@@ -8,10 +8,6 @@ exclude = '''
     | \.mypy_cache
     | \.tox
     | \.venv
-    | odoo/src
-    | odoo/external-src
-    | odoo/data
 )/
-| /__openerp__.py
 | /__manifest__.py
 '''

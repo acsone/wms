@@ -1,3 +1,0 @@
-id,position_id/id,account_src_id/id,account_dest_id/id
-__setup__.account_fp_640100,l10n_be.1_fiscal_position_template_3,l10n_be.1_a604,__setup__.account_604100
-__setup__.account_fp_640200,l10n_be.1_fiscal_position_template_2,l10n_be.1_a604,__setup__.account_604200

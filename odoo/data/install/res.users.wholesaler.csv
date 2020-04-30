@@ -1,3 +1,0 @@
-id,login,name,password_crypt,lang,notify_email,country_id/id,tz,groups_id/id,is_for_newpharma,is_for_olalux
-__setup__.res_user_newpharma,newpharma,NewPharma,$pbkdf2-sha512$25000$6H3vHeNcy5kzZoyR0lqrNQ$aGH44OoFFaqK6s0SSoYn.XEzGCRjDph4t6FD6JZ3ZNRRu1sv6dWZid4qxNRQrXjR2nhIXnfHUL1kxZwqQoAqsw,fr_BE,always,base.be,Europe/Brussels,"sale.group_show_price_subtotal,base.group_public",1,0
-__setup__.res_user_olalux,olalux,Olalux,$pbkdf2-sha512$25000$xxgDoFRqzdn733vP.R9DaA$8K.29Xboyd5mXCSsycic67W/OJ5mDsUQYnG3Pn/CUgj4CeUqXbtSnA1t77SSprjSmahJe8EBK9Ykng4xeb9PKQ,fr_BE,always,base.be,Europe/Brussels,"sale.group_show_price_subtotal,base.group_public",0,1

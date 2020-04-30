@@ -1,7 +1,0 @@
-id,code,name,time_leave_planned,time_picking_planned
-__setup__.delivery_template_longterm,86,Long Terme,22,22
-__setup__.delivery_template_comptoir,95,Comptoir,0,0
-__setup__.delivery_template_bpost,97,BPost,13,13.5
-__setup__.delivery_template_tnt,97,TNT,13,13.5
-__setup__.delivery_template_ups,97,UPS,13,13.5
-__setup__.delivery_template_dhl,97,DHL,13,13.5

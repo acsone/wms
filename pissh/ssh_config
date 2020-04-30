@@ -1,5 +1,0 @@
-Host *
-    StrictHostKeyChecking no
-    ForwardAgent yes
-    IdentityFile ~/.ssh/id_rsa
-    ServerAliveInterval 60

@@ -1,6 +1,0 @@
-"id","week_day","version_id/id","tag_ids/id"
-"__setup__.cron_delivery_plan_6","Vendredi","__setup__.dr20180828_version","__setup__.deliveryroundtag_5"
-"__setup__.cron_delivery_plan_2","Lundi","__setup__.dr20180828_version","__setup__.deliveryroundtag_1"
-"__setup__.cron_delivery_plan_3","Mardi","__setup__.dr20180828_version","__setup__.deliveryroundtag_2"
-"__setup__.cron_delivery_plan_4","Mercredi","__setup__.dr20180828_version","__setup__.deliveryroundtag_3"
-"__setup__.cron_delivery_plan_5","Jeudi","__setup__.dr20180828_version","__setup__.deliveryroundtag_4"

@@ -2,3 +2,6 @@
 omit=
   venv*
   src*
+  odoo/addons/*/__manifest__.py
+  # omit all test files
+  odoo/addons/*/tests/*

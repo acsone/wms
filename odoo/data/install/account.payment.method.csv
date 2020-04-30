@@ -1,2 +1,0 @@
-id,name,code,payment_type,bank_account_required
-__setup__.account_payment_method_virement_out,Virement Manuel,virement,outbound,1
