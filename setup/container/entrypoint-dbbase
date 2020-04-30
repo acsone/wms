@@ -26,7 +26,7 @@ if db_name:
                 "-d",
                 database,
                 "--i18n-overwrite",
-                "–-ignore-core-addons",
+                "--ignore-core-addons",
             ]
         )
         subprocess.check_call(
