@@ -1,0 +1,322 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* csv_file
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: csv_file
+#: code:addons/csv_file/models/ftp_connector.py:50
+#, python-format
+msgid "%s must be set in environ"
+msgstr ""
+
+#. module: csv_file
+#: model:ir.model.fields,field_description:csv_file.field_csv_file_active
+#: model:ir.model.fields,field_description:csv_file.field_csv_file_export_active
+#: model:ir.model.fields,field_description:csv_file.field_csv_file_import_active
+msgid "Active"
+msgstr ""
+
+#. module: csv_file
+#: model:ir.model.fields,field_description:csv_file.field_csv_file_create_uid
+#: model:ir.model.fields,field_description:csv_file.field_csv_file_logger_create_uid
+#: model:ir.model.fields,field_description:csv_file.field_ftp_connector_create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: csv_file
+#: model:ir.model.fields,field_description:csv_file.field_csv_file_create_date
+#: model:ir.model.fields,field_description:csv_file.field_csv_file_logger_create_date
+#: model:ir.model.fields,field_description:csv_file.field_ftp_connector_create_date
+msgid "Created on"
+msgstr ""
+
+#. module: csv_file
+#: model:ir.model.fields,field_description:csv_file.field_csv_file_export_logger_date_end
+#: model:ir.model.fields,field_description:csv_file.field_csv_file_import_logger_date_end
+#: model:ir.model.fields,field_description:csv_file.field_csv_file_logger_date_end
+msgid "Date end"
+msgstr ""
+
+#. module: csv_file
+#: model:ir.model.fields,field_description:csv_file.field_csv_file_export_logger_date_start
+#: model:ir.model.fields,field_description:csv_file.field_csv_file_import_logger_date_start
+#: model:ir.model.fields,field_description:csv_file.field_csv_file_logger_date_start
+msgid "Date start"
+msgstr ""
+
+#. module: csv_file
+#: model:ir.model.fields,field_description:csv_file.field_csv_file_delimiter
+#: model:ir.model.fields,field_description:csv_file.field_csv_file_export_delimiter
+#: model:ir.model.fields,field_description:csv_file.field_csv_file_import_delimiter
+msgid "Delimiter"
+msgstr ""
+
+#. module: csv_file
+#: model:ir.model.fields,field_description:csv_file.field_csv_file_display_name
+#: model:ir.model.fields,field_description:csv_file.field_csv_file_logger_display_name
+#: model:ir.model.fields,field_description:csv_file.field_ftp_connector_display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: csv_file
+#: model:ir.model.fields,field_description:csv_file.field_csv_file_export_logger_duration
+#: model:ir.model.fields,field_description:csv_file.field_csv_file_import_logger_duration
+#: model:ir.model.fields,field_description:csv_file.field_csv_file_logger_duration
+msgid "Duration"
+msgstr ""
+
+#. module: csv_file
+#: selection:csv.file.export.logger,state:0
+#: selection:csv.file.import.logger,state:0
+#: selection:csv.file.logger,state:0
+msgid "Error"
+msgstr ""
+
+#. module: csv_file
+#: code:addons/csv_file/models/ftp_connector.py:85
+#: code:addons/csv_file/models/ftp_connector.py:94
+#, python-format
+msgid "Everything seems ok"
+msgstr ""
+
+#. module: csv_file
+#: selection:ftp.connector,type:0
+msgid "FTP"
+msgstr ""
+
+#. module: csv_file
+#: model:ir.actions.act_window,name:csv_file.action_ftp_connector
+#: model:ir.ui.menu,name:csv_file.menu_ftp_connetor
+#: model:ir.ui.view,arch_db:csv_file.ftp_connector_view_form
+msgid "FTP Connector"
+msgstr ""
+
+#. module: csv_file
+#: model:ir.model.fields,field_description:csv_file.field_csv_file_export_ftp_connector_id
+#: model:ir.model.fields,field_description:csv_file.field_csv_file_ftp_connector_id
+#: model:ir.model.fields,field_description:csv_file.field_csv_file_import_ftp_connector_id
+msgid "FTP connector"
+msgstr ""
+
+#. module: csv_file
+#: model:ir.model.fields,field_description:csv_file.field_csv_file_export_file_encoding
+#: model:ir.model.fields,field_description:csv_file.field_csv_file_file_encoding
+#: model:ir.model.fields,field_description:csv_file.field_csv_file_import_file_encoding
+msgid "File encoding"
+msgstr ""
+
+#. module: csv_file
+#: model:ir.model.fields,field_description:csv_file.field_csv_file_export_filename
+#: model:ir.model.fields,field_description:csv_file.field_csv_file_filename
+#: model:ir.model.fields,field_description:csv_file.field_csv_file_import_filename
+msgid "Filename"
+msgstr ""
+
+#. module: csv_file
+#: model:ir.model.fields,field_description:csv_file.field_csv_file_export_folder_out
+#: model:ir.model.fields,field_description:csv_file.field_csv_file_folder_out
+#: model:ir.model.fields,field_description:csv_file.field_csv_file_import_folder_out
+msgid "Folder OUT"
+msgstr ""
+
+#. module: csv_file
+#: model:ir.model.fields,field_description:csv_file.field_ftp_connector_hostname
+msgid "Hostname"
+msgstr ""
+
+#. module: csv_file
+#: model:ir.model.fields,field_description:csv_file.field_csv_file_id
+#: model:ir.model.fields,field_description:csv_file.field_csv_file_logger_id
+#: model:ir.model.fields,field_description:csv_file.field_ftp_connector_id
+msgid "ID"
+msgstr ""
+
+#. module: csv_file
+#: model:ir.ui.menu,name:csv_file.main_menu_csv_file
+msgid "Import/export"
+msgstr ""
+
+#. module: csv_file
+#: model:ir.model.fields,field_description:csv_file.field_csv_file___last_update
+#: model:ir.model.fields,field_description:csv_file.field_csv_file_logger___last_update
+#: model:ir.model.fields,field_description:csv_file.field_ftp_connector___last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: csv_file
+#: model:ir.model.fields,field_description:csv_file.field_csv_file_logger_write_uid
+#: model:ir.model.fields,field_description:csv_file.field_csv_file_write_uid
+#: model:ir.model.fields,field_description:csv_file.field_ftp_connector_write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: csv_file
+#: model:ir.model.fields,field_description:csv_file.field_csv_file_logger_write_date
+#: model:ir.model.fields,field_description:csv_file.field_csv_file_write_date
+#: model:ir.model.fields,field_description:csv_file.field_ftp_connector_write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: csv_file
+#: model:ir.ui.view,arch_db:csv_file.csv_file_logger_view_form
+msgid "Logger"
+msgstr ""
+
+#. module: csv_file
+#: model:ir.model.fields,field_description:csv_file.field_csv_file_export_logger_message
+#: model:ir.model.fields,field_description:csv_file.field_csv_file_import_logger_message
+#: model:ir.model.fields,field_description:csv_file.field_csv_file_logger_message
+#: model:ir.ui.view,arch_db:csv_file.csv_file_logger_view_form
+msgid "Message"
+msgstr ""
+
+#. module: csv_file
+#: model:ir.model.fields,field_description:csv_file.field_csv_file_export_method
+#: model:ir.model.fields,field_description:csv_file.field_csv_file_import_method
+#: model:ir.model.fields,field_description:csv_file.field_csv_file_method
+msgid "Method"
+msgstr ""
+
+#. module: csv_file
+#: model:ir.model.fields,field_description:csv_file.field_csv_file_export_name
+#: model:ir.model.fields,field_description:csv_file.field_csv_file_import_name
+#: model:ir.model.fields,field_description:csv_file.field_csv_file_name
+#: model:ir.model.fields,field_description:csv_file.field_ftp_connector_name
+msgid "Name"
+msgstr ""
+
+#. module: csv_file
+#: model:ir.model.fields,field_description:csv_file.field_csv_file_export_logger_nbr_lines
+#: model:ir.model.fields,field_description:csv_file.field_csv_file_import_logger_nbr_lines
+#: model:ir.model.fields,field_description:csv_file.field_csv_file_logger_nbr_lines
+msgid "Number of lines"
+msgstr ""
+
+#. module: csv_file
+#: selection:csv.file.export.logger,state:0
+#: selection:csv.file.import.logger,state:0
+#: selection:csv.file.logger,state:0
+msgid "Partial"
+msgstr ""
+
+#. module: csv_file
+#: model:ir.model.fields,field_description:csv_file.field_ftp_connector_password
+msgid "Password"
+msgstr ""
+
+#. module: csv_file
+#: code:addons/csv_file/models/csv_file.py:238
+#, python-format
+msgid "Please configure a sFTP connector"
+msgstr ""
+
+#. module: csv_file
+#: code:addons/csv_file/models/ftp_connector.py:45
+#, python-format
+msgid "Please set the primary key environment variable"
+msgstr ""
+
+#. module: csv_file
+#: model:ir.model.fields,field_description:csv_file.field_ftp_connector_port
+msgid "Port"
+msgstr ""
+
+#. module: csv_file
+#: model:ir.model.fields,field_description:csv_file.field_ftp_connector_pk_env_variable
+msgid "Primary key environment variable"
+msgstr ""
+
+#. module: csv_file
+#: model:ir.model.fields,field_description:csv_file.field_csv_file_export_logger_state
+#: model:ir.model.fields,field_description:csv_file.field_csv_file_import_logger_state
+#: model:ir.model.fields,field_description:csv_file.field_csv_file_logger_state
+msgid "State"
+msgstr ""
+
+#. module: csv_file
+#: selection:csv.file.export.logger,state:0
+#: selection:csv.file.import.logger,state:0
+#: selection:csv.file.logger,state:0
+msgid "Success"
+msgstr ""
+
+#. module: csv_file
+#: model:ir.ui.view,arch_db:csv_file.ftp_connector_view_form
+msgid "Test connection"
+msgstr ""
+
+#. module: csv_file
+#: code:addons/csv_file/models/csv_file.py:37
+#: sql_constraint:csv.file:0
+#, python-format
+msgid "The file name must be unique."
+msgstr ""
+
+#. module: csv_file
+#: code:addons/csv_file/models/csv_file.py:100
+#, python-format
+msgid "The filename is not valid.Please check the part \"%s\""
+msgstr ""
+
+#. module: csv_file
+#: code:addons/csv_file/models/csv_file.py:76
+#, python-format
+msgid "The filename must contain the extension"
+msgstr ""
+
+#. module: csv_file
+#: model:ir.model.fields,help:csv_file.field_ftp_connector_pk_env_variable
+msgid "The name of the environment variable who contains the primary key"
+msgstr ""
+
+#. module: csv_file
+#: model:ir.model.fields,field_description:csv_file.field_ftp_connector_type
+msgid "Type"
+msgstr ""
+
+#. module: csv_file
+#: code:addons/csv_file/models/csv_file.py:147
+#: code:addons/csv_file/models/csv_file.py:162
+#: code:addons/csv_file/models/csv_file.py:179
+#: code:addons/csv_file/models/csv_file.py:201
+#: code:addons/csv_file/models/csv_file.py:221
+#: code:addons/csv_file/models/csv_file.py:231
+#, python-format
+msgid "Unknown import type"
+msgstr ""
+
+#. module: csv_file
+#: model:ir.model.fields,field_description:csv_file.field_ftp_connector_username
+msgid "Username"
+msgstr ""
+
+#. module: csv_file
+#: model:ir.model,name:csv_file.model_csv_file
+msgid "csv.file"
+msgstr ""
+
+#. module: csv_file
+#: model:ir.model,name:csv_file.model_csv_file_logger
+msgid "csv.file.logger"
+msgstr ""
+
+#. module: csv_file
+#: model:ir.model,name:csv_file.model_ftp_connector
+msgid "ftp.connector"
+msgstr ""
+
+#. module: csv_file
+#: selection:ftp.connector,type:0
+msgid "sFTP"
+msgstr ""
+
