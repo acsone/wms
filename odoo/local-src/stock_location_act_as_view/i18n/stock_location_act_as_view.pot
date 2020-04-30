@@ -1,0 +1,46 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* stock_location_act_as_view
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_location_act_as_view
+#: model:ir.model.fields,field_description:stock_location_act_as_view.field_stock_location_act_as_view
+msgid "Act as view"
+msgstr ""
+
+#. module: stock_location_act_as_view
+#: model:ir.model,name:stock_location_act_as_view.model_stock_change_product_qty
+msgid "Change Product Quantity"
+msgstr ""
+
+#. module: stock_location_act_as_view
+#: model:ir.model,name:stock_location_act_as_view.model_stock_location
+msgid "Inventory Locations"
+msgstr ""
+
+#. module: stock_location_act_as_view
+#: model:ir.model,name:stock_location_act_as_view.model_stock_quant
+msgid "Quants"
+msgstr ""
+
+#. module: stock_location_act_as_view
+#: model:ir.model.fields,help:stock_location_act_as_view.field_stock_location_act_as_view
+msgid "When marked, the location will be considered as a view, meaning they must not contain stock and they have sub-locations. Usually used on internal locations, the 'view' usage should be used only on the 'view location' of the warehouses."
+msgstr ""
+
+#. module: stock_location_act_as_view
+#: code:addons/stock_location_act_as_view/models/stock_quant.py:26
+#, python-format
+msgid "You cannot move to a location acting as view %s."
+msgstr ""
+
