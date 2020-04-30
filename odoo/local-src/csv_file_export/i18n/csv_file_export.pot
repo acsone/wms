@@ -1,0 +1,161 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* csv_file_export
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: csv_file_export
+#: model:ir.ui.view,arch_db:csv_file_export.csv_file_export_view_form
+msgid "CSV Export"
+msgstr ""
+
+#. module: csv_file_export
+#: model:ir.actions.act_window,name:csv_file_export.action_csv_file_export
+msgid "CSV Exports"
+msgstr ""
+
+#. module: csv_file_export
+#: model:ir.ui.view,arch_db:csv_file_export.csv_export_wizard_view_form
+msgid "Cancel"
+msgstr ""
+
+#. module: csv_file_export
+#: model:ir.model.fields,field_description:csv_file_export.field_csv_file_export_create_uid
+#: model:ir.model.fields,field_description:csv_file_export.field_csv_file_export_logger_create_uid
+#: model:ir.model.fields,field_description:csv_file_export.field_csv_file_export_wizard_create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: csv_file_export
+#: model:ir.model.fields,field_description:csv_file_export.field_csv_file_export_create_date
+#: model:ir.model.fields,field_description:csv_file_export.field_csv_file_export_logger_create_date
+#: model:ir.model.fields,field_description:csv_file_export.field_csv_file_export_wizard_create_date
+msgid "Created on"
+msgstr ""
+
+#. module: csv_file_export
+#: model:ir.model.fields,field_description:csv_file_export.field_csv_file_export_last_logger_datetime
+msgid "Date last export"
+msgstr ""
+
+#. module: csv_file_export
+#: model:ir.model.fields,field_description:csv_file_export.field_csv_file_export_display_name
+#: model:ir.model.fields,field_description:csv_file_export.field_csv_file_export_logger_display_name
+#: model:ir.model.fields,field_description:csv_file_export.field_csv_file_export_wizard_display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: csv_file_export
+#: selection:csv.file.export,last_logger_state:0
+msgid "Error"
+msgstr ""
+
+#. module: csv_file_export
+#: model:ir.ui.view,arch_db:csv_file_export.csv_file_export_view_form
+#: model:ir.ui.view,arch_db:csv_file_export.csv_file_export_view_tree
+msgid "Execute export"
+msgstr ""
+
+#. module: csv_file_export
+#: model:ir.actions.act_window,name:csv_file_export.act_csv_execute_exports
+#: model:ir.ui.view,arch_db:csv_file_export.csv_export_wizard_view_form
+msgid "Execute exports"
+msgstr ""
+
+#. module: csv_file_export
+#: model:ir.model.fields,field_description:csv_file_export.field_csv_file_export_logger_ids
+#: model:ir.model.fields,field_description:csv_file_export.field_csv_file_export_wizard_export_ids
+#: model:ir.ui.menu,name:csv_file_export.menu_csv_file_export
+#: model:ir.ui.view,arch_db:csv_file_export.csv_export_wizard_view_form
+msgid "Exports"
+msgstr ""
+
+#. module: csv_file_export
+#: model:ir.model.fields,field_description:csv_file_export.field_csv_file_export_logger_file_id
+msgid "File"
+msgstr ""
+
+#. module: csv_file_export
+#: model:ir.model.fields,field_description:csv_file_export.field_csv_file_export_id
+#: model:ir.model.fields,field_description:csv_file_export.field_csv_file_export_logger_id
+#: model:ir.model.fields,field_description:csv_file_export.field_csv_file_export_wizard_id
+msgid "ID"
+msgstr ""
+
+#. module: csv_file_export
+#: model:ir.model.fields,field_description:csv_file_export.field_csv_file_export___last_update
+#: model:ir.model.fields,field_description:csv_file_export.field_csv_file_export_logger___last_update
+#: model:ir.model.fields,field_description:csv_file_export.field_csv_file_export_wizard___last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: csv_file_export
+#: model:ir.model.fields,field_description:csv_file_export.field_csv_file_export_logger_write_uid
+#: model:ir.model.fields,field_description:csv_file_export.field_csv_file_export_wizard_write_uid
+#: model:ir.model.fields,field_description:csv_file_export.field_csv_file_export_write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: csv_file_export
+#: model:ir.model.fields,field_description:csv_file_export.field_csv_file_export_logger_write_date
+#: model:ir.model.fields,field_description:csv_file_export.field_csv_file_export_wizard_write_date
+#: model:ir.model.fields,field_description:csv_file_export.field_csv_file_export_write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: csv_file_export
+#: model:ir.model.fields,field_description:csv_file_export.field_csv_file_export_last_logger_state
+msgid "Last export state"
+msgstr ""
+
+#. module: csv_file_export
+#: model:ir.model.fields,field_description:csv_file_export.field_csv_file_export_last_logger
+msgid "Last logger"
+msgstr ""
+
+#. module: csv_file_export
+#: model:ir.ui.view,arch_db:csv_file_export.csv_file_export_view_form
+msgid "Loggers"
+msgstr ""
+
+#. module: csv_file_export
+#: code:addons/csv_file_export/wizard/csv_file_export_wizard.py:27
+#, python-format
+msgid "Please select at least one export"
+msgstr ""
+
+#. module: csv_file_export
+#: selection:csv.file.export,last_logger_state:0
+msgid "Success"
+msgstr ""
+
+#. module: csv_file_export
+#: code:addons/csv_file_export/models/csv_file_export.py:100
+#, python-format
+msgid "The folder %s doesn't exist on the source"
+msgstr ""
+
+#. module: csv_file_export
+#: model:ir.model,name:csv_file_export.model_csv_file_export
+msgid "csv.file.export"
+msgstr ""
+
+#. module: csv_file_export
+#: model:ir.model,name:csv_file_export.model_csv_file_export_logger
+msgid "csv.file.export.logger"
+msgstr ""
+
+#. module: csv_file_export
+#: model:ir.model,name:csv_file_export.model_csv_file_export_wizard
+msgid "csv.file.export.wizard"
+msgstr ""
+
