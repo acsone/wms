@@ -1,7 +1,39 @@
-[run]
-omit=
-  venv*
-  src*
-  odoo/addons/*/__manifest__.py
-  # omit all test files
-  odoo/addons/*/tests/*
+[paths]
+source =
+    odoo/addons/
+    */odoo-alcyon/odoo/addons
+
+[report]
+include =
+    */odoo/addons/*
+
+omit =
+    venv*
+    src*
+    */scenario/*
+    */scenarios/*
+    */test/*
+    */tests/*
+    */lib/*
+    *_example/*
+    *__init__.py
+    *__manifest__.py
+    *hooks.py
+    *_parser.py
+
+# Regexes for lines to exclude from consideration
+exclude_lines =
+    pragma: no cover
+    if context is None:
+    raise NotImplementedError
+    except ImportError:
+    def _onchange_
+    except AccessError:
+    def name_search\(
+    def search_read\(
+    def _search_
+    def fields_view_get\(.*
+    def name_get\(
+    def default_get\(
+    def _get_default_.*\(self\):
+    def show_.*\(self\):
