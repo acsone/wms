@@ -129,7 +129,7 @@ build-and-publish-image:
     - cd setup
     - build_and_push_image
   only:
-    - /1\.50\.\d+/
+    - /1\.51\.\d+/
   dependencies:
     - build
 
@@ -150,7 +150,7 @@ deploy-test:
     on_stop: stop-test
   when: manual
   only:
-    - /1\.50\.\d+/
+    - /1\.51\.\d+/
     
 stop-test:
   stage: deploy
@@ -165,7 +165,7 @@ stop-test:
     name: test/odoo-alcyon
     action: stop
   only:
-    - /1\.50\.\d+/
+    - /1\.51\.\d+/
   dependencies: []
   allow_failure: true
 
@@ -178,7 +178,7 @@ deploy-preprod:
     - ssh -J acsone@194.78.105.88:23 acsone@Lnx001.abl.grp ./odoo-upgrade.sh ${CI_COMMIT_REF_NAME}
   when: manual
   only:
-    - /1\.50\.\d+/
+    - /1\.51\.\d+/
 
 deploy-prod:
   stage: deploy
@@ -189,5 +189,5 @@ deploy-prod:
     - ssh -J acsone@194.78.105.88:23 acsone@Lnx004.abl.grp ./odoo-upgrade.sh ${CI_COMMIT_REF_NAME}
   when: manual
   only:
-    - /1\.50\.\d+/
+    - /1\.51\.\d+/
 
