@@ -1,0 +1,177 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* csv_file_import
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: csv_file_import
+#: model:ir.ui.view,arch_db:csv_file_import.csv_file_import_view_form
+msgid "CSV Import"
+msgstr ""
+
+#. module: csv_file_import
+#: model:ir.actions.act_window,name:csv_file_import.action_csv_file_import
+msgid "CSV Imports"
+msgstr ""
+
+#. module: csv_file_import
+#: model:ir.ui.view,arch_db:csv_file_import.csv_import_wizard_view_form
+msgid "Cancel"
+msgstr ""
+
+#. module: csv_file_import
+#: model:ir.model.fields,field_description:csv_file_import.field_csv_file_import_create_uid
+#: model:ir.model.fields,field_description:csv_file_import.field_csv_file_import_logger_create_uid
+#: model:ir.model.fields,field_description:csv_file_import.field_csv_file_import_wizard_create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: csv_file_import
+#: model:ir.model.fields,field_description:csv_file_import.field_csv_file_import_create_date
+#: model:ir.model.fields,field_description:csv_file_import.field_csv_file_import_logger_create_date
+#: model:ir.model.fields,field_description:csv_file_import.field_csv_file_import_wizard_create_date
+msgid "Created on"
+msgstr ""
+
+#. module: csv_file_import
+#: model:ir.model.fields,field_description:csv_file_import.field_csv_file_import_last_logger_datetime
+msgid "Date last import"
+msgstr ""
+
+#. module: csv_file_import
+#: model:ir.model.fields,field_description:csv_file_import.field_csv_file_import_display_name
+#: model:ir.model.fields,field_description:csv_file_import.field_csv_file_import_logger_display_name
+#: model:ir.model.fields,field_description:csv_file_import.field_csv_file_import_wizard_display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: csv_file_import
+#: selection:csv.file.import,last_logger_state:0
+msgid "Error"
+msgstr ""
+
+#. module: csv_file_import
+#: model:ir.ui.view,arch_db:csv_file_import.csv_file_import_view_form
+#: model:ir.ui.view,arch_db:csv_file_import.csv_file_import_view_tree
+msgid "Execute import"
+msgstr ""
+
+#. module: csv_file_import
+#: model:ir.actions.act_window,name:csv_file_import.act_csv_execute_imports
+#: model:ir.ui.view,arch_db:csv_file_import.csv_import_wizard_view_form
+msgid "Execute imports"
+msgstr ""
+
+#. module: csv_file_import
+#: model:ir.model.fields,field_description:csv_file_import.field_csv_file_import_logger_file_id
+msgid "File"
+msgstr ""
+
+#. module: csv_file_import
+#: model:ir.model.fields,field_description:csv_file_import.field_csv_file_import_folder_failure
+msgid "Folder FAILURE"
+msgstr ""
+
+#. module: csv_file_import
+#: model:ir.model.fields,field_description:csv_file_import.field_csv_file_import_folder_in
+msgid "Folder IN"
+msgstr ""
+
+#. module: csv_file_import
+#: model:ir.model.fields,field_description:csv_file_import.field_csv_file_import_id
+#: model:ir.model.fields,field_description:csv_file_import.field_csv_file_import_logger_id
+#: model:ir.model.fields,field_description:csv_file_import.field_csv_file_import_wizard_id
+msgid "ID"
+msgstr ""
+
+#. module: csv_file_import
+#: model:ir.model.fields,field_description:csv_file_import.field_csv_file_import_logger_ids
+msgid "Import"
+msgstr ""
+
+#. module: csv_file_import
+#: model:ir.model.fields,field_description:csv_file_import.field_csv_file_import_wizard_import_ids
+#: model:ir.ui.menu,name:csv_file_import.menu_csv_file_import
+#: model:ir.ui.view,arch_db:csv_file_import.csv_import_wizard_view_form
+msgid "Imports"
+msgstr ""
+
+#. module: csv_file_import
+#: model:ir.model.fields,field_description:csv_file_import.field_csv_file_import___last_update
+#: model:ir.model.fields,field_description:csv_file_import.field_csv_file_import_logger___last_update
+#: model:ir.model.fields,field_description:csv_file_import.field_csv_file_import_wizard___last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: csv_file_import
+#: model:ir.model.fields,field_description:csv_file_import.field_csv_file_import_logger_write_uid
+#: model:ir.model.fields,field_description:csv_file_import.field_csv_file_import_wizard_write_uid
+#: model:ir.model.fields,field_description:csv_file_import.field_csv_file_import_write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: csv_file_import
+#: model:ir.model.fields,field_description:csv_file_import.field_csv_file_import_logger_write_date
+#: model:ir.model.fields,field_description:csv_file_import.field_csv_file_import_wizard_write_date
+#: model:ir.model.fields,field_description:csv_file_import.field_csv_file_import_write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: csv_file_import
+#: model:ir.model.fields,field_description:csv_file_import.field_csv_file_import_last_logger_state
+msgid "Last import state"
+msgstr ""
+
+#. module: csv_file_import
+#: model:ir.model.fields,field_description:csv_file_import.field_csv_file_import_last_logger
+msgid "Last logger"
+msgstr ""
+
+#. module: csv_file_import
+#: model:ir.ui.view,arch_db:csv_file_import.csv_file_import_view_form
+msgid "Loggers"
+msgstr ""
+
+#. module: csv_file_import
+#: code:addons/csv_file_import/wizard/csv_file_import_wizard.py:27
+#, python-format
+msgid "Please select at least one import"
+msgstr ""
+
+#. module: csv_file_import
+#: selection:csv.file.import,last_logger_state:0
+msgid "Success"
+msgstr ""
+
+#. module: csv_file_import
+#: code:addons/csv_file_import/models/csv_file_import.py:93
+#: code:addons/csv_file_import/models/csv_file_import.py:106
+#: code:addons/csv_file_import/models/csv_file_import.py:119
+#, python-format
+msgid "The folder %s doesn't exist on the source"
+msgstr ""
+
+#. module: csv_file_import
+#: model:ir.model,name:csv_file_import.model_csv_file_import
+msgid "csv.file.import"
+msgstr ""
+
+#. module: csv_file_import
+#: model:ir.model,name:csv_file_import.model_csv_file_import_logger
+msgid "csv.file.import.logger"
+msgstr ""
+
+#. module: csv_file_import
+#: model:ir.model,name:csv_file_import.model_csv_file_import_wizard
+msgid "csv.file.import.wizard"
+msgstr ""
+
