@@ -252,9 +252,8 @@ msgstr "Itinéraire de livraison manquant"
 
 #. module: delivery_rounds
 #: selection:round.instance,state:0
-#, fuzzy
 msgid "Delivery Optimization Failure"
-msgstr "L'échec de livraison"
+msgstr "Echec d'optimisation des livraisons"
 
 #. module: delivery_rounds
 #: model:ir.model.fields,field_description:delivery_rounds.field_picking_assign_delivery_round_delivery_round_id
@@ -606,9 +605,8 @@ msgstr "Ouvert"
 
 #. module: delivery_rounds
 #: selection:round.instance,state:0
-#, fuzzy
 msgid "Optimizing delivery"
-msgstr "Remise du rapport"
+msgstr "Optimisation de la livraison"
 
 #. module: delivery_rounds
 #: model:ir.model,name:delivery_rounds.model_res_partner
