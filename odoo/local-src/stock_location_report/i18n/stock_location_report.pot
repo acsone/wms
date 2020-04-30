@@ -1,0 +1,50 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* stock_location_report
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_location_report
+#: selection:stock.location,color:0
+msgid "Blue"
+msgstr ""
+
+#. module: stock_location_report
+#: model:ir.model.fields,field_description:stock_location_report.field_stock_location_color
+msgid "Color"
+msgstr ""
+
+#. module: stock_location_report
+#: selection:stock.location,color:0
+msgid "Green"
+msgstr ""
+
+#. module: stock_location_report
+#: model:ir.model,name:stock_location_report.model_stock_location
+msgid "Inventory Locations"
+msgstr ""
+
+#. module: stock_location_report
+#: model:ir.actions.report.xml,name:stock_location_report.action_report_location_barcode_4x2
+msgid "Location Barcode 4x2"
+msgstr ""
+
+#. module: stock_location_report
+#: model:ir.actions.report.xml,name:stock_location_report.action_report_location_barcode_8x2
+msgid "Location Barcode 8x2"
+msgstr ""
+
+#. module: stock_location_report
+#: selection:stock.location,color:0
+msgid "Yellow"
+msgstr ""
+
