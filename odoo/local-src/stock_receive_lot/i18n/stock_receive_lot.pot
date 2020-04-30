@@ -1,0 +1,238 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* stock_receive_lot
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_receive_lot
+#: model:ir.ui.view,arch_db:stock_receive_lot.view_pack_operation_lot_add_form
+msgid "<i class=\"fa fa-exclamation-triangle\" style=\"color:red\"><span style=\"margin:0 5px\">Expired</span></i>"
+msgstr ""
+
+#. module: stock_receive_lot
+#: model:ir.model.fields,field_description:stock_receive_lot.field_stock_pack_operation_lot_add_create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: stock_receive_lot
+#: model:ir.model.fields,field_description:stock_receive_lot.field_stock_pack_operation_lot_add_create_date
+msgid "Created on"
+msgstr ""
+
+#. module: stock_receive_lot
+#: model:ir.model.fields,field_description:stock_receive_lot.field_stock_pack_operation_lot_add_location_dest_id
+msgid "Destination Location"
+msgstr ""
+
+#. module: stock_receive_lot
+#: model:ir.model.fields,field_description:stock_receive_lot.field_stock_pack_operation_lot_add_display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: stock_receive_lot
+#: model:ir.model.fields,field_description:stock_receive_lot.field_stock_pack_operation_lot_add_life_date
+#: model:ir.model.fields,field_description:stock_receive_lot.field_stock_pack_operation_lot_life_date
+msgid "Expiration date"
+msgstr ""
+
+#. module: stock_receive_lot
+#: model:ir.model.fields,field_description:stock_receive_lot.field_stock_pack_operation_lot_add_life_date_char
+msgid "Expiration date (input)"
+msgstr ""
+
+#. module: stock_receive_lot
+#: model:ir.model.fields,field_description:stock_receive_lot.field_stock_pack_operation_lot_add_id
+msgid "ID"
+msgstr ""
+
+#. module: stock_receive_lot
+#: model:ir.model,name:stock_receive_lot.model_stock_location
+msgid "Inventory Locations"
+msgstr ""
+
+#. module: stock_receive_lot
+#: model:ir.model.fields,field_description:stock_receive_lot.field_stock_pack_operation_lot_add___last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: stock_receive_lot
+#: model:ir.model.fields,field_description:stock_receive_lot.field_stock_pack_operation_lot_add_write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: stock_receive_lot
+#: model:ir.model.fields,field_description:stock_receive_lot.field_stock_pack_operation_lot_add_write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: stock_receive_lot
+#: model:ir.model.fields,field_description:stock_receive_lot.field_stock_pack_operation_lot_add_lot_id
+msgid "Lot"
+msgstr ""
+
+#. module: stock_receive_lot
+#: model:ir.model.fields,field_description:stock_receive_lot.field_stock_pack_operation_lot_add_lot_name
+msgid "Lot Name"
+msgstr ""
+
+#. module: stock_receive_lot
+#: model:ir.model.fields,field_description:stock_receive_lot.field_stock_pack_operation_lot_add_lot_required
+msgid "Lot Required"
+msgstr ""
+
+#. module: stock_receive_lot
+#: model:ir.model,name:stock_receive_lot.model_stock_production_lot
+msgid "Lot/Serial"
+msgstr ""
+
+#. module: stock_receive_lot
+#: model:ir.model,name:stock_receive_lot.model_stock_pack_operation_lot
+msgid "Lot/Serial number for pack ops"
+msgstr ""
+
+#. module: stock_receive_lot
+#: model:ir.model.fields,field_description:stock_receive_lot.field_stock_pack_operation_lot_add_name
+msgid "Name"
+msgstr ""
+
+#. module: stock_receive_lot
+#: model:ir.ui.view,arch_db:stock_receive_lot.view_pack_operation_lot_add_form
+msgid "Next Destination"
+msgstr ""
+
+#. module: stock_receive_lot
+#: model:ir.ui.view,arch_db:stock_receive_lot.view_pack_operation_lot_add_form
+msgid "Next Lot"
+msgstr ""
+
+#. module: stock_receive_lot
+#: model:ir.ui.view,arch_db:stock_receive_lot.view_pack_operation_lot_add_form
+msgid "Next Operation"
+msgstr ""
+
+#. module: stock_receive_lot
+#: model:ir.model.fields,field_description:stock_receive_lot.field_stock_pack_operation_lot_add_operation_id
+msgid "Operation"
+msgstr ""
+
+#. module: stock_receive_lot
+#: model:ir.model.fields,field_description:stock_receive_lot.field_stock_pack_operation_lot_add_location_op_dest_id
+msgid "Operation Destination View Location"
+msgstr ""
+
+#. module: stock_receive_lot
+#: model:ir.model,name:stock_receive_lot.model_stock_pack_operation
+msgid "Packing Operation"
+msgstr ""
+
+#. module: stock_receive_lot
+#: model:ir.model.fields,field_description:stock_receive_lot.field_stock_pack_operation_lot_add_partner_id
+msgid "Partner"
+msgstr ""
+
+#. module: stock_receive_lot
+#: model:ir.model.fields,field_description:stock_receive_lot.field_stock_pack_operation_lot_add_picking_id
+msgid "Picking id"
+msgstr ""
+
+#. module: stock_receive_lot
+#: model:ir.model.fields,field_description:stock_receive_lot.field_stock_pack_operation_lot_add_qty
+msgid "Qty Done"
+msgstr ""
+
+#. module: stock_receive_lot
+#: model:ir.model.fields,field_description:stock_receive_lot.field_stock_pack_operation_lot_add_remaining_qty
+msgid "Qty Remaining"
+msgstr ""
+
+#. module: stock_receive_lot
+#: code:addons/stock_receive_lot/wizards/stock.py:288
+#, python-format
+msgid "Quantity must be greater than 0"
+msgstr ""
+
+#. module: stock_receive_lot
+#: model:ir.actions.act_window,name:stock_receive_lot.action_pack_operation_lot_add
+#: model:ir.ui.view,arch_db:stock_receive_lot.view_picking_form
+msgid "Receive"
+msgstr ""
+
+#. module: stock_receive_lot
+#: model:ir.model.fields,help:stock_receive_lot.field_stock_pack_operation_lot_add_origin
+msgid "Reference of the document"
+msgstr ""
+
+#. module: stock_receive_lot
+#: model:ir.model.fields,field_description:stock_receive_lot.field_stock_pack_operation_lot_add_is_removal_date_expired
+msgid "Removal Date Expired"
+msgstr ""
+
+#. module: stock_receive_lot
+#: model:ir.model.fields,field_description:stock_receive_lot.field_stock_pack_operation_lot_is_removal_date_expired
+msgid "Removal date"
+msgstr ""
+
+#. module: stock_receive_lot
+#: model:ir.model.fields,field_description:stock_receive_lot.field_stock_pack_operation_lot_add_origin
+msgid "Source Document"
+msgstr ""
+
+#. module: stock_receive_lot
+#: code:addons/stock_receive_lot/wizards/stock.py:353
+#, python-format
+msgid "This lot is not in the list of expected lots"
+msgstr ""
+
+#. module: stock_receive_lot
+#: model:ir.model.fields,field_description:stock_receive_lot.field_stock_pack_operation_lot_add_product_qty
+msgid "To Do"
+msgstr ""
+
+#. module: stock_receive_lot
+#: model:ir.model,name:stock_receive_lot.model_stock_picking
+#: model:ir.ui.view,arch_db:stock_receive_lot.view_pack_operation_lot_add_form
+msgid "Transfer"
+msgstr ""
+
+#. module: stock_receive_lot
+#: model:ir.model.fields,field_description:stock_receive_lot.field_stock_pack_operation_lot_add_product_uom_id
+msgid "Unit of Measure"
+msgstr ""
+
+#. module: stock_receive_lot
+#: model:ir.model.fields,field_description:stock_receive_lot.field_stock_location_is_reception_wizard
+msgid "Visible in reception wizard"
+msgstr ""
+
+#. module: stock_receive_lot
+#: code:addons/stock_receive_lot/wizards/stock.py:186
+#, python-format
+msgid "Warning"
+msgstr ""
+
+#. module: stock_receive_lot
+#: code:addons/stock_receive_lot/wizards/stock.py:187
+#: code:addons/stock_receive_lot/wizards/stock.py:291
+#, python-format
+msgid "You cannot receive more than the expected remaining quantity"
+msgstr ""
+
+#. module: stock_receive_lot
+#: model:ir.ui.view,arch_db:stock_receive_lot.view_pack_operation_lot_add_form
+msgid "out of"
+msgstr ""
+
+#. module: stock_receive_lot
+#: model:ir.model,name:stock_receive_lot.model_stock_pack_operation_lot_add
+msgid "stock.pack.operation.lot.add"
+msgstr ""
+
