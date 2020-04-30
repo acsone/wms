@@ -10,7 +10,9 @@ cffi==1.14.0
 chardet==3.0.4
 Click==7.0
 click-odoo==1.4.2
-click-odoo-contrib==1.9.0
+click-odoo-contrib==1.10.1
+configparser==4.0.2
+contextlib2==0.6.0.post1
 cryptography==2.8
 decorator==4.0.10
 dicttoxml==1.7.4
@@ -22,6 +24,8 @@ funcsigs==1.0.2
 gevent==1.1.2
 greenlet==0.4.10
 idna==2.7
+importlib-metadata==1.6.0
+importlib-resources==1.5.0
 ipaddress==1.0.23
 jcconv==0.2.3
 Jinja2==2.10.1
@@ -126,8 +130,8 @@ odoo10-addon-sale-stock-picking-blocking @ git+https://github.com/acsone/sale-wo
 odoo10-addon-sale-triple-discount @ git+https://github.com/acsone/sale-workflow.git@b9987e4eb546f9ea8c0ee88e507072252b0d57d3#subdirectory=setup/sale_triple_discount
 odoo10-addon-server-environment @ git+https://github.com/acsone/server-tools.git@dcefdba5bac014076f05229ba091acd8b739e164#subdirectory=setup/server_environment
 odoo10-addon-server-environment-ir-config-parameter @ git+https://github.com/acsone/server-tools.git@dcefdba5bac014076f05229ba091acd8b739e164#subdirectory=setup/server_environment_ir_config_parameter
+odoo10-addon-slow-statement-logger @ git+https://github.com/acsone/server-tools@a619cdf9dfae7e60ff02caa3c588058283440e16#subdirectory=setup/slow_statement_logger
 odoo10-addon-sql-request-abstract @ git+https://github.com/acsone/server-tools.git@dcefdba5bac014076f05229ba091acd8b739e164#subdirectory=setup/sql_request_abstract
-odoo10_addon_slow_statement_logger @ git+https://github.com/acsone/server-tools@a619cdf9dfae7e60ff02caa3c588058283440e16#subdirectory=setup/slow_statement_logger
 odoo10-addon-stock-available @ git+https://github.com/acsone/stock-logistics-warehouse.git@d7cedf56da46da998d63d4e03a0e9cea2099fded#subdirectory=setup/stock_available
 odoo10-addon-stock-available-immediately @ git+https://github.com/acsone/stock-logistics-warehouse.git@d7cedf56da46da998d63d4e03a0e9cea2099fded#subdirectory=setup/stock_available_immediately
 odoo10-addon-stock-disable-force-availability-button @ git+https://github.com/acsone/stock-logistics-workflow.git@73135ace7b20fc3b86dcb8b0459c9b8a203d1474#subdirectory=setup/stock_disable_force_availability_button
@@ -144,6 +148,7 @@ odoo10-addon-web-widget-many2many-tags-multi-selection @ git+https://github.com/
 ofxparse==0.16
 paramiko==2.7.1
 passlib==1.6.5
+pathlib2==2.3.5
 pbr==5.4.4
 Pillow==3.4.1
 psutil==4.3.1
@@ -169,10 +174,13 @@ PyYAML==3.12
 qrcode==5.3
 reportlab==3.3.0
 requests==2.20.0
+scandir==1.10.0
 simplejson==3.17.0
+singledispatch==3.4.0.3
 six==1.10.0
 soupsieve==1.9.5
 suds-jurko==0.6
+typing==3.7.4.1
 unicodecsv==0.14.1
 Unidecode==1.1.1
 urllib3==1.24.3
@@ -183,3 +191,4 @@ wrapt==1.11.2
 xlrd==1.0.0
 XlsxWriter==0.9.3
 xlwt==1.1.2
+zipp==1.2.0
