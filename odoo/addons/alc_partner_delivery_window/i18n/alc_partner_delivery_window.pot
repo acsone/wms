@@ -14,13 +14,13 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_partner_delivery_window
-#: code:addons/alc_partner_delivery_window/models/alc_delivery_window.py:34
+#: code:addons/alc_partner_delivery_window/models/alc_delivery_window.py:32
 #, python-format
 msgid "%s must be > %s"
 msgstr ""
 
 #. module: alc_partner_delivery_window
-#: code:addons/alc_partner_delivery_window/models/alc_delivery_window.py:74
+#: code:addons/alc_partner_delivery_window/models/alc_delivery_window.py:72
 #, python-format
 msgid "%s overlaps %s"
 msgstr ""
@@ -115,7 +115,7 @@ msgid "Name"
 msgstr ""
 
 #. module: alc_partner_delivery_window
-#: code:addons/alc_partner_delivery_window/models/alc_delivery_week_day.py:26
+#: code:addons/alc_partner_delivery_window/models/alc_delivery_week_day.py:25
 #: sql_constraint:alc.delivery.week.day:0
 #, python-format
 msgid "Name must be unique"
