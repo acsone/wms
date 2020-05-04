@@ -14,13 +14,13 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_edi_connector
-#: code:addons/alc_edi_connector/components/edi_sftp_backend_adapter.py:59
+#: code:addons/alc_edi_connector/components/edi_sftp_backend_adapter.py:55
 #, python-format
 msgid "%s must be set in environ"
 msgstr ""
 
 #. module: alc_edi_connector
-#: code:addons/alc_edi_connector/models/edi_import_task_def.py:39
+#: code:addons/alc_edi_connector/models/edi_import_task_def.py:37
 #, python-format
 msgid "A File Matcher Pattern is required for task %s with an SFTP backend"
 msgstr ""
@@ -31,7 +31,7 @@ msgid "API Configuration"
 msgstr ""
 
 #. module: alc_edi_connector
-#: code:addons/alc_edi_connector/models/res_partner.py:22
+#: code:addons/alc_edi_connector/models/res_partner.py:20
 #, python-format
 msgid "An EDI connector is required."
 msgstr ""
@@ -69,7 +69,7 @@ msgid "Channel"
 msgstr ""
 
 #. module: alc_edi_connector
-#: code:addons/alc_edi_connector/components/ubl_order_exporter.py:32
+#: code:addons/alc_edi_connector/components/ubl_order_exporter.py:30
 #, python-format
 msgid "Connector EDI"
 msgstr ""
@@ -102,7 +102,7 @@ msgid "EDI"
 msgstr ""
 
 #. module: alc_edi_connector
-#: code:addons/alc_edi_connector/models/res_partner.py:27
+#: code:addons/alc_edi_connector/models/res_partner.py:25
 #, python-format
 msgid "EDI is not supported by %s"
 msgstr ""
@@ -134,7 +134,7 @@ msgid "Edi connector"
 msgstr ""
 
 #. module: alc_edi_connector
-#: code:addons/alc_edi_connector/models/edi_backend.py:61
+#: code:addons/alc_edi_connector/models/edi_backend.py:58
 #, python-format
 msgid "Everything seems ok"
 msgstr ""
@@ -205,7 +205,7 @@ msgid "Imports"
 msgstr ""
 
 #. module: alc_edi_connector
-#: code:addons/alc_edi_connector/models/edi_task_def.py:30
+#: code:addons/alc_edi_connector/models/edi_task_def.py:22
 #: sql_constraint:edi.export.task.def:0
 #: sql_constraint:edi.import.task.def:0
 #: sql_constraint:edi.task.def:0
@@ -301,7 +301,7 @@ msgid "Private key environment variable"
 msgstr ""
 
 #. module: alc_edi_connector
-#: code:addons/alc_edi_connector/models/edi_backend.py:89
+#: code:addons/alc_edi_connector/models/edi_backend.py:84
 #, python-format
 msgid "Pull EDI %s"
 msgstr ""
@@ -327,7 +327,7 @@ msgid "Send UBL Order"
 msgstr ""
 
 #. module: alc_edi_connector
-#: code:addons/alc_edi_connector/models/purchase_order.py:33
+#: code:addons/alc_edi_connector/models/purchase_order.py:31
 #, python-format
 msgid "Sending UBL Order documet is only allowed in state approved"
 msgstr ""
@@ -358,13 +358,13 @@ msgid "Timestamp last import"
 msgstr ""
 
 #. module: alc_edi_connector
-#: code:addons/alc_edi_connector/models/edi_backend.py:76
+#: code:addons/alc_edi_connector/models/edi_backend.py:73
 #, python-format
 msgid "UBL Oder Document Generation not configured on the backend %s"
 msgstr ""
 
 #. module: alc_edi_connector
-#: code:addons/alc_edi_connector/components/ubl_order_exporter.py:31
+#: code:addons/alc_edi_connector/components/ubl_order_exporter.py:29
 #, python-format
 msgid "UBL Order document sent"
 msgstr ""
