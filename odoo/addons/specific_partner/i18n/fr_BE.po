@@ -77,7 +77,7 @@ msgid "Display Name"
 msgstr "Nom affiché"
 
 #. module: specific_partner
-#: code:addons/specific_partner/models/res_partner.py:328
+#: code:addons/specific_partner/models/res_partner.py:316
 #, python-format
 msgid ""
 "For an invoicing or delivery address the following fields (name, street, "
@@ -94,7 +94,7 @@ msgid "ID"
 msgstr "ID"
 
 #. module: specific_partner
-#: code:addons/specific_partner/models/res_partner.py:91
+#: code:addons/specific_partner/models/res_partner.py:87
 #, python-format
 msgid "Invoice and delivery"
 msgstr "Facturation + Livraison"
@@ -188,14 +188,14 @@ msgid "Suite Name"
 msgstr "Nom de suite"
 
 #. module: specific_partner
-#: code:addons/specific_partner/models/res_partner.py:340
+#: code:addons/specific_partner/models/res_partner.py:328
 #: sql_constraint:res.partner:0
 #, python-format
 msgid "The reference must be numeric or empty"
 msgstr "La référence doit être unique ou vide"
 
 #. module: specific_partner
-#: code:addons/specific_partner/models/partner_alcyon_category.py:17
+#: code:addons/specific_partner/models/partner_alcyon_category.py:14
 #: sql_constraint:partner.alcyon_category:0
 #, python-format
 msgid "This category name already exists"
@@ -209,7 +209,7 @@ msgid "This legal entity already exists"
 msgstr "Cette entité juridique existe déjà"
 
 #. module: specific_partner
-#: code:addons/specific_partner/models/partner_alcyon_category.py:22
+#: code:addons/specific_partner/models/partner_alcyon_category.py:15
 #: sql_constraint:partner.alcyon_category:0
 #, python-format
 msgid "This reference esb already exists"
