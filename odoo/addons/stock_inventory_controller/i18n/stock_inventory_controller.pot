@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: stock_inventory_controller
-#: code:addons/stock_inventory_controller/models/stock_inventory.py:100
+#: code:addons/stock_inventory_controller/models/stock_inventory.py:95
 #, python-format
 msgid "Cannot validate inventory:\n"
 "\n"
@@ -28,7 +28,7 @@ msgid "Error during Inventory"
 msgstr ""
 
 #. module: stock_inventory_controller
-#: code:addons/stock_inventory_controller/models/stock_inventory.py:126
+#: code:addons/stock_inventory_controller/models/stock_inventory.py:119
 #, python-format
 msgid "Error during validation. Please restart an inventory."
 msgstr ""
