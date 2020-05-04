@@ -157,7 +157,7 @@ msgid "Temperature (°C)"
 msgstr ""
 
 #. module: specific_product
-#: code:addons/specific_product/models/product.py:53
+#: code:addons/specific_product/models/product.py:50
 #: sql_constraint:product.template:0
 #, python-format
 msgid "This cnk_code already exists."
