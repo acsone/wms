@@ -57,7 +57,7 @@ msgid "Transfer"
 msgstr ""
 
 #. module: specific_shipping_costs
-#: code:addons/specific_shipping_costs/models/delivery_carrier.py:22
+#: code:addons/specific_shipping_costs/models/delivery_carrier.py:19
 #, python-format
 msgid "You cannot delete a record linked from a partner"
 msgstr ""
