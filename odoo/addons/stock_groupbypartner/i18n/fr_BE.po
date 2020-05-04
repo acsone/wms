@@ -17,7 +17,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: stock_groupbypartner
-#: code:addons/stock_groupbypartner/models/stock.py:322
+#: code:addons/stock_groupbypartner/models/stock.py:306
 #, python-format
 msgid "Backorder of %s"
 msgstr ""
@@ -38,13 +38,13 @@ msgid "Procurement Requisition"
 msgstr ""
 
 #. module: stock_groupbypartner
-#: code:addons/stock_groupbypartner/models/stock.py:325
+#: code:addons/stock_groupbypartner/models/stock.py:309
 #, python-format
 msgid "Remaining move '%s' moved to new backorder <em>%s</em>."
 msgstr ""
 
 #. module: stock_groupbypartner
-#: code:addons/stock_groupbypartner/models/stock.py:261
+#: code:addons/stock_groupbypartner/models/stock.py:247
 #, python-format
 msgid ""
 "Remaining move '%s' of qty %s and origin '%s' moved to exiting picking <em>"
@@ -52,8 +52,8 @@ msgid ""
 msgstr ""
 
 #. module: stock_groupbypartner
-#: code:addons/stock_groupbypartner/models/stock.py:85
-#: code:addons/stock_groupbypartner/models/stock.py:119
+#: code:addons/stock_groupbypartner/models/stock.py:83
+#: code:addons/stock_groupbypartner/models/stock.py:113
 #, python-format
 msgid ""
 "Remaining moves canceled as partner does not accept backorder:<ul>%s</ul>"
