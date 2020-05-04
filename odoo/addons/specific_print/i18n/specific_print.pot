@@ -71,7 +71,7 @@ msgid "Created on"
 msgstr ""
 
 #. module: specific_print
-#: code:addons/specific_print/models/stock.py:155
+#: code:addons/specific_print/models/stock.py:149
 #: model:ir.model.fields,help:specific_print.field_res_partner_no_labels_products
 #: model:ir.model.fields,help:specific_print.field_res_users_no_labels_products
 #, python-format
@@ -113,15 +113,15 @@ msgid "ID"
 msgstr ""
 
 #. module: specific_print
-#: code:addons/specific_print/wizards/print_label.py:37
+#: code:addons/specific_print/wizards/print_label.py:35
 #, python-format
 msgid "Invalid model"
 msgstr ""
 
 #. module: specific_print
-#: code:addons/specific_print/wizards/print_label.py:47
-#: code:addons/specific_print/wizards/print_label.py:55
-#: code:addons/specific_print/wizards/print_label.py:64
+#: code:addons/specific_print/wizards/print_label.py:45
+#: code:addons/specific_print/wizards/print_label.py:53
+#: code:addons/specific_print/wizards/print_label.py:62
 #, python-format
 msgid "Invalid printer"
 msgstr ""
@@ -173,8 +173,8 @@ msgid "Lots"
 msgstr ""
 
 #. module: specific_print
-#: code:addons/specific_print/models/stock.py:74
-#: code:addons/specific_print/models/stock.py:134
+#: code:addons/specific_print/models/stock.py:72
+#: code:addons/specific_print/models/stock.py:130
 #, python-format
 msgid "No destination partner defined"
 msgstr ""
@@ -290,7 +290,7 @@ msgid "Report"
 msgstr ""
 
 #. module: specific_print
-#: code:addons/specific_print/models/printer.py:21
+#: code:addons/specific_print/models/printer.py:20
 #: sql_constraint:printing.printer:0
 #, python-format
 msgid "The printer code must be unique by type"
