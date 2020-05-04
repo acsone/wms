@@ -34,13 +34,13 @@ msgid "Uncancel"
 msgstr ""
 
 #. module: stock_constraint
-#: code:addons/stock_constraint/models/stock.py:26
+#: code:addons/stock_constraint/models/stock.py:21
 #, python-format
 msgid "You are not allowed to cancel such operation"
 msgstr ""
 
 #. module: stock_constraint
-#: code:addons/stock_constraint/models/stock.py:55
+#: code:addons/stock_constraint/models/stock.py:48
 #, python-format
 msgid "You cannot cancel a move that is part of a started picking"
 msgstr ""
