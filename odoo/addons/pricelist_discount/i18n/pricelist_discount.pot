@@ -105,43 +105,43 @@ msgid "The date start is null"
 msgstr ""
 
 #. module: pricelist_discount
-#: code:addons/pricelist_discount/models/product_supplierinfo.py:130
+#: code:addons/pricelist_discount/models/product_supplierinfo.py:116
 #, python-format
 msgid "The end date must be equal or greater than the start date"
 msgstr ""
 
 #. module: pricelist_discount
-#: code:addons/pricelist_discount/models/product_supplierinfo.py:125
+#: code:addons/pricelist_discount/models/product_supplierinfo.py:112
 #, python-format
 msgid "You cannot have a promo without end date"
 msgstr ""
 
 #. module: pricelist_discount
-#: code:addons/pricelist_discount/models/product_supplierinfo.py:121
+#: code:addons/pricelist_discount/models/product_supplierinfo.py:110
 #, python-format
 msgid "You cannot have a promo without start date"
 msgstr ""
 
 #. module: pricelist_discount
-#: code:addons/pricelist_discount/models/product_supplierinfo.py:148
+#: code:addons/pricelist_discount/models/product_supplierinfo.py:134
 #, python-format
 msgid "You cannot have two promos at the same time"
 msgstr ""
 
 #. module: pricelist_discount
-#: code:addons/pricelist_discount/models/product_supplierinfo.py:114
+#: code:addons/pricelist_discount/models/product_supplierinfo.py:107
 #, python-format
 msgid "You cannot have two promos without start and end date"
 msgstr ""
 
 #. module: pricelist_discount
-#: code:addons/pricelist_discount/models/product_supplierinfo.py:98
+#: code:addons/pricelist_discount/models/product_supplierinfo.py:91
 #, python-format
 msgid "You cannot set a minimum quantity (sale and/or purchase) on a default promo"
 msgstr ""
 
 #. module: pricelist_discount
-#: code:addons/pricelist_discount/models/product_supplierinfo.py:92
+#: code:addons/pricelist_discount/models/product_supplierinfo.py:85
 #, python-format
 msgid "You cannot two different supplier for a product"
 msgstr ""
