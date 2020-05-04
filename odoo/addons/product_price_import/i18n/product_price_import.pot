@@ -71,8 +71,8 @@ msgid "Product Template"
 msgstr ""
 
 #. module: product_price_import
-#: code:addons/product_price_import/report/report_product_price_import.py:120
-#: code:addons/product_price_import/report/report_product_price_import.py:122
+#: code:addons/product_price_import/report/report_product_price_import.py:109
+#: code:addons/product_price_import/report/report_product_price_import.py:111
 #, python-format
 msgid "Product prices"
 msgstr ""
@@ -83,19 +83,19 @@ msgid "Product prices export/import XLSX"
 msgstr ""
 
 #. module: product_price_import
-#: code:addons/product_price_import/wizards/product_price_importer.py:167
+#: code:addons/product_price_import/wizards/product_price_importer.py:161
 #, python-format
 msgid "The default supplier %s for product %s is not the same one as found into the file (%s)"
 msgstr ""
 
 #. module: product_price_import
-#: code:addons/product_price_import/wizards/product_price_importer.py:94
+#: code:addons/product_price_import/wizards/product_price_importer.py:92
 #, python-format
 msgid "Unknown product identifier %s"
 msgstr ""
 
 #. module: product_price_import
-#: code:addons/product_price_import/wizards/product_price_importer.py:101
+#: code:addons/product_price_import/wizards/product_price_importer.py:99
 #, python-format
 msgid "Unknown supplier identifier %s"
 msgstr ""
