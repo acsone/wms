@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_delivery_rounds_geooptimize
-#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:401
+#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:382
 #, python-format
 msgid "%s: Optimization failed"
 msgstr ""
@@ -35,7 +35,7 @@ msgid "Aborted"
 msgstr ""
 
 #. module: alc_delivery_rounds_geooptimize
-#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:413
+#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:393
 #, python-format
 msgid "Check geo optimization status for %s"
 msgstr ""
@@ -148,7 +148,7 @@ msgid "Optimization process max duration"
 msgstr ""
 
 #. module: alc_delivery_rounds_geooptimize
-#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:163
+#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:153
 #, python-format
 msgid "Optimization requests sent to external system."
 msgstr ""
@@ -180,13 +180,13 @@ msgid "Success"
 msgstr ""
 
 #. module: alc_delivery_rounds_geooptimize
-#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:480
+#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:451
 #, python-format
 msgid "The following partner ids are not expected into the optimization result: %s"
 msgstr ""
 
 #. module: alc_delivery_rounds_geooptimize
-#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:472
+#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:443
 #, python-format
 msgid "The following partners are not found into the optimization result: %s"
 msgstr ""
