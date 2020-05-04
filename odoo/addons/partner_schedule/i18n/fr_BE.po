@@ -89,7 +89,7 @@ msgid "Start date"
 msgstr "Date de début"
 
 #. module: partner_schedule
-#: code:addons/partner_schedule/models/partner_working_schedule.py:30
+#: code:addons/partner_schedule/models/partner_working_schedule.py:28
 #, python-format
 msgid "The end date of a schedule must be after the start date or empty"
 msgstr ""
@@ -102,7 +102,7 @@ msgid "To mark only one day set same date as start and end date"
 msgstr ""
 
 #. module: partner_schedule
-#: code:addons/partner_schedule/models/partner_working_schedule.py:55
+#: code:addons/partner_schedule/models/partner_working_schedule.py:52
 #, python-format
 msgid "You cannot have 2 schedules that overlap!."
 msgstr "Vous ne pouvez pas avoir 2 horaires qui se chevauchent!."
