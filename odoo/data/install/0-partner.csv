@@ -1,4 +1,0 @@
-id,name,street,street2,zip,city,vat,legal_entity_id/id,company_type
-__import__.customer_master_17,Pharmacie populaire La Sauvegarde,Avenue de la Résistance 284,,4634,SOUMAGNE,BE0403919678,__setup__.legal_entity_8,company
-__import__.customer_master_18,Pharmacies du Peuple,Rue de la Boverie 379,,4100,SERAING,BE0406418122,__setup__.legal_entity_8,company
-__import__.customer_master_29,PHARMACIE LEJEUNE SA,rue des Combattants 17,,6997,EREZEE,BE0432865270,__setup__.legal_entity_6,company

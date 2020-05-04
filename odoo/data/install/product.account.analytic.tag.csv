@@ -1,6 +1,0 @@
-id,name,color
-__setup__.account_analytic_tag_ALIMENT,Aliment,1
-__setup__.account_analytic_tag_MATERIEL,Matériel,2
-__setup__.account_analytic_tag_MEDICAMENT,Médicament,3
-__setup__.account_analytic_tag_MEDICAMENT_VET_BELGE,Médicament vet Belge,4
-__setup__.account_analytic_tag_PARAPHARMACIE,Parapharmacie,5

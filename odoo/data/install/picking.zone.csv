@@ -1,6 +1,0 @@
-id,code,name
-__setup__.picking_zone_medicament,01,Médicaments
-__setup__.picking_zone_materiel,02,Matériel
-__setup__.picking_zone_frigo,03,Frigo
-__setup__.picking_zone_aliments,04,Aliments
-__setup__.picking_zone_humain,05,Humain

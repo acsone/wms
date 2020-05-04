@@ -1,5 +1,0 @@
-id,name,bic,street,zip,city,phone,fax,email,country/id
-__setup__.bank_BBRUBEBB,ING Belgium,BBRUBEBB,"rue du Fort, 3",4671,BARCHON,+32 (0)4 345 65 22,+32 (0)4 345 65 99,sophie.bouillenne@ing.be,base.be
-__setup__.bank_GKCCBEBB,BELFIUS Banque Compte courant,GKCCBEBB,Avenue Maurice Destenay 7,4000,LIEGE,+32 (0)4 230 32 22,,charles.tefnin@belfius.be,base.be
-__setup__.bank_CREGBEBB,CBC Banque,CREGBEBB,"Boulevard Piercot, 35",4000,LIEGE,+32 (0)4 232 24 01,,pierre.destexhe@cbc.be,base.be
-__setup__.bank_GEBABEBB,BNP PARIBAS FORTIS,GEBABEBB,,,,+32 (0)4 220 40 90,+32 (0)2 565 29 50,martine.fabry@bnpparibasfortis.com,base.be

@@ -6,8 +6,6 @@ repos:
   hooks:
   - id: black
     language_version: python3
-    exclude: __openerp__.py|__manifest__.py|odoo/external-src/
-    args: [--fast]
 
 # pylint
 - repo: https://github.com/pre-commit/mirrors-pylint
@@ -17,8 +15,8 @@ repos:
   - id: pylint
     name: pylint misc
     # check all Python code excepting Odoo addons
-    exclude: odoo/local-src/|odoo/external-src/
-    args: ["--rcfile=travis/pylintrc"]
+    exclude: odoo/addons/|odoo/external-src/
+    args: ["--rcfile=./pylintrc"]
     language_version: python2.7
 
 # yaml, flake8...
