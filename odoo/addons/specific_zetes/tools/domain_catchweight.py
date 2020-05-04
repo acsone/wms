@@ -11,108 +11,108 @@ _logger = logging.getLogger(__name__)
 
 class Catchweight(DomainInterface):
     EXAMPLE_REQU = (
-        '208030828,2.2.3,3iV_101,REQU_CATCHWEIGHT,30,1,20170207,'
-        '072929,30427733121295,000000001625844,,,,1,'
-        '00000000162584400001,G,B,A,4,15,2520872,00709,01,,,,,,,'
-        ',,000002,,67709,,,,,,,,,,,'
+        "208030828,2.2.3,3iV_101,REQU_CATCHWEIGHT,30,1,20170207,"
+        "072929,30427733121295,000000001625844,,,,1,"
+        "00000000162584400001,G,B,A,4,15,2520872,00709,01,,,,,,,"
+        ",,000002,,67709,,,,,,,,,,,"
     )
     EXAMPLE_RESP = (
-        '208030828,2.2.3,3iV_101,RESP_CATCHWEIGHT,30,1,20170207,'
-        '072914,304277331212950,,,000000001625844,,,,1,'
-        '00000000162584400001,2520872,000002,,67709,,,,,,,,,,'
+        "208030828,2.2.3,3iV_101,RESP_CATCHWEIGHT,30,1,20170207,"
+        "072914,304277331212950,,,000000001625844,,,,1,"
+        "00000000162584400001,2520872,000002,,67709,,,,,,,,,,"
     )
     EXAMPLE_RESU = (
-        '208030828,2.2.3,3iV_101,RESU_CATCHWEIGHT,30,1,20170207,'
-        '072930,30427733121306,000000001625844,,,,1,'
-        '00000000162584400001,,,,,,,,,,67709,000002,,,,,,,,,'
+        "208030828,2.2.3,3iV_101,RESU_CATCHWEIGHT,30,1,20170207,"
+        "072930,30427733121306,000000001625844,,,,1,"
+        "00000000162584400001,,,,,,,,,,67709,000002,,,,,,,,,"
     )
     REQU = (
-        'groupNum',
-        'groupSubNum',
-        'headerNum',
-        'headerSubNum',
-        'itemPickSeqNum',
-        'pickLineId',
-        'sourceLC1',
-        'sourceLC2',
-        'sourceLC3',
-        'sourceLC4',
-        'sourceLC5',
-        'productCode',
-        'Cri01',
-        'Cri02',
-        'Cri03',
-        'Cri04',
-        'Cri05',
-        'Cri06',
-        'Cri07',
-        'Cri08',
-        'Cri09',
-        'Cri10',
-        'effQty',
-        'totalCatchWeight',
-        'lotNumber',
-        'Usf01',
-        'Usf02',
-        'Usf03',
-        'Usf04',
-        'Usf05',
-        'Usf06',
-        'Usf07',
-        'Usf08',
-        'Usf09',
-        'Usf10',
+        "groupNum",
+        "groupSubNum",
+        "headerNum",
+        "headerSubNum",
+        "itemPickSeqNum",
+        "pickLineId",
+        "sourceLC1",
+        "sourceLC2",
+        "sourceLC3",
+        "sourceLC4",
+        "sourceLC5",
+        "productCode",
+        "Cri01",
+        "Cri02",
+        "Cri03",
+        "Cri04",
+        "Cri05",
+        "Cri06",
+        "Cri07",
+        "Cri08",
+        "Cri09",
+        "Cri10",
+        "effQty",
+        "totalCatchWeight",
+        "lotNumber",
+        "Usf01",
+        "Usf02",
+        "Usf03",
+        "Usf04",
+        "Usf05",
+        "Usf06",
+        "Usf07",
+        "Usf08",
+        "Usf09",
+        "Usf10",
     )
     RESP = (
-        'respCode',
-        'respMsg',
-        'groupNum',
-        'groupSubNum',
-        'headerNum',
-        'headerSubNum',
-        'itemPickSeqNum',
-        'pickLineId',
-        'productCode',
-        'effQty',
-        'totalCatchWeight',
-        'lotNumber',
-        'Usf01',
-        'Usf02',
-        'Usf03',
-        'Usf04',
-        'Usf05',
-        'Usf06',
-        'Usf07',
-        'Usf08',
-        'Usf09',
-        'Usf10',
+        "respCode",
+        "respMsg",
+        "groupNum",
+        "groupSubNum",
+        "headerNum",
+        "headerSubNum",
+        "itemPickSeqNum",
+        "pickLineId",
+        "productCode",
+        "effQty",
+        "totalCatchWeight",
+        "lotNumber",
+        "Usf01",
+        "Usf02",
+        "Usf03",
+        "Usf04",
+        "Usf05",
+        "Usf06",
+        "Usf07",
+        "Usf08",
+        "Usf09",
+        "Usf10",
     )
     RESU = (
-        'groupNum',
-        'groupSubNum',
-        'headerNum',
-        'headerSubNum',
-        'itemSeqNum',
-        'lineId',
-        'assignmentType',
-        'unitOfMeasure',
-        'seqWeightInput',
-        'weight',
-        'barcode',
-        'expiryDate',
-        'destCarSeqNum',
-        'destCarId',
-        'lineIndicator',
-        'Usf01',
-        'Usf02',
-        'Usf03',
-        'Usf04',
-        'Usf05',
-        'Usf06',
-        'Usf07',
-        'Usf08',
-        'Usf09',
-        'Usf10',
+        "groupNum",
+        "groupSubNum",
+        "headerNum",
+        "headerSubNum",
+        "itemSeqNum",
+        "lineId",
+        "assignmentType",
+        "unitOfMeasure",
+        "seqWeightInput",
+        "weight",
+        "barcode",
+        "expiryDate",
+        "destCarSeqNum",
+        "destCarId",
+        "lineIndicator",
+        "Usf01",
+        "Usf02",
+        "Usf03",
+        "Usf04",
+        "Usf05",
+        "Usf06",
+        "Usf07",
+        "Usf08",
+        "Usf09",
+        "Usf10",
     )
 
     def requ(self, params):
@@ -122,14 +122,14 @@ class Catchweight(DomainInterface):
         :param params:
         :return:
         """
-        result = Parameters(self, action='resp')
+        result = Parameters(self, action="resp")
 
         line_id = params.pickLineId
         if not line_id:
             result.update(
                 {
-                    'respCode': constants.RESPONSE_CODE_ERROR,
-                    'respMsg': _('No picking found'),
+                    "respCode": constants.RESPONSE_CODE_ERROR,
+                    "respMsg": _("No picking found"),
                 }
             )
             return result.format()
@@ -152,17 +152,17 @@ class Catchweight(DomainInterface):
             life_date_str = query_result[0]
             if life_date_str:
                 life_date = fields.Date.from_string(life_date_str)
-                result.Usf01 = life_date.strftime('%d%m%y')
+                result.Usf01 = life_date.strftime("%d%m%y")
 
         result.update(
             {
-                'respCode': constants.RESPONSE_CODE_OK,
-                'groupNum': params.groupNum,
-                'itemPickSeqNum': 1,
-                'pickLineId': params.pickLineId,
-                'productCode': params.productCode,
-                'lotNumber': params.lotNumber,
-                'effQty': params.effQty,
+                "respCode": constants.RESPONSE_CODE_OK,
+                "groupNum": params.groupNum,
+                "itemPickSeqNum": 1,
+                "pickLineId": params.pickLineId,
+                "productCode": params.productCode,
+                "lotNumber": params.lotNumber,
+                "effQty": params.effQty,
             }
         )
         return result.format()
@@ -207,7 +207,7 @@ class Catchweight(DomainInterface):
         if isinstance(line_id, int):
             line_id = str(line_id)
 
-        line_id_list = line_id.split('_')
+        line_id_list = line_id.split("_")
         if len(line_id_list) == 2:
             pack_operation_id = int(line_id_list[0])
             lot_id = int(line_id_list[1])
@@ -215,9 +215,7 @@ class Catchweight(DomainInterface):
             pack_operation_id = int(line_id)
             lot_id = None
 
-        pack_op = self.request.env['stock.pack.operation'].browse(
-            pack_operation_id
-        )
+        pack_op = self.request.env["stock.pack.operation"].browse(pack_operation_id)
         if not len(pack_op):
             return
 
@@ -231,18 +229,15 @@ class Catchweight(DomainInterface):
             lot = None
             if lot_number:
                 if lot_id:
-                    lot = self.request.env['stock.production.lot'].search(
-                        [
-                            ('id', '=', lot_id),
-                            ('voice_identifier', '=', lot_number),
-                        ]
+                    lot = self.request.env["stock.production.lot"].search(
+                        [("id", "=", lot_id), ("voice_identifier", "=", lot_number)]
                     )
 
                 if not lot:
-                    lot = self.request.env['stock.production.lot'].search(
+                    lot = self.request.env["stock.production.lot"].search(
                         [
-                            ('product_id', '=', pack_op.product_id.id),
-                            ('voice_identifier', '=', lot_number),
+                            ("product_id", "=", pack_op.product_id.id),
+                            ("voice_identifier", "=", lot_number),
                         ],
                         limit=1,
                     )
@@ -279,22 +274,17 @@ class Catchweight(DomainInterface):
                 == constants.RANGEMENT_ASSIGNMENT
                 and not virtual_qty
             ):
-                reserve_rel_obj = self.request.env[
-                    'pack.operation.reserve.rel'
-                ]
+                reserve_rel_obj = self.request.env["pack.operation.reserve.rel"]
                 reserve_rel = reserve_rel_obj.search(
-                    [
-                        ('pack_operation_id', '=', pack_op.id),
-                        ('lot_id', '=', lot_id),
-                    ],
+                    [("pack_operation_id", "=", pack_op.id), ("lot_id", "=", lot_id)],
                     limit=1,
                     order="id DESC",
                 )
 
                 if not reserve_rel:
-                    error_message = (
-                        "Reserve not found for pack_op %s "
-                        "(lot %s)" % (pack_op.id, lot_id)
+                    error_message = "Reserve not found for pack_op %s " "(lot %s)" % (
+                        pack_op.id,
+                        lot_id,
                     )
                     _logger.error(error_message)
                     params.log(
@@ -319,9 +309,7 @@ class Catchweight(DomainInterface):
                 new_qty = pack_op.product_qty - virtual_qty
 
                 # Create the pack op for the quantity left in the reserve
-                pack_op_move = pack_op.split_pack_op(
-                    new_qty, location_dest_id, lot_id
-                )
+                pack_op_move = pack_op.split_pack_op(new_qty, location_dest_id, lot_id)
                 pack_op_move.add_qty(new_qty, lot_id)
             # Otherwise simple add the new quantity to the current pack op
             else:
@@ -372,7 +360,7 @@ class Catchweight(DomainInterface):
                 )
             )
             if lot_id:
-                lot = self.request.env['stock.production.lot'].browse(lot_id)
+                lot = self.request.env["stock.production.lot"].browse(lot_id)
                 error_message += " (lot %s)" % lot.name
 
             _logger.error(error_message)
@@ -380,7 +368,7 @@ class Catchweight(DomainInterface):
                 picking_id=pack_op.picking_id.id,
                 operation_id=pack_op.id,
                 exception=error_message,
-                error_type='human',
+                error_type="human",
             )
 
     def check_picked_quantity(self, params, pack_op, picked_quantity):
@@ -414,7 +402,7 @@ class Catchweight(DomainInterface):
                 picking_id=pack_op.picking_id.id,
                 operation_id=pack_op.id,
                 exception=error_message,
-                error_type='human',
+                error_type="human",
             )
             return pack_op.product_qty - pack_op.qty_done
 

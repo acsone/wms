@@ -14,16 +14,12 @@ _logger = logging.getLogger(__name__)
 
 
 def create_index(cr, index_name, table, expression):
-    cr.execute(
-        'SELECT indexname FROM pg_indexes WHERE indexname = %s', (index_name,)
-    )
+    cr.execute("SELECT indexname FROM pg_indexes WHERE indexname = %s", (index_name,))
     if not cr.fetchone():
         # pylint: disable=sql-injection
         cr.execute(
-            sql.SQL('CREATE INDEX {}  ON {} {}').format(
-                sql.Identifier(index_name),
-                sql.Identifier(table),
-                sql.SQL(expression),
+            sql.SQL("CREATE INDEX {}  ON {} {}").format(
+                sql.Identifier(index_name), sql.Identifier(table), sql.SQL(expression)
             )
         )
 
@@ -31,7 +27,7 @@ def create_index(cr, index_name, table, expression):
 def is_postgres_superuser(env):
     env.cr.execute("SHOW is_superuser;")
     superuser = env.cr.fetchone()
-    return superuser is not None and superuser[0] == 'on' or False
+    return superuser is not None and superuser[0] == "on" or False
 
 
 def trgm_extension_exists(env):
@@ -46,30 +42,29 @@ def trgm_extension_exists(env):
 
     extension = env.cr.fetchone()
     if extension is None:
-        return 'missing'
+        return "missing"
 
     if extension[1] is None:
-        return 'uninstalled'
+        return "uninstalled"
 
-    return 'installed'
+    return "installed"
 
 
 def install_trgm_extension(env):
     extension = trgm_extension_exists(env)
-    if extension == 'missing':
+    if extension == "missing":
         _logger.warning(
-            'To use pg_trgm you have to install the '
-            'postgres-contrib module.'
+            "To use pg_trgm you have to install the " "postgres-contrib module."
         )
-    elif extension == 'uninstalled':
+    elif extension == "uninstalled":
         if is_postgres_superuser(env):
             env.cr.execute("CREATE EXTENSION IF NOT EXISTS pg_trgm;")
             return True
         else:
             _logger.warning(
-                'To use pg_trgm you have to create the '
-                'extension pg_trgm in your database or you '
-                'have to be the superuser.'
+                "To use pg_trgm you have to create the "
+                "extension pg_trgm in your database or you "
+                "have to be the superuser."
             )
     else:
         return True

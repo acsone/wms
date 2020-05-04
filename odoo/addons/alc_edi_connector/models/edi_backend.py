@@ -12,36 +12,33 @@ SFTP_TIMEOUT = 30
 
 class EdiBackend(models.Model):
 
-    _name = 'edi.backend'
-    _description = 'Edi Backend'
-    _inherit = 'connector.backend'
+    _name = "edi.backend"
+    _description = "Edi Backend"
+    _inherit = "connector.backend"
 
     name = fields.Char(required=True)
-    channel = fields.Selection(
-        [('sftp', 'ftp/sftp')], required=True, default="sftp"
-    )
+    channel = fields.Selection([("sftp", "ftp/sftp")], required=True, default="sftp")
     hostname = fields.Char(required=True)
     username = fields.Char(required=True)
     password = fields.Char()
     port = fields.Integer(default=22)
     pk_env_variable = fields.Char(
-        'Private key environment variable',
-        help='The name of the environment variable who '
-        'contains the private sh key',
+        "Private key environment variable",
+        help="The name of the environment variable who " "contains the private sh key",
     )
     path_read = fields.Char()
     path_write = fields.Char()
 
     edi_import_task_def_ids = fields.One2many(
-        comodel_name='edi.import.task.def',
-        inverse_name='backend_id',
-        string='Import Task Definition',
+        comodel_name="edi.import.task.def",
+        inverse_name="backend_id",
+        string="Import Task Definition",
     )
 
     edi_export_task_def_ids = fields.One2many(
-        comodel_name='edi.export.task.def',
-        inverse_name='backend_id',
-        string='Export Task Definition',
+        comodel_name="edi.export.task.def",
+        inverse_name="backend_id",
+        string="Export Task Definition",
     )
 
     @contextmanager
@@ -58,7 +55,7 @@ class EdiBackend(models.Model):
             backend_adapter = work.component(usage=backend_adapter_usage)
             backend_adapter.test_connection()
 
-        raise UserError(_('Everything seems ok'))
+        raise UserError(_("Everything seems ok"))
 
     def _get_task(self, kind):
         """
@@ -73,9 +70,7 @@ class EdiBackend(models.Model):
         task_def = self._get_task("ubl.order.exporter")
         if not task_def:
             raise UserError(
-                _(
-                    "UBL Oder Document Generation not configured on the backend %s"
-                )
+                _("UBL Oder Document Generation not configured on the backend %s")
                 % self.name
             )
 

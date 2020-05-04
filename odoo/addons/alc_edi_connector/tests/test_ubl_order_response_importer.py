@@ -14,9 +14,7 @@ class TestUblOrderResponseImporter(AlcEdiConnectorCase):
     @classmethod
     def setUpClass(cls):
         super(TestUblOrderResponseImporter, cls).setUpClass()
-        cls.import_task_def = cls.edi_backend._get_task(
-            "ubl.order.response.importer"
-        )
+        cls.import_task_def = cls.edi_backend._get_task("ubl.order.response.importer")
         cls.OrderResponseImport = cls.env["order.response.import"]
 
     def test_01(self):
@@ -81,6 +79,4 @@ class TestUblOrderResponseImporter(AlcEdiConnectorCase):
         ) as patched_process_content:
             job.perform()
             self.assertEqual(patched_process_content.call_count, 1)
-            self.assertEqual(
-                patched_process_content.call_args[0], (attachment,)
-            )
+            self.assertEqual(patched_process_content.call_args[0], (attachment,))

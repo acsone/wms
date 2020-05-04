@@ -5,8 +5,8 @@ from odoo import fields, models
 
 
 class StorageTemperatures(models.Model):
-    _name = 'product.storage.temperature'
+    _name = "product.storage.temperature"
 
     name = fields.Char(required=True)
-    temperature = fields.Float(u'Temperature (°C)')
-    esb_ref = fields.Char(string='Reference for ESB')
+    temperature = fields.Float(u"Temperature (°C)")
+    esb_ref = fields.Char(string="Reference for ESB")

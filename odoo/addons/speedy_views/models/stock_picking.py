@@ -9,7 +9,7 @@ from .utils import create_index
 
 
 class StockPicking(models.Model):
-    _inherit = 'stock.picking'
+    _inherit = "stock.picking"
 
     partner_id = fields.Many2one(index=True)
     group_id = fields.Many2one(index=True)
@@ -18,10 +18,7 @@ class StockPicking(models.Model):
     def init(self):
 
         # index for the default _order of stock.picking
-        index_name = 'stock_picking_order_list_sort_desc_index'
+        index_name = "stock_picking_order_list_sort_desc_index"
         create_index(
-            self.env.cr,
-            index_name,
-            self._table,
-            '(priority desc, date, id desc)',
+            self.env.cr, index_name, self._table, "(priority desc, date, id desc)"
         )

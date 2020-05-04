@@ -6,13 +6,13 @@ from odoo import fields, models
 
 
 class ResPartner(models.Model):
-    _inherit = 'res.partner'
+    _inherit = "res.partner"
 
     invoice_sending_method = fields.Selection(
-        [('email', 'Email'), ('letter', 'Letter')], default=False, copy=False
+        [("email", "Email"), ("letter", "Letter")], default=False, copy=False
     )
     invoice_amount_copy = fields.Integer(
-        'Amount of invoice copies to generate',
+        "Amount of invoice copies to generate",
         help="If amount = 1, then 2 invoices will be generated in the pdf "
         "(original + copy)",
     )

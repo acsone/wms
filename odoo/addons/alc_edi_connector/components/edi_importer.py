@@ -8,8 +8,8 @@ from odoo.addons.component.core import AbstractComponent
 class EdiImporter(AbstractComponent):
     """ Synchronizer for importing data from a backend to Odoo """
 
-    _name = 'edi.importer'
-    _inherit = ['edi.synchronizer', 'base.importer']
+    _name = "edi.importer"
+    _inherit = ["edi.synchronizer", "base.importer"]
 
     def execute(self):
         raise NotImplementedError()

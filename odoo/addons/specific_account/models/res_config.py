@@ -6,10 +6,10 @@ from odoo import fields, models
 
 
 class AccountConfigSettings(models.TransientModel):
-    _inherit = 'account.config.settings'
+    _inherit = "account.config.settings"
 
     invoice_terms_conditions = fields.Text(
-        related='company_id.invoice_terms_conditions',
-        string='Invoice Terms and Conditions',
+        related="company_id.invoice_terms_conditions",
+        string="Invoice Terms and Conditions",
         translate=True,
     )

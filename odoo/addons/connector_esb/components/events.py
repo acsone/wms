@@ -6,9 +6,9 @@ from odoo.addons.component.core import Component
 
 
 class ESBEventListener(Component):
-    _name = 'esb.listener'
-    _inherit = ['esb.base', 'base.event.listener']
-    _collection = 'esb.backend'
+    _name = "esb.listener"
+    _inherit = ["esb.base", "base.event.listener"]
+    _collection = "esb.backend"
 
     # def on_record_create(self, record, fields=None):
     #     print "%r has been created", record, fields

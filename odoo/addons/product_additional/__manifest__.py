@@ -5,27 +5,27 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
-    'name': 'Product additional for Alcyon',
-    'version': '10.0.1.0.0',
-    'author': 'Camptocamp',
-    'license': 'AGPL-3',
-    'category': 'Product',
-    'depends': [
-        'product',
-        'sale',
-        'stock',
-        'stock_constraint',
-        'stock_picking_subcode',
-        'purchase',
-        'pricelist_discount',
-        'stock_reassign_auto',
+    "name": "Product additional for Alcyon",
+    "version": "10.0.1.0.0",
+    "author": "Camptocamp",
+    "license": "AGPL-3",
+    "category": "Product",
+    "depends": [
+        "product",
+        "sale",
+        "stock",
+        "stock_constraint",
+        "stock_picking_subcode",
+        "purchase",
+        "pricelist_discount",
+        "stock_reassign_auto",
     ],
-    'website': 'http://www.camptocamp.com',
-    'data': [
+    "website": "http://www.camptocamp.com",
+    "data": [
         # Views
         "views/product_template.xml",
         "views/product_supplierinfo.xml",
         "views/purchase_order.xml",
     ],
-    'installable': True,
+    "installable": True,
 }

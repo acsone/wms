@@ -7,7 +7,7 @@ from ...components.adapter import ESBWebServiceAdapter
 
 
 class ESBWebServiceAdapterSaleOrder(ESBWebServiceAdapter):
-    _name = 'esb.saleorder.webservice.adapter'
-    _inherit = ['esb.webservice.adapter']
-    _usage = 'backend.adapter.saleorder'
-    _endpoint = 'sales_order'
+    _name = "esb.saleorder.webservice.adapter"
+    _inherit = ["esb.webservice.adapter"]
+    _usage = "backend.adapter.saleorder"
+    _endpoint = "sales_order"

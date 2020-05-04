@@ -13,20 +13,20 @@ class DeliveryFees(TestDeliveryRound):
         super(DeliveryFees, cls).setUpClass()
         # set the partners
         cls.partner1.help_with_fee = True
-        cls.partner1.invoice_frequency = '10_days'
-        cls.partner1.invoice_grouping = 'by_delivery'
+        cls.partner1.invoice_frequency = "10_days"
+        cls.partner1.invoice_grouping = "by_delivery"
 
         cls.partner2.help_with_fee = True
-        cls.partner2.invoice_frequency = '10_days'
-        cls.partner2.invoice_grouping = 'by_delivery'
+        cls.partner2.invoice_frequency = "10_days"
+        cls.partner2.invoice_grouping = "by_delivery"
 
         # round is in draft and open
         cls.delivery_round_1.button_resetdraft()
 
     def get_shipping_cost(self, so):
         """Returns the amount of shipping cost billed on a sale order"""
-        delivery_line = so.order_line.filtered('is_delivery')
-        return sum(delivery_line.mapped('price_unit'))
+        delivery_line = so.order_line.filtered("is_delivery")
+        return sum(delivery_line.mapped("price_unit"))
 
     def test_invoicing_shipping_fees_1_sale_order_out_validate_by_client(self):
         """ We want to be sure the shipping fees are invoiced.
@@ -55,9 +55,9 @@ class DeliveryFees(TestDeliveryRound):
         shippings.do_new_transfer()
         # close round
         self.delivery_round_1.button_close()
-        so_invoice_status = so1.mapped('order_line.invoice_status')
+        so_invoice_status = so1.mapped("order_line.invoice_status")
 
-        self.assertEqual(so_invoice_status, ['to invoice', 'to invoice'])
+        self.assertEqual(so_invoice_status, ["to invoice", "to invoice"])
         self.assertTrue(so1.used_for_delivery_fee)
         self.assertEqual(self.get_shipping_cost(so1), self.fee)
 
@@ -79,13 +79,13 @@ class DeliveryFees(TestDeliveryRound):
         preparation.do_new_transfer()
         # close round
         self.delivery_round_1.button_close()
-        with tools.mute_logger('odoo.addons.queue_job.models.base'):
-            self.delivery_round_1.with_context(
-                test_queue_job_no_delay=True
-            )._deliver(background=False)
+        with tools.mute_logger("odoo.addons.queue_job.models.base"):
+            self.delivery_round_1.with_context(test_queue_job_no_delay=True)._deliver(
+                background=False
+            )
         self.delivery_round_1.button_done()
-        so_invoice_status = so1.mapped('order_line.invoice_status')
-        self.assertEqual(so_invoice_status, ['invoiced', 'invoiced'])
+        so_invoice_status = so1.mapped("order_line.invoice_status")
+        self.assertEqual(so_invoice_status, ["invoiced", "invoiced"])
 
     def test_invoicing_shipping_fees_2_sale_order(self):
         """ The shipping fees are invoiced and only on the last sale order.
@@ -107,23 +107,23 @@ class DeliveryFees(TestDeliveryRound):
         preparation += so2.picking_ids.filtered(
             lambda p: p.picking_type_id == self.warehouse_1.pick_type_id
         )
-        pack_op = preparation.mapped('pack_operation_ids')
+        pack_op = preparation.mapped("pack_operation_ids")
         pack_op[0].qty_done = 10.0
         pack_op[1].qty_done = 5.0
         for prep in preparation:
             prep.do_new_transfer()
         # close round
         self.delivery_round_1.button_close()
-        with tools.mute_logger('odoo.addons.queue_job.models.base'):
-            self.delivery_round_1.with_context(
-                test_queue_job_no_delay=True
-            )._deliver(background=False)
+        with tools.mute_logger("odoo.addons.queue_job.models.base"):
+            self.delivery_round_1.with_context(test_queue_job_no_delay=True)._deliver(
+                background=False
+            )
         self.delivery_round_1.button_done()
-        so1_invoice_status = so1.mapped('order_line.invoice_status')
-        so2_invoice_status = so2.mapped('order_line.invoice_status')
-        self.assertEqual(so1_invoice_status, ['invoiced'])
+        so1_invoice_status = so1.mapped("order_line.invoice_status")
+        so2_invoice_status = so2.mapped("order_line.invoice_status")
+        self.assertEqual(so1_invoice_status, ["invoiced"])
         # the fees should be invoiced only on the last sale order
-        self.assertEqual(so2_invoice_status, ['invoiced', 'invoiced'])
+        self.assertEqual(so2_invoice_status, ["invoiced", "invoiced"])
 
     def test_invoicing_shipping_fees_2_sale_order_from_2_partners(self):
         """ Only the first customer SO will be prepared.
@@ -145,18 +145,18 @@ class DeliveryFees(TestDeliveryRound):
         preparation = so1.picking_ids.filtered(
             lambda p: p.picking_type_id == self.warehouse_1.pick_type_id
         )
-        pack_op = preparation.mapped('pack_operation_ids')
+        pack_op = preparation.mapped("pack_operation_ids")
         pack_op[0].qty_done = 10.0
         preparation.do_new_transfer()
         # close round
         self.delivery_round_1.button_close()
 
-        with tools.mute_logger('odoo.addons.queue_job.models.base'):
-            self.delivery_round_1.with_context(
-                test_queue_job_no_delay=True
-            )._deliver(background=False)
+        with tools.mute_logger("odoo.addons.queue_job.models.base"):
+            self.delivery_round_1.with_context(test_queue_job_no_delay=True)._deliver(
+                background=False
+            )
         self.delivery_round_1.button_done()
-        so1_invoice_status = so1.mapped('order_line.invoice_status')
-        so2_invoice_status = so2.mapped('order_line.invoice_status')
-        self.assertEqual(so1_invoice_status, ['invoiced', 'invoiced'])
-        self.assertEqual(so2_invoice_status, ['to invoice'])
+        so1_invoice_status = so1.mapped("order_line.invoice_status")
+        so2_invoice_status = so2.mapped("order_line.invoice_status")
+        self.assertEqual(so1_invoice_status, ["invoiced", "invoiced"])
+        self.assertEqual(so2_invoice_status, ["to invoice"])

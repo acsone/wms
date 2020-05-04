@@ -8,8 +8,8 @@ from odoo.addons.component.core import AbstractComponent
 class EdiSynchronizer(AbstractComponent):
     """ Base class for synchronizers """
 
-    _name = 'edi.synchronizer'
-    _inherit = ['base.synchronizer', 'edi.base']
+    _name = "edi.synchronizer"
+    _inherit = ["base.synchronizer", "edi.base"]
 
     @property
     def _base_backend_adapter_usage(self):

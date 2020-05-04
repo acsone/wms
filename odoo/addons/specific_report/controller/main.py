@@ -10,7 +10,7 @@ from werkzeug import exceptions
 
 
 class SpecificReportController(Controller):
-    @route(['/report/qrcode'], type='http', auth="public")
+    @route(["/report/qrcode"], type="http", auth="public")
     def report_qrcode(self, value, size=5, border=4):
         """
         Contoller able to render qrcode images without reportlab.
@@ -28,13 +28,9 @@ class SpecificReportController(Controller):
             qr.make(fit=True)
             img = qr.make_image(fill_color="white", back_color="black")
             output = StringIO.StringIO()
-            img.save(output, 'png')
+            img.save(output, "png")
             png = output.getvalue()
             output.close()
         except (ValueError, AttributeError):
-            raise exceptions.HTTPException(
-                description='Cannot convert into qrcode.'
-            )
-        return request.make_response(
-            png, headers=[('Content-Type', 'image/png')]
-        )
+            raise exceptions.HTTPException(description="Cannot convert into qrcode.")
+        return request.make_response(png, headers=[("Content-Type", "image/png")])

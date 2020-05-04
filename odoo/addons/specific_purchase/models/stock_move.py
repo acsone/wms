@@ -6,7 +6,7 @@ from odoo import api, models
 
 
 class StockMove(models.Model):
-    _inherit = 'stock.move'
+    _inherit = "stock.move"
 
     @api.multi
     def get_price_unit(self):
@@ -18,5 +18,5 @@ class StockMove(models.Model):
         price_unit = super(StockMove, self).get_price_unit()
         if self.purchase_line_id:  # this is called already in a loop on self
             price_unit = self.purchase_line_id._get_stock_move_price_unit()
-            self.write({'price_unit': price_unit})
+            self.write({"price_unit": price_unit})
         return price_unit

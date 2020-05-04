@@ -17,34 +17,34 @@ _logger = logging.getLogger(__name__)
 
 
 class StockUpdateMapper(Component):
-    _name = 'esb.stock.update.export.mapper'
-    _inherit = ['esb.export.mapper']
-    _apply_on = 'product.product'
+    _name = "esb.stock.update.export.mapper"
+    _inherit = ["esb.export.mapper"]
+    _apply_on = "product.product"
 
     @classmethod
     def _component_match(cls, work):
         return bool(
             work.timestamp
-            and work.timestamp.kind in ['stock.update', 'stock.update.single']
+            and work.timestamp.kind in ["stock.update", "stock.update.single"]
         )
 
     direct = [
-        (falsy2emptystring('default_code'), 'sku'),
-        (falsy2zero('immediately_usable_qty'), 'qty'),
+        (falsy2emptystring("default_code"), "sku"),
+        (falsy2zero("immediately_usable_qty"), "qty"),
     ]
 
     @mapping
     def compute_erpstockcode(self, record):
-        value = ''
+        value = ""
         if record.product_tmpl_id.state_id:
-            value = record.product_tmpl_id.state_id.esb_ref or ''
-        return {'erp_stock_code': value}
+            value = record.product_tmpl_id.state_id.esb_ref or ""
+        return {"erp_stock_code": value}
 
     @mapping
     def compute_date_peremption(self, record):
         """Get the closest (to now) expiration date."""
-        value = record.older_lot_id.life_date or ''
-        return {'date_peremption': value[:10]}
+        value = record.older_lot_id.life_date or ""
+        return {"date_peremption": value[:10]}
 
     @mapping
     def compute_sales_average(self, record):
@@ -52,7 +52,7 @@ class StockUpdateMapper(Component):
 
         Using direct sql to speed up the export.
         """
-        sql = '''
+        sql = """
             SELECT
                 COALESCE(SUM(sol.product_uom_qty), 0) /365
             FROM sale_order_line AS sol
@@ -60,23 +60,23 @@ class StockUpdateMapper(Component):
             WHERE sol.state not in ('cancel')
                   AND so.date_order > current_date - interval '1' year
                   AND sol.product_id = %s
-        '''
+        """
         self.env.cr.execute(sql, [record.id])
         sale_average = self.env.cr.fetchone()[0]
-        return {'sales_average': round(sale_average or 0, 1)}
+        return {"sales_average": round(sale_average or 0, 1)}
 
 
 class StockUpdateExporter(Component):
     """Multiple product stock status exporter, scheduled by cron."""
 
-    _name = 'esb.stock.update.webservice.exporter'
-    _inherit = 'esb.webservice.cron.exporter'
-    _apply_on = 'product.product'
-    _base_backend_adapter_usage = 'backend.adapter.stockupdate'
+    _name = "esb.stock.update.webservice.exporter"
+    _inherit = "esb.webservice.cron.exporter"
+    _apply_on = "product.product"
+    _base_backend_adapter_usage = "backend.adapter.stockupdate"
 
     @classmethod
     def _component_match(cls, work):
-        return bool(work.timestamp and work.timestamp.kind == 'stock.update')
+        return bool(work.timestamp and work.timestamp.kind == "stock.update")
 
     def get_items(self, export_since):
         """Find all quants that need to be exported.
@@ -86,15 +86,15 @@ class StockUpdateExporter(Component):
         that can be sent.
         """
         domain = [
-            ('product_id.default_code', '!=', ''),
-            ('product_id.default_code', '!=', False),
-            ('product_id.type', '=', 'product'),
-            ('product_id.sale_ok', '=', True),
+            ("product_id.default_code", "!=", ""),
+            ("product_id.default_code", "!=", False),
+            ("product_id.type", "=", "product"),
+            ("product_id.sale_ok", "=", True),
         ]
         if export_since:
             date_domain = self.domain_timestamp(export_since)
             domain = AND([domain, date_domain])
-        return self.env['stock.quant'].search(domain, order='write_date asc')
+        return self.env["stock.quant"].search(domain, order="write_date asc")
 
     @classmethod
     def get_exported_until(cls, last_export):
@@ -129,22 +129,20 @@ class StockUpdateExporter(Component):
                 if max_records != 0 and len(exported_ids) >= max_records:
                     # Export a batch of product state
                     try:
-                        self._create({'lines': data})
-                        _logger.debug(
-                            'Stock_exported_until %s', quant.write_date
-                        )
+                        self._create({"lines": data})
+                        _logger.debug("Stock_exported_until %s", quant.write_date)
                     except ConnectorException:
                         if last_export:
                             return self.get_exported_until(last_export)
                         raise  # No succesful export, job failed
                     else:
                         last_export = quant.write_date
-                        _logger.debug('Exporting stock status : %s', data)
+                        _logger.debug("Exporting stock status : %s", data)
                     exported_ids = []
                     data = []
         if data:
             try:
-                self._create({'lines': data})
+                self._create({"lines": data})
             except ConnectorException:
                 if last_export:
                     return self.get_exported_until(last_export)
@@ -155,16 +153,14 @@ class StockUpdateExporter(Component):
 class StockUpdateServiceExporter(Component):
     """Single product stock status exporter."""
 
-    _name = 'esb.stock.update.webservice.exporter.single'
-    _inherit = 'esb.webservice.exporter'
-    _apply_on = 'product.product'
-    _base_backend_adapter_usage = 'backend.adapter.stockupdate'
+    _name = "esb.stock.update.webservice.exporter.single"
+    _inherit = "esb.webservice.exporter"
+    _apply_on = "product.product"
+    _base_backend_adapter_usage = "backend.adapter.stockupdate"
 
     @classmethod
     def _component_match(cls, work):
-        return bool(
-            work.timestamp and work.timestamp.kind == 'stock.update.single'
-        )
+        return bool(work.timestamp and work.timestamp.kind == "stock.update.single")
 
     def _get_external_id(self):
         """Always send a POST request, so no external id."""

@@ -8,7 +8,7 @@ from .utils import create_index
 
 
 class AccountMove(models.Model):
-    _inherit = 'account.move'
+    _inherit = "account.move"
 
     name = fields.Char(index=True)  # used for reconciliation
     journal_id = fields.Many2one(index=True)
@@ -16,7 +16,5 @@ class AccountMove(models.Model):
     @api.model_cr
     def init(self):
         # index for the default _order of account.move
-        index_name = 'account_move_order_list_sort_index'
-        create_index(
-            self.env.cr, index_name, self._table, '(date DESC, id DESC)'
-        )
+        index_name = "account_move_order_list_sort_index"
+        create_index(self.env.cr, index_name, self._table, "(date DESC, id DESC)")

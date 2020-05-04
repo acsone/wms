@@ -11,39 +11,39 @@ from odoo.exceptions import UserError
 
 
 class StockProductionLot(models.Model):
-    _inherit = 'stock.production.lot'
+    _inherit = "stock.production.lot"
 
-    life_date = fields.Datetime(string='Expiration Date', required=True)
-    is_archived = fields.Boolean('Archived', default=False, readonly=True)
-    checksum = fields.Char('Checksum', readonly=True)
-    voice_identifier = fields.Char('Voice Identifier', readonly=True)
+    life_date = fields.Datetime(string="Expiration Date", required=True)
+    is_archived = fields.Boolean("Archived", default=False, readonly=True)
+    checksum = fields.Char("Checksum", readonly=True)
+    voice_identifier = fields.Char("Voice Identifier", readonly=True)
 
     # Cancel defaults values from `product_expiry` module
     _defaults = {
-        'life_date': None,
-        'use_date': None,
-        'removal_date': None,
-        'alert_date': None,
+        "life_date": None,
+        "use_date": None,
+        "removal_date": None,
+        "alert_date": None,
     }
 
     @api.model
     def create(self, vals):
         new_vals = vals.copy()
-        if not vals.get('life_date'):
+        if not vals.get("life_date"):
             context = self.env.context or {}
-            if context.get('default_life_date_allowed'):
-                new_vals['life_date'] = fields.datetime.now()
+            if context.get("default_life_date_allowed"):
+                new_vals["life_date"] = fields.datetime.now()
         result = super(StockProductionLot, self).create(new_vals)
 
-        if 'checksum' not in vals:
+        if "checksum" not in vals:
             result.compute_checksum()
 
-        if 'voice_identifier' not in vals:
+        if "voice_identifier" not in vals:
             result.compute_voice_identifier()
 
         return result
 
-    @api.onchange('product_id')
+    @api.onchange("product_id")
     def _onchange_product(self):
         # Override the product_expiry module method
         # Do nothing : on Alcyon, the life_date is entered by user
@@ -51,7 +51,7 @@ class StockProductionLot(models.Model):
         pass
 
     @api.multi
-    @api.depends('product_id')
+    @api.depends("product_id")
     def compute_checksum(self):
         """
         This method will compute a checksum on each lot.
@@ -96,12 +96,10 @@ class StockProductionLot(models.Model):
         :return:
         """
         lot_checksum_size = int(
-            self.env['ir.config_parameter'].get_param('lot_checksum_size', 3)
+            self.env["ir.config_parameter"].get_param("lot_checksum_size", 3)
         )
         same_lot_checksum_range = int(
-            self.env['ir.config_parameter'].get_param(
-                'same_lot_checksum_range', 2
-            )
+            self.env["ir.config_parameter"].get_param("same_lot_checksum_range", 2)
         )
 
         for lot in self:
@@ -144,13 +142,13 @@ class StockProductionLot(models.Model):
                 max_shelf_code = shelf_code + same_lot_checksum_range
                 for code in (min_shelf_code, shelf_code, max_shelf_code):
                     if is_letter:
-                        if code < ord('A') or code > ord('Z'):
+                        if code < ord("A") or code > ord("Z"):
                             continue
                         code = unichr(code)
                     else:
                         if code < 1:
                             continue
-                        code = format(code, '0%d' % 2)
+                        code = format(code, "0%d" % 2)
 
                     range_of_shelves.append(code)
 
@@ -176,11 +174,7 @@ class StockProductionLot(models.Model):
                 """
                 self.env.cr.execute(
                     not_available_checksum_query,
-                    (
-                        location.zone,
-                        location.corridor,
-                        tuple(range_of_shelves),
-                    ),
+                    (location.zone, location.corridor, tuple(range_of_shelves)),
                 )
                 for result in self.env.cr.fetchall():
                     if result[0]:
@@ -189,14 +183,12 @@ class StockProductionLot(models.Model):
             minval = 1
             maxval = 10 ** lot_checksum_size
             formated_checksum = [
-                format(item, '0%d' % lot_checksum_size)
+                format(item, "0%d" % lot_checksum_size)
                 for item in range(minval, maxval)
             ]
-            picklist = list(
-                set(formated_checksum) - set(checksum_not_available)
-            )
+            picklist = list(set(formated_checksum) - set(checksum_not_available))
             if not picklist:
-                raise UserError(_('There is no checksum available'))
+                raise UserError(_("There is no checksum available"))
 
             # Step 4: Generate an available checksum
             checksum = random.choice(picklist)
@@ -248,20 +240,18 @@ class StockProductionLot(models.Model):
         :return:
         """
         lot_voice_identifier_size = int(
-            self.env['ir.config_parameter'].get_param(
-                'lot_voice_identifier_size', 3
-            )
+            self.env["ir.config_parameter"].get_param("lot_voice_identifier_size", 3)
         )
         same_lot_voice_identifier_range = int(
-            self.env['ir.config_parameter'].get_param(
-                'same_lot_voice_identifier_range', 2
+            self.env["ir.config_parameter"].get_param(
+                "same_lot_voice_identifier_range", 2
             )
         )
 
         for lot in self:
             product = lot.product_id
             if not product or (
-                lot.voice_identifier and not self._context.get('force_compute')
+                lot.voice_identifier and not self._context.get("force_compute")
             ):
                 continue
 
@@ -300,13 +290,13 @@ class StockProductionLot(models.Model):
                 max_shelf_code = shelf_code + same_lot_voice_identifier_range
                 for code in (min_shelf_code, shelf_code, max_shelf_code):
                     if is_letter:
-                        if code < ord('A') or code > ord('Z'):
+                        if code < ord("A") or code > ord("Z"):
                             continue
                         code = unichr(code)
                     else:
                         if code < 1:
                             continue
-                        code = format(code, '0%d' % 2)
+                        code = format(code, "0%d" % 2)
 
                     range_of_shelves.append(code)
 
@@ -333,11 +323,7 @@ class StockProductionLot(models.Model):
                 """
                 self.env.cr.execute(
                     not_available_voice_identifier_query,
-                    (
-                        location.zone,
-                        location.corridor,
-                        tuple(range_of_shelves),
-                    ),
+                    (location.zone, location.corridor, tuple(range_of_shelves)),
                 )
                 for result in self.env.cr.fetchall():
                     if result[0]:
@@ -346,11 +332,11 @@ class StockProductionLot(models.Model):
             # 26 is for number letters in the alphabet
             nbr_possibilities = 26 ** lot_voice_identifier_size
             if len(voice_identifier_not_available) == nbr_possibilities:
-                raise UserError(_('There is no voice identifier available'))
+                raise UserError(_("There is no voice identifier available"))
 
             # Step 4: Generate a list with all available identifiers
             combinations_list = [
-                ''.join(cc)
+                "".join(cc)
                 for cc in itertools_product(string.ascii_uppercase, repeat=3)
             ]
             available_voice_identifiers = list(
@@ -358,7 +344,7 @@ class StockProductionLot(models.Model):
             )
 
             if not available_voice_identifiers:
-                raise UserError(_('Cannot generate a voice identifier'))
+                raise UserError(_("Cannot generate a voice identifier"))
 
             # Chose randomly an available voice identifier
             voice_identifier = random.choice(available_voice_identifiers)
@@ -378,7 +364,7 @@ class StockProductionLot(models.Model):
         - There is a new lot (with a higher expiration date) for this product
         :return:
         """
-        location_customers = self.env.ref('stock.stock_location_customers')
+        location_customers = self.env.ref("stock.stock_location_customers")
 
         query = """
             SELECT lot.id
@@ -399,4 +385,4 @@ class StockProductionLot(models.Model):
         result = self.env.cr.fetchall()
         lot_to_archive_ids = [lot[0] for lot in result]
 
-        self.browse(lot_to_archive_ids).write({'is_archived': True})
+        self.browse(lot_to_archive_ids).write({"is_archived": True})

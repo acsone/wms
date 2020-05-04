@@ -5,7 +5,7 @@ from odoo import api, models
 
 
 class AccountMoveLine(models.Model):
-    _inherit = 'account.move.line'
+    _inherit = "account.move.line"
 
     @api.model
     def _create(self, vals):
@@ -19,7 +19,7 @@ class AccountMoveLine(models.Model):
         We will manually call these method after the import of the initial
         balance.
         """
-        if not self._context.get('import_initial_balance'):
+        if not self._context.get("import_initial_balance"):
             return super(AccountMoveLine, self)._create(vals)
 
         # Call super without recompute methods
@@ -27,9 +27,9 @@ class AccountMoveLine(models.Model):
             result = super(AccountMoveLine, self)._create(vals)
 
         # Remove the recompute method for matched_percentage and amount
-        AccountMove = self.env['account.move']
-        matched_percentage = AccountMove._fields['matched_percentage']
-        amount = AccountMove._fields['amount']
+        AccountMove = self.env["account.move"]
+        matched_percentage = AccountMove._fields["matched_percentage"]
+        amount = AccountMove._fields["amount"]
 
         if matched_percentage in self.env.all.todo:
             del self.env.all.todo[matched_percentage]

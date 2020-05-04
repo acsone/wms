@@ -10,12 +10,12 @@ from odoo.exceptions import UserError
 
 class ProductTemplate(models.Model):
 
-    _inherit = 'product.template'
+    _inherit = "product.template"
 
     @api.multi
     def write(self, vals):
-        uom_id = vals.pop('uom_id', False)
-        uom_po_id = vals.pop('uom_po_id', False)
+        uom_id = vals.pop("uom_id", False)
+        uom_po_id = vals.pop("uom_po_id", False)
         res = super(ProductTemplate, self).write(vals)
         if uom_id:
             self._update_uom(uom_id)
@@ -32,13 +32,10 @@ class ProductTemplate(models.Model):
             for product in product_list:
                 product_id_list.append(product.id)
             new_uom = uom_obj.browse(uom_id)
-            if (
-                key.category_id == new_uom.category_id
-                and key.factor == new_uom.factor
-            ):
+            if key.category_id == new_uom.category_id and key.factor == new_uom.factor:
                 self.env.cr.execute(
-                    'UPDATE product_template SET uom_id = %(uom)s WHERE id in %(product_id)s',
-                    {'uom': new_uom.id, 'product_id': tuple(product_id_list)},
+                    "UPDATE product_template SET uom_id = %(uom)s WHERE id in %(product_id)s",
+                    {"uom": new_uom.id, "product_id": tuple(product_id_list)},
                 )
             else:
                 raise UserError(
@@ -61,11 +58,8 @@ class ProductTemplate(models.Model):
                 and key.factor == new_uom_po.factor
             ):
                 self.env.cr.execute(
-                    'UPDATE product_template SET uom_po_id = %(uom)s WHERE id in %(product_id)s',
-                    {
-                        'uom': new_uom_po.id,
-                        'product_id': tuple(product_id_list),
-                    },
+                    "UPDATE product_template SET uom_po_id = %(uom)s WHERE id in %(product_id)s",
+                    {"uom": new_uom_po.id, "product_id": tuple(product_id_list)},
                 )
             else:
                 raise UserError(

@@ -7,18 +7,18 @@ from odoo.osv import expression
 
 
 class ProcurementOrder(models.Model):
-    _inherit = 'procurement.order'
+    _inherit = "procurement.order"
 
     restrict_lot_id = fields.Many2one(
-        'stock.production.lot',
-        'Lot/Serial Number',
+        "stock.production.lot",
+        "Lot/Serial Number",
         help="Technical field used to depict a restriction on the lot/serial "
         "number of quants to consider when marking this move as 'done'",
     )
 
     def _get_stock_move_values(self):
         res = super(ProcurementOrder, self)._get_stock_move_values()
-        res['restrict_lot_id'] = self.restrict_lot_id.id
+        res["restrict_lot_id"] = self.restrict_lot_id.id
         return res
 
     @api.multi
@@ -32,18 +32,12 @@ class ProcurementOrder(models.Model):
         """
         self.ensure_one()
 
-        location_output = self.env.ref('stock.stock_location_output')
+        location_output = self.env.ref("stock.stock_location_output")
         if self.location_id == location_output:
             product_picking_zone = self.product_id.picking_zone_id
             domain = expression.AND(
                 [
-                    [
-                        (
-                            'picking_type_id.picking_zone_id',
-                            '=',
-                            product_picking_zone.id,
-                        )
-                    ],
+                    [("picking_type_id.picking_zone_id", "=", product_picking_zone.id)],
                     domain,
                 ]
             )

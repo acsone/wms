@@ -6,7 +6,7 @@ from odoo import _, api, exceptions, models
 
 
 class StockQuant(models.Model):
-    _inherit = 'stock.quant'
+    _inherit = "stock.quant"
 
     @api.model
     def quants_move(
@@ -23,7 +23,7 @@ class StockQuant(models.Model):
     ):
         if location_to.act_as_view:
             raise exceptions.UserError(
-                _('You cannot move to a location acting as view %s.')
+                _("You cannot move to a location acting as view %s.")
                 % (location_to.name,)
             )
         return super(StockQuant, self).quants_move(

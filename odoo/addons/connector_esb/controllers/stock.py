@@ -12,9 +12,7 @@ _logger = logging.getLogger(__name__)
 
 
 class StockController(http.Controller):
-    @http.route(
-        '/connector_esb/stock/product', type='http', auth='user', csrf=False
-    )
+    @http.route("/connector_esb/stock/product", type="http", auth="user", csrf=False)
     def product_stock_level(self, **kw):
         """ Return stock levels of products
 
@@ -31,24 +29,20 @@ class StockController(http.Controller):
         ensure_db()
         request.uid = SUPERUSER_ID
         env = request.env
-        _logger.debug(
-            'Calling stock/product with data : %s', request.httprequest.form
-        )
+        _logger.debug("Calling stock/product with data : %s", request.httprequest.form)
 
         params = request.httprequest.form.iterlists()
         # Keep only parameters whose key start by product
-        skus = [param[1] for param in params if param[0].startswith('product')]
+        skus = [param[1] for param in params if param[0].startswith("product")]
         # Flatten the list of skus and keep only the valid ones
         skus = [sku for sku_grp in skus for sku in sku_grp if sku.isdigit()]
-        backend = env['esb.backend'].sudo().get_singleton()
-        with backend.work_on('product.product') as work:
-            res = work.component('ws.message.product.stock').get_message(skus)
-            headers = [('Content-Type', 'text/xml')]
+        backend = env["esb.backend"].sudo().get_singleton()
+        with backend.work_on("product.product") as work:
+            res = work.component("ws.message.product.stock").get_message(skus)
+            headers = [("Content-Type", "text/xml")]
             return request.make_response(res, headers)
 
-    @http.route(
-        '/connector_esb/stock/cnk', type='json', auth='user', csrf=False
-    )
+    @http.route("/connector_esb/stock/cnk", type="json", auth="user", csrf=False)
     def product_stock_cnk(self, products=None):
         """ Return stock levels of all products (use the CNK)
         or for specific products
@@ -65,16 +59,12 @@ class StockController(http.Controller):
         request.uid = SUPERUSER_ID
         env = request.env
 
-        backend = env['esb.backend'].sudo().get_singleton()
-        with backend.work_on('product.product') as work:
-            res = work.component('ws.message.product.stock.cnk').get_message(
-                products
-            )
+        backend = env["esb.backend"].sudo().get_singleton()
+        with backend.work_on("product.product") as work:
+            res = work.component("ws.message.product.stock.cnk").get_message(products)
             return res
 
-    @http.route(
-        '/connector_esb/stock/sku', type='json', auth='user', csrf=False
-    )
+    @http.route("/connector_esb/stock/sku", type="json", auth="user", csrf=False)
     def product_stock_sku(self, products=None):
         """ Return stock levels of all products (use the SKU)
         or for specific products
@@ -91,9 +81,7 @@ class StockController(http.Controller):
         request.uid = SUPERUSER_ID
         env = request.env
 
-        backend = env['esb.backend'].sudo().get_singleton()
-        with backend.work_on('product.product') as work:
-            res = work.component('ws.message.product.stock.sku').get_message(
-                products
-            )
+        backend = env["esb.backend"].sudo().get_singleton()
+        with backend.work_on("product.product") as work:
+            res = work.component("ws.message.product.stock.sku").get_message(products)
             return res

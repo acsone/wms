@@ -13,31 +13,31 @@ class TestPurchaseOrderInvoicing(SavepointCase):
     def setUpClass(cls):
         super(TestPurchaseOrderInvoicing, cls).setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
-        cls.partner = cls.env['res.partner'].create(
-            {'name': u"TEST", 'supplier': True, 'ref': "42"}
+        cls.partner = cls.env["res.partner"].create(
+            {"name": u"TEST", "supplier": True, "ref": "42"}
         )
-        cls.product = cls.env['product.product'].create(
-            {'name': u"TEST", 'type': 'consu', 'purchase_method': 'receive'}
+        cls.product = cls.env["product.product"].create(
+            {"name": u"TEST", "type": "consu", "purchase_method": "receive"}
         )
         today = fields.Date.today()
         po_vals = {
-            'partner_id': cls.partner.id,
-            'order_line': [
+            "partner_id": cls.partner.id,
+            "order_line": [
                 (
                     0,
                     0,
                     {
-                        'name': u"Line 1",
-                        'product_id': cls.product.id,
-                        'product_qty': 10,
-                        'product_uom': cls.product.uom_id.id,
-                        'price_unit': 10,
-                        'date_planned': today,
+                        "name": u"Line 1",
+                        "product_id": cls.product.id,
+                        "product_qty": 10,
+                        "product_uom": cls.product.uom_id.id,
+                        "price_unit": 10,
+                        "date_planned": today,
                     },
                 )
             ],
         }
-        cls.order = cls.env['purchase.order'].create(po_vals)
+        cls.order = cls.env["purchase.order"].create(po_vals)
 
     def _process_picking(self, picking):
         picking.assign_operator()
@@ -58,8 +58,8 @@ class TestPurchaseOrderInvoicing(SavepointCase):
         picking = self.order.picking_ids
         self._process_picking(picking)
 
-        invoice_vals = {'partner_id': self.partner.id}
-        invoice = self.env['account.invoice'].create(invoice_vals)
+        invoice_vals = {"partner_id": self.partner.id}
+        invoice = self.env["account.invoice"].create(invoice_vals)
         # Encode purchase order lines
         invoice.purchase_id = self.order
         invoice.purchase_order_change()

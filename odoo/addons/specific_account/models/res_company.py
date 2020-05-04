@@ -6,8 +6,8 @@ from odoo import fields, models
 
 
 class ResCompany(models.Model):
-    _inherit = 'res.company'
+    _inherit = "res.company"
 
     invoice_terms_conditions = fields.Text(
-        string='Invoice Terms and Conditions', translate=True
+        string="Invoice Terms and Conditions", translate=True
     )

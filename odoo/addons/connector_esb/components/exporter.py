@@ -17,9 +17,9 @@ _logger = logging.getLogger(__name__)
 
 
 class ExportMapper(AbstractComponent):
-    _name = 'esb.export.mapper'
-    _inherit = ['base.export.mapper', 'esb.base']
-    _usage = 'export.mapper'
+    _name = "esb.export.mapper"
+    _inherit = ["base.export.mapper", "esb.base"]
+    _usage = "export.mapper"
 
     translatable_keys = {
         # 'fr_FR': {
@@ -28,11 +28,7 @@ class ExportMapper(AbstractComponent):
     }
 
     def translatable_langs(self):
-        return (
-            self.env['res.lang']
-            .search([('translatable', '=', True)])
-            .mapped('code')
-        )
+        return self.env["res.lang"].search([("translatable", "=", True)]).mapped("code")
 
     def finalize(self, record, values):
         values = super(ExportMapper, self).finalize(record, values)
@@ -45,17 +41,15 @@ class ExportMapper(AbstractComponent):
             if lang not in self.translatable_keys:
                 continue
             translatable = self.translatable_keys[lang]
-            data = record.source.with_context(lang=lang).read(
-                translatable.keys()
-            )[0]
+            data = record.source.with_context(lang=lang).read(translatable.keys())[0]
             for fname, extname in translatable.iteritems():
                 values[extname] = data[fname]
 
 
 class ESBWebServiceExporter(AbstractComponent):
-    _name = 'esb.webservice.exporter'
-    _inherit = ['base.exporter', 'esb.base']
-    _usage = 'record.exporter'
+    _name = "esb.webservice.exporter"
+    _inherit = ["base.exporter", "esb.base"]
+    _usage = "record.exporter"
 
     def __init__(self, working_context):
         super(ESBWebServiceExporter, self).__init__(working_context)
@@ -84,7 +78,7 @@ class ESBWebServiceExporter(AbstractComponent):
         # Commit so we keep the external ID when we do something in
         # _after_export and it fails. The commit will also release the lock
         # acquired on the record
-        if not odoo.tools.config['test_enable']:
+        if not odoo.tools.config["test_enable"]:
             self.env.cr.commit()  # noqa
 
         self._after_export()
@@ -106,15 +100,15 @@ class ESBWebServiceExporter(AbstractComponent):
         if self.external_id:
             record = self._update_data(map_record)
             if not record:
-                return _('Nothing to export.')
+                return _("Nothing to export.")
             self._update(record)
         else:
             record = self._create_data(map_record)
             if not record:
-                return _('Nothing to export.')
+                return _("Nothing to export.")
             result = self._create(record)
             self._postprocess_create_result(result)
-        return _('Record exported')
+        return _("Record exported")
 
     def _postprocess_create_result(self, result):
         raise NotImplementedError
@@ -158,23 +152,20 @@ class ESBWebServiceExporter(AbstractComponent):
         """
         if not records and not self.record:
             return
-        sql = (
-            "SELECT id FROM %s WHERE ID in %%s FOR UPDATE NOWAIT"
-            % self.model._table
-        )
+        sql = "SELECT id FROM %s WHERE ID in %%s FOR UPDATE NOWAIT" % self.model._table
         record_ids = tuple(records.ids) if records else (self.record.id,)
         try:
             self.env.cr.execute(sql, (record_ids,), log_exceptions=False)
         except psycopg2.OperationalError:
             _logger.info(
-                'A concurrent job is already exporting the same '
-                'record (%s with id %s). Job delayed later.',
+                "A concurrent job is already exporting the same "
+                "record (%s with id %s). Job delayed later.",
                 self.model._name,
                 record_ids,
             )
             raise RetryableJobError(
-                'A concurrent job is already exporting the same record '
-                '(%s with id %s). The job will be retried later.'
+                "A concurrent job is already exporting the same record "
+                "(%s with id %s). The job will be retried later."
                 % (self.model._name, record_ids)
             )
 
@@ -182,7 +173,7 @@ class ESBWebServiceExporter(AbstractComponent):
         """ Return True if the export can be skipped """
         # this variable contains the name of the models
         # that _inherit from 'esb.exportable'
-        exportable_models = self.env['esb.exportable']._inherit_children
+        exportable_models = self.env["esb.exportable"]._inherit_children
         # The 'esb.exportable' abstract model implements an
         # 'esb_is_exportable' method. Use it when available.
         if self.model._name in exportable_models:
@@ -192,8 +183,8 @@ class ESBWebServiceExporter(AbstractComponent):
 
 class ESBExporterMixin(AbstractComponent):
 
-    _name = 'esb.exporter.mixin'
-    _inherit = ['base.exporter', 'esb.base']
+    _name = "esb.exporter.mixin"
+    _inherit = ["base.exporter", "esb.base"]
 
     # Set to True if the record must be marked as 'exported'
     # The model must have a 'esb_exported' field
@@ -201,9 +192,7 @@ class ESBExporterMixin(AbstractComponent):
 
     @property
     def logger(self):
-        return logging.getLogger(
-            u'[{}:{}]'.format(self._usage, self.model._name)
-        )
+        return logging.getLogger(u"[{}:{}]".format(self._usage, self.model._name))
 
     def _prepare_item(self, items):
         prepared = []
@@ -212,13 +201,13 @@ class ESBExporterMixin(AbstractComponent):
         return prepared
 
     def _get_producer(self):
-        return self.work.component(usage='xml.producer')
+        return self.work.component(usage="xml.producer")
 
     def _export_items(self, items):
         producer = self._get_producer()
         writer_type = self.work.timestamp.writer
         assert writer_type
-        writer_usage = writer_type + '.xml.writer'
+        writer_usage = writer_type + ".xml.writer"
         writer = self.work.component(usage=writer_usage)
         # TODO: how many items could we have here?
         # Shall we split this in chunks?
@@ -226,7 +215,7 @@ class ESBExporterMixin(AbstractComponent):
         content = producer.produce(prepared)
         path = writer.write_file(content)
 
-        self.logger.info('File created (%s) : %s', writer_type, path)
+        self.logger.info("File created (%s) : %s", writer_type, path)
 
         if self._mark_as_exported:
             self._mark_items_as_exported(items)
@@ -240,7 +229,7 @@ class ESBExporterMixin(AbstractComponent):
 
         """
         new_exported = self.model.search(
-            [('id', 'in', items.ids), ('esb_exported', '=', False)]
+            [("id", "in", items.ids), ("esb_exported", "=", False)]
         )
         if new_exported:
             self._write_esb_exported_mark_on_records(new_exported)
@@ -253,7 +242,7 @@ class ESBExporterMixin(AbstractComponent):
             self.model._table,
         )
         self.env.cr.execute(query, (tuple(records.ids),))
-        self.model.invalidate_cache(fnames=['esb_exported'], ids=records.ids)
+        self.model.invalidate_cache(fnames=["esb_exported"], ids=records.ids)
 
     def _lock(self, records):
         """Lock the records.
@@ -266,24 +255,19 @@ class ESBExporterMixin(AbstractComponent):
         """
         if not records:
             return
-        sql = (
-            "SELECT id FROM %s WHERE id in %%s FOR UPDATE NOWAIT"
-            % self.model._table
-        )
+        sql = "SELECT id FROM %s WHERE id in %%s FOR UPDATE NOWAIT" % self.model._table
         try:
-            self.env.cr.execute(
-                sql, (tuple(records.ids),), log_exceptions=False
-            )
+            self.env.cr.execute(sql, (tuple(records.ids),), log_exceptions=False)
         except psycopg2.OperationalError:
             _logger.info(
-                'The export on (%s with ids %s) could not be done.'
-                'some locked records prevented the execution.',
+                "The export on (%s with ids %s) could not be done."
+                "some locked records prevented the execution.",
                 self.model._name,
                 records.ids,
             )
             raise RetryableJobError(
-                'Concurrent access prevented the job to export the records '
-                '(%s with id %s). The job will be retried later.'
+                "Concurrent access prevented the job to export the records "
+                "(%s with id %s). The job will be retried later."
                 % (self.model._name, records.ids)
             )
 
@@ -293,9 +277,9 @@ class ESBExporterMixin(AbstractComponent):
 
 class ESBExporter(Component):
 
-    _name = 'esb.exporter'
-    _inherit = ['esb.exporter.mixin']
-    _usage = 'record.exporter'
+    _name = "esb.exporter"
+    _inherit = ["esb.exporter.mixin"]
+    _usage = "record.exporter"
 
     def run(self, records):
         return self._export_items(records)
@@ -303,9 +287,9 @@ class ESBExporter(Component):
 
 class ESBCronExporter(AbstractComponent):
 
-    _name = 'esb.cron.exporter'
-    _inherit = ['esb.exporter.mixin']
-    _usage = 'record.exporter.cron'
+    _name = "esb.cron.exporter"
+    _inherit = ["esb.exporter.mixin"]
+    _usage = "record.exporter.cron"
 
     BASIC_LOCK_TIME = 60
 
@@ -327,11 +311,9 @@ class ESBCronExporter(AbstractComponent):
         """
         if export_since:
             export_date = fields.Datetime.from_string(export_since)
-            export_date = export_date - datetime.timedelta(
-                seconds=self.BASIC_LOCK_TIME
-            )
+            export_date = export_date - datetime.timedelta(seconds=self.BASIC_LOCK_TIME)
             export_since = fields.Datetime.to_string(export_date)
-        return [('write_date', '>=', export_since)]
+        return [("write_date", ">=", export_since)]
 
     def get_items(self, export_since):
         domain = self.get_items_domain()
@@ -357,9 +339,9 @@ class ESBCronExporter(AbstractComponent):
 
 
 class ESBWebServiceCronExporter(AbstractComponent):
-    _name = 'esb.webservice.cron.exporter'
-    _inherit = ['esb.webservice.exporter', 'esb.cron.exporter']
-    _usage = 'record.exporter.cron'
+    _name = "esb.webservice.cron.exporter"
+    _inherit = ["esb.webservice.exporter", "esb.cron.exporter"]
+    _usage = "record.exporter.cron"
 
     def run(self, export_since=None, max_records=0):
         """ Run the export on a domain
@@ -379,6 +361,6 @@ class ESBWebServiceCronExporter(AbstractComponent):
             mapped_record = self.mapper.map_record(r)
             data.append(self._update_data(mapped_record))
         if data:
-            data = {'lines': data}
+            data = {"lines": data}
             self._create(data)
         return

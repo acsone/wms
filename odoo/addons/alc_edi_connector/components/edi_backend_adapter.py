@@ -6,8 +6,8 @@ from odoo.addons.component.core import AbstractComponent
 
 
 class EdiBackendAdapter(AbstractComponent):
-    _name = 'edi.backend.adapter'
-    _inherit = ['base.backend.adapter', 'edi.base']
+    _name = "edi.backend.adapter"
+    _inherit = ["base.backend.adapter", "edi.base"]
 
     def push(self, content):
         raise NotImplementedError()

@@ -7,33 +7,29 @@ from odoo import api, fields, models
 
 class SaleOrder(models.Model):
 
-    _inherit = 'sale.order'
+    _inherit = "sale.order"
 
     @api.multi
     def _compute_helpdesk_tickets_count(self):
         for order in self:
-            domain = [('sale_order_id', '=', order.id)]
+            domain = [("sale_order_id", "=", order.id)]
 
             order.helpdesk_tickets_count = len(
-                self.env['helpdesk.ticket'].search(domain)
+                self.env["helpdesk.ticket"].search(domain)
             )
 
-    helpdesk_tickets_count = fields.Integer(
-        compute='_compute_helpdesk_tickets_count'
-    )
+    helpdesk_tickets_count = fields.Integer(compute="_compute_helpdesk_tickets_count")
 
     @api.multi
     def action_view_helpdesk_tickets(self):
         self.ensure_one()
 
-        action_data = self.env.ref(
-            'helpdesk.helpdesk_ticket_action_main_tree'
-        ).read()[0]
-        context = eval(action_data.get('context', '{}'))
-        context['default_team_id'] = self.env.ref(
-            'specific_helpdesk.customer_team'
-        ).id
-        action_data['context'] = str(context)
-        action_data['domain'] = [('sale_order_id', '=', self.id)]
+        action_data = self.env.ref("helpdesk.helpdesk_ticket_action_main_tree").read()[
+            0
+        ]
+        context = eval(action_data.get("context", "{}"))
+        context["default_team_id"] = self.env.ref("specific_helpdesk.customer_team").id
+        action_data["context"] = str(context)
+        action_data["domain"] = [("sale_order_id", "=", self.id)]
 
         return action_data

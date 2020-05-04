@@ -8,7 +8,7 @@ from .utils import create_index, install_trgm_extension
 
 
 class IrAttachment(models.Model):
-    _inherit = 'ir.attachment'
+    _inherit = "ir.attachment"
 
     url = fields.Char(index=True)
 
@@ -18,10 +18,7 @@ class IrAttachment(models.Model):
         self.env.cr.commit()
 
         if trgm_installed:
-            index_name = 'ir_attachment_url_trgm_index'
+            index_name = "ir_attachment_url_trgm_index"
             create_index(
-                self.env.cr,
-                index_name,
-                self._table,
-                'USING gin (url gin_trgm_ops)',
+                self.env.cr, index_name, self._table, "USING gin (url gin_trgm_ops)"
             )

@@ -6,10 +6,10 @@ from odoo import _, fields, models
 
 
 class LegalEntity(models.Model):
-    _name = 'legal.entity'
+    _name = "legal.entity"
 
     name = fields.Char(required=True, translate=True)
 
     _sql_constraints = [
-        ('unique_name', 'unique(name)', _('This legal entity already exists'))
+        ("unique_name", "unique(name)", _("This legal entity already exists"))
     ]

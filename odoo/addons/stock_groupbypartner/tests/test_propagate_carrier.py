@@ -7,22 +7,20 @@ from .common import GroupByPartnerCommonCase
 
 class TestPropagateCarrier(GroupByPartnerCommonCase):
     def test_propagate_carrier_to_group(self):
-        sale = self.env['sale.order'].create(
+        sale = self.env["sale.order"].create(
             {
-                'partner_id': self.partner1.id,
-                'carrier_id': self.carrier_fixed.id,
-                'order_line': [
+                "partner_id": self.partner1.id,
+                "carrier_id": self.carrier_fixed.id,
+                "order_line": [
                     (
                         0,
                         0,
                         {
-                            'name': self.p1.name,
-                            'product_id': self.p1.id,
-                            'product_uom': self.ref(
-                                'product.product_uom_unit'
-                            ),
-                            'product_uom_qty': 3,
-                            'price_unit': 200,
+                            "name": self.p1.name,
+                            "product_id": self.p1.id,
+                            "product_uom": self.ref("product.product_uom_unit"),
+                            "product_uom_qty": 3,
+                            "price_unit": 200,
                         },
                     )
                 ],

@@ -23,7 +23,7 @@ from odoo import api, models
 
 
 class StockProductionLot(models.Model):
-    _inherit = 'stock.production.lot'
+    _inherit = "stock.production.lot"
 
     def _get_fk_on(self, table):
         q = """  SELECT cl1.relname as table,
@@ -47,10 +47,10 @@ class StockProductionLot(models.Model):
     def _update_relations(self, product):
         cr = self._cr
 
-        self._get_fk_on('product_product')
+        self._get_fk_on("product_product")
         product_fields = dict(cr.fetchall())
 
-        self._get_fk_on('product_template')
+        self._get_fk_on("product_template")
         template_fields = dict(cr.fetchall())
 
         self._get_fk_on(self._table)
@@ -60,8 +60,7 @@ class StockProductionLot(models.Model):
                 qs.append("{}={}".format(product_fields[table], product.id))
             if table in template_fields:
                 qs.append(
-                    "%s=%s"
-                    % (template_fields[table], product.product_tmpl_id.id)
+                    "%s=%s" % (template_fields[table], product.product_tmpl_id.id)
                 )
             if not qs:
                 continue
@@ -70,17 +69,15 @@ class StockProductionLot(models.Model):
                 "UPDATE "
                 + table
                 + " SET "
-                + ','.join(qs)
+                + ",".join(qs)
                 + " WHERE "
                 + column
                 + " in %s"
             )
             params = (tuple(self.ids),)
 
-            if table == 'stock_move':
-                quants = self.env['stock.quant'].search(
-                    [('lot_id', 'in', self.ids)]
-                )
+            if table == "stock_move":
+                quants = self.env["stock.quant"].search([("lot_id", "in", self.ids)])
                 moves = set()
                 for quant in quants:
                     moves |= {move.id for move in quant.history_ids}
@@ -92,15 +89,11 @@ class StockProductionLot(models.Model):
 
     @api.multi
     def write(self, vals):
-        if not self._context.get('product_noupdate') and vals.get(
-            'product_id'
-        ):
+        if not self._context.get("product_noupdate") and vals.get("product_id"):
             for rec in self:
-                if rec.product_id == vals['product_id']:
+                if rec.product_id == vals["product_id"]:
                     continue
-                new_prod = self.env['product.product'].browse(
-                    vals['product_id']
-                )
+                new_prod = self.env["product.product"].browse(vals["product_id"])
                 self._update_relations(new_prod)
                 break
         return super(StockProductionLot, self).write(vals)

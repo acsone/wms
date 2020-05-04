@@ -6,44 +6,40 @@ from odoo import api, fields, models
 
 
 class StockConfigSettings(models.TransientModel):
-    _inherit = 'stock.config.settings'
+    _inherit = "stock.config.settings"
 
-    reservation_unit_pallet_factor = fields.Float('Factor for pallets')
-    reservation_unit_box_factor = fields.Float('Factor for boxes')
-    reservation_unit_wrap_factor = fields.Float('Factor for shrink wrap')
-    reservation_unit_min_quantity = fields.Float('Minimum quantity')
+    reservation_unit_pallet_factor = fields.Float("Factor for pallets")
+    reservation_unit_box_factor = fields.Float("Factor for boxes")
+    reservation_unit_wrap_factor = fields.Float("Factor for shrink wrap")
+    reservation_unit_min_quantity = fields.Float("Minimum quantity")
 
     @api.model
     def default_get(self, fields):
         res = super(StockConfigSettings, self).default_get(fields)
-        config_param = self.env['ir.config_parameter']
+        config_param = self.env["ir.config_parameter"]
 
-        if 'reservation_unit_pallet_factor' in fields or not fields:
+        if "reservation_unit_pallet_factor" in fields or not fields:
             factor = float(
-                config_param.get_param(
-                    'stock.reservation_unit_pallet_factor', 1
-                )
+                config_param.get_param("stock.reservation_unit_pallet_factor", 1)
             )
-            res['reservation_unit_pallet_factor'] = factor
+            res["reservation_unit_pallet_factor"] = factor
 
-        if 'reservation_unit_box_factor' in fields or not fields:
+        if "reservation_unit_box_factor" in fields or not fields:
             factor = float(
-                config_param.get_param('stock.reservation_unit_box_factor', 1)
+                config_param.get_param("stock.reservation_unit_box_factor", 1)
             )
-            res['reservation_unit_box_factor'] = factor
+            res["reservation_unit_box_factor"] = factor
 
-        if 'reservation_unit_wrap_factor' in fields or not fields:
+        if "reservation_unit_wrap_factor" in fields or not fields:
             factor = float(
-                config_param.get_param('stock.reservation_unit_wrao_factor', 1)
+                config_param.get_param("stock.reservation_unit_wrao_factor", 1)
             )
-            res['reservation_unit_wrap_factor'] = factor
+            res["reservation_unit_wrap_factor"] = factor
 
-        if 'reservation_unit_min_quantity' in fields or not fields:
+        if "reservation_unit_min_quantity" in fields or not fields:
             factor = float(
-                config_param.get_param(
-                    'stock.reservation_unit_min_quantity_factor', 0
-                )
+                config_param.get_param("stock.reservation_unit_min_quantity_factor", 0)
             )
-            res['reservation_unit_min_quantity'] = factor
+            res["reservation_unit_min_quantity"] = factor
 
         return res

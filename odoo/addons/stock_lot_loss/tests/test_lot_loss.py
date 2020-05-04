@@ -11,83 +11,83 @@ class TestLotLoss(SavepointCase):
     def setUpClass(cls):
         super(TestLotLoss, cls).setUpClass()
 
-        cls.product_1 = cls.env['product.product'].create(
+        cls.product_1 = cls.env["product.product"].create(
             {
-                'name': 'Product stock_lot_loss',
-                'type': 'product',
-                'uom_id': cls.env.ref('product.product_uom_unit').id,
-                'uom_po_id': cls.env.ref('product.product_uom_unit').id,
-                'default_code': 'Code product lot_loss',
-                'tracking': 'lot',
+                "name": "Product stock_lot_loss",
+                "type": "product",
+                "uom_id": cls.env.ref("product.product_uom_unit").id,
+                "uom_po_id": cls.env.ref("product.product_uom_unit").id,
+                "default_code": "Code product lot_loss",
+                "tracking": "lot",
             }
         )
-        cls.product_2 = cls.env['product.product'].create(
+        cls.product_2 = cls.env["product.product"].create(
             {
-                'name': 'Product 2 stock_lot_loss no tracking',
-                'type': 'product',
-                'uom_id': cls.env.ref('product.product_uom_unit').id,
-                'uom_po_id': cls.env.ref('product.product_uom_unit').id,
-                'default_code': 'Code product lot_loss no tracking 2',
-                'tracking': 'none',
+                "name": "Product 2 stock_lot_loss no tracking",
+                "type": "product",
+                "uom_id": cls.env.ref("product.product_uom_unit").id,
+                "uom_po_id": cls.env.ref("product.product_uom_unit").id,
+                "default_code": "Code product lot_loss no tracking 2",
+                "tracking": "none",
             }
         )
-        cls.product_3 = cls.env['product.product'].create(
+        cls.product_3 = cls.env["product.product"].create(
             {
-                'name': 'Product 3 stock_lot_loss no tracking',
-                'type': 'product',
-                'uom_id': cls.env.ref('product.product_uom_unit').id,
-                'uom_po_id': cls.env.ref('product.product_uom_unit').id,
-                'default_code': 'Code product lot_loss no tracking 3',
-                'tracking': 'none',
+                "name": "Product 3 stock_lot_loss no tracking",
+                "type": "product",
+                "uom_id": cls.env.ref("product.product_uom_unit").id,
+                "uom_po_id": cls.env.ref("product.product_uom_unit").id,
+                "default_code": "Code product lot_loss no tracking 3",
+                "tracking": "none",
             }
         )
-        wh = cls.env['stock.warehouse'].search([])
+        wh = cls.env["stock.warehouse"].search([])
         cls.location = wh[0].view_location_id
-        cls.location.usage = 'internal'
-        cls.loc_customer = cls.env.ref('stock.stock_location_customers')
+        cls.location.usage = "internal"
+        cls.loc_customer = cls.env.ref("stock.stock_location_customers")
 
-        cls.pick_type = cls.env.ref('stock.picking_type_out')
-        cls.pick_type.subcode = 'PICK'
+        cls.pick_type = cls.env.ref("stock.picking_type_out")
+        cls.pick_type.subcode = "PICK"
 
     def initiate_values(self):
-        self.product_1_lotA = self.env['stock.production.lot'].create(
-            {'product_id': self.product_1.id, 'name': 'LotA'}
+        self.product_1_lotA = self.env["stock.production.lot"].create(
+            {"product_id": self.product_1.id, "name": "LotA"}
         )
-        self.product_1_lotB = self.env['stock.production.lot'].create(
-            {'product_id': self.product_1.id, 'name': 'LotB'}
+        self.product_1_lotB = self.env["stock.production.lot"].create(
+            {"product_id": self.product_1.id, "name": "LotB"}
         )
 
         # Create picking 1
-        self.picking_1 = self.env['stock.picking'].create(
+        self.picking_1 = self.env["stock.picking"].create(
             {
-                'picking_type_id': self.pick_type.id,
-                'location_id': self.location.id,
-                'location_dest_id': self.loc_customer.id,
+                "picking_type_id": self.pick_type.id,
+                "location_id": self.location.id,
+                "location_dest_id": self.loc_customer.id,
             }
         )
-        self.move_1a = self.env['stock.move'].create(
+        self.move_1a = self.env["stock.move"].create(
             {
-                'picking_id': self.picking_1.id,
-                'name': 'Test move 1a',
-                'product_id': self.product_1.id,
-                'product_uom': self.product_1.uom_id.id,
-                'product_uom_qty': 6,
-                'location_id': self.location.id,
-                'location_dest_id': self.loc_customer.id,
-                'date': '2018-01-01 00:00:00',
+                "picking_id": self.picking_1.id,
+                "name": "Test move 1a",
+                "product_id": self.product_1.id,
+                "product_uom": self.product_1.uom_id.id,
+                "product_uom_qty": 6,
+                "location_id": self.location.id,
+                "location_dest_id": self.loc_customer.id,
+                "date": "2018-01-01 00:00:00",
             }
         )
         self.move_1a.action_confirm()
-        self.move_1b = self.env['stock.move'].create(
+        self.move_1b = self.env["stock.move"].create(
             {
-                'picking_id': self.picking_1.id,
-                'name': 'Test move 1b',
-                'product_id': self.product_1.id,
-                'product_uom': self.product_1.uom_id.id,
-                'product_uom_qty': 1,
-                'location_id': self.location.id,
-                'location_dest_id': self.loc_customer.id,
-                'date': '2018-01-01 00:00:00',
+                "picking_id": self.picking_1.id,
+                "name": "Test move 1b",
+                "product_id": self.product_1.id,
+                "product_uom": self.product_1.uom_id.id,
+                "product_uom_qty": 1,
+                "location_id": self.location.id,
+                "location_dest_id": self.loc_customer.id,
+                "date": "2018-01-01 00:00:00",
             }
         )
         self.move_1b.action_confirm()
@@ -95,73 +95,73 @@ class TestLotLoss(SavepointCase):
         # Put product in stock
         # LotA: 3
         # LotB: 5
-        inventory = self.env['stock.inventory'].create(
+        inventory = self.env["stock.inventory"].create(
             {
-                'name': 'Test',
-                'filter': 'product',
-                'location_id': self.location.id,
-                'product_id': self.product_1.id,
+                "name": "Test",
+                "filter": "product",
+                "location_id": self.location.id,
+                "product_id": self.product_1.id,
             }
         )
         inventory.prepare_inventory()
         inventory.line_ids.unlink()
         inventory.line_ids.create(
             {
-                'product_id': self.product_1.id,
-                'product_qty': 3.0,
-                'inventory_id': inventory.id,
-                'location_id': self.location.id,
-                'prod_lot_id': self.product_1_lotA.id,
+                "product_id": self.product_1.id,
+                "product_qty": 3.0,
+                "inventory_id": inventory.id,
+                "location_id": self.location.id,
+                "prod_lot_id": self.product_1_lotA.id,
             }
         )
         inventory.line_ids.create(
             {
-                'product_id': self.product_1.id,
-                'product_qty': 5.0,
-                'inventory_id': inventory.id,
-                'location_id': self.location.id,
-                'prod_lot_id': self.product_1_lotB.id,
+                "product_id": self.product_1.id,
+                "product_qty": 5.0,
+                "inventory_id": inventory.id,
+                "location_id": self.location.id,
+                "prod_lot_id": self.product_1_lotB.id,
             }
         )
         inventory.action_done()
 
-        quants = self.env['stock.quant'].search(
-            [('product_id', '=', self.product_1.id)]
+        quants = self.env["stock.quant"].search(
+            [("product_id", "=", self.product_1.id)]
         )
         self.assertEqual(len(quants), 2)
 
     def initiate_values_no_tracking(self):
         # Create picking 2
-        self.picking_2 = self.env['stock.picking'].create(
+        self.picking_2 = self.env["stock.picking"].create(
             {
-                'picking_type_id': self.pick_type.id,
-                'location_id': self.location.id,
-                'location_dest_id': self.loc_customer.id,
+                "picking_type_id": self.pick_type.id,
+                "location_id": self.location.id,
+                "location_dest_id": self.loc_customer.id,
             }
         )
-        self.move_2 = self.env['stock.move'].create(
+        self.move_2 = self.env["stock.move"].create(
             {
-                'picking_id': self.picking_2.id,
-                'name': 'Test move 2',
-                'product_id': self.product_2.id,
-                'product_uom': self.product_2.uom_id.id,
-                'product_uom_qty': 6,
-                'location_id': self.location.id,
-                'location_dest_id': self.loc_customer.id,
-                'date': '2018-01-01 00:00:00',
+                "picking_id": self.picking_2.id,
+                "name": "Test move 2",
+                "product_id": self.product_2.id,
+                "product_uom": self.product_2.uom_id.id,
+                "product_uom_qty": 6,
+                "location_id": self.location.id,
+                "location_dest_id": self.loc_customer.id,
+                "date": "2018-01-01 00:00:00",
             }
         )
         self.move_2.action_confirm()
-        self.move_3 = self.env['stock.move'].create(
+        self.move_3 = self.env["stock.move"].create(
             {
-                'picking_id': self.picking_2.id,
-                'name': 'Test move 3',
-                'product_id': self.product_3.id,
-                'product_uom': self.product_3.uom_id.id,
-                'product_uom_qty': 1,
-                'location_id': self.location.id,
-                'location_dest_id': self.loc_customer.id,
-                'date': '2018-01-01 00:00:00',
+                "picking_id": self.picking_2.id,
+                "name": "Test move 3",
+                "product_id": self.product_3.id,
+                "product_uom": self.product_3.uom_id.id,
+                "product_uom_qty": 1,
+                "location_id": self.location.id,
+                "location_dest_id": self.loc_customer.id,
+                "date": "2018-01-01 00:00:00",
             }
         )
         self.move_3.action_confirm()
@@ -169,36 +169,36 @@ class TestLotLoss(SavepointCase):
         # Put product in stock
         # Product2: 3
         # Product3: 5
-        inventory = self.env['stock.inventory'].create(
+        inventory = self.env["stock.inventory"].create(
             {
-                'name': 'Test',
-                'filter': 'product',
-                'location_id': self.location.id,
-                'product_id': self.product_2.id,
+                "name": "Test",
+                "filter": "product",
+                "location_id": self.location.id,
+                "product_id": self.product_2.id,
             }
         )
         inventory.prepare_inventory()
         inventory.line_ids.unlink()
         inventory.line_ids.create(
             {
-                'product_id': self.product_2.id,
-                'product_qty': 3.0,
-                'inventory_id': inventory.id,
-                'location_id': self.location.id,
+                "product_id": self.product_2.id,
+                "product_qty": 3.0,
+                "inventory_id": inventory.id,
+                "location_id": self.location.id,
             }
         )
         inventory.line_ids.create(
             {
-                'product_id': self.product_3.id,
-                'product_qty': 5.0,
-                'inventory_id': inventory.id,
-                'location_id': self.location.id,
+                "product_id": self.product_3.id,
+                "product_qty": 5.0,
+                "inventory_id": inventory.id,
+                "location_id": self.location.id,
             }
         )
         inventory.action_done()
 
-        quants = self.env['stock.quant'].search(
-            [('product_id', 'in', (self.product_2.id, self.product_3.id))]
+        quants = self.env["stock.quant"].search(
+            [("product_id", "in", (self.product_2.id, self.product_3.id))]
         )
         self.assertEqual(len(quants), 2)
 
@@ -209,7 +209,7 @@ class TestLotLoss(SavepointCase):
 
         self.picking_1.with_context(round_autoset=False).action_assign()
 
-        quant = self.picking_1.move_lines.mapped('reserved_quant_ids')
+        quant = self.picking_1.move_lines.mapped("reserved_quant_ids")
         self.assertEqual(len(quant), 3)
 
         op = self.picking_1.pack_operation_ids
@@ -223,9 +223,7 @@ class TestLotLoss(SavepointCase):
         pack_lot_A.qty = 1
         op.save()
 
-        op.with_context(round_autoset=False)._skip_operation(
-            pack_op_lot_id=pack_lot_A
-        )
+        op.with_context(round_autoset=False)._skip_operation(pack_op_lot_id=pack_lot_A)
 
         # Check new pack operation
         new_op = self.picking_1.pack_operation_ids
@@ -245,69 +243,67 @@ class TestLotLoss(SavepointCase):
         self.assertEqual(new_pack_lot_B.qty, 0)
 
         # Check blocking move has been created
-        loss_picking_type = self.env.ref(
-            'stock_lot_loss.stock_picking_type_23'
-        )
+        loss_picking_type = self.env.ref("stock_lot_loss.stock_picking_type_23")
         block_move = (
-            self.env['stock.quant']
+            self.env["stock.quant"]
             .search(
                 [
-                    ('qty', '>', 0.0),
-                    ('product_id', '=', self.product_1.id),
-                    ('lot_id', '=', self.product_1_lotB.id),
-                    ('location_id', '=', self.location.id),
+                    ("qty", ">", 0.0),
+                    ("product_id", "=", self.product_1.id),
+                    ("lot_id", "=", self.product_1_lotB.id),
+                    ("location_id", "=", self.location.id),
                     (
-                        'reservation_id.picking_id.picking_type_id',
-                        '=',
+                        "reservation_id.picking_id.picking_type_id",
+                        "=",
                         loss_picking_type.id,
                     ),
                 ]
             )
-            .mapped('reservation_id')
+            .mapped("reservation_id")
         )
         self.assertEqual(block_move.ids, [])
         block_move = (
-            self.env['stock.quant']
+            self.env["stock.quant"]
             .search(
                 [
-                    ('qty', '>', 0.0),
-                    ('product_id', '=', self.product_1.id),
-                    ('lot_id', '=', self.product_1_lotA.id),
-                    ('location_id', '=', self.location.id),
+                    ("qty", ">", 0.0),
+                    ("product_id", "=", self.product_1.id),
+                    ("lot_id", "=", self.product_1_lotA.id),
+                    ("location_id", "=", self.location.id),
                     (
-                        'reservation_id.picking_id.picking_type_id',
-                        '=',
+                        "reservation_id.picking_id.picking_type_id",
+                        "=",
                         loss_picking_type.id,
                     ),
                 ]
             )
-            .mapped('reservation_id')
+            .mapped("reservation_id")
         )
-        self.assertEqual(block_move.state, 'assigned')
+        self.assertEqual(block_move.state, "assigned")
         self.assertEqual(block_move.product_qty, 2)
 
         # Check blocked lot cleanup
-        inventory = self.env['stock.inventory'].create(
+        inventory = self.env["stock.inventory"].create(
             {
-                'name': 'Test',
-                'filter': 'product',
-                'location_id': self.location.id,
-                'product_id': self.product_1.id,
+                "name": "Test",
+                "filter": "product",
+                "location_id": self.location.id,
+                "product_id": self.product_1.id,
             }
         )
         inventory.prepare_inventory()
         inventory.line_ids.unlink()
         inventory.line_ids.create(
             {
-                'product_id': self.product_1.id,
-                'product_qty': 1.0,
-                'inventory_id': inventory.id,
-                'location_id': self.location.id,
-                'prod_lot_id': self.product_1_lotA.id,
+                "product_id": self.product_1.id,
+                "product_qty": 1.0,
+                "inventory_id": inventory.id,
+                "location_id": self.location.id,
+                "prod_lot_id": self.product_1_lotA.id,
             }
         )
         inventory.action_done()
-        self.assertEqual(block_move.state, 'cancel')
+        self.assertEqual(block_move.state, "cancel")
 
     def test_lot_loss_line2(self):
         """ Create loss of line2 """
@@ -315,7 +311,7 @@ class TestLotLoss(SavepointCase):
 
         self.picking_1.with_context(round_autoset=False).action_assign()
 
-        quant = self.picking_1.move_lines.mapped('reserved_quant_ids')
+        quant = self.picking_1.move_lines.mapped("reserved_quant_ids")
         self.assertEqual(len(quant), 3)
 
         op = self.picking_1.pack_operation_ids
@@ -333,9 +329,7 @@ class TestLotLoss(SavepointCase):
         pack_lot_B.qty = 1
         op.save()
 
-        op.with_context(round_autoset=False)._skip_operation(
-            pack_op_lot_id=pack_lot_B
-        )
+        op.with_context(round_autoset=False)._skip_operation(pack_op_lot_id=pack_lot_B)
 
         # Check new pack operation
         new_op = self.picking_1.pack_operation_ids
@@ -355,69 +349,67 @@ class TestLotLoss(SavepointCase):
         self.assertEqual(new_pack_lot_B.qty, 1)
 
         # Check blocking move has been created
-        loss_picking_type = self.env.ref(
-            'stock_lot_loss.stock_picking_type_23'
-        )
+        loss_picking_type = self.env.ref("stock_lot_loss.stock_picking_type_23")
         block_move = (
-            self.env['stock.quant']
+            self.env["stock.quant"]
             .search(
                 [
-                    ('qty', '>', 0.0),
-                    ('product_id', '=', self.product_1.id),
-                    ('lot_id', '=', self.product_1_lotA.id),
-                    ('location_id', '=', self.location.id),
+                    ("qty", ">", 0.0),
+                    ("product_id", "=", self.product_1.id),
+                    ("lot_id", "=", self.product_1_lotA.id),
+                    ("location_id", "=", self.location.id),
                     (
-                        'reservation_id.picking_id.picking_type_id',
-                        '=',
+                        "reservation_id.picking_id.picking_type_id",
+                        "=",
                         loss_picking_type.id,
                     ),
                 ]
             )
-            .mapped('reservation_id')
+            .mapped("reservation_id")
         )
         self.assertEqual(block_move.ids, [])
         block_move = (
-            self.env['stock.quant']
+            self.env["stock.quant"]
             .search(
                 [
-                    ('qty', '>', 0.0),
-                    ('product_id', '=', self.product_1.id),
-                    ('lot_id', '=', self.product_1_lotB.id),
-                    ('location_id', '=', self.location.id),
+                    ("qty", ">", 0.0),
+                    ("product_id", "=", self.product_1.id),
+                    ("lot_id", "=", self.product_1_lotB.id),
+                    ("location_id", "=", self.location.id),
                     (
-                        'reservation_id.picking_id.picking_type_id',
-                        '=',
+                        "reservation_id.picking_id.picking_type_id",
+                        "=",
                         loss_picking_type.id,
                     ),
                 ]
             )
-            .mapped('reservation_id')
+            .mapped("reservation_id")
         )
-        self.assertEqual(block_move.state, 'assigned')
+        self.assertEqual(block_move.state, "assigned")
         self.assertEqual(block_move.product_qty, 4)
 
         # Check blocked lot cleanup
-        inventory = self.env['stock.inventory'].create(
+        inventory = self.env["stock.inventory"].create(
             {
-                'name': 'Test',
-                'filter': 'product',
-                'location_id': self.location.id,
-                'product_id': self.product_1.id,
+                "name": "Test",
+                "filter": "product",
+                "location_id": self.location.id,
+                "product_id": self.product_1.id,
             }
         )
         inventory.prepare_inventory()
         inventory.line_ids.unlink()
         inventory.line_ids.create(
             {
-                'product_id': self.product_1.id,
-                'product_qty': 1.0,
-                'inventory_id': inventory.id,
-                'location_id': self.location.id,
-                'prod_lot_id': self.product_1_lotB.id,
+                "product_id": self.product_1.id,
+                "product_qty": 1.0,
+                "inventory_id": inventory.id,
+                "location_id": self.location.id,
+                "prod_lot_id": self.product_1_lotB.id,
             }
         )
         inventory.action_done()
-        self.assertEqual(block_move.state, 'cancel')
+        self.assertEqual(block_move.state, "cancel")
 
     def test_loss_line_no_tracking(self):
         """ Create loss of product_2 without tracking"""
@@ -425,7 +417,7 @@ class TestLotLoss(SavepointCase):
 
         self.picking_2.with_context(round_autoset=False).action_assign()
 
-        quant = self.picking_2.mapped('move_lines.reserved_quant_ids')
+        quant = self.picking_2.mapped("move_lines.reserved_quant_ids")
         self.assertEqual(len(quant), 2)
 
         ops = self.picking_2.pack_operation_ids
@@ -446,63 +438,61 @@ class TestLotLoss(SavepointCase):
         self.assertEqual(new_op_2.qty_done, 1)
 
         # Check blocking move has been created
-        loss_picking_type = self.env.ref(
-            'stock_lot_loss.stock_picking_type_23'
-        )
+        loss_picking_type = self.env.ref("stock_lot_loss.stock_picking_type_23")
         block_move = (
-            self.env['stock.quant']
+            self.env["stock.quant"]
             .search(
                 [
-                    ('qty', '>', 0.0),
-                    ('product_id', '=', self.product_3.id),
-                    ('location_id', '=', self.location.id),
+                    ("qty", ">", 0.0),
+                    ("product_id", "=", self.product_3.id),
+                    ("location_id", "=", self.location.id),
                     (
-                        'reservation_id.picking_id.picking_type_id',
-                        '=',
+                        "reservation_id.picking_id.picking_type_id",
+                        "=",
                         loss_picking_type.id,
                     ),
                 ]
             )
-            .mapped('reservation_id')
+            .mapped("reservation_id")
         )
         self.assertEqual(block_move.ids, [])
         block_move = (
-            self.env['stock.quant']
+            self.env["stock.quant"]
             .search(
                 [
-                    ('qty', '>', 0.0),
-                    ('product_id', '=', self.product_2.id),
-                    ('location_id', '=', self.location.id),
+                    ("qty", ">", 0.0),
+                    ("product_id", "=", self.product_2.id),
+                    ("location_id", "=", self.location.id),
                     (
-                        'reservation_id.picking_id.picking_type_id',
-                        '=',
+                        "reservation_id.picking_id.picking_type_id",
+                        "=",
                         loss_picking_type.id,
                     ),
                 ]
             )
-            .mapped('reservation_id')
+            .mapped("reservation_id")
         )
-        self.assertEqual(block_move.state, 'assigned')
+        self.assertEqual(block_move.state, "assigned")
         self.assertEqual(block_move.product_qty, 2)
 
         # Check blocked lot cleanup
-        inventory = self.env['stock.inventory'].create(
+        inventory = self.env["stock.inventory"].create(
             {
-                'name': 'Test',
-                'filter': 'product',
-                'location_id': self.location.id,
-                'product_id': self.product_1.id,
+                "name": "Test",
+                "filter": "product",
+                "location_id": self.location.id,
+                "product_id": self.product_1.id,
             }
         )
         inventory.prepare_inventory()
         inventory.line_ids.unlink()
         inventory.line_ids.create(
             {
-                'product_id': self.product_2.id,
-                'product_qty': 1.0,
-                'inventory_id': inventory.id,
-                'location_id': self.location.id,
+                "product_id": self.product_2.id,
+                "product_qty": 1.0,
+                "inventory_id": inventory.id,
+                "location_id": self.location.id,
             }
         )
         inventory.action_done()
-        self.assertEqual(block_move.state, 'cancel')
+        self.assertEqual(block_move.state, "cancel")

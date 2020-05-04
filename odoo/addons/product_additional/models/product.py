@@ -6,13 +6,13 @@ from odoo import api, fields, models
 
 
 class ProductTemplate(models.Model):
-    _inherit = 'product.template'
+    _inherit = "product.template"
 
     additional_product_id = fields.Many2one(
-        'product.product', string='Additional Product', ondelete='restrict'
+        "product.product", string="Additional Product", ondelete="restrict"
     )
-    ratio_main_product = fields.Integer('Ratio Main Product')
-    ratio_additional_product = fields.Integer('Ratio Additional Product')
+    ratio_main_product = fields.Integer("Ratio Main Product")
+    ratio_additional_product = fields.Integer("Ratio Additional Product")
 
     @api.multi
     def get_qty_additional_product(self, ordered_qty):
@@ -35,8 +35,8 @@ class ProductTemplate(models.Model):
         self.ensure_one()
         return bool(
             len(
-                self.env['product.template'].search(
-                    [('additional_product_id', '=', self.id)]
+                self.env["product.template"].search(
+                    [("additional_product_id", "=", self.id)]
                 )
             )
         )

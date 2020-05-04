@@ -8,7 +8,7 @@ from odoo.addons.queue_job.job import job, related_action
 
 
 class ESBExportable(models.Model):
-    _name = 'esb.exportable'
+    _name = "esb.exportable"
 
     @api.multi
     def esb_is_exportable(self):
@@ -16,13 +16,13 @@ class ESBExportable(models.Model):
         return True
 
     @api.multi
-    @job(default_channel='root.background.esb')  # priority=25
-    @related_action(action='related_action_open_record')
+    @job(default_channel="root.background.esb")  # priority=25
+    @related_action(action="related_action_open_record")
     def esb_export_record(self, timestamp=None):
         """Export a record"""
         if not self.exists():
-            return 'Record does not exist'
-        backend = self.env['esb.backend'].sudo().get_singleton()
+            return "Record does not exist"
+        backend = self.env["esb.backend"].sudo().get_singleton()
         with backend.work_on(self._name, timestamp=timestamp) as work:
-            exporter = work.component('record.exporter')
+            exporter = work.component("record.exporter")
             return exporter.run(self)

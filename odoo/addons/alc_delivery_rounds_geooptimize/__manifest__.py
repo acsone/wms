@@ -17,8 +17,8 @@
         "queue_job",
         "stock",
     ],
-    "data": ['wizards/stock_config_settings.xml', "views/round_instance.xml"],
+    "data": ["wizards/stock_config_settings.xml", "views/round_instance.xml"],
     "demo": [],
     "post_init_hook": "post_init_hook",
-    'external_dependencies': {'python': ['requests']},
+    "external_dependencies": {"python": ["requests"]},
 }

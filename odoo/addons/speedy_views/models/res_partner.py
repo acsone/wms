@@ -8,7 +8,7 @@ from .utils import create_index, install_trgm_extension
 
 
 class ResPartner(models.Model):
-    _inherit = 'res.partner'
+    _inherit = "res.partner"
 
     @api.model_cr
     def init(self):
@@ -16,34 +16,34 @@ class ResPartner(models.Model):
         self.env.cr.commit()
 
         if trgm_installed:
-            for field in ('name', 'email', 'display_name', 'ref'):
-                index_name = 'res_partner_%s_trgm_index' % field
+            for field in ("name", "email", "display_name", "ref"):
+                index_name = "res_partner_%s_trgm_index" % field
                 create_index(
                     self.env.cr,
                     index_name,
                     self._table,
-                    'USING gin (%s gin_trgm_ops)' % field,
+                    "USING gin (%s gin_trgm_ops)" % field,
                 )
 
         # this query is issued every time the list view of partners
         # is displayed
-        index_name = 'res_partner_customer_count_index'
+        index_name = "res_partner_customer_count_index"
         create_index(
             self.env.cr,
             index_name,
             self._table,
-            '(active, customer, parent_id) '
-            'WHERE active AND customer '
-            'AND parent_id is null ',
+            "(active, customer, parent_id) "
+            "WHERE active AND customer "
+            "AND parent_id is null ",
         )
 
         # equivalent for the suppliers
-        index_name = 'res_partner_supplier_count_index'
+        index_name = "res_partner_supplier_count_index"
         create_index(
             self.env.cr,
             index_name,
             self._table,
-            '(active, customer, parent_id) '
-            'WHERE active AND supplier '
-            'AND parent_id is null ',
+            "(active, customer, parent_id) "
+            "WHERE active AND supplier "
+            "AND parent_id is null ",
         )

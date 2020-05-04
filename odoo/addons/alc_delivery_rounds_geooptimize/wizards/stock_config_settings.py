@@ -22,8 +22,7 @@ class StockConfigSettings(models.TransientModel):
     geo_optimization_api_key = fields.Char("TourSolver API Key")
     geo_optimization_duration = fields.Integer(
         "Optimization process max duration",
-        help="Duration in seconds allowed to the computation of "
-        "the optimization",
+        help="Duration in seconds allowed to the computation of " "the optimization",
     )
     geo_optimization_delivery_duration = fields.Integer(
         "Fixed time spent deliverying a customer",
@@ -49,8 +48,7 @@ class StockConfigSettings(models.TransientModel):
         )
         duration = int(
             IrConfigParameter.get_param(
-                "alc_delivery_rounds_geooptimize.geo_optimization_duration",
-                "210",
+                "alc_delivery_rounds_geooptimize.geo_optimization_duration", "210"
             )
         )
         delivery_duration = int(

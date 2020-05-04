@@ -6,7 +6,7 @@ from odoo import api, models
 
 
 class StockPicking(models.Model):
-    _inherit = 'stock.picking'
+    _inherit = "stock.picking"
 
     @api.multi
     def _add_delivery_cost_to_so(self):
@@ -16,10 +16,7 @@ class StockPicking(models.Model):
             and self.picking_type_code == "outgoing"
         ):
             return
-        if (
-            self.carrier_id.use_specific_cost_calculation
-            or not self.carrier_price
-        ):
+        if self.carrier_id.use_specific_cost_calculation or not self.carrier_price:
             return
         return super(StockPicking, self)._add_delivery_cost_to_so()
 
@@ -37,19 +34,19 @@ class StockPicking(models.Model):
         if self.picking_type_id.avoid_shipping_cost:
             return
         moves = (
-            self.mapped('delivery_round_id.shipping_ids')
+            self.mapped("delivery_round_id.shipping_ids")
             .filtered(lambda ship: ship.partner_id == self.partner_id)
-            .mapped('move_lines')
+            .mapped("move_lines")
         )
-        moves = moves.filtered(lambda m: m.state in ('assigned', 'done'))
-        round_saleorders = moves.mapped('procurement_id.sale_line_id.order_id')
-        round_carriers = round_saleorders.mapped('carrier_id').filtered(
+        moves = moves.filtered(lambda m: m.state in ("assigned", "done"))
+        round_saleorders = moves.mapped("procurement_id.sale_line_id.order_id")
+        round_carriers = round_saleorders.mapped("carrier_id").filtered(
             lambda r: r.use_specific_cost_calculation
         )
         if len(round_carriers) == 0:
             # No delivery carrier that use specific shipping cost so out.
             return
-        round_customers = round_saleorders.mapped('partner_id').filtered(
+        round_customers = round_saleorders.mapped("partner_id").filtered(
             lambda r: r.help_with_fee is True
         )
         for customer in round_customers:
@@ -60,9 +57,9 @@ class StockPicking(models.Model):
             customer_round_saleorders = round_saleorders.filtered(
                 lambda r: r.partner_id == customer
             )
-            customer_carriers = customer_round_saleorders.mapped('carrier_id')
+            customer_carriers = customer_round_saleorders.mapped("carrier_id")
 
             for delivery_carrier in customer_carriers:
-                self.env['sale.order'].charge_shipping_costs_by_carrier(
+                self.env["sale.order"].charge_shipping_costs_by_carrier(
                     delivery_carrier, customer_round_saleorders, customer
                 )

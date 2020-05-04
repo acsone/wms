@@ -20,19 +20,15 @@
 ##############################################################################
 
 {
-    'name': 'Stock Barcode Fix',
-    'version': '1.0',
-    'author': "BCIM",
-    'maintainer': 'Camptocamp',
-    'category': 'Stock Management',
-    'depends': [
-        'stock_barcode',
-    ],
-    'data': [
-        'views/stock.xml',
-    ],
-    'installable': True,
-    'auto_install': False,
-    'license': 'AGPL-3',
-    'application': False,
+    "name": "Stock Barcode Fix",
+    "version": "1.0",
+    "author": "BCIM",
+    "maintainer": "Camptocamp",
+    "category": "Stock Management",
+    "depends": ["stock_barcode"],
+    "data": ["views/stock.xml"],
+    "installable": True,
+    "auto_install": False,
+    "license": "AGPL-3",
+    "application": False,
 }

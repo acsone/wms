@@ -9,9 +9,9 @@ from odoo.addons.component.core import Component
 
 
 class ESBZIPProducer(Component):
-    _name = 'esb.zip.producer'
-    _inherit = 'esb.base'
-    _usage = 'zip.producer'
+    _name = "esb.zip.producer"
+    _inherit = "esb.base"
+    _usage = "zip.producer"
 
     def produce(self, data):
         """Generate a zip file from map records from ir.attachment"""
@@ -19,8 +19,8 @@ class ESBZIPProducer(Component):
         with zipfile.ZipFile(zipdata, "a", zipfile.ZIP_DEFLATED, False) as zf:
             for item in data:
                 zf.writestr(
-                    item['filename'] or '',
-                    item['data'].decode('base64') if item['data'] else '',
+                    item["filename"] or "",
+                    item["data"].decode("base64") if item["data"] else "",
                 )
         zipdata.seek(0)
         return zipdata.read()

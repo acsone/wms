@@ -5,7 +5,7 @@ from odoo import fields, models
 
 
 class BankHoliday(models.Model):
-    _name = 'bank.holiday'
+    _name = "bank.holiday"
 
     name = fields.Char(required=True)
     date = fields.Date(required=True)

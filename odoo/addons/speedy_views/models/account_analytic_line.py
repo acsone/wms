@@ -7,6 +7,6 @@ from odoo import fields, models
 
 
 class AccountAnalyticLine(models.Model):
-    _inherit = 'account.analytic.line'
+    _inherit = "account.analytic.line"
 
     so_line = fields.Many2one(index=True)

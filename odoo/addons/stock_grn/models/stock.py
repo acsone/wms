@@ -22,32 +22,28 @@ from odoo import api, fields, models
 
 
 class StockPicking(models.Model):
-    _inherit = 'stock.picking'
+    _inherit = "stock.picking"
 
     grn_id = fields.Many2one(
-        comodel_name='stock.grn',
-        string='Goods Received Note',
+        comodel_name="stock.grn",
+        string="Goods Received Note",
         copy=False,
         readonly=True,
     )
     grn_date = fields.Datetime(
-        related='grn_id.date',
-        string='GRN Date',
-        store=True,
-        index=True,
-        readonly=True,
+        related="grn_id.date", string="GRN Date", store=True, index=True, readonly=True
     )
 
 
 class StockPickingType(models.Model):
-    _inherit = 'stock.picking.type'
+    _inherit = "stock.picking.type"
 
     @api.multi
     def _get_action(self, action_xmlid):
         result = super(StockPickingType, self)._get_action(action_xmlid)
         if self:
-            if self.code == 'incoming':
-                result['context'] = result['context'].replace(
-                    '{', "{'search_default_grn':1,", 1
+            if self.code == "incoming":
+                result["context"] = result["context"].replace(
+                    "{", "{'search_default_grn':1,", 1
                 )
         return result

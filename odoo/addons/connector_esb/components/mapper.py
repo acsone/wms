@@ -41,8 +41,8 @@ def dt2esbdate(field):
     def modifier(self, record, to_attr):
         value = record[field]
         if not value:
-            return ''
-        return value[:10].replace('-', '/')
+            return ""
+        return value[:10].replace("-", "/")
 
     return modifier
 
@@ -66,8 +66,8 @@ def dt2nakeddate(field):
     def modifier(self, record, to_attr):
         value = record[field]
         if not value:
-            return ''
-        return value[:10].replace('-', '')
+            return ""
+        return value[:10].replace("-", "")
 
     return modifier
 
@@ -86,7 +86,7 @@ def falsy2emptystring(field):
     def modifier(self, record, to_attr):
         value = record[field]
         if not value:
-            return ''
+            return ""
         return value
 
     return modifier
@@ -100,7 +100,7 @@ def two_digits_fractional(field):
     """
 
     def modifier(self, record, to_attr):
-        return '{:.2f}'.format(record[field] or 0)
+        return "{:.2f}".format(record[field] or 0)
 
     return modifier
 
@@ -113,7 +113,7 @@ def three_digits_fractional(field):
     """
 
     def modifier(self, record, to_attr):
-        return '{:.3f}'.format(record[field] or 0)
+        return "{:.3f}".format(record[field] or 0)
 
     return modifier
 

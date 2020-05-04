@@ -5,16 +5,16 @@ from odoo import api, fields, models
 
 
 class RoundInstance(models.Model):
-    _inherit = 'round.instance'
+    _inherit = "round.instance"
 
     has_pending_reassort = fields.Boolean(
-        string='Has Pending Reassort',
-        compute='_compute_has_pending_reassort',
-        search='_search_has_pending_reassort',
-        help='True if there are some moves in the round which are waiting '
-        'availability, and for which there is a pending reassort. Delivery '
-        'rounds which are not in state Open are considered as not having '
-        'pending reassorts.',
+        string="Has Pending Reassort",
+        compute="_compute_has_pending_reassort",
+        search="_search_has_pending_reassort",
+        help="True if there are some moves in the round which are waiting "
+        "availability, and for which there is a pending reassort. Delivery "
+        "rounds which are not in state Open are considered as not having "
+        "pending reassorts.",
     )
 
     def _compute_has_pending_reassort(self):
@@ -58,24 +58,24 @@ class RoundInstance(models.Model):
                 rec.has_pending_reassort = rec.id in with_pending_refill
 
     def _search_has_pending_reassort(self, operator, value):
-        if operator == '!=':
+        if operator == "!=":
             value = not value
-        elif operator != '=':
+        elif operator != "=":
             raise ValueError(
                 'unexpected domain (we only support "=" and "!="): '
                 '("has_pending_reassort", "%s", "%s")' % (operator, value)
             )
-        rounds = self.search([('state', 'in', ('draft', 'close'))])
-        rounds = rounds.filtered('has_pending_reassort')
+        rounds = self.search([("state", "in", ("draft", "close"))])
+        rounds = rounds.filtered("has_pending_reassort")
         if value:
-            operator = 'in'
+            operator = "in"
         else:
-            operator = 'not in'
-        return [('id', operator, rounds.ids)]
+            operator = "not in"
+        return [("id", operator, rounds.ids)]
 
     @api.multi
     def open_pending_reassort(self):
-        with_pending = self.filtered('has_pending_reassort')
+        with_pending = self.filtered("has_pending_reassort")
         # compute products which are in unavailable moves in the pickings of
         # the rounds: this is quick and we can use them as a filter for the
         # reassort report
@@ -92,17 +92,13 @@ class RoundInstance(models.Model):
             "  AND sp.delivery_round_id in %s"
         )
         if with_pending:
-            self.env.cr.execute(
-                unavailable_products_query, (tuple(with_pending.ids),)
-            )
-            unavailable_product_ids = [
-                row[0] for row in self.env.cr.fetchall()
-            ]
+            self.env.cr.execute(unavailable_products_query, (tuple(with_pending.ids),))
+            unavailable_product_ids = [row[0] for row in self.env.cr.fetchall()]
         else:
             unavailable_product_ids = []
-        domain = [('product_id', 'in', unavailable_product_ids)]
+        domain = [("product_id", "in", unavailable_product_ids)]
         action = self.env.ref(
-            'delivery_rounds_refill.action_report_stock_refill_reassort'
+            "delivery_rounds_refill.action_report_stock_refill_reassort"
         ).read()[0]
-        action['domain'] = domain
+        action["domain"] = domain
         return action

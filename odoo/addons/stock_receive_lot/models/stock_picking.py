@@ -6,7 +6,7 @@ from odoo import models
 
 
 class StockPicking(models.Model):
-    _inherit = 'stock.picking'
+    _inherit = "stock.picking"
 
     def button_receive(self):
         self.ensure_one()
@@ -14,6 +14,4 @@ class StockPicking(models.Model):
         if not self.operator_id:
             self.assign_operator()
 
-        return self.env.ref(
-            'stock_receive_lot.action_pack_operation_lot_add'
-        ).read()[0]
+        return self.env.ref("stock_receive_lot.action_pack_operation_lot_add").read()[0]

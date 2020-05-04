@@ -31,7 +31,7 @@ class TestSavepoint(SavepointCase):
     def table_name(self, savepoint):
         return "test_savepoint_%s" % (savepoint._name)
 
-    @mute_logger('odoo.sql_db')
+    @mute_logger("odoo.sql_db")
     def test_savepoint(self):
         savepoint = Savepoint(self.env.cr)
         name = self.table_name(savepoint)
@@ -46,12 +46,10 @@ class TestSavepoint(SavepointCase):
         self.create_table(name)
         savepoint.release()
         self.assert_table_exists(name)
-        with self.assertRaisesRegexp(
-            psycopg2.InternalError, "no such savepoint"
-        ):
+        with self.assertRaisesRegexp(psycopg2.InternalError, "no such savepoint"):
             savepoint.release()
 
-    @mute_logger('odoo.sql_db')
+    @mute_logger("odoo.sql_db")
     def test_savepoint_context_manager(self):
         with Savepoint(self.env.cr) as savepoint:
             name = self.table_name(savepoint)
@@ -67,7 +65,5 @@ class TestSavepoint(SavepointCase):
             savepoint.release()
             self.assert_table_exists(name)
 
-        with self.assertRaisesRegexp(
-            psycopg2.InternalError, "no such savepoint"
-        ):
+        with self.assertRaisesRegexp(psycopg2.InternalError, "no such savepoint"):
             savepoint.release()

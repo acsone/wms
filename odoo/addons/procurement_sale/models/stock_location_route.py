@@ -9,4 +9,4 @@ from odoo.addons.procurement.models.procurement import PROCUREMENT_PRIORITIES
 class StockLocationRoute(models.Model):
     _inherit = "stock.location.route"
 
-    priority = fields.Selection(PROCUREMENT_PRIORITIES, string='Priority')
+    priority = fields.Selection(PROCUREMENT_PRIORITIES, string="Priority")

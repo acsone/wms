@@ -6,21 +6,13 @@ from odoo import _, api, fields, models, tools
 
 
 class PartnerAlcyonCategorie(models.Model):
-    _name = 'partner.alcyon_category'
+    _name = "partner.alcyon_category"
 
-    name = fields.Char(string='Name', required=True)
-    esb_ref = fields.Char(string='Reference for ESB', required=True)
+    name = fields.Char(string="Name", required=True)
+    esb_ref = fields.Char(string="Reference for ESB", required=True)
     _sql_constraints = [
-        (
-            'name_unique',
-            'unique(name)',
-            _('This category name already exists'),
-        ),
-        (
-            'esb_ref_unique',
-            'unique(esb_ref)',
-            _('This reference esb already exists'),
-        ),
+        ("name_unique", "unique(name)", _("This category name already exists")),
+        ("esb_ref_unique", "unique(esb_ref)", _("This reference esb already exists")),
     ]
 
     @api.multi

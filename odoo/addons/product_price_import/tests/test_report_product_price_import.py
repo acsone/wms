@@ -15,44 +15,44 @@ class TestReportProductPriceImport(SavepointCase):
             "product_price_import.report_product_price_import_xlsx"
         )
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
-        cls.supplier = cls.env.ref('base.res_partner_12')
-        cls.product = cls.env['product.product'].create(
+        cls.supplier = cls.env.ref("base.res_partner_12")
+        cls.product = cls.env["product.product"].create(
             {
-                'name': 'Product 1',
-                'list_price': 11.0,
+                "name": "Product 1",
+                "list_price": 11.0,
                 "indicated_price": 13.75,
                 "default_code": "P01",
             }
         )
 
-        cls.supplierinfo = cls.env['product.supplierinfo'].create(
-            {'name': cls.supplier.id, 'price': 10, "product_code": "SUP01"}
+        cls.supplierinfo = cls.env["product.supplierinfo"].create(
+            {"name": cls.supplier.id, "price": 10, "product_code": "SUP01"}
         )
-        cls.product.write({'seller_ids': [(6, 0, cls.supplierinfo.ids)]})
+        cls.product.write({"seller_ids": [(6, 0, cls.supplierinfo.ids)]})
 
-        cls.pricelist_pb2 = cls.env.ref('specific_data.product_pricelist_pb2')
+        cls.pricelist_pb2 = cls.env.ref("specific_data.product_pricelist_pb2")
         cls.pricelist_pb2.item_ids = [
             (
                 0,
                 False,
                 {
-                    'applied_on': '1_product',
-                    'product_id': cls.product.id,
-                    'compute_price': 'fixed',
-                    'fixed_price': 12.24,
-                    'product_tmpl_id': cls.product.product_tmpl_id.id,
+                    "applied_on": "1_product",
+                    "product_id": cls.product.id,
+                    "compute_price": "fixed",
+                    "fixed_price": 12.24,
+                    "product_tmpl_id": cls.product.product_tmpl_id.id,
                 },
             )
         ]
 
     def _get_xml_id(self, model):
-        IrModelData = self.env['ir.model.data'].sudo()
+        IrModelData = self.env["ir.model.data"].sudo()
         data = IrModelData.search(
-            [('model', '=', model._name), ('res_id', '=', model.id)]
+            [("model", "=", model._name), ("res_id", "=", model.id)]
         )
         if data:
             if data[0].module:
-                return '%s.%s' % (data[0].module, data[0].name)
+                return "%s.%s" % (data[0].module, data[0].name)
             else:
                 return data[0].name
 
@@ -104,17 +104,17 @@ class TestReportProductPriceImport(SavepointCase):
         self.assertListEqual(
             headers,
             [
-                'product_id',
-                'supplier_id',
-                'supplier_name',
-                'product_name',
-                'internal_reference',
-                'supplier_reference',
-                'sale_taxes',
-                'purchase_price',
-                'sale_price',
-                'sale_price_2',
-                'indicated_price',
+                "product_id",
+                "supplier_id",
+                "supplier_name",
+                "product_name",
+                "internal_reference",
+                "supplier_reference",
+                "sale_taxes",
+                "purchase_price",
+                "sale_price",
+                "sale_price_2",
+                "indicated_price",
             ],
         )
         values = rows[1]
@@ -124,13 +124,13 @@ class TestReportProductPriceImport(SavepointCase):
                 self._get_xml_id(self.product.product_tmpl_id),
                 self._get_xml_id(self.supplier),
                 self.supplier.name,
-                u'Product 1',
-                u'P01',
-                u'SUP01',
+                u"Product 1",
+                u"P01",
+                u"SUP01",
                 ", ".join(self.product.mapped("taxes_id.name")),
-                u'10',
-                u'11',
-                u'12.24',
-                u'13.75',
+                u"10",
+                u"11",
+                u"12.24",
+                u"13.75",
             ],
         )

@@ -7,18 +7,18 @@ from odoo import api, fields, models
 
 
 class StockScrap(models.Model):
-    _inherit = 'stock.scrap'
+    _inherit = "stock.scrap"
 
     def _get_default_scrap_location_id(self):
         # Set destination location to quality control
         try:
-            return self.env.ref('__setup__.stock_location_scrap_quality').id
+            return self.env.ref("__setup__.stock_location_scrap_quality").id
         except ValueError:
             return super(StockScrap, self)._get_default_scrap_location_id()
 
     scrap_location_id = fields.Many2one(default=_get_default_scrap_location_id)
 
-    @api.onchange('product_id')
+    @api.onchange("product_id")
     def onchange_product_id(self):
         self.ensure_one()
 

@@ -12,10 +12,10 @@ from odoo.addons.queue_job.job import Job
 class UblOrderResponseImporter(Component):
     """ Synchronizer for importing data from a backend to Odoo """
 
-    _name = 'ubl.order.response.importer'
-    _inherit = ['edi.importer']
-    _apply_on = 'purchase.order'
-    _usage = 'ubl.order.response.importer'
+    _name = "ubl.order.response.importer"
+    _inherit = ["edi.importer"]
+    _apply_on = "purchase.order"
+    _usage = "ubl.order.response.importer"
 
     def execute(self):
         wizard = self.env["order.response.import"]
@@ -24,17 +24,15 @@ class UblOrderResponseImporter(Component):
                 filename,
                 self.backend_record.name,
             )
-            attachment = self.env['ir.attachment'].create(
+            attachment = self.env["ir.attachment"].create(
                 {
-                    'name': filename,
-                    'datas': base64.b64encode(content),
-                    'datas_fname': filename,
+                    "name": filename,
+                    "datas": base64.b64encode(content),
+                    "datas_fname": filename,
                 }
             )
-            new_job = wizard.with_delay(
-                description=description
-            ).process_attachment(attachment)
-            queue_job = Job.db_record_from_uuid(self.env, new_job.uuid)
-            attachment.write(
-                {'res_id': queue_job.id, 'res_model': queue_job._name}
+            new_job = wizard.with_delay(description=description).process_attachment(
+                attachment
             )
+            queue_job = Job.db_record_from_uuid(self.env, new_job.uuid)
+            attachment.write({"res_id": queue_job.id, "res_model": queue_job._name})

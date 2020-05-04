@@ -12,16 +12,16 @@ from unidecode import unidecode
 
 
 class StockPicking(models.Model):
-    _inherit = 'stock.picking'
+    _inherit = "stock.picking"
 
     @api.multi
     def do_transfer(self):
-        to_do = self.filtered(lambda p: p.state not in ('cancel', 'done'))
+        to_do = self.filtered(lambda p: p.state not in ("cancel", "done"))
         if not to_do:
             return True
         result = super(StockPicking, to_do).do_transfer()
-        picking_type_out = self.env.ref('stock.picking_type_out')
-        if self.env.context.get('skip_pdf_gen'):
+        picking_type_out = self.env.ref("stock.picking_type_out")
+        if self.env.context.get("skip_pdf_gen"):
             return result
         for r in to_do:
             if r.picking_type_id == picking_type_out:
@@ -35,20 +35,18 @@ class StockPicking(models.Model):
         self.ensure_one()
         if not self.date_done:
             return
-        sale_orders = self.move_lines.mapped('order_id')
+        sale_orders = self.move_lines.mapped("order_id")
         return (
-            '_'.join(
+            "_".join(
                 [
-                    'NE',
-                    sale_orders[0].partner_id.ref or ''
-                    if len(sale_orders)
-                    else '',
+                    "NE",
+                    sale_orders[0].partner_id.ref or "" if len(sale_orders) else "",
                     str(self.id),
-                    ''.join(self.date_done[:10].split('-')),
-                    ''.join(self.date_done[-8:].split(':')),
+                    "".join(self.date_done[:10].split("-")),
+                    "".join(self.date_done[-8:].split(":")),
                 ]
             )
-            + '.csv'
+            + ".csv"
         )
 
     @api.multi
@@ -60,7 +58,7 @@ class StockPicking(models.Model):
             # Stock picking probably not done
             return
         file_data = BytesIO()
-        w = csv.writer(file_data, delimiter=';', encoding='iso-8859-1')
+        w = csv.writer(file_data, delimiter=";", encoding="iso-8859-1")
         for line in self._generate_delivery_note():
             w.writerow(
                 [
@@ -69,28 +67,28 @@ class StockPicking(models.Model):
                 ]
             )
         data = file_data.getvalue()
-        existing = self.env['ir.attachment'].search([('name', '=', filename)])
+        existing = self.env["ir.attachment"].search([("name", "=", filename)])
         if len(existing):
-            existing[0].datas = data.encode('base_64')
+            existing[0].datas = data.encode("base_64")
         else:
-            existing = self.env['ir.attachment'].create(
+            existing = self.env["ir.attachment"].create(
                 {
-                    'type': 'binary',
-                    'res_model': 'stock.picking',
-                    'res_id': self.id,
-                    'name': filename,
-                    'datas_fname': filename,
-                    'mimetype': 'text/csv',
-                    'datas': data.encode('base_64'),
+                    "type": "binary",
+                    "res_model": "stock.picking",
+                    "res_id": self.id,
+                    "name": filename,
+                    "datas_fname": filename,
+                    "mimetype": "text/csv",
+                    "datas": data.encode("base_64"),
                 }
             )
 
     def _delivery_note_recipient_ids(self, values):
         # we could make this global for all emails by using
         # https://github.com/OCA/social/pull/329
-        partner_ids = values.get('partner_ids', [])
+        partner_ids = values.get("partner_ids", [])
         partners_with_emails = set()
-        for partner in self.env['res.partner'].sudo().browse(partner_ids):
+        for partner in self.env["res.partner"].sudo().browse(partner_ids):
             current = partner
             while current:
                 if current.email:
@@ -103,27 +101,26 @@ class StockPicking(models.Model):
     def _send_delivery_note(self):
         """Send the delivery note by email to the customer."""
         self.ensure_one()
-        if config['test_enable']:
+        if config["test_enable"]:
             return
         filename = self._get_delivery_note_filename()
-        existing = self.env['ir.attachment'].search([('name', '=', filename)])
+        existing = self.env["ir.attachment"].search([("name", "=", filename)])
         if not len(existing):
             return
-        template = self.env.ref('stock_delivery_note.delivery_note_csv')
+        template = self.env.ref("stock_delivery_note.delivery_note_csv")
         values = template.generate_email(self.id)
         values.update(
             {
-                'recipient_ids': [
-                    (4, pid)
-                    for pid in self._delivery_note_recipient_ids(values)
+                "recipient_ids": [
+                    (4, pid) for pid in self._delivery_note_recipient_ids(values)
                 ],
-                'auto_delete': False,
+                "auto_delete": False,
             }
         )
-        if 'email_from' in values and not values.get('email_from'):
-            values.pop('email_from')
-        values['attachment_ids'] = [(6, 0, existing[0].ids)]
-        self.env['mail.mail'].create(values)
+        if "email_from" in values and not values.get("email_from"):
+            values.pop("email_from")
+        values["attachment_ids"] = [(6, 0, existing[0].ids)]
+        self.env["mail.mail"].create(values)
 
     @api.multi
     def create_delivery_note(self):
@@ -161,15 +158,15 @@ class StockPicking(models.Model):
             with a comma. With between 1 and 3 number after the comma.
             """
             if fractional_size == 1:
-                formater = '{:.1f}'
+                formater = "{:.1f}"
             elif fractional_size == 2:
-                formater = '{:.2f}'
+                formater = "{:.2f}"
             elif fractional_size == 3:
-                formater = '{:.3f}'
+                formater = "{:.3f}"
             else:
-                formater = '{}'
+                formater = "{}"
             s = formater.format(number)
-            return ','.join(s.split('.'))
+            return ",".join(s.split("."))
 
         def get_last_column(sale_order, delivery_date):
             """ Compute last column of the delivery note.
@@ -179,25 +176,24 @@ class StockPicking(models.Model):
             """
             customer = sale_order.partner_id
             depot_number = (
-                customer.vet_depot_number
-                or customer.parent_id.vet_depot_number
+                customer.vet_depot_number or customer.parent_id.vet_depot_number
             )
             if not depot_number:
-                return sale_order.client_order_ref or ''
-            return '/'.join(
+                return sale_order.client_order_ref or ""
+            return "/".join(
                 [
-                    datetime.strptime(
-                        delivery_date, '%Y-%m-%d %H:%M:%S'
-                    ).strftime('%y'),
+                    datetime.strptime(delivery_date, "%Y-%m-%d %H:%M:%S").strftime(
+                        "%y"
+                    ),
                     depot_number,
-                    sale_order.suite_name or '0000',
+                    sale_order.suite_name or "0000",
                 ]
             )
 
         def format_use_date(use_date):
             """Get the use dates in format dd-mm-yyyy"""
             if not use_date:
-                return ''
+                return ""
             use_date = use_date[:10]
             return use_date[-2:] + use_date[4:8] + use_date[:4]
 
@@ -205,20 +201,20 @@ class StockPicking(models.Model):
         lines = []
         partner = self.partner_id
         # The two header lines
-        lines.append([self.id, partner.email or '', ''])
+        lines.append([self.id, partner.email or "", ""])
         lines.append(
             [
-                u'{} {}'.format(
-                    partner.title.shortcut or '', partner.name or ''
+                u"{} {}".format(
+                    partner.title.shortcut or "", partner.name or ""
                 ).strip(),
-                partner.street or '',
-                u'{} {}'.format(partner.zip or '', partner.city or '').strip(),
-                partner.country_id.name or '',
-                '',
+                partner.street or "",
+                u"{} {}".format(partner.zip or "", partner.city or "").strip(),
+                partner.country_id.name or "",
+                "",
             ]
         )
 
-        vat_group = self.env.ref('specific_data.vat_tax_group')
+        vat_group = self.env.ref("specific_data.vat_tax_group")
         # The product lines
         grouped_lines = self.get_moves_by_order()
         for group in grouped_lines:
@@ -231,10 +227,8 @@ class StockPicking(models.Model):
                     # Sometimes get_lots does not return any quants
                     # but the quantity of the stock still as to be
                     # represtented in the delivery note
-                    quants.append(['', move_line.product_qty - quants_qty, ''])
-                vat = sol.tax_id.filtered(
-                    lambda r: r.tax_group_id == vat_group
-                )
+                    quants.append(["", move_line.product_qty - quants_qty, ""])
+                vat = sol.tax_id.filtered(lambda r: r.tax_group_id == vat_group)
                 if not vat:
                     vat = product.taxes_id.filtered(
                         lambda r: r.tax_group_id == vat_group
@@ -242,7 +236,7 @@ class StockPicking(models.Model):
                 for quant in quants:
                     lines.append(
                         [
-                            product.default_code or '',
+                            product.default_code or "",
                             product.name,
                             # Quantity computed from the quants
                             format_number(quant[1], 3),
@@ -253,10 +247,10 @@ class StockPicking(models.Model):
                             #  VAT rate, yes only the first one if present
                             format_number(vat[0].amount if vat else 0, 1),
                             # Lots name
-                            quant[0] or '',
-                            format_use_date(quant[2] or ''),
+                            quant[0] or "",
+                            format_use_date(quant[2] or ""),
                             get_last_column(sol.order_id, self.date_done),
-                            '',
+                            "",
                         ]
                     )
         return lines
@@ -283,9 +277,7 @@ class StockPicking(models.Model):
         if is_entry_register:
             lines_done = self.get_entry_register_lines()
         else:
-            lines_done = self.move_lines.filtered(
-                lambda line: line.state == 'done'
-            )
+            lines_done = self.move_lines.filtered(lambda line: line.state == "done")
 
         for line in lines_done:
             if not line.order_id:
@@ -295,12 +287,12 @@ class StockPicking(models.Model):
 
         # We don't need to display backorder for the entry register
         if not is_entry_register:
-            proc_groups = self.move_lines.mapped('procurement_id.group_id')
-            moves = proc_groups.mapped('procurement_ids.move_ids')
+            proc_groups = self.move_lines.mapped("procurement_id.group_id")
+            moves = proc_groups.mapped("procurement_ids.move_ids")
             moves = moves.filtered(
                 lambda rec: (
-                    rec.location_dest_id.usage == 'customer'
-                    and rec.state not in ('cancel', 'done')
+                    rec.location_dest_id.usage == "customer"
+                    and rec.state not in ("cancel", "done")
                 )
             )
             for line in moves:
@@ -311,44 +303,35 @@ class StockPicking(models.Model):
 
         result_dict = {}
         for order, moves in moves_by_order.iteritems():
-            result_dict[order] = [
-                moves,
-                backorder_moves_by_order.get(order, []),
-            ]
+            result_dict[order] = [moves, backorder_moves_by_order.get(order, [])]
         if moves_without_order:
-            result.append(
-                (None, (moves_without_order, backorder_moves_without_order))
-            )
+            result.append((None, (moves_without_order, backorder_moves_without_order)))
 
         result.extend(
             sorted(
                 result_dict.items(),
-                key=lambda picking: (
-                    picking[0][0].date_order,
-                    picking[0][0].id,
-                ),
+                key=lambda picking: (picking[0][0].date_order, picking[0][0].id),
             )
         )
         return result
 
     def get_entry_register_lines(self):
-        categ_vet = self.env.ref('specific_data.product_categ_vet_belges')
-        categ_import = self.env.ref('specific_data.product_categ_importation')
+        categ_vet = self.env.ref("specific_data.product_categ_vet_belges")
+        categ_import = self.env.ref("specific_data.product_categ_importation")
 
-        all_products = self.mapped('move_lines.product_id')
-        medic_products = self.env['product.product'].search(
+        all_products = self.mapped("move_lines.product_id")
+        medic_products = self.env["product.product"].search(
             [
-                '|',
-                ('categ_id', 'child_of', categ_vet.id),
-                ('categ_id', 'child_of', categ_import.id),
-                ('id', 'in', all_products.ids),
+                "|",
+                ("categ_id", "child_of", categ_vet.id),
+                ("categ_id", "child_of", categ_import.id),
+                ("id", "in", all_products.ids),
             ],
-            order='categ_id',
+            order="categ_id",
         )
 
-        lines = self.mapped('move_lines').filtered(
-            lambda line: line.state == 'done'
-            and line.product_id in medic_products
+        lines = self.mapped("move_lines").filtered(
+            lambda line: line.state == "done" and line.product_id in medic_products
         )
 
         return lines

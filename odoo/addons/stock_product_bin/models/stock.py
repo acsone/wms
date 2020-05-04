@@ -6,19 +6,18 @@ from odoo import models
 
 
 class StockLocation(models.Model):
-    _inherit = 'stock.location'
+    _inherit = "stock.location"
 
     def get_putaway_strategy(self, product):
         location = self
         dest_location_id = (
-            super(StockLocation, self).get_putaway_strategy(product)
-            or location.id
+            super(StockLocation, self).get_putaway_strategy(product) or location.id
         )
-        bin_obj = self.env['product.stock.bin']
+        bin_obj = self.env["product.stock.bin"]
         lbin = bin_obj.search(
             [
-                ('product_id', '=', product.product_tmpl_id.id),
-                ('location_id', '=', dest_location_id),
+                ("product_id", "=", product.product_tmpl_id.id),
+                ("location_id", "=", dest_location_id),
             ],
             limit=1,
         )
@@ -34,8 +33,8 @@ class StockLocation(models.Model):
             location = location.location_id
             lbin = bin_obj.search(
                 [
-                    ('product_id', '=', product.product_tmpl_id.id),
-                    ('location_id', '=', location.id),
+                    ("product_id", "=", product.product_tmpl_id.id),
+                    ("location_id", "=", location.id),
                 ],
                 limit=1,
             )

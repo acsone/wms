@@ -18,12 +18,8 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
     @classmethod
     def setUpClass(cls):
         super(TestRoundInstance, cls).setUpClass()
-        cls.env = cls.env(
-            context=dict(cls.env.context, test_queue_job_no_delay=True)
-        )
-        cls.delivery_round_1 = cls.delivery_round_1.with_context(
-            cls.env.context
-        )
+        cls.env = cls.env(context=dict(cls.env.context, test_queue_job_no_delay=True))
+        cls.delivery_round_1 = cls.delivery_round_1.with_context(cls.env.context)
         cls.StockConfigSettings = cls.env["stock.config.settings"]
         cls.StockConfigSettings.create(
             {
@@ -37,15 +33,9 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
         ).execute()
         cls.delivery_round_1.geo_optimization_enabled = True
 
-        cls.partner1.write(
-            {"partner_latitude": 10.1, "partner_longitude": 10.1}
-        )
-        cls.partner2.write(
-            {"partner_latitude": 10.2, "partner_longitude": 10.2}
-        )
-        cls.partner3.write(
-            {"partner_latitude": 10.3, "partner_longitude": 10.3}
-        )
+        cls.partner1.write({"partner_latitude": 10.1, "partner_longitude": 10.1})
+        cls.partner2.write({"partner_latitude": 10.2, "partner_longitude": 10.2})
+        cls.partner3.write({"partner_latitude": 10.3, "partner_longitude": 10.3})
 
         # makes all the pickings done into the for the round...
         pick1 = cls._create_picking_pick(partner=cls.partner1)
@@ -59,22 +49,22 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
         # we don't care about the details if it is really
         # in that state, we force the state to assigned to be sure that
         # these pickings will be linked to the delivery round
-        pick1.move_lines.write({'state': 'assigned'})
-        pick2.move_lines.write({'state': 'assigned'})
-        pick3.move_lines.write({'state': 'assigned'})
+        pick1.move_lines.write({"state": "assigned"})
+        pick2.move_lines.write({"state": "assigned"})
+        pick3.move_lines.write({"state": "assigned"})
 
-        ship1.move_lines.write({'state': 'assigned'})
-        ship2.move_lines.write({'state': 'assigned'})
-        ship3.move_lines.write({'state': 'assigned'})
+        ship1.move_lines.write({"state": "assigned"})
+        ship2.move_lines.write({"state": "assigned"})
+        ship3.move_lines.write({"state": "assigned"})
 
         pickings = pick1 | pick2 | pick3 | ship1 | ship2 | ship3
         cls.delivery_round_1._assign_pickings(pickings)
 
         # we don't care about the details if it is really
         # in that state, it is only for the round to think it is
-        pick1.move_lines.write({'state': 'done'})
-        pick2.move_lines.write({'state': 'done'})
-        pick3.move_lines.write({'state': 'done'})
+        pick1.move_lines.write({"state": "done"})
+        pick2.move_lines.write({"state": "done"})
+        pick3.move_lines.write({"state": "done"})
 
         # at this stage we have a round ready to be delivered
 
@@ -122,9 +112,7 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
 
         def get(url):
             result_status_code, result_json_result = res.popleft()
-            return _PseudoRequestsResponse(
-                result_status_code, result_json_result
-            )
+            return _PseudoRequestsResponse(result_status_code, result_json_result)
 
         self.mocked_requests_get.side_effect = get
         yield
@@ -182,9 +170,7 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
             delivery.round must be in state optimization_failure
             the error message must be the error message from the api response
         """
-        with self.api_post_optimize(
-            200, {"status": "ERROR", "message": "api error"}
-        ):
+        with self.api_post_optimize(200, {"status": "ERROR", "message": "api error"}):
             self.delivery_round_1.button_deliver()
         self.assertEqual(self.delivery_round_1.state, "optimization_failure")
         self.assertEqual(
@@ -231,14 +217,11 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
         """
         with self.api_post_optimize(
             200, {"taskId": "123", "status": "OK"}
-        ), self.api_get_results(
-            (200, {"status": "ERROR", "message": "status error"})
-        ):
+        ), self.api_get_results((200, {"status": "ERROR", "message": "status error"})):
             self.delivery_round_1.button_deliver()
         self.assertEqual(self.delivery_round_1.state, "optimization_failure")
         self.assertEqual(
-            self.delivery_round_1.geo_optimization_error_message,
-            "status error",
+            self.delivery_round_1.geo_optimization_error_message, "status error"
         )
         self.assertEqual(self.delivery_round_1.geo_optimization_task_id, "123")
 
@@ -292,8 +275,7 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
             self.delivery_round_1.button_deliver()
         self.assertEqual(self.delivery_round_1.state, "optimization_failure")
         self.assertEqual(
-            self.delivery_round_1.geo_optimization_error_message,
-            "result error",
+            self.delivery_round_1.geo_optimization_error_message, "result error"
         )
         self.assertEqual(self.delivery_round_1.geo_optimization_task_id, "123")
 
@@ -443,58 +425,58 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
         self.maxDiff = 2000
         shippings = self.delivery_round_1.shipping_ids
         expected = {
-            'depots': [{'x': 0.0, 'y': 0.0}],
-            'language': u'en_US',
-            'options': {
-                'maxOptimDuration': '00:00:01',
-                'vehicleCode': 'deliveryIntermediateVehicle',
+            "depots": [{"x": 0.0, "y": 0.0}],
+            "language": u"en_US",
+            "options": {
+                "maxOptimDuration": "00:00:01",
+                "vehicleCode": "deliveryIntermediateVehicle",
             },
-            'orders': [
+            "orders": [
                 {
-                    'customerId': shippings[0].partner_id.id,
-                    'fixedVisitDuration': '00:00:10',
-                    'id': shippings[0].partner_id.id,
-                    'label': shippings[0].partner_id.name,
-                    'phone': '',
-                    'type': 0,
-                    'x': shippings[0].partner_id.partner_longitude,
-                    'y': shippings[0].partner_id.partner_latitude,
+                    "customerId": shippings[0].partner_id.id,
+                    "fixedVisitDuration": "00:00:10",
+                    "id": shippings[0].partner_id.id,
+                    "label": shippings[0].partner_id.name,
+                    "phone": "",
+                    "type": 0,
+                    "x": shippings[0].partner_id.partner_longitude,
+                    "y": shippings[0].partner_id.partner_latitude,
                 },
                 {
-                    'customerId': shippings[1].partner_id.id,
-                    'fixedVisitDuration': '00:00:10',
-                    'id': shippings[1].partner_id.id,
-                    'label': shippings[1].partner_id.name,
-                    'phone': '',
-                    'type': 0,
-                    'x': shippings[1].partner_id.partner_longitude,
-                    'y': shippings[1].partner_id.partner_latitude,
+                    "customerId": shippings[1].partner_id.id,
+                    "fixedVisitDuration": "00:00:10",
+                    "id": shippings[1].partner_id.id,
+                    "label": shippings[1].partner_id.name,
+                    "phone": "",
+                    "type": 0,
+                    "x": shippings[1].partner_id.partner_longitude,
+                    "y": shippings[1].partner_id.partner_latitude,
                 },
                 {
-                    'customerId': shippings[2].partner_id.id,
-                    'fixedVisitDuration': '00:00:10',
-                    'id': shippings[2].partner_id.id,
-                    'label': shippings[2].partner_id.name,
-                    'phone': '',
-                    'type': 0,
-                    'x': shippings[2].partner_id.partner_longitude,
-                    'y': shippings[2].partner_id.partner_latitude,
+                    "customerId": shippings[2].partner_id.id,
+                    "fixedVisitDuration": "00:00:10",
+                    "id": shippings[2].partner_id.id,
+                    "label": shippings[2].partner_id.name,
+                    "phone": "",
+                    "type": 0,
+                    "x": shippings[2].partner_id.partner_longitude,
+                    "y": shippings[2].partner_id.partner_latitude,
                 },
             ],
-            'resources': [
+            "resources": [
                 {
-                    'endX': 0.0,
-                    'endY': 0.0,
-                    'fixedLoadingDuration': '01:40:00',
-                    'loadBeforeDeparture': True,
-                    'noReload': True,
-                    'openStart': False,
-                    'startX': 0.0,
-                    'startY': 0.0,
-                    'workStartTime': '00:00:00',
+                    "endX": 0.0,
+                    "endY": 0.0,
+                    "fixedLoadingDuration": "01:40:00",
+                    "loadBeforeDeparture": True,
+                    "noReload": True,
+                    "openStart": False,
+                    "startX": 0.0,
+                    "startY": 0.0,
+                    "workStartTime": "00:00:00",
                 }
             ],
-            'simulationName': self.delivery_round_1.display_name,
+            "simulationName": self.delivery_round_1.display_name,
         }
         self.assertJsonEqual(res, expected)
 
@@ -517,9 +499,7 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
         AlcDeliveryWeekDay = self.env["alc.delivery.week.day"]
         AlcDeliveryWindow = self.env["alc.delivery.window"]
         today_id = AlcDeliveryWeekDay._get_id_by_name("%s" % week_day_today)
-        tomorrow_id = AlcDeliveryWeekDay._get_id_by_name(
-            "%s" % week_day_tomorrow
-        )
+        tomorrow_id = AlcDeliveryWeekDay._get_id_by_name("%s" % week_day_tomorrow)
         AlcDeliveryWindow.create(
             {
                 "partner_id": self.partner1.id,
@@ -554,25 +534,25 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
         )
         cfg = self.delivery_round_1.get_optimization_config()
         res = {
-            c['customerId']: c
+            c["customerId"]: c
             for c in self.delivery_round_1._generate_optimization_orders(cfg)
         }
         for partner_id, result in res.items():
             partner = self.env["res.partner"].browse(partner_id)
             expected = {
-                'customerId': partner.id,
-                'fixedVisitDuration': '00:00:10',
-                'id': partner.id,
-                'label': partner.name,
-                'phone': '',
-                'type': 0,
-                'x': partner.partner_longitude,
-                'y': partner.partner_latitude,
+                "customerId": partner.id,
+                "fixedVisitDuration": "00:00:10",
+                "id": partner.id,
+                "label": partner.name,
+                "phone": "",
+                "type": 0,
+                "x": partner.partner_longitude,
+                "y": partner.partner_latitude,
             }
             if partner_id == self.partner1.id:
-                expected['timeWindows'] = [
-                    {'beginTime': '10:00', 'endTime': '12:00'},
-                    {'beginTime': '16:00', 'endTime': '18:00'},
+                expected["timeWindows"] = [
+                    {"beginTime": "10:00", "endTime": "12:00"},
+                    {"beginTime": "16:00", "endTime": "18:00"},
                 ]
 
             self.assertJsonEqual(expected, result)
@@ -647,9 +627,7 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
             "https://geoservices.geoconcept.com/ToursolverCloud/api/ts/"
             "toursolver/test?tsCloudApiKey=api+key",
         )
-        url = self.delivery_round_1._get_opitization_api_url(
-            "test", param1="val2"
-        )
+        url = self.delivery_round_1._get_opitization_api_url("test", param1="val2")
         self.assertEqual(
             url,
             "https://geoservices.geoconcept.com/ToursolverCloud/api/ts/"
@@ -703,18 +681,12 @@ class _PseudoRequestsResponse(object):
         return self.json_result
 
     def raise_for_status(self):
-        http_error_msg = ''
+        http_error_msg = ""
         if 400 <= self.status_code < 500:
-            http_error_msg = u'%s Client Error: %s' % (
-                self.status_code,
-                self.reason,
-            )
+            http_error_msg = u"%s Client Error: %s" % (self.status_code, self.reason)
 
         elif 500 <= self.status_code < 600:
-            http_error_msg = u'%s Server Error: %s' % (
-                self.status_code,
-                self.reason,
-            )
+            http_error_msg = u"%s Server Error: %s" % (self.status_code, self.reason)
 
         if http_error_msg:
             raise HTTPError(http_error_msg, response=self)

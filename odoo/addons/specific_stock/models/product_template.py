@@ -10,43 +10,38 @@ from odoo.exceptions import UserError
 
 
 class ProductTemplate(models.Model):
-    _inherit = 'product.template'
+    _inherit = "product.template"
 
-    life_time = fields.Integer(related='categ_id.life_time')
+    life_time = fields.Integer(related="categ_id.life_time")
 
-    use_time = fields.Integer(related='categ_id.use_time')
+    use_time = fields.Integer(related="categ_id.use_time")
 
-    removal_time = fields.Integer(related='categ_id.removal_time')
+    removal_time = fields.Integer(related="categ_id.removal_time")
 
-    alert_time = fields.Integer(related='categ_id.alert_time')
+    alert_time = fields.Integer(related="categ_id.alert_time")
 
     picking_zone_id = fields.Many2one(
-        'picking.zone',
-        string='Picking zone',
-        compute='_compute_picking_zone_id',
+        "picking.zone",
+        string="Picking zone",
+        compute="_compute_picking_zone_id",
         readonly=True,
         store=True,
     )
     is_mto_product = fields.Boolean(
-        'On Order',
-        readonly=True,
-        compute='_compute_picking_zone_id',
-        store=True,
+        "On Order", readonly=True, compute="_compute_picking_zone_id", store=True
     )
 
-    @api.depends('route_ids', 'route_from_categ_ids')
+    @api.depends("route_ids", "route_from_categ_ids")
     def _compute_picking_zone_id(self):
-        Rule = self.env['procurement.rule']
-        stock_location = self.env.ref('stock.stock_location_stock')
-        picking_types = self.env['stock.picking.type'].search(
-            [('default_location_src_id', 'child_of', stock_location.id)]
+        Rule = self.env["procurement.rule"]
+        stock_location = self.env.ref("stock.stock_location_stock")
+        picking_types = self.env["stock.picking.type"].search(
+            [("default_location_src_id", "child_of", stock_location.id)]
         )
-        route_mto = self.env.ref('stock.route_warehouse0_mto')
+        route_mto = self.env.ref("stock.route_warehouse0_mto")
 
         for product in self:
-            product_routes = (
-                product.route_ids | product.categ_id.total_route_ids
-            )
+            product_routes = product.route_ids | product.categ_id.total_route_ids
 
             product.is_mto_product = route_mto in product_routes
             # We need to remove the MTO route because this route has a higher
@@ -56,31 +51,29 @@ class ProductTemplate(models.Model):
 
             res = Rule.search(
                 [
-                    ('route_id', 'in', product_routes.ids),
-                    ('picking_type_id', 'in', picking_types.ids),
+                    ("route_id", "in", product_routes.ids),
+                    ("picking_type_id", "in", picking_types.ids),
                 ],
-                order='route_sequence, sequence',
+                order="route_sequence, sequence",
                 limit=1,
             )
             if res:
-                product.picking_zone_id = (
-                    res.picking_type_id.picking_zone_id.id
-                )
+                product.picking_zone_id = res.picking_type_id.picking_zone_id.id
 
 
 # Due to a bug in odoo 10 we need to redefine the fields
 class ProductProduct(models.Model):
-    _inherit = 'product.product'
+    _inherit = "product.product"
 
-    life_time = fields.Integer(related='categ_id.life_time')
+    life_time = fields.Integer(related="categ_id.life_time")
 
-    use_time = fields.Integer(related='categ_id.use_time')
+    use_time = fields.Integer(related="categ_id.use_time")
 
-    removal_time = fields.Integer(related='categ_id.removal_time')
+    removal_time = fields.Integer(related="categ_id.removal_time")
 
-    alert_time = fields.Integer(related='categ_id.alert_time')
+    alert_time = fields.Integer(related="categ_id.alert_time")
 
-    date_last_inventory = fields.Datetime('Last inventory', readonly=True)
+    date_last_inventory = fields.Datetime("Last inventory", readonly=True)
 
     @api.model
     def get_number_of_products_by_category(self):
@@ -88,9 +81,9 @@ class ProductProduct(models.Model):
         Return the number of products by categories
         :return:
         """
-        config_param = self.env['ir.config_parameter']
+        config_param = self.env["ir.config_parameter"]
         best_sellers_percent = int(
-            config_param.get_param('stock.best_sellers_percent', 0)
+            config_param.get_param("stock.best_sellers_percent", 0)
         )
 
         all_products_query = """
@@ -105,8 +98,8 @@ class ProductProduct(models.Model):
         nbr_products = self.env.cr.fetchone()[0]
 
         price = float(
-            self.env['ir.config_parameter'].get_param(
-                'stock.price_limit_for_inventory', 0
+            self.env["ir.config_parameter"].get_param(
+                "stock.price_limit_for_inventory", 0
             )
         )
         expensive_products_query = """
@@ -126,9 +119,7 @@ class ProductProduct(models.Model):
         # To modify the percent of best sellers change the config
         # "Quantity to take for best sellers (in percent)" in sock settings
         nbr_best_sellers = int(nbr_products * (best_sellers_percent / 100.0))
-        nbr_other_products = (
-            nbr_products - nbr_expensive_products - nbr_best_sellers
-        )
+        nbr_other_products = nbr_products - nbr_expensive_products - nbr_best_sellers
 
         return nbr_expensive_products, nbr_best_sellers, nbr_other_products
 
@@ -157,16 +148,14 @@ class ProductProduct(models.Model):
         by the number of days in the year and nbr of inventory per year.
         :return:
         """
-        config_param = self.env['ir.config_parameter']
-        price = float(
-            config_param.get_param('stock.price_limit_for_inventory', 0)
-        )
-        days = int(config_param.get_param('stock.nbr_open_days', 0))
+        config_param = self.env["ir.config_parameter"]
+        price = float(config_param.get_param("stock.price_limit_for_inventory", 0))
+        days = int(config_param.get_param("stock.nbr_open_days", 0))
         interval_between_inventory = int(
-            config_param.get_param('stock.months_between_inventory', 0)
+            config_param.get_param("stock.months_between_inventory", 0)
         )
         best_sellers_duration = int(
-            config_param.get_param('stock.best_sellers_duration', 0)
+            config_param.get_param("stock.best_sellers_duration", 0)
         )
         date_today = date_today_overwrite or date.today()
         maximum_last_inventory_date = date_today - relativedelta(
@@ -179,9 +168,9 @@ class ProductProduct(models.Model):
         if not price or not days:
             raise UserError(
                 _(
-                    'Please set the Price limit for inventory '
-                    'or/and the Number of open days '
-                    'in the stock configuration'
+                    "Please set the Price limit for inventory "
+                    "or/and the Number of open days "
+                    "in the stock configuration"
                 )
             )
 
@@ -209,18 +198,16 @@ class ProductProduct(models.Model):
         # ------------------
         # An expensive product is a product where the price is greater or
         # equal to the "limit" price defined in the stock configuration.
-        expensive_period = inventory_periods.get('expensive')
+        expensive_period = inventory_periods.get("expensive")
         if not expensive_period:
-            raise UserError(_('There is no period for expensive products'))
-        expensive_period_start = expensive_period['date_start']
-        expensive_period_nbr_year = expensive_period['nbr_inventory_per_year']
+            raise UserError(_("There is no period for expensive products"))
+        expensive_period_start = expensive_period["date_start"]
+        expensive_period_nbr_year = expensive_period["nbr_inventory_per_year"]
 
         if maximum_last_inventory_date_str < expensive_period_start:
             expensive_period_start = maximum_last_inventory_date_str
 
-        qty_to_check = int(
-            nbr_expensive_products / (days / expensive_period_nbr_year)
-        )
+        qty_to_check = int(nbr_expensive_products / (days / expensive_period_nbr_year))
 
         query = """
         SELECT product.id
@@ -253,20 +240,16 @@ class ProductProduct(models.Model):
         # Best sellers
         # ------------------
         # Take twenty percent of best sales
-        best_sellers_period = inventory_periods.get('best_sellers')
+        best_sellers_period = inventory_periods.get("best_sellers")
         if not best_sellers_period:
-            raise UserError(_('There is no period for best sellers products'))
-        best_sellers_period_start = best_sellers_period['date_start']
-        best_sellers_period_nbr_year = best_sellers_period[
-            'nbr_inventory_per_year'
-        ]
+            raise UserError(_("There is no period for best sellers products"))
+        best_sellers_period_start = best_sellers_period["date_start"]
+        best_sellers_period_nbr_year = best_sellers_period["nbr_inventory_per_year"]
 
         if maximum_last_inventory_date_str < best_sellers_period_start:
             best_sellers_period_start = maximum_last_inventory_date_str
 
-        qty_to_check = int(
-            nbr_best_sellers / (days / best_sellers_period_nbr_year)
-        )
+        qty_to_check = int(nbr_best_sellers / (days / best_sellers_period_nbr_year))
 
         query = """
         SELECT product_id
@@ -306,11 +289,11 @@ class ProductProduct(models.Model):
         # Others
         # ------
         # Take all others products
-        other_period = inventory_periods.get('other')
+        other_period = inventory_periods.get("other")
         if not other_period:
-            raise UserError(_('There is no period for other products'))
-        other_period_start = other_period['date_start']
-        other_period_nbr_year = other_period['nbr_inventory_per_year']
+            raise UserError(_("There is no period for other products"))
+        other_period_start = other_period["date_start"]
+        other_period_nbr_year = other_period["nbr_inventory_per_year"]
 
         if maximum_last_inventory_date_str < other_period_start:
             other_period_start = maximum_last_inventory_date_str

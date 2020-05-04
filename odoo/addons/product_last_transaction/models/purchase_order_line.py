@@ -6,7 +6,7 @@ from odoo import fields, models
 
 
 class PurchaseOrderLine(models.Model):
-    _inherit = 'purchase.order.line'
+    _inherit = "purchase.order.line"
 
     # Add an index because the query in ProductProduct._get_product_last_in_date
     # benefits a lot from it (an order of magnitude)

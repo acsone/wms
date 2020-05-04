@@ -8,56 +8,52 @@ from odoo.tools import config
 
 
 class AccountInvoice(models.Model):
-    _name = 'account.invoice'
-    _inherit = ['account.invoice', 'report.async']
+    _name = "account.invoice"
+    _inherit = ["account.invoice", "report.async"]
 
-    amount_without_discount = fields.Monetary(compute='_compute_total_amounts')
+    amount_without_discount = fields.Monetary(compute="_compute_total_amounts")
 
-    amount_supplier_discount = fields.Monetary(
-        compute='_compute_total_amounts'
-    )
+    amount_supplier_discount = fields.Monetary(compute="_compute_total_amounts")
 
-    amount_alcyon_discount = fields.Monetary(compute='_compute_total_amounts')
+    amount_alcyon_discount = fields.Monetary(compute="_compute_total_amounts")
 
-    amount_discount_total = fields.Monetary(compute='_compute_total_amounts')
+    amount_discount_total = fields.Monetary(compute="_compute_total_amounts")
 
-    amount_untaxed_with_contribution = fields.Monetary(
-        compute='_compute_total_amounts'
-    )
+    amount_untaxed_with_contribution = fields.Monetary(compute="_compute_total_amounts")
 
     invoice_apb_ids = fields.Many2many(
-        'account.invoice.tax', compute='_compute_total_amounts'
+        "account.invoice.tax", compute="_compute_total_amounts"
     )
-    amount_apb = fields.Monetary(compute='_compute_total_amounts')
+    amount_apb = fields.Monetary(compute="_compute_total_amounts")
 
     invoice_antibiotics_ids = fields.Many2many(
-        'account.invoice.tax', compute='_compute_total_amounts'
+        "account.invoice.tax", compute="_compute_total_amounts"
     )
-    amount_antibiotics = fields.Monetary(compute='_compute_total_amounts')
+    amount_antibiotics = fields.Monetary(compute="_compute_total_amounts")
 
     invoice_contribution_ids = fields.Many2many(
-        'account.invoice.tax', compute='_compute_total_amounts'
+        "account.invoice.tax", compute="_compute_total_amounts"
     )
-    amount_contribution = fields.Monetary(compute='_compute_total_amounts')
+    amount_contribution = fields.Monetary(compute="_compute_total_amounts")
 
     invoice_only_tax_ids = fields.Many2many(
-        'account.invoice.tax', compute='_compute_total_amounts'
+        "account.invoice.tax", compute="_compute_total_amounts"
     )
-    amount_only_tax = fields.Monetary(compute='_compute_total_amounts')
+    amount_only_tax = fields.Monetary(compute="_compute_total_amounts")
 
     @api.depends(
-        'invoice_line_ids',
-        'invoice_line_ids.quantity',
-        'invoice_line_ids.price_unit',
-        'invoice_line_ids.discount2',
-        'invoice_line_ids.discount3',
-        'invoice_line_ids.amount_discount2',
-        'invoice_line_ids.amount_discount3',
-        'tax_line_ids',
+        "invoice_line_ids",
+        "invoice_line_ids.quantity",
+        "invoice_line_ids.price_unit",
+        "invoice_line_ids.discount2",
+        "invoice_line_ids.discount3",
+        "invoice_line_ids.amount_discount2",
+        "invoice_line_ids.amount_discount3",
+        "tax_line_ids",
     )
     def _compute_total_amounts(self):
-        tax_group_apb = self.env.ref('specific_account.tax_group_apb')
-        tax_group_antibiotics = self.env.ref('account.tax_group_taxes')
+        tax_group_apb = self.env.ref("specific_account.tax_group_apb")
+        tax_group_antibiotics = self.env.ref("account.tax_group_taxes")
         for inv in self:
             inv.amount_supplier_discount = sum(
                 [l.amount_discount2 for l in inv.invoice_line_ids]
@@ -70,13 +66,11 @@ class AccountInvoice(models.Model):
                 inv.amount_supplier_discount + inv.amount_alcyon_discount
             )
 
-            amount_apb = (
-                amount_antibiotics
-            ) = amount_contribution = amount_only_tax = 0
-            invoice_only_tax_ids = self.env['account.invoice.tax']
-            invoice_contribution_ids = self.env['account.invoice.tax']
-            invoice_apb_ids = self.env['account.invoice.tax']
-            invoice_antibiotics_ids = self.env['account.invoice.tax']
+            amount_apb = amount_antibiotics = amount_contribution = amount_only_tax = 0
+            invoice_only_tax_ids = self.env["account.invoice.tax"]
+            invoice_contribution_ids = self.env["account.invoice.tax"]
+            invoice_apb_ids = self.env["account.invoice.tax"]
+            invoice_antibiotics_ids = self.env["account.invoice.tax"]
 
             for invoice_tax in inv.tax_line_ids:
                 if invoice_tax.tax_id.include_base_amount:
@@ -117,7 +111,7 @@ class AccountInvoice(models.Model):
         sales = defaultdict(list)
         orphans = []
         for line in self.invoice_line_ids:
-            order = line.sale_line_ids.mapped('order_id')
+            order = line.sale_line_ids.mapped("order_id")
             if not order:
                 orphans.append(line)
 
@@ -130,9 +124,7 @@ class AccountInvoice(models.Model):
         if orphans:
             result.append((None, orphans))
 
-        result.extend(
-            sorted(sales.items(), key=lambda x: (x[0].date_order, x[0].id))
-        )
+        result.extend(sorted(sales.items(), key=lambda x: (x[0].date_order, x[0].id)))
         return result
 
     @api.multi
@@ -172,26 +164,26 @@ class AccountInvoice(models.Model):
         If no name is returned, the file is not saved.
         """
         self.ensure_one()
-        if self.type in ['in_invoice', 'in_refund'] or self.state == 'draft':
+        if self.type in ["in_invoice", "in_refund"] or self.state == "draft":
             # Only generate for client invoice and credit notes
             # And not for invoice in draft state
             return None
-        type_doc = ''
-        if self.type == 'out_invoice':
-            type_doc = 'fc'
-        elif self.type == 'out_refund':
-            type_doc = 'nc'
+        type_doc = ""
+        if self.type == "out_invoice":
+            type_doc = "fc"
+        elif self.type == "out_refund":
+            type_doc = "nc"
         return (
-            '_'.join(
+            "_".join(
                 [
                     type_doc,
-                    self.partner_id.ref or '',
+                    self.partner_id.ref or "",
                     str(self.id),
-                    ''.join(self.create_date[:10].split('-')),
-                    ''.join(self.create_date[-8:].split(':')),
+                    "".join(self.create_date[:10].split("-")),
+                    "".join(self.create_date[-8:].split(":")),
                 ]
             )
-            + '.pdf'
+            + ".pdf"
         )
 
     @api.multi
@@ -199,10 +191,10 @@ class AccountInvoice(models.Model):
         """Generate the invoice pdf and save it to ir.attachment """
         res = super(AccountInvoice, self).action_invoice_open()
         for invoice in self:
-            if invoice.type not in ('out_invoice', 'out_refund'):
+            if invoice.type not in ("out_invoice", "out_refund"):
                 continue
             invoice.with_delay(priority=4).print_and_attach_report(
-                'account.report_invoice'
+                "account.report_invoice"
             )
         return res
 
@@ -211,45 +203,32 @@ class AccountInvoice(models.Model):
         """Only keep one invoice with the same name"""
         self.ensure_one()
         res = super(AccountInvoice, self).invoice_print()
-        if config['test_enable']:
+        if config["test_enable"]:
             # Do not generate the report during test
             return res
         filename = self.get_report_name()
-        existing = self.env['ir.attachment'].search(
-            [('name', '=', filename), ('res_model', '=', 'account.invoice')]
+        existing = self.env["ir.attachment"].search(
+            [("name", "=", filename), ("res_model", "=", "account.invoice")]
         )
         existing.unlink()
         return res
 
 
 class AccountInvoiceLine(models.Model):
-    _inherit = 'account.invoice.line'
+    _inherit = "account.invoice.line"
 
-    only_tax_ids = fields.Many2many(
-        'account.tax', compute='_compute_all_taxes'
-    )
-    contribution_ids = fields.Many2many(
-        'account.tax', compute='_compute_all_taxes'
-    )
-    apb_ids = fields.Many2many('account.tax', compute='_compute_all_taxes')
-    amount_contribution = fields.Monetary(compute='_compute_all_taxes')
+    only_tax_ids = fields.Many2many("account.tax", compute="_compute_all_taxes")
+    contribution_ids = fields.Many2many("account.tax", compute="_compute_all_taxes")
+    apb_ids = fields.Many2many("account.tax", compute="_compute_all_taxes")
+    amount_contribution = fields.Monetary(compute="_compute_all_taxes")
 
-    amount_discount2 = fields.Monetary(
-        compute='_compute_price_discount_amount'
-    )
+    amount_discount2 = fields.Monetary(compute="_compute_price_discount_amount")
 
-    amount_discount3 = fields.Monetary(
-        compute='_compute_price_discount_amount'
-    )
+    amount_discount3 = fields.Monetary(compute="_compute_price_discount_amount")
 
     @api.multi
     @api.depends(
-        'price_unit',
-        'price_subtotal',
-        'discount',
-        'discount2',
-        'discount3',
-        'quantity',
+        "price_unit", "price_subtotal", "discount", "discount2", "discount3", "quantity"
     )
     def _compute_price_discount_amount(self):
         """ We need to compute discount line by line to prevent
@@ -267,9 +246,7 @@ class AccountInvoiceLine(models.Model):
                 line.amount_discount2 = 0.0
             elif line.discount3 and line.discount2:
                 line.amount_discount2 = (
-                    line.quantity
-                    * line.price_unit
-                    * ((line.discount2 or 0.0) / 100.0)
+                    line.quantity * line.price_unit * ((line.discount2 or 0.0) / 100.0)
                 )
                 line.amount_discount3 = (
                     (line.quantity * line.price_unit)
@@ -281,15 +258,15 @@ class AccountInvoiceLine(models.Model):
                 line.amount_discount2 = 0.0
 
     @api.multi
-    @api.depends('invoice_line_tax_ids')
+    @api.depends("invoice_line_tax_ids")
     def _compute_all_taxes(self):
-        tax_group_apb = self.env.ref('specific_account.tax_group_apb')
+        tax_group_apb = self.env.ref("specific_account.tax_group_apb")
 
         for line in self:
             amount_contribution = 0
-            only_tax_ids = self.env['account.tax']
-            contribution_ids = self.env['account.tax']
-            apb_ids = self.env['account.tax']
+            only_tax_ids = self.env["account.tax"]
+            contribution_ids = self.env["account.tax"]
+            apb_ids = self.env["account.tax"]
 
             for tax in line.invoice_line_tax_ids:
                 if tax.include_base_amount:

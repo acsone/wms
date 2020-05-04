@@ -15,19 +15,17 @@ class TestLocation(ZetesTest):
         pack_op = self.picking.pack_operation_product_ids
         pack_op.ensure_one()
 
-        domain = Location(
-            self._default_header(), mock.MagicMock(name='Savepoint()')
-        )
-        request_params = Parameters(domain, action='requ')
+        domain = Location(self._default_header(), mock.MagicMock(name="Savepoint()"))
+        request_params = Parameters(domain, action="requ")
         request_params.update(
             {
-                'lineId': pack_op.id,
-                'Cri01': self.location_product_1.zone,
-                'Cri02': self.location_product_1.corridor,
-                'Cri03': self.location_product_1.shelf,
-                'Cri04': self.location_product_1.height,
-                'Cri05': self.location_product_1.box,
-                'Cri07': self.lot_product_1.checksum,
+                "lineId": pack_op.id,
+                "Cri01": self.location_product_1.zone,
+                "Cri02": self.location_product_1.corridor,
+                "Cri03": self.location_product_1.shelf,
+                "Cri04": self.location_product_1.height,
+                "Cri05": self.location_product_1.box,
+                "Cri07": self.lot_product_1.checksum,
             }
         )
 
@@ -37,7 +35,7 @@ class TestLocation(ZetesTest):
         self.assertEqual(result.respCode, str(constants.RESPONSE_CODE_OK))
         self.assertEqual(result.productCode, self.product_1.default_code)
         self.assertEqual(result.productDescription, self.product_1.name)
-        self.assertEqual(result.quantity, '100.0')
+        self.assertEqual(result.quantity, "100.0")
         # If we use a demo database for this test, the result will be 100
         # but if you use an Alcyon DB, the result is 90. It is a problem
         # with warehouse configuration

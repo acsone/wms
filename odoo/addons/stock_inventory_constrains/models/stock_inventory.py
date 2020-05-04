@@ -7,18 +7,15 @@ from odoo.exceptions import ValidationError
 
 
 class StockInventory(models.Model):
-    _inherit = 'stock.inventory'
+    _inherit = "stock.inventory"
 
     @api.multi
-    @api.constrains('location_id', 'filter')
+    @api.constrains("location_id", "filter")
     def _check_all_product_on_main_location(self):
         for inventory in self:
-            if inventory.filter != 'none':
+            if inventory.filter != "none":
                 continue
-            if (
-                inventory.location_id
-                and inventory.location_id.is_inventory_forbidden
-            ):
+            if inventory.location_id and inventory.location_id.is_inventory_forbidden:
                 raise ValidationError(
                     _(
                         "You cannot create an inventory for 'all products' on the %s location."

@@ -94,31 +94,19 @@ class TestStockProductionLot(SavepointCase):
         self._add_lot_qty(self.prod1_lot1, 2, self.location_wh1_1)
         self.assertEqual(self.prod1_lot1.qty_available, 2)
         self.assertEqual(
-            self.prod1_lot1.with_context(
-                warehouse=self.warehouse_1.id
-            ).qty_available,
-            2,
+            self.prod1_lot1.with_context(warehouse=self.warehouse_1.id).qty_available, 2
         )
         self.assertEqual(
-            self.prod1_lot1.with_context(
-                warehouse=self.warehouse_2.id
-            ).qty_available,
-            0,
+            self.prod1_lot1.with_context(warehouse=self.warehouse_2.id).qty_available, 0
         )
         # 2
         self._add_lot_qty(self.prod1_lot1, 3, self.location_wh2_1)
         self.assertEqual(self.prod1_lot1.qty_available, 5)
         self.assertEqual(
-            self.prod1_lot1.with_context(
-                warehouse=self.warehouse_1.id
-            ).qty_available,
-            2,
+            self.prod1_lot1.with_context(warehouse=self.warehouse_1.id).qty_available, 2
         )
         self.assertEqual(
-            self.prod1_lot1.with_context(
-                warehouse=self.warehouse_2.id
-            ).qty_available,
-            3,
+            self.prod1_lot1.with_context(warehouse=self.warehouse_2.id).qty_available, 3
         )
 
     def test_2(self):

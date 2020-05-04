@@ -8,14 +8,12 @@ from odoo.exceptions import UserError
 
 class PurchaseOrder(models.Model):
 
-    _inherit = 'purchase.order'
+    _inherit = "purchase.order"
 
     is_edi_available = fields.Boolean(
         related="partner_id.use_edi_connector", readonly=True
     )
-    can_send_ubl_document = fields.Boolean(
-        compute="_compute_can_send_ubl_document"
-    )
+    can_send_ubl_document = fields.Boolean(compute="_compute_can_send_ubl_document")
 
     @api.depends("partner_id.use_edi_connector", "state")
     def _compute_can_send_ubl_document(self):

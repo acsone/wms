@@ -15,47 +15,45 @@ class InventoryError(Exception):
 
     def __init__(self, errors, msg=None):
         if not msg:
-            msg = _('Error during Inventory')
+            msg = _("Error during Inventory")
         super(InventoryError, self).__init__(msg)
         self.errors = errors
 
 
 class StockMove(models.Model):
-    _inherit = 'stock.move'
+    _inherit = "stock.move"
 
-    inventory_line_id = fields.Many2one(comodel_name='stock.inventory.line')
+    inventory_line_id = fields.Many2one(comodel_name="stock.inventory.line")
 
 
 class StockInventoryLine(models.Model):
-    _inherit = 'stock.inventory.line'
+    _inherit = "stock.inventory.line"
 
-    is_line_failed = fields.Boolean(
-        'Line failed', readonly=True, default=False
-    )
-    fail_message = fields.Char('Fail message', readonly=True)
+    is_line_failed = fields.Boolean("Line failed", readonly=True, default=False)
+    fail_message = fields.Char("Fail message", readonly=True)
 
     def _get_move_values(self, qty, location_id, location_dest_id):
         values = super(StockInventoryLine, self)._get_move_values(
             qty, location_id, location_dest_id
         )
-        values['inventory_line_id'] = self.id
+        values["inventory_line_id"] = self.id
         return values
 
 
 class StockInventory(models.Model):
-    _inherit = 'stock.inventory'
+    _inherit = "stock.inventory"
 
     failed_line_ids = fields.One2many(
-        'stock.inventory.line',
-        'inventory_id',
-        string='Failed inventories',
-        domain=[('is_line_failed', '=', True)],
+        "stock.inventory.line",
+        "inventory_id",
+        string="Failed inventories",
+        domain=[("is_line_failed", "=", True)],
         copy=False,
         readonly=True,
-        states={'done': [('readonly', True)]},
+        states={"done": [("readonly", True)]},
     )
 
-    line_ids = fields.One2many(domain=[('is_line_failed', '=', False)])
+    line_ids = fields.One2many(domain=[("is_line_failed", "=", False)])
 
     @api.multi
     def action_done(self):
@@ -75,7 +73,7 @@ class StockInventory(models.Model):
             with open_new_env() as new_env:
                 for line, original_error in err.errors:
                     bullets.append(
-                        u' - %s: %s'
+                        u" - %s: %s"
                         % (line.product_id.display_name, original_error.name)
                     )
 
@@ -90,14 +88,11 @@ class StockInventory(models.Model):
                     if not line.exists():
                         continue
                     line.write(
-                        {
-                            'is_line_failed': True,
-                            'fail_message': original_error.name,
-                        }
+                        {"is_line_failed": True, "fail_message": original_error.name}
                     )
 
             raise exceptions.UserError(
-                _(u'Cannot validate inventory:\n\n%s') % ('\n'.join(bullets),)
+                _(u"Cannot validate inventory:\n\n%s") % ("\n".join(bullets),)
             )
 
     @api.multi
@@ -106,15 +101,13 @@ class StockInventory(models.Model):
         This method has the api multi but this method is called for each line.
         :return:
         """
-        moves = self.mapped('move_ids').filtered(
-            lambda move: move.state != 'done'
-        )
+        moves = self.mapped("move_ids").filtered(lambda move: move.state != "done")
         errors = []
         for move in moves:
             try:
                 move.action_done()
             except exceptions.UserError as err:
-                _logger.error('UserError: %s', err)
+                _logger.error("UserError: %s", err)
                 line = move.inventory_line_id
                 if not line:
                     # This is only in case we are trying to validate an
@@ -123,9 +116,7 @@ class StockInventory(models.Model):
                     # once we have deployed the addon sinc 'inventory_line_id' will
                     # always be populated then.
                     raise exceptions.UserError(
-                        _(
-                            'Error during validation. Please restart an inventory.'
-                        )
+                        _("Error during validation. Please restart an inventory.")
                     )
                 errors.append((line, err))
         if errors:

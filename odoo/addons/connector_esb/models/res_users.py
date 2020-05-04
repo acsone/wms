@@ -6,6 +6,6 @@ from odoo import fields, models
 
 
 class ResUsers(models.Model):
-    _inherit = 'res.users'
+    _inherit = "res.users"
 
-    esb_ref = fields.Char(string='Reference for ESB', copy=False)
+    esb_ref = fields.Char(string="Reference for ESB", copy=False)

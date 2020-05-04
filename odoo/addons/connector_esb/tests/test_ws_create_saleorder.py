@@ -18,8 +18,8 @@ class WSCreateSaleOrderTestCase(SavepointCase):
     def setUpClass(cls):
         super(WSCreateSaleOrderTestCase, cls).setUpClass()
         cls.controller = SaleController()
-        cls.fiji = cls.env.ref('base.fj')
-        cls.fiji.esb_ref = 'fj'
+        cls.fiji = cls.env.ref("base.fj")
+        cls.fiji.esb_ref = "fj"
         cls.setup_records()
         cls.order_data = {
             "increment_id": "INC-ID",
@@ -27,13 +27,13 @@ class WSCreateSaleOrderTestCase(SavepointCase):
             "date": "2017-09-18",
             "order_ref": "refClt",
             "lines": [
-                {'line_id': '1', 'sku': '0001', 'quantity': 3, 'free': False},
+                {"line_id": "1", "sku": "0001", "quantity": 3, "free": False},
                 {
                     # free line: to be skipped
-                    'line_id': '2',
-                    'sku': 'FOO',
-                    'quantity': 3,
-                    'free': True,
+                    "line_id": "2",
+                    "sku": "FOO",
+                    "quantity": 3,
+                    "free": True,
                 },
             ],
         }
@@ -42,9 +42,7 @@ class WSCreateSaleOrderTestCase(SavepointCase):
             "customer_id": cls.partner.ref,
             "date": "2017-09-18",
             "order_ref": "refClt",
-            "lines": [
-                {'line_id': '1', 'cnk': '00999', 'quantity': 3, 'free': False}
-            ],
+            "lines": [{"line_id": "1", "cnk": "00999", "quantity": 3, "free": False}],
         }
         cls.request_data = {
             "jsonrpc": "3.0",
@@ -55,55 +53,51 @@ class WSCreateSaleOrderTestCase(SavepointCase):
 
     @classmethod
     def setup_records(cls):
-        cls.p1 = cls.env['product.product'].create(
+        cls.p1 = cls.env["product.product"].create(
             {
-                'name': 'Unittest P1',
-                'default_code': '0001',
-                'cnk_code': '00999',
-                'list_price': 10.0,
+                "name": "Unittest P1",
+                "default_code": "0001",
+                "cnk_code": "00999",
+                "list_price": 10.0,
             }
         )
-        cls.delivery_1 = cls.env['delivery.carrier'].create(
+        cls.delivery_1 = cls.env["delivery.carrier"].create(
+            {"delivery_type": "fixed", "name": "delivery carrier 1", "esb_ref": "031"}
+        )
+        cls.payment_30_net = cls.env.ref("account.account_payment_term_net")
+        cls.partner = cls.env["res.partner"].create(
             {
-                'delivery_type': 'fixed',
-                'name': 'delivery carrier 1',
-                'esb_ref': '031',
+                "name": "John Doe",
+                "ref": "111111",
+                "property_delivery_carrier_id": cls.delivery_1.id,
+                "supplier_promotion_sale_allowed": True,
+                "property_payment_term_id": cls.payment_30_net.id,
             }
         )
-        cls.payment_30_net = cls.env.ref('account.account_payment_term_net')
-        cls.partner = cls.env['res.partner'].create(
+        cls.partner_shipping = cls.env["res.partner"].create(
             {
-                'name': 'John Doe',
-                'ref': '111111',
-                'property_delivery_carrier_id': cls.delivery_1.id,
-                'supplier_promotion_sale_allowed': True,
-                'property_payment_term_id': cls.payment_30_net.id,
+                "name": "John Doe (ship)",
+                "ref": "58020388759284",
+                "type": "delivery",
+                "street": "Middle street 2",
+                "city": "Some Island",
+                "zip": "7492125",
+                "country_id": cls.fiji.id,
+                "parent_id": cls.partner.id,
             }
         )
-        cls.partner_shipping = cls.env['res.partner'].create(
+        cls.pricelist_1 = cls.env["product.pricelist"].create(
             {
-                'name': 'John Doe (ship)',
-                'ref': '58020388759284',
-                'type': 'delivery',
-                'street': 'Middle street 2',
-                'city': 'Some Island',
-                'zip': '7492125',
-                'country_id': cls.fiji.id,
-                'parent_id': cls.partner.id,
-            }
-        )
-        cls.pricelist_1 = cls.env['product.pricelist'].create(
-            {
-                'name': 'Pricelist 1',
-                'item_ids': [
+                "name": "Pricelist 1",
+                "item_ids": [
                     (
                         0,
                         False,
                         {
-                            'applied_on': '0_product_variant',
-                            'product_id': cls.p1.id,
-                            'compute_price': 'fixed',
-                            'fixed_price': 9,
+                            "applied_on": "0_product_variant",
+                            "product_id": cls.p1.id,
+                            "compute_price": "fixed",
+                            "fixed_price": 9,
                         },
                     )
                 ],
@@ -114,23 +108,23 @@ class WSCreateSaleOrderTestCase(SavepointCase):
     def test_create_saleorder(self):
         starting_date = fields.Datetime().now()
         data = deepcopy(self.order_data)
-        data['num_suite'] = 'iamsuitename'
-        order = self.env['sale.order']._ws_create_new(data, datetime.now())
+        data["num_suite"] = "iamsuitename"
+        order = self.env["sale.order"]._ws_create_new(data, datetime.now())
         tax_rate = self.p1.taxes_id.amount / 100.0
-        web_team = self.env.ref('sales_team.salesteam_website_sales')
+        web_team = self.env.ref("sales_team.salesteam_website_sales")
         expected = {
-            'esb_ref': 'INC-ID',
-            'client_order_ref': 'refClt',
-            'partner_id': self.partner,
-            'partner_invoice_id': self.partner,
-            'partner_shipping_id': self.partner_shipping,
-            'amount_total': self.p1.list_price * 3 * (1 + tax_rate),
-            'amount_tax': self.p1.list_price * 3 * tax_rate,
-            'supplier_promotion_allowed': True,
-            'payment_term_id': self.payment_30_net,
-            'team_id': web_team,
-            'sale_channel': 'web',
-            'suite_name': 'iamsuitename',
+            "esb_ref": "INC-ID",
+            "client_order_ref": "refClt",
+            "partner_id": self.partner,
+            "partner_invoice_id": self.partner,
+            "partner_shipping_id": self.partner_shipping,
+            "amount_total": self.p1.list_price * 3 * (1 + tax_rate),
+            "amount_tax": self.p1.list_price * 3 * tax_rate,
+            "supplier_promotion_allowed": True,
+            "payment_term_id": self.payment_30_net,
+            "team_id": web_team,
+            "sale_channel": "web",
+            "suite_name": "iamsuitename",
         }
         for k, v in expected.iteritems():
             if isinstance(v, float):
@@ -143,18 +137,18 @@ class WSCreateSaleOrderTestCase(SavepointCase):
         self.assertTrue(
             starting_date <= order.confirmation_date <= fields.Datetime.now()
         )
-        self.assertTrue(order.date_order == '2017-09-18 11:30:20')
+        self.assertTrue(order.date_order == "2017-09-18 11:30:20")
 
     def test_create_saleorder_multiple_ref(self):
         self.partner_shipping.ref = self.partner.ref
         self.test_create_saleorder()
 
     def test_create_saleorder_shipping(self):
-        carrier = self.env['delivery.carrier'].search([], limit=1)
-        carrier.esb_ref = '95'
+        carrier = self.env["delivery.carrier"].search([], limit=1)
+        carrier.esb_ref = "95"
         data = deepcopy(self.order_data)
-        data['carrier_id'] = carrier.esb_ref
-        order = self.env['sale.order']._ws_create_new(data, datetime.now())
+        data["carrier_id"] = carrier.esb_ref
+        order = self.env["sale.order"]._ws_create_new(data, datetime.now())
         self.assertEqual(len(order.order_line), 1)
         self.assertEqual(order.carrier_id, carrier)
 
@@ -164,7 +158,7 @@ class WSCreateSaleOrderTestCase(SavepointCase):
         When not specified in the data
         """
         data = deepcopy(self.order_data)
-        order = self.env['sale.order']._ws_create_new(data, datetime.now())
+        order = self.env["sale.order"]._ws_create_new(data, datetime.now())
         self.assertEqual(len(order.order_line), 1)
         self.assertEqual(order.carrier_id, self.delivery_1)
 
@@ -175,36 +169,36 @@ class WSCreateSaleOrderTestCase(SavepointCase):
 
         """
         data = deepcopy(self.order_data)
-        data['carrier_id'] = None
-        order = self.env['sale.order']._ws_create_new(data, datetime.now())
+        data["carrier_id"] = None
+        order = self.env["sale.order"]._ws_create_new(data, datetime.now())
         self.assertEqual(len(order.order_line), 1)
         self.assertEqual(order.carrier_id, self.delivery_1)
 
     def test_integrity_error(self):
         data = deepcopy(self.order_data)
         # set inexisting partner
-        data['customer_id'] = 999999
+        data["customer_id"] = 999999
         # internal api will raise IntegrityError
         with self.assertRaises(MissingError):
-            self.env['sale.order']._ws_create_new(data, datetime.now())
+            self.env["sale.order"]._ws_create_new(data, datetime.now())
 
     def test_draft_invoice_is_not_exported(self):
         """Check that invoices in state draft are not exported."""
         data = {
-            'esb_ref': 'ref_01',
-            'partner_id': self.partner.id,
-            'date_order': '2018-01-29',
-            'sale_channel': 'fax',
-            'state': 'draft',
-            'order_line': [
+            "esb_ref": "ref_01",
+            "partner_id": self.partner.id,
+            "date_order": "2018-01-29",
+            "sale_channel": "fax",
+            "state": "draft",
+            "order_line": [
                 (
                     0,
                     0,
                     {
-                        'sequence': 1,
-                        'name': self.p1.name,
-                        'product_id': self.p1.id,
-                        'product_uom_qty': 7,
+                        "sequence": 1,
+                        "name": self.p1.name,
+                        "product_id": self.p1.id,
+                        "product_uom_qty": 7,
                     },
                 )
             ],
@@ -213,39 +207,34 @@ class WSCreateSaleOrderTestCase(SavepointCase):
         # with patch('odoo.addons.connector_esb.models.esb_exportable.'
         #            'ESBExportable.esb_export_record') as export_record:
         with patch(
-            'odoo.addons.queue_job.job.DelayableRecordset.__init__',
-            return_value=None,
+            "odoo.addons.queue_job.job.DelayableRecordset.__init__", return_value=None
         ) as export_record:
-            self.env['sale.order'].create(data)
+            self.env["sale.order"].create(data)
             export_record.assert_not_called()
 
     @freeze_time("2017-09-18 11:30:20")
     def test_create_saleorder_with_discount(self):
         discount_percent = 10.0
-        supplier = self.env['res.partner'].create(
-            {'name': 'Supplier', 'ref': '9001'}
-        )
-        self.p1.seller_ids = self.env['product.supplierinfo'].create(
-            {'name': supplier.id, 'discount_sale': discount_percent}
+        supplier = self.env["res.partner"].create({"name": "Supplier", "ref": "9001"})
+        self.p1.seller_ids = self.env["product.supplierinfo"].create(
+            {"name": supplier.id, "discount_sale": discount_percent}
         )
 
         starting_date = fields.Datetime().now()
         data = deepcopy(self.order_data)
-        order = self.env['sale.order']._ws_create_new(data, datetime.now())
+        order = self.env["sale.order"]._ws_create_new(data, datetime.now())
         tax_rate = self.p1.taxes_id.amount / 100.0
-        unit_price = (
-            self.p1.list_price - self.p1.list_price * discount_percent / 100
-        )
+        unit_price = self.p1.list_price - self.p1.list_price * discount_percent / 100
         expected = {
-            'esb_ref': 'INC-ID',
-            'client_order_ref': 'refClt',
-            'partner_id': self.partner,
-            'partner_invoice_id': self.partner,
-            'partner_shipping_id': self.partner_shipping,
-            'amount_total': unit_price * 3 * (1 + tax_rate),
-            'amount_tax': unit_price * 3 * tax_rate,
-            'supplier_promotion_allowed': True,
-            'payment_term_id': self.payment_30_net,
+            "esb_ref": "INC-ID",
+            "client_order_ref": "refClt",
+            "partner_id": self.partner,
+            "partner_invoice_id": self.partner,
+            "partner_shipping_id": self.partner_shipping,
+            "amount_total": unit_price * 3 * (1 + tax_rate),
+            "amount_tax": unit_price * 3 * tax_rate,
+            "supplier_promotion_allowed": True,
+            "payment_term_id": self.payment_30_net,
         }
         for k, v in expected.iteritems():
             if isinstance(v, float):
@@ -258,7 +247,7 @@ class WSCreateSaleOrderTestCase(SavepointCase):
         self.assertTrue(
             starting_date <= order.confirmation_date <= fields.Datetime.now()
         )
-        self.assertTrue(order.date_order == '2017-09-18 11:30:20')
+        self.assertTrue(order.date_order == "2017-09-18 11:30:20")
         # check discounts
         self.assertEqual(order.order_line.discount2, discount_percent)
 
@@ -266,29 +255,28 @@ class WSCreateSaleOrderTestCase(SavepointCase):
         """Check that the customer assigned pricelist is used."""
         data = deepcopy(self.order_data)
         self.partner.property_product_pricelist = self.pricelist_1.id
-        order = self.env['sale.order']._ws_create_new(data, datetime.now())
+        order = self.env["sale.order"]._ws_create_new(data, datetime.now())
         self.assertEqual(
-            order.order_line[0].price_unit,
-            self.pricelist_1.item_ids[0].fixed_price,
+            order.order_line[0].price_unit, self.pricelist_1.item_ids[0].fixed_price
         )
 
     def test_create_saleorder_with_cnk(self):
         data = deepcopy(self.order_data_cnk)
-        order = self.env['sale.order']._ws_create_new(data, datetime.now())
+        order = self.env["sale.order"]._ws_create_new(data, datetime.now())
         tax_rate = self.p1.taxes_id.amount / 100.0
-        web_team = self.env.ref('sales_team.salesteam_website_sales')
+        web_team = self.env.ref("sales_team.salesteam_website_sales")
         expected = {
-            'esb_ref': 'INC-ID',
-            'client_order_ref': 'refClt',
-            'partner_id': self.partner,
-            'partner_invoice_id': self.partner,
-            'partner_shipping_id': self.partner_shipping,
-            'amount_total': self.p1.list_price * 3 * (1 + tax_rate),
-            'amount_tax': self.p1.list_price * 3 * tax_rate,
-            'supplier_promotion_allowed': True,
-            'payment_term_id': self.payment_30_net,
-            'team_id': web_team,
-            'sale_channel': 'web',
+            "esb_ref": "INC-ID",
+            "client_order_ref": "refClt",
+            "partner_id": self.partner,
+            "partner_invoice_id": self.partner,
+            "partner_shipping_id": self.partner_shipping,
+            "amount_total": self.p1.list_price * 3 * (1 + tax_rate),
+            "amount_tax": self.p1.list_price * 3 * tax_rate,
+            "supplier_promotion_allowed": True,
+            "payment_term_id": self.payment_30_net,
+            "team_id": web_team,
+            "sale_channel": "web",
         }
         for k, v in expected.iteritems():
             if isinstance(v, float):
@@ -302,27 +290,27 @@ class WSCreateSaleOrderTestCase(SavepointCase):
         on create of sale order from WS
 
         """
-        human_categ = self.env.ref('specific_data.product_categ_humain')
+        human_categ = self.env.ref("specific_data.product_categ_humain")
         data = deepcopy(self.order_data)
         self.p1.categ_id = human_categ
         self.p1.list_price = 0.0
 
         # set all lines as free
         # line 1 not invoiced drug to take
-        data['lines'][0]['free'] = True
+        data["lines"][0]["free"] = True
         # line 2 additional product to ignore
-        data['lines'][1]['free'] = True
-        order = self.env['sale.order']._ws_create_new(data, datetime.now())
+        data["lines"][1]["free"] = True
+        order = self.env["sale.order"]._ws_create_new(data, datetime.now())
         expected = {
-            'esb_ref': 'INC-ID',
-            'client_order_ref': 'refClt',
-            'partner_id': self.partner,
-            'partner_invoice_id': self.partner,
-            'partner_shipping_id': self.partner_shipping,
-            'amount_total': 0.0,
-            'amount_tax': 0.0,
-            'supplier_promotion_allowed': True,
-            'payment_term_id': self.payment_30_net,
+            "esb_ref": "INC-ID",
+            "client_order_ref": "refClt",
+            "partner_id": self.partner,
+            "partner_invoice_id": self.partner,
+            "partner_shipping_id": self.partner_shipping,
+            "amount_total": 0.0,
+            "amount_tax": 0.0,
+            "supplier_promotion_allowed": True,
+            "payment_term_id": self.payment_30_net,
         }
         for k, v in expected.iteritems():
             if isinstance(v, float):
@@ -338,37 +326,35 @@ class WSCreateSaleOrderTestCase(SavepointCase):
 
         """
         data = deepcopy(self.order_data)
-        demo = self.env.ref('base.user_demo')
+        demo = self.env.ref("base.user_demo")
         # set a user that will be copied on sale as salesmanager
         self.partner.user_id = demo
-        self.env['sale.order']._patch_method(
-            'message_post_with_view', MagicMock()
-        )
+        self.env["sale.order"]._patch_method("message_post_with_view", MagicMock())
 
-        self.env['sale.order']._ws_create_new(data, datetime.now())
-        self.env['sale.order'].message_post_with_view.assert_not_called()
+        self.env["sale.order"]._ws_create_new(data, datetime.now())
+        self.env["sale.order"].message_post_with_view.assert_not_called()
 
     @freeze_time("2019-02-26 11:30:20")
     def test_date_order(self):
-        get_date_order = self.env['sale.order']._ws_get_date_order
+        get_date_order = self.env["sale.order"]._ws_get_date_order
         self.assertEqual(
-            get_date_order('2019-02-26 11:22:33'),
-            '2019-02-26 11:22:33',
+            get_date_order("2019-02-26 11:22:33"),
+            "2019-02-26 11:22:33",
             "full date provided must be used",
         )
         self.assertEqual(
-            get_date_order('2019-02-25 11:22:33'),
-            '2019-02-25 11:22:33',
+            get_date_order("2019-02-25 11:22:33"),
+            "2019-02-25 11:22:33",
             "full date provided must be used",
         )
         self.assertEqual(
-            get_date_order('2019-02-26'),
-            '2019-02-26 11:30:20',
+            get_date_order("2019-02-26"),
+            "2019-02-26 11:30:20",
             "current date without time should use current time",
         )
         self.assertEqual(
-            get_date_order('2019-02-25'),
-            '2019-02-25 12:00:00',
+            get_date_order("2019-02-25"),
+            "2019-02-25 12:00:00",
             "another date without time should use 12:00:00",
         )
 
@@ -380,8 +366,8 @@ class WSCreateSaleOrderTestCase(SavepointCase):
         )
         self.partner.max_delay_for_sale_order_creation = 1
         data = deepcopy(self.order_data)
-        order = self.env['sale.order']._ws_create_new(data, job_creation_date)
-        self.assertEqual(order.state, 'cancel')
+        order = self.env["sale.order"]._ws_create_new(data, job_creation_date)
+        self.assertEqual(order.state, "cancel")
 
     def test_create_saleorder_with_unknown_product(self):
         """Check sale.order with an unknown product.
@@ -391,11 +377,11 @@ class WSCreateSaleOrderTestCase(SavepointCase):
         by a message in the chatter.
         """
         data = deepcopy(self.order_data)
-        unknown_sku = 'UNKWN'
-        data['lines'].append(
-            {'line_id': '3', 'sku': unknown_sku, 'quantity': 3, 'free': False}
+        unknown_sku = "UNKWN"
+        data["lines"].append(
+            {"line_id": "3", "sku": unknown_sku, "quantity": 3, "free": False}
         ),
-        order = self.env['sale.order']._ws_create_new(data, datetime.now())
+        order = self.env["sale.order"]._ws_create_new(data, datetime.now())
         self.assertEqual(len(order.order_line), 1)
         message = order.message_ids.filtered(lambda r: unknown_sku in r.body)
         self.assertEqual(len(message), 1)

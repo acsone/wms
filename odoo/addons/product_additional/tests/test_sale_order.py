@@ -19,45 +19,43 @@ class TestSaleOrder(common.SavepointCase):
         cls.env = cls.env(context=context)
 
         # Create partner
-        cls.partner = cls.env['res.partner'].create(
+        cls.partner = cls.env["res.partner"].create(
             {
-                'name': 'Hello World',
-                'ref': '95739887576',
-                'supplier_promotion_sale_allowed': True,
+                "name": "Hello World",
+                "ref": "95739887576",
+                "supplier_promotion_sale_allowed": True,
             }
         )
 
-        cls.supplier = cls.env['res.partner'].create(
-            {'name': 'Supplier', 'ref': '875893929', 'supplier': True}
+        cls.supplier = cls.env["res.partner"].create(
+            {"name": "Supplier", "ref": "875893929", "supplier": True}
         )
 
         # Create the main product
-        cls.main_product = cls.env['product.product'].create(
+        cls.main_product = cls.env["product.product"].create(
             {
-                'name': 'Main product',
-                'default_code': '1234567',
-                'tracking': 'lot',
-                'list_price': 100,
-                'type': 'product',
+                "name": "Main product",
+                "default_code": "1234567",
+                "tracking": "lot",
+                "list_price": 100,
+                "type": "product",
             }
         )
 
         # Create the sale order
-        cls.sale_order = cls.env['sale.order'].create(
+        cls.sale_order = cls.env["sale.order"].create(
             {
-                'partner_id': cls.partner.id,
-                'order_line': [
+                "partner_id": cls.partner.id,
+                "order_line": [
                     (
                         0,
                         0,
                         {
-                            'name': cls.main_product.name,
-                            'product_id': cls.main_product.id,
-                            'product_uom': cls.env.ref(
-                                'product.product_uom_unit'
-                            ).id,
-                            'product_uom_qty': 10,
-                            'sequence': 1,
+                            "name": cls.main_product.name,
+                            "product_id": cls.main_product.id,
+                            "product_uom": cls.env.ref("product.product_uom_unit").id,
+                            "product_uom_qty": 10,
+                            "sequence": 1,
                         },
                     )
                 ],
@@ -71,33 +69,31 @@ class TestSaleOrder(common.SavepointCase):
         not receive the free products.
         """
         self.partner.supplier_promotion_sale_allowed = False
-        self.env['product.supplierinfo'].create(
+        self.env["product.supplierinfo"].create(
             {
-                'name': self.supplier.id,
-                'product_tmpl_id': self.main_product.product_tmpl_id.id,
-                'product_code': '123456',
-                'delay': 1,
-                'ratio_main_product': 3,
-                'ratio_promotional_product': 1,
+                "name": self.supplier.id,
+                "product_tmpl_id": self.main_product.product_tmpl_id.id,
+                "product_code": "123456",
+                "delay": 1,
+                "ratio_main_product": 3,
+                "ratio_promotional_product": 1,
             }
         )
         # Flag on sale order to give or not supplier promotions is set on
         # create and with onchanges
-        so = self.env['sale.order'].create(
+        so = self.env["sale.order"].create(
             {
-                'partner_id': self.partner.id,
-                'order_line': [
+                "partner_id": self.partner.id,
+                "order_line": [
                     (
                         0,
                         0,
                         {
-                            'name': self.main_product.name,
-                            'product_id': self.main_product.id,
-                            'product_uom': self.env.ref(
-                                'product.product_uom_unit'
-                            ).id,
-                            'product_uom_qty': 10,
-                            'sequence': 1,
+                            "name": self.main_product.name,
+                            "product_id": self.main_product.id,
+                            "product_uom": self.env.ref("product.product_uom_unit").id,
+                            "product_uom_qty": 10,
+                            "sequence": 1,
                         },
                     )
                 ],
@@ -112,14 +108,14 @@ class TestSaleOrder(common.SavepointCase):
         Add a simple supplier info (ratio 3/1) without date or min quantity
         :return:
         """
-        self.env['product.supplierinfo'].create(
+        self.env["product.supplierinfo"].create(
             {
-                'name': self.supplier.id,
-                'product_tmpl_id': self.main_product.product_tmpl_id.id,
-                'product_code': '123456',
-                'delay': 1,
-                'ratio_main_product': 3,
-                'ratio_promotional_product': 1,
+                "name": self.supplier.id,
+                "product_tmpl_id": self.main_product.product_tmpl_id.id,
+                "product_code": "123456",
+                "delay": 1,
+                "ratio_main_product": 3,
+                "ratio_promotional_product": 1,
             }
         )
         self.assertEqual(len(self.sale_order.order_line), 1)
@@ -146,29 +142,29 @@ class TestSaleOrder(common.SavepointCase):
         (ratio 2/1) with a min quantity
         :return:
         """
-        self.env['product.supplierinfo'].create(
+        self.env["product.supplierinfo"].create(
             {
-                'name': self.supplier.id,
-                'product_tmpl_id': self.main_product.product_tmpl_id.id,
-                'product_code': '123456',
-                'delay': 1,
-                'ratio_main_product': 3,
-                'ratio_promotional_product': 1,
-                'date_start': fields.Date.today(),
-                'date_end': fields.Date.today(),
+                "name": self.supplier.id,
+                "product_tmpl_id": self.main_product.product_tmpl_id.id,
+                "product_code": "123456",
+                "delay": 1,
+                "ratio_main_product": 3,
+                "ratio_promotional_product": 1,
+                "date_start": fields.Date.today(),
+                "date_end": fields.Date.today(),
             }
         )
-        self.env['product.supplierinfo'].create(
+        self.env["product.supplierinfo"].create(
             {
-                'name': self.supplier.id,
-                'product_tmpl_id': self.main_product.product_tmpl_id.id,
-                'product_code': '123456',
-                'min_qty_sale': 5,
-                'delay': 1,
-                'ratio_main_product': 2,
-                'ratio_promotional_product': 1,
-                'date_start': fields.Date.today(),
-                'date_end': fields.Date.today(),
+                "name": self.supplier.id,
+                "product_tmpl_id": self.main_product.product_tmpl_id.id,
+                "product_code": "123456",
+                "min_qty_sale": 5,
+                "delay": 1,
+                "ratio_main_product": 2,
+                "ratio_promotional_product": 1,
+                "date_start": fields.Date.today(),
+                "date_end": fields.Date.today(),
             }
         )
         self.assertEqual(len(self.sale_order.order_line), 1)
@@ -194,16 +190,16 @@ class TestSaleOrder(common.SavepointCase):
         Create a supplier info with a expired date_start and date_end
         :return:
         """
-        self.env['product.supplierinfo'].create(
+        self.env["product.supplierinfo"].create(
             {
-                'name': self.supplier.id,
-                'product_tmpl_id': self.main_product.product_tmpl_id.id,
-                'product_code': '123456',
-                'delay': 1,
-                'ratio_main_product': 2,
-                'ratio_promotional_product': 1,
-                'date_start': '2017-01-01',
-                'date_end': '2017-06-30',
+                "name": self.supplier.id,
+                "product_tmpl_id": self.main_product.product_tmpl_id.id,
+                "product_code": "123456",
+                "delay": 1,
+                "ratio_main_product": 2,
+                "ratio_promotional_product": 1,
+                "date_start": "2017-01-01",
+                "date_end": "2017-06-30",
             }
         )
         self.assertEqual(len(self.sale_order.order_line), 1)
@@ -216,14 +212,14 @@ class TestSaleOrder(common.SavepointCase):
         Confirm a sale order and reset the state to draft
         :return:
         """
-        self.env['product.supplierinfo'].create(
+        self.env["product.supplierinfo"].create(
             {
-                'name': self.supplier.id,
-                'product_tmpl_id': self.main_product.product_tmpl_id.id,
-                'product_code': '123456',
-                'delay': 1,
-                'ratio_main_product': 3,
-                'ratio_promotional_product': 1,
+                "name": self.supplier.id,
+                "product_tmpl_id": self.main_product.product_tmpl_id.id,
+                "product_code": "123456",
+                "delay": 1,
+                "ratio_main_product": 3,
+                "ratio_promotional_product": 1,
             }
         )
         self.assertEqual(len(self.sale_order.order_line), 1)
@@ -242,53 +238,49 @@ class TestSaleOrder(common.SavepointCase):
         just after the corresponding paid products.
         """
         # Create a product without promotion
-        self.product_2 = self.env['product.product'].create(
+        self.product_2 = self.env["product.product"].create(
             {
-                'name': 'Product 2',
-                'default_code': '984928374',
-                'tracking': 'lot',
-                'list_price': 100,
-                'type': 'product',
+                "name": "Product 2",
+                "default_code": "984928374",
+                "tracking": "lot",
+                "list_price": 100,
+                "type": "product",
             }
         )
         # Add a free product on the main product
-        self.env['product.supplierinfo'].create(
+        self.env["product.supplierinfo"].create(
             {
-                'name': self.supplier.id,
-                'product_tmpl_id': self.main_product.product_tmpl_id.id,
-                'product_code': '123456',
-                'delay': 1,
-                'ratio_main_product': 10,
-                'ratio_promotional_product': 1,
+                "name": self.supplier.id,
+                "product_tmpl_id": self.main_product.product_tmpl_id.id,
+                "product_code": "123456",
+                "delay": 1,
+                "ratio_main_product": 10,
+                "ratio_promotional_product": 1,
             }
         )
         # Create the sale order without setting a sequence on sale order lines
-        self.so_2 = self.env['sale.order'].create(
+        self.so_2 = self.env["sale.order"].create(
             {
-                'partner_id': self.partner.id,
-                'order_line': [
+                "partner_id": self.partner.id,
+                "order_line": [
                     (
                         0,
                         0,
                         {
-                            'name': self.main_product.name,
-                            'product_id': self.main_product.id,
-                            'product_uom': self.env.ref(
-                                'product.product_uom_unit'
-                            ).id,
-                            'product_uom_qty': 10,
+                            "name": self.main_product.name,
+                            "product_id": self.main_product.id,
+                            "product_uom": self.env.ref("product.product_uom_unit").id,
+                            "product_uom_qty": 10,
                         },
                     ),
                     (
                         0,
                         0,
                         {
-                            'name': self.product_2.name,
-                            'product_id': self.product_2.id,
-                            'product_uom': self.env.ref(
-                                'product.product_uom_unit'
-                            ).id,
-                            'product_uom_qty': 3,
+                            "name": self.product_2.name,
+                            "product_id": self.product_2.id,
+                            "product_uom": self.env.ref("product.product_uom_unit").id,
+                            "product_uom_qty": 3,
                         },
                     ),
                 ],

@@ -6,7 +6,7 @@ from odoo import api, models
 
 
 class BankPaymentLine(models.Model):
-    _inherit = 'bank.payment.line'
+    _inherit = "bank.payment.line"
 
     @api.multi
     def reconcile(self):

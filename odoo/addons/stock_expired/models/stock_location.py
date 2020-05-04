@@ -6,8 +6,6 @@ from odoo import fields, models
 
 
 class StockLocation(models.Model):
-    _inherit = 'stock.location'
+    _inherit = "stock.location"
 
-    ignore_quants_expiration = fields.Boolean(
-        string='Ignore quants expiration'
-    )
+    ignore_quants_expiration = fields.Boolean(string="Ignore quants expiration")

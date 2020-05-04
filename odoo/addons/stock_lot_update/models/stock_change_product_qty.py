@@ -22,8 +22,8 @@ from odoo import fields, models
 
 
 class StockChangeProductQty(models.TransientModel):
-    _inherit = 'stock.change.product.qty'
+    _inherit = "stock.change.product.qty"
 
     product_tmpl_tracking = fields.Selection(
-        related='product_tmpl_id.tracking', readonly=True
+        related="product_tmpl_id.tracking", readonly=True
     )

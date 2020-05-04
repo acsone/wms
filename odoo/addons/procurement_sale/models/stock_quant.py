@@ -7,20 +7,14 @@ from odoo.tools.float_utils import float_compare
 
 
 class StockQuant(models.Model):
-    _inherit = 'stock.quant'
+    _inherit = "stock.quant"
 
     @api.model
     def quants_get_preferred_domain(
-        self,
-        qty,
-        move,
-        ops=False,
-        lot_id=False,
-        domain=None,
-        preferred_domain_list=[],
+        self, qty, move, ops=False, lot_id=False, domain=None, preferred_domain_list=[]
     ):
         allowed_qty = qty
-        if move.picking_id.picking_type_id.subcode == 'PICK':
+        if move.picking_id.picking_type_id.subcode == "PICK":
             # Do not reserve quantity that is from a previously confirmed SO
             # This allows to reserve quantity in any order. So you can reserve
             # and deliver a customer that has ordered after another one but
@@ -28,37 +22,37 @@ class StockQuant(models.Model):
             # first one.
             # You still need to run the procurements in the right order to
             # ensure the delivery orders exist when performing this check.
-            output_loc = self.env.ref('stock.stock_location_output')
+            output_loc = self.env.ref("stock.stock_location_output")
             previous_moves_domain = [
-                ('product_id', '=', move.product_id.id),
-                ('location_id.usage', 'in', ('internal', 'view')),
-                '|',
+                ("product_id", "=", move.product_id.id),
+                ("location_id.usage", "in", ("internal", "view")),
+                "|",
                 # PICK + SHIP
-                '&',
-                ('location_id', '=', output_loc.id),
-                ('state', '=', 'waiting'),  # any shipping in waiting is
+                "&",
+                ("location_id", "=", output_loc.id),
+                ("state", "=", "waiting"),  # any shipping in waiting is
                 # awaiting a picking still to do
                 # SHIP only
-                '&',
-                ('location_id', '!=', output_loc.id),
-                ('state', 'in', ('waiting', 'confirmed', 'assigned')),
-                ('date', '<', move.date),
-                ('priority', '>=', move.priority),
-                ('location_dest_id.usage', '=', 'customer'),
+                "&",
+                ("location_id", "!=", output_loc.id),
+                ("state", "in", ("waiting", "confirmed", "assigned")),
+                ("date", "<", move.date),
+                ("priority", ">=", move.priority),
+                ("location_dest_id.usage", "=", "customer"),
             ]
             if move.restrict_lot_id:
                 previous_moves_domain.append(
-                    ('restrict_lot_id', '=', move.restrict_lot_id.id)
+                    ("restrict_lot_id", "=", move.restrict_lot_id.id)
                 )
-            previous_moves = move.search(previous_moves_domain, order='id')
+            previous_moves = move.search(previous_moves_domain, order="id")
             blocked_qty = 0
             for pm in previous_moves:
                 # Some moves could be in waiting state because the shipping is
                 # not reserved and not because the pick move has not been done.
                 # So we still need to check that the source move is not
                 # effectively done
-                if pm.location_id == output_loc and 'done' in pm.mapped(
-                    'move_orig_ids.state'
+                if pm.location_id == output_loc and "done" in pm.mapped(
+                    "move_orig_ids.state"
                 ):
                     continue
                 blocked_qty += pm.product_qty
@@ -78,13 +72,11 @@ class StockQuant(models.Model):
             preferred_domain_list=preferred_domain_list,
         )
 
-        if move.picking_id.picking_type_id.subcode == 'PICK':
+        if move.picking_id.picking_type_id.subcode == "PICK":
             missing_qty = qty - sum([quant[1] for quant in res])
             if (
                 float_compare(
-                    missing_qty,
-                    0,
-                    precision_rounding=move.product_id.uom_id.rounding,
+                    missing_qty, 0, precision_rounding=move.product_id.uom_id.rounding
                 )
                 > 0
             ):

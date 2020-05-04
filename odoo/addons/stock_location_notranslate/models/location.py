@@ -6,6 +6,6 @@ from openerp import fields, models
 
 
 class StockLocation(models.Model):
-    _inherit = 'stock.location'
+    _inherit = "stock.location"
 
     name = fields.Char(translate=False)

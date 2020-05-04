@@ -72,7 +72,6 @@
         "base_optional_quick_create",
         "sale_stock_picking_blocking",
         "purchase_delivery_split_date",
-
         # specific
         "alc_analytic_category_report",
         "alc_edi_connector",

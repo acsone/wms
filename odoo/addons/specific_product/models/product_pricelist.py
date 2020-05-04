@@ -6,6 +6,6 @@ from odoo import fields, models
 
 
 class ProductPricelistItem(models.Model):
-    _inherit = 'product.pricelist.item'
+    _inherit = "product.pricelist.item"
 
-    base = fields.Selection(selection_add=[('list_price', 'Sale Price 1')])
+    base = fields.Selection(selection_add=[("list_price", "Sale Price 1")])

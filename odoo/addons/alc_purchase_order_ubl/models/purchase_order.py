@@ -8,7 +8,7 @@ from odoo.exceptions import ValidationError
 
 class PurchaseOrder(models.Model):
 
-    _inherit = 'purchase.order'
+    _inherit = "purchase.order"
 
     @api.model
     def _ubl_get_party_identification(self, commercial_partner):
@@ -27,16 +27,14 @@ class PurchaseOrder(models.Model):
 
     @api.model
     def _ubl_add_tax_category(
-        self, tax, parent_node, ns, node_name='TaxCategory', version='2.1'
+        self, tax, parent_node, ns, node_name="TaxCategory", version="2.1"
     ):
         """
         We don't provides tax info...
         """
 
     @api.multi
-    def _ubl_add_order_line(
-        self, parent_node, oline, line_number, ns, version='2.1'
-    ):
+    def _ubl_add_order_line(self, parent_node, oline, line_number, ns, version="2.1"):
         """
         Overrides to use the po line id as identifier
         """

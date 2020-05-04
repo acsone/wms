@@ -7,13 +7,13 @@ from odoo.exceptions import Warning as UserError
 
 
 class StockPackOperationLotAdd(models.TransientModel):
-    _inherit = 'stock.pack.operation.lot.add'
+    _inherit = "stock.pack.operation.lot.add"
 
     def _default_print_qty(self):
         return 1
 
     print_qty = fields.Integer(
-        'Print Quantity', help="Quantity to print", default=_default_print_qty
+        "Print Quantity", help="Quantity to print", default=_default_print_qty
     )
 
     def _add(self):

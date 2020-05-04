@@ -6,17 +6,13 @@ from odoo import api, fields, models
 
 
 class ProductTemplate(models.Model):
-    _inherit = 'product.template'
+    _inherit = "product.template"
 
-    orderpoint_min = fields.Float('Minimum Quantity')
-    orderpoint_max = fields.Float('Maximum Quantity')
-    orderpoint_qty_multiple = fields.Float('Qty Multiple')
+    orderpoint_min = fields.Float("Minimum Quantity")
+    orderpoint_max = fields.Float("Maximum Quantity")
+    orderpoint_qty_multiple = fields.Float("Qty Multiple")
 
-    _orderpoint_fields = (
-        'orderpoint_min',
-        'orderpoint_max',
-        'orderpoint_qty_multiple',
-    )
+    _orderpoint_fields = ("orderpoint_min", "orderpoint_max", "orderpoint_qty_multiple")
 
     def _propagate_orderpoint(self):
         """
@@ -24,7 +20,7 @@ class ProductTemplate(models.Model):
         :return:
         """
         # Use only for songs
-        if self.env.context.get('disable_constrains_orderpoint'):
+        if self.env.context.get("disable_constrains_orderpoint"):
             return
 
         for product_tmpl in self:
@@ -45,24 +41,24 @@ class ProductTemplate(models.Model):
             if rules:
                 rules.write(
                     {
-                        'product_min_qty': product.orderpoint_min,
-                        'product_max_qty': product.orderpoint_max,
-                        'qty_multiple': product.orderpoint_qty_multiple,
-                        'active': product.active,
+                        "product_min_qty": product.orderpoint_min,
+                        "product_max_qty": product.orderpoint_max,
+                        "qty_multiple": product.orderpoint_qty_multiple,
+                        "active": product.active,
                     }
                 )
             else:
                 product.orderpoint_ids.create(
                     {
-                        'product_id': product.id,
-                        'product_uom': product.uom_id,
-                        'product_min_qty': product.orderpoint_min,
-                        'product_max_qty': product.orderpoint_max,
-                        'qty_multiple': product.orderpoint_qty_multiple,
-                        'location_id': self.env.ref(
-                            'stock.stock_location_stock'
+                        "product_id": product.id,
+                        "product_uom": product.uom_id,
+                        "product_min_qty": product.orderpoint_min,
+                        "product_max_qty": product.orderpoint_max,
+                        "qty_multiple": product.orderpoint_qty_multiple,
+                        "location_id": self.env.ref(
+                            "stock.stock_location_stock"
                         ).location_id.id,
-                        'active': product.active,
+                        "active": product.active,
                     }
                 )
 
@@ -81,17 +77,17 @@ class ProductTemplate(models.Model):
         Used only for import.
         """
         if (
-            self._context.get('force_archive_orderpoint')
-            and 'type' in values
-            and values['type'] != 'product'
-            and sum(self.mapped('nbr_reordering_rules')) != 0
+            self._context.get("force_archive_orderpoint")
+            and "type" in values
+            and values["type"] != "product"
+            and sum(self.mapped("nbr_reordering_rules")) != 0
         ):
-            ops = self.mapped('product_variant_ids.orderpoint_ids').filtered(
+            ops = self.mapped("product_variant_ids.orderpoint_ids").filtered(
                 lambda r: r.active
             )
-            ops.write({'active': False})
+            ops.write({"active": False})
             # recompute value of `nbr_reordering_rules`
-            self.invalidate_cache(['nbr_reordering_rules'])
+            self.invalidate_cache(["nbr_reordering_rules"])
 
         result = super(ProductTemplate, self).write(values)
 
@@ -101,7 +97,7 @@ class ProductTemplate(models.Model):
 
 
 class ProductProduct(models.Model):
-    _inherit = 'product.product'
+    _inherit = "product.product"
 
     @api.model
     def create(self, vals):
@@ -112,18 +108,18 @@ class ProductProduct(models.Model):
         :param vals:
         :return:
         """
-        orderpoint_min = vals.pop('orderpoint_min', 0)
-        orderpoint_max = vals.pop('orderpoint_max', 0)
-        orderpoint_qty_multiple = vals.pop('orderpoint_qty_multiple', 0)
+        orderpoint_min = vals.pop("orderpoint_min", 0)
+        orderpoint_max = vals.pop("orderpoint_max", 0)
+        orderpoint_qty_multiple = vals.pop("orderpoint_qty_multiple", 0)
 
         result = super(ProductProduct, self).create(vals)
 
         if orderpoint_min or orderpoint_max or orderpoint_qty_multiple:
             result.product_tmpl_id.write(
                 {
-                    'orderpoint_min': orderpoint_min,
-                    'orderpoint_max': orderpoint_max,
-                    'orderpoint_qty_multiple': orderpoint_qty_multiple,
+                    "orderpoint_min": orderpoint_min,
+                    "orderpoint_max": orderpoint_max,
+                    "orderpoint_qty_multiple": orderpoint_qty_multiple,
                 }
             )
 
@@ -136,10 +132,10 @@ class ProductProduct(models.Model):
         Used only for import.
         """
         if (
-            self._context.get('force_archive_orderpoint')
-            and 'active' in values
-            and not values['active']
+            self._context.get("force_archive_orderpoint")
+            and "active" in values
+            and not values["active"]
         ):
-            ops = self.mapped('orderpoint_ids').filtered(lambda r: r.active)
-            ops.write({'active': False})
+            ops = self.mapped("orderpoint_ids").filtered(lambda r: r.active)
+            ops.write({"active": False})
         return super(ProductProduct, self).write(values)

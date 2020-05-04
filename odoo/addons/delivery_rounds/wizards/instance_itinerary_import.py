@@ -23,19 +23,17 @@ from odoo import api, fields, models
 
 
 class RoundItineraryImport(models.TransientModel):
-    _name = 'round.itinerary.import'
+    _name = "round.itinerary.import"
 
-    itinerary_id = fields.Many2one(
-        'round.itinerary', 'Itinerary', required=True
-    )
+    itinerary_id = fields.Many2one("round.itinerary", "Itinerary", required=True)
 
     @api.one
     def confirm(self):
-        act_close = {'type': 'ir.actions.act_window_close'}
-        instance_ids = self._context.get('active_ids')
+        act_close = {"type": "ir.actions.act_window_close"}
+        instance_ids = self._context.get("active_ids")
         if instance_ids is None:
             return act_close
         assert len(instance_ids) == 1, "Only 1 ID expected"
-        instance = self.env['round.instance'].browse(instance_ids)
+        instance = self.env["round.instance"].browse(instance_ids)
         instance._include_itinerary(self.itinerary_id)
         return act_close

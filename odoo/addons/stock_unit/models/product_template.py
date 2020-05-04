@@ -6,8 +6,8 @@ from odoo import fields, models
 
 
 class ProductTemplate(models.Model):
-    _inherit = 'product.template'
+    _inherit = "product.template"
 
-    unit_in_pallet = fields.Integer('Unit in pallet')
-    unit_in_box = fields.Integer('Unit in box')
-    unit_in_shrink_wrap = fields.Integer('Unit in shrink-wrap')
+    unit_in_pallet = fields.Integer("Unit in pallet")
+    unit_in_box = fields.Integer("Unit in box")
+    unit_in_shrink_wrap = fields.Integer("Unit in shrink-wrap")

@@ -10,7 +10,7 @@ from odoo import api, models, tools
 class SaleOrderLineMarginReport(models.AbstractModel):
     """This SQL view is used by QlickView."""
 
-    _name = 'sale.order.line.margin'
+    _name = "sale.order.line.margin"
 
     @api.model_cr
     def init(self):

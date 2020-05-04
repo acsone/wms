@@ -7,6 +7,6 @@ from odoo import fields, models
 
 
 class StockQuant(models.Model):
-    _inherit = 'stock.quant'
+    _inherit = "stock.quant"
 
     negative_move_id = fields.Many2one(index=True)

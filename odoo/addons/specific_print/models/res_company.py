@@ -7,7 +7,7 @@ from odoo import models
 
 
 class ResCompany(models.Model):
-    _inherit = 'res.company'
+    _inherit = "res.company"
 
     @staticmethod
     def convert_to_ascii(str_to_convert):
@@ -21,8 +21,6 @@ class ResCompany(models.Model):
         :return:
         """
         if not isinstance(str_to_convert, unicode):
-            str.decode('uft-8')
+            str.decode("uft-8")
 
-        return unicodedata.normalize('NFKD', str_to_convert).encode(
-            'ascii', 'ignore'
-        )
+        return unicodedata.normalize("NFKD", str_to_convert).encode("ascii", "ignore")

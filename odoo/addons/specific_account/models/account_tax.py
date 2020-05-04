@@ -5,9 +5,9 @@ from odoo import fields, models
 
 
 class AccountTax(models.Model):
-    _inherit = 'account.tax'
-    _description = 'Tax'
-    _order = 'sequence,id'
+    _inherit = "account.tax"
+    _description = "Tax"
+    _order = "sequence,id"
 
     # Rise decimal precision from (16, 4) to (16, 5)
     # the APB taxe needs a precision of 5 decimals

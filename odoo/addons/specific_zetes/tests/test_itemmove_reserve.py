@@ -29,7 +29,7 @@ class TestItemmoveReserve(ZetesReserveTest):
         self.assertTrue(result)
         report_id = result[0]
 
-        model_name = 'report.stock.refill.reassort'
+        model_name = "report.stock.refill.reassort"
         report = self.env[model_name].browse(report_id)
         # Create the picking
         self.picking_reserve = report.create_picking()
@@ -39,16 +39,14 @@ class TestItemmoveReserve(ZetesReserveTest):
 
         :return:
         """
-        domain = Itemmove(
-            self._default_header(), mock.MagicMock(name='Savepoint()')
-        )
+        domain = Itemmove(self._default_header(), mock.MagicMock(name="Savepoint()"))
 
-        request_params = Parameters(domain, action='requ')
+        request_params = Parameters(domain, action="requ")
         request_params.update(
             {
-                'groupNum': self.picking_reserve.id,
-                'itemMoveType': constants.MOVE_TYPE_PUT,
-                'Cri01': None,
+                "groupNum": self.picking_reserve.id,
+                "itemMoveType": constants.MOVE_TYPE_PUT,
+                "Cri01": None,
             }
         )
 
@@ -61,8 +59,7 @@ class TestItemmoveReserve(ZetesReserveTest):
         self.assertEqual(result.respCode, str(constants.RESPONSE_CODE_OK))
         self.assertEqual(result.groupNum, str(self.picking_reserve.id))
         self.assertEqual(
-            result.moveLineId,
-            '{}_{}'.format(pack_op.id, self.lot_product_1.id),
+            result.moveLineId, "{}_{}".format(pack_op.id, self.lot_product_1.id)
         )
         self.assertEqual(int(result.reqQty), 20)
         self.assertEqual(int(result.effQty), 0)
@@ -71,8 +68,8 @@ class TestItemmoveReserve(ZetesReserveTest):
         self.assertEqual(result.productDescription, self.product_1.name)
         self.assertFalse(result.productProperty1)
         self.assertFalse(result.productProperty2)
-        self.assertEqual(result.productBarcode, self.product_1.barcode or '')
-        self.assertEqual(result.scanProductBarcode, '0')
+        self.assertEqual(result.productBarcode, self.product_1.barcode or "")
+        self.assertEqual(result.scanProductBarcode, "0")
 
         # Check location
         self.assertEqual(result.sourceLC1, self.reserve_medoc.zone)
@@ -104,20 +101,18 @@ class TestItemmoveReserve(ZetesReserveTest):
         pack_op = self.picking_reserve.pack_operation_product_ids
         pack_op.ensure_one()
 
-        pack_op.pack_lot_ids.write({'qty': 20})
-        pack_op.write({'qty_done': 20})
+        pack_op.pack_lot_ids.write({"qty": 20})
+        pack_op.write({"qty_done": 20})
 
         self.assertEqual(pack_op.qty_done, 20)
 
-        domain = Itemmove(
-            self._default_header(), mock.MagicMock(name='Savepoint()')
-        )
-        request_params = Parameters(domain, action='resu')
+        domain = Itemmove(self._default_header(), mock.MagicMock(name="Savepoint()"))
+        request_params = Parameters(domain, action="resu")
         request_params.update(
             {
-                'moveLineId': pack_op.id,
-                'moveStatus': constants.MOVE_DONE,
-                'itemMoveType': constants.MOVE_TYPE_PUT,
+                "moveLineId": pack_op.id,
+                "moveStatus": constants.MOVE_DONE,
+                "itemMoveType": constants.MOVE_TYPE_PUT,
             }
         )
 
@@ -125,4 +120,4 @@ class TestItemmoveReserve(ZetesReserveTest):
         self.assertEqual(pack_op.zetes_state, constants.MOVE_DONE)
         self.assertEqual(pack_op.qty_done, 20)
         self.assertEqual(len(pack_op.pack_lot_ids), 1)
-        self.assertEqual(self.picking_reserve.state, 'done')
+        self.assertEqual(self.picking_reserve.state, "done")

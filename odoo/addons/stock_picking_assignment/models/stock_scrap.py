@@ -7,10 +7,10 @@ from odoo import api, fields, models
 
 class StockScrap(models.Model):
 
-    _inherit = 'stock.scrap'
+    _inherit = "stock.scrap"
 
     operator_id = fields.Many2one(
-        'res.users', string='Operator', copy=False, track_visibility='onchange'
+        "res.users", string="Operator", copy=False, track_visibility="onchange"
     )
 
     @api.model
@@ -18,7 +18,7 @@ class StockScrap(models.Model):
         return self.env.user.id
 
     @api.model
-    @api.returns('self', lambda value: value.id)
+    @api.returns("self", lambda value: value.id)
     def create(self, vals):
         if "operator_id" not in vals:
             vals["operator_id"] = self._get_default_operator_id()

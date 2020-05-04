@@ -19,26 +19,25 @@
 #
 ##############################################################################
 
-{'name': 'Goods Received Note',
- 'version': '10.0.1.0.1',
- 'author': "BCIM",
- 'maintainer': 'QANSEE',
- 'category': 'Delivery',
- 'complexity': 'normal',
- 'depends': [
-     'stock',
- ],
- 'website': 'http://www.bcim.be/',
- 'data': [
-     'views/grn.xml',
-     'views/stock_picking.xml',
-     'stock_sequence.xml',
-     'security/ir.model.access.csv',
-     'security/ir_rule.xml',
- ],
- 'tests': [],
- 'installable': True,
- 'auto_install': False,
- 'license': 'AGPL-3',
- 'application': False,
- }
+{
+    "name": "Goods Received Note",
+    "version": "10.0.1.0.1",
+    "author": "BCIM",
+    "maintainer": "QANSEE",
+    "category": "Delivery",
+    "complexity": "normal",
+    "depends": ["stock"],
+    "website": "http://www.bcim.be/",
+    "data": [
+        "views/grn.xml",
+        "views/stock_picking.xml",
+        "stock_sequence.xml",
+        "security/ir.model.access.csv",
+        "security/ir_rule.xml",
+    ],
+    "tests": [],
+    "installable": True,
+    "auto_install": False,
+    "license": "AGPL-3",
+    "application": False,
+}

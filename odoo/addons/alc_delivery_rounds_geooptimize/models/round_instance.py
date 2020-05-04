@@ -26,7 +26,7 @@ def seconds_to_duration(sec):
 
 class RoundInstance(models.Model):
 
-    _inherit = 'round.instance'
+    _inherit = "round.instance"
 
     geo_optimization_task_id = fields.Char(
         "Optimization task id",
@@ -42,8 +42,7 @@ class RoundInstance(models.Model):
     )
     geo_optimization_status = fields.Char(
         "Opitmization status",
-        help="Status of the optimization task provided byt the TourSolver "
-        "service.",
+        help="Status of the optimization task provided byt the TourSolver " "service.",
         readonly=True,
     )
     geo_optimization_state = fields.Selection(
@@ -58,14 +57,11 @@ class RoundInstance(models.Model):
         compute="_compute_geo_optimization_state",
     )
     geo_optimization_enabled = fields.Boolean(
-        "Enable geo optimization",
-        default=lambda a: a.get_optimization_config().enabled,
+        "Enable geo optimization", default=lambda a: a.get_optimization_config().enabled
     )
     geo_optimization_result = fields.Binary(attachment=True, readonly=True)
 
-    geo_optimization_json = fields.Serialized(
-        compute="_compute_geo_optimization_json"
-    )
+    geo_optimization_json = fields.Serialized(compute="_compute_geo_optimization_json")
     geo_optimization_error_message = fields.Text("Optimization error message")
 
     state = fields.Selection(
@@ -86,9 +82,7 @@ class RoundInstance(models.Model):
         for record in self:
             val = {}
             if record.geo_optimization_result:
-                val = json.loads(
-                    base64.b64decode(record.geo_optimization_result)
-                )
+                val = json.loads(base64.b64decode(record.geo_optimization_result))
             record.geo_optimization_json = val
 
     @api.depends("geo_optimization_status")
@@ -128,9 +122,7 @@ class RoundInstance(models.Model):
                     "The delivery round %S contains pickings for more than"
                     " one warehouse" % record.display_name
                 )
-            record.warehouse_id = self.env["stock.warehouse"].browse(
-                warehouse_ids
-            )
+            record.warehouse_id = self.env["stock.warehouse"].browse(warehouse_ids)
 
     def _deliver(self, background=True):
         self.filtered("geo_optimization_enabled")._geo_optimize()
@@ -147,8 +139,7 @@ class RoundInstance(models.Model):
         if not self.geo_optimization_json:
             return shipping_ids
         expected_partner_order = [
-            int(o["stopId"])
-            for o in self.geo_optimization_json["plannedOrders"]
+            int(o["stopId"]) for o in self.geo_optimization_json["plannedOrders"]
         ]
         return shipping_ids.sorted(
             lambda r: expected_partner_order.index(r.partner_id.id)
@@ -159,9 +150,7 @@ class RoundInstance(models.Model):
         return self.env["stock.config.settings"].get_optimization_config()
 
     def _geo_optimize(self):
-        self.env.user.notify_info(
-            _('Optimization requests sent to external system.')
-        )
+        self.env.user.notify_info(_("Optimization requests sent to external system."))
         cfg = self.get_optimization_config()
         for record in self:
             optimization_request = record._generate_optimization_request()
@@ -199,7 +188,7 @@ class RoundInstance(models.Model):
                     record.state = "optimization_failure"
         return res
 
-    @job(default_channel='root.background.stock_picking_deliver')
+    @job(default_channel="root.background.stock_picking_deliver")
     @api.multi
     def recheck_delivery_state(self):
         to_optimize = self.filtered("geo_optimization_enabled")
@@ -272,14 +261,10 @@ class RoundInstance(models.Model):
             "%s" % datetime.today().weekday()
         )
         for partner in partners:
-            phones = filter(
-                None, (partner.mobile or None, partner.phone or None)
-            )
+            phones = filter(None, (partner.mobile or None, partner.phone or None))
             order = {
                 "customerId": partner.id,
-                "fixedVisitDuration": seconds_to_duration(
-                    cfg.delivery_duration
-                ),
+                "fixedVisitDuration": seconds_to_duration(cfg.delivery_duration),
                 "id": partner.id,
                 "label": partner.display_name,
                 "phone": "| ".join(phones),
@@ -293,9 +278,7 @@ class RoundInstance(models.Model):
                 for window in delivery_windows:
                     time_windows.append(
                         {
-                            "beginTime": window.float_to_time_repr(
-                                window.start
-                            ),
+                            "beginTime": window.float_to_time_repr(window.start),
                             "endTime": window.float_to_time_repr(window.end),
                         }
                     )
@@ -305,7 +288,7 @@ class RoundInstance(models.Model):
 
     def _generate_optimization_resources(self, cfg):
         address = self.warehouse_id.partner_id
-        pattern = '%02d:%02d:00'
+        pattern = "%02d:%02d:00"
         hour = math.floor(self.time_leave_planned)
         min = round((self.time_leave_planned % 1) * 60)
         if min == 60:
@@ -314,7 +297,7 @@ class RoundInstance(models.Model):
 
         work_start_time = pattern % (hour, min)
         h, m = divmod(cfg.loading_duration, 60)
-        fixed_loading_duration = '%02d:%02d:00' % (h, m)
+        fixed_loading_duration = "%02d:%02d:00" % (h, m)
         return [
             {
                 "startX": address.partner_longitude,
@@ -345,9 +328,7 @@ class RoundInstance(models.Model):
         action = "optimize"
         optimize_url = self._get_opitization_api_url(action)
         response = requests.post(
-            optimize_url,
-            json=json_request,
-            headers={"Accept": "application/json"},
+            optimize_url, json=json_request, headers={"Accept": "application/json"}
         )
         result = self._check_optimization_response(action, response)
         if result is False:
@@ -409,12 +390,8 @@ class RoundInstance(models.Model):
         eta_delay: The delay in seconds tu use for eta
         """
         eta = datetime.now() + timedelta(seconds=eta_delay_seconds)
-        description = (
-            _("Check geo optimization status for %s") % self.display_name
-        )
-        self.with_delay(
-            eta=eta, description=description
-        )._check_optimization_status()
+        description = _("Check geo optimization status for %s") % self.display_name
+        self.with_delay(eta=eta, description=description)._check_optimization_status()
 
     def _check_optimization_response(self, action, response):
         """
@@ -425,22 +402,16 @@ class RoundInstance(models.Model):
             response.raise_for_status()
         except requests.HTTPError as http_error:
             self.geo_optimization_error_message = http_error.message
-            self._notify_optimization_error(
-                self.geo_optimization_error_message
-            )
+            self._notify_optimization_error(self.geo_optimization_error_message)
             _logger.exception(
-                "Optimization action '%s' of %s failed",
-                action,
-                self.display_name,
+                "Optimization action '%s' of %s failed", action, self.display_name
             )
             self.geo_optimization_status = "failed"
             return False
         result = response.json()
         if result["status"] == "ERROR":
             self.geo_optimization_error_message = result["message"]
-            self._notify_optimization_error(
-                self.geo_optimization_error_message
-            )
+            self._notify_optimization_error(self.geo_optimization_error_message)
             self.geo_optimization_status = "failed"
             return False
         return result
@@ -487,8 +458,6 @@ class RoundInstance(models.Model):
             self.write(
                 {
                     "geo_optimization_status": "failed",
-                    "geo_optimization_error_message": "\n".join(
-                        error_messages
-                    ),
+                    "geo_optimization_error_message": "\n".join(error_messages),
                 }
             )

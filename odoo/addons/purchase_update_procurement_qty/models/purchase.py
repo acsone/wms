@@ -7,9 +7,9 @@ from odoo.tools import float_compare
 
 
 class PurchaseOrderLine(models.Model):
-    _inherit = 'purchase.order.line'
+    _inherit = "purchase.order.line"
 
-    @api.constrains('product_qty')
+    @api.constrains("product_qty")
     def _check_qty_procurement(self):
         """check that the purchased qty is greater than the qty comming from MTO
         procurements"""
@@ -18,9 +18,9 @@ class PurchaseOrderLine(models.Model):
             if mto_qty > rec.product_qty:
                 raise exceptions.ValidationError(
                     _(
-                        'You cannot decrease the purchased quantity of product '
-                        '%s below %s %s, which is the quantity requested by '
-                        'Make To Order procurements.'
+                        "You cannot decrease the purchased quantity of product "
+                        "%s below %s %s, which is the quantity requested by "
+                        "Make To Order procurements."
                     )
                     % (rec.product.name, mto_qty, rec.product_uom.name)
                 )

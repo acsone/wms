@@ -13,14 +13,14 @@ def column_exists(cr, tablename, columnname):
 def migrate(cr, version):
     if not version:
         return
-    if not column_exists(cr, 'sale_order_line', 'product_type'):
+    if not column_exists(cr, "sale_order_line", "product_type"):
         cr.execute(
             """
             ALTER TABLE sale_order_line
             ADD COLUMN product_type varchar;
         """
         )
-    if not column_exists(cr, 'sale_order_line', 'is_consignment'):
+    if not column_exists(cr, "sale_order_line", "is_consignment"):
         cr.execute(
             """
             ALTER TABLE sale_order_line

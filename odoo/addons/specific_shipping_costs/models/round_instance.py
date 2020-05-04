@@ -6,7 +6,7 @@ from odoo import api, models
 
 
 class RoundInstance(models.Model):
-    _inherit = 'round.instance'
+    _inherit = "round.instance"
 
     @api.multi
     def button_done(self):

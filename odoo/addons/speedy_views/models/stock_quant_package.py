@@ -7,6 +7,6 @@ from odoo import fields, models
 
 
 class StockQuantPackage(models.Model):
-    _inherit = 'stock.quant.package'
+    _inherit = "stock.quant.package"
 
     parent_id = fields.Many2one(index=True)

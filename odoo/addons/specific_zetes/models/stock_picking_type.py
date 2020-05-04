@@ -8,18 +8,18 @@ from .. import constants
 
 
 class StockPickingType(models.Model):
-    _inherit = 'stock.picking.type'
+    _inherit = "stock.picking.type"
 
     zetes_picking_type = fields.Selection(
         [
-            (constants.PICKING_ASSIGNMENT, 'Customer'),
-            (constants.RANGEMENT_ASSIGNMENT, 'Rangement'),
-            (constants.REASSORT_ASSIGNMENT, 'Reassort'),
+            (constants.PICKING_ASSIGNMENT, "Customer"),
+            (constants.RANGEMENT_ASSIGNMENT, "Rangement"),
+            (constants.REASSORT_ASSIGNMENT, "Reassort"),
         ],
         string="Picking type",
     )
 
-    passport = fields.Boolean('Enable passports')
+    passport = fields.Boolean("Enable passports")
 
     def toggle_passport(self):
         for rec in self:

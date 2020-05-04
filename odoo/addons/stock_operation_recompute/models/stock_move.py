@@ -12,26 +12,24 @@ _logger = logging.getLogger(__name__)
 
 
 class StockMove(models.Model):
-    _inherit = 'stock.move'
+    _inherit = "stock.move"
 
-    def _recompute_pack_op(self):
-        picking = self.mapped('picking_id')
+    def _recompute_pack_op(self):  # noqa: C901
+        picking = self.mapped("picking_id")
         picking.ensure_one()
 
         # Re-reserve quants
         self.action_assign(no_prepare=True)
 
         # Backup qty done
-        ops = self.mapped('linked_move_operation_ids.operation_id')
+        ops = self.mapped("linked_move_operation_ids.operation_id")
         for op in ops:
             _logger.debug(
-                'Old operation %s %s'
+                "Old operation %s %s"
                 % (
                     op,
                     [
-                        '{}: {}/{}'.format(
-                            plot.lot_id, plot.qty, plot.qty_todo
-                        )
+                        "{}: {}/{}".format(plot.lot_id, plot.qty, plot.qty_todo)
                         for plot in op.pack_lot_ids
                     ],
                 )
@@ -39,7 +37,7 @@ class StockMove(models.Model):
         qty_done = {}
         for op in ops:
             done = qty_done.setdefault(op.location_id.id, {})
-            if op.product_id.tracking == 'none' and op.qty_done:
+            if op.product_id.tracking == "none" and op.qty_done:
                 # Set 0 as lot_id for products without tracking
                 done[0] = op.qty_done
                 continue
@@ -49,11 +47,9 @@ class StockMove(models.Model):
 
         # Check if product additional has been done
         additional_ctx = {}
-        additional_move = ops.mapped('additional_move_id')
+        additional_move = ops.mapped("additional_move_id")
         if any(
-            additional_move.mapped(
-                'linked_move_operation_ids.operation_id.qty_done'
-            )
+            additional_move.mapped("linked_move_operation_ids.operation_id.qty_done")
         ):
             # In this case, we support only recomputation for product at a time
             additional_move.ensure_one()
@@ -64,14 +60,14 @@ class StockMove(models.Model):
 
         # Re-generate pack ops - similar to do_prepare_partial
         forced_qties = {}
-        picking_quants = self.env['stock.quant']
+        picking_quants = self.env["stock.quant"]
         for move in self:
-            if move.state not in ('assigned', 'confirmed', 'waiting'):
+            if move.state not in ("assigned", "confirmed", "waiting"):
                 continue
             move_quants = move.reserved_quant_ids
             picking_quants |= move_quants
             forced_qty = 0.0
-            if move.state == 'assigned':
+            if move.state == "assigned":
                 qty = move.product_uom._compute_quantity(
                     move.product_uom_qty, move.product_id.uom_id, round=False
                 )
@@ -80,9 +76,7 @@ class StockMove(models.Model):
             # incoming, forced_qty > 0
             if (
                 float_compare(
-                    forced_qty,
-                    0,
-                    precision_rounding=move.product_id.uom_id.rounding,
+                    forced_qty, 0, precision_rounding=move.product_id.uom_id.rounding
                 )
                 > 0
             ):
@@ -90,25 +84,21 @@ class StockMove(models.Model):
                     forced_qties[move.product_id] += forced_qty
                 else:
                     forced_qties[move.product_id] = forced_qty
-        new_ops = self.env['stock.pack.operation']
+        new_ops = self.env["stock.pack.operation"]
         for vals in picking.with_context(**additional_ctx)._prepare_pack_ops(
             picking_quants, forced_qties
         ):
             new_ops |= new_ops.create(vals)
         # New pack operations could contain additional products.
         # Filter them out
-        new_ops = new_ops.filtered(
-            lambda o: o.product_id in self.mapped('product_id')
-        )
+        new_ops = new_ops.filtered(lambda o: o.product_id in self.mapped("product_id"))
         if additional_ctx:
-            new_ops.write({'additional_move_id': additional_move.id})
+            new_ops.write({"additional_move_id": additional_move.id})
 
         # Recover the qty done
         for location_id, lines in qty_done.iteritems():
             for lot_id, qty in lines.iteritems():
-                nop = new_ops.filtered(
-                    lambda op: op.location_id.id == location_id
-                )
+                nop = new_ops.filtered(lambda op: op.location_id.id == location_id)
                 # lot_id == 0 on products without tracking
                 if not lot_id:
                     nop.qty_done = qty
@@ -119,8 +109,8 @@ class StockMove(models.Model):
                     if not nol:
                         raise UserError(
                             _(
-                                'Internal Error. '
-                                'Cannot match done lot in new pack operation'
+                                "Internal Error. "
+                                "Cannot match done lot in new pack operation"
                             )
                         )
                     nol.qty = qty
@@ -131,21 +121,19 @@ class StockMove(models.Model):
         picking.do_recompute_remaining_quantities()
         for pack in new_ops:
             pack.ordered_qty = sum(
-                pack.mapped('linked_move_operation_ids')
-                .mapped('move_id')
-                .filtered(lambda r: r.state != 'cancel')
-                .mapped('ordered_qty')
+                pack.mapped("linked_move_operation_ids")
+                .mapped("move_id")
+                .filtered(lambda r: r.state != "cancel")
+                .mapped("ordered_qty")
             )
 
-        for new_mop in self.mapped('linked_move_operation_ids.operation_id'):
+        for new_mop in self.mapped("linked_move_operation_ids.operation_id"):
             _logger.debug(
-                'New operation %s %s'
+                "New operation %s %s"
                 % (
                     new_mop,
                     [
-                        '{}: {}/{}'.format(
-                            plot.lot_id, plot.qty, plot.qty_todo
-                        )
+                        "{}: {}/{}".format(plot.lot_id, plot.qty, plot.qty_todo)
                         for plot in new_mop.pack_lot_ids
                     ],
                 )

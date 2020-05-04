@@ -10,15 +10,11 @@ class TestActAsView(SavepointCase):
     @classmethod
     def setUpClass(cls):
         super(TestActAsView, cls).setUpClass()
-        cls.location = cls.env.ref('stock.stock_location_stock')
+        cls.location = cls.env.ref("stock.stock_location_stock")
 
     def _create_inventory(self, location):
-        return self.env['stock.inventory'].create(
-            {
-                'name': 'Test Inventory',
-                'filter': 'none',
-                'location_id': location.id,
-            }
+        return self.env["stock.inventory"].create(
+            {"name": "Test Inventory", "filter": "none", "location_id": location.id}
         )
 
     def test_inventory_allowed(self):

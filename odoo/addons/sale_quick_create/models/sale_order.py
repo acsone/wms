@@ -9,7 +9,7 @@ QUICK_EDIT_MODE = "force_quick_edit"
 
 class SaleOrder(models.Model):
 
-    _inherit = 'sale.order'
+    _inherit = "sale.order"
 
     is_quick_edited = fields.Boolean()
 
@@ -17,19 +17,19 @@ class SaleOrder(models.Model):
     def _is_in_quick_edit_mode(self):
         return self.env.context.get(QUICK_EDIT_MODE, False)
 
-    @api.depends('carrier_id', 'order_line')
+    @api.depends("carrier_id", "order_line")
     def _compute_delivery_price(self):
         if self._is_in_quick_edit_mode():
             return
         return super(SaleOrder, self)._compute_delivery_price()
 
-    @api.depends('order_line.price_total')
+    @api.depends("order_line.price_total")
     def _amount_all(self):
         if self._is_in_quick_edit_mode():
             return
         return super(SaleOrder, self)._amount_all()
 
-    @api.depends('state', 'order_line.invoice_status')
+    @api.depends("state", "order_line.invoice_status")
     def _get_invoiced(self):
         if self._is_in_quick_edit_mode():
             return
@@ -77,16 +77,12 @@ class SaleOrder(models.Model):
             "type": "ir.actions.act_window",
             "view_mode": "tree",
             "res_model": "sale.order.line",
-            "view_id": self.env.ref(
-                "sale_quick_create.sale_order_line_tree_edit"
-            ).id,
-            "search_view_id": self.env.ref(
-                "sale.view_sales_order_line_filter"
-            ).id,
-            "domain": [('order_id', '=', self.id)],
+            "view_id": self.env.ref("sale_quick_create.sale_order_line_tree_edit").id,
+            "search_view_id": self.env.ref("sale.view_sales_order_line_filter").id,
+            "domain": [("order_id", "=", self.id)],
             "context": {
-                'default_order_id': self.id,
-                "readonly_by_pass": ['product_qty_unavailable'],
+                "default_order_id": self.id,
+                "readonly_by_pass": ["product_qty_unavailable"],
                 QUICK_EDIT_MODE: True,
             },
         }

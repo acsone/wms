@@ -4,22 +4,18 @@
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl)
 
 {
-    'name': 'Stock Picking Backorder',
-    'version': '10.0.1.0.0',
-    'author': 'BCIM, Camptocamp',
-    'license': 'LGPL-3',
-    'category': 'Warehouse',
-    'depends': [
-        'specific_helpdesk',  # requires LGPL
-        'stock_grn',
-        'stock_receive_lot',
+    "name": "Stock Picking Backorder",
+    "version": "10.0.1.0.0",
+    "author": "BCIM, Camptocamp",
+    "license": "LGPL-3",
+    "category": "Warehouse",
+    "depends": ["specific_helpdesk", "stock_grn", "stock_receive_lot"],  # requires LGPL
+    "data": [
+        "views/res_partner.xml",
+        "views/stock_backorder_reason.xml",
+        "wizards/stock_backorder_choice.xml",
+        "security/ir.model.access.csv",
+        "data/stock_backorder_reason.xml",
     ],
-    'data': [
-        'views/res_partner.xml',
-        'views/stock_backorder_reason.xml',
-        'wizards/stock_backorder_choice.xml',
-        'security/ir.model.access.csv',
-        'data/stock_backorder_reason.xml',
-    ],
-    'installable': True,
+    "installable": True,
 }

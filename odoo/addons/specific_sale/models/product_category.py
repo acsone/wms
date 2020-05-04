@@ -6,7 +6,7 @@ from odoo import api, models, tools
 
 
 class ProductCategory(models.Model):
-    _inherit = 'product.category'
+    _inherit = "product.category"
 
     @api.multi
     def has_for_parent(self, category_id):
@@ -45,7 +45,7 @@ class ProductCategory(models.Model):
     @api.multi
     def write(self, vals):
         result = super(ProductCategory, self).write(vals)
-        if 'parent_id' in vals:
+        if "parent_id" in vals:
             self._has_for_parent.clear_cache(self)
         return result
 

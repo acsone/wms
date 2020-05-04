@@ -13,7 +13,7 @@ _logger = logging.getLogger(__name__)
 
 
 class AccountBankStatementImport(models.TransientModel):
-    _inherit = 'account.bank.statement.import'
+    _inherit = "account.bank.statement.import"
 
     @api.multi
     def import_file(self):
@@ -42,7 +42,7 @@ class AccountBankStatementImport(models.TransientModel):
         statement_ids = []
         notifications = []
         for coda in codas:
-            encoded_coda = '\n'.join(coda).encode('windows-1252')
+            encoded_coda = "\n".join(coda).encode("windows-1252")
             currency_code, account_number, stmts_vals = self.with_context(
                 active_id=self.ids[0]
             )._parse_file(encoded_coda)
@@ -52,15 +52,13 @@ class AccountBankStatementImport(models.TransientModel):
             sanitized_account_number = sanitize_account_number(account_number)
 
             # Check if the account number is valid
-            journal_obj = self.env['account.journal']
-            journal = journal_obj.browse(
-                self.env.context.get('journal_id', [])
-            )
+            journal_obj = self.env["account.journal"]
+            journal = journal_obj.browse(self.env.context.get("journal_id", []))
             is_valid_account = self._check_journal_bank_account(
                 journal, sanitized_account_number
             )
             if journal.bank_account_id and not is_valid_account:
-                _logger.info('Skip the CODA for account %s' % account_number)
+                _logger.info("Skip the CODA for account %s" % account_number)
                 continue
 
             # Try to find the currency and journal in odoo
@@ -81,15 +79,13 @@ class AccountBankStatementImport(models.TransientModel):
             ):
                 raise UserError(
                     _(
-                        'You have to set a Default Debit Account and a Default '
-                        'Credit Account for the journal: %s'
+                        "You have to set a Default Debit Account and a Default "
+                        "Credit Account for the journal: %s"
                     )
                     % journal.name
                 )
             # Prepare statement data to be used for bank statements creation
-            stmts_vals = self._complete_stmts_vals(
-                stmts_vals, journal, account_number
-            )
+            stmts_vals = self._complete_stmts_vals(stmts_vals, journal, account_number)
             # Create the bank statements
             new_statement_ids, new_notifications = self._create_bank_statements(
                 stmts_vals
@@ -99,21 +95,18 @@ class AccountBankStatementImport(models.TransientModel):
 
             # Now that the import worked out, set it as the
             # bank_statements_source of the journal
-            journal.bank_statements_source = 'file_import'
+            journal.bank_statements_source = "file_import"
 
         if not statement_ids:
-            raise UserError(_('No coda imported. Please check the journal'))
+            raise UserError(_("No coda imported. Please check the journal"))
 
         # Finally dispatch to reconciliation interface
-        action = self.env.ref('account.action_bank_reconcile_bank_statements')
+        action = self.env.ref("account.action_bank_reconcile_bank_statements")
         return {
-            'name': action.name,
-            'tag': action.tag,
-            'context': {
-                'statement_ids': statement_ids,
-                'notifications': notifications,
-            },
-            'type': 'ir.actions.client',
+            "name": action.name,
+            "tag": action.tag,
+            "context": {"statement_ids": statement_ids, "notifications": notifications},
+            "type": "ir.actions.client",
         }
 
     @api.multi
@@ -129,7 +122,7 @@ class AccountBankStatementImport(models.TransientModel):
         :param data:
         :return:
         """
-        recordlist = unicode(data, 'windows-1252', 'strict').split('\n')
+        recordlist = unicode(data, "windows-1252", "strict").split("\n")
 
         splitted_codas = []
         current_coda = None
@@ -138,13 +131,13 @@ class AccountBankStatementImport(models.TransientModel):
                 continue
 
             # Code 0 => the beginning of the statement
-            if line[0] == '0':
+            if line[0] == "0":
                 current_coda = []
 
             current_coda.append(line)
 
             # Code 9 => the end of the statement
-            if line[0] == '9':
+            if line[0] == "9":
                 splitted_codas.append(current_coda)
 
         return splitted_codas

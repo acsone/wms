@@ -17,9 +17,9 @@ class ProductProductListener(Component):
     update on product_product is never called.
     """
 
-    _name = 'esb.product.product.export.listener'
-    _inherit = 'base.connector.listener'
-    _apply_on = ['product.product']
+    _name = "esb.product.product.export.listener"
+    _inherit = "base.connector.listener"
+    _apply_on = ["product.product"]
 
     EXPORT_DESCRIPTION = u"Export product {} stock state change to ESB"
 
@@ -27,13 +27,11 @@ class ProductProductListener(Component):
     def on_record_create(self, record, fields=None):
         if not record._is_product_fit_to_export():
             return
-        product_code = record.default_code or ''
+        product_code = record.default_code or ""
         record.with_delay(
             description=self.EXPORT_DESCRIPTION.format(product_code),
             identity_key=identity_exact,
             priority=25,
         ).esb_export_record(
-            timestamp=self.env.ref(
-                'connector_esb.esb_timestamp_stock_update_single'
-            )
+            timestamp=self.env.ref("connector_esb.esb_timestamp_stock_update_single")
         )

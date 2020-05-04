@@ -7,62 +7,54 @@ from openerp.osv.expression import AND, OR
 
 
 class WizardValuationHistory(models.TransientModel):
-    _inherit = 'wizard.valuation.history'
+    _inherit = "wizard.valuation.history"
 
     date = fields.Datetime(default=lambda self: self._default_date())
 
     def _default_date(self):
-        materialized_model = self.env['stock.history.materialized']
+        materialized_model = self.env["stock.history.materialized"]
         refresh_date = materialized_model.get_refresh_date()
         return refresh_date or fields.Datetime.now()
 
     @api.multi
     def open_table(self):
-        materialized_model = self.env['stock.history.materialized']
+        materialized_model = self.env["stock.history.materialized"]
         refresh_date = materialized_model.get_refresh_date()
         date_dt = fields.Datetime.from_string(self.date)
-        if not refresh_date or date_dt > fields.Datetime.from_string(
-            refresh_date
-        ):
+        if not refresh_date or date_dt > fields.Datetime.from_string(refresh_date):
             materialized_model.refresh_view()
         res = super(WizardValuationHistory, self).open_table()
-        res['context']['search_default_group_by_product'] = False
-        res['context']['search_default_group_by_location'] = False
+        res["context"]["search_default_group_by_product"] = False
+        res["context"]["search_default_group_by_location"] = False
         now = fields.Datetime.now()
-        domain = AND([[('date', '>=', self.date)], [('date', '<=', now)]])
-        domain = OR([domain, [('move_id', '=', False)]])
+        domain = AND([[("date", ">=", self.date)], [("date", "<=", now)]])
+        domain = OR([domain, [("move_id", "=", False)]])
 
-        res['domain'] = domain
+        res["domain"] = domain
 
         return res
 
 
 class StockHistoryMaterialized(models.AbstractModel):
-    _name = 'stock.history.materialized'
+    _name = "stock.history.materialized"
 
     @api.model
     def get_refresh_date(self):
-        return self.env['ir.config_parameter'].get_param(
-            'stock_history_refresh_date'
-        )
+        return self.env["ir.config_parameter"].get_param("stock_history_refresh_date")
 
     @api.model
     def set_refresh_date(self, date=None):
         if date is None:
             date = fields.Datetime.now()
-        self.env['ir.config_parameter'].set_param(
-            'stock_history_refresh_date', date
-        )
+        self.env["ir.config_parameter"].set_param("stock_history_refresh_date", date)
 
     @api.model
     def refresh_view(self):
-        self.env.cr.execute('refresh materialized view %s' % self._table)
+        self.env.cr.execute("refresh materialized view %s" % self._table)
         self.set_refresh_date()
 
     def init(self):
-        self.env.cr.execute(
-            "DROP MATERIALIZED VIEW IF EXISTS %s CASCADE" % self._table
-        )
+        self.env.cr.execute("DROP MATERIALIZED VIEW IF EXISTS %s CASCADE" % self._table)
         self.env.cr.execute(
             """
             CREATE MATERIALIZED VIEW %s AS (
@@ -214,9 +206,7 @@ class StockHistoryMaterialized(models.AbstractModel):
             % (self._table,)
         )  # noqa
         self.env.cr.execute(
-            "CREATE UNIQUE INDEX pk_{} ON {} (id)".format(
-                self._table, self._table
-            )
+            "CREATE UNIQUE INDEX pk_{} ON {} (id)".format(self._table, self._table)
         )
         self.env.cr.execute(
             "CREATE INDEX %s_location_id_idx ON %s (location_id)"
@@ -231,12 +221,11 @@ class StockHistoryMaterialized(models.AbstractModel):
             % (self._table, self._table)
         )
         self.env.cr.execute(
-            "CREATE INDEX %s_date_idx ON %s (date)"
-            % (self._table, self._table)
+            "CREATE INDEX %s_date_idx ON %s (date)" % (self._table, self._table)
         )
         self.set_refresh_date(date=False)
         cron = self.env.ref(
-            'stock_valuation.refresh_materialized_view',
+            "stock_valuation.refresh_materialized_view",
             # at install, won't exist yet
             raise_if_not_found=False,
         )
@@ -246,22 +235,20 @@ class StockHistoryMaterialized(models.AbstractModel):
 
 
 class StockHistory(models.Model):
-    _inherit = 'stock.history'
+    _inherit = "stock.history"
 
-    cost_method = fields.Char(related='product_id.cost_method', readonly=True)
-    product_supplier_id = fields.Many2one(
-        'res.partner', 'Supplier', readonly=True
-    )
+    cost_method = fields.Char(related="product_id.cost_method", readonly=True)
+    product_supplier_id = fields.Many2one("res.partner", "Supplier", readonly=True)
 
     product_last_in_date = fields.Datetime(
-        'Last Purchasing Date', related='product_id.product_last_in_date'
+        "Last Purchasing Date", related="product_id.product_last_in_date"
     )
     product_last_out_date = fields.Datetime(
-        'Last Selling Date', related='product_id.product_last_out_date'
+        "Last Selling Date", related="product_id.product_last_out_date"
     )
 
     def _compute_inventory_value(self):
-        history_date = self._context.get('history_date', fields.Datetime.now())
+        history_date = self._context.get("history_date", fields.Datetime.now())
         for rec in self:
             # get price_unit at date from product_price_history
             history_price = rec.product_id.get_history_price(
@@ -271,17 +258,10 @@ class StockHistory(models.Model):
 
     @api.model
     def read_group(
-        self,
-        domain,
-        fields,
-        groupby,
-        offset=0,
-        limit=None,
-        orderby=False,
-        lazy=True,
+        self, domain, fields, groupby, offset=0, limit=None, orderby=False, lazy=True
     ):
-        if 'inventory_value' in fields:
-            fields.remove('inventory_value')
+        if "inventory_value" in fields:
+            fields.remove("inventory_value")
         res = super(StockHistory, self).read_group(
             domain,
             fields,

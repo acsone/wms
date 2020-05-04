@@ -8,9 +8,9 @@ from odoo.tools.sql import drop_view_if_exists
 
 
 class ReportStockRefillArrange(models.Model):
-    _name = 'report.stock.refill.arrange'
+    _name = "report.stock.refill.arrange"
     _auto = False
-    _order = 'refill_priority_arrange desc'
+    _order = "refill_priority_arrange desc"
 
     def init(self):
         drop_view_if_exists(self.env.cr, self._table)
@@ -31,19 +31,17 @@ class ReportStockRefillArrange(models.Model):
             "CREATE OR REPLACE VIEW " + self._table + " AS (" + query + ")"
         )
 
-    product_id = fields.Many2one('product.product', 'Product')
-    product_uom_id = fields.Many2one(
-        related='product_id.uom_id', readonly=True
-    )
-    location_id = fields.Many2one('stock.location', 'Location')
-    lot_id = fields.Many2one('stock.production.lot', 'Lot')
-    qty = fields.Float('Quantity')
-    reservation_id = fields.Many2one('stock.move', 'Reservation')
+    product_id = fields.Many2one("product.product", "Product")
+    product_uom_id = fields.Many2one(related="product_id.uom_id", readonly=True)
+    location_id = fields.Many2one("stock.location", "Location")
+    lot_id = fields.Many2one("stock.production.lot", "Lot")
+    qty = fields.Float("Quantity")
+    reservation_id = fields.Many2one("stock.move", "Reservation")
 
-    qty_in_bin = fields.Float('Quantity in bin')
-    qty_in_bin_available = fields.Float('Quantity available in bin')
-    qty_in_parking = fields.Float('Quantity in parking')
-    qty_in_reserve = fields.Float('Quantity in reserve')
+    qty_in_bin = fields.Float("Quantity in bin")
+    qty_in_bin_available = fields.Float("Quantity available in bin")
+    qty_in_parking = fields.Float("Quantity in parking")
+    qty_in_reserve = fields.Float("Quantity in reserve")
 
     confirmed_qty = fields.Integer(
         "Quantity to pick", help="Remaining quantity to pick"
@@ -72,15 +70,15 @@ class ReportStockRefillArrange(models.Model):
     )
 
     average_qty = fields.Integer(
-        'Average daily usage',
+        "Average daily usage",
         help="Computed with an horizon of 1 week assuming 5 working days",
     )
     average_count = fields.Integer(
-        'Average daily customer',
+        "Average daily customer",
         help="Computed with an horizon of 1 week assuming 5 working days",
     )
 
-    refill_priority_arrange = fields.Integer('Arrange Priority')
+    refill_priority_arrange = fields.Integer("Arrange Priority")
 
     def create_picking(self):
         self.ensure_one()
@@ -88,17 +86,17 @@ class ReportStockRefillArrange(models.Model):
         picking_type = self.location_id.barcode_picking_type_id
         if not picking_type:
             raise UserError(
-                _('Missing Operation Type on Location %s')
+                _("Missing Operation Type on Location %s")
                 % self.location_id.display_name
             )
-        picking = self.env['stock.picking'].create(
+        picking = self.env["stock.picking"].create(
             {
-                'move_type': 'direct',
-                'company_id': self.location_id.company_id.id,
-                'picking_type_id': picking_type.id,
-                'origin': 'arrange',
-                'location_id': self.location_id.id,
-                'location_dest_id': picking_type.default_location_dest_id.id,
+                "move_type": "direct",
+                "company_id": self.location_id.company_id.id,
+                "picking_type_id": picking_type.id,
+                "origin": "arrange",
+                "location_id": self.location_id.id,
+                "location_dest_id": picking_type.default_location_dest_id.id,
             }
         )
         picking.button_fillwithstock()

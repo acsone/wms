@@ -20,19 +20,15 @@
 ##############################################################################
 
 {
-    'name': 'Stock Picking Sequence',
-    'version': '1.0',
-    'author': "BCIM",
-    'maintainer': 'Camptocamp',
-    'category': 'Stock Management',
-    'depends': [
-        'stock',
-    ],
-    'data': [
-        'views/picking.xml',
-    ],
-    'installable': True,
-    'auto_install': False,
-    'license': 'AGPL-3',
-    'application': False,
+    "name": "Stock Picking Sequence",
+    "version": "1.0",
+    "author": "BCIM",
+    "maintainer": "Camptocamp",
+    "category": "Stock Management",
+    "depends": ["stock"],
+    "data": ["views/picking.xml"],
+    "installable": True,
+    "auto_install": False,
+    "license": "AGPL-3",
+    "application": False,
 }

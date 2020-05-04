@@ -17,11 +17,11 @@ class Report(models.Model):
         report_obj = report.env[report.model]
         docs = report_obj.browse(oids)
         docargs = {
-            'doc_ids': oids,
-            'doc_model': report.model,
-            'docs': docs,
-            'report': report,
-            'qty': qty,
+            "doc_ids": oids,
+            "doc_model": report.model,
+            "docs": docs,
+            "report": report,
+            "qty": qty,
         }
         template = report.report_name
         html = self.render(template, docargs)
@@ -29,19 +29,18 @@ class Report(models.Model):
         try:
             root = lxml.html.fromstring(html)
             match_klass = (
-                "//div[contains(concat(' ', normalize-space(@class), ' '), "
-                "' {} ')]"
+                "//div[contains(concat(' ', normalize-space(@class), ' '), " "' {} ')]"
             )
             for x in xrange(qty):
-                for node in root.xpath(match_klass.format('raw')):
+                for node in root.xpath(match_klass.format("raw")):
                     text += node.text
         except lxml.etree.XMLSyntaxError:
             pass
-        text = text.replace('\n', '')
+        text = text.replace("\n", "")
         if not isinstance(text, unicode):
-            text = text.decode('utf-8')
-        nfkd_form = unicodedata.normalize('NFKD', text)
+            text = text.decode("utf-8")
+        nfkd_form = unicodedata.normalize("NFKD", text)
         text = u"".join([c for c in nfkd_form if not unicodedata.combining(c)])
-        text = text.encode('ASCII', 'ignore')
-        text = text.decode('string_escape')
+        text = text.encode("ASCII", "ignore")
+        text = text.decode("string_escape")
         return text

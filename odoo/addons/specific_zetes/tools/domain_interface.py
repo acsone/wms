@@ -36,9 +36,9 @@ class Savepoint(object):
 
 
 class DomainInterface(object):
-    EXAMPLE_REQU = ''
-    EXAMPLE_RESP = ''
-    EXAMPLE_RESU = ''
+    EXAMPLE_REQU = ""
+    EXAMPLE_RESP = ""
+    EXAMPLE_RESU = ""
     REQU = ()
     RESP = ()
     RESU = ()
@@ -51,7 +51,7 @@ class DomainInterface(object):
         # Retrieve the current user
         operator_code = header[constants.USER_INDEX]
         self._operator_user = (
-            self.request.env['res.users'].sudo().get_user(operator_code)
+            self.request.env["res.users"].sudo().get_user(operator_code)
         )
         if self._operator_user:
             self.request.context = frozendict(
@@ -65,16 +65,11 @@ class DomainInterface(object):
             # permissions.
             self.request._env = None
 
-        _logger.debug(
-            u'User: {}'.format(self._operator_user.name or 'no user')
-        )
+        _logger.debug(u"User: {}".format(self._operator_user.name or "no user"))
 
     def __repr__(self):
-        return u'{}({!r}, {!r}, {!r})'.format(
-            self.__class__.__name__,
-            self._header,
-            self._savepoint,
-            self.request,
+        return u"{}({!r}, {!r}, {!r})".format(
+            self.__class__.__name__, self._header, self._savepoint, self.request
         )
 
     def rollback_to_savepoint(self):
@@ -96,7 +91,7 @@ class DomainInterface(object):
         :param params:
         :return:
         """
-        raise NotImplementedError('Please implement this method')
+        raise NotImplementedError("Please implement this method")
 
     def resu(self, params):
         """
@@ -109,11 +104,11 @@ class DomainInterface(object):
         :param params:
         :return:
         """
-        raise NotImplementedError('Please implement this method')
+        raise NotImplementedError("Please implement this method")
 
 
 class Parameters:
-    def __init__(self, domain, action='resp', values=None):
+    def __init__(self, domain, action="resp", values=None):
         """
         Init the parameter
         :param domain: DomainInterface<class>: a link to the domain
@@ -123,9 +118,7 @@ class Parameters:
         labels = getattr(domain, action.upper())
 
         new_header = list(domain._header)
-        method = '{}_{}'.format(
-            action.upper(), domain.__class__.__name__.upper()
-        )
+        method = "{}_{}".format(action.upper(), domain.__class__.__name__.upper())
         new_header[constants.METHOD_INDEX] = method
 
         self.__dict__.update(dict(zip(constants.HEADER_LABELS, new_header)))
@@ -149,12 +142,12 @@ class Parameters:
         If the value of the parameter has an example we display this value
         :return:
         """
-        title = '===========> {}_{} <==========='.format(
+        title = "===========> {}_{} <===========".format(
             self._action.upper(), self._domain.__class__.__name__.upper()
         )
 
         if not self._labels:
-            return '{}\nNO VALUES'.format(title)
+            return "{}\nNO VALUES".format(title)
 
         labels = constants.HEADER_LABELS + self._labels
         default_values = self.get_example()
@@ -164,26 +157,24 @@ class Parameters:
             key = labels[i]
 
             if not i:
-                values.append('----------- header -----------')
+                values.append("----------- header -----------")
             if i == len(constants.HEADER_LABELS):
-                values.append('----------- values -----------')
+                values.append("----------- values -----------")
 
-            value = getattr(self, key, '')
+            value = getattr(self, key, "")
             if isinstance(value, unicode):
-                value = value.encode('utf-8').replace(',', ' ')
+                value = value.encode("utf-8").replace(",", " ")
 
             elif isinstance(value, (int, float)):
                 value = str(value)
 
             if i < len(default_values) and default_values[i]:
-                line = '{}. {}: {} ({})'.format(
-                    i + 1, key, value, default_values[i]
-                )
+                line = "{}. {}: {} ({})".format(i + 1, key, value, default_values[i])
             else:
-                line = '{}. {}: {}'.format(i + 1, key, value)
+                line = "{}. {}: {}".format(i + 1, key, value)
             values.append(line)
 
-        return '{}\n{}'.format(title, '\n'.join(values))
+        return "{}\n{}".format(title, "\n".join(values))
 
     def update(self, values):
         """
@@ -199,18 +190,18 @@ class Parameters:
         :return: None
         """
         action = self._action.upper()
-        example_str = getattr(self._domain, 'EXAMPLE_{}'.format(action), [])
+        example_str = getattr(self._domain, "EXAMPLE_{}".format(action), [])
         if not example_str:
             return []
 
-        return example_str.split(',')
+        return example_str.split(",")
 
     def get_labels(self):
         """
         Return a list with all labels
         :return: None
         """
-        return [key for key in self.__dict__.keys() if not key.startswith('_')]
+        return [key for key in self.__dict__.keys() if not key.startswith("_")]
 
     def format(self):
         """
@@ -220,17 +211,16 @@ class Parameters:
         """
         ordered_values = []
         for label in constants.HEADER_LABELS + self._labels:
-            value = getattr(self, label, '')
+            value = getattr(self, label, "")
             if not value and type(value) is not int:
-                value = ''
+                value = ""
             elif isinstance(value, (str, unicode)):
-                value = value.encode('utf-8').replace(',', ' ')
+                value = value.encode("utf-8").replace(",", " ")
             elif isinstance(value, (int, float)):
                 value = str(value)
             else:
                 raise Exception(
-                    _('Cannot format the value %s with type %s')
-                    % (value, type(value))
+                    _("Cannot format the value %s with type %s") % (value, type(value))
                 )
 
             ordered_values.append(value)
@@ -240,9 +230,9 @@ class Parameters:
             self.check(ordered_values)
 
         # Insert an empty value (used by Zetes)
-        ordered_values.insert(0, '')
+        ordered_values.insert(0, "")
 
-        return ','.join(ordered_values)
+        return ",".join(ordered_values)
 
     def check(self, ordered_values):
         """
@@ -259,19 +249,14 @@ class Parameters:
         bad_values = set(current_labels) - set(labels)
         if bad_values:
             message = _(
-                'Some attributes are not valid: {}'.format(
-                    ', '.join(list(bad_values))
-                )
+                "Some attributes are not valid: {}".format(", ".join(list(bad_values)))
             )
             _logger.error(message)
 
         default_values = self.get_example()
         if len(default_values) != len(ordered_values):
             _logger.error(
-                _(
-                    'The number of attributes doen\'t correspond '
-                    'to the example size'
-                )
+                _("The number of attributes doen't correspond " "to the example size")
             )
 
         empty_mandatory_values = []
@@ -282,19 +267,13 @@ class Parameters:
         if empty_mandatory_values:
             _logger.warning(
                 _(
-                    'There are some missing mandatory values: {}'.format(
-                        ', '.join(empty_mandatory_values)
+                    "There are some missing mandatory values: {}".format(
+                        ", ".join(empty_mandatory_values)
                     )
                 )
             )
 
-    def log(
-        self,
-        picking_id=None,
-        operation_id=None,
-        exception=None,
-        error_type=None,
-    ):
+    def log(self, picking_id=None, operation_id=None, exception=None, error_type=None):
         """
         Log an error in Odoo
         :param picking_id:  The picking ID (stock.picking)
@@ -307,19 +286,18 @@ class Parameters:
         if exception and not isinstance(exception, (str, unicode)):
             exception = str(exception)
 
-        self._domain.request.env['zetes.logger'].sudo().create(
+        self._domain.request.env["zetes.logger"].sudo().create(
             {
-                'domain': self._domain.__class__.__name__.lower(),
-                'action': self._action.lower(),
-                'request': self.format(),
-                'formatted_request': str(self),
-                'user_id': (
-                    self._domain._operator_user
-                    and self._domain._operator_user.id
+                "domain": self._domain.__class__.__name__.lower(),
+                "action": self._action.lower(),
+                "request": self.format(),
+                "formatted_request": str(self),
+                "user_id": (
+                    self._domain._operator_user and self._domain._operator_user.id
                 ),
-                'error_type': error_type or 'technical',
-                'picking_id': picking_id,
-                'operation_id': operation_id,
-                'traceback': exception,
+                "error_type": error_type or "technical",
+                "picking_id": picking_id,
+                "operation_id": operation_id,
+                "traceback": exception,
             }
         )

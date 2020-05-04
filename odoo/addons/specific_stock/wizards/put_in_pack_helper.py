@@ -5,14 +5,10 @@ from odoo import api, fields, models
 
 
 class PutInPackHelper(models.TransientModel):
-    _name = 'put.in.pack.helper'
+    _name = "put.in.pack.helper"
 
-    nbr_packages = fields.Integer(
-        'Number of packages', required=True, default=1
-    )
-    picking_id = fields.Many2one(
-        'stock.picking', string='Picking', required=True
-    )
+    nbr_packages = fields.Integer("Number of packages", required=True, default=1)
+    picking_id = fields.Many2one("stock.picking", string="Picking", required=True)
 
     @api.multi
     def do_put_in_pack(self):

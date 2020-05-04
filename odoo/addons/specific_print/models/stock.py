@@ -11,27 +11,27 @@ _logger = logging.getLogger(__name__)
 
 
 def hw_print(self, report_xmlid, printer_id=False, qty=1):
-    document = self.env['report']._get_raw(self._ids, report_xmlid, qty=qty)
+    document = self.env["report"]._get_raw(self._ids, report_xmlid, qty=qty)
     report = self.env.ref(report_xmlid)
     behaviour = report.behaviour()[report.id]
     printer = False
     if printer_id:
-        printer = self.env['printing.printer'].browse(printer_id)
+        printer = self.env["printing.printer"].browse(printer_id)
     if not printer:
-        printer = behaviour['printer']
+        printer = behaviour["printer"]
     if not printer:
-        raise UserError(_('No printer assigned'))
+        raise UserError(_("No printer assigned"))
     try:
-        printer.print_document(report, document, 'text')
+        printer.print_document(report, document, "text")
     except UnicodeEncodeError:
         raise
     except Exception:
-        _logger.exception('Printer unavailable')
-        raise UserError(_('Printer unavailable'))
+        _logger.exception("Printer unavailable")
+        raise UserError(_("Printer unavailable"))
 
 
 class StockPackOperation(models.Model):
-    _inherit = 'stock.pack.operation'
+    _inherit = "stock.pack.operation"
 
     @api.multi
     def get_so_partner(self):
@@ -43,18 +43,16 @@ class StockPackOperation(models.Model):
             - finally have the customer
         """
         self.ensure_one()
-        moves = self.linked_move_operation_ids.mapped('move_id')
+        moves = self.linked_move_operation_ids.mapped("move_id")
 
         def descend_moves(lvl):
-            next_lvl = lvl.mapped('move_dest_id')
+            next_lvl = lvl.mapped("move_dest_id")
             if next_lvl:
                 lvl |= descend_moves(next_lvl)
             return lvl
 
         moves = descend_moves(moves)
-        partners = moves.mapped(
-            'procurement_id.sale_line_id.order_id.partner_id'
-        )
+        partners = moves.mapped("procurement_id.sale_line_id.order_id.partner_id")
         # While we could potentially have multiple SO, and so partners,
         # practically it won't be the case in 99% otherwise it's not important
         # which one we return
@@ -71,10 +69,10 @@ class StockPackOperation(models.Model):
     def print_product_label(self, printer_id=False, quantity=1):
         for op in self:
             if not op.picking_id.partner_id:
-                raise Warning(_('No destination partner defined'))
+                raise Warning(_("No destination partner defined"))
         hw_print(
             self,
-            'specific_print.report_stock_product_label',
+            "specific_print.report_stock_product_label",
             printer_id=printer_id,
             qty=quantity,
         )
@@ -111,7 +109,7 @@ class StockPackOperation(models.Model):
 
 
 class StockPicking(models.Model):
-    _inherit = 'stock.picking'
+    _inherit = "stock.picking"
 
     @api.multi
     def print_products_label(self, printer_id=False, quantity=1):
@@ -123,18 +121,16 @@ class StockPicking(models.Model):
             lambda pack_op: not pack_op.product_id.is_do_not_print_label
         )
         if packs_to_print:
-            packs_to_print.print_product_label(
-                printer_id=printer_id, quantity=quantity
-            )
+            packs_to_print.print_product_label(printer_id=printer_id, quantity=quantity)
 
     @api.multi
     def print_packages_label(self, quantity=1, printer_id=False):
         self.ensure_one()
         if not self.partner_id:
-            raise Warning(_('No destination partner defined'))
+            raise Warning(_("No destination partner defined"))
         hw_print(
             self,
-            'specific_print.report_stock_pick_packs_label',
+            "specific_print.report_stock_pick_packs_label",
             printer_id=printer_id,
             qty=quantity,
         )
@@ -142,31 +138,29 @@ class StockPicking(models.Model):
     @api.multi
     def print_passport_report(self, printer_id):
         self.ensure_one()
-        pdf = self.env['report'].get_pdf(
-            self.ids, 'specific_report.report_passport'
-        )
-        printer = self.env['printing.printer'].browse(printer_id)
-        printer.print_document('', pdf, '')
+        pdf = self.env["report"].get_pdf(self.ids, "specific_report.report_passport")
+        printer = self.env["printing.printer"].browse(printer_id)
+        printer.print_document("", pdf, "")
 
     @api.multi
     def print_labels_report(self):
         self.ensure_one()
         if self.partner_id and self.partner_id.no_labels_products:
-            raise UserError(_('Customer does not need product labels'))
+            raise UserError(_("Customer does not need product labels"))
         return {
-            'name': 'Print label',
-            'type': 'ir.actions.act_window',
-            'id': self.env.ref('specific_print.print_label_action').id,
-            'view_mode': 'form',
-            'res_model': 'print.label',
-            'target': 'new',
+            "name": "Print label",
+            "type": "ir.actions.act_window",
+            "id": self.env.ref("specific_print.print_label_action").id,
+            "view_mode": "form",
+            "res_model": "print.label",
+            "target": "new",
             # sending of all context causes errors
-            'context': {'default_label_type': 'product'},
+            "context": {"default_label_type": "product"},
         }
 
 
 class StockPackOperationLot(models.Model):
-    _inherit = 'stock.pack.operation.lot'
+    _inherit = "stock.pack.operation.lot"
 
     @api.multi
     def print_lot_label(self, quantity=1):
@@ -175,28 +169,25 @@ class StockPackOperationLot(models.Model):
 
 
 class StockProductionLot(models.Model):
-    _inherit = 'stock.production.lot'
+    _inherit = "stock.production.lot"
 
     @api.multi
     def print_lot_label(self, quantity=1, printer_id=False):
         self.ensure_one()
         hw_print(
-            self,
-            'specific_print.report_lot_label',
-            qty=quantity,
-            printer_id=printer_id,
+            self, "specific_print.report_lot_label", qty=quantity, printer_id=printer_id
         )
 
 
 class ProductProduct(models.Model):
-    _inherit = 'product.product'
+    _inherit = "product.product"
 
     @api.multi
     def print_product_label(self, quantity=1, printer_id=False):
         self.ensure_one()
         hw_print(
             self,
-            'specific_print.report_lot_nolot_label',
+            "specific_print.report_lot_nolot_label",
             qty=quantity,
             printer_id=printer_id,
         )

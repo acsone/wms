@@ -7,7 +7,7 @@ from odoo import api, fields, models
 
 
 class ProcurementOrder(models.Model):
-    _inherit = 'procurement.order'
+    _inherit = "procurement.order"
 
     sale_line_id = fields.Many2one(index=True)
     purchase_line_id = fields.Many2one(index=True)

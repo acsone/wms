@@ -9,17 +9,15 @@ MODEL_NAME_BY_KIND = {"ubl.order.response.importer": "purchase.order"}
 
 
 class EdiImportTaskDef(models.Model):
-    _name = 'edi.import.task.def'
-    _description = 'Edi Import Task Definition'
+    _name = "edi.import.task.def"
+    _description = "Edi Import Task Definition"
     _inherit = "edi.task.def"
 
-    last_import_dt = fields.Datetime(string='Timestamp last import')
+    last_import_dt = fields.Datetime(string="Timestamp last import")
 
     kind = fields.Selection(
-        selection=[
-            ("ubl.order.response.importer", "Import UBL Order Response")
-        ],
-        string='Kind of EDI document',
+        selection=[("ubl.order.response.importer", "Import UBL Order Response")],
+        string="Kind of EDI document",
     )
 
     path = fields.Char(

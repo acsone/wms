@@ -24,17 +24,16 @@ from odoo.exceptions import Warning
 
 
 class StockLocation(models.Model):
-    _inherit = 'stock.location'
+    _inherit = "stock.location"
 
     kind = fields.Selection(
-        [('reserve', 'Reserve'), ('parking', 'Parking'), ('bin', 'Bin')],
-        string='Kind',
+        [("reserve", "Reserve"), ("parking", "Parking"), ("bin", "Bin")], string="Kind"
     )
 
     reserve_location_id = fields.Many2one(
-        'stock.location',
-        'Reserve',
-        domain=[('kind', '=', 'reserve')],
+        "stock.location",
+        "Reserve",
+        domain=[("kind", "=", "reserve")],
         help="Destination for putaway strategy when the poduct must be stored "
         "in reserve",
     )
@@ -47,7 +46,7 @@ class StockLocation(models.Model):
             SELECT distinct c.id
             FROM """
             + self._table
-            + ' p, '
+            + " p, "
             + self._table
             + """ c
             WHERE c.parent_left < p.parent_left
@@ -61,32 +60,28 @@ class StockLocation(models.Model):
     def get_putaway_strategy(self, product):
         location = self
         location_dest = self.browse(
-            super(StockLocation, self).get_putaway_strategy(product)
-            or location.id
+            super(StockLocation, self).get_putaway_strategy(product) or location.id
         )
 
         # check if bin location
-        if location_dest.kind != 'bin':
+        if location_dest.kind != "bin":
             return location_dest.id
 
         # Do not put product in bin if lot tracking (possibly fefo) and
         # there is already stock in reserve
-        if product.tracking == 'lot' and product.qty_in_reserve > 0:
+        if product.tracking == "lot" and product.qty_in_reserve > 0:
             reserve = location_dest.reserve_location_id
             if not reserve:
-                reserve = location_dest._get_ancestors().mapped(
-                    'reserve_location_id'
-                )[:1]
+                reserve = location_dest._get_ancestors().mapped("reserve_location_id")[
+                    :1
+                ]
             if not reserve:
                 raise Warning(
                     _(
-                        'Product %s must be put in reserve but cannot '
-                        'find a suitable location'
+                        "Product %s must be put in reserve but cannot "
+                        "find a suitable location"
                     )
                     % product.display_name
                 )
             return reserve.id
-        return (
-            super(StockLocation, self).get_putaway_strategy(product)
-            or location.id
-        )
+        return super(StockLocation, self).get_putaway_strategy(product) or location.id

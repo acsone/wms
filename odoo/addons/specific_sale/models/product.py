@@ -9,7 +9,7 @@ from odoo import api, fields, models
 
 
 class ProductProduct(models.Model):
-    _inherit = 'product.product'
+    _inherit = "product.product"
 
     @api.multi
     def _sales_count(self):
@@ -29,20 +29,16 @@ class ProductProduct(models.Model):
         done = {}
         for product_id, qty, state in self._cr.fetchall():
             product = self.browse(product_id)
-            if state == 'sale':
+            if state == "sale":
                 product.sale_lines_count = qty
-            elif state == 'done':
+            elif state == "done":
                 done[product_id] = qty
-            product.sales_count = product.sale_lines_count + done.get(
-                product_id, 0
-            )
+            product.sales_count = product.sale_lines_count + done.get(product_id, 0)
 
-    sale_lines_count = fields.Integer(compute='_sales_count')
+    sale_lines_count = fields.Integer(compute="_sales_count")
 
     older_lot_id = fields.Many2one(
-        'stock.production.lot',
-        string='Older lot',
-        compute='_compute_older_lot_id',
+        "stock.production.lot", string="Older lot", compute="_compute_older_lot_id"
     )
 
     def _compute_older_lot_id(self):
@@ -57,7 +53,7 @@ class ProductProduct(models.Model):
         github.com/camptocamp/alcyon_odoo/pull/1515#discussion_r302508955
 
         """
-        location_physical = self.env.ref('specific_base.stock_location_vlb')
+        location_physical = self.env.ref("specific_base.stock_location_vlb")
         get_lot_query = """
         SELECT lot.id
         FROM stock_production_lot AS lot
@@ -88,12 +84,12 @@ class ProductProduct(models.Model):
     @api.model
     def get_cnk_products_domain(self):
         """ Generate the domain to get stock with CNK product """
-        domain = [('sale_ok', '=', True), ('cnk_code', '!=', False)]
+        domain = [("sale_ok", "=", True), ("cnk_code", "!=", False)]
 
         # The ESB Connector use the user Admin to execute the method
         # However, the real user id is in the context
-        current_user = self.env['res.users'].search(
-            [('id', '=', self.env.context.get('uid'))]
+        current_user = self.env["res.users"].search(
+            [("id", "=", self.env.context.get("uid"))]
         )
 
         if current_user.is_for_newpharma:
@@ -104,12 +100,12 @@ class ProductProduct(models.Model):
     @api.model
     def get_sku_products_domain(self):
         """ Generate the domain to get stock with SKU product """
-        domain = [('sale_ok', '=', True), ('default_code', '!=', False)]
+        domain = [("sale_ok", "=", True), ("default_code", "!=", False)]
 
         # The ESB Connector use the user Admin to execute the method
         # However, the real user id is in the context
-        current_user = self.env['res.users'].search(
-            [('id', '=', self.env.context.get('uid'))]
+        current_user = self.env["res.users"].search(
+            [("id", "=", self.env.context.get("uid"))]
         )
 
         if current_user.is_for_olalux:
@@ -125,17 +121,17 @@ class ProductProduct(models.Model):
         for the ones in the category 'Médicaments vétérinaires Belges' and its
         children.
         """
-        belgium_medoc = self.env.ref('specific_data.product_categ_vet_belges')
-        laroyduro_suppliers = self.env['res.partner'].search(
-            [('supplier', '=', True), ('ref', '=', '73657')]
+        belgium_medoc = self.env.ref("specific_data.product_categ_vet_belges")
+        laroyduro_suppliers = self.env["res.partner"].search(
+            [("supplier", "=", True), ("ref", "=", "73657")]
         )
 
         return [
-            '|',
-            '|',
-            ('veterinary_only', '=', False),
-            ('categ_id', 'child_of', belgium_medoc.id),
-            ('supplier_id', 'in', laroyduro_suppliers.ids),
+            "|",
+            "|",
+            ("veterinary_only", "=", False),
+            ("categ_id", "child_of", belgium_medoc.id),
+            ("supplier_id", "in", laroyduro_suppliers.ids),
         ]
 
     @api.model
@@ -156,11 +152,8 @@ class ProductProduct(models.Model):
         # 78650: Royal Canin
         # 68250: Hill's
         # 61800: Nestle
-        all_products_supplier = self.env['res.partner'].search(
-            [
-                ('supplier', '=', True),
-                ('ref', 'in', ['78650', '68250', '61800']),
-            ]
+        all_products_supplier = self.env["res.partner"].search(
+            [("supplier", "=", True), ("ref", "in", ["78650", "68250", "61800"])]
         )
 
         #######################
@@ -168,8 +161,8 @@ class ProductProduct(models.Model):
         #######################
         # Dechra: 60422
         # V.M.D. Aliment: 82702
-        only_food_suppliers = self.env['res.partner'].search(
-            [('supplier', '=', True), ('ref', 'in', ['60422', '82702'])]
+        only_food_suppliers = self.env["res.partner"].search(
+            [("supplier", "=", True), ("ref", "in", ["60422", "82702"])]
         )
 
         #######################
@@ -177,27 +170,25 @@ class ProductProduct(models.Model):
         #######################
         # Virbac Belgium: 81200
         # Virbac Belgium Aliment: 81201
-        virbac_suppliers = self.env['res.partner'].search(
-            [('supplier', '=', True), ('ref', 'in', ['81200', '81201'])]
+        virbac_suppliers = self.env["res.partner"].search(
+            [("supplier", "=", True), ("ref", "in", ["81200", "81201"])]
         )
 
-        categ_ali = self.env.ref('specific_data.product_categ_ali')
-        categ_parapharmacie = self.env.ref(
-            'specific_data.product_categ_parapharmacie'
-        )
+        categ_ali = self.env.ref("specific_data.product_categ_ali")
+        categ_parapharmacie = self.env.ref("specific_data.product_categ_parapharmacie")
 
         domain = [
-            '|',
-            ('supplier_id', 'in', all_products_supplier.ids),
-            '|',
-            '&',
-            ('supplier_id', 'in', only_food_suppliers.ids),
-            ('categ_id', 'child_of', categ_ali.id),
-            '&',
-            ('supplier_id', 'in', virbac_suppliers.ids),
-            '|',
-            ('categ_id', 'child_of', categ_ali.id),
-            ('categ_id', 'child_of', categ_parapharmacie.id),
+            "|",
+            ("supplier_id", "in", all_products_supplier.ids),
+            "|",
+            "&",
+            ("supplier_id", "in", only_food_suppliers.ids),
+            ("categ_id", "child_of", categ_ali.id),
+            "&",
+            ("supplier_id", "in", virbac_suppliers.ids),
+            "|",
+            ("categ_id", "child_of", categ_ali.id),
+            ("categ_id", "child_of", categ_parapharmacie.id),
         ]
 
         return domain
@@ -210,16 +201,14 @@ class ProductProduct(models.Model):
           priority but later date
         """
         res = super(ProductProduct, self)._compute_available_quantities_dict()
-        prio = self.env.context.get('prio')
-        date = self.env.context.get('date')
+        prio = self.env.context.get("prio")
+        date = self.env.context.get("date")
         corrections = {}
-        loc_loss = self.env.ref('stock_lot_loss.stock_location_14019')
-        loc_loss_qty = self.with_context(
-            location=loc_loss.id
-        )._product_available()
+        loc_loss = self.env.ref("stock_lot_loss.stock_location_14019")
+        loc_loss_qty = self.with_context(location=loc_loss.id)._product_available()
         exclude_location_ids = (
-            self.env['stock.location']
-            .search([('exclude_from_immediately_usable_qty', '=', True)])
+            self.env["stock.location"]
+            .search([("exclude_from_immediately_usable_qty", "=", True)])
             .ids
         )
         exclude_qty = None
@@ -236,68 +225,59 @@ class ProductProduct(models.Model):
                 # We never want to overwrite a move,
                 # which ends in the loss location. The quantity isn't usable
                 # and would have to be deducted in the end anyway.
-                ('product_id', 'in', self.ids),
-                ('state', 'not in', ('done', 'cancel')),
-                '|',
-                ('priority', '<', prio),
-                '&',
-                ('priority', '=', prio),
-                ('date', '>', date),
+                ("product_id", "in", self.ids),
+                ("state", "not in", ("done", "cancel")),
+                "|",
+                ("priority", "<", prio),
+                "&",
+                ("priority", "=", prio),
+                ("date", ">", date),
             ]
-            move_groupby = self.env['stock.move'].read_group(
-                domain,
-                ['product_id', 'product_qty'],
-                ['product_id'],
-                orderby='id',
+            move_groupby = self.env["stock.move"].read_group(
+                domain, ["product_id", "product_qty"], ["product_id"], orderby="id"
             )
             for group in move_groupby:
-                corrections[group['product_id'][0]] = group['product_qty']
+                corrections[group["product_id"][0]] = group["product_qty"]
 
         for product_id in res:
             deducted_amounts = 0.0
-            deducted_amounts += loc_loss_qty[product_id]['incoming_qty']
-            deducted_amounts += loc_loss_qty[product_id]['qty_available']
+            deducted_amounts += loc_loss_qty[product_id]["incoming_qty"]
+            deducted_amounts += loc_loss_qty[product_id]["qty_available"]
             if exclude_qty:
-                deducted_amounts += exclude_qty[product_id]['qty_available']
+                deducted_amounts += exclude_qty[product_id]["qty_available"]
 
-            res[product_id]['immediately_usable_qty'] += (
+            res[product_id]["immediately_usable_qty"] += (
                 corrections.get(product_id, 0) - deducted_amounts
             )
         return res
 
-    @api.depends('virtual_available', 'incoming_qty')
+    @api.depends("virtual_available", "incoming_qty")
     def _compute_available_quantities(self):
         super(ProductProduct, self)._compute_available_quantities()
 
 
 class ProductTemplate(models.Model):
-    _inherit = 'product.template'
+    _inherit = "product.template"
 
-    sale_lines_count = fields.Integer(compute='_compute_sale_lines_count')
+    sale_lines_count = fields.Integer(compute="_compute_sale_lines_count")
 
     lot_ids = fields.Many2many(
-        'stock.production.lot',
-        string='Lots',
-        compute='_compute_lot_ids',
-        readonly=True,
+        "stock.production.lot", string="Lots", compute="_compute_lot_ids", readonly=True
     )
 
     def _compute_lot_ids(self):
-        StockProductionLot = self.env['stock.production.lot']
+        StockProductionLot = self.env["stock.production.lot"]
 
         for product_tmpl in self:
             products = product_tmpl.product_variant_ids
             lots = StockProductionLot.search(
-                [
-                    ('product_id', 'in', products.ids),
-                    ('is_archived', '=', False),
-                ],
-                order='life_date',
+                [("product_id", "in", products.ids), ("is_archived", "=", False)],
+                order="life_date",
             )
             product_tmpl.lot_ids = [(6, 0, lots.ids)]
 
     @api.multi
-    @api.depends('product_variant_ids.sales_count')
+    @api.depends("product_variant_ids.sales_count")
     def _compute_sale_lines_count(self):
         for product in self:
             product.sale_lines_count = sum(
@@ -309,11 +289,11 @@ class ProductTemplate(models.Model):
         self.ensure_one()
 
         action_data = self.env.ref(
-            'specific_sale.action_sale_lines_unavailable_list'
+            "specific_sale.action_sale_lines_unavailable_list"
         ).read()[0]
-        action_data['domain'] = [
-            ('state', 'in', ['sale']),
-            ('product_id.product_tmpl_id', '=', self.id),
+        action_data["domain"] = [
+            ("state", "in", ["sale"]),
+            ("product_id.product_tmpl_id", "=", self.id),
         ]
 
         return action_data
@@ -321,10 +301,10 @@ class ProductTemplate(models.Model):
     @api.multi
     def action_view_sales(self):
         res = super(ProductTemplate, self).action_view_sales()
-        if res['context']:
-            action_context = ast.literal_eval(res['context'])
-            action_context['search_default_remains_to_deliver'] = 1
-            res['context'] = str(action_context)
+        if res["context"]:
+            action_context = ast.literal_eval(res["context"])
+            action_context["search_default_remains_to_deliver"] = 1
+            res["context"] = str(action_context)
         else:
-            res['context'] = "{" "'search_default_remains_to_deliver': 1," "}"
+            res["context"] = "{" "'search_default_remains_to_deliver': 1," "}"
         return res

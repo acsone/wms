@@ -7,12 +7,12 @@ from odoo import api, fields, models
 
 
 class ResPartner(models.Model):
-    _inherit = 'res.partner'
+    _inherit = "res.partner"
 
     last_suite_name = fields.Char(
-        string='Last Suite Name', compute='_compute_last_suite_name'
+        string="Last Suite Name", compute="_compute_last_suite_name"
     )
-    help_with_fee = fields.Boolean(string='Helps with fees')
+    help_with_fee = fields.Boolean(string="Helps with fees")
     auto_cancel_unavailable_qty_sold = fields.Boolean(
         string="Auto-cancel Unavailable Quantity",
         default=False,
@@ -30,9 +30,9 @@ class ResPartner(models.Model):
         Used to be returned by WSO2
         """
         for record in self:
-            order = self.env['sale.order'].search(
-                [('partner_id', '=', record.id), ('suite_name', '!=', False)],
-                order='date_order desc, id desc',
+            order = self.env["sale.order"].search(
+                [("partner_id", "=", record.id), ("suite_name", "!=", False)],
+                order="date_order desc, id desc",
                 limit=1,
             )
             if order:
@@ -42,27 +42,25 @@ class ResPartner(models.Model):
     def _compute_sale_lines_count(self):
         for partner in self:
             domain = [
-                ('state', 'in', ['sale']),
-                ('order_id.partner_id', '=', partner.id),
-                ('product_qty_remains_to_deliver', '>', 0),
+                ("state", "in", ["sale"]),
+                ("order_id.partner_id", "=", partner.id),
+                ("product_qty_remains_to_deliver", ">", 0),
             ]
 
-            partner.sale_lines_count = len(
-                self.env['sale.order.line'].search(domain)
-            )
+            partner.sale_lines_count = len(self.env["sale.order.line"].search(domain))
 
-    sale_lines_count = fields.Integer(compute='_compute_sale_lines_count')
+    sale_lines_count = fields.Integer(compute="_compute_sale_lines_count")
 
     @api.multi
     def action_view_sale_lines_unavailable(self):
         self.ensure_one()
 
         action_data = self.env.ref(
-            'specific_sale.action_sale_lines_unavailable_list'
+            "specific_sale.action_sale_lines_unavailable_list"
         ).read()[0]
-        action_data['domain'] = [
-            ('state', 'in', ['sale']),
-            ('order_id.partner_id', '=', self.id),
+        action_data["domain"] = [
+            ("state", "in", ["sale"]),
+            ("order_id.partner_id", "=", self.id),
         ]
 
         return action_data

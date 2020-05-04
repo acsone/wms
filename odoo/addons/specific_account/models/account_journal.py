@@ -6,11 +6,11 @@ from odoo import api, models
 
 
 class AccountJournal(models.Model):
-    _inherit = 'account.journal'
+    _inherit = "account.journal"
 
     @api.model
     def _get_sequence_prefix(self, code, refund=False):
         prefix = code.upper()
         if refund:
-            prefix = 'NC' + prefix
-        return prefix + '/%(range_year)s/'
+            prefix = "NC" + prefix
+        return prefix + "/%(range_year)s/"

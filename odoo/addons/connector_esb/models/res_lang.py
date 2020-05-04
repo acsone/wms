@@ -6,6 +6,6 @@ from odoo import fields, models
 
 
 class ResLang(models.Model):
-    _inherit = 'res.lang'
+    _inherit = "res.lang"
 
-    esb_ref = fields.Char(string='Reference for ESB', copy=False)
+    esb_ref = fields.Char(string="Reference for ESB", copy=False)

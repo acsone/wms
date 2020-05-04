@@ -8,11 +8,9 @@ from odoo.exceptions import UserError, ValidationError
 
 class ResPartner(models.Model):
 
-    _inherit = 'res.partner'
+    _inherit = "res.partner"
 
-    edi_backend_id = fields.Many2one(
-        comodel_name="edi.backend", string="Edi connector"
-    )
+    edi_backend_id = fields.Many2one(comodel_name="edi.backend", string="Edi connector")
     use_edi_connector = fields.Boolean()
 
     @api.constrains("use_edi_connector", "edi_backend_id")

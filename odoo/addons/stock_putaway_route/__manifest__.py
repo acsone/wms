@@ -20,20 +20,15 @@
 ##############################################################################
 
 {
-    'name': 'Stock Putaway by Route',
-    'version': '1.0',
-    'author': "BCIM",
-    'maintainer': 'Camptocamp',
-    'category': 'Stock Management',
-    'depends': [
-        'stock',
-    ],
-    'data': [
-        'views/stock.xml',
-        'security/ir.model.access.csv',
-    ],
-    'installable': True,
-    'auto_install': False,
-    'license': 'AGPL-3',
-    'application': False,
+    "name": "Stock Putaway by Route",
+    "version": "1.0",
+    "author": "BCIM",
+    "maintainer": "Camptocamp",
+    "category": "Stock Management",
+    "depends": ["stock"],
+    "data": ["views/stock.xml", "security/ir.model.access.csv"],
+    "installable": True,
+    "auto_install": False,
+    "license": "AGPL-3",
+    "application": False,
 }

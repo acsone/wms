@@ -41,11 +41,7 @@ class SaleOrderLine(models.Model):
                     ("product_id", "in", product_ids),
                     ("state", "=", "assigned"),
                     ("picking_id.picking_type_id.code", "=", "incoming"),
-                    (
-                        "location_dest_id",
-                        "child_of",
-                        warehouse.view_location_id.id,
-                    ),
+                    ("location_dest_id", "child_of", warehouse.view_location_id.id),
                 ]
                 res = {
                     item["product_id"][0]: item["date_expected"]
@@ -63,6 +59,4 @@ class SaleOrderLine(models.Model):
     def _compute_next_expected_date_for_receipt(self):
         expected_date_by_lines = self._get_next_receipt_expected_date_dict()
         for line in self:
-            line.next_expected_date_for_receipt = expected_date_by_lines[
-                line.id
-            ]
+            line.next_expected_date_for_receipt = expected_date_by_lines[line.id]

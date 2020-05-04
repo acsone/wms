@@ -7,18 +7,18 @@ from odoo import api, fields, models
 
 
 class RoundTag(models.Model):
-    _name = 'round.tag'
+    _name = "round.tag"
 
-    name = fields.Char('Name', required=True)
-    code = fields.Char('Code')
-    color = fields.Integer('Color Index')
+    name = fields.Char("Name", required=True)
+    code = fields.Char("Code")
+    color = fields.Integer("Color Index")
 
     @api.multi
-    @api.depends('name', 'code')
+    @api.depends("name", "code")
     def name_get(self):
         result = []
         for rec in self:
-            if not self.env.context.get('short_round_tag_name'):
+            if not self.env.context.get("short_round_tag_name"):
                 name = rec.name
             else:
                 name = rec.code or rec.name

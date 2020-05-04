@@ -30,9 +30,7 @@ class StockProductionLot(models.Model):
         quant_domain, _move_in_domain, _move_out_domain = self.env[
             "product.product"
         ]._get_domain_locations()
-        quant_domain = expression.AND(
-            [quant_domain, [("lot_id", "in", self.ids)]]
-        )
+        quant_domain = expression.AND([quant_domain, [("lot_id", "in", self.ids)]])
         StockQuant = self.env["stock.quant"]
         quants_res = {
             item["lot_id"][0]: item["qty"]

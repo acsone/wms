@@ -11,15 +11,15 @@ class TestStockScrap(SavepointCase):
         super(TestStockScrap, cls).setUpClass()
         cls.demo_user = cls.env.ref("base.user_demo")
         cls.StockScrap = cls.env["stock.scrap"]
-        cls.stock_loc = cls.env.ref('stock.stock_location_stock')
+        cls.stock_loc = cls.env.ref("stock.stock_location_stock")
 
         # Stockable product
-        cls.product_stockable = cls.env['product.product'].create(
+        cls.product_stockable = cls.env["product.product"].create(
             {
-                'type': 'product',
-                'name': 'Stockable Product',
-                'uom_id': cls.env.ref('product.product_uom_unit').id,
-                'uom_po_id': cls.env.ref('product.product_uom_unit').id,
+                "type": "product",
+                "name": "Stockable Product",
+                "uom_id": cls.env.ref("product.product_uom_unit").id,
+                "uom_po_id": cls.env.ref("product.product_uom_unit").id,
             }
         )
 
@@ -27,11 +27,11 @@ class TestStockScrap(SavepointCase):
 
     @classmethod
     def _update_product_qty(cls, product):
-        product_qty = cls.env['stock.change.product.qty'].create(
+        product_qty = cls.env["stock.change.product.qty"].create(
             {
-                'location_id': cls.stock_loc.id,
-                'product_id': product.id,
-                'new_quantity': 100.0,
+                "location_id": cls.stock_loc.id,
+                "product_id": product.id,
+                "new_quantity": 100.0,
             }
         )
         product_qty.change_product_qty()
@@ -40,8 +40,8 @@ class TestStockScrap(SavepointCase):
     def _get_scrap_values(self):
         return {
             "name": "test inventor",
-            'product_id': self.product_stockable.id,
-            'product_uom_id': self.ref('product.product_uom_unit'),
+            "product_id": self.product_stockable.id,
+            "product_uom_id": self.ref("product.product_uom_unit"),
         }
 
     def test_00(self):

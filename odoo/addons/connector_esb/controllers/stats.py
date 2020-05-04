@@ -18,32 +18,28 @@ from odoo.http import request
 
 
 def strptime(val):
-    return datetime.strptime(val, '%Y-%m-%d').date()
+    return datetime.strptime(val, "%Y-%m-%d").date()
 
 
 class StatsController(http.Controller):
 
-    PRODUCT_TYPES = {'aliment': 'ALI', 'medicament': 'MED', 'materiel': 'MAT'}
+    PRODUCT_TYPES = {"aliment": "ALI", "medicament": "MED", "materiel": "MAT"}
 
     @staticmethod
     def _validate_statistics_form(values):
         errors = []
-        datefields = ('startDate', 'endDate')
+        datefields = ("startDate", "endDate")
         for key in datefields:
             try:
                 if not values.get(key):
                     continue
                 strptime(values[key])
             except ValueError:
-                errors.append(
-                    _('Bad date format for `%s`. Expected: YYYY-mm-dd') % key
-                )
+                errors.append(_("Bad date format for `%s`. Expected: YYYY-mm-dd") % key)
         if errors:
-            raise werkzeug.exceptions.BadRequest('\n'.join(errors))
+            raise werkzeug.exceptions.BadRequest("\n".join(errors))
 
-    @http.route(
-        '/connector_esb/statistics/form', type='http', auth='user', csrf=False
-    )
+    @http.route("/connector_esb/statistics/form", type="http", auth="user", csrf=False)
     def statistics_form(self, **kw):
         """ Return statistics for customers according to filters
 
@@ -64,32 +60,29 @@ class StatsController(http.Controller):
         values = request.httprequest.form
         self._validate_statistics_form(values)
 
-        start = values.get('startDate')
-        end = values.get('endDate')
-        supplier = values.get('manufacturer') or ''
+        start = values.get("startDate")
+        end = values.get("endDate")
+        supplier = values.get("manufacturer") or ""
 
-        backend = env['esb.backend'].sudo().get_singleton()
-        with backend.work_on('res.partner') as work:
-            component = work.component('ws.message.statistics.form')
+        backend = env["esb.backend"].sudo().get_singleton()
+        with backend.work_on("res.partner") as work:
+            component = work.component("ws.message.statistics.form")
             options = component.options_for_form(
-                customer_ref=values['customerErpId'],
+                customer_ref=values["customerErpId"],
                 start=strptime(start) if start else False,
                 end=strptime(end) if end else False,
-                product_type=self.PRODUCT_TYPES.get(
-                    values.get('productType'), ''
-                ),
-                suppliers=supplier.split(',') if supplier.strip() else False,
-                language=values.get('language'),
+                product_type=self.PRODUCT_TYPES.get(values.get("productType"), ""),
+                suppliers=supplier.split(",") if supplier.strip() else False,
+                language=values.get("language"),
             )
             res = component.get_message(options)
-            headers = [('Content-Type', 'text/xml')]
+            headers = [("Content-Type", "text/xml")]
             return request.make_response(res, headers)
 
     @http.route(
-        '/connector_esb/statistics/product/<string:sku>/'
-        '<string:customer_ref>',
-        type='http',
-        auth='user',
+        "/connector_esb/statistics/product/<string:sku>/" "<string:customer_ref>",
+        type="http",
+        auth="user",
         csrf=False,
     )
     def product_customer_stat(self, sku, customer_ref):
@@ -104,18 +97,18 @@ class StatsController(http.Controller):
         ensure_db()
         request.uid = odoo.SUPERUSER_ID
         env = request.env
-        backend = env['esb.backend'].get_singleton()
-        with backend.work_on('sale.order.line') as work:
-            res = work.component(
-                'ws.message.product.customer.stat'
-            ).get_message(customer_ref, sku)
-            headers = [('Content-Type', 'text/xml')]
+        backend = env["esb.backend"].get_singleton()
+        with backend.work_on("sale.order.line") as work:
+            res = work.component("ws.message.product.customer.stat").get_message(
+                customer_ref, sku
+            )
+            headers = [("Content-Type", "text/xml")]
             return request.make_response(res, headers)
 
     @http.route(
-        '/connector_esb/statistics/customer/<string:customer_ref>',
-        type='http',
-        auth='user',
+        "/connector_esb/statistics/customer/<string:customer_ref>",
+        type="http",
+        auth="user",
         csrf=False,
     )
     def customer_purchase_statistic(self, customer_ref):
@@ -133,18 +126,16 @@ class StatsController(http.Controller):
         ensure_db()
         request.uid = odoo.SUPERUSER_ID
         env = request.env
-        backend = env['esb.backend'].get_singleton()
-        with backend.work_on('sale.order.line') as work:
-            res = work.component('ws.message.customer.stat').get_message(
-                customer_ref
-            )
-            headers = [('Content-Type', 'text/xml')]
+        backend = env["esb.backend"].get_singleton()
+        with backend.work_on("sale.order.line") as work:
+            res = work.component("ws.message.customer.stat").get_message(customer_ref)
+            headers = [("Content-Type", "text/xml")]
             return request.make_response(res, headers)
 
     @http.route(
-        '/connector_esb/totalorder/customer/<string:customer_ref>',
-        type='http',
-        auth='public',
+        "/connector_esb/totalorder/customer/<string:customer_ref>",
+        type="http",
+        auth="public",
         csrf=False,
     )
     def customer_delivery_fee(self, customer_ref):
@@ -158,11 +149,11 @@ class StatsController(http.Controller):
         ensure_db()
         request.uid = odoo.SUPERUSER_ID
         env = request.env
-        backend = env['esb.backend'].get_singleton()
+        backend = env["esb.backend"].get_singleton()
 
-        with backend.work_on('res.partner') as work:
-            res = work.component(
-                'ws.message.customer.delivery.fee'
-            ).get_message(customer_ref)
-            headers = [('Content-Type', 'text/xml')]
+        with backend.work_on("res.partner") as work:
+            res = work.component("ws.message.customer.delivery.fee").get_message(
+                customer_ref
+            )
+            headers = [("Content-Type", "text/xml")]
             return request.make_response(res, headers)

@@ -7,13 +7,13 @@ from odoo.addons.queue_job.job import job
 
 
 class ReportAsync(models.AbstractModel):
-    _name = 'report.async'
+    _name = "report.async"
 
     @api.multi
     def get_report_name(self):
         raise NotImplementedError
 
-    @job(default_channel='root.background.report')  # priority=4
+    @job(default_channel="root.background.report")  # priority=4
     @api.multi
     def print_and_attach_report(self, report, send_to_fax=None):
         """Print and attach a report.
@@ -23,29 +23,29 @@ class ReportAsync(models.AbstractModel):
         """
         self.ensure_one()
         filename = self.get_report_name()
-        data = self.env['report'].get_pdf([self.id], report)
-        existing = self.env['ir.attachment'].search(
-            [('name', '=', filename), ('res_model', '=', self._name)]
+        data = self.env["report"].get_pdf([self.id], report)
+        existing = self.env["ir.attachment"].search(
+            [("name", "=", filename), ("res_model", "=", self._name)]
         )
         if len(existing):
-            existing[0].datas = data.encode('base_64')
+            existing[0].datas = data.encode("base_64")
         else:
-            new_report = self.env['ir.attachment'].create(
+            new_report = self.env["ir.attachment"].create(
                 {
-                    'type': 'binary',
-                    'res_model': self._name,
-                    'res_id': self.id,
-                    'name': filename,
-                    'datas_fname': filename,
-                    'mimetype': 'application/pdf',
-                    'datas': data.encode('base_64'),
+                    "type": "binary",
+                    "res_model": self._name,
+                    "res_id": self.id,
+                    "name": filename,
+                    "datas_fname": filename,
+                    "mimetype": "application/pdf",
+                    "datas": data.encode("base_64"),
                 }
             )
         if send_to_fax:
             report_id = existing[0].id if len(existing) else new_report.id
-            fax = self.env.ref('external_fax.ovh')
+            fax = self.env.ref("external_fax.ovh")
             fax.with_delay(
-                description=_(u'Sending fax for {} with id {}').format(
+                description=_(u"Sending fax for {} with id {}").format(
                     self._name, self.id
                 ),
                 priority=10,

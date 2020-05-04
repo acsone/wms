@@ -5,33 +5,27 @@ from .. import constants
 
 
 class ZetesLogger(models.Model):
-    _name = 'zetes.logger'
+    _name = "zetes.logger"
 
-    action = fields.Selection(
-        constants.ZETES_ACTIONS, string='Action', required=True
-    )
-    domain = fields.Selection(
-        constants.ZETES_DOMAINS, string='Domain', required=True
-    )
-    command = fields.Char(
-        'Command', compute='_compute_name', store=True, readonly=True
-    )
-    user_id = fields.Many2one('res.users', string='User', required=True)
-    name = fields.Char('Name', compute='_compute_name', readonly=True)
-    picking_id = fields.Many2one('stock.picking', string='Picking')
-    operation_id = fields.Many2one('stock.pack.operation', string='Operation')
-    request = fields.Char('Request')
-    formatted_request = fields.Text('Request')
-    is_checked = fields.Boolean('Checked')
-    traceback = fields.Text('Traceback')
+    action = fields.Selection(constants.ZETES_ACTIONS, string="Action", required=True)
+    domain = fields.Selection(constants.ZETES_DOMAINS, string="Domain", required=True)
+    command = fields.Char("Command", compute="_compute_name", store=True, readonly=True)
+    user_id = fields.Many2one("res.users", string="User", required=True)
+    name = fields.Char("Name", compute="_compute_name", readonly=True)
+    picking_id = fields.Many2one("stock.picking", string="Picking")
+    operation_id = fields.Many2one("stock.pack.operation", string="Operation")
+    request = fields.Char("Request")
+    formatted_request = fields.Text("Request")
+    is_checked = fields.Boolean("Checked")
+    traceback = fields.Text("Traceback")
     error_type = fields.Selection(
-        [('technical', 'Technical'), ('human', 'Human')],
-        string='Error type',
-        default='technical',
+        [("technical", "Technical"), ("human", "Human")],
+        string="Error type",
+        default="technical",
         required=True,
     )
 
-    @api.depends('action', 'domain', 'user_id')
+    @api.depends("action", "domain", "user_id")
     def _compute_name(self):
         """
         Compute a friendly name and the technical name of a command.
@@ -50,14 +44,12 @@ class ZetesLogger(models.Model):
             command_displayed = dict(constants.ZETES_ACTIONS).get(
                 log.action, log.action
             )
-            domain_displayed = dict(constants.ZETES_DOMAINS).get(
-                log.domain, log.domain
-            )
+            domain_displayed = dict(constants.ZETES_DOMAINS).get(log.domain, log.domain)
 
-            name = u'{} on {} by {}'.format(
+            name = u"{} on {} by {}".format(
                 command_displayed, domain_displayed, log.user_id.name
             )
-            command = u'{}_{}'.format(log.action.upper(), log.domain.upper())
+            command = u"{}_{}".format(log.action.upper(), log.domain.upper())
             log.name = name
             log.command = command
 

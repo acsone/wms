@@ -24,20 +24,20 @@ from odoo.exceptions import Warning
 
 
 class StockPicking(models.Model):
-    _inherit = 'stock.picking'
+    _inherit = "stock.picking"
 
     @api.one
     def button_fillwithstock(self):
         # check source location has no children, i.e. we scanned a bin
         if self.location_id.child_ids:
-            raise Warning(_('Please choose a source end location'))
+            raise Warning(_("Please choose a source end location"))
         if self.move_lines:
-            raise Warning(_('Moves lines already exsits'))
-        quants = self.env['stock.quant'].search(
+            raise Warning(_("Moves lines already exsits"))
+        quants = self.env["stock.quant"].search(
             [
-                ('location_id', 'child_of', self.location_id.id),
-                ('reservation_id', '=', False),
-                ('qty', '>', 0.0),
+                ("location_id", "child_of", self.location_id.id),
+                ("reservation_id", "=", False),
+                ("qty", ">", 0.0),
             ]
         )
         products = {}
@@ -47,20 +47,20 @@ class StockPicking(models.Model):
                 available = True
             if quant.product_id.id not in products:
                 products[quant.product_id.id] = {
-                    'picking_id': self.id,
-                    'product_id': quant.product_id.id,
-                    'name': quant.product_id.partner_ref,
-                    'product_uom_qty': quant.qty,
-                    'product_uom': quant.product_uom_id.id,
-                    'picking_type_id': self.picking_type_id.id,
-                    'location_id': self.location_id.id,
-                    'location_dest_id': self.location_dest_id.id,
+                    "picking_id": self.id,
+                    "product_id": quant.product_id.id,
+                    "name": quant.product_id.partner_ref,
+                    "product_uom_qty": quant.qty,
+                    "product_uom": quant.product_uom_id.id,
+                    "picking_type_id": self.picking_type_id.id,
+                    "location_id": self.location_id.id,
+                    "location_dest_id": self.location_dest_id.id,
                 }
             else:
-                products[quant.product_id.id]['product_uom_qty'] += quant.qty
-        move_obj = self.env['stock.move']
+                products[quant.product_id.id]["product_uom_qty"] += quant.qty
+        move_obj = self.env["stock.move"]
         if not available:
-            raise Warning(_('Nothing to move'))
+            raise Warning(_("Nothing to move"))
         for data in products.values():
             move_obj.create(data)
         self.action_confirm()

@@ -7,6 +7,6 @@ from odoo import fields, models
 
 
 class SaleOrderLine(models.Model):
-    _inherit = 'sale.order.line'
+    _inherit = "sale.order.line"
 
-    esb_ref = fields.Integer(string='Reference for ESB', copy=False)
+    esb_ref = fields.Integer(string="Reference for ESB", copy=False)

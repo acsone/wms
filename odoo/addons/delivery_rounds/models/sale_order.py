@@ -11,17 +11,17 @@ _logger = logging.getLogger(__name__)
 
 
 class SaleOrderLine(models.Model):
-    _inherit = 'sale.order.line'
+    _inherit = "sale.order.line"
 
     @api.multi
     def _action_procurement_create(self):
         res = super(SaleOrderLine, self)._action_procurement_create()
-        self.mapped('order_id')._assign_delivery_round()
+        self.mapped("order_id")._assign_delivery_round()
         return res
 
 
 class SaleOrder(models.Model):
-    _inherit = 'sale.order'
+    _inherit = "sale.order"
 
     @api.one
     def _assign_delivery_round(self):
@@ -39,8 +39,8 @@ class SaleOrder(models.Model):
         # multiple pickings could be created, or inserted in existing pickings
 
         pickings = self.picking_ids.filtered(
-            lambda picking: picking.picking_type_subcode == 'PICK'
-            and picking.state not in ('done', 'cancel')
+            lambda picking: picking.picking_type_subcode == "PICK"
+            and picking.state not in ("done", "cancel")
             and not picking.printed
         )
         if not pickings:
@@ -48,16 +48,13 @@ class SaleOrder(models.Model):
 
         if template:
             _logger.debug(
-                "Associate SO %d to delivery instance matching " "carrier",
-                self.id,
+                "Associate SO %d to delivery instance matching " "carrier", self.id
             )
-            delivery_round = self.env['round.instance'].find_bytemplate(
-                template
-            )
+            delivery_round = self.env["round.instance"].find_bytemplate(template)
             if (
                 delivery_round
-                and pickings.mapped('delivery_round_id')
-                and delivery_round != pickings.mapped('delivery_round_id')
+                and pickings.mapped("delivery_round_id")
+                and delivery_round != pickings.mapped("delivery_round_id")
             ):
                 raise ValidationError(
                     _(
@@ -66,7 +63,7 @@ class SaleOrder(models.Model):
                     )
                 )
         else:
-            delivery_round = pickings.mapped('delivery_round_id')
+            delivery_round = pickings.mapped("delivery_round_id")
             if len(delivery_round) > 1:
                 raise ValidationError(
                     _(
@@ -75,7 +72,7 @@ class SaleOrder(models.Model):
                     )
                 )
             if not delivery_round:
-                delivery_round = self.env['round.instance'].find_bypartner(
+                delivery_round = self.env["round.instance"].find_bypartner(
                     pickings[0].partner_id
                 )
 

@@ -6,12 +6,12 @@ from odoo import fields, models
 
 
 class ResPartner(models.Model):
-    _inherit = 'res.partner'
+    _inherit = "res.partner"
 
     working_schedules_ids = fields.One2many(
-        'partner.scheduled.week',
-        'partner_id',
-        string='Partner Schedule',
+        "partner.scheduled.week",
+        "partner_id",
+        string="Partner Schedule",
         ondelete="cascade",
     )
 
@@ -22,7 +22,6 @@ class ResPartner(models.Model):
         self.ensure_one()
         return not bool(
             self.working_schedules_ids.filtered(
-                lambda l: l.start_date <= day
-                and (l.end_date >= day or not l.end_date)
+                lambda l: l.start_date <= day and (l.end_date >= day or not l.end_date)
             )
         )

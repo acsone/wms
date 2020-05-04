@@ -10,17 +10,15 @@ from ...components.mapper import falsy2emptystring
 
 
 class CustomerAddressExportMapper(Component):
-    _name = 'esb.customer.address.mapper'
-    _inherit = ['esb.export.mapper']
-    _apply_on = 'res.partner'
+    _name = "esb.customer.address.mapper"
+    _inherit = ["esb.export.mapper"]
+    _apply_on = "res.partner"
 
     @classmethod
     def _component_match(cls, work):
-        return bool(
-            work.timestamp and work.timestamp.kind == 'customer.address'
-        )
+        return bool(work.timestamp and work.timestamp.kind == "customer.address")
 
-    direct = [(falsy2emptystring('city'), 'City')]
+    direct = [(falsy2emptystring("city"), "City")]
 
     @mapping
     def compute_name(self, record):
@@ -28,23 +26,23 @@ class CustomerAddressExportMapper(Component):
             name = record.name_get()[0][1]
         except TypeError:
             name = record.name
-        return {'Firstname': name or ''}
+        return {"Firstname": name or ""}
 
     @mapping
     def compute_optional_fields(self, record):
         """ Manage the direct fields that are optional """
         val = {}
         if record.fax:
-            val['Fax'] = record.fax
+            val["Fax"] = record.fax
         if record.phone:
-            val['Telephone'] = record.phone
+            val["Telephone"] = record.phone
         if record.zip:
-            val['Postcode'] = record.zip
+            val["Postcode"] = record.zip
         return val
 
     @mapping
     def compute_customerid(self, record):
-        return {'CustomerId': self.options.customer_id or ''}
+        return {"CustomerId": self.options.customer_id or ""}
 
     @mapping
     def compute_addressid(self, record):
@@ -63,56 +61,54 @@ class CustomerAddressExportMapper(Component):
 
         """
 
-        INVOICE_REF = '5'
-        DELIVERY_REF = '12'
+        INVOICE_REF = "5"
+        DELIVERY_REF = "12"
 
         if record.parent_id:
-            if self.options.address_kind == 'delivery':
+            if self.options.address_kind == "delivery":
                 address_id = DELIVERY_REF
-            elif self.options.address_kind == 'invoice':
+            elif self.options.address_kind == "invoice":
                 address_id = INVOICE_REF
-        elif self.options.address_kind == 'delivery':
-            address_id = '0'
+        elif self.options.address_kind == "delivery":
+            address_id = "0"
         else:
             address_id = record.ref
-        return {'AddressId': address_id or ''}
+        return {"AddressId": address_id or ""}
 
     @mapping
     def compute_street(self, record):
-        street = record.street or ''
+        street = record.street or ""
         if record.street2:
-            street += '\n' + record.street2
-        return {'Street': street or ''}
+            street += "\n" + record.street2
+        return {"Street": street or ""}
 
     @mapping
     def compute_country_id(self, record):
         if record.country_id:
-            return {'CountryId': record.country_id.esb_ref or ''}
+            return {"CountryId": record.country_id.esb_ref or ""}
         else:
-            return {'CountryId': ''}
+            return {"CountryId": ""}
 
     @mapping
     def compute_isdefaults(self, record):
         """Set the type of address being created it is one or the other"""
-        is_invoicing_address = self.options.address_kind == 'invoice'
+        is_invoicing_address = self.options.address_kind == "invoice"
         return {
-            'IsDefaultBilling': (is_invoicing_address),
-            'IsDefaultShipping': (not is_invoicing_address),
+            "IsDefaultBilling": (is_invoicing_address),
+            "IsDefaultShipping": (not is_invoicing_address),
         }
 
 
 class CustomerAddressCronExporter(Component):
 
-    _name = 'esb.customer.address.cron.exporter'
-    _inherit = 'esb.cron.exporter'
-    _usage = 'record.exporter.cron'
-    _apply_on = 'res.partner'
+    _name = "esb.customer.address.cron.exporter"
+    _inherit = "esb.cron.exporter"
+    _usage = "record.exporter.cron"
+    _apply_on = "res.partner"
 
     @classmethod
     def _component_match(cls, work):
-        return bool(
-            work.timestamp and work.timestamp.kind == 'customer.address'
-        )
+        return bool(work.timestamp and work.timestamp.kind == "customer.address")
 
     def _prepare_item(self, items):
         prepared = []
@@ -127,11 +123,11 @@ class CustomerAddressCronExporter(Component):
     def _valid_address_domain(self):
         """All address that are sent must be valid."""
         return [
-            ('city', '!=', ''),
-            ('name', '!=', ''),
-            ('zip', '!=', ''),
-            ('street', '!=', ''),
-            ('country_id.esb_ref', '!=', ''),
+            ("city", "!=", ""),
+            ("name", "!=", ""),
+            ("zip", "!=", ""),
+            ("street", "!=", ""),
+            ("country_id.esb_ref", "!=", ""),
         ]
 
     def get_items(self, export_since):
@@ -145,25 +141,23 @@ class CustomerAddressCronExporter(Component):
         Magento.
         This default method address_get has been monkey patched for Alcyon.
         """
-        items = super(CustomerAddressCronExporter, self).get_items(
-            export_since
-        )
-        modified_items_ids = set(items.mapped('id'))
+        items = super(CustomerAddressCronExporter, self).get_items(export_since)
+        modified_items_ids = set(items.mapped("id"))
         # get_items will return all modified customer including the addresses.
         # Then for all commercial partner with potentially modified addresses.
-        commercial_partners = items.mapped('commercial_partner_id')
+        commercial_partners = items.mapped("commercial_partner_id")
         # Search for the impacted customers in their structure.
-        possible_impacted_customer = self.env['res.partner'].search(
+        possible_impacted_customer = self.env["res.partner"].search(
             [
-                ('commercial_partner_id', 'in', commercial_partners.ids),
-                ('customer', '=', True),
-                ('email', '<>', False),
+                ("commercial_partner_id", "in", commercial_partners.ids),
+                ("customer", "=", True),
+                ("email", "<>", False),
             ]
         )
         items2export = []
         for customer in possible_impacted_customer:
             # For each customer get the invoice and devlivery addresses
-            addresses = customer.address_get(('invoice', 'delivery'))
+            addresses = customer.address_get(("invoice", "delivery"))
             # If one of them has changed
             impacting_records = set(addresses.values())
             if not modified_items_ids.intersection(impacting_records):
@@ -172,26 +166,22 @@ class CustomerAddressCronExporter(Component):
             items2export.append(
                 (
                     customer.ref,
-                    'invoice',
-                    self.env['res.partner'].browse(addresses['invoice']),
+                    "invoice",
+                    self.env["res.partner"].browse(addresses["invoice"]),
                 )
             )
             items2export.append(
                 (
                     customer.ref,
-                    'delivery',
-                    self.env['res.partner'].browse(addresses['delivery']),
+                    "delivery",
+                    self.env["res.partner"].browse(addresses["delivery"]),
                 )
             )
         return items2export
 
     def get_items_domain(self):
         """Find all records that can be used as customer addresses."""
-        domain = [
-            '|',
-            ('customer', '=', 1),
-            ('type', 'in', ['invoice', 'delivery']),
-        ]
+        domain = ["|", ("customer", "=", 1), ("type", "in", ["invoice", "delivery"])]
         return AND([domain, self._valid_address_domain()])
 
     def run(self, export_since=None, max_records=0):

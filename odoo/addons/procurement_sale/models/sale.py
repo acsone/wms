@@ -33,20 +33,16 @@ class SaleOrder(models.Model):
 class SaleOrderLine(models.Model):
     _inherit = "sale.order.line"
 
-    date_order = fields.Datetime(
-        related="order_id.date_order", readonly="True"
-    )
+    date_order = fields.Datetime(related="order_id.date_order", readonly="True")
 
     current_product_qty_unavailable = fields.Float(
-        string='Current quantity unavailable',
-        digits=dp.get_precision('Product Unit of Measure'),
-        compute='_compute_current_product_qty_unavailable',
+        string="Current quantity unavailable",
+        digits=dp.get_precision("Product Unit of Measure"),
+        compute="_compute_current_product_qty_unavailable",
     )
 
     @api.model
-    def get_product_qty_unavailable(
-        self, product, product_uom_qty, confirmed, line_id
-    ):
+    def get_product_qty_unavailable(self, product, product_uom_qty, confirmed, line_id):
         if product and product_uom_qty:
             immediately_usable_qty = product.immediately_usable_qty
             if confirmed:
@@ -66,41 +62,37 @@ class SaleOrderLine(models.Model):
                     # equals the immediately usable quantity
                     # minus the sum of stock move quantity
                     # which stock move is after the order line stock move
-                    order_line_stock_move = self.env['stock.move'].search(
+                    order_line_stock_move = self.env["stock.move"].search(
                         [
-                            ('procurement_id.sale_line_id', '=', line_id),
-                            ('state', 'not in', ['draft', 'cancel', 'done']),
+                            ("procurement_id.sale_line_id", "=", line_id),
+                            ("state", "not in", ["draft", "cancel", "done"]),
                         ],
                         limit=1,
                     )
                     if not order_line_stock_move:
-                        return min(
-                            abs(immediately_usable_qty), product_uom_qty
-                        )
-                    stock_move_date_expected = (
-                        order_line_stock_move.date_expected
-                    )
+                        return min(abs(immediately_usable_qty), product_uom_qty)
+                    stock_move_date_expected = order_line_stock_move.date_expected
 
-                    next_stock_moves = self.env['stock.move'].search(
+                    next_stock_moves = self.env["stock.move"].search(
                         [
-                            ('product_id', '=', product.id),
-                            ('location_id.usage', 'in', ('internal', 'view')),
-                            ('location_dest_id.usage', '=', 'customer'),
-                            ('procurement_id.sale_line_id', '!=', line_id),
-                            ('state', 'not in', ['draft', 'cancel', 'done']),
-                            '|',
-                            '|',
-                            ('priority', '<', order_line_stock_move.priority),
-                            '&',
-                            ('priority', '=', order_line_stock_move.priority),
-                            ('date_expected', '>', stock_move_date_expected),
+                            ("product_id", "=", product.id),
+                            ("location_id.usage", "in", ("internal", "view")),
+                            ("location_dest_id.usage", "=", "customer"),
+                            ("procurement_id.sale_line_id", "!=", line_id),
+                            ("state", "not in", ["draft", "cancel", "done"]),
+                            "|",
+                            "|",
+                            ("priority", "<", order_line_stock_move.priority),
+                            "&",
+                            ("priority", "=", order_line_stock_move.priority),
+                            ("date_expected", ">", stock_move_date_expected),
                             # in rare case of same date_expected,
                             # use id to sort the moves
-                            '&',
-                            '&',
-                            ('priority', '=', order_line_stock_move.priority),
-                            ('date_expected', '=', stock_move_date_expected),
-                            ('id', '>', order_line_stock_move.id),
+                            "&",
+                            "&",
+                            ("priority", "=", order_line_stock_move.priority),
+                            ("date_expected", "=", stock_move_date_expected),
+                            ("id", ">", order_line_stock_move.id),
                         ]
                     )
                     next_quantities = sum(
@@ -112,9 +104,7 @@ class SaleOrderLine(models.Model):
                     )
 
                     if good_immediately_usable_qty <= 0:
-                        return min(
-                            product_uom_qty, abs(good_immediately_usable_qty)
-                        )
+                        return min(product_uom_qty, abs(good_immediately_usable_qty))
                     else:
                         return 0
             else:
@@ -135,20 +125,20 @@ class SaleOrderLine(models.Model):
         else:
             return None
 
-    @api.onchange('product_id', 'product_uom_qty', 'route_id', 'date_order')
+    @api.onchange("product_id", "product_uom_qty", "route_id", "date_order")
     def onchange_for_product_qty_unavailable(self):
         context = self.env.context or {}
-        if context.get('must_compute_product_qty_unavailable'):
+        if context.get("must_compute_product_qty_unavailable"):
             for line in self:
                 line.product_qty_unavailable = line.get_product_qty_unavailable(
                     # context change to get the corrections of immediately
                     # available qty with the date and priority
                     line.product_id.with_context(
-                        prio=line.route_id.priority or '1',
+                        prio=line.route_id.priority or "1",
                         date=line.order_id.date_order,
                     ),
                     line.product_uom_qty,
-                    line.state == 'sale',
+                    line.state == "sale",
                     None,
                 )
 
@@ -157,23 +147,21 @@ class SaleOrderLine(models.Model):
         """ If the route has changed, we need to adapt the procurement. Cancel
         it and recreate it """
         changed_lines = False
-        if 'route_id' in values:
-            changed_lines = self.filtered(lambda r: r.state == 'sale')
+        if "route_id" in values:
+            changed_lines = self.filtered(lambda r: r.state == "sale")
             if changed_lines:
-                changed_lines.mapped('procurement_ids').cancel()
-                changed_lines.mapped('procurement_ids').write(
-                    {'sale_line_id': False}
-                )
-                if 'product_uom_qty' in values:
+                changed_lines.mapped("procurement_ids").cancel()
+                changed_lines.mapped("procurement_ids").write({"sale_line_id": False})
+                if "product_uom_qty" in values:
                     # then procurement is already recreated in standard
-                    precision = self.env['decimal.precision'].precision_get(
-                        'Product Unit of Measure'
+                    precision = self.env["decimal.precision"].precision_get(
+                        "Product Unit of Measure"
                     )
                     changed_lines -= self.filtered(
-                        lambda r: r.state == 'sale'
+                        lambda r: r.state == "sale"
                         and float_compare(
                             r.product_uom_qty,
-                            values['product_uom_qty'],
+                            values["product_uom_qty"],
                             precision_digits=precision,
                         )
                         == -1
@@ -191,13 +179,13 @@ class SaleOrderLine(models.Model):
         if not self.order_id.confirmation_date:
             raise UserError(
                 _(
-                    'Missing sale order confirmation date. '
-                    'Cannot plan delivery procurement order'
+                    "Missing sale order confirmation date. "
+                    "Cannot plan delivery procurement order"
                 )
             )
-        vals['date_planned'] = self.order_id.confirmation_date
+        vals["date_planned"] = self.order_id.confirmation_date
         if self.route_id.priority:
-            vals['priority'] = self.route_id.priority
+            vals["priority"] = self.route_id.priority
         return vals
 
     def _compute_current_product_qty_unavailable(self):
@@ -208,11 +196,9 @@ class SaleOrderLine(models.Model):
                 self.get_product_qty_unavailable(
                     # context change to get the corrections of immediately
                     # available qty with the date and priority
-                    line.product_id.with_context(
-                        prio=line.route_id.priority or '1'
-                    ),
+                    line.product_id.with_context(prio=line.route_id.priority or "1"),
                     line.product_uom_qty,
-                    line.state == 'sale',
+                    line.state == "sale",
                     line.id,
                 ),
                 line.product_qty_remains_to_deliver,

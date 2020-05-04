@@ -14,20 +14,19 @@ SFTP_TIMEOUT = 30
 
 
 class FTPConnector(models.Model):
-    _name = 'ftp.connector'
+    _name = "ftp.connector"
 
     name = fields.Char(required=True)
     type = fields.Selection(
-        [('ftp', 'FTP'), ('sftp', 'sFTP')], string='Type', required=True
+        [("ftp", "FTP"), ("sftp", "sFTP")], string="Type", required=True
     )
     hostname = fields.Char(required=True)
     username = fields.Char(required=True)
     password = fields.Char()
     port = fields.Integer(default=22)
     pk_env_variable = fields.Char(
-        'Primary key environment variable',
-        help='The name of the environment variable who '
-        'contains the primary key',
+        "Primary key environment variable",
+        help="The name of the environment variable who " "contains the primary key",
     )
 
     def get_ftp_connector(self):
@@ -41,17 +40,13 @@ class FTPConnector(models.Model):
 
         pk_env_variable = self.pk_env_variable
         if not pk_env_variable:
-            raise UserError(
-                _('Please set the primary key environment variable')
-            )
+            raise UserError(_("Please set the primary key environment variable"))
 
         private_key = os.environ.get(pk_env_variable)
         if not private_key:
-            raise UserError(_('%s must be set in environ') % pk_env_variable)
+            raise UserError(_("%s must be set in environ") % pk_env_variable)
 
-        pkey = paramiko.RSAKey.from_private_key(
-            StringIO(private_key.decode('utf8'))
-        )
+        pkey = paramiko.RSAKey.from_private_key(StringIO(private_key.decode("utf8")))
 
         with paramiko.SSHClient() as ssh:
             ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy)
@@ -70,7 +65,7 @@ class FTPConnector(models.Model):
     def test_connection(self):
         self.ensure_one()
 
-        if self.type == 'sftp':
+        if self.type == "sftp":
             self.test_sftp_connection()
         else:
             self.test_ftp_connection()
@@ -80,15 +75,15 @@ class FTPConnector(models.Model):
         self.ensure_one()
 
         with self.get_ftp_connector() as connector:
-            connector.dir('/')
+            connector.dir("/")
 
-        raise UserError(_('Everything seems ok'))
+        raise UserError(_("Everything seems ok"))
 
     @api.multi
     def test_sftp_connection(self):
         self.ensure_one()
 
         with self.get_sftp_connector() as connector:
-            connector.listdir('/')
+            connector.listdir("/")
 
-        raise UserError(_('Everything seems ok'))
+        raise UserError(_("Everything seems ok"))

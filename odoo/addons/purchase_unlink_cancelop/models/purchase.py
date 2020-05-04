@@ -6,7 +6,7 @@ from odoo import models
 
 
 class PurchaseOrderLine(models.Model):
-    _inherit = 'purchase.order.line'
+    _inherit = "purchase.order.line"
 
     def unlink(self):
         """ In standard, when a PO line is deleted, the procurement is set in
@@ -17,6 +17,6 @@ class PurchaseOrderLine(models.Model):
         """
         for line in self:
             line.procurement_ids.filtered(
-                lambda r: r.orderpoint_id and r.state != 'cancel'
-            ).write({'state': 'cancel'})
+                lambda r: r.orderpoint_id and r.state != "cancel"
+            ).write({"state": "cancel"})
         return super(PurchaseOrderLine, self).unlink()

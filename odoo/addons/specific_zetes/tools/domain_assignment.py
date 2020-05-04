@@ -14,101 +14,101 @@ MAX_RETRY = 10
 
 class Assignment(DomainInterface):
     EXAMPLE_REQU = (
-        '208030828,2.2.3,3iV_101,REQU_ASSIGNMENT,30,1,20170207,'
-        '072835,30427733115352,1,1,1,01,,,,,,,,,,,,,,,,,,,,,,,,,'
-        ',,,,,,,,,,,,,,,'
+        "208030828,2.2.3,3iV_101,REQU_ASSIGNMENT,30,1,20170207,"
+        "072835,30427733115352,1,1,1,01,,,,,,,,,,,,,,,,,,,,,,,,,"
+        ",,,,,,,,,,,,,,,"
     )
     EXAMPLE_RESP = (
-        '208030828,2.2.3,3iV_101,RESP_ASSIGNMENT,30,1,20170207,'
-        '072820,30427733115352,0,,1,1,000000001625844,,00,,'
-        'Vétérinaires,95,0,0,C,CLINIQUE VET. DU MONT-FALISE,'
-        '4520 WANZE,00018,'
+        "208030828,2.2.3,3iV_101,RESP_ASSIGNMENT,30,1,20170207,"
+        "072820,30427733115352,0,,1,1,000000001625844,,00,,"
+        "Vétérinaires,95,0,0,C,CLINIQUE VET. DU MONT-FALISE,"
+        "4520 WANZE,00018,"
     )
     EXAMPLE_RESU = (
-        '208030828,2.2.3,3iV_101,RESU_ASSIGNMENT,30,1,20170207,'
-        '072836,30427733115363,000000001625844,,,,'
-        '01,123456789,,,,,,,,,,'
+        "208030828,2.2.3,3iV_101,RESU_ASSIGNMENT,30,1,20170207,"
+        "072836,30427733115363,000000001625844,,,,"
+        "01,123456789,,,,,,,,,,"
     )
     REQU = (
-        'assignmentType',
-        'requestType',
-        'tripCounter',
-        'Cri01',
-        'Cri02',
-        'Cri03',
-        'Cri04',
-        'Cri05',
-        'Cri06',
-        'Cri07',
-        'Cri08',
-        'Cri09',
-        'Cri10',
-        'Cri11',
-        'Cri12',
-        'Cri13',
-        'Cri14',
-        'Cri15',
-        'Cri16',
-        'Cri17',
-        'Cri18',
-        'Cri19',
-        'Cri20',
-        'Cri21',
-        'Cri22',
-        'Cri23',
-        'Cri24',
-        'Cri25',
-        'Cri26',
-        'Cri27',
-        'Cri28',
-        'Cri29',
-        'Cri30',
-        'Usf01',
-        'Usf02',
-        'Usf03',
-        'Usf04',
-        'Usf05',
-        'Usf06',
-        'Usf07',
-        'Usf08',
-        'Usf09',
-        'Usf10',
+        "assignmentType",
+        "requestType",
+        "tripCounter",
+        "Cri01",
+        "Cri02",
+        "Cri03",
+        "Cri04",
+        "Cri05",
+        "Cri06",
+        "Cri07",
+        "Cri08",
+        "Cri09",
+        "Cri10",
+        "Cri11",
+        "Cri12",
+        "Cri13",
+        "Cri14",
+        "Cri15",
+        "Cri16",
+        "Cri17",
+        "Cri18",
+        "Cri19",
+        "Cri20",
+        "Cri21",
+        "Cri22",
+        "Cri23",
+        "Cri24",
+        "Cri25",
+        "Cri26",
+        "Cri27",
+        "Cri28",
+        "Cri29",
+        "Cri30",
+        "Usf01",
+        "Usf02",
+        "Usf03",
+        "Usf04",
+        "Usf05",
+        "Usf06",
+        "Usf07",
+        "Usf08",
+        "Usf09",
+        "Usf10",
     )
     RESP = (
-        'respCode',
-        'respMsg',
-        'assignmentType',
-        'responseType',
-        'groupNum',
-        'groupSubNum',
-        'assignmentStatus',
-        'Usf01',
-        'Usf02',
-        'Usf03',
-        'Usf04',
-        'Usf05',
-        'Usf06',
-        'Usf07',
-        'Usf08',
-        'Usf09',
-        'Usf10',
+        "respCode",
+        "respMsg",
+        "assignmentType",
+        "responseType",
+        "groupNum",
+        "groupSubNum",
+        "assignmentStatus",
+        "Usf01",
+        "Usf02",
+        "Usf03",
+        "Usf04",
+        "Usf05",
+        "Usf06",
+        "Usf07",
+        "Usf08",
+        "Usf09",
+        "Usf10",
     )
     RESU = (
-        'groupNum',
-        'groupSubNum',
-        'headerNum',
-        'headerSubNum',
-        'assignmentStatus',
-        'Usf01',
-        'Usf02',
-        'Usf03',
-        'Usf04',
-        'Usf05',
-        'Usf06',
-        'Usf07',
-        'Usf08',
-        'Usf09',
-        'Usf10',
+        "groupNum",
+        "groupSubNum",
+        "headerNum",
+        "headerSubNum",
+        "assignmentStatus",
+        "Usf01",
+        "Usf02",
+        "Usf03",
+        "Usf04",
+        "Usf05",
+        "Usf06",
+        "Usf07",
+        "Usf08",
+        "Usf09",
+        "Usf10",
     )
 
     def requ(self, params):
@@ -123,7 +123,7 @@ class Assignment(DomainInterface):
         :param params:
         :return:
         """
-        result = Parameters(self, action='resp')
+        result = Parameters(self, action="resp")
 
         # If the picker request a new picking (Cri02 is the picking ID)
         if not params.Cri02:
@@ -143,8 +143,8 @@ class Assignment(DomainInterface):
             else:
                 result.update(
                     {
-                        'respCode': constants.RESPONSE_CODE_ERROR,
-                        'respMsg': _('Unknown assignment type'),
+                        "respCode": constants.RESPONSE_CODE_ERROR,
+                        "respMsg": _("Unknown assignment type"),
                     }
                 )
                 return result.format()
@@ -152,15 +152,15 @@ class Assignment(DomainInterface):
             if not picking:
                 result.update(
                     {
-                        'respCode': constants.RESPONSE_CODE_ERROR,
-                        'respMsg': _('Cannot found a picking'),
+                        "respCode": constants.RESPONSE_CODE_ERROR,
+                        "respMsg": _("Cannot found a picking"),
                     }
                 )
                 return result.format()
         # If the picker want to continue a picking (Cri02 is not empty)
         else:
             picking_id = int(params.Cri02)
-            picking = self.request.env['stock.picking'].browse(picking_id)
+            picking = self.request.env["stock.picking"].browse(picking_id)
 
         # Assign the picking
         picking.assign_operator()
@@ -172,9 +172,9 @@ class Assignment(DomainInterface):
         # take the checksum on the left (=> bin_checksum_2)
         is_odd_day = date.today().day % 2
         if is_odd_day:
-            result.Usf10 = _('left')
+            result.Usf10 = _("left")
         else:
-            result.Usf10 = _('right')
+            result.Usf10 = _("right")
 
         partner = picking.partner_id
 
@@ -182,18 +182,16 @@ class Assignment(DomainInterface):
 
         result.update(
             {
-                'respCode': constants.RESPONSE_CODE_OK,
-                'groupNum': picking.id,
-                'Usf02': partner.alcyon_category_id.name,
-                'Usf03': round_name,
-                'Usf04': 0,  # Constant value
-                'Usf05': 0,  # Constant value
-                'Usf07': partner.name,  # Partner name
+                "respCode": constants.RESPONSE_CODE_OK,
+                "groupNum": picking.id,
+                "Usf02": partner.alcyon_category_id.name,
+                "Usf03": round_name,
+                "Usf04": 0,  # Constant value
+                "Usf05": 0,  # Constant value
+                "Usf07": partner.name,  # Partner name
                 # Zip + city
-                'Usf08': u'{} {}'.format(
-                    partner.zip or '', partner.city or ''
-                ),
-                'Usf09': picking.nbr_actions,  # Nbr of operation
+                "Usf08": u"{} {}".format(partner.zip or "", partner.city or ""),
+                "Usf09": picking.nbr_actions,  # Nbr of operation
             }
         )
 
@@ -202,17 +200,14 @@ class Assignment(DomainInterface):
         )
         picking.is_passport_required = is_passport_required
         if is_passport_required:
-            result.Usf06 = 'C'  # This partner request a double control
+            result.Usf06 = "C"  # This partner request a double control
             picking.assign_picking_checksum()
         else:
-            result.Usf06 = 'E'  # Simple packaging
+            result.Usf06 = "E"  # Simple packaging
 
         if picking.zetes_state == constants.AS_CANCELED:
             result.update(
-                {
-                    'assignmentStatus': constants.AS_START,
-                    'Usf01': picking.checksum,
-                }
+                {"assignmentStatus": constants.AS_START, "Usf01": picking.checksum}
             )
         else:
             result.assignmentStatus = constants.AS_DEFAULT
@@ -242,22 +237,19 @@ class Assignment(DomainInterface):
         if not picking_id:
             return
 
-        picking = self.request.env['stock.picking'].browse(int(picking_id))
+        picking = self.request.env["stock.picking"].browse(int(picking_id))
         if not len(picking):
             return
         picking._lock_rows()
         try:
             picking_zetes_state = params.assignmentStatus
 
-            if params.assignmentStatus in [
-                constants.AS_DONE,
-                constants.AS_FINISHED,
-            ]:
+            if params.assignmentStatus in [constants.AS_DONE, constants.AS_FINISHED]:
 
                 if not picking.is_passport_required:
                     picking.validate_picking()
                 else:
-                    picking_zetes_state = 'passport'
+                    picking_zetes_state = "passport"
             elif params.assignmentStatus == constants.AS_CANCELED:
                 picking.interrupt_picking()
 
@@ -306,20 +298,17 @@ WHERE pick_type.subcode = 'PICK'
 --                       AND si.state = 'confirm')
                 """
         query_values = {
-            'picking_zetes_state': (
-                constants.AS_DEFAULT,
-                constants.AS_CANCELED,
-            ),
-            'picking_type': constants.PICKING_ASSIGNMENT,
-            'op_zetes_state': (constants.OP_DEFAULT, constants.OP_SKIPPED),
-            'operator': self._operator_user.id,
+            "picking_zetes_state": (constants.AS_DEFAULT, constants.AS_CANCELED),
+            "picking_type": constants.PICKING_ASSIGNMENT,
+            "op_zetes_state": (constants.OP_DEFAULT, constants.OP_SKIPPED),
+            "operator": self._operator_user.id,
         }
 
         # Search a picking in a specific zone (like Food)
         zone_code = params.Cri01
         if zone_code:
             picking_query += "AND picking_zone.code = %(zone_code)s "
-            query_values['zone_code'] = zone_code
+            query_values["zone_code"] = zone_code
 
         picking_query += (
             "ORDER BY picking.operator_id, "
@@ -334,7 +323,7 @@ WHERE pick_type.subcode = 'PICK'
 
         if query_result and query_result[0]:
             picking_id = query_result[0]
-            picking = self.request.env['stock.picking'].browse(picking_id)
+            picking = self.request.env["stock.picking"].browse(picking_id)
         else:
             return False
 
@@ -379,20 +368,17 @@ WHERE picking.state IN ('partially_available', 'assigned')
                 """
 
         query_values = {
-            'picking_zetes_state': (
-                constants.AS_DEFAULT,
-                constants.AS_CANCELED,
-            ),
-            'picking_type': constants.RANGEMENT_ASSIGNMENT,
-            'op_zetes_state': (constants.OP_DEFAULT, constants.OP_SKIPPED),
-            'operator': self._operator_user.id,
+            "picking_zetes_state": (constants.AS_DEFAULT, constants.AS_CANCELED),
+            "picking_type": constants.RANGEMENT_ASSIGNMENT,
+            "op_zetes_state": (constants.OP_DEFAULT, constants.OP_SKIPPED),
+            "operator": self._operator_user.id,
         }
 
         # Search a picking in a specific zone (like Food)
         zone_code = params.Cri01
         if zone_code:
             picking_query += "AND picking_zone.code = %(zone_code)s "
-            query_values['zone_code'] = zone_code
+            query_values["zone_code"] = zone_code
 
         picking_query += (
             "ORDER BY picking.operator_id, " "picking.rank DESC " "LIMIT 1;"
@@ -403,7 +389,7 @@ WHERE picking.state IN ('partially_available', 'assigned')
 
         if query_result and query_result[0]:
             picking_id = query_result[0]
-            picking = self.request.env['stock.picking'].browse(picking_id)
+            picking = self.request.env["stock.picking"].browse(picking_id)
             return picking
 
         # Picking not found. Try to create a new one.
@@ -412,7 +398,7 @@ WHERE picking.state IN ('partially_available', 'assigned')
         query_values = {}
         if zone_code:
             zone_condition = "AND picking_zone.code = %(zone_code)s"
-            query_values['zone_code'] = zone_code
+            query_values["zone_code"] = zone_code
 
         report_query = (
             """
@@ -445,7 +431,7 @@ WHERE picking.state IN ('partially_available', 'assigned')
 
             report_id = report_id[0]
 
-            model_name = 'report.stock.refill.arrange'
+            model_name = "report.stock.refill.arrange"
             report = self.request.env[model_name].browse(report_id)
             # Create the picking
             picking = report.create_picking()
@@ -462,8 +448,8 @@ WHERE picking.state IN ('partially_available', 'assigned')
                 return picking
             else:
                 error_message = (
-                    'The picking %s contains one or more '
-                    'invalid location' % picking.display_name
+                    "The picking %s contains one or more "
+                    "invalid location" % picking.display_name
                 )
                 _logger.error(error_message)
                 params.log(picking_id=picking.id, exception=error_message)
@@ -511,20 +497,17 @@ WHERE picking.state IN ('partially_available', 'assigned')
                 """
 
         query_values = {
-            'picking_zetes_state': (
-                constants.AS_DEFAULT,
-                constants.AS_CANCELED,
-            ),
-            'picking_type': constants.REASSORT_ASSIGNMENT,
-            'op_zetes_state': (constants.OP_DEFAULT, constants.OP_SKIPPED),
-            'operator': self._operator_user.id,
+            "picking_zetes_state": (constants.AS_DEFAULT, constants.AS_CANCELED),
+            "picking_type": constants.REASSORT_ASSIGNMENT,
+            "op_zetes_state": (constants.OP_DEFAULT, constants.OP_SKIPPED),
+            "operator": self._operator_user.id,
         }
 
         # Search a picking in a specific zone (like Food)
         zone_code = params.Cri01
         if zone_code:
             picking_query += "AND picking_zone.code = %(zone_code)s "
-            query_values['zone_code'] = zone_code
+            query_values["zone_code"] = zone_code
 
         picking_query += (
             "ORDER BY picking.operator_id, " "picking.rank DESC " "LIMIT 1;"
@@ -535,7 +518,7 @@ WHERE picking.state IN ('partially_available', 'assigned')
 
         if query_result and query_result[0]:
             picking_id = query_result[0]
-            picking = self.request.env['stock.picking'].browse(picking_id)
+            picking = self.request.env["stock.picking"].browse(picking_id)
             return picking
 
         # Picking not found. Try to create a new one.
@@ -544,7 +527,7 @@ WHERE picking.state IN ('partially_available', 'assigned')
         query_values = {}
         if zone_code:
             zone_condition = "AND picking_zone.code = %(zone_code)s"
-            query_values['zone_code'] = zone_code
+            query_values["zone_code"] = zone_code
 
         report_query = (
             """
@@ -575,7 +558,7 @@ WHERE picking.state IN ('partially_available', 'assigned')
                 break
             report_id = report_id[0]
 
-            model_name = 'report.stock.refill.reassort'
+            model_name = "report.stock.refill.reassort"
             report = self.request.env[model_name].browse(report_id)
 
             # Create the picking
@@ -590,8 +573,8 @@ WHERE picking.state IN ('partially_available', 'assigned')
                 return picking
             else:
                 error_message = (
-                    'The picking %s contains one or more '
-                    'invalid location' % picking.display_name
+                    "The picking %s contains one or more "
+                    "invalid location" % picking.display_name
                 )
                 _logger.error(error_message)
                 params.log(picking_id=picking.id, exception=error_message)

@@ -14,23 +14,21 @@ _logger = logging.getLogger(__name__)
 
 
 class PurchaseOrder(models.Model):
-    _inherit = 'purchase.order'
+    _inherit = "purchase.order"
 
     total_weight = fields.Float(
-        'Total weight',
-        compute='_compute_total_weight',
+        "Total weight",
+        compute="_compute_total_weight",
         readonly=True,
-        help='Total weight in Kg',
+        help="Total weight in Kg",
     )
     responsible_id = fields.Many2one(
-        'res.users', string='Responsible', track_visibility='onchange'
+        "res.users", string="Responsible", track_visibility="onchange"
     )
-    nbr_lines = fields.Integer(
-        'Nbr lines', compute='_compute_nbr_lines', readonly=True
-    )
+    nbr_lines = fields.Integer("Nbr lines", compute="_compute_nbr_lines", readonly=True)
     nbr_lines_bo = fields.Integer(
-        'Nbr lines BO',
-        compute='_compute_nbr_lines_bo',
+        "Nbr lines BO",
+        compute="_compute_nbr_lines_bo",
         search="_search_nbr_lines_bo",
         readonly=True,
     )
@@ -42,15 +40,13 @@ class PurchaseOrder(models.Model):
         pl_day - date in string format
         pl_time - time in float format
         """
-        tz_utc = pytz.timezone('UTC')
-        tz_context = pytz.timezone(self.env.context.get('tz', 'UTC'))
+        tz_utc = pytz.timezone("UTC")
+        tz_context = pytz.timezone(self.env.context.get("tz", "UTC"))
 
         new_planned_date = fields.Datetime.from_string(pl_day)
         hour = int(pl_time)
         minute = int(round(pl_time - hour) * 60)
-        new_planned_date = new_planned_date.replace(
-            hour=hour, minute=minute, second=0
-        )
+        new_planned_date = new_planned_date.replace(hour=hour, minute=minute, second=0)
         return tz_context.localize(new_planned_date).astimezone(tz_utc)
 
     @api.multi
@@ -58,7 +54,7 @@ class PurchaseOrder(models.Model):
         # disabled default method
         for order in self:
             renew_date = self.convert_time(order.date_planned)
-            order.order_line.update({'date_planned': renew_date})
+            order.order_line.update({"date_planned": renew_date})
 
     @api.multi
     def _compute_nbr_lines(self):
@@ -86,13 +82,13 @@ class PurchaseOrder(models.Model):
 
     def _search_nbr_lines_bo(self, operator, value):
         orders = self.browse()
-        draft_orders = self.search([('state', '=', 'draft')])
+        draft_orders = self.search([("state", "=", "draft")])
         for order in draft_orders:
             # NOTE: actual operator is ignored here for the sake of simplicity.
             # To implement if it's really needed.
             if order.nbr_lines_bo:
                 orders |= order
-        return [('id', 'in', orders.ids)]
+        return [("id", "in", orders.ids)]
 
     @api.model
     def create(self, vals):
@@ -101,17 +97,17 @@ class PurchaseOrder(models.Model):
         :param vals:
         :return:
         """
-        if not vals.get('responsible_id') and vals.get('partner_id'):
-            partner = self.env['res.partner'].browse(vals['partner_id'])
+        if not vals.get("responsible_id") and vals.get("partner_id"):
+            partner = self.env["res.partner"].browse(vals["partner_id"])
             if partner.purchase_manager_id:
-                vals['responsible_id'] = partner.purchase_manager_id.id
+                vals["responsible_id"] = partner.purchase_manager_id.id
 
         return super(PurchaseOrder, self).create(vals)
 
     def write(self, vals):
         res = super(PurchaseOrder, self).write(vals)
         for rec in self:
-            if rec.state == 'draft' and vals.get('date_planned'):
+            if rec.state == "draft" and vals.get("date_planned"):
                 rec.action_set_date_planned()
         return res
 
@@ -139,37 +135,31 @@ class PurchaseOrder(models.Model):
         return
 
     last_date_done = fields.Datetime(
-        string='Last date of Transfer',
-        compute='_compute_last_date_done',
-        store=True,
+        string="Last date of Transfer", compute="_compute_last_date_done", store=True
     )
 
-    @api.depends('order_line.qty_received')
+    @api.depends("order_line.qty_received")
     def _compute_last_date_done(self):
         for order in self:
             if order.is_shipped:
-                order.last_date_done = max(
-                    order.picking_ids.mapped('date_done')
-                )
+                order.last_date_done = max(order.picking_ids.mapped("date_done"))
             else:
                 order.last_date_done = False
 
 
 class PurchaseOrderLine(models.Model):
-    _inherit = 'purchase.order.line'
+    _inherit = "purchase.order.line"
 
     price_unit_base = fields.Float(
-        'Unit Price', required=True, digits=dp.get_precision('Product Price')
+        "Unit Price", required=True, digits=dp.get_precision("Product Price")
     )
-    price_unit = fields.Float(string='Unit Price (discounted)')
+    price_unit = fields.Float(string="Unit Price (discounted)")
     discount_global = fields.Float(
         default=lambda line: line.order_id.partner_id.supplier_discount
     )
     promotion_supplier = fields.Float(default=0.0)
-    product_ref = fields.Char('Product ref', related='product_id.default_code')
-    is_bo_line = fields.Boolean(
-        'BO Line', compute='_compute_is_bo_line', readonly=True
-    )
+    product_ref = fields.Char("Product ref", related="product_id.default_code")
+    is_bo_line = fields.Boolean("BO Line", compute="_compute_is_bo_line", readonly=True)
 
     @api.multi
     def _compute_is_bo_line(self):
@@ -196,11 +186,11 @@ class PurchaseOrderLine(models.Model):
         :param vals:
         :return:
         """
-        if 'price_unit' in vals and 'price_unit_base' not in vals:
-            vals['price_unit_base'] = vals['price_unit']
+        if "price_unit" in vals and "price_unit_base" not in vals:
+            vals["price_unit_base"] = vals["price_unit"]
 
-        if 'price_unit_base' in vals and 'price_unit' not in vals:
-            vals['price_unit'] = vals['price_unit_base']
+        if "price_unit_base" in vals and "price_unit" not in vals:
+            vals["price_unit"] = vals["price_unit_base"]
 
         return super(PurchaseOrderLine, self).create(vals)
 
@@ -221,7 +211,7 @@ class PurchaseOrderLine(models.Model):
 
         return super(PurchaseOrderLine, self).write(vals)
 
-    @api.onchange('price_unit_base', 'discount_global', 'promotion_supplier')
+    @api.onchange("price_unit_base", "discount_global", "promotion_supplier")
     def _onchange_price_unit(self):
         """
         This method defines when price unit must be recomputed from the view
@@ -243,9 +233,7 @@ class PurchaseOrderLine(models.Model):
         """
         for line in self:
             price_unit = self._compute_discount(
-                line.price_unit_base,
-                line.discount_global,
-                line.promotion_supplier,
+                line.price_unit_base, line.discount_global, line.promotion_supplier
             )
             # set context only out of onchange context
             # as it would loose cached values otherwise
@@ -253,7 +241,7 @@ class PurchaseOrderLine(models.Model):
                 line = line.with_context(discount_incl=True)
             line.price_unit = price_unit
 
-    @api.onchange('product_qty', 'product_uom')
+    @api.onchange("product_qty", "product_uom")
     def _onchange_quantity(self):
         result = super(PurchaseOrderLine, self)._onchange_quantity()
         self.price_unit_base = self.price_unit
@@ -265,7 +253,7 @@ class PurchaseOrderLine(models.Model):
     def _get_seller(self):
         """Get supplier info for purchase line"""
         self.ensure_one()
-        seller = self.env['res.partner']
+        seller = self.env["res.partner"]
         if self.product_id:
             po = self.order_id
             seller = self.product_id._select_seller(
@@ -283,7 +271,7 @@ class PurchaseOrderLine(models.Model):
         else:
             self.promotion_supplier = 0.0
 
-    @api.onchange('product_id')
+    @api.onchange("product_id")
     def onchange_product_id(self):
         """
         Force discount recomputation, handle scheduled date
@@ -312,9 +300,7 @@ class PurchaseOrderLine(models.Model):
                 line.date_planned = line._get_date_planned(seller)
 
             if not line.discount_global:
-                line.discount_global = (
-                    line.order_id.partner_id.supplier_discount
-                )
+                line.discount_global = line.order_id.partner_id.supplier_discount
             line._set_price_unit()
 
     @api.multi
@@ -339,14 +325,14 @@ class PurchaseOrderLine(models.Model):
         else:
             date_planned = date.today()
 
-        holiday_obj = self.env['bank.holiday']
+        holiday_obj = self.env["bank.holiday"]
         index = 0
         while index < lead_time:
             date_planned += timedelta(days=1)
 
             # Check if there is a bank holiday for the current date planned
             date_order_str = fields.Date.to_string(date_planned)
-            holiday = holiday_obj.search([('date', '=', date_order_str)])
+            holiday = holiday_obj.search([("date", "=", date_order_str)])
             if holiday:
                 continue
 
@@ -380,9 +366,7 @@ class PurchaseOrderLine(models.Model):
             )
         if not date_planned_str:
             date_order_str = po.date_order if po else self.order_id.date_order
-            date_planned_str = self.get_next_scheduled_date(
-                seller, date_order_str
-            )
+            date_planned_str = self.get_next_scheduled_date(seller, date_order_str)
 
         return fields.Datetime.from_string(date_planned_str)
 

@@ -6,27 +6,27 @@ from odoo.exceptions import UserError
 
 
 class ProductProduct(models.Model):
-    _inherit = 'product.product'
+    _inherit = "product.product"
 
-    turnover = fields.Monetary('Turnover', readonly=True)
-    turnover_average = fields.Monetary('Turnover average', readonly=True)
-    turnover_nbr_lines = fields.Integer('Turnover (nbr lines)', readonly=True)
+    turnover = fields.Monetary("Turnover", readonly=True)
+    turnover_average = fields.Monetary("Turnover average", readonly=True)
+    turnover_nbr_lines = fields.Integer("Turnover (nbr lines)", readonly=True)
     turnover_average_nbr_lines = fields.Integer(
-        'Turnover average (nbr lines)', readonly=True
+        "Turnover average (nbr lines)", readonly=True
     )
-    abc_id = fields.Many2one('code.abc', string='ABC', readonly=True)
+    abc_id = fields.Many2one("code.abc", string="ABC", readonly=True)
     business_unit_id = fields.Many2one(
-        'product.category',
-        string='Business unit',
-        compute='_compute_business_unit_id',
+        "product.category",
+        string="Business unit",
+        compute="_compute_business_unit_id",
         readonly=True,
         store=True,
     )
 
-    @api.depends('categ_id')
+    @api.depends("categ_id")
     def _compute_business_unit_id(self):
-        business_units = self.env['product.category'].search(
-            [('is_business_unit', '=', True)]
+        business_units = self.env["product.category"].search(
+            [("is_business_unit", "=", True)]
         )
 
         # If there is business units, we can stop this method now
@@ -70,8 +70,8 @@ class ProductProduct(models.Model):
         the global turnover
         :return:
         """
-        config_param = self.env['ir.config_parameter']
-        turnover_delay = int(config_param.get_param('abc.turnover_delay', 0))
+        config_param = self.env["ir.config_parameter"]
+        turnover_delay = int(config_param.get_param("abc.turnover_delay", 0))
 
         #####################################
         # Compute turnover by Business Unit #
@@ -88,7 +88,7 @@ class ProductProduct(models.Model):
         GROUP BY bu.id;
         """
         self.env.cr.execute(turnover_by_bu_query, (turnover_delay,))
-        business_unit_obj = self.env['product.category']
+        business_unit_obj = self.env["product.category"]
 
         turnover_by_bu = {}
         for line in self.env.cr.fetchall():
@@ -117,7 +117,7 @@ class ProductProduct(models.Model):
             turnover_by_products[result[0]] = [result[1], result[2], result[3]]
 
         # Compute the turnover for all products
-        products = self.env['product.product'].search([])
+        products = self.env["product.product"].search([])
         for product in products:
             if product.id not in turnover_by_products:
                 product_turnover_sum = nbr_lines = 0
@@ -129,9 +129,7 @@ class ProductProduct(models.Model):
 
                 if bu_id in turnover_by_bu:
                     bu_turnover, bu_turnover_nbr_lines = turnover_by_bu[bu_id]
-                    turnover_average = (
-                        bu_turnover / 100
-                    ) * product_turnover_sum
+                    turnover_average = (bu_turnover / 100) * product_turnover_sum
                     turnover_average_nbr_lines = (
                         bu_turnover_nbr_lines / 100
                     ) * nbr_lines
@@ -140,10 +138,10 @@ class ProductProduct(models.Model):
 
             product.write(
                 {
-                    'turnover': product_turnover_sum,
-                    'turnover_nbr_lines': nbr_lines,
-                    'turnover_average': turnover_average,
-                    'turnover_average_nbr_lines': turnover_average_nbr_lines,
+                    "turnover": product_turnover_sum,
+                    "turnover_nbr_lines": nbr_lines,
+                    "turnover_average": turnover_average,
+                    "turnover_average_nbr_lines": turnover_average_nbr_lines,
                 }
             )
 
@@ -165,12 +163,12 @@ class ProductProduct(models.Model):
         than 80% of the total turnover.
         :return:
         """
-        product_obj = self.env['product.product']
+        product_obj = self.env["product.product"]
 
-        abc_rates = self.env['code.abc'].search([])
+        abc_rates = self.env["code.abc"].search([])
 
         if not abc_rates:
-            raise UserError(_('Please define a least one ABC rate'))
+            raise UserError(_("Please define a least one ABC rate"))
 
         # We want to recompute the ABC code for all products
         # Products without invoices or deactivated products must be have
@@ -178,10 +176,10 @@ class ProductProduct(models.Model):
         remove_abc_query = "UPDATE product_product SET abc_id = NULL;"
         self.env.cr.execute(remove_abc_query)
 
-        self.invalidate_cache(['abc_id'])
+        self.invalidate_cache(["abc_id"])
 
-        business_units = self.env['product.category'].search(
-            [('is_business_unit', '=', True)]
+        business_units = self.env["product.category"].search(
+            [("is_business_unit", "=", True)]
         )
         for business_unit in business_units:
             bu_turnover = business_unit.turnover
@@ -214,19 +212,17 @@ class ProductProduct(models.Model):
                 if not abc_rates_lst:
                     product_remaining_ids = []
                     for x in product_ids_ordered_by_turnover:
-                        product_remaining_ids += [
-                            int(y) for y in x[1].split(',')
-                        ]
+                        product_remaining_ids += [int(y) for y in x[1].split(",")]
 
                     products = product_obj.browse(product_remaining_ids)
-                    products.write({'abc_id': current_abc_id})
+                    products.write({"abc_id": current_abc_id})
                     break
 
                 # Pop the product Turnover and the list of products
                 product_turnover, product_ids_str = product_ids_ordered_by_turnover.pop(
                     0
                 )
-                product_ids = [int(y) for y in product_ids_str.split(',')]
+                product_ids = [int(y) for y in product_ids_str.split(",")]
 
                 # Add these products ids in the list to update
                 current_abc_product_ids += product_ids
@@ -238,14 +234,12 @@ class ProductProduct(models.Model):
                 # that we need to the next rate.
                 if total_turnover_amount >= current_abc_total_amount:
                     products = product_obj.browse(current_abc_product_ids)
-                    products.write({'abc_id': current_abc_id})
+                    products.write({"abc_id": current_abc_id})
 
                     # Switch to the next ABC rate and recompute
                     # the current rate
                     current_abc_id, current_abc_rate = abc_rates_lst.pop(0)
-                    current_abc_total_amount = (
-                        bu_turnover / 100.0
-                    ) * current_abc_rate
+                    current_abc_total_amount = (bu_turnover / 100.0) * current_abc_rate
                     current_abc_product_ids = []
 
                     # If the new ABC rate is the last we continue the loop
@@ -286,29 +280,25 @@ class ProductProduct(models.Model):
 
 
 class ProductTemplate(models.Model):
-    _inherit = 'product.template'
+    _inherit = "product.template"
 
-    turnover = fields.Monetary(
-        'Turnover', readonly=True, compute='_compute_abc_values'
-    )
+    turnover = fields.Monetary("Turnover", readonly=True, compute="_compute_abc_values")
     turnover_average = fields.Monetary(
-        'Turnover average', readonly=True, compute='_compute_abc_values'
+        "Turnover average", readonly=True, compute="_compute_abc_values"
     )
     turnover_nbr_lines = fields.Integer(
-        'Turnover (nbr lines)', readonly=True, compute='_compute_abc_values'
+        "Turnover (nbr lines)", readonly=True, compute="_compute_abc_values"
     )
     turnover_average_nbr_lines = fields.Integer(
-        'Turnover average (nbr lines)',
-        readonly=True,
-        compute='_compute_abc_values',
+        "Turnover average (nbr lines)", readonly=True, compute="_compute_abc_values"
     )
     abc_id = fields.Many2one(
-        'code.abc', string='ABC', readonly=True, compute='_compute_abc_values'
+        "code.abc", string="ABC", readonly=True, compute="_compute_abc_values"
     )
     business_unit_id = fields.Many2one(
-        'product.category',
-        string='Business unit',
-        compute='_compute_abc_values',
+        "product.category",
+        string="Business unit",
+        compute="_compute_abc_values",
         readonly=True,
     )
 
@@ -321,11 +311,11 @@ class ProductTemplate(models.Model):
             variant = product.product_variant_ids
             product.update(
                 {
-                    'turnover': variant.turnover,
-                    'turnover_average': variant.turnover_average,
-                    'turnover_nbr_lines': variant.turnover_nbr_lines,
-                    'turnover_average_nbr_lines': variant.turnover_average_nbr_lines,
-                    'abc_id': variant.abc_id,
-                    'business_unit_id': variant.business_unit_id,
+                    "turnover": variant.turnover,
+                    "turnover_average": variant.turnover_average,
+                    "turnover_nbr_lines": variant.turnover_nbr_lines,
+                    "turnover_average_nbr_lines": variant.turnover_average_nbr_lines,
+                    "abc_id": variant.abc_id,
+                    "business_unit_id": variant.business_unit_id,
                 }
             )

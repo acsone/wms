@@ -5,9 +5,7 @@
 from odoo.addons.delivery_rounds.tests import test_instance_picking_state
 
 
-class TestInstancePickingState(
-    test_instance_picking_state.TestInstancePickingState
-):
+class TestInstancePickingState(test_instance_picking_state.TestInstancePickingState):
     """
     All the initial tests must succeed if the optimization process is disabled
     """

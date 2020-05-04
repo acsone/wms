@@ -6,9 +6,9 @@ from odoo.exceptions import UserError
 
 
 class OpenUOP(models.TransientModel):
-    _name = 'open.uop'
+    _name = "open.uop"
 
-    uop = fields.Integer('UOP', required=True)
+    uop = fields.Integer("UOP", required=True)
 
     def open_uop(self):
         """
@@ -22,18 +22,18 @@ class OpenUOP(models.TransientModel):
         """
         self.ensure_one()
 
-        picking = self.env['stock.picking'].search([('id', '=', self.uop)])
+        picking = self.env["stock.picking"].search([("id", "=", self.uop)])
         if not picking:
-            raise UserError(_('This UOP does\'t exist'))
+            raise UserError(_("This UOP does't exist"))
 
         return {
-            'name': 'UOP',
-            'view_type': 'form',
-            'view_mode': 'form',
-            'res_model': 'stock.picking',
-            'view_id': self.env.ref('stock.view_picking_form').id,
-            'type': 'ir.actions.act_window',
-            'res_id': self.uop,
-            'context': self._context,
-            'target': 'current',
+            "name": "UOP",
+            "view_type": "form",
+            "view_mode": "form",
+            "res_model": "stock.picking",
+            "view_id": self.env.ref("stock.view_picking_form").id,
+            "type": "ir.actions.act_window",
+            "res_id": self.uop,
+            "context": self._context,
+            "target": "current",
         }

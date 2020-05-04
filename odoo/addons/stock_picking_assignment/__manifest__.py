@@ -20,24 +20,21 @@
 ##############################################################################
 
 {
-    'name': 'Stock Picking Assignment',
-    'version': '10.0.1.0.1',
-    'category': 'Stock Management',
-    'author': 'Sylvain Van Hoof',
-    'description':
-    """
+    "name": "Stock Picking Assignment",
+    "version": "10.0.1.0.1",
+    "category": "Stock Management",
+    "author": "Sylvain Van Hoof",
+    "description": """
     Stock Picking Assignment
     """,
-    'depends': [
-        'stock',
+    "depends": ["stock"],
+    "data": [
+        "views/stock_inventory.xml",
+        "views/stock_scrap.xml",
+        "views/stock_picking.xml",
     ],
-    'data': [
-        'views/stock_inventory.xml',
-        'views/stock_scrap.xml',
-        'views/stock_picking.xml',
-    ],
-    'installable': True,
-    'active': False,
-    'license': 'AGPL-3',
-    'application': False,
+    "installable": True,
+    "active": False,
+    "license": "AGPL-3",
+    "application": False,
 }

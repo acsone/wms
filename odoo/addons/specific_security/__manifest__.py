@@ -3,29 +3,29 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 {
-    'name': 'Specific security for Alcyon',
-    'version': '10.0.1.0.0',
-    'author': 'Sylvain Van Hoof (Okia SPRL)',
-    'license': 'AGPL-3',
-    'category': 'Others',
-    'description': """
+    "name": "Specific security for Alcyon",
+    "version": "10.0.1.0.0",
+    "author": "Sylvain Van Hoof (Okia SPRL)",
+    "license": "AGPL-3",
+    "category": "Others",
+    "description": """
     Specific security for Alcyon
     """,
-    'depends': [
-        'stock',
-        'account',
-        'sale',
-        'mrp',
-        'code_abc',
-        'specific_data',
-        'account_cutoff_base',
+    "depends": [
+        "stock",
+        "account",
+        "sale",
+        "mrp",
+        "code_abc",
+        "specific_data",
+        "account_cutoff_base",
     ],
-    'data': [
+    "data": [
         # Security
-        'security/res_groups.xml',
-        'security/ir.model.access.csv',
-        'security/ir_rule.xml',
+        "security/res_groups.xml",
+        "security/ir.model.access.csv",
+        "security/ir_rule.xml",
     ],
-    'website': 'http://www.camptocamp.com',
-    'installable': True,
+    "website": "http://www.camptocamp.com",
+    "installable": True,
 }

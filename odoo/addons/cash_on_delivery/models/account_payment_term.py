@@ -6,6 +6,6 @@ from odoo import fields, models
 
 
 class AccountPaymentTerm(models.Model):
-    _inherit = 'account.payment.term'
+    _inherit = "account.payment.term"
 
-    cash_on_delivery = fields.Boolean('Cash On Delivery')
+    cash_on_delivery = fields.Boolean("Cash On Delivery")

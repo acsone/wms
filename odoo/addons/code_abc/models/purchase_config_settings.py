@@ -5,12 +5,12 @@ from odoo import api, fields, models
 
 
 class PurchaseConfigSettings(models.TransientModel):
-    _inherit = 'purchase.config.settings'
+    _inherit = "purchase.config.settings"
 
     turnover_delay = fields.Integer(
-        'CA computation delay (in months)',
+        "CA computation delay (in months)",
         default=lambda self: int(
-            self.env['ir.config_parameter'].get_param('abc.turnover_delay', 0)
+            self.env["ir.config_parameter"].get_param("abc.turnover_delay", 0)
         ),
     )
 
@@ -19,6 +19,6 @@ class PurchaseConfigSettings(models.TransientModel):
         self.ensure_one()
 
         if self.turnover_delay:
-            self.env['ir.config_parameter'].set_param(
-                'abc.turnover_delay', self.turnover_delay
+            self.env["ir.config_parameter"].set_param(
+                "abc.turnover_delay", self.turnover_delay
             )

@@ -6,12 +6,10 @@ from odoo import api, fields, models
 
 
 class ResPartner(models.Model):
-    _inherit = 'res.partner'
+    _inherit = "res.partner"
 
     time_limit_order = fields.Float(
-        'Deadline for ordering',
-        compute='_compute_time_limit_order',
-        readonly=True,
+        "Deadline for ordering", compute="_compute_time_limit_order", readonly=True
     )
 
     @api.multi

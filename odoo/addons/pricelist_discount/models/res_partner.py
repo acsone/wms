@@ -6,14 +6,14 @@ from odoo import api, fields, models
 
 
 class ResPartner(models.Model):
-    _inherit = 'res.partner'
+    _inherit = "res.partner"
 
     supplier_promotion_sale_allowed = fields.Boolean(
-        string='Supplier promotion allowed on sale'
+        string="Supplier promotion allowed on sale"
     )
 
     discount_pricelist_id = fields.Many2one(
-        string='Alcyon Discount Pricelist', comodel_name='product.pricelist'
+        string="Alcyon Discount Pricelist", comodel_name="product.pricelist"
     )
 
     @api.model
@@ -22,6 +22,6 @@ class ResPartner(models.Model):
         theirs values will be synced to children partners.
         """
         return super(ResPartner, self)._commercial_fields() + [
-            'supplier_promotion_sale_allowed',
-            'discount_pricelist_id',
+            "supplier_promotion_sale_allowed",
+            "discount_pricelist_id",
         ]

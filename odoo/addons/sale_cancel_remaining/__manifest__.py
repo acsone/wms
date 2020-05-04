@@ -3,22 +3,16 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 {
-    'name': 'Sale Cancel Remaining',
-    'version': '10.0.1.0.0',
-    'author': 'Sylvain Van Hoof',
-    'license': 'AGPL-3',
-    'category': 'Sales',
-    'description': """
+    "name": "Sale Cancel Remaining",
+    "version": "10.0.1.0.0",
+    "author": "Sylvain Van Hoof",
+    "license": "AGPL-3",
+    "category": "Sales",
+    "description": """
     Sale Cancel Remaining
     """,
-    'depends': [
-        'sale',
-        'stock',
-    ],
-    'data': [
-        "wizard/cancel_remaining_wizard.xml",
-        "views/sale_order.xml",
-    ],
-    'website': 'http://www.camptocamp.com',
-    'installable': True,
+    "depends": ["sale", "stock"],
+    "data": ["wizard/cancel_remaining_wizard.xml", "views/sale_order.xml"],
+    "website": "http://www.camptocamp.com",
+    "installable": True,
 }

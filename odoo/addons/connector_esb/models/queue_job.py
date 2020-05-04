@@ -7,7 +7,7 @@ from odoo import _, api, models
 
 class QueueJob(models.Model):
 
-    _inherit = 'queue.job'
+    _inherit = "queue.job"
 
     @api.multi
     def related_action_open_record(self):
@@ -24,20 +24,20 @@ class QueueJob(models.Model):
         if not records:
             return None
         action = {
-            'name': _('Related Record'),
-            'type': 'ir.actions.act_window',
-            'view_type': 'form',
-            'view_mode': 'form',
-            'res_model': records._name,
+            "name": _("Related Record"),
+            "type": "ir.actions.act_window",
+            "view_type": "form",
+            "view_mode": "form",
+            "res_model": records._name,
         }
         if len(records) == 1:
-            action['res_id'] = records.id
+            action["res_id"] = records.id
         else:
             action.update(
                 {
-                    'name': _('Related Records'),
-                    'view_mode': 'tree,form',
-                    'domain': [('id', 'in', records.ids)],
+                    "name": _("Related Records"),
+                    "view_mode": "tree,form",
+                    "domain": [("id", "in", records.ids)],
                 }
             )
         return action

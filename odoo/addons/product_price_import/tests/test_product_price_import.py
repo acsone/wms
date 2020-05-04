@@ -18,77 +18,69 @@ class TestProductPriceImport(SavepointCase):
     def setUpClass(cls):
         super(TestProductPriceImport, cls).setUpClass()
         cls.BaseImport = cls.env["base_import.import"]
-        cls.pastday = fields.Date.to_string(
-            datetime.now() - timedelta(days=10)
-        )
-        cls.yesterday = fields.Date.to_string(
-            datetime.now() - timedelta(days=1)
-        )
-        cls.tomorrow = fields.Date.to_string(
-            datetime.now() + timedelta(days=1)
-        )
+        cls.pastday = fields.Date.to_string(datetime.now() - timedelta(days=10))
+        cls.yesterday = fields.Date.to_string(datetime.now() - timedelta(days=1))
+        cls.tomorrow = fields.Date.to_string(datetime.now() + timedelta(days=1))
         cls.report_action = cls.env.ref(
             "product_price_import.report_product_price_import_xlsx"
         )
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
-        cls.supplier = cls.env.ref('base.res_partner_12')
-        cls.product = cls.env['product.product'].create(
+        cls.supplier = cls.env.ref("base.res_partner_12")
+        cls.product = cls.env["product.product"].create(
             {
-                'name': 'Product 1',
-                'list_price': 11.0,
+                "name": "Product 1",
+                "list_price": 11.0,
                 "indicated_price": 13.75,
                 "default_code": "P01",
             }
         )
 
-        cls.supplierinfo = cls.env['product.supplierinfo'].create(
-            {'name': cls.supplier.id, 'price': 10, "product_code": "SUP01"}
+        cls.supplierinfo = cls.env["product.supplierinfo"].create(
+            {"name": cls.supplier.id, "price": 10, "product_code": "SUP01"}
         )
-        cls.supplierinfo_promo_active = cls.env['product.supplierinfo'].create(
+        cls.supplierinfo_promo_active = cls.env["product.supplierinfo"].create(
             {
-                'name': cls.supplier.id,
-                'price': 10,
+                "name": cls.supplier.id,
+                "price": 10,
                 "product_code": "SUP01",
                 "discount_purchase": 10,
                 "date_start": cls.yesterday,
                 "date_end": cls.tomorrow,
             }
         )
-        cls.supplierinfo_promo_future = cls.env['product.supplierinfo'].create(
+        cls.supplierinfo_promo_future = cls.env["product.supplierinfo"].create(
             {
-                'name': cls.supplier.id,
-                'price': 10,
-                'min_qty': 20,
+                "name": cls.supplier.id,
+                "price": 10,
+                "min_qty": 20,
                 "product_code": "SUP01",
                 "discount_purchase": 20,
                 "date_start": cls.tomorrow,
                 "date_end": cls.tomorrow,
             }
         )
-        cls.supplierinfo_promo_obsolete = cls.env[
-            'product.supplierinfo'
-        ].create(
+        cls.supplierinfo_promo_obsolete = cls.env["product.supplierinfo"].create(
             {
-                'name': cls.supplier.id,
-                'price': 10,
-                'min_qty': 20,
+                "name": cls.supplier.id,
+                "price": 10,
+                "min_qty": 20,
                 "product_code": "SUP01",
                 "discount_purchase": 20,
                 "date_start": cls.pastday,
                 "date_end": cls.pastday,
             }
         )
-        cls.product.write({'seller_ids': [(6, 0, cls.supplierinfo.ids)]})
+        cls.product.write({"seller_ids": [(6, 0, cls.supplierinfo.ids)]})
 
-        cls.pricelist_pb2 = cls.env.ref('specific_data.product_pricelist_pb2')
+        cls.pricelist_pb2 = cls.env.ref("specific_data.product_pricelist_pb2")
         cls.product_pricelist_item = cls.env["product.pricelist.item"].create(
             {
-                'applied_on': '1_product',
-                'product_id': cls.product.id,
-                'compute_price': 'fixed',
-                'fixed_price': 12.24,
-                'product_tmpl_id': cls.product.product_tmpl_id.id,
-                'pricelist_id': cls.pricelist_pb2.id,
+                "applied_on": "1_product",
+                "product_id": cls.product.id,
+                "compute_price": "fixed",
+                "fixed_price": 12.24,
+                "product_tmpl_id": cls.product.product_tmpl_id.id,
+                "pricelist_id": cls.pricelist_pb2.id,
             }
         )
 
@@ -110,7 +102,7 @@ class TestProductPriceImport(SavepointCase):
     def _add_promos(cls):
         cls.product.write(
             {
-                'seller_ids': [
+                "seller_ids": [
                     (4, cls.supplierinfo_promo_active.id),
                     (4, cls.supplierinfo_promo_obsolete.id),
                     (4, cls.supplierinfo_promo_future.id),
@@ -120,13 +112,13 @@ class TestProductPriceImport(SavepointCase):
 
     @classmethod
     def _get_xml_id(cls, model):
-        IrModelData = cls.env['ir.model.data'].sudo()
+        IrModelData = cls.env["ir.model.data"].sudo()
         data = IrModelData.search(
-            [('model', '=', model._name), ('res_id', '=', model.id)]
+            [("model", "=", model._name), ("res_id", "=", model.id)]
         )
         if data:
             if data[0].module:
-                return '%s.%s' % (data[0].module, data[0].name)
+                return "%s.%s" % (data[0].module, data[0].name)
             else:
                 return data[0].name
 
@@ -194,15 +186,11 @@ class TestProductPriceImport(SavepointCase):
             Price fields on the product are updated
         """
         price_info = self.default_product_prive_info.copy()
-        self.assertNotEqual(
-            float(price_info.sale_price), self.product.list_price
-        )
+        self.assertNotEqual(float(price_info.sale_price), self.product.list_price)
         self.assertNotEqual(
             float(price_info.indicated_price), self.product.indicated_price
         )
-        self.assertNotEqual(
-            float(price_info.sale_price_2), self.product.sale_price_2
-        )
+        self.assertNotEqual(float(price_info.sale_price_2), self.product.sale_price_2)
         self.assertNotEqual(
             float(price_info.purchase_price), self.product.seller_ids[0].price
         )
@@ -212,9 +200,7 @@ class TestProductPriceImport(SavepointCase):
         self.assertEqual(
             float(price_info.indicated_price), self.product.indicated_price
         )
-        self.assertEqual(
-            float(price_info.sale_price_2), self.product.sale_price_2
-        )
+        self.assertEqual(float(price_info.sale_price_2), self.product.sale_price_2)
         self.assertEqual(
             float(price_info.purchase_price), self.product.seller_ids[0].price
         )
@@ -239,8 +225,7 @@ class TestProductPriceImport(SavepointCase):
             float(price_info.purchase_price), self.product.seller_ids[0].price
         )
         self.assertEqual(
-            price_info.supplier_reference,
-            self.product.seller_ids[0].product_code,
+            price_info.supplier_reference, self.product.seller_ids[0].product_code
         )
         self.assertEqual(
             price_info.supplier_reference, self.product.vendor_product_code
@@ -309,9 +294,7 @@ class TestProductPriceImport(SavepointCase):
         )
         self.ProductPriceImporter._do_update_prices([price_info])
         self.product.refresh()
-        self.assertEqual(
-            float(price_info.sale_price_2), self.product.sale_price_2
-        )
+        self.assertEqual(float(price_info.sale_price_2), self.product.sale_price_2)
         self.assertEqual(
             1,
             self.env["product.pricelist.item"].search_count(
@@ -334,29 +317,23 @@ class TestProductPriceImport(SavepointCase):
         self.assertEqual(len(self.product.seller_ids), 4)
         price_info = self.default_product_prive_info.copy()
         self.assertNotEqual(
-            self.supplierinfo_promo_active.price,
-            float(price_info.purchase_price),
+            self.supplierinfo_promo_active.price, float(price_info.purchase_price)
         )
         self.assertNotEqual(
-            self.supplierinfo_promo_future.price,
-            float(price_info.purchase_price),
+            self.supplierinfo_promo_future.price, float(price_info.purchase_price)
         )
         self.assertNotEqual(
-            self.supplierinfo_promo_obsolete.price,
-            float(price_info.purchase_price),
+            self.supplierinfo_promo_obsolete.price, float(price_info.purchase_price)
         )
 
         self.ProductPriceImporter._do_update_prices([price_info])
         self.supplierinfo_promo_active.refresh()
         self.assertEqual(
-            self.supplierinfo_promo_active.price,
-            float(price_info.purchase_price),
+            self.supplierinfo_promo_active.price, float(price_info.purchase_price)
         )
         self.assertEqual(
-            self.supplierinfo_promo_future.price,
-            float(price_info.purchase_price),
+            self.supplierinfo_promo_future.price, float(price_info.purchase_price)
         )
         self.assertNotEqual(
-            self.supplierinfo_promo_obsolete.price,
-            float(price_info.purchase_price),
+            self.supplierinfo_promo_obsolete.price, float(price_info.purchase_price)
         )

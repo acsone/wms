@@ -24,7 +24,7 @@ from odoo import api, fields, models
 
 
 class ProductProduct(models.Model):
-    _inherit = 'product.product'
+    _inherit = "product.product"
 
     @api.multi
     def _get_domain_locations(self):
@@ -32,41 +32,41 @@ class ProductProduct(models.Model):
         computing qty_available
         """
         loc_domain = super(ProductProduct, self)._get_domain_locations()
-        kind = self._context.get('loc_kind')
+        kind = self._context.get("loc_kind")
         if kind:
             loc_domain = (
-                ['&', ('location_id.kind', '=', kind)] + loc_domain[0],
-                ['&', ('location_id.kind', '=', kind)] + loc_domain[1],
-                ['&', ('location_id.kind', '=', kind)] + loc_domain[2],
+                ["&", ("location_id.kind", "=", kind)] + loc_domain[0],
+                ["&", ("location_id.kind", "=", kind)] + loc_domain[1],
+                ["&", ("location_id.kind", "=", kind)] + loc_domain[2],
             )
         return loc_domain
 
     qty_in_parking = fields.Float(
-        'Qty in parking',
-        digits=dp.get_precision('Product Unit of Measure'),
-        compute='_get_qty_in_parking',
+        "Qty in parking",
+        digits=dp.get_precision("Product Unit of Measure"),
+        compute="_get_qty_in_parking",
     )
     qty_in_reserve = fields.Float(
-        'Qty in reserve',
-        digits=dp.get_precision('Product Unit of Measure'),
-        compute='_get_qty_in_reserve',
+        "Qty in reserve",
+        digits=dp.get_precision("Product Unit of Measure"),
+        compute="_get_qty_in_reserve",
     )
     qty_in_bin = fields.Float(
-        'Qty in bins',
-        digits=dp.get_precision('Product Unit of Measure'),
-        compute='_get_qty_in_bin',
+        "Qty in bins",
+        digits=dp.get_precision("Product Unit of Measure"),
+        compute="_get_qty_in_bin",
     )
 
     @api.one
     def _get_qty_in_parking(self):
-        _self = self.with_context(loc_kind='parking')
+        _self = self.with_context(loc_kind="parking")
         self.qty_in_parking = _self.qty_available or 0
 
     @api.one
     def _get_qty_in_reserve(self):
-        _self = self.with_context(loc_kind='reserve')
+        _self = self.with_context(loc_kind="reserve")
         self.qty_in_reserve = _self.qty_available or 0
 
     @api.one
     def _get_qty_in_bin(self):
-        self.qty_in_bin = self.with_context(loc_kind='bin').qty_available or 0
+        self.qty_in_bin = self.with_context(loc_kind="bin").qty_available or 0

@@ -6,17 +6,17 @@ from odoo import fields, models
 
 
 class ProductProduct(models.Model):
-    _inherit = 'product.product'
+    _inherit = "product.product"
 
     product_last_in_date = fields.Datetime(
-        'Last Purchasing Date', compute='_get_product_last_in_date'
+        "Last Purchasing Date", compute="_get_product_last_in_date"
     )
     product_last_out_date = fields.Datetime(
-        'Last Selling Date', compute='_get_product_last_out_date'
+        "Last Selling Date", compute="_get_product_last_out_date"
     )
 
     def _get_product_last_in_date(self):
-        for_date = self._context.get('history_date', fields.Datetime.now())
+        for_date = self._context.get("history_date", fields.Datetime.now())
         self._cr.execute(
             """
             SELECT DISTINCT ON (product_id)
@@ -40,7 +40,7 @@ class ProductProduct(models.Model):
             rec.product_last_in_date = dates_by_product.get(rec.id, False)
 
     def _get_product_last_out_date(self):
-        for_date = self._context.get('history_date', fields.Datetime.now())
+        for_date = self._context.get("history_date", fields.Datetime.now())
         self._cr.execute(
             """
             SELECT DISTINCT ON (product_id)

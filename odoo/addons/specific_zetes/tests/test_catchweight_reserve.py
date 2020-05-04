@@ -28,7 +28,7 @@ class TestCatchweightReserve(ZetesReserveTest):
         self.assertTrue(result)
         report_id = result[0]
 
-        model_name = 'report.stock.refill.reassort'
+        model_name = "report.stock.refill.reassort"
         report = self.env[model_name].browse(report_id)
         # Create the picking
         self.picking_reserve = report.create_picking()
@@ -39,9 +39,7 @@ class TestCatchweightReserve(ZetesReserveTest):
         :return:
         """
 
-        domain = Catchweight(
-            self._default_header(), mock.MagicMock(name='Savepoint()')
-        )
+        domain = Catchweight(self._default_header(), mock.MagicMock(name="Savepoint()"))
 
         pack_op = self.picking_reserve.pack_operation_product_ids
         pack_op.ensure_one()
@@ -50,13 +48,13 @@ class TestCatchweightReserve(ZetesReserveTest):
         self.assertEqual(pack_op.pack_lot_ids.qty, 0)
 
         # Try with a lot
-        request_params = Parameters(domain, action='resu')
+        request_params = Parameters(domain, action="resu")
         request_params.update(
             {
-                'lineId': pack_op.id,
-                'Usf01': self.lot_product_1.voice_identifier,
-                'Usf02': 20,  # Pick 20 unit,
-                'Usf03': None,
+                "lineId": pack_op.id,
+                "Usf01": self.lot_product_1.voice_identifier,
+                "Usf02": 20,  # Pick 20 unit,
+                "Usf03": None,
             }
         )
         domain.resu(request_params)
@@ -72,9 +70,7 @@ class TestCatchweightReserve(ZetesReserveTest):
         :return:
         """
 
-        domain = Catchweight(
-            self._default_header(), mock.MagicMock(name='Savepoint()')
-        )
+        domain = Catchweight(self._default_header(), mock.MagicMock(name="Savepoint()"))
 
         pack_op = self.picking_reserve.pack_operation_product_ids
         pack_op.ensure_one()
@@ -83,13 +79,13 @@ class TestCatchweightReserve(ZetesReserveTest):
         self.assertEqual(pack_op.pack_lot_ids.qty, 0)
 
         # Try with a lot
-        request_params = Parameters(domain, action='resu')
+        request_params = Parameters(domain, action="resu")
         request_params.update(
             {
-                'lineId': pack_op.id,
-                'Usf01': self.lot_product_1.voice_identifier,
-                'Usf02': 15,  # Pick 15 unit,
-                'Usf03': None,
+                "lineId": pack_op.id,
+                "Usf01": self.lot_product_1.voice_identifier,
+                "Usf02": 15,  # Pick 15 unit,
+                "Usf03": None,
             }
         )
         domain.resu(request_params)

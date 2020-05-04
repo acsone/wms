@@ -6,8 +6,6 @@ from odoo import fields, models
 
 
 class StockPicking(models.Model):
-    _inherit = 'stock.picking'
+    _inherit = "stock.picking"
 
-    to_process_quant_expired = fields.Boolean(
-        'Bypass restriction on expired quants'
-    )
+    to_process_quant_expired = fields.Boolean("Bypass restriction on expired quants")

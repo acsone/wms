@@ -6,6 +6,6 @@ from odoo import fields, models
 
 
 class StockPickingType(models.Model):
-    _inherit = 'stock.picking.type'
+    _inherit = "stock.picking.type"
 
-    picking_zone_id = fields.Many2one('picking.zone', string='Picking zone')
+    picking_zone_id = fields.Many2one("picking.zone", string="Picking zone")

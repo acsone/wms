@@ -6,23 +6,23 @@ from odoo import api, fields, models
 
 
 class PurchaseOrder(models.Model):
-    _inherit = 'purchase.order'
+    _inherit = "purchase.order"
 
     prepayment = fields.Boolean(
-        'Prepayment',
+        "Prepayment",
         help="Check this if the invoice is received before reception of goods",
     )
 
     @api.depends(
-        'state',
-        'order_line.qty_invoiced',
-        'order_line.qty_received',
-        'order_line.product_qty',
-        'prepayment',
+        "state",
+        "order_line.qty_invoiced",
+        "order_line.qty_received",
+        "order_line.product_qty",
+        "prepayment",
     )
     def _get_invoiced(self):
         for order in self:
             if order.prepayment:
-                order.invoice_status = 'to invoice'
+                order.invoice_status = "to invoice"
             else:
                 super(PurchaseOrder, self)._get_invoiced()

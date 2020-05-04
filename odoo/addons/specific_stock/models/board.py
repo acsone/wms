@@ -6,20 +6,17 @@ from odoo import api, models
 
 
 class Board(models.AbstractModel):
-    _inherit = 'board.board'
+    _inherit = "board.board"
 
     @api.model
     def fields_view_get(
-        self, view_id=None, view_type='form', toolbar=False, submenu=False
+        self, view_id=None, view_type="form", toolbar=False, submenu=False
     ):
         res = super(Board, self).fields_view_get(
-            view_id=view_id,
-            view_type=view_type,
-            toolbar=toolbar,
-            submenu=submenu,
+            view_id=view_id, view_type=view_type, toolbar=toolbar, submenu=submenu
         )
         # FIX ALCYN-1950
         # make sure `custom_view_id` is always valued to avoid broken RPC call
-        if res.get('custom_view_id') is None:
-            res['custom_view_id'] = False
+        if res.get("custom_view_id") is None:
+            res["custom_view_id"] = False
         return res

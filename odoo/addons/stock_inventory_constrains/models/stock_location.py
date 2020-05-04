@@ -6,7 +6,7 @@ from odoo import fields, models
 
 
 class StockLocation(models.Model):
-    _inherit = 'stock.location'
+    _inherit = "stock.location"
 
     is_inventory_forbidden = fields.Boolean(
         string="Inventory on all products is forbidden",

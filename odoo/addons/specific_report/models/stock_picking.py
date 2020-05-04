@@ -23,83 +23,76 @@ from odoo.exceptions import UserError
 
 
 class StockPicking(models.Model):
-    _inherit = 'stock.picking'
+    _inherit = "stock.picking"
 
     price_total = fields.Monetary(
-        string='Total', compute='_compute_price_total', readonly=True
+        string="Total", compute="_compute_price_total", readonly=True
     )
     currency_id = fields.Many2one(
-        'res.currency', string='Currency', compute='_compute_price_total'
+        "res.currency", string="Currency", compute="_compute_price_total"
     )
 
     number_of_drug = fields.Float(
-        'Number of medical', compute='_compute_number_of_products'
+        "Number of medical", compute="_compute_number_of_products"
     )
     number_of_cold = fields.Float(
-        'Number of cold', compute='_compute_number_of_products'
+        "Number of cold", compute="_compute_number_of_products"
     )
     number_of_food = fields.Float(
-        'Number of food', compute='_compute_number_of_products'
+        "Number of food", compute="_compute_number_of_products"
     )
     number_of_human_drug = fields.Float(
-        'Number of human drug', compute='_compute_number_of_products'
+        "Number of human drug", compute="_compute_number_of_products"
     )
     number_of_equipment = fields.Float(
-        'Number of equipments', compute='_compute_number_of_products'
+        "Number of equipments", compute="_compute_number_of_products"
     )
     number_total = fields.Float(
-        'Number of boxes', compute='_compute_number_of_products'
+        "Number of boxes", compute="_compute_number_of_products"
     )
 
     item_number_of_drug = fields.Float(
-        'Number of medical products', compute='_compute_number_of_products'
+        "Number of medical products", compute="_compute_number_of_products"
     )
     item_number_of_cold = fields.Float(
-        'Number of cold products', compute='_compute_number_of_products'
+        "Number of cold products", compute="_compute_number_of_products"
     )
     item_number_of_food = fields.Float(
-        'Number of food products', compute='_compute_number_of_products'
+        "Number of food products", compute="_compute_number_of_products"
     )
     item_number_of_human_drug = fields.Float(
-        'Number of human drug products', compute='_compute_number_of_products'
+        "Number of human drug products", compute="_compute_number_of_products"
     )
     item_number_of_equipment = fields.Float(
-        'Number of equipments products', compute='_compute_number_of_products'
+        "Number of equipments products", compute="_compute_number_of_products"
     )
     item_number_total = fields.Float(
-        'Number of products', compute='_compute_number_of_products'
+        "Number of products", compute="_compute_number_of_products"
     )
 
     def _compute_price_total(self):
         for picking in self:
-            lines_done = picking.move_lines.filtered(
-                lambda line: line.state == 'done'
-            )
+            lines_done = picking.move_lines.filtered(lambda line: line.state == "done")
 
-            currency = lines_done.mapped('order_id.currency_id')
+            currency = lines_done.mapped("order_id.currency_id")
             if not currency:
                 currency = picking.company_id.currency_id
 
             if len(currency) != 1:
-                raise UserError(
-                    _('There are more than one currencies on orders')
-                )
+                raise UserError(_("There are more than one currencies on orders"))
 
             picking.price_total = sum(
-                l.order_line_id.price_reduce_taxinc * l.product_qty
-                for l in lines_done
+                l.order_line_id.price_reduce_taxinc * l.product_qty for l in lines_done
             )
             picking.currency_id = currency.id
 
-    @api.depends(
-        'move_lines', 'move_lines.product_id', 'move_lines.product_uom_qty'
-    )
+    @api.depends("move_lines", "move_lines.product_id", "move_lines.product_uom_qty")
     def _compute_number_of_products(self):
-        zone_drug = self.env.ref('__setup__.picking_zone_medicament')
-        zone_equipment = self.env.ref('__setup__.picking_zone_materiel')
-        zone_cold = self.env.ref('__setup__.picking_zone_frigo')
-        zone_food = self.env.ref('__setup__.picking_zone_aliments')
-        zone_human = self.env.ref('__setup__.picking_zone_humain')
+        zone_drug = self.env.ref("__setup__.picking_zone_medicament")
+        zone_equipment = self.env.ref("__setup__.picking_zone_materiel")
+        zone_cold = self.env.ref("__setup__.picking_zone_frigo")
+        zone_food = self.env.ref("__setup__.picking_zone_aliments")
+        zone_human = self.env.ref("__setup__.picking_zone_humain")
 
         # Check quantities for packages
         for picking in self:
@@ -113,10 +106,7 @@ class StockPicking(models.Model):
             for operation in picking.pack_operation_pack_ids:
                 if not operation.package_id.original_picking_zone_id:
                     raise UserError(
-                        _(
-                            'There is no original picking zone on '
-                            'this operation.'
-                        )
+                        _("There is no original picking zone on " "this operation.")
                     )
 
                 picking_zone = operation.package_id.original_picking_zone_id
@@ -136,8 +126,7 @@ class StockPicking(models.Model):
                     number_of_human_drug += qty
                 else:
                     raise UserError(
-                        _('The picking zone %s is not correct')
-                        % picking_zone.name
+                        _("The picking zone %s is not correct") % picking_zone.name
                     )
 
             picking.number_of_drug = number_of_drug
@@ -157,7 +146,7 @@ class StockPicking(models.Model):
             # Check quantities for products without pack
             for operation in picking.pack_operation_product_ids:
                 if not operation.product_id.categ_id:
-                    raise UserError(_('There is no category on this product'))
+                    raise UserError(_("There is no category on this product"))
 
                 picking_zone = operation.product_id.picking_zone_id
 
@@ -176,8 +165,7 @@ class StockPicking(models.Model):
                     item_number_of_human_drug += qty
                 else:
                     raise UserError(
-                        _('The picking zone %s is not correct')
-                        % picking_zone.name
+                        _("The picking zone %s is not correct") % picking_zone.name
                     )
 
             picking.item_number_of_drug = item_number_of_drug

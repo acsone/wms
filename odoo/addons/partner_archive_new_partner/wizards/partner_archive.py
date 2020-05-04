@@ -9,21 +9,13 @@ class PartnerArchiveWizard(models.TransientModel):
     _name = "partner.archive.new.partner.wizard"
 
     old_partner_id = fields.Many2one(comodel_name="res.partner")
-    old_partner_company_id = fields.Many2one(
-        related="old_partner_id.company_id"
-    )
+    old_partner_company_id = fields.Many2one(related="old_partner_id.company_id")
     new_partner_id = fields.Many2one(
         comodel_name="res.partner", string="New partner", required="True"
     )
-    sale_ids = fields.Many2many(
-        "sale.order", string="Sale orders", readonly=True
-    )
-    picking_ids = fields.Many2many(
-        "stock.picking", string="Pickings", readonly=True
-    )
-    invoice_ids = fields.Many2many(
-        "account.invoice", string="Invoices", readonly=True
-    )
+    sale_ids = fields.Many2many("sale.order", string="Sale orders", readonly=True)
+    picking_ids = fields.Many2many("stock.picking", string="Pickings", readonly=True)
+    invoice_ids = fields.Many2many("account.invoice", string="Invoices", readonly=True)
 
     def action_confirm(self):
         """Search for objects to reallocate"""

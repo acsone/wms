@@ -28,27 +28,20 @@ class Zetes(Home):
     def _sudo_zetes(self):
         # The request comes from a public user without permissions.
         # The request will be executed as zetes user.
-        zetes_user = request.env(user=SUPERUSER_ID).ref(
-            'specific_zetes.user_zetes'
-        )
+        zetes_user = request.env(user=SUPERUSER_ID).ref("specific_zetes.user_zetes")
         request.uid = zetes_user.id
 
     @http.route(
-        '/zetes',
-        type='http',
-        methods=['POST'],
-        auth='none',
-        website=True,
-        csrf=False,
+        "/zetes", type="http", methods=["POST"], auth="none", website=True, csrf=False
     )
     def wrapper(self, **kw):
         cmd = request.httprequest.data
 
-        _logger.info('Command: ' + cmd)
+        _logger.info("Command: " + cmd)
 
         # For all requests Zetes sends an extra comma.
         # We need to remove this comma before split the request
-        params = cmd[:-1].split(',')
+        params = cmd[:-1].split(",")
         # Split the request in two parts (header and values)
         header = params[: len(constants.HEADER_LABELS)]
         values = params[len(constants.HEADER_LABELS) :]
@@ -59,12 +52,12 @@ class Zetes(Home):
         # In this case the msgType is REQU_ITEMPICK
         # command: requ
         # domain: itempick
-        command, domain = header[constants.METHOD_INDEX].split('_')
+        command, domain = header[constants.METHOD_INDEX].split("_")
 
         # Create the handler
         # If the domain is itempick the module name will be
         # openerp.addons.specific_zetes.tools.domain_itempick
-        module_name = 'odoo.addons.specific_zetes.tools.domain_{}'.format(
+        module_name = "odoo.addons.specific_zetes.tools.domain_{}".format(
             domain.lower()
         )
 
@@ -78,9 +71,7 @@ class Zetes(Home):
 
             # Create the parameter instance with all values received in the
             # request
-            parameter_obj = Parameters(
-                instance, action=command.upper(), values=values
-            )
+            parameter_obj = Parameters(instance, action=command.upper(), values=values)
             # Execute the the method
             # e.g: if the msgType is REQU_ITEMPICK
             # domain: itempick
@@ -91,18 +82,18 @@ class Zetes(Home):
         # If the method return something (action REQU)
         if result and isinstance(result, str):
             # Add a # and two break line to respect Zetes requirement
-            _logger.info('Result: ' + result)
-            result += '#\n\n'
+            _logger.info("Result: " + result)
+            result += "#\n\n"
         # If the method return nothing (action RESU)
         else:
-            result = ''
+            result = ""
 
-        mimetype = 'text/plain'
+        mimetype = "text/plain"
 
-        return request.make_response(result, [('Content-Type', mimetype)])
+        return request.make_response(result, [("Content-Type", mimetype)])
 
     # TODO This method is only for TESTS but don't remove it.
-    @http.route('/display_values', type='http', auth="public", website=True)
+    @http.route("/display_values", type="http", auth="public", website=True)
     def display_values(self, **kwargs):
         """
         !!! This method is only for development/test !!!
@@ -122,23 +113,23 @@ class Zetes(Home):
         :param kwargs:
         :return:
         """
-        result = ''
+        result = ""
 
-        domains_str = kwargs.get('domains')
+        domains_str = kwargs.get("domains")
         if domains_str:
-            domains = domains_str.split(',')
+            domains = domains_str.split(",")
         else:
             domains = [domain[0] for domain in constants.ZETES_DOMAINS]
 
-        actions_str = kwargs.get('actions')
+        actions_str = kwargs.get("actions")
         if actions_str:
-            actions = actions_str.split(',')
+            actions = actions_str.split(",")
         else:
             actions = [action[0] for action in constants.ZETES_ACTIONS]
 
         self._sudo_zetes()
         for domain in domains:
-            module_name = 'odoo.addons.specific_zetes.tools.domain_{}'.format(
+            module_name = "odoo.addons.specific_zetes.tools.domain_{}".format(
                 domain.lower()
             )
             module_obj = importlib.import_module(module_name)
@@ -160,6 +151,6 @@ class Zetes(Home):
 
                 for action in actions:
                     parameter_obj = Parameters(instance, action=action.upper())
-                    result += '\n' + str(parameter_obj)
+                    result += "\n" + str(parameter_obj)
 
         return result

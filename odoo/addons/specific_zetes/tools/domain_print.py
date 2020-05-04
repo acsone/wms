@@ -11,62 +11,62 @@ _logger = logging.getLogger(__name__)
 
 class Print(DomainInterface):
     EXAMPLE_REQU = (
-        '208030828,2.2.3,3iV_101,REQU_PRINT,30,1,20170207,'
-        '073426,304277331552660,000000001625844,,,,,'
-        '03,X,,,,,,,,,,,,,,'
+        "208030828,2.2.3,3iV_101,REQU_PRINT,30,1,20170207,"
+        "073426,304277331552660,000000001625844,,,,,"
+        "03,X,,,,,,,,,,,,,,"
     )
     EXAMPLE_RESP = (
-        '208030828,2.2.3,3iV_101,RESP_PRINT,30,1,20170207,'
-        '073411,304277331552660,0,,000000001625844,,,,,,,,,,'
-        '17,,,,,,,,,,'
+        "208030828,2.2.3,3iV_101,RESP_PRINT,30,1,20170207,"
+        "073411,304277331552660,0,,000000001625844,,,,,,,,,,"
+        "17,,,,,,,,,,"
     )
-    EXAMPLE_RESU = ''
+    EXAMPLE_RESU = ""
     REQU = (
-        'groupNum',
-        'groupSubNum',
-        'headerNum',
-        'headerSubNum',
-        'assignmentType',
-        'printType',
-        'printerNum',
-        'destLocationId',
-        'destCarSeqNum',
-        'destCarId',
-        'Usf01',
-        'Usf02',
-        'Usf03',
-        'Usf04',
-        'Usf05',
-        'Usf06',
-        'Usf07',
-        'Usf08',
-        'Usf09',
-        'Usf10',
+        "groupNum",
+        "groupSubNum",
+        "headerNum",
+        "headerSubNum",
+        "assignmentType",
+        "printType",
+        "printerNum",
+        "destLocationId",
+        "destCarSeqNum",
+        "destCarId",
+        "Usf01",
+        "Usf02",
+        "Usf03",
+        "Usf04",
+        "Usf05",
+        "Usf06",
+        "Usf07",
+        "Usf08",
+        "Usf09",
+        "Usf10",
     )
     RESP = (
-        'respCode',
-        'respMsg',
-        'groupNum',
-        'groupSubNum',
-        'headerNum',
-        'headerSubNum',
-        'printerNum',
-        'destLocationId',
-        'destLocationCD',
-        'destCarSeqNum',
-        'destCarId',
-        'numOfLabels',
-        'labelCD',
-        'Usf01',
-        'Usf02',
-        'Usf03',
-        'Usf04',
-        'Usf05',
-        'Usf06',
-        'Usf07',
-        'Usf08',
-        'Usf09',
-        'Usf10',
+        "respCode",
+        "respMsg",
+        "groupNum",
+        "groupSubNum",
+        "headerNum",
+        "headerSubNum",
+        "printerNum",
+        "destLocationId",
+        "destLocationCD",
+        "destCarSeqNum",
+        "destCarId",
+        "numOfLabels",
+        "labelCD",
+        "Usf01",
+        "Usf02",
+        "Usf03",
+        "Usf04",
+        "Usf05",
+        "Usf06",
+        "Usf07",
+        "Usf08",
+        "Usf09",
+        "Usf10",
     )
     RESU = ()
 
@@ -82,22 +82,21 @@ class Print(DomainInterface):
         :param params:
         :return:
         """
-        result = Parameters(self, action='resp')
+        result = Parameters(self, action="resp")
 
         picking_id = params.groupNum
         if not picking_id:
-            result = Parameters(self, action='resp')
+            result = Parameters(self, action="resp")
             result.update(
                 {
-                    'respCode': constants.RESPONSE_CODE_ERROR,
-                    'respMsg': _('No picking found with the ID %s')
-                    % picking_id,
+                    "respCode": constants.RESPONSE_CODE_ERROR,
+                    "respMsg": _("No picking found with the ID %s") % picking_id,
                 }
             )
             return result.format()
         picking_id = int(picking_id)
 
-        picking = self.request.env['stock.picking'].browse(picking_id)
+        picking = self.request.env["stock.picking"].browse(picking_id)
         picking._lock_rows()
         # Assign a checksum on the picking (print on the package label)
         picking.assign_picking_checksum()
@@ -109,12 +108,8 @@ class Print(DomainInterface):
 
         # Print the passport (see above)
         if print_type == constants.PRINT_PASSPORT:
-            pick_aliment = self.request.env.ref(
-                '__setup__.stock_picking_type_ali'
-            )
-            pick_frigo = self.request.env.ref(
-                '__setup__.stock_picking_type_froid'
-            )
+            pick_aliment = self.request.env.ref("__setup__.stock_picking_type_ali")
+            pick_frigo = self.request.env.ref("__setup__.stock_picking_type_froid")
             if picking.picking_type_id == pick_aliment:
                 printer_code = constants.PRINTER_ALIMENT
             elif picking.picking_type_id == pick_frigo:
@@ -124,16 +119,16 @@ class Print(DomainInterface):
 
             # The passport is always printed on the printer 1
             printer = (
-                self.request.env['printing.printer']
+                self.request.env["printing.printer"]
                 .sudo()
-                .search([('code', '=', printer_code), ('type', '=', 'pdf')])
+                .search([("code", "=", printer_code), ("type", "=", "pdf")])
             )
             if not printer:
                 result.update(
                     {
-                        'respCode': constants.RESPONSE_CODE_ERROR,
-                        'respMsg': _('Cannot found a printer'),
-                        'labelCD': '00',
+                        "respCode": constants.RESPONSE_CODE_ERROR,
+                        "respMsg": _("Cannot found a printer"),
+                        "labelCD": "00",
                     }
                 )
                 return result.format()
@@ -146,9 +141,9 @@ class Print(DomainInterface):
                 params.log(picking_id=picking_id, exception=e)
                 result.update(
                     {
-                        'respCode': constants.RESPONSE_CODE_ERROR,
-                        'respMsg': _('Error during printing'),
-                        'labelCD': '00',  # Default code
+                        "respCode": constants.RESPONSE_CODE_ERROR,
+                        "respMsg": _("Error during printing"),
+                        "labelCD": "00",  # Default code
                     }
                 )
                 return result.format()
@@ -166,51 +161,47 @@ class Print(DomainInterface):
                     pack_savepoint.rollback()
 
             printer_toshiba = (
-                self.request.env['printing.printer']
+                self.request.env["printing.printer"]
                 .sudo()
-                .search([('code', '=', printer_num), ('type', '=', 'toshiba')])
+                .search([("code", "=", printer_num), ("type", "=", "toshiba")])
             )
             printer_zebra = (
-                self.request.env['printing.printer']
+                self.request.env["printing.printer"]
                 .sudo()
-                .search([('code', '=', printer_num), ('type', '=', 'zebra')])
+                .search([("code", "=", printer_num), ("type", "=", "zebra")])
             )
 
             if not printer_toshiba or not printer_zebra:
                 result.update(
                     {
-                        'respCode': constants.RESPONSE_CODE_ERROR,
-                        'respMsg': _('Cannot found a printer'),
-                        'labelCD': '00',  # Default code
+                        "respCode": constants.RESPONSE_CODE_ERROR,
+                        "respMsg": _("Cannot found a printer"),
+                        "labelCD": "00",  # Default code
                     }
                 )
                 return result.format()
 
             try:
-                picking.sudo().print_products_label(
-                    printer_id=printer_toshiba.id
-                )
-                picking.sudo().print_packages_label(
-                    printer_id=printer_zebra.id
-                )
+                picking.sudo().print_products_label(printer_id=printer_toshiba.id)
+                picking.sudo().print_packages_label(printer_id=printer_zebra.id)
             except Exception as e:
                 self.rollback_to_savepoint()
                 _logger.error(str(e))
                 params.log(picking_id=picking_id, exception=e)
                 result.update(
                     {
-                        'respCode': constants.RESPONSE_CODE_ERROR,
-                        'respMsg': _('Error during printing'),
-                        'labelCD': '00',  # Default code
+                        "respCode": constants.RESPONSE_CODE_ERROR,
+                        "respMsg": _("Error during printing"),
+                        "labelCD": "00",  # Default code
                     }
                 )
                 return result.format()
 
         result.update(
             {
-                'respCode': constants.RESPONSE_CODE_OK,
-                'groupNum': picking.id,
-                'labelCD': picking.checksum or '00',
+                "respCode": constants.RESPONSE_CODE_OK,
+                "groupNum": picking.id,
+                "labelCD": picking.checksum or "00",
             }
         )
 

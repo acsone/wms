@@ -18,11 +18,9 @@ class AlcDeliveryWindow(models.Model):
 
     start = fields.Float("From", required=True)
     end = fields.Float("To", required=True)
-    week_day_ids = fields.Many2many(
-        comodel_name="alc.delivery.week.day", required=True
-    )
+    week_day_ids = fields.Many2many(comodel_name="alc.delivery.week.day", required=True)
     partner_id = fields.Many2one(
-        "res.partner", required=True, index=True, ondelete='cascade'
+        "res.partner", required=True, index=True, ondelete="cascade"
     )
 
     @api.constrains("start", "end", "week_day_ids")
@@ -71,8 +69,7 @@ class AlcDeliveryWindow(models.Model):
             if res:
                 other = self.browse(res[0][0])
                 raise ValidationError(
-                    _("%s overlaps %s")
-                    % (record.display_name, other.display_name)
+                    _("%s overlaps %s") % (record.display_name, other.display_name)
                 )
 
     @api.depends("start", "end", "week_day_ids")

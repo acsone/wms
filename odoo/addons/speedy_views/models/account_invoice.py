@@ -9,7 +9,7 @@ from .utils import create_index, install_trgm_extension
 
 
 class AccountInvoice(models.Model):
-    _inherit = 'account.invoice'
+    _inherit = "account.invoice"
 
     partner_id = fields.Many2one(index=True)
 
@@ -19,19 +19,16 @@ class AccountInvoice(models.Model):
         self.env.cr.commit()
 
         if trgm_installed:
-            index_name = 'account_invoice_origin_gin_trgm'
+            index_name = "account_invoice_origin_gin_trgm"
             create_index(
-                self.env.cr,
-                index_name,
-                self._table,
-                'USING gin (origin gin_trgm_ops)',
+                self.env.cr, index_name, self._table, "USING gin (origin gin_trgm_ops)"
             )
 
         # default list view sort by those fields desc
-        index_name = 'account_invoice_list_sort_index'
+        index_name = "account_invoice_list_sort_index"
         create_index(
             self.env.cr,
             index_name,
             self._table,
-            '(date_invoice desc, number desc, id desc) ',
+            "(date_invoice desc, number desc, id desc) ",
         )

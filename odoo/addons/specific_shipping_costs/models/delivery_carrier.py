@@ -8,16 +8,12 @@ from odoo.exceptions import UserError
 
 
 class DeliveryCarrier(models.Model):
-    _inherit = 'delivery.carrier'
+    _inherit = "delivery.carrier"
 
-    use_specific_cost_calculation = fields.Boolean(
-        string='Alcyon specific cost'
-    )
+    use_specific_cost_calculation = fields.Boolean(string="Alcyon specific cost")
 
     def unlink(self):
-        if self.env['res.partner'].search(
-            [('property_delivery_carrier_id', 'in', self.ids)]
+        if self.env["res.partner"].search(
+            [("property_delivery_carrier_id", "in", self.ids)]
         ):
-            raise UserError(
-                _('You cannot delete a record linked from a partner')
-            )
+            raise UserError(_("You cannot delete a record linked from a partner"))

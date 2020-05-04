@@ -23,11 +23,11 @@ from odoo import fields, models
 
 
 class StockLocation(models.Model):
-    _inherit = 'stock.location'
+    _inherit = "stock.location"
 
     barcode_picking_type_id = fields.Many2one(
-        'stock.picking.type',
-        'Barcode Picking Type',
+        "stock.picking.type",
+        "Barcode Picking Type",
         help="Define the type of picking to create when this location (or any "
         "children) is scanned",
     )

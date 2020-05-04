@@ -5,16 +5,14 @@ from odoo import api, fields, models
 
 
 class SaleOrder(models.Model):
-    _inherit = 'sale.order'
+    _inherit = "sale.order"
 
     used_for_delivery_fee = fields.Boolean(
-        'Has been used for delivery fee calculation', copy=False
+        "Has been used for delivery fee calculation", copy=False
     )
 
     @api.model
-    def charge_shipping_costs_by_carrier(
-        self, carrier, round_saleorders, customer
-    ):
+    def charge_shipping_costs_by_carrier(self, carrier, round_saleorders, customer):
         """Check customer fee for one delivery carrier.
 
         And charge the customer on his last sale order if nececssary.
@@ -23,16 +21,16 @@ class SaleOrder(models.Model):
             return
         sale_orders = self.search(
             [
-                ('partner_id', '=', customer.id),
-                ('state', '!=', 'cancel'),
-                ('used_for_delivery_fee', '=', False),
-                ('carrier_id', '=', carrier.id),
+                ("partner_id", "=", customer.id),
+                ("state", "!=", "cancel"),
+                ("used_for_delivery_fee", "=", False),
+                ("carrier_id", "=", carrier.id),
             ]
         )
         if not sale_orders:
             return
-        sum_ordered = sum(sale_orders.mapped('amount_untaxed'))
-        sale_orders.write({'used_for_delivery_fee': True})
+        sum_ordered = sum(sale_orders.mapped("amount_untaxed"))
+        sale_orders.write({"used_for_delivery_fee": True})
         if sum_ordered == 0 or sum_ordered >= carrier.amount:
             return
         # Find the last sale order passed and charge the customer

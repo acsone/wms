@@ -8,28 +8,25 @@ from odoo import fields
 from odoo.addons.component.core import Component
 
 StatsFormOptions = namedtuple(
-    'StatsFormOptions',
-    'customer_ref start end product_type suppliers language',
+    "StatsFormOptions", "customer_ref start end product_type suppliers language"
 )
 # Make None the default value for fields
 # customer_ref is required, hence the len(fields) - 1
-StatsFormOptions.__new__.__defaults__ = (None,) * (
-    len(StatsFormOptions._fields) - 1
-)
+StatsFormOptions.__new__.__defaults__ = (None,) * (len(StatsFormOptions._fields) - 1)
 
 
 class StatisticsFormWebserviceMessage(Component):
 
-    _name = 'esb.webservice.message.statistics.form'
-    _inherit = ['esb.webservice.message.base']
-    _apply_on = ['res.partner']
-    _usage = 'ws.message.statistics.form'
+    _name = "esb.webservice.message.statistics.form"
+    _inherit = ["esb.webservice.message.base"]
+    _apply_on = ["res.partner"]
+    _usage = "ws.message.statistics.form"
 
     options_for_form = StatsFormOptions
 
     def _data_for_message(self, options):
 
-        sql = '''
+        sql = """
 SELECT
     pp.default_code AS "sku",
 
@@ -95,10 +92,10 @@ LEFT JOIN res_partner AS supplier ON supplier.id = psi.name
 
 WHERE sol.invoice_status = 'invoiced' AND
       customer.ref = %s
-        '''
+        """
 
         params = []
-        params.append(options.language or 'FR')
+        params.append(options.language or "FR")
         params.append(options.customer_ref)
         if options.product_type:
             sql += " AND business_unit.esb_ref = %s"
@@ -112,7 +109,7 @@ WHERE sol.invoice_status = 'invoiced' AND
         if options.suppliers:
             sql += " AND supplier.ref in %s"
             params.append(tuple(options.suppliers))
-        sql += ' GROUP BY pp.id,pp.default_code,business_unit.esb_ref,pt.id;'
+        sql += " GROUP BY pp.id,pp.default_code,business_unit.esb_ref,pt.id;"
 
         self.env.cr.execute(sql, params)
         data = self.env.cr.fetchall()
@@ -125,10 +122,10 @@ WHERE sol.invoice_status = 'invoiced' AND
 
 class CustomerDeliveryFeeWebserviceMessage(Component):
 
-    _name = 'esb.webservice.message.customer.delivery.fee'
-    _inherit = ['esb.webservice.message.base']
-    _apply_on = ['res.partner']
-    _usage = 'ws.message.customer.delivery.fee'
+    _name = "esb.webservice.message.customer.delivery.fee"
+    _inherit = ["esb.webservice.message.base"]
+    _apply_on = ["res.partner"]
+    _usage = "ws.message.customer.delivery.fee"
 
     def get_message(self, customer_ref):
         """Always sending the same result !? so no need to call produce.
@@ -139,8 +136,8 @@ class CustomerDeliveryFeeWebserviceMessage(Component):
         """
         return (
             '<?xml version="1.0" encoding="UTF-8" ?>'
-            '<result>'
-            '<byPassTestAmount>True</byPassTestAmount>'
-            '<totalOrderAmount>9999.00</totalOrderAmount>'
-            '</result>'
+            "<result>"
+            "<byPassTestAmount>True</byPassTestAmount>"
+            "<totalOrderAmount>9999.00</totalOrderAmount>"
+            "</result>"
         )

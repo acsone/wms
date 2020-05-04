@@ -7,9 +7,7 @@ _logger = logging.getLogger(__name__)
 
 
 def _fill_partner_lat_long(cr, registry):
-    _logger.info(
-        "Move partner lat/long info from custom fields to specific fields"
-    )
+    _logger.info("Move partner lat/long info from custom fields to specific fields")
     cr.execute(
         """
         SELECT 1

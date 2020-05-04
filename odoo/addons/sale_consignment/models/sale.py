@@ -9,14 +9,14 @@ class SaleOrder(models.Model):
     _inherit = "sale.order"
 
     is_consignment = fields.Boolean(
-        'For Consignment',
+        "For Consignment",
         help="Procurement will be generated for the consignment location "
         "of the selected customer",
     )
 
 
 class SaleOrderLine(models.Model):
-    _inherit = 'sale.order.line'
+    _inherit = "sale.order.line"
 
     @api.multi
     def _prepare_order_line_procurement(self, group_id=False):
@@ -29,23 +29,23 @@ class SaleOrderLine(models.Model):
             )
             if not location:
                 location = (
-                    self.env['stock.location']
+                    self.env["stock.location"]
                     .sudo()
                     .create(
                         {
-                            'location_id': self.env.ref(
-                                'sale_consignment.stock_location_consignment'
+                            "location_id": self.env.ref(
+                                "sale_consignment.stock_location_consignment"
                             ).id,
-                            'name': self.order_id.partner_shipping_id.display_name,
-                            'usage': 'internal',
-                            'company_id': self.order_id.company_id.id,
+                            "name": self.order_id.partner_shipping_id.display_name,
+                            "usage": "internal",
+                            "company_id": self.order_id.company_id.id,
                         }
                     )
                 )
                 self.order_id.partner_shipping_id.sudo().property_stock_consignment_customer = (
                     location.id
                 )
-            vals['location_id'] = location.id
+            vals["location_id"] = location.id
         return vals
 
     @api.multi

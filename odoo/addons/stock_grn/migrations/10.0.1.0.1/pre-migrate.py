@@ -8,7 +8,7 @@ _logger = logging.getLogger(__name__)
 
 
 def migrate(cr, version):
-    _logger.info('Create and initialize the grn_date field on stock.picking')
+    _logger.info("Create and initialize the grn_date field on stock.picking")
 
     cr.execute(
         """

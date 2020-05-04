@@ -19,16 +19,10 @@ class ResPartner(models.Model):
         ]
 
     def _get_invoice_unpaid_domain(self):
-        return [
-            ("state", "not in", ["paid", "cancel"]),
-            ("partner_id", "=", self.id),
-        ]
+        return [("state", "not in", ["paid", "cancel"]), ("partner_id", "=", self.id)]
 
     def _get_stock_picking_domain(self):
-        return [
-            ("state", "not in", ["done", "cancel"]),
-            ("partner_id", "=", self.id),
-        ]
+        return [("state", "not in", ["done", "cancel"]), ("partner_id", "=", self.id)]
 
     @api.multi
     def archive_partner(self):
@@ -36,22 +30,16 @@ class ResPartner(models.Model):
         if self.active:
             context = {}
             Sale = self.env["sale.order"]
-            nb_so_not_done = Sale.search(
-                self._get_sale_order_not_done_domain()
-            )
+            nb_so_not_done = Sale.search(self._get_sale_order_not_done_domain())
             if nb_so_not_done:
                 context["default_sale_ids"] = nb_so_not_done.ids
             Invoice = self.env["account.invoice"]
-            nb_invoices_unpaid = Invoice.search(
-                self._get_invoice_unpaid_domain()
-            )
+            nb_invoices_unpaid = Invoice.search(self._get_invoice_unpaid_domain())
             if nb_so_not_done:
                 context["default_invoice_ids"] = nb_invoices_unpaid.ids
 
             Picking = self.env["stock.picking"]
-            nb_deliveries_not_done = Picking.search(
-                self._get_stock_picking_domain()
-            )
+            nb_deliveries_not_done = Picking.search(self._get_stock_picking_domain())
             if nb_so_not_done:
                 context["default_picking_ids"] = nb_deliveries_not_done.ids
             if context:

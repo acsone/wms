@@ -9,7 +9,7 @@ class ResPartner(models.Model):
     _inherit = "res.partner"
 
     property_stock_consignment_customer = fields.Many2one(
-        'stock.location',
+        "stock.location",
         string="Customer Consignment Location",
         company_dependent=True,
         help="This stock location will be used for consignment orders "

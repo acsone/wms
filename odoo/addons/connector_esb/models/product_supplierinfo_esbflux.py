@@ -15,31 +15,31 @@ class ProductSupplierinfoEsbflux(models.Model):
     flux can be properly generated later on
     """
 
-    _name = 'product.supplierinfo.esbflux'
-    _description = 'ESB Promotions XML'
+    _name = "product.supplierinfo.esbflux"
+    _description = "ESB Promotions XML"
 
     action = fields.Selection(
-        string='Action', selection=[('delete', 'Delete'), ('create', 'Create')]
+        string="Action", selection=[("delete", "Delete"), ("create", "Create")]
     )
     flux = fields.Selection(
-        string='Flux name',
+        string="Flux name",
         selection=[
-            ('buyxgety', 'Buy X Get Y'),
-            ('specialpromotion', 'Special Promotion'),
+            ("buyxgety", "Buy X Get Y"),
+            ("specialpromotion", "Special Promotion"),
         ],
     )
-    real_id = fields.Integer(string='Real Id')
+    real_id = fields.Integer(string="Real Id")
     # Fields from table product.supplierinfo, needed for the mapping later
     product_tmpl_id = fields.Many2one(
-        'product.template', 'Product Template', index=True, ondelete='cascade'
+        "product.template", "Product Template", index=True, ondelete="cascade"
     )
-    ratio_main_product = fields.Integer('Ratio Main Product')
-    ratio_promotional_product = fields.Integer('Ratio Free Product')
+    ratio_main_product = fields.Integer("Ratio Main Product")
+    ratio_promotional_product = fields.Integer("Ratio Free Product")
     discount_sale = fields.Float(
-        'Sale discount (%)', digits=dp.get_precision('Discount'), default=0.0
+        "Sale discount (%)", digits=dp.get_precision("Discount"), default=0.0
     )
-    date_start = fields.Date(string='Start Date')
-    date_end = fields.Date(string='End Date')
+    date_start = fields.Date(string="Start Date")
+    date_end = fields.Date(string="End Date")
 
     @api.multi
     def remove_duplicate_actions(self):
@@ -59,11 +59,11 @@ class ProductSupplierinfoEsbflux(models.Model):
             """
             if last is None:
                 return first
-            elif first.action == 'create' and last.action == 'create':
+            elif first.action == "create" and last.action == "create":
                 return last
-            elif first.action == 'delete' and last.action == 'delete':
+            elif first.action == "delete" and last.action == "delete":
                 return first
-            elif first.action == 'delete' and last.action == 'create':
+            elif first.action == "delete" and last.action == "create":
                 return self.browse() | first | last
             else:
                 # Start with create and finish with delete, nothing to send
@@ -103,18 +103,18 @@ class ProductSupplierinfoEsbflux(models.Model):
         resent to the ESB.
         """
         today = fields.Date.today()
-        self.search([(1, '=', 1)]).unlink()
-        valid_promotion = self.env['product.supplierinfo'].search(
-            [('date_start', '!=', False), ('date_end', '>=', today)]
+        self.search([(1, "=", 1)]).unlink()
+        valid_promotion = self.env["product.supplierinfo"].search(
+            [("date_start", "!=", False), ("date_end", ">=", today)]
         )
         for promotion in valid_promotion:
             if promotion._is_promotion_buyx_gety():
-                promotion._update_flux('create', 'buyxgety')
+                promotion._update_flux("create", "buyxgety")
             if promotion._is_promotion_special():
-                promotion._update_flux('create', 'specialpromotion')
+                promotion._update_flux("create", "specialpromotion")
         flux_to_reset = [
-            'connector_esb.esb_timestamp_special_promotion',
-            'connector_esb.esb_timestamp_buyx_gety',
+            "connector_esb.esb_timestamp_special_promotion",
+            "connector_esb.esb_timestamp_buyx_gety",
         ]
         for flux in flux_to_reset:
             self.env.ref(flux).last_export = None

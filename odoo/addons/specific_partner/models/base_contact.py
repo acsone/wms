@@ -6,7 +6,7 @@ from odoo import api, models
 
 
 class Contact(models.AbstractModel):
-    _inherit = 'ir.qweb.field.contact'
+    _inherit = "ir.qweb.field.contact"
 
     @api.model
     def value_to_html(self, value, options):

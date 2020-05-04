@@ -6,6 +6,6 @@ from odoo import fields, models
 
 
 class ResCountry(models.Model):
-    _inherit = 'res.country'
+    _inherit = "res.country"
 
-    esb_ref = fields.Char(string='Reference for ESB')
+    esb_ref = fields.Char(string="Reference for ESB")

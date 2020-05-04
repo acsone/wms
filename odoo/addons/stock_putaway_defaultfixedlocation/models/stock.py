@@ -23,18 +23,18 @@ from odoo import fields, models
 
 
 class ProductPutaway(models.Model):
-    _inherit = 'product.putaway'
+    _inherit = "product.putaway"
 
     fixed_location_id = fields.Many2one(
-        'stock.location',
-        string='Default Fixed Location',
+        "stock.location",
+        string="Default Fixed Location",
         help="Destination fixed location when no fixed location is defined "
         "for a product category",
     )
 
     def putaway_apply(self, product):
         res = super(ProductPutaway, self).putaway_apply(product)
-        if self.method == 'fixed':
+        if self.method == "fixed":
             if not res:
                 return self.fixed_location_id.id
         return res

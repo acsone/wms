@@ -6,13 +6,13 @@ from odoo import _, api, fields, models
 
 
 class StockMove(models.Model):
-    _inherit = 'stock.move'
+    _inherit = "stock.move"
 
     # Use a boolean instead of reverse relation of
     # 'stock.pack.operation' 'additional_move_id' because some pack operations
     # are deleted when the picking is transfered through do_new_transfer() and
     # this prevent to find the additional moves to not forward to backorder
-    is_additional_move = fields.Boolean('Is Additional Move')
+    is_additional_move = fields.Boolean("Is Additional Move")
 
     def do_unreserve(self):
         # picking do_unreserve first unlink pack operations and then calls
@@ -20,7 +20,7 @@ class StockMove(models.Model):
         # rebuild the record set otherwise it will complain for missing records
         # in the recordset
         if self.ids:
-            self = self.search([('id', 'in', self.ids)])
+            self = self.search([("id", "in", self.ids)])
         return super(StockMove, self).do_unreserve()
 
     def check_move_lots(self):
@@ -28,7 +28,7 @@ class StockMove(models.Model):
         # As recordset changed, we need to rebuild it otherwise it
         # will complain for missing records in the recordset
         if self.ids:
-            self = self.search([('id', 'in', self.ids)])
+            self = self.search([("id", "in", self.ids)])
         return super(StockMove, self).check_move_lots()
 
     def assign_picking(self):
@@ -41,9 +41,7 @@ class StockMove(models.Model):
                     no_recompute_pack=True, force_cancel=True
                 ).action_cancel()
                 move.picking_id.message_post(
-                    body=_(
-                        "Remaining additional move '%s' canceled" % move.name
-                    )
+                    body=_("Remaining additional move '%s' canceled" % move.name)
                 )
             else:
                 other_moves |= move

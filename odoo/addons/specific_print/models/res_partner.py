@@ -5,9 +5,9 @@ from odoo import fields, models
 
 
 class ResPartner(models.Model):
-    _inherit = 'res.partner'
+    _inherit = "res.partner"
 
-    is_price_on_labels = fields.Boolean('Display price on labels')
+    is_price_on_labels = fields.Boolean("Display price on labels")
     no_labels_products = fields.Boolean(
         string="Do not print product labels",
         help="Customer does not need product labels",

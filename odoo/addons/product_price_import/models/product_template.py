@@ -7,7 +7,7 @@ from odoo import api, models
 
 class ProductTemplate(models.Model):
 
-    _inherit = 'product.template'
+    _inherit = "product.template"
 
     @api.model
     def _get_default_supplierinfo(self, products):
@@ -17,9 +17,9 @@ class ProductTemplate(models.Model):
         """
         si = self.env["product.supplierinfo"].search(
             [
-                ('product_tmpl_id', 'in', products.ids),
-                ('date_start', '=', False),
-                ('date_end', '=', False),
+                ("product_tmpl_id", "in", products.ids),
+                ("date_start", "=", False),
+                ("date_end", "=", False),
             ]
         )
         return {i.product_tmpl_id: i for i in si}

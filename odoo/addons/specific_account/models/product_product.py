@@ -6,7 +6,7 @@ from odoo import models
 
 
 class ProductProduct(models.Model):
-    _inherit = 'product.product'
+    _inherit = "product.product"
 
     def _compute_partner_ref(self):
         """ Called from invoice product onchange.
@@ -14,7 +14,7 @@ class ProductProduct(models.Model):
         put internal code prefix on the line description. This rule applies for
         SO and Invoice at product onchange as invoice line description is
         copied from SO line description. """
-        if self.env.context.get('type') in ('out_invoice', 'out_refund'):
+        if self.env.context.get("type") in ("out_invoice", "out_refund"):
             self.partner_ref = self.name
         else:
             super(ProductProduct, self)._compute_partner_ref()

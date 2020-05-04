@@ -5,9 +5,9 @@ from odoo import api, fields, models
 
 
 class GenerateVoiceIdentifier(models.TransientModel):
-    _name = 'generate.voice.identifier'
+    _name = "generate.voice.identifier"
 
-    lot_ids = fields.Many2many('stock.production.lot', string='Lots')
+    lot_ids = fields.Many2many("stock.production.lot", string="Lots")
 
     def default_get(self, fields_list=None):
         if not fields_list:
@@ -16,7 +16,7 @@ class GenerateVoiceIdentifier(models.TransientModel):
             fields_list=fields_list
         )
 
-        result['lot_ids'] = [(6, 0, self.env.context.get('active_ids', []))]
+        result["lot_ids"] = [(6, 0, self.env.context.get("active_ids", []))]
 
         return result
 

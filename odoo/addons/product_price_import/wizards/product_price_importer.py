@@ -47,9 +47,9 @@ def _ensure_float(price_str):
 
 class ProductPriceImporter(models.TransientModel):
 
-    _name = 'product.price.importer'
+    _name = "product.price.importer"
 
-    document = fields.Binary(string='XLSX file', required=True)
+    document = fields.Binary(string="XLSX file", required=True)
 
     @api.multi
     def doit(self):
@@ -58,13 +58,11 @@ class ProductPriceImporter(models.TransientModel):
         product_price_infos = [p for p in self._iter_data(content)]
         self._do_update_prices(product_price_infos)
         action = {
-            'type': 'ir.actions.act_window',
-            'name': _('Updated products'),
-            'res_model': 'product.template',
-            'domain': [
-                ('id', 'in', [i.product.id for i in product_price_infos])
-            ],
-            'view_mode': 'tree,form',
+            "type": "ir.actions.act_window",
+            "name": _("Updated products"),
+            "res_model": "product.template",
+            "domain": [("id", "in", [i.product.id for i in product_price_infos])],
+            "view_mode": "tree,form",
         }
         return action
 
@@ -141,9 +139,7 @@ class ProductPriceImporter(models.TransientModel):
             price_info.product.write(
                 {
                     "list_price": _ensure_float(price_info.sale_price),
-                    "indicated_price": _ensure_float(
-                        price_info.indicated_price
-                    ),
+                    "indicated_price": _ensure_float(price_info.indicated_price),
                 }
             )
 
@@ -158,9 +154,7 @@ class ProductPriceImporter(models.TransientModel):
             ProductTemplate.browse(ids)
         )
         for price_info in product_price_infos:
-            product_supplierinfo = default_supplier_infos.get(
-                price_info.product
-            )
+            product_supplierinfo = default_supplier_infos.get(price_info.product)
             if product_supplierinfo:
                 if product_supplierinfo.name != price_info.supplier:
                     raise ValidationError(
@@ -186,9 +180,7 @@ class ProductPriceImporter(models.TransientModel):
                                 0,
                                 {
                                     "name": price_info.supplier.id,
-                                    "price": _ensure_float(
-                                        price_info.purchase_price
-                                    ),
+                                    "price": _ensure_float(price_info.purchase_price),
                                     "product_code": price_info.supplier_reference,
                                 },
                             )
@@ -229,23 +221,17 @@ class ProductPriceImporter(models.TransientModel):
           starting from now.
         """
         ProductPricelistItem = self.env["product.pricelist.item"]
-        pricelist = self.env.ref('specific_data.product_pricelist_pb2')
+        pricelist = self.env.ref("specific_data.product_pricelist_pb2")
 
-        pricelist_items = self.env['product.pricelist.item'].search(
+        pricelist_items = self.env["product.pricelist.item"].search(
             [
-                ('pricelist_id', '=', pricelist.id),
-                ('applied_on', '=', '1_product'),
-                (
-                    'product_tmpl_id',
-                    'in',
-                    [i.product.id for i in product_price_infos],
-                ),
+                ("pricelist_id", "=", pricelist.id),
+                ("applied_on", "=", "1_product"),
+                ("product_tmpl_id", "in", [i.product.id for i in product_price_infos]),
             ]
         )
-        pricelist_items_by_product = {
-            i.product_tmpl_id: i for i in pricelist_items
-        }
-        prec = self.env['decimal.precision'].precision_get('Product Price')
+        pricelist_items_by_product = {i.product_tmpl_id: i for i in pricelist_items}
+        prec = self.env["decimal.precision"].precision_get("Product Price")
         for price_info in product_price_infos:
             sale_price_2 = price_info.sale_price_2
             if sale_price_2:
@@ -262,14 +248,12 @@ class ProductPriceImporter(models.TransientModel):
                 else:
                     ProductPricelistItem.create(
                         {
-                            'applied_on': '1_product',
-                            'product_id': price_info.product.product_variant_ids[
-                                0
-                            ].id,
-                            'compute_price': 'fixed',
-                            'fixed_price': sale_price_2,
-                            'product_tmpl_id': price_info.product.id,
-                            'pricelist_id': pricelist.id,
+                            "applied_on": "1_product",
+                            "product_id": price_info.product.product_variant_ids[0].id,
+                            "compute_price": "fixed",
+                            "fixed_price": sale_price_2,
+                            "product_tmpl_id": price_info.product.id,
+                            "pricelist_id": pricelist.id,
                         }
                     )
             elif pricelist_item:

@@ -22,18 +22,18 @@ from odoo import api, fields, models
 
 
 class StockChangeProductQty(models.TransientModel):
-    _inherit = 'stock.change.product.qty'
+    _inherit = "stock.change.product.qty"
 
     @api.model
     def _get_default_location_id(self):
         if self.env.context.get(
-            'active_model'
-        ) != 'product.template' or not self.env.context.get('active_id'):
+            "active_model"
+        ) != "product.template" or not self.env.context.get("active_id"):
             return
 
-        product_tmpl_id = self.env.context['active_id']
-        stock_bins = self.env['product.stock.bin'].search(
-            [('product_id', '=', product_tmpl_id)], limit=1
+        product_tmpl_id = self.env.context["active_id"]
+        stock_bins = self.env["product.stock.bin"].search(
+            [("product_id", "=", product_tmpl_id)], limit=1
         )
 
         if stock_bins:

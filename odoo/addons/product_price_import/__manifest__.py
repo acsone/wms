@@ -28,7 +28,7 @@ This addon provides:
         "base_import",
     ],
     "data": [
-        'wizards/product_price_importer.xml',
+        "wizards/product_price_importer.xml",
         "report/report_product_price_import.xml",
     ],
     "demo": [],

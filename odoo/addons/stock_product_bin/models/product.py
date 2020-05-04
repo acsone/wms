@@ -6,34 +6,32 @@ from odoo import fields, models
 
 
 class ProductStockBin(models.Model):
-    _name = 'product.stock.bin'
-    _order = 'sequence'
+    _name = "product.stock.bin"
+    _order = "sequence"
 
-    sequence = fields.Integer('Seq.')
+    sequence = fields.Integer("Seq.")
     location_id = fields.Many2one(
-        'stock.location', 'Location', required=True, ondelete='restrict'
+        "stock.location", "Location", required=True, ondelete="restrict"
     )
     bin_location_id = fields.Many2one(
-        'stock.location', 'Bin', required=True, ondelete='restrict'
+        "stock.location", "Bin", required=True, ondelete="restrict"
     )
     product_id = fields.Many2one(
-        'product.template', 'Product', required=True, ondelete='cascade'
+        "product.template", "Product", required=True, ondelete="cascade"
     )
 
 
 class ProductTemplate(models.Model):
-    _inherit = 'product.template'
+    _inherit = "product.template"
 
-    stock_bin_ids = fields.One2many(
-        'product.stock.bin', 'product_id', 'Stock Bins'
-    )
+    stock_bin_ids = fields.One2many("product.stock.bin", "product_id", "Stock Bins")
 
     def _bin(self):
         self.ensure_one()
 
-        order_list = ['bin', 'parking', 'reserve']
+        order_list = ["bin", "parking", "reserve"]
         order = {key: i for i, key in enumerate(order_list)}
         if self.stock_bin_ids:
-            bins = self.stock_bin_ids.mapped('bin_location_id')
+            bins = self.stock_bin_ids.mapped("bin_location_id")
             return sorted(bins, key=lambda rec: order.get(rec.kind, 99))[0]
-        return self.env['stock.location'].browse()
+        return self.env["stock.location"].browse()

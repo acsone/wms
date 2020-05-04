@@ -7,33 +7,33 @@ from odoo import api, fields, models
 
 
 class SaleOrderLine(models.Model):
-    _inherit = 'sale.order.line'
+    _inherit = "sale.order.line"
 
     product_qty_canceled = fields.Float(
-        'Qty canceled',
+        "Qty canceled",
         readonly=True,
         copy=False,
-        digits=dp.get_precision('Product Unit of Measure'),
+        digits=dp.get_precision("Product Unit of Measure"),
     )
     product_qty_returned = fields.Float(
-        'Qty returned',
+        "Qty returned",
         readonly=True,
         copy=False,
-        digits=dp.get_precision('Product Unit of Measure'),
+        digits=dp.get_precision("Product Unit of Measure"),
     )
     product_qty_remains_to_deliver = fields.Float(
-        string='Remains to deliver',
-        digits=dp.get_precision('Product Unit of Measure'),
-        compute='_compute_product_qty_remains_to_deliver',
+        string="Remains to deliver",
+        digits=dp.get_precision("Product Unit of Measure"),
+        compute="_compute_product_qty_remains_to_deliver",
         store=True,
     )
 
     @api.multi
     @api.depends(
-        'product_uom_qty',
-        'qty_delivered',
-        'product_qty_canceled',
-        'product_qty_returned',
+        "product_uom_qty",
+        "qty_delivered",
+        "product_qty_canceled",
+        "product_qty_returned",
     )
     def _compute_product_qty_remains_to_deliver(self):
         for line in self:

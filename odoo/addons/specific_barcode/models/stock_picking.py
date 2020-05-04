@@ -7,37 +7,33 @@ import re
 from odoo import _, models
 from odoo.exceptions import UserError
 
-lot_barcode = re.compile(r'#(\w+)#(\w+)#?')
+lot_barcode = re.compile(r"#(\w+)#(\w+)#?")
 
 
 class StockPicking(models.Model):
-    _name = 'stock.picking'
-    _inherit = ['stock.picking', 'barcodes.barcode_events_mixin']
+    _name = "stock.picking"
+    _inherit = ["stock.picking", "barcodes.barcode_events_mixin"]
 
     def _barcode_process_alldone(self):
         """ Mark all quantities as processed """
         for op in self.pack_operation_product_ids:
             # Force writing in DB
-            op.write({'qty_done': op.product_qty})
+            op.write({"qty_done": op.product_qty})
             for oplot in op.pack_lot_ids:
-                oplot.write({'qty': oplot.qty_todo})
+                oplot.write({"qty": oplot.qty_todo})
             # Now update the UI
             op.qty_done = op.product_qty
 
     def _barcode_process_lot(self, m):
-        lot = self.env['stock.production.lot'].search(
-            [
-                ('product_id.default_code', '=', m.group(1)),
-                ('name', '=', m.group(2)),
-            ],
+        lot = self.env["stock.production.lot"].search(
+            [("product_id.default_code", "=", m.group(1)), ("name", "=", m.group(2))],
             limit=1,
         )
         if not lot:
             return {
-                'warning': {
-                    'title': _('Wrong lot'),
-                    'message': _('No match for lot %s product %s')
-                    % m.groups(),
+                "warning": {
+                    "title": _("Wrong lot"),
+                    "message": _("No match for lot %s product %s") % m.groups(),
                 }
             }
         op = self.pack_operation_product_ids.filtered(
@@ -47,27 +43,24 @@ class StockPicking(models.Model):
         )
         if not op:
             return {
-                'warning': {
-                    'title': _('Wrong lot'),
-                    'message': _('No operation matched for product %s')
-                    % m.group(1),
+                "warning": {
+                    "title": _("Wrong lot"),
+                    "message": _("No operation matched for product %s") % m.group(1),
                 }
             }
         oplot = op.pack_lot_ids.filtered(lambda r: r.lot_id == lot)
         if not oplot:
             return {
-                'warning': {
-                    'title': _('Wrong lot'),
-                    'message': _(
-                        'Operation with product %s does not accept lot %s'
-                    )
+                "warning": {
+                    "title": _("Wrong lot"),
+                    "message": _("Operation with product %s does not accept lot %s")
                     % m.groups(),
                 }
             }
         qty_done = op.qty_done
         # Force writing in DB
-        op.write({'qty_done': qty_done + 1})
-        oplot.write({'qty': oplot.qty + 1})
+        op.write({"qty_done": qty_done + 1})
+        oplot.write({"qty": oplot.qty + 1})
         # Now update the UI
         op.qty_done = qty_done + 1
 
@@ -79,23 +72,23 @@ class StockPicking(models.Model):
         )
         if not op:
             return {
-                'warning': {
-                    'title': _('Wrong product'),
-                    'message': _('No operation matched for product %s')
+                "warning": {
+                    "title": _("Wrong product"),
+                    "message": _("No operation matched for product %s")
                     % product.default_code,
                 }
             }
         if op.pack_lot_ids:
             return {
-                'warning': {
-                    'title': _('Lot required'),
-                    'message': _('Operation with product %s need a lot')
+                "warning": {
+                    "title": _("Lot required"),
+                    "message": _("Operation with product %s need a lot")
                     % product.default_code,
                 }
             }
         qty_done = op.qty_done
         # Force writing in DB
-        op.write({'qty_done': qty_done + 1})
+        op.write({"qty_done": qty_done + 1})
         # Now update the UI
         op.qty_done = qty_done + 1
 
@@ -108,28 +101,25 @@ class StockPicking(models.Model):
         changes on the UI does not make any difference.
         """
         if not self.operator_id:
-            raise UserError(_('Please start operation first'))
+            raise UserError(_("Please start operation first"))
 
-        picking = self.search([('name', '=', self.name)])
+        picking = self.search([("name", "=", self.name)])
         if not picking:
-            return UserError(_('Invalid document reference'))
+            return UserError(_("Invalid document reference"))
         # Check if command 'alldone'
-        if barcode == 'C#ALLDONE':
+        if barcode == "C#ALLDONE":
             return self._barcode_process_alldone()
         # Check if lot: #product#lot or #product#lot#
         m = lot_barcode.match(barcode)
         if m and len(m.groups()) == 2:
             return self._barcode_process_lot(m)
         # Check product
-        product = self.env['product.product'].search(
-            [('default_code', '=', barcode)], limit=1
+        product = self.env["product.product"].search(
+            [("default_code", "=", barcode)], limit=1
         )
         if product:
             return self._barcode_process_product(product)
         # Raise error
         return {
-            'warning': {
-                'title': _('Unsupported code'),
-                'message': _('%s') % barcode,
-            }
+            "warning": {"title": _("Unsupported code"), "message": _("%s") % barcode}
         }

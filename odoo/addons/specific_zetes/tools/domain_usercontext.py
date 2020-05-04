@@ -7,76 +7,76 @@ from .. import constants
 
 class Usercontext(DomainInterface):
     EXAMPLE_REQU = (
-        '208030824,2.2.3,3iV_101,REQU_USERCONTEXT,98,1,20170207,'
-        '072932,98427733121320,1,,01,,,,,,,,,,,,,,,,'
+        "208030824,2.2.3,3iV_101,REQU_USERCONTEXT,98,1,20170207,"
+        "072932,98427733121320,1,,01,,,,,,,,,,,,,,,,"
     )
     EXAMPLE_RESP = (
-        '208030824,2.2.3,3iV_101,RESP_USERCONTEXT,98,1,'
-        '20170207,072758,98427733121320,0,,1,01,,1,'
-        'Serge Diplo,,0,,,,,,,,,,'
+        "208030824,2.2.3,3iV_101,RESP_USERCONTEXT,98,1,"
+        "20170207,072758,98427733121320,0,,1,01,,1,"
+        "Serge Diplo,,0,,,,,,,,,,"
     )
     EXAMPLE_RESU = (
-        '208092662,2.2.3,3iV_101,RESU_USERCONTEXT,87,1,20170207,'
-        '081534,874277334413394,4,70,,1,Monica Checchi,,,,,,,,,,,,'
+        "208092662,2.2.3,3iV_101,RESU_USERCONTEXT,87,1,20170207,"
+        "081534,874277334413394,4,70,,1,Monica Checchi,,,,,,,,,,,,"
     )
     REQU = (
-        'contextType',
-        'requestType',
-        'scenarioStatus',
-        'Cri01',
-        'Cri02',
-        'Cri03',
-        'Cri04',
-        'Cri05',
-        'Usf01',
-        'Usf02',
-        'Usf03',
-        'Usf04',
-        'Usf05',
-        'Usf06',
-        'Usf07',
-        'Usf08',
-        'Usf09',
-        'Usf10',
+        "contextType",
+        "requestType",
+        "scenarioStatus",
+        "Cri01",
+        "Cri02",
+        "Cri03",
+        "Cri04",
+        "Cri05",
+        "Usf01",
+        "Usf02",
+        "Usf03",
+        "Usf04",
+        "Usf05",
+        "Usf06",
+        "Usf07",
+        "Usf08",
+        "Usf09",
+        "Usf10",
     )
     RESP = (
-        'respCode',
-        'respMsg',
-        'contextType',
-        'scenarioStatus',
-        'responseType',
-        'assignmentType',
-        'operName',
-        'operType',
-        'unitSlam',
-        'Usf01',
-        'Usf02',
-        'Usf03',
-        'Usf04',
-        'Usf05',
-        'Usf06',
-        'Usf07',
-        'Usf08',
-        'Usf09',
-        'Usf10',
+        "respCode",
+        "respMsg",
+        "contextType",
+        "scenarioStatus",
+        "responseType",
+        "assignmentType",
+        "operName",
+        "operType",
+        "unitSlam",
+        "Usf01",
+        "Usf02",
+        "Usf03",
+        "Usf04",
+        "Usf05",
+        "Usf06",
+        "Usf07",
+        "Usf08",
+        "Usf09",
+        "Usf10",
     )
     RESU = (
-        'contextType',
-        'scenarioStatus',
-        'requestType',
-        'assignmentType',
-        'operName',
-        'operType',
-        'Usf01',
-        'Usf02',
-        'Usf03',
-        'Usf04',
-        'Usf05',
-        'Usf06',
-        'Usf07',
-        'Usf08',
-        'Usf09',
-        'Usf10',
+        "contextType",
+        "scenarioStatus",
+        "requestType",
+        "assignmentType",
+        "operName",
+        "operType",
+        "Usf01",
+        "Usf02",
+        "Usf03",
+        "Usf04",
+        "Usf05",
+        "Usf06",
+        "Usf07",
+        "Usf08",
+        "Usf09",
+        "Usf10",
     )
 
     def requ(self, params):
@@ -89,13 +89,13 @@ class Usercontext(DomainInterface):
         :param params:
         :return:
         """
-        result = Parameters(self, action='resp')
+        result = Parameters(self, action="resp")
 
         if not self._operator_user:
             result.update(
                 {
-                    'respCode': constants.RESPONSE_CODE_ERROR,
-                    'respMsg': _('User not found'),
+                    "respCode": constants.RESPONSE_CODE_ERROR,
+                    "respMsg": _("User not found"),
                 }
             )
 
@@ -103,11 +103,11 @@ class Usercontext(DomainInterface):
 
         # The picker (zetes user) must have the group "warehouse"
         user = self.request.env.user
-        if not user.has_group('stock.group_stock_user'):
+        if not user.has_group("stock.group_stock_user"):
             result.update(
                 {
-                    'respCode': constants.RESPONSE_CODE_ERROR,
-                    'respMsg': _('The user should be in the group Inventory'),
+                    "respCode": constants.RESPONSE_CODE_ERROR,
+                    "respMsg": _("The user should be in the group Inventory"),
                 }
             )
 
@@ -115,15 +115,15 @@ class Usercontext(DomainInterface):
 
         result.update(
             {
-                'respCode': constants.RESPONSE_CODE_OK,
-                'assignmentType': 1,
-                'operName': self._operator_user.name,
+                "respCode": constants.RESPONSE_CODE_OK,
+                "assignmentType": 1,
+                "operName": self._operator_user.name,
             }
         )
 
         # Do sign on
-        if params.contextType == '1':
-            result.update({'contextType': 1, 'scenarioStatus': '01'})
+        if params.contextType == "1":
+            result.update({"contextType": 1, "scenarioStatus": "01"})
 
             # This query will check if the picker has an open picking.
             # This can happen if the Zetes console crash
@@ -153,12 +153,9 @@ LIMIT 1;
             """
 
             query_values = {
-                'picking_zetes_state': (
-                    constants.AS_START,
-                    constants.AS_ACTIVE,
-                ),
-                'operator_id': self._operator_user.id,
-                'op_zetes_state': (constants.OP_DEFAULT, constants.OP_SKIPPED),
+                "picking_zetes_state": (constants.AS_START, constants.AS_ACTIVE),
+                "operator_id": self._operator_user.id,
+                "op_zetes_state": (constants.OP_DEFAULT, constants.OP_SKIPPED),
             }
 
             self.request.env.cr.execute(picking_query, query_values)
@@ -168,10 +165,10 @@ LIMIT 1;
             if query_result and query_result[0]:
                 result.update(
                     {
-                        'unitSlam': 1,
-                        'Usf01': query_result[0],
-                        'Usf02': query_result[1],
-                        'Usf03': query_result[2],
+                        "unitSlam": 1,
+                        "Usf01": query_result[0],
+                        "Usf02": query_result[1],
+                        "Usf03": query_result[2],
                     }
                 )
             else:

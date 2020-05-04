@@ -6,13 +6,12 @@ from odoo import fields, models
 
 
 class StockPickingType(models.Model):
-    _inherit = 'stock.picking.type'
+    _inherit = "stock.picking.type"
 
     # avoid_shipping_cost is used to avoid computing shipping cost for
     # outgoing picking type. It has no effect on other picking types.
     avoid_shipping_cost = fields.Boolean(
         string="Avoid shipping cost",
         default=False,
-        help="Is selected, the shipping cost will not be added to the sale"
-        "order.",
+        help="Is selected, the shipping cost will not be added to the sale" "order.",
     )

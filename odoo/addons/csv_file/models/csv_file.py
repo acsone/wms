@@ -16,29 +16,25 @@ _logger = logging.getLogger(__name__)
 
 
 class CSVFile(models.Model):
-    _name = 'csv.file'
+    _name = "csv.file"
 
-    name = fields.Char('Name', required=True)
-    active = fields.Boolean('Active', default=True)
-    filename = fields.Char('Filename', required=True)
-    delimiter = fields.Char('Delimiter', required=True)
-    folder_out = fields.Char('Folder OUT', required=True)
+    name = fields.Char("Name", required=True)
+    active = fields.Boolean("Active", default=True)
+    filename = fields.Char("Filename", required=True)
+    delimiter = fields.Char("Delimiter", required=True)
+    folder_out = fields.Char("Folder OUT", required=True)
     method = fields.Char(required=True)
-    file_encoding = fields.Char(required=True, default='utf_8')
+    file_encoding = fields.Char(required=True, default="utf_8")
 
     ftp_connector_id = fields.Many2one(
-        'ftp.connector', string='FTP connector', required=False
+        "ftp.connector", string="FTP connector", required=False
     )
 
     _sql_constraints = [
-        (
-            'unique_csv_file',
-            'UNIQUE(filename)',
-            _('The file name must be unique.'),
-        )
+        ("unique_csv_file", "UNIQUE(filename)", _("The file name must be unique."))
     ]
 
-    @api.constrains('filename')
+    @api.constrains("filename")
     def check_filename(self):
         for import_file in self:
             import_file.get_filename_pattern(self.filename)
@@ -72,14 +68,14 @@ class CSVFile(models.Model):
         """
 
         # Check if the filename contains the extension
-        if '.' not in filename:
-            raise UserError(_('The filename must contain the extension'))
+        if "." not in filename:
+            raise UserError(_("The filename must contain the extension"))
 
         # Use the datetime send in params or "now" (datetime)
         now = now_overwrite or datetime.now()
 
         # Datetime directives contain only "%" with a letter (eg: %Y, %m, ...)
-        date_directive_regex = r'(%[a-zA-Z])'
+        date_directive_regex = r"(%[a-zA-Z])"
         # To format date we will extract these directives
         result = re.findall(date_directive_regex, filename)
         # If the filename doesn't contain datetime directives
@@ -97,10 +93,7 @@ class CSVFile(models.Model):
                 value = now.strftime(date_format)
             except Exception:
                 raise UserError(
-                    _(
-                        'The filename is not valid.'
-                        'Please check the part "%s"'
-                    )
+                    _("The filename is not valid." 'Please check the part "%s"')
                     % date_format
                 )
 
@@ -130,7 +123,7 @@ class CSVFile(models.Model):
                 os.makedirs(directory_path)
 
             return True
-        elif self.ftp_connector_id.type == 'sftp':
+        elif self.ftp_connector_id.type == "sftp":
             with self.get_sftp_connector() as connector:
                 try:
                     connector.listdir(directory_path)
@@ -144,7 +137,7 @@ class CSVFile(models.Model):
 
             return True
         else:
-            raise UserError(_('Unknown import type'))
+            raise UserError(_("Unknown import type"))
 
     @api.multi
     def check_file(self, file_path):
@@ -152,14 +145,14 @@ class CSVFile(models.Model):
 
         if not self.ftp_connector_id:
             return os.path.isfile(file_path)
-        elif self.ftp_connector_id.type == 'sftp':
+        elif self.ftp_connector_id.type == "sftp":
             with self.get_sftp_connector() as connector:
                 stat = connector.stat(file_path)
                 if stat:
                     return True
                 return False
         else:
-            raise UserError(_('Unknown import type'))
+            raise UserError(_("Unknown import type"))
 
     @api.multi
     def get_all_files(self, import_path):
@@ -172,16 +165,16 @@ class CSVFile(models.Model):
 
         if not self.ftp_connector_id:
             files = os.listdir(import_path)
-        elif self.ftp_connector_id.type == 'sftp':
+        elif self.ftp_connector_id.type == "sftp":
             with self.get_sftp_connector() as connector:
                 files = connector.listdir(import_path)
         else:
-            raise UserError(_('Unknown import type'))
+            raise UserError(_("Unknown import type"))
 
         return files
 
     @api.multi
-    def get_file_content(self, file_path, encoding='utf_8'):
+    def get_file_content(self, file_path, encoding="utf_8"):
         """
         Return the file content (StringIO) from file_path
         :param file_path: The path of the file on the source
@@ -190,15 +183,15 @@ class CSVFile(models.Model):
         self.ensure_one()
 
         if not self.ftp_connector_id:
-            with open(file_path, 'r') as f:
+            with open(file_path, "r") as f:
                 content = StringIO(f.read().decode(encoding))
-        elif self.ftp_connector_id.type == 'sftp':
+        elif self.ftp_connector_id.type == "sftp":
             with self.get_sftp_connector() as connector:
-                f = connector.open(file_path, 'r')
+                f = connector.open(file_path, "r")
                 content_str = f.read()
                 content = StringIO(unicode(content_str))
         else:
-            raise UserError(_('Unknown import type'))
+            raise UserError(_("Unknown import type"))
 
         return content
 
@@ -214,28 +207,28 @@ class CSVFile(models.Model):
 
         if not self.ftp_connector_id:
             shutil.move(old_path, new_path)
-        elif self.ftp_connector_id.type == 'sftp':
+        elif self.ftp_connector_id.type == "sftp":
             with self.get_sftp_connector() as connector:
                 connector.rename(old_path, new_path)
         else:
-            raise UserError(_('Unknown import type'))
+            raise UserError(_("Unknown import type"))
 
     @api.multi
     def put_file(self, current_path, destination_path):
         if not self.ftp_connector_id:
             shutil.move(current_path, destination_path)
-        elif self.ftp_connector_id.type == 'sftp':
+        elif self.ftp_connector_id.type == "sftp":
             with self.get_sftp_connector() as connector:
                 connector.put(current_path, destination_path)
         else:
-            raise UserError(_('Unknown import type'))
+            raise UserError(_("Unknown import type"))
 
     @contextmanager
     def get_sftp_connector(self):
         self.ensure_one()
 
         if not self.ftp_connector_id:
-            raise UserError(_('Please configure a sFTP connector'))
+            raise UserError(_("Please configure a sFTP connector"))
 
         with self.ftp_connector_id.get_sftp_connector() as connector:
             yield connector
@@ -244,20 +237,20 @@ class CSVFile(models.Model):
     def get_ftp_connector(self):
         self.ensure_one()
 
-        raise NotImplementedError('Please implement this method')
+        raise NotImplementedError("Please implement this method")
 
 
 class CSVFileLogger(models.Model):
-    _name = 'csv.file.logger'
-    _order = 'create_date DESC'
-    _rec_name = 'date_start'
+    _name = "csv.file.logger"
+    _order = "create_date DESC"
+    _rec_name = "date_start"
 
-    date_start = fields.Datetime('Date start')
-    date_end = fields.Datetime('Date end')
-    message = fields.Text('Message')
-    nbr_lines = fields.Integer('Number of lines')
-    duration = fields.Float('Duration')
+    date_start = fields.Datetime("Date start")
+    date_end = fields.Datetime("Date end")
+    message = fields.Text("Message")
+    nbr_lines = fields.Integer("Number of lines")
+    duration = fields.Float("Duration")
     state = fields.Selection(
-        [('success', 'Success'), ('partial', 'Partial'), ('error', 'Error')],
-        default='success',
+        [("success", "Success"), ("partial", "Partial"), ("error", "Error")],
+        default="success",
     )

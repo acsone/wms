@@ -10,18 +10,16 @@ class TestStockReturnPicking(SavepointCase):
     def setUpClass(cls):
         super(TestStockReturnPicking, cls).setUpClass()
         cls.env = cls.env(
-            context=dict(
-                cls.env.context, tracking_disable=True, round_autoset=False
-            )
+            context=dict(cls.env.context, tracking_disable=True, round_autoset=False)
         )
         #  create and execute a picking with 1 product put into a stock quant
         #  package
 
         # Base data
-        StockQuantPackage = cls.env['stock.quant.package']
+        StockQuantPackage = cls.env["stock.quant.package"]
         StockReturnPicking = cls.env["stock.return.picking"]
 
-        cls.pack = StockQuantPackage.create({'name': 'Pack test'})
+        cls.pack = StockQuantPackage.create({"name": "Pack test"})
 
         cls.product = cls.env["product.product"].create(
             {
@@ -96,8 +94,8 @@ class TestStockReturnPicking(SavepointCase):
 
         cls.quants = cls.env["stock.quant"].search(
             [
-                ('history_ids', 'in', cls.move.id),
-                ('location_id', 'child_of', cls.move.location_dest_id.id),
+                ("history_ids", "in", cls.move.id),
+                ("location_id", "child_of", cls.move.location_dest_id.id),
             ]
         )
 

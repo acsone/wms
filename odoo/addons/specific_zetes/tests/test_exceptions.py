@@ -20,40 +20,40 @@ class TestExceptions(ZetesTest):
         self.disable_picking_validation = True
         super(TestExceptions, self).setUp()
 
-        self.location_product_2 = self.env['stock.location'].create(
+        self.location_product_2 = self.env["stock.location"].create(
             {
-                'name': 'GD80B2',
-                'kind': 'bin',
-                'zone': 'G',
-                'corridor': 'D',
-                'shelf': '80',
-                'height': 'B',
-                'box': '2',
-                'location_id': self.zone_gustave.id,
-                'bin_checksum_1': '45',
-                'bin_checksum_2': '45',
+                "name": "GD80B2",
+                "kind": "bin",
+                "zone": "G",
+                "corridor": "D",
+                "shelf": "80",
+                "height": "B",
+                "box": "2",
+                "location_id": self.zone_gustave.id,
+                "bin_checksum_1": "45",
+                "bin_checksum_2": "45",
             }
         )
-        self.env['stock.location']._parent_store_compute()
+        self.env["stock.location"]._parent_store_compute()
 
         # Product 2
         # Location: GD80B1
-        self.product_2 = self.env['product.product'].create(
+        self.product_2 = self.env["product.product"].create(
             {
-                'name': 'Test medoc 2',
-                'default_code': '587502',
-                'categ_id': self.product_categ_medoc.id,
-                'tracking': 'lot',
-                'list_price': 40,
-                'type': 'product',
-                'stock_bin_ids': [
+                "name": "Test medoc 2",
+                "default_code": "587502",
+                "categ_id": self.product_categ_medoc.id,
+                "tracking": "lot",
+                "list_price": 40,
+                "type": "product",
+                "stock_bin_ids": [
                     (
                         0,
                         0,
                         {
-                            'sequence': 1,
-                            'location_id': self.stock_location.id,
-                            'bin_location_id': self.location_product_2.id,
+                            "sequence": 1,
+                            "location_id": self.stock_location.id,
+                            "bin_location_id": self.location_product_2.id,
                         },
                     )
                 ],
@@ -61,42 +61,40 @@ class TestExceptions(ZetesTest):
         )
 
         two_years = datetime.now() + relativedelta(years=2)
-        self.lot_product_2 = self.env['stock.production.lot'].create(
+        self.lot_product_2 = self.env["stock.production.lot"].create(
             {
-                'name': '000000001',
-                'product_id': self.product_2.id,
-                'removal_date': fields.Datetime.to_string(two_years),
+                "name": "000000001",
+                "product_id": self.product_2.id,
+                "removal_date": fields.Datetime.to_string(two_years),
             }
         )
-        update_qty_wizard = self.env['stock.change.product.qty'].create(
+        update_qty_wizard = self.env["stock.change.product.qty"].create(
             {
-                'product_id': self.product_2.id,
-                'product_tmpl_id': self.product_1.product_tmpl_id.id,
-                'new_quantity': 10,
-                'lot_id': self.lot_product_2.id,
-                'location_id': self.location_product_2.id,
+                "product_id": self.product_2.id,
+                "product_tmpl_id": self.product_1.product_tmpl_id.id,
+                "new_quantity": 10,
+                "lot_id": self.lot_product_2.id,
+                "location_id": self.location_product_2.id,
             }
         )
         update_qty_wizard.change_product_qty()
 
         self.picking.write(
             {
-                'move_lines': [
+                "move_lines": [
                     (
                         0,
                         0,
                         {
-                            'name': 'Test medoc 2',
-                            'product_id': self.product_2.id,
-                            'product_uom_qty': 10,
-                            'product_uom': self.env.ref(
-                                'product.product_uom_unit'
+                            "name": "Test medoc 2",
+                            "product_id": self.product_2.id,
+                            "product_uom_qty": 10,
+                            "product_uom": self.env.ref("product.product_uom_unit").id,
+                            "location_id": self.env.ref(
+                                "stock.stock_location_stock"
                             ).id,
-                            'location_id': self.env.ref(
-                                'stock.stock_location_stock'
-                            ).id,
-                            'location_dest_id': self.env.ref(
-                                'stock.stock_location_output'
+                            "location_dest_id": self.env.ref(
+                                "stock.stock_location_output"
                             ).id,
                         },
                     )
@@ -115,16 +113,16 @@ class TestExceptions(ZetesTest):
         """
 
         assignement_obj = Assignment(
-            self._default_header(), mock.MagicMock(name='Savepoint()')
+            self._default_header(), mock.MagicMock(name="Savepoint()")
         )
         catchweight_obj = Catchweight(
-            self._default_header(), mock.MagicMock(name='Savepoint()')
+            self._default_header(), mock.MagicMock(name="Savepoint()")
         )
         itempick_obj = Itempick(
-            self._default_header(), mock.MagicMock(name='Savepoint()')
+            self._default_header(), mock.MagicMock(name="Savepoint()")
         )
         usercontext_obj = Usercontext(
-            self._default_header(), mock.MagicMock(name='Savepoint()')
+            self._default_header(), mock.MagicMock(name="Savepoint()")
         )
 
         ##########
@@ -137,10 +135,7 @@ class TestExceptions(ZetesTest):
         # Start the picking
         start_picking_params = Parameters(assignement_obj)
         start_picking_params.update(
-            {
-                'groupNum': self.picking.id,
-                'assignmentStatus': constants.AS_START,
-            }
+            {"groupNum": self.picking.id, "assignmentStatus": constants.AS_START}
         )
         assignement_obj.resu(start_picking_params)
 
@@ -154,11 +149,11 @@ class TestExceptions(ZetesTest):
         request_pick_items_params = Parameters(catchweight_obj)
         request_pick_items_params.update(
             {
-                'groupNum': self.picking.id,
-                'lineId': pack_op_1.id,
-                'Usf01': self.lot_product_1.voice_identifier,
-                'Usf02': 10,  # Pick 10 items
-                'Usf03': None,
+                "groupNum": self.picking.id,
+                "lineId": pack_op_1.id,
+                "Usf01": self.lot_product_1.voice_identifier,
+                "Usf02": 10,  # Pick 10 items
+                "Usf03": None,
             }
         )
         catchweight_obj.resu(request_pick_items_params)
@@ -166,9 +161,9 @@ class TestExceptions(ZetesTest):
         request_validate_picking_line_params = Parameters(itempick_obj)
         request_validate_picking_line_params.update(
             {
-                'groupNum': self.picking.id,
-                'pickLineId': pack_op_1.id,
-                'pickStatus': constants.OP_PICKED,
+                "groupNum": self.picking.id,
+                "pickLineId": pack_op_1.id,
+                "pickStatus": constants.OP_PICKED,
             }
         )
         itempick_obj.resu(request_validate_picking_line_params)
@@ -177,19 +172,16 @@ class TestExceptions(ZetesTest):
         # Step 3 #
         ##########
         login_params = Parameters(usercontext_obj)
-        login_params.update({'contextType': '1'})  # Do a sign in
+        login_params.update({"contextType": "1"})  # Do a sign in
         result_str = usercontext_obj.requ(login_params)
         result = self.format_result(result_str)
         self.assertEqual(result.respCode, str(constants.RESPONSE_CODE_OK))
-        self.assertEqual(result.unitSlam, '1')
+        self.assertEqual(result.unitSlam, "1")
         self.assertEqual(result.Usf01, str(self.picking.id))
 
         request_restart_picking_params = Parameters(assignement_obj)
         request_restart_picking_params.update(
-            {
-                'groupNum': self.picking.id,
-                'assignmentStatus': constants.AS_START,
-            }
+            {"groupNum": self.picking.id, "assignmentStatus": constants.AS_START}
         )
         assignement_obj.resu(request_restart_picking_params)
 
@@ -198,15 +190,13 @@ class TestExceptions(ZetesTest):
         ##########
         request_picking_line_params = Parameters(itempick_obj)
         request_picking_line_params.update(
-            {'groupNum': self.picking.id, 'Cri01': 0, 'Usf06': None}
+            {"groupNum": self.picking.id, "Cri01": 0, "Usf06": None}
         )
 
         result_str = itempick_obj.requ(request_picking_line_params)
-        result_lines = result_str.split('\n')
-        results = [
-            self.format_result(result_line) for result_line in result_lines
-        ]
+        result_lines = result_str.split("\n")
+        results = [self.format_result(result_line) for result_line in result_lines]
         # self.assertEqual(len(results), 1)
-        pick_line_id, lot_id = results[0].pickLineId.split('_')
+        pick_line_id, lot_id = results[0].pickLineId.split("_")
         # self.assertEqual(pick_line_id, str(pack_op_2.id))
         # self.assertEqual(lot_id, str(self.lot_product_2.id))

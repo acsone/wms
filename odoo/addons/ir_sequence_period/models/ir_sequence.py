@@ -8,10 +8,10 @@ from odoo import fields, models
 
 
 class IrSequence(models.Model):
-    _inherit = 'ir.sequence'
+    _inherit = "ir.sequence"
 
     use_end_date = fields.Boolean(
-        'Use the end date of the range',
+        "Use the end date of the range",
         help="""By default Odoo will use
                                   the start date (from) to compute date
                                   with the prefix range_ (eg: range_year).
@@ -30,10 +30,10 @@ class IrSequence(models.Model):
     def _create_date_range_seq(self, date_string):
         user = self.env.user
         date = fields.Date.from_string(date_string)
-        if 'range_month' in self.prefix:
+        if "range_month" in self.prefix:
             start = date.replace(day=1)
             end = start + relativedelta(months=+1, days=-1)
-        elif 'range_year' in self.prefix:
+        elif "range_year" in self.prefix:
             ld = user.company_id.fiscalyear_last_day
             lm = user.company_id.fiscalyear_last_month
             start = end = date.replace(day=ld, month=lm)
@@ -43,20 +43,20 @@ class IrSequence(models.Model):
             else:
                 start -= relativedelta(years=+1)
         return (
-            self.env['ir.sequence.date_range']
+            self.env["ir.sequence.date_range"]
             .sudo()
             .create(
                 {
-                    'date_from': fields.Date.to_string(start),
-                    'date_to': fields.Date.to_string(end),
-                    'sequence_id': self.id,
+                    "date_from": fields.Date.to_string(start),
+                    "date_to": fields.Date.to_string(end),
+                    "sequence_id": self.id,
                 }
             )
         )
 
 
 class IrSequenceDateRange(models.Model):
-    _inherit = 'ir.sequence.date_range'
+    _inherit = "ir.sequence.date_range"
 
     def _next(self):
         self.ensure_one()

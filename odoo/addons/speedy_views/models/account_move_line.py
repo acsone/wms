@@ -8,7 +8,7 @@ from .utils import create_index
 
 
 class AccountMoveLine(models.Model):
-    _inherit = 'account.move.line'
+    _inherit = "account.move.line"
 
     # Reconciliation processes use intensive searches on those fields
     debit = fields.Monetary(index=True)
@@ -21,17 +21,15 @@ class AccountMoveLine(models.Model):
         # in reconcile wizard, queries look for null or false values
         # for 'reconciled'. We improve the mass reconciliations with
         # this partial index
-        index_name = 'account_move_line_not_reconciled_index'
+        index_name = "account_move_line_not_reconciled_index"
         create_index(
             self.env.cr,
             index_name,
             self._table,
-            '(reconciled) WHERE ' 'reconciled IS NULL OR NOT reconciled ',
+            "(reconciled) WHERE " "reconciled IS NULL OR NOT reconciled ",
         )
 
         # in reconcile wizard, a query is regularly issued with an
         # order by date_maturity, id, and we improve from 6s to 0.5ms
-        index_name = 'account_move_line_date_maturity_order_index'
-        create_index(
-            self.env.cr, index_name, self._table, '(date_maturity, id)'
-        )
+        index_name = "account_move_line_date_maturity_order_index"
+        create_index(self.env.cr, index_name, self._table, "(date_maturity, id)")

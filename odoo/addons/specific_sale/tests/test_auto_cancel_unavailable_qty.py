@@ -12,13 +12,13 @@ class TestAutoCancelUnavailableQty(SavepointCase):
     def setUpClass(cls):
         super(TestAutoCancelUnavailableQty, cls).setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
-        cls.partner = cls.env['res.partner'].create(
+        cls.partner = cls.env["res.partner"].create(
             {"name": "TEST CUSTOMER", "ref": "4929752", "customer": True}
         )
-        cls.product = cls.env['product.product'].create(
+        cls.product = cls.env["product.product"].create(
             {"name": "TEST", "default_code": "TEST", "type": "product"}
         )
-        cls.order = cls.env['sale.order'].create(
+        cls.order = cls.env["sale.order"].create(
             {
                 "partner_id": cls.partner.id,
                 "date_order": "2018-01-29",
@@ -64,7 +64,7 @@ class TestAutoCancelUnavailableQty(SavepointCase):
         self.assertEqual(line.product_qty_canceled, 4)
         # ALCYN-2359 the backorders must keep their value
         self.assertEqual(line.product_qty_unavailable, 4)
-        proc = line.procurement_ids.filtered(lambda r: r.state != 'cancel')
+        proc = line.procurement_ids.filtered(lambda r: r.state != "cancel")
         self.assertEqual(proc.product_qty, 6)
 
     def test_option_enabled_qty_available(self):

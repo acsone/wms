@@ -12,97 +12,95 @@ class TestReservation(TransactionCase):
     def setUp(self):
         super(TestReservation, self).setUp()
 
-        self.product_1 = self.env['product.product'].create(
+        self.product_1 = self.env["product.product"].create(
             {
-                'name': 'Product sale_procurement',
-                'type': 'product',
-                'uom_id': self.env.ref('product.product_uom_unit').id,
-                'uom_po_id': self.env.ref('product.product_uom_unit').id,
-                'default_code': 'Code product sale_procurement',
+                "name": "Product sale_procurement",
+                "type": "product",
+                "uom_id": self.env.ref("product.product_uom_unit").id,
+                "uom_po_id": self.env.ref("product.product_uom_unit").id,
+                "default_code": "Code product sale_procurement",
             }
         )
 
-        wh = self.env['stock.warehouse'].search([])
+        wh = self.env["stock.warehouse"].search([])
         location = wh[0].view_location_id
-        location.usage = 'internal'
-        loc_customer = self.env.ref('stock.stock_location_customers')
+        location.usage = "internal"
+        loc_customer = self.env.ref("stock.stock_location_customers")
 
-        pick_type = self.env.ref('stock.picking_type_out')
-        pick_type.subcode = 'PICK'
+        pick_type = self.env.ref("stock.picking_type_out")
+        pick_type.subcode = "PICK"
 
         # Create test move 1
-        self.picking_1 = self.env['stock.picking'].create(
+        self.picking_1 = self.env["stock.picking"].create(
             {
-                'picking_type_id': pick_type.id,
-                'location_id': location.id,
-                'location_dest_id': loc_customer.id,
+                "picking_type_id": pick_type.id,
+                "location_id": location.id,
+                "location_dest_id": loc_customer.id,
             }
         )
-        self.move_1 = self.env['stock.move'].create(
+        self.move_1 = self.env["stock.move"].create(
             {
-                'picking_id': self.picking_1.id,
-                'name': 'Test move 1',
-                'product_id': self.product_1.id,
-                'product_uom': self.product_1.uom_id.id,
-                'product_uom_qty': 2,
-                'location_id': location.id,
-                'location_dest_id': loc_customer.id,
-                'date': '2018-01-01 00:00:00',
+                "picking_id": self.picking_1.id,
+                "name": "Test move 1",
+                "product_id": self.product_1.id,
+                "product_uom": self.product_1.uom_id.id,
+                "product_uom_qty": 2,
+                "location_id": location.id,
+                "location_dest_id": loc_customer.id,
+                "date": "2018-01-01 00:00:00",
             }
         )
         self.move_1.action_confirm()
 
         # Create test move 2
-        self.picking_2 = self.env['stock.picking'].create(
+        self.picking_2 = self.env["stock.picking"].create(
             {
-                'picking_type_id': pick_type.id,
-                'location_id': location.id,
-                'location_dest_id': loc_customer.id,
+                "picking_type_id": pick_type.id,
+                "location_id": location.id,
+                "location_dest_id": loc_customer.id,
             }
         )
-        self.move_2 = self.env['stock.move'].create(
+        self.move_2 = self.env["stock.move"].create(
             {
-                'picking_id': self.picking_2.id,
-                'name': 'Test move 2',
-                'product_id': self.product_1.id,
-                'product_uom': self.product_1.uom_id.id,
-                'product_uom_qty': 2,
-                'location_id': location.id,
-                'location_dest_id': loc_customer.id,
-                'date': '2018-01-02 00:00:00',
+                "picking_id": self.picking_2.id,
+                "name": "Test move 2",
+                "product_id": self.product_1.id,
+                "product_uom": self.product_1.uom_id.id,
+                "product_uom_qty": 2,
+                "location_id": location.id,
+                "location_dest_id": loc_customer.id,
+                "date": "2018-01-02 00:00:00",
             }
         )
         self.move_2.action_confirm()
 
         # Put 1 product in stock
-        inventory = self.env['stock.inventory'].create(
+        inventory = self.env["stock.inventory"].create(
             {
-                'name': 'Test',
-                'filter': 'product',
-                'location_id': location.id,
-                'product_id': self.product_1.id,
+                "name": "Test",
+                "filter": "product",
+                "location_id": location.id,
+                "product_id": self.product_1.id,
             }
         )
         inventory.prepare_inventory()
         inventory.line_ids.unlink()
         inventory.line_ids.create(
             {
-                'product_id': self.product_1.id,
-                'product_qty': 3.0,
-                'inventory_id': inventory.id,
-                'location_id': location.id,
+                "product_id": self.product_1.id,
+                "product_qty": 3.0,
+                "inventory_id": inventory.id,
+                "location_id": location.id,
             }
         )
         inventory.action_done()
 
         # There should be 1 quant in stock
-        quants = self.env['stock.quant'].search(
-            [('product_id', '=', self.product_1.id)]
+        quants = self.env["stock.quant"].search(
+            [("product_id", "=", self.product_1.id)]
         )
         self.assertEqual(len(quants), 1)
-        self.assertTrue(
-            quants.mapped('qty') == [3.0], 'Unexpected quants qty in stock'
-        )
+        self.assertTrue(quants.mapped("qty") == [3.0], "Unexpected quants qty in stock")
         self.assertEqual(self.product_1.qty_available, 3)
 
     def test_reservation_1_2(self):

@@ -41,8 +41,7 @@ class TestStockConfigSettings(SavepointCase):
 
         # an update on the parameters invalidate the config cache
         self.IrConfigParameter.set_param(
-            "alc_delivery_rounds_geooptimize.geo_optimization_api_url",
-            "new_url",
+            "alc_delivery_rounds_geooptimize.geo_optimization_api_url", "new_url"
         )
         config = self.StockConfigSettings.get_optimization_config()
         self.assertEqual(config.api_url, "new_url")

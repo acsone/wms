@@ -6,7 +6,7 @@ from odoo import api, models
 
 
 class IrConfigParameter(models.Model):
-    _inherit = 'ir.config_parameter'
+    _inherit = "ir.config_parameter"
 
     @api.model
     def _clear_geo_optimization_cache_config(self):

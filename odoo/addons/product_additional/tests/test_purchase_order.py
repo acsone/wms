@@ -15,53 +15,51 @@ class TestPurchaseOrder(SavepointCase):
         super(TestPurchaseOrder, cls).setUpClass()
 
         # Create partner
-        cls.partner = cls.env['res.partner'].create(
-            {'name': 'Hello World', 'ref': '85789284'}
+        cls.partner = cls.env["res.partner"].create(
+            {"name": "Hello World", "ref": "85789284"}
         )
 
-        cls.supplier = cls.env['res.partner'].create(
-            {'name': 'Supplier', 'ref': '829562231', 'supplier': True}
+        cls.supplier = cls.env["res.partner"].create(
+            {"name": "Supplier", "ref": "829562231", "supplier": True}
         )
 
         # Create the main product
-        cls.main_product = cls.env['product.product'].create(
+        cls.main_product = cls.env["product.product"].create(
             {
-                'name': 'Main product',
-                'default_code': '1234567',
-                'tracking': 'lot',
-                'list_price': 100,
-                'type': 'product',
+                "name": "Main product",
+                "default_code": "1234567",
+                "tracking": "lot",
+                "list_price": 100,
+                "type": "product",
             }
         )
 
-        cls.additional_product = cls.env['product.product'].create(
+        cls.additional_product = cls.env["product.product"].create(
             {
-                'name': 'Second product',
-                'default_code': '987654321',
-                'tracking': 'none',
-                'list_price': 20,
-                'type': 'product',
+                "name": "Second product",
+                "default_code": "987654321",
+                "tracking": "none",
+                "list_price": 20,
+                "type": "product",
             }
         )
 
         # Create the purchase_order
-        cls.purchase_order = cls.env['purchase.order'].create(
+        cls.purchase_order = cls.env["purchase.order"].create(
             {
-                'partner_id': cls.partner.id,
-                'order_line': [
+                "partner_id": cls.partner.id,
+                "order_line": [
                     (
                         0,
                         0,
                         {
-                            'name': cls.main_product.name,
-                            'product_id': cls.main_product.id,
-                            'product_uom': cls.env.ref(
-                                'product.product_uom_unit'
-                            ).id,
-                            'product_qty': 12,
-                            'sequence': 1,
-                            'price_unit_base': 100,
-                            'date_planned': fields.Datetime.now(),
+                            "name": cls.main_product.name,
+                            "product_id": cls.main_product.id,
+                            "product_uom": cls.env.ref("product.product_uom_unit").id,
+                            "product_qty": 12,
+                            "sequence": 1,
+                            "price_unit_base": 100,
+                            "date_planned": fields.Datetime.now(),
                         },
                     )
                 ],
@@ -86,9 +84,9 @@ class TestPurchaseOrder(SavepointCase):
         """
         self.main_product.write(
             {
-                'ratio_main_product': 5,
-                'ratio_additional_product': 2,
-                'additional_product_id': self.additional_product.id,
+                "ratio_main_product": 5,
+                "ratio_additional_product": 2,
+                "additional_product_id": self.additional_product.id,
             }
         )
         self.assertEqual(len(self.purchase_order.order_line), 1)

@@ -6,6 +6,6 @@ from odoo import fields, models
 
 
 class StockLocation(models.Model):
-    _inherit = 'stock.location'
+    _inherit = "stock.location"
 
-    is_reception_wizard = fields.Boolean('Visible in reception wizard')
+    is_reception_wizard = fields.Boolean("Visible in reception wizard")

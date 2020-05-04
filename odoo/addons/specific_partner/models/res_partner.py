@@ -8,49 +8,45 @@ from odoo.osv.expression import get_unaccent_wrapper
 
 
 class ResPartner(models.Model):
-    _inherit = 'res.partner'
+    _inherit = "res.partner"
 
     alcyon_category_id = fields.Many2one(
-        'partner.alcyon_category', string='Alcyon category'
+        "partner.alcyon_category", string="Alcyon category"
     )
     ref = fields.Char(copy=False, readonly=True)
 
-    vet_depot_number = fields.Char(string='Depot number')
-    vet_subscription_number = fields.Char(string='Subscription number')
+    vet_depot_number = fields.Char(string="Depot number")
+    vet_subscription_number = fields.Char(string="Subscription number")
 
-    is_veterinary = fields.Boolean(
-        compute='_compute_is_veterinary_or_students'
-    )
-    is_students = fields.Boolean(compute='_compute_is_veterinary_or_students')
+    is_veterinary = fields.Boolean(compute="_compute_is_veterinary_or_students")
+    is_students = fields.Boolean(compute="_compute_is_veterinary_or_students")
 
-    legal_entity_id = fields.Many2one('legal.entity', string='Legal entity')
+    legal_entity_id = fields.Many2one("legal.entity", string="Legal entity")
 
     pharmacist_id = fields.Many2one(
-        comodel_name='res.partner', string='Associated pharmacist'
+        comodel_name="res.partner", string="Associated pharmacist"
     )
     pharmacist_of_ids = fields.One2many(
-        comodel_name='res.partner',
-        inverse_name='pharmacist_id',
-        string='Pharmacist associated to',
+        comodel_name="res.partner",
+        inverse_name="pharmacist_id",
+        string="Pharmacist associated to",
     )
 
     master_partner_id = fields.Many2one(
-        comodel_name='res.partner', string='Customer master'
+        comodel_name="res.partner", string="Customer master"
     )
 
     # temporary field to get the data and make it
     # possible to create contacts by hand in Odoo
     suite = fields.Char("Suite Name")
-    call_name = fields.Char(string='Nickname')
+    call_name = fields.Char(string="Nickname")
 
-    apb_authorization = fields.Char(string='Authorization/APB')
+    apb_authorization = fields.Char(string="Authorization/APB")
 
-    @api.depends('alcyon_category_id')
+    @api.depends("alcyon_category_id")
     def _compute_is_veterinary_or_students(self):
-        veterinary = self.env.ref(
-            'specific_partner.partner_category_veterinary'
-        )
-        students = self.env.ref('specific_partner.partner_category_student')
+        veterinary = self.env.ref("specific_partner.partner_category_veterinary")
+        students = self.env.ref("specific_partner.partner_category_student")
         for partner in self:
             partner.is_veterinary = partner.alcyon_category_id == veterinary
             partner.is_students = partner.alcyon_category_id == students
@@ -62,8 +58,8 @@ class ResPartner(models.Model):
         This changes the default behavior of the module base_partner_sequence,
          """
         res = super(ResPartner, self)._commercial_fields()
-        if 'ref' in res:
-            res.remove('ref')
+        if "ref" in res:
+            res.remove("ref")
         return res
 
     @api.multi
@@ -73,24 +69,24 @@ class ResPartner(models.Model):
         This changes the default behavior of the module base_partner_sequence.
         """
         res = super(ResPartner, self)._needsRef(vals)
-        if vals and vals.get('parent_id'):
+        if vals and vals.get("parent_id"):
             return True
         return res
 
     type_delivery = fields.Boolean(
-        'Is Also Delivery',
+        "Is Also Delivery",
         help="Allow to mark an invoice address as also a delivery address",
     )
-    type_name = fields.Char('Address Type Name', compute='_compute_type_name')
+    type_name = fields.Char("Address Type Name", compute="_compute_type_name")
 
     @api.multi
     def _compute_type_name(self):
         for partner in self:
             name = False
-            if partner.type == 'invoice' and partner.type_delivery:
-                name = _('Invoice and delivery')
+            if partner.type == "invoice" and partner.type_delivery:
+                name = _("Invoice and delivery")
             elif partner.type:
-                name = dict(self.fields_get(['type'])['type']['selection'])[
+                name = dict(self.fields_get(["type"])["type"]["selection"])[
                     partner.type
                 ]
             partner.type_name = name
@@ -120,8 +116,8 @@ class ResPartner(models.Model):
                     visited.add(record)
                     # jbaudoux: add 'invoice and delivery' in search
                     rtypes = [record.type]
-                    if rtypes == ['invoice'] and record.type_delivery:
-                        rtypes = ['invoice', 'delivery']
+                    if rtypes == ["invoice"] and record.type_delivery:
+                        rtypes = ["invoice", "delivery"]
                     for rtype in rtypes:
                         if rtype in adr_pref and not result.get(rtype):
                             result[rtype] = record.id
@@ -147,29 +143,25 @@ class ResPartner(models.Model):
         return result
 
     @api.model
-    def name_search(self, name, args=None, operator='ilike', limit=100):
+    def name_search(self, name, args=None, operator="ilike", limit=100):
         """Process ref as a code: do not apply ilike on ref.
         Return matched ref first.
         This is a copy/paste of the standard method where only 'ilike %ref%'
         has been changed into '= ref' in the query below."""
         if args is None:
             args = []
-        if name and operator in ('=', 'ilike', '=ilike', 'like', '=like'):
-            self.check_access_rights('read')
+        if name and operator in ("=", "ilike", "=ilike", "like", "=like"):
+            self.check_access_rights("read")
             where_query = self._where_calc(args)
-            self._apply_ir_rules(where_query, 'read')
-            from_clause, where_clause, where_clause_params = (
-                where_query.get_sql()
-            )
-            where_str = (
-                where_clause and (" WHERE %s AND " % where_clause) or ' WHERE '
-            )
+            self._apply_ir_rules(where_query, "read")
+            from_clause, where_clause, where_clause_params = where_query.get_sql()
+            where_str = where_clause and (" WHERE %s AND " % where_clause) or " WHERE "
 
             # search on the name of the contacts and of its company
             search_name = name
-            if operator in ('ilike', 'like'):
-                search_name = '%%%s%%' % name
-            if operator in ('=ilike', '=like'):
+            if operator in ("ilike", "like"):
+                search_name = "%%%s%%" % name
+            if operator in ("=ilike", "=like"):
                 operator = operator[1:]
 
             unaccent = get_unaccent_wrapper(self.env.cr)
@@ -186,16 +178,14 @@ class ResPartner(models.Model):
                     """.format(
                 where=where_str,
                 operator=operator,
-                email=unaccent('email'),
-                display_name=unaccent('display_name'),
-                percent=unaccent('%s'),
+                email=unaccent("email"),
+                display_name=unaccent("display_name"),
+                percent=unaccent("%s"),
             )
 
-            where_clause_params += (
-                [search_name] * 2 + [name] * 2 + [search_name]
-            )
+            where_clause_params += [search_name] * 2 + [name] * 2 + [search_name]
             if limit:
-                query += u' limit %s'
+                query += u" limit %s"
                 where_clause_params.append(limit)
             self.env.cr.execute(query, where_clause_params)
             partner_ids = map(lambda x: x[0], self.env.cr.fetchall())
@@ -210,10 +200,10 @@ class ResPartner(models.Model):
 
     @api.multi
     def name_get(self):
-        if self.env.context.get('show_address_only'):
+        if self.env.context.get("show_address_only"):
             return super(ResPartner, self).name_get()
-        html_format = self.env.context.get('html_format')
-        to_html = html_format or self.env.context.get('to_html')
+        html_format = self.env.context.get("html_format")
+        to_html = html_format or self.env.context.get("to_html")
         nameget = dict(
             super(ResPartner, self.with_context(html_format=False)).name_get()
         )
@@ -233,7 +223,7 @@ class ResPartner(models.Model):
                     name = u"{} {}".format(title, name)
                     full.append(name)
 
-            name = partner.name or ''
+            name = partner.name or ""
             if name and partner.title:
                 title = partner.title.shortcut or partner.title.name
                 name = u"{} {}".format(title, name)
@@ -245,20 +235,20 @@ class ResPartner(models.Model):
             if partner.suite:
                 full.append(partner.suite)
 
-            if to_html and not self.env.context.get('show_email'):
-                fullname = u'\n'.join(full)
+            if to_html and not self.env.context.get("show_email"):
+                fullname = u"\n".join(full)
             else:
-                fullname = u', '.join(full)
+                fullname = u", ".join(full)
 
-            if self.env.context.get('show_email') and partner.email:
+            if self.env.context.get("show_email") and partner.email:
                 fullname = u"{} <{}>".format(fullname, partner.email)
 
-            address = nameget[partner.id].split(u'\n', 1)
+            address = nameget[partner.id].split(u"\n", 1)
             if len(address) > 1:
-                fullname += u'\n' + address[1]
+                fullname += u"\n" + address[1]
 
             if html_format:
-                fullname = fullname.replace(u'\n', u'<br/>')
+                fullname = fullname.replace(u"\n", u"<br/>")
 
             res.append((partner.id, fullname))
         return res
@@ -271,20 +261,18 @@ class ResPartner(models.Model):
         Add subtype to note automatically for partner
         """
         # Get the id from "Note"
-        subtype_note_xmlids = 'mail.mt_note'
-        subtype_note_id = self.env['ir.model.data'].xmlid_to_res_id(
-            subtype_note_xmlids
-        )
+        subtype_note_xmlids = "mail.mt_note"
+        subtype_note_id = self.env["ir.model.data"].xmlid_to_res_id(subtype_note_xmlids)
         # Get default subtype item for partner
         partner_default_subtype_ids = (
-            self.env['mail.message.subtype']
+            self.env["mail.message.subtype"]
             .search(
                 [
-                    '|',
-                    ('res_model', '=', False),
-                    '&',
-                    ('res_model', '=', 'res.partner'),
-                    ('default', '=', True),
+                    "|",
+                    ("res_model", "=", False),
+                    "&",
+                    ("res_model", "=", "res.partner"),
+                    ("default", "=", True),
                 ]
             )
             .ids
@@ -304,7 +292,7 @@ class ResPartner(models.Model):
         )
 
     @api.one
-    @api.constrains('name', 'street', 'city', 'zip', 'country_id')
+    @api.constrains("name", "street", "city", "zip", "country_id")
     def _is_valid_esb_address(self):
         """Check customer address validity.
 
@@ -314,7 +302,7 @@ class ResPartner(models.Model):
         """
         if not self.parent_id or not self.customer:
             return
-        if self.type not in ['invoice', 'delivery']:
+        if self.type not in ["invoice", "delivery"]:
             return
         if (
             self.name
@@ -326,17 +314,17 @@ class ResPartner(models.Model):
             return
         raise ValidationError(
             _(
-                'For an invoicing or delivery address the '
-                'following fields (name, street, city, zip, '
-                'country) are required. And the country '
-                'must have a reference ESB.'
+                "For an invoicing or delivery address the "
+                "following fields (name, street, city, zip, "
+                "country) are required. And the country "
+                "must have a reference ESB."
             )
         )
 
     _sql_constraints = [
         (
-            'ref_digit_only',
+            "ref_digit_only",
             "CHECK (ref SIMILAR TO '[[:digit:]]*')",
-            _('The reference must be numeric or empty'),
+            _("The reference must be numeric or empty"),
         )
     ]

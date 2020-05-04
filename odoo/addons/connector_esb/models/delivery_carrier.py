@@ -6,6 +6,6 @@ from odoo import fields, models
 
 
 class DeliveryCarrier(models.Model):
-    _inherit = 'delivery.carrier'
+    _inherit = "delivery.carrier"
 
-    esb_ref = fields.Char(string='Reference for ESB', copy=False)
+    esb_ref = fields.Char(string="Reference for ESB", copy=False)

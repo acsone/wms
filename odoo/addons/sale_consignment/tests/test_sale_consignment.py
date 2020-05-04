@@ -13,35 +13,35 @@ class TestSaleconsignment(SavepointCase):
     def setUpClass(cls):
         super(TestSaleconsignment, cls).setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
-        cls.partner = cls.env.ref('base.res_partner_12')
+        cls.partner = cls.env.ref("base.res_partner_12")
         cls.partner.ref = 1
-        cls.product = cls.env['product.product'].create(
+        cls.product = cls.env["product.product"].create(
             {
-                'name': 'Product 1',
-                'list_price': 11.0,
+                "name": "Product 1",
+                "list_price": 11.0,
                 "indicated_price": 13.75,
                 "default_code": "P01",
             }
         )
 
-        cls.so = cls.env['sale.order'].create(
+        cls.so = cls.env["sale.order"].create(
             {
-                'esb_ref': 'ref_123',
-                'partner_id': cls.partner.id,
-                'date_order': '2018-01-29',
-                'sale_channel': 'fax',
-                'client_order_ref': 'whatever the client want',
-                'delivery_price': 23.5,
-                'suite_name': '0123434234',
-                'order_line': [
+                "esb_ref": "ref_123",
+                "partner_id": cls.partner.id,
+                "date_order": "2018-01-29",
+                "sale_channel": "fax",
+                "client_order_ref": "whatever the client want",
+                "delivery_price": 23.5,
+                "suite_name": "0123434234",
+                "order_line": [
                     (
                         0,
                         0,
                         {
-                            'sequence': 1,
-                            'name': cls.product.name,
-                            'product_id': cls.product.id,
-                            'product_uom_qty': 7,
+                            "sequence": 1,
+                            "name": cls.product.name,
+                            "product_id": cls.product.id,
+                            "product_uom_qty": 7,
                         },
                     )
                 ],
@@ -61,7 +61,7 @@ class TestSaleconsignment(SavepointCase):
         self.assertEqual(sol.qty_delivered, 7.0)
         self.assertEqual(sol.qty_invoiced, 0.0)
         wizard = (
-            self.env['stock.return.picking']
+            self.env["stock.return.picking"]
             .with_context(active_ids=picking.ids, active_id=picking.id)
             .create({})
         )
@@ -90,7 +90,7 @@ class TestSaleconsignment(SavepointCase):
         self.assertEqual(sol.qty_invoiced, 0.0)
 
         wizard = (
-            self.env['stock.return.picking']
+            self.env["stock.return.picking"]
             .with_context(active_ids=picking.ids, active_id=picking.id)
             .create({})
         )

@@ -22,19 +22,19 @@
 
 
 {
-    'name': 'Web Auto Refresh Views',
-    'summary': "This module use the auto_refresh field of OpenERP actions to "
-               "set a time based refresh of views used on the actions.",
-    'version': '10.0.1.0.0',
-    'category': 'web',
-    'author': 'aekroft@gmail.com',
-    'contributor': 'Jacques-Etienne Baudoux <je@bcim.be>',
-    'website': 'www.soltein.org',
-    'depends': [
-        'web',
+    "name": "Web Auto Refresh Views",
+    "summary": "This module use the auto_refresh field of OpenERP actions to "
+    "set a time based refresh of views used on the actions.",
+    "version": "10.0.1.0.0",
+    "category": "web",
+    "author": "aekroft@gmail.com",
+    "contributor": "Jacques-Etienne Baudoux <je@bcim.be>",
+    "website": "www.soltein.org",
+    "depends": [
+        "web",
         # 'web_calendar', 'web_graph', 'web_kanban',
     ],
-    'data': ['assets.xml'],
-    'active': False,
-    'installable': True,
+    "data": ["assets.xml"],
+    "active": False,
+    "installable": True,
 }

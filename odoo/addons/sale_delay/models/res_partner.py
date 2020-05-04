@@ -6,11 +6,11 @@ from odoo import fields, models
 
 
 class ResPartner(models.Model):
-    _inherit = 'res.partner'
+    _inherit = "res.partner"
 
     max_delay_for_sale_order_creation = fields.Float(
-        string='Max delay on sale order operation',
+        string="Max delay on sale order operation",
         digits=(3, 4),
-        help='Used to compute if the processing of a sale order in'
-        'the background takes too long. (0.5 is 30 minutes)',
+        help="Used to compute if the processing of a sale order in"
+        "the background takes too long. (0.5 is 30 minutes)",
     )

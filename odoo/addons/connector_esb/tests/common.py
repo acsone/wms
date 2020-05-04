@@ -20,22 +20,22 @@ class ESBTestCase(SavepointComponentCase):
 
     def setUp(self):
         super(ESBTestCase, self).setUp()
-        self.backend_model = self.env['esb.backend']
+        self.backend_model = self.env["esb.backend"]
         self.backend = self.backend_model.get_singleton()
 
     @classmethod
     def activate_lang(cls):
         """Create a fictive language to use in tests."""
-        Lang = cls.env['res.lang']
-        if not Lang.search([('iso_code', '=', 'tlh')], limit=1):
-            cls.env['res.lang'].create(
+        Lang = cls.env["res.lang"]
+        if not Lang.search([("iso_code", "=", "tlh")], limit=1):
+            cls.env["res.lang"].create(
                 {
-                    'name': 'Klingon',
-                    'code': 'tlh_TLH',
-                    'iso_code': 'tlh',
-                    'active': True,
-                    'translatable': True,
-                    'esb_ref': 'TLH',
+                    "name": "Klingon",
+                    "code": "tlh_TLH",
+                    "iso_code": "tlh",
+                    "active": True,
+                    "translatable": True,
+                    "esb_ref": "TLH",
                 }
             )
 
@@ -44,7 +44,7 @@ class ESBXMLTestCase(ESBTestCase, xmlunittest.XmlTestMixin):
     """Test XML files."""
 
     def flatten(self, txt):
-        return ''.join([x.strip() for x in txt.splitlines()])
+        return "".join([x.strip() for x in txt.splitlines()])
 
     def assertXmlEquivalentData(self, given, expected, unique_key):
         """Compare xml values.
@@ -56,19 +56,17 @@ class ESBXMLTestCase(ESBTestCase, xmlunittest.XmlTestMixin):
         exml = etree.fromstring(expected)
 
         # don't check the comments in the examples
-        comments = exml.xpath('//comment()')
+        comments = exml.xpath("//comment()")
         for c in comments:
             p = c.getparent()
             p.remove(c)
 
         missing_elems = defaultdict(list)
         content_differs = defaultdict(list)
-        for item in exml.xpath('//' + unique_key):
+        for item in exml.xpath("//" + unique_key):
             # `item` is the el w/ unique_key
             # let's find its match in given xml and go up to the parent
-            parent = gxml.xpath(
-                '//{}[text()="{}"]/..'.format(unique_key, item.text)
-            )
+            parent = gxml.xpath('//{}[text()="{}"]/..'.format(unique_key, item.text))
             assert parent
             # then compare all the values there
             for expected_elem in item.getparent().iterchildren():
@@ -85,31 +83,29 @@ class ESBXMLTestCase(ESBTestCase, xmlunittest.XmlTestMixin):
             message = []
             keys = set(list(missing_elems) + list(content_differs))
             for key in keys:
-                message.append(u'Row with unique key: %s' % key)
+                message.append(u"Row with unique key: %s" % key)
 
                 tags = missing_elems[key]
                 if tags:
-                    message.append(u'  Missing elements')
+                    message.append(u"  Missing elements")
                 for tag in tags:
-                    message.append(u'   - {}'.format(tag))
+                    message.append(u"   - {}".format(tag))
                 elems = content_differs[key]
                 if elems:
-                    message.append(u'  Content differs')
+                    message.append(u"  Content differs")
                 for tag, expected, got in elems:
                     message.append(
-                        u"   - {}: expect {!r}, got {!r}".format(
-                            tag, expected, got
-                        )
+                        u"   - {}: expect {!r}, got {!r}".format(tag, expected, got)
                     )
-                message.append('')
+                message.append("")
 
             raise AssertionError(
-                u'XML does not match:\n\n{}'.format('\n'.join(message))
+                u"XML does not match:\n\n{}".format("\n".join(message))
             )
 
     def read_test_file(self, filename):
-        path = os.path.join(os.path.dirname(__file__), 'examples', filename)
-        with open(path, 'r') as thefile:
+        path = os.path.join(os.path.dirname(__file__), "examples", filename)
+        with open(path, "r") as thefile:
             return thefile.read()
 
     @freeze_time("2018-08-10 17:10:00")
@@ -118,13 +114,11 @@ class ESBXMLTestCase(ESBTestCase, xmlunittest.XmlTestMixin):
            Test the filename of the export, the name template can have a date
            parameter or a date and time parameter
         """
-        day = fields.Date.today().replace('-', '')
-        time = fields.Datetime.now().split(' ')[1].replace(':', '')
+        day = fields.Date.today().replace("-", "")
+        time = fields.Datetime.now().split(" ")[1].replace(":", "")
         expected = name_template.format(day, time)
-        with self.backend.work_on(
-            self.model._name, timestamp=self.timestamp
-        ) as work:
-            writer = work.component(usage='local.xml.writer')
+        with self.backend.work_on(self.model._name, timestamp=self.timestamp) as work:
+            writer = work.component(usage="local.xml.writer")
             self.assertEqual(writer.filename(), expected)
-            writer = work.component(usage='sftp.xml.writer')
+            writer = work.component(usage="sftp.xml.writer")
             self.assertEqual(writer.filename(), expected)

@@ -11,15 +11,15 @@ MODEL_NAME_BY_KIND = {"ubl.order.exporter": "purchase.order"}
 
 
 class EdiExportTaskDef(models.Model):
-    _name = 'edi.export.task.def'
-    _description = 'Edi Export Task Definition'
+    _name = "edi.export.task.def"
+    _description = "Edi Export Task Definition"
     _inherit = "edi.task.def"
 
-    last_export_dt = fields.Datetime(string='Timestamp last export')
+    last_export_dt = fields.Datetime(string="Timestamp last export")
 
     kind = fields.Selection(
         selection=[("ubl.order.exporter", "Export UBL Order document")],
-        string='Kind of EDI document',
+        string="Kind of EDI document",
     )
 
     path = fields.Char(
@@ -28,7 +28,7 @@ class EdiExportTaskDef(models.Model):
 
     export_filename = fields.Char(
         required=True,
-        default='{name}_{date}.xml',
+        default="{name}_{date}.xml",
         help="The following place holders are available: name, id, date, time",
     )
 
@@ -54,9 +54,9 @@ class EdiExportTaskDef(models.Model):
     def filename(self, record=None):
         pattern = self.export_filename.strip()
         return pattern.format(
-            name=record.name.replace('.', '_'),
-            date=fields.Date.today().replace('-', ''),
-            time=fields.Datetime.now().split(' ')[1].replace(':', ''),
+            name=record.name.replace(".", "_"),
+            date=fields.Date.today().replace("-", ""),
+            time=fields.Datetime.now().split(" ")[1].replace(":", ""),
             id=record.id if record else uuid.uuid4(),
         )
 

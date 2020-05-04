@@ -15,18 +15,18 @@ class ControllerSaleTestCase(SavepointCase):
         super(ControllerSaleTestCase, cls).setUpClass()
         cls.controller = SaleController()
         cls.order_data = {
-            "increment_id": '048300',
-            "customer_id": '39847598274',
+            "increment_id": "048300",
+            "customer_id": "39847598274",
             "date": "2017-09-18",
             "order_ref": "refClt",
             "lines": [
-                {'line_id': '1', 'sku': '0001', 'quantity': 3, 'free': False},
+                {"line_id": "1", "sku": "0001", "quantity": 3, "free": False},
                 {
                     # free line: to be skipped
-                    'line_id': '2',
-                    'sku': 'FOO',
-                    'quantity': 3,
-                    'free': True,
+                    "line_id": "2",
+                    "sku": "FOO",
+                    "quantity": 3,
+                    "free": True,
                 },
             ],
         }
@@ -45,52 +45,52 @@ class ControllerSaleTestCase(SavepointCase):
     def test_request_data(self):
         """ Check no params"""
         data = deepcopy(self.request_data)
-        data.pop('params')
+        data.pop("params")
         with self.assertRaises(BadRequest):
             self.controller._validate_request(data)
 
     def test_required_invrement_id(self):
         data = deepcopy(self.order_data)
-        data.pop('increment_id')
+        data.pop("increment_id")
         with self.assertRaises(BadRequest):
             self.controller._validate_create_sale_order(data)
 
     def test_required_customer_id(self):
         data = deepcopy(self.order_data)
-        data.pop('customer_id')
+        data.pop("customer_id")
         with self.assertRaises(BadRequest):
             self.controller._validate_create_sale_order(data)
 
     def test_required_sale_date(self):
         data = deepcopy(self.order_data)
-        data.pop('date')
+        data.pop("date")
         with self.assertRaises(BadRequest):
             self.controller._validate_create_sale_order(data)
 
     def test_required_order_lines(self):
         data = deepcopy(self.order_data)
-        data.pop('lines')
+        data.pop("lines")
         with self.assertRaises(BadRequest):
             self.controller._validate_create_sale_order(data)
 
     def test_valid_order_lines(self):
         """Check lines is a list"""
         data = deepcopy(self.order_data)
-        data['lines'] = data['lines'][0]
+        data["lines"] = data["lines"][0]
         with self.assertRaises(BadRequest):
             self.controller._validate_create_sale_order(data)
 
     def test_sale_date_validity(self):
         """ """
         data = deepcopy(self.order_data)
-        data['date'] = '2019-02-18 12:12:12'
+        data["date"] = "2019-02-18 12:12:12"
         self.controller._validate_create_sale_order(data)
-        data['date'] = '2019-02-18'
+        data["date"] = "2019-02-18"
         self.controller._validate_create_sale_order(data)
 
-        data['date'] = '2019-02-18 asdf'
+        data["date"] = "2019-02-18 asdf"
         with self.assertRaises(BadRequest):
             self.controller._validate_create_sale_order(data)
-        data['date'] = '2019'
+        data["date"] = "2019"
         with self.assertRaises(BadRequest):
             self.controller._validate_create_sale_order(data)

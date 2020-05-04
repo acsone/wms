@@ -10,58 +10,42 @@ _logger = logging.getLogger(__name__)
 
 
 class RoundInstance(models.Model):
-    _inherit = 'round.instance'
+    _inherit = "round.instance"
 
     count_picking_available_total_ali = fields.Integer(
-        'Picking Available Total Aliment',
-        compute='_get_count_picking',
-        readonly=True,
+        "Picking Available Total Aliment", compute="_get_count_picking", readonly=True
     )
     count_picking_done_total_ali = fields.Integer(
-        'Picking Done Total Aliment',
-        compute='_get_count_picking',
-        readonly=True,
+        "Picking Done Total Aliment", compute="_get_count_picking", readonly=True
     )
     count_picking_available_total_med = fields.Integer(
-        'Picking Available Total Medicament',
-        compute='_get_count_picking',
+        "Picking Available Total Medicament",
+        compute="_get_count_picking",
         readonly=True,
     )
     count_picking_done_total_med = fields.Integer(
-        'Picking Done Total Medicament',
-        compute='_get_count_picking',
-        readonly=True,
+        "Picking Done Total Medicament", compute="_get_count_picking", readonly=True
     )
     count_picking_available_total_frigo = fields.Integer(
-        'Picking Available Total Frigo',
-        compute='_get_count_picking',
-        readonly=True,
+        "Picking Available Total Frigo", compute="_get_count_picking", readonly=True
     )
     count_picking_done_total_frigo = fields.Integer(
-        'Picking Done Total Frigo', compute='_get_count_picking', readonly=True
+        "Picking Done Total Frigo", compute="_get_count_picking", readonly=True
     )
     count_picking_available_total_mat = fields.Integer(
-        'Picking Available Total Materiel',
-        compute='_get_count_picking',
-        readonly=True,
+        "Picking Available Total Materiel", compute="_get_count_picking", readonly=True
     )
     count_picking_done_total_mat = fields.Integer(
-        'Picking Done Total Materiel',
-        compute='_get_count_picking',
-        readonly=True,
+        "Picking Done Total Materiel", compute="_get_count_picking", readonly=True
     )
     count_picking_available_total_pharm = fields.Integer(
-        'Picking Available Total Pharmacie',
-        compute='_get_count_picking',
-        readonly=True,
+        "Picking Available Total Pharmacie", compute="_get_count_picking", readonly=True
     )
     count_picking_done_total_pharm = fields.Integer(
-        'Picking Done Total Pharmacie',
-        compute='_get_count_picking',
-        readonly=True,
+        "Picking Done Total Pharmacie", compute="_get_count_picking", readonly=True
     )
 
-    @api.depends('picking_ids')
+    @api.depends("picking_ids")
     def _get_count_picking(self):
         query = """
             SELECT p.delivery_round_id, z.code,
@@ -90,19 +74,19 @@ class RoundInstance(models.Model):
         for delivery_round_id, code, total, done in self._cr.fetchall():
             rec = self.browse(delivery_round_id)
 
-            if code == '01':
+            if code == "01":
                 rec.count_picking_available_total_med = total
                 rec.count_picking_done_total_med = done
-            elif code == '02':
+            elif code == "02":
                 rec.count_picking_available_total_mat = total
                 rec.count_picking_done_total_mat = done
-            elif code == '03':
+            elif code == "03":
                 rec.count_picking_available_total_frigo = total
                 rec.count_picking_done_total_frigo = done
-            elif code == '04':
+            elif code == "04":
                 rec.count_picking_available_total_ali = total
                 rec.count_picking_done_total_ali = done
-            elif code == '05':
+            elif code == "05":
                 rec.count_picking_available_total_pharm = total
                 rec.count_picking_done_total_pharm = done
 

@@ -6,8 +6,8 @@ from odoo import fields, models
 
 
 class ProductProduct(models.Model):
-    _inherit = 'product.product'
+    _inherit = "product.product"
 
     # Store the calculated field sale_price_2 from product_template before
     # the esb export, so the write_date is changed and the product exported
-    sale_price_2_export = fields.Float(string='Sale Price 2 exported')
+    sale_price_2_export = fields.Float(string="Sale Price 2 exported")

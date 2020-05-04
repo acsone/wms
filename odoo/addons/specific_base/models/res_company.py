@@ -6,14 +6,14 @@ from odoo import fields, models
 
 
 class ResCompany(models.Model):
-    _inherit = 'res.company'
+    _inherit = "res.company"
 
-    order_phone = fields.Char(string='Order phone')
-    order_fax = fields.Char(string='Order fax')
+    order_phone = fields.Char(string="Order phone")
+    order_fax = fields.Char(string="Order fax")
 
     invoice_terms_conditions = fields.Text(
-        string='Invoice Terms and Conditions', translate=True
+        string="Invoice Terms and Conditions", translate=True
     )
     delivery_terms_conditions = fields.Html(
-        string='Delivery Terms and Conditions', translate=True
+        string="Delivery Terms and Conditions", translate=True
     )

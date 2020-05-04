@@ -6,22 +6,18 @@ from odoo import api, fields, models, tools
 
 
 class PurchaseReport(models.Model):
-    _inherit = 'purchase.report'
+    _inherit = "purchase.report"
 
-    nbr_tickets = fields.Integer(string='Nb. of Tickets', readonly=True)
-    last_date_done = fields.Datetime(
-        string='Last date of Transfer', readonly=True
-    )
-    late_delivery = fields.Float(
-        string='Late delivery', digits=(16, 2), readonly=True
-    )
+    nbr_tickets = fields.Integer(string="Nb. of Tickets", readonly=True)
+    last_date_done = fields.Datetime(string="Last date of Transfer", readonly=True)
+    late_delivery = fields.Float(string="Late delivery", digits=(16, 2), readonly=True)
 
     # ***********************************************************************
     # ********************** OVERRIDE FROM ORIGINAL CLASS *******************
     # ***********************************************************************
     @api.model_cr
     def init(self):
-        tools.drop_view_if_exists(self._cr, 'purchase_report')
+        tools.drop_view_if_exists(self._cr, "purchase_report")
         self._cr.execute(
             """
             create view purchase_report as (
@@ -158,7 +154,7 @@ class PurchaseReport(models.Model):
                     analytic_account.id
             )
         """
-            % self.env['res.currency']._select_companies_rates()
+            % self.env["res.currency"]._select_companies_rates()
         )
 
     # ***********************************************************************

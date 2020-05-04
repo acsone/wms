@@ -6,7 +6,7 @@ from ..tools.domain_assignment import Assignment
 from ..tools.domain_interface import Parameters
 from .zetes_test_classes import ZetesParkingTest
 
-OPERATOR_CODE = '99'
+OPERATOR_CODE = "99"
 
 
 class TestAssignment(ZetesParkingTest):
@@ -15,16 +15,14 @@ class TestAssignment(ZetesParkingTest):
 
     def test_01_requ_assignment(self):
         # Check with no current picking
-        domain = Assignment(
-            self._default_header(), mock.MagicMock(name='Savepoint()')
-        )
-        request_params = Parameters(domain, action='requ')
+        domain = Assignment(self._default_header(), mock.MagicMock(name="Savepoint()"))
+        request_params = Parameters(domain, action="requ")
         request_params.update(
             {
-                'Cri01': self.picking_zone_medoc.code,
-                'Cri02': None,
-                'assignmentType': constants.RANGEMENT_ASSIGNMENT,
-                'requestType': '1',
+                "Cri01": self.picking_zone_medoc.code,
+                "Cri02": None,
+                "assignmentType": constants.RANGEMENT_ASSIGNMENT,
+                "requestType": "1",
             }
         )
 
@@ -32,7 +30,7 @@ class TestAssignment(ZetesParkingTest):
         result_str = domain.requ(request_params)
         result = self.format_result(result_str)
         self.assertEqual(result.respCode, str(constants.RESPONSE_CODE_OK))
-        self.assertEqual(result.Usf09, '1')  # Nbr of lines
+        self.assertEqual(result.Usf09, "1")  # Nbr of lines
 
         # Inventory desactivated
         # # Try to create an inventory for the product 1
@@ -79,15 +77,15 @@ class TestAssignment(ZetesParkingTest):
 
         # Try to create an inventory for the product 1
         # No product should be available
-        inventory = self.env['stock.inventory'].create(
-            {'name': 'Test', 'filter': 'partial'}
+        inventory = self.env["stock.inventory"].create(
+            {"name": "Test", "filter": "partial"}
         )
         inventory.line_ids.create(
             {
-                'inventory_id': inventory.id,
-                'product_id': self.product_1.id,
-                'product_qty': 20,
-                'location_id': self.parking_medoc.id,
+                "inventory_id": inventory.id,
+                "product_id": self.product_1.id,
+                "product_qty": 20,
+                "location_id": self.parking_medoc.id,
             }
         )
         # Start the inventory
@@ -108,27 +106,24 @@ class TestAssignment(ZetesParkingTest):
         self.assertTrue(result)
         report_id = result[0]
 
-        model_name = 'report.stock.refill.arrange'
+        model_name = "report.stock.refill.arrange"
         report = self.env[model_name].browse(report_id)
         # Create the picking
         picking = report.create_picking()
 
         self.assertEqual(
-            picking.picking_type_id.zetes_picking_type,
-            constants.RANGEMENT_ASSIGNMENT,
+            picking.picking_type_id.zetes_picking_type, constants.RANGEMENT_ASSIGNMENT
         )
 
         # Check with no current picking
-        domain = Assignment(
-            self._default_header(), mock.MagicMock(name='Savepoint()')
-        )
-        request_params = Parameters(domain, action='requ')
+        domain = Assignment(self._default_header(), mock.MagicMock(name="Savepoint()"))
+        request_params = Parameters(domain, action="requ")
         request_params.update(
             {
-                'Cri01': self.picking_zone_medoc.code,
-                'Cri02': None,
-                'assignmentType': constants.RANGEMENT_ASSIGNMENT,
-                'requestType': '1',
+                "Cri01": self.picking_zone_medoc.code,
+                "Cri02": None,
+                "assignmentType": constants.RANGEMENT_ASSIGNMENT,
+                "requestType": "1",
             }
         )
 
@@ -136,5 +131,5 @@ class TestAssignment(ZetesParkingTest):
         result_str = domain.requ(request_params)
         result = self.format_result(result_str)
         self.assertEqual(result.respCode, str(constants.RESPONSE_CODE_OK))
-        self.assertEqual(result.Usf09, '1')  # Nbr of lines
+        self.assertEqual(result.Usf09, "1")  # Nbr of lines
         self.assertEqual(result.groupNum, str(picking.id))

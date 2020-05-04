@@ -14,7 +14,7 @@ _logger = logging.getLogger(__name__)
 
 
 class StockPicking(models.Model):
-    _inherit = 'stock.picking'
+    _inherit = "stock.picking"
 
     def _lock(self):
         """Lock the database rows of the picking to prevent concurrent access.
@@ -27,12 +27,12 @@ class StockPicking(models.Model):
         3. when assigning the picking to a delivery round to prevent new moves to be added
         """
         if self:
-            _logger.info('acquire lock for pickings %s', self.ids)
+            _logger.info("acquire lock for pickings %s", self.ids)
             self.env.cr.execute(
-                'SELECT printed FROM stock_picking WHERE id in %s FOR UPDATE',
+                "SELECT printed FROM stock_picking WHERE id in %s FOR UPDATE",
                 (tuple(self.ids),),
             )
-            _logger.info('lock acquired for pickings %s', self.ids)
+            _logger.info("lock acquired for pickings %s", self.ids)
         return
 
     @api.multi
@@ -46,21 +46,19 @@ class StockPicking(models.Model):
         lines.
         Pay attention to unsafe standard signature "backorder_moves=[]".
         """
-        backorders = self.env['stock.picking']
+        backorders = self.env["stock.picking"]
 
-        picking_togroup = self.filtered(
-            lambda p: p.picking_type_id.groupbypartner
-        )
+        picking_togroup = self.filtered(lambda p: p.picking_type_id.groupbypartner)
         picking_notgroup = self - picking_togroup
 
         for picking in picking_togroup:
-            if self._context.get('do_only_split'):
+            if self._context.get("do_only_split"):
                 not_done_bo_moves = picking.move_lines.filtered(
-                    lambda move: move.id not in self._context.get('split', [])
+                    lambda move: move.id not in self._context.get("split", [])
                 )
             else:
                 not_done_bo_moves = picking.move_lines.filtered(
-                    lambda move: move.state not in ('done', 'cancel')
+                    lambda move: move.state not in ("done", "cancel")
                 )
             if not not_done_bo_moves:
                 continue
@@ -69,7 +67,7 @@ class StockPicking(models.Model):
                 # backorder, we look for picking not printed
                 picking.printed = True
 
-            if self.env.context.get('cancel_backorder'):
+            if self.env.context.get("cancel_backorder"):
                 # Triggerred by delivery round shipping delivery
                 # for partner that does not accept backorder
                 not_done_bo_moves.with_context(
@@ -79,10 +77,10 @@ class StockPicking(models.Model):
                     body=_(
                         "Remaining moves canceled as partner does not "
                         "accept backorder:<ul>%s</ul>"
-                        % ''.join(
+                        % "".join(
                             [
-                                '<li>%s</li>' % m
-                                for m in not_done_bo_moves.mapped('name')
+                                "<li>%s</li>" % m
+                                for m in not_done_bo_moves.mapped("name")
                             ]
                         )
                     )
@@ -93,16 +91,12 @@ class StockPicking(models.Model):
 
                 cancel_moves = (
                     not_done_bo_moves.filtered(lambda move: move.propagate)
-                    .mapped('move_orig_ids')
-                    .filtered(
-                        lambda move: move.state not in ('cancel', 'done')
-                    )
+                    .mapped("move_orig_ids")
+                    .filtered(lambda move: move.state not in ("cancel", "done"))
                     .sorted(key=key)
                 )
                 # Propagate to picking
-                for cancel_picking, cancel_moves_iter in groupby(
-                    cancel_moves, key=key
-                ):
+                for cancel_picking, cancel_moves_iter in groupby(cancel_moves, key=key):
                     cancel_moves_bypicking = reduce(
                         lambda x, y: x | y, cancel_moves_iter
                     )
@@ -113,12 +107,10 @@ class StockPicking(models.Model):
                         body=_(
                             "Remaining moves canceled as partner does not "
                             "accept backorder:<ul>%s</ul>"
-                            % ''.join(
+                            % "".join(
                                 [
-                                    '<li>%s</li>' % m
-                                    for m in cancel_moves_bypicking.mapped(
-                                        'name'
-                                    )
+                                    "<li>%s</li>" % m
+                                    for m in cancel_moves_bypicking.mapped("name")
                                 ]
                             )
                         )
@@ -129,11 +121,7 @@ class StockPicking(models.Model):
 
             if not picking.date_done:
                 picking.write(
-                    {
-                        'date_done': time.strftime(
-                            DEFAULT_SERVER_DATETIME_FORMAT
-                        )
-                    }
+                    {"date_done": time.strftime(DEFAULT_SERVER_DATETIME_FORMAT)}
                 )
             # In the call to assign_picking, additional products have been
             # canceled.
@@ -141,9 +129,9 @@ class StockPicking(models.Model):
                 # we need to check if the move exists because we can have
                 # deleted moves in case of additional products
                 lambda move: move.exists()
-                and move.state not in ('done', 'cancel')
+                and move.state not in ("done", "cancel")
             )
-            backorders |= not_done_bo_moves.mapped('picking_id')
+            backorders |= not_done_bo_moves.mapped("picking_id")
         if backorders:
             # In standard, created backorders are assigned at the end of the
             # method
@@ -161,29 +149,29 @@ class StockPicking(models.Model):
 
 
 class StockPickingType(models.Model):
-    _inherit = 'stock.picking.type'
+    _inherit = "stock.picking.type"
 
-    groupbypartner = fields.Boolean('Use existing picking having same partner')
-    groupbypartner_maxweight = fields.Integer('Max Weight')
+    groupbypartner = fields.Boolean("Use existing picking having same partner")
+    groupbypartner_maxweight = fields.Integer("Max Weight")
 
 
 class StockMove(models.Model):
-    _inherit = 'stock.move'
+    _inherit = "stock.move"
 
     @api.multi
     def _assign_picking_group_domain(self):
         self.ensure_one()
         domain = [
-            ('partner_id', '=', self.group_id.partner_id.id),
-            ('location_id', '=', self.location_id.id),
-            ('location_dest_id', '=', self.location_dest_id.id),
-            ('picking_type_id', '=', self.picking_type_id.id),
-            ('printed', '=', False),
-            ('state', 'not in', ('draft', 'cancel', 'done')),
+            ("partner_id", "=", self.group_id.partner_id.id),
+            ("location_id", "=", self.location_id.id),
+            ("location_dest_id", "=", self.location_dest_id.id),
+            ("picking_type_id", "=", self.picking_type_id.id),
+            ("printed", "=", False),
+            ("state", "not in", ("draft", "cancel", "done")),
         ]
         return domain
 
-    @api.multi
+    @api.multi  # noqa: C901
     def assign_picking(self):
         """Try to assign the moves to an existing picking
         that has not been reserved yet and that does not have the same
@@ -191,9 +179,7 @@ class StockMove(models.Model):
         (moves should already have them identical). Otherwise, create a new
         picking to Assign them to.
         """
-        moves_to_group = self.filtered(
-            lambda x: x.picking_type_id.groupbypartner
-        )
+        moves_to_group = self.filtered(lambda x: x.picking_type_id.groupbypartner)
 
         moves_to_not_group = self - moves_to_group
         if moves_to_not_group:
@@ -201,7 +187,7 @@ class StockMove(models.Model):
 
         pick_obj = self.env["stock.picking"]
         pickings_cache = {}
-        if moves_to_group.mapped('picking_id'):
+        if moves_to_group.mapped("picking_id"):
             recompute_sale_pickings = True
         else:
             recompute_sale_pickings = False
@@ -228,8 +214,8 @@ class StockMove(models.Model):
                         move.group_id
                         and move.group_id
                         in r.move_lines.filtered(
-                            lambda m: m.state not in ('cancel', 'done')
-                        ).mapped('group_id')
+                            lambda m: m.state not in ("cancel", "done")
+                        ).mapped("group_id")
                     )
 
                 pickings = pickings.sorted(key=key)
@@ -282,17 +268,15 @@ class StockMove(models.Model):
                 # If the new move is in waiting state (line added in a
                 # ship), then do not cleanup the pack operation as it won't
                 # be recomputed
-                if move.state == 'waiting':
+                if move.state == "waiting":
                     break
                 operations_to_recompute = picking.pack_operation_ids.filtered(
                     lambda op: op.product_id == move.product_id
                 )
                 if operations_to_recompute:
-                    _logger.debug(
-                        "Cleaning operations %s", operations_to_recompute.ids
-                    )
+                    _logger.debug("Cleaning operations %s", operations_to_recompute.ids)
                     op_linked_moves = operations_to_recompute.mapped(
-                        'linked_move_operation_ids.move_id'
+                        "linked_move_operation_ids.move_id"
                     )
                     operations_to_recompute.unlink()
                     op_linked_moves.do_unreserve()
@@ -301,8 +285,8 @@ class StockMove(models.Model):
                 break
 
             else:
-                if self.env.context.get('no_new_picking') and not any(
-                    pm.state == 'done' for pm in move.picking_id.move_lines
+                if self.env.context.get("no_new_picking") and not any(
+                    pm.state == "done" for pm in move.picking_id.move_lines
                 ):
                     # if picking has not been processed, we can use it as backorder
                     move.picking_id._lock()
@@ -337,12 +321,12 @@ class StockMove(models.Model):
                 # see standard assign_picking for why recompute is called
                 move.recompute()
         if recompute_sale_pickings:
-            procurement_groups = moves_to_group.mapped('group_id')
-            sales = self.env['sale.order'].search(
-                [('procurement_group_id', 'in', procurement_groups.ids)]
+            procurement_groups = moves_to_group.mapped("group_id")
+            sales = self.env["sale.order"].search(
+                [("procurement_group_id", "in", procurement_groups.ids)]
             )
             # force recompute of picking_ids
-            sales.modified(['procurement_group_id'])
+            sales.modified(["procurement_group_id"])
         return True
 
     @api.multi
@@ -351,23 +335,22 @@ class StockMove(models.Model):
         operations """
         _logger.debug("Canceling moves %s", self.ids)
         res = super(StockMove, self).action_cancel()
-        if not self.env.context.get('no_recompute_pack'):
-            pickings = self.mapped('picking_id').filtered(
-                lambda picking: picking.state != 'cancel'
+        if not self.env.context.get("no_recompute_pack"):
+            pickings = self.mapped("picking_id").filtered(
+                lambda picking: picking.state != "cancel"
             )
-            products = self.mapped('product_id')
-            moves = pickings.mapped('move_lines').filtered(
-                lambda move: move.state == 'confirmed'
-                and move.product_id in products
+            products = self.mapped("product_id")
+            moves = pickings.mapped("move_lines").filtered(
+                lambda move: move.state == "confirmed" and move.product_id in products
             )
             if moves:
                 # action_assign requires to clean existing pack operation
-                moves.mapped('linked_move_operation_ids.operation_id').unlink()
+                moves.mapped("linked_move_operation_ids.operation_id").unlink()
                 _logger.debug("Re-check availability for moves %s", moves.ids)
                 moves.action_assign(no_prepare=True)
             # recompute pack op
             _logger.debug("Recompute pack operations")
             pickings.do_prepare_partial()
             # Recompute the weight for each picking
-            self.mapped('picking_id')._cal_weight()
+            self.mapped("picking_id")._cal_weight()
         return res

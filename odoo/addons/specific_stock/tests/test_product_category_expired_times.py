@@ -8,17 +8,15 @@ from odoo.tests.common import TransactionCase, at_install, post_install
 class TestProductCategoryExpiredTimes(TransactionCase):
     def setUp(self):
         super(TestProductCategoryExpiredTimes, self).setUp()
-        self.category_model = self.env['product.category']
-        self.product_model = self.env['product.product']
+        self.category_model = self.env["product.category"]
+        self.product_model = self.env["product.product"]
 
-        self.category = self.category_model.create(
-            {'name': 'Unittest category'}
-        )
+        self.category = self.category_model.create({"name": "Unittest category"})
         self.product = self.product_model.create(
             {
-                'name': 'Unittest product',
-                'type': 'product',
-                'categ_id': self.category.id,
+                "name": "Unittest product",
+                "type": "product",
+                "categ_id": self.category.id,
             }
         )
 
@@ -36,7 +34,7 @@ class TestProductCategoryExpiredTimes(TransactionCase):
         self.assertFalse(self.product.removal_time)
 
         self.category.write(
-            {'use_time': 1, 'life_time': 2, 'alert_time': 3, 'removal_time': 4}
+            {"use_time": 1, "life_time": 2, "alert_time": 3, "removal_time": 4}
         )
         self.assertEqual(self.category.use_time, 1)
         self.assertEqual(self.category.life_time, 2)
@@ -49,12 +47,7 @@ class TestProductCategoryExpiredTimes(TransactionCase):
         self.assertEqual(self.product.removal_time, 4)
 
         self.product.write(
-            {
-                'use_time': 10,
-                'life_time': 20,
-                'alert_time': 30,
-                'removal_time': 40,
-            }
+            {"use_time": 10, "life_time": 20, "alert_time": 30, "removal_time": 40}
         )
         self.assertEqual(self.category.use_time, 10)
         self.assertEqual(self.category.life_time, 20)

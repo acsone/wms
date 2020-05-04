@@ -14,13 +14,13 @@ from lxml import etree
 from odoo import _, exceptions, fields
 from odoo.addons.component.core import AbstractComponent, Component
 
-logging.getLogger('dicttoxml').setLevel(logging.WARN)
+logging.getLogger("dicttoxml").setLevel(logging.WARN)
 
 SFTP_TIMEOUT = 30
 
 NAMESPACES = (
     # el, ns, attr
-    ('Root', 'urn:schemas-microsoft-com:datatypes', 'dt'),
+    ("Root", "urn:schemas-microsoft-com:datatypes", "dt"),
 )
 for el, ns, attr in NAMESPACES:
     etree.register_namespace(attr, ns)
@@ -29,14 +29,14 @@ for el, ns, attr in NAMESPACES:
 class ESBXMLProducer(Component):
     """ XML Producer for exports """
 
-    _name = 'esb.xml.producer'
-    _inherit = 'esb.base'
-    _usage = 'xml.producer'
+    _name = "esb.xml.producer"
+    _inherit = "esb.base"
+    _usage = "xml.producer"
 
     namespaces = NAMESPACES
-    main_root_el = 'ROOT'
-    root_el = 'Root'
-    list_item_el = 'Row'
+    main_root_el = "ROOT"
+    root_el = "Root"
+    list_item_el = "Row"
 
     def _apply_namespaces(self, xml):
         root = etree.XML(xml)
@@ -45,9 +45,9 @@ class ESBXMLProducer(Component):
                 # NOTE: this sets
                 #  `xmlns:dt="urn:schemas-microsoft-com:datatypes"`
                 # as well as an empty `dt:dt=""` attribute
-                root.find(el).set('{{{}}}{}'.format(ns, attr), '')
+                root.find(el).set("{{{}}}{}".format(ns, attr), "")
         return etree.tostring(
-            root, xml_declaration=True, encoding='utf-8', pretty_print=True
+            root, xml_declaration=True, encoding="utf-8", pretty_print=True
         )
 
     def _produce(self, data, main_root, root):
@@ -63,13 +63,13 @@ class ESBXMLProducer(Component):
         if data:
             xml = self._apply_namespaces(xml)
         # Remove the xml version node
-        xml = xml[xml.find('?>') + 2 :]
+        xml = xml[xml.find("?>") + 2 :]
         return xml
 
     def _dicttoxml_item_func(self, item):
         return self.list_item_el
 
-    def produce(self, data, main_root='', root=''):
+    def produce(self, data, main_root="", root=""):
         main_root = main_root or self.main_root_el
         root = root or self.root_el
         return self._produce(data, main_root, root)
@@ -78,12 +78,12 @@ class ESBXMLProducer(Component):
 class ESBWebServiceXMLProducer(Component):
     """ XML Producer for WebServices """
 
-    _name = 'esb.xml.webservice.producer'
-    _inherit = 'esb.base'
-    _usage = 'xml.webservice.producer'
+    _name = "esb.xml.webservice.producer"
+    _inherit = "esb.base"
+    _usage = "xml.webservice.producer"
 
-    root_el = 'result'
-    list_item_el = 'resultItem'
+    root_el = "result"
+    list_item_el = "resultItem"
 
     def _produce(self, data, root, list_item):
         item = partial(self._dicttoxml_item_func, list_item)
@@ -102,9 +102,9 @@ class ESBWebServiceXMLProducer(Component):
 
 
 class ESBXMLWriter(AbstractComponent):
-    _name = 'esb.xml.writer'
-    _inherit = 'esb.base'
-    _usage = 'xml.writer'
+    _name = "esb.xml.writer"
+    _inherit = "esb.base"
+    _usage = "xml.writer"
 
     @property
     def config(self):
@@ -116,13 +116,13 @@ class ESBXMLWriter(AbstractComponent):
     def filename(self):
         pattern = self.config.export_filename.strip()
         return pattern.format(
-            name=self.model._name.replace('.', '_'),
-            date=fields.Date.today().replace('-', ''),
-            time=fields.Datetime.now().split(' ')[1].replace(':', ''),
+            name=self.model._name.replace(".", "_"),
+            date=fields.Date.today().replace("-", ""),
+            time=fields.Datetime.now().split(" ")[1].replace(":", ""),
         )
 
     def path(self):
-        return self.env.context.get('xml_out_path') or self.config.path or ''
+        return self.env.context.get("xml_out_path") or self.config.path or ""
 
     def write_file(self, content):
         path = self.path()
@@ -130,9 +130,7 @@ class ESBXMLWriter(AbstractComponent):
         if self._already_exists(path, filename):
             # if we overwrite a file, we might lose data as we are
             # exporting a diff
-            raise exceptions.UserError(
-                _('File %s already exported.') % (filename,)
-            )
+            raise exceptions.UserError(_("File %s already exported.") % (filename,))
         return self._write_file(path, filename, content)
 
     def _already_exists(path, filename):
@@ -143,14 +141,14 @@ class ESBXMLWriter(AbstractComponent):
 
 
 class LocalESBXMLWriter(Component):
-    _name = 'local.esb.xml.writer'
-    _inherit = 'esb.xml.writer'
-    _usage = 'local.xml.writer'
+    _name = "local.esb.xml.writer"
+    _inherit = "esb.xml.writer"
+    _usage = "local.xml.writer"
 
     def path(self):
         path = super(LocalESBXMLWriter, self).path()
         if not path:
-            path = '/tmp'
+            path = "/tmp"
         return path
 
     def write_file(self, content):
@@ -159,9 +157,7 @@ class LocalESBXMLWriter(Component):
         if self._already_exists(path, filename):
             # if we overwrite a file, we might lose data as we are
             # exporting a diff
-            raise exceptions.UserError(
-                _('File %s already exported.') % (filename,)
-            )
+            raise exceptions.UserError(_("File %s already exported.") % (filename,))
 
         return self._write_file(path, filename, content)
 
@@ -170,15 +166,15 @@ class LocalESBXMLWriter(Component):
 
     def _write_file(self, path, filename, content):
         fullpath = os.path.join(path, filename)
-        with open(fullpath, 'w') as thefile:
+        with open(fullpath, "w") as thefile:
             thefile.write(content)
         return fullpath
 
 
 class SFTPESBXMLWriter(Component):
-    _name = 'sftp.esb.xml.writer'
-    _inherit = 'esb.xml.writer'
-    _usage = 'sftp.xml.writer'
+    _name = "sftp.esb.xml.writer"
+    _inherit = "esb.xml.writer"
+    _usage = "sftp.xml.writer"
 
     def __init__(self, work_context):
         super(SFTPESBXMLWriter, self).__init__(work_context)
@@ -186,11 +182,9 @@ class SFTPESBXMLWriter(Component):
 
     @contextmanager
     def _sftp_client(self):
-        private_key = os.environ.get('ODOO_ESB_SFTP_PRIVATE_KEY')
+        private_key = os.environ.get("ODOO_ESB_SFTP_PRIVATE_KEY")
         assert private_key, "ODOO_ESB_SFTP_PRIVATE_KEY must be set in environ"
-        pkey = paramiko.RSAKey.from_private_key(
-            StringIO(private_key.decode('utf8'))
-        )
+        pkey = paramiko.RSAKey.from_private_key(StringIO(private_key.decode("utf8")))
         with paramiko.SSHClient() as ssh:
             ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy)
             ssh.connect(
@@ -209,7 +203,7 @@ class SFTPESBXMLWriter(Component):
     @property
     def sftp(self):
         if self._sftp is None:
-            raise ValueError('must be in _sftp_client() context to use sftp')
+            raise ValueError("must be in _sftp_client() context to use sftp")
         return self._sftp
 
     def path(self):
@@ -217,7 +211,7 @@ class SFTPESBXMLWriter(Component):
         file_path = super(SFTPESBXMLWriter, self).path()
         sftp_path = self.backend_record.sftp_path
         if file_path and sftp_path:
-            if not sftp_path.endswith('/') and not file_path.startswith('/'):
+            if not sftp_path.endswith("/") and not file_path.startswith("/"):
                 return sftp_path + "/" + file_path
         return sftp_path + file_path
 
@@ -237,8 +231,8 @@ class SFTPESBXMLWriter(Component):
         # a file during its written
         if path:
             self.sftp.chdir(path)
-        tmpfile = filename + '.tmp'
-        with self.sftp.open(tmpfile, 'w') as thefile:
+        tmpfile = filename + ".tmp"
+        with self.sftp.open(tmpfile, "w") as thefile:
             thefile.write(content)
         self.sftp.posix_rename(tmpfile, filename)
         return os.path.join(path, filename)

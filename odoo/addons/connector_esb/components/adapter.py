@@ -8,10 +8,7 @@ import logging
 import requests
 
 from odoo.addons.component.core import Component
-from odoo.addons.connector.exception import (
-    ConnectorException,
-    RetryableJobError,
-)
+from odoo.addons.connector.exception import ConnectorException, RetryableJobError
 from simplejson.decoder import JSONDecodeError
 
 _logger = logging.getLogger(__name__)
@@ -24,33 +21,30 @@ class ESBWebServiceAdapter(Component):
     with _endpoint or or maybe _url.
     """
 
-    _name = 'esb.webservice.adapter'
-    _inherit = ['base.backend.adapter.crud', 'esb.base']
-    _endpoint = ''
+    _name = "esb.webservice.adapter"
+    _inherit = ["base.backend.adapter.crud", "esb.base"]
+    _endpoint = ""
 
     def _get_url(self):
         """ Construct the url for an HTTP request """
         if not (self.backend_record.ws_url and self.backend_record.ws_user):
-            raise ConnectorException('Url or username not defined on adapter')
+            raise ConnectorException("Url or username not defined on adapter")
         return (
             self.backend_record.ws_url
-            + '/'
+            + "/"
             + self.backend_record.ws_user
-            + '/'
+            + "/"
             + self._endpoint
         )
 
     def _get_headers(self):
-        return {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-        }
+        return {"Content-Type": "application/json", "Accept": "application/json"}
 
     def create(self, values):
         """ Create a record on the external system """
         url = self._get_url()
         data = json.dumps(values)
-        _logger.debug('calling POST on %s with this data %s', url, values)
+        _logger.debug("calling POST on %s with this data %s", url, values)
         try:
             res = requests.post(
                 url,
@@ -60,19 +54,19 @@ class ESBWebServiceAdapter(Component):
             )
         except requests.ConnectionError:
             raise RetryableJobError(
-                'Connection is not available, the job will be retried later.'
+                "Connection is not available, the job will be retried later."
             )
         if res.status_code == 202:
-            raise ConnectorException('Error %s on POST' % (res.status_code))
+            raise ConnectorException("Error %s on POST" % (res.status_code))
         elif res.status_code == 200:
             try:
                 res_data = res.json()
             except JSONDecodeError:
                 raise ConnectorException(
-                    'Error decoding json response : %s' % (res.text)
+                    "Error decoding json response : %s" % (res.text)
                 )
-            if 'error' in res_data:
-                raise ConnectorException('Error on POST %s' % (res_data))
+            if "error" in res_data:
+                raise ConnectorException("Error on POST %s" % (res_data))
         else:
             res.raise_for_status()
         return res_data
@@ -81,7 +75,7 @@ class ESBWebServiceAdapter(Component):
         """ Update a record on the external system """
         url = self._get_url()
         data = json.dumps(values)
-        _logger.debug('calling PUT on %s with values %s', url, values)
+        _logger.debug("calling PUT on %s with values %s", url, values)
         try:
             res = requests.put(
                 url,
@@ -91,19 +85,19 @@ class ESBWebServiceAdapter(Component):
             )
         except requests.ConnectionError:
             raise RetryableJobError(
-                'Connection is not available, the job will be retried later.'
+                "Connection is not available, the job will be retried later."
             )
         if res.status_code == 202:
-            raise ConnectorException('Error %s on PUT' % (res.status_code))
+            raise ConnectorException("Error %s on PUT" % (res.status_code))
         elif res.status_code == 200:
             try:
                 res_data = res.json()
             except JSONDecodeError:
                 raise ConnectorException(
-                    'Error decoding json response : %s' % (res.text)
+                    "Error decoding json response : %s" % (res.text)
                 )
-            if 'error' in res_data:
-                raise ConnectorException('Error on PUT %s' % (res_data))
+            if "error" in res_data:
+                raise ConnectorException("Error on PUT %s" % (res_data))
         else:
             res.raise_for_status()
         return res_data

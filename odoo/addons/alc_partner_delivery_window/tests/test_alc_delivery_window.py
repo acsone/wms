@@ -10,8 +10,8 @@ class TestAlcDeliveryWindow(SavepointCase):
     @classmethod
     def setUpClass(cls):
         super(TestAlcDeliveryWindow, cls).setUpClass()
-        cls.partner_1 = cls.env['res.partner'].create({'name': 'partner 1'})
-        cls.partner_2 = cls.env['res.partner'].create({'name': 'patner 2'})
+        cls.partner_1 = cls.env["res.partner"].create({"name": "partner 1"})
+        cls.partner_2 = cls.env["res.partner"].create({"name": "patner 2"})
         cls.AlcDeliveryWindow = cls.env["alc.delivery.window"]
         cls.monday = cls.env.ref(
             "alc_partner_delivery_window.alc_delivery_weed_day_monday"

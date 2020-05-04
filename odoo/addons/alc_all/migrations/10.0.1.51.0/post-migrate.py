@@ -10,12 +10,12 @@ _logger = logging.getLogger(__name__)
 
 
 def migrate(cr, version):
-    _logger.info('Uninstall module db2_import')
+    _logger.info("Uninstall module db2_import")
     if not version:
         return
 
     env = api.Environment(cr, SUPERUSER_ID, {})
-    module = env['ir.module.module'].search([('name', '=', 'db2_import')])
+    module = env["ir.module.module"].search([("name", "=", "db2_import")])
     if module:
-        module.write({'state': 'to remove'})
+        module.write({"state": "to remove"})
     return

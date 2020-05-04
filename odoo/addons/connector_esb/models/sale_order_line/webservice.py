@@ -12,10 +12,10 @@ from odoo.addons.component.core import Component
 
 class ProductCustomerStatWebserviceMessage(Component):
 
-    _name = 'esb.webservice.message.product.customer.stat'
-    _inherit = ['esb.webservice.message.base']
-    _apply_on = ['sale.order.line']
-    _usage = 'ws.message.product.customer.stat'
+    _name = "esb.webservice.message.product.customer.stat"
+    _inherit = ["esb.webservice.message.base"]
+    _apply_on = ["sale.order.line"]
+    _usage = "ws.message.product.customer.stat"
 
     def get_message(self, customer_ref, sku):
         """
@@ -28,16 +28,12 @@ class ProductCustomerStatWebserviceMessage(Component):
         date_end = date(today.year, today.month, 1)
         # Get the sale order line for the customer and specific product
         # for the last 12 month starting from one month before
-        sol = self.env['sale.order.line'].search(
+        sol = self.env["sale.order.line"].search(
             [
-                ('order_id.partner_id.ref', '=', customer_ref),
-                (
-                    'order_id.date_order',
-                    '>=',
-                    fields.Date.to_string(date_start),
-                ),
-                ('order_id.date_order', '<', fields.Date.to_string(date_end)),
-                ('product_tmpl_id.default_code', '=', sku),
+                ("order_id.partner_id.ref", "=", customer_ref),
+                ("order_id.date_order", ">=", fields.Date.to_string(date_start)),
+                ("order_id.date_order", "<", fields.Date.to_string(date_end)),
+                ("product_tmpl_id.default_code", "=", sku),
             ]
         )
         # Compute the statistics for each month
@@ -48,7 +44,7 @@ class ProductCustomerStatWebserviceMessage(Component):
             period = line.order_id.date_order[:7]
             periods[period] += line.product_uom_qty
         data = [
-            {'salesPeriod': month, 'salesAverage': '{:.2f}'.format(qty)}
+            {"salesPeriod": month, "salesAverage": "{:.2f}".format(qty)}
             for month, qty in periods.iteritems()
         ]
         return self._produce_xml(data)
@@ -56,10 +52,10 @@ class ProductCustomerStatWebserviceMessage(Component):
 
 class ProductCategoryWebserviceMessage(Component):
 
-    _name = 'esb.webservice.message.product.category'
-    _inherit = ['esb.webservice.message.base']
-    _apply_on = ['sale.order.line']
-    _usage = 'ws.message.customer.stat'
+    _name = "esb.webservice.message.product.category"
+    _inherit = ["esb.webservice.message.base"]
+    _apply_on = ["sale.order.line"]
+    _usage = "ws.message.customer.stat"
 
     def get_message(self, customer_ref):
         sql = """
@@ -136,4 +132,4 @@ GROUP BY esb_ref;
         raw_data = self.env.cr.fetchall()
         column_names = [column.name for column in self.env.cr.description]
         data = [dict(zip(column_names, row)) for row in raw_data]
-        return self._produce_xml(data, list_item_el='resultItem')
+        return self._produce_xml(data, list_item_el="resultItem")

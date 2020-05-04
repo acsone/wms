@@ -8,9 +8,9 @@ from odoo.addons.queue_job.job import identity_exact
 
 
 class SaleExportListener(Component):
-    _name = 'esb.sale.order.export.listener'
-    _inherit = 'base.connector.listener'
-    _apply_on = ['sale.order']
+    _name = "esb.sale.order.export.listener"
+    _inherit = "base.connector.listener"
+    _apply_on = ["sale.order"]
 
     EXPORT_DESCRIPTION = u"Export sale order {} to ESB's webservice"
 
@@ -19,7 +19,7 @@ class SaleExportListener(Component):
         if not record.esb_is_exportable():
             return
         record.with_delay(
-            description=self.EXPORT_DESCRIPTION.format(record.name or ''),
+            description=self.EXPORT_DESCRIPTION.format(record.name or ""),
             identity_key=identity_exact,
             priority=25,
         ).esb_export_record()
@@ -28,7 +28,7 @@ class SaleExportListener(Component):
     def on_record_write(self, record, fields=None):
         if not record.esb_is_exportable():
             return
-        if record.env.context.get('_sale_order_create'):
+        if record.env.context.get("_sale_order_create"):
             # export already triggered by the sale order create
             return
         record.with_delay(
@@ -39,9 +39,9 @@ class SaleExportListener(Component):
 
 
 class SaleLineExportListener(Component):
-    _name = 'esb.sale.order.line.export.listener'
-    _inherit = 'base.connector.listener'
-    _apply_on = ['sale.order.line']
+    _name = "esb.sale.order.line.export.listener"
+    _inherit = "base.connector.listener"
+    _apply_on = ["sale.order.line"]
 
     EXPORT_DESCRIPTION = u"Export sale order {} to ESB's webservice"
 
@@ -49,19 +49,19 @@ class SaleLineExportListener(Component):
     def on_record_write(self, record, fields=None):
         if not record.order_id.esb_is_exportable():
             return
-        if record.env.context.get(
-            '_sale_order_create'
-        ) or record.env.context.get('_sale_order_write'):
+        if record.env.context.get("_sale_order_create") or record.env.context.get(
+            "_sale_order_write"
+        ):
             # export already triggered by the sale order write/create
             return
         if set(fields) & {
-            'qty_delivered',
-            'product_qty_unavailable',
-            'product_qty_canceled',
+            "qty_delivered",
+            "product_qty_unavailable",
+            "product_qty_canceled",
         }:
             so = record.order_id
             so.with_delay(
-                description=self.EXPORT_DESCRIPTION.format(so.name or ''),
+                description=self.EXPORT_DESCRIPTION.format(so.name or ""),
                 identity_key=identity_exact,
                 priority=25,
             ).esb_export_record()

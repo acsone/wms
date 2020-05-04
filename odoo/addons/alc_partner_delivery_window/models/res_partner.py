@@ -26,15 +26,10 @@ class ResPartner(models.Model):
         :param day: The day name (see alc.delivery.week.day)
         :return: dict partner_id:[delivery_window, ]
         """
-        week_day_id = self.env["alc.delivery.week.day"]._get_id_by_name(
-            day_name
-        )
+        week_day_id = self.env["alc.delivery.week.day"]._get_id_by_name(day_name)
         res = defaultdict(list)
         windows = self.env["alc.delivery.window"].search(
-            [
-                ("partner_id", "in", self.ids),
-                ("week_day_ids", "in", week_day_id),
-            ]
+            [("partner_id", "in", self.ids), ("week_day_ids", "in", week_day_id)]
         )
         for window in windows:
             res[window.partner_id.id].append(window)

@@ -39,28 +39,23 @@ def cleanup_pulled_files(paramiko_kwargs, files_to_remove):
 
 class EdiSftpBackendAdapter(Component):
 
-    _name = 'edi.sftp.backend.adapter'
-    _inherit = 'edi.backend.adapter'
-    _usage = 'sftp.backend.adapter'
+    _name = "edi.sftp.backend.adapter"
+    _inherit = "edi.backend.adapter"
+    _usage = "sftp.backend.adapter"
 
     def _get_paramiko_kwarqs(self):
         pk_env_variable = self.backend_record.pk_env_variable
         if not pk_env_variable and not self.backend_record.password:
             raise ConnectorException(
-                _(
-                    'Please set the private key environment variable '
-                    'or a password'
-                )
+                _("Please set the private key environment variable " "or a password")
             )
         private_key = os.environ.get(pk_env_variable)
         pkey = None
         if pk_env_variable and not private_key:
-            raise ConnectorException(
-                _('%s must be set in environ') % pk_env_variable
-            )
+            raise ConnectorException(_("%s must be set in environ") % pk_env_variable)
 
             pkey = paramiko.RSAKey.from_private_key(
-                StringIO(private_key.decode('utf8'))
+                StringIO(private_key.decode("utf8"))
             )
         return dict(
             hostname=self.backend_record.hostname,
@@ -82,13 +77,11 @@ class EdiSftpBackendAdapter(Component):
         record = getattr(self.work, "record", None)
         task_def = self.work.task_def
         filename = task_def.filename(record)
-        path = os.path.join(
-            task_def.backend_id.path_write or "", task_def.path or ""
-        )
+        path = os.path.join(task_def.backend_id.path_write or "", task_def.path or "")
         with self.open_sftp() as sftp:
             sftp.chdir(path)
             tmp_filename = filename + ".wip"
-            with sftp.open(tmp_filename, 'w') as thefile:
+            with sftp.open(tmp_filename, "w") as thefile:
                 thefile.write(content)
             sftp.rename(tmp_filename, filename)
 
@@ -101,9 +94,7 @@ class EdiSftpBackendAdapter(Component):
         task_def = self.work.task_def
         file_pattern = task_def.file_matcher_pattern
         re_pattern = re.compile(file_pattern)
-        path = os.path.join(
-            task_def.backend_id.path_read or "", task_def.path or ""
-        )
+        path = os.path.join(task_def.backend_id.path_read or "", task_def.path or "")
         hostname = self.backend_record.hostname
         result = []
         to_cleanup = []
@@ -113,9 +104,7 @@ class EdiSftpBackendAdapter(Component):
                 full_path = os.path.join(path, filename)
                 with sftp.file(full_path, "rb") as f:
                     result.append((filename, f.read()))
-                _logger.debug(
-                    "SFTP host %s: Pull file %s", hostname, full_path
-                )
+                _logger.debug("SFTP host %s: Pull file %s", hostname, full_path)
                 to_cleanup.append(full_path)
 
         self.env.cr.after(

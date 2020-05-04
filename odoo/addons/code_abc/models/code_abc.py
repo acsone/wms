@@ -5,33 +5,31 @@ from odoo import _, api, fields, models
 
 
 class CodeABC(models.Model):
-    _name = 'code.abc'
-    _rec_name = 'code'
-    _order = 'rate'
+    _name = "code.abc"
+    _rec_name = "code"
+    _order = "rate"
 
     code = fields.Char(required=True)
     rate = fields.Integer(required=True)
     nbr_products = fields.Integer(
-        'Number of products', compute='_compute_nbr_products', readonly=True
+        "Number of products", compute="_compute_nbr_products", readonly=True
     )
     nbr_products_prc = fields.Integer(
-        'Number of products in percent',
-        compute='_compute_nbr_products',
+        "Number of products in percent",
+        compute="_compute_nbr_products",
         readonly=True,
         digits=(3, 2),
     )
 
-    _sql_constrains = [
-        ('unique_rate', 'UNIQUE(rate)', _('The rate must be unique'))
-    ]
+    _sql_constrains = [("unique_rate", "UNIQUE(rate)", _("The rate must be unique"))]
 
     @api.multi
     def _compute_nbr_products(self):
-        nbr_products = self.env['product.product'].search_count([])
+        nbr_products = self.env["product.product"].search_count([])
 
         for abc in self:
-            nbr_products_rate = self.env['product.product'].search_count(
-                [('abc_id', '=', abc.id)]
+            nbr_products_rate = self.env["product.product"].search_count(
+                [("abc_id", "=", abc.id)]
             )
 
             abc.nbr_products = nbr_products_rate

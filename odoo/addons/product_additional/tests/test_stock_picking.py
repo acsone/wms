@@ -16,149 +16,146 @@ class TestStockPicking(common.TransactionCase):
     def setUp(self):
         super(TestStockPicking, self).setUp()
 
-        location_obj = self.env['stock.location']
+        location_obj = self.env["stock.location"]
 
-        self.env.user.write({'ref': '757823948234', 'tz': 'Europe/Brussels'})
+        self.env.user.write({"ref": "757823948234", "tz": "Europe/Brussels"})
 
         # Create partner
-        self.partner = self.env['res.partner'].create(
-            {'name': 'Hello World', 'ref': '29969868875'}
+        self.partner = self.env["res.partner"].create(
+            {"name": "Hello World", "ref": "29969868875"}
         )
 
-        round_template = self.env['round.template'].create(
+        round_template = self.env["round.template"].create(
             {
-                'code': '78',
-                'name': 'Test',
-                'time_leave_planned': 12.50,
-                'time_picking_planned': 12.50,
+                "code": "78",
+                "name": "Test",
+                "time_leave_planned": 12.50,
+                "time_picking_planned": 12.50,
             }
         )
 
-        round_itinerary = self.env['round.itinerary'].create(
+        round_itinerary = self.env["round.itinerary"].create(
             {
-                'sequence': 100,
-                'name': 'Test itinerary',
-                'code': 'TEST1',
-                'template_ids': [(6, 0, [round_template.id])],
-                'partner_position_ids': [
-                    (0, 0, {'sequence': 1, 'partner_id': self.partner.id})
+                "sequence": 100,
+                "name": "Test itinerary",
+                "code": "TEST1",
+                "template_ids": [(6, 0, [round_template.id])],
+                "partner_position_ids": [
+                    (0, 0, {"sequence": 1, "partner_id": self.partner.id})
                 ],
             }
         )
 
-        self.round = self.env['round.instance'].create(
+        self.round = self.env["round.instance"].create(
             {
-                'template_id': round_template.id,
-                'date': fields.Date.today(),
-                'time_leave_planned': 12.50,
-                'time_picking_planned': 12.50,
-                'itinerary_ids': [(6, 0, [round_itinerary.id])],
+                "template_id": round_template.id,
+                "date": fields.Date.today(),
+                "time_leave_planned": 12.50,
+                "time_picking_planned": 12.50,
+                "itinerary_ids": [(6, 0, [round_itinerary.id])],
             }
         )
 
         self.parent_location = location_obj.create(
-            {
-                'name': 'G',
-                'location_id': self.env.ref('stock.stock_location_stock').id,
-            }
+            {"name": "G", "location_id": self.env.ref("stock.stock_location_stock").id}
         )
 
-        self.pick_type = self.env['stock.picking.type'].search(
-            [('code', '=', 'outgoing')], limit=1
+        self.pick_type = self.env["stock.picking.type"].search(
+            [("code", "=", "outgoing")], limit=1
         )
-        self.pick_type.subcode = 'PICK'
+        self.pick_type.subcode = "PICK"
 
         # Create additional product and update the available quantity (15)
-        self.additional_product = self.env['product.product'].create(
+        self.additional_product = self.env["product.product"].create(
             {
-                'name': 'Additional product',
-                'default_code': '987654321',
-                'tracking': 'lot',
-                'list_price': 20,
-                'type': 'product',
+                "name": "Additional product",
+                "default_code": "987654321",
+                "tracking": "lot",
+                "list_price": 20,
+                "type": "product",
             }
         )
 
         location_add_product = location_obj.create(
             {
-                'name': 'GAA320',
-                'kind': 'bin',
-                'zone': 'G',
-                'corridor': 'A',
-                'shelf': 'A',
-                'height': '3',
-                'box': '30',
-                'location_id': self.parent_location.id,
-                'bin_checksum_1': '123',
-                'bin_checksum_2': '123',
+                "name": "GAA320",
+                "kind": "bin",
+                "zone": "G",
+                "corridor": "A",
+                "shelf": "A",
+                "height": "3",
+                "box": "30",
+                "location_id": self.parent_location.id,
+                "bin_checksum_1": "123",
+                "bin_checksum_2": "123",
             }
         )
-        self.env['stock.location']._parent_store_compute()
+        self.env["stock.location"]._parent_store_compute()
 
         one_year = datetime.now() + relativedelta(years=1)
-        lot_additional_product = self.env['stock.production.lot'].create(
+        lot_additional_product = self.env["stock.production.lot"].create(
             {
-                'name': '000000001',
-                'product_id': self.additional_product.id,
-                'life_date': fields.Datetime.to_string(one_year),
+                "name": "000000001",
+                "product_id": self.additional_product.id,
+                "life_date": fields.Datetime.to_string(one_year),
             }
         )
-        update_qty_wizard = self.env['stock.change.product.qty'].create(
+        update_qty_wizard = self.env["stock.change.product.qty"].create(
             {
-                'product_id': self.additional_product.id,
-                'product_tmpl_id': self.additional_product.product_tmpl_id.id,
-                'new_quantity': 15,
-                'lot_id': lot_additional_product.id,
-                'location_id': location_add_product.id,
+                "product_id": self.additional_product.id,
+                "product_tmpl_id": self.additional_product.product_tmpl_id.id,
+                "new_quantity": 15,
+                "lot_id": lot_additional_product.id,
+                "location_id": location_add_product.id,
             }
         )
         update_qty_wizard.change_product_qty()
 
         # Create main product linked to the additional product with quanity 20
-        self.main_product = self.env['product.product'].create(
+        self.main_product = self.env["product.product"].create(
             {
-                'name': 'Test medoc 1',
-                'default_code': '1234567',
-                'tracking': 'lot',
-                'list_price': 100,
-                'type': 'product',
-                'additional_product_id': self.additional_product.id,
-                'ratio_main_product': 2,
-                'ratio_additional_product': 1,
+                "name": "Test medoc 1",
+                "default_code": "1234567",
+                "tracking": "lot",
+                "list_price": 100,
+                "type": "product",
+                "additional_product_id": self.additional_product.id,
+                "ratio_main_product": 2,
+                "ratio_additional_product": 1,
             }
         )
 
         location_product_1 = location_obj.create(
             {
-                'name': 'GAA210',
-                'kind': 'bin',
-                'zone': 'G',
-                'corridor': 'A',
-                'shelf': 'A',
-                'height': '2',
-                'box': '10',
-                'location_id': self.parent_location.id,
-                'bin_checksum_1': '123',
-                'bin_checksum_2': '123',
+                "name": "GAA210",
+                "kind": "bin",
+                "zone": "G",
+                "corridor": "A",
+                "shelf": "A",
+                "height": "2",
+                "box": "10",
+                "location_id": self.parent_location.id,
+                "bin_checksum_1": "123",
+                "bin_checksum_2": "123",
             }
         )
-        self.env['stock.location']._parent_store_compute()
+        self.env["stock.location"]._parent_store_compute()
 
         one_year = datetime.now() + relativedelta(years=1)
-        lot_product_1 = self.env['stock.production.lot'].create(
+        lot_product_1 = self.env["stock.production.lot"].create(
             {
-                'name': '000000001',
-                'product_id': self.main_product.id,
-                'life_date': fields.Datetime.to_string(one_year),
+                "name": "000000001",
+                "product_id": self.main_product.id,
+                "life_date": fields.Datetime.to_string(one_year),
             }
         )
-        update_qty_wizard = self.env['stock.change.product.qty'].create(
+        update_qty_wizard = self.env["stock.change.product.qty"].create(
             {
-                'product_id': self.main_product.id,
-                'product_tmpl_id': self.main_product.product_tmpl_id.id,
-                'new_quantity': 100,
-                'lot_id': lot_product_1.id,
-                'location_id': location_product_1.id,
+                "product_id": self.main_product.id,
+                "product_tmpl_id": self.main_product.product_tmpl_id.id,
+                "new_quantity": 100,
+                "lot_id": lot_product_1.id,
+                "location_id": location_product_1.id,
             }
         )
         update_qty_wizard.change_product_qty()
@@ -183,32 +180,32 @@ class TestStockPicking(common.TransactionCase):
         :return:
         """
 
-        location_id = self.env.ref('stock.stock_location_stock').id
-        location_dest_id = self.env.ref('stock.stock_location_customers').id
-        product_uom_id = self.env.ref('product.product_uom_unit').id
+        location_id = self.env.ref("stock.stock_location_stock").id
+        location_dest_id = self.env.ref("stock.stock_location_customers").id
+        product_uom_id = self.env.ref("product.product_uom_unit").id
 
         # Picking 1
         # Stock additional product: 15.0
         tomorrow = datetime.now() + relativedelta(days=1)
         picking_1 = (
-            self.env['stock.picking']
+            self.env["stock.picking"]
             .create(
                 {
-                    'partner_id': self.partner.id,
-                    'location_id': location_id,
-                    'location_dest_id': location_dest_id,
-                    'min_date': fields.Datetime.to_string(tomorrow),
-                    'picking_type_id': self.pick_type.id,
-                    'delivery_round_id': self.round.id,
-                    'move_lines': [
+                    "partner_id": self.partner.id,
+                    "location_id": location_id,
+                    "location_dest_id": location_dest_id,
+                    "min_date": fields.Datetime.to_string(tomorrow),
+                    "picking_type_id": self.pick_type.id,
+                    "delivery_round_id": self.round.id,
+                    "move_lines": [
                         (
                             0,
                             0,
                             {
-                                'name': 'Test medoc 1',
-                                'product_id': self.main_product.id,
-                                'product_uom_qty': 20,
-                                'product_uom': product_uom_id,
+                                "name": "Test medoc 1",
+                                "product_id": self.main_product.id,
+                                "product_uom_qty": 20,
+                                "product_uom": product_uom_id,
                             },
                         )
                     ],
@@ -231,24 +228,24 @@ class TestStockPicking(common.TransactionCase):
         # Picking 2
         # Stock additional product: 5.0
         picking_2 = (
-            self.env['stock.picking']
+            self.env["stock.picking"]
             .create(
                 {
-                    'partner_id': self.partner.id,
-                    'location_id': location_id,
-                    'location_dest_id': location_dest_id,
-                    'min_date': fields.Datetime.to_string(tomorrow),
-                    'picking_type_id': self.pick_type.id,
-                    'delivery_round_id': self.round.id,
-                    'move_lines': [
+                    "partner_id": self.partner.id,
+                    "location_id": location_id,
+                    "location_dest_id": location_dest_id,
+                    "min_date": fields.Datetime.to_string(tomorrow),
+                    "picking_type_id": self.pick_type.id,
+                    "delivery_round_id": self.round.id,
+                    "move_lines": [
                         (
                             0,
                             0,
                             {
-                                'name': 'Test medoc 1',
-                                'product_id': self.main_product.id,
-                                'product_uom_qty': 20,
-                                'product_uom': product_uom_id,
+                                "name": "Test medoc 1",
+                                "product_id": self.main_product.id,
+                                "product_uom_qty": 20,
+                                "product_uom": product_uom_id,
                             },
                         )
                     ],
@@ -271,24 +268,24 @@ class TestStockPicking(common.TransactionCase):
         # Picking 3
         # Stock additional product: 0
         picking_3 = (
-            self.env['stock.picking']
+            self.env["stock.picking"]
             .create(
                 {
-                    'partner_id': self.partner.id,
-                    'location_id': location_id,
-                    'location_dest_id': location_dest_id,
-                    'min_date': fields.Datetime.to_string(tomorrow),
-                    'picking_type_id': self.pick_type.id,
-                    'delivery_round_id': self.round.id,
-                    'move_lines': [
+                    "partner_id": self.partner.id,
+                    "location_id": location_id,
+                    "location_dest_id": location_dest_id,
+                    "min_date": fields.Datetime.to_string(tomorrow),
+                    "picking_type_id": self.pick_type.id,
+                    "delivery_round_id": self.round.id,
+                    "move_lines": [
                         (
                             0,
                             0,
                             {
-                                'name': 'Test medoc 1',
-                                'product_id': self.main_product.id,
-                                'product_uom_qty': 20,
-                                'product_uom': product_uom_id,
+                                "name": "Test medoc 1",
+                                "product_id": self.main_product.id,
+                                "product_uom_qty": 20,
+                                "product_uom": product_uom_id,
                             },
                         )
                     ],

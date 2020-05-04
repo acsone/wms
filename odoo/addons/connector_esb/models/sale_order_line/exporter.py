@@ -9,26 +9,26 @@ from ...components.mapper import falsy2zero
 
 
 class SaleOrderLineExportChildMapper(Component):
-    _name = 'esb.sale.order.line.export.child.mapper'
-    _inherit = ['base.map.child.export']
-    _apply_on = 'sale.order.line'
+    _name = "esb.sale.order.line.export.child.mapper"
+    _inherit = ["base.map.child.export"]
+    _apply_on = "sale.order.line"
 
     def skip_item(self, record):
         """Do not export lines that contains delivery information."""
-        return 'is_delivery' in record.source and record.source.is_delivery
+        return "is_delivery" in record.source and record.source.is_delivery
 
 
 class SaleOrderLineExportMapper(Component):
-    _name = 'esb.sale.order.line.export.mapper'
-    _inherit = ['esb.export.mapper']
-    _apply_on = 'sale.order.line'
+    _name = "esb.sale.order.line.export.mapper"
+    _inherit = ["esb.export.mapper"]
+    _apply_on = "sale.order.line"
 
     direct = [
-        (falsy2zero('product_uom_qty'), 'qty_ordered'),
-        (falsy2zero('qty_delivered'), 'qty_delivered'),
-        (falsy2zero('price_reduce_taxexcl'), 'price'),
-        (falsy2zero('price_reduce_taxinc'), 'price_inc_tax'),
-        (falsy2zero('product_qty_canceled'), 'qty_cancelled'),
+        (falsy2zero("product_uom_qty"), "qty_ordered"),
+        (falsy2zero("qty_delivered"), "qty_delivered"),
+        (falsy2zero("price_reduce_taxexcl"), "price"),
+        (falsy2zero("price_reduce_taxinc"), "price_inc_tax"),
+        (falsy2zero("product_qty_canceled"), "qty_cancelled"),
     ]
 
     @mapping
@@ -44,15 +44,15 @@ class SaleOrderLineExportMapper(Component):
             line_number = record.id
         else:
             line_number = record.esb_ref
-        return {'line_number': line_number}
+        return {"line_number": line_number}
 
     @mapping
     def compute_sku(self, record):
-        return {'sku': record.product_id.default_code or ''}
+        return {"sku": record.product_id.default_code or ""}
 
     @mapping
     def compute_qty_backorder(self, record):
         if record.qty_delivered == 0 or record.product_qty_canceled != 0:
-            return {'qty_backorder': record.product_qty_unavailable}
+            return {"qty_backorder": record.product_qty_unavailable}
         else:
-            return {'qty_backorder': record.product_qty_remains_to_deliver}
+            return {"qty_backorder": record.product_qty_remains_to_deliver}

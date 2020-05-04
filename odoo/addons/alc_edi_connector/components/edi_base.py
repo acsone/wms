@@ -7,6 +7,6 @@ from odoo.addons.component.core import AbstractComponent
 
 class EdiBBase(AbstractComponent):
 
-    _name = 'edi.base'
-    _inherit = 'base.connector'
-    _collection = 'edi.backend'
+    _name = "edi.base"
+    _inherit = "base.connector"
+    _collection = "edi.backend"

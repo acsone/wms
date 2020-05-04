@@ -18,27 +18,27 @@ class ProductTemplateListener(Component):
     the product_product record to export.
     """
 
-    _name = 'esb.product.template.export.listener'
-    _inherit = 'base.connector.listener'
-    _apply_on = ['product.template']
+    _name = "esb.product.template.export.listener"
+    _inherit = "base.connector.listener"
+    _apply_on = ["product.template"]
 
     EXPORT_DESCRIPTION = u"Export product {} stock state change to ESB"
 
     @skip_if(lambda self, record, **kwargs: self.no_connector_export(record))
     def on_record_write(self, record, fields=None):
-        if record.env.context.get('_product_create'):
+        if record.env.context.get("_product_create"):
             # Export already triggered by the product create
             return
         if not record.product_variant_id._is_product_fit_to_export():
             return
-        if 'state_id' in fields:
-            product_code = record.default_code or ''
+        if "state_id" in fields:
+            product_code = record.default_code or ""
             record.product_variant_id.with_delay(
                 description=self.EXPORT_DESCRIPTION.format(product_code),
                 identity_key=identity_exact,
                 priority=25,
             ).esb_export_record(
                 timestamp=self.env.ref(
-                    'connector_esb.esb_timestamp_stock_update_single'
+                    "connector_esb.esb_timestamp_stock_update_single"
                 )
             )

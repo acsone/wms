@@ -251,12 +251,8 @@ class TestSaleOrderLine(SavepointCase):
         self.assertFalse(self.sol_prod2.next_expected_date_for_receipt)
         self.picking_in_wh1.action_confirm()
         self.picking_in_wh2.action_confirm()
-        self.assertEqual(
-            self.sol_prod1.next_expected_date_for_receipt, self.dp1
-        )
-        self.assertEqual(
-            self.sol_prod2.next_expected_date_for_receipt, self.dm1
-        )
+        self.assertEqual(self.sol_prod1.next_expected_date_for_receipt, self.dp1)
+        self.assertEqual(self.sol_prod2.next_expected_date_for_receipt, self.dm1)
 
     def test_03(self):
         """
@@ -281,9 +277,5 @@ class TestSaleOrderLine(SavepointCase):
         self.assertFalse(self.sol_prod1.next_expected_date_for_receipt)
         self.assertFalse(self.sol_prod2.next_expected_date_for_receipt)
         self.so.warehouse_id = self.warehouse_2
-        self.assertEqual(
-            self.sol_prod1.next_expected_date_for_receipt, self.dm1
-        )
-        self.assertEqual(
-            self.sol_prod2.next_expected_date_for_receipt, self.dp1
-        )
+        self.assertEqual(self.sol_prod1.next_expected_date_for_receipt, self.dm1)
+        self.assertEqual(self.sol_prod2.next_expected_date_for_receipt, self.dp1)

@@ -7,7 +7,7 @@ from odoo.tools.sql import drop_view_if_exists
 
 
 class ReportStockOverview(models.Model):
-    _name = 'report.stock.overview'
+    _name = "report.stock.overview"
     _auto = False
 
     def init(self):
@@ -126,12 +126,12 @@ class ReportStockOverview(models.Model):
             "CREATE OR REPLACE VIEW " + self._table + " AS (" + query + ")"
         )
 
-    product_id = fields.Many2one('product.product', 'Product')
+    product_id = fields.Many2one("product.product", "Product")
 
-    qty_in_bin = fields.Float('Quantity in bin')
-    qty_in_bin_available = fields.Float('Quantity available in bin')
-    qty_in_parking = fields.Float('Quantity in parking')
-    qty_in_reserve = fields.Float('Quantity in reserve')
+    qty_in_bin = fields.Float("Quantity in bin")
+    qty_in_bin_available = fields.Float("Quantity available in bin")
+    qty_in_parking = fields.Float("Quantity in parking")
+    qty_in_reserve = fields.Float("Quantity in reserve")
 
     confirmed_qty = fields.Integer(
         "Quantity to pick", help="Remaining quantity to pick"
@@ -160,13 +160,13 @@ class ReportStockOverview(models.Model):
     )
 
     average_qty = fields.Integer(
-        'Average daily usage',
+        "Average daily usage",
         help="Computed with an horizon of 1 week assuming 5 working days",
     )
     average_count = fields.Integer(
-        'Average daily customer',
+        "Average daily customer",
         help="Computed with an horizon of 1 week assuming 5 working days",
     )
 
-    refill_priority_arrange = fields.Integer('Arrangement Priority')
-    refill_priority_reassort = fields.Integer('Reassortment Priority')
+    refill_priority_arrange = fields.Integer("Arrangement Priority")
+    refill_priority_reassort = fields.Integer("Reassortment Priority")

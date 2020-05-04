@@ -10,34 +10,34 @@ from odoo.exceptions import UserError
 
 
 class StockLocation(models.Model):
-    _inherit = 'stock.location'
+    _inherit = "stock.location"
 
-    picking_zone_id = fields.Many2one('picking.zone', string='Picking zone')
-    zone = fields.Char('Zone')
-    corridor = fields.Char('Corridor')
-    shelf = fields.Char('Shelf')
-    height = fields.Char('Height')
-    box = fields.Char('Box')
+    picking_zone_id = fields.Many2one("picking.zone", string="Picking zone")
+    zone = fields.Char("Zone")
+    corridor = fields.Char("Corridor")
+    shelf = fields.Char("Shelf")
+    height = fields.Char("Height")
+    box = fields.Char("Box")
     is_valid_location = fields.Boolean(
-        'Valid location',
-        compute='_compute_is_valid_location',
+        "Valid location",
+        compute="_compute_is_valid_location",
         store=True,
         readonly=True,
     )
     exclude_from_immediately_usable_qty = fields.Boolean(
-        'Exclude from immediately usable quantity', default=False
+        "Exclude from immediately usable quantity", default=False
     )
 
     _sql_constraints = [
         (
-            'unique_location_coordinates',
-            'UNIQUE(zone, corridor, shelf, height, box)',
-            _('The location coordinate must be unique'),
+            "unique_location_coordinates",
+            "UNIQUE(zone, corridor, shelf, height, box)",
+            _("The location coordinate must be unique"),
         )
     ]
 
     @api.multi
-    @api.depends('zone', 'corridor', 'shelf', 'height', 'box')
+    @api.depends("zone", "corridor", "shelf", "height", "box")
     def _compute_is_valid_location(self):
         for location in self:
             if (
@@ -50,7 +50,7 @@ class StockLocation(models.Model):
                 location.is_valid_location = False
             else:
                 location.is_valid_location = True
-                location.name = u'{}{}{}{}{}'.format(
+                location.name = u"{}{}{}{}{}".format(
                     location.zone,
                     location.corridor,
                     location.shelf,
@@ -76,7 +76,7 @@ class StockLocation(models.Model):
             # while location.location_id and location.usage != 'view':
             while (
                 location.location_id
-                and location.usage != 'view'
+                and location.usage != "view"
                 and not location.act_as_view
             ):
                 location = location.location_id
@@ -100,16 +100,11 @@ class StockLocation(models.Model):
                 strict=True
             )
 
-            formated_checksum = ['{:02d}'.format(i) for i in range(100)]
-            picklist = list(
-                set(formated_checksum) - set(checksum_not_available)
-            )
+            formated_checksum = ["{:02d}".format(i) for i in range(100)]
+            picklist = list(set(formated_checksum) - set(checksum_not_available))
             if not picklist:
                 raise UserError(
-                    _(
-                        'There is no checksum available for location %s'
-                        % location.name
-                    )
+                    _("There is no checksum available for location %s" % location.name)
                 )
 
             # Assign checksum
@@ -117,12 +112,11 @@ class StockLocation(models.Model):
             location.bin_checksum_1 = checksum
 
             # location.bin_checksum_2 = checksum
-            location.bin_checksum_3 = 'GEN'
+            location.bin_checksum_3 = "GEN"
             location.is_checksum_invalid = False
 
             self.filtered(
-                lambda r: r.bin_checksum_1 == old_checksum
-                and r.is_checksum_invalid
+                lambda r: r.bin_checksum_1 == old_checksum and r.is_checksum_invalid
             ).check_checksum_valid()
 
     @api.multi
@@ -139,7 +133,7 @@ class StockLocation(models.Model):
 
         shelf = location.shelf
 
-        checksum_not_available = {'00', '12'}
+        checksum_not_available = {"00", "12"}
 
         try:
             shelf_code = int(shelf)
@@ -150,23 +144,23 @@ class StockLocation(models.Model):
 
         def convert(code):
             if is_letter:
-                if code < ord('A') or code > ord('Z'):
+                if code < ord("A") or code > ord("Z"):
                     return
                 code = chr(code)
             else:
                 if code < 1 or code > 99:
                     return
-                code = '{:02d}'.format(code)
+                code = "{:02d}".format(code)
             return code
 
         query_or = []
         query_args = {
-            'id': location.id,
-            'zone': location.zone,
-            'corridor': location.corridor,
-            'shelf': location.shelf,
-            'height': location.height,
-            'box': location.box,
+            "id": location.id,
+            "zone": location.zone,
+            "corridor": location.corridor,
+            "shelf": location.shelf,
+            "height": location.height,
+            "box": location.box,
         }
         # Get checksums of this shelf
         query_or.append(
@@ -185,13 +179,10 @@ class StockLocation(models.Model):
             AND height = %(height)s
             ) """
         )
-        query_args['next_shelfs'] = tuple(
+        query_args["next_shelfs"] = tuple(
             filter(
                 None,
-                map(
-                    convert,
-                    (shelf_code - 2, shelf_code + 2, (shelf_code % 2 or -1)),
-                ),
+                map(convert, (shelf_code - 2, shelf_code + 2, (shelf_code % 2 or -1))),
             )
         )
         # Get checksums of other corridors, same location
@@ -251,4 +242,4 @@ class StockLocation(models.Model):
             else:
                 location.is_checksum_invalid = False
 
-    is_checksum_invalid = fields.Boolean('Invalid Checksum')
+    is_checksum_invalid = fields.Boolean("Invalid Checksum")

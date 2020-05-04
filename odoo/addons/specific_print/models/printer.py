@@ -6,18 +6,17 @@ from odoo import _, fields, models
 
 
 class PrintingPrinter(models.Model):
-    _inherit = 'printing.printer'
+    _inherit = "printing.printer"
 
     code = fields.Char()
     type = fields.Selection(
-        [('zebra', 'Zebra'), ('pdf', 'PDF'), ('toshiba', 'Toshiba')],
-        string='Type',
+        [("zebra", "Zebra"), ("pdf", "PDF"), ("toshiba", "Toshiba")], string="Type"
     )
 
     _sql_constraints = [
         (
-            'unique_printer_code_by_type',
-            'unique(code, type)',
-            _('The printer code must be unique by type'),
+            "unique_printer_code_by_type",
+            "unique(code, type)",
+            _("The printer code must be unique by type"),
         )
     ]

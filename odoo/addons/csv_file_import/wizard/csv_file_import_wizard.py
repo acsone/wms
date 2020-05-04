@@ -6,16 +6,14 @@ from odoo.exceptions import UserError
 
 
 class CSVFileImportWizard(models.TransientModel):
-    _name = 'csv.file.import.wizard'
+    _name = "csv.file.import.wizard"
 
-    import_ids = fields.Many2many('csv.file.import', string='Imports')
+    import_ids = fields.Many2many("csv.file.import", string="Imports")
 
     def default_get(self, fields_list={}):
-        result = super(CSVFileImportWizard, self).default_get(
-            fields_list=fields_list
-        )
+        result = super(CSVFileImportWizard, self).default_get(fields_list=fields_list)
 
-        result['import_ids'] = [(6, 0, self.env.context.get('active_ids', []))]
+        result["import_ids"] = [(6, 0, self.env.context.get("active_ids", []))]
 
         return result
 
@@ -24,7 +22,7 @@ class CSVFileImportWizard(models.TransientModel):
         self.ensure_one()
 
         if not self.import_ids:
-            raise UserError(_('Please select at least one import'))
+            raise UserError(_("Please select at least one import"))
 
-        imports = self.env['csv.file.import'].browse(self.import_ids.ids)
+        imports = self.env["csv.file.import"].browse(self.import_ids.ids)
         imports.execute_imports()

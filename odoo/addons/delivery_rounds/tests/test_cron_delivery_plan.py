@@ -18,18 +18,18 @@ class TestCronDeliveryPlan(TransactionCase):
     def setUp(self):
         super(TestCronDeliveryPlan, self).setUp()
 
-        self.version = self.env['round.template.version'].create(
+        self.version = self.env["round.template.version"].create(
             {
-                'name': 'Version test',
-                'template_ids': [
+                "name": "Version test",
+                "template_ids": [
                     (
                         0,
                         0,
                         {
-                            'name': 'Round template test',
-                            'code': 'TEST',
-                            'time_picking_planned': 8,
-                            'time_leave_planned': 9,
+                            "name": "Round template test",
+                            "code": "TEST",
+                            "time_picking_planned": 8,
+                            "time_leave_planned": 9,
                         },
                     )
                 ],
@@ -42,7 +42,7 @@ class TestCronDeliveryPlan(TransactionCase):
         the next execution
         :return:
         """
-        cron_delivery_plan = self.env['cron.delivery.plan']
+        cron_delivery_plan = self.env["cron.delivery.plan"]
 
         tomorrow = datetime.today() + relativedelta(days=1)
 
@@ -53,19 +53,19 @@ class TestCronDeliveryPlan(TransactionCase):
 
         # Try with a day of week
         cron_1 = cron_delivery_plan.create(
-            {'week_day': ISO_WEEK_DAY_MONDAY, 'version_id': self.version.id}
+            {"week_day": ISO_WEEK_DAY_MONDAY, "version_id": self.version.id}
         )
         self.assertEqual(cron_1.next_execution, next_monday_str)
 
         # Try with a date
         cron_2 = cron_delivery_plan.create(
-            {'date_overwrite': next_monday_str, 'version_id': self.version.id}
+            {"date_overwrite": next_monday_str, "version_id": self.version.id}
         )
         self.assertEqual(cron_2.next_execution, next_monday_str)
 
-        cron_delivery_plan.with_context(
-            {'assign_moves': False}
-        ).create_daily_plan(today_overwrite=next_monday_str)
+        cron_delivery_plan.with_context({"assign_moves": False}).create_daily_plan(
+            today_overwrite=next_monday_str
+        )
 
         # The next execution of cron 1 (with day of week) should be one week
         # late

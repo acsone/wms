@@ -6,7 +6,7 @@ from odoo import fields, models
 
 
 class AccountTax(models.Model):
-    _inherit = 'account.tax'
+    _inherit = "account.tax"
 
-    esb_ref = fields.Char(string='Reference for ESB', copy=False)
-    contrib_sku = fields.Char(string='Contribution SKU', copy=False)
+    esb_ref = fields.Char(string="Reference for ESB", copy=False)
+    contrib_sku = fields.Char(string="Contribution SKU", copy=False)

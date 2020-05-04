@@ -6,7 +6,7 @@ from odoo import api, models
 
 
 class MailThread(models.AbstractModel):
-    _inherit = 'mail.thread'
+    _inherit = "mail.thread"
 
     @api.multi
     def _message_auto_subscribe_notify(self, partner_ids):
