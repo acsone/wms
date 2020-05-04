@@ -22,7 +22,7 @@ msgid "Cancel"
 msgstr "Annuler"
 
 #. module: sale_confirm_background
-#: code:addons/sale_confirm_background/models/sale_order.py:63
+#: code:addons/sale_confirm_background/models/sale_order.py:61
 #, python-format
 msgid "Confirmation of sales order %s"
 msgstr "Confirmation de la commande %s"
@@ -34,25 +34,29 @@ msgid "Order %s is now confirmed."
 msgstr "La commande %s est maintenant confirmée."
 
 #. module: sale_confirm_background
-#: code:addons/sale_confirm_background/models/sale_order.py:60
+#: code:addons/sale_confirm_background/models/sale_order.py:58
 #, python-format
 msgid "Order %s will be confirmed in background."
 msgstr "La commande %s va être confirmée en arrière-plan."
 
 #. module: sale_confirm_background
-#: code:addons/sale_confirm_background/models/sale_order.py:77
+#: code:addons/sale_confirm_background/models/sale_order.py:74
 #, python-format
 msgid "Remove delivery block for order %s is now done."
-msgstr "La suppression du blocage de livraison pour la commande %s est maintenant effectuée."
+msgstr ""
+"La suppression du blocage de livraison pour la commande %s est maintenant "
+"effectuée."
+
+#. module: sale_confirm_background
+#: code:addons/sale_confirm_background/models/sale_order.py:83
+#, python-format
+msgid "Remove delivery block for order %s will be done in background."
+msgstr ""
+"La suppression du blocage de livraison pour la commande %s va être effectué "
+"en arrière-plan."
 
 #. module: sale_confirm_background
 #: code:addons/sale_confirm_background/models/sale_order.py:87
-#, python-format
-msgid "Remove delivery block for order %s will be done in background."
-msgstr "La suppression du blocage de livraison pour la commande %s va être effectué en arrière-plan."
-
-#. module: sale_confirm_background
-#: code:addons/sale_confirm_background/models/sale_order.py:93
 #, python-format
 msgid "Remove delivery block for sales order %s"
 msgstr "Supprimer le blocage de livraison pour la commande %s"
