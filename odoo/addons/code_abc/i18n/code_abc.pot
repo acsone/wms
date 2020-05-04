@@ -96,7 +96,7 @@ msgid "Number of products in percent"
 msgstr ""
 
 #. module: code_abc
-#: code:addons/code_abc/models/product_product.py:173
+#: code:addons/code_abc/models/product_product.py:171
 #, python-format
 msgid "Please define a least one ABC rate"
 msgstr ""
@@ -122,7 +122,7 @@ msgid "Rate"
 msgstr ""
 
 #. module: code_abc
-#: code:addons/code_abc/models/code_abc.py:25
+#: code:addons/code_abc/models/code_abc.py:24
 #, python-format
 msgid "The rate must be unique"
 msgstr ""
