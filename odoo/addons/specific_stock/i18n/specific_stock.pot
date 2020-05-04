@@ -24,7 +24,7 @@ msgid "Additional information communicated to the customer"
 msgstr ""
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/reception_pharmacy.py:122
+#: code:addons/specific_stock/models/reception_pharmacy.py:115
 #, python-format
 msgid "All pickings at destination of a same shipping must be in the same delivery round"
 msgstr ""
@@ -71,7 +71,7 @@ msgid "Cancel move"
 msgstr ""
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/stock_production_lot.py:361
+#: code:addons/specific_stock/models/stock_production_lot.py:347
 #, python-format
 msgid "Cannot generate a voice identifier"
 msgstr ""
@@ -135,7 +135,7 @@ msgid "Customer"
 msgstr ""
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/reception_pharmacy.py:57
+#: code:addons/specific_stock/models/reception_pharmacy.py:50
 #, python-format
 msgid "Customer location is missing"
 msgstr ""
@@ -347,13 +347,13 @@ msgid "Missing quantity of products to pick"
 msgstr ""
 
 #. module: specific_stock
-#: code:addons/specific_stock/wizards/stock_move_update_handler.py:60
+#: code:addons/specific_stock/wizards/stock_move_update_handler.py:58
 #, python-format
 msgid "Move for product {} with quantity {}                     of current picking moved to {}"
 msgstr ""
 
 #. module: specific_stock
-#: code:addons/specific_stock/wizards/stock_move_update_handler.py:77
+#: code:addons/specific_stock/wizards/stock_move_update_handler.py:75
 #, python-format
 msgid "Move for product {} with quantity {} canceled"
 msgstr ""
@@ -440,7 +440,7 @@ msgid "Partner"
 msgstr ""
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/reception_pharmacy.py:65
+#: code:addons/specific_stock/models/reception_pharmacy.py:58
 #, python-format
 msgid "Partner {} does not belong to any itinerary"
 msgstr ""
@@ -474,13 +474,13 @@ msgid "Picking zone"
 msgstr ""
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/reception_pharmacy.py:44
+#: code:addons/specific_stock/models/reception_pharmacy.py:37
 #, python-format
 msgid "Please insert at least one line"
 msgstr ""
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/product_template.py:181
+#: code:addons/specific_stock/models/product_template.py:170
 #, python-format
 msgid "Please set the Price limit for inventory or/and the Number of open days in the stock configuration"
 msgstr ""
@@ -616,7 +616,7 @@ msgid "Stock Move Handler"
 msgstr ""
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/reception_pharmacy.py:60
+#: code:addons/specific_stock/models/reception_pharmacy.py:53
 #, python-format
 msgid "Supplier location is missing"
 msgstr ""
@@ -627,7 +627,7 @@ msgid "Technical field used to depict a restriction on the lot/serial number of 
 msgstr ""
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/stock_config_settings.py:167
+#: code:addons/specific_stock/models/stock_config_settings.py:155
 #, python-format
 msgid "The delay can only be in the following list:\n"
 "(1, 2, 3, 4, 6 or 12 months)"
@@ -641,7 +641,7 @@ msgid "The location coordinate must be unique"
 msgstr ""
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/stock_config_settings.py:163
+#: code:addons/specific_stock/models/stock_config_settings.py:151
 #, python-format
 msgid "The maximum delay is 12 months"
 msgstr ""
@@ -652,49 +652,49 @@ msgid "The picking type determines the picking view"
 msgstr ""
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/stock_picking.py:92
+#: code:addons/specific_stock/models/stock_picking.py:89
 #, python-format
 msgid "The reception must be linked to a Goods Received Note"
 msgstr ""
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/stock_production_lot.py:199
+#: code:addons/specific_stock/models/stock_production_lot.py:191
 #, python-format
 msgid "There is no checksum available"
 msgstr ""
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/stock_location.py:109
+#: code:addons/specific_stock/models/stock_location.py:107
 #, python-format
 msgid "There is no checksum available for location %s"
 msgstr ""
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/stock_inventory.py:115
+#: code:addons/specific_stock/models/stock_inventory.py:110
 #, python-format
 msgid "There is no delay for the inventory %s"
 msgstr ""
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/product_template.py:258
+#: code:addons/specific_stock/models/product_template.py:245
 #, python-format
 msgid "There is no period for best sellers products"
 msgstr ""
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/product_template.py:214
+#: code:addons/specific_stock/models/product_template.py:203
 #, python-format
 msgid "There is no period for expensive products"
 msgstr ""
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/product_template.py:311
+#: code:addons/specific_stock/models/product_template.py:294
 #, python-format
 msgid "There is no period for other products"
 msgstr ""
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/stock_production_lot.py:349
+#: code:addons/specific_stock/models/stock_production_lot.py:335
 #, python-format
 msgid "There is no voice identifier available"
 msgstr ""
@@ -739,7 +739,7 @@ msgid "Voice Identifier"
 msgstr ""
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/reception_pharmacy.py:54
+#: code:addons/specific_stock/models/reception_pharmacy.py:47
 #, python-format
 msgid "Warehouse is missing"
 msgstr ""
@@ -775,7 +775,7 @@ msgid "Wizard"
 msgstr ""
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/stock_picking.py:79
+#: code:addons/specific_stock/models/stock_picking.py:76
 #, python-format
 msgid "You cannot transfer lots with an expired removal date:\n"
 "	- %s"
