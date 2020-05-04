@@ -19,7 +19,7 @@ msgid "Invoice"
 msgstr ""
 
 #. module: l10n_be_bba_fix
-#: code:addons/l10n_be_bba_fix/models/account_invoice.py:123
+#: code:addons/l10n_be_bba_fix/models/account_invoice.py:121
 #, python-format
 msgid "The maximum of outgoing invoices for this partner reference has been reached"
 msgstr ""
