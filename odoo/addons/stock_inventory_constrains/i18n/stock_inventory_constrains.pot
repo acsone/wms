@@ -34,7 +34,7 @@ msgid "Inventory on all products is forbidden"
 msgstr ""
 
 #. module: stock_inventory_constrains
-#: code:addons/stock_inventory_constrains/models/stock_inventory.py:23
+#: code:addons/stock_inventory_constrains/models/stock_inventory.py:20
 #, python-format
 msgid "You cannot create an inventory for 'all products' on the %s location."
 msgstr ""
