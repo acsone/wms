@@ -19,13 +19,13 @@ msgid "Product Template"
 msgstr ""
 
 #. module: alc_product_uom_updatable
-#: code:addons/alc_product_uom_updatable/models/product_template.py:72
+#: code:addons/alc_product_uom_updatable/models/product_template.py:66
 #, python-format
 msgid "You can not change the purchase unit of measure of a product to a new unit that doesn't have the same category and factor"
 msgstr ""
 
 #. module: alc_product_uom_updatable
-#: code:addons/alc_product_uom_updatable/models/product_template.py:45
+#: code:addons/alc_product_uom_updatable/models/product_template.py:42
 #, python-format
 msgid "You can not change the unit of measure of a product to a new unit that doesn't have the same category and factor"
 msgstr ""
