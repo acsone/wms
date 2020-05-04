@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: csv_file
-#: code:addons/csv_file/models/ftp_connector.py:50
+#: code:addons/csv_file/models/ftp_connector.py:47
 #, python-format
 msgid "%s must be set in environ"
 msgstr ""
@@ -83,8 +83,8 @@ msgid "Error"
 msgstr ""
 
 #. module: csv_file
-#: code:addons/csv_file/models/ftp_connector.py:85
-#: code:addons/csv_file/models/ftp_connector.py:94
+#: code:addons/csv_file/models/ftp_connector.py:80
+#: code:addons/csv_file/models/ftp_connector.py:89
 #, python-format
 msgid "Everything seems ok"
 msgstr ""
@@ -215,13 +215,13 @@ msgid "Password"
 msgstr ""
 
 #. module: csv_file
-#: code:addons/csv_file/models/csv_file.py:238
+#: code:addons/csv_file/models/csv_file.py:231
 #, python-format
 msgid "Please configure a sFTP connector"
 msgstr ""
 
 #. module: csv_file
-#: code:addons/csv_file/models/ftp_connector.py:45
+#: code:addons/csv_file/models/ftp_connector.py:43
 #, python-format
 msgid "Please set the primary key environment variable"
 msgstr ""
@@ -256,20 +256,20 @@ msgid "Test connection"
 msgstr ""
 
 #. module: csv_file
-#: code:addons/csv_file/models/csv_file.py:37
+#: code:addons/csv_file/models/csv_file.py:34
 #: sql_constraint:csv.file:0
 #, python-format
 msgid "The file name must be unique."
 msgstr ""
 
 #. module: csv_file
-#: code:addons/csv_file/models/csv_file.py:100
+#: code:addons/csv_file/models/csv_file.py:96
 #, python-format
 msgid "The filename is not valid.Please check the part \"%s\""
 msgstr ""
 
 #. module: csv_file
-#: code:addons/csv_file/models/csv_file.py:76
+#: code:addons/csv_file/models/csv_file.py:72
 #, python-format
 msgid "The filename must contain the extension"
 msgstr ""
@@ -285,12 +285,12 @@ msgid "Type"
 msgstr ""
 
 #. module: csv_file
-#: code:addons/csv_file/models/csv_file.py:147
-#: code:addons/csv_file/models/csv_file.py:162
-#: code:addons/csv_file/models/csv_file.py:179
-#: code:addons/csv_file/models/csv_file.py:201
-#: code:addons/csv_file/models/csv_file.py:221
-#: code:addons/csv_file/models/csv_file.py:231
+#: code:addons/csv_file/models/csv_file.py:140
+#: code:addons/csv_file/models/csv_file.py:155
+#: code:addons/csv_file/models/csv_file.py:172
+#: code:addons/csv_file/models/csv_file.py:194
+#: code:addons/csv_file/models/csv_file.py:214
+#: code:addons/csv_file/models/csv_file.py:224
 #, python-format
 msgid "Unknown import type"
 msgstr ""
