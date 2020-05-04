@@ -193,13 +193,13 @@ msgid "Lot"
 msgstr "Lot"
 
 #. module: delivery_rounds_refill
-#: code:addons/delivery_rounds_refill/models/report_stock_refill_arrange.py:91
+#: code:addons/delivery_rounds_refill/models/report_stock_refill_arrange.py:89
 #, python-format
 msgid "Missing Operation Type on Location %s"
 msgstr "Type d'opération manquante sur l'emplacement %s"
 
 #. module: delivery_rounds_refill
-#: code:addons/delivery_rounds_refill/models/report_stock_refill_reassort.py:91
+#: code:addons/delivery_rounds_refill/models/report_stock_refill_reassort.py:89
 #, python-format
 msgid "Missing operation type on location %s"
 msgstr "Type d'opération manquante sur l'emplacement %s"
