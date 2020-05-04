@@ -31,7 +31,7 @@ msgid "Camptocamp Versions"
 msgstr ""
 
 #. module: camptocamp_tools
-#: code:addons/camptocamp_tools/controllers/camptocamp_version.py:24
+#: code:addons/camptocamp_tools/controllers/camptocamp_version.py:21
 #, python-format
 msgid "Only users with Technical Features activated are allowed."
 msgstr ""
