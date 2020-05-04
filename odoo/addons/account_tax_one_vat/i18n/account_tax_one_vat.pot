@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: account_tax_one_vat
-#: code:addons/account_tax_one_vat/models/purchase_order.py:20
+#: code:addons/account_tax_one_vat/models/purchase_order.py:18
 #: code:addons/account_tax_one_vat/models/sale.py:18
 #, python-format
 msgid "For %s multiple tax from the VAT group are selected. Only one is allowed."
@@ -27,20 +27,20 @@ msgstr ""
 
 #. module: account_tax_one_vat
 #: code:addons/account_tax_one_vat/models/acccount_invoice.py:20
-#: code:addons/account_tax_one_vat/models/purchase_order.py:33
+#: code:addons/account_tax_one_vat/models/purchase_order.py:31
 #: code:addons/account_tax_one_vat/models/sale.py:31
 #, python-format
 msgid "More than one VAT tax selected!"
 msgstr ""
 
 #. module: account_tax_one_vat
-#: code:addons/account_tax_one_vat/models/product.py:20
+#: code:addons/account_tax_one_vat/models/product.py:18
 #, python-format
 msgid "Multiple customer tax of type VAT are selected. Only one is allowed."
 msgstr ""
 
 #. module: account_tax_one_vat
-#: code:addons/account_tax_one_vat/models/product.py:33
+#: code:addons/account_tax_one_vat/models/product.py:31
 #, python-format
 msgid "Multiple supplier tax of type VAT are selected. Only one is allowed."
 msgstr ""
@@ -61,7 +61,7 @@ msgid "Sales Order Line"
 msgstr ""
 
 #. module: account_tax_one_vat
-#: code:addons/account_tax_one_vat/models/purchase_order.py:34
+#: code:addons/account_tax_one_vat/models/purchase_order.py:32
 #, python-format
 msgid "You selected more than one tax of type VAT on a line, it does not make sense."
 msgstr ""
