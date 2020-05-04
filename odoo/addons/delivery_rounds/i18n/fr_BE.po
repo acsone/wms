@@ -62,9 +62,9 @@ msgid "Active"
 msgstr "Actif"
 
 #. module: delivery_rounds
-#: code:addons/delivery_rounds/models/sale_order.py:63
-#: code:addons/delivery_rounds/models/sale_order.py:72
-#: code:addons/delivery_rounds/models/stock_move.py:116
+#: code:addons/delivery_rounds/models/sale_order.py:60
+#: code:addons/delivery_rounds/models/sale_order.py:69
+#: code:addons/delivery_rounds/models/stock_move.py:110
 #, python-format
 msgid ""
 "All pickings at destination of a same shipping must be in the same delivery "
@@ -89,7 +89,7 @@ msgid "Assign Delivery Round"
 msgstr "Assigner une tournée"
 
 #. module: delivery_rounds
-#: code:addons/delivery_rounds/models/stock_picking.py:167
+#: code:addons/delivery_rounds/models/stock_picking.py:158
 #, python-format
 msgid "Assign pickings of partner %s"
 msgstr "Assigner les préparations du partenaire %s"
@@ -217,7 +217,7 @@ msgid "Deliver"
 msgstr "Livrer"
 
 #. module: delivery_rounds
-#: code:addons/delivery_rounds/models/round_instance.py:1181
+#: code:addons/delivery_rounds/models/round_instance.py:1103
 #, python-format
 msgid "Deliver customer %s of delivery round %s"
 msgstr "Livraison du client %s de la tournée %s"
@@ -265,7 +265,7 @@ msgid "Delivery Round"
 msgstr "Tournée"
 
 #. module: delivery_rounds
-#: code:addons/delivery_rounds/models/round_instance.py:783
+#: code:addons/delivery_rounds/models/round_instance.py:739
 #, python-format
 msgid "Delivery Round %s is now completed"
 msgstr "La tournée %s est maintenant terminée"
@@ -306,13 +306,13 @@ msgid "Delivery failure"
 msgstr "L'échec de livraison"
 
 #. module: delivery_rounds
-#: code:addons/delivery_rounds/wizards/picking_assign_delivery_round.py:63
+#: code:addons/delivery_rounds/wizards/picking_assign_delivery_round.py:59
 #, python-format
 msgid "Delivery round \"%s\" manually assigned"
 msgstr "Tournée \"%s\" attribuée manuellement"
 
 #. module: delivery_rounds
-#: code:addons/delivery_rounds/models/round_instance.py:650
+#: code:addons/delivery_rounds/models/round_instance.py:613
 #, python-format
 msgid "Delivery round will be delivered in background."
 msgstr "La tournée sera livrée en arrière-plan."
@@ -369,7 +369,7 @@ msgid "End mileage"
 msgstr "Kilométrage final"
 
 #. module: delivery_rounds
-#: code:addons/delivery_rounds/models/round_instance.py:1166
+#: code:addons/delivery_rounds/models/round_instance.py:1088
 #, python-format
 msgid "Error when delivering %s: %s"
 msgstr "Erreur lors de la livraison %s: %s"
@@ -573,13 +573,13 @@ msgid "Next execution"
 msgstr "Exécution suivante"
 
 #. module: delivery_rounds
-#: code:addons/delivery_rounds/models/round_instance.py:965
+#: code:addons/delivery_rounds/models/round_instance.py:900
 #, python-format
 msgid "No picking have been processed yet"
 msgstr "Aucune préparation n'a encore été traitée"
 
 #. module: delivery_rounds
-#: code:addons/delivery_rounds/wizards/picking_assign_delivery_round.py:56
+#: code:addons/delivery_rounds/wizards/picking_assign_delivery_round.py:52
 #, python-format
 msgid ""
 "No products available.\n"
@@ -807,7 +807,7 @@ msgid "Shipping count"
 msgstr "Nombre de livraisons"
 
 #. module: delivery_rounds
-#: code:addons/delivery_rounds/models/round_instance.py:1159
+#: code:addons/delivery_rounds/models/round_instance.py:1081
 #, python-format
 msgid "Should be delivered manually, could not deliver because of %s"
 msgstr "Doit être livré manuellement, n'a pas pu être livré en raison de %s"
@@ -885,7 +885,7 @@ msgid "The picking type determines the picking view"
 msgstr "Le type de préparation détermine la vue de préparation"
 
 #. module: delivery_rounds
-#: code:addons/delivery_rounds/models/round_instance.py:1200
+#: code:addons/delivery_rounds/models/round_instance.py:1117
 #, python-format
 msgid "The shipping is not part anymore of this delivery round"
 msgstr ""
@@ -932,7 +932,7 @@ msgid "Unassigned Pickings"
 msgstr "Préparations non assignées"
 
 #. module: delivery_rounds
-#: code:addons/delivery_rounds/models/round_instance.py:1004
+#: code:addons/delivery_rounds/models/round_instance.py:937
 #, python-format
 msgid "Unexpected error (%s)"
 msgstr "Erreur inattendue (%s)"
@@ -979,26 +979,26 @@ msgid "Weight"
 msgstr "Poids"
 
 #. module: delivery_rounds
-#: code:addons/delivery_rounds/models/round_instance.py:711
+#: code:addons/delivery_rounds/models/round_instance.py:671
 #, python-format
 msgid "You cannot delete a delivery round having a started picking"
 msgstr ""
 "Vous ne pouvez pas supprimer une tournée dont la préparation a commencé"
 
 #. module: delivery_rounds
-#: code:addons/delivery_rounds/models/round_instance.py:717
+#: code:addons/delivery_rounds/models/round_instance.py:675
 #, python-format
 msgid "You cannot delete a delivery round having a started shipping"
 msgstr "Vous ne pouvez pas supprimer une tournée dont la livraison a commencé"
 
 #. module: delivery_rounds
-#: code:addons/delivery_rounds/models/round_instance.py:707
+#: code:addons/delivery_rounds/models/round_instance.py:667
 #, python-format
 msgid "You cannot delete a delivery round that has been started"
 msgstr "Vous ne pouvez pas supprimer une tournée qui est démarrée"
 
 #. module: delivery_rounds
-#: code:addons/delivery_rounds/models/round_instance.py:1044
+#: code:addons/delivery_rounds/models/round_instance.py:976
 #, python-format
 msgid "You cannot deliver with ongoing picking(s): %s"
 msgstr "Vous ne pouvez pas livré une tournée avec des prépratations encours"
@@ -1010,7 +1010,7 @@ msgid "You cannot have more than one default version at once."
 msgstr "Vous ne pouvez pas avoir plus d'une version par défaut à la fois"
 
 #. module: delivery_rounds
-#: code:addons/delivery_rounds/models/round_instance.py:287
+#: code:addons/delivery_rounds/models/round_instance.py:264
 #, python-format
 msgid ""
 "You cannot reassign the started picking %s on the delivery round %s to the "
@@ -1018,7 +1018,7 @@ msgid ""
 msgstr ""
 
 #. module: delivery_rounds
-#: code:addons/delivery_rounds/models/cron_delivery_plan.py:65
+#: code:addons/delivery_rounds/models/cron_delivery_plan.py:61
 #, python-format
 msgid "You cannot set a week day and a date overwrite in the same time."
 msgstr ""
@@ -1026,14 +1026,14 @@ msgstr ""
 "même temps."
 
 #. module: delivery_rounds
-#: code:addons/delivery_rounds/models/stock_picking.py:124
+#: code:addons/delivery_rounds/models/stock_picking.py:119
 #, python-format
 msgid "You cannot unassign a delivery round from a started picking"
 msgstr ""
 "Vous ne pouvez pas retirer d'une tournée une préparation déjà commencée"
 
 #. module: delivery_rounds
-#: code:addons/delivery_rounds/models/cron_delivery_plan.py:61
+#: code:addons/delivery_rounds/models/cron_delivery_plan.py:57
 #, python-format
 msgid "You have to set the week day or the date overwrite"
 msgstr "Vous devez définir un jour de la semaine ou une date spécifique"
@@ -1116,7 +1116,7 @@ msgid "unit(s)"
 msgstr "unités(s)"
 
 #. module: delivery_rounds
-#: code:addons/delivery_rounds/models/round_instance.py:309
+#: code:addons/delivery_rounds/models/round_instance.py:286
 #, python-format
 msgid "{} is not working day for {}"
 msgstr "{} n'est pas un jour de travail pour {}"
