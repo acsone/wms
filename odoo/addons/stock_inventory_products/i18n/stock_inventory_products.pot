@@ -19,7 +19,7 @@ msgid "Inventory"
 msgstr ""
 
 #. module: stock_inventory_products
-#: code:addons/stock_inventory_products/models/stock_inventory.py:50
+#: code:addons/stock_inventory_products/models/stock_inventory.py:48
 #, python-format
 msgid "Please select at least one product"
 msgstr ""
