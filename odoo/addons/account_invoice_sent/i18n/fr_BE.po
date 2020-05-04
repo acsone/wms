@@ -27,13 +27,13 @@ msgid "<strong>Please select operation...</strong>"
 msgstr "<strong>Veuillez choisir l'opération...</strong>"
 
 #. module: account_invoice_sent
-#: code:addons/account_invoice_sent/models/account_invoice_print.py:120
+#: code:addons/account_invoice_sent/models/account_invoice_print.py:114
 #, python-format
 msgid "A report for invoices is available."
 msgstr "Un rapport de factures est disponible."
 
 #. module: account_invoice_sent
-#: code:addons/account_invoice_sent/wizards/account_invoice_state.py:62
+#: code:addons/account_invoice_sent/wizards/account_invoice_state.py:56
 #, python-format
 msgid "A report will be generated in background."
 msgstr "Un rapport va être généré en tâche de fond."
@@ -152,9 +152,9 @@ msgid "Invoice sending method"
 msgstr "Méthode d'envoi de facture"
 
 #. module: account_invoice_sent
-#: code:addons/account_invoice_sent/models/account_invoice.py:68
-#: code:addons/account_invoice_sent/models/account_invoice_print.py:54
-#: code:addons/account_invoice_sent/wizards/account_invoice_state.py:92
+#: code:addons/account_invoice_sent/models/account_invoice.py:62
+#: code:addons/account_invoice_sent/models/account_invoice_print.py:50
+#: code:addons/account_invoice_sent/wizards/account_invoice_state.py:83
 #, python-format
 msgid "Invoice sent"
 msgstr "Facture envoyée"
@@ -170,7 +170,7 @@ msgid "Invoices Mass Sending"
 msgstr "Envoi en masse de factures"
 
 #. module: account_invoice_sent
-#: code:addons/account_invoice_sent/wizards/account_invoice_state.py:78
+#: code:addons/account_invoice_sent/wizards/account_invoice_state.py:70
 #, python-format
 msgid "Invoices will be send by email in background."
 msgstr "Des factures vont être envoyer par courriel en tâche de fond."
