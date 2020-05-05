@@ -332,6 +332,8 @@ class RoundInstance(models.Model):
                 "fixedLoadingDuration": fixed_loading_duration,
                 "loadBeforeDeparture": True,
                 "noReload": True,
+                "globalCapacity": 9999,
+                "useAllCapacities": False,
             }
         ]
 
