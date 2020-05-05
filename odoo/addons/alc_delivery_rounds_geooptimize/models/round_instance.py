@@ -114,14 +114,8 @@ class RoundInstance(models.Model):
     @api.depends("shipping_ids")
     def _compute_warehouse_id(self):
         for record in self:
-            locations = record.mapped("shipping_ids.location_dest_id")
-            warehouse_ids = {l.get_warehouse().id for l in locations}
-            if len(warehouse_ids) > 1:
-                raise ValueError(
-                    "The delivery round %S contains pickings for more than"
-                    " one warehouse" % record.display_name
-                )
-            record.warehouse_id = self.env["stock.warehouse"].browse(warehouse_ids)
+            warehouse_id = record.picking_ids[0].location_id.get_warehouse().id
+            record.warehouse_id = self.env["stock.warehouse"].browse(warehouse_id)
 
     @api.model
     def create(self, vals):
