@@ -178,6 +178,7 @@ class RoundInstance(models.Model):
                         "geo_optimization_start_dt": fields.Datetime.now(),
                         "geo_optimization_status": "undefined",
                         "geo_optimization_result": False,
+                        "geo_optimization_error_message": False,
                     }
                 )
                 record._delay_check_optimization_status(
@@ -417,6 +418,7 @@ class RoundInstance(models.Model):
         Return json content if OK otherwise False
         """
         try:
+            self.geo_optimization_error_message = False
             response.raise_for_status()
         except requests.HTTPError as http_error:
             self.geo_optimization_error_message = http_error.message
