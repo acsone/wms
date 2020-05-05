@@ -6,7 +6,7 @@
     "name": "Alc Delivery Rounds Geooptimize",
     "description": """
         Alcyon: Geo Optimize Delivery Rounds""",
-    "version": "10.0.1.0.0",
+    "version": "10.0.1.0.1",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
