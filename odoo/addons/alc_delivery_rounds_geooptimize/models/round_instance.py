@@ -56,9 +56,7 @@ class RoundInstance(models.Model):
         readonly=True,
         compute="_compute_geo_optimization_state",
     )
-    geo_optimization_enabled = fields.Boolean(
-        "Enable geo optimization", default=lambda a: a.get_optimization_config().enabled
-    )
+    geo_optimization_enabled = fields.Boolean("Enable geo optimization")
     geo_optimization_result = fields.Binary(attachment=True, readonly=True)
 
     geo_optimization_json = fields.Serialized(compute="_compute_geo_optimization_json")
@@ -124,10 +122,33 @@ class RoundInstance(models.Model):
                 )
             record.warehouse_id = self.env["stock.warehouse"].browse(warehouse_ids)
 
+    @api.model
+    def create(self, vals):
+        if "geo_optimization_enabled" not in vals and "template_id" in vals:
+            vals["geo_optimization_enabled"] = (
+                self.env["round.template"]
+                .browse(vals["template_id"])
+                .geo_optimization_enabled
+            )
+        return super(RoundInstance, self).create(vals)
+
+    @api.onchange("template_id")
+    def onchange_template_id(self):
+        super(RoundInstance, self).onchange_template_id()
+        for record in self:
+            record.geo_optimization_enabled = (
+                record.template_id.geo_optimization_enabled
+            )
+
     def _deliver(self, background=True):
-        self.filtered("geo_optimization_enabled")._geo_optimize()
+        self.filtered(lambda a: a._is_geo_optimization_enabled())._geo_optimize()
         res = super(RoundInstance, self)._deliver(background=background)
         return res
+
+    @api.multi
+    def _is_geo_optimization_enabled(self):
+        self.ensure_one()
+        return self.geo_optimization_enabled and self.get_optimization_config().enabled
 
     @api.multi
     def _get_sorted_shipping_ids(self):
@@ -174,7 +195,7 @@ class RoundInstance(models.Model):
         for record in self:
             if not record.state == "done":
                 continue
-            if record.geo_optimization_enabled:
+            if record._is_geo_optimization_enabled():
                 if not record.geo_optimization_state:
                     # optimization not launched; relaunch
                     self._geo_optimize()
@@ -191,7 +212,7 @@ class RoundInstance(models.Model):
     @job(default_channel="root.background.stock_picking_deliver")
     @api.multi
     def recheck_delivery_state(self):
-        to_optimize = self.filtered("geo_optimization_enabled")
+        to_optimize = self.filtered(lambda a: a._is_geo_optimization_enabled())
         super(RoundInstance, self - to_optimize).recheck_delivery_state()
         for record in to_optimize:
             if not record._is_all_customer_delivered():
