@@ -110,7 +110,7 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
     ):
         res = deque(results)
 
-        def get(url):
+        def get(url, **kwargs):
             result_status_code, result_json_result = res.popleft()
             return _PseudoRequestsResponse(result_status_code, result_json_result)
 

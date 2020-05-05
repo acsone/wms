@@ -368,7 +368,7 @@ class RoundInstance(models.Model):
         status_url = self._get_opitization_api_url(
             action, taskId=self.geo_optimization_task_id
         )
-        response = requests.get(status_url)
+        response = requests.get(status_url, headers={"Accept": "application/json"})
         result = self._check_optimization_response(action, response)
         if result is False:
             return
@@ -390,7 +390,7 @@ class RoundInstance(models.Model):
         result_url = self._get_opitization_api_url(
             action, taskId=self.geo_optimization_task_id
         )
-        response = requests.get(result_url)
+        response = requests.get(result_url, headers={"Accept": "application/json"})
         result = self._check_optimization_response(action, response)
         if result is False:
             return
