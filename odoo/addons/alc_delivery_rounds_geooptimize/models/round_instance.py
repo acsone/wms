@@ -87,9 +87,10 @@ class RoundInstance(models.Model):
     def _compute_geo_optimization_state(self):
         for record in self:
             status = record.geo_optimization_status
+            status = status and status.lower()
             if not status:
                 state = False
-            elif status == "failed":
+            elif status in ("error", "failed"):
                 state = "error"
             elif status == "aborted":
                 state = "cancelled"
@@ -377,6 +378,8 @@ class RoundInstance(models.Model):
             self._delay_check_optimization_status(eta_delay_seconds=20)
         elif self.geo_optimization_state == "success":
             self._get_optimization_result()
+        elif self.geo_optimization_state == "error" and result.get("message"):
+            self.geo_optimization_error_message = result["message"]
         self.recheck_delivery_state()
 
     def _get_optimization_result(self):
