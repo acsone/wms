@@ -125,7 +125,7 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
         """
         expected_result = {
             "status": "OK",
-            "plannedOrders": [{"stopId": p.id} for p in partner_ids],
+            "plannedOrders": [{"stopId": "%s" % p.id} for p in partner_ids],
         }
         with self.api_post_optimize(
             200, {"taskId": "123", "status": "OK"}
@@ -301,8 +301,8 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
                 {
                     "status": "OK",
                     "plannedOrders": [
-                        {"stopId": self.partner1.id},
-                        {"stopId": self.partner2.id},
+                        {"stopId": "%s" % self.partner1.id},
+                        {"stopId": "%s" % self.partner2.id},
                     ],
                 },
             ),
@@ -337,11 +337,11 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
                 {
                     "status": "OK",
                     "plannedOrders": [
-                        {"stopId": self.partner1.id},
-                        {"stopId": self.partner2.id},
-                        {"stopId": self.partner3.id},
-                        {"stopId": 4},
-                        {"stopId": 5},
+                        {"stopId": "%s" % self.partner1.id},
+                        {"stopId": "%s" % self.partner2.id},
+                        {"stopId": "%s" % self.partner3.id},
+                        {"stopId": "4"},
+                        {"stopId": "5"},
                     ],
                 },
             ),
@@ -370,9 +370,9 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
         expected_result = {
             "status": "OK",
             "plannedOrders": [
-                {"stopId": self.partner2.id},
-                {"stopId": self.partner1.id},
-                {"stopId": self.partner3.id},
+                {"stopId": "%s" % self.partner2.id},
+                {"stopId": "%s" % self.partner1.id},
+                {"stopId": "%s" % self.partner3.id},
             ],
         }
         with self.api_post_optimize(
@@ -592,9 +592,9 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
         expected_result = {
             "status": "OK",
             "plannedOrders": [
-                {"stopId": self.partner2.id},
-                {"stopId": self.partner1.id},
-                {"stopId": self.partner3.id},
+                {"stopId": "%s" % self.partner2.id},
+                {"stopId": "%s" % self.partner1.id},
+                {"stopId": "%s" % self.partner3.id},
             ],
         }
         with self.api_post_optimize(
@@ -651,9 +651,9 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
         expected_result = {
             "status": "OK",
             "plannedOrders": [
-                {"stopId": self.partner2.id},
-                {"stopId": self.partner1.id},
-                {"stopId": self.partner3.id},
+                {"stopId": "%s" % self.partner2.id},
+                {"stopId": "%s" % self.partner1.id},
+                {"stopId": "%s" % self.partner3.id},
             ],
         }
         with self.api_post_optimize(

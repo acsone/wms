@@ -460,7 +460,9 @@ class RoundInstance(models.Model):
         """
         self.ensure_one()
         expected_partners = set(self.shipping_ids.mapped("partner_id").ids)
-        received_partners = {int(o["stopId"]) for o in result["plannedOrders"]}
+        received_partners = {
+            int(o["stopId"]) for o in result["plannedOrders"] if o["stopId"].isdigit()
+        }
         missing_partners = self.env["res.partner"].browse(
             list(expected_partners - received_partners)
         )
