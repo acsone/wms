@@ -58,6 +58,7 @@ class RoundInstance(models.Model):
     )
     geo_optimization_enabled = fields.Boolean("Enable geo optimization")
     geo_optimization_result = fields.Binary(attachment=True, readonly=True)
+    geo_optimization_request = fields.Binary(attachment=True, readonly=True)
 
     geo_optimization_json = fields.Serialized(compute="_compute_geo_optimization_json")
     geo_optimization_error_message = fields.Text("Optimization error message")
@@ -179,6 +180,9 @@ class RoundInstance(models.Model):
                         "geo_optimization_status": "undefined",
                         "geo_optimization_result": False,
                         "geo_optimization_error_message": False,
+                        "geo_optimization_request": base64.b64encode(
+                            json.dumps(optimization_request)
+                        ),
                     }
                 )
                 record._delay_check_optimization_status(

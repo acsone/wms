@@ -20,6 +20,7 @@
                         <field name="geo_optimization_start_dt"/>
                         <field name="geo_optimization_status"/>
                         <field name="geo_optimization_state"/>
+                        <field name="geo_optimization_request"/>
                         <field name="geo_optimization_result"/>
                         <field name="geo_optimization_error_message"/>
                     </group>
