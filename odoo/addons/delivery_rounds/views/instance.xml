@@ -71,7 +71,7 @@
                                     </div>
                                 </div>
                                 <div class="row" style="margin-top:130px">
-                                    <div class="col-xs-12 o_kanban_primary_bottom" t-att-style="'background-color: ' + (record.state.raw_value=='draft' and 'lightgreen' or record.state.raw_value=='close' and 'lightsalmon' or record.state.raw_value=='pending' and 'sandybrown' or 'lightgray')">
+                                    <div name="pickings_progress" class="col-xs-12 o_kanban_primary_bottom" t-att-style="'background-color: ' + (record.state.raw_value=='draft' and 'lightgreen' or record.state.raw_value=='close' and 'lightsalmon' or record.state.raw_value=='pending' and 'sandybrown' or 'lightgray')">
                                         <button class="btn btn-picking" name="action_picking_tree_available" type="object">
                                             <field name="count_picking_done_total" widget="progress" title="Pickings" options="{'current_value': 'count_picking_done_total', 'max_value': 'count_picking_available_total'}"/>
                                         </button>
