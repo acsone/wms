@@ -268,7 +268,7 @@ class RoundInstance(models.Model):
             {
                 "x": address.partner_longitude,
                 "y": address.partner_latitude,
-                "id": address.id,
+                "id": "dep_%s" % address.id,
             }
         ]
 
@@ -318,6 +318,7 @@ class RoundInstance(models.Model):
         fixed_loading_duration = "%02d:%02d:00" % (h, m)
         return [
             {
+                "id": address.id,
                 "startX": address.partner_longitude,
                 "startY": address.partner_latitude,
                 "endX": address.partner_longitude,
