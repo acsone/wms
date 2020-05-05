@@ -184,6 +184,7 @@ class RoundInstance(models.Model):
                 record._delay_check_optimization_status(
                     eta_delay_seconds=cfg.duration + 10
                 )
+                record.recheck_delivery_state()
 
     @api.multi
     def button_done(self):
