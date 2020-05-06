@@ -20,6 +20,7 @@
                         <field name="geo_optimization_start_dt"/>
                         <field name="geo_optimization_status"/>
                         <field name="geo_optimization_state"/>
+                        <field name="geo_optimization_request"/>
                         <field name="geo_optimization_result"/>
                         <field name="geo_optimization_error_message"/>
                     </group>
@@ -44,6 +45,9 @@
         <field name="inherit_id"
                ref="delivery_rounds.view_round_instance_kanban"/>
         <field name="arch" type="xml">
+            <xpath expr="//div[@name='pickings_progress']" position="attributes">
+                <attribute name="t-att-style">'background-color: ' + (record.state.raw_value=='draft' and 'lightgreen' or record.state.raw_value=='close' and 'lightsalmon' or record.state.raw_value=='pending' and 'sandybrown' or record.state.raw_value=='optimizing' and 'deepskyblue' or record.state.raw_value=='optimization_failure' and 'red' or 'lightgray')</attribute>
+            </xpath>
             <xpath expr="//a[@name='button_deliver']/parent::div"
                    position="after">
                 <div>

@@ -56,10 +56,9 @@ class RoundInstance(models.Model):
         readonly=True,
         compute="_compute_geo_optimization_state",
     )
-    geo_optimization_enabled = fields.Boolean(
-        "Enable geo optimization", default=lambda a: a.get_optimization_config().enabled
-    )
+    geo_optimization_enabled = fields.Boolean("Enable geo optimization")
     geo_optimization_result = fields.Binary(attachment=True, readonly=True)
+    geo_optimization_request = fields.Binary(attachment=True, readonly=True)
 
     geo_optimization_json = fields.Serialized(compute="_compute_geo_optimization_json")
     geo_optimization_error_message = fields.Text("Optimization error message")
@@ -89,9 +88,10 @@ class RoundInstance(models.Model):
     def _compute_geo_optimization_state(self):
         for record in self:
             status = record.geo_optimization_status
+            status = status and status.lower()
             if not status:
                 state = False
-            elif status == "failed":
+            elif status in ("error", "failed"):
                 state = "error"
             elif status == "aborted":
                 state = "cancelled"
@@ -115,19 +115,36 @@ class RoundInstance(models.Model):
     @api.depends("shipping_ids")
     def _compute_warehouse_id(self):
         for record in self:
-            locations = record.mapped("shipping_ids.location_dest_id")
-            warehouse_ids = {l.get_warehouse().id for l in locations}
-            if len(warehouse_ids) > 1:
-                raise ValueError(
-                    "The delivery round %S contains pickings for more than"
-                    " one warehouse" % record.display_name
-                )
-            record.warehouse_id = self.env["stock.warehouse"].browse(warehouse_ids)
+            warehouse_id = record.picking_ids[0].location_id.get_warehouse().id
+            record.warehouse_id = self.env["stock.warehouse"].browse(warehouse_id)
+
+    @api.model
+    def create(self, vals):
+        if "geo_optimization_enabled" not in vals and "template_id" in vals:
+            vals["geo_optimization_enabled"] = (
+                self.env["round.template"]
+                .browse(vals["template_id"])
+                .geo_optimization_enabled
+            )
+        return super(RoundInstance, self).create(vals)
+
+    @api.onchange("template_id")
+    def onchange_template_id(self):
+        super(RoundInstance, self).onchange_template_id()
+        for record in self:
+            record.geo_optimization_enabled = (
+                record.template_id.geo_optimization_enabled
+            )
 
     def _deliver(self, background=True):
-        self.filtered("geo_optimization_enabled")._geo_optimize()
+        self.filtered(lambda a: a._is_geo_optimization_enabled())._geo_optimize()
         res = super(RoundInstance, self)._deliver(background=background)
         return res
+
+    @api.multi
+    def _is_geo_optimization_enabled(self):
+        self.ensure_one()
+        return self.geo_optimization_enabled and self.get_optimization_config().enabled
 
     @api.multi
     def _get_sorted_shipping_ids(self):
@@ -162,11 +179,16 @@ class RoundInstance(models.Model):
                         "geo_optimization_start_dt": fields.Datetime.now(),
                         "geo_optimization_status": "undefined",
                         "geo_optimization_result": False,
+                        "geo_optimization_error_message": False,
+                        "geo_optimization_request": base64.b64encode(
+                            json.dumps(optimization_request)
+                        ),
                     }
                 )
                 record._delay_check_optimization_status(
                     eta_delay_seconds=cfg.duration + 10
                 )
+                record.recheck_delivery_state()
 
     @api.multi
     def button_done(self):
@@ -174,7 +196,7 @@ class RoundInstance(models.Model):
         for record in self:
             if not record.state == "done":
                 continue
-            if record.geo_optimization_enabled:
+            if record._is_geo_optimization_enabled():
                 if not record.geo_optimization_state:
                     # optimization not launched; relaunch
                     self._geo_optimize()
@@ -191,7 +213,7 @@ class RoundInstance(models.Model):
     @job(default_channel="root.background.stock_picking_deliver")
     @api.multi
     def recheck_delivery_state(self):
-        to_optimize = self.filtered("geo_optimization_enabled")
+        to_optimize = self.filtered(lambda a: a._is_geo_optimization_enabled())
         super(RoundInstance, self - to_optimize).recheck_delivery_state()
         for record in to_optimize:
             if not record._is_all_customer_delivered():
@@ -225,6 +247,32 @@ class RoundInstance(models.Model):
         records.write({"geo_optimization_enabled": False})
         records._deliver()
 
+    @api.multi
+    def _get_partners_to_deliver(self):
+        """
+        Return the list of partners who will be delivered.
+        We takes as predicate that a partner for which at least one move into
+        a picking 'PICK' is done will be delivered
+        """
+        self.ensure_one()
+        sql = """
+            SELECT
+                distinct sp.partner_id
+            FROM
+                stock_picking sp,
+                stock_picking_type spt,
+                stock_move sm
+            WHERE
+                sm.picking_id = sp.id
+                AND sp.picking_type_id = spt.id
+                AND spt.subcode='PICK'
+                AND sp.delivery_round_id = %s
+                AND sm.state='done'
+        """
+        self.env.cr.execute(sql, (self.id,))
+        ids = [i[0] for i in self.env.cr.fetchall()]
+        return self.env["res.partner"].browse(ids)
+
     def _generate_optimization_request(self):
         """Generate the JSON optimization request conform to
         https://geoservices.geoconcept.com/ToursolverCloud/
@@ -250,13 +298,13 @@ class RoundInstance(models.Model):
             {
                 "x": address.partner_longitude,
                 "y": address.partner_latitude,
-                "id": address.id,
+                "id": "dep_%s" % address.id,
             }
         ]
 
     def _generate_optimization_orders(self, cfg):
         ret = []
-        partners = self.mapped("shipping_ids.partner_id")
+        partners = self._get_partners_to_deliver()
         delivery_windows_by_partner_id = partners.get_delivery_windows(
             "%s" % datetime.today().weekday()
         )
@@ -300,6 +348,7 @@ class RoundInstance(models.Model):
         fixed_loading_duration = "%02d:%02d:00" % (h, m)
         return [
             {
+                "id": address.id,
                 "startX": address.partner_longitude,
                 "startY": address.partner_latitude,
                 "endX": address.partner_longitude,
@@ -309,6 +358,8 @@ class RoundInstance(models.Model):
                 "fixedLoadingDuration": fixed_loading_duration,
                 "loadBeforeDeparture": True,
                 "noReload": True,
+                "globalCapacity": 9999,
+                "useAllCapacities": False,
             }
         ]
 
@@ -347,7 +398,7 @@ class RoundInstance(models.Model):
         status_url = self._get_opitization_api_url(
             action, taskId=self.geo_optimization_task_id
         )
-        response = requests.get(status_url)
+        response = requests.get(status_url, headers={"Accept": "application/json"})
         result = self._check_optimization_response(action, response)
         if result is False:
             return
@@ -356,6 +407,8 @@ class RoundInstance(models.Model):
             self._delay_check_optimization_status(eta_delay_seconds=20)
         elif self.geo_optimization_state == "success":
             self._get_optimization_result()
+        elif self.geo_optimization_state == "error" and result.get("message"):
+            self.geo_optimization_error_message = result["message"]
         self.recheck_delivery_state()
 
     def _get_optimization_result(self):
@@ -369,7 +422,7 @@ class RoundInstance(models.Model):
         result_url = self._get_opitization_api_url(
             action, taskId=self.geo_optimization_task_id
         )
-        response = requests.get(result_url)
+        response = requests.get(result_url, headers={"Accept": "application/json"})
         result = self._check_optimization_response(action, response)
         if result is False:
             return
@@ -399,6 +452,7 @@ class RoundInstance(models.Model):
         Return json content if OK otherwise False
         """
         try:
+            self.geo_optimization_error_message = False
             response.raise_for_status()
         except requests.HTTPError as http_error:
             self.geo_optimization_error_message = http_error.message
@@ -431,8 +485,10 @@ class RoundInstance(models.Model):
         Check that all the shiping's partner are into the optimization result
         """
         self.ensure_one()
-        expected_partners = set(self.shipping_ids.mapped("partner_id").ids)
-        received_partners = {int(o["stopId"]) for o in result["plannedOrders"]}
+        expected_partners = set(self._get_partners_to_deliver().ids)
+        received_partners = {
+            int(o["stopId"]) for o in result["plannedOrders"] if o["stopId"].isdigit()
+        }
         missing_partners = self.env["res.partner"].browse(
             list(expected_partners - received_partners)
         )

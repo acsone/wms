@@ -18,7 +18,11 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
     @classmethod
     def setUpClass(cls):
         super(TestRoundInstance, cls).setUpClass()
-        cls.env = cls.env(context=dict(cls.env.context, test_queue_job_no_delay=True))
+        cls.env = cls.env(
+            context=dict(
+                cls.env.context, test_queue_job_no_delay=True, mail_notrack=True
+            )
+        )
         cls.delivery_round_1 = cls.delivery_round_1.with_context(cls.env.context)
         cls.StockConfigSettings = cls.env["stock.config.settings"]
         cls.StockConfigSettings.create(
@@ -65,8 +69,9 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
         pick1.move_lines.write({"state": "done"})
         pick2.move_lines.write({"state": "done"})
         pick3.move_lines.write({"state": "done"})
-
         # at this stage we have a round ready to be delivered
+
+        cls.pick1 = pick1
 
     def setUp(self):
         super(TestRoundInstance, self).setUp()
@@ -110,7 +115,7 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
     ):
         res = deque(results)
 
-        def get(url):
+        def get(url, **kwargs):
             result_status_code, result_json_result = res.popleft()
             return _PseudoRequestsResponse(result_status_code, result_json_result)
 
@@ -125,7 +130,7 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
         """
         expected_result = {
             "status": "OK",
-            "plannedOrders": [{"stopId": p.id} for p in partner_ids],
+            "plannedOrders": [{"stopId": "%s" % p.id} for p in partner_ids],
         }
         with self.api_post_optimize(
             200, {"taskId": "123", "status": "OK"}
@@ -301,8 +306,8 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
                 {
                     "status": "OK",
                     "plannedOrders": [
-                        {"stopId": self.partner1.id},
-                        {"stopId": self.partner2.id},
+                        {"stopId": "%s" % self.partner1.id},
+                        {"stopId": "%s" % self.partner2.id},
                     ],
                 },
             ),
@@ -337,11 +342,11 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
                 {
                     "status": "OK",
                     "plannedOrders": [
-                        {"stopId": self.partner1.id},
-                        {"stopId": self.partner2.id},
-                        {"stopId": self.partner3.id},
-                        {"stopId": 4},
-                        {"stopId": 5},
+                        {"stopId": "%s" % self.partner1.id},
+                        {"stopId": "%s" % self.partner2.id},
+                        {"stopId": "%s" % self.partner3.id},
+                        {"stopId": "4"},
+                        {"stopId": "5"},
                     ],
                 },
             ),
@@ -370,9 +375,9 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
         expected_result = {
             "status": "OK",
             "plannedOrders": [
-                {"stopId": self.partner2.id},
-                {"stopId": self.partner1.id},
-                {"stopId": self.partner3.id},
+                {"stopId": "%s" % self.partner2.id},
+                {"stopId": "%s" % self.partner1.id},
+                {"stopId": "%s" % self.partner3.id},
             ],
         }
         with self.api_post_optimize(
@@ -592,9 +597,9 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
         expected_result = {
             "status": "OK",
             "plannedOrders": [
-                {"stopId": self.partner2.id},
-                {"stopId": self.partner1.id},
-                {"stopId": self.partner3.id},
+                {"stopId": "%s" % self.partner2.id},
+                {"stopId": "%s" % self.partner1.id},
+                {"stopId": "%s" % self.partner3.id},
             ],
         }
         with self.api_post_optimize(
@@ -651,9 +656,9 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
         expected_result = {
             "status": "OK",
             "plannedOrders": [
-                {"stopId": self.partner2.id},
-                {"stopId": self.partner1.id},
-                {"stopId": self.partner3.id},
+                {"stopId": "%s" % self.partner2.id},
+                {"stopId": "%s" % self.partner1.id},
+                {"stopId": "%s" % self.partner3.id},
             ],
         }
         with self.api_post_optimize(
@@ -669,6 +674,24 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
         self.assertDictEqual(
             self.delivery_round_1.geo_optimization_json, expected_result
         )
+
+    def test_16(self):
+        """
+        Data:
+            A round for 3 partners ready to be delivered for 2 partners 'pick1 not done'
+        Test case:
+             Call method _generate_optimization_request
+        Expected result:
+            Only partners for pick2 and pick3 must be into the genreated json
+        """
+        self.pick1.move_lines.write({"state": "assigned"})
+        cfg = self.delivery_round_1.get_optimization_config()
+        res = {
+            c["customerId"]
+            for c in self.delivery_round_1._generate_optimization_orders(cfg)
+        }
+        expected = {self.partner2.id, self.partner3.id}
+        self.assertEqual(res, expected)
 
 
 class _PseudoRequestsResponse(object):

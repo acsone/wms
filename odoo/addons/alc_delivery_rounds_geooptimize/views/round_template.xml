@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2020 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+    <record model="ir.ui.view" id="round_template_form_view">
+        <field name="name">round.template.form (in alc_delivery_rounds_geooptimize)</field>
+        <field name="model">round.template</field>
+        <field name="inherit_id" ref="delivery_rounds.view_round_template_form"/>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="geo_optimization_enabled"/>
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="round_template_search_view">
+        <field name="name">round.template.search (in alc_delivery_rounds_geooptimize)</field>
+        <field name="model">round.template</field>
+        <field name="inherit_id" ref="delivery_rounds.view_round_template_search"/>
+        <field name="arch" type="xml">
+            <field name="tag_ids" position="after">
+                <filter name="geooptimized" domain="[('geo_optimization_enabled', '=', True)]" string="Geo Optimized"/>
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="round_template_tree_view">
+        <field name="name">round.template.tree (in alc_delivery_rounds_geooptimize)</field>
+        <field name="model">round.template</field>
+        <field name="inherit_id" ref="delivery_rounds.view_round_template_tree"/>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="geo_optimization_enabled"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>
