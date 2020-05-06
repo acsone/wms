@@ -247,6 +247,32 @@ class RoundInstance(models.Model):
         records.write({"geo_optimization_enabled": False})
         records._deliver()
 
+    @api.multi
+    def _get_partners_to_deliver(self):
+        """
+        Return the list of partners who will be delivered.
+        We takes as predicate that a partner for which at least one move into
+        a picking 'PICK' is done will be delivered
+        """
+        self.ensure_one()
+        sql = """
+            SELECT
+                distinct sp.partner_id
+            FROM
+                stock_picking sp,
+                stock_picking_type spt,
+                stock_move sm
+            WHERE
+                sm.picking_id = sp.id
+                AND sp.picking_type_id = spt.id
+                AND spt.subcode='PICK'
+                AND sp.delivery_round_id = %s
+                AND sm.state='done'
+        """
+        self.env.cr.execute(sql, (self.id,))
+        ids = [i[0] for i in self.env.cr.fetchall()]
+        return self.env["res.partner"].browse(ids)
+
     def _generate_optimization_request(self):
         """Generate the JSON optimization request conform to
         https://geoservices.geoconcept.com/ToursolverCloud/
@@ -278,7 +304,7 @@ class RoundInstance(models.Model):
 
     def _generate_optimization_orders(self, cfg):
         ret = []
-        partners = self.mapped("shipping_ids.partner_id")
+        partners = self._get_partners_to_deliver()
         delivery_windows_by_partner_id = partners.get_delivery_windows(
             "%s" % datetime.today().weekday()
         )
@@ -459,7 +485,7 @@ class RoundInstance(models.Model):
         Check that all the shiping's partner are into the optimization result
         """
         self.ensure_one()
-        expected_partners = set(self.shipping_ids.mapped("partner_id").ids)
+        expected_partners = set(self._get_partners_to_deliver().ids)
         received_partners = {
             int(o["stopId"]) for o in result["plannedOrders"] if o["stopId"].isdigit()
         }
