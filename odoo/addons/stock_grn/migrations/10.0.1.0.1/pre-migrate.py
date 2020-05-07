@@ -22,7 +22,7 @@ def migrate(cr, version):
     """
     )
     if cr.fetchall():
-        _logger.into("Column already exists; Skip!")
+        _logger.info("Column already exists; Skip!")
         return
 
     cr.execute(
