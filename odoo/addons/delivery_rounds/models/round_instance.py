@@ -841,7 +841,7 @@ class RoundInstanceCustomer(models.Model):
     def _remove_if_empty(self):
         """ Remove partner from round instance if no more pickings or all
         canceled """
-        if not self.mapped("picking_ids").filtered(lambda p: p.state != "cancel"):
+        if self and not self.mapped("picking_ids").filtered(lambda p: p.state != "cancel"):
             _logger.debug(
                 "Removing customers %s from round instance %s",
                 self.mapped("partner_id").ids,
@@ -927,6 +927,7 @@ class RoundInstanceCustomer(models.Model):
             # user intervention. The record will be marked
             # as failed, users will see it on the round and be able
             # to retry to deliver manually.
+            self.env.clear()
             self.delivery_error = err.name
         except Exception as err:
             _logger.exception(
@@ -934,6 +935,7 @@ class RoundInstanceCustomer(models.Model):
                 "with an unexpected error: %s",
                 unicode(err),
             )
+            self.env.clear()
             self.delivery_error = _("Unexpected error (%s)") % unicode(err)
 
     @job(  # noqa: C901
@@ -957,17 +959,20 @@ class RoundInstanceCustomer(models.Model):
         )
         # when a job is executing, we get this key in the context
         background = self.env.context.get("job_uuid") and not config["test_enable"]
-        with self._handle_delivery_error(), self._new_env(
-            new_cr=not config["test_enable"]
-        ) as new_env:
+        delivery_round = self.delivery_round_id
+
+        with self._handle_delivery_error(), self.env.cr.savepoint():
+            pickings = self.env["stock.picking"]
+            shippings = self.env["stock.picking"]
+            for pick in self.picking_ids:
+                if pick.state in ["cancel", "done"]:
+                    continue
+                elif pick.picking_type_id.subcode == "PICK":
+                    pickings |= pick
+                elif pick.picking_type_id.code == 'outgoing':
+                    shippings |= pick
+
             # check there is no ongoing picking
-            pickings = new_env["stock.picking"].search(
-                [
-                    ("state", "not in", ("cancel", "done")),
-                    ("picking_type_id.subcode", "=", "PICK"),
-                    ("delivery_round_customer_id", "=", self.id),
-                ]
-            )
             ongoing_pickings = pickings.filtered(
                 lambda p: p.printed or any(op.qty_done for op in p.pack_operation_ids)
             )
@@ -977,19 +982,8 @@ class RoundInstanceCustomer(models.Model):
                     % (", ".join(ongoing_pickings.mapped("name")))
                 )
 
-            new_env["round.instance.customer"].browse(self.id).write(
-                {"delivered": True, "delivery_error": ""}
-            )
+            self.write({"delivered": True, "delivery_error": ""})
 
-            # change the env to the new env so everything happening
-            # will be rollbacked by the context manager in case of error
-            shippings = new_env["stock.picking"].search(
-                [
-                    ("state", "not in", ("cancel", "done")),
-                    ("picking_type_id.code", "=", "outgoing"),
-                    ("delivery_round_customer_id", "=", self.id),
-                ]
-            )
             # FIXME: should be moved out of delivery_round module and applied in do_transfer
             if self.partner_id.is_sale_back_order_cancel:
                 shippings = shippings.with_context(cancel_backorder=True)
@@ -1041,12 +1035,8 @@ class RoundInstanceCustomer(models.Model):
             # and this causes the deletion of the round instance customer (see
             # stock.move action_cancel). So to access the pickings from self,
             # we first need to check if self still exists.
-            if self.with_env(new_env).exists():
-                pickings = (
-                    self.with_env(new_env)
-                    .mapped("picking_ids")
-                    .filtered(lambda p: p.state not in ("cancel", "done"))
-                )
+            if self.exists():
+                pickings = self.picking_ids.filtered(lambda p: p.state not in ("cancel", "done"))
                 pickings.with_context(tracking_disable=True).write({"printed": True})
                 pickings.with_context(no_new_picking=True)._create_backorder()
                 _logger.debug(
@@ -1070,27 +1060,28 @@ class RoundInstanceCustomer(models.Model):
             # Ensure any backorder is reassigned
             shippings._delay_jobs_action_assign(shippings.mapped("partner_id"))
 
-            if self.delivery_round_id.state == "delivering":
-                self.delivery_round_id.with_delay(priority=5).recheck_delivery_state()
-
-            if self.delivery_error:
-                if background:
-                    # write a result to the job
-                    message = _(
-                        "Should be delivered manually, could not"
-                        " deliver because of %s" % (self.delivery_error,)
-                    )
-                    return message
-                else:
-                    # if we raise the error using the normal way, the buttons
-                    # on the one2many list stop to work...
-                    self.env.user.notify_warning(
-                        _("Error when delivering %s: %s")
-                        % (self.display_name, self.delivery_error)
-                    )
             # If this customer do not have any linked picking, remove it
             # We perform this step at last to prevent Missing record error
-            self.with_env(new_env)._remove_if_empty()
+            self._remove_if_empty()
+
+        if delivery_round.state == "delivering":
+            delivery_round.with_delay(priority=5).recheck_delivery_state()
+
+        if self.exists() and self.delivery_error:
+            if background:
+                # write a result to the job
+                message = _(
+                    "Should be delivered manually, could not"
+                    " deliver because of %s" % (self.delivery_error,)
+                )
+                return message
+            else:
+                # if we raise the error using the normal way, the buttons
+                # on the one2many list stop to work...
+                self.env.user.notify_warning(
+                    _("Error when delivering %s: %s")
+                    % (self.display_name, self.delivery_error)
+                    )
 
     def _deliver(self, background=True):
         """ Validate all shipping orders that are available
