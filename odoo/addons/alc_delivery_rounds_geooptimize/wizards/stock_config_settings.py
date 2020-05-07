@@ -9,7 +9,7 @@ from odoo.tools import ormcache
 
 OptimizationConfig = namedtuple(
     "OptimizationConfig",
-    "enabled,api_url,api_key,duration,delivery_duration,loading_duration",
+    "enabled,api_url,api_key,duration,delivery_duration,loading_duration,resources_number",
 )
 
 
@@ -31,6 +31,10 @@ class StockConfigSettings(models.TransientModel):
 
     geo_optimization_loading_duration = fields.Integer(
         "Fixed initial loading time", help="Loading time in minutes"
+    )
+    geo_optimization_resources_number = fields.Integer(
+        "Number of available resource",
+        help="Resource into geoconcept must be named as D1, D2, ....",
     )
 
     @api.model
@@ -63,6 +67,12 @@ class StockConfigSettings(models.TransientModel):
                 "45",
             )
         )
+        resources_number = int(
+            IrConfigParameter.get_param(
+                "alc_delivery_rounds_geooptimize.geo_optimization_resources_number",
+                "45",
+            )
+        )
 
         return OptimizationConfig(
             enabled=enabled,
@@ -71,6 +81,7 @@ class StockConfigSettings(models.TransientModel):
             duration=duration,
             delivery_duration=delivery_duration,
             loading_duration=loading_duration,
+            resources_number=resources_number,
         )
 
     @api.model
@@ -89,6 +100,8 @@ class StockConfigSettings(models.TransientModel):
             res["geo_optimization_delivery_duration"] = cfg.delivery_duration
         if "geo_optimization_loading_duration" in fields or not fields:
             res["geo_optimization_loading_duration"] = cfg.loading_duration
+        if "geo_optimization_resources_number" in fields or not fields:
+            res["geo_optimization_resources_number"] = cfg.resources_number
         return res
 
     @api.multi
@@ -143,4 +156,13 @@ class StockConfigSettings(models.TransientModel):
         self.env["ir.config_parameter"].set_param(
             "alc_delivery_rounds_geooptimize.geo_optimization_loading_duration",
             self.geo_optimization_loading_duration or "45",
+        )
+
+    @api.multi
+    def set_geo_optimization_resources_number(self):
+        self.ensure_one()
+
+        self.env["ir.config_parameter"].set_param(
+            "alc_delivery_rounds_geooptimize.geo_optimization_resources_number",
+            self.geo_optimization_resources_number or "10",
         )

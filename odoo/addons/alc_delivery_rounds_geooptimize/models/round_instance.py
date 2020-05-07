@@ -14,6 +14,7 @@ import requests
 
 from odoo import _, api, fields, models
 from odoo.addons.queue_job.job import job
+from odoo.exceptions import ValidationError
 
 _logger = logging.getLogger(__name__)
 
@@ -57,6 +58,9 @@ class RoundInstance(models.Model):
         compute="_compute_geo_optimization_state",
     )
     geo_optimization_enabled = fields.Boolean("Enable geo optimization")
+    geo_optimization_resource_id = fields.Selection(
+        selection="_selection_geo_optimization_resource_id"
+    )
     geo_optimization_result = fields.Binary(attachment=True, readonly=True)
     geo_optimization_request = fields.Binary(attachment=True, readonly=True)
 
@@ -72,6 +76,21 @@ class RoundInstance(models.Model):
     warehouse_id = fields.Many2one(
         comodel_name="stock.warehouse", compute="_compute_warehouse_id"
     )
+
+    @api.model
+    def _selection_geo_optimization_resource_id(self):
+        return self.env["round.template"]._selection_geo_optimization_resource_id()
+
+    @api.constrains("geo_optimization_enabled", "geo_optimization_resource_id")
+    def _check_geo_optimization_resource_id(self):
+        for rec in self:
+            if rec.geo_optimization_enabled and not rec.geo_optimization_resource_id:
+                raise ValidationError(
+                    _(
+                        "A resource identifier is required if geo_optimization is enabled for %s"
+                    )
+                    % rec.display_name
+                )
 
     @api.depends("geo_optimization_result")
     def _compute_geo_optimization_json(self):
@@ -121,11 +140,9 @@ class RoundInstance(models.Model):
     @api.model
     def create(self, vals):
         if "geo_optimization_enabled" not in vals and "template_id" in vals:
-            vals["geo_optimization_enabled"] = (
-                self.env["round.template"]
-                .browse(vals["template_id"])
-                .geo_optimization_enabled
-            )
+            template = self.env["round.template"].browse(vals["template_id"])
+            vals["geo_optimization_enabled"] = template.geo_optimization_enabled
+            vals["geo_optimization_resource_id"] = template.geo_optimization_resource_id
         return super(RoundInstance, self).create(vals)
 
     @api.onchange("template_id")
@@ -348,7 +365,7 @@ class RoundInstance(models.Model):
         fixed_loading_duration = "%02d:%02d:00" % (h, m)
         return [
             {
-                "id": address.id,
+                "id": self.geo_optimization_resource_id,
                 "startX": address.partner_longitude,
                 "startY": address.partner_latitude,
                 "endX": address.partner_longitude,

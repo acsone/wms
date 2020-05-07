@@ -12,6 +12,7 @@ from requests.exceptions import HTTPError
 
 import mock
 from odoo.addons.delivery_rounds.tests import common
+from odoo.exceptions import ValidationError
 
 
 class TestRoundInstance(common.DeliveryRoundTestCase):
@@ -33,9 +34,12 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
                 "geo_optimization_duration": 1,
                 "geo_optimization_delivery_duration": 10,
                 "geo_optimization_loading_duration": 100,
+                "geo_optimization_resources_number": 1,
             }
         ).execute()
-        cls.delivery_round_1.geo_optimization_enabled = True
+        cls.delivery_round_1.write(
+            {"geo_optimization_enabled": True, "geo_optimization_resource_id": "D1"}
+        )
 
         cls.partner1.write({"partner_latitude": 10.1, "partner_longitude": 10.1})
         cls.partner2.write({"partner_latitude": 10.2, "partner_longitude": 10.2})
@@ -692,6 +696,67 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
         }
         expected = {self.partner2.id, self.partner3.id}
         self.assertEqual(res, expected)
+
+    def test_17(self):
+        """
+        Data:
+            An round template
+        Test Case:
+            Set geo_optimization_enabled True
+        Expected Result:
+            ValidationError is raised since geo_optimization_resource_id is not set
+        """
+        template = self.delivery_template
+        template.write(
+            {"geo_optimization_enabled": False, "geo_optimization_resource_id": False}
+        )
+        with self.assertRaises(ValidationError):
+            template.geo_optimization_enabled = True
+        template.write(
+            {"geo_optimization_enabled": True, "geo_optimization_resource_id": "D1"}
+        )
+
+    def test_18(self):
+        """
+        Data:
+            An round instance
+        Test Case:
+            Set geo_optimization_enabled True
+        Expected Result:
+            ValidationError is raised since geo_optimization_resource_id is not set
+        """
+        round = self.delivery_round_1
+        round.write(
+            {"geo_optimization_enabled": False, "geo_optimization_resource_id": False}
+        )
+        with self.assertRaises(ValidationError):
+            round.geo_optimization_enabled = True
+        round.write(
+            {"geo_optimization_enabled": True, "geo_optimization_resource_id": "D1"}
+        )
+
+    def test_19(self):
+        """
+        Data:
+            A round instance
+            A template instance
+            A configuration with 5 resources number available
+        Test Case:
+            Check that the geo_optimization_resource_id selection is based on
+            the number od available resources
+        """
+        resources_number = (
+            self.delivery_template.get_optimization_config().resources_number
+        )
+        for model in ("round.instance", "round.template"):
+            field = self.env[model]._fields["geo_optimization_resource_id"]
+            self.assertEqual(len(field.get_values(self.env)), resources_number)
+        self.env["ir.config_parameter"].set_param(
+            "alc_delivery_rounds_geooptimize.geo_optimization_resources_number", "10"
+        )
+        for model in ("round.instance", "round.template"):
+            field = self.env[model]._fields["geo_optimization_resource_id"]
+            self.assertEqual(len(field.get_values(self.env)), 10)
 
 
 class _PseudoRequestsResponse(object):

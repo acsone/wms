@@ -16,6 +16,7 @@
                 <page name="optimizations" string="Geo Optimization">
                     <group>
                         <field name="geo_optimization_enabled"/>
+                        <field name="geo_optimization_resource_id" attrs="{'required': [('geo_optimization_enabled', '=', True)]}"/>
                         <field name="geo_optimization_task_id"/>
                         <field name="geo_optimization_start_dt"/>
                         <field name="geo_optimization_status"/>

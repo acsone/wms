@@ -11,6 +11,7 @@
         <field name="arch" type="xml">
             <field name="name" position="after">
                 <field name="geo_optimization_enabled"/>
+                <field name="geo_optimization_resource_id" attrs="{'required': [('geo_optimization_enabled', '=', True)]}"/>
             </field>
         </field>
     </record>
@@ -33,6 +34,7 @@
         <field name="arch" type="xml">
             <field name="name" position="after">
                 <field name="geo_optimization_enabled"/>
+                <field name="geo_optimization_resource_id" attrs="{'required': [('geo_optimization_enabled', '=', True)]}"/>
             </field>
         </field>
     </record>
