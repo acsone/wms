@@ -210,7 +210,7 @@ msgid "Deliver"
 msgstr ""
 
 #. module: delivery_rounds
-#: code:addons/delivery_rounds/models/round_instance.py:1103
+#: code:addons/delivery_rounds/models/round_instance.py:1098
 #, python-format
 msgid "Deliver customer %s of delivery round %s"
 msgstr ""
@@ -362,7 +362,7 @@ msgid "End mileage"
 msgstr ""
 
 #. module: delivery_rounds
-#: code:addons/delivery_rounds/models/round_instance.py:1088
+#: code:addons/delivery_rounds/models/round_instance.py:1086
 #, python-format
 msgid "Error when delivering %s: %s"
 msgstr ""
@@ -555,7 +555,7 @@ msgid "Next execution"
 msgstr ""
 
 #. module: delivery_rounds
-#: code:addons/delivery_rounds/models/round_instance.py:900
+#: code:addons/delivery_rounds/models/round_instance.py:902
 #, python-format
 msgid "No picking have been processed yet"
 msgstr ""
@@ -786,7 +786,7 @@ msgid "Shipping count"
 msgstr ""
 
 #. module: delivery_rounds
-#: code:addons/delivery_rounds/models/round_instance.py:1081
+#: code:addons/delivery_rounds/models/round_instance.py:1079
 #, python-format
 msgid "Should be delivered manually, could not deliver because of %s"
 msgstr ""
@@ -864,7 +864,7 @@ msgid "The picking type determines the picking view"
 msgstr ""
 
 #. module: delivery_rounds
-#: code:addons/delivery_rounds/models/round_instance.py:1117
+#: code:addons/delivery_rounds/models/round_instance.py:1112
 #, python-format
 msgid "The shipping is not part anymore of this delivery round"
 msgstr ""
@@ -911,7 +911,7 @@ msgid "Unassigned Pickings"
 msgstr ""
 
 #. module: delivery_rounds
-#: code:addons/delivery_rounds/models/round_instance.py:937
+#: code:addons/delivery_rounds/models/round_instance.py:941
 #, python-format
 msgid "Unexpected error (%s)"
 msgstr ""
@@ -976,7 +976,7 @@ msgid "You cannot delete a delivery round that has been started"
 msgstr ""
 
 #. module: delivery_rounds
-#: code:addons/delivery_rounds/models/round_instance.py:976
+#: code:addons/delivery_rounds/models/round_instance.py:983
 #, python-format
 msgid "You cannot deliver with ongoing picking(s): %s"
 msgstr ""
