@@ -841,7 +841,9 @@ class RoundInstanceCustomer(models.Model):
     def _remove_if_empty(self):
         """ Remove partner from round instance if no more pickings or all
         canceled """
-        if self and not self.mapped("picking_ids").filtered(lambda p: p.state != "cancel"):
+        if self and not self.mapped("picking_ids").filtered(
+            lambda p: p.state != "cancel"
+        ):
             _logger.debug(
                 "Removing customers %s from round instance %s",
                 self.mapped("partner_id").ids,
@@ -969,7 +971,7 @@ class RoundInstanceCustomer(models.Model):
                     continue
                 elif pick.picking_type_id.subcode == "PICK":
                     pickings |= pick
-                elif pick.picking_type_id.code == 'outgoing':
+                elif pick.picking_type_id.code == "outgoing":
                     shippings |= pick
 
             # check there is no ongoing picking
@@ -1036,7 +1038,9 @@ class RoundInstanceCustomer(models.Model):
             # stock.move action_cancel). So to access the pickings from self,
             # we first need to check if self still exists.
             if self.exists():
-                pickings = self.picking_ids.filtered(lambda p: p.state not in ("cancel", "done"))
+                pickings = self.picking_ids.filtered(
+                    lambda p: p.state not in ("cancel", "done")
+                )
                 pickings.with_context(tracking_disable=True).write({"printed": True})
                 pickings.with_context(no_new_picking=True)._create_backorder()
                 _logger.debug(
@@ -1081,7 +1085,7 @@ class RoundInstanceCustomer(models.Model):
                 self.env.user.notify_warning(
                     _("Error when delivering %s: %s")
                     % (self.display_name, self.delivery_error)
-                    )
+                )
 
     def _deliver(self, background=True):
         """ Validate all shipping orders that are available
