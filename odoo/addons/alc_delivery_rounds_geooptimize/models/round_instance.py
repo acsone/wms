@@ -455,7 +455,7 @@ class RoundInstance(models.Model):
     def _notify_optimization_error(self, message):
         self.env.user.notify_warning(
             message=message,
-            title=_("%s: Optimization failed") % self.display_name,
+            title=_("%s: Optimization api call failed") % self.display_name,
             sticky=True,
         )
 
@@ -489,10 +489,10 @@ class RoundInstance(models.Model):
             return False
         result = response.json()
         if result["status"] == "ERROR":
-            self._notify_optimization_error(self.geo_optimization_error_message)
             self.geo_optimization_error_message = result["message"]
             if not ignoreError:
                 self.geo_optimization_status = "failed"
+            self._notify_optimization_error(self.geo_optimization_error_message)
             return False
         return result
 
@@ -606,6 +606,7 @@ class RoundInstance(models.Model):
             _("Optimization for %s exported to operational planning.")
             % self.display_name
         )
+        return json_request
 
     def _generate_optimization_operational_export_request(self):
         self.ensure_one()
