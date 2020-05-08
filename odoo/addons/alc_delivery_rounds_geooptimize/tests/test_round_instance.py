@@ -764,6 +764,7 @@ class _PseudoRequestsResponse(object):
         self.status_code = status_code
         self.json_result = json_result
         self.reason = "Fake reason for status code %s" % self.status_code
+        self.content = ""
 
     def json(self):
         return self.json_result
