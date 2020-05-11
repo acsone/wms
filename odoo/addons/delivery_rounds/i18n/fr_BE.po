@@ -1001,7 +1001,7 @@ msgstr "Vous ne pouvez pas supprimer une tournée qui est démarrée"
 #: code:addons/delivery_rounds/models/round_instance.py:983
 #, python-format
 msgid "You cannot deliver with ongoing picking(s): %s"
-msgstr "Vous ne pouvez pas livrer une tournée avec des prépratations encours: %s"
+msgstr "Vous ne pouvez pas livrer une tournée avec des préparations en cours: %s"
 
 #. module: delivery_rounds
 #: code:addons/delivery_rounds/models/round_template.py:31
