@@ -173,9 +173,9 @@ class RoundInstance(models.Model):
         shipping_ids = super(RoundInstance, self)._get_sorted_shipping_ids()
         if not self.geo_optimization_json:
             return shipping_ids
-        expected_partner_order = [
-            int(o["stopId"]) for o in self.geo_optimization_json["plannedOrders"]
-        ]
+        expected_partner_order = self._get_planned_partner_ids(
+            self.geo_optimization_json
+        )
         return shipping_ids.sorted(
             lambda r: expected_partner_order.index(r.partner_id.id)
         )
@@ -514,9 +514,7 @@ class RoundInstance(models.Model):
         """
         self.ensure_one()
         expected_partners = set(self._get_partners_to_deliver().ids)
-        received_partners = {
-            int(o["stopId"]) for o in result["plannedOrders"] if o["stopId"].isdigit()
-        }
+        received_partners = set(self._get_planned_partner_ids(result))
         missing_partners = self.env["res.partner"].browse(
             list(expected_partners - received_partners)
         )
@@ -545,6 +543,17 @@ class RoundInstance(models.Model):
                     "geo_optimization_error_message": "\n".join(error_messages),
                 }
             )
+
+    @api.model
+    def _get_planned_partner_ids(self, json_result):
+        """
+        Return the list of planned partners in the same order as in the json document
+        """
+        return [
+            int(o["stopId"])
+            for o in json_result["plannedOrders"]
+            if o["stopId"].isdigit()
+        ]
 
     def button_export_to_mobile_app(self):
         """
