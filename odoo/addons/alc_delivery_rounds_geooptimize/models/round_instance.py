@@ -14,6 +14,8 @@ import requests
 
 from odoo import _, api, fields, models
 from odoo.addons.queue_job.job import job
+from odoo.exceptions import UserError, ValidationError
+from odoo.tools import config
 
 _logger = logging.getLogger(__name__)
 
@@ -57,6 +59,9 @@ class RoundInstance(models.Model):
         compute="_compute_geo_optimization_state",
     )
     geo_optimization_enabled = fields.Boolean("Enable geo optimization")
+    geo_optimization_resource_id = fields.Selection(
+        selection="_selection_geo_optimization_resource_id"
+    )
     geo_optimization_result = fields.Binary(attachment=True, readonly=True)
     geo_optimization_request = fields.Binary(attachment=True, readonly=True)
 
@@ -72,6 +77,21 @@ class RoundInstance(models.Model):
     warehouse_id = fields.Many2one(
         comodel_name="stock.warehouse", compute="_compute_warehouse_id"
     )
+
+    @api.model
+    def _selection_geo_optimization_resource_id(self):
+        return self.env["round.template"]._selection_geo_optimization_resource_id()
+
+    @api.constrains("geo_optimization_enabled", "geo_optimization_resource_id")
+    def _check_geo_optimization_resource_id(self):
+        for rec in self:
+            if rec.geo_optimization_enabled and not rec.geo_optimization_resource_id:
+                raise ValidationError(
+                    _(
+                        "A resource identifier is required if geo_optimization is enabled for %s"
+                    )
+                    % rec.display_name
+                )
 
     @api.depends("geo_optimization_result")
     def _compute_geo_optimization_json(self):
@@ -121,11 +141,9 @@ class RoundInstance(models.Model):
     @api.model
     def create(self, vals):
         if "geo_optimization_enabled" not in vals and "template_id" in vals:
-            vals["geo_optimization_enabled"] = (
-                self.env["round.template"]
-                .browse(vals["template_id"])
-                .geo_optimization_enabled
-            )
+            template = self.env["round.template"].browse(vals["template_id"])
+            vals["geo_optimization_enabled"] = template.geo_optimization_enabled
+            vals["geo_optimization_resource_id"] = template.geo_optimization_resource_id
         return super(RoundInstance, self).create(vals)
 
     @api.onchange("template_id")
@@ -290,7 +308,12 @@ class RoundInstance(models.Model):
         return ret
 
     def _generate_optimization_metas(self, cfg):
-        return {"simulationName": self.display_name, "countryCode": "BE"}
+        return {
+            "simulationName": self.display_name,
+            "countryCode": "BE",
+            "beginDate": self._date_to_geo_date(self.date),
+            "language": self.env.user.lang,
+        }
 
     def _generate_optimization_depots(self, cfg):
         address = self.warehouse_id.partner_id
@@ -348,7 +371,7 @@ class RoundInstance(models.Model):
         fixed_loading_duration = "%02d:%02d:00" % (h, m)
         return [
             {
-                "id": address.id,
+                "id": self.geo_optimization_resource_id,
                 "startX": address.partner_longitude,
                 "startY": address.partner_latitude,
                 "endX": address.partner_longitude,
@@ -432,7 +455,7 @@ class RoundInstance(models.Model):
     def _notify_optimization_error(self, message):
         self.env.user.notify_warning(
             message=message,
-            title=_("%s: Optimization failed") % self.display_name,
+            title=_("%s: Optimization api call failed") % self.display_name,
             sticky=True,
         )
 
@@ -446,7 +469,7 @@ class RoundInstance(models.Model):
         description = _("Check geo optimization status for %s") % self.display_name
         self.with_delay(eta=eta, description=description)._check_optimization_status()
 
-    def _check_optimization_response(self, action, response):
+    def _check_optimization_response(self, action, response, ignoreError=False):
         """
         Check if the response is OK and process error according
         Return json content if OK otherwise False
@@ -455,18 +478,21 @@ class RoundInstance(models.Model):
             self.geo_optimization_error_message = False
             response.raise_for_status()
         except requests.HTTPError as http_error:
-            self.geo_optimization_error_message = http_error.message
+            msg = "\n".join(filter(None, [http_error.message, response.content]))
+            self.geo_optimization_error_message = msg
             self._notify_optimization_error(self.geo_optimization_error_message)
             _logger.exception(
                 "Optimization action '%s' of %s failed", action, self.display_name
             )
-            self.geo_optimization_status = "failed"
+            if not ignoreError:
+                self.geo_optimization_status = "failed"
             return False
         result = response.json()
         if result["status"] == "ERROR":
             self.geo_optimization_error_message = result["message"]
+            if not ignoreError:
+                self.geo_optimization_status = "failed"
             self._notify_optimization_error(self.geo_optimization_error_message)
-            self.geo_optimization_status = "failed"
             return False
         return result
 
@@ -517,3 +543,91 @@ class RoundInstance(models.Model):
                     "geo_optimization_error_message": "\n".join(error_messages),
                 }
             )
+
+    def button_export_to_mobile_app(self):
+        """
+        Makes the delivery round available into the mobile APP
+        """
+        return self._delay_export_optimization_to_operational_planning()
+
+    def _delay_export_optimization_to_operational_planning(self):
+        """
+        Delay the export of the result of an optimization to operational
+        planning
+        """
+        for record in self:
+            self.env.user.notify_info(
+                _(
+                    "The delivery round %s will be exported to tha mobile App into background."
+                )
+                % record.display_name
+            )
+            description = (
+                _("Export optimization result to operational planning for %s")
+                % record.display_name
+            )
+            record.with_delay(
+                description=description
+            )._export_optimization_to_operational_planning()
+
+    @job(default_channel="root.background.geo_optimization")
+    def _export_optimization_to_operational_planning(self):
+        """
+        Exports the result of an optimization to operational planning that
+        mobile resources will be able to browse on the field through a mobile
+        app.
+        This command only works on completed optimizations.
+        https://geoservices.geoconcept.com/ToursolverCloud/api-book.html
+        #_resource_toursolverwebservice_exporttooperationplanning_post
+        """
+        self.ensure_one()
+        background = self.env.context.get("job_uuid") and not config["test_enable"]
+        if self.geo_optimization_state != "success":
+            error_message = (
+                _("Can't export a not complete optimization for %s") % self.display_name
+            )
+            if background:
+                return error_message
+            else:
+                raise UserError(error_message)
+
+        action = "exportToOperationalPlanning"
+        json_request = self._generate_optimization_operational_export_request()
+        url = self._get_opitization_api_url(action)
+        response = requests.post(
+            url, json=json_request, headers={"Accept": "application/json"}
+        )
+        result = self._check_optimization_response(action, response, ignoreError=True)
+        if result is False:
+            if background:
+                return self.geo_optimization_error_message
+            return False
+        self.env.user.notify_info(
+            _("Optimization for %s exported to operational planning.")
+            % self.display_name
+        )
+        return json_request
+
+    def _generate_optimization_operational_export_request(self):
+        self.ensure_one()
+        return {
+            "taskId": self.geo_optimization_task_id,
+            "resourceMapping": [
+                {
+                    "id": self.geo_optimization_resource_id,
+                    "operationalId": "%s@alcyonbelux.be"
+                    % self.geo_optimization_resource_id.lower(),
+                }
+            ],
+            "force": True,  # override if exists
+            "startDate": self._date_to_geo_date(self.date),
+            "dayNums": [1],
+        }
+
+    @api.model
+    def _date_to_geo_date(self, d):
+        """
+        Return date as YYYY-MM-DD
+        """
+        date = fields.Date.from_string(d)
+        return date.strftime("%Y-%m-%d")
