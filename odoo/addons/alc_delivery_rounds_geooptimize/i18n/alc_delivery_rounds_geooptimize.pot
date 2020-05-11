@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_delivery_rounds_geooptimize
-#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:458
+#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:460
 #, python-format
 msgid "%s: Optimization api call failed"
 msgstr ""
@@ -42,13 +42,13 @@ msgid "Aborted"
 msgstr ""
 
 #. module: alc_delivery_rounds_geooptimize
-#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:587
+#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:598
 #, python-format
 msgid "Can't export a not complete optimization for %s"
 msgstr ""
 
 #. module: alc_delivery_rounds_geooptimize
-#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:469
+#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:471
 #, python-format
 msgid "Check geo optimization status for %s"
 msgstr ""
@@ -80,7 +80,7 @@ msgid "Error"
 msgstr ""
 
 #. module: alc_delivery_rounds_geooptimize
-#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:566
+#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:577
 #, python-format
 msgid "Export optimization result to operational planning for %s"
 msgstr ""
@@ -195,7 +195,7 @@ msgid "Optimization error message"
 msgstr ""
 
 #. module: alc_delivery_rounds_geooptimize
-#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:606
+#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:617
 #, python-format
 msgid "Optimization for %s exported to operational planning."
 msgstr ""
@@ -243,7 +243,7 @@ msgid "Success"
 msgstr ""
 
 #. module: alc_delivery_rounds_geooptimize
-#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:560
+#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:571
 #, python-format
 msgid "The delivery round %s will be exported to tha mobile App into background."
 msgstr ""
