@@ -372,6 +372,8 @@ class RoundInstance(models.Model):
         return [
             {
                 "id": self.geo_optimization_resource_id,
+                "mobileLogin": "%s@alcyonbelux.be"
+                % self.geo_optimization_resource_id.lower(),
                 "startX": address.partner_longitude,
                 "startY": address.partner_latitude,
                 "endX": address.partner_longitude,
