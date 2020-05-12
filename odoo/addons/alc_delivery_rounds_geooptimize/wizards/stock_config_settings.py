@@ -70,7 +70,7 @@ class StockConfigSettings(models.TransientModel):
         resources_number = int(
             IrConfigParameter.get_param(
                 "alc_delivery_rounds_geooptimize.geo_optimization_resources_number",
-                "45",
+                "10",
             )
         )
 
