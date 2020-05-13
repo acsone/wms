@@ -2,8 +2,7 @@
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, models
-from odoo.exceptions import ValidationError
+from odoo import api, models
 
 
 class PurchaseOrder(models.Model):
@@ -15,15 +14,15 @@ class PurchaseOrder(models.Model):
         """
             Should return a dict with key=SchemeName, value=Identifier
         """
-        if not commercial_partner.vat:
-            raise ValidationError(
-                _(
-                    "No VAT defined on the supplier.\n"
-                    "VAT is required to identy the partner into the UBL"
-                    "document"
-                )
-            )
-        return {"BE:VAT": commercial_partner.vat}
+        if commercial_partner.vat:
+            country_code = commercial_partner.vat[:2].upper()
+            if country_code == "EL":  # special case for Greek
+                country_code = "GR"
+            schemeName = "%s:VAT" % country_code
+            return {schemeName: commercial_partner.vat}
+        return super(PurchaseOrder, self)._ubl_get_party_identification(
+            commercial_partner
+        )
 
     @api.model
     def _ubl_add_tax_category(
