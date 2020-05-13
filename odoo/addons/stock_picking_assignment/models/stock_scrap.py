@@ -10,7 +10,8 @@ class StockScrap(models.Model):
     _inherit = "stock.scrap"
 
     operator_id = fields.Many2one(
-        "res.users", string="Operator", copy=False, track_visibility="onchange"
+        "res.users", string="Operator", copy=False, track_visibility="onchange",
+        default=lambda self: self._get_default_operator_id(),
     )
 
     @api.model
@@ -20,6 +21,6 @@ class StockScrap(models.Model):
     @api.model
     @api.returns("self", lambda value: value.id)
     def create(self, vals):
-        if "operator_id" not in vals:
+        if "operator_id" not in vals or not vals.get("operator_id"):
             vals["operator_id"] = self._get_default_operator_id()
         return super(StockScrap, self).create(vals)
