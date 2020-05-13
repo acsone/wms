@@ -20,6 +20,9 @@
         - acsone 10.0-add_perf_log-lmi
           # Branch that contains the patch odoo#pull3706 add country_of_origin instatat 223a0e8b19a474bf24bfe9dae09c6c2ba396c8c8
         - acsone 10.0-alc_patch
+        - acsone 10.0-models_improve_read_translation_rco-dro
+        - odoo refs/pull/19447/head # [FIX] related fields should be readonly to avoid recompute
+        - odoo refs/pull/30686/head # [10.0] [IMP] backport avoid one query when recomputing a field (#18846)
     shell_command_after:
           # [FIX] stock: remove `_parent_store=True` from model `stock.quant.package`
         - git am "$(git format-patch -1 45c42df5f01044b87c01b53d47321c5c80da47bf -o ../patches)"
