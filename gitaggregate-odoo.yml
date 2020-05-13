@@ -22,7 +22,8 @@
         - acsone 10.0-alc_patch
         - acsone 10.0-models_improve_read_translation_rco-dro
         - odoo refs/pull/19447/head # [FIX] related fields should be readonly to avoid recompute
-        - odoo refs/pull/30686/head # [10.0] [IMP] backport avoid one query when recomputing a field (#18846)
+        # disable since it include new column on procurement
+        #- odoo refs/pull/30686/head # [10.0] [IMP] backport avoid one query when recomputing a field (#18846)
     shell_command_after:
           # [FIX] stock: remove `_parent_store=True` from model `stock.quant.package`
         - git am "$(git format-patch -1 45c42df5f01044b87c01b53d47321c5c80da47bf -o ../patches)"
@@ -36,4 +37,9 @@
         - git am "$(git format-patch -1 eb0a1feed6940fa720aca2e85f00111888b92b58 -o ../patches)"
          # models: enable prefetching feedback when using mapped()
         - git am "$(git format-patch -1 e2e537f247cdd7def87b90d8e91e7e1d58ad5a47 -o ../patches)"
+         # TO REMOVE once refs/pull/30686/head is fully included
+         # [IMP] models: improve code of read()
+        - git am "$(git format-patch -1 0004b9ebef4c6deb3333c8b0b48b893fcd37e1ec -o ../patches)"
+         # [IMP] stock: Disable translation on product qty computation
+        - git am "$(git format-patch -1 ca10dfc3c4340bd8e058397a50895addb2be20f0 -o ../patches)"
     target: acsone 10.0-alc_master
