@@ -939,6 +939,11 @@ class RoundInstanceCustomer(models.Model):
             )
             self.env.clear()
             self.delivery_error = _("Unexpected error (%s)") % unicode(err)
+            if config["test_enable"] and not self.env.context.get(
+                "test_delivery_error_handling"
+            ):
+                # always raise error in tests to early detect regressions
+                raise
 
     @job(  # noqa: C901
         default_channel="root.background.stock_picking_deliver"
@@ -990,6 +995,8 @@ class RoundInstanceCustomer(models.Model):
             if self.partner_id.is_sale_back_order_cancel:
                 shippings = shippings.with_context(cancel_backorder=True)
 
+            delivery_round = self.delivery_round_id
+
             # We mark as printed to prevent to be a valid shipping when the
             # backorder is created.
             # For shippings that are not available (no pick done), do not track
@@ -1010,7 +1017,7 @@ class RoundInstanceCustomer(models.Model):
                     shipping.with_context(no_new_picking=True)._create_backorder()
                     _logger.debug(
                         "Shipping detached from delivery round %s: %s (%s)",
-                        self.delivery_round_id.id,
+                        delivery_round.id,
                         shipping.id,
                         shipping.name,
                     )
@@ -1066,7 +1073,8 @@ class RoundInstanceCustomer(models.Model):
 
             # If this customer do not have any linked picking, remove it
             # We perform this step at last to prevent Missing record error
-            self._remove_if_empty()
+            if self.exists():
+                self._remove_if_empty()
 
         if delivery_round.state == "delivering":
             delivery_round.with_delay(priority=5).recheck_delivery_state()
