@@ -210,7 +210,7 @@ msgid "Deliver"
 msgstr ""
 
 #. module: delivery_rounds
-#: code:addons/delivery_rounds/models/round_instance.py:1098
+#: code:addons/delivery_rounds/models/round_instance.py:1106
 #, python-format
 msgid "Deliver customer %s of delivery round %s"
 msgstr ""
@@ -362,7 +362,7 @@ msgid "End mileage"
 msgstr ""
 
 #. module: delivery_rounds
-#: code:addons/delivery_rounds/models/round_instance.py:1086
+#: code:addons/delivery_rounds/models/round_instance.py:1094
 #, python-format
 msgid "Error when delivering %s: %s"
 msgstr ""
@@ -786,7 +786,7 @@ msgid "Shipping count"
 msgstr ""
 
 #. module: delivery_rounds
-#: code:addons/delivery_rounds/models/round_instance.py:1079
+#: code:addons/delivery_rounds/models/round_instance.py:1087
 #, python-format
 msgid "Should be delivered manually, could not deliver because of %s"
 msgstr ""
@@ -864,7 +864,7 @@ msgid "The picking type determines the picking view"
 msgstr ""
 
 #. module: delivery_rounds
-#: code:addons/delivery_rounds/models/round_instance.py:1112
+#: code:addons/delivery_rounds/models/round_instance.py:1120
 #, python-format
 msgid "The shipping is not part anymore of this delivery round"
 msgstr ""
@@ -976,7 +976,7 @@ msgid "You cannot delete a delivery round that has been started"
 msgstr ""
 
 #. module: delivery_rounds
-#: code:addons/delivery_rounds/models/round_instance.py:983
+#: code:addons/delivery_rounds/models/round_instance.py:988
 #, python-format
 msgid "You cannot deliver with ongoing picking(s): %s"
 msgstr ""

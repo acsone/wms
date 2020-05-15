@@ -217,7 +217,7 @@ msgid "Deliver"
 msgstr "Livrer"
 
 #. module: delivery_rounds
-#: code:addons/delivery_rounds/models/round_instance.py:1098
+#: code:addons/delivery_rounds/models/round_instance.py:1106
 #, python-format
 msgid "Deliver customer %s of delivery round %s"
 msgstr "Livraison du client %s de la tournée %s"
@@ -369,7 +369,7 @@ msgid "End mileage"
 msgstr "Kilométrage final"
 
 #. module: delivery_rounds
-#: code:addons/delivery_rounds/models/round_instance.py:1086
+#: code:addons/delivery_rounds/models/round_instance.py:1094
 #, python-format
 msgid "Error when delivering %s: %s"
 msgstr "Erreur lors de la livraison %s: %s"
@@ -807,7 +807,7 @@ msgid "Shipping count"
 msgstr "Nombre de livraisons"
 
 #. module: delivery_rounds
-#: code:addons/delivery_rounds/models/round_instance.py:1079
+#: code:addons/delivery_rounds/models/round_instance.py:1087
 #, python-format
 msgid "Should be delivered manually, could not deliver because of %s"
 msgstr "Doit être livré manuellement, n'a pas pu être livré en raison de %s"
@@ -885,7 +885,7 @@ msgid "The picking type determines the picking view"
 msgstr "Le type de préparation détermine la vue de préparation"
 
 #. module: delivery_rounds
-#: code:addons/delivery_rounds/models/round_instance.py:1112
+#: code:addons/delivery_rounds/models/round_instance.py:1120
 #, python-format
 msgid "The shipping is not part anymore of this delivery round"
 msgstr ""
@@ -998,10 +998,11 @@ msgid "You cannot delete a delivery round that has been started"
 msgstr "Vous ne pouvez pas supprimer une tournée qui est démarrée"
 
 #. module: delivery_rounds
-#: code:addons/delivery_rounds/models/round_instance.py:983
+#: code:addons/delivery_rounds/models/round_instance.py:988
 #, python-format
 msgid "You cannot deliver with ongoing picking(s): %s"
-msgstr "Vous ne pouvez pas livrer une tournée avec des préparations en cours: %s"
+msgstr ""
+"Vous ne pouvez pas livrer une tournée avec des préparations en cours: %s"
 
 #. module: delivery_rounds
 #: code:addons/delivery_rounds/models/round_template.py:31
