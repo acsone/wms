@@ -43,6 +43,57 @@ class TestDeliveryRound(common.DeliveryRoundTestCase):
             }
         )
         cls.delivery_round_1.state = "draft"
+        cls.StockPicking = cls.env["stock.picking"]
+
+    def _prepare_delivery_round(self):
+        """
+         Data:
+            2 SO for :
+              the same partner
+              the same carrier
+            The carrier is linked to a delivery template without instances
+            The SO are confirmed with delivery_step pic + ship
+            The outgoing picking is groupbypartner
+        Process:
+            Create a delivery round
+            Assign the 1 pickings
+        Status:
+            The 2 pickings are into the round
+            The 2 pickings PICK are available
+            The 2 SO SHIP are into the same shipping
+        return: delivery_round, picks, ships
+        """
+        sale1 = self._confirm_sale_order(carrier_id=self.delivery_carrier.id)
+        sale2 = self._confirm_sale_order(carrier_id=self.delivery_carrier.id)
+        # the SO
+        sales = self.env["sale.order"].browse([sale1.id, sale2.id])
+        self.assertFalse(sales.mapped("picking_ids.delivery_round_id"))
+
+        # check the pickings
+        # PICK has picking_type.groupbypartner = False  -> 1 by SO
+        picks = sales.mapped("picking_ids").filtered(
+            lambda p: p.picking_type_subcode == "PICK"
+        )
+        self.assertEqual(len(picks), 2)
+        # outgoring has picking_type.groupbypartner = True -> 1 for the 2 SO
+        ships = sales.mapped("picking_ids").filtered(
+            lambda p: p.picking_type_code == "outgoing"
+        )
+        self.assertEqual(len(ships), 1)
+
+        # create the delivery rounf
+        delivery_round = self.env["round.instance"].create(
+            {"template_id": self.delivery_template_2.id, "date": "2017-01-01"}
+        )
+
+        # now that a delivery round is created for the same template as the one
+        # linked to the carrier, the job assign must link all the pickings to
+        # this new delivery round AND the 2 PICK pickings must be available
+        picks.with_context(round_autoset=True)._job_action_assign()
+        self.assertEqual(sales.mapped("picking_ids.delivery_round_id"), delivery_round)
+        self.assertListEqual(picks.mapped("state"), ["assigned", "assigned"])
+
+        return delivery_round, picks, ships
 
     def test_picking_assign_00(self):
         """
@@ -139,3 +190,46 @@ class TestDeliveryRound(common.DeliveryRoundTestCase):
         picks[0].with_context(round_autoset=True)._job_action_assign()
         self.assertEqual(sales.mapped("picking_ids.delivery_round_id"), delivery_round)
         self.assertListEqual(picks.mapped("state"), ["assigned", "assigned"])
+
+    def test_deliver_01(self):
+        """
+        Data:
+            partner1 accept backorder
+            A delivery_round with picks for partner1:
+               * 2 pickings PICK are available
+               * 2 SO SHIP are into the same shipping
+        Test Case:
+            Deliver the order even if no picking are done
+        Expected results:
+            2 Backorders must be created (one for each pick)
+            backorders must be assigned
+        """
+        self.partner1.is_sale_back_order_cancel = False
+        delivery_round, picks, ships = self._prepare_delivery_round()
+        pickings = self.StockPicking.search([])
+        delivery_round.button_close()
+        delivery_round._deliver(background=False)
+        new_pickings = self.StockPicking.search([]) - pickings
+        self.assertEqual(2, len(new_pickings))
+        self.assertEqual(picks, new_pickings.mapped("backorder_id"))
+        self.assertListEqual(["assigned", "assigned"], new_pickings.mapped("state"))
+
+    def test_deliver_02(self):
+        """
+        Data:
+            partner1 refuse backorder
+            A delivery_round with picks for partner1:
+               * 2 pickings PICK are available
+               * 2 SO SHIP are into the same shipping
+        Test Case:
+            Deliver the order even if no picking are done
+        Expected results:
+            no backoders created
+        """
+        self.partner1.is_sale_back_order_cancel = True
+        delivery_round, picks, ships = self._prepare_delivery_round()
+        pickings = self.StockPicking.search([])
+        delivery_round.button_close()
+        delivery_round._deliver(background=False)
+        new_pickings = self.StockPicking.search([]) - pickings
+        self.assertFalse(new_pickings)
