@@ -66,6 +66,9 @@ class Sale(models.Model):
     def remove_delivery_block(self, notify=True):
         """ Job that execute the remove delivery block on sale order"""
         self.ensure_one()
+        if self.state != "confirm_background":
+            return
+        self.state = "sale"
         super(Sale, self).action_remove_delivery_block()
         if notify:
             action = self.env.ref("sale.action_orders").read()[0]
@@ -79,6 +82,7 @@ class Sale(models.Model):
     def action_remove_delivery_block(self):
         """Make 'Remove the delivery block' asynchronous."""
         for order in self.filtered(lambda s: s.state == "sale"):
+            order.write({"state": "confirm_background"})
             self.env.user.notify_info(
                 _("Remove delivery block for order %s will be done in background.")
                 % order.name
