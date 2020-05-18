@@ -5,7 +5,8 @@ import logging
 import urllib
 from datetime import datetime
 
-from odoo import api, fields, models
+from odoo import _, api, fields, models
+from odoo.exceptions import ValidationError
 
 _logger = logging.getLogger(__name__)
 
@@ -43,6 +44,9 @@ class PurchaseOrder(models.Model):
                 self.id, products[0].id
             )
         else:
+            products = self.get_products()
+            if not products:
+                raise ValidationError(_("There are no products for this supplier"))
             url = "/purchase_review/%s" % self.id
 
         return {"type": "ir.actions.act_url", "url": url, "target": "self"}
