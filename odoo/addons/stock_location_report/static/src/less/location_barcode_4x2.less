@@ -1,97 +1,62 @@
 .stock_location_barcode_4x2 {
     .barcode_label {
         display: inline-block;
-        width: 460px;
+        width: 450px;
         height: 460px; // =1320/4
-        //border: 1px solid;
         overflow: hidden;
-        padding: 20px 0;
     }
-    .barcode_label:nth-child(odd) {
+    .barcode_label {
         padding-left:15px;
     }
-    .barcode_label_A {
-        padding: 20px 0 !important;
-    }
     .barcode_label:nth-child(odd) {
-        margin-right: 20px;
-        margin-left: -5px;
+        margin-right: 50px;
+        margin-left: 0;
     }
     .barcode_label:nth-child(even) {
-        margin-left: 20px;
-        margin-right: -5px;
+        margin-left: 0;
+        margin-right: 0;
     }
-
     .reserve {
-        height: 330px; // =1320/4
+        height: 330px; // =1400/4
     }
     .bin, .parking {
-        height: 350px; // =1400/4 (no-margin paper)
+        height: 330px; // =1400/4 (no-margin paper)
     }
 
     .barcode_name {
-        font-size: 67px;
+        font-size: 88px;
         font-weight: bold;
-        display: block;
+        display: inline-block;
         white-space: nowrap;
         overflow: hidden;
         text-align: left;
-
-        // margin-top: -5px; // 8
-        //-webkit-transform: scale(1,1); // 8
-
-        //margin-top: -30px; // 12
-        //-webkit-transform: scale(1,.7); //12
+        transform: scale(1, 3);
+        -webkit-transform: scale(1,3);
     }
     .reserve .barcode_name {
-        margin-top: 23px; // 4
-        // -webkit-transform: scale(1,3); // 4
-
-        // margin-top: 10px; // 6
-        // -webkit-transform: scale(1,2); // 6
+        margin-top: 78px;
     }
-
-    img.barcode {
-        float: right;
-    }
-    .barcode_label_A img.barcode {
-        float: left !important;
-        margin-right: 20px;
-    }
-    //img.barcode {
-    //    left: 0px;
-    //    // height: 40px; // 12
-    //    height: 50px; // 8
-    //}
     .reserve img.barcode {
-        // height: 50px; // 6
-        // height: 70px; // 4
-        margin-top: 35px;
-        margin-left: -40px;
+        margin: -4px 0 0 -85px;
     }
     div.barcode_checksum {
         text-align: center;
+        width: 440px;
+        height: 80px;
+        overflow: hidden;
     }
     div.barcode_checksum > div {
-        // font-size: 25px; // 12
-        font-size: 33px; // 8
-        background: black;
-        font-weight: bold;
-        color: white;
+        font-size: 48px;
+        background: LightGray;
+        color: black;
         padding: 0 10px;
         border: 1px solid;
-        margin: 0 5px;
-    }
-    div.barcode_checksum > div:first-child  {
-        float: left;
-    }
-    div.barcode_checksum > div:last-child  {
+        margin: 0 5px 0 -15px;
         float: right;
-        margin: 0 77px;
     }
     .reserve div.barcode_checksum {
-        ///font-size: 32px; // 6
         font-size: 48px;  // 4
+        margin-top: 50px;
     }
 
 }
