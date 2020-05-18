@@ -343,6 +343,12 @@ msgid "Supplier discount"
 msgstr ""
 
 #. module: website_purchase_review
+#: code:addons/website_purchase_review/models/purchase_order.py:49
+#, python-format
+msgid "There are no products for this supplier"
+msgstr ""
+
+#. module: website_purchase_review
 #: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
 msgid "Total amount:"
 msgstr ""
