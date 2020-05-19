@@ -80,13 +80,6 @@ class PurchaseReview(Home):
             "return_url": po.get_url(),
         }
 
-        if po.date_planned_overwrite:
-            date_planned_overwrite = fields.Datetime.from_string(
-                po.date_planned_overwrite
-            )
-            date_planned_overwrite_str = fields.Date.to_string(date_planned_overwrite)
-            render_values["date_planned_overwrite"] = date_planned_overwrite_str
-
         if po.discount_global_overwrite:
             render_values["discount_global_overwrite"] = po.discount_global_overwrite
 
@@ -121,16 +114,18 @@ class PurchaseReview(Home):
             price_unit_base = seller.price or 0
 
             # Set the date planned
-            if render_values.get("date_planned_overwrite"):
-                date_planned = fields.Datetime.from_string(
-                    render_values["date_planned_overwrite"]
-                )
-            elif seller:
+            if seller:
                 delivery_lead_time = seller.delay
                 date_planned = datetime.now() + relativedelta(days=delivery_lead_time)
+                if po.date_planned:
+                    po_date_planned = fields.Datetime.from_string(po.date_planned)
+                    if po_date_planned > date_planned:
+                        date_planned = po_date_planned
             else:
-                date_planned = datetime.now()
-            date_planned_str = fields.Date.to_string(date_planned)
+                if po.date_planned:
+                    date_planned = fields.Datetime.from_string(po.date_planned)
+                else:
+                    date_planned = datetime.now()
 
             # Set the discount global
             if render_values.get("discount_global_overwrite"):
@@ -149,7 +144,7 @@ class PurchaseReview(Home):
                     "price_unit_base": price_unit_base,
                     "discount_global": discount_global,
                     "promotion_supplier": promotion_supplier,
-                    "date_planned": date_planned_str,
+                    "date_planned": fields.Date.to_string(date_planned),
                 }
             )
 

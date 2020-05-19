@@ -69,7 +69,7 @@
                                 <table class="spacing_table_2">
                                     <tr>
                                         <td>Scheduled date:</td>
-                                        <td><input type="date" id="global_date_planned" t-att-value="date_planned_overwrite"/></td>
+                                        <td><span id="global_date_planned" t-field="po.date_planned" t-options="{'widget': 'date'}"/></td>
                                     </tr>
                                     <tr>
                                         <td>Discount global:</td>
