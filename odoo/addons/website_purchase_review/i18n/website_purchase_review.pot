@@ -338,7 +338,7 @@ msgid "Supplier discount"
 msgstr ""
 
 #. module: website_purchase_review
-#: code:addons/website_purchase_review/models/purchase_order.py:49
+#: code:addons/website_purchase_review/models/purchase_order.py:47
 #, python-format
 msgid "There are no products for this supplier"
 msgstr ""
