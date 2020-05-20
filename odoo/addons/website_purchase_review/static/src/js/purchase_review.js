@@ -291,12 +291,10 @@ odoo.define('website_purchase_review.main_page', function (require) {
     }
 
     function save_global_values() {
-        var global_date_planned = $('#global_date_planned').val();
         var global_discount_global = $('#global_discount_global').val();
         var global_promotion_supplier = $('#global_promotion_supplier').val();
 
         var vals = {
-            'global_date_planned': global_date_planned,
             'global_discount_global': parseFloat(global_discount_global),
             'global_promotion_supplier': parseFloat(global_promotion_supplier)
         };
@@ -304,9 +302,6 @@ odoo.define('website_purchase_review.main_page', function (require) {
         var PO = new Model('purchase.order');
         PO.call('set_overwrite_values', [purchase_order_id, vals])
             .then(function (result) {
-                if (global_date_planned) {
-                    $('#date_planned').val(global_date_planned);
-                }
                 if (global_discount_global) {
                     $('#discount_global').val(global_discount_global);
                 }

@@ -107,11 +107,6 @@ msgid "Creation date"
 msgstr ""
 
 #. module: website_purchase_review
-#: model:ir.model.fields,field_description:website_purchase_review.field_purchase_order_date_planned_overwrite
-msgid "Date planned overwrite"
-msgstr ""
-
-#. module: website_purchase_review
 #: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
 msgid "Discount global"
 msgstr ""

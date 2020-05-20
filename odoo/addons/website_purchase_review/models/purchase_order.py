@@ -3,7 +3,6 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 import logging
 import urllib
-from datetime import datetime
 
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
@@ -14,7 +13,6 @@ _logger = logging.getLogger(__name__)
 class PurchaseOrder(models.Model):
     _inherit = "purchase.order"
 
-    date_planned_overwrite = fields.Datetime("Date planned overwrite")
     discount_global_overwrite = fields.Float("Discount global overwrite")
     promotion_supplier_overwrite = fields.Float("Promotion supplier overwrite")
     total_lines = fields.Integer(
@@ -55,12 +53,6 @@ class PurchaseOrder(models.Model):
     def set_overwrite_values(self, vals):
         self.ensure_one()
         trigger_onchange = False
-        date_planned_str = vals.get("global_date_planned")
-        if date_planned_str:
-            date_planned = datetime.strptime(date_planned_str, "%Y-%m-%d")
-            odoo_date_planned_str = fields.Datetime.to_string(date_planned)
-            self.order_line.write({"date_planned": odoo_date_planned_str})
-            self.date_planned_overwrite = odoo_date_planned_str
 
         discount_global = vals.get("global_discount_global")
         if discount_global:
@@ -144,7 +136,11 @@ class PurchaseOrder(models.Model):
 
         date_planned_str = vals["date_planned"]
         date_planned = fields.Datetime.from_string(date_planned_str)
-        vals["date_planned"] = fields.Datetime.to_string(date_planned)
+        po_date_planned = fields.Datetime.from_string(self.date_planned)
+        if po_date_planned < date_planned:
+            vals["date_planned"] = fields.Datetime.to_string(date_planned)
+        else:
+            vals["date_planned"] = fields.Datetime.to_string(po_date_planned)
 
         orderpoint_min = vals.pop("orderpoint_min", 0)
         orderpoint_max = vals.pop("orderpoint_max", 0)
@@ -201,6 +197,8 @@ class PurchaseOrder(models.Model):
             # method modifies some values.
             new_line._onchange_price_unit()
 
+        if po_date_planned < date_planned:
+            self.date_planned = date_planned
         return True
 
     @api.multi
