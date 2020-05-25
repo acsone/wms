@@ -19,7 +19,6 @@
         "account_financial_report_date_range",
         "mass_editing",
         "account_invoice_force_number",
-        "logging_json",
         "account_invoice_line_default_account",
         "account_invoice_merge",
         "account_invoice_tax_required",
