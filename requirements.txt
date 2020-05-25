@@ -1,5 +1,4 @@
 --find-links https://wheelhouse.acsone.eu/manylinux1
---find-links https://wheelhouse.acsone.eu/acsone-odoo
 Babel==2.3.4
 backports.functools-lru-cache==1.6.1
 bcrypt==3.1.7
