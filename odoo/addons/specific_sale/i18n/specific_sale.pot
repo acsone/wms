@@ -77,6 +77,11 @@ msgid "Category III (psychotropic) Medicine Not Allowed"
 msgstr ""
 
 #. module: specific_sale
+#: selection:sale.order,sale_channel:0
+msgid "Chronovet"
+msgstr ""
+
+#. module: specific_sale
 #: model:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
 msgid "Confirmed order #"
 msgstr ""
