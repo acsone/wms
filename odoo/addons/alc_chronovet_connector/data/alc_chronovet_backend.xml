@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2020 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo noupdate="1">
+
+    <record id="alc_chronovet_backend" model="alc.chronovet.backend">
+        <field name="name">Chronovet Backend</field>
+        <field name="product_assortment_id" ref="alc_chronovet_connector.chronovet_product_assortment_filter"/>
+        <field name="pricelist_id" ref="alc_chronovet_connector.product_pricelist_chronovet"/>
+        <field name="sale_team_id" ref="sales_team.salesteam_website_sales"/>
+    </record>
+
+</odoo>
