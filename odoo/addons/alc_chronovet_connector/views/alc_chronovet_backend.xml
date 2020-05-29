@@ -20,8 +20,6 @@
                     </h1>
                     <group name="configuration">
                         <field name="product_assortment_id"
-                               attrs="{'invisible': [('product_manual_binding', '=', True)],
-                                   'required': [('product_manual_binding', '!=', True)]}"
                                context="{'form_view_ref': 'product_assortment.product_assortment_view_form',
                                      'product_assortment': True,
                                      'default_is_assortment': 1}"/>
@@ -33,17 +31,6 @@
         </field>
     </record>
 
-    <record model="ir.ui.view" id="alc_chronovet_backend_tree_view">
-        <field name="name">alc.chronovet.backend.tree (in
-            alc_chronovet_connector)
-        </field>
-        <field name="model">alc.chronovet.backend</field>
-        <field name="arch" type="xml">
-            <tree>
-                <field name="name"/>
-            </tree>
-        </field>
-    </record>
 
     <record model="ir.actions.act_window"
             id="alc_chronovet_backend_act_window">
