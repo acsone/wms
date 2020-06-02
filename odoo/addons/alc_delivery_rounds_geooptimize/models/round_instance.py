@@ -159,6 +159,26 @@ class RoundInstance(models.Model):
         res = super(RoundInstance, self)._deliver(background=background)
         return res
 
+    def _compute_stat_time_loading(self):
+        """
+        Overrides to add the delivery duration into the expected loading time
+        of the truck
+        """
+        stat_time_loading = super(RoundInstance, self)._compute_stat_time_loading()
+        opti_duration = (
+            self._is_geo_optimization_enabled()
+            and self.get_optimization_config().duration
+        )
+        if not opti_duration:
+            return stat_time_loading
+        tz_name = self.env.context.get("tz") or self.env.user.tz
+        if not tz_name:
+            raise UserError("Please configure your timezone in your user preferences")
+        m, s = divmod(opti_duration, 60)
+        now = fields.Datetime.context_timestamp(self, datetime.now())
+        now = now + timedelta(minutes=m, seconds=s)
+        return now.hour + (now.minute / 60.0)
+
     @api.multi
     def _is_geo_optimization_enabled(self):
         self.ensure_one()
@@ -344,8 +364,8 @@ class RoundInstance(models.Model):
     def _generate_optimization_resources(self, cfg):
         address = self.warehouse_id.partner_id
         pattern = "%02d:%02d:00"
-        hour = math.floor(self.time_leave_planned)
-        min = round((self.time_leave_planned % 1) * 60)
+        hour = math.floor(self.stat_time_loading)
+        min = round((self.stat_time_loading % 1) * 60)
         if min == 60:
             min = 0
             hour += 1

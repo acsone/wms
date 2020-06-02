@@ -11,6 +11,7 @@ from contextlib import contextmanager
 from requests.exceptions import HTTPError
 
 import mock
+from freezegun import freeze_time
 from odoo.addons.delivery_rounds.tests import common
 from odoo.exceptions import ValidationError
 
@@ -31,7 +32,7 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
                 "geo_optimization_enabled": True,
                 "geo_optimization_api_url": "my_url",
                 "geo_optimization_api_key": "api key",
-                "geo_optimization_duration": 1,
+                "geo_optimization_duration": 90,
                 "geo_optimization_delivery_duration": 10,
                 "geo_optimization_loading_duration": 100,
                 "geo_optimization_resources_number": 1,
@@ -757,6 +758,28 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
         for model in ("round.instance", "round.template"):
             field = self.env[model]._fields["geo_optimization_resource_id"]
             self.assertEqual(len(field.get_values(self.env)), 10)
+
+    def test_20(self):
+        """
+        Data:
+            A round instance
+            an optimization duration set to 90 seconds
+        Test Case:
+            stat_time_loading must takes into account the optimization duration
+        """
+        float_to_time_repr = self.env["alc.delivery.window"].float_to_time_repr
+        with freeze_time("2020-01-01 07:10:00"):
+            # TIME is UTC, stat_time_loading must be local since it's a float time
+            # WE are GMT + 1
+            self.assertEqual(
+                float_to_time_repr(self.delivery_round_1._compute_stat_time_loading()),
+                "08:11",
+            )
+        with freeze_time("2020-01-01 07:59:31"):
+            self.assertEqual(
+                float_to_time_repr(self.delivery_round_1._compute_stat_time_loading()),
+                "09:01",
+            )
 
 
 class _PseudoRequestsResponse(object):

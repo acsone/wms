@@ -214,7 +214,8 @@
                             <group>
                                 <field name="stat_time_closed" widget="float_time"/>
                                 <field name="stat_time_picking" widget="float_time"/>
-                                <field name="stat_time_leave" widget="float_time"/>
+                                <field name="stat_time_loading" widget="float_time" attrs="{'readonly': [('can_edit_stat_time_loading', '=', False)]}"/>
+                                <field name="can_edit_stat_time_loading" invisible="1"/>
                             </group>
                         </page>
                     </notebook>

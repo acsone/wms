@@ -944,9 +944,9 @@ msgid "Vehicle"
 msgstr "Modèle de Tournée"
 
 #. module: delivery_rounds
-#: model:ir.model.fields,field_description:delivery_rounds.field_round_instance_stat_time_leave
-msgid "Vehicle Start Time"
-msgstr "Heure effective de départ du véhicule"
+#: model:ir.model.fields,field_description:delivery_rounds.field_round_instance_stat_time_loading
+msgid "Vehicle Loading Time"
+msgstr "Heure effective de chargement du véhicule"
 
 #. module: delivery_rounds
 #: model:ir.model.fields,field_description:delivery_rounds.field_cron_delivery_plan_version_id
