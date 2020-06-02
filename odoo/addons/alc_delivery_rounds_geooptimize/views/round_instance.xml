@@ -60,6 +60,9 @@
             <xpath expr="//div[@name='pickings_progress']" position="attributes">
                 <attribute name="t-att-style">'background-color: ' + (record.state.raw_value=='draft' and 'lightgreen' or record.state.raw_value=='close' and 'lightsalmon' or record.state.raw_value=='pending' and 'sandybrown' or record.state.raw_value=='optimizing' and 'deepskyblue' or record.state.raw_value=='optimization_failure' and 'red' or 'lightgray')</attribute>
             </xpath>
+            <xpath expr="//i[@class='oe_inline fa fa-spinner fa-truck-loading']" position="attributes">
+                <attribute name="states">delivering,optimizing</attribute>
+            </xpath>
             <xpath expr="//a[@name='button_deliver']/parent::div"
                    position="after">
                 <div>
