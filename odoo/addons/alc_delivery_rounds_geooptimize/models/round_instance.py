@@ -164,22 +164,6 @@ class RoundInstance(models.Model):
         self.ensure_one()
         return self.geo_optimization_enabled and self.get_optimization_config().enabled
 
-    @api.multi
-    def _get_sorted_shipping_ids(self):
-        """
-         return the shippings sorted according to the optimization result
-         if available.
-        """
-        shipping_ids = super(RoundInstance, self)._get_sorted_shipping_ids()
-        if not self.geo_optimization_json:
-            return shipping_ids
-        expected_partner_order = self._get_planned_partner_ids(
-            self.geo_optimization_json
-        )
-        return shipping_ids.sorted(
-            lambda r: expected_partner_order.index(r.partner_id.id)
-        )
-
     @api.model
     def get_optimization_config(self):
         return self.env["stock.config.settings"].get_optimization_config()
@@ -453,6 +437,27 @@ class RoundInstance(models.Model):
             return
         self.geo_optimization_result = base64.b64encode(json.dumps(result))
         self._validate_optimization_result(result)
+        self._sort_round_instance_customers()
+
+    def _sort_round_instance_customers(self):
+        """
+        Sort the list of customer instances according to the list of deliveries
+        into the opimization result
+        """
+        self.ensure_one()
+        if self.geo_optimization_state != "success" or not self.geo_optimization_result:
+            self.instance_customer_ids._propagate_rank()
+            self.instance_customer_ids.write({"is_rank_computed": False})
+            return
+        expected_partner_order = self._get_planned_partner_ids(
+            self.geo_optimization_json
+        )
+        for round_instance_customer in self.instance_customer_ids:
+            partner_id = round_instance_customer.partner_id.id
+            rank = -1
+            if partner_id in expected_partner_order:
+                rank = expected_partner_order.index(partner_id)
+            round_instance_customer.write({"rank": rank, "is_rank_computed": True})
 
     def _notify_optimization_error(self, message):
         self.env.user.notify_warning(
