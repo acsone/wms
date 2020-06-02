@@ -43,12 +43,12 @@ class RoundInstance(models.Model):
         readonly=True,
     )
     geo_optimization_status = fields.Char(
-        "Opitmization status",
+        "Optimization status",
         help="Status of the optimization task provided byt the TourSolver " "service.",
         readonly=True,
     )
     geo_optimization_state = fields.Selection(
-        string="Opimization state",
+        string="Optimization state",
         selection=[
             ("in_progress", "In progress"),
             ("aborted", "Aborted"),
