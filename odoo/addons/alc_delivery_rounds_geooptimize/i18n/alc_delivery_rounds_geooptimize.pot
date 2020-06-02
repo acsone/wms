@@ -170,16 +170,6 @@ msgid "Number of resources available"
 msgstr ""
 
 #. module: alc_delivery_rounds_geooptimize
-#: model:ir.model.fields,field_description:alc_delivery_rounds_geooptimize.field_round_instance_geo_optimization_state
-msgid "Opimization state"
-msgstr ""
-
-#. module: alc_delivery_rounds_geooptimize
-#: model:ir.model.fields,field_description:alc_delivery_rounds_geooptimize.field_round_instance_geo_optimization_status
-msgid "Opitmization status"
-msgstr ""
-
-#. module: alc_delivery_rounds_geooptimize
 #: model:ir.model.fields,field_description:alc_delivery_rounds_geooptimize.field_stock_config_settings_geo_optimization_enabled
 msgid "Optimization activated"
 msgstr ""
@@ -209,6 +199,16 @@ msgstr ""
 #: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:188
 #, python-format
 msgid "Optimization requests sent to external system."
+msgstr ""
+
+#. module: alc_delivery_rounds_geooptimize
+#: model:ir.model.fields,field_description:alc_delivery_rounds_geooptimize.field_round_instance_geo_optimization_state
+msgid "Optimization state"
+msgstr ""
+
+#. module: alc_delivery_rounds_geooptimize
+#: model:ir.model.fields,field_description:alc_delivery_rounds_geooptimize.field_round_instance_geo_optimization_status
+msgid "Optimization status"
 msgstr ""
 
 #. module: alc_delivery_rounds_geooptimize
