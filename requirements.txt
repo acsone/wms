@@ -101,6 +101,7 @@ odoo10-addon-component==10.0.1.1.0
 odoo10-addon-component-event==10.0.1.0.0.99.dev26
 odoo10-addon-connector @ git+https://github.com/acsone/connector@de23258a4d639e696d6e4d941ba005a1577a9935#subdirectory=setup/connector
 odoo10-addon-date-range @ git+https://github.com/acsone/server-tools.git@dcefdba5bac014076f05229ba091acd8b739e164#subdirectory=setup/date_range
+odoo10-addon-geoengine-base-geolocalize @ git+https://github.com/acsone/geospatial.git@2051fc85bad155d9e76bd5c9be283770471015d2#subdirectory=setup/geoengine_base_geolocalize
 odoo10-addon-geoengine-partner @ git+https://github.com/acsone/geospatial.git@2051fc85bad155d9e76bd5c9be283770471015d2#subdirectory=setup/geoengine_partner
 odoo10-addon-l10n-be-antibiotic-tax @ git+https://github.com/acsone/l10n-belgium.git@066bd9c086d087a2c1e11274e629f300f6e0eb27#subdirectory=setup/l10n_be_antibiotic_tax
 odoo10-addon-l10n-be-apb-tax @ git+https://github.com/acsone/l10n-belgium.git@066bd9c086d087a2c1e11274e629f300f6e0eb27#subdirectory=setup/l10n_be_apb_tax

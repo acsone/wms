@@ -72,6 +72,7 @@
         "sale_stock_picking_blocking",
         "purchase_delivery_split_date",
         # "base_geolocalize_openstreetmap",
+        # "geoengine_base_geolocalize",
         # specific
         # "alc_geo_delivery_rounds",
         "alc_analytic_category_report",
