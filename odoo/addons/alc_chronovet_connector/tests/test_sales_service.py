@@ -171,6 +171,7 @@ class TestSalesService(CommonCase):
                 shipping partner -> the veterinary
                 invoice partner -> the veterinary
                 priclist -> the one from the backend
+                payment_mode -> the one from the backend
         """
         recipient_info = self._gen_recipent()
         params = {
@@ -194,8 +195,12 @@ class TestSalesService(CommonCase):
         self.assertEqual(new_so.partner_invoice_id, self.vt_partner)
         self.assertEqual(new_so.partner_shipping_id, self.vt_partner)
         self.assertEqual(new_so.date_order, "2020-05-28 11:45:47")
+        self.assertTrue(self.chronovet_backend.pricelist_id)
         self.assertEqual(new_so.pricelist_id, self.chronovet_backend.pricelist_id)
+        self.assertTrue(self.chronovet_backend.sale_team_id)
         self.assertEqual(new_so.team_id, self.chronovet_backend.sale_team_id)
+        self.assertTrue(self.chronovet_backend.payment_mode_id)
+        self.assertEqual(new_so.payment_mode_id, self.chronovet_backend.payment_mode_id)
         self.assertEqual(1, len(new_so.order_line))
         sol = new_so.order_line
         self.assertEqual(sol.product_id, self.saleable_product)
