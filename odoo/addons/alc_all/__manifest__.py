@@ -71,9 +71,9 @@
         "base_optional_quick_create",
         "sale_stock_picking_blocking",
         "purchase_delivery_split_date",
-        "base_geolocalize_openstreetmap",
+        # "base_geolocalize_openstreetmap",
         # specific
-        "alc_geo_delivery_rounds",
+        # "alc_geo_delivery_rounds",
         "alc_analytic_category_report",
         "alc_edi_connector",
         "alc_product_uom_updatable",
