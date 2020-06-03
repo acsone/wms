@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2020 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo noupdate="1">
+
+    <record id="account_payment_mode_chronovet" model="account.payment.mode">
+        <field name="name">Domiciliation Chronovet</field>
+        <field name="company_id" ref="base.main_company"/>
+        <field name="payment_type">inbound</field>
+        <field name="payment_method_id" ref="account_banking_sepa_direct_debit.sepa_direct_debit"/>
+        <field name="payment_order_ok" eval="1"/>
+        <field name="bank_account_link">variable</field>
+        <field name="variable_journal_ids" search="[('name', 'in', ['CBC Banque - CC', 'BELFIUS - CC', 'BNP Paribas - CC', 'ING Belgium - CC'])]"/>
+        <field name="group_lines" eval="1"/>
+        <field name="default_journal_ids" search="[('type', 'in', ('sale', 'sale_refund'))]"/>
+        <field name="default_payment_mode">same</field>
+        <field name="default_target_move">posted</field>
+        <field name="default_date_type">due</field>
+        <!-- field name="generate_move" eval="1"/>
+        <field name="offsetting_account">transfer_account</field>
+        <field name="transfer_account_id" search="[('code', '=', '401500')]"/>
+        <field name="transfer_journal_id" search="[('name', '=', 'Domiciliations clients')]"/ -->
+        <field name="move_option">date</field>
+        <field name="show_bank_account">full</field>
+    </record>
+
+</odoo>
