@@ -8,3 +8,11 @@
         - oca refs/pull/172/head #[10.0] Add UBL OrderResponse import
     target: origin 10.0-alc_master
 
+./src/geospatial:
+    remotes:
+        oca: https://github.com/oca/geospatial.git
+        origin: ssh://git@github.com/acsone/geospatial.git
+    merges:
+        - oca 10.0
+        - oca refs/pull/155/head #[10.0][MIG] geoengine_base_geolocalize migration #155
+    target: origin 10.0-alc_master
