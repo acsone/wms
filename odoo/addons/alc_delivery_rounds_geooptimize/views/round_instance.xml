@@ -43,6 +43,12 @@
                           class="oe_highlight"
                         />
             </button>
+            <xpath expr="//page[@name='customers']//field[@name='rank']" position="before">
+                <field name="is_rank_computed" invisible="1"/>
+            </xpath>
+            <xpath expr="//page[@name='customers']//field[@name='rank']" position="attributes">
+                <attribute name="attrs">{'readonly': [('is_rank_computed', '==', True)]}</attribute>
+            </xpath>
         </field>
     </record>
 

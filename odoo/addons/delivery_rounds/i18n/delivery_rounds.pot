@@ -923,8 +923,8 @@ msgid "Vehicle"
 msgstr ""
 
 #. module: delivery_rounds
-#: model:ir.model.fields,field_description:delivery_rounds.field_round_instance_stat_time_leave
-msgid "Vehicle Start Time"
+#: model:ir.model.fields,field_description:delivery_rounds.field_round_instance_stat_time_loading
+msgid "Vehicle Loading Time"
 msgstr ""
 
 #. module: delivery_rounds

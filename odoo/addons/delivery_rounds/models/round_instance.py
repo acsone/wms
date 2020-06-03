@@ -62,7 +62,10 @@ class RoundInstance(models.Model):
 
     stat_time_closed = fields.Float("Closed Time", readonly=True)
     stat_time_picking = fields.Float("Picking Start Time", readonly=True)
-    stat_time_leave = fields.Float("Vehicle Start Time", readonly=True)
+    stat_time_loading = fields.Float("Vehicle Loading Time", oldname="stat_time_leave")
+    can_edit_stat_time_loading = fields.Boolean(
+        compute="_compute_can_edit_stat_time_loading"
+    )
 
     template_id = fields.Many2one(
         "round.template",
@@ -150,6 +153,12 @@ class RoundInstance(models.Model):
         for instance in self:
             partners = instance.mapped("itinerary_ids.partner_position_ids.partner_id")
             instance.partner_ids = [(6, 0, partners.ids)]
+
+    @api.multi
+    def _compute_can_edit_stat_time_loading(self):
+        can_edit = self.env.user.has_group("base.group_system")
+        for record in self:
+            record.can_edit_stat_time_loading = can_edit
 
     def _search_partner_ids(self, operator, value):
         """
@@ -614,8 +623,21 @@ class RoundInstance(models.Model):
         self.filtered(lambda ri: ri.state != "done").mapped(
             "instance_customer_ids"
         ).filtered(lambda c: not c.delivered)._deliver(background=background)
-        self.write({"state": "delivering"})
+        self.write(
+            {
+                "state": "delivering",
+                "stat_time_loading": self._compute_stat_time_loading(),
+            }
+        )
         self.recheck_delivery_state()
+
+    def _compute_stat_time_loading(self):
+        """
+        Compute the theoretical loading time of the truck
+
+        The value returned is a time as float
+        """
+        return time_now(self)
 
     @api.multi
     def button_resetdraft(self):
@@ -637,13 +659,7 @@ class RoundInstance(models.Model):
                 shipping.delivery_round_id = False
         started = self.filtered("picking_launched")
         started.button_picking_stop()
-        self.write(
-            {
-                "state": "done",
-                # TODO move when we start to delay the delivery?
-                "stat_time_leave": time_now(self),
-            }
-        )
+        self.write({"state": "done"})
 
     @api.multi
     def _get_sorted_shipping_ids(self):
