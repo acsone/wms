@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2020 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+    <record model="ir.ui.view" id="round_template_search_view">
+        <field name="name">round.template.search (in alc_geo_delivery_rounds)</field>
+        <field name="model">round.template</field>
+        <field name="inherit_id" ref="delivery_rounds.view_round_template_search"/>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="delivery_plan_id" string="Delivery plan"/>
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="round_template_form_view">
+        <field name="name">round.template.form (in alc_geo_delivery_rounds)</field>
+        <field name="model">round.template</field>
+        <field name="inherit_id" ref="delivery_rounds.view_round_template_form"/>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <notebook colspan="4">
+                    <page string="Geometry">
+                        <field name="geo_polygon_shape" widget="geo_edit_map"
+                            groups="base_geoengine.group_geoengine_user,base_geoengine.group_geoengine_admin"
+                            options='{"opacity": 0.4, "fill_color":"#33ccff"}'/> 
+                    </page>
+                </notebook>
+            </field>
+        </field>
+    </record>
+
+        <record model="ir.ui.view" id="round_template_tree_view">
+        <field name="name">round.template.tree (in alc_geo_delivery_rounds)</field>
+        <field name="model">round.template</field>
+        <field name="inherit_id" ref="delivery_rounds.view_round_template_tree"/>
+        <field name="arch" type="xml">
+            <field name="geo_optimization_resource_id" position="after">
+                <field name="delivery_plan_id"/>
+            </field>
+        </field>
+    </record>
+
+<!-- GeoEngine views -->
+
+    <record id="round_template_geoengine_view" model="ir.ui.view">
+        <field name="name">round.template.geoengine (in alc_geo_delivery_rounds)</field>
+        <field name="arch" type="xml">
+            <geoengine>
+                <field name="name"/>
+            </geoengine>
+        </field>
+        <field eval="16" name="priority"/>
+        <field name="model">round.template</field>
+    </record>
+    <record id="round_template_geoengine_vector_layer" model="geoengine.vector.layer">
+        <field name="geo_field_id" ref="alc_geo_delivery_rounds.field_round_template_geo_polygon_shape"/>
+        <field name="name">Basic view</field>
+        <field name="view_id" ref="round_template_geoengine_view"/>
+        <field name="geo_repr">basic</field>
+        <field name="begin_color">#33ccff</field>
+        <field name="layer_opacity">0.6</field>
+        <field name="display_polygon_labels" eval= "1"/>
+        <field name="attribute_field_id" ref="delivery_rounds.field_round_template_name"/>
+    </record>
+    <record id="round_template_geoengine_raster_layer" model="geoengine.raster.layer">
+        <field name="raster_type">osm</field>
+        <field name="name">OSM layer</field>
+        <field name="view_id" ref="round_template_geoengine_view"/>
+        <field eval="0" name="overlay"/>
+    </record>
+    <record id="round_template_geoengine_raster_layer_osm" model="geoengine.raster.layer">
+        <field name="raster_type">osm</field>
+        <field name="name">OSM Light layer</field>
+        <field name="view_id" ref="round_template_geoengine_view"/>
+        <field eval="1" name="overlay"/>
+    </record>
+    <record id="action_round_template_geoengine" model="ir.actions.act_window.view">
+        <field eval="20" name="sequence"/>
+        <field name="view_mode">geoengine</field>
+        <field name="view_id" ref="round_template_geoengine_view"/>
+        <field name="act_window_id" ref="delivery_rounds.action_round_template_tree"/>
+    </record>
+</odoo>
