@@ -10,7 +10,7 @@
     "website": "http://acsone.eu",
     "license": "AGPL-3",
     "category": "",
-    "depends": ["geoengine_partner"],
+    "depends": ["geoengine_partner", "base_geolocalize"],
     "data": [],
     "demo": [],
     "post_init_hook": "post_init_hook",
