@@ -13,6 +13,7 @@
     "depends": ["geoengine_partner"],
     "data": [],
     "demo": [],
+    "post_init_hook": "post_init_hook",
     "auto_install": True,
     "application": True,
 }
