@@ -42,7 +42,9 @@ class PurchaseOrder(models.Model):
                 self.id, products[0].id
             )
         else:
-            products = self.get_products()
+            products = self.env["product.product"].search(
+                [("supplier_id", "=", self.partner_id.id)], limit=1
+            )
             if not products:
                 raise ValidationError(_("There are no products for this supplier"))
             url = "/purchase_review/%s" % self.id
@@ -74,7 +76,7 @@ class PurchaseOrder(models.Model):
         products = self.env["product.product"].search(
             [("supplier_id", "=", self.partner_id.id)], order="name"
         )
-        products.sorted(key=lambda product: product.default_code)
+
         all_products = []
         for product in products:
             all_products.append(product)
