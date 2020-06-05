@@ -76,6 +76,10 @@ class TestSalesService(CommonCase):
         )
 
         cls.SaleOrder = cls.env["sale.order"]
+        cls.payment_term_test = cls.env.ref(
+            "account.account_payment_term_advance"
+        ).copy()
+        cls.chronovet_backend.payment_term_id = cls.payment_term_test
 
         with cls.work_on_services() as work:
             cls.sales_service = work.component(usage="sales")
@@ -171,6 +175,8 @@ class TestSalesService(CommonCase):
                 shipping partner -> the veterinary
                 invoice partner -> the veterinary
                 priclist -> the one from the backend
+                payment_mode -> the one from the backend
+                payment_term_id -> the one from the backend
         """
         recipient_info = self._gen_recipent()
         params = {
@@ -194,8 +200,14 @@ class TestSalesService(CommonCase):
         self.assertEqual(new_so.partner_invoice_id, self.vt_partner)
         self.assertEqual(new_so.partner_shipping_id, self.vt_partner)
         self.assertEqual(new_so.date_order, "2020-05-28 11:45:47")
+        self.assertTrue(self.chronovet_backend.pricelist_id)
         self.assertEqual(new_so.pricelist_id, self.chronovet_backend.pricelist_id)
+        self.assertTrue(self.chronovet_backend.sale_team_id)
         self.assertEqual(new_so.team_id, self.chronovet_backend.sale_team_id)
+        self.assertTrue(self.chronovet_backend.payment_mode_id)
+        self.assertEqual(new_so.payment_mode_id, self.chronovet_backend.payment_mode_id)
+        self.assertEqual(self.chronovet_backend.payment_term_id, self.payment_term_test)
+        self.assertEqual(new_so.payment_term_id, self.payment_term_test)
         self.assertEqual(1, len(new_so.order_line))
         sol = new_so.order_line
         self.assertEqual(sol.product_id, self.saleable_product)

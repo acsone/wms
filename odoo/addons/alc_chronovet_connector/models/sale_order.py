@@ -55,13 +55,16 @@ class SaleOrder(models.Model):
         order_data["sale_channel"] = "chronovet"
         order_data["date_order"] = self._parse_datetime_to_utc(data["date"])
         order_data["team_id"] = chronovet_backend.sale_team_id.id
+        order_data["payment_mode_id"] = chronovet_backend.payment_mode_id.id
         # invvoice, payment_term, pricelist, carrier_id, team
         updated_data = self.play_onchanges(order_data, order_data.keys())
         order_data.update(updated_data)
 
         # replace partner by the final customer
         order_data["partner_id"] = self._get_final_chonovet_recipient(data).id
+        # ensure specific values from the backend are preserved
         order_data["pricelist_id"] = chronovet_backend.pricelist_id.id
+        order_data["payment_term_id"] = chronovet_backend.payment_term_id.id
         order_data["order_line"] = [
             (0, 0, line_info)
             for line_info in self._parse_chronovet_order_line(data, chronovet_backend)

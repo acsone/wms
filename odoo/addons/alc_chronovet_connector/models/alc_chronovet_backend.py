@@ -24,6 +24,12 @@ class AlcChronovetBackend(models.Model):
         "product.pricelist", string="Pricelist", required=True
     )
     sale_team_id = fields.Many2one("crm.team", string="Sale Team", required=True)
+    payment_mode_id = fields.Many2one(
+        "account.payment.mode",
+        string="Payment Mode",
+        domain=[("payment_type", "=", "inbound")],
+    )
+    payment_term_id = fields.Many2one("account.payment.term", string="Payment Terms")
 
     @api.model
     def get_singleton(self):
