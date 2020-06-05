@@ -95,15 +95,25 @@ msgid "Name"
 msgstr ""
 
 #. module: alc_chronovet_connector
-#: code:addons/alc_chronovet_connector/models/sale_order.py:147
+#: code:addons/alc_chronovet_connector/models/sale_order.py:151
 #, python-format
 msgid "No match found for customer_id: %s"
 msgstr ""
 
 #. module: alc_chronovet_connector
-#: code:addons/alc_chronovet_connector/models/alc_chronovet_backend.py:36
+#: code:addons/alc_chronovet_connector/models/alc_chronovet_backend.py:42
 #, python-format
 msgid "Only 1 ChronoVet backend configuration is allowed."
+msgstr ""
+
+#. module: alc_chronovet_connector
+#: model:ir.model.fields,field_description:alc_chronovet_connector.field_alc_chronovet_backend_payment_mode_id
+msgid "Payment Mode"
+msgstr ""
+
+#. module: alc_chronovet_connector
+#: model:ir.model.fields,field_description:alc_chronovet_connector.field_alc_chronovet_backend_payment_term_id
+msgid "Payment Terms"
 msgstr ""
 
 #. module: alc_chronovet_connector
@@ -157,7 +167,7 @@ msgid "This user has no access to the Chronovet REST Api."
 msgstr ""
 
 #. module: alc_chronovet_connector
-#: code:addons/alc_chronovet_connector/models/sale_order.py:82
+#: code:addons/alc_chronovet_connector/models/sale_order.py:85
 #, python-format
 msgid "Unknowns SKU(s): %s , "
 msgstr ""
