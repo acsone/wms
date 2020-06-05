@@ -121,6 +121,7 @@ class SaleOrder(models.Model):
                 "city": customer_info.get("city"),
                 "phone": customer_info.get("phone"),
                 "mobile": customer_info.get("mobile"),
+                "is_sale_back_order_accepted": False,
                 "category_id": [
                     (
                         4,

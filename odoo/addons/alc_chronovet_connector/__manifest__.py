@@ -24,6 +24,7 @@
         "sale",
         "sales_team",
         "stock_available",
+        "stock_picking_backorder",  # is_sale_back_order_accepted on respartner
         "specific_data",  # categs for product_assortment
         "specific_partner",  # alcyon_category_id on res_partner
         "specific_sale",  # sale_channel field on SO
