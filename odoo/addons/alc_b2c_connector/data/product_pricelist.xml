@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- pylint:disable=duplicate-xml-record-id -->
+<odoo noupdate="1">
+
+    <record id="product_pricelist_b2c" model="product.pricelist">
+        <field name="name">List de prix B2C</field>
+        <field name="discount_policy">with_discount</field>
+        <field name="currency_id" ref="base.EUR"/>
+    </record>
+
+    <record id="product_pricelist_b2c_item" model="product.pricelist.item">
+        <field name="base">list_price</field>
+        <field name="price_discount" eval="12"/>
+        <field name="name">12% Remise</field>
+        <field name="pricelist_id" ref="product_pricelist_b2c"/>
+        <field name="compute_price">formula</field>
+    </record>
+
+    <!--
+        FORCE ONLY ONE ITEM ON THE PRICE LIST
+        When a price list is created, odoo assign a default price list item/
+        To be sure that only our new item is assigned to the price list
+        we reassign the item_ids....
+    -->
+    <record id="product_pricelist_b2c" model="product.pricelist">
+        <field name="item_ids" eval="[(6, 0, [ref('alc_b2c_connector.product_pricelist_b2c_item')])]"/>
+    </record>
+
+
+</odoo>
