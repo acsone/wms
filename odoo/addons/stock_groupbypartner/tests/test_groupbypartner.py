@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # Copyright 2019 Camptocamp
+# Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from .common import GroupByPartnerCommonCase
@@ -17,9 +18,15 @@ class TestGroupByPartner(GroupByPartnerCommonCase):
 
     """
 
-    def _create_procurement_group(self, partner):
+    def _create_procurement_group(self, partner, customer=None):
+        customer = customer or partner
         group = self.env["procurement.group"].create(
-            {"name": "test group", "move_type": "direct", "partner_id": partner.id}
+            {
+                "name": "test group",
+                "move_type": "direct",
+                "partner_id": partner.id,
+                "customer_id": customer.id,
+            }
         )
         return group
 
@@ -43,6 +50,19 @@ class TestGroupByPartner(GroupByPartnerCommonCase):
     def test_assign_same_picking(self):
         """Moves with similar values are grouped"""
         group = self._create_procurement_group(self.partner1)
+        move1 = self._create_move(group)
+        move1.assign_picking()
+
+        move2 = self._create_move(group)
+        move2.assign_picking()
+
+        self.assertEqual(move1.picking_id, move2.picking_id)
+
+    def test_assign_same_picking_01(self):
+        """Moves with similar values are grouped
+        (here we have a customer <> partner)
+        """
+        group = self._create_procurement_group(self.partner1, self.partner2)
         move1 = self._create_move(group)
         move1.assign_picking()
 
@@ -97,3 +117,63 @@ class TestGroupByPartner(GroupByPartnerCommonCase):
         move4 = self._create_move(group4)
         move4.assign_picking()
         self.assertEqual(move2.picking_id, move4.picking_id)
+
+    def test_assign_grouby_01(self):
+        """ Moves are grouped by partner"""
+        group = self._create_procurement_group(self.partner1)
+        move1 = self._create_move(group)
+        move1.assign_picking()
+
+        group2 = self._create_procurement_group(self.partner1)
+        move2 = self._create_move(group2)
+        move2.assign_picking()
+
+        self.assertEqual(move1.picking_id, move2.picking_id)
+
+    def test_assign_grouby_02(self):
+        """ Moves are grouped by partner and customer
+        Test Case:
+            = partners
+            = customers
+        """
+        group = self._create_procurement_group(self.partner1, customer=self.partner2)
+        move1 = self._create_move(group)
+        move1.assign_picking()
+
+        group2 = self._create_procurement_group(self.partner1, customer=self.partner2)
+        move2 = self._create_move(group2)
+        move2.assign_picking()
+
+        self.assertEqual(move1.picking_id, move2.picking_id)
+
+    def test_assign_grouby_03(self):
+        """ Moves are grouped by partner and customer
+        Test Case:
+            = partners
+            <> customers
+        """
+        group = self._create_procurement_group(self.partner1)
+        move1 = self._create_move(group)
+        move1.assign_picking()
+
+        group2 = self._create_procurement_group(self.partner1, customer=self.partner2)
+        move2 = self._create_move(group2)
+        move2.assign_picking()
+
+        self.assertNotEqual(move1.picking_id, move2.picking_id)
+
+    def test_assign_grouby_04(self):
+        """ Moves are grouped by partner and customer
+        Test Case:
+            <> partners
+            = customers
+        """
+        group = self._create_procurement_group(self.partner2, customer=self.partner2)
+        move1 = self._create_move(group)
+        move1.assign_picking()
+
+        group2 = self._create_procurement_group(self.partner1, customer=self.partner2)
+        move2 = self._create_move(group2)
+        move2.assign_picking()
+
+        self.assertNotEqual(move1.picking_id, move2.picking_id)

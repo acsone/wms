@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # Copyright 2016-2017 Jacques-Etienne Baudoux (BCIM)
+# Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import api, models
@@ -23,6 +24,7 @@ class SaleOrder(models.Model):
 
     def _prepare_procurement_group(self):
         values = super(SaleOrder, self)._prepare_procurement_group()
+        values["customer_id"] = self.partner_id.id
         if self.carrier_id:
             values["carrier_id"] = self.carrier_id.id
         return values

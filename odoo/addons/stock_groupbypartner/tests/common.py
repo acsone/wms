@@ -17,6 +17,9 @@ class GroupByPartnerCommonCase(SavepointCase):
         cls.partner1 = cls.env["res.partner"].create(
             {"name": "Unittest partner", "ref": "12344566777878"}
         )
+        cls.partner2 = cls.env["res.partner"].create(
+            {"name": "Unittest partner", "ref": "12344566777879"}
+        )
         cls.p1 = cls.env["product.product"].create(
             {
                 "name": "Unittest P1",
