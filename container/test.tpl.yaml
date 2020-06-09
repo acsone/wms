@@ -80,8 +80,9 @@ spec:
         - name: ADDITIONAL_ODOO_RC
           value: |
             [api_key_chronovet_rest_api]
-            user=alc_chronovet_rest_api_user
+            user=alc_b2c_rest_api_user
             key= {{ TEST_CHRONOVET_API_KEY }}
+            backend_name=Chronovet
         ports:
         - name: web
           containerPort: 8069
