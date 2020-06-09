@@ -17,9 +17,15 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: stock_groupbypartner
-#: code:addons/stock_groupbypartner/models/stock.py:306
+#: code:addons/stock_groupbypartner/models/stock_move.py:173
 #, python-format
 msgid "Backorder of %s"
+msgstr ""
+
+#. module: stock_groupbypartner
+#: model:ir.model.fields,field_description:stock_groupbypartner.field_procurement_group_customer_id
+#: model:ir.model.fields,field_description:stock_groupbypartner.field_stock_picking_customer_id
+msgid "Customer"
 msgstr ""
 
 #. module: stock_groupbypartner
@@ -38,13 +44,13 @@ msgid "Procurement Requisition"
 msgstr ""
 
 #. module: stock_groupbypartner
-#: code:addons/stock_groupbypartner/models/stock.py:309
+#: code:addons/stock_groupbypartner/models/stock_move.py:176
 #, python-format
 msgid "Remaining move '%s' moved to new backorder <em>%s</em>."
 msgstr ""
 
 #. module: stock_groupbypartner
-#: code:addons/stock_groupbypartner/models/stock.py:247
+#: code:addons/stock_groupbypartner/models/stock_move.py:114
 #, python-format
 msgid ""
 "Remaining move '%s' of qty %s and origin '%s' moved to exiting picking <em>"
@@ -52,8 +58,8 @@ msgid ""
 msgstr ""
 
 #. module: stock_groupbypartner
-#: code:addons/stock_groupbypartner/models/stock.py:83
-#: code:addons/stock_groupbypartner/models/stock.py:113
+#: code:addons/stock_groupbypartner/models/stock_picking.py:114
+#: code:addons/stock_groupbypartner/models/stock_picking.py:144
 #, python-format
 msgid ""
 "Remaining moves canceled as partner does not accept backorder:<ul>%s</ul>"
@@ -67,6 +73,26 @@ msgstr ""
 #. module: stock_groupbypartner
 #: model:ir.model,name:stock_groupbypartner.model_stock_move
 msgid "Stock Move"
+msgstr ""
+
+#. module: stock_groupbypartner
+#: model:ir.model.fields,help:stock_groupbypartner.field_stock_picking_customer_id
+msgid ""
+"The partner customer on the SO if the picking has been created for a "
+"procurement group linked to a SO."
+msgstr ""
+
+#. module: stock_groupbypartner
+#: model:ir.model.fields,help:stock_groupbypartner.field_procurement_group_customer_id
+msgid ""
+"The partner customer on the SO. In the same time, the partner_id is the "
+"partner_shipping_id from the SO. This fiels help us to keep the information "
+"of the real/final customer from the SO"
+msgstr ""
+
+#. module: stock_groupbypartner
+#: model:ir.model.fields,help:stock_groupbypartner.field_procurement_group_carrier_id
+msgid "The partner shipping on the SO"
 msgstr ""
 
 #. module: stock_groupbypartner
