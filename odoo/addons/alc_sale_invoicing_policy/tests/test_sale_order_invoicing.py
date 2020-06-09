@@ -7,9 +7,6 @@ from odoo.tests.common import SavepointCase
 
 
 class TestSaleOrderInvoicing(SavepointCase):
-    at_install = False
-    post_install = True
-
     @classmethod
     def setUpClass(cls):
         super(TestSaleOrderInvoicing, cls).setUpClass()
@@ -63,7 +60,6 @@ class TestSaleOrderInvoicing(SavepointCase):
 
     def _process_picking(self, picking):
         picking.force_assign()
-        picking.assign_operator()
         for pack in picking.pack_operation_product_ids:
             pack.qty_done = pack.product_qty
         picking.do_new_transfer()

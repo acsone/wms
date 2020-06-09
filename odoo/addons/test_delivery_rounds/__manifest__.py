@@ -9,6 +9,8 @@
     "maintainer": "Camptocamp",
     "category": "Stock Management",
     "depends": [
+        "alc_sale_invoicing_on_transfer",
+        "alc_sale_invoicing_policy",
         "delivery_rounds_alcyon",
         "stock_picking_zone",
         "stock_lot_loss",
