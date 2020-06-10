@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* alc_sale_invoicing_policy
+# 	* alc_sale_invoicing_policy
 #
 msgid ""
 msgstr ""
@@ -10,27 +10,32 @@ msgstr ""
 "PO-Revision-Date: 2020-06-09 15:17+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
 #. module: alc_sale_invoicing_policy
+#: selection:account.payment.mode,invoice_frequency:0
 #: selection:res.partner,invoice_frequency:0
 msgid "1 Month"
 msgstr "1 Month"
 
 #. module: alc_sale_invoicing_policy
+#: selection:account.payment.mode,invoice_frequency:0
 #: selection:res.partner,invoice_frequency:0
 msgid "10 Days"
 msgstr "10 Days"
 
 #. module: alc_sale_invoicing_policy
+#: selection:account.payment.mode,invoice_grouping:0
 #: selection:res.partner,invoice_grouping:0
 msgid "All at once"
 msgstr "All at once"
 
 #. module: alc_sale_invoicing_policy
+#: selection:account.payment.mode,invoice_grouping:0
 #: selection:res.partner,invoice_grouping:0
 msgid "By delivery"
 msgstr "By delivery"
@@ -46,19 +51,34 @@ msgid "Invoice"
 msgstr "Factuur"
 
 #. module: alc_sale_invoicing_policy
+#: model:ir.model.fields,field_description:alc_sale_invoicing_policy.field_account_payment_mode_invoice_frequency
 #: model:ir.model.fields,field_description:alc_sale_invoicing_policy.field_res_partner_invoice_frequency
+#: model:ir.model.fields,field_description:alc_sale_invoicing_policy.field_res_users_invoice_frequency
 msgid "Invoice frequency"
 msgstr "Invoice frequency"
 
 #. module: alc_sale_invoicing_policy
+#: model:ir.model.fields,field_description:alc_sale_invoicing_policy.field_account_payment_mode_invoice_grouping
 #: model:ir.model.fields,field_description:alc_sale_invoicing_policy.field_res_partner_invoice_grouping
+#: model:ir.model.fields,field_description:alc_sale_invoicing_policy.field_res_users_invoice_grouping
 msgid "Invoice grouping"
 msgstr "Invoice grouping"
+
+#. module: alc_sale_invoicing_policy
+#: model:ir.ui.view,arch_db:alc_sale_invoicing_policy.account_payment_mode_form_view
+#, fuzzy
+msgid "Invoicing"
+msgstr "Factuur"
 
 #. module: alc_sale_invoicing_policy
 #: model:ir.model,name:alc_sale_invoicing_policy.model_res_partner
 msgid "Partner"
 msgstr "Relatie"
+
+#. module: alc_sale_invoicing_policy
+#: model:ir.model,name:alc_sale_invoicing_policy.model_account_payment_mode
+msgid "Payment Modes"
+msgstr ""
 
 #. module: alc_sale_invoicing_policy
 #: model:ir.model,name:alc_sale_invoicing_policy.model_sale_order
