@@ -75,6 +75,8 @@
         # "geoengine_base_geolocalize",
         # specific
         # "alc_geo_delivery_rounds",
+        "alc_sale_invoicing_on_transfer",
+        "alc_sale_invoicing_policy",
         "alc_analytic_category_report",
         "alc_edi_connector",
         "alc_product_uom_updatable",
