@@ -9,7 +9,6 @@ from datetime import datetime
 from dateutil.relativedelta import relativedelta
 
 from odoo import api, fields, models
-from odoo.addons.queue_job.exception import FailedJobError
 from odoo.addons.queue_job.job import job
 from odoo.tools import DEFAULT_SERVER_DATE_FORMAT
 
@@ -20,7 +19,9 @@ class SaleOrder(models.Model):
     _inherit = "sale.order"
 
     is_unique_invoice = fields.Boolean(
-        "Unique invoice", help="Create an unique invoice for this sale order"
+        "Unique invoice",
+        help="Create an unique invoice for this sale order",
+        index=True,
     )
 
     @api.model
@@ -33,75 +34,101 @@ class SaleOrder(models.Model):
                 date += relativedelta(months=1)
             date = date.replace(day=1)
             date -= relativedelta(days=1)
-            invoice_frequency = ["10_days", "1_month"]
+            invoice_frequencies = ["10_days", "1_month"]
         else:
             date = datetime.today()
             date = date.replace(day=day)
-            invoice_frequency = ["10_days"]
+            invoice_frequencies = ["10_days"]
         date_invoice = date.strftime(DEFAULT_SERVER_DATE_FORMAT)
 
-        query = """
-        SELECT DISTINCT so.partner_invoice_id
-        FROM sale_order AS so
-          INNER JOIN res_partner AS partner
-          ON partner.id = so.partner_invoice_id
-        WHERE so.invoice_status = 'to invoice'
-        AND partner.invoice_grouping = 'all_at_once'
-        AND partner.invoice_frequency IN %s
-        """
-        self.env.cr.execute(query, (tuple(invoice_frequency),))
-        partner_ids = [x[0] for x in self.env.cr.fetchall()]
+        # invoice the policy is resolved as follow: If grouping/frequency are
+        # defined on the payment_mode, they are used otherwise we use the
+        # information from the partner
 
-        for partner_id in partner_ids:
+        query = """
+        SELECT
+            so.partner_invoice_id,
+            so.payment_mode_id
+        FROM
+            sale_order AS so
+            INNER JOIN res_partner AS partner
+                ON partner.id = so.partner_invoice_id
+            LEFT JOIN account_payment_mode AS pm
+                ON pm.id = so.payment_mode_id
+        WHERE
+            so.invoice_status = 'to invoice'
+            AND COALESCE(pm.invoice_grouping, partner.invoice_grouping) = 'all_at_once'
+            AND COALESCE(pm.invoice_frequency, partner.invoice_frequency) IN %s
+        GROUP BY
+            so.partner_invoice_id,
+            so.payment_mode_id
+        """
+        cr = self.env.cr
+        cr.execute(query, (tuple(invoice_frequencies),))
+        for (partner_id, payment_mode_id) in cr.fetchall():
             self.with_delay(priority=9)._job_invoices_by_partner(
-                partner_id, date_invoice
+                partner_id, payment_mode_id, date_invoice
             )
 
         query = """
-        SELECT invoice.id
-        FROM account_invoice AS invoice
-          INNER JOIN res_partner AS partner
-          ON invoice.partner_id = partner.id
-        WHERE partner.invoice_grouping = 'by_delivery'
-        AND partner.invoice_frequency IN %s
-        AND invoice.state = 'draft'
-        AND invoice.type in ('out_invoice', 'out_refund')
+        SELECT
+            invoice.id
+        FROM
+            account_invoice AS invoice
+            INNER JOIN res_partner AS partner
+                ON invoice.partner_id = partner.id
+            LEFT JOIN account_payment_mode AS pm
+                ON pm.id = invoice.payment_mode_id
+        WHERE
+            invoice.state = 'draft'
+            AND invoice.type in ('out_invoice', 'out_refund')
+            AND COALESCE(pm.invoice_grouping, partner.invoice_grouping) = 'by_delivery'
+            AND COALESCE(pm.invoice_frequency, partner.invoice_frequency) IN %s
         """
-        self.env.cr.execute(query, (tuple(invoice_frequency),))
-        invoice_ids = [x[0] for x in self.env.cr.fetchall()]
+        cr.execute(query, (tuple(invoice_frequencies),))
+        invoice_ids = [x[0] for x in cr.fetchall()]
         invoices = self.env["account.invoice"].browse(invoice_ids)
         for invoice in invoices:
             invoice.with_delay(priority=3)._job_validate_invoice(date_invoice)
 
     @api.multi
     @job(default_channel="root.background.invoice_creation")  # priority=9
-    def _job_invoices_by_partner(self, partner_id, date_invoice):
-        partner = self.env["res.partner"].browse(partner_id)
-        if partner.invoice_grouping != "all_at_once":
-            raise FailedJobError("Invalid invoice grouping")
-
+    def _job_invoices_by_partner(self, partner_id, payment_mode_id, date_invoice):
         invoice_ids = []
-        # Create all the invoices
-        to_invoice_sales = self.search(
-            [
-                ("invoice_status", "=", "to invoice"),
-                ("partner_invoice_id", "=", partner.id),
-                ("order_line.qty_to_invoice", ">", 0),
-            ]
-        )
-        invoice_ids += to_invoice_sales.action_invoice_create(final=False)
-        # Create all the refunds
-        to_refund_sales = self.search(
-            [
-                ("invoice_status", "=", "to invoice"),
-                ("partner_invoice_id", "=", partner.id),
-                ("order_line.qty_to_invoice", "<", 0),
-            ]
-        )
-        invoice_ids += to_refund_sales.action_invoice_create(final=True)
-        invoices = self.env["account.invoice"].browse(invoice_ids)
-        # Validate invoices
-        invoices.with_delay(priority=3)._job_validate_invoice(date_invoice)
+        with self._auto_join(["order_line"]):
+            # When the left side of a domain leaf contains a dot ie
+            # "order_line.qty_to_invoice", the orm will first query the
+            # linked model (select id from sale_order_line where qty_to_invoice...)
+            # and use the result into the query on the initial model with a in
+            # operator. This process could lead to huge and inefficient queries
+            # By using auto_join, we temporarily instruct the ORM that a SQL
+            # join can be safely be used when building the SQL query in place
+            # of the dummy mechanism. This is only safe if we are sure that no
+            # record rule applies to the linked model
+
+            # Create all the invoices
+            to_invoice_sales = self.search(
+                [
+                    ("invoice_status", "=", "to invoice"),
+                    ("partner_invoice_id", "=", partner_id),
+                    ("order_line.qty_to_invoice", ">", 0),
+                    ("payment_mode_id", "=", payment_mode_id),
+                ]
+            )
+            invoice_ids += to_invoice_sales.action_invoice_create(final=False)
+            # Create all the refunds
+            to_refund_sales = self.search(
+                [
+                    ("invoice_status", "=", "to invoice"),
+                    ("partner_invoice_id", "=", partner_id),
+                    ("order_line.qty_to_invoice", "<", 0),
+                    ("payment_mode_id", "=", payment_mode_id),
+                ]
+            )
+            invoice_ids += to_refund_sales.action_invoice_create(final=True)
+            invoices = self.env["account.invoice"].browse(invoice_ids)
+            # Validate invoices
+            invoices.with_delay(priority=3)._job_validate_invoice(date_invoice)
 
     @api.multi
     def action_invoice_create(self, grouped=False, final=False):

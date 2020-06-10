@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2020 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+    <record model="ir.ui.view" id="account_payment_mode_form_view">
+        <field name="name">account.payment.mode.form (in alc_sale_invoicing_policy)</field>
+        <field name="model">account.payment.mode</field>
+        <field name="inherit_id" ref="account_payment_mode.account_payment_mode_form"/>
+        <field name="arch" type="xml">
+            <group name="main" position="after">
+                <group name="invoicing" string="Invoicing">
+                    <field name="invoice_frequency"/>
+                    <field name="invoice_grouping"/>
+                </group>
+            </group>
+        </field>
+    </record>
+
+</odoo>

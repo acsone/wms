@@ -15,20 +15,26 @@
         these values overrides the one defined on the partner.
         The frequency and/or grouping defined on the partner applies to all the
         payment mode without these informations and to sale orders created without
-        payment mode
+        payment mode.
     """,
     "version": "10.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
+        "alc_base_auto_join",
         "alc_sale_invoicing_on_transfer",
         "account",
         "account_payment_mode",
         "account_payment_sale",
         "queue_job",
     ],
-    "data": ["data/ir_cron.xml", "views/sale_order.xml", "views/res_partner.xml"],
+    "data": [
+        "views/account_payment_mode.xml",
+        "data/ir_cron.xml",
+        "views/sale_order.xml",
+        "views/res_partner.xml",
+    ],
     "demo": [],
     "external_dependencies": {"python": ["openupgradelib"]},
     "pre_init_hook": "pre_init_hook",
