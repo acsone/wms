@@ -23,16 +23,6 @@ msgid " * The 'Draft' status is used when a user is encoding a new and unconfirm
 msgstr ""
 
 #. module: specific_account
-#: selection:res.partner,invoice_frequency:0
-msgid "1 Month"
-msgstr ""
-
-#. module: specific_account
-#: selection:res.partner,invoice_frequency:0
-msgid "10 Days"
-msgstr ""
-
-#. module: specific_account
 #: model:ir.ui.view,arch_db:specific_account.invoice_supplier_form_inherit
 msgid "<span>Lines Fast Entry</span>"
 msgstr ""
@@ -40,11 +30,6 @@ msgstr ""
 #. module: specific_account
 #: model:account.tax.group,name:specific_account.tax_group_apb
 msgid "APB"
-msgstr ""
-
-#. module: specific_account
-#: selection:res.partner,invoice_grouping:0
-msgid "All at once"
 msgstr ""
 
 #. module: specific_account
@@ -66,11 +51,6 @@ msgid "August"
 msgstr ""
 
 #. module: specific_account
-#: selection:res.partner,invoice_grouping:0
-msgid "By delivery"
-msgstr ""
-
-#. module: specific_account
 #: model:ir.actions.act_window,help:specific_account.action_invoice_tree1_refund
 msgid "Click to create a customer refund."
 msgstr ""
@@ -78,16 +58,6 @@ msgstr ""
 #. module: specific_account
 #: model:ir.model,name:specific_account.model_res_company
 msgid "Companies"
-msgstr ""
-
-#. module: specific_account
-#: model:ir.model.fields,help:specific_account.field_sale_order_is_unique_invoice
-msgid "Create an unique invoice for this sale order"
-msgstr ""
-
-#. module: specific_account
-#: model:ir.model.fields,field_description:specific_account.field_stock_picking_type_create_invoice_on_transfer
-msgid "Create invoice on transfer"
 msgstr ""
 
 #. module: specific_account
@@ -160,18 +130,6 @@ msgid "Invoice Terms and Conditions"
 msgstr ""
 
 #. module: specific_account
-#: model:ir.model.fields,field_description:specific_account.field_res_partner_invoice_frequency
-#: model:ir.model.fields,field_description:specific_account.field_res_users_invoice_frequency
-msgid "Invoice frequency"
-msgstr ""
-
-#. module: specific_account
-#: model:ir.model.fields,field_description:specific_account.field_res_partner_invoice_grouping
-#: model:ir.model.fields,field_description:specific_account.field_res_users_invoice_grouping
-msgid "Invoice grouping"
-msgstr ""
-
-#. module: specific_account
 #: model:ir.model.fields,field_description:specific_account.field_account_invoice_report_invoice_month
 msgid "Invoice month"
 msgstr ""
@@ -239,11 +197,6 @@ msgid "Ordered Qty"
 msgstr ""
 
 #. module: specific_account
-#: model:ir.model,name:specific_account.model_res_partner
-msgid "Partner"
-msgstr ""
-
-#. module: specific_account
 #: model:ir.model,name:specific_account.model_product_product
 msgid "Product"
 msgstr ""
@@ -272,21 +225,6 @@ msgstr ""
 #. module: specific_account
 #: model:ir.model,name:specific_account.model_account_tax
 msgid "Tax"
-msgstr ""
-
-#. module: specific_account
-#: model:ir.model,name:specific_account.model_stock_picking_type
-msgid "The picking type determines the picking view"
-msgstr ""
-
-#. module: specific_account
-#: model:ir.model,name:specific_account.model_stock_picking
-msgid "Transfer"
-msgstr ""
-
-#. module: specific_account
-#: model:ir.model.fields,field_description:specific_account.field_sale_order_is_unique_invoice
-msgid "Unique invoice"
 msgstr ""
 
 #. module: specific_account

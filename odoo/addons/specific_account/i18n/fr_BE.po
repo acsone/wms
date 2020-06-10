@@ -31,16 +31,6 @@ msgid ""
 msgstr ""
 
 #. module: specific_account
-#: selection:res.partner,invoice_frequency:0
-msgid "1 Month"
-msgstr "1 Mois"
-
-#. module: specific_account
-#: selection:res.partner,invoice_frequency:0
-msgid "10 Days"
-msgstr "10 Jours"
-
-#. module: specific_account
 #: model:ir.ui.view,arch_db:specific_account.invoice_supplier_form_inherit
 msgid "<span>Lines Fast Entry</span>"
 msgstr ""
@@ -49,11 +39,6 @@ msgstr ""
 #: model:account.tax.group,name:specific_account.tax_group_apb
 msgid "APB"
 msgstr "APB"
-
-#. module: specific_account
-#: selection:res.partner,invoice_grouping:0
-msgid "All at once"
-msgstr "Tout en 1 fois"
 
 #. module: specific_account
 #: model:ir.actions.act_window,name:specific_account.action_analytic_tag
@@ -74,11 +59,6 @@ msgid "August"
 msgstr "Août"
 
 #. module: specific_account
-#: selection:res.partner,invoice_grouping:0
-msgid "By delivery"
-msgstr "Par livraison"
-
-#. module: specific_account
 #: model:ir.actions.act_window,help:specific_account.action_invoice_tree1_refund
 msgid "Click to create a customer refund."
 msgstr "Cliquer pour créer une note de crédit client."
@@ -87,16 +67,6 @@ msgstr "Cliquer pour créer une note de crédit client."
 #: model:ir.model,name:specific_account.model_res_company
 msgid "Companies"
 msgstr "Sociétés"
-
-#. module: specific_account
-#: model:ir.model.fields,help:specific_account.field_sale_order_is_unique_invoice
-msgid "Create an unique invoice for this sale order"
-msgstr "Créer une facture unique pour cette vente"
-
-#. module: specific_account
-#: model:ir.model.fields,field_description:specific_account.field_stock_picking_type_create_invoice_on_transfer
-msgid "Create invoice on transfer"
-msgstr "Créer une facture lors du transfert"
 
 #. module: specific_account
 #: model:ir.ui.menu,name:specific_account.menu_action_sale_invoice_tree1
@@ -168,18 +138,6 @@ msgid "Invoice Terms and Conditions"
 msgstr "Conditions générales pour facture"
 
 #. module: specific_account
-#: model:ir.model.fields,field_description:specific_account.field_res_partner_invoice_frequency
-#: model:ir.model.fields,field_description:specific_account.field_res_users_invoice_frequency
-msgid "Invoice frequency"
-msgstr "Fréquence de facturation"
-
-#. module: specific_account
-#: model:ir.model.fields,field_description:specific_account.field_res_partner_invoice_grouping
-#: model:ir.model.fields,field_description:specific_account.field_res_users_invoice_grouping
-msgid "Invoice grouping"
-msgstr "Regroupement des factures"
-
-#. module: specific_account
 #: model:ir.model.fields,field_description:specific_account.field_account_invoice_report_invoice_month
 msgid "Invoice month"
 msgstr "Mois de la facture"
@@ -247,11 +205,6 @@ msgid "Ordered Qty"
 msgstr ""
 
 #. module: specific_account
-#: model:ir.model,name:specific_account.model_res_partner
-msgid "Partner"
-msgstr "Partenaire"
-
-#. module: specific_account
 #: model:ir.model,name:specific_account.model_product_product
 msgid "Product"
 msgstr "Article"
@@ -283,24 +236,42 @@ msgid "Tax"
 msgstr "Taxe"
 
 #. module: specific_account
-#: model:ir.model,name:specific_account.model_stock_picking_type
-msgid "The picking type determines the picking view"
-msgstr ""
-
-#. module: specific_account
-#: model:ir.model,name:specific_account.model_stock_picking
-msgid "Transfer"
-msgstr "Transfert"
-
-#. module: specific_account
-#: model:ir.model.fields,field_description:specific_account.field_sale_order_is_unique_invoice
-msgid "Unique invoice"
-msgstr "Facture unique"
-
-#. module: specific_account
 #: model:ir.model,name:specific_account.model_account_config_settings
 msgid "account.config.settings"
 msgstr "account.config.settings"
+
+#~ msgid "1 Month"
+#~ msgstr "1 Mois"
+
+#~ msgid "10 Days"
+#~ msgstr "10 Jours"
+
+#~ msgid "All at once"
+#~ msgstr "Tout en 1 fois"
+
+#~ msgid "By delivery"
+#~ msgstr "Par livraison"
+
+#~ msgid "Create an unique invoice for this sale order"
+#~ msgstr "Créer une facture unique pour cette vente"
+
+#~ msgid "Create invoice on transfer"
+#~ msgstr "Créer une facture lors du transfert"
+
+#~ msgid "Invoice frequency"
+#~ msgstr "Fréquence de facturation"
+
+#~ msgid "Invoice grouping"
+#~ msgstr "Regroupement des factures"
+
+#~ msgid "Partner"
+#~ msgstr "Partenaire"
+
+#~ msgid "Transfer"
+#~ msgstr "Transfert"
+
+#~ msgid "Unique invoice"
+#~ msgstr "Facture unique"
 
 #~ msgid ""
 #~ "Automaticaly cancel products that could not be delivered. Must be set on "
