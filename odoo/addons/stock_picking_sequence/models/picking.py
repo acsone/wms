@@ -22,6 +22,12 @@
 from odoo import api, fields, models
 
 
+def create_index(cr, index_name, table, expression):
+    cr.execute("SELECT indexname FROM pg_indexes WHERE indexname = %s", (index_name,))
+    if not cr.fetchone():
+        cr.execute("CREATE INDEX %s " "ON %s %s" % (index_name, table, expression))
+
+
 class StockPicking(models.Model):
     _inherit = "stock.picking"
     _order = "priority desc, rank desc, date asc, id desc"
@@ -31,6 +37,25 @@ class StockPicking(models.Model):
         default=-1,
         states={"done": [("readonly", True)], "cancel": [("readonly", True)]},
     )
+
+    @api.model_cr
+    def init(self):
+
+        # index for the default _order of stock.picking
+        index_name = "stock_picking_order_list_sort_desc_index"
+        create_index(
+            self.env.cr,
+            index_name,
+            self._table,
+            "(priority desc, rank desc, date asc, id desc)",
+        )
+        index_name = "stock_picking_order_list_sort_desc_index_2"
+        create_index(
+            self.env.cr,
+            index_name,
+            self._table,
+            "(picking_type_id, priority desc, rank desc, date asc, id desc)",
+        )
 
     @api.multi
     def button_priority_recompute(self):
