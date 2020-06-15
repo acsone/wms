@@ -8,7 +8,7 @@
     "author": "Camptocamp",
     "license": "AGPL-3",
     "category": "Warehouse",
-    "depends": ["mail", "product_expiry", "stock"],
+    "depends": ["alc_base_auto_join", "mail", "product_expiry", "stock"],
     "website": "http://www.camptocamp.com",
     "data": [
         # Data

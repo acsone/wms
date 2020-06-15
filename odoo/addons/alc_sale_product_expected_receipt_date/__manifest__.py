@@ -8,7 +8,7 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["sale", "sale_stock"],
+    "depends": ["alc_base_auto_join", "sale", "sale_stock"],
     "data": ["views/sale_order.xml"],
     "demo": [],
 }

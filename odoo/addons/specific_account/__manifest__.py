@@ -9,6 +9,7 @@
     "license": "AGPL-3",
     "category": "Sales",
     "depends": [
+        "alc_base_auto_join",
         "sale",
         "purchase",
         "specific_base",

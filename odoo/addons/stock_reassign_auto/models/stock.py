@@ -133,14 +133,15 @@ class StockMove(models.Model):
         if not products:
             _logger.info("No product to reassign, exiting")
             return
-        moves_pickings = self.search(
-            [
-                ("picking_id.picking_type_subcode", "=", "PICK"),
-                ("state", "=", "confirmed"),
-                ("product_id", "in", products.ids),
-                ("picking_id.operator_id", "=", False),
-            ]
-        )
+        with self._auto_join(["picking_id"]):
+            moves_pickings = self.search(
+                [
+                    ("picking_id.picking_type_subcode", "=", "PICK"),
+                    ("state", "=", "confirmed"),
+                    ("product_id", "in", products.ids),
+                    ("picking_id.operator_id", "=", False),
+                ]
+            )
         if not moves_pickings:
             return
         _logger.debug("Products received are in backorder")

@@ -8,7 +8,7 @@
     "author": "BCIM",
     "maintainer": "Camptocamp",
     "category": "Accounting & Finance",
-    "depends": ["account_invoice_accrual"],
+    "depends": ["alc_base_auto_join", "account_invoice_accrual"],
     "data": ["data/ir_cron.xml"],
     "installable": True,
     "auto_install": False,
