@@ -42,4 +42,6 @@
         - git am "$(git format-patch -1 0004b9ebef4c6deb3333c8b0b48b893fcd37e1ec -o ../patches)"
          # [IMP] stock: Disable translation on product qty computation
         - git am "$(git format-patch -1 ca10dfc3c4340bd8e058397a50895addb2be20f0 -o ../patches)"
+         # [FIX] models: more than one prefetch in onchange 
+        - git am "$(git format-patch -1 9024cbd40bce780f360600853c44bfb1d27c208b -o ../patches)"
     target: acsone 10.0-alc_master
