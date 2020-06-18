@@ -75,14 +75,18 @@
         # "geoengine_base_geolocalize",
         # specific
         # "alc_geo_delivery_rounds",
-        "alc_sale_invoicing_on_transfer",
-        "alc_sale_invoicing_policy",
-        "alc_analytic_category_report",
-        "alc_edi_connector",
-        "alc_product_uom_updatable",
         "account_move_productcateg",
         "account_payment_order_background",
         "account_tax_one_vat",
+        "alc_account_payment_globalization",
+        "alc_analytic_category_report",
+        "alc_b2c_connector",
+        "alc_chronovet",
+        "alc_chronovet_payment_globalization",
+        "alc_edi_connector",
+        "alc_product_uom_updatable",
+        "alc_sale_invoicing_on_transfer",
+        "alc_sale_invoicing_policy",
         "camptocamp_tools",  # to remove
         "connector_esb",
         "csv_file_export",  # to remove
