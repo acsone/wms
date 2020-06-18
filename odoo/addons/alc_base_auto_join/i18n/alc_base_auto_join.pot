@@ -84,11 +84,6 @@ msgid "Update status of provider account"
 msgstr ""
 
 #. module: alc_base_auto_join
-#: model:ir.model.fields,field_description:alc_base_auto_join.field_server_config_api_key_chronovet_rest_api | backend_name
-msgid "api_key_chronovet_rest_api | backend_name"
-msgstr ""
-
-#. module: alc_base_auto_join
 #: model:ir.model,name:alc_base_auto_join.model_base
 msgid "base"
 msgstr ""
