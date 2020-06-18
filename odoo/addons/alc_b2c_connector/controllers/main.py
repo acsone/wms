@@ -4,12 +4,12 @@
 from odoo.addons.base_rest.controllers import main
 from odoo.http import request
 
-from ..services.base_b2c_service import CHRONOVET_COLLECTION
+from ..services.base_b2c_service import B2C_COLLECTION
 
 
 class RestController(main.RestController):
     _root_path = "/b2c_api/"
-    _collection_name = CHRONOVET_COLLECTION
+    _collection_name = B2C_COLLECTION
     _default_auth = "api_key"
 
     @classmethod

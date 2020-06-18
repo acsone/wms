@@ -9,7 +9,7 @@ from odoo.addons.component.core import WorkContext
 from odoo.addons.component.tests.common import SavepointComponentCase
 
 from ..hooks import _initialize_product_assortment_filter
-from ..services.base_b2c_service import CHRONOVET_COLLECTION
+from ..services.base_b2c_service import B2C_COLLECTION
 
 
 class CommonCase(SavepointComponentCase):
@@ -45,7 +45,31 @@ class CommonCase(SavepointComponentCase):
             }
         )
         cls.change_product_qty(cls.saleable_product, 5)
-        cls.b2c_backend = cls.env.ref("alc_b2c_connector.alc_b2c_chronovet_backend")
+        cls.payment_mode = cls.env["account.payment.mode"].create(
+            {
+                "name": "Inbound payment mode",
+                "company_id": cls.env.ref("base.main_company").id,
+                "bank_account_link": "variable",
+                "payment_method_id": cls.env.ref(
+                    "account.account_payment_method_manual_in"
+                ).id,
+                "payment_type": "inbound",
+            }
+        )
+        cls.b2c_backend = cls.env["alc.b2c.backend"].create(
+            {
+                "name": "B2c backend test",
+                "product_assortment_id": cls.env.ref(
+                    "alc_b2c_connector.b2c_product_assortment_filter"
+                ).id,
+                "pricelist_id": cls.env.ref(
+                    "alc_b2c_connector.product_pricelist_b2c"
+                ).id,
+                "sale_team_id": cls.env.ref("sales_team.salesteam_website_sales").id,
+                "payment_mode_id": cls.payment_mode.id,
+                "sale_channel": "web",
+            }
+        )
 
     @classmethod
     def change_product_qty(cls, product, qty):
@@ -62,7 +86,7 @@ class CommonCase(SavepointComponentCase):
         )
         if "b2c_backend" not in params:
             params["b2c_backend"] = cls.b2c_backend
-        collection = _PseudoCollection(CHRONOVET_COLLECTION, ctx.env)
+        collection = _PseudoCollection(B2C_COLLECTION, ctx.env)
         yield WorkContext(
             model_name="rest.service.registration", collection=collection, **params
         )

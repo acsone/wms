@@ -20,7 +20,6 @@ class SaleOrder(models.Model):
     _inherit = "sale.order"
 
     b2c_ref = fields.Char(string="Reference B2C", copy=False, index=True)
-    sale_channel = fields.Selection(selection_add=[("chronovet", "Chronovet")])
 
     _sql_constraints = [
         (
