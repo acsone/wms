@@ -29,12 +29,12 @@ before_script:
     }
     function build_and_push_image() {
         echo "Building OCI image ${IMAGE}..."
-        docker build -t ${IMAGE} .
+        podman build --pull-always -t ${IMAGE} --volume ${PWD}/release:/tmp/release .
         echo "Pushing image to GitLab Container Registry..."
-        docker login ${CI_REGISTRY} -u ${CI_REGISTRY_USER} -p ${CI_REGISTRY_PASSWORD}
-        docker push ${IMAGE}
+        podman login ${CI_REGISTRY} -u ${CI_REGISTRY_USER} -p ${CI_REGISTRY_PASSWORD}
+        podman push ${IMAGE}
         echo "Removing image from Runner..."
-        docker rmi ${IMAGE}
+        podman rmi ${IMAGE}
     }
     function create_gitlab_registry_secret() {
         kubectl create secret docker-registry \
@@ -124,7 +124,7 @@ test:
 build-and-publish-image:
   stage: build image
   tags:
-    - docker
+    - podman
   script:
     - build_and_push_image
   only:
