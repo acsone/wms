@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* alc_chronovet_invoicing
+#	* alc_account_payment_globalization
 #
 msgid ""
 msgstr ""
@@ -13,8 +13,8 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
-#. module: alc_chronovet_invoicing
-#: model:account.payment.mode,name:alc_chronovet_invoicing.account_payment_mode_chronovet
+#. module: alc_account_payment_globalization
+#: model:account.payment.mode,name:alc_account_payment_globalization.account_payment_mode_chronovet
 msgid "Domiciliation Chronovet"
 msgstr ""
 

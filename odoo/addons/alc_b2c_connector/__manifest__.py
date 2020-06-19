@@ -14,7 +14,8 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        "alc_chronovet_invoicing",
+        "account_payment_mode",
+        "account_payment_sale",
         "auth_api_key",
         "base_rest",
         "base_suspend_security",
@@ -34,7 +35,6 @@
         "views/sale_order.xml",
         "data/ir_filters.xml",
         "data/product_pricelist.xml",
-        "data/alc_b2c_backend.xml",
         "data/res_users.xml",
         "data/res_partner_category.xml",
         "views/alc_b2c_backend.xml",
@@ -42,4 +42,5 @@
     ],
     "demo": [],
     "post_init_hook": "post_init_hook",
+    "application": True,
 }

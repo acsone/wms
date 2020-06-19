@@ -1,0 +1,1 @@
+from . import test_alc_account_payment_globalization

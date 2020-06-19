@@ -1,0 +1,1 @@
+from . import alc_chronovet_payment_globalization

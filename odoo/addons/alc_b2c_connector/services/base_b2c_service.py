@@ -7,13 +7,13 @@ from odoo import _, fields
 from odoo.addons.component.core import AbstractComponent
 from odoo.exceptions import AccessDenied
 
-CHRONOVET_COLLECTION = "b2c.collection"
+B2C_COLLECTION = "b2c.collection"
 
 
 class BaseB2CService(AbstractComponent):
     _inherit = ["base.rest.service"]
     _name = "base.b2c.rest.service"
-    _collection = CHRONOVET_COLLECTION
+    _collection = B2C_COLLECTION
 
     @property
     def b2c_backend(self):
