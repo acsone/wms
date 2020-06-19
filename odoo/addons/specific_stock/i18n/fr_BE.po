@@ -78,7 +78,7 @@ msgid "Cancel move"
 msgstr "Annuler le mouvement de stock"
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/stock_production_lot.py:347
+#: code:addons/specific_stock/models/stock_production_lot.py:348
 #, python-format
 msgid "Cannot generate a voice identifier"
 msgstr "Impossible de générer un identifiant vocal"
@@ -679,7 +679,7 @@ msgid "The reception must be linked to a Goods Received Note"
 msgstr "La réception doit être liée à un accusé de réception"
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/stock_production_lot.py:191
+#: code:addons/specific_stock/models/stock_production_lot.py:192
 #, python-format
 msgid "There is no checksum available"
 msgstr "Il n'y a pas de checksum disponnible"
@@ -715,7 +715,7 @@ msgid "There is no period for other products"
 msgstr "Il n'y a pas de période pour les autres produits"
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/stock_production_lot.py:335
+#: code:addons/specific_stock/models/stock_production_lot.py:336
 #, python-format
 msgid "There is no voice identifier available"
 msgstr "Il n'y a pas d'identifiant vocal disponible"
