@@ -94,7 +94,12 @@ class StockUpdateExporter(Component):
         if export_since:
             date_domain = self.domain_timestamp(export_since)
             domain = AND([domain, date_domain])
-        return self.env["stock.quant"].search(domain, order="write_date asc")
+        StockMove = self.env["stock.quant"]
+        # uses auto_join on stock_moveto avoid that the orm do a first
+        # query to get all the product's ids
+        # and uses a "product_id in" operator into the final query
+        with StockMove._auto_join(["product_id"]):
+            return StockMove.search(domain, order="write_date asc")
 
     @classmethod
     def get_exported_until(cls, last_export):

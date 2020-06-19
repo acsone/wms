@@ -7,7 +7,12 @@
     "version": "1.0",
     "author": "BCIM",
     "category": "Stock Management",
-    "depends": ["stock_picking_assignment", "stock_picking_subcode", "queue_job"],
+    "depends": [
+        "alc_base_auto_join",
+        "stock_picking_assignment",
+        "stock_picking_subcode",
+        "queue_job",
+    ],
     "data": [],
     "installable": True,
     "auto_install": False,

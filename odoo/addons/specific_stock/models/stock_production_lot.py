@@ -17,6 +17,7 @@ class StockProductionLot(models.Model):
     is_archived = fields.Boolean("Archived", default=False, readonly=True)
     checksum = fields.Char("Checksum", readonly=True)
     voice_identifier = fields.Char("Voice Identifier", readonly=True)
+    product_id = fields.Many2one(index=True)
 
     # Cancel defaults values from `product_expiry` module
     _defaults = {

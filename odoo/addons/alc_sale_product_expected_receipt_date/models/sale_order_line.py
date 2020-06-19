@@ -34,21 +34,30 @@ class SaleOrderLine(models.Model):
             expected_date_field.group_operator = "min"
             # TODO usage="supplier" into the domain????? Otherwise customer
             #  returns will be taken into account
+
+            # get incoming picking type
+            picking_type_ids = (
+                self.env["stock.picking.type"].search([("code", "=", "incoming")]).ids
+            )
             for warehouse, line_ids in line_ids_by_wh.items():
                 so_lines = self.browse(line_ids)
                 product_ids = so_lines.mapped("product_id").ids
                 domain = [
                     ("product_id", "in", product_ids),
                     ("state", "=", "assigned"),
-                    ("picking_id.picking_type_id.code", "=", "incoming"),
+                    ("picking_id.picking_type_id", "in", picking_type_ids),
                     ("location_dest_id", "child_of", warehouse.view_location_id.id),
                 ]
-                res = {
-                    item["product_id"][0]: item["date_expected"]
-                    for item in StockMove.read_group(
-                        domain, ["product_id", "date_expected"], ["product_id"]
-                    )
-                }
+                # uses auto_join on stock_picking to avoid that the orm do a first
+                # query to get all the picking's ids with code = incoming
+                # and uses a "pickihg_id in" operator into the final query
+                with StockMove._auto_join(["picking_id"]):
+                    res = {
+                        item["product_id"][0]: item["date_expected"]
+                        for item in StockMove.read_group(
+                            domain, ["product_id", "date_expected"], ["product_id"]
+                        )
+                    }
                 for line in so_lines:
                     ret[line.id] = res.get(line.product_id.id)
             return ret

@@ -62,39 +62,43 @@ class SaleOrderLine(models.Model):
                     # equals the immediately usable quantity
                     # minus the sum of stock move quantity
                     # which stock move is after the order line stock move
-                    order_line_stock_move = self.env["stock.move"].search(
-                        [
-                            ("procurement_id.sale_line_id", "=", line_id),
-                            ("state", "not in", ["draft", "cancel", "done"]),
-                        ],
-                        limit=1,
-                    )
+                    StockMove = self.env["stock.move"]
+                    with StockMove._auto_join(["procurement_id"]):
+                        order_line_stock_move = StockMove.search(
+                            [
+                                ("procurement_id.sale_line_id", "=", line_id),
+                                ("state", "not in", ["draft", "cancel", "done"]),
+                            ],
+                            limit=1,
+                        )
                     if not order_line_stock_move:
                         return min(abs(immediately_usable_qty), product_uom_qty)
                     stock_move_date_expected = order_line_stock_move.date_expected
-
-                    next_stock_moves = self.env["stock.move"].search(
-                        [
-                            ("product_id", "=", product.id),
-                            ("location_id.usage", "in", ("internal", "view")),
-                            ("location_dest_id.usage", "=", "customer"),
-                            ("procurement_id.sale_line_id", "!=", line_id),
-                            ("state", "not in", ["draft", "cancel", "done"]),
-                            "|",
-                            "|",
-                            ("priority", "<", order_line_stock_move.priority),
-                            "&",
-                            ("priority", "=", order_line_stock_move.priority),
-                            ("date_expected", ">", stock_move_date_expected),
-                            # in rare case of same date_expected,
-                            # use id to sort the moves
-                            "&",
-                            "&",
-                            ("priority", "=", order_line_stock_move.priority),
-                            ("date_expected", "=", stock_move_date_expected),
-                            ("id", ">", order_line_stock_move.id),
-                        ]
-                    )
+                    with StockMove._auto_join(
+                        ["location_id", "location_dest_id", "procurement_id"]
+                    ):
+                        next_stock_moves = self.env["stock.move"].search(
+                            [
+                                ("product_id", "=", product.id),
+                                ("location_id.usage", "in", ("internal", "view")),
+                                ("location_dest_id.usage", "=", "customer"),
+                                ("procurement_id.sale_line_id", "!=", line_id),
+                                ("state", "not in", ["draft", "cancel", "done"]),
+                                "|",
+                                "|",
+                                ("priority", "<", order_line_stock_move.priority),
+                                "&",
+                                ("priority", "=", order_line_stock_move.priority),
+                                ("date_expected", ">", stock_move_date_expected),
+                                # in rare case of same date_expected,
+                                # use id to sort the moves
+                                "&",
+                                "&",
+                                ("priority", "=", order_line_stock_move.priority),
+                                ("date_expected", "=", stock_move_date_expected),
+                                ("id", ">", order_line_stock_move.id),
+                            ]
+                        )
                     next_quantities = sum(
                         move.product_uom_qty for move in next_stock_moves
                     )

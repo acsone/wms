@@ -34,7 +34,7 @@ lxml==3.5.0
 Mako==1.0.4
 MarkupSafe==0.23
 mock==2.0.0
-odoo @ git+https://github.com/acsone/odoo.git@c0a8cce640931f9eccc6aabe3b49fb1f61181e16
+odoo @ git+https://github.com/acsone/odoo.git@1af8127482911009afd42c22e3aefb5efdb99f7c
 odoo-addons-enterprise @ git+ssh://git@github.com/acsone/enterprise.git@14c3dc9a82d7bceb12e6d59644a91b7e2e8772f5#subdirectory=setup
 odoo-autodiscover==2.0.0
 odoo10-addon-account-analytic-no-lines @ git+https://github.com/acsone/account-analytic.git@daf43630f1ca58b431bb93809a331374b8530863#subdirectory=setup/account_analytic_no_lines
@@ -109,7 +109,7 @@ odoo10-addon-l10n-be-apb-tax @ git+https://github.com/acsone/l10n-belgium.git@06
 odoo10-addon-l10n-be-eco-tax @ git+https://github.com/acsone/l10n-belgium.git@066bd9c086d087a2c1e11274e629f300f6e0eb27#subdirectory=setup/l10n_be_eco_tax
 odoo10-addon-l10n-be-iso20022-pain @ git+https://github.com/acsone/l10n-belgium.git@066bd9c086d087a2c1e11274e629f300f6e0eb27#subdirectory=setup/l10n_be_iso20022_pain
 odoo10-addon-l10n-be-mis-reports @ git+https://github.com/acsone/l10n-belgium.git@066bd9c086d087a2c1e11274e629f300f6e0eb27#subdirectory=setup/l10n_be_mis_reports
-odoo10-addon-logging-json @ git+https://github.com/acsone/odoo-cloud-platform.git@45a9d1f258eb93ec619202c2cfcb76978eee46cd#subdirectory=setup/logging_json
+odoo10-addon-logging-json @ git+https://github.com/acsone/odoo-cloud-platform.git@9aa6967e47c8f011cf3709370fbc5561901e5231#subdirectory=setup/logging_json
 odoo10-addon-mail-environment @ git+https://github.com/acsone/server-tools.git@dcefdba5bac014076f05229ba091acd8b739e164#subdirectory=setup/mail_environment
 odoo10-addon-mass-editing @ git+https://github.com/acsone/server-tools.git@dcefdba5bac014076f05229ba091acd8b739e164#subdirectory=setup/mass_editing
 odoo10-addon-mis-builder==10.0.3.6.0
@@ -136,7 +136,7 @@ odoo10-addon-report-xlsx-helper @ git+https://github.com/acsone/reporting-engine
 odoo10-addon-report-xml==10.0.1.0.0.99.dev3
 odoo10-addon-sale-exception @ git+https://github.com/acsone/sale-workflow.git@b9987e4eb546f9ea8c0ee88e507072252b0d57d3#subdirectory=setup/sale_exception
 odoo10-addon-sale-stock-picking-blocking @ git+https://github.com/acsone/sale-workflow.git@b9987e4eb546f9ea8c0ee88e507072252b0d57d3#subdirectory=setup/sale_stock_picking_blocking
-odoo10-addon-sale-triple-discount @ git+https://github.com/acsone/sale-workflow.git@b9987e4eb546f9ea8c0ee88e507072252b0d57d3#subdirectory=setup/sale_triple_discount
+odoo10-addon-sale-triple-discount @ git+https://github.com/acsone/sale-workflow.git@0821f306cd46c82aee04452ba8bd2d9ef18706fd#subdirectory=setup/sale_triple_discount
 odoo10-addon-server-environment @ git+https://github.com/acsone/server-tools.git@dcefdba5bac014076f05229ba091acd8b739e164#subdirectory=setup/server_environment
 odoo10-addon-server-environment-ir-config-parameter @ git+https://github.com/acsone/server-tools.git@dcefdba5bac014076f05229ba091acd8b739e164#subdirectory=setup/server_environment_ir_config_parameter
 odoo10-addon-slow-statement-logger @ git+https://github.com/acsone/server-tools@a619cdf9dfae7e60ff02caa3c588058283440e16#subdirectory=setup/slow_statement_logger

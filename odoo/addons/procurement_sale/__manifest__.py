@@ -8,7 +8,12 @@
     "author": "BCIM",
     "maintainer": "Camptocamp",
     "category": "Stock Management",
-    "depends": ["procurement", "sale_stock", "stock_picking_subcode"],
+    "depends": [
+        "alc_base_auto_join",
+        "procurement",
+        "sale_stock",
+        "stock_picking_subcode",
+    ],
     "data": ["views/stock_location_route.xml"],
     "installable": True,
     "auto_install": False,

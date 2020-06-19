@@ -51,9 +51,11 @@ class AccountCutoff(models.Model):
         if self.type == "accrued_expense":
             # Exclude blocked purchases
             self.line_ids.unlink()
-            lines = self.env["purchase.order.line"].search(
-                [("qty_to_invoice", "!=", 0), ("order_id.state", "!=", "done")]
-            )
+            SaleOrderLine = self.env["purchase.order.line"]
+            with SaleOrderLine._auto_join(["order_id"]):
+                lines = self.env["purchase.order.line"].search(
+                    [("qty_to_invoice", "!=", 0), ("order_id.state", "!=", "done")]
+                )
             for line in lines:
                 self.env["account.cutoff.line"].create(self._prepare_line(line))
         else:

@@ -275,7 +275,6 @@ FROM stock_picking AS picking
     ON picking.delivery_round_id = round.id
 WHERE pick_type.subcode = 'PICK'
       AND picking.state IN ('partially_available', 'assigned')
-      AND picking.zetes_state IN %(picking_zetes_state)s
       AND pick_type.zetes_picking_type = %(picking_type)s
       AND EXISTS(SELECT 1
                  FROM stock_pack_operation AS operation
@@ -286,8 +285,18 @@ WHERE pick_type.subcode = 'PICK'
                  AND l.is_valid_location
                  )
       AND round.state in ('draft', 'pending', 'close')
-      AND ((picking.operator_id IS NULL AND round.picking_launched)
-           OR picking.operator_id = %(operator)s)
+      AND (
+            (
+                picking.operator_id IS NULL
+                AND round.picking_launched
+                AND picking.zetes_state IN %(picking_zetes_states_no_operator)s
+            )
+           OR
+           (
+                picking.operator_id = %(operator)s
+                AND picking.zetes_state NOT IN %(picking_zetes_states_operator)s
+           )
+      )
 --      AND NOT EXISTS (SELECT 1
 --                      FROM stock_pack_operation AS operation
 --                        INNER JOIN stock_inventory_line AS sil
@@ -298,10 +307,19 @@ WHERE pick_type.subcode = 'PICK'
 --                       AND si.state = 'confirm')
                 """
         query_values = {
-            "picking_zetes_state": (constants.AS_DEFAULT, constants.AS_CANCELED),
             "picking_type": constants.PICKING_ASSIGNMENT,
             "op_zetes_state": (constants.OP_DEFAULT, constants.OP_SKIPPED),
             "operator": self._operator_user.id,
+            "picking_zetes_states_no_operator": (
+                constants.AS_DEFAULT,
+                constants.AS_CANCELED,
+            ),
+            "picking_zetes_states_operator": (
+                constants.AS_DONE,
+                constants.AS_FINISHED,
+                "passport",
+                "done",
+            ),
         }
 
         # Search a picking in a specific zone (like Food)

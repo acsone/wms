@@ -146,6 +146,7 @@ deploy-test:
     name: test/odoo-alcyon
     url: https://odoo-alcyon-test.acscloud-6.acsone.eu
     on_stop: stop-test
+  when: manual
   only:
     - /1\.53\.\d+/
     
