@@ -9,6 +9,7 @@
     "maintainer": "Camptocamp",
     "category": "Stock Management",
     "depends": [
+        "alc_base_auto_join",
         "stock",
         "delivery",
         "stock_picking_assignment",

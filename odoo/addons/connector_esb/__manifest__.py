@@ -9,6 +9,7 @@
     "license": "AGPL-3",
     "category": "Connector",
     "depends": [
+        "alc_base_auto_join",
         "connector",
         "delivery_rounds",
         "onchange_helper",

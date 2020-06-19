@@ -44,7 +44,8 @@ class StockQuant(models.Model):
                 previous_moves_domain.append(
                     ("restrict_lot_id", "=", move.restrict_lot_id.id)
                 )
-            previous_moves = move.search(previous_moves_domain, order="id")
+            with move._auto_join(["location_id", "location_dest_id"]):
+                previous_moves = move.search(previous_moves_domain, order="id")
             blocked_qty = 0
             for pm in previous_moves:
                 # Some moves could be in waiting state because the shipping is
