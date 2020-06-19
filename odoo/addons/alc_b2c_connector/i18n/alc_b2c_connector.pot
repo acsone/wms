@@ -95,7 +95,7 @@ msgid "Name"
 msgstr ""
 
 #. module: alc_b2c_connector
-#: code:addons/alc_b2c_connector/models/sale_order.py:151
+#: code:addons/alc_b2c_connector/models/sale_order.py:150
 #, python-format
 msgid "No match found for customer_id: %s"
 msgstr ""
@@ -159,7 +159,7 @@ msgid "Sales Order Line"
 msgstr ""
 
 #. module: alc_b2c_connector
-#: code:addons/alc_b2c_connector/models/sale_order.py:29
+#: code:addons/alc_b2c_connector/models/sale_order.py:28
 #: sql_constraint:sale.order:0
 #, python-format
 msgid "This b2c reference already exists"
@@ -172,7 +172,7 @@ msgid "This user has no access to the B2C REST Api."
 msgstr ""
 
 #. module: alc_b2c_connector
-#: code:addons/alc_b2c_connector/models/sale_order.py:85
+#: code:addons/alc_b2c_connector/models/sale_order.py:84
 #, python-format
 msgid "Unknowns SKU(s): %s , "
 msgstr ""
