@@ -251,7 +251,7 @@ msgstr "Erreurs humaine"
 #: model:ir.model.fields,field_description:specific_zetes.field_manage_uop_id
 #: model:ir.model.fields,field_description:specific_zetes.field_manage_uop_line_id
 #: model:ir.model.fields,field_description:specific_zetes.field_pack_operation_reserve_rel_id
-#: model:ir.model.fields,field_description:specific_zetes.field_stock_pack_operation_operator_id_9483
+#: model:ir.model.fields,field_description:specific_zetes.field_stock_pack_operation_operator_id_9507
 #: model:ir.model.fields,field_description:specific_zetes.field_view_picking_line_id
 #: model:ir.model.fields,field_description:specific_zetes.field_zetes_logger_id
 msgid "ID"
