@@ -1,5 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
+#	* alc_geo_delivery_rounds
 #
 msgid ""
 msgstr ""
@@ -11,4 +12,173 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
+
+#. module: alc_geo_delivery_rounds
+#: model:ir.ui.view,arch_db:alc_geo_delivery_rounds.delivery_plan_form_view
+msgid "<span>Import shape file</span>"
+msgstr ""
+
+#. module: alc_geo_delivery_rounds
+#: code:addons/alc_geo_delivery_rounds/models/round_template.py:20
+#, python-format
+msgid "A shape is required if a delivery plan is set for %s"
+msgstr ""
+
+#. module: alc_geo_delivery_rounds
+#: model:geoengine.vector.layer,name:alc_geo_delivery_rounds.round_template_geoengine_vector_layer
+msgid "Basic view"
+msgstr ""
+
+#. module: alc_geo_delivery_rounds
+#: model:ir.ui.view,arch_db:alc_geo_delivery_rounds.shape_file_import_wizard_form_view
+msgid "Cancel"
+msgstr ""
+
+#. module: alc_geo_delivery_rounds
+#: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_delivery_plan_create_uid
+#: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_shape_file_import_wizard_create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: alc_geo_delivery_rounds
+#: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_delivery_plan_create_date
+#: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_shape_file_import_wizard_create_date
+msgid "Created on"
+msgstr ""
+
+#. module: alc_geo_delivery_rounds
+#: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_round_template_delivery_plan_id
+msgid "Delivery"
+msgstr ""
+
+#. module: alc_geo_delivery_rounds
+#: model:ir.actions.act_window,name:alc_geo_delivery_rounds.delivery_plan_act_window
+#: model:ir.model,name:alc_geo_delivery_rounds.model_delivery_plan
+#: model:ir.ui.menu,name:alc_geo_delivery_rounds.delivery_plan_menu
+#: model:ir.ui.view,arch_db:alc_geo_delivery_rounds.round_template_search_view
+msgid "Delivery plan"
+msgstr ""
+
+#. module: alc_geo_delivery_rounds
+#: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_shape_file_import_wizard_delivery_plan_id
+msgid "Delivery plan id"
+msgstr ""
+
+#. module: alc_geo_delivery_rounds
+#: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_round_template_geo_polygon_shape
+msgid "Delivery round Shape"
+msgstr ""
+
+#. module: alc_geo_delivery_rounds
+#: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_delivery_plan_display_name
+#: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_shape_file_import_wizard_display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: alc_geo_delivery_rounds
+#: model:ir.ui.view,arch_db:alc_geo_delivery_rounds.shape_file_import_wizard_form_view
+msgid "Execute import"
+msgstr ""
+
+#. module: alc_geo_delivery_rounds
+#: code:addons/alc_geo_delivery_rounds/wizards/shape_file_import_wizard.py:56
+#, python-format
+msgid "File is not a zip file!"
+msgstr ""
+
+#. module: alc_geo_delivery_rounds
+#: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_shape_file_import_wizard_filename
+msgid "Filename"
+msgstr ""
+
+#. module: alc_geo_delivery_rounds
+#: model:ir.ui.view,arch_db:alc_geo_delivery_rounds.round_template_form_view
+msgid "Geometry"
+msgstr ""
+
+#. module: alc_geo_delivery_rounds
+#: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_delivery_plan_id
+#: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_shape_file_import_wizard_id
+msgid "ID"
+msgstr ""
+
+#. module: alc_geo_delivery_rounds
+#: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_shape_file_import_wizard_shape_file
+#: model:ir.ui.view,arch_db:alc_geo_delivery_rounds.delivery_plan_form_view
+msgid "Import shape file"
+msgstr ""
+
+#. module: alc_geo_delivery_rounds
+#: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_delivery_plan___last_update
+#: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_shape_file_import_wizard___last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: alc_geo_delivery_rounds
+#: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_delivery_plan_write_uid
+#: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_shape_file_import_wizard_write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: alc_geo_delivery_rounds
+#: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_delivery_plan_write_date
+#: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_shape_file_import_wizard_write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: alc_geo_delivery_rounds
+#: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_delivery_plan_name
+msgid "Name"
+msgstr ""
+
+#. module: alc_geo_delivery_rounds
+#: code:addons/alc_geo_delivery_rounds/models/delivery_plan.py:13
+#: sql_constraint:delivery.plan:0
+#, python-format
+msgid "Name must be unique"
+msgstr ""
+
+#. module: alc_geo_delivery_rounds
+#: code:addons/alc_geo_delivery_rounds/wizards/shape_file_import_wizard.py:54
+#, python-format
+msgid "No file sent."
+msgstr ""
+
+#. module: alc_geo_delivery_rounds
+#: model:geoengine.raster.layer,name:alc_geo_delivery_rounds.round_template_geoengine_raster_layer_osm
+msgid "OSM Light layer"
+msgstr ""
+
+#. module: alc_geo_delivery_rounds
+#: model:geoengine.raster.layer,name:alc_geo_delivery_rounds.round_template_geoengine_raster_layer
+msgid "OSM layer"
+msgstr ""
+
+#. module: alc_geo_delivery_rounds
+#: model:ir.actions.act_window,name:alc_geo_delivery_rounds.action_shape_file_import
+#: model:ir.ui.view,arch_db:alc_geo_delivery_rounds.shape_file_import_wizard_form_view
+msgid "Shape File Import Wizard"
+msgstr ""
+
+#. module: alc_geo_delivery_rounds
+#: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_delivery_plan_round_template_ids
+msgid "Templates"
+msgstr ""
+
+#. module: alc_geo_delivery_rounds
+#: code:addons/alc_geo_delivery_rounds/wizards/shape_file_import_wizard.py:71
+#: code:addons/alc_geo_delivery_rounds/wizards/shape_file_import_wizard.py:73
+#, python-format
+msgid "Unable to import the shape file"
+msgstr ""
+
+#. module: alc_geo_delivery_rounds
+#: model:ir.model,name:alc_geo_delivery_rounds.model_round_template
+msgid "round.template"
+msgstr ""
+
+#. module: alc_geo_delivery_rounds
+#: model:ir.model,name:alc_geo_delivery_rounds.model_shape_file_import_wizard
+msgid "shape.file.import.wizard"
+msgstr ""
 
