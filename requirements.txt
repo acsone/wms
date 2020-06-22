@@ -109,7 +109,7 @@ odoo10-addon-l10n-be-apb-tax @ git+https://github.com/acsone/l10n-belgium.git@06
 odoo10-addon-l10n-be-eco-tax @ git+https://github.com/acsone/l10n-belgium.git@066bd9c086d087a2c1e11274e629f300f6e0eb27#subdirectory=setup/l10n_be_eco_tax
 odoo10-addon-l10n-be-iso20022-pain @ git+https://github.com/acsone/l10n-belgium.git@066bd9c086d087a2c1e11274e629f300f6e0eb27#subdirectory=setup/l10n_be_iso20022_pain
 odoo10-addon-l10n-be-mis-reports @ git+https://github.com/acsone/l10n-belgium.git@066bd9c086d087a2c1e11274e629f300f6e0eb27#subdirectory=setup/l10n_be_mis_reports
-odoo10-addon-logging-json @ git+https://github.com/acsone/odoo-cloud-platform.git@9aa6967e47c8f011cf3709370fbc5561901e5231#subdirectory=setup/logging_json
+odoo10-addon-logging-json @ git+https://github.com/acsone/odoo-cloud-platform.git@601842b9c0b4d45bd40c73ed3e0edf8def2f5787#subdirectory=setup/logging_json
 odoo10-addon-mail-environment @ git+https://github.com/acsone/server-tools.git@dcefdba5bac014076f05229ba091acd8b739e164#subdirectory=setup/mail_environment
 odoo10-addon-mass-editing @ git+https://github.com/acsone/server-tools.git@dcefdba5bac014076f05229ba091acd8b739e164#subdirectory=setup/mass_editing
 odoo10-addon-mis-builder==10.0.3.6.0
