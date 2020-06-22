@@ -24,7 +24,8 @@ def _fill_partner_lat_long_or_geo_point(cr, registry):
             id,
             ST_TRANSFORM(ST_SetSRID(geo_point, 3857), 4326) as geom
             FROM res_partner
-            WHERE geo_point is not null and partner_longitude is null and partner_latitude is null
+            WHERE geo_point is not null and
+                    partner_longitude is null and partner_latitude is null
         ) g
         WHERE res_partner.id = g.id
     """

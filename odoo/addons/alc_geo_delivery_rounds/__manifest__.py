@@ -10,10 +10,21 @@
     "website": "http://acsone.eu",
     "license": "AGPL-3",
     "category": "",
-    "depends": ["geoengine_partner", "base_geolocalize"],
-    "data": [],
+    "depends": [
+        "alc_delivery_rounds_geooptimize",
+        "base_geolocalize",
+        "delivery_rounds",
+        "geoengine_partner",
+    ],
+    "data": [
+        "wizards/shape_file_import_wizard.xml",
+        "views/round_template.xml",
+        "views/delivery_plan.xml",
+        "security/ir.model.access.csv",
+    ],
     "demo": [],
     "post_init_hook": "post_init_hook",
+    "external_dependencies": {"python": ["shapely", "shapefile"]},
     "auto_install": True,
     "application": True,
 }

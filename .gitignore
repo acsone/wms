@@ -71,3 +71,6 @@ docker-compose.override.yml
 setup/release
 
 odoo.cfg
+
+# VSCode setting
+.vscode/
