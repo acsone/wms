@@ -24,6 +24,7 @@
         - odoo refs/pull/19447/head # [FIX] related fields should be readonly to avoid recompute
         # disable since it include new column on procurement
         #- odoo refs/pull/30686/head # [10.0] [IMP] backport avoid one query when recomputing a field (#18846)
+        - odoo refs/pull/53624/head # [10.0][FIX] expression: simplify sub-searches order
     shell_command_after:
           # [FIX] stock: remove `_parent_store=True` from model `stock.quant.package`
         - git am "$(git format-patch -1 45c42df5f01044b87c01b53d47321c5c80da47bf -o ../patches)"
