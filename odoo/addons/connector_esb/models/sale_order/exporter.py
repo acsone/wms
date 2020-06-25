@@ -136,14 +136,6 @@ class SaleWebServiceExporter(Component):
             return True
         if not self.record.partner_id.email:
             return True
-        if self.record.partner_id.ref in ("8114", "8264"):
-            # NewPharma
-            # They create sale order with the web service directly
-            # Sending an increment_id in their call (like the ESB)
-            # So for Odoo it should be a PUT method but the sale
-            # order does not exist yet on the ESB and it fails.
-            # They need to change their calls to resolve this.
-            return True
         return False
 
     def _get_external_id(self):

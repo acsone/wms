@@ -86,6 +86,15 @@ class WSCreateSaleOrderTestCase(SavepointCase):
                 "parent_id": cls.partner.id,
             }
         )
+        cls.partner_newpharma = cls.env["res.partner"].create(
+            {
+                "name": "newpharam",
+                "ref": cls.env["res.partner"].newpharma_refs[0],
+                "property_delivery_carrier_id": cls.delivery_1.id,
+                "supplier_promotion_sale_allowed": True,
+                "property_payment_term_id": cls.payment_30_net.id,
+            }
+        )
         cls.pricelist_1 = cls.env["product.pricelist"].create(
             {
                 "name": "Pricelist 1",
@@ -385,3 +394,13 @@ class WSCreateSaleOrderTestCase(SavepointCase):
         self.assertEqual(len(order.order_line), 1)
         message = order.message_ids.filtered(lambda r: unknown_sku in r.body)
         self.assertEqual(len(message), 1)
+
+    def test_create_saleorder_newpharama(self):
+        """Sale orders created for NewPharma don't use esb_ref as external id
+        The esb-ref is filled only when the SO is exported to magento
+        """
+        data = deepcopy(self.order_data)
+        data["customer_id"] = self.partner_newpharma.ref
+        order = self.env["sale.order"]._ws_create_new(data, datetime.now())
+        self.assertFalse(order.esb_ref)
+        self.assertEqual(order.newpharma_ref, data["increment_id"])

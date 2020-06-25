@@ -15,6 +15,9 @@ class WSSaleOrderStatusTestCase(SavepointCase):
         cls.partner = cls.env["res.partner"].create(
             {"name": "Partner 1", "ref": "93765921390"}
         )
+        cls.partner_newpharma = cls.env["res.partner"].create(
+            {"name": "newpharam", "ref": cls.env["res.partner"].newpharma_refs[0]}
+        )
 
         cls.prod1 = cls.env["product.product"].create(
             {
@@ -68,6 +71,29 @@ class WSSaleOrderStatusTestCase(SavepointCase):
         self.assertEqual(result["price_total"], 30.25)
         self.assertEqual(len(result["lines"]), 2)
 
+    def test_saleorder_status_newpharam(self):
+        """ Test the method sale order status with a standard SO for newpharma"""
+
+        data = deepcopy(self.order_data)
+        data["customer_id"] = self.partner_newpharma.ref
+        order = self.env["sale.order"]._ws_create_new(data, datetime.now())
+        self.assertFalse(order.esb_ref)
+        order.action_confirm()
+
+        partner_ref = self.partner_newpharma.ref
+        esb_ref = order.newpharma_ref
+
+        backend = self.env["esb.backend"].get_singleton()
+        with backend.work_on("sale.order") as work:
+            component = work.component("ws.message.sale.order.status")
+            result = component.get_message(partner_ref, esb_ref)
+
+        self.assertEqual(result["state"], "sale")
+        self.assertEqual(result["price_subtotal"], 25)
+        self.assertEqual(result["price_tax"], 5.25)
+        self.assertEqual(result["price_total"], 30.25)
+        self.assertEqual(len(result["lines"]), 2)
+
     def test_saleorder_status_with_wrong_product(self):
         """ Test the method sale order status with a wrong product
 
@@ -90,12 +116,12 @@ class WSSaleOrderStatusTestCase(SavepointCase):
 
         data = deepcopy(self.order_data)
         data["customer_id"] = "8114"
+        esb_ref = data["increment_id"]
         self.partner.ref = "8114"
         self.so0 = self.env["sale.order"]._ws_create_new(data, datetime.now())
         self.so0.action_confirm()
 
         partner_ref = self.partner.ref
-        esb_ref = self.so0.esb_ref
 
         # Compute exceptions
         self.assertTrue(self.so0.ignore_exception)
@@ -109,8 +135,8 @@ class WSSaleOrderStatusTestCase(SavepointCase):
         self.assertEqual(result["price_total"], 24.2)
         self.assertEqual(len(result["lines"]), 2)
 
-        good_line = [l for l in result["lines"] if l["cnk"] == "000015"]
-        wrong_line = [l for l in result["lines"] if l["cnk"] == "000062"]
+        good_line = [line for line in result["lines"] if line["cnk"] == "000015"]
+        wrong_line = [line for line in result["lines"] if line["cnk"] == "000062"]
 
         self.assertEqual(len(good_line), 1)
         self.assertEqual(len(wrong_line), 1)
@@ -165,8 +191,8 @@ class WSSaleOrderStatusTestCase(SavepointCase):
         self.assertEqual(result["price_total"], 30.25)
         self.assertEqual(len(result["lines"]), 2)
 
-        good_line = [l for l in result["lines"] if l["cnk"] == "000015"]
-        wrong_line = [l for l in result["lines"] if l["cnk"] == "000062"]
+        good_line = [line for line in result["lines"] if line["cnk"] == "000015"]
+        wrong_line = [line for line in result["lines"] if line["cnk"] == "000062"]
 
         self.assertEqual(len(good_line), 1)
         self.assertEqual(len(wrong_line), 1)

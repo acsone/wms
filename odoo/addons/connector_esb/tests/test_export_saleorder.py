@@ -16,37 +16,43 @@ class ExportSaleOrderTestCase(SavepointCase):
     post_install = True
     at_install = False
 
-    def setUp(self):
-        super(ExportSaleOrderTestCase, self).setUp()
+    @classmethod
+    def setUpClass(cls):
+        super(ExportSaleOrderTestCase, cls).setUpClass()
 
         os.environ["ODOO_ESB_WS_USER"] = "ws_user"
         os.environ["ODOO_ESB_WS_BASE_URL"] = "https://test.com"
         os.environ["ODOO_ESB_WS_PWD"] = "pwd"
 
-        self.backend_model = self.env["esb.backend"]
-        self.backend = self.backend_model.get_singleton()
+        cls.backend_model = cls.env["esb.backend"]
+        cls.backend = cls.backend_model.get_singleton()
 
-        self.partner = self.env.ref("base.res_partner_1")
-        self.partner.ref = "123321"
-        self.prod1 = self.env.ref("product.product_product_1")
-        self.prod2 = self.env.ref("product.product_product_2")
-        self.setup_records()
+        cls.partner = cls.env.ref("base.res_partner_1")
+        cls.partner.ref = "123321"
+        cls.partner_newpharma = cls.env["res.partner"].create(
+            {
+                "name": "newpharam",
+                "ref": cls.env["res.partner"].newpharma_refs[0],
+                "email": "newpharma@test.be",
+            }
+        )
+        cls.prod1 = cls.env.ref("product.product_product_1")
+        cls.prod2 = cls.env.ref("product.product_product_2")
+        cls.model = cls.env["sale.order"]
+        cls.setup_records()
 
-    @property
-    def model(self):
-        return self.env["sale.order"]
-
-    def setup_records(self):
-        self.delivery = self.env["delivery.carrier"].search(
+    @classmethod
+    def setup_records(cls):
+        cls.delivery = cls.env["delivery.carrier"].search(
             [("free_if_more_than", "=", False)], limit=1
         )
-        self.delivery.esb_ref = "03"
-        self.prod1.default_code = "SKU01"
-        self.prod1.default_code = "SKU02"
+        cls.delivery.esb_ref = "03"
+        cls.prod1.default_code = "SKU01"
+        cls.prod1.default_code = "SKU02"
         # Create the abp tax and it's corresponding xmlid on account.tax
         # As the l10n_be module installs it in account_tax_template
         # And it is created in account.tax by the chart of account module
-        self.apb_tax = self.env["account.tax"].create(
+        cls.apb_tax = cls.env["account.tax"].create(
             {
                 "description": "APB-OUT",
                 "company_id": 1,
@@ -59,16 +65,16 @@ class ExportSaleOrderTestCase(SavepointCase):
                 "amount": 0.0224,
             }
         )
-        self.env["ir.model.data"].create(
+        cls.env["ir.model.data"].create(
             {
                 "module": "l10n_be_apb_tax",
                 "name": "1_apb_01_out",
                 "model": "account.tax",
-                "res_id": self.apb_tax.id,
+                "res_id": cls.apb_tax.id,
             }
         )
         # And also add a vat tax of 6%
-        self.vat_tax = self.env["account.tax"].create(
+        cls.vat_tax = cls.env["account.tax"].create(
             {
                 "description": "6percent",
                 "company_id": 1,
@@ -82,14 +88,14 @@ class ExportSaleOrderTestCase(SavepointCase):
                 "amount": 6.0000,
             }
         )
-        self.prod1.taxes_id = [(4, self.apb_tax.id, False), (4, self.vat_tax.id, False)]
-        self.so1 = self.model.create(
+        cls.prod1.taxes_id = [(4, cls.apb_tax.id, False), (4, cls.vat_tax.id, False)]
+        cls.so1 = cls.model.create(
             {
                 "esb_ref": "ref_01",
-                "partner_id": self.partner.id,
+                "partner_id": cls.partner.id,
                 "date_order": "2018-01-29",
                 "sale_channel": "fax",
-                "carrier_id": self.delivery.id,
+                "carrier_id": cls.delivery.id,
                 "client_order_ref": "whatever the client want",
                 "delivery_price": 23.5,
                 "suite_name": "0123434234",
@@ -99,21 +105,21 @@ class ExportSaleOrderTestCase(SavepointCase):
                         0,
                         {
                             "sequence": 1,
-                            "name": self.prod1.name,
-                            "product_id": self.prod1.id,
+                            "name": cls.prod1.name,
+                            "product_id": cls.prod1.id,
                             "product_uom_qty": 7,
                         },
                     )
                 ],
             }
         )
-        self.so2 = self.model.create(
+        cls.so2 = cls.model.create(
             {
                 "esb_ref": "ref_02",
-                "partner_id": self.partner.id,
+                "partner_id": cls.partner.id,
                 "date_order": "2018-01-29",
                 "sale_channel": "phone",
-                "carrier_id": self.delivery.id,
+                "carrier_id": cls.delivery.id,
                 "client_order_ref": "whatever the client want",
                 "delivery_price": 23.5,
                 "suite_name": "0123434234",
@@ -123,9 +129,32 @@ class ExportSaleOrderTestCase(SavepointCase):
                         0,
                         {
                             "sequence": 1,
-                            "name": self.prod1.name,
-                            "product_id": self.prod1.id,
+                            "name": cls.prod1.name,
+                            "product_id": cls.prod1.id,
                             "product_uom_qty": 1,
+                        },
+                    )
+                ],
+            }
+        )
+        cls.so_newpharma = cls.model.create(
+            {
+                "partner_id": cls.partner_newpharma.id,
+                "date_order": "2018-01-29",
+                "sale_channel": "fax",
+                "carrier_id": cls.delivery.id,
+                "client_order_ref": "whatever the client want",
+                "delivery_price": 23.5,
+                "suite_name": "0123434234",
+                "order_line": [
+                    (
+                        0,
+                        0,
+                        {
+                            "sequence": 1,
+                            "name": cls.prod1.name,
+                            "product_id": cls.prod1.id,
+                            "product_uom_qty": 7,
                         },
                     )
                 ],
@@ -262,7 +291,7 @@ class ExportSaleOrderTestCase(SavepointCase):
     def put_ret_status(url, data, headers, auth):
         resp = requests.Response()
         resp.status_code = 200
-        resp.json = lambda: '{"erp_id" : "42", “increment_id” : “1000000348”}'
+        resp.json = lambda: {"erp_id": "42", "increment_id": "1000000348"}
         return resp
 
     @mock.patch("requests.put", side_effect=put_ret_status)
@@ -273,6 +302,26 @@ class ExportSaleOrderTestCase(SavepointCase):
             exporter = work.component(usage="record.exporter")
             exporter.run(self.so1)
         put.assert_called_once()
+
+    def post_ret_status(url, data, headers, auth):
+        resp = requests.Response()
+        resp.status_code = 200
+        resp.json = lambda: {
+            "erp_id": "42",
+            "increment_id": "1000000348",
+            "lines": [{"line_number": 10, "created_id": 106}],
+        }
+        return resp
+
+    @mock.patch("requests.post", side_effect=post_ret_status)
+    def test_record_exporter_new_pharam(self, post):
+        """Test export of a sale order catching the put request."""
+        self.so_newpharma.action_confirm()
+        with self.backend.work_on(self.model._name) as work:
+            exporter = work.component(usage="record.exporter")
+            exporter.run(self.so_newpharma)
+        post.assert_called_once()
+        self.assertEqual(self.so_newpharma.esb_ref, "1000000348")
 
     def test_mapper_state_in_confirm_background(self):
         """ Check status sent for sale order being confirmed in background."""
