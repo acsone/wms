@@ -34,6 +34,7 @@ lxml==3.5.0
 Mako==1.0.4
 MarkupSafe==0.23
 mock==2.0.0
+numpy==1.16.6
 odoo @ git+https://github.com/acsone/odoo.git@7bba9adfbfa641da46546453fe0dde10fc815ba6
 odoo-addons-enterprise @ git+ssh://git@github.com/acsone/enterprise.git@14c3dc9a82d7bceb12e6d59644a91b7e2e8772f5#subdirectory=setup
 odoo-autodiscover==2.0.0
