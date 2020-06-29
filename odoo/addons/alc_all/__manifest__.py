@@ -136,6 +136,6 @@
         "web_autorefresh",
     ],
     "application": True,
-    "data": [],
+    "data": ["security/sale_order.xml"],
     "demo": [],
 }
