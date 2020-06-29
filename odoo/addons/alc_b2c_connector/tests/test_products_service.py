@@ -38,10 +38,38 @@ class TestProductsService(CommonCase):
                 "price": 10.0,
                 "quantity": 5.0,
                 "sku": u"12345",
+                "cnk": "CNK123",
             },
         )
 
     def test_01(self):
+        """
+        Data:
+            1 saleable product without cnk nor ean
+        Test case:
+            Get list of saleable product
+        Expected result:
+            The product is into the list with the expected info
+        """
+        self.saleable_product.write({"barcode": False, "cnk_code": False})
+        res = self.products_service.dispatch("search", params=False)
+        self.assertEqual(res["size"], 1)
+        result = res["data"][0]
+        create_date = result.pop("create_date")
+        self.assertEqual(create_date.tzinfo, pytz.utc)
+        self.assertDictEqual(
+            result,
+            {
+                "eans": [],
+                "name": u"Product 1",
+                "price": 10.0,
+                "quantity": 5.0,
+                "sku": u"12345",
+                "cnk": None,
+            },
+        )
+
+    def test_02(self):
         """
         Data:
             1 saleable product

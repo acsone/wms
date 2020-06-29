@@ -32,6 +32,7 @@ class CommonCase(SavepointComponentCase):
                 "list_price": 10,
                 "barcode": "XXX0001",
                 "default_code": "12345",
+                "cnk_code": "CNK123",
             }
         )
         cls.not_saleable_product = cls.ProductProduct.create(

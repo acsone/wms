@@ -41,6 +41,7 @@ class ProductsService(Component):
                     "create_date",
                     "immediately_usable_qty",
                     "list_price",
+                    "cnk_code",
                 ],
                 limit=limit,
                 offset=offset,
@@ -70,6 +71,7 @@ class ProductsService(Component):
                 "schema": {"type": "string"},
                 "required": False,
             },
+            "cnk": {"type": "string", "required": True, "nullable": True},
             "price": {"type": "float", "required": True, "nullable": False},
             "create_date": {"type": "datetime", "required": True, "nullable": False},
             "quantity": {"type": "float", "required": True, "nullable": False},
@@ -96,9 +98,11 @@ class ProductsService(Component):
         res = {
             "name": read_item["name"],
             "sku": read_item["default_code"],
+            "cnk": read_item["cnk_code"] or None,
             "price": read_item["list_price"],
             "create_date": self._to_dt_utc_with_tz(read_item["create_date"]),
             "quantity": read_item["immediately_usable_qty"],
+            "eans": [],
         }
         ean = read_item["barcode"]
         if ean:
