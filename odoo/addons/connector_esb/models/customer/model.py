@@ -10,6 +10,10 @@ class ResPartner(models.Model):
 
     esb_exported = fields.Boolean(copy=False)
 
+    @property
+    def newpharma_refs(self):
+        return ("8114", "8264")
+
     @api.multi
     def unlink(self):
         for record in self:

@@ -8,6 +8,7 @@
     <field name="arch" type="xml">
       <field name="sale_channel" position="after">
         <field name="esb_ref" readonly="1"/>
+        <field name="newpharma_ref" readonly="1"/>
       </field>
     </field>
   </record>

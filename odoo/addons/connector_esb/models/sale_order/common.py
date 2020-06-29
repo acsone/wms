@@ -17,10 +17,22 @@ class SaleOrder(models.Model):
     _name = "sale.order"
     _inherit = ["sale.order", "esb.exportable"]
 
-    esb_ref = fields.Char(string="Reference for ESB", copy=False)
+    esb_ref = fields.Char(string="Reference for ESB", copy=False, index=True)
+    newpharma_ref = fields.Char(
+        string="Reference for NewPharma", copy=False, index=True
+    )
 
     _sql_constraints = [
-        ("esb_ref_unique", "unique(esb_ref)", _("This reference esb already exists"))
+        (
+            "esb_ref_unique",
+            "EXCLUDE (esb_ref WITH =) WHERE (esb_ref <> '' or esb_ref is not null)",
+            _("This reference esb already exists"),
+        ),
+        (
+            "newpharma_ref_unique",
+            "EXCLUDE (newpharma_ref WITH =) WHERE (newpharma_ref <> '' or newpharma_ref is not null)",
+            _("This reference NewPharma already exists"),
+        ),
     ]
 
     @api.multi
@@ -104,7 +116,7 @@ class SaleOrder(models.Model):
             if line_rec.exception:
                 is_sale_in_exception = True
                 # FIXME: add boolean on res_partner to filter web service users
-                if partner_ref in ("8114", "8264"):
+                if partner_ref in self.env["res.partner"].newpharma_refs:
                     # NewPharma
                     line_rec.write({"product_uom_qty": 0, "ignore_exception": True})
                 else:
@@ -166,7 +178,12 @@ class SaleOrder(models.Model):
         partner_ref = data["customer_id"]
         partner = self._ws_get_partner(partner_ref)
         order_data["team_id"] = self.env.ref("sales_team.salesteam_website_sales").id
-        order_data["esb_ref"] = data["increment_id"]
+        ref = data["increment_id"]
+        if partner_ref in self.env["res.partner"].newpharma_refs:
+            order_data["newpharma_ref"] = ref
+        else:
+            order_data["esb_ref"] = ref
+
         order_data["partner_id"] = partner.id
         order_data["date_order"] = self._ws_get_date_order(data["date"])
         order_data["client_order_ref"] = data["order_ref"]
@@ -196,6 +213,7 @@ class SaleOrder(models.Model):
 
     def _ws_create_order_line_data(self, data):
         lines = []
+        partner_ref = data["customer_id"]
         human_categ = self.env.ref("specific_data.product_categ_humain")
         for line in data["lines"]:
             if "sku" in line:
@@ -236,7 +254,10 @@ class SaleOrder(models.Model):
                 sol["product_uom"] = product.uom_id.id
                 sol["product_uom_qty"] = line.pop("quantity")
                 sol["discounting_type"] = "multiplicative"
-                sol["esb_ref"] = line.pop("line_id")
+                if partner_ref in self.env["res.partner"].newpharma_refs:
+                    sol["newpharma_ref"] = line.pop("line_id")
+                else:
+                    sol["esb_ref"] = line.pop("line_id")
             else:
                 # Product not found
                 sol["product_id"] = ""

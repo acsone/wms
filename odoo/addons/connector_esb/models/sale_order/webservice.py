@@ -19,9 +19,13 @@ class SaleOrderStatusWebserviceMessage(Component):
         SaleOrder = self.env["sale.order"]
         partner = SaleOrder._ws_get_partner(partner_ref)
 
-        so = SaleOrder.search(
-            [("partner_id", "=", partner.id), ("esb_ref", "=", esb_ref)]
-        )
+        domain = [("partner_id", "=", partner.id)]
+        if partner_ref in self.env["res.partner"].newpharma_refs:
+            domain.append(("newpharma_ref", "=", esb_ref))
+        else:
+            domain.append(("esb_ref", "=", esb_ref))
+
+        so = SaleOrder.search(domain)
 
         if not so:
             raise exceptions.UserError(_("Sale Order not found"))
