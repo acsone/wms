@@ -121,14 +121,7 @@ class SaleOrder(models.Model):
                 "phone": customer_info.get("phone"),
                 "mobile": customer_info.get("mobile"),
                 "is_sale_back_order_accepted": False,
-                "category_id": [
-                    (
-                        4,
-                        self.env.ref(
-                            "alc_b2c_connector.res_partner_category_b2c_customer"
-                        ).id,
-                    )
-                ],
+                "is_b2c_customer": True,
                 "alcyon_category_id": self.env.ref(
                     "specific_partner.partner_category_student"
                 ).id,

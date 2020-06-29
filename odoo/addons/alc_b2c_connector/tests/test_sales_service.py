@@ -20,15 +20,8 @@ class TestSalesService(CommonCase):
         # create a b2c_partner
         cls.b2c_partner = cls.env["res.partner"].create(
             {
-                "name": "EXISTING CHRONOVET PARTNER",
-                "category_id": [
-                    (
-                        4,
-                        cls.env.ref(
-                            "alc_b2c_connector.res_partner_category_b2c_customer"
-                        ).id,
-                    )
-                ],
+                "name": "EXISTING B2C PARTNER",
+                "is_b2c_customer": True,
                 "alcyon_category_id": cls.env.ref(
                     "specific_partner.partner_category_student"
                 ).id,
