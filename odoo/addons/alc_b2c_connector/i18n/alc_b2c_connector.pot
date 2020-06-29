@@ -35,6 +35,12 @@ msgid "B2C Configuration"
 msgstr ""
 
 #. module: alc_b2c_connector
+#: code:addons/alc_b2c_connector/models/res_partner_category.py:17
+#, python-format
+msgid "B2C category can't be removed."
+msgstr ""
+
+#. module: alc_b2c_connector
 #: model:ir.ui.menu,name:alc_b2c_connector.alc_b2c_backend_menu
 msgid "Backend"
 msgstr ""
@@ -70,6 +76,12 @@ msgid "ID"
 msgstr ""
 
 #. module: alc_b2c_connector
+#: model:ir.model.fields,field_description:alc_b2c_connector.field_res_partner_is_b2c_customer
+#: model:ir.model.fields,field_description:alc_b2c_connector.field_res_users_is_b2c_customer
+msgid "Is b2c customer"
+msgstr ""
+
+#. module: alc_b2c_connector
 #: model:ir.model.fields,field_description:alc_b2c_connector.field_alc_b2c_backend___last_update
 msgid "Last Modified on"
 msgstr ""
@@ -95,7 +107,7 @@ msgid "Name"
 msgstr ""
 
 #. module: alc_b2c_connector
-#: code:addons/alc_b2c_connector/models/sale_order.py:150
+#: code:addons/alc_b2c_connector/models/sale_order.py:143
 #, python-format
 msgid "No match found for customer_id: %s"
 msgstr ""
@@ -104,6 +116,16 @@ msgstr ""
 #: code:addons/alc_b2c_connector/models/alc_b2c_backend.py:47
 #, python-format
 msgid "Only 1 ChronoVet backend configuration is allowed."
+msgstr ""
+
+#. module: alc_b2c_connector
+#: model:ir.model,name:alc_b2c_connector.model_res_partner
+msgid "Partner"
+msgstr ""
+
+#. module: alc_b2c_connector
+#: model:ir.model,name:alc_b2c_connector.model_res_partner_category
+msgid "Partner Tags"
 msgstr ""
 
 #. module: alc_b2c_connector
