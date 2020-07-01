@@ -166,6 +166,17 @@ stop-test:
   dependencies: []
   allow_failure: true
 
+deploy-uat:
+  stage: deploy
+  tags:
+    - acsone-lan-lux
+  script:
+    - start_ssh_agent
+    - ssh -J acsone@194.78.105.88:23 acsone@Lnx009.abl.grp ./odoo-upgrade.sh ${CI_COMMIT_REF_NAME}
+  when: manual
+  only:
+    - /1\.53\.\d+/
+
 deploy-preprod:
   stage: deploy
   tags:
