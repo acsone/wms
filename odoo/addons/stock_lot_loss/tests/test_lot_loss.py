@@ -496,3 +496,28 @@ class TestLotLoss(SavepointCase):
         )
         inventory.action_done()
         self.assertEqual(block_move.state, "cancel")
+
+    def test_00(self):
+        """
+        Data:
+            A picking with 2 lines for 2 un tracked products
+        Test case:
+            Skip all the operation a transfer the picking
+        Expected result:
+            The picking is done and a back_order is created
+        """
+        self.initiate_values_no_tracking()
+        self.picking_2.with_context(round_autoset=False).action_assign()
+        for op in self.picking_2.pack_operation_ids:
+            op.qty_done = 1.0
+            op._skip_operation()
+        result = self.picking_2.do_new_transfer()
+
+        if isinstance(result, dict) and result:
+            model = result.get("res_model")
+            wizard = self.env[model].browse(int(result.get("res_id")))
+
+            # Fortunately these wizards have the same
+            # method "process" to execute the wizard
+            wizard.process()
+        self.assertEqual(self.picking_2.state, "done")
