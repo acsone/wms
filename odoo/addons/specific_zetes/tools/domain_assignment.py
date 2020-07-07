@@ -92,6 +92,7 @@ class Assignment(DomainInterface):
         "Usf08",
         "Usf09",
         "Usf10",
+        "Usf11",  # FOR chronovet customer
     )
     RESU = (
         "groupNum",
@@ -177,6 +178,12 @@ class Assignment(DomainInterface):
             result.Usf10 = _("right")
 
         partner = picking.partner_id
+        customer = picking.customer_id
+        customer_name = ""
+        address = u"{} {}".format(partner.zip or "", partner.city or "")
+        if customer != partner:
+            customer_name = customer.name
+            address = u"{} -- {}".format(address, customer_name)
 
         round_name = picking.sudo().delivery_round_id.template_id.code
 
@@ -190,8 +197,9 @@ class Assignment(DomainInterface):
                 "Usf05": 0,  # Constant value
                 "Usf07": partner.name,  # Partner name
                 # Zip + city
-                "Usf08": u"{} {}".format(partner.zip or "", partner.city or ""),
+                "Usf08": address,
                 "Usf09": picking.nbr_actions,  # Nbr of operation
+                "Usf11": customer_name,
             }
         )
 
