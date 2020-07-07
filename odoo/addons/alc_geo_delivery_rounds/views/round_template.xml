@@ -50,14 +50,80 @@
         <field name="arch" type="xml">
             <geoengine>
                 <field name="name"/>
+                <field name="delivery_plan_id"/>
+                <templates>
+                    <t t-name="layer-box">
+                        <div id="content">
+                            <b>
+                                <field name="name"/>
+                            </b>
+                            <hr/>
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <b>Delivery plan:</b>
+                                </div>
+                                <div class="col-xs-6">
+                                    <field name="delivery_plan_id"/>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
             </geoengine>
         </field>
         <field eval="16" name="priority"/>
         <field name="model">round.template</field>
     </record>
+
+
+    <record id="res_partner_details_view_geoengine" model="ir.ui.view">
+    <field name="name">res.partner.details.geo_view</field>
+    <field name="arch" type="xml">
+        <geoengine>
+            <field name="name"/>
+            <field name="ref"/>
+            <field name="tag_labels"/>
+            <templates>
+                <t t-name="layer-box">
+                    <div id="content">
+                        <b>
+                            <field name="name"/>
+                        </b>
+                        <hr/>
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <b>Reference:</b>
+                            </div>
+                            <div class="col-xs-8">
+                                <field name="ref"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <b>Tags:</b>
+                            </div>
+                            <div class="col-xs-8">
+                                <field name="tag_labels"/>
+                            </div>
+                        </div>
+                        <br/>
+                    </div>
+                </t>
+            </templates>
+        </geoengine>
+    </field>
+    <!--
+    put a higher priority to be sure that this view is not the one used by default
+    -->
+    <field name="priority" eval="16"/>
+    <field name="model">res.partner</field>
+    </record>
+
+
+
     <record id="round_template_geoengine_vector_layer" model="geoengine.vector.layer">
         <field name="geo_field_id" ref="alc_geo_delivery_rounds.field_round_template_geo_polygon_shape"/>
-        <field name="name">Basic view</field>
+        <field name="name">Geographic zones</field>
         <field name="view_id" ref="round_template_geoengine_view"/>
         <field name="geo_repr">basic</field>
         <field name="begin_color">#33ccff</field>
@@ -65,6 +131,19 @@
         <field name="display_polygon_labels" eval= "1"/>
         <field name="attribute_field_id" ref="delivery_rounds.field_round_template_name"/>
     </record>
+
+    <record id="res_partner_geoengine_vector_layer" model="geoengine.vector.layer">
+        <field name="model_id" ref="base.model_res_partner"/>
+        <field name="model_view_id" ref="alc_geo_delivery_rounds.res_partner_details_view_geoengine"/>
+        <field name="geo_field_id" ref="geoengine_partner.field_res_partner_geo_point"/>
+        <field name="name">Partners positions</field>
+        <field name="view_id" ref="round_template_geoengine_view"/>
+        <field name="geo_repr">basic</field>
+        <field name="begin_color">#ff3333</field>
+        <field name="layer_opacity">0.9</field>
+        <field name="display_polygon_labels" eval= "0"/>
+    </record>
+
     <record id="round_template_geoengine_raster_layer" model="geoengine.raster.layer">
         <field name="raster_type">osm</field>
         <field name="name">OSM layer</field>

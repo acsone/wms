@@ -12,6 +12,8 @@ from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 from odoo.tools.osutil import tempdir
 from shapely.geometry import asShape
+from shapely.geometry.multipolygon import MultiPolygon
+from shapely.geometry.polygon import Polygon
 from shapely.wkb import loads as wkbloads
 
 logger = logging.getLogger(__name__)
@@ -99,6 +101,11 @@ class ShapeFileImportWizard(models.TransientModel):
         )
         projected_geoshape = self.env.cr.fetchone()
         wkb = wkbloads(projected_geoshape[0], hex=True)
+
+        # Cast Polygon to MultiPolygon for consistency
+        # Some templates have a multipolygon shape, others have a polygon shape
+        if isinstance(wkb, Polygon):
+            wkb = MultiPolygon([wkb])
 
         existing_template = self.delivery_plan_id.round_template_ids.filtered(
             lambda x: x.name == shape_record.record.Nom

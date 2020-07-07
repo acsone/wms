@@ -6,6 +6,7 @@ import base64
 
 from odoo.modules.module import get_resource_path
 from odoo.tests.common import TransactionCase
+from shapely.geometry.multipolygon import MultiPolygon
 from shapely.geometry.polygon import Polygon
 
 
@@ -54,8 +55,10 @@ class TestShapeFileImportWizard(TransactionCase):
                 [3.155595, 50.777824],
             ]
         )
+
+        multipolygon = MultiPolygon([polygon])
         template = self.env["round.template"].create(
-            {"name": "D2", "geo_polygon_shape": polygon}
+            {"name": "D2", "geo_polygon_shape": multipolygon}
         )  # No shape associated to it
         delivery_plan = self.env["delivery.plan"].create(
             {"name": "test_update", "round_template_ids": [(4, template.id)]}
@@ -66,7 +69,7 @@ class TestShapeFileImportWizard(TransactionCase):
         self._do_import("shape_test_2.zip", delivery_plan_id=delivery_plan.id)
 
         # after update : shape does exists on template
-        geo_shape_after = isinstance(template.geo_polygon_shape, Polygon)
+        geo_shape_after = isinstance(template.geo_polygon_shape, MultiPolygon)
         self.assertTrue(geo_shape_after)
         self.assertEqual(template.geo_optimization_resource_id, template.name)
 
@@ -81,8 +84,10 @@ class TestShapeFileImportWizard(TransactionCase):
                 [3.155595, 50.777824],
             ]
         )
+
+        multipolygon = MultiPolygon([polygon])
         template = self.env["round.template"].create(
-            {"name": "D1", "geo_polygon_shape": polygon}
+            {"name": "D1", "geo_polygon_shape": multipolygon}
         )
         delivery_plan = self.env["delivery.plan"].create(
             {"name": "test_delete", "round_template_ids": [(4, template.id)]}
