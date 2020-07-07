@@ -4,7 +4,7 @@
 
 {
     "name": "Alc geoEngine",
-    "version": "10.0.1.0.0",
+    "version": "10.0.2.0.0",
     "description": """Alcyon: Improve journey planification for deliveries """,
     "author": "Acsone SA/NV",
     "website": "http://acsone.eu",
@@ -17,9 +17,11 @@
         "geoengine_partner",
     ],
     "data": [
+        "wizards/make_itinerary_plan_wizard.xml",
         "wizards/shape_file_import_wizard.xml",
-        "views/round_template.xml",
         "views/delivery_plan.xml",
+        "views/res_partner.xml",
+        "views/round_template.xml",
         "security/ir.model.access.csv",
     ],
     "demo": [],

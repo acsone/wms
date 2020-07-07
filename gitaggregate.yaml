@@ -8,6 +8,16 @@
         - oca refs/pull/172/head #[10.0] Add UBL OrderResponse import
     target: origin 10.0-alc_master
 
+./src/geospatial:
+    remotes:
+        oca: https://github.com/oca/geospatial.git
+        origin: ssh://git@github.com/acsone/geospatial.git
+    merges:
+        - oca 10.0
+        - oca refs/pull/261/head #[10.0][IMP] base_geoengine: allow custom configuration on layer opacity
+        - oca refs/pull/265/head #[10.0][IMP] add choice model on layers
+    target: origin 10.0-alc_master
+
 ./src/sale-workflow:
     remotes:
         oca: https://github.com/oca/sale-workflow.git

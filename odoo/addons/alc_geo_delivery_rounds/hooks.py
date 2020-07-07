@@ -32,5 +32,17 @@ def _fill_partner_lat_long_or_geo_point(cr, registry):
     )
 
 
+def _fill_partner_tag(cr):
+    cr.execute(
+        """
+        INSERT INTO res_partner_round_tag_rel (round_tag_id, res_partner_id)
+        SELECT DISTINCT rel.round_tag_id, p.partner_id
+        FROM round_itinerary_position_round_tag_rel rel, round_itinerary_position p
+        WHERE p.id = rel.round_itinerary_position_id
+    """
+    )
+
+
 def post_init_hook(cr, registry):
     _fill_partner_lat_long_or_geo_point(cr, registry)
+    _fill_partner_tag(cr)
