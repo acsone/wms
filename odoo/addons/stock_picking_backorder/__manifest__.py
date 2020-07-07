@@ -13,6 +13,7 @@
     "data": [
         "views/res_partner.xml",
         "views/stock_backorder_reason.xml",
+        "views/stock_picking.xml",
         "wizards/stock_backorder_choice.xml",
         "security/ir.model.access.csv",
         "data/stock_backorder_reason.xml",

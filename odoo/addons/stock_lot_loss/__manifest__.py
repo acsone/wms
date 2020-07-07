@@ -15,9 +15,11 @@
         "purchase",  # Add only for unittests
     ],
     "data": [
+        "wizards/stock_pack_operation_skip_lot.xml",
         "data/ir.sequence.csv",
         "data/stock.location.csv",
         "data/stock.picking.type.csv",
+        "views/stock_pack_operation.xml",
     ],
     "installable": True,
     "auto_install": False,

@@ -500,7 +500,7 @@ class TestLotLoss(SavepointCase):
     def test_00(self):
         """
         Data:
-            A picking with 2 lines for 2 un tracked products
+            A picking with lines for un tracked products
         Test case:
             Skip all the operation a transfer the picking
         Expected result:
@@ -509,8 +509,7 @@ class TestLotLoss(SavepointCase):
         self.initiate_values_no_tracking()
         self.picking_2.with_context(round_autoset=False).action_assign()
         for op in self.picking_2.pack_operation_ids:
-            op.qty_done = 1.0
-            op._skip_operation()
+            op.action_missing_qty()
         result = self.picking_2.do_new_transfer()
 
         if isinstance(result, dict) and result:
@@ -521,3 +520,35 @@ class TestLotLoss(SavepointCase):
             # method "process" to execute the wizard
             wizard.process()
         self.assertEqual(self.picking_2.state, "done")
+
+    def test_01(self):
+        """
+        Data:
+            A picking with lines for tracked products
+        Test case:
+            Skip all the operation a transfer the picking
+        Expected result:
+            The picking is confirmed and no pack op are available
+        """
+        self.initiate_values()
+        self.picking_1.with_context(round_autoset=False).action_assign()
+        pack_operations = self.picking_1.pack_operation_ids
+        while pack_operations:
+            pack_op = pack_operations[0]
+            result = pack_op.action_missing_qty()
+            if isinstance(result, dict) and result:
+                model = result.get("res_model")
+                wizard = (
+                    self.env[model]
+                    .with_context(result.get("context"))
+                    .create({"skip_pack_lot_id": pack_op.pack_lot_ids.ids[0]})
+                )
+                wizard.doit()
+            pack_operations = self.picking_1.pack_operation_ids
+
+        result = self.picking_1.do_new_transfer()
+        self.assertEqual(self.picking_1.state, "confirmed")
+        self.assertFalse(self.picking_1.pack_operation_ids)
+        # here we try to create a backorder.
+        self.picking_1._create_backorder()
+        self.assertEqual(self.picking_1.state, "draft")
