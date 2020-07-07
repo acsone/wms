@@ -14,6 +14,21 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_geo_delivery_rounds
+#: model:ir.ui.view,arch_db:alc_geo_delivery_rounds.round_template_geoengine_view
+msgid "<b>Delivery plan:</b>"
+msgstr ""
+
+#. module: alc_geo_delivery_rounds
+#: model:ir.ui.view,arch_db:alc_geo_delivery_rounds.res_partner_details_view_geoengine
+msgid "<b>Reference:</b>"
+msgstr ""
+
+#. module: alc_geo_delivery_rounds
+#: model:ir.ui.view,arch_db:alc_geo_delivery_rounds.res_partner_details_view_geoengine
+msgid "<b>Tags:</b>"
+msgstr ""
+
+#. module: alc_geo_delivery_rounds
 #: model:ir.ui.view,arch_db:alc_geo_delivery_rounds.delivery_plan_form_view
 msgid "<span>Import shape file</span>"
 msgstr ""
@@ -25,25 +40,33 @@ msgid "A shape is required if a delivery plan is set for %s"
 msgstr ""
 
 #. module: alc_geo_delivery_rounds
-#: model:geoengine.vector.layer,name:alc_geo_delivery_rounds.round_template_geoengine_vector_layer
-msgid "Basic view"
-msgstr ""
-
-#. module: alc_geo_delivery_rounds
+#: model:ir.ui.view,arch_db:alc_geo_delivery_rounds.make_itinerary_plan_wizard_form_view
 #: model:ir.ui.view,arch_db:alc_geo_delivery_rounds.shape_file_import_wizard_form_view
 msgid "Cancel"
 msgstr ""
 
 #. module: alc_geo_delivery_rounds
+#: model:ir.ui.view,arch_db:alc_geo_delivery_rounds.make_itinerary_plan_wizard_form_view
+msgid "Confirm"
+msgstr ""
+
+#. module: alc_geo_delivery_rounds
 #: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_delivery_plan_create_uid
+#: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_make_itinerary_plan_wizard_create_uid
 #: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_shape_file_import_wizard_create_uid
 msgid "Created by"
 msgstr ""
 
 #. module: alc_geo_delivery_rounds
 #: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_delivery_plan_create_date
+#: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_make_itinerary_plan_wizard_create_date
 #: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_shape_file_import_wizard_create_date
 msgid "Created on"
+msgstr ""
+
+#. module: alc_geo_delivery_rounds
+#: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_make_itinerary_plan_wizard_execution_date
+msgid "Date"
 msgstr ""
 
 #. module: alc_geo_delivery_rounds
@@ -54,6 +77,7 @@ msgstr ""
 #. module: alc_geo_delivery_rounds
 #: model:ir.actions.act_window,name:alc_geo_delivery_rounds.delivery_plan_act_window
 #: model:ir.model,name:alc_geo_delivery_rounds.model_delivery_plan
+#: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_make_itinerary_plan_wizard_delivery_plan_id
 #: model:ir.ui.menu,name:alc_geo_delivery_rounds.delivery_plan_menu
 #: model:ir.ui.view,arch_db:alc_geo_delivery_rounds.round_template_search_view
 msgid "Delivery plan"
@@ -71,6 +95,7 @@ msgstr ""
 
 #. module: alc_geo_delivery_rounds
 #: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_delivery_plan_display_name
+#: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_make_itinerary_plan_wizard_display_name
 #: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_shape_file_import_wizard_display_name
 msgid "Display Name"
 msgstr ""
@@ -81,7 +106,7 @@ msgid "Execute import"
 msgstr ""
 
 #. module: alc_geo_delivery_rounds
-#: code:addons/alc_geo_delivery_rounds/wizards/shape_file_import_wizard.py:56
+#: code:addons/alc_geo_delivery_rounds/wizards/shape_file_import_wizard.py:58
 #, python-format
 msgid "File is not a zip file!"
 msgstr ""
@@ -92,12 +117,18 @@ msgid "Filename"
 msgstr ""
 
 #. module: alc_geo_delivery_rounds
+#: model:geoengine.vector.layer,name:alc_geo_delivery_rounds.round_template_geoengine_vector_layer
+msgid "Geographic zones"
+msgstr ""
+
+#. module: alc_geo_delivery_rounds
 #: model:ir.ui.view,arch_db:alc_geo_delivery_rounds.round_template_form_view
 msgid "Geometry"
 msgstr ""
 
 #. module: alc_geo_delivery_rounds
 #: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_delivery_plan_id
+#: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_make_itinerary_plan_wizard_id
 #: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_shape_file_import_wizard_id
 msgid "ID"
 msgstr ""
@@ -109,21 +140,41 @@ msgid "Import shape file"
 msgstr ""
 
 #. module: alc_geo_delivery_rounds
+#: model:ir.actions.act_window,name:alc_geo_delivery_rounds.itinerary_plan_act_window
+#: model:ir.ui.menu,name:alc_geo_delivery_rounds.itinerary_plan_menu
+msgid "Itinerary plan"
+msgstr ""
+
+#. module: alc_geo_delivery_rounds
 #: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_delivery_plan___last_update
+#: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_make_itinerary_plan_wizard___last_update
 #: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_shape_file_import_wizard___last_update
 msgid "Last Modified on"
 msgstr ""
 
 #. module: alc_geo_delivery_rounds
 #: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_delivery_plan_write_uid
+#: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_make_itinerary_plan_wizard_write_uid
 #: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_shape_file_import_wizard_write_uid
 msgid "Last Updated by"
 msgstr ""
 
 #. module: alc_geo_delivery_rounds
 #: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_delivery_plan_write_date
+#: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_make_itinerary_plan_wizard_write_date
 #: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_shape_file_import_wizard_write_date
 msgid "Last Updated on"
+msgstr ""
+
+#. module: alc_geo_delivery_rounds
+#: model:ir.model.fields,help:alc_geo_delivery_rounds.field_res_partner_round_template_ids
+#: model:ir.model.fields,help:alc_geo_delivery_rounds.field_res_users_round_template_ids
+msgid "List all the round templates containing the partner"
+msgstr ""
+
+#. module: alc_geo_delivery_rounds
+#: model:ir.ui.view,arch_db:alc_geo_delivery_rounds.make_itinerary_plan_wizard_form_view
+msgid "Make Today's Itinerary Plan"
 msgstr ""
 
 #. module: alc_geo_delivery_rounds
@@ -139,7 +190,7 @@ msgid "Name must be unique"
 msgstr ""
 
 #. module: alc_geo_delivery_rounds
-#: code:addons/alc_geo_delivery_rounds/wizards/shape_file_import_wizard.py:54
+#: code:addons/alc_geo_delivery_rounds/wizards/shape_file_import_wizard.py:56
 #, python-format
 msgid "No file sent."
 msgstr ""
@@ -155,9 +206,49 @@ msgid "OSM layer"
 msgstr ""
 
 #. module: alc_geo_delivery_rounds
+#: model:ir.model.fields,help:alc_geo_delivery_rounds.field_res_partner_tag_ids
+#: model:ir.model.fields,help:alc_geo_delivery_rounds.field_res_users_tag_ids
+msgid "Only partners with the right tag will be delivered"
+msgstr ""
+
+#. module: alc_geo_delivery_rounds
+#: model:ir.model,name:alc_geo_delivery_rounds.model_res_partner
+msgid "Partner"
+msgstr ""
+
+#. module: alc_geo_delivery_rounds
+#: model:geoengine.vector.layer,name:alc_geo_delivery_rounds.res_partner_geoengine_vector_layer
+msgid "Partners positions"
+msgstr ""
+
+#. module: alc_geo_delivery_rounds
+#: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_make_itinerary_plan_wizard_assign_moves
+msgid "Reserve stock"
+msgstr ""
+
+#. module: alc_geo_delivery_rounds
+#: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_res_partner_round_template_ids
+#: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_res_users_round_template_ids
+msgid "Round templates"
+msgstr ""
+
+#. module: alc_geo_delivery_rounds
 #: model:ir.actions.act_window,name:alc_geo_delivery_rounds.action_shape_file_import
 #: model:ir.ui.view,arch_db:alc_geo_delivery_rounds.shape_file_import_wizard_form_view
 msgid "Shape File Import Wizard"
+msgstr ""
+
+#. module: alc_geo_delivery_rounds
+#: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_res_partner_tag_labels
+#: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_res_users_tag_labels
+msgid "Tag labels"
+msgstr ""
+
+#. module: alc_geo_delivery_rounds
+#: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_make_itinerary_plan_wizard_tag_ids
+#: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_res_partner_tag_ids
+#: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_res_users_tag_ids
+msgid "Tags"
 msgstr ""
 
 #. module: alc_geo_delivery_rounds
@@ -166,10 +257,25 @@ msgid "Templates"
 msgstr ""
 
 #. module: alc_geo_delivery_rounds
-#: code:addons/alc_geo_delivery_rounds/wizards/shape_file_import_wizard.py:71
 #: code:addons/alc_geo_delivery_rounds/wizards/shape_file_import_wizard.py:73
+#: code:addons/alc_geo_delivery_rounds/wizards/shape_file_import_wizard.py:75
 #, python-format
 msgid "Unable to import the shape file"
+msgstr ""
+
+#. module: alc_geo_delivery_rounds
+#: model:ir.model,name:alc_geo_delivery_rounds.model_make_itinerary_plan_wizard
+msgid "make.itinerary.plan.wizard"
+msgstr ""
+
+#. module: alc_geo_delivery_rounds
+#: model:ir.ui.view,arch_db:alc_geo_delivery_rounds.make_itinerary_plan_wizard_form_view
+msgid "or"
+msgstr ""
+
+#. module: alc_geo_delivery_rounds
+#: model:ir.model,name:alc_geo_delivery_rounds.model_round_instance
+msgid "round.instance"
 msgstr ""
 
 #. module: alc_geo_delivery_rounds
