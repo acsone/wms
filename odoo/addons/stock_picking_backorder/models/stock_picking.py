@@ -30,10 +30,14 @@ class StockPicking(models.Model):
         for rec in self:
             # allow to transfer and create backorder even if no line
             # processed
-            rec.is_create_backorder_allowed = (
-                rec.state == "draft"
-                or all(x.qty_done == 0.0 for x in rec.pack_operation_ids)
-            ) and rec.check_backorder()
+            rec.is_create_backorder_allowed = rec._is_create_backorder_allowed()
+
+    def _is_create_backorder_allowed(self):
+        self.ensure_one()
+        return (
+            self.state == "draft"
+            or all(x.qty_done == 0.0 for x in self.pack_operation_ids)
+        ) and self.check_backorder()
 
     def _check_is_action_force_transfer_allowed(self):
         if any(not rec.is_action_force_transfer_allowed for rec in self):
@@ -80,11 +84,10 @@ class StockPicking(models.Model):
 
     @api.multi
     def do_transfer(self):
-        for pick in self:
-            if pick.is_create_backorder_allowed:
-                pick._create_backorder()
-            else:
-                super(StockPicking, self).do_transfer()
+        to_backorder = self.filtered(lambda pick: pick._is_create_backorder_allowed())
+        to_transfer = self - to_backorder
+        to_backorder._create_backorder()
+        super(StockPicking, to_transfer).do_transfer()
         return True
 
     @api.one
