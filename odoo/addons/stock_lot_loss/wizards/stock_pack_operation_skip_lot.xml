@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2020 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+    <record model="ir.ui.view" id="stock_pack_operation_skip_lot_form_view">
+        <field name="name">stock.pack.operation.skip.lot.form (in stock_lot_loss)</field>
+        <field name="model">stock.pack.operation.skip.lot</field>
+        <field name="arch" type="xml">
+            <form string="Skip pack operation for lot">
+                <group>
+                    <field name="pack_operation_id" required="1"/>
+                    <field name="pack_lot_ids"/>
+                    <field name="skip_pack_lot_id" required="1"/>
+                </group>
+                <footer>
+                    <button name="doit"
+                            string="Skip"
+                            class="btn-primary"
+                            type="object"/>
+                    <button string="Cancel"
+                            class="btn-default"
+                            special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>

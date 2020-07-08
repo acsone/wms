@@ -5,7 +5,7 @@
 
 import logging
 
-from odoo import _, models
+from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
 _logger = logging.getLogger(__name__)
@@ -13,6 +13,21 @@ _logger = logging.getLogger(__name__)
 
 class StockPackOperation(models.Model):
     _inherit = "stock.pack.operation"
+
+    is_action_missing_qty_allowed = fields.Boolean(
+        compute="_compute_is_action_missing_qty_allowed"
+    )
+
+    @api.depends("product_qty", "qty_done")
+    def _compute_is_action_missing_qty_allowed(self):
+        for rec in self:
+            rec.is_action_missing_qty_allowed = (
+                rec.qty_done - rec.product_qty <= 0
+            ) and rec.state not in ("done", "draft")
+
+    def _check_is_action_missing_qty_allowed(self):
+        if any(not rec.is_action_missing_qty_allowed for rec in self):
+            raise UserError(_("You are not allowed to declare missing quantities"))
 
     def _skip_operation(self, pack_op_lot_id=None):
         """Unreserve the current move and recreate a new move with a different
@@ -89,3 +104,38 @@ class StockPackOperation(models.Model):
 
         # Recompute pack operations
         moves._recompute_pack_op()
+
+    def action_missing_qty(self):
+        """This action process the operation and makes the remaining qty no more
+        available into the stock at the same time of creating a picking to
+        search for the qty loss. At the end, we try to recompute a new pack
+        operation to find qty into an other place to complete the move.
+        """
+        self.ensure_one()
+        self._check_is_action_missing_qty_allowed()
+        if not self.pack_lot_ids:
+            self._skip_operation()
+            return True
+        skipable_lots = self.pack_lot_ids.filtered(
+            lambda pack_lot_id: pack_lot_id.qty < pack_lot_id.qty_todo
+        )
+        if len(skipable_lots) > 1:
+            action_ctx = dict(self.env.context)
+            action_ctx.update({"default_pack_operation_id": self.id})
+            view_id = self.env.ref(
+                "stock_lot_loss.stock_pack_operation_skip_lot_form_view"
+            ).id
+            return {
+                "name": _("Select Lot/Serial Number to skip"),
+                "type": "ir.actions.act_window",
+                "view_type": "form",
+                "view_mode": "form",
+                "res_model": "stock.pack.operation.skip.lot",
+                "views": [(view_id, "form")],
+                "view_id": view_id,
+                "target": "new",
+                "context": action_ctx,
+            }
+        if len(skipable_lots) == 1:
+            self._skip_operation(skipable_lots)
+        return True

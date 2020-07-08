@@ -22,7 +22,11 @@ class StockPicking(models.Model):
 
     @api.multi
     def do_transfer(self):
+        # TODO do_transfer MUST SUPPORT API MULTI WTF this check_shipping_cost
+        # method that doesn't support multi records!!!!!!
+        # Once again a bulk of shit
         self.check_shipping_cost()
+
         return super(StockPicking, self).do_transfer()
 
     @api.multi
