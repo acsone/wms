@@ -14,14 +14,80 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: stock_lot_loss
+#: model:ir.ui.view,arch_db:stock_lot_loss.stock_pack_operation_skip_lot_form_view
+msgid "Cancel"
+msgstr ""
+
+#. module: stock_lot_loss
+#: model:ir.model.fields,field_description:stock_lot_loss.field_stock_pack_operation_skip_lot_create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: stock_lot_loss
+#: model:ir.model.fields,field_description:stock_lot_loss.field_stock_pack_operation_skip_lot_create_date
+msgid "Created on"
+msgstr ""
+
+#. module: stock_lot_loss
+#: model:ir.model.fields,field_description:stock_lot_loss.field_stock_pack_operation_skip_lot_display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: stock_lot_loss
+#: model:ir.model.fields,field_description:stock_lot_loss.field_stock_pack_operation_skip_lot_id
+msgid "ID"
+msgstr ""
+
+#. module: stock_lot_loss
 #: model:ir.model,name:stock_lot_loss.model_stock_inventory_line
 msgid "Inventory Line"
 msgstr ""
 
 #. module: stock_lot_loss
-#: code:addons/stock_lot_loss/models/stock_pack_operation.py:56
+#: model:ir.model.fields,field_description:stock_lot_loss.field_stock_pack_operation_is_action_missing_qty_allowed
+msgid "Is action missing qty allowed"
+msgstr ""
+
+#. module: stock_lot_loss
+#: model:ir.model.fields,field_description:stock_lot_loss.field_stock_pack_operation_skip_lot___last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: stock_lot_loss
+#: model:ir.model.fields,field_description:stock_lot_loss.field_stock_pack_operation_skip_lot_write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: stock_lot_loss
+#: model:ir.model.fields,field_description:stock_lot_loss.field_stock_pack_operation_skip_lot_write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: stock_lot_loss
+#: model:ir.model.fields,field_description:stock_lot_loss.field_stock_pack_operation_skip_lot_skip_pack_lot_id
+msgid "Lot to skip"
+msgstr ""
+
+#. module: stock_lot_loss
+#: code:addons/stock_lot_loss/models/stock_pack_operation.py:71
 #, python-format
 msgid "No qty to block."
+msgstr ""
+
+#. module: stock_lot_loss
+#: model:ir.model.fields,field_description:stock_lot_loss.field_stock_pack_operation_skip_lot_pack_lot_ids
+msgid "Pack lot ids"
+msgstr ""
+
+#. module: stock_lot_loss
+#: code:addons/stock_lot_loss/wizards/stock_pack_operation_skip_lot.py:40
+#, python-format
+msgid "Pack operation and the lot to skip are required informations"
+msgstr ""
+
+#. module: stock_lot_loss
+#: model:ir.model.fields,field_description:stock_lot_loss.field_stock_pack_operation_skip_lot_pack_operation_id
+msgid "Pack operation id"
 msgstr ""
 
 #. module: stock_lot_loss
@@ -30,7 +96,39 @@ msgid "Packing Operation"
 msgstr ""
 
 #. module: stock_lot_loss
+#: model:ir.ui.view,arch_db:stock_lot_loss.stock_picking_form_view
+msgid "Qty not found"
+msgstr ""
+
+#. module: stock_lot_loss
 #: model:stock.picking.type,name:stock_lot_loss.stock_picking_type_23
 msgid "Ruptures"
+msgstr ""
+
+#. module: stock_lot_loss
+#: code:addons/stock_lot_loss/models/stock_pack_operation.py:129
+#, python-format
+msgid "Select Lot/Serial Number to skip"
+msgstr ""
+
+#. module: stock_lot_loss
+#: model:ir.ui.view,arch_db:stock_lot_loss.stock_pack_operation_skip_lot_form_view
+msgid "Skip"
+msgstr ""
+
+#. module: stock_lot_loss
+#: model:ir.ui.view,arch_db:stock_lot_loss.stock_pack_operation_skip_lot_form_view
+msgid "Skip pack operation for lot"
+msgstr ""
+
+#. module: stock_lot_loss
+#: code:addons/stock_lot_loss/models/stock_pack_operation.py:30
+#, python-format
+msgid "You are not allowed to declare missing quantities"
+msgstr ""
+
+#. module: stock_lot_loss
+#: model:ir.model,name:stock_lot_loss.model_stock_pack_operation_skip_lot
+msgid "stock.pack.operation.skip.lot"
 msgstr ""
 
