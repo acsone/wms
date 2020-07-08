@@ -72,7 +72,7 @@ msgid "Cannot format the value %s with type %s"
 msgstr ""
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_assignment.py:156
+#: code:addons/specific_zetes/tools/domain_assignment.py:157
 #, python-format
 msgid "Cannot found a picking"
 msgstr ""
@@ -240,7 +240,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:specific_zetes.field_manage_uop_id
 #: model:ir.model.fields,field_description:specific_zetes.field_manage_uop_line_id
 #: model:ir.model.fields,field_description:specific_zetes.field_pack_operation_reserve_rel_id
-#: model:ir.model.fields,field_description:specific_zetes.field_stock_pack_operation_operator_id_9552
+#: model:ir.model.fields,field_description:specific_zetes.field_stock_pack_operation_operator_id_9565
 #: model:ir.model.fields,field_description:specific_zetes.field_view_picking_line_id
 #: model:ir.model.fields,field_description:specific_zetes.field_zetes_logger_id
 msgid "ID"
@@ -767,7 +767,7 @@ msgid "UOP not found or this UOP is not open"
 msgstr ""
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_assignment.py:147
+#: code:addons/specific_zetes/tools/domain_assignment.py:148
 #, python-format
 msgid "Unknown assignment type"
 msgstr ""
@@ -878,7 +878,7 @@ msgid "Zetes state"
 msgstr ""
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_assignment.py:175
+#: code:addons/specific_zetes/tools/domain_assignment.py:176
 #, python-format
 msgid "left"
 msgstr ""
@@ -899,7 +899,7 @@ msgid "pack.operation.reserve.rel"
 msgstr ""
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_assignment.py:177
+#: code:addons/specific_zetes/tools/domain_assignment.py:178
 #, python-format
 msgid "right"
 msgstr ""
