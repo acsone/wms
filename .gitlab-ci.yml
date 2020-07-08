@@ -29,7 +29,7 @@ before_script:
     }
     function build_and_push_image() {
         echo "Building OCI image ${IMAGE}..."
-        podman build --pull-always -t ${IMAGE} --volume ${PWD}/release:/tmp/release .
+        podman build --cgroup-manager=cgroupfs --pull-always -t ${IMAGE} --volume ${PWD}/release:/tmp/release .
         echo "Pushing image to GitLab Container Registry..."
         podman login ${CI_REGISTRY} -u ${CI_REGISTRY_USER} -p ${CI_REGISTRY_PASSWORD}
         podman push ${IMAGE}
@@ -80,7 +80,7 @@ build:
   script:
     - start_ssh_agent
     - virtualenv --python=$PYTHON venv
-    - venv/bin/pip wheel --no-deps -r requirements.txt . --wheel-dir=release
+      - venv/bin/pip wheel --no-deps -r requirements.txt . --wheel-dir=release
   artifacts:
     expire_in: 1 week
     paths:
