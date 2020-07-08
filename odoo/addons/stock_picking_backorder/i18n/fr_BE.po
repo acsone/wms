@@ -96,6 +96,12 @@ msgid "End of day"
 msgstr "Fin de journée"
 
 #. module: stock_picking_backorder
+#: model:ir.ui.view,arch_db:stock_picking_backorder.stock_picking_form_view
+#, fuzzy
+msgid "Force transfer"
+msgstr "Transfert"
+
+#. module: stock_picking_backorder
 #: model:ir.ui.view,arch_db:stock_picking_backorder.stock_backorder_choice_view_form
 msgid "Helpdesk"
 msgstr "Helpdesk"
@@ -116,6 +122,17 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_picking_backorder.field_stock_backorder_reason_id
 msgid "ID"
 msgstr ""
+
+#. module: stock_picking_backorder
+#: model:ir.model.fields,field_description:stock_picking_backorder.field_stock_picking_is_action_force_transfer_allowed
+msgid "Is action force transfer allowed"
+msgstr ""
+
+#. module: stock_picking_backorder
+#: model:ir.model.fields,field_description:stock_picking_backorder.field_stock_picking_is_create_backorder_allowed
+#, fuzzy
+msgid "Is create backorder allowed"
+msgstr "Créer un reliquat"
 
 #. module: stock_picking_backorder
 #: model:ir.model.fields,field_description:stock_picking_backorder.field_stock_backorder_reason_keep_grn
@@ -204,6 +221,12 @@ msgstr "Transfert"
 #. module: stock_picking_backorder
 #: selection:stock.backorder.reason,backorder_action_to_do:0
 msgid "Use partner option (Purchase backorder accepted)"
+msgstr ""
+
+#. module: stock_picking_backorder
+#: code:addons/stock_picking_backorder/models/stock_picking.py:44
+#, python-format
+msgid "You are not allowed to force the transfer"
 msgstr ""
 
 #. module: stock_picking_backorder
