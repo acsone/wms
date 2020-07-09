@@ -3,6 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 import logging
 import urllib
+from datetime import datetime
 
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
@@ -139,10 +140,13 @@ class PurchaseOrder(models.Model):
         date_planned_str = vals["date_planned"]
         date_planned = fields.Datetime.from_string(date_planned_str)
         po_date_planned = fields.Datetime.from_string(self.date_planned)
-        if po_date_planned < date_planned:
-            vals["date_planned"] = fields.Datetime.to_string(date_planned)
-        else:
+
+        today_date = datetime.today().replace(hour=0, minute=0, second=0, microsecond=0)
+        # If the date is before today, keep the PO date
+        if date_planned < today_date:
             vals["date_planned"] = fields.Datetime.to_string(po_date_planned)
+        else:
+            vals["date_planned"] = fields.Datetime.to_string(date_planned)
 
         orderpoint_min = vals.pop("orderpoint_min", 0)
         orderpoint_max = vals.pop("orderpoint_max", 0)
@@ -191,6 +195,7 @@ class PurchaseOrder(models.Model):
             )
             line.onchange_product_id()
             new_vals = line._convert_to_write(line._cache)
+
             new_vals.update(vals)
             new_line = PurchaseOrderLine.create(new_vals)
             # The subtotal is not correct if we don't call this onchange.
@@ -198,9 +203,11 @@ class PurchaseOrder(models.Model):
             # not give the expected result, probably because the 'create()'
             # method modifies some values.
             new_line._onchange_price_unit()
-
-        if po_date_planned < date_planned:
+        if date_planned < today_date:
+            self.date_planned = po_date_planned
+        else:
             self.date_planned = date_planned
+
         return True
 
     @api.multi
