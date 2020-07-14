@@ -25,6 +25,19 @@ class TestStockPicking(common.TransactionCase):
             {"name": "Hello World", "ref": "29969868875"}
         )
 
+        self.warehouse = self.env["stock.warehouse"].create(
+            {
+                "name": "Warehouse pick and ship",
+                "reception_steps": "one_step",
+                "delivery_steps": "pick_ship",
+                "code": "WPS",
+            }
+        )
+        self.warehouse.pick_type_id.subcode = "PICK"
+        self.warehouse.pick_type_id.groupbypartner = False
+        self.warehouse.out_type_id.groupbypartner = True
+        self.warehouse.out_type_id.create_invoice_on_transfer = True
+
         round_template = self.env["round.template"].create(
             {
                 "code": "78",
@@ -112,6 +125,8 @@ class TestStockPicking(common.TransactionCase):
         update_qty_wizard.change_product_qty()
 
         # Create main product linked to the additional product with quanity 20
+
+        product_uom_id = self.env.ref("product.product_uom_unit").id
         self.main_product = self.env["product.product"].create(
             {
                 "name": "Test medoc 1",
@@ -120,6 +135,7 @@ class TestStockPicking(common.TransactionCase):
                 "list_price": 100,
                 "type": "product",
                 "additional_product_id": self.additional_product.id,
+                "product_uom": product_uom_id,
                 "ratio_main_product": 2,
                 "ratio_additional_product": 1,
             }
