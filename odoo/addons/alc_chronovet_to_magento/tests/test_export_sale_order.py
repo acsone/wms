@@ -123,7 +123,7 @@ class TestExportSaleOrder(common.ESBTestCase):
             Map SO info to ESB
         Expected result;
             The customer id into the exported data is the one from chronovet
-            The sale_channel is 04 (WEB)
+            The sale_channel is 01 (phone)
         """
         with self.backend.work_on("sale.order") as work:
             mapper = work.component(usage="export.mapper")
@@ -132,7 +132,7 @@ class TestExportSaleOrder(common.ESBTestCase):
             values["customer_id"],
             self.env.ref("alc_chronovet.res_partner_chronovet").ref,
         )
-        self.assertEqual(values["channel"], "04")
+        self.assertEqual(values["channel"], "01")
 
     @mock.patch("requests.post", side_effect=post_ret_status)
     def test_01(self, post):

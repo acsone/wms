@@ -49,7 +49,7 @@ class SaleExportMapper(Component):
     @mapping
     def compute_channel(self, record):
         # Phone channel '01' is the default
-        if record.sale_channel == "phone":
+        if record.sale_channel in ("phone", "newpharma"):
             channel = "01"
         elif record.sale_channel == "fax":
             channel = "03"

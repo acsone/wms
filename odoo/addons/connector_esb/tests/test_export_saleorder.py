@@ -141,7 +141,7 @@ class ExportSaleOrderTestCase(SavepointCase):
             {
                 "partner_id": cls.partner_newpharma.id,
                 "date_order": "2018-01-29",
-                "sale_channel": "fax",
+                "sale_channel": "newpharma",
                 "carrier_id": cls.delivery.id,
                 "client_order_ref": "whatever the client want",
                 "delivery_price": 23.5,
