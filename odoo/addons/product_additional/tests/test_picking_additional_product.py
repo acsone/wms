@@ -36,7 +36,7 @@ class TestStockPicking(common.StockPickingTestCase):
         pick.action_confirm()
         pick.action_assign()
 
-        # Check the additional product is taken into account after confirmation
+        # Check that the additional product is taken into account after confirmation
         self.assertEqual(len(pick.move_lines), 2)
         self.assertEqual(len(pick.pack_operation_ids), 2)
 
@@ -45,5 +45,19 @@ class TestStockPicking(common.StockPickingTestCase):
             self.main_product | self.additional_product,
         )
 
-        # Check the additional product is taken into account after confirmation
-        # self.assertEqual(len(ship.move_lines), 2)
+        # Check that the additional product is also added to the shipping after confirmation
+        self.assertEqual(len(ship.move_lines), 2)
+
+        # The move created for the additional product into the pick picking
+        # must be linked to the move for the additional product into the ship
+        pick_addition_product_move = pick.move_lines.filtered(
+            lambda a, additional_product=self.additional_product: a.product_id
+            == additional_product
+        )
+        ship_addition_product_move = ship.move_lines.filtered(
+            lambda a, additional_product=self.additional_product: a.product_id
+            == additional_product
+        )
+        self.assertEqual(
+            pick_addition_product_move.move_dest_id, ship_addition_product_move
+        )
