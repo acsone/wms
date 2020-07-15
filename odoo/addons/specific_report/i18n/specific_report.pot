@@ -998,26 +998,25 @@ msgid "The Quotation can not be printed the client {} ({}) has no reference assi
 msgstr ""
 
 #. module: specific_report
-#: code:addons/specific_report/models/stock_picking.py:129
-#: code:addons/specific_report/models/stock_picking.py:168
+#: code:addons/specific_report/models/stock_picking.py:192
 #, python-format
 msgid "The picking zone %s is not correct"
 msgstr ""
 
 #. module: specific_report
-#: code:addons/specific_report/models/stock_picking.py:82
+#: code:addons/specific_report/models/stock_picking.py:84
 #, python-format
 msgid "There are more than one currencies on orders"
 msgstr ""
 
 #. module: specific_report
-#: code:addons/specific_report/models/stock_picking.py:149
+#: code:addons/specific_report/models/stock_picking.py:173
 #, python-format
 msgid "There is no category on this product"
 msgstr ""
 
 #. module: specific_report
-#: code:addons/specific_report/models/stock_picking.py:109
+#: code:addons/specific_report/models/stock_picking.py:107
 #, python-format
 msgid "There is no original picking zone on this operation."
 msgstr ""
