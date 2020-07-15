@@ -181,7 +181,7 @@ class Assignment(DomainInterface):
         customer = picking.customer_id
         customer_name = ""
         address = u"{} {}".format(partner.zip or "", partner.city or "")
-        if customer != partner:
+        if customer.is_b2c_customer:
             customer_name = customer.name
             address = u"{} -- {}".format(address, customer_name)
 

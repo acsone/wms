@@ -209,17 +209,20 @@ class Itempick(DomainInterface):
             order_by = "location_name ASC, id"
 
         print_price_query = """
-        SELECT partner.is_price_on_labels
+        SELECT partner.is_price_on_labels,
+               customer.is_b2c_customer
         FROM stock_picking AS picking
           INNER JOIN res_partner AS partner ON picking.partner_id = partner.id
+          left JOIN res_partner AS customer ON picking.customer_id = customer.id
         WHERE picking.id = %s;
         """
         self.request.env.cr.execute(print_price_query, (picking_id,))
         print_price_result = self.request.env.cr.fetchone()
-        if print_price_result and print_price_result[0]:
-            is_print_price = True
-        else:
-            is_print_price = False
+        is_print_price = False
+        if print_price_result:
+            is_price_on_labels, is_b2c_customer = print_price_result
+            if is_price_on_labels and not is_b2c_customer:
+                is_print_price = True
 
         # Check if we need to print on a portable printer
         is_portable_printer_result_query = """

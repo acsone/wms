@@ -12,6 +12,7 @@
     Zetes integration for Alcyon
     """,
     "depends": [
+        "alc_b2c_partner",
         "delivery_rounds",
         "delivery_rounds_refill",
         "stock",
