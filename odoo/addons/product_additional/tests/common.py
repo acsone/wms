@@ -76,66 +76,6 @@ class StockPickingTestCase(SavepointCase):
         update_qty_wizard.change_product_qty()
 
     @classmethod
-    def _create_picking_pick(cls, partner=None):
-        if not partner:
-            partner = cls.partner1
-        warehouse = cls.warehouse_1
-        Picking = cls.env["stock.picking"]
-        picking_values = {
-            "partner_id": partner.id,
-            "picking_type_id": warehouse.pick_type_id.id,
-            "location_id": cls.env.ref("stock.stock_location_stock").id,
-            "location_dest_id": warehouse.wh_output_stock_loc_id.id,
-            "move_lines": [
-                (
-                    0,
-                    0,
-                    {
-                        "name": cls.main_product.name,
-                        "product_id": cls.main_product.id,
-                        "picking_type_id": warehouse.pick_type_id.id,
-                        "product_uom_qty": 1,
-                        "product_uom": cls.main_product.uom_id.id,
-                        "location_id": cls.env.ref("stock.stock_location_stock").id,
-                        "location_dest_id": warehouse.wh_output_stock_loc_id.id,
-                    },
-                )
-            ],
-        }
-        return Picking.create(picking_values)
-
-    @classmethod
-    def _create_picking_out(cls, partner=None):
-        if not partner:
-            partner = cls.partner1
-        warehouse = cls.warehouse_1
-        Picking = cls.env["stock.picking"]
-        picking_values = {
-            "partner_id": partner.id,
-            "picking_type_id": warehouse.out_type_id.id,
-            "location_id": warehouse.wh_output_stock_loc_id.id,
-            "location_dest_id": cls.env.ref("stock.stock_location_customers").id,
-            "move_lines": [
-                (
-                    0,
-                    0,
-                    {
-                        "name": cls.main_product.name,
-                        "product_id": cls.main_product.id,
-                        "picking_type_id": warehouse.out_type_id.id,
-                        "product_uom_qty": 1,
-                        "product_uom": cls.main_product.uom_id.id,
-                        "location_id": warehouse.wh_output_stock_loc_id.id,
-                        "location_dest_id": cls.env.ref(
-                            "stock.stock_location_customers"
-                        ).id,
-                    },
-                )
-            ],
-        }
-        return Picking.create(picking_values)
-
-    @classmethod
     def _confirm_sale_order(cls, partner=None, product=None, qty=1, carrier_id=None):
         if partner is None:
             partner = cls.partner1

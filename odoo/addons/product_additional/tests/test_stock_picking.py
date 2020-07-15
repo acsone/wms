@@ -135,7 +135,7 @@ class TestStockPicking(common.TransactionCase):
                 "list_price": 100,
                 "type": "product",
                 "additional_product_id": self.additional_product.id,
-                "product_uom": product_uom_id,
+                "uom_id": product_uom_id,
                 "ratio_main_product": 2,
                 "ratio_additional_product": 1,
             }
