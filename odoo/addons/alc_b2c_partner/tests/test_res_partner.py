@@ -11,7 +11,7 @@ class TestResPartner(SavepointCase):
         super(TestResPartner, cls).setUpClass()
         cls.ResPartner = cls.env["res.partner"]
         cls.bc2_category = cls.env.ref(
-            "alc_b2c_connector.res_partner_category_b2c_customer"
+            "alc_b2c_partner.res_partner_category_b2c_customer"
         )
         cls.partner = cls.ResPartner.create({"name": "my test partner"})
 

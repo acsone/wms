@@ -16,6 +16,7 @@
     "depends": [
         "account_payment_mode",
         "account_payment_sale",
+        "alc_b2c_partner",
         "auth_api_key",
         "base_rest",
         "base_suspend_security",
@@ -37,7 +38,6 @@
         "data/ir_filters.xml",
         "data/product_pricelist.xml",
         "data/res_users.xml",
-        "data/res_partner_category.xml",
         "views/alc_b2c_backend.xml",
         "security/alc_b2c_backend.xml",
     ],
