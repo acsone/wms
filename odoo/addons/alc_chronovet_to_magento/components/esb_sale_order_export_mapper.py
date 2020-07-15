@@ -21,5 +21,5 @@ class EsbSaleExportMapper(Component):
     def compute_channel(self, record):
         # Phone channel '01' is the default
         if record.sale_channel == "chronovet":
-            return {"channel": "04"}  # web
+            return {"channel": "01"}  # phone
         return super(EsbSaleExportMapper, self).compute_channel(record)

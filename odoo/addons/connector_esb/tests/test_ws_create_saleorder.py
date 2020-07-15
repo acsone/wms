@@ -404,3 +404,4 @@ class WSCreateSaleOrderTestCase(SavepointCase):
         order = self.env["sale.order"]._ws_create_new(data, datetime.now())
         self.assertFalse(order.esb_ref)
         self.assertEqual(order.newpharma_ref, data["increment_id"])
+        self.assertEqual(order.sale_channel, "newpharma")

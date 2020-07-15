@@ -16,6 +16,7 @@ _logger = logging.getLogger(__name__)
 class SaleOrder(models.Model):
     _name = "sale.order"
     _inherit = ["sale.order", "esb.exportable"]
+    sale_channel = fields.Selection(selection_add=[("newpharma", "NewPharma")])
 
     esb_ref = fields.Char(string="Reference for ESB", copy=False, index=True)
     newpharma_ref = fields.Char(
@@ -181,6 +182,7 @@ class SaleOrder(models.Model):
         ref = data["increment_id"]
         if partner_ref in self.env["res.partner"].newpharma_refs:
             order_data["newpharma_ref"] = ref
+            order_data["sale_channel"] = "newpharma"
         else:
             order_data["esb_ref"] = ref
 
