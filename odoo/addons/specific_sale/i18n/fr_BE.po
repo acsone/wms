@@ -295,6 +295,11 @@ msgid "Negative Sale Order Line Not Allowed"
 msgstr "Ligne de vente ne peut pas être négative"
 
 #. module: specific_sale
+#: selection:sale.order,sale_channel:0
+msgid "NewPharma"
+msgstr ""
+
+#. module: specific_sale
 #: model:exception.rule,name:specific_sale.no_medoc_veterinary_belge
 msgid "No Belgian Veterinary Medicine"
 msgstr "Médicament vétérinaire belge interdit"
