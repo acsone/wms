@@ -248,7 +248,7 @@ msgid "Model name"
 msgstr ""
 
 #. module: connector_esb
-#: code:addons/connector_esb/models/sale_order/common.py:152
+#: code:addons/connector_esb/models/sale_order/common.py:153
 #, python-format
 msgid "No match found for customer_id: %s"
 msgstr ""
@@ -488,14 +488,14 @@ msgid "This export can not be triggered manually."
 msgstr ""
 
 #. module: connector_esb
-#: code:addons/connector_esb/models/sale_order/common.py:34
+#: code:addons/connector_esb/models/sale_order/common.py:35
 #: sql_constraint:sale.order:0
 #, python-format
 msgid "This reference NewPharma already exists"
 msgstr ""
 
 #. module: connector_esb
-#: code:addons/connector_esb/models/sale_order/common.py:29
+#: code:addons/connector_esb/models/sale_order/common.py:30
 #: sql_constraint:sale.order:0
 #, python-format
 msgid "This reference esb already exists"
@@ -512,7 +512,7 @@ msgid "Users"
 msgstr ""
 
 #. module: connector_esb
-#: code:addons/connector_esb/models/sale_order/common.py:133
+#: code:addons/connector_esb/models/sale_order/common.py:134
 #, python-format
 msgid "Was automatically cancelled on creation because thejob took longer to execute than the customer allows."
 msgstr ""
