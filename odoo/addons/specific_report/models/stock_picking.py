@@ -18,6 +18,8 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
+from collections import defaultdict
+
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
@@ -82,7 +84,8 @@ class StockPicking(models.Model):
                 raise UserError(_("There are more than one currencies on orders"))
 
             picking.price_total = sum(
-                l.order_line_id.price_reduce_taxinc * l.product_qty for l in lines_done
+                line.order_line_id.price_reduce_taxinc * line.product_qty
+                for line in lines_done
             )
             picking.currency_id = currency.id
 
@@ -96,12 +99,7 @@ class StockPicking(models.Model):
 
         # Check quantities for packages
         for picking in self:
-            number_of_drug = 0
-            number_of_cold = 0
-            number_of_food = 0
-            number_of_human_drug = 0
-            number_of_equipment = 0
-            number_total = 0
+            nbr_of_packages_by_zone = defaultdict(set)
 
             for operation in picking.pack_operation_pack_ids:
                 if not operation.package_id.original_picking_zone_id:
@@ -111,30 +109,56 @@ class StockPicking(models.Model):
 
                 picking_zone = operation.package_id.original_picking_zone_id
 
-                qty = operation.package_id.nbr_packages
-                number_total += qty
+                if operation.package_id:
+                    nbr_of_packages_by_zone[picking_zone].add(operation.package_id.id)
 
-                if picking_zone == zone_drug:
-                    number_of_drug += qty
-                elif picking_zone == zone_equipment:
-                    number_of_equipment += qty
-                elif picking_zone == zone_cold:
-                    number_of_cold += qty
-                elif picking_zone == zone_food:
-                    number_of_food += qty
-                elif picking_zone == zone_human:
-                    number_of_human_drug += qty
-                else:
-                    raise UserError(
-                        _("The picking zone %s is not correct") % picking_zone.name
-                    )
-
-            picking.number_of_drug = number_of_drug
-            picking.number_of_cold = number_of_cold
-            picking.number_of_food = number_of_food
-            picking.number_of_human_drug = number_of_human_drug
-            picking.number_of_equipment = number_of_equipment
-            picking.number_total = number_total
+            picking.number_of_drug = sum(
+                [
+                    x
+                    for x in self.env["stock.quant.package"]
+                    .browse(nbr_of_packages_by_zone[zone_drug])
+                    .mapped("nbr_packages")
+                ]
+            )
+            picking.number_of_equipment = sum(
+                [
+                    x
+                    for x in self.env["stock.quant.package"]
+                    .browse(nbr_of_packages_by_zone[zone_equipment])
+                    .mapped("nbr_packages")
+                ]
+            )
+            picking.number_of_cold = sum(
+                [
+                    x
+                    for x in self.env["stock.quant.package"]
+                    .browse(nbr_of_packages_by_zone[zone_cold])
+                    .mapped("nbr_packages")
+                ]
+            )
+            picking.number_of_food = sum(
+                [
+                    x
+                    for x in self.env["stock.quant.package"]
+                    .browse(nbr_of_packages_by_zone[zone_food])
+                    .mapped("nbr_packages")
+                ]
+            )
+            picking.number_of_human_drug = sum(
+                [
+                    x
+                    for x in self.env["stock.quant.package"]
+                    .browse(nbr_of_packages_by_zone[zone_human])
+                    .mapped("nbr_packages")
+                ]
+            )
+            picking.number_total = (
+                picking.number_of_drug
+                + picking.number_of_equipment
+                + picking.number_of_cold
+                + picking.number_of_food
+                + picking.number_of_human_drug
+            )
 
             item_number_of_drug = 0
             item_number_of_cold = 0
