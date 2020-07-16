@@ -98,7 +98,7 @@ msgstr ""
 "responsable"
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_itempick.py:311
+#: code:addons/specific_zetes/tools/domain_itempick.py:314
 #, python-format
 msgid "Cannot reload the picking %s"
 msgstr "Impossible de recharger le picking %s"
@@ -334,7 +334,7 @@ msgid "Location Checksum Right"
 msgstr "Checksum emplacement droite"
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_itempick.py:418
+#: code:addons/specific_zetes/tools/domain_itempick.py:421
 #, python-format
 msgid "Location not found for the product %s"
 msgstr "Localisation non trouvé pour le produit %s"
@@ -741,7 +741,7 @@ msgstr "Certaines valeurs obligatoires manquantes: {}"
 
 #. module: specific_zetes
 #: code:addons/specific_zetes/tools/domain_itemmove.py:194
-#: code:addons/specific_zetes/tools/domain_itempick.py:336
+#: code:addons/specific_zetes/tools/domain_itempick.py:339
 #, python-format
 msgid "There is no lines for the picking %s"
 msgstr "There is no lines for the picking %s"
