@@ -10,9 +10,7 @@ class ResPartnerCategory(models.Model):
     _inherit = "res.partner.category"
 
     def unlink(self):
-        bc2_category = self.env.ref(
-            "alc_b2c_connector.res_partner_category_b2c_customer"
-        )
+        bc2_category = self.env.ref("alc_b2c_partner.res_partner_category_b2c_customer")
         if bc2_category in self:
             raise UserError(_("B2C category can't be removed."))
         return super(ResPartnerCategory, self).unlink()

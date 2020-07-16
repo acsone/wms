@@ -86,6 +86,41 @@ class TestItempick(ZetesTest):
         # Round to the picking
         self.round.button_update()
 
+    def test_requ_itempick_price(self):
+        """
+        """
+
+        domain = Itempick(self._default_header(), mock.MagicMock(name="Savepoint()"))
+
+        # Set the flag is_price_on_labels
+        self.partner.write({"is_price_on_labels": True})
+        customer = self.partner.copy()
+        customer.is_b2c_customer = True
+        self.picking.customer_id = customer
+
+        request_params = Parameters(domain, action="requ")
+        request_params.update(
+            {"groupNum": self.picking.id, "Cri01": None, "Usf06": None}
+        )
+
+        # customer has flag is_b2c_customer
+        # -> the price must not be set
+        result_str = domain.requ(request_params)
+        result = self.format_result(result_str)
+        self.assertFalse(result.Usf07)
+        # unset flag is_b2c_customer on customer
+        # -> the price must be set
+        customer.is_b2c_customer = False
+        result_str = domain.requ(request_params)
+        result = self.format_result(result_str)
+        self.assertTrue(result.Usf07)
+        # unset flag is_price_on_labels on the partner
+        # -> the price must not be set
+        self.partner.is_price_on_labels = False
+        result_str = domain.requ(request_params)
+        result = self.format_result(result_str)
+        self.assertFalse(result.Usf07)
+
     def test_requ_itempick(self):
         """
         The method requ on catchweight is not used.

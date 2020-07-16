@@ -18,7 +18,7 @@ class ResPartner(models.Model):
     @api.depends("category_id")
     def _compute_is_b2c_customer(self):
         bc2_category = self.env.ref(
-            "alc_b2c_connector.res_partner_category_b2c_customer",
+            "alc_b2c_partner.res_partner_category_b2c_customer",
             raise_if_not_found=False,
         )
         if not bc2_category:
@@ -31,7 +31,7 @@ class ResPartner(models.Model):
 
     def _inverse_is_b2c_customer(self):
         bc2_category_id = self.env.ref(
-            "alc_b2c_connector.res_partner_category_b2c_customer"
+            "alc_b2c_partner.res_partner_category_b2c_customer"
         ).id
         to_unset = self.filtered(lambda n: not n.is_b2c_customer)
         to_unset.write({"category_id": [(3, bc2_category_id)]})
