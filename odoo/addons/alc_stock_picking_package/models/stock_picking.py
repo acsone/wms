@@ -11,7 +11,6 @@ class StockPicking(models.Model):
 
     stock_quant_package_ids = fields.One2many(
         comodel_name="stock.quant.package",
-        inverse_name="picking_id",
         string="Package ids",
         compute="_compute_stock_quant_package_ids",
     )
