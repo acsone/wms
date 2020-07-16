@@ -114,7 +114,9 @@ class StockPicking(models.Model):
     @api.multi
     def print_products_label(self, printer_id=False, quantity=1):
         self.ensure_one()
-        if self.partner_id and self.partner_id.no_labels_products:
+        if self.partner_id and (
+            self.partner_id.no_labels_products or self.customer_id.is_b2c_customer
+        ):
             return
 
         packs_to_print = self.pack_operation_ids.filtered(
