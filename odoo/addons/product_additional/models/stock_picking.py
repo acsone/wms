@@ -84,34 +84,52 @@ class StockPicking(models.Model):
             if not qty_available:
                 continue
             qty_add = min(qty_add, qty_available)
-            # Create move
-            picking = self.env["stock.picking"].browse(picking_id)
-            move_vals = {
-                "name": u"ADDITIONAL PRODUCT: %s (FROM %s)"
-                % (additional_product.display_name, product.display_name),
-                "sequence": 9999,
-                "product_id": additional_product.id,
-                "product_uom_qty": qty_add,
-                "product_uom": additional_product.uom_id.id,
-                "partner_id": picking.partner_id.id,
-                "location_id": picking.location_id.id,
-                "location_dest_id": picking.location_dest_id.id,
-                "picking_id": picking.id,
-                "picking_type_id": picking.picking_type_id.id,
-                "origin": picking.name,
-                "group_id": picking.group_id.id,
-                "is_additional_move": True,
-            }
-            move_add = self.env["stock.move"].create(move_vals)
-            _logger.debug(
-                "Created additional move %s (qty=%s) in the pickings %s",
-                move_add.id,
-                qty_add,
-                picking.id,
+
+            # Create moves into all the chained pickings of the main product
+            # The moves must be created into the reverse order of the chain to
+            # be able to link moves between us
+            chained_moves = []
+            picking = self.browse(picking_id)
+            main_move = picking.move_lines.filtered(
+                lambda a, product_id=product_id: a.product_id.id == product_id
             )
-            for packop in packops:
-                packop["additional_move_id"] = move_add.id
-            additional_moves |= move_add
+            while main_move:
+                chained_moves.append(main_move)
+                main_move = main_move.move_dest_id
+            move_dest_id = False
+            chained_moves.reverse()
+            for main_move in chained_moves:
+                target_picking = main_move.picking_id
+                move_vals = {
+                    "name": u"ADDITIONAL PRODUCT: %s (FROM %s)"
+                    % (additional_product.display_name, product.display_name),
+                    "sequence": 9999,
+                    "product_id": additional_product.id,
+                    "product_uom_qty": qty_add,
+                    "product_uom": additional_product.uom_id.id,
+                    "partner_id": target_picking.partner_id.id,
+                    "location_id": target_picking.location_id.id,
+                    "location_dest_id": target_picking.location_dest_id.id,
+                    "picking_id": target_picking.id,
+                    "picking_type_id": target_picking.picking_type_id.id,
+                    "origin": target_picking.name,
+                    "group_id": target_picking.group_id.id,
+                    "is_additional_move": True,
+                    "rule_id": main_move.rule_id.id,
+                    "propagate": main_move.propagate,
+                    "move_dest_id": move_dest_id,
+                }
+                move_add = self.env["stock.move"].create(move_vals)
+                move_dest_id = move_add.id
+                _logger.debug(
+                    "Created additional move %s (qty=%s) in the pickings %s",
+                    move_add.id,
+                    qty_add,
+                    target_picking.id,
+                )
+                for packop in packops:
+                    packop["additional_move_id"] = move_add.id
+                additional_moves |= move_add
 
         # Assign moves
         if additional_moves:
