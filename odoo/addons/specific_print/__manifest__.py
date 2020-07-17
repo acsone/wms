@@ -9,11 +9,12 @@
     "author": "BCIM",
     "maintainer": "Camptocamp",
     "depends": [
-        "stock",
+        "alc_b2c_partner",
         "base_report_to_printer",  # OCA/report-print-send.git
-        "stock_receive_lot",
         "specific_report",
         "specific_product",
+        "stock",
+        "stock_receive_lot",
     ],
     "data": [
         "views/stock_splitlot.xml",

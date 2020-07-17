@@ -127,6 +127,7 @@ class StockPicking(models.Model):
 
     @api.multi
     def put_in_pack(self):
+        result = False
         for pick in self:
             operations = [
                 x
