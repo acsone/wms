@@ -71,7 +71,7 @@ msgid "Created on"
 msgstr ""
 
 #. module: specific_print
-#: code:addons/specific_print/models/stock.py:149
+#: code:addons/specific_print/models/stock.py:151
 #: model:ir.model.fields,help:specific_print.field_res_partner_no_labels_products
 #: model:ir.model.fields,help:specific_print.field_res_users_no_labels_products
 #, python-format
@@ -174,7 +174,7 @@ msgstr ""
 
 #. module: specific_print
 #: code:addons/specific_print/models/stock.py:72
-#: code:addons/specific_print/models/stock.py:130
+#: code:addons/specific_print/models/stock.py:132
 #, python-format
 msgid "No destination partner defined"
 msgstr ""
