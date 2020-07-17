@@ -90,6 +90,7 @@
         "alc_product_uom_updatable",
         "alc_sale_invoicing_on_transfer",
         "alc_sale_invoicing_policy",
+        "alc_stock_picking_package",
         "camptocamp_tools",  # to remove
         "connector_esb",
         "csv_file_export",  # to remove
