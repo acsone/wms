@@ -15,6 +15,7 @@
         "stock_expired",
     ],
     "data": [
+        "views/res_partner.xml",
         "data/email_template.xml",
         "views/stock_picking.xml",
         "views/stock_move.xml",

@@ -92,6 +92,7 @@ class TestStockDeliveryNote(SavepointCase):
                 "zip": "5300",
                 "city": "ANDENNE",
                 "country_id": cls.env.ref("base.be").id,
+                "send_pdf_deliveryship": "true",
             }
         )
         cls.destination = cls.env.ref("stock.stock_location_customers")
