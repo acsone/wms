@@ -47,14 +47,14 @@ class TestUblOrderResponseImporter(AlcEdiConnectorCase):
         ]
         self.import_task_def.execute()
         queue_jobs = job_counter.search_created()
-        queue_jobs.sorted("id")
         self.assertEqual(len(queue_jobs), 2)
-        attachment = self._get_attachments(queue_jobs[0])
-        self.assertEqual(attachment.name, "PO1.xml")
-        self.assertEqual(base64.decodestring(attachment.datas), "content1")
-        attachment = self._get_attachments(queue_jobs[1])
-        self.assertEqual(attachment.name, "PO2.xml")
-        self.assertEqual(base64.decodestring(attachment.datas), "content2")
+        attachments = self._get_attachments(queue_jobs[0]) | self._get_attachments(
+            queue_jobs[1]
+        )
+        result = {}
+        for attachment in attachments:
+            result[attachment.name] = base64.decodestring(attachment.datas)
+        self.assertDictEqual({"PO1.xml": "content1", "PO2.xml": "content2"}, result)
 
     def test_03(self):
         """
