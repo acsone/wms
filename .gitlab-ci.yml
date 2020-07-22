@@ -29,7 +29,7 @@ before_script:
     }
     function build_and_push_image() {
         echo "Building OCI image ${IMAGE}..."
-        podman build --cgroup-manager=cgroupfs --pull-always -t ${IMAGE} --volume ${PWD}/release:/tmp/release .
+        podman build --pull-always -t ${IMAGE} --volume ${PWD}/release:/tmp/release .
         echo "Pushing image to GitLab Container Registry..."
         podman login ${CI_REGISTRY} -u ${CI_REGISTRY_USER} -p ${CI_REGISTRY_PASSWORD}
         podman push ${IMAGE}
