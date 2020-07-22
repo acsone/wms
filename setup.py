@@ -20,5 +20,7 @@ setup(
         "odoo-addons-enterprise",
         "odoo10-addon-slow-statement-logger",
         "xlrd",
+        "numpy",  # speedup pyshape
+        "odoo10-addon-logging-json",
     ],
 )
