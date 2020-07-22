@@ -96,11 +96,6 @@ msgid "Packing Operation"
 msgstr ""
 
 #. module: stock_lot_loss
-#: model:ir.ui.view,arch_db:stock_lot_loss.stock_picking_form_view
-msgid "Qty not found"
-msgstr ""
-
-#. module: stock_lot_loss
 #: model:stock.picking.type,name:stock_lot_loss.stock_picking_type_23
 msgid "Ruptures"
 msgstr ""
