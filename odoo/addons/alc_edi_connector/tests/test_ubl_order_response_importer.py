@@ -47,6 +47,7 @@ class TestUblOrderResponseImporter(AlcEdiConnectorCase):
         ]
         self.import_task_def.execute()
         queue_jobs = job_counter.search_created()
+        queue_jobs.sorted("id")
         self.assertEqual(len(queue_jobs), 2)
         attachment = self._get_attachments(queue_jobs[0])
         self.assertEqual(attachment.name, "PO1.xml")
