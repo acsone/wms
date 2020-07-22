@@ -3,7 +3,7 @@
 # Copyright 2018 Jacques-Etienne Baudoux (BCIM sprl) <je@bcim.be>
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl)
 
-from odoo import _, api, fields, models
+from odoo import SUPERUSER_ID, _, api, fields, models
 from odoo.exceptions import UserError
 
 
@@ -19,7 +19,10 @@ class StockPicking(models.Model):
     )
 
     def _compute_is_action_force_transfer_allowed(self):
-        has_group = self.user_has_groups("base.group_no_one")
+        has_group = (
+            self.user_has_groups("base.group_no_one")
+            or self.env.user.id == SUPERUSER_ID
+        )
         for rec in self:
             rec.is_action_force_transfer_allowed = has_group and (
                 rec.state in ("draft,partially_available,assigned")
@@ -87,7 +90,8 @@ class StockPicking(models.Model):
         to_backorder = self.filtered(lambda pick: pick._is_create_backorder_allowed())
         to_transfer = self - to_backorder
         to_backorder._create_backorder()
-        super(StockPicking, to_transfer).do_transfer()
+        if to_transfer:
+            super(StockPicking, to_transfer).do_transfer()
         return True
 
     @api.one

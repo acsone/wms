@@ -70,9 +70,34 @@ class TestPickingBackorder(SavepointCase):
                 "grn_id": cls.grn.id,
             }
         )
+        cls.picking_waiting_availability = cls.stock_picking_model.create(
+            {
+                "picking_type_id": cls.env.ref("stock.picking_type_out").id,
+                "location_id": cls.stock_location.id,
+                "location_dest_id": cls.output_location.id,
+                "partner_id": cls.partner.id,
+                "move_lines": [
+                    (
+                        0,
+                        0,
+                        {
+                            "name": "a move",
+                            "product_id": cls.product.id,
+                            "product_uom_qty": 10,
+                            "product_uom": cls.product.uom_id.id,
+                            "location_id": cls.stock_location.id,
+                            "location_dest_id": cls.output_location.id,
+                        },
+                    )
+                ],
+                "grn_id": cls.grn.id,
+            }
+        )
         # Transfer picking partially
         cls.picking.action_confirm()
         cls.picking.force_assign()
+        # Don't force assign to let the picking into waiting availability state
+        cls.picking_waiting_availability.action_confirm()
         pack_operation = cls.picking.pack_operation_product_ids
         pack_operation.write({"qty_done": 3})
 
@@ -359,3 +384,25 @@ class TestPickingBackorder(SavepointCase):
                     self.assertEqual(
                         backorder.state, "confirmed"  # always a backorder for Sales
                     )
+
+    def test_00(self):
+        """
+        Data:
+            A picking in Waiting availability state (confirmed)
+        Test case:
+            Validate the picking
+        Expected result:
+            A backorder must be created and the picking must be done
+        """
+        picking = self.picking_waiting_availability
+        self.assertEqual(picking.state, "confirmed")
+        backorder = self.stock_picking_model.search([("backorder_id", "=", picking.id)])
+        self.assertFalse(backorder)
+        picking.printed = True  # HACK TO GET THE STATE DONE.... TO BE REFACTORED
+        result = picking.do_new_transfer()
+
+        # Check that the transfer action return no wizard
+        self.assertEqual(result, {})
+        backorder = self.stock_picking_model.search([("backorder_id", "=", picking.id)])
+        self.assertTrue(backorder)
+        self.assertEqual(picking.state, "done")
