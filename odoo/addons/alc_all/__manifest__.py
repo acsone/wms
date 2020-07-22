@@ -75,7 +75,7 @@
         "geoengine_base_geolocalize",
         "base_geoengine",
         # specific
-        "alc_geo_delivery_rounds",
+        # "alc_geo_delivery_rounds",
         "account_move_productcateg",
         "account_payment_order_background",
         "account_tax_one_vat",
