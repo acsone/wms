@@ -217,7 +217,7 @@ msgid "Use partner option (Purchase backorder accepted)"
 msgstr ""
 
 #. module: stock_picking_backorder
-#: code:addons/stock_picking_backorder/models/stock_picking.py:44
+#: code:addons/stock_picking_backorder/models/stock_picking.py:47
 #, python-format
 msgid "You are not allowed to force the transfer"
 msgstr ""
