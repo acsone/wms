@@ -93,6 +93,7 @@ class StockPicking(models.Model):
             main_move = picking.move_lines.filtered(
                 lambda a, product_id=product_id: a.product_id.id == product_id
             )
+            main_move = main_move and main_move[0]
             while main_move:
                 chained_moves.append(main_move)
                 main_move = main_move.move_dest_id
