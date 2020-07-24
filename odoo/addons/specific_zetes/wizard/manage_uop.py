@@ -268,7 +268,9 @@ class ManageUOPLine(models.TransientModel):
         related="pack_op_id.product_id",
         readonly=True,
     )
-    pack_op_id = fields.Many2one("stock.pack.operation", "Line", required=True)
+    pack_op_id = fields.Many2one(
+        "stock.pack.operation", "Line", required=True, ondelete="cascade"
+    )
     lot_id = fields.Many2one("stock.production.lot", "Lot")
     qty = fields.Integer("Qty", required=True)
 
@@ -280,7 +282,7 @@ class ViewPickingLine(models.TransientModel):
         "manage.uop", string="Wizard", readonly=True, required=True
     )
     pack_op_id = fields.Many2one(
-        "stock.pack.operation", "Line", required=True, readonly=True
+        "stock.pack.operation", "Line", required=True, readonly=True, ondelete="cascade"
     )
     product_id = fields.Many2one(
         "product.product", "Product", related="pack_op_id.product_id", readonly=True
