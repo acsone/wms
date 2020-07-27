@@ -10,7 +10,7 @@ from odoo.exceptions import UserError
 class CancelRemainingWizard(models.TransientModel):
     _name = "cancel.remaining.wizard"
 
-    @api.multi
+    @api.model
     def cancel_remaining_qty(self):
         active_id = self._context.get("active_id")
 
