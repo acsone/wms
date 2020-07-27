@@ -25,17 +25,20 @@ class StockPicking(models.Model):
             return result
         for r in to_do:
             if r.picking_type_id == picking_type_out:
-                r._save_delivery_note()
-                r._send_delivery_note()
+                r._send_delivery_notes(
+                    r.customer_id.send_csv_deliveryship,
+                    r.customer_id.send_pdf_deliveryship,
+                )
         return result
 
     @api.multi
-    def _get_delivery_note_filename(self):
+    def _get_delivery_note_filename(self, extension):
         """Return the delivery note filename."""
         self.ensure_one()
         if not self.date_done:
             return
         sale_orders = self.move_lines.mapped("order_id")
+
         return (
             "_".join(
                 [
@@ -46,14 +49,14 @@ class StockPicking(models.Model):
                     "".join(self.date_done[-8:].split(":")),
                 ]
             )
-            + ".csv"
+            + extension
         )
 
     @api.multi
-    def _save_delivery_note(self):
+    def _generate_delivery_note_csv(self):
         """Save the delivery note in csv format in ir.attachment"""
         self.ensure_one()
-        filename = self._get_delivery_note_filename()
+        filename = self._get_delivery_note_filename(extension=".csv")
         if not filename:
             # Stock picking probably not done
             return
@@ -67,11 +70,11 @@ class StockPicking(models.Model):
                 ]
             )
         data = file_data.getvalue()
-        existing = self.env["ir.attachment"].search([("name", "=", filename)])
-        if len(existing):
-            existing[0].datas = data.encode("base_64")
+        csv_delivery_note = self.env["ir.attachment"].search([("name", "=", filename)])
+        if len(csv_delivery_note):
+            csv_delivery_note[0].datas = data.encode("base_64")
         else:
-            existing = self.env["ir.attachment"].create(
+            csv_delivery_note = self.env["ir.attachment"].create(
                 {
                     "type": "binary",
                     "res_model": "stock.picking",
@@ -82,6 +85,41 @@ class StockPicking(models.Model):
                     "datas": data.encode("base_64"),
                 }
             )
+
+        return csv_delivery_note
+
+    @api.multi
+    def _generate_delivery_note_pdf(self):
+        """Save the delivery note in pdf format in ir.attachment"""
+        self.ensure_one()
+        filename = self._get_delivery_note_filename(extension=".pdf")
+        if not filename:
+            # Stock picking probably not done
+            return
+
+        shippings = self.filtered(lambda p: p.picking_type_code == "outgoing")
+        shipping_done = shippings.filtered(lambda shipping: shipping.state == "done")
+        report = self.env["report"].get_pdf(
+            shipping_done.ids, "stock.report_deliveryslip"
+        )
+
+        pdf_delivery_note = self.env["ir.attachment"].search([("name", "=", filename)])
+        if len(pdf_delivery_note):
+            pdf_delivery_note[0].datas = report.encode("base_64")
+        else:
+            pdf_delivery_note = self.env["ir.attachment"].create(
+                {
+                    "type": "binary",
+                    "res_model": "stock.picking",
+                    "res_id": self.id,
+                    "name": filename,
+                    "datas_fname": filename,
+                    "mimetype": "text/pdf",
+                    "datas": report.encode("base_64"),
+                }
+            )
+
+        return pdf_delivery_note
 
     def _delivery_note_recipient_ids(self, values):
         # we could make this global for all emails by using
@@ -98,15 +136,22 @@ class StockPicking(models.Model):
         return list(partners_with_emails)
 
     @api.multi
-    def _send_delivery_note(self):
+    def _send_delivery_notes(self, send_csv, send_pdf):
         """Send the delivery note by email to the customer."""
         self.ensure_one()
+
+        attachements = []
+        if send_csv:
+            csv_note = self._generate_delivery_note_csv()
+            attachements.append(csv_note.id)
+
+        if send_pdf:
+            pdf_note = self._generate_delivery_note_pdf()
+            attachements.append(pdf_note.id)
+
         if config["test_enable"]:
             return
-        filename = self._get_delivery_note_filename()
-        existing = self.env["ir.attachment"].search([("name", "=", filename)])
-        if not len(existing):
-            return
+
         template = self.env.ref("stock_delivery_note.delivery_note_csv")
         values = template.generate_email(self.id)
         values.update(
@@ -119,7 +164,7 @@ class StockPicking(models.Model):
         )
         if "email_from" in values and not values.get("email_from"):
             values.pop("email_from")
-        values["attachment_ids"] = [(6, 0, existing[0].ids)]
+        values["attachment_ids"] = [(6, 0, attachements)]
         self.env["mail.mail"].create(values)
 
     @api.multi

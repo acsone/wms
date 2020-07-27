@@ -2,6 +2,7 @@
 # Copyright 2018 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
+import uuid
 from datetime import datetime
 
 from odoo.tests.common import SavepointCase
@@ -82,7 +83,7 @@ class TestStockDeliveryNote(SavepointCase):
         )
         inventory.action_done()
         # Create the customer
-        cls.partner = cls.env["res.partner"].create(
+        cls.partner_csv_only = cls.env["res.partner"].create(
             {
                 "title": cls.env.ref("base.res_partner_title_prof").id,
                 "name": "HOENS OLIVIER",
@@ -92,12 +93,33 @@ class TestStockDeliveryNote(SavepointCase):
                 "zip": "5300",
                 "city": "ANDENNE",
                 "country_id": cls.env.ref("base.be").id,
+                "send_pdf_deliveryship": False,
+                "send_csv_deliveryship": True,
             }
         )
-        cls.destination = cls.env.ref("stock.stock_location_customers")
-        cls.so = cls.env["sale.order"].create(
+        cls.partner_pdf_only = cls.partner_csv_only.copy(
+            {"send_pdf_deliveryship": True, "send_csv_deliveryship": False}
+        )
+
+        cls.partner_pdf_csv = cls.partner_pdf_only.copy(
+            {"send_pdf_deliveryship": True, "send_csv_deliveryship": True}
+        )
+        cls.so_csv, cls.picking_csv = cls._create_and_transfer_picking(
+            cls.partner_csv_only, "20170102"
+        )
+        cls.so_pdf, cls.picking_pdf = cls._create_and_transfer_picking(
+            cls.partner_pdf_only
+        )
+        cls.so_pdf_csv, cls.picking_pdf_csv = cls._create_and_transfer_picking(
+            cls.partner_pdf_csv
+        )
+
+    @classmethod
+    def _create_and_transfer_picking(cls, partner, lot_name=None):
+        lot_name = lot_name or str(uuid.uuid1())
+        so = cls.env["sale.order"].create(
             {
-                "partner_id": cls.partner.id,
+                "partner_id": partner.id,
                 "suite_name": "123454321",
                 "client_order_ref": "customer.ref.123",
                 "order_line": [
@@ -116,10 +138,10 @@ class TestStockDeliveryNote(SavepointCase):
                 ],
             }
         )
-        cls.so.action_confirm()
-        cls.picking = cls.so.picking_ids
-        cls.picking.action_assign()
-        pack_operation = cls.picking.pack_operation_product_ids
+        so.action_confirm()
+        picking = so.picking_ids
+        picking.action_assign()
+        pack_operation = picking.pack_operation_product_ids
         pack_operation.write(
             {
                 "pack_lot_ids": [
@@ -128,7 +150,7 @@ class TestStockDeliveryNote(SavepointCase):
                         0,
                         {
                             "life_date": "2017-01-31 10:00:00",
-                            "lot_name": "20170102",
+                            "lot_name": lot_name,
                             "qty": 10,
                         },
                     )
@@ -137,15 +159,12 @@ class TestStockDeliveryNote(SavepointCase):
             }
         )
 
-    def setUp(self):
-        super(TestStockDeliveryNote, self).setUp()
-        # do new transfer must be done in setUp as
-        # setUpClass doesn't set odoo.tools.config['test_enable']
-        self.picking.do_transfer()
+        picking.do_transfer()
         # This is a hack because the reserved_quant_id are not filled up
         # And they are needed by the get_lot in stock.move
-        for sm in self.picking.move_lines:
+        for sm in picking.move_lines:
             sm.linked_move_operation_ids[0].reserved_quant_id = sm.quant_ids[0]
+        return so, picking
 
     def test_delivery_note_filename(self):
         """Check the correct generation of the filename"""
@@ -154,29 +173,50 @@ class TestStockDeliveryNote(SavepointCase):
                 [
                     "NE",
                     "123456789",
-                    str(self.picking.id),
-                    "".join(self.picking.date_done[:10].split("-")),
-                    "".join(self.picking.date_done[-8:].split(":")),
+                    str(self.picking_csv.id),
+                    "".join(self.picking_csv.date_done[:10].split("-")),
+                    "".join(self.picking_csv.date_done[-8:].split(":")),
                 ]
             )
             + ".csv"
         )
-        filename = self.picking._get_delivery_note_filename()
+        filename = self.picking_csv._get_delivery_note_filename(".csv")
         self.assertEqual(filename, expected_filename)
 
-    def test_creation_note_on_validate_picking(self):
-        """Check that the csv document is in the store."""
+    def test_creation_note_on_validate_picking_csv(self):
+        """Check that the csv document is in the store for partner confiured
+        to recieve only csv."""
         attachments = self.env["ir.attachment"].search(
-            [("res_id", "=", self.picking.id)]
+            [("res_id", "=", self.picking_csv.id)]
         )
         self.assertEqual(len(attachments), 1)
+        self.assertTrue(attachments.datas_fname.endswith(".csv"))
+
+    def test_creation_note_on_validate_picking_pdf(self):
+        """Check that the pdf document is in the store for partner confiured
+        to recieve only pdf."""
+        attachments = self.env["ir.attachment"].search(
+            [("res_id", "=", self.picking_pdf.id)]
+        )
+        self.assertEqual(len(attachments), 1)
+        self.assertTrue(attachments.datas_fname.endswith(".pdf"))
+
+    def test_creation_note_on_validate_picking_pdf_csv(self):
+        """Check that the pdf and csv documents are in the store for partner
+        confiured to recieve csv and ofmrat."""
+        attachments = self.env["ir.attachment"].search(
+            [("res_id", "=", self.picking_pdf_csv.id)]
+        )
+        self.assertEqual(len(attachments), 2)
+        extensions = {a.datas_fname.split(".")[1] for a in attachments}
+        self.assertSetEqual({"csv", "pdf"}, extensions)
 
     def test_delivery_note_for_vet_with_depo(self):
         """Check the format of the csv with a vet customer."""
-        self.partner.vet_depot_number = "778899"
+        self.partner_csv_only.vet_depot_number = "778899"
         tax_amount = ",".join(str(self.tax.amount).split("."))
         expected = [
-            [self.picking.id, "tester@pytest.com", ""],
+            [self.picking_csv.id, "tester@pytest.com", ""],
             [
                 u"Prof. HOENS OLIVIER",
                 "Rue Polisart 2 A",
@@ -194,19 +234,23 @@ class TestStockDeliveryNote(SavepointCase):
                 "20170102",
                 "31-01-2017",
                 "/".join(
-                    [self.smallyear, self.partner.vet_depot_number, self.so.suite_name]
+                    [
+                        self.smallyear,
+                        self.partner_csv_only.vet_depot_number,
+                        self.so_csv.suite_name,
+                    ]
                 ),
                 "",
             ],
         ]
-        lines = self.picking._generate_delivery_note()
+        lines = self.picking_csv._generate_delivery_note()
         self.assertEqual(lines, expected)
 
     def test_delivery_note_line_for_other_customer(self):
         """Check the format of the csv document for a normal customer."""
         tax_amount = ",".join(str(self.tax.amount).split("."))
         expected = [
-            [self.picking.id, "tester@pytest.com", ""],
+            [self.picking_csv.id, "tester@pytest.com", ""],
             [
                 u"Prof. HOENS OLIVIER",
                 "Rue Polisart 2 A",
@@ -227,14 +271,14 @@ class TestStockDeliveryNote(SavepointCase):
                 "",
             ],
         ]
-        lines = self.picking._generate_delivery_note()
+        lines = self.picking_csv._generate_delivery_note()
         self.assertEqual(lines, expected)
 
     def test_delivery_note_line_without_vat_tax(self):
         """Check with no vat so vat amount is zero"""
         self.tax.tax_group_id = self.env.ref("account.tax_group_taxes").id
         expected = [
-            [self.picking.id, "tester@pytest.com", ""],
+            [self.picking_csv.id, "tester@pytest.com", ""],
             [
                 u"Prof. HOENS OLIVIER",
                 "Rue Polisart 2 A",
@@ -255,13 +299,13 @@ class TestStockDeliveryNote(SavepointCase):
                 "",
             ],
         ]
-        lines = self.picking._generate_delivery_note()
+        lines = self.picking_csv._generate_delivery_note()
         self.assertEqual(lines, expected)
 
     def test_each_line_finishes_with_separator(self):
         """"""
         attachments = self.env["ir.attachment"].search(
-            [("res_id", "=", self.picking.id)]
+            [("res_id", "=", self.picking_csv.id)]
         )
         content = attachments.index_content
         for line in content.splitlines():
