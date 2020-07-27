@@ -61,6 +61,23 @@ msgid "Order line"
 msgstr ""
 
 #. module: stock_delivery_note
+#: model:ir.model,name:stock_delivery_note.model_res_partner
+msgid "Partner"
+msgstr ""
+
+#. module: stock_delivery_note
+#: model:ir.model.fields,field_description:stock_delivery_note.field_res_partner_send_csv_deliveryship
+#: model:ir.model.fields,field_description:stock_delivery_note.field_res_users_send_csv_deliveryship
+msgid "Send the deliveryship in CSV format"
+msgstr ""
+
+#. module: stock_delivery_note
+#: model:ir.model.fields,field_description:stock_delivery_note.field_res_partner_send_pdf_deliveryship
+#: model:ir.model.fields,field_description:stock_delivery_note.field_res_users_send_pdf_deliveryship
+msgid "Send the deliveryship in PDF format"
+msgstr ""
+
+#. module: stock_delivery_note
 #: model:ir.model,name:stock_delivery_note.model_stock_move
 msgid "Stock Move"
 msgstr ""
