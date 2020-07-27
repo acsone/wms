@@ -55,3 +55,39 @@ class TestStockPicking(common.StockPickingTestCase):
         self.assertEqual(
             pick_addition_product_move.move_dest_id, ship_addition_product_move
         )
+
+    def test_00(self):
+        """
+        Test case:
+            Create and confirm a SO with product_additional
+            Confirm the picking (required to get the additional product into the picking)
+            Cancel the SO
+        Expected result:
+            SO and pickings must be canceled
+
+        """
+        sale = self._confirm_sale_order(product=self.main_product)
+        pick = sale.mapped("picking_ids").filtered(
+            lambda p: p.picking_type_subcode == "PICK"
+        )
+        # Add the move for the additional product into the picking...
+        pick.action_confirm()
+        pick.action_assign()
+        # Check that the additional product is taken into account after confirmation
+        self.assertEqual(len(pick.move_lines), 2)
+
+        # At this stage the sale order is confirmed
+        self.assertEqual(sale.state, "sale")
+
+        # cancel it
+        sale.action_cancel()
+
+        # everything must be canceled
+        self.assertEqual(sale.state, "cancel")
+        self.assertEqual(len(pick), 1)
+        self.assertEqual(pick.state, "cancel")
+        ship = sale.mapped("picking_ids").filtered(
+            lambda p: p.picking_type_code == "outgoing"
+        )
+        self.assertEqual(len(ship), 1)
+        self.assertEqual(ship.state, "cancel")
