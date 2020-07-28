@@ -19,40 +19,22 @@ class ProductTemplate(models.Model):
         string="Vendor",
         readonly=True,
         domain=[("supplier", "=", True)],
-        compute="_compute_supplier_id",
+        related="seller_ids.name",
         store=True,
+        index=True,
     )
     vendor_product_code = fields.Char(
-        "Vendor Product Code", readonly=True, compute="_compute_supplier_id", store=True
+        "Vendor Product Code",
+        readonly=True,
+        related="seller_ids.product_code",
+        store=True,
+        index=True,
     )
     state_id = fields.Many2one("product.state", string="State")
     nb_days_out_of_stock = fields.Integer(
         help="Number of days before running out of stock",
         compute="compute_date_out_of_stock",
     )
-
-    @api.depends("seller_ids")
-    def _compute_supplier_id(self):
-        """
-        Compute the supplier for each product.
-        Alcyon cannot have more than one supplier per product.
-        This field will be used by filters
-        :return:
-        """
-        for product in self:
-            sellers = product.seller_ids.mapped("name")
-            if len(sellers) == 1:
-                product.supplier_id = sellers.id
-            else:
-                product.supplier_id = None
-
-            product_codes = product.seller_ids.mapped("product_code")
-            # Remove null entries
-            product_codes = list(set(filter(None, product_codes)))
-            if len(product_codes) == 1:
-                product.vendor_product_code = product_codes[0]
-            else:
-                product.vendor_product_code = ""
 
     @api.onchange("length", "width", "depth")
     def onchange_size(self):
