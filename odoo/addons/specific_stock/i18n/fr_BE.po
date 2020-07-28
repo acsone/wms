@@ -755,6 +755,11 @@ msgid "Vendor"
 msgstr "Fournisseur"
 
 #. module: specific_stock
+#: model:ir.model.fields,help:specific_stock.field_stock_quant_supplier_id
+msgid "Vendor of this product"
+msgstr ""
+
+#. module: specific_stock
 #: model:ir.model.fields,field_description:specific_stock.field_stock_production_lot_voice_identifier
 msgid "Voice Identifier"
 msgstr "Identifiant Vocal"
