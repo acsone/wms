@@ -344,6 +344,33 @@ class ExportSaleOrderTestCase(SavepointCase):
             self.so1.order_line[0].write({"product_qty_canceled": 1})
             self.assertEqual(export_record.call_count, 1)
 
+    def test_mapper_when_qty_canceled(self):
+        """
+        Data:
+            A sale order with a line with qty 7 and no product in stock
+        Test case:
+            1. Confirm the SO
+            2. Cancel the line
+        Expected result:
+            1 Since no product in stock qty_backorder should be 7
+            2 Line is cancelled, no more backorder => qty backorder should be 0
+        """
+        self.so1.action_confirm()
+        self.so1.state = "sale"
+        # Clear the context from _sale_order_create left over from creation
+        self.so1.order_line[0].env.context = {}
+        order_line = self.so1.order_line[0]
+        with self.backend.work_on(self.model._name) as work:
+            mapper = work.component(usage="export.mapper")
+            values = mapper.map_record(self.so1).values()
+            self.assertEqual(values["lines"][0]["qty_backorder"], 7)
+            with mock.patch("odoo.addons.queue_job.models.base.DelayableRecordset"):
+                order_line.write(
+                    {"product_qty_canceled": order_line.product_qty_remains_to_deliver}
+                )
+            values = mapper.map_record(self.so1).values()
+            self.assertEqual(values["lines"][0]["qty_backorder"], 0)
+
     def test_bo_qty_changed(self):
         """Check sale order is sent when back order is modified.
         """

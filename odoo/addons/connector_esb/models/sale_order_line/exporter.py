@@ -52,7 +52,12 @@ class SaleOrderLineExportMapper(Component):
 
     @mapping
     def compute_qty_backorder(self, record):
-        if record.qty_delivered == 0 or record.product_qty_canceled != 0:
+        """
+        As long as no quantity has been delivered, the BO quantity is the
+        quantity unavailable at the time of the order minus the canceled
+        quantity. Otherwise it is the quantity remaining to be delivered.
+        """
+        if record.qty_delivered == 0 and record.product_qty_canceled == 0:
             return {"qty_backorder": record.product_qty_unavailable}
         else:
             return {"qty_backorder": record.product_qty_remains_to_deliver}
