@@ -8,5 +8,8 @@
 odoo10-addon-purchase-order-approved @ git+https://github.com/acsone/purchase-workflow.git@10.0-purchase_order_approved_by_supplier-lmi#subdirectory=setup/purchase_order_approved
 
 # oca/server-tools
-git+https://github.com/acsone/server-tools@10.0-backport-slow_statement_logger-lmi#egg=odoo10_addon_slow_statement_logger&subdirectory=setup/slow_statement_logger
+odoo10-addon-slow-statement-logger @ git+https://github.com/acsone/server-tools@10.0-backport-slow_statement_logger-lmi#egg=odoo10_addon_slow_statement_logger&subdirectory=setup/slow_statement_logger
+
+# oca/report-csv
+odoo10-addon-report-csv @ git+https://github.com/acsone/reporting-engine@10.0-backport-report_csv-lmi#egg=odoo10-addon-report-csv&subdirectory=setup/report_csv
 

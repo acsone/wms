@@ -17,3 +17,6 @@ class AlcChronovetPaymentGlobalization(models.TransientModel):
     payment_mode_id = fields.Many2one(
         default=lambda a: a.env.ref("alc_chronovet.account_payment_mode_chronovet").id
     )
+
+    def _after_globalization(self, account_move):
+        pass
