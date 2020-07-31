@@ -9,8 +9,8 @@
         <field name="inherit_id" ref="delivery_rounds.view_partner_form"/>
         <field name="arch" type="xml">
             <xpath expr="//group[@name='delivery']" position="inside">
-                <field name="send_csv_deliveryship" attrs="{'invisible': [('customer', '=', False)]}"/>
-                <field name="send_pdf_deliveryship" attrs="{'invisible': [('customer', '=', False)]}"/>
+                <field name="send_csv_deliveryship" />
+                <field name="send_pdf_deliveryship" />
           </xpath>
         </field>
     </record>
