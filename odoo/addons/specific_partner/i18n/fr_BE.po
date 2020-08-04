@@ -188,13 +188,6 @@ msgid "Suite Name"
 msgstr "Nom de suite"
 
 #. module: specific_partner
-#: code:addons/specific_partner/models/res_partner.py:328
-#: sql_constraint:res.partner:0
-#, python-format
-msgid "The reference must be numeric or empty"
-msgstr "La référence doit être unique ou vide"
-
-#. module: specific_partner
 #: code:addons/specific_partner/models/partner_alcyon_category.py:14
 #: sql_constraint:partner.alcyon_category:0
 #, python-format
@@ -229,3 +222,6 @@ msgstr "legal.entity"
 #: model:ir.model,name:specific_partner.model_partner_alcyon_category
 msgid "partner.alcyon_category"
 msgstr "partner.alcyon_category"
+
+#~ msgid "The reference must be numeric or empty"
+#~ msgstr "La référence doit être unique ou vide"

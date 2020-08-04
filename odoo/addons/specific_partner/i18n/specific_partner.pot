@@ -180,13 +180,6 @@ msgid "Suite Name"
 msgstr ""
 
 #. module: specific_partner
-#: code:addons/specific_partner/models/res_partner.py:328
-#: sql_constraint:res.partner:0
-#, python-format
-msgid "The reference must be numeric or empty"
-msgstr ""
-
-#. module: specific_partner
 #: code:addons/specific_partner/models/partner_alcyon_category.py:14
 #: sql_constraint:partner.alcyon_category:0
 #, python-format
