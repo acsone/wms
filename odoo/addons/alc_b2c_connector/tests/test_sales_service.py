@@ -25,7 +25,7 @@ class TestSalesService(CommonCase):
                 "alcyon_category_id": cls.env.ref(
                     "specific_partner.partner_category_student"
                 ).id,
-                "ref": "CHRONOVET_ABC",
+                "ref": "%s_ABC" % cls.b2c_backend.sale_channel,
                 "email": "b2c@b2c.be",
             }
         )
@@ -187,7 +187,10 @@ class TestSalesService(CommonCase):
         self.assertTrue(res)
         new_so = self._get_so_from_name(res["ref"])
         self.assertTrue(new_so)
-        self.assertEqual(new_so.partner_id.ref, "CHRONOVET_%s" % recipient_info["id"])
+        self.assertEqual(
+            new_so.partner_id.ref,
+            "%s_%s" % (self.b2c_backend.sale_channel, recipient_info["id"]),
+        )
         self.assertEqual(new_so.partner_invoice_id, self.vt_partner)
         self.assertEqual(new_so.partner_shipping_id, self.vt_partner)
         self.assertFalse(new_so.partner_id.is_sale_back_order_accepted)

@@ -9,7 +9,7 @@ from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 from odoo.osv.expression import AND
 
-TITLE_XML_ID_BY_CHRONOVET_KEY = {
+TITLE_XML_ID_BY_B2C_KEY = {
     "mr": "base.res_partner_title_mister",
     "ms": "base.res_partner_title_madam",
 }
@@ -60,7 +60,7 @@ class SaleOrder(models.Model):
         order_data.update(updated_data)
 
         # replace partner by the final customer
-        order_data["partner_id"] = self._get_final_chonovet_recipient(data).id
+        order_data["partner_id"] = self._get_final_b2c_recipient(data, b2c_backend).id
         # ensure specific values from the backend are preserved
         order_data["pricelist_id"] = b2c_backend.pricelist_id.id
         order_data["payment_term_id"] = b2c_backend.payment_term_id.id
@@ -95,9 +95,9 @@ class SaleOrder(models.Model):
         return result
 
     @api.model
-    def _get_final_chonovet_recipient(self, data):
+    def _get_final_b2c_recipient(self, data, b2c_backend):
         customer_info = data["recipient"]
-        b2c_ref = "CHRONOVET_%s" % customer_info["id"]
+        b2c_ref = "%s_%s" % (b2c_backend.sale_channel, customer_info["id"])
         partner = self._get_partner_by_ref(b2c_ref, raise_if_notfound=False)
         if partner:
             # DO WE HAVE TO UPDATE ADDRESS INFO?
@@ -108,7 +108,7 @@ class SaleOrder(models.Model):
             name = "%s %s" % (name, last_name)
         title = customer_info.get("title")
         if title:
-            title = self.env.ref(TITLE_XML_ID_BY_CHRONOVET_KEY[title]).id
+            title = self.env.ref(TITLE_XML_ID_BY_B2C_KEY[title]).id
         return self.env["res.partner"].create(
             {
                 "name": name,
