@@ -320,11 +320,3 @@ class ResPartner(models.Model):
                 "must have a reference ESB."
             )
         )
-
-    _sql_constraints = [
-        (
-            "ref_digit_only",
-            "CHECK (ref SIMILAR TO '[[:digit:]]*')",
-            _("The reference must be numeric or empty"),
-        )
-    ]
