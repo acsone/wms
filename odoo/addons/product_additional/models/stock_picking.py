@@ -129,9 +129,14 @@ class StockPicking(models.Model):
                     qty_add,
                     target_picking.id,
                 )
+                additional_moves |= move_add
+
+            current_pick_move = additional_moves.filtered(
+                lambda m, p=picking, a=additional_product: m.picking_id == p
+                and m.product_id == a
+            )
             for packop in packops:
-                packop["additional_move_id"] = move_add.id
-            additional_moves |= move_add
+                packop["additional_move_id"] = current_pick_move.id
 
         # Assign moves
         if additional_moves:
