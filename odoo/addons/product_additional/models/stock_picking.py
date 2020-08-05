@@ -20,7 +20,7 @@ class StockPicking(models.Model):
         moves_to_uncancel.write({"state": "confirmed"})
         moves_to_uncancel.action_assign()
 
-    @api.multi
+    @api.multi  # noqa: C901
     def _prepare_pack_ops(self, quants, forced_qties):
         """
         This method will add additional products on stock
@@ -93,14 +93,14 @@ class StockPicking(models.Model):
             main_move = picking.move_lines.filtered(
                 lambda a, product_id=product_id: a.product_id.id == product_id
             )
-            main_move = main_move and main_move[0]
-            while main_move:
-                chained_moves.append(main_move)
-                main_move = main_move.move_dest_id
+            move_dest = main_move and main_move[0]
+            while move_dest:
+                chained_moves.append(move_dest)
+                move_dest = move_dest.move_dest_id
             move_dest_id = False
             chained_moves.reverse()
-            for main_move in chained_moves:
-                target_picking = main_move.picking_id
+            for move_dest in chained_moves:
+                target_picking = move_dest.picking_id
                 move_vals = {
                     "name": u"ADDITIONAL PRODUCT: %s (FROM %s)"
                     % (additional_product.display_name, product.display_name),
@@ -116,10 +116,10 @@ class StockPicking(models.Model):
                     "origin": target_picking.name,
                     "group_id": target_picking.group_id.id,
                     "is_additional_move": True,
-                    "rule_id": main_move.rule_id.id,
-                    "propagate": main_move.propagate,
+                    "rule_id": move_dest.rule_id.id,
+                    "propagate": move_dest.propagate,
                     "move_dest_id": move_dest_id,
-                    "procurement_id": main_move.procurement_id.id,
+                    "procurement_id": move_dest.procurement_id.id,
                 }
                 move_add = self.env["stock.move"].create(move_vals)
                 move_dest_id = move_add.id
@@ -129,14 +129,11 @@ class StockPicking(models.Model):
                     qty_add,
                     target_picking.id,
                 )
-                additional_moves |= move_add
+                if move_dest == main_move:
+                    for packop in packops:
+                        packop["additional_move_id"] = move_add.id
 
-            current_pick_move = additional_moves.filtered(
-                lambda m, p=picking, a=additional_product: m.picking_id == p
-                and m.product_id == a
-            )
-            for packop in packops:
-                packop["additional_move_id"] = current_pick_move.id
+                additional_moves |= move_add
 
         # Assign moves
         if additional_moves:
