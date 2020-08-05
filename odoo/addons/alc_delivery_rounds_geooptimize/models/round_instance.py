@@ -476,7 +476,7 @@ class RoundInstance(models.Model):
             partner_id = round_instance_customer.partner_id.id
             rank = -1
             if partner_id in expected_partner_order:
-                rank = expected_partner_order.index(partner_id)
+                rank = expected_partner_order.index(partner_id) + 1
             round_instance_customer.write({"rank": rank, "is_rank_computed": True})
 
     def _notify_optimization_error(self, message):

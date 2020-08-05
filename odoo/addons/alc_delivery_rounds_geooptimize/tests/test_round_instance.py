@@ -416,11 +416,36 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
         self.assertEqual(shippings[0].partner_id, self.partner3)
         self.assertEqual(shippings[1].partner_id, self.partner1)
         self.assertEqual(shippings[2].partner_id, self.partner2)
+        self.assertEqual(
+            self.delivery_round_1.instance_customer_ids[0].partner_id, self.partner3
+        )
+        self.assertEqual(self.delivery_round_1.instance_customer_ids[0].rank, 1)
+        self.assertEqual(
+            self.delivery_round_1.instance_customer_ids[1].partner_id, self.partner1
+        )
+        self.assertEqual(self.delivery_round_1.instance_customer_ids[1].rank, 2)
+        self.assertEqual(
+            self.delivery_round_1.instance_customer_ids[2].partner_id, self.partner2
+        )
+        self.assertEqual(self.delivery_round_1.instance_customer_ids[2].rank, 3)
         self._simulate_optimize(self.partner2, self.partner1, self.partner3)
         shippings = self.delivery_round_1._get_sorted_shipping_ids()
         self.assertEqual(shippings[0].partner_id, self.partner2)
         self.assertEqual(shippings[1].partner_id, self.partner1)
         self.assertEqual(shippings[2].partner_id, self.partner3)
+        self.delivery_round_1.instance_customer_ids.refresh()  # refresh to apply order
+        self.assertEqual(
+            self.delivery_round_1.instance_customer_ids[0].partner_id, self.partner2
+        )
+        self.assertEqual(self.delivery_round_1.instance_customer_ids[0].rank, 1)
+        self.assertEqual(
+            self.delivery_round_1.instance_customer_ids[1].partner_id, self.partner1
+        )
+        self.assertEqual(self.delivery_round_1.instance_customer_ids[1].rank, 2)
+        self.assertEqual(
+            self.delivery_round_1.instance_customer_ids[2].partner_id, self.partner3
+        )
+        self.assertEqual(self.delivery_round_1.instance_customer_ids[2].rank, 3)
 
     def test_10(self):
         """
