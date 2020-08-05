@@ -6,7 +6,7 @@
 
 {
     "name": "Product additional for Alcyon",
-    "version": "10.0.1.0.0",
+    "version": "10.0.1.0.1",
     "author": "Camptocamp",
     "license": "AGPL-3",
     "category": "Product",
@@ -15,6 +15,7 @@
         "product",
         "purchase",
         "sale",
+        "sale_stock",
         "stock",
         "stock_available",
         "stock_constraint",

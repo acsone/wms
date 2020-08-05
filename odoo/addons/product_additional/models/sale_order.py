@@ -90,3 +90,27 @@ class SaleOrderLine(models.Model):
         self.ensure_one()
         values = self._prepare_promotional_line(qty)
         self.copy(default=values)
+
+    @api.multi
+    def _get_delivered_qty(self):
+        """Computes the delivered quantity on sale order lines, based on done
+        stock moves related to its procurements but excluding moves related
+        to an other product (additional products...)
+        """
+        self.ensure_one()
+        qty = super(SaleOrderLine, self)._get_delivered_qty()
+        for move in self.procurement_ids.mapped("move_ids").filtered(
+            lambda r: r.state == "done" and r.is_additional_move
+        ):
+            if move.location_dest_id.usage == "customer":
+                if not move.origin_returned_move_id or (
+                    move.origin_returned_move_id and move.to_refund_so
+                ):
+                    qty -= move.product_uom._compute_quantity(
+                        move.product_uom_qty, self.product_uom
+                    )
+            elif move.location_dest_id.usage != "customer" and move.to_refund_so:
+                qty += move.product_uom._compute_quantity(
+                    move.product_uom_qty, self.product_uom
+                )
+        return qty
