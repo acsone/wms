@@ -1,8 +1,9 @@
 .stock_location_barcode_8x2 {
     .barcode_label {
+        box-sizing: border-box;
+        width: 47%;
+        height: 12.5%;
         display: inline-block;
-        width: 448px;
-        height: 230px; // 8
         overflow: hidden;
         padding: 0 0;
     }
@@ -26,6 +27,7 @@
     }
 
     .barcode_name {
+        margin-top: 22px;
         font-size: 60px;
         font-weight: bold;
         display: block;
@@ -39,6 +41,8 @@
 
     img.barcode {
         float: right;
+        margin-top: 35px;
+        margin-left: -40px;
     }
     .barcode_label_A img.barcode {
         float: left !important;
