@@ -33,7 +33,7 @@ class SalesService(Component):
             ._create_from_chonovet(params, self.b2c_backend)
         )
         return {
-            "id": so.b2c_ref,
+            "id": int(so.b2c_ref),
             "ref": so.name,
             "state": so.state,
             "confirmation_date": self._to_dt_utc_with_tz(so.confirmation_date),
@@ -73,7 +73,7 @@ class SalesService(Component):
 
     def _validator_create(self):
         return {
-            "id": {"type": "string", "nullable": False, "required": True},
+            "id": {"type": "integer", "nullable": False, "required": True},
             "customer_ref": {"type": "string", "nullable": False, "required": True},
             "date": {"type": "string", "nullable": False, "required": True},
             "recipient": {
@@ -113,7 +113,7 @@ class SalesService(Component):
                     "type": "dict",
                     "schema": {
                         "line_id": {
-                            "type": "string",
+                            "type": "integer",
                             "nullable": False,
                             "required": False,
                         },
@@ -141,7 +141,7 @@ class SalesService(Component):
                 "type": "list",
                 "nullable": True,
                 "required": False,
-                "schema": {"type": "string"},
+                "schema": {"type": "integer"},
             },
             "limit": {"coerce": to_int, "nullable": True, "type": "integer"},
             "offset": {"coerce": to_int, "nullable": True, "type": "integer"},
@@ -165,7 +165,7 @@ class SalesService(Component):
     @property
     def _sale_info_schema(self):
         return {
-            "id": {"type": "string", "required": True, "nullable": False},
+            "id": {"type": "integer", "required": True, "nullable": False},
             "ref": {"type": "string", "required": True, "nullable": False},
             "state": {"type": "string", "required": True, "nullable": False},
             "confirmation_date": {"type": "string", "required": True, "nullable": True},
@@ -180,7 +180,7 @@ class SalesService(Component):
 
     def _item_read_to_search_result(self, read_item):
         return {
-            "id": read_item["b2c_ref"],
+            "id": int(read_item["b2c_ref"]),
             "ref": read_item["name"],
             "state": read_item["state"],
             "confirmation_date": self._to_dt_utc_with_tz(

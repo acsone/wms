@@ -45,7 +45,7 @@ class TestSalesService(CommonCase):
         # create a b2c sale_order
         cls.b2c_order = cls.env["sale.order"].create(
             {
-                "b2c_ref": "SO1",
+                "b2c_ref": 10,
                 "partner_id": cls.b2c_partner.id,
                 "partner_invoice_id": cls.vt_partner.id,
                 "partner_shipping_id": cls.vt_partner.id,
@@ -108,11 +108,11 @@ class TestSalesService(CommonCase):
         Expected result:
             The so info
         """
-        res = self.sales_service.dispatch("get", _id="SO1")
+        res = self.sales_service.dispatch("get", _id=10)
         self.assertTrue(res)
         self.assertEqual(res["state"], self.b2c_order.state)
         self.assertEqual(res["ref"], self.b2c_order.name)
-        self.assertEqual(res["id"], "SO1")
+        self.assertEqual(res["id"], 10)
         self.assertFalse(res["confirmation_date"])
 
     def test_01(self):
@@ -123,7 +123,7 @@ class TestSalesService(CommonCase):
             Missing error is raised
         """
         with self.assertRaises(MissingError):
-            self.sales_service.dispatch("get", _id="UNKNOWN")
+            self.sales_service.dispatch("get", _id=9999)
 
     def test_02(self):
         """
@@ -134,12 +134,12 @@ class TestSalesService(CommonCase):
         Expected result:
             The so info
         """
-        res = self.sales_service.dispatch("search", params={"ids": ["SO1"]})
+        res = self.sales_service.dispatch("search", params={"ids": [10]})
         self.assertEqual(res["size"], 1)
         result = res["data"][0]
         self.assertEqual(result["state"], self.b2c_order.state)
         self.assertEqual(result["ref"], self.b2c_order.name)
-        self.assertEqual(result["id"], "SO1")
+        self.assertEqual(result["id"], 10)
         self.assertFalse(result["confirmation_date"])
 
     def test_03(self):
@@ -149,7 +149,7 @@ class TestSalesService(CommonCase):
         Expected result:
             Empty result
         """
-        res = self.sales_service.dispatch("search", params={"ids": ["UNKNOWN"]})
+        res = self.sales_service.dispatch("search", params={"ids": [9999]})
         self.assertEqual(res["size"], 0)
         self.assertFalse(res["data"])
 
@@ -171,13 +171,13 @@ class TestSalesService(CommonCase):
         """
         recipient_info = self._gen_recipent()
         params = {
-            "id": "SO2",
+            "id": 2,
             "customer_ref": self.vt_partner.ref,
             "date": ISO_DT_WITH_TZ,
             "recipient": recipient_info,
             "lines": [
                 {
-                    "line_id": "SOL2",
+                    "line_id": 2,
                     "sku": self.saleable_product.default_code,
                     "quantity": 10,
                 }
@@ -218,13 +218,13 @@ class TestSalesService(CommonCase):
         """
         recipient_info = self._gen_recipent()
         params = {
-            "id": "SO2",
+            "id": 2,
             "customer_ref": "unknow",
             "date": ISO_DT_WITH_TZ,
             "recipient": recipient_info,
             "lines": [
                 {
-                    "line_id": "SOL2",
+                    "line_id": 2,
                     "sku": self.saleable_product.default_code,
                     "quantity": 10,
                 }
@@ -249,13 +249,13 @@ class TestSalesService(CommonCase):
         recipient_info = self._gen_recipent()
         recipient_info["id"] = "ABC"
         params = {
-            "id": "SO2",
+            "id": 2,
             "customer_ref": self.vt_partner.ref,
             "date": ISO_DT_WITH_TZ,
             "recipient": recipient_info,
             "lines": [
                 {
-                    "line_id": "SOL2",
+                    "line_id": 2,
                     "sku": self.saleable_product.default_code,
                     "quantity": 10,
                 }
@@ -278,11 +278,11 @@ class TestSalesService(CommonCase):
         """
         recipient_info = self._gen_recipent()
         params = {
-            "id": "SO2",
+            "id": 2,
             "customer_ref": self.vt_partner.ref,
             "date": ISO_DT_WITH_TZ,
             "recipient": recipient_info,
-            "lines": [{"line_id": "SOL2", "sku": "????", "quantity": 10}],
+            "lines": [{"line_id": 2, "sku": "????", "quantity": 10}],
         }
         with self.assertRaises(ValidationError):
             self.sales_service.dispatch("create", params=params)
@@ -296,13 +296,13 @@ class TestSalesService(CommonCase):
         """
         recipient_info = self._gen_recipent()
         params = {
-            "id": "SO2",
+            "id": 2,
             "customer_ref": self.vt_partner.ref,
             "date": ISO_DT_WITH_TZ,
             "recipient": recipient_info,
             "lines": [
                 {
-                    "line_id": "SOL2",
+                    "line_id": 2,
                     "sku": self.not_saleable_product.default_code,
                     "quantity": 10,
                 }
