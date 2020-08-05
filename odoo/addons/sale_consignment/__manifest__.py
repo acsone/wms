@@ -9,7 +9,7 @@
     "maintainer": "Camptocamp",
     "license": "AGPL-3",
     "category": "Stock Management",
-    "depends": ["sale_stock", "sale_cancel_remaining"],
+    "depends": ["sale_stock", "sale_cancel_remaining", "product_additional"],
     "data": ["views/res_partner.xml", "views/sale.xml", "data/data.xml"],
     "installable": True,
 }
