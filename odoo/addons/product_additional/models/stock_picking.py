@@ -129,9 +129,9 @@ class StockPicking(models.Model):
                     qty_add,
                     target_picking.id,
                 )
-                for packop in packops:
-                    packop["additional_move_id"] = move_add.id
-                additional_moves |= move_add
+            for packop in packops:
+                packop["additional_move_id"] = move_add.id
+            additional_moves |= move_add
 
         # Assign moves
         if additional_moves:

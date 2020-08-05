@@ -15,6 +15,7 @@
         "product",
         "purchase",
         "sale",
+        "sale_stock",
         "stock",
         "stock_available",
         "stock_constraint",
