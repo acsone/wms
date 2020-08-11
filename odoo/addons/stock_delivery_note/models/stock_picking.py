@@ -152,6 +152,17 @@ class StockPicking(models.Model):
         if config["test_enable"]:
             return
 
+        # If no CSV or PDF is generate, no email should be sent -- case for human_drug products
+        csv_filename = self._get_delivery_note_filename(extension=".csv")
+        pdf_filename = self._get_delivery_note_filename(extension=".pdf")
+        note_does_not_exist = not (
+            self.env["ir.attachment"].search([("name", "=", csv_filename)])
+            or self.env["ir.attachment"].search([("name", "=", pdf_filename)])
+        )
+
+        if note_does_not_exist:
+            return
+
         template = self.env.ref("stock_delivery_note.delivery_note_csv")
         values = template.generate_email(self.id)
         values.update(
