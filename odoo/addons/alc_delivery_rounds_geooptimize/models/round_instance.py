@@ -338,7 +338,7 @@ class RoundInstance(models.Model):
         for partner in partners:
             phones = filter(None, (partner.mobile or None, partner.phone or None))
             order = {
-                "customerId": partner.id,
+                "customerId": partner.ref,
                 "fixedVisitDuration": seconds_to_duration(cfg.delivery_duration),
                 "id": partner.id,
                 "label": partner.display_name,

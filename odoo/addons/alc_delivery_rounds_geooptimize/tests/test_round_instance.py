@@ -468,7 +468,7 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
             },
             "orders": [
                 {
-                    "customerId": shippings[0].partner_id.id,
+                    "customerId": shippings[0].partner_id.ref,
                     "fixedVisitDuration": "00:00:10",
                     "id": shippings[0].partner_id.id,
                     "label": shippings[0].partner_id.name,
@@ -478,7 +478,7 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
                     "y": shippings[0].partner_id.partner_latitude,
                 },
                 {
-                    "customerId": shippings[1].partner_id.id,
+                    "customerId": shippings[1].partner_id.ref,
                     "fixedVisitDuration": "00:00:10",
                     "id": shippings[1].partner_id.id,
                     "label": shippings[1].partner_id.name,
@@ -488,7 +488,7 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
                     "y": shippings[1].partner_id.partner_latitude,
                 },
                 {
-                    "customerId": shippings[2].partner_id.id,
+                    "customerId": shippings[2].partner_id.ref,
                     "fixedVisitDuration": "00:00:10",
                     "id": shippings[2].partner_id.id,
                     "label": shippings[2].partner_id.name,
@@ -569,13 +569,12 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
         )
         cfg = self.delivery_round_1.get_optimization_config()
         res = {
-            c["customerId"]: c
-            for c in self.delivery_round_1._generate_optimization_orders(cfg)
+            c["id"]: c for c in self.delivery_round_1._generate_optimization_orders(cfg)
         }
         for partner_id, result in res.items():
             partner = self.env["res.partner"].browse(partner_id)
             expected = {
-                "customerId": partner.id,
+                "customerId": partner.ref,
                 "fixedVisitDuration": "00:00:10",
                 "id": partner.id,
                 "label": partner.name,
@@ -717,8 +716,7 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
         self.pick1.move_lines.write({"state": "assigned"})
         cfg = self.delivery_round_1.get_optimization_config()
         res = {
-            c["customerId"]
-            for c in self.delivery_round_1._generate_optimization_orders(cfg)
+            c["id"] for c in self.delivery_round_1._generate_optimization_orders(cfg)
         }
         expected = {self.partner2.id, self.partner3.id}
         self.assertEqual(res, expected)
