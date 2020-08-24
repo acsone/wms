@@ -10,3 +10,6 @@ odoo10-addon-purchase-order-approved @ git+https://github.com/acsone/purchase-wo
 # oca/server-tools
 git+https://github.com/acsone/server-tools@10.0-backport-slow_statement_logger-lmi#egg=odoo10_addon_slow_statement_logger&subdirectory=setup/slow_statement_logger
 
+# oca/bank-payment
+
+odoo10-addon-account-banking-mandate @ git+https://github.com/oca/bank-payment.git@refs/pull/727/head#subdirectory=setup/account_banking_mandate
