@@ -104,9 +104,25 @@ class TestStockDeliveryNote(SavepointCase):
         cls.partner_pdf_csv = cls.partner_pdf_only.copy(
             {"send_pdf_deliveryship": True, "send_csv_deliveryship": True}
         )
-        cls.so_csv, cls.picking_csv = cls._create_and_transfer_picking(
-            cls.partner_csv_only, "20170102"
+
+        # Create b2c customer to test that the associate veterinary will not receive the csv/pdf
+        # for the b2c customer purchase
+        cls.b2c_customer = cls.partner_csv_only.copy(
+            {
+                "is_b2c_customer": True,
+                "name": "B2C Customer",
+                "email": "new_customer@pytest.com",
+            }
         )
+
+        cls.so_csv, cls.picking_csv = cls._create_and_transfer_picking(
+            cls.partner_csv_only, lot_name="20170102"
+        )
+
+        cls.b2c_so_csv, cls.b2c_picking_csv = cls._create_and_transfer_picking(
+            partner=cls.partner_csv_only, customer=cls.b2c_customer, lot_name="20200102"
+        )
+
         cls.so_pdf, cls.picking_pdf = cls._create_and_transfer_picking(
             cls.partner_pdf_only
         )
@@ -115,7 +131,7 @@ class TestStockDeliveryNote(SavepointCase):
         )
 
     @classmethod
-    def _create_and_transfer_picking(cls, partner, lot_name=None):
+    def _create_and_transfer_picking(cls, partner, customer=None, lot_name=None):
         lot_name = lot_name or str(uuid.uuid1())
         so = cls.env["sale.order"].create(
             {
@@ -140,6 +156,8 @@ class TestStockDeliveryNote(SavepointCase):
         )
         so.action_confirm()
         picking = so.picking_ids
+        if customer:
+            picking.customer_id = customer.id
         picking.action_assign()
         pack_operation = picking.pack_operation_product_ids
         pack_operation.write(
@@ -182,6 +200,14 @@ class TestStockDeliveryNote(SavepointCase):
         )
         filename = self.picking_csv._get_delivery_note_filename(".csv")
         self.assertEqual(filename, expected_filename)
+
+    def test_email_not_sent_to_partner(self):
+        """Use partner mail if recipient customer has an email."""
+        values = {"partner_ids": [self.b2c_customer.id]}
+        self.assertEqual(
+            self.env["stock.picking"]._delivery_note_recipient_ids(values),
+            [self.b2c_customer.id],
+        )
 
     def test_creation_note_on_validate_picking_csv(self):
         """Check that the csv document is in the store for partner confiured
