@@ -337,6 +337,7 @@ class RoundInstance(models.Model):
         )
         for partner in partners:
             phones = filter(None, (partner.mobile or None, partner.phone or None))
+
             order = {
                 "customerId": partner.id,
                 "fixedVisitDuration": seconds_to_duration(cfg.delivery_duration),
@@ -347,6 +348,18 @@ class RoundInstance(models.Model):
                 "x": partner.partner_longitude,
                 "y": partner.partner_latitude,
             }
+
+            customDataMap = {}
+            if partner.comment:
+                customDataMap["notes"] = partner.comment
+            if not all(
+                char == "" or char.isspace()
+                for char in partner.contact_address.split("\n")
+            ):
+                customDataMap["address"] = partner.contact_address
+            if customDataMap:
+                order["customDataMap"] = customDataMap
+
             delivery_windows = delivery_windows_by_partner_id[partner.id]
             if delivery_windows:
                 time_windows = []
