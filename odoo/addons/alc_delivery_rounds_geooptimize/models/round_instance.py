@@ -340,7 +340,7 @@ class RoundInstance(models.Model):
 
             order = {
                 "customerId": partner.ref,
-                "fixedVisitDuration": seconds_to_duration(cfg.delivery_duration),
+                "fixedVisitDuration": seconds_to_duration(partner.delivery_duration),
                 "id": partner.id,
                 "label": partner.display_name,
                 "phone": "| ".join(phones),

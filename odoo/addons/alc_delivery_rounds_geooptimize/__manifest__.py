@@ -18,6 +18,7 @@
         "stock",
     ],
     "data": [
+        "views/res_partner.xml",
         "views/round_template.xml",
         "wizards/stock_config_settings.xml",
         "views/round_instance.xml",
