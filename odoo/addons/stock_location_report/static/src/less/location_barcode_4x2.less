@@ -1,11 +1,10 @@
 .stock_location_barcode_4x2 {
     .barcode_label {
+        box-sizing: border-box;
+        width: 47%;
+        height: 25%;
         display: inline-block;
-        width: 450px;
-        height: 460px; // =1320/4
         overflow: hidden;
-    }
-    .barcode_label {
         padding-left:15px;
     }
     .barcode_label:nth-child(odd) {
@@ -17,13 +16,14 @@
         margin-right: 0;
     }
     .reserve {
-        height: 330px; // =1400/4
+        height: 330px; // =1170/4
     }
     .bin, .parking {
-        height: 330px; // =1400/4 (no-margin paper)
+        height: 330px; // =1170/s (no-margin paper)
     }
 
     .barcode_name {
+        margin-top: 78px;
         font-size: 88px;
         font-weight: bold;
         display: inline-block;
@@ -36,14 +36,23 @@
     .reserve .barcode_name {
         margin-top: 78px;
     }
+    img.barcode {
+        float: left;
+        margin: -4px 0 0 -85px;
+    }
+
     .reserve img.barcode {
+        float: left;
         margin: -4px 0 0 -85px;
     }
     div.barcode_checksum {
-        text-align: center;
-        width: 440px;
+        font-size: 48px;  // 4
+        width: 95%;
         height: 80px;
-        overflow: hidden;
+        margin: 50px 5px 0 -15px;
+        padding: 0 10px;
+        overflow: visible;
+        float: right;
     }
     div.barcode_checksum > div {
         font-size: 48px;
@@ -53,6 +62,7 @@
         border: 1px solid;
         margin: 0 5px 0 -15px;
         float: right;
+        overflow: visible;
     }
     .reserve div.barcode_checksum {
         font-size: 48px;  // 4
