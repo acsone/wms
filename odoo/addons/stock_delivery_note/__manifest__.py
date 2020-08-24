@@ -7,6 +7,7 @@
     "license": "AGPL-3",
     "category": "Stock",
     "depends": [
+        "alc_b2c_partner",
         "specific_data",
         "specific_sale",
         "stock",
