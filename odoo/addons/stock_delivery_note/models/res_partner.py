@@ -10,7 +10,7 @@ class ResPartner(models.Model):
     _inherit = "res.partner"
 
     send_csv_deliveryship = fields.Boolean(
-        string="Send the deliveryship in CSV format", default=True
+        string="Send the deliveryship in CSV format", default=False
     )
     send_pdf_deliveryship = fields.Boolean(
         string="Send the deliveryship in PDF format", default=False
