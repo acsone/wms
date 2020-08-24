@@ -101,6 +101,7 @@ msgid "%<br/>Supplier<br/>discount"
 msgstr "%<br/>Leveranciers<br/>korting"
 
 #. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.deliveryslip_b2c_customer
 #: model:ir.ui.view,arch_db:specific_report.deliveryslip_with_price
 #: model:ir.ui.view,arch_db:specific_report.deliveryslip_without_price
 #: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_entry_register_body
@@ -571,12 +572,14 @@ msgid "BNP PARIBAS FORTIS :"
 msgstr "BNP PARIBAS FORTIS :"
 
 #. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.deliveryslip_b2c_customer
 #: model:ir.ui.view,arch_db:specific_report.deliveryslip_with_price
 #: model:ir.ui.view,arch_db:specific_report.deliveryslip_without_price
 msgid "Balance to be delivered"
 msgstr "Nog te leveren"
 
 #. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.deliveryslip_b2c_customer
 #: model:ir.ui.view,arch_db:specific_report.deliveryslip_with_price
 #: model:ir.ui.view,arch_db:specific_report.deliveryslip_without_price
 msgid "Balance to be delivered on order"
@@ -588,6 +591,7 @@ msgid "Base taxable"
 msgstr "Belastbare basis"
 
 #. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.deliveryslip_b2c_customer
 #: model:ir.ui.view,arch_db:specific_report.deliveryslip_with_price
 #: model:ir.ui.view,arch_db:specific_report.deliveryslip_without_price
 #: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_entry_register_body
@@ -735,6 +739,7 @@ msgid "Entry register"
 msgstr "Entry register"
 
 #. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.deliveryslip_b2c_customer
 #: model:ir.ui.view,arch_db:specific_report.deliveryslip_with_price
 #: model:ir.ui.view,arch_db:specific_report.deliveryslip_without_price
 #: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_entry_register_body
@@ -748,6 +753,7 @@ msgid "For delivery order only"
 msgstr "For delivery order only"
 
 #. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.deliveryslip_b2c_customer
 #: model:ir.ui.view,arch_db:specific_report.deliveryslip_with_price
 #: model:ir.ui.view,arch_db:specific_report.deliveryslip_without_price
 #: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_entry_register_body
@@ -875,6 +881,7 @@ msgid "Modify Serial Number"
 msgstr "Modify Serial Number"
 
 #. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.deliveryslip_b2c_customer
 #: model:ir.ui.view,arch_db:specific_report.deliveryslip_with_price
 #: model:ir.ui.view,arch_db:specific_report.deliveryslip_without_price
 #: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_entry_register_body
@@ -902,6 +909,7 @@ msgid "No invoice to print"
 msgstr "No invoice to print"
 
 #. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.deliveryslip_b2c_customer
 #: model:ir.ui.view,arch_db:specific_report.deliveryslip_with_price
 #: model:ir.ui.view,arch_db:specific_report.deliveryslip_without_price
 #: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_entry_register_body
@@ -1054,6 +1062,7 @@ msgid "Print invoices"
 msgstr "Print invoices"
 
 #. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.deliveryslip_b2c_customer
 #: model:ir.ui.view,arch_db:specific_report.deliveryslip_with_price
 #: model:ir.ui.view,arch_db:specific_report.deliveryslip_without_price
 #: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_entry_register_body
@@ -1063,6 +1072,7 @@ msgid "Product<br/>reference"
 msgstr "Artikel<br/>nummer"
 
 #. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.deliveryslip_b2c_customer
 #: model:ir.ui.view,arch_db:specific_report.deliveryslip_with_price
 #: model:ir.ui.view,arch_db:specific_report.deliveryslip_without_price
 #: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_entry_register_body
