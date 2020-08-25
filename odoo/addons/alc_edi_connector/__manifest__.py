@@ -12,6 +12,7 @@
     "website": "https://acsone.eu/",
     "depends": [
         "alc_purchase_order_ubl",
+        "alc_purchase_order_import_ubl",
         "connector",
         "purchase_order_approved",
         "purchase_order_ubl",
