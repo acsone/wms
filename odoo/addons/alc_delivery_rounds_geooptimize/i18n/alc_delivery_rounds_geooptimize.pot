@@ -48,6 +48,18 @@ msgid "Can't export a not complete optimization for %s"
 msgstr ""
 
 #. module: alc_delivery_rounds_geooptimize
+#: model:ir.model.fields,field_description:alc_delivery_rounds_geooptimize.field_res_partner_use_specific_delivery_duration
+#: model:ir.model.fields,field_description:alc_delivery_rounds_geooptimize.field_res_users_use_specific_delivery_duration
+msgid "Change the default delivery duration"
+msgstr ""
+
+#. module: alc_delivery_rounds_geooptimize
+#: model:ir.model.fields,help:alc_delivery_rounds_geooptimize.field_res_partner_use_specific_delivery_duration
+#: model:ir.model.fields,help:alc_delivery_rounds_geooptimize.field_res_users_use_specific_delivery_duration
+msgid "Change the default delivery duration for this specific partner"
+msgstr ""
+
+#. module: alc_delivery_rounds_geooptimize
 #: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:509
 #, python-format
 msgid "Check geo optimization status for %s"
@@ -59,6 +71,14 @@ msgid "Date and time the optimization task was submitted to the TourSolver servi
 msgstr ""
 
 #. module: alc_delivery_rounds_geooptimize
+#: model:ir.model.fields,field_description:alc_delivery_rounds_geooptimize.field_res_partner_delivery_duration
+#: model:ir.model.fields,field_description:alc_delivery_rounds_geooptimize.field_res_partner_specific_delivery_duration
+#: model:ir.model.fields,field_description:alc_delivery_rounds_geooptimize.field_res_users_delivery_duration
+#: model:ir.model.fields,field_description:alc_delivery_rounds_geooptimize.field_res_users_specific_delivery_duration
+msgid "Delivery duration"
+msgstr ""
+
+#. module: alc_delivery_rounds_geooptimize
 #: model:ir.model.fields,help:alc_delivery_rounds_geooptimize.field_stock_config_settings_geo_optimization_duration
 msgid "Duration in seconds allowed to the computation of the optimization"
 msgstr ""
@@ -66,6 +86,12 @@ msgstr ""
 #. module: alc_delivery_rounds_geooptimize
 #: model:ir.model.fields,help:alc_delivery_rounds_geooptimize.field_stock_config_settings_geo_optimization_delivery_duration
 msgid "Duration in seconds needed to deliver a cutomer"
+msgstr ""
+
+#. module: alc_delivery_rounds_geooptimize
+#: model:ir.model.fields,help:alc_delivery_rounds_geooptimize.field_res_partner_specific_delivery_duration
+#: model:ir.model.fields,help:alc_delivery_rounds_geooptimize.field_res_users_specific_delivery_duration
+msgid "Duration in seconds needed to deliver a specific cutomer (different from the general one)"
 msgstr ""
 
 #. module: alc_delivery_rounds_geooptimize
@@ -136,6 +162,12 @@ msgstr ""
 #. module: alc_delivery_rounds_geooptimize
 #: model:ir.model.fields,help:alc_delivery_rounds_geooptimize.field_round_instance_geo_optimization_task_id
 msgid "Identifier of the task submitted to the TourSolver service to optimize the planning/path of the delivery round."
+msgstr ""
+
+#. module: alc_delivery_rounds_geooptimize
+#: code:addons/alc_delivery_rounds_geooptimize/models/res_partner.py:33
+#, python-format
+msgid "If you enable the specific delivery duration for this user, you must provide a duration."
 msgstr ""
 
 #. module: alc_delivery_rounds_geooptimize
@@ -224,6 +256,11 @@ msgstr ""
 #. module: alc_delivery_rounds_geooptimize
 #: model:ir.model.fields,field_description:alc_delivery_rounds_geooptimize.field_round_instance_geo_optimization_start_dt
 msgid "Optimization task start time"
+msgstr ""
+
+#. module: alc_delivery_rounds_geooptimize
+#: model:ir.model,name:alc_delivery_rounds_geooptimize.model_res_partner
+msgid "Partner"
 msgstr ""
 
 #. module: alc_delivery_rounds_geooptimize
