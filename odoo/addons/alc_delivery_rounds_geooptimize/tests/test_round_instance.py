@@ -41,7 +41,6 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
         cls.delivery_round_1.write(
             {"geo_optimization_enabled": True, "geo_optimization_resource_id": "D1"}
         )
-
         cls.partner1.write({"partner_latitude": 10.1, "partner_longitude": 10.1})
         cls.partner2.write({"partner_latitude": 10.2, "partner_longitude": 10.2})
         cls.partner3.write({"partner_latitude": 10.3, "partner_longitude": 10.3})
@@ -80,6 +79,7 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
 
     def setUp(self):
         super(TestRoundInstance, self).setUp()
+
         # mute logger
         loggers = [
             "odoo.addons.alc_delivery_rounds_geooptimize.models.round_instance",
@@ -459,6 +459,7 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
         res = self.delivery_round_1._generate_optimization_request()
         self.maxDiff = 2000
         shippings = self.delivery_round_1.shipping_ids
+
         expected = {
             "depots": [{"x": 0.0, "y": 0.0}],
             "language": u"en_US",
@@ -803,6 +804,90 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
                 float_to_time_repr(self.delivery_round_1._compute_stat_time_loading()),
                 "09:01",
             )
+
+    def test_21(self):
+        """
+        Data:
+            A round ready to be delivered for 3 partners. Partner 3 has an address
+        Test case:
+            Call method _generate_optimization_request
+        Expected result:
+            The json is conform to what's expected
+        """
+
+        country = self.env["res.country"].search([("name", "=", "Belgium")])
+        self.partner3.write(
+            {
+                "street": "rue testAddress",
+                "street2": "1",
+                "zip": 5000,
+                "country_id": country.id,
+                "comment": "this is my test comment",
+            }
+        )
+
+        res = self.delivery_round_1._generate_optimization_request()
+        shippings = self.delivery_round_1.shipping_ids
+
+        expected = {
+            "depots": [{"x": 0.0, "y": 0.0}],
+            "language": u"en_US",
+            "options": {
+                "maxOptimDuration": "00:00:01",
+                "vehicleCode": "deliveryIntermediateVehicle",
+            },
+            "orders": [
+                {
+                    "customerId": shippings[0].partner_id.id,
+                    "customDataMap": {
+                        "notes": shippings[0].partner_id.comment,
+                        "address": shippings[0].partner_id.contact_address,
+                    },
+                    "fixedVisitDuration": "00:00:10",
+                    "id": shippings[0].partner_id.id,
+                    "label": shippings[0].partner_id.name,
+                    "phone": "",
+                    "type": 0,
+                    "x": shippings[0].partner_id.partner_longitude,
+                    "y": shippings[0].partner_id.partner_latitude,
+                },
+                {
+                    "customerId": shippings[1].partner_id.id,
+                    "fixedVisitDuration": "00:00:10",
+                    "id": shippings[1].partner_id.id,
+                    "label": shippings[1].partner_id.name,
+                    "phone": "",
+                    "type": 0,
+                    "x": shippings[1].partner_id.partner_longitude,
+                    "y": shippings[1].partner_id.partner_latitude,
+                },
+                {
+                    "customerId": shippings[2].partner_id.id,
+                    "fixedVisitDuration": "00:00:10",
+                    "id": shippings[2].partner_id.id,
+                    "label": shippings[2].partner_id.name,
+                    "phone": "",
+                    "type": 0,
+                    "x": shippings[2].partner_id.partner_longitude,
+                    "y": shippings[2].partner_id.partner_latitude,
+                },
+            ],
+            "resources": [
+                {
+                    "endX": 0.0,
+                    "endY": 0.0,
+                    "fixedLoadingDuration": "01:40:00",
+                    "loadBeforeDeparture": True,
+                    "noReload": True,
+                    "openStart": False,
+                    "startX": 0.0,
+                    "startY": 0.0,
+                    "workStartTime": "00:00:00",
+                }
+            ],
+            "simulationName": self.delivery_round_1.display_name,
+        }
+        self.assertJsonEqual(res, expected)
 
 
 class _PseudoRequestsResponse(object):
