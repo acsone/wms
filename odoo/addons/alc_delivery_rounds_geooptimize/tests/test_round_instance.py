@@ -889,6 +889,240 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
         }
         self.assertJsonEqual(res, expected)
 
+    def test_22(self):
+        """
+        Data:
+            A round ready to be delivered for 3 partners, one has a specific fixed duration
+        Test case:
+            Call method _generate_optimization_request
+        Expected result:
+            The json is conform to what's expected
+        """
+
+        self.partner1.write(
+            {"use_specific_delivery_duration": True, "specific_delivery_duration": 50}
+        )
+        res = self.delivery_round_1._generate_optimization_request()
+        self.maxDiff = 2000
+        shippings = self.delivery_round_1.shipping_ids
+        fixedVisitDuration = {}
+        for shipping in shippings:
+            if shipping.partner_id.id == self.partner1.id:
+                fixedVisitDuration[self.partner1.id] = "00:00:50"
+            else:
+                fixedVisitDuration[shipping.partner_id.id] = "00:00:10"
+
+        expected = {
+            "depots": [{"x": 0.0, "y": 0.0}],
+            "language": u"en_US",
+            "options": {
+                "maxOptimDuration": "00:00:01",
+                "vehicleCode": "deliveryIntermediateVehicle",
+            },
+            "orders": [
+                {
+                    "customerId": shippings[0].partner_id.id,
+                    "fixedVisitDuration": fixedVisitDuration[
+                        shippings[0].partner_id.id
+                    ],
+                    "id": shippings[0].partner_id.id,
+                    "label": shippings[0].partner_id.name,
+                    "phone": "",
+                    "type": 0,
+                    "x": shippings[0].partner_id.partner_longitude,
+                    "y": shippings[0].partner_id.partner_latitude,
+                },
+                {
+                    "customerId": shippings[1].partner_id.id,
+                    "fixedVisitDuration": fixedVisitDuration[
+                        shippings[1].partner_id.id
+                    ],
+                    "id": shippings[1].partner_id.id,
+                    "label": shippings[1].partner_id.name,
+                    "phone": "",
+                    "type": 0,
+                    "x": shippings[1].partner_id.partner_longitude,
+                    "y": shippings[1].partner_id.partner_latitude,
+                },
+                {
+                    "customerId": shippings[2].partner_id.id,
+                    "fixedVisitDuration": fixedVisitDuration[
+                        shippings[2].partner_id.id
+                    ],
+                    "id": shippings[2].partner_id.id,
+                    "label": shippings[2].partner_id.name,
+                    "phone": "",
+                    "type": 0,
+                    "x": shippings[2].partner_id.partner_longitude,
+                    "y": shippings[2].partner_id.partner_latitude,
+                },
+            ],
+            "resources": [
+                {
+                    "endX": 0.0,
+                    "endY": 0.0,
+                    "fixedLoadingDuration": "01:40:00",
+                    "loadBeforeDeparture": True,
+                    "noReload": True,
+                    "openStart": False,
+                    "startX": 0.0,
+                    "startY": 0.0,
+                    "workStartTime": "00:00:00",
+                }
+            ],
+            "simulationName": self.delivery_round_1.display_name,
+        }
+        self.assertJsonEqual(res, expected)
+
+    def test_23(self):
+        """
+        Data:
+            A round ready to be delivered for 3 partners, one had a specific fixed duration that is now removed
+        Test case:
+            Call method _generate_optimization_request
+        Expected result:
+            The json is conform to what's expected
+        """
+
+        self.partner1.write(
+            {"use_specific_delivery_duration": True, "specific_delivery_duration": 50}
+        )
+        res = self.delivery_round_1._generate_optimization_request()
+        self.maxDiff = 2000
+        shippings = self.delivery_round_1.shipping_ids
+        fixedVisitDuration = {}
+        for shipping in shippings:
+            if shipping.partner_id.id == self.partner1.id:
+                fixedVisitDuration[self.partner1.id] = "00:00:50"
+            else:
+                fixedVisitDuration[shipping.partner_id.id] = "00:00:10"
+
+        expected = {
+            "depots": [{"x": 0.0, "y": 0.0}],
+            "language": u"en_US",
+            "options": {
+                "maxOptimDuration": "00:00:01",
+                "vehicleCode": "deliveryIntermediateVehicle",
+            },
+            "orders": [
+                {
+                    "customerId": shippings[0].partner_id.id,
+                    "fixedVisitDuration": fixedVisitDuration[
+                        shippings[0].partner_id.id
+                    ],
+                    "id": shippings[0].partner_id.id,
+                    "label": shippings[0].partner_id.name,
+                    "phone": "",
+                    "type": 0,
+                    "x": shippings[0].partner_id.partner_longitude,
+                    "y": shippings[0].partner_id.partner_latitude,
+                },
+                {
+                    "customerId": shippings[1].partner_id.id,
+                    "fixedVisitDuration": fixedVisitDuration[
+                        shippings[1].partner_id.id
+                    ],
+                    "id": shippings[1].partner_id.id,
+                    "label": shippings[1].partner_id.name,
+                    "phone": "",
+                    "type": 0,
+                    "x": shippings[1].partner_id.partner_longitude,
+                    "y": shippings[1].partner_id.partner_latitude,
+                },
+                {
+                    "customerId": shippings[2].partner_id.id,
+                    "fixedVisitDuration": fixedVisitDuration[
+                        shippings[2].partner_id.id
+                    ],
+                    "id": shippings[2].partner_id.id,
+                    "label": shippings[2].partner_id.name,
+                    "phone": "",
+                    "type": 0,
+                    "x": shippings[2].partner_id.partner_longitude,
+                    "y": shippings[2].partner_id.partner_latitude,
+                },
+            ],
+            "resources": [
+                {
+                    "endX": 0.0,
+                    "endY": 0.0,
+                    "fixedLoadingDuration": "01:40:00",
+                    "loadBeforeDeparture": True,
+                    "noReload": True,
+                    "openStart": False,
+                    "startX": 0.0,
+                    "startY": 0.0,
+                    "workStartTime": "00:00:00",
+                }
+            ],
+            "simulationName": self.delivery_round_1.display_name,
+        }
+        self.assertJsonEqual(res, expected)
+
+        # Remove the specific delivery duration, check everything goes as expected
+        self.partner1.write({"use_specific_delivery_duration": False})
+        self.assertEqual(self.partner1.specific_delivery_duration, 0)
+
+        res = self.delivery_round_1._generate_optimization_request()
+        self.maxDiff = 2000
+        shippings = self.delivery_round_1.shipping_ids
+
+        expected = {
+            "depots": [{"x": 0.0, "y": 0.0}],
+            "language": u"en_US",
+            "options": {
+                "maxOptimDuration": "00:00:01",
+                "vehicleCode": "deliveryIntermediateVehicle",
+            },
+            "orders": [
+                {
+                    "customerId": shippings[0].partner_id.id,
+                    "fixedVisitDuration": "00:00:10",
+                    "id": shippings[0].partner_id.id,
+                    "label": shippings[0].partner_id.name,
+                    "phone": "",
+                    "type": 0,
+                    "x": shippings[0].partner_id.partner_longitude,
+                    "y": shippings[0].partner_id.partner_latitude,
+                },
+                {
+                    "customerId": shippings[1].partner_id.id,
+                    "fixedVisitDuration": "00:00:10",
+                    "id": shippings[1].partner_id.id,
+                    "label": shippings[1].partner_id.name,
+                    "phone": "",
+                    "type": 0,
+                    "x": shippings[1].partner_id.partner_longitude,
+                    "y": shippings[1].partner_id.partner_latitude,
+                },
+                {
+                    "customerId": shippings[2].partner_id.id,
+                    "fixedVisitDuration": "00:00:10",
+                    "id": shippings[2].partner_id.id,
+                    "label": shippings[2].partner_id.name,
+                    "phone": "",
+                    "type": 0,
+                    "x": shippings[2].partner_id.partner_longitude,
+                    "y": shippings[2].partner_id.partner_latitude,
+                },
+            ],
+            "resources": [
+                {
+                    "endX": 0.0,
+                    "endY": 0.0,
+                    "fixedLoadingDuration": "01:40:00",
+                    "loadBeforeDeparture": True,
+                    "noReload": True,
+                    "openStart": False,
+                    "startX": 0.0,
+                    "startY": 0.0,
+                    "workStartTime": "00:00:00",
+                }
+            ],
+            "simulationName": self.delivery_round_1.display_name,
+        }
+        self.assertJsonEqual(res, expected)
+
 
 class _PseudoRequestsResponse(object):
     def __init__(self, status_code, json_result):
