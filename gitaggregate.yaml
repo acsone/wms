@@ -5,7 +5,6 @@
     merges:
         - oca 10.0
         - oca refs/pull/168/head #[10.0][IMP] base_ubl: Add support for ubl-2.2
-        - oca refs/pull/172/head #[10.0] Add UBL OrderResponse import
     target: origin 10.0-alc_master
 
 ./src/geospatial:
