@@ -97,7 +97,7 @@ odoo10-addon-base-report-to-printer @ git+https://github.com/acsone/report-print
 odoo10-addon-base-rest==10.0.2.0.1
 odoo10-addon-base-suspend-security==10.0.1.0.0
 odoo10-addon-base-technical-features @ git+https://github.com/acsone/server-tools.git@dcefdba5bac014076f05229ba091acd8b739e164#subdirectory=setup/base_technical_features
-odoo10-addon-base-ubl @ git+https://github.com/acsone/edi.git@164ce63fee0a48d126933691291725218fec3489#subdirectory=setup/base_ubl
+odoo10-addon-base-ubl==10.0.1.1.0
 odoo10-addon-base-unece==10.0.1.0.0.99.dev2
 odoo10-addon-base-vat-sanitized==10.0.1.0.0.99.dev9
 odoo10-addon-component==10.0.1.1.0
@@ -129,7 +129,7 @@ odoo10-addon-purchase-cancel-reason @ git+https://github.com/acsone/purchase-wor
 odoo10-addon-purchase-delivery-split-date @ git+https://github.com/acsone/purchase-workflow.git@527ab1413ba29a34c478e83413267f41e608cd4c#subdirectory=setup/purchase_delivery_split_date
 odoo10-addon-purchase-order-approved @ git+https://github.com/acsone/purchase-workflow.git@d89e022c168f3abce117ee7bb64b4323eabe0694#subdirectory=setup/purchase_order_approved
 odoo10-addon-purchase-order-import==10.0.2.0.0
-odoo10-addon-purchase-order-import-ubl==10.0.2.0.0
+odoo10-addon-purchase-order-import-ubl==10.0.2.0.2
 odoo10-addon-purchase-order-ubl==10.0.1.0.0.99.dev10
 odoo10-addon-queue-job @ git+https://github.com/acsone/queue.git@1e90ecc9ba9160783d63a8f005171d0c7dabcc3d#subdirectory=setup/queue_job
 odoo10-addon-queue-job-cron @ git+https://github.com/acsone/queue.git@cecd5db2f1664e1dc14fdb590996486f638b0fb0#subdirectory=setup/queue_job_cron
