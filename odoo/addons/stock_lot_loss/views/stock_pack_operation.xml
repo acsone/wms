@@ -11,7 +11,7 @@
         <field name="arch" type="xml">
             <button name="split_lot" position="after">
                 <field name="is_action_missing_qty_allowed" invisible="1"/>
-                <button name="action_missing_qty" string="Qty not found" type="object" icon="fa-step-forward "
+                <button name="action_missing_qty" string="Rupture" type="object" icon="fa-step-forward "
                                             attrs="{'invisible': [('is_action_missing_qty_allowed', '=', False)]}"/>
 
             </button>

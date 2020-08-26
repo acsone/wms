@@ -546,9 +546,40 @@ class TestLotLoss(SavepointCase):
                 wizard.doit()
             pack_operations = self.picking_1.pack_operation_ids
 
-        result = self.picking_1.do_new_transfer()
+        self.picking_1.do_new_transfer()
         self.assertEqual(self.picking_1.state, "confirmed")
         self.assertFalse(self.picking_1.pack_operation_ids)
         # here we try to create a backorder.
         self.picking_1._create_backorder()
         self.assertEqual(self.picking_1.state, "draft")
+
+    def test_02(self):
+        """
+        Qty missing is only allowed on not incoming picking
+        Data:
+            A picking out with lines for tracked products
+        Test case:
+            1. Check if the action missing_qty is allowed.
+            2. Change code on the picking_type to declare it as "incoming"
+            3. Check if the action missing_qty is allowed.
+        Expected results:
+            1. True since the picking type code is != "incoming"
+            2. False  since the picking type code is == "incoming"
+        """
+        self.initiate_values()
+        self.picking_1.with_context(round_autoset=False).action_assign()
+        self.assertTrue(
+            all(
+                self.picking_1.mapped(
+                    "pack_operation_ids.is_action_missing_qty_allowed"
+                )
+            )
+        )
+        self.picking_1.picking_type_id.code = "incoming"
+        self.assertFalse(
+            all(
+                self.picking_1.mapped(
+                    "pack_operation_ids.is_action_missing_qty_allowed"
+                )
+            )
+        )
