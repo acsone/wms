@@ -15,15 +15,19 @@ class StockPackOperationLot(models.Model):
         "Removal date", compute="_get_is_removal_date_expired"
     )
 
-    @api.depends("life_date", "operation_id")
+    @api.depends("lot_id.life_date", "operation_id")
     @api.one
     def _get_is_removal_date_expired(self):
+        # CODE TO BE MOVED
+        # Thsi code should be put into a specific addon with the
+        # method using it
+        # see specific_stock/stock_picking/check_removal_date_on_transfer
         product = self.operation_id.product_id
         is_removal_date_expired = False
-        if product and self.life_date:
+        if product and self.lot_id.life_date:
             if product.removal_time:
                 lot = self.env["stock.production.lot"].new(
-                    {"product_id": product.id, "life_date": self.life_date}
+                    {"product_id": product.id, "life_date": self.lot_id.life_date}
                 )
                 lot.onchange_life_date()
                 if (
