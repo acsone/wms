@@ -69,7 +69,7 @@ msgid "Lot to skip"
 msgstr ""
 
 #. module: stock_lot_loss
-#: code:addons/stock_lot_loss/models/stock_pack_operation.py:71
+#: code:addons/stock_lot_loss/models/stock_pack_operation.py:75
 #, python-format
 msgid "No qty to block."
 msgstr ""
@@ -96,12 +96,17 @@ msgid "Packing Operation"
 msgstr ""
 
 #. module: stock_lot_loss
+#: model:ir.ui.view,arch_db:stock_lot_loss.stock_picking_form_view
+msgid "Rupture"
+msgstr ""
+
+#. module: stock_lot_loss
 #: model:stock.picking.type,name:stock_lot_loss.stock_picking_type_23
 msgid "Ruptures"
 msgstr ""
 
 #. module: stock_lot_loss
-#: code:addons/stock_lot_loss/models/stock_pack_operation.py:129
+#: code:addons/stock_lot_loss/models/stock_pack_operation.py:133
 #, python-format
 msgid "Select Lot/Serial Number to skip"
 msgstr ""
@@ -117,7 +122,7 @@ msgid "Skip pack operation for lot"
 msgstr ""
 
 #. module: stock_lot_loss
-#: code:addons/stock_lot_loss/models/stock_pack_operation.py:30
+#: code:addons/stock_lot_loss/models/stock_pack_operation.py:34
 #, python-format
 msgid "You are not allowed to declare missing quantities"
 msgstr ""
