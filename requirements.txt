@@ -97,7 +97,7 @@ odoo10-addon-base-report-to-printer @ git+https://github.com/acsone/report-print
 odoo10-addon-base-rest==10.0.2.0.1
 odoo10-addon-base-suspend-security==10.0.1.0.0
 odoo10-addon-base-technical-features @ git+https://github.com/acsone/server-tools.git@dcefdba5bac014076f05229ba091acd8b739e164#subdirectory=setup/base_technical_features
-odoo10-addon-base-ubl @ git+https://github.com/acsone/edi.git@164ce63fee0a48d126933691291725218fec3489#subdirectory=setup/base_ubl
+odoo10-addon-base-ubl==10.0.1.1.0
 odoo10-addon-base-unece==10.0.1.0.0.99.dev2
 odoo10-addon-base-vat-sanitized==10.0.1.0.0.99.dev9
 odoo10-addon-component==10.0.1.1.0
