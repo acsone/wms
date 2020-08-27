@@ -10,23 +10,24 @@ class AlcChronovetReportCsvFacpied(models.AbstractModel):
     _name = "report.alc_chronovet_report_csv_facpied"
     _inherit = "report.report_csv.abstract"
 
-    def generate_csv_report(self, writer, data, account_moves):
-        writer.writeheader()
-        invoices = self._get_all_invoives(account_moves)
+    def generate_csv_report(self, file, data, account_move):
+        # Write header first
+        file.writeheader()
+        invoices = self._get_all_invoices(account_move)
         for invoice in invoices:
-            writer.writerow(
+            file.writerow(
                 {
                     "CFACT": invoice.partner_id.ref,
                     "NOM": invoice.partner_id.name,
-                    "TYPE": "",
-                    "NFACT": "",
-                    "DATEFACT": "",
-                    "TVA": "",
-                    "MONTHT": "",
-                    "ESCOMPTE": "",
-                    "TOTALHT": "",
-                    "MONTTVA": "",
-                    "TOTALTTC": "",
+                    "TYPE": invoice.type,
+                    "NFACT": invoice.number,
+                    "DATEFACT": invoice.date_invoice,
+                    "TVA": invoice.tax_line_ids[0].tax_id.amount,
+                    "MONTHT": invoice.amount_untaxed,
+                    "ESCOMPTE": 0,
+                    "TOTALHT": invoice.amount_untaxed,
+                    "MONTTVA": invoice.amount_tax,
+                    "TOTALTTC": invoice.amount_total,
                 }
             )
 
@@ -51,6 +52,5 @@ class AlcChronovetReportCsvFacpied(models.AbstractModel):
         res["quoting"] = csv.QUOTE_ALL
         return res
 
-    def _get_all_invoices(self, account_moves):
-        invoice_ids = []
-        return invoice_ids
+    def _get_all_invoices(self, account_move):
+        return [line.invoice_id for line in account_move.line_ids if line.invoice_id]

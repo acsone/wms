@@ -19,4 +19,10 @@ class AlcChronovetPaymentGlobalization(models.TransientModel):
     )
 
     def _after_globalization(self, account_move):
-        pass
+        result = super(AlcChronovetPaymentGlobalization, self)._after_globalization(
+            account_move
+        )
+        self.env["report"].get_csv(
+            account_move.ids, "alc_chronovet_report_csv_facpied", {}
+        )
+        return result
