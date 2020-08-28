@@ -13,6 +13,7 @@
                 <field name="lot_id"/>
                 <field name="location_id"/>
                 <field name="alert_date"/>
+                <field name="expiry_date"/>
                 <field name="removal_date"/>
                 <field name="use_date"/>
                 <field name="life_date"/>
@@ -30,7 +31,7 @@
                 <separator/>
                 <field name="removal_date"/>
                 <filter name="on_alert" string="Quants on alert" domain="[('alert_date', '&lt;', time.strftime('%Y-%m-%d %H:%M:%S'))]"/>
-                <filter name="expired" string="Quants expired" domain="[('removal_date', '&lt;', time.strftime('%Y-%m-%d %H:%M:%S'))]"/>
+                <filter name="expired" string="Quants expired" domain="[('is_expired', '=', True)]"/>
             </filter>
 
         </field>

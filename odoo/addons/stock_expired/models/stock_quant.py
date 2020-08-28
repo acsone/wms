@@ -6,16 +6,42 @@
 import itertools
 
 from odoo import api, fields, models
+from odoo.osv.expression import NEGATIVE_TERM_OPERATORS
 
 
 class StockQuant(models.Model):
     _inherit = "stock.quant"
 
     alert_date = fields.Datetime(related="lot_id.alert_date", store=True, readonly=True)
-
     use_date = fields.Datetime(related="lot_id.use_date", store=True, readonly=True)
-
     life_date = fields.Datetime(related="lot_id.life_date", store=True, readonly=True)
+    is_expired = fields.Boolean(
+        compute="_compute_is_expired", search="_search_is_expired"
+    )
+    expiry_date = fields.Datetime(
+        related="lot_id.expiry_date", store=True, index=True, readonly=True
+    )
+
+    @api.depends("lot_id.is_expired")
+    def _compute_is_expired(self):
+        for rec in self:
+            rec.is_expired = rec.lot_id.is_expired
+
+    def _search_is_expired(self, operator, value):
+        search_expired = (
+            # is_expired != False
+            (operator in NEGATIVE_TERM_OPERATORS and not value)
+            or
+            # is_expired = True
+            (operator not in NEGATIVE_TERM_OPERATORS and value)
+        )
+        if search_expired:
+            return [("expiry_date", "<", fields.Datetime.now())]
+        return [
+            "|",
+            ("expiry_date", "=", False),
+            ("expiry_date", ">=", fields.Datetime.now()),
+        ]
 
     def _quants_get_reservation_domain(
         self,
@@ -36,9 +62,7 @@ class StockQuant(models.Model):
         new_domain = initial_domain or []
         if deny_reservation_for_quants_expired:
             new_domain.append("|")
-            new_domain.append("|")
-            new_domain.append(("removal_date", "=", False))
-            new_domain.append(("removal_date", ">", fields.Datetime.now()))
+            new_domain.append(("is_expired", "=", False))
             new_domain.append(("location_id.ignore_quants_expiration", "=", True))
 
         return super(StockQuant, self)._quants_get_reservation_domain(
@@ -52,7 +76,7 @@ class StockQuant(models.Model):
     @api.model
     def alert_quant_expired(self):
         domain = [
-            ("lot_id.alert_date", "<=", fields.Datetime.now()),
+            ("alert_date", "<=", fields.Datetime.now()),
             ("location_id.usage", "=", "internal"),
             ("location_id.ignore_quants_expiration", "=", False),
         ]
@@ -75,7 +99,7 @@ class StockQuant(models.Model):
             "move_lines.reserved_quant_ids"
         )
         domain = [
-            ("removal_date", "<=", fields.Datetime.now()),
+            ("is_expired", "=", True),
             ("location_id.usage", "=", "internal"),
             ("location_id.ignore_quants_expiration", "=", False),
             ("id", "not in", quants_already_processed.ids),

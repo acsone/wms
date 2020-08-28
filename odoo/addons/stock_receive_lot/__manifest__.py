@@ -11,9 +11,10 @@
     "category": "Stock Management",
     "depends": [
         "stock",
-        "stock_picking_assignment",
-        "stock_production_lot_expired_dates",
         "stock_location_act_as_view",
+        "stock_picking_assignment",
+        "stock_production_lot_expiry",
+        "stock_production_lot_expired_dates",
         "web_widget_inputmask",
     ],
     "data": [

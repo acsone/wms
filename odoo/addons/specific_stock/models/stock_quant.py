@@ -21,7 +21,7 @@ class StockQuant(models.Model):
     def _quants_removal_get_order(self, removal_strategy):
         """ Fixing issue https://github.com/odoo/odoo/issues/31186 """
         if removal_strategy == "fefo":
-            return "removal_date, in_date, id desc"
+            return "expiry_date, in_date, id desc"
         elif removal_strategy == "fifo":
             return "in_date, id desc"
         return super(StockQuant, self)._quants_removal_get_order(removal_strategy)

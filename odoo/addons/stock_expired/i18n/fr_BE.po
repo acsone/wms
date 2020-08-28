@@ -141,5 +141,15 @@ msgstr ""
 msgid "Transfer"
 msgstr "Transfert"
 
+#. module: specific_expired
+#: code:addons/specific_expired/models/stock_picking.py:38
+#, python-format
+msgid ""
+"You cannot transfer lots with an expired removal date:\n"
+"\t- %s"
+msgstr ""
+"Vous ne pouvez pas transférer un lot expiré:\n"
+"\t- %s"
+
 #~ msgid "To process quant expired"
 #~ msgstr "Stocks expirés à traiter"
