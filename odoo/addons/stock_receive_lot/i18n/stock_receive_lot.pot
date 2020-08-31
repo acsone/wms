@@ -60,6 +60,11 @@ msgid "Inventory Locations"
 msgstr ""
 
 #. module: stock_receive_lot
+#: model:ir.model.fields,field_description:stock_receive_lot.field_stock_pack_operation_lot_is_product_expired
+msgid "Is expired"
+msgstr ""
+
+#. module: stock_receive_lot
 #: model:ir.model.fields,field_description:stock_receive_lot.field_stock_pack_operation_lot_add___last_update
 msgid "Last Modified on"
 msgstr ""
@@ -155,7 +160,7 @@ msgid "Qty Remaining"
 msgstr ""
 
 #. module: stock_receive_lot
-#: code:addons/stock_receive_lot/wizards/stock.py:263
+#: code:addons/stock_receive_lot/wizards/stock.py:253
 #, python-format
 msgid "Quantity must be greater than 0"
 msgstr ""
@@ -177,17 +182,12 @@ msgid "Removal Date Expired"
 msgstr ""
 
 #. module: stock_receive_lot
-#: model:ir.model.fields,field_description:stock_receive_lot.field_stock_pack_operation_lot_is_removal_date_expired
-msgid "Removal date"
-msgstr ""
-
-#. module: stock_receive_lot
 #: model:ir.model.fields,field_description:stock_receive_lot.field_stock_pack_operation_lot_add_origin
 msgid "Source Document"
 msgstr ""
 
 #. module: stock_receive_lot
-#: code:addons/stock_receive_lot/wizards/stock.py:324
+#: code:addons/stock_receive_lot/wizards/stock.py:314
 #, python-format
 msgid "This lot is not in the list of expected lots"
 msgstr ""
@@ -214,14 +214,14 @@ msgid "Visible in reception wizard"
 msgstr ""
 
 #. module: stock_receive_lot
-#: code:addons/stock_receive_lot/wizards/stock.py:167
+#: code:addons/stock_receive_lot/wizards/stock.py:168
 #, python-format
 msgid "Warning"
 msgstr ""
 
 #. module: stock_receive_lot
-#: code:addons/stock_receive_lot/wizards/stock.py:168
-#: code:addons/stock_receive_lot/wizards/stock.py:266
+#: code:addons/stock_receive_lot/wizards/stock.py:169
+#: code:addons/stock_receive_lot/wizards/stock.py:256
 #, python-format
 msgid "You cannot receive more than the expected remaining quantity"
 msgstr ""
