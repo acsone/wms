@@ -652,7 +652,7 @@ msgid "The picking type determines the picking view"
 msgstr ""
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/stock_picking.py:89
+#: code:addons/specific_stock/models/stock_picking.py:61
 #, python-format
 msgid "The reception must be linked to a Goods Received Note"
 msgstr ""
@@ -777,13 +777,6 @@ msgstr ""
 #. module: specific_stock
 #: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy_line_wizard_id
 msgid "Wizard"
-msgstr ""
-
-#. module: specific_stock
-#: code:addons/specific_stock/models/stock_picking.py:76
-#, python-format
-msgid "You cannot transfer lots with an expired removal date:\n"
-"	- %s"
 msgstr ""
 
 #. module: specific_stock
