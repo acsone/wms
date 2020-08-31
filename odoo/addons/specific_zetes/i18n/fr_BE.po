@@ -251,7 +251,7 @@ msgstr "Erreurs humaine"
 #: model:ir.model.fields,field_description:specific_zetes.field_manage_uop_id
 #: model:ir.model.fields,field_description:specific_zetes.field_manage_uop_line_id
 #: model:ir.model.fields,field_description:specific_zetes.field_pack_operation_reserve_rel_id
-#: model:ir.model.fields,field_description:specific_zetes.field_stock_pack_operation_operator_id_9576
+#: model:ir.model.fields,field_description:specific_zetes.field_stock_pack_operation_operator_id_9602
 #: model:ir.model.fields,field_description:specific_zetes.field_view_picking_line_id
 #: model:ir.model.fields,field_description:specific_zetes.field_zetes_logger_id
 msgid "ID"
@@ -318,7 +318,7 @@ msgid "Location"
 msgstr "Emplacement"
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_location.py:180
+#: code:addons/specific_zetes/tools/domain_location.py:179
 #, python-format
 msgid "Location %s%s%s%s%s not found"
 msgstr "Emplacement %s%s%s%s%s non trouvé"
@@ -347,13 +347,13 @@ msgid "Lot"
 msgstr "Lot"
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_location.py:245
+#: code:addons/specific_zetes/tools/domain_location.py:240
 #, python-format
 msgid "Lot %s has expired. Please contact the manager"
 msgstr "Le lot %s a expiré. Veuille contacter votre manager"
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_location.py:257
+#: code:addons/specific_zetes/tools/domain_location.py:252
 #, python-format
 msgid "Lot %s not found. Please contact the manager"
 msgstr "Lot %s non trouvé. Veuillez contacter votre manager"
@@ -435,8 +435,8 @@ msgstr "Aucune opération trouvée avec l'ID %s"
 #. module: specific_zetes
 #: code:addons/specific_zetes/tools/domain_catchweight.py:132
 #: code:addons/specific_zetes/tools/domain_itemmove.py:168
-#: code:addons/specific_zetes/tools/domain_location.py:112
-#: code:addons/specific_zetes/tools/domain_location.py:133
+#: code:addons/specific_zetes/tools/domain_location.py:111
+#: code:addons/specific_zetes/tools/domain_location.py:132
 #, python-format
 msgid "No picking found"
 msgstr "Aucun UOP trouvé"
@@ -747,7 +747,7 @@ msgid "There is no lines for the picking %s"
 msgstr "There is no lines for the picking %s"
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_location.py:200
+#: code:addons/specific_zetes/tools/domain_location.py:199
 #, python-format
 msgid "This location is not a reserve"
 msgstr "This location is not a reserve"
