@@ -81,14 +81,33 @@ class StockPackOperationLotAdd(models.TransientModel):
     _name = "stock.pack.operation.lot.add"
 
     name = fields.Char(default="New")
-
     picking_id = fields.Many2one("stock.picking", readonly="True")
     partner_id = fields.Many2one(related="picking_id.partner_id", readonly=True)
     origin = fields.Char(related="picking_id.origin", readonly=True)
-
     operation_id = fields.Many2one(
         "stock.pack.operation", string="Operation", domain=[("state", "=", "assigned")]
     )
+    location_op_dest_id = fields.Many2one(
+        "stock.location",
+        "Operation Destination View Location",
+        compute="_get_location_op_dest_id",
+    )
+    location_dest_id = fields.Many2one("stock.location", "Destination Location")
+
+    lot_required = fields.Boolean("Lot Required", compute="_get_lot_required")
+    product_qty = fields.Float(related="operation_id.product_qty", readonly=True)
+    product_uom_id = fields.Many2one(
+        "product.uom", related="operation_id.product_uom_id", readonly=True
+    )
+    remaining_qty = fields.Float("Qty Remaining", compute="_get_remaining_qty")
+    qty = fields.Float("Qty Done")
+    life_date_char = fields.Char(string="Expiration date (input)")
+    life_date = fields.Datetime(string="Expiration date")
+    is_removal_date_expired = fields.Boolean(
+        "Removal Date Expired", compute="_get_is_removal_date_expired"
+    )
+    lot_name = fields.Char("Lot Name")
+    lot_id = fields.Many2one("stock.production.lot", "Lot")
 
     def _is_parent_child(self, parent, child):
         if child.parent_left and child.parent_right:
@@ -123,12 +142,6 @@ class StockPackOperationLotAdd(models.TransientModel):
         self.lot_name = False
         self.qty = 0
 
-    location_op_dest_id = fields.Many2one(
-        "stock.location",
-        "Operation Destination View Location",
-        compute="_get_location_op_dest_id",
-    )
-
     @api.one
     @api.depends("operation_id")
     def _get_location_op_dest_id(self):
@@ -137,27 +150,15 @@ class StockPackOperationLotAdd(models.TransientModel):
             loc = loc.location_id
         self.location_op_dest_id = loc.id
 
-    location_dest_id = fields.Many2one("stock.location", "Destination Location")
-
-    lot_required = fields.Boolean("Lot Required", compute="_get_lot_required")
-
     @api.depends("operation_id")
     @api.one
     def _get_lot_required(self):
         self.lot_required = self.operation_id.product_id.tracking != "none"
 
-    product_qty = fields.Float(related="operation_id.product_qty", readonly=True)
-    product_uom_id = fields.Many2one(
-        "product.uom", related="operation_id.product_uom_id", readonly=True
-    )
-    remaining_qty = fields.Float("Qty Remaining", compute="_get_remaining_qty")
-
     @api.depends("operation_id.qty_done")
     @api.one
     def _get_remaining_qty(self):
         self.remaining_qty = self.operation_id.product_qty - self.operation_id.qty_done
-
-    qty = fields.Float("Qty Done")
 
     @api.onchange("qty")
     def _onchange_qty(self):
@@ -171,8 +172,6 @@ class StockPackOperationLotAdd(models.TransientModel):
                     ),
                 }
             }
-
-    life_date_char = fields.Char(string="Expiration date (input)")
 
     @api.onchange("life_date_char")
     def _onchange_life_date_char(self):
@@ -190,8 +189,6 @@ class StockPackOperationLotAdd(models.TransientModel):
         for method in methods:
             method(self)
 
-    life_date = fields.Datetime(string="Expiration date")
-
     @api.onchange("life_date")
     def _onchange_life_date(self):
         oplot = self.env["stock.pack.operation.lot"]
@@ -200,20 +197,13 @@ class StockPackOperationLotAdd(models.TransientModel):
                 self.operation_id, self.life_date
             )
 
-    is_removal_date_expired = fields.Boolean(
-        "Removal Date Expired", compute="_get_is_removal_date_expired"
-    )
-
     @api.depends("life_date")
     def _get_is_removal_date_expired(self):
-        oplot = self.env["stock.pack.operation.lot"]
-        line = oplot.new(
-            {"life_date": self.life_date, "operation_id": self.operation_id.id}
+        lot = self.env["stock.production.lot"].new(
+            {"product_id": self.operation_id.product_id.id, "life_date": self.life_date}
         )
-        self.is_removal_date_expired = line.is_removal_date_expired
-
-    lot_name = fields.Char("Lot Name")
-    lot_id = fields.Many2one("stock.production.lot", "Lot")
+        lot.onchange_life_date()
+        self.is_removal_date_expired = lot.is_expired
 
     def _convert_lot_name2id(self, vals):
         if "operation_id" in vals:

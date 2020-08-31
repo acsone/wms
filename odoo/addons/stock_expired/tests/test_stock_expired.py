@@ -2,9 +2,6 @@
 # Copyright 2016 Julien Coux (Camptocamp)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from datetime import datetime
-
-from odoo import fields, tools
 from odoo.tests.common import TransactionCase, at_install, post_install
 
 
@@ -156,12 +153,8 @@ class TestStockExpired(TransactionCase):
         self.assertEqual(product_ko_2.qty_available, 4)
         self.assertEqual(product_ko_2.virtual_available, 4)
 
-        now = datetime.strftime(
-            fields.datetime.now(), tools.DEFAULT_SERVER_DATETIME_FORMAT
-        )
-
         domain = [
-            ("removal_date", "<=", now),
+            ("is_expired", "=", True),
             ("location_id.usage", "=", "internal"),
             ("location_id.ignore_quants_expiration", "=", False),
         ]

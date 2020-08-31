@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 import re
-from datetime import datetime
 
 from domain_interface import DomainInterface, Parameters
-from odoo import _, fields
+from odoo import _
 
 from .. import constants
 
@@ -234,21 +233,17 @@ class Location(DomainInterface):
             )
 
             if specific_lot:
-                if specific_lot.removal_date:
-                    removal_date = fields.Datetime.from_string(
-                        specific_lot.removal_date
+                if specific_lot.is_expired:
+                    result.update(
+                        {
+                            "respCode": constants.RESPONSE_CODE_ERROR,
+                            "respMsg": _(
+                                "Lot %s has expired. " "Please contact the manager"
+                            )
+                            % params.Cri07,
+                        }
                     )
-                    if removal_date < datetime.now():
-                        result.update(
-                            {
-                                "respCode": constants.RESPONSE_CODE_ERROR,
-                                "respMsg": _(
-                                    "Lot %s has expired. " "Please contact the manager"
-                                )
-                                % params.Cri07,
-                            }
-                        )
-                        return result.format()
+                    return result.format()
                 result.Usf01 = specific_lot.voice_identifier
             else:
                 result.update(

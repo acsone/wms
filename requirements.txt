@@ -148,6 +148,7 @@ odoo10-addon-stock-available @ git+https://github.com/acsone/stock-logistics-war
 odoo10-addon-stock-available-immediately @ git+https://github.com/acsone/stock-logistics-warehouse.git@d7cedf56da46da998d63d4e03a0e9cea2099fded#subdirectory=setup/stock_available_immediately
 odoo10-addon-stock-disable-force-availability-button @ git+https://github.com/acsone/stock-logistics-workflow.git@73135ace7b20fc3b86dcb8b0459c9b8a203d1474#subdirectory=setup/stock_disable_force_availability_button
 odoo10-addon-stock-mts-mto-rule @ git+https://github.com/acsone/stock-logistics-warehouse.git@d7cedf56da46da998d63d4e03a0e9cea2099fded#subdirectory=setup/stock_mts_mto_rule
+-e git+git@github.com:acsone/product-attribute@7e2c8cda6effefe84023848ea0c560af95e8a268#egg=odoo10_addon_stock_production_lot_expiry&subdirectory=setup/stock_production_lot_expiry
 odoo10-addon-web-cache-name-get @ git+https://github.com/acsone/web.git@f37c8ad92c2190e0bbc09444424273843a9f3cd0#subdirectory=setup/web_cache_name_get
 odoo10-addon-web-decimal-numpad-dot @ git+https://github.com/acsone/web.git@f37c8ad92c2190e0bbc09444424273843a9f3cd0#subdirectory=setup/web_decimal_numpad_dot
 odoo10-addon-web-environment-ribbon @ git+https://github.com/acsone/web.git@f37c8ad92c2190e0bbc09444424273843a9f3cd0#subdirectory=setup/web_environment_ribbon

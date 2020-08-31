@@ -24,6 +24,7 @@
         "stock_product_bin",
         "stock_barcode_fix",
         "stock_picking_fillwithstock",
+        "stock_production_lot_expiry",
         "stock_groupbypartner",
         "procurement_sale",
         "stock_picking_zone",

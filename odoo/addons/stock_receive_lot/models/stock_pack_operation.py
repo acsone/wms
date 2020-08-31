@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 # © 2016 Julien Coux (Camptocamp)
 # © 2017 Jacques-Etienne Baudoux (BCIM)
+# Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-from datetime import datetime
 
 from odoo import api, fields, models
 
@@ -11,31 +11,8 @@ class StockPackOperationLot(models.Model):
     _inherit = "stock.pack.operation.lot"
 
     life_date = fields.Datetime(string="Expiration date")
-    is_removal_date_expired = fields.Boolean(
-        "Removal date", compute="_get_is_removal_date_expired"
-    )
 
-    @api.depends("lot_id.life_date", "operation_id")
-    @api.one
-    def _get_is_removal_date_expired(self):
-        # CODE TO BE MOVED
-        # Thsi code should be put into a specific addon with the
-        # method using it
-        # see specific_stock/stock_picking/check_removal_date_on_transfer
-        product = self.operation_id.product_id
-        is_removal_date_expired = False
-        if product and self.lot_id.life_date:
-            if product.removal_time:
-                lot = self.env["stock.production.lot"].new(
-                    {"product_id": product.id, "life_date": self.lot_id.life_date}
-                )
-                lot.onchange_life_date()
-                if (
-                    lot.removal_date
-                    and fields.Datetime.from_string(lot.removal_date) < datetime.now()
-                ):
-                    is_removal_date_expired = True
-        self.is_removal_date_expired = is_removal_date_expired
+    is_product_expired = fields.Boolean(related="lot_id.is_expired", readonly=True)
 
     def _calc_lotname_from_lifedate(self, pack_op, life_date):
         """ The default lot name is only for an aliment """
