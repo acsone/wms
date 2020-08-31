@@ -68,6 +68,12 @@ msgid "Expiration Date"
 msgstr "Date de péremption"
 
 #. module: stock_expired
+#: model:ir.model.fields,field_description:stock_expired.field_stock_quant_expiry_date
+#, fuzzy
+msgid "Expiry date"
+msgstr "Date de péremption"
+
+#. module: stock_expired
 #: model:ir.model.fields,field_description:stock_expired.field_stock_location_ignore_quants_expiration
 msgid "Ignore quants expiration"
 msgstr "Ignorer l'expiration des stocks"
@@ -76,6 +82,12 @@ msgstr "Ignorer l'expiration des stocks"
 #: model:ir.model,name:stock_expired.model_stock_location
 msgid "Inventory Locations"
 msgstr "Emplacements de stock"
+
+#. module: stock_expired
+#: model:ir.model.fields,field_description:stock_expired.field_stock_quant_is_expired
+#, fuzzy
+msgid "Is expired"
+msgstr "Stocks expirés"
 
 #. module: stock_expired
 #: model:ir.model,name:stock_expired.model_stock_quant
@@ -141,8 +153,8 @@ msgstr ""
 msgid "Transfer"
 msgstr "Transfert"
 
-#. module: specific_expired
-#: code:addons/specific_expired/models/stock_picking.py:38
+#. module: stock_expired
+#: code:addons/stock_expired/models/stock_picking.py:35
 #, python-format
 msgid ""
 "You cannot transfer lots with an expired removal date:\n"
