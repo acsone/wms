@@ -15,7 +15,7 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["alc_account_payment_globalization", "alc_chronovet"],
-    "data": ["wizards/alc_chronovet_payment_globalization.xml"],
+    "depends": ["alc_account_payment_globalization", "alc_chronovet", "report_csv"],
+    "data": ["wizards/alc_chronovet_payment_globalization.xml", "reports/report.xml"],
     "demo": [],
 }

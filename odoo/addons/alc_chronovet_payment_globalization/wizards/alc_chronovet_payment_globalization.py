@@ -17,3 +17,12 @@ class AlcChronovetPaymentGlobalization(models.TransientModel):
     payment_mode_id = fields.Many2one(
         default=lambda a: a.env.ref("alc_chronovet.account_payment_mode_chronovet").id
     )
+
+    def _after_globalization(self, account_move):
+        result = super(AlcChronovetPaymentGlobalization, self)._after_globalization(
+            account_move
+        )
+        self.env["report"].get_csv(
+            account_move.ids, "alc_chronovet_report_csv_facpied", {}
+        )
+        return result
