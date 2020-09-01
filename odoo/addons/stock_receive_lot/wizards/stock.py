@@ -197,13 +197,19 @@ class StockPackOperationLotAdd(models.TransientModel):
                 self.operation_id, self.life_date
             )
 
-    @api.depends("life_date")
+    @api.depends("life_date", "operation_id")
     def _get_is_removal_date_expired(self):
-        lot = self.env["stock.production.lot"].new(
-            {"product_id": self.operation_id.product_id.id, "life_date": self.life_date}
-        )
-        lot.onchange_life_date()
-        self.is_removal_date_expired = lot.is_expired
+        if not self.operation_id:
+            self.is_removal_date_expired = False
+        else:
+            lot = self.env["stock.production.lot"].new(
+                {
+                    "product_id": self.operation_id.product_id.id,
+                    "life_date": self.life_date,
+                }
+            )
+            lot.onchange_life_date()
+            self.is_removal_date_expired = lot.is_expired
 
     def _convert_lot_name2id(self, vals):
         if "operation_id" in vals:
