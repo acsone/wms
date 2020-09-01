@@ -1,0 +1,145 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* stock_lot_loss
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-09-01 07:20+0000\n"
+"PO-Revision-Date: 2020-09-01 07:20+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_lot_loss
+#: model:ir.ui.view,arch_db:stock_lot_loss.stock_picking_form_view
+msgid "Are you sure the product is out of stock?"
+msgstr "Voulez-vous vraiment déclarer une rupture?"
+
+#. module: stock_lot_loss
+#: model:ir.ui.view,arch_db:stock_lot_loss.stock_pack_operation_skip_lot_form_view
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: stock_lot_loss
+#: model:ir.model.fields,field_description:stock_lot_loss.field_stock_pack_operation_skip_lot_create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: stock_lot_loss
+#: model:ir.model.fields,field_description:stock_lot_loss.field_stock_pack_operation_skip_lot_create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: stock_lot_loss
+#: model:ir.model.fields,field_description:stock_lot_loss.field_stock_pack_operation_skip_lot_display_name
+msgid "Display Name"
+msgstr "Nom affiché"
+
+#. module: stock_lot_loss
+#: model:ir.model.fields,field_description:stock_lot_loss.field_stock_pack_operation_skip_lot_id
+msgid "ID"
+msgstr "ID"
+
+#. module: stock_lot_loss
+#: model:ir.model,name:stock_lot_loss.model_stock_inventory_line
+msgid "Inventory Line"
+msgstr "Ligne d'inventaire"
+
+#. module: stock_lot_loss
+#: model:ir.model.fields,field_description:stock_lot_loss.field_stock_pack_operation_is_action_missing_qty_allowed
+msgid "Is action missing qty allowed"
+msgstr "Déclaration de rupture possible?"
+
+#. module: stock_lot_loss
+#: model:ir.model.fields,field_description:stock_lot_loss.field_stock_pack_operation_skip_lot___last_update
+msgid "Last Modified on"
+msgstr "Dernière modification le"
+
+#. module: stock_lot_loss
+#: model:ir.model.fields,field_description:stock_lot_loss.field_stock_pack_operation_skip_lot_write_uid
+msgid "Last Updated by"
+msgstr "Dernière mise à jour par"
+
+#. module: stock_lot_loss
+#: model:ir.model.fields,field_description:stock_lot_loss.field_stock_pack_operation_skip_lot_write_date
+msgid "Last Updated on"
+msgstr "Dernière mise à jour le"
+
+#. module: stock_lot_loss
+#: model:ir.model.fields,field_description:stock_lot_loss.field_stock_pack_operation_skip_lot_skip_pack_lot_id
+msgid "Lot to skip"
+msgstr "Lot en rupture"
+
+#. module: stock_lot_loss
+#: model:ir.model,name:stock_lot_loss.model_stock_pack_operation_lot
+msgid "Lot/Serial number for pack ops"
+msgstr "Lot/Numéro de série pour l'opération"
+
+#. module: stock_lot_loss
+#: code:addons/stock_lot_loss/models/stock_pack_operation.py:75
+#, python-format
+msgid "No qty to block."
+msgstr "Aucune quantité à bloquer pour rupture."
+
+#. module: stock_lot_loss
+#: model:ir.model.fields,field_description:stock_lot_loss.field_stock_pack_operation_skip_lot_pack_lot_ids
+msgid "Pack lot ids"
+msgstr "Lot"
+
+#. module: stock_lot_loss
+#: code:addons/stock_lot_loss/wizards/stock_pack_operation_skip_lot.py:40
+#, python-format
+msgid "Pack operation and the lot to skip are required informations"
+msgstr "Colisage et lot en rupture sont requis"
+
+#. module: stock_lot_loss
+#: model:ir.model.fields,field_description:stock_lot_loss.field_stock_pack_operation_skip_lot_pack_operation_id
+msgid "Pack operation id"
+msgstr "Colisage"
+
+#. module: stock_lot_loss
+#: model:ir.model,name:stock_lot_loss.model_stock_pack_operation
+msgid "Packing Operation"
+msgstr "Colisage"
+
+#. module: stock_lot_loss
+#: model:ir.ui.view,arch_db:stock_lot_loss.stock_picking_form_view
+msgid "Rupture"
+msgstr "Rupture"
+
+#. module: stock_lot_loss
+#: model:stock.picking.type,name:stock_lot_loss.stock_picking_type_23
+msgid "Ruptures"
+msgstr "Ruptures"
+
+#. module: stock_lot_loss
+#: code:addons/stock_lot_loss/models/stock_pack_operation.py:133
+#, python-format
+msgid "Select Lot/Serial Number to skip"
+msgstr "Sélectionner le Lot/Numéro de série en rupture"
+
+#. module: stock_lot_loss
+#: model:ir.ui.view,arch_db:stock_lot_loss.stock_pack_operation_skip_lot_form_view
+msgid "Skip"
+msgstr "Ignorer"
+
+#. module: stock_lot_loss
+#: model:ir.ui.view,arch_db:stock_lot_loss.stock_pack_operation_skip_lot_form_view
+msgid "Skip pack operation for lot"
+msgstr "Déclarer une rupture sur un Lot/Numéro de série"
+
+#. module: stock_lot_loss
+#: code:addons/stock_lot_loss/models/stock_pack_operation.py:34
+#, python-format
+msgid "You are not allowed to declare missing quantities"
+msgstr "Vous n'êtes pas autorisé à déclarer une rupture"
+
+#. module: stock_lot_loss
+#: model:ir.model,name:stock_lot_loss.model_stock_pack_operation_skip_lot
+msgid "stock.pack.operation.skip.lot"
+msgstr "Déclaration d'un Lot/Numéro de série en rupture"
