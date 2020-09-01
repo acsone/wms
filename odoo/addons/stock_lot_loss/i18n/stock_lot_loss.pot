@@ -14,6 +14,11 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: stock_lot_loss
+#: model:ir.ui.view,arch_db:stock_lot_loss.stock_picking_form_view
+msgid "Are you sure the product is out of stock?"
+msgstr ""
+
+#. module: stock_lot_loss
 #: model:ir.ui.view,arch_db:stock_lot_loss.stock_pack_operation_skip_lot_form_view
 msgid "Cancel"
 msgstr ""
