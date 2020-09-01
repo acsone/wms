@@ -167,7 +167,7 @@ msgid "Qty Remaining"
 msgstr "Qté Restante"
 
 #. module: stock_receive_lot
-#: code:addons/stock_receive_lot/wizards/stock.py:253
+#: code:addons/stock_receive_lot/wizards/stock.py:259
 #, python-format
 msgid "Quantity must be greater than 0"
 msgstr ""
@@ -194,7 +194,7 @@ msgid "Source Document"
 msgstr "Document d'origine"
 
 #. module: stock_receive_lot
-#: code:addons/stock_receive_lot/wizards/stock.py:314
+#: code:addons/stock_receive_lot/wizards/stock.py:320
 #, python-format
 msgid "This lot is not in the list of expected lots"
 msgstr ""
@@ -228,7 +228,7 @@ msgstr ""
 
 #. module: stock_receive_lot
 #: code:addons/stock_receive_lot/wizards/stock.py:169
-#: code:addons/stock_receive_lot/wizards/stock.py:256
+#: code:addons/stock_receive_lot/wizards/stock.py:262
 #, python-format
 msgid "You cannot receive more than the expected remaining quantity"
 msgstr ""
