@@ -5,5 +5,5 @@ cc @jbaudoux
 
 /label ~"needs review"
 /assign @laurent.mignon
-/milestone %1.55
+/milestone %1.56
 /target_branch master
