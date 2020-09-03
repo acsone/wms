@@ -32,17 +32,19 @@
         - git am "$(git format-patch -1 7d3a0282566d3b1b5f8ecc398db94a991150678c -o ../patches)"
           # At sale order confirmation, run all procurements at once (performance)
         - git am "$(git format-patch -1 f291979f6af6d7e11434da3fbf66b5a70d537eb2 -o ../patches)"
-         # Fix base amount for global_rounding on invoice tax #39212
+          # Fix base amount for global_rounding on invoice tax #39212
         - git am "$(git format-patch -1 f29058075bad5eb50b7ffdb4b1e19984b9ae4316 -o ../patches)"
-         # Make procurement_jit not autoinstallable
+          # Make procurement_jit not autoinstallable
         - git am "$(git format-patch -1 eb0a1feed6940fa720aca2e85f00111888b92b58 -o ../patches)"
-         # models: enable prefetching feedback when using mapped()
+          # models: enable prefetching feedback when using mapped()
         - git am "$(git format-patch -1 e2e537f247cdd7def87b90d8e91e7e1d58ad5a47 -o ../patches)"
-         # TO REMOVE once refs/pull/30686/head is fully included
-         # [IMP] models: improve code of read()
+          # TO REMOVE once refs/pull/30686/head is fully included
+          # [IMP] models: improve code of read()
         - git am "$(git format-patch -1 0004b9ebef4c6deb3333c8b0b48b893fcd37e1ec -o ../patches)"
-         # [IMP] stock: Disable translation on product qty computation
+          # [IMP] stock: Disable translation on product qty computation
         - git am "$(git format-patch -1 ca10dfc3c4340bd8e058397a50895addb2be20f0 -o ../patches)"
-         # [FIX] models: more than one prefetch in onchange 
+          # [FIX] models: more than one prefetch in onchange 
         - git am "$(git format-patch -1 9024cbd40bce780f360600853c44bfb1d27c208b -o ../patches)"
+          #  [FIX] orm: Ensure prefetch working when traversing multi level relation
+          git am "$(git format-patch -1 81022c7e3a22d56eec11604c88359ce1dbe3326b -o ../patches)"
     target: acsone 10.0-alc_master
