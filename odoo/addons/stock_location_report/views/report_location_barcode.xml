@@ -26,27 +26,33 @@
 </template>
 
 <template id="stock_location_report.barcode_items">
-    <div t-foreach="docs" t-as="o" t-att-class="'barcode_label barcode_label_%s %s' % (o.height, o.kind)">
-        <t t-if="o.barcode"><t t-set="content" t-value="o.barcode"/></t>
+    <div t-foreach="docs" t-as="o"  t-att-class="'container container_%s %s' % (o.height, o.kind)">
         <t t-if="not o.barcode"><t t-set="content" t-value="'L#%s' % o.name"/></t>
         <t t-set="content" t-value="content.replace('#', '%%23')"/>
-        <div class="barcode_name"><t t-esc="o.name[0:2]"/> <t t-esc="o.name[2:4]"/> <t t-esc="o.name[4:]"/></div>
-        <div class="barcode_checksum">
-            <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', content, 425, 73)" class="barcode"/>
-            <div t-esc="o.bin_checksum_1"/>
+        <div class="barcode_name">
+            <t t-esc="o.name[0:2]"/> <t t-esc="o.name[2:4]"/> <t t-esc="o.name[4:]"/>
         </div>
+        <div class="barcode_checksum">
+            <div t-esc="o.bin_checksum_1"/>
+
+        </div> 
+        <div class="barcode">
+            <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', content, 425, 73)"/>
+        </div> 
     </div>
 </template>
 
 <template id="stock_location_report.qrcode_items">
-    <div t-foreach="docs" t-as="o" t-att-class="'barcode_label barcode_label_%s %s' % (o.height, o.kind)">
+    <div t-foreach="docs" t-as="o" t-att-class="'container container_%s %s' % (o.height, o.kind)">
         <t t-if="o.barcode"><t t-set="content" t-value="o.barcode"/></t>
         <t t-if="not o.barcode"><t t-set="content" t-value="'L#%s' % o.name"/></t>
         <t t-set="content" t-value="content.replace('#', '%%23')"/>
-        <img t-att-src="'/report/qrcode/?value=%s&amp;size=5&amp;border=1' % content" class="barcode"/>
-
-        <div class="barcode_name"><t t-esc="o.name[0:2]"/> <t t-esc="o.name[2:4]"/> <t t-esc="o.name[4:]"/></div>
-
+        <div class="barcode">
+            <img t-att-src="'/report/qrcode/?value=%s&amp;size=5&amp;border=1' % content"/>
+        </div>
+        <div class="barcode_name">
+            <t t-esc="o.name[0:2]"/> <t t-esc="o.name[2:4]"/> <t t-esc="o.name[4:]"/>
+        </div>
         <div class="barcode_checksum">
             <div t-esc="o.bin_checksum_1"/>
             <div t-esc="o.bin_checksum_2"/>
