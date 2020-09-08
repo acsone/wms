@@ -74,6 +74,7 @@
         "base_geolocalize_openstreetmap",
         "geoengine_base_geolocalize",
         "base_geoengine",
+        "sale_stock_picking_return_fees_invoicing",
         # specific
         # "alc_geo_delivery_rounds",
         "account_move_productcateg",

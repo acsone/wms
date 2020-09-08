@@ -18,5 +18,7 @@ odoo10-addon-report-csv @ git+https://github.com/acsone/reporting-engine@10.0-ba
 odoo10-addon-account-banking-mandate @ git+https://github.com/oca/bank-payment.git@refs/pull/727/head#subdirectory=setup/account_banking_mandate
 
 # oca/product-attribute
-odoo10-addon-stock-production-lot-expiry @ git+https://github.com/product-attribute/bank-payment.git@refs/pull/670/head#subdirectory=setup/stock_production_lot_expiry
+odoo10-addon-stock-production-lot-expiry @ git+https://github.com/oca/product-attribute.git@refs/pull/670/head#subdirectory=setup/stock_production_lot_expiry
 
+# oca/account-invoicing
+odoo10-addon-sale-stock-picking-return-fees-invoicing @ git+https://github.com/oca/account-invoicing.git@refs/pull/784/head#subdirectory=setup/sale_stock_picking_return_fees_invoicing
