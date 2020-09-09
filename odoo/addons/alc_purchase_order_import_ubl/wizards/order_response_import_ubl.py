@@ -15,13 +15,15 @@ class OrderResponseImport(models.TransientModel):
         alc_purchase_order_ubl
         """
         res = super(OrderResponseImport, self).ubl_parse_party(party_node, ns)
-        partner_identification_xpath = party_node.xpath(
+        partner_identification_xpaths = party_node.xpath(
             "cac:PartyIdentification/cbc:ID", namespaces=ns
         )
-        if not partner_identification_xpath or not partner_identification_xpath[0].text:
-            return res
-        is_vat = "VAT" in partner_identification_xpath[0].attrib.get("schemeName")
-        if not is_vat:
-            return res
-        res["vat"] = partner_identification_xpath[0].text
+        for identification_xpath in partner_identification_xpaths:
+            is_vat = "VAT" in identification_xpath.attrib.get("schemeName").upper()
+            if not is_vat:
+                continue
+            value = identification_xpath.text
+            if value:
+                res["vat"] = value
+                break
         return res

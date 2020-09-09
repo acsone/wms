@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<OrderResponse xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns="urn:oasis:names:specification:ubl:schema:xsd:OrderResponse-2">
+  <cbc:UBLVersionID>2.1</cbc:UBLVersionID>
+  <cbc:ID>PO07337</cbc:ID>
+  <cbc:IssueDate>2020-02-04</cbc:IssueDate>
+  <cbc:IssueTime>22:10:30</cbc:IssueTime>
+  <cbc:OrderResponseCode>{order_response_code}</cbc:OrderResponseCode>
+  <cbc:Note>Note1</cbc:Note>
+  <cbc:Note>Note2</cbc:Note>
+  <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
+  <cac:OrderReference>
+        <cbc:ID>{order_id}</cbc:ID>
+  </cac:OrderReference>
+  <cac:SellerSupplierParty>
+    <cbc:CustomerAssignedAccountID>79201</cbc:CustomerAssignedAccountID>
+    <cac:Party>
+      <cac:PartyIdentification>
+        <cbc:ID schemeName="TEST">TEST</cbc:ID>
+      </cac:PartyIdentification>
+      <cac:PartyIdentification>
+        <cbc:ID schemeName="BE:VAT">BE0477472701</cbc:ID>
+      </cac:PartyIdentification>
+      <cac:PartyName>
+        <cbc:Name>Test</cbc:Name>
+      </cac:PartyName>
+    </cac:Party>
+  </cac:SellerSupplierParty>
+  <cac:BuyerCustomerParty>
+    <cac:Party>
+      <cbc:WebsiteURI>http://www.my-company.be</cbc:WebsiteURI>
+      <cac:PartyIdentification>
+        <cbc:ID schemeName="TEST">TEST</cbc:ID>
+      </cac:PartyIdentification>
+      <cac:PartyIdentification>
+        <cbc:ID schemeName="BE:VAT">BE0421801233</cbc:ID>
+      </cac:PartyIdentification>
+      <cac:PartyName>
+        <cbc:Name>Test</cbc:Name>
+      </cac:PartyName>
+    </cac:Party>
+  </cac:BuyerCustomerParty>
+  <cac:OrderLine>
+    <cac:LineItem>
+      <cbc:ID>{line_1_id}</cbc:ID>
+      <cbc:Note>line_1 Note1</cbc:Note>
+      <cbc:Note>line_1 Note2</cbc:Note>
+      <cbc:Quantity unitCode="C62">{line_1_qty}</cbc:Quantity>
+      <cbc:MaximumBackorderQuantity>{line_1_backorder_qty}</cbc:MaximumBackorderQuantity>
+      <cbc:LineStatusCode>{line_1_status_code}</cbc:LineStatusCode>
+      <cbc:LineExtensionAmount currencyID="EUR">228.2</cbc:LineExtensionAmount>
+      <cac:Price>
+        <cbc:PriceAmount currencyID="EUR">45.64</cbc:PriceAmount>
+        <cbc:BaseQuantity unitCode="C62">1</cbc:BaseQuantity>
+      </cac:Price>
+      <cac:Item>
+        <cbc:Description>[10016098] CYTOPOINT 10MG 2x1ml</cbc:Description>
+        <cbc:Name>CYTOPOINT 10MG 2x1ml</cbc:Name>
+        <cac:SellersItemIdentification>
+          <cbc:ID>10016098</cbc:ID>
+        </cac:SellersItemIdentification>
+
+      </cac:Item>
+    </cac:LineItem>
+  </cac:OrderLine>
+  <cac:OrderLine>
+    <cac:LineItem>
+      <cbc:ID>{line_2_id}</cbc:ID>
+      <cbc:Note>line_2 Note1</cbc:Note>
+      <cbc:Note>line_2 Note2</cbc:Note>
+      <cbc:Quantity unitCode="C62">{line_2_qty}</cbc:Quantity>
+      <cbc:MaximumBackorderQuantity>{line_2_backorder_qty}</cbc:MaximumBackorderQuantity>
+      <cbc:LineStatusCode>{line_2_status_code}</cbc:LineStatusCode>
+      <cbc:LineExtensionAmount currencyID="EUR">1117.07</cbc:LineExtensionAmount>
+      <cac:Price>
+        <cbc:PriceAmount currencyID="EUR">65.71</cbc:PriceAmount>
+        <cbc:BaseQuantity unitCode="C62">1</cbc:BaseQuantity>
+      </cac:Price>
+      <cac:Item>
+        <cbc:Description>[10016099] CYTOPOINT 20MG 2x1ml</cbc:Description>
+        <cbc:Name>CYTOPOINT 20MG 2x1ml</cbc:Name>
+        <cac:SellersItemIdentification>
+          <cbc:ID>10016099</cbc:ID>
+        </cac:SellersItemIdentification>
+      </cac:Item>
+    </cac:LineItem>
+  </cac:OrderLine>
+</OrderResponse>
