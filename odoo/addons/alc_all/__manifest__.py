@@ -76,6 +76,7 @@
         "base_geoengine",
         "sale_stock_picking_return_fees_invoicing",
         # specific
+        "alc_running_env",
         # "alc_geo_delivery_rounds",
         "account_move_productcateg",
         "account_payment_order_background",
