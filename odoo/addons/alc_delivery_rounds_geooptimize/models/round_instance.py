@@ -293,6 +293,7 @@ class RoundInstance(models.Model):
         """
         self.env.cr.execute(sql, (self.id,))
         ids = [i[0] for i in self.env.cr.fetchall()]
+        ids.sort()
         return self.env["res.partner"].browse(ids)
 
     def _generate_optimization_request(self):
@@ -377,8 +378,9 @@ class RoundInstance(models.Model):
     def _generate_optimization_resources(self, cfg):
         address = self.warehouse_id.partner_id
         pattern = "%02d:%02d:00"
-        hour = math.floor(self.stat_time_loading)
-        min = round((self.stat_time_loading % 1) * 60)
+        time_loading = self.stat_time_loading or self._compute_stat_time_loading()
+        hour = math.floor(time_loading)
+        min = round((time_loading % 1) * 60)
         if min == 60:
             min = 0
             hour += 1

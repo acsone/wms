@@ -42,6 +42,7 @@ class ResPartner(models.Model):
             and not vals["use_specific_delivery_duration"]
         ):
             vals["specific_delivery_duration"] = False
+            self.invalidate_cache(["delivery_duration"], self.ids)
         return super(ResPartner, self).write(vals)
 
     def _compute_delivery_duration(self):

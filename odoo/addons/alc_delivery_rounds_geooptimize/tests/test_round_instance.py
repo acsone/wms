@@ -148,7 +148,7 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
 
     def assertJsonEqual(self, expected, value):
         expected_str = json.dumps(expected, sort_keys=True)
-        value_str = json.dumps(expected, sort_keys=True)
+        value_str = json.dumps(value, sort_keys=True)
         self.assertEqual(expected_str, value_str)
 
     def test_00(self):
@@ -447,6 +447,7 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
         )
         self.assertEqual(self.delivery_round_1.instance_customer_ids[2].rank, 3)
 
+    @freeze_time("2020-01-01 07:10:00")
     def test_10(self):
         """
         Data:
@@ -458,58 +459,65 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
         """
         res = self.delivery_round_1._generate_optimization_request()
         self.maxDiff = 2000
-        shippings = self.delivery_round_1.shipping_ids
-
+        partner_ids = self.delivery_round_1.shipping_ids.mapped("partner_id.id")
+        partner_ids.sort()
+        partners = self.env["res.partner"].browse(partner_ids)
         expected = {
-            "depots": [{"x": 0.0, "y": 0.0}],
+            "beginDate": "2017-01-01",
+            "countryCode": "BE",
+            "depots": [{"id": "dep_1", "x": 5.2758074, "y": 50.5825464}],
             "language": u"en_US",
             "options": {
-                "maxOptimDuration": "00:00:01",
+                "maxOptimDuration": "00:01:30",
                 "vehicleCode": "deliveryIntermediateVehicle",
             },
             "orders": [
                 {
-                    "customerId": shippings[0].partner_id.ref,
+                    "customerId": partners[0].ref,
                     "fixedVisitDuration": "00:00:10",
-                    "id": shippings[0].partner_id.id,
-                    "label": shippings[0].partner_id.name,
+                    "id": partners[0].id,
+                    "label": partners[0].name,
                     "phone": "",
                     "type": 0,
-                    "x": shippings[0].partner_id.partner_longitude,
-                    "y": shippings[0].partner_id.partner_latitude,
+                    "x": partners[0].partner_longitude,
+                    "y": partners[0].partner_latitude,
                 },
                 {
-                    "customerId": shippings[1].partner_id.ref,
+                    "customerId": partners[1].ref,
                     "fixedVisitDuration": "00:00:10",
-                    "id": shippings[1].partner_id.id,
-                    "label": shippings[1].partner_id.name,
+                    "id": partners[1].id,
+                    "label": partners[1].name,
                     "phone": "",
                     "type": 0,
-                    "x": shippings[1].partner_id.partner_longitude,
-                    "y": shippings[1].partner_id.partner_latitude,
+                    "x": partners[1].partner_longitude,
+                    "y": partners[1].partner_latitude,
                 },
                 {
-                    "customerId": shippings[2].partner_id.ref,
+                    "customerId": partners[2].ref,
                     "fixedVisitDuration": "00:00:10",
-                    "id": shippings[2].partner_id.id,
-                    "label": shippings[2].partner_id.name,
+                    "id": partners[2].id,
+                    "label": partners[2].name,
                     "phone": "",
                     "type": 0,
-                    "x": shippings[2].partner_id.partner_longitude,
-                    "y": shippings[2].partner_id.partner_latitude,
+                    "x": partners[2].partner_longitude,
+                    "y": partners[2].partner_latitude,
                 },
             ],
             "resources": [
                 {
-                    "endX": 0.0,
-                    "endY": 0.0,
+                    "endX": 5.2758074,
+                    "endY": 50.5825464,
                     "fixedLoadingDuration": "01:40:00",
+                    "globalCapacity": 9999,
+                    "id": "D1",
                     "loadBeforeDeparture": True,
+                    "mobileLogin": "d1@alcyonbelux.be",
                     "noReload": True,
                     "openStart": False,
-                    "startX": 0.0,
-                    "startY": 0.0,
-                    "workStartTime": "00:00:00",
+                    "startX": 5.2758074,
+                    "startY": 50.5825464,
+                    "useAllCapacities": False,
+                    "workStartTime": "08:11:00",
                 }
             ],
             "simulationName": self.delivery_round_1.display_name,
@@ -805,6 +813,7 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
                 "09:01",
             )
 
+    @freeze_time("2020-01-01 07:10:00")
     def test_21(self):
         """
         Data:
@@ -827,68 +836,77 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
         )
 
         res = self.delivery_round_1._generate_optimization_request()
-        shippings = self.delivery_round_1.shipping_ids
+        partner_ids = self.delivery_round_1.shipping_ids.mapped("partner_id.id")
+        partner_ids.sort()
+        partners = self.env["res.partner"].browse(partner_ids)
 
         expected = {
-            "depots": [{"x": 0.0, "y": 0.0}],
+            "beginDate": "2017-01-01",
+            "countryCode": "BE",
+            "depots": [{"id": "dep_1", "x": 5.2758074, "y": 50.5825464}],
             "language": u"en_US",
             "options": {
-                "maxOptimDuration": "00:00:01",
+                "maxOptimDuration": "00:01:30",
                 "vehicleCode": "deliveryIntermediateVehicle",
             },
             "orders": [
                 {
-                    "customerId": shippings[0].partner_id.id,
+                    "customerId": partners[0].ref,
+                    "fixedVisitDuration": "00:00:10",
+                    "id": partners[0].id,
+                    "label": partners[0].name,
+                    "phone": "",
+                    "type": 0,
+                    "x": partners[0].partner_longitude,
+                    "y": partners[0].partner_latitude,
+                },
+                {
+                    "customerId": partners[1].ref,
+                    "fixedVisitDuration": "00:00:10",
+                    "id": partners[1].id,
+                    "label": partners[1].name,
+                    "phone": "",
+                    "type": 0,
+                    "x": partners[1].partner_longitude,
+                    "y": partners[1].partner_latitude,
+                },
+                {
+                    "customerId": partners[2].ref,
                     "customDataMap": {
-                        "notes": shippings[0].partner_id.comment,
-                        "address": shippings[0].partner_id.contact_address,
+                        "notes": partners[2].comment,
+                        "address": partners[2].contact_address,
                     },
                     "fixedVisitDuration": "00:00:10",
-                    "id": shippings[0].partner_id.id,
-                    "label": shippings[0].partner_id.name,
+                    "id": partners[2].id,
+                    "label": partners[2].name,
                     "phone": "",
                     "type": 0,
-                    "x": shippings[0].partner_id.partner_longitude,
-                    "y": shippings[0].partner_id.partner_latitude,
-                },
-                {
-                    "customerId": shippings[1].partner_id.id,
-                    "fixedVisitDuration": "00:00:10",
-                    "id": shippings[1].partner_id.id,
-                    "label": shippings[1].partner_id.name,
-                    "phone": "",
-                    "type": 0,
-                    "x": shippings[1].partner_id.partner_longitude,
-                    "y": shippings[1].partner_id.partner_latitude,
-                },
-                {
-                    "customerId": shippings[2].partner_id.id,
-                    "fixedVisitDuration": "00:00:10",
-                    "id": shippings[2].partner_id.id,
-                    "label": shippings[2].partner_id.name,
-                    "phone": "",
-                    "type": 0,
-                    "x": shippings[2].partner_id.partner_longitude,
-                    "y": shippings[2].partner_id.partner_latitude,
+                    "x": partners[2].partner_longitude,
+                    "y": partners[2].partner_latitude,
                 },
             ],
             "resources": [
                 {
-                    "endX": 0.0,
-                    "endY": 0.0,
+                    "endX": 5.2758074,
+                    "endY": 50.5825464,
                     "fixedLoadingDuration": "01:40:00",
+                    "globalCapacity": 9999,
+                    "id": "D1",
                     "loadBeforeDeparture": True,
+                    "mobileLogin": "d1@alcyonbelux.be",
                     "noReload": True,
                     "openStart": False,
-                    "startX": 0.0,
-                    "startY": 0.0,
-                    "workStartTime": "00:00:00",
+                    "startX": 5.2758074,
+                    "startY": 50.5825464,
+                    "useAllCapacities": False,
+                    "workStartTime": "08:11:00",
                 }
             ],
             "simulationName": self.delivery_round_1.display_name,
         }
         self.assertJsonEqual(res, expected)
 
+    @freeze_time("2020-01-01 07:10:00")
     def test_22(self):
         """
         Data:
@@ -911,69 +929,73 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
                 fixedVisitDuration[self.partner1.id] = "00:00:50"
             else:
                 fixedVisitDuration[shipping.partner_id.id] = "00:00:10"
+        partner_ids = self.delivery_round_1.shipping_ids.mapped("partner_id.id")
+        partner_ids.sort()
+        partners = self.env["res.partner"].browse(partner_ids)
 
         expected = {
-            "depots": [{"x": 0.0, "y": 0.0}],
+            "beginDate": "2017-01-01",
+            "countryCode": "BE",
+            "depots": [{"id": "dep_1", "x": 5.2758074, "y": 50.5825464}],
             "language": u"en_US",
             "options": {
-                "maxOptimDuration": "00:00:01",
+                "maxOptimDuration": "00:01:30",
                 "vehicleCode": "deliveryIntermediateVehicle",
             },
             "orders": [
                 {
-                    "customerId": shippings[0].partner_id.id,
-                    "fixedVisitDuration": fixedVisitDuration[
-                        shippings[0].partner_id.id
-                    ],
-                    "id": shippings[0].partner_id.id,
-                    "label": shippings[0].partner_id.name,
+                    "customerId": partners[0].ref,
+                    "fixedVisitDuration": fixedVisitDuration[partners[0].id],
+                    "id": partners[0].id,
+                    "label": partners[0].name,
                     "phone": "",
                     "type": 0,
-                    "x": shippings[0].partner_id.partner_longitude,
-                    "y": shippings[0].partner_id.partner_latitude,
+                    "x": partners[0].partner_longitude,
+                    "y": partners[0].partner_latitude,
                 },
                 {
-                    "customerId": shippings[1].partner_id.id,
-                    "fixedVisitDuration": fixedVisitDuration[
-                        shippings[1].partner_id.id
-                    ],
-                    "id": shippings[1].partner_id.id,
-                    "label": shippings[1].partner_id.name,
+                    "customerId": partners[1].ref,
+                    "fixedVisitDuration": fixedVisitDuration[partners[1].id],
+                    "id": partners[1].id,
+                    "label": partners[1].name,
                     "phone": "",
                     "type": 0,
-                    "x": shippings[1].partner_id.partner_longitude,
-                    "y": shippings[1].partner_id.partner_latitude,
+                    "x": partners[1].partner_longitude,
+                    "y": partners[1].partner_latitude,
                 },
                 {
-                    "customerId": shippings[2].partner_id.id,
-                    "fixedVisitDuration": fixedVisitDuration[
-                        shippings[2].partner_id.id
-                    ],
-                    "id": shippings[2].partner_id.id,
-                    "label": shippings[2].partner_id.name,
+                    "customerId": partners[2].ref,
+                    "fixedVisitDuration": fixedVisitDuration[partners[2].id],
+                    "id": partners[2].id,
+                    "label": partners[2].name,
                     "phone": "",
                     "type": 0,
-                    "x": shippings[2].partner_id.partner_longitude,
-                    "y": shippings[2].partner_id.partner_latitude,
+                    "x": partners[2].partner_longitude,
+                    "y": partners[2].partner_latitude,
                 },
             ],
             "resources": [
                 {
-                    "endX": 0.0,
-                    "endY": 0.0,
+                    "endX": 5.2758074,
+                    "endY": 50.5825464,
                     "fixedLoadingDuration": "01:40:00",
+                    "globalCapacity": 9999,
+                    "id": "D1",
                     "loadBeforeDeparture": True,
+                    "mobileLogin": "d1@alcyonbelux.be",
                     "noReload": True,
                     "openStart": False,
-                    "startX": 0.0,
-                    "startY": 0.0,
-                    "workStartTime": "00:00:00",
+                    "startX": 5.2758074,
+                    "startY": 50.5825464,
+                    "useAllCapacities": False,
+                    "workStartTime": "08:11:00",
                 }
             ],
             "simulationName": self.delivery_round_1.display_name,
         }
         self.assertJsonEqual(res, expected)
 
+    @freeze_time("2020-01-01 07:10:00")
     def test_23(self):
         """
         Data:
@@ -996,63 +1018,66 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
                 fixedVisitDuration[self.partner1.id] = "00:00:50"
             else:
                 fixedVisitDuration[shipping.partner_id.id] = "00:00:10"
+        partner_ids = self.delivery_round_1.shipping_ids.mapped("partner_id.id")
+        partner_ids.sort()
+        partners = self.env["res.partner"].browse(partner_ids)
 
         expected = {
-            "depots": [{"x": 0.0, "y": 0.0}],
+            "beginDate": "2017-01-01",
+            "countryCode": "BE",
+            "depots": [{"id": "dep_1", "x": 5.2758074, "y": 50.5825464}],
             "language": u"en_US",
             "options": {
-                "maxOptimDuration": "00:00:01",
+                "maxOptimDuration": "00:01:30",
                 "vehicleCode": "deliveryIntermediateVehicle",
             },
             "orders": [
                 {
-                    "customerId": shippings[0].partner_id.id,
-                    "fixedVisitDuration": fixedVisitDuration[
-                        shippings[0].partner_id.id
-                    ],
-                    "id": shippings[0].partner_id.id,
-                    "label": shippings[0].partner_id.name,
+                    "customerId": partners[0].ref,
+                    "fixedVisitDuration": fixedVisitDuration[partners[0].id],
+                    "id": partners[0].id,
+                    "label": partners[0].name,
                     "phone": "",
                     "type": 0,
-                    "x": shippings[0].partner_id.partner_longitude,
-                    "y": shippings[0].partner_id.partner_latitude,
+                    "x": partners[0].partner_longitude,
+                    "y": partners[0].partner_latitude,
                 },
                 {
-                    "customerId": shippings[1].partner_id.id,
-                    "fixedVisitDuration": fixedVisitDuration[
-                        shippings[1].partner_id.id
-                    ],
-                    "id": shippings[1].partner_id.id,
-                    "label": shippings[1].partner_id.name,
+                    "customerId": partners[1].ref,
+                    "fixedVisitDuration": fixedVisitDuration[partners[1].id],
+                    "id": partners[1].id,
+                    "label": partners[1].name,
                     "phone": "",
                     "type": 0,
-                    "x": shippings[1].partner_id.partner_longitude,
-                    "y": shippings[1].partner_id.partner_latitude,
+                    "x": partners[1].partner_longitude,
+                    "y": partners[1].partner_latitude,
                 },
                 {
-                    "customerId": shippings[2].partner_id.id,
-                    "fixedVisitDuration": fixedVisitDuration[
-                        shippings[2].partner_id.id
-                    ],
-                    "id": shippings[2].partner_id.id,
-                    "label": shippings[2].partner_id.name,
+                    "customerId": partners[2].ref,
+                    "fixedVisitDuration": fixedVisitDuration[partners[2].id],
+                    "id": partners[2].id,
+                    "label": partners[2].name,
                     "phone": "",
                     "type": 0,
-                    "x": shippings[2].partner_id.partner_longitude,
-                    "y": shippings[2].partner_id.partner_latitude,
+                    "x": partners[2].partner_longitude,
+                    "y": partners[2].partner_latitude,
                 },
             ],
             "resources": [
                 {
-                    "endX": 0.0,
-                    "endY": 0.0,
+                    "endX": 5.2758074,
+                    "endY": 50.5825464,
                     "fixedLoadingDuration": "01:40:00",
+                    "globalCapacity": 9999,
+                    "id": "D1",
                     "loadBeforeDeparture": True,
+                    "mobileLogin": "d1@alcyonbelux.be",
                     "noReload": True,
                     "openStart": False,
-                    "startX": 0.0,
-                    "startY": 0.0,
-                    "workStartTime": "00:00:00",
+                    "startX": 5.2758074,
+                    "startY": 50.5825464,
+                    "useAllCapacities": False,
+                    "workStartTime": "08:11:00",
                 }
             ],
             "simulationName": self.delivery_round_1.display_name,
@@ -1065,58 +1090,66 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
 
         res = self.delivery_round_1._generate_optimization_request()
         self.maxDiff = 2000
-        shippings = self.delivery_round_1.shipping_ids
+        partner_ids = self.delivery_round_1.shipping_ids.mapped("partner_id.id")
+        partner_ids.sort()
+        partners = self.env["res.partner"].browse(partner_ids)
 
         expected = {
-            "depots": [{"x": 0.0, "y": 0.0}],
-            "language": u"en_US",
+            "beginDate": "2017-01-01",
+            "countryCode": "BE",
+            "depots": [{"id": "dep_1", "x": 5.2758074, "y": 50.5825464}],
+            "language": "en_US",
             "options": {
-                "maxOptimDuration": "00:00:01",
+                "maxOptimDuration": "00:01:30",
                 "vehicleCode": "deliveryIntermediateVehicle",
             },
             "orders": [
                 {
-                    "customerId": shippings[0].partner_id.id,
+                    "customerId": partners[0].ref,
                     "fixedVisitDuration": "00:00:10",
-                    "id": shippings[0].partner_id.id,
-                    "label": shippings[0].partner_id.name,
+                    "id": partners[0].id,
+                    "label": partners[0].name,
                     "phone": "",
                     "type": 0,
-                    "x": shippings[0].partner_id.partner_longitude,
-                    "y": shippings[0].partner_id.partner_latitude,
+                    "x": partners[0].partner_longitude,
+                    "y": partners[0].partner_latitude,
                 },
                 {
-                    "customerId": shippings[1].partner_id.id,
+                    "customerId": partners[1].ref,
                     "fixedVisitDuration": "00:00:10",
-                    "id": shippings[1].partner_id.id,
-                    "label": shippings[1].partner_id.name,
+                    "id": partners[1].id,
+                    "label": partners[1].name,
                     "phone": "",
                     "type": 0,
-                    "x": shippings[1].partner_id.partner_longitude,
-                    "y": shippings[1].partner_id.partner_latitude,
+                    "x": partners[1].partner_longitude,
+                    "y": partners[1].partner_latitude,
                 },
                 {
-                    "customerId": shippings[2].partner_id.id,
+                    "customerId": partners[2].ref,
                     "fixedVisitDuration": "00:00:10",
-                    "id": shippings[2].partner_id.id,
-                    "label": shippings[2].partner_id.name,
+                    "id": partners[2].id,
+                    "label": partners[2].name,
                     "phone": "",
                     "type": 0,
-                    "x": shippings[2].partner_id.partner_longitude,
-                    "y": shippings[2].partner_id.partner_latitude,
+                    "x": partners[2].partner_longitude,
+                    "y": partners[2].partner_latitude,
                 },
             ],
             "resources": [
                 {
-                    "endX": 0.0,
-                    "endY": 0.0,
+                    "endX": 5.2758074,
+                    "endY": 50.5825464,
                     "fixedLoadingDuration": "01:40:00",
+                    "globalCapacity": 9999,
+                    "id": "D1",
                     "loadBeforeDeparture": True,
+                    "mobileLogin": "d1@alcyonbelux.be",
                     "noReload": True,
                     "openStart": False,
-                    "startX": 0.0,
-                    "startY": 0.0,
-                    "workStartTime": "00:00:00",
+                    "startX": 5.2758074,
+                    "startY": 50.5825464,
+                    "useAllCapacities": False,
+                    "workStartTime": "08:11:00",
                 }
             ],
             "simulationName": self.delivery_round_1.display_name,
