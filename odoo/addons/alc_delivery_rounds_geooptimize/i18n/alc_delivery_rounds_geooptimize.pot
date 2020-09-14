@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_delivery_rounds_geooptimize
-#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:498
+#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:500
 #, python-format
 msgid "%s: Optimization api call failed"
 msgstr ""
@@ -42,7 +42,7 @@ msgid "Aborted"
 msgstr ""
 
 #. module: alc_delivery_rounds_geooptimize
-#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:636
+#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:638
 #, python-format
 msgid "Can't export a not complete optimization for %s"
 msgstr ""
@@ -60,7 +60,7 @@ msgid "Change the default delivery duration for this specific partner"
 msgstr ""
 
 #. module: alc_delivery_rounds_geooptimize
-#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:509
+#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:511
 #, python-format
 msgid "Check geo optimization status for %s"
 msgstr ""
@@ -106,7 +106,7 @@ msgid "Error"
 msgstr ""
 
 #. module: alc_delivery_rounds_geooptimize
-#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:615
+#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:617
 #, python-format
 msgid "Export optimization result to operational planning for %s"
 msgstr ""
@@ -222,7 +222,7 @@ msgid "Optimization error message"
 msgstr ""
 
 #. module: alc_delivery_rounds_geooptimize
-#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:655
+#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:657
 #, python-format
 msgid "Optimization for %s exported to operational planning."
 msgstr ""
@@ -285,19 +285,19 @@ msgid "Success"
 msgstr ""
 
 #. module: alc_delivery_rounds_geooptimize
-#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:609
+#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:611
 #, python-format
 msgid "The delivery round %s will be exported to tha mobile App into background."
 msgstr ""
 
 #. module: alc_delivery_rounds_geooptimize
-#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:571
+#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:573
 #, python-format
 msgid "The following partner ids are not expected into the optimization result: %s"
 msgstr ""
 
 #. module: alc_delivery_rounds_geooptimize
-#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:563
+#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:565
 #, python-format
 msgid "The following partners are not found into the optimization result: %s"
 msgstr ""
