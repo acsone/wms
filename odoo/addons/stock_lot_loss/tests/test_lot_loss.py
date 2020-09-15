@@ -3,6 +3,7 @@
 # Copyright 2018 Okia SPRL <sylvain@okia.be>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
+from odoo.exceptions import UserError
 from odoo.tests.common import SavepointCase
 
 
@@ -583,3 +584,44 @@ class TestLotLoss(SavepointCase):
                 )
             )
         )
+
+    def test_03(self):
+        """
+        Data:
+            A picking with lines for un tracked products
+        Test case:
+            Skip operation on a completed pack op
+        Expected result:
+            No error nor new picking
+        """
+        self.initiate_values_no_tracking()
+        self.picking_2.with_context(round_autoset=False).action_assign()
+        with self.assertRaises(UserError), self.env.cr.savepoint():
+            for op in self.picking_2.pack_operation_ids:
+                op.qty_done = op.product_qty
+                op._skip_operation()
+        for op in self.picking_2.pack_operation_ids:
+            op.qty_done = op.product_qty
+            op._skip_operation(raise_if_nothing_to_block=False)
+
+    def test_04(self):
+        """
+        Data:
+            A picking with lines for tracked products
+        Test case:
+            Skip operation on a completed pack op
+        Expected result:
+            No error nor new picking
+        """
+        self.initiate_values()
+        self.picking_1.with_context(round_autoset=False).action_assign()
+        with self.assertRaises(UserError), self.env.cr.savepoint():
+            for op in self.picking_1.pack_operation_ids:
+                for lot in op.pack_lot_ids:
+                    lot.qty = lot.qty_todo
+                    op._skip_operation(pack_op_lot_id=lot)
+
+        for op in self.picking_1.pack_operation_ids:
+            for lot in op.pack_lot_ids:
+                lot.qty = lot.qty_todo
+                op._skip_operation(pack_op_lot_id=lot, raise_if_nothing_to_block=False)
