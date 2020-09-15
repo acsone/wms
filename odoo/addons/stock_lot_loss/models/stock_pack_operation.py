@@ -33,7 +33,14 @@ class StockPackOperation(models.Model):
         if any(not rec.is_action_missing_qty_allowed for rec in self):
             raise UserError(_("You are not allowed to declare missing quantities"))
 
-    def _skip_operation(self, pack_op_lot_id=None):
+    def _is_done(self, pack_op_lot_id=None):
+        self.ensure_one()
+        is_done = self.product_qty - self.qty_done <= 0
+        if pack_op_lot_id:
+            is_done = pack_op_lot_id.qty_todo - pack_op_lot_id.qty <= 0
+        return is_done
+
+    def _skip_operation(self, pack_op_lot_id=None, raise_if_nothing_to_block=True):
         """Unreserve the current move and recreate a new move with a different
         destination location. This method can be used if an operator
         wants to change the reserved moves (out of stock; scrap; ...)
@@ -41,6 +48,17 @@ class StockPackOperation(models.Model):
         :param pack_op_lot_id: stock.pack.operation.lot
         """
         self.ensure_one()
+        if self._is_done(pack_op_lot_id=pack_op_lot_id):
+            if raise_if_nothing_to_block:
+                raise UserError(_("No qty to block."))
+            else:
+                _logger.info(
+                    "No qty to block for product %s on picking %s",
+                    self.product_id.name,
+                    self.picking_id.name,
+                )
+                return
+
         moves = self.linked_move_operation_ids.mapped("move_id")
 
         # Unreserve all operations
@@ -72,7 +90,15 @@ class StockPackOperation(models.Model):
                 qty_done = self.qty_done
             qty_to_block = qty_available - qty_done
             if qty_to_block <= 0:
-                raise UserError(_("No qty to block."))
+                if raise_if_nothing_to_block:
+                    raise UserError(_("No qty to block."))
+                else:
+                    _logger.info(
+                        "No qty to block for product %s on picking %s",
+                        self.product_id.name,
+                        self.picking_id.name,
+                    )
+                    return
 
             # Create a move to block this qty
             # Send to a temporary location part of the non-pickable stock
