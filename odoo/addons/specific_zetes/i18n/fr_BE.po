@@ -98,12 +98,6 @@ msgstr ""
 "responsable"
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_itempick.py:314
-#, python-format
-msgid "Cannot reload the picking %s"
-msgstr "Impossible de recharger le picking %s"
-
-#. module: specific_zetes
 #: code:addons/specific_zetes/wizard/manage_uop.py:206
 #, python-format
 msgid "Cannot validate the UOP. Please give the passport to your manager"
@@ -334,7 +328,7 @@ msgid "Location Checksum Right"
 msgstr "Checksum emplacement droite"
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_itempick.py:421
+#: code:addons/specific_zetes/tools/domain_itempick.py:418
 #, python-format
 msgid "Location not found for the product %s"
 msgstr "Localisation non trouvé pour le produit %s"
@@ -741,7 +735,7 @@ msgstr "Certaines valeurs obligatoires manquantes: {}"
 
 #. module: specific_zetes
 #: code:addons/specific_zetes/tools/domain_itemmove.py:194
-#: code:addons/specific_zetes/tools/domain_itempick.py:339
+#: code:addons/specific_zetes/tools/domain_itempick.py:336
 #, python-format
 msgid "There is no lines for the picking %s"
 msgstr "There is no lines for the picking %s"
@@ -936,6 +930,9 @@ msgstr "view.picking.line"
 #: model:ir.model,name:specific_zetes.model_zetes_logger
 msgid "zetes.logger"
 msgstr "zetes.logger"
+
+#~ msgid "Cannot reload the picking %s"
+#~ msgstr "Impossible de recharger le picking %s"
 
 #~ msgid "change.lot"
 #~ msgstr "change.lot"

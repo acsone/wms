@@ -91,12 +91,6 @@ msgid "Cannot print labels. Please give the passport to your manager"
 msgstr ""
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_itempick.py:314
-#, python-format
-msgid "Cannot reload the picking %s"
-msgstr ""
-
-#. module: specific_zetes
 #: code:addons/specific_zetes/wizard/manage_uop.py:206
 #, python-format
 msgid "Cannot validate the UOP. Please give the passport to your manager"
@@ -323,7 +317,7 @@ msgid "Location Checksum Right"
 msgstr ""
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_itempick.py:421
+#: code:addons/specific_zetes/tools/domain_itempick.py:418
 #, python-format
 msgid "Location not found for the product %s"
 msgstr ""
@@ -731,7 +725,7 @@ msgstr ""
 
 #. module: specific_zetes
 #: code:addons/specific_zetes/tools/domain_itemmove.py:194
-#: code:addons/specific_zetes/tools/domain_itempick.py:339
+#: code:addons/specific_zetes/tools/domain_itempick.py:336
 #, python-format
 msgid "There is no lines for the picking %s"
 msgstr ""
