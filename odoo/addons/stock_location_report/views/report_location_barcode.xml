@@ -47,16 +47,32 @@
         <t t-if="o.barcode"><t t-set="content" t-value="o.barcode"/></t>
         <t t-if="not o.barcode"><t t-set="content" t-value="'L#%s' % o.name"/></t>
         <t t-set="content" t-value="content.replace('#', '%%23')"/>
-        <div class="barcode">
-            <img t-att-src="'/report/qrcode/?value=%s&amp;size=5&amp;border=1' % content"/>
-        </div>
-        <div class="barcode_name">
-            <t t-esc="o.name[0:2]"/> <t t-esc="o.name[2:4]"/> <t t-esc="o.name[4:]"/>
-        </div>
-        <div class="barcode_checksum">
-            <div t-esc="o.bin_checksum_1"/>
-            <div t-esc="o.bin_checksum_2"/>
-        </div>
+
+        <t t-if="o.name[4] != 'A'">
+            <div class="barcode_right">
+                <img t-att-src="'/report/qrcode/?value=%s&amp;size=5&amp;border=1' % content"/>
+            </div>
+            <div class="barcode_name_left">
+                <t t-esc="o.name[0:2]"/> <t t-esc="o.name[2:4]"/> <t t-esc="o.name[4:]"/>
+            </div>
+            <div class="barcode_checksum_left">
+                <div t-esc="o.bin_checksum_1"/>
+                <div t-esc="o.bin_checksum_2"/>
+            </div>
+        </t>
+
+        <t t-if="o.name[4] == 'A'">
+            <div class="barcode_name_right">
+                <t t-esc="o.name[0:2]"/> <t t-esc="o.name[2:4]"/> <t t-esc="o.name[4:]"/>
+            </div>
+            <div class="barcode_checksum_right">
+                <div t-esc="o.bin_checksum_1"/>
+                <div t-esc="o.bin_checksum_2"/>
+            </div>
+            <div class="barcode_left">
+                <img t-att-src="'/report/qrcode/?value=%s&amp;size=5&amp;border=1' % content"/>
+            </div>
+        </t>
     </div>
 </template>
 
