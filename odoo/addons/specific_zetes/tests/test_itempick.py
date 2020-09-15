@@ -275,6 +275,25 @@ class TestItempick(ZetesTest):
             self.env.ref("stock_lot_loss.stock_location_14019"),
         )
 
+    def test_requ_itempick_no_tracking_false_shortage(self):
+        # Here we declare a shortage but the request contains all the qty to pick
+        # in this case the code should not fails
+        domain = Itempick(self._default_header(), mock.MagicMock(name="Savepoint()"))
+        request_params = Parameters(domain, action="requ")
+        request_params.update(
+            {
+                "groupNum": self.picking_2.id,
+                "Cri01": None,
+                "Usf06": constants.OP_CUT,
+                "Usf02": str(self.picking_2.pack_operation_product_ids.id),
+                "Usf04": "%d" % self.picking_2.pack_operation_product_ids.product_qty,
+            }
+        )
+        result_str = domain.requ(request_params)
+        result = self.format_result(result_str)
+        self.assertEqual(result.respCode, str(constants.RESPONSE_CODE_NO_LINES))
+        self.assertFalse(result.respMsg)
+
     def test_requ_itempick_zero_check(self):
         """
         Test the ZeroCheck flag

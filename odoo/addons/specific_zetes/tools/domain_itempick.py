@@ -301,20 +301,17 @@ class Itempick(DomainInterface):
             with Savepoint(self.request.env.cr) as lot_savepoint:
                 try:
                     # Call the method to skip this operation
-                    pack_op._skip_operation(pack_op_lot_id=pack_lot)
+                    pack_op._skip_operation(
+                        pack_op_lot_id=pack_lot, raise_if_nothing_to_block=False
+                    )
                 except Exception as e:
                     lot_savepoint.rollback()
                     _logger.error(str(e))
-                    params.log(picking_id=picking_id, exception=e)
-
-                    result = Parameters(self, action="resp")
-                    result.update(
-                        {
-                            "respCode": constants.RESPONSE_CODE_ERROR,
-                            "respMsg": _("Cannot reload the picking %s") % picking_id,
-                        }
-                    )
-                    return result.format()
+                    # we can't return an error at this stage of the process
+                    # otherwise zetes/ the operator could resend the same request
+                    # and since this code block is into a savepoint all the
+                    # data are already stored into the DB (no rollback of the
+                    # modifications done before this code block)
 
         # Search all pack operations for this picking
         lines = self.request.env["stock.pack.operation"].search(
