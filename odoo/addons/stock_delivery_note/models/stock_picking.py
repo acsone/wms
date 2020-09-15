@@ -289,7 +289,9 @@ class StockPicking(models.Model):
                     vat = product.taxes_id.filtered(
                         lambda r: r.tax_group_id == vat_group
                     )
+
                 for quant in quants:
+
                     lines.append(
                         [
                             product.default_code or "",
@@ -297,11 +299,17 @@ class StockPicking(models.Model):
                             # Quantity computed from the quants
                             format_number(quant[1], 3),
                             #  Net HTVA price
-                            format_number(sol.price_reduce, 2),
+                            format_number(sol.price_reduce, 2)
+                            if not move_line.is_additional_move
+                            else "",
                             #  Brut HTVA price
-                            format_number(sol.price_unit, 2),
+                            format_number(sol.price_unit, 2)
+                            if not move_line.is_additional_move
+                            else "",
                             #  VAT rate, yes only the first one if present
-                            format_number(vat[0].amount if vat else 0, 1),
+                            format_number(vat[0].amount if vat else 0, 1)
+                            if not move_line.is_additional_move
+                            else "",
                             # Lots name
                             quant[0] or "",
                             format_use_date(quant[2] or ""),

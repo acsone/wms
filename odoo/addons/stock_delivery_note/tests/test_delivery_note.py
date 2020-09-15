@@ -45,6 +45,7 @@ class TestStockDeliveryNote(SavepointCase):
                 "type": "product",
             }
         )
+
         # Add some stock for p1 and p2
         inventory = cls.env["stock.inventory"].create(
             {
@@ -131,8 +132,12 @@ class TestStockDeliveryNote(SavepointCase):
         )
 
     @classmethod
-    def _create_and_transfer_picking(cls, partner, customer=None, lot_name=None):
+    def _create_and_transfer_picking(
+        cls, partner, product=None, customer=None, lot_name=None
+    ):
         lot_name = lot_name or str(uuid.uuid1())
+        if product is None:
+            product = cls.p1
         so = cls.env["sale.order"].create(
             {
                 "partner_id": partner.id,
@@ -143,8 +148,8 @@ class TestStockDeliveryNote(SavepointCase):
                         0,
                         0,
                         {
-                            "name": cls.p1.name,
-                            "product_id": cls.p1.id,
+                            "name": product.name,
+                            "product_id": product.id,
                             "product_uom": cls.env.ref("product.product_uom_unit").id,
                             "product_uom_qty": 10,
                             "price_unit": 50,
@@ -159,6 +164,7 @@ class TestStockDeliveryNote(SavepointCase):
         if customer:
             picking.customer_id = customer.id
         picking.action_assign()
+
         pack_operation = picking.pack_operation_product_ids
         pack_operation.write(
             {
