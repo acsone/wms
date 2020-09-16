@@ -8,11 +8,12 @@
     "category": "Stock",
     "depends": [
         "alc_b2c_partner",
+        "product_additional",
+        "product_expiry",
         "specific_data",
         "specific_sale",
-        "stock",
         "specific_stock",
-        "product_expiry",
+        "stock",
         "stock_expired",
     ],
     "data": [
