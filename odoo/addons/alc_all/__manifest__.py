@@ -88,6 +88,7 @@
         "alc_chronovet",
         "alc_chronovet_to_magento",
         "alc_chronovet_payment_globalization",
+        "alc_delivery_rounds_partner_geo_localize",
         "alc_edi_connector",
         "alc_product_uom_updatable",
         "alc_sale_invoicing_on_transfer",
