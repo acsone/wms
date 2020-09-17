@@ -29,7 +29,7 @@ class PurchaseOrder(models.Model):
                 if rec.state != "approved":
                     raise UserError(
                         _(
-                            "Sending UBL Order documet is only allowed in "
+                            "Sending UBL Order document is only allowed in "
                             "state approved"
                         )
                     )
