@@ -22,3 +22,6 @@ odoo10-addon-stock-production-lot-expiry @ git+https://github.com/oca/product-at
 
 # oca/account-invoicing
 odoo10-addon-sale-stock-restocking-fee-invoicing @ git+https://github.com/oca/account-invoicing.git@refs/pull/784/head#subdirectory=setup/sale_stock_restocking_fee_invoicing
+
+# oca/stock-logistics-warehouse
+odoo10-addon-stock-location-product-restriction @ git+https://github.com/oca/stock-logistics-warehouse.git@refs/pull/971/head#subdirectory=setup/stock_location_product_restriction
