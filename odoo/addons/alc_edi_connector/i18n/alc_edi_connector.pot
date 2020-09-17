@@ -329,7 +329,7 @@ msgstr ""
 #. module: alc_edi_connector
 #: code:addons/alc_edi_connector/models/purchase_order.py:31
 #, python-format
-msgid "Sending UBL Order documet is only allowed in state approved"
+msgid "Sending UBL Order document is only allowed in state approved"
 msgstr ""
 
 #. module: alc_edi_connector
