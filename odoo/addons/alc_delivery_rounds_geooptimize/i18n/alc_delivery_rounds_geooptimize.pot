@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_delivery_rounds_geooptimize
-#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:500
+#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:502
 #, python-format
 msgid "%s: Optimization api call failed"
 msgstr ""
@@ -42,7 +42,7 @@ msgid "Aborted"
 msgstr ""
 
 #. module: alc_delivery_rounds_geooptimize
-#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:638
+#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:640
 #, python-format
 msgid "Can't export a not complete optimization for %s"
 msgstr ""
@@ -60,7 +60,7 @@ msgid "Change the default delivery duration for this specific partner"
 msgstr ""
 
 #. module: alc_delivery_rounds_geooptimize
-#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:511
+#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:513
 #, python-format
 msgid "Check geo optimization status for %s"
 msgstr ""
@@ -106,7 +106,7 @@ msgid "Error"
 msgstr ""
 
 #. module: alc_delivery_rounds_geooptimize
-#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:617
+#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:619
 #, python-format
 msgid "Export optimization result to operational planning for %s"
 msgstr ""
@@ -115,6 +115,16 @@ msgstr ""
 #: model:ir.ui.view,arch_db:alc_delivery_rounds_geooptimize.round_instance_form_view
 #: model:ir.ui.view,arch_db:alc_delivery_rounds_geooptimize.view_round_instance_kanban
 msgid "Export to Mobile App"
+msgstr ""
+
+#. module: alc_delivery_rounds_geooptimize
+#: model:ir.model.fields,field_description:alc_delivery_rounds_geooptimize.field_stock_config_settings_geo_optimization_travel_penalty
+msgid "Fixed cost travelling/hour"
+msgstr ""
+
+#. module: alc_delivery_rounds_geooptimize
+#: model:ir.model.fields,field_description:alc_delivery_rounds_geooptimize.field_stock_config_settings_geo_optimization_work_penalty
+msgid "Fixed cost working/hour"
 msgstr ""
 
 #. module: alc_delivery_rounds_geooptimize
@@ -222,7 +232,7 @@ msgid "Optimization error message"
 msgstr ""
 
 #. module: alc_delivery_rounds_geooptimize
-#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:657
+#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:659
 #, python-format
 msgid "Optimization for %s exported to operational planning."
 msgstr ""
@@ -285,19 +295,29 @@ msgid "Success"
 msgstr ""
 
 #. module: alc_delivery_rounds_geooptimize
-#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:611
+#: model:ir.model.fields,help:alc_delivery_rounds_geooptimize.field_stock_config_settings_geo_optimization_travel_penalty
+msgid "The cost for a resource of driving for one distance unit."
+msgstr ""
+
+#. module: alc_delivery_rounds_geooptimize
+#: model:ir.model.fields,help:alc_delivery_rounds_geooptimize.field_stock_config_settings_geo_optimization_work_penalty
+msgid "The cost of a resource working for an hour."
+msgstr ""
+
+#. module: alc_delivery_rounds_geooptimize
+#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:613
 #, python-format
 msgid "The delivery round %s will be exported to tha mobile App into background."
 msgstr ""
 
 #. module: alc_delivery_rounds_geooptimize
-#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:573
+#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:575
 #, python-format
 msgid "The following partner ids are not expected into the optimization result: %s"
 msgstr ""
 
 #. module: alc_delivery_rounds_geooptimize
-#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:565
+#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:567
 #, python-format
 msgid "The following partners are not found into the optimization result: %s"
 msgstr ""
@@ -315,6 +335,16 @@ msgstr ""
 #. module: alc_delivery_rounds_geooptimize
 #: model:ir.model.fields,field_description:alc_delivery_rounds_geooptimize.field_round_instance_warehouse_id
 msgid "Warehouse id"
+msgstr ""
+
+#. module: alc_delivery_rounds_geooptimize
+#: model:ir.ui.view,arch_db:alc_delivery_rounds_geooptimize.stock_config_settings_form_view
+msgid "euros per distance unit"
+msgstr ""
+
+#. module: alc_delivery_rounds_geooptimize
+#: model:ir.ui.view,arch_db:alc_delivery_rounds_geooptimize.stock_config_settings_form_view
+msgid "euros per hour"
 msgstr ""
 
 #. module: alc_delivery_rounds_geooptimize
