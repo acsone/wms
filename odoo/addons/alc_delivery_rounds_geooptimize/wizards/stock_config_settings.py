@@ -9,7 +9,7 @@ from odoo.tools import ormcache
 
 OptimizationConfig = namedtuple(
     "OptimizationConfig",
-    "enabled,api_url,api_key,duration,delivery_duration,loading_duration,resources_number",
+    "enabled,api_url,api_key,duration,delivery_duration,loading_duration,resources_number,work_penalty,travel_penalty",
 )
 
 
@@ -35,6 +35,13 @@ class StockConfigSettings(models.TransientModel):
     geo_optimization_resources_number = fields.Integer(
         "Number of available resource",
         help="Resource into geoconcept must be named as D1, D2, ....",
+    )
+    geo_optimization_work_penalty = fields.Float(
+        "Fixed cost working/hour", help="The cost of a resource working for an hour."
+    )
+    geo_optimization_travel_penalty = fields.Float(
+        "Fixed cost travelling/hour",
+        help="The cost for a resource of driving for one distance unit.",
     )
 
     @api.model
@@ -73,6 +80,16 @@ class StockConfigSettings(models.TransientModel):
                 "10",
             )
         )
+        work_penalty = float(
+            IrConfigParameter.get_param(
+                "alc_delivery_rounds_geooptimize.geo_optimization_work_penalty", "9.0"
+            )
+        )
+        travel_penalty = float(
+            IrConfigParameter.get_param(
+                "alc_delivery_rounds_geooptimize.geo_optimization_travel_penalty", "1.5"
+            )
+        )
 
         return OptimizationConfig(
             enabled=enabled,
@@ -82,6 +99,8 @@ class StockConfigSettings(models.TransientModel):
             delivery_duration=delivery_duration,
             loading_duration=loading_duration,
             resources_number=resources_number,
+            work_penalty=work_penalty,
+            travel_penalty=travel_penalty,
         )
 
     @api.model
@@ -102,6 +121,10 @@ class StockConfigSettings(models.TransientModel):
             res["geo_optimization_loading_duration"] = cfg.loading_duration
         if "geo_optimization_resources_number" in fields or not fields:
             res["geo_optimization_resources_number"] = cfg.resources_number
+        if "geo_optimization_work_penalty" in fields or not fields:
+            res["geo_optimization_work_penalty"] = cfg.work_penalty
+        if "geo_optimization_travel_penalty" in fields or not fields:
+            res["geo_optimization_travel_penalty"] = cfg.travel_penalty
         return res
 
     @api.multi
@@ -165,4 +188,22 @@ class StockConfigSettings(models.TransientModel):
         self.env["ir.config_parameter"].set_param(
             "alc_delivery_rounds_geooptimize.geo_optimization_resources_number",
             self.geo_optimization_resources_number or "10",
+        )
+
+    @api.multi
+    def set_geo_optimization_work_penalty(self):
+        self.ensure_one()
+
+        self.env["ir.config_parameter"].set_param(
+            "alc_delivery_rounds_geooptimize.geo_optimization_work_penalty",
+            self.geo_optimization_work_penalty or "9",
+        )
+
+    @api.multi
+    def set_geo_optimization_travel_penalty(self):
+        self.ensure_one()
+
+        self.env["ir.config_parameter"].set_param(
+            "alc_delivery_rounds_geooptimize.geo_optimization_travel_penalty",
+            self.geo_optimization_travel_penalty or "1.5",
         )

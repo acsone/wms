@@ -404,6 +404,8 @@ class RoundInstance(models.Model):
                 "noReload": True,
                 "globalCapacity": 9999,
                 "useAllCapacities": False,
+                "travelPenalty": cfg.travel_penalty,
+                "workPenalty": cfg.work_penalty,
             }
         ]
 

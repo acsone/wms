@@ -36,6 +36,8 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
                 "geo_optimization_delivery_duration": 10,
                 "geo_optimization_loading_duration": 100,
                 "geo_optimization_resources_number": 1,
+                "geo_optimization_work_penalty": 4.0,
+                "geo_optimization_travel_penalty": 3.5,
             }
         ).execute()
         cls.delivery_round_1.write(
@@ -516,7 +518,9 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
                     "openStart": False,
                     "startX": 5.2758074,
                     "startY": 50.5825464,
+                    "travelPenalty": 3.5,
                     "useAllCapacities": False,
+                    "workPenalty": 4.0,
                     "workStartTime": "08:11:00",
                 }
             ],
@@ -898,7 +902,9 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
                     "openStart": False,
                     "startX": 5.2758074,
                     "startY": 50.5825464,
+                    "travelPenalty": 3.5,
                     "useAllCapacities": False,
+                    "workPenalty": 4.0,
                     "workStartTime": "08:11:00",
                 }
             ],
@@ -987,7 +993,9 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
                     "openStart": False,
                     "startX": 5.2758074,
                     "startY": 50.5825464,
+                    "travelPenalty": 3.5,
                     "useAllCapacities": False,
+                    "workPenalty": 4.0,
                     "workStartTime": "08:11:00",
                 }
             ],
@@ -1076,7 +1084,9 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
                     "openStart": False,
                     "startX": 5.2758074,
                     "startY": 50.5825464,
+                    "travelPenalty": 3.5,
                     "useAllCapacities": False,
+                    "workPenalty": 4.0,
                     "workStartTime": "08:11:00",
                 }
             ],
@@ -1148,7 +1158,9 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
                     "openStart": False,
                     "startX": 5.2758074,
                     "startY": 50.5825464,
+                    "travelPenalty": 3.5,
                     "useAllCapacities": False,
+                    "workPenalty": 4.0,
                     "workStartTime": "08:11:00",
                 }
             ],
