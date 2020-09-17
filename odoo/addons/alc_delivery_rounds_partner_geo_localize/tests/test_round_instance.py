@@ -120,10 +120,8 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
         responses.add(
             responses.Response(
                 method="GET",
-                url="https://nominatim.openstreetmap.org/search?"
-                + "city=Tamines&format=json&country=Belgium&"
-                + "state=&street=Rue+bois+des+noix&limit=1&postalCode=5060",
-                match_querystring=True,
+                url="https://nominatim.openstreetmap.org/search",
+                match_querystring=False,
                 json=[{"lat": 50.4311411, "lon": 4.6132813}],
                 status=200,
             )
@@ -161,10 +159,8 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
         responses.add(
             responses.Response(
                 method="GET",
-                url="https://nominatim.openstreetmap.org/search?"
-                + "city=Andenne&format=json&country=Belgium&"
-                + "state=&street=Rue+du+polisart&limit=1&postalCode=5300",
-                match_querystring=True,
+                url="https://nominatim.openstreetmap.org/search",
+                match_querystring=False,
                 json=[{"lat": 50.5114237, "lon": 5.0840081}],
                 status=200,
             )
@@ -241,6 +237,8 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
                     "startY": 50.5825464,
                     "useAllCapacities": False,
                     "workStartTime": "08:11:00",
+                    "workPenalty": 9.0,
+                    "travelPenalty": 1.5,
                 }
             ],
             "simulationName": self.delivery_round_1.display_name,
@@ -273,10 +271,8 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
         responses.add(
             responses.Response(
                 method="GET",
-                url="https://nominatim.openstreetmap.org/search?city=Tmnss&"
-                + "format=json&country=Belgium&state=&street=Rue+test&"
-                + "limit=1&postalCode=",
-                match_querystring=True,
+                url="https://nominatim.openstreetmap.org/search",
+                match_querystring=False,
                 json=[{}],
             )
         )
@@ -284,10 +280,8 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
         responses.add(
             responses.Response(
                 method="GET",
-                url="https://nominatim.openstreetmap.org/search?city=Tmnss&"
-                + "format=json&country=Belgium&state=&street=&"
-                + "limit=1&postalCode=",
-                match_querystring=True,
+                url="https://nominatim.openstreetmap.org/search",
+                match_querystring=False,
                 json=[{}],
             )
         )
