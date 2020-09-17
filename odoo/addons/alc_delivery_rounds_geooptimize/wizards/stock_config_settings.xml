@@ -61,7 +61,32 @@
                                    attrs="{'invisible': [('geo_optimization_enabled', '=', False)]}"/>
                         </div>
                     </div>
-
+                    <label for="geo_optimization_travel_penalty"
+                           attrs="{'invisible': [('geo_optimization_enabled', '=', False)]}"/>
+                    <div>
+                        <div>
+                            <field name="geo_optimization_travel_penalty"
+                                   widget="float"
+                                   class="oe_inline"
+                                   attrs="{'invisible': [('geo_optimization_enabled', '=', False)], 'required': [('geo_optimization_enabled', '=', True)]}"/>
+                            <label for="geo_optimization_delivery_duration"
+                                   string="euros per distance unit"
+                                   attrs="{'invisible': [('geo_optimization_enabled', '=', False)]}"/>
+                        </div>
+                    </div>
+                    <label for="geo_optimization_work_penalty"
+                           attrs="{'invisible': [('geo_optimization_enabled', '=', False)]}"/>
+                    <div>
+                        <div>
+                            <field name="geo_optimization_work_penalty"
+                                   widget="float"
+                                   class="oe_inline"
+                                   attrs="{'invisible': [('geo_optimization_enabled', '=', False)], 'required': [('geo_optimization_enabled', '=', True)]}"/>
+                            <label for="geo_optimization_delivery_duration"
+                                   string="euros per hour"
+                                   attrs="{'invisible': [('geo_optimization_enabled', '=', False)]}"/>
+                        </div>
+                    </div>
                 </group>
             </xpath>
         </field>
