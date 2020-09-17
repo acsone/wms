@@ -75,6 +75,7 @@
         "geoengine_base_geolocalize",
         "base_geoengine",
         "sale_stock_restocking_fee_invoicing",
+        "stock_location_product_restriction",
         # specific
         "alc_running_env",
         # "alc_geo_delivery_rounds",
