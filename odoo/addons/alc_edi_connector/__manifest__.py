@@ -13,6 +13,7 @@
     "depends": [
         "alc_purchase_order_ubl",
         "alc_purchase_order_import_ubl",
+        "base_suspend_security",
         "connector",
         "purchase_order_approved",
         "purchase_order_ubl",
@@ -24,6 +25,7 @@
         "security/edi_backend.xml",
         "security/edi_export_task_def.xml",
         "security/edi_import_task_def.xml",
+        "security/res_groups.xml",
         "views/res_partner.xml",
         "views/edi_backend.xml",
         "views/purchase_order.xml",

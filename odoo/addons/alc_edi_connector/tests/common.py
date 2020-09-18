@@ -53,7 +53,11 @@ class AlcEdiConnectorCase(SavepointComponentCase, JobMixin):
         cls.supplier_no_edi = cls.supplier.copy(
             {"use_edi_connector": False, "edi_backend_id": False}
         )
+
+        group = cls.env["res.groups"].search([("name", "=", "Purchase Order Manager")])
         cls.env.user.company_id.partner_id.vat = "BE0421801233"
+        cls.env.user.write({"groups_id": [(4, group.id, 0)]})
+
         cls.currency_euro = cls.env.ref("base.EUR")
         cls.currency_usd = cls.env.ref("base.USD")
         cls.product_1 = cls.env["product.product"].create(
