@@ -312,6 +312,11 @@ msgid "Purchase Order"
 msgstr ""
 
 #. module: alc_edi_connector
+#: model:res.groups,name:alc_edi_connector.purchase_order_manager
+msgid "Purchase Order Manager"
+msgstr ""
+
+#. module: alc_edi_connector
 #: model:ir.model,name:alc_edi_connector.model_order_response_import
 msgid "Purchase Order Response Import from Files"
 msgstr ""
@@ -327,7 +332,13 @@ msgid "Send UBL Order"
 msgstr ""
 
 #. module: alc_edi_connector
-#: code:addons/alc_edi_connector/models/purchase_order.py:31
+#: code:addons/alc_edi_connector/models/purchase_order.py:43
+#, python-format
+msgid "Sending UBL Order document is not allowed in the current context."
+msgstr ""
+
+#. module: alc_edi_connector
+#: code:addons/alc_edi_connector/models/purchase_order.py:36
 #, python-format
 msgid "Sending UBL Order document is only allowed in state approved"
 msgstr ""
