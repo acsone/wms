@@ -13,6 +13,9 @@ class SaleOrder(models.Model):
     @api.multi
     @job(default_channel="root.background.invoice_creation")  # priority=9
     def _job_create_draft_invoice(self):
-        self.with_context(mail_auto_subscribe_no_notify=True).action_invoice_create(
-            final=True
-        )
+        to_invoice = self.filtered(lambda s: s.invoice_status == "to invoice")
+        if not to_invoice:
+            return "Invoices already created"
+        return to_invoice.with_context(
+            mail_auto_subscribe_no_notify=True
+        ).action_invoice_create(final=True)
