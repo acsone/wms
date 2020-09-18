@@ -17,9 +17,14 @@ class PurchaseOrder(models.Model):
 
     @api.depends("partner_id.use_edi_connector", "state")
     def _compute_can_send_ubl_document(self):
+        is_purchase_order_manager = self.env.user.has_group(
+            "alc_edi_connector.purchase_order_manager"
+        )
         for rec in self:
             rec.can_send_ubl_document = (
-                rec.partner_id.use_edi_connector and rec.state == "approved"
+                is_purchase_order_manager
+                and rec.partner_id.use_edi_connector
+                and rec.state == "approved"
             )
 
     def check_can_send_ubl_document(self):
@@ -33,8 +38,14 @@ class PurchaseOrder(models.Model):
                             "state approved"
                         )
                     )
+                else:
+                    raise UserError(
+                        _(
+                            "Sending UBL Order document is not allowed in the current context."
+                        )
+                    )
 
     def send_ubl_order_document(self):
-        for rec in self:
+        for rec in self.suspend_security():
             rec.check_can_send_ubl_document()
             rec.partner_id.edi_backend_id.send_order_document(rec)

@@ -84,3 +84,24 @@ class TestUblOrderExporter(AlcEdiConnectorCase):
         self.draft_purchase_order.button_approve()
         self.assertTrue(self.draft_purchase_order.can_send_ubl_document)
         self.draft_purchase_order.send_ubl_order_document()
+
+    def test_03(self):
+        """
+        Data:
+            A supplier using the edi connector
+            An approved purchase
+            The user does not have purchase manager permission
+        Test case:
+            can_send_ubl_document
+            send the ubl document
+        Expected result:
+            can_send_ubl_document is False
+            a UserError is sent
+        """
+        self.assertTrue(self.purchase_order.partner_id.use_edi_connector)
+        group = self.env["res.groups"].search([("name", "=", "Purchase Order Manager")])
+        self.assertTrue(group)
+        self.env.user.write({"groups_id": [(3, group.id, 0)]})
+        self.assertFalse(self.purchase_order.can_send_ubl_document)
+        with self.assertRaises(UserError), self.env.cr.savepoint():
+            self.purchase_order.send_ubl_order_document()
