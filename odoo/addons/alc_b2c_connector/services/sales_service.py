@@ -168,7 +168,11 @@ class SalesService(Component):
             "id": {"type": "integer", "required": True, "nullable": False},
             "ref": {"type": "string", "required": True, "nullable": False},
             "state": {"type": "string", "required": True, "nullable": False},
-            "confirmation_date": {"type": "string", "required": True, "nullable": True},
+            "confirmation_date": {
+                "type": "datetime",
+                "required": True,
+                "nullable": True,
+            },
         }
 
     def _to_search_result(self, read_result):
