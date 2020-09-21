@@ -89,8 +89,8 @@ class SaleOrder(models.Model):
             sol["product_id"] = product.id
             sol["name"] = product.name
             sol["product_uom"] = product.uom_id.id
-            sol["product_uom_qty"] = line.pop("quantity")
-            sol["b2c_ref"] = line.pop("line_id")
+            sol["product_uom_qty"] = line_data.pop("quantity")
+            sol["b2c_ref"] = line_data.pop("line_id")
             result.append(sol)
         return result
 

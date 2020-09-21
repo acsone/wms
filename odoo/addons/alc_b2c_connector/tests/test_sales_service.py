@@ -310,3 +310,34 @@ class TestSalesService(CommonCase):
         }
         with self.assertRaises(ValidationError):
             self.sales_service.dispatch("create", params=params)
+
+    def test_09(self):
+        """
+        Test case:
+            Create a new SO with 2 lines
+        Expected result:
+            A new SO is createdd
+        """
+        recipient_info = self._gen_recipent()
+        params = {
+            "id": 2,
+            "customer_ref": self.vt_partner.ref,
+            "date": ISO_DT_WITH_TZ,
+            "recipient": recipient_info,
+            "lines": [
+                {
+                    "line_id": 2,
+                    "sku": self.saleable_product.default_code,
+                    "quantity": 10,
+                },
+                {
+                    "line_id": 3,
+                    "sku": self.saleable_product_2.default_code,
+                    "quantity": 1,
+                },
+            ],
+        }
+        res = self.sales_service.dispatch("create", params=params)
+        self.assertTrue(res)
+        new_so = self._get_so_from_name(res["ref"])
+        self.assertEqual(2, len(new_so.order_line))
