@@ -102,6 +102,11 @@ msgid "EDI"
 msgstr ""
 
 #. module: alc_edi_connector
+#: model:res.groups,name:alc_edi_connector.purchase_order_manager
+msgid "EDI - Purchase Order Manager"
+msgstr ""
+
+#. module: alc_edi_connector
 #: code:addons/alc_edi_connector/models/res_partner.py:25
 #, python-format
 msgid "EDI is not supported by %s"
@@ -309,11 +314,6 @@ msgstr ""
 #. module: alc_edi_connector
 #: model:ir.model,name:alc_edi_connector.model_purchase_order
 msgid "Purchase Order"
-msgstr ""
-
-#. module: alc_edi_connector
-#: model:res.groups,name:alc_edi_connector.purchase_order_manager
-msgid "Purchase Order Manager"
 msgstr ""
 
 #. module: alc_edi_connector
