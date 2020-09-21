@@ -16,21 +16,23 @@ class TestStocksService(CommonCase):
     def test_00(self):
         """
         Data:
-            1 saleable product
+            2 saleable product
         Test case:
             Get the stock of all products
         Expected result:
             The product is into the list with the expected info
         """
         res = self.stocks_service.dispatch("search", params=False)
-        self.assertEqual(res["size"], 1)
+        self.assertEqual(res["size"], 2)
         result = res["data"][0]
         self.assertDictEqual(result, {"quantity": 5.0, "sku": "12345"})
+        result = res["data"][1]
+        self.assertDictEqual(result, {"quantity": 110.0, "sku": "23456"})
 
     def test_01(self):
         """
         Data:
-            1 saleable product
+            2 saleable product
         Test case:
             Get the stock of a given products
         Expected result:

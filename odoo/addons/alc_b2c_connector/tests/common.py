@@ -35,17 +35,29 @@ class CommonCase(SavepointComponentCase):
                 "cnk_code": "CNK123",
             }
         )
-        cls.not_saleable_product = cls.ProductProduct.create(
+        cls.change_product_qty(cls.saleable_product, 5)
+        cls.saleable_product_2 = cls.ProductProduct.create(
             {
                 "name": "Product 2",
+                "sale_ok": True,
+                "type": "product",
+                "list_price": 20,
+                "barcode": "XXX0002",
+                "default_code": "23456",
+                "cnk_code": "CNK234",
+            }
+        )
+        cls.change_product_qty(cls.saleable_product_2, 110)
+        cls.not_saleable_product = cls.ProductProduct.create(
+            {
+                "name": "Product 3",
                 "sale_ok": False,
                 "type": "product",
                 "list_price": 10,
-                "barcode": "XXX0002",
-                "default_code": "23456",
+                "barcode": "XXX0003",
+                "default_code": "34567",
             }
         )
-        cls.change_product_qty(cls.saleable_product, 5)
         cls.payment_mode = cls.env["account.payment.mode"].create(
             {
                 "name": "Inbound payment mode",

@@ -26,7 +26,7 @@ class TestProductsService(CommonCase):
         """
 
         res = self.products_service.dispatch("search", params=False)
-        self.assertEqual(res["size"], 1)
+        self.assertEqual(res["size"], 2)
         result = res["data"][0]
         create_date = result.pop("create_date")
         self.assertEqual(create_date.tzinfo, pytz.utc)
@@ -41,6 +41,19 @@ class TestProductsService(CommonCase):
                 "cnk": "CNK123",
             },
         )
+        result = res["data"][1]
+        result.pop("create_date")
+        self.assertDictEqual(
+            result,
+            {
+                "eans": [u"XXX0002"],
+                "name": u"Product 2",
+                "price": 20.0,
+                "quantity": 110.0,
+                "sku": u"23456",
+                "cnk": "CNK234",
+            },
+        )
 
     def test_01(self):
         """
@@ -53,7 +66,7 @@ class TestProductsService(CommonCase):
         """
         self.saleable_product.write({"barcode": False, "cnk_code": False})
         res = self.products_service.dispatch("search", params=False)
-        self.assertEqual(res["size"], 1)
+        self.assertEqual(res["size"], 2)
         result = res["data"][0]
         create_date = result.pop("create_date")
         self.assertEqual(create_date.tzinfo, pytz.utc)
@@ -68,15 +81,28 @@ class TestProductsService(CommonCase):
                 "cnk": None,
             },
         )
+        result = res["data"][1]
+        result.pop("create_date")
+        self.assertDictEqual(
+            result,
+            {
+                "eans": [u"XXX0002"],
+                "name": u"Product 2",
+                "price": 20.0,
+                "quantity": 110.0,
+                "sku": u"23456",
+                "cnk": "CNK234",
+            },
+        )
 
     def test_02(self):
         """
         Data:
-            1 saleable product
+            2 saleable product
         Test case:
-            Put the product into an forbidden category
+            Put 1 the product into a forbidden category
         Expected result:
-            The product is no more into the list with the expected info
+            This product is no more into the list with the expected info
         """
         default_categ = self.saleable_product.categ_id
         for categ_xml_id in (
@@ -86,15 +112,18 @@ class TestProductsService(CommonCase):
         ):
             self.saleable_product.categ_id = self.env.ref(categ_xml_id)
             res = self.products_service.dispatch("search", params=False)
-            self.assertEqual(res["size"], 0)
+            self.assertEqual(res["size"], 1)
+            self.assertEqual(
+                res["data"][0]["sku"], self.saleable_product_2.default_code
+            )
         self.saleable_product.categ_id = default_categ
         res = self.products_service.dispatch("search", params=False)
-        self.assertEqual(res["size"], 1)
+        self.assertEqual(res["size"], 2)
 
-    def test_2(self):
+    def test_03(self):
         """
         Data:
-            1 saleable product
+            3 saleable product
         Test case:
             Search for a given sku
         Expected result:
