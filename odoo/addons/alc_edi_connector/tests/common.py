@@ -54,9 +54,13 @@ class AlcEdiConnectorCase(SavepointComponentCase, JobMixin):
             {"use_edi_connector": False, "edi_backend_id": False}
         )
 
-        group = cls.env["res.groups"].search([("name", "=", "Purchase Order Manager")])
+        cls.group_edi_purchase_order_manager = cls.env.ref(
+            "alc_edi_connector.purchase_order_manager"
+        )
         cls.env.user.company_id.partner_id.vat = "BE0421801233"
-        cls.env.user.write({"groups_id": [(4, group.id, 0)]})
+        cls.env.user.write(
+            {"groups_id": [(4, cls.group_edi_purchase_order_manager.id, 0)]}
+        )
 
         cls.currency_euro = cls.env.ref("base.EUR")
         cls.currency_usd = cls.env.ref("base.USD")

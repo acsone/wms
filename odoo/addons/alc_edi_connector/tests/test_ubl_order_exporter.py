@@ -99,7 +99,7 @@ class TestUblOrderExporter(AlcEdiConnectorCase):
             a UserError is sent
         """
         self.assertTrue(self.purchase_order.partner_id.use_edi_connector)
-        group = self.env["res.groups"].search([("name", "=", "Purchase Order Manager")])
+        group = self.group_edi_purchase_order_manager
         self.assertTrue(group)
         self.env.user.write({"groups_id": [(3, group.id, 0)]})
         self.assertFalse(self.purchase_order.can_send_ubl_document)
