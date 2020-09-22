@@ -90,7 +90,7 @@ msgid "Name"
 msgstr ""
 
 #. module: alc_b2c_connector
-#: code:addons/alc_b2c_connector/models/sale_order.py:143
+#: code:addons/alc_b2c_connector/models/sale_order.py:144
 #, python-format
 msgid "No match found for customer_id: %s"
 msgstr ""
@@ -167,7 +167,7 @@ msgid "This user has no access to the B2C REST Api."
 msgstr ""
 
 #. module: alc_b2c_connector
-#: code:addons/alc_b2c_connector/models/sale_order.py:84
+#: code:addons/alc_b2c_connector/models/sale_order.py:85
 #, python-format
 msgid "Unknowns SKU(s): %s , "
 msgstr ""
