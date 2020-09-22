@@ -2,11 +2,13 @@
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+import logging
 from contextlib import contextmanager
 
 from odoo.addons.base_rest.controllers.main import _PseudoCollection
 from odoo.addons.component.core import WorkContext
 from odoo.addons.component.tests.common import SavepointComponentCase
+from odoo.tools import mute_logger
 
 from ..hooks import _initialize_product_assortment_filter
 from ..services.base_b2c_service import B2C_COLLECTION
@@ -14,14 +16,20 @@ from ..services.base_b2c_service import B2C_COLLECTION
 
 class CommonCase(SavepointComponentCase):
     @classmethod
+    @mute_logger("odoo.addons.queue_job.models.base")
     def setUpClass(cls):
         super(CommonCase, cls).setUpClass()
-        cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
+        cls.env = cls.env(
+            context=dict(
+                cls.env.context, tracking_disable=True, test_queue_job_no_delay=True
+            )
+        )
         _initialize_product_assortment_filter(cls.env.cr)
         cls.ProductProduct = cls.env["product.product"]
         # disable all products
         cls.ProductProduct.search([]).mapped("orderpoint_ids").write({"active": False})
         cls.ProductProduct.search([]).write({"active": False})
+        cls.env.ref("alc_b2c_connector.alc_b2c_rest_api_user").email = "test@test.be"
         cls.env["stock.location"]._parent_store_compute()
         cls.env["product.category"]._parent_store_compute()
         cls.saleable_product = cls.ProductProduct.create(
@@ -83,6 +91,20 @@ class CommonCase(SavepointComponentCase):
                 "sale_channel": "web",
             }
         )
+
+    def setUp(self):
+        super(CommonCase, self).setUp()
+        loggers = ["odoo.addons.queue_job.models.base"]
+        for logger in loggers:
+            logging.getLogger(logger).addFilter(self)
+
+        @self.addCleanup
+        def un_mute_logger():
+            for logger_ in loggers:
+                logging.getLogger(logger_).removeFilter(self)
+
+    def filter(self, record):
+        return 0
 
     @classmethod
     def change_product_qty(cls, product, qty):

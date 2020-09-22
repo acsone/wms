@@ -39,6 +39,7 @@ class SaleOrder(models.Model):
             .with_context(mail_auto_subscribe_no_notify=True)
             .create(order_data)
         )
+        order.action_confirm_background()
         return order
 
     @api.model

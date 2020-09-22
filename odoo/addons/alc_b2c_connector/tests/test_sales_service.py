@@ -316,7 +316,7 @@ class TestSalesService(CommonCase):
         Test case:
             Create a new SO with 2 lines
         Expected result:
-            A new SO is createdd
+            A new SO with 2 lines is created and confirmed
         """
         recipient_info = self._gen_recipent()
         params = {
@@ -341,3 +341,4 @@ class TestSalesService(CommonCase):
         self.assertTrue(res)
         new_so = self._get_so_from_name(res["ref"])
         self.assertEqual(2, len(new_so.order_line))
+        self.assertEqual("sale", new_so.state)
