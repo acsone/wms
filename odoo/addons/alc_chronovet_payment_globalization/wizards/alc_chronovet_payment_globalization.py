@@ -25,4 +25,7 @@ class AlcChronovetPaymentGlobalization(models.TransientModel):
         self.env["report"].get_csv(
             account_move.ids, "alc_chronovet_report_csv_facpied", {}
         )
+        self.env["report"].get_csv(
+            account_move.ids, "alc_chronovet_report_csv_faclign", {}
+        )
         return result
