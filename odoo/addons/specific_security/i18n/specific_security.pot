@@ -19,6 +19,16 @@ msgid "Materials manager"
 msgstr ""
 
 #. module: specific_security
+#: model:res.groups,name:specific_security.group_product_assortment_manager
+msgid "Product assortment manager"
+msgstr ""
+
+#. module: specific_security
+#: model:res.groups,name:specific_security.group_res_api_user
+msgid "REST API user"
+msgstr ""
+
+#. module: specific_security
 #: model:ir.model,name:specific_security.model_stock_picking
 msgid "Transfer"
 msgstr ""
