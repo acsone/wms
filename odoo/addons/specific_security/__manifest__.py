@@ -19,12 +19,17 @@
         "code_abc",
         "specific_data",
         "account_cutoff_base",
+        "product_assortment",
+        "base_rest",
     ],
     "data": [
         # Security
         "security/res_groups.xml",
         "security/ir.model.access.csv",
         "security/ir_rule.xml",
+        # views
+        "views/base_rest_view.xml",
+        "views/product_assortment.xml",
     ],
     "website": "http://www.camptocamp.com",
     "installable": True,
