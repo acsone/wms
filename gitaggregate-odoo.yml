@@ -46,5 +46,7 @@
           # [FIX] models: more than one prefetch in onchange 
         - git am "$(git format-patch -1 9024cbd40bce780f360600853c44bfb1d27c208b -o ../patches)"
           #  [FIX] orm: Ensure prefetch working when traversing multi level relation
-          git am "$(git format-patch -1 81022c7e3a22d56eec11604c88359ce1dbe3326b -o ../patches)"
+        - git am "$(git format-patch -1 81022c7e3a22d56eec11604c88359ce1dbe3326b -o ../patches)"
+          # [FIX] web: Fix convertion of list record item to a format expected by context evaluations
+        - git am "$(git format-patch -1 7495a531d4470546f31973d3b3d01abc38bf8f1c -o ../patches)"
     target: acsone 10.0-alc_master
