@@ -2,6 +2,6 @@
 
 <odoo noupdate="1">
     <record id="mail_template_30" model="mail.template">
-        <field name="name">mail_template_30</field>
+        <field name="name">Sales Order - Annulation solde</field>
     </record>
 </odoo>
