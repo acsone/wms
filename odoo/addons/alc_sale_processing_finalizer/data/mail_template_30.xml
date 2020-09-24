@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo noupdate="1">
+    <record id="mail_template_30" model="mail.template">
+        <field name="name">mail_template_30</field>
+    </record>
+</odoo>
