@@ -1,0 +1,37 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* alc_sale_processing_finalizer
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_sale_processing_finalizer
+#: model:ir.model.fields,field_description:alc_sale_processing_finalizer.field_sale_order_auto_finalize_processing
+msgid "Auto finalize processing"
+msgstr ""
+
+#. module: alc_sale_processing_finalizer
+#: model:ir.model,name:alc_sale_processing_finalizer.model_sale_order
+msgid "Sales Order"
+msgstr ""
+
+#. module: alc_sale_processing_finalizer
+#: model:ir.model.fields,help:alc_sale_processing_finalizer.field_sale_order_auto_finalize_processing
+msgid "Set to true to automatically purge SO after 3 months"
+msgstr ""
+
+#. module: alc_sale_processing_finalizer
+#: model:delivery.carrier,name:alc_sale_processing_finalizer.deliver_carrier_long_term
+#: model:product.product,name:alc_sale_processing_finalizer.deliver_carrier_long_term_product_product
+#: model:product.template,name:alc_sale_processing_finalizer.deliver_carrier_long_term_product_template
+msgid "deliver_carrier_long_term"
+msgstr ""
+
