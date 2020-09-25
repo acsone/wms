@@ -5,7 +5,7 @@
 {
     "name": "Account Invoice Sent",
     "version": "1.0",
-    "author": "BCIM",
+    "author": "BCIM, ACSONE SA/NV",
     "license": "AGPL-3",
     "category": "Accounting & Finance",
     "depends": ["account", "web_notify", "queue_job"],
