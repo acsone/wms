@@ -32,6 +32,26 @@ class CommonCase(SavepointComponentCase):
         cls.env.ref("alc_b2c_connector.alc_b2c_rest_api_user").email = "test@test.be"
         cls.env["stock.location"]._parent_store_compute()
         cls.env["product.category"]._parent_store_compute()
+
+        # create specific taxes
+        cls.tax_fixed = cls.env["account.tax"].create(
+            {
+                "sequence": 10,
+                "name": "Tax 10.0 (Fixed)",
+                "amount": 10.0,
+                "amount_type": "fixed",
+                "type_tax_use": "sale",
+            }
+        )
+        cls.tax_6_percent = cls.env["account.tax"].create(
+            {
+                "name": "Tax 6%",
+                "amount": 6.0000,
+                "amount_type": "percent",
+                "type_tax_use": "sale",
+            }
+        )
+        # create products
         cls.saleable_product = cls.ProductProduct.create(
             {
                 "name": "Product 1",
@@ -41,6 +61,7 @@ class CommonCase(SavepointComponentCase):
                 "barcode": "XXX0001",
                 "default_code": "12345",
                 "cnk_code": "CNK123",
+                "taxes_id": [(6, False, [cls.tax_6_percent.id])],
             }
         )
         cls.change_product_qty(cls.saleable_product, 5)
@@ -53,6 +74,7 @@ class CommonCase(SavepointComponentCase):
                 "barcode": "XXX0002",
                 "default_code": "23456",
                 "cnk_code": "CNK234",
+                "taxes_id": [(6, False, [cls.tax_fixed.id])],
             }
         )
         cls.change_product_qty(cls.saleable_product_2, 110)
