@@ -14,7 +14,6 @@ class SaleOrderLine(models.Model):
         string="Qty into back order",
         digits=dp.get_precision("Product Unit of Measure"),
         compute="_compute_product_qty_backorder",
-        store=True,
         help="As long as no quantity has been delivered, the BO quantity is "
         "the quantity unavailable at the time of the order minus the canceled "
         "quantity. Otherwise it is the quantity remaining to be delivered.",
