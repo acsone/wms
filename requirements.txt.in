@@ -25,3 +25,6 @@ odoo10-addon-sale-stock-restocking-fee-invoicing @ git+https://github.com/oca/ac
 
 # oca/stock-logistics-warehouse
 odoo10-addon-stock-location-product-restriction @ git+https://github.com/oca/stock-logistics-warehouse.git@refs/pull/971/head#subdirectory=setup/stock_location_product_restriction
+
+# oca/server-auth
+odoo10-addon-auth-api-key @  git+https://github.com/oca/server-auth.git@refs/pull/95/head#subdirectory=setup/auth_api_key

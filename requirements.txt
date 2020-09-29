@@ -81,7 +81,7 @@ odoo10-addon-account-type-menu @ git+https://github.com/acsone/account-financial
 odoo10-addon-analytic-tag-dimension @ git+https://github.com/acsone/account-analytic.git@daf43630f1ca58b431bb93809a331374b8530863#subdirectory=setup/analytic_tag_dimension
 odoo10-addon-analytic-tag-dimension-purchase-warning @ git+https://github.com/acsone/account-analytic.git@daf43630f1ca58b431bb93809a331374b8530863#subdirectory=setup/analytic_tag_dimension_purchase_warning
 odoo10-addon-analytic-tag-dimension-sale-warning @ git+https://github.com/acsone/account-analytic.git@daf43630f1ca58b431bb93809a331374b8530863#subdirectory=setup/analytic_tag_dimension_sale_warning
-odoo10-addon-auth-api-key==10.0.1.0.1
+odoo10-addon-auth-api-key @ git+https://github.com/oca/server-auth.git@9bd64ff90b564b0995bdcf4a1757f4a1ffaa84dd#subdirectory=setup/auth_api_key
 odoo10-addon-auto-reconcile-structured-ref @ git+https://github.com/acsone/account-reconcile.git@eecb8a9dcb54145e876362efd07f76400da318f9#subdirectory=setup/auto_reconcile_structured_ref
 odoo10-addon-base-attachment-object-storage @ git+https://github.com/acsone/odoo-cloud-platform.git@45a9d1f258eb93ec619202c2cfcb76978eee46cd#subdirectory=setup/base_attachment_object_storage
 odoo10-addon-base-business-document-import==10.0.1.0.0.99.dev28

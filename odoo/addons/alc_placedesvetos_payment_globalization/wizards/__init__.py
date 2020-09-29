@@ -1,0 +1,1 @@
+from . import alc_placedesvetos_payment_globalization
