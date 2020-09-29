@@ -10,6 +10,7 @@
     "category": "Connector",
     "depends": [
         "alc_base_auto_join",
+        "alc_sale_product_qty_backorder",
         "connector",
         "delivery_rounds",
         "onchange_helper",

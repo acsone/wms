@@ -4,7 +4,6 @@
 
 from odoo import _, api, fields, models, tools
 from odoo.addons.server_environment import serv_config
-from odoo.exceptions import UserError
 from odoo.http import request
 
 
@@ -35,17 +34,17 @@ class AlcB2CBackend(models.Model):
         domain=[("payment_type", "=", "inbound")],
     )
     payment_term_id = fields.Many2one("account.payment.term", string="Payment Terms")
+    is_sale_back_order_accepted = fields.Boolean(
+        string="Sale backorder accepted",
+        default=True,
+        help="Allows customer to order products not in stock",
+    )
+
+    _sql_constraints = [("name_uniq", "UNIQUE(name)", _("Name must be unique"))]
 
     @api.model
     def get_sale_channel_selection(self):
         return self.env["sale.order"]._fields["sale_channel"].selection
-
-    @api.model
-    def create(self, vals):
-        existing = self.search([])
-        if existing:
-            raise UserError(_("Only 1 ChronoVet backend configuration is allowed."))
-        return super(AlcB2CBackend, self).create(vals)
 
     @classmethod
     def _get_api_key_section_name(cls, auth_api_key):

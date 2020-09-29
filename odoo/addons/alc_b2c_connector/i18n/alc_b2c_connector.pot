@@ -41,7 +41,7 @@ msgstr ""
 
 #. module: alc_b2c_connector
 #: model:ir.filters,name:alc_b2c_connector.b2c_product_assortment_filter
-msgid "ChonoVet Product Assortment"
+msgid "B2C Product Assortment"
 msgstr ""
 
 #. module: alc_b2c_connector
@@ -98,7 +98,7 @@ msgstr ""
 #. module: alc_b2c_connector
 #: code:addons/alc_b2c_connector/models/alc_b2c_backend.py:47
 #, python-format
-msgid "Only 1 ChronoVet backend configuration is allowed."
+msgid "Only 1 B2C backend configuration is allowed."
 msgstr ""
 
 #. module: alc_b2c_connector
@@ -140,7 +140,7 @@ msgstr ""
 #. module: alc_b2c_connector
 #: code:addons/alc_b2c_connector/services/sales_service.py:52
 #, python-format
-msgid "Sale order not found for chonovet id %s"
+msgid "Sale order not found for b2c id %s"
 msgstr ""
 
 #. module: alc_b2c_connector

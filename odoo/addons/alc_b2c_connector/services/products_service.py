@@ -21,7 +21,13 @@ class ProductsService(Component):
     # api methods
     def search(self, **params):
         """
-        Return the list of available products
+        Return the list of available products.
+
+        For each product, the taxes to applied are provided. The type of amount
+        to apply can be one of the following values:
+            * fixed: Fixed amount
+            * percent, Percentage of Price
+            * division, Percentage of Price Tax Included
         """
         domain = self.product_assortment_domain
         skus = params.get("skus")
@@ -42,6 +48,7 @@ class ProductsService(Component):
                     "immediately_usable_qty",
                     "list_price",
                     "cnk_code",
+                    "taxes_id",
                 ],
                 limit=limit,
                 offset=offset,
@@ -75,6 +82,28 @@ class ProductsService(Component):
             "price": {"type": "float", "required": True, "nullable": False},
             "create_date": {"type": "datetime", "required": True, "nullable": False},
             "quantity": {"type": "float", "required": True, "nullable": False},
+            "taxes": {
+                "type": "list",
+                "nullable": True,
+                "schema": {
+                    "type": "dict",
+                    "schema": {
+                        "name": {"type": "string", "required": True, "nullable": False},
+                        "amount": {
+                            "type": "float",
+                            "required": True,
+                            "nullable": False,
+                        },
+                        "amount_type": {
+                            "type": "string",
+                            "nullable": False,
+                            "required": True,
+                            "allowed": ["fixed", "percent", "division"],
+                        },
+                    },
+                },
+                "required": False,
+            },
         }
         schema = {
             "size": {"type": "integer"},
@@ -107,4 +136,17 @@ class ProductsService(Component):
         ean = read_item["barcode"]
         if ean:
             res["eans"] = [ean]
+        taxes_id = read_item["taxes_id"]
+        if taxes_id:
+            taxes = []
+            for id in taxes_id:
+                tax = self.env["account.tax"].sudo().browse(id)
+                taxes.append(
+                    {
+                        "name": tax.name,
+                        "amount": tax.amount,
+                        "amount_type": tax.amount_type,
+                    }
+                )
+            res["taxes"] = taxes
         return res

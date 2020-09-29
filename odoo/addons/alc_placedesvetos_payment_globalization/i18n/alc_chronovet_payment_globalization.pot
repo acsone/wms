@@ -1,0 +1,84 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* alc_placedesvetos_payment_globalization
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_placedesvetos_payment_globalization
+#: model:ir.actions.act_window,name:alc_placedesvetos_payment_globalization.alc_placedesvetos_payment_globalization_act_window
+#: model:ir.ui.menu,name:alc_placedesvetos_payment_globalization.alc_placedesvetos_payment_globalization_menu
+msgid "PlaceDesVetos Payment Globalization"
+msgstr ""
+
+#. module: alc_placedesvetos_payment_globalization
+#: model:ir.model.fields,field_description:alc_placedesvetos_payment_globalization.field_alc_placedesvetos_payment_globalization_create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: alc_placedesvetos_payment_globalization
+#: model:ir.model.fields,field_description:alc_placedesvetos_payment_globalization.field_alc_placedesvetos_payment_globalization_create_date
+msgid "Created on"
+msgstr ""
+
+#. module: alc_placedesvetos_payment_globalization
+#: model:ir.model.fields,field_description:alc_placedesvetos_payment_globalization.field_alc_placedesvetos_payment_globalization_display_name
+#: model:ir.model.fields,field_description:alc_placedesvetos_payment_globalization.field_report_alc_placedesvetos_report_csv_facpied_display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: alc_placedesvetos_payment_globalization
+#: model:ir.model.fields,field_description:alc_placedesvetos_payment_globalization.field_alc_placedesvetos_payment_globalization_partner_id
+msgid "Globalization counter party"
+msgstr ""
+
+#. module: alc_placedesvetos_payment_globalization
+#: model:ir.model.fields,field_description:alc_placedesvetos_payment_globalization.field_alc_placedesvetos_payment_globalization_id
+#: model:ir.model.fields,field_description:alc_placedesvetos_payment_globalization.field_report_alc_placedesvetos_report_csv_facpied_id
+msgid "ID"
+msgstr ""
+
+#. module: alc_placedesvetos_payment_globalization
+#: model:ir.model.fields,field_description:alc_placedesvetos_payment_globalization.field_alc_placedesvetos_payment_globalization___last_update
+#: model:ir.model.fields,field_description:alc_placedesvetos_payment_globalization.field_report_alc_placedesvetos_report_csv_facpied___last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: alc_placedesvetos_payment_globalization
+#: model:ir.model.fields,field_description:alc_placedesvetos_payment_globalization.field_alc_placedesvetos_payment_globalization_write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: alc_placedesvetos_payment_globalization
+#: model:ir.model.fields,field_description:alc_placedesvetos_payment_globalization.field_alc_placedesvetos_payment_globalization_write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: alc_placedesvetos_payment_globalization
+#: model:ir.model.fields,field_description:alc_placedesvetos_payment_globalization.field_alc_placedesvetos_payment_globalization_payment_mode_id
+msgid "Payment mode"
+msgstr ""
+
+#. module: alc_placedesvetos_payment_globalization
+#: model:ir.model,name:alc_placedesvetos_payment_globalization.model_alc_placedesvetos_payment_globalization
+msgid "alc.placedesvetos.payment.globalization"
+msgstr ""
+
+#. module: alc_placedesvetos_payment_globalization
+#: model:ir.actions.report.xml,name:alc_placedesvetos_payment_globalization.alc_placedesvetos_report_csv_facpied
+msgid "facpied"
+msgstr ""
+
+#. module: alc_placedesvetos_payment_globalization
+#: model:ir.model,name:alc_placedesvetos_payment_globalization.model_report_alc_placedesvetos_report_csv_facpied
+msgid "report.alc_placedesvetos_report_csv_facpied"
+msgstr ""
+

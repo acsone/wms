@@ -20,6 +20,16 @@ class SaleOrder(models.Model):
     _inherit = "sale.order"
 
     b2c_ref = fields.Char(string="Reference B2C", copy=False, index=True)
+    b2c_state = fields.Selection(
+        string="B2C state",
+        selection=[
+            ("draft", "Draft"),
+            ("sale", "Sale"),
+            ("cancel", "Cancel"),
+            ("delivery", "Delivery"),
+        ],
+        compute="_compute_b2c_state",
+    )
 
     _sql_constraints = [
         (
@@ -29,8 +39,27 @@ class SaleOrder(models.Model):
         )
     ]
 
+    @api.depends(
+        "state",
+        "order_line",
+        "order_line.product_qty_remains_to_deliver",
+        "order_line.qty_delivered",
+    )
+    @api.multi
+    def _compute_b2c_state(self):
+        for record in self:
+            state = "draft"
+            if record.state == "cancel":
+                state = "cancel"
+            elif record.state in ("sale", "done"):
+                if any(record.mapped("order_line.qty_delivered")):
+                    state = "delivery"
+                else:
+                    state = "sale"
+            record.b2c_state = state
+
     @api.model
-    def _create_from_chonovet(self, data, b2c_backend):
+    def _create_from_b2c(self, data, b2c_backend):
         """ Create a sale order with data coming from b2c
         """
         order_data = self._parse_b2c_order(data, b2c_backend)
@@ -121,7 +150,7 @@ class SaleOrder(models.Model):
                 "city": customer_info.get("city"),
                 "phone": customer_info.get("phone"),
                 "mobile": customer_info.get("mobile"),
-                "is_sale_back_order_accepted": False,
+                "is_sale_back_order_accepted": b2c_backend.is_sale_back_order_accepted,
                 "is_b2c_customer": True,
                 "alcyon_category_id": self.env.ref(
                     "specific_partner.partner_category_student"

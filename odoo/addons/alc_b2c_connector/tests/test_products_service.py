@@ -39,6 +39,9 @@ class TestProductsService(CommonCase):
                 "quantity": 5.0,
                 "sku": u"12345",
                 "cnk": "CNK123",
+                "taxes": [
+                    {"amount": 6.0, "amount_type": u"percent", "name": u"Tax 6%"}
+                ],
             },
         )
         result = res["data"][1]
@@ -52,6 +55,13 @@ class TestProductsService(CommonCase):
                 "quantity": 110.0,
                 "sku": u"23456",
                 "cnk": "CNK234",
+                "taxes": [
+                    {
+                        "amount": 10.0,
+                        "amount_type": u"fixed",
+                        "name": u"Tax 10.0 (Fixed)",
+                    }
+                ],
             },
         )
 
@@ -79,6 +89,9 @@ class TestProductsService(CommonCase):
                 "quantity": 5.0,
                 "sku": u"12345",
                 "cnk": None,
+                "taxes": [
+                    {"amount": 6.0, "amount_type": u"percent", "name": u"Tax 6%"}
+                ],
             },
         )
         result = res["data"][1]
@@ -92,6 +105,13 @@ class TestProductsService(CommonCase):
                 "quantity": 110.0,
                 "sku": u"23456",
                 "cnk": "CNK234",
+                "taxes": [
+                    {
+                        "amount": 10.0,
+                        "amount_type": u"fixed",
+                        "name": u"Tax 10.0 (Fixed)",
+                    }
+                ],
             },
         )
 

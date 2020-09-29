@@ -41,6 +41,12 @@ class SaleOrderLine(models.Model):
         compute="_compute_current_product_qty_unavailable",
     )
 
+    product_qty_unavailable = fields.Float(
+        string="Quantity unavailable",
+        digits=dp.get_precision("Product Unit of Measure"),
+        readonly=True,
+    )
+
     @api.model
     def get_product_qty_unavailable(self, product, product_uom_qty, confirmed, line_id):
         if product and product_uom_qty:
@@ -131,20 +137,37 @@ class SaleOrderLine(models.Model):
 
     @api.onchange("product_id", "product_uom_qty", "route_id", "date_order")
     def onchange_for_product_qty_unavailable(self):
-        context = self.env.context or {}
-        if context.get("must_compute_product_qty_unavailable"):
-            for line in self:
-                line.product_qty_unavailable = line.get_product_qty_unavailable(
-                    # context change to get the corrections of immediately
-                    # available qty with the date and priority
-                    line.product_id.with_context(
-                        prio=line.route_id.priority or "1",
-                        date=line.order_id.date_order,
-                    ),
-                    line.product_uom_qty,
-                    line.state == "sale",
-                    None,
-                )
+        for line in self:
+            if not line.product_id or not line.product_uom_qty or not line.date_order:
+                line.product_qty_unavailable = None
+                continue
+            line.product_qty_unavailable = line.get_product_qty_unavailable(
+                # context change to get the corrections of immediately
+                # available qty with the date and priority
+                line.product_id.with_context(
+                    prio=line.route_id.priority or "1", date=line.order_id.date_order
+                ),
+                line.product_uom_qty,
+                line.state == "sale",
+                None,
+            )
+
+    @api.multi
+    def _init_product_qty_unavailable(self, vals):
+        # don't trigger product_qty_unavalable computation
+        # if the value is provided.
+        if vals.get("product_uom_qty") and "product_qty_unavailable" not in vals:
+            # Because product_qty_unavailable is readonly and not computed,
+            # we need to apply the onchange
+            # on create / save to save the correct values.
+            self.onchange_for_product_qty_unavailable()
+        return self
+
+    @api.model
+    def create(self, vals):
+        record = super(SaleOrderLine, self).create(vals)
+        record._init_product_qty_unavailable(vals)
+        return record
 
     @api.multi
     def write(self, values):
@@ -173,6 +196,7 @@ class SaleOrderLine(models.Model):
         result = super(SaleOrderLine, self).write(values)
         if changed_lines:
             changed_lines._action_procurement_create()
+        self._init_product_qty_unavailable(values)
         return result
 
     @api.multi

@@ -4,7 +4,7 @@
 
 <odoo noupdate="1">
     <record id="b2c_product_assortment_filter" model="ir.filters">
-        <field name="name">ChonoVet Product Assortment</field>
+        <field name="name">B2C Product Assortment</field>
         <field name="model_id">product.product</field>
         <field name="domain">[(1, "!=", 1)]</field> <!-- initialized by the post init hook -->
         <field name="user_id" eval="False"/>
