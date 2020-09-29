@@ -14,6 +14,11 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_b2c_connector
+#: model:ir.model.fields,help:alc_b2c_connector.field_alc_b2c_backend_is_sale_back_order_accepted
+msgid "Allows customer to order products not in stock"
+msgstr ""
+
+#. module: alc_b2c_connector
 #: model:ir.model.fields,help:alc_b2c_connector.field_alc_b2c_backend_product_assortment_id
 msgid "Allows only products matching with the assortment domain"
 msgstr ""
@@ -35,13 +40,23 @@ msgid "B2C Configuration"
 msgstr ""
 
 #. module: alc_b2c_connector
+#: model:ir.filters,name:alc_b2c_connector.b2c_product_assortment_filter
+msgid "B2C Product Assortment"
+msgstr ""
+
+#. module: alc_b2c_connector
+#: model:ir.model.fields,field_description:alc_b2c_connector.field_sale_order_b2c_state
+msgid "B2C state"
+msgstr ""
+
+#. module: alc_b2c_connector
 #: model:ir.ui.menu,name:alc_b2c_connector.alc_b2c_backend_menu
 msgid "Backend"
 msgstr ""
 
 #. module: alc_b2c_connector
-#: model:ir.filters,name:alc_b2c_connector.b2c_product_assortment_filter
-msgid "B2C Product Assortment"
+#: selection:sale.order,b2c_state:0
+msgid "Cancel"
 msgstr ""
 
 #. module: alc_b2c_connector
@@ -55,8 +70,18 @@ msgid "Created on"
 msgstr ""
 
 #. module: alc_b2c_connector
+#: selection:sale.order,b2c_state:0
+msgid "Delivery"
+msgstr ""
+
+#. module: alc_b2c_connector
 #: model:ir.model.fields,field_description:alc_b2c_connector.field_alc_b2c_backend_display_name
 msgid "Display Name"
+msgstr ""
+
+#. module: alc_b2c_connector
+#: selection:sale.order,b2c_state:0
+msgid "Draft"
 msgstr ""
 
 #. module: alc_b2c_connector
@@ -90,15 +115,16 @@ msgid "Name"
 msgstr ""
 
 #. module: alc_b2c_connector
-#: code:addons/alc_b2c_connector/models/sale_order.py:144
+#: code:addons/alc_b2c_connector/models/alc_b2c_backend.py:43
+#: sql_constraint:alc.b2c.backend:0
 #, python-format
-msgid "No match found for customer_id: %s"
+msgid "Name must be unique"
 msgstr ""
 
 #. module: alc_b2c_connector
-#: code:addons/alc_b2c_connector/models/alc_b2c_backend.py:47
+#: code:addons/alc_b2c_connector/models/sale_order.py:173
 #, python-format
-msgid "Only 1 B2C backend configuration is allowed."
+msgid "No match found for customer_id: %s"
 msgstr ""
 
 #. module: alc_b2c_connector
@@ -128,8 +154,18 @@ msgid "Reference B2C"
 msgstr ""
 
 #. module: alc_b2c_connector
+#: selection:sale.order,b2c_state:0
+msgid "Sale"
+msgstr ""
+
+#. module: alc_b2c_connector
 #: model:ir.model.fields,field_description:alc_b2c_connector.field_alc_b2c_backend_sale_team_id
 msgid "Sale Team"
+msgstr ""
+
+#. module: alc_b2c_connector
+#: model:ir.model.fields,field_description:alc_b2c_connector.field_alc_b2c_backend_is_sale_back_order_accepted
+msgid "Sale backorder accepted"
 msgstr ""
 
 #. module: alc_b2c_connector
@@ -138,9 +174,9 @@ msgid "Sale channel"
 msgstr ""
 
 #. module: alc_b2c_connector
-#: code:addons/alc_b2c_connector/services/sales_service.py:52
+#: code:addons/alc_b2c_connector/services/sales_service.py:51
 #, python-format
-msgid "Sale order not found for b2c id %s"
+msgid "Sale order not found for id %s"
 msgstr ""
 
 #. module: alc_b2c_connector
@@ -154,7 +190,7 @@ msgid "Sales Order Line"
 msgstr ""
 
 #. module: alc_b2c_connector
-#: code:addons/alc_b2c_connector/models/sale_order.py:28
+#: code:addons/alc_b2c_connector/models/sale_order.py:38
 #: sql_constraint:sale.order:0
 #, python-format
 msgid "This b2c reference already exists"
@@ -167,7 +203,7 @@ msgid "This user has no access to the B2C REST Api."
 msgstr ""
 
 #. module: alc_b2c_connector
-#: code:addons/alc_b2c_connector/models/sale_order.py:85
+#: code:addons/alc_b2c_connector/models/sale_order.py:114
 #, python-format
 msgid "Unknowns SKU(s): %s , "
 msgstr ""

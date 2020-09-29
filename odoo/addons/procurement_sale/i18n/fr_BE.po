@@ -27,7 +27,7 @@ msgid "Inventory Routes"
 msgstr ""
 
 #. module: procurement_sale
-#: code:addons/procurement_sale/models/sale.py:185
+#: code:addons/procurement_sale/models/sale.py:209
 #, python-format
 msgid ""
 "Missing sale order confirmation date. Cannot plan delivery procurement order"
@@ -56,6 +56,11 @@ msgstr ""
 #. module: procurement_sale
 #: model:ir.model,name:procurement_sale.model_procurement_order
 msgid "Procurement"
+msgstr ""
+
+#. module: procurement_sale
+#: model:ir.model.fields,field_description:procurement_sale.field_sale_order_line_product_qty_unavailable
+msgid "Quantity unavailable"
 msgstr ""
 
 #. module: procurement_sale

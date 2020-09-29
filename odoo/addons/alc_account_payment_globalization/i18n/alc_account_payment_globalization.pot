@@ -16,6 +16,7 @@ msgstr ""
 #. module: alc_account_payment_globalization
 #: model:ir.model.fields,field_description:alc_account_payment_globalization.field_alc_account_payment_globalization_account_id
 #: model:ir.model.fields,field_description:alc_account_payment_globalization.field_alc_chronovet_payment_globalization_account_id
+#: model:ir.model.fields,field_description:alc_account_payment_globalization.field_alc_placedesvetos_payment_globalization_account_id
 msgid "Account"
 msgstr ""
 
@@ -64,6 +65,7 @@ msgstr ""
 #. module: alc_account_payment_globalization
 #: model:ir.model.fields,field_description:alc_account_payment_globalization.field_alc_account_payment_globalization_journal_id
 #: model:ir.model.fields,field_description:alc_account_payment_globalization.field_alc_chronovet_payment_globalization_journal_id
+#: model:ir.model.fields,field_description:alc_account_payment_globalization.field_alc_placedesvetos_payment_globalization_journal_id
 msgid "Journal"
 msgstr ""
 
@@ -95,6 +97,7 @@ msgstr ""
 #. module: alc_account_payment_globalization
 #: model:ir.model.fields,field_description:alc_account_payment_globalization.field_alc_account_payment_globalization_date
 #: model:ir.model.fields,field_description:alc_account_payment_globalization.field_alc_chronovet_payment_globalization_date
+#: model:ir.model.fields,field_description:alc_account_payment_globalization.field_alc_placedesvetos_payment_globalization_date
 msgid "Posting date"
 msgstr ""
 

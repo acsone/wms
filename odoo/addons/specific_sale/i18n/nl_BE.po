@@ -22,7 +22,7 @@ msgid "&amp;bull;"
 msgstr "&amp;bull;"
 
 #. module: specific_sale
-#: code:addons/specific_sale/models/sale.py:251
+#: code:addons/specific_sale/models/sale.py:244
 #, python-format
 msgid "A narcotic voucher is required for the data entry."
 msgstr ""
@@ -47,7 +47,7 @@ msgid "April"
 msgstr ""
 
 #. module: specific_sale
-#: code:addons/specific_sale/models/sale.py:109
+#: code:addons/specific_sale/models/sale.py:108
 #, python-format
 msgid "Article transferred to dispensing pharmacy: %s"
 msgstr ""
@@ -279,7 +279,7 @@ msgid "Narcotic Veterinary Medicine Not Allowed"
 msgstr ""
 
 #. module: specific_sale
-#: code:addons/specific_sale/models/sale.py:250
+#: code:addons/specific_sale/models/sale.py:243
 #, python-format
 msgid "Narcotic voucher"
 msgstr ""
@@ -429,6 +429,11 @@ msgid "Picking zone"
 msgstr ""
 
 #. module: specific_sale
+#: selection:sale.order,sale_channel:0
+msgid "Place des Vétos"
+msgstr ""
+
+#. module: specific_sale
 #: model:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
 msgid "Price"
 msgstr "Prijs"
@@ -517,21 +522,9 @@ msgid "Quantity"
 msgstr "Hoeveelheid"
 
 #. module: specific_sale
-#: model:ir.model.fields,field_description:specific_sale.field_sale_order_line_product_qty_unavailable
 #: model:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
 msgid "Quantity unavailable"
 msgstr "Niet beschikbare hoeveelheid"
-
-#. module: specific_sale
-#: model:ir.ui.view,arch_db:specific_sale.view_sale_order_line_search_specific_sale
-msgid "Remains to deliver"
-msgstr ""
-
-#. module: specific_sale
-#: model:ir.actions.act_window,name:specific_sale.action_sale_lines_unavailable_list
-#: model:ir.ui.menu,name:specific_sale.menu_sale_lines_unavailable_list
-msgid "Sale Order Lines"
-msgstr "Verkooporderregels"
 
 #. module: specific_sale
 #: model:ir.model.fields,field_description:specific_sale.field_sale_order_sale_channel
@@ -666,7 +659,7 @@ msgid "Will include free product"
 msgstr ""
 
 #. module: specific_sale
-#: code:addons/specific_sale/models/sale.py:140
+#: code:addons/specific_sale/models/sale.py:139
 #, python-format
 msgid "You cannot cancel sale order %s, it's already prepared"
 msgstr ""
@@ -680,3 +673,6 @@ msgstr ""
 #: model:exception.rule,warning_text:specific_sale.warning_stupefiant_vet
 msgid "stupéfiant VET: written order, keep confirmation."
 msgstr ""
+
+#~ msgid "Sale Order Lines"
+#~ msgstr "Verkooporderregels"
