@@ -97,11 +97,6 @@
                 <field name="older_lot_life_date" widget="date"/>
             </xpath>
 
-            <xpath expr="//field[@name='order_line']/tree//field[@name='product_uom_qty']" position="after">
-                <field name="product_qty_canceled"/>
-                <field name="product_qty_returned"/>
-            </xpath>
-
             <xpath expr="//field[@name='order_line']/tree//field[@name='product_id']" position="attributes">
                 <attribute name="attrs">{'readonly': [('procurement_ids', '!=', [])]}</attribute>
             </xpath>
@@ -151,53 +146,6 @@
 
         </field>
     </record>
-
-    <record id="view_sale_order_line_tree_specific_sale" model="ir.ui.view">
-        <field name="name">sale.order.line.tree.specific_sale</field>
-        <field name="model">sale.order.line</field>
-        <field name="inherit_id" ref="sale.view_order_line_tree"/>
-        <field name="arch" type="xml">
-
-            <xpath expr="//field[@name='order_id']" position="after">
-                <field name="date_order"/>
-            </xpath>
-
-            <xpath expr="//field[@name='product_uom_qty']" position="after">
-                <field name="product_qty_canceled"/>
-                <field name="product_qty_returned"/>
-                <field name="product_qty_remains_to_deliver"/>
-                <button name="%(sale_cancel_remaining.action_cancel_remaining_wizard)d" type="action" icon="fa-ban" attrs="{'invisible': [('product_qty_remains_to_deliver', '=', 0)]}"/>
-            </xpath>
-
-        </field>
-    </record>
-
-    <record id="view_sale_order_line_search_specific_sale" model="ir.ui.view">
-        <field name="name">sale.order.line.search.specific_sale</field>
-        <field name="model">sale.order.line</field>
-        <field name="inherit_id" ref="sale.view_sales_order_line_filter"/>
-        <field name="arch" type="xml">
-            <xpath expr="//field[@name='order_id']" position="before">
-                <field name="product_qty_remains_to_deliver"/>
-                <filter string="Remains to deliver" name="remains_to_deliver"
-                        domain="[('product_qty_remains_to_deliver', '>', 0),('product_type', 'in', ['consu', 'product']),('is_consignment','=',False)]"/>
-            </xpath>
-        </field>
-    </record>
-
-    <record id="action_sale_lines_unavailable_list" model="ir.actions.act_window">
-        <field name="name">Sale Order Lines</field>
-        <field name="res_model">sale.order.line</field>
-        <field name="view_id" ref="sale.view_order_line_tree"/>
-        <field name="search_view_id" ref="sale.view_sales_order_line_filter" />
-        <field name="domain">[('state', 'in', ['sale'])]</field>
-        <field name="context">{'search_default_remains_to_deliver': 1}</field>
-    </record>
-
-    <menuitem id="menu_sale_lines_unavailable_list"
-              action="action_sale_lines_unavailable_list"
-              parent="sales_team.menu_sale_report"
-              sequence="200"/>
 
     <record id="sale.action_quotations" model="ir.actions.act_window">
         <field name="domain">[('state', 'not in', ('sale', 'done'))]</field>
