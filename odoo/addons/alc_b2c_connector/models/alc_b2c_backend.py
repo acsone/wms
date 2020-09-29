@@ -34,6 +34,11 @@ class AlcB2CBackend(models.Model):
         domain=[("payment_type", "=", "inbound")],
     )
     payment_term_id = fields.Many2one("account.payment.term", string="Payment Terms")
+    is_sale_back_order_accepted = fields.Boolean(
+        string="Sale backorder accepted",
+        default=True,
+        help="Allows customer to order products not in stock",
+    )
 
     _sql_constraints = [("name_uniq", "UNIQUE(name)", _("Name must be unique"))]
 

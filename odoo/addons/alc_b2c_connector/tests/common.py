@@ -111,6 +111,7 @@ class CommonCase(SavepointComponentCase):
                 "sale_team_id": cls.env.ref("sales_team.salesteam_website_sales").id,
                 "payment_mode_id": cls.payment_mode.id,
                 "sale_channel": "web",
+                "is_sale_back_order_accepted": False,
             }
         )
 

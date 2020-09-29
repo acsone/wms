@@ -150,7 +150,7 @@ class SaleOrder(models.Model):
                 "city": customer_info.get("city"),
                 "phone": customer_info.get("phone"),
                 "mobile": customer_info.get("mobile"),
-                "is_sale_back_order_accepted": False,
+                "is_sale_back_order_accepted": b2c_backend.is_sale_back_order_accepted,
                 "is_b2c_customer": True,
                 "alcyon_category_id": self.env.ref(
                     "specific_partner.partner_category_student"
