@@ -20,7 +20,7 @@ msgstr ""
 
 #. module: sale_cancel_remaining
 #: model:ir.actions.act_window,name:sale_cancel_remaining.action_cancel_remaining_wizard
-#: model:ir.ui.view,arch_db:sale_cancel_remaining.view_order_form
+#: model:ir.ui.view,arch_db:sale_cancel_remaining.sale_order_form_view
 msgid "Cancel remaining qty"
 msgstr ""
 
@@ -88,7 +88,14 @@ msgstr ""
 
 #. module: sale_cancel_remaining
 #: model:ir.model.fields,field_description:sale_cancel_remaining.field_sale_order_line_product_qty_remains_to_deliver
+#: model:ir.ui.view,arch_db:sale_cancel_remaining.sale_order_line_search_view
 msgid "Remains to deliver"
+msgstr ""
+
+#. module: sale_cancel_remaining
+#: model:ir.actions.act_window,name:sale_cancel_remaining.action_sale_order_line_unavailable_list
+#: model:ir.ui.menu,name:sale_cancel_remaining.menu_sale_lines_unavailable_list
+msgid "Sale Order Lines"
 msgstr ""
 
 #. module: sale_cancel_remaining
