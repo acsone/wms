@@ -1,0 +1,30 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* alc_sale_product_qty_backorder
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_sale_product_qty_backorder
+#: model:ir.model.fields,help:alc_sale_product_qty_backorder.field_sale_order_line_product_qty_backorder
+msgid "As long as no quantity has been delivered, the BO quantity is the quantity unavailable at the time of the order minus the canceled quantity. Otherwise it is the quantity remaining to be delivered."
+msgstr ""
+
+#. module: alc_sale_product_qty_backorder
+#: model:ir.model.fields,field_description:alc_sale_product_qty_backorder.field_sale_order_line_product_qty_backorder
+msgid "Qty into back order"
+msgstr ""
+
+#. module: alc_sale_product_qty_backorder
+#: model:ir.model,name:alc_sale_product_qty_backorder.model_sale_order_line
+msgid "Sales Order Line"
+msgstr ""
+
