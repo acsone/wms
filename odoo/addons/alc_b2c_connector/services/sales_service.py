@@ -30,13 +30,21 @@ class SalesService(Component):
         so = (
             self.env["sale.order"]
             .suspend_security()
-            ._create_from_chonovet(params, self.b2c_backend)
+            ._create_from_b2c(params, self.b2c_backend)
         )
         return self._sale_order_to_search_result(so)
 
     def get(self, _id):
         """
-        Get order info
+        Get order info:
+
+        Into the response:
+         * the field state can have one of the following value:
+           * draft: Quote received and created into our system
+           * sale: Sale Order confirmed
+           * cancel: Sale Order cancelled
+           * delivery: Sale Order sent to the vet
+
         """
         res = self.env["sale.order"].suspend_security().search([("b2c_ref", "=", _id)])
         if not res:
@@ -45,7 +53,8 @@ class SalesService(Component):
 
     def search(self, **params):
         """
-        Get orders info
+        Get orders info. More information on the response content is available
+        on the 'get' method
         """
         domain = []
         ids = params.get("ids")
@@ -218,10 +227,11 @@ class SalesService(Component):
         return {
             "id": int(sale_order.b2c_ref),
             "ref": sale_order.name,
-            "state": sale_order.state,
+            "state": sale_order.b2c_state,
             "confirmation_date": self._to_dt_utc_with_tz(sale_order.confirmation_date),
             "lines": [
-                self._line_to_search_result(line) for line in sale_order.order_line
+                self._line_to_search_result(line)
+                for line in sale_order.order_line.filtered("b2c_ref")
             ],
         }
 

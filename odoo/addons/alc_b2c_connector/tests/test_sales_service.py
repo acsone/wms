@@ -99,6 +99,30 @@ class TestSalesService(CommonCase):
     def _get_so_from_name(self, name):
         return self.SaleOrder.search([("name", "=", name)])
 
+    def _process_picking(self, picking):
+        picking.force_assign()
+        for pack in picking.pack_operation_product_ids:
+            pack.qty_done = pack.product_qty
+        picking.do_new_transfer()
+
+    def _deliver_orders(self, orders):
+        for order in orders:
+            # validate SO
+            order.action_confirm()
+            # process deliveries
+            picking_internals = order.picking_ids.filtered(
+                lambda p: p.picking_type_code == "internal"
+            )
+            picking_outs = order.picking_ids.filtered(
+                lambda p: p.picking_type_code == "outgoing"
+            )
+            for picking in picking_internals:
+                self._process_picking(picking)
+                self.assertEqual(picking.state, "done")
+            for picking in picking_outs:
+                self._process_picking(picking)
+                self.assertEqual(picking.state, "done")
+
     def test_00(self):
         """
         Data:
@@ -373,3 +397,42 @@ class TestSalesService(CommonCase):
             },
             res,
         )
+
+    def test_10(self):
+        """
+        Test case:
+            1. Create a new SO with 2 lines.
+               5 saleable products are in stock
+               110  saleable product2s are in stock
+
+            2. Deliver available product
+        Expected result:
+            1 state is 'sale'
+            2 state is 'delivery'
+        """
+        recipient_info = self._gen_recipent()
+        params = {
+            "id": 99,
+            "customer_ref": self.vt_partner.ref,
+            "date": ISO_DT_WITH_TZ,
+            "recipient": recipient_info,
+            "lines": [
+                {
+                    "line_id": 2,
+                    "sku": self.saleable_product.default_code,
+                    "quantity": 10,
+                },
+                {
+                    "line_id": 3,
+                    "sku": self.saleable_product_2.default_code,
+                    "quantity": 1,
+                },
+            ],
+        }
+        res = self.sales_service.dispatch("create", params=params)
+        self.assertTrue(res)
+        new_so = self._get_so_from_name(res["ref"])
+        self.assertEqual("sale", res["state"])
+        self._deliver_orders(new_so)
+        res = self.sales_service.dispatch("get", _id=99)
+        self.assertEqual("delivery", res["state"])
