@@ -2,13 +2,10 @@
 # © 2016 Julien Coux (Camptocamp)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-import logging
 from datetime import timedelta
 
 from odoo.fields import Datetime
-from odoo.tests.common import TransactionCase, at_install, post_install
-
-_logger = logging.getLogger(__name__)
+from odoo.tests.common import TransactionCase
 
 
 class TestSaleOrderLineQtyUnavailable(TransactionCase):
@@ -64,8 +61,6 @@ class TestSaleOrderLineQtyUnavailable(TransactionCase):
         )
         self.inventory.action_done()
 
-    @at_install(False)
-    @post_install(True)
     def test_01_basic(self):
         # At test beginning, the product immediately usable quantity is 0
         self.assertEqual(self.p1.product_variant_ids[0].immediately_usable_qty, 0)

@@ -4,7 +4,6 @@
 
 from collections import defaultdict
 
-import odoo.addons.decimal_precision as dp
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError, ValidationError
 
@@ -211,12 +210,6 @@ class SaleOrderLine(models.Model):
                 line.warning_text = warning
                 line.set_line_name()
 
-    product_qty_unavailable = fields.Float(
-        string="Quantity unavailable",
-        digits=dp.get_precision("Product Unit of Measure"),
-        readonly=True,
-    )
-
     @api.multi
     def set_line_name(self):
         """ Set the name description on the line.
@@ -262,73 +255,6 @@ class SaleOrderLine(models.Model):
         set by Odooo
         """
         self.set_line_name()
-
-    @api.multi
-    def onchange(self, values, field_name, field_onchange):
-        """
-        NOTE BY LMIGNON: My little attempt to understand the motivation behind
-        this override.
-        The implementation into the onchange method computing a value for
-        product_qty_unavailable is conditioned to the presence of the
-        'must_compute_product_qty_unavailable' attribute into the context.
-        See procurement_sale.models.sale.onchange_for_product_qty_unavailable
-        By default the logic into onchange_for_product_qty_unavailable is
-        disabled if this attribute is not present.
-        Since the override of the onchange method is done into the
-        sale.order.line, the logic in onchange_for_product_qty_unavailable is
-        never executed if the call to onchange is done by editing a line into
-        the order_line tree into the sale order form. The logic is only
-        executed when the same line is edited into the Fast Line entry tree
-        since the onchange is called directly on the sale.order.line model.
-
-        TO BE REMOVED / REFACTORED / EXPLAINED
-        """
-        new_context = self.env.context.copy() if self.env.context else {}
-        if isinstance(field_name, list):
-            if "product_uom_qty" in field_name or "product_id" in field_name:
-                new_context["must_compute_product_qty_unavailable"] = True
-        else:
-            if field_name in ["product_uom_qty", "product_id"]:
-                new_context["must_compute_product_qty_unavailable"] = True
-        return super(SaleOrderLine, self.with_context(new_context)).onchange(
-            values, field_name, field_onchange
-        )
-
-    @api.model
-    def create(self, vals):
-        record = super(SaleOrderLine, self).create(vals)
-        # don't trigger product_qty_unavalable computation
-        # if the value is provided.
-        if vals.get("product_uom_qty") and "product_qty_unavailable" not in vals:
-            # Because product_qty_unavailable is readonly,
-            # we need to apply the onchange
-            # on create to save the correct values.
-            #
-            # Without that,
-            # the product_qty_unavailable isn't sent by form view,
-            # and its value isn't save.
-            record.with_context(
-                must_compute_product_qty_unavailable=True
-            ).onchange_for_product_qty_unavailable()
-        return record
-
-    @api.multi
-    def write(self, vals):
-        result = super(SaleOrderLine, self).write(vals)
-        # don't trigger product_qty_unavalable computation
-        # if the value is provided.
-        if vals.get("product_uom_qty") and "product_qty_unavailable" not in vals:
-            # Because product_qty_unavailable is readonly,
-            # we need to apply the onchange
-            # on write to save the correct values.
-            #
-            # Without that,
-            # the product_qty_unavailable isn't sent by form view,
-            # and its value isn't save.
-            self.with_context(
-                must_compute_product_qty_unavailable=True
-            ).onchange_for_product_qty_unavailable()
-        return result
 
     production_lot_ids = fields.Many2many(
         comodel_name="stock.production.lot",

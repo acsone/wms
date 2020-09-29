@@ -33,11 +33,12 @@ class TestSaleRoute(TransactionCase):
         self.route = self.env["stock.location.route"].create(
             {"name": "SO route", "sale_selectable": True}
         )
+        if "exception.rule" in self.env:
+            rules = self.env["exception.rule"].search([("active", "=", 1)])
+            rules.write({"active": 0})
 
     def test_route_change(self):
         """Test procurement update on route change"""
-        rules = self.env["exception.rule"].search([("active", "=", 1)])
-        rules.write({"active": 0})
         sol = self.so1.order_line[0]
         self.assertEqual(len(sol.procurement_ids), 0)
         self.so1.action_confirm()
@@ -70,4 +71,3 @@ class TestSaleRoute(TransactionCase):
         self.assertEqual(len(pick), 1)
         moves = pick.filtered(lambda p: p.state not in ("cancel", "waiting"))
         self.assertEqual(len(moves), 1)
-        rules.write({"active": 1})
