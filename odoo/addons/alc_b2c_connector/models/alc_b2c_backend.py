@@ -2,7 +2,7 @@
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import api, fields, models, tools
+from odoo import _, api, fields, models, tools
 from odoo.addons.server_environment import serv_config
 from odoo.http import request
 
@@ -34,6 +34,8 @@ class AlcB2CBackend(models.Model):
         domain=[("payment_type", "=", "inbound")],
     )
     payment_term_id = fields.Many2one("account.payment.term", string="Payment Terms")
+
+    _sql_constraints = [("name_uniq", "UNIQUE(name)", _("Name must be unique"))]
 
     @api.model
     def get_sale_channel_selection(self):
