@@ -49,7 +49,7 @@ class AccountInvoicePrint(models.Model):
             @return: dictionary of document path by invoice
         """
         attachment = self.env["report"]._check_attachment_use(
-            invoices.sorted(key=lambda r: r.partner_id.ref).ids,
+            invoices.ids,
             self.env["report"]._get_report_from_name("account.report_invoice"),
         )
         loaded_documents = attachment["loaded_documents"]
@@ -144,7 +144,9 @@ class AccountInvoicePrint(models.Model):
         )
 
         # sort all the invoices by partner ref and num
-        sorted_invoices = invoices.sorted(lambda i: (i.partner_id.ref, i.number))
+        sorted_invoices = invoices.sorted(
+            lambda i: (i.partner_id.name and i.partner_id.name.lower(), i.number)
+        )
 
         # sort path to generate a single document where invoices are ordered by
         # partner.ref, invoice.number

@@ -133,7 +133,9 @@ class TestAccountInvoicePring(SavepointCase):
         return invoice_print.generate_report()
 
     def _sort_invoices(self, invoices):
-        return invoices.sorted(lambda i: (i.partner_id.ref, i.number))
+        return invoices.sorted(
+            lambda i: (i.partner_id.name and i.partner_id.name.lower(), i.number)
+        )
 
     def _get_invoice_ids_from_invoices_path(self, invoices_path):
         return [int(p.split(".")[1]) for p in invoices_path]
