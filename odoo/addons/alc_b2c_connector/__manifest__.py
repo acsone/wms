@@ -17,6 +17,7 @@
         "account_payment_mode",
         "account_payment_sale",
         "alc_b2c_partner",
+        "alc_sale_product_qty_backorder",
         "auth_api_key",
         "base_rest",
         "base_suspend_security",
@@ -25,6 +26,7 @@
         "procurement_sale",  # confirmation_date field on SO
         "product_assortment",
         "sale",
+        "sale_cancel_remaining",
         "sale_confirm_background",
         "sales_team",
         "stock_available",

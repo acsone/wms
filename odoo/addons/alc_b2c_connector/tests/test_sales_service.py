@@ -55,7 +55,7 @@ class TestSalesService(CommonCase):
                         0,
                         0,
                         {
-                            "b2c_ref": "SOL1",
+                            "b2c_ref": 1,
                             "product_id": cls.saleable_product.id,
                             "name": cls.saleable_product.name,
                             "product_uom": cls.saleable_product.uom_id.id,
@@ -314,7 +314,9 @@ class TestSalesService(CommonCase):
     def test_09(self):
         """
         Test case:
-            Create a new SO with 2 lines
+            Create a new SO with 2 lines.
+            5 saleable products are in stock
+            110  saleable product2s are in stock
         Expected result:
             A new SO with 2 lines is created and confirmed
         """
@@ -342,3 +344,32 @@ class TestSalesService(CommonCase):
         new_so = self._get_so_from_name(res["ref"])
         self.assertEqual(2, len(new_so.order_line))
         self.assertEqual("sale", new_so.state)
+        res.pop("confirmation_date")
+        self.assertDictEqual(
+            {
+                "id": 2,
+                "lines": [
+                    {
+                        "line_id": 2,
+                        "qty_backorder": 5,
+                        "qty_cancelled": 0,
+                        "qty_delivered": 0,
+                        "qty_ordered": 10,
+                        "qty_returned": 0,
+                        "sku": u"12345",
+                    },
+                    {
+                        "line_id": 3,
+                        "qty_backorder": 0,
+                        "qty_cancelled": 0,
+                        "qty_delivered": 0,
+                        "qty_ordered": 1,
+                        "qty_returned": 0,
+                        "sku": u"23456",
+                    },
+                ],
+                "ref": new_so.name,
+                "state": u"sale",
+            },
+            res,
+        )
