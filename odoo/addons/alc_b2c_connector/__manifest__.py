@@ -5,9 +5,9 @@
 {
     "name": "Alc B2C Connector",
     "description": """
-        Alcyon: ChronoVet Connector
+        Alcyon: B2C Connector
 
-        A set of REST services used by ChronoVet to makes PO.
+        A set of REST services used by B2C market places to makes PO.
         """,
     "version": "10.0.1.0.0",
     "license": "AGPL-3",

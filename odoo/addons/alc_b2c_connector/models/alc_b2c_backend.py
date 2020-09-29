@@ -2,9 +2,8 @@
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, fields, models, tools
+from odoo import api, fields, models, tools
 from odoo.addons.server_environment import serv_config
-from odoo.exceptions import UserError
 from odoo.http import request
 
 
@@ -39,13 +38,6 @@ class AlcB2CBackend(models.Model):
     @api.model
     def get_sale_channel_selection(self):
         return self.env["sale.order"]._fields["sale_channel"].selection
-
-    @api.model
-    def create(self, vals):
-        existing = self.search([])
-        if existing:
-            raise UserError(_("Only 1 ChronoVet backend configuration is allowed."))
-        return super(AlcB2CBackend, self).create(vals)
 
     @classmethod
     def _get_api_key_section_name(cls, auth_api_key):

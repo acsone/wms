@@ -30,7 +30,7 @@ class SaleOrder(models.Model):
     ]
 
     @api.model
-    def _create_from_chonovet(self, data, b2c_backend):
+    def _create_from_b2c(self, data, b2c_backend):
         """ Create a sale order with data coming from b2c
         """
         order_data = self._parse_b2c_order(data, b2c_backend)
