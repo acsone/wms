@@ -30,7 +30,7 @@ class AlcChronovetReportCsvFaclign(models.AbstractModel):
                     "DATFACT": invoice.date_invoice,
                     "CDART": invoice.invoice_line_ids[0].product_id.code,
                     "DESART": invoice.invoice_line_ids[0].product_id.description,
-                    "PRIXUN": "",
+                    "PRIXUN": invoice.invoice_line_ids[0].price_unit,  # TBC
                     "PRIXREM": "",
                     "QTFACT": invoice.quantity,
                     "MONTHT": invoice.amount_untaxed,
@@ -51,7 +51,7 @@ class AlcChronovetReportCsvFaclign(models.AbstractModel):
                     "TOTALHT": invoice.amount_untaxed,
                     "MONTTVA": invoice.amount_tax,
                     "TOTALTTC": invoice.amount_total,
-                    "DATLIV": "",
+                    "DATLIV": invoice.purchase_id.date_done,  # TBC --date done on stock picking
                     "CIP": "",
                     "PUCAT": "",
                 }
