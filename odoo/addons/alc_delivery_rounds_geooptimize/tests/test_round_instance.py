@@ -470,6 +470,7 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
             "language": u"en_US",
             "options": {
                 "maxOptimDuration": "00:01:30",
+                "useForbiddenTransitAreas": False,
                 "vehicleCode": "deliveryIntermediateVehicle",
             },
             "orders": [
@@ -850,6 +851,7 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
             "language": u"en_US",
             "options": {
                 "maxOptimDuration": "00:01:30",
+                "useForbiddenTransitAreas": False,
                 "vehicleCode": "deliveryIntermediateVehicle",
             },
             "orders": [
@@ -945,6 +947,7 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
             "language": u"en_US",
             "options": {
                 "maxOptimDuration": "00:01:30",
+                "useForbiddenTransitAreas": False,
                 "vehicleCode": "deliveryIntermediateVehicle",
             },
             "orders": [
@@ -1036,6 +1039,7 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
             "language": u"en_US",
             "options": {
                 "maxOptimDuration": "00:01:30",
+                "useForbiddenTransitAreas": False,
                 "vehicleCode": "deliveryIntermediateVehicle",
             },
             "orders": [
@@ -1110,6 +1114,7 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
             "language": "en_US",
             "options": {
                 "maxOptimDuration": "00:01:30",
+                "useForbiddenTransitAreas": False,
                 "vehicleCode": "deliveryIntermediateVehicle",
             },
             "orders": [

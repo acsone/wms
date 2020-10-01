@@ -412,6 +412,7 @@ class RoundInstance(models.Model):
         return {
             "vehicleCode": "deliveryIntermediateVehicle",
             "maxOptimDuration": seconds_to_duration(cfg.duration),
+            "useForbiddenTransitAreas": False,
         }
 
     def _send_optimization_request(self, json_request):
