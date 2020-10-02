@@ -179,71 +179,41 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
             self.partner3.partner_longitude, 5.0840081, 3, "Longitude Should be equals"
         )
 
-        expected = {
-            "beginDate": "2017-01-01",
-            "countryCode": "BE",
-            "depots": [{"id": "dep_1", "x": 5.2758074, "y": 50.5825464}],
-            "language": u"en_US",
-            "options": {
-                "maxOptimDuration": "00:01:30",
-                "vehicleCode": "deliveryIntermediateVehicle",
+        expected = [
+            {
+                "customerId": partners[0].ref,
+                "fixedVisitDuration": "00:00:10",
+                "id": partners[0].id,
+                "label": partners[0].name,
+                "phone": "",
+                "type": 0,
+                "x": partners[0].partner_longitude,
+                "y": partners[0].partner_latitude,
             },
-            "orders": [
-                {
-                    "customerId": partners[0].ref,
-                    "fixedVisitDuration": "00:00:10",
-                    "id": partners[0].id,
-                    "label": partners[0].name,
-                    "phone": "",
-                    "type": 0,
-                    "x": partners[0].partner_longitude,
-                    "y": partners[0].partner_latitude,
-                },
-                {
-                    "customerId": partners[1].ref,
-                    "customDataMap": {"address": partners[1].contact_address},
-                    "fixedVisitDuration": "00:00:10",
-                    "id": partners[1].id,
-                    "label": partners[1].name,
-                    "phone": "",
-                    "type": 0,
-                    "x": partners[1].partner_longitude,
-                    "y": partners[1].partner_latitude,
-                },
-                {
-                    "customerId": partners[2].ref,
-                    "customDataMap": {"address": partners[2].contact_address},
-                    "fixedVisitDuration": "00:00:10",
-                    "id": partners[2].id,
-                    "label": partners[2].name,
-                    "phone": "",
-                    "type": 0,
-                    "x": partners[2].partner_longitude,
-                    "y": partners[2].partner_latitude,
-                },
-            ],
-            "resources": [
-                {
-                    "endX": 5.2758074,
-                    "endY": 50.5825464,
-                    "fixedLoadingDuration": "01:40:00",
-                    "globalCapacity": 9999,
-                    "id": "D1",
-                    "loadBeforeDeparture": True,
-                    "mobileLogin": "d1@alcyonbelux.be",
-                    "noReload": True,
-                    "openStart": False,
-                    "startX": 5.2758074,
-                    "startY": 50.5825464,
-                    "useAllCapacities": False,
-                    "workStartTime": "08:11:00",
-                    "workPenalty": 9.0,
-                    "travelPenalty": 1.5,
-                }
-            ],
-            "simulationName": self.delivery_round_1.display_name,
-        }
-        self.assertJsonEqual(res, expected)
+            {
+                "customerId": partners[1].ref,
+                "customDataMap": {"address": partners[1].contact_address},
+                "fixedVisitDuration": "00:00:10",
+                "id": partners[1].id,
+                "label": partners[1].name,
+                "phone": "",
+                "type": 0,
+                "x": partners[1].partner_longitude,
+                "y": partners[1].partner_latitude,
+            },
+            {
+                "customerId": partners[2].ref,
+                "customDataMap": {"address": partners[2].contact_address},
+                "fixedVisitDuration": "00:00:10",
+                "id": partners[2].id,
+                "label": partners[2].name,
+                "phone": "",
+                "type": 0,
+                "x": partners[2].partner_longitude,
+                "y": partners[2].partner_latitude,
+            },
+        ]
+        self.assertJsonEqual(res["orders"], expected)
 
     @responses.activate
     @freeze_time("2020-01-01 07:10:00")
