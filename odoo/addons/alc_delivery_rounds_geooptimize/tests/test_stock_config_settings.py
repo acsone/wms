@@ -30,6 +30,7 @@ class TestStockConfigSettings(SavepointCase):
                 "geo_optimization_delivery_duration": 10,
                 "geo_optimization_loading_duration": 100,
                 "geo_optimization_resources_number": 5,
+                "geo_optimization_daily_work_time": 5.0,
             }
         ).execute()
         config = self.StockConfigSettings.get_optimization_config()
@@ -40,6 +41,7 @@ class TestStockConfigSettings(SavepointCase):
         self.assertEqual(config.delivery_duration, 10)
         self.assertEqual(config.loading_duration, 100)
         self.assertEqual(config.resources_number, 5)
+        self.assertEqual(config.daily_work_time, 5.0)
 
         # an update on the parameters invalidate the config cache
         self.IrConfigParameter.set_param(

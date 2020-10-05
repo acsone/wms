@@ -507,6 +507,7 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
             ],
             "resources": [
                 {
+                    "dailyWorkTime": "10:00:00",
                     "endX": 5.2758074,
                     "endY": 50.5825464,
                     "fixedLoadingDuration": "01:40:00",
@@ -892,6 +893,7 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
             ],
             "resources": [
                 {
+                    "dailyWorkTime": "10:00:00",
                     "endX": 5.2758074,
                     "endY": 50.5825464,
                     "fixedLoadingDuration": "01:40:00",
@@ -984,6 +986,7 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
             ],
             "resources": [
                 {
+                    "dailyWorkTime": "10:00:00",
                     "endX": 5.2758074,
                     "endY": 50.5825464,
                     "fixedLoadingDuration": "01:40:00",
@@ -1076,6 +1079,7 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
             ],
             "resources": [
                 {
+                    "dailyWorkTime": "10:00:00",
                     "endX": 5.2758074,
                     "endY": 50.5825464,
                     "fixedLoadingDuration": "01:40:00",
@@ -1151,6 +1155,7 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
             ],
             "resources": [
                 {
+                    "dailyWorkTime": "10:00:00",
                     "endX": 5.2758074,
                     "endY": 50.5825464,
                     "fixedLoadingDuration": "01:40:00",

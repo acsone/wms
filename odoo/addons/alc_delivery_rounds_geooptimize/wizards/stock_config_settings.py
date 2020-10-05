@@ -9,7 +9,8 @@ from odoo.tools import ormcache
 
 OptimizationConfig = namedtuple(
     "OptimizationConfig",
-    "enabled,api_url,api_key,duration,delivery_duration,loading_duration,resources_number,work_penalty,travel_penalty",
+    "enabled,api_url,api_key,duration,delivery_duration,loading_duration,"
+    "resources_number,work_penalty,travel_penalty,daily_work_time",
 )
 
 
@@ -43,6 +44,7 @@ class StockConfigSettings(models.TransientModel):
         "Fixed cost travelling/hour",
         help="The cost for a resource of driving for one distance unit.",
     )
+    geo_optimization_daily_work_time = fields.Float("Resources Daily Working Hours")
 
     @api.model
     @ormcache()
@@ -91,6 +93,13 @@ class StockConfigSettings(models.TransientModel):
             )
         )
 
+        daily_work_time = float(
+            IrConfigParameter.get_param(
+                "alc_delivery_rounds_geooptimize.geo_optimization_daily_work_time",
+                "10.0",
+            )
+        )
+
         return OptimizationConfig(
             enabled=enabled,
             api_url=api_url,
@@ -101,6 +110,7 @@ class StockConfigSettings(models.TransientModel):
             resources_number=resources_number,
             work_penalty=work_penalty,
             travel_penalty=travel_penalty,
+            daily_work_time=daily_work_time,
         )
 
     @api.model
@@ -125,6 +135,9 @@ class StockConfigSettings(models.TransientModel):
             res["geo_optimization_work_penalty"] = cfg.work_penalty
         if "geo_optimization_travel_penalty" in fields or not fields:
             res["geo_optimization_travel_penalty"] = cfg.travel_penalty
+        if "geo_optimization_daily_work_time" in fields or not fields:
+            res["geo_optimization_daily_work_time"] = cfg.daily_work_time
+
         return res
 
     @api.multi
@@ -206,4 +219,13 @@ class StockConfigSettings(models.TransientModel):
         self.env["ir.config_parameter"].set_param(
             "alc_delivery_rounds_geooptimize.geo_optimization_travel_penalty",
             self.geo_optimization_travel_penalty or "1.5",
+        )
+
+    @api.multi
+    def set_geo_optimization_daily_work_time(self):
+        self.ensure_one()
+
+        self.env["ir.config_parameter"].set_param(
+            "alc_delivery_rounds_geooptimize.geo_optimization_daily_work_time",
+            self.geo_optimization_daily_work_time or "10.0",
         )

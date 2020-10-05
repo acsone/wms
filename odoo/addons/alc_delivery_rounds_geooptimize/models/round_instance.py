@@ -374,17 +374,18 @@ class RoundInstance(models.Model):
             ret.append(order)
         return ret
 
-    def _generate_optimization_resources(self, cfg):
-        address = self.warehouse_id.partner_id
-        pattern = "%02d:%02d:00"
-        time_loading = self.stat_time_loading or self._compute_stat_time_loading()
-        hour = math.floor(time_loading)
-        min = round((time_loading % 1) * 60)
+    def float_time_to_str_time(self, float_time, pattern="%02d:%02d:00"):
+        hour = math.floor(float_time)
+        min = round((float_time % 1) * 60)
         if min == 60:
             min = 0
             hour += 1
+        return pattern % (hour, min)
 
-        work_start_time = pattern % (hour, min)
+    def _generate_optimization_resources(self, cfg):
+        address = self.warehouse_id.partner_id
+        time_loading = self.stat_time_loading or self._compute_stat_time_loading()
+        work_start_time = self.float_time_to_str_time(time_loading)
         h, m = divmod(cfg.loading_duration, 60)
         fixed_loading_duration = "%02d:%02d:00" % (h, m)
         return [
@@ -405,6 +406,7 @@ class RoundInstance(models.Model):
                 "useAllCapacities": False,
                 "travelPenalty": cfg.travel_penalty,
                 "workPenalty": cfg.work_penalty,
+                "dailyWorkTime": self.float_time_to_str_time(cfg.daily_work_time),
             }
         ]
 
