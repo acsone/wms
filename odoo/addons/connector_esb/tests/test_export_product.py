@@ -104,7 +104,19 @@ class ExportProductTestCase(ESBXMLTestCase):
                 "width": 19.0,
                 "volume": 0.005,
                 "tracking": "serial",
-                "unit_in_shrink_wrap": 4,
+                "packaging_ids": [
+                    (
+                        0,
+                        0,
+                        {
+                            "qty": 4,
+                            "packaging_type_id": self.env.ref(
+                                "alc_product_packaging.product_packaging_type_shrink_wrap"
+                            ).id,
+                            "name": "Wrap",
+                        },
+                    )
+                ],
                 "uom_id": cm.id,
                 "uom_po_id": cm.id,
                 "price_category_id": alg.id,
