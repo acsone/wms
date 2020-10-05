@@ -8,7 +8,7 @@
                 <filter name="late" position="after">
                     <filter name="grn" string="Received" domain="[('grn_id', '!=', False)]"/>
                     <filter name="nogrn" string="Not Received" domain="[('grn_id', '=', False)]"/>
-                    <filter name="five_days" string="Received more than 5 days ago" domain="[('grn_date', '&lt;', (context_today() + relativedelta(days=-5)).strftime('%Y-%m-%d'))]"/>
+                    <filter name="time_exceeded" string="Outdated receipt" domain="[('is_time_exceeded', '=', True)]"/>
                 </filter>
             </field>
         </record>
@@ -17,9 +17,14 @@
             <field name="model">stock.picking</field>
             <field name="inherit_id" ref="stock.vpicktree"/>
             <field name="arch" type="xml">
+                <xpath expr="//tree" position="attributes">
+                    <attribute name="colors">red:is_time_exceeded == True</attribute>
+                </xpath>
                 <field name="state" position="after">
                     <field name="grn_id" widget="boolean" string="GRN"/>
                     <field name="grn_date" widget="date"/>
+                    <field name="time_delay"/>
+                    <field name="is_time_exceeded" invisible="1"/>
                 </field>
             </field>
         </record>
@@ -32,6 +37,7 @@
                     <field name="picking_type_code" invisible="1" />
                     <field name="grn_id" attrs="{'invisible':[('picking_type_code','!=','incoming')]}" options="{'no_create':True}"/>
                     <field name="grn_date" attrs="{'invisible':[('picking_type_code','!=','incoming')]}"/>
+                    <field name="time_delay" attrs="{'invisible':[('picking_type_code','!=','incoming')]}"/>
                 </field>
             </field>
         </record>
