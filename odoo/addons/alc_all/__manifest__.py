@@ -95,6 +95,7 @@
         "alc_placedesvetos_to_magento",
         "alc_placedesvetos_payment_globalization",
         "alc_product_uom_updatable",
+        "alc_sale_cancel_remaining_product_additional",
         "alc_sale_invoicing_on_transfer",
         "alc_sale_invoicing_policy",
         "alc_sale_processing_finalizer",
