@@ -11,7 +11,13 @@
     "description": """
     Website purchase review
     """,
-    "depends": ["purchase", "stock", "stock_orderpoint_product", "code_abc"],
+    "depends": [
+        "alc_product_packaging",
+        "purchase",
+        "stock",
+        "stock_orderpoint_product",
+        "code_abc",
+    ],
     "data": ["views/purchase_order.xml", "views/templates.xml"],
     "website": "http://www.camptocamp.com",
     "installable": True,

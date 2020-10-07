@@ -11,6 +11,7 @@
     "depends": [
         "alc_base_auto_join",
         "alc_sale_product_qty_backorder",
+        "alc_product_packaging",
         "connector",
         "delivery_rounds",
         "onchange_helper",

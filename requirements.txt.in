@@ -19,6 +19,9 @@ odoo10-addon-account-banking-mandate @ git+https://github.com/oca/bank-payment.g
 
 # oca/product-attribute
 odoo10-addon-stock-production-lot-expiry @ git+https://github.com/oca/product-attribute.git@refs/pull/670/head#subdirectory=setup/stock_production_lot_expiry
+odoo10-addon-product-packaging-type @ git+https://github.com/oca/product-attribute.git@refs/pull/693/head#subdirectory=setup/product_packaging_type
+odoo10-addon-product-packaging-dimension @ git+https://github.com/oca/product-attribute.git@refs/pull/695/head#subdirectory=setup/product_packaging_dimension
+odoo10-addon-product-packaging-type-pallet @ git+https://github.com/oca/product-attribute.git@refs/pull/696/head#subdirectory=setup/product_packaging_type_pallet
 
 # oca/account-invoicing
 odoo10-addon-sale-stock-restocking-fee-invoicing @ git+https://github.com/oca/account-invoicing.git@refs/pull/784/head#subdirectory=setup/sale_stock_restocking_fee_invoicing

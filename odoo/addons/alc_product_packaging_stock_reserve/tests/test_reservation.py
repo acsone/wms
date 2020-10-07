@@ -1,27 +1,52 @@
 # -*- coding: utf-8 -*-
 
 
-from odoo.tests.common import TransactionCase
+from odoo.tests.common import SavepointCase
 
 
-class TestReservationUnit(TransactionCase):
+class TestReservationUnit(SavepointCase):
+    @classmethod
+    def setUpClass(cls):
+        super(TestReservationUnit, cls).setUpClass()
 
-    post_install = True
-    at_install = False
-
-    def setUp(self):
-        super(TestReservationUnit, self).setUp()
-
-        self.product_1 = self.env["product.product"].create(
+        cls.product_1 = cls.env["product.product"].create(
             {
                 "name": "Product 1",
                 "type": "product",
-                "uom_id": self.env.ref("product.product_uom_unit").id,
-                "uom_po_id": self.env.ref("product.product_uom_unit").id,
+                "uom_id": cls.env.ref("product.product_uom_unit").id,
+                "uom_po_id": cls.env.ref("product.product_uom_unit").id,
                 "default_code": "Code product 1",
-                "unit_in_pallet": 80,
-                "unit_in_box": 20,
-                "unit_in_shrink_wrap": 8,
+            }
+        )
+        cls.ProductPackaging = cls.env["product.packaging"]
+        cls.ProductPackaging.create(
+            {
+                "packaging_type_id": cls.env.ref(
+                    "alc_product_packaging.product_packaging_type_palette"
+                ).id,
+                "name": "Palette",
+                "qty": 80,
+                "product_tmpl_id": cls.product_1.product_tmpl_id.id,
+            }
+        )
+        cls.ProductPackaging.create(
+            {
+                "packaging_type_id": cls.env.ref(
+                    "alc_product_packaging.product_packaging_type_box"
+                ).id,
+                "name": "Box",
+                "qty": 20,
+                "product_tmpl_id": cls.product_1.product_tmpl_id.id,
+            }
+        )
+        cls.ProductPackaging.create(
+            {
+                "packaging_type_id": cls.env.ref(
+                    "alc_product_packaging.product_packaging_type_shrink_wrap"
+                ).id,
+                "name": "Wrap",
+                "qty": 8,
+                "product_tmpl_id": cls.product_1.product_tmpl_id.id,
             }
         )
 

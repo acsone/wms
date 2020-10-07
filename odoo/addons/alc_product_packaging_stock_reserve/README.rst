@@ -16,6 +16,10 @@ packaged properly and that a quant with a high quantity contains packaged goods.
 
 3 types of packaging are added on the product: pallet, box, shrink-wrap
 
+
+THIS ADDONS SHOULD BE REPLACED WHEN MIGRATING BY
+https://github.com/OCA/stock-logistics-warehouse/tree/13.0/stock_reserve_rule
+
 Installation
 ============
 

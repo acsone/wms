@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2020 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+    <record model="ir.ui.view" id="product_packaging_type_form_view">
+        <field name="name">product.packaging.type.form (in alc_product_packaging_stock_reserve)</field>
+        <field name="model">product.packaging.type</field>
+        <field name="inherit_id" ref="product_packaging_type.view_product_packaging_type_form"/>
+        <field name="arch" type="xml">
+            <group name="main" position="after">
+                <group name="stock" groups="stock.group_stock_manager">
+                    <group name="reservation">
+                        <field name="stock_reservation_factor"/>
+                    </group>
+                </group>
+            </group>
+        </field>
+    </record>
+
+</odoo>

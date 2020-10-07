@@ -13,6 +13,11 @@ class StockQuant(models.Model):
     _inherit = "stock.quant"
 
     @api.model
+    def _get_packagings(self, move):
+        # return biggest package first ...
+        return move.product_id.mapped("packaging_ids").sorted("qty", reverse=True)
+
+    @api.model
     def quants_get_preferred_domain(
         self,
         qty,
@@ -35,35 +40,16 @@ class StockQuant(models.Model):
             preferred_domain_list = []
             exclude_domain = []
             if qty >= min_qty:
-                pallet_factor = float(
-                    config_param.get_param("stock.reservation_unit_pallet_factor", 1)
-                )
-                pallet_qty = move.product_id.unit_in_pallet * pallet_factor
-                if pallet_qty and qty >= pallet_qty:
-                    preferred_domain_list.append(
-                        [("qty", ">=", pallet_qty)] + exclude_domain
-                    )
-                    exclude_domain.append(("qty", "<", pallet_qty))
-
-                box_factor = float(
-                    config_param.get_param("stock.reservation_unit_box_factor", 1)
-                )
-                box_qty = move.product_id.unit_in_box * box_factor
-                if box_qty and qty >= box_qty:
-                    preferred_domain_list.append(
-                        [("qty", ">=", box_qty)] + exclude_domain
-                    )
-                    exclude_domain.append(("qty", "<", box_qty))
-
-                wrap_factor = float(
-                    config_param.get_param("stock.reservation_unit_wrap_factor", 1)
-                )
-                wrap_qty = move.product_id.unit_in_shrink_wrap * wrap_factor
-                if wrap_qty and qty >= wrap_qty:
-                    preferred_domain_list.append(
-                        [("qty", ">=", wrap_qty)] + exclude_domain
-                    )
-                    exclude_domain.append(("qty", "<", wrap_qty))
+                for packaging in self._get_packagings(move):
+                    factor = packaging.packaging_type_id.stock_reservation_factor
+                    if not factor:
+                        continue
+                    min_reservable_qty = packaging.qty * factor
+                    if min_reservable_qty and qty >= min_reservable_qty:
+                        preferred_domain_list.append(
+                            [("qty", ">=", min_reservable_qty)] + exclude_domain
+                        )
+                        exclude_domain.append(("qty", "<", min_reservable_qty))
 
                 if preferred_domain_list:
                     preferred_domain_list.append(exclude_domain)

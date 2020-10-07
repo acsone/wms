@@ -76,6 +76,9 @@
         "base_geoengine",
         "sale_stock_restocking_fee_invoicing",
         "stock_location_product_restriction",
+        "product_packaging_type",
+        "product_packaging_type_pallet",
+        "product_packaging_dimension",
         # specific
         "alc_running_env",
         # "alc_geo_delivery_rounds",
@@ -94,6 +97,8 @@
         "alc_placedesvetos",
         "alc_placedesvetos_to_magento",
         "alc_placedesvetos_payment_globalization",
+        "alc_product_packaging",
+        "alc_product_packaging_stock_reserve",
         "alc_product_uom_updatable",
         "alc_sale_cancel_remaining_product_additional",
         "alc_sale_invoicing_on_transfer",
@@ -147,6 +152,6 @@
         "web_autorefresh",
     ],
     "application": True,
-    "data": ["security/sale_order.xml"],
+    "data": ["security/sale_order.xml", "views/product_packaging.xml"],
     "demo": [],
 }
