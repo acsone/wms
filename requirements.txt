@@ -143,7 +143,7 @@ odoo10-addon-report-xlsx-helper @ git+https://github.com/acsone/reporting-engine
 odoo10-addon-report-xml==10.0.1.0.0.99.dev3
 odoo10-addon-sale-exception @ git+https://github.com/acsone/sale-workflow.git@b9987e4eb546f9ea8c0ee88e507072252b0d57d3#subdirectory=setup/sale_exception
 odoo10-addon-sale-stock-picking-blocking @ git+https://github.com/acsone/sale-workflow.git@b9987e4eb546f9ea8c0ee88e507072252b0d57d3#subdirectory=setup/sale_stock_picking_blocking
-odoo10-addon-sale-stock-restocking-fee-invoicing @ git+https://github.com/acsone/account-invoicing.git@150fe987b73a6569ef3d2012a53fc8fcd664fa09#subdirectory=setup/sale_stock_restocking_fee_invoicing
+odoo10-addon-sale-stock-restocking-fee-invoicing @ git+https://github.com/acsone/account-invoicing.git@ab5c1ec23d57c671712755ac44192acfa78e842d#subdirectory=setup/sale_stock_restocking_fee_invoicing
 odoo10-addon-sale-triple-discount @ git+https://github.com/acsone/sale-workflow.git@0821f306cd46c82aee04452ba8bd2d9ef18706fd#subdirectory=setup/sale_triple_discount
 odoo10-addon-server-environment @ git+https://github.com/acsone/server-tools.git@dcefdba5bac014076f05229ba091acd8b739e164#subdirectory=setup/server_environment
 odoo10-addon-server-environment-ir-config-parameter @ git+https://github.com/acsone/server-tools.git@dcefdba5bac014076f05229ba091acd8b739e164#subdirectory=setup/server_environment_ir_config_parameter
