@@ -152,6 +152,10 @@
         "web_autorefresh",
     ],
     "application": True,
-    "data": ["security/sale_order.xml", "views/product_packaging.xml"],
+    "data": [
+        "security/sale_order.xml",
+        "views/product_packaging.xml",
+        "views/product_template.xml",
+    ],
     "demo": [],
 }
