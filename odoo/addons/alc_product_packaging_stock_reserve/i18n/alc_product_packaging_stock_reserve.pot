@@ -14,18 +14,13 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_product_packaging_stock_reserve
-#: model:ir.model.fields,field_description:alc_product_packaging_stock_reserve.field_stock_config_settings_reservation_unit_box_factor
-msgid "Factor for boxes"
+#: model:ir.ui.view,arch_db:alc_product_packaging_stock_reserve.view_stock_config_settings
+msgid "Configure Packaging Ratio By Type"
 msgstr ""
 
 #. module: alc_product_packaging_stock_reserve
-#: model:ir.model.fields,field_description:alc_product_packaging_stock_reserve.field_stock_config_settings_reservation_unit_pallet_factor
-msgid "Factor for pallets"
-msgstr ""
-
-#. module: alc_product_packaging_stock_reserve
-#: model:ir.model.fields,field_description:alc_product_packaging_stock_reserve.field_stock_config_settings_reservation_unit_wrap_factor
-msgid "Factor for shrink wrap"
+#: model:ir.model.fields,help:alc_product_packaging_stock_reserve.field_product_packaging_type_stock_reservation_factor
+msgid "Factor specifying what is the acceptable percentage of a package reservable."
 msgstr ""
 
 #. module: alc_product_packaging_stock_reserve
@@ -39,34 +34,18 @@ msgid "Packaging reservation"
 msgstr ""
 
 #. module: alc_product_packaging_stock_reserve
-#: model:ir.model,name:alc_product_packaging_stock_reserve.model_product_template
-msgid "Product Template"
-msgstr ""
-
-#. module: alc_product_packaging_stock_reserve
 #: model:ir.model,name:alc_product_packaging_stock_reserve.model_stock_quant
 msgid "Quants"
 msgstr ""
 
 #. module: alc_product_packaging_stock_reserve
-#: model:ir.model.fields,field_description:alc_product_packaging_stock_reserve.field_delivery_carrier_unit_in_box
-#: model:ir.model.fields,field_description:alc_product_packaging_stock_reserve.field_product_product_unit_in_box
-#: model:ir.model.fields,field_description:alc_product_packaging_stock_reserve.field_product_template_unit_in_box
-msgid "Unit in box"
+#: model:ir.model.fields,field_description:alc_product_packaging_stock_reserve.field_product_packaging_type_stock_reservation_factor
+msgid "Reservation factor"
 msgstr ""
 
 #. module: alc_product_packaging_stock_reserve
-#: model:ir.model.fields,field_description:alc_product_packaging_stock_reserve.field_delivery_carrier_unit_in_pallet
-#: model:ir.model.fields,field_description:alc_product_packaging_stock_reserve.field_product_product_unit_in_pallet
-#: model:ir.model.fields,field_description:alc_product_packaging_stock_reserve.field_product_template_unit_in_pallet
-msgid "Unit in pallet"
-msgstr ""
-
-#. module: alc_product_packaging_stock_reserve
-#: model:ir.model.fields,field_description:alc_product_packaging_stock_reserve.field_delivery_carrier_unit_in_shrink_wrap
-#: model:ir.model.fields,field_description:alc_product_packaging_stock_reserve.field_product_product_unit_in_shrink_wrap
-#: model:ir.model.fields,field_description:alc_product_packaging_stock_reserve.field_product_template_unit_in_shrink_wrap
-msgid "Unit in shrink-wrap"
+#: model:ir.model,name:alc_product_packaging_stock_reserve.model_product_packaging_type
+msgid "Type management for product.packaging"
 msgstr ""
 
 #. module: alc_product_packaging_stock_reserve
