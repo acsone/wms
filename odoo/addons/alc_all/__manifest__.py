@@ -94,6 +94,7 @@
         "alc_chronovet_payment_globalization",
         "alc_delivery_rounds_partner_geolocalize",
         "alc_edi_connector",
+        "alc_partner_manual_sale_order",
         "alc_placedesvetos",
         "alc_placedesvetos_to_magento",
         "alc_placedesvetos_payment_globalization",

@@ -2,6 +2,7 @@
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+from odoo.exceptions import ValidationError
 from odoo.tests.common import SavepointCase
 
 
@@ -48,3 +49,43 @@ class TestResPartner(SavepointCase):
         self.assertTrue(self.partner.is_b2c_customer)
         self.partner.write({"category_id": [(3, self.bc2_category.id)]})
         self.assertFalse(self.partner.is_b2c_customer)
+
+    def test_02(self):
+        """
+        Data:
+            partner without category
+        Test case:
+            set manual_sale_order_allowed
+            set is_bc2_customer
+            set manual_sale_order_allowed
+        Expected result
+            manual_sale_order_allowed is True
+            manual_sale_order_allowed is False
+            ValidationError
+        """
+        self.partner.manual_sale_order_allowed = True
+        self.assertTrue(self.partner.manual_sale_order_allowed)
+        self.partner.is_b2c_customer = True
+        self.assertFalse(self.partner.manual_sale_order_allowed)
+        with self.assertRaises(ValidationError):
+            self.partner.manual_sale_order_allowed = True
+
+    def test_03(self):
+        """
+        Data:
+            partner without category
+        Test case:
+            set manual_sale_order_allowed
+            add b2c_category
+            set manual_sale_order_allowed
+        Expected result
+            manual_sale_order_allowed is True
+            manual_sale_order_allowed is False
+            ValidationError
+        """
+        self.partner.manual_sale_order_allowed = True
+        self.assertTrue(self.partner.manual_sale_order_allowed)
+        self.partner.write({"category_id": [(4, self.bc2_category.id)]})
+        self.assertFalse(self.partner.manual_sale_order_allowed)
+        with self.assertRaises(ValidationError):
+            self.partner.manual_sale_order_allowed = True
