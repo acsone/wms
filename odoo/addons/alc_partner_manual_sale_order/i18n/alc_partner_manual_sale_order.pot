@@ -1,16 +1,13 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* alc_partner_manual_sale_order
+#	* alc_partner_manual_sale_order
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-08 08:02+0000\n"
-"PO-Revision-Date: 2020-10-08 08:02+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -19,15 +16,16 @@ msgstr ""
 #. module: alc_partner_manual_sale_order
 #: model:ir.ui.view,arch_db:alc_partner_manual_sale_order.res_partner_search_view
 msgid "Direct customers (manual order allowed)"
-msgstr "Client direct (Encodage manuel de commandes autorisé)"
+msgstr ""
 
 #. module: alc_partner_manual_sale_order
 #: model:ir.model.fields,field_description:alc_partner_manual_sale_order.field_res_partner_manual_sale_order_allowed
 #: model:ir.model.fields,field_description:alc_partner_manual_sale_order.field_res_users_manual_sale_order_allowed
 msgid "Manual sale order allowed"
-msgstr "Encodage manuel de commandes autorisé"
+msgstr ""
 
 #. module: alc_partner_manual_sale_order
 #: model:ir.model,name:alc_partner_manual_sale_order.model_res_partner
 msgid "Partner"
-msgstr "Partenaire"
+msgstr ""
+
