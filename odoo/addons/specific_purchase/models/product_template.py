@@ -92,17 +92,16 @@ class ProductProduct(models.Model):
         if not args:
             args = []
 
-        if not limit:
-            limit = 100
-
         result = super(ProductProduct, self).name_search(
             name=name, args=args, operator=operator, limit=limit
         )
 
-        if len(result) >= limit:
+        if limit and len(result) >= limit:
             return result
 
-        limit_available = limit - len(result)
+        limit_available = None
+        if limit:
+            limit_available = limit - len(result)
         existing_ids = [x[0] for x in result]
         products = self.search(
             [("vendor_product_code", "=", name), ("id", "not in", existing_ids)] + args,
