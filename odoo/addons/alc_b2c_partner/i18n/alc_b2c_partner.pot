@@ -31,6 +31,12 @@ msgid "Is b2c customer"
 msgstr ""
 
 #. module: alc_b2c_partner
+#: code:addons/alc_b2c_partner/models/res_partner.py:26
+#, python-format
+msgid "Manual sale order not allowed for B2C cutomers (%s)"
+msgstr ""
+
+#. module: alc_b2c_partner
 #: model:ir.model,name:alc_b2c_partner.model_res_partner
 msgid "Partner"
 msgstr ""
