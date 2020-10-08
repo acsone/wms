@@ -88,6 +88,7 @@
         "alc_account_payment_globalization",
         "alc_analytic_category_report",
         "alc_b2c_connector",
+        "alc_b2c_connector_pricelist_discount",
         "alc_b2c_to_magento",
         "alc_chronovet",
         "alc_chronovet_to_magento",
