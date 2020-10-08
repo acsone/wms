@@ -112,8 +112,10 @@ class TestStockMove(SavepointCase):
         pick.do_transfer()
 
         # Make sure additional product is in the loop
-        self.assertEqual(len(pick.move_lines), 2)
-        self.assertEqual(len(pick.pack_operation_ids), 2)
+        self.assertIn(self.additional_product, pick.mapped("move_lines.product_id"))
+        self.assertIn(
+            self.additional_product, pick.mapped("pack_operation_ids.product_id")
+        )
 
         ship.action_confirm()
         ship.action_assign()
@@ -123,7 +125,8 @@ class TestStockMove(SavepointCase):
         ship.do_transfer()
 
         # Make sure additional product is in the loop
-        self.assertEqual(len(ship.move_lines), 2)
+        self.assertIn(self.additional_product, ship.mapped("move_lines.product_id"))
+
         sol = self.so.order_line[0]
 
         # Create return
