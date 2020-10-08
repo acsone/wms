@@ -25,6 +25,7 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
             )
         )
         cls.delivery_round_1 = cls.delivery_round_1.with_context(cls.env.context)
+
         cls.StockConfigSettings = cls.env["stock.config.settings"]
         cls.StockConfigSettings.create(
             {
@@ -40,7 +41,11 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
             }
         ).execute()
         cls.delivery_round_1.write(
-            {"geo_optimization_enabled": True, "geo_optimization_resource_id": "D1"}
+            {
+                "geo_optimization_enabled": True,
+                "geo_optimization_resource_id": "D1",
+                "date": "2020-10-15",
+            }
         )
         cls.partner1.write({"partner_latitude": 10.1, "partner_longitude": 10.1})
         cls.partner2.write({"partner_latitude": 10.2, "partner_longitude": 10.2})
@@ -464,7 +469,7 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
         partner_ids.sort()
         partners = self.env["res.partner"].browse(partner_ids)
         expected = {
-            "beginDate": "2017-01-01",
+            "beginDate": "2020-10-15",
             "countryCode": "BE",
             "depots": [{"id": "dep_1", "x": 5.2758074, "y": 50.5825464}],
             "language": u"en_US",
@@ -534,25 +539,26 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
         Data:
             A round ready to be delivered for 3 partners
         Test case:
-            Add 2 delivery windows on partner1 for current day
-            Add 2 delivery windows on partner2 for tomorrow
+            Add 1 delivery windows on partner1 for delivery date
             Call method _generate_optimization_request
 
         Expected result:
             The json is conform to what's expected (only contains time windows
             for partner1)
         """
-        today = datetime.datetime.today()
-        week_day_today = today.weekday()
-        week_day_tomorrow = (today + datetime.timedelta(days=1)).weekday()
+
+        date_delivery = datetime.datetime.strptime(
+            self.delivery_round_1.date, "%Y-%m-%d"
+        )
+        week_day_delivery = date_delivery.weekday()
+
         AlcDeliveryWeekDay = self.env["alc.delivery.week.day"]
         AlcDeliveryWindow = self.env["alc.delivery.window"]
-        today_id = AlcDeliveryWeekDay._get_id_by_name("%s" % week_day_today)
-        tomorrow_id = AlcDeliveryWeekDay._get_id_by_name("%s" % week_day_tomorrow)
+        date_delivery_id = AlcDeliveryWeekDay._get_id_by_name("%s" % week_day_delivery)
         AlcDeliveryWindow.create(
             {
                 "partner_id": self.partner1.id,
-                "week_day_ids": [(4, today_id)],
+                "week_day_ids": [(4, date_delivery_id)],
                 "start": 16.0,
                 "end": 18.0,
             }
@@ -560,25 +566,9 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
         AlcDeliveryWindow.create(
             {
                 "partner_id": self.partner1.id,
-                "week_day_ids": [(4, today_id)],
+                "week_day_ids": [(4, date_delivery_id)],
                 "start": 10.0,
                 "end": 12.0,
-            }
-        )
-        AlcDeliveryWindow.create(
-            {
-                "partner_id": self.partner2.id,
-                "week_day_ids": [(4, tomorrow_id)],
-                "start": 11.0,
-                "end": 13.0,
-            }
-        )
-        AlcDeliveryWindow.create(
-            {
-                "partner_id": self.partner2.id,
-                "week_day_ids": [(4, tomorrow_id)],
-                "start": 15.0,
-                "end": 17.0,
             }
         )
         cfg = self.delivery_round_1.get_optimization_config()
@@ -846,7 +836,7 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
         partners = self.env["res.partner"].browse(partner_ids)
 
         expected = {
-            "beginDate": "2017-01-01",
+            "beginDate": "2020-10-15",
             "countryCode": "BE",
             "depots": [{"id": "dep_1", "x": 5.2758074, "y": 50.5825464}],
             "language": u"en_US",
@@ -943,7 +933,7 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
         partners = self.env["res.partner"].browse(partner_ids)
 
         expected = {
-            "beginDate": "2017-01-01",
+            "beginDate": "2020-10-15",
             "countryCode": "BE",
             "depots": [{"id": "dep_1", "x": 5.2758074, "y": 50.5825464}],
             "language": u"en_US",
@@ -1036,7 +1026,7 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
         partners = self.env["res.partner"].browse(partner_ids)
 
         expected = {
-            "beginDate": "2017-01-01",
+            "beginDate": "2020-10-15",
             "countryCode": "BE",
             "depots": [{"id": "dep_1", "x": 5.2758074, "y": 50.5825464}],
             "language": u"en_US",
@@ -1112,7 +1102,7 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
         partners = self.env["res.partner"].browse(partner_ids)
 
         expected = {
-            "beginDate": "2017-01-01",
+            "beginDate": "2020-10-15",
             "countryCode": "BE",
             "depots": [{"id": "dep_1", "x": 5.2758074, "y": 50.5825464}],
             "language": "en_US",
