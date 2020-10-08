@@ -334,7 +334,7 @@ class RoundInstance(models.Model):
         ret = []
         partners = self._get_partners_to_deliver()
         delivery_windows_by_partner_id = partners.get_delivery_windows(
-            "%s" % datetime.today().weekday()
+            "%s" % fields.Date.from_string(self.date).weekday()
         )
         for partner in partners:
             phones = filter(None, (partner.mobile or None, partner.phone or None))
