@@ -14,4 +14,4 @@ class StockMove(models.Model):
         self.ensure_one()
         if self.is_additional_move:
             return False
-        return super(StockMove, self)._append_move_to_charge()
+        return super(StockMove, self)._is_restocking_fee_chargeable()
