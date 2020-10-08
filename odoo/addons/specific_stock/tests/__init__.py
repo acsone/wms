@@ -9,3 +9,4 @@ from . import test_time_limit_order
 from . import test_lot_voice_identifier
 from . import test_stock_move_wizard
 from . import test_stock_return_picking
+from . import test_reception_pharmacy

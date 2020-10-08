@@ -4,7 +4,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import odoo.addons.decimal_precision as dp
-from odoo import _, fields, models
+from odoo import _, api, fields, models
 from odoo.exceptions import UserError, ValidationError
 
 
@@ -18,7 +18,7 @@ class ReceptionPharmacy(models.Model):
         string="Product",
         default=lambda self: self.env.ref("specific_stock.product_colis_souverain"),
         required=True,
-        readonly=True,
+        domain=lambda s: s._domain_product_id(),
     )
     line_ids = fields.One2many(
         "reception.pharmacy.line",
@@ -29,6 +29,19 @@ class ReceptionPharmacy(models.Model):
     state = fields.Selection(
         [("draft", "New"), ("done", "Done")], copy=False, readonly=True, default="draft"
     )
+
+    @api.model
+    def _domain_product_id(self):
+        return [
+            (
+                "id",
+                "in",
+                [
+                    self.env.ref("specific_stock.product_colis_souverain").id,
+                    self.env.ref("specific_stock.product_colis_souverain_frigo").id,
+                ],
+            )
+        ]
 
     def validate(self):
         self.ensure_one()
@@ -84,7 +97,12 @@ class ReceptionPharmacy(models.Model):
             line.reception_move_id.action_done()
             # Plan a delivery
             # The procurement will create the ship and pick
-            group_id = proc_group.create({"partner_id": line.customer_id.id})
+            group_id = proc_group.create(
+                {
+                    "partner_id": line.partner_shipping_id.id,
+                    "customer_id": line.customer_id.id,
+                }
+            )
             line.procurement_id = proc_order.create(
                 {
                     "name": "Pharmacy",
@@ -153,3 +171,17 @@ class ReceptionPharmacyLine(models.Model):
     procurement_id = fields.Many2one(
         "procurement.order", string="Delivery Procurement", readonly=True
     )
+
+    partner_shipping_id = fields.Many2one(
+        "res.partner", string="Delivery Address", compute="_compute_partner_shipping_id"
+    )
+
+    @api.multi
+    def _compute_partner_shipping_id(self):
+        """
+        Trigger the change of the shipping address if the customer is modified.
+        """
+        for rec in self:
+            if rec.customer_id:
+                address = rec.customer_id.address_get(["delivery", "invoice"])
+                rec.partner_shipping_id = address["delivery"]

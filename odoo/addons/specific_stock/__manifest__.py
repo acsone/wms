@@ -4,7 +4,7 @@
 
 {
     "name": "Specific stock for Alcyon",
-    "version": "10.0.1.0.0",
+    "version": "10.0.1.0.1",
     "author": "Camptocamp",
     "license": "AGPL-3",
     "category": "Warehouse",
@@ -23,6 +23,7 @@
         "stock",
         "stock_available_immediately",
         "stock_expired",
+        "stock_groupbypartner",
         "stock_inventory_products",
         "stock_location",
         "stock_mts_mto_rule",
@@ -39,6 +40,13 @@
     ],
     "website": "http://www.camptocamp.com",
     "data": [
+        # Data
+        "data/ir_cron.xml",
+        "data/ir_config_parameter.xml",
+        "data/product.category.csv",
+        "data/ir_sequence.xml",
+        "data/product.xml",
+        "data/product_frigo.xml",
         # Views
         "views/product_category.xml",
         "views/product_template.xml",
@@ -64,12 +72,6 @@
         # Security
         "security/ir.model.access.csv",
         "security/ir_ui_menu.xml",
-        # Data
-        "data/ir_cron.xml",
-        "data/ir_config_parameter.xml",
-        "data/product.category.csv",
-        "data/ir_sequence.xml",
-        "data/product.xml",
     ],
     "installable": True,
 }
