@@ -36,12 +36,14 @@
                     <field name="line_ids">
                         <tree editable="top">
                             <field name="customer_id" options="{'no_open':True,'no_create':True}"/>
+                            <field name="partner_shipping_id" options="{'no_open':True,'no_create':True}"/>
                             <field name="bin_id" options="{'no_open':True,'no_create':True}"/>
                             <field name="product_qty" options="{'no_open':True,'no_create':True}"/>
                         </tree>
                         <form>
                             <group>
                                 <field name="customer_id"/>
+                                <field name="partner_shipping_id"/>
                                 <field name="bin_id"/>
                                 <field name="product_qty"/>
                                 <field name="reception_move_id"/>
