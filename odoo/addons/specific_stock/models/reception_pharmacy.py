@@ -65,7 +65,7 @@ class ReceptionPharmacy(models.Model):
         if not loc_supplier:
             raise UserError(_("Supplier location is missing"))
 
-        for partner in self.line_ids.mapped("customer_id"):
+        for partner in self.line_ids.mapped("partner_shipping_id"):
             if not partner.round_itinerary_ids:
                 raise UserError(
                     _("Partner {} does not belong to any itinerary").format(
