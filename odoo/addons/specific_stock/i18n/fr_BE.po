@@ -27,7 +27,7 @@ msgid "Additional information communicated to the customer"
 msgstr "Informations complémentaires communiquées au client"
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/reception_pharmacy.py:115
+#: code:addons/specific_stock/models/reception_pharmacy.py:133
 #, python-format
 msgid ""
 "All pickings at destination of a same shipping must be in the same delivery "
@@ -110,6 +110,13 @@ msgid "Colis Souverain"
 msgstr "Colis Souverain"
 
 #. module: specific_stock
+#: model:product.product,name:specific_stock.product_colis_souverain_frigo
+#: model:product.template,name:specific_stock.product_colis_souverain_frigo_product_template
+#, fuzzy
+msgid "Colis Souverain Frigo"
+msgstr "Colis Souverain"
+
+#. module: specific_stock
 #: model:ir.model.fields,field_description:specific_stock.field_stock_location_corridor
 msgid "Corridor"
 msgstr "Couloir"
@@ -142,7 +149,7 @@ msgid "Customer"
 msgstr "Client"
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/reception_pharmacy.py:50
+#: code:addons/specific_stock/models/reception_pharmacy.py:63
 #, python-format
 msgid "Customer location is missing"
 msgstr "L'adresse du client est manquante"
@@ -183,6 +190,12 @@ msgstr "Delais entre deux inventaires pour les produits coûteux"
 #: model:ir.model.fields,field_description:specific_stock.field_stock_config_settings_delay_inventory_other_products
 msgid "Delay between two inventory for other products"
 msgstr "Delais entre deux inventaires pour les autres produits"
+
+#. module: specific_stock
+#: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy_line_partner_shipping_id
+#, fuzzy
+msgid "Delivery Address"
+msgstr "Livraison"
 
 #. module: specific_stock
 #: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy_line_procurement_id
@@ -450,7 +463,7 @@ msgid "Partner"
 msgstr "Partenaire"
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/reception_pharmacy.py:58
+#: code:addons/specific_stock/models/reception_pharmacy.py:71
 #, python-format
 msgid "Partner {} does not belong to any itinerary"
 msgstr "Le partenaire {} ne figure dans aucun itinéraire."
@@ -484,7 +497,7 @@ msgid "Picking zone"
 msgstr "Zone de picking"
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/reception_pharmacy.py:37
+#: code:addons/specific_stock/models/reception_pharmacy.py:50
 #, python-format
 msgid "Please insert at least one line"
 msgstr "Veuillez introduire au moins une ligne"
@@ -630,7 +643,7 @@ msgid "Stock Move Handler"
 msgstr "Assistant de mouvement de stock"
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/reception_pharmacy.py:53
+#: code:addons/specific_stock/models/reception_pharmacy.py:66
 #, python-format
 msgid "Supplier location is missing"
 msgstr "L'adresse du fournisseur est manquante"
@@ -765,7 +778,7 @@ msgid "Voice Identifier"
 msgstr "Identifiant Vocal"
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/reception_pharmacy.py:47
+#: code:addons/specific_stock/models/reception_pharmacy.py:60
 #, python-format
 msgid "Warehouse is missing"
 msgstr "Entrepot est manquant"

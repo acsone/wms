@@ -24,7 +24,7 @@ msgid "Additional information communicated to the customer"
 msgstr ""
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/reception_pharmacy.py:115
+#: code:addons/specific_stock/models/reception_pharmacy.py:133
 #, python-format
 msgid "All pickings at destination of a same shipping must be in the same delivery round"
 msgstr ""
@@ -103,6 +103,12 @@ msgid "Colis Souverain"
 msgstr ""
 
 #. module: specific_stock
+#: model:product.product,name:specific_stock.product_colis_souverain_frigo
+#: model:product.template,name:specific_stock.product_colis_souverain_frigo_product_template
+msgid "Colis Souverain Frigo"
+msgstr ""
+
+#. module: specific_stock
 #: model:ir.model.fields,field_description:specific_stock.field_stock_location_corridor
 msgid "Corridor"
 msgstr ""
@@ -135,7 +141,7 @@ msgid "Customer"
 msgstr ""
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/reception_pharmacy.py:50
+#: code:addons/specific_stock/models/reception_pharmacy.py:63
 #, python-format
 msgid "Customer location is missing"
 msgstr ""
@@ -175,6 +181,11 @@ msgstr ""
 #. module: specific_stock
 #: model:ir.model.fields,field_description:specific_stock.field_stock_config_settings_delay_inventory_other_products
 msgid "Delay between two inventory for other products"
+msgstr ""
+
+#. module: specific_stock
+#: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy_line_partner_shipping_id
+msgid "Delivery Address"
 msgstr ""
 
 #. module: specific_stock
@@ -440,7 +451,7 @@ msgid "Partner"
 msgstr ""
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/reception_pharmacy.py:58
+#: code:addons/specific_stock/models/reception_pharmacy.py:71
 #, python-format
 msgid "Partner {} does not belong to any itinerary"
 msgstr ""
@@ -474,7 +485,7 @@ msgid "Picking zone"
 msgstr ""
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/reception_pharmacy.py:37
+#: code:addons/specific_stock/models/reception_pharmacy.py:50
 #, python-format
 msgid "Please insert at least one line"
 msgstr ""
@@ -616,7 +627,7 @@ msgid "Stock Move Handler"
 msgstr ""
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/reception_pharmacy.py:53
+#: code:addons/specific_stock/models/reception_pharmacy.py:66
 #, python-format
 msgid "Supplier location is missing"
 msgstr ""
@@ -744,7 +755,7 @@ msgid "Voice Identifier"
 msgstr ""
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/reception_pharmacy.py:47
+#: code:addons/specific_stock/models/reception_pharmacy.py:60
 #, python-format
 msgid "Warehouse is missing"
 msgstr ""
