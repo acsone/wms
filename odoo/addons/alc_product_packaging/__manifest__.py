@@ -11,7 +11,11 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": ["product_packaging_type", "product_packaging_type_pallet", "purchase"],
-    "data": ["data/product_packaging_type.xml", "views/product_template.xml"],
+    "data": [
+        "data/product_packaging_type.xml",
+        "views/product_template.xml",
+        "views/sale_order.xml",
+    ],
     "demo": [],
     "external_dependencies": {"python": ["openupgradelib"]},
     "pre_init_hook": "pre_init_hook",
