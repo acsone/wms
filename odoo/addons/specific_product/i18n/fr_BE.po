@@ -51,9 +51,9 @@ msgid "ID"
 msgstr "ID"
 
 #. module: specific_product
-#: model:ir.model.fields,field_description:specific_product.field_delivery_carrier_count_moves_to_do
-#: model:ir.model.fields,field_description:specific_product.field_product_product_count_moves_to_do
-#: model:ir.model.fields,field_description:specific_product.field_product_template_count_moves_to_do
+#: model:ir.model.fields,field_description:specific_product.field_delivery_carrier_count_pickings_to_do
+#: model:ir.model.fields,field_description:specific_product.field_product_product_count_pickings_to_do
+#: model:ir.model.fields,field_description:specific_product.field_product_template_count_pickings_to_do
 msgid "Incoming Stock moves"
 msgstr "Mouvement de stock entrant"
 

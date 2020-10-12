@@ -11,7 +11,7 @@
                             attrs="{'invisible':[('type', 'not in', ['product', 'consu'])]}"
                             class="oe_stat_button" icon="fa-truck"
                             groups="stock.group_stock_user">
-                    <field name="count_moves_to_do" widget="statinfo" string="Receptions to do"/>
+                    <field name="count_pickings_to_do" widget="statinfo" string="Receptions to do"/>
                 </button>
             </xpath>
             <field name="default_code" position="after">

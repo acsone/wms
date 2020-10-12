@@ -42,8 +42,8 @@ class ProductTemplate(models.Model):
 
     veterinary_only = fields.Boolean(string="Veterinary only")
     belgium_only = fields.Boolean(string="Belgium only")
-    count_moves_to_do = fields.Integer(
-        string="Incoming Stock moves", compute="_compute_incoming_stock_moves"
+    count_pickings_to_do = fields.Integer(
+        string="Incoming Pickings", compute="_compute_incoming_pickings"
     )
 
     _sql_constraints = [
@@ -92,13 +92,15 @@ class ProductTemplate(models.Model):
         action["domain"].append(("picking_type_id.code", "=", "incoming"))
         return action
 
-    def _compute_incoming_stock_moves(self):
+    def _compute_incoming_pickings(self):
         stock_move = self.env["stock.move"]
         for rec in self:
-            rec.count_moves_to_do = stock_move.search_count(
-                [
-                    ("product_id.product_tmpl_id", "in", rec.ids),
-                    ("picking_type_id.code", "=", "incoming"),
-                    ("state", "in", ("assigned", "confirmed", "waiting")),
-                ]
+            domain = [
+                ("product_id.product_tmpl_id", "in", rec.ids),
+                ("picking_type_id.code", "=", "incoming"),
+                ("state", "in", ("assigned", "confirmed", "waiting")),
+            ]
+            stock_moves_grouped_by_picking = stock_move.read_group(
+                domain, ["picking_id"], "picking_id"
             )
+            rec.count_pickings_to_do = len(stock_moves_grouped_by_picking)
