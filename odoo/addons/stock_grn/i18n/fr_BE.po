@@ -103,11 +103,6 @@ msgid "Incoming Shipments"
 msgstr "Réceptions"
 
 #. module: stock_grn
-#: model:ir.model.fields,field_description:stock_grn.field_stock_picking_is_time_exceeded
-msgid "Is time exceeded"
-msgstr ""
-
-#. module: stock_grn
 #: model:ir.model.fields,field_description:stock_grn.field_stock_grn___last_update
 #: model:ir.model.fields,field_description:stock_grn.field_stock_grn_type___last_update
 msgid "Last Modified on"
@@ -126,16 +121,6 @@ msgid "Last Updated on"
 msgstr "Dernière mise à jour le"
 
 #. module: stock_grn
-#: model:ir.model.fields,field_description:stock_grn.field_stock_config_settings_max_delay_to_process_receipt
-msgid "Max delay to process receipt"
-msgstr ""
-
-#. module: stock_grn
-#: model:ir.model.fields,help:stock_grn.field_stock_config_settings_max_delay_to_process_receipt
-msgid "Maximum delay to handle the receipt of goods."
-msgstr ""
-
-#. module: stock_grn
 #: model:ir.model.fields,field_description:stock_grn.field_stock_grn_name
 msgid "Name"
 msgstr "Nom"
@@ -144,11 +129,6 @@ msgstr "Nom"
 #: model:ir.ui.view,arch_db:stock_grn.view_picking_withgrn_search
 msgid "Not Received"
 msgstr "Pas reçu"
-
-#. module: stock_grn
-#: model:ir.ui.view,arch_db:stock_grn.view_picking_withgrn_search
-msgid "Outdated receipt"
-msgstr ""
 
 #. module: stock_grn
 #: model:ir.model.fields,field_description:stock_grn.field_stock_grn_qty_box
@@ -176,11 +156,6 @@ msgid "The picking type determines the picking view"
 msgstr ""
 
 #. module: stock_grn
-#: model:ir.model.fields,field_description:stock_grn.field_stock_picking_time_delay
-msgid "Time delay"
-msgstr ""
-
-#. module: stock_grn
 #: model:ir.model,name:stock_grn.model_stock_picking
 msgid "Transfer"
 msgstr "Transfert"
@@ -190,16 +165,6 @@ msgstr "Transfert"
 #: model:ir.model.fields,field_description:stock_grn.field_stock_grn_type_name
 msgid "Type"
 msgstr "Type"
-
-#. module: stock_grn
-#: model:ir.ui.view,arch_db:stock_grn.stock_config_settings_form_view
-msgid "days."
-msgstr ""
-
-#. module: stock_grn
-#: model:ir.model,name:stock_grn.model_stock_config_settings
-msgid "stock.config.settings"
-msgstr ""
 
 #. module: stock_grn
 #: model:ir.model,name:stock_grn.model_stock_grn_type
