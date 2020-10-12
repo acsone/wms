@@ -30,7 +30,7 @@ def post_init_hook(cr, registry=None):
     WHERE
         id in (
             SELECT
-                distinct(rp.ref)
+                distinct(rp.id)
             FROM
                 account_move_line aml
                 JOIN account_tax tax
