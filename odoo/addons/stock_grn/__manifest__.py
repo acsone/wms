@@ -29,7 +29,6 @@
     "depends": ["stock"],
     "website": "http://www.bcim.be/",
     "data": [
-        "views/stock_config_settings.xml",
         "views/grn.xml",
         "views/stock_picking.xml",
         "stock_sequence.xml",

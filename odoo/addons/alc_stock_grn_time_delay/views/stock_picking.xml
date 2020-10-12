@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2020 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+    <record model="ir.ui.view" id="stock_picking_form_view">
+        <field name="name">stock.picking.form (in alc_stock_grn_time_delay)</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock_grn.view_picking_withgrn_form"/>
+        <field name="arch" type="xml">
+                <field name="grn_date" position="after">
+                    <field name="picking_type_code" invisible="1" />
+                    <field name="time_delay" attrs="{'invisible':[('picking_type_code','!=','incoming')]}"/>
+                </field>
+        </field>
+    </record>
+
+
+    <record model="ir.ui.view" id="stock_picking_search_view">
+        <field name="name">stock.picking.search (in alc_stock_grn_time_delay)</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock_grn.view_picking_withgrn_search"/>
+        <field name="arch" type="xml">
+            <filter name="nogrn" position="after">
+                <separator/>
+                <filter name="time_exceeded" string="Outdated receipt" domain="[('is_time_exceeded', '=', True)]"/>
+            </filter>
+        </field>
+    </record>
+
+
+    <record model="ir.ui.view" id="stock_picking_tree_view">
+        <field name="name">stock.picking.tree (in alc_stock_grn_time_delay)</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock_grn.view_picking_withgrn_tree"/>
+        <field name="arch" type="xml">
+                <xpath expr="//tree" position="attributes">
+                    <attribute name="colors">red:is_time_exceeded == True</attribute>
+                </xpath>
+                <field name="grn_date" position="after">
+                    <field name="time_delay"/>
+                    <field name="is_time_exceeded" invisible="1"/>
+                </field>
+        </field>
+    </record>
+
+</odoo>
