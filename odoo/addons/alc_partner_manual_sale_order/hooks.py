@@ -22,6 +22,24 @@ def pre_init_hook(cr):
 def post_init_hook(cr, registry=None):
     cr.execute("update res_partner set manual_sale_order_allowed=customer")
     cr.execute(
-        "update res_partner set customer=true where supplier=false "
-        "and not parent_id is null"
+        """
+    UPDATE
+        res_partner
+    SET
+        customer=true
+    WHERE
+        id in (
+            SELECT
+                distinct(rp.ref)
+            FROM
+                account_move_line aml
+                JOIN account_tax tax
+                    ON aml.tax_line_id=tax.id
+                JOIN res_partner rp
+                    ON aml.partner_id=rp.id
+                WHERE
+                    rp.customer != 't'
+                    AND tax.type_tax_use = 'sale'
+        )
+    """
     )
