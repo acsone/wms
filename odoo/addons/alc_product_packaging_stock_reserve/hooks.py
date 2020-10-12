@@ -6,11 +6,5 @@ from openupgradelib import openupgrade
 
 def pre_init_hook(cr):
     openupgrade.update_module_names(
-        cr,
-        [
-            (
-                "alc_product_packaging_stock_reserve",
-                "alc_product_packaging_stock_reserve",
-            )
-        ],
+        cr, [("stock_unit", "alc_product_packaging_stock_reserve")], merge_modules=True
     )
