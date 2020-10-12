@@ -15,5 +15,9 @@ class PutInPackHelper(models.TransientModel):
         self.ensure_one()
 
         package = self.picking_id.put_in_pack()
+
+        if isinstance(package, dict):
+            package = self.env["stock.quant.package"].browse(package["res_id"])
+            # The method _put_in_pack in delivery addon can return a dict...
         if package:
             package.nbr_packages = self.nbr_packages
