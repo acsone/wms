@@ -1,0 +1,55 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* alc_stock_grn_time_delay
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_stock_grn_time_delay
+#: model:ir.model.fields,field_description:alc_stock_grn_time_delay.field_stock_picking_is_time_exceeded
+msgid "Is time exceeded"
+msgstr ""
+
+#. module: alc_stock_grn_time_delay
+#: model:ir.model.fields,field_description:alc_stock_grn_time_delay.field_stock_config_settings_max_delay_to_process_receipt
+msgid "Max delay to process receipt"
+msgstr ""
+
+#. module: alc_stock_grn_time_delay
+#: model:ir.model.fields,help:alc_stock_grn_time_delay.field_stock_config_settings_max_delay_to_process_receipt
+msgid "Maximum delay to handle the receipt of goods."
+msgstr ""
+
+#. module: alc_stock_grn_time_delay
+#: model:ir.ui.view,arch_db:alc_stock_grn_time_delay.stock_picking_search_view
+msgid "Outdated receipt"
+msgstr ""
+
+#. module: alc_stock_grn_time_delay
+#: model:ir.model.fields,field_description:alc_stock_grn_time_delay.field_stock_picking_time_delay
+msgid "Time delay"
+msgstr ""
+
+#. module: alc_stock_grn_time_delay
+#: model:ir.model,name:alc_stock_grn_time_delay.model_stock_picking
+msgid "Transfer"
+msgstr ""
+
+#. module: alc_stock_grn_time_delay
+#: model:ir.ui.view,arch_db:alc_stock_grn_time_delay.stock_config_settings_form_view
+msgid "days."
+msgstr ""
+
+#. module: alc_stock_grn_time_delay
+#: model:ir.model,name:alc_stock_grn_time_delay.model_stock_config_settings
+msgid "stock.config.settings"
+msgstr ""
+
