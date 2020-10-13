@@ -51,7 +51,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:specific_product.field_delivery_carrier_count_pickings_to_do
 #: model:ir.model.fields,field_description:specific_product.field_product_product_count_pickings_to_do
 #: model:ir.model.fields,field_description:specific_product.field_product_template_count_pickings_to_do
-msgid "Incoming Stock moves"
+msgid "Incoming Pickings"
 msgstr ""
 
 #. module: specific_product
@@ -157,7 +157,7 @@ msgid "Temperature (°C)"
 msgstr ""
 
 #. module: specific_product
-#: code:addons/specific_product/models/product.py:50
+#: code:addons/specific_product/models/product_template.py:43
 #: sql_constraint:product.template:0
 #, python-format
 msgid "This cnk_code already exists."
