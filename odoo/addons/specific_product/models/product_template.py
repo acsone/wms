@@ -6,14 +6,6 @@ import odoo.addons.decimal_precision as dp
 from odoo import _, api, fields, models
 
 
-class ProductProduct(models.Model):
-    _inherit = "product.product"
-    _order = "default_code"
-
-    def action_open_incoming_stock_moves(self):
-        return self.product_tmpl_id.action_open_incoming_stock_moves()
-
-
 class ProductTemplate(models.Model):
     _inherit = "product.template"
     _order = "default_code"
@@ -42,6 +34,7 @@ class ProductTemplate(models.Model):
 
     veterinary_only = fields.Boolean(string="Veterinary only")
     belgium_only = fields.Boolean(string="Belgium only")
+
     count_pickings_to_do = fields.Integer(
         string="Incoming Pickings", compute="_compute_incoming_pickings"
     )
@@ -93,14 +86,7 @@ class ProductTemplate(models.Model):
         return action
 
     def _compute_incoming_pickings(self):
-        stock_move = self.env["stock.move"]
         for rec in self:
-            domain = [
-                ("product_id.product_tmpl_id", "in", rec.ids),
-                ("picking_type_id.code", "=", "incoming"),
-                ("state", "in", ("assigned", "confirmed", "waiting")),
-            ]
-            stock_moves_grouped_by_picking = stock_move.read_group(
-                domain, ["picking_id"], "picking_id"
+            rec.count_pickings_to_do = sum(
+                rec.mapped("product_variant_ids.count_pickings_to_do")
             )
-            rec.count_pickings_to_do = len(stock_moves_grouped_by_picking)
