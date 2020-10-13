@@ -6,14 +6,6 @@ import odoo.addons.decimal_precision as dp
 from odoo import _, api, fields, models
 
 
-class ProductProduct(models.Model):
-    _inherit = "product.product"
-    _order = "default_code"
-
-    def action_open_incoming_stock_moves(self):
-        return self.product_tmpl_id.action_open_incoming_stock_moves()
-
-
 class ProductTemplate(models.Model):
     _inherit = "product.template"
     _order = "default_code"
@@ -42,8 +34,9 @@ class ProductTemplate(models.Model):
 
     veterinary_only = fields.Boolean(string="Veterinary only")
     belgium_only = fields.Boolean(string="Belgium only")
-    count_moves_to_do = fields.Integer(
-        string="Incoming Stock moves", compute="_compute_incoming_stock_moves"
+
+    count_pickings_to_do = fields.Integer(
+        string="Incoming Pickings", compute="_compute_incoming_pickings"
     )
 
     _sql_constraints = [
@@ -92,13 +85,8 @@ class ProductTemplate(models.Model):
         action["domain"].append(("picking_type_id.code", "=", "incoming"))
         return action
 
-    def _compute_incoming_stock_moves(self):
-        stock_move = self.env["stock.move"]
+    def _compute_incoming_pickings(self):
         for rec in self:
-            rec.count_moves_to_do = stock_move.search_count(
-                [
-                    ("product_id.product_tmpl_id", "in", rec.ids),
-                    ("picking_type_id.code", "=", "incoming"),
-                    ("state", "in", ("assigned", "confirmed", "waiting")),
-                ]
+            rec.count_pickings_to_do = sum(
+                rec.mapped("product_variant_ids.count_pickings_to_do")
             )
