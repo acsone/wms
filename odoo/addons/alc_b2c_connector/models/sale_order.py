@@ -34,7 +34,7 @@ class SaleOrder(models.Model):
     _sql_constraints = [
         (
             "b2c_ref_unique",
-            "EXCLUDE (b2c_ref WITH =) WHERE (b2c_ref <> '' or b2c_ref is not null)",
+            "EXCLUDE (b2c_ref WITH =, sale_channel WITH =) WHERE (b2c_ref <> '' or b2c_ref is not null)",
             _("This b2c reference already exists"),
         )
     ]
