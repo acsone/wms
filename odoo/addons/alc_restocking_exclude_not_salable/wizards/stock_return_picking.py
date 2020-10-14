@@ -11,6 +11,7 @@ class StockReturnPicking(models.TransientModel):
 
     has_archived_product = fields.Boolean(default=False)
     archived_products_message = fields.Html(readonly=True)
+    has_not_salable_product = fields.Boolean(default=False)
 
     @api.model
     def default_get(self, fields):
@@ -21,6 +22,7 @@ class StockReturnPicking(models.TransientModel):
         for move in res.get("product_return_moves", []):
             product = self.env["product.product"].browse(move[2].get("product_id"))
             move[2]["not_salable_product"] = not product.sale_ok
+            res["has_not_salable_product"] = True
             if not product.active:
                 res["has_archived_product"] = True
                 products_archived.append(product)
