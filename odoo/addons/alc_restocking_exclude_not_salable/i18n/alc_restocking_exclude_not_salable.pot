@@ -24,8 +24,18 @@ msgid "Has archived product"
 msgstr ""
 
 #. module: alc_restocking_exclude_not_salable
+#: model:ir.model.fields,field_description:alc_restocking_exclude_not_salable.field_stock_return_picking_has_not_salable_product
+msgid "Has not salable product"
+msgstr ""
+
+#. module: alc_restocking_exclude_not_salable
 #: model:ir.model.fields,field_description:alc_restocking_exclude_not_salable.field_stock_return_picking_line_not_salable_product
 msgid "Not salable product"
+msgstr ""
+
+#. module: alc_restocking_exclude_not_salable
+#: model:ir.ui.view,arch_db:alc_restocking_exclude_not_salable.stock_return_picking_form_view
+msgid "Products in red are not sold anymore."
 msgstr ""
 
 #. module: alc_restocking_exclude_not_salable
