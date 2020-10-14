@@ -4,7 +4,7 @@
 
 {
     "name": "Specific stock for Alcyon",
-    "version": "10.0.1.0.1",
+    "version": "10.0.1.0.2",
     "author": "Camptocamp",
     "license": "AGPL-3",
     "category": "Warehouse",
