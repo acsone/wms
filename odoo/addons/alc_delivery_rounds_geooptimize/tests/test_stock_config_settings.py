@@ -2,6 +2,8 @@
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+import json
+
 from odoo.tests.common import SavepointCase
 
 
@@ -21,6 +23,7 @@ class TestStockConfigSettings(SavepointCase):
         Expected result:
             Values retrieved are those saved
         """
+        resource_cfg = {"key": "val"}
         self.StockConfigSettings.create(
             {
                 "geo_optimization_enabled": True,
@@ -31,6 +34,7 @@ class TestStockConfigSettings(SavepointCase):
                 "geo_optimization_loading_duration": 100,
                 "geo_optimization_resources_number": 5,
                 "geo_optimization_daily_work_time": 5.0,
+                "geo_optimization_resource_cfg": json.dumps(resource_cfg),
             }
         ).execute()
         config = self.StockConfigSettings.get_optimization_config()
@@ -42,6 +46,7 @@ class TestStockConfigSettings(SavepointCase):
         self.assertEqual(config.loading_duration, 100)
         self.assertEqual(config.resources_number, 5)
         self.assertEqual(config.daily_work_time, 5.0)
+        self.assertDictEqual(config.resource_cfg, resource_cfg)
 
         # an update on the parameters invalidate the config cache
         self.IrConfigParameter.set_param(

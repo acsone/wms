@@ -87,19 +87,9 @@
                                    attrs="{'invisible': [('geo_optimization_enabled', '=', False)]}"/>
                         </div>
                     </div>
-                    <label for="geo_optimization_daily_work_time"
-                           attrs="{'invisible': [('geo_optimization_enabled', '=', False)]}"/>
-                    <div>
-                        <div>
-                            <field name="geo_optimization_daily_work_time"
-                                   widget="float_time"
-                                   class="oe_inline"
-                                   attrs="{'invisible': [('geo_optimization_enabled', '=', False)], 'required': [('geo_optimization_enabled', '=', True)]}"/>
-                            <label for="geo_optimization_daily_work_time"
-                                   string="hours per hour"
-                                   attrs="{'invisible': [('geo_optimization_enabled', '=', False)]}"/>
-                        </div>
-                    </div>
+                    <field name="geo_optimization_resource_cfg" string="Resource additional configuration"
+                        attrs="{'invisible': [('geo_optimization_enabled', '=', False)]}"/>
+
                 </group>
             </xpath>
         </field>

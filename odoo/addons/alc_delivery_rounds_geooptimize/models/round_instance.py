@@ -388,27 +388,26 @@ class RoundInstance(models.Model):
         work_start_time = self.float_time_to_str_time(time_loading)
         h, m = divmod(cfg.loading_duration, 60)
         fixed_loading_duration = "%02d:%02d:00" % (h, m)
-        return [
-            {
-                "id": self.geo_optimization_resource_id,
-                "mobileLogin": "%s@alcyonbelux.be"
-                % self.geo_optimization_resource_id.lower(),
-                "startX": address.partner_longitude,
-                "startY": address.partner_latitude,
-                "endX": address.partner_longitude,
-                "endY": address.partner_latitude,
-                "openStart": False,  # begin the tour at the resource start location.
-                "workStartTime": work_start_time,
-                "fixedLoadingDuration": fixed_loading_duration,
-                "loadBeforeDeparture": True,
-                "noReload": True,
-                "globalCapacity": 9999,
-                "useAllCapacities": False,
-                "travelPenalty": cfg.travel_penalty,
-                "workPenalty": cfg.work_penalty,
-                "dailyWorkTime": self.float_time_to_str_time(cfg.daily_work_time),
-            }
-        ]
+        res = {
+            "id": self.geo_optimization_resource_id,
+            "mobileLogin": "%s@alcyonbelux.be"
+            % self.geo_optimization_resource_id.lower(),
+            "startX": address.partner_longitude,
+            "startY": address.partner_latitude,
+            "endX": address.partner_longitude,
+            "endY": address.partner_latitude,
+            "openStart": False,  # begin the tour at the resource start location.
+            "workStartTime": work_start_time,
+            "fixedLoadingDuration": fixed_loading_duration,
+            "loadBeforeDeparture": True,
+            "noReload": True,
+            "globalCapacity": 9999,
+            "useAllCapacities": False,
+            "travelPenalty": cfg.travel_penalty,
+            "workPenalty": cfg.work_penalty,
+        }
+        res.update(cfg.resource_cfg)
+        return [res]
 
     def _generate_optimization_options(self, cfg):
         return {

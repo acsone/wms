@@ -22,6 +22,7 @@
         "views/round_template.xml",
         "wizards/stock_config_settings.xml",
         "views/round_instance.xml",
+        "data/ir_config_parameter.xml",
     ],
     "demo": [],
     "post_init_hook": "post_init_hook",

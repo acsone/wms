@@ -2,6 +2,7 @@
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+import json
 from collections import namedtuple
 
 from odoo import api, fields, models
@@ -10,7 +11,7 @@ from odoo.tools import ormcache
 OptimizationConfig = namedtuple(
     "OptimizationConfig",
     "enabled,api_url,api_key,duration,delivery_duration,loading_duration,"
-    "resources_number,work_penalty,travel_penalty,daily_work_time",
+    "resources_number,work_penalty,travel_penalty,daily_work_time,resource_cfg",
 )
 
 
@@ -45,6 +46,10 @@ class StockConfigSettings(models.TransientModel):
         help="The cost for a resource of driving for one distance unit.",
     )
     geo_optimization_daily_work_time = fields.Float("Resources Daily Working Hours")
+
+    geo_optimization_resource_cfg = fields.Text(
+        "Additional resources configuration (json)"
+    )
 
     @api.model
     @ormcache()
@@ -99,6 +104,11 @@ class StockConfigSettings(models.TransientModel):
                 "10.0",
             )
         )
+        resource_cfg = json.loads(
+            IrConfigParameter.get_param(
+                "alc_delivery_rounds_geooptimize.geo_optimization_resource_cfg", "{}"
+            )
+        )
 
         return OptimizationConfig(
             enabled=enabled,
@@ -111,6 +121,7 @@ class StockConfigSettings(models.TransientModel):
             work_penalty=work_penalty,
             travel_penalty=travel_penalty,
             daily_work_time=daily_work_time,
+            resource_cfg=resource_cfg,
         )
 
     @api.model
@@ -137,6 +148,8 @@ class StockConfigSettings(models.TransientModel):
             res["geo_optimization_travel_penalty"] = cfg.travel_penalty
         if "geo_optimization_daily_work_time" in fields or not fields:
             res["geo_optimization_daily_work_time"] = cfg.daily_work_time
+        if "geo_optimization_resource_cfg" in fields or not fields:
+            res["geo_optimization_resource_cfg"] = json.dumps(cfg.resource_cfg)
 
         return res
 
@@ -228,4 +241,12 @@ class StockConfigSettings(models.TransientModel):
         self.env["ir.config_parameter"].set_param(
             "alc_delivery_rounds_geooptimize.geo_optimization_daily_work_time",
             self.geo_optimization_daily_work_time or "10.0",
+        )
+
+    @api.multi
+    def set_geo_optimization_resource_cfg(self):
+
+        self.env["ir.config_parameter"].set_param(
+            "alc_delivery_rounds_geooptimize.geo_optimization_resource_cfg",
+            self.geo_optimization_resource_cfg or "{}",
         )
