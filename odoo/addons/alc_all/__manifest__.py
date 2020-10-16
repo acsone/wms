@@ -107,6 +107,7 @@
         "alc_sale_invoicing_on_transfer",
         "alc_sale_invoicing_policy",
         "alc_sale_processing_finalizer",
+        "alc_sale_statistics",
         "alc_sale_stock_restocking_fee_invoicing_additional_product",
         "alc_stock_grn_time_delay",
         "alc_stock_picking_package",
