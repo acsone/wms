@@ -16,8 +16,8 @@
                 <div class="alert alert-warning" attrs="{'invisible': [('has_archived_product', '=', False)]}">
                     <field name="archived_products_message"/>
                 </div>
-                <div class="alert alert-warning" attrs="{'invisible': [('has_not_salable_product', '=', True)]}">
-                    Products in red are not sold anymore.
+                <div class="alert alert-warning" attrs="{'invisible': [('has_not_salable_product', '=', False)]}">
+                    <p>Products in red are not sold anymore. </p>
                 </div>
             </xpath>
             <field name="quantity" position="after">
