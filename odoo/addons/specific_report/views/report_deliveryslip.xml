@@ -173,18 +173,18 @@
                             </td>
                             <td>
                                 <span t-field="order_line.price_unit" t-if="not line.is_additional_move and not line.order_id.is_consignment"/>
-                                <span t-if="line.is_additional_move"> 0 </span>
+                                <span t-if="line.is_additional_move or line.order_id.is_consignment"> 0 </span>
                             </td>
                             <td>
                                 <span t-field="order_line.price_reduce_taxexcl" t-if="not line.is_additional_move and not line.order_id.is_consignment"/>
-                                <span t-if="line.is_additional_move"> 0 </span>
+                                <span t-if="line.is_additional_move or line.order_id.is_consignment"> 0 </span>
                             </td>
                             <td>
                                 <t t-esc="order_line.price_reduce * int(line.product_qty)" t-options="{'widget': 'monetary', 'display_currency': order_line.currency_id}"  t-if="not line.is_additional_move and not line.order_id.is_consignment"/>
-                                <span t-if="line.is_additional_move"> 0 </span>
+                                <span t-if="line.is_additional_move or line.order_id.is_consignment"> 0 </span>
                             </td>
                             <td>
-                                <t t-foreach="order_line.tax_id" t-as="tax" t-if="not line.order_id.is_consignment"><t t-if="tax_index">, </t><span style="white-space:nowrap"><t t-esc="tax.description or tax.name"/></span></t>
+                                <t t-foreach="order_line.tax_id" t-as="tax"><t t-if="tax_index">, </t><span style="white-space:nowrap"><t t-esc="tax.description or tax.name"/></span></t>
                             </td>
                         </tr>
                         <tr t-foreach="quants" t-as="quant">
