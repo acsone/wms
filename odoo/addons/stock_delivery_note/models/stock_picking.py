@@ -301,15 +301,13 @@ class StockPicking(models.Model):
                             #  Net HTVA price
                             format_number(sol.price_reduce, 2)
                             if not (move_line.is_additional_move or sol.is_consignment)
-                            else ("0" if move_line.is_additional_move else ""),
+                            else "0",
                             #  Brut HTVA price
                             format_number(sol.price_unit, 2)
                             if not (move_line.is_additional_move or sol.is_consignment)
-                            else ("0" if move_line.is_additional_move else ""),
+                            else "0",
                             #  VAT rate, yes only the first one if present
-                            format_number(vat[0].amount if vat else 0, 1)
-                            if not (sol.is_consignment)
-                            else "",
+                            format_number(vat[0].amount if vat else 0, 1),
                             # Lots name
                             quant[0] or "",
                             format_use_date(quant[2] or ""),
