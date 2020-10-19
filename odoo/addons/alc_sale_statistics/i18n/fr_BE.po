@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* alc_sale_statistics
+# 	* alc_sale_statistics
 #
 msgid ""
 msgstr ""
@@ -10,6 +10,7 @@ msgstr ""
 "PO-Revision-Date: 2020-10-19 07:41+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -17,15 +18,26 @@ msgstr ""
 
 #. module: alc_sale_statistics
 #: model:ir.model.fields,help:alc_sale_statistics.field_alc_stock_move_report_state
-msgid "* New: When the stock move is created and not yet confirmed.\n"
-"* Waiting Another Move: This state can be seen when a move is waiting for another one, for example in a chained flow.\n"
-"* Waiting Availability: This state is reached when the procurement resolution is not straight forward. It may need the scheduler to run, a component to be manufactured...\n"
+msgid ""
+"* New: When the stock move is created and not yet confirmed.\n"
+"* Waiting Another Move: This state can be seen when a move is waiting for "
+"another one, for example in a chained flow.\n"
+"* Waiting Availability: This state is reached when the procurement "
+"resolution is not straight forward. It may need the scheduler to run, a "
+"component to be manufactured...\n"
 "* Available: When products are reserved, it is set to 'Available'.\n"
 "* Done: When the shipment is processed, the state is 'Done'."
-msgstr "* Nouveau : lorsque le mouvement de stock a été créé mais n'est pas encore confirmé.\n"
-"* En attente d'un autre mouvement : cet état signifie qu'un mouvement est en attente d'un autre mouvement, par exemple dans le cas d'un flux à enchaînements.\n"
-"* En attente de disponibilité : cet état signifie que l'approvisionnement ne peut pas se faire directement. Il est peut-être nécessaire d'exécuter le planificateur ou de fabriquer un composant, par exemple.\n"
-"* Disponible : lorsqu'un produit est réservé, son état passe à « Disponible ».\n"
+msgstr ""
+"* Nouveau : lorsque le mouvement de stock a été créé mais n'est pas encore "
+"confirmé.\n"
+"* En attente d'un autre mouvement : cet état signifie qu'un mouvement est en "
+"attente d'un autre mouvement, par exemple dans le cas d'un flux à "
+"enchaînements.\n"
+"* En attente de disponibilité : cet état signifie que l'approvisionnement ne "
+"peut pas se faire directement. Il est peut-être nécessaire d'exécuter le "
+"planificateur ou de fabriquer un composant, par exemple.\n"
+"* Disponible : lorsqu'un produit est réservé, son état passe à "
+"« Disponible ».\n"
 "* Terminé : lorsque l'envoi a été traité, son état passe à « Terminé »"
 
 #. module: alc_sale_statistics
@@ -45,8 +57,14 @@ msgstr "Coût"
 
 #. module: alc_sale_statistics
 #: model:ir.model.fields,help:alc_sale_statistics.field_alc_stock_move_report_product_standard_price
-msgid "Cost of the product template used for standard stock valuation in accounting and used as a base price on purchase orders. Expressed in the default unit of measure of the product."
-msgstr "Prix de revient utilisé en comptabilité pour la valorisation standard des stocks et en achat comme prix de base. Exprimé dans l'unité de mesure par défaut de l'article."
+msgid ""
+"Cost of the product template used for standard stock valuation in accounting "
+"and used as a base price on purchase orders. Expressed in the default unit "
+"of measure of the product."
+msgstr ""
+"Prix de revient utilisé en comptabilité pour la valorisation standard des "
+"stocks et en achat comme prix de base. Exprimé dans l'unité de mesure par "
+"défaut de l'article."
 
 #. module: alc_sale_statistics
 #: model:ir.model.fields,field_description:alc_sale_statistics.field_alc_stock_move_report_customer_in_statistics
@@ -176,8 +194,13 @@ msgstr "Article/Prix de vente 2"
 
 #. module: alc_sale_statistics
 #: model:ir.model.fields,help:alc_sale_statistics.field_alc_stock_move_report_location_id
-msgid "Sets a location if you produce at a fixed location. This can be a partner location if you subcontract the manufacturing operations."
-msgstr "Mettre un emplacement si vous produisez à un emplacement fixe. Ceci peut être un emplacement partenaire si vous soutraitez des opérations de fabrication."
+msgid ""
+"Sets a location if you produce at a fixed location. This can be a partner "
+"location if you subcontract the manufacturing operations."
+msgstr ""
+"Mettre un emplacement si vous produisez à un emplacement fixe. Ceci peut "
+"être un emplacement partenaire si vous soutraitez des opérations de "
+"fabrication."
 
 #. module: alc_sale_statistics
 #: model:ir.model.fields,field_description:alc_sale_statistics.field_alc_stock_move_report_location_id
@@ -197,7 +220,6 @@ msgstr "Mouvements de stock (statistiques)"
 
 #. module: alc_sale_statistics
 #: model:ir.model,name:alc_sale_statistics.model_alc_stock_move_report
-#: model:ir.model,name:alc_sale_statistics.model_stock_move_report
 msgid "Stock move report"
 msgstr "Mouvements de stock"
 
@@ -240,4 +262,3 @@ msgstr "Mouvements de stock relatif à des clients"
 #: model:ir.ui.view,arch_db:alc_sale_statistics.stock_moves_with_partner_view_search
 msgid "is_in_statistics"
 msgstr "Mouvements de stock à prendre en compte pour les statistiques"
-
