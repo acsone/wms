@@ -16,37 +16,37 @@ msgstr ""
 #. module: alc_stock_grn_time_delay
 #: model:ir.model.fields,field_description:alc_stock_grn_time_delay.field_stock_picking_is_time_exceeded
 msgid "Is time exceeded"
-msgstr ""
+msgstr "Durée dépassée"
 
 #. module: alc_stock_grn_time_delay
 #: model:ir.model.fields,field_description:alc_stock_grn_time_delay.field_stock_config_settings_max_delay_to_process_receipt
 msgid "Max delay to process receipt"
-msgstr ""
+msgstr "Durée maximum pour traiter une réception"
 
 #. module: alc_stock_grn_time_delay
 #: model:ir.model.fields,help:alc_stock_grn_time_delay.field_stock_config_settings_max_delay_to_process_receipt
 msgid "Maximum delay to handle the receipt of goods."
-msgstr ""
+msgstr "Durée maximum pour traiter une réception"
 
 #. module: alc_stock_grn_time_delay
 #: model:ir.ui.view,arch_db:alc_stock_grn_time_delay.stock_picking_search_view
 msgid "Outdated receipt"
-msgstr ""
+msgstr "Réceptions en retard"
 
 #. module: alc_stock_grn_time_delay
 #: model:ir.model.fields,field_description:alc_stock_grn_time_delay.field_stock_picking_time_delay
 msgid "Time delay"
-msgstr ""
+msgstr "Retard"
 
 #. module: alc_stock_grn_time_delay
 #: model:ir.model,name:alc_stock_grn_time_delay.model_stock_picking
 msgid "Transfer"
-msgstr ""
+msgstr "Transfert"
 
 #. module: alc_stock_grn_time_delay
 #: model:ir.ui.view,arch_db:alc_stock_grn_time_delay.stock_config_settings_form_view
 msgid "days."
-msgstr ""
+msgstr "jours."
 
 #. module: alc_stock_grn_time_delay
 #: model:ir.model,name:alc_stock_grn_time_delay.model_stock_config_settings
