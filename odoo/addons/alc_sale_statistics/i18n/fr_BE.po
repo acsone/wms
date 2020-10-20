@@ -242,5 +242,5 @@ msgstr "Mouvements clients réalisés"
 
 #. module: alc_sale_statistics
 #: model:ir.ui.view,arch_db:alc_sale_statistics.stock_moves_with_partner_view_search
-msgid "is_in_statistics"
+msgid "is in statistics"
 msgstr "Clients inclus dans statistiques de vente"
