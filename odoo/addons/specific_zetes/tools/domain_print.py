@@ -154,6 +154,10 @@ class Print(DomainInterface):
                 try:
                     # Create a pack for this picking
                     box = picking.put_in_pack()
+                    if isinstance(box, dict):
+                        box = self.request.env["stock.quant.package"].browse(
+                            box["res_id"]
+                        )
                     if box:
                         # Set the number of packages for this picking
                         box.nbr_packages = quantity
