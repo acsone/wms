@@ -43,7 +43,7 @@
         <field name="model">alc.stock.move.report</field>
         <field name="arch" type="xml">
             <search>
-                <filter string="is_in_statistics" name="filter_is_in_statistics"
+                <filter string="is in statistics" name="filter_is_in_statistics"
                   domain="[
                       ('customer_in_statistics', '=', True),
                     ]"/>
@@ -52,6 +52,13 @@
                   domain="['|',
                       ('state', '=', 'done'), ('location_id', 'ilike', 'Customers'), ('location_dest_id', 'ilike', 'Customers')
                     ]"/>
+                 <separator/>
+                <filter name="last_month" string="Previous Month"
+                            domain="[
+                                '&amp;',
+                                ('validation_date', '>=', (context_today() - relativedelta(months=1)).strftime('%Y-%m-01')),
+                                ('validation_date', '&lt;', context_today().strftime('%Y-%m-01')),
+                            ]"/>
             </search>
         </field>
         </record>
@@ -63,6 +70,7 @@
         <field name="context">{
             'search_default_filter_is_in_statistics': 1,
             'search_default_customer_related_stock_moves': 1,
+            'search_default_last_month': 1,
           }</field>
         <field name="search_view_id" ref="stock_moves_with_partner_view_search"/>
     </record>
