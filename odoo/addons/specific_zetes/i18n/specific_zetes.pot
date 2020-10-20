@@ -79,7 +79,7 @@ msgstr ""
 
 #. module: specific_zetes
 #: code:addons/specific_zetes/tools/domain_print.py:130
-#: code:addons/specific_zetes/tools/domain_print.py:178
+#: code:addons/specific_zetes/tools/domain_print.py:182
 #, python-format
 msgid "Cannot found a printer"
 msgstr ""
@@ -200,7 +200,7 @@ msgstr ""
 
 #. module: specific_zetes
 #: code:addons/specific_zetes/tools/domain_print.py:145
-#: code:addons/specific_zetes/tools/domain_print.py:194
+#: code:addons/specific_zetes/tools/domain_print.py:198
 #, python-format
 msgid "Error during printing"
 msgstr ""
