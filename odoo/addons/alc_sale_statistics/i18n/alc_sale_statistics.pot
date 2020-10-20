@@ -144,6 +144,11 @@ msgid "Picking reference"
 msgstr ""
 
 #. module: alc_sale_statistics
+#: model:ir.ui.view,arch_db:alc_sale_statistics.stock_moves_with_partner_view_search
+msgid "Previous Month"
+msgstr ""
+
+#. module: alc_sale_statistics
 #: model:ir.model.fields,field_description:alc_sale_statistics.field_alc_stock_move_report_product_id
 msgid "Product"
 msgstr ""
@@ -231,6 +236,6 @@ msgstr ""
 
 #. module: alc_sale_statistics
 #: model:ir.ui.view,arch_db:alc_sale_statistics.stock_moves_with_partner_view_search
-msgid "is_in_statistics"
+msgid "is in statistics"
 msgstr ""
 

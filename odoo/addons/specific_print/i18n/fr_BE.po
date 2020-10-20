@@ -35,6 +35,13 @@ msgstr ""
 "{U1;0120|}\\r"
 
 #. module: specific_print
+#: model:ir.ui.view,arch_db:specific_print.stock_pick_packs_label_zebra_v1
+msgid ""
+",75,3,2^FS\\r\n"
+"^FO40,47^A0N60,60^FD"
+msgstr ""
+
+#. module: specific_print
 #: model:ir.actions.report.xml,name:specific_print.report_lot_label
 msgid "Alcyon Lot Label"
 msgstr "Etiquette de lot Alcyon"
@@ -327,48 +334,54 @@ msgstr "Zebra"
 
 #. module: specific_print
 #: model:ir.ui.view,arch_db:specific_print.stock_pick_packs_label_zebra_v1
-msgid ""
-"^FS\\r\n"
-"^FN2^FD"
+msgid "^FO200,47^A0N60,60^FDB2C^FS\\r"
 msgstr ""
-"^FS\\r\n"
-"^FN2^FD"
 
 #. module: specific_print
 #: model:ir.ui.view,arch_db:specific_print.stock_pick_packs_label_zebra_v1
+msgid "^FO570,50,1^A0N60,60^FD"
+msgstr ""
+
+#. module: specific_print
+#: model:ir.ui.view,arch_db:specific_print.stock_pick_packs_label_zebra_v1
+#, fuzzy
+msgid "^FS\\r"
+msgstr ""
+"^FS\\r\n"
+"^PQ"
+
+#. module: specific_print
+#: model:ir.ui.view,arch_db:specific_print.stock_pick_packs_label_zebra_v1
+#, fuzzy
 msgid ""
+"^FS\\r\n"
+"\n"
+"^FO30,30^GB"
+msgstr ""
 "^FS\\r\n"
 "^FN3^FD"
-msgstr ""
-"^FS\\r\n"
-"^FN3^FD"
 
 #. module: specific_print
 #: model:ir.ui.view,arch_db:specific_print.stock_pick_packs_label_zebra_v1
+#, fuzzy
 msgid ""
 "^FS\\r\n"
-"^FN4^FD"
+"\n"
+"^FO570,120,1^A0N30,30^FD"
 msgstr ""
 "^FS\\r\n"
-"^FN4^FD"
+"^FO25,342^A0N,31,23^CI13^FR^FD"
 
 #. module: specific_print
 #: model:ir.ui.view,arch_db:specific_print.stock_pick_packs_label_zebra_v1
+#, fuzzy
 msgid ""
 "^FS\\r\n"
-"^FN5^FD"
+"\n"
+"^FO570,280,1^A0N30,25^FD"
 msgstr ""
 "^FS\\r\n"
-"^FN5^FD"
-
-#. module: specific_print
-#: model:ir.ui.view,arch_db:specific_print.stock_pick_packs_label_zebra_v1
-msgid ""
-"^FS\\r\n"
-"^FN6^FD"
-msgstr ""
-"^FS\\r\n"
-"^FN6^FD"
+"^FO25,342^A0N,31,23^CI13^FR^FD"
 
 #. module: specific_print
 #: model:ir.ui.view,arch_db:specific_print.stock_lot_nolot_label_zebra_v1
@@ -481,6 +494,56 @@ msgstr ""
 "^FO420,33^A0N,118,103^CI13^FR^FD"
 
 #. module: specific_print
+#: model:ir.ui.view,arch_db:specific_print.stock_pick_packs_label_zebra_v1
+#, fuzzy
+msgid ""
+"^FS\\r\n"
+"^FO570,150,1^A0N30,30^FD"
+msgstr ""
+"^FS\\r\n"
+"^FO25,342^A0N,31,23^CI13^FR^FD"
+
+#. module: specific_print
+#: model:ir.ui.view,arch_db:specific_print.stock_pick_packs_label_zebra_v1
+#, fuzzy
+msgid ""
+"^FS\\r\n"
+"^FO570,185,1^A0N35,30^FD"
+msgstr ""
+"^FS\\r\n"
+"^FO25,342^A0N,31,23^CI13^FR^FD"
+
+#. module: specific_print
+#: model:ir.ui.view,arch_db:specific_print.stock_pick_packs_label_zebra_v1
+#, fuzzy
+msgid ""
+"^FS\\r\n"
+"^FO570,230,1^A0N30,30^FD"
+msgstr ""
+"^FS\\r\n"
+"^FO25,342^A0N,31,23^CI13^FR^FD"
+
+#. module: specific_print
+#: model:ir.ui.view,arch_db:specific_print.stock_pick_packs_label_zebra_v1
+#, fuzzy
+msgid ""
+"^FS\\r\n"
+"^FO570,310,1^A0N20,25^FD"
+msgstr ""
+"^FS\\r\n"
+"^FO25,342^A0N,31,23^CI13^FR^FD"
+
+#. module: specific_print
+#: model:ir.ui.view,arch_db:specific_print.stock_pick_packs_label_zebra_v1
+#, fuzzy
+msgid ""
+"^FS\\r\n"
+"^FO570,350,1^A0N45,45^FD"
+msgstr ""
+"^FS\\r\n"
+"^FO25,342^A0N,31,23^CI13^FR^FD"
+
+#. module: specific_print
 #: model:ir.ui.view,arch_db:specific_print.stock_lot_label_zebra_v1
 msgid ""
 "^FS\\r\n"
@@ -498,6 +561,19 @@ msgid ""
 msgstr ""
 "^FS\\r\n"
 "^XZ"
+
+#. module: specific_print
+#: model:ir.ui.view,arch_db:specific_print.stock_pick_packs_label_zebra_v1
+#, fuzzy
+msgid ""
+"^XA\n"
+"\n"
+"^FO30,250^BQN,2,6^FDQA,"
+msgstr ""
+"^FS\\r\n"
+"^FO420,150\\r\n"
+"^BQN,2,6\\r\n"
+"^FDQA,"
 
 #. module: specific_print
 #: model:ir.ui.view,arch_db:specific_print.stock_lot_label_zebra_v1
@@ -524,17 +600,6 @@ msgstr ""
 "^PRC\n"
 "^LH0,0^FS\\r\n"
 "^FO25,40^A0N,50,40^CI13^FR^FD"
-
-#. module: specific_print
-#: model:ir.ui.view,arch_db:specific_print.stock_pick_packs_label_zebra_v1
-msgid ""
-"^XA\n"
-"^XFE:FORMAT.ZPL^FS\\r\n"
-"^FN1^FD"
-msgstr ""
-"^XA\n"
-"^XFE:FORMAT.ZPL^FS\\r\n"
-"^FN1^FD"
 
 #. module: specific_print
 #: model:ir.model,name:specific_print.model_print_label
@@ -642,3 +707,40 @@ msgstr "🖶Imprimer colis"
 #: model:ir.ui.view,arch_db:specific_print.view_picking_form
 msgid "🖶Print Products"
 msgstr "🖶Imprimer produits"
+
+#~ msgid ""
+#~ "^FS\\r\n"
+#~ "^FN2^FD"
+#~ msgstr ""
+#~ "^FS\\r\n"
+#~ "^FN2^FD"
+
+#~ msgid ""
+#~ "^FS\\r\n"
+#~ "^FN4^FD"
+#~ msgstr ""
+#~ "^FS\\r\n"
+#~ "^FN4^FD"
+
+#~ msgid ""
+#~ "^FS\\r\n"
+#~ "^FN5^FD"
+#~ msgstr ""
+#~ "^FS\\r\n"
+#~ "^FN5^FD"
+
+#~ msgid ""
+#~ "^FS\\r\n"
+#~ "^FN6^FD"
+#~ msgstr ""
+#~ "^FS\\r\n"
+#~ "^FN6^FD"
+
+#~ msgid ""
+#~ "^XA\n"
+#~ "^XFE:FORMAT.ZPL^FS\\r\n"
+#~ "^FN1^FD"
+#~ msgstr ""
+#~ "^XA\n"
+#~ "^XFE:FORMAT.ZPL^FS\\r\n"
+#~ "^FN1^FD"
