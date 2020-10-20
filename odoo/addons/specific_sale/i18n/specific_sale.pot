@@ -512,6 +512,11 @@ msgid "Quantity unavailable"
 msgstr ""
 
 #. module: specific_sale
+#: model:ir.actions.act_window,name:specific_sale.action_sale_lines_unavailable_list
+msgid "Sale Order Lines"
+msgstr ""
+
+#. module: specific_sale
 #: model:ir.model.fields,field_description:specific_sale.field_sale_order_sale_channel
 msgid "Sale channel"
 msgstr ""

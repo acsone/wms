@@ -532,6 +532,11 @@ msgid "Quantity unavailable"
 msgstr "BO"
 
 #. module: specific_sale
+#: model:ir.actions.act_window,name:specific_sale.action_sale_lines_unavailable_list
+msgid "Sale Order Lines"
+msgstr "Lignes de ventes"
+
+#. module: specific_sale
 #: model:ir.model.fields,field_description:specific_sale.field_sale_order_sale_channel
 msgid "Sale channel"
 msgstr "Canal de vente"
@@ -681,6 +686,3 @@ msgstr "Commande de psychotrope par écrit, gardez la confirmation."
 
 #~ msgid "Remains to deliver"
 #~ msgstr "Reste à livrer"
-
-#~ msgid "Sale Order Lines"
-#~ msgstr "Lignes de ventes"

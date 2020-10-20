@@ -527,6 +527,11 @@ msgid "Quantity unavailable"
 msgstr "Niet beschikbare hoeveelheid"
 
 #. module: specific_sale
+#: model:ir.actions.act_window,name:specific_sale.action_sale_lines_unavailable_list
+msgid "Sale Order Lines"
+msgstr "Verkooporderregels"
+
+#. module: specific_sale
 #: model:ir.model.fields,field_description:specific_sale.field_sale_order_sale_channel
 msgid "Sale channel"
 msgstr ""
@@ -673,6 +678,3 @@ msgstr ""
 #: model:exception.rule,warning_text:specific_sale.warning_stupefiant_vet
 msgid "stupéfiant VET: written order, keep confirmation."
 msgstr ""
-
-#~ msgid "Sale Order Lines"
-#~ msgstr "Verkooporderregels"
