@@ -29,10 +29,18 @@ class PickingAssignDeliveryRound(models.TransientModel):
     delivery_round_id = fields.Many2one(
         "round.instance",
         "Delivery Round",
-        domain="[('state', 'not in', ('delivering','done'))]",
+        domain=lambda p: p._domain_delivery_round_id(),
         required=True,
         ondelete="cascade",
     )
+
+    @api.model
+    def _domain_delivery_round_id(self):
+        return [("state", "in", self._get_assignable_states())]
+
+    @api.model
+    def _get_assignable_states(self):
+        return ["pending", "draft"]
 
     @api.one
     def confirm(self):
