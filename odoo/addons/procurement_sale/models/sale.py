@@ -136,7 +136,12 @@ class SaleOrderLine(models.Model):
             return None
 
     @api.onchange(
-        "product_id", "product_uom_qty", "route_id", "date_order", "order_id.date_order"
+        "product_id",
+        "product_uom_qty",
+        "route_id",
+        "date_order",
+        "order_id",
+        "date_order",
     )
     def onchange_for_product_qty_unavailable(self):
         for line in self:
