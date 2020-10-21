@@ -24,7 +24,7 @@ msgid "Inventory Routes"
 msgstr ""
 
 #. module: procurement_sale
-#: code:addons/procurement_sale/models/sale.py:209
+#: code:addons/procurement_sale/models/sale.py:222
 #, python-format
 msgid "Missing sale order confirmation date. Cannot plan delivery procurement order"
 msgstr ""
