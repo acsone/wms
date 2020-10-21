@@ -311,7 +311,7 @@ msgid "Delivery failure"
 msgstr "L'échec de livraison"
 
 #. module: delivery_rounds
-#: code:addons/delivery_rounds/wizards/picking_assign_delivery_round.py:59
+#: code:addons/delivery_rounds/wizards/picking_assign_delivery_round.py:67
 #, python-format
 msgid "Delivery round \"%s\" manually assigned"
 msgstr "Tournée \"%s\" attribuée manuellement"
@@ -584,7 +584,7 @@ msgid "No picking have been processed yet"
 msgstr "Aucune préparation n'a encore été traitée"
 
 #. module: delivery_rounds
-#: code:addons/delivery_rounds/wizards/picking_assign_delivery_round.py:52
+#: code:addons/delivery_rounds/wizards/picking_assign_delivery_round.py:60
 #, python-format
 msgid ""
 "No products available.\n"
