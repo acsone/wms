@@ -63,6 +63,9 @@ odoo.define('website_purchase_review.main_page', function (require) {
                     break;
             }
         });
+        $('#button_reload_products').click(function () {
+            load_product(current_product_id, true);
+        });
 
     }
 
@@ -106,29 +109,45 @@ odoo.define('website_purchase_review.main_page', function (require) {
     }
 
     function load_products_list() {
+        var urlParams = new URLSearchParams(window.location.search);
+        var storageKey = 'products_' + purchase_order_id;
+        if (urlParams.has("reload_products")){
+            sessionStorage.removeItem(storageKey);
+        }
         var PO = new Model('purchase.order');
+        var products = sessionStorage.getItem(storageKey);
+        if (products !== null){
+            _set_loaded_products(JSON.parse(products));
+            return;
+        }
         PO.call('get_products', [purchase_order_id]).then(function(result) {
-            $.each(result, function(index) {
-                products_list.push({
-                    id: result[index]['id'],
-                    name: result[index]['name'],
-                    display_name: result[index]['display_name'],
-                    ref: result[index]['ref'],
-                    ordered_products: result[index]['ordered_product'],
-                    with_promo: result[index]['with_promo'],
-                    without_promo: result[index]['without_promo'],
-                    is_in_bo: result[index]['is_in_bo']
-                });
-            });
-
-            if (current_product_id === null) {
-                current_product_id = products_list[0].id;
-            }
-            load_stock_graph();
-            refresh_list();
-            compute_next_product();
-            disable_buttons(false);
+            sessionStorage.setItem(storageKey, JSON.stringify(result));
+            _set_loaded_products(result);
+            return;
         });
+    }
+
+    function _set_loaded_products(products){
+        $.each(products, function(index) {
+            products_list.push({
+                id: products[index]['id'],
+                name: products[index]['name'],
+                display_name: products[index]['display_name'],
+                ref: products[index]['ref'],
+                ordered_products: products[index]['ordered_product'],
+                with_promo: products[index]['with_promo'],
+                without_promo: products[index]['without_promo'],
+                is_in_bo: products[index]['is_in_bo']
+            });
+        });
+
+        if (current_product_id === null) {
+            current_product_id = products_list[0].id;
+        }
+        load_stock_graph();
+        refresh_list();
+        compute_next_product();
+        disable_buttons(false);
     }
 
     function refresh_list() {
@@ -256,8 +275,8 @@ odoo.define('website_purchase_review.main_page', function (require) {
         }
     }
 
-    function load_product(productId) {
-        if (productId === current_product_id) {
+    function load_product(productId, reload_products) {
+        if (productId === current_product_id && reload_products !== true) {
             return false;
         }
 
@@ -278,6 +297,9 @@ odoo.define('website_purchase_review.main_page', function (require) {
         }
         if (product_name.trim()) {
             params['product_name'] = product_name.trim();
+        }
+        if(reload_products) {
+            params['reload_products'] = true;
         }
 
         var url = '/purchase_review/' + purchase_order_id + '/' + productId;
