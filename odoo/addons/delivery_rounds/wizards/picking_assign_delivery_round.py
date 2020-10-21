@@ -40,7 +40,7 @@ class PickingAssignDeliveryRound(models.TransientModel):
 
     @api.model
     def _get_assignable_states(self):
-        return ["pending", "draft"]
+        return ["pending", "draft", "close"]
 
     @api.one
     def confirm(self):
