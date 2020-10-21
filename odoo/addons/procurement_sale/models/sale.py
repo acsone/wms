@@ -135,10 +135,18 @@ class SaleOrderLine(models.Model):
         else:
             return None
 
-    @api.onchange("product_id", "product_uom_qty", "route_id", "date_order")
+    @api.onchange(
+        "product_id", "product_uom_qty", "route_id", "date_order", "order_id.date_order"
+    )
     def onchange_for_product_qty_unavailable(self):
         for line in self:
-            if not line.product_id or not line.product_uom_qty or not line.date_order:
+            # don't use the date_order on the line since the related is not initialized when
+            # the onchange is called by the UI WHY??????
+            if (
+                not line.product_id
+                or not line.product_uom_qty
+                or not line.order_id.date_order
+            ):
                 line.product_qty_unavailable = None
                 continue
             line.product_qty_unavailable = line.get_product_qty_unavailable(
