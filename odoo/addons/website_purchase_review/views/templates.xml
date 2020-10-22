@@ -400,6 +400,7 @@
                             </div>
                             <div class="col-md-4 text-right">
                                 <a class="btn btn-success return_btn" t-att-href="return_url"><i class="fa fa-long-arrow-left" aria-hidden="true"/> Return</a>
+                                <button class="btn btn-success return_btn" id="button_reload_products"> <i class="fa fa-refresh" aria-hidden="true"/> Refresh product list</button>
                             </div>
                         </div>
                     </div>

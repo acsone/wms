@@ -39,7 +39,7 @@ class PurchaseOrder(models.Model):
             products = self.order_line.mapped("product_id").sorted(
                 lambda product: product.name
             )
-            url = "/purchase_review/{}/{}?products_to_order=true".format(
+            url = "/purchase_review/{}/{}?products_to_order=true&reload_products=true".format(
                 self.id, products[0].id
             )
         else:
@@ -48,7 +48,7 @@ class PurchaseOrder(models.Model):
             )
             if not products:
                 raise ValidationError(_("There are no products for this supplier"))
-            url = "/purchase_review/%s" % self.id
+            url = "/purchase_review/%s?reload_products=true" % self.id
 
         return {"type": "ir.actions.act_url", "url": url, "target": "self"}
 

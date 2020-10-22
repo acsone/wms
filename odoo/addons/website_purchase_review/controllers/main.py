@@ -19,6 +19,7 @@ FILTERS = [
     "products_with_promo",
     "product_name",
     "next_product_id",
+    "reload_products",
 ]
 
 
