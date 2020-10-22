@@ -31,3 +31,6 @@ odoo10-addon-stock-location-product-restriction @ git+https://github.com/oca/sto
 
 # oca/server-auth
 odoo10-addon-auth-api-key @  git+https://github.com/oca/server-auth.git@refs/pull/95/head#subdirectory=setup/auth_api_key
+
+# oca/edi
+odoo10-addon-purchase-order-import @  git+https://github.com/oca/edi.git@refs/pull/244/head#subdirectory=setup/purchase_order_import
