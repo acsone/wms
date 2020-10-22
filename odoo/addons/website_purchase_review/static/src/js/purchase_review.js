@@ -27,9 +27,9 @@ odoo.define('website_purchase_review.main_page', function (require) {
 
     init_listeners();
     // init_shortcuts();
+    disable_buttons(true);
     load_filters();
     load_products_list();
-    disable_buttons(true);
 
     function init_listeners() {
         $('#save_global_values_btn').click(function () {
