@@ -9,8 +9,8 @@
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="base.view_partner_form"/>
         <field name="arch" type="xml">
-           <xpath expr="//group[@name='sale']" position="inside">
-                <field name="is_in_statistics"/>
+           <xpath expr="//group[@name='purchase']" position="inside">
+                <field name="ask_sale_statistics"/>
            </xpath>
         </field>
     </record>

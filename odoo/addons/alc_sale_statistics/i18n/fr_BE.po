@@ -1,16 +1,15 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* alc_sale_statistics
+#	* alc_sale_statistics
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-20 08:34+0000\n"
-"PO-Revision-Date: 2020-10-20 08:34+0000\n"
+"POT-Creation-Date: 2020-10-22 15:17+0000\n"
+"PO-Revision-Date: 2020-10-22 15:17+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -18,27 +17,22 @@ msgstr ""
 
 #. module: alc_sale_statistics
 #: model:ir.model.fields,help:alc_sale_statistics.field_alc_stock_move_report_state
-msgid ""
-"* New: When the stock move is created and not yet confirmed.\n"
-"* Waiting Another Move: This state can be seen when a move is waiting for "
-"another one, for example in a chained flow.\n"
-"* Waiting Availability: This state is reached when the procurement "
-"resolution is not straight forward. It may need the scheduler to run, a "
-"component to be manufactured...\n"
+msgid "* New: When the stock move is created and not yet confirmed.\n"
+"* Waiting Another Move: This state can be seen when a move is waiting for another one, for example in a chained flow.\n"
+"* Waiting Availability: This state is reached when the procurement resolution is not straight forward. It may need the scheduler to run, a component to be manufactured...\n"
 "* Available: When products are reserved, it is set to 'Available'.\n"
 "* Done: When the shipment is processed, the state is 'Done'."
-msgstr ""
-"* Nouveau : lorsque le mouvement de stock a été créé mais n'est pas encore "
-"confirmé.\n"
-"* En attente d'un autre mouvement : cet état signifie qu'un mouvement est en "
-"attente d'un autre mouvement, par exemple dans le cas d'un flux à "
-"enchaînements.\n"
-"* En attente de disponibilité : cet état signifie que l'approvisionnement ne "
-"peut pas se faire directement. Il est peut-être nécessaire d'exécuter le "
-"planificateur ou de fabriquer un composant, par exemple.\n"
-"* Disponible : lorsqu'un produit est réservé, son état passe à "
-"« Disponible ».\n"
+msgstr "* Nouveau : lorsque le mouvement de stock a été créé mais n'est pas encore confirmé.\n"
+"* En attente d'un autre mouvement : cet état signifie qu'un mouvement est en attente d'un autre mouvement, par exemple dans le cas d'un flux à enchaînements.\n"
+"* En attente de disponibilité : cet état signifie que l'approvisionnement ne peut pas se faire directement. Il est peut-être nécessaire d'exécuter le planificateur ou de fabriquer un composant, par exemple.\n"
+"* Disponible : lorsqu'un produit est réservé, son état passe à « Disponible ».\n"
 "* Terminé : lorsque l'envoi a été traité, son état passe à « Terminé »"
+
+#. module: alc_sale_statistics
+#: model:ir.model.fields,field_description:alc_sale_statistics.field_res_partner_ask_sale_statistics
+#: model:ir.model.fields,field_description:alc_sale_statistics.field_res_users_ask_sale_statistics
+msgid "Ask for sale statistics "
+msgstr "Demande les statistiques de vente "
 
 #. module: alc_sale_statistics
 #: selection:alc.stock.move.report,state:0
@@ -57,25 +51,8 @@ msgstr "Coût"
 
 #. module: alc_sale_statistics
 #: model:ir.model.fields,help:alc_sale_statistics.field_alc_stock_move_report_product_standard_price
-msgid ""
-"Cost of the product template used for standard stock valuation in accounting "
-"and used as a base price on purchase orders. Expressed in the default unit "
-"of measure of the product."
-msgstr ""
-"Prix de revient utilisé en comptabilité pour la valorisation standard des "
-"stocks et en achat comme prix de base. Exprimé dans l'unité de mesure par "
-"défaut de l'article."
-
-#. module: alc_sale_statistics
-#: model:ir.model.fields,field_description:alc_sale_statistics.field_alc_stock_move_report_customer_in_statistics
-msgid "Customer in statistics"
-msgstr "Afficher les statistiques de stock"
-
-#. module: alc_sale_statistics
-#: model:ir.model.fields,field_description:alc_sale_statistics.field_res_partner_is_in_statistics
-#: model:ir.model.fields,field_description:alc_sale_statistics.field_res_users_is_in_statistics
-msgid "Customer should be displayed in statistics"
-msgstr "Inclure dans les statistiques de vente"
+msgid "Cost of the product template used for standard stock valuation in accounting and used as a base price on purchase orders. Expressed in the default unit of measure of the product."
+msgstr "Prix de revient utilisé en comptabilité pour la valorisation standard des stocks et en achat comme prix de base. Exprimé dans l'unité de mesure par défaut de l'article."
 
 #. module: alc_sale_statistics
 #: model:ir.model.fields,field_description:alc_sale_statistics.field_alc_stock_move_report_location_dest_id
@@ -108,22 +85,18 @@ msgid "Last Modified on"
 msgstr "Dernière modification le"
 
 #. module: alc_sale_statistics
-#: model:ir.model.fields,help:alc_sale_statistics.field_alc_stock_move_report_location_dest_id
-msgid "Location where the system will stock the finished products."
-msgstr "Emplacement où le système stockera les produits finis."
-
-#. module: alc_sale_statistics
-#: model:ir.model.fields,field_description:alc_sale_statistics.field_alc_stock_move_report_product_name
-msgid "Name"
-msgstr "Nom"
-
-#. module: alc_sale_statistics
 #: selection:alc.stock.move.report,state:0
 msgid "New"
 msgstr "Nouveau"
 
 #. module: alc_sale_statistics
+#: model:ir.ui.view,arch_db:alc_sale_statistics.stock_moves_with_partner_view_search
+msgid "Only supplier requesting statistics"
+msgstr "Seulement pour les fournisseurs demandant les statistiques"
+
+#. module: alc_sale_statistics
 #: model:ir.model,name:alc_sale_statistics.model_res_partner
+#: model:ir.model.fields,field_description:alc_sale_statistics.field_alc_stock_move_report_partner_id
 msgid "Partner"
 msgstr "Partenaire"
 
@@ -175,7 +148,7 @@ msgstr "Mois précédent"
 #. module: alc_sale_statistics
 #: model:ir.model.fields,field_description:alc_sale_statistics.field_alc_stock_move_report_product_id
 msgid "Product"
-msgstr "Produit"
+msgstr "Article"
 
 #. module: alc_sale_statistics
 #: model:ir.model.fields,field_description:alc_sale_statistics.field_alc_stock_move_report_product_default_code
@@ -183,29 +156,24 @@ msgid "Product default code"
 msgstr "Article/Réference interne"
 
 #. module: alc_sale_statistics
+#: model:ir.model.fields,field_description:alc_sale_statistics.field_alc_stock_move_report_product_name
+msgid "Product name"
+msgstr "Article"
+
+#. module: alc_sale_statistics
+#: model:ir.model.fields,field_description:alc_sale_statistics.field_alc_stock_move_report_product_price
+msgid "Product price"
+msgstr "Prix de vente"
+
+#. module: alc_sale_statistics
 #: model:ir.model.fields,field_description:alc_sale_statistics.field_alc_stock_move_report_product_qty
 msgid "Product quantity"
 msgstr "Quantité"
 
 #. module: alc_sale_statistics
-#: model:ir.model.fields,field_description:alc_sale_statistics.field_alc_stock_move_report_product_price
-msgid "Sale Price"
-msgstr "Prix de vente"
-
-#. module: alc_sale_statistics
 #: model:ir.model.fields,field_description:alc_sale_statistics.field_alc_stock_move_report_product_sale_price_2
 msgid "Sale Price 2"
 msgstr "Prix de vente 2"
-
-#. module: alc_sale_statistics
-#: model:ir.model.fields,help:alc_sale_statistics.field_alc_stock_move_report_location_id
-msgid ""
-"Sets a location if you produce at a fixed location. This can be a partner "
-"location if you subcontract the manufacturing operations."
-msgstr ""
-"Mettre un emplacement si vous produisez à un emplacement fixe. Ceci peut "
-"être un emplacement partenaire si vous soutraitez des opérations de "
-"fabrication."
 
 #. module: alc_sale_statistics
 #: model:ir.model.fields,field_description:alc_sale_statistics.field_alc_stock_move_report_location_id
@@ -215,7 +183,7 @@ msgstr "Emplacement d'origine"
 #. module: alc_sale_statistics
 #: model:ir.model.fields,field_description:alc_sale_statistics.field_alc_stock_move_report_state
 msgid "Status"
-msgstr "Statut"
+msgstr "Etat"
 
 #. module: alc_sale_statistics
 #: model:ir.actions.act_window,name:alc_sale_statistics.action_stock_moves_with_partner
@@ -224,9 +192,24 @@ msgid "Stock Move (with partner)"
 msgstr "Mouvements de stock (statistiques)"
 
 #. module: alc_sale_statistics
+#: model:ir.model.fields,field_description:alc_sale_statistics.field_alc_stock_move_report_move_id
+msgid "Stock move"
+msgstr "Mouvement de stock"
+
+#. module: alc_sale_statistics
 #: model:ir.model,name:alc_sale_statistics.model_alc_stock_move_report
 msgid "Stock move report"
 msgstr "Mouvements de stock"
+
+#. module: alc_sale_statistics
+#: model:ir.model.fields,field_description:alc_sale_statistics.field_alc_stock_move_report_supplier_id
+msgid "Supplier"
+msgstr "Fournisseur"
+
+#. module: alc_sale_statistics
+#: model:ir.model.fields,field_description:alc_sale_statistics.field_alc_stock_move_report_supplier_ask_sale_statistics
+msgid "Supplier ask statistics"
+msgstr "Fournisseur demandant les statistiques"
 
 #. module: alc_sale_statistics
 #: model:ir.model.fields,field_description:alc_sale_statistics.field_alc_stock_move_report_price_unit
@@ -262,8 +245,3 @@ msgstr "En attente de disponibilité"
 #: model:ir.ui.view,arch_db:alc_sale_statistics.stock_moves_with_partner_view_search
 msgid "customer related stock moves"
 msgstr "Mouvements clients réalisés"
-
-#. module: alc_sale_statistics
-#: model:ir.ui.view,arch_db:alc_sale_statistics.stock_moves_with_partner_view_search
-msgid "is in statistics"
-msgstr "Clients inclus dans statistiques de vente"

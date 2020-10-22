@@ -9,6 +9,6 @@ class ResPartner(models.Model):
 
     _inherit = "res.partner"
 
-    is_in_statistics = fields.Boolean(
-        "Customer should be displayed in statistics", default=False
+    ask_sale_statistics = fields.Boolean(
+        "Ask for sale statistics ", default=False, index=True
     )

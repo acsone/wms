@@ -32,7 +32,7 @@
                     <field name="partner_invoice_depot_number"/>
                     <field name="partner_invoice_alcyon_category"/>
                     <field name="picking_reference"/>
-                    <field name="customer_in_statistics"/>
+                    <field name="supplier_ask_sale_statistics"/>
                 </tree>
             </field>
         </record>
@@ -43,9 +43,12 @@
         <field name="model">alc.stock.move.report</field>
         <field name="arch" type="xml">
             <search>
-                <filter string="is in statistics" name="filter_is_in_statistics"
+                <field name="supplier_id"/>
+                <field name="partner_id"/>
+                <field name="product_id"/>
+                <filter string="Only supplier requesting statistics" name="filter_ask_sale_statistics"
                   domain="[
-                      ('customer_in_statistics', '=', True),
+                      ('supplier_ask_sale_statistics', '=', True),
                     ]"/>
                 <separator/>
                 <filter string="customer related stock moves" name="customer_related_stock_moves"
@@ -68,11 +71,18 @@
         <field name="res_model">alc.stock.move.report</field>
         <field name="view_mode">tree</field>
         <field name="context">{
-            'search_default_filter_is_in_statistics': 1,
+            'search_default_filter_ask_sale_statistics': 1,
             'search_default_customer_related_stock_moves': 1,
             'search_default_last_month': 1,
           }</field>
         <field name="search_view_id" ref="stock_moves_with_partner_view_search"/>
     </record>
-    <menuitem id="menu_stock_moves_with_partner" action="action_stock_moves_with_partner" parent="stock.menu_warehouse_report" sequence="25" groups="base.group_no_one"/>
+
+    <record model="ir.ui.menu" id="menu_stock_moves_with_partner">
+        <field name="name">Stock Move (with partner)</field>
+        <field name="parent_id" ref="stock.menu_warehouse_report"/>
+        <field name="action" ref="action_stock_moves_with_partner"/>
+        <field name="sequence" eval="99"/>
+    </record>
+
 </odoo>

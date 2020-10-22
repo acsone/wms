@@ -2,6 +2,6 @@
 <odoo>
     <!-- ensure that the qty stats button are first into the toolbar -->
     <record model="ir.ui.view" id="stock.product_template_form_view_procurement_button">
-        <field name="sequence">18</field>
+        <field name="priority">18</field>
     </record>
 </odoo>

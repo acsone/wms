@@ -12,31 +12,25 @@ class AlcStockMoveReport(models.Model):
     _auto = False
     _order = "validation_date desc"
 
-    customer_in_statistics = fields.Boolean("Customer in statistics", readonly=True)
+    move_id = fields.Many2one(
+        comodel_name="stock.move", string="Stock move", readonly=True
+    )
+    supplier_ask_sale_statistics = fields.Boolean(
+        "Supplier ask statistics", readonly=True
+    )
 
     internal_ref_for_partner_invoice = fields.Char(
         "Internal Ref for invoicing", readonly=True
     )
 
     location_dest_id = fields.Many2one(
-        "stock.location",
-        "Destination Location",
-        auto_join=True,
-        index=True,
-        required=True,
-        states={"done": [("readonly", True)]},
-        help="Location where the system will stock the finished products.",
+        "stock.location", "Destination Location", readonly=True
     )
-    location_id = fields.Many2one(
-        "stock.location",
-        "Source Location",
-        auto_join=True,
-        index=True,
-        required=True,
-        states={"done": [("readonly", True)]},
-        help="Sets a location if you produce at a fixed location. This can be a partner location if you subcontract the manufacturing operations.",
-    )
+    location_id = fields.Many2one("stock.location", "Source Location", readonly=True)
 
+    partner_id = fields.Many2one(
+        comodel_name="res.partner", string="Partner", readonly=True
+    )
     partner_invoice_alcyon_category = fields.Char(
         "Partner Alcyon category for invoicing", readonly=True
     )
@@ -54,10 +48,10 @@ class AlcStockMoveReport(models.Model):
     price_unit = fields.Float(string="Unit Price", readonly=True)
 
     product_id = fields.Many2one("product.product", "Product", readonly=True)
-    product_default_code = fields.Char("Product default code")
-    product_name = fields.Char("Name", index=True, required=True, translate=True)
-    product_price = fields.Float("Sale Price", default=1.0, readonly=True)
-    product_qty = fields.Float("Product quantity", required=True, readonly=True)
+    product_default_code = fields.Char()
+    product_name = fields.Char(readonly=True)
+    product_price = fields.Float(readonly=True)
+    product_qty = fields.Float("Product quantity", readonly=True)
     product_sale_price_2 = fields.Float(
         related="product_id.product_tmpl_id.sale_price_2", readonly=True
     )
@@ -86,6 +80,9 @@ class AlcStockMoveReport(models.Model):
         "* Done: When the shipment is processed, the state is 'Done'.",
     )
 
+    supplier_id = fields.Many2one(
+        comodel_name="res.partner", string="Supplier", readonly=True
+    )
     supplier_ref = fields.Char("Vendor Product Code", readonly=True)
     supplier_name = fields.Char("Vendor Product Name", readonly=True)
     validation_date = fields.Date("Validation date", readonly=True)
@@ -97,6 +94,7 @@ class AlcStockMoveReport(models.Model):
             """
             create view alc_stock_move_report as (
                 SELECT sm.id AS id,
+                       sm.id AS move_id,
                        sm.product_id AS product_id,
                        sm.state AS state,
                        sm.location_id AS location_id,
@@ -108,6 +106,7 @@ class AlcStockMoveReport(models.Model):
                        pt.list_price AS product_price,
                        pt.vendor_product_code AS supplier_ref,
                        sol.price_unit AS price_unit,
+                       resp.id as partner_id,
                        resp.ref AS internal_ref_for_partner_invoice,
                        resp.name AS partner_invoice_name,
                        resp.street AS partner_invoice_street,
@@ -116,9 +115,10 @@ class AlcStockMoveReport(models.Model):
                        resp.vat AS partner_invoice_vat,
                        resp.vet_depot_number AS partner_invoice_depot_number,
                        resp.alcyon_category_id AS partner_invoice_alcyon_category,
-                       resp.is_in_statistics AS customer_in_statistics,
                        pick.name AS picking_reference,
-                       suppl.name AS supplier_name
+                       suppl.id AS supplier_id,
+                       suppl.name AS supplier_name,
+                       suppl.ask_sale_statistics AS supplier_ask_sale_statistics
                 FROM stock_move sm
                     JOIN product_product pp ON pp.id = sm.product_id
                     JOIN product_template pt ON pt.id = pp.product_tmpl_id
