@@ -45,6 +45,11 @@ msgstr ""
 
 #. module: website_purchase_review
 #: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
+msgid "<i class=\"fa fa-refresh\" aria-hidden=\"true\"/> Refresh product list"
+msgstr ""
+
+#. module: website_purchase_review
+#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
 msgid "ABC amount"
 msgstr ""
 

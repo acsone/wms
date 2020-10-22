@@ -49,6 +49,12 @@ msgstr ""
 
 #. module: website_purchase_review
 #: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
+#, fuzzy
+msgid "<i class=\"fa fa-refresh\" aria-hidden=\"true\"/> Refresh product list"
+msgstr "<i class=\"fa fa-check-circle-o\" aria-hidden=\"true\"/> Confirmé"
+
+#. module: website_purchase_review
+#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
 msgid "ABC amount"
 msgstr "Montant ABC"
 
