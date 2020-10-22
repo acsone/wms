@@ -159,13 +159,18 @@ class PurchaseOrder(models.Model):
             orderpoint_qty_multiple = (
                 orderpoint_qty_multiple and float(orderpoint_qty_multiple) or 0.0
             )
-            product.sudo().write(
-                {
-                    "orderpoint_min": orderpoint_min,
-                    "orderpoint_max": orderpoint_max,
-                    "orderpoint_qty_multiple": orderpoint_qty_multiple,
-                }
-            )
+            if (
+                product.orderpoint_min != orderpoint_min
+                or product.orderpoint_max != orderpoint_max
+                or product.orderpoint_qty_multiple != orderpoint_qty_multiple
+            ):
+                product.sudo().write(
+                    {
+                        "orderpoint_min": orderpoint_min,
+                        "orderpoint_max": orderpoint_max,
+                        "orderpoint_qty_multiple": orderpoint_qty_multiple,
+                    }
+                )
 
         PurchaseOrderLine = self.env["purchase.order.line"]
 
@@ -179,8 +184,10 @@ class PurchaseOrder(models.Model):
         if existing_line:
             vals.pop("order_id")
             vals.pop("product_id")
+            old_price_unit_base = existing_line.price_unit_base
             existing_line.write(vals)
-            existing_line._onchange_price_unit()
+            if old_price_unit_base != existing_line.price_unit_base:
+                existing_line._onchange_price_unit()
         else:
 
             product_id = vals.pop("product_id")
@@ -205,7 +212,7 @@ class PurchaseOrder(models.Model):
             new_line._onchange_price_unit()
         if date_planned < today_date:
             self.date_planned = po_date_planned
-        else:
+        elif self.date_planned != fields.Datetime.to_string(date_planned):
             self.date_planned = date_planned
 
         return True
