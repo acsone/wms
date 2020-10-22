@@ -109,10 +109,12 @@ odoo.define('website_purchase_review.main_page', function (require) {
     }
 
     function load_products_list() {
-        var urlParams = new URLSearchParams(window.location.search);
+        var url = new URL(window.location);
         var storageKey = 'products_' + purchase_order_id;
-        if (urlParams.has("reload_products")){
+        if (url.searchParams.has("reload_products")){
+            url.searchParams.delete("reload_products");
             sessionStorage.removeItem(storageKey);
+            window.history.replaceState({}, document.title, url.toString());
         }
         var PO = new Model('purchase.order');
         var products = sessionStorage.getItem(storageKey);
