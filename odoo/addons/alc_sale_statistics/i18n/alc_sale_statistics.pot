@@ -206,6 +206,11 @@ msgid "Supplier ask statistics"
 msgstr ""
 
 #. module: alc_sale_statistics
+#: model:ir.model.fields,field_description:alc_sale_statistics.field_alc_stock_move_report_supplier_name
+msgid "Supplier name"
+msgstr ""
+
+#. module: alc_sale_statistics
 #: model:ir.model.fields,field_description:alc_sale_statistics.field_alc_stock_move_report_price_unit
 msgid "Unit Price"
 msgstr ""
@@ -218,11 +223,6 @@ msgstr ""
 #. module: alc_sale_statistics
 #: model:ir.model.fields,field_description:alc_sale_statistics.field_alc_stock_move_report_supplier_ref
 msgid "Vendor Product Code"
-msgstr ""
-
-#. module: alc_sale_statistics
-#: model:ir.model.fields,field_description:alc_sale_statistics.field_alc_stock_move_report_supplier_name
-msgid "Vendor Product Name"
 msgstr ""
 
 #. module: alc_sale_statistics
