@@ -84,7 +84,7 @@ class AlcStockMoveReport(models.Model):
         comodel_name="res.partner", string="Supplier", readonly=True
     )
     supplier_ref = fields.Char("Vendor Product Code", readonly=True)
-    supplier_name = fields.Char("Vendor Product Name", readonly=True)
+    supplier_name = fields.Char("Supplier name", readonly=True)
     validation_date = fields.Date("Validation date", readonly=True)
 
     @api.model_cr

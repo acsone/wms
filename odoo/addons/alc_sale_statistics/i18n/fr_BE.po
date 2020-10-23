@@ -230,6 +230,11 @@ msgid "Supplier ask statistics"
 msgstr "Fournisseur demandant les statistiques"
 
 #. module: alc_sale_statistics
+#: model:ir.model.fields,field_description:alc_sale_statistics.field_alc_stock_move_report_supplier_name
+msgid "Supplier name"
+msgstr "Fournisseur"
+
+#. module: alc_sale_statistics
 #: model:ir.model.fields,field_description:alc_sale_statistics.field_alc_stock_move_report_price_unit
 msgid "Unit Price"
 msgstr "Prix unitaire"
@@ -243,11 +248,6 @@ msgstr "Date de validation"
 #: model:ir.model.fields,field_description:alc_sale_statistics.field_alc_stock_move_report_supplier_ref
 msgid "Vendor Product Code"
 msgstr "Référence Fournisseur"
-
-#. module: alc_sale_statistics
-#: model:ir.model.fields,field_description:alc_sale_statistics.field_alc_stock_move_report_supplier_name
-msgid "Vendor Product Name"
-msgstr "Nom de l'article chez le fournisseur"
 
 #. module: alc_sale_statistics
 #: selection:alc.stock.move.report,state:0
