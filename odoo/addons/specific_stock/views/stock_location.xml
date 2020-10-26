@@ -25,11 +25,6 @@
                     <field name="is_valid_location" invisible="1"/>
                 </group>
             </xpath>
-
-            <xpath expr="//field[@name='putaway_strategy_id']" position="after">
-              <field name="exclude_from_immediately_usable_qty"/>
-            </xpath>
-
         </field>
     </record>
 
