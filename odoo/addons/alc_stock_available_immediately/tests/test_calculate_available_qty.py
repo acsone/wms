@@ -37,9 +37,16 @@ class TestCalcAvailableQty(SavepointCase):
                 "exclude_from_immediately_usable_qty": True,
             }
         )
+        cls.location_p1 = cls.stock_location_model.create(
+            {
+                "name": "Product p1 sotk",
+                "location_id": cls.stock_location.location_id.id,
+                "exclude_from_immediately_usable_qty": False,
+            }
+        )
         cls.location_parking._parent_store_compute()
         cls.customer_location = cls.env.ref("stock.stock_location_customers")
-        cls._define_product_qty(cls.stock_location, cls.p1, 10.0)
+        cls._define_product_qty(cls.location_p1, cls.p1, 10.0)
 
     @classmethod
     def _define_product_qty(cls, location, product, quantity):
@@ -91,7 +98,7 @@ class TestCalcAvailableQty(SavepointCase):
             picking_out.do_transfer()
 
     def test_inventory(self):
-        self._define_product_qty(self.stock_location, self.p1, 10.0)
+        self._define_product_qty(self.location_p1, self.p1, 10.0)
         self.p1.refresh()
         self.assertEqual(self.p1.immediately_usable_qty, 10.0)
 
@@ -104,6 +111,19 @@ class TestCalcAvailableQty(SavepointCase):
         self.p1.refresh()
         self.assertEqual(self.p1.virtual_available, 40.0)
         self.assertEqual(self.p1.immediately_usable_qty, 10.0)
+
+    def test_specific_location(self):
+        """If we request the available qty on a specific location, the exluded
+        locations should not be taken into account"""
+        self.p1 = self.p1.with_context(
+            prio=1, date=fields.Datetime.to_string(datetime.now())
+        )
+        self.assertEqual(self.p1.immediately_usable_qty, 10.0)
+        self._define_product_qty(self.location_parking, self.p1, 30.0)
+        self.p1.refresh()
+        p1_on_location = self.p1.with_context(location=self.location_p1.id)
+        self.assertEqual(p1_on_location.virtual_available, 10.0)
+        self.assertEqual(p1_on_location.immediately_usable_qty, 10.0)
 
     def test_same_prio(self):
         self.p1 = self.p1.with_context(
