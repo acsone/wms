@@ -6,6 +6,7 @@ odoo @ git+https://github.com/acsone/odoo.git@10.0-alc_master
 # oca/puchase-workflow
 
 odoo10-addon-purchase-order-approved @ git+https://github.com/acsone/purchase-workflow.git@10.0-purchase_order_approved_by_supplier-lmi#subdirectory=setup/purchase_order_approved
+odoo10-addon-purchase-order-line-packaging-qty @ git+https://github.com/oca/purchase-workflow.git@refs/pull/989/head#subdirectory=setup/purchase_order_line_packaging_qty
 
 # oca/server-tools
 odoo10-addon-slow-statement-logger @ git+https://github.com/acsone/server-tools@10.0-backport-slow_statement_logger-lmi#egg=odoo10_addon_slow_statement_logger&subdirectory=setup/slow_statement_logger
