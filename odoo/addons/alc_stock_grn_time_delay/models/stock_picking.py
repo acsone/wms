@@ -2,6 +2,7 @@
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+import math
 from datetime import datetime, timedelta
 
 from odoo import api, fields, models
@@ -22,10 +23,14 @@ class StockPicking(models.Model):
     def _compute_time_delay(self):
         for rec in self:
             if rec.grn_date:
-                time_delta = datetime.today() - datetime.strptime(
+                time_delta_total = datetime.today() - datetime.strptime(
                     rec.grn_date, "%Y-%m-%d %H:%M:%S"
                 )
-                rec.time_delay = time_delta.days
+                time_delta = time_delta_total.days
+                # Saturdays and sundays have to be removed from the count
+                nb_of_weekend_days = math.ceil(float(time_delta) / 7.0) * 2
+                time_delta_working_days = time_delta - nb_of_weekend_days
+                rec.time_delay = time_delta_working_days
 
     @api.depends("time_delay")
     def _compute_is_time_exceeded(self):
