@@ -224,11 +224,6 @@ msgid "Duration to compute best sellers (in months)"
 msgstr "Durée (en mois) pour calculer les produits les plus vendus"
 
 #. module: specific_stock
-#: model:ir.model.fields,field_description:specific_stock.field_stock_location_exclude_from_immediately_usable_qty
-msgid "Exclude from immediately usable quantity"
-msgstr "Exclure de la quantité immédiatement utilisable"
-
-#. module: specific_stock
 #: model:ir.ui.view,arch_db:specific_stock.generate_voice_identifier_view_form
 #: model:ir.ui.view,arch_db:specific_stock.stock_location_wizard_checksum_view_form
 msgid "Generate"
@@ -668,7 +663,7 @@ msgstr ""
 "(1, 2, 3, 4, 6 ou 12 mois)"
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/stock_location.py:35
+#: code:addons/specific_stock/models/stock_location.py:32
 #: sql_constraint:stock.location:0
 #, python-format
 msgid "The location coordinate must be unique"
@@ -698,7 +693,7 @@ msgid "There is no checksum available"
 msgstr "Il n'y a pas de checksum disponnible"
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/stock_location.py:107
+#: code:addons/specific_stock/models/stock_location.py:104
 #, python-format
 msgid "There is no checksum available for location %s"
 msgstr "Il n'y a pas de checksum disponnible pour cet emplacement %s"
@@ -895,6 +890,9 @@ msgstr "stock.scrap"
 #: model:ir.ui.view,arch_db:specific_stock.view_picking_form
 msgid "↳Put in Pack"
 msgstr "↳Ajouter au colis"
+
+#~ msgid "Exclude from immediately usable quantity"
+#~ msgstr "Exclure de la quantité immédiatement utilisable"
 
 #~ msgid ""
 #~ "You cannot transfer lots with an expired removal date:\n"
