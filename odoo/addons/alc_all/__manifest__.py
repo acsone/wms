@@ -99,6 +99,7 @@
         "alc_placedesvetos",
         "alc_placedesvetos_to_magento",
         "alc_placedesvetos_payment_globalization",
+        "alc_purchase_multipackaging",
         "alc_product_packaging",
         "alc_product_packaging_stock_reserve",
         "alc_product_uom_updatable",
