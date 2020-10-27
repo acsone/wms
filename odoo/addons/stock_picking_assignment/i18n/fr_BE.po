@@ -1,16 +1,15 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* stock_picking_assignment
+#	* stock_picking_assignment
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-09 15:52+0000\n"
-"PO-Revision-Date: 2020-03-09 15:52+0000\n"
+"POT-Creation-Date: 2020-10-23 09:30+0000\n"
+"PO-Revision-Date: 2020-10-23 09:30+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -37,6 +36,13 @@ msgid "Start"
 msgstr "Démarrer"
 
 #. module: stock_picking_assignment
+#: code:addons/stock_picking_assignment/models/stock_picking.py:23
+#: sql_constraint:stock.picking:0
+#, python-format
+msgid "This operator is already assigned to another ongoing picking"
+msgstr "L'opérateur est déjà assigné à une préparation encours. Un opérateur ne peut pas faire plus d'une préparation à la fois."
+
+#. module: stock_picking_assignment
 #: model:ir.model,name:stock_picking_assignment.model_stock_picking
 msgid "Transfer"
 msgstr "Transfert"
@@ -45,3 +51,4 @@ msgstr "Transfert"
 #: model:ir.model,name:stock_picking_assignment.model_stock_scrap
 msgid "stock.scrap"
 msgstr "stock.scrap"
+

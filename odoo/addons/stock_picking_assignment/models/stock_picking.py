@@ -3,7 +3,7 @@
 # © 2016-2018 Jacques-Etienne Baudoux (BCIM sprl) <je@bcim.be>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import api, fields, models
+from odoo import _, api, fields, models
 
 
 class StockPicking(models.Model):
@@ -15,6 +15,14 @@ class StockPicking(models.Model):
     operator_id = fields.Many2one(
         "res.users", string="Operator", copy=False, track_visibility="onchange"
     )
+
+    _sql_constraints = [
+        (
+            "operator_id_unique",
+            "EXCLUDE (operator_id WITH =) WHERE (state not in ('done', 'cancel') and operator_id is not null)",
+            _("This operator is already assigned to another ongoing picking"),
+        )
+    ]
 
     def _prepare_assign_operator_values(self):
         return {"operator_id": self.env.uid, "printed": True}
