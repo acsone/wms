@@ -24,9 +24,6 @@ class StockLocation(models.Model):
         store=True,
         readonly=True,
     )
-    exclude_from_immediately_usable_qty = fields.Boolean(
-        "Exclude from immediately usable quantity", default=False
-    )
 
     _sql_constraints = [
         (
