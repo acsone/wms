@@ -110,6 +110,7 @@ test:
     - echo Testing ${ADDONS_TEST}
     - unbuffer venv/bin/coverage run --branch venv/bin/odoo -c odoo-ci.cfg -d ${DB_NAME} --stop-after-init --no-xmlrpc -i ${ADDONS_TEST} --test-enable | ./acsoo checklog
     - venv/bin/coverage html
+    - venv/bin/coverage xml
     - venv/bin/coverage report
     - if [ "${CI_COMMIT_REF_NAME}" = "master" ] ; then makepot ; fi
   coverage: '/TOTAL\s+\d+\s+\d+\s+\d+\s+\d+\s+(\d+\%)/'
@@ -118,6 +119,8 @@ test:
     paths:
       - htmlcov/
     name: "${CI_PROJECT_NAME}-${CI_JOB_ID}-coverage-html"
+    reports:
+      cobertura: coverage.xml
   dependencies:
     - build
 
