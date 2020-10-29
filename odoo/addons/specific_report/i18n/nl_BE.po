@@ -436,6 +436,12 @@ msgstr ""
 msgid "<span>Sales Order</span>"
 msgstr "<span>Bestelling</span>"
 
+
+#. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
+msgid "<span>Consignement</span>"
+msgstr ""
+
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "<span>Total<br/>APB</span>"

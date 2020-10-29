@@ -438,6 +438,11 @@ msgstr "<span>Commande</span>"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
+msgid "<span>Consignement</span>"
+msgstr "<span>Consignation</span>"
+
+#. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "<span>Total<br/>APB</span>"
 msgstr "<span>Total<br/>APB</span>"
 
