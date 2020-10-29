@@ -37,7 +37,7 @@ class ReportStockOverview(models.Model):
     JOIN stock_picking_type spt ON sm.picking_type_id=spt.id
     WHERE
       spt.subcode = 'PICK'
-      AND sm.priority > '0'
+      AND sm.priority > '0' -- to exclude palette
       AND sm.procure_method = 'make_to_stock'
       AND (sm.state = 'confirmed' or (sm.state = 'assigned' and sm.partially_available))
   ),
