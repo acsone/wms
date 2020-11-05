@@ -1,0 +1,217 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* alc_b2c_connector
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-11-05 10:14+0000\n"
+"PO-Revision-Date: 2020-11-05 10:14+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_b2c_connector
+#: model:ir.model.fields,field_description:alc_b2c_connector.field_alc_b2c_backend_discount_pricelist_id
+msgid "Alcyon Discount"
+msgstr "Remise Alcyon"
+
+#. module: alc_b2c_connector
+#: model:ir.model.fields,help:alc_b2c_connector.field_alc_b2c_backend_is_sale_back_order_accepted
+msgid "Allows customer to order products not in stock"
+msgstr "Permettre aux clients B2C d'acheter des produits hors stock"
+
+#. module: alc_b2c_connector
+#: model:ir.model.fields,help:alc_b2c_connector.field_alc_b2c_backend_product_assortment_id
+msgid "Allows only products matching with the assortment domain"
+msgstr "Seul les produits de l'assortiment peuvent être acheté"
+
+#. module: alc_b2c_connector
+#: model:ir.ui.menu,name:alc_b2c_connector.alc_b2c_root_menu
+msgid "B2C\n"
+"        "
+msgstr "B2C\n"
+"        "
+
+#. module: alc_b2c_connector
+#: model:ir.model,name:alc_b2c_connector.model_alc_b2c_backend
+msgid "B2C Config"
+msgstr "B2C Config"
+
+#. module: alc_b2c_connector
+#: model:ir.actions.act_window,name:alc_b2c_connector.alc_b2c_backend_act_window
+msgid "B2C Configuration"
+msgstr "B2C Configuration"
+
+#. module: alc_b2c_connector
+#: model:ir.filters,name:alc_b2c_connector.b2c_product_assortment_filter
+msgid "B2C Product Assortment"
+msgstr "Assortiment de produits disponibles pour le B2C"
+
+#. module: alc_b2c_connector
+#: model:ir.model.fields,field_description:alc_b2c_connector.field_sale_order_b2c_state
+msgid "B2C state"
+msgstr "Statut B2C"
+
+#. module: alc_b2c_connector
+#: model:ir.ui.menu,name:alc_b2c_connector.alc_b2c_backend_menu
+msgid "Backend"
+msgstr "Backend"
+
+#. module: alc_b2c_connector
+#: selection:sale.order,b2c_state:0
+msgid "Cancel"
+msgstr "Annulé"
+
+#. module: alc_b2c_connector
+#: model:ir.model.fields,field_description:alc_b2c_connector.field_alc_b2c_backend_create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: alc_b2c_connector
+#: model:ir.model.fields,field_description:alc_b2c_connector.field_alc_b2c_backend_create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: alc_b2c_connector
+#: selection:sale.order,b2c_state:0
+msgid "Delivery"
+msgstr "Délivré"
+
+#. module: alc_b2c_connector
+#: model:ir.model.fields,field_description:alc_b2c_connector.field_alc_b2c_backend_display_name
+msgid "Display Name"
+msgstr "Nom affiché"
+
+#. module: alc_b2c_connector
+#: selection:sale.order,b2c_state:0
+msgid "Draft"
+msgstr "Brouillon"
+
+#. module: alc_b2c_connector
+#: model:ir.model.fields,field_description:alc_b2c_connector.field_alc_b2c_backend_id
+msgid "ID"
+msgstr "ID"
+
+#. module: alc_b2c_connector
+#: model:ir.model.fields,field_description:alc_b2c_connector.field_alc_b2c_backend___last_update
+msgid "Last Modified on"
+msgstr "Dernière Modification le"
+
+#. module: alc_b2c_connector
+#: model:ir.model.fields,field_description:alc_b2c_connector.field_alc_b2c_backend_write_uid
+msgid "Last Updated by"
+msgstr "Dernière mise à jour par"
+
+#. module: alc_b2c_connector
+#: model:ir.model.fields,field_description:alc_b2c_connector.field_alc_b2c_backend_write_date
+msgid "Last Updated on"
+msgstr "Dernière mise à jour le"
+
+#. module: alc_b2c_connector
+#: model:product.pricelist,name:alc_b2c_connector.product_pricelist_b2c
+msgid "List de prix B2C"
+msgstr "List de prix B2C"
+
+#. module: alc_b2c_connector
+#: model:ir.model.fields,field_description:alc_b2c_connector.field_alc_b2c_backend_name
+msgid "Name"
+msgstr "Nom"
+
+#. module: alc_b2c_connector
+#: code:addons/alc_b2c_connector/models/alc_b2c_backend.py:46
+#: sql_constraint:alc.b2c.backend:0
+#, python-format
+msgid "Name must be unique"
+msgstr "Le nom doit être unique"
+
+#. module: alc_b2c_connector
+#: code:addons/alc_b2c_connector/models/sale_order.py:175
+#, python-format
+msgid "No match found for customer_id: %s"
+msgstr "Aucun client trouvé pour customer_id: %s"
+
+#. module: alc_b2c_connector
+#: model:ir.model.fields,field_description:alc_b2c_connector.field_alc_b2c_backend_payment_mode_id
+msgid "Payment Mode"
+msgstr "Mode de paiement"
+
+#. module: alc_b2c_connector
+#: model:ir.model.fields,field_description:alc_b2c_connector.field_alc_b2c_backend_payment_term_id
+msgid "Payment Terms"
+msgstr "Conditions de règlement"
+
+#. module: alc_b2c_connector
+#: model:ir.model.fields,field_description:alc_b2c_connector.field_alc_b2c_backend_pricelist_id
+msgid "Pricelist"
+msgstr "Liste de prix"
+
+#. module: alc_b2c_connector
+#: model:ir.model.fields,field_description:alc_b2c_connector.field_alc_b2c_backend_product_assortment_id
+msgid "Product Assortment"
+msgstr "Assortiment de produits"
+
+#. module: alc_b2c_connector
+#: model:ir.model.fields,field_description:alc_b2c_connector.field_sale_order_b2c_ref
+#: model:ir.model.fields,field_description:alc_b2c_connector.field_sale_order_line_b2c_ref
+msgid "Reference B2C"
+msgstr "Réference B2C"
+
+#. module: alc_b2c_connector
+#: selection:sale.order,b2c_state:0
+msgid "Sale"
+msgstr "Vente"
+
+#. module: alc_b2c_connector
+#: model:ir.model.fields,field_description:alc_b2c_connector.field_alc_b2c_backend_sale_team_id
+msgid "Sale Team"
+msgstr "Equipe commerciale"
+
+#. module: alc_b2c_connector
+#: model:ir.model.fields,field_description:alc_b2c_connector.field_alc_b2c_backend_is_sale_back_order_accepted
+msgid "Sale backorder accepted"
+msgstr "Autoriser les backorder"
+
+#. module: alc_b2c_connector
+#: model:ir.model.fields,field_description:alc_b2c_connector.field_alc_b2c_backend_sale_channel
+msgid "Sale channel"
+msgstr "Canal de vente"
+
+#. module: alc_b2c_connector
+#: code:addons/alc_b2c_connector/services/sales_service.py:51
+#, python-format
+msgid "Sale order not found for id %s"
+msgstr "Bon de commande inconnu avec l'id %s"
+
+#. module: alc_b2c_connector
+#: model:ir.model,name:alc_b2c_connector.model_sale_order
+msgid "Sales Order"
+msgstr "Bon de commande"
+
+#. module: alc_b2c_connector
+#: model:ir.model,name:alc_b2c_connector.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Ligne du bon de commande"
+
+#. module: alc_b2c_connector
+#: code:addons/alc_b2c_connector/models/sale_order.py:38
+#: sql_constraint:sale.order:0
+#, python-format
+msgid "This b2c reference already exists"
+msgstr "Cette référence b2c existe déjà"
+
+#. module: alc_b2c_connector
+#: code:addons/alc_b2c_connector/services/base_b2c_service.py:31
+#, python-format
+msgid "This user has no access to the B2C REST Api."
+msgstr "Cet utilisateur n'a pas accès à l'API REST B2C"
+
+#. module: alc_b2c_connector
+#: code:addons/alc_b2c_connector/models/sale_order.py:115
+#, python-format
+msgid "Unknowns SKU(s): %s , "
+msgstr "SKU(s) inconnu(s): %s , "
