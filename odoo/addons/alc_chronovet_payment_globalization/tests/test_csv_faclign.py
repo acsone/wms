@@ -6,10 +6,21 @@ from odoo import fields
 from odoo.tests import common
 
 
-class TestCsvReport(common.SavepointCase):
+class TestCsvFaclign(common.SavepointCase):
     @classmethod
     def setUpClass(cls):
-        super(TestCsvReport, cls).setUpClass()
+        super(TestCsvFaclign, cls).setUpClass()
+        cls.warehouse_1 = cls.env.ref("stock.warehouse0")
+        cls.warehouse_1.write(
+            {
+                "name": "Test Warehouse",
+                "reception_steps": "one_step",
+                "delivery_steps": "pick_ship",
+                "code": "TST",
+            }
+        )
+        cls.warehouse_1.pick_type_id.subcode = "PICK"
+
         cls.partner_1 = cls.env["res.partner"].create({"name": "partner1"})
         cls.partner_2 = cls.env["res.partner"].create({"name": "partner1"})
         cls.partner_3 = cls.env["res.partner"].create({"name": "partner3"})
@@ -70,8 +81,27 @@ class TestCsvReport(common.SavepointCase):
         cls.partner_3.property_account_payable_id = cls.account_revenue
 
         cls.AccountInvoice = cls.env["account.invoice"]
-        cls.product = cls.env.ref("product.product_product_4")
-        cls.product2 = cls.env.ref("product.product_product_3")
+
+        cls.product = cls.env["product.product"].create(
+            {
+                "name": "test product1",
+                "default_code": "987654321",
+                "tracking": "none",
+                "list_price": 20,
+                "uom_id": cls.env.ref("product.product_uom_unit").id,
+                "type": "product",
+            }
+        )
+        cls.product2 = cls.env["product.product"].create(
+            {
+                "name": "test product2",
+                "default_code": "987654312",
+                "tracking": "none",
+                "list_price": 20,
+                "uom_id": cls.env.ref("product.product_uom_unit").id,
+                "type": "product",
+            }
+        )
 
         cls.tax_fixed = cls.env["account.tax"].create(
             {
@@ -82,50 +112,59 @@ class TestCsvReport(common.SavepointCase):
                 "include_base_amount": True,
             }
         )
-
-        cls.invoice_partner_1_1_receivable_1 = cls._create_invoice(
-            cls.partner_1, cls.product
-        )
-        cls.invoice_partner_1_2_receivable_1 = cls._create_invoice(
-            cls.partner_1, cls.product
-        )
-        cls.invoice_partner_2_1_receivable_1 = cls._create_invoice(
-            cls.partner_2, cls.product
-        )
-        cls.invoice_partner_2_2_receivable_1 = cls._create_invoice(
-            cls.partner_2, cls.product, price_unit=200
-        )
-        cls.invoice_partner_2_1_receivable_2 = cls._create_invoice(
-            cls.partner_2, cls.product, price_unit=200, account=cls.account_receivable_2
-        )
-
-    @classmethod
-    def _create_invoice(cls, partner, product, price_unit=100, qty=5, account=None):
-        account = account or cls.account_receivable_1
-        invoice = cls.AccountInvoice.create(
+        cls.so1 = cls.env["sale.order"].create(
             {
-                "partner_id": partner.id,
-                "account_id": account.id,
-                "type": "out_invoice",
-                "payment_mode_id": cls.payment_mode.id,
+                "partner_id": cls.partner_1.id,
+                "warehouse_id": cls.warehouse_1.id,
+                "partner_invoice_id": cls.partner_1.id,
+                "partner_shipping_id": cls.partner_1.id,
+                "order_line": [
+                    (
+                        0,
+                        0,
+                        {
+                            "name": cls.product.name,
+                            "product_id": cls.product.id,
+                            "product_uom_qty": 5.0,
+                            "product_uom": cls.product.uom_id.id,
+                        },
+                    ),
+                    (
+                        0,
+                        0,
+                        {
+                            "name": cls.product2.name,
+                            "product_id": cls.product2.id,
+                            "product_uom_qty": 15.0,
+                            "product_uom": cls.product2.uom_id.id,
+                        },
+                    ),
+                ],
             }
         )
+        cls.so1.action_confirm()
 
-        cls.env["account.invoice.line"].create(
-            {
-                "product_id": product.id,
-                "quantity": qty,
-                "price_unit": price_unit,
-                "invoice_id": invoice.id,
-                "account_id": cls.account_revenue.id,
-                "name": "product that cost 100",
-                "invoice_line_tax_ids": [(6, 0, [cls.tax_fixed.id])],
-            }
+        picking = cls.so1.mapped("picking_ids").filtered(
+            lambda p: p.picking_type_subcode == "PICK"
         )
 
-        invoice.compute_taxes()
+        picking.action_confirm()
+        picking.action_assign()
+        for pack_op in picking.pack_operation_ids:
+            pack_op.qty_done = pack_op.product_qty
+        picking.action_done()
+        shipping = cls.so1.mapped("picking_ids").filtered(
+            lambda p: p.picking_type_code == "outgoing"
+        )
 
-        return invoice
+        shipping.action_confirm()
+        shipping.action_assign()
+        for pack_op in shipping.pack_operation_ids:
+            pack_op.qty_done = pack_op.product_qty
+        shipping.action_done()
+
+        invoice_ids = cls.so1.action_invoice_create(final=True)
+        cls.invoices = cls.env["account.invoice"].browse(invoice_ids)
 
     def _do_globalization(self, partner, account, date=None):
         date = date or fields.Date.today()
@@ -143,24 +182,21 @@ class TestCsvReport(common.SavepointCase):
 
     def test_00(self):
         """
-        Data:
-            2 open invoices for partner 1 and receivable_1 account
-            1 open invoice for partner 2 and receivable_1 account
-            1 draft invoice for partner 2 and receivable_1 account
-            1 open invoice for partner 2 and receivable_2 account
-        Test Case:
-            globalize For receivable account on partner 3
-            make the after_globalization and check we get the invoices back before print csv
-        Expected result;
-
         """
-        self.invoice_partner_1_1_receivable_1.action_invoice_open()
-        self.invoice_partner_1_2_receivable_1.action_invoice_open()
-        self.invoice_partner_2_1_receivable_1.action_invoice_open()
-        self.invoice_partner_2_1_receivable_2.action_invoice_open()
+        for invoice in self.invoices:
+            invoice.payment_mode_id = self.payment_mode.id
+            for line in invoice.invoice_line_ids:
+                line.write(
+                    {
+                        "account_id": self.account_revenue.id,
+                        "invoice_line_tax_ids": [(6, 0, [self.tax_fixed.id])],
+                    }
+                )
+
+            invoice.action_invoice_open()
 
         account_globalization = self._do_globalization(
-            self.partner_3, self.account_receivable_1
+            self.partner_1, self.account_receivable_1
         )
         self.assertTrue(account_globalization)
 
@@ -170,7 +206,7 @@ class TestCsvReport(common.SavepointCase):
                 ("res_model", "=", account_globalization._name),
             ]
         )
-        # Faclign & Facpied are generated here
+        # Faclign & Facpied are generated now
         self.assertEqual(len(attachments), 2)
         for attachment in attachments:
             self.assertTrue(attachment.datas_fname.endswith(".csv"))
