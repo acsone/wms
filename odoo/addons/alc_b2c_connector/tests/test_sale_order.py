@@ -12,7 +12,6 @@ class TestSaleOrder(SavepointCase):
     def setUpClass(cls):
         super(TestSaleOrder, cls).setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
-        cls.pricelist_id = cls.env.ref("alc_b2c_connector.product_pricelist_b2c")
         # create a b2c_partner
         cls.partner = cls.env["res.partner"].create({"name": "test partner"})
 

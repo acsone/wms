@@ -25,6 +25,14 @@ class CommonCase(SavepointComponentCase):
             )
         )
         _initialize_product_assortment_filter(cls.env.cr)
+        currency_id = cls.env.user.company_id.currency_id
+        cls.pricelist_id = cls.env.ref("specific_data.product_pricelist_pb1")
+        cls.discount_pricelist_id = cls.env.ref(
+            "alc_b2c_connector.product_pricelist_b2c"
+        )
+        # ensure same currency across products and pricelists
+        cls.pricelist_id.currency_id = currency_id
+        cls.discount_pricelist_id.currency_id = currency_id
         cls.ProductProduct = cls.env["product.product"]
         # disable all products
         cls.ProductProduct.search([]).mapped("orderpoint_ids").write({"active": False})
@@ -105,9 +113,8 @@ class CommonCase(SavepointComponentCase):
                 "product_assortment_id": cls.env.ref(
                     "alc_b2c_connector.b2c_product_assortment_filter"
                 ).id,
-                "pricelist_id": cls.env.ref(
-                    "alc_b2c_connector.product_pricelist_b2c"
-                ).id,
+                "pricelist_id": cls.pricelist_id.id,
+                "discount_pricelist_id": cls.discount_pricelist_id.id,
                 "sale_team_id": cls.env.ref("sales_team.salesteam_website_sales").id,
                 "payment_mode_id": cls.payment_mode.id,
                 "sale_channel": "web",

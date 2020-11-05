@@ -16,7 +16,6 @@ class TestSalesService(CommonCase):
     @classmethod
     def setUpClass(cls):
         super(TestSalesService, cls).setUpClass()
-        cls.pricelist_id = cls.env.ref("alc_b2c_connector.product_pricelist_b2c")
         # create a b2c_partner
         cls.b2c_partner = cls.env["res.partner"].create(
             {
@@ -39,6 +38,7 @@ class TestSalesService(CommonCase):
                 ).id,
                 "ref": "VTREF",
                 "email": "vt@vt.be",
+                "supplier_promotion_sale_allowed": True,
             }
         )
 
@@ -50,6 +50,7 @@ class TestSalesService(CommonCase):
                 "partner_invoice_id": cls.vt_partner.id,
                 "partner_shipping_id": cls.vt_partner.id,
                 "pricelist_id": cls.pricelist_id.id,
+                "discount_pricelist_id": cls.discount_pricelist_id.id,
                 "order_line": [
                     (
                         0,
@@ -192,6 +193,7 @@ class TestSalesService(CommonCase):
                 priclist -> the one from the backend
                 payment_mode -> the one from the backend
                 payment_term_id -> the one from the backend
+                supplier_promotion_allowed -> the one from the veterinary
         """
         recipient_info = self._gen_recipent()
         params = {
@@ -227,10 +229,12 @@ class TestSalesService(CommonCase):
         self.assertEqual(new_so.payment_mode_id, self.b2c_backend.payment_mode_id)
         self.assertEqual(self.b2c_backend.payment_term_id, self.payment_term_test)
         self.assertEqual(new_so.payment_term_id, self.payment_term_test)
+        self.assertTrue(new_so.supplier_promotion_allowed)
         self.assertEqual(1, len(new_so.order_line))
         sol = new_so.order_line
         self.assertEqual(sol.product_id, self.saleable_product)
-        self.assertEqual(sol.price_unit, 8.8)  # 10 - 12%
+        self.assertEqual(sol.discount3, 12)  # discount in %
+        self.assertEqual(sol.price_unit, 10)
         self.assertEqual(sol.product_qty, 10)
 
     def test_05(self):
