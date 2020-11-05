@@ -163,9 +163,7 @@ class TestPricelistDiscount(SavepointCase):
     @post_install(True)
     @at_install(False)
     def test_sale_discounts(self):
-        for line in self.sale.order_line:
-            line.product_id_change()
-            line.onchange_product_id_reset_discount()
+        # discounts are computed if not provided into the line info
 
         self.assertEqual(100, self.sol_p1.price_unit)
         self.assertEqual(10, self.sol_p1.discount2)

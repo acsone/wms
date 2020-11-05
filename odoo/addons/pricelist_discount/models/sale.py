@@ -118,3 +118,22 @@ class SaleOrderLine(models.Model):
                 override_based_price={product.id: price}, pricelist=pricelist.id
             ).browse(product.id)
             return product_temporary.price
+
+    @api.model
+    def _prepare_add_missing_fields(self, values):
+        """ Deduce missing required fields from the onchange """
+        res = super(SaleOrderLine, self)._prepare_add_missing_fields(values)
+        record_values = values.copy()
+        record_values.update(res)
+        onchange_fields = ["discount2", "discount3"]
+        if (
+            values.get("order_id")
+            and values.get("product_id")
+            and any(f not in values for f in onchange_fields)
+        ):
+            line = self.new(record_values)
+            line.onchange_product_id_reset_discount()
+            for field in onchange_fields:
+                if field not in values:
+                    res[field] = line._fields[field].convert_to_write(line[field], line)
+        return res
