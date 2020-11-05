@@ -7,7 +7,8 @@
     <record id="alc_b2c_chronovet_backend" model="alc.b2c.backend">
         <field name="name">Chronovet</field>
         <field name="product_assortment_id" ref="alc_b2c_connector.b2c_product_assortment_filter"/>
-        <field name="pricelist_id" ref="alc_b2c_connector.product_pricelist_b2c"/>
+        <field name="pricelist_id" ref="specific_data.product_pricelist_pb1"/>
+        <field name="discount_pricelist_id" ref="alc_b2c_connector.product_pricelist_b2c"/>
         <field name="sale_team_id" ref="sales_team.salesteam_website_sales"/>
         <field name="payment_mode_id" ref="alc_chronovet.account_payment_mode_chronovet"/>
         <field name="sale_channel">chronovet</field>
