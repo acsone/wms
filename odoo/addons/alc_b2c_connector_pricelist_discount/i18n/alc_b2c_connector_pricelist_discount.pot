@@ -14,6 +14,16 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_b2c_connector_pricelist_discount
+#: model:ir.model.fields,field_description:alc_b2c_connector_pricelist_discount.field_alc_b2c_backend_discount_pricelist_id
+msgid "Alcyon Discount"
+msgstr ""
+
+#. module: alc_b2c_connector_pricelist_discount
+#: model:ir.model,name:alc_b2c_connector_pricelist_discount.model_alc_b2c_backend
+msgid "B2C Config"
+msgstr ""
+
+#. module: alc_b2c_connector_pricelist_discount
 #: model:ir.model,name:alc_b2c_connector_pricelist_discount.model_sale_order
 msgid "Sales Order"
 msgstr ""

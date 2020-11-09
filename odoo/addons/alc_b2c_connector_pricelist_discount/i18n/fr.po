@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* alc_b2c_connector_pricelist_discount
+# 	* alc_b2c_connector_pricelist_discount
 #
 msgid ""
 msgstr ""
@@ -10,13 +10,14 @@ msgstr ""
 "PO-Revision-Date: 2020-11-09 16:29+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
-#. module: alc_b2c_connector
-#: model:ir.model.fields,field_description:alc_b2c_connector.field_alc_b2c_backend_discount_pricelist_id
+#. module: alc_b2c_connector_pricelist_discount
+#: model:ir.model.fields,field_description:alc_b2c_connector_pricelist_discount.field_alc_b2c_backend_discount_pricelist_id
 msgid "Alcyon Discount"
 msgstr "Remise Alcyon"
 
