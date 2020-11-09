@@ -93,7 +93,6 @@ class SaleOrder(models.Model):
         order_data["partner_id"] = self._get_final_b2c_recipient(data, b2c_backend).id
         # ensure specific values from the backend are preserved
         order_data["pricelist_id"] = b2c_backend.pricelist_id.id
-        order_data["discount_pricelist_id"] = b2c_backend.discount_pricelist_id.id
         order_data["payment_term_id"] = b2c_backend.payment_term_id.id
         order_data["order_line"] = [
             (0, 0, line_info)

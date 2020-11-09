@@ -24,7 +24,6 @@
                                      'product_assortment': True,
                                      'default_is_assortment': 1}"/>
                         <field name="pricelist_id"/>
-                        <field name="discount_pricelist_id"/>
                         <field name="sale_team_id"/>
                         <field name="payment_mode_id"/>
                         <field name="payment_term_id"/>

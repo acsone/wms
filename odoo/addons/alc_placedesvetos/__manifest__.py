@@ -12,6 +12,7 @@
     "website": "https://acsone.eu/",
     "depends": [
         "alc_b2c_connector",
+        "alc_b2c_connector_pricelist_discount",
         "account_banking_sepa_direct_debit",
         "account_payment_mode",
     ],

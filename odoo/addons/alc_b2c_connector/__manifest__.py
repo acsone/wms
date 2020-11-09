@@ -23,7 +23,6 @@
         "base_suspend_security",
         "connector",
         "onchange_helper",
-        "pricelist_discount",
         "procurement_sale",  # confirmation_date field on SO
         "product_assortment",
         "sale",

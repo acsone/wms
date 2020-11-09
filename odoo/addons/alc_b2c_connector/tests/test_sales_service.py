@@ -50,7 +50,6 @@ class TestSalesService(CommonCase):
                 "partner_invoice_id": cls.vt_partner.id,
                 "partner_shipping_id": cls.vt_partner.id,
                 "pricelist_id": cls.pricelist_id.id,
-                "discount_pricelist_id": cls.discount_pricelist_id.id,
                 "order_line": [
                     (
                         0,
@@ -233,7 +232,7 @@ class TestSalesService(CommonCase):
         self.assertEqual(1, len(new_so.order_line))
         sol = new_so.order_line
         self.assertEqual(sol.product_id, self.saleable_product)
-        self.assertEqual(sol.discount3, 12)  # discount in %
+        self.assertEqual(sol.discount3, 0)  # discount in %
         self.assertEqual(sol.price_unit, 10)
         self.assertEqual(sol.product_qty, 10)
 

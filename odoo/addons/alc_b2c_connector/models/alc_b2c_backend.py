@@ -27,9 +27,6 @@ class AlcB2CBackend(models.Model):
     pricelist_id = fields.Many2one(
         "product.pricelist", string="Pricelist", required=True
     )
-    discount_pricelist_id = fields.Many2one(
-        comodel_name="product.pricelist", string="Alcyon Discount"
-    )
     sale_team_id = fields.Many2one("crm.team", string="Sale Team", required=True)
     payment_mode_id = fields.Many2one(
         "account.payment.mode",

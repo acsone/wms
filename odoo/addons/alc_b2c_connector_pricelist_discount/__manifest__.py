@@ -5,12 +5,12 @@
 {
     "name": "Alc B2c Connector Pricelist Discount",
     "description": """
-        Alcyon: No pricelist discount for B2C SO""",
+        Alcyon: Pricelist discount for B2C SO""",
     "version": "10.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": ["alc_b2c_connector", "pricelist_discount"],
-    "data": [],
+    "data": ["views/alc_b2c_backend.xml"],
     "demo": [],
 }

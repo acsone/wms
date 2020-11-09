@@ -14,8 +14,12 @@ class TestSalesService(CommonCase):
     @classmethod
     def setUpClass(cls):
         super(TestSalesService, cls).setUpClass()
-        cls.pricelist_id = cls.env.ref("alc_b2c_connector.product_pricelist_b2c")
         # create a b2c_partner
+        cls.discount_pricelist_id = cls.env.ref(
+            "alc_b2c_connector.product_pricelist_b2c"
+        )
+        cls.discount_pricelist_id.currency_id = cls.currency_id
+        cls.b2c_backend.discount_pricelist_id = cls.discount_pricelist_id
         cls.b2c_partner = cls.env["res.partner"].create(
             {
                 "name": "EXISTING B2C PARTNER",
@@ -25,8 +29,6 @@ class TestSalesService(CommonCase):
                 ).id,
                 "ref": "%s_ABC" % cls.b2c_backend.sale_channel,
                 "email": "b2c@b2c.be",
-                "discount_pricelist_id": cls.pricelist_id.id,
-                "supplier_promotion_sale_allowed": True,
             }
         )
 
@@ -39,8 +41,32 @@ class TestSalesService(CommonCase):
                 ).id,
                 "ref": "VTREF",
                 "email": "vt@vt.be",
-                "discount_pricelist_id": cls.pricelist_id.id,
                 "supplier_promotion_sale_allowed": True,
+            }
+        )
+
+        # create a b2c sale_order
+        cls.b2c_order = cls.env["sale.order"].create(
+            {
+                "b2c_ref": 10,
+                "partner_id": cls.b2c_partner.id,
+                "partner_invoice_id": cls.vt_partner.id,
+                "partner_shipping_id": cls.vt_partner.id,
+                "pricelist_id": cls.pricelist_id.id,
+                "discount_pricelist_id": cls.discount_pricelist_id.id,
+                "order_line": [
+                    (
+                        0,
+                        0,
+                        {
+                            "b2c_ref": 1,
+                            "product_id": cls.saleable_product.id,
+                            "name": cls.saleable_product.name,
+                            "product_uom": cls.saleable_product.uom_id.id,
+                            "product_uom_qty": 10,
+                        },
+                    )
+                ],
             }
         )
 
@@ -77,57 +103,24 @@ class TestSalesService(CommonCase):
     def _get_so_from_name(self, name):
         return self.SaleOrder.search([("name", "=", name)])
 
-    def test_00(self):
-        """
-        Data:
-            An existing veterinary with a
-            discount_pricelist and supplier_promotion_allowed=True
-            A new customer
-        Test case:
-            Create a new SO for a new partner and the existing veterinary
-        Expected result:
-            A new SO is created with:
-                discount_pricelist_id False
-                supplier_promotion_allowed False
-        """
-        recipient_info = self._gen_recipent()
-        recipient_info["id"] = "ABC"
-        params = {
-            "id": 2,
-            "customer_ref": self.vt_partner.ref,
-            "date": ISO_DT_WITH_TZ,
-            "recipient": recipient_info,
-            "lines": [
-                {
-                    "line_id": 2,
-                    "sku": self.saleable_product.default_code,
-                    "quantity": 10,
-                }
-            ],
-        }
-        res = self.sales_service.dispatch("create", params=params)
-        self.assertTrue(res)
-        new_so = self._get_so_from_name(res["ref"])
-        self.assertTrue(new_so)
-        self.assertFalse(new_so.discount_pricelist_id)
-        self.assertFalse(new_so.supplier_promotion_allowed)
-
     def test_01(self):
         """
         Data:
-            An existing veterinary with a
-            discount_pricelist and supplier_promotion_allowed=True
-            A n existing customer with a
-            discount_pricelist and supplier_promotion_allowed=True
+            An existing veterinary
         Test case:
             Create a new SO for a new partner and the existing veterinary
         Expected result:
+            A new partner is created
             A new SO is created with:
-                discount_pricelist_id False
-                supplier_promotion_allowed False
+                partner -> new partner
+                shipping partner -> the veterinary
+                invoice partner -> the veterinary
+                priclist -> the one from the backend
+                payment_mode -> the one from the backend
+                payment_term_id -> the one from the backend
+                supplier_promotion_allowed -> the one from the veterinary
         """
         recipient_info = self._gen_recipent()
-        recipient_info["id"] = "%s_ABC" % self.b2c_backend.sale_channel
         params = {
             "id": 2,
             "customer_ref": self.vt_partner.ref,
@@ -145,5 +138,26 @@ class TestSalesService(CommonCase):
         self.assertTrue(res)
         new_so = self._get_so_from_name(res["ref"])
         self.assertTrue(new_so)
-        self.assertFalse(new_so.discount_pricelist_id)
-        self.assertFalse(new_so.supplier_promotion_allowed)
+        self.assertEqual(
+            new_so.partner_id.ref,
+            "%s_%s" % (self.b2c_backend.sale_channel, recipient_info["id"]),
+        )
+        self.assertEqual(new_so.partner_invoice_id, self.vt_partner)
+        self.assertEqual(new_so.partner_shipping_id, self.vt_partner)
+        self.assertFalse(new_so.partner_id.is_sale_back_order_accepted)
+        self.assertEqual(new_so.date_order, "2020-05-28 11:45:47")
+        self.assertTrue(self.b2c_backend.pricelist_id)
+        self.assertEqual(new_so.pricelist_id, self.b2c_backend.pricelist_id)
+        self.assertTrue(self.b2c_backend.sale_team_id)
+        self.assertEqual(new_so.team_id, self.b2c_backend.sale_team_id)
+        self.assertTrue(self.b2c_backend.payment_mode_id)
+        self.assertEqual(new_so.payment_mode_id, self.b2c_backend.payment_mode_id)
+        self.assertEqual(self.b2c_backend.payment_term_id, self.payment_term_test)
+        self.assertEqual(new_so.payment_term_id, self.payment_term_test)
+        self.assertTrue(new_so.supplier_promotion_allowed)
+        self.assertEqual(1, len(new_so.order_line))
+        sol = new_so.order_line
+        self.assertEqual(sol.product_id, self.saleable_product)
+        self.assertEqual(sol.discount3, 12)  # discount in %
+        self.assertEqual(sol.price_unit, 10)
+        self.assertEqual(sol.product_qty, 10)
