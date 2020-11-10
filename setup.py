@@ -23,4 +23,8 @@ setup(
         "numpy",  # speedup pyshape
         "odoo10-addon-logging-json",
     ],
+    entry_points="""
+        [console_scripts]
+        click-odoo-cubiscan-import=scripts.cubiscan_import:main
+    """,
 )

@@ -168,6 +168,7 @@ odoo10-addon-web-widget-domain-v11==10.0.1.0.1
 odoo10-addon-web-widget-many2many-tags-multi-selection @ git+https://github.com/acsone/web.git@f37c8ad92c2190e0bbc09444424273843a9f3cd0#subdirectory=setup/web_widget_many2many_tags_multi_selection
 ofxparse==0.16
 openupgradelib @ git+https://github.com/OCA/openupgradelib@6c18ce0c160b9cf47c4fa898d9b6c4265d98c216
+pandas==0.24.2
 paramiko==2.7.1
 parse-accept-language==0.1.2
 passlib==1.6.5
