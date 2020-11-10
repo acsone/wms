@@ -185,8 +185,14 @@ class PurchaseOrder(models.Model):
             vals.pop("order_id")
             vals.pop("product_id")
             old_price_unit_base = existing_line.price_unit_base
+            old_discount_global = existing_line.discount_global
+            old_promotion_supplier = existing_line.promotion_supplier
             existing_line.write(vals)
-            if old_price_unit_base != existing_line.price_unit_base:
+            if (
+                old_price_unit_base != existing_line.price_unit_base
+                or old_discount_global != existing_line.discount_global
+                or old_promotion_supplier != existing_line.promotion_supplier
+            ):
                 existing_line._onchange_price_unit()
         else:
 
