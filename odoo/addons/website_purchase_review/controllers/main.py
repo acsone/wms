@@ -74,6 +74,8 @@ class PurchaseReview(Home):
             "res_company": request.env.user.company_id,
             "current_product": product,
             "product_qty": 0,
+            "pre_selected_packaging": 0,
+            "unit_qty": 0,
             "total_weight": po.total_weight,
             "amount_untaxed": po.amount_untaxed,
             "is_confirmed_line": False,
@@ -100,6 +102,8 @@ class PurchaseReview(Home):
                 {
                     "current_product": product,
                     "product_qty": po_line.product_qty,
+                    "pre_selected_packaging": po_line.product_packaging.id,
+                    "unit_qty": po_line.product_packaging_qty,
                     "price_unit_base": po_line.price_unit_base,
                     "discount_global": po_line.discount_global,
                     "promotion_supplier": po_line.promotion_supplier,

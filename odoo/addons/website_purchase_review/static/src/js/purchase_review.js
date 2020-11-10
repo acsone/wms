@@ -31,7 +31,11 @@ odoo.define('website_purchase_review.main_page', function (require) {
     load_filters();
     load_products_list();
 
+    
+    listenPackageSelection();
+
     function init_listeners() {
+
         $('#save_global_values_btn').click(function () {
             save_global_values()
         });
@@ -65,6 +69,70 @@ odoo.define('website_purchase_review.main_page', function (require) {
         });
         $('#button_reload_products').click(function () {
             load_product(current_product_id, true);
+        });
+
+    }
+
+
+    function listenPackageSelection() {
+
+        var preSelectedPackaging = document.getElementById("pre_selected_packaging");
+        preSelectedPackaging.hidden = true;
+
+        var selectPackagingType = document.getElementById("packaging_ids");
+
+        var productQty = document.getElementById("product_qty");
+        productQty.readOnly = false;
+        var unitQty = document.getElementById("unit_qty");
+        unitQty.hidden = true;
+
+
+        if (!!preSelectedPackaging.getAttribute('value')) {
+            unitQty.hidden = false;
+            productQty.readOnly = true;
+            _.each(selectPackagingType.options, function(option) {
+                if (preSelectedPackaging.getAttribute('value') === option.value) {
+                    option.selected = true;
+                }
+            });   
+        }
+        else {
+            unitQty.hidden = true;
+            productQty.readOnly = false;
+            
+        }
+
+        unitQty.addEventListener("input", function() {
+            if (!!unitQty.value) {
+                unitQty.hidden = false;
+                unitQty.value = parseInt(unitQty.value);
+                productQty.value = parseInt(selectPackagingType.selectedOptions[0].getAttribute('qty')) * parseInt(unitQty.value);
+            }
+        });
+
+        selectPackagingType.addEventListener("change", function() {
+            unitQty.value = ''
+            if (!!selectPackagingType.value) {
+                unitQty.hidden = false;
+                productQty.readOnly = true;
+                preSelectedPackaging.setAttribute('value', selectPackagingType.value);
+                selectPackagingType.selectedOptions[0].selected = true;
+                _.each(selectPackagingType.options, function(option) {
+                    if  (option.value != selectPackagingType.value ) {
+                        option.selected = false;
+                    }
+                });
+                }
+            else {
+                unitQty.value = '';
+                unitQty.hidden = true;
+                productQty.readOnly = false;
+                preSelectedPackaging.setAttribute('value', '');
+                selectPackagingType.selectedOptions[0].selected = true;
+                _.each(selectPackagingType.options, function(option) {
+                        option.selected = false;
+                });
+            }
         });
 
     }

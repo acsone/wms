@@ -170,7 +170,29 @@
                                                 </tr>
                                                 <tr>
                                                     <td>Ordered qty</td>
-                                                    <td><input type="number" name="product_qty" id="product_qty" t-att-value="product_qty" required="required"/></td>
+                                                    <td>
+                                                        <input type="number" name="product_qty" id="product_qty" t-att-value="product_qty" required="required"/>
+                                                    </td>
+                                                </tr>
+                                                <tr t-if='current_product.packaging_ids'> 
+                                                    <td>Unit</td>
+                                                    <td>
+                                                     <div hidden="true" name="pre_selected_packaging" id="pre_selected_packaging" t-att-value="pre_selected_packaging"/>
+                                                     <select name='packaging_ids' id='packaging_ids'> 
+                                                        <option value=''></option> 
+                                                        <t t-foreach='current_product.packaging_ids' t-as='packaging'> 
+                                                            <option t-att-value='packaging.id' t-att-qty='packaging.qty' selected='selected'> 
+                                                                <t t-esc='packaging.name'/> 
+                                                            </option> 
+                                                         </t>
+                                                    </select> 
+                                                    </td>
+                                                </tr>
+                                                <tr t-if='current_product.packaging_ids'>
+                                                    <td>Ordered qty of unit</td>
+                                                    <td>
+                                                        <input type="number" name="unit_qty" id="unit_qty" t-att-value="unit_qty" required="required"/>
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <td>Stock min</td>

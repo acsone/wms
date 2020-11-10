@@ -76,3 +76,9 @@ html, body {
     width: 100%;
     color: black;
  }
+
+input[readonly]{
+    background-color:transparent;
+    border: 0;
+    font-size: 1em;
+  }
