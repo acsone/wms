@@ -273,7 +273,7 @@ class TestSalesService(CommonCase):
                 shipping partner -> the veterinary
                 invoice partner -> the veterinary
         """
-        recipient_info = self._gen_recipent()
+        recipient_info = self._gen_recipent(title="mm")
         recipient_info["id"] = "ABC"
         params = {
             "id": 2,
