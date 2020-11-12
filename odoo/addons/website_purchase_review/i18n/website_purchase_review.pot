@@ -188,6 +188,11 @@ msgstr ""
 
 #. module: website_purchase_review
 #: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
+msgid "Ordered qty of unit"
+msgstr ""
+
+#. module: website_purchase_review
+#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
 msgid "Price"
 msgstr ""
 
@@ -366,6 +371,11 @@ msgstr ""
 #. module: website_purchase_review
 #: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
 msgid "Total weight:"
+msgstr ""
+
+#. module: website_purchase_review
+#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
+msgid "Unit"
 msgstr ""
 
 #. module: website_purchase_review

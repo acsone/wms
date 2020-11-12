@@ -193,6 +193,12 @@ msgstr "Qté commande"
 
 #. module: website_purchase_review
 #: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
+#, fuzzy
+msgid "Ordered qty of unit"
+msgstr "Qté commande"
+
+#. module: website_purchase_review
+#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
 msgid "Price"
 msgstr "Prix"
 
@@ -372,6 +378,11 @@ msgstr "Total des lignes faites"
 #: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
 msgid "Total weight:"
 msgstr "Poids total:"
+
+#. module: website_purchase_review
+#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
+msgid "Unit"
+msgstr ""
 
 #. module: website_purchase_review
 #: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
