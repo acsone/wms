@@ -172,6 +172,13 @@ class PurchaseOrder(models.Model):
                     }
                 )
 
+        packaging_id = int(vals.pop("packaging_ids", 0))
+        unit_qty = int(float(vals.pop("unit_qty", 0)))
+        if packaging_id and unit_qty:
+            vals.update(
+                {"product_packaging": packaging_id, "product_packaging_qty": unit_qty}
+            )
+
         PurchaseOrderLine = self.env["purchase.order.line"]
 
         existing_line = PurchaseOrderLine.search(
@@ -211,6 +218,7 @@ class PurchaseOrder(models.Model):
 
             new_vals.update(vals)
             new_line = PurchaseOrderLine.create(new_vals)
+
             # The subtotal is not correct if we don't call this onchange.
             # Calling the onchange after 'onchange_product_id' above does
             # not give the expected result, probably because the 'create()'

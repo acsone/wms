@@ -13,6 +13,7 @@
     """,
     "depends": [
         "alc_product_packaging",
+        "purchase_order_line_packaging_qty",
         "purchase",
         "stock",
         "stock_orderpoint_product",
