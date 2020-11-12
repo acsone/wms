@@ -11,7 +11,7 @@ from odoo.osv.expression import AND
 
 TITLE_XML_ID_BY_B2C_KEY = {
     "mr": "base.res_partner_title_mister",
-    "ms": "base.res_partner_title_madam",
+    "mm": "base.res_partner_title_madam",
 }
 
 
