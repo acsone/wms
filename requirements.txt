@@ -131,6 +131,7 @@ odoo10-addon-product-sequence @ git+https://github.com/acsone/product-attribute.
 odoo10-addon-product-uom-unece==10.0.1.1.0.99.dev1
 odoo10-addon-purchase-cancel-reason @ git+https://github.com/acsone/purchase-workflow.git@527ab1413ba29a34c478e83413267f41e608cd4c#subdirectory=setup/purchase_cancel_reason
 odoo10-addon-purchase-delivery-split-date @ git+https://github.com/acsone/purchase-workflow.git@527ab1413ba29a34c478e83413267f41e608cd4c#subdirectory=setup/purchase_delivery_split_date
+odoo10-addon-purchase-open-qty==10.0.1.1.0.99.dev3
 odoo10-addon-purchase-order-approved @ git+https://github.com/acsone/purchase-workflow.git@921b0bed4baefe590a1a2fae976f18db585e777e#subdirectory=setup/purchase_order_approved
 odoo10-addon-purchase-order-import @ git+https://github.com/acsone/edi.git@eb8ceac3ba16c60cc206a4c87dbd05471d0d2ddc#subdirectory=setup/purchase_order_import
 odoo10-addon-purchase-order-line-packaging-qty @ git+https://github.com/acsone/purchase-workflow.git@92b6ddd177d70dae58da141d58f027b0e215a946#subdirectory=setup/purchase_order_line_packaging_qty

@@ -74,6 +74,7 @@
         "base_geolocalize_openstreetmap",
         "geoengine_base_geolocalize",
         "base_geoengine",
+        "purchase_open_qty",
         "sale_stock_restocking_fee_invoicing",
         "stock_location_product_restriction",
         "product_packaging_type",
