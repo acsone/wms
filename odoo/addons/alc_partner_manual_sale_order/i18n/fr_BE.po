@@ -27,6 +27,13 @@ msgstr "Client direct (Encodage manuel de commandes autorisé)"
 msgid "Manual sale order allowed"
 msgstr "Encodage manuel de commandes autorisé"
 
+
+#. module: alc_partner_manual_sale_order
+#: model:ir.ui.view,arch_db:alc_partner_manual_sale_order.sale_order_form_view
+msgid "Manual sale order are not allowed for this customer."
+msgstr "Les ventes manuelles ne sont pas autorisées pour ce client."
+
+
 #. module: alc_partner_manual_sale_order
 #: model:ir.model,name:alc_partner_manual_sale_order.model_res_partner
 msgid "Partner"
