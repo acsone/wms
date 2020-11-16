@@ -29,7 +29,7 @@ class ProductProduct(models.Model):
 
         if exclude_location_ids:
             excluded_qty_dict = self.with_context(
-                location=exclude_location_ids
+                location=exclude_location_ids, compute_child=False
             )._compute_quantities_dict(
                 self._context.get("lot_id"),
                 self._context.get("owner_id"),
