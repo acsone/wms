@@ -34,13 +34,6 @@ msgid "Start"
 msgstr ""
 
 #. module: stock_picking_assignment
-#: code:addons/stock_picking_assignment/models/stock_picking.py:23
-#: sql_constraint:stock.picking:0
-#, python-format
-msgid "This operator is already assigned to another ongoing picking"
-msgstr ""
-
-#. module: stock_picking_assignment
 #: model:ir.model,name:stock_picking_assignment.model_stock_picking
 msgid "Transfer"
 msgstr ""
