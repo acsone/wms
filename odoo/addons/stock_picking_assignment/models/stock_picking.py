@@ -19,7 +19,7 @@ class StockPicking(models.Model):
     _sql_constraints = [
         (
             "operator_id_unique",
-            "EXCLUDE (operator_id WITH =) WHERE (state not in ('done', 'cancel') and operator_id is not null)",
+            "EXCLUDE (operator_id WITH =) WHERE ((state is not 'done' or state is not 'cancel') and (operator_id <> '' or operator_id is not null))",
             _("This operator is already assigned to another ongoing picking"),
         )
     ]

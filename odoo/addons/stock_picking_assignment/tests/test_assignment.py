@@ -2,8 +2,6 @@
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from psycopg2 import IntegrityError
-
 from odoo.tests.common import SavepointCase
 
 
@@ -18,6 +16,7 @@ class TestAssignment(SavepointCase):
                 "name": "Operator test",
                 "ref": "02984757889392",
                 "login": "operator_user_test",
+                "operator_code": "99",
                 "groups_id": [(4, cls.env.ref("stock.group_stock_user").id)],
                 "tz": "Europe/Brussels",
                 "lang": "en_US",
@@ -115,10 +114,10 @@ class TestAssignment(SavepointCase):
         self.assertEqual(self.picking1.operator_id.id, self.operator_user.id)
 
         # Try to assign another picking to the same operator, should throw an error
-        with self.assertRaisesRegexp(
-            IntegrityError, "stock_picking_operator_id_unique"
-        ):
-            self.picking2.operator_id = self.operator_user.id
+        self.picking2.operator_id = self.operator_user.id
+
+        # Check that the picking is indeed assign to the operator
+        self.assertEqual(self.picking2.operator_id.id, self.operator_user.id)
 
     def test_operator_is_none_for_both(self):
         self.picking1.operator_id = None
