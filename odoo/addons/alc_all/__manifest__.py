@@ -115,6 +115,7 @@
         "alc_stock_available_immediately_lot_loss",
         "alc_stock_grn_time_delay",
         "alc_stock_picking_package",
+        "alc_turnover_reporting",
         "camptocamp_tools",  # to remove
         "connector_esb",
         "csv_file_export",  # to remove
