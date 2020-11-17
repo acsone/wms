@@ -10,5 +10,5 @@ class SaleOrder(models.Model):
     _inherit = "sale.order"
 
     manual_sale_order_allowed = fields.Boolean(
-        related="partner_id.manual_sale_order_allowed"
+        related="partner_id.manual_sale_order_allowed", readonly=True
     )
