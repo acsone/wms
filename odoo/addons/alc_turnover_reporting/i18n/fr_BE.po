@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* alc_turnover_reporting
+# 	* alc_turnover_reporting
 #
 msgid ""
 msgstr ""
@@ -10,6 +10,7 @@ msgstr ""
 "PO-Revision-Date: 2020-11-16 15:30+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -19,11 +20,6 @@ msgstr ""
 #: model:ir.ui.menu,name:alc_turnover_reporting.alc_turnover_report_menu
 msgid "ALC Turnover Reporting"
 msgstr "Rapports comptable Alcyon"
-
-#. module: alc_turnover_reporting
-#: model:ir.model,name:alc_turnover_reporting.model_alc_turnover_report
-msgid "Alc Turnover Report"
-msgstr "Exporter un rapport comptable"
 
 #. module: alc_turnover_reporting
 #: model:ir.ui.view,arch_db:alc_turnover_reporting.export_report_turnover_form_view
@@ -127,3 +123,5 @@ msgstr "export.report.turnover"
 msgid "get"
 msgstr "get"
 
+#~ msgid "Alc Turnover Report"
+#~ msgstr "Exporter un rapport comptable"
