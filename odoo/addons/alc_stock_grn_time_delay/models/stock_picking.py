@@ -2,9 +2,9 @@
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-import math
 from datetime import datetime, timedelta
 
+import numpy as np
 from odoo import api, fields, models
 from odoo.osv.expression import NEGATIVE_TERM_OPERATORS
 
@@ -21,16 +21,11 @@ class StockPicking(models.Model):
 
     @api.depends("grn_date")
     def _compute_time_delay(self):
+        today = datetime.today().strftime("%Y-%m-%d")
         for rec in self:
             if rec.grn_date:
-                time_delta_total = datetime.today() - datetime.strptime(
-                    rec.grn_date, "%Y-%m-%d %H:%M:%S"
-                )
-                time_delta = time_delta_total.days
-                # Saturdays and sundays have to be removed from the count
-                nb_of_weekend_days = math.ceil(float(time_delta) / 7.0) * 2
-                time_delta_working_days = time_delta - nb_of_weekend_days
-                rec.time_delay = time_delta_working_days
+                time = rec.grn_date.split(" ")[0]
+                rec.time_delay = np.busday_count(time, today)
 
     @api.depends("time_delay")
     def _compute_is_time_exceeded(self):
