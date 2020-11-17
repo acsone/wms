@@ -33,3 +33,8 @@ msgstr ""
 msgid "Product"
 msgstr ""
 
+#. module: alc_stock_available_immediately
+#: model:ir.model.fields,help:alc_stock_available_immediately.field_stock_location_exclude_from_immediately_usable_qty
+msgid "This property is not inherited by children locations"
+msgstr ""
+
