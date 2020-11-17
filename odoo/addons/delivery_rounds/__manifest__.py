@@ -4,7 +4,7 @@
 
 {
     "name": "Delivery Rounds",
-    "version": "1.1",
+    "version": "10.0.1.1.1",
     "author": "BCIM",
     "maintainer": "Camptocamp",
     "category": "Stock Management",
