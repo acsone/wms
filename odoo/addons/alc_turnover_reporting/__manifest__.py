@@ -12,4 +12,5 @@
     "depends": ["account", "stock", "sale", "stock_delivery_note"],
     "data": ["wizards/export_report_turnover.xml"],
     "demo": [],
+    "external_dependencies": {"python": ["pandas", "numpy"]},
 }
