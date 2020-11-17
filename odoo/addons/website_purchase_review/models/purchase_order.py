@@ -172,13 +172,17 @@ class PurchaseOrder(models.Model):
                     }
                 )
 
-        packaging_id = int(vals.pop("packaging_ids", 0))
-        unit_qty = int(float(vals.pop("unit_qty", 0)))
+        p_id = vals.pop("packaging_ids", 0)
+        u_qty = vals.pop("unit_qty", 0)
+        packaging_id = int(p_id) if p_id else None
+        unit_qty = int(float(u_qty)) if u_qty else None
+
         if packaging_id and unit_qty:
             vals.update(
                 {"product_packaging": packaging_id, "product_packaging_qty": unit_qty}
             )
-
+        else:
+            vals.update({"product_packaging": "", "product_packaging_qty": ""})
         PurchaseOrderLine = self.env["purchase.order.line"]
 
         existing_line = PurchaseOrderLine.search(

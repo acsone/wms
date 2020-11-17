@@ -84,11 +84,11 @@ odoo.define('website_purchase_review.main_page', function (require) {
         var productQty = document.getElementById("product_qty");
         productQty.readOnly = false;
         var unitQty = document.getElementById("unit_qty");
-        unitQty.hidden = true;
+        unitQty.readOnly = true;
 
 
         if (!!preSelectedPackaging.getAttribute('value')) {
-            unitQty.hidden = false;
+            unitQty.readOnly = false;
             productQty.readOnly = true;
             _.each(selectPackagingType.options, function(option) {
                 if (preSelectedPackaging.getAttribute('value') === option.value) {
@@ -97,14 +97,14 @@ odoo.define('website_purchase_review.main_page', function (require) {
             });   
         }
         else {
-            unitQty.hidden = true;
+            unitQty.readOnly = true;
             productQty.readOnly = false;
             
         }
 
         unitQty.addEventListener("input", function() {
             if (!!unitQty.value) {
-                unitQty.hidden = false;
+                unitQty.readOnly = false;
                 unitQty.value = parseInt(unitQty.value);
                 productQty.value = parseInt(selectPackagingType.selectedOptions[0].getAttribute('qty')) * parseInt(unitQty.value);
             }
@@ -113,7 +113,7 @@ odoo.define('website_purchase_review.main_page', function (require) {
         selectPackagingType.addEventListener("change", function() {
             unitQty.value = ''
             if (!!selectPackagingType.value) {
-                unitQty.hidden = false;
+                unitQty.readOnly = false;
                 productQty.readOnly = true;
                 preSelectedPackaging.setAttribute('value', selectPackagingType.value);
                 selectPackagingType.selectedOptions[0].selected = true;
@@ -125,7 +125,7 @@ odoo.define('website_purchase_review.main_page', function (require) {
                 }
             else {
                 unitQty.value = '';
-                unitQty.hidden = true;
+                unitQty.readOnly = true;
                 productQty.readOnly = false;
                 preSelectedPackaging.setAttribute('value', '');
                 selectPackagingType.selectedOptions[0].selected = true;
