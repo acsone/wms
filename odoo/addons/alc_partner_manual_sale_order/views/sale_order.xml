@@ -14,8 +14,8 @@
                 <attribute name="attrs">{'invisible': [("manual_sale_order_allowed", "=", True)]}</attribute>
             </header>
             <header position="after">
-                <div class="alert alert-warning"
-                        style="margin-bottom:0px;"
+                <div class="alert alert-danger"
+                        style="margin-bottom:0px;font-weight: bolder;text-align: center;"
                         role="alert"
                         attrs="{'invisible': [('manual_sale_order_allowed', '=', True)]}">
                     Manual sale order are not allowed for this customer.
