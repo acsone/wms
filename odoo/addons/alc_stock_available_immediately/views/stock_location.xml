@@ -29,7 +29,7 @@
             <filter name="inactive" position="after">
                 <filter string="Excluded from immediately usable quantities"
                         name="exclude_from_immediately_usable_qty"
-                        domain="[('exclude_from_immediately_usable_qty','=',Trues)]"/>
+                        domain="[('exclude_from_immediately_usable_qty','=',True)]"/>
             </filter>
         </field>
     </record>
