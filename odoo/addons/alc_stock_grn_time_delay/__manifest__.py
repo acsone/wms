@@ -11,5 +11,6 @@
     "author": "ACSONE SA/NV",
     "depends": ["stock", "stock_grn"],
     "data": ["views/stock_config_settings.xml", "views/stock_picking.xml"],
+    "external_dependencies": {"python": ["numpy"]},
     "demo": [],
 }
