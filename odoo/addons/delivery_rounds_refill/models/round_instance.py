@@ -42,6 +42,7 @@ class RoundInstance(models.Model):
             "  ) AS ex2 "
             "  WHERE spt.subcode = 'PICK' "
             "  AND sp.delivery_round_id=ri.id "
+            "  AND sp.state not in ('done', 'cancel')"
             "  LIMIT 1 "
             ") AS ex1 "
             "WHERE state IN ('draft','close') "
