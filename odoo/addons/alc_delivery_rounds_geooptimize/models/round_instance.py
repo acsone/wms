@@ -282,12 +282,10 @@ class RoundInstance(models.Model):
                 distinct sp.partner_id
             FROM
                 stock_picking sp,
-                stock_picking_type spt,
                 stock_move sm
             WHERE
                 sm.picking_id = sp.id
-                AND sp.picking_type_id = spt.id
-                AND spt.subcode='PICK'
+                AND sp.picking_type_subcode='PICK'
                 AND sp.delivery_round_id = %s
                 AND sm.state='done'
         """

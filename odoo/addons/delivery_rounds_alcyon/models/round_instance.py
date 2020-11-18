@@ -62,7 +62,7 @@ class RoundInstance(models.Model):
               AND (stock_move.state in ('done', 'assigned')
                 OR (stock_move.state = 'confirmed'
                   AND stock_move.partially_available))))
-            AND t.subcode='PICK'
+            AND p.picking_type_subcode='PICK'
             AND p.delivery_round_id in %s
             GROUP BY p.delivery_round_id, z.code
         """

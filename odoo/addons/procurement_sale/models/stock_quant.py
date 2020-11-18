@@ -14,7 +14,7 @@ class StockQuant(models.Model):
         self, qty, move, ops=False, lot_id=False, domain=None, preferred_domain_list=[]
     ):
         allowed_qty = qty
-        if move.picking_id.picking_type_id.subcode == "PICK":
+        if move.picking_id.picking_type_subcode == "PICK":
             # Do not reserve quantity that is from a previously confirmed SO
             # This allows to reserve quantity in any order. So you can reserve
             # and deliver a customer that has ordered after another one but
@@ -73,7 +73,7 @@ class StockQuant(models.Model):
             preferred_domain_list=preferred_domain_list,
         )
 
-        if move.picking_id.picking_type_id.subcode == "PICK":
+        if move.picking_id.picking_type_subcode == "PICK":
             missing_qty = qty - sum([quant[1] for quant in res])
             if (
                 float_compare(

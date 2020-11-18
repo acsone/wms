@@ -14,7 +14,9 @@ class StockPickingType(models.Model):
 class StockPicking(models.Model):
     _inherit = "stock.picking"
 
-    picking_type_subcode = fields.Char(related="picking_type_id.subcode", readonly=True)
+    picking_type_subcode = fields.Char(
+        related="picking_type_id.subcode", readonly=True, store=True, index=True
+    )
 
 
 class StockMove(models.Model):

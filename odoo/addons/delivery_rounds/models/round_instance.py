@@ -524,14 +524,12 @@ class RoundInstance(models.Model):
             sum(coalesce(product_product.weight, 0) *
                 coalesce(stock_pack_operation.product_qty, 0))
             FROM stock_picking picking
-            LEFT JOIN stock_picking_type
-                ON picking.picking_type_id = stock_picking_type.id
             LEFT JOIN stock_pack_operation
                 ON stock_pack_operation.picking_id = picking.id
             LEFT JOIN product_product
                 ON stock_pack_operation.product_id = product_product.id
             WHERE picking.state != 'cancel'
-            AND stock_picking_type.subcode = 'PICK'
+            AND picking.picking_type_subcode = 'PICK'
             AND picking.delivery_round_id in %s
             GROUP BY picking.delivery_round_id
             """,
