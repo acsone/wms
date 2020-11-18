@@ -16,6 +16,20 @@ class StockQuant(models.Model):
         index=True,
     )
 
+    @api.model_cr
+    def init(self):
+        res = super(StockQuant, self).init()
+        # This partial index is used by the 'has_pending_reassort' computed field
+        # on 'round.instance'
+        query = """
+            CREATE INDEX IF NOT EXISTS
+            stock_quant_positive_qty_location_type_index
+            ON stock_quant (product_id, location_kind)
+            WHERE qty > 0;
+        """
+        self.env.cr.execute(query)
+        return res
+
     @api.model
     def _selection_location_lind(self):
         return self.env["location_id"]._fields["kind"].selecction
