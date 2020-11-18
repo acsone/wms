@@ -20,10 +20,9 @@ class ReportStockRefillReassort(models.Model):
             sq.reservation_id,
             sq.lot_id, sq.qty, rso.*
           FROM stock_quant sq
-          JOIN stock_location sl ON sq.location_id = sl.id
           JOIN report_stock_overview rso USING (product_id)
           LEFT JOIN stock_production_lot lot ON sq.lot_id = lot.id
-          WHERE sl.kind = 'reserve'
+          WHERE sq.location_kind = 'reserve'
             AND rso.qty_in_reserve > 0
           ORDER BY product_id, lot.removal_date, sq.in_date
         """
