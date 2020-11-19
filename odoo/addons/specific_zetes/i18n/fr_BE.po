@@ -84,7 +84,7 @@ msgstr "Aucun UOP trouvé"
 
 #. module: specific_zetes
 #: code:addons/specific_zetes/tools/domain_print.py:130
-#: code:addons/specific_zetes/tools/domain_print.py:182
+#: code:addons/specific_zetes/tools/domain_print.py:184
 #, python-format
 msgid "Cannot found a printer"
 msgstr "Aucune imprimante trouvée"
@@ -211,7 +211,7 @@ msgstr "Activer les passports"
 
 #. module: specific_zetes
 #: code:addons/specific_zetes/tools/domain_print.py:145
-#: code:addons/specific_zetes/tools/domain_print.py:198
+#: code:addons/specific_zetes/tools/domain_print.py:200
 #, python-format
 msgid "Error during printing"
 msgstr "Erreur durant l'impression"
@@ -328,7 +328,7 @@ msgid "Location Checksum Right"
 msgstr "Checksum emplacement droite"
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_itempick.py:418
+#: code:addons/specific_zetes/tools/domain_itempick.py:419
 #, python-format
 msgid "Location not found for the product %s"
 msgstr "Localisation non trouvé pour le produit %s"
@@ -734,8 +734,8 @@ msgid "There are some missing mandatory values: {}"
 msgstr "Certaines valeurs obligatoires manquantes: {}"
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_itemmove.py:194
-#: code:addons/specific_zetes/tools/domain_itempick.py:336
+#: code:addons/specific_zetes/tools/domain_itemmove.py:196
+#: code:addons/specific_zetes/tools/domain_itempick.py:337
 #, python-format
 msgid "There is no lines for the picking %s"
 msgstr "There is no lines for the picking %s"
