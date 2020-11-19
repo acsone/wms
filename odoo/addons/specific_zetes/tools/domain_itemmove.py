@@ -187,7 +187,9 @@ class Itemmove(DomainInterface):
         elif params.itemMoveType == constants.MOVE_TYPE_PUT:
             lines = self.get_put_lines(params, picking_id)
         else:
-            _logger.error("itemMoveType %s unknown" % params.itemMoveType)
+            error_message = "itemMoveType %s unknown" % params.itemMoveType
+            params.log(picking_id=picking_id, exception=error_message)
+            _logger.error(error_message)
             lines = []
 
         if not lines:
@@ -346,7 +348,7 @@ class Itemmove(DomainInterface):
 
         except Exception as e:
             self.rollback_to_savepoint()
-            _logger.error(str(e))
+            _logger.exception(str(e))
             params.log(
                 picking_id=pack_op.picking_id.id,
                 operation_id=pack_operation_id,
@@ -462,10 +464,13 @@ class Itemmove(DomainInterface):
 
         pack_lots = line.pack_lot_ids.filtered(lambda lot: lot.qty < lot.qty_todo)
         if not pack_lots:
-            _logger.error(
-                "Error with the line %s (picking %s):\n"
-                "No valid lots" % (line.id, picking_id)
+            error_message = "Error with the line %s (picking %s):\n" "No valid lots" % (
+                line.id,
+                picking_id,
             )
+            params.log(picking_id=picking_id, exception=error_message)
+
+            _logger.error(error_message)
             return []
         pack_lot = pack_lots[0]
 

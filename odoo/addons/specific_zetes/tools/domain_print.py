@@ -137,7 +137,7 @@ class Print(DomainInterface):
                 picking.sudo().print_passport_report(printer_id=printer.id)
             except Exception as e:
                 self.rollback_to_savepoint()
-                _logger.error(str(e))
+                _logger.exception(str(e))
                 params.log(picking_id=picking_id, exception=e)
                 result.update(
                     {
@@ -161,8 +161,10 @@ class Print(DomainInterface):
                     if box:
                         # Set the number of packages for this picking
                         box.nbr_packages = quantity
-                except Exception:
+                except Exception as e:
                     pack_savepoint.rollback()
+                    params.log(picking_id=picking_id, exception=e)
+                    _logger.exception(str(e))
 
             printer_toshiba = (
                 self.request.env["printing.printer"]
@@ -190,7 +192,7 @@ class Print(DomainInterface):
                 picking.sudo().print_packages_label(printer_id=printer_zebra.id)
             except Exception as e:
                 self.rollback_to_savepoint()
-                _logger.error(str(e))
+                _logger.exception(str(e))
                 params.log(picking_id=picking_id, exception=e)
                 result.update(
                     {

@@ -306,7 +306,8 @@ class Itempick(DomainInterface):
                     )
                 except Exception as e:
                     lot_savepoint.rollback()
-                    _logger.error(str(e))
+                    _logger.exception(str(e))
+                    params.log(picking_id=picking_id, exception=e)
                     # we can't return an error at this stage of the process
                     # otherwise zetes/ the operator could resend the same request
                     # and since this code block is into a savepoint all the
@@ -528,7 +529,7 @@ class Itempick(DomainInterface):
 
         except Exception as e:
             self.rollback_to_savepoint()
-            _logger.error(str(e))
+            _logger.exception(str(e))
             params.log(
                 picking_id=pack_op.picking_id.id,
                 operation_id=pack_operation_id,
