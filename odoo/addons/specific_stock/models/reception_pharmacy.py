@@ -56,6 +56,8 @@ class ReceptionPharmacy(models.Model):
         sequence = self.env["ir.sequence"]
 
         warehouse = self.env.ref("stock.warehouse0")
+
+        carrier = self.env.ref("__setup__.deliver_carrier_alcyon")
         if not warehouse:
             raise UserError(_("Warehouse is missing"))
         loc_customer = self.env.ref("stock.stock_location_customers")
@@ -101,6 +103,7 @@ class ReceptionPharmacy(models.Model):
                 {
                     "partner_id": line.partner_shipping_id.id,
                     "customer_id": line.customer_id.id,
+                    "carrier_id": carrier.id,
                 }
             )
             line.procurement_id = proc_order.create(
@@ -116,6 +119,7 @@ class ReceptionPharmacy(models.Model):
                     "group_id": group_id.id,
                 }
             )
+            # procurement_autorun_defer
             line.procurement_id.run()
             pickings = (
                 self.env["stock.move"]

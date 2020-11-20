@@ -17,7 +17,6 @@ def migrate(cr, version):
         "__setup__.stock_location_route_pick_froid", raise_if_not_found=False
     )
     product_template = env.ref("specific_stock.product_colis_souverain_frigo")
-
     if route:
         product_template.write({"route_ids": [(6, 0, route.ids)]})
     return
