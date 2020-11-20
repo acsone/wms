@@ -151,6 +151,11 @@ msgid "Immediate quantity to pick"
 msgstr ""
 
 #. module: delivery_rounds_refill
+#: model:ir.model.fields,field_description:delivery_rounds_refill.field_stock_quant_location_kind
+msgid "Kind"
+msgstr ""
+
+#. module: delivery_rounds_refill
 #: model:ir.model.fields,field_description:delivery_rounds_refill.field_report_stock_overview___last_update
 #: model:ir.model.fields,field_description:delivery_rounds_refill.field_report_stock_refill_arrange___last_update
 #: model:ir.model.fields,field_description:delivery_rounds_refill.field_report_stock_refill_reassort___last_update
@@ -181,13 +186,13 @@ msgid "Lot"
 msgstr ""
 
 #. module: delivery_rounds_refill
-#: code:addons/delivery_rounds_refill/models/report_stock_refill_arrange.py:89
+#: code:addons/delivery_rounds_refill/models/report_stock_refill_arrange.py:88
 #, python-format
 msgid "Missing Operation Type on Location %s"
 msgstr ""
 
 #. module: delivery_rounds_refill
-#: code:addons/delivery_rounds_refill/models/report_stock_refill_reassort.py:89
+#: code:addons/delivery_rounds_refill/models/report_stock_refill_reassort.py:88
 #, python-format
 msgid "Missing operation type on location %s"
 msgstr ""
@@ -266,6 +271,11 @@ msgid "Quantity to pick"
 msgstr ""
 
 #. module: delivery_rounds_refill
+#: model:ir.model,name:delivery_rounds_refill.model_stock_quant
+msgid "Quants"
+msgstr ""
+
+#. module: delivery_rounds_refill
 #: model:ir.actions.act_window,name:delivery_rounds_refill.action_report_stock_refill_reassort
 #: model:ir.ui.menu,name:delivery_rounds_refill.menu_report_stock_refill_reassort
 #: model:ir.ui.view,arch_db:delivery_rounds_refill.view_report_stock_refill_reassort_tree
@@ -309,6 +319,11 @@ msgstr ""
 #: code:addons/delivery_rounds_refill/wizards/create_picking.py:27
 #, python-format
 msgid "Reserve"
+msgstr ""
+
+#. module: delivery_rounds_refill
+#: model:ir.model,name:delivery_rounds_refill.model_stock_move
+msgid "Stock Move"
 msgstr ""
 
 #. module: delivery_rounds_refill
