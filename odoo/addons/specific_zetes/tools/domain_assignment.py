@@ -281,7 +281,7 @@ FROM stock_picking AS picking
   LEFT JOIN picking_zone ON pick_type.picking_zone_id = picking_zone.id
   INNER JOIN round_instance AS round
     ON picking.delivery_round_id = round.id
-WHERE pick_type.subcode = 'PICK'
+WHERE picking.picking_type_subcode = 'PICK'
       AND picking.state IN ('partially_available', 'assigned')
       AND pick_type.zetes_picking_type = %(picking_type)s
       AND EXISTS(SELECT 1

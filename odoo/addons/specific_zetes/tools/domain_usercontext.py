@@ -136,7 +136,7 @@ FROM stock_picking AS picking
     ON picking.picking_type_id = pick_type.id
   LEFT JOIN picking_zone ON pick_type.picking_zone_id = picking_zone.id
   LEFT JOIN round_instance AS round ON picking.delivery_round_id = round.id
-WHERE pick_type.subcode IN ('PICK', 'ARRANGEMENT')
+WHERE picking.picking_type_subcode IN ('PICK', 'ARRANGEMENT')
       AND picking.state IN ('partially_available', 'assigned')
       AND picking.zetes_state IN %(picking_zetes_state)s
       AND EXISTS(SELECT 1

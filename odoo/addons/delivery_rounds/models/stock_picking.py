@@ -22,6 +22,34 @@ class StockPicking(models.Model):
         help="Indicates on which itinerary this partner is",
         compute="_compute_partner_itinerary_ids",
     )
+    delivery_round_customer_id = fields.Many2one(
+        "round.instance.customer", "Delivery Round Customer", copy=False, index=True
+    )
+    delivery_round_id = fields.Many2one(
+        related="delivery_round_customer_id.delivery_round_id",
+        string="Delivery Round",
+        store=True,
+        readonly=True,
+        track_visibility="onchange",
+        index=True,
+    )
+
+    @api.model_cr
+    def init(self):
+        res = super(StockPicking, self).init()
+        # Create the required index to speedup:
+        # * get_picking method in specific_zetes.tools.domain_assignment.Assignment
+        # * get_count_weight in delivery_rounds.models.round_instance.RoundInstance
+        # * _compute_has_pending_reassort in delivery_rounds_refill.models.round_instance.RoundInstance
+        # * open_pending_reassort in delivery_rounds_refill.models.round_instance.RoundInstance
+        query = """
+            CREATE INDEX IF NOT EXISTS
+            stock_picking_delivery_round_id_type_subcode_state_index
+            ON stock_picking (delivery_round_id, picking_type_subcode, state)
+            WHERE delivery_round_id is not null and picking_type_subcode is not null
+        """
+        self.env.cr.execute(query)
+        return res
 
     def _compute_partner_itinerary_ids(self):
         for picking in self:
@@ -34,18 +62,6 @@ class StockPicking(models.Model):
             if partner.type == "contact" and partner.parent_id:
                 partner = partner.parent_id
             picking.partner_itinerary_ids = partner.round_itinerary_ids
-
-    delivery_round_customer_id = fields.Many2one(
-        "round.instance.customer", "Delivery Round Customer", copy=False, index=True
-    )
-    delivery_round_id = fields.Many2one(
-        related="delivery_round_customer_id.delivery_round_id",
-        string="Delivery Round",
-        store=True,
-        readonly=True,
-        track_visibility="onchange",
-        index=True,
-    )
 
     @api.model
     def default_get(self, fields_list):

@@ -16,13 +16,12 @@ class ReportStockOverview(models.Model):
   WITH stock_bykind AS (
     SELECT
       sq.product_id,
-      sum(qty) FILTER (WHERE sl.kind='bin') as qty_in_bin,
-      sum(qty) FILTER (WHERE sl.kind='bin' and reservation_id is null) as qty_in_bin_available,
-      sum(qty) FILTER (WHERE sl.kind='parking') as qty_in_parking,
-      sum(qty) FILTER (WHERE sl.kind='reserve') as qty_in_reserve
+      sum(qty) FILTER (WHERE location_kind='bin') as qty_in_bin,
+      sum(qty) FILTER (WHERE location_kind='bin' and reservation_id is null) as qty_in_bin_available,
+      sum(qty) FILTER (WHERE location_kind='parking') as qty_in_parking,
+      sum(qty) FILTER (WHERE location_kind='reserve') as qty_in_reserve
     FROM stock_quant sq
-    JOIN stock_location sl ON sq.location_id = sl.id
-    WHERE sl.kind IS NOT NULL
+    WHERE location_kind IS NOT NULL
     GROUP BY product_id
   ),
   unreserved_pick_moves AS (
