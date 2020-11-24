@@ -250,6 +250,14 @@
                         <t t-set="bank_ing" t-value="invoice.env['account.journal'].search([('code', '=', 'BNK2')])"/>
                         <t t-set="bank_dexia" t-value="invoice.env['account.journal'].search([('code', '=', 'BNK3')])"/>
                         <t t-set="bank_bnp" t-value="invoice.env['account.journal'].search([('code', '=', 'BNK4')])"/>
+                        <t t-if="invoice.payment_mode_description">
+                        <tr> 
+                            <td colspan="2">
+                                <span t-esc="invoice.payment_mode_description"/>
+                            </td>
+                        </tr>
+                        </t>
+                        <t t-else="">
                         <tr>
                             <td colspan="2" t-if="invoice.type == 'out_invoice'">
                                 <t>Reference for your payment</t>
@@ -257,7 +265,7 @@
                                 <strong t-field="invoice.reference"/>
                             </td>
                         </tr>
-                        <tr>
+                       <tr>
                             <td>
                                 CBC:
                                 <span t-esc="bank_cbc.bank_acc_number"/>
@@ -292,10 +300,11 @@
                         <tr>
                             <td colspan="2" t-if="invoice.type == 'out_invoice'">
                                 <span t-if="invoice.payment_mode_id and invoice.payment_mode_id.payment_method_id.code == 'sepa_direct_debit'"
-                                      t-field="invoice.payment_mode_id.name"/>
+                                    t-field="invoice.payment_mode_id.name"/>
                                 <span>Due date</span> <strong t-field="invoice.date_due"/>
                             </td>
                         </tr>
+                    </t>
                     </table>
                 </div>
             </div>

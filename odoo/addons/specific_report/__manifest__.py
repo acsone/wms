@@ -30,6 +30,7 @@
     ],
     "website": "http://www.camptocamp.com",
     "data": [
+        "views/account_payment_mode.xml",
         # Views
         "wizard/modify_serial_number.xml",
         "views/base_contact.xml",
