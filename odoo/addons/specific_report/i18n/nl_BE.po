@@ -837,6 +837,12 @@ msgid "Invoice contribution ids"
 msgstr "Invoice contribution ids"
 
 #. module: specific_report
+#: model:ir.model.fields,field_description:specific_report.field_account_payment_mode_invoice_description
+#, fuzzy
+msgid "Invoice description"
+msgstr "Invoice contribution ids"
+
+#. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_account_invoice_invoice_only_tax_ids
 msgid "Invoice only tax ids"
 msgstr "Invoice only tax ids"
@@ -845,6 +851,11 @@ msgstr "Invoice only tax ids"
 #: model:ir.model.fields,field_description:specific_report.field_round_instance_customer_cash_on_delivery_invoice_ids
 msgid "Invoices"
 msgstr "Facturen"
+
+#. module: specific_report
+#: model:ir.model.fields,help:specific_report.field_account_payment_mode_invoice_description
+msgid "Invoicing method description"
+msgstr ""
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
@@ -1028,6 +1039,16 @@ msgstr "Pagina: <span class=\"page\"/> / <span class=\"topage\"/>"
 #: model:ir.model,name:specific_report.model_res_partner
 msgid "Partner"
 msgstr "Klant"
+
+#. module: specific_report
+#: model:ir.model,name:specific_report.model_account_payment_mode
+msgid "Payment Modes"
+msgstr ""
+
+#. module: specific_report
+#: model:ir.model.fields,field_description:specific_report.field_account_invoice_payment_mode_description
+msgid "Payment mode description"
+msgstr ""
 
 #. module: specific_report
 #: model:ir.actions.report.xml,name:specific_report.report_sale_order_pharmacist_supplier

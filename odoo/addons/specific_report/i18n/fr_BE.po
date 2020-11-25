@@ -837,6 +837,11 @@ msgid "Invoice contribution ids"
 msgstr "Facture contribution IDs"
 
 #. module: specific_report
+#: model:ir.model.fields,field_description:specific_report.field_account_payment_mode_invoice_description
+msgid "Invoice description"
+msgstr "Description de la méthode de facturation"
+
+#. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_account_invoice_invoice_only_tax_ids
 msgid "Invoice only tax ids"
 msgstr "Facture taxes seules IDs"
@@ -845,6 +850,12 @@ msgstr "Facture taxes seules IDs"
 #: model:ir.model.fields,field_description:specific_report.field_round_instance_customer_cash_on_delivery_invoice_ids
 msgid "Invoices"
 msgstr "Factures"
+
+#. module: specific_report
+#: model:ir.model.fields,help:specific_report.field_account_payment_mode_invoice_description
+#, fuzzy
+msgid "Invoicing method description"
+msgstr "Description de la méthode de facturation"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
@@ -1028,6 +1039,17 @@ msgstr "Page: <span class=\"page\"/> / <span class=\"topage\"/>"
 #: model:ir.model,name:specific_report.model_res_partner
 msgid "Partner"
 msgstr "Partenaire"
+
+#. module: specific_report
+#: model:ir.model,name:specific_report.model_account_payment_mode
+msgid "Payment Modes"
+msgstr ""
+
+#. module: specific_report
+#: model:ir.model.fields,field_description:specific_report.field_account_invoice_payment_mode_description
+#, fuzzy
+msgid "Payment mode description"
+msgstr "Description de la méthode de facturation"
 
 #. module: specific_report
 #: model:ir.actions.report.xml,name:specific_report.report_sale_order_pharmacist_supplier
@@ -1352,9 +1374,3 @@ msgstr ""
 
 #~ msgid "Order line"
 #~ msgstr "Ligne du bon de commande"
-
-
-#. module: specific_report
-#: model:ir.model.fields,field_description:specific_report.model_account_payment_mode_field_invoie_description
-msgid "Invoice description"
-msgstr "Description de la méthode de facturation"

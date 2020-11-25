@@ -667,6 +667,11 @@ msgid "Invoice contribution ids"
 msgstr ""
 
 #. module: specific_report
+#: model:ir.model.fields,field_description:specific_report.field_account_payment_mode_invoice_description
+msgid "Invoice description"
+msgstr ""
+
+#. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_account_invoice_invoice_only_tax_ids
 msgid "Invoice only tax ids"
 msgstr ""
@@ -674,6 +679,11 @@ msgstr ""
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_round_instance_customer_cash_on_delivery_invoice_ids
 msgid "Invoices"
+msgstr ""
+
+#. module: specific_report
+#: model:ir.model.fields,help:specific_report.field_account_payment_mode_invoice_description
+msgid "Invoicing method description"
 msgstr ""
 
 #. module: specific_report
@@ -857,6 +867,16 @@ msgstr ""
 #. module: specific_report
 #: model:ir.model,name:specific_report.model_res_partner
 msgid "Partner"
+msgstr ""
+
+#. module: specific_report
+#: model:ir.model,name:specific_report.model_account_payment_mode
+msgid "Payment Modes"
+msgstr ""
+
+#. module: specific_report
+#: model:ir.model.fields,field_description:specific_report.field_account_invoice_payment_mode_description
+msgid "Payment mode description"
 msgstr ""
 
 #. module: specific_report
