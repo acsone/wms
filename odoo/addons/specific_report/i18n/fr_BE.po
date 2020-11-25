@@ -1352,3 +1352,9 @@ msgstr ""
 
 #~ msgid "Order line"
 #~ msgstr "Ligne du bon de commande"
+
+
+#. module: specific_report
+#: model:ir.model.fields,field_description:specific_report.model_account_payment_mode_field_invoie_description
+msgid "Invoice description"
+msgstr "Description de la méthode de facturation"
