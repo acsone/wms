@@ -13,16 +13,12 @@ class StockLocation(models.Model):
         dest_location_id = (
             super(StockLocation, self).get_putaway_strategy(product) or location.id
         )
-        bin_obj = self.env["product.stock.bin"]
-        lbin = bin_obj.search(
-            [
-                ("product_id", "=", product.product_tmpl_id.id),
-                ("location_id", "=", dest_location_id),
-            ],
-            limit=1,
+        stock_bin_ids = product.product_tmpl_id.stock_bin_ids
+        lbin = stock_bin_ids.filtered(
+            lambda b, location_id=dest_location_id: b.location_id.id == location_id
         )
         if lbin:
-            return lbin.bin_location_id.id
+            return lbin[0].bin_location_id.id
         if dest_location_id != location.id:
             # case Input under Stock and fixed putaway strat. No bin found
             # under that fixed location
@@ -31,13 +27,7 @@ class StockLocation(models.Model):
         # want to apply stock bin mapping)
         while location.act_as_view and location.location_id:
             location = location.location_id
-            lbin = bin_obj.search(
-                [
-                    ("product_id", "=", product.product_tmpl_id.id),
-                    ("location_id", "=", location.id),
-                ],
-                limit=1,
-            )
+            lbin = stock_bin_ids.filtered(lambda b, loc=location: b.location_id == loc)
             if lbin:
-                return lbin.bin_location_id.id
+                return lbin[0].bin_location_id.id
         return dest_location_id
