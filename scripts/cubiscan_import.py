@@ -81,11 +81,14 @@ def format_files_to_dataframe(env, path_to_files, verbose):
 
     # concat all files in one DF
     for file in files:
+        if verbose:
+            click.echo("Start processing file: {}. . .".format(file))
+
         df = pd.read_excel(path_to_files + file)
         # Name 'primary' is ambiguous when using sql tables. cf primary key ... so renaming it into the df
         # NB: sometimes we have Ref in the xlsx sheets => using this for consistancy
         if "Primary" in df.columns:
-            df.rename(columns={"Primary": "Ref"}, inplace=True)
+            df.rename(columns={"Primary": "REF "}, inplace=True)
         # Sometimes Weight, sometimes Poids... just using weight all the time for consistancy
         if "Poids" in df.columns:
             df.rename(columns={"Poids": "Weight"}, inplace=True)
@@ -123,8 +126,16 @@ def format_files_to_dataframe(env, path_to_files, verbose):
 
 def split_products_and_packagings(env, all_data_dataframe, verbose):
 
+    no_package_info = all_data_dataframe[all_data_dataframe["Secondary"] == ""]
+    if verbose:
+        click.echo("no package info df: {}. . .".format(no_package_info.head()))
+
     # Extract product related DF
     product_data = all_data_dataframe[all_data_dataframe["Secondary"] == "PIECE"]
+    product_data = product_data.append(no_package_info, ignore_index=True, sort=True)
+    if verbose:
+        click.echo("products data: {}. . .".format(product_data.head()))
+
     # Concat all_data with product_data + drop_duplicates ==> keep only packaging related data
     product_packaging_data = pd.concat(
         [all_data_dataframe, product_data, product_data]
@@ -141,23 +152,12 @@ def split_products_and_packagings(env, all_data_dataframe, verbose):
 
     # Clean ids : default pandas format is float : fill  NaN with zero then enforce INT type
     product_packaging_data["Secondary_id"] = (
-        product_packaging_data["Secondary"].map(PACKAGING_TYPES).fillna(0).astype(int)
+        product_packaging_data["Secondary"].map(PACKAGING_TYPES).astype(int)
     )
-    if verbose:
-        click.echo(
-            "IDS for packagings: {}. . .".format(product_packaging_data["Secondary_id"])
-        )
 
     product_data[
         "Secondary_id"
     ] = 0  # Fill with zero for product to always drop in the same sql table
-
-    if verbose:
-        click.echo(
-            "IDS for product -- should always be zero: {}. . .".format(
-                product_data["Secondary_id"]
-            )
-        )
 
     return product_data, product_packaging_data
 
