@@ -41,6 +41,21 @@ class AccountInvoice(models.Model):
     )
     amount_only_tax = fields.Monetary(compute="_compute_total_amounts")
 
+    payment_mode_description = fields.Char(
+        compute="_compute_payment_mode_description_on_invoice"
+    )
+
+    def _compute_payment_mode_description_on_invoice(self):
+        for inv in self:
+            payment_mode = self.env["account.payment.mode"].search(
+                [("id", "=", inv.payment_mode_id.id)]
+            )
+            inv.payment_mode_description = (
+                payment_mode.invoice_description
+                if payment_mode.invoice_description
+                else ""
+            )
+
     @api.depends(
         "invoice_line_ids",
         "invoice_line_ids.quantity",
@@ -56,10 +71,10 @@ class AccountInvoice(models.Model):
         tax_group_antibiotics = self.env.ref("account.tax_group_taxes")
         for inv in self:
             inv.amount_supplier_discount = sum(
-                [l.amount_discount2 for l in inv.invoice_line_ids]
+                [line.amount_discount2 for line in inv.invoice_line_ids]
             )
             inv.amount_alcyon_discount = sum(
-                [l.amount_discount3 for l in inv.invoice_line_ids]
+                [line.amount_discount3 for line in inv.invoice_line_ids]
             )
 
             inv.amount_discount_total = (
@@ -95,7 +110,7 @@ class AccountInvoice(models.Model):
             inv.invoice_antibiotics_ids = invoice_antibiotics_ids
 
             inv.amount_without_discount = (
-                sum([l.price_unit * l.quantity for l in inv.invoice_line_ids])
+                sum([line.price_unit * line.quantity for line in inv.invoice_line_ids])
                 + amount_contribution
             )
 
