@@ -9,6 +9,7 @@
     "license": "AGPL-3",
     "category": "Sales",
     "depends": [
+        "alc_sale_invoicing_policy",
         "stock",
         "specific_base",
         "report",
