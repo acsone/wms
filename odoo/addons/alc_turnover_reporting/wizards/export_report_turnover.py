@@ -33,7 +33,7 @@ class ExportReportTurnover(models.TransientModel):
                 SUM((sol.price_subtotal/sol.product_uom_qty) * sm.product_qty) AS debit_from_sm FROM stock_move sm
                 JOIN sale_order_line sol ON sol.id = sm.order_line_id
                 JOIN stock_location from_loc ON from_loc.id = sm.location_id
-                WHERE sm.state = 'done' AND from_loc.usage = 'customer' AND sol.product_uom_qty != 0
+                WHERE sm.state = 'done' AND from_loc.usage = 'customer' AND sol.product_uom_qty != 0  AND sm.product_id=sol.product_id
                 GROUP BY date_trunc('month', sm.date)
         """
         )
@@ -44,11 +44,11 @@ class ExportReportTurnover(models.TransientModel):
         self.env.cr.execute(
             """
                 SELECT
-                        date_trunc('month', sm.date) as date,
-                        SUM((sol.price_subtotal/sol.product_uom_qty) * sm.product_qty) AS credit_from_sm FROM stock_move sm
+                date_trunc('month', sm.date) as date,
+                SUM((sol.price_subtotal/sol.product_uom_qty) * sm.product_qty) AS credit_from_sm FROM stock_move sm
                 JOIN sale_order_line sol ON sol.id = sm.order_line_id
                 JOIN stock_location to_loc ON to_loc.id = sm.location_dest_id
-                WHERE sm.state = 'done' AND to_loc.usage = 'customer' AND sol.product_uom_qty != 0
+                WHERE sm.state = 'done' AND to_loc.usage = 'customer' AND sol.product_uom_qty != 0 AND sm.product_id=sol.product_id
                 GROUP BY date_trunc('month', sm.date)
         """
         )
