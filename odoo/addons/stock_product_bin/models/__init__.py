@@ -1,3 +1,3 @@
-from . import product
-from . import stock
-from . import stock_change_product_qty
+from . import product_stock_bin
+from . import product_template
+from . import stock_location
