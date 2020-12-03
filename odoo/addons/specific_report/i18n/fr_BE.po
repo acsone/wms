@@ -1367,7 +1367,7 @@ msgstr ""
 "                <span>Téléphone:</span>"
 
 #~ msgid "<span>Consignement</span>"
-#~ msgstr "<span>Consignation</span>"
+#~ msgstr "<span> Bon de Consignation</span>"
 
 #~ msgid "Order Reference"
 #~ msgstr "Référence commande"
