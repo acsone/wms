@@ -49,4 +49,7 @@
         - git am "$(git format-patch -1 81022c7e3a22d56eec11604c88359ce1dbe3326b -o ../patches)"
           # [FIX] web: Fix convertion of list record item to a format expected by context evaluations
         - git am "$(git format-patch -1 7495a531d4470546f31973d3b3d01abc38bf8f1c -o ../patches)"
+          # [FIX] l10n_be_intrastat: Value must include discount
+        - git am "$(git format-patch -1 780e7461d21a7be54a6af747235d1b44b99ebc51 -o ../patches)"
+
     target: acsone 10.0-alc_master
