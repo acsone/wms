@@ -28,13 +28,16 @@ class TestAlcAccountPaymentGlobalization(common.SavepointCase):
 
         # associate the partner 3 to an bank account and create a banking mandate
         # for this account
-        bank_account = cls.env.ref("account_payment_mode.res_partner_12_iban")
-        bank_account.partner_id = cls.partner_3
+        cls.mandate = cls.partner_3.valid_mandate_id
+        if not cls.mandate:
+            bank_account = cls.env.ref("account_payment_mode.res_partner_12_iban")
+            bank_account.partner_id = cls.partner_3
 
-        cls.mandate = cls.env["account.banking.mandate"].create(
-            {"partner_bank_id": bank_account.id, "signature_date": "2015-01-01"}
-        )
-        cls.mandate.validate()
+            mandate = cls.env["account.banking.mandate"].create(
+                {"partner_bank_id": bank_account.id, "signature_date": "2015-01-01"}
+            )
+            mandate.validate()
+            cls.mandate = cls.partner_3.valid_mandate_id
         cls.partner_3.customer_payment_mode_id = cls.payment_mode
 
         cls.account_type_receivable = cls.env.ref(
