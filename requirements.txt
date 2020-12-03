@@ -36,7 +36,7 @@ Mako==1.0.4
 MarkupSafe==0.23
 mock==2.0.0
 numpy==1.16.6
-odoo @ git+https://github.com/acsone/odoo.git@f4703c31fa3488c144abbbcb573a37eb96365d4d
+odoo @ git+https://github.com/acsone/odoo.git@64d4d15796eb346c235f0729c098d741214f7200
 odoo-addons-enterprise @ git+ssh://git@github.com/acsone/enterprise.git@14c3dc9a82d7bceb12e6d59644a91b7e2e8772f5#subdirectory=setup
 odoo-autodiscover==2.0.0
 odoo10-addon-account-analytic-no-lines @ git+https://github.com/acsone/account-analytic.git@daf43630f1ca58b431bb93809a331374b8530863#subdirectory=setup/account_analytic_no_lines
@@ -133,9 +133,9 @@ odoo10-addon-purchase-cancel-reason @ git+https://github.com/acsone/purchase-wor
 odoo10-addon-purchase-delivery-split-date @ git+https://github.com/acsone/purchase-workflow.git@527ab1413ba29a34c478e83413267f41e608cd4c#subdirectory=setup/purchase_delivery_split_date
 odoo10-addon-purchase-open-qty==10.0.1.1.0.99.dev3
 odoo10-addon-purchase-order-approved @ git+https://github.com/acsone/purchase-workflow.git@921b0bed4baefe590a1a2fae976f18db585e777e#subdirectory=setup/purchase_order_approved
--e git+git@github.com:acsone/edi@25396b33d24857be43fc1ed63a8f0340ffa26ae6#egg=odoo10_addon_purchase_order_import&subdirectory=setup/purchase_order_import
-odoo10-addon-purchase-order-import-ubl==10.0.2.0.2
+odoo10-addon-purchase-order-import @ git+https://github.com/acsone/edi.git@eb8ceac3ba16c60cc206a4c87dbd05471d0d2ddc#subdirectory=setup/purchase_order_import
 odoo10-addon-purchase-order-line-packaging-qty @ git+https://github.com/acsone/purchase-workflow.git@92b6ddd177d70dae58da141d58f027b0e215a946#subdirectory=setup/purchase_order_line_packaging_qty
+odoo10-addon-purchase-order-import-ubl==10.0.2.0.2
 odoo10-addon-purchase-order-ubl==10.0.1.0.0.99.dev10
 odoo10-addon-queue-job @ git+https://github.com/acsone/queue.git@1e90ecc9ba9160783d63a8f005171d0c7dabcc3d#subdirectory=setup/queue_job
 odoo10-addon-queue-job-cron @ git+https://github.com/acsone/queue.git@cecd5db2f1664e1dc14fdb590996486f638b0fb0#subdirectory=setup/queue_job_cron
