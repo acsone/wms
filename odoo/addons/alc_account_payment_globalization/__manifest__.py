@@ -22,6 +22,7 @@ Translated with www.DeepL.com/Translator (free version)""",
         "account",
         "account_payment_mode",
         "account_payment_partner",  # payment_mode_id on account.invoice
+        "account_banking_mandate",  # mandate_id
     ],
     "data": ["wizards/alc_account_payment_globalization.xml"],
     "demo": [],

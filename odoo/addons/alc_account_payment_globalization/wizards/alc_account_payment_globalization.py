@@ -89,6 +89,8 @@ class AlcAccountPaymentGlobalization(models.TransientModel):
             "name": u"Prélèvement {}".format(date_localized),
             "account_id": self.account_id.id,
             "partner_id": self.partner_id.id,
+            "payment_mode_id": self.partner_id.customer_payment_mode_id.id,
+            "mandate_id": self.partner_id.valid_mandate_id.id,
         }
         if globalization_amount > 0:
             globalization_line_vals["debit"] = globalization_amount

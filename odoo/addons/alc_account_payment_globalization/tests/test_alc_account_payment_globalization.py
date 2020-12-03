@@ -26,6 +26,17 @@ class TestAlcAccountPaymentGlobalization(common.SavepointCase):
             }
         )
 
+        # associate the partner 3 to an bank account and create a banking mandate
+        # for this account
+        bank_account = cls.env.ref("account_payment_mode.res_partner_12_iban")
+        bank_account.partner_id = cls.partner_3
+
+        cls.mandate = cls.env["account.banking.mandate"].create(
+            {"partner_bank_id": bank_account.id, "signature_date": "2015-01-01"}
+        )
+        cls.mandate.validate()
+        cls.partner_3.customer_payment_mode_id = cls.payment_mode
+
         cls.account_type_receivable = cls.env.ref(
             "account.data_account_type_receivable"
         )
@@ -189,6 +200,12 @@ class TestAlcAccountPaymentGlobalization(common.SavepointCase):
             lambda l: l.partner_id == self.partner_3
         )
         self.assertEqual(len(partner_3_line), 1)
+
+        # partner_3_line is the globalization line
+        # we must have the mandate and the payment mode on globalization line
+        self.assertEqual(partner_3_line.payment_mode_id, self.payment_mode)
+        self.assertEqual(partner_3_line.mandate_id, self.mandate)
+
         self.assertEqual(self.invoice_partner_1_1_receivable_1.state, "paid")
         self.assertEqual(self.invoice_partner_1_2_receivable_1.state, "paid")
         self.assertEqual(self.invoice_partner_2_1_receivable_1.state, "paid")
