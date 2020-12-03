@@ -91,6 +91,7 @@ odoo10-addon-base-geoengine @ git+https://github.com/acsone/geospatial.git@035fe
 odoo10-addon-base-geolocalize-openstreetmap==10.0.1.0.1
 odoo10-addon-base-import-async @ git+https://github.com/acsone/connector-interfaces.git@cf333ca7f81e027df6c4eac3581e111b9058823b#subdirectory=setup/base_import_async
 odoo10-addon-base-import-security-group @ git+https://github.com/acsone/server-tools.git@dcefdba5bac014076f05229ba091acd8b739e164#subdirectory=setup/base_import_security_group
+odoo10-addon-base-m2m-custom-field @ git+https://github.com/acsone/server-tools.git@0174140279eb96d59c7c3c58084c34645e4dc1a2#subdirectory=setup/base_m2m_custom_field
 odoo10-addon-base-optional-quick-create @ git+https://github.com/acsone/server-tools.git@dcefdba5bac014076f05229ba091acd8b739e164#subdirectory=setup/base_optional_quick_create
 odoo10-addon-base-partner-sequence @ git+https://github.com/acsone/partner-contact@a9e98e0dad100bbf0ba80da7e4b83b9a65dcc3ea#subdirectory=setup/base_partner_sequence
 odoo10-addon-base-report-to-printer @ git+https://github.com/acsone/report-print-send.git@c8244592b3952b406f768f6f45faeec048b9e1a0#subdirectory=setup/base_report_to_printer
@@ -123,7 +124,7 @@ odoo10-addon-product-analytic-purchase @ git+https://github.com/acsone/account-a
 odoo10-addon-product-assortment==10.0.1.0.0.99.dev4
 odoo10-addon-product-manufacturer @ git+https://github.com/acsone/product-attribute.git@f1dc5cd944b481993f7fb92cc98990527856cd4e#subdirectory=setup/product_manufacturer
 odoo10-addon-product-packaging-barcode==10.0.1.0.0.99.dev2
-odoo10-addon-product-packaging-dimension @ git+https://github.com/acsone/product-attribute.git@c36c0392373b4252c46c6625fdec9e38af33ac9f#subdirectory=setup/product_packaging_dimension
+odoo10-addon-product-packaging-dimension @ git+https://github.com/acsone/product-attribute.git@eb1dd1585c929dc44e41e5bd6c4dfe0b1d18be0f#subdirectory=setup/product_packaging_dimension
 odoo10-addon-product-packaging-type @ git+https://github.com/acsone/product-attribute.git@c36c0392373b4252c46c6625fdec9e38af33ac9f#subdirectory=setup/product_packaging_type
 odoo10-addon-product-packaging-type-pallet @ git+https://github.com/acsone/product-attribute.git@c36c0392373b4252c46c6625fdec9e38af33ac9f#subdirectory=setup/product_packaging_type_pallet
 odoo10-addon-product-price-category @ git+https://github.com/acsone/sale-workflow.git@b9987e4eb546f9ea8c0ee88e507072252b0d57d3#subdirectory=setup/product_price_category
@@ -134,8 +135,8 @@ odoo10-addon-purchase-delivery-split-date @ git+https://github.com/acsone/purcha
 odoo10-addon-purchase-open-qty==10.0.1.1.0.99.dev3
 odoo10-addon-purchase-order-approved @ git+https://github.com/acsone/purchase-workflow.git@921b0bed4baefe590a1a2fae976f18db585e777e#subdirectory=setup/purchase_order_approved
 odoo10-addon-purchase-order-import @ git+https://github.com/acsone/edi.git@eb8ceac3ba16c60cc206a4c87dbd05471d0d2ddc#subdirectory=setup/purchase_order_import
-odoo10-addon-purchase-order-line-packaging-qty @ git+https://github.com/acsone/purchase-workflow.git@92b6ddd177d70dae58da141d58f027b0e215a946#subdirectory=setup/purchase_order_line_packaging_qty
 odoo10-addon-purchase-order-import-ubl==10.0.2.0.2
+odoo10-addon-purchase-order-line-packaging-qty @ git+https://github.com/acsone/purchase-workflow.git@92b6ddd177d70dae58da141d58f027b0e215a946#subdirectory=setup/purchase_order_line_packaging_qty
 odoo10-addon-purchase-order-ubl==10.0.1.0.0.99.dev10
 odoo10-addon-queue-job @ git+https://github.com/acsone/queue.git@1e90ecc9ba9160783d63a8f005171d0c7dabcc3d#subdirectory=setup/queue_job
 odoo10-addon-queue-job-cron @ git+https://github.com/acsone/queue.git@cecd5db2f1664e1dc14fdb590996486f638b0fb0#subdirectory=setup/queue_job_cron
@@ -157,8 +158,13 @@ odoo10-addon-stock-disable-force-availability-button @ git+https://github.com/ac
 odoo10-addon-stock-location-product-restriction==10.0.1.0.1
 odoo10-addon-stock-mts-mto-rule @ git+https://github.com/acsone/stock-logistics-warehouse.git@d7cedf56da46da998d63d4e03a0e9cea2099fded#subdirectory=setup/stock_mts_mto_rule
 odoo10-addon-stock-production-lot-expiry @ git+https://github.com/acsone/product-attribute@7e2c8cda6effefe84023848ea0c560af95e8a268#subdirectory=setup/stock_production_lot_expiry
+odoo10-addon-stock-quant-package-dimension @ git+https://github.com/acsone/stock-logistics-workflow.git@7f017cda394dd11ba2a55d47c348af9b8dd71a9f#subdirectory=setup/stock_quant_package_dimension
+odoo10-addon-stock-quant-package-product-packaging @ git+https://github.com/acsone/stock-logistics-workflow.git@3501c29e80f66a14fa9961db107c5a300a1776f3#subdirectory=setup/stock_quant_package_product_packaging
+odoo10-addon-stock-storage-type @ git+https://github.com/acsone/wms.git@f33f41b78b32dff7a1fc5a0782df77b8f5a62455#subdirectory=setup/stock_storage_type
+odoo10-addon-stock-storage-type-putaway-abc @ git+https://github.com/acsone/wms.git@9cdf2d6d0d34f1d4f9180acca8b997dcdbfa1439#subdirectory=setup/stock_storage_type_putaway_abc
 odoo10-addon-web-cache-name-get @ git+https://github.com/acsone/web.git@f37c8ad92c2190e0bbc09444424273843a9f3cd0#subdirectory=setup/web_cache_name_get
 odoo10-addon-web-decimal-numpad-dot @ git+https://github.com/acsone/web.git@f37c8ad92c2190e0bbc09444424273843a9f3cd0#subdirectory=setup/web_decimal_numpad_dot
+odoo10-addon-web-domain-field==10.0.1.0.0
 odoo10-addon-web-environment-ribbon @ git+https://github.com/acsone/web.git@f37c8ad92c2190e0bbc09444424273843a9f3cd0#subdirectory=setup/web_environment_ribbon
 odoo10-addon-web-export-view @ git+https://github.com/acsone/web.git@f37c8ad92c2190e0bbc09444424273843a9f3cd0#subdirectory=setup/web_export_view
 odoo10-addon-web-notify @ git+https://github.com/acsone/web.git@f37c8ad92c2190e0bbc09444424273843a9f3cd0#subdirectory=setup/web_notify
