@@ -71,7 +71,7 @@ class Refdata(DomainInterface):
         :param params:
         :return:
         """
-        picking_types = self.request.env["stock.picking.type"].search(
+        picking_types = self.env["stock.picking.type"].search(
             [("subcode", "=", "PICK"), ("picking_zone_id", "!=", False)]
         )
         result = []

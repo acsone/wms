@@ -50,9 +50,7 @@ class DomainInterface(object):
         self._header = header
         # Retrieve the current user
         operator_code = header[constants.USER_INDEX]
-        self._operator_user = (
-            self.request.env["res.users"].sudo().get_user(operator_code)
-        )
+        self._operator_user = self.env["res.users"].sudo().get_user(operator_code)
         if self._operator_user:
             self.request.context = frozendict(
                 self.request.context,
@@ -105,6 +103,10 @@ class DomainInterface(object):
         :return:
         """
         raise NotImplementedError("Please implement this method")
+
+    @property
+    def env(self):
+        return self.request.env
 
 
 class Parameters:

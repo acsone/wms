@@ -96,7 +96,7 @@ class Print(DomainInterface):
             return result.format()
         picking_id = int(picking_id)
 
-        picking = self.request.env["stock.picking"].browse(picking_id)
+        picking = self.env["stock.picking"].browse(picking_id)
         picking._lock_rows()
         # Assign a checksum on the picking (print on the package label)
         picking.assign_picking_checksum()
@@ -108,8 +108,8 @@ class Print(DomainInterface):
 
         # Print the passport (see above)
         if print_type == constants.PRINT_PASSPORT:
-            pick_aliment = self.request.env.ref("__setup__.stock_picking_type_ali")
-            pick_frigo = self.request.env.ref("__setup__.stock_picking_type_froid")
+            pick_aliment = self.env.ref("__setup__.stock_picking_type_ali")
+            pick_frigo = self.env.ref("__setup__.stock_picking_type_froid")
             if picking.picking_type_id == pick_aliment:
                 printer_code = constants.PRINTER_ALIMENT
             elif picking.picking_type_id == pick_frigo:
@@ -119,7 +119,7 @@ class Print(DomainInterface):
 
             # The passport is always printed on the printer 1
             printer = (
-                self.request.env["printing.printer"]
+                self.env["printing.printer"]
                 .sudo()
                 .search([("code", "=", printer_code), ("type", "=", "pdf")])
             )
@@ -150,14 +150,12 @@ class Print(DomainInterface):
 
         elif print_type == constants.PRINT_LABELS:
 
-            with Savepoint(self.request.env.cr) as pack_savepoint:
+            with Savepoint(self.env.cr) as pack_savepoint:
                 try:
                     # Create a pack for this picking
                     box = picking.put_in_pack()
                     if isinstance(box, dict):
-                        box = self.request.env["stock.quant.package"].browse(
-                            box["res_id"]
-                        )
+                        box = self.env["stock.quant.package"].browse(box["res_id"])
                     if box:
                         # Set the number of packages for this picking
                         box.nbr_packages = quantity
@@ -167,12 +165,12 @@ class Print(DomainInterface):
                     _logger.exception(str(e))
 
             printer_toshiba = (
-                self.request.env["printing.printer"]
+                self.env["printing.printer"]
                 .sudo()
                 .search([("code", "=", printer_num), ("type", "=", "toshiba")])
             )
             printer_zebra = (
-                self.request.env["printing.printer"]
+                self.env["printing.printer"]
                 .sudo()
                 .search([("code", "=", printer_num), ("type", "=", "zebra")])
             )
