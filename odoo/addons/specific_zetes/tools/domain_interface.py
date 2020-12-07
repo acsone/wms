@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 import logging
+import StringIO
+import traceback
 import uuid
 
 from odoo import _
@@ -287,6 +289,12 @@ class Parameters:
 
         if exception and not isinstance(exception, (str, unicode)):
             exception = str(exception)
+
+        stack = StringIO.StringIO()
+        traceback.print_stack(file=stack)
+        stack.seek(0)
+
+        exception += u"\n%s" % stack.getvalue()
 
         self._domain.request.env["zetes.logger"].sudo().create(
             {
