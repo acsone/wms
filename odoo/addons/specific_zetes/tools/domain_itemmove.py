@@ -321,15 +321,8 @@ class Itemmove(DomainInterface):
         :param params:
         :return:
         """
-        line_id = params.moveLineId
-        if not line_id:
-            return
 
-        if isinstance(line_id, int):
-            line_id = str(line_id)
-
-        pack_operation_id = int(line_id.split("_")[0])
-
+        pack_operation_id, _ = params.parse_line_id(params.moveLineId)
         pack_op = self.env["stock.pack.operation"].browse(pack_operation_id)
         if not len(pack_op):
             return

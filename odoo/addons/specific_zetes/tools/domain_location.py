@@ -113,17 +113,7 @@ class Location(DomainInterface):
             )
             return result.format()
 
-        if isinstance(line_id, int):
-            line_id = str(line_id)
-
-        line_id_list = line_id.split("_")
-        if len(line_id_list) == 2:
-            pack_operation_id = int(line_id_list[0])
-            lot_id = int(line_id_list[1])
-        else:
-            pack_operation_id = int(line_id)
-            lot_id = None
-
+        pack_operation_id, lot_id = params.parse_line_id(line_id)
         pack_op = self.env["stock.pack.operation"].browse(pack_operation_id)
         if not len(pack_op):
             result.update(

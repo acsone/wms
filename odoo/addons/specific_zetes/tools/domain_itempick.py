@@ -244,20 +244,9 @@ class Itempick(DomainInterface):
         is_cut_itempick = False
         if params.Usf06 == constants.OP_CUT:
             is_cut_itempick = True
-            line_id = params.Usf02
-            if isinstance(line_id, int):
-                line_id = str(line_id)
-
-            line_id_list = line_id.split("_")
-            if len(line_id_list) == 2:
-                pack_operation_id = int(line_id_list[0])
-                lot_id = int(line_id_list[1])
-            else:
-                pack_operation_id = int(line_id)
-                lot_id = None
-
             picked_qty = int(params.Usf04 or 0)
 
+            pack_operation_id, lot_id = params.parse_line_id(params.Usf02)
             pack_op = self.env["stock.pack.operation"].browse(pack_operation_id)
             # Check if the product is tracked or not
             product = pack_op.product_id
@@ -493,20 +482,7 @@ class Itempick(DomainInterface):
         """
         if not params.pickLineId:
             return
-
-        line_id = params.pickLineId
-
-        if isinstance(line_id, int):
-            line_id = str(line_id)
-
-        line_id_list = line_id.split("_")
-        if len(line_id_list) == 2:
-            pack_operation_id = int(line_id_list[0])
-            lot_id = int(line_id_list[1])
-        else:
-            pack_operation_id = int(line_id)
-            lot_id = None
-
+        pack_operation_id, lot_id = params.parse_line_id(params.pickLineId)
         pack_op = self.env["stock.pack.operation"].browse(pack_operation_id)
         if not len(pack_op):
             return
