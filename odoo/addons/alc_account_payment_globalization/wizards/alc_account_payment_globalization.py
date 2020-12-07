@@ -37,7 +37,7 @@ class AlcAccountPaymentGlobalization(models.TransientModel):
 
     @api.model
     def _get_default_journal_id(self):
-        return self.env["account.journal"].search([("code", "=", "MISC")], limit=1).id
+        return self.env["account.journal"].search([("code", "=", "ODDOM")], limit=1).id
 
     @api.model
     def _get_default_account_id(self):
