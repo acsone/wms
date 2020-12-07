@@ -36,6 +36,59 @@ class TestCatchweight(ZetesTest):
 
         self.assertEqual(result.respCode, str(constants.RESPONSE_CODE_OK))
 
+    def test_requ_catchweight_wrong_pack(self):
+        """
+        Check that the method return an error code if we provide a wrong
+        pack operation id
+        :return:
+        """
+        domain = Catchweight(self._default_header(), mock.MagicMock(name="Savepoint()"))
+        request_params = Parameters(domain, action="requ")
+        request_params.update(
+            {
+                "groupNum": self.picking.id,
+                "pickLineId": -1,
+                "productCode": self.product_1.default_code,
+                "lotNumber": self.lot_product_1.name,
+                "effQty": 10,
+            }
+        )
+
+        result_str = domain.requ(request_params)
+        result = self.format_result(result_str)
+
+        self.assertEqual(result.respCode, str(constants.RESPONSE_CODE_ERROR))
+
+    def test_requ_catchweight_deleted_pack(self):
+        """
+        Check that the method return an error code if we provide a deleted
+        pack operation id and that a zettes loger is created for the related
+        picking to log this event
+        :return:
+        """
+        domain = Catchweight(self._default_header(), mock.MagicMock(name="Savepoint()"))
+        request_params = Parameters(domain, action="requ")
+
+        pack_op = self.picking.pack_operation_product_ids
+        pack_op.ensure_one()
+        pack_op_id = pack_op.id
+        pack_op.unlink()
+
+        self.assertFalse(self.picking.is_zetes_error)
+        request_params.update(
+            {
+                "groupNum": self.picking.id,
+                "pickLineId": pack_op_id,
+                "productCode": self.product_1.default_code,
+                "lotNumber": self.lot_product_1.name,
+                "effQty": 10,
+            }
+        )
+        result_str = domain.requ(request_params)
+        self.assertTrue(self.picking.is_zetes_error)
+        result = self.format_result(result_str)
+        self.assertEqual(result.respCode, str(constants.RESPONSE_CODE_ERROR))
+
     def test_resu_catchweight(self):
         """
         Change the picked quantity on the pack operation
@@ -90,6 +143,20 @@ class TestCatchweight(ZetesTest):
         self.assertEqual(pack_op.qty_done, 10)
         self.assertEqual(len(pack_op.pack_lot_ids), 2)
         self.assertEqual(pack_op.pack_lot_ids[1].qty, 5)
+
+    def test_resu_catchweight_wrong_pack_op(self):
+        """
+        Provides a wrong pack operation
+        :return:
+        """
+        self.product_1.write({"tracking": "none"})
+
+        domain = Catchweight(self._default_header(), mock.MagicMock(name="Savepoint()"))
+        request_params = Parameters(domain, action="resu")
+        request_params.update(
+            {"lineId": -1, "Usf01": None, "Usf02": 5, "Usf03": None}  # Pick 5 unit,
+        )
+        self.assertIsNone(domain.resu(request_params))
 
     def test_resu_catchweight_without_lot(self):
         """

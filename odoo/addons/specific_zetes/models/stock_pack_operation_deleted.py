@@ -32,3 +32,7 @@ class StockPackOperationDeleted(models.Model):
             WHERE create_date < now()-'2 month'::interval;
             """
         )
+
+    @api.model
+    def get(self, deleted_id):
+        return self.search([("deleted_id", "=", deleted_id)], limit=1)

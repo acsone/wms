@@ -247,7 +247,16 @@ class Itempick(DomainInterface):
             picked_qty = int(params.Usf04 or 0)
 
             pack_operation_id, lot_id = params.parse_line_id(params.Usf02)
-            pack_op = self.env["stock.pack.operation"].browse(pack_operation_id)
+            pack_op = self._get_pack_operation(pack_operation_id, params=params)
+            if not pack_op:
+                result = Parameters(self, action="resp")
+                result.update(
+                    {
+                        "respCode": constants.RESPONSE_CODE_ERROR,
+                        "respMsg": _("No pack operation found"),
+                    }
+                )
+                return result.format()
             # Check if the product is tracked or not
             product = pack_op.product_id
             if product.tracking != "none":
@@ -261,7 +270,7 @@ class Itempick(DomainInterface):
                     result.update(
                         {
                             "respCode": constants.RESPONSE_CODE_ERROR,
-                            "respMsg": "Lot pack operation not found",
+                            "respMsg": _("Lot pack operation not found"),
                         }
                     )
                     return result.format()
@@ -483,8 +492,8 @@ class Itempick(DomainInterface):
         if not params.pickLineId:
             return
         pack_operation_id, lot_id = params.parse_line_id(params.pickLineId)
-        pack_op = self.env["stock.pack.operation"].browse(pack_operation_id)
-        if not len(pack_op):
+        pack_op = self._get_pack_operation(pack_operation_id, params=params)
+        if not pack_op:
             return
 
         try:

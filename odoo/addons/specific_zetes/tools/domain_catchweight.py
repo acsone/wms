@@ -125,11 +125,13 @@ class Catchweight(DomainInterface):
         result = Parameters(self, action="resp")
 
         line_id = params.pickLineId
-        if not line_id:
+        pack_operation_id, _lot_id = params.parse_line_id(line_id)
+        pack_op = self._get_pack_operation(pack_operation_id, params=params)
+        if not pack_op:
             result.update(
                 {
                     "respCode": constants.RESPONSE_CODE_ERROR,
-                    "respMsg": _("No picking found"),
+                    "respMsg": _("No pack operation found"),
                 }
             )
             return result.format()
@@ -201,8 +203,8 @@ class Catchweight(DomainInterface):
         pack_operation_id, lot_id = params.parse_line_id(params.lineId)
         if not pack_operation_id:
             return
-        pack_op = self.env["stock.pack.operation"].browse(pack_operation_id)
-        if not len(pack_op):
+        pack_op = self._get_pack_operation(pack_operation_id, params=params)
+        if not pack_op:
             return
 
         try:

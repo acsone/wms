@@ -114,8 +114,8 @@ class Location(DomainInterface):
             return result.format()
 
         pack_operation_id, lot_id = params.parse_line_id(line_id)
-        pack_op = self.env["stock.pack.operation"].browse(pack_operation_id)
-        if not len(pack_op):
+        pack_op = self._get_pack_operation(pack_operation_id, params=params)
+        if not pack_op:
             result.update(
                 {
                     "respCode": constants.RESPONSE_CODE_ERROR,

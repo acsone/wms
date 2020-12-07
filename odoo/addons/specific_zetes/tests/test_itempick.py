@@ -204,6 +204,20 @@ class TestItempick(ZetesTest):
         self.assertEqual(pack_op.qty_done, 0)
         self.assertEqual(len(pack_op.pack_lot_ids), 1)
 
+    def test_resu_itempick_deleted_packop(self):
+        pack_op = self.picking.pack_operation_product_ids
+        pack_op.ensure_one()
+        pack_op_id = pack_op.id
+        pack_op.unlink()
+        self.assertFalse(self.picking.is_zetes_error)
+        domain = Itempick(self._default_header(), mock.MagicMock(name="Savepoint()"))
+        request_params = Parameters(domain, action="resu")
+        request_params.update(
+            {"pickLineId": pack_op_id, "pickStatus": constants.OP_CANCELED}
+        )
+        domain.resu(request_params)
+        self.assertTrue(self.picking.is_zetes_error)
+
     def test_requ_itempick_lot_shortage(self):
         domain = Itempick(self._default_header(), mock.MagicMock(name="Savepoint()"))
         request_params = Parameters(domain, action="requ")
@@ -239,6 +253,28 @@ class TestItempick(ZetesTest):
             new_operation.location_dest_id,
             self.env.ref("stock_lot_loss.stock_location_14019"),
         )
+
+    def test_requ_itempick_lot_shortage_deleted_packop(self):
+        pack_op = self.picking.pack_operation_product_ids
+        pack_op.ensure_one()
+        pack_op_id = pack_op.id
+        pack_op.unlink()
+        self.assertFalse(self.picking.is_zetes_error)
+        domain = Itempick(self._default_header(), mock.MagicMock(name="Savepoint()"))
+        request_params = Parameters(domain, action="requ")
+        request_params.update(
+            {
+                "groupNum": self.picking.id,
+                "Cri01": None,
+                "Usf06": constants.OP_CUT,
+                "Usf02": "%s_%s" % (pack_op_id, self.lot_product_1.id),
+                "Usf04": "0",
+            }
+        )
+        result_str = domain.requ(request_params)
+        result = self.format_result(result_str)
+        self.assertEqual(result.respCode, str(constants.RESPONSE_CODE_ERROR))
+        self.assertTrue(self.picking.is_zetes_error)
 
     def test_requ_itempick_no_tracking_shortage(self):
         domain = Itempick(self._default_header(), mock.MagicMock(name="Savepoint()"))

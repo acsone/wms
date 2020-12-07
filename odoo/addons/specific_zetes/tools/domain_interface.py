@@ -110,6 +110,29 @@ class DomainInterface(object):
     def env(self):
         return self.request.env
 
+    def _get_pack_operation(self, _id, params, log_error_if_not_found=True):
+        """
+        Return the pack operation if it exists (None otherwise)
+        """
+        pack_op = self.env["stock.pack.operation"].search([("id", "=", _id)])
+        if not pack_op and log_error_if_not_found:
+            self._log_pack_op_not_found_error(_id, params)
+        return pack_op
+
+    def _log_pack_op_not_found_error(self, not_found_id, params):
+        picking_id = (
+            self.env["stock.pack.operation.deleted"].get(not_found_id).picking_id
+        )
+        if not picking_id:
+            _logger.warning("Pack operations id %s unknown", not_found_id)
+            return
+        params.log(
+            picking_id=picking_id.id,
+            operation_id=None,
+            exception=_("Try to process a deleted pack operation %s") % not_found_id,
+            error_type="technical",
+        )
+
 
 class Parameters:
     def __init__(self, domain, action="resp", values=None):
