@@ -32,8 +32,10 @@
         "product_expiry",
     ],
     "data": [
+        "security/stock_pack_operation_deleted.xml",
         # Data
         "data/res_users.xml",
+        "data/stock_pack_operation_deleted.xml",
         # Views
         "views/res_users.xml",
         "views/res_partner.xml",
