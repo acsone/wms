@@ -21,5 +21,10 @@ class StockPackOperation(models.Model):
         stack = StringIO.StringIO()
         traceback.print_stack(file=stack)
         stack.seek(0)
-        _logger.warning("Operations %s deleted \n %s", ", ".join(ids), stack.getvalue())
+        _logger.warning(
+            "Operations %s deleted by %s \n %s",
+            ", ".join(ids),
+            self.env.user.name,
+            stack.getvalue(),
+        )
         return super(StockPackOperation, self).unlink()
