@@ -86,6 +86,12 @@ msgid "ID"
 msgstr ""
 
 #. module: alc_turnover_reporting
+#: code:addons/alc_turnover_reporting/wizards/export_report_turnover.py:188
+#, python-format
+msgid "Invalid period."
+msgstr ""
+
+#. module: alc_turnover_reporting
 #: model:ir.model.fields,field_description:alc_turnover_reporting.field_export_report_turnover___last_update
 msgid "Last Modified on"
 msgstr ""
