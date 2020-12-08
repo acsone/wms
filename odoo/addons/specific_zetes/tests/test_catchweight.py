@@ -36,6 +36,7 @@ class TestCatchweight(ZetesTest):
 
         self.assertEqual(result.respCode, str(constants.RESPONSE_CODE_OK))
 
+    @mute_logger("odoo.addons.specific_zetes.tools.domain_interface")
     def test_requ_catchweight_wrong_pack(self):
         """
         Check that the method return an error code if we provide a wrong
@@ -144,6 +145,7 @@ class TestCatchweight(ZetesTest):
         self.assertEqual(len(pack_op.pack_lot_ids), 2)
         self.assertEqual(pack_op.pack_lot_ids[1].qty, 5)
 
+    @mute_logger("odoo.addons.specific_zetes.tools.domain_interface")
     def test_resu_catchweight_wrong_pack_op(self):
         """
         Provides a wrong pack operation
