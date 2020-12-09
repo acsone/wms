@@ -131,6 +131,7 @@ class DomainInterface(object):
             operation_id=None,
             exception=_("Try to process a deleted pack operation %s") % not_found_id,
             error_type="technical",
+            requires_check=True,
         )
 
 
@@ -300,7 +301,14 @@ class Parameters:
                 )
             )
 
-    def log(self, picking_id=None, operation_id=None, exception=None, error_type=None):
+    def log(
+        self,
+        picking_id=None,
+        operation_id=None,
+        exception=None,
+        error_type=None,
+        requires_check=False,
+    ):
         """
         Log an error in Odoo
         :param picking_id:  The picking ID (stock.picking)
@@ -316,8 +324,7 @@ class Parameters:
         stack = StringIO.StringIO()
         traceback.print_stack(file=stack)
         stack.seek(0)
-
-        exception += u"\n%s" % stack.getvalue()
+        call_stack = stack.getvalue()
 
         self._domain.request.env["zetes.logger"].sudo().create(
             {
@@ -332,6 +339,8 @@ class Parameters:
                 "picking_id": picking_id,
                 "operation_id": operation_id,
                 "traceback": exception,
+                "call_stack": call_stack,
+                "requires_check": requires_check,
             }
         )
 

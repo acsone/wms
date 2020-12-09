@@ -13,6 +13,7 @@
                     </div>
                     <group>
                         <field name="name"/>
+                        <field name="traceback"/>
                         <field name="command"/>
                         <field name="action"/>
                         <field name="domain"/>
@@ -21,11 +22,18 @@
                         <field name="operation_id"/>
                         <field name="error_type"/>
                     </group>
-                    <separator for="request" string="Request"/>
-                    <field name="request"/>
-                    <field name="formatted_request"/>
-                    <separator for="traceback" string="Traceback"/>
-                    <field name="traceback"/>
+                    <notebook>
+                        <page name="request" string="Request">
+                            <group>
+                                <field name="request" nolabel="1" colspan="2"/>
+                                <field name="formatted_request" nolabel="1" colspan="2"/>
+                            </group>
+                        </page>
+                        <page name="tech" string="Debug">
+                            <separator for="call_stack" string="Call Stack"/>
+                            <field name="call_stack"/>
+                        </page>
+                    </notebook>
                 </sheet>
             </form>
         </field>
@@ -35,8 +43,11 @@
         <field name="name">zetes.logger.view.tree</field>
         <field name="model">zetes.logger</field>
         <field name="arch" type="xml">
-            <tree>
+            <tree decoration-danger="to_check">
+                <field name="to_check" invisible="1"/>
+                <field name="create_date"/>
                 <field name="name"/>
+                <field name="traceback"/>
                 <field name="command"/>
                 <field name="action"/>
                 <field name="domain"/>
@@ -44,7 +55,8 @@
                 <field name="picking_id"/>
                 <field name="operation_id"/>
                 <field name="error_type"/>
-                <field name="is_checked"/>
+                <button name="button_checked" string="Check" type="object" icon="fa-check-square-o" groups="stock.group_stock_manager"
+                        attrs="{'invisible': [('to_check', '=', False)]}"/>
             </tree>
         </field>
     </record>
@@ -62,7 +74,7 @@
                 <field name="user_id" />
                 <field name="error_type" />
                 <separator/>
-                <filter name="need_to_be_check" string="Need to be check" domain="[('is_checked', '=', False)]"/>
+                <filter name="need_to_be_check" string="Need to be check" domain="[('to_check', '=', True)]"/>
                 <separator/>
                 <filter name="human_error" string="Human errors" domain="[('error_type', '=', 'human')]"/>
                 <group expand="0" string="Group By">
@@ -81,7 +93,7 @@
         <field name="res_model">zetes.logger</field>
         <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
-        <field name="context">{'search_default_need_to_be_check': 1, 'search_default_human_error': 1}</field>
+        <field name="context">{'search_default_need_to_be_check': 1}</field>
     </record>
 
     <menuitem action="action_zetes_logger" id="menu_zetes_logger" parent="stock.menu_stock_config_settings" sequence="60" groups="stock.group_stock_manager"/>

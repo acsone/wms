@@ -391,6 +391,7 @@ class Catchweight(DomainInterface):
                 operation_id=pack_op.id,
                 exception=error_message,
                 error_type="human",
+                requires_check=True,
             )
             return pack_op.product_qty - pack_op.qty_done
 
