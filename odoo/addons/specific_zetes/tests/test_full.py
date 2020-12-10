@@ -249,6 +249,7 @@ class TestFull(ZetesTest):
     @mute_logger(
         "odoo.addons.base_report_to_printer.models.printing_server",
         "odoo.addons.specific_zetes.tools.domain_print",
+        "odoo.addons.specific_print.models.stock",
     )
     def test_full(self):
         """

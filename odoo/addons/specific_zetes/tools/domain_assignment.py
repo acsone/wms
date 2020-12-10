@@ -22,7 +22,7 @@ class Assignment(DomainInterface):
         "208030828,2.2.3,3iV_101,RESP_ASSIGNMENT,30,1,20170207,"
         "072820,30427733115352,0,,1,1,000000001625844,,00,,"
         "Vétérinaires,95,0,0,C,CLINIQUE VET. DU MONT-FALISE,"
-        "4520 WANZE,00018,"
+        "4520 WANZE,00018,B2C customer address,"
     )
     EXAMPLE_RESU = (
         "208030828,2.2.3,3iV_101,RESU_ASSIGNMENT,30,1,20170207,"
