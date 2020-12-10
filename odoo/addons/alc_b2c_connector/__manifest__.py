@@ -16,6 +16,7 @@
     "depends": [
         "account_payment_mode",
         "account_payment_sale",
+        "account_payment_partner",
         "alc_b2c_partner",
         "alc_sale_product_qty_backorder",
         "auth_api_key",

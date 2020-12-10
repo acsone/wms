@@ -29,6 +29,19 @@ class TestSalesService(CommonCase):
             }
         )
 
+        # create a specific payment mode for the VT
+        cls.vt_payment_mode = cls.env["account.payment.mode"].create(
+            {
+                "name": "Specific VT payment mode",
+                "company_id": cls.env.ref("base.main_company").id,
+                "bank_account_link": "variable",
+                "payment_method_id": cls.env.ref(
+                    "account.account_payment_method_manual_in"
+                ).id,
+                "payment_type": "inbound",
+            }
+        )
+
         # create a vete
         cls.vt_partner = cls.env["res.partner"].create(
             {
@@ -39,6 +52,7 @@ class TestSalesService(CommonCase):
                 "ref": "VTREF",
                 "email": "vt@vt.be",
                 "supplier_promotion_sale_allowed": True,
+                "customer_payment_mode_id": cls.vt_payment_mode.id,
             }
         )
 
@@ -235,6 +249,39 @@ class TestSalesService(CommonCase):
         self.assertEqual(sol.discount3, 0)  # discount in %
         self.assertEqual(sol.price_unit, 10)
         self.assertEqual(sol.product_qty, 10)
+
+    def test_04_01(self):
+        """
+        Data:
+            An existing veterinary with a specific payment_mode
+            A backend without payment_mode
+        Test case:
+            Create a new SO for a new partner and the existing veterinary
+        Expected result:
+            A new SO is created with:
+                payment_mode -> the one from the veterinary
+
+        """
+        self.b2c_backend.payment_mode_id = False
+        recipient_info = self._gen_recipent()
+        params = {
+            "id": 2,
+            "customer_ref": self.vt_partner.ref,
+            "date": ISO_DT_WITH_TZ,
+            "recipient": recipient_info,
+            "lines": [
+                {
+                    "line_id": 2,
+                    "sku": self.saleable_product.default_code,
+                    "quantity": 10,
+                }
+            ],
+        }
+        res = self.sales_service.dispatch("create", params=params)
+        self.assertTrue(res)
+        new_so = self._get_so_from_name(res["ref"])
+        self.assertTrue(new_so)
+        self.assertEqual(new_so.payment_mode_id, self.vt_payment_mode)
 
     def test_05(self):
         """

@@ -84,7 +84,8 @@ class SaleOrder(models.Model):
         order_data["sale_channel"] = b2c_backend.sale_channel
         order_data["date_order"] = self._parse_datetime_to_utc(data["date"])
         order_data["team_id"] = b2c_backend.sale_team_id.id
-        order_data["payment_mode_id"] = b2c_backend.payment_mode_id.id
+        if b2c_backend.payment_mode_id:
+            order_data["payment_mode_id"] = b2c_backend.payment_mode_id.id
         # invvoice, payment_term, pricelist, carrier_id, team
         updated_data = self.play_onchanges(order_data, order_data.keys())
         order_data.update(updated_data)
