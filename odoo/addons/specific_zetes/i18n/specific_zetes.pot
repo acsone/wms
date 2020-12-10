@@ -14,6 +14,11 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: specific_zetes
+#: model:ir.model.fields,field_description:specific_zetes.field_stock_picking_zetes_logger_count
+msgid "# of Zetes logs"
+msgstr ""
+
+#. module: specific_zetes
 #: model:ir.ui.view,arch_db:specific_zetes.manage_uop_view_form
 msgid "- Zone"
 msgstr ""
@@ -45,6 +50,16 @@ msgid "By your user"
 msgstr ""
 
 #. module: specific_zetes
+#: model:ir.ui.view,arch_db:specific_zetes.zetes_logger_view_form
+msgid "Call Stack"
+msgstr ""
+
+#. module: specific_zetes
+#: model:ir.model.fields,field_description:specific_zetes.field_zetes_logger_call_stack
+msgid "Call stack"
+msgstr ""
+
+#. module: specific_zetes
 #: model:ir.ui.view,arch_db:specific_zetes.manage_uop_view_form
 msgid "Cancel"
 msgstr ""
@@ -66,7 +81,7 @@ msgid "Cannot create the package. Please give the passport to your manager"
 msgstr ""
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_interface.py:223
+#: code:addons/specific_zetes/tools/domain_interface.py:251
 #, python-format
 msgid "Cannot format the value %s with type %s"
 msgstr ""
@@ -79,7 +94,7 @@ msgstr ""
 
 #. module: specific_zetes
 #: code:addons/specific_zetes/tools/domain_print.py:130
-#: code:addons/specific_zetes/tools/domain_print.py:184
+#: code:addons/specific_zetes/tools/domain_print.py:182
 #, python-format
 msgid "Cannot found a printer"
 msgstr ""
@@ -107,6 +122,11 @@ msgid "Change lots"
 msgstr ""
 
 #. module: specific_zetes
+#: model:ir.ui.view,arch_db:specific_zetes.zetes_logger_view_tree
+msgid "Check"
+msgstr ""
+
+#. module: specific_zetes
 #: model:ir.model.fields,field_description:specific_zetes.field_zetes_logger_is_checked
 msgid "Checked"
 msgstr ""
@@ -131,6 +151,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:specific_zetes.field_manage_uop_create_uid
 #: model:ir.model.fields,field_description:specific_zetes.field_manage_uop_line_create_uid
 #: model:ir.model.fields,field_description:specific_zetes.field_pack_operation_reserve_rel_create_uid
+#: model:ir.model.fields,field_description:specific_zetes.field_stock_pack_operation_deleted_create_uid
 #: model:ir.model.fields,field_description:specific_zetes.field_view_picking_line_create_uid
 #: model:ir.model.fields,field_description:specific_zetes.field_zetes_logger_create_uid
 msgid "Created by"
@@ -140,6 +161,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:specific_zetes.field_manage_uop_create_date
 #: model:ir.model.fields,field_description:specific_zetes.field_manage_uop_line_create_date
 #: model:ir.model.fields,field_description:specific_zetes.field_pack_operation_reserve_rel_create_date
+#: model:ir.model.fields,field_description:specific_zetes.field_stock_pack_operation_deleted_create_date
 #: model:ir.model.fields,field_description:specific_zetes.field_view_picking_line_create_date
 #: model:ir.model.fields,field_description:specific_zetes.field_zetes_logger_create_date
 msgid "Created on"
@@ -156,6 +178,11 @@ msgid "Cut"
 msgstr ""
 
 #. module: specific_zetes
+#: model:ir.ui.view,arch_db:specific_zetes.zetes_logger_view_form
+msgid "Debug"
+msgstr ""
+
+#. module: specific_zetes
 #: selection:stock.pack.operation,zetes_state:0
 #: selection:stock.picking,zetes_state:0
 msgid "Default"
@@ -168,6 +195,11 @@ msgid "Define if pickings for this partner need to be verify by an another picke
 msgstr ""
 
 #. module: specific_zetes
+#: model:ir.model,name:specific_zetes.model_stock_pack_operation_deleted
+msgid "Deleted Stock Pack Operation "
+msgstr ""
+
+#. module: specific_zetes
 #: model:ir.model.fields,field_description:specific_zetes.field_stock_pack_operation_operator_picking_destination_location_id
 msgid "Destination Location Zone"
 msgstr ""
@@ -176,6 +208,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:specific_zetes.field_manage_uop_display_name
 #: model:ir.model.fields,field_description:specific_zetes.field_manage_uop_line_display_name
 #: model:ir.model.fields,field_description:specific_zetes.field_pack_operation_reserve_rel_display_name
+#: model:ir.model.fields,field_description:specific_zetes.field_stock_pack_operation_deleted_display_name
 #: model:ir.model.fields,field_description:specific_zetes.field_stock_pack_operation_operator_display_name
 #: model:ir.model.fields,field_description:specific_zetes.field_view_picking_line_display_name
 #: model:ir.model.fields,field_description:specific_zetes.field_zetes_logger_display_name
@@ -200,7 +233,7 @@ msgstr ""
 
 #. module: specific_zetes
 #: code:addons/specific_zetes/tools/domain_print.py:145
-#: code:addons/specific_zetes/tools/domain_print.py:200
+#: code:addons/specific_zetes/tools/domain_print.py:198
 #, python-format
 msgid "Error during printing"
 msgstr ""
@@ -208,6 +241,11 @@ msgstr ""
 #. module: specific_zetes
 #: model:ir.model.fields,field_description:specific_zetes.field_zetes_logger_error_type
 msgid "Error type"
+msgstr ""
+
+#. module: specific_zetes
+#: model:ir.ui.view,arch_db:specific_zetes.view_picking_form
+msgid "Errors occurred into the Zetes picking process. Validation by Zetes has been disabled. Checks errors before manual validation of the picking."
 msgstr ""
 
 #. module: specific_zetes
@@ -234,10 +272,16 @@ msgstr ""
 #: model:ir.model.fields,field_description:specific_zetes.field_manage_uop_id
 #: model:ir.model.fields,field_description:specific_zetes.field_manage_uop_line_id
 #: model:ir.model.fields,field_description:specific_zetes.field_pack_operation_reserve_rel_id
-#: model:ir.model.fields,field_description:specific_zetes.field_stock_pack_operation_operator_id_9727
+#: model:ir.model.fields,field_description:specific_zetes.field_stock_pack_operation_deleted_id
+#: model:ir.model.fields,field_description:specific_zetes.field_stock_pack_operation_operator_id_9734
 #: model:ir.model.fields,field_description:specific_zetes.field_view_picking_line_id
 #: model:ir.model.fields,field_description:specific_zetes.field_zetes_logger_id
 msgid "ID"
+msgstr ""
+
+#. module: specific_zetes
+#: selection:zetes.logger,domain:0
+msgid "Itemmove"
 msgstr ""
 
 #. module: specific_zetes
@@ -249,6 +293,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:specific_zetes.field_manage_uop___last_update
 #: model:ir.model.fields,field_description:specific_zetes.field_manage_uop_line___last_update
 #: model:ir.model.fields,field_description:specific_zetes.field_pack_operation_reserve_rel___last_update
+#: model:ir.model.fields,field_description:specific_zetes.field_stock_pack_operation_deleted___last_update
 #: model:ir.model.fields,field_description:specific_zetes.field_stock_pack_operation_operator___last_update
 #: model:ir.model.fields,field_description:specific_zetes.field_view_picking_line___last_update
 #: model:ir.model.fields,field_description:specific_zetes.field_zetes_logger___last_update
@@ -259,6 +304,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:specific_zetes.field_manage_uop_line_write_uid
 #: model:ir.model.fields,field_description:specific_zetes.field_manage_uop_write_uid
 #: model:ir.model.fields,field_description:specific_zetes.field_pack_operation_reserve_rel_write_uid
+#: model:ir.model.fields,field_description:specific_zetes.field_stock_pack_operation_deleted_write_uid
 #: model:ir.model.fields,field_description:specific_zetes.field_view_picking_line_write_uid
 #: model:ir.model.fields,field_description:specific_zetes.field_zetes_logger_write_uid
 msgid "Last Updated by"
@@ -268,6 +314,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:specific_zetes.field_manage_uop_line_write_date
 #: model:ir.model.fields,field_description:specific_zetes.field_manage_uop_write_date
 #: model:ir.model.fields,field_description:specific_zetes.field_pack_operation_reserve_rel_write_date
+#: model:ir.model.fields,field_description:specific_zetes.field_stock_pack_operation_deleted_write_date
 #: model:ir.model.fields,field_description:specific_zetes.field_view_picking_line_write_date
 #: model:ir.model.fields,field_description:specific_zetes.field_zetes_logger_write_date
 msgid "Last Updated on"
@@ -301,7 +348,7 @@ msgid "Location"
 msgstr ""
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_location.py:179
+#: code:addons/specific_zetes/tools/domain_location.py:169
 #, python-format
 msgid "Location %s%s%s%s%s not found"
 msgstr ""
@@ -317,7 +364,7 @@ msgid "Location Checksum Right"
 msgstr ""
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_itempick.py:419
+#: code:addons/specific_zetes/tools/domain_itempick.py:417
 #, python-format
 msgid "Location not found for the product %s"
 msgstr ""
@@ -330,13 +377,13 @@ msgid "Lot"
 msgstr ""
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_location.py:240
+#: code:addons/specific_zetes/tools/domain_location.py:230
 #, python-format
 msgid "Lot %s has expired. Please contact the manager"
 msgstr ""
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_location.py:252
+#: code:addons/specific_zetes/tools/domain_location.py:242
 #, python-format
 msgid "Lot %s not found. Please contact the manager"
 msgstr ""
@@ -349,6 +396,12 @@ msgstr ""
 #. module: specific_zetes
 #: model:ir.model.fields,field_description:specific_zetes.field_view_picking_line_lot_voice_identifier
 msgid "Lot Voice Identifier"
+msgstr ""
+
+#. module: specific_zetes
+#: code:addons/specific_zetes/tools/domain_itempick.py:273
+#, python-format
+msgid "Lot pack operation not found"
 msgstr ""
 
 #. module: specific_zetes
@@ -404,22 +457,23 @@ msgid "Need to be check"
 msgstr ""
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/models/stock_picking.py:227
+#: code:addons/specific_zetes/models/stock_picking.py:256
+#: code:addons/specific_zetes/tools/domain_catchweight.py:134
+#: code:addons/specific_zetes/tools/domain_itempick.py:256
 #, python-format
 msgid "No pack operation found"
 msgstr ""
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/models/stock_picking.py:230
+#: code:addons/specific_zetes/models/stock_picking.py:259
 #, python-format
 msgid "No pack operation found with ID %s"
 msgstr ""
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_catchweight.py:132
 #: code:addons/specific_zetes/tools/domain_itemmove.py:168
 #: code:addons/specific_zetes/tools/domain_location.py:111
-#: code:addons/specific_zetes/tools/domain_location.py:132
+#: code:addons/specific_zetes/tools/domain_location.py:122
 #, python-format
 msgid "No picking found"
 msgstr ""
@@ -573,6 +627,7 @@ msgstr ""
 
 #. module: specific_zetes
 #: model:ir.model.fields,field_description:specific_zetes.field_manage_uop_line_product_id
+#: model:ir.model.fields,field_description:specific_zetes.field_stock_pack_operation_deleted_product_id
 #: model:ir.model.fields,field_description:specific_zetes.field_view_picking_line_product_id
 msgid "Product"
 msgstr ""
@@ -617,6 +672,11 @@ msgid "Request"
 msgstr ""
 
 #. module: specific_zetes
+#: model:ir.model.fields,field_description:specific_zetes.field_zetes_logger_requires_check
+msgid "Requires check"
+msgstr ""
+
+#. module: specific_zetes
 #: model:ir.model.fields,field_description:specific_zetes.field_pack_operation_reserve_rel_reserve_location_id
 msgid "Reserve"
 msgstr ""
@@ -657,7 +717,7 @@ msgid "Skipped"
 msgstr ""
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_interface.py:252
+#: code:addons/specific_zetes/tools/domain_interface.py:280
 #, python-format
 msgid "Some attributes are not valid: {}"
 msgstr ""
@@ -689,12 +749,22 @@ msgid "Stock Pack Operation Report"
 msgstr ""
 
 #. module: specific_zetes
+#: model:ir.model.fields,field_description:specific_zetes.field_stock_pack_operation_deleted_picking_id
+msgid "Stock Picking"
+msgstr ""
+
+#. module: specific_zetes
 #: selection:zetes.logger,error_type:0
 msgid "Technical"
 msgstr ""
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_interface.py:259
+#: model:ir.model.fields,field_description:specific_zetes.field_stock_pack_operation_deleted_deleted_id
+msgid "The identifier of the deleted pack operation"
+msgstr ""
+
+#. module: specific_zetes
+#: code:addons/specific_zetes/tools/domain_interface.py:287
 #, python-format
 msgid "The number of attributes doen't correspond to the example size"
 msgstr ""
@@ -712,39 +782,54 @@ msgid "The picking type determines the picking view"
 msgstr ""
 
 #. module: specific_zetes
+#: model:ir.model.fields,help:specific_zetes.field_stock_pack_operation_deleted_picking_id
+msgid "The stock operation where the delted packing has been made"
+msgstr ""
+
+#. module: specific_zetes
 #: code:addons/specific_zetes/tools/domain_usercontext.py:110
 #, python-format
 msgid "The user should be in the group Inventory"
 msgstr ""
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_interface.py:271
+#: code:addons/specific_zetes/tools/domain_interface.py:299
 #, python-format
 msgid "There are some missing mandatory values: {}"
 msgstr ""
 
 #. module: specific_zetes
 #: code:addons/specific_zetes/tools/domain_itemmove.py:196
-#: code:addons/specific_zetes/tools/domain_itempick.py:337
+#: code:addons/specific_zetes/tools/domain_itempick.py:335
 #, python-format
 msgid "There is no lines for the picking %s"
 msgstr ""
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_location.py:199
+#: code:addons/specific_zetes/tools/domain_location.py:189
 #, python-format
 msgid "This location is not a reserve"
 msgstr ""
 
 #. module: specific_zetes
+#: model:ir.model.fields,field_description:specific_zetes.field_zetes_logger_to_check
+msgid "To check"
+msgstr ""
+
+#. module: specific_zetes
 #: model:ir.model.fields,field_description:specific_zetes.field_zetes_logger_traceback
-#: model:ir.ui.view,arch_db:specific_zetes.zetes_logger_view_form
 msgid "Traceback"
 msgstr ""
 
 #. module: specific_zetes
 #: model:ir.model,name:specific_zetes.model_stock_picking
 msgid "Transfer"
+msgstr ""
+
+#. module: specific_zetes
+#: code:addons/specific_zetes/tools/domain_interface.py:132
+#, python-format
+msgid "Try to process a deleted pack operation %s"
 msgstr ""
 
 #. module: specific_zetes
@@ -832,13 +917,13 @@ msgid "You cannot pick more than %s unit of the product %s"
 msgstr ""
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/models/stock_picking.py:207
+#: code:addons/specific_zetes/models/stock_picking.py:236
 #, python-format
 msgid "You cannot split this pack operation because the new quantity (%s) is geater than the available quantity (%s)"
 msgstr ""
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/models/stock_picking.py:235
+#: code:addons/specific_zetes/models/stock_picking.py:264
 #, python-format
 msgid "You cannot split this pack operation lot because the new quantity (%s) is greater than the available quantity (%s)"
 msgstr ""
@@ -856,13 +941,26 @@ msgstr ""
 
 #. module: specific_zetes
 #: model:ir.actions.act_window,name:specific_zetes.action_zetes_logger
+#: model:ir.model,name:specific_zetes.model_zetes_logger
+#: model:ir.model.fields,field_description:specific_zetes.field_stock_picking_zetes_logger_ids
 #: model:ir.ui.menu,name:specific_zetes.menu_zetes_logger
 msgid "Zetes logger"
 msgstr ""
 
 #. module: specific_zetes
+#: model:ir.model.fields,field_description:specific_zetes.field_stock_picking_zetes_logger_requires_check
+msgid "Zetes logger requires check"
+msgstr ""
+
+#. module: specific_zetes
 #: model:ir.ui.view,arch_db:specific_zetes.zetes_logger_view_form
 msgid "Zetes loggers"
+msgstr ""
+
+#. module: specific_zetes
+#: model:ir.actions.act_window,name:specific_zetes.act_stock_picking_2_zetes_logger
+#: model:ir.ui.view,arch_db:specific_zetes.view_picking_form
+msgid "Zetes logs"
 msgstr ""
 
 #. module: specific_zetes
@@ -906,10 +1004,5 @@ msgstr ""
 #. module: specific_zetes
 #: model:ir.model,name:specific_zetes.model_view_picking_line
 msgid "view.picking.line"
-msgstr ""
-
-#. module: specific_zetes
-#: model:ir.model,name:specific_zetes.model_zetes_logger
-msgid "zetes.logger"
 msgstr ""
 
