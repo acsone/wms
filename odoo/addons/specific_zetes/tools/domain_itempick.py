@@ -216,8 +216,8 @@ class Itempick(DomainInterface):
           left JOIN res_partner AS customer ON picking.customer_id = customer.id
         WHERE picking.id = %s;
         """
-        self.request.env.cr.execute(print_price_query, (picking_id,))
-        print_price_result = self.request.env.cr.fetchone()
+        self.env.cr.execute(print_price_query, (picking_id,))
+        print_price_result = self.env.cr.fetchone()
         is_print_price = False
         if print_price_result:
             is_price_on_labels, is_b2c_customer = print_price_result
@@ -231,8 +231,8 @@ class Itempick(DomainInterface):
           INNER JOIN stock_picking_type AS picking_type
           ON picking.picking_type_id = picking_type.id
         WHERE picking.id = %s"""
-        self.request.env.cr.execute(is_portable_printer_result_query, (picking_id,))
-        is_portable_printer_result = self.request.env.cr.fetchone()
+        self.env.cr.execute(is_portable_printer_result_query, (picking_id,))
+        is_portable_printer_result = self.env.cr.fetchone()
 
         if is_portable_printer_result and is_portable_printer_result[0]:
             print_on_portable_printer = "1"
@@ -244,26 +244,24 @@ class Itempick(DomainInterface):
         is_cut_itempick = False
         if params.Usf06 == constants.OP_CUT:
             is_cut_itempick = True
-            line_id = params.Usf02
-            if isinstance(line_id, int):
-                line_id = str(line_id)
-
-            line_id_list = line_id.split("_")
-            if len(line_id_list) == 2:
-                pack_operation_id = int(line_id_list[0])
-                lot_id = int(line_id_list[1])
-            else:
-                pack_operation_id = int(line_id)
-                lot_id = None
-
             picked_qty = int(params.Usf04 or 0)
 
-            pack_op = self.request.env["stock.pack.operation"].browse(pack_operation_id)
+            pack_operation_id, lot_id = params.parse_line_id(params.Usf02)
+            pack_op = self._get_pack_operation(pack_operation_id, params=params)
+            if not pack_op:
+                result = Parameters(self, action="resp")
+                result.update(
+                    {
+                        "respCode": constants.RESPONSE_CODE_ERROR,
+                        "respMsg": _("No pack operation found"),
+                    }
+                )
+                return result.format()
             # Check if the product is tracked or not
             product = pack_op.product_id
             if product.tracking != "none":
                 # Retrieve the pack lot
-                pack_lot = self.request.env["stock.pack.operation.lot"].search(
+                pack_lot = self.env["stock.pack.operation.lot"].search(
                     [("operation_id", "=", pack_operation_id), ("lot_id", "=", lot_id)],
                     limit=1,
                 )
@@ -272,7 +270,7 @@ class Itempick(DomainInterface):
                     result.update(
                         {
                             "respCode": constants.RESPONSE_CODE_ERROR,
-                            "respMsg": "Lot pack operation not found",
+                            "respMsg": _("Lot pack operation not found"),
                         }
                     )
                     return result.format()
@@ -298,7 +296,7 @@ class Itempick(DomainInterface):
                 error_type="human",
             )
 
-            with Savepoint(self.request.env.cr) as lot_savepoint:
+            with Savepoint(self.env.cr) as lot_savepoint:
                 try:
                     # Call the method to skip this operation
                     pack_op._skip_operation(
@@ -315,7 +313,7 @@ class Itempick(DomainInterface):
                     # modifications done before this code block)
 
         # Search all pack operations for this picking
-        lines = self.request.env["stock.pack.operation"].search(
+        lines = self.env["stock.pack.operation"].search(
             [
                 ("picking_id", "=", picking_id),
                 ("location_id.is_valid_location", "=", True),
@@ -459,10 +457,10 @@ class Itempick(DomainInterface):
             # AND quant.location_id = %s
             # AND quant.reservation_id IS NULL
             # """
-            # self.request.env.cr.execute(available_qty_query,
+            # self.env.cr.execute(available_qty_query,
             #                             (line.product_id.id,
             #                              line.location_id.id))
-            # query_result = self.request.env.cr.fetchone()
+            # query_result = self.env.cr.fetchone()
             # available_qty = query_result and query_result[0] or 0
             #
             # forcast_available_qty = available_qty - line.product_qty
@@ -493,22 +491,9 @@ class Itempick(DomainInterface):
         """
         if not params.pickLineId:
             return
-
-        line_id = params.pickLineId
-
-        if isinstance(line_id, int):
-            line_id = str(line_id)
-
-        line_id_list = line_id.split("_")
-        if len(line_id_list) == 2:
-            pack_operation_id = int(line_id_list[0])
-            lot_id = int(line_id_list[1])
-        else:
-            pack_operation_id = int(line_id)
-            lot_id = None
-
-        pack_op = self.request.env["stock.pack.operation"].browse(pack_operation_id)
-        if not len(pack_op):
+        pack_operation_id, lot_id = params.parse_line_id(params.pickLineId)
+        pack_op = self._get_pack_operation(pack_operation_id, params=params)
+        if not pack_op:
             return
 
         try:

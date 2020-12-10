@@ -36,6 +36,32 @@ class StockPicking(models.Model):
         "Nbr of actions", compute="_compute_nbr_actions", readonly=True
     )
     is_passport_required = fields.Boolean("Passport required", default=False)
+    zetes_logger_ids = fields.One2many(
+        comodel_name="zetes.logger", inverse_name="picking_id", string="Zetes logger"
+    )
+    zetes_logger_count = fields.Integer(
+        compute="_compute_zetes_logger_count", string="# of Zetes logs"
+    )
+    zetes_logger_requires_check = fields.Boolean(
+        compute="_compute_zetes_logger_requires_check", store=True
+    )
+
+    @api.depends("zetes_logger_ids", "zetes_logger_ids.to_check")
+    def _compute_zetes_logger_requires_check(self):
+        for record in self:
+            record.zetes_logger_requires_check = any(
+                record.zetes_logger_ids.mapped("to_check")
+            )
+
+    def _compute_zetes_logger_count(self):
+        zetes_logger_groups = self.env["zetes.logger"].read_group(
+            domain=[("picking_id", "in", self.ids)],
+            fields=["picking_id"],
+            groupby=["picking_id"],
+        )
+        for group in zetes_logger_groups:
+            picking = self.browse(group["picking_id"][0])
+            picking.zetes_logger_count = group["picking_id_count"]
 
     @api.model
     def create(self, vals):
@@ -109,10 +135,13 @@ class StockPicking(models.Model):
 
     @api.multi
     def validate_picking(self):
-        for picking in self:
+        for picking in self.filtered(lambda p: not p.zetes_logger_requires_check):
             # The method "do_new_transfer" is the method called when
             # an user click on "Validate" on a picking.
             result = picking.do_new_transfer()
+
+            # TO BE REMOVED ... this code is already implemented into
+            # stock_picking_backorder
 
             # In Odoo this button will open a wizard in following case:
             # 1. A wizard if no quantity has been defined on lines

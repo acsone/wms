@@ -123,3 +123,33 @@ class TestItemmoveParking(ZetesParkingTest):
         self.assertEqual(pack_op.zetes_state, constants.MOVE_DONE)
         self.assertEqual(pack_op.qty_done, 100)
         self.assertEqual(len(pack_op.pack_lot_ids), 1)
+
+    def test_resu_itempick_deleted_pack_op(self):
+        """
+        Set the deleted pack op as done
+        :return:
+        """
+        pack_op = self.picking_parking.pack_operation_product_ids
+        pack_op.ensure_one()
+
+        pack_op.pack_lot_ids.write({"qty": 100})
+        pack_op.write({"qty_done": 100})
+
+        self.assertEqual(pack_op.qty_done, 100)
+
+        pack_op_id = pack_op.id
+        pack_op.unlink()
+        self.assertFalse(self.picking_parking.is_zetes_error)
+
+        domain = Itemmove(self._default_header(), mock.MagicMock(name="Savepoint()"))
+        request_params = Parameters(domain, action="resu")
+        request_params.update(
+            {
+                "moveLineId": pack_op_id,
+                "moveStatus": constants.MOVE_DONE,
+                "itemMoveType": constants.MOVE_TYPE_LOAD,
+            }
+        )
+
+        domain.resu(request_params)
+        self.assertTrue(self.picking_parking.is_zetes_error)

@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 import logging
+import StringIO
+import traceback
 import uuid
 
 from odoo import _
@@ -50,9 +52,7 @@ class DomainInterface(object):
         self._header = header
         # Retrieve the current user
         operator_code = header[constants.USER_INDEX]
-        self._operator_user = (
-            self.request.env["res.users"].sudo().get_user(operator_code)
-        )
+        self._operator_user = self.env["res.users"].sudo().get_user(operator_code)
         if self._operator_user:
             self.request.context = frozendict(
                 self.request.context,
@@ -105,6 +105,34 @@ class DomainInterface(object):
         :return:
         """
         raise NotImplementedError("Please implement this method")
+
+    @property
+    def env(self):
+        return self.request.env
+
+    def _get_pack_operation(self, _id, params, log_error_if_not_found=True):
+        """
+        Return the pack operation if it exists (None otherwise)
+        """
+        pack_op = self.env["stock.pack.operation"].search([("id", "=", _id)])
+        if not pack_op and log_error_if_not_found:
+            self._log_pack_op_not_found_error(_id, params)
+        return pack_op
+
+    def _log_pack_op_not_found_error(self, not_found_id, params):
+        picking_id = (
+            self.env["stock.pack.operation.deleted"].get(not_found_id).picking_id
+        )
+        if not picking_id:
+            _logger.warning("Pack operations id %s unknown", not_found_id)
+            return
+        params.log(
+            picking_id=picking_id.id,
+            operation_id=None,
+            exception=_("Try to process a deleted pack operation %s") % not_found_id,
+            error_type="technical",
+            requires_check=True,
+        )
 
 
 class Parameters:
@@ -273,7 +301,14 @@ class Parameters:
                 )
             )
 
-    def log(self, picking_id=None, operation_id=None, exception=None, error_type=None):
+    def log(
+        self,
+        picking_id=None,
+        operation_id=None,
+        exception=None,
+        error_type=None,
+        requires_check=False,
+    ):
         """
         Log an error in Odoo
         :param picking_id:  The picking ID (stock.picking)
@@ -285,6 +320,11 @@ class Parameters:
 
         if exception and not isinstance(exception, (str, unicode)):
             exception = str(exception)
+
+        stack = StringIO.StringIO()
+        traceback.print_stack(file=stack)
+        stack.seek(0)
+        call_stack = stack.getvalue()
 
         self._domain.request.env["zetes.logger"].sudo().create(
             {
@@ -299,5 +339,28 @@ class Parameters:
                 "picking_id": picking_id,
                 "operation_id": operation_id,
                 "traceback": exception,
+                "call_stack": call_stack,
+                "requires_check": requires_check,
             }
         )
+
+    def parse_line_id(self, line_id):
+        """
+        Parse value from request and extract the lot_id and the pack_operation
+        id from lineId
+        return tuple (pack_operation id, lot id)
+        """
+        if not line_id:
+            return None, None
+
+        if isinstance(line_id, int):
+            line_id = str(line_id)
+
+        line_id_list = line_id.split("_")
+        if len(line_id_list) == 2:
+            pack_operation_id = int(line_id_list[0])
+            lot_id = int(line_id_list[1])
+        else:
+            pack_operation_id = int(line_id)
+            lot_id = None
+        return pack_operation_id, lot_id

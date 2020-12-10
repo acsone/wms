@@ -113,19 +113,9 @@ class Location(DomainInterface):
             )
             return result.format()
 
-        if isinstance(line_id, int):
-            line_id = str(line_id)
-
-        line_id_list = line_id.split("_")
-        if len(line_id_list) == 2:
-            pack_operation_id = int(line_id_list[0])
-            lot_id = int(line_id_list[1])
-        else:
-            pack_operation_id = int(line_id)
-            lot_id = None
-
-        pack_op = self.request.env["stock.pack.operation"].browse(pack_operation_id)
-        if not len(pack_op):
+        pack_operation_id, lot_id = params.parse_line_id(line_id)
+        pack_op = self._get_pack_operation(pack_operation_id, params=params)
+        if not pack_op:
             result.update(
                 {
                     "respCode": constants.RESPONSE_CODE_ERROR,
@@ -143,7 +133,7 @@ class Location(DomainInterface):
         if regex_result:
             shelf = regex_result.group(1)
 
-        location = self.request.env["stock.location"].search(
+        location = self.env["stock.location"].search(
             [
                 ("zone", "=", params.Cri01),
                 ("corridor", "=", params.Cri02),
@@ -201,7 +191,7 @@ class Location(DomainInterface):
                 )
                 return result.format()
 
-            self.request.env["pack.operation.reserve.rel"].create(
+            self.env["pack.operation.reserve.rel"].create(
                 {
                     "pack_operation_id": pack_op.id,
                     "reserve_location_id": location.id,
@@ -227,7 +217,7 @@ class Location(DomainInterface):
 
         # Search a specific lot
         if params.Cri07:
-            specific_lot = self.request.env["stock.production.lot"].search(
+            specific_lot = self.env["stock.production.lot"].search(
                 [("checksum", "=", params.Cri07), ("product_id", "=", product.id)],
                 limit=1,
             )

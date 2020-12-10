@@ -321,17 +321,10 @@ class Itemmove(DomainInterface):
         :param params:
         :return:
         """
-        line_id = params.moveLineId
-        if not line_id:
-            return
 
-        if isinstance(line_id, int):
-            line_id = str(line_id)
-
-        pack_operation_id = int(line_id.split("_")[0])
-
-        pack_op = self.request.env["stock.pack.operation"].browse(pack_operation_id)
-        if not len(pack_op):
+        pack_operation_id, _lot_id = params.parse_line_id(params.moveLineId)
+        pack_op = self._get_pack_operation(pack_operation_id, params=params)
+        if not pack_op:
             return
 
         try:
@@ -372,7 +365,7 @@ class Itemmove(DomainInterface):
         # Search all pack operations for this picking
         # The state of the line must be
         # "MOVE_DEFAULT", "MOVE_SKIPPED" or "MOVE_FULL"
-        lines = self.request.env["stock.pack.operation"].search(
+        lines = self.env["stock.pack.operation"].search(
             [
                 ("picking_id", "=", picking_id),
                 ("location_id.is_valid_location", "=", True),
@@ -398,15 +391,15 @@ class Itemmove(DomainInterface):
         GROUP BY quant.lot_id;
         """
 
-        production_lot_obj = self.request.env["stock.production.lot"]
+        production_lot_obj = self.env["stock.production.lot"]
         reserved_lines = []
         put_away_lines = []
         for line in lines:
-            self.request.env.cr.execute(
+            self.env.cr.execute(
                 reserved_quants_query,
                 (line.location_id.id, line.product_id.id, picking_id),
             )
-            query_result = self.request.env.cr.fetchall()
+            query_result = self.env.cr.fetchall()
             for quant in query_result:
                 lot = production_lot_obj.browse(quant[0])
                 reserved_lines.append((line, lot, quant[1], constants.MOVE_UNLOAD))
@@ -442,7 +435,7 @@ class Itemmove(DomainInterface):
         # Search ONLY ONE pack operations for this picking
         # The state of this line must be
         # "MOVE_DEFAULT" or "MOVE_SKIPPED"
-        lines = self.request.env["stock.pack.operation"].search(
+        lines = self.env["stock.pack.operation"].search(
             [
                 ("picking_id", "=", picking_id),
                 ("zetes_state", "in", [constants.MOVE_DEFAULT, constants.MOVE_SKIPPED]),

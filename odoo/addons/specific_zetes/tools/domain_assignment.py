@@ -161,7 +161,7 @@ class Assignment(DomainInterface):
         # If the picker want to continue a picking (Cri02 is not empty)
         else:
             picking_id = int(params.Cri02)
-            picking = self.request.env["stock.picking"].browse(picking_id)
+            picking = self.env["stock.picking"].browse(picking_id)
 
         # Assign the picking
         picking.assign_operator()
@@ -245,7 +245,7 @@ class Assignment(DomainInterface):
         if not picking_id:
             return
 
-        picking = self.request.env["stock.picking"].browse(int(picking_id))
+        picking = self.env["stock.picking"].browse(int(picking_id))
         if not len(picking):
             return
         picking._lock_rows()
@@ -344,12 +344,12 @@ WHERE picking.picking_type_subcode = 'PICK'
             "LIMIT 1 "
             "FOR UPDATE OF picking SKIP LOCKED;"
         )
-        self.request.env.cr.execute(picking_query, query_values)
-        query_result = self.request.env.cr.fetchone()
+        self.env.cr.execute(picking_query, query_values)
+        query_result = self.env.cr.fetchone()
 
         if query_result and query_result[0]:
             picking_id = query_result[0]
-            picking = self.request.env["stock.picking"].browse(picking_id)
+            picking = self.env["stock.picking"].browse(picking_id)
         else:
             return False
 
@@ -410,12 +410,12 @@ WHERE picking.state IN ('partially_available', 'assigned')
             "ORDER BY picking.operator_id, " "picking.rank DESC " "LIMIT 1;"
         )
 
-        self.request.env.cr.execute(picking_query, query_values)
-        query_result = self.request.env.cr.fetchone()
+        self.env.cr.execute(picking_query, query_values)
+        query_result = self.env.cr.fetchone()
 
         if query_result and query_result[0]:
             picking_id = query_result[0]
-            picking = self.request.env["stock.picking"].browse(picking_id)
+            picking = self.env["stock.picking"].browse(picking_id)
             return picking
 
         # Picking not found. Try to create a new one.
@@ -450,15 +450,15 @@ WHERE picking.state IN ('partially_available', 'assigned')
 
         counter = 0
         while counter < MAX_RETRY:
-            self.request.env.cr.execute(report_query, query_values)
-            report_id = self.request.env.cr.fetchone()
+            self.env.cr.execute(report_query, query_values)
+            report_id = self.env.cr.fetchone()
             if not report_id:
                 break
 
             report_id = report_id[0]
 
             model_name = "report.stock.refill.arrange"
-            report = self.request.env[model_name].browse(report_id)
+            report = self.env[model_name].browse(report_id)
             # Create the picking
             picking = report.create_picking()
             is_valid_location = True
@@ -539,12 +539,12 @@ WHERE picking.state IN ('partially_available', 'assigned')
             "ORDER BY picking.operator_id, " "picking.rank DESC " "LIMIT 1;"
         )
 
-        self.request.env.cr.execute(picking_query, query_values)
-        query_result = self.request.env.cr.fetchone()
+        self.env.cr.execute(picking_query, query_values)
+        query_result = self.env.cr.fetchone()
 
         if query_result and query_result[0]:
             picking_id = query_result[0]
-            picking = self.request.env["stock.picking"].browse(picking_id)
+            picking = self.env["stock.picking"].browse(picking_id)
             return picking
 
         # Picking not found. Try to create a new one.
@@ -578,14 +578,14 @@ WHERE picking.state IN ('partially_available', 'assigned')
 
         counter = 0
         while counter < MAX_RETRY:
-            self.request.env.cr.execute(report_query, query_values)
-            report_id = self.request.env.cr.fetchone()
+            self.env.cr.execute(report_query, query_values)
+            report_id = self.env.cr.fetchone()
             if not report_id:
                 break
             report_id = report_id[0]
 
             model_name = "report.stock.refill.reassort"
-            report = self.request.env[model_name].browse(report_id)
+            report = self.env[model_name].browse(report_id)
 
             # Create the picking
             picking = report.create_picking()

@@ -3,6 +3,7 @@ import mock
 
 from .. import constants
 from ..tools.domain_assignment import Assignment
+from ..tools.domain_catchweight import Catchweight
 from ..tools.domain_interface import Parameters
 from .zetes_test_classes import ROUND_CODE, ZetesTest
 
@@ -113,3 +114,49 @@ class TestAssignemnt(ZetesTest):
         domain.resu(request_params)
         self.assertFalse(self.picking.operator_id)
         self.assertIsNotNone(self.picking.checksum)
+
+    def test_resu_assignment_pack_op_error(self):
+        """
+        Check that a picking is not validated on resu_assignment if
+        a resu_catchweight failed due to a deleted pack operation id
+        """
+        assignment_domain = Assignment(
+            self._default_header(), mock.MagicMock(name="Savepoint()")
+        )
+        resu_assignment_params = Parameters(assignment_domain, action="resu")
+        # Assign and start the picking
+        resu_assignment_params.update(
+            {"groupNum": self.picking.id, "assignmentStatus": constants.AS_START}
+        )
+
+        assignment_domain.resu(resu_assignment_params)
+
+        # unlink and execute pack operation
+        pack_op = self.picking.pack_operation_product_ids
+        pack_op.ensure_one()
+        pack_op_id = pack_op.id
+        pack_op.unlink()
+        catchweight_domain = Catchweight(
+            self._default_header(), mock.MagicMock(name="Savepoint()")
+        )
+        resu_catchweight_params = Parameters(catchweight_domain, action="resu")
+        resu_catchweight_params.update(
+            {"lineId": pack_op_id, "Usf01": None, "Usf02": 5, "Usf03": None}
+        )
+        catchweight_domain.resu(resu_catchweight_params)
+
+        # Finalize the picking (set the state to done)
+        resu_assignment_params.update(
+            {"assignmentStatus": constants.AS_DONE, "Usf01": "1"}
+        )
+        assignment_domain.resu(resu_assignment_params)
+
+        # the picking should not be done
+        self.assertNotEqual(self.picking.state, "done")
+        self.assertTrue(self.picking.zetes_logger_requires_check)
+
+        # if we check the zetes loggers and validate the picking again
+        # the picking wil be done
+        self.picking.zetes_logger_ids.button_checked()
+        self.picking.validate_picking()
+        self.assertEqual(self.picking.state, "done")

@@ -25,6 +25,7 @@ ZETES_DOMAINS = [
     ("assignment", "Assignment"),
     ("catchweight", "Catchweight"),
     ("itempick", "Itempick"),
+    ("itemmove", "Itemmove"),
     ("location", "Location"),
     ("print", "Print"),
     ("refdata", "Refdata"),

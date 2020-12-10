@@ -125,11 +125,13 @@ class Catchweight(DomainInterface):
         result = Parameters(self, action="resp")
 
         line_id = params.pickLineId
-        if not line_id:
+        pack_operation_id, _lot_id = params.parse_line_id(line_id)
+        pack_op = self._get_pack_operation(pack_operation_id, params=params)
+        if not pack_op:
             result.update(
                 {
                     "respCode": constants.RESPONSE_CODE_ERROR,
-                    "respMsg": _("No picking found"),
+                    "respMsg": _("No pack operation found"),
                 }
             )
             return result.format()
@@ -144,10 +146,8 @@ class Catchweight(DomainInterface):
         LIMIT 1;
         """
 
-        self.request.env.cr.execute(
-            get_lot_query, (params.productCode, params.lotNumber)
-        )
-        query_result = self.request.env.cr.fetchone()
+        self.env.cr.execute(get_lot_query, (params.productCode, params.lotNumber))
+        query_result = self.env.cr.fetchone()
         if query_result:
             life_date_str = query_result[0]
             if life_date_str:
@@ -200,23 +200,11 @@ class Catchweight(DomainInterface):
         :param params:
         :return:
         """
-        line_id = params.lineId
-        if not line_id:
+        pack_operation_id, lot_id = params.parse_line_id(params.lineId)
+        if not pack_operation_id:
             return
-
-        if isinstance(line_id, int):
-            line_id = str(line_id)
-
-        line_id_list = line_id.split("_")
-        if len(line_id_list) == 2:
-            pack_operation_id = int(line_id_list[0])
-            lot_id = int(line_id_list[1])
-        else:
-            pack_operation_id = int(line_id)
-            lot_id = None
-
-        pack_op = self.request.env["stock.pack.operation"].browse(pack_operation_id)
-        if not len(pack_op):
+        pack_op = self._get_pack_operation(pack_operation_id, params=params)
+        if not pack_op:
             return
 
         try:
@@ -229,12 +217,12 @@ class Catchweight(DomainInterface):
             lot = None
             if lot_number:
                 if lot_id:
-                    lot = self.request.env["stock.production.lot"].search(
+                    lot = self.env["stock.production.lot"].search(
                         [("id", "=", lot_id), ("voice_identifier", "=", lot_number)]
                     )
 
                 if not lot:
-                    lot = self.request.env["stock.production.lot"].search(
+                    lot = self.env["stock.production.lot"].search(
                         [
                             ("product_id", "=", pack_op.product_id.id),
                             ("voice_identifier", "=", lot_number),
@@ -274,7 +262,7 @@ class Catchweight(DomainInterface):
                 == constants.RANGEMENT_ASSIGNMENT
                 and not virtual_qty
             ):
-                reserve_rel_obj = self.request.env["pack.operation.reserve.rel"]
+                reserve_rel_obj = self.env["pack.operation.reserve.rel"]
                 reserve_rel = reserve_rel_obj.search(
                     [("pack_operation_id", "=", pack_op.id), ("lot_id", "=", lot_id)],
                     limit=1,
@@ -343,8 +331,8 @@ class Catchweight(DomainInterface):
         """
         query_values = [pack_op.product_id.id, pack_op.location_id.id]
 
-        self.request.env.cr.execute(available_qty_query, tuple(query_values))
-        query_result = self.request.env.cr.fetchone()
+        self.env.cr.execute(available_qty_query, tuple(query_values))
+        query_result = self.env.cr.fetchone()
         available_qty = query_result and query_result[0] or 0
 
         if available_qty != actual_stock:
@@ -360,7 +348,7 @@ class Catchweight(DomainInterface):
                 )
             )
             if lot_id:
-                lot = self.request.env["stock.production.lot"].browse(lot_id)
+                lot = self.env["stock.production.lot"].browse(lot_id)
                 error_message += " (lot %s)" % lot.name
 
             _logger.error(error_message)
@@ -403,6 +391,7 @@ class Catchweight(DomainInterface):
                 operation_id=pack_op.id,
                 exception=error_message,
                 error_type="human",
+                requires_check=True,
             )
             return pack_op.product_qty - pack_op.qty_done
 

@@ -23,12 +23,36 @@
         </field>
     </record>
 
+    <record id="act_stock_picking_2_zetes_logger" model="ir.actions.act_window">
+        <field name="name">Zetes logs</field>
+        <field name="res_model">zetes.logger</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'search_default_picking_id': active_id}</field>
+    </record>
+
     <record id="view_picking_form" model="ir.ui.view">
         <field name="name">view.picking.form.inherit</field>
         <field name="inherit_id" ref="stock.view_picking_form"/>
         <field name="model">stock.picking</field>
         <field name="priority" eval="20"/>
         <field name="arch" type="xml">
+            <header position="after">
+                <field name="zetes_logger_requires_check" invisible="1"/>
+                <div class="alert alert-danger"
+                     style="margin-bottom:0px;"
+                     role="alert"
+                     attrs="{'invisible': [('zetes_logger_requires_check', '=', False)]}">
+                    Errors occurred into the Zetes picking process. Validation by Zetes has been disabled. Checks errors before manual validation of the picking.
+                </div>
+            </header>
+             <div name="button_box" position="inside">
+                <button class="oe_stat_button" type="action" name="%(specific_zetes.act_stock_picking_2_zetes_logger)d"
+                    attrs="{'invisible': [('zetes_logger_count', '=', False)]}"
+                    icon="fa-cogs">
+                    <field string="Zetes logs" name="zetes_logger_count" widget="statinfo"/>
+                </button>
+            </div>
             <xpath expr="//field[@name='priority']" position="after">
                 <field name="zetes_state" readonly="1"/>
                 <field name="is_zetes_error" readonly="1"/>

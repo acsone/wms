@@ -102,7 +102,7 @@ class Usercontext(DomainInterface):
             return result.format()
 
         # The picker (zetes user) must have the group "warehouse"
-        user = self.request.env.user
+        user = self.env.user
         if not user.has_group("stock.group_stock_user"):
             result.update(
                 {
@@ -158,8 +158,8 @@ LIMIT 1;
                 "op_zetes_state": (constants.OP_DEFAULT, constants.OP_SKIPPED),
             }
 
-            self.request.env.cr.execute(picking_query, query_values)
-            query_result = self.request.env.cr.fetchone()
+            self.env.cr.execute(picking_query, query_values)
+            query_result = self.env.cr.fetchone()
 
             # If the user has a assigned picking
             if query_result and query_result[0]:
