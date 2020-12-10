@@ -53,6 +53,7 @@ class ZetesTest(SavepointCase):
         fake_request._cr = cls.env.cr
         fake_request._uid = cls.env.uid
         fake_request._context = cls.env.context
+        fake_request.httprequest.args = {}
         _request_stack.push(fake_request)
 
         cls.env.user.write({"ref": "38229299884", "tz": "Europe/Brussels"})

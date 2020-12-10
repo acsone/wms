@@ -33,6 +33,12 @@ class StockPicking(models.Model):
         track_visibility="onchange",
         index=True,
     )
+    delivery_round_launched = fields.Boolean(
+        related="delivery_round_id.picking_launched",
+        store=True,
+        string="Delivery Round Launched",
+    )
+    is_assignable_to_round = fields.Boolean(compute="_compute_is_assignable_to_round")
 
     @api.model_cr
     def init(self):
@@ -50,6 +56,26 @@ class StockPicking(models.Model):
         """
         self.env.cr.execute(query)
         return res
+
+    @api.depends(
+        "picking_type_subcode",
+        "printed",
+        "pack_operation_product_ids",
+        "delivery_round_customer_id",
+        "delivery_round_customer_id.delivered",
+    )
+    def _compute_is_assignable_to_round(self):
+        for picking in self:
+            not_assignable = (
+                picking.picking_type_subcode != "PICK"
+                or picking.state in ("done", "cancel")
+                or (picking.printed and picking.pack_operation_product_ids)
+                or (
+                    picking.delivery_round_customer_id
+                    and not picking.delivery_round_customer_id.delivered
+                )
+            )
+            picking.is_assignable_to_round = not not_assignable
 
     def _compute_partner_itinerary_ids(self):
         for picking in self:
@@ -73,12 +99,6 @@ class StockPicking(models.Model):
         if "delivery_round_customer_id" in fields_list:
             fields_list.remove("delivery_round_customer_id")
         return super(StockPicking, self).default_get(fields_list)
-
-    delivery_round_launched = fields.Boolean(
-        related="delivery_round_id.picking_launched",
-        store=True,
-        string="Delivery Round Launched",
-    )
 
     def _get_all_src_pickings(self):
         def _descend_moves(lvl):

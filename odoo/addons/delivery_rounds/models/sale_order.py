@@ -38,11 +38,7 @@ class SaleOrder(models.Model):
         # 1 shipping is created
         # multiple pickings could be created, or inserted in existing pickings
 
-        pickings = self.picking_ids.filtered(
-            lambda picking: picking.picking_type_subcode == "PICK"
-            and picking.state not in ("done", "cancel")
-            and not picking.printed
-        )
+        pickings = self.picking_ids.filtered("is_assignable_to_round")
         if not pickings:
             return
 
