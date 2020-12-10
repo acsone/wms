@@ -233,3 +233,81 @@ class TestDeliveryRound(common.DeliveryRoundTestCase):
         delivery_round._deliver(background=False)
         new_pickings = self.StockPicking.search([]) - pickings
         self.assertFalse(new_pickings)
+
+    def test_picking_assign_03(self):
+        """
+        Tournée existe pour le client, état "ouverte" avec déjà une livraison pour ce
+        client. Le pick du client a débuté avec zetes. Le client passe une
+        nouvelle commande avec 1 pick, marchandise disponible
+        Dans le picking commencé, on a 2 moves pour deux produits différents
+        mais 1 opération car 1 des deux produits n'est pas disponibles
+
+        -> Un nouveau pick est créé et est inséré dans la tournée
+        -> L'opération du premier pick n'a pas été supprimée par la confirmation
+        de la deuxième commande
+        """
+        # ensures that pickings out are grouped by partner
+        # self.warehouse_1.pick_type_id.groupbypartner = True
+        self.warehouse_1.out_type_id.groupbypartner = True
+        delivery_carrier = self.env["delivery.carrier"].create(
+            {
+                "name": "Unittest shipping costs",
+                "delivery_type": "fixed",
+                "fixed_price": 10.0,
+                "delivery_template_id": self.delivery_template.id,
+            }
+        )
+        # create a new produit without stock to have one move whitout packop
+        # into the first picking
+        p3 = self.env["product.product"].create(
+            {
+                "name": "Unittest P3",
+                "uom_id": self.env.ref("product.product_uom_unit").id,
+                "type": "product",
+                "weight": 20.0,
+            }
+        )
+        # round is in draft and open
+        self.delivery_round_1.button_resetdraft()
+        # create sale order
+        so1 = self._confirm_sale_order(
+            self.partner1, product=self.p1 | p3, carrier_id=delivery_carrier.id
+        )
+
+        # picking is in the delivery round
+        self.assertEqual(
+            so1.mapped("picking_ids.delivery_round_id"), self.delivery_round_1
+        )
+        #
+        # start pick 1 and process available qty
+        self.delivery_round_1.button_picking_start()
+        so1_picking_pick = so1.picking_ids.filtered(
+            lambda p: p.picking_type_id == self.warehouse_1.pick_type_id
+        )
+        so1_picking_pick.assign_operator()
+        # start the picking:
+        pack_op_ids = so1_picking_pick.pack_operation_ids.ids
+        self.assertEqual(1, len(pack_op_ids))
+        self.assertEqual(2, len(so1_picking_pick.move_lines))
+
+        # create another move -> gets grouped in same picking
+        so2 = self._confirm_sale_order(self.partner1, carrier_id=delivery_carrier.id)
+        # picking2 is in the delivery round
+        self.assertEqual(
+            so2.mapped("picking_ids.delivery_round_id"), self.delivery_round_1
+        )
+        # pick are <> but out are equals
+        so2_picking_pick = so2.picking_ids.filtered(
+            lambda p: p.picking_type_id == self.warehouse_1.pick_type_id
+        )
+        self.assertNotEqual(so2_picking_pick, so1_picking_pick)
+        so1_picking_out = so1.picking_ids.filtered(
+            lambda p: p.picking_type_id == self.warehouse_1.out_type_id
+        )
+        so2_picking_out = so2.picking_ids.filtered(
+            lambda p: p.picking_type_id == self.warehouse_1.out_type_id
+        )
+        self.assertEqual(so1_picking_out, so2_picking_out)
+
+        # pack_op_ids into the picking are not changed
+        self.assertEqual(pack_op_ids, so1_picking_pick.pack_operation_ids.ids)

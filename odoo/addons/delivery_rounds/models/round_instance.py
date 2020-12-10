@@ -328,6 +328,8 @@ class RoundInstance(models.Model):
             # Get and assign linked picking to be sure that they are all into
             # the same delivery round
             linked_pickings = self._get_linked_pickings(pickings_assigned)
+            # exclude pickings already started
+            linked_pickings = linked_pickings.filtered("is_assignable_to_round")
             self._assign_picking_moves_to_assign(linked_pickings, no_prepare=no_prepare)
 
             # Use | to let it work in tests with one step delivery

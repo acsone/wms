@@ -22,21 +22,7 @@ class StockMove(models.Model):
         not tested into unittest. Functional meaning must be clarified and a
         unittest added for this.
         """
-        move_ids = set()
-        for move in self:
-            picking = move.picking_id
-            if (
-                picking.picking_type_subcode != "PICK"
-                or (picking.printed and picking.pack_operation_product_ids)
-                or (
-                    picking.delivery_round_customer_id
-                    and not picking.delivery_round_customer_id.delivered
-                )
-            ):
-                continue
-            move_ids.add(move.id)
-
-        return self.env["stock.move"].browse(move_ids)
+        return self.filtered(lambda move: move.picking_id.is_assignable_to_round)
 
     @api.multi
     def action_assign(self, no_prepare=False):

@@ -161,22 +161,24 @@ class DeliveryRoundTestCase(SavepointCase):
             product = cls.p1
         warehouse = cls.warehouse_1
         Sale = cls.env["sale.order"]
+        lines = [
+            (
+                0,
+                0,
+                {
+                    "name": p.name,
+                    "product_id": p.id,
+                    "product_uom_qty": qty,
+                    "product_uom": p.uom_id.id,
+                    "price_unit": 1,
+                },
+            )
+            for p in product
+        ]
         so_values = {
             "partner_id": partner.id,
             "warehouse_id": warehouse.id,
-            "order_line": [
-                (
-                    0,
-                    0,
-                    {
-                        "name": product.name,
-                        "product_id": product.id,
-                        "product_uom_qty": qty,
-                        "product_uom": product.uom_id.id,
-                        "price_unit": 1,
-                    },
-                )
-            ],
+            "order_line": lines,
         }
         if carrier_id:
             so_values["carrier_id"] = carrier_id
