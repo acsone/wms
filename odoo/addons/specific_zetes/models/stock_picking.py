@@ -4,6 +4,7 @@
 import random
 
 from odoo import _, api, fields, models
+from odoo.addons.queue_job.job import job
 from odoo.exceptions import UserError
 
 from .. import constants
@@ -133,6 +134,7 @@ class StockPicking(models.Model):
             wo_checksum.assign_picking_checksum()
         self.write({"operator_id": None})
 
+    @job(default_channel="root.background.stock_picking_validate")
     @api.multi
     def validate_picking(self):
         for picking in self.filtered(lambda p: not p.zetes_logger_requires_check):

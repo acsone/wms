@@ -4,7 +4,9 @@ from datetime import datetime
 from dateutil.relativedelta import relativedelta
 
 import mock
-from odoo import fields
+from odoo import _, fields
+from odoo.addons.queue_job.job import Job
+from odoo.addons.queue_job.tests.common import JobMixin
 from odoo.tools import mute_logger
 
 from .. import constants
@@ -19,7 +21,7 @@ from ..tools.domain_usercontext import Usercontext
 from .zetes_test_classes import ZetesTest
 
 
-class TestFull(ZetesTest):
+class TestFull(ZetesTest, JobMixin):
     def setUp(self):
         self.disable_picking_validation = True
         super(TestFull, self).setUp()
@@ -613,11 +615,36 @@ class TestFull(ZetesTest):
             }
         )
 
-        with mute_logger("odoo.addons.specific_zetes.tools.domain_assignment"):
-            # to make travis happy but not sure if this is an expected
-            # behaviour
-            assignement_obj.resu(request_finish_picking_params)
-        self.assertEqual(self.picking.state, "done")
+        job_counter = self.job_counter()
+        assignement_obj.resu(request_finish_picking_params)
+
+        # At this stage the picking is not yet validated.... therefore no
+        # backorder created therefore there is no more pickings to prepare
+        self.assertNotEqual(self.picking.state, "done")
+        queue_job = job_counter.search_created()
+        self.assertEqual(len(queue_job), 1)
+
+        # check that no picking is available...
+        request_picking_params = Parameters(assignement_obj)
+        request_picking_params.update(
+            {
+                "assignmentType": constants.PICKING_ASSIGNMENT,
+                "requestType": "1",
+                "tripCounter": "1",
+                "Cri01": medic_picking_code,
+                "Cri02": None,
+            }
+        )
+
+        result_str = assignement_obj.requ(request_picking_params)
+        result = self.format_result(result_str)
+        # no picking available
+        self.assertEqual(result.respCode, str(constants.RESPONSE_CODE_ERROR))
+        self.assertEqual(result.respMsg, _("Cannot found a picking"))
+
+        # process the job -> a backorder is created
+        job = Job.load(self.env, queue_job.uuid)
+        job.perform()
 
         ###########
         # Step 13 #

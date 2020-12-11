@@ -255,7 +255,8 @@ class Assignment(DomainInterface):
             if params.assignmentStatus in [constants.AS_DONE, constants.AS_FINISHED]:
 
                 if not picking.is_passport_required:
-                    picking.validate_picking()
+                    description = _("Validate picking %s") % picking.display_name
+                    picking.with_delay(description=description).validate_picking()
                 else:
                     picking_zetes_state = "passport"
             elif params.assignmentStatus == constants.AS_CANCELED:

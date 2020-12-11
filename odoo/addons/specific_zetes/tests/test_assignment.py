@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 import mock
+from odoo.addons.queue_job.job import Job
+from odoo.addons.queue_job.tests.common import JobMixin
 
 from .. import constants
 from ..tools.domain_assignment import Assignment
@@ -8,7 +10,7 @@ from ..tools.domain_interface import Parameters
 from .zetes_test_classes import ROUND_CODE, ZetesTest
 
 
-class TestAssignemnt(ZetesTest):
+class TestAssignemnt(ZetesTest, JobMixin):
     def test_requ_assignment(self):
         # Check with no current picking
         domain = Assignment(self._default_header(), mock.MagicMock(name="Savepoint()"))
@@ -106,7 +108,18 @@ class TestAssignemnt(ZetesTest):
         pack_op = self.picking.pack_operation_product_ids[0]
         pack_op.pack_lot_ids.write({"qty": 10})
         pack_op.write({"qty_done": 10})
+
+        job_counter = self.job_counter()
         domain.resu(request_params)
+
+        # at this stage only the zetes_state is changed
+        self.assertEqual(self.picking.zetes_state, constants.AS_DONE)
+        self.assertEqual(self.picking.state, "assigned")
+        # and a job has been created to finalize the picking
+        queue_job = job_counter.search_created()
+        self.assertEqual(len(queue_job), 1)
+        job = Job.load(self.env, queue_job.uuid)
+        job.perform()
         self.assertEqual(self.picking.state, "done")
 
         # Interrupt the picking (NOT cancel the picking himselft)
