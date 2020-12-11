@@ -10,7 +10,7 @@ class StockQuant(models.Model):
     _inherit = "stock.quant"
 
     location_kind = fields.Selection(
-        selection="_selection_location_lind",
+        selection="_selection_location_kind",
         related="location_id.kind",
         store=True,
         index=True,
@@ -31,5 +31,5 @@ class StockQuant(models.Model):
         return res
 
     @api.model
-    def _selection_location_lind(self):
-        return self.env["location_id"]._fields["kind"].selecction
+    def _selection_location_kind(self):
+        return self.env["location_id"]._fields["kind"].selection
