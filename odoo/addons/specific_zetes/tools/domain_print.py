@@ -97,7 +97,7 @@ class Print(DomainInterface):
         picking_id = int(picking_id)
 
         picking = self.env["stock.picking"].browse(picking_id)
-        picking._lock_rows()
+        picking._lock()
         # Assign a checksum on the picking (print on the package label)
         picking.assign_picking_checksum()
 

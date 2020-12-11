@@ -15,6 +15,7 @@
         "alc_b2c_partner",
         "delivery_rounds",
         "delivery_rounds_refill",
+        "queue_job",
         "stock",
         "specific_print",
         "specific_data",

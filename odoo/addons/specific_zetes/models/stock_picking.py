@@ -4,6 +4,7 @@
 import random
 
 from odoo import _, api, fields, models
+from odoo.addons.queue_job.job import job
 from odoo.exceptions import UserError
 
 from .. import constants
@@ -133,6 +134,7 @@ class StockPicking(models.Model):
             wo_checksum.assign_picking_checksum()
         self.write({"operator_id": None})
 
+    @job(default_channel="root.background.stock_picking_validate")
     @api.multi
     def validate_picking(self):
         for picking in self.filtered(lambda p: not p.zetes_logger_requires_check):
@@ -166,18 +168,6 @@ class StockPicking(models.Model):
             )
             split_lines = lines.split_pack_op_lines()
             picking.nbr_actions = len(split_lines)
-
-    def _lock_rows(self):
-        """Lock the database rows of the pickings to prevent concurrent access
-        in case two consecutive requests are sent for the same pickings.
-
-        The lock is released when the transaction is committed or rolled back.
-        """
-        if self:
-            self.env.cr.execute(
-                "SELECT id FROM stock_picking WHERE id in %s FOR UPDATE",
-                (tuple(self.ids),),
-            )
 
 
 class PackOperationReserveRel(models.Model):
