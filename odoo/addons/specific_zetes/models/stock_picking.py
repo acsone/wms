@@ -167,18 +167,6 @@ class StockPicking(models.Model):
             split_lines = lines.split_pack_op_lines()
             picking.nbr_actions = len(split_lines)
 
-    def _lock_rows(self):
-        """Lock the database rows of the pickings to prevent concurrent access
-        in case two consecutive requests are sent for the same pickings.
-
-        The lock is released when the transaction is committed or rolled back.
-        """
-        if self:
-            self.env.cr.execute(
-                "SELECT id FROM stock_picking WHERE id in %s FOR UPDATE",
-                (tuple(self.ids),),
-            )
-
 
 class PackOperationReserveRel(models.Model):
     _name = "pack.operation.reserve.rel"
