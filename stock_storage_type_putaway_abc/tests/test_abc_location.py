@@ -114,7 +114,8 @@ class TestAbcLocation(SavepointCase):
         sublocation = self.stock_location.copy(
             {"name": "Sub-location", "location_id": self.stock_location.id}
         )
-        (self.cardboxes_location | self.pallets_location).location_id = sublocation
+        self.pallets_location.location_id = sublocation
+        self.cardboxes_location.location_id = sublocation
         # configure putaway strategy for all locations
         sublocation.write({"pack_putaway_strategy": "abc"})
         # configure abc storage on locations
@@ -222,7 +223,7 @@ class TestAbcLocation(SavepointCase):
     def test_get_storage_locations_not_all_keys(self):
         """Do not crash if we have no A or B or C locations"""
         self.stock_location.write({"pack_putaway_strategy": "abc"})
-        self.env["stock.location"].search(
-            [("abc_storage", "in", ("a", "b"))]
-        ).abc_storage = "b"
+        self.env["stock.location"].search([("abc_storage", "in", ("a", "b"))]).write(
+            {"abc_storage": "b"}
+        )
         self.assertTrue(self.stock_location.get_storage_locations())
