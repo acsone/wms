@@ -2,6 +2,6 @@
 - [ ] fixes #
 
 /label ~"work in progress"
-/milestone %1.60
+/milestone %1.61
 /target_branch master
 /wip

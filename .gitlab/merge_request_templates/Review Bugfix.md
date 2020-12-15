@@ -3,5 +3,5 @@
 
 /label ~"needs review"
 /assign @laurent.mignon
-/milestone %1.59
-/target_branch alcyon_iteration_1.59
+/milestone %1.60
+/target_branch alcyon_iteration_1.60
