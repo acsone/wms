@@ -2,6 +2,7 @@
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+import json
 import random
 import string
 
@@ -207,6 +208,7 @@ class TestSalesService(CommonCase):
                 payment_mode -> the one from the backend
                 payment_term_id -> the one from the backend
                 supplier_promotion_allowed -> the one from the veterinary
+                a new message with the json has been added into the chatter
         """
         recipient_info = self._gen_recipent()
         params = {
@@ -249,6 +251,10 @@ class TestSalesService(CommonCase):
         self.assertEqual(sol.discount3, 0)  # discount in %
         self.assertEqual(sol.price_unit, 10)
         self.assertEqual(sol.product_qty, 10)
+        self.assertIn(
+            json.dumps(params, sort_keys=True),
+            "\n".join(new_so.mapped("message_ids.body")),
+        )
 
     def test_04_01(self):
         """

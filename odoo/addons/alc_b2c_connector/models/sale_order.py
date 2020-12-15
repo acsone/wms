@@ -2,6 +2,8 @@
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+import json
+
 import dateutil
 
 import pytz
@@ -62,12 +64,15 @@ class SaleOrder(models.Model):
     def _create_from_b2c(self, data, b2c_backend):
         """ Create a sale order with data coming from b2c
         """
+        data
+        body = _("Order created from json: %s.") % json.dumps(data, sort_keys=True)
         order_data = self._parse_b2c_order(data, b2c_backend)
         order = (
             self.env["sale.order"]
             .with_context(mail_auto_subscribe_no_notify=True)
             .create(order_data)
         )
+        order.message_post(body=body)
         order.sudo().action_confirm_background()
         return order
 
