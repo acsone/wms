@@ -1,0 +1,141 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* alc_product_audit
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-12-11 14:34+0000\n"
+"PO-Revision-Date: 2020-12-11 14:34+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_product_audit
+#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
+msgid "- More than one route is selected for the product, leading to a mismatch with the picking zone"
+msgstr "- Plus d'une route est sélectionnée pour le produit. Cela conduit à une incohérence entre route et zone de picking"
+
+#. module: alc_product_audit
+#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
+msgid "- Product has min/max and is 'on command reappro'"
+msgstr "- Le produit présente un min/max mais est coché en 'approvisionner à la commande'"
+
+#. module: alc_product_audit
+#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
+msgid "- Product has no min/max and is not 'on command reappro'"
+msgstr "- Le produit ne présente pas de min/max et n'est pas coché en 'approvisionner à la commande'"
+
+#. module: alc_product_audit
+#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
+msgid "- Product is not salable and still has a bin"
+msgstr "- Le produit est retiré de la vente (ou archivé) mais le bac n'est pas supprimé"
+
+#. module: alc_product_audit
+#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
+msgid "- Product is not salable but not archived"
+msgstr "- Le produit est retiré de la vente mais n'est pas archivé"
+
+#. module: alc_product_audit
+#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
+msgid "- The selected picking zone does not match the bin"
+msgstr "- La zone de picking ne correspond pas au bac"
+
+#. module: alc_product_audit
+#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
+msgid "Following issue(s) is/are observed on the product:"
+msgstr "Le/les problèmes suivants sont observés pour le produit:"
+
+#. module: alc_product_audit
+#: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_has_anomaly
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_product_has_anomaly
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_template_has_anomaly
+msgid "Has anomaly"
+msgstr "Présente une anomalie"
+
+#. module: alc_product_audit
+#: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_min_max_on_command_reappro
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_product_min_max_on_command_reappro
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_template_min_max_on_command_reappro
+msgid "Min max on command reappro"
+msgstr ""Min/max mais en 'approvisionner à la commande' "
+
+#. module: alc_product_audit
+#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
+msgid "Min/max and 'on command reappro'"
+msgstr "Min/max mais en 'approvisionner à la commande' "
+
+#. module: alc_product_audit
+#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
+msgid "Mismatch between picking zone and bin"
+msgstr "Incohérence entre la zone de picking et le bac"
+
+#. module: alc_product_audit
+#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
+msgid "Mismatch between route and picking zone"
+msgstr La route et la zone de picking ne correspondent pas"
+
+#. module: alc_product_audit
+#: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_mismatch_picking_bin
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_product_mismatch_picking_bin
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_template_mismatch_picking_bin
+msgid "Mismatch picking bin"
+msgstr "Incohérence entre la zone de picking et le bac"
+
+#. module: alc_product_audit
+#: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_mismatch_route_picking
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_product_mismatch_route_picking
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_template_mismatch_route_picking
+msgid "Mismatch route picking"
+msgstr "Incohérence entre la route et la zone de picking"
+
+#. module: alc_product_audit
+#: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_no_min_max_no_on_command_reappro
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_product_no_min_max_no_on_command_reappro
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_template_no_min_max_no_on_command_reappro
+msgid "No min max no on command reappro"
+msgstr "pas de Min/max et pas en 'approvisionner à la commande'"
+
+#. module: alc_product_audit
+#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
+msgid "No min/max and no 'on command reappro'"
+msgstr "pas de Min/max et pas en 'approvisionner à la commande'"
+
+#. module: alc_product_audit
+#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
+msgid "Not salable but not archived"
+msgstr "Ne peut être vendu mais pas archivé"
+
+#. module: alc_product_audit
+#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
+msgid "Not salable or archived but with a bin"
+msgstr "Ne peut être vendu (ou archivé) mais présente toujours un bac"
+
+#. module: alc_product_audit
+#: model:ir.model,name:alc_product_audit.model_product_template
+msgid "Product Template"
+msgstr "Modèle de produit"
+
+#. module: alc_product_audit
+#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
+msgid "Product has an anomaly"
+msgstr "Le produit présente une anomalie"
+
+#. module: alc_product_audit
+#: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_sale_not_ok_archived_bin_available
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_product_sale_not_ok_archived_bin_available
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_template_sale_not_ok_archived_bin_available
+msgid "Sale not ok archived bin available"
+msgstr "Ne peut être vendu (ou archivé) mais présente toujours un bac"
+
+#. module: alc_product_audit
+#: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_sale_not_ok_not_archived
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_product_sale_not_ok_not_archived
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_template_sale_not_ok_not_archived
+msgid "Sale not ok not archived"
+msgstr "Ne peut être vendu mais pas archivé"
+
