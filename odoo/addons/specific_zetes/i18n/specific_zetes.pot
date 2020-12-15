@@ -87,6 +87,7 @@ msgid "Cannot format the value %s with type %s"
 msgstr ""
 
 #. module: specific_zetes
+#: code:addons/specific_zetes/tests/test_full.py:643
 #: code:addons/specific_zetes/tools/domain_assignment.py:157
 #, python-format
 msgid "Cannot found a picking"
@@ -457,7 +458,7 @@ msgid "Need to be check"
 msgstr ""
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/models/stock_picking.py:256
+#: code:addons/specific_zetes/models/stock_picking.py:246
 #: code:addons/specific_zetes/tools/domain_catchweight.py:134
 #: code:addons/specific_zetes/tools/domain_itempick.py:256
 #, python-format
@@ -465,7 +466,7 @@ msgid "No pack operation found"
 msgstr ""
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/models/stock_picking.py:259
+#: code:addons/specific_zetes/models/stock_picking.py:249
 #, python-format
 msgid "No pack operation found with ID %s"
 msgstr ""
@@ -890,6 +891,12 @@ msgid "Validate UOP"
 msgstr ""
 
 #. module: specific_zetes
+#: code:addons/specific_zetes/tools/domain_assignment.py:258
+#, python-format
+msgid "Validate picking %s"
+msgstr ""
+
+#. module: specific_zetes
 #: selection:manage.uop,state:0
 msgid "View Picking"
 msgstr ""
@@ -917,13 +924,13 @@ msgid "You cannot pick more than %s unit of the product %s"
 msgstr ""
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/models/stock_picking.py:236
+#: code:addons/specific_zetes/models/stock_picking.py:226
 #, python-format
 msgid "You cannot split this pack operation because the new quantity (%s) is geater than the available quantity (%s)"
 msgstr ""
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/models/stock_picking.py:264
+#: code:addons/specific_zetes/models/stock_picking.py:254
 #, python-format
 msgid "You cannot split this pack operation lot because the new quantity (%s) is greater than the available quantity (%s)"
 msgstr ""
