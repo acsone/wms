@@ -311,3 +311,52 @@ class TestDeliveryRound(common.DeliveryRoundTestCase):
 
         # pack_op_ids into the picking are not changed
         self.assertEqual(pack_op_ids, so1_picking_pick.pack_operation_ids.ids)
+
+    def test_deliver_03(self):
+        """
+        Data:
+            Pick group by partner
+            A delivery_round with picks for partner1:
+               * 2 pickings PICK are available
+               * 2 SO SHIP are into the same shipping
+        Test Case:
+            Create and confirm a new SO for the same partner
+        Expected results:
+            * All the new products are into the existing pickings and
+            all the move are assigned (the picks are not yet started and the
+            delivery is not delivered)
+        """
+        self.warehouse_1.pick_type_id.groupbypartner = True
+
+        # create the delivery round
+        delivery_round = self.env["round.instance"].create(
+            {"template_id": self.delivery_template_2.id, "date": "2017-01-01"}
+        )
+        delivery_round.button_resetdraft()
+        # create a first SO -> SO into the delivery and picking assigned
+        sale1 = self._confirm_sale_order(
+            partner=self.partner1, carrier_id=self.delivery_carrier.id
+        )
+        # at this stage the pick is assigned and into the delivery
+        self.assertEqual(sale1.mapped("picking_ids.delivery_round_id"), delivery_round)
+        pick = sale1.mapped("picking_ids").filtered(
+            lambda p: p.picking_type_subcode == "PICK"
+        )
+        self.assertEqual(pick.state, "assigned")
+
+        # create a second SO -> SO into the same delivery and same picking assigned
+        sale2 = self._confirm_sale_order(
+            partner=self.partner1, carrier_id=self.delivery_carrier.id
+        )
+        # the SO
+        sales = self.env["sale.order"].browse([sale1.id, sale2.id])
+        self.assertEqual(sales.mapped("picking_ids.delivery_round_id"), delivery_round)
+
+        # we only have 1 picking since pick must be grouped by partner
+        pick = sales.mapped("picking_ids").filtered(
+            lambda p: p.picking_type_subcode == "PICK"
+        )
+        self.assertEqual(len(pick), 1)
+
+        # and the picking is assigned
+        self.assertEqual(pick.state, "assigned")

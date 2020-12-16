@@ -39,6 +39,7 @@ class StockPicking(models.Model):
         string="Delivery Round Launched",
     )
     is_assignable_to_round = fields.Boolean(compute="_compute_is_assignable_to_round")
+    is_assignable = fields.Boolean(compute="_compute_is_assignable")
 
     @api.model_cr
     def init(self):
@@ -76,6 +77,16 @@ class StockPicking(models.Model):
                 )
             )
             picking.is_assignable_to_round = not not_assignable
+
+    @api.depends("picking_type_subcode", "printed", "pack_operation_product_ids")
+    def _compute_is_assignable(self):
+        for picking in self:
+            not_assignable = (
+                picking.picking_type_subcode != "PICK"
+                or picking.state in ("done", "cancel")
+                or (picking.printed and picking.pack_operation_product_ids)
+            )
+            picking.is_assignable = not not_assignable
 
     def _compute_partner_itinerary_ids(self):
         for picking in self:

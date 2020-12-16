@@ -3,6 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import logging
+from collections import defaultdict
 
 from odoo import _, api, models
 from odoo.exceptions import ValidationError
@@ -34,14 +35,38 @@ class SaleOrder(models.Model):
         (partially) available
         """
         _logger.debug("Searching a delivery round for SO %d", self.id)
-        template = self.carrier_id.delivery_template_id
         # 1 shipping is created
         # multiple pickings could be created, or inserted in existing pickings
 
         pickings = self.picking_ids.filtered("is_assignable_to_round")
-        if not pickings:
+        if pickings:
+            delivery_round = self._find_suitable_delivery_round(pickings)
+            if delivery_round:
+                pickings = pickings.filtered(
+                    lambda picking: picking.partner_id.is_shipping_date_allowed(
+                        delivery_round.date
+                    )
+                )
+            if pickings and delivery_round:
+                delivery_round._assign_pickings(pickings)
             return
 
+        # If pickings are already into a delivery, ensure that operations
+        # are assigned
+        pickings = self.picking_ids.filtered("is_assignable")
+        pick_ids_by_delivery_round = defaultdict(set)
+        for pick in pickings:
+            pick_ids_by_delivery_round[pick.delivery_round_id].add(pick.id)
+        for delivery_round, pick_ids in pick_ids_by_delivery_round.items():
+            if not delivery_round:
+                continue
+            delivery_round._confirm_picking_and_assign_moves(
+                self.env["stock.picking"].browse(pick_ids)
+            )
+
+    def _find_suitable_delivery_round(self, pickings):
+        self.ensure_one()
+        template = self.carrier_id.delivery_template_id
         if template:
             _logger.debug(
                 "Associate SO %d to delivery instance matching " "carrier", self.id
@@ -72,12 +97,4 @@ class SaleOrder(models.Model):
                     pickings[0].partner_id
                 )
 
-        if pickings and delivery_round:
-            pickings = pickings.filtered(
-                lambda picking: picking.partner_id.is_shipping_date_allowed(
-                    delivery_round.date
-                )
-            )
-        if delivery_round:
-            delivery_round._assign_pickings(pickings)
-        _logger.debug("Searching a delivery round for SO %d. Done.", self.id)
+        return delivery_round
