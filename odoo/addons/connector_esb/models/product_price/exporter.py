@@ -53,7 +53,7 @@ class ProductPriceCronExporter(Component):
         producer.namespaces = ()
         return producer
 
-    def get_items(self, export_since):
+    def get_items(self, export_since, export_to=None):
         """All items are exported each time"""
         self.update_saleprice_2()
         return super(ProductPriceCronExporter, self).get_items(None)

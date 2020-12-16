@@ -130,7 +130,7 @@ class CustomerAddressCronExporter(Component):
             ("country_id.esb_ref", "!=", ""),
         ]
 
-    def get_items(self, export_since):
+    def get_items(self, export_since, export_to=None):
         """Get customer addresses and add type of address to export
 
         Export for each customer the invoice and delivery address
@@ -141,7 +141,9 @@ class CustomerAddressCronExporter(Component):
         Magento.
         This default method address_get has been monkey patched for Alcyon.
         """
-        items = super(CustomerAddressCronExporter, self).get_items(export_since)
+        items = super(CustomerAddressCronExporter, self).get_items(
+            export_since, export_to=export_to
+        )
         modified_items_ids = set(items.mapped("id"))
         # get_items will return all modified customer including the addresses.
         # Then for all commercial partner with potentially modified addresses.

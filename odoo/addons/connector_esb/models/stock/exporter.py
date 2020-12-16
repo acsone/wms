@@ -78,7 +78,7 @@ class StockUpdateExporter(Component):
     def _component_match(cls, work):
         return bool(work.timestamp and work.timestamp.kind == "stock.update")
 
-    def get_items(self, export_since):
+    def get_items(self, export_since, export_to=None):
         """Find all quants that need to be exported.
 
         Returns the quants instead of the products directly because the
@@ -92,7 +92,7 @@ class StockUpdateExporter(Component):
             ("product_id.sale_ok", "=", True),
         ]
         if export_since:
-            date_domain = self.domain_timestamp(export_since)
+            date_domain = self.domain_timestamp(export_since, export_to=export_to)
             domain = AND([domain, date_domain])
         StockMove = self.env["stock.quant"]
         # uses auto_join on stock_moveto avoid that the orm do a first

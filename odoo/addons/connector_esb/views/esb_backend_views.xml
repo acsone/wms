@@ -40,6 +40,9 @@
                   <button name="export"
                     type="object"
                     string="Export"/>
+                  <button name="export_period"
+                    type="object"
+                    string="Export a given period"/>
                 </tree>
               </field>
             </page>

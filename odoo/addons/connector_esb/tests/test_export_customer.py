@@ -3,6 +3,9 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import os
+from datetime import datetime, timedelta
+
+from odoo import fields
 
 from .common import ESBXMLTestCase
 
@@ -195,3 +198,21 @@ class ExportCustomerTestCase(ESBXMLTestCase):
             self.assertXmlEquivalentData(
                 result, self.read_test_file("customer_1.xml"), "Firstname"
             )
+
+    def test_export_wizard(self):
+        self.timestamp.writer = "local"
+        now = datetime.now()
+        wizard = self.env["esb.period.exporter"].create(
+            {
+                "backend_timestamp_id": self.timestamp.id,
+                "export_from": fields.Datetime.to_string(now - timedelta(minutes=1)),
+                "export_to": fields.Datetime.to_string(now + timedelta(minutes=1)),
+            }
+        )
+        respath = wizard.doit()
+        self.addCleanup(os.remove, respath)
+        with open(respath, "r") as result_file:
+            result = result_file.read()
+        self.assertXmlEquivalentData(
+            result, self.read_test_file("customer_1.xml"), "Firstname"
+        )

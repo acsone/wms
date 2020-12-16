@@ -43,6 +43,7 @@
     ],
     "website": "http://www.camptocamp.com",
     "data": [
+        "wizards/esb_period_exporter.xml",
         "data/esb_backend.xml",
         "data/esb_backend_timestamp.xml",
         "data/product.category.csv",
