@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2020 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+
+    <record model="ir.ui.view" id="product_template_search_view">
+        <field name="name">product.template.search (in alc_product_audit)</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_search_view"/>
+        <field name="arch" type="xml">
+            
+            <xpath expr="//search" position="inside">
+                <separator/>
+                <filter string="Product has an anomaly" name="filter_has_anomaly" domain="[('has_anomaly','=',True)]"/>
+                <filter string="No min/max and no 'on command reappro'" name="filter_no_min_max_no_on_command_reappro" domain="[('no_min_max_no_on_command_reappro','=',True)]"/>
+                <filter string="Min/max and 'on command reappro'" name="filter_min_max_on_command_reappro" domain="[('min_max_on_command_reappro','=',True)]"/>
+                <filter string="Not salable but not archived" name="filter_sale_not_ok_not_archived" domain="[('sale_not_ok_not_archived','=',True)]"/>
+                <filter string="Not salable or archived but with a bin" name="filter_sale_not_ok_archived_bin_available" domain="[('sale_not_ok_archived_bin_available','=',True)]"/>
+                <filter string="Mismatch between route and picking zone" name="filter_mismatch_route_picking" domain="[('mismatch_route_picking','=',True)]"/>
+                <filter string="Mismatch between picking zone and bin" name="filter_mismatch_picking_bin" domain="[('mismatch_picking_bin','=',True)]"/>
+            </xpath>
+                
+        </field>
+    </record>
+
+    <record id="product_template_tree_view" model="ir.ui.view">
+        <field name="name">product.template.tree (in alc_product_audit)</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_tree_view"/>
+        <field name="arch" type="xml">
+            <field name="categ_id" position="after">
+                <field name="has_anomaly"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="product_template_form_view" model="ir.ui.view">
+        <field name="name">product.template.form  (in alc_product_audit)</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
+        <field name="arch" type="xml">
+            <form position="inside">
+                <field name="has_anomaly" invisible="1"/>
+                <field name="no_min_max_no_on_command_reappro" invisible="1"/>
+                <field name="min_max_on_command_reappro" invisible="1"/>
+                <field name="sale_not_ok_not_archived" invisible="1"/>
+                <field name="sale_not_ok_archived_bin_available" invisible="1"/>
+                <field name="mismatch_route_picking" invisible="1"/>
+                <field name="mismatch_picking_bin" invisible="1"/>
+            </form>
+            <header position="after">
+                <div class="alert alert-warning" attrs="{'invisible': [('has_anomaly', '=', False)]}">
+                Following issue(s) is/are observed on the product:
+                    <div attrs="{'invisible': [('no_min_max_no_on_command_reappro', '=', False)]}">
+                        <p> - Product has no min/max and is not 'on command reappro' </p>
+                    </div>
+                    <div attrs="{'invisible': [('min_max_on_command_reappro', '=', False)]}">
+                        <p>- Product has min/max and is 'on command reappro'</p>
+                    </div>
+                    <div attrs="{'invisible': [('sale_not_ok_not_archived', '=', False)]}">
+                        <p>- Product is not salable but not archived</p>
+                    </div>
+                    <div attrs="{'invisible': [('sale_not_ok_archived_bin_available', '=', False)]}">
+                        <p>- Product is not salable and still has a bin</p>
+                    </div>
+                    <div attrs="{'invisible': [('mismatch_route_picking', '=', False)]}">
+                        <p>- More than one route is selected for the product, leading to a mismatch with the picking zone</p>
+                    </div>
+                    <div attrs="{'invisible': [('mismatch_picking_bin', '=', False)]}">
+                        <p>- The selected picking zone does not match the bin</p>
+                    </div>
+                </div>
+            </header>
+        </field>
+    </record>
+
+</odoo>
