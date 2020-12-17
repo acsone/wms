@@ -312,6 +312,33 @@ class RoundInstance(models.Model):
         if self.env.context.get("manual_change_delivery_round"):
             self._check_allowed_holidays_pickings(pickings)
 
+        pickings_assigned = self._confirm_picking_and_assign_moves(pickings, no_prepare)
+        if pickings_assigned:
+
+            def key(r):
+                partner = r.partner_id
+                # If delivery address is a contact, take parent
+                if partner.type == "contact" and partner.parent_id:
+                    partner = partner.parent_id
+                return partner
+
+            for partner, pickings_bypartner_iter in groupby(
+                pickings_assigned.sorted(key=key), key=key
+            ):
+                ric = self._add_customer(partner)
+                pickings_bypartner = reduce(lambda x, y: x | y, pickings_bypartner_iter)
+                # As we filtered on assigned, we typically excluded the waiting
+                # shippings. So include them back
+                pickings_bypartner |= pickings_bypartner._get_all_dest_pickings()
+                ric._link_pickings(pickings_bypartner)
+        return pickings_assigned
+
+    @api.multi
+    def _confirm_picking_and_assign_moves(self, pickings, no_prepare=False):
+        """
+        Confirm pricking if required and ensures that moves are assigned.
+        Return the list of all related pickings
+        """
         pickings.filtered(lambda picking: picking.state == "draft").action_confirm()
         # Note: MTO moves in waiting state are updated in standard by a call to
         # action_assign, so we need to propagate it
@@ -334,23 +361,6 @@ class RoundInstance(models.Model):
 
             # Use | to let it work in tests with one step delivery
             pickings_assigned |= linked_pickings
-
-            def key(r):
-                partner = r.partner_id
-                # If delivery address is a contact, take parent
-                if partner.type == "contact" and partner.parent_id:
-                    partner = partner.parent_id
-                return partner
-
-            for partner, pickings_bypartner_iter in groupby(
-                pickings_assigned.sorted(key=key), key=key
-            ):
-                ric = self._add_customer(partner)
-                pickings_bypartner = reduce(lambda x, y: x | y, pickings_bypartner_iter)
-                # As we filtered on assigned, we typically excluded the waiting
-                # shippings. So include them back
-                pickings_bypartner |= pickings_bypartner._get_all_dest_pickings()
-                ric._link_pickings(pickings_bypartner)
         return pickings_assigned
 
     @api.model
