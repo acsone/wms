@@ -360,3 +360,103 @@ class TestDeliveryRound(common.DeliveryRoundTestCase):
 
         # and the picking is assigned
         self.assertEqual(pick.state, "assigned")
+
+    def test_deliver_04(self):
+        """
+        Data:
+            Pick group by partner
+            A delivery_round with picks for partner1
+        Test Case:
+            Finalize the picking and create a backorder
+        Expected results:
+            * move into backorder must be assigned
+        """
+        self.warehouse_1.pick_type_id.groupbypartner = True
+        self.partner1.is_sale_back_order_cancel = False
+
+        # create the delivery round
+        delivery_round = self.env["round.instance"].create(
+            {"template_id": self.delivery_template_2.id, "date": "2017-01-01"}
+        )
+        delivery_round.button_resetdraft()
+        # create a first SO -> SO into the delivery and picking is
+        # partially available since P2 is not in stock
+        sale1 = self._confirm_sale_order(
+            partner=self.partner1,
+            carrier_id=self.delivery_carrier.id,
+            product=self.p1 | self.p2,
+        )
+        # at this stage the pick is partially available and into the delivery
+        self.assertEqual(sale1.mapped("picking_ids.delivery_round_id"), delivery_round)
+        pick = sale1.mapped("picking_ids").filtered(
+            lambda p: p.picking_type_subcode == "PICK"
+        )
+
+        # process the product available
+        self.assertEqual(pick.state, "partially_available")
+        pack_operation = pick.pack_operation_product_ids[0]
+        pack_operation.write({"qty_done": 1})
+
+        # finalize the picking and create the backorder
+        # (done by stock_picking_backorder)
+        pickings = self.StockPicking.search([])
+        pick.do_new_transfer()
+        new_picking = self.StockPicking.search([]) - pickings
+        self.assertTrue(new_picking)
+
+        # the backorder is "confirmed" since it only contains p2
+        self.assertEqual(new_picking.state, "confirmed")
+
+        # create a new SO for p1
+        self._confirm_sale_order(
+            partner=self.partner1, carrier_id=self.delivery_carrier.id, product=self.p1
+        )
+        # p1 is into the backorder and the backorder is not partially_available
+        self.assertEqual(new_picking.state, "partially_available")
+
+    def test_deliver_05(self):
+        self.warehouse_1.pick_type_id.groupbypartner = True
+        # create a SO for an unavailable product
+        # the SO create a picking into the delivery
+        delivery_round = self.env["round.instance"].create(
+            {"template_id": self.delivery_template_2.id, "date": "2017-01-01"}
+        )
+
+        sale1 = self._confirm_sale_order(
+            partner=self.partner1, carrier_id=self.delivery_carrier.id, product=self.p2
+        )
+        # We close the delivery to avoid the creation of the backorder into
+        # the same delivery
+        delivery_round.button_close()
+        pick = sale1.mapped("picking_ids").filtered(
+            lambda p: p.picking_type_subcode == "PICK"
+        )
+        self.assertEqual(pick.state, "confirmed")
+        # p2 is not in stock -> a backorder is created when the picking is
+        # transfered but no delivery round is assigned since the original one
+        # is closed
+        pickings = self.StockPicking.search([])
+        pick.do_new_transfer()
+        new_picking = self.StockPicking.search([]) - pickings
+        self.assertNotEqual(new_picking.delivery_round_id, delivery_round)
+
+        # create a new delivery round and assign the picking
+        delivery_round = self.env["round.instance"].create(
+            {"template_id": self.delivery_template_2.id, "date": "2017-01-01"}
+        )
+        delivery_round._assign_pickings(new_picking)
+
+        # the picking is still confirmed since p2 is out of stock
+        self.assertEqual(new_picking.state, "confirmed")
+
+        # Create a new SO for p1 in stock
+        sale2 = self._confirm_sale_order(
+            partner=self.partner1, carrier_id=self.delivery_carrier.id, product=self.p1
+        )
+        pick2 = sale2.mapped("picking_ids").filtered(
+            lambda p: p.picking_type_subcode == "PICK"
+        )
+        self.assertEqual(new_picking, pick2)
+        # The so is into the same picking and the picking is now
+        # partlially_available
+        self.assertEqual(pick2.state, "partially_available")
