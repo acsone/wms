@@ -10,6 +10,7 @@ odoo10-addon-purchase-order-line-packaging-qty @ git+https://github.com/oca/purc
 
 # oca/server-tools
 odoo10-addon-slow-statement-logger @ git+https://github.com/acsone/server-tools@10.0-backport-slow_statement_logger-lmi#egg=odoo10_addon_slow_statement_logger&subdirectory=setup/slow_statement_logger
+odoo10-addon-base-m2m-custom-field @ git+https://github.com/oca/server-tools.git@refs/pull/1940/head#subdirectory=setup/base_m2m_custom_field
 
 # oca/report-csv
 odoo10-addon-report-csv @ git+https://github.com/acsone/reporting-engine@10.0-backport-report_csv-lmi#egg=odoo10-addon-report-csv&subdirectory=setup/report_csv
@@ -34,3 +35,11 @@ odoo10-addon-auth-api-key @  git+https://github.com/oca/server-auth.git@refs/pul
 odoo10-addon-purchase-order-import @  git+https://github.com/oca/edi.git@refs/pull/244/head#subdirectory=setup/purchase_order_import
 odoo10-addon-despatch-advice-import @  git+https://github.com/oca/edi.git@refs/pull/280/head#subdirectory=setup/despatch_advice_import
 odoo10-addon-despatch-advice-import-ubl @  git+https://github.com/oca/edi.git@refs/pull/280/head#subdirectory=setup/despatch_advice_import_ubl
+
+# oca/stock-logistics-wokflow
+odoo10-addon-stock-quant-package-product-packaging @ git+https://github.com/oca/stock-logistics-workflow.git@refs/pull/743/head#subdirectory=setup/stock_quant_package_product_packaging
+odoo10-addon-stock-quant-package-dimension @ git+https://github.com/oca/stock-logistics-workflow.git@refs/pull/744/head#subdirectory=setup/stock_quant_package_dimension
+
+# oca/wms
+odoo10-addon-stock-storage-type @ git+https://github.com/oca/wms.git@refs/pull/95/head#subdirectory=setup/stock_storage_type
+odoo10-addon-stock-storage-type-putaway-abc @ git+https://github.com/oca/wms.git@refs/pull/103/head#subdirectory=setup/stock_storage_type_putaway_abc
