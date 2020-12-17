@@ -32,3 +32,5 @@ odoo10-addon-auth-api-key @  git+https://github.com/oca/server-auth.git@refs/pul
 
 # oca/edi
 odoo10-addon-purchase-order-import @  git+https://github.com/oca/edi.git@refs/pull/244/head#subdirectory=setup/purchase_order_import
+odoo10-addon-despatch-advice-import @  git+https://github.com/oca/edi.git@refs/pull/280/head#subdirectory=setup/despatch_advice_import
+odoo10-addon-despatch-advice-import-ubl @  git+https://github.com/oca/edi.git@refs/pull/280/head#subdirectory=setup/despatch_advice_import_ubl
