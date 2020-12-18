@@ -38,22 +38,27 @@ class SaleOrder(models.Model):
         # 1 shipping is created
         # multiple pickings could be created, or inserted in existing pickings
 
-        pickings = self.picking_ids.filtered("is_assignable_to_round")
-        if pickings:
-            delivery_round = self._find_suitable_delivery_round(pickings)
+        pickins_assignable_to_round = self.picking_ids.filtered(
+            "is_assignable_to_round"
+        )
+        if pickins_assignable_to_round:
+            delivery_round = self._find_suitable_delivery_round(
+                pickins_assignable_to_round
+            )
             if delivery_round:
-                pickings = pickings.filtered(
+                pickins_assignable_to_round = pickins_assignable_to_round.filtered(
                     lambda picking: picking.partner_id.is_shipping_date_allowed(
                         delivery_round.date
                     )
                 )
-            if pickings and delivery_round:
-                delivery_round._assign_pickings(pickings)
-            return
+            if pickins_assignable_to_round and delivery_round:
+                delivery_round._assign_pickings(pickins_assignable_to_round)
 
         # If pickings are already into a delivery, ensure that operations
         # are assigned
-        pickings = self.picking_ids.filtered("is_assignable")
+        pickings = (self.picking_ids - pickins_assignable_to_round).filtered(
+            "is_assignable"
+        )
         pick_ids_by_delivery_round = defaultdict(set)
         for pick in pickings:
             pick_ids_by_delivery_round[pick.delivery_round_id].add(pick.id)

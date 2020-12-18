@@ -460,3 +460,22 @@ class TestDeliveryRound(common.DeliveryRoundTestCase):
         # The so is into the same picking and the picking is now
         # partlially_available
         self.assertEqual(pick2.state, "partially_available")
+
+    def test_picking_assign_04(self):
+        warehouse = self.env.ref("stock.warehouse0")
+        picking_sequence = warehouse.in_type_id.sequence_id
+        self.env["stock.picking.type"].create(
+            {
+                "name": "Pick Aliments",
+                "code": "internal",
+                "subcode": "PICK",
+                "sequence_id": picking_sequence.id,
+                "groupbypartner": True,
+            }
+        )
+
+        # create a so with 1 available product
+        # this SO will have a picking assigned to the delivery
+        # the picking is the default picking type
+
+        # therefore the picking will be available and
