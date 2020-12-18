@@ -12,6 +12,7 @@ import psycopg2
 
 import click
 import click_odoo
+import numpy as np
 import pandas as pd
 
 
@@ -35,9 +36,9 @@ def dataframe_to_sql_table(env, dataframe, verbose):
                             "Site ID" VARCHAR,
                             SnapShotFile VARCHAR,
                             Updated BOOLEAN,
-                            User1 VARCHAR,
-                            User2 VARCHAR,
-                            User3 VARCHAR,
+                            User1 NUMERIC,
+                            User2 NUMERIC,
+                            User3 NUMERIC,
                             User4 VARCHAR,
                             User5 VARCHAR,
                             User6 VARCHAR,
@@ -54,6 +55,10 @@ def dataframe_to_sql_table(env, dataframe, verbose):
     if verbose:
         click.echo("dataframe temporary table created. . .")
         click.echo("Dropping DataFrame into a buffer . . .")
+
+    if verbose:
+        click.echo("dataframe {}. . .".format(dataframe.head()))
+
     buffer = StringIO()
     dataframe.to_csv(buffer, index_label="id", header=False)
     buffer.seek(0)
@@ -85,6 +90,7 @@ def format_files_to_dataframe(env, path_to_files, verbose):
             click.echo("Start processing file: {}. . .".format(file))
 
         df = pd.read_excel(path_to_files + file)
+
         # Name 'primary' is ambiguous when using sql tables. cf primary key ... so renaming it into the df
         # NB: sometimes we have Ref in the xlsx sheets => using this for consistancy
         if "Primary" in df.columns:
@@ -99,28 +105,29 @@ def format_files_to_dataframe(env, path_to_files, verbose):
     all_data = all_data.fillna(
         value={
             "Description": "",
+            "REF ": 0,
             "Weight": 0,
-            "User1": "",
-            "User2": "",
-            "User3": "",
-            "User4": "",
-            "User5": "",
-            "User6": "",
-            "User7": "",
-            "User8": "",
             "Dim Wgt": 0,
             "Factor": 0,
+            "User1": 0,
+            "User2": 0,
+            "User3": 0,
             "Sequence": 0,
             "Secondary": "",
             "Updated": False,
             "Volume": 0,
         }
     )
+    all_data["REF "] = all_data["REF "].astype(np.int64)
+    all_data["REF "] = all_data["REF "].astype(str)
+    all_data["User1"] = all_data["User1"].astype(np.int64)
+    all_data["User2"] = all_data["User2"].astype(np.int64)
+    all_data["User3"] = all_data["User3"].astype(np.int64)
 
     if verbose:
         click.echo("Dataframe Columns : {}. . .".format(all_data.columns))
         click.echo("Dataframe Head : {}. . .".format(all_data.head()))
-
+        click.echo("Dataframe types: {}".format(all_data.dtypes))
     return all_data
 
 
@@ -133,6 +140,7 @@ def split_products_and_packagings(env, all_data_dataframe, verbose):
     # Extract product related DF
     product_data = all_data_dataframe[all_data_dataframe["Secondary"] == "PIECE"]
     product_data = product_data.append(no_package_info, ignore_index=True, sort=True)
+
     if verbose:
         click.echo("products data: {}. . .".format(product_data.head()))
 
@@ -140,7 +148,6 @@ def split_products_and_packagings(env, all_data_dataframe, verbose):
     product_packaging_data = pd.concat(
         [all_data_dataframe, product_data, product_data]
     ).drop_duplicates(keep=False)
-
     # Maps packaging type on Odoo packaging type ids
     PACKAGING_TYPES = {
         "CARTON": env.ref("alc_product_packaging.product_packaging_type_box").id,
@@ -158,6 +165,20 @@ def split_products_and_packagings(env, all_data_dataframe, verbose):
     product_data[
         "Secondary_id"
     ] = 0  # Fill with zero for product to always drop in the same sql table
+
+    # Drop all products and packagings that are duplicated
+    product_data.drop_duplicates(inplace=True)
+    product_packaging_data.drop_duplicates(inplace=True)
+
+    product_data["REF "] = product_data["REF "].astype(str)
+    product_data["User1"] = product_data["User1"].astype(np.int64)
+    product_data["User2"] = product_data["User2"].astype(np.int64)
+    product_data["User3"] = product_data["User3"].astype(np.int64)
+
+    product_packaging_data["REF "] = product_packaging_data["REF "].astype(str)
+    product_packaging_data["User1"] = product_packaging_data["User1"].astype(np.int64)
+    product_packaging_data["User2"] = product_packaging_data["User2"].astype(np.int64)
+    product_packaging_data["User3"] = product_packaging_data["User3"].astype(np.int64)
 
     return product_data, product_packaging_data
 
@@ -199,6 +220,7 @@ def main(env, path_to_files, verbose):
 
     if verbose:
         click.echo("Updating Products table. . .")
+
     # Update my products table
     env.cr.execute(
         """ UPDATE
@@ -214,6 +236,96 @@ def main(env, path_to_files, verbose):
                 """
     )
     env.cr.commit()
+
+    # Look for no barcode
+    env.cr.execute(
+        """ SELECT Count(User1)
+                FROM dataframe_table
+                WHERE  User1 = 0
+    """
+    )
+    result = env.cr.fetchall()
+    if verbose:
+        click.echo("no barcode {}, count: {}. . .".format(result, len(result)))
+
+    # Look for no cnk
+    env.cr.execute(
+        """ SELECT Count(User2)
+                FROM dataframe_table
+                WHERE  User2 = 0
+    """
+    )
+    result = env.cr.fetchall()
+    if verbose:
+        click.echo("no ucnk {}, count: {}. . .".format(result, len(result)))
+
+    # Look for duplicates barcode
+    env.cr.execute(
+        """ SELECT Ref, User1
+                FROM dataframe_table
+                WHERE  User1 != 0 AND User1 IN (SELECT User1 FROM dataframe_table GROUP BY User1 Having COUNT(*) >1)
+    """
+    )
+    result = env.cr.fetchall()
+    products_refs = tuple([str(elt[0]) for elt in result])
+    if verbose:
+        click.echo("duplicated barcode {}, count: {}. . .".format(result, len(result)))
+        click.echo("products_refs {},. . .".format(products_refs))
+
+    env.cr.execute(
+        """ SELECT * FROM dataframe_table
+                WHERE Ref IN %(products_refs)s ORDER BY User1 DESC
+    """,
+        {"products_refs": products_refs},
+    )
+    result = env.cr.fetchall()
+
+    env.cr.execute(
+        """ DELETE FROM dataframe_table
+                WHERE Ref IN %(products_refs)s
+    """,
+        {"products_refs": products_refs},
+    )
+    env.cr.commit()
+    # Look for duplicates cnk
+    env.cr.execute(
+        """ SELECT Ref, User2
+                FROM dataframe_table
+                WHERE  User2 != 0 AND User2 IN (SELECT User2 FROM dataframe_table GROUP BY User2 Having COUNT(*) >1)
+    """
+    )
+    result2 = env.cr.fetchall()
+    products_refs = tuple([elt[0] for elt in result2])
+    if verbose:
+        click.echo("duplicated cnk {}, count: {}. . .".format(result2, len(result2)))
+
+    env.cr.execute(
+        """ SELECT * FROM dataframe_table
+                WHERE Ref IN %(products_refs)s ORDER BY User2 DESC
+    """,
+        {"products_refs": products_refs},
+    )
+    result = env.cr.fetchall()
+
+    env.cr.execute(
+        """ DELETE FROM dataframe_table
+                WHERE Ref IN %(products_refs)s
+    """,
+        {"products_refs": products_refs},
+    )
+    env.cr.commit()
+
+    env.cr.execute(
+        """ UPDATE
+                            product_product pp
+                       SET
+                            barcode = p_df.User1
+                       FROM dataframe_table p_df
+                       WHERE p_df.User1 != 0 AND pp.default_code = p_df.Ref
+                """
+    )
+    env.cr.commit()
+
     if verbose:
         click.echo(
             "I updated your products with the dataframe table infos. Now dropping the temporary table for products. . ."
@@ -224,6 +336,12 @@ def main(env, path_to_files, verbose):
 
     # Working on the product packaging
     # Put DF to sql temporary table
+
+    # Data in mm for packagings : conversion for now
+    product_packaging_data["Height"] = product_packaging_data["Height"] * 10
+    product_packaging_data["Width"] = product_packaging_data["Width"] * 10
+    product_packaging_data["Length"] = product_packaging_data["Length"] * 10
+
     dataframe_to_sql_table(env, product_packaging_data, verbose)
     if verbose:
         click.echo("Updating or creating packagings for products. . .")
@@ -260,12 +378,46 @@ def main(env, path_to_files, verbose):
                             max_weight = p_df.Weight,
                             height = p_df.Height,
                             width = p_df.Width,
-                            lngth = p_df.Length
+                            lngth = p_df.Length,
+                            barcode = p_df.User1,
+                            qty = p_df.User3
                        FROM (dataframe_table p_df JOIN product_template pt ON p_df.Ref = pt.default_code)
                        WHERE pt.id = p_pckg.product_tmpl_id AND p_pckg.packaging_type_id = p_df.Secondary_id
                    """
     )
     env.cr.commit()
+
+    env.cr.execute(
+        """
+        SELECT DISTINCT p_pckg.id FROM product_packaging p_pckg
+        JOIN product_template pt ON pt.id = p_pckg.product_tmpl_id
+        JOIN dataframe_table p_df ON pt.default_code = p_df.Ref
+        LEFT JOIN dataframe_table p_dff ON p_pckg.packaging_type_id = p_dff.Secondary_id
+        WHERE p_dff.Secondary_id IS NULL
+
+        """
+    )
+    #     SELECT p_pckg.id FROM product_packaging p_pckg
+    # WHERE NOT EXISTS (SELECT p_df.Secondary_id FROM dataframe_table p_df
+    # JOIN product_template pt ON pt.default_code = p_df.Ref
+    # JOIN product_packaging p_pckg ON pt.id = p_pckg.product_tmpl_id)
+    result = env.cr.fetchall()
+
+    if result:
+        packaging_ids = tuple([r[0] for r in result])
+        if verbose:
+            click.echo(
+                "Deleting following product packaging ids that where not in the xlsx file: {}. . .".format(
+                    packaging_ids
+                )
+            )
+        # deleting product packaging
+        env.cr.execute(
+            """ DELETE FROM product_packaging WHERE id IN %(ids)s
+        """,
+            {"ids": packaging_ids},
+        )
+        env.cr.commit()
 
     if verbose:
         click.echo("Dropping packaging product temporary table. . .")
