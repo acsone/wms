@@ -62,7 +62,7 @@ msgstr "Présente une anomalie"
 #: model:ir.model.fields,field_description:alc_product_audit.field_product_product_min_max_on_command_reappro
 #: model:ir.model.fields,field_description:alc_product_audit.field_product_template_min_max_on_command_reappro
 msgid "Min max on command reappro"
-msgstr ""Min/max mais en 'approvisionner à la commande' "
+msgstr "Min/max mais en 'approvisionner à la commande' "
 
 #. module: alc_product_audit
 #: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
