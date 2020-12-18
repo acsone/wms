@@ -44,7 +44,6 @@ class TestDeliveryRoundAssign2(common.DeliveryRoundTestCase):
                 "usage": "internal",
                 "act_as_view": True,
                 "location_id": cls.stock_location.id,
-                "picking_zone_id": cls.picking_zone_ali.id,
             }
         )
 
@@ -54,7 +53,6 @@ class TestDeliveryRoundAssign2(common.DeliveryRoundTestCase):
                 "usage": "internal",
                 "act_as_view": True,
                 "location_id": cls.stock_location.id,
-                "picking_zone_id": cls.picking_zone_medoc.id,
             }
         )
         cls.zone_ali = cls.env["stock.location"].create(
@@ -69,11 +67,6 @@ class TestDeliveryRoundAssign2(common.DeliveryRoundTestCase):
             {
                 "name": "GD80B2",
                 "kind": "bin",
-                "zone": "G",
-                "corridor": "D",
-                "shelf": "80",
-                "height": "B",
-                "box": "2",
                 "location_id": cls.zone_medoc.id,
                 "bin_checksum_1": "45",
                 "bin_checksum_2": "45",
@@ -84,11 +77,6 @@ class TestDeliveryRoundAssign2(common.DeliveryRoundTestCase):
             {
                 "name": "AD80B2",
                 "kind": "bin",
-                "zone": "A",
-                "corridor": "D",
-                "shelf": "80",
-                "height": "B",
-                "box": "2",
                 "location_id": cls.zone_ali.id,
                 "bin_checksum_1": "45",
                 "bin_checksum_2": "45",
