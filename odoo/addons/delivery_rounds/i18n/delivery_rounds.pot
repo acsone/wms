@@ -59,8 +59,8 @@ msgid "Active"
 msgstr ""
 
 #. module: delivery_rounds
-#: code:addons/delivery_rounds/models/sale_order.py:81
-#: code:addons/delivery_rounds/models/sale_order.py:90
+#: code:addons/delivery_rounds/models/sale_order.py:86
+#: code:addons/delivery_rounds/models/sale_order.py:95
 #: code:addons/delivery_rounds/models/stock_move.py:96
 #, python-format
 msgid "All pickings at destination of a same shipping must be in the same delivery round"
