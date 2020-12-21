@@ -128,10 +128,16 @@ msgid "Name must be unique"
 msgstr "Le nom doit être unique"
 
 #. module: alc_b2c_connector
-#: code:addons/alc_b2c_connector/models/sale_order.py:175
+#: code:addons/alc_b2c_connector/models/sale_order.py:180
 #, python-format
 msgid "No match found for customer_id: %s"
 msgstr "Aucun client trouvé pour customer_id: %s"
+
+#. module: alc_b2c_connector
+#: code:addons/alc_b2c_connector/models/sale_order.py:68
+#, python-format
+msgid "Order created from json: %s."
+msgstr ""
 
 #. module: alc_b2c_connector
 #: model:ir.model.fields,field_description:alc_b2c_connector.field_alc_b2c_backend_payment_mode_id
@@ -196,7 +202,7 @@ msgid "Sales Order Line"
 msgstr "Ligne du bon de commande"
 
 #. module: alc_b2c_connector
-#: code:addons/alc_b2c_connector/models/sale_order.py:38
+#: code:addons/alc_b2c_connector/models/sale_order.py:40
 #: sql_constraint:sale.order:0
 #, python-format
 msgid "This b2c reference already exists"
@@ -209,7 +215,7 @@ msgid "This user has no access to the B2C REST Api."
 msgstr "Cet utilisateur n'a pas accès à l'API REST B2C"
 
 #. module: alc_b2c_connector
-#: code:addons/alc_b2c_connector/models/sale_order.py:115
+#: code:addons/alc_b2c_connector/models/sale_order.py:120
 #, python-format
 msgid "Unknowns SKU(s): %s , "
 msgstr "SKU(s) inconnu(s): %s , "
