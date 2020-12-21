@@ -77,7 +77,7 @@ msgstr "Incohérence entre la zone de picking et le bac"
 #. module: alc_product_audit
 #: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
 msgid "Mismatch between route and picking zone"
-msgstr La route et la zone de picking ne correspondent pas"
+msgstr "La route et la zone de picking ne correspondent pas"
 
 #. module: alc_product_audit
 #: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_mismatch_picking_bin
@@ -98,12 +98,12 @@ msgstr "Incohérence entre la route et la zone de picking"
 #: model:ir.model.fields,field_description:alc_product_audit.field_product_product_no_min_max_no_on_command_reappro
 #: model:ir.model.fields,field_description:alc_product_audit.field_product_template_no_min_max_no_on_command_reappro
 msgid "No min max no on command reappro"
-msgstr "pas de Min/max et pas en 'approvisionner à la commande'"
+msgstr "Pas de Min/max et pas en 'approvisionner à la commande'"
 
 #. module: alc_product_audit
 #: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
 msgid "No min/max and no 'on command reappro'"
-msgstr "pas de Min/max et pas en 'approvisionner à la commande'"
+msgstr "Pas de Min/max et pas en 'approvisionner à la commande'"
 
 #. module: alc_product_audit
 #: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
