@@ -228,20 +228,27 @@ class ProductCronExporter(Component):
         ]
         return domain
 
-    def get_domain_timestamp_product_tmpl(self, export_since):
+    def get_domain_timestamp_product_tmpl(self, export_since, export_to=None):
         """Domain timestamp for product.template.
 
         Depending of the fields changed the write_date in the database
         is changed either on the product_product model or product_template.
         """
-        return [("product_tmpl_id.write_date", ">=", export_since)]
+        domain = [("product_tmpl_id.write_date", ">=", export_since)]
+        if export_to:
+            domain.append(("product_tmpl_id.write_date", "<=", export_since))
+        return domain
 
-    def domain_timestamp(self, export_since=None):
+    def domain_timestamp(self, export_since=None, export_to=None):
         """Add a check on product_template write_date."""
         return OR(
             [
-                super(ProductCronExporter, self).domain_timestamp(export_since),
-                self.get_domain_timestamp_product_tmpl(export_since),
+                super(ProductCronExporter, self).domain_timestamp(
+                    export_since, export_to=export_to
+                ),
+                self.get_domain_timestamp_product_tmpl(
+                    export_since, export_to=export_to
+                ),
             ]
         )
 

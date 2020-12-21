@@ -77,6 +77,18 @@ class ESBBackendTimestamp(models.Model):
                 self.last_export = next_last_export
 
     @api.multi
+    def export_period(self):
+        action = {
+            "type": "ir.actions.act_window",
+            "name": "Export: %s" % self.kind,
+            "res_model": "esb.period.exporter",
+            "context": [("active_ids", "=", self.ids)],
+            "view_mode": "form",
+            "target": "new",
+        }
+        return action
+
+    @api.multi
     def _lock_timestamp(self):
         """ Lock the timestamp record
 

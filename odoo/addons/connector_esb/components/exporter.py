@@ -296,7 +296,7 @@ class ESBCronExporter(AbstractComponent):
     def get_items_domain(self):
         return []
 
-    def domain_timestamp(self, export_since=None):
+    def domain_timestamp(self, export_since=None, export_to=None):
         """ Create a search domain for a timestamp
 
         To export only the changes since last export
@@ -309,32 +309,41 @@ class ESBCronExporter(AbstractComponent):
         But the FOR UPDATE NO WAIT did not seem to succeed at all on the
         product.product table when addressing many records.
         """
+        domain = []
         if export_since:
             export_date = fields.Datetime.from_string(export_since)
             export_date = export_date - datetime.timedelta(seconds=self.BASIC_LOCK_TIME)
             export_since = fields.Datetime.to_string(export_date)
-        return [("write_date", ">=", export_since)]
+            domain.append(("write_date", ">=", export_since))
+        if export_to:
+            export_date = fields.Datetime.from_string(export_to)
+            export_date = export_date + datetime.timedelta(seconds=self.BASIC_LOCK_TIME)
+            export_since = fields.Datetime.to_string(export_date)
+            domain.append(("write_date", "<=", export_since))
+        return domain
 
-    def get_items(self, export_since):
+    def get_items(self, export_since, export_to=None):
         domain = self.get_items_domain()
         if export_since:
-            date_domain = self.domain_timestamp(export_since)
+            date_domain = self.domain_timestamp(export_since, export_to=export_to)
             domain = AND([domain, date_domain])
         items = self.model.with_context(active_test=False).search(domain)
         return items
 
-    def run(self, export_since=None, max_records=0):
+    def run(self, export_since=None, export_to=None, max_records=0):
         """ Run the export on a domain
 
         ``export_since`` can be omitted to ignore the date and export
                          all the records that match the domain.
+        ``export_to`` can be omitted to ignore the date and export
+                      all the records that match the domain.
         ``max_records``  the maximum number of records that must be exported
                          in one export. Can be ommited to export all records
                          that need exporting. (Only used by cron web service
                          export)
         ``return``       the path of the file exported
         """
-        records = self.get_items(export_since=export_since)
+        records = self.get_items(export_since=export_since, export_to=export_to)
         return self._export_items(records)
 
 
