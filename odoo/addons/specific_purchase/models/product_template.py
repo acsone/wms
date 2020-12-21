@@ -8,9 +8,13 @@ class ProductTemplate(models.Model):
     _inherit = "product.template"
 
     volume = fields.Float(
-        string="Volume (liter)", help="Volume in liter", digits=(12, 3)
+        digits=(8, 4),
+        compute="_compute_volume",
+        readonly=True,
+        store=False,
+        string="Volume (liter)",
+        help="Volume in liter",
     )
-
     length = fields.Float("Length (cm)", help="Length in cm")
     width = fields.Float("Width (cm)", help="Width in cm")
     depth = fields.Float("Depth (cm)", help="Depth in cm")
@@ -47,6 +51,11 @@ class ProductTemplate(models.Model):
             volume_in_cm3 = product.length * product.width * product.depth
             volume_in_liter = volume_in_cm3 / 1000
             product.volume = volume_in_liter
+
+    @api.depends("length", "width", "depth")
+    def _compute_volume(self):
+        for product in self:
+            product.volume = (product.length * product.width * product.depth) / 1000.0
 
     @api.onchange("route_ids")
     def compute_date_out_of_stock(self):
