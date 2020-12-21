@@ -35,6 +35,7 @@ msgstr ""
 
 #. module: connector_esb
 #: model:ir.model.fields,field_description:connector_esb.field_esb_backend_timestamp_backend_id
+#: model:ir.model.fields,field_description:connector_esb.field_esb_period_exporter_backend_timestamp_id
 msgid "Backend Id"
 msgstr ""
 
@@ -47,6 +48,11 @@ msgstr ""
 #. module: connector_esb
 #: selection:product.supplierinfo.esbflux,flux:0
 msgid "Buy X Get Y"
+msgstr ""
+
+#. module: connector_esb
+#: model:ir.ui.view,arch_db:connector_esb.esb_period_exporter_form_view
+msgid "Cancel"
 msgstr ""
 
 #. module: connector_esb
@@ -68,6 +74,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:connector_esb.field_esb_backend_create_uid
 #: model:ir.model.fields,field_description:connector_esb.field_esb_backend_timestamp_create_uid
 #: model:ir.model.fields,field_description:connector_esb.field_esb_exportable_create_uid
+#: model:ir.model.fields,field_description:connector_esb.field_esb_period_exporter_create_uid
 #: model:ir.model.fields,field_description:connector_esb.field_product_supplierinfo_esbflux_create_uid
 msgid "Created by"
 msgstr ""
@@ -76,6 +83,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:connector_esb.field_esb_backend_create_date
 #: model:ir.model.fields,field_description:connector_esb.field_esb_backend_timestamp_create_date
 #: model:ir.model.fields,field_description:connector_esb.field_esb_exportable_create_date
+#: model:ir.model.fields,field_description:connector_esb.field_esb_period_exporter_create_date
 #: model:ir.model.fields,field_description:connector_esb.field_product_supplierinfo_esbflux_create_date
 msgid "Created on"
 msgstr ""
@@ -95,6 +103,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:connector_esb.field_esb_backend_display_name
 #: model:ir.model.fields,field_description:connector_esb.field_esb_backend_timestamp_display_name
 #: model:ir.model.fields,field_description:connector_esb.field_esb_exportable_display_name
+#: model:ir.model.fields,field_description:connector_esb.field_esb_period_exporter_display_name
 #: model:ir.model.fields,field_description:connector_esb.field_product_supplierinfo_esbflux_display_name
 msgid "Display Name"
 msgstr ""
@@ -127,6 +136,12 @@ msgid "End Date"
 msgstr ""
 
 #. module: connector_esb
+#: model:ir.actions.act_window,name:connector_esb.esb_period_exporter_act_window
+#: model:ir.ui.view,arch_db:connector_esb.esb_period_exporter_form_view
+msgid "Esb Period Exporter"
+msgstr ""
+
+#. module: connector_esb
 #: model:ir.model.fields,field_description:connector_esb.field_delivery_carrier_esb_exported
 #: model:ir.model.fields,field_description:connector_esb.field_product_product_esb_exported
 #: model:ir.model.fields,field_description:connector_esb.field_product_template_esb_exported
@@ -138,6 +153,11 @@ msgstr ""
 #. module: connector_esb
 #: model:ir.ui.view,arch_db:connector_esb.view_esb_backend_form
 msgid "Export"
+msgstr ""
+
+#. module: connector_esb
+#: model:ir.ui.view,arch_db:connector_esb.view_esb_backend_form
+msgid "Export a given period"
 msgstr ""
 
 #. module: connector_esb
@@ -169,9 +189,15 @@ msgid "Flux name"
 msgstr ""
 
 #. module: connector_esb
+#: model:ir.model.fields,field_description:connector_esb.field_esb_period_exporter_export_from
+msgid "From"
+msgstr ""
+
+#. module: connector_esb
 #: model:ir.model.fields,field_description:connector_esb.field_esb_backend_id
 #: model:ir.model.fields,field_description:connector_esb.field_esb_backend_timestamp_id
 #: model:ir.model.fields,field_description:connector_esb.field_esb_exportable_id
+#: model:ir.model.fields,field_description:connector_esb.field_esb_period_exporter_id
 #: model:ir.model.fields,field_description:connector_esb.field_product_supplierinfo_esbflux_id
 msgid "ID"
 msgstr ""
@@ -200,6 +226,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:connector_esb.field_esb_backend___last_update
 #: model:ir.model.fields,field_description:connector_esb.field_esb_backend_timestamp___last_update
 #: model:ir.model.fields,field_description:connector_esb.field_esb_exportable___last_update
+#: model:ir.model.fields,field_description:connector_esb.field_esb_period_exporter___last_update
 #: model:ir.model.fields,field_description:connector_esb.field_product_supplierinfo_esbflux___last_update
 msgid "Last Modified on"
 msgstr ""
@@ -208,6 +235,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:connector_esb.field_esb_backend_timestamp_write_uid
 #: model:ir.model.fields,field_description:connector_esb.field_esb_backend_write_uid
 #: model:ir.model.fields,field_description:connector_esb.field_esb_exportable_write_uid
+#: model:ir.model.fields,field_description:connector_esb.field_esb_period_exporter_write_uid
 #: model:ir.model.fields,field_description:connector_esb.field_product_supplierinfo_esbflux_write_uid
 msgid "Last Updated by"
 msgstr ""
@@ -216,6 +244,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:connector_esb.field_esb_backend_timestamp_write_date
 #: model:ir.model.fields,field_description:connector_esb.field_esb_backend_write_date
 #: model:ir.model.fields,field_description:connector_esb.field_esb_exportable_write_date
+#: model:ir.model.fields,field_description:connector_esb.field_esb_period_exporter_write_date
 #: model:ir.model.fields,field_description:connector_esb.field_product_supplierinfo_esbflux_write_date
 msgid "Last Updated on"
 msgstr ""
@@ -258,6 +287,11 @@ msgstr ""
 #: code:addons/connector_esb/components/exporter.py:108
 #, python-format
 msgid "Nothing to export."
+msgstr ""
+
+#. module: connector_esb
+#: model:ir.ui.view,arch_db:connector_esb.esb_period_exporter_form_view
+msgid "OK"
 msgstr ""
 
 #. module: connector_esb
@@ -470,7 +504,7 @@ msgid "The customer {} has already been exported, it can be archived  but not de
 msgstr ""
 
 #. module: connector_esb
-#: code:addons/connector_esb/models/backend_timestamp.py:99
+#: code:addons/connector_esb/models/backend_timestamp.py:111
 #, python-format
 msgid "The synchronization timestamp (%s) is currently locked, probably due to an ongoing synchronization."
 msgstr ""
@@ -483,6 +517,7 @@ msgstr ""
 
 #. module: connector_esb
 #: code:addons/connector_esb/models/backend_timestamp.py:69
+#: code:addons/connector_esb/wizards/esb_period_exporter.py:39
 #, python-format
 msgid "This export can not be triggered manually."
 msgstr ""
@@ -504,6 +539,11 @@ msgstr ""
 #. module: connector_esb
 #: model:ir.model.fields,field_description:connector_esb.field_esb_backend_timestamp_last_export
 msgid "Timestamp last export"
+msgstr ""
+
+#. module: connector_esb
+#: model:ir.model.fields,field_description:connector_esb.field_esb_period_exporter_export_to
+msgid "To"
 msgstr ""
 
 #. module: connector_esb
@@ -565,6 +605,11 @@ msgstr ""
 #. module: connector_esb
 #: model:ir.model,name:connector_esb.model_esb_exportable
 msgid "esb.exportable"
+msgstr ""
+
+#. module: connector_esb
+#: model:ir.model,name:connector_esb.model_esb_period_exporter
+msgid "esb.period.exporter"
 msgstr ""
 
 #. module: connector_esb
