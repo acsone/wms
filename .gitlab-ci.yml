@@ -95,7 +95,7 @@ test:
     - install_acsoo
     - start_ssh_agent  # for pushing translations
     - virtualenv --python=$PYTHON venv
-    - venv/bin/pip install coverage -r requirements-test.txt
+    - venv/bin/pip install coverage -r requirements-tests.txt
     # use --no-index so missing dependencies that would not be in *.whl are detected
     - venv/bin/pip install --no-index release/*.whl
     # although the project is part of *.whl, install it in editable mode so coverage sees it
