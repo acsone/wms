@@ -14,7 +14,7 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["alc_stock_receive_lot", "LGPL" "web_widget_inputmask"],
+    "depends": ["stock_receive_lot", "web_widget_inputmask"],
     "data": ["views/stock_pack_operation_lot_add.xml"],
     "demo": [],
 }

@@ -6,18 +6,18 @@
     "name": "Specific Helpdesk for Alcyon",
     "version": "10.0.1.0.0",
     "author": "Camptocamp",
-    "license": "LGPL-3",
+    "license": "OEEL-1",
     "category": "Helpdesk",
+    # BE CAREFUL ALL the dependencies must BE LGPL or OEEL!!!
+    # helpdesk is an Odoo enterprise module
     "depends": [
         "account",
-        "helpdesk",  # Odoo enterprise module requires LGPL
-        "mrp_repair",
-        "product",
+        "helpdesk",
         "purchase",
         "sale",
-        "specific_purchase",
         "stock",
         "stock_receive_lot",
+        "alc_supplier_purchase_manager",
     ],
     "website": "http://www.camptocamp.com",
     "data": [
