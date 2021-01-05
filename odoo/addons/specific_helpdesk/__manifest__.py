@@ -27,7 +27,7 @@
         "data/mail_template.xml",
         "security/ir.model.access.csv",
         "wizards/create_helpdesk_ticket.xml",
-        "wizards/stock_receive_lot.xml",
+        "wizards/stock_pack_operation_lot_add.xml",
         "views/res_partner.xml",
         "views/helpdesk.xml",
         "views/purchase_order.xml",
