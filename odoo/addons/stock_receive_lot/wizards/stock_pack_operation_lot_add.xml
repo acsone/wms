@@ -37,14 +37,9 @@
                         <label for="life_date"/>
                         <div>
                             <field name="life_date_char"
-                                widget="mask" data-inputmask-regex="^(3[0-1]|[0-2]\d|\d)\/(1[0-2]|0[1-9]|\d)\/20\d{2}$"
                                 attrs="{'required': [('lot_required', '=', True)], 'readonly': ['|', ('operation_id', '=', False), ('lot_required', '=', False)]}"
                                 />
                             <field name="life_date" invisible="1"/>
-                            <field name="is_removal_date_expired" invisible="1"/>
-                            <div attrs="{'invisible': [('is_removal_date_expired', '!=', True)]}">
-                                <i class="fa fa-exclamation-triangle" style="color:red"><span style="margin:0 5px">Expired</span></i>
-                            </div>
                         </div>
                         <field name="lot_name" attrs="{'required': [('lot_required', '=', True)], 'readonly': ['|', ('operation_id', '=', False), ('lot_required', '=', False)]}"/>
                         <field name="qty" attrs="{'readonly': [('operation_id', '=', False)]}"/>

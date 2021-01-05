@@ -2,7 +2,7 @@
 # © 2016 Julien Coux (Camptocamp)
 # © 2017 Jacques-Etienne Baudoux (BCIM)
 # Copyright 2020 ACSONE SA/NV
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+# License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
 from odoo import api, fields, models
 
@@ -11,8 +11,6 @@ class StockPackOperationLot(models.Model):
     _inherit = "stock.pack.operation.lot"
 
     life_date = fields.Datetime(string="Expiration date")
-
-    is_product_expired = fields.Boolean(related="lot_id.is_expired", readonly=True)
 
     def _calc_lotname_from_lifedate(self, pack_op, life_date):
         """ The default lot name is only for an aliment """

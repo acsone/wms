@@ -9,6 +9,8 @@
     "license": "AGPL-3",
     "category": "Warehouse",
     "depends": [
+        "alc_stock_receive_lot_expiry",
+        "alc_stock_receive_lot_inputmask",
         "board",
         "delivery_rounds",
         "product",

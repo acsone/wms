@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2021 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+    <record model="ir.ui.view" id="stock_pack_operation_lot_add_form_view">
+        <field name="name">stock.pack.operation.lot.add.form (in alc_stock_receive_lot_inputmask)</field>
+        <field name="model">stock.pack.operation.lot.add</field>
+        <field name="inherit_id" ref="stock_receive_lot.view_pack_operation_lot_add_form"/>
+        <field name="arch" type="xml">
+            <field name="life_date_char" position="attributes">
+                <attribute name="widget">mask</attribute>>
+                <attribute name="data-inputmask-regex">^(3[0-1]|[0-2]\d|\d)\/(1[0-2]|0[1-9]|\d)\/20\d{2}$</attribute>
+            </field>
+        </field>
+    </record>
+
+</odoo>

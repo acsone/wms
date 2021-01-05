@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # © 2017-2018 Jacques-Etienne Baudoux (BCIM sprl) <je@bcim.be>
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+# License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
 from datetime import datetime
 
@@ -136,19 +136,10 @@ class StockPackOperationLotAdd(models.TransientModel):
                 self.operation_id, self.life_date
             )
 
-    @api.depends("life_date", "operation_id")
-    def _get_is_removal_date_expired(self):
-        if not self.operation_id:
-            self.is_removal_date_expired = False
-        else:
-            lot = self.env["stock.production.lot"].new(
-                {
-                    "product_id": self.operation_id.product_id.id,
-                    "life_date": self.life_date,
-                }
-            )
-            lot.onchange_life_date()
-            self.is_removal_date_expired = lot.is_expired
+    def _lot_onchange_life_date(self, lot):
+        methods = lot._onchange_methods.get("life_date", ())
+        for method in methods:
+            method(lot)
 
     def _convert_lot_name2id(self, vals):
         if "operation_id" in vals:
@@ -171,7 +162,7 @@ class StockPackOperationLotAdd(models.TransientModel):
                     "product_id": operation.product_id.id,
                 }
             )
-            lot.onchange_life_date()
+            self._lot_onchange_life_date(lot)
         vals["lot_id"] = lot.id
 
     @api.model
@@ -190,7 +181,7 @@ class StockPackOperationLotAdd(models.TransientModel):
         for rec in self:
             if rec.lot_id and rec.life_date and rec.lot_id.life_date != rec.life_date:
                 rec.lot_id.life_date = rec.life_date
-                rec.lot_id.onchange_life_date()
+                self._lot_onchange_life_date(rec.lot_id)
         return res
 
     def _add(self):
