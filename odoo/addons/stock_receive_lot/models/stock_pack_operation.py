@@ -1,50 +1,74 @@
 # -*- coding: utf-8 -*-
-# © 2016 Julien Coux (Camptocamp)
-# © 2017 Jacques-Etienne Baudoux (BCIM)
-# Copyright 2020 ACSONE SA/NV
+# © 2017-2018 Jacques-Etienne Baudoux (BCIM sprl) <je@bcim.be>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import api, fields, models
+from odoo import api, models
 
 
-class StockPackOperationLot(models.Model):
-    _inherit = "stock.pack.operation.lot"
-
-    life_date = fields.Datetime(string="Expiration date")
-
-    is_product_expired = fields.Boolean(related="lot_id.is_expired", readonly=True)
-
-    def _calc_lotname_from_lifedate(self, pack_op, life_date):
-        """ The default lot name is only for an aliment """
-        picking_zone = pack_op.product_id.picking_zone_id
-        if picking_zone != self.env.ref("__setup__.picking_zone_aliments"):
-            return
-
-        date = fields.Datetime.from_string(life_date)
-        date_with_timezone = fields.Datetime.context_timestamp(self, date)
-        return date_with_timezone.strftime("%d%m%y")
-
-    @api.onchange("life_date")
-    def _onchange_life_date(self):
-        if self.life_date and self.operation_id:
-            self.lot_name = self._calc_lotname_from_lifedate(
-                self.operation_id, self.life_date
-            )
+class StockPackOperation(models.Model):
+    _inherit = "stock.pack.operation"
+    _rec_name = "product_id"
 
     @api.multi
-    def write(self, vals):
-        result = super(StockPackOperationLot, self).write(vals)
-        if vals.get("lot_id"):
-            for pack_operation_lot in self:
-                life_date = pack_operation_lot.life_date
-                if life_date:
-                    pack_operation_lot.lot_id.life_date = life_date
-                    pack_operation_lot.lot_id.onchange_life_date()
+    def name_get(self):
+        result = []
+        for rec in self:
+            result.append(
+                (
+                    rec.id,
+                    "%s (%d/%d)"
+                    % (rec.product_id.display_name, rec.qty_done, rec.product_qty),
+                )
+            )
         return result
 
     @api.model
-    def create(self, vals):
-        if vals.get("lot_id") and not vals.get("life_date"):
-            lot = self.env["stock.production.lot"].browse(vals["lot_id"])
-            vals["life_date"] = lot.life_date
-        return super(StockPackOperationLot, self).create(vals)
+    def name_search(self, name, args=None, operator="ilike", limit=100):
+        """Search a pack operation by name
+
+        It is customized to find an operation by the display name of a product.
+        The default name_search would search on the pack operation's name_get,
+        which would be pretty inefficient due to the products' quantities in
+        the name_get.
+
+        This method also handles a fast path for when we are receiving products
+        for a picking: in the reception wizard (stock.pack.operation.lot.add),
+        the Many2one for stock.pack.operation filters on the picking_id. In
+        that case, we limit the search on the products of the picking only.
+        """
+        args = args or []
+        if name:
+            # fast path for stock.pack.operation.lot.add, narrow the search
+            # on the current picking
+            picking_id = None
+            product_args = []
+            # default limit for search products a too large limit would be too
+            # slow when the name match thousands of products
+            product_limit = 100
+            for (field, op, value) in args:
+                if field == "picking_id" and op == "=":
+                    picking_id = value
+                    break
+            if picking_id:
+                picking = self.env["stock.picking"].browse(picking_id).exists()
+                picking_products = picking.mapped("move_lines.product_id")
+                product_args.append(("id", "in", picking_products.ids))
+                # in this particular case we can disable the limit as we want
+                # all the products of the picking, and we shouldn't have
+                # thousands of them matching a term for a picking
+                product_limit = None
+
+            product_ids = [
+                pid
+                for pid, __ in self.env["product.product"].name_search(
+                    name, operator=operator, args=product_args, limit=product_limit
+                )
+            ]
+            args = [("product_id", "in", product_ids)] + args
+        # Warning: as we limit on 100 products, if filter the pack operations
+        # with 'args' and the name returns thousands of products (like 'a'),
+        # then potentially we might have an empty list because the 'args'
+        # domain would be applied on a list which does not include our product.
+        # This is not a problem when using the fast path which should be the
+        # common case.
+        return self.search(args, limit=limit).name_get()

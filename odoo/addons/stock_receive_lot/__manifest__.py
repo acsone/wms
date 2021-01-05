@@ -4,7 +4,7 @@
 
 {
     "name": "Stock Receive Wizard",
-    "version": "9.0.1.0.0",
+    "version": "10.0.1.0.0",
     "author": "BCIM",
     "maintainer": "Camptocamp",
     "license": "AGPL-3",
@@ -20,7 +20,8 @@
     "data": [
         "views/stock_location.xml",
         "views/stock_pack_operation.xml",
-        "wizards/stock.xml",
+        "wizards/stock_pack_operation_lot_add.xml",
+        "views/stock_picking.xml",
     ],
     "installable": True,
 }

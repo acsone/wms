@@ -2,12 +2,13 @@
 # Copyright 2017 Jacques-Etienne Baudoux <je@bcim.be>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+from odoo.exceptions import UserError
 from odoo.tests.common import TransactionCase, at_install, post_install
 
 
-class TestReception(TransactionCase):
+class TestPackOperationLotAdd(TransactionCase):
     def setUp(self):
-        super(TestReception, self).setUp()
+        super(TestPackOperationLotAdd, self).setUp()
         self.category_model = self.env["product.category"]
         self.product_model = self.env["product.product"]
         self.partner_model = self.env["res.partner"]
@@ -173,6 +174,33 @@ class TestReception(TransactionCase):
         self.assertEqual(picking.state, "done")
         self.assertEqual(len(picking.move_lines), len(self.products))
         self.assertEqual(len(picking.pack_operation_product_ids), len(self.products))
+
+    def test_receive_surplus_quantities(self):
+        picking = self.picking
+        # launch wizard
+        wiz = self.stock_reception_wizard.with_context(
+            default_life_date_allowed=True
+        ).new({"picking_id": picking.id})
+
+        op1 = picking.pack_operation_product_ids[0]
+
+        # Simulate putaway to bin1 and bin2
+        op1.location_dest_id = self.bin1
+
+        # select operation
+        with self.assertRaises(UserError), self.env.cr.savepoint():
+            wiz.operation_id = op1
+            wiz._onchange_operation_id()
+            self.assertEqual(wiz.remaining_qty, 5)
+            wiz.qty = 10
+            wiz.button_nextop()
+        wiz.operation_id = op1
+        wiz._onchange_operation_id()
+        self.assertEqual(wiz.remaining_qty, 5)
+        wiz.qty = 10
+        wiz.is_surplus_qty_confirmed = True
+        wiz.button_nextop()
+        self.assertEqual(op1.qty_done, 10)
 
     @post_install(True)
     @at_install(False)
