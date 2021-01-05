@@ -27,5 +27,7 @@ setup(
         [console_scripts]
         click-odoo-cubiscan-import=scripts.cubiscan_import:main
     """,
-    extras_require={"tests": ["xmlunittest", "freezegun", "unittest2", "responses"]},
+    extras_require={
+        "tests": ["xmlunittest", "freezegun==0.3.14", "unittest2", "responses"]
+    },
 )
