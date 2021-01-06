@@ -63,7 +63,7 @@ class HelpdeskTicket(models.Model):
     @api.model
     def create(self, vals):
         if vals.get("name", "/") == "/":
-            sequence = self.env.ref("specific_helpdesk.seq_ticket_auto")
+            sequence = self.env.ref("alc_oeel_helpdesk.seq_ticket_auto")
             vals["name"] = sequence.next_by_id()
         ticket = super(HelpdeskTicket, self).create(vals)
 
@@ -81,7 +81,7 @@ class HelpdeskTicket(models.Model):
     @api.model
     def new_one(self, r):
         """Return the action for the wizard to create a new ticket."""
-        view = self.env.ref("specific_helpdesk.create_helpdesk_ticket_view_form")
+        view = self.env.ref("alc_oeel_helpdesk.create_helpdesk_ticket_view_form")
         return {
             "type": "ir.actions.act_window",
             "res_model": "create.helpdesk.ticket",

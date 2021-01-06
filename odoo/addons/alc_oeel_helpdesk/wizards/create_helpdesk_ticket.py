@@ -45,9 +45,9 @@ class CreateHelpdeskTicket(models.TransientModel):
         env = self.env
         if picking.sale_id:
             ticket["sale_order_id"] = picking.sale_id.id
-            ticket["team_id"] = env.ref("specific_helpdesk.customer_team").id
+            ticket["team_id"] = env.ref("alc_oeel_helpdesk.customer_team").id
         if picking.purchase_id:
             ticket["purchase_order_id"] = picking.purchase_id.id
-            ticket["team_id"] = env.ref("specific_helpdesk.supplier_team").id
+            ticket["team_id"] = env.ref("alc_oeel_helpdesk.supplier_team").id
 
         self.env["helpdesk.ticket"].create(ticket)

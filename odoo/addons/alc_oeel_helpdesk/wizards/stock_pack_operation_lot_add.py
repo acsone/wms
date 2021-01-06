@@ -32,7 +32,7 @@ class StockPackOperationLotAdd(models.TransientModel):
                 "partner_id": self.partner_id.id,
                 "stock_picking_id": self.picking_id.id,
                 "product_id": self.operation_id.product_id.id,
-                "team_id": self.env.ref("specific_helpdesk.supplier_team").id,
+                "team_id": self.env.ref("alc_oeel_helpdesk.supplier_team").id,
             }
             if self.operation_id.picking_id.purchase_id:
                 ticket["purchase_order_id"] = self.picking_id.purchase_id.id

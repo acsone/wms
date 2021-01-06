@@ -2,7 +2,7 @@
 <odoo>
 
     <!-- Add smart button on customer invoices -->
-    <record id="account_invoice_specific_helpdesk" model="ir.ui.view">
+    <record id="account_invoice_alc_oeel_helpdesk" model="ir.ui.view">
         <field name="name">account.invoice.helpdesk.specific.form</field>
         <field name="model">account.invoice</field>
         <field name="inherit_id" ref="sale.account_invoice_form"/>
@@ -22,7 +22,7 @@
     </record>
 
     <!-- Add smart button on supplier invoices -->
-    <record id="account_supplier_invoice_specific_helpdesk" model="ir.ui.view">
+    <record id="account_supplier_invoice_alc_oeel_helpdesk" model="ir.ui.view">
         <field name="name">account.invoice.helpdesk.specific.form</field>
         <field name="model">account.invoice</field>
         <field name="inherit_id" ref="purchase.view_invoice_supplier_purchase_form"/>

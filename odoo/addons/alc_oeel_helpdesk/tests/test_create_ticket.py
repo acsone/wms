@@ -12,7 +12,7 @@ class TestCreateTicketWizard(SavepointCase):
     @classmethod
     def setUpClass(cls):
         super(TestCreateTicketWizard, cls).setUpClass()
-        cls.reason_defect = cls.env.ref("specific_helpdesk.product_defect")
+        cls.reason_defect = cls.env.ref("alc_oeel_helpdesk.product_defect")
         cls.partner1 = cls.env["res.partner"].create(
             {"name": "Partner One", "ref": "99829422054"}
         )

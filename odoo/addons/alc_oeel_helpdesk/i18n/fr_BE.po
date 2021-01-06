@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* specific_helpdesk
+# 	* alc_oeel_helpdesk
 #
 msgid ""
 msgstr ""
@@ -16,73 +16,73 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
-#. module: specific_helpdesk
-#: model:mail.template,subject:specific_helpdesk.email_template_helpdesk_msg_1
-#: model:mail.template,subject:specific_helpdesk.email_template_helpdesk_msg_2
-#: model:mail.template,subject:specific_helpdesk.email_template_helpdesk_msg_3
-#: model:mail.template,subject:specific_helpdesk.email_template_helpdesk_msg_4
-#: model:mail.template,subject:specific_helpdesk.email_template_helpdesk_msg_5
-#: model:mail.template,subject:specific_helpdesk.email_template_helpdesk_msg_6
+#. module: alc_oeel_helpdesk
+#: model:mail.template,subject:alc_oeel_helpdesk.email_template_helpdesk_msg_1
+#: model:mail.template,subject:alc_oeel_helpdesk.email_template_helpdesk_msg_2
+#: model:mail.template,subject:alc_oeel_helpdesk.email_template_helpdesk_msg_3
+#: model:mail.template,subject:alc_oeel_helpdesk.email_template_helpdesk_msg_4
+#: model:mail.template,subject:alc_oeel_helpdesk.email_template_helpdesk_msg_5
+#: model:mail.template,subject:alc_oeel_helpdesk.email_template_helpdesk_msg_6
 msgid "${object.display_name}"
 msgstr ""
 
-#. module: specific_helpdesk
-#: model:helpdesk.ticket.reason,name:specific_helpdesk.product_defect
+#. module: alc_oeel_helpdesk
+#: model:helpdesk.ticket.reason,name:alc_oeel_helpdesk.product_defect
 msgid "01-Product defect"
 msgstr "01-Article défecteux"
 
-#. module: specific_helpdesk
-#: model:helpdesk.ticket.reason,name:specific_helpdesk.missing_quantity
+#. module: alc_oeel_helpdesk
+#: model:helpdesk.ticket.reason,name:alc_oeel_helpdesk.missing_quantity
 msgid "02-Missing quantity"
 msgstr "02-Quantité manquante"
 
-#. module: specific_helpdesk
-#: model:helpdesk.ticket.reason,name:specific_helpdesk.cold_chain_broken
+#. module: alc_oeel_helpdesk
+#: model:helpdesk.ticket.reason,name:alc_oeel_helpdesk.cold_chain_broken
 msgid "03-Cold chain broken"
 msgstr "03-Chaine du froid non respectée"
 
-#. module: specific_helpdesk
-#: model:helpdesk.ticket.reason,name:specific_helpdesk.short_lapsing
+#. module: alc_oeel_helpdesk
+#: model:helpdesk.ticket.reason,name:alc_oeel_helpdesk.short_lapsing
 msgid "04-Short lapsing"
 msgstr "04-Date d'expiration proche"
 
-#. module: specific_helpdesk
-#: model:helpdesk.ticket.reason,name:specific_helpdesk.expired_product
+#. module: alc_oeel_helpdesk
+#: model:helpdesk.ticket.reason,name:alc_oeel_helpdesk.expired_product
 msgid "05-Expired product"
 msgstr "05-Article périmé"
 
-#. module: specific_helpdesk
-#: model:helpdesk.ticket.reason,name:specific_helpdesk.non_ordered_product
+#. module: alc_oeel_helpdesk
+#: model:helpdesk.ticket.reason,name:alc_oeel_helpdesk.non_ordered_product
 msgid "06-Non ordered product"
 msgstr "06-Article non commandé"
 
-#. module: specific_helpdesk
-#: model:helpdesk.ticket.reason,name:specific_helpdesk.higher_quantity
+#. module: alc_oeel_helpdesk
+#: model:helpdesk.ticket.reason,name:alc_oeel_helpdesk.higher_quantity
 msgid "07-Higher quantity"
 msgstr "07-Quantité supérieure"
 
-#. module: specific_helpdesk
-#: model:helpdesk.ticket.reason,name:specific_helpdesk.product_switch
+#. module: alc_oeel_helpdesk
+#: model:helpdesk.ticket.reason,name:alc_oeel_helpdesk.product_switch
 msgid "08-Product error (A for B)"
 msgstr "08-Mauvais article (A pour B)"
 
-#. module: specific_helpdesk
-#: model:helpdesk.ticket.reason,name:specific_helpdesk.delivery_error
+#. module: alc_oeel_helpdesk
+#: model:helpdesk.ticket.reason,name:alc_oeel_helpdesk.delivery_error
 msgid "09-Delivery error"
 msgstr "09-Erreur de livraison"
 
-#. module: specific_helpdesk
-#: model:helpdesk.ticket.reason,name:specific_helpdesk.misc
+#. module: alc_oeel_helpdesk
+#: model:helpdesk.ticket.reason,name:alc_oeel_helpdesk.misc
 msgid "10-Miscalenious"
 msgstr "10-Divers"
 
-#. module: specific_helpdesk
-#: model:helpdesk.ticket.reason,name:specific_helpdesk.price_issue
+#. module: alc_oeel_helpdesk
+#: model:helpdesk.ticket.reason,name:alc_oeel_helpdesk.price_issue
 msgid "11-Price issue"
 msgstr "11-Problème de prix"
 
-#. module: specific_helpdesk
-#: model:mail.template,body_html:specific_helpdesk.email_template_helpdesk_msg_1
+#. module: alc_oeel_helpdesk
+#: model:mail.template,body_html:alc_oeel_helpdesk.email_template_helpdesk_msg_1
 msgid ""
 "<?xml version=\"1.0\"?>\n"
 "<div style=\"max-width:600px; height:auto; margin-left:30px;\">\n"
@@ -114,8 +114,8 @@ msgstr ""
 "</div>\n"
 "        "
 
-#. module: specific_helpdesk
-#: model:mail.template,body_html:specific_helpdesk.email_template_helpdesk_msg_2
+#. module: alc_oeel_helpdesk
+#: model:mail.template,body_html:alc_oeel_helpdesk.email_template_helpdesk_msg_2
 msgid ""
 "<?xml version=\"1.0\"?>\n"
 "<div style=\"max-width:600px; height:auto; margin-left:30px;\">\n"
@@ -146,8 +146,8 @@ msgstr ""
 "</div>\n"
 "        "
 
-#. module: specific_helpdesk
-#: model:mail.template,body_html:specific_helpdesk.email_template_helpdesk_msg_3
+#. module: alc_oeel_helpdesk
+#: model:mail.template,body_html:alc_oeel_helpdesk.email_template_helpdesk_msg_3
 msgid ""
 "<?xml version=\"1.0\"?>\n"
 "<div style=\"max-width:600px; height:auto; margin-left:30px;\">\n"
@@ -177,8 +177,8 @@ msgstr ""
 "</div>\n"
 "        "
 
-#. module: specific_helpdesk
-#: model:mail.template,body_html:specific_helpdesk.email_template_helpdesk_msg_4
+#. module: alc_oeel_helpdesk
+#: model:mail.template,body_html:alc_oeel_helpdesk.email_template_helpdesk_msg_4
 msgid ""
 "<?xml version=\"1.0\"?>\n"
 "<div style=\"max-width:600px; height:auto; margin-left:30px;\">\n"
@@ -212,8 +212,8 @@ msgstr ""
 "</div>\n"
 "        "
 
-#. module: specific_helpdesk
-#: model:mail.template,body_html:specific_helpdesk.email_template_helpdesk_msg_5
+#. module: alc_oeel_helpdesk
+#: model:mail.template,body_html:alc_oeel_helpdesk.email_template_helpdesk_msg_5
 msgid ""
 "<?xml version=\"1.0\"?>\n"
 "<div style=\"max-width:600px; height:auto; margin-left:30px;\">\n"
@@ -247,8 +247,8 @@ msgstr ""
 "</div>\n"
 "        "
 
-#. module: specific_helpdesk
-#: model:mail.template,body_html:specific_helpdesk.email_template_helpdesk_msg_6
+#. module: alc_oeel_helpdesk
+#: model:mail.template,body_html:alc_oeel_helpdesk.email_template_helpdesk_msg_6
 msgid ""
 "<?xml version=\"1.0\"?>\n"
 "<div style=\"max-width:600px; height:auto; margin-left:30px;\">\n"
@@ -282,251 +282,251 @@ msgstr ""
 "</div>\n"
 "        "
 
-#. module: specific_helpdesk
-#: model:helpdesk.team,name:specific_helpdesk.accounting_team
+#. module: alc_oeel_helpdesk
+#: model:helpdesk.team,name:alc_oeel_helpdesk.accounting_team
 msgid "Accounting"
 msgstr "Comptabilité"
 
-#. module: specific_helpdesk
-#: model:helpdesk.team,name:specific_helpdesk.aftersales_team
+#. module: alc_oeel_helpdesk
+#: model:helpdesk.team,name:alc_oeel_helpdesk.aftersales_team
 msgid "After Sale Service"
 msgstr "SAV - Matériel"
 
-#. module: specific_helpdesk
-#: model:ir.ui.view,arch_db:specific_helpdesk.create_helpdesk_ticket_view_form
+#. module: alc_oeel_helpdesk
+#: model:ir.ui.view,arch_db:alc_oeel_helpdesk.create_helpdesk_ticket_view_form
 msgid "Cancel"
 msgstr ""
 
-#. module: specific_helpdesk
-#: model:ir.actions.act_window,help:specific_helpdesk.helpdesk_ticket_reason_action
+#. module: alc_oeel_helpdesk
+#: model:ir.actions.act_window,help:alc_oeel_helpdesk.helpdesk_ticket_reason_action
 msgid "Click to create a new ticket reason."
 msgstr "Cliquer pour créer une nouvelle cause du ticket"
 
-#. module: specific_helpdesk
-#: model:ir.ui.view,arch_db:specific_helpdesk.view_pack_operation_lot_add_form
+#. module: alc_oeel_helpdesk
+#: model:ir.ui.view,arch_db:alc_oeel_helpdesk.view_pack_operation_lot_add_form
 msgid "Create a helpdesk ticket"
 msgstr "Créer un ticket helpdesk"
 
-#. module: specific_helpdesk
-#: model:ir.actions.act_window,name:specific_helpdesk.action_create_helpdesk_ticket
-#: model:ir.ui.view,arch_db:specific_helpdesk.create_helpdesk_ticket_view_form
+#. module: alc_oeel_helpdesk
+#: model:ir.actions.act_window,name:alc_oeel_helpdesk.action_create_helpdesk_ticket
+#: model:ir.ui.view,arch_db:alc_oeel_helpdesk.create_helpdesk_ticket_view_form
 msgid "Create helpdesk ticket"
 msgstr "Créer un ticket helpdesk"
 
-#. module: specific_helpdesk
-#: model:ir.model.fields,field_description:specific_helpdesk.field_create_helpdesk_ticket_create_uid
-#: model:ir.model.fields,field_description:specific_helpdesk.field_helpdesk_ticket_reason_create_uid
+#. module: alc_oeel_helpdesk
+#: model:ir.model.fields,field_description:alc_oeel_helpdesk.field_create_helpdesk_ticket_create_uid
+#: model:ir.model.fields,field_description:alc_oeel_helpdesk.field_helpdesk_ticket_reason_create_uid
 msgid "Created by"
 msgstr "Créé par"
 
-#. module: specific_helpdesk
-#: model:ir.model.fields,field_description:specific_helpdesk.field_create_helpdesk_ticket_create_date
-#: model:ir.model.fields,field_description:specific_helpdesk.field_helpdesk_ticket_reason_create_date
+#. module: alc_oeel_helpdesk
+#: model:ir.model.fields,field_description:alc_oeel_helpdesk.field_create_helpdesk_ticket_create_date
+#: model:ir.model.fields,field_description:alc_oeel_helpdesk.field_helpdesk_ticket_reason_create_date
 msgid "Created on"
 msgstr "Créé le"
 
-#. module: specific_helpdesk
-#: model:helpdesk.team,name:specific_helpdesk.customer_team
+#. module: alc_oeel_helpdesk
+#: model:helpdesk.team,name:alc_oeel_helpdesk.customer_team
 msgid "Customer"
 msgstr "Clients"
 
-#. module: specific_helpdesk
-#: model:ir.model.fields,field_description:specific_helpdesk.field_create_helpdesk_ticket_description
-#: model:ir.model.fields,field_description:specific_helpdesk.field_stock_pack_operation_lot_add_helpdesk_ticket_description
+#. module: alc_oeel_helpdesk
+#: model:ir.model.fields,field_description:alc_oeel_helpdesk.field_create_helpdesk_ticket_description
+#: model:ir.model.fields,field_description:alc_oeel_helpdesk.field_stock_pack_operation_lot_add_helpdesk_ticket_description
 msgid "Description"
 msgstr ""
 
-#. module: specific_helpdesk
-#: model:ir.model.fields,field_description:specific_helpdesk.field_helpdesk_ticket_reason_location_dest_id
+#. module: alc_oeel_helpdesk
+#: model:ir.model.fields,field_description:alc_oeel_helpdesk.field_helpdesk_ticket_reason_location_dest_id
 msgid "Destination Location"
 msgstr ""
 
-#. module: specific_helpdesk
-#: model:ir.model.fields,field_description:specific_helpdesk.field_create_helpdesk_ticket_display_name
-#: model:ir.model.fields,field_description:specific_helpdesk.field_helpdesk_ticket_reason_display_name
+#. module: alc_oeel_helpdesk
+#: model:ir.model.fields,field_description:alc_oeel_helpdesk.field_create_helpdesk_ticket_display_name
+#: model:ir.model.fields,field_description:alc_oeel_helpdesk.field_helpdesk_ticket_reason_display_name
 msgid "Display Name"
 msgstr "Afficher le nom"
 
-#. module: specific_helpdesk
-#: model:ir.model.fields,field_description:specific_helpdesk.field_account_invoice_helpdesk_tickets_count
-#: model:ir.model.fields,field_description:specific_helpdesk.field_purchase_order_helpdesk_tickets_count
-#: model:ir.model.fields,field_description:specific_helpdesk.field_res_partner_helpdesk_tickets_count
-#: model:ir.model.fields,field_description:specific_helpdesk.field_res_users_helpdesk_tickets_count
-#: model:ir.model.fields,field_description:specific_helpdesk.field_sale_order_helpdesk_tickets_count
-#: model:ir.model.fields,field_description:specific_helpdesk.field_stock_move_helpdesk_tickets_count
-#: model:ir.model.fields,field_description:specific_helpdesk.field_stock_picking_helpdesk_tickets_count
+#. module: alc_oeel_helpdesk
+#: model:ir.model.fields,field_description:alc_oeel_helpdesk.field_account_invoice_helpdesk_tickets_count
+#: model:ir.model.fields,field_description:alc_oeel_helpdesk.field_purchase_order_helpdesk_tickets_count
+#: model:ir.model.fields,field_description:alc_oeel_helpdesk.field_res_partner_helpdesk_tickets_count
+#: model:ir.model.fields,field_description:alc_oeel_helpdesk.field_res_users_helpdesk_tickets_count
+#: model:ir.model.fields,field_description:alc_oeel_helpdesk.field_sale_order_helpdesk_tickets_count
+#: model:ir.model.fields,field_description:alc_oeel_helpdesk.field_stock_move_helpdesk_tickets_count
+#: model:ir.model.fields,field_description:alc_oeel_helpdesk.field_stock_picking_helpdesk_tickets_count
 msgid "Helpdesk tickets count"
 msgstr "Nombre de tickets helpdesk"
 
-#. module: specific_helpdesk
-#: model:ir.model.fields,field_description:specific_helpdesk.field_create_helpdesk_ticket_id
-#: model:ir.model.fields,field_description:specific_helpdesk.field_helpdesk_ticket_reason_id
+#. module: alc_oeel_helpdesk
+#: model:ir.model.fields,field_description:alc_oeel_helpdesk.field_create_helpdesk_ticket_id
+#: model:ir.model.fields,field_description:alc_oeel_helpdesk.field_helpdesk_ticket_reason_id
 msgid "ID"
 msgstr "ID"
 
-#. module: specific_helpdesk
-#: model:ir.model,name:specific_helpdesk.model_account_invoice
-#: model:ir.model.fields,field_description:specific_helpdesk.field_helpdesk_ticket_account_invoice_id
+#. module: alc_oeel_helpdesk
+#: model:ir.model,name:alc_oeel_helpdesk.model_account_invoice
+#: model:ir.model.fields,field_description:alc_oeel_helpdesk.field_helpdesk_ticket_account_invoice_id
 msgid "Invoice"
 msgstr "Facture"
 
-#. module: specific_helpdesk
-#: model:ir.model.fields,field_description:specific_helpdesk.field_create_helpdesk_ticket___last_update
-#: model:ir.model.fields,field_description:specific_helpdesk.field_helpdesk_ticket_reason___last_update
+#. module: alc_oeel_helpdesk
+#: model:ir.model.fields,field_description:alc_oeel_helpdesk.field_create_helpdesk_ticket___last_update
+#: model:ir.model.fields,field_description:alc_oeel_helpdesk.field_helpdesk_ticket_reason___last_update
 msgid "Last Modified on"
 msgstr "Dernière Modification le"
 
-#. module: specific_helpdesk
-#: model:ir.model.fields,field_description:specific_helpdesk.field_create_helpdesk_ticket_write_uid
-#: model:ir.model.fields,field_description:specific_helpdesk.field_helpdesk_ticket_reason_write_uid
+#. module: alc_oeel_helpdesk
+#: model:ir.model.fields,field_description:alc_oeel_helpdesk.field_create_helpdesk_ticket_write_uid
+#: model:ir.model.fields,field_description:alc_oeel_helpdesk.field_helpdesk_ticket_reason_write_uid
 msgid "Last Updated by"
 msgstr "Dernière mise à jour par"
 
-#. module: specific_helpdesk
-#: model:ir.model.fields,field_description:specific_helpdesk.field_create_helpdesk_ticket_write_date
-#: model:ir.model.fields,field_description:specific_helpdesk.field_helpdesk_ticket_reason_write_date
+#. module: alc_oeel_helpdesk
+#: model:ir.model.fields,field_description:alc_oeel_helpdesk.field_create_helpdesk_ticket_write_date
+#: model:ir.model.fields,field_description:alc_oeel_helpdesk.field_helpdesk_ticket_reason_write_date
 msgid "Last Updated on"
 msgstr "Dernière mise à jour le"
 
-#. module: specific_helpdesk
-#: model:ir.model.fields,field_description:specific_helpdesk.field_helpdesk_ticket_lots
+#. module: alc_oeel_helpdesk
+#: model:ir.model.fields,field_description:alc_oeel_helpdesk.field_helpdesk_ticket_lots
 msgid "Lot/Serial Number"
 msgstr "Lot/Numéro de série"
 
-#. module: specific_helpdesk
-#: model:ir.model.fields,field_description:specific_helpdesk.field_helpdesk_ticket_reason_name
+#. module: alc_oeel_helpdesk
+#: model:ir.model.fields,field_description:alc_oeel_helpdesk.field_helpdesk_ticket_reason_name
 msgid "Name"
 msgstr "Nom"
 
-#. module: specific_helpdesk
-#: model:ir.model.fields,field_description:specific_helpdesk.field_helpdesk_ticket_qty_ordered
+#. module: alc_oeel_helpdesk
+#: model:ir.model.fields,field_description:alc_oeel_helpdesk.field_helpdesk_ticket_qty_ordered
 msgid "Ordered product quantitiy"
 msgstr ""
 
-#. module: specific_helpdesk
-#: model:ir.model,name:specific_helpdesk.model_res_partner
-#: model:ir.ui.view,arch_db:specific_helpdesk.helpdesk_ticket_view_form
+#. module: alc_oeel_helpdesk
+#: model:ir.model,name:alc_oeel_helpdesk.model_res_partner
+#: model:ir.ui.view,arch_db:alc_oeel_helpdesk.helpdesk_ticket_view_form
 msgid "Partner"
 msgstr "Partenaire"
 
-#. module: specific_helpdesk
-#: model:ir.model.fields,field_description:specific_helpdesk.field_helpdesk_ticket_product_id
+#. module: alc_oeel_helpdesk
+#: model:ir.model.fields,field_description:alc_oeel_helpdesk.field_helpdesk_ticket_product_id
 msgid "Product"
 msgstr "Produit"
 
-#. module: specific_helpdesk
-#: model:ir.model,name:specific_helpdesk.model_purchase_order
+#. module: alc_oeel_helpdesk
+#: model:ir.model,name:alc_oeel_helpdesk.model_purchase_order
 msgid "Purchase Order"
 msgstr "Commande fournisseur"
 
-#. module: specific_helpdesk
-#: model:ir.model.fields,field_description:specific_helpdesk.field_helpdesk_ticket_purchase_order_id
+#. module: alc_oeel_helpdesk
+#: model:ir.model.fields,field_description:alc_oeel_helpdesk.field_helpdesk_ticket_purchase_order_id
 msgid "Purchase order"
 msgstr "Commande fournisseur"
 
-#. module: specific_helpdesk
-#: model:ir.model.fields,field_description:specific_helpdesk.field_create_helpdesk_ticket_helpdesk_ticket_reason_id
-#: model:ir.model.fields,field_description:specific_helpdesk.field_helpdesk_ticket_helpdesk_ticket_reason_id
-#: model:ir.model.fields,field_description:specific_helpdesk.field_stock_pack_operation_lot_add_helpdesk_ticket_reason_id
-#: model:ir.ui.view,arch_db:specific_helpdesk.helpdesk_ticket_reason_view_form
+#. module: alc_oeel_helpdesk
+#: model:ir.model.fields,field_description:alc_oeel_helpdesk.field_create_helpdesk_ticket_helpdesk_ticket_reason_id
+#: model:ir.model.fields,field_description:alc_oeel_helpdesk.field_helpdesk_ticket_helpdesk_ticket_reason_id
+#: model:ir.model.fields,field_description:alc_oeel_helpdesk.field_stock_pack_operation_lot_add_helpdesk_ticket_reason_id
+#: model:ir.ui.view,arch_db:alc_oeel_helpdesk.helpdesk_ticket_reason_view_form
 msgid "Reason"
 msgstr "Cause"
 
-#. module: specific_helpdesk
-#: model:ir.actions.act_window,help:specific_helpdesk.helpdesk_ticket_reason_action
+#. module: alc_oeel_helpdesk
+#: model:ir.actions.act_window,help:alc_oeel_helpdesk.helpdesk_ticket_reason_action
 msgid "Reason allows to organize tickets."
 msgstr "La cause permet d'organiser les tickets"
 
-#. module: specific_helpdesk
-#: model:ir.ui.view,arch_db:specific_helpdesk.helpdesk_ticket_reason_view_tree
+#. module: alc_oeel_helpdesk
+#: model:ir.ui.view,arch_db:alc_oeel_helpdesk.helpdesk_ticket_reason_view_tree
 msgid "Reasons"
 msgstr "Causes"
 
-#. module: specific_helpdesk
-#: model:ir.model.fields,field_description:specific_helpdesk.field_helpdesk_ticket_qty_received
+#. module: alc_oeel_helpdesk
+#: model:ir.model.fields,field_description:alc_oeel_helpdesk.field_helpdesk_ticket_qty_received
 msgid "Received product quantitiy"
 msgstr ""
 
-#. module: specific_helpdesk
-#: model:ir.model.fields,field_description:specific_helpdesk.field_helpdesk_ticket_sale_order_id
+#. module: alc_oeel_helpdesk
+#: model:ir.model.fields,field_description:alc_oeel_helpdesk.field_helpdesk_ticket_sale_order_id
 msgid "Sale order"
 msgstr "Commande client"
 
-#. module: specific_helpdesk
-#: model:ir.model,name:specific_helpdesk.model_sale_order
+#. module: alc_oeel_helpdesk
+#: model:ir.model,name:alc_oeel_helpdesk.model_sale_order
 msgid "Sales Order"
 msgstr "Commande client"
 
-#. module: specific_helpdesk
-#: model:ir.model,name:specific_helpdesk.model_stock_move
+#. module: alc_oeel_helpdesk
+#: model:ir.model,name:alc_oeel_helpdesk.model_stock_move
 msgid "Stock Move"
 msgstr ""
 
-#. module: specific_helpdesk
-#: model:ir.model.fields,field_description:specific_helpdesk.field_helpdesk_ticket_stock_move_id
+#. module: alc_oeel_helpdesk
+#: model:ir.model.fields,field_description:alc_oeel_helpdesk.field_helpdesk_ticket_stock_move_id
 msgid "Stock move"
 msgstr ""
 
-#. module: specific_helpdesk
-#: model:ir.model.fields,field_description:specific_helpdesk.field_helpdesk_ticket_stock_picking_id
+#. module: alc_oeel_helpdesk
+#: model:ir.model.fields,field_description:alc_oeel_helpdesk.field_helpdesk_ticket_stock_picking_id
 msgid "Stock picking"
 msgstr "Opération de manutention"
 
-#. module: specific_helpdesk
-#: model:helpdesk.team,name:specific_helpdesk.supplier_team
+#. module: alc_oeel_helpdesk
+#: model:helpdesk.team,name:alc_oeel_helpdesk.supplier_team
 msgid "Supplier"
 msgstr "Fournisseurs"
 
-#. module: specific_helpdesk
-#: code:addons/specific_helpdesk/wizards/create_helpdesk_ticket.py:26
+#. module: alc_oeel_helpdesk
+#: code:addons/alc_oeel_helpdesk/wizards/create_helpdesk_ticket.py:26
 #, python-format
 msgid "The record related to the new helpdeskticket was not found !"
 msgstr ""
 
-#. module: specific_helpdesk
-#: model:ir.model,name:specific_helpdesk.model_helpdesk_ticket
+#. module: alc_oeel_helpdesk
+#: model:ir.model,name:alc_oeel_helpdesk.model_helpdesk_ticket
 msgid "Ticket"
 msgstr "Ticket"
 
-#. module: specific_helpdesk
-#: model:ir.actions.act_window,name:specific_helpdesk.helpdesk_ticket_reason_action
-#: model:ir.model,name:specific_helpdesk.model_helpdesk_ticket_reason
-#: model:ir.ui.menu,name:specific_helpdesk.helpdesk_ticket_reason_menu
+#. module: alc_oeel_helpdesk
+#: model:ir.actions.act_window,name:alc_oeel_helpdesk.helpdesk_ticket_reason_action
+#: model:ir.model,name:alc_oeel_helpdesk.model_helpdesk_ticket_reason
+#: model:ir.ui.menu,name:alc_oeel_helpdesk.helpdesk_ticket_reason_menu
 msgid "Ticket Reason"
 msgstr "Cause du ticket"
 
-#. module: specific_helpdesk
-#: model:ir.ui.view,arch_db:specific_helpdesk.account_invoice_specific_helpdesk
-#: model:ir.ui.view,arch_db:specific_helpdesk.account_supplier_invoice_specific_helpdesk
-#: model:ir.ui.view,arch_db:specific_helpdesk.partner_form_view_helpdesk_tickets_button
-#: model:ir.ui.view,arch_db:specific_helpdesk.purchase_order_specific_form
-#: model:ir.ui.view,arch_db:specific_helpdesk.sale_order_specific_form
-#: model:ir.ui.view,arch_db:specific_helpdesk.view_picking_form
+#. module: alc_oeel_helpdesk
+#: model:ir.ui.view,arch_db:alc_oeel_helpdesk.account_invoice_alc_oeel_helpdesk
+#: model:ir.ui.view,arch_db:alc_oeel_helpdesk.account_supplier_invoice_alc_oeel_helpdesk
+#: model:ir.ui.view,arch_db:alc_oeel_helpdesk.partner_form_view_helpdesk_tickets_button
+#: model:ir.ui.view,arch_db:alc_oeel_helpdesk.purchase_order_specific_form
+#: model:ir.ui.view,arch_db:alc_oeel_helpdesk.sale_order_specific_form
+#: model:ir.ui.view,arch_db:alc_oeel_helpdesk.view_picking_form
 msgid "Tickets"
 msgstr "Tickets"
 
-#. module: specific_helpdesk
-#: model:ir.model,name:specific_helpdesk.model_stock_picking
+#. module: alc_oeel_helpdesk
+#: model:ir.model,name:alc_oeel_helpdesk.model_stock_picking
 msgid "Transfer"
 msgstr "Transfert"
 
-#. module: specific_helpdesk
-#: model:ir.ui.view,arch_db:specific_helpdesk.create_helpdesk_ticket_view_form
+#. module: alc_oeel_helpdesk
+#: model:ir.ui.view,arch_db:alc_oeel_helpdesk.create_helpdesk_ticket_view_form
 msgid "Validate"
 msgstr ""
 
-#. module: specific_helpdesk
-#: model:ir.model.fields,field_description:specific_helpdesk.field_helpdesk_ticket_reason_visible_reception_wizard
+#. module: alc_oeel_helpdesk
+#: model:ir.model.fields,field_description:alc_oeel_helpdesk.field_helpdesk_ticket_reason_visible_reception_wizard
 msgid "Visible on Reception Wizard?"
 msgstr ""
 
-#. module: specific_helpdesk
-#: model:ir.model,name:specific_helpdesk.model_create_helpdesk_ticket
+#. module: alc_oeel_helpdesk
+#: model:ir.model,name:alc_oeel_helpdesk.model_create_helpdesk_ticket
 msgid "create.helpdesk.ticket"
 msgstr ""
 
-#. module: specific_helpdesk
-#: model:ir.model,name:specific_helpdesk.model_stock_pack_operation_lot_add
+#. module: alc_oeel_helpdesk
+#: model:ir.model,name:alc_oeel_helpdesk.model_stock_pack_operation_lot_add
 msgid "stock.pack.operation.lot.add"
 msgstr ""
 

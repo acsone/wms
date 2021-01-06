@@ -6,7 +6,7 @@
     "name": "Specific Helpdesk for Alcyon",
     "version": "10.0.1.0.0",
     "author": "Camptocamp",
-    "license": "OEEL-1",
+    "license": "Other proprietary",
     "category": "Helpdesk",
     # BE CAREFUL ALL the dependencies must BE LGPL or OEEL!!!
     # helpdesk is an Odoo enterprise module
@@ -38,4 +38,6 @@
         "data/ticket_sequence.xml",
     ],
     "installable": True,
+    "external_dependencies": {"python": ["openupgradelib"]},
+    "pre_init_hook": "pre_init_hook",
 }

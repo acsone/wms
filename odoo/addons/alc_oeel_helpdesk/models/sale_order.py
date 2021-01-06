@@ -5,14 +5,14 @@
 from odoo import api, fields, models
 
 
-class PurchaseOrder(models.Model):
+class SaleOrder(models.Model):
 
-    _inherit = "purchase.order"
+    _inherit = "sale.order"
 
     @api.multi
     def _compute_helpdesk_tickets_count(self):
         for order in self:
-            domain = [("purchase_order_id", "=", order.id)]
+            domain = [("sale_order_id", "=", order.id)]
 
             order.helpdesk_tickets_count = len(
                 self.env["helpdesk.ticket"].search(domain)
@@ -28,8 +28,8 @@ class PurchaseOrder(models.Model):
             0
         ]
         context = eval(action_data.get("context", "{}"))
-        context["default_team_id"] = self.env.ref("specific_helpdesk.supplier_team").id
+        context["default_team_id"] = self.env.ref("alc_oeel_helpdesk.customer_team").id
         action_data["context"] = str(context)
-        action_data["domain"] = [("purchase_order_id", "=", self.id)]
+        action_data["domain"] = [("sale_order_id", "=", self.id)]
 
         return action_data
