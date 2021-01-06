@@ -2,7 +2,7 @@
 # Copyright 2017-2018 Jacques-Etienne Baudoux (BCIM sprl) <je@bcim.be>
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl)
 
-from odoo import api, fields, models
+from odoo import _, api, fields, models
 
 
 class StockPackOperationLotAdd(models.TransientModel):
@@ -42,4 +42,17 @@ class StockPackOperationLotAdd(models.TransientModel):
 
     def _add(self):
         super(StockPackOperationLotAdd, self)._add()
+        operation = self.operation_id
         self._create_helpdesk_ticket()
+        if self.is_qty_exceeded:
+            self.helpdesk_ticket_reason_id = self.env.ref(
+                "alce_helpdesk.higher_quantity"
+            )
+            self.helpdesk_ticket_description = _(
+                "Received more than expected qties for product '%s'. (Expected: %d, Received %d)"
+            ) % (
+                operation.product_id.display_name,
+                operation.product_qty,
+                operation.qty_done,
+            )
+            self._create_helpdesk_ticket()
