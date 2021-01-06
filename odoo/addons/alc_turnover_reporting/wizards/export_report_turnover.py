@@ -116,7 +116,7 @@ class ExportReportTurnover(models.TransientModel):
         data.loc[~np.isfinite(data["Mensual grow"]), "Mensual grow"] = np.nan
 
         # For unfinished month, specific treatment
-        if data["Month+1"].iloc[-1] == today:
+        if data["Month+1"].iloc[-1].split("-")[1] == today.split("-")[1]:
             # grow = (CA_current_month - (CA_same_month_previous_year/business_days_month_prev_year)*business_days_current_month) /
             #           ((CA_same_month_previous_year/business_days_month_prev_year)*business_days_current_month)
             data["Mensual grow"].iloc[-1] = (
@@ -149,7 +149,7 @@ class ExportReportTurnover(models.TransientModel):
         data_by_years.loc[
             ~np.isfinite(data_by_years["Global grow"]), "Global grow"
         ] = np.nan
-        if data_by_months["Month+1"].iloc[-1] == today:
+        if data_by_months["Month+1"].iloc[-1].split("-")[1] == today.split("-")[1]:
 
             # If unfinished month : get the info from the month in the previous year
             current_month = today.split("-")[1]
@@ -195,9 +195,9 @@ class ExportReportTurnover(models.TransientModel):
 
         # Check for the last month -- last day is today
         is_today_in_current_month = pd.DataFrame()
-        is_today_in_current_month["bool"] = data[start_date_name].lt(today) & data[
+        is_today_in_current_month["bool"] = data[start_date_name].le(today) & data[
             end_date_name
-        ].gt(today)
+        ].ge(today)
         index_in_df = is_today_in_current_month[
             is_today_in_current_month["bool"]
         ].index.values
@@ -215,9 +215,17 @@ class ExportReportTurnover(models.TransientModel):
         output = io.BytesIO()
         writer = pd.ExcelWriter(output, engine="xlsxwriter")
 
+        today = datetime.today().date().strftime("%Y-%m-%d")
         data_by_day["Day"] = pd.to_datetime(
             data_by_day["Day"], errors="raise", format="%Y-%m-%d"
         )
+        current_month = int(today.split("-")[1])
+        current_year = int(today.split("-")[0])
+        data_by_day = data_by_day[
+            (data_by_day["Day"].dt.month == current_month)
+            & (data_by_day["Day"].dt.year == current_year)
+        ]
+
         data_by_day["Day"] = data_by_day["Day"].dt.strftime("%d-%m-%Y")
 
         cols = ["Day", "Turnover (stock moves)", "Credit notes (stock moves)"]
@@ -280,6 +288,11 @@ class ExportReportTurnover(models.TransientModel):
         data_by_year["Year"] = pd.to_datetime(
             data_by_year["Year"], errors="raise", format="%Y-%m-%d"
         )
+
+        data_by_year = data_by_year[
+            (data_by_year["Year"].dt.year == current_year)
+            | (data_by_year["Year"].dt.year == current_year - 1)
+        ]
         data_by_year["Year"] = data_by_year["Year"].dt.strftime("%Y")
         cols = [
             "Year",
@@ -386,10 +399,16 @@ class ExportReportTurnover(models.TransientModel):
 
         today = datetime.today().date().strftime("%Y-%m-%d")
         current_year = today.split("-")[0]
-        next_year = int(current_year) + 1
-        previous_year = int(current_year) - 1
-        prev_exercice = str(previous_year) + "-" + str(current_year)
-        current_exercice = str(current_year) + "-" + str(next_year)
+        if today <= current_year + "-09-30":
+            previous_year = int(current_year) - 1
+            previous_previous_year = int(current_year) - 2
+            current_exercice = str(previous_year) + "-" + str(current_year)
+            prev_exercice = str(previous_previous_year) + "-" + str(previous_year)
+        else:
+            next_year = int(current_year) + 1
+            previous_year = int(current_year) - 1
+            prev_exercice = str(previous_year) + "-" + str(current_year)
+            current_exercice = str(current_year) + "-" + str(next_year)
 
         # Configure the first series.
         chart.add_series(
@@ -518,16 +537,6 @@ class ExportReportTurnover(models.TransientModel):
         credit_debit_balance_day = credit_debit_balance_day[cols]
 
         credit_debit_balance_day.reset_index(drop=True, inplace=True)
-        # Keep only current month
-        current_month = today.split("-")[1]
-        current_year = today.split("-")[0]
-        date_to_get = current_year + "-" + current_month + "-01"
-        first_day = pd.DataFrame()
-        first_day["bool"] = credit_debit_balance_day["Day"].eq(date_to_get)
-
-        index = first_day[first_day["bool"]].index.values
-        if index:
-            credit_debit_balance_day = credit_debit_balance_day.iloc[index[0] :]
 
         # Month by month Dataframe
         result = self._get_data_from_stock_moves(
@@ -660,8 +669,6 @@ class ExportReportTurnover(models.TransientModel):
         ]
         credit_debit_balance = credit_debit_balance[cols]
 
-        # compare = credit_debit_balance_day.groupby([credit_debit_balance_day["Day"].dt.year, credit_debit_balance_day["Day"].dt.month]
-        # ).sum()
         self._count_business_days(credit_debit_balance, "Month", "Month+1", today)
         self._compute_mensual_grow(credit_debit_balance, today)
 
@@ -689,6 +696,7 @@ class ExportReportTurnover(models.TransientModel):
             axis=1,
         )
 
+        current_year = today.split("-")[0]
         two_years_ago = int(today.split("-")[0]) - 2
         date_to_get = str(two_years_ago) + "-10-01"
         october_two_years_ago = pd.DataFrame()
@@ -701,7 +709,6 @@ class ExportReportTurnover(models.TransientModel):
             else [0]
         )
 
-        # Keep only current month
         last_year = int(today.split("-")[0]) - 1
         date_to_get = str(last_year) + "-10-01"
         october_last_year = pd.DataFrame()
@@ -728,7 +735,43 @@ class ExportReportTurnover(models.TransientModel):
             credit_debit_2_years["Turnover (accounting)"].sum(),
         ]
 
-        if index_this_year:
+        if today <= current_year + "-09-30":
+            # need to go to n-3 to compute global grow
+            three_years_ago = int(today.split("-")[0]) - 3
+            date_to_get = str(three_years_ago) + "-10-01"
+            october_three_years_ago = pd.DataFrame()
+            october_three_years_ago["bool"] = credit_debit_balance_month["Month"].eq(
+                date_to_get
+            )
+            index_three_ago = (
+                october_three_years_ago[october_three_years_ago["bool"]].index.values
+                if october_three_years_ago[october_three_years_ago["bool"]].index.values
+                else [0]
+            )
+            credit_debit_3_years = credit_debit_balance_month.iloc[
+                index_three_ago[0] : index_two_ago[0]
+            ]
+            list_3_years = [
+                credit_debit_3_years["Month"].iloc[-1].split("-")[0],
+                credit_debit_3_years["Turnover (stock moves)"].sum(),
+                credit_debit_3_years["Credit notes (stock moves)"].sum(),
+                credit_debit_3_years["Turnover (accounting)"].sum(),
+            ]
+
+            credit_debit_last_year = credit_debit_balance_month.iloc[
+                index_last_year[0] :
+            ]
+            list_last_year = [
+                str(int(credit_debit_last_year["Month"].iloc[-1].split("-")[0]) + 1),
+                credit_debit_last_year["Turnover (stock moves)"].sum(),
+                credit_debit_last_year["Credit notes (stock moves)"].sum(),
+                credit_debit_last_year["Turnover (accounting)"].sum(),
+            ]
+
+            by_year_grouping = [list_3_years, list_2_years, list_last_year]
+
+            credit_debit_balance = credit_debit_balance.iloc[index_two_ago[0] :]
+        else:
             credit_debit_last_year = credit_debit_balance_month.iloc[
                 index_last_year[0] : index_this_year[0]
             ]
@@ -751,21 +794,6 @@ class ExportReportTurnover(models.TransientModel):
             ]
 
             by_year_grouping = [list_2_years, list_last_year, list_this_year]
-        else:
-            # if no index for this year, this means we are in the current year, before october
-            credit_debit_last_year = credit_debit_balance_month.iloc[
-                index_last_year[0] :
-            ]
-            list_last_year = [
-                credit_debit_last_year["Month"].iloc[-1].split("-")[0],
-                credit_debit_last_year["Turnover (stock moves)"].sum(),
-                credit_debit_last_year["Credit notes (stock moves)"].sum(),
-                credit_debit_last_year["Turnover (accounting)"].sum(),
-            ]
-
-            by_year_grouping = [list_2_years, list_last_year]
-
-        if index_last_year and index_last_year[0]:
             credit_debit_balance = credit_debit_balance.iloc[index_last_year[0] :]
 
         cols = [
