@@ -22,6 +22,11 @@ msgid "Last date of Transfer"
 msgstr "Dernière date de transfert"
 
 #. module: specific_purchase_report
+#: model:ir.model.fields,field_description:specific_purchase_report.field_purchase_order_last_date_done
+msgid "Last date of Transfer"
+msgstr "Dernière date de transfert"
+
+#. module: specific_purchase_report
 #: model:ir.model.fields,field_description:specific_purchase_report.field_purchase_report_late_delivery
 msgid "Late delivery"
 msgstr "Retard de livraison"

@@ -1,15 +1,16 @@
 # -*- coding: utf-8 -*-
 # Copyright 2017 Julien Coux (Camptocamp)
-# License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl)
 
 {
     "name": "Specific purchase report for Alcyon",
-    "version": "10.0.1.0.0",
+    "version": "10.0.1.0.1",
     "author": "Camptocamp",
-    "license": "LGPL-3",
+    "license": "Other proprietary",
     "category": "Report",
-    "depends": ["specific_helpdesk", "specific_purchase"],
+    "depends": ["alc_oeel_helpdesk", "purchase"],
     "website": "http://www.camptocamp.com",
     "data": [],
     "installable": True,
+    "external_dependencies": {"python": ["openupgradelib"]},
+    "pre_init_hook": "pre_init_hook",
 }

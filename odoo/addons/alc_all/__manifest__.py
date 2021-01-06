@@ -142,7 +142,6 @@
         "specific_print",
         "specific_product",
         "specific_purchase",
-        "specific_purchase_report",
         "specific_report",
         "specific_sale",
         "specific_security",
