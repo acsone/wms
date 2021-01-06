@@ -94,6 +94,7 @@ msgstr "Nom"
 
 #. module: specific_product
 #: model:ir.actions.act_window,name:specific_product.action_product_price_list
+#: model:ir.model,name:specific_product.model_product_price_list
 msgid "Price List"
 msgstr "Liste de prix"
 
@@ -166,6 +167,12 @@ msgstr "Température (°C)"
 #, python-format
 msgid "This cnk_code already exists."
 msgstr "Ce CNK existe déjà."
+
+#. module: specific_product
+#: code:addons/specific_product/models/product_price_list.py:31
+#, python-format
+msgid "Unable to print pricelist for product with current model %s"
+msgstr ""
 
 #. module: specific_product
 #: model:ir.model.fields,field_description:specific_product.field_delivery_carrier_veterinary_only
