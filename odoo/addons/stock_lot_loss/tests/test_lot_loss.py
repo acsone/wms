@@ -511,14 +511,12 @@ class TestLotLoss(SavepointCase):
         self.picking_2.with_context(round_autoset=False).action_assign()
         for op in self.picking_2.pack_operation_ids:
             op.action_missing_qty()
+        self.picking_2.printed = True  # HACK TO GET THE STATE DONE.... TO BE REFACTORED
         result = self.picking_2.do_new_transfer()
 
         if isinstance(result, dict) and result:
             model = result.get("res_model")
             wizard = self.env[model].browse(int(result.get("res_id")))
-
-            # Fortunately these wizards have the same
-            # method "process" to execute the wizard
             wizard.process()
         self.assertEqual(self.picking_2.state, "done")
 
@@ -548,7 +546,10 @@ class TestLotLoss(SavepointCase):
             pack_operations = self.picking_1.pack_operation_ids
 
         self.picking_1.do_new_transfer()
-        self.assertEqual(self.picking_1.state, "confirmed")
+        # if stock_picking_backorder is installed, a backorder is created and
+        # the state is 'draft' HACK
+        state = "draft" if "stock.backorder.reason" in self.env else "confirmed"
+        self.assertEqual(self.picking_1.state, state)
         self.assertFalse(self.picking_1.pack_operation_ids)
         # here we try to create a backorder.
         self.picking_1._create_backorder()

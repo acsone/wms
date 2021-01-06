@@ -10,6 +10,9 @@ class TestStockMove(SavepointCase):
     def setUpClass(cls):
         super(TestStockMove, cls).setUpClass()
 
+        if "round.instance" in cls.env:
+            cls.env = cls.env(context=dict(cls.env.context, round_autoset=False))
+
         cls.warehouse_1 = cls.env.ref("stock.warehouse0")
         cls.warehouse_1.write(
             {
