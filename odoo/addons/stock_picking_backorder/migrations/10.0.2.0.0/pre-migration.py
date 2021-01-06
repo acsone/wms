@@ -5,13 +5,13 @@ from openupgradelib import openupgrade
 
 
 def migrate(cr, version):
-    # Move fields to alc_oeel_stock_picking_backorder_helpdesk
+    # Move fields to alce_stock_picking_backorder_helpdesk
     openupgrade.update_module_moved_fields(
         cr,
         "stock.backorder.reason",
         ["is_helpdesk_ticket_to_create", "helpdesk_ticket_reason_id"],
         "stock_picking_backorder",
-        "alc_oeel_stock_picking_backorder_helpdesk",
+        "alce_stock_picking_backorder_helpdesk",
     )
 
     openupgrade.update_module_moved_fields(
@@ -23,5 +23,5 @@ def migrate(cr, version):
             "helpdesk_ticket_description",
         ],
         "stock_picking_backorder",
-        "alc_oeel_stock_picking_backorder_helpdesk",
+        "alce_stock_picking_backorder_helpdesk",
     )

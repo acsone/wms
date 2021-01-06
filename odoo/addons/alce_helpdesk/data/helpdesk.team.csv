@@ -1,0 +1,5 @@
+id,name,stage_ids/id
+customer_team,Customer,"alce_helpdesk.stage_new,helpdesk.stage_in_progress,alce_helpdesk.stage_pending,helpdesk.stage_solved"
+supplier_team,Supplier,"alce_helpdesk.stage_new,helpdesk.stage_in_progress,alce_helpdesk.stage_pending,helpdesk.stage_solved"
+accounting_team,Accounting,"alce_helpdesk.stage_new,helpdesk.stage_in_progress,alce_helpdesk.stage_pending,helpdesk.stage_solved"
+aftersales_team,After Sale Service,"alce_helpdesk.stage_new,helpdesk.stage_in_progress,alce_helpdesk.stage_pending,helpdesk.stage_solved"

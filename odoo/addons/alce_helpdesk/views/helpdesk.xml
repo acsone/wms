@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <!--Helpdesk Ticket-->
+  <record id="helpdesk_ticket_view_form" model="ir.ui.view">
+    <field name="name">helpdesk.ticket.form</field>
+    <field name="model">helpdesk.ticket</field>
+    <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form" />
+    <field name="arch" type="xml">
+
+      <field name="partner_email" position="attributes">
+        <attribute name="invisible">1</attribute>
+      </field>
+      <field name="name" position="attributes">
+        <attribute name="readonly">1</attribute>
+      </field>
+
+      <xpath expr="//group" position="replace">
+        <group>
+          <group>
+            <field name="partner_id"/>
+            <field name="ticket_type_id"/>
+            <field name="helpdesk_ticket_reason_id"/>
+            <field name="user_id"/>
+            <field name="team_id"/>
+            <field name="priority"/>
+            <field name="kanban_state"/>
+          </group>
+          <group>
+            <field name="sale_order_id" context="{'default_partner_id': partner_id}"/>
+            <field name="purchase_order_id"
+                   context="{'default_partner_id': partner_id, 'show_purchase': True}"/>
+            <field name="stock_picking_id" context="{'default_partner_id': partner_id}"/>
+            <field name="lots"/>
+            <field name="account_invoice_id" context="{'default_partner_id': partner_id}"/>
+            <field name="product_id"/>
+            <field name="qty_ordered" attrs="{'invisible': [('purchase_order_id', '=', False)]}"/>
+            <field name="qty_received" attrs="{'invisible': [('purchase_order_id', '=', False)]}"/>
+          </group>
+        </group>
+      </xpath>
+
+      <field name="partner_id" position="attributes">
+        <attribute name="string">Partner</attribute>
+      </field>
+
+    </field>
+  </record>
+
+  <!--Helpdesk Ticket Reason-->
+  <record id="helpdesk_ticket_reason_view_tree" model="ir.ui.view">
+    <field name="name">helpdesk.ticket.reason.tree</field>
+    <field name="model">helpdesk.ticket.reason</field>
+    <field name="arch" type="xml">
+      <tree editable="top" string="Reasons">
+        <field name="name"/>
+        <field name="visible_reception_wizard"/>
+        <field name="location_dest_id"/>
+      </tree>
+    </field>
+  </record>
+  <record id="helpdesk_ticket_reason_view_form" model="ir.ui.view">
+    <field name="name">helpdesk.ticket.reason.form</field>
+    <field name="model">helpdesk.ticket.reason</field>
+    <field name="arch" type="xml">
+      <form string="Reason">
+        <field name="name"/>
+      </form>
+    </field>
+  </record>
+
+  <record id="helpdesk_ticket_reason_action" model="ir.actions.act_window">
+    <field name="name">Ticket Reason</field>
+    <field name="res_model">helpdesk.ticket.reason</field>
+    <field name="view_type">form</field>
+    <field name="view_mode">tree,form</field>
+    <field name="help" type="html">
+      <p class="oe_view_nocontent_create">
+        Click to create a new ticket reason.
+        </p><p>
+        Reason allows to organize tickets.
+      </p>
+    </field>
+  </record>
+
+  <menuitem id="helpdesk_ticket_reason_menu" action="helpdesk_ticket_reason_action"
+    sequence="1" parent="helpdesk.helpdesk_menu_config"
+    groups="base.group_no_one"/>
+
+  <record id="view_helpdesk_ticket_search_alce_helpdesk" model="ir.ui.view">
+      <field name="name">helpdesk.ticket.search.alce_helpdesk</field>
+      <field name="model">helpdesk.ticket</field>
+      <field name="inherit_id" ref="helpdesk.helpdesk_tickets_view_search"/>
+      <field name="arch" type="xml">
+          <xpath expr="//field[@name='name']" position="after">
+              <field name="sale_order_id"/>
+              <field name="purchase_order_id"/>
+              <field name="stock_picking_id"/>
+              <field name="lots"/>
+              <field name="account_invoice_id"/>
+              <field name="product_id"/>
+          </xpath>
+      </field>
+  </record>
+
+</odoo>

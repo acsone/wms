@@ -11,5 +11,5 @@ def migrate(cr, version):
 
     _logger.info("set alc enterprise to install")
     cr.execute(
-        "update ir_module_module set state = 'to install' where name like 'alc_oeel%' or name = 'alc_all_enterprise'"
+        "update ir_module_module set state = 'to install' where name like 'alce_%'"
     )
