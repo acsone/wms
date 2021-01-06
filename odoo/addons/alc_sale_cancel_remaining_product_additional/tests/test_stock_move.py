@@ -9,6 +9,8 @@ class TestStockMove(SavepointCase):
     def setUpClass(cls):
         super(TestStockMove, cls).setUpClass()
 
+        if "round.instance" in cls.env:
+            cls.env = cls.env(context=dict(cls.env.context, round_autoset=False))
         cls.partner1 = cls.env["res.partner"].create(
             {"name": "Unittest first partner", "ref": "12344566777878"}
         )

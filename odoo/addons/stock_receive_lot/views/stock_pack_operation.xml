@@ -8,13 +8,8 @@
         <field name="arch" type="xml">
 
             <field name="lot_name" position="before">
-                <field name="is_product_expired" invisible="1"/>
                 <field name="life_date" invisible="not context.get('only_create', False)" required="context.get('only_create', False)"/>
             </field>
-
-            <xpath expr="//tree" position="attributes">
-                <attribute name="decoration-danger">is_product_expired == True</attribute>
-            </xpath>
 
         </field>
     </record>

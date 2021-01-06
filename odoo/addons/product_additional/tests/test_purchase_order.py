@@ -58,7 +58,7 @@ class TestPurchaseOrder(SavepointCase):
                             "product_uom": cls.env.ref("product.product_uom_unit").id,
                             "product_qty": 12,
                             "sequence": 1,
-                            "price_unit_base": 100,
+                            "price_unit": 100,
                             "date_planned": fields.Datetime.now(),
                         },
                     )
@@ -98,13 +98,13 @@ class TestPurchaseOrder(SavepointCase):
             lambda line: line.product_qty == 12.0
         )
         self.assertEqual(len(main_line), 1)
-        self.assertEqual(main_line.price_unit_base, 100.0)
+        self.assertEqual(main_line.price_unit, 100.0)
         # Check promotional line
         additional_line = self.purchase_order.order_line.filtered(
             lambda line: line.product_qty == 4.0
         )
         self.assertEqual(len(additional_line), 1)
-        self.assertEqual(additional_line.price_unit_base, 0.0)
+        self.assertEqual(additional_line.price_unit, 0.0)
 
         # Cancel the PO
         self.purchase_order.button_draft()

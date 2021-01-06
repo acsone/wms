@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2021 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+    <record model="ir.ui.view" id="stock_pack_operation_lot_add_form_view">
+        <field name="name">stock.pack.operation.lot.add.form (in alc_stock_receive_lot_expiry)</field>
+        <field name="model">stock.pack.operation.lot.add</field>
+        <field name="inherit_id" ref="stock_receive_lot.view_pack_operation_lot_add_form"/>
+        <field name="arch" type="xml">
+            <field name="life_date" position="after">
+                <field name="is_removal_date_expired" invisible="1"/>
+                <div attrs="{'invisible': [('is_removal_date_expired', '!=', True)]}">
+                    <i class="fa fa-exclamation-triangle" style="color:red"><span style="margin:0 5px">Expired</span></i>
+                </div>
+            </field>
+        </field>
+    </record>
+
+</odoo>

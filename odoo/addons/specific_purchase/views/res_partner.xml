@@ -3,14 +3,12 @@
 
     <record id="view_partner_form" model="ir.ui.view">
         <field name="name">view.partner.form</field>
-        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="inherit_id" ref="alc_supplier_purchase_manager.res_partner_form_view" />
         <field name="model">res.partner</field>
         <field name="priority">20</field>
         <field name="arch" type="xml">
 
-            <xpath expr="//group[@name='purchase']" position="inside">
-                <field name="purchase_manager_id" attrs="{'invisible':[('supplier','!=',True)]}"/>
-                <field name="substitute_purchase_manager_id" attrs="{'invisible':[('supplier','!=',True)]}"/>
+            <field name="substitute_purchase_manager_id" position="after">
                 <field name="supplier_discount"/>
                 <field name="delivery_lead_time"/>
                 <label string="Days for management"/>
@@ -34,7 +32,7 @@
                         <td><field name="is_manage_day_7" nolabel="1"/></td>
                     </tr>
                 </table>
-            </xpath>
+            </field>
         </field>
     </record>
 

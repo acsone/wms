@@ -8,14 +8,6 @@ class ResPartner(models.Model):
     _inherit = "res.partner"
 
     supplier_discount = fields.Float("Supplier discount %")
-
-    purchase_manager_id = fields.Many2one(
-        comodel_name="res.users", string="Purchase manager"
-    )
-
-    substitute_purchase_manager_id = fields.Many2one(
-        comodel_name="res.users", string="Substitute purchase manager"
-    )
     delivery_lead_time = fields.Integer("Delivery lead time")
     is_manage_day_1 = fields.Boolean("Monday")
     is_manage_day_2 = fields.Boolean("Tuesday")

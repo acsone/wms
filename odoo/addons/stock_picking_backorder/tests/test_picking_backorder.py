@@ -3,7 +3,7 @@
 # Copyright 2018 Jacques-Etienne Baudoux (BCIM sprl) <je@bcim.be>
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl)
 
-from odoo.tests.common import SavepointCase, at_install, post_install
+from odoo.tests.common import SavepointCase
 
 
 class TestPickingBackorder(SavepointCase):
@@ -18,8 +18,6 @@ class TestPickingBackorder(SavepointCase):
         cls.backorder_reason_model = cls.env["stock.backorder.reason"]
         cls.backorder_choice_model = cls.env["stock.backorder.choice"]
         cls.backorder_confirmation_model = cls.env["stock.backorder.confirmation"]
-        cls.helpdesk_ticket_model = cls.env["helpdesk.ticket"]
-        cls.helpdesk_ticket_reason_model = cls.env["helpdesk.ticket.reason"]
 
         cls.product = cls.product_model.create(
             {
@@ -101,25 +99,13 @@ class TestPickingBackorder(SavepointCase):
         pack_operation = cls.picking.pack_operation_product_ids
         pack_operation.write({"qty_done": 3})
 
-        # Define helpdesk ticket values
-        cls.ticket_reason = cls.helpdesk_ticket_reason_model.create(
-            {"name": "Unittest helpdesk ticket reason"}
-        )
-
-    def _check_backorder_behavior(
-        self, backorder_accepted, backorder_action, helpdesk_needed
-    ):
+    def _check_backorder_behavior(self, backorder_accepted, backorder_action):
         # Define the backorder behavior on partner
         self.partner.is_purchase_back_order_accepted = backorder_accepted
 
         # Define backorder reason
         backorder_reason = self.backorder_reason_model.create(
-            {
-                "name": "Unittest backorder",
-                "backorder_action_to_do": backorder_action,
-                "is_helpdesk_ticket_to_create": helpdesk_needed,
-                "helpdesk_ticket_reason_id": self.ticket_reason.id,
-            }
+            {"name": "Unittest backorder", "backorder_action_to_do": backorder_action}
         )
 
         result = self.picking.do_new_transfer()
@@ -129,7 +115,7 @@ class TestPickingBackorder(SavepointCase):
 
         # Create backorder choice wizard and execute it
         wizard = self.backorder_choice_model.with_context(result["context"]).create(
-            {"reason_id": backorder_reason.id, "helpdesk_ticket_description": "test"}
+            {"reason_id": backorder_reason.id}
         )
         wizard.apply()
 
@@ -153,156 +139,46 @@ class TestPickingBackorder(SavepointCase):
         )
         self.assertEqual(backorder.state, "assigned" if keep_backorder else "cancel")
 
-        # Check helpdesk ticket creation
-        ticket = self.helpdesk_ticket_model.search(
-            [("stock_picking_id", "=", self.picking.id)]
-        )
-        if helpdesk_needed:
-            self.assertEqual(len(ticket), 1)
-            self.assertEqual(ticket.partner_id, self.partner)
-            self.assertEqual(ticket.description, "test")
-            # Check that the name has a reference and not the default value
-            self.assertTrue(ticket.name)
-            self.assertNotEqual(ticket.name, "/")
-            self.assertEqual(ticket.helpdesk_ticket_reason_id, self.ticket_reason)
-        else:
-            self.assertEqual(len(ticket), 0)
-
     # Test all cases separately to benefit of SavepointCase
     # backorder_action in ['create', 'cancel', 'use_partner_option']
     # backorder_accepted in [False, True]
-    # helpdesk_needed in [False, True]
 
-    @post_install(True)
-    @at_install(False)
-    def test_purchase_picking_backorder_create_backorder_no_helpdesk_1(self):
+    def test_purchase_picking_backorder_create_backorder_1(self):
         backorder_action = "create"
         backorder_accepted = False
-        helpdesk_needed = False
 
-        self._check_backorder_behavior(
-            backorder_accepted, backorder_action, helpdesk_needed
-        )
+        self._check_backorder_behavior(backorder_accepted, backorder_action)
 
-    @post_install(True)
-    @at_install(False)
-    def test_purchase_picking_backorder_create_backorder_no_helpdesk_2(self):
-        backorder_action = "create"
-        backorder_accepted = False
-        helpdesk_needed = True
-
-        self._check_backorder_behavior(
-            backorder_accepted, backorder_action, helpdesk_needed
-        )
-
-    @post_install(True)
-    @at_install(False)
-    def test_purchase_picking_backorder_create_backorder_no_helpdesk_3(self):
+    def test_purchase_picking_backorder_create_backorder_3(self):
         backorder_action = "create"
         backorder_accepted = True
-        helpdesk_needed = False
 
-        self._check_backorder_behavior(
-            backorder_accepted, backorder_action, helpdesk_needed
-        )
+        self._check_backorder_behavior(backorder_accepted, backorder_action)
 
-    @post_install(True)
-    @at_install(False)
-    def test_purchase_picking_backorder_create_backorder_no_helpdesk_4(self):
-        backorder_action = "create"
-        backorder_accepted = True
-        helpdesk_needed = True
-        self._check_backorder_behavior(
-            backorder_accepted, backorder_action, helpdesk_needed
-        )
-
-    @post_install(True)
-    @at_install(False)
-    def test_purchase_picking_backorder_create_backorder_no_helpdesk_5(self):
+    def test_purchase_picking_backorder_create_backorder_5(self):
         backorder_action = "cancel"
         backorder_accepted = False
-        helpdesk_needed = False
-        self._check_backorder_behavior(
-            backorder_accepted, backorder_action, helpdesk_needed
-        )
 
-    @post_install(True)
-    @at_install(False)
-    def test_purchase_picking_backorder_create_backorder_no_helpdesk_6(self):
-        backorder_action = "cancel"
-        backorder_accepted = False
-        helpdesk_needed = True
+        self._check_backorder_behavior(backorder_accepted, backorder_action)
 
-        self._check_backorder_behavior(
-            backorder_accepted, backorder_action, helpdesk_needed
-        )
-
-    @post_install(True)
-    @at_install(False)
-    def test_purchase_picking_backorder_create_backorder_no_helpdesk_7(self):
+    def test_purchase_picking_backorder_create_backorder_7(self):
         backorder_action = "cancel"
         backorder_accepted = True
-        helpdesk_needed = False
 
-        self._check_backorder_behavior(
-            backorder_accepted, backorder_action, helpdesk_needed
-        )
+        self._check_backorder_behavior(backorder_accepted, backorder_action)
 
-    @post_install(True)
-    @at_install(False)
-    def test_purchase_picking_backorder_create_backorder_no_helpdesk_8(self):
-        backorder_action = "cancel"
-        backorder_accepted = True
-        helpdesk_needed = True
-        self._check_backorder_behavior(
-            backorder_accepted, backorder_action, helpdesk_needed
-        )
-
-    @post_install(True)
-    @at_install(False)
-    def test_purchase_picking_backorder_create_backorder_no_helpdesk_9(self):
+    def test_purchase_picking_backorder_create_backorder_9(self):
         backorder_action = "use_partner_option"
         backorder_accepted = False
-        helpdesk_needed = False
 
-        self._check_backorder_behavior(
-            backorder_accepted, backorder_action, helpdesk_needed
-        )
+        self._check_backorder_behavior(backorder_accepted, backorder_action)
 
-    @post_install(True)
-    @at_install(False)
-    def test_purchase_picking_backorder_create_backorder_no_helpdesk_10(self):
-        backorder_action = "use_partner_option"
-        backorder_accepted = False
-        helpdesk_needed = True
-
-        self._check_backorder_behavior(
-            backorder_accepted, backorder_action, helpdesk_needed
-        )
-
-    @post_install(True)
-    @at_install(False)
-    def test_purchase_picking_backorder_create_backorder_no_helpdesk_11(self):
+    def test_purchase_picking_backorder_create_backorder_11(self):
         backorder_action = "use_partner_option"
         backorder_accepted = True
-        helpdesk_needed = False
 
-        self._check_backorder_behavior(
-            backorder_accepted, backorder_action, helpdesk_needed
-        )
+        self._check_backorder_behavior(backorder_accepted, backorder_action)
 
-    @post_install(True)
-    @at_install(False)
-    def test_purchase_picking_backorder_create_backorder_no_helpdesk_12(self):
-        backorder_action = "use_partner_option"
-        backorder_accepted = True
-        helpdesk_needed = True
-        self._check_backorder_behavior(
-            backorder_accepted, backorder_action, helpdesk_needed
-        )
-
-    @post_install(True)
-    @at_install(False)
     def test_2_sale_and_other_picking_backorder(self):
         """
         We take like sale case

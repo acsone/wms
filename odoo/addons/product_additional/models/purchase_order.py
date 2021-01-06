@@ -50,7 +50,6 @@ class PurchaseOrder(models.Model):
                     default={
                         "name": additional_product_lang.display_name,
                         "order_id": order.id,
-                        "price_unit_base": 0,
                         "price_unit": 0,
                         "product_id": additional_product_id.id,
                         "product_uom": line.product_uom.id,

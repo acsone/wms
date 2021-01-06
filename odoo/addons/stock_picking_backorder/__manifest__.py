@@ -5,11 +5,11 @@
 
 {
     "name": "Stock Picking Backorder",
-    "version": "10.0.1.0.0",
+    "version": "10.0.2.0.0",
     "author": "BCIM, Camptocamp",
-    "license": "LGPL-3",
+    "license": "LGPL-3",  # MUST BE LGPL since will be mixed with helpdesk OEEL
     "category": "Warehouse",
-    "depends": ["specific_helpdesk", "stock_grn", "stock_receive_lot"],  # requires LGPL
+    "depends": ["stock_grn", "stock_receive_lot"],  # requires LGPL
     "data": [
         "views/res_partner.xml",
         "views/stock_backorder_reason.xml",

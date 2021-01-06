@@ -4,24 +4,20 @@
         <field name="name">Missing products</field>
         <field name="backorder_action_to_do">use_partner_option</field>
         <field name="keep_grn">False</field>
-        <field name="is_helpdesk_ticket_to_create">True</field>
     </record>
     <record model="stock.backorder.reason" id="stock_backorder_reason_2">
         <field name="name">Partial Urgent Reception</field>
         <field name="backorder_action_to_do">create</field>
         <field name="keep_grn">True</field>
-        <field name="is_helpdesk_ticket_to_create">False</field>
     </record>
     <record model="stock.backorder.reason" id="stock_backorder_reason_3">
         <field name="name">Pause</field>
         <field name="backorder_action_to_do">create</field>
         <field name="keep_grn">True</field>
-        <field name="is_helpdesk_ticket_to_create">False</field>
     </record>
     <record model="stock.backorder.reason" id="stock_backorder_reason_4">
         <field name="name">End of day</field>
         <field name="backorder_action_to_do">create</field>
         <field name="keep_grn">True</field>
-        <field name="is_helpdesk_ticket_to_create">False</field>
     </record>
 </odoo>

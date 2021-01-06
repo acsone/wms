@@ -8,6 +8,8 @@ class TestStockPicking(common.StockPickingTestCase):
     @classmethod
     def setUpClass(cls):
         super(TestStockPicking, cls).setUpClass()
+        if "round.instance" in cls.env:
+            cls.env = cls.env(context=dict(cls.env.context, round_autoset=False))
 
     def test_pick_and_ship(self):
         sale = self._confirm_sale_order(product=self.main_product)

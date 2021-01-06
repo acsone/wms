@@ -1,0 +1,493 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* alce_helpdesk
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-01-06 09:32+0000\n"
+"PO-Revision-Date: 2021-01-06 09:32+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alce_helpdesk
+#: model:mail.template,subject:alce_helpdesk.email_template_helpdesk_msg_1
+#: model:mail.template,subject:alce_helpdesk.email_template_helpdesk_msg_2
+#: model:mail.template,subject:alce_helpdesk.email_template_helpdesk_msg_3
+#: model:mail.template,subject:alce_helpdesk.email_template_helpdesk_msg_4
+#: model:mail.template,subject:alce_helpdesk.email_template_helpdesk_msg_5
+#: model:mail.template,subject:alce_helpdesk.email_template_helpdesk_msg_6
+msgid "${object.display_name}"
+msgstr "${object.display_name}"
+
+#. module: alce_helpdesk
+#: model:helpdesk.ticket.reason,name:alce_helpdesk.product_defect
+msgid "01-Product defect"
+msgstr "01-Product defect"
+
+#. module: alce_helpdesk
+#: model:helpdesk.ticket.reason,name:alce_helpdesk.missing_quantity
+msgid "02-Missing quantity"
+msgstr "02-Quantité manquante"
+
+#. module: alce_helpdesk
+#: model:helpdesk.ticket.reason,name:alce_helpdesk.cold_chain_broken
+msgid "03-Cold chain broken"
+msgstr "03-Chaine du froid non respectée"
+
+#. module: alce_helpdesk
+#: model:helpdesk.ticket.reason,name:alce_helpdesk.short_lapsing
+msgid "04-Short lapsing"
+msgstr "04-Date d'expiration proche"
+
+#. module: alce_helpdesk
+#: model:helpdesk.ticket.reason,name:alce_helpdesk.expired_product
+msgid "05-Expired product"
+msgstr "05-Article périmé"
+
+#. module: alce_helpdesk
+#: model:helpdesk.ticket.reason,name:alce_helpdesk.non_ordered_product
+msgid "06-Non ordered product"
+msgstr "06-Article non commandé"
+
+#. module: alce_helpdesk
+#: model:helpdesk.ticket.reason,name:alce_helpdesk.higher_quantity
+msgid "07-Higher quantity"
+msgstr "07-Quantité supérieure"
+
+#. module: alce_helpdesk
+#: model:helpdesk.ticket.reason,name:alce_helpdesk.product_switch
+msgid "08-Product error (A for B)"
+msgstr "08-Mauvais article (A pour B)"
+
+#. module: alce_helpdesk
+#: model:helpdesk.ticket.reason,name:alce_helpdesk.delivery_error
+msgid "09-Delivery error"
+msgstr "09-Erreur de livraison"
+
+#. module: alce_helpdesk
+#: model:helpdesk.ticket.reason,name:alce_helpdesk.misc
+msgid "10-Miscalenious"
+msgstr "10-Miscalenious"
+
+#. module: alce_helpdesk
+#: model:helpdesk.ticket.reason,name:alce_helpdesk.price_issue
+msgid "11-Price issue"
+msgstr "11-Price issue"
+
+#. module: alce_helpdesk
+#: model:mail.template,body_html:alce_helpdesk.email_template_helpdesk_msg_1
+msgid "<?xml version=\"1.0\"?>\n"
+"<div style=\"max-width:600px; height:auto; margin-left:30px;\">\n"
+"    <div style=\"margin-left:30px;align=center;\">\n"
+"        Dear ${object.sudo().partner_id.name or 'Madam, Sir'},\n"
+"    </div>\n"
+"    <div style=\"margin-left:30px;align=center;\" width=\"60%\">\n"
+"        MESSAGE_01\n"
+"    </div><br/>\n"
+"    <span style=\"margin-left:30px;font-weight:normal;\">Thank you </span>\n"
+"    <span style=\"margin-left:30px;font-weight:normal;\">${object.team_id.name or 'Helpdesk'} Team.</span>\n"
+"</div>\n"
+"        "
+msgstr "<?xml version=\"1.0\"?>\n"
+"<div style=\"max-width:600px; height:auto; margin-left:30px;\">\n"
+"    Chère/Cher ${object.sudo().partner_id.name or 'Madame/Monsieur'},<br/><br/>\n"
+"    </div>\n"
+"    <div style=\"margin-left:30px;align=center;\" width=\"60%\">\n"
+"        Lors de votre livraison du ${object.stock_picking_id.date_done} nous avons constaté que ${object.qty_received} de ${object.product_id.name} étai(en)t abîmé(s)\n"
+"        Merci de reprendre ce(s) produit(s) et de nous le(s) créditer.\n"
+"    </div><br/>\n"
+"    <span style=\"margin-left:30px;font-weight:normal;\">Merci,</span>\n"
+"    L'Équipe ${object.team_id.name or 'Helpdesk'}.\n"
+"</div>\n"
+"        "
+
+#. module: alce_helpdesk
+#: model:mail.template,body_html:alce_helpdesk.email_template_helpdesk_msg_2
+msgid "<?xml version=\"1.0\"?>\n"
+"<div style=\"max-width:600px; height:auto; margin-left:30px;\">\n"
+"    <div style=\"margin-left:30px;align=center;\">\n"
+"        Dear ${object.sudo().partner_id.name or 'Madam, Sir'},\n"
+"    </div>\n"
+"    <div style=\"margin-left:30px;align=center;\" width=\"60%\">\n"
+"        MESSAGE_02\n"
+"    </div><br/>\n"
+"    <span style=\"margin-left:30px;font-weight:normal;\">Thank you </span>\n"
+"    <span style=\"margin-left:30px;font-weight:normal;\">${object.team_id.name or 'Helpdesk'} Team.</span>\n"
+"</div>\n"
+"        "
+msgstr "<?xml version=\"1.0\"?>\n"
+"<div style=\"max-width:600px; height:auto; margin-left:30px;\">\n"
+"    Chère/Cher ${object.sudo().partner_id.name or 'Madame/Monsieur'},<br/><br/>\n"
+"    </div>\n"
+"    <div style=\"margin-left:30px;align=center;\" width=\"60%\">\n"
+"        Lors de votre livraison du ${object.stock_picking_id.date_done} vous indiquez ${object.qty_ordered} livrés de ${object.product_id.name} et avons reçu ${object.qty_received}. Merci faire suivre les quantités manquantes.\n"
+"    </div><br/>\n"
+"    <span style=\"margin-left:30px;font-weight:normal;\">Merci,</span>\n"
+"    L'Équipe ${object.team_id.name or 'Helpdesk'}.\n"
+"</div>\n"
+"        "
+
+#. module: alce_helpdesk
+#: model:mail.template,body_html:alce_helpdesk.email_template_helpdesk_msg_3
+msgid "<?xml version=\"1.0\"?>\n"
+"<div style=\"max-width:600px; height:auto; margin-left:30px;\">\n"
+"    <div style=\"margin-left:30px;align=center;\">\n"
+"        Dear ${object.sudo().partner_id.name or 'Madam, Sir'},\n"
+"    </div>\n"
+"    <div style=\"margin-left:30px;align=center;\" width=\"60%\">\n"
+"        MESSAGE_03\n"
+"    </div><br/>\n"
+"    <span style=\"margin-left:30px;font-weight:normal;\">Thank you </span>\n"
+"    <span style=\"margin-left:30px;font-weight:normal;\">${object.team_id.name or 'Helpdesk'} Team.</span>\n"
+"</div>\n"
+"        "
+msgstr "<?xml version=\"1.0\"?>\n"
+"<div style=\"max-width:600px; height:auto; margin-left:30px;\">\n"
+"    Chère/Cher ${object.sudo().partner_id.name or 'Madame/Monsieur'},<br/><br/>\n"
+"    </div>\n"
+"    <div style=\"margin-left:30px;align=center;\" width=\"60%\">\n"
+"        Lors de votre livraison du ${object.stock_picking_id.date_done} nous avons constaté que votre transporteur n'a pas respecté la chaîne de froid.\n"
+"        Nous refusons la livraison.    </div><br/>\n"
+"    <span style=\"margin-left:30px;font-weight:normal;\">Merci,</span>\n"
+"    L'Équipe ${object.team_id.name or 'Helpdesk'}.\n"
+"</div>\n"
+"        "
+
+#. module: alce_helpdesk
+#: model:mail.template,body_html:alce_helpdesk.email_template_helpdesk_msg_4
+msgid "<?xml version=\"1.0\"?>\n"
+"<div style=\"max-width:600px; height:auto; margin-left:30px;\">\n"
+"    <div style=\"margin-left:30px;align=center;\">\n"
+"        Dear ${object.sudo().partner_id.name or 'Madam, Sir'},\n"
+"    </div>\n"
+"    <div style=\"margin-left:30px;align=center;\" width=\"60%\">\n"
+"        MESSAGE_04\n"
+"    </div><br/>\n"
+"    <span style=\"margin-left:30px;font-weight:normal;\">Thank you </span>\n"
+"    <span style=\"margin-left:30px;font-weight:normal;\">${object.team_id.name or 'Helpdesk'} Team.</span>\n"
+"</div>\n"
+"        "
+msgstr "<?xml version=\"1.0\"?>\n"
+"<div style=\"max-width:600px; height:auto; margin-left:30px;\">\n"
+"    Chère/Cher ${object.sudo().partner_id.name or 'Madame/Monsieur'},<br/><br/>\n"
+"    </div>\n"
+"    <div style=\"margin-left:30px;align=center;\" width=\"60%\">\n"
+"        Dans votre livraison du ${object.stock_picking_id.date_done} vous avez livré ${object.qty_received} de ${object.product_id.name}, lot ${object.lots.name} dont la date de péremption est inférieure aux 6 mois demandés dans notre commande. Nous acceptons néanmoins la livraison sous réserve de vente.\n"
+"        En cas de non vente, une note de crédit vous sera demandée.    </div><br/>\n"
+"    <span style=\"margin-left:30px;font-weight:normal;\">Merci,</span>\n"
+"    L'Équipe ${object.team_id.name or 'Helpdesk'}.\n"
+"</div>\n"
+"        "
+
+#. module: alce_helpdesk
+#: model:mail.template,body_html:alce_helpdesk.email_template_helpdesk_msg_5
+msgid "<?xml version=\"1.0\"?>\n"
+"<div style=\"max-width:600px; height:auto; margin-left:30px;\">\n"
+"    <div style=\"margin-left:30px;align=center;\">\n"
+"        Dear ${object.sudo().partner_id.name or 'Madam, Sir'},\n"
+"    </div>\n"
+"    <div style=\"margin-left:30px;align=center;\" width=\"60%\">\n"
+"        MESSAGE_05\n"
+"    </div><br/>\n"
+"    <span style=\"margin-left:30px;font-weight:normal;\">Thank you </span>\n"
+"    <span style=\"margin-left:30px;font-weight:normal;\">${object.team_id.name or 'Helpdesk'} Team.</span>\n"
+"</div>\n"
+"        "
+msgstr "<?xml version=\"1.0\"?>\n"
+"<div style=\"max-width:600px; height:auto; margin-left:30px;\">\n"
+"    Chère/Cher ${object.sudo().partner_id.name or 'Madame/Monsieur'},<br/><br/>\n"
+"    </div>\n"
+"    <div style=\"margin-left:30px;align=center;\" width=\"60%\">\n"
+"        Dans votre livraison du ${object.stock_picking_id.date_done} vous avez livré ${object.qty_received} de ${object.product_id.name}, lot ${object.lots.name} dont la péremption est inférieure aux 6 mois demandés dans notre commande.\n"
+"        Nous refusons votre livraison et vous demandons de bien vouloir nous créditer. Nous tenons les produits à votre disposition.\n"
+"    </div><br/>\n"
+"    <span style=\"margin-left:30px;font-weight:normal;\">Merci,</span>\n"
+"    L'Équipe ${object.team_id.name or 'Helpdesk'}.\n"
+"</div>\n"
+"        "
+
+#. module: alce_helpdesk
+#: model:mail.template,body_html:alce_helpdesk.email_template_helpdesk_msg_6
+msgid "<?xml version=\"1.0\"?>\n"
+"<div style=\"max-width:600px; height:auto; margin-left:30px;\">\n"
+"    <div style=\"margin-left:30px;align=center;\">\n"
+"        Dear ${object.sudo().partner_id.name or 'Madam, Sir'},\n"
+"    </div>\n"
+"    <div style=\"margin-left:30px;align=center;\" width=\"60%\">\n"
+"        MESSAGE_06\n"
+"    </div><br/>\n"
+"    <span style=\"margin-left:30px;font-weight:normal;\">Thank you </span>\n"
+"    <span style=\"margin-left:30px;font-weight:normal;\">${object.team_id.name or 'Helpdesk'} Team.</span>\n"
+"</div>\n"
+"        "
+msgstr "<?xml version=\"1.0\"?>\n"
+"<div style=\"max-width:600px; height:auto; margin-left:30px;\">\n"
+"    Chère/Cher ${object.sudo().partner_id.name or 'Madame/Monsieur'},<br/><br/>\n"
+"    </div>\n"
+"    <div style=\"margin-left:30px;align=center;\" width=\"60%\">\n"
+"        Lors de votre livraison du ${object.stock_picking_id.date_done} vous nous avez livré ${object.qty_received} de ${object.product_id.name}, produit que nous n'avions pas commandé.\n"
+"        Nous refusons la livraison et tenons le produit à votre disposition.\n"
+"        Nous attendons une note de crédit.\n"
+"    </div><br/>\n"
+"    <span style=\"margin-left:30px;font-weight:normal;\">Merci,</span>\n"
+"    L'Équipe ${object.team_id.name or 'Helpdesk'}.\n"
+"</div>\n"
+"        "
+
+#. module: alce_helpdesk
+#: model:helpdesk.team,name:alce_helpdesk.accounting_team
+msgid "Accounting"
+msgstr "Comptabilité"
+
+#. module: alce_helpdesk
+#: model:helpdesk.team,name:alce_helpdesk.aftersales_team
+msgid "After Sale Service"
+msgstr "SAV - Matériel"
+
+#. module: alce_helpdesk
+#: model:ir.ui.view,arch_db:alce_helpdesk.create_helpdesk_ticket_view_form
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: alce_helpdesk
+#: model:ir.actions.act_window,help:alce_helpdesk.helpdesk_ticket_reason_action
+msgid "Click to create a new ticket reason."
+msgstr "Cliquer pour créer une nouvelle cause du ticket"
+
+#. module: alce_helpdesk
+#: model:ir.ui.view,arch_db:alce_helpdesk.view_pack_operation_lot_add_form
+msgid "Create a helpdesk ticket"
+msgstr "Créer un ticket helpdesk"
+
+#. module: alce_helpdesk
+#: model:ir.actions.act_window,name:alce_helpdesk.action_create_helpdesk_ticket
+#: model:ir.ui.view,arch_db:alce_helpdesk.create_helpdesk_ticket_view_form
+msgid "Create helpdesk ticket"
+msgstr "Créer un ticket helpdesk"
+
+#. module: alce_helpdesk
+#: model:ir.model.fields,field_description:alce_helpdesk.field_create_helpdesk_ticket_create_uid
+#: model:ir.model.fields,field_description:alce_helpdesk.field_helpdesk_ticket_reason_create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: alce_helpdesk
+#: model:ir.model.fields,field_description:alce_helpdesk.field_create_helpdesk_ticket_create_date
+#: model:ir.model.fields,field_description:alce_helpdesk.field_helpdesk_ticket_reason_create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: alce_helpdesk
+#: model:helpdesk.team,name:alce_helpdesk.customer_team
+msgid "Customer"
+msgstr "Clients"
+
+#. module: alce_helpdesk
+#: model:ir.model.fields,field_description:alce_helpdesk.field_create_helpdesk_ticket_description
+msgid "Description"
+msgstr "Description"
+
+#. module: alce_helpdesk
+#: model:ir.model.fields,field_description:alce_helpdesk.field_helpdesk_ticket_reason_location_dest_id
+msgid "Destination Location"
+msgstr "Emplacement de destination"
+
+#. module: alce_helpdesk
+#: model:ir.model.fields,field_description:alce_helpdesk.field_create_helpdesk_ticket_display_name
+#: model:ir.model.fields,field_description:alce_helpdesk.field_helpdesk_ticket_reason_display_name
+msgid "Display Name"
+msgstr "Nom affiché"
+
+#. module: alce_helpdesk
+#: model:ir.model.fields,field_description:alce_helpdesk.field_account_invoice_helpdesk_tickets_count
+#: model:ir.model.fields,field_description:alce_helpdesk.field_purchase_order_helpdesk_tickets_count
+#: model:ir.model.fields,field_description:alce_helpdesk.field_res_partner_helpdesk_tickets_count
+#: model:ir.model.fields,field_description:alce_helpdesk.field_res_users_helpdesk_tickets_count
+#: model:ir.model.fields,field_description:alce_helpdesk.field_sale_order_helpdesk_tickets_count
+#: model:ir.model.fields,field_description:alce_helpdesk.field_stock_move_helpdesk_tickets_count
+#: model:ir.model.fields,field_description:alce_helpdesk.field_stock_picking_helpdesk_tickets_count
+msgid "Helpdesk tickets count"
+msgstr "Nombre de tickets helpdesk"
+
+#. module: alce_helpdesk
+#: model:ir.model.fields,field_description:alce_helpdesk.field_create_helpdesk_ticket_id
+#: model:ir.model.fields,field_description:alce_helpdesk.field_helpdesk_ticket_reason_id
+msgid "ID"
+msgstr "ID"
+
+#. module: alce_helpdesk
+#: model:ir.model,name:alce_helpdesk.model_account_invoice
+#: model:ir.model.fields,field_description:alce_helpdesk.field_helpdesk_ticket_account_invoice_id
+msgid "Invoice"
+msgstr "Facture"
+
+#. module: alce_helpdesk
+#: model:ir.model.fields,field_description:alce_helpdesk.field_create_helpdesk_ticket___last_update
+#: model:ir.model.fields,field_description:alce_helpdesk.field_helpdesk_ticket_reason___last_update
+msgid "Last Modified on"
+msgstr "Dernière modification le"
+
+#. module: alce_helpdesk
+#: model:ir.model.fields,field_description:alce_helpdesk.field_create_helpdesk_ticket_write_uid
+#: model:ir.model.fields,field_description:alce_helpdesk.field_helpdesk_ticket_reason_write_uid
+msgid "Last Updated by"
+msgstr "Dernière mise à jour par"
+
+#. module: alce_helpdesk
+#: model:ir.model.fields,field_description:alce_helpdesk.field_create_helpdesk_ticket_write_date
+#: model:ir.model.fields,field_description:alce_helpdesk.field_helpdesk_ticket_reason_write_date
+msgid "Last Updated on"
+msgstr "Dernière mise à jour le"
+
+#. module: alce_helpdesk
+#: model:ir.model.fields,field_description:alce_helpdesk.field_helpdesk_ticket_lots
+msgid "Lot/Serial Number"
+msgstr "Lot/numéro de série"
+
+#. module: alce_helpdesk
+#: model:ir.model.fields,field_description:alce_helpdesk.field_helpdesk_ticket_reason_name
+msgid "Name"
+msgstr "Nom"
+
+#. module: alce_helpdesk
+#: model:ir.model.fields,field_description:alce_helpdesk.field_helpdesk_ticket_qty_ordered
+msgid "Ordered product quantitiy"
+msgstr "Quantité commandée"
+
+#. module: alce_helpdesk
+#: model:ir.model,name:alce_helpdesk.model_res_partner
+#: model:ir.ui.view,arch_db:alce_helpdesk.helpdesk_ticket_view_form
+msgid "Partner"
+msgstr "Partenaire"
+
+#. module: alce_helpdesk
+#: model:ir.model.fields,field_description:alce_helpdesk.field_helpdesk_ticket_product_id
+msgid "Product"
+msgstr "Produit"
+
+#. module: alce_helpdesk
+#: model:ir.model,name:alce_helpdesk.model_purchase_order
+msgid "Purchase Order"
+msgstr "Commande fournisseur"
+
+#. module: alce_helpdesk
+#: model:ir.model.fields,field_description:alce_helpdesk.field_helpdesk_ticket_purchase_order_id
+msgid "Purchase order"
+msgstr "Commande fournisseur"
+
+#. module: alce_helpdesk
+#: model:ir.model.fields,field_description:alce_helpdesk.field_create_helpdesk_ticket_helpdesk_ticket_reason_id
+#: model:ir.model.fields,field_description:alce_helpdesk.field_helpdesk_ticket_helpdesk_ticket_reason_id
+#: model:ir.ui.view,arch_db:alce_helpdesk.helpdesk_ticket_reason_view_form
+msgid "Reason"
+msgstr "Motif"
+
+#. module: alce_helpdesk
+#: model:ir.actions.act_window,help:alce_helpdesk.helpdesk_ticket_reason_action
+msgid "Reason allows to organize tickets."
+msgstr "La cause permet d'organiser les tickets"
+
+#. module: alce_helpdesk
+#: model:ir.ui.view,arch_db:alce_helpdesk.helpdesk_ticket_reason_view_tree
+msgid "Reasons"
+msgstr "Causes"
+
+#. module: alce_helpdesk
+#: code:addons/alce_helpdesk/wizards/stock_pack_operation_lot_add.py:51
+#, python-format
+msgid "Received more than expected qties for product '%s'. (Expected: %d, Received %d)"
+msgstr "Quantité reçue exédentaire pour le produit '%s'. (Attendu: %d, Reçu %d)"
+
+#. module: alce_helpdesk
+#: model:ir.model.fields,field_description:alce_helpdesk.field_helpdesk_ticket_qty_received
+msgid "Received product quantitiy"
+msgstr "Quantité reçue"
+
+#. module: alce_helpdesk
+#: model:ir.model.fields,field_description:alce_helpdesk.field_helpdesk_ticket_sale_order_id
+msgid "Sale order"
+msgstr "Commande client"
+
+#. module: alce_helpdesk
+#: model:ir.model,name:alce_helpdesk.model_sale_order
+msgid "Sales Order"
+msgstr "Bon de commande"
+
+#. module: alce_helpdesk
+#: model:ir.model,name:alce_helpdesk.model_stock_move
+msgid "Stock Move"
+msgstr "Mouvement de stock"
+
+#. module: alce_helpdesk
+#: model:ir.model.fields,field_description:alce_helpdesk.field_helpdesk_ticket_stock_move_id
+msgid "Stock move"
+msgstr "Mouvement de stock"
+
+#. module: alce_helpdesk
+#: model:ir.model.fields,field_description:alce_helpdesk.field_helpdesk_ticket_stock_picking_id
+msgid "Stock picking"
+msgstr "Opération de manutention"
+
+#. module: alce_helpdesk
+#: model:helpdesk.team,name:alce_helpdesk.supplier_team
+msgid "Supplier"
+msgstr "Fournisseurs"
+
+#. module: alce_helpdesk
+#: code:addons/alce_helpdesk/wizards/create_helpdesk_ticket.py:26
+#, python-format
+msgid "The record related to the new helpdeskticket was not found !"
+msgstr "The record related to the new helpdeskticket was not found !"
+
+#. module: alce_helpdesk
+#: model:ir.model,name:alce_helpdesk.model_helpdesk_ticket
+msgid "Ticket"
+msgstr "Ticket"
+
+#. module: alce_helpdesk
+#: model:ir.actions.act_window,name:alce_helpdesk.helpdesk_ticket_reason_action
+#: model:ir.model,name:alce_helpdesk.model_helpdesk_ticket_reason
+#: model:ir.ui.menu,name:alce_helpdesk.helpdesk_ticket_reason_menu
+msgid "Ticket Reason"
+msgstr "Cause du ticket"
+
+#. module: alce_helpdesk
+#: model:ir.ui.view,arch_db:alce_helpdesk.account_invoice_alce_helpdesk
+#: model:ir.ui.view,arch_db:alce_helpdesk.account_supplier_invoice_alce_helpdesk
+#: model:ir.ui.view,arch_db:alce_helpdesk.partner_form_view_helpdesk_tickets_button
+#: model:ir.ui.view,arch_db:alce_helpdesk.purchase_order_specific_form
+#: model:ir.ui.view,arch_db:alce_helpdesk.sale_order_specific_form
+#: model:ir.ui.view,arch_db:alce_helpdesk.view_picking_form
+msgid "Tickets"
+msgstr "Tickets"
+
+#. module: alce_helpdesk
+#: model:ir.model,name:alce_helpdesk.model_stock_picking
+msgid "Transfer"
+msgstr "Transfert"
+
+#. module: alce_helpdesk
+#: model:ir.ui.view,arch_db:alce_helpdesk.create_helpdesk_ticket_view_form
+msgid "Validate"
+msgstr "Valider"
+
+#. module: alce_helpdesk
+#: model:ir.model.fields,field_description:alce_helpdesk.field_helpdesk_ticket_reason_visible_reception_wizard
+msgid "Visible on Reception Wizard?"
+msgstr "Visible on Reception Wizard?"
+
+#. module: alce_helpdesk
+#: model:ir.model,name:alce_helpdesk.model_create_helpdesk_ticket
+msgid "create.helpdesk.ticket"
+msgstr "create.helpdesk.ticket"
+
+#. module: alce_helpdesk
+#: model:ir.model,name:alce_helpdesk.model_stock_pack_operation_lot_add
+msgid "stock.pack.operation.lot.add"
+msgstr "stock.pack.operation.lot.add"
