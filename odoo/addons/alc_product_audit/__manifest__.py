@@ -11,6 +11,7 @@
     "author": "ACSONE SA/NV",
     "depends": [
         "stock",
+        "purchase",
         "product",
         "stock_orderpoint_product",
         "stock_product_bin",
