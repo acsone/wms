@@ -11,9 +11,6 @@
                         <field name="name"/>
                         <field name="backorder_action_to_do"/>
                         <field name="keep_grn"/>
-                        <field name="is_helpdesk_ticket_to_create"/>
-                        <field name="helpdesk_ticket_reason_id"
-                               attrs="{'invisible': [('is_helpdesk_ticket_to_create', '=', False)], 'required': [('is_helpdesk_ticket_to_create', '=', True)]}"/>
                     </group>
                 </sheet>
             </form>
@@ -28,8 +25,6 @@
                 <field name="name" />
                 <field name="backorder_action_to_do"/>
                 <field name="keep_grn"/>
-                <field name="is_helpdesk_ticket_to_create"/>
-                <field name="helpdesk_ticket_reason_id"/>
             </tree>
         </field>
     </record>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2021 ACSONE SA/NV -->
+
+<odoo>
+
+    <record model="ir.ui.view" id="stock_backorder_reason_form_view">
+        <field name="name">stock.backorder.reason.form (in alc_oeel_stock_picking_backorder_helpdesk)</field>
+        <field name="model">stock.backorder.reason</field>
+        <field name="inherit_id" ref="stock_picking_backorder.stock_backorder_reason_form"/>
+        <field name="arch" type="xml">
+            <field name="keep_grn" position="after">
+                <field name="is_helpdesk_ticket_to_create"/>
+                <field name="helpdesk_ticket_reason_id"
+                       attrs="{'invisible': [('is_helpdesk_ticket_to_create', '=', False)], 'required': [('is_helpdesk_ticket_to_create', '=', True)]}"/>
+            </field>
+        </field>
+    </record>
+
+
+    <record model="ir.ui.view" id="stock_backorder_reason_tree_view">
+        <field name="name">stock.backorder.reason.tree (in alc_oeel_stock_picking_backorder_helpdesk)</field>
+        <field name="model">stock.backorder.reason</field>
+        <field name="inherit_id" ref="stock_picking_backorder.stock_backorder_reason_tree_view"/>
+        <field name="arch" type="xml">
+             <field name="keep_grn" position="after">
+                <field name="is_helpdesk_ticket_to_create"/>
+                <field name="helpdesk_ticket_reason_id"/>
+             </field>
+        </field>
+    </record>
+
+</odoo>

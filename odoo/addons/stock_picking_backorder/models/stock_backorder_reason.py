@@ -20,9 +20,3 @@ class StockBackorderReason(models.Model):
         string="Backorder action to do",
     )
     keep_grn = fields.Boolean("Keep GRN on backorder")
-    is_helpdesk_ticket_to_create = fields.Boolean(string="Create helpdesk ticket")
-    helpdesk_ticket_reason_id = fields.Many2one(
-        comodel_name="helpdesk.ticket.reason",
-        string="Helpdesk ticket reason",
-        ondelete="restrict",
-    )

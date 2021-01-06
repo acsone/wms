@@ -18,6 +18,8 @@ class TestPickingBackorder(SavepointCase):
         cls.backorder_reason_model = cls.env["stock.backorder.reason"]
         cls.backorder_choice_model = cls.env["stock.backorder.choice"]
         cls.backorder_confirmation_model = cls.env["stock.backorder.confirmation"]
+        cls.helpdesk_ticket_model = cls.env["helpdesk.ticket"]
+        cls.helpdesk_ticket_reason_model = cls.env["helpdesk.ticket.reason"]
 
         cls.product = cls.product_model.create(
             {
@@ -99,13 +101,25 @@ class TestPickingBackorder(SavepointCase):
         pack_operation = cls.picking.pack_operation_product_ids
         pack_operation.write({"qty_done": 3})
 
-    def _check_backorder_behavior(self, backorder_accepted, backorder_action):
+        # Define helpdesk ticket values
+        cls.ticket_reason = cls.helpdesk_ticket_reason_model.create(
+            {"name": "Unittest helpdesk ticket reason"}
+        )
+
+    def _check_backorder_behavior(
+        self, backorder_accepted, backorder_action, helpdesk_needed
+    ):
         # Define the backorder behavior on partner
         self.partner.is_purchase_back_order_accepted = backorder_accepted
 
         # Define backorder reason
         backorder_reason = self.backorder_reason_model.create(
-            {"name": "Unittest backorder", "backorder_action_to_do": backorder_action}
+            {
+                "name": "Unittest backorder",
+                "backorder_action_to_do": backorder_action,
+                "is_helpdesk_ticket_to_create": helpdesk_needed,
+                "helpdesk_ticket_reason_id": self.ticket_reason.id,
+            }
         )
 
         result = self.picking.do_new_transfer()
@@ -115,7 +129,7 @@ class TestPickingBackorder(SavepointCase):
 
         # Create backorder choice wizard and execute it
         wizard = self.backorder_choice_model.with_context(result["context"]).create(
-            {"reason_id": backorder_reason.id}
+            {"reason_id": backorder_reason.id, "helpdesk_ticket_description": "test"}
         )
         wizard.apply()
 
@@ -139,146 +153,126 @@ class TestPickingBackorder(SavepointCase):
         )
         self.assertEqual(backorder.state, "assigned" if keep_backorder else "cancel")
 
+        # Check helpdesk ticket creation
+        ticket = self.helpdesk_ticket_model.search(
+            [("stock_picking_id", "=", self.picking.id)]
+        )
+        if helpdesk_needed:
+            self.assertEqual(len(ticket), 1)
+            self.assertEqual(ticket.partner_id, self.partner)
+            self.assertEqual(ticket.description, "test")
+            # Check that the name has a reference and not the default value
+            self.assertTrue(ticket.name)
+            self.assertNotEqual(ticket.name, "/")
+            self.assertEqual(ticket.helpdesk_ticket_reason_id, self.ticket_reason)
+        else:
+            self.assertEqual(len(ticket), 0)
+
     # Test all cases separately to benefit of SavepointCase
     # backorder_action in ['create', 'cancel', 'use_partner_option']
     # backorder_accepted in [False, True]
+    # helpdesk_needed in [False, True]
 
-    def test_purchase_picking_backorder_create_backorder_1(self):
+    def test_purchase_picking_backorder_create_backorder_no_helpdesk_1(self):
         backorder_action = "create"
         backorder_accepted = False
+        helpdesk_needed = False
 
-        self._check_backorder_behavior(backorder_accepted, backorder_action)
+        self._check_backorder_behavior(
+            backorder_accepted, backorder_action, helpdesk_needed
+        )
 
-    def test_purchase_picking_backorder_create_backorder_3(self):
+    def test_purchase_picking_backorder_create_backorder_no_helpdesk_2(self):
+        backorder_action = "create"
+        backorder_accepted = False
+        helpdesk_needed = True
+
+        self._check_backorder_behavior(
+            backorder_accepted, backorder_action, helpdesk_needed
+        )
+
+    def test_purchase_picking_backorder_create_backorder_no_helpdesk_3(self):
         backorder_action = "create"
         backorder_accepted = True
+        helpdesk_needed = False
 
-        self._check_backorder_behavior(backorder_accepted, backorder_action)
+        self._check_backorder_behavior(
+            backorder_accepted, backorder_action, helpdesk_needed
+        )
 
-    def test_purchase_picking_backorder_create_backorder_5(self):
+    def test_purchase_picking_backorder_create_backorder_no_helpdesk_4(self):
+        backorder_action = "create"
+        backorder_accepted = True
+        helpdesk_needed = True
+        self._check_backorder_behavior(
+            backorder_accepted, backorder_action, helpdesk_needed
+        )
+
+    def test_purchase_picking_backorder_create_backorder_no_helpdesk_5(self):
         backorder_action = "cancel"
         backorder_accepted = False
+        helpdesk_needed = False
+        self._check_backorder_behavior(
+            backorder_accepted, backorder_action, helpdesk_needed
+        )
 
-        self._check_backorder_behavior(backorder_accepted, backorder_action)
+    def test_purchase_picking_backorder_create_backorder_no_helpdesk_6(self):
+        backorder_action = "cancel"
+        backorder_accepted = False
+        helpdesk_needed = True
 
-    def test_purchase_picking_backorder_create_backorder_7(self):
+        self._check_backorder_behavior(
+            backorder_accepted, backorder_action, helpdesk_needed
+        )
+
+    def test_purchase_picking_backorder_create_backorder_no_helpdesk_7(self):
         backorder_action = "cancel"
         backorder_accepted = True
+        helpdesk_needed = False
 
-        self._check_backorder_behavior(backorder_accepted, backorder_action)
+        self._check_backorder_behavior(
+            backorder_accepted, backorder_action, helpdesk_needed
+        )
 
-    def test_purchase_picking_backorder_create_backorder_9(self):
+    def test_purchase_picking_backorder_create_backorder_no_helpdesk_8(self):
+        backorder_action = "cancel"
+        backorder_accepted = True
+        helpdesk_needed = True
+        self._check_backorder_behavior(
+            backorder_accepted, backorder_action, helpdesk_needed
+        )
+
+    def test_purchase_picking_backorder_create_backorder_no_helpdesk_9(self):
         backorder_action = "use_partner_option"
         backorder_accepted = False
+        helpdesk_needed = False
 
-        self._check_backorder_behavior(backorder_accepted, backorder_action)
+        self._check_backorder_behavior(
+            backorder_accepted, backorder_action, helpdesk_needed
+        )
 
-    def test_purchase_picking_backorder_create_backorder_11(self):
+    def test_purchase_picking_backorder_create_backorder_no_helpdesk_10(self):
+        backorder_action = "use_partner_option"
+        backorder_accepted = False
+        helpdesk_needed = True
+
+        self._check_backorder_behavior(
+            backorder_accepted, backorder_action, helpdesk_needed
+        )
+
+    def test_purchase_picking_backorder_create_backorder_no_helpdesk_11(self):
         backorder_action = "use_partner_option"
         backorder_accepted = True
+        helpdesk_needed = False
 
-        self._check_backorder_behavior(backorder_accepted, backorder_action)
-
-    def test_2_sale_and_other_picking_backorder(self):
-        """
-        We take like sale case
-        This case use the standard Odoo feature.
-        """
-
-        # Test all cases
-        sale_case_1 = (
-            self.ref("stock.picking_type_out"),
-            self.stock_location.id,
-            self.customer_location.id,
+        self._check_backorder_behavior(
+            backorder_accepted, backorder_action, helpdesk_needed
         )
-        sale_case_2 = (
-            self.ref("stock.picking_type_out"),
-            self.stock_location.id,
-            self.output_location.id,
+
+    def test_purchase_picking_backorder_create_backorder_no_helpdesk_12(self):
+        backorder_action = "use_partner_option"
+        backorder_accepted = True
+        helpdesk_needed = True
+        self._check_backorder_behavior(
+            backorder_accepted, backorder_action, helpdesk_needed
         )
-        for sale_backorder_accepted in [False, True]:
-            for purchase_backorder_accepted in [False, True]:
-                # Define the backorder behavior on partner
-                self.partner.write(
-                    {
-                        "is_sale_back_order_accepted": sale_backorder_accepted,
-                        "is_purchase_back_order_accepted": purchase_backorder_accepted,
-                    }
-                )
-                for picking_type_id, location_id, location_dest_id in [
-                    sale_case_1,
-                    sale_case_2,
-                ]:
-
-                    # Create picking
-                    picking = self.stock_picking_model.create(
-                        {
-                            "picking_type_id": picking_type_id,
-                            "location_id": location_id,
-                            "location_dest_id": location_dest_id,
-                            "partner_id": self.partner.id,
-                            "move_lines": [
-                                (
-                                    0,
-                                    0,
-                                    {
-                                        "name": "a move",
-                                        "product_id": self.product.id,
-                                        "product_uom_qty": 10,
-                                        "product_uom": self.product.uom_id.id,
-                                        "location_id": location_id,
-                                        "location_dest_id": location_dest_id,
-                                    },
-                                )
-                            ],
-                            "grn_id": self.grn.id,
-                        }
-                    )
-
-                    # Transfer picking partially
-                    picking.action_confirm()
-                    picking.force_assign()
-                    pack_operation = picking.pack_operation_product_ids
-                    pack_operation.write({"qty_done": 3})
-                    result = picking.do_new_transfer()
-
-                    # Check that the transfer action return no wizard
-                    self.assertEqual(result, {})
-
-                    # Search created backorder
-                    backorder = self.stock_picking_model.search(
-                        [("backorder_id", "=", picking.id)]
-                    )
-
-                    # Check picking values
-                    self.assertEqual(picking.pack_operation_product_ids.product_qty, 3)
-                    self.assertEqual(picking.state, "done")
-
-                    # Check backorder values
-                    self.assertEqual(len(backorder), 1)
-                    self.assertEqual(backorder.move_lines.product_uom_qty, 7)
-                    self.assertEqual(
-                        backorder.state, "confirmed"  # always a backorder for Sales
-                    )
-
-    def test_00(self):
-        """
-        Data:
-            A picking in Waiting availability state (confirmed)
-        Test case:
-            Validate the picking
-        Expected result:
-            A backorder must be created and the picking must be done
-        """
-        picking = self.picking_waiting_availability
-        self.assertEqual(picking.state, "confirmed")
-        backorder = self.stock_picking_model.search([("backorder_id", "=", picking.id)])
-        self.assertFalse(backorder)
-        picking.printed = True  # HACK TO GET THE STATE DONE.... TO BE REFACTORED
-        result = picking.do_new_transfer()
-
-        # Check that the transfer action return no wizard
-        self.assertEqual(result, {})
-        backorder = self.stock_picking_model.search([("backorder_id", "=", picking.id)])
-        self.assertTrue(backorder)
-        self.assertEqual(picking.state, "done")
