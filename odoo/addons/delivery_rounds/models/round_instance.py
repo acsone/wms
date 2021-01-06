@@ -414,7 +414,6 @@ class RoundInstance(models.Model):
             )
             if pos:
                 rank = (pos.sequence + pos.itinerary_id.sequence * 1000) * 1000
-            _logger.warn("Partner added on delivery %s", self.id)
             ric = (
                 self.env["round.instance.customer"]
                 .sudo()

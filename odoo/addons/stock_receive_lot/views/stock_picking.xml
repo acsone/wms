@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_picking_form" model="ir.ui.view">
+        <field name="name">stock.picking.form.AddLot</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <button name="do_new_transfer" position="before">
+                <button name="button_receive"
+                        string="Receive" type="object" class="oe_highlight" groups="base.group_user"
+                        context="{'default_picking_id':active_id}"
+                        attrs="{'invisible': ['|', ('picking_type_code', '!=', 'incoming'), ('state', '!=', 'assigned')]}"/>
+            </button>
+        </field>
+    </record>
+</odoo>

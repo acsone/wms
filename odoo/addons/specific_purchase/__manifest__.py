@@ -9,6 +9,7 @@
     "license": "AGPL-3",
     "category": "Purchases",
     "depends": [
+        "alc_supplier_purchase_manager",
         "pricelist_discount",
         "purchase",
         "stock",

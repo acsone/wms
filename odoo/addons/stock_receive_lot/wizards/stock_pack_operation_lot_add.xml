@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <record id="view_pack_operation_lot_add_form" model="ir.ui.view">
+        <field name="name">stock.pack.operation.lot.add.form</field>
+        <field name="model">stock.pack.operation.lot.add</field>
+        <field name="arch" type="xml">
+            <form>
+              <header>
+                  <button name="button_nextlot" type="object" string="Next Lot" class="oe_highlight" attrs="{'invisible': [('lot_required', '!=', True)]}"/>
+                  <button name="button_nextop" type="object" string="Next Operation" class="oe_highlight"/>
+                  <button name="button_nextdestloc" type="object" string="Next Destination" class="oe_highlight"/>
+                  <button name="button_transfer" type="object" string="Transfer"/>
+              </header>
+              <sheet>
+                <group>
+                    <group>
+                        <field name="partner_id"/>
+                    </group>
+                    <group>
+                        <field name="origin"/>
+                    </group>
+                </group>
+                <group>
+                    <field name="picking_id" invisible="1"/>
+                    <field name="operation_id" required="1" domain="[('picking_id','=',picking_id)]" options="{'no_create':1}"/>
+                    <label for="remaining_qty"/>
+                    <span>
+                        <field name="remaining_qty" class="oe_inline" readonly="1"/> out of
+                        <field name="product_qty" class="oe_inline" readonly="1"/>
+                        <field name="product_uom_id" class="oe_inline" groups="product.group_uom" readonly="1"/>
+                    </span>
+                </group>
+                <group>
+                    <group>
+                        <field name="lot_required" invisible="1"/>
+                        <label for="life_date"/>
+                        <div>
+                            <field name="life_date_char"
+                                attrs="{'required': [('lot_required', '=', True)], 'readonly': ['|', ('operation_id', '=', False), ('lot_required', '=', False)]}"
+                                />
+                            <field name="life_date" invisible="1"/>
+                        </div>
+                        <field name="lot_name" attrs="{'required': [('lot_required', '=', True)], 'readonly': ['|', ('operation_id', '=', False), ('lot_required', '=', False)]}"/>
+                        <field name="qty" attrs="{'readonly': [('operation_id', '=', False)]}"/>
+                        <field name="is_qty_exceeded" invisible="1"/>
+                        <field name="is_surplus_qty_confirmed" attrs="{'invisible': [('is_qty_exceeded', '=', False)], 'required': [('is_qty_exceeded', '=', True)]}"/>
+                    </group>
+                    <group col="1">
+                        <label for="location_dest_id"/>
+                        <h2>
+                            <field name="location_op_dest_id"/>
+                            <field name="location_dest_id"
+                                   domain="['|', '|', ('is_reception_wizard', '=', True), ('scrap_location', '=', True),
+                                           '&amp;', '&amp;', ('usage', '=', 'internal'), ('id', 'child_of', location_op_dest_id), ('act_as_view', '=', False)]"
+                                required="1" options="{'no_create':1}"/>
+                        </h2>
+                    </group>
+                </group>
+                <footer>
+                </footer>
+              </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_pack_operation_lot_add" model="ir.actions.act_window">
+        <field name="name">Receive</field>
+        <field name="res_model">stock.pack.operation.lot.add</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">current</field>
+    </record>
+
+</odoo>

@@ -5,24 +5,16 @@
         <field name="name">stock.backorder.choice.form</field>
         <field name="model">stock.backorder.choice</field>
         <field name="arch" type="xml">
-
             <form string="Backorder">
-                <group>
+                <group name="main">
                     <group>
                         <field name="reason_id" options="{'no_open':True, 'no_create':True}"/>
                     </group>
                     <group>
                         <field name="backorder_action_to_do"/>
                         <field name="is_purchase_back_order_accepted" attrs="{'invisible': [('backorder_action_to_do', '!=', 'use_partner_option')]}"/>
-                        <field name="is_helpdesk_ticket_to_create"/>
                     </group>
                 </group>
-                <group string="Helpdesk" attrs="{'invisible': [('is_helpdesk_ticket_to_create', '=', False)]}">
-                    <field name="helpdesk_ticket_description"
-                           attrs="{'required': [('is_helpdesk_ticket_to_create', '=', True)]}"/>
-                    <field name="helpdesk_ticket_reason_id"/>
-                </group>
-
                 <footer>
                     <button name="apply" string="Apply"
                             type="object" class="btn btn-sm btn-primary" />

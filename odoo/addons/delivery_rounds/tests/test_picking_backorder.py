@@ -18,11 +18,6 @@ class TestPickingBackorder(SavepointCase):
         cls.backorder_reason_model = cls.env["stock.backorder.reason"]
         cls.backorder_choice_model = cls.env["stock.backorder.choice"]
         cls.backorder_confirmation_model = cls.env["stock.backorder.confirmation"]
-        cls.helpdesk_ticket_model = cls.env["helpdesk.ticket"]
-        cls.helpdesk_ticket_reason_model = cls.env["helpdesk.ticket.reason"]
-        cls.ticket_reason = cls.helpdesk_ticket_reason_model.create(
-            {"name": "Unittest helpdesk ticket reason"}
-        )
 
         cls.product = cls.product_model.create(
             {
@@ -126,12 +121,7 @@ class TestPickingBackorder(SavepointCase):
         result = picking.do_new_transfer()
         if result:
             backorder_reason = self.backorder_reason_model.create(
-                {
-                    "name": "Unittest backorder",
-                    "backorder_action_to_do": "create",
-                    "is_helpdesk_ticket_to_create": False,
-                    "helpdesk_ticket_reason_id": self.ticket_reason.id,
-                }
+                {"name": "Unittest backorder", "backorder_action_to_do": "create"}
             )
 
             result = self.picking_in.do_new_transfer()
@@ -141,10 +131,7 @@ class TestPickingBackorder(SavepointCase):
 
             # Create backorder choice wizard and execute it
             wizard = self.backorder_choice_model.with_context(result["context"]).create(
-                {
-                    "reason_id": backorder_reason.id,
-                    "helpdesk_ticket_description": "test",
-                }
+                {"reason_id": backorder_reason.id}
             )
             wizard.apply()
         return self._get_backorder(picking)

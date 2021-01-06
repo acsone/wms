@@ -14,22 +14,6 @@ class TestDeliveryRoundAssign2(common.DeliveryRoundTestCase):
         super(TestDeliveryRoundAssign2, cls).setUpClass()
         cls.stock_location = cls.env.ref("stock.stock_location_stock")
 
-        cls.picking_zone_medoc = cls.env.ref(
-            "__setup__.picking_zone_medicament", raise_if_not_found=False
-        )
-        if not cls.picking_zone_medoc:
-            cls.picking_zone_medoc = cls.env["picking.zone"].create(
-                {"code": "01", "name": "Medicament"}
-            )
-
-        cls.picking_zone_ali = cls.env.ref(
-            "__setup__.picking_zone_aliments", raise_if_not_found=False
-        )
-        if not cls.picking_zone_ali:
-            cls.picking_zone_ali = cls.env["picking.zone"].create(
-                {"code": "02", "name": "Aliment"}
-            )
-
         cls.route_medoc = cls.env.ref(
             "__setup__.stock_location_route_pick_medoc", raise_if_not_found=False
         )
@@ -64,23 +48,11 @@ class TestDeliveryRoundAssign2(common.DeliveryRoundTestCase):
         )
 
         cls.location_product_medoc = cls.env["stock.location"].create(
-            {
-                "name": "GD80B2",
-                "kind": "bin",
-                "location_id": cls.zone_medoc.id,
-                "bin_checksum_1": "45",
-                "bin_checksum_2": "45",
-            }
+            {"name": "GD80B2", "location_id": cls.zone_medoc.id}
         )
 
         cls.location_product_alim = cls.env["stock.location"].create(
-            {
-                "name": "AD80B2",
-                "kind": "bin",
-                "location_id": cls.zone_ali.id,
-                "bin_checksum_1": "45",
-                "bin_checksum_2": "45",
-            }
+            {"name": "AD80B2", "location_id": cls.zone_ali.id}
         )
 
         cls.env["stock.location"]._parent_store_compute()
@@ -130,7 +102,6 @@ class TestDeliveryRoundAssign2(common.DeliveryRoundTestCase):
                 "groupbypartner": True,
                 "color": 7,
                 "sequence": 4,
-                "picking_zone_id": cls.picking_zone_medoc.id,
             }
         )
 
@@ -145,7 +116,6 @@ class TestDeliveryRoundAssign2(common.DeliveryRoundTestCase):
                 "groupbypartner": True,
                 "color": 7,
                 "sequence": 4,
-                "picking_zone_id": cls.picking_zone_ali.id,
             }
         )
 
@@ -170,7 +140,13 @@ class TestDeliveryRoundAssign2(common.DeliveryRoundTestCase):
                 }
             )
 
-        cls.categ_ali = cls.env.ref("specific_data.product_categ_ali")
+        cls.categ_ali = cls.env.ref(
+            "specific_data.product_categ_ali", raise_if_not_found=False
+        )
+        if not cls.categ_ali:
+            cls.categ_ali = cls.env["product.category"].create(
+                {"name": "Alim category"}
+            )
         cls.categ_ali.route_ids = [(4, cls.route_aliment.id)]
         if not cls.route_medoc:
             cls.route_medoc = cls.env["stock.location.route"].create(
@@ -192,7 +168,13 @@ class TestDeliveryRoundAssign2(common.DeliveryRoundTestCase):
                     ],
                 }
             )
-        cls.categ_medoc = cls.env.ref("specific_data.product_categ_medoc")
+        cls.categ_medoc = cls.env.ref(
+            "specific_data.product_categ_medoc", raise_if_not_found=False
+        )
+        if not cls.categ_medoc:
+            cls.categ_medoc = cls.env["product.category"].create(
+                {"name": "Medeoc category"}
+            )
         cls.categ_medoc.route_ids = [(4, cls.route_medoc.id)]
 
     @classmethod

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Add smart button on customer invoices -->
+    <record id="account_invoice_alce_helpdesk" model="ir.ui.view">
+        <field name="name">account.invoice.helpdesk.specific.form</field>
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="sale.account_invoice_form"/>
+        <field name="arch" type="xml">
+
+          <xpath expr="//sheet/h1" position="before">
+              <div class="oe_button_box" name="button_box">
+                <button class="oe_stat_button" name="action_view_helpdesk_tickets"
+                        type="object" icon="fa-life-ring"
+                        context="{'default_account_invoice_id': active_id, 'default_partner_id': partner_id}">
+                    <field string="Tickets" name="helpdesk_tickets_count" widget="statinfo" />
+                </button>
+              </div>
+          </xpath>
+
+        </field>
+    </record>
+
+    <!-- Add smart button on supplier invoices -->
+    <record id="account_supplier_invoice_alce_helpdesk" model="ir.ui.view">
+        <field name="name">account.invoice.helpdesk.specific.form</field>
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="purchase.view_invoice_supplier_purchase_form"/>
+        <field name="arch" type="xml">
+
+          <xpath expr="//sheet/div" position="before">
+              <div class="oe_button_box" name="button_box">
+                <button class="oe_stat_button" name="action_view_helpdesk_tickets"
+                        type="object" icon="fa-life-ring"
+                        context="{'default_account_invoice_id': active_id, 'default_partner_id': partner_id}">
+                    <field string="Tickets" name="helpdesk_tickets_count" widget="statinfo" />
+                </button>
+              </div>
+          </xpath>
+
+        </field>
+    </record>
+
+</odoo>
