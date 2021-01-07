@@ -190,12 +190,6 @@ msgid "Source Document"
 msgstr "Document d'origine"
 
 #. module: stock_receive_lot
-#: code:addons/stock_receive_lot/wizards/stock_pack_operation_lot_add.py:253
-#, python-format
-msgid "This lot is not in the list of expected lots"
-msgstr ""
-
-#. module: stock_receive_lot
 #: model:ir.model.fields,field_description:stock_receive_lot.field_stock_pack_operation_lot_add_product_qty
 msgid "To Do"
 msgstr "A Faire"
