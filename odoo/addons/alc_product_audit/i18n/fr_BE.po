@@ -34,7 +34,7 @@ msgstr ""
 #: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
 msgid "- Product can be purchased but does not have the buy route"
 msgstr ""
-"- Le produit peut être acheté mais ne dispose pas de la route 'acheter' "
+"- Le produit peut être acheté mais ne dispose pas de la route 'Acheter' "
 
 #. module: alc_product_audit
 #: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
@@ -52,7 +52,7 @@ msgstr ""
 #: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
 msgid "- Product is not salable and still has a bin"
 msgstr ""
-"- Le produit ne peut être vendu ou est archivé et est associé à un rangement
+"- Le produit ne peut être vendu ou est archivé et est associé à un rangement"
 
 #. module: alc_product_audit
 #: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
@@ -63,18 +63,6 @@ msgstr "- Le produit ne peut être vendu et non archivé"
 #: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
 msgid "- The selected picking zone does not match the bin"
 msgstr "- Rangement et zone de picking incohérent"
-
-
-#. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
-msgid "- MTO Product with abnormal routes"
-msgstr "- Le produit est un acheté/vendu qui présente une route incohérente"
-
-#. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
-msgid "- Product can be purchased but does not have the buy route"
-msgstr "- Le produit peut être acheté mais ne dispose pas de la route Acheter "
-
 
 #. module: alc_product_audit
 #: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
@@ -109,11 +97,6 @@ msgstr "Min/Max défini pour des produits achetés/vendus "
 #: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
 msgid "Mismatch between picking zone and bin"
 msgstr "Rangement et zone de picking incohérent"
-
-#. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
-msgid "MTO product has abnormal routes"
-msgstr "Produits achetés/vendus avec une route incohérente"
 
 #. module: alc_product_audit
 #: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
