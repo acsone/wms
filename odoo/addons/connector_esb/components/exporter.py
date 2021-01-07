@@ -318,8 +318,8 @@ class ESBCronExporter(AbstractComponent):
         if export_to:
             export_date = fields.Datetime.from_string(export_to)
             export_date = export_date + datetime.timedelta(seconds=self.BASIC_LOCK_TIME)
-            export_since = fields.Datetime.to_string(export_date)
-            domain.append(("write_date", "<=", export_since))
+            export_to = fields.Datetime.to_string(export_date)
+            domain.append(("write_date", "<=", export_to))
         return domain
 
     def get_items(self, export_since, export_to=None):

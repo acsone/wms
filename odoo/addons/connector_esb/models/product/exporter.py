@@ -236,7 +236,7 @@ class ProductCronExporter(Component):
         """
         domain = [("product_tmpl_id.write_date", ">=", export_since)]
         if export_to:
-            domain.append(("product_tmpl_id.write_date", "<=", export_since))
+            domain.append(("product_tmpl_id.write_date", "<=", export_to))
         return domain
 
     def domain_timestamp(self, export_since=None, export_to=None):
