@@ -15,7 +15,17 @@ msgstr ""
 
 #. module: alc_product_audit
 #: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
+msgid "- MTO Product with abnormal routes"
+msgstr ""
+
+#. module: alc_product_audit
+#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
 msgid "- More than one route is selected for the product, leading to a mismatch with the picking zone"
+msgstr ""
+
+#. module: alc_product_audit
+#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
+msgid "- Product can be purchased but does not have the buy route"
 msgstr ""
 
 #. module: alc_product_audit
@@ -44,6 +54,13 @@ msgid "- The selected picking zone does not match the bin"
 msgstr ""
 
 #. module: alc_product_audit
+#: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_can_be_bought_without_buy_route
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_product_can_be_bought_without_buy_route
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_template_can_be_bought_without_buy_route
+msgid "Can be bought without buy route"
+msgstr ""
+
+#. module: alc_product_audit
 #: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
 msgid "Following issue(s) is/are observed on the product:"
 msgstr ""
@@ -53,6 +70,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:alc_product_audit.field_product_product_has_anomaly
 #: model:ir.model.fields,field_description:alc_product_audit.field_product_template_has_anomaly
 msgid "Has anomaly"
+msgstr ""
+
+#. module: alc_product_audit
+#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
+msgid "MTO product has abnormal routes"
 msgstr ""
 
 #. module: alc_product_audit
@@ -89,6 +111,13 @@ msgstr ""
 #: model:ir.model.fields,field_description:alc_product_audit.field_product_product_mismatch_route_picking
 #: model:ir.model.fields,field_description:alc_product_audit.field_product_template_mismatch_route_picking
 msgid "Mismatch route picking"
+msgstr ""
+
+#. module: alc_product_audit
+#: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_mto_with_abnormal_route
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_product_mto_with_abnormal_route
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_template_mto_with_abnormal_route
+msgid "Mto with abnormal route"
 msgstr ""
 
 #. module: alc_product_audit
@@ -135,5 +164,10 @@ msgstr ""
 #: model:ir.model.fields,field_description:alc_product_audit.field_product_product_sale_not_ok_not_archived
 #: model:ir.model.fields,field_description:alc_product_audit.field_product_template_sale_not_ok_not_archived
 msgid "Sale not ok not archived"
+msgstr ""
+
+#. module: alc_product_audit
+#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
+msgid "can be bought without buy routes"
 msgstr ""
 
