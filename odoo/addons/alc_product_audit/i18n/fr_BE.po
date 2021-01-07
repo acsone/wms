@@ -39,14 +39,12 @@ msgstr ""
 #. module: alc_product_audit
 #: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
 msgid "- Product has min/max and is 'on command reappro'"
-msgstr ""
-"- Min/Max défini et produit en achetés/vendus"
+msgstr "- Min/Max défini et produit en achetés/vendus"
 
 #. module: alc_product_audit
 #: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
 msgid "- Product has no min/max and is not 'on command reappro'"
-msgstr ""
-"- Min/Max non défini pour et produit non achetés/vendus"
+msgstr "- Min/Max non défini pour et produit non achetés/vendus"
 
 #. module: alc_product_audit
 #: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
@@ -63,6 +61,14 @@ msgstr "- Le produit ne peut être vendu et non archivé"
 #: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
 msgid "- The selected picking zone does not match the bin"
 msgstr "- Rangement et zone de picking incohérent"
+
+#. module: alc_product_audit
+#: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_can_be_bought_without_buy_route
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_product_can_be_bought_without_buy_route
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_template_can_be_bought_without_buy_route
+#, fuzzy
+msgid "Can be bought without buy route"
+msgstr "Peut être acheté sans route Acheter"
 
 #. module: alc_product_audit
 #: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
@@ -100,11 +106,6 @@ msgstr "Rangement et zone de picking incohérent"
 
 #. module: alc_product_audit
 #: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
-msgid "can be bought without buy routes"
-msgstr "Peut être acheté sans route Acheter"
-
-#. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
 msgid "Mismatch between route and picking zone"
 msgstr "Route et zone de picking incohérente"
 
@@ -123,12 +124,12 @@ msgid "Mismatch route picking"
 msgstr "Route et zone de picking incohérente"
 
 #. module: alc_product_audit
-#: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_can_be_bought_without_buy_route
-#: model:ir.model.fields,field_description:alc_product_audit.field_product_product_can_be_bought_without_buy_route
-#: model:ir.model.fields,field_description:alc_product_audit.field_product_template_can_be_bought_without_buy_route
-msgid "can be bought without buy route"
-msgstr "Peut être acheté sans route Acheter"
-
+#: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_mto_with_abnormal_route
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_product_mto_with_abnormal_route
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_template_mto_with_abnormal_route
+#, fuzzy
+msgid "Mto with abnormal route"
+msgstr "Produits achetés/vendus avec une route incohérente"
 
 #. module: alc_product_audit
 #: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_no_min_max_no_on_command_reappro
@@ -146,15 +147,6 @@ msgstr "Min/Max non défini pour des produits non achetés/vendus"
 #: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
 msgid "Not salable but not archived"
 msgstr "Ne peut être vendu et non archivé"
-
-
-#. module: alc_product_audit
-#: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_mto_with_abnormal_route
-#: model:ir.model.fields,field_description:alc_product_audit.field_product_product_mto_with_abnormal_route
-#: model:ir.model.fields,field_description:alc_product_audit.field_product_template_mto_with_abnormal_route
-msgid "mto with abnormal route"
-msgstr "Produits achetés/vendus avec une route incohérente"
-
 
 #. module: alc_product_audit
 #: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
@@ -184,3 +176,8 @@ msgstr "Ne peut être vendu ou est archivé et associé à un rangement"
 #: model:ir.model.fields,field_description:alc_product_audit.field_product_template_sale_not_ok_not_archived
 msgid "Sale not ok not archived"
 msgstr "Ne peut être vendu et non archivé"
+
+#. module: alc_product_audit
+#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
+msgid "can be bought without buy routes"
+msgstr "Peut être acheté sans route Acheter"
