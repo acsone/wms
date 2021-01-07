@@ -103,6 +103,7 @@
         "alc_purchase_multipackaging",
         "alc_product_audit",
         "alc_product_packaging",
+        "alc_product_packaging_dimension",
         "alc_product_packaging_stock_reserve",
         "alc_product_uom_updatable",
         "alc_restocking_exclude_not_salable",
