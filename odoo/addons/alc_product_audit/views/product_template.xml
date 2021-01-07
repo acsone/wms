@@ -20,8 +20,9 @@
                 <filter string="Not salable or archived but with a bin" name="filter_sale_not_ok_archived_bin_available" domain="[('sale_not_ok_archived_bin_available','=',True)]"/>
                 <filter string="Mismatch between route and picking zone" name="filter_mismatch_route_picking" domain="[('mismatch_route_picking','=',True)]"/>
                 <filter string="Mismatch between picking zone and bin" name="filter_mismatch_picking_bin" domain="[('mismatch_picking_bin','=',True)]"/>
+                <filter string="MTO product has abnormal routes" name="filter_mto_with_abnormal_route" domain="[('mto_with_abnormal_route','=',True)]"/>
+                <filter string="can be bought without buy routes" name="filter_can_be_bought_without_buy_route" domain="[('can_be_bought_without_buy_route','=',True)]"/>
             </xpath>
-                
         </field>
     </record>
 
@@ -49,6 +50,8 @@
                 <field name="sale_not_ok_archived_bin_available" invisible="1"/>
                 <field name="mismatch_route_picking" invisible="1"/>
                 <field name="mismatch_picking_bin" invisible="1"/>
+                <field name="mto_with_abnormal_route" invisible="1"/>
+                <field name="can_be_bought_without_buy_route" invisible="1"/>
             </form>
             <header position="after">
                 <div class="alert alert-warning" attrs="{'invisible': [('has_anomaly', '=', False)]}">
@@ -70,6 +73,12 @@
                     </div>
                     <div attrs="{'invisible': [('mismatch_picking_bin', '=', False)]}">
                         <p>- The selected picking zone does not match the bin</p>
+                    </div>
+                    <div attrs="{'invisible': [('mto_with_abnormal_route', '=', False)]}">
+                        <p>- MTO Product with abnormal routes</p>
+                    </div>
+                    <div attrs="{'invisible': [('can_be_bought_without_buy_route', '=', False)]}">
+                        <p>- Product can be purchased but does not have the buy route</p>
                     </div>
                 </div>
             </header>

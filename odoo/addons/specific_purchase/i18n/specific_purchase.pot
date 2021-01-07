@@ -208,11 +208,6 @@ msgid "Last Updated on"
 msgstr ""
 
 #. module: specific_purchase
-#: model:ir.model.fields,field_description:specific_purchase.field_purchase_order_last_date_done
-msgid "Last date of Transfer"
-msgstr ""
-
-#. module: specific_purchase
 #: model:ir.model.fields,field_description:specific_purchase.field_delivery_carrier_length
 #: model:ir.model.fields,field_description:specific_purchase.field_product_product_length
 #: model:ir.model.fields,field_description:specific_purchase.field_product_template_length
@@ -344,12 +339,6 @@ msgid "Purchase Order Line"
 msgstr ""
 
 #. module: specific_purchase
-#: model:ir.model.fields,field_description:specific_purchase.field_res_partner_purchase_manager_id
-#: model:ir.model.fields,field_description:specific_purchase.field_res_users_purchase_manager_id
-msgid "Purchase manager"
-msgstr ""
-
-#. module: specific_purchase
 #: model:mail.template,subject:specific_purchase.cancel_purchase_order
 msgid "Purchase order ${object.partner_ref or ''} canceled"
 msgstr ""
@@ -391,12 +380,6 @@ msgstr ""
 #. module: specific_purchase
 #: model:ir.model,name:specific_purchase.model_stock_move
 msgid "Stock Move"
-msgstr ""
-
-#. module: specific_purchase
-#: model:ir.model.fields,field_description:specific_purchase.field_res_partner_substitute_purchase_manager_id
-#: model:ir.model.fields,field_description:specific_purchase.field_res_users_substitute_purchase_manager_id
-msgid "Substitute purchase manager"
 msgstr ""
 
 #. module: specific_purchase

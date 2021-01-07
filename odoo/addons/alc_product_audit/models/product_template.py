@@ -42,6 +42,20 @@ class ProductTemplate(models.Model):
         default=False, compute="_compute_mismatch_picking_bin", store=True, index=True
     )
 
+    mto_with_abnormal_route = fields.Boolean(
+        default=False,
+        compute="_compute_mto_with_abnormal_route",
+        store=True,
+        index=True,
+    )
+
+    can_be_bought_without_buy_route = fields.Boolean(
+        default=False,
+        compute="_compute_can_be_bought_without_buy_route",
+        store=True,
+        index=True,
+    )
+
     has_anomaly = fields.Boolean(
         default=False, compute="_compute_has_anomaly", store=True, index=True
     )
@@ -80,6 +94,14 @@ class ProductTemplate(models.Model):
             if product.stock_bin_ids and not (product.sale_ok and product.active):
                 product.sale_not_ok_archived_bin_available = True
 
+    @api.depends("purchase_ok", "route_ids")
+    def _compute_can_be_bought_without_buy_route(self):
+        purchase_route = self.env.ref("purchase.route_warehouse0_buy")
+        for product in self:
+            product_routes = product.route_ids
+            if product.purchase_ok and purchase_route not in product_routes:
+                product.can_be_bought_without_buy_route = True
+
     @api.depends("route_ids")
     def _compute_mismatch_route_picking(self):
         Rule = self.env["procurement.rule"]
@@ -102,7 +124,6 @@ class ProductTemplate(models.Model):
 
     @api.depends("picking_zone_id", "stock_bin_ids")
     def _compute_mismatch_picking_bin(self):
-
         for product in self:
             if product.stock_bin_ids:
                 for stock_bin in product.stock_bin_ids:
@@ -112,6 +133,21 @@ class ProductTemplate(models.Model):
                     ):
                         product.mismatch_picking_bin = True
 
+    @api.depends("route_ids")
+    def _compute_mto_with_abnormal_route(self):
+        mto_route = self.env.ref("stock.route_warehouse0_mto")
+        new_route = self.env.ref(
+            "__setup__.stock_location_route_new", raise_if_not_found=False
+        )
+        for product in self:
+            product_routes = product.route_ids
+            if (
+                mto_route in product_routes
+                and new_route
+                and new_route in product_routes
+            ):
+                product.mto_with_abnormal_route = True
+
     @api.depends(
         "min_max_on_command_reappro",
         "no_min_max_no_on_command_reappro",
@@ -119,6 +155,8 @@ class ProductTemplate(models.Model):
         "sale_not_ok_archived_bin_available",
         "mismatch_route_picking",
         "mismatch_picking_bin",
+        "mto_with_abnormal_route",
+        "can_be_bought_without_buy_route",
     )
     def _compute_has_anomaly(self):
         for product in self:
@@ -129,5 +167,7 @@ class ProductTemplate(models.Model):
                 or product.sale_not_ok_not_archived
                 or product.min_max_on_command_reappro
                 or product.no_min_max_no_on_command_reappro
+                or product.mto_with_abnormal_route
+                or product.can_be_bought_without_buy_route
             ):
                 product.has_anomaly = True

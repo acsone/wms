@@ -12,6 +12,7 @@ class TestProductTemplate(SavepointCase):
 
         cls.stock_location = cls.env.ref("stock.stock_location_stock")
 
+        cls.route_buy = cls.env.ref("purchase.route_warehouse0_buy")
         cls.picking_zone_medoc = cls.env.ref(
             "__setup__.picking_zone_medicament", raise_if_not_found=False
         )
@@ -150,6 +151,22 @@ class TestProductTemplate(SavepointCase):
                 }
             )
 
+        cls.route_new = cls.env.ref(
+            "__setup__.stock_location_route_new", raise_if_not_found=False
+        )
+
+        if not cls.route_new:
+            cls.route_new = cls.env["stock.location.route"].create(
+                {"name": "Nouveautes"}
+            )
+            cls.env["ir.model.data"].create(
+                {
+                    "module": "__setup__",
+                    "name": "stock_location_route_new",
+                    "model": "stock.location.route",
+                    "res_id": cls.route_new.id,
+                }
+            )
         cls.categ_ali = cls.env.ref("specific_data.product_categ_ali")
         cls.categ_ali.route_ids = [(4, cls.route_aliment.id)]
         if not cls.route_medoc:
@@ -277,3 +294,21 @@ class TestProductTemplate(SavepointCase):
 
         self.product_template._compute_mismatch_picking_bin()
         self.assertTrue(self.product_template.mismatch_picking_bin)
+
+    def test_7(self):
+        "can be bought without buy route"
+        self.product_template.write(
+            {"route_ids": [(3, self.route_buy.id)], "purchase_ok": True}
+        )
+
+        self.product_template._compute_can_be_bought_without_buy_route()
+        self.assertTrue(self.product_template.can_be_bought_without_buy_route)
+
+    def test_8(self):
+        "route mto + route new"
+        self.product_template.write(
+            {"route_ids": [(6, 0, [self.route_mto, self.route_new.id])]}
+        )
+
+        self.product_template._compute_mto_with_abnormal_route()
+        self.assertTrue(self.product_template.mto_with_abnormal_route)

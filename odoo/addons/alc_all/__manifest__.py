@@ -6,7 +6,7 @@
     "name": "Alc All",
     "description": """
         Alcyon Odoo App""",
-    "version": "10.0.1.61.2",
+    "version": "10.0.1.61.3",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
@@ -101,6 +101,7 @@
         "alc_placedesvetos_to_magento",
         "alc_placedesvetos_payment_globalization",
         "alc_purchase_multipackaging",
+        "alc_product_audit",
         "alc_product_packaging",
         "alc_product_packaging_stock_reserve",
         "alc_product_uom_updatable",
