@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* specific_purchase_report
+# 	* alce_purchase_report
 #
 msgid ""
 msgstr ""
@@ -16,27 +16,22 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
-#. module: specific_purchase_report
-#: model:ir.model.fields,field_description:specific_purchase_report.field_purchase_report_last_date_done
+#. module: alce_purchase_report
+#: model:ir.model.fields,field_description:alce_purchase_report.field_purchase_report_last_date_done
 msgid "Last date of Transfer"
 msgstr "Dernière date de transfert"
 
-#. module: specific_purchase_report
-#: model:ir.model.fields,field_description:specific_purchase_report.field_purchase_order_last_date_done
-msgid "Last date of Transfer"
-msgstr "Dernière date de transfert"
-
-#. module: specific_purchase_report
-#: model:ir.model.fields,field_description:specific_purchase_report.field_purchase_report_late_delivery
+#. module: alce_purchase_report
+#: model:ir.model.fields,field_description:alce_purchase_report.field_purchase_report_late_delivery
 msgid "Late delivery"
 msgstr "Retard de livraison"
 
-#. module: specific_purchase_report
-#: model:ir.model.fields,field_description:specific_purchase_report.field_purchase_report_nbr_tickets
+#. module: alce_purchase_report
+#: model:ir.model.fields,field_description:alce_purchase_report.field_purchase_report_nbr_tickets
 msgid "Nb. of Tickets"
 msgstr "Nb. de tickets"
 
-#. module: specific_purchase_report
-#: model:ir.model,name:specific_purchase_report.model_purchase_report
+#. module: alce_purchase_report
+#: model:ir.model,name:alce_purchase_report.model_purchase_report
 msgid "Purchases Orders"
 msgstr "Ordres d'achat"
