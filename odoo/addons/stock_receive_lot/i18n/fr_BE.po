@@ -17,13 +17,9 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: stock_receive_lot
-#: model:ir.ui.view,arch_db:stock_receive_lot.view_pack_operation_lot_add_form
-msgid ""
-"<i class=\"fa fa-exclamation-triangle\" style=\"color:red\"><span style="
-"\"margin:0 5px\">Expired</span></i>"
+#: model:ir.model.fields,field_description:stock_receive_lot.field_stock_pack_operation_lot_add_is_surplus_qty_confirmed
+msgid "Confirm received more than expected"
 msgstr ""
-"<i class=\"fa fa-exclamation-triangle\" style=\"color:red\"><span style="
-"\"margin:0 5px\">Expired</span></i>"
 
 #. module: stock_receive_lot
 #: model:ir.model.fields,field_description:stock_receive_lot.field_stock_pack_operation_lot_add_create_uid
@@ -67,8 +63,8 @@ msgid "Inventory Locations"
 msgstr "Emplacements d'inventaire"
 
 #. module: stock_receive_lot
-#: model:ir.model.fields,field_description:stock_receive_lot.field_stock_pack_operation_lot_is_product_expired
-msgid "Is expired"
+#: model:ir.model.fields,field_description:stock_receive_lot.field_stock_pack_operation_lot_add_is_qty_exceeded
+msgid "Is qty exceeded"
 msgstr ""
 
 #. module: stock_receive_lot
@@ -167,7 +163,7 @@ msgid "Qty Remaining"
 msgstr "Qté Restante"
 
 #. module: stock_receive_lot
-#: code:addons/stock_receive_lot/wizards/stock.py:259
+#: code:addons/stock_receive_lot/wizards/stock_pack_operation_lot_add.py:189
 #, python-format
 msgid "Quantity must be greater than 0"
 msgstr ""
@@ -194,7 +190,7 @@ msgid "Source Document"
 msgstr "Document d'origine"
 
 #. module: stock_receive_lot
-#: code:addons/stock_receive_lot/wizards/stock.py:320
+#: code:addons/stock_receive_lot/wizards/stock_pack_operation_lot_add.py:253
 #, python-format
 msgid "This lot is not in the list of expected lots"
 msgstr ""
@@ -221,16 +217,25 @@ msgid "Visible in reception wizard"
 msgstr ""
 
 #. module: stock_receive_lot
-#: code:addons/stock_receive_lot/wizards/stock.py:168
+#: code:addons/stock_receive_lot/wizards/stock_pack_operation_lot_add.py:106
 #, python-format
 msgid "Warning"
 msgstr ""
 
 #. module: stock_receive_lot
-#: code:addons/stock_receive_lot/wizards/stock.py:169
-#: code:addons/stock_receive_lot/wizards/stock.py:262
+#: code:addons/stock_receive_lot/wizards/stock_pack_operation_lot_add.py:192
 #, python-format
-msgid "You cannot receive more than the expected remaining quantity"
+msgid ""
+"You receive more than the expected remaining quantity. You must confirm that "
+"you received more than the expected qty"
+msgstr ""
+
+#. module: stock_receive_lot
+#: code:addons/stock_receive_lot/wizards/stock_pack_operation_lot_add.py:107
+#, python-format
+msgid ""
+"You received more than the expected remaining quantity. Please confirm by "
+"ticking the 'Confirm received more than expected' checkbox."
 msgstr ""
 
 #. module: stock_receive_lot
@@ -242,6 +247,13 @@ msgstr "sur"
 #: model:ir.model,name:stock_receive_lot.model_stock_pack_operation_lot_add
 msgid "stock.pack.operation.lot.add"
 msgstr "stock.pack.operation.lot.add"
+
+#~ msgid ""
+#~ "<i class=\"fa fa-exclamation-triangle\" style=\"color:red\"><span style="
+#~ "\"margin:0 5px\">Expired</span></i>"
+#~ msgstr ""
+#~ "<i class=\"fa fa-exclamation-triangle\" style=\"color:red\"><span style="
+#~ "\"margin:0 5px\">Expired</span></i>"
 
 #~ msgid "Removal date"
 #~ msgstr "Date de retrait"
