@@ -37,7 +37,15 @@ class AlcEdiConnectorCase(SavepointComponentCase, JobMixin):
                             "kind": "ubl.order.response.importer",
                             "file_matcher_pattern": "PO.*.xml$",
                         },
-                    )
+                    ),
+                    (
+                        0,
+                        0,
+                        {
+                            "kind": "ubl.despatch.advice.importer",
+                            "file_matcher_pattern": "DespatchAdvice.*.xml$",
+                        },
+                    ),
                 ],
             }
         )

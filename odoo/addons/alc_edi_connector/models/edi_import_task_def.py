@@ -5,7 +5,10 @@
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 
-MODEL_NAME_BY_KIND = {"ubl.order.response.importer": "purchase.order"}
+MODEL_NAME_BY_KIND = {
+    "ubl.order.response.importer": "purchase.order",
+    "ubl.despatch.advice.importer": "stock.move",
+}
 
 
 class EdiImportTaskDef(models.Model):
@@ -16,7 +19,10 @@ class EdiImportTaskDef(models.Model):
     last_import_dt = fields.Datetime(string="Timestamp last import")
 
     kind = fields.Selection(
-        selection=[("ubl.order.response.importer", "Import UBL Order Response")],
+        selection=[
+            ("ubl.order.response.importer", "Import UBL Order Response"),
+            ("ubl.despatch.advice.importer", "Import UBL Despatch Advice"),
+        ],
         string="Kind of EDI document",
     )
 
