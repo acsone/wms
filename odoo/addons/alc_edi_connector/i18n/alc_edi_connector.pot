@@ -20,7 +20,7 @@ msgid "%s must be set in environ"
 msgstr ""
 
 #. module: alc_edi_connector
-#: code:addons/alc_edi_connector/models/edi_import_task_def.py:37
+#: code:addons/alc_edi_connector/models/edi_import_task_def.py:43
 #, python-format
 msgid "A File Matcher Pattern is required for task %s with an SFTP backend"
 msgstr ""
@@ -86,6 +86,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:alc_edi_connector.field_edi_export_task_def_create_date
 #: model:ir.model.fields,field_description:alc_edi_connector.field_edi_import_task_def_create_date
 msgid "Created on"
+msgstr ""
+
+#. module: alc_edi_connector
+#: model:ir.model,name:alc_edi_connector.model_despatch_advice_import
+msgid "Despatch Advice Import from Files"
 msgstr ""
 
 #. module: alc_edi_connector
@@ -189,6 +194,12 @@ msgid "If specified, is a sub path of the path specified on the backend"
 msgstr ""
 
 #. module: alc_edi_connector
+#: code:addons/alc_edi_connector/components/ubl_despatch_advice_importer.py:23
+#, python-format
+msgid "Import Despatch Advice %s from %s"
+msgstr ""
+
+#. module: alc_edi_connector
 #: code:addons/alc_edi_connector/components/ubl_order_response_importer.py:23
 #, python-format
 msgid "Import Order Response %s from %s"
@@ -197,6 +208,11 @@ msgstr ""
 #. module: alc_edi_connector
 #: model:ir.model.fields,field_description:alc_edi_connector.field_edi_backend_edi_import_task_def_ids
 msgid "Import Task Definition"
+msgstr ""
+
+#. module: alc_edi_connector
+#: selection:edi.import.task.def,kind:0
+msgid "Import UBL Despatch Advice"
 msgstr ""
 
 #. module: alc_edi_connector

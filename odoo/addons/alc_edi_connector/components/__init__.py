@@ -6,3 +6,4 @@ from . import edi_importer
 from . import edi_exporter
 from . import ubl_order_response_importer
 from . import ubl_order_exporter
+from . import ubl_despatch_advice_importer
