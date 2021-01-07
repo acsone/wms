@@ -83,7 +83,7 @@ def format_files_to_dataframe(env, path_to_files, verbose):
     # list all files in one dataframe
     files = [f for f in listdir(path_to_files) if isfile(join(path_to_files, f))]
     all_data = pd.DataFrame()
-
+    # new_export = pd.DataFrame()
     # concat all files in one DF
     for file in files:
         if verbose:
@@ -98,8 +98,9 @@ def format_files_to_dataframe(env, path_to_files, verbose):
         # Sometimes Weight, sometimes Poids... just using weight all the time for consistancy
         if "Poids" in df.columns:
             df.rename(columns={"Poids": "Weight"}, inplace=True)
-
+        # df['file name'] = file
         all_data = all_data.append(df, ignore_index=True, sort=True)
+        # new_export = new_export.append(df, ignore_index=True, sort=True)
 
     # Replace Nan values with proper value for consistancy in the SQL table
     all_data = all_data.fillna(
@@ -118,12 +119,35 @@ def format_files_to_dataframe(env, path_to_files, verbose):
             "Volume": 0,
         }
     )
+
     all_data["REF "] = all_data["REF "].astype(np.int64)
+    all_data["REF "] = all_data["REF "].apply(lambda x: "{:0>7}".format(x))
     all_data["REF "] = all_data["REF "].astype(str)
+    # REF is 7 char min. zeros were removed at the beginning because of np.int6' -- which is necessary
+    # to prevent pandas to interpret those ref as float and then put a .0 at the end
+    # all_data[all_data['REF '].str.len() == 6] = all_data['REF '].apply(lambda x: "{}{}".format('0', x))
+    # all_data[all_data['REF '].str.len() == 5] = all_data['REF '].apply(lambda x: "{}{}".format('00', x))
     all_data["User1"] = all_data["User1"].astype(np.int64)
     all_data["User2"] = all_data["User2"].astype(np.int64)
+    all_data["User2"] = all_data["User2"].apply(lambda x: "{:0>7}".format(x))
     all_data["User3"] = all_data["User3"].astype(np.int64)
 
+    # new_export["REF "] = new_export["REF "].astype(np.int64)
+    # new_export["REF "] = new_export["REF "].astype(str)
+    # new_export["User1"] = new_export["User1"].astype(np.int64)
+    # new_export["User2"] = new_export["User2"].astype(np.int64)
+    # new_export["User3"] = new_export["User3"].astype(np.int64)
+    # cols = ['Sequence', 'REF ', 'Secondary', 'Description', 'Length', 'Width',
+    #         'Height', 'Weight', 'Volume', 'Dim Wgt', 'Dim Unit',
+    #         'Wgt Unit', 'Vol Unit', 'Factor', 'Site ID', 'Date-Time', 'User1', 'User2',
+    #         'User3', 'User4', 'User5', 'User6', 'User7', 'User8', 'SnapShotFile', 'Updated', 'file name']
+    # all_data = all_data[cols]
+    # all_data.to_excel("/home/lma-local/Sources/odoo-alcyon/scripts/output.xlsx")
+
+    # all_data.drop(
+    #         ["file name"],
+    #         axis=1,
+    #         inplace=True)
     if verbose:
         click.echo("Dataframe Columns : {}. . .".format(all_data.columns))
         click.echo("Dataframe Head : {}. . .".format(all_data.head()))
@@ -173,11 +197,15 @@ def split_products_and_packagings(env, all_data_dataframe, verbose):
     product_data["REF "] = product_data["REF "].astype(str)
     product_data["User1"] = product_data["User1"].astype(np.int64)
     product_data["User2"] = product_data["User2"].astype(np.int64)
+    product_data["User2"] = product_data["User2"].apply(lambda x: "{:0>7}".format(x))
     product_data["User3"] = product_data["User3"].astype(np.int64)
 
     product_packaging_data["REF "] = product_packaging_data["REF "].astype(str)
     product_packaging_data["User1"] = product_packaging_data["User1"].astype(np.int64)
     product_packaging_data["User2"] = product_packaging_data["User2"].astype(np.int64)
+    product_packaging_data["User2"] = product_packaging_data["User2"].apply(
+        lambda x: "{:0>7}".format(x)
+    )
     product_packaging_data["User3"] = product_packaging_data["User3"].astype(np.int64)
 
     return product_data, product_packaging_data
