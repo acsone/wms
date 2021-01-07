@@ -56,12 +56,6 @@ msgid "Create backorder"
 msgstr ""
 
 #. module: stock_picking_backorder
-#: model:ir.model.fields,field_description:stock_picking_backorder.field_stock_backorder_choice_is_helpdesk_ticket_to_create
-#: model:ir.model.fields,field_description:stock_picking_backorder.field_stock_backorder_reason_is_helpdesk_ticket_to_create
-msgid "Create helpdesk ticket"
-msgstr ""
-
-#. module: stock_picking_backorder
 #: model:ir.model.fields,field_description:stock_picking_backorder.field_stock_backorder_choice_create_uid
 #: model:ir.model.fields,field_description:stock_picking_backorder.field_stock_backorder_reason_create_uid
 msgid "Created by"
@@ -93,22 +87,6 @@ msgstr ""
 #. module: stock_picking_backorder
 #: model:ir.ui.view,arch_db:stock_picking_backorder.stock_picking_form_view
 msgid "Force transfer"
-msgstr ""
-
-#. module: stock_picking_backorder
-#: model:ir.ui.view,arch_db:stock_picking_backorder.stock_backorder_choice_view_form
-msgid "Helpdesk"
-msgstr ""
-
-#. module: stock_picking_backorder
-#: model:ir.model.fields,field_description:stock_picking_backorder.field_stock_backorder_choice_helpdesk_ticket_description
-msgid "Helpdesk ticket description"
-msgstr ""
-
-#. module: stock_picking_backorder
-#: model:ir.model.fields,field_description:stock_picking_backorder.field_stock_backorder_choice_helpdesk_ticket_reason_id
-#: model:ir.model.fields,field_description:stock_picking_backorder.field_stock_backorder_reason_helpdesk_ticket_reason_id
-msgid "Helpdesk ticket reason"
 msgstr ""
 
 #. module: stock_picking_backorder
