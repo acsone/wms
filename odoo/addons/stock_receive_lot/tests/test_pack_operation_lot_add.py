@@ -180,7 +180,7 @@ class TestPackOperationLotAdd(TransactionCase):
         # launch wizard
         wiz = self.stock_reception_wizard.with_context(
             default_life_date_allowed=True
-        ).new({"picking_id": picking.id})
+        ).create({"picking_id": picking.id})
 
         op1 = picking.pack_operation_product_ids[0]
 
@@ -202,6 +202,39 @@ class TestPackOperationLotAdd(TransactionCase):
         wiz.button_nextop()
         self.assertEqual(op1.qty_done, 10)
 
+    def test_receive_lot_surplus_quantities(self):
+        picking = self.picking
+        # launch wizard
+        wiz = self.stock_reception_wizard.with_context(
+            default_life_date_allowed=True
+        ).create({"picking_id": picking.id})
+
+        op1 = picking.pack_operation_product_ids[0]
+
+        # Simulate putaway to bin1 and bin2
+        op1.location_dest_id = self.bin1
+
+        # select operation
+        with self.assertRaises(UserError), self.env.cr.savepoint():
+            wiz.operation_id = op1
+            wiz._onchange_operation_id()
+            self.assertEqual(wiz.remaining_qty, 5)
+            self.assertTrue(wiz.lot_required)
+            wiz.qty = 10
+            wiz.lot_name = "Unittest Reception L1"
+            wiz.life_date = "2030-01-01 10:00:00"
+            wiz.button_nextop()
+        wiz.operation_id = op1
+        wiz._onchange_operation_id()
+        self.assertTrue(wiz.lot_required)
+        self.assertEqual(wiz.remaining_qty, 5)
+        wiz.qty = 10
+        wiz.lot_name = "Unittest Reception L1"
+        wiz.life_date = "2030-01-01 10:00:00"
+        wiz.is_surplus_qty_confirmed = True
+        wiz.button_nextop()
+        self.assertEqual(op1.qty_done, 10)
+
     @post_install(True)
     @at_install(False)
     def test_receive_on_bins(self):
@@ -209,7 +242,7 @@ class TestPackOperationLotAdd(TransactionCase):
         # launch wizard
         wiz = self.stock_reception_wizard.with_context(
             default_life_date_allowed=True
-        ).new({"picking_id": picking.id})
+        ).create({"picking_id": picking.id})
 
         op1 = picking.pack_operation_product_ids[0]
         op2 = picking.pack_operation_product_ids[1]

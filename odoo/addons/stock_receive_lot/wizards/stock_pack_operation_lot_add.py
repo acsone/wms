@@ -240,17 +240,6 @@ class StockPackOperationLotAdd(models.TransientModel):
                         },
                     )
                 ]
-            # check Total
-            if (
-                sum(
-                    [
-                        max(lot.qty_todo, lot.qty)
-                        for lot in self.operation_id.pack_lot_ids
-                    ]
-                )
-                > self.operation_id.product_qty
-            ):
-                raise UserError(_("This lot is not in the list of expected lots"))
             pack.save()
         else:
             pack.write({"qty_done": self.qty})
