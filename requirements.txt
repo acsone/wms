@@ -162,7 +162,7 @@ odoo10-addon-stock-mts-mto-rule @ git+https://github.com/acsone/stock-logistics-
 odoo10-addon-stock-production-lot-expiry @ git+https://github.com/acsone/product-attribute@7e2c8cda6effefe84023848ea0c560af95e8a268#subdirectory=setup/stock_production_lot_expiry
 odoo10-addon-stock-quant-package-dimension @ git+https://github.com/acsone/stock-logistics-workflow.git@7f017cda394dd11ba2a55d47c348af9b8dd71a9f#subdirectory=setup/stock_quant_package_dimension
 odoo10-addon-stock-quant-package-product-packaging @ git+https://github.com/acsone/stock-logistics-workflow.git@3501c29e80f66a14fa9961db107c5a300a1776f3#subdirectory=setup/stock_quant_package_product_packaging
-odoo10-addon-stock-storage-type @ git+https://github.com/acsone/wms.git@f33f41b78b32dff7a1fc5a0782df77b8f5a62455#subdirectory=setup/stock_storage_type
+odoo10-addon-stock-storage-type @ git+https://github.com/acsone/wms.git@6f2aefaf0467f53ec335c1f3e7684d9894886546#subdirectory=setup/stock_storage_type
 odoo10-addon-stock-storage-type-putaway-abc @ git+https://github.com/acsone/wms.git@9cdf2d6d0d34f1d4f9180acca8b997dcdbfa1439#subdirectory=setup/stock_storage_type_putaway_abc
 odoo10-addon-web-cache-name-get @ git+https://github.com/acsone/web.git@f37c8ad92c2190e0bbc09444424273843a9f3cd0#subdirectory=setup/web_cache_name_get
 odoo10-addon-web-decimal-numpad-dot @ git+https://github.com/acsone/web.git@f37c8ad92c2190e0bbc09444424273843a9f3cd0#subdirectory=setup/web_decimal_numpad_dot
