@@ -19,7 +19,7 @@ msgstr ""
 #. module: stock_receive_lot
 #: model:ir.model.fields,field_description:stock_receive_lot.field_stock_pack_operation_lot_add_is_surplus_qty_confirmed
 msgid "Confirm received more than expected"
-msgstr ""
+msgstr "Confirmation quantité reçue exédentaire"
 
 #. module: stock_receive_lot
 #: model:ir.model.fields,field_description:stock_receive_lot.field_stock_pack_operation_lot_add_create_uid
@@ -222,7 +222,7 @@ msgstr ""
 msgid ""
 "You receive more than the expected remaining quantity. You must confirm that "
 "you received more than the expected qty"
-msgstr ""
+msgstr "Vous avez encodé une quantité suprérieure à la quantité commandée. Vous devez confirmer que l'encodage est correct."
 
 #. module: stock_receive_lot
 #: code:addons/stock_receive_lot/wizards/stock_pack_operation_lot_add.py:107
@@ -230,7 +230,7 @@ msgstr ""
 msgid ""
 "You received more than the expected remaining quantity. Please confirm by "
 "ticking the 'Confirm received more than expected' checkbox."
-msgstr ""
+msgstr "Vous avez encodé une quantité suprérieure à la quantité commandée. Veuillez confirmer que l'encodage est correct via la case à cocher 'Confirmation quantité reçue exédentaire'."
 
 #. module: stock_receive_lot
 #: model:ir.ui.view,arch_db:stock_receive_lot.view_pack_operation_lot_add_form
