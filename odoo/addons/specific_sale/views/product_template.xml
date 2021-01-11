@@ -25,7 +25,7 @@
 
             <xpath expr="//group[@name='stock_bins']/field[@name='stock_bin_ids']" position="before">
                 <field name="lot_ids" attrs="{'invisible': [('tracking', '!=', 'lot')]}" nolabel="1">
-                    <tree>
+                    <tree limit='5'>
                         <field name="name"/>
                         <field name="qty_available" widget="integer"/>
                         <field name="life_date"/>
