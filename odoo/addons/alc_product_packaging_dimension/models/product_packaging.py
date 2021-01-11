@@ -44,7 +44,7 @@ class ProductPackaging(models.Model):
         for pack in self:
             pack.length_cm = pack.lngth / 10.0
 
-    def _inverse_length(self):
+    def _inverse_length_cm(self):
         for pack in self:
             pack.lngth = pack.length_cm * 10.0
 
@@ -53,7 +53,7 @@ class ProductPackaging(models.Model):
         for pack in self:
             pack.width_cm = pack.width / 10.0
 
-    def _inverse_width(self):
+    def _inverse_width_cm(self):
         for pack in self:
             pack.width = pack.width_cm * 10.0
 
@@ -62,7 +62,7 @@ class ProductPackaging(models.Model):
         for pack in self:
             pack.height_cm = pack.height / 10.0
 
-    def _inverse_height(self):
+    def _inverse_height_cm(self):
         for pack in self:
             pack.height = pack.height_cm * 10.0
 
