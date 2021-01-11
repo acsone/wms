@@ -9,13 +9,25 @@ class ProductPackaging(models.Model):
     _inherit = "product.packaging"
 
     length_cm = fields.Integer(
-        "Length (cm)", compute="_compute_length", help="length in centimeters"
+        "Length (cm)",
+        compute="_compute_length",
+        help="length in centimeters",
+        store=True,
+        inverse="_inverse_length_cm",
     )
     width_cm = fields.Integer(
-        "Width (cm)", compute="_compute_width", help="width in centimeters"
+        "Width (cm)",
+        compute="_compute_width",
+        help="width in centimeters",
+        store=True,
+        inverse="_inverse_width_cm",
     )
     height_cm = fields.Integer(
-        "Height (cm)", compute="_compute_height", help="height in centimeters"
+        "Height (cm)",
+        compute="_compute_height",
+        help="height in centimeters",
+        store=True,
+        inverse="_inverse_height_cm",
     )
 
     volume_l = fields.Float(
@@ -32,15 +44,27 @@ class ProductPackaging(models.Model):
         for pack in self:
             pack.length_cm = pack.lngth / 10.0
 
+    def _inverse_length(self):
+        for pack in self:
+            pack.lngth = pack.length_cm * 10.0
+
     @api.depends("width")
     def _compute_width(self):
         for pack in self:
             pack.width_cm = pack.width / 10.0
 
+    def _inverse_width(self):
+        for pack in self:
+            pack.width = pack.width_cm * 10.0
+
     @api.depends("height")
     def _compute_height(self):
         for pack in self:
             pack.height_cm = pack.height / 10.0
+
+    def _inverse_height(self):
+        for pack in self:
+            pack.height = pack.height_cm * 10.0
 
     @api.depends("length_cm", "width_cm", "height_cm")
     def _compute_volume(self):
