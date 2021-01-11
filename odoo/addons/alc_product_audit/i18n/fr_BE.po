@@ -19,7 +19,7 @@ msgstr ""
 #. module: alc_product_audit
 #: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
 msgid "- MTO Product with abnormal routes"
-msgstr "- Le produit est un acheté/vendu qui présente des routes anormales"
+msgstr "- Produit acheté/vendu avec une route incohérente"
 
 #. module: alc_product_audit
 #: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
@@ -34,17 +34,17 @@ msgstr ""
 #: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
 msgid "- Product can be purchased but does not have the buy route"
 msgstr ""
-"- Le produit peut être acheté mais ne dispose pas de la route 'Acheter' "
+"- Le produit peut être acheté sans route Acheter "
 
 #. module: alc_product_audit
 #: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
 msgid "- Product has min/max and is 'on command reappro'"
-msgstr "- Min/Max défini et produit en achetés/vendus"
+msgstr "- Min/Max défini pour un produit en achetés/vendus"
 
 #. module: alc_product_audit
 #: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
 msgid "- Product has no min/max and is not 'on command reappro'"
-msgstr "- Min/Max non défini pour et produit non achetés/vendus"
+msgstr "- Min/Max non défini pour un produit non achetés/vendus"
 
 #. module: alc_product_audit
 #: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
@@ -85,7 +85,7 @@ msgstr "Produits avec anomalies"
 #. module: alc_product_audit
 #: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
 msgid "MTO product has abnormal routes"
-msgstr "Produit acheté/vendu avec des routes anormales"
+msgstr "Produits achetés/vendus avec une route incohérente"
 
 #. module: alc_product_audit
 #: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_min_max_on_command_reappro
