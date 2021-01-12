@@ -3,6 +3,7 @@
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl)
 
 from odoo import _, api, fields, models
+from odoo.tools import float_compare
 
 
 class StockPackOperationLotAdd(models.TransientModel):
@@ -44,7 +45,15 @@ class StockPackOperationLotAdd(models.TransientModel):
         super(StockPackOperationLotAdd, self)._add()
         operation = self.operation_id
         self._create_helpdesk_ticket()
-        if self.is_qty_exceeded:
+        precision = self.env["decimal.precision"].precision_get(
+            "Product Unit of Measure"
+        )
+        if (
+            float_compare(
+                operation.qty_done, operation.product_qty, precision_digits=precision
+            )
+            > 0
+        ):
             self.helpdesk_ticket_reason_id = self.env.ref(
                 "alce_helpdesk.higher_quantity"
             )

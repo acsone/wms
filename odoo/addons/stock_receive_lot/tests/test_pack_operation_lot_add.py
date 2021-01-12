@@ -165,6 +165,7 @@ class TestPackOperationLotAdd(TransactionCase):
         wiz.lot_name = "Unittest Reception L3"
         wiz.life_date = "2030-01-01 10:00:00"
         wiz.qty = 5
+        self.assertFalse(wiz.is_qty_exceeded)
 
         # go to next operation
         wiz.button_nextop()
