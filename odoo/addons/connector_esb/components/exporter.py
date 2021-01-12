@@ -271,7 +271,7 @@ class ESBExporterMixin(AbstractComponent):
                 % (self.model._name, records.ids)
             )
 
-    def run(self):
+    def run(self, *args, **kwargs):
         return NotImplementedError
 
 
@@ -281,7 +281,7 @@ class ESBExporter(Component):
     _inherit = ["esb.exporter.mixin"]
     _usage = "record.exporter"
 
-    def run(self, records):
+    def run(self, records, *args, **kwargs):
         return self._export_items(records)
 
 
@@ -352,7 +352,7 @@ class ESBWebServiceCronExporter(AbstractComponent):
     _inherit = ["esb.webservice.exporter", "esb.cron.exporter"]
     _usage = "record.exporter.cron"
 
-    def run(self, export_since=None, max_records=0):
+    def run(self, export_since=None, export_to=None, max_records=0):
         """ Run the export on a domain
 
         ``export_since`` can be omitted to ignore the date and export
@@ -364,7 +364,7 @@ class ESBWebServiceCronExporter(AbstractComponent):
                          only if there was more than max_records to export.
 
         """
-        records = self.get_items(export_since=export_since)
+        records = self.get_items(export_since=export_since, export_to=export_to)
         data = []
         for r in records:
             mapped_record = self.mapper.map_record(r)

@@ -186,12 +186,12 @@ class CustomerAddressCronExporter(Component):
         domain = ["|", ("customer", "=", 1), ("type", "in", ["invoice", "delivery"])]
         return AND([domain, self._valid_address_domain()])
 
-    def run(self, export_since=None, max_records=0):
+    def run(self, export_since=None, export_to=None, max_records=0):
         """ Run the export.
 
         Redefined because the get_items does not return a simple
         recordset but a list of tuples, and can not be handled by the _lock.
 
         """
-        items = self.get_items(export_since=export_since)
+        items = self.get_items(export_since=export_since, export_to=export_to)
         return self._export_items(items)

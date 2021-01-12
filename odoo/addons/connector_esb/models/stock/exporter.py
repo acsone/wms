@@ -114,7 +114,7 @@ class StockUpdateExporter(Component):
             + timedelta(seconds=cls.BASIC_LOCK_TIME)
         )
 
-    def run(self, export_since=None, max_records=0):
+    def run(self, export_since=None, export_to=None, max_records=0):
         """ Run the export of multiple stock status.
 
         ``export_since`` can be omitted to ignore the date and export
@@ -125,7 +125,7 @@ class StockUpdateExporter(Component):
         data = []
         exported_ids = []
         last_export = None
-        quants = self.get_items(export_since=export_since)
+        quants = self.get_items(export_since=export_since, export_to=export_to)
         for quant in quants:
             if quant.product_id.id not in exported_ids:
                 mapped_record = self.mapper.map_record(quant.product_id)
