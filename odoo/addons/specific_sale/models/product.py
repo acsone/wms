@@ -210,7 +210,7 @@ class ProductTemplate(models.Model):
             products = product_tmpl.product_variant_ids
             lots = StockProductionLot.search(
                 [("product_id", "in", products.ids), ("is_archived", "=", False)],
-                order="life_date",
+                order="life_date DESC",
             )
             product_tmpl.lot_ids = [(6, 0, lots.ids)]
 
