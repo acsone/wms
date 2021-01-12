@@ -405,8 +405,11 @@ def main(env, path_to_files, verbose):
                        SET
                             max_weight = p_df.Weight,
                             height = p_df.Height,
+                            height_cm = p_df.Height / 10,
                             width = p_df.Width,
+                            width_cm = p_df.Width / 10,
                             lngth = p_df.Length,
+                            length_cm = p_df.Length / 10,
                             barcode = p_df.User1,
                             qty = p_df.User3
                        FROM (dataframe_table p_df JOIN product_template pt ON p_df.Ref = pt.default_code)
