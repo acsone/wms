@@ -443,7 +443,7 @@ msgid "Reasons"
 msgstr "Causes"
 
 #. module: alce_helpdesk
-#: code:addons/alce_helpdesk/wizards/stock_pack_operation_lot_add.py:51
+#: code:addons/alce_helpdesk/wizards/stock_pack_operation_lot_add.py:60
 #, python-format
 msgid ""
 "Received more than expected qties for product '%s'. (Expected: %d, Received "
