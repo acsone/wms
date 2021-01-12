@@ -907,6 +907,7 @@ msgstr "Valider l'UOP"
 
 #. module: specific_zetes
 #: code:addons/specific_zetes/tools/domain_assignment.py:258
+#, python-format
 msgid "Validate picking %s"
 msgstr "Validation de la préparation %s"
 
