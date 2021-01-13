@@ -135,7 +135,7 @@ class StockPackOperation(models.Model):
 
         product_id = vals.get("product_id")
         package_id = vals.get("package_id")
-        quant = None
+        quant = self.env["stock.quant"].browse()
         product = None
         if product_id:
             product = ProductProduct.browse(product_id)
@@ -147,7 +147,7 @@ class StockPackOperation(models.Model):
             for q in moves.mapped("reserved_quant_ids"):
                 reserved_quants_by_products[q.product_id].add(q)
             reserved_quants = reserved_quants_by_products.get(product, [])
-            quant = len(reserved_quants) == 1 and next(iter(reserved_quants)) or None
+            quant = len(reserved_quants) == 1 and next(iter(reserved_quants)) or quant
         elif package_id:
             quant_package = StockQuantPackage.browse(package_id)
             if not quant_package.single_product_id:
@@ -158,7 +158,7 @@ class StockPackOperation(models.Model):
             quant = quant_package.get_content()[:1]
             if not quant:
                 return
-        if not quant or not product:
+        if not quant and not product:
             return
 
         putaway_location = StockLocation.browse(vals["location_dest_id"])
