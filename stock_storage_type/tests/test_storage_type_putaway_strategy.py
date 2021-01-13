@@ -572,3 +572,49 @@ class TestPutawayStorageTypeStrategy(TestStorageTypeCommon):
             self.assertEqual(
                 package_level.location_dest_id, self.cardboxes_bin_4_location,
             )
+
+    def test_storage_strategy_no_pack(self):
+        """storage_type is taken on the product if no package is provided
+
+        """
+        # assign storage_type to product
+        self.product.product_package_storage_type_id = (
+            self.cardboxes_package_storage_type
+        )
+        # Create picking
+        in_picking = self.env["stock.picking"].create(
+            {
+                "picking_type_id": self.receipts_picking_type.id,
+                "location_id": self.suppliers_location.id,
+                "location_dest_id": self.input_location.id,
+                "move_lines": [
+                    (
+                        0,
+                        0,
+                        {
+                            "name": self.product.name,
+                            "product_id": self.product.id,
+                            "product_uom_qty": 8.0,
+                            "product_uom": self.product.uom_id.id,
+                        },
+                    )
+                ],
+            }
+        )
+        # Mark as todo
+        in_picking.action_confirm()
+        # Put in pack
+        in_picking.pack_operation_ids.qty_done = 8.0
+        # Validate picking
+        in_picking.do_new_transfer()
+        # Assign internal picking
+        int_picking = in_picking.move_lines.mapped("move_dest_id.picking_id")
+        int_picking.action_assign()  # TODO drop ?
+        self.assertEqual(int_picking.location_dest_id, self.stock_location)
+        self.assertEqual(
+            int_picking.move_lines.mapped("location_dest_id"), self.stock_location
+        )
+        self.assertEqual(
+            int_picking.pack_operation_ids.mapped("location_dest_id"),
+            self.cardboxes_bin_1_location,
+        )
