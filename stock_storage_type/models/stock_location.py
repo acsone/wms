@@ -214,13 +214,15 @@ class StockLocation(models.Model):
         return self._get_pack_putaway_strategy(putaway_location, quant, product).id
 
     def _get_pack_putaway_strategy(self, putaway_location, quant, product):
-        package_storage_type = False
+        package_storage_type = None
         if quant:
             package_storage_type = quant.package_id.package_storage_type_id
             _logger.debug(
                 "Computing putaway for pack %s (%s)"
                 % (quant.package_id.name, quant.package_id)
             )
+        if not package_storage_type:
+            package_storage_type = product.product_package_storage_type_id
         # I'm not sure about this. I had to add the line, because there is a
         # second call to get_putaway_strategy which is made a 'leaf' location
         # as putaway_location which does not match the package storage type in
