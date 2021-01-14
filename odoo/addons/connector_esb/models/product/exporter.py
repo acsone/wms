@@ -27,7 +27,7 @@ class ProductExportMapper(Component):
         (three_digits_fractional("weight"), "Gespnt"),
         (dt2esbdate("create_date"), "Gescrt"),
         (falsy2emptystring("cnk_code"), "Cplz03"),
-        (two_digits_fractional("depth"), "Cp2z01"),
+        (two_digits_fractional("height"), "Cp2z01"),
         (two_digits_fractional("length"), "Cp2z03"),
         (two_digits_fractional("width"), "Cp2z05"),
         (falsy2zero("unit_in_shrink_wrap"), "Cp2z02"),

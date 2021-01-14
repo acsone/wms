@@ -132,20 +132,6 @@ msgid "Delivery lead time"
 msgstr ""
 
 #. module: specific_purchase
-#: model:ir.model.fields,field_description:specific_purchase.field_delivery_carrier_depth
-#: model:ir.model.fields,field_description:specific_purchase.field_product_product_depth
-#: model:ir.model.fields,field_description:specific_purchase.field_product_template_depth
-msgid "Depth (cm)"
-msgstr ""
-
-#. module: specific_purchase
-#: model:ir.model.fields,help:specific_purchase.field_delivery_carrier_depth
-#: model:ir.model.fields,help:specific_purchase.field_product_product_depth
-#: model:ir.model.fields,help:specific_purchase.field_product_template_depth
-msgid "Depth in cm"
-msgstr ""
-
-#. module: specific_purchase
 #: model:ir.model.fields,field_description:specific_purchase.field_purchase_order_line_discount_global
 msgid "Discount global"
 msgstr ""
@@ -205,20 +191,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:specific_purchase.field_bank_holiday_write_date
 #: model:ir.model.fields,field_description:specific_purchase.field_product_state_write_date
 msgid "Last Updated on"
-msgstr ""
-
-#. module: specific_purchase
-#: model:ir.model.fields,field_description:specific_purchase.field_delivery_carrier_length
-#: model:ir.model.fields,field_description:specific_purchase.field_product_product_length
-#: model:ir.model.fields,field_description:specific_purchase.field_product_template_length
-msgid "Length (cm)"
-msgstr ""
-
-#. module: specific_purchase
-#: model:ir.model.fields,help:specific_purchase.field_delivery_carrier_length
-#: model:ir.model.fields,help:specific_purchase.field_product_product_length
-#: model:ir.model.fields,help:specific_purchase.field_product_template_length
-msgid "Length in cm"
 msgstr ""
 
 #. module: specific_purchase
@@ -495,20 +467,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:specific_purchase.field_res_partner_is_manage_day_3
 #: model:ir.model.fields,field_description:specific_purchase.field_res_users_is_manage_day_3
 msgid "Wednesday"
-msgstr ""
-
-#. module: specific_purchase
-#: model:ir.model.fields,field_description:specific_purchase.field_delivery_carrier_width
-#: model:ir.model.fields,field_description:specific_purchase.field_product_product_width
-#: model:ir.model.fields,field_description:specific_purchase.field_product_template_width
-msgid "Width (cm)"
-msgstr ""
-
-#. module: specific_purchase
-#: model:ir.model.fields,help:specific_purchase.field_delivery_carrier_width
-#: model:ir.model.fields,help:specific_purchase.field_product_product_width
-#: model:ir.model.fields,help:specific_purchase.field_product_template_width
-msgid "Width in cm"
 msgstr ""
 
 #. module: specific_purchase
