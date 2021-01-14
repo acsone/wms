@@ -124,6 +124,7 @@ odoo10-addon-onchange-helper @ git+https://github.com/acsone/server-tools.git@dc
 odoo10-addon-product-analytic @ git+https://github.com/acsone/account-analytic.git@daf43630f1ca58b431bb93809a331374b8530863#subdirectory=setup/product_analytic
 odoo10-addon-product-analytic-purchase @ git+https://github.com/acsone/account-analytic.git@daf43630f1ca58b431bb93809a331374b8530863#subdirectory=setup/product_analytic_purchase
 odoo10-addon-product-assortment==10.0.1.0.0.99.dev4
+odoo10-addon-product-dimension==10.0.1.0.0.99.dev5
 odoo10-addon-product-manufacturer @ git+https://github.com/acsone/product-attribute.git@f1dc5cd944b481993f7fb92cc98990527856cd4e#subdirectory=setup/product_manufacturer
 odoo10-addon-product-packaging-barcode==10.0.1.0.0.99.dev2
 odoo10-addon-product-packaging-dimension @ git+https://github.com/acsone/product-attribute.git@eb1dd1585c929dc44e41e5bd6c4dfe0b1d18be0f#subdirectory=setup/product_packaging_dimension

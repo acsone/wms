@@ -15,12 +15,6 @@
                 </group>
             </xpath>
 
-            <xpath expr="//label[@for='volume']" position="before">
-                <field name="length"/>
-                <field name="width"/>
-                <field name="depth"/>
-            </xpath>
-
             <xpath expr="//field[@name='seller_ids']" position="before">
                 <group>
                     <field name="supplier_id" />

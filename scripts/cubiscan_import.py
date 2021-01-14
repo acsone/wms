@@ -249,22 +249,6 @@ def main(env, path_to_files, verbose):
     if verbose:
         click.echo("Updating Products table. . .")
 
-    # Update my products table
-    env.cr.execute(
-        """ UPDATE
-                            product_template pt
-                       SET
-                            weight = p_df.Weight,
-                            depth = p_df.Height,
-                            width = p_df.Width,
-                            length = p_df.Length,
-                            volume = p_df.Volume
-                       FROM dataframe_table p_df
-                       WHERE pt.default_code = p_df.Ref
-                """
-    )
-    env.cr.commit()
-
     # Look for no barcode
     env.cr.execute(
         """ SELECT Count(User1)
@@ -347,6 +331,11 @@ def main(env, path_to_files, verbose):
         """ UPDATE
                             product_product pp
                        SET
+                            weight = p_df.Weight,
+                            height = p_df.Height,
+                            width = p_df.Width,
+                            length = p_df.Length,
+                            volume = p_df.Volume,
                             barcode = p_df.User1
                        FROM dataframe_table p_df
                        WHERE p_df.User1 != 0 AND pp.default_code = p_df.Ref

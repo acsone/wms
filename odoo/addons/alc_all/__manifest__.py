@@ -103,6 +103,7 @@
         "alc_placedesvetos_payment_globalization",
         "alc_purchase_multipackaging",
         "alc_product_audit",
+        "alc_product_dimensions",
         "alc_product_packaging",
         "alc_product_packaging_dimension",
         "alc_product_packaging_stock_reserve",
