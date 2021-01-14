@@ -6,7 +6,7 @@
     "name": "Alc Purchase Multipackaging",
     "description": """
         Allow to have multipackaging in the purchase screen""",
-    "version": "10",
+    "version": "10.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": ["purchase_order_line_packaging_qty", "purchase"],

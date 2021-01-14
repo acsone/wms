@@ -190,9 +190,11 @@ class ProductProduct(models.Model):
         # in the list.
         product_ids_in_open_inventory.add(0)
 
-        nbr_expensive_products, nbr_best_sellers, nbr_other = (
-            self.get_number_of_products_by_category()
-        )
+        (
+            nbr_expensive_products,
+            nbr_best_sellers,
+            nbr_other,
+        ) = self.get_number_of_products_by_category()
 
         # Expensive products
         # ------------------

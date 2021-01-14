@@ -1,30 +1,33 @@
-<?xml version="1.0"?>
+<?xml version="1.0" ?>
 <odoo>
-
-    <record id="view_vpicktree" model="ir.ui.view">
-        <field name="name">stock.picking.tree.rank</field>
-        <field name="model">stock.picking</field>
-        <field name="inherit_id" ref="stock.vpicktree"/>
-        <field name="arch" type="xml">
-            <field name="name" position="before">
-                <field name="rank"/>
-            </field>
-        </field>
-    </record>
-
-    <record id="view_picking_form" model="ir.ui.view">
-        <field name="name">stock.picking.form.rank</field>
-        <field name="model">stock.picking</field>
-        <field name="inherit_id" ref="stock.view_picking_form"/>
-        <field name="arch" type="xml">
-            <field name="origin" position="after">
-                <label for="rank"/>
-                <div>
-                    <field name="rank"/>
-                    <button name="button_priority_recompute" type="object" string="recompute" class="oe_link" attrs="{'invisible':[('picking_type_code', '=', 'incoming')]}"/>
-                </div>
-            </field>
-        </field>
-    </record>
-
+  <record id="view_vpicktree" model="ir.ui.view">
+    <field name="name">stock.picking.tree.rank</field>
+    <field name="model">stock.picking</field>
+    <field name="inherit_id" ref="stock.vpicktree" />
+    <field name="arch" type="xml">
+      <field name="name" position="before">
+        <field name="rank" />
+      </field>
+    </field>
+  </record>
+  <record id="view_picking_form" model="ir.ui.view">
+    <field name="name">stock.picking.form.rank</field>
+    <field name="model">stock.picking</field>
+    <field name="inherit_id" ref="stock.view_picking_form" />
+    <field name="arch" type="xml">
+      <field name="origin" position="after">
+        <label for="rank" />
+        <div>
+          <field name="rank" />
+          <button
+            name="button_priority_recompute"
+            type="object"
+            string="recompute"
+            class="oe_link"
+            attrs="{'invisible':[('picking_type_code', '=', 'incoming')]}"
+          />
+        </div>
+      </field>
+    </field>
+  </record>
 </odoo>

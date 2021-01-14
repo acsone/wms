@@ -5,6 +5,7 @@
 import base64
 
 from odoo import models
+
 from odoo.addons.queue_job.job import job
 
 

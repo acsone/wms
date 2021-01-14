@@ -1,77 +1,105 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <!-- Copyright 2017 Camptocamp SA
      Copyright 2020 ACSONE SA/NV
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
-
 <odoo>
-    <!--
+  <!--
         This view duplicates the inner tree view of the lines from the usual sale.order form view.
         Any change done in the lines of the usual view must be reported here.
     -->
-    <record model="ir.ui.view" id="sale_order_line_tree_edit">
-        <field name="name">sale.order.line.tree (in sale_quick_create)</field>
-        <field name="model">sale.order.line</field>
-        <field name="arch" type="xml">
-            <tree create="true" editable="bottom" decoration-warning="exception">
-
-                <field name="order_id" invisible="1"/>
-                <field name="date_order" invisible="1"/>
-                <field name="order_partner_id" invisible="1"/>
-                <field name="order_pricelist_id" invisible="1"/>
-                <field name="company_id" invisible="1"/>
-
-                <field name="sequence" widget="handle"/>
-
-                <field name="product_id"
-                    attrs="{'readonly': [('procurement_ids', '!=', [])]}"
-                    context="{'partner_id':order_partner_id, 'quantity':product_uom_qty, 'pricelist':order_pricelist_id, 'uom':product_uom, 'company_id': company_id}"
-                    />
-                <field name="older_lot_life_date" widget="date"/>
-                <field name="layout_category_id" groups="sale.group_sale_layout"/>
-                <field name="name"/>
-                <field name="product_uom_qty"
-                    string="Ordered Qty"
-                    attrs="{'readonly': [('procurement_ids', '!=', [])]}"
-                    context="{'partner_id':order_partner_id, 'quantity':product_uom_qty, 'pricelist':order_pricelist_id, 'uom':product_uom, 'company_id': company_id}"
-                />
-                <field name="discounting_type"/>
-                <field name="product_qty_unavailable"/>
-                <field name="product_qty_canceled"/>
-                <field name="product_qty_returned"/>
-                <field name="qty_delivered" invisible="context.get('hide_sale')"
-                    attrs="{'readonly': [('qty_delivered_updateable', '=', False)]}"/>
-                <field name="product_qty_remains_to_deliver" invisible="1"/>
-                <button name="%(sale_cancel_remaining.action_cancel_remaining_wizard)d" type="action" icon="fa-ban" attrs="{'invisible': [('product_qty_remains_to_deliver', '=', 0)]}"/>
-                <field name="qty_invoiced"
-                    invisible="context.get('hide_sale')"/>
-                <field name="qty_to_invoice" invisible="1"/>
-                <field name="product_uom"
-                    attrs="{'readonly': [('procurement_ids', '!=', [])]}"
-                    context="{'company_id': company_id}"
-                    groups="product.group_uom" options='{"no_open": True}'/>
-                <field name="analytic_tag_ids" groups="analytic.group_analytic_accounting" widget="many2many_tags"
-                       invisible="1"/>
-                <field name="route_id" groups="sale_stock.group_route_so_lines"/>
-                <field name="price_unit"
-                    attrs="{'readonly': [('qty_invoiced', '&gt;', 0)]}"/>
-                <field name="tax_id" widget="many2many_tags" domain="[('type_tax_use','=','sale'),('company_id','=',company_id)]"
-                    attrs="{'readonly': [('qty_invoiced', '&gt;', 0)]}"/>
-                <field name="discount" invisible="1" groups="sale.group_discount_per_so_line"/>
-                <field name="discount2" string="Promotion (%)"
-                       groups="sale.group_discount_per_so_line"/>
-                <field name="discount3" string="Discount (%)"
-                       groups="sale.group_discount_per_so_line"/>
-                <field name="price_subtotal" widget="monetary" groups="sale.group_show_price_subtotal"/>
-                <field name="exception"/>
-                <field name="price_total" widget="monetary" groups="sale.group_show_price_total"/>
-                <field name="qty_delivered_updateable" invisible="1"/>
-                <field name="procurement_ids" invisible="1"/>
-                <field name="state" invisible="1"/>
-                <field name="invoice_status" invisible="1"/>
-                <field name="customer_lead" invisible="1"/>
-                <field name="currency_id" invisible="1"/>
-            </tree>
-        </field>
-    </record>
-
+  <record model="ir.ui.view" id="sale_order_line_tree_edit">
+    <field name="name">sale.order.line.tree (in sale_quick_create)</field>
+    <field name="model">sale.order.line</field>
+    <field name="arch" type="xml">
+      <tree create="true" editable="bottom" decoration-warning="exception">
+        <field name="order_id" invisible="1" />
+        <field name="date_order" invisible="1" />
+        <field name="order_partner_id" invisible="1" />
+        <field name="order_pricelist_id" invisible="1" />
+        <field name="company_id" invisible="1" />
+        <field name="sequence" widget="handle" />
+        <field
+          name="product_id"
+          attrs="{'readonly': [('procurement_ids', '!=', [])]}"
+          context="{'partner_id':order_partner_id, 'quantity':product_uom_qty, 'pricelist':order_pricelist_id, 'uom':product_uom, 'company_id': company_id}"
+        />
+        <field name="older_lot_life_date" widget="date" />
+        <field name="layout_category_id" groups="sale.group_sale_layout" />
+        <field name="name" />
+        <field
+          name="product_uom_qty"
+          string="Ordered Qty"
+          attrs="{'readonly': [('procurement_ids', '!=', [])]}"
+          context="{'partner_id':order_partner_id, 'quantity':product_uom_qty, 'pricelist':order_pricelist_id, 'uom':product_uom, 'company_id': company_id}"
+        />
+        <field name="discounting_type" />
+        <field name="product_qty_unavailable" />
+        <field name="product_qty_canceled" />
+        <field name="product_qty_returned" />
+        <field
+          name="qty_delivered"
+          invisible="context.get('hide_sale')"
+          attrs="{'readonly': [('qty_delivered_updateable', '=', False)]}"
+        />
+        <field name="product_qty_remains_to_deliver" invisible="1" />
+        <button
+          name="%(sale_cancel_remaining.action_cancel_remaining_wizard)d"
+          type="action"
+          icon="fa-ban"
+          attrs="{'invisible': [('product_qty_remains_to_deliver', '=', 0)]}"
+        />
+        <field name="qty_invoiced" invisible="context.get('hide_sale')" />
+        <field name="qty_to_invoice" invisible="1" />
+        <field
+          name="product_uom"
+          attrs="{'readonly': [('procurement_ids', '!=', [])]}"
+          context="{'company_id': company_id}"
+          groups="product.group_uom"
+          options='{"no_open": True}'
+        />
+        <field
+          name="analytic_tag_ids"
+          groups="analytic.group_analytic_accounting"
+          widget="many2many_tags"
+          invisible="1"
+        />
+        <field name="route_id" groups="sale_stock.group_route_so_lines" />
+        <field name="price_unit" attrs="{'readonly': [('qty_invoiced', '&gt;', 0)]}" />
+        <field
+          name="tax_id"
+          widget="many2many_tags"
+          domain="[('type_tax_use','=','sale'),('company_id','=',company_id)]"
+          attrs="{'readonly': [('qty_invoiced', '&gt;', 0)]}"
+        />
+        <field name="discount" invisible="1" groups="sale.group_discount_per_so_line" />
+        <field
+          name="discount2"
+          string="Promotion (%)"
+          groups="sale.group_discount_per_so_line"
+        />
+        <field
+          name="discount3"
+          string="Discount (%)"
+          groups="sale.group_discount_per_so_line"
+        />
+        <field
+          name="price_subtotal"
+          widget="monetary"
+          groups="sale.group_show_price_subtotal"
+        />
+        <field name="exception" />
+        <field
+          name="price_total"
+          widget="monetary"
+          groups="sale.group_show_price_total"
+        />
+        <field name="qty_delivered_updateable" invisible="1" />
+        <field name="procurement_ids" invisible="1" />
+        <field name="state" invisible="1" />
+        <field name="invoice_status" invisible="1" />
+        <field name="customer_lead" invisible="1" />
+        <field name="currency_id" invisible="1" />
+      </tree>
+    </field>
+  </record>
 </odoo>

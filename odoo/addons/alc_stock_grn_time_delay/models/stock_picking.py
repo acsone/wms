@@ -5,6 +5,7 @@
 from datetime import datetime, timedelta
 
 import numpy as np
+
 from odoo import api, fields, models
 from odoo.osv.expression import NEGATIVE_TERM_OPERATORS
 

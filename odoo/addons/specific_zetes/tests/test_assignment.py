@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import mock
+
 from odoo.addons.queue_job.job import Job
 from odoo.addons.queue_job.tests.common import JobMixin
 

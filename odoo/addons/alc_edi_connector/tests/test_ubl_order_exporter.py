@@ -3,6 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from freezegun import freeze_time
+
 from odoo.exceptions import UserError
 
 from .common import AlcEdiConnectorCase

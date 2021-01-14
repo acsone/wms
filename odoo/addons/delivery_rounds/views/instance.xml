@@ -1,240 +1,385 @@
-<?xml version="1.0"?>
+<?xml version="1.0" ?>
 <odoo>
-
-    <record id="view_round_instance_kanban" model="ir.ui.view">
-        <field name="name">round.instance.kanban</field>
-        <field name="model">round.instance</field>
-        <field name="arch" type="xml">
-            <kanban class="oe_background_grey o_kanban_dashboard o_delivery_round_kanban">
-                <field name="color"/>
-                <field name="state"/>
-                <field name="count_picking_available_total"/>
-                <field name="count_picking_available_partner"/>
-                <field name="count_picking_available_weight"/>
-                <field name="picking_launched"/>
-                <field name="delivery_failure"/>
-                <templates>
-                    <t t-name="kanban-box">
-                        <div t-attf-class="#{kanban_color(record.color.raw_value)}">
-                            <div class="o_kanban_card_header">
-                                <div class="o_kanban_card_header_title">
-                                    <div class="o_primary"><field name="template_id"/></div>
-                                    <div class="o_secondary">
-                                        <div style="display:inline-table"><strong><field name="date"/></strong></div>
-                                        <div style="display:inline-table;white-space:pre"> - </div>
-                                        <div style="display:inline-table"><strong><field name="time_picking_planned" widget="float_time"/></strong></div>
-                                        <div style="display:inline-table;white-space:pre"> | </div>
-                                        <div style="display:inline-table"><strong><field name="time_leave_planned" widget="float_time"/></strong></div>
-                                    </div>
-                                </div>
-                                <div class="o_kanban_manage_button_section">
-                                    <a class="o_kanban_manage_toggle_button" href="#">More <i class="fa fa-caret-down"/></a>
-                                </div>
-                            </div>
-                            <div class="container o_kanban_card_content o_visible">
-                                <div class="row">
-                                    <div class="col-xs-6 o_kanban_primary_left">
-                                        <div class="col-xs-4 btn-toggle">
-                                            <a name="toggle_picking_launched" type="object" states="draft,close"><i t-attf-class="oe_inline fa #{record.picking_launched.raw_value ? 'fa-volume-up' : 'fa-volume-off'}" title="Start/Stop pickings"/></a>
-
-                                            <i class="oe_inline fa fa-spinner fa-truck-loading" states="delivering"/>
-                                            <i class="oe_inline fa fa-print fa-truck-moving" states="done"/>
-                                        </div>
-                                        <div class="col-xs-4 btn-toggle">
-                                            <a name="toggle_partner_locked" type="object" states="draft,close"><i t-attf-class="oe_inline fa #{record.state.raw_value == 'close' ? 'fa-lock' : 'fa-unlock'}" title="Lock/Unlock destinations"/></a>
-                                        </div>
-                                        <t t-if="record.state.raw_value == 'delivering' and record.delivery_failure.raw_value">
-                                            <div class="col-xs-4 btn-delivery">
-
-                                                <a type="open"><i class="oe_inline fa fa-exclamation-triangle" title="Errors during delivery"/></a>
-                                            </div>
-                                        </t>
-                                    </div>
-                                    <div class="col-xs-6 o_kanban_primary_right">
-                                        <div class="row">
-                                            <div class="col-xs-8">
-                                                Destinations
-                                            </div>
-                                            <div class="col-xs-4">
-                                                <field name="count_picking_available_partner"/>
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-xs-8">
-                                                Weight
-                                            </div>
-                                            <div class="col-xs-4">
-                                                <field name="count_picking_available_weight"/>kg
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row" style="margin-top:130px">
-                                    <div name="pickings_progress" class="col-xs-12 o_kanban_primary_bottom" t-att-style="'background-color: ' + (record.state.raw_value=='draft' and 'lightgreen' or record.state.raw_value=='close' and 'lightsalmon' or record.state.raw_value=='pending' and 'sandybrown' or 'lightgray')">
-                                        <button class="btn btn-picking" name="action_picking_tree_available" type="object">
-                                            <field name="count_picking_done_total" widget="progress" title="Pickings" options="{'current_value': 'count_picking_done_total', 'max_value': 'count_picking_available_total'}"/>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div><!--
-                            No space here
-                            --><div class="container o_kanban_card_manage_pane o_invisible">
-                            <div class="row">
-                                <div class="col-xs-6 o_kanban_card_manage_section o_kanban_manage_view">
-                                    <div class="o_kanban_card_manage_title">
-                                        <span>Actions</span>
-                                    </div>
-                                    <div><a name="button_close" type="object" states="draft">Lock destinations</a></div>
-                                    <div><a name="button_deliver" type="object" states="close">Deliver</a></div>
-                                    <div><a name="button_resetdraft" type="object" states="close">Reset to draft</a></div>
-                                    <div><a name="print_all_deliveryslip" type="object" states="done">Print all deliveryslip</a></div>
-                                    <br/>
-                                </div>
-                            </div>
-                            <div t-if="widget.editable" class="o_kanban_card_manage_settings row">
-                                <div class="col-xs-8">
-                                    <ul class="oe_kanban_colorpicker" data-field="color"/>
-                                </div>
-                                <div class="col-xs-4 text-right">
-                                    <a type="edit">Edit</a>
-                                </div>
-                            </div>
-                        </div>
+  <record id="view_round_instance_kanban" model="ir.ui.view">
+    <field name="name">round.instance.kanban</field>
+    <field name="model">round.instance</field>
+    <field name="arch" type="xml">
+      <kanban class="oe_background_grey o_kanban_dashboard o_delivery_round_kanban">
+        <field name="color" />
+        <field name="state" />
+        <field name="count_picking_available_total" />
+        <field name="count_picking_available_partner" />
+        <field name="count_picking_available_weight" />
+        <field name="picking_launched" />
+        <field name="delivery_failure" />
+        <templates>
+          <t t-name="kanban-box">
+            <div t-attf-class="#{kanban_color(record.color.raw_value)}">
+              <div class="o_kanban_card_header">
+                <div class="o_kanban_card_header_title">
+                  <div class="o_primary">
+                    <field name="template_id" />
+                  </div>
+                  <div class="o_secondary">
+                    <div style="display:inline-table">
+                      <strong>
+                        <field name="date" />
+                      </strong>
+                    </div>
+                    <div style="display:inline-table;white-space:pre"> - </div>
+                    <div style="display:inline-table">
+                      <strong>
+                        <field name="time_picking_planned" widget="float_time" />
+                      </strong>
+                    </div>
+                    <div style="display:inline-table;white-space:pre"> | </div>
+                    <div style="display:inline-table">
+                      <strong>
+                        <field name="time_leave_planned" widget="float_time" />
+                      </strong>
+                    </div>
+                  </div>
+                </div>
+                <div class="o_kanban_manage_button_section">
+                  <a class="o_kanban_manage_toggle_button" href="#">More <i
+                      class="fa fa-caret-down"
+                    /></a>
+                </div>
+              </div>
+              <div class="container o_kanban_card_content o_visible">
+                <div class="row">
+                  <div class="col-xs-6 o_kanban_primary_left">
+                    <div class="col-xs-4 btn-toggle">
+                      <a
+                        name="toggle_picking_launched"
+                        type="object"
+                        states="draft,close"
+                      >
+                        <i
+                          t-attf-class="oe_inline fa #{record.picking_launched.raw_value ? 'fa-volume-up' : 'fa-volume-off'}"
+                          title="Start/Stop pickings"
+                        />
+                      </a>
+                      <i
+                        class="oe_inline fa fa-spinner fa-truck-loading"
+                        states="delivering"
+                      />
+                      <i class="oe_inline fa fa-print fa-truck-moving" states="done" />
+                    </div>
+                    <div class="col-xs-4 btn-toggle">
+                      <a
+                        name="toggle_partner_locked"
+                        type="object"
+                        states="draft,close"
+                      >
+                        <i
+                          t-attf-class="oe_inline fa #{record.state.raw_value == 'close' ? 'fa-lock' : 'fa-unlock'}"
+                          title="Lock/Unlock destinations"
+                        />
+                      </a>
+                    </div>
+                    <t
+                      t-if="record.state.raw_value == 'delivering' and record.delivery_failure.raw_value"
+                    >
+                      <div class="col-xs-4 btn-delivery">
+                        <a type="open">
+                          <i
+                            class="oe_inline fa fa-exclamation-triangle"
+                            title="Errors during delivery"
+                          />
+                        </a>
                       </div>
                     </t>
-                </templates>
-            </kanban>
-        </field>
-    </record>
-
-
-    <record id="view_round_instance_search" model="ir.ui.view">
-        <field name="name">round.instance.search</field>
-        <field name="model">round.instance</field>
-        <field name="arch" type="xml">
-            <search string="Delivery Rounds">
-                <field name="template_name"/>
-                <field name="template_code"/>
-                <field name="date"/>
-                <separator/>
-                <field name="partner_ids" string="Potential Customer"/>
-                <field name="instance_customer_ids" string="Effective Customer"/>
-                <filter name="today" string="Today" domain="[('date','=',time.strftime('%%Y-%%m-%%d'))]"/>
-                <filter name="current" string="Current" domain="[('state', '!=', 'done')]" />
-            </search>
-        </field>
-    </record>
-
-    <record id="view_round_instance_tree" model="ir.ui.view">
-        <field name="name">round.instance.tree</field>
-        <field name="model">round.instance</field>
-        <field name="arch" type="xml">
-            <tree string="Delivery Rounds">
-                <field name="date" />
-                <field name="time_picking_planned" widget="float_time"/>
-                <field name="time_leave_planned" widget="float_time"/>
-                <field name="template_id" />
-                <field name="state" />
-                <field name="tag_ids" widget="many2many_tags" options="{'no_create': True}"/>
-            </tree>
-        </field>
-    </record>
-
-    <record id="view_round_instance_form" model="ir.ui.view">
-        <field name="name">round.instance.form</field>
-        <field name="model">round.instance</field>
-        <field name="arch" type="xml">
-            <form string="Delivery Round">
-                <header>
-                    <button name="button_close" type="object" string="Lock Destinations" states="draft" class="oe_highlight"/>
-                    <button name="button_deliver" type="object" string="Deliver" states="close" class="oe_highlight"/>
-                    <button name="button_resetdraft" type="object" string="Reset to Draft" states="close,done"/>
-                    <button name="button_resetpending" type="object" string="Reset to Anticipated" states="draft"/>
-                    <button name="print_all_deliveryslip" type="object" string="Print all deliveryslip" states="done" class="oe_highlight"/>
-                    <field name="state" widget="statusbar" clickable="True"/>
-
-                </header>
-                <sheet>
-
-                    <div class="oe_button_box" name="button_box">
-                        <button name="toggle_picking_launched" states="draft,close" type="object" class="oe_stat_button" icon="fa-volume-down">
-                            <field name="picking_launched" widget="boolean_button" options="{&quot;terminology&quot;: {'string_true':'Launched','string_false':'Stopped'}}"/>
-                        </button>
-
-                        <button class="oe_stat_button" name="action_view_shippings"
-                                type="object" icon="fa-truck">
-                            <field string="Deliveries" name="shipping_count" widget="statinfo" />
-                        </button>
-
-                        <button class="oe_stat_button" name="action_view_pickings"
-                                type="object" icon="fa-truck">
-                            <field string="Pickings" name="picking_count" widget="statinfo" />
-                        </button>
-
+                  </div>
+                  <div class="col-xs-6 o_kanban_primary_right">
+                    <div class="row">
+                      <div class="col-xs-8">
+                                                Destinations
+                                            </div>
+                      <div class="col-xs-4">
+                        <field name="count_picking_available_partner" />
+                      </div>
                     </div>
-
-                    <div class="oe_title">
-                        <h1>
-                            <field name="template_id" />
-                        </h1>
-                        <field name="delivery_failure" invisible="1"/>
-                        <div class="alert alert-danger" attrs="{'invisible': [('delivery_failure', '=', False)]}">
-                            <field name="report_delivery"/>
-                        </div>
+                    <div class="row">
+                      <div class="col-xs-8">
+                                                Weight
+                                            </div>
+                      <div class="col-xs-4">
+                                                <field
+                          name="count_picking_available_weight"
+                        />kg
+                                            </div>
                     </div>
-
-                    <group>
-                        <group>
-                            <field name="date" />
-                            <field name="time_picking_planned" widget="float_time"/>
-                            <field name="time_leave_planned" widget="float_time"/>
-                        </group>
-                        <group>
-                            <field name="itinerary_ids" widget="many2many_tags"/>
-                            <field name="tag_ids" widget="many2many_tags" options="{'no_create': True}"/>
-                        </group>
-                    </group>
-                    <button name="button_itinerary_import" type="object" string="Import from itinerary"
-                            attrs="{'invisible': [('state', 'in', ('delivering', 'done'))]}"/>
-                    <notebook>
-                        <page string="Customers" name="customers">
-                            <field name="instance_customer_ids">
-                                <tree editable="bottom" create="0" delete="0">
-                                    <field name="rank"/>
-                                    <field name="partner_id"/>
-                                    <field name="count_picking_progress"/>
-                                    <field name="delivered" invisible="1"/>
-                                    <button name="button_deliver" type="object" string="Deliver" attrs="{'invisible': [('delivered', '!=', False)]}"/>
-                                    <button name="print_deliveryslip" type="object" string="Print delivery slip" attrs="{'invisible': [('delivered', '=', False)]}"/>
-                                </tree>
-                            </field>
-                        </page>
-                        <page string="Statistics" name="statistics">
-                            <group>
-                                <field name="stat_time_closed" widget="float_time"/>
-                                <field name="stat_time_picking" widget="float_time"/>
-                                <field name="stat_time_loading" widget="float_time" attrs="{'readonly': [('can_edit_stat_time_loading', '=', False)]}"/>
-                                <field name="can_edit_stat_time_loading" invisible="1"/>
-                            </group>
-                        </page>
-                    </notebook>
-
-                </sheet>
-            </form>
-        </field>
-    </record>
-
-    <record id="action_round_instance" model="ir.actions.act_window">
-        <field name="name">Delivery Rounds</field>
-        <field name="type">ir.actions.act_window</field>
-        <field name="res_model">round.instance</field>
-        <field name="view_type">form</field>
-        <field name="view_mode">kanban,tree,form</field>
-        <field name="context">{'search_default_current': 1, 'search_default_today': 1}</field>
-    </record>
-
-    <menuitem action="action_round_instance" id="menu_round_instance" parent="menu_delivery_round" sequence="20"/>
-
-
+                  </div>
+                </div>
+                <div class="row" style="margin-top:130px">
+                  <div
+                    name="pickings_progress"
+                    class="col-xs-12 o_kanban_primary_bottom"
+                    t-att-style="'background-color: ' + (record.state.raw_value=='draft' and 'lightgreen' or record.state.raw_value=='close' and 'lightsalmon' or record.state.raw_value=='pending' and 'sandybrown' or 'lightgray')"
+                  >
+                    <button
+                      class="btn btn-picking"
+                      name="action_picking_tree_available"
+                      type="object"
+                    >
+                      <field
+                        name="count_picking_done_total"
+                        widget="progress"
+                        title="Pickings"
+                        options="{'current_value': 'count_picking_done_total', 'max_value': 'count_picking_available_total'}"
+                      />
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <!--
+                            No space here
+                            -->
+              <div class="container o_kanban_card_manage_pane o_invisible">
+                <div class="row">
+                  <div
+                    class="col-xs-6 o_kanban_card_manage_section o_kanban_manage_view"
+                  >
+                    <div class="o_kanban_card_manage_title">
+                      <span>Actions</span>
+                    </div>
+                    <div>
+                      <a
+                        name="button_close"
+                        type="object"
+                        states="draft"
+                      >Lock destinations</a>
+                    </div>
+                    <div>
+                      <a name="button_deliver" type="object" states="close">Deliver</a>
+                    </div>
+                    <div>
+                      <a
+                        name="button_resetdraft"
+                        type="object"
+                        states="close"
+                      >Reset to draft</a>
+                    </div>
+                    <div>
+                      <a
+                        name="print_all_deliveryslip"
+                        type="object"
+                        states="done"
+                      >Print all deliveryslip</a>
+                    </div>
+                    <br />
+                  </div>
+                </div>
+                <div t-if="widget.editable" class="o_kanban_card_manage_settings row">
+                  <div class="col-xs-8">
+                    <ul class="oe_kanban_colorpicker" data-field="color" />
+                  </div>
+                  <div class="col-xs-4 text-right">
+                    <a type="edit">Edit</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </t>
+        </templates>
+      </kanban>
+    </field>
+  </record>
+  <record id="view_round_instance_search" model="ir.ui.view">
+    <field name="name">round.instance.search</field>
+    <field name="model">round.instance</field>
+    <field name="arch" type="xml">
+      <search string="Delivery Rounds">
+        <field name="template_name" />
+        <field name="template_code" />
+        <field name="date" />
+        <separator />
+        <field name="partner_ids" string="Potential Customer" />
+        <field name="instance_customer_ids" string="Effective Customer" />
+        <filter
+          name="today"
+          string="Today"
+          domain="[('date','=',time.strftime('%%Y-%%m-%%d'))]"
+        />
+        <filter name="current" string="Current" domain="[('state', '!=', 'done')]" />
+      </search>
+    </field>
+  </record>
+  <record id="view_round_instance_tree" model="ir.ui.view">
+    <field name="name">round.instance.tree</field>
+    <field name="model">round.instance</field>
+    <field name="arch" type="xml">
+      <tree string="Delivery Rounds">
+        <field name="date" />
+        <field name="time_picking_planned" widget="float_time" />
+        <field name="time_leave_planned" widget="float_time" />
+        <field name="template_id" />
+        <field name="state" />
+        <field name="tag_ids" widget="many2many_tags" options="{'no_create': True}" />
+      </tree>
+    </field>
+  </record>
+  <record id="view_round_instance_form" model="ir.ui.view">
+    <field name="name">round.instance.form</field>
+    <field name="model">round.instance</field>
+    <field name="arch" type="xml">
+      <form string="Delivery Round">
+        <header>
+          <button
+            name="button_close"
+            type="object"
+            string="Lock Destinations"
+            states="draft"
+            class="oe_highlight"
+          />
+          <button
+            name="button_deliver"
+            type="object"
+            string="Deliver"
+            states="close"
+            class="oe_highlight"
+          />
+          <button
+            name="button_resetdraft"
+            type="object"
+            string="Reset to Draft"
+            states="close,done"
+          />
+          <button
+            name="button_resetpending"
+            type="object"
+            string="Reset to Anticipated"
+            states="draft"
+          />
+          <button
+            name="print_all_deliveryslip"
+            type="object"
+            string="Print all deliveryslip"
+            states="done"
+            class="oe_highlight"
+          />
+          <field name="state" widget="statusbar" clickable="True" />
+        </header>
+        <sheet>
+          <div class="oe_button_box" name="button_box">
+            <button
+              name="toggle_picking_launched"
+              states="draft,close"
+              type="object"
+              class="oe_stat_button"
+              icon="fa-volume-down"
+            >
+              <field
+                name="picking_launched"
+                widget="boolean_button"
+                options="{&quot;terminology&quot;: {'string_true':'Launched','string_false':'Stopped'}}"
+              />
+            </button>
+            <button
+              class="oe_stat_button"
+              name="action_view_shippings"
+              type="object"
+              icon="fa-truck"
+            >
+              <field string="Deliveries" name="shipping_count" widget="statinfo" />
+            </button>
+            <button
+              class="oe_stat_button"
+              name="action_view_pickings"
+              type="object"
+              icon="fa-truck"
+            >
+              <field string="Pickings" name="picking_count" widget="statinfo" />
+            </button>
+          </div>
+          <div class="oe_title">
+            <h1>
+              <field name="template_id" />
+            </h1>
+            <field name="delivery_failure" invisible="1" />
+            <div
+              class="alert alert-danger"
+              attrs="{'invisible': [('delivery_failure', '=', False)]}"
+            >
+              <field name="report_delivery" />
+            </div>
+          </div>
+          <group>
+            <group>
+              <field name="date" />
+              <field name="time_picking_planned" widget="float_time" />
+              <field name="time_leave_planned" widget="float_time" />
+            </group>
+            <group>
+              <field name="itinerary_ids" widget="many2many_tags" />
+              <field
+                name="tag_ids"
+                widget="many2many_tags"
+                options="{'no_create': True}"
+              />
+            </group>
+          </group>
+          <button
+            name="button_itinerary_import"
+            type="object"
+            string="Import from itinerary"
+            attrs="{'invisible': [('state', 'in', ('delivering', 'done'))]}"
+          />
+          <notebook>
+            <page string="Customers" name="customers">
+              <field name="instance_customer_ids">
+                <tree editable="bottom" create="0" delete="0">
+                  <field name="rank" />
+                  <field name="partner_id" />
+                  <field name="count_picking_progress" />
+                  <field name="delivered" invisible="1" />
+                  <button
+                    name="button_deliver"
+                    type="object"
+                    string="Deliver"
+                    attrs="{'invisible': [('delivered', '!=', False)]}"
+                  />
+                  <button
+                    name="print_deliveryslip"
+                    type="object"
+                    string="Print delivery slip"
+                    attrs="{'invisible': [('delivered', '=', False)]}"
+                  />
+                </tree>
+              </field>
+            </page>
+            <page string="Statistics" name="statistics">
+              <group>
+                <field name="stat_time_closed" widget="float_time" />
+                <field name="stat_time_picking" widget="float_time" />
+                <field
+                  name="stat_time_loading"
+                  widget="float_time"
+                  attrs="{'readonly': [('can_edit_stat_time_loading', '=', False)]}"
+                />
+                <field name="can_edit_stat_time_loading" invisible="1" />
+              </group>
+            </page>
+          </notebook>
+        </sheet>
+      </form>
+    </field>
+  </record>
+  <record id="action_round_instance" model="ir.actions.act_window">
+    <field name="name">Delivery Rounds</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="res_model">round.instance</field>
+    <field name="view_type">form</field>
+    <field name="view_mode">kanban,tree,form</field>
+    <field
+      name="context"
+    >{'search_default_current': 1, 'search_default_today': 1}</field>
+  </record>
+  <menuitem
+    action="action_round_instance"
+    id="menu_round_instance"
+    parent="menu_delivery_round"
+    sequence="20"
+  />
 </odoo>

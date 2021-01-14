@@ -1,49 +1,44 @@
 <odoo>
-
-    <!-- account.invoice.line form -->
-    <record id="view_invoice_line_form" model="ir.ui.view">
-        <field name="model">account.invoice.line</field>
-        <field name="inherit_id" ref="account_invoice_triple_discount.invoice_line_triple_discount_form_view"/>
-        <field name="arch" type="xml">
-
-            <field name="discount" position="attributes">
-                <attribute name="invisible">True</attribute>
-            </field>
-
-            <field name="discount2" position="attributes">
-                <attribute name="groups">sale.group_discount_per_so_line</attribute>
-                <attribute name="string">Promotion (%)</attribute>
-            </field>
-
-            <field name="discount3" position="attributes">
-                <attribute name="groups">sale.group_discount_per_so_line</attribute>
-                <attribute name="string">Discount (%)</attribute>
-            </field>
-
-        </field>
-    </record>
-
-    <!-- account.invoice form -->
-    <record id="invoice_form" model="ir.ui.view">
-        <field name="model">account.invoice</field>
-        <field name="inherit_id" ref="account_invoice_triple_discount.invoice_triple_discount_form_view"/>
-        <field name="arch" type="xml">
-
-            <field name="discount" position="attributes">
-                <attribute name="invisible">True</attribute>
-            </field>
-
-            <field name="discount2" position="attributes">
-                <attribute name="groups">sale.group_discount_per_so_line</attribute>
-                <attribute name="string">Promotion (%)</attribute>
-            </field>
-
-            <field name="discount3" position="attributes">
-                <attribute name="groups">sale.group_discount_per_so_line</attribute>
-                <attribute name="string">Discount (%)</attribute>
-            </field>
-
-        </field>
-    </record>
-
+  <!-- account.invoice.line form -->
+  <record id="view_invoice_line_form" model="ir.ui.view">
+    <field name="model">account.invoice.line</field>
+    <field
+      name="inherit_id"
+      ref="account_invoice_triple_discount.invoice_line_triple_discount_form_view"
+    />
+    <field name="arch" type="xml">
+      <field name="discount" position="attributes">
+        <attribute name="invisible">True</attribute>
+      </field>
+      <field name="discount2" position="attributes">
+        <attribute name="groups">sale.group_discount_per_so_line</attribute>
+        <attribute name="string">Promotion (%)</attribute>
+      </field>
+      <field name="discount3" position="attributes">
+        <attribute name="groups">sale.group_discount_per_so_line</attribute>
+        <attribute name="string">Discount (%)</attribute>
+      </field>
+    </field>
+  </record>
+  <!-- account.invoice form -->
+  <record id="invoice_form" model="ir.ui.view">
+    <field name="model">account.invoice</field>
+    <field
+      name="inherit_id"
+      ref="account_invoice_triple_discount.invoice_triple_discount_form_view"
+    />
+    <field name="arch" type="xml">
+      <field name="discount" position="attributes">
+        <attribute name="invisible">True</attribute>
+      </field>
+      <field name="discount2" position="attributes">
+        <attribute name="groups">sale.group_discount_per_so_line</attribute>
+        <attribute name="string">Promotion (%)</attribute>
+      </field>
+      <field name="discount3" position="attributes">
+        <attribute name="groups">sale.group_discount_per_so_line</attribute>
+        <attribute name="string">Discount (%)</attribute>
+      </field>
+    </field>
+  </record>
 </odoo>

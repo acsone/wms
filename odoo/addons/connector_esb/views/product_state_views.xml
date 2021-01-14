@@ -1,27 +1,23 @@
-<?xml version="1.0" encoding="utf-8"?>
-
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-
   <record id="view_product_state_form_esb_view" model="ir.ui.view">
     <field name="name">view.product.state.form</field>
     <field name="model">product.state</field>
-    <field name="inherit_id" ref="specific_purchase.view_product_state_form_view"/>
+    <field name="inherit_id" ref="specific_purchase.view_product_state_form_view" />
     <field name="arch" type="xml">
       <xpath expr="//field[@name='sequence']" position="after">
-        <field name="esb_ref"/>
+        <field name="esb_ref" />
       </xpath>
     </field>
   </record>
-
   <record id="view_product_state_tree_esb_view" model="ir.ui.view">
     <field name="name">view.product.state.tree</field>
     <field name="model">product.state</field>
-    <field name="inherit_id" ref="specific_purchase.view_product_state_tree_view"/>
+    <field name="inherit_id" ref="specific_purchase.view_product_state_tree_view" />
     <field name="arch" type="xml">
       <xpath expr="//field[@name='sequence']" position="after">
-        <field name="esb_ref"/>
+        <field name="esb_ref" />
       </xpath>
     </field>
   </record>
-
 </odoo>

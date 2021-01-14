@@ -3,8 +3,9 @@ import importlib
 import logging
 
 from odoo import SUPERUSER_ID, http
-from odoo.addons.web.controllers.main import Home
 from odoo.http import request
+
+from odoo.addons.web.controllers.main import Home
 
 from .. import constants
 from ..tools.domain_interface import Parameters, Savepoint

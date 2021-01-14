@@ -21,12 +21,11 @@
 
 {
     "name": "Stock location",
-    "version": "1.0",
+    "version": "10.0.1.0.0",
     "category": "Stock Management",
     "depends": ["stock"],
     "data": ["views/stock_location.xml"],
     "installable": True,
-    "active": False,
     "license": "AGPL-3",
     "application": False,
 }

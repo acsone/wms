@@ -1,66 +1,70 @@
-<?xml version="1.0"?>
+<?xml version="1.0" ?>
 <odoo>
-
-    <record id="view_round_itinerary_tree" model="ir.ui.view">
-        <field name="name">round.itinerary.tree</field>
-        <field name="model">round.itinerary</field>
-        <field name="arch" type="xml">
-            <tree string="Itineraries">
-                <field name="sequence" />
-                <field name="code" />
-                <field name="name" />
-            </tree>
+  <record id="view_round_itinerary_tree" model="ir.ui.view">
+    <field name="name">round.itinerary.tree</field>
+    <field name="model">round.itinerary</field>
+    <field name="arch" type="xml">
+      <tree string="Itineraries">
+        <field name="sequence" />
+        <field name="code" />
+        <field name="name" />
+      </tree>
+    </field>
+  </record>
+  <record id="view_round_itinerary_form" model="ir.ui.view">
+    <field name="name">round.itinerary.form</field>
+    <field name="model">round.itinerary</field>
+    <field name="arch" type="xml">
+      <form string="Itineraries">
+        <group>
+          <group>
+            <field name="name" />
+            <field name="code" />
+          </group>
+          <group>
+            <field name="template_ids" widget="many2many_tags" />
+          </group>
+        </group>
+        <field name="partner_position_ids">
+          <tree string="Partners" editable="bottom">
+            <field name="sequence" />
+            <field name="partner_id" />
+            <field name="partner_zip" />
+            <field name="partner_city" />
+            <field name="partner_street" />
+            <field
+              name="tag_ids"
+              widget="many2many_tags"
+              options="{'no_create': True}"
+            />
+          </tree>
         </field>
-    </record>
-    <record id="view_round_itinerary_form" model="ir.ui.view">
-        <field name="name">round.itinerary.form</field>
-        <field name="model">round.itinerary</field>
-        <field name="arch" type="xml">
-            <form string="Itineraries">
-                <group>
-                    <group>
-                        <field name="name" />
-                        <field name="code" />
-                    </group>
-                    <group>
-                        <field name="template_ids" widget="many2many_tags"/>
-                    </group>
-                </group>
-                <field name="partner_position_ids">
-                    <tree string="Partners" editable="bottom">
-                        <field name="sequence" />
-                        <field name="partner_id" />
-                        <field name="partner_zip" />
-                        <field name="partner_city" />
-                        <field name="partner_street" />
-                        <field name="tag_ids" widget="many2many_tags" options="{'no_create': True}"/>
-                    </tree>
-                </field>
-            </form>
-        </field>
-    </record>
-
-    <record id="round_itinerary_view_search" model="ir.ui.view">
-        <field name="name">round.itinerary.view.search</field>
-        <field name="model">round.itinerary</field>
-        <field name="arch" type="xml">
-            <search string="Delivery Itineraries">
-                <field name="name"/>
-                <field name="code"/>
-                <separator/>
-                <field name="partner_ids" string="Customer"/>
-            </search>
-        </field>
-    </record>
-
-    <record id="action_round_itinerary_tree" model="ir.actions.act_window">
-        <field name="name">Itineraries</field>
-        <field name="type">ir.actions.act_window</field>
-        <field name="res_model">round.itinerary</field>
-        <field name="view_type">form</field>
-        <field name="view_mode">tree,form</field>
-    </record>
-
-    <menuitem action="action_round_itinerary_tree" id="menu_round_itinerary" parent="menu_delivery_round_settings" sequence="20"/>
-
+      </form>
+    </field>
+  </record>
+  <record id="round_itinerary_view_search" model="ir.ui.view">
+    <field name="name">round.itinerary.view.search</field>
+    <field name="model">round.itinerary</field>
+    <field name="arch" type="xml">
+      <search string="Delivery Itineraries">
+        <field name="name" />
+        <field name="code" />
+        <separator />
+        <field name="partner_ids" string="Customer" />
+      </search>
+    </field>
+  </record>
+  <record id="action_round_itinerary_tree" model="ir.actions.act_window">
+    <field name="name">Itineraries</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="res_model">round.itinerary</field>
+    <field name="view_type">form</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+  <menuitem
+    action="action_round_itinerary_tree"
+    id="menu_round_itinerary"
+    parent="menu_delivery_round_settings"
+    sequence="20"
+  />
 </odoo>

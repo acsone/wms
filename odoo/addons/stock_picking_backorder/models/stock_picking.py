@@ -94,6 +94,7 @@ class StockPicking(models.Model):
             super(StockPicking, to_transfer).do_transfer()
         return True
 
+    # pylint: disable=W8104
     @api.one
     def _compute_state(self):
         # Mark as done picking transfered without any line

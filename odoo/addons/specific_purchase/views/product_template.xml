@@ -1,48 +1,60 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <record id="product_template_form_view_procurement_button" model="ir.ui.view">
-        <field name="name">product.template.only.form.view</field>
-        <field name="model">product.template</field>
-        <field name="inherit_id" ref="stock.product_template_form_view_procurement_button"/>
-        <field name="arch" type="xml">
-            <xpath expr="//field[@name='default_code']" position="after">
-                <field name="state_id"/>
-            </xpath>
-
-            <xpath expr="//group[@name='inventory']/group[@name='group_lots_and_weight']" position="after">
-                <group>
-                    <field name="nb_days_out_of_stock" />
-                </group>
-            </xpath>
-
-            <xpath expr="//field[@name='seller_ids']" position="before">
-                <group>
-                    <field name="supplier_id" />
-                    <field name="vendor_product_code" />
-                </group>
-            </xpath>
-
-            <xpath expr="//field[@name='seller_ids']" position="attributes">
-                <attribute name="context">{'default_product_tmpl_id': context.get('product_tmpl_id', active_id), 'default_name': supplier_id, 'default_product_code': vendor_product_code or '-'}</attribute>
-            </xpath>
-        </field>
-    </record>
-
-    <record id="product_template_search_view" model="ir.ui.view">
-        <field name="name">product.template.search</field>
-        <field name="model">product.template</field>
-        <field name="inherit_id" ref="product.product_template_search_view"/>
-        <field name="arch" type="xml">
-            <xpath expr="//field[@name='categ_id']" position="after">
-                <field name="supplier_id" widget="selection" string="Vendor" context="{'supplier': self}"/>
-                <field name="vendor_product_code"/>
-            </xpath>
-
-            <xpath expr="/search" position="inside">
-                <group expand="0" string="Group By">
-                    <filter name="group_by_supplier_id" string="Vendor" context="{'group_by':'supplier_id'}"/>
-                </group>
-            </xpath>
-        </field>
-    </record>
+  <record id="product_template_form_view_procurement_button" model="ir.ui.view">
+    <field name="name">product.template.only.form.view</field>
+    <field name="model">product.template</field>
+    <field
+      name="inherit_id"
+      ref="stock.product_template_form_view_procurement_button"
+    />
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='default_code']" position="after">
+        <field name="state_id" />
+      </xpath>
+      <xpath
+        expr="//group[@name='inventory']/group[@name='group_lots_and_weight']"
+        position="after"
+      >
+        <group>
+          <field name="nb_days_out_of_stock" />
+        </group>
+      </xpath>
+      <xpath expr="//field[@name='seller_ids']" position="before">
+        <group>
+          <field name="supplier_id" />
+          <field name="vendor_product_code" />
+        </group>
+      </xpath>
+      <xpath expr="//field[@name='seller_ids']" position="attributes">
+        <attribute
+          name="context"
+        >{'default_product_tmpl_id': context.get('product_tmpl_id', active_id), 'default_name': supplier_id, 'default_product_code': vendor_product_code or '-'}</attribute>
+      </xpath>
+    </field>
+  </record>
+  <record id="product_template_search_view" model="ir.ui.view">
+    <field name="name">product.template.search</field>
+    <field name="model">product.template</field>
+    <field name="inherit_id" ref="product.product_template_search_view" />
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='categ_id']" position="after">
+        <field
+          name="supplier_id"
+          widget="selection"
+          string="Vendor"
+          context="{'supplier': self}"
+        />
+        <field name="vendor_product_code" />
+      </xpath>
+      <xpath expr="/search" position="inside">
+        <group expand="0" string="Group By">
+          <filter
+            name="group_by_supplier_id"
+            string="Vendor"
+            context="{'group_by':'supplier_id'}"
+          />
+        </group>
+      </xpath>
+    </field>
+  </record>
 </odoo>

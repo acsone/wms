@@ -1,126 +1,142 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <!-- Copyright 2020 ACSONE SA/NV
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
-
 <odoo>
-
-    <record model="ir.ui.view" id="round_instance_form_view">
-        <field name="name">round.instance.form (in
+  <record model="ir.ui.view" id="round_instance_form_view">
+    <field name="name">round.instance.form (in
             alc_delivery_rounds_geooptimize)
         </field>
-        <field name="model">round.instance</field>
-        <field name="inherit_id"
-               ref="delivery_rounds.view_round_instance_form"/>
-        <field name="arch" type="xml">
-            <page name="statistics" position="before">
-                <page name="optimizations" string="Geo Optimization">
-                    <group>
-                        <field name="geo_optimization_enabled"/>
-                        <field name="geo_optimization_resource_id" attrs="{'required': [('geo_optimization_enabled', '=', True)]}"/>
-                        <field name="geo_optimization_task_id"/>
-                        <field name="geo_optimization_start_dt"/>
-                        <field name="geo_optimization_status"/>
-                        <field name="geo_optimization_state"/>
-                        <field name="geo_optimization_request"/>
-                        <field name="geo_optimization_result"/>
-                        <field name="geo_optimization_error_message"/>
-                    </group>
-                </page>
-            </page>
-            <button name="button_deliver" position="after">
-                <button name="retry_optimization" type="object"
-                        states="optimization_failure"
-                        string="Retry Geo Optimize"/>
-                <button name="button_ignore_optimization_failure" type="object"
-                        states="optimization_failure"
-                        string="Ignore Optimization Failure"/>
-            </button>
-            <button name="print_all_deliveryslip"  position="after">
-                <button  name="button_export_to_mobile_app"
-                         type="object"
-                         string="Export to Mobile App"
-                          attrs="{'invisible': [('geo_optimization_state', '!=', 'success')]}"
-                          class="oe_highlight"
-                        />
-            </button>
-            <xpath expr="//page[@name='customers']//field[@name='rank']" position="before">
-                <field name="is_rank_computed" invisible="1"/>
-            </xpath>
-            <xpath expr="//page[@name='customers']//field[@name='rank']" position="attributes">
-                <attribute name="attrs">{'readonly': [('is_rank_computed', '==', True)]}</attribute>
-            </xpath>
-        </field>
-    </record>
-
-    <record id="view_round_instance_kanban" model="ir.ui.view">
-        <field name="name">round.instance.kanban (in
+    <field name="model">round.instance</field>
+    <field name="inherit_id" ref="delivery_rounds.view_round_instance_form" />
+    <field name="arch" type="xml">
+      <page name="statistics" position="before">
+        <page name="optimizations" string="Geo Optimization">
+          <group>
+            <field name="geo_optimization_enabled" />
+            <field
+              name="geo_optimization_resource_id"
+              attrs="{'required': [('geo_optimization_enabled', '=', True)]}"
+            />
+            <field name="geo_optimization_task_id" />
+            <field name="geo_optimization_start_dt" />
+            <field name="geo_optimization_status" />
+            <field name="geo_optimization_state" />
+            <field name="geo_optimization_request" />
+            <field name="geo_optimization_result" />
+            <field name="geo_optimization_error_message" />
+          </group>
+        </page>
+      </page>
+      <button name="button_deliver" position="after">
+        <button
+          name="retry_optimization"
+          type="object"
+          states="optimization_failure"
+          string="Retry Geo Optimize"
+        />
+        <button
+          name="button_ignore_optimization_failure"
+          type="object"
+          states="optimization_failure"
+          string="Ignore Optimization Failure"
+        />
+      </button>
+      <button name="print_all_deliveryslip" position="after">
+        <button
+          name="button_export_to_mobile_app"
+          type="object"
+          string="Export to Mobile App"
+          attrs="{'invisible': [('geo_optimization_state', '!=', 'success')]}"
+          class="oe_highlight"
+        />
+      </button>
+      <xpath expr="//page[@name='customers']//field[@name='rank']" position="before">
+        <field name="is_rank_computed" invisible="1" />
+      </xpath>
+      <xpath
+        expr="//page[@name='customers']//field[@name='rank']"
+        position="attributes"
+      >
+        <attribute
+          name="attrs"
+        >{'readonly': [('is_rank_computed', '==', True)]}</attribute>
+      </xpath>
+    </field>
+  </record>
+  <record id="view_round_instance_kanban" model="ir.ui.view">
+    <field name="name">round.instance.kanban (in
             alc_delivery_rounds_geooptimize)
         </field>
-        <field name="model">round.instance</field>
-        <field name="inherit_id"
-               ref="delivery_rounds.view_round_instance_kanban"/>
-        <field name="arch" type="xml">
-             <field name="delivery_failure" position="after">
-                 <field name="geo_optimization_state" invisible="1"/>
-             </field>
-            <xpath expr="//div[@name='pickings_progress']" position="attributes">
-                <attribute name="t-att-style">'background-color: ' + (record.state.raw_value=='draft' and 'lightgreen' or record.state.raw_value=='close' and 'lightsalmon' or record.state.raw_value=='pending' and 'sandybrown' or record.state.raw_value=='optimizing' and 'deepskyblue' or record.state.raw_value=='optimization_failure' and 'red' or 'lightgray')</attribute>
-            </xpath>
-            <xpath expr="//i[@class='oe_inline fa fa-spinner fa-truck-loading']" position="attributes">
-                <attribute name="states">delivering,optimizing</attribute>
-            </xpath>
-            <xpath expr="//a[@name='button_deliver']/parent::div"
-                   position="after">
-                <div>
-                    <a name="retry_optimization" type="object"
-                       states="optimization_failure">Retry Geo Optimize
+    <field name="model">round.instance</field>
+    <field name="inherit_id" ref="delivery_rounds.view_round_instance_kanban" />
+    <field name="arch" type="xml">
+      <field name="delivery_failure" position="after">
+        <field name="geo_optimization_state" invisible="1" />
+      </field>
+      <xpath expr="//div[@name='pickings_progress']" position="attributes">
+        <attribute
+          name="t-att-style"
+        >'background-color: ' + (record.state.raw_value=='draft' and 'lightgreen' or record.state.raw_value=='close' and 'lightsalmon' or record.state.raw_value=='pending' and 'sandybrown' or record.state.raw_value=='optimizing' and 'deepskyblue' or record.state.raw_value=='optimization_failure' and 'red' or 'lightgray')</attribute>
+      </xpath>
+      <xpath
+        expr="//i[@class='oe_inline fa fa-spinner fa-truck-loading']"
+        position="attributes"
+      >
+        <attribute name="states">delivering,optimizing</attribute>
+      </xpath>
+      <xpath expr="//a[@name='button_deliver']/parent::div" position="after">
+        <div>
+          <a
+            name="retry_optimization"
+            type="object"
+            states="optimization_failure"
+          >Retry Geo Optimize
                     </a>
-                </div>
-                <div>
-                    <a name="button_ignore_optimization_failure" type="object"
-                       states="optimization_failure">Ignore Optimization
+        </div>
+        <div>
+          <a
+            name="button_ignore_optimization_failure"
+            type="object"
+            states="optimization_failure"
+          >Ignore Optimization
                         Failure
                     </a>
-                </div>
-            </xpath>
-            <xpath expr="//a[@name='print_all_deliveryslip']/parent::div"
-                   position="after">
-                <div>
-                    <a name="button_export_to_mobile_app"
-                       type="object"
-                       attrs="{'invisible': [('geo_optimization_state', '!=', 'success')]}">Export to Mobile App
+        </div>
+      </xpath>
+      <xpath expr="//a[@name='print_all_deliveryslip']/parent::div" position="after">
+        <div>
+          <a
+            name="button_export_to_mobile_app"
+            type="object"
+            attrs="{'invisible': [('geo_optimization_state', '!=', 'success')]}"
+          >Export to Mobile App
                     </a>
-                </div>
-            </xpath>
-        </field>
-    </record>
-
-    <record model="ir.ui.view" id="round_instance_search_view">
-        <field name="name">round.instance.search (in
+        </div>
+      </xpath>
+    </field>
+  </record>
+  <record model="ir.ui.view" id="round_instance_search_view">
+    <field name="name">round.instance.search (in
             alc_delivery_rounds_geooptimize)
         </field>
-        <field name="model">round.instance</field>
-        <field name="inherit_id"
-               ref="delivery_rounds.view_round_instance_search"/>
-        <field name="arch" type="xml">
-            <field name="date" position="after">
-                <field name="geo_optimization_state"/>
-            </field>
-        </field>
-    </record>
-
-    <record model="ir.ui.view" id="round_instance_tree_view">
-        <field name="name">round.instance.tree (in
+    <field name="model">round.instance</field>
+    <field name="inherit_id" ref="delivery_rounds.view_round_instance_search" />
+    <field name="arch" type="xml">
+      <field name="date" position="after">
+        <field name="geo_optimization_state" />
+      </field>
+    </field>
+  </record>
+  <record model="ir.ui.view" id="round_instance_tree_view">
+    <field name="name">round.instance.tree (in
             alc_delivery_rounds_geooptimize)
         </field>
-        <field name="model">round.instance</field>
-        <field name="inherit_id"
-               ref="delivery_rounds.view_round_instance_tree"/>
-        <field name="arch" type="xml">
-            <field name="state" position="after">
-                <field name="geo_optimization_state"/>
-            </field>
-        </field>
-    </record>
-
+    <field name="model">round.instance</field>
+    <field name="inherit_id" ref="delivery_rounds.view_round_instance_tree" />
+    <field name="arch" type="xml">
+      <field name="state" position="after">
+        <field name="geo_optimization_state" />
+      </field>
+    </field>
+  </record>
 </odoo>

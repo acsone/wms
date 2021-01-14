@@ -2,8 +2,9 @@
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from odoo import _, api, fields
-from odoo.addons.base_geoengine import fields as geo_fields, geo_model
 from odoo.exceptions import ValidationError
+
+from odoo.addons.base_geoengine import fields as geo_fields, geo_model
 
 
 class RoundTemplate(geo_model.GeoModel):

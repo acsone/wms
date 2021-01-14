@@ -3,10 +3,11 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import exceptions
+from odoo.tests.common import SavepointCase
+
 from odoo.addons.partner_schedule.tests.test_working_schedule import (
     TestCustomerWorkingScheduleBase,
 )
-from odoo.tests.common import SavepointCase
 
 from .common import DeliveryRoundTestCase
 

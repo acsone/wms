@@ -1,75 +1,90 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <record id="csv_file_export_view_form" model="ir.ui.view">
-        <field name="name">csv.file.export.view.form</field>
-        <field name="model">csv.file.export</field>
-        <field name="arch" type="xml">
-            <form string="CSV Export">
-                <header>
-                    <button name="execute_exports" string="Execute export" class="oe_highlight" type="object"/>
-                </header>
-                <sheet>
-                    <group>
-                        <field name="name"/>
-                        <field name="active"/>
-                        <field name="ftp_connector_id"/>
-                        <field name="method"/>
-                        <field name="filename"/>
-                        <field name="delimiter"/>
-                        <field name="file_encoding"/>
-                    </group>
-                    <group>
-                        <field name="folder_out"/>
-                    </group>
-                    <separator for="logger_ids" string="Loggers"/>
-                    <group>
-                        <field name="last_logger"/>
-                    </group>
-                    <field name="logger_ids">
-                        <tree>
-                            <field name="date_start"/>
-                            <field name="date_end"/>
-                            <field name="state"/>
-                            <field name="nbr_lines"/>
-                            <field name="duration"/>
-                        </tree>
-                    </field>
-                </sheet>
-            </form>
-        </field>
-    </record>
-
-    <record id="csv_file_export_view_tree" model="ir.ui.view">
-        <field name="name">csv.file.export.view.tree</field>
-        <field name="model">csv.file.export</field>
-        <field name="arch" type="xml">
+  <record id="csv_file_export_view_form" model="ir.ui.view">
+    <field name="name">csv.file.export.view.form</field>
+    <field name="model">csv.file.export</field>
+    <field name="arch" type="xml">
+      <form string="CSV Export">
+        <header>
+          <button
+            name="execute_exports"
+            string="Execute export"
+            class="oe_highlight"
+            type="object"
+          />
+        </header>
+        <sheet>
+          <group>
+            <field name="name" />
+            <field name="active" />
+            <field name="ftp_connector_id" />
+            <field name="method" />
+            <field name="filename" />
+            <field name="delimiter" />
+            <field name="file_encoding" />
+          </group>
+          <group>
+            <field name="folder_out" />
+          </group>
+          <separator for="logger_ids" string="Loggers" />
+          <group>
+            <field name="last_logger" />
+          </group>
+          <field name="logger_ids">
             <tree>
-                <field name="name"/>
-                <field name="method"/>
-                <field name="filename"/>
-                <field name="last_logger_datetime"/>
-                <field name="last_logger_state"/>
-                <button name="execute_exports" string="Execute export" class="oe_highlight" type="object" icon="fa-play"/>
+              <field name="date_start" />
+              <field name="date_end" />
+              <field name="state" />
+              <field name="nbr_lines" />
+              <field name="duration" />
             </tree>
-        </field>
-    </record>
-
-    <record id="action_csv_file_export" model="ir.actions.act_window">
-        <field name="name">CSV Exports</field>
-        <field name="res_model">csv.file.export</field>
-        <field name="type">ir.actions.act_window</field>
-        <field name="view_type">form</field>
-        <field name="view_mode">tree,form</field>
-    </record>
-
-    <menuitem id="menu_csv_file_export" name="Exports" sequence="10" parent="csv_file.main_menu_csv_file" action="action_csv_file_export"/>
-
-    <act_window name="Execute exports"
-        res_model="csv.file.export.wizard"
-        src_model="csv.file.export"
-        view_mode="form"
-        target="new"
-        key2="client_action_multi"
-        id="act_csv_execute_exports"
-        multi="True"/>
+          </field>
+        </sheet>
+      </form>
+    </field>
+  </record>
+  <record id="csv_file_export_view_tree" model="ir.ui.view">
+    <field name="name">csv.file.export.view.tree</field>
+    <field name="model">csv.file.export</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="name" />
+        <field name="method" />
+        <field name="filename" />
+        <field name="last_logger_datetime" />
+        <field name="last_logger_state" />
+        <button
+          name="execute_exports"
+          string="Execute export"
+          class="oe_highlight"
+          type="object"
+          icon="fa-play"
+        />
+      </tree>
+    </field>
+  </record>
+  <record id="action_csv_file_export" model="ir.actions.act_window">
+    <field name="name">CSV Exports</field>
+    <field name="res_model">csv.file.export</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="view_type">form</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+  <menuitem
+    id="menu_csv_file_export"
+    name="Exports"
+    sequence="10"
+    parent="csv_file.main_menu_csv_file"
+    action="action_csv_file_export"
+  />
+  <act_window
+    name="Execute exports"
+    res_model="csv.file.export.wizard"
+    src_model="csv.file.export"
+    view_mode="form"
+    target="new"
+    key2="client_action_multi"
+    id="act_csv_execute_exports"
+    multi="True"
+  />
 </odoo>

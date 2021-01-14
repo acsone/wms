@@ -1,157 +1,206 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-
-    <record id="view_supplier_invoice_line_tree_edit" model="ir.ui.view">
-        <field name="name">supplier.invoice.line.tree</field>
-        <field name="model">account.invoice.line</field>
-        <field name="arch" type="xml">
-            <tree create="true" editable="bottom">
-
-                <field name="invoice_id" invisible="1"/>
-                <field name="invoice_state" invisible="1"/>
-                <field name="company_id" invisible="1"/>
-
-                <field name="sequence" widget="handle" attrs="{'readonly': [('invoice_state', '!=', 'draft')]}"/>
-
-                <field name="purchase_id"/>
-                <field name="purchase_line_qty_received"/>
-                <field name="purchase_line_product_qty"/>
-                <field name="product_id" attrs="{'readonly': [('invoice_state', '!=', 'draft')]}"/>
-                <field name="name" attrs="{'readonly': [('invoice_state', '!=', 'draft')]}"/>
-                <field name="account_id" attrs="{'readonly': [('invoice_state', '!=', 'draft')]}" groups="account.group_account_user"/>
-                <field name="account_analytic_id" attrs="{'readonly': [('invoice_state', '!=', 'draft')]}"/>
-                <field name="quantity" attrs="{'readonly': [('invoice_state', '!=', 'draft')]}"/>
-
-                <field name="uom_id" groups="product.group_uom" attrs="{'readonly': [('invoice_state', '!=', 'draft')]}"/>
-                <field name="price_unit" attrs="{'readonly': [('invoice_state', '!=', 'draft')]}"/>
-
-                <field name="discount" attrs="{'readonly': [('invoice_state', '!=', 'draft')]}"/>
-                <field name="discount2" attrs="{'readonly': [('invoice_state', '!=', 'draft')]}"/>
-                <field name="discount3" attrs="{'readonly': [('invoice_state', '!=', 'draft')]}"/>
-
-                <field name="invoice_line_tax_ids" widget="many2many_tags" attrs="{'readonly': [('invoice_state', '!=', 'draft')]}"/>
-
-                <field name="price_subtotal"/>
-                <field name="currency_id" invisible="1"/>
-            </tree>
-        </field>
-    </record>
-
-    <record id="view_invoice_line_filter" model="ir.ui.view">
-        <field name="name">invoice.line.filter</field>
-        <field name="model">account.invoice.line</field>
-        <field name="arch" type="xml">
-            <search>
-              <field name="name"/>
-              <field name="product_id"/>
-              <field name="account_id" groups="account.group_account_user"/>
-              <field name="account_analytic_id"/>
-              <field name="purchase_id"/>
-            </search>
-        </field>
-    </record>
-
-    <record id="action_supplier_invoice_lines_list" model="ir.actions.act_window">
-      <field name="name">Invoice Lines</field>
-        <field name="res_model">account.invoice.line</field>
-        <field name="view_id" ref="view_supplier_invoice_line_tree_edit"/>
-        <field name="search_view_id" ref="specific_account.view_invoice_line_filter" />
-        <field name="domain">[('invoice_id', '=', context['active_id'])]</field>
-        <field name="context">{'recompute_taxes_on_delete': 1}</field>
-    </record>
-
-    <record id="invoice_form_inherit" model="ir.ui.view">
-        <field name="model">account.invoice</field>
-        <field name="inherit_id" ref="account.invoice_form"/>
-        <field name="arch" type="xml">
-            <xpath expr="//field[@name='journal_id']" position="replace"/>
-            <xpath expr="//field[@name='partner_id']" position="before">
-                <field name="journal_id"/>
-            </xpath>
-        </field>
-    </record>
-
-    <record id="invoice_supplier_form_inherit" model="ir.ui.view">
-        <field name="model">account.invoice</field>
-        <field name="inherit_id" ref="account.invoice_supplier_form"/>
-        <field name="arch" type="xml">
-            <xpath expr="//sheet/*[1]" position="before">
-                <div class="oe_button_box" name="button_box">
-                    <button name="%(action_supplier_invoice_lines_list)d"
-                        type="action"
-                        class="oe_stat_button"
-                        icon="fa-pencil-square-o"
-                        context="{'default_invoice_id': active_id}"
-                        >
-                        <span>Lines Fast Entry</span>
-                    </button>
-                </div>
-            </xpath>
-        </field>
-    </record>
-
-    <record id="invoice_supplier_form" model="ir.ui.view">
-        <field name="name">account.invoice.form.inherit</field>
-        <field name="model">account.invoice</field>
-        <field name="inherit_id" ref="account.invoice_supplier_form"/>
-        <field name="priority">20</field>
-        <field name="arch" type="xml">
-            <xpath expr="//field[@name='journal_id']" position="replace"/>
-            <xpath expr="//field[@name='partner_id']" position="before">
-                <field name="journal_id"/>
-            </xpath>
-
-            <field name="date" position="replace"/>
-            <field name="date_invoice" position="after">
-                <field name="date" domain="[('state', '=', 'draft'), ('company_id', '=', company_id)]" groups="account.group_account_user"/>
-            </field>
-            <xpath expr="//field[@name='invoice_line_ids']" position="attributes">
-              <!-- To migrate with 'force_save' field attributes on Odoo >= 11 -->
-              <attribute name="readonly_by_pass">['purchase_line_qty_received', 'purchase_line_product_qty']</attribute>
-            </xpath>
-            <xpath expr="//field[@name='invoice_line_ids']/tree" position="inside">
-              <field name="purchase_line_qty_received" invisible="1"/>
-              <field name="purchase_line_product_qty" invisible="1"/>
-            </xpath>
-            <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='analytic_tag_ids']" position="replace"/>
-            <xpath expr="//field[@name='tax_line_ids']/tree/field[@name='account_analytic_id']" position="after">
-                <field name="base"/>
-            </xpath>
-        </field>
-    </record>
-
-    <record id="action_invoice_tree1_refund" model="ir.actions.act_window">
-        <field name="name">Customer Refunds</field>
-        <field name="res_model">account.invoice</field>
-        <field name="view_type">form</field>
-        <field name="view_mode">tree,kanban,form,calendar,pivot,graph</field>
-        <field eval="False" name="view_id"/>
-        <field name="domain">[('type', '=', 'out_refund')]</field>
-        <field name="context">{'defaut_type': 'out_refund', 'type': 'out_refund', 'journal_type': 'sale'}</field>
-        <field name="search_view_id" ref="account.view_account_invoice_filter"/>
-        <field name="help" type="html">
-          <p class="oe_view_nocontent_create">
+  <record id="view_supplier_invoice_line_tree_edit" model="ir.ui.view">
+    <field name="name">supplier.invoice.line.tree</field>
+    <field name="model">account.invoice.line</field>
+    <field name="arch" type="xml">
+      <tree create="true" editable="bottom">
+        <field name="invoice_id" invisible="1" />
+        <field name="invoice_state" invisible="1" />
+        <field name="company_id" invisible="1" />
+        <field
+          name="sequence"
+          widget="handle"
+          attrs="{'readonly': [('invoice_state', '!=', 'draft')]}"
+        />
+        <field name="purchase_id" />
+        <field name="purchase_line_qty_received" />
+        <field name="purchase_line_product_qty" />
+        <field
+          name="product_id"
+          attrs="{'readonly': [('invoice_state', '!=', 'draft')]}"
+        />
+        <field name="name" attrs="{'readonly': [('invoice_state', '!=', 'draft')]}" />
+        <field
+          name="account_id"
+          attrs="{'readonly': [('invoice_state', '!=', 'draft')]}"
+          groups="account.group_account_user"
+        />
+        <field
+          name="account_analytic_id"
+          attrs="{'readonly': [('invoice_state', '!=', 'draft')]}"
+        />
+        <field
+          name="quantity"
+          attrs="{'readonly': [('invoice_state', '!=', 'draft')]}"
+        />
+        <field
+          name="uom_id"
+          groups="product.group_uom"
+          attrs="{'readonly': [('invoice_state', '!=', 'draft')]}"
+        />
+        <field
+          name="price_unit"
+          attrs="{'readonly': [('invoice_state', '!=', 'draft')]}"
+        />
+        <field
+          name="discount"
+          attrs="{'readonly': [('invoice_state', '!=', 'draft')]}"
+        />
+        <field
+          name="discount2"
+          attrs="{'readonly': [('invoice_state', '!=', 'draft')]}"
+        />
+        <field
+          name="discount3"
+          attrs="{'readonly': [('invoice_state', '!=', 'draft')]}"
+        />
+        <field
+          name="invoice_line_tax_ids"
+          widget="many2many_tags"
+          attrs="{'readonly': [('invoice_state', '!=', 'draft')]}"
+        />
+        <field name="price_subtotal" />
+        <field name="currency_id" invisible="1" />
+      </tree>
+    </field>
+  </record>
+  <record id="view_invoice_line_filter" model="ir.ui.view">
+    <field name="name">invoice.line.filter</field>
+    <field name="model">account.invoice.line</field>
+    <field name="arch" type="xml">
+      <search>
+        <field name="name" />
+        <field name="product_id" />
+        <field name="account_id" groups="account.group_account_user" />
+        <field name="account_analytic_id" />
+        <field name="purchase_id" />
+      </search>
+    </field>
+  </record>
+  <record id="action_supplier_invoice_lines_list" model="ir.actions.act_window">
+    <field name="name">Invoice Lines</field>
+    <field name="res_model">account.invoice.line</field>
+    <field name="view_id" ref="view_supplier_invoice_line_tree_edit" />
+    <field name="search_view_id" ref="specific_account.view_invoice_line_filter" />
+    <field name="domain">[('invoice_id', '=', context['active_id'])]</field>
+    <field name="context">{'recompute_taxes_on_delete': 1}</field>
+  </record>
+  <record id="invoice_form_inherit" model="ir.ui.view">
+    <field name="model">account.invoice</field>
+    <field name="inherit_id" ref="account.invoice_form" />
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='journal_id']" position="replace" />
+      <xpath expr="//field[@name='partner_id']" position="before">
+        <field name="journal_id" />
+      </xpath>
+    </field>
+  </record>
+  <record id="invoice_supplier_form_inherit" model="ir.ui.view">
+    <field name="model">account.invoice</field>
+    <field name="inherit_id" ref="account.invoice_supplier_form" />
+    <field name="arch" type="xml">
+      <xpath expr="//sheet/*[1]" position="before">
+        <div class="oe_button_box" name="button_box">
+          <button
+            name="%(action_supplier_invoice_lines_list)d"
+            type="action"
+            class="oe_stat_button"
+            icon="fa-pencil-square-o"
+            context="{'default_invoice_id': active_id}"
+          >
+            <span>Lines Fast Entry</span>
+          </button>
+        </div>
+      </xpath>
+    </field>
+  </record>
+  <record id="invoice_supplier_form" model="ir.ui.view">
+    <field name="name">account.invoice.form.inherit</field>
+    <field name="model">account.invoice</field>
+    <field name="inherit_id" ref="account.invoice_supplier_form" />
+    <field name="priority">20</field>
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='journal_id']" position="replace" />
+      <xpath expr="//field[@name='partner_id']" position="before">
+        <field name="journal_id" />
+      </xpath>
+      <field name="date" position="replace" />
+      <field name="date_invoice" position="after">
+        <field
+          name="date"
+          domain="[('state', '=', 'draft'), ('company_id', '=', company_id)]"
+          groups="account.group_account_user"
+        />
+      </field>
+      <xpath expr="//field[@name='invoice_line_ids']" position="attributes">
+        <!-- To migrate with 'force_save' field attributes on Odoo >= 11 -->
+        <attribute
+          name="readonly_by_pass"
+        >['purchase_line_qty_received', 'purchase_line_product_qty']</attribute>
+      </xpath>
+      <xpath expr="//field[@name='invoice_line_ids']/tree" position="inside">
+        <field name="purchase_line_qty_received" invisible="1" />
+        <field name="purchase_line_product_qty" invisible="1" />
+      </xpath>
+      <xpath
+        expr="//field[@name='invoice_line_ids']/tree/field[@name='analytic_tag_ids']"
+        position="replace"
+      />
+      <xpath
+        expr="//field[@name='tax_line_ids']/tree/field[@name='account_analytic_id']"
+        position="after"
+      >
+        <field name="base" />
+      </xpath>
+    </field>
+  </record>
+  <record id="action_invoice_tree1_refund" model="ir.actions.act_window">
+    <field name="name">Customer Refunds</field>
+    <field name="res_model">account.invoice</field>
+    <field name="view_type">form</field>
+    <field name="view_mode">tree,kanban,form,calendar,pivot,graph</field>
+    <field eval="False" name="view_id" />
+    <field name="domain">[('type', '=', 'out_refund')]</field>
+    <field
+      name="context"
+    >{'defaut_type': 'out_refund', 'type': 'out_refund', 'journal_type': 'sale'}</field>
+    <field name="search_view_id" ref="account.view_account_invoice_filter" />
+    <field name="help" type="html">
+      <p class="oe_view_nocontent_create">
             Click to create a customer refund.
           </p>
-        </field>
-    </record>
-    <record id="action_invoice_tree1_refund_view1" model="ir.actions.act_window.view">
-        <field eval="1" name="sequence"/>
-        <field name="view_mode">tree</field>
-        <field name="view_id" ref="account.invoice_tree"/>
-        <field name="act_window_id" ref="action_invoice_tree1_refund"/>
-    </record>
-    <record id="action_invoice_tree1_refund_view2" model="ir.actions.act_window.view">
-        <field eval="2" name="sequence"/>
-        <field name="view_mode">form</field>
-        <field name="view_id" ref="account.invoice_form"/>
-        <field name="act_window_id" ref="action_invoice_tree1_refund"/>
-    </record>
-
-    <menuitem action="action_invoice_tree1_refund" id="menu_action_invoice_tree1_refund" parent="account.menu_finance_receivables" sequence="2"/>
-
-    <!-- also add in sales menu -->
-    <menuitem action="account.action_invoice_tree1" id="menu_action_sale_invoice_tree1" parent="sale.menu_sale_invoicing" sequence="1"/>
-    <menuitem action="action_invoice_tree1_refund" id="menu_action_sale_invoice_tree1_refund" parent="sale.menu_sale_invoicing" sequence="1"/>
-
+    </field>
+  </record>
+  <record id="action_invoice_tree1_refund_view1" model="ir.actions.act_window.view">
+    <field eval="1" name="sequence" />
+    <field name="view_mode">tree</field>
+    <field name="view_id" ref="account.invoice_tree" />
+    <field name="act_window_id" ref="action_invoice_tree1_refund" />
+  </record>
+  <record id="action_invoice_tree1_refund_view2" model="ir.actions.act_window.view">
+    <field eval="2" name="sequence" />
+    <field name="view_mode">form</field>
+    <field name="view_id" ref="account.invoice_form" />
+    <field name="act_window_id" ref="action_invoice_tree1_refund" />
+  </record>
+  <menuitem
+    action="action_invoice_tree1_refund"
+    id="menu_action_invoice_tree1_refund"
+    parent="account.menu_finance_receivables"
+    sequence="2"
+  />
+  <!-- also add in sales menu -->
+  <menuitem
+    action="account.action_invoice_tree1"
+    id="menu_action_sale_invoice_tree1"
+    parent="sale.menu_sale_invoicing"
+    sequence="1"
+  />
+  <menuitem
+    action="action_invoice_tree1_refund"
+    id="menu_action_sale_invoice_tree1_refund"
+    parent="sale.menu_sale_invoicing"
+    sequence="1"
+  />
 </odoo>

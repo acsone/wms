@@ -1,52 +1,47 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <!-- Copyright 2020 ACSONE SA/NV
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
-
 <odoo>
-
-    <record model="ir.ui.view" id="alc_account_payment_globalization_form_view">
-        <field name="name">alc.account.payment.globalization.form (in alc_account_payment_globalization)</field>
-        <field name="model">alc.account.payment.globalization</field>
-        <field name="arch" type="xml">
-            <form string="Account Payment Globalization">
-                <group>
-                    <field name="partner_id"/>
-                    <field name="journal_id"/>
-                    <field name="date"/>
-                    <field name="payment_mode_id"/>
-                    <field name="account_id"/>
-                </group>
-                <footer>
-                    <button name="doit"
-                            string="OK"
-                            class="btn-primary"
-                            type="object"/>
-                    <button string="Cancel"
-                            class="btn-default"
-                            special="cancel"/>
-                </footer>
-            </form>
-        </field>
-    </record>
-
-    <record model="ir.actions.act_window" id="alc_account_payment_globalization_act_window">
-        <field name="name">Account Payment Globalization</field>
-        <field name="res_model">alc.account.payment.globalization</field>
-        <field name="view_mode">form</field>
-        <field name="context">{}</field>
-        <field name="target">new</field>
-    </record>
-
-    <record model="ir.ui.menu" id="alc_account_actions_menu">
-        <field name="name">Actions</field>
-        <field name="parent_id" ref="account.menu_finance_entries"/>
-        <field name="sequence" eval="99"/>
-    </record>
-
-    <record model="ir.ui.menu" id="alc_account_payment_globalization_menu">
-        <field name="name">Account Payment Globalization</field>
-        <field name="parent_id" ref="alc_account_actions_menu"/>
-        <field name="action" ref="alc_account_payment_globalization_act_window"/>
-        <field name="sequence" eval="10"/>
-    </record>
+  <record model="ir.ui.view" id="alc_account_payment_globalization_form_view">
+    <field
+      name="name"
+    >alc.account.payment.globalization.form (in alc_account_payment_globalization)</field>
+    <field name="model">alc.account.payment.globalization</field>
+    <field name="arch" type="xml">
+      <form string="Account Payment Globalization">
+        <group>
+          <field name="partner_id" />
+          <field name="journal_id" />
+          <field name="date" />
+          <field name="payment_mode_id" />
+          <field name="account_id" />
+        </group>
+        <footer>
+          <button name="doit" string="OK" class="btn-primary" type="object" />
+          <button string="Cancel" class="btn-default" special="cancel" />
+        </footer>
+      </form>
+    </field>
+  </record>
+  <record
+    model="ir.actions.act_window"
+    id="alc_account_payment_globalization_act_window"
+  >
+    <field name="name">Account Payment Globalization</field>
+    <field name="res_model">alc.account.payment.globalization</field>
+    <field name="view_mode">form</field>
+    <field name="context">{}</field>
+    <field name="target">new</field>
+  </record>
+  <record model="ir.ui.menu" id="alc_account_actions_menu">
+    <field name="name">Actions</field>
+    <field name="parent_id" ref="account.menu_finance_entries" />
+    <field name="sequence" eval="99" />
+  </record>
+  <record model="ir.ui.menu" id="alc_account_payment_globalization_menu">
+    <field name="name">Account Payment Globalization</field>
+    <field name="parent_id" ref="alc_account_actions_menu" />
+    <field name="action" ref="alc_account_payment_globalization_act_window" />
+    <field name="sequence" eval="10" />
+  </record>
 </odoo>

@@ -50,8 +50,8 @@ class RoundInstance(models.Model):
         if self:
             self.env.cr.execute(query, (tuple(self.ids),))
             with_pending_refill = []
-            for (id,) in self.env.cr.fetchall():
-                with_pending_refill.append(id)
+            for (id_,) in self.env.cr.fetchall():
+                with_pending_refill.append(id_)
             with_pending_refill = set(with_pending_refill)
             for rec in self:
                 rec.has_pending_reassort = rec.id in with_pending_refill

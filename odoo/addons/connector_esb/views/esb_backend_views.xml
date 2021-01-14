@@ -1,6 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-
   <record id="view_esb_backend_form" model="ir.ui.view">
     <field name="name">esb.backend.form</field>
     <field name="model">esb.backend</field>
@@ -9,20 +8,24 @@
         <header groups="connector.group_connector_manager">
         </header>
         <sheet>
-          <label for="name" class="oe_edit_only"/>
+          <label for="name" class="oe_edit_only" />
           <h1>
             <field name="name" class="oe_inline" />
           </h1>
-          <group name="api_configuration" string="API Configuration" groups="connector.group_connector_manager">
+          <group
+            name="api_configuration"
+            string="API Configuration"
+            groups="connector.group_connector_manager"
+          >
             <group name="sftp_configuration">
-              <field name="sftp_host"/>
-              <field name="sftp_port"/>
-              <field name="sftp_path"/>
-              <field name="sftp_user"/>
+              <field name="sftp_host" />
+              <field name="sftp_port" />
+              <field name="sftp_path" />
+              <field name="sftp_user" />
             </group>
             <group name="webservice_configuration">
-              <field name="ws_url"/>
-              <field name="ws_user"/>
+              <field name="ws_url" />
+              <field name="ws_user" />
             </group>
           </group>
           <group name="main_configuration" string="Main Configuration">
@@ -31,18 +34,18 @@
             <page name="Exports" string="Exports">
               <field name="timestamp_ids">
                 <tree editable="top" create="0" delete="0">
-                  <field name="model"/>
-                  <field name="kind"/>
-                  <field name="last_export"/>
-                  <field name="export_filename"/>
-                  <field name="path"/>
-                  <field name="writer"/>
-                  <button name="export"
+                  <field name="model" />
+                  <field name="kind" />
+                  <field name="last_export" />
+                  <field name="export_filename" />
+                  <field name="path" />
+                  <field name="writer" />
+                  <button name="export" type="object" string="Export" />
+                  <button
+                    name="export_period"
                     type="object"
-                    string="Export"/>
-                  <button name="export_period"
-                    type="object"
-                    string="Export a given period"/>
+                    string="Export a given period"
+                  />
                 </tree>
               </field>
             </page>
@@ -51,35 +54,34 @@
       </form>
     </field>
   </record>
-
   <record id="view_esb_backend_tree" model="ir.ui.view">
     <field name="name">esb.backend.tree</field>
     <field name="model">esb.backend</field>
     <field name="arch" type="xml">
       <tree string="ESB Backend" create="0" delete="0">
-        <field name="name"/>
-        <field name="sftp_host"/>
+        <field name="name" />
+        <field name="sftp_host" />
       </tree>
     </field>
   </record>
-
   <record id="action_esb_backend" model="ir.actions.act_window">
     <field name="name">ESB Backends</field>
     <field name="res_model">esb.backend</field>
     <field name="view_type">form</field>
     <field name="view_mode">form</field>
-    <field name="res_id" ref="esb_backend_config"/>
+    <field name="res_id" ref="esb_backend_config" />
   </record>
-
-  <menuitem id="menu_connector_esb_root"
+  <menuitem
+    id="menu_connector_esb_root"
     parent="connector.menu_connector_root"
     name="ESB"
     sequence="10"
-    groups="connector.group_connector_manager"/>
-
-  <menuitem id="menu_connector_esb_backend"
+    groups="connector.group_connector_manager"
+  />
+  <menuitem
+    id="menu_connector_esb_backend"
     name="Backend"
     parent="menu_connector_esb_root"
-    action="action_esb_backend"/>
-
+    action="action_esb_backend"
+  />
 </odoo>

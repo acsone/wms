@@ -1,10 +1,14 @@
 <odoo>
-    <!-- Add Price list report on product.template -->
-    <act_window id="action_product_price_list"
-                key2="client_print_multi"
-                name="Price List"
-                res_model="product.price_list"
-                src_model="product.template"
-                groups="product.group_sale_pricelist"
-                view_mode="form" target="new" view_type="form"/>
+  <!-- Add Price list report on product.template -->
+  <act_window
+    id="action_product_price_list"
+    key2="client_print_multi"
+    name="Price List"
+    res_model="product.price_list"
+    src_model="product.template"
+    groups="product.group_sale_pricelist"
+    view_mode="form"
+    target="new"
+    view_type="form"
+  />
 </odoo>

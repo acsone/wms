@@ -1,111 +1,151 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <record id="manage_uop_view_form" model="ir.ui.view">
-        <field name="name">manage.uop.view.form</field>
-        <field name="model">manage.uop</field>
-        <field name="arch" type="xml">
-            <form>
-                <field name="state" invisible="1"/>
-                <field name="is_change_lots" invisible="1"/>
-                <field name="user_id" invisible="1"/>
-                <field name="picking_zone_code" invisible="1"/>
-                <div states="start_menu">
-                    <h2>Search your UOP</h2>
-                    <group>
-                        <group>
-                            <h3>By your user</h3>
-                            <field name="user_id" nolabel="1" options='{"no_open": True, "no_create": True}'/>
-                        </group>
-                        <group>
-                            <h3>By the UOP number</h3>
-                            <field name="uop" nolabel="1"/>
-                        </group>
-                    </group>
-                </div>
-                <div states="search_picking">
-                    <h2>Select your UOP</h2>
-                    <group>
-                        <field name="picking_id" domain="[('state', 'in', ('partially_available', 'assigned')), ('operator_id', '=', user_id), ('picking_type_subcode', '=', 'PICK')]" widget="selection"/>
-                    </group>
-                </div>
-
-                <div states="main_menu,validate_picking,view_picking">
-                    <h2><field name="picking_name" class="oe_inline"/></h2>
-                    <h3>UOP <field name="picking_uop" class="oe_inline"/> - Zone <field name="picking_zone_id" class="oe_inline" options='{"no_open": True}'/></h3>
-
-                    <div states="main_menu">
-                        <group>
-                            <group>
-                                <button name="to_to_validate_picking" string="Validate UOP" type="object" class="oe_highlight"/>
-                            </group>
-                            <group>
-                                <button name="view_picking" string="View UOP" type="object" class="oe_highlight"/>
-                            </group>
-                        </group>
-                    </div>
-
-                    <div states="view_picking">
-                        <group>
-                            <field name="picking_checksum"/>
-                        </group>
-                        <field name="picking_line_ids">
-                            <tree>
-                                <field name="product_id"/>
-                                <field name="location_id"/>
-                                <field name="lot_id"/>
-                                <field name="location_checksum_left"/>
-                                <field name="location_checksum_right"/>
-                                <field name="lot_voice_identifier"/>
-                                <field name="lot_checksum"/>
-                                <field name="qty_done"/>
-                                <field name="qty_todo"/>
-                            </tree>
-                        </field>
-                    </div>
-
-                    <div states="validate_picking">
-                        <div attrs="{'invisible': [('is_change_lots', '=', False)]}">
-                            <h3>Modify lots</h3>
-                            <field name="line_ids">
-                                <tree editable="bottom" create="0">
-                                    <field name="product_id"/>
-                                    <field name="lot_id" domain="[('product_id', '=', product_id)]" widget="selection"/>
-                                    <field name="qty"/>
-                                </tree>
-                            </field>
-                        </div>
-                        <div attrs="{'invisible': [('picking_zone_code', '!=', '01')]}">
-                            <h3>Printer</h3>
-                            <group>
-                                <field name="printer_num"/>
-                                <field name="nbr_package"/>
-                            </group>
-                        </div>
-                    </div>
-                </div>
-
-                <footer>
-                    <button name="search_picking" string="Search UOP" type="object" class="oe_highlight" states="start_menu"/>
-                    <button name="go_to_main_menu" string="Main Menu" type="object" class="oe_highlight" states="search_picking,view_picking"/>
-                    <button name="validate" string="Validate" type="object" class="oe_highlight" states="validate_picking"/>
-                    <button string="Cancel" class="oe_link" special="cancel"/>
-                </footer>
-            </form>
-        </field>
-    </record>
-
-    <record id="manage_uop_action" model="ir.actions.act_window">
-        <field name="name">Manage UOP</field>
-        <field name="type">ir.actions.act_window</field>
-        <field name="res_model">manage.uop</field>
-        <field name="view_mode">form</field>
-        <field name="view_type">form</field>
-        <field name="target">new</field>
-    </record>
-
-    <menuitem
-        action="manage_uop_action"
-        id="manage_uop_menu"
-        parent="stock.menu_stock_warehouse_mgmt"
-        sequence="1"/>
+  <record id="manage_uop_view_form" model="ir.ui.view">
+    <field name="name">manage.uop.view.form</field>
+    <field name="model">manage.uop</field>
+    <field name="arch" type="xml">
+      <form>
+        <field name="state" invisible="1" />
+        <field name="is_change_lots" invisible="1" />
+        <field name="user_id" invisible="1" />
+        <field name="picking_zone_code" invisible="1" />
+        <div states="start_menu">
+          <h2>Search your UOP</h2>
+          <group>
+            <group>
+              <h3>By your user</h3>
+              <field
+                name="user_id"
+                nolabel="1"
+                options='{"no_open": True, "no_create": True}'
+              />
+            </group>
+            <group>
+              <h3>By the UOP number</h3>
+              <field name="uop" nolabel="1" />
+            </group>
+          </group>
+        </div>
+        <div states="search_picking">
+          <h2>Select your UOP</h2>
+          <group>
+            <field
+              name="picking_id"
+              domain="[('state', 'in', ('partially_available', 'assigned')), ('operator_id', '=', user_id), ('picking_type_subcode', '=', 'PICK')]"
+              widget="selection"
+            />
+          </group>
+        </div>
+        <div states="main_menu,validate_picking,view_picking">
+          <h2>
+            <field name="picking_name" class="oe_inline" />
+          </h2>
+          <h3>UOP <field name="picking_uop" class="oe_inline" /> - Zone <field
+              name="picking_zone_id"
+              class="oe_inline"
+              options='{"no_open": True}'
+            /></h3>
+          <div states="main_menu">
+            <group>
+              <group>
+                <button
+                  name="to_to_validate_picking"
+                  string="Validate UOP"
+                  type="object"
+                  class="oe_highlight"
+                />
+              </group>
+              <group>
+                <button
+                  name="view_picking"
+                  string="View UOP"
+                  type="object"
+                  class="oe_highlight"
+                />
+              </group>
+            </group>
+          </div>
+          <div states="view_picking">
+            <group>
+              <field name="picking_checksum" />
+            </group>
+            <field name="picking_line_ids">
+              <tree>
+                <field name="product_id" />
+                <field name="location_id" />
+                <field name="lot_id" />
+                <field name="location_checksum_left" />
+                <field name="location_checksum_right" />
+                <field name="lot_voice_identifier" />
+                <field name="lot_checksum" />
+                <field name="qty_done" />
+                <field name="qty_todo" />
+              </tree>
+            </field>
+          </div>
+          <div states="validate_picking">
+            <div attrs="{'invisible': [('is_change_lots', '=', False)]}">
+              <h3>Modify lots</h3>
+              <field name="line_ids">
+                <tree editable="bottom" create="0">
+                  <field name="product_id" />
+                  <field
+                    name="lot_id"
+                    domain="[('product_id', '=', product_id)]"
+                    widget="selection"
+                  />
+                  <field name="qty" />
+                </tree>
+              </field>
+            </div>
+            <div attrs="{'invisible': [('picking_zone_code', '!=', '01')]}">
+              <h3>Printer</h3>
+              <group>
+                <field name="printer_num" />
+                <field name="nbr_package" />
+              </group>
+            </div>
+          </div>
+        </div>
+        <footer>
+          <button
+            name="search_picking"
+            string="Search UOP"
+            type="object"
+            class="oe_highlight"
+            states="start_menu"
+          />
+          <button
+            name="go_to_main_menu"
+            string="Main Menu"
+            type="object"
+            class="oe_highlight"
+            states="search_picking,view_picking"
+          />
+          <button
+            name="validate"
+            string="Validate"
+            type="object"
+            class="oe_highlight"
+            states="validate_picking"
+          />
+          <button string="Cancel" class="oe_link" special="cancel" />
+        </footer>
+      </form>
+    </field>
+  </record>
+  <record id="manage_uop_action" model="ir.actions.act_window">
+    <field name="name">Manage UOP</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="res_model">manage.uop</field>
+    <field name="view_mode">form</field>
+    <field name="view_type">form</field>
+    <field name="target">new</field>
+  </record>
+  <menuitem
+    action="manage_uop_action"
+    id="manage_uop_menu"
+    parent="stock.menu_stock_warehouse_mgmt"
+    sequence="1"
+  />
 </odoo>

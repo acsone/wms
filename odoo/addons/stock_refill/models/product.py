@@ -19,8 +19,9 @@
 #
 ##############################################################################
 
-import odoo.addons.decimal_precision as dp
 from odoo import api, fields, models
+
+import odoo.addons.decimal_precision as dp
 
 
 class ProductProduct(models.Model):
@@ -44,29 +45,33 @@ class ProductProduct(models.Model):
     qty_in_parking = fields.Float(
         "Qty in parking",
         digits=dp.get_precision("Product Unit of Measure"),
-        compute="_get_qty_in_parking",
+        compute="_compute_qty_in_parking",
     )
     qty_in_reserve = fields.Float(
         "Qty in reserve",
         digits=dp.get_precision("Product Unit of Measure"),
-        compute="_get_qty_in_reserve",
+        compute="_compute_qty_in_reserve",
     )
     qty_in_bin = fields.Float(
         "Qty in bins",
         digits=dp.get_precision("Product Unit of Measure"),
-        compute="_get_qty_in_bin",
+        compute="_compute_qty_in_bin",
     )
 
-    @api.one
-    def _get_qty_in_parking(self):
+    def _compute_qty_in_parking(self):
         _self = self.with_context(loc_kind="parking")
-        self.qty_in_parking = _self.qty_available or 0
+        qties = {r.id: r.qty_available or 0 for r in _self}
+        for rec in self:
+            rec.qty_in_parking = qties[rec.id]
 
-    @api.one
-    def _get_qty_in_reserve(self):
+    def _compute_qty_in_reserve(self):
         _self = self.with_context(loc_kind="reserve")
-        self.qty_in_reserve = _self.qty_available or 0
+        qties = {r.id: r.qty_available or 0 for r in _self}
+        for rec in self:
+            rec.qty_in_reserve = qties[rec.id]
 
-    @api.one
-    def _get_qty_in_bin(self):
-        self.qty_in_bin = self.with_context(loc_kind="bin").qty_available or 0
+    def _compute_qty_in_bin(self):
+        _self = self.with_context(loc_kind="bin")
+        qties = {r.id: r.qty_available or 0 for r in _self}
+        for rec in self:
+            rec.qty_in_bin = qties[rec.id]

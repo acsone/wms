@@ -1,73 +1,66 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <!-- Copyright 2020 ACSONE SA/NV
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
-
 <odoo>
-
-    <record model="ir.ui.view" id="alc_b2c_backend_form_view">
-        <field name="name">alc.b2c.backend.form (in
+  <record model="ir.ui.view" id="alc_b2c_backend_form_view">
+    <field name="name">alc.b2c.backend.form (in
             alc_b2c_connector)
         </field>
-        <field name="model">alc.b2c.backend</field>
-        <field name="arch" type="xml">
-            <form>
-                <header>
+    <field name="model">alc.b2c.backend</field>
+    <field name="arch" type="xml">
+      <form>
+        <header>
                 </header>
-                <sheet>
-                    <label for="name" class="oe_edit_only"/>
-                    <h1>
-                        <field name="name" class="oe_inline"/>
-                    </h1>
-                    <group name="configuration">
-                        <field name="product_assortment_id"
-                               context="{'form_view_ref': 'product_assortment.product_assortment_view_form',
+        <sheet>
+          <label for="name" class="oe_edit_only" />
+          <h1>
+            <field name="name" class="oe_inline" />
+          </h1>
+          <group name="configuration">
+            <field
+              name="product_assortment_id"
+              context="{'form_view_ref': 'product_assortment.product_assortment_view_form',
                                      'product_assortment': True,
-                                     'default_is_assortment': 1}"/>
-                        <field name="pricelist_id"/>
-                        <field name="sale_team_id"/>
-                        <field name="payment_mode_id"/>
-                        <field name="payment_term_id"/>
-                        <field name="is_sale_back_order_accepted"/>
-                    </group>
-                </sheet>
-            </form>
-        </field>
-    </record>
-
-    <record model="ir.ui.view" id="alc_b2c_backend_tree_view">
-        <field name="name">alc.b2c.backend.tree (in
+                                     'default_is_assortment': 1}"
+            />
+            <field name="pricelist_id" />
+            <field name="sale_team_id" />
+            <field name="payment_mode_id" />
+            <field name="payment_term_id" />
+            <field name="is_sale_back_order_accepted" />
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+  <record model="ir.ui.view" id="alc_b2c_backend_tree_view">
+    <field name="name">alc.b2c.backend.tree (in
             alc_b2c_connector)
         </field>
-        <field name="model">alc.b2c.backend</field>
-        <field name="arch" type="xml">
-            <tree>
-                <field name="name"/>
-            </tree>
+    <field name="model">alc.b2c.backend</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="name" />
+      </tree>
+    </field>
+  </record>
+  <record model="ir.actions.act_window" id="alc_b2c_backend_act_window">
+    <field name="name">B2C Configuration</field>
+    <field name="res_model">alc.b2c.backend</field>
+    <field name="view_type">form</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+  <record model="ir.ui.menu" id="alc_b2c_root_menu">
+    <field name="name">B2C
         </field>
-    </record>
-
-    <record model="ir.actions.act_window"
-            id="alc_b2c_backend_act_window">
-        <field name="name">B2C Configuration</field>
-        <field name="res_model">alc.b2c.backend</field>
-        <field name="view_type">form</field>
-        <field name="view_mode">tree,form</field>
-    </record>
-
-
-    <record model="ir.ui.menu" id="alc_b2c_root_menu">
-        <field name="name">B2C
-        </field>
-        <field name="parent_id" ref="connector.menu_connector_root"/>
-        <field name="action" ref="alc_b2c_backend_act_window"/>
-        <field name="sequence" eval="36"/>
-    </record>
-
-    <record model="ir.ui.menu" id="alc_b2c_backend_menu">
-        <field name="name">Backend</field>
-        <field name="parent_id" ref="alc_b2c_root_menu"/>
-        <field name="action" ref="alc_b2c_backend_act_window"/>
-        <field name="sequence" eval="16"/>
-    </record>
-
+    <field name="parent_id" ref="connector.menu_connector_root" />
+    <field name="action" ref="alc_b2c_backend_act_window" />
+    <field name="sequence" eval="36" />
+  </record>
+  <record model="ir.ui.menu" id="alc_b2c_backend_menu">
+    <field name="name">Backend</field>
+    <field name="parent_id" ref="alc_b2c_root_menu" />
+    <field name="action" ref="alc_b2c_backend_act_window" />
+    <field name="sequence" eval="16" />
+  </record>
 </odoo>

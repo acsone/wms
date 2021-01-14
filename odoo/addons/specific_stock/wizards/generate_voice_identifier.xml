@@ -1,22 +1,21 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-
-    <record id="generate_voice_identifier_view_form" model="ir.ui.view">
-        <field name="name">generate.voice.identifier.view.form</field>
-        <field name="model">generate.voice.identifier</field>
-        <field name="arch" type="xml">
-
-            <form string="Generate voice identifier">
-                <field name="lot_ids"/>
-
-                <footer>
-                    <button name="generate_voice_identifier" string="Generate"
-                            type="object" class="btn btn-sm btn-primary" />
-                    <button string="Cancel" class="btn btn-sm btn-default" special="cancel"/>
-                </footer>
-
-            </form>
-        </field>
-    </record>
-
+  <record id="generate_voice_identifier_view_form" model="ir.ui.view">
+    <field name="name">generate.voice.identifier.view.form</field>
+    <field name="model">generate.voice.identifier</field>
+    <field name="arch" type="xml">
+      <form string="Generate voice identifier">
+        <field name="lot_ids" />
+        <footer>
+          <button
+            name="generate_voice_identifier"
+            string="Generate"
+            type="object"
+            class="btn btn-sm btn-primary"
+          />
+          <button string="Cancel" class="btn btn-sm btn-default" special="cancel" />
+        </footer>
+      </form>
+    </field>
+  </record>
 </odoo>

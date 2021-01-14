@@ -3,9 +3,10 @@
 # Copyright 2018 Jacques-Etienne Baudoux (BCIM sprl) <je@bcim.be>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-import odoo.addons.decimal_precision as dp
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError, ValidationError
+
+import odoo.addons.decimal_precision as dp
 
 
 class ReceptionPharmacy(models.Model):

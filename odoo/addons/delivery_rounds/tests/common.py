@@ -5,6 +5,7 @@
 from contextlib import contextmanager
 
 import mock
+
 from odoo.tests.common import SavepointCase
 
 

@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!-- Copyright 2020 ACSONE SA/NV
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
-
 <odoo noupdate="1">
-
-    <record id="alc_chronovet_report_csv_faclign" model="ir.actions.report.xml">
-        <field name="name">faclign</field>
-        <field name="model">account.move</field>
-        <field name="report_type">csv</field>
-        <field name="report_name">alc_chronovet_report_csv_faclign</field>
-        <field name="report_file">alc_chronovet_report_csv_faclign</field>
-        <field name="attachment_use" eval="1"/>
-        <field name="attachment">(object.name or 'INV').replace('/','_')+'_faclign.csv'</field>
-    </record>
-
+  <record id="alc_chronovet_report_csv_faclign" model="ir.actions.report.xml">
+    <field name="name">faclign</field>
+    <field name="model">account.move</field>
+    <field name="report_type">csv</field>
+    <field name="report_name">alc_chronovet_report_csv_faclign</field>
+    <field name="report_file">alc_chronovet_report_csv_faclign</field>
+    <field name="attachment_use" eval="1" />
+    <field
+      name="attachment"
+    >(object.name or 'INV').replace('/','_')+'_faclign.csv'</field>
+  </record>
 </odoo>

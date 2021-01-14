@@ -5,11 +5,12 @@
 import os
 import random
 
+import mock
 import requests
 
-import mock
-from odoo.addons.connector.exception import ConnectorException
 from odoo.tests.common import SavepointCase
+
+from odoo.addons.connector.exception import ConnectorException
 
 
 class ExportStockUpdateTestCase(SavepointCase):

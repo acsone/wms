@@ -1,38 +1,47 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-        <record id="view_round_wizard_makeplan" model="ir.ui.view">
-            <field name="name">Delivery Date</field>
-            <field name="model">round.wizard.makeplan</field>
-            <field name="arch" type="xml">
-                <form string="Make Today's Delivery Plan">
-                    <group>
-                        <field name="assign_moves"/>
-                        <field name="version_id"/>
-                        <field name="tag_ids" widget="many2many_tags"/>
-                        <field name="execution_date"/>
-                    </group>
-                    <footer>
-                        <button name="confirm"
-                            string="Confirm" type="object"
-                            class="oe_highlight"/>
+  <record id="view_round_wizard_makeplan" model="ir.ui.view">
+    <field name="name">Delivery Date</field>
+    <field name="model">round.wizard.makeplan</field>
+    <field name="arch" type="xml">
+      <form string="Make Today's Delivery Plan">
+        <group>
+          <field name="assign_moves" />
+          <field name="version_id" />
+          <field name="tag_ids" widget="many2many_tags" />
+          <field name="execution_date" />
+        </group>
+        <footer>
+                        <button
+            name="confirm"
+            string="Confirm"
+            type="object"
+            class="oe_highlight"
+          />
                         or
-                        <button string="Cancel" class="oe_link"
-                            special="cancel" />
+                        <button string="Cancel" class="oe_link" special="cancel" />
                     </footer>
-                </form>
-            </field>
-        </record>
-
-        <record id="action_round_wizard_makeplan" model="ir.actions.act_window">
-            <field name="name">Make Today's Delivery Plan</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">round.wizard.makeplan</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">form</field>
-            <field name="target">new</field>
-        </record>
-
-        <menuitem id="menu_delivery_round_actions" name="Actions" parent="menu_delivery_round" sequence="80"/>
-        <menuitem action="action_round_wizard_makeplan" id="menu_round_wizard_makeplan" parent="menu_delivery_round_actions" sequence="40"/>
-
+      </form>
+    </field>
+  </record>
+  <record id="action_round_wizard_makeplan" model="ir.actions.act_window">
+    <field name="name">Make Today's Delivery Plan</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="res_model">round.wizard.makeplan</field>
+    <field name="view_type">form</field>
+    <field name="view_mode">form</field>
+    <field name="target">new</field>
+  </record>
+  <menuitem
+    id="menu_delivery_round_actions"
+    name="Actions"
+    parent="menu_delivery_round"
+    sequence="80"
+  />
+  <menuitem
+    action="action_round_wizard_makeplan"
+    id="menu_round_wizard_makeplan"
+    parent="menu_delivery_round_actions"
+    sequence="40"
+  />
 </odoo>

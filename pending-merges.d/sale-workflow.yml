@@ -14,5 +14,6 @@
     - OCA refs/pull/916/head
   shell_command_after:
     # fix sale_triple_discount (ALCYN-2292)
-    - git am "$(git format-patch -1 d1ee7c6db92276eeb8bf47d22b1e0c6804b1e7ac -o ../patches)"
+    - git am "$(git format-patch -1 d1ee7c6db92276eeb8bf47d22b1e0c6804b1e7ac -o
+      ../patches)"
   target: camptocamp merge-branch-1793-master

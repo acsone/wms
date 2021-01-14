@@ -216,7 +216,7 @@ class TestSaleOrderException(SavepointCase):
         rules.write({"active": 1})
         warns = self.env["exception.rule"].search([("warning_only", "=", 1)])
         warns.write({"active": 0})
-        "Test customer students"
+        # Test customer students
         self.partner.alcyon_category_id = self.env.ref(
             "specific_partner.partner_category_student"
         )

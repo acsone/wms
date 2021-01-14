@@ -13,9 +13,10 @@ from datetime import datetime, timedelta
 import requests
 
 from odoo import _, api, fields, models
-from odoo.addons.queue_job.job import job
 from odoo.exceptions import UserError, ValidationError
 from odoo.tools import config
+
+from odoo.addons.queue_job.job import job
 
 _logger = logging.getLogger(__name__)
 
@@ -173,7 +174,9 @@ class RoundInstance(models.Model):
             return stat_time_loading
         tz_name = self.env.context.get("tz") or self.env.user.tz
         if not tz_name:
-            raise UserError("Please configure your timezone in your user preferences")
+            raise UserError(
+                _("Please configure your timezone in your user preferences")
+            )
         m, s = divmod(opti_duration, 60)
         now = fields.Datetime.context_timestamp(self, datetime.now())
         now = now + timedelta(minutes=m, seconds=s)
@@ -374,11 +377,11 @@ class RoundInstance(models.Model):
 
     def float_time_to_str_time(self, float_time, pattern="%02d:%02d:00"):
         hour = math.floor(float_time)
-        min = round((float_time % 1) * 60)
-        if min == 60:
-            min = 0
+        min_ = round((float_time % 1) * 60)
+        if min_ == 60:
+            min_ = 0
             hour += 1
-        return pattern % (hour, min)
+        return pattern % (hour, min_)
 
     def _generate_optimization_resources(self, cfg):
         address = self.warehouse_id.partner_id

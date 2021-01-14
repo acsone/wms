@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8' ?>
 <ROOT>
   <Root xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="">
     <Row>
@@ -7,7 +7,7 @@
       <Firstname>Joe</Firstname>
       <Language>TLH</Language>
       <Petits_animaux>Y</Petits_animaux>
-      <IdDelegate/>
+      <IdDelegate />
       <GroupId>TST</GroupId>
       <AlcyonGroupId>REF_ESB_2</AlcyonGroupId>
       <ErpId>3162</ErpId>
@@ -19,7 +19,7 @@
       <TaxCode>1</TaxCode>
       <Firstname>Peter</Firstname>
       <Language>FR</Language>
-      <IdDelegate/>
+      <IdDelegate />
       <GroupId>TST</GroupId>
       <AlcyonGroupId>REF_ESB</AlcyonGroupId>
       <ErpId>100</ErpId>

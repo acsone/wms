@@ -12,9 +12,10 @@ from itertools import groupby
 
 import odoo
 from odoo import _, api, fields, models
-from odoo.addons.queue_job.job import job
 from odoo.exceptions import AccessError, UserError, ValidationError
 from odoo.tools import config
+
+from odoo.addons.queue_job.job import job
 
 _logger = logging.getLogger(__name__)
 
@@ -35,7 +36,7 @@ def time2float(value):
 def time_now(record):
     tz_name = record.env.context.get("tz") or record.env.user.tz
     if not tz_name:
-        raise UserError("Please configure your timezone in your user preferences")
+        raise UserError(_("Please configure your timezone in your user preferences"))
     return time2float(fields.Datetime.context_timestamp(record, datetime.now()))
 
 
@@ -113,7 +114,7 @@ class RoundInstance(models.Model):
     )
 
     complete_name = fields.Char(
-        "Display Name", readonly=True, compute="_get_complete_name", store=True
+        "Display Name", readonly=True, compute="_compute_complete_name", store=True
     )
     tag_ids = fields.Many2many("round.tag", string="Tags")
     partner_ids = fields.Many2many(
@@ -179,7 +180,7 @@ class RoundInstance(models.Model):
 
     @api.multi
     @api.depends("template_id", "date", "time_leave_planned")
-    def _get_complete_name(self):
+    def _compute_complete_name(self):
         for rec in self:
             rec.complete_name = u"{} {} - {}".format(
                 rec.date,
@@ -515,20 +516,20 @@ class RoundInstance(models.Model):
         return False
 
     count_picking_available_total = fields.Integer(
-        "Picking Available Total", compute="_get_count_picking", readonly=True
+        "Picking Available Total", compute="_compute_count_picking", readonly=True
     )
     count_picking_done_total = fields.Integer(
-        "Picking Done Total", compute="_get_count_picking", readonly=True
+        "Picking Done Total", compute="_compute_count_picking", readonly=True
     )
     count_picking_available_partner = fields.Integer(
-        "Picking Available Partner", compute="_get_count_picking", readonly=True
+        "Picking Available Partner", compute="_compute_count_picking", readonly=True
     )
     count_picking_available_weight = fields.Integer(
-        "Picking Available Total", compute="_get_count_weight", readonly=True
+        "Picking Available Total", compute="_compute_count_weight", readonly=True
     )
 
     @api.depends("picking_ids")
-    def _get_count_weight(self):
+    def _compute_count_weight(self):
         self._cr.execute(
             """
             SELECT picking.delivery_round_id,
@@ -550,7 +551,7 @@ class RoundInstance(models.Model):
             self.browse(r[0]).count_picking_available_weight = r[1]
 
     @api.depends("picking_ids")
-    def _get_count_picking(self):
+    def _compute_count_picking(self):
         for rec in self:
             rec.count_picking_done_total = len(
                 rec.picking_ids.filtered(lambda r: r.state == ("done"))
@@ -892,11 +893,11 @@ class RoundInstanceCustomer(models.Model):
             pickings.write({"rank": rank})
 
     count_picking_progress = fields.Char(
-        "Picking Progress", compute="_get_count_picking", readonly=True
+        "Picking Progress", compute="_compute_count_picking", readonly=True
     )
 
     @api.depends("picking_ids")
-    def _get_count_picking(self):
+    def _compute_count_picking(self):
         for rec in self:
             pickings = rec.picking_ids.filtered(
                 lambda r: r.picking_type_subcode == "PICK"

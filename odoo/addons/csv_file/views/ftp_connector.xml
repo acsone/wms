@@ -1,49 +1,72 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <record id="ftp_connector_view_form" model="ir.ui.view">
-        <field name="name">ftp.connector.view.form</field>
-        <field name="model">ftp.connector</field>
-        <field name="arch" type="xml">
-            <form string="FTP Connector">
-                <header>
-                    <button name="test_connection" string="Test connection" class="oe_highlight" type="object"/>
-                </header>
-                <sheet>
-                    <group>
-                        <field name="name"/>
-                        <field name="hostname"/>
-                        <field name="username"/>
-                        <field name="type"/>
-                        <field name="password" password="True" attrs="{'invisible': [('type', '!=', 'ftp')], 'required': [('type', '=', 'ftp')]}"/>
-                        <field name="port" attrs="{'invisible': [('type', '!=', 'sftp')], 'required': [('type', '=', 'sftp')]}"/>
-                        <field name="pk_env_variable" attrs="{'invisible': [('type', '!=', 'sftp')], 'required': [('type', '=', 'sftp')]}"/>
-                    </group>
-                </sheet>
-            </form>
-        </field>
-    </record>
-
-    <record id="ftp_connector_view_tree" model="ir.ui.view">
-        <field name="name">ftp.connector.view.tree</field>
-        <field name="model">ftp.connector</field>
-        <field name="arch" type="xml">
-            <tree>
-                <field name="name"/>
-                <field name="hostname"/>
-                <field name="username"/>
-                <field name="type"/>
-            </tree>
-        </field>
-    </record>
-
-    <record id="action_ftp_connector" model="ir.actions.act_window">
-        <field name="name">FTP Connector</field>
-        <field name="res_model">ftp.connector</field>
-        <field name="type">ir.actions.act_window</field>
-        <field name="view_type">form</field>
-        <field name="view_mode">tree,form</field>
-    </record>
-
-    <menuitem id="main_menu_csv_file" name="Import/export" sequence="95" parent="base.menu_custom"/>
-    <menuitem id="menu_ftp_connetor" name="FTP Connector" sequence="50" parent="main_menu_csv_file" action="action_ftp_connector"/>
+  <record id="ftp_connector_view_form" model="ir.ui.view">
+    <field name="name">ftp.connector.view.form</field>
+    <field name="model">ftp.connector</field>
+    <field name="arch" type="xml">
+      <form string="FTP Connector">
+        <header>
+          <button
+            name="test_connection"
+            string="Test connection"
+            class="oe_highlight"
+            type="object"
+          />
+        </header>
+        <sheet>
+          <group>
+            <field name="name" />
+            <field name="hostname" />
+            <field name="username" />
+            <field name="type" />
+            <field
+              name="password"
+              password="True"
+              attrs="{'invisible': [('type', '!=', 'ftp')], 'required': [('type', '=', 'ftp')]}"
+            />
+            <field
+              name="port"
+              attrs="{'invisible': [('type', '!=', 'sftp')], 'required': [('type', '=', 'sftp')]}"
+            />
+            <field
+              name="pk_env_variable"
+              attrs="{'invisible': [('type', '!=', 'sftp')], 'required': [('type', '=', 'sftp')]}"
+            />
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+  <record id="ftp_connector_view_tree" model="ir.ui.view">
+    <field name="name">ftp.connector.view.tree</field>
+    <field name="model">ftp.connector</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="name" />
+        <field name="hostname" />
+        <field name="username" />
+        <field name="type" />
+      </tree>
+    </field>
+  </record>
+  <record id="action_ftp_connector" model="ir.actions.act_window">
+    <field name="name">FTP Connector</field>
+    <field name="res_model">ftp.connector</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="view_type">form</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+  <menuitem
+    id="main_menu_csv_file"
+    name="Import/export"
+    sequence="95"
+    parent="base.menu_custom"
+  />
+  <menuitem
+    id="menu_ftp_connetor"
+    name="FTP Connector"
+    sequence="50"
+    parent="main_menu_csv_file"
+    action="action_ftp_connector"
+  />
 </odoo>

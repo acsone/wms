@@ -18,6 +18,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
+from psycopg2.extensions import AsIs
 
 from odoo import fields, models
 from odoo.tools.sql import drop_view_if_exists
@@ -60,7 +61,8 @@ class ReportStockQuantBylocation(models.Model):
         if params.get("orderby"):
             query += "ORDER BY %(orderby)s"
         self.env.cr.execute(
-            "CREATE OR REPLACE VIEW " + self._table + " AS (" + query % params + ")"
+            "CREATE OR REPLACE VIEW  %s AS (%s)",
+            (AsIs(self._table), AsIs(query % params)),
         )
 
     product_id = fields.Many2one("product.product", "Product", auto_join=True)

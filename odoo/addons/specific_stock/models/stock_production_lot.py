@@ -19,14 +19,6 @@ class StockProductionLot(models.Model):
     voice_identifier = fields.Char("Voice Identifier", readonly=True)
     product_id = fields.Many2one(index=True)
 
-    # Cancel defaults values from `product_expiry` module
-    _defaults = {
-        "life_date": None,
-        "use_date": None,
-        "removal_date": None,
-        "alert_date": None,
-    }
-
     @api.model
     def create(self, vals):
         new_vals = vals.copy()

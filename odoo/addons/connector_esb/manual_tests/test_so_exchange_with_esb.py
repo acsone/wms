@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+# pylint: disable=W8116
 """
 This script work with sale order to make a full test exchange
 with the ESB.

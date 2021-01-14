@@ -1,49 +1,44 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <!-- Copyright 2020 ACSONE SA/NV
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
-
 <odoo>
-
-    <record id="make_itinerary_plan_wizard_form_view" model="ir.ui.view">
-        <field name="name">make.itinerary.plan.wizard.form (in alc_geo_delivery_rounds)</field>
-        <field name="model">make.itinerary.plan.wizard</field>
-        <field name="arch" type="xml">
-            <form string="Make Today's Itinerary Plan">
-                <group>
-                    <field name="delivery_plan_id"/>
-                    <field name="execution_date"/>
-                </group>
-                <footer>
-                    <button name="confirm"
-                        string="Confirm" type="object"
-                        class="oe_highlight"/>
+  <record id="make_itinerary_plan_wizard_form_view" model="ir.ui.view">
+    <field
+      name="name"
+    >make.itinerary.plan.wizard.form (in alc_geo_delivery_rounds)</field>
+    <field name="model">make.itinerary.plan.wizard</field>
+    <field name="arch" type="xml">
+      <form string="Make Today's Itinerary Plan">
+        <group>
+          <field name="delivery_plan_id" />
+          <field name="execution_date" />
+        </group>
+        <footer>
+                    <button
+            name="confirm"
+            string="Confirm"
+            type="object"
+            class="oe_highlight"
+          />
                     or
-                    <button string="Cancel" class="oe_link"
-                        special="cancel" />
+                    <button string="Cancel" class="oe_link" special="cancel" />
                 </footer>
-            </form>
-        </field>
-    </record>
-
-
-    <record model="ir.actions.act_window" id="itinerary_plan_act_window">
-        <field name="name">Itinerary plan</field> 
-        <field name="res_model">make.itinerary.plan.wizard</field>
-        <field name="type">ir.actions.act_window</field>
-        <field name="view_type">form</field>
-        <field name="view_mode">form</field>
-        <field name="view_id" ref="make_itinerary_plan_wizard_form_view"/>
-        <field name="target">new</field>
-    </record>
-
-
-    <record model="ir.ui.menu" id="itinerary_plan_menu">
-        <field name="name">Itinerary plan</field>
-        <field name="parent_id" ref="delivery_rounds.menu_delivery_round_actions"/> 
-        <field name="action" ref="itinerary_plan_act_window"/>
-        <field name="sequence" eval="16"/> 
-    </record>
-
-
-
+      </form>
+    </field>
+  </record>
+  <record model="ir.actions.act_window" id="itinerary_plan_act_window">
+    <field name="name">Itinerary plan</field>
+    <field name="res_model">make.itinerary.plan.wizard</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="view_type">form</field>
+    <field name="view_mode">form</field>
+    <field name="view_id" ref="make_itinerary_plan_wizard_form_view" />
+    <field name="target">new</field>
+  </record>
+  <record model="ir.ui.menu" id="itinerary_plan_menu">
+    <field name="name">Itinerary plan</field>
+    <field name="parent_id" ref="delivery_rounds.menu_delivery_round_actions" />
+    <field name="action" ref="itinerary_plan_act_window" />
+    <field name="sequence" eval="16" />
+  </record>
 </odoo>

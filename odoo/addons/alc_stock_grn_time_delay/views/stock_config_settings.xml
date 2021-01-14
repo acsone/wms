@@ -1,29 +1,27 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <!-- Copyright 2020 ACSONE SA/NV
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
-
 <odoo>
-
-    <record model="ir.ui.view" id="stock_config_settings_form_view">
-        <field name="name">stock.config.settings.form (in stock_grn)</field>
-        <field name="model">stock.config.settings</field>
-        <field name="inherit_id" ref="stock.view_stock_config_settings"/>
-        <field name="arch" type="xml">
-            <xpath expr="//form" position="inside">
-                <group name="max_time" String="Maximum time to process a receipt">
-                    <label for="max_delay_to_process_receipt"/>
-                    <div>
-                        <div>
-                            <field name="max_delay_to_process_receipt" widget="integer"
-                                   class="oe_inline"/>
-                            <label for="max_delay_to_process_receipt" string="days."/>
-                        </div>
-                    </div>
-                </group>
-            </xpath>
-        </field>
-    </record>
-
-
-
+  <record model="ir.ui.view" id="stock_config_settings_form_view">
+    <field name="name">stock.config.settings.form (in stock_grn)</field>
+    <field name="model">stock.config.settings</field>
+    <field name="inherit_id" ref="stock.view_stock_config_settings" />
+    <field name="arch" type="xml">
+      <xpath expr="//form" position="inside">
+        <group name="max_time" String="Maximum time to process a receipt">
+          <label for="max_delay_to_process_receipt" />
+          <div>
+            <div>
+              <field
+                name="max_delay_to_process_receipt"
+                widget="integer"
+                class="oe_inline"
+              />
+              <label for="max_delay_to_process_receipt" string="days." />
+            </div>
+          </div>
+        </group>
+      </xpath>
+    </field>
+  </record>
 </odoo>

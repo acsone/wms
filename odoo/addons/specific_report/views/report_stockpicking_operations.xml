@@ -1,120 +1,176 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-
-    <template id="stock.report_picking">
-        <t t-foreach="docs" t-as="picking">
-            <div style="display:none">
-                <!-- Do not break delivery module xpath -->
-                <t t-set="o" t-value="picking"/>
-                <th name="td_sched_date_h"/>
-                <td name="td_sched_date"/>
-            </div>
-            <t t-call="specific_report.report_picking_page" t-lang="picking.partner_id.lang"/>
-        </t>
-    </template>
-
-    <template id="specific_report.report_picking_page">
-        <t t-set="company" t-value="res_company"/>
-        <t t-call="report.html_container">
-            <div class="header">
-                <div>
-                    <div class="logo">
-                        <img t-if="company.logo"
-                            t-att-src="'data:image/png;base64,%s' % company.logo"
-                            style="max-height: 70px;"/>
-                    </div>
-                    <div class="main_title">
-                        <t t-esc="docs[0].picking_type_id.name"/>
-                    </div>
-                </div>
-
-            </div>
-            <t t-call="specific_report.report_picking_body"/>
-            <t t-call="specific_report.page_number_footer"/>
-        </t>
-    </template>
-
-    <template id="specific_report.report_picking_body">
-        <div class="page">
-            <div id="left_header" class="remove_padding_top">
-                <table id="invoice_reference" class="border_table round_table">
-                    <tr>
-                        <td><span>Customer</span></td>
-                        <td><span>N° Document</span></td>
-                        <td><span>Date</span></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <span t-field="picking.partner_id.ref"/>
-                        </td>
-                        <td>
-                            <span t-field="picking.name"/>
-                        </td>
-                        <td>
-                            <span t-field="picking.date"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="3">
-                            <span t-field="picking.origin"/>
-                        </td>
-                    </tr>
-                </table>
-                <br/>
-                <div>
-                    <img t-att-src="'/report/qrcode/?value=%s&amp;size=4' % picking.name"/>
-                </div>
-            </div>
-
-            <div id="partner_header" class="remove_padding_top">
-                <div t-field="picking.partner_id" t-options='{"widget": "contact", "fields": ["name", "address", "phone"], "no_marker": True, "phone_icons": True}'/>
-            </div>
-
-            <t t-set="pack_operation_ids" t-value="picking.pack_operation_ids"/>
-            <t groups="base.group_portal" t-set="pack_operation_ids" t-value="picking.pack_operation_ids.sudo()"/>
-            <div class="bicol">
-                <div class="pick_card" t-foreach="pack_operation_ids" t-as="pack_operation">
-                    <div>
-                        <span t-field="pack_operation.product_id"/><br/>
-                        <span t-field="pack_operation.product_id.description_picking"/>
-                        <t t-if="not pack_operation.product_id and pack_operation.package_id"><span  t-field="pack_operation.package_id"/></t>
-                    </div>
-                    <div t-if="pack_operation.product_id.picking_zone_id == picking.env.ref('__setup__.picking_zone_frigo')" class="flag">
-                        <i class="fa fa-check" aria-hidden="true"></i>
-                    </div>
-                    <div>Location: <strong><span t-field="pack_operation.location_id.name"/></strong> -> <strong><span t-field="pack_operation.location_dest_id.name"/></strong>
-                    </div>
-                    <div t-if="pack_operation.package_id">Package: <span t-field="pack_operation.package_id"/>
-                    </div>
-                    <div t-if="pack_operation.result_package_id">Resulting Package: <span t-field="pack_operation.result_package_id"/>
-                    </div>
-                    <div class="qrcode row">
-                        <div t-if="not pack_operation.pack_lot_ids" class="col-xs-6 text-center">
-                            <div style="float:right">
-                                <t t-if="pack_operation.product_id.default_code">
-                                    <t t-set="barcode" t-value="pack_operation.product_id.default_code"/>
-                                    <img t-att-src="'/report/qrcode/?value=%s&amp;size=2' % barcode"/>
-                                </t>
-                            </div>
-                            <div style="padding-top:20px"><strong><t t-if="pack_operation.qty_done"><span t-field="pack_operation.qty_done"/> / </t><span t-field="pack_operation.product_qty"/> <span t-field="pack_operation.product_uom_id" groups="product.group_uom"/></strong></div>
-                        </div>
-                        <div t-foreach="pack_operation.pack_lot_ids" t-as="packlot" class="col-xs-6 text-center">
-                            <div style="float:right">
-                                <t t-if="pack_operation.product_id.default_code and packlot.lot_id.name">
-                                    <t t-set="barcode" t-value="'%%23' + pack_operation.product_id.default_code + '%%23' + packlot.lot_id.name"/>
-                                    <img t-att-src="'/report/qrcode/?value=%s&amp;size=2' % barcode"/>
-                                </t>
-                            </div>
-                            <div style="padding-top:10px"><span t-field="packlot.lot_id.name"/></div>
-                            <div><strong><t t-if="packlot.qty"><span t-field="packlot.qty"/> / </t><span t-field="packlot.qty_todo"/> <span t-field="pack_operation.product_uom_id" groups="product.group_uom"/></strong></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <p t-field="picking.note"/>
-            </div>
+  <template id="stock.report_picking">
+    <t t-foreach="docs" t-as="picking">
+      <div style="display:none">
+        <!-- Do not break delivery module xpath -->
+        <t t-set="o" t-value="picking" />
+        <th name="td_sched_date_h" />
+        <td name="td_sched_date" />
+      </div>
+      <t
+        t-call="specific_report.report_picking_page"
+        t-lang="picking.partner_id.lang"
+      />
+    </t>
+  </template>
+  <template id="specific_report.report_picking_page">
+    <t t-set="company" t-value="res_company" />
+    <t t-call="report.html_container">
+      <div class="header">
+        <div>
+          <div class="logo">
+            <img
+              t-if="company.logo"
+              t-att-src="'data:image/png;base64,%s' % company.logo"
+              style="max-height: 70px;"
+            />
+          </div>
+          <div class="main_title">
+            <t t-esc="docs[0].picking_type_id.name" />
+          </div>
         </div>
-    </template>
-
+      </div>
+      <t t-call="specific_report.report_picking_body" />
+      <t t-call="specific_report.page_number_footer" />
+    </t>
+  </template>
+  <template id="specific_report.report_picking_body">
+    <div class="page">
+      <div id="left_header" class="remove_padding_top">
+        <table id="invoice_reference" class="border_table round_table">
+          <tr>
+            <td>
+              <span>Customer</span>
+            </td>
+            <td>
+              <span>N° Document</span>
+            </td>
+            <td>
+              <span>Date</span>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span t-field="picking.partner_id.ref" />
+            </td>
+            <td>
+              <span t-field="picking.name" />
+            </td>
+            <td>
+              <span t-field="picking.date" />
+            </td>
+          </tr>
+          <tr>
+            <td colspan="3">
+              <span t-field="picking.origin" />
+            </td>
+          </tr>
+        </table>
+        <br />
+        <div>
+          <img t-att-src="'/report/qrcode/?value=%s&amp;size=4' % picking.name" />
+        </div>
+      </div>
+      <div id="partner_header" class="remove_padding_top">
+        <div
+          t-field="picking.partner_id"
+          t-options='{"widget": "contact", "fields": ["name", "address", "phone"], "no_marker": True, "phone_icons": True}'
+        />
+      </div>
+      <t t-set="pack_operation_ids" t-value="picking.pack_operation_ids" />
+      <t
+        groups="base.group_portal"
+        t-set="pack_operation_ids"
+        t-value="picking.pack_operation_ids.sudo()"
+      />
+      <div class="bicol">
+        <div class="pick_card" t-foreach="pack_operation_ids" t-as="pack_operation">
+          <div>
+            <span t-field="pack_operation.product_id" />
+            <br />
+            <span t-field="pack_operation.product_id.description_picking" />
+            <t t-if="not pack_operation.product_id and pack_operation.package_id">
+              <span t-field="pack_operation.package_id" />
+            </t>
+          </div>
+          <div
+            t-if="pack_operation.product_id.picking_zone_id == picking.env.ref('__setup__.picking_zone_frigo')"
+            class="flag"
+          >
+            <i class="fa fa-check" aria-hidden="true" />
+          </div>
+          <div>Location: <strong>
+              <span t-field="pack_operation.location_id.name" />
+            </strong> -> <strong>
+              <span t-field="pack_operation.location_dest_id.name" />
+            </strong>
+                    </div>
+          <div t-if="pack_operation.package_id">Package: <span
+              t-field="pack_operation.package_id"
+            />
+                    </div>
+          <div t-if="pack_operation.result_package_id">Resulting Package: <span
+              t-field="pack_operation.result_package_id"
+            />
+                    </div>
+          <div class="qrcode row">
+            <div t-if="not pack_operation.pack_lot_ids" class="col-xs-6 text-center">
+              <div style="float:right">
+                <t t-if="pack_operation.product_id.default_code">
+                  <t t-set="barcode" t-value="pack_operation.product_id.default_code" />
+                  <img t-att-src="'/report/qrcode/?value=%s&amp;size=2' % barcode" />
+                </t>
+              </div>
+              <div style="padding-top:20px">
+                <strong>
+                  <t t-if="pack_operation.qty_done"><span
+                      t-field="pack_operation.qty_done"
+                    /> / </t>
+                  <span t-field="pack_operation.product_qty" />
+                  <span
+                    t-field="pack_operation.product_uom_id"
+                    groups="product.group_uom"
+                  />
+                </strong>
+              </div>
+            </div>
+            <div
+              t-foreach="pack_operation.pack_lot_ids"
+              t-as="packlot"
+              class="col-xs-6 text-center"
+            >
+              <div style="float:right">
+                <t
+                  t-if="pack_operation.product_id.default_code and packlot.lot_id.name"
+                >
+                  <t
+                    t-set="barcode"
+                    t-value="'%%23' + pack_operation.product_id.default_code + '%%23' + packlot.lot_id.name"
+                  />
+                  <img t-att-src="'/report/qrcode/?value=%s&amp;size=2' % barcode" />
+                </t>
+              </div>
+              <div style="padding-top:10px">
+                <span t-field="packlot.lot_id.name" />
+              </div>
+              <div>
+                <strong>
+                  <t t-if="packlot.qty"><span t-field="packlot.qty" /> / </t>
+                  <span t-field="packlot.qty_todo" />
+                  <span
+                    t-field="pack_operation.product_uom_id"
+                    groups="product.group_uom"
+                  />
+                </strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <p t-field="picking.note" />
+      </div>
+    </div>
+  </template>
 </odoo>

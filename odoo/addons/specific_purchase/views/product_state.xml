@@ -1,42 +1,38 @@
-<?xml version="1.0" encoding="utf-8"?>
-
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-
   <record id="view_product_state_form_view" model="ir.ui.view">
     <field name="name">view.product.state.form</field>
     <field name="model">product.state</field>
     <field name="arch" type="xml">
-        <form string="Product state">
-          <group>
-            <field name="name"/>
-            <field name="sequence"/>
-          </group>
-        </form>
+      <form string="Product state">
+        <group>
+          <field name="name" />
+          <field name="sequence" />
+        </group>
+      </form>
     </field>
   </record>
-
   <record id="view_product_state_tree_view" model="ir.ui.view">
     <field name="name">view.product.state.tree</field>
     <field name="model">product.state</field>
     <field name="arch" type="xml">
-        <tree string="Product state">
-          <field name="name"/>
-          <field name="sequence"/>
-        </tree>
+      <tree string="Product state">
+        <field name="name" />
+        <field name="sequence" />
+      </tree>
     </field>
   </record>
-
   <record id="product_state_action_form" model="ir.actions.act_window">
-      <field name="name">Product state</field>
-      <field name="type">ir.actions.act_window</field>
-      <field name="res_model">product.state</field>
-      <field name="view_type">form</field>
-      <field name="view_mode">tree,form</field>
+    <field name="name">Product state</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="res_model">product.state</field>
+    <field name="view_type">form</field>
+    <field name="view_mode">tree,form</field>
   </record>
-
   <menuitem
-    action="specific_purchase.product_state_action_form" id="menu_product_state_config"
-    parent="sale.prod_config_main" sequence="2"
+    action="specific_purchase.product_state_action_form"
+    id="menu_product_state_config"
+    parent="sale.prod_config_main"
+    sequence="2"
   />
-
 </odoo>

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo noupdate="1">
-    <record id="create_delivery_daily_plan" model="ir.cron">
-        <field name="name">Create delivery daily plan</field>
-        <field name="active" eval="True"/>
-        <field name="user_id" ref="base.user_root" />
-        <field name="interval_number">1</field>
-        <field name="interval_type">days</field>
-        <field name="numbercall">-1</field>
-        <field eval="False" name="doall" />
-        <field eval="'cron.delivery.plan'" name="model" />
-        <field eval="'create_daily_plan'" name="function" />
-        <field name="nextcall" eval="(datetime.now()).strftime('%Y-%m-%d 3:00:01')" />
-    </record>
+  <record id="create_delivery_daily_plan" model="ir.cron">
+    <field name="name">Create delivery daily plan</field>
+    <field name="active" eval="True" />
+    <field name="user_id" ref="base.user_root" />
+    <field name="interval_number">1</field>
+    <field name="interval_type">days</field>
+    <field name="numbercall">-1</field>
+    <field eval="False" name="doall" />
+    <field eval="'cron.delivery.plan'" name="model" />
+    <field eval="'create_daily_plan'" name="function" />
+    <field name="nextcall" eval="(datetime.now()).strftime('%Y-%m-%d 3:00:01')" />
+  </record>
 </odoo>

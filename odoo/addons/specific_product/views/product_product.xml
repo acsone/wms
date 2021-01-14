@@ -1,51 +1,55 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-    <record id="product_normal_form_view" model="ir.ui.view">
-        <field name="name">product.product.form.inherit</field>
-        <field name="model">product.product</field>
-        <field name="inherit_id" ref="product.product_normal_form_view" />
-        <field name="arch" type="xml">
-            <xpath expr="//div[@name='button_box']" position="inside">
-                <button type="object"
-                            name= "action_open_incoming_stock_moves"
-                            attrs="{'invisible':[('type', 'not in', ['product', 'consu'])]}"
-                            class="oe_stat_button" icon="fa-truck"
-                            groups="stock.group_stock_user">
-                    <field name="count_pickings_to_do" widget="statinfo" string="Receptions to do"/>
-                </button>
-            </xpath>
-            <field name="default_code" position="after">
-                <field name="cnk_code" />
-            </field>
-        </field>
-    </record>
-
-    <record id="product_variant_easy_edit_view" model="ir.ui.view">
-        <field name="model">product.product</field>
-        <field name="inherit_id" ref="product.product_variant_easy_edit_view" />
-        <field name="arch" type="xml">
-            <xpath expr="//field[@name='volume']/.." position="after">
-                <label for="storage_temperature_id"/>
-                <div class="o_row">
-                    <field name="storage_temperature_id"/>
-                </div>
-            </xpath>
-        </field>
-    </record>
-
-    <record id="view_product_product_tree_specific_product" model="ir.ui.view">
-        <field name="name">product.product.tree.specific_product</field>
-        <field name="model">product.product</field>
-        <field name="inherit_id" ref="product.product_product_tree_view"/>
-        <field name="arch" type="xml">
-            <xpath expr="//tree" position="attributes">
-                <attribute name="default_order">name</attribute>
-            </xpath>
-        </field>
-    </record>
-
-    <!--Disable the view kanban on Products-->
-    <record id="product.product_normal_action_sell" model="ir.actions.act_window">
-        <field name="view_mode">tree,form</field>
-    </record>
+  <record id="product_normal_form_view" model="ir.ui.view">
+    <field name="name">product.product.form.inherit</field>
+    <field name="model">product.product</field>
+    <field name="inherit_id" ref="product.product_normal_form_view" />
+    <field name="arch" type="xml">
+      <xpath expr="//div[@name='button_box']" position="inside">
+        <button
+          type="object"
+          name="action_open_incoming_stock_moves"
+          attrs="{'invisible':[('type', 'not in', ['product', 'consu'])]}"
+          class="oe_stat_button"
+          icon="fa-truck"
+          groups="stock.group_stock_user"
+        >
+          <field
+            name="count_pickings_to_do"
+            widget="statinfo"
+            string="Receptions to do"
+          />
+        </button>
+      </xpath>
+      <field name="default_code" position="after">
+        <field name="cnk_code" />
+      </field>
+    </field>
+  </record>
+  <record id="product_variant_easy_edit_view" model="ir.ui.view">
+    <field name="model">product.product</field>
+    <field name="inherit_id" ref="product.product_variant_easy_edit_view" />
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='volume']/.." position="after">
+        <label for="storage_temperature_id" />
+        <div class="o_row">
+          <field name="storage_temperature_id" />
+        </div>
+      </xpath>
+    </field>
+  </record>
+  <record id="view_product_product_tree_specific_product" model="ir.ui.view">
+    <field name="name">product.product.tree.specific_product</field>
+    <field name="model">product.product</field>
+    <field name="inherit_id" ref="product.product_product_tree_view" />
+    <field name="arch" type="xml">
+      <xpath expr="//tree" position="attributes">
+        <attribute name="default_order">name</attribute>
+      </xpath>
+    </field>
+  </record>
+  <!--Disable the view kanban on Products-->
+  <record id="product.product_normal_action_sell" model="ir.actions.act_window">
+    <field name="view_mode">tree,form</field>
+  </record>
 </odoo>

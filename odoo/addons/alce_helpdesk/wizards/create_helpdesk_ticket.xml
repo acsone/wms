@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-
   <record id="create_helpdesk_ticket_view_form" model="ir.ui.view">
     <field name="name">create.helpdesk.ticket.view.form</field>
     <field name="model">create.helpdesk.ticket</field>
@@ -9,18 +8,22 @@
         <sheet>
           <h2>Create helpdesk ticket</h2>
           <group>
-            <field name="description"/>
-            <field name="helpdesk_ticket_reason_id"/>
+            <field name="description" />
+            <field name="helpdesk_ticket_reason_id" />
           </group>
         </sheet>
         <footer>
-          <button name="create_helpdesk_ticket" string="Validate" type="object" class="oe_highlight"/>
-          <button string="Cancel" class="oe_link" special="cancel"/>
+          <button
+            name="create_helpdesk_ticket"
+            string="Validate"
+            type="object"
+            class="oe_highlight"
+          />
+          <button string="Cancel" class="oe_link" special="cancel" />
         </footer>
       </form>
     </field>
   </record>
-
   <record id="action_create_helpdesk_ticket" model="ir.actions.act_window">
     <field name="name">Create helpdesk ticket</field>
     <field name="type">ir.actions.act_window</field>
@@ -29,5 +32,4 @@
     <field name="view_mode">form</field>
     <field name="target">new</field>
   </record>
-
 </odoo>

@@ -1,114 +1,141 @@
-@color_1: #4D4D4D;
+@color_1: #4d4d4d;
 @color_2: darkblue;
 @color_3: white;
-@background_color_1: #4D4D4D;
-@background_color_2: #61BD4F;
-@background_color_3: #F2D600;
-@background_color_4: #FFAB4A;
-@background_color_5: #EB5A46;
-@background_color_6: #875A7B;
-@background_color_7: #0079BF;
-@background_color_8: #00C2E0;
-@background_color_9: #4CD98E;
-@background_color_10: #FF80CE;
+@background_color_1: #4d4d4d;
+@background_color_2: #61bd4f;
+@background_color_3: #f2d600;
+@background_color_4: #ffab4a;
+@background_color_5: #eb5a46;
+@background_color_6: #875a7b;
+@background_color_7: #0079bf;
+@background_color_8: #00c2e0;
+@background_color_9: #4cd98e;
+@background_color_10: #ff80ce;
 @picking_color_started: #27902a;
 @picking_color_stopped: #596166;
 
-
 div.o_delivery_round_kanban.o_kanban_view {
-    .o_kanban_card_content {
-        >.row {
-            >div {
-                padding-top: 2px !important;
-                padding-bottom: 2px !important;
-            }
-        }
+  .o_kanban_card_content {
+    > .row {
+      > div {
+        padding-top: 2px !important;
+        padding-bottom: 2px !important;
+      }
     }
-    .btn-toggle {
-        padding: 0;
-        font-size: 25px;
-    }
-    .btn-delivery {
-        padding: 0;
-        font-size: 25px;
-    }
-    .btn-picking {
-        width: 100%;
-        padding: 0;
-        background: 0;
-    }
+  }
+  .btn-toggle {
+    padding: 0;
+    font-size: 25px;
+  }
+  .btn-delivery {
+    padding: 0;
+    font-size: 25px;
+  }
+  .btn-picking {
+    width: 100%;
+    padding: 0;
+    background: 0;
+  }
 
-    button.btn-started {
-        color: #fff;
-        background-color: @picking_color_started;
-        text-transform: uppercase;
-    }
-    button.btn-stopped {
-        color: #fff;
-        background-color: @picking_color_stopped;
-        text-transform: uppercase;
-    }
+  button.btn-started {
+    color: #fff;
+    background-color: @picking_color_started;
+    text-transform: uppercase;
+  }
+  button.btn-stopped {
+    color: #fff;
+    background-color: @picking_color_stopped;
+    text-transform: uppercase;
+  }
 
-    .o_kanban_card_header {
-        color: @color_1;
+  .o_kanban_card_header {
+    color: @color_1;
+  }
+  .o_kanban_primary_bottom {
+    color: @color_1;
+  }
+  .o_kanban_record {
+    .oe_kanban_colorpicker {
+      > li {
+        border: 1px solid white;
+      }
     }
-    .o_kanban_primary_bottom {
-        color: @color_1;
-    }
-    .o_kanban_record {
-        .oe_kanban_colorpicker {
-            >li {
-                border: 1px solid white;
-            }
-        }
-    }
-    .oe_kanban_color_0 {
-        background-color: @background_color_1;
-        color: @color_3;
-    }
-    .oe_kanban_color_1 {
-        background-color: @background_color_2;
-        color: @color_3;
-    }
-    .oe_kanban_color_2 {
-        background-color: @background_color_3;
-        color: @color_1;
-    }
-    .oe_kanban_color_3 {
-        background-color: @background_color_4;
-        color: @color_1;
-    }
-    .oe_kanban_color_4 {
-        background-color: @background_color_5;
-        color: @color_3;
-    }
-    .oe_kanban_color_5 {
-        background-color: @background_color_6;
-        color: @color_3;
-    }
-    .oe_kanban_color_6 {
-        background-color: @background_color_7;
-        color: @color_3;
-    }
-    .oe_kanban_color_7 {
-        background-color: @background_color_8;
-        color: @color_1;
-    }
-    .oe_kanban_color_8 {
-        background-color: @background_color_9;
-        color: @color_1;
-    }
-    .oe_kanban_color_9 {
-        background-color: @background_color_10;
-        color: @color_1;
-    }
+  }
+  .oe_kanban_color_0 {
+    background-color: @background_color_1;
+    color: @color_3;
+  }
+  .oe_kanban_color_1 {
+    background-color: @background_color_2;
+    color: @color_3;
+  }
+  .oe_kanban_color_2 {
+    background-color: @background_color_3;
+    color: @color_1;
+  }
+  .oe_kanban_color_3 {
+    background-color: @background_color_4;
+    color: @color_1;
+  }
+  .oe_kanban_color_4 {
+    background-color: @background_color_5;
+    color: @color_3;
+  }
+  .oe_kanban_color_5 {
+    background-color: @background_color_6;
+    color: @color_3;
+  }
+  .oe_kanban_color_6 {
+    background-color: @background_color_7;
+    color: @color_3;
+  }
+  .oe_kanban_color_7 {
+    background-color: @background_color_8;
+    color: @color_1;
+  }
+  .oe_kanban_color_8 {
+    background-color: @background_color_9;
+    color: @color_1;
+  }
+  .oe_kanban_color_9 {
+    background-color: @background_color_10;
+    color: @color_1;
+  }
 }
 div.o_delivery_round_kanban.o_kanban_view.o_kanban_dashboard {
-    .oe_kanban_color_1 { a { color: @color_2; } }
-    .oe_kanban_color_2 { a { color: @color_2; } }
-    .oe_kanban_color_3 { a { color: @color_2; } }
-    .oe_kanban_color_4 { a { color: @color_2; } }
-    .oe_kanban_color_7 { a { color: @color_2; } }
-    .oe_kanban_color_8 { a { color: @color_2; } }
-    .oe_kanban_color_9 { a { color: @color_2; } }
+  .oe_kanban_color_1 {
+    a {
+      color: @color_2;
+    }
+  }
+  .oe_kanban_color_2 {
+    a {
+      color: @color_2;
+    }
+  }
+  .oe_kanban_color_3 {
+    a {
+      color: @color_2;
+    }
+  }
+  .oe_kanban_color_4 {
+    a {
+      color: @color_2;
+    }
+  }
+  .oe_kanban_color_7 {
+    a {
+      color: @color_2;
+    }
+  }
+  .oe_kanban_color_8 {
+    a {
+      color: @color_2;
+    }
+  }
+  .oe_kanban_color_9 {
+    a {
+      color: @color_2;
+    }
+  }
 }

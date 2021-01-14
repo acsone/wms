@@ -5,6 +5,7 @@
 import logging
 
 from odoo import _, api, models
+
 from odoo.addons.queue_job.job import job
 
 _logger = logging.getLogger(__name__)

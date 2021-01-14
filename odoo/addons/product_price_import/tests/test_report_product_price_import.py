@@ -3,6 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import xlrd
+
 from odoo.tests import SavepointCase
 
 
@@ -52,7 +53,7 @@ class TestReportProductPriceImport(SavepointCase):
         )
         if data:
             if data[0].module:
-                return "%s.%s" % (data[0].module, data[0].name)
+                return "{}.{}".format(data[0].module, data[0].name)
             else:
                 return data[0].name
 

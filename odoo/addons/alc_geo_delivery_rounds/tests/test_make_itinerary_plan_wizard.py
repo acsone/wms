@@ -4,9 +4,10 @@
 
 import logging
 
-from odoo.addons.delivery_rounds.tests import common
 from shapely.geometry.multipolygon import MultiPolygon
 from shapely.geometry.polygon import Point, Polygon
+
+from odoo.addons.delivery_rounds.tests import common
 
 
 class TestMakeItineraryPlanWizard(common.DeliveryRoundTestCase):

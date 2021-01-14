@@ -1,8 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-        <template id="assets_backend" name="solt_web assets" inherit_id="web.assets_backend">
-            <xpath expr="." position="inside">
-                <script type="text/javascript" src="/web_autorefresh/static/src/js/autorefresh.js"></script>
-            </xpath>
-        </template>
+  <template id="assets_backend" name="solt_web assets" inherit_id="web.assets_backend">
+    <xpath expr="." position="inside">
+      <script
+        type="text/javascript"
+        src="/web_autorefresh/static/src/js/autorefresh.js"
+      />
+    </xpath>
+  </template>
 </odoo>

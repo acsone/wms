@@ -6,7 +6,7 @@
     "name": "Alc Customer Invoices By Fiscal Year",
     "description": """
         Compute customer invoices and totals by fiscal years""",
-    "version": "10",
+    "version": "10.0.1.0.0",
     "license": "AGPL-3",
     "author": "Acsone SA/NV",
     "depends": ["account"],

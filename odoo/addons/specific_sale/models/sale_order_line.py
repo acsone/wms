@@ -2,13 +2,18 @@
 # Copyright 2019 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+from psycopg2.extensions import AsIs
+
 from odoo import api, fields, models
 
 
 def create_index(cr, index_name, table, expression):
     cr.execute("SELECT indexname FROM pg_indexes WHERE indexname = %s", (index_name,))
     if not cr.fetchone():
-        cr.execute("CREATE INDEX %s " "ON %s %s" % (index_name, table, expression))
+        cr.execute(
+            "CREATE INDEX %s " "ON %s %s",
+            (AsIs(index_name), AsIs(table), AsIs(expression)),
+        )
 
 
 class SaleOrderLine(models.Model):

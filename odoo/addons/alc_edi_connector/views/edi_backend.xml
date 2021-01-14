@@ -1,95 +1,96 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <!-- Copyright 2020 ACSONE SA/NV
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
-
 <odoo>
-
-    <record model="ir.ui.view" id="edi_backend_form_view">
-        <field name="name">edi.backend.form (in alc_edi_connector)</field>
-        <field name="model">edi.backend</field>
-        <field name="arch" type="xml">
-            <form>
-                <header>
-                    <button name="test_connection" string="Test connection"
-                            class="oe_highlight" type="object"/>
-                </header>
-                <sheet>
-                    <div class="oe_title">
-                        <h1>
-                            <field name="name"/>
-                        </h1>
-                    </div>
-                    <group>
-                        <field name="channel"/>
-                    </group>
-                    <group name="api_configuration" string="API Configuration"
-                           groups="connector.group_connector_manager">
-                        <group name="sftp">
-                            <field name="hostname"/>
-                            <field name="username"/>
-                            <field name="password" password="True"/>
-                            <field name="port"/>
-                            <field name="pk_env_variable"/>
-                            <field name="path_read"/>ble"/>
-                            <field name="path_write"/>
+  <record model="ir.ui.view" id="edi_backend_form_view">
+    <field name="name">edi.backend.form (in alc_edi_connector)</field>
+    <field name="model">edi.backend</field>
+    <field name="arch" type="xml">
+      <form>
+        <header>
+          <button
+            name="test_connection"
+            string="Test connection"
+            class="oe_highlight"
+            type="object"
+          />
+        </header>
+        <sheet>
+          <div class="oe_title">
+            <h1>
+              <field name="name" />
+            </h1>
+          </div>
+          <group>
+            <field name="channel" />
+          </group>
+          <group
+            name="api_configuration"
+            string="API Configuration"
+            groups="connector.group_connector_manager"
+          >
+            <group name="sftp">
+                            <field name="hostname" />
+                            <field name="username" />
+                            <field name="password" password="True" />
+                            <field name="port" />
+                            <field name="pk_env_variable" />
+                            <field name="path_read" />ble"/>
+                            <field name="path_write" />
                         </group>
-                    </group>
-                    <notebook>
-                        <page name="exports" string="Exports">
-                            <field name="edi_export_task_def_ids">
-                                <tree editable="top">
-                                    <field name="kind"/>
-                                    <field name="last_export_dt"/>
-                                    <field name="export_filename"/>
-                                    <field name="path"/>
-                                </tree>
-                            </field>
-                        </page>
-                        <page name="imports" string="Imports">
-                            <field name="edi_import_task_def_ids">
-                                <tree editable="top">
-                                    <field name="kind"/>
-                                    <field name="last_import_dt"/>
-                                    <field name="file_matcher_pattern"/>
-                                    <field name="path"/>
-                                </tree>
-                            </field>
-                        </page>
-                    </notebook>
-                </sheet>
-            </form>
-        </field>
-    </record>
-
-    <record model="ir.ui.view" id="edi_backend_tree_view">
-        <field name="name">edi.backend.tree (in alc_edi_connector)</field>
-        <field name="model">edi.backend</field>
-        <field name="arch" type="xml">
-            <tree>
-                <field name="name"/>
-                <field name="channel"/>
-            </tree>
-        </field>
-    </record>
-
-    <record model="ir.actions.act_window" id="edi_backend_act_window">
-        <field name="name">Backend</field>
-        <field name="res_model">edi.backend</field>
-        <field name="view_mode">tree,form</field>
-        <field name="domain">[]</field>
-        <field name="context">{}</field>
-    </record>
-
-    <record model="ir.ui.menu" id="alc_edi_connector_menu">
-        <field name="name">EDI</field>
-        <field name="parent_id" ref="connector.menu_connector_root"/>
-        <field name="sequence" eval="16"/>
-    </record>
-
-    <record model="ir.ui.menu" id="edi_backend_menu">
-        <field name="name">Backend</field>
-        <field name="parent_id" ref="alc_edi_connector_menu"/>
-        <field name="action" ref="edi_backend_act_window"/>
-        <field name="sequence" eval="16"/>
-    </record>
+          </group>
+          <notebook>
+            <page name="exports" string="Exports">
+              <field name="edi_export_task_def_ids">
+                <tree editable="top">
+                  <field name="kind" />
+                  <field name="last_export_dt" />
+                  <field name="export_filename" />
+                  <field name="path" />
+                </tree>
+              </field>
+            </page>
+            <page name="imports" string="Imports">
+              <field name="edi_import_task_def_ids">
+                <tree editable="top">
+                  <field name="kind" />
+                  <field name="last_import_dt" />
+                  <field name="file_matcher_pattern" />
+                  <field name="path" />
+                </tree>
+              </field>
+            </page>
+          </notebook>
+        </sheet>
+      </form>
+    </field>
+  </record>
+  <record model="ir.ui.view" id="edi_backend_tree_view">
+    <field name="name">edi.backend.tree (in alc_edi_connector)</field>
+    <field name="model">edi.backend</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="name" />
+        <field name="channel" />
+      </tree>
+    </field>
+  </record>
+  <record model="ir.actions.act_window" id="edi_backend_act_window">
+    <field name="name">Backend</field>
+    <field name="res_model">edi.backend</field>
+    <field name="view_mode">tree,form</field>
+    <field name="domain">[]</field>
+    <field name="context">{}</field>
+  </record>
+  <record model="ir.ui.menu" id="alc_edi_connector_menu">
+    <field name="name">EDI</field>
+    <field name="parent_id" ref="connector.menu_connector_root" />
+    <field name="sequence" eval="16" />
+  </record>
+  <record model="ir.ui.menu" id="edi_backend_menu">
+    <field name="name">Backend</field>
+    <field name="parent_id" ref="alc_edi_connector_menu" />
+    <field name="action" ref="edi_backend_act_window" />
+    <field name="sequence" eval="16" />
+  </record>
 </odoo>

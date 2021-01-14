@@ -1,22 +1,24 @@
-<?xml version="1.0"?>
+<?xml version="1.0" ?>
 <odoo>
-
-    <record id="view_pack_operation_lot_add_form" model="ir.ui.view">
-        <field name="name">helpdesk</field>
-        <field name="model">stock.pack.operation.lot.add</field>
-        <field name="inherit_id" ref="stock_receive_lot.view_pack_operation_lot_add_form"/>
-        <field name="arch" type="xml">
-            <xpath expr="//footer" position="before">
-                <h3>Create a helpdesk ticket</h3>
-                <group>
-                    <field name="helpdesk_ticket_reason_id"
-                        attrs="{'required': [('helpdesk_ticket_description', '!=', False)]}"
-                        options="{'no_create':1}"
-                        />
-                    <field name="helpdesk_ticket_description" attrs="{'required': [('helpdesk_ticket_reason_id', '!=', False)]}"/>
-                </group>
-            </xpath>
-        </field>
-    </record>
-
+  <record id="view_pack_operation_lot_add_form" model="ir.ui.view">
+    <field name="name">helpdesk</field>
+    <field name="model">stock.pack.operation.lot.add</field>
+    <field name="inherit_id" ref="stock_receive_lot.view_pack_operation_lot_add_form" />
+    <field name="arch" type="xml">
+      <xpath expr="//footer" position="before">
+        <h3>Create a helpdesk ticket</h3>
+        <group>
+          <field
+            name="helpdesk_ticket_reason_id"
+            attrs="{'required': [('helpdesk_ticket_description', '!=', False)]}"
+            options="{'no_create':1}"
+          />
+          <field
+            name="helpdesk_ticket_description"
+            attrs="{'required': [('helpdesk_ticket_reason_id', '!=', False)]}"
+          />
+        </group>
+      </xpath>
+    </field>
+  </record>
 </odoo>

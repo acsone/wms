@@ -1,98 +1,134 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <!-- Copyright 2020 ACSONE SA/NV
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
-
 <odoo>
-
-    <record model="ir.ui.view" id="stock_config_settings_form_view">
-        <field name="name">stock.config.settings.form (in
+  <record model="ir.ui.view" id="stock_config_settings_form_view">
+    <field name="name">stock.config.settings.form (in
             alc_delivery_rounds_geooptimize)
         </field>
-        <field name="model">stock.config.settings</field>
-        <field name="inherit_id" ref="stock.view_stock_config_settings"/>
-        <field name="arch" type="xml">
-            <xpath expr="//form" position="inside">
-                <group name="geo_optimization" string="Geo Optimization">
-                    <field name="geo_optimization_enabled"
-                           string="Optimization activated?"/>
-                    <field name="geo_optimization_api_url" string="API url"
-                           attrs="{'invisible': [('geo_optimization_enabled', '=', False)], 'required': [('geo_optimization_enabled', '=', True)]}"/>
-                    <field name="geo_optimization_api_key" string="API key"
-                           attrs="{'invisible': [('geo_optimization_enabled', '=', False)]}"/>
-                    <field name="geo_optimization_resources_number" string="Number of resources available"
-                           attrs="{'invisible': [('geo_optimization_enabled', '=', False)]}"/>
-                    <label for="geo_optimization_duration"
-                           attrs="{'invisible': [('geo_optimization_enabled', '=', False)]}"/>
-                    <div>
-                        <div>
-                            <field name="geo_optimization_duration"
-                                   widget="integer"
-                                   class="oe_inline"
-                                   attrs="{'invisible': [('geo_optimization_enabled', '=', False)], 'required': [('geo_optimization_enabled', '=', True)]}"/>
-
-                            <label for="geo_optimization_duration"
-                                   string="seconds"
-                                   attrs="{'invisible': [('geo_optimization_enabled', '=', False)]}"/>
-                        </div>
-                    </div>
-                    <label for="geo_optimization_loading_duration"
-                           attrs="{'invisible': [('geo_optimization_enabled', '=', False)]}"/>
-                    <div>
-                        <div>
-                            <field name="geo_optimization_loading_duration"
-                                   widget="integer"
-                                   class="oe_inline"
-                                   attrs="{'invisible': [('geo_optimization_enabled', '=', False)], 'required': [('geo_optimization_enabled', '=', True)]}"/>
-                            <label for="geo_optimization_loading_duration"
-                                   string="minutes"
-                                   attrs="{'invisible': [('geo_optimization_enabled', '=', False)]}"/>
-                        </div>
-                    </div>
-                    <label for="geo_optimization_delivery_duration"
-                           attrs="{'invisible': [('geo_optimization_enabled', '=', False)]}"/>
-                    <div>
-                        <div>
-                            <field name="geo_optimization_delivery_duration"
-                                   widget="integer"
-                                   class="oe_inline"
-                                   attrs="{'invisible': [('geo_optimization_enabled', '=', False)], 'required': [('geo_optimization_enabled', '=', True)]}"/>
-                            <label for="geo_optimization_delivery_duration"
-                                   string="seconds"
-                                   attrs="{'invisible': [('geo_optimization_enabled', '=', False)]}"/>
-                        </div>
-                    </div>
-                    <label for="geo_optimization_travel_penalty"
-                           attrs="{'invisible': [('geo_optimization_enabled', '=', False)]}"/>
-                    <div>
-                        <div>
-                            <field name="geo_optimization_travel_penalty"
-                                   widget="float"
-                                   class="oe_inline"
-                                   attrs="{'invisible': [('geo_optimization_enabled', '=', False)], 'required': [('geo_optimization_enabled', '=', True)]}"/>
-                            <label for="geo_optimization_delivery_duration"
-                                   string="euros per distance unit"
-                                   attrs="{'invisible': [('geo_optimization_enabled', '=', False)]}"/>
-                        </div>
-                    </div>
-                    <label for="geo_optimization_work_penalty"
-                           attrs="{'invisible': [('geo_optimization_enabled', '=', False)]}"/>
-                    <div>
-                        <div>
-                            <field name="geo_optimization_work_penalty"
-                                   widget="float"
-                                   class="oe_inline"
-                                   attrs="{'invisible': [('geo_optimization_enabled', '=', False)], 'required': [('geo_optimization_enabled', '=', True)]}"/>
-                            <label for="geo_optimization_delivery_duration"
-                                   string="euros per hour"
-                                   attrs="{'invisible': [('geo_optimization_enabled', '=', False)]}"/>
-                        </div>
-                    </div>
-                    <field name="geo_optimization_resource_cfg" string="Resource additional configuration"
-                        attrs="{'invisible': [('geo_optimization_enabled', '=', False)]}"/>
-
-                </group>
-            </xpath>
-        </field>
-    </record>
-
+    <field name="model">stock.config.settings</field>
+    <field name="inherit_id" ref="stock.view_stock_config_settings" />
+    <field name="arch" type="xml">
+      <xpath expr="//form" position="inside">
+        <group name="geo_optimization" string="Geo Optimization">
+          <field name="geo_optimization_enabled" string="Optimization activated?" />
+          <field
+            name="geo_optimization_api_url"
+            string="API url"
+            attrs="{'invisible': [('geo_optimization_enabled', '=', False)], 'required': [('geo_optimization_enabled', '=', True)]}"
+          />
+          <field
+            name="geo_optimization_api_key"
+            string="API key"
+            attrs="{'invisible': [('geo_optimization_enabled', '=', False)]}"
+          />
+          <field
+            name="geo_optimization_resources_number"
+            string="Number of resources available"
+            attrs="{'invisible': [('geo_optimization_enabled', '=', False)]}"
+          />
+          <label
+            for="geo_optimization_duration"
+            attrs="{'invisible': [('geo_optimization_enabled', '=', False)]}"
+          />
+          <div>
+            <div>
+              <field
+                name="geo_optimization_duration"
+                widget="integer"
+                class="oe_inline"
+                attrs="{'invisible': [('geo_optimization_enabled', '=', False)], 'required': [('geo_optimization_enabled', '=', True)]}"
+              />
+              <label
+                for="geo_optimization_duration"
+                string="seconds"
+                attrs="{'invisible': [('geo_optimization_enabled', '=', False)]}"
+              />
+            </div>
+          </div>
+          <label
+            for="geo_optimization_loading_duration"
+            attrs="{'invisible': [('geo_optimization_enabled', '=', False)]}"
+          />
+          <div>
+            <div>
+              <field
+                name="geo_optimization_loading_duration"
+                widget="integer"
+                class="oe_inline"
+                attrs="{'invisible': [('geo_optimization_enabled', '=', False)], 'required': [('geo_optimization_enabled', '=', True)]}"
+              />
+              <label
+                for="geo_optimization_loading_duration"
+                string="minutes"
+                attrs="{'invisible': [('geo_optimization_enabled', '=', False)]}"
+              />
+            </div>
+          </div>
+          <label
+            for="geo_optimization_delivery_duration"
+            attrs="{'invisible': [('geo_optimization_enabled', '=', False)]}"
+          />
+          <div>
+            <div>
+              <field
+                name="geo_optimization_delivery_duration"
+                widget="integer"
+                class="oe_inline"
+                attrs="{'invisible': [('geo_optimization_enabled', '=', False)], 'required': [('geo_optimization_enabled', '=', True)]}"
+              />
+              <label
+                for="geo_optimization_delivery_duration"
+                string="seconds"
+                attrs="{'invisible': [('geo_optimization_enabled', '=', False)]}"
+              />
+            </div>
+          </div>
+          <label
+            for="geo_optimization_travel_penalty"
+            attrs="{'invisible': [('geo_optimization_enabled', '=', False)]}"
+          />
+          <div>
+            <div>
+              <field
+                name="geo_optimization_travel_penalty"
+                widget="float"
+                class="oe_inline"
+                attrs="{'invisible': [('geo_optimization_enabled', '=', False)], 'required': [('geo_optimization_enabled', '=', True)]}"
+              />
+              <label
+                for="geo_optimization_delivery_duration"
+                string="euros per distance unit"
+                attrs="{'invisible': [('geo_optimization_enabled', '=', False)]}"
+              />
+            </div>
+          </div>
+          <label
+            for="geo_optimization_work_penalty"
+            attrs="{'invisible': [('geo_optimization_enabled', '=', False)]}"
+          />
+          <div>
+            <div>
+              <field
+                name="geo_optimization_work_penalty"
+                widget="float"
+                class="oe_inline"
+                attrs="{'invisible': [('geo_optimization_enabled', '=', False)], 'required': [('geo_optimization_enabled', '=', True)]}"
+              />
+              <label
+                for="geo_optimization_delivery_duration"
+                string="euros per hour"
+                attrs="{'invisible': [('geo_optimization_enabled', '=', False)]}"
+              />
+            </div>
+          </div>
+          <field
+            name="geo_optimization_resource_cfg"
+            string="Resource additional configuration"
+            attrs="{'invisible': [('geo_optimization_enabled', '=', False)]}"
+          />
+        </group>
+      </xpath>
+    </field>
+  </record>
 </odoo>

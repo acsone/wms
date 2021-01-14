@@ -6,7 +6,7 @@
     "name": "Alc Sale Processing Finalizer",
     "description": """
         Allow to automatically close a Sale after a given period of time. """,
-    "version": "10",
+    "version": "10.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": [

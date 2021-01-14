@@ -5,8 +5,8 @@
 import json
 
 import dateutil
-
 import pytz
+
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 from odoo.osv.expression import AND
@@ -64,7 +64,6 @@ class SaleOrder(models.Model):
     def _create_from_b2c(self, data, b2c_backend):
         """ Create a sale order with data coming from b2c
         """
-        data
         body = _("Order created from json: %s.") % json.dumps(data, sort_keys=True)
         order_data = self._parse_b2c_order(data, b2c_backend)
         order = (
@@ -134,7 +133,7 @@ class SaleOrder(models.Model):
     @api.model
     def _get_final_b2c_recipient(self, data, b2c_backend):
         customer_info = data["recipient"]
-        b2c_ref = "%s_%s" % (b2c_backend.sale_channel, customer_info["id"])
+        b2c_ref = "{}_{}".format(b2c_backend.sale_channel, customer_info["id"])
         partner = self._get_partner_by_ref(b2c_ref, raise_if_notfound=False)
         if partner:
             # DO WE HAVE TO UPDATE ADDRESS INFO?
@@ -142,7 +141,7 @@ class SaleOrder(models.Model):
         name = customer_info["first_name"]
         last_name = customer_info.get("last_name")
         if last_name:
-            name = "%s %s" % (name, last_name)
+            name = "{} {}".format(name, last_name)
         title = customer_info.get("title")
         if title:
             title = self.env.ref(TITLE_XML_ID_BY_B2C_KEY[title]).id

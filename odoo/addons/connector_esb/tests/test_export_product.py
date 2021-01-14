@@ -4,7 +4,10 @@
 
 import os
 
+from psycopg2.extensions import AsIs
+
 from odoo import tools
+
 from odoo.addons.connector_esb.models.product.exporter import ProductExportMapper
 
 from .common import ESBXMLTestCase
@@ -194,8 +197,8 @@ class ExportProductTestCase(ESBXMLTestCase):
 
     def force_create_date(self, records, dt):
         self.env.cr.execute(
-            "UPDATE {} SET create_date=%s " "WHERE id in %s".format(self.model._table),
-            (dt, tuple(records.ids)),
+            "UPDATE %s SET create_date=%s WHERE id in %s",
+            (AsIs(self.model._table), dt, tuple(records.ids)),
         )
 
     def test_mapper(self):

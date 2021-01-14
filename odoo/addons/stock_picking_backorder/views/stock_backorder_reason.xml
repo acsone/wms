@@ -1,44 +1,43 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-
-    <record model="ir.ui.view" id="stock_backorder_reason_form">
-        <field name="name">stock.backorder.reason.form</field>
-        <field name="model">stock.backorder.reason</field>
-        <field name="arch" type="xml">
-            <form>
-                <sheet>
-                    <group>
-                        <field name="name"/>
-                        <field name="backorder_action_to_do"/>
-                        <field name="keep_grn"/>
-                    </group>
-                </sheet>
-            </form>
-        </field>
-    </record>
-
-    <record model="ir.ui.view" id="stock_backorder_reason_tree_view">
-        <field name="name">stock.backorder.reason.tree</field>
-        <field name="model">stock.backorder.reason</field>
-        <field name="arch" type="xml">
-            <tree string="Stock backorder reasons">
-                <field name="name" />
-                <field name="backorder_action_to_do"/>
-                <field name="keep_grn"/>
-            </tree>
-        </field>
-    </record>
-
-    <act_window id="action_stock_backorder_reason"
-                name="Stock backorder reasons"
-                res_model="stock.backorder.reason"
-                view_type="form"
-                view_mode="tree,form" />
-
-    <menuitem id="menu_stock_backorder_reason"
-              action="action_stock_backorder_reason"
-              parent="stock.menu_stock_config_settings"
-              groups="stock.group_stock_manager"
-              sequence="100"/>
-
+  <record model="ir.ui.view" id="stock_backorder_reason_form">
+    <field name="name">stock.backorder.reason.form</field>
+    <field name="model">stock.backorder.reason</field>
+    <field name="arch" type="xml">
+      <form>
+        <sheet>
+          <group>
+            <field name="name" />
+            <field name="backorder_action_to_do" />
+            <field name="keep_grn" />
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+  <record model="ir.ui.view" id="stock_backorder_reason_tree_view">
+    <field name="name">stock.backorder.reason.tree</field>
+    <field name="model">stock.backorder.reason</field>
+    <field name="arch" type="xml">
+      <tree string="Stock backorder reasons">
+        <field name="name" />
+        <field name="backorder_action_to_do" />
+        <field name="keep_grn" />
+      </tree>
+    </field>
+  </record>
+  <act_window
+    id="action_stock_backorder_reason"
+    name="Stock backorder reasons"
+    res_model="stock.backorder.reason"
+    view_type="form"
+    view_mode="tree,form"
+  />
+  <menuitem
+    id="menu_stock_backorder_reason"
+    action="action_stock_backorder_reason"
+    parent="stock.menu_stock_config_settings"
+    groups="stock.group_stock_manager"
+    sequence="100"
+  />
 </odoo>

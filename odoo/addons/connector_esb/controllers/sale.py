@@ -11,11 +11,13 @@ Respond to calls from the ESB.
 import logging
 from datetime import datetime
 
-import odoo
 import werkzeug
+
+import odoo
 from odoo import _, http
-from odoo.addons.web.controllers.main import ensure_db
 from odoo.http import request
+
+from odoo.addons.web.controllers.main import ensure_db
 
 _logger = logging.getLogger(__name__)
 

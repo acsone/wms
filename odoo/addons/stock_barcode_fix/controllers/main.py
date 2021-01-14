@@ -1,8 +1,9 @@
+# -*- coding: utf-8 -*-
+""" This is copy/paste from stock_barcde + jbaudoux FIX """
 from odoo import _, http
-from odoo.addons.stock_barcode.controllers.main import StockBarcodeController
 from odoo.http import request
 
-""" This is copy/paste from stock_barcde + jbaudoux FIX """
+from odoo.addons.stock_barcode.controllers.main import StockBarcodeController
 
 
 class StockBarcodeControllerFix(StockBarcodeController):

@@ -5,6 +5,7 @@
 from datetime import datetime
 
 from freezegun import freeze_time
+
 from odoo.tests.common import SavepointCase
 
 

@@ -1,30 +1,30 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-
-    <record model="ir.ui.menu" id="account.menu_action_account_moves_all">
-        <field name="groups_id" eval="[(6, 0, [ref('account.group_account_user')])]"/>
-    </record>
-
-    <record id="view_analytic_tag_tree" model="ir.ui.view">
-        <field name="name">view.analytic.tag.tree</field>
-        <field name="model">account.analytic.tag</field>
-        <field name="priority">20</field>
-        <field name="arch" type="xml">
-            <tree editable="bottom">
-                <field name="name"/>
-                <field name="color"/>
-            </tree>
-        </field>
-    </record>
-
-    <record id="action_analytic_tag" model="ir.actions.act_window">
-        <field name="name">Analytic Tags</field>
-        <field name="res_model">account.analytic.tag</field>
-        <field name="view_type">form</field>
-        <field name="view_mode">tree</field>
-        <field name="view_id" ref="view_analytic_tag_tree"/>
-    </record>
-
-    <menuitem id="menu_analytic_tag" action="action_analytic_tag" parent="account.menu_analytic_accounting" sequence="5"/>
-
+  <record model="ir.ui.menu" id="account.menu_action_account_moves_all">
+    <field name="groups_id" eval="[(6, 0, [ref('account.group_account_user')])]" />
+  </record>
+  <record id="view_analytic_tag_tree" model="ir.ui.view">
+    <field name="name">view.analytic.tag.tree</field>
+    <field name="model">account.analytic.tag</field>
+    <field name="priority">20</field>
+    <field name="arch" type="xml">
+      <tree editable="bottom">
+        <field name="name" />
+        <field name="color" />
+      </tree>
+    </field>
+  </record>
+  <record id="action_analytic_tag" model="ir.actions.act_window">
+    <field name="name">Analytic Tags</field>
+    <field name="res_model">account.analytic.tag</field>
+    <field name="view_type">form</field>
+    <field name="view_mode">tree</field>
+    <field name="view_id" ref="view_analytic_tag_tree" />
+  </record>
+  <menuitem
+    id="menu_analytic_tag"
+    action="action_analytic_tag"
+    parent="account.menu_analytic_accounting"
+    sequence="5"
+  />
 </odoo>

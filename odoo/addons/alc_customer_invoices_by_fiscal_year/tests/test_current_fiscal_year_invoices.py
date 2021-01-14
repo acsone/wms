@@ -3,6 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from freezegun import freeze_time
+
 from odoo.tests.common import SavepointCase
 
 
@@ -261,7 +262,7 @@ class TestCurrentFiscalYearInvoices(SavepointCase):
     def test_00(self):
         " customer invoice 1 is ignored"
         total_invoiced_in_current_year = 100 * 10 + 100 * 10 + 500 * 30 + 500 * 130
-        self.partner._invoice_total_current_fiscal_year()
+        self.partner._compute_invoice_total_current_fiscal_year()
 
         self.assertEqual(
             total_invoiced_in_current_year,
@@ -272,7 +273,7 @@ class TestCurrentFiscalYearInvoices(SavepointCase):
     def test_01(self):
         " customer invoices 0 and 2 are ignored"
         total_invoiced_in_current_year = 100 * 10 + 100 * 10
-        self.partner._invoice_total_current_fiscal_year()
+        self.partner._compute_invoice_total_current_fiscal_year()
 
         self.assertEqual(
             total_invoiced_in_current_year,

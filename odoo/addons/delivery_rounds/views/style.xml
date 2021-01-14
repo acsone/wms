@@ -1,9 +1,15 @@
 <odoo>
-
-    <template id="assets_delivery_round" name="delivery_rounds_assets" inherit_id="web.assets_backend">
-      <xpath expr="." position="inside">
-        <link rel="stylesheet" type="text/less" href="/delivery_rounds/static/src/css/delivery_round.less"/>
-      </xpath>
-    </template>
-
+  <template
+    id="assets_delivery_round"
+    name="delivery_rounds_assets"
+    inherit_id="web.assets_backend"
+  >
+    <xpath expr="." position="inside">
+      <link
+        rel="stylesheet"
+        type="text/less"
+        href="/delivery_rounds/static/src/css/delivery_round.less"
+      />
+    </xpath>
+  </template>
 </odoo>

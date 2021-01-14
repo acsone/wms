@@ -1,55 +1,49 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-
-    <record model="ir.ui.view" id="view_product_supplierinfo_specific_form">
-        <field name="name">product.supplierinfo.specific.form</field>
-        <field name="model">product.supplierinfo</field>
-        <field name="inherit_id" ref="product.product_supplierinfo_form_view"/>
-        <field name="priority">16</field>
-        <field name="arch" type="xml">
-
-            <xpath expr="//group[field[@name='product_tmpl_id']]" position="inside">
-                <field name="discount_purchase"/>
-            </xpath>
-
-            <xpath expr="//group[field[@name='product_tmpl_id']]" position="after">
-                <group string="Sale" name="sale">
-                    <field name="min_qty_sale" attrs="{'readonly': [('date_start', '=', False), ('date_end', '=', False)]}" widget="integer"/>
-                    <field name="discount_sale"/>
-                </group>
-            </xpath>
-
-            <xpath expr="//field[@name='min_qty']" position="attributes">
-                <attribute name="attrs">{'readonly': [('date_start', '=', False), ('date_end', '=', False)]}</attribute>
-                <attribute name="widget">integer</attribute>
-            </xpath>
-
-        </field>
-    </record>
-
-    <record model="ir.ui.view" id="view_product_supplierinfo_specific_tree">
-        <field name="name">product.supplierinfo.specific.tree</field>
-        <field name="model">product.supplierinfo</field>
-        <field name="inherit_id" ref="product.product_supplierinfo_tree_view"/>
-        <field name="arch" type="xml">
-
-            <xpath expr="//field[@name='sequence']" position="attributes">
-                <attribute name="widget"/>
-                <attribute name="invisible">1</attribute>
-            </xpath>
-
-            <xpath expr="//field[@name='min_qty']" position="attributes">
-                <attribute name="widget">integer</attribute>
-            </xpath>
-
-            <field name="date_start" position="before">
-                <field name="discount_purchase"/>
-                <field name="min_qty_sale" widget="integer"/>
-                <field name="discount_sale"/>
-            </field>
-
-        </field>
-    </record>
-
-
+  <record model="ir.ui.view" id="view_product_supplierinfo_specific_form">
+    <field name="name">product.supplierinfo.specific.form</field>
+    <field name="model">product.supplierinfo</field>
+    <field name="inherit_id" ref="product.product_supplierinfo_form_view" />
+    <field name="priority">16</field>
+    <field name="arch" type="xml">
+      <xpath expr="//group[field[@name='product_tmpl_id']]" position="inside">
+        <field name="discount_purchase" />
+      </xpath>
+      <xpath expr="//group[field[@name='product_tmpl_id']]" position="after">
+        <group string="Sale" name="sale">
+          <field
+            name="min_qty_sale"
+            attrs="{'readonly': [('date_start', '=', False), ('date_end', '=', False)]}"
+            widget="integer"
+          />
+          <field name="discount_sale" />
+        </group>
+      </xpath>
+      <xpath expr="//field[@name='min_qty']" position="attributes">
+        <attribute
+          name="attrs"
+        >{'readonly': [('date_start', '=', False), ('date_end', '=', False)]}</attribute>
+        <attribute name="widget">integer</attribute>
+      </xpath>
+    </field>
+  </record>
+  <record model="ir.ui.view" id="view_product_supplierinfo_specific_tree">
+    <field name="name">product.supplierinfo.specific.tree</field>
+    <field name="model">product.supplierinfo</field>
+    <field name="inherit_id" ref="product.product_supplierinfo_tree_view" />
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='sequence']" position="attributes">
+        <attribute name="widget" />
+        <attribute name="invisible">1</attribute>
+      </xpath>
+      <xpath expr="//field[@name='min_qty']" position="attributes">
+        <attribute name="widget">integer</attribute>
+      </xpath>
+      <field name="date_start" position="before">
+        <field name="discount_purchase" />
+        <field name="min_qty_sale" widget="integer" />
+        <field name="discount_sale" />
+      </field>
+    </field>
+  </record>
 </odoo>

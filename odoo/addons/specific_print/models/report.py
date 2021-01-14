@@ -5,6 +5,7 @@
 import unicodedata
 
 import lxml.html
+
 from odoo import api, models
 
 

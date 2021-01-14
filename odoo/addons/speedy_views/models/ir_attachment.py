@@ -15,7 +15,6 @@ class IrAttachment(models.Model):
     @api.model_cr
     def init(self):
         trgm_installed = install_trgm_extension(self.env)
-        self.env.cr.commit()
 
         if trgm_installed:
             index_name = "ir_attachment_url_trgm_index"

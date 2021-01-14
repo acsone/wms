@@ -5,7 +5,7 @@ from odoo import _, api, models
 from odoo.exceptions import UserError
 
 
-class product_price_list(models.TransientModel):
+class ProductPriceList(models.TransientModel):
     _inherit = "product.price_list"
 
     @api.multi
@@ -31,6 +31,4 @@ class product_price_list(models.TransientModel):
                 _("Unable to print pricelist for product with current model %s")
                 % active_model
             )
-        return super(
-            product_price_list, self.with_context(active_ids=ids)
-        ).print_report()
+        return super(ProductPriceList, self.with_context(active_ids=ids)).print_report()

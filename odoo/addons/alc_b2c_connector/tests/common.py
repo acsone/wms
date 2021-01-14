@@ -5,10 +5,11 @@
 import logging
 from contextlib import contextmanager
 
+from odoo.tools import mute_logger
+
 from odoo.addons.base_rest.controllers.main import _PseudoCollection
 from odoo.addons.component.core import WorkContext
 from odoo.addons.component.tests.common import SavepointComponentCase
-from odoo.tools import mute_logger
 
 from ..hooks import _initialize_product_assortment_filter
 from ..services.base_b2c_service import B2C_COLLECTION

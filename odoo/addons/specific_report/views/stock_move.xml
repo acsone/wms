@@ -1,24 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <record id="action_edit_serial_number" model="ir.actions.act_window">
-        <field name="name">Modify Serial Number</field>
-        <field name="res_model">modify.serial.number</field>
-        <field name="type">ir.actions.act_window</field>
-        <field name="view_type">form</field>
-        <field name="view_mode">form</field>
-        <field name="target">new</field>
-    </record>
-
-    <record id="view_move_picking_tree" model="ir.ui.view">
-        <field name="name">view_move_picking_tree inherit</field>
-        <field name="model">stock.move</field>
-        <field name="inherit_id" ref="stock.view_move_picking_tree" />
-        <field name="arch" type="xml">
-            <xpath expr="//field[@name='product_id']" position="after">
-                <field name="serial_number"/>
-                <button name="button_edit_serial_number" type="object" icon="fa-pencil"/>
-            </xpath>
-        </field>
-    </record>
-
+  <record id="action_edit_serial_number" model="ir.actions.act_window">
+    <field name="name">Modify Serial Number</field>
+    <field name="res_model">modify.serial.number</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="view_type">form</field>
+    <field name="view_mode">form</field>
+    <field name="target">new</field>
+  </record>
+  <record id="view_move_picking_tree" model="ir.ui.view">
+    <field name="name">view_move_picking_tree inherit</field>
+    <field name="model">stock.move</field>
+    <field name="inherit_id" ref="stock.view_move_picking_tree" />
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='product_id']" position="after">
+        <field name="serial_number" />
+        <button name="button_edit_serial_number" type="object" icon="fa-pencil" />
+      </xpath>
+    </field>
+  </record>
 </odoo>

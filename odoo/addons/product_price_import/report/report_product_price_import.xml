@@ -1,12 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-    <report
-        id="report_product_price_import_xlsx"
-        model="product.template"
-        string="Product prices export/import XLSX"
-        report_type="xlsx"
-        name="product_price_import.xlsx"
-        file="report.product.price.import.xlsx"
-        attachment_use="False"
-    />
+  <report
+    id="report_product_price_import_xlsx"
+    model="product.template"
+    string="Product prices export/import XLSX"
+    report_type="xlsx"
+    name="product_price_import.xlsx"
+    file="report.product.price.import.xlsx"
+    attachment_use="False"
+  />
 </odoo>

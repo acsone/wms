@@ -1,16 +1,12 @@
-<?xml version="1.0"?>
+<?xml version="1.0" ?>
 <odoo noupdate="0">
-
   <record id="base.lang_fr_BE" model="res.lang">
     <field name="esb_ref">FR</field>
   </record>
-
   <record id="base.lang_nl_BE" model="res.lang">
     <field name="esb_ref">NL</field>
   </record>
-
   <record id="base.lang_de" model="res.lang">
     <field name="esb_ref">DE</field>
   </record>
-
 </odoo>

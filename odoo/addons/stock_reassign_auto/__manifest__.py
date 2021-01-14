@@ -4,7 +4,7 @@
 
 {
     "name": "Stock Reassign Auto",
-    "version": "1.0",
+    "version": "10.0.1.0.0",
     "author": "BCIM",
     "category": "Stock Management",
     "depends": [

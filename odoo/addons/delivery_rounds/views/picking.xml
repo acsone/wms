@@ -1,132 +1,159 @@
-<?xml version="1.0"?>
+<?xml version="1.0" ?>
 <odoo>
-
-    <record id="view_picking_internal_search" model="ir.ui.view">
-        <field name="name">stock.picking.search.round</field>
-        <field name="model">stock.picking</field>
-        <field name="inherit_id" ref="stock.view_picking_internal_search"/>
-        <field name="arch" type="xml">
-            <field name="partner_id" position="after">
-                <filter name="partner_delivery_itinerary_id" domain="[('partner_id.round_itinerary_ids', '=', False)]" string="Delivery Itinerary Missing"/>
-            </field>
-            <field name="picking_type_id" position="after">
-                <field name="delivery_round_id"/>
-                <field name="delivery_round_launched"/>
-            </field>
-            <xpath expr="//filter[@name='picking_type']" position="after">
-                <filter name="delivery_round" string="Delivery Round" domain="[]" context="{'group_by':'delivery_round_id'}"/>
-            </xpath>
-        </field>
-    </record>
-
-    <record id="view_vpicktree" model="ir.ui.view">
-        <field name="name">stock.picking.tree.round</field>
-        <field name="model">stock.picking</field>
-        <field name="inherit_id" ref="stock.vpicktree"/>
-        <field name="arch" type="xml">
-            <field name="partner_id" position="after">
-                <field name="partner_itinerary_ids" widget="many2many_tags"/>
-            </field>
-            <field name="state" position="after">
-                <field name="picking_type_code"/>
-                <field name="delivery_round_id"/>
-                <field name="printed" invisible="1"/>
-                <button name="button_delivery_round" type="object"
-                    attrs="{'invisible': ['|', '|', ('printed', '!=', False), ('picking_type_code', '!=', 'outgoing'), ('state', 'in', ['draft', 'cancel', 'done'])]}"
-                    icon="fa-pencil"
-                    help="Include in a delivery round"
-                    context="{'manual_change_delivery_round': True}"
-                    />
-            </field>
-        </field>
-    </record>
-
-
-    <record id="view_vpicktree_ro" model="ir.ui.view">
-        <field name="name">stock.picking.tree.round</field>
-        <field name="model">stock.picking</field>
-        <field name="arch" type="xml">
-            <tree decoration-info="state == 'draft'" decoration-muted="state == 'cancel'" decoration-danger="state not in ('cancel', 'done') and min_date &lt; current_date" string="Picking list" create="false" delete="false" edit="false" >
-                <field name="rank"/>
-                <field name="name"/>
-                <field name="operator_id"/>
-                <field name="location_dest_id"/>
-                <field name="partner_id"/>
-                <field name="partner_itinerary_ids" widget="many2many_tags"/>
-                <field name="date" invisible="1"/>
-                <field name="min_date"/>
-                <field name="origin"/>
-                <field name="group_id" invisible="1"/>
-                <field name="state"/>
-                <field name="delivery_round_id"/>
-                <field name="shipping_weight"/>
-                <field name="priority" invisible="1"/>
-                <field name="picking_type_id" invisible="0"/>
-            </tree>
-        </field>
-    </record>
-
-
-    <record id="action_picking_tree_round" model="ir.actions.act_window">
-        <field name="name">Stock Operations</field>
-        <field name="res_model">stock.picking</field>
-        <field name="type">ir.actions.act_window</field>
-        <field name="view_type">form</field>
-        <field name="view_mode">tree,kanban,form,calendar</field>
-        <field name="domain">[('picking_type_subcode', '=', 'PICK')]</field>
-        <field name="context">{
+  <record id="view_picking_internal_search" model="ir.ui.view">
+    <field name="name">stock.picking.search.round</field>
+    <field name="model">stock.picking</field>
+    <field name="inherit_id" ref="stock.view_picking_internal_search" />
+    <field name="arch" type="xml">
+      <field name="partner_id" position="after">
+        <filter
+          name="partner_delivery_itinerary_id"
+          domain="[('partner_id.round_itinerary_ids', '=', False)]"
+          string="Delivery Itinerary Missing"
+        />
+      </field>
+      <field name="picking_type_id" position="after">
+        <field name="delivery_round_id" />
+        <field name="delivery_round_launched" />
+      </field>
+      <xpath expr="//filter[@name='picking_type']" position="after">
+        <filter
+          name="delivery_round"
+          string="Delivery Round"
+          domain="[]"
+          context="{'group_by':'delivery_round_id'}"
+        />
+      </xpath>
+    </field>
+  </record>
+  <record id="view_vpicktree" model="ir.ui.view">
+    <field name="name">stock.picking.tree.round</field>
+    <field name="model">stock.picking</field>
+    <field name="inherit_id" ref="stock.vpicktree" />
+    <field name="arch" type="xml">
+      <field name="partner_id" position="after">
+        <field name="partner_itinerary_ids" widget="many2many_tags" />
+      </field>
+      <field name="state" position="after">
+        <field name="picking_type_code" />
+        <field name="delivery_round_id" />
+        <field name="printed" invisible="1" />
+        <button
+          name="button_delivery_round"
+          type="object"
+          attrs="{'invisible': ['|', '|', ('printed', '!=', False), ('picking_type_code', '!=', 'outgoing'), ('state', 'in', ['draft', 'cancel', 'done'])]}"
+          icon="fa-pencil"
+          help="Include in a delivery round"
+          context="{'manual_change_delivery_round': True}"
+        />
+      </field>
+    </field>
+  </record>
+  <record id="view_vpicktree_ro" model="ir.ui.view">
+    <field name="name">stock.picking.tree.round</field>
+    <field name="model">stock.picking</field>
+    <field name="arch" type="xml">
+      <tree
+        decoration-info="state == 'draft'"
+        decoration-muted="state == 'cancel'"
+        decoration-danger="state not in ('cancel', 'done') and min_date &lt; current_date"
+        string="Picking list"
+        create="false"
+        delete="false"
+        edit="false"
+      >
+        <field name="rank" />
+        <field name="name" />
+        <field name="operator_id" />
+        <field name="location_dest_id" />
+        <field name="partner_id" />
+        <field name="partner_itinerary_ids" widget="many2many_tags" />
+        <field name="date" invisible="1" />
+        <field name="min_date" />
+        <field name="origin" />
+        <field name="group_id" invisible="1" />
+        <field name="state" />
+        <field name="delivery_round_id" />
+        <field name="shipping_weight" />
+        <field name="priority" invisible="1" />
+        <field name="picking_type_id" invisible="0" />
+      </tree>
+    </field>
+  </record>
+  <record id="action_picking_tree_round" model="ir.actions.act_window">
+    <field name="name">Stock Operations</field>
+    <field name="res_model">stock.picking</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="view_type">form</field>
+    <field name="view_mode">tree,kanban,form,calendar</field>
+    <field name="domain">[('picking_type_subcode', '=', 'PICK')]</field>
+    <field name="context">{
                 'contact_display': 'partner_address',
                 'search_default_available': 1,
         }
         </field>
-        <field name="view_id" ref="view_vpicktree_ro"/>
-        <field name="search_view_id" ref="stock.view_picking_internal_search"/>
-        <field name="help" type="html">
-          <p>
+    <field name="view_id" ref="view_vpicktree_ro" />
+    <field name="search_view_id" ref="stock.view_picking_internal_search" />
+    <field name="help" type="html">
+      <p>
             List of pickings to process. Only pickings linked to confirmed delivery rounds are displayed.
           </p>
-        </field>
-    </record>
-    <record id="action_picking_tree_noround" model="ir.actions.act_window">
-        <field name="name">Unassigned Pickings</field>
-        <field name="res_model">stock.picking</field>
-        <field name="type">ir.actions.act_window</field>
-        <field name="view_type">form</field>
-        <field name="view_mode">tree,kanban,form,calendar</field>
-        <field name="domain">[('delivery_round_id', '=', False), ('picking_type_subcode', '=', 'PICK'), ('state', 'not in', ('done', 'cancel'))]</field>
-        <field name="context">{
+    </field>
+  </record>
+  <record id="action_picking_tree_noround" model="ir.actions.act_window">
+    <field name="name">Unassigned Pickings</field>
+    <field name="res_model">stock.picking</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="view_type">form</field>
+    <field name="view_mode">tree,kanban,form,calendar</field>
+    <field
+      name="domain"
+    >[('delivery_round_id', '=', False), ('picking_type_subcode', '=', 'PICK'), ('state', 'not in', ('done', 'cancel'))]</field>
+    <field name="context">{
                 'contact_display': 'partner_address',
         }
         </field>
-        <field name="view_id" ref="view_vpicktree_ro"/>
-        <field name="search_view_id" ref="stock.view_picking_internal_search"/>
-        <field name="help" type="html">
-          <p>
+    <field name="view_id" ref="view_vpicktree_ro" />
+    <field name="search_view_id" ref="stock.view_picking_internal_search" />
+    <field name="help" type="html">
+      <p>
             List of pickings that are not assigned to a delivery round. Ensure the delivery address is part of a itinerary.
           </p>
-        </field>
-    </record>
-    <menuitem id="menu_round_picking_unassigned" name="Unassigned Pickings" parent="menu_delivery_round" sequence="40" action="action_picking_tree_noround" groups="stock.group_stock_manager,stock.group_stock_user"/>
-    <record id="action_picking_tree_available_round" model="ir.actions.act_window">
-        <field name="name">Stock Operations</field>
-        <field name="res_model">stock.picking</field>
-        <field name="type">ir.actions.act_window</field>
-        <field name="view_type">form</field>
-        <field name="view_mode">tree,kanban,form,calendar</field>
-        <field name="domain">[('picking_type_subcode', '=', 'PICK')]</field>
-        <field name="context">{
+    </field>
+  </record>
+  <menuitem
+    id="menu_round_picking_unassigned"
+    name="Unassigned Pickings"
+    parent="menu_delivery_round"
+    sequence="40"
+    action="action_picking_tree_noround"
+    groups="stock.group_stock_manager,stock.group_stock_user"
+  />
+  <record id="action_picking_tree_available_round" model="ir.actions.act_window">
+    <field name="name">Stock Operations</field>
+    <field name="res_model">stock.picking</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="view_type">form</field>
+    <field name="view_mode">tree,kanban,form,calendar</field>
+    <field name="domain">[('picking_type_subcode', '=', 'PICK')]</field>
+    <field name="context">{
                 'search_default_delivery_round_id': active_id,
         }
         </field>
-        <field name="view_id" ref="view_vpicktree_ro"/>
-        <field name="search_view_id" ref="stock.view_picking_internal_search"/>
-        <field name="help" type="html">
-          <p>
+    <field name="view_id" ref="view_vpicktree_ro" />
+    <field name="search_view_id" ref="stock.view_picking_internal_search" />
+    <field name="help" type="html">
+      <p>
             List of pickings attached to a delivery round.
           </p>
-        </field>
-    </record>
-    <menuitem id="menu_round_picking" name="Rounds' Pickings" parent="menu_delivery_round" sequence="50" action="action_picking_tree_round" groups="stock.group_stock_manager,stock.group_stock_user"/>
-
-
+    </field>
+  </record>
+  <menuitem
+    id="menu_round_picking"
+    name="Rounds' Pickings"
+    parent="menu_delivery_round"
+    sequence="50"
+    action="action_picking_tree_round"
+    groups="stock.group_stock_manager,stock.group_stock_user"
+  />
 </odoo>

@@ -1,154 +1,151 @@
 .stock_location_barcode_4x2 {
+  .container {
+    display: inline-block;
+    width: 450px;
+    height: 460px; // =1320/4
+    justify-content: space-around;
+    overflow: hidden;
+  }
 
-    .container {
-        display:inline-block;
-        width: 450px;
-        height: 460px; // =1320/4
-        justify-content: space-around;
-        overflow:hidden;
-    }
+  .container:nth-child(odd) {
+    margin-right: 50px;
+    margin-left: 0;
+  }
+  .container:nth-child(even) {
+    margin-left: 0;
+    margin-right: 0;
+  }
 
-    .container:nth-child(odd) {
-        margin-right: 50px;
-        margin-left: 0;
-    }
-    .container:nth-child(even) {
-        margin-left: 0;
-        margin-right: 0;
-    }
+  .barcode_name {
+    position: relative !important; // relative position and size compared to the main container
+    width: 100%;
+    height: 45%; // size relative to the main container box
+    padding-top: 45px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    font-size: 80px;
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    z-index: 100;
+    transform: scale(1, 3);
+    -webkit-transform: scale(1, 3);
+  }
 
-    .barcode_name {
-        position: relative!important; // relative position and size compared to the main container
-        width: 100%;
-        height: 45%;// size relative to the main container box
-        padding-top: 45px;
-        text-align: center;
-        justify-content: center;
-        align-items: center;
-        font-size: 80px;
-        font-weight: bold;
-        white-space: nowrap;
-        overflow:hidden;
-        z-index: 100;
-        transform: scale(1, 3);
-        -webkit-transform: scale(1,3);
-    }
-  
-    .barcode {
-        position: fixed!important;
-        padding-top:-30px;
-        margin-left:-30px;
-        float:left;
-        width: 86%;
-        height: 50%; 
-        z-index: 1;
-    }
-    .barcode_checksum {
-        padding-top: 5px;
-        text-align: center!important;
-        align-items: center!important;
-        position: relative!important;
-        float:right;
-        font-size: 48px;
-        background-color: lightgray !important; 
-        border: 2px solid black;
-        width: 20%;
-        height: 15%; // =1320/4
-        z-index: 10;
-        justify-content: center!important;
-    }
+  .barcode {
+    position: fixed !important;
+    padding-top: -30px;
+    margin-left: -30px;
+    float: left;
+    width: 86%;
+    height: 50%;
+    z-index: 1;
+  }
+  .barcode_checksum {
+    padding-top: 5px;
+    text-align: center !important;
+    align-items: center !important;
+    position: relative !important;
+    float: right;
+    font-size: 48px;
+    background-color: lightgray !important;
+    border: 2px solid black;
+    width: 20%;
+    height: 15%; // =1320/4
+    z-index: 10;
+    justify-content: center !important;
+  }
 
-    .reserve {
-        height: 330px; // =1170/4
-    }
-    .bin, .parking {
-        height: 330px; // =1170/4 (no-margin paper)
-    }
+  .reserve {
+    height: 330px; // =1170/4
+  }
+  .bin,
+  .parking {
+    height: 330px; // =1170/4 (no-margin paper)
+  }
 
-    .reserve .barcode_name {
-        position: relative!important; // relative position and size compared to the main container
-        width: 100%;
-        height: 55%;// size relative to the main container box
-        padding-top: 0px;
-        margin-top:150px;
-        font-size: 80px;
-        overflow:hidden;
-    }
+  .reserve .barcode_name {
+    position: relative !important; // relative position and size compared to the main container
+    width: 100%;
+    height: 55%; // size relative to the main container box
+    padding-top: 0px;
+    margin-top: 150px;
+    font-size: 80px;
+    overflow: hidden;
+  }
 
-    .reserve .barcode {
-        position: fixed!important;
-        margin-top:-75px;
-        margin-left:-30px;
-        float:left;
-        width: 86%;
-        height: 50%; 
-    }
+  .reserve .barcode {
+    position: fixed !important;
+    margin-top: -75px;
+    margin-left: -30px;
+    float: left;
+    width: 86%;
+    height: 50%;
+  }
 
-    .reserve .barcode_checksum {
-        position: relative!important;
-        margin-top:-75px;
-        font-size: 45px;
-        float:right;
-        width: 18%;
-        height: 22%; 
-    }
+  .reserve .barcode_checksum {
+    position: relative !important;
+    margin-top: -75px;
+    font-size: 45px;
+    float: right;
+    width: 18%;
+    height: 22%;
+  }
 
+  .bin .barcode_name {
+    position: relative !important; // relative position and size compared to the main container
+    width: 100%;
+    height: 55%; // size relative to the main container box
+    padding-top: 0px;
+    margin-top: 150px;
+    font-size: 80px;
+    overflow: hidden;
+  }
 
-    .bin .barcode_name {
-        position: relative!important; // relative position and size compared to the main container
-        width: 100%;
-        height: 55%;// size relative to the main container box
-        padding-top: 0px;
-        margin-top:150px;
-        font-size: 80px;
-        overflow:hidden;
-    }
+  .bin .barcode {
+    position: fixed !important;
+    margin-top: -75px;
+    margin-left: -30px;
+    float: left;
+    width: 86%;
+    height: 50%;
+  }
 
-    .bin .barcode {
-        position: fixed!important;
-        margin-top:-75px;
-        margin-left:-30px;
-        float:left;
-        width: 86%;
-        height: 50%; 
-    }
+  .bin .barcode_checksum {
+    position: relative !important;
+    margin-top: -75px;
+    font-size: 45px;
+    float: right;
+    width: 18%;
+    height: 22%;
+  }
 
-    .bin .barcode_checksum {
-        position: relative!important;
-        margin-top:-75px;
-        font-size: 45px;
-        float:right;
-        width: 18%;
-        height: 22%; 
-    }
+  .parking .barcode_name {
+    position: relative !important; // relative position and size compared to the main container
+    width: 100%;
+    height: 55%; // size relative to the main container box
+    padding-top: 0px;
+    margin-top: 150px;
+    font-size: 80px;
+    overflow: hidden;
+  }
 
+  .parking .barcode {
+    position: fixed !important;
+    margin-top: -75px;
+    margin-left: -30px;
+    float: left;
+    width: 86%;
+    height: 50%;
+  }
 
-    .parking .barcode_name {
-        position: relative!important; // relative position and size compared to the main container
-        width: 100%;
-        height: 55%;// size relative to the main container box
-        padding-top: 0px;
-        margin-top:150px;
-        font-size: 80px;
-        overflow:hidden;
-    }
-
-    .parking .barcode {
-        position: fixed!important;
-        margin-top:-75px;
-        margin-left:-30px;
-        float:left;
-        width: 86%;
-        height: 50%; 
-    }
-
-    .parking .barcode_checksum {
-        position: relative!important;
-        margin-top:-75px;
-        font-size: 45px;
-        float:right;
-        width: 18%;
-        height: 22%; 
-    }
-
+  .parking .barcode_checksum {
+    position: relative !important;
+    margin-top: -75px;
+    font-size: 45px;
+    float: right;
+    width: 18%;
+    height: 22%;
+  }
 }

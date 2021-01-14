@@ -6,7 +6,7 @@
     "name": "Alc Product Audit",
     "description": """
         Custom filter for Alcyon products""",
-    "version": "10",
+    "version": "10.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": [

@@ -1,39 +1,38 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <record id="product_state_a" model="product.state">
-        <field name="name">Article de remplacement</field>
-        <field name="code">A</field>
-        <field name="sequence">1</field>
-    </record>
-    <record id="product_state_d" model="product.state">
-        <field name="name">Article déffectueux en attente du fournisseur</field>
-        <field name="code">D</field>
-        <field name="sequence">2</field>
-    </record>
-    <record id="product_state_h" model="product.state">
-        <field name="name">Rupture chez le founisseur</field>
-        <field name="code">H</field>
-        <field name="sequence">3</field>
-    </record>
-    <record id="product_state_i" model="product.state">
-        <field name="name">Médicaments humain avec importé équivalent</field>
-        <field name="code">I</field>
-        <field name="sequence">4</field>
-    </record>
-    <record id="product_state_l" model="product.state">
-        <field name="name">Article retiré de la vente</field>
-        <field name="code">L</field>
-        <field name="sequence">5</field>
-    </record>
-    <record id="product_state_m" model="product.state">
-        <field name="name">Article retiré de la vente et remplacé</field>
-        <field name="code">M</field>
-        <field name="sequence">6</field>
-    </record>
-    <record id="product_state_n" model="product.state">
-        <field name="name">Article non suivi par Alcyon</field>
-        <field name="code">N</field>
-        <field name="sequence">7</field>
-    </record>
-
+  <record id="product_state_a" model="product.state">
+    <field name="name">Article de remplacement</field>
+    <field name="code">A</field>
+    <field name="sequence">1</field>
+  </record>
+  <record id="product_state_d" model="product.state">
+    <field name="name">Article déffectueux en attente du fournisseur</field>
+    <field name="code">D</field>
+    <field name="sequence">2</field>
+  </record>
+  <record id="product_state_h" model="product.state">
+    <field name="name">Rupture chez le founisseur</field>
+    <field name="code">H</field>
+    <field name="sequence">3</field>
+  </record>
+  <record id="product_state_i" model="product.state">
+    <field name="name">Médicaments humain avec importé équivalent</field>
+    <field name="code">I</field>
+    <field name="sequence">4</field>
+  </record>
+  <record id="product_state_l" model="product.state">
+    <field name="name">Article retiré de la vente</field>
+    <field name="code">L</field>
+    <field name="sequence">5</field>
+  </record>
+  <record id="product_state_m" model="product.state">
+    <field name="name">Article retiré de la vente et remplacé</field>
+    <field name="code">M</field>
+    <field name="sequence">6</field>
+  </record>
+  <record id="product_state_n" model="product.state">
+    <field name="name">Article non suivi par Alcyon</field>
+    <field name="code">N</field>
+    <field name="sequence">7</field>
+  </record>
 </odoo>

@@ -1,83 +1,90 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <!-- Copyright 2020 ACSONE SA/NV
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
-
 <odoo>
-
-    <record model="ir.ui.view" id="account_move_line_with_analytic_category_tree_view">
-        <field name="name">account.move.line.with.analytic.category.tree (in alc_analytic_category_report)</field>
-        <field name="model">account.move.line.with.analytic.category</field>
-        <field name="arch" type="xml">
-            <tree>
-                <field name="company_id" groups="base.group_multi_company"/>
-                <field name="date"/>
-                <field name="account_id"/>
-                <field name="user_type_id"/>
-                <field name="analytic_account_id"/>
-                <field name="tag_1_id"/>
-                <field name="tag_2_id"/>
-                <field name="tag_3_id"/>
-                <field name="product_id"/>
-                <field name="journal_id"/>
-                <field name="partner_id"/>
-                <field name="company_currency_id"/>
-                <field name="ref"/>
-                <field name="quantity"/>
-                <field name="move_id"/>
-                <field name="amount"/>
-                <field name="name"/>
-            </tree>
-        </field>
-    </record>
-
-    <record id="account_move_line_with_analytic_category_pivot_view" model="ir.ui.view">
-        <field name="name">account.move.line.with.analytic.category.pivot (in alc_analytic_category_report)</field>
-        <field name="model">account.move.line.with.analytic.category</field>
-        <field name="arch" type="xml">
-            <pivot string="Analytic Analysis">
-                <field name="tag_1_id" type="row"/>
-                <field name="tag_2_id" type="row"/>
-                <field name="tag_3_id" type="row"/>
-                <field name="amount" type="measure"/>
-            </pivot>
-        </field>
-    </record>
-
-    <record model="ir.ui.view" id="account_move_line_with_analytic_category_search_view">
-        <field name="name">account.move.line.with.analytic.category.search (in alc_analytic_category_report)</field>
-        <field name="model">account.move.line.with.analytic.category</field>
-        <field name="priority" eval="20"/>
-        <field name="arch" type="xml">
-            <search>
-                <field name="name" filter_domain="['|', ('name','ilike',self), ('ref','ilike',self)]" string="Move"/>
-                <field name="move_id" string="Number (Move)"/>
-                <field name="account_id"/>
-                <field name="analytic_account_id"/>
-                <field name="tag_1_id"/>
-                <field name="tag_2_id"/>
-                <field name="tag_3_id"/>
-                <field name="partner_id"/>
-                <field name="journal_id"/>
-            </search>
-        </field>
-    </record>
-
-    <record model="ir.actions.act_window" id="analytic_analysis_act_window">
-        <field name="name">Analytic Analysis</field>
-        <field name="res_model">account.move.line.with.analytic.category</field>
-        <field name="view_mode">tree,pivot</field>
-        <field name="domain">[]</field>
-        <field name="context">{}</field>
-    </record>
-
-    <record model="ir.ui.menu" id="analytic_analysis_menu">
-        <field name="name">Analytic Analysis</field>
-        <field name="parent_id" ref="account.menu_finance_reports"/>
-        <field name="action" ref="analytic_analysis_act_window"/>
-        <field name="sequence" eval="202"/>
-    </record>
-
-    <menuitem id="analytic_analysis_view_menu" parent="account.account_reports_business_intelligence_menu" name="Analytic Analysis" action="analytic_analysis_act_window" sequence="23"/>
-
-
+  <record model="ir.ui.view" id="account_move_line_with_analytic_category_tree_view">
+    <field
+      name="name"
+    >account.move.line.with.analytic.category.tree (in alc_analytic_category_report)</field>
+    <field name="model">account.move.line.with.analytic.category</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="company_id" groups="base.group_multi_company" />
+        <field name="date" />
+        <field name="account_id" />
+        <field name="user_type_id" />
+        <field name="analytic_account_id" />
+        <field name="tag_1_id" />
+        <field name="tag_2_id" />
+        <field name="tag_3_id" />
+        <field name="product_id" />
+        <field name="journal_id" />
+        <field name="partner_id" />
+        <field name="company_currency_id" />
+        <field name="ref" />
+        <field name="quantity" />
+        <field name="move_id" />
+        <field name="amount" />
+        <field name="name" />
+      </tree>
+    </field>
+  </record>
+  <record id="account_move_line_with_analytic_category_pivot_view" model="ir.ui.view">
+    <field
+      name="name"
+    >account.move.line.with.analytic.category.pivot (in alc_analytic_category_report)</field>
+    <field name="model">account.move.line.with.analytic.category</field>
+    <field name="arch" type="xml">
+      <pivot string="Analytic Analysis">
+        <field name="tag_1_id" type="row" />
+        <field name="tag_2_id" type="row" />
+        <field name="tag_3_id" type="row" />
+        <field name="amount" type="measure" />
+      </pivot>
+    </field>
+  </record>
+  <record model="ir.ui.view" id="account_move_line_with_analytic_category_search_view">
+    <field
+      name="name"
+    >account.move.line.with.analytic.category.search (in alc_analytic_category_report)</field>
+    <field name="model">account.move.line.with.analytic.category</field>
+    <field name="priority" eval="20" />
+    <field name="arch" type="xml">
+      <search>
+        <field
+          name="name"
+          filter_domain="['|', ('name','ilike',self), ('ref','ilike',self)]"
+          string="Move"
+        />
+        <field name="move_id" string="Number (Move)" />
+        <field name="account_id" />
+        <field name="analytic_account_id" />
+        <field name="tag_1_id" />
+        <field name="tag_2_id" />
+        <field name="tag_3_id" />
+        <field name="partner_id" />
+        <field name="journal_id" />
+      </search>
+    </field>
+  </record>
+  <record model="ir.actions.act_window" id="analytic_analysis_act_window">
+    <field name="name">Analytic Analysis</field>
+    <field name="res_model">account.move.line.with.analytic.category</field>
+    <field name="view_mode">tree,pivot</field>
+    <field name="domain">[]</field>
+    <field name="context">{}</field>
+  </record>
+  <record model="ir.ui.menu" id="analytic_analysis_menu">
+    <field name="name">Analytic Analysis</field>
+    <field name="parent_id" ref="account.menu_finance_reports" />
+    <field name="action" ref="analytic_analysis_act_window" />
+    <field name="sequence" eval="202" />
+  </record>
+  <menuitem
+    id="analytic_analysis_view_menu"
+    parent="account.account_reports_business_intelligence_menu"
+    name="Analytic Analysis"
+    action="analytic_analysis_act_window"
+    sequence="23"
+  />
 </odoo>

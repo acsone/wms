@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
 from datetime import datetime
 
+import mock
 from dateutil.relativedelta import relativedelta
 
-import mock
 from odoo import _, fields
+from odoo.tools import mute_logger
+
 from odoo.addons.queue_job.job import Job
 from odoo.addons.queue_job.tests.common import JobMixin
-from odoo.tools import mute_logger
 
 from .. import constants
 from ..tools.domain_assignment import Assignment

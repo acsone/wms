@@ -34,7 +34,7 @@
       <!-- volume -->
       <Cp2z08>10.00</Cp2z08>
       <!-- Free product you get -->
-      <Cp2z22></Cp2z22>
+      <Cp2z22 />
       <!-- Qantity needed to get free product -->
       <Cp2z23>0</Cp2z23>
       <!-- Quantity of free product you get -->
@@ -120,17 +120,17 @@
       <!-- volume -->
       <Cp2z08>5.00</Cp2z08>
       <!-- Free product you get -->
-      <Cp2z22></Cp2z22>
+      <Cp2z22 />
       <!-- Qantity needed to get free product -->
       <Cp2z23>0</Cp2z23>
       <!-- Quantity of free product you get -->
       <Cp2z24>0</Cp2z24>
       <!-- comment DE -->
-      <Warceg></Warceg>
+      <Warceg />
       <!-- comment FR -->
-      <Warcfr></Warcfr>
+      <Warcfr />
       <!-- comment NL BE -->
-      <Warcnl></Warcnl>
+      <Warcnl />
       <!-- VAT rate -->
       <Gesctv>009</Gesctv>
       <!-- lot tracking enabled -->
@@ -140,7 +140,7 @@
       <!-- stockable -->
       <Gescge>0</Gescge>
       <!-- Business unit ALI/MAT/MED/999 (humains) -->
-      <Cplz14></Cplz14>
+      <Cplz14 />
       <!-- SKU of the tax -->
       <Cplz07>CCC</Cplz07>
       <!-- always 0 -->
@@ -212,11 +212,11 @@
       <!-- Quantity of free product you get -->
       <Cp2z24>1</Cp2z24>
       <!-- comment DE -->
-      <Warceg></Warceg>
+      <Warceg />
       <!-- comment FR -->
-      <Warcfr></Warcfr>
+      <Warcfr />
       <!-- comment NL BE -->
-      <Warcnl></Warcnl>
+      <Warcnl />
       <!-- VAT rate -->
       <Gesctv>006</Gesctv>
       <!-- lot tracking enabled -->
@@ -226,7 +226,7 @@
       <!-- stockable -->
       <Gescge>1</Gescge>
       <!-- Business unit ALI/MAT/MED/999 (humains) -->
-      <Cplz14></Cplz14>
+      <Cplz14 />
       <!-- SKU of the tax -->
       <Cplz07>BBB</Cplz07>
       <!-- always 0 -->

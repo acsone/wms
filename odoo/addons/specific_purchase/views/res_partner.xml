@@ -1,39 +1,70 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-
-    <record id="view_partner_form" model="ir.ui.view">
-        <field name="name">view.partner.form</field>
-        <field name="inherit_id" ref="alc_supplier_purchase_manager.res_partner_form_view" />
-        <field name="model">res.partner</field>
-        <field name="priority">20</field>
-        <field name="arch" type="xml">
-
-            <field name="substitute_purchase_manager_id" position="after">
-                <field name="supplier_discount"/>
-                <field name="delivery_lead_time"/>
-                <label string="Days for management"/>
-                <table class="table table-bordered text-center table-condensed" style="width: auto;">
-                    <tr>
-                        <th><label for="is_manage_day_1"/></th>
-                        <th><label for="is_manage_day_2"/></th>
-                        <th><label for="is_manage_day_3"/></th>
-                        <th><label for="is_manage_day_4"/></th>
-                        <th><label for="is_manage_day_5"/></th>
-                        <th><label for="is_manage_day_6"/></th>
-                        <th><label for="is_manage_day_7"/></th>
-                    </tr>
-                    <tr>
-                        <td><field name="is_manage_day_1" nolabel="1"/></td>
-                        <td><field name="is_manage_day_2" nolabel="1"/></td>
-                        <td><field name="is_manage_day_3" nolabel="1"/></td>
-                        <td><field name="is_manage_day_4" nolabel="1"/></td>
-                        <td><field name="is_manage_day_5" nolabel="1"/></td>
-                        <td><field name="is_manage_day_6" nolabel="1"/></td>
-                        <td><field name="is_manage_day_7" nolabel="1"/></td>
-                    </tr>
-                </table>
-            </field>
-        </field>
-    </record>
-
+  <record id="view_partner_form" model="ir.ui.view">
+    <field name="name">view.partner.form</field>
+    <field
+      name="inherit_id"
+      ref="alc_supplier_purchase_manager.res_partner_form_view"
+    />
+    <field name="model">res.partner</field>
+    <field name="priority">20</field>
+    <field name="arch" type="xml">
+      <field name="substitute_purchase_manager_id" position="after">
+        <field name="supplier_discount" />
+        <field name="delivery_lead_time" />
+        <label string="Days for management" />
+        <table
+          class="table table-bordered text-center table-condensed"
+          style="width: auto;"
+        >
+          <tr>
+            <th>
+              <label for="is_manage_day_1" />
+            </th>
+            <th>
+              <label for="is_manage_day_2" />
+            </th>
+            <th>
+              <label for="is_manage_day_3" />
+            </th>
+            <th>
+              <label for="is_manage_day_4" />
+            </th>
+            <th>
+              <label for="is_manage_day_5" />
+            </th>
+            <th>
+              <label for="is_manage_day_6" />
+            </th>
+            <th>
+              <label for="is_manage_day_7" />
+            </th>
+          </tr>
+          <tr>
+            <td>
+              <field name="is_manage_day_1" nolabel="1" />
+            </td>
+            <td>
+              <field name="is_manage_day_2" nolabel="1" />
+            </td>
+            <td>
+              <field name="is_manage_day_3" nolabel="1" />
+            </td>
+            <td>
+              <field name="is_manage_day_4" nolabel="1" />
+            </td>
+            <td>
+              <field name="is_manage_day_5" nolabel="1" />
+            </td>
+            <td>
+              <field name="is_manage_day_6" nolabel="1" />
+            </td>
+            <td>
+              <field name="is_manage_day_7" nolabel="1" />
+            </td>
+          </tr>
+        </table>
+      </field>
+    </field>
+  </record>
 </odoo>

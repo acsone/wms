@@ -1,27 +1,22 @@
-<?xml version="1.0"?>
+<?xml version="1.0" ?>
 <odoo>
-
   <record id="product_storage_temperature_ambient" model="product.storage.temperature">
     <field name="name">Température ambiante</field>
     <field name="esb_ref">0</field>
   </record>
-
   <record id="product_storage_temperature_minus_12" model="product.storage.temperature">
     <field name="name">Température -12°C</field>
     <field name="temperature">-12</field>
     <field name="esb_ref">2</field>
   </record>
-
   <record id="product_storage_temperature_15" model="product.storage.temperature">
     <field name="name">Température 15°C</field>
     <field name="temperature">15</field>
     <field name="esb_ref">5</field>
   </record>
-
   <record id="product_storage_temperature_6" model="product.storage.temperature">
     <field name="name">Température 6°C</field>
     <field name="temperature">6</field>
     <field name="esb_ref">6</field>
   </record>
-
 </odoo>

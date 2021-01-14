@@ -3,9 +3,11 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import pytz
+
 from odoo import _, fields
-from odoo.addons.component.core import AbstractComponent
 from odoo.exceptions import AccessDenied
+
+from odoo.addons.component.core import AbstractComponent
 
 B2C_COLLECTION = "b2c.collection"
 

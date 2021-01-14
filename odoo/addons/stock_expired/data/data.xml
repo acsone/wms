@@ -1,26 +1,24 @@
-<?xml version="1.0"?>
+<?xml version="1.0" ?>
 <odoo noupdate="1">
-
-        <!--
+  <!--
         Scrap Picking Type
         -->
-        <record model="stock.picking.type" forcecreate="True" id="picking_type_scrap">
-            <field name="name">Scrap</field>
-            <field name="sequence_id" ref="stock.seq_picking_internal"/>
-            <field name="warehouse_id" eval="0"/>
-            <field name="code">internal</field>
-            <field name="default_location_src_id" ref="stock.stock_location_stock"/>
-            <field name="default_location_dest_id" ref="stock.stock_location_scrapped"/>
-        </record>
-
-        <!--
+  <record model="stock.picking.type" forcecreate="True" id="picking_type_scrap">
+    <field name="name">Scrap</field>
+    <field name="sequence_id" ref="stock.seq_picking_internal" />
+    <field name="warehouse_id" eval="0" />
+    <field name="code">internal</field>
+    <field name="default_location_src_id" ref="stock.stock_location_stock" />
+    <field name="default_location_dest_id" ref="stock.stock_location_scrapped" />
+  </record>
+  <!--
         EMAIL TEMPLATE
         -->
-        <record id="email_template_alert_quant_expired" model="mail.template">
-            <field name="name">Alert quant expired</field>
-            <field name="model_id" ref="stock.model_stock_quant"/>
-            <field name="subject">Quants on alert</field>
-            <field name="body_html">
+  <record id="email_template_alert_quant_expired" model="mail.template">
+    <field name="name">Alert quant expired</field>
+    <field name="model_id" ref="stock.model_stock_quant" />
+    <field name="subject">Quants on alert</field>
+    <field name="body_html">
                 <![CDATA[
                     <p>Hello,</p>
                     <p>Following quants are on alert:</p>
@@ -33,33 +31,30 @@
                     </p>
                 ]]>
             </field>
-        </record>
-
-        <!--
+  </record>
+  <!--
         CRONS
         -->
-        <record model="ir.cron" forcecreate="True" id="cron_quant_expired">
-            <field name="name">Alert quant expired</field>
-            <field name="active">True</field>
-            <field name="interval_number">1</field>
-            <field name="interval_type">days</field>
-            <field name="numbercall">-1</field>
-            <field name="nextcall">2016-12-13 20:30:00</field>
-            <field name="doall" eval="False" />
-            <field name="model">stock.quant</field>
-            <field name="function">alert_quant_expired</field>
-        </record>
-
-        <record model="ir.cron" forcecreate="True" id="cron_process_quant_expired">
-            <field name="name">Process quant expired</field>
-            <field name="active">True</field>
-            <field name="interval_number">1</field>
-            <field name="interval_type">days</field>
-            <field name="numbercall">-1</field>
-            <field name="nextcall">2016-12-13 20:30:00</field>
-            <field name="doall" eval="False" />
-            <field name="model">stock.quant</field>
-            <field name="function">process_quant_expired</field>
-        </record>
-
+  <record model="ir.cron" forcecreate="True" id="cron_quant_expired">
+    <field name="name">Alert quant expired</field>
+    <field name="active">True</field>
+    <field name="interval_number">1</field>
+    <field name="interval_type">days</field>
+    <field name="numbercall">-1</field>
+    <field name="nextcall">2016-12-13 20:30:00</field>
+    <field name="doall" eval="False" />
+    <field name="model">stock.quant</field>
+    <field name="function">alert_quant_expired</field>
+  </record>
+  <record model="ir.cron" forcecreate="True" id="cron_process_quant_expired">
+    <field name="name">Process quant expired</field>
+    <field name="active">True</field>
+    <field name="interval_number">1</field>
+    <field name="interval_type">days</field>
+    <field name="numbercall">-1</field>
+    <field name="nextcall">2016-12-13 20:30:00</field>
+    <field name="doall" eval="False" />
+    <field name="model">stock.quant</field>
+    <field name="function">process_quant_expired</field>
+  </record>
 </odoo>

@@ -4,7 +4,7 @@
 
 {
     "name": "Tests related to product MTO handling",
-    "version": "1.0",
+    "version": "10.0.1.0.0",
     "author": "Alexandre Fayolle",
     "maintainer": "Camptocamp",
     "category": "Stock Management",

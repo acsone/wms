@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-
 <odoo noupdate="1">
-    <record id="seq_ticket_auto" model="ir.sequence">
-        <field name="name">Helpdesk Ticket</field>
-        <field name="code">helpdesk.ticket</field>
-        <field eval="5" name="padding" />
-    </record>
+  <record id="seq_ticket_auto" model="ir.sequence">
+    <field name="name">Helpdesk Ticket</field>
+    <field name="code">helpdesk.ticket</field>
+    <field eval="5" name="padding" />
+  </record>
 </odoo>

@@ -2,8 +2,9 @@
 # Copyright 2020 Acsone SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-import odoo.addons.decimal_precision as dp
 from odoo import api, fields, models, tools
+
+import odoo.addons.decimal_precision as dp
 
 
 class AccountMoveLineWithAnalyticCategory(models.Model):

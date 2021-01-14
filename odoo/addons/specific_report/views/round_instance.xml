@@ -1,29 +1,61 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <record id="view_round_instance_kanban" model="ir.ui.view">
-        <field name="name">view.round.instance.kanban</field>
-        <field name="model">round.instance</field>
-        <field name="inherit_id" ref="delivery_rounds.view_round_instance_kanban"/>
-        <field name="arch" type="xml">
-            <xpath expr="//div[a[@name='print_all_deliveryslip']]" position="after">
-                <div><a name="print_delivery_round" type="object" states="done">Print delivery round</a></div>
-                <div><a name="print_cash_on_delivery_invoices" type="object" states="done">Print invoices</a></div>
-            </xpath>
-        </field>
-    </record>
-    <record id="view_round_instance_form" model="ir.ui.view">
-        <field name="name">view.round.instance.form</field>
-        <field name="model">round.instance</field>
-        <field name="inherit_id" ref="delivery_rounds.view_round_instance_form"/>
-        <field name="arch" type="xml">
-            <xpath expr="//header/button[@name='button_deliver']" position="after">
-                <button name="print_delivery_round" type="object" string="Print delivery round" states="done" class="oe_highlight"/>
-                <button name="print_cash_on_delivery_invoices" type="object" string="Print invoices" states="done" class="oe_highlight"/>
-            </xpath>
-            <xpath expr="//field[@name='instance_customer_ids']/tree/button[@name='print_deliveryslip']" position="after">
-                <field name="has_cash_on_delivery_invoice" invisible="1"/>
-                <button name="print_cash_on_delivery_invoices" type="object" string="Print invoices" attrs="{'invisible': [('has_cash_on_delivery_invoice', '=', False)]}"/>
-            </xpath>
-        </field>
-    </record>
+  <record id="view_round_instance_kanban" model="ir.ui.view">
+    <field name="name">view.round.instance.kanban</field>
+    <field name="model">round.instance</field>
+    <field name="inherit_id" ref="delivery_rounds.view_round_instance_kanban" />
+    <field name="arch" type="xml">
+      <xpath expr="//div[a[@name='print_all_deliveryslip']]" position="after">
+        <div>
+          <a
+            name="print_delivery_round"
+            type="object"
+            states="done"
+          >Print delivery round</a>
+        </div>
+        <div>
+          <a
+            name="print_cash_on_delivery_invoices"
+            type="object"
+            states="done"
+          >Print invoices</a>
+        </div>
+      </xpath>
+    </field>
+  </record>
+  <record id="view_round_instance_form" model="ir.ui.view">
+    <field name="name">view.round.instance.form</field>
+    <field name="model">round.instance</field>
+    <field name="inherit_id" ref="delivery_rounds.view_round_instance_form" />
+    <field name="arch" type="xml">
+      <xpath expr="//header/button[@name='button_deliver']" position="after">
+        <button
+          name="print_delivery_round"
+          type="object"
+          string="Print delivery round"
+          states="done"
+          class="oe_highlight"
+        />
+        <button
+          name="print_cash_on_delivery_invoices"
+          type="object"
+          string="Print invoices"
+          states="done"
+          class="oe_highlight"
+        />
+      </xpath>
+      <xpath
+        expr="//field[@name='instance_customer_ids']/tree/button[@name='print_deliveryslip']"
+        position="after"
+      >
+        <field name="has_cash_on_delivery_invoice" invisible="1" />
+        <button
+          name="print_cash_on_delivery_invoices"
+          type="object"
+          string="Print invoices"
+          attrs="{'invisible': [('has_cash_on_delivery_invoice', '=', False)]}"
+        />
+      </xpath>
+    </field>
+  </record>
 </odoo>

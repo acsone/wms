@@ -1,34 +1,33 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <!-- Copyright 2020 ACSONE SA/NV
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
-
 <odoo>
-
-    <record model="ir.ui.view" id="sale_order_form_view">
-        <field name="name">sale.order.form (in alc_partner_manual_sale_order)</field>
-        <field name="model">sale.order</field>
-        <field name="inherit_id" ref="sale.view_order_form"/>
-        <field name="arch" type="xml">
-        
-            <header position="attributes">
-                <attribute name="attrs">{'invisible': [("manual_sale_order_allowed", "=", True)]}</attribute>
-            </header>
-            <header position="after">
-                <div class="alert alert-danger"
-                        style="margin-bottom:0px;font-weight: bolder;text-align: center;"
-                        role="alert"
-                        attrs="{'invisible': [('manual_sale_order_allowed', '=', True)]}">
+  <record model="ir.ui.view" id="sale_order_form_view">
+    <field name="name">sale.order.form (in alc_partner_manual_sale_order)</field>
+    <field name="model">sale.order</field>
+    <field name="inherit_id" ref="sale.view_order_form" />
+    <field name="arch" type="xml">
+      <header position="attributes">
+        <attribute
+          name="attrs"
+        >{'invisible': [("manual_sale_order_allowed", "=", True)]}</attribute>
+      </header>
+      <header position="after">
+        <div
+          class="alert alert-danger"
+          style="margin-bottom:0px;font-weight: bolder;text-align: center;"
+          role="alert"
+          attrs="{'invisible': [('manual_sale_order_allowed', '=', True)]}"
+        >
                     Manual sale order are not allowed for this customer.
                 </div>
-            </header>
-            <field name="partner_id" position="after">
-                <field name="manual_sale_order_allowed" invisible="1"/>
-            </field>
-            <field name="partner_id" position="attributes">
-                <attribute name="domain">[('manual_sale_order_allowed','=',True)]</attribute>
-            </field>
-        </field>
-    </record>
-
+      </header>
+      <field name="partner_id" position="after">
+        <field name="manual_sale_order_allowed" invisible="1" />
+      </field>
+      <field name="partner_id" position="attributes">
+        <attribute name="domain">[('manual_sale_order_allowed','=',True)]</attribute>
+      </field>
+    </field>
+  </record>
 </odoo>
-

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-    <record id="purchase_order_manager" model="res.groups">
-        <field name="name">EDI - Purchase Order Manager</field>
-    </record>
+  <record id="purchase_order_manager" model="res.groups">
+    <field name="name">EDI - Purchase Order Manager</field>
+  </record>
 </odoo>

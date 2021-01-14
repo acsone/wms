@@ -10,7 +10,9 @@ from functools import partial
 from StringIO import StringIO
 
 import paramiko
+
 from odoo import _
+
 from odoo.addons.component.core import Component
 from odoo.addons.connector.exception import ConnectorException
 
@@ -54,9 +56,7 @@ class EdiSftpBackendAdapter(Component):
         if pk_env_variable and not private_key:
             raise ConnectorException(_("%s must be set in environ") % pk_env_variable)
 
-            pkey = paramiko.RSAKey.from_private_key(
-                StringIO(private_key.decode("utf8"))
-            )
+        pkey = paramiko.RSAKey.from_private_key(StringIO(private_key.decode("utf8")))
         return dict(
             hostname=self.backend_record.hostname,
             port=self.backend_record.port,

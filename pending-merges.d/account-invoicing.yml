@@ -14,5 +14,6 @@
     - OCA refs/pull/567/head
   shell_command_after:
     # ALCYN-2268: account_invoice_triple_discount: add a workaround over PR 525 (https://github.com/acsone/account-invoicing/pull/2)
-    - git am "$(git format-patch -1 d01abda9e3a8247cbcbbb97dd759787a9a3bb0da -o ../patches)"
+    - git am "$(git format-patch -1 d01abda9e3a8247cbcbbb97dd759787a9a3bb0da -o
+      ../patches)"
   target: camptocamp merge-branch-1793-master

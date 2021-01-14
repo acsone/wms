@@ -1,319 +1,395 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-
-    <record id="l10n_be.attn_TVA-21-inclus-dans-prix" model="account.tax.template">
-        <field name="name">VAT-IN-V82-21-S-INC</field>
-        <field name="description">21% (TVAC)</field>
-    </record>
-    <record id="attn_VAT-IN-V82-12-S-INC" model="account.tax.template">
-        <field name="sequence">12</field>
-        <field name="name">VAT-IN-V82-12-S-INC</field>
-        <field name="description">12% (TVAC)</field>
-        <field name="refund_account_id" ref="l10n_be.a411059"/>
-        <field name="account_id" ref="l10n_be.a411059"/>
-        <field name="price_include" eval="1"/>
-        <field name="amount">12</field>
-        <field name="amount_type">percent</field>
-        <field name="type_tax_use">purchase</field>
-        <field name="chart_template_id" ref="l10n_be.l10nbe_chart_template"/>
-        <field name="tag_ids" eval="[(6,0,[ref('l10n_be.tax_tag_82'), ref('l10n_be.tax_tag_85'), ref('l10n_be.tax_tag_63'), ref('l10n_be.tax_tag_59')])]"/>
-    </record>
-    <record id="attn_VAT-IN-V82-06-S-INC" model="account.tax.template">
-        <field name="sequence">12</field>
-        <field name="name">VAT-IN-V82-06-S-INC</field>
-        <field name="description">6% (TVAC)</field>
-        <field name="refund_account_id" ref="l10n_be.a411059"/>
-        <field name="account_id" ref="l10n_be.a411059"/>
-        <field name="price_include" eval="1"/>
-        <field name="amount">6</field>
-        <field name="amount_type">percent</field>
-        <field name="type_tax_use">purchase</field>
-        <field name="chart_template_id" ref="l10n_be.l10nbe_chart_template"/>
-        <field name="tag_ids" eval="[(6,0,[ref('l10n_be.tax_tag_82'), ref('l10n_be.tax_tag_85'), ref('l10n_be.tax_tag_63'), ref('l10n_be.tax_tag_59')])]"/>
-    </record>
-
-    <record id="l10n_be.attn_VAT-IN-V81-21" model="account.tax.template">
-        <field name="name">VAT-IN-V81-21</field>
-        <field name="description">21% Marchandises</field>
-    </record>
-    <record id="l10n_be.attn_VAT-IN-V81-12" model="account.tax.template">
-        <field name="name">VAT-IN-V81-12</field>
-        <field name="description">12% Marchandises</field>
-    </record>
-    <record id="l10n_be.attn_VAT-IN-V81-06" model="account.tax.template">
-        <field name="name">VAT-IN-V81-06</field>
-        <field name="description">6% Marchandises</field>
-    </record>
-    <record id="l10n_be.attn_VAT-IN-V81-00" model="account.tax.template">
-        <field name="name">VAT-IN-V81-00</field>
-        <field name="description">0% Marchandises</field>
-    </record>
-    <record id="l10n_be.attn_VAT-IN-V82-21-S" model="account.tax.template">
-        <field name="name">VAT-IN-V82-21-S</field>
-        <field name="description">21% Services</field>
-    </record>
-    <record id="l10n_be.attn_VAT-IN-V82-21-G" model="account.tax.template">
-        <field name="name">VAT-IN-V82-21-G</field>
-        <field name="description">21% Biens divers</field>
-    </record>
-    <record id="l10n_be.attn_VAT-IN-V82-12-S" model="account.tax.template">
-        <field name="name">VAT-IN-V82-12-S</field>
-        <field name="description">12% Services</field>
-    </record>
-    <record id="l10n_be.attn_VAT-IN-V82-12-G" model="account.tax.template">
-        <field name="name">VAT-IN-V82-12-G</field>
-        <field name="description">12% Biens divers</field>
-    </record>
-    <record id="l10n_be.attn_VAT-IN-V82-06-S" model="account.tax.template">
-        <field name="name">VAT-IN-V82-06-S</field>
-        <field name="description">6% Services</field>
-    </record>
-    <record id="l10n_be.attn_VAT-IN-V82-06-G" model="account.tax.template">
-        <field name="name">VAT-IN-V82-06-G</field>
-        <field name="description">6% Biens divers</field>
-    </record>
-    <record id="l10n_be.attn_VAT-IN-V82-00-S" model="account.tax.template">
-        <field name="name">VAT-IN-V82-00-S</field>
-        <field name="description">0% Services</field>
-    </record>
-    <record id="l10n_be.attn_VAT-IN-V82-00-G" model="account.tax.template">
-        <field name="name">VAT-IN-V82-00-G</field>
-        <field name="description">0% Biens divers</field>
-    </record>
-    <record id="l10n_be.attn_VAT-IN-V83-21" model="account.tax.template">
-        <field name="name">VAT-IN-V83-21</field>
-        <field name="description">21% Biens d'investissement</field>
-    </record>
-    <record id="l10n_be.attn_VAT-IN-V83-12" model="account.tax.template">
-        <field name="name">VAT-IN-V83-12</field>
-        <field name="description">12% Biens d'investissement</field>
-    </record>
-    <record id="l10n_be.attn_VAT-IN-V83-06" model="account.tax.template">
-        <field name="name">VAT-IN-V83-06</field>
-        <field name="description">6% Biens d'investissement</field>
-    </record>
-    <record id="l10n_be.attn_VAT-IN-V83-00" model="account.tax.template">
-        <field name="name">VAT-IN-V83-00</field>
-        <field name="description">0% Biens d'investissement</field>
-    </record>
-    <record id="l10n_be.attn_VAT-IN-V81-21-CC" model="account.tax.template">
-        <field name="name">VAT-IN-V81-21-CC</field>
-        <field name="description">21% Cocontract. - Approvisionn. et marchandises</field>
-    </record>
-
-    <record id="attn_VAT-IN-V82-GSM-EXC-C1" model="account.tax.template">
-        <field name="sequence">721</field>
-        <field name="name">VAT-IN-V82-GSM-EXC-C1</field>
-        <field name="description">GSM, tablette, ordi - TVA 25% Non Deductible</field>
-        <field name="refund_account_id" ref="l10n_be.a64012"/>
-        <field name="account_id" ref="l10n_be.a64012"/>
-        <field name="price_include" eval="0"/>
-        <field name="amount">5.25</field>
-        <field name="amount_type">percent</field>
-        <field name="type_tax_use">none</field>
-        <field name="chart_template_id" ref="l10n_be.l10nbe_chart_template"/>
-        <field name="tag_ids" eval="[(6,0,[ref('l10n_be.tax_tag_82_not_deductible'), ref('l10n_be.tax_tag_85_not_deductible')])]"/>
-    </record>
-    <record id="attn_VAT-IN-V82-GSM-EXC-C2" model="account.tax.template">
-        <field name="sequence">722</field>
-        <field name="name">VAT-IN-V82-GSM-EXC-C2</field>
-        <field name="description">GSM, tablette, ordi - TVA 75% Deductible (Prix Excl.)</field>
-        <field name="refund_account_id" ref="l10n_be.a411059"/>
-        <field name="account_id" ref="l10n_be.a411059"/>
-        <field name="price_include" eval="0"/>
-        <field name="amount">15.75</field>
-        <field name="amount_type">percent</field>
-        <field name="type_tax_use">none</field>
-        <field name="chart_template_id" ref="l10n_be.l10nbe_chart_template"/>
-        <field name="tag_ids" eval="[(6,0,[ref('l10n_be.tax_tag_63'), ref('l10n_be.tax_tag_59')])]"/>
-    </record>
-    <record id="attn_VAT-IN-V82-GSM-EXC" model="account.tax.template">
-        <field name="sequence">720</field>
-        <field name="name">VAT-IN-V82-GSM-EXC</field>
-        <field name="description">TVA Entrant - GSM, tablette, ordi - VAT 25% Non Deductible (Price Excl.)</field>
-        <field name="price_include" eval="0"/>
-        <field name="amount">1</field>
-        <field name="amount_type">group</field>
-        <field name="type_tax_use">purchase</field>
-        <field name="children_tax_ids" eval="[(6, 0, [ref('attn_VAT-IN-V82-GSM-EXC-C1'), ref('attn_VAT-IN-V82-GSM-EXC-C2')])]"/>
-        <field name="chart_template_id" ref="l10n_be.l10nbe_chart_template"/>
-        <field name="tag_ids" eval="[(6,0,[ref('l10n_be.tax_tag_82'), ref('l10n_be.tax_tag_85'), ref('l10n_be.tax_tag_63'), ref('l10n_be.tax_tag_59')])]"/>
-    </record>
-
-    <record id="l10n_be.attn_VAT-IN-V81-12-CC" model="account.tax.template">
-        <field name="name">VAT-IN-V81-12-CC</field>
-        <field name="description">12% Cocontract. - Approvisionn. et marchandises</field>
-    </record>
-    <record id="l10n_be.attn_VAT-IN-V81-06-CC" model="account.tax.template">
-        <field name="name">VAT-IN-V81-06-CC</field>
-        <field name="description">TVA Déductible 6% Cocontract. - Approvisionn. et marchandises</field>
-    </record>
-    <record id="l10n_be.attn_VAT-IN-V81-00-CC" model="account.tax.template">
-        <field name="name">VAT-IN-V81-00-CC</field>
-        <field name="description">TVA à l'entrée 0% Cocontract. - Approvisionn. et marchandises</field>
-    </record>
-    <record id="l10n_be.attn_VAT-IN-V82-21-CC" model="account.tax.template">
-        <field name="name">VAT-IN-V82-21-CC</field>
-        <field name="description">TVA Déductible 21% Cocontract. - Services and other goods</field>
-    </record>
-    <record id="l10n_be.attn_VAT-IN-V82-12-CC" model="account.tax.template">
-        <field name="name">VAT-IN-V82-12-CC</field>
-        <field name="description">TVA Déductible 12% Cocontract. - Services and other goods</field>
-    </record>
-    <record id="l10n_be.attn_VAT-IN-V82-06-CC" model="account.tax.template">
-        <field name="name">VAT-IN-V82-06-CC</field>
-        <field name="description">TVA Déductible 6% Cocontract. - Services and other goods</field>
-    </record>
-    <record id="l10n_be.attn_VAT-IN-V82-00-CC" model="account.tax.template">
-        <field name="name">VAT-IN-V82-00-CC</field>
-        <field name="description">TVA à l'entrée 0% Cocontract. - Services and other goods</field>
-    </record>
-    <record id="l10n_be.attn_VAT-IN-V83-21-CC" model="account.tax.template">
-        <field name="name">VAT-IN-V83-21-CC</field>
-        <field name="description">TVA Déductible 21% Cocontract. - Biens d'investissement</field>
-    </record>
-    <record id="l10n_be.attn_VAT-IN-V83-12-CC" model="account.tax.template">
-        <field name="name">VAT-IN-V83-12-CC</field>
-        <field name="description">TVA Déductible 12% Cocontract. - Biens d'investissement</field>
-    </record>
-    <record id="l10n_be.attn_VAT-IN-V83-06-CC" model="account.tax.template">
-        <field name="name">VAT-IN-V83-06-CC</field>
-        <field name="description">TVA Déductible 6% Cocontract. - Biens d'investissement</field>
-    </record>
-    <record id="l10n_be.attn_VAT-IN-V83-00-CC" model="account.tax.template">
-        <field name="name">VAT-IN-V83-00-CC</field>
-        <field name="description">TVA à l'entrée 0% Cocontract. - Biens d'investissement</field>
-    </record>
-    <record id="l10n_be.attn_VAT-IN-V82-CAR-EXC-C1" model="account.tax.template">
-        <field name="name">VAT-IN-V82-CAR-EXC-C1</field>
-        <field name="description">Frais de voiture - TVA 50% Non Deductible</field>
-    </record>
-    <record id="l10n_be.attn_VAT-IN-V82-CAR-EXC-C2" model="account.tax.template">
-        <field name="name">VAT-IN-V82-CAR-EXC-C2</field>
-        <field name="description">Frais de voiture - TVA 50% Deductible (Prix Excl.)</field>
-    </record>
-    <record id="l10n_be.attn_VAT-IN-V82-CAR-EXC" model="account.tax.template">
-        <field name="name">VAT-IN-V82-CAR-EXC</field>
-        <field name="description">TVA Entrant - Frais de voiture - VAT 50% Non Deductible (Price Excl.)</field>
-    </record>
-    <record id="l10n_be.attn_VAT-IN-V81-21-EU" model="account.tax.template">
-        <field name="name">VAT-IN-V81-21-EU</field>
-        <field name="description">TVA Déductible 21% Intracomm. - Approvisionn. et marchandises</field>
-    </record>
-    <record id="l10n_be.attn_VAT-IN-V81-12-EU" model="account.tax.template">
-        <field name="name">VAT-IN-V81-12-EU</field>
-        <field name="description">TVA Déductible 12% Intracomm. - Approvisionn. et marchandises</field>
-    </record>
-    <record id="l10n_be.attn_VAT-IN-V81-06-EU" model="account.tax.template">
-        <field name="name">VAT-IN-V81-06-EU</field>
-        <field name="description">TVA Déductible 6% Intracomm. - Approvisionn. et marchandises</field>
-    </record>
-    <record id="l10n_be.attn_VAT-IN-V81-00-EU" model="account.tax.template">
-        <field name="name">VAT-IN-V81-00-EU</field>
-        <field name="description">TVA à l'entrée 0% Intracomm. - Approvisionn. et marchandises</field>
-    </record>
-    <record id="l10n_be.attn_VAT-IN-V82-21-EU-S" model="account.tax.template">
-        <field name="name">VAT-IN-V82-21-EU-S</field>
-        <field name="description">TVA Déductible 21% Intracomm. - Services</field>
-    </record>
-    <record id="l10n_be.attn_VAT-IN-V82-21-EU-G" model="account.tax.template">
-        <field name="name">VAT-IN-V82-21-EU-G</field>
-        <field name="description">TVA Déductible 21% Intracomm. - Biens divers</field>
-    </record>
-    <record id="l10n_be.attn_VAT-IN-V82-12-EU-S" model="account.tax.template">
-        <field name="name">VAT-IN-V82-12-EU-S</field>
-        <field name="description">TVA Déductible 12% Intracomm. - Services</field>
-    </record>
-    <record id="l10n_be.attn_VAT-IN-V82-12-EU-G" model="account.tax.template">
-        <field name="name">VAT-IN-V82-12-EU-G</field>
-        <field name="description">TVA Déductible 12% Intracomm. - Biens divers</field>
-    </record>
-    <record id="l10n_be.attn_VAT-IN-V82-06-EU-S" model="account.tax.template">
-        <field name="name">VAT-IN-V82-06-EU-S</field>
-        <field name="description">TVA Déductible 6% Intracomm. - Services</field>
-    </record>
-    <record id="l10n_be.attn_VAT-IN-V82-06-EU-G" model="account.tax.template">
-        <field name="name">VAT-IN-V82-06-EU-G</field>
-        <field name="description">TVA Déductible 6% Intracomm. - Biens divers</field>
-    </record>
-    <record id="l10n_be.attn_VAT-IN-V82-00-EU-S" model="account.tax.template">
-        <field name="name">VAT-IN-V82-00-EU-S</field>
-        <field name="description">TVA à l'entrée 0% Intracomm. - Services</field>
-    </record>
-    <record id="l10n_be.attn_VAT-IN-V83-21-EU" model="account.tax.template">
-        <field name="name">VAT-IN-V83-21-EU</field>
-        <field name="description">TVA Déductible 21% Intracomm. - Biens d'investissement</field>
-    </record>
-    <record id="l10n_be.attn_VAT-IN-V82-00-EU-G" model="account.tax.template">
-        <field name="name">VAT-IN-V82-00-EU-G</field>
-        <field name="description">TVA à l'entrée 0% Intracomm. - Biens divers</field>
-    </record>
-    <record id="l10n_be.attn_VAT-IN-V83-12-EU" model="account.tax.template">
-        <field name="name">VAT-IN-V83-12-EU</field>
-        <field name="description">TVA Déductible 12% Intracomm. - Biens d'investissement</field>
-    </record>
-    <record id="l10n_be.attn_VAT-IN-V83-06-EU" model="account.tax.template">
-        <field name="name">VAT-IN-V83-06-EU</field>
-        <field name="description">TVA Déductible 6% Intracomm. - Biens d'investissement</field>
-    </record>
-    <record id="l10n_be.attn_VAT-IN-V83-00-EU" model="account.tax.template">
-        <field name="name">VAT-IN-V83-00-EU</field>
-        <field name="description">TVA à l'entrée 0% Intracomm. - Biens d'investissement</field>
-    </record>
-    <record id="l10n_be.attn_VAT-IN-V81-21-ROW-CC" model="account.tax.template">
-        <field name="name">VAT-IN-V81-21-ROW-CC</field>
-        <field name="description">TVA Déductible 21% Hors EU - Approvisionn. et marchandises</field>
-    </record>
-    <record id="l10n_be.attn_VAT-IN-V81-12-ROW-CC" model="account.tax.template">
-        <field name="name">VAT-IN-V81-12-ROW-CC</field>
-        <field name="description">TVA Déductible 12% Hors EU - Approvisionn. et marchandises</field>
-    </record>
-    <record id="l10n_be.attn_VAT-IN-V81-06-ROW-CC" model="account.tax.template">
-        <field name="name">VAT-IN-V81-06-ROW-CC</field>
-        <field name="description">TVA Déductible 6% Hors EU - Approvisionn. et marchandises</field>
-    </record>
-    <record id="l10n_be.attn_VAT-IN-V81-00-ROW-CC" model="account.tax.template">
-        <field name="name">VAT-IN-V81-00-ROW-CC</field>
-        <field name="description">TVA à l'entrée 0% Hors EU - Approvisionn. et marchandises</field>
-    </record>
-    <record id="l10n_be.attn_VAT-IN-V82-21-ROW-CC" model="account.tax.template">
-        <field name="name">VAT-IN-V82-21-ROW-CC</field>
-        <field name="description">TVA Déductible 21% Hors EU - Services and other goods</field>
-    </record>
-    <record id="l10n_be.attn_VAT-IN-V82-12-ROW-CC" model="account.tax.template">
-        <field name="name">VAT-IN-V82-12-ROW-CC</field>
-        <field name="description">TVA Déductible 12% Hors EU - Services and other goods</field>
-    </record>
-    <record id="l10n_be.attn_VAT-IN-V82-06-ROW-CC" model="account.tax.template">
-        <field name="name">VAT-IN-V82-06-ROW-CC</field>
-        <field name="description">TVA Déductible 6% Hors EU - Services and other goods</field>
-    </record>
-    <record id="l10n_be.attn_VAT-IN-V82-00-ROW-CC" model="account.tax.template">
-        <field name="name">VAT-IN-V82-00-ROW-CC</field>
-        <field name="description">TVA à l'entrée 0% Hors EU - Services and other goods</field>
-    </record>
-    <record id="l10n_be.attn_VAT-IN-V83-21-ROW-CC" model="account.tax.template">
-        <field name="name">VAT-IN-V83-21-ROW-CC</field>
-        <field name="description">TVA Déductible 21% Hors EU - Biens d'investissement</field>
-    </record>
-    <record id="l10n_be.attn_VAT-IN-V83-12-ROW-CC" model="account.tax.template">
-        <field name="name">VAT-IN-V83-12-ROW-CC</field>
-        <field name="description">TVA Déductible 12% Hors EU - Biens d'investissement</field>
-    </record>
-    <record id="l10n_be.attn_VAT-IN-V83-06-ROW-CC" model="account.tax.template">
-        <field name="name">VAT-IN-V83-06-ROW-CC</field>
-        <field name="description">TVA Déductible 6% Hors EU - Biens d'investissement</field>
-    </record>
-    <record id="l10n_be.attn_VAT-IN-V83-00-ROW-CC" model="account.tax.template">
-        <field name="name">VAT-IN-V83-00-ROW-CC</field>
-        <field name="description">0% Non EU - Biens d'investissement</field>
-    </record>
-    <record id="l10n_be.attn_VAT-IN-V61" model="account.tax.template">
-        <field name="name">VAT-IN-V61</field>
-        <field name="description">Régularisation en faveur de l'état</field>
-    </record>
-    <record id="l10n_be.attn_VAT-IN-V62" model="account.tax.template">
-        <field name="name">VAT-IN-V62</field>
-        <field name="description">Régularisation en faveur du déclarant</field>
-    </record>
+  <record id="l10n_be.attn_TVA-21-inclus-dans-prix" model="account.tax.template">
+    <field name="name">VAT-IN-V82-21-S-INC</field>
+    <field name="description">21% (TVAC)</field>
+  </record>
+  <record id="attn_VAT-IN-V82-12-S-INC" model="account.tax.template">
+    <field name="sequence">12</field>
+    <field name="name">VAT-IN-V82-12-S-INC</field>
+    <field name="description">12% (TVAC)</field>
+    <field name="refund_account_id" ref="l10n_be.a411059" />
+    <field name="account_id" ref="l10n_be.a411059" />
+    <field name="price_include" eval="1" />
+    <field name="amount">12</field>
+    <field name="amount_type">percent</field>
+    <field name="type_tax_use">purchase</field>
+    <field name="chart_template_id" ref="l10n_be.l10nbe_chart_template" />
+    <field
+      name="tag_ids"
+      eval="[(6,0,[ref('l10n_be.tax_tag_82'), ref('l10n_be.tax_tag_85'), ref('l10n_be.tax_tag_63'), ref('l10n_be.tax_tag_59')])]"
+    />
+  </record>
+  <record id="attn_VAT-IN-V82-06-S-INC" model="account.tax.template">
+    <field name="sequence">12</field>
+    <field name="name">VAT-IN-V82-06-S-INC</field>
+    <field name="description">6% (TVAC)</field>
+    <field name="refund_account_id" ref="l10n_be.a411059" />
+    <field name="account_id" ref="l10n_be.a411059" />
+    <field name="price_include" eval="1" />
+    <field name="amount">6</field>
+    <field name="amount_type">percent</field>
+    <field name="type_tax_use">purchase</field>
+    <field name="chart_template_id" ref="l10n_be.l10nbe_chart_template" />
+    <field
+      name="tag_ids"
+      eval="[(6,0,[ref('l10n_be.tax_tag_82'), ref('l10n_be.tax_tag_85'), ref('l10n_be.tax_tag_63'), ref('l10n_be.tax_tag_59')])]"
+    />
+  </record>
+  <record id="l10n_be.attn_VAT-IN-V81-21" model="account.tax.template">
+    <field name="name">VAT-IN-V81-21</field>
+    <field name="description">21% Marchandises</field>
+  </record>
+  <record id="l10n_be.attn_VAT-IN-V81-12" model="account.tax.template">
+    <field name="name">VAT-IN-V81-12</field>
+    <field name="description">12% Marchandises</field>
+  </record>
+  <record id="l10n_be.attn_VAT-IN-V81-06" model="account.tax.template">
+    <field name="name">VAT-IN-V81-06</field>
+    <field name="description">6% Marchandises</field>
+  </record>
+  <record id="l10n_be.attn_VAT-IN-V81-00" model="account.tax.template">
+    <field name="name">VAT-IN-V81-00</field>
+    <field name="description">0% Marchandises</field>
+  </record>
+  <record id="l10n_be.attn_VAT-IN-V82-21-S" model="account.tax.template">
+    <field name="name">VAT-IN-V82-21-S</field>
+    <field name="description">21% Services</field>
+  </record>
+  <record id="l10n_be.attn_VAT-IN-V82-21-G" model="account.tax.template">
+    <field name="name">VAT-IN-V82-21-G</field>
+    <field name="description">21% Biens divers</field>
+  </record>
+  <record id="l10n_be.attn_VAT-IN-V82-12-S" model="account.tax.template">
+    <field name="name">VAT-IN-V82-12-S</field>
+    <field name="description">12% Services</field>
+  </record>
+  <record id="l10n_be.attn_VAT-IN-V82-12-G" model="account.tax.template">
+    <field name="name">VAT-IN-V82-12-G</field>
+    <field name="description">12% Biens divers</field>
+  </record>
+  <record id="l10n_be.attn_VAT-IN-V82-06-S" model="account.tax.template">
+    <field name="name">VAT-IN-V82-06-S</field>
+    <field name="description">6% Services</field>
+  </record>
+  <record id="l10n_be.attn_VAT-IN-V82-06-G" model="account.tax.template">
+    <field name="name">VAT-IN-V82-06-G</field>
+    <field name="description">6% Biens divers</field>
+  </record>
+  <record id="l10n_be.attn_VAT-IN-V82-00-S" model="account.tax.template">
+    <field name="name">VAT-IN-V82-00-S</field>
+    <field name="description">0% Services</field>
+  </record>
+  <record id="l10n_be.attn_VAT-IN-V82-00-G" model="account.tax.template">
+    <field name="name">VAT-IN-V82-00-G</field>
+    <field name="description">0% Biens divers</field>
+  </record>
+  <record id="l10n_be.attn_VAT-IN-V83-21" model="account.tax.template">
+    <field name="name">VAT-IN-V83-21</field>
+    <field name="description">21% Biens d'investissement</field>
+  </record>
+  <record id="l10n_be.attn_VAT-IN-V83-12" model="account.tax.template">
+    <field name="name">VAT-IN-V83-12</field>
+    <field name="description">12% Biens d'investissement</field>
+  </record>
+  <record id="l10n_be.attn_VAT-IN-V83-06" model="account.tax.template">
+    <field name="name">VAT-IN-V83-06</field>
+    <field name="description">6% Biens d'investissement</field>
+  </record>
+  <record id="l10n_be.attn_VAT-IN-V83-00" model="account.tax.template">
+    <field name="name">VAT-IN-V83-00</field>
+    <field name="description">0% Biens d'investissement</field>
+  </record>
+  <record id="l10n_be.attn_VAT-IN-V81-21-CC" model="account.tax.template">
+    <field name="name">VAT-IN-V81-21-CC</field>
+    <field name="description">21% Cocontract. - Approvisionn. et marchandises</field>
+  </record>
+  <record id="attn_VAT-IN-V82-GSM-EXC-C1" model="account.tax.template">
+    <field name="sequence">721</field>
+    <field name="name">VAT-IN-V82-GSM-EXC-C1</field>
+    <field name="description">GSM, tablette, ordi - TVA 25% Non Deductible</field>
+    <field name="refund_account_id" ref="l10n_be.a64012" />
+    <field name="account_id" ref="l10n_be.a64012" />
+    <field name="price_include" eval="0" />
+    <field name="amount">5.25</field>
+    <field name="amount_type">percent</field>
+    <field name="type_tax_use">none</field>
+    <field name="chart_template_id" ref="l10n_be.l10nbe_chart_template" />
+    <field
+      name="tag_ids"
+      eval="[(6,0,[ref('l10n_be.tax_tag_82_not_deductible'), ref('l10n_be.tax_tag_85_not_deductible')])]"
+    />
+  </record>
+  <record id="attn_VAT-IN-V82-GSM-EXC-C2" model="account.tax.template">
+    <field name="sequence">722</field>
+    <field name="name">VAT-IN-V82-GSM-EXC-C2</field>
+    <field
+      name="description"
+    >GSM, tablette, ordi - TVA 75% Deductible (Prix Excl.)</field>
+    <field name="refund_account_id" ref="l10n_be.a411059" />
+    <field name="account_id" ref="l10n_be.a411059" />
+    <field name="price_include" eval="0" />
+    <field name="amount">15.75</field>
+    <field name="amount_type">percent</field>
+    <field name="type_tax_use">none</field>
+    <field name="chart_template_id" ref="l10n_be.l10nbe_chart_template" />
+    <field
+      name="tag_ids"
+      eval="[(6,0,[ref('l10n_be.tax_tag_63'), ref('l10n_be.tax_tag_59')])]"
+    />
+  </record>
+  <record id="attn_VAT-IN-V82-GSM-EXC" model="account.tax.template">
+    <field name="sequence">720</field>
+    <field name="name">VAT-IN-V82-GSM-EXC</field>
+    <field
+      name="description"
+    >TVA Entrant - GSM, tablette, ordi - VAT 25% Non Deductible (Price Excl.)</field>
+    <field name="price_include" eval="0" />
+    <field name="amount">1</field>
+    <field name="amount_type">group</field>
+    <field name="type_tax_use">purchase</field>
+    <field
+      name="children_tax_ids"
+      eval="[(6, 0, [ref('attn_VAT-IN-V82-GSM-EXC-C1'), ref('attn_VAT-IN-V82-GSM-EXC-C2')])]"
+    />
+    <field name="chart_template_id" ref="l10n_be.l10nbe_chart_template" />
+    <field
+      name="tag_ids"
+      eval="[(6,0,[ref('l10n_be.tax_tag_82'), ref('l10n_be.tax_tag_85'), ref('l10n_be.tax_tag_63'), ref('l10n_be.tax_tag_59')])]"
+    />
+  </record>
+  <record id="l10n_be.attn_VAT-IN-V81-12-CC" model="account.tax.template">
+    <field name="name">VAT-IN-V81-12-CC</field>
+    <field name="description">12% Cocontract. - Approvisionn. et marchandises</field>
+  </record>
+  <record id="l10n_be.attn_VAT-IN-V81-06-CC" model="account.tax.template">
+    <field name="name">VAT-IN-V81-06-CC</field>
+    <field
+      name="description"
+    >TVA Déductible 6% Cocontract. - Approvisionn. et marchandises</field>
+  </record>
+  <record id="l10n_be.attn_VAT-IN-V81-00-CC" model="account.tax.template">
+    <field name="name">VAT-IN-V81-00-CC</field>
+    <field
+      name="description"
+    >TVA à l'entrée 0% Cocontract. - Approvisionn. et marchandises</field>
+  </record>
+  <record id="l10n_be.attn_VAT-IN-V82-21-CC" model="account.tax.template">
+    <field name="name">VAT-IN-V82-21-CC</field>
+    <field
+      name="description"
+    >TVA Déductible 21% Cocontract. - Services and other goods</field>
+  </record>
+  <record id="l10n_be.attn_VAT-IN-V82-12-CC" model="account.tax.template">
+    <field name="name">VAT-IN-V82-12-CC</field>
+    <field
+      name="description"
+    >TVA Déductible 12% Cocontract. - Services and other goods</field>
+  </record>
+  <record id="l10n_be.attn_VAT-IN-V82-06-CC" model="account.tax.template">
+    <field name="name">VAT-IN-V82-06-CC</field>
+    <field
+      name="description"
+    >TVA Déductible 6% Cocontract. - Services and other goods</field>
+  </record>
+  <record id="l10n_be.attn_VAT-IN-V82-00-CC" model="account.tax.template">
+    <field name="name">VAT-IN-V82-00-CC</field>
+    <field
+      name="description"
+    >TVA à l'entrée 0% Cocontract. - Services and other goods</field>
+  </record>
+  <record id="l10n_be.attn_VAT-IN-V83-21-CC" model="account.tax.template">
+    <field name="name">VAT-IN-V83-21-CC</field>
+    <field
+      name="description"
+    >TVA Déductible 21% Cocontract. - Biens d'investissement</field>
+  </record>
+  <record id="l10n_be.attn_VAT-IN-V83-12-CC" model="account.tax.template">
+    <field name="name">VAT-IN-V83-12-CC</field>
+    <field
+      name="description"
+    >TVA Déductible 12% Cocontract. - Biens d'investissement</field>
+  </record>
+  <record id="l10n_be.attn_VAT-IN-V83-06-CC" model="account.tax.template">
+    <field name="name">VAT-IN-V83-06-CC</field>
+    <field
+      name="description"
+    >TVA Déductible 6% Cocontract. - Biens d'investissement</field>
+  </record>
+  <record id="l10n_be.attn_VAT-IN-V83-00-CC" model="account.tax.template">
+    <field name="name">VAT-IN-V83-00-CC</field>
+    <field
+      name="description"
+    >TVA à l'entrée 0% Cocontract. - Biens d'investissement</field>
+  </record>
+  <record id="l10n_be.attn_VAT-IN-V82-CAR-EXC-C1" model="account.tax.template">
+    <field name="name">VAT-IN-V82-CAR-EXC-C1</field>
+    <field name="description">Frais de voiture - TVA 50% Non Deductible</field>
+  </record>
+  <record id="l10n_be.attn_VAT-IN-V82-CAR-EXC-C2" model="account.tax.template">
+    <field name="name">VAT-IN-V82-CAR-EXC-C2</field>
+    <field name="description">Frais de voiture - TVA 50% Deductible (Prix Excl.)</field>
+  </record>
+  <record id="l10n_be.attn_VAT-IN-V82-CAR-EXC" model="account.tax.template">
+    <field name="name">VAT-IN-V82-CAR-EXC</field>
+    <field
+      name="description"
+    >TVA Entrant - Frais de voiture - VAT 50% Non Deductible (Price Excl.)</field>
+  </record>
+  <record id="l10n_be.attn_VAT-IN-V81-21-EU" model="account.tax.template">
+    <field name="name">VAT-IN-V81-21-EU</field>
+    <field
+      name="description"
+    >TVA Déductible 21% Intracomm. - Approvisionn. et marchandises</field>
+  </record>
+  <record id="l10n_be.attn_VAT-IN-V81-12-EU" model="account.tax.template">
+    <field name="name">VAT-IN-V81-12-EU</field>
+    <field
+      name="description"
+    >TVA Déductible 12% Intracomm. - Approvisionn. et marchandises</field>
+  </record>
+  <record id="l10n_be.attn_VAT-IN-V81-06-EU" model="account.tax.template">
+    <field name="name">VAT-IN-V81-06-EU</field>
+    <field
+      name="description"
+    >TVA Déductible 6% Intracomm. - Approvisionn. et marchandises</field>
+  </record>
+  <record id="l10n_be.attn_VAT-IN-V81-00-EU" model="account.tax.template">
+    <field name="name">VAT-IN-V81-00-EU</field>
+    <field
+      name="description"
+    >TVA à l'entrée 0% Intracomm. - Approvisionn. et marchandises</field>
+  </record>
+  <record id="l10n_be.attn_VAT-IN-V82-21-EU-S" model="account.tax.template">
+    <field name="name">VAT-IN-V82-21-EU-S</field>
+    <field name="description">TVA Déductible 21% Intracomm. - Services</field>
+  </record>
+  <record id="l10n_be.attn_VAT-IN-V82-21-EU-G" model="account.tax.template">
+    <field name="name">VAT-IN-V82-21-EU-G</field>
+    <field name="description">TVA Déductible 21% Intracomm. - Biens divers</field>
+  </record>
+  <record id="l10n_be.attn_VAT-IN-V82-12-EU-S" model="account.tax.template">
+    <field name="name">VAT-IN-V82-12-EU-S</field>
+    <field name="description">TVA Déductible 12% Intracomm. - Services</field>
+  </record>
+  <record id="l10n_be.attn_VAT-IN-V82-12-EU-G" model="account.tax.template">
+    <field name="name">VAT-IN-V82-12-EU-G</field>
+    <field name="description">TVA Déductible 12% Intracomm. - Biens divers</field>
+  </record>
+  <record id="l10n_be.attn_VAT-IN-V82-06-EU-S" model="account.tax.template">
+    <field name="name">VAT-IN-V82-06-EU-S</field>
+    <field name="description">TVA Déductible 6% Intracomm. - Services</field>
+  </record>
+  <record id="l10n_be.attn_VAT-IN-V82-06-EU-G" model="account.tax.template">
+    <field name="name">VAT-IN-V82-06-EU-G</field>
+    <field name="description">TVA Déductible 6% Intracomm. - Biens divers</field>
+  </record>
+  <record id="l10n_be.attn_VAT-IN-V82-00-EU-S" model="account.tax.template">
+    <field name="name">VAT-IN-V82-00-EU-S</field>
+    <field name="description">TVA à l'entrée 0% Intracomm. - Services</field>
+  </record>
+  <record id="l10n_be.attn_VAT-IN-V83-21-EU" model="account.tax.template">
+    <field name="name">VAT-IN-V83-21-EU</field>
+    <field
+      name="description"
+    >TVA Déductible 21% Intracomm. - Biens d'investissement</field>
+  </record>
+  <record id="l10n_be.attn_VAT-IN-V82-00-EU-G" model="account.tax.template">
+    <field name="name">VAT-IN-V82-00-EU-G</field>
+    <field name="description">TVA à l'entrée 0% Intracomm. - Biens divers</field>
+  </record>
+  <record id="l10n_be.attn_VAT-IN-V83-12-EU" model="account.tax.template">
+    <field name="name">VAT-IN-V83-12-EU</field>
+    <field
+      name="description"
+    >TVA Déductible 12% Intracomm. - Biens d'investissement</field>
+  </record>
+  <record id="l10n_be.attn_VAT-IN-V83-06-EU" model="account.tax.template">
+    <field name="name">VAT-IN-V83-06-EU</field>
+    <field
+      name="description"
+    >TVA Déductible 6% Intracomm. - Biens d'investissement</field>
+  </record>
+  <record id="l10n_be.attn_VAT-IN-V83-00-EU" model="account.tax.template">
+    <field name="name">VAT-IN-V83-00-EU</field>
+    <field
+      name="description"
+    >TVA à l'entrée 0% Intracomm. - Biens d'investissement</field>
+  </record>
+  <record id="l10n_be.attn_VAT-IN-V81-21-ROW-CC" model="account.tax.template">
+    <field name="name">VAT-IN-V81-21-ROW-CC</field>
+    <field
+      name="description"
+    >TVA Déductible 21% Hors EU - Approvisionn. et marchandises</field>
+  </record>
+  <record id="l10n_be.attn_VAT-IN-V81-12-ROW-CC" model="account.tax.template">
+    <field name="name">VAT-IN-V81-12-ROW-CC</field>
+    <field
+      name="description"
+    >TVA Déductible 12% Hors EU - Approvisionn. et marchandises</field>
+  </record>
+  <record id="l10n_be.attn_VAT-IN-V81-06-ROW-CC" model="account.tax.template">
+    <field name="name">VAT-IN-V81-06-ROW-CC</field>
+    <field
+      name="description"
+    >TVA Déductible 6% Hors EU - Approvisionn. et marchandises</field>
+  </record>
+  <record id="l10n_be.attn_VAT-IN-V81-00-ROW-CC" model="account.tax.template">
+    <field name="name">VAT-IN-V81-00-ROW-CC</field>
+    <field
+      name="description"
+    >TVA à l'entrée 0% Hors EU - Approvisionn. et marchandises</field>
+  </record>
+  <record id="l10n_be.attn_VAT-IN-V82-21-ROW-CC" model="account.tax.template">
+    <field name="name">VAT-IN-V82-21-ROW-CC</field>
+    <field
+      name="description"
+    >TVA Déductible 21% Hors EU - Services and other goods</field>
+  </record>
+  <record id="l10n_be.attn_VAT-IN-V82-12-ROW-CC" model="account.tax.template">
+    <field name="name">VAT-IN-V82-12-ROW-CC</field>
+    <field
+      name="description"
+    >TVA Déductible 12% Hors EU - Services and other goods</field>
+  </record>
+  <record id="l10n_be.attn_VAT-IN-V82-06-ROW-CC" model="account.tax.template">
+    <field name="name">VAT-IN-V82-06-ROW-CC</field>
+    <field
+      name="description"
+    >TVA Déductible 6% Hors EU - Services and other goods</field>
+  </record>
+  <record id="l10n_be.attn_VAT-IN-V82-00-ROW-CC" model="account.tax.template">
+    <field name="name">VAT-IN-V82-00-ROW-CC</field>
+    <field
+      name="description"
+    >TVA à l'entrée 0% Hors EU - Services and other goods</field>
+  </record>
+  <record id="l10n_be.attn_VAT-IN-V83-21-ROW-CC" model="account.tax.template">
+    <field name="name">VAT-IN-V83-21-ROW-CC</field>
+    <field
+      name="description"
+    >TVA Déductible 21% Hors EU - Biens d'investissement</field>
+  </record>
+  <record id="l10n_be.attn_VAT-IN-V83-12-ROW-CC" model="account.tax.template">
+    <field name="name">VAT-IN-V83-12-ROW-CC</field>
+    <field
+      name="description"
+    >TVA Déductible 12% Hors EU - Biens d'investissement</field>
+  </record>
+  <record id="l10n_be.attn_VAT-IN-V83-06-ROW-CC" model="account.tax.template">
+    <field name="name">VAT-IN-V83-06-ROW-CC</field>
+    <field name="description">TVA Déductible 6% Hors EU - Biens d'investissement</field>
+  </record>
+  <record id="l10n_be.attn_VAT-IN-V83-00-ROW-CC" model="account.tax.template">
+    <field name="name">VAT-IN-V83-00-ROW-CC</field>
+    <field name="description">0% Non EU - Biens d'investissement</field>
+  </record>
+  <record id="l10n_be.attn_VAT-IN-V61" model="account.tax.template">
+    <field name="name">VAT-IN-V61</field>
+    <field name="description">Régularisation en faveur de l'état</field>
+  </record>
+  <record id="l10n_be.attn_VAT-IN-V62" model="account.tax.template">
+    <field name="name">VAT-IN-V62</field>
+    <field name="description">Régularisation en faveur du déclarant</field>
+  </record>
 </odoo>

@@ -4,6 +4,7 @@
 from datetime import date, datetime as dt
 
 from freezegun import freeze_time
+
 from odoo import fields
 from odoo.tests.common import TransactionCase
 

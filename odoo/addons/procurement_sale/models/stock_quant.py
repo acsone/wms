@@ -11,8 +11,15 @@ class StockQuant(models.Model):
 
     @api.model
     def quants_get_preferred_domain(
-        self, qty, move, ops=False, lot_id=False, domain=None, preferred_domain_list=[]
+        self,
+        qty,
+        move,
+        ops=False,
+        lot_id=False,
+        domain=None,
+        preferred_domain_list=None,
     ):
+        preferred_domain_list = preferred_domain_list or []
         allowed_qty = qty
         if move.picking_id.picking_type_subcode == "PICK":
             # Do not reserve quantity that is from a previously confirmed SO

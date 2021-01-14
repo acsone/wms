@@ -4,7 +4,7 @@
 
 {
     "name": "Stock Valuation",
-    "version": "1.0",
+    "version": "10.0.1.0.0",
     "category": "Stock Management",
     "author": "BCIM",
     "depends": [
@@ -20,7 +20,6 @@
         "security/menu.xml",
     ],
     "installable": True,
-    "active": False,
     "license": "AGPL-3",
     "application": False,
 }

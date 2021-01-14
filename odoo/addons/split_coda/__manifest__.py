@@ -4,7 +4,7 @@
 
 {
     "name": "Split CODA",
-    "version": "1.0",
+    "version": "10.0.1.0.0",
     "author": "Okia",
     "maintainer": "QANSEE",
     "category": "Accounting",

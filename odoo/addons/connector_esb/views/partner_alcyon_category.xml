@@ -6,8 +6,8 @@
       <form string="Partner Alcyon Category From">
         <sheet>
           <group>
-            <field name="name"/>
-            <field name="esb_ref"/>
+            <field name="name" />
+            <field name="esb_ref" />
           </group>
         </sheet>
       </form>

@@ -4,9 +4,9 @@
 
 import os
 
+import mock
 import requests
 
-import mock
 from odoo.addons.connector_esb.tests import common
 
 
@@ -144,7 +144,7 @@ class TestExportSaleOrder(common.ESBTestCase):
         Expected result;
             The SO is exported
         """
-        """Test export of a sale order catching the put request."""
+        # Test export of a sale order catching the put request.
         self.placesdesvetos_order.action_confirm()
         with self.backend.work_on("sale.order") as work:
             exporter = work.component(usage="record.exporter")

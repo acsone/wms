@@ -8,13 +8,14 @@ import os
 import zipfile
 
 import shapefile
-from odoo import _, api, fields, models
-from odoo.exceptions import UserError
-from odoo.tools.osutil import tempdir
 from shapely.geometry import asShape
 from shapely.geometry.multipolygon import MultiPolygon
 from shapely.geometry.polygon import Polygon
 from shapely.wkb import loads as wkbloads
+
+from odoo import _, api, fields, models
+from odoo.exceptions import UserError
+from odoo.tools.osutil import tempdir
 
 logger = logging.getLogger(__name__)
 

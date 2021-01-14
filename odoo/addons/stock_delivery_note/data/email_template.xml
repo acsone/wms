@@ -1,14 +1,13 @@
-<?xml version="1.0"?>
+<?xml version="1.0" ?>
 <odoo noupdate="1">
-
-    <record id="delivery_note_csv" model="mail.template">
-        <field name="name">Delivery Note</field>
-        <field name="model_id" ref="stock.model_stock_picking"/>
-        <field name="email_from">${user.company_id.partner_id.email|safe}</field>
-        <field name="subject">Alcyon Delivery Note ${object.id}</field>
-        <field name="partner_to">${object.partner_id.id}</field>
-        <field name="lang">${object.partner_id.lang}</field>
-        <field name="body_html">
+  <record id="delivery_note_csv" model="mail.template">
+    <field name="name">Delivery Note</field>
+    <field name="model_id" ref="stock.model_stock_picking" />
+    <field name="email_from">${user.company_id.partner_id.email|safe}</field>
+    <field name="subject">Alcyon Delivery Note ${object.id}</field>
+    <field name="partner_to">${object.partner_id.id}</field>
+    <field name="lang">${object.partner_id.lang}</field>
+    <field name="body_html">
             <![CDATA[
                 <p>Hello,</p>
                 <p>Please find here attached the electronic delivery note.</p>
@@ -17,6 +16,5 @@
                 <p>Your Team Alcyon</p>
             ]]>
         </field>
-    </record>
-
+  </record>
 </odoo>

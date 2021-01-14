@@ -4,6 +4,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from openerp import api, fields, models, tools
 from openerp.osv.expression import AND, OR
+from psycopg2.extensions import AsIs
 
 
 class WizardValuationHistory(models.TransientModel):
@@ -50,11 +51,13 @@ class StockHistoryMaterialized(models.AbstractModel):
 
     @api.model
     def refresh_view(self):
-        self.env.cr.execute("refresh materialized view %s" % self._table)
+        self.env.cr.execute("refresh materialized view %s", (AsIs(self._table),))
         self.set_refresh_date()
 
     def init(self):
-        self.env.cr.execute("DROP MATERIALIZED VIEW IF EXISTS %s CASCADE" % self._table)
+        self.env.cr.execute(
+            "DROP MATERIALIZED VIEW IF EXISTS %s CASCADE", (AsIs(self._table),)
+        )
         self.env.cr.execute(
             """
             CREATE MATERIALIZED VIEW %s AS (
@@ -202,9 +205,10 @@ class StockHistoryMaterialized(models.AbstractModel):
                 GROUP BY move_id, location_id, company_id, product_id,
                          product_categ_id, product_supplier_id, date,
                          source, product_template_id
-            ) WITH NO DATA;"""
-            % (self._table,)
-        )  # noqa
+            ) WITH NO DATA;""",
+            (AsIs(self._table),),
+        )
+        # pylint: disable=E8103
         self.env.cr.execute(
             "CREATE UNIQUE INDEX pk_{} ON {} (id)".format(self._table, self._table)
         )
@@ -221,7 +225,7 @@ class StockHistoryMaterialized(models.AbstractModel):
             % (self._table, self._table)
         )
         self.env.cr.execute(
-            "CREATE INDEX %s_date_idx ON %s (date)" % (self._table, self._table)
+            "CREATE INDEX {}_date_idx ON {} (date)".format(self._table, self._table)
         )
         self.set_refresh_date(date=False)
         cron = self.env.ref(

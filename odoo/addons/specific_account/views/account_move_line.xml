@@ -6,17 +6,26 @@
     <field name="inherit_id" ref="account.view_account_move_line_filter" />
     <field name="arch" type="xml">
       <field name="journal_id" position="after">
-        <separator/>
-        <filter string="Due date over 210 days" domain="[
-          ('date_maturity', '&lt;', (context_today() + relativedelta(days=-210)).strftime('%Y-%m-%d'))]" />
-        <filter string="Due date between 90 to 210 days" domain="[
+        <separator />
+        <filter
+          string="Due date over 210 days"
+          domain="[
+          ('date_maturity', '&lt;', (context_today() + relativedelta(days=-210)).strftime('%Y-%m-%d'))]"
+        />
+        <filter
+          string="Due date between 90 to 210 days"
+          domain="[
           '&amp;',
           ('date_maturity', '&gt;=', (context_today() + relativedelta(days=-210)).strftime('%Y-%m-%d')),
-          ('date_maturity', '&lt;=', (context_today() + relativedelta(days=-90)).strftime('%Y-%m-%d'))]" />
-        <filter string="Due date up to 89 days" domain="[
+          ('date_maturity', '&lt;=', (context_today() + relativedelta(days=-90)).strftime('%Y-%m-%d'))]"
+        />
+        <filter
+          string="Due date up to 89 days"
+          domain="[
           '&amp;',
           ('date_maturity', '&gt;', (context_today() + relativedelta(days=-90)).strftime('%Y-%m-%d')),
-          ('date_maturity', '&lt;', context_today().strftime('%Y-%m-%d'))]" />
+          ('date_maturity', '&lt;', context_today().strftime('%Y-%m-%d'))]"
+        />
       </field>
       <xpath expr="//filter[@name='unreconciled']" position="attributes">
         <attribute name="domain">[('full_reconcile_id', '=', False),
@@ -24,7 +33,6 @@
       </xpath>
     </field>
   </record>
-
   <record id="view_move_line_tree" model="ir.ui.view">
     <field name="name">account.move.line.tree</field>
     <field name="model">account.move.line</field>

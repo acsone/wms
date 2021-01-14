@@ -11,7 +11,9 @@ from io import StringIO
 import dicttoxml
 import paramiko
 from lxml import etree
+
 from odoo import _, exceptions, fields
+
 from odoo.addons.component.core import AbstractComponent, Component
 
 logging.getLogger("dicttoxml").setLevel(logging.WARN)

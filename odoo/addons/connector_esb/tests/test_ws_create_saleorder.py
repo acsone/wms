@@ -7,10 +7,12 @@ from datetime import datetime
 
 from freezegun import freeze_time
 from mock import MagicMock, patch
+
 from odoo import fields
-from odoo.addons.connector_esb.controllers.sale import SaleController
 from odoo.exceptions import MissingError
 from odoo.tests.common import SavepointCase
+
+from odoo.addons.connector_esb.controllers.sale import SaleController
 
 
 class WSCreateSaleOrderTestCase(SavepointCase):

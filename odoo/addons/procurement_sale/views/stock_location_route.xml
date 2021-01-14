@@ -1,15 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-
-    <record model="ir.ui.view" id="stock_location_route_form_view">
-        <field name="name">prority</field>
-        <field name="model">stock.location.route</field>
-        <field name="inherit_id" ref="stock.stock_location_route_form_view"/>
-        <field name="arch" type="xml">
-            <field name="sequence" position="after">
-                <field name="priority" attrs="{'invisible': [('sale_selectable', '=', 1)]}"/>
-            </field>
-        </field>
-    </record>
-
+  <record model="ir.ui.view" id="stock_location_route_form_view">
+    <field name="name">prority</field>
+    <field name="model">stock.location.route</field>
+    <field name="inherit_id" ref="stock.stock_location_route_form_view" />
+    <field name="arch" type="xml">
+      <field name="sequence" position="after">
+        <field name="priority" attrs="{'invisible': [('sale_selectable', '=', 1)]}" />
+      </field>
+    </field>
+  </record>
 </odoo>

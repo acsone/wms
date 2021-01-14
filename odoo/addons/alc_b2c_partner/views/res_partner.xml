@@ -1,24 +1,22 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <!-- Copyright 2020 ACSONE SA/NV
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
-
 <odoo>
-
-    <record model="ir.ui.view" id="res_partner_form_view">
-        <field name="name">res.partner.form (in alc_b2c_partner)</field>
-        <field name="model">res.partner</field>
-        <field name="inherit_id" ref="alc_partner_manual_sale_order.res_partner_form_view"/>
-        <field name="arch" type="xml">
-            <field name="manual_sale_order_allowed" position="after">
-                <field name="is_b2c_customer" invisible="1"/>
-            </field>
-
-            <field name="manual_sale_order_allowed" position="attributes">
-                <attribute name="attrs">{'readonly': [('is_b2c_customer', '=', True)]}
+  <record model="ir.ui.view" id="res_partner_form_view">
+    <field name="name">res.partner.form (in alc_b2c_partner)</field>
+    <field name="model">res.partner</field>
+    <field
+      name="inherit_id"
+      ref="alc_partner_manual_sale_order.res_partner_form_view"
+    />
+    <field name="arch" type="xml">
+      <field name="manual_sale_order_allowed" position="after">
+        <field name="is_b2c_customer" invisible="1" />
+      </field>
+      <field name="manual_sale_order_allowed" position="attributes">
+        <attribute name="attrs">{'readonly': [('is_b2c_customer', '=', True)]}
                 </attribute>
-            </field>
-        </field>
-    </record>
-
-
+      </field>
+    </field>
+  </record>
 </odoo>

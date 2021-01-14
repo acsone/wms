@@ -24,7 +24,6 @@ class SaleOrderLine(models.Model):
 class SaleOrder(models.Model):
     _inherit = "sale.order"
 
-    @api.one
     def _assign_delivery_round(self):
         """ When the sale order is confirmed,
         - if there is a shipping method (carrier) that map to a delivery
@@ -34,40 +33,41 @@ class SaleOrder(models.Model):
         In all cases, a picking is associated to a round instance only if
         (partially) available
         """
-        _logger.debug("Searching a delivery round for SO %d", self.id)
-        # 1 shipping is created
-        # multiple pickings could be created, or inserted in existing pickings
+        for rec in self:
+            _logger.debug("Searching a delivery round for SO %d", rec.id)
+            # 1 shipping is created
+            # multiple pickings could be created, or inserted in existing pickings
 
-        pickins_assignable_to_round = self.picking_ids.filtered(
-            "is_assignable_to_round"
-        )
-        if pickins_assignable_to_round:
-            delivery_round = self._find_suitable_delivery_round(
-                pickins_assignable_to_round
+            pickins_assignable_to_round = rec.picking_ids.filtered(
+                "is_assignable_to_round"
             )
-            if delivery_round:
-                pickins_assignable_to_round = pickins_assignable_to_round.filtered(
-                    lambda picking: picking.partner_id.is_shipping_date_allowed(
-                        delivery_round.date
-                    )
+            if pickins_assignable_to_round:
+                delivery_round = rec._find_suitable_delivery_round(
+                    pickins_assignable_to_round
                 )
-            if pickins_assignable_to_round and delivery_round:
-                delivery_round._assign_pickings(pickins_assignable_to_round)
+                if delivery_round:
+                    pickins_assignable_to_round = pickins_assignable_to_round.filtered(
+                        lambda picking: picking.partner_id.is_shipping_date_allowed(
+                            delivery_round.date
+                        )
+                    )
+                if pickins_assignable_to_round and delivery_round:
+                    delivery_round._assign_pickings(pickins_assignable_to_round)
 
-        # If pickings are already into a delivery, ensure that operations
-        # are assigned
-        pickings = (self.picking_ids - pickins_assignable_to_round).filtered(
-            "is_assignable"
-        )
-        pick_ids_by_delivery_round = defaultdict(set)
-        for pick in pickings:
-            pick_ids_by_delivery_round[pick.delivery_round_id].add(pick.id)
-        for delivery_round, pick_ids in pick_ids_by_delivery_round.items():
-            if not delivery_round:
-                continue
-            delivery_round._confirm_picking_and_assign_moves(
-                self.env["stock.picking"].browse(pick_ids)
+            # If pickings are already into a delivery, ensure that operations
+            # are assigned
+            pickings = (rec.picking_ids - pickins_assignable_to_round).filtered(
+                "is_assignable"
             )
+            pick_ids_by_delivery_round = defaultdict(set)
+            for pick in pickings:
+                pick_ids_by_delivery_round[pick.delivery_round_id].add(pick.id)
+            for delivery_round, pick_ids in pick_ids_by_delivery_round.items():
+                if not delivery_round:
+                    continue
+                delivery_round._confirm_picking_and_assign_moves(
+                    rec.env["stock.picking"].browse(pick_ids)
+                )
 
     def _find_suitable_delivery_round(self, pickings):
         self.ensure_one()

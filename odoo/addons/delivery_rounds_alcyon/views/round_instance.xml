@@ -1,39 +1,79 @@
-<?xml version="1.0"?>
+<?xml version="1.0" ?>
 <odoo>
-    <record id="view_round_instance_kanban" model="ir.ui.view">
-        <field name="name">count alcyon</field>
-        <field name="model">round.instance</field>
-        <field name="inherit_id" ref="delivery_rounds.view_round_instance_kanban"/>
-        <field name="arch" type="xml">
-            <xpath expr="//templates" position="before">
-                <field name="count_picking_available_total_ali"/>
-                <field name="count_picking_available_total_med"/>
-                <field name="count_picking_available_total_mat"/>
-                <field name="count_picking_available_total_frigo"/>
-                <field name="count_picking_available_total_pharm"/>
-            </xpath>
-            <xpath expr="//button/field[@name='count_picking_done_total']" position="after">
-                <button class="btn btn-picking" name="action_picking_tree_available" type="object">
-                    <field name="count_picking_done_total_ali" widget="progress" title="Aliments"
-                        options="{'current_value': 'count_picking_done_total_ali', 'max_value': 'count_picking_available_total_ali'}"/>
-                </button>
-                <button class="btn btn-picking" name="action_picking_tree_available" type="object">
-                    <field name="count_picking_done_total_med" widget="progress" title="Médicaments"
-                        options="{'current_value': 'count_picking_done_total_med', 'max_value': 'count_picking_available_total_med'}"/>
-                </button>
-                <button class="btn btn-picking" name="action_picking_tree_available" type="object">
-                    <field name="count_picking_done_total_frigo" widget="progress" title="Frigo"
-                        options="{'current_value': 'count_picking_done_total_frigo', 'max_value': 'count_picking_available_total_frigo'}"/>
-                </button>
-                <button class="btn btn-picking" name="action_picking_tree_available" type="object">
-                    <field name="count_picking_done_total_mat" widget="progress" title="Matériel"
-                        options="{'current_value': 'count_picking_done_total_mat', 'max_value': 'count_picking_available_total_mat'}"/>
-                </button>
-                <button class="btn btn-picking" name="action_picking_tree_available" type="object">
-                    <field name="count_picking_done_total_pharm" widget="progress" title="Humain"
-                        options="{'current_value': 'count_picking_done_total_pharm', 'max_value': 'count_picking_available_total_pharm'}"/>
-                </button>
-            </xpath>
-        </field>
-    </record>
+  <record id="view_round_instance_kanban" model="ir.ui.view">
+    <field name="name">count alcyon</field>
+    <field name="model">round.instance</field>
+    <field name="inherit_id" ref="delivery_rounds.view_round_instance_kanban" />
+    <field name="arch" type="xml">
+      <xpath expr="//templates" position="before">
+        <field name="count_picking_available_total_ali" />
+        <field name="count_picking_available_total_med" />
+        <field name="count_picking_available_total_mat" />
+        <field name="count_picking_available_total_frigo" />
+        <field name="count_picking_available_total_pharm" />
+      </xpath>
+      <xpath expr="//button/field[@name='count_picking_done_total']" position="after">
+        <button
+          class="btn btn-picking"
+          name="action_picking_tree_available"
+          type="object"
+        >
+          <field
+            name="count_picking_done_total_ali"
+            widget="progress"
+            title="Aliments"
+            options="{'current_value': 'count_picking_done_total_ali', 'max_value': 'count_picking_available_total_ali'}"
+          />
+        </button>
+        <button
+          class="btn btn-picking"
+          name="action_picking_tree_available"
+          type="object"
+        >
+          <field
+            name="count_picking_done_total_med"
+            widget="progress"
+            title="Médicaments"
+            options="{'current_value': 'count_picking_done_total_med', 'max_value': 'count_picking_available_total_med'}"
+          />
+        </button>
+        <button
+          class="btn btn-picking"
+          name="action_picking_tree_available"
+          type="object"
+        >
+          <field
+            name="count_picking_done_total_frigo"
+            widget="progress"
+            title="Frigo"
+            options="{'current_value': 'count_picking_done_total_frigo', 'max_value': 'count_picking_available_total_frigo'}"
+          />
+        </button>
+        <button
+          class="btn btn-picking"
+          name="action_picking_tree_available"
+          type="object"
+        >
+          <field
+            name="count_picking_done_total_mat"
+            widget="progress"
+            title="Matériel"
+            options="{'current_value': 'count_picking_done_total_mat', 'max_value': 'count_picking_available_total_mat'}"
+          />
+        </button>
+        <button
+          class="btn btn-picking"
+          name="action_picking_tree_available"
+          type="object"
+        >
+          <field
+            name="count_picking_done_total_pharm"
+            widget="progress"
+            title="Humain"
+            options="{'current_value': 'count_picking_done_total_pharm', 'max_value': 'count_picking_available_total_pharm'}"
+          />
+        </button>
+      </xpath>
+    </field>
+  </record>
 </odoo>

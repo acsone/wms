@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-
   <!-- Add an entry in the action menu to re generate the delivery note -->
-
   <record id="action_server_generate_delivery_note" model="ir.actions.server">
     <field name="name">Generate delivery note</field>
     <field name="condition">True</field>
@@ -11,15 +9,16 @@
     <field name="state">code</field>
     <field name="code">records.create_delivery_note()</field>
   </record>
-
   <record id="ir_values_generate_delivery_note" model="ir.values">
     <field name="name">action_generate_delivery_note</field>
     <field name="action_id" ref="action_server_generate_delivery_note" />
-    <field name="value" eval="'ir.actions.server,' + str(ref('action_server_generate_delivery_note'))"/>
+    <field
+      name="value"
+      eval="'ir.actions.server,' + str(ref('action_server_generate_delivery_note'))"
+    />
     <field name="key">action</field>
     <field name="model_id" ref="model_stock_picking" />
     <field name="model">stock.picking</field>
     <field name="key2">client_action_multi</field>
   </record>
-
 </odoo>

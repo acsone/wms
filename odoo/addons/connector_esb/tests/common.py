@@ -8,7 +8,9 @@ from collections import defaultdict
 import xmlunittest
 from freezegun import freeze_time
 from lxml import etree
+
 from odoo import fields
+
 from odoo.addons.component.tests.common import SavepointComponentCase
 
 

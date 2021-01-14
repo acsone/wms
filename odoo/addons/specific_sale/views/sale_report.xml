@@ -1,22 +1,21 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-
-    <record id="sale_report_specific_search" model="ir.ui.view">
-        <field name="name">sale.report.specific.search</field>
-        <field name="model">sale.report</field>
-        <field name="inherit_id" ref="sale.view_order_product_search"/>
-        <field name="arch" type="xml">
-
-            <field name="user_id" position="after">
-                <field name="month"/>
-            </field>
-
-            <filter name="Sales" position="after">
-                <separator/>
-                <filter name="only_narcotic" string="Only narcotics" domain="[('only_narcotic', '=', True)]"/>
-            </filter>
-
-        </field>
-    </record>
-
+  <record id="sale_report_specific_search" model="ir.ui.view">
+    <field name="name">sale.report.specific.search</field>
+    <field name="model">sale.report</field>
+    <field name="inherit_id" ref="sale.view_order_product_search" />
+    <field name="arch" type="xml">
+      <field name="user_id" position="after">
+        <field name="month" />
+      </field>
+      <filter name="Sales" position="after">
+        <separator />
+        <filter
+          name="only_narcotic"
+          string="Only narcotics"
+          domain="[('only_narcotic', '=', True)]"
+        />
+      </filter>
+    </field>
+  </record>
 </odoo>

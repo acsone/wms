@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
-
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo noupdate="1">
-    <record id="deliver_carrier_long_term" model="delivery.carrier">
-        <field name="name">deliver_carrier_long_term</field>
-    </record>
+  <record id="deliver_carrier_long_term" model="delivery.carrier">
+    <field name="name">deliver_carrier_long_term</field>
+  </record>
 </odoo>

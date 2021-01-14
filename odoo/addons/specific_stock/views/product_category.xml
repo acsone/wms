@@ -1,26 +1,21 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-
-    <record id="view_product_category_specific_form" model="ir.ui.view">
-        <field name="name">product.category.specific.form</field>
-        <field name="model">product.category</field>
-        <field name="inherit_id" ref="product.product_category_form_view"/>
-        <field name="arch" type="xml">
-
-            <field name="removal_strategy_id" position="after">
-                <field name="use_time" />
-                <field name="life_time" />
-                <field name="removal_time" />
-                <field name="alert_time" />
-            </field>
-
-            <group name="first" position="after">
-              <group>
-                <field name="warning_info"/>
-              </group>
-            </group>
-
-        </field>
-    </record>
-
+  <record id="view_product_category_specific_form" model="ir.ui.view">
+    <field name="name">product.category.specific.form</field>
+    <field name="model">product.category</field>
+    <field name="inherit_id" ref="product.product_category_form_view" />
+    <field name="arch" type="xml">
+      <field name="removal_strategy_id" position="after">
+        <field name="use_time" />
+        <field name="life_time" />
+        <field name="removal_time" />
+        <field name="alert_time" />
+      </field>
+      <group name="first" position="after">
+        <group>
+          <field name="warning_info" />
+        </group>
+      </group>
+    </field>
+  </record>
 </odoo>

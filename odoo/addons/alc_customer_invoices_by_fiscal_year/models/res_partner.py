@@ -12,7 +12,7 @@ class ResPartner(models.Model):
     _inherit = "res.partner"
 
     total_invoiced_in_current_fiscal_year = fields.Monetary(
-        compute="_invoice_total_current_fiscal_year",
+        compute="_compute_invoice_total_current_fiscal_year",
         string="Total Invoiced during the current fiscal year",
         groups="account.group_account_invoice",
     )
@@ -29,7 +29,7 @@ class ResPartner(models.Model):
         return start_date_fiscal_year, end_date_fiscal_year
 
     @api.multi
-    def _invoice_total_current_fiscal_year(self):
+    def _compute_invoice_total_current_fiscal_year(self):
         account_invoice_report = self.env["account.invoice.report"]
 
         start_date_fiscal_year, end_date_fiscal_year = self._get_fiscal_year()
@@ -71,7 +71,7 @@ class ResPartner(models.Model):
                 """
             % where_clause
         )
-        self.env.cr.execute(query, where_clause_params)
+        self.env.cr.execute(query, where_clause_params)  # pylint: disable=E8103
         price_totals = self.env.cr.dictfetchall()
         for partner, child_ids in all_partners_and_children.items():
             partner.total_invoiced_in_current_fiscal_year = sum(

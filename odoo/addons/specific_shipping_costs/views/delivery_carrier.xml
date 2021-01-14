@@ -1,31 +1,28 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-
   <record model="ir.ui.view" id="view_delivery_carrier_specific_form">
     <field name="name">delivery.carrier.specific.form</field>
     <field name="model">delivery.carrier</field>
-    <field name="inherit_id" ref="delivery.view_delivery_carrier_form"/>
+    <field name="inherit_id" ref="delivery.view_delivery_carrier_form" />
     <field name="arch" type="xml">
-
       <field name="delivery_type" position="after">
-        <field name="use_specific_cost_calculation"/>
+        <field name="use_specific_cost_calculation" />
       </field>
-
       <label for="margin" position="attributes">
-        <attribute name="attrs">{'invisible': [('use_specific_cost_calculation', '=', True)]}</attribute>
+        <attribute
+          name="attrs"
+        >{'invisible': [('use_specific_cost_calculation', '=', True)]}</attribute>
       </label>
-
       <xpath expr="//field[@name='margin']/parent::div" position="attributes">
-        <attribute name="attrs">{'invisible': [('use_specific_cost_calculation', '=', True)]}</attribute>
+        <attribute
+          name="attrs"
+        >{'invisible': [('use_specific_cost_calculation', '=', True)]}</attribute>
       </xpath>
-
       <field name="integration_level" position="attributes">
         <attribute name="attrs">
           {'invisible': ['|', '|', ('delivery_type', '=', 'fixed'), ('delivery_type', '=', 'base_on_rule'), ('use_specific_cost_calculation', '=', True)]}
         </attribute>
       </field>
-
     </field>
   </record>
-
 </odoo>

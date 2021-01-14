@@ -10,7 +10,8 @@ class CSVFileImportWizard(models.TransientModel):
 
     import_ids = fields.Many2many("csv.file.import", string="Imports")
 
-    def default_get(self, fields_list={}):
+    def default_get(self, fields_list=None):
+        fields_list = fields_list or {}
         result = super(CSVFileImportWizard, self).default_get(fields_list=fields_list)
 
         result["import_ids"] = [(6, 0, self.env.context.get("active_ids", []))]

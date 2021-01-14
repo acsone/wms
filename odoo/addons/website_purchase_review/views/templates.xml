@@ -1,434 +1,714 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="assets_purchase_review">
-        <script type="text/javascript" src="/website_purchase_review/static/src/js/purchase_review.js"></script>
-        <script type="text/javascript" src="/web/static/lib/nvd3/d3.v3.js"></script>
-        <script type="text/javascript" src="/web/static/lib/nvd3/nv.d3.js"></script>
-        <link rel="stylesheet" href="/website_purchase_review/static/src/css/purchase_review.css" />
-        <link rel="stylesheet" type="text/css" href="/web/static/lib/nvd3/nv.d3.css"/>
-    </template>
-
-    <template id="main_page" name="Purchase review">&lt;!DOCTYPE html&gt;
+  <template id="assets_purchase_review">
+    <script
+      type="text/javascript"
+      src="/website_purchase_review/static/src/js/purchase_review.js"
+    />
+    <script type="text/javascript" src="/web/static/lib/nvd3/d3.v3.js" />
+    <script type="text/javascript" src="/web/static/lib/nvd3/nv.d3.js" />
+    <link
+      rel="stylesheet"
+      href="/website_purchase_review/static/src/css/purchase_review.css"
+    />
+    <link rel="stylesheet" type="text/css" href="/web/static/lib/nvd3/nv.d3.css" />
+  </template>
+  <template id="main_page" name="Purchase review">&lt;!DOCTYPE html&gt;
 <html>
-    <head>
+      <head>
         <title>Purchase Review</title>
-
-        <meta charset="utf-8"/>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
         <meta http-equiv="content-type" content="text/html, charset=utf-8" />
-
-        <link rel="shortcut icon" href="/web/static/src/img/favicon.ico" type="image/x-icon"/>
-
+        <link
+          rel="shortcut icon"
+          href="/web/static/src/img/favicon.ico"
+          type="image/x-icon"
+        />
         <script type="text/javascript">
             var odoo = {
-            csrf_token: "<t t-esc="request.csrf_token(None)"/>",
-            session_info: <t t-raw="session_info"/>,
-            _modules: <t t-raw="modules"/>,
+            csrf_token: "<t t-esc="request.csrf_token(None)" />",
+            session_info: <t t-raw="session_info" />,
+            _modules: <t t-raw="modules" />,
             };
         </script>
-
-        <t t-call-assets="web.assets_common" t-js="false"/>
-        <t t-call-assets="web.assets_frontend" t-js="false"/>
-        <t t-call-assets="web.assets_common" t-css="false"/>
-        <t t-call-assets="web.assets_frontend" t-css="false"/>
-        <t t-call-assets="website_purchase_review.assets_purchase_review" t-js="false"/>
-        <t t-call-assets="website_purchase_review.assets_purchase_review" t-css="false"/>
-    </head>
-    <body class="container-fluid">
+        <t t-call-assets="web.assets_common" t-js="false" />
+        <t t-call-assets="web.assets_frontend" t-js="false" />
+        <t t-call-assets="web.assets_common" t-css="false" />
+        <t t-call-assets="web.assets_frontend" t-css="false" />
+        <t
+          t-call-assets="website_purchase_review.assets_purchase_review"
+          t-js="false"
+        />
+        <t
+          t-call-assets="website_purchase_review.assets_purchase_review"
+          t-css="false"
+        />
+      </head>
+      <body class="container-fluid">
         <div>
-            <t t-call="website_purchase_review.main_page_body"/>
+          <t t-call="website_purchase_review.main_page_body" />
         </div>
-    </body>
-</html>
+      </body>
+    </html>
 </template>
-
-    <template id="main_page_body">
-        <div class="row"  style="height: 100%; min-height: 100%">
-            <div class="col-md-9" style="height: 100%; min-height: 100%">
-                <div class="header border block_bacground">
-                    <div class="header">
-                        <div class="row">
-
-                            <div class="col-md-5">
-                                <h3><span t-field="po.partner_id.name"/></h3>
-                                <strong><span t-field="po.partner_id.ref"/></strong>
-                            </div>
-                            <div class="col-md-2">
-                                <table class="spacing_table_5">
-                                    <tr>
-                                        <td>Total amount:</td>
-                                        <td><span t-field="po.amount_untaxed" id="amount_untaxed" t-options='{"widget": "monetary", "display_currency": po.currency_id}'/></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Total weight:</td>
-                                        <td><span t-field="po.total_weight" id="total_weight"/> Kg</td>
-                                    </tr>
-                                </table>
-                            </div>
-                            <div class="col-md-3">
-                                <table class="spacing_table_2">
-                                    <tr>
-                                        <td>Scheduled date:</td>
-                                        <td><span id="global_date_planned" t-field="po.date_planned" t-options="{'widget': 'date'}"/></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Discount global:</td>
-                                        <td><input type="number" id="global_discount_global" step="0.01" t-att-value="discount_global_overwrite"/></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Promotion supplier:</td>
-                                        <td><input type="number" id="global_promotion_supplier" step="0.01" t-att-value="promotion_supplier_overwrite"/></td>
-                                    </tr>
-                                </table>
-                            </div>
-                            <div class="col-md-2 text-right">
-                                <button id="save_global_values_btn" type="button" class="btn btn-info">Save</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="product_data">
-                    <div class="row">
-                        <div class="col-md-5">
-                            <div class="border block_bacground">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <strong><span t-field="current_product.name"/></strong><br/>
-                                        <span t-field="current_product.default_code"/>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <form method="post" action="#">
-                                        <input name="order_id" t-att-value="po.id" type="hidden" />
-                                        <input name="product_id" t-att-value="current_product.id" type="hidden" />
-                                        <input name="next_product_id" type="hidden" id="next_product_id" />
-                                        <div class="col-md-4" id="buttons_panel">
-                                            <div class="row">
-                                                <div class="col-md-12 text-center">
-                                                    <button type="submit" class="btn btn-primary navigation_button" id="save_line">Confirm</button>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-12 text-center">
-                                                    <div class="progress" style="margin-right: 10px; margin-left: 10px;">
-                                                        <t t-set="width_pct" t-value="0" />
-                                                        <t t-if="po.total_lines">
-                                                            <t t-set="width_pct" t-value="(po.total_lines_done / float(po.total_lines)) * 100" />
-                                                        </t>
-                                                        <div class="progress-bar bg-primary" role="progressbar"
-                                                             t-att-aria-valuenow="po.total_lines_done" aria-valuemin="0"
-                                                             t-att-aria-valuemax="po.total_lines"
-                                                             t-att-style="'width: %d%%%%' % int(width_pct)">
-                                                            <span><strong><t t-esc="po.total_lines_done"/></strong> / <strong><t t-esc="po.total_lines"/></strong></span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-6 text-right">
-                                                    <button type="button" class="btn btn-default navigation_button" id="step_backward">
-                                                        <i class="fa fa-step-backward"/>
-                                                    </button>
-                                                </div>
-                                                <div class="col-md-6 text-left">
-                                                    <button type="button" class="btn btn-default navigation_button" id="step_forward">
-                                                        <i class="fa fa-step-forward"/>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-6 text-right">
-                                                    <button type="button" class="btn btn-default navigation_button" id="fast_backward">
-                                                        <i class="fa fa-fast-backward"/>
-                                                    </button>
-                                                </div>
-                                                <div class="col-md-6 text-left">
-                                                    <button type="button" class="btn btn-default navigation_button" id="fast_forward">
-                                                        <i class="fa fa-fast-forward"/>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                            <div clas="row">
-                                                <div class="col-md-12 text-center">
-                                                    <div t-if="not is_existing_line and not is_confirmed_line" class="bg-secondary line_state">
-                                                        <i class="fa fa-question-circle" aria-hidden="true"/> New line
-                                                    </div>
-                                                    <div t-if="is_existing_line and not is_confirmed_line" class="bg-info line_state">
-                                                        <i class="fa fa-circle-o" aria-hidden="true"/> To confirm
-                                                    </div>
-                                                    <div t-if="is_existing_line and is_confirmed_line" class="bg-success line_state">
-                                                        <i class="fa fa-check-circle-o" aria-hidden="true"/> Confirmed
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-8">
-                                            <table class="spacing_table_5">
-                                                <tr>
-                                                    <td>Advised qty</td>
-                                                    <td><strong><span t-esc="int(current_product.advised_qty + product_qty)" /></strong></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Ordered qty</td>
-                                                    <td>
-                                                        <input type="number" name="product_qty" id="product_qty" t-att-value="product_qty" required="required"/>
-                                                    </td>
-                                                </tr>
-                                                <tr t-if='current_product.packaging_ids'> 
-                                                    <td>Unit</td>
-                                                    <td>
-                                                     <div hidden="true" name="pre_selected_packaging" id="pre_selected_packaging" t-att-value="pre_selected_packaging"/>
-                                                     <select name='packaging_ids' id='packaging_ids'> 
-                                                        <option value=''></option> 
-                                                        <t t-foreach='current_product.packaging_ids' t-as='packaging'> 
-                                                            <option t-att-value='packaging.id' t-att-qty='packaging.qty' selected='selected'> 
-                                                                <t t-esc='packaging.name'/> 
-                                                            </option> 
-                                                         </t>
-                                                    </select> 
-                                                    </td>
-                                                </tr>
-                                                <tr t-if='current_product.packaging_ids'>
-                                                    <td>Ordered qty of unit</td>
-                                                    <td>
-                                                        <input type="number" name="unit_qty" id="unit_qty" t-att-value="unit_qty" required="required"/>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Stock min</td>
-                                                    <td><input type="number" name="orderpoint_min" id="orderpoint_min" t-att-value="current_product.orderpoint_min" t-att-readonly="current_product.is_mto_product and 'readonly' or None"/></td>
-                                                </tr>
-
-                                                <tr>
-                                                    <td>Stock max</td>
-                                                    <td><input type="number" name="orderpoint_max" id="orderpoint_max" t-att-value="current_product.orderpoint_max" t-att-readonly="current_product.is_mto_product and 'readonly' or None"/></td>
-                                                </tr>
-
-                                                <tr>
-                                                    <td>Qty multiple</td>
-                                                    <td><input type="number" name="orderpoint_qty_multiple" id="orderpoint_qty_multiple" t-att-value="current_product.orderpoint_qty_multiple" t-att-readonly="current_product.is_mto_product and 'readonly' or None"/></td>
-                                                </tr>
-
-                                                <tr>
-                                                    <td>Price</td>
-                                                    <td><input type="number" name="price_unit_base" step="0.01" id="price_unit_base" t-att-value="price_unit_base" required="required"/></td>
-                                                </tr>
-
-                                                <tr>
-                                                    <td>Scheduled date</td>
-                                                    <td><input type="date" name="date_planned" id="date_planned" t-att-value="date_planned" required="required"/></td>
-                                                </tr>
-
-                                                <tr>
-                                                    <td>Discount global</td>
-                                                    <td><input type="number" step="0.01" name="discount_global" id="discount_global" t-att-value="discount_global"/></td>
-                                                </tr>
-
-                                                <tr>
-                                                    <td>Promotion supplier</td>
-                                                    <td><input type="number" step="0.01" name="promotion_supplier" id="promotion_supplier" t-att-value="promotion_supplier"/></td>
-                                                </tr>
-                                            </table>
-                                        </div>
-                                    </form>
-                                </div>
-                                <div class="row">
-                                    <div id="stock_graph">
-                                        <svg height="250"/>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="border block_bacground">
-                                <h3>Stock</h3>
-                                <table class="border-left spacing_table_5">
-                                    <tr>
-                                        <td>Av. annual consumption</td>
-                                        <td><span t-field="current_product.average_annual_consumption" /></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Av. 3 months consumption</td>
-                                        <td><span t-field="current_product.average_three_months_consumption" /></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Stock</td>
-                                        <td><span t-field="current_product.qty_available"/></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Stock available</td>
-                                        <td><span t-field="current_product.virtual_available"/></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Stock Customer</td>
-                                        <td><span t-field="current_product.outgoing_qty" /></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Stock BO</td>
-                                        <td><span t-esc="current_product.qty_available &lt; 0 and -1 * current_product.qty_available or 0" /></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Stock supplier</td>
-                                        <td><span t-field="current_product.incoming_qty"/></td>
-                                    </tr>
-                                </table>
-                            </div>
-                            <div class="border block_bacground">
-                                <h3>Lots</h3>
-                                <table class="table table-striped">
-                                    <tr>
-                                        <th>Lot</th>
-                                        <th>Qty</th>
-                                        <th>Expiration date</th>
-                                    </tr>
-                                    <tr t-foreach="current_product.get_lots()" t-as="lot">
-                                        <td><span t-field="lot.name"/></td>
-                                        <td><span t-esc="int(lot.qty_available)"/></td>
-                                        <td><span t-field="lot.life_date"/></td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="border block_bacground">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <h3>Product</h3>
-                                        <table class="border-left spacing_table_2">
-                                            <tr>
-                                                <td>Group</td>
-                                                <td><span t-field="current_product.categ_id.parent_id.name"/></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Sub group</td>
-                                                <td><span t-field="current_product.categ_id.name"/></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Order code</td>
-                                                <td><span t-if="current_product.is_mto_product">Product on order</span><span t-if="not current_product.is_mto_product">Normal product</span></td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                </div>
-                                <hr/>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <table class="border-left spacing_table_2">
-                                            <tr>
-                                                <td>Creation date</td>
-                                                <td><span t-field="current_product.create_date"  t-options="{'widget': 'date'}"/></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Write date</td>
-                                                <td><span t-field="current_product.write_date"  t-options="{'widget': 'date'}"/></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Sold out</td>
-                                                <td><span t-field="current_product.state_id.display_name" /></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Gross weight</td>
-                                                <td><span t-field="current_product.weight"/> Kg</td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                    <div class="col-md-6 div_separator">
-                                        <table class="border-left spacing_table_2">
-                                            <tr>
-                                                <td>ABC code</td>
-                                                <td><span t-field="current_product.abc_id" /></td>
-                                            </tr>
-                                            <tr>
-                                                <td>ABC amount</td>
-                                                <td><span t-field="current_product.turnover" /></td>
-                                            </tr>
-                                            <tr>
-                                                <td>% amount</td>
-                                                <td><span t-field="current_product.turnover_average" /></td>
-                                            </tr>
-                                            <tr>
-                                                <td>ABC nbr lines</td>
-                                                <td><span t-field="current_product.turnover_nbr_lines" /></td>
-                                            </tr>
-                                            <tr>
-                                                <td>% nbr lines</td>
-                                                <td><span t-field="current_product.turnover_average_nbr_lines" /></td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                </div>
-                                <hr/>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <table class="border-left spacing_table_2">
-                                            <tr>
-                                                <td>Unit in pallet</td>
-                                                <td><span t-field="current_product.unit_in_pallet" /></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Unit in box</td>
-                                                <td><span t-field="current_product.unit_in_box" /></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Unit in shrink-wrap</td>
-                                                <td><span t-field="current_product.unit_in_shrink_wrap" /></td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="border block_bacground">
-                                <h3>Promotions</h3>
-                                <table class="table table-striped table-condensed">
-                                    <tr>
-                                        <th>Start</th>
-                                        <th>End</th>
-                                        <th>Supplier discount</th>
-                                        <th>Purchase discount</th>
-                                        <th>Qty</th>
-                                        <th>Free</th>
-                                    </tr>
-                                    <t t-foreach="current_product.get_promotions()" t-as="promotion">
-                                        <tr>
-                                            <td><span t-field="promotion.date_start" /></td>
-                                            <td><span t-field="promotion.date_end" /></td>
-                                            <td><span t-field="po.partner_id.supplier_discount" /></td>
-                                            <td><span t-field="promotion.discount_purchase" /></td>
-                                            <td><span t-field="promotion.min_qty" /></td>
-                                            <td>
-                                                <div t-if="promotion.ratio_promotional_product">
-                                                    <span t-field="promotion.ratio_promotional_product" /> / <span t-field="promotion.ratio_main_product"/>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </t>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+  <template id="main_page_body">
+    <div class="row" style="height: 100%; min-height: 100%">
+      <div class="col-md-9" style="height: 100%; min-height: 100%">
+        <div class="header border block_bacground">
+          <div class="header">
+            <div class="row">
+              <div class="col-md-5">
+                <h3>
+                  <span t-field="po.partner_id.name" />
+                </h3>
+                <strong>
+                  <span t-field="po.partner_id.ref" />
+                </strong>
+              </div>
+              <div class="col-md-2">
+                <table class="spacing_table_5">
+                  <tr>
+                    <td>Total amount:</td>
+                    <td>
+                      <span
+                        t-field="po.amount_untaxed"
+                        id="amount_untaxed"
+                        t-options='{"widget": "monetary", "display_currency": po.currency_id}'
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Total weight:</td>
+                    <td><span t-field="po.total_weight" id="total_weight" /> Kg</td>
+                  </tr>
+                </table>
+              </div>
+              <div class="col-md-3">
+                <table class="spacing_table_2">
+                  <tr>
+                    <td>Scheduled date:</td>
+                    <td>
+                      <span
+                        id="global_date_planned"
+                        t-field="po.date_planned"
+                        t-options="{'widget': 'date'}"
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Discount global:</td>
+                    <td>
+                      <input
+                        type="number"
+                        id="global_discount_global"
+                        step="0.01"
+                        t-att-value="discount_global_overwrite"
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Promotion supplier:</td>
+                    <td>
+                      <input
+                        type="number"
+                        id="global_promotion_supplier"
+                        step="0.01"
+                        t-att-value="promotion_supplier_overwrite"
+                      />
+                    </td>
+                  </tr>
+                </table>
+              </div>
+              <div class="col-md-2 text-right">
+                <button
+                  id="save_global_values_btn"
+                  type="button"
+                  class="btn btn-info"
+                >Save</button>
+              </div>
             </div>
-            <div class="col-md-3 h-100 d-inline-block" style="height: 100%; min-height: 100%">
-                <div class="border" style="height: 100%; min-height: 100%; ">
-                    <div style="height: 120px;">
-                        <div class="row">
-                            <div class="col-md-8">
-                                <div id="products_list_header">
-                                    <input type="checkbox" id="products_to_order"/> Products to order<br/>
-                                    <input type="checkbox" id="products_without_promo"/> Products without promotions<br/>
-                                    <input type="checkbox" id="products_with_promo"/> Products with promotions<br/>
-                                    <input type="text" id="product_name" placeholder="Product name"/>
-                                </div>
-                            </div>
-                            <div class="col-md-4 text-right">
-                                <a class="btn btn-success return_btn" t-att-href="return_url"><i class="fa fa-long-arrow-left" aria-hidden="true"/> Return</a>
-                                <button class="btn btn-success return_btn" id="button_reload_products"> <i class="fa fa-refresh" aria-hidden="true"/> Refresh product list</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="border" id="products_list" style="height: 750px;"/>
-                </div>
-            </div>
+          </div>
         </div>
-    </template>
+        <div class="product_data">
+          <div class="row">
+            <div class="col-md-5">
+              <div class="border block_bacground">
+                <div class="row">
+                  <div class="col-md-12">
+                    <strong>
+                      <span t-field="current_product.name" />
+                    </strong>
+                    <br />
+                    <span t-field="current_product.default_code" />
+                  </div>
+                </div>
+                <div class="row">
+                  <form method="post" action="#">
+                    <input name="order_id" t-att-value="po.id" type="hidden" />
+                    <input
+                      name="product_id"
+                      t-att-value="current_product.id"
+                      type="hidden"
+                    />
+                    <input name="next_product_id" type="hidden" id="next_product_id" />
+                    <div class="col-md-4" id="buttons_panel">
+                      <div class="row">
+                        <div class="col-md-12 text-center">
+                          <button
+                            type="submit"
+                            class="btn btn-primary navigation_button"
+                            id="save_line"
+                          >Confirm</button>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12 text-center">
+                          <div
+                            class="progress"
+                            style="margin-right: 10px; margin-left: 10px;"
+                          >
+                            <t t-set="width_pct" t-value="0" />
+                            <t t-if="po.total_lines">
+                              <t
+                                t-set="width_pct"
+                                t-value="(po.total_lines_done / float(po.total_lines)) * 100"
+                              />
+                            </t>
+                            <div
+                              class="progress-bar bg-primary"
+                              role="progressbar"
+                              t-att-aria-valuenow="po.total_lines_done"
+                              aria-valuemin="0"
+                              t-att-aria-valuemax="po.total_lines"
+                              t-att-style="'width: %d%%%%' % int(width_pct)"
+                            >
+                              <span><strong>
+                                  <t t-esc="po.total_lines_done" />
+                                </strong> / <strong>
+                                  <t t-esc="po.total_lines" />
+                                </strong></span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6 text-right">
+                          <button
+                            type="button"
+                            class="btn btn-default navigation_button"
+                            id="step_backward"
+                          >
+                            <i class="fa fa-step-backward" />
+                          </button>
+                        </div>
+                        <div class="col-md-6 text-left">
+                          <button
+                            type="button"
+                            class="btn btn-default navigation_button"
+                            id="step_forward"
+                          >
+                            <i class="fa fa-step-forward" />
+                          </button>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6 text-right">
+                          <button
+                            type="button"
+                            class="btn btn-default navigation_button"
+                            id="fast_backward"
+                          >
+                            <i class="fa fa-fast-backward" />
+                          </button>
+                        </div>
+                        <div class="col-md-6 text-left">
+                          <button
+                            type="button"
+                            class="btn btn-default navigation_button"
+                            id="fast_forward"
+                          >
+                            <i class="fa fa-fast-forward" />
+                          </button>
+                        </div>
+                      </div>
+                      <div clas="row">
+                        <div class="col-md-12 text-center">
+                          <div
+                            t-if="not is_existing_line and not is_confirmed_line"
+                            class="bg-secondary line_state"
+                          >
+                                                        <i
+                              class="fa fa-question-circle"
+                              aria-hidden="true"
+                            /> New line
+                                                    </div>
+                          <div
+                            t-if="is_existing_line and not is_confirmed_line"
+                            class="bg-info line_state"
+                          >
+                                                        <i
+                              class="fa fa-circle-o"
+                              aria-hidden="true"
+                            /> To confirm
+                                                    </div>
+                          <div
+                            t-if="is_existing_line and is_confirmed_line"
+                            class="bg-success line_state"
+                          >
+                                                        <i
+                              class="fa fa-check-circle-o"
+                              aria-hidden="true"
+                            /> Confirmed
+                                                    </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-8">
+                      <table class="spacing_table_5">
+                        <tr>
+                          <td>Advised qty</td>
+                          <td>
+                            <strong>
+                              <span
+                                t-esc="int(current_product.advised_qty + product_qty)"
+                              />
+                            </strong>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Ordered qty</td>
+                          <td>
+                            <input
+                              type="number"
+                              name="product_qty"
+                              id="product_qty"
+                              t-att-value="product_qty"
+                              required="required"
+                            />
+                          </td>
+                        </tr>
+                        <tr t-if='current_product.packaging_ids'>
+                          <td>Unit</td>
+                          <td>
+                            <div
+                              hidden="true"
+                              name="pre_selected_packaging"
+                              id="pre_selected_packaging"
+                              t-att-value="pre_selected_packaging"
+                            />
+                            <select name='packaging_ids' id='packaging_ids'>
+                              <option value='' />
+                              <t
+                                t-foreach='current_product.packaging_ids'
+                                t-as='packaging'
+                              >
+                                <option
+                                  t-att-value='packaging.id'
+                                  t-att-qty='packaging.qty'
+                                  selected='selected'
+                                >
+                                  <t t-esc='packaging.name' />
+                                </option>
+                              </t>
+                            </select>
+                          </td>
+                        </tr>
+                        <tr t-if='current_product.packaging_ids'>
+                          <td>Ordered qty of unit</td>
+                          <td>
+                            <input
+                              type="number"
+                              name="unit_qty"
+                              id="unit_qty"
+                              t-att-value="unit_qty"
+                              required="required"
+                            />
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Stock min</td>
+                          <td>
+                            <input
+                              type="number"
+                              name="orderpoint_min"
+                              id="orderpoint_min"
+                              t-att-value="current_product.orderpoint_min"
+                              t-att-readonly="current_product.is_mto_product and 'readonly' or None"
+                            />
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Stock max</td>
+                          <td>
+                            <input
+                              type="number"
+                              name="orderpoint_max"
+                              id="orderpoint_max"
+                              t-att-value="current_product.orderpoint_max"
+                              t-att-readonly="current_product.is_mto_product and 'readonly' or None"
+                            />
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Qty multiple</td>
+                          <td>
+                            <input
+                              type="number"
+                              name="orderpoint_qty_multiple"
+                              id="orderpoint_qty_multiple"
+                              t-att-value="current_product.orderpoint_qty_multiple"
+                              t-att-readonly="current_product.is_mto_product and 'readonly' or None"
+                            />
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Price</td>
+                          <td>
+                            <input
+                              type="number"
+                              name="price_unit_base"
+                              step="0.01"
+                              id="price_unit_base"
+                              t-att-value="price_unit_base"
+                              required="required"
+                            />
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Scheduled date</td>
+                          <td>
+                            <input
+                              type="date"
+                              name="date_planned"
+                              id="date_planned"
+                              t-att-value="date_planned"
+                              required="required"
+                            />
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Discount global</td>
+                          <td>
+                            <input
+                              type="number"
+                              step="0.01"
+                              name="discount_global"
+                              id="discount_global"
+                              t-att-value="discount_global"
+                            />
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Promotion supplier</td>
+                          <td>
+                            <input
+                              type="number"
+                              step="0.01"
+                              name="promotion_supplier"
+                              id="promotion_supplier"
+                              t-att-value="promotion_supplier"
+                            />
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
+                  </form>
+                </div>
+                <div class="row">
+                  <div id="stock_graph">
+                    <svg height="250" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="border block_bacground">
+                <h3>Stock</h3>
+                <table class="border-left spacing_table_5">
+                  <tr>
+                    <td>Av. annual consumption</td>
+                    <td>
+                      <span t-field="current_product.average_annual_consumption" />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Av. 3 months consumption</td>
+                    <td>
+                      <span
+                        t-field="current_product.average_three_months_consumption"
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Stock</td>
+                    <td>
+                      <span t-field="current_product.qty_available" />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Stock available</td>
+                    <td>
+                      <span t-field="current_product.virtual_available" />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Stock Customer</td>
+                    <td>
+                      <span t-field="current_product.outgoing_qty" />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Stock BO</td>
+                    <td>
+                      <span
+                        t-esc="current_product.qty_available &lt; 0 and -1 * current_product.qty_available or 0"
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Stock supplier</td>
+                    <td>
+                      <span t-field="current_product.incoming_qty" />
+                    </td>
+                  </tr>
+                </table>
+              </div>
+              <div class="border block_bacground">
+                <h3>Lots</h3>
+                <table class="table table-striped">
+                  <tr>
+                    <th>Lot</th>
+                    <th>Qty</th>
+                    <th>Expiration date</th>
+                  </tr>
+                  <tr t-foreach="current_product.get_lots()" t-as="lot">
+                    <td>
+                      <span t-field="lot.name" />
+                    </td>
+                    <td>
+                      <span t-esc="int(lot.qty_available)" />
+                    </td>
+                    <td>
+                      <span t-field="lot.life_date" />
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="border block_bacground">
+                <div class="row">
+                  <div class="col-md-12">
+                    <h3>Product</h3>
+                    <table class="border-left spacing_table_2">
+                      <tr>
+                        <td>Group</td>
+                        <td>
+                          <span t-field="current_product.categ_id.parent_id.name" />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Sub group</td>
+                        <td>
+                          <span t-field="current_product.categ_id.name" />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Order code</td>
+                        <td>
+                          <span
+                            t-if="current_product.is_mto_product"
+                          >Product on order</span>
+                          <span
+                            t-if="not current_product.is_mto_product"
+                          >Normal product</span>
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+                <hr />
+                <div class="row">
+                  <div class="col-md-6">
+                    <table class="border-left spacing_table_2">
+                      <tr>
+                        <td>Creation date</td>
+                        <td>
+                          <span
+                            t-field="current_product.create_date"
+                            t-options="{'widget': 'date'}"
+                          />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Write date</td>
+                        <td>
+                          <span
+                            t-field="current_product.write_date"
+                            t-options="{'widget': 'date'}"
+                          />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Sold out</td>
+                        <td>
+                          <span t-field="current_product.state_id.display_name" />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Gross weight</td>
+                        <td><span t-field="current_product.weight" /> Kg</td>
+                      </tr>
+                    </table>
+                  </div>
+                  <div class="col-md-6 div_separator">
+                    <table class="border-left spacing_table_2">
+                      <tr>
+                        <td>ABC code</td>
+                        <td>
+                          <span t-field="current_product.abc_id" />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>ABC amount</td>
+                        <td>
+                          <span t-field="current_product.turnover" />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>% amount</td>
+                        <td>
+                          <span t-field="current_product.turnover_average" />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>ABC nbr lines</td>
+                        <td>
+                          <span t-field="current_product.turnover_nbr_lines" />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>% nbr lines</td>
+                        <td>
+                          <span t-field="current_product.turnover_average_nbr_lines" />
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+                <hr />
+                <div class="row">
+                  <div class="col-md-12">
+                    <table class="border-left spacing_table_2">
+                      <tr>
+                        <td>Unit in pallet</td>
+                        <td>
+                          <span t-field="current_product.unit_in_pallet" />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Unit in box</td>
+                        <td>
+                          <span t-field="current_product.unit_in_box" />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Unit in shrink-wrap</td>
+                        <td>
+                          <span t-field="current_product.unit_in_shrink_wrap" />
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <div class="border block_bacground">
+                <h3>Promotions</h3>
+                <table class="table table-striped table-condensed">
+                  <tr>
+                    <th>Start</th>
+                    <th>End</th>
+                    <th>Supplier discount</th>
+                    <th>Purchase discount</th>
+                    <th>Qty</th>
+                    <th>Free</th>
+                  </tr>
+                  <t t-foreach="current_product.get_promotions()" t-as="promotion">
+                    <tr>
+                      <td>
+                        <span t-field="promotion.date_start" />
+                      </td>
+                      <td>
+                        <span t-field="promotion.date_end" />
+                      </td>
+                      <td>
+                        <span t-field="po.partner_id.supplier_discount" />
+                      </td>
+                      <td>
+                        <span t-field="promotion.discount_purchase" />
+                      </td>
+                      <td>
+                        <span t-field="promotion.min_qty" />
+                      </td>
+                      <td>
+                        <div t-if="promotion.ratio_promotional_product">
+                                                    <span
+                            t-field="promotion.ratio_promotional_product"
+                          /> / <span t-field="promotion.ratio_main_product" />
+                                                </div>
+                      </td>
+                    </tr>
+                  </t>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 h-100 d-inline-block" style="height: 100%; min-height: 100%">
+        <div class="border" style="height: 100%; min-height: 100%; ">
+          <div style="height: 120px;">
+            <div class="row">
+              <div class="col-md-8">
+                <div id="products_list_header">
+                                    <input
+                    type="checkbox"
+                    id="products_to_order"
+                  /> Products to order<br />
+                                    <input
+                    type="checkbox"
+                    id="products_without_promo"
+                  /> Products without promotions<br />
+                                    <input
+                    type="checkbox"
+                    id="products_with_promo"
+                  /> Products with promotions<br />
+                                    <input
+                    type="text"
+                    id="product_name"
+                    placeholder="Product name"
+                  />
+                                </div>
+              </div>
+              <div class="col-md-4 text-right">
+                <a class="btn btn-success return_btn" t-att-href="return_url"><i
+                    class="fa fa-long-arrow-left"
+                    aria-hidden="true"
+                  /> Return</a>
+                <button
+                  class="btn btn-success return_btn"
+                  id="button_reload_products"
+                > <i
+                    class="fa fa-refresh"
+                    aria-hidden="true"
+                  /> Refresh product list</button>
+              </div>
+            </div>
+          </div>
+          <div class="border" id="products_list" style="height: 750px;" />
+        </div>
+      </div>
+    </div>
+  </template>
 </odoo>

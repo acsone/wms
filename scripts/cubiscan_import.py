@@ -8,12 +8,11 @@ from os import listdir
 from os.path import isfile, join
 from StringIO import StringIO
 
-import psycopg2
-
 import click
 import click_odoo
 import numpy as np
 import pandas as pd
+import psycopg2
 
 
 def dataframe_to_sql_table(env, dataframe, verbose):

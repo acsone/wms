@@ -1,24 +1,18 @@
-<?xml version="1.0"?>
+<?xml version="1.0" ?>
 <odoo>
-
   <record id="product_price_category_ali" model="product.price.category">
     <field name="name">ALI</field>
   </record>
-
   <record id="product_price_category_alg" model="product.price.category">
     <field name="name">ALG</field>
   </record>
-
   <record id="product_price_category_alh" model="product.price.category">
     <field name="name">ALH</field>
   </record>
-
   <record id="product_price_category_gma" model="product.price.category">
     <field name="name">GMA</field>
   </record>
-
   <record id="product_price_category_imp" model="product.price.category">
     <field name="name">IMP</field>
   </record>
-
 </odoo>

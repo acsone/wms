@@ -1,34 +1,36 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
   <record id='view_round_instance_with_reassort_search' model='ir.ui.view'>
     <field name="name">round.instance.search with reassorts</field>
     <field name="model">round.instance</field>
-    <field name="inherit_id" ref="delivery_rounds.view_round_instance_search"/>
+    <field name="inherit_id" ref="delivery_rounds.view_round_instance_search" />
     <field name="arch" type="xml">
       <xpath expr="//field[@name='date']" position="after">
-        <filter name="with_reassort"
-                string="With reassort"
-                domain="[('has_pending_reassort', '=', True)]"
-                />
+        <filter
+          name="with_reassort"
+          string="With reassort"
+          domain="[('has_pending_reassort', '=', True)]"
+        />
       </xpath>
     </field>
   </record>
-
   <record id="view_round_instance_kanban_refill" model="ir.ui.view">
-      <field name="name">pending refills</field>
-      <field name="model">round.instance</field>
-      <field name="inherit_id" ref="delivery_rounds.view_round_instance_kanban"/>
-      <field name="arch" type="xml">
-          <xpath expr="//templates" position="before">
-              <field name="has_pending_reassort"/>
-          </xpath>
-          <xpath expr="//div[a[@name='toggle_partner_locked']]" position="after">
-              <t t-if="record.has_pending_reassort.raw_value">
-                  <div class="col-xs-4 btn-delivery">
-                      <a type="object" name="open_pending_reassort"><i class="oe_inline fa fa-cart-arrow-down" title="pending reassorts"/></a>
-                  </div>
-              </t>
-          </xpath>
-      </field>
+    <field name="name">pending refills</field>
+    <field name="model">round.instance</field>
+    <field name="inherit_id" ref="delivery_rounds.view_round_instance_kanban" />
+    <field name="arch" type="xml">
+      <xpath expr="//templates" position="before">
+        <field name="has_pending_reassort" />
+      </xpath>
+      <xpath expr="//div[a[@name='toggle_partner_locked']]" position="after">
+        <t t-if="record.has_pending_reassort.raw_value">
+          <div class="col-xs-4 btn-delivery">
+            <a type="object" name="open_pending_reassort">
+              <i class="oe_inline fa fa-cart-arrow-down" title="pending reassorts" />
+            </a>
+          </div>
+        </t>
+      </xpath>
+    </field>
   </record>
 </odoo>

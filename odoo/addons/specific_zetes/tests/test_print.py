@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import mock
+
 from odoo.tools import mute_logger
 
 from .. import constants

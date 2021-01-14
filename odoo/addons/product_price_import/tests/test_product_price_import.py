@@ -6,11 +6,12 @@ import base64
 from datetime import datetime, timedelta
 
 from odoo import fields
+from odoo.exceptions import ValidationError
+from odoo.tests import SavepointCase
+
 from odoo.addons.product_price_import.wizards.product_price_importer import (
     ProductPriceInfo,
 )
-from odoo.exceptions import ValidationError
-from odoo.tests import SavepointCase
 
 
 class TestProductPriceImport(SavepointCase):
@@ -118,7 +119,7 @@ class TestProductPriceImport(SavepointCase):
         )
         if data:
             if data[0].module:
-                return "%s.%s" % (data[0].module, data[0].name)
+                return "{}.{}".format(data[0].module, data[0].name)
             else:
                 return data[0].name
 

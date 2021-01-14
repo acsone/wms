@@ -1,61 +1,57 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <!-- Copyright 2020 ACSONE SA/NV
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
-
 <odoo>
-
-
-    <record model="ir.ui.view" id="alc_delivery_window_search_view">
-        <field name="name">alc.delivery.window.search (in
+  <record model="ir.ui.view" id="alc_delivery_window_search_view">
+    <field name="name">alc.delivery.window.search (in
             alc_partner_delivery_window)
         </field>
-        <field name="model">alc.delivery.window</field>
-        <field name="arch" type="xml">
-            <search>
-                <field name="partner_id"/>
-                <field name="week_day_ids"/>
-                <group expand="0" string="Group By" name="group_by">
-                    <filter name="group_by_partner_id" string="Partner" context="{'group_by':'partner_id'}"/>
-                </group>
-            </search>
-        </field>
-    </record>
-
-    <record model="ir.ui.view" id="alc_delivery_window_tree_view">
-        <field name="name">alc.delivery.window.tree (in
+    <field name="model">alc.delivery.window</field>
+    <field name="arch" type="xml">
+      <search>
+        <field name="partner_id" />
+        <field name="week_day_ids" />
+        <group expand="0" string="Group By" name="group_by">
+          <filter
+            name="group_by_partner_id"
+            string="Partner"
+            context="{'group_by':'partner_id'}"
+          />
+        </group>
+      </search>
+    </field>
+  </record>
+  <record model="ir.ui.view" id="alc_delivery_window_tree_view">
+    <field name="name">alc.delivery.window.tree (in
             alc_partner_delivery_window)
         </field>
-        <field name="model">alc.delivery.window</field>
-        <field name="arch" type="xml">
-            <tree editable="top">
-                <field name="partner_id"/>
-                <field name="start" widget="float_time"/>
-                <field name="end" widget="float_time"/>
-                <field name="week_day_ids"
-                       widget="many2many_tags"/>
-            </tree>
-        </field>
-    </record>
-
-    <record model="ir.actions.act_window" id="alc_delivery_window_act_window">
-        <field name="name">Partner Delivery Windows</field>
-        <field name="res_model">alc.delivery.window</field>
-        <field name="view_mode">tree,form</field>
-        <field name="domain">[]</field>
-        <field name="context">{}</field>
-    </record>
-
-    <record model="ir.ui.menu" id="alc_delivery_window_menu">
-        <field name="name">Partner Delivery Windows</field>
-        <field name="parent_id" ref="delivery.menu_delivery"/>
-        <field name="action" ref="alc_delivery_window_act_window"/>
-        <field name="sequence" eval="16"/>
-    </record>
-
-    <record model="ir.ui.menu" id="alc_delivery_window_sale_menu">
-        <field name="name">Partner Delivery Windows</field>
-        <field name="parent_id" ref="delivery.sale_menu_delivery"/>
-        <field name="action" ref="alc_delivery_window_act_window"/>
-        <field name="sequence" eval="16"/>
-    </record>
+    <field name="model">alc.delivery.window</field>
+    <field name="arch" type="xml">
+      <tree editable="top">
+        <field name="partner_id" />
+        <field name="start" widget="float_time" />
+        <field name="end" widget="float_time" />
+        <field name="week_day_ids" widget="many2many_tags" />
+      </tree>
+    </field>
+  </record>
+  <record model="ir.actions.act_window" id="alc_delivery_window_act_window">
+    <field name="name">Partner Delivery Windows</field>
+    <field name="res_model">alc.delivery.window</field>
+    <field name="view_mode">tree,form</field>
+    <field name="domain">[]</field>
+    <field name="context">{}</field>
+  </record>
+  <record model="ir.ui.menu" id="alc_delivery_window_menu">
+    <field name="name">Partner Delivery Windows</field>
+    <field name="parent_id" ref="delivery.menu_delivery" />
+    <field name="action" ref="alc_delivery_window_act_window" />
+    <field name="sequence" eval="16" />
+  </record>
+  <record model="ir.ui.menu" id="alc_delivery_window_sale_menu">
+    <field name="name">Partner Delivery Windows</field>
+    <field name="parent_id" ref="delivery.sale_menu_delivery" />
+    <field name="action" ref="alc_delivery_window_act_window" />
+    <field name="sequence" eval="16" />
+  </record>
 </odoo>

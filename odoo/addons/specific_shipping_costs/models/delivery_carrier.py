@@ -17,3 +17,4 @@ class DeliveryCarrier(models.Model):
             [("property_delivery_carrier_id", "in", self.ids)]
         ):
             raise UserError(_("You cannot delete a record linked from a partner"))
+        super(DeliveryCarrier, self).unlink()

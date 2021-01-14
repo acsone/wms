@@ -7,7 +7,10 @@
     - odoo 21eb4b9ba07e19608c1fdcf209ce02fc73eddfee
   shell_command_after:
     # security patch ODOO-SA-2018-11-28-1
-    - git am "$(git format-patch -1 410e038dd4e561143d741862203e7f3ed69f326a -o ../../patches)"
-    - git am "$(git format-patch -1 dc66021677082317f64907d6307c2c6d298dc648 -o ../../patches)"
-    - git am "$(git format-patch -1 1cd3c6cba13a5d6e234396bd35b55f6e250cff18 -o ../../patches)"
+    - git am "$(git format-patch -1 410e038dd4e561143d741862203e7f3ed69f326a -o
+      ../../patches)"
+    - git am "$(git format-patch -1 dc66021677082317f64907d6307c2c6d298dc648 -o
+      ../../patches)"
+    - git am "$(git format-patch -1 1cd3c6cba13a5d6e234396bd35b55f6e250cff18 -o
+      ../../patches)"
   target: camptocamp merge-branch-1793-master

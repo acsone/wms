@@ -1,24 +1,33 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <record id="manage_products_materials_manager" model="ir.rule">
-        <field name="name">Manage products for materials manager</field>
-        <field name="model_id" ref="product.model_product_product"/>
-        <field name="domain_force">[('categ_id', 'child_of' , [user.env.ref('specific_data.product_categ_materiel').id])]</field>
-        <field name="groups" eval="[(4, ref('specific_security.group_materials_manager'))]"/>
-        <field name="perm_read" eval="False"/>
-        <field name="perm_write" eval="True"/>
-        <field name="perm_create" eval="True"/>
-        <field name="perm_unlink" eval="True"/>
-    </record>
-
-    <record id="manage_products_template_materials_manager" model="ir.rule">
-        <field name="name">Manage products template for materials manager</field>
-        <field name="model_id" ref="product.model_product_template"/>
-        <field name="domain_force">[('categ_id', 'child_of' , [user.env.ref('specific_data.product_categ_materiel').id])]</field>
-        <field name="groups" eval="[(4, ref('specific_security.group_materials_manager'))]"/>
-        <field name="perm_read" eval="False"/>
-        <field name="perm_write" eval="True"/>
-        <field name="perm_create" eval="True"/>
-        <field name="perm_unlink" eval="True"/>
-    </record>
+  <record id="manage_products_materials_manager" model="ir.rule">
+    <field name="name">Manage products for materials manager</field>
+    <field name="model_id" ref="product.model_product_product" />
+    <field
+      name="domain_force"
+    >[('categ_id', 'child_of' , [user.env.ref('specific_data.product_categ_materiel').id])]</field>
+    <field
+      name="groups"
+      eval="[(4, ref('specific_security.group_materials_manager'))]"
+    />
+    <field name="perm_read" eval="False" />
+    <field name="perm_write" eval="True" />
+    <field name="perm_create" eval="True" />
+    <field name="perm_unlink" eval="True" />
+  </record>
+  <record id="manage_products_template_materials_manager" model="ir.rule">
+    <field name="name">Manage products template for materials manager</field>
+    <field name="model_id" ref="product.model_product_template" />
+    <field
+      name="domain_force"
+    >[('categ_id', 'child_of' , [user.env.ref('specific_data.product_categ_materiel').id])]</field>
+    <field
+      name="groups"
+      eval="[(4, ref('specific_security.group_materials_manager'))]"
+    />
+    <field name="perm_read" eval="False" />
+    <field name="perm_write" eval="True" />
+    <field name="perm_create" eval="True" />
+    <field name="perm_unlink" eval="True" />
+  </record>
 </odoo>

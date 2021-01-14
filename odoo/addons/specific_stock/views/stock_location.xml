@@ -1,65 +1,62 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-
-    <record id="stock_location_form_inherit" model="ir.ui.view">
-        <field name="name">stock.location.form.inherit</field>
-        <field name="model">stock.location</field>
-        <field name="inherit_id" ref="stock.view_location_form"/>
-        <field name="arch" type="xml">
-
-            <xpath expr="//group[@name='localization']" position="attributes">
-                <attribute name="invisible">1</attribute>
-            </xpath>
-
-            <xpath expr="//group[@name='localization']//field[@name='barcode']" position="replace"/>
-
-            <xpath expr="//group[@name='localization']" position="after">
-                <group string="Localization">
-                    <field name="barcode"/>
-                    <field name="picking_zone_id" options="{'no_create': True, 'no_open': True}"/>
-                    <field name="zone" />
-                    <field name="corridor" />
-                    <field name="shelf" />
-                    <field name="height" />
-                    <field name="box" />
-                    <field name="is_valid_location" invisible="1"/>
-                </group>
-            </xpath>
-        </field>
-    </record>
-
-    <record id="view_location_search" model="ir.ui.view">
-        <field name="name">view.location.search.inherit</field>
-        <field name="model">stock.location</field>
-        <field name="inherit_id" ref="stock.view_location_search"/>
-        <field name="arch" type="xml">
-
-            <xpath expr="//search" position="inside">
-                <field name="zone"/>
-                <field name="corridor"/>
-                <field name="shelf"/>
-                <field name="height"/>
-                <field name="box"/>
-                <separator/>
-                <filter string="Bin" name="bin" domain="[('kind','=','bin')]"/>
-                <filter string="Parking" name="parking" domain="[('kind','=','parking')]"/>
-                <filter string="Reserve" name="reserve" domain="[('kind','=','reserve')]"/>
-            </xpath>
-
-        </field>
-    </record>
-
-    <record id="stock_location_pivot" model="ir.ui.view">
-        <field name="name">stock.location.pivot</field>
-        <field name="model">stock.location</field>
-        <field name="arch" type="xml">
-            <pivot string="Stock Location">
-                <field name="bin_checksum_1"/>
-            </pivot>
-        </field>
-    </record>
-
-    <record id="stock.action_location_form" model="ir.actions.act_window">
-        <field name="view_mode">tree,form,pivot</field>
-    </record>
+  <record id="stock_location_form_inherit" model="ir.ui.view">
+    <field name="name">stock.location.form.inherit</field>
+    <field name="model">stock.location</field>
+    <field name="inherit_id" ref="stock.view_location_form" />
+    <field name="arch" type="xml">
+      <xpath expr="//group[@name='localization']" position="attributes">
+        <attribute name="invisible">1</attribute>
+      </xpath>
+      <xpath
+        expr="//group[@name='localization']//field[@name='barcode']"
+        position="replace"
+      />
+      <xpath expr="//group[@name='localization']" position="after">
+        <group string="Localization">
+          <field name="barcode" />
+          <field
+            name="picking_zone_id"
+            options="{'no_create': True, 'no_open': True}"
+          />
+          <field name="zone" />
+          <field name="corridor" />
+          <field name="shelf" />
+          <field name="height" />
+          <field name="box" />
+          <field name="is_valid_location" invisible="1" />
+        </group>
+      </xpath>
+    </field>
+  </record>
+  <record id="view_location_search" model="ir.ui.view">
+    <field name="name">view.location.search.inherit</field>
+    <field name="model">stock.location</field>
+    <field name="inherit_id" ref="stock.view_location_search" />
+    <field name="arch" type="xml">
+      <xpath expr="//search" position="inside">
+        <field name="zone" />
+        <field name="corridor" />
+        <field name="shelf" />
+        <field name="height" />
+        <field name="box" />
+        <separator />
+        <filter string="Bin" name="bin" domain="[('kind','=','bin')]" />
+        <filter string="Parking" name="parking" domain="[('kind','=','parking')]" />
+        <filter string="Reserve" name="reserve" domain="[('kind','=','reserve')]" />
+      </xpath>
+    </field>
+  </record>
+  <record id="stock_location_pivot" model="ir.ui.view">
+    <field name="name">stock.location.pivot</field>
+    <field name="model">stock.location</field>
+    <field name="arch" type="xml">
+      <pivot string="Stock Location">
+        <field name="bin_checksum_1" />
+      </pivot>
+    </field>
+  </record>
+  <record id="stock.action_location_form" model="ir.actions.act_window">
+    <field name="view_mode">tree,form,pivot</field>
+  </record>
 </odoo>

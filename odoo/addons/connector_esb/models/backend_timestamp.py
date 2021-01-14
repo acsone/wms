@@ -5,6 +5,7 @@
 import psycopg2
 
 from odoo import _, api, exceptions, fields, models
+
 from odoo.addons.component.exception import NoComponentError
 
 

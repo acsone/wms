@@ -1,15 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <!-- Copyright 2020 ACSONE SA/NV
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
-
 <odoo>
-
-    <record model="ir.ui.view" id="sale.view_order_form_editable_list">
-        <!-- By default into odoo, sale order line are no more inline
+  <record model="ir.ui.view" id="sale.view_order_form_editable_list">
+    <!-- By default into odoo, sale order line are no more inline
         editable once we use packaging. For alcyon, we must keep the
         tree view editable and packaging will be make selectable into the tree
         -->
-        <field name="active" eval="0"/>
-    </record>
-
+    <field name="active" eval="0" />
+  </record>
 </odoo>

@@ -1,31 +1,35 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <!-- Copyright 2020 ACSONE SA/NV
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
-
 <odoo>
-
-    <record model="ir.ui.view" id="stock_return_picking_form_view">
-        <field name="name">stock.return.picking.form (in alc_restocking_exclude_not_salable)
+  <record model="ir.ui.view" id="stock_return_picking_form_view">
+    <field name="name">stock.return.picking.form (in alc_restocking_exclude_not_salable)
         </field>
-        <field name="model">stock.return.picking</field>
-        <field name="inherit_id" ref="stock.view_stock_return_picking_form"/>
-        <field name="arch" type="xml">
-            <xpath expr="//group[1]" position="after">
-             <field name="has_archived_product" invisible="1"/>
-             <field name="has_not_salable_product" invisible="1"/>
-                <div class="alert alert-warning" attrs="{'invisible': [('has_archived_product', '=', False)]}">
-                    <field name="archived_products_message"/>
-                </div>
-                <div class="alert alert-warning" attrs="{'invisible': [('has_not_salable_product', '=', False)]}">
-                    <p>Products in red are not sold anymore. </p>
-                </div>
-            </xpath>
-            <field name="quantity" position="after">
-                <field name="not_salable_product"/>
-            </field>
-            <tree position="attributes">
-                <attribute name="decoration-danger">not_salable_product == True</attribute>
-            </tree>
-        </field>
-    </record>
+    <field name="model">stock.return.picking</field>
+    <field name="inherit_id" ref="stock.view_stock_return_picking_form" />
+    <field name="arch" type="xml">
+      <xpath expr="//group[1]" position="after">
+        <field name="has_archived_product" invisible="1" />
+        <field name="has_not_salable_product" invisible="1" />
+        <div
+          class="alert alert-warning"
+          attrs="{'invisible': [('has_archived_product', '=', False)]}"
+        >
+          <field name="archived_products_message" />
+        </div>
+        <div
+          class="alert alert-warning"
+          attrs="{'invisible': [('has_not_salable_product', '=', False)]}"
+        >
+          <p>Products in red are not sold anymore. </p>
+        </div>
+      </xpath>
+      <field name="quantity" position="after">
+        <field name="not_salable_product" />
+      </field>
+      <tree position="attributes">
+        <attribute name="decoration-danger">not_salable_product == True</attribute>
+      </tree>
+    </field>
+  </record>
 </odoo>

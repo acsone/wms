@@ -1,361 +1,364 @@
 .logo {
-    width: 49%;
-    display: inline-block;
+  width: 49%;
+  display: inline-block;
 }
 
 .logo > img {
-    max-height: 70px;
+  max-height: 70px;
 }
 
 .main_title {
-    float: right;
-    display: inline-block;
-    text-align: right;
-    font-weight: bold;
-    text-transform: uppercase;
+  float: right;
+  display: inline-block;
+  text-align: right;
+  font-weight: bold;
+  text-transform: uppercase;
 }
 
 #passport_checksum {
-    float: right;
-    top: 50px;
-    width: 50px;
-    height: 50px;
-    border: solid black 2px;
-    border-radius: 1.1em;
-    vertical-align: middle;
+  float: right;
+  top: 50px;
+  width: 50px;
+  height: 50px;
+  border: solid black 2px;
+  border-radius: 1.1em;
+  vertical-align: middle;
 }
 
 #passport_checksum p {
-    font-size: xx-large;
-    font-weight: bold;
-    text-align: center;
-    vertical-align: middle;
+  font-size: xx-large;
+  font-weight: bold;
+  text-align: center;
+  vertical-align: middle;
 }
 
-div.page div.row span.partner_inline address, div.page div.row span.partner_inline address > div {
-    display:inline;
+div.page div.row span.partner_inline address,
+div.page div.row span.partner_inline address > div {
+  display: inline;
 }
 
-.border_table, .round_table {
-    border-collapse:separate;
-    border:solid black 1px;
+.border_table,
+.round_table {
+  border-collapse: separate;
+  border: solid black 1px;
 }
 
 .round_table {
-    border-radius: 1.1em;
-    -moz-border-radius: 1.1em;
-    overflow: hidden;
+  border-radius: 1.1em;
+  -moz-border-radius: 1.1em;
+  overflow: hidden;
 }
 
-.border_table td, .border_table th {
-    border-left:solid black 1px;
-    border-top:solid black 1px;
+.border_table td,
+.border_table th {
+  border-left: solid black 1px;
+  border-top: solid black 1px;
 }
 
 .border_table > :first-child > :first-child td {
-    border-top: none;
+  border-top: none;
 }
 
 .border_table td:first-child {
-    border-left: none;
+  border-left: none;
 }
 
 .summary_deliverslip {
-    height: 100px;
+  height: 100px;
 }
 
 .summary_deliverslip > div {
-    padding: 5px;
+  padding: 5px;
 }
 
 .intrastat_table {
-    width: 35%;
-    margin-left: 5px;
-    font-size: x-small;
-    padding: 5px;
-    margin-top: 1px;
+  width: 35%;
+  margin-left: 5px;
+  font-size: x-small;
+  padding: 5px;
+  margin-top: 1px;
 }
 
 .border_top {
-    border-top: 1px solid black;
+  border-top: 1px solid black;
 }
 
 .white_space_pre_wrap {
-    white-space: pre-wrap;
+  white-space: pre-wrap;
 }
 
 .avoid_break {
-    page-break-inside: avoid;
+  page-break-inside: avoid;
 }
 
 .indicator_left {
-    position: fixed;
-    left: 0;
-    top: 420px;
+  position: fixed;
+  left: 0;
+  top: 420px;
 }
 
 .indicator_right {
-    position: fixed;
-    right: 0;
-    top: 420px;
+  position: fixed;
+  right: 0;
+  top: 420px;
 }
 
 .m-5px {
-    margin: 5px;
+  margin: 5px;
 }
 
 .pl-5px {
-    padding-left: 5px;
+  padding-left: 5px;
 }
 
 .font-xxs {
-    font-size: xx-small;
+  font-size: xx-small;
 }
 
 .no_background {
-    background-color: transparent !important;
+  background-color: transparent !important;
 }
 
 .black_background > * {
-    background-color: #EEE;
+  background-color: #eee;
 }
 
 #left_header {
-    padding-top: 20mm;
-    width: 45%;
-    display: inline-block;
-    vertical-align: top;
-    min-height: 240px;
+  padding-top: 20mm;
+  width: 45%;
+  display: inline-block;
+  vertical-align: top;
+  min-height: 240px;
 }
 
 .remove_padding_top {
-    padding-top: 0 !important;
+  padding-top: 0 !important;
 }
 
 #company_header {
-    line-height: 1.2;
-    border: thin solid black;
-    padding: 1mm 0 2mm 2mm;
-    margin: 8mm 0 5mm 0;
+  line-height: 1.2;
+  border: thin solid black;
+  padding: 1mm 0 2mm 2mm;
+  margin: 8mm 0 5mm 0;
 }
 
 #partner_header {
-    position: absolute;
-    left: 460px;
-    top: 70px;
-    width: 420px;
-    height: 160px;
-    font-size: 1.3em;
-    line-height: 1.3;
+  position: absolute;
+  left: 460px;
+  top: 70px;
+  width: 420px;
+  height: 160px;
+  font-size: 1.3em;
+  line-height: 1.3;
 }
 
-#document_reference td, #invoice_reference td {
-    padding: 5px;
-    text-align: center;
-    font-size: 0.9em;
+#document_reference td,
+#invoice_reference td {
+  padding: 5px;
+  text-align: center;
+  font-size: 0.9em;
 }
 
 #products_table {
-    height:140mm;
-    width: 100%;
-    font-size: 0.9em;
-    margin: 5mm 0;
+  height: 140mm;
+  width: 100%;
+  font-size: 0.9em;
+  margin: 5mm 0;
 }
 #products_table th {
-    font-size: 0.8em;
+  font-size: 0.8em;
 }
 
 .products_table_deliveryslip {
-    height:160mm !important;
-    margin-top: 5mm !important;
+  height: 160mm !important;
+  margin-top: 5mm !important;
 }
 
 .products_table_entry_register {
-    height:245mm !important;
-    margin-top: 5mm !important;
+  height: 245mm !important;
+  margin-top: 5mm !important;
 }
 
 #products_table th {
-    border-bottom: thin solid black;
+  border-bottom: thin solid black;
 }
 
 #products_table th:not(:first-child) {
-    border-left: thin solid black;
+  border-left: thin solid black;
 }
 
 #products_table th {
-    text-align: center;
-    vertical-align: middle;
+  text-align: center;
+  vertical-align: middle;
 }
 
-#products_table td, #products_table th {
-    padding: 3px;
+#products_table td,
+#products_table th {
+  padding: 3px;
 }
 
 #products_table td {
-    text-align: right;
+  text-align: right;
 }
 
 #products_table td.text-left {
-    text-align: left;
+  text-align: left;
 }
 #products_table td.text-center {
-    text-align: center;
+  text-align: center;
 }
 
 #products_table tr:not(:last-child) {
-    height: 3mm;
+  height: 3mm;
 }
 
 #products_table tr:last-child {
-    height: auto;
+  height: auto;
 }
 
 #products_table .sale_separator {
-    padding: 0 3mm;
+  padding: 0 3mm;
 }
 
 #products_table .sale_separator div {
-    padding: 2px 10px;
-    background-color: #c7c7c7;
-    border: thin solid black;
-    border-radius: 1.1em;
-    -moz-border-radius: 1.1em;
-    text-align: left;
+  padding: 2px 10px;
+  background-color: #c7c7c7;
+  border: thin solid black;
+  border-radius: 1.1em;
+  -moz-border-radius: 1.1em;
+  text-align: left;
 }
 
 #products_table td:not(:first-child) {
-    border-left: thin solid grey;
+  border-left: thin solid grey;
 }
 
 #products_table td {
-    padding-right: 1.5mm;
-    padding-left: 1.5mm;
+  padding-right: 1.5mm;
+  padding-left: 1.5mm;
 }
 
 #sale_condition {
-    font-size: 0.7em;
+  font-size: 0.7em;
 }
 
 #total_table {
-    width: 100%;
-    height: 15mm;
-    margin-bottom: 3mm;
+  width: 100%;
+  height: 15mm;
+  margin-bottom: 3mm;
 }
 
 #total_table td {
-    width: 11%;
-    text-align: center;
+  width: 11%;
+  text-align: center;
 }
 
 #total_table td:first-child {
-    vertical-align: middle;
+  vertical-align: middle;
 }
 
 #total_table td span:not(.oe_currency_value) {
-    display: block;
-    font-size: 0.9em;
-    padding-bottom: 3mm;
+  display: block;
+  font-size: 0.9em;
+  padding-bottom: 3mm;
 }
 
-#summary_table.round_table{
-    display: inline-table;
-    height: 140px;
+#summary_table.round_table {
+  display: inline-table;
+  height: 140px;
 }
 
 #summary_table.round_table tr:nth-child(-n + 2) td {
-    border-bottom: solid black 1px;
+  border-bottom: solid black 1px;
 }
 
 #summary_table.round_table tr:nth-child(n + 2) td {
-    height: 4mm;
+  height: 4mm;
 }
 
-
 #summary_table.round_table tr:nth-child(n + 2) td:not(:first-child) {
-    border-left: thin solid grey;
+  border-left: thin solid grey;
 }
 
 #summary_table.round_table tr:nth-child(n + 3) td {
-    text-align: right;
-    padding-right: 2mm;
-    padding-left: 3mm;
+  text-align: right;
+  padding-right: 2mm;
+  padding-left: 3mm;
 }
 
 #summary_table.round_table tr:first-child td:first-child {
-    font-size: 1.3em;
-    height: 10mm;
-    width: 85mm;
+  font-size: 1.3em;
+  height: 10mm;
+  width: 85mm;
 }
 
 #summary_table.round_table span:nth-of-type(3) {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 #summary_table.round_table tr:nth-child(2) {
-    font-size: 0.8em;
+  font-size: 0.8em;
 }
 
 #summary_table.round_table tr:nth-child(2) td {
-    padding: 1.5mm 0 1mm 0;
-    text-align: center;
+  padding: 1.5mm 0 1mm 0;
+  text-align: center;
 }
 
 #summary_table.round_table tr:not(:first-child) > td:nth-child(3n + 1) {
-    width: 25mm;
+  width: 25mm;
 }
 
 #summary_table.round_table tr:first-child > td:first-child > span:first-child {
-    display: inline-block;
-    width: 100%;
-    text-align: center;
+  display: inline-block;
+  width: 100%;
+  text-align: center;
 }
 
 #bank_table {
-    display: inline-table;
-    float: right;
-    height: 140px;
+  display: inline-table;
+  float: right;
+  height: 140px;
 }
 
-
 #bank_table td {
-    padding: 1mm;
-    line-height: 1.1;
+  padding: 1mm;
+  line-height: 1.1;
 }
 
 #bank_table tr:nth-of-type(1) td:nth-of-type(1) {
-    text-align: center;
-    text-transform: uppercase;
-    width: 110mm;
-    font-weight: bold;
+  text-align: center;
+  text-transform: uppercase;
+  width: 110mm;
+  font-weight: bold;
 }
 
 #bank_table tr:nth-of-type(1) td:nth-of-type(1) span {
-    font-size: 1.3em;
+  font-size: 1.3em;
 }
 
 #bank_table tr:nth-last-of-type(1) td {
-    text-align: center;
+  text-align: center;
 }
 
 #bank_table td:nth-of-type(2) {
-    text-align: right;
+  text-align: right;
 }
 
 #bank_table tr:nth-last-of-type(1) td:nth-child(2) {
-    font-weight: bold;
-    font-size: 1.2em;
+  font-weight: bold;
+  font-size: 1.2em;
 }
 
 .page .bicol {
 }
 .page .pick_card {
-    display: inline-block;
-    vertical-align:top;
-    width: 48%;
-    border: 1px solid black;
-    padding: 10px;
-    margin: 10px 10px 0 0;
-    font-size: larger;
-    page-break-inside: avoid !important;
+  display: inline-block;
+  vertical-align: top;
+  width: 48%;
+  border: 1px solid black;
+  padding: 10px;
+  margin: 10px 10px 0 0;
+  font-size: larger;
+  page-break-inside: avoid !important;
 }

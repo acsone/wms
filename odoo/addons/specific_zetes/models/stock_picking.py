@@ -4,8 +4,9 @@
 import random
 
 from odoo import _, api, fields, models
-from odoo.addons.queue_job.job import job
 from odoo.exceptions import UserError
+
+from odoo.addons.queue_job.job import job
 
 from .. import constants
 
@@ -117,7 +118,7 @@ class StockPicking(models.Model):
 
         checksum_available = picking_checksums - active_picking_checksum
         if not checksum_available:
-            raise Warning("There is no picking checksum available")
+            raise UserError(_("There is no picking checksum available"))
 
         for picking in self:
             if picking.checksum:

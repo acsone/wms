@@ -10,11 +10,13 @@ Respond to calls from the ESB.
 
 from datetime import datetime
 
-import odoo
 import werkzeug
+
+import odoo
 from odoo import _, http
-from odoo.addons.web.controllers.main import ensure_db
 from odoo.http import request
+
+from odoo.addons.web.controllers.main import ensure_db
 
 
 def strptime(val):

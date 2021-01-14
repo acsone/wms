@@ -1,43 +1,48 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-
-    <record id="view_report_stock_refill_wizard_form" model="ir.ui.view">
-        <field name="name">report.stock.refill.wizard.form</field>
-        <field name="model">report.stock.refill.wizard</field>
-        <field name="arch" type="xml">
-            <form string="Create Operation">
-                <group>
-                    <group>
-                        <p>Please confirm the creation of the stock operation</p>
+  <record id="view_report_stock_refill_wizard_form" model="ir.ui.view">
+    <field name="name">report.stock.refill.wizard.form</field>
+    <field name="model">report.stock.refill.wizard</field>
+    <field name="arch" type="xml">
+      <form string="Create Operation">
+        <group>
+          <group>
+            <p>Please confirm the creation of the stock operation</p>
+          </group>
+          <group>
                     </group>
-                    <group>
-                    </group>
-                </group>
-                <footer>
-                    <button name="confirm" string="Confirm" type="object" class="oe_highlight" />
+        </group>
+        <footer>
+                    <button
+            name="confirm"
+            string="Confirm"
+            type="object"
+            class="oe_highlight"
+          />
                     or
                     <button string="Cancel" class="oe_link" special="cancel" />
                 </footer>
-            </form>
-        </field>
-    </record>
-
-    <act_window name="Create Operation"
-        res_model="report.stock.refill.wizard"
-        src_model="report.stock.refill.arrange"
-        view_mode="form"
-        target="new"
-        key2="client_action_multi"
-        id="act_report_stock_refill_arrange"
-        multi="True"/>
-
-    <act_window name="Create Operation"
-        res_model="report.stock.refill.wizard"
-        src_model="report.stock.refill.reassort"
-        view_mode="form"
-        target="new"
-        key2="client_action_multi"
-        id="act_report_stock_refill_reassort"
-        multi="True"/>
-
+      </form>
+    </field>
+  </record>
+  <act_window
+    name="Create Operation"
+    res_model="report.stock.refill.wizard"
+    src_model="report.stock.refill.arrange"
+    view_mode="form"
+    target="new"
+    key2="client_action_multi"
+    id="act_report_stock_refill_arrange"
+    multi="True"
+  />
+  <act_window
+    name="Create Operation"
+    res_model="report.stock.refill.wizard"
+    src_model="report.stock.refill.reassort"
+    view_mode="form"
+    target="new"
+    key2="client_action_multi"
+    id="act_report_stock_refill_reassort"
+    multi="True"
+  />
 </odoo>

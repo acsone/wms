@@ -3,6 +3,7 @@
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
 from odoo import api, fields, models
+from odoo.tools.safe_eval import safe_eval
 
 
 class Picking(models.Model):
@@ -25,7 +26,7 @@ class Picking(models.Model):
         action_data = self.env.ref("helpdesk.helpdesk_ticket_action_main_tree").read()[
             0
         ]
-        context = eval(action_data.get("context", "{}"))
+        context = safe_eval(action_data.get("context", "{}"))
         context["default_team_id"] = self.env.ref("alce_helpdesk.supplier_team").id
         action_data["context"] = str(context)
         action_data["domain"] = [("stock_picking_id", "=", self.id)]

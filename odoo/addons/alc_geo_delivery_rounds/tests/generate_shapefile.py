@@ -1,15 +1,14 @@
 # -*- coding: utf-8 -*-
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-import os
-
-import shapefile
-
 """
 This script is used to generate the content of the 'ressources/' directory.
 The files in the ressources are used for th test_shape_file_import_wizard.py.
 If you need to generate more files, he can use this script as an example.
 """
+import os
+
+import shapefile
 
 current_dir = os.getcwd()
 if not os.path.exists("ressources"):

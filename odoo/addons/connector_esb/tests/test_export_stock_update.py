@@ -5,9 +5,9 @@
 import os
 from datetime import datetime, timedelta
 
+import mock
 import requests
 
-import mock
 from odoo.tests.common import SavepointCase
 
 

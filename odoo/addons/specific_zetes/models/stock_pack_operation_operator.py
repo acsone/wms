@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
+from psycopg2.extensions import AsIs
 
 from odoo import fields, models, tools
 
@@ -30,5 +31,5 @@ class StockPackOperationSqlView(models.Model):
                   ON sp.id = spo.picking_id
         """
         self.env.cr.execute(
-            "CREATE OR REPLACE VIEW " + self._table + " AS (" + query + ")"
+            "CREATE OR REPLACE VIEW %s AS (%s)", (AsIs(self._table), AsIs(query))
         )
