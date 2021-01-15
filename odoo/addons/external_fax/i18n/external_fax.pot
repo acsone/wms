@@ -39,7 +39,7 @@ msgid "Email from"
 msgstr ""
 
 #. module: external_fax
-#: code:addons/external_fax/models/fax.py:71
+#: code:addons/external_fax/models/fax.py:72
 #, python-format
 msgid "Fax could not be sent for attachment with id {}. Fax number is empty or invalid."
 msgstr ""
