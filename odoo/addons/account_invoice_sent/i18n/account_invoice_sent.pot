@@ -24,7 +24,7 @@ msgid "<strong>Please select operation...</strong>"
 msgstr ""
 
 #. module: account_invoice_sent
-#: code:addons/account_invoice_sent/models/account_invoice_print.py:110
+#: code:addons/account_invoice_sent/models/account_invoice_print.py:111
 #, python-format
 msgid "A report for invoices is available."
 msgstr ""
@@ -148,8 +148,8 @@ msgid "Invoice sending method"
 msgstr ""
 
 #. module: account_invoice_sent
-#: code:addons/account_invoice_sent/models/account_invoice.py:62
-#: code:addons/account_invoice_sent/models/account_invoice_print.py:128
+#: code:addons/account_invoice_sent/models/account_invoice.py:63
+#: code:addons/account_invoice_sent/models/account_invoice_print.py:129
 #: code:addons/account_invoice_sent/wizards/account_invoice_state.py:83
 #, python-format
 msgid "Invoice sent"
