@@ -142,7 +142,7 @@ msgid "Loggers"
 msgstr ""
 
 #. module: csv_file_import
-#: code:addons/csv_file_import/wizard/csv_file_import_wizard.py:25
+#: code:addons/csv_file_import/wizard/csv_file_import_wizard.py:26
 #, python-format
 msgid "Please select at least one import"
 msgstr ""
