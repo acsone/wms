@@ -121,20 +121,20 @@ msgid "Name"
 msgstr "Nom"
 
 #. module: alc_b2c_connector
-#: code:addons/alc_b2c_connector/models/alc_b2c_backend.py:43
+#: code:addons/alc_b2c_connector/models/alc_b2c_backend.py:44
 #: sql_constraint:alc.b2c.backend:0
 #, python-format
 msgid "Name must be unique"
 msgstr "Le nom doit être unique"
 
 #. module: alc_b2c_connector
-#: code:addons/alc_b2c_connector/models/sale_order.py:180
+#: code:addons/alc_b2c_connector/models/sale_order.py:179
 #, python-format
 msgid "No match found for customer_id: %s"
 msgstr "Aucun client trouvé pour customer_id: %s"
 
 #. module: alc_b2c_connector
-#: code:addons/alc_b2c_connector/models/sale_order.py:68
+#: code:addons/alc_b2c_connector/models/sale_order.py:67
 #, python-format
 msgid "Order created from json: %s."
 msgstr ""
@@ -186,7 +186,7 @@ msgid "Sale channel"
 msgstr "Canal de vente"
 
 #. module: alc_b2c_connector
-#: code:addons/alc_b2c_connector/services/sales_service.py:51
+#: code:addons/alc_b2c_connector/services/sales_service.py:53
 #, python-format
 msgid "Sale order not found for id %s"
 msgstr "Bon de commande inconnu avec l'id %s"
@@ -209,13 +209,13 @@ msgid "This b2c reference already exists"
 msgstr "Cette référence b2c existe déjà"
 
 #. module: alc_b2c_connector
-#: code:addons/alc_b2c_connector/services/base_b2c_service.py:31
+#: code:addons/alc_b2c_connector/services/base_b2c_service.py:33
 #, python-format
 msgid "This user has no access to the B2C REST Api."
 msgstr "Cet utilisateur n'a pas accès à l'API REST B2C"
 
 #. module: alc_b2c_connector
-#: code:addons/alc_b2c_connector/models/sale_order.py:120
+#: code:addons/alc_b2c_connector/models/sale_order.py:119
 #, python-format
 msgid "Unknowns SKU(s): %s , "
 msgstr "SKU(s) inconnu(s): %s , "
