@@ -29,13 +29,13 @@ msgid "Inventory Locations"
 msgstr ""
 
 #. module: stock_barcode_fix
-#: code:addons/stock_barcode_fix/controllers/main.py:75
+#: code:addons/stock_barcode_fix/controllers/main.py:76
 #, python-format
 msgid "No internal picking type. Please configure one in warehouse settings."
 msgstr ""
 
 #. module: stock_barcode_fix
-#: code:addons/stock_barcode_fix/controllers/main.py:82
+#: code:addons/stock_barcode_fix/controllers/main.py:83
 #, python-format
 msgid "No picking or location corresponding to barcode %(barcode)s"
 msgstr ""
