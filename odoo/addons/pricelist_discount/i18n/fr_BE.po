@@ -108,31 +108,31 @@ msgid "The date start is null"
 msgstr "La date de début est nul"
 
 #. module: pricelist_discount
-#: code:addons/pricelist_discount/models/product_supplierinfo.py:116
+#: code:addons/pricelist_discount/models/product_supplierinfo.py:117
 #, python-format
 msgid "The end date must be equal or greater than the start date"
 msgstr "La date de fin doit être égale ou supérieure à la date de début"
 
 #. module: pricelist_discount
-#: code:addons/pricelist_discount/models/product_supplierinfo.py:112
+#: code:addons/pricelist_discount/models/product_supplierinfo.py:113
 #, python-format
 msgid "You cannot have a promo without end date"
 msgstr "Vous ne pouvez pas avoir une promotion sans date de fin"
 
 #. module: pricelist_discount
-#: code:addons/pricelist_discount/models/product_supplierinfo.py:110
+#: code:addons/pricelist_discount/models/product_supplierinfo.py:111
 #, python-format
 msgid "You cannot have a promo without start date"
 msgstr "Vous ne pouvez pas avoir une promotion sans date de début"
 
 #. module: pricelist_discount
-#: code:addons/pricelist_discount/models/product_supplierinfo.py:134
+#: code:addons/pricelist_discount/models/product_supplierinfo.py:135
 #, python-format
 msgid "You cannot have two promos at the same time"
 msgstr "Vous ne pouvez pas avoir deux promotions en même temps"
 
 #. module: pricelist_discount
-#: code:addons/pricelist_discount/models/product_supplierinfo.py:107
+#: code:addons/pricelist_discount/models/product_supplierinfo.py:108
 #, python-format
 msgid "You cannot have two promos without start and end date"
 msgstr ""
@@ -140,7 +140,7 @@ msgstr ""
 "fin"
 
 #. module: pricelist_discount
-#: code:addons/pricelist_discount/models/product_supplierinfo.py:91
+#: code:addons/pricelist_discount/models/product_supplierinfo.py:92
 #, python-format
 msgid ""
 "You cannot set a minimum quantity (sale and/or purchase) on a default promo"
@@ -149,7 +149,7 @@ msgstr ""
 "défaut"
 
 #. module: pricelist_discount
-#: code:addons/pricelist_discount/models/product_supplierinfo.py:85
+#: code:addons/pricelist_discount/models/product_supplierinfo.py:86
 #, python-format
 msgid "You cannot two different supplier for a product"
 msgstr "Vous ne pouvez pas avoir plusieurs fournisseurs pour un même produit"
