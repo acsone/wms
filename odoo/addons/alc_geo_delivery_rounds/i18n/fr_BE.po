@@ -38,7 +38,7 @@ msgid "<span>Import shape file</span>"
 msgstr "<span>Importer un fichier shape</span>"
 
 #. module: alc_geo_delivery_rounds
-#: code:addons/alc_geo_delivery_rounds/models/round_template.py:20
+#: code:addons/alc_geo_delivery_rounds/models/round_template.py:21
 #, python-format
 msgid "A shape is required if a delivery plan is set for %s"
 msgstr "Un geopolygone est requis si un plan de livraison est donné pour %s"
@@ -110,7 +110,7 @@ msgid "Execute import"
 msgstr "Importer"
 
 #. module: alc_geo_delivery_rounds
-#: code:addons/alc_geo_delivery_rounds/wizards/shape_file_import_wizard.py:58
+#: code:addons/alc_geo_delivery_rounds/wizards/shape_file_import_wizard.py:59
 #, python-format
 msgid "File is not a zip file!"
 msgstr "Le fichier importé n'est pas un fichier ZIP!"
@@ -194,7 +194,7 @@ msgid "Name must be unique"
 msgstr "Le nom doit être unique"
 
 #. module: alc_geo_delivery_rounds
-#: code:addons/alc_geo_delivery_rounds/wizards/shape_file_import_wizard.py:56
+#: code:addons/alc_geo_delivery_rounds/wizards/shape_file_import_wizard.py:57
 #, python-format
 msgid "No file sent."
 msgstr "Aucun fichier n'a été importé."
@@ -262,8 +262,8 @@ msgid "Templates"
 msgstr "Modèles"
 
 #. module: alc_geo_delivery_rounds
-#: code:addons/alc_geo_delivery_rounds/wizards/shape_file_import_wizard.py:73
-#: code:addons/alc_geo_delivery_rounds/wizards/shape_file_import_wizard.py:75
+#: code:addons/alc_geo_delivery_rounds/wizards/shape_file_import_wizard.py:74
+#: code:addons/alc_geo_delivery_rounds/wizards/shape_file_import_wizard.py:76
 #, python-format
 msgid "Unable to import the shape file"
 msgstr "Impossible d'importer un fichier shape"
