@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_edi_connector
-#: code:addons/alc_edi_connector/components/edi_sftp_backend_adapter.py:55
+#: code:addons/alc_edi_connector/components/edi_sftp_backend_adapter.py:57
 #, python-format
 msgid "%s must be set in environ"
 msgstr ""
@@ -69,7 +69,7 @@ msgid "Channel"
 msgstr ""
 
 #. module: alc_edi_connector
-#: code:addons/alc_edi_connector/components/ubl_order_exporter.py:30
+#: code:addons/alc_edi_connector/components/ubl_order_exporter.py:31
 #, python-format
 msgid "Connector EDI"
 msgstr ""
@@ -194,13 +194,13 @@ msgid "If specified, is a sub path of the path specified on the backend"
 msgstr ""
 
 #. module: alc_edi_connector
-#: code:addons/alc_edi_connector/components/ubl_despatch_advice_importer.py:23
+#: code:addons/alc_edi_connector/components/ubl_despatch_advice_importer.py:24
 #, python-format
 msgid "Import Despatch Advice %s from %s"
 msgstr ""
 
 #. module: alc_edi_connector
-#: code:addons/alc_edi_connector/components/ubl_order_response_importer.py:23
+#: code:addons/alc_edi_connector/components/ubl_order_response_importer.py:24
 #, python-format
 msgid "Import Order Response %s from %s"
 msgstr ""
@@ -226,7 +226,7 @@ msgid "Imports"
 msgstr ""
 
 #. module: alc_edi_connector
-#: code:addons/alc_edi_connector/models/edi_task_def.py:22
+#: code:addons/alc_edi_connector/models/edi_task_def.py:23
 #: sql_constraint:edi.export.task.def:0
 #: sql_constraint:edi.import.task.def:0
 #: sql_constraint:edi.task.def:0
@@ -306,7 +306,7 @@ msgid "Path write"
 msgstr ""
 
 #. module: alc_edi_connector
-#: code:addons/alc_edi_connector/components/edi_sftp_backend_adapter.py:50
+#: code:addons/alc_edi_connector/components/edi_sftp_backend_adapter.py:52
 #, python-format
 msgid "Please set the private key environment variable or a password"
 msgstr ""
@@ -391,7 +391,7 @@ msgid "UBL Oder Document Generation not configured on the backend %s"
 msgstr ""
 
 #. module: alc_edi_connector
-#: code:addons/alc_edi_connector/components/ubl_order_exporter.py:29
+#: code:addons/alc_edi_connector/components/ubl_order_exporter.py:30
 #, python-format
 msgid "UBL Order document sent"
 msgstr ""
