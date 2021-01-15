@@ -24,7 +24,7 @@ msgid "Journal Item"
 msgstr ""
 
 #. module: account_payment_order_background
-#: code:addons/account_payment_order_background/models/account_move_line.py:31
+#: code:addons/account_payment_order_background/models/account_move_line.py:32
 #, python-format
 msgid "Not reconciled because of: %s"
 msgstr ""
