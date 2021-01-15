@@ -22,25 +22,25 @@ msgid "Cancel"
 msgstr "Annuler"
 
 #. module: sale_confirm_background
-#: code:addons/sale_confirm_background/models/sale_order.py:61
+#: code:addons/sale_confirm_background/models/sale_order.py:62
 #, python-format
 msgid "Confirmation of sales order %s"
 msgstr "Confirmation de la commande %s"
 
 #. module: sale_confirm_background
-#: code:addons/sale_confirm_background/models/sale_order.py:45
+#: code:addons/sale_confirm_background/models/sale_order.py:46
 #, python-format
 msgid "Order %s is now confirmed."
 msgstr "La commande %s est maintenant confirmée."
 
 #. module: sale_confirm_background
-#: code:addons/sale_confirm_background/models/sale_order.py:58
+#: code:addons/sale_confirm_background/models/sale_order.py:59
 #, python-format
 msgid "Order %s will be confirmed in background."
 msgstr "La commande %s va être confirmée en arrière-plan."
 
 #. module: sale_confirm_background
-#: code:addons/sale_confirm_background/models/sale_order.py:77
+#: code:addons/sale_confirm_background/models/sale_order.py:78
 #, python-format
 msgid "Remove delivery block for order %s is now done."
 msgstr ""
@@ -48,7 +48,7 @@ msgstr ""
 "effectuée."
 
 #. module: sale_confirm_background
-#: code:addons/sale_confirm_background/models/sale_order.py:87
+#: code:addons/sale_confirm_background/models/sale_order.py:88
 #, python-format
 msgid "Remove delivery block for order %s will be done in background."
 msgstr ""
@@ -56,7 +56,7 @@ msgstr ""
 "en arrière-plan."
 
 #. module: sale_confirm_background
-#: code:addons/sale_confirm_background/models/sale_order.py:91
+#: code:addons/sale_confirm_background/models/sale_order.py:92
 #, python-format
 msgid "Remove delivery block for sales order %s"
 msgstr "Supprimer le blocage de livraison pour la commande %s"
@@ -67,7 +67,7 @@ msgid "Sales Order"
 msgstr "Commandes"
 
 #. module: sale_confirm_background
-#: code:addons/sale_confirm_background/models/sale_order.py:34
+#: code:addons/sale_confirm_background/models/sale_order.py:35
 #, python-format
 msgid ""
 "Was automatically cancelled on confirmation becausethe job took longer to "
