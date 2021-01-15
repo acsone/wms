@@ -40,7 +40,7 @@ msgid "Backend Id"
 msgstr ""
 
 #. module: connector_esb
-#: code:addons/connector_esb/controllers/stats.py:38
+#: code:addons/connector_esb/controllers/stats.py:40
 #, python-format
 msgid "Bad date format for `%s`. Expected: YYYY-mm-dd"
 msgstr ""
@@ -89,7 +89,7 @@ msgid "Created on"
 msgstr ""
 
 #. module: connector_esb
-#: code:addons/connector_esb/controllers/sale.py:76
+#: code:addons/connector_esb/controllers/sale.py:78
 #, python-format
 msgid "Customer ID must be a number"
 msgstr ""
@@ -171,14 +171,14 @@ msgid "Exports"
 msgstr ""
 
 #. module: connector_esb
-#: code:addons/connector_esb/controllers/sale.py:45
+#: code:addons/connector_esb/controllers/sale.py:47
 #, python-format
 msgid "Field 'lines' must be a <type 'list'> got %s."
 msgstr ""
 
 #. module: connector_esb
-#: code:addons/connector_esb/components/xml_writer.py:133
-#: code:addons/connector_esb/components/xml_writer.py:160
+#: code:addons/connector_esb/components/xml_writer.py:135
+#: code:addons/connector_esb/components/xml_writer.py:162
 #, python-format
 msgid "File %s already exported."
 msgstr ""
@@ -265,7 +265,7 @@ msgid "Maximum of records to export at once."
 msgstr ""
 
 #. module: connector_esb
-#: code:addons/connector_esb/models/backend_timestamp.py:53
+#: code:addons/connector_esb/models/backend_timestamp.py:54
 #: sql_constraint:esb.backend.timestamp:0
 #, python-format
 msgid "Model must be unique"
@@ -277,14 +277,14 @@ msgid "Model name"
 msgstr ""
 
 #. module: connector_esb
-#: code:addons/connector_esb/models/sale_order/common.py:153
+#: code:addons/connector_esb/models/sale_order/common.py:154
 #, python-format
 msgid "No match found for customer_id: %s"
 msgstr ""
 
 #. module: connector_esb
-#: code:addons/connector_esb/components/exporter.py:103
-#: code:addons/connector_esb/components/exporter.py:108
+#: code:addons/connector_esb/components/exporter.py:105
+#: code:addons/connector_esb/components/exporter.py:110
 #, python-format
 msgid "Nothing to export."
 msgstr ""
@@ -342,6 +342,12 @@ msgid "Product Unit of Measure"
 msgstr ""
 
 #. module: connector_esb
+#: code:addons/connector_esb/models/sale_order/common.py:105
+#, python-format
+msgid "Product with {} : {} was not found"
+msgstr ""
+
+#. module: connector_esb
 #: model:ir.model,name:connector_esb.model_queue_job
 msgid "Queue Job"
 msgstr ""
@@ -362,7 +368,7 @@ msgid "Real Id"
 msgstr ""
 
 #. module: connector_esb
-#: code:addons/connector_esb/components/exporter.py:111
+#: code:addons/connector_esb/components/exporter.py:113
 #, python-format
 msgid "Record exported"
 msgstr ""
@@ -406,20 +412,20 @@ msgid "Related Records"
 msgstr ""
 
 #. module: connector_esb
-#: code:addons/connector_esb/controllers/sale.py:30
+#: code:addons/connector_esb/controllers/sale.py:32
 #, python-format
 msgid "Required `data` key is missing."
 msgstr ""
 
 #. module: connector_esb
-#: code:addons/connector_esb/controllers/sale.py:28
+#: code:addons/connector_esb/controllers/sale.py:30
 #, python-format
 msgid "Required `params` key is missing."
 msgstr ""
 
 #. module: connector_esb
-#: code:addons/connector_esb/controllers/sale.py:42
-#: code:addons/connector_esb/controllers/sale.py:70
+#: code:addons/connector_esb/controllers/sale.py:44
+#: code:addons/connector_esb/controllers/sale.py:72
 #, python-format
 msgid "Required field(s) missing: %s"
 msgstr ""
@@ -445,7 +451,7 @@ msgid "SFTP User"
 msgstr ""
 
 #. module: connector_esb
-#: code:addons/connector_esb/models/sale_order/webservice.py:31
+#: code:addons/connector_esb/models/sale_order/webservice.py:32
 #, python-format
 msgid "Sale Order not found"
 msgstr ""
@@ -504,33 +510,33 @@ msgid "The customer {} has already been exported, it can be archived  but not de
 msgstr ""
 
 #. module: connector_esb
-#: code:addons/connector_esb/models/backend_timestamp.py:111
+#: code:addons/connector_esb/models/backend_timestamp.py:112
 #, python-format
 msgid "The synchronization timestamp (%s) is currently locked, probably due to an ongoing synchronization."
 msgstr ""
 
 #. module: connector_esb
-#: code:addons/connector_esb/models/sale_order/webservice.py:34
+#: code:addons/connector_esb/models/sale_order/webservice.py:35
 #, python-format
 msgid "There are several sale orders with the same increment ID"
 msgstr ""
 
 #. module: connector_esb
-#: code:addons/connector_esb/models/backend_timestamp.py:69
-#: code:addons/connector_esb/wizards/esb_period_exporter.py:39
+#: code:addons/connector_esb/models/backend_timestamp.py:70
+#: code:addons/connector_esb/wizards/esb_period_exporter.py:40
 #, python-format
 msgid "This export can not be triggered manually."
 msgstr ""
 
 #. module: connector_esb
-#: code:addons/connector_esb/models/sale_order/common.py:35
+#: code:addons/connector_esb/models/sale_order/common.py:36
 #: sql_constraint:sale.order:0
 #, python-format
 msgid "This reference NewPharma already exists"
 msgstr ""
 
 #. module: connector_esb
-#: code:addons/connector_esb/models/sale_order/common.py:30
+#: code:addons/connector_esb/models/sale_order/common.py:31
 #: sql_constraint:sale.order:0
 #, python-format
 msgid "This reference esb already exists"
@@ -552,7 +558,7 @@ msgid "Users"
 msgstr ""
 
 #. module: connector_esb
-#: code:addons/connector_esb/models/sale_order/common.py:134
+#: code:addons/connector_esb/models/sale_order/common.py:135
 #, python-format
 msgid "Was automatically cancelled on creation because thejob took longer to execute than the customer allows."
 msgstr ""
