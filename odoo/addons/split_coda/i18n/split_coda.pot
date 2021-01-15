@@ -19,13 +19,13 @@ msgid "Import Bank Statement"
 msgstr ""
 
 #. module: split_coda
-#: code:addons/split_coda/wizard/account_bank_statement_import.py:101
+#: code:addons/split_coda/wizard/account_bank_statement_import.py:102
 #, python-format
 msgid "No coda imported. Please check the journal"
 msgstr ""
 
 #. module: split_coda
-#: code:addons/split_coda/wizard/account_bank_statement_import.py:81
+#: code:addons/split_coda/wizard/account_bank_statement_import.py:82
 #, python-format
 msgid "You have to set a Default Debit Account and a Default Credit Account for the journal: %s"
 msgstr ""
