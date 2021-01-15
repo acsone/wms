@@ -24,7 +24,7 @@ msgid "Additional information communicated to the customer"
 msgstr ""
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/reception_pharmacy.py:137
+#: code:addons/specific_stock/models/reception_pharmacy.py:138
 #, python-format
 msgid "All pickings at destination of a same shipping must be in the same delivery round"
 msgstr ""
@@ -71,7 +71,7 @@ msgid "Cancel move"
 msgstr ""
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/stock_production_lot.py:348
+#: code:addons/specific_stock/models/stock_production_lot.py:340
 #, python-format
 msgid "Cannot generate a voice identifier"
 msgstr ""
@@ -141,7 +141,7 @@ msgid "Customer"
 msgstr ""
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/reception_pharmacy.py:65
+#: code:addons/specific_stock/models/reception_pharmacy.py:66
 #, python-format
 msgid "Customer location is missing"
 msgstr ""
@@ -446,7 +446,7 @@ msgid "Partner"
 msgstr ""
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/reception_pharmacy.py:73
+#: code:addons/specific_stock/models/reception_pharmacy.py:74
 #, python-format
 msgid "Partner {} does not belong to any itinerary"
 msgstr ""
@@ -480,7 +480,7 @@ msgid "Picking zone"
 msgstr ""
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/reception_pharmacy.py:50
+#: code:addons/specific_stock/models/reception_pharmacy.py:51
 #, python-format
 msgid "Please insert at least one line"
 msgstr ""
@@ -622,7 +622,7 @@ msgid "Stock Move Handler"
 msgstr ""
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/reception_pharmacy.py:68
+#: code:addons/specific_stock/models/reception_pharmacy.py:69
 #, python-format
 msgid "Supplier location is missing"
 msgstr ""
@@ -664,7 +664,7 @@ msgid "The reception must be linked to a Goods Received Note"
 msgstr ""
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/stock_production_lot.py:192
+#: code:addons/specific_stock/models/stock_production_lot.py:184
 #, python-format
 msgid "There is no checksum available"
 msgstr ""
@@ -682,25 +682,25 @@ msgid "There is no delay for the inventory %s"
 msgstr ""
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/product_template.py:245
+#: code:addons/specific_stock/models/product_template.py:247
 #, python-format
 msgid "There is no period for best sellers products"
 msgstr ""
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/product_template.py:203
+#: code:addons/specific_stock/models/product_template.py:205
 #, python-format
 msgid "There is no period for expensive products"
 msgstr ""
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/product_template.py:294
+#: code:addons/specific_stock/models/product_template.py:296
 #, python-format
 msgid "There is no period for other products"
 msgstr ""
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/stock_production_lot.py:336
+#: code:addons/specific_stock/models/stock_production_lot.py:328
 #, python-format
 msgid "There is no voice identifier available"
 msgstr ""
@@ -750,7 +750,7 @@ msgid "Voice Identifier"
 msgstr ""
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/reception_pharmacy.py:62
+#: code:addons/specific_stock/models/reception_pharmacy.py:63
 #, python-format
 msgid "Warehouse is missing"
 msgstr ""
