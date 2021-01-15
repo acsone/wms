@@ -87,15 +87,15 @@ msgid "Cannot format the value %s with type %s"
 msgstr ""
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tests/test_full.py:643
-#: code:addons/specific_zetes/tools/domain_assignment.py:157
+#: code:addons/specific_zetes/tests/test_full.py:644
+#: code:addons/specific_zetes/tools/domain_assignment.py:158
 #, python-format
 msgid "Cannot found a picking"
 msgstr ""
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_print.py:130
-#: code:addons/specific_zetes/tools/domain_print.py:182
+#: code:addons/specific_zetes/tools/domain_print.py:131
+#: code:addons/specific_zetes/tools/domain_print.py:183
 #, python-format
 msgid "Cannot found a printer"
 msgstr ""
@@ -233,8 +233,8 @@ msgid "Enable passports"
 msgstr ""
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_print.py:145
-#: code:addons/specific_zetes/tools/domain_print.py:198
+#: code:addons/specific_zetes/tools/domain_print.py:146
+#: code:addons/specific_zetes/tools/domain_print.py:199
 #, python-format
 msgid "Error during printing"
 msgstr ""
@@ -349,7 +349,7 @@ msgid "Location"
 msgstr ""
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_location.py:169
+#: code:addons/specific_zetes/tools/domain_location.py:170
 #, python-format
 msgid "Location %s%s%s%s%s not found"
 msgstr ""
@@ -365,7 +365,7 @@ msgid "Location Checksum Right"
 msgstr ""
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_itempick.py:417
+#: code:addons/specific_zetes/tools/domain_itempick.py:418
 #, python-format
 msgid "Location not found for the product %s"
 msgstr ""
@@ -378,13 +378,13 @@ msgid "Lot"
 msgstr ""
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_location.py:230
+#: code:addons/specific_zetes/tools/domain_location.py:231
 #, python-format
 msgid "Lot %s has expired. Please contact the manager"
 msgstr ""
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_location.py:242
+#: code:addons/specific_zetes/tools/domain_location.py:243
 #, python-format
 msgid "Lot %s not found. Please contact the manager"
 msgstr ""
@@ -400,7 +400,7 @@ msgid "Lot Voice Identifier"
 msgstr ""
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_itempick.py:273
+#: code:addons/specific_zetes/tools/domain_itempick.py:274
 #, python-format
 msgid "Lot pack operation not found"
 msgstr ""
@@ -458,31 +458,31 @@ msgid "Need to be check"
 msgstr ""
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/models/stock_picking.py:246
-#: code:addons/specific_zetes/tools/domain_catchweight.py:134
-#: code:addons/specific_zetes/tools/domain_itempick.py:256
+#: code:addons/specific_zetes/models/stock_picking.py:247
+#: code:addons/specific_zetes/tools/domain_catchweight.py:135
+#: code:addons/specific_zetes/tools/domain_itempick.py:257
 #, python-format
 msgid "No pack operation found"
 msgstr ""
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/models/stock_picking.py:249
+#: code:addons/specific_zetes/models/stock_picking.py:250
 #, python-format
 msgid "No pack operation found with ID %s"
 msgstr ""
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_itemmove.py:168
-#: code:addons/specific_zetes/tools/domain_location.py:111
-#: code:addons/specific_zetes/tools/domain_location.py:122
+#: code:addons/specific_zetes/tools/domain_itemmove.py:169
+#: code:addons/specific_zetes/tools/domain_location.py:112
+#: code:addons/specific_zetes/tools/domain_location.py:123
 #, python-format
 msgid "No picking found"
 msgstr ""
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_itemmove.py:179
-#: code:addons/specific_zetes/tools/domain_itempick.py:199
-#: code:addons/specific_zetes/tools/domain_print.py:93
+#: code:addons/specific_zetes/tools/domain_itemmove.py:180
+#: code:addons/specific_zetes/tools/domain_itempick.py:200
+#: code:addons/specific_zetes/tools/domain_print.py:94
 #, python-format
 msgid "No picking found with the ID %s"
 msgstr ""
@@ -788,7 +788,7 @@ msgid "The stock operation where the delted packing has been made"
 msgstr ""
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_usercontext.py:110
+#: code:addons/specific_zetes/tools/domain_usercontext.py:111
 #, python-format
 msgid "The user should be in the group Inventory"
 msgstr ""
@@ -800,14 +800,20 @@ msgid "There are some missing mandatory values: {}"
 msgstr ""
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_itemmove.py:196
-#: code:addons/specific_zetes/tools/domain_itempick.py:335
+#: code:addons/specific_zetes/tools/domain_itemmove.py:197
+#: code:addons/specific_zetes/tools/domain_itempick.py:336
 #, python-format
 msgid "There is no lines for the picking %s"
 msgstr ""
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_location.py:189
+#: code:addons/specific_zetes/models/stock_picking.py:121
+#, python-format
+msgid "There is no picking checksum available"
+msgstr ""
+
+#. module: specific_zetes
+#: code:addons/specific_zetes/tools/domain_location.py:190
 #, python-format
 msgid "This location is not a reserve"
 msgstr ""
@@ -847,7 +853,7 @@ msgid "UOP not found or this UOP is not open"
 msgstr ""
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_assignment.py:148
+#: code:addons/specific_zetes/tools/domain_assignment.py:149
 #, python-format
 msgid "Unknown assignment type"
 msgstr ""
@@ -860,7 +866,7 @@ msgid "User"
 msgstr ""
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_usercontext.py:98
+#: code:addons/specific_zetes/tools/domain_usercontext.py:99
 #, python-format
 msgid "User not found"
 msgstr ""
@@ -891,7 +897,7 @@ msgid "Validate UOP"
 msgstr ""
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_assignment.py:258
+#: code:addons/specific_zetes/tools/domain_assignment.py:259
 #, python-format
 msgid "Validate picking %s"
 msgstr ""
@@ -924,13 +930,13 @@ msgid "You cannot pick more than %s unit of the product %s"
 msgstr ""
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/models/stock_picking.py:226
+#: code:addons/specific_zetes/models/stock_picking.py:227
 #, python-format
 msgid "You cannot split this pack operation because the new quantity (%s) is geater than the available quantity (%s)"
 msgstr ""
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/models/stock_picking.py:254
+#: code:addons/specific_zetes/models/stock_picking.py:255
 #, python-format
 msgid "You cannot split this pack operation lot because the new quantity (%s) is greater than the available quantity (%s)"
 msgstr ""
@@ -977,7 +983,7 @@ msgid "Zetes state"
 msgstr ""
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_assignment.py:176
+#: code:addons/specific_zetes/tools/domain_assignment.py:177
 #, python-format
 msgid "left"
 msgstr ""
@@ -998,7 +1004,7 @@ msgid "pack.operation.reserve.rel"
 msgstr ""
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_assignment.py:178
+#: code:addons/specific_zetes/tools/domain_assignment.py:179
 #, python-format
 msgid "right"
 msgstr ""
