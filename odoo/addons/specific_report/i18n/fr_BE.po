@@ -133,6 +133,17 @@ msgstr ""
 "                                BIC:"
 
 #. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
+#, fuzzy
+msgid ""
+"<br/>\n"
+"                      <br/>\n"
+"                      <span>Customer</span>"
+msgstr ""
+"<br/><br/>\n"
+"                                            <span>Client</span>"
+
+#. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.page_number_footer
 #: model:ir.ui.view,arch_db:specific_report.report_invoice
 msgid ""
@@ -141,15 +152,6 @@ msgid ""
 msgstr ""
 "<br/>\n"
 "                    <span>Email:</span>"
-
-#. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
-msgid ""
-"<br/><br/>\n"
-"                                            <span>Customer</span>"
-msgstr ""
-"<br/><br/>\n"
-"                                            <span>Client</span>"
 
 #. module: specific_report
 #: model:mail.template,body_html:specific_report.mail_template_pharamcist_notification
@@ -422,10 +424,11 @@ msgstr "<span>RPM Liège division Huy - TVA</span>"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
+#, fuzzy
 msgid ""
 "<span>SUMMARY</span>\n"
-"                                <br/>\n"
-"                                <span>Total discount:</span>"
+"                <br/>\n"
+"                <span>Total discount:</span>"
 msgstr ""
 "<span>Résumé</span>\n"
 "                            <br/>\n"
@@ -1159,7 +1162,7 @@ msgid "Sales Order Line"
 msgstr "Ligne du bon de commande"
 
 #. module: specific_report
-#: code:addons/specific_report/models/report_async.py:48
+#: code:addons/specific_report/models/report_async.py:49
 #, python-format
 msgid "Sending fax for {} with id {}"
 msgstr "Envoyer par fax pour {} avec l'ID {}"
