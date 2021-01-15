@@ -22,14 +22,14 @@ msgid "Invoice"
 msgstr ""
 
 #. module: l10n_be_bba_fix
-#: code:addons/l10n_be_bba_fix/models/account_invoice.py:121
+#: code:addons/l10n_be_bba_fix/models/account_invoice.py:122
 #, python-format
 msgid ""
 "The maximum of outgoing invoices for this partner reference has been reached"
 msgstr ""
 
 #. module: l10n_be_bba_fix
-#: code:addons/l10n_be_bba_fix/models/account_invoice.py:96
+#: code:addons/l10n_be_bba_fix/models/account_invoice.py:97
 #, python-format
 msgid ""
 "The partner reference cannot exceed 6 digits for the generation of BBA "
