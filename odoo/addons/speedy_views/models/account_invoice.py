@@ -16,7 +16,6 @@ class AccountInvoice(models.Model):
     @api.model_cr
     def init(self):
         trgm_installed = install_trgm_extension(self.env)
-        self.env.cr.commit()
 
         if trgm_installed:
             index_name = "account_invoice_origin_gin_trgm"

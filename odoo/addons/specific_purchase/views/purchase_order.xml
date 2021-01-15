@@ -1,123 +1,162 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <record id="purchase_order_form" model="ir.ui.view">
-        <field name="name">purchase.order.form</field>
-        <field name="model">purchase.order</field>
-        <field name="inherit_id" ref="purchase.purchase_order_form"/>
-        <field name="arch" type="xml">
-            <xpath expr="//field[@name='origin']" position="attributes">
-                <attribute name="invisible">1</attribute>
-            </xpath>
-
-            <xpath expr="//field[@name='origin']" position="after">
-                <field name="nbr_lines"/>
-                <field name="nbr_lines_bo"/>
-                <field name="date_planned" widget="date" attrs="{'readonly': [('state', 'not in', ('draft', 'sent'))]}" class="oe_inline"/>
-            </xpath>
-
-            <xpath expr="//sheet/group" position="after">
-            <!-- Adding a new table to place button in rigth place and don't affect the fields of prevous table -->
-                <group style="margin-top: -20px; margin-bottom: 0px;">
-                    <group>
+  <record id="purchase_order_form" model="ir.ui.view">
+    <field name="name">purchase.order.form</field>
+    <field name="model">purchase.order</field>
+    <field name="inherit_id" ref="purchase.purchase_order_form" />
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='origin']" position="attributes">
+        <attribute name="invisible">1</attribute>
+      </xpath>
+      <xpath expr="//field[@name='origin']" position="after">
+        <field name="nbr_lines" />
+        <field name="nbr_lines_bo" />
+        <field
+          name="date_planned"
+          widget="date"
+          attrs="{'readonly': [('state', 'not in', ('draft', 'sent'))]}"
+          class="oe_inline"
+        />
+      </xpath>
+      <xpath expr="//sheet/group" position="after">
+        <!-- Adding a new table to place button in rigth place and don't affect the fields of prevous table -->
+        <group style="margin-top: -20px; margin-bottom: 0px;">
+          <group>
                     </group>
-                    <group style="margin-top: 0px;">
-                        <button name="action_set_date_planned" type="object" states="draft,sent" string="Set date to all order lines" help="This changes the scheduled date of all order lines to the given date" class="fa fa-calendar o_icon_button oe_edit_only" />
-                    </group>
-                </group>
-            </xpath>
-
-            <xpath expr="//field[@name='partner_id']" position="after">
-                <field name="responsible_id"/>
-            </xpath>
-
-            <xpath expr="//field[@name='date_order']" position="after">
-                <field name="total_weight"/>
-            </xpath>
-
-            <xpath expr="//field[@name='order_line']/tree/field[@name='price_unit']" position="attributes">
-                <attribute name="invisible">1</attribute>
-            </xpath>
-
-            <xpath expr="//field[@name='order_line']/tree/field[@name='price_unit']" position="after">
-                <field name="price_unit_base"/>
-                <field name="discount_global"/>
-                <field name="promotion_supplier"/>
-            </xpath>
-
-            <xpath expr="//field[@name='order_line']/form//field[@name='price_unit']" position="attributes">
-                <attribute name="invisible">1</attribute>
-            </xpath>
-
-            <xpath expr="//field[@name='order_line']/form//field[@name='price_unit']" position="after">
-                <field name="price_unit_base"/>
-                <field name="discount_global"/>
-                <field name="promotion_supplier"/>
-            </xpath>
-
-            <xpath expr="//field[@name='order_line']/tree//field[@name='date_planned']" position="attributes">
-                <attribute name="attrs">{'readonly': [('state', 'in', ['purchase', 'done'])]}</attribute>
-            </xpath>
-
-            <!-- Invisible are not aplicable here as it will hide field in form at all -->
-            <xpath expr="//page[2]/group/group/label[1]" position="replace"/>
-            <xpath expr="//page[2]/group/group/div[1]" position="replace"/>
-
-            <xpath expr="//field[@name='order_line']/tree//field[@name='product_qty']" position="attributes">
-                <attribute name="attrs">{'readonly': [('state', 'in', ['purchase', 'done'])]}</attribute>
-            </xpath>
-
-            <xpath expr="//field[@name='order_line']/tree//field[@name='analytic_tag_ids']" position="attributes">
-                <attribute name="attrs">{'readonly': [('state', 'in', ['purchase', 'done'])]}</attribute>
-            </xpath>
-
-            <xpath expr="//field[@name='order_line']/tree//field[@name='account_analytic_id']" position="attributes">
-                <attribute name="attrs">{'readonly': [('state', 'in', ['purchase', 'done'])]}</attribute>
-            </xpath>
-
-            <xpath expr="//field[@name='order_line']/tree//field[@name='taxes_id']" position="attributes">
-                <attribute name="attrs">{'readonly': [('state', 'in', ['purchase', 'done'])]}</attribute>
-            </xpath>
-
-            <xpath expr="//field[@name='order_line']/tree" position="inside">
-                <field name="is_bo_line" invisible="1"/>
-            </xpath>
-
-            <xpath expr="//field[@name='order_line']/tree" position="attributes">
-                <attribute name="decoration-warning">is_bo_line</attribute>
-            </xpath>
-        </field>
-    </record>
-
-    <record id="purchase_order_tree" model="ir.ui.view">
-        <field name="name">purchase_order_tree inherit</field>
-        <field name="model">purchase.order</field>
-        <field name="inherit_id" ref="purchase.purchase_order_tree"/>
-        <field name="arch" type="xml">
-            <xpath expr="//field[@name='origin']" position="attributes">
-                <attribute name="invisible">1</attribute>
-            </xpath>
-            <xpath expr="//field[@name='origin']" position="after">
-                <field name="nbr_lines"/>
-            </xpath>
-        </field>
-    </record>
-
-    <record id="view_purchase_order_filter" model="ir.ui.view">
-        <field name="name">view.purchase.order.filter inherit</field>
-        <field name="model">purchase.order</field>
-        <field name="inherit_id" ref="purchase.view_purchase_order_filter" />
-        <field name="arch" type="xml">
-            <xpath expr="//filter[@name='draft']" position="before">
-                <filter name="my_orders" string="My Orders" domain="[('responsible_id', '=', uid)]" />
-                <filter name="without_responsible" string="Without responsible" domain="[('responsible_id', '=', False)]" />
-                <filter name="bo_orders" string="In BO" domain="[('nbr_lines_bo', '>', 0)]" />
-                <separtor/>
-            </xpath>
-        </field>
-    </record>
-
-    <record id="purchase.purchase_rfq" model="ir.actions.act_window">
-        <field name="context">{'search_default_without_responsible':1, 'search_default_my_orders': 1}</field>
-    </record>
-
+          <group style="margin-top: 0px;">
+            <button
+              name="action_set_date_planned"
+              type="object"
+              states="draft,sent"
+              string="Set date to all order lines"
+              help="This changes the scheduled date of all order lines to the given date"
+              class="fa fa-calendar o_icon_button oe_edit_only"
+            />
+          </group>
+        </group>
+      </xpath>
+      <xpath expr="//field[@name='partner_id']" position="after">
+        <field name="responsible_id" />
+      </xpath>
+      <xpath expr="//field[@name='date_order']" position="after">
+        <field name="total_weight" />
+      </xpath>
+      <xpath
+        expr="//field[@name='order_line']/tree/field[@name='price_unit']"
+        position="attributes"
+      >
+        <attribute name="invisible">1</attribute>
+      </xpath>
+      <xpath
+        expr="//field[@name='order_line']/tree/field[@name='price_unit']"
+        position="after"
+      >
+        <field name="price_unit_base" />
+        <field name="discount_global" />
+        <field name="promotion_supplier" />
+      </xpath>
+      <xpath
+        expr="//field[@name='order_line']/form//field[@name='price_unit']"
+        position="attributes"
+      >
+        <attribute name="invisible">1</attribute>
+      </xpath>
+      <xpath
+        expr="//field[@name='order_line']/form//field[@name='price_unit']"
+        position="after"
+      >
+        <field name="price_unit_base" />
+        <field name="discount_global" />
+        <field name="promotion_supplier" />
+      </xpath>
+      <xpath
+        expr="//field[@name='order_line']/tree//field[@name='date_planned']"
+        position="attributes"
+      >
+        <attribute
+          name="attrs"
+        >{'readonly': [('state', 'in', ['purchase', 'done'])]}</attribute>
+      </xpath>
+      <!-- Invisible are not aplicable here as it will hide field in form at all -->
+      <xpath expr="//page[2]/group/group/label[1]" position="replace" />
+      <xpath expr="//page[2]/group/group/div[1]" position="replace" />
+      <xpath
+        expr="//field[@name='order_line']/tree//field[@name='product_qty']"
+        position="attributes"
+      >
+        <attribute
+          name="attrs"
+        >{'readonly': [('state', 'in', ['purchase', 'done'])]}</attribute>
+      </xpath>
+      <xpath
+        expr="//field[@name='order_line']/tree//field[@name='analytic_tag_ids']"
+        position="attributes"
+      >
+        <attribute
+          name="attrs"
+        >{'readonly': [('state', 'in', ['purchase', 'done'])]}</attribute>
+      </xpath>
+      <xpath
+        expr="//field[@name='order_line']/tree//field[@name='account_analytic_id']"
+        position="attributes"
+      >
+        <attribute
+          name="attrs"
+        >{'readonly': [('state', 'in', ['purchase', 'done'])]}</attribute>
+      </xpath>
+      <xpath
+        expr="//field[@name='order_line']/tree//field[@name='taxes_id']"
+        position="attributes"
+      >
+        <attribute
+          name="attrs"
+        >{'readonly': [('state', 'in', ['purchase', 'done'])]}</attribute>
+      </xpath>
+      <xpath expr="//field[@name='order_line']/tree" position="inside">
+        <field name="is_bo_line" invisible="1" />
+      </xpath>
+      <xpath expr="//field[@name='order_line']/tree" position="attributes">
+        <attribute name="decoration-warning">is_bo_line</attribute>
+      </xpath>
+    </field>
+  </record>
+  <record id="purchase_order_tree" model="ir.ui.view">
+    <field name="name">purchase_order_tree inherit</field>
+    <field name="model">purchase.order</field>
+    <field name="inherit_id" ref="purchase.purchase_order_tree" />
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='origin']" position="attributes">
+        <attribute name="invisible">1</attribute>
+      </xpath>
+      <xpath expr="//field[@name='origin']" position="after">
+        <field name="nbr_lines" />
+      </xpath>
+    </field>
+  </record>
+  <record id="view_purchase_order_filter" model="ir.ui.view">
+    <field name="name">view.purchase.order.filter inherit</field>
+    <field name="model">purchase.order</field>
+    <field name="inherit_id" ref="purchase.view_purchase_order_filter" />
+    <field name="arch" type="xml">
+      <xpath expr="//filter[@name='draft']" position="before">
+        <filter
+          name="my_orders"
+          string="My Orders"
+          domain="[('responsible_id', '=', uid)]"
+        />
+        <filter
+          name="without_responsible"
+          string="Without responsible"
+          domain="[('responsible_id', '=', False)]"
+        />
+        <filter name="bo_orders" string="In BO" domain="[('nbr_lines_bo', '>', 0)]" />
+        <separtor />
+      </xpath>
+    </field>
+  </record>
+  <record id="purchase.purchase_rfq" model="ir.actions.act_window">
+    <field
+      name="context"
+    >{'search_default_without_responsible':1, 'search_default_my_orders': 1}</field>
+  </record>
 </odoo>

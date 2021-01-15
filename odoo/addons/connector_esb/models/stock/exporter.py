@@ -6,10 +6,11 @@ import logging
 from datetime import timedelta
 
 from odoo import fields
+from odoo.osv.expression import AND
+
 from odoo.addons.component.core import Component
 from odoo.addons.connector.components.mapper import mapping
 from odoo.addons.connector.exception import ConnectorException
-from odoo.osv.expression import AND
 
 from ...components.mapper import falsy2emptystring, falsy2zero
 

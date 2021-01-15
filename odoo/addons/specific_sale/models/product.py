@@ -12,7 +12,7 @@ class ProductProduct(models.Model):
     _inherit = "product.product"
 
     @api.multi
-    def _sales_count(self):
+    def _compute_sales_count(self):
         # rewrite of method as sale.report is very slow to load
         query = """
             SELECT
@@ -35,7 +35,7 @@ class ProductProduct(models.Model):
                 done[product_id] = qty
             product.sales_count = product.sale_lines_count + done.get(product_id, 0)
 
-    sale_lines_count = fields.Integer(compute="_sales_count")
+    sale_lines_count = fields.Integer(compute="_compute_sales_count")
 
     older_lot_id = fields.Many2one(
         "stock.production.lot", string="Older lot", compute="_compute_older_lot_id"

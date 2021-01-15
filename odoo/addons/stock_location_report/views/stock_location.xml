@@ -1,28 +1,25 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-    <record id="view_location_form" model="ir.ui.view">
-        <field name="name">location color</field>
-        <field name="model">stock.location</field>
-        <field name="inherit_id" ref="specific_stock.stock_location_form_inherit" />
-        <field name="priority">20</field>
-        <field name="arch" type="xml">
-            <field name="barcode" position="after">
-                <field name="color"/>
-            </field>
-        </field>
-    </record>
-
-    <record id="view_location_search" model="ir.ui.view">
-        <field name="name">view.location.search.inherit</field>
-        <field name="model">stock.location</field>
-        <field name="inherit_id" ref="specific_stock.view_location_search"/>
-        <field name="arch" type="xml">
-
-            <xpath expr="//search" position="inside">
-                <separator/>
-                <field name="color"/>
-            </xpath>
-
-        </field>
-    </record>
+  <record id="view_location_form" model="ir.ui.view">
+    <field name="name">location color</field>
+    <field name="model">stock.location</field>
+    <field name="inherit_id" ref="specific_stock.stock_location_form_inherit" />
+    <field name="priority">20</field>
+    <field name="arch" type="xml">
+      <field name="barcode" position="after">
+        <field name="color" />
+      </field>
+    </field>
+  </record>
+  <record id="view_location_search" model="ir.ui.view">
+    <field name="name">view.location.search.inherit</field>
+    <field name="model">stock.location</field>
+    <field name="inherit_id" ref="specific_stock.view_location_search" />
+    <field name="arch" type="xml">
+      <xpath expr="//search" position="inside">
+        <separator />
+        <field name="color" />
+      </xpath>
+    </field>
+  </record>
 </odoo>

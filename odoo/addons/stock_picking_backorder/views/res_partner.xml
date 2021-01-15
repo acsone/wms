@@ -1,22 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-
-    <record id="view_partner_form" model="ir.ui.view">
-        <field name="name">backorder</field>
-        <field name="inherit_id" ref="base.view_partner_form" />
-        <field name="model">res.partner</field>
-        <field name="arch" type="xml">
-
-            <xpath expr="//field[@name='customer']/parent::group" position="inside">
-                <field name="is_sale_back_order_accepted"/>
-                <field name="is_sale_back_order_cancel"/>
-            </xpath>
-
-            <xpath expr="//field[@name='supplier']/parent::group" position="inside">
-                <field name="is_purchase_back_order_accepted"/>
-            </xpath>
-
-        </field>
-    </record>
-
+  <record id="view_partner_form" model="ir.ui.view">
+    <field name="name">backorder</field>
+    <field name="inherit_id" ref="base.view_partner_form" />
+    <field name="model">res.partner</field>
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='customer']/parent::group" position="inside">
+        <field name="is_sale_back_order_accepted" />
+        <field name="is_sale_back_order_cancel" />
+      </xpath>
+      <xpath expr="//field[@name='supplier']/parent::group" position="inside">
+        <field name="is_purchase_back_order_accepted" />
+      </xpath>
+    </field>
+  </record>
 </odoo>

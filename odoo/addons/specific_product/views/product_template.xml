@@ -1,131 +1,132 @@
 <odoo>
-
-    <record id="product_template_form_view" model="ir.ui.view">
-        <field name="model">product.template</field>
-        <field name="inherit_id" ref="product_price_category.product_template_form_view"/>
-        <field name="arch" type="xml">
-
-            <field name="price_category_id" position="before">
-                <field name="sale_price_2"
-                       widget='monetary'
-                       options="{'currency_field': 'currency_id'}"
-                       attrs="{'invisible':[('sale_price_2','=',0.0)]}"
-                />
-            </field>
-
-            <field name="price_category_id" position="after">
-                <field name="medical_device"/>
-            </field>
-
-            <field name="list_price" position="attributes">
-                <attribute name="string">Sale Price 1</attribute>
-            </field>
-
-            <xpath expr="//field[@name='list_price']" position="after">
-                <field name="indicated_price"/>
-            </xpath>
-        </field>
-    </record>
-
-    <record id="storage_temperature_product_template_form_view" model="ir.ui.view">
-        <field name="model">product.template</field>
-        <field name="inherit_id" ref="stock.view_template_property_form"/>
-        <field name="arch" type="xml">
-
-            <xpath expr="//field[@name='volume']/.." position="after">
-                <label for="storage_temperature_id" attrs="{'invisible':[('type', 'not in', ['product', 'consu'])]}"/>
-                <div class="o_row" name="storage_temperature" attrs="{'invisible':[('type', 'not in', ['product', 'consu'])]}">
-                    <field name="storage_temperature_id" string="Storage Temperature"/>
-                </div>
-            </xpath>
-
-        </field>
-    </record>
-
-    <record id="web_published_product_template_form_view" model="ir.ui.view">
-        <field name="model">product.template</field>
-        <field name="inherit_id" ref="product.product_template_form_view"/>
-        <field name="arch" type="xml">
-            <field name="categ_id" position="after">
-                <field name="web_published"/>
-            </field>
-            <xpath expr="//page[@name='sales']" position="inside">
-                <group name="sales_restriction">
-                    <field name="veterinary_only"/>
-                    <field name="belgium_only"/>
-                </group>
-            </xpath>
-        </field>
-    </record>
-
-    <record id="product_template_specific_tree_view" model="ir.ui.view">
-        <field name="name">product.template.specific.tree</field>
-        <field name="model">product.template</field>
-        <field name="inherit_id" ref="product.product_template_tree_view"/>
-        <field name="arch" type="xml">
-            <xpath expr="//tree" position="attributes">
-              <attribute name="default_order">name</attribute>
-            </xpath>
-
-            <field name="list_price" position="attributes">
-                <attribute name="string">Sale Price 1</attribute>
-                <attribute name="widget">monetary</attribute>
-            </field>
-            <field name="list_price" position="after">
-                <field name="sale_price_2" widget="monetary"/>
-                <field name="currency_id" invisible="True"/>
-            </field>
-
-            <field name="standard_price" position="attributes">
-                <attribute name="widget">monetary</attribute>
-            </field>
-
-        </field>
-    </record>
-
-    <record id="product_template_only_form_view" model="ir.ui.view">
-        <field name="name">product.template.product.form.inherit</field>
-        <field name="model">product.template</field>
-        <field name="inherit_id" ref="product.product_template_only_form_view"/>
-        <field name="arch" type="xml">
-            <field name="default_code" position="after">
-                <field name="cnk_code" />
-            </field>
-            <field name="default_code" position="attributes">
-              <attribute name="attrs">{'readonly': True}</attribute>
-            </field>
-        </field>
-    </record>
-
-    <record id="product_template_form_view_procurement_button" model="ir.ui.view">
-        <field name="name">product.template.product.form.inherit</field>
-        <field name="model">product.template</field>
-        <field name="inherit_id" ref="stock.product_template_form_view_procurement_button"/>
-        <field name="arch" type="xml">
-            <xpath expr="//button[@name='action_view_stock_moves']" position="after">
-                <button type="object"
-                            name= "action_open_incoming_stock_moves"
-                            attrs="{'invisible':[('type', 'not in', ['product', 'consu'])]}"
-                            class="oe_stat_button" icon="fa-truck"
-                            groups="stock.group_stock_user">
-                    <field name="count_pickings_to_do" widget="statinfo" string="Receptions to do"/>
-                </button>
-            </xpath>
-        </field>
-    </record>
-
-    <!--Disable the view kanban on Products-->
-    <record id="product.product_template_action" model="ir.actions.act_window">
-        <field name="view_mode">tree,form</field>
-    </record>
-    <record id="purchase.product_normal_action_puchased" model="ir.actions.act_window">
-        <field name="view_mode">tree,form</field>
-    </record>
-    <record id="product.product_template_action_all" model="ir.actions.act_window">
-        <field name="view_mode">tree,form</field>
-    </record>
-    <record id="stock.product_template_action_product" model="ir.actions.act_window">
-        <field name="view_mode">tree,form</field>
-    </record>
-
+  <record id="product_template_form_view" model="ir.ui.view">
+    <field name="model">product.template</field>
+    <field name="inherit_id" ref="product_price_category.product_template_form_view" />
+    <field name="arch" type="xml">
+      <field name="price_category_id" position="before">
+        <field
+          name="sale_price_2"
+          widget='monetary'
+          options="{'currency_field': 'currency_id'}"
+          attrs="{'invisible':[('sale_price_2','=',0.0)]}"
+        />
+      </field>
+      <field name="price_category_id" position="after">
+        <field name="medical_device" />
+      </field>
+      <field name="list_price" position="attributes">
+        <attribute name="string">Sale Price 1</attribute>
+      </field>
+      <xpath expr="//field[@name='list_price']" position="after">
+        <field name="indicated_price" />
+      </xpath>
+    </field>
+  </record>
+  <record id="storage_temperature_product_template_form_view" model="ir.ui.view">
+    <field name="model">product.template</field>
+    <field name="inherit_id" ref="stock.view_template_property_form" />
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='volume']/.." position="after">
+        <label
+          for="storage_temperature_id"
+          attrs="{'invisible':[('type', 'not in', ['product', 'consu'])]}"
+        />
+        <div
+          class="o_row"
+          name="storage_temperature"
+          attrs="{'invisible':[('type', 'not in', ['product', 'consu'])]}"
+        >
+          <field name="storage_temperature_id" string="Storage Temperature" />
+        </div>
+      </xpath>
+    </field>
+  </record>
+  <record id="web_published_product_template_form_view" model="ir.ui.view">
+    <field name="model">product.template</field>
+    <field name="inherit_id" ref="product.product_template_form_view" />
+    <field name="arch" type="xml">
+      <field name="categ_id" position="after">
+        <field name="web_published" />
+      </field>
+      <xpath expr="//page[@name='sales']" position="inside">
+        <group name="sales_restriction">
+          <field name="veterinary_only" />
+          <field name="belgium_only" />
+        </group>
+      </xpath>
+    </field>
+  </record>
+  <record id="product_template_specific_tree_view" model="ir.ui.view">
+    <field name="name">product.template.specific.tree</field>
+    <field name="model">product.template</field>
+    <field name="inherit_id" ref="product.product_template_tree_view" />
+    <field name="arch" type="xml">
+      <xpath expr="//tree" position="attributes">
+        <attribute name="default_order">name</attribute>
+      </xpath>
+      <field name="list_price" position="attributes">
+        <attribute name="string">Sale Price 1</attribute>
+        <attribute name="widget">monetary</attribute>
+      </field>
+      <field name="list_price" position="after">
+        <field name="sale_price_2" widget="monetary" />
+        <field name="currency_id" invisible="True" />
+      </field>
+      <field name="standard_price" position="attributes">
+        <attribute name="widget">monetary</attribute>
+      </field>
+    </field>
+  </record>
+  <record id="product_template_only_form_view" model="ir.ui.view">
+    <field name="name">product.template.product.form.inherit</field>
+    <field name="model">product.template</field>
+    <field name="inherit_id" ref="product.product_template_only_form_view" />
+    <field name="arch" type="xml">
+      <field name="default_code" position="after">
+        <field name="cnk_code" />
+      </field>
+      <field name="default_code" position="attributes">
+        <attribute name="attrs">{'readonly': True}</attribute>
+      </field>
+    </field>
+  </record>
+  <record id="product_template_form_view_procurement_button" model="ir.ui.view">
+    <field name="name">product.template.product.form.inherit</field>
+    <field name="model">product.template</field>
+    <field
+      name="inherit_id"
+      ref="stock.product_template_form_view_procurement_button"
+    />
+    <field name="arch" type="xml">
+      <xpath expr="//button[@name='action_view_stock_moves']" position="after">
+        <button
+          type="object"
+          name="action_open_incoming_stock_moves"
+          attrs="{'invisible':[('type', 'not in', ['product', 'consu'])]}"
+          class="oe_stat_button"
+          icon="fa-truck"
+          groups="stock.group_stock_user"
+        >
+          <field
+            name="count_pickings_to_do"
+            widget="statinfo"
+            string="Receptions to do"
+          />
+        </button>
+      </xpath>
+    </field>
+  </record>
+  <!--Disable the view kanban on Products-->
+  <record id="product.product_template_action" model="ir.actions.act_window">
+    <field name="view_mode">tree,form</field>
+  </record>
+  <record id="purchase.product_normal_action_puchased" model="ir.actions.act_window">
+    <field name="view_mode">tree,form</field>
+  </record>
+  <record id="product.product_template_action_all" model="ir.actions.act_window">
+    <field name="view_mode">tree,form</field>
+  </record>
+  <record id="stock.product_template_action_product" model="ir.actions.act_window">
+    <field name="view_mode">tree,form</field>
+  </record>
 </odoo>

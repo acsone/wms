@@ -6,10 +6,10 @@ import json
 import logging
 
 import requests
+from simplejson.decoder import JSONDecodeError
 
 from odoo.addons.component.core import Component
 from odoo.addons.connector.exception import ConnectorException, RetryableJobError
-from simplejson.decoder import JSONDecodeError
 
 _logger = logging.getLogger(__name__)
 
@@ -40,6 +40,7 @@ class ESBWebServiceAdapter(Component):
     def _get_headers(self):
         return {"Content-Type": "application/json", "Accept": "application/json"}
 
+    # pylint: disable=W8106
     def create(self, values):
         """ Create a record on the external system """
         url = self._get_url()
@@ -71,6 +72,7 @@ class ESBWebServiceAdapter(Component):
             res.raise_for_status()
         return res_data
 
+    # pylint: disable=W8106
     def write(self, id_, values):
         """ Update a record on the external system """
         url = self._get_url()

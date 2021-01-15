@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <record id="specific_purchase.product_state_a" model="product.state">
-        <field name="esb_ref">A</field>
-    </record>
-    <record id="specific_purchase.product_state_d" model="product.state">
-        <field name="esb_ref">D</field>
-    </record>
-    <record id="specific_purchase.product_state_h" model="product.state">
-        <field name="esb_ref">H</field>
-    </record>
-    <record id="specific_purchase.product_state_i" model="product.state">
-        <field name="esb_ref">I</field>
-    </record>
-    <record id="specific_purchase.product_state_l" model="product.state">
-        <field name="esb_ref">L</field>
-    </record>
-    <record id="specific_purchase.product_state_m" model="product.state">
-        <field name="esb_ref">M</field>
-    </record>
-    <record id="specific_purchase.product_state_n" model="product.state">
-        <field name="esb_ref">N</field>
-    </record>
+  <record id="specific_purchase.product_state_a" model="product.state">
+    <field name="esb_ref">A</field>
+  </record>
+  <record id="specific_purchase.product_state_d" model="product.state">
+    <field name="esb_ref">D</field>
+  </record>
+  <record id="specific_purchase.product_state_h" model="product.state">
+    <field name="esb_ref">H</field>
+  </record>
+  <record id="specific_purchase.product_state_i" model="product.state">
+    <field name="esb_ref">I</field>
+  </record>
+  <record id="specific_purchase.product_state_l" model="product.state">
+    <field name="esb_ref">L</field>
+  </record>
+  <record id="specific_purchase.product_state_m" model="product.state">
+    <field name="esb_ref">M</field>
+  </record>
+  <record id="specific_purchase.product_state_n" model="product.state">
+    <field name="esb_ref">N</field>
+  </record>
 </odoo>

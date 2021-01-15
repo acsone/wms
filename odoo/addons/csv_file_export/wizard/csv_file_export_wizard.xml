@@ -1,19 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <record id="csv_export_wizard_view_form" model="ir.ui.view">
-        <field name="name">csv.file.export.wizard.view.form</field>
-        <field name="model">csv.file.export.wizard</field>
-        <field name="arch" type="xml">
-            <form>
-                <sheet>
-                    <h3>Exports</h3>
-                    <field name="export_ids"/>
-                </sheet>
-                <footer>
-                    <button name="execute_exports" string="Execute exports" type="object" class="oe_highlight"/>
-                    <button string="Cancel" class="oe_link" special="cancel" />
-                </footer>
-            </form>
-        </field>
-    </record>
+  <record id="csv_export_wizard_view_form" model="ir.ui.view">
+    <field name="name">csv.file.export.wizard.view.form</field>
+    <field name="model">csv.file.export.wizard</field>
+    <field name="arch" type="xml">
+      <form>
+        <sheet>
+          <h3>Exports</h3>
+          <field name="export_ids" />
+        </sheet>
+        <footer>
+          <button
+            name="execute_exports"
+            string="Execute exports"
+            type="object"
+            class="oe_highlight"
+          />
+          <button string="Cancel" class="oe_link" special="cancel" />
+        </footer>
+      </form>
+    </field>
+  </record>
 </odoo>

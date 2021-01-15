@@ -7,6 +7,7 @@ from datetime import date
 from dateutil.relativedelta import relativedelta
 
 from odoo import fields
+
 from odoo.addons.component.core import Component
 
 

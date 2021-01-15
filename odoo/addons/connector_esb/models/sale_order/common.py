@@ -8,6 +8,7 @@ from datetime import datetime
 from psycopg2 import IntegrityError
 
 from odoo import _, api, exceptions, fields, models
+
 from odoo.addons.queue_job.job import job
 
 _logger = logging.getLogger(__name__)
@@ -101,7 +102,7 @@ class SaleOrder(models.Model):
             if line["product_id"] == "":
                 # Unknown product just log the error in the chatter
                 order.message_post(
-                    body="Product with {} : {} was not found".format(
+                    body=_("Product with {} : {} was not found").format(
                         line["code_type"], line["code_searched"]
                     )
                 )

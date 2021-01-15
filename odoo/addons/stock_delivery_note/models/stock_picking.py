@@ -6,9 +6,10 @@ from datetime import datetime
 from io import BytesIO
 
 import unicodecsv as csv
+from unidecode import unidecode
+
 from odoo import api, models
 from odoo.tools import config
-from unidecode import unidecode
 
 
 class StockPicking(models.Model):

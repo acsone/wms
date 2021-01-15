@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <record id="res_partner_form_view" model="ir.ui.view">
-        <field name="name">res.partner.form (in alc_sale_invoicing_policy)</field>
-        <field name="model">res.partner</field>
-        <field name="inherit_id" ref="account.view_partner_property_form"/>
-        <field name="arch" type="xml">
-            <xpath expr="//page[@name='accounting']/group" position="inside">
-                <group>
-                    <field name="invoice_frequency"/>
-                    <field name="invoice_grouping"/>
-                </group>
-            </xpath>
-            <xpath expr="//group[@name='accounting_entries']" position="attributes">
-                <attribute name="groups">account.group_account_manager</attribute>
-            </xpath>
-        </field>
-    </record>
+  <record id="res_partner_form_view" model="ir.ui.view">
+    <field name="name">res.partner.form (in alc_sale_invoicing_policy)</field>
+    <field name="model">res.partner</field>
+    <field name="inherit_id" ref="account.view_partner_property_form" />
+    <field name="arch" type="xml">
+      <xpath expr="//page[@name='accounting']/group" position="inside">
+        <group>
+          <field name="invoice_frequency" />
+          <field name="invoice_grouping" />
+        </group>
+      </xpath>
+      <xpath expr="//group[@name='accounting_entries']" position="attributes">
+        <attribute name="groups">account.group_account_manager</attribute>
+      </xpath>
+    </field>
+  </record>
 </odoo>

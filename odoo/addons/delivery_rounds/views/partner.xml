@@ -1,14 +1,13 @@
-<?xml version="1.0"?>
+<?xml version="1.0" ?>
 <odoo>
-    <record id="view_partner_form" model="ir.ui.view">
-        <field name="name">res.partner.form.round</field>
-        <field name="model">res.partner</field>
-        <field name="inherit_id" ref="partner_delivery.res_partner_form_view"/>
-        <field name="arch" type="xml">
-            <field name="property_delivery_carrier_id" position="after">
-                <field name="round_itinerary_ids" widget="many2many_tags"/>
-            </field>
-
-        </field>
-    </record>
+  <record id="view_partner_form" model="ir.ui.view">
+    <field name="name">res.partner.form.round</field>
+    <field name="model">res.partner</field>
+    <field name="inherit_id" ref="partner_delivery.res_partner_form_view" />
+    <field name="arch" type="xml">
+      <field name="property_delivery_carrier_id" position="after">
+        <field name="round_itinerary_ids" widget="many2many_tags" />
+      </field>
+    </field>
+  </record>
 </odoo>

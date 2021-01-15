@@ -6,7 +6,7 @@
     "name": "Alc Restocking Exclude Not Salable",
     "description": """
         a product that have been archived should not be suitable for restocking. A product that is no more sold is still suitable for restocking but the user should be warned. This is the purpose of this addon""",
-    "version": "10",
+    "version": "10.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": ["sale", "stock", "specific_stock"],

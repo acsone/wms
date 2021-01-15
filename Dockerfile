@@ -14,4 +14,3 @@ COPY ./container/entrypoint-dbbase /odoo/start-entrypoint.d/
 #COPY ./release /tmp/release
 
 RUN pip install --no-index --no-deps /tmp/release/*.whl
-

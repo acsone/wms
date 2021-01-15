@@ -1,85 +1,84 @@
 <odoo>
-
-    <template id="specific_report.alcyon_header">
-        <div class="header">
-            <div style="position: fixed; left: 0; top: 420px;">_</div>
-            <div style="position: fixed; right: 0; top: 420px;">_</div>
-
-            <div class="logo">
-                <img t-if="company.logo"
-                         t-att-src="'data:image/png;base64,%s' % company.logo"
-                         style="max-height: 70px;"/>
-            </div>
-        </div>
-    </template>
-
-    <!-- footer with only page numbering -->
-    <template id="specific_report.page_number_footer">
-        <div class="footer">
-            <div style="padding-top: 5mm;">
-                <div style="border-top: 1px solid black;">
-                    <span t-field="company.street"/>,
-                    <span t-field="company.zip"/>
-                    <span t-field="company.city"/>
+  <template id="specific_report.alcyon_header">
+    <div class="header">
+      <div style="position: fixed; left: 0; top: 420px;">_</div>
+      <div style="position: fixed; right: 0; top: 420px;">_</div>
+      <div class="logo">
+        <img
+          t-if="company.logo"
+          t-att-src="'data:image/png;base64,%s' % company.logo"
+          style="max-height: 70px;"
+        />
+      </div>
+    </div>
+  </template>
+  <!-- footer with only page numbering -->
+  <template id="specific_report.page_number_footer">
+    <div class="footer">
+      <div style="padding-top: 5mm;">
+        <div style="border-top: 1px solid black;">
+                    <span t-field="company.street" />,
+                    <span t-field="company.zip" />
+                    <span t-field="company.city" />
                     -
-                    <span t-field="company.country_id"/>
+                    <span t-field="company.country_id" />
                     |
                     <span>Phone:</span>
-                    <span t-field="company.phone"/>
+                    <span t-field="company.phone" />
                     |
                     <span>Fax:</span>
-                    <span t-field="company.fax"/>
-                    <br/>
+                    <span t-field="company.fax" />
+                    <br />
                     <span>Email:</span>
-                    <span t-field="company.email"/>
+                    <span t-field="company.email" />
                     |
                     <span>For commands;</span>
                     <span>Phone:</span>
-                    <span t-field="company.order_phone"/>
+                    <span t-field="company.order_phone" />
                     -
                     <span>Fax:</span>
-                    <span t-field="company.order_fax"/>
-                    <br/>
+                    <span t-field="company.order_fax" />
+                    <br />
                     <div style="width: 50%; float: left">
-                        <span>RPM Liège division Huy - TVA</span>
-                        <span t-field="company.vat"/>
-                    </div>
+            <span>RPM Liège division Huy - TVA</span>
+            <span t-field="company.vat" />
+          </div>
                     <div style="width: 50%; float: right; text-align: right">
-                        Page: <span class="page"/> / <span class="topage"/>
+                        Page: <span class="page" /> / <span class="topage" />
                     </div>
                 </div>
-            </div>
-        </div>
-    </template>
-
-    <template id="assets_specific" inherit_id="report.assets_common">
-        <xpath expr="." position="inside">
-            <link rel="stylesheet" href="/specific_report/static/src/css/specific_report.css"/>
-        </xpath>
-    </template>
-
-    <template id="report.external_layout">
-        <!-- Multicompany -->
-        <t t-if="not o and doc">
-            <t t-set="o" t-value="doc"/>
-        </t>
-        <t t-if="o and 'company_id' in o">
-            <t t-set="company" t-value="o.company_id"></t>
-        </t>
-        <t t-if="not o or not 'company_id' in o">
-            <t t-set="company" t-value="res_company"></t>
-        </t>
-
-        <!--Avoid problem with xpath in other module
+      </div>
+    </div>
+  </template>
+  <template id="assets_specific" inherit_id="report.assets_common">
+    <xpath expr="." position="inside">
+      <link
+        rel="stylesheet"
+        href="/specific_report/static/src/css/specific_report.css"
+      />
+    </xpath>
+  </template>
+  <template id="report.external_layout">
+    <!-- Multicompany -->
+    <t t-if="not o and doc">
+      <t t-set="o" t-value="doc" />
+    </t>
+    <t t-if="o and 'company_id' in o">
+      <t t-set="company" t-value="o.company_id" />
+    </t>
+    <t t-if="not o or not 'company_id' in o">
+      <t t-set="company" t-value="res_company" />
+    </t>
+    <!--Avoid problem with xpath in other module
             We want to get rid of them. Given that we already did it (and) the
             xmlid of this template, we need to put them back as 'invisible'
         -->
-        <!--Tag invisible will call the original header. It's why I prefer to use a t-if tag-->
-        <t t-call="report.external_layout_header" t-if="1 == 0"/>
-        <t t-call="specific_report.alcyon_header" />
-        <t t-raw="0" />
-        <t t-call="specific_report.page_number_footer" />
-        <!--Avoid problem with xpath in other module-->
-        <t t-call="report.external_layout_footer" t-if="1 == 0"/>
-    </template>
+    <!--Tag invisible will call the original header. It's why I prefer to use a t-if tag-->
+    <t t-call="report.external_layout_header" t-if="1 == 0" />
+    <t t-call="specific_report.alcyon_header" />
+    <t t-raw="0" />
+    <t t-call="specific_report.page_number_footer" />
+    <!--Avoid problem with xpath in other module-->
+    <t t-call="report.external_layout_footer" t-if="1 == 0" />
+  </template>
 </odoo>

@@ -1,43 +1,47 @@
 <odoo noupdate="1">
-    <record id="paperformat_alcyon_report" model="report.paperformat">
-        <field name="name">Alcyon report</field>
-        <field name="format">A4</field>
-        <field name="orientation">Portrait</field>
-        <field name="margin_top">25</field>
-        <field name="margin_bottom">20</field>
-        <field name="margin_left">10</field>
-        <field name="margin_right">10</field>
-        <field name="header_line" eval="False"/>
-        <field name="header_spacing">20</field>
-        <field name="dpi">96</field>
-        <field name="report_ids" eval="[(4, ref('account.account_invoices')), (4, ref('stock.action_report_delivery')), (4, ref('stock.action_report_picking'))]"/>
-    </record>
-
-    <record id="paperformat_alcyon_report_without_header" model="report.paperformat">
-        <field name="name">Alcyon report (without header)</field>
-        <field name="format">A4</field>
-        <field name="orientation">Portrait</field>
-        <field name="margin_top">5</field>
-        <field name="margin_bottom">20</field>
-        <field name="margin_left">10</field>
-        <field name="margin_right">10</field>
-        <field name="header_line" eval="False"/>
-        <field name="header_spacing">5</field>
-        <field name="dpi">96</field>
-        <field name="report_ids" eval="[(4, ref('specific_report.action_passport_report'))]"/>
-    </record>
-
-    <record id="paperformat_delivery_round" model="report.paperformat">
-        <field name="name">Delivery round</field>
-        <field name="format">A4</field>
-        <field name="orientation">Landscape</field>
-        <field name="margin_top">5</field>
-        <field name="margin_bottom">5</field>
-        <field name="margin_left">5</field>
-        <field name="margin_right">5</field>
-        <field name="header_line" eval="False"/>
-        <field name="header_spacing">0</field>
-        <field name="dpi">96</field>
-        <field name="report_ids" eval="[(4, ref('action_report_delivery_round'))]"/>
-    </record>
+  <record id="paperformat_alcyon_report" model="report.paperformat">
+    <field name="name">Alcyon report</field>
+    <field name="format">A4</field>
+    <field name="orientation">Portrait</field>
+    <field name="margin_top">25</field>
+    <field name="margin_bottom">20</field>
+    <field name="margin_left">10</field>
+    <field name="margin_right">10</field>
+    <field name="header_line" eval="False" />
+    <field name="header_spacing">20</field>
+    <field name="dpi">96</field>
+    <field
+      name="report_ids"
+      eval="[(4, ref('account.account_invoices')), (4, ref('stock.action_report_delivery')), (4, ref('stock.action_report_picking'))]"
+    />
+  </record>
+  <record id="paperformat_alcyon_report_without_header" model="report.paperformat">
+    <field name="name">Alcyon report (without header)</field>
+    <field name="format">A4</field>
+    <field name="orientation">Portrait</field>
+    <field name="margin_top">5</field>
+    <field name="margin_bottom">20</field>
+    <field name="margin_left">10</field>
+    <field name="margin_right">10</field>
+    <field name="header_line" eval="False" />
+    <field name="header_spacing">5</field>
+    <field name="dpi">96</field>
+    <field
+      name="report_ids"
+      eval="[(4, ref('specific_report.action_passport_report'))]"
+    />
+  </record>
+  <record id="paperformat_delivery_round" model="report.paperformat">
+    <field name="name">Delivery round</field>
+    <field name="format">A4</field>
+    <field name="orientation">Landscape</field>
+    <field name="margin_top">5</field>
+    <field name="margin_bottom">5</field>
+    <field name="margin_left">5</field>
+    <field name="margin_right">5</field>
+    <field name="header_line" eval="False" />
+    <field name="header_spacing">0</field>
+    <field name="dpi">96</field>
+    <field name="report_ids" eval="[(4, ref('action_report_delivery_round'))]" />
+  </record>
 </odoo>

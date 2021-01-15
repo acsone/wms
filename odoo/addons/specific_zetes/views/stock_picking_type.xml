@@ -1,36 +1,41 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-    <record id="view_picking_type_tree_inherit" model="ir.ui.view">
-        <field name="name">view.picking.type.tree.inherit</field>
-        <field name="model">stock.picking.type</field>
-        <field name="inherit_id" ref="stock.view_picking_type_tree"/>
-        <field name="arch" type="xml">
-            <xpath expr="//field[@name='name']" position="after">
-                <field name="is_portable_printer" />
-                <field name="passport" />
-            </xpath>
-        </field>
-    </record>
-
-    <record id="view_picking_type_form_inherit" model="ir.ui.view">
-        <field name="name">view.picking.type.form.inherit</field>
-        <field name="model">stock.picking.type</field>
-        <field name="inherit_id" ref="stock.view_picking_type_form"/>
-        <field name="arch" type="xml">
-            <xpath expr="//div[@name='button_box']" position="inside">
-                <button name="toggle_passport" type="object" class="oe_stat_button" icon="fa-check-square">
-                    <field name="passport" widget="boolean_button"
-                         options="{&quot;terminology&quot;: {'string_true':'Passport','string_false':'Auto'}}"/>
-                </button>
-            </xpath>
-
-            <xpath expr="//field[@name='code']" position="after">
-                <field name="is_portable_printer" />
-            </xpath>
-
-            <xpath expr="//field[@name='picking_zone_id']" position="after">
-                <field name="zetes_picking_type"/>
-            </xpath>
-        </field>
-    </record>
+  <record id="view_picking_type_tree_inherit" model="ir.ui.view">
+    <field name="name">view.picking.type.tree.inherit</field>
+    <field name="model">stock.picking.type</field>
+    <field name="inherit_id" ref="stock.view_picking_type_tree" />
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='name']" position="after">
+        <field name="is_portable_printer" />
+        <field name="passport" />
+      </xpath>
+    </field>
+  </record>
+  <record id="view_picking_type_form_inherit" model="ir.ui.view">
+    <field name="name">view.picking.type.form.inherit</field>
+    <field name="model">stock.picking.type</field>
+    <field name="inherit_id" ref="stock.view_picking_type_form" />
+    <field name="arch" type="xml">
+      <xpath expr="//div[@name='button_box']" position="inside">
+        <button
+          name="toggle_passport"
+          type="object"
+          class="oe_stat_button"
+          icon="fa-check-square"
+        >
+          <field
+            name="passport"
+            widget="boolean_button"
+            options="{&quot;terminology&quot;: {'string_true':'Passport','string_false':'Auto'}}"
+          />
+        </button>
+      </xpath>
+      <xpath expr="//field[@name='code']" position="after">
+        <field name="is_portable_printer" />
+      </xpath>
+      <xpath expr="//field[@name='picking_zone_id']" position="after">
+        <field name="zetes_picking_type" />
+      </xpath>
+    </field>
+  </record>
 </odoo>

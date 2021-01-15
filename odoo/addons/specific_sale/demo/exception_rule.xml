@@ -1,96 +1,72 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo noupdate="0">
-
-        <record id="no_food_allowed" model="exception.rule">
-            <field name="active">0</field>
-        </record>
-
-        <record id="no_medoc_allowed" model="exception.rule">
-            <field name="active">0</field>
-        </record>
-
-        <record id="no_medoc_cascade_import" model="exception.rule">
-            <field name="active">0</field>
-        </record>
-
-        <record id="no_medoc_veterinary_belge" model="exception.rule">
-            <field name="active">0</field>
-        </record>
-
-        <record id="no_medoc_human" model="exception.rule">
-            <field name="active">0</field>
-        </record>
-
-        <record id="no_medoc_vet_stup" model="exception.rule">
-            <field name="active">0</field>
-        </record>
-
-        <record id="no_medoc_vet_stupIII" model="exception.rule">
-            <field name="active">0</field>
-        </record>
-
-        <record id="no_medoc_belgium_only" model="exception.rule">
-            <field name="active">0</field>
-        </record>
-
-        <record id="no_veterinary_product" model="exception.rule">
-            <field name="active">0</field>
-        </record>
-
-        <record id="no_psychotropic_by_phone" model="exception.rule">
-            <field name="active">0</field>
-        </record>
-
-        <record id="no_stupefiant_vet_by_phone" model="exception.rule">
-            <field name="active">0</field>
-        </record>
-
-        <record id="warning_psychotropic" model="exception.rule">
-            <field name="active">0</field>
-        </record>
-
-        <record id="warning_stupefiant_vet" model="exception.rule">
-            <field name="active">0</field>
-        </record>
-
-        <record id="warning_cascade_import" model="exception.rule">
-            <field name="active">0</field>
-        </record>
-
-        <record id="warning_human_medoc" model="exception.rule">
-            <field name="active">0</field>
-        </record>
-
-        <record id="provision_on_order" model="exception.rule">
-            <field name="active">0</field>
-        </record>
-
-        <record id="no_line_under_0" model="exception.rule">
-            <field name="active">0</field>
-        </record>
-
-        <record id="no_backorder" model="exception.rule">
-            <field name="active">0</field>
-        </record>
-
-        <record id="warning_free_product" model="exception.rule">
-            <field name="active">0</field>
-        </record>
-
-        <record id="warning_supplier_break" model="exception.rule">
-            <field name="active">0</field>
-        </record>
-
-        <record id="no_line_at_zero" model="exception.rule">
-            <field name="active">0</field>
-        </record>
-
-        <record id="order_amount_minimum" model="exception.rule">
-            <field name="active">0</field>
-        </record>
-
-        <record id="order_amount_material_maximum" model="exception.rule">
-            <field name="active">0</field>
-        </record>
-
+  <record id="no_food_allowed" model="exception.rule">
+    <field name="active">0</field>
+  </record>
+  <record id="no_medoc_allowed" model="exception.rule">
+    <field name="active">0</field>
+  </record>
+  <record id="no_medoc_cascade_import" model="exception.rule">
+    <field name="active">0</field>
+  </record>
+  <record id="no_medoc_veterinary_belge" model="exception.rule">
+    <field name="active">0</field>
+  </record>
+  <record id="no_medoc_human" model="exception.rule">
+    <field name="active">0</field>
+  </record>
+  <record id="no_medoc_vet_stup" model="exception.rule">
+    <field name="active">0</field>
+  </record>
+  <record id="no_medoc_vet_stupIII" model="exception.rule">
+    <field name="active">0</field>
+  </record>
+  <record id="no_medoc_belgium_only" model="exception.rule">
+    <field name="active">0</field>
+  </record>
+  <record id="no_veterinary_product" model="exception.rule">
+    <field name="active">0</field>
+  </record>
+  <record id="no_psychotropic_by_phone" model="exception.rule">
+    <field name="active">0</field>
+  </record>
+  <record id="no_stupefiant_vet_by_phone" model="exception.rule">
+    <field name="active">0</field>
+  </record>
+  <record id="warning_psychotropic" model="exception.rule">
+    <field name="active">0</field>
+  </record>
+  <record id="warning_stupefiant_vet" model="exception.rule">
+    <field name="active">0</field>
+  </record>
+  <record id="warning_cascade_import" model="exception.rule">
+    <field name="active">0</field>
+  </record>
+  <record id="warning_human_medoc" model="exception.rule">
+    <field name="active">0</field>
+  </record>
+  <record id="provision_on_order" model="exception.rule">
+    <field name="active">0</field>
+  </record>
+  <record id="no_line_under_0" model="exception.rule">
+    <field name="active">0</field>
+  </record>
+  <record id="no_backorder" model="exception.rule">
+    <field name="active">0</field>
+  </record>
+  <record id="warning_free_product" model="exception.rule">
+    <field name="active">0</field>
+  </record>
+  <record id="warning_supplier_break" model="exception.rule">
+    <field name="active">0</field>
+  </record>
+  <record id="no_line_at_zero" model="exception.rule">
+    <field name="active">0</field>
+  </record>
+  <record id="order_amount_minimum" model="exception.rule">
+    <field name="active">0</field>
+  </record>
+  <record id="order_amount_material_maximum" model="exception.rule">
+    <field name="active">0</field>
+  </record>
 </odoo>

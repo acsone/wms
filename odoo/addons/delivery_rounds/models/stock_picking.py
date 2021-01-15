@@ -7,8 +7,9 @@ import logging
 from collections import defaultdict
 
 from odoo import _, api, fields, models
-from odoo.addons.queue_job.job import job
 from odoo.exceptions import UserError
+
+from odoo.addons.queue_job.job import job
 
 _logger = logging.getLogger(__name__)
 
@@ -137,9 +138,11 @@ class StockPicking(models.Model):
             "noround_write"
         ):
             raise UserError(
-                "Delivery round assigned to a picking without "
-                "reservation. Method _assign_pickings on delivery.round "
-                "should have been called."
+                _(
+                    "Delivery round assigned to a picking without "
+                    "reservation. Method _assign_pickings on delivery.round "
+                    "should have been called."
+                )
             )
 
         unset_round = (

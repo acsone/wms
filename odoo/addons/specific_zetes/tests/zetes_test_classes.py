@@ -2,9 +2,9 @@
 import importlib
 from datetime import datetime
 
+import mock
 from dateutil.relativedelta import relativedelta
 
-import mock
 from odoo import fields
 from odoo.http import WebRequest, _request_stack
 from odoo.tests.common import SavepointCase

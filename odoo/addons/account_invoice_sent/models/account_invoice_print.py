@@ -10,6 +10,7 @@ import tempfile
 from contextlib import closing
 
 from odoo import _, api, fields, models
+
 from odoo.addons.queue_job.job import job
 
 

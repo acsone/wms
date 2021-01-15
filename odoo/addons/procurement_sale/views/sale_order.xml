@@ -1,37 +1,39 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <!-- Copyright 2020 ACSONE SA/NV
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
-
 <odoo>
-
-    <record model="ir.ui.view" id="sale_order_form_view">
-        <field name="name">sale.order.form (in procurement_sale)</field>
-        <field name="model">sale.order</field>
-        <field name="inherit_id" ref="sale_cancel_remaining.sale_order_form_view"/>
-        <field name="arch" type="xml">
-            <xpath expr="//field[@name='order_line']" position="attributes">
-              <!-- To migrate with 'force_save' field attributes on Odoo >= 11 -->
-              <attribute name="readonly_by_pass">['product_qty_unavailable']</attribute>
-            </xpath>
-            <xpath expr="//field[@name='order_line']/form//label[@for='qty_delivered']" position="before">
-                <field name="product_qty_unavailable"/>
-            </xpath>
-            <xpath expr="//field[@name='order_line']/tree//field[@name='product_uom_qty']" position="after">
-                <field name="product_qty_unavailable"/>
-                <field name="date_order" invisible="1"/>
-            </xpath>
-        </field>
-    </record>
-
-    <record id="sale_order_line_tree_view" model="ir.ui.view">
-        <field name="name">sale.order.line.tree (in procurement_sale)</field>
-        <field name="model">sale.order.line</field>
-        <field name="inherit_id" ref="sale.view_order_line_tree"/>
-        <field name="arch" type="xml">
-            <xpath expr="//field[@name='order_id']" position="after">
-                <field name="date_order"/>
-            </xpath>
-
-        </field>
-    </record>
+  <record model="ir.ui.view" id="sale_order_form_view">
+    <field name="name">sale.order.form (in procurement_sale)</field>
+    <field name="model">sale.order</field>
+    <field name="inherit_id" ref="sale_cancel_remaining.sale_order_form_view" />
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='order_line']" position="attributes">
+        <!-- To migrate with 'force_save' field attributes on Odoo >= 11 -->
+        <attribute name="readonly_by_pass">['product_qty_unavailable']</attribute>
+      </xpath>
+      <xpath
+        expr="//field[@name='order_line']/form//label[@for='qty_delivered']"
+        position="before"
+      >
+        <field name="product_qty_unavailable" />
+      </xpath>
+      <xpath
+        expr="//field[@name='order_line']/tree//field[@name='product_uom_qty']"
+        position="after"
+      >
+        <field name="product_qty_unavailable" />
+        <field name="date_order" invisible="1" />
+      </xpath>
+    </field>
+  </record>
+  <record id="sale_order_line_tree_view" model="ir.ui.view">
+    <field name="name">sale.order.line.tree (in procurement_sale)</field>
+    <field name="model">sale.order.line</field>
+    <field name="inherit_id" ref="sale.view_order_line_tree" />
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='order_id']" position="after">
+        <field name="date_order" />
+      </xpath>
+    </field>
+  </record>
 </odoo>

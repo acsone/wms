@@ -1,19 +1,22 @@
 <odoo>
-    <!-- Adds discount_pricelist_id on res.partner form view -->
-    <record id="view_partner_form_discount_pricelist" model="ir.ui.view">
-        <field name="name">res.partner.form</field>
-        <field name="model">res.partner</field>
-        <field name="inherit_id" ref="product.view_partner_property_form"/>
-        <field name="groups_id" eval="[(4, ref('product.group_sale_pricelist'))]"/>
-        <field name="arch" type="xml">
-
-            <field name="property_product_pricelist" position="after">
-                <field name="supplier_promotion_sale_allowed"
-                       attrs="{'invisible': [('is_company','=',False),('parent_id','!=',False)]}"/>
-                <field name="discount_pricelist_id" groups="product.group_sale_pricelist"
-                       attrs="{'invisible': [('is_company','=',False),('parent_id','!=',False)]}"/>
-            </field>
-
-        </field>
-    </record>
+  <!-- Adds discount_pricelist_id on res.partner form view -->
+  <record id="view_partner_form_discount_pricelist" model="ir.ui.view">
+    <field name="name">res.partner.form</field>
+    <field name="model">res.partner</field>
+    <field name="inherit_id" ref="product.view_partner_property_form" />
+    <field name="groups_id" eval="[(4, ref('product.group_sale_pricelist'))]" />
+    <field name="arch" type="xml">
+      <field name="property_product_pricelist" position="after">
+        <field
+          name="supplier_promotion_sale_allowed"
+          attrs="{'invisible': [('is_company','=',False),('parent_id','!=',False)]}"
+        />
+        <field
+          name="discount_pricelist_id"
+          groups="product.group_sale_pricelist"
+          attrs="{'invisible': [('is_company','=',False),('parent_id','!=',False)]}"
+        />
+      </field>
+    </field>
+  </record>
 </odoo>

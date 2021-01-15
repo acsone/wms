@@ -1,25 +1,22 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <!-- Copyright 2020 ACSONE SA/NV
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
-
 <odoo>
-
-    <record model="ir.ui.view" id="purchase_order_form_view">
-        <field name="name">purchase.order.form (in alc_edi_connector)</field>
-        <field name="model">purchase.order</field>
-        <field name="inherit_id" ref="purchase_order_approved.purchase_order_form"/>
-        <field name="arch" type="xml">
-            <button name="button_release" position="before">
-                <field name="can_send_ubl_document" invisible="1"/>
-                <button name="send_ubl_order_document"
-                        string="Send UBL Order"
-                        type="object"
-                        class="oe_highlight"
-                        attrs="{'invisible': [('can_send_ubl_document', '=', False)]}"/>
-            </button>
-        </field>
-    </record>
-
-
-
+  <record model="ir.ui.view" id="purchase_order_form_view">
+    <field name="name">purchase.order.form (in alc_edi_connector)</field>
+    <field name="model">purchase.order</field>
+    <field name="inherit_id" ref="purchase_order_approved.purchase_order_form" />
+    <field name="arch" type="xml">
+      <button name="button_release" position="before">
+        <field name="can_send_ubl_document" invisible="1" />
+        <button
+          name="send_ubl_order_document"
+          string="Send UBL Order"
+          type="object"
+          class="oe_highlight"
+          attrs="{'invisible': [('can_send_ubl_document', '=', False)]}"
+        />
+      </button>
+    </field>
+  </record>
 </odoo>

@@ -7,12 +7,13 @@ import logging
 from collections import deque
 from contextlib import contextmanager
 
-from requests.exceptions import HTTPError
-
 import mock
 from freezegun import freeze_time
-from odoo.addons.delivery_rounds.tests import common
+from requests.exceptions import HTTPError
+
 from odoo.exceptions import ValidationError
+
+from odoo.addons.delivery_rounds.tests import common
 
 
 class TestRoundInstance(common.DeliveryRoundTestCase):
@@ -756,13 +757,13 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
         Expected Result:
             ValidationError is raised since geo_optimization_resource_id is not set
         """
-        round = self.delivery_round_1
-        round.write(
+        delivery_round = self.delivery_round_1
+        delivery_round.write(
             {"geo_optimization_enabled": False, "geo_optimization_resource_id": False}
         )
         with self.assertRaises(ValidationError):
-            round.geo_optimization_enabled = True
-        round.write(
+            delivery_round.geo_optimization_enabled = True
+        delivery_round.write(
             {"geo_optimization_enabled": True, "geo_optimization_resource_id": "D1"}
         )
 
@@ -1184,10 +1185,14 @@ class _PseudoRequestsResponse(object):
     def raise_for_status(self):
         http_error_msg = ""
         if 400 <= self.status_code < 500:
-            http_error_msg = u"%s Client Error: %s" % (self.status_code, self.reason)
+            http_error_msg = u"{} Client Error: {}".format(
+                self.status_code, self.reason
+            )
 
         elif 500 <= self.status_code < 600:
-            http_error_msg = u"%s Server Error: %s" % (self.status_code, self.reason)
+            http_error_msg = u"{} Server Error: {}".format(
+                self.status_code, self.reason
+            )
 
         if http_error_msg:
             raise HTTPError(http_error_msg, response=self)

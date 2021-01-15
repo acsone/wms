@@ -4,7 +4,7 @@
 
 {
     "name": "Account Belgium Taxes",
-    "version": "1.0",
+    "version": "10.0.1.0.0",
     "category": "Accounting & Finance",
     "license": "AGPL-3",
     "author": "BCIM",

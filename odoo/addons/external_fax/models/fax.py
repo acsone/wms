@@ -6,8 +6,9 @@ import os
 import re
 
 from odoo import _, api, fields, models
-from odoo.addons.queue_job.job import job
 from odoo.exceptions import UserError
+
+from odoo.addons.queue_job.job import job
 
 
 class Fax(models.Model):

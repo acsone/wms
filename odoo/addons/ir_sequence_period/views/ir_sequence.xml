@@ -1,17 +1,15 @@
-<?xml version="1.0"?>
+<?xml version="1.0" ?>
 <odoo>
-
-    <record id="sequence_view_form_inherit" model="ir.ui.view">
-        <field name="name">sequence.view.form.inherit</field>
-        <field name="model">ir.sequence</field>
-        <field name="inherit_id" ref="base.sequence_view"/>
-        <field name="arch" type="xml">
-            <xpath expr="//field[@name='use_date_range']" position="after">
-                <group attrs="{'invisible': [('use_date_range', '=', False)]}">
-                    <field name="use_end_date"/>
-                </group>
-            </xpath>
-        </field>
-    </record>
-
+  <record id="sequence_view_form_inherit" model="ir.ui.view">
+    <field name="name">sequence.view.form.inherit</field>
+    <field name="model">ir.sequence</field>
+    <field name="inherit_id" ref="base.sequence_view" />
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='use_date_range']" position="after">
+        <group attrs="{'invisible': [('use_date_range', '=', False)]}">
+          <field name="use_end_date" />
+        </group>
+      </xpath>
+    </field>
+  </record>
 </odoo>

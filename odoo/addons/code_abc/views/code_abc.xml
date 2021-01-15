@@ -1,28 +1,31 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <record id="code_abc_view_form" model="ir.ui.view">
-        <field name="name">code.abc.view.form</field>
-        <field name="model">code.abc</field>
-        <field name="arch" type="xml">
-            <form sring="Configure Code ABC">
-                <group>
-                    <field name="code"/>
-                    <field name="rate"/>
-                    <field name="nbr_products"/>
-                    <field name="nbr_products_prc"/>
-                </group>
-            </form>
-        </field>
-    </record>
-
-    <record id="code_abc_action" model="ir.actions.act_window">
-        <field name="name">ABC</field>
-        <field name="type">ir.actions.act_window</field>
-        <field name="res_model">code.abc</field>
-        <field name="view_mode">tree,form</field>
-        <field name="view_type">form</field>
-    </record>
-
-    <menuitem id="menu_code_abc" name="ABC" parent="purchase.menu_purchase_config"
-            sequence="40" action="code_abc_action"/>
+  <record id="code_abc_view_form" model="ir.ui.view">
+    <field name="name">code.abc.view.form</field>
+    <field name="model">code.abc</field>
+    <field name="arch" type="xml">
+      <form sring="Configure Code ABC">
+        <group>
+          <field name="code" />
+          <field name="rate" />
+          <field name="nbr_products" />
+          <field name="nbr_products_prc" />
+        </group>
+      </form>
+    </field>
+  </record>
+  <record id="code_abc_action" model="ir.actions.act_window">
+    <field name="name">ABC</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="res_model">code.abc</field>
+    <field name="view_mode">tree,form</field>
+    <field name="view_type">form</field>
+  </record>
+  <menuitem
+    id="menu_code_abc"
+    name="ABC"
+    parent="purchase.menu_purchase_config"
+    sequence="40"
+    action="code_abc_action"
+  />
 </odoo>

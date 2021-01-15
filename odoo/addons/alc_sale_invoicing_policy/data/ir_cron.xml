@@ -1,45 +1,42 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo noupdate="1">
-
-        <record forcecreate="True" id="ir_cron_invoice_10" model="ir.cron">
-            <field name="name">Invoice Sales day 10</field>
-            <field eval="True" name="active" />
-            <field name="user_id" ref="base.user_root" />
-            <field name="interval_number">1</field>
-            <field name="interval_type">months</field>
-            <field name="numbercall">-1</field>
-            <field eval="False" name="doall" />
-            <field eval="'sale.order'" name="model" />
-            <field eval="'_cron_invoice_makeall'" name="function" />
-            <field eval="'(10, )'" name="args" />
-            <field name="nextcall" eval="(DateTime.now()).strftime('%Y-%m-10 22:00:00')" />
-        </record>
-        <record forcecreate="True" id="ir_cron_invoice_20" model="ir.cron">
-            <field name="name">Invoice Sales day 20</field>
-            <field eval="True" name="active" />
-            <field name="user_id" ref="base.user_root" />
-            <field name="interval_number">1</field>
-            <field name="interval_type">months</field>
-            <field name="numbercall">-1</field>
-            <field eval="False" name="doall" />
-            <field eval="'sale.order'" name="model" />
-            <field eval="'_cron_invoice_makeall'" name="function" />
-            <field eval="'(20, )'" name="args" />
-            <field name="nextcall" eval="(DateTime.now()).strftime('%Y-%m-20 22:00:00')" />
-        </record>
-        <record forcecreate="True" id="ir_cron_invoice_31" model="ir.cron">
-            <field name="name">Invoice Sales day last</field>
-            <field eval="True" name="active" />
-            <field name="user_id" ref="base.user_root" />
-            <field name="interval_number">1</field>
-            <field name="interval_type">months</field>
-            <field name="numbercall">-1</field>
-            <field eval="False" name="doall" />
-            <field eval="'sale.order'" name="model" />
-            <field eval="'_cron_invoice_makeall'" name="function" />
-            <field eval="'(-1, )'" name="args" />
-            <field name="nextcall" eval="(DateTime.now()).strftime('%Y-%m-1 00:00:00')" />
-        </record>
-
+  <record forcecreate="True" id="ir_cron_invoice_10" model="ir.cron">
+    <field name="name">Invoice Sales day 10</field>
+    <field eval="True" name="active" />
+    <field name="user_id" ref="base.user_root" />
+    <field name="interval_number">1</field>
+    <field name="interval_type">months</field>
+    <field name="numbercall">-1</field>
+    <field eval="False" name="doall" />
+    <field eval="'sale.order'" name="model" />
+    <field eval="'_cron_invoice_makeall'" name="function" />
+    <field eval="'(10, )'" name="args" />
+    <field name="nextcall" eval="(DateTime.now()).strftime('%Y-%m-10 22:00:00')" />
+  </record>
+  <record forcecreate="True" id="ir_cron_invoice_20" model="ir.cron">
+    <field name="name">Invoice Sales day 20</field>
+    <field eval="True" name="active" />
+    <field name="user_id" ref="base.user_root" />
+    <field name="interval_number">1</field>
+    <field name="interval_type">months</field>
+    <field name="numbercall">-1</field>
+    <field eval="False" name="doall" />
+    <field eval="'sale.order'" name="model" />
+    <field eval="'_cron_invoice_makeall'" name="function" />
+    <field eval="'(20, )'" name="args" />
+    <field name="nextcall" eval="(DateTime.now()).strftime('%Y-%m-20 22:00:00')" />
+  </record>
+  <record forcecreate="True" id="ir_cron_invoice_31" model="ir.cron">
+    <field name="name">Invoice Sales day last</field>
+    <field eval="True" name="active" />
+    <field name="user_id" ref="base.user_root" />
+    <field name="interval_number">1</field>
+    <field name="interval_type">months</field>
+    <field name="numbercall">-1</field>
+    <field eval="False" name="doall" />
+    <field eval="'sale.order'" name="model" />
+    <field eval="'_cron_invoice_makeall'" name="function" />
+    <field eval="'(-1, )'" name="args" />
+    <field name="nextcall" eval="(DateTime.now()).strftime('%Y-%m-1 00:00:00')" />
+  </record>
 </odoo>

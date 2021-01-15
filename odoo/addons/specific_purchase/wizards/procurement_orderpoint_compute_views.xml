@@ -1,40 +1,77 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-    <record id="view_procurement_compute_wizard" model="ir.ui.view">
-        <field name="name">Run Reordering Rules</field>
-        <field name="model">procurement.orderpoint.compute</field>
-        <field name="inherit_id" ref="stock.view_procurement_compute_wizard"/>
-        <field name="arch" type="xml">
-            <xpath expr="//form/group" position="after">
-                <group>
-                    <field name="type"/>
-                    <field name="supplier_ids" attrs="{'invisible': [('type', '!=', 'by_suppliers')]}" widget="many2many_tags" options="{'no_create':True}"/>
-                </group>
-                <div attrs="{'invisible': [('type', '!=', 'by_days')]}">
-                    <h3>WARNING - You will generate procurement order by days. This process can take a very long time.</h3>
-                    <label string="Days to generate"/>
-                    <table class="table table-bordered text-center table-condensed" style="width: auto;">
-                        <tr>
-                            <th><label for="is_manage_day_1"/></th>
-                            <th><label for="is_manage_day_2"/></th>
-                            <th><label for="is_manage_day_3"/></th>
-                            <th><label for="is_manage_day_4"/></th>
-                            <th><label for="is_manage_day_5"/></th>
-                            <th><label for="is_manage_day_6"/></th>
-                            <th><label for="is_manage_day_7"/></th>
-                        </tr>
-                        <tr>
-                            <td><field name="is_manage_day_1" nolabel="1"/></td>
-                            <td><field name="is_manage_day_2" nolabel="1"/></td>
-                            <td><field name="is_manage_day_3" nolabel="1"/></td>
-                            <td><field name="is_manage_day_4" nolabel="1"/></td>
-                            <td><field name="is_manage_day_5" nolabel="1"/></td>
-                            <td><field name="is_manage_day_6" nolabel="1"/></td>
-                            <td><field name="is_manage_day_7" nolabel="1"/></td>
-                        </tr>
-                    </table>
-                </div>
-            </xpath>
-        </field>
-    </record>
+  <record id="view_procurement_compute_wizard" model="ir.ui.view">
+    <field name="name">Run Reordering Rules</field>
+    <field name="model">procurement.orderpoint.compute</field>
+    <field name="inherit_id" ref="stock.view_procurement_compute_wizard" />
+    <field name="arch" type="xml">
+      <xpath expr="//form/group" position="after">
+        <group>
+          <field name="type" />
+          <field
+            name="supplier_ids"
+            attrs="{'invisible': [('type', '!=', 'by_suppliers')]}"
+            widget="many2many_tags"
+            options="{'no_create':True}"
+          />
+        </group>
+        <div attrs="{'invisible': [('type', '!=', 'by_days')]}">
+          <h3
+          >WARNING - You will generate procurement order by days. This process can take a very long time.</h3>
+          <label string="Days to generate" />
+          <table
+            class="table table-bordered text-center table-condensed"
+            style="width: auto;"
+          >
+            <tr>
+              <th>
+                <label for="is_manage_day_1" />
+              </th>
+              <th>
+                <label for="is_manage_day_2" />
+              </th>
+              <th>
+                <label for="is_manage_day_3" />
+              </th>
+              <th>
+                <label for="is_manage_day_4" />
+              </th>
+              <th>
+                <label for="is_manage_day_5" />
+              </th>
+              <th>
+                <label for="is_manage_day_6" />
+              </th>
+              <th>
+                <label for="is_manage_day_7" />
+              </th>
+            </tr>
+            <tr>
+              <td>
+                <field name="is_manage_day_1" nolabel="1" />
+              </td>
+              <td>
+                <field name="is_manage_day_2" nolabel="1" />
+              </td>
+              <td>
+                <field name="is_manage_day_3" nolabel="1" />
+              </td>
+              <td>
+                <field name="is_manage_day_4" nolabel="1" />
+              </td>
+              <td>
+                <field name="is_manage_day_5" nolabel="1" />
+              </td>
+              <td>
+                <field name="is_manage_day_6" nolabel="1" />
+              </td>
+              <td>
+                <field name="is_manage_day_7" nolabel="1" />
+              </td>
+            </tr>
+          </table>
+        </div>
+      </xpath>
+    </field>
+  </record>
 </odoo>

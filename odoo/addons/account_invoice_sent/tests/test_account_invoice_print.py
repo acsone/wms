@@ -89,7 +89,7 @@ class TestAccountInvoicePring(SavepointCase):
                 # Instance: invoice line
                 cls.invoice_line = cls.AccountInvoiceLine.create(
                     {
-                        "name": "test %s %s" % (i, p),
+                        "name": "test {} {}".format(i, p),
                         "account_id": cls.account_payable.id,
                         "price_unit": 100.00 * p * i,
                         "quantity": 1,
@@ -106,7 +106,7 @@ class TestAccountInvoicePring(SavepointCase):
                         "invoice_line_ids": [(4, cls.invoice_line.id)],
                     }
                 )
-                setattr(cls, "partner_%s_invoice_%s" % (p, i), invoice)
+                setattr(cls, "partner_{}_invoice_{}".format(p, i), invoice)
                 cls.invoices |= invoice
         cls.invoices.action_invoice_open()
 

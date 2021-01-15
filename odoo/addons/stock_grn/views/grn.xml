@@ -1,75 +1,87 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-        <record model="ir.ui.view" id="view_grn_search">
-            <field name="name">stock.grn.search</field>
-            <field name="model">stock.grn</field>
-            <field name="arch" type="xml">
-                <search string="GRN">
-                    <field name="name"/>
-                    <field name="carrier_ref"/>
-                    <group  expand='0' string='Group by...'>
-                       <filter string="Carrier" domain="[]" context="{'group_by': 'carrier_id'}"/>
-                    </group>
-                </search>
-            </field>
-        </record>
-        <record model="ir.ui.view" id="view_grn_tree">
-            <field name="name">stock.grn.tree</field>
-            <field name="model">stock.grn</field>
-            <field name="arch" type="xml">
-                <tree string="GRN">
-                    <field name="name"/>
-                    <field name="date"/>
-                    <field name="carrier_id"/>
-                    <field name="carrier_ref"/>
-                    <field name="ref"/>
-                    <field name="qty_pallet"/>
-                    <field name="qty_box"/>
-                </tree>
-            </field>
-        </record>
-        <record model="ir.ui.view" id="view_grn_form">
-            <field name="name">stock.grn.form</field>
-            <field name="model">stock.grn</field>
-            <field eval="10" name="priority"/>
-            <field name="arch" type="xml">
-                <form string="GRN">
-                    <header>
+  <record model="ir.ui.view" id="view_grn_search">
+    <field name="name">stock.grn.search</field>
+    <field name="model">stock.grn</field>
+    <field name="arch" type="xml">
+      <search string="GRN">
+        <field name="name" />
+        <field name="carrier_ref" />
+        <group expand='0' string='Group by...'>
+          <filter string="Carrier" domain="[]" context="{'group_by': 'carrier_id'}" />
+        </group>
+      </search>
+    </field>
+  </record>
+  <record model="ir.ui.view" id="view_grn_tree">
+    <field name="name">stock.grn.tree</field>
+    <field name="model">stock.grn</field>
+    <field name="arch" type="xml">
+      <tree string="GRN">
+        <field name="name" />
+        <field name="date" />
+        <field name="carrier_id" />
+        <field name="carrier_ref" />
+        <field name="ref" />
+        <field name="qty_pallet" />
+        <field name="qty_box" />
+      </tree>
+    </field>
+  </record>
+  <record model="ir.ui.view" id="view_grn_form">
+    <field name="name">stock.grn.form</field>
+    <field name="model">stock.grn</field>
+    <field eval="10" name="priority" />
+    <field name="arch" type="xml">
+      <form string="GRN">
+        <header>
                     </header>
-                    <sheet>
-                        <div class="oe_title">
-                            <h1><field name="name" readonly="1" class="oe_inline"/></h1>
-                        </div>
-                        <group>
-                            <group>
-                               <field name="date"/>
-                               <field name="carrier_id" context="{'default_customer': False}" options="{'no_create': True}"/>
-                               <field name="carrier_ref"/>
-                               <field name="company_id" groups="base.group_multi_company"/>
-                               <field name="qty_pallet"/>
-                               <field name="qty_box"/>
-                            </group>
-                            <group>
-                               <field name="from_info"/>
-                               <field name="ref"/>
-                               <field name="description"/>
-                            </group>
-                        </group>
-                        <group>
-                            <field name="picking_ids"
-                                widget="many2many" options="{'not_delete':1}"
-                                context="{'search_default_available':1,'search_default_nogrn':1}"
-                                />
-                        </group>
-                    </sheet>
-                </form>
-            </field>
-        </record>
-
-        <record model="ir.actions.act_window" id="action_grn_view">
-            <field name="name">Goods Received Note</field>
-            <field name="res_model">stock.grn</field>
-        </record>
-
-        <menuitem id="menu_stock_grn" name="Goods Received Note" parent="stock.menu_stock_inventory_control" sequence="50" action="action_grn_view"/>
+        <sheet>
+          <div class="oe_title">
+            <h1>
+              <field name="name" readonly="1" class="oe_inline" />
+            </h1>
+          </div>
+          <group>
+            <group>
+              <field name="date" />
+              <field
+                name="carrier_id"
+                context="{'default_customer': False}"
+                options="{'no_create': True}"
+              />
+              <field name="carrier_ref" />
+              <field name="company_id" groups="base.group_multi_company" />
+              <field name="qty_pallet" />
+              <field name="qty_box" />
+            </group>
+            <group>
+              <field name="from_info" />
+              <field name="ref" />
+              <field name="description" />
+            </group>
+          </group>
+          <group>
+            <field
+              name="picking_ids"
+              widget="many2many"
+              options="{'not_delete':1}"
+              context="{'search_default_available':1,'search_default_nogrn':1}"
+            />
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+  <record model="ir.actions.act_window" id="action_grn_view">
+    <field name="name">Goods Received Note</field>
+    <field name="res_model">stock.grn</field>
+  </record>
+  <menuitem
+    id="menu_stock_grn"
+    name="Goods Received Note"
+    parent="stock.menu_stock_inventory_control"
+    sequence="50"
+    action="action_grn_view"
+  />
 </odoo>

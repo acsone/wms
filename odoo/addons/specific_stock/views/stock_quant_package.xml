@@ -1,27 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <record id="view_quant_package_form_save" model="ir.ui.view">
-        <field name="name">view.quant.package.form.save (in specific_stock)</field>
-        <field name="model">stock.quant.package</field>
-        <field name="inherit_id" ref="delivery.view_quant_package_form_save"/>
-        <field name="arch" type="xml">
-            <xpath expr="//group" position="inside">
-                <field name="nbr_packages"/>
-            </xpath>
-        </field>
-    </record>
-
-
-    <record model="ir.ui.view" id="view_quant_package_tree">
-        <field name="name">stock.quant.package.tree (in specific_stock)</field>
-        <field name="model">stock.quant.package</field>
-        <field name="inherit_id" ref="stock.view_quant_package_tree"/>
-        <field name="arch" type="xml">
-            <field name="packaging_id" position="after">
-                <field name="nbr_packages"/>
-            </field>
-        </field>
-    </record>
-
-
+  <record id="view_quant_package_form_save" model="ir.ui.view">
+    <field name="name">view.quant.package.form.save (in specific_stock)</field>
+    <field name="model">stock.quant.package</field>
+    <field name="inherit_id" ref="delivery.view_quant_package_form_save" />
+    <field name="arch" type="xml">
+      <xpath expr="//group" position="inside">
+        <field name="nbr_packages" />
+      </xpath>
+    </field>
+  </record>
+  <record model="ir.ui.view" id="view_quant_package_tree">
+    <field name="name">stock.quant.package.tree (in specific_stock)</field>
+    <field name="model">stock.quant.package</field>
+    <field name="inherit_id" ref="stock.view_quant_package_tree" />
+    <field name="arch" type="xml">
+      <field name="packaging_id" position="after">
+        <field name="nbr_packages" />
+      </field>
+    </field>
+  </record>
 </odoo>

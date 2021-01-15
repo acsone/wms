@@ -1,45 +1,48 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-    <record id="view_move_form" model="ir.ui.view">
-        <field name="name">view.mode.form inherit</field>
-        <field name="model">stock.move</field>
-        <field name="inherit_id" ref="stock.view_move_form"/>
-        <field name="arch" type="xml">
-            <xpath expr="//field[@name='move_dest_id']" position="attributes">
-                <attribute name="groups"/>
-            </xpath>
-
-            <xpath expr="//group[@name='quants_grp']" position="attributes">
-                <attribute name="groups"/>
-            </xpath>
-
-            <xpath expr="//group[@name='moved_quants_grp']" position="attributes">
-                <attribute name="groups"/>
-            </xpath>
-        </field>
-    </record>
-
-    <record id="view_move_picking_tree" model="ir.ui.view">
-        <field name="name">stock.move.tree.inherit</field>
-        <field name="model">stock.move</field>
-        <field name="inherit_id" ref="stock.view_move_picking_tree"/>
-        <field name="arch" type="xml">
-            <field name="product_id" position="after">
-                <field name="group_id"/>
-            </field>
-            <field name="date_expected" position="attributes">
-                <attribute name="invisible">0</attribute>
-            </field>
-            <field name="date_expected" position="after">
-                <button name="action_open_update_wizard" type="object"
-                    attrs="{'invisible': [('state', 'in', ['cancel','done'])]}"
-                    icon="fa-cog"
-                    help="Update expected date"/>
-                <button name="action_cancel_move" type="object"
-                    attrs="{'invisible': [('state', 'in', ['cancel','done']),]}"
-                    icon="fa-undo"
-                    help="Cancel move"/>
-            </field>
-        </field>
-    </record>
+  <record id="view_move_form" model="ir.ui.view">
+    <field name="name">view.mode.form inherit</field>
+    <field name="model">stock.move</field>
+    <field name="inherit_id" ref="stock.view_move_form" />
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='move_dest_id']" position="attributes">
+        <attribute name="groups" />
+      </xpath>
+      <xpath expr="//group[@name='quants_grp']" position="attributes">
+        <attribute name="groups" />
+      </xpath>
+      <xpath expr="//group[@name='moved_quants_grp']" position="attributes">
+        <attribute name="groups" />
+      </xpath>
+    </field>
+  </record>
+  <record id="view_move_picking_tree" model="ir.ui.view">
+    <field name="name">stock.move.tree.inherit</field>
+    <field name="model">stock.move</field>
+    <field name="inherit_id" ref="stock.view_move_picking_tree" />
+    <field name="arch" type="xml">
+      <field name="product_id" position="after">
+        <field name="group_id" />
+      </field>
+      <field name="date_expected" position="attributes">
+        <attribute name="invisible">0</attribute>
+      </field>
+      <field name="date_expected" position="after">
+        <button
+          name="action_open_update_wizard"
+          type="object"
+          attrs="{'invisible': [('state', 'in', ['cancel','done'])]}"
+          icon="fa-cog"
+          help="Update expected date"
+        />
+        <button
+          name="action_cancel_move"
+          type="object"
+          attrs="{'invisible': [('state', 'in', ['cancel','done']),]}"
+          icon="fa-undo"
+          help="Cancel move"
+        />
+      </field>
+    </field>
+  </record>
 </odoo>

@@ -1,22 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <record id="legal_entity_view_tree" model="ir.ui.view">
-        <field name="name">legal.entity.view.tree</field>
-        <field name="model">legal.entity</field>
-        <field name="arch" type="xml">
-            <tree editable="bottom">
-                <field name="name"/>
-            </tree>
-        </field>
-    </record>
-
-    <record id="action_legal_entity" model="ir.actions.act_window">
-        <field name="name">Legal Entities</field>
-        <field name="type">ir.actions.act_window</field>
-        <field name="res_model">legal.entity</field>
-        <field name="view_type">form</field>
-        <field name="view_mode">tree</field>
-    </record>
-
-    <menuitem action="action_legal_entity" id="menu_legal_entity" parent="sales_team.menu_config_address_book" sequence="20" groups="sales_team.group_sale_manager"/>
+  <record id="legal_entity_view_tree" model="ir.ui.view">
+    <field name="name">legal.entity.view.tree</field>
+    <field name="model">legal.entity</field>
+    <field name="arch" type="xml">
+      <tree editable="bottom">
+        <field name="name" />
+      </tree>
+    </field>
+  </record>
+  <record id="action_legal_entity" model="ir.actions.act_window">
+    <field name="name">Legal Entities</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="res_model">legal.entity</field>
+    <field name="view_type">form</field>
+    <field name="view_mode">tree</field>
+  </record>
+  <menuitem
+    action="action_legal_entity"
+    id="menu_legal_entity"
+    parent="sales_team.menu_config_address_book"
+    sequence="20"
+    groups="sales_team.group_sale_manager"
+  />
 </odoo>

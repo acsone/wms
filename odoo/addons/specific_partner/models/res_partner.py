@@ -187,7 +187,7 @@ class ResPartner(models.Model):
             if limit:
                 query += u" limit %s"
                 where_clause_params.append(limit)
-            self.env.cr.execute(query, where_clause_params)
+            self.env.cr.execute(query, where_clause_params)  # pylint: disable=E8103
             partner_ids = map(lambda x: x[0], self.env.cr.fetchall())
 
             if partner_ids:
@@ -291,7 +291,6 @@ class ResPartner(models.Model):
             force=force,
         )
 
-    @api.one
     @api.constrains("name", "street", "city", "zip", "country_id")
     def _is_valid_esb_address(self):
         """Check customer address validity.
@@ -300,23 +299,24 @@ class ResPartner(models.Model):
         and some fields are required for them to be valid.
         And check is made in the view as well.
         """
-        if not self.parent_id or not self.customer:
-            return
-        if self.type not in ["invoice", "delivery"]:
-            return
-        if (
-            self.name
-            and self.street
-            and self.city
-            and self.zip
-            and self.country_id.esb_ref
-        ):
-            return
-        raise ValidationError(
-            _(
-                "For an invoicing or delivery address the "
-                "following fields (name, street, city, zip, "
-                "country) are required. And the country "
-                "must have a reference ESB."
+        for rec in self:
+            if not rec.parent_id or not rec.customer:
+                return
+            if rec.type not in ["invoice", "delivery"]:
+                return
+            if (
+                rec.name
+                and rec.street
+                and rec.city
+                and rec.zip
+                and rec.country_id.esb_ref
+            ):
+                return
+            raise ValidationError(
+                _(
+                    "For an invoicing or delivery address the "
+                    "following fields (name, street, city, zip, "
+                    "country) are required. And the country "
+                    "must have a reference ESB."
+                )
             )
-        )

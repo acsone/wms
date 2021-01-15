@@ -6,7 +6,7 @@
     "name": "Alc Product Dimensions",
     "description": """
         compute product product diemnsions based on product template dimensions""",
-    "version": "10",
+    "version": "10.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": ["product", "product_dimension"],

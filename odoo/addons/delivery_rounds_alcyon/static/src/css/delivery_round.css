@@ -1,7 +1,7 @@
 .delivery_round_kanban div.o_progressbar_title {
-    width: 100px;
+  width: 100px;
 }
 .delivery_round_kanban div.o_progressbar_value {
-    width: 50px !important;
-    text-align: left !important;
+  width: 50px !important;
+  text-align: left !important;
 }

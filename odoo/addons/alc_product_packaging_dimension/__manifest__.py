@@ -6,7 +6,7 @@
     "name": "Alc Product Packaging Dimension",
     "description": """
         dimensions in cm and volume in liter for packagings""",
-    "version": "10",
+    "version": "10.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": ["product_packaging_dimension"],

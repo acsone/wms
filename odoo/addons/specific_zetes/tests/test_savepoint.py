@@ -2,11 +2,13 @@
 
 import psycopg2
 
-from odoo.addons.specific_zetes.tools.domain_interface import Savepoint
 from odoo.tests.common import SavepointCase
 from odoo.tools import mute_logger
 
+from odoo.addons.specific_zetes.tools.domain_interface import Savepoint
 
+
+# pylint: disable=E8103
 class TestSavepoint(SavepointCase):
     def _table_exists(self, name):
         query = (

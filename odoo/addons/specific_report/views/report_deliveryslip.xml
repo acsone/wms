@@ -1,645 +1,895 @@
 <odoo>
-    <template id="specific_report.report_deliveryslip_alcyon">
-        <div class="page">
-            <div id="left_header" class="remove_padding_top">
-                <table id="invoice_reference" class="border_table round_table">
-                    <tr>
-                        <td><span>Customer</span></td>
-                        <td><span>N° Document</span></td>
-                        <td><span>Date</span></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <span t-field="partner.ref"/>
-                        </td>
-                        <td>
-                            <span t-field="deliveryslip.name"/>
-                        </td>
-                        <td>
-                            <span t-field="deliveryslip.date_done"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="3">
-                            <span>Your VAT number:</span>
-                            <span t-field="partner.vat"/>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-
-            <div id="partner_header" class="remove_padding_top">
-                <div t-if="deliveryslip.customer_id != deliveryslip.partner_id"  t-field="deliveryslip.customer_id" t-options='{"widget": "contact", "fields": ["name"], "no_marker": True}'/>
-                <div t-field="deliveryslip.partner_id" t-options='{"widget": "contact", "fields": ["name", "address"], "no_marker": True}'/>
-            </div>
-
-            <t t-call="specific_report.deliveryslip_with_price" t-if="not partner.is_hide_prices_deliveryslip and not deliveryslip.customer_id.is_b2c_customer" t-lang="partner.lang"/>
-            <t t-call="specific_report.deliveryslip_b2c_customer" t-if="deliveryslip.customer_id.is_b2c_customer" t-lang="partner.lang"/>
-            <t t-call="specific_report.deliveryslip_without_price" t-if="partner.is_hide_prices_deliveryslip" t-lang="partner.lang"/>
-
-            <!-- Rebrowse company with partner lang to get the right translation -->
-            <p id="delivery_condition" t-field="company.with_context(lang=partner.lang).delivery_terms_conditions"/>
-
-            <div class="row" style="page-break-inside:avoid">
-                <div class="col-xs-6">
-                    <div class="round_table summary_deliverslip">
-                        <div style="border-bottom: 1px solid black">
-                            Delivery round: <span t-if="deliveryslip.delivery_round_id" t-field="deliveryslip.delivery_round_id.display_name" />
+  <template id="specific_report.report_deliveryslip_alcyon">
+    <div class="page">
+      <div id="left_header" class="remove_padding_top">
+        <table id="invoice_reference" class="border_table round_table">
+          <tr>
+            <td>
+              <span>Customer</span>
+            </td>
+            <td>
+              <span>N° Document</span>
+            </td>
+            <td>
+              <span>Date</span>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span t-field="partner.ref" />
+            </td>
+            <td>
+              <span t-field="deliveryslip.name" />
+            </td>
+            <td>
+              <span t-field="deliveryslip.date_done" />
+            </td>
+          </tr>
+          <tr>
+            <td colspan="3">
+              <span>Your VAT number:</span>
+              <span t-field="partner.vat" />
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div id="partner_header" class="remove_padding_top">
+        <div
+          t-if="deliveryslip.customer_id != deliveryslip.partner_id"
+          t-field="deliveryslip.customer_id"
+          t-options='{"widget": "contact", "fields": ["name"], "no_marker": True}'
+        />
+        <div
+          t-field="deliveryslip.partner_id"
+          t-options='{"widget": "contact", "fields": ["name", "address"], "no_marker": True}'
+        />
+      </div>
+      <t
+        t-call="specific_report.deliveryslip_with_price"
+        t-if="not partner.is_hide_prices_deliveryslip and not deliveryslip.customer_id.is_b2c_customer"
+        t-lang="partner.lang"
+      />
+      <t
+        t-call="specific_report.deliveryslip_b2c_customer"
+        t-if="deliveryslip.customer_id.is_b2c_customer"
+        t-lang="partner.lang"
+      />
+      <t
+        t-call="specific_report.deliveryslip_without_price"
+        t-if="partner.is_hide_prices_deliveryslip"
+        t-lang="partner.lang"
+      />
+      <!-- Rebrowse company with partner lang to get the right translation -->
+      <p
+        id="delivery_condition"
+        t-field="company.with_context(lang=partner.lang).delivery_terms_conditions"
+      />
+      <div class="row" style="page-break-inside:avoid">
+        <div class="col-xs-6">
+          <div class="round_table summary_deliverslip">
+            <div style="border-bottom: 1px solid black">
+                            Delivery round: <span
+                t-if="deliveryslip.delivery_round_id"
+                t-field="deliveryslip.delivery_round_id.display_name"
+              />
                         </div>
-                        <table style="margin:0 15px; width:100%">
-                            <tr>
-                                <th># Drug</th>
-                                <th># Cold</th>
-                                <th># Food</th>
-                                <th># Mat.</th>
-                                <th># Hum.</th>
-                            </tr>
-                            <tr>
-                                <td><t t-esc="int(deliveryslip.number_of_drug)"/> boxes</td>
-                                <td><t t-esc="int(deliveryslip.number_of_cold)"/> boxes</td>
-                                <td><t t-esc="int(deliveryslip.number_of_food)"/> boxes</td>
-                                <td><t t-esc="int(deliveryslip.number_of_equipment)"/> boxes</td>
-                                <td><t t-esc="int(deliveryslip.number_of_human_drug)"/> boxes</td>
-                            </tr>
-                            <tr>
-                                <td><t t-esc="int(deliveryslip.item_number_of_drug)"/> items</td>
-                                <td><t t-esc="int(deliveryslip.item_number_of_cold)"/> items</td>
-                                <td><t t-esc="int(deliveryslip.item_number_of_food)"/> items</td>
-                                <td><t t-esc="int(deliveryslip.item_number_of_equipment)"/> items</td>
-                                <td><t t-esc="int(deliveryslip.item_number_of_human_drug)"/> items</td>
-                            </tr>
-                        </table>
+            <table style="margin:0 15px; width:100%">
+              <tr>
+                <th># Drug</th>
+                <th># Cold</th>
+                <th># Food</th>
+                <th># Mat.</th>
+                <th># Hum.</th>
+              </tr>
+              <tr>
+                <td><t t-esc="int(deliveryslip.number_of_drug)" /> boxes</td>
+                <td><t t-esc="int(deliveryslip.number_of_cold)" /> boxes</td>
+                <td><t t-esc="int(deliveryslip.number_of_food)" /> boxes</td>
+                <td><t t-esc="int(deliveryslip.number_of_equipment)" /> boxes</td>
+                <td><t t-esc="int(deliveryslip.number_of_human_drug)" /> boxes</td>
+              </tr>
+              <tr>
+                <td><t t-esc="int(deliveryslip.item_number_of_drug)" /> items</td>
+                <td><t t-esc="int(deliveryslip.item_number_of_cold)" /> items</td>
+                <td><t t-esc="int(deliveryslip.item_number_of_food)" /> items</td>
+                <td><t t-esc="int(deliveryslip.item_number_of_equipment)" /> items</td>
+                <td><t t-esc="int(deliveryslip.item_number_of_human_drug)" /> items</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div
+            class="round_table summary_deliverslip"
+            style="text-align: center; padding-top: 30px"
+          >
+                        Weight:<br /><span t-field="deliveryslip.weight" /> Kg
                     </div>
-                </div>
-                <div class="col-xs-2">
-                    <div class="round_table summary_deliverslip" style="text-align: center; padding-top: 30px">
-                        Weight:<br/><span t-field="deliveryslip.weight"/> Kg
-                    </div>
-                </div>
-                <div class="col-xs-4">
-                    <div class="round_table summary_deliverslip">
-                        <div>
-                            Received the:<br/>
+        </div>
+        <div class="col-xs-4">
+          <div class="round_table summary_deliverslip">
+            <div>
+                            Received the:<br />
                             Signature:
                         </div>
-
-                    </div>
-                </div>
-            </div>
+          </div>
         </div>
-    </template>
-
-    <template id="specific_report.deliveryslip_orderref">
-        <div>
-            <span t-if="not order.is_consignment">Order</span>
-            <span t-if="order.is_consignment">Consignement</span>
-            <span t-field="order.name"/>
-            <t t-set="depot_number" t-value="order.partner_id.vet_depot_number or order.partner_id.parent_id.vet_depot_number"/>
-            <t t-if="depot_number">
-                (<t t-esc="datetime.datetime.strptime(deliveryslip.date, '%Y-%m-%d %H:%M:%S').strftime('%y')"/>/<t t-esc="depot_number"/>/<t t-esc="order.suite_name or '000'"/>)
+      </div>
+    </div>
+  </template>
+  <template id="specific_report.deliveryslip_orderref">
+    <div>
+      <span t-if="not order.is_consignment">Order</span>
+      <span t-if="order.is_consignment">Consignement</span>
+      <span t-field="order.name" />
+      <t
+        t-set="depot_number"
+        t-value="order.partner_id.vet_depot_number or order.partner_id.parent_id.vet_depot_number"
+      />
+      <t t-if="depot_number">
+                (<t
+          t-esc="datetime.datetime.strptime(deliveryslip.date, '%Y-%m-%d %H:%M:%S').strftime('%y')"
+        />/<t t-esc="depot_number" />/<t t-esc="order.suite_name or '000'" />)
             </t>
-            <span>of</span>
-            <span t-field="order.date_order_short"/>
-            <t t-if="order.client_order_ref">
-                (<span t-esc="order.client_order_ref"/>)
+      <span>of</span>
+      <span t-field="order.date_order_short" />
+      <t t-if="order.client_order_ref">
+                (<span t-esc="order.client_order_ref" />)
             </t>
-        </div>
-    </template>
-
-    <template id="specific_report.deliveryslip_with_price">
-        <table id="products_table" class="round_table products_table_deliveryslip">
-            <thead>
-                <tr>
-                    <th rowspan="2">Product<br/>reference</th>
-                    <th rowspan="2">Name</th>
-                    <th rowspan="2">Fridge</th>
-                    <th rowspan="2">Quantity</th>
-                    <th colspan="3" style="border-left: thin solid black;">By lot</th>
-                    <th rowspan="2">Gross<br/>unit<br/>price</th>
-                    <th rowspan="2">Net<br/>unit<br/>price</th>
-                    <th rowspan="2">Subtotal</th>
-                    <th rowspan="2" style="min-width:70px">VAT</th>
-                </tr>
-                <tr>
-                    <th style="border-left: thin solid black;">Number</th>
-                    <th>Quantity</th>
-                    <th>Expiration date</th>
-                </tr>
-            </thead>
-            <tbody class="invoice_tbody">
-                <t t-foreach="deliveryslip.with_context(lang=partner.lang).get_moves_by_order()" t-as="grouped_lines">
-                    <t t-set="order" t-value="grouped_lines[0]"/>
-                    <t t-set="move_lines" t-value="grouped_lines[1][0]"/>
-                    <t t-set="backorder_move_lines" t-value="grouped_lines[1][1]"/>
-
-                    <t t-if="order">
-                        <tr><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/></tr>
-                        <tr>
-                            <td colspan="11" class="sale_separator">
-                                <t t-call="specific_report.deliveryslip_orderref"/>
-                            </td>
-                        </tr>
-                        <tr><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/></tr>
-                    </t>
-
-                    <t t-foreach="move_lines" t-as="line">
-                        <t t-set="order_line" t-value="line.order_line_id"/>
-                        <t t-set="quants" t-value="line.get_lots()"/>
-                        <t t-set="first_quant" t-value="quants and quants.pop()"/>
-                        <tr>
-                            <td>
-                                <span t-field="line.product_id.default_code"/>
-                            </td>
-                            <td class="text-left">
-                                <span t-field="line.product_id.name"/>
-                                <div t-if="line.serial_number"> (S/N: <span t-field="line.serial_number"/>)</div>
-                            </td>
-                            <td class="text-center">
-                                <span t-if="line.product_id.picking_zone_id == line.env.ref('__setup__.picking_zone_frigo')">
-                                    <i class="fa fa-check" aria-hidden="true"></i>
-                                </span>
-                            </td>
-                            <td>
-                                <span t-esc="int(line.product_qty)"/>
-                            </td>
-                            <td>
-                                <t t-esc="first_quant and first_quant[0] or ''"/>
-                            </td>
-                            <td>
-                                <t t-esc="first_quant and int(first_quant[1])  or ''"/>
-                            </td>
-                            <td style="white-space:nowrap">
-                                <t t-esc="first_quant and first_quant[2] and first_quant[2][:10] or ''"/>
-                            </td>
-                            <td>
-                                <span t-field="order_line.price_unit" t-if="not line.is_additional_move and not line.order_id.is_consignment"/>
-                                <span t-if="line.is_additional_move or line.order_id.is_consignment"> 0 </span>
-                            </td>
-                            <td>
-                                <span t-field="order_line.price_reduce_taxexcl" t-if="not line.is_additional_move and not line.order_id.is_consignment"/>
-                                <span t-if="line.is_additional_move or line.order_id.is_consignment"> 0 </span>
-                            </td>
-                            <td>
-                                <t t-esc="order_line.price_reduce * int(line.product_qty)" t-options="{'widget': 'monetary', 'display_currency': order_line.currency_id}"  t-if="not line.is_additional_move and not line.order_id.is_consignment"/>
-                                <span t-if="line.is_additional_move or line.order_id.is_consignment"> 0 </span>
-                            </td>
-                            <td>
-                                <t t-foreach="order_line.tax_id" t-as="tax"><t t-if="tax_index">, </t><span style="white-space:nowrap"><t t-esc="tax.description or tax.name"/></span></t>
-                            </td>
-                        </tr>
-                        <tr t-foreach="quants" t-as="quant">
-                            <td/>
-                            <td/>
-                            <td/>
-                            <td/>
-                            <td>
-                                <span t-esc="quant[0]"/>
-                            </td>
-                            <td>
-                                <span t-esc="int(quant[1])"/>
-                            </td>
-                            <td>
-                                <span t-esc="quant[2] and quant[2][:10]"/>
-                            </td>
-                            <td/>
-                            <td/>
-                            <td/>
-                            <td/>
-                        </tr>
-                    </t>
-
-                    <t t-if="backorder_move_lines">
-                        <tr><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/></tr>
-                        <tr>
-                            <td colspan="11" class="sale_separator">
-                                <div class="no_background" style="padding-left: 2mm; padding-right: 2mm; padding-top: 1mm">
-                                    <div t-if="order" style="padding-left: 2mm; padding-right: 2mm;">Balance to be delivered on order <span t-field="order.name"/></div>
-                                    <div t-if="not order">Balance to be delivered</div>
-                                    <table style="width: 50%;">
-                                        <tbody>
-                                            <tr t-foreach="backorder_move_lines" t-as="line">
-                                                <td style="border: none;">
-                                                    <span t-field="line.product_id.default_code"/>
-                                                </td>
-                                                <td style="border: none;">
-                                                    <span t-field="line.product_id.name"/>
-                                                </td>
-                                                <td style="border: none;">
-                                                    <span t-esc="int(line.product_qty)"/>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </td>
-                        </tr>
-                    </t>
+    </div>
+  </template>
+  <template id="specific_report.deliveryslip_with_price">
+    <table id="products_table" class="round_table products_table_deliveryslip">
+      <thead>
+        <tr>
+          <th rowspan="2">Product<br />reference</th>
+          <th rowspan="2">Name</th>
+          <th rowspan="2">Fridge</th>
+          <th rowspan="2">Quantity</th>
+          <th colspan="3" style="border-left: thin solid black;">By lot</th>
+          <th rowspan="2">Gross<br />unit<br />price</th>
+          <th rowspan="2">Net<br />unit<br />price</th>
+          <th rowspan="2">Subtotal</th>
+          <th rowspan="2" style="min-width:70px">VAT</th>
+        </tr>
+        <tr>
+          <th style="border-left: thin solid black;">Number</th>
+          <th>Quantity</th>
+          <th>Expiration date</th>
+        </tr>
+      </thead>
+      <tbody class="invoice_tbody">
+        <t
+          t-foreach="deliveryslip.with_context(lang=partner.lang).get_moves_by_order()"
+          t-as="grouped_lines"
+        >
+          <t t-set="order" t-value="grouped_lines[0]" />
+          <t t-set="move_lines" t-value="grouped_lines[1][0]" />
+          <t t-set="backorder_move_lines" t-value="grouped_lines[1][1]" />
+          <t t-if="order">
+            <tr>
+              <td />
+              <td />
+              <td />
+              <td />
+              <td />
+              <td />
+              <td />
+              <td />
+              <td />
+              <td />
+              <td />
+            </tr>
+            <tr>
+              <td colspan="11" class="sale_separator">
+                <t t-call="specific_report.deliveryslip_orderref" />
+              </td>
+            </tr>
+            <tr>
+              <td />
+              <td />
+              <td />
+              <td />
+              <td />
+              <td />
+              <td />
+              <td />
+              <td />
+              <td />
+              <td />
+            </tr>
+          </t>
+          <t t-foreach="move_lines" t-as="line">
+            <t t-set="order_line" t-value="line.order_line_id" />
+            <t t-set="quants" t-value="line.get_lots()" />
+            <t t-set="first_quant" t-value="quants and quants.pop()" />
+            <tr>
+              <td>
+                <span t-field="line.product_id.default_code" />
+              </td>
+              <td class="text-left">
+                <span t-field="line.product_id.name" />
+                <div t-if="line.serial_number"> (S/N: <span
+                    t-field="line.serial_number"
+                  />)</div>
+              </td>
+              <td class="text-center">
+                <span
+                  t-if="line.product_id.picking_zone_id == line.env.ref('__setup__.picking_zone_frigo')"
+                >
+                  <i class="fa fa-check" aria-hidden="true" />
+                </span>
+              </td>
+              <td>
+                <span t-esc="int(line.product_qty)" />
+              </td>
+              <td>
+                <t t-esc="first_quant and first_quant[0] or ''" />
+              </td>
+              <td>
+                <t t-esc="first_quant and int(first_quant[1])  or ''" />
+              </td>
+              <td style="white-space:nowrap">
+                <t
+                  t-esc="first_quant and first_quant[2] and first_quant[2][:10] or ''"
+                />
+              </td>
+              <td>
+                <span
+                  t-field="order_line.price_unit"
+                  t-if="not line.is_additional_move and not line.order_id.is_consignment"
+                />
+                <span
+                  t-if="line.is_additional_move or line.order_id.is_consignment"
+                > 0 </span>
+              </td>
+              <td>
+                <span
+                  t-field="order_line.price_reduce_taxexcl"
+                  t-if="not line.is_additional_move and not line.order_id.is_consignment"
+                />
+                <span
+                  t-if="line.is_additional_move or line.order_id.is_consignment"
+                > 0 </span>
+              </td>
+              <td>
+                <t
+                  t-esc="order_line.price_reduce * int(line.product_qty)"
+                  t-options="{'widget': 'monetary', 'display_currency': order_line.currency_id}"
+                  t-if="not line.is_additional_move and not line.order_id.is_consignment"
+                />
+                <span
+                  t-if="line.is_additional_move or line.order_id.is_consignment"
+                > 0 </span>
+              </td>
+              <td>
+                <t t-foreach="order_line.tax_id" t-as="tax">
+                  <t t-if="tax_index">, </t>
+                  <span style="white-space:nowrap">
+                    <t t-esc="tax.description or tax.name" />
+                  </span>
                 </t>
-                <tr><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/></tr>
-            </tbody>
-        </table>
-    </template>
-
-
-    <template id="specific_report.deliveryslip_b2c_customer">
-        <table id="products_table" class="round_table products_table_deliveryslip">
-            <thead>
-                <tr>
-                    <th rowspan="2">Product<br/>reference</th>
-                    <th rowspan="2">Name</th>
-                    <th rowspan="2">Fridge</th>
-                    <th rowspan="2">Quantity</th>
-                    <th colspan="3" style="border-left: thin solid black;">By lot</th>
-                </tr>
-                <tr>
-                    <th style="border-left: thin solid black;">Number</th>
-                    <th>Quantity</th>
-                    <th>Expiration date</th>
-                </tr>
-            </thead>
-            <tbody class="invoice_tbody">
-                <t t-foreach="deliveryslip.with_context(lang=partner.lang).get_moves_by_order()" t-as="grouped_lines">
-                    <t t-set="order" t-value="grouped_lines[0]"/>
-                    <t t-set="move_lines" t-value="grouped_lines[1][0]"/>
-                    <t t-set="backorder_move_lines" t-value="grouped_lines[1][1]"/>
-
-                    <t t-if="order">
-                        <tr><td/><td/><td/><td/><td/></tr>
-                        <tr>
-                            <td colspan="11" class="sale_separator">
-                                <t t-call="specific_report.deliveryslip_orderref"/>
-                            </td>
-                        </tr>
-                        <tr><td/><td/><td/><td/><td/></tr>
-                    </t>
-
-                    <t t-foreach="move_lines" t-as="line">
-                        <t t-set="order_line" t-value="line.order_line_id"/>
-                        <t t-set="quants" t-value="line.get_lots()"/>
-                        <t t-set="first_quant" t-value="quants and quants.pop()"/>
-                        <tr>
-                            <td>
-                                <span t-field="line.product_id.default_code"/>
-                            </td>
-                            <td class="text-left">
-                                <span t-field="line.product_id.name"/>
-                                <div t-if="line.serial_number"> (S/N: <span t-field="line.serial_number"/>)</div>
-                            </td>
-                            <td class="text-center">
-                                <span t-if="line.product_id.picking_zone_id == line.env.ref('__setup__.picking_zone_frigo')">
-                                    <i class="fa fa-check" aria-hidden="true"></i>
-                                </span>
-                            </td>
-                            <td>
-                                <span t-esc="int(line.product_qty)"/>
-                            </td>
-                            <td>
-                                <t t-esc="first_quant and first_quant[0] or ''"/>
-                            </td>
-                            <td>
-                                <t t-esc="first_quant and int(first_quant[1])  or ''"/>
-                            </td>
-                            <td style="white-space:nowrap">
-                                <t t-esc="first_quant and first_quant[2] and first_quant[2][:10] or ''"/>
-                            </td>
-                        </tr>
-                        <tr t-foreach="quants" t-as="quant">
-                            <td/>
-                            <td/>
-                            <td/>
-                            <td/>
-                            <td>
-                                <span t-esc="quant[0]"/>
-                            </td>
-                            <td>
-                                <span t-esc="int(quant[1])"/>
-                            </td>
-                            <td>
-                                <span t-esc="quant[2] and quant[2][:10]"/>
-                            </td>
-                        </tr>
-                    </t>
-
-                    <t t-if="backorder_move_lines">
-                        <tr><td/><td/><td/><td/><td/><td/><td/></tr>
-                        <tr>
-                            <td colspan="11" class="sale_separator">
-                                <div class="no_background" style="padding-left: 2mm; padding-right: 2mm; padding-top: 1mm">
-                                    <div t-if="order" style="padding-left: 2mm; padding-right: 2mm;">Balance to be delivered on order <span t-field="order.name"/></div>
-                                    <div t-if="not order">Balance to be delivered</div>
-                                    <table style="width: 50%;">
-                                        <tbody>
-                                            <tr t-foreach="backorder_move_lines" t-as="line">
-                                                <td style="border: none;">
-                                                    <span t-field="line.product_id.default_code"/>
-                                                </td>
-                                                <td style="border: none;">
-                                                    <span t-field="line.product_id.name"/>
-                                                </td>
-                                                <td style="border: none;">
-                                                    <span t-esc="int(line.product_qty)"/>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </td>
-                        </tr>
-                    </t>
-                </t>
-                <tr><td/><td/><td/><td/><td/><td/><td/></tr>
-            </tbody>
-        </table>
-    </template>
-    <template id="specific_report.deliveryslip_without_price">
-        <table id="products_table" class="round_table products_table_deliveryslip">
-            <thead>
-                <tr>
-                    <th rowspan="2" t-if="partner.show_deliveryslip_cnk">CNK</th>
-                    <th rowspan="2">Product<br/>reference</th>
-                    <th rowspan="2">Name</th>
-                    <th rowspan="2">Fridge</th>
-                    <th rowspan="2">Quantity</th>
-                    <th colspan="3" style="border-left: thin solid black;">By lot</th>
-                </tr>
-                <tr>
-                    <th style="border-left: thin solid black;">Number</th>
-                    <th>Quantity</th>
-                    <th>Expiration date</th>
-                </tr>
-            </thead>
-            <tbody class="invoice_tbody">
-                <t t-foreach="deliveryslip.with_context(lang=partner.lang).get_moves_by_order()" t-as="grouped_lines">
-                    <t t-set="order" t-value="grouped_lines[0]"/>
-                    <t t-set="move_lines" t-value="grouped_lines[1][0]"/>
-                    <t t-set="backorder_move_lines" t-value="grouped_lines[1][1]"/>
-                    <t t-set="cols" t-value="7 + partner.show_deliveryslip_cnk"/>
-
-                    <t t-if="order">
-                        <tr><td t-if="partner.show_deliveryslip_cnk"/><td/><td/><td/><td/><td/><td/><td/></tr>
-                        <tr>
-                            <td t-att-colspan="cols" class="sale_separator">
-                                <t t-call="specific_report.deliveryslip_orderref"/>
-                            </td>
-                        </tr>
-                        <tr><td t-if="partner.show_deliveryslip_cnk"/><td/><td/><td/><td/><td/><td/><td/></tr>
-                    </t>
-
-                    <t t-foreach="move_lines" t-as="line">
-                        <t t-set="order_line" t-value="line.order_line_id"/>
-                        <t t-set="quants" t-value="line.get_lots()"/>
-                        <t t-set="first_quant" t-value="quants and quants.pop()"/>
-                        <tr>
-                            <td t-if="partner.show_deliveryslip_cnk">
-                                <span t-field="line.product_id.cnk_code"/>
-                            </td>
-                            <td>
-                                <span t-field="line.product_id.default_code"/>
-                            </td>
-                            <td class="text-left">
-                                <span t-field="line.product_id.name"/>
-                                <div t-if="line.serial_number"> (S/N: <span t-field="line.serial_number"/>)</div>
-                            </td>
-                            <td class="text-center">
-                                <span t-if="line.product_id.picking_zone_id == line.env.ref('__setup__.picking_zone_frigo')">
-                                    <i class="fa fa-check" aria-hidden="true"></i>
-                                </span>
-                            </td>
-                            <td>
-                                <span t-esc="int(line.product_qty)"/>
-                            </td>
-                            <td>
-                                <t t-esc="first_quant and first_quant[0] or ''"/>
-                            </td>
-                            <td>
-                                <t t-esc="first_quant and int(first_quant[1])  or ''"/>
-                            </td>
-                            <td style="white-space:nowrap">
-                                <t t-esc="first_quant and first_quant[2] and first_quant[2][:10] or ''"/>
-                            </td>
-                        </tr>
-                        <tr t-foreach="quants" t-as="quant">
-                            <td t-if="partner.show_deliveryslip_cnk"/>
-                            <td/>
-                            <td/>
-                            <td/>
-                            <td/>
-                            <td>
-                                <span t-esc="quant[0]"/>
-                            </td>
-                            <td>
-                                <span t-esc="int(quant[1])"/>
-                            </td>
-                            <td style="white-space:nowrap">
-                                <span t-esc="quant[2] and quant[2][:10]"/>
-                            </td>
-                        </tr>
-                    </t>
-
-                    <t t-if="backorder_move_lines">
-                        <tr><td t-if="partner.show_deliveryslip_cnk"/><td/><td/><td/><td/><td/><td/><td/></tr>
-                        <tr>
-                            <td t-att-colspan="cols" class="sale_separator">
-                                <div class="no_background" style="padding-left: 2mm; padding-right: 2mm; padding-top: 1mm">
-                                    <div t-if="order" style="padding-left: 2mm; padding-right: 2mm;">Balance to be delivered on order <span t-field="order.name"/></div>
-                                    <div t-if="not order">Balance to be delivered</div>
-                                    <table style="width: 50%;">
-                                        <tbody>
-                                            <tr t-foreach="backorder_move_lines" t-as="line">
-                                                <td style="border: none;">
-                                                    <span t-field="line.product_id.default_code"/>
-                                                </td>
-                                                <td style="border: none;">
-                                                    <span t-field="line.product_id.name"/>
-                                                </td>
-                                                <td style="border: none;">
-                                                    <span t-esc="int(line.product_qty)"/>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </td>
-                        </tr>
-                    </t>
-                </t>
-                <tr><td t-if="partner.show_deliveryslip_cnk"/><td/><td/><td/><td/><td/><td/><td/></tr>
-            </tbody>
-        </table>
-    </template>
-
-    <template id="specific_report.report_deliveryslip_entry_register_body">
-        <div class="page">
-            <div id="left_header" class="remove_padding_top">
-                <table id="invoice_reference" class="border_table round_table">
-                    <tr>
-                        <td><span>Customer</span></td>
-                        <td><span>N° Document</span></td>
-                        <td><span>Date</span></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <span t-field="partner.ref"/>
+              </td>
+            </tr>
+            <tr t-foreach="quants" t-as="quant">
+              <td />
+              <td />
+              <td />
+              <td />
+              <td>
+                <span t-esc="quant[0]" />
+              </td>
+              <td>
+                <span t-esc="int(quant[1])" />
+              </td>
+              <td>
+                <span t-esc="quant[2] and quant[2][:10]" />
+              </td>
+              <td />
+              <td />
+              <td />
+              <td />
+            </tr>
+          </t>
+          <t t-if="backorder_move_lines">
+            <tr>
+              <td />
+              <td />
+              <td />
+              <td />
+              <td />
+              <td />
+              <td />
+              <td />
+              <td />
+              <td />
+              <td />
+            </tr>
+            <tr>
+              <td colspan="11" class="sale_separator">
+                <div
+                  class="no_background"
+                  style="padding-left: 2mm; padding-right: 2mm; padding-top: 1mm"
+                >
+                  <div
+                    t-if="order"
+                    style="padding-left: 2mm; padding-right: 2mm;"
+                  >Balance to be delivered on order <span t-field="order.name" /></div>
+                  <div t-if="not order">Balance to be delivered</div>
+                  <table style="width: 50%;">
+                    <tbody>
+                      <tr t-foreach="backorder_move_lines" t-as="line">
+                        <td style="border: none;">
+                          <span t-field="line.product_id.default_code" />
                         </td>
-                        <td>
-                            <span t-field="deliveryslip.name"/>
+                        <td style="border: none;">
+                          <span t-field="line.product_id.name" />
                         </td>
-                        <td>
-                            <span t-field="deliveryslip.date_done"/>
+                        <td style="border: none;">
+                          <span t-esc="int(line.product_qty)" />
                         </td>
-                    </tr>
-                    <tr>
-                        <td colspan="3">
-                            <span>Your VAT number:</span>
-                            <span t-field="partner.vat"/>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-
-            <div id="partner_header" class="remove_padding_top">
-                <div t-field="deliveryslip.partner_id" t-options='{"widget": "contact", "fields": ["name", "address"], "no_marker": True}'/>
-            </div>
-            <table id="products_table" class="round_table products_table_entry_register">
-                <thead>
-                    <tr>
-                        <th rowspan="2">Product<br/>reference</th>
-                        <th rowspan="2">Name</th>
-                        <th rowspan="2">Fridge</th>
-                        <th rowspan="2">Quantity</th>
-                        <th colspan="3" style="border-left: thin solid black;">By lot</th>
-                    </tr>
-                    <tr>
-                        <th style="border-left: thin solid black;">Number</th>
-                        <th>Quantity</th>
-                        <th>Expiration date</th>
-                    </tr>
-                </thead>
-                <tbody class="invoice_tbody">
-                    <t t-foreach="deliveryslip.with_context(lang=partner.lang).get_moves_by_order(is_entry_register=True)" t-as="grouped_lines">
-                        <t t-set="order" t-value="grouped_lines[0]"/>
-                        <t t-set="move_lines" t-value="grouped_lines[1][0]"/>
-
-                        <t t-if="order">
-                            <tr><td/><td/><td/><td/><td/><td/><td/></tr>
-                            <tr>
-                                <td colspan="7" class="sale_separator">
-                                    <t t-call="specific_report.deliveryslip_orderref"/>
-                                </td>
-                            </tr>
-                            <tr><td/><td/><td/><td/><td/><td/><td/></tr>
-                        </t>
-
-                        <t t-foreach="move_lines" t-as="line">
-                            <t t-set="order_line" t-value="line.order_line_id"/>
-                            <t t-set="quants" t-value="line.get_lots()"/>
-                            <t t-set="first_quant" t-value="quants and quants.pop()"/>
-                            <tr>
-                                <td>
-                                    <span t-field="line.product_id.default_code"/>
-                                </td>
-                                <td class="text-left">
-                                    <span t-field="line.product_id.name"/>
-                                    <div t-if="line.serial_number"> (S/N: <span t-field="line.serial_number"/>)</div>
-                                </td>
-                                <td class="text-center">
-                                    <span t-if="line.product_id.picking_zone_id == line.env.ref('__setup__.picking_zone_frigo')">
-                                        <i class="fa fa-check" aria-hidden="true"></i>
-                                    </span>
-                                </td>
-                                <td>
-                                    <span t-esc="int(line.product_qty)"/>
-                                </td>
-                                <td>
-                                    <t t-esc="first_quant and first_quant[0] or ''"/>
-                                </td>
-                                <td>
-                                    <t t-esc="first_quant and int(first_quant[1])  or ''"/>
-                                </td>
-                                <td style="white-space:nowrap">
-                                    <t t-esc="first_quant and first_quant[2] and first_quant[2][:10] or ''"/>
-                                </td>
-                            </tr>
-                            <tr t-foreach="quants" t-as="quant">
-                                <td/>
-                                <td/>
-                                <td/>
-                                <td/>
-                                <td>
-                                    <span t-esc="quant[0]"/>
-                                </td>
-                                <td>
-                                    <span t-esc="int(quant[1])"/>
-                                </td>
-                                <td style="white-space:nowrap">
-                                    <span t-esc="quant[2] and quant[2][:10]"/>
-                                </td>
-                            </tr>
-                        </t>
-                    </t>
-                    <tr><td/><td/><td/><td/><td/><td/><td/></tr>
-                </tbody>
-            </table>
-        </div>
-    </template>
-
-    <template id="specific_report.report_deliveryslip">
-        <t t-call="report.html_container">
-            <t t-set="company" t-value="res_company"/>
-            <t t-set="partner" t-value="deliveryslip.partner_id"/>
-            <t t-set="order" t-value="deliveryslip.with_context(lang=partner.lang).get_moves_by_order()[0]"/>
-
-            <div class="header">
-                <div>
-                    <div class="logo">
-                        <img t-if="company.logo"
-                             t-att-src="'data:image/png;base64,%s' % company.logo"
-                             style="max-height: 70px;"/>
-                    </div>
-                    <div class="main_title">
-                        <t t-set="order" t-value="deliveryslip.with_context(lang=partner.lang).get_moves_by_order()[0][0]"/>
-                        <t t-if="deliveryslip.picking_type_code=='outgoing'">Delivery slip</t>
-                        <t t-if="deliveryslip.picking_type_code=='incoming'">Goods return note</t>
-                    </div>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
-
-            </div>
-
-            <t t-call="specific_report.report_deliveryslip_alcyon" t-lang="partner.lang"/>
-
-            <t t-call="specific_report.page_number_footer" t-lang="partner.lang"/>
+              </td>
+            </tr>
+          </t>
         </t>
-    </template>
-
-    <template id="specific_report.report_deliveryslip_entry_register">
-        <t t-call="report.html_container">
-            <t t-set="company" t-value="res_company"/>
-            <t t-set="partner" t-value="deliveryslip.partner_id"/>
-
-            <div class="header">
-                <div>
-                    <div class="logo">
-                        <img t-if="company.logo"
-                             t-att-src="'data:image/png;base64,%s' % company.logo"
-                             style="max-height: 70px;"/>
-                    </div>
-                    <div class="main_title">
+        <tr>
+          <td />
+          <td />
+          <td />
+          <td />
+          <td />
+          <td />
+          <td />
+          <td />
+          <td />
+          <td />
+          <td />
+        </tr>
+      </tbody>
+    </table>
+  </template>
+  <template id="specific_report.deliveryslip_b2c_customer">
+    <table id="products_table" class="round_table products_table_deliveryslip">
+      <thead>
+        <tr>
+          <th rowspan="2">Product<br />reference</th>
+          <th rowspan="2">Name</th>
+          <th rowspan="2">Fridge</th>
+          <th rowspan="2">Quantity</th>
+          <th colspan="3" style="border-left: thin solid black;">By lot</th>
+        </tr>
+        <tr>
+          <th style="border-left: thin solid black;">Number</th>
+          <th>Quantity</th>
+          <th>Expiration date</th>
+        </tr>
+      </thead>
+      <tbody class="invoice_tbody">
+        <t
+          t-foreach="deliveryslip.with_context(lang=partner.lang).get_moves_by_order()"
+          t-as="grouped_lines"
+        >
+          <t t-set="order" t-value="grouped_lines[0]" />
+          <t t-set="move_lines" t-value="grouped_lines[1][0]" />
+          <t t-set="backorder_move_lines" t-value="grouped_lines[1][1]" />
+          <t t-if="order">
+            <tr>
+              <td />
+              <td />
+              <td />
+              <td />
+              <td />
+            </tr>
+            <tr>
+              <td colspan="11" class="sale_separator">
+                <t t-call="specific_report.deliveryslip_orderref" />
+              </td>
+            </tr>
+            <tr>
+              <td />
+              <td />
+              <td />
+              <td />
+              <td />
+            </tr>
+          </t>
+          <t t-foreach="move_lines" t-as="line">
+            <t t-set="order_line" t-value="line.order_line_id" />
+            <t t-set="quants" t-value="line.get_lots()" />
+            <t t-set="first_quant" t-value="quants and quants.pop()" />
+            <tr>
+              <td>
+                <span t-field="line.product_id.default_code" />
+              </td>
+              <td class="text-left">
+                <span t-field="line.product_id.name" />
+                <div t-if="line.serial_number"> (S/N: <span
+                    t-field="line.serial_number"
+                  />)</div>
+              </td>
+              <td class="text-center">
+                <span
+                  t-if="line.product_id.picking_zone_id == line.env.ref('__setup__.picking_zone_frigo')"
+                >
+                  <i class="fa fa-check" aria-hidden="true" />
+                </span>
+              </td>
+              <td>
+                <span t-esc="int(line.product_qty)" />
+              </td>
+              <td>
+                <t t-esc="first_quant and first_quant[0] or ''" />
+              </td>
+              <td>
+                <t t-esc="first_quant and int(first_quant[1])  or ''" />
+              </td>
+              <td style="white-space:nowrap">
+                <t
+                  t-esc="first_quant and first_quant[2] and first_quant[2][:10] or ''"
+                />
+              </td>
+            </tr>
+            <tr t-foreach="quants" t-as="quant">
+              <td />
+              <td />
+              <td />
+              <td />
+              <td>
+                <span t-esc="quant[0]" />
+              </td>
+              <td>
+                <span t-esc="int(quant[1])" />
+              </td>
+              <td>
+                <span t-esc="quant[2] and quant[2][:10]" />
+              </td>
+            </tr>
+          </t>
+          <t t-if="backorder_move_lines">
+            <tr>
+              <td />
+              <td />
+              <td />
+              <td />
+              <td />
+              <td />
+              <td />
+            </tr>
+            <tr>
+              <td colspan="11" class="sale_separator">
+                <div
+                  class="no_background"
+                  style="padding-left: 2mm; padding-right: 2mm; padding-top: 1mm"
+                >
+                  <div
+                    t-if="order"
+                    style="padding-left: 2mm; padding-right: 2mm;"
+                  >Balance to be delivered on order <span t-field="order.name" /></div>
+                  <div t-if="not order">Balance to be delivered</div>
+                  <table style="width: 50%;">
+                    <tbody>
+                      <tr t-foreach="backorder_move_lines" t-as="line">
+                        <td style="border: none;">
+                          <span t-field="line.product_id.default_code" />
+                        </td>
+                        <td style="border: none;">
+                          <span t-field="line.product_id.name" />
+                        </td>
+                        <td style="border: none;">
+                          <span t-esc="int(line.product_qty)" />
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </td>
+            </tr>
+          </t>
+        </t>
+        <tr>
+          <td />
+          <td />
+          <td />
+          <td />
+          <td />
+          <td />
+          <td />
+        </tr>
+      </tbody>
+    </table>
+  </template>
+  <template id="specific_report.deliveryslip_without_price">
+    <table id="products_table" class="round_table products_table_deliveryslip">
+      <thead>
+        <tr>
+          <th rowspan="2" t-if="partner.show_deliveryslip_cnk">CNK</th>
+          <th rowspan="2">Product<br />reference</th>
+          <th rowspan="2">Name</th>
+          <th rowspan="2">Fridge</th>
+          <th rowspan="2">Quantity</th>
+          <th colspan="3" style="border-left: thin solid black;">By lot</th>
+        </tr>
+        <tr>
+          <th style="border-left: thin solid black;">Number</th>
+          <th>Quantity</th>
+          <th>Expiration date</th>
+        </tr>
+      </thead>
+      <tbody class="invoice_tbody">
+        <t
+          t-foreach="deliveryslip.with_context(lang=partner.lang).get_moves_by_order()"
+          t-as="grouped_lines"
+        >
+          <t t-set="order" t-value="grouped_lines[0]" />
+          <t t-set="move_lines" t-value="grouped_lines[1][0]" />
+          <t t-set="backorder_move_lines" t-value="grouped_lines[1][1]" />
+          <t t-set="cols" t-value="7 + partner.show_deliveryslip_cnk" />
+          <t t-if="order">
+            <tr>
+              <td t-if="partner.show_deliveryslip_cnk" />
+              <td />
+              <td />
+              <td />
+              <td />
+              <td />
+              <td />
+              <td />
+            </tr>
+            <tr>
+              <td t-att-colspan="cols" class="sale_separator">
+                <t t-call="specific_report.deliveryslip_orderref" />
+              </td>
+            </tr>
+            <tr>
+              <td t-if="partner.show_deliveryslip_cnk" />
+              <td />
+              <td />
+              <td />
+              <td />
+              <td />
+              <td />
+              <td />
+            </tr>
+          </t>
+          <t t-foreach="move_lines" t-as="line">
+            <t t-set="order_line" t-value="line.order_line_id" />
+            <t t-set="quants" t-value="line.get_lots()" />
+            <t t-set="first_quant" t-value="quants and quants.pop()" />
+            <tr>
+              <td t-if="partner.show_deliveryslip_cnk">
+                <span t-field="line.product_id.cnk_code" />
+              </td>
+              <td>
+                <span t-field="line.product_id.default_code" />
+              </td>
+              <td class="text-left">
+                <span t-field="line.product_id.name" />
+                <div t-if="line.serial_number"> (S/N: <span
+                    t-field="line.serial_number"
+                  />)</div>
+              </td>
+              <td class="text-center">
+                <span
+                  t-if="line.product_id.picking_zone_id == line.env.ref('__setup__.picking_zone_frigo')"
+                >
+                  <i class="fa fa-check" aria-hidden="true" />
+                </span>
+              </td>
+              <td>
+                <span t-esc="int(line.product_qty)" />
+              </td>
+              <td>
+                <t t-esc="first_quant and first_quant[0] or ''" />
+              </td>
+              <td>
+                <t t-esc="first_quant and int(first_quant[1])  or ''" />
+              </td>
+              <td style="white-space:nowrap">
+                <t
+                  t-esc="first_quant and first_quant[2] and first_quant[2][:10] or ''"
+                />
+              </td>
+            </tr>
+            <tr t-foreach="quants" t-as="quant">
+              <td t-if="partner.show_deliveryslip_cnk" />
+              <td />
+              <td />
+              <td />
+              <td />
+              <td>
+                <span t-esc="quant[0]" />
+              </td>
+              <td>
+                <span t-esc="int(quant[1])" />
+              </td>
+              <td style="white-space:nowrap">
+                <span t-esc="quant[2] and quant[2][:10]" />
+              </td>
+            </tr>
+          </t>
+          <t t-if="backorder_move_lines">
+            <tr>
+              <td t-if="partner.show_deliveryslip_cnk" />
+              <td />
+              <td />
+              <td />
+              <td />
+              <td />
+              <td />
+              <td />
+            </tr>
+            <tr>
+              <td t-att-colspan="cols" class="sale_separator">
+                <div
+                  class="no_background"
+                  style="padding-left: 2mm; padding-right: 2mm; padding-top: 1mm"
+                >
+                  <div
+                    t-if="order"
+                    style="padding-left: 2mm; padding-right: 2mm;"
+                  >Balance to be delivered on order <span t-field="order.name" /></div>
+                  <div t-if="not order">Balance to be delivered</div>
+                  <table style="width: 50%;">
+                    <tbody>
+                      <tr t-foreach="backorder_move_lines" t-as="line">
+                        <td style="border: none;">
+                          <span t-field="line.product_id.default_code" />
+                        </td>
+                        <td style="border: none;">
+                          <span t-field="line.product_id.name" />
+                        </td>
+                        <td style="border: none;">
+                          <span t-esc="int(line.product_qty)" />
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </td>
+            </tr>
+          </t>
+        </t>
+        <tr>
+          <td t-if="partner.show_deliveryslip_cnk" />
+          <td />
+          <td />
+          <td />
+          <td />
+          <td />
+          <td />
+          <td />
+        </tr>
+      </tbody>
+    </table>
+  </template>
+  <template id="specific_report.report_deliveryslip_entry_register_body">
+    <div class="page">
+      <div id="left_header" class="remove_padding_top">
+        <table id="invoice_reference" class="border_table round_table">
+          <tr>
+            <td>
+              <span>Customer</span>
+            </td>
+            <td>
+              <span>N° Document</span>
+            </td>
+            <td>
+              <span>Date</span>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span t-field="partner.ref" />
+            </td>
+            <td>
+              <span t-field="deliveryslip.name" />
+            </td>
+            <td>
+              <span t-field="deliveryslip.date_done" />
+            </td>
+          </tr>
+          <tr>
+            <td colspan="3">
+              <span>Your VAT number:</span>
+              <span t-field="partner.vat" />
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div id="partner_header" class="remove_padding_top">
+        <div
+          t-field="deliveryslip.partner_id"
+          t-options='{"widget": "contact", "fields": ["name", "address"], "no_marker": True}'
+        />
+      </div>
+      <table id="products_table" class="round_table products_table_entry_register">
+        <thead>
+          <tr>
+            <th rowspan="2">Product<br />reference</th>
+            <th rowspan="2">Name</th>
+            <th rowspan="2">Fridge</th>
+            <th rowspan="2">Quantity</th>
+            <th colspan="3" style="border-left: thin solid black;">By lot</th>
+          </tr>
+          <tr>
+            <th style="border-left: thin solid black;">Number</th>
+            <th>Quantity</th>
+            <th>Expiration date</th>
+          </tr>
+        </thead>
+        <tbody class="invoice_tbody">
+          <t
+            t-foreach="deliveryslip.with_context(lang=partner.lang).get_moves_by_order(is_entry_register=True)"
+            t-as="grouped_lines"
+          >
+            <t t-set="order" t-value="grouped_lines[0]" />
+            <t t-set="move_lines" t-value="grouped_lines[1][0]" />
+            <t t-if="order">
+              <tr>
+                <td />
+                <td />
+                <td />
+                <td />
+                <td />
+                <td />
+                <td />
+              </tr>
+              <tr>
+                <td colspan="7" class="sale_separator">
+                  <t t-call="specific_report.deliveryslip_orderref" />
+                </td>
+              </tr>
+              <tr>
+                <td />
+                <td />
+                <td />
+                <td />
+                <td />
+                <td />
+                <td />
+              </tr>
+            </t>
+            <t t-foreach="move_lines" t-as="line">
+              <t t-set="order_line" t-value="line.order_line_id" />
+              <t t-set="quants" t-value="line.get_lots()" />
+              <t t-set="first_quant" t-value="quants and quants.pop()" />
+              <tr>
+                <td>
+                  <span t-field="line.product_id.default_code" />
+                </td>
+                <td class="text-left">
+                  <span t-field="line.product_id.name" />
+                  <div t-if="line.serial_number"> (S/N: <span
+                      t-field="line.serial_number"
+                    />)</div>
+                </td>
+                <td class="text-center">
+                  <span
+                    t-if="line.product_id.picking_zone_id == line.env.ref('__setup__.picking_zone_frigo')"
+                  >
+                    <i class="fa fa-check" aria-hidden="true" />
+                  </span>
+                </td>
+                <td>
+                  <span t-esc="int(line.product_qty)" />
+                </td>
+                <td>
+                  <t t-esc="first_quant and first_quant[0] or ''" />
+                </td>
+                <td>
+                  <t t-esc="first_quant and int(first_quant[1])  or ''" />
+                </td>
+                <td style="white-space:nowrap">
+                  <t
+                    t-esc="first_quant and first_quant[2] and first_quant[2][:10] or ''"
+                  />
+                </td>
+              </tr>
+              <tr t-foreach="quants" t-as="quant">
+                <td />
+                <td />
+                <td />
+                <td />
+                <td>
+                  <span t-esc="quant[0]" />
+                </td>
+                <td>
+                  <span t-esc="int(quant[1])" />
+                </td>
+                <td style="white-space:nowrap">
+                  <span t-esc="quant[2] and quant[2][:10]" />
+                </td>
+              </tr>
+            </t>
+          </t>
+          <tr>
+            <td />
+            <td />
+            <td />
+            <td />
+            <td />
+            <td />
+            <td />
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </template>
+  <template id="specific_report.report_deliveryslip">
+    <t t-call="report.html_container">
+      <t t-set="company" t-value="res_company" />
+      <t t-set="partner" t-value="deliveryslip.partner_id" />
+      <t
+        t-set="order"
+        t-value="deliveryslip.with_context(lang=partner.lang).get_moves_by_order()[0]"
+      />
+      <div class="header">
+        <div>
+          <div class="logo">
+            <img
+              t-if="company.logo"
+              t-att-src="'data:image/png;base64,%s' % company.logo"
+              style="max-height: 70px;"
+            />
+          </div>
+          <div class="main_title">
+            <t
+              t-set="order"
+              t-value="deliveryslip.with_context(lang=partner.lang).get_moves_by_order()[0][0]"
+            />
+            <t t-if="deliveryslip.picking_type_code=='outgoing'">Delivery slip</t>
+            <t t-if="deliveryslip.picking_type_code=='incoming'">Goods return note</t>
+          </div>
+        </div>
+      </div>
+      <t t-call="specific_report.report_deliveryslip_alcyon" t-lang="partner.lang" />
+      <t t-call="specific_report.page_number_footer" t-lang="partner.lang" />
+    </t>
+  </template>
+  <template id="specific_report.report_deliveryslip_entry_register">
+    <t t-call="report.html_container">
+      <t t-set="company" t-value="res_company" />
+      <t t-set="partner" t-value="deliveryslip.partner_id" />
+      <div class="header">
+        <div>
+          <div class="logo">
+            <img
+              t-if="company.logo"
+              t-att-src="'data:image/png;base64,%s' % company.logo"
+              style="max-height: 70px;"
+            />
+          </div>
+          <div class="main_title">
                         Entry register
                     </div>
-                </div>
-
-            </div>
-
-            <t t-call="specific_report.report_deliveryslip_entry_register_body" t-lang="partner.lang"/>
-            <t t-call="specific_report.page_number_footer" t-lang="partner.lang"/>
-        </t>
-    </template>
-
-    <template id="stock.report_deliveryslip">
-        <t t-foreach="docs" t-as="deliveryslip">
-            <t t-call="specific_report.report_deliveryslip" t-lang="deliveryslip.partner_id.lang"/>
-            <t t-set="depot_number" t-value="deliveryslip.partner_id.vet_depot_number or deliveryslip.partner_id.parent_id.vet_depot_number"/>
-            <t t-if="not deliveryslip.partner_id.is_hide_entry_register and depot_number and deliveryslip.get_entry_register_lines()" t-call="specific_report.report_deliveryslip_entry_register" t-lang="deliveryslip.partner_id.lang"/>
-        </t>
-    </template>
+        </div>
+      </div>
+      <t
+        t-call="specific_report.report_deliveryslip_entry_register_body"
+        t-lang="partner.lang"
+      />
+      <t t-call="specific_report.page_number_footer" t-lang="partner.lang" />
+    </t>
+  </template>
+  <template id="stock.report_deliveryslip">
+    <t t-foreach="docs" t-as="deliveryslip">
+      <t
+        t-call="specific_report.report_deliveryslip"
+        t-lang="deliveryslip.partner_id.lang"
+      />
+      <t
+        t-set="depot_number"
+        t-value="deliveryslip.partner_id.vet_depot_number or deliveryslip.partner_id.parent_id.vet_depot_number"
+      />
+      <t
+        t-if="not deliveryslip.partner_id.is_hide_entry_register and depot_number and deliveryslip.get_entry_register_lines()"
+        t-call="specific_report.report_deliveryslip_entry_register"
+        t-lang="deliveryslip.partner_id.lang"
+      />
+    </t>
+  </template>
 </odoo>

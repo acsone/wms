@@ -1,16 +1,17 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <!-- Copyright 2020 ACSONE SA/NV
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
-
 <odoo noupdate="1">
-
-    <record id="alc_b2c_rest_api_user" model="res.users" context="{'no_reset_password': True}">
-        <field name="name">B2C REST API User</field>
-        <field name="login">alc_b2c_rest_api_user</field>
-        <field name="company_id" ref="base.main_company"/>
-         <!-- Avoid auto-including this user in any default group -->
-        <field name="groups_id" eval="[(6,0,[])]"/>
-        <field name="active" eval="0"/>
-    </record>
-
+  <record
+    id="alc_b2c_rest_api_user"
+    model="res.users"
+    context="{'no_reset_password': True}"
+  >
+    <field name="name">B2C REST API User</field>
+    <field name="login">alc_b2c_rest_api_user</field>
+    <field name="company_id" ref="base.main_company" />
+    <!-- Avoid auto-including this user in any default group -->
+    <field name="groups_id" eval="[(6,0,[])]" />
+    <field name="active" eval="0" />
+  </record>
 </odoo>

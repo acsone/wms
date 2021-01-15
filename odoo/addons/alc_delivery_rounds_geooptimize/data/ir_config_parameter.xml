@@ -1,10 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <!-- Copyright 2020 ACSONE SA/NV
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
-
 <odoo noupdate="1">
-     <record id="geo_optimization_resource_cfg" model="ir.config_parameter">
-        <field name="key">alc_delivery_rounds_geooptimize.geo_optimization_resource_cfg</field>
-        <field name="value">{"overtimePenalties": [10], "workEndTime": "20:00:00", "overtimeDurations": ["02:00:00"], "optimumStartTime": true}</field>
-    </record>
+  <record id="geo_optimization_resource_cfg" model="ir.config_parameter">
+    <field
+      name="key"
+    >alc_delivery_rounds_geooptimize.geo_optimization_resource_cfg</field>
+    <field
+      name="value"
+    >{"overtimePenalties": [10], "workEndTime": "20:00:00", "overtimeDurations": ["02:00:00"], "optimumStartTime": true}</field>
+  </record>
 </odoo>

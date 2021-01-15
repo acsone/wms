@@ -5,10 +5,12 @@
 import logging
 from datetime import date, timedelta
 
-import odoo.addons.decimal_precision as dp
 import pytz
+
 from odoo import api, fields, models
 from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT
+
+import odoo.addons.decimal_precision as dp
 
 _logger = logging.getLogger(__name__)
 

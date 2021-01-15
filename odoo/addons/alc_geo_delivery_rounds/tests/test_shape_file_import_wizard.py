@@ -4,10 +4,11 @@
 
 import base64
 
-from odoo.modules.module import get_resource_path
-from odoo.tests.common import TransactionCase
 from shapely.geometry.multipolygon import MultiPolygon
 from shapely.geometry.polygon import Polygon
+
+from odoo.modules.module import get_resource_path
+from odoo.tests.common import TransactionCase
 
 
 class TestShapeFileImportWizard(TransactionCase):

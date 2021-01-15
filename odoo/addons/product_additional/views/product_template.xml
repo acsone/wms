@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <record id="product_template_form_view" model="ir.ui.view">
-        <field name="name">product.template.form.view</field>
-        <field name="model">product.template</field>
-        <field name="inherit_id" ref="product.product_template_form_view"/>
-        <field name="arch" type="xml">
-            <xpath expr="//page[@name='sales']/group[@name='sale']" position="before">
-                <group name="additional_product" string="Additional product">
-                    <p>For <field name="ratio_main_product" class="oe_inline"/> products, <field name="ratio_additional_product" class="oe_inline"/> <field name="additional_product_id" class="oe_inline"/> given</p>
-                </group>
-            </xpath>
-        </field>
-    </record>
+  <record id="product_template_form_view" model="ir.ui.view">
+    <field name="name">product.template.form.view</field>
+    <field name="model">product.template</field>
+    <field name="inherit_id" ref="product.product_template_form_view" />
+    <field name="arch" type="xml">
+      <xpath expr="//page[@name='sales']/group[@name='sale']" position="before">
+        <group name="additional_product" string="Additional product">
+          <p>For <field name="ratio_main_product" class="oe_inline" /> products, <field
+              name="ratio_additional_product"
+              class="oe_inline"
+            /> <field name="additional_product_id" class="oe_inline" /> given</p>
+        </group>
+      </xpath>
+    </field>
+  </record>
 </odoo>

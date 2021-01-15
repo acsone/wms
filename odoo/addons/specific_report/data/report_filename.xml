@@ -1,14 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
   <data>
-
     <record id="sale.report_sale_order" model="ir.actions.report.xml">
       <field name="attachment">object.get_report_name()</field>
     </record>
-
     <record id="account.account_invoices" model="ir.actions.report.xml">
       <field name="attachment">object.get_report_name()</field>
     </record>
-
   </data>
 </odoo>

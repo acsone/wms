@@ -13,40 +13,46 @@ class RoundInstance(models.Model):
     _inherit = "round.instance"
 
     count_picking_available_total_ali = fields.Integer(
-        "Picking Available Total Aliment", compute="_get_count_picking", readonly=True
+        "Picking Available Total Aliment",
+        compute="_compute_count_picking",
+        readonly=True,
     )
     count_picking_done_total_ali = fields.Integer(
-        "Picking Done Total Aliment", compute="_get_count_picking", readonly=True
+        "Picking Done Total Aliment", compute="_compute_count_picking", readonly=True
     )
     count_picking_available_total_med = fields.Integer(
         "Picking Available Total Medicament",
-        compute="_get_count_picking",
+        compute="_compute_count_picking",
         readonly=True,
     )
     count_picking_done_total_med = fields.Integer(
-        "Picking Done Total Medicament", compute="_get_count_picking", readonly=True
+        "Picking Done Total Medicament", compute="_compute_count_picking", readonly=True
     )
     count_picking_available_total_frigo = fields.Integer(
-        "Picking Available Total Frigo", compute="_get_count_picking", readonly=True
+        "Picking Available Total Frigo", compute="_compute_count_picking", readonly=True
     )
     count_picking_done_total_frigo = fields.Integer(
-        "Picking Done Total Frigo", compute="_get_count_picking", readonly=True
+        "Picking Done Total Frigo", compute="_compute_count_picking", readonly=True
     )
     count_picking_available_total_mat = fields.Integer(
-        "Picking Available Total Materiel", compute="_get_count_picking", readonly=True
+        "Picking Available Total Materiel",
+        compute="_compute_count_picking",
+        readonly=True,
     )
     count_picking_done_total_mat = fields.Integer(
-        "Picking Done Total Materiel", compute="_get_count_picking", readonly=True
+        "Picking Done Total Materiel", compute="_compute_count_picking", readonly=True
     )
     count_picking_available_total_pharm = fields.Integer(
-        "Picking Available Total Pharmacie", compute="_get_count_picking", readonly=True
+        "Picking Available Total Pharmacie",
+        compute="_compute_count_picking",
+        readonly=True,
     )
     count_picking_done_total_pharm = fields.Integer(
-        "Picking Done Total Pharmacie", compute="_get_count_picking", readonly=True
+        "Picking Done Total Pharmacie", compute="_compute_count_picking", readonly=True
     )
 
     @api.depends("picking_ids")
-    def _get_count_picking(self):
+    def _compute_count_picking(self):
         query = """
             SELECT p.delivery_round_id, z.code,
             count(*) AS total,

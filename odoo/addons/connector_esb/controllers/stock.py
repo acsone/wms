@@ -5,8 +5,9 @@
 import logging
 
 from odoo import SUPERUSER_ID, http
-from odoo.addons.web.controllers.main import ensure_db
 from odoo.http import request
+
+from odoo.addons.web.controllers.main import ensure_db
 
 _logger = logging.getLogger(__name__)
 

@@ -3,8 +3,9 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import _, api, fields, models, tools
-from odoo.addons.server_environment import serv_config
 from odoo.http import request
+
+from odoo.addons.server_environment import serv_config
 
 
 class AlcB2CBackend(models.Model):

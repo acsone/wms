@@ -2,7 +2,7 @@
 # © 2017 Sylvain Van Hoof
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 from odoo import fields
-from odoo.exceptions import Warning
+from odoo.exceptions import UserError
 from odoo.tests.common import TransactionCase, at_install, post_install
 
 
@@ -114,7 +114,7 @@ class TestLotChecksum(TransactionCase):
         }
 
         # All checksum are assigned for this range (APA=>APD)
-        with self.assertRaises(Warning):
+        with self.assertRaises(UserError):
             self.env["stock.production.lot"].create(lot_values)
 
         # We will generate a new checksum with a product in the shelf APE

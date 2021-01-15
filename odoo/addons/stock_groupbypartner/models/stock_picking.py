@@ -67,7 +67,7 @@ class StockPicking(models.Model):
         return
 
     @api.multi
-    def _create_backorder(self, backorder_moves=[]):
+    def _create_backorder(self, backorder_moves=None):
         """ Take care of grouping by partner.
         Reuse the overriden method action_assign that search a good picking or
         create a new one.

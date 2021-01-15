@@ -1,22 +1,20 @@
-<?xml version="1.0"?>
+<?xml version="1.0" ?>
 <odoo>
-
-    <record id="view_product_putaway_form" model="ir.ui.view">
-        <field name="name">product.putaway.routefixedlocation</field>
-        <field name="model">product.putaway</field>
-        <field name="inherit_id" ref="stock.view_putaway"/>
-        <field name="arch" type="xml">
-            <xpath expr="//div/*[1]" position="before">
-                <separator string="Fixed Locations Per Routes"/>
-                <field name="route_location_ids" colspan="4" nolabel="1">
-                    <tree editable="top">
-                        <field name="sequence" widget='handle'/>
-                        <field name="route_id"/>
-                        <field name="fixed_location_id"/>
-                    </tree>
-                </field>
-            </xpath>
+  <record id="view_product_putaway_form" model="ir.ui.view">
+    <field name="name">product.putaway.routefixedlocation</field>
+    <field name="model">product.putaway</field>
+    <field name="inherit_id" ref="stock.view_putaway" />
+    <field name="arch" type="xml">
+      <xpath expr="//div/*[1]" position="before">
+        <separator string="Fixed Locations Per Routes" />
+        <field name="route_location_ids" colspan="4" nolabel="1">
+          <tree editable="top">
+            <field name="sequence" widget='handle' />
+            <field name="route_id" />
+            <field name="fixed_location_id" />
+          </tree>
         </field>
-    </record>
-
+      </xpath>
+    </field>
+  </record>
 </odoo>

@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <record id="csv_file_logger_view_form" model="ir.ui.view">
-        <field name="name">csv.file.logger.view.form</field>
-        <field name="model">csv.file.logger</field>
-        <field name="arch" type="xml">
-            <form string="Logger">
-                <group>
-                    <field name="date_start"/>
-                    <field name="date_end"/>
-                    <field name="state"/>
-                    <field name="nbr_lines"/>
-                    <field name="duration"/>
-                </group>
-                <separator for="message" string="Message"/>
-                <field name="message"/>
-            </form>
-        </field>
-    </record>
+  <record id="csv_file_logger_view_form" model="ir.ui.view">
+    <field name="name">csv.file.logger.view.form</field>
+    <field name="model">csv.file.logger</field>
+    <field name="arch" type="xml">
+      <form string="Logger">
+        <group>
+          <field name="date_start" />
+          <field name="date_end" />
+          <field name="state" />
+          <field name="nbr_lines" />
+          <field name="duration" />
+        </group>
+        <separator for="message" string="Message" />
+        <field name="message" />
+      </form>
+    </field>
+  </record>
 </odoo>

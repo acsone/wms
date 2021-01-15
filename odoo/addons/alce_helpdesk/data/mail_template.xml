@@ -1,134 +1,176 @@
 <odoo>
-    <!-- Message 01 -->
-    <record id="email_template_helpdesk_msg_1" model="mail.template">
-        <field name="name">01 - Article défectueux</field>
-        <field name="email_from">${object.user_id.email_formatted | safe}</field>
-        <field name="subject">${object.display_name}</field>
-        <field name="model_id" ref="helpdesk.model_helpdesk_ticket"/>
-        <field name="email_to">${('' if object.partner_id and object.sudo().partner_id.email and object.sudo().partner_id.email==object.partner_email else object.partner_email|safe)}</field>
-        <field name="partner_to">${object.partner_id and object.sudo().partner_id.email and object.sudo().partner_id.email==object.partner_email and object.sudo().partner_id.id or False}</field>
-        <field name="auto_delete" eval="False"/>
-        <field name="body_html" type="xml">
-<div style="max-width:600px; height:auto; margin-left:30px;">
-    <div style="margin-left:30px;align=center;">
+  <!-- Message 01 -->
+  <record id="email_template_helpdesk_msg_1" model="mail.template">
+    <field name="name">01 - Article défectueux</field>
+    <field name="email_from">${object.user_id.email_formatted | safe}</field>
+    <field name="subject">${object.display_name}</field>
+    <field name="model_id" ref="helpdesk.model_helpdesk_ticket" />
+    <field
+      name="email_to"
+    >${('' if object.partner_id and object.sudo().partner_id.email and object.sudo().partner_id.email==object.partner_email else object.partner_email|safe)}</field>
+    <field
+      name="partner_to"
+    >${object.partner_id and object.sudo().partner_id.email and object.sudo().partner_id.email==object.partner_email and object.sudo().partner_id.id or False}</field>
+    <field name="auto_delete" eval="False" />
+    <field name="body_html" type="xml">
+      <div style="max-width:600px; height:auto; margin-left:30px;">
+        <div style="margin-left:30px;align=center;">
         Dear ${object.sudo().partner_id.name or 'Madam, Sir'},
     </div>
-    <div style="margin-left:30px;align=center;" width="60%">
+        <div style="margin-left:30px;align=center;" width="60%">
         MESSAGE_01
-    </div><br />
-    <span style="margin-left:30px;font-weight:normal;">Thank you </span>
-    <span style="margin-left:30px;font-weight:normal;">${object.team_id.name or 'Helpdesk'} Team.</span>
-</div>
-        </field>
-    </record>
-    <!-- Message 02 -->
-    <record id="email_template_helpdesk_msg_2" model="mail.template">
-        <field name="name">02 - Quantité manquante</field>
-        <field name="email_from">${object.user_id.email_formatted | safe}</field>
-        <field name="subject">${object.display_name}</field>
-        <field name="model_id" ref="helpdesk.model_helpdesk_ticket"/>
-        <field name="email_to">${('' if object.partner_id and object.sudo().partner_id.email and object.sudo().partner_id.email==object.partner_email else object.partner_email|safe)}</field>
-        <field name="partner_to">${object.partner_id and object.sudo().partner_id.email and object.sudo().partner_id.email==object.partner_email and object.sudo().partner_id.id or False}</field>
-        <field name="auto_delete" eval="False"/>
-        <field name="body_html" type="xml">
-<div style="max-width:600px; height:auto; margin-left:30px;">
-    <div style="margin-left:30px;align=center;">
+    </div>
+        <br />
+        <span style="margin-left:30px;font-weight:normal;">Thank you </span>
+        <span
+          style="margin-left:30px;font-weight:normal;"
+        >${object.team_id.name or 'Helpdesk'} Team.</span>
+      </div>
+    </field>
+  </record>
+  <!-- Message 02 -->
+  <record id="email_template_helpdesk_msg_2" model="mail.template">
+    <field name="name">02 - Quantité manquante</field>
+    <field name="email_from">${object.user_id.email_formatted | safe}</field>
+    <field name="subject">${object.display_name}</field>
+    <field name="model_id" ref="helpdesk.model_helpdesk_ticket" />
+    <field
+      name="email_to"
+    >${('' if object.partner_id and object.sudo().partner_id.email and object.sudo().partner_id.email==object.partner_email else object.partner_email|safe)}</field>
+    <field
+      name="partner_to"
+    >${object.partner_id and object.sudo().partner_id.email and object.sudo().partner_id.email==object.partner_email and object.sudo().partner_id.id or False}</field>
+    <field name="auto_delete" eval="False" />
+    <field name="body_html" type="xml">
+      <div style="max-width:600px; height:auto; margin-left:30px;">
+        <div style="margin-left:30px;align=center;">
         Dear ${object.sudo().partner_id.name or 'Madam, Sir'},
     </div>
-    <div style="margin-left:30px;align=center;" width="60%">
+        <div style="margin-left:30px;align=center;" width="60%">
         MESSAGE_02
-    </div><br />
-    <span style="margin-left:30px;font-weight:normal;">Thank you </span>
-    <span style="margin-left:30px;font-weight:normal;">${object.team_id.name or 'Helpdesk'} Team.</span>
-</div>
-        </field>
-    </record>
-    <!-- Message 03 -->
-    <record id="email_template_helpdesk_msg_3" model="mail.template">
-        <field name="name">03 - Chaîne du froids non respectée</field>
-        <field name="email_from">${object.user_id.email_formatted | safe}</field>
-        <field name="subject">${object.display_name}</field>
-        <field name="model_id" ref="helpdesk.model_helpdesk_ticket"/>
-        <field name="email_to">${('' if object.partner_id and object.sudo().partner_id.email and object.sudo().partner_id.email==object.partner_email else object.partner_email|safe)}</field>
-        <field name="partner_to">${object.partner_id and object.sudo().partner_id.email and object.sudo().partner_id.email==object.partner_email and object.sudo().partner_id.id or False}</field>
-        <field name="auto_delete" eval="False"/>
-        <field name="body_html" type="xml">
-<div style="max-width:600px; height:auto; margin-left:30px;">
-    <div style="margin-left:30px;align=center;">
+    </div>
+        <br />
+        <span style="margin-left:30px;font-weight:normal;">Thank you </span>
+        <span
+          style="margin-left:30px;font-weight:normal;"
+        >${object.team_id.name or 'Helpdesk'} Team.</span>
+      </div>
+    </field>
+  </record>
+  <!-- Message 03 -->
+  <record id="email_template_helpdesk_msg_3" model="mail.template">
+    <field name="name">03 - Chaîne du froids non respectée</field>
+    <field name="email_from">${object.user_id.email_formatted | safe}</field>
+    <field name="subject">${object.display_name}</field>
+    <field name="model_id" ref="helpdesk.model_helpdesk_ticket" />
+    <field
+      name="email_to"
+    >${('' if object.partner_id and object.sudo().partner_id.email and object.sudo().partner_id.email==object.partner_email else object.partner_email|safe)}</field>
+    <field
+      name="partner_to"
+    >${object.partner_id and object.sudo().partner_id.email and object.sudo().partner_id.email==object.partner_email and object.sudo().partner_id.id or False}</field>
+    <field name="auto_delete" eval="False" />
+    <field name="body_html" type="xml">
+      <div style="max-width:600px; height:auto; margin-left:30px;">
+        <div style="margin-left:30px;align=center;">
         Dear ${object.sudo().partner_id.name or 'Madam, Sir'},
     </div>
-    <div style="margin-left:30px;align=center;" width="60%">
+        <div style="margin-left:30px;align=center;" width="60%">
         MESSAGE_03
-    </div><br />
-    <span style="margin-left:30px;font-weight:normal;">Thank you </span>
-    <span style="margin-left:30px;font-weight:normal;">${object.team_id.name or 'Helpdesk'} Team.</span>
-</div>
-        </field>
-    </record>
-    <!-- Message 04 -->
-    <record id="email_template_helpdesk_msg_4" model="mail.template">
-        <field name="name">04 - Date d'expiration proche</field>
-        <field name="email_from">${object.user_id.email_formatted | safe}</field>
-        <field name="subject">${object.display_name}</field>
-        <field name="model_id" ref="helpdesk.model_helpdesk_ticket"/>
-        <field name="email_to">${('' if object.partner_id and object.sudo().partner_id.email and object.sudo().partner_id.email==object.partner_email else object.partner_email|safe)}</field>
-        <field name="partner_to">${object.partner_id and object.sudo().partner_id.email and object.sudo().partner_id.email==object.partner_email and object.sudo().partner_id.id or False}</field>
-        <field name="auto_delete" eval="False"/>
-        <field name="body_html" type="xml">
-<div style="max-width:600px; height:auto; margin-left:30px;">
-    <div style="margin-left:30px;align=center;">
+    </div>
+        <br />
+        <span style="margin-left:30px;font-weight:normal;">Thank you </span>
+        <span
+          style="margin-left:30px;font-weight:normal;"
+        >${object.team_id.name or 'Helpdesk'} Team.</span>
+      </div>
+    </field>
+  </record>
+  <!-- Message 04 -->
+  <record id="email_template_helpdesk_msg_4" model="mail.template">
+    <field name="name">04 - Date d'expiration proche</field>
+    <field name="email_from">${object.user_id.email_formatted | safe}</field>
+    <field name="subject">${object.display_name}</field>
+    <field name="model_id" ref="helpdesk.model_helpdesk_ticket" />
+    <field
+      name="email_to"
+    >${('' if object.partner_id and object.sudo().partner_id.email and object.sudo().partner_id.email==object.partner_email else object.partner_email|safe)}</field>
+    <field
+      name="partner_to"
+    >${object.partner_id and object.sudo().partner_id.email and object.sudo().partner_id.email==object.partner_email and object.sudo().partner_id.id or False}</field>
+    <field name="auto_delete" eval="False" />
+    <field name="body_html" type="xml">
+      <div style="max-width:600px; height:auto; margin-left:30px;">
+        <div style="margin-left:30px;align=center;">
         Dear ${object.sudo().partner_id.name or 'Madam, Sir'},
     </div>
-    <div style="margin-left:30px;align=center;" width="60%">
+        <div style="margin-left:30px;align=center;" width="60%">
         MESSAGE_04
-    </div><br />
-    <span style="margin-left:30px;font-weight:normal;">Thank you </span>
-    <span style="margin-left:30px;font-weight:normal;">${object.team_id.name or 'Helpdesk'} Team.</span>
-</div>
-        </field>
-    </record>
-    <!-- Message 05 -->
-    <record id="email_template_helpdesk_msg_5" model="mail.template">
-        <field name="name">05 - Article périmé</field>
-        <field name="email_from">${object.user_id.email_formatted | safe}</field>
-        <field name="subject">${object.display_name}</field>
-        <field name="model_id" ref="helpdesk.model_helpdesk_ticket"/>
-        <field name="email_to">${('' if object.partner_id and object.sudo().partner_id.email and object.sudo().partner_id.email==object.partner_email else object.partner_email|safe)}</field>
-        <field name="partner_to">${object.partner_id and object.sudo().partner_id.email and object.sudo().partner_id.email==object.partner_email and object.sudo().partner_id.id or False}</field>
-        <field name="auto_delete" eval="False"/>
-        <field name="body_html" type="xml">
-<div style="max-width:600px; height:auto; margin-left:30px;">
-    <div style="margin-left:30px;align=center;">
+    </div>
+        <br />
+        <span style="margin-left:30px;font-weight:normal;">Thank you </span>
+        <span
+          style="margin-left:30px;font-weight:normal;"
+        >${object.team_id.name or 'Helpdesk'} Team.</span>
+      </div>
+    </field>
+  </record>
+  <!-- Message 05 -->
+  <record id="email_template_helpdesk_msg_5" model="mail.template">
+    <field name="name">05 - Article périmé</field>
+    <field name="email_from">${object.user_id.email_formatted | safe}</field>
+    <field name="subject">${object.display_name}</field>
+    <field name="model_id" ref="helpdesk.model_helpdesk_ticket" />
+    <field
+      name="email_to"
+    >${('' if object.partner_id and object.sudo().partner_id.email and object.sudo().partner_id.email==object.partner_email else object.partner_email|safe)}</field>
+    <field
+      name="partner_to"
+    >${object.partner_id and object.sudo().partner_id.email and object.sudo().partner_id.email==object.partner_email and object.sudo().partner_id.id or False}</field>
+    <field name="auto_delete" eval="False" />
+    <field name="body_html" type="xml">
+      <div style="max-width:600px; height:auto; margin-left:30px;">
+        <div style="margin-left:30px;align=center;">
         Dear ${object.sudo().partner_id.name or 'Madam, Sir'},
     </div>
-    <div style="margin-left:30px;align=center;" width="60%">
+        <div style="margin-left:30px;align=center;" width="60%">
         MESSAGE_05
-    </div><br />
-    <span style="margin-left:30px;font-weight:normal;">Thank you </span>
-    <span style="margin-left:30px;font-weight:normal;">${object.team_id.name or 'Helpdesk'} Team.</span>
-</div>
-        </field>
-    </record>
-    <!-- Message 06 -->
-    <record id="email_template_helpdesk_msg_6" model="mail.template">
-        <field name="name">06 - Article non commandé</field>
-        <field name="email_from">${object.user_id.email_formatted | safe}</field>
-        <field name="subject">${object.display_name}</field>
-        <field name="model_id" ref="helpdesk.model_helpdesk_ticket"/>
-        <field name="email_to">${('' if object.partner_id and object.sudo().partner_id.email and object.sudo().partner_id.email==object.partner_email else object.partner_email|safe)}</field>
-        <field name="partner_to">${object.partner_id and object.sudo().partner_id.email and object.sudo().partner_id.email==object.partner_email and object.sudo().partner_id.id or False}</field>
-        <field name="auto_delete" eval="False"/>
-        <field name="body_html" type="xml">
-<div style="max-width:600px; height:auto; margin-left:30px;">
-    <div style="margin-left:30px;align=center;">
+    </div>
+        <br />
+        <span style="margin-left:30px;font-weight:normal;">Thank you </span>
+        <span
+          style="margin-left:30px;font-weight:normal;"
+        >${object.team_id.name or 'Helpdesk'} Team.</span>
+      </div>
+    </field>
+  </record>
+  <!-- Message 06 -->
+  <record id="email_template_helpdesk_msg_6" model="mail.template">
+    <field name="name">06 - Article non commandé</field>
+    <field name="email_from">${object.user_id.email_formatted | safe}</field>
+    <field name="subject">${object.display_name}</field>
+    <field name="model_id" ref="helpdesk.model_helpdesk_ticket" />
+    <field
+      name="email_to"
+    >${('' if object.partner_id and object.sudo().partner_id.email and object.sudo().partner_id.email==object.partner_email else object.partner_email|safe)}</field>
+    <field
+      name="partner_to"
+    >${object.partner_id and object.sudo().partner_id.email and object.sudo().partner_id.email==object.partner_email and object.sudo().partner_id.id or False}</field>
+    <field name="auto_delete" eval="False" />
+    <field name="body_html" type="xml">
+      <div style="max-width:600px; height:auto; margin-left:30px;">
+        <div style="margin-left:30px;align=center;">
         Dear ${object.sudo().partner_id.name or 'Madam, Sir'},
     </div>
-    <div style="margin-left:30px;align=center;" width="60%">
+        <div style="margin-left:30px;align=center;" width="60%">
         MESSAGE_06
-    </div><br />
-    <span style="margin-left:30px;font-weight:normal;">Thank you </span>
-    <span style="margin-left:30px;font-weight:normal;">${object.team_id.name or 'Helpdesk'} Team.</span>
-</div>
-        </field>
-    </record>
+    </div>
+        <br />
+        <span style="margin-left:30px;font-weight:normal;">Thank you </span>
+        <span
+          style="margin-left:30px;font-weight:normal;"
+        >${object.team_id.name or 'Helpdesk'} Team.</span>
+      </div>
+    </field>
+  </record>
 </odoo>

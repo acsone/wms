@@ -1,14 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-    <record id="view_partner_form_inherit" model="ir.ui.view">
-        <field name="name">view.partner.form.inherit</field>
-        <field name="model">res.partner</field>
-        <field name="inherit_id" ref="specific_print.view_partner_form_inherit"/>
-        <field name="arch" type="xml">
-            <xpath expr="//group[@name='zetes']" position="inside">
-                <field name="is_passport_required" />
-            </xpath>
-        </field>
-    </record>
-
+  <record id="view_partner_form_inherit" model="ir.ui.view">
+    <field name="name">view.partner.form.inherit</field>
+    <field name="model">res.partner</field>
+    <field name="inherit_id" ref="specific_print.view_partner_form_inherit" />
+    <field name="arch" type="xml">
+      <xpath expr="//group[@name='zetes']" position="inside">
+        <field name="is_passport_required" />
+      </xpath>
+    </field>
+  </record>
 </odoo>

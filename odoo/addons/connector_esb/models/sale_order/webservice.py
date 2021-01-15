@@ -4,6 +4,7 @@
 
 
 from odoo import _, exceptions
+
 from odoo.addons.component.core import Component
 
 

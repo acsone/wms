@@ -1,24 +1,22 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-
-    <template id="report_saleorder_specific_document" inherit_id="sale.report_saleorder_document">
-
-        <!-- text() does not work with translation. Disabling it as for Alcyon, this report is anyway redefined in specific_sale
+  <template
+    id="report_saleorder_specific_document"
+    inherit_id="sale.report_saleorder_document"
+  >
+    <!-- text() does not work with translation. Disabling it as for Alcyon, this report is anyway redefined in specific_sale
         <xpath expr="//th[text()='Taxes']" position="after">
             <th class="text-right">Promotion</th>
             <th class="text-right">Discount</th>
         </xpath>
         -->
-
-        <xpath expr="//span[@t-field='l.price_subtotal']/parent::td" position="before">
-            <td class="text-right">
-                <span t-field="l.discount2"/>
-            </td>
-            <td class="text-right">
-                <span t-field="l.discount3"/>
-            </td>
-        </xpath>
-
-    </template>
-
+    <xpath expr="//span[@t-field='l.price_subtotal']/parent::td" position="before">
+      <td class="text-right">
+        <span t-field="l.discount2" />
+      </td>
+      <td class="text-right">
+        <span t-field="l.discount3" />
+      </td>
+    </xpath>
+  </template>
 </odoo>

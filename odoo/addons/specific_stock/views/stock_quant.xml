@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <record id="view_stock_quant_tree" model="ir.ui.view">
-        <field name="name">vendor</field>
-        <field name="model">stock.quant</field>
-        <field name="inherit_id" ref="stock_expired.view_stock_quant_expired_tree"/>
-        <field name="arch" type="xml">
-            <field name="product_id" position="after">
-                <field name="supplier_id"/>
-            </field>
-        </field>
-    </record>
+  <record id="view_stock_quant_tree" model="ir.ui.view">
+    <field name="name">vendor</field>
+    <field name="model">stock.quant</field>
+    <field name="inherit_id" ref="stock_expired.view_stock_quant_expired_tree" />
+    <field name="arch" type="xml">
+      <field name="product_id" position="after">
+        <field name="supplier_id" />
+      </field>
+    </field>
+  </record>
 </odoo>

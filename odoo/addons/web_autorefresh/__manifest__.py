@@ -26,6 +26,7 @@
     "summary": "This module use the auto_refresh field of OpenERP actions to "
     "set a time based refresh of views used on the actions.",
     "version": "10.0.1.0.0",
+    "license": "AGPL-3",
     "category": "web",
     "author": "aekroft@gmail.com",
     "contributor": "Jacques-Etienne Baudoux <je@bcim.be>",
@@ -35,6 +36,5 @@
         # 'web_calendar', 'web_graph', 'web_kanban',
     ],
     "data": ["assets.xml"],
-    "active": False,
     "installable": True,
 }

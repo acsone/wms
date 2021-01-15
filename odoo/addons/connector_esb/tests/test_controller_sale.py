@@ -4,9 +4,11 @@
 
 from copy import deepcopy
 
-from odoo.addons.connector_esb.controllers.sale import SaleController
-from odoo.tests.common import SavepointCase
 from werkzeug.exceptions import BadRequest
+
+from odoo.tests.common import SavepointCase
+
+from odoo.addons.connector_esb.controllers.sale import SaleController
 
 
 class ControllerSaleTestCase(SavepointCase):

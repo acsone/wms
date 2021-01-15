@@ -13,11 +13,11 @@ class AccountCutoff(models.Model):
     _inherit = "account.cutoff"
 
     @api.model
-    def _cron_cutoff_refund(self, type):
+    def _cron_cutoff_refund(self, type_):
         invoices = self.env["account.invoice"].search(
             [
                 ("state", "in", ("draft", "proforma2")),
-                ("type", "=", type),
+                ("type", "=", type_),
                 ("accrual_move_id", "=", False),
             ]
         )

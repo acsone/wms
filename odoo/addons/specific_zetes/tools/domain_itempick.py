@@ -2,6 +2,7 @@
 import logging
 
 from domain_interface import DomainInterface, Parameters, Savepoint
+
 from odoo import _
 
 from .. import constants

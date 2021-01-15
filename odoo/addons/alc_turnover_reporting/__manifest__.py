@@ -6,7 +6,7 @@
     "name": "Alc Turnover Reporting",
     "description": """
         Generate turnover reports""",
-    "version": "10",
+    "version": "10.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": ["account", "stock", "sale", "stock_delivery_note"],

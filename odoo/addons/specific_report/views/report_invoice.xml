@@ -1,401 +1,479 @@
 <odoo>
-
-    <template id="report_invoice_alcyon">
-        <div class="page">
-            <div id="left_header">
-                <table id="document_reference" class="border_table round_table">
-                    <tr>
-                        <td><span>Customer</span></td>
-                        <td><span>N° Document</span></td>
-                        <td><span>Date</span></td>
-                        <td><span>Due date</span></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <span t-field="partner.ref"/>
-                        </td>
-                        <td>
-                            <span t-field="invoice.number"/>
-                        </td>
-                        <td>
-                            <span t-field="invoice.date_invoice"/>
-                        </td>
-                        <td>
-                            <span t-field="invoice.date_due"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="4">
-                            <span>Your VAT number:</span>
-                            <span t-field="partner.vat"/>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-            <div id="partner_header">
-                <div t-field="invoice.partner_id" t-options='{"widget": "contact", "fields": ["name", "address"], "no_marker": True}'/>
-            </div>
-            <table id="products_table" class="round_table">
-                <thead>
-                    <tr>
-                        <th>Product<br/>reference</th>
-                        <th>Name</th>
-                        <th>Quantity</th>
-                        <th>Unit<br/>price</th>
-                        <th>%<br/>Supplier<br/>discount</th>
-                        <th>%<br/>Alcyon<br/>discount</th>
-                        <th>Subtotal<br/>price</th>
-                        <th>Taxes</th>
-                    </tr>
-                </thead>
-                <tbody class="invoice_tbody">
-                    <t t-foreach="invoice.get_lines_by_sale()" t-as="grouped_lines">
-                        <t t-set="sale" t-value="grouped_lines[0]"/>
-                        <t t-set="invoice_lines" t-value="grouped_lines[1]"/>
-
-                        <t t-if="sale">
-                            <tr><td/><td/><td/><td/><td/><td/><td/><td/></tr>
-                            <tr>
-                                <td colspan="8" class="sale_separator">
-                                    <div>
-                                        <span>Sales Order</span>
-                                        <span t-field="sale.name"/>
-                                        <t t-if="sale.suite_name">(<t t-esc="sale.suite_name"/>)</t>
-                                        <span>du</span>
-                                        <span t-field="sale.date_order_short"/>
-                                        <t t-if="sale.client_order_ref">(V Ref:<t t-esc="sale.client_order_ref"/>)</t>
-                                        <t t-if="sale.partner_id != invoice.partner_id">
-                                            <br/><br/>
-                                            <span>Customer</span>
-                                            <span t-esc="sale.partner_id.with_context(show_address=1).name_get()[0][1].replace('\n',' ; ')"/>
-                                        </t>
-                                        <t t-set="pickings" t-value="sale.picking_ids.filtered(lambda p: p.picking_type_code in ('incoming', 'outgoing') and p.state == 'done').sorted(lambda p: p.name, reverse=True)" />
-                                        <t t-if="pickings">
-                                            <span> - Delivery slip:</span>
-                                            <t t-foreach="pickings" t-as="picking">
-                                                <span t-field="picking.name" />
-                                            </t>
-                                        </t>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr><td/><td/><td/><td/><td/><td/><td/><td/></tr>
-                        </t>
-
-                        <t t-foreach="invoice_lines" t-as="line">
-                            <tr>
-                                <td>
-                                    <span t-field="line.product_id.default_code"/>
-                                </td>
-                                <td class="text-left">
-                                    <span t-field="line.name"/>
-                                </td>
-                                <td>
-                                    <span t-esc="int(line.quantity)"/>
-                                </td>
-                                <td>
-                                    <span t-field="line.price_unit" />
-                                </td>
-                                <td>
-                                    <span t-field="line.discount2"/>
-                                </td>
-                                <td>
-                                    <span t-field="line.discount3"/>
-                                </td>
-                                <td>
-                                    <span t-field="line.price_subtotal" />
-                                </td>
-                                <td>
-                                    <span t-esc="', '.join(map(lambda x: (x.description or x.name), line.only_tax_ids))"/>
-                                </td>
-                            </tr>
-                            <tr t-foreach="line.contribution_ids" t-as="contribution">
-                                <td></td>
-                                <td>
-                                    <span t-esc="contribution.description or contribution.name"/>
-                                </td>
-                                <td>
-                                    <span t-esc="int(line.quantity)"/>
-                                </td>
-                                <td>
-                                    <span t-field="contribution.amount" />
-                                </td>
-                                <td></td>
-                                <td></td>
-                                <td>
-                                    <span t-field="line.amount_contribution"/>
-                                </td>
-                                <td>
-                                    <span t-esc="', '.join(map(lambda x: (x.description or x.name), line.only_tax_ids))"/>
-                                </td>
-                            </tr>
-                        </t>
+  <template id="report_invoice_alcyon">
+    <div class="page">
+      <div id="left_header">
+        <table id="document_reference" class="border_table round_table">
+          <tr>
+            <td>
+              <span>Customer</span>
+            </td>
+            <td>
+              <span>N° Document</span>
+            </td>
+            <td>
+              <span>Date</span>
+            </td>
+            <td>
+              <span>Due date</span>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span t-field="partner.ref" />
+            </td>
+            <td>
+              <span t-field="invoice.number" />
+            </td>
+            <td>
+              <span t-field="invoice.date_invoice" />
+            </td>
+            <td>
+              <span t-field="invoice.date_due" />
+            </td>
+          </tr>
+          <tr>
+            <td colspan="4">
+              <span>Your VAT number:</span>
+              <span t-field="partner.vat" />
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div id="partner_header">
+        <div
+          t-field="invoice.partner_id"
+          t-options='{"widget": "contact", "fields": ["name", "address"], "no_marker": True}'
+        />
+      </div>
+      <table id="products_table" class="round_table">
+        <thead>
+          <tr>
+            <th>Product<br />reference</th>
+            <th>Name</th>
+            <th>Quantity</th>
+            <th>Unit<br />price</th>
+            <th>%<br />Supplier<br />discount</th>
+            <th>%<br />Alcyon<br />discount</th>
+            <th>Subtotal<br />price</th>
+            <th>Taxes</th>
+          </tr>
+        </thead>
+        <tbody class="invoice_tbody">
+          <t t-foreach="invoice.get_lines_by_sale()" t-as="grouped_lines">
+            <t t-set="sale" t-value="grouped_lines[0]" />
+            <t t-set="invoice_lines" t-value="grouped_lines[1]" />
+            <t t-if="sale">
+              <tr>
+                <td />
+                <td />
+                <td />
+                <td />
+                <td />
+                <td />
+                <td />
+                <td />
+              </tr>
+              <tr>
+                <td colspan="8" class="sale_separator">
+                  <div>
+                    <span>Sales Order</span>
+                    <span t-field="sale.name" />
+                    <t t-if="sale.suite_name">(<t t-esc="sale.suite_name" />)</t>
+                    <span>du</span>
+                    <span t-field="sale.date_order_short" />
+                    <t t-if="sale.client_order_ref">(V Ref:<t
+                        t-esc="sale.client_order_ref"
+                      />)</t>
+                    <t t-if="sale.partner_id != invoice.partner_id">
+                      <br />
+                      <br />
+                      <span>Customer</span>
+                      <span
+                        t-esc="sale.partner_id.with_context(show_address=1).name_get()[0][1].replace('\n',' ; ')"
+                      />
                     </t>
-                    <tr><td/><td/><td/><td/><td/><td/><td/><td/></tr>
-                    <t t-if="invoice.comment">
-                        <tr><td colspan="8" class="border_top white_space_pre_wrap"><span t-esc="invoice.comment"/></td></tr>
+                    <t
+                      t-set="pickings"
+                      t-value="sale.picking_ids.filtered(lambda p: p.picking_type_code in ('incoming', 'outgoing') and p.state == 'done').sorted(lambda p: p.name, reverse=True)"
+                    />
+                    <t t-if="pickings">
+                      <span> - Delivery slip:</span>
+                      <t t-foreach="pickings" t-as="picking">
+                        <span t-field="picking.name" />
+                      </t>
                     </t>
-                    <tr t-if="invoice.partner_id.country_id and invoice.partner_id.country_id.intrastat and invoice.partner_id.country_id != invoice.env.ref('base.be')">
-                        <td colspan="8" class="border_top">
-                            <table class="round_table intrastat_table">
-                                <tbody>
-                                    <tr>
-                                        <th class="text-right">Intrastat code</th>
-                                        <th class="text-right">Total weight</th>
-                                        <th class="text-right">Total net value</th>
-                                    </tr>
-                                </tbody>
-                                <tbody>
-                                    <tr t-foreach="invoice.get_instrastat_values()" t-as="line">
-                                        <td class="text-right"><span t-esc="line[0]" /></td>
-                                        <td class="text-right"><span t-esc="line[1]" /> Kg</td>
-                                        <td class="text-right"><span t-esc="line[2]" /> <span t-esc="invoice.currency_id.symbol"/></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <div class="m-5px"><strong><span t-field="invoice.fiscal_position_id.note"/></strong></div>
-                        </td>
-                    </tr>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td />
+                <td />
+                <td />
+                <td />
+                <td />
+                <td />
+                <td />
+                <td />
+              </tr>
+            </t>
+            <t t-foreach="invoice_lines" t-as="line">
+              <tr>
+                <td>
+                  <span t-field="line.product_id.default_code" />
+                </td>
+                <td class="text-left">
+                  <span t-field="line.name" />
+                </td>
+                <td>
+                  <span t-esc="int(line.quantity)" />
+                </td>
+                <td>
+                  <span t-field="line.price_unit" />
+                </td>
+                <td>
+                  <span t-field="line.discount2" />
+                </td>
+                <td>
+                  <span t-field="line.discount3" />
+                </td>
+                <td>
+                  <span t-field="line.price_subtotal" />
+                </td>
+                <td>
+                  <span
+                    t-esc="', '.join(map(lambda x: (x.description or x.name), line.only_tax_ids))"
+                  />
+                </td>
+              </tr>
+              <tr t-foreach="line.contribution_ids" t-as="contribution">
+                <td />
+                <td>
+                  <span t-esc="contribution.description or contribution.name" />
+                </td>
+                <td>
+                  <span t-esc="int(line.quantity)" />
+                </td>
+                <td>
+                  <span t-field="contribution.amount" />
+                </td>
+                <td />
+                <td />
+                <td>
+                  <span t-field="line.amount_contribution" />
+                </td>
+                <td>
+                  <span
+                    t-esc="', '.join(map(lambda x: (x.description or x.name), line.only_tax_ids))"
+                  />
+                </td>
+              </tr>
+            </t>
+          </t>
+          <tr>
+            <td />
+            <td />
+            <td />
+            <td />
+            <td />
+            <td />
+            <td />
+            <td />
+          </tr>
+          <t t-if="invoice.comment">
+            <tr>
+              <td colspan="8" class="border_top white_space_pre_wrap">
+                <span t-esc="invoice.comment" />
+              </td>
+            </tr>
+          </t>
+          <tr
+            t-if="invoice.partner_id.country_id and invoice.partner_id.country_id.intrastat and invoice.partner_id.country_id != invoice.env.ref('base.be')"
+          >
+            <td colspan="8" class="border_top">
+              <table class="round_table intrastat_table">
+                <tbody>
+                  <tr>
+                    <th class="text-right">Intrastat code</th>
+                    <th class="text-right">Total weight</th>
+                    <th class="text-right">Total net value</th>
+                  </tr>
                 </tbody>
-            </table>
-
-            <p><br/></p>
-            <div class="avoid_break">
-                <p id="sale_condition" t-field="company.invoice_terms_conditions"/>
-                <table id="total_table" class="border_table round_table">
-
-                    <tr>
-                        <td>Totals</td>
-                        <td>
-                            <span>Gross<br/>amount</span>
-                            <span t-field="invoice.amount_without_discount"/>
-                        </td>
-                        <td>
-                            <span>Base<br/>discount</span>
-                            <span t-field="invoice.amount_supplier_discount"/>
-                        </td>
-                        <td>
-                            <span>Alcyon<br/>discount</span>
-                            <span t-field="invoice.amount_alcyon_discount"/>
-                        </td>
-                        <td>
-                            <span>Untaxed<br/>amount</span>
-                            <span t-field="invoice.amount_untaxed_with_contribution"/>
-                        </td>
-                        <td>
-                            <span>Total<br/>APB</span>
-                            <span t-field="invoice.amount_apb"/>
-                        </td>
-                        <td>
-                            <span>Total<br/>Antibiotics</span>
-                            <span t-field="invoice.amount_antibiotics"/>
-                        </td>
-                        <td>
-                            <span>Total<br/>tax</span>
-                            <span t-field="invoice.amount_only_tax"/>
-                        </td>
-                        <td t-if="invoice.type != 'out_refund'">
-                            <span>Total<br/>amount</span>
-                            <strong t-field="invoice.amount_total"/>
-                        </td>
-                        <td t-if="invoice.type == 'out_refund'">
-                            <span>Total<br/>refund</span>
-                            <strong t-field="invoice.amount_total"/>
-                        </td>
-                    </tr>
-                </table>
-                <div>
-                    <table id="summary_table" class="round_table">
-                        <tr>
-                            <td colspan="4" class="pl-5px">
-                                <span>SUMMARY</span>
-                                <br/>
-                                <span>Total discount:</span>
-                                <span t-field="invoice.amount_discount_total"/><br/>
-                                <span class="font-xxs" t-field="invoice.fiscal_position_id.note"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Base taxable</td>
-                            <td>Rate</td>
-                            <td>VAT Amount</td>
-                        </tr>
-                        <t t-if="len(invoice.invoice_only_tax_ids) &lt; 4">
-                            <t t-foreach="range(3 - len(invoice.invoice_only_tax_ids))" t-as="idx">
-                                <tr>
-                                    <td/>
-                                    <td/>
-                                    <td/>
-                                </tr>
-                            </t>
-                        </t>
-
-                        <t t-foreach="invoice.invoice_only_tax_ids" t-as="tax_line">
-                            <tr>
-                                <td>
-                                    <span t-field="tax_line.base"/>
-                                </td>
-                                <td>
-                                    <span t-esc="'%.2f' % (tax_line.tax_id.amount)"/>
-                                </td>
-                                <td>
-                                    <span t-field="tax_line.amount"/>
-                                </td>
-                            </tr>
-                        </t>
-                    </table>
-
-                    <table id="bank_table" class="round_table">
-                        <t t-set="bank_cbc" t-value="invoice.env['account.journal'].search([('code', '=', 'BNK1')])"/>
-                        <t t-set="bank_ing" t-value="invoice.env['account.journal'].search([('code', '=', 'BNK2')])"/>
-                        <t t-set="bank_dexia" t-value="invoice.env['account.journal'].search([('code', '=', 'BNK3')])"/>
-                        <t t-set="bank_bnp" t-value="invoice.env['account.journal'].search([('code', '=', 'BNK4')])"/>
-                        <t t-if="invoice.payment_mode_description">
-                        <tr> 
-                            <td colspan="2">
-                                <span t-esc="invoice.payment_mode_description"/>
-                            </td>
-                        </tr>
-                        </t>
-                        <t t-else="">
-                        <tr>
-                            <td colspan="2" t-if="invoice.type == 'out_invoice'">
-                                <t>Reference for your payment</t>
-                                <br/>
-                                <strong t-field="invoice.reference"/>
-                            </td>
-                        </tr>
-                       <tr>
-                            <td>
+                <tbody>
+                  <tr t-foreach="invoice.get_instrastat_values()" t-as="line">
+                    <td class="text-right">
+                      <span t-esc="line[0]" />
+                    </td>
+                    <td class="text-right"><span t-esc="line[1]" /> Kg</td>
+                    <td class="text-right">
+                      <span t-esc="line[2]" />
+                      <span t-esc="invoice.currency_id.symbol" />
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="m-5px">
+                <strong>
+                  <span t-field="invoice.fiscal_position_id.note" />
+                </strong>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        <br />
+      </p>
+      <div class="avoid_break">
+        <p id="sale_condition" t-field="company.invoice_terms_conditions" />
+        <table id="total_table" class="border_table round_table">
+          <tr>
+            <td>Totals</td>
+            <td>
+              <span>Gross<br />amount</span>
+              <span t-field="invoice.amount_without_discount" />
+            </td>
+            <td>
+              <span>Base<br />discount</span>
+              <span t-field="invoice.amount_supplier_discount" />
+            </td>
+            <td>
+              <span>Alcyon<br />discount</span>
+              <span t-field="invoice.amount_alcyon_discount" />
+            </td>
+            <td>
+              <span>Untaxed<br />amount</span>
+              <span t-field="invoice.amount_untaxed_with_contribution" />
+            </td>
+            <td>
+              <span>Total<br />APB</span>
+              <span t-field="invoice.amount_apb" />
+            </td>
+            <td>
+              <span>Total<br />Antibiotics</span>
+              <span t-field="invoice.amount_antibiotics" />
+            </td>
+            <td>
+              <span>Total<br />tax</span>
+              <span t-field="invoice.amount_only_tax" />
+            </td>
+            <td t-if="invoice.type != 'out_refund'">
+              <span>Total<br />amount</span>
+              <strong t-field="invoice.amount_total" />
+            </td>
+            <td t-if="invoice.type == 'out_refund'">
+              <span>Total<br />refund</span>
+              <strong t-field="invoice.amount_total" />
+            </td>
+          </tr>
+        </table>
+        <div>
+          <table id="summary_table" class="round_table">
+            <tr>
+              <td colspan="4" class="pl-5px">
+                <span>SUMMARY</span>
+                <br />
+                <span>Total discount:</span>
+                <span t-field="invoice.amount_discount_total" />
+                <br />
+                <span class="font-xxs" t-field="invoice.fiscal_position_id.note" />
+              </td>
+            </tr>
+            <tr>
+              <td>Base taxable</td>
+              <td>Rate</td>
+              <td>VAT Amount</td>
+            </tr>
+            <t t-if="len(invoice.invoice_only_tax_ids) &lt; 4">
+              <t t-foreach="range(3 - len(invoice.invoice_only_tax_ids))" t-as="idx">
+                <tr>
+                  <td />
+                  <td />
+                  <td />
+                </tr>
+              </t>
+            </t>
+            <t t-foreach="invoice.invoice_only_tax_ids" t-as="tax_line">
+              <tr>
+                <td>
+                  <span t-field="tax_line.base" />
+                </td>
+                <td>
+                  <span t-esc="'%.2f' % (tax_line.tax_id.amount)" />
+                </td>
+                <td>
+                  <span t-field="tax_line.amount" />
+                </td>
+              </tr>
+            </t>
+          </table>
+          <table id="bank_table" class="round_table">
+            <t
+              t-set="bank_cbc"
+              t-value="invoice.env['account.journal'].search([('code', '=', 'BNK1')])"
+            />
+            <t
+              t-set="bank_ing"
+              t-value="invoice.env['account.journal'].search([('code', '=', 'BNK2')])"
+            />
+            <t
+              t-set="bank_dexia"
+              t-value="invoice.env['account.journal'].search([('code', '=', 'BNK3')])"
+            />
+            <t
+              t-set="bank_bnp"
+              t-value="invoice.env['account.journal'].search([('code', '=', 'BNK4')])"
+            />
+            <t t-if="invoice.payment_mode_description">
+              <tr>
+                <td colspan="2">
+                  <span t-esc="invoice.payment_mode_description" />
+                </td>
+              </tr>
+            </t>
+            <t t-else="">
+              <tr>
+                <td colspan="2" t-if="invoice.type == 'out_invoice'">
+                  <t>Reference for your payment</t>
+                  <br />
+                  <strong t-field="invoice.reference" />
+                </td>
+              </tr>
+              <tr>
+                <td>
                                 CBC:
-                                <span t-esc="bank_cbc.bank_acc_number"/>
-                                <br/>
+                                <span t-esc="bank_cbc.bank_acc_number" />
+                                <br />
                                 BIC:
-                                <span t-esc="bank_cbc.bank_id.bic"/>
+                                <span t-esc="bank_cbc.bank_id.bic" />
                             </td>
-                            <td>
+                <td>
                                 ING:
-                                <span t-esc="bank_ing.bank_acc_number"/>
-                                <br/>
+                                <span t-esc="bank_ing.bank_acc_number" />
+                                <br />
                                 BIC:
-                                <span t-esc="bank_ing.bank_id.bic"/>
+                                <span t-esc="bank_ing.bank_id.bic" />
                             </td>
-                        </tr>
-                        <tr>
-                            <td>
+              </tr>
+              <tr>
+                <td>
                                 DEXIA:
-                                <span t-esc="bank_dexia.bank_acc_number"/>
-                                <br/>
+                                <span t-esc="bank_dexia.bank_acc_number" />
+                                <br />
                                 BIC:
-                                <span t-esc="bank_dexia.bank_id.bic"/>
+                                <span t-esc="bank_dexia.bank_id.bic" />
                             </td>
-                            <td>
+                <td>
                                 BNP PARIBAS FORTIS :
-                                <span t-esc="bank_bnp.bank_acc_number"/>
-                                <br/>
+                                <span t-esc="bank_bnp.bank_acc_number" />
+                                <br />
                                 BIC:
-                                <span t-esc="bank_bnp.bank_id.bic"/>
+                                <span t-esc="bank_bnp.bank_id.bic" />
                             </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2" t-if="invoice.type == 'out_invoice'">
-                                <span t-if="invoice.payment_mode_id and invoice.payment_mode_id.payment_method_id.code == 'sepa_direct_debit'"
-                                    t-field="invoice.payment_mode_id.name"/>
-                                <span>Due date</span> <strong t-field="invoice.date_due"/>
-                            </td>
-                        </tr>
-                    </t>
-                    </table>
-                </div>
-            </div>
+              </tr>
+              <tr>
+                <td colspan="2" t-if="invoice.type == 'out_invoice'">
+                  <span
+                    t-if="invoice.payment_mode_id and invoice.payment_mode_id.payment_method_id.code == 'sepa_direct_debit'"
+                    t-field="invoice.payment_mode_id.name"
+                  />
+                  <span>Due date</span>
+                  <strong t-field="invoice.date_due" />
+                </td>
+              </tr>
+            </t>
+          </table>
         </div>
-    </template>
-
-    <template id="report_invoice">
-        <t t-call="report.html_container">
-            <t t-set="company" t-value="res_company.with_context({'lang': invoice.partner_id.lang})"/>
-            <t t-set="invoice" t-value="invoice.with_context({'lang': invoice.partner_id.lang})"/>
-            <t t-set="partner" t-value="invoice.partner_id"/>
-
-            <t t-foreach="range(partner.invoice_amount_copy+1)" t-as="duplicata">
-            <div class="header">
-                <div class="indicator_left">_</div>
-                <div class="indicator_right">_</div>
-
-                <div>
-                    <div class="logo">
-                        <img t-if="company.logo"
-                             t-att-src="'data:image/png;base64,%s' % company.logo"/>
-                    </div>
-                    <div class="main_title">
-                        <div t-if="invoice.type == 'out_invoice'">
-                            <span t-if="invoice.state in ('open', 'paid')">Invoice</span>
-                            <span t-if="invoice.state == 'proforma2'">PRO-FORMA</span>
-                            <span t-if="invoice.state == 'draft'">Draft Invoice</span>
-                            <span t-if="invoice.state == 'cancel'">Canceled Invoice</span>
-                        </div>
-                        <div t-if="invoice.type == 'out_refund'">
-                            <span t-if="invoice.state in ('open', 'paid')">Refund</span>
-                            <span t-if="invoice.state == 'proforma2'">PRO-FORMA</span>
-                            <span t-if="invoice.state == 'draft'">Draft Credit Note</span>
-                            <span t-if="invoice.state == 'cancel'">Canceled Refund</span>
-                        </div>
-                        <span t-if="duplicata">DUPLICATA</span>
-                        <span t-if="invoice.type == 'in_refund'">Vendor Refund</span>
-                        <span t-if="invoice.type == 'in_invoice'">Vendor Bill</span>
-                    </div>
-                </div>
+      </div>
+    </div>
+  </template>
+  <template id="report_invoice">
+    <t t-call="report.html_container">
+      <t
+        t-set="company"
+        t-value="res_company.with_context({'lang': invoice.partner_id.lang})"
+      />
+      <t
+        t-set="invoice"
+        t-value="invoice.with_context({'lang': invoice.partner_id.lang})"
+      />
+      <t t-set="partner" t-value="invoice.partner_id" />
+      <t t-foreach="range(partner.invoice_amount_copy+1)" t-as="duplicata">
+        <div class="header">
+          <div class="indicator_left">_</div>
+          <div class="indicator_right">_</div>
+          <div>
+            <div class="logo">
+              <img
+                t-if="company.logo"
+                t-att-src="'data:image/png;base64,%s' % company.logo"
+              />
             </div>
-
-            <t t-call="specific_report.report_invoice_alcyon" t-lang="partner.lang"/>
-
+            <div class="main_title">
+              <div t-if="invoice.type == 'out_invoice'">
+                <span t-if="invoice.state in ('open', 'paid')">Invoice</span>
+                <span t-if="invoice.state == 'proforma2'">PRO-FORMA</span>
+                <span t-if="invoice.state == 'draft'">Draft Invoice</span>
+                <span t-if="invoice.state == 'cancel'">Canceled Invoice</span>
+              </div>
+              <div t-if="invoice.type == 'out_refund'">
+                <span t-if="invoice.state in ('open', 'paid')">Refund</span>
+                <span t-if="invoice.state == 'proforma2'">PRO-FORMA</span>
+                <span t-if="invoice.state == 'draft'">Draft Credit Note</span>
+                <span t-if="invoice.state == 'cancel'">Canceled Refund</span>
+              </div>
+              <span t-if="duplicata">DUPLICATA</span>
+              <span t-if="invoice.type == 'in_refund'">Vendor Refund</span>
+              <span t-if="invoice.type == 'in_invoice'">Vendor Bill</span>
+            </div>
+          </div>
+        </div>
+        <t t-call="specific_report.report_invoice_alcyon" t-lang="partner.lang" />
         <div class="footer">
-            <div style="padding-top: 3mm;">
-                <div style="border-top: 1px solid black;">
-                    <span t-field="company.street"/>,
-                    <span t-field="company.zip"/>
-                    <span t-field="company.city"/>
+          <div style="padding-top: 3mm;">
+            <div style="border-top: 1px solid black;">
+                    <span t-field="company.street" />,
+                    <span t-field="company.zip" />
+                    <span t-field="company.city" />
                     -
-                    <span t-field="company.country_id"/>
+                    <span t-field="company.country_id" />
                     |
                     <span>Phone:</span>
-                    <span t-field="company.phone"/>
+                    <span t-field="company.phone" />
                     |
                     <span>Fax:</span>
-                    <span t-field="company.fax"/>
-                    <br/>
+                    <span t-field="company.fax" />
+                    <br />
                     <span>Email:</span>
-                    <span t-field="company.email"/>
+                    <span t-field="company.email" />
                     |
                     <span>For commands;</span>
                     <span>Phone:</span>
-                    <span t-field="company.order_phone"/>
+                    <span t-field="company.order_phone" />
                     -
                     <span>Fax:</span>
-                    <span t-field="company.order_fax"/>
-                    <br/>
+                    <span t-field="company.order_fax" />
+                    <br />
                     <div style="width: 50%; float: left">
-                        <span>RPM Liège division Huy - TVA</span>
-                        <span t-field="company.vat"/>
-                    </div>
-                    <span t-field="invoice.number"/>
+                <span>RPM Liège division Huy - TVA</span>
+                <span t-field="company.vat" />
+              </div>
+                    <span t-field="invoice.number" />
                     -
-                    <span t-field="invoice.date_invoice"/>
+                    <span t-field="invoice.date_invoice" />
                     <div style="width: 50%; float: right; text-align: right">
-                        Page: <span class="page"/> / <span class="topage"/>
+                        Page: <span class="page" /> / <span class="topage" />
                     </div>
                 </div>
-            </div>
+          </div>
         </div>
-            </t>
-        </t>
-    </template>
-
-    <template id="account.report_invoice">
-        <t t-call="report.html_container">
-            <t t-foreach="docs" t-as="invoice">
-                <t t-call="specific_report.report_invoice" t-lang="invoice.partner_id.lang"/>
-            </t>
-        </t>
-    </template>
+      </t>
+    </t>
+  </template>
+  <template id="account.report_invoice">
+    <t t-call="report.html_container">
+      <t t-foreach="docs" t-as="invoice">
+        <t t-call="specific_report.report_invoice" t-lang="invoice.partner_id.lang" />
+      </t>
+    </t>
+  </template>
 </odoo>

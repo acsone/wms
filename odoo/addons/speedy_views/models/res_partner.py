@@ -13,7 +13,6 @@ class ResPartner(models.Model):
     @api.model_cr
     def init(self):
         trgm_installed = install_trgm_extension(self.env)
-        self.env.cr.commit()
 
         if trgm_installed:
             for field in ("name", "email", "display_name", "ref"):

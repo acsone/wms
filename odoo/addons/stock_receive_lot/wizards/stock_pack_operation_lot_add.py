@@ -21,23 +21,23 @@ class StockPackOperationLotAdd(models.TransientModel):
     location_op_dest_id = fields.Many2one(
         "stock.location",
         "Operation Destination View Location",
-        compute="_get_location_op_dest_id",
+        compute="_compute_location_op_dest_id",
     )
     location_dest_id = fields.Many2one("stock.location", "Destination Location")
 
-    lot_required = fields.Boolean("Lot Required", compute="_get_lot_required")
+    lot_required = fields.Boolean("Lot Required", compute="_compute_lot_required")
     product_qty = fields.Float(related="operation_id.product_qty", readonly=True)
     product_uom_id = fields.Many2one(
         "product.uom", related="operation_id.product_uom_id", readonly=True
     )
-    remaining_qty = fields.Float("Qty Remaining", compute="_get_remaining_qty")
+    remaining_qty = fields.Float("Qty Remaining", compute="_compute_remaining_qty")
     qty = fields.Float("Qty Done")
     is_qty_exceeded = fields.Boolean(compute="_compute_is_qty_exceeded")
     is_surplus_qty_confirmed = fields.Boolean("Confirm received more than expected")
     life_date_char = fields.Char(string="Expiration date (input)")
     life_date = fields.Datetime(string="Expiration date")
     is_removal_date_expired = fields.Boolean(
-        "Removal Date Expired", compute="_get_is_removal_date_expired"
+        "Removal Date Expired", compute="_compute_is_removal_date_expired"
     )
     lot_name = fields.Char("Lot Name")
     lot_id = fields.Many2one("stock.production.lot", "Lot")
@@ -80,23 +80,23 @@ class StockPackOperationLotAdd(models.TransientModel):
         self.lot_name = False
         self.qty = 0
 
-    @api.one
     @api.depends("operation_id")
-    def _get_location_op_dest_id(self):
-        loc = self.operation_id.location_dest_id
-        while loc and not loc.act_as_view:
-            loc = loc.location_id
-        self.location_op_dest_id = loc.id
+    def _compute_location_op_dest_id(self):
+        for rec in self:
+            loc = rec.operation_id.location_dest_id
+            while loc and not loc.act_as_view:
+                loc = loc.location_id
+            rec.location_op_dest_id = loc.id
 
     @api.depends("operation_id")
-    @api.one
-    def _get_lot_required(self):
-        self.lot_required = self.operation_id.product_id.tracking != "none"
+    def _compute_lot_required(self):
+        for rec in self:
+            rec.lot_required = rec.operation_id.product_id.tracking != "none"
 
     @api.depends("operation_id.qty_done")
-    @api.one
-    def _get_remaining_qty(self):
-        self.remaining_qty = self.operation_id.product_qty - self.operation_id.qty_done
+    def _compute_remaining_qty(self):
+        for rec in self:
+            rec.remaining_qty = rec.operation_id.product_qty - rec.operation_id.qty_done
 
     @api.onchange("qty")
     def _onchange_qty(self):

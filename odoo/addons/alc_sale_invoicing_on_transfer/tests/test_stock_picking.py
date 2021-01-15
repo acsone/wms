@@ -4,8 +4,9 @@
 
 import logging
 
-from odoo.addons.queue_job.job import Job
 from odoo.tests.common import SavepointCase
+
+from odoo.addons.queue_job.job import Job
 
 
 class TestStockPicking(SavepointCase):

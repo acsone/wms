@@ -5,6 +5,7 @@
 from collections import OrderedDict, namedtuple
 
 from odoo import _
+
 from odoo.addons.report_xlsx_helper.report.abstract_report_xlsx import (
     AbstractReportXlsx,
 )

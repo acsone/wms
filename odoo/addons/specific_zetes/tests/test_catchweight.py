@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 from datetime import datetime
 
+import mock
 from dateutil.relativedelta import relativedelta
 
-import mock
 from odoo import fields
 from odoo.tools import mute_logger
 

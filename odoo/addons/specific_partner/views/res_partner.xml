@@ -1,162 +1,185 @@
 <odoo>
-
-    <record id="view_partner_address_form" model="ir.ui.view">
-        <field name="model">res.partner</field>
-        <field name="inherit_id" ref="base.view_partner_address_form"/>
-        <field name="arch" type="xml">
-            <field name="type" position="after">
-                <field name="type_delivery" attrs="{'invisible': [('type', '!=', 'invoice')]}"/>
-            </field>
-        </field>
-    </record>
-
-    <record id="view_partner_simple_form" model="ir.ui.view">
-        <field name="model">res.partner</field>
-        <field name="inherit_id" ref="account.view_partner_property_form"/>
-        <field name="arch" type="xml">
-
-            <group name="fiscal_information" position="inside">
-                <field name="legal_entity_id" attrs="{'invisible': [('company_type', '=', 'person')]}"/>
-            </group>
-        </field>
-    </record>
-
-    <record id="view_res_partner_specific_tree" model="ir.ui.view">
-      <field name="name">res.partner.specific.tree</field>
-      <field name="model">res.partner</field>
-        <field name="inherit_id" ref="base.view_partner_tree"/>
-        <field name="arch" type="xml">
-            <field name="display_name" position="after">
-                <field name="suite"/>
-                <field name="ref"/>
-                <field name="customer"/>
-                <field name="supplier"/>
-                <field name="type_name"/>
-                <field name="city"/>
-            </field>
-        </field>
-    </record>
-
-    <record id="view_res_partner_specific_filter" model="ir.ui.view">
-        <field name="name">res.partner.specific.select</field>
-        <field name="model">res.partner</field>
-        <field name="inherit_id" ref="base.view_res_partner_filter"/>
-        <field name="arch" type="xml">
-            <xpath expr="//filter[@name='customer']" position="attributes">
-                <attribute name="domain">[('customer','=',1)]</attribute>
-            </xpath>
-            <xpath expr="//filter[@name='supplier']" position="attributes">
-                <attribute name="domain">[('supplier','=',1)]</attribute>
-            </xpath>
-            <field name="category_id" position="before">
-                <field name="call_name"/>
-                <field name="city"/>
-                <field name="vat"/>
-            </field>
-            <!-- Add call_name in the default search on name -->
-            <field name="name" position="attributes">
-                <attribute name="filter_domain">
+  <record id="view_partner_address_form" model="ir.ui.view">
+    <field name="model">res.partner</field>
+    <field name="inherit_id" ref="base.view_partner_address_form" />
+    <field name="arch" type="xml">
+      <field name="type" position="after">
+        <field
+          name="type_delivery"
+          attrs="{'invisible': [('type', '!=', 'invoice')]}"
+        />
+      </field>
+    </field>
+  </record>
+  <record id="view_partner_simple_form" model="ir.ui.view">
+    <field name="model">res.partner</field>
+    <field name="inherit_id" ref="account.view_partner_property_form" />
+    <field name="arch" type="xml">
+      <group name="fiscal_information" position="inside">
+        <field
+          name="legal_entity_id"
+          attrs="{'invisible': [('company_type', '=', 'person')]}"
+        />
+      </group>
+    </field>
+  </record>
+  <record id="view_res_partner_specific_tree" model="ir.ui.view">
+    <field name="name">res.partner.specific.tree</field>
+    <field name="model">res.partner</field>
+    <field name="inherit_id" ref="base.view_partner_tree" />
+    <field name="arch" type="xml">
+      <field name="display_name" position="after">
+        <field name="suite" />
+        <field name="ref" />
+        <field name="customer" />
+        <field name="supplier" />
+        <field name="type_name" />
+        <field name="city" />
+      </field>
+    </field>
+  </record>
+  <record id="view_res_partner_specific_filter" model="ir.ui.view">
+    <field name="name">res.partner.specific.select</field>
+    <field name="model">res.partner</field>
+    <field name="inherit_id" ref="base.view_res_partner_filter" />
+    <field name="arch" type="xml">
+      <xpath expr="//filter[@name='customer']" position="attributes">
+        <attribute name="domain">[('customer','=',1)]</attribute>
+      </xpath>
+      <xpath expr="//filter[@name='supplier']" position="attributes">
+        <attribute name="domain">[('supplier','=',1)]</attribute>
+      </xpath>
+      <field name="category_id" position="before">
+        <field name="call_name" />
+        <field name="city" />
+        <field name="vat" />
+      </field>
+      <!-- Add call_name in the default search on name -->
+      <field name="name" position="attributes">
+        <attribute name="filter_domain">
                   ['|','|','|',('display_name','ilike',self),('ref','=',self),('email','ilike',self),('call_name','ilike',self)]
                 </attribute>
-            </field>
-        </field>
-    </record>
-
-    <record id="view_partner_form" model="ir.ui.view">
-      <field name="model">res.partner</field>
-      <field name="inherit_id" ref="base.view_partner_form"/>
-      <field name="arch" type="xml">
-        <field name="type" position="after">
-            <field name="type_delivery" attrs="{'invisible': [('type', '!=', 'invoice')]}"/>
-        </field>
-        <xpath expr="//field[@name='child_ids']/form//field[@name='type']" position="after">
-            <field name="type_delivery" attrs="{'invisible': [('type', '!=', 'invoice')]}"/>
-            <label for="type_delivery" attrs="{'invisible': [('type', '!=', 'invoice')]}"/>
-        </xpath>
-        <xpath expr="//field[@name='type']" position="attributes">
-            <attribute name="attrs" eval="{}"/>
-            <attribute name="groups"/>
-        </xpath>
-        <field name="ref" position="attributes">
-          <attribute name="attrs">{'readonly': True}</attribute>
-        </field>
-        <!-- Set required fields for client address of type invoicing and delivery -->
-        <!-- As to have coherent data to export to the esb -->
-        <xpath expr="//div[@name='div_address']/field[@name='street']" position="attributes">
-          <attribute name="attrs">{'required': [('customer', '=', True), ('type', 'in', ['invoice', 'delivery'])]}</attribute>
-        </xpath>
-        <xpath expr="//div[@name='div_address']/field[@name='zip']" position="attributes">
-          <attribute name="attrs">{'required': [('customer', '=', True), ('type', 'in', ['invoice', 'delivery'])]}</attribute>
-        </xpath>
-        <xpath expr="//div[@name='div_address']/field[@name='country_id']" position="attributes">
-          <attribute name="attrs">{'required': [('customer', '=', True), ('type', 'in', ['invoice', 'delivery'])]}</attribute>
-        </xpath>
-        <xpath expr="//div[@name='div_address']/field[@name='city']" position="attributes">
-          <attribute name="attrs">{'required': [('customer', '=', True), ('type', 'in', ['invoice', 'delivery'])]}</attribute>
-        </xpath>
-        <xpath expr="//notebook//form//field[@name='name']" position="attributes">
-          <attribute name="attrs">{'required': [('customer', '=', True), ('type', 'in', ['invoice', 'delivery'])]}</attribute>
-        </xpath>
-        <xpath expr="//field[@name='title']" position="attributes">
-          <attribute name="attrs"/>
-        </xpath>
-
-            <xpath expr="//field[@name='ref']/parent::group" position="attributes">
-                <attribute name="groups">base.group_multi_company</attribute>
-            </xpath>
-
-            <field name="ref" position="replace"/>
-
-            <xpath expr="//field[@name='name']/parent::h1" position="after">
-                <group>
-                    <field name="suite"/>
-                    <field name="call_name"/>
-                    <field name="ref"/>
-                    <field name="master_partner_id"/>
-                </group>
-            </xpath>
-
-            <field name="function" position="before">
-                <field name="alcyon_category_id"/>
-                <field name="apb_authorization"/>
-                <field name="is_veterinary" invisible="1"/>
-                <field name="is_students" invisible="1"/>
-                <field name="vet_depot_number"
-                       attrs="{'invisible': [('is_veterinary', '=', False)], 'required': [('is_veterinary', '=', True)]}"/>
-                <field name="vet_subscription_number"
-                       attrs="{'invisible': [('is_veterinary', '=', False),('is_students', '=', False)], 'required': ['|',('is_veterinary', '=', True),('is_students', '=', True)]}"/>
-            </field>
-
-            <field name="user_id" position="after">
-                <field name="pharmacist_id" attrs="{'invisible': [('customer', '=', False)]}"/>
-            </field>
       </field>
-    </record>
-
-    <record id="view_emails_partner_info_form" model="ir.ui.view">
-        <field name="name">view.emails.partner.info.form</field>
-        <field name="model">res.partner</field>
-        <field name="inherit_id" ref="mail.view_emails_partner_info_form"/>
-        <field name="arch" type="xml">
-            <xpath expr="//field[@name='opt_out']" position="attributes">
-                <attribute name="groups"/>
-            </xpath>
-        </field>
-    </record>
-
-    <!--Display the view tree in first time-->
-    <record id="base.action_partner_form" model="ir.actions.act_window">
-        <field name="view_mode">tree,kanban,form</field>
-    </record>
-    <record id="base.action_partner_customer_form" model="ir.actions.act_window">
-        <field name="view_mode">tree,kanban,form</field>
-    </record>
-    <record id="base.action_partner_supplier_form" model="ir.actions.act_window">
-        <field name="view_mode">tree,kanban,form</field>
-    </record>
-
-    <record id="base.action_partner_form_view1" model="ir.actions.act_window.view">
-        <field eval="3" name="sequence"/>
-    </record>
-
+    </field>
+  </record>
+  <record id="view_partner_form" model="ir.ui.view">
+    <field name="model">res.partner</field>
+    <field name="inherit_id" ref="base.view_partner_form" />
+    <field name="arch" type="xml">
+      <field name="type" position="after">
+        <field
+          name="type_delivery"
+          attrs="{'invisible': [('type', '!=', 'invoice')]}"
+        />
+      </field>
+      <xpath
+        expr="//field[@name='child_ids']/form//field[@name='type']"
+        position="after"
+      >
+        <field
+          name="type_delivery"
+          attrs="{'invisible': [('type', '!=', 'invoice')]}"
+        />
+        <label for="type_delivery" attrs="{'invisible': [('type', '!=', 'invoice')]}" />
+      </xpath>
+      <xpath expr="//field[@name='type']" position="attributes">
+        <attribute name="attrs" eval="{}" />
+        <attribute name="groups" />
+      </xpath>
+      <field name="ref" position="attributes">
+        <attribute name="attrs">{'readonly': True}</attribute>
+      </field>
+      <!-- Set required fields for client address of type invoicing and delivery -->
+      <!-- As to have coherent data to export to the esb -->
+      <xpath
+        expr="//div[@name='div_address']/field[@name='street']"
+        position="attributes"
+      >
+        <attribute
+          name="attrs"
+        >{'required': [('customer', '=', True), ('type', 'in', ['invoice', 'delivery'])]}</attribute>
+      </xpath>
+      <xpath expr="//div[@name='div_address']/field[@name='zip']" position="attributes">
+        <attribute
+          name="attrs"
+        >{'required': [('customer', '=', True), ('type', 'in', ['invoice', 'delivery'])]}</attribute>
+      </xpath>
+      <xpath
+        expr="//div[@name='div_address']/field[@name='country_id']"
+        position="attributes"
+      >
+        <attribute
+          name="attrs"
+        >{'required': [('customer', '=', True), ('type', 'in', ['invoice', 'delivery'])]}</attribute>
+      </xpath>
+      <xpath
+        expr="//div[@name='div_address']/field[@name='city']"
+        position="attributes"
+      >
+        <attribute
+          name="attrs"
+        >{'required': [('customer', '=', True), ('type', 'in', ['invoice', 'delivery'])]}</attribute>
+      </xpath>
+      <xpath expr="//notebook//form//field[@name='name']" position="attributes">
+        <attribute
+          name="attrs"
+        >{'required': [('customer', '=', True), ('type', 'in', ['invoice', 'delivery'])]}</attribute>
+      </xpath>
+      <xpath expr="//field[@name='title']" position="attributes">
+        <attribute name="attrs" />
+      </xpath>
+      <xpath expr="//field[@name='ref']/parent::group" position="attributes">
+        <attribute name="groups">base.group_multi_company</attribute>
+      </xpath>
+      <field name="ref" position="replace" />
+      <xpath expr="//field[@name='name']/parent::h1" position="after">
+        <group>
+          <field name="suite" />
+          <field name="call_name" />
+          <field name="ref" />
+          <field name="master_partner_id" />
+        </group>
+      </xpath>
+      <field name="function" position="before">
+        <field name="alcyon_category_id" />
+        <field name="apb_authorization" />
+        <field name="is_veterinary" invisible="1" />
+        <field name="is_students" invisible="1" />
+        <field
+          name="vet_depot_number"
+          attrs="{'invisible': [('is_veterinary', '=', False)], 'required': [('is_veterinary', '=', True)]}"
+        />
+        <field
+          name="vet_subscription_number"
+          attrs="{'invisible': [('is_veterinary', '=', False),('is_students', '=', False)], 'required': ['|',('is_veterinary', '=', True),('is_students', '=', True)]}"
+        />
+      </field>
+      <field name="user_id" position="after">
+        <field name="pharmacist_id" attrs="{'invisible': [('customer', '=', False)]}" />
+      </field>
+    </field>
+  </record>
+  <record id="view_emails_partner_info_form" model="ir.ui.view">
+    <field name="name">view.emails.partner.info.form</field>
+    <field name="model">res.partner</field>
+    <field name="inherit_id" ref="mail.view_emails_partner_info_form" />
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='opt_out']" position="attributes">
+        <attribute name="groups" />
+      </xpath>
+    </field>
+  </record>
+  <!--Display the view tree in first time-->
+  <record id="base.action_partner_form" model="ir.actions.act_window">
+    <field name="view_mode">tree,kanban,form</field>
+  </record>
+  <record id="base.action_partner_customer_form" model="ir.actions.act_window">
+    <field name="view_mode">tree,kanban,form</field>
+  </record>
+  <record id="base.action_partner_supplier_form" model="ir.actions.act_window">
+    <field name="view_mode">tree,kanban,form</field>
+  </record>
+  <record id="base.action_partner_form_view1" model="ir.actions.act_window.view">
+    <field eval="3" name="sequence" />
+  </record>
 </odoo>

@@ -6,7 +6,7 @@
     "name": "Alc Stock Grn Time Delay",
     "description": """
         Add information about outdated receipt based on the GRN date""",
-    "version": "10",
+    "version": "10.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": ["stock", "stock_grn"],

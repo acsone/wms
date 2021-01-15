@@ -7,6 +7,7 @@ from ftplib import FTP
 from io import StringIO
 
 import paramiko
+
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 

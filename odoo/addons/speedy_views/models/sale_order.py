@@ -26,7 +26,7 @@ class SaleOrder(models.Model):
         "order_line.invoice_lines.invoice_id.origin",
         "order_line.invoice_lines.invoice_id.number",
     )
-    def _get_invoice_ids(self):
+    def _compute_invoice_ids(self):
         for order in self:
             invoice_ids = (
                 order.order_line.mapped("invoice_lines")
@@ -68,7 +68,7 @@ class SaleOrder(models.Model):
             )
 
     @api.depends("state", "order_line.invoice_status")
-    def _get_invoiced(self):
+    def _compute_invoiced(self):
         for order in self:
             # Ignore the status of the deposit product
             payment_adv_model = self.env["sale.advance.payment.inv"]
@@ -99,11 +99,11 @@ class SaleOrder(models.Model):
 
             order.update({"invoice_status": invoice_status})
 
-    invoice_count = fields.Integer(compute="_get_invoice_ids")
-    invoice_ids = fields.Many2many(compute="_get_invoice_ids")
+    invoice_count = fields.Integer(compute="_compute_invoice_ids")
+    invoice_ids = fields.Many2many(compute="_compute_invoice_ids")
     # often used in searches, 'sales to invoice' menu... so it's better to have
     # it's computation detached from the invoice status, plus an index
-    invoice_status = fields.Selection(compute="_get_invoiced", index=True)
+    invoice_status = fields.Selection(compute="_compute_invoiced", index=True)
 
     @api.model_cr
     def init(self):
@@ -114,7 +114,6 @@ class SaleOrder(models.Model):
         )
 
         trgm_installed = install_trgm_extension(self.env)
-        self.env.cr.commit()
 
         if trgm_installed:
             index_name = "sale_order_client_order_ref_trgm_index"

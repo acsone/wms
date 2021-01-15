@@ -1,36 +1,44 @@
-<?xml version="1.0"?>
+<?xml version="1.0" ?>
 <odoo>
-
-    <record id="view_picking_tree" model="ir.ui.view">
-        <field name="name">stock.picking.prio</field>
-        <field name="model">stock.picking</field>
-        <field name="inherit_id" ref="stock.vpicktree"/>
-        <field name="arch" type="xml">
-            <field name="state" position="after">
-                <field name="qty_backorder"/>
-                <field name="qty_outofstock"/>
-            </field>
-        </field>
-    </record>
-
-    <record id="view_picking_form" model="ir.ui.view">
-        <field name="name">stock.picking.prio</field>
-        <field name="model">stock.picking</field>
-        <field name="inherit_id" ref="stock_picking_subcode.view_picking_form"/>
-        <field name="arch" type="xml">
-            <xpath expr="//field[@name='pack_operation_product_ids']/tree/field[@name='product_id']" position="before">
-                <field name="qty_backorder" widget="boolean" string="BO" />
-            </xpath>
-            <field name="origin" position="after">
-                <label for="qty_backorder" attrs="{'invisible':[('picking_type_subcode','!=','RECEIVE')]}"/>
-                <div attrs="{'invisible':[('picking_type_subcode','!=','RECEIVE')]}">
-                    <field name="qty_backorder"/>
+  <record id="view_picking_tree" model="ir.ui.view">
+    <field name="name">stock.picking.prio</field>
+    <field name="model">stock.picking</field>
+    <field name="inherit_id" ref="stock.vpicktree" />
+    <field name="arch" type="xml">
+      <field name="state" position="after">
+        <field name="qty_backorder" />
+        <field name="qty_outofstock" />
+      </field>
+    </field>
+  </record>
+  <record id="view_picking_form" model="ir.ui.view">
+    <field name="name">stock.picking.prio</field>
+    <field name="model">stock.picking</field>
+    <field name="inherit_id" ref="stock_picking_subcode.view_picking_form" />
+    <field name="arch" type="xml">
+      <xpath
+        expr="//field[@name='pack_operation_product_ids']/tree/field[@name='product_id']"
+        position="before"
+      >
+        <field name="qty_backorder" widget="boolean" string="BO" />
+      </xpath>
+      <field name="origin" position="after">
+        <label
+          for="qty_backorder"
+          attrs="{'invisible':[('picking_type_subcode','!=','RECEIVE')]}"
+        />
+        <div attrs="{'invisible':[('picking_type_subcode','!=','RECEIVE')]}">
+                    <field name="qty_backorder" />
                     ;
-                    <field name="qty_outofstock"/>
-                    <button name="button_priority_recompute" class="oe_link" string="recompute" type="object"/>
+                    <field name="qty_outofstock" />
+                    <button
+            name="button_priority_recompute"
+            class="oe_link"
+            string="recompute"
+            type="object"
+          />
                 </div>
-            </field>
-        </field>
-    </record>
-
+      </field>
+    </field>
+  </record>
 </odoo>

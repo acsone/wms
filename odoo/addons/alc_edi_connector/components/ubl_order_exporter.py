@@ -5,6 +5,7 @@
 import base64
 
 from odoo import _
+
 from odoo.addons.component.core import Component
 
 

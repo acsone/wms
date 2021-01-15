@@ -1,5 +1,5 @@
 .border {
-    padding: 2px;
+  padding: 2px;
   margin: 5px;
   border: 1px solid #dee2e6 !important;
 }
@@ -7,15 +7,16 @@
   border-radius: 0.25rem !important;
 }
 #products_list_header {
-    height: 10%;
-    margin-left: 5px;
-    margin-top: 5px;
+  height: 10%;
+  margin-left: 5px;
+  margin-top: 5px;
 }
 #products_list {
-    overflow: auto;
+  overflow: auto;
 }
 
-html, body {
+html,
+body {
   height: 100%;
   min-height: 100%;
   margin: 0;
@@ -29,56 +30,56 @@ html, body {
   border-left: 2px solid #c9d2e0;
 }
 .spacing_table_5 td {
-    padding: 5px;
+  padding: 5px;
 }
 .spacing_table_2 td {
-    padding: 2px;
+  padding: 2px;
 }
 #save_global_values_btn {
-    vertical-align: middle;
+  vertical-align: middle;
 }
 .div_separator {
-    border-left: 2px solid black;
+  border-left: 2px solid black;
 }
 .line_state {
-    border-radius: 10px;
-    width: auto;
-    padding: 2px;
-    margin: 5px;
+  border-radius: 10px;
+  width: auto;
+  padding: 2px;
+  margin: 5px;
 }
 .navigation_button {
-    margin: 5px;
+  margin: 5px;
 }
 .bg-secondary {
   background-color: #e1e2ef;
 }
 .return_btn {
-    margin-top: 5px;
-    margin-right: 5px;
+  margin-top: 5px;
+  margin-right: 5px;
 }
 .block_bacground {
-    background-color: #FFFAEA;
-    /*background-color: #FFFDF7;*/
+  background-color: #fffaea;
+  /*background-color: #FFFDF7;*/
 }
 #stock_graph {
-    padding-right: 25px;
+  padding-right: 25px;
 }
 #save_global_values_btn {
-    margin: 5px;
+  margin: 5px;
 }
 .progress {
-    position: relative;
+  position: relative;
 }
 
 .progress span {
-    position: absolute;
-    display: block;
-    width: 100%;
-    color: black;
- }
+  position: absolute;
+  display: block;
+  width: 100%;
+  color: black;
+}
 
-input[readonly]{
-    background-color:transparent;
-    border: 0;
-    font-size: 1em;
-  }
+input[readonly] {
+  background-color: transparent;
+  border: 0;
+  font-size: 1em;
+}

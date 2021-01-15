@@ -267,7 +267,7 @@ class TestItempick(ZetesTest):
                 "groupNum": self.picking.id,
                 "Cri01": None,
                 "Usf06": constants.OP_CUT,
-                "Usf02": "%s_%s" % (pack_op_id, self.lot_product_1.id),
+                "Usf02": "{}_{}".format(pack_op_id, self.lot_product_1.id),
                 "Usf04": "0",
             }
         )

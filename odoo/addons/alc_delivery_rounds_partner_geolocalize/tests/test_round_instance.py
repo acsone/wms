@@ -8,8 +8,10 @@ import logging
 
 import responses
 from freezegun import freeze_time
-from odoo.addons.delivery_rounds.tests import common
+
 from odoo.exceptions import ValidationError
+
+from odoo.addons.delivery_rounds.tests import common
 
 
 class TestRoundInstance(common.DeliveryRoundTestCase):

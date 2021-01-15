@@ -6,10 +6,10 @@ import base64
 import io
 from datetime import datetime
 
-from dateutil.relativedelta import relativedelta
-
 import numpy as np
 import pandas as pd
+from dateutil.relativedelta import relativedelta
+
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 

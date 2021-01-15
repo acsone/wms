@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 # Copyright 2017 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+from psycopg2.extensions import AsIs
+
+from odoo.osv.expression import OR
 
 from odoo.addons.component.core import Component
 from odoo.addons.connector.components.mapper import mapping
-from odoo.osv.expression import OR
 
 from ...components.mapper import (
     dt2esbdate,
@@ -261,8 +263,6 @@ class ProductCronExporter(Component):
         # do the same here. (it bypasses the ORM to avoid to update the
         # write_date which would trigger a new update)
         templates = records.mapped("product_tmpl_id")
-        query = "UPDATE %s SET esb_exported = true " "WHERE id IN %%s " % (
-            templates._table,
-        )
-        self.env.cr.execute(query, (tuple(templates.ids),))
+        query = "UPDATE %s SET esb_exported = true " "WHERE id IN %s "
+        self.env.cr.execute(query, (AsIs(templates._table), tuple(templates.ids),))
         self.model.invalidate_cache(fnames=["esb_exported"], ids=templates.ids)

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <record id="stock.menu_procurement_compute" model="ir.ui.menu">
-        <field name="groups_id" eval="[(6, 0, [])]"/>
-    </record>
+  <record id="stock.menu_procurement_compute" model="ir.ui.menu">
+    <field name="groups_id" eval="[(6, 0, [])]" />
+  </record>
 </odoo>

@@ -19,7 +19,7 @@
 #
 ##############################################################################
 
-from odoo import api, fields, models
+from odoo import fields, models
 
 
 class RoundItineraryImport(models.TransientModel):
@@ -27,8 +27,8 @@ class RoundItineraryImport(models.TransientModel):
 
     itinerary_id = fields.Many2one("round.itinerary", "Itinerary", required=True)
 
-    @api.one
     def confirm(self):
+        self.ensure_one()
         act_close = {"type": "ir.actions.act_window_close"}
         instance_ids = self._context.get("active_ids")
         if instance_ids is None:

@@ -1,106 +1,122 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-
-    <record id="view_picking_form" model="ir.ui.view">
-        <field name="name">stock.picking.form.print</field>
-        <field name="model">stock.picking</field>
-        <field name="inherit_id" ref="stock.view_picking_form"/>
-        <field name="arch" type="xml">
-            <xpath expr="//page/button[@name='put_in_pack']" position="attributes">
-                <attribute name="invisible">1</attribute>
-            </xpath>
-            <xpath expr="//field[@name='priority']" position="after">
-                <field name="is_put_in_pack_done" invisible="0"/>
-            </xpath>
-            <xpath expr="//header" position="inside">
-                <button attrs="{'invisible': ['|', '|', '|', ('picking_type_subcode', '!=', 'PICK'), ('operator_id', '=', False), ('state', 'not in', ['partially_available','assigned']), ('is_put_in_pack_done', '!=', False)]}"
-                    class="oe_highlight"
-                    name="button_put_in_pack" type="object"
-                    string="&#8627;Put in Pack" context="{'default_picking_id': active_id}"/>
-                <button attrs="{'invisible': ['|', '|', '|', ('picking_type_subcode', '!=', 'PICK'), ('operator_id', '=', False), ('state', 'not in', ['partially_available','assigned']), ('is_put_in_pack_done', '=', False)]}"
-                    name="button_put_in_pack" type="object"
-                    string="&#8627;Put in Pack" context="{'default_picking_id': active_id}"/>
-            </xpath>
-
-            <xpath expr="//field[@name='partner_id']" position="attributes">
-                <attribute name="attrs">{'invisible': [('picking_type_code', '=', 'internal'),('picking_type_subcode', '!=', 'PICK')]}</attribute>
-                <attribute name="readonly" eval="1"/>
-            </xpath>
-
-            <xpath expr="//button[@name='do_new_transfer']" position="attributes">
-                <attribute name="attrs">{'invisible': ['|', '|', '|', ('operator_id', '=', False), ('state', 'not in', ['draft','partially_available','assigned']), '&amp;', ('is_put_in_pack_done', '=', False), ('picking_type_subcode', '=', 'PICK')]}</attribute>
-                <attribute name="states"/>
-            </xpath>
-
-            <xpath expr="//field[@name='pack_operation_product_ids']" position="attributes">
-                <attribute name="attrs">{'readonly': [('operator_id', '=', False)]}</attribute>
-            </xpath>
-            <xpath expr="//field[@name='pack_operation_product_ids']/tree" position="inside">
-                <field name="operator_id" invisible="1"/>
-            </xpath>
-            <xpath expr="//field[@name='pack_operation_product_ids']/tree/button[@name='split_lot']" position="attributes">
-                <attribute name="attrs">{'invisible': ['|', '|', ('lots_visible', '=', False), ('state', 'not in', ['confirmed', 'assigned', 'waiting', 'partially_available','done']), ('operator_id', '=', False)]}</attribute>
-            </xpath>
-            <xpath expr="//field[@name='pack_operation_product_ids']/tree/button[@name='show_details']" position="attributes">
-                <attribute name="attrs">{'invisible': ['|', ('state', 'not in', ['confirmed', 'assigned', 'waiting', 'partially_available']), ('operator_id', '=', False)]}</attribute>
-                <attribute name="states"/>
-            </xpath>
-
-            <xpath expr="//field[@name='pack_operation_pack_ids']" position="attributes">
-                <attribute name="attrs">{'invisible': [('pack_operation_pack_ids', '=', []), ('picking_type_entire_packs', '=', False)], 'readonly': [('operator_id', '=', False)]}</attribute>
-            </xpath>
-            <xpath expr="//field[@name='pack_operation_pack_ids']/tree" position="inside">
-                <field name="operator_id" invisible="1"/>
-            </xpath>
-            <xpath expr="//field[@name='pack_operation_pack_ids']/tree/button[@name='show_details']" position="attributes">
-                <attribute name="attrs">{'invisible': ['|', ('state', 'not in', ['confirmed', 'assigned', 'waiting', 'partially_available']), ('operator_id', '=', False)]}</attribute>
-                <attribute name="states"/>
-            </xpath>
-
-            <xpath expr="//h1[field[@name='name']]" position="after">
-                <h3>UOP <field name="id" class="oe_inline"/></h3>
-            </xpath>
-
-            <field name="min_date" position="after">
-                <field name="date_done" />
-            </field>
-
-            <xpath expr="//field[@name='location_id']" position="before">
-                <field name="delivery_round_id" readonly="True"/>
-            </xpath>
-        </field>
-    </record>
-
-    <record id="view_stock_picking_tree" model="ir.ui.view">
-        <field name="name">Picking Type</field>
-        <field name="model">stock.picking</field>
-        <field name="inherit_id" ref="stock.vpicktree"/>
-        <field name="priority">25</field>
-        <field name="arch" type="xml">
-            <xpath expr="//field[@name='picking_type_id']" position="attributes">
-                <attribute name="invisible">0</attribute>
-            </xpath>
-
-            <xpath expr="//field[@name='rank']" position="before">
-                <field name="id" string="UOP"/>
-            </xpath>
-
-            <xpath expr="//field[@name='qty_outofstock']" position="after">
-                <field name="weight"/>
-            </xpath>
-        </field>
-    </record>
-
-    <record id="view_picking_internal_search" model="ir.ui.view">
-        <field name="name">view.picking.internal.search</field>
-        <field name="model">stock.picking</field>
-        <field name="inherit_id" ref="stock.view_picking_internal_search"/>
-        <field name="arch" type="xml">
-            <xpath expr="//field[@name='picking_type_id']" position="before">
-                <separator/>
-                <field name="operator_id"/>
-            </xpath>
-        </field>
-    </record>
-
+  <record id="view_picking_form" model="ir.ui.view">
+    <field name="name">stock.picking.form.print</field>
+    <field name="model">stock.picking</field>
+    <field name="inherit_id" ref="stock.view_picking_form" />
+    <field name="arch" type="xml">
+      <xpath expr="//page/button[@name='put_in_pack']" position="attributes">
+        <attribute name="invisible">1</attribute>
+      </xpath>
+      <xpath expr="//field[@name='priority']" position="after">
+        <field name="is_put_in_pack_done" invisible="0" />
+      </xpath>
+      <xpath expr="//header" position="inside">
+        <button
+          attrs="{'invisible': ['|', '|', '|', ('picking_type_subcode', '!=', 'PICK'), ('operator_id', '=', False), ('state', 'not in', ['partially_available','assigned']), ('is_put_in_pack_done', '!=', False)]}"
+          class="oe_highlight"
+          name="button_put_in_pack"
+          type="object"
+          string="&#8627;Put in Pack"
+          context="{'default_picking_id': active_id}"
+        />
+        <button
+          attrs="{'invisible': ['|', '|', '|', ('picking_type_subcode', '!=', 'PICK'), ('operator_id', '=', False), ('state', 'not in', ['partially_available','assigned']), ('is_put_in_pack_done', '=', False)]}"
+          name="button_put_in_pack"
+          type="object"
+          string="&#8627;Put in Pack"
+          context="{'default_picking_id': active_id}"
+        />
+      </xpath>
+      <xpath expr="//field[@name='partner_id']" position="attributes">
+        <attribute
+          name="attrs"
+        >{'invisible': [('picking_type_code', '=', 'internal'),('picking_type_subcode', '!=', 'PICK')]}</attribute>
+        <attribute name="readonly" eval="1" />
+      </xpath>
+      <xpath expr="//button[@name='do_new_transfer']" position="attributes">
+        <attribute
+          name="attrs"
+        >{'invisible': ['|', '|', '|', ('operator_id', '=', False), ('state', 'not in', ['draft','partially_available','assigned']), '&amp;', ('is_put_in_pack_done', '=', False), ('picking_type_subcode', '=', 'PICK')]}</attribute>
+        <attribute name="states" />
+      </xpath>
+      <xpath expr="//field[@name='pack_operation_product_ids']" position="attributes">
+        <attribute name="attrs">{'readonly': [('operator_id', '=', False)]}</attribute>
+      </xpath>
+      <xpath expr="//field[@name='pack_operation_product_ids']/tree" position="inside">
+        <field name="operator_id" invisible="1" />
+      </xpath>
+      <xpath
+        expr="//field[@name='pack_operation_product_ids']/tree/button[@name='split_lot']"
+        position="attributes"
+      >
+        <attribute
+          name="attrs"
+        >{'invisible': ['|', '|', ('lots_visible', '=', False), ('state', 'not in', ['confirmed', 'assigned', 'waiting', 'partially_available','done']), ('operator_id', '=', False)]}</attribute>
+      </xpath>
+      <xpath
+        expr="//field[@name='pack_operation_product_ids']/tree/button[@name='show_details']"
+        position="attributes"
+      >
+        <attribute
+          name="attrs"
+        >{'invisible': ['|', ('state', 'not in', ['confirmed', 'assigned', 'waiting', 'partially_available']), ('operator_id', '=', False)]}</attribute>
+        <attribute name="states" />
+      </xpath>
+      <xpath expr="//field[@name='pack_operation_pack_ids']" position="attributes">
+        <attribute
+          name="attrs"
+        >{'invisible': [('pack_operation_pack_ids', '=', []), ('picking_type_entire_packs', '=', False)], 'readonly': [('operator_id', '=', False)]}</attribute>
+      </xpath>
+      <xpath expr="//field[@name='pack_operation_pack_ids']/tree" position="inside">
+        <field name="operator_id" invisible="1" />
+      </xpath>
+      <xpath
+        expr="//field[@name='pack_operation_pack_ids']/tree/button[@name='show_details']"
+        position="attributes"
+      >
+        <attribute
+          name="attrs"
+        >{'invisible': ['|', ('state', 'not in', ['confirmed', 'assigned', 'waiting', 'partially_available']), ('operator_id', '=', False)]}</attribute>
+        <attribute name="states" />
+      </xpath>
+      <xpath expr="//h1[field[@name='name']]" position="after">
+        <h3>UOP <field name="id" class="oe_inline" /></h3>
+      </xpath>
+      <field name="min_date" position="after">
+        <field name="date_done" />
+      </field>
+      <xpath expr="//field[@name='location_id']" position="before">
+        <field name="delivery_round_id" readonly="True" />
+      </xpath>
+    </field>
+  </record>
+  <record id="view_stock_picking_tree" model="ir.ui.view">
+    <field name="name">Picking Type</field>
+    <field name="model">stock.picking</field>
+    <field name="inherit_id" ref="stock.vpicktree" />
+    <field name="priority">25</field>
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='picking_type_id']" position="attributes">
+        <attribute name="invisible">0</attribute>
+      </xpath>
+      <xpath expr="//field[@name='rank']" position="before">
+        <field name="id" string="UOP" />
+      </xpath>
+      <xpath expr="//field[@name='qty_outofstock']" position="after">
+        <field name="weight" />
+      </xpath>
+    </field>
+  </record>
+  <record id="view_picking_internal_search" model="ir.ui.view">
+    <field name="name">view.picking.internal.search</field>
+    <field name="model">stock.picking</field>
+    <field name="inherit_id" ref="stock.view_picking_internal_search" />
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='picking_type_id']" position="before">
+        <separator />
+        <field name="operator_id" />
+      </xpath>
+    </field>
+  </record>
 </odoo>

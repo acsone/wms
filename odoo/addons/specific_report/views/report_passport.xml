@@ -1,198 +1,207 @@
 <odoo>
-    <template id="specific_report.report_passport_body">
-        <div class="page" style="font-size: large;">
-            <div class="row">
-                        <div class="logo col-xs-6">
-                            <img t-if="company.logo"
-                                 t-att-src="'data:image/png;base64,%s' % company.logo"
-                                 style="max-height: 70px;"/>
-                        </div>
-                        <div class="col-xs-6">
-                            <div class="main_title">
+  <template id="specific_report.report_passport_body">
+    <div class="page" style="font-size: large;">
+      <div class="row">
+        <div class="logo col-xs-6">
+          <img
+            t-if="company.logo"
+            t-att-src="'data:image/png;base64,%s' % company.logo"
+            style="max-height: 70px;"
+          />
+        </div>
+        <div class="col-xs-6">
+          <div class="main_title">
                                 Picking inspection
                             </div>
-                            <br/>
-                            <div id="passport_checksum">
-                                <p><span t-field="picking.checksum"/></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <table>
-                                <tbody>
-                                    <tr>
-                                        <td>
+          <br />
+          <div id="passport_checksum">
+            <p>
+              <span t-field="picking.checksum" />
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <table>
+            <tbody>
+              <tr>
+                <td>
                                             Date
                                         </td>
-                                        <td style="width: 20px; text-align: center;">
+                <td style="width: 20px; text-align: center;">
                                             :
                                         </td>
-                                        <td>
-                                            <span t-field="picking.min_date" />
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
+                <td>
+                  <span t-field="picking.min_date" />
+                </td>
+              </tr>
+              <tr>
+                <td>
                                             Operator
                                         </td>
-                                        <td style="width: 20px; text-align: center;">
+                <td style="width: 20px; text-align: center;">
                                             :
                                         </td>
-                                        <td>
-                                            <span t-field="picking.operator_id.name" />
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
+                <td>
+                  <span t-field="picking.operator_id.name" />
+                </td>
+              </tr>
+              <tr>
+                <td>
                                             UOP
                                         </td>
-                                        <td style="width: 20px; text-align: center;">
+                <td style="width: 20px; text-align: center;">
                                             :
                                         </td>
-                                        <td>
-                                            <span t-field="picking.id" />
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
+                <td>
+                  <span t-field="picking.id" />
+                </td>
+              </tr>
+              <tr>
+                <td>
                                             Round
                                         </td>
-                                        <td style="width: 20px; text-align: center;">
+                <td style="width: 20px; text-align: center;">
                                             :
                                         </td>
-                                        <td>
-                                            <span t-field="picking.delivery_round_id.display_name"/>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
+                <td>
+                  <span t-field="picking.delivery_round_id.display_name" />
+                </td>
+              </tr>
+              <tr>
+                <td>
                                             Customer
                                         </td>
-                                        <td style="width: 20px; text-align: center;">
+                <td style="width: 20px; text-align: center;">
                                             :
                                         </td>
-                                        <td>
-                                            <strong>
+                <td>
+                  <strong>
                                             [<span t-field="picking.partner_id.ref" />]
-                                            <span class="partner_inline" t-field="picking.partner_id" t-options='{"widget": "contact", "fields": ["name"], "no_marker": True}'/>
+                                            <span
+                      class="partner_inline"
+                      t-field="picking.partner_id"
+                      t-options='{"widget": "contact", "fields": ["name"], "no_marker": True}'
+                    />
                                             </strong>
-                                        </td>
-                                    </tr>
-
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-            <table id="products_table" class="round_table">
-                <thead>
-                    <tr>
-                        <th rowspan="2">Product<br/>reference</th>
-                        <th rowspan="2">Name</th>
-                        <th rowspan="2">Picked Quantity</th>
-                        <th rowspan="2">Ordered Quantity</th>
-                        <th colspan="3" style="border-left: thin solid black;">By lot</th>
-                    </tr>
-                    <tr>
-                        <th style="border-left: thin solid black;">Number</th>
-                        <th>Quantity</th>
-                        <th>Expiration date</th>
-                    </tr>
-                </thead>
-                <tbody class="invoice_tbody">
-                    <t t-set="is_black_background" t-value="True" />
-                    <t t-foreach="picking.pack_operation_ids" t-as="line">
-                        <t t-set="lots" t-value="[lot for lot in line.pack_lot_ids]"/>
-                        <t t-set="first_lot" t-value="lots and lots.pop()"/>
-                            <tr t-att-class="bool(is_black_background) and 'black_background'">
-
-                            <td>
-                                <span t-field="line.product_id.default_code"/>
-                            </td>
-                            <td class="text-left">
-                                <span t-field="line.product_id.name"/>
-                            </td>
-                            <td>
-                                <span t-esc="int(line.qty_done)"/>
-                            </td>
-                            <td>
-                                <span t-esc="int(line.product_qty)"/>
-                            </td>
-                            <td>
-                                <span t-if="first_lot" t-field="first_lot.lot_id.name"/>
-                            </td>
-                            <td>
-                                <span t-if="first_lot" t-esc="int(first_lot.qty)"/>
-                            </td>
-                            <td>
-                                <span t-if="first_lot" t-field="first_lot.life_date" t-options="{'widget': 'date'}"/>
-                            </td>
-                        </tr>
-                        <tr t-foreach="lots" t-as="lot" t-att-class="bool(is_black_background) and 'black_background'">
-                            <td/>
-                            <td/>
-                            <td/>
-                            <td/>
-                            <td>
-                                <span t-field="lot.lot_id.name"/>
-                            </td>
-                            <td>
-                                <span t-esc="int(lot.qty)"/>
-                            </td>
-                            <td>
-                                <span t-field="lot.life_date" t-options="{'widget': 'date'}"/>
-                            </td>
-                        </tr>
-                        <t t-set="is_black_background" t-value="not is_black_background"/>
-                    </t>
-                    <tr t-if="not is_black_background">
-                        <td/>
-                        <td/>
-                        <td/>
-                        <td/>
-                        <td/>
-                        <td/>
-                        <td/>
-                    </tr>
-                </tbody>
-            </table>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-    </template>
-
-    <template id="specific_report.report_passport">
-        <t t-call="report.html_container">
-            <t t-foreach="docs" t-as="picking">
-                <t t-set="company" t-value="picking.env.user.company_id"/>
-                <t t-set="partner" t-value="picking.partner_id"/>
-
-                <div class="header" />
-
-                <t t-call="specific_report.report_passport_body"/>
-
-                <div class="footer">
-                    <div class="text-center" style="border-top: 1px solid black;">
-                        <ul class="list-inline">
-                            <li>Page:</li>
-                            <li>
-                                <span class="page"/>
-                            </li>
-                            <li>/</li>
-                            <li>
-                                <span class="topage"/>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </t>
-        </t>
-    </template>
-
-    <report
-        string="Picking Inspection"
-        id="action_passport_report"
-        model="stock.picking"
-        report_type="qweb-pdf"
-        name="specific_report.report_passport"
-        file="specific_report.report_passport"
-    />
+      </div>
+      <table id="products_table" class="round_table">
+        <thead>
+          <tr>
+            <th rowspan="2">Product<br />reference</th>
+            <th rowspan="2">Name</th>
+            <th rowspan="2">Picked Quantity</th>
+            <th rowspan="2">Ordered Quantity</th>
+            <th colspan="3" style="border-left: thin solid black;">By lot</th>
+          </tr>
+          <tr>
+            <th style="border-left: thin solid black;">Number</th>
+            <th>Quantity</th>
+            <th>Expiration date</th>
+          </tr>
+        </thead>
+        <tbody class="invoice_tbody">
+          <t t-set="is_black_background" t-value="True" />
+          <t t-foreach="picking.pack_operation_ids" t-as="line">
+            <t t-set="lots" t-value="[lot for lot in line.pack_lot_ids]" />
+            <t t-set="first_lot" t-value="lots and lots.pop()" />
+            <tr t-att-class="bool(is_black_background) and 'black_background'">
+              <td>
+                <span t-field="line.product_id.default_code" />
+              </td>
+              <td class="text-left">
+                <span t-field="line.product_id.name" />
+              </td>
+              <td>
+                <span t-esc="int(line.qty_done)" />
+              </td>
+              <td>
+                <span t-esc="int(line.product_qty)" />
+              </td>
+              <td>
+                <span t-if="first_lot" t-field="first_lot.lot_id.name" />
+              </td>
+              <td>
+                <span t-if="first_lot" t-esc="int(first_lot.qty)" />
+              </td>
+              <td>
+                <span
+                  t-if="first_lot"
+                  t-field="first_lot.life_date"
+                  t-options="{'widget': 'date'}"
+                />
+              </td>
+            </tr>
+            <tr
+              t-foreach="lots"
+              t-as="lot"
+              t-att-class="bool(is_black_background) and 'black_background'"
+            >
+              <td />
+              <td />
+              <td />
+              <td />
+              <td>
+                <span t-field="lot.lot_id.name" />
+              </td>
+              <td>
+                <span t-esc="int(lot.qty)" />
+              </td>
+              <td>
+                <span t-field="lot.life_date" t-options="{'widget': 'date'}" />
+              </td>
+            </tr>
+            <t t-set="is_black_background" t-value="not is_black_background" />
+          </t>
+          <tr t-if="not is_black_background">
+            <td />
+            <td />
+            <td />
+            <td />
+            <td />
+            <td />
+            <td />
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </template>
+  <template id="specific_report.report_passport">
+    <t t-call="report.html_container">
+      <t t-foreach="docs" t-as="picking">
+        <t t-set="company" t-value="picking.env.user.company_id" />
+        <t t-set="partner" t-value="picking.partner_id" />
+        <div class="header" />
+        <t t-call="specific_report.report_passport_body" />
+        <div class="footer">
+          <div class="text-center" style="border-top: 1px solid black;">
+            <ul class="list-inline">
+              <li>Page:</li>
+              <li>
+                <span class="page" />
+              </li>
+              <li>/</li>
+              <li>
+                <span class="topage" />
+              </li>
+            </ul>
+          </div>
+        </div>
+      </t>
+    </t>
+  </template>
+  <report
+    string="Picking Inspection"
+    id="action_passport_report"
+    model="stock.picking"
+    report_type="qweb-pdf"
+    name="specific_report.report_passport"
+    file="specific_report.report_passport"
+  />
 </odoo>

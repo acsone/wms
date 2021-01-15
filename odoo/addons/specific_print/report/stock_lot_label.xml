@@ -1,69 +1,76 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <openerp>
- <data noupdate="1">
-
-  <template id="stock_lot_label_zebra_v1">
+  <data noupdate="1">
+    <template id="stock_lot_label_zebra_v1">
       <div class="raw">
-<t t-foreach="docs" t-as="lot">
+        <t t-foreach="docs" t-as="lot">
 ^XA
 ^PRC
 ^LH0,0^FS\r
-^FO25,33^A0N,118,103^CI13^FR^FD<t t-esc="lot.voice_identifier"/>^FS\r
-^FO420,33^A0N,118,103^CI13^FR^FD<t t-esc="lot.checksum"/>^FS\r
+^FO25,33^A0N,118,103^CI13^FR^FD<t t-esc="lot.voice_identifier" />^FS\r
+^FO420,33^A0N,118,103^CI13^FR^FD<t t-esc="lot.checksum" />^FS\r
 ^FO25,145^A0N,37,32^CI13^FR^FDLot:^FS\r
-^FO90,145^A0N,37,32^CI13^FR^FD<t t-esc="lot.name"/>^FS\r
+^FO90,145^A0N,37,32^CI13^FR^FD<t t-esc="lot.name" />^FS\r
 ^FO25,190^A0N,37,32^CI13^FR^FDBac:^FS\r
-^FO90,190^A0N,37,32^CI13^FR^FD<t t-esc="lot.product_id.product_tmpl_id._bin().zone"/>-<t t-esc="lot.product_id.product_tmpl_id._bin().corridor"/>-<t t-esc="lot.product_id.product_tmpl_id._bin().shelf"/>-<t t-esc="lot.product_id.product_tmpl_id._bin().height"/>-<t t-esc="lot.product_id.product_tmpl_id._bin().box"/>^FS\r
+^FO90,190^A0N,37,32^CI13^FR^FD<t
+            t-esc="lot.product_id.product_tmpl_id._bin().zone"
+          />-<t t-esc="lot.product_id.product_tmpl_id._bin().corridor" />-<t
+            t-esc="lot.product_id.product_tmpl_id._bin().shelf"
+          />-<t t-esc="lot.product_id.product_tmpl_id._bin().height" />-<t
+            t-esc="lot.product_id.product_tmpl_id._bin().box"
+          />^FS\r
 ^FO25,240^A0N,37,32^CI13^FR^FDDate limite:^FS\r
-^FO190,230^A0N,50,40^CI13^FR^FD<t t-esc="lot.life_date and time.strftime('%d/%m/%Y', time.strptime(lot.life_date,'%Y-%m-%d %H:%M:%S')) or ''"/>^FS\r
+^FO190,230^A0N,50,40^CI13^FR^FD<t
+            t-esc="lot.life_date and time.strftime('%d/%m/%Y', time.strptime(lot.life_date,'%Y-%m-%d %H:%M:%S')) or ''"
+          />^FS\r
 ^FO25,290^A0N,37,32^CI13^FR^FDArticle:^FS\r
-^FO140,290^A0N,37,40^CI13^FR^FD<t t-esc="lot.product_id.default_code"/>^FS\r
-^FO25,342^A0N,31,23^CI13^FR^FD<t t-esc="lot.product_id.name"/>^FS\r
+^FO140,290^A0N,37,40^CI13^FR^FD<t t-esc="lot.product_id.default_code" />^FS\r
+^FO25,342^A0N,31,23^CI13^FR^FD<t t-esc="lot.product_id.name" />^FS\r
 ^FO420,150\r
 ^BQN,2,6\r
-^FDQA,#<t t-esc="lot.product_id.default_code"/>#<t t-esc="lot.name"/>^FS\r
-^PQ<t t-esc="qty"/>,0,0,N\r
+^FDQA,#<t t-esc="lot.product_id.default_code" />#<t t-esc="lot.name" />^FS\r
+^PQ<t t-esc="qty" />,0,0,N\r
 ^XZ
 </t>
-</div>
-  </template>
-
-  <report
-          id="report_lot_label"
-          string="Alcyon Lot Label"
-          model="stock.production.lot"
-          report_type="qweb-pdf"
-          file="specific_print.stock_lot_label_zebra_v1"
-          name="specific_print.stock_lot_label_zebra_v1"
-  />
-
-  <template id="stock_lot_nolot_label_zebra_v1">
+      </div>
+    </template>
+    <report
+      id="report_lot_label"
+      string="Alcyon Lot Label"
+      model="stock.production.lot"
+      report_type="qweb-pdf"
+      file="specific_print.stock_lot_label_zebra_v1"
+      name="specific_print.stock_lot_label_zebra_v1"
+    />
+    <template id="stock_lot_nolot_label_zebra_v1">
       <div class="raw">
-<t t-foreach="docs" t-as="product_id">
+        <t t-foreach="docs" t-as="product_id">
 ^XA
 ^PRC
 ^LH0,0^FS\r
-^FO25,40^A0N,50,40^CI13^FR^FD<t t-esc="product_id.name"/>^FS\r
+^FO25,40^A0N,50,40^CI13^FR^FD<t t-esc="product_id.name" />^FS\r
 ^FO25,115^A0N,37,32^CI13^FR^FDArticle:^FS\r
-^FO140,115^A0N,37,40^CI13^FR^FD<t t-esc="product_id.default_code"/>^FS\r
+^FO140,115^A0N,37,40^CI13^FR^FD<t t-esc="product_id.default_code" />^FS\r
 ^FO25,180^A0N,37,32^CI13^FR^FDBac:^FS\r
-^FO90,180^A0N,37,32^CI13^FR^FD<t t-esc="product_id.product_tmpl_id._bin().zone"/>-<t t-esc="product_id.product_tmpl_id._bin().corridor"/>-<t t-esc="product_id.product_tmpl_id._bin().shelf"/>-<t t-esc="product_id.product_tmpl_id._bin().height"/>-<t t-esc="product_id.product_tmpl_id._bin().box"/>^FS\r
+^FO90,180^A0N,37,32^CI13^FR^FD<t t-esc="product_id.product_tmpl_id._bin().zone" />-<t
+            t-esc="product_id.product_tmpl_id._bin().corridor"
+          />-<t t-esc="product_id.product_tmpl_id._bin().shelf" />-<t
+            t-esc="product_id.product_tmpl_id._bin().height"
+          />-<t t-esc="product_id.product_tmpl_id._bin().box" />^FS\r
 ^FO420,150\r
 ^BQN,2,6\r
-^FDQA,<t t-esc="product_id.default_code"/>^FS\r
+^FDQA,<t t-esc="product_id.default_code" />^FS\r
 ^XZ
 </t>
-</div>
-  </template>
-
-  <report
-          id="report_lot_nolot_label"
-          string="Alcyon Nolot Label"
-          model="product.product"
-          report_type="qweb-pdf"
-          file="specific_print.stock_lot_nolot_label_zebra_v1"
-          name="specific_print.stock_lot_nolot_label_zebra_v1"
-  />
-
- </data>
+      </div>
+    </template>
+    <report
+      id="report_lot_nolot_label"
+      string="Alcyon Nolot Label"
+      model="product.product"
+      report_type="qweb-pdf"
+      file="specific_print.stock_lot_nolot_label_zebra_v1"
+      name="specific_print.stock_lot_nolot_label_zebra_v1"
+    />
+  </data>
 </openerp>

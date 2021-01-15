@@ -1,17 +1,18 @@
 # -*- coding: utf-8 -*-
 # Copyright 2017 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-
 import datetime
 import logging
 
 import psycopg2
+from psycopg2.extensions import AsIs
 
 import odoo
 from odoo import _, fields
+from odoo.osv.expression import AND
+
 from odoo.addons.component.core import AbstractComponent, Component
 from odoo.addons.connector.exception import RetryableJobError
-from odoo.osv.expression import AND
 
 _logger = logging.getLogger(__name__)
 
@@ -78,6 +79,7 @@ class ESBWebServiceExporter(AbstractComponent):
         # Commit so we keep the external ID when we do something in
         # _after_export and it fails. The commit will also release the lock
         # acquired on the record
+        # pylint: disable=E8102
         if not odoo.tools.config["test_enable"]:
             self.env.cr.commit()  # noqa
 
@@ -238,10 +240,8 @@ class ESBExporterMixin(AbstractComponent):
         # we flag the products as exported, bypassing the ORM
         # otherwise the write_date would be modified and the records
         # exported again...
-        query = "UPDATE %s SET esb_exported = true " "WHERE id IN %%s " % (
-            self.model._table,
-        )
-        self.env.cr.execute(query, (tuple(records.ids),))
+        query = "UPDATE %s SET esb_exported = true WHERE id IN %s "
+        self.env.cr.execute(query, (AsIs(self.model._table), tuple(records.ids),))
         self.model.invalidate_cache(fnames=["esb_exported"], ids=records.ids)
 
     def _lock(self, records):

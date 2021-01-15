@@ -6,7 +6,7 @@
     "name": "Alc Sale Stock Restocking Fee Invoicing Additional Product",
     "description": """
         Remove additional product from restocking fees""",
-    "version": "10",
+    "version": "10.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": ["sale_stock_restocking_fee_invoicing", "product_additional"],

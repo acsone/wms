@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <record id="view_purchase_configuration" model="ir.ui.view">
-        <field name="name">view_purchase_configuration</field>
-        <field name="model">purchase.config.settings</field>
-        <field name="inherit_id" ref="purchase.view_purchase_configuration"/>
-        <field name="arch" type="xml">
-            <xpath expr="//field[@name='group_product_variant']" position="before">
-                <field name="lead_time"/>
-            </xpath>
-        </field>
-    </record>
+  <record id="view_purchase_configuration" model="ir.ui.view">
+    <field name="name">view_purchase_configuration</field>
+    <field name="model">purchase.config.settings</field>
+    <field name="inherit_id" ref="purchase.view_purchase_configuration" />
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='group_product_variant']" position="before">
+        <field name="lead_time" />
+      </xpath>
+    </field>
+  </record>
 </odoo>

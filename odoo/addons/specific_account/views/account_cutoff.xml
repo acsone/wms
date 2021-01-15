@@ -1,14 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-
-    <record id="account_cutoff_line_tree" model="ir.ui.view">
-        <field name="name">hide tax</field>
-        <field name="model">account.cutoff.line</field>
-        <field name="inherit_id" ref="account_cutoff_base.account_cutoff_line_tree"/>
-        <field name="arch" type="xml">
-            <!-- odoo client spawn 1 request per line every 1/2 seconds -->
-            <field name="tax_ids" position="replace"/>
-        </field>
-    </record>
-
+  <record id="account_cutoff_line_tree" model="ir.ui.view">
+    <field name="name">hide tax</field>
+    <field name="model">account.cutoff.line</field>
+    <field name="inherit_id" ref="account_cutoff_base.account_cutoff_line_tree" />
+    <field name="arch" type="xml">
+      <!-- odoo client spawn 1 request per line every 1/2 seconds -->
+      <field name="tax_ids" position="replace" />
+    </field>
+  </record>
 </odoo>

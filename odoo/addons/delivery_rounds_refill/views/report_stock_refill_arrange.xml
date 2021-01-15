@@ -1,50 +1,52 @@
-<?xml version="1.0"?>
+<?xml version="1.0" ?>
 <odoo>
-
-    <record id="view_report_stock_refill_arrange_search" model="ir.ui.view">
-        <field name="name">report.stock.refill.arrange.search</field>
-        <field name="model">report.stock.refill.arrange</field>
-        <field name="arch" type="xml">
-            <search>
-                <field name="product_id"/>
-                <field name="location_id"/>
-                <filter name="todo" string="To do" domain="[('refill_priority_arrange', '>', 0)]"/>
-            </search>
-        </field>
-    </record>
-    <record id="view_report_stock_refill_arrange_tree" model="ir.ui.view">
-        <field name="name">report.stock.refill.arrange.tree</field>
-        <field name="model">report.stock.refill.arrange</field>
-        <field name="arch" type="xml">
-            <tree string="Arrangement" create="0" delete="0">
-                <field name="refill_priority_arrange"/>
-                <field name="product_id"/>
-                <field name="qty"/>
-                <field name="product_uom_id" groups="product.group_uom"/>
-                <field name="location_id"/>
-                <field name="reservation_id"/>
-                <field name="qty_in_bin"/>
-                <field name="qty_in_bin_available"/>
-                <field name="qty_in_reserve"/>
-                <field name="qty_in_parking"/>
-                <field name="immediate_qty"/>
-                <field name="planned_qty"/>
-                <field name="confirmed_qty"/>
-            </tree>
-        </field>
-    </record>
-
-    <record id="action_report_stock_refill_arrange" model="ir.actions.act_window">
-        <field name="name">Arrangement</field>
-        <field name="res_model">report.stock.refill.arrange</field>
-        <field name="view_mode">tree</field>
-        <field name="context">{'search_default_todo': 1}</field>
-    </record>
-
-    <menuitem id="menu_report_stock_refill_arrange"
-        name="Arrangement"
-        parent="stock.menu_stock_inventory_control"
-        sequence="40"
-        action="action_report_stock_refill_arrange"/>
-
+  <record id="view_report_stock_refill_arrange_search" model="ir.ui.view">
+    <field name="name">report.stock.refill.arrange.search</field>
+    <field name="model">report.stock.refill.arrange</field>
+    <field name="arch" type="xml">
+      <search>
+        <field name="product_id" />
+        <field name="location_id" />
+        <filter
+          name="todo"
+          string="To do"
+          domain="[('refill_priority_arrange', '>', 0)]"
+        />
+      </search>
+    </field>
+  </record>
+  <record id="view_report_stock_refill_arrange_tree" model="ir.ui.view">
+    <field name="name">report.stock.refill.arrange.tree</field>
+    <field name="model">report.stock.refill.arrange</field>
+    <field name="arch" type="xml">
+      <tree string="Arrangement" create="0" delete="0">
+        <field name="refill_priority_arrange" />
+        <field name="product_id" />
+        <field name="qty" />
+        <field name="product_uom_id" groups="product.group_uom" />
+        <field name="location_id" />
+        <field name="reservation_id" />
+        <field name="qty_in_bin" />
+        <field name="qty_in_bin_available" />
+        <field name="qty_in_reserve" />
+        <field name="qty_in_parking" />
+        <field name="immediate_qty" />
+        <field name="planned_qty" />
+        <field name="confirmed_qty" />
+      </tree>
+    </field>
+  </record>
+  <record id="action_report_stock_refill_arrange" model="ir.actions.act_window">
+    <field name="name">Arrangement</field>
+    <field name="res_model">report.stock.refill.arrange</field>
+    <field name="view_mode">tree</field>
+    <field name="context">{'search_default_todo': 1}</field>
+  </record>
+  <menuitem
+    id="menu_report_stock_refill_arrange"
+    name="Arrangement"
+    parent="stock.menu_stock_inventory_control"
+    sequence="40"
+    action="action_report_stock_refill_arrange"
+  />
 </odoo>

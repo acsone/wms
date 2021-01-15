@@ -1,21 +1,19 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <!-- Copyright 2020 ACSONE SA/NV
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
-
 <odoo>
-
-    <record model="ir.ui.view" id="res_partner_form_view">
-        <field name="name">res.partner.form (in alc_edi_connector)</field>
-        <field name="model">res.partner</field>
-        <field name="inherit_id" ref="base.view_partner_form"/>
-        <field name="arch" type="xml">
-            <group name="purchase" position="inside">
-                <field name="use_edi_connector"/>
-                <field name="edi_backend_id" attrs="{'invisible': [('use_edi_connector', '=', False)], 'required': [('use_edi_connector', '=', True)]}"/>
-            </group>
-        </field>
-    </record>
-
-
-
+  <record model="ir.ui.view" id="res_partner_form_view">
+    <field name="name">res.partner.form (in alc_edi_connector)</field>
+    <field name="model">res.partner</field>
+    <field name="inherit_id" ref="base.view_partner_form" />
+    <field name="arch" type="xml">
+      <group name="purchase" position="inside">
+        <field name="use_edi_connector" />
+        <field
+          name="edi_backend_id"
+          attrs="{'invisible': [('use_edi_connector', '=', False)], 'required': [('use_edi_connector', '=', True)]}"
+        />
+      </group>
+    </field>
+  </record>
 </odoo>

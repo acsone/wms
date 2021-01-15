@@ -1,44 +1,42 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo noupdate="1">
-
-    <record id="product_defect" model="helpdesk.ticket.reason">
-        <field name="name">01-Product defect</field>
-        <field name="visible_reception_wizard">1</field>
-    </record>
-    <record id="missing_quantity" model="helpdesk.ticket.reason">
-        <field name="name">02-Missing quantity</field>
-        <field name="visible_reception_wizard">1</field>
-    </record>
-    <record id="cold_chain_broken" model="helpdesk.ticket.reason">
-        <field name="name">03-Cold chain broken</field>
-        <field name="visible_reception_wizard">1</field>
-    </record>
-    <record id="short_lapsing" model="helpdesk.ticket.reason">
-        <field name="name">04-Short lapsing</field>
-        <field name="visible_reception_wizard">1</field>
-    </record>
-    <record id="expired_product" model="helpdesk.ticket.reason">
-        <field name="name">05-Expired product</field>
-        <field name="visible_reception_wizard">1</field>
-    </record>
-    <record id="non_ordered_product" model="helpdesk.ticket.reason">
-        <field name="name">06-Non ordered product</field>
-    </record>
-    <record id="higher_quantity" model="helpdesk.ticket.reason">
-        <field name="name">07-Higher quantity</field>
-        <field name="visible_reception_wizard">1</field>
-    </record>
-    <record id="product_switch" model="helpdesk.ticket.reason">
-        <field name="name">08-Product error (A for B)</field>
-    </record>
-    <record id="delivery_error" model="helpdesk.ticket.reason">
-        <field name="name">09-Delivery error</field>
-    </record>
-    <record id="misc" model="helpdesk.ticket.reason">
-        <field name="name">10-Miscalenious</field>
-    </record>
-    <record id="price_issue" model="helpdesk.ticket.reason">
-        <field name="name">11-Price issue</field>
-    </record>
-
+  <record id="product_defect" model="helpdesk.ticket.reason">
+    <field name="name">01-Product defect</field>
+    <field name="visible_reception_wizard">1</field>
+  </record>
+  <record id="missing_quantity" model="helpdesk.ticket.reason">
+    <field name="name">02-Missing quantity</field>
+    <field name="visible_reception_wizard">1</field>
+  </record>
+  <record id="cold_chain_broken" model="helpdesk.ticket.reason">
+    <field name="name">03-Cold chain broken</field>
+    <field name="visible_reception_wizard">1</field>
+  </record>
+  <record id="short_lapsing" model="helpdesk.ticket.reason">
+    <field name="name">04-Short lapsing</field>
+    <field name="visible_reception_wizard">1</field>
+  </record>
+  <record id="expired_product" model="helpdesk.ticket.reason">
+    <field name="name">05-Expired product</field>
+    <field name="visible_reception_wizard">1</field>
+  </record>
+  <record id="non_ordered_product" model="helpdesk.ticket.reason">
+    <field name="name">06-Non ordered product</field>
+  </record>
+  <record id="higher_quantity" model="helpdesk.ticket.reason">
+    <field name="name">07-Higher quantity</field>
+    <field name="visible_reception_wizard">1</field>
+  </record>
+  <record id="product_switch" model="helpdesk.ticket.reason">
+    <field name="name">08-Product error (A for B)</field>
+  </record>
+  <record id="delivery_error" model="helpdesk.ticket.reason">
+    <field name="name">09-Delivery error</field>
+  </record>
+  <record id="misc" model="helpdesk.ticket.reason">
+    <field name="name">10-Miscalenious</field>
+  </record>
+  <record id="price_issue" model="helpdesk.ticket.reason">
+    <field name="name">11-Price issue</field>
+  </record>
 </odoo>

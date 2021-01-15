@@ -1,14 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-
-    <template id="contact" inherit_id="base.contact">
-
-        <xpath expr="//div[@itemtype='http://schema.org/PostalAddress']" position="before">
-            <div t-if="'suite' in fields">
-                <span t-field="object.suite"/>
-            </div>
-        </xpath>
-
-    </template>
-
+  <template id="contact" inherit_id="base.contact">
+    <xpath expr="//div[@itemtype='http://schema.org/PostalAddress']" position="before">
+      <div t-if="'suite' in fields">
+        <span t-field="object.suite" />
+      </div>
+    </xpath>
+  </template>
 </odoo>

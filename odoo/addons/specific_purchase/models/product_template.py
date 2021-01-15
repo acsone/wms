@@ -26,11 +26,11 @@ class ProductTemplate(models.Model):
     state_id = fields.Many2one("product.state", string="State")
     nb_days_out_of_stock = fields.Integer(
         help="Number of days before running out of stock",
-        compute="compute_date_out_of_stock",
+        compute="_compute_date_out_of_stock",
     )
 
     @api.onchange("route_ids")
-    def compute_date_out_of_stock(self):
+    def _compute_date_out_of_stock(self):
         route_mto = self.env.ref("stock.route_warehouse0_mto")
         route_mto_mts = self.env.ref("stock_mts_mto_rule.route_mto_mts")
         route_ids = [route_mto.id, route_mto_mts.id]

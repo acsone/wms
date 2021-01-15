@@ -22,7 +22,7 @@
 from odoo import api, fields, models
 
 
-class GRN_Type(models.Model):
+class GRNType(models.Model):
     """ GRN Type """
 
     _name = "stock.grn.type"

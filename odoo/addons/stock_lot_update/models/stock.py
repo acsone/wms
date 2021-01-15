@@ -60,7 +60,7 @@ class StockProductionLot(models.Model):
                 qs.append("{}={}".format(product_fields[table], product.id))
             if table in template_fields:
                 qs.append(
-                    "%s=%s" % (template_fields[table], product.product_tmpl_id.id)
+                    "{}={}".format(template_fields[table], product.product_tmpl_id.id)
                 )
             if not qs:
                 continue
@@ -85,7 +85,7 @@ class StockProductionLot(models.Model):
                     query += " OR id in %s"
                     params += (tuple(moves),)
 
-            cr.execute(query, params)
+            cr.execute(query, params)  # pylint: disable=E8103
 
     @api.multi
     def write(self, vals):

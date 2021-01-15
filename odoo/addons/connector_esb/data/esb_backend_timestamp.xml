@@ -1,83 +1,71 @@
-<?xml version="1.0"?>
+<?xml version="1.0" ?>
 <odoo noupdate="1">
-
   <record id="esb_timestamp_product" model="esb.backend.timestamp">
-    <field name="backend_id" ref="esb_backend_config"/>
+    <field name="backend_id" ref="esb_backend_config" />
     <field name="model">product.product</field>
     <field name="kind">product</field>
     <field name="export_filename">Products_{date}.xml</field>
   </record>
-
   <record id="esb_timestamp_pharmacy" model="esb.backend.timestamp">
-    <field name="backend_id" ref="esb_backend_config"/>
+    <field name="backend_id" ref="esb_backend_config" />
     <field name="model">res.partner</field>
     <field name="kind">pharmacy</field>
     <field name="export_filename">Pharmacy_{date}.xml</field>
   </record>
-
   <record id="esb_timestamp_customer" model="esb.backend.timestamp">
-    <field name="backend_id" ref="esb_backend_config"/>
+    <field name="backend_id" ref="esb_backend_config" />
     <field name="model">res.partner</field>
     <field name="kind">customer</field>
     <field name="export_filename">Customer_{date}_{time}.xml</field>
   </record>
-
   <record id="esb_timestamp_customer_address" model="esb.backend.timestamp">
-    <field name="backend_id" ref="esb_backend_config"/>
+    <field name="backend_id" ref="esb_backend_config" />
     <field name="model">res.partner</field>
     <field name="kind">customer.address</field>
     <field name="export_filename">CustomerAddress_{date}_{time}.xml</field>
   </record>
-
   <record id="esb_timestamp_promotion_alcyon" model="esb.backend.timestamp">
-    <field name="backend_id" ref="esb_backend_config"/>
+    <field name="backend_id" ref="esb_backend_config" />
     <field name="model">product.pricelist.item</field>
     <field name="kind">promotion.alcyon</field>
     <field name="export_filename">AlcyonPromotion_{date}.xml</field>
   </record>
-
   <record id="esb_timestamp_product_price" model="esb.backend.timestamp">
-    <field name="backend_id" ref="esb_backend_config"/>
+    <field name="backend_id" ref="esb_backend_config" />
     <field name="model">product.product</field>
     <field name="kind">product.price</field>
     <field name="export_filename">ProductPrice_{date}.xml</field>
   </record>
-
   <record id="esb_timestamp_special_promotion" model="esb.backend.timestamp">
-    <field name="backend_id" ref="esb_backend_config"/>
+    <field name="backend_id" ref="esb_backend_config" />
     <field name="model">product.supplierinfo.esbflux</field>
     <field name="kind">special.promotion</field>
     <field name="export_filename">SpecialPromotion_{date}.xml</field>
   </record>
-
   <record id="esb_timestamp_buyx_gety" model="esb.backend.timestamp">
-    <field name="backend_id" ref="esb_backend_config"/>
+    <field name="backend_id" ref="esb_backend_config" />
     <field name="model">product.supplierinfo.esbflux</field>
     <field name="kind">buyx.gety</field>
     <field name="export_filename">BuyXGetY_{date}.xml</field>
   </record>
-
   <record id="esb_timestamp_stock_update" model="esb.backend.timestamp">
-    <field name="backend_id" ref="esb_backend_config"/>
+    <field name="backend_id" ref="esb_backend_config" />
     <field name="model">product.product</field>
     <field name="kind">stock.update</field>
     <field name="writer">webservice</field>
     <field name="export_filename">none</field>
   </record>
-
   <record id="esb_timestamp_stock_update_single" model="esb.backend.timestamp">
-    <field name="backend_id" ref="esb_backend_config"/>
+    <field name="backend_id" ref="esb_backend_config" />
     <field name="model">product.product</field>
     <field name="kind">stock.update.single</field>
     <field name="writer">webservice</field>
     <field name="export_filename">none</field>
   </record>
-
   <record id="esb_timestamp_document_zip" model="esb.backend.timestamp">
-    <field name="backend_id" ref="esb_backend_config"/>
+    <field name="backend_id" ref="esb_backend_config" />
     <field name="model">ir.attachment</field>
     <field name="kind">documents</field>
     <field name="export_filename">Documents_{date}.zip</field>
   </record>
-
 </odoo>

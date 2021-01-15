@@ -5,6 +5,7 @@
 from collections import namedtuple
 
 from odoo import fields
+
 from odoo.addons.component.core import Component
 
 StatsFormOptions = namedtuple(

@@ -1,17 +1,15 @@
-<?xml version="1.0"?>
+<?xml version="1.0" ?>
 <odoo>
-
-    <record id="view_pack_operation_lot_add_form" model="ir.ui.view">
-        <field name="name">Receive Wizard BO</field>
-        <field name="model">stock.pack.operation.lot.add</field>
-        <field name="inherit_id" ref="stock_receive_lot.view_pack_operation_lot_add_form"/>
-        <field name="arch" type="xml">
-            <field name="location_dest_id" position="after">
-                <div attrs="{'invisible': [('qty_backorder','=',0)]}" style="color:red">
-                    <label for="qty_backorder"/>: <field name="qty_backorder"/><br/>
+  <record id="view_pack_operation_lot_add_form" model="ir.ui.view">
+    <field name="name">Receive Wizard BO</field>
+    <field name="model">stock.pack.operation.lot.add</field>
+    <field name="inherit_id" ref="stock_receive_lot.view_pack_operation_lot_add_form" />
+    <field name="arch" type="xml">
+      <field name="location_dest_id" position="after">
+        <div attrs="{'invisible': [('qty_backorder','=',0)]}" style="color:red">
+                    <label for="qty_backorder" />: <field name="qty_backorder" /><br />
                 </div>
-            </field>
-        </field>
-    </record>
-
+      </field>
+    </field>
+  </record>
 </odoo>

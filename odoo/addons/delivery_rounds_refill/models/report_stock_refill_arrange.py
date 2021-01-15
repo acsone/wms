@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright 2018 Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+from psycopg2.extensions import AsIs
 
 from odoo import _, fields, models
 from odoo.exceptions import UserError
@@ -27,7 +28,7 @@ class ReportStockRefillArrange(models.Model):
           ORDER BY product_id, lot.removal_date, sq.in_date
         """
         self.env.cr.execute(
-            "CREATE OR REPLACE VIEW " + self._table + " AS (" + query + ")"
+            "CREATE OR REPLACE VIEW %s AS (%s)", (AsIs(self._table), AsIs(query))
         )
 
     product_id = fields.Many2one("product.product", "Product")

@@ -2,9 +2,10 @@
 # Copyright 2020 ACSONE SV/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo.tests.common import TransactionCase
 from shapely.geometry.multipolygon import MultiPolygon
 from shapely.geometry.polygon import Point, Polygon
+
+from odoo.tests.common import TransactionCase
 
 
 class TestComputeRoundTemplateIds(TransactionCase):

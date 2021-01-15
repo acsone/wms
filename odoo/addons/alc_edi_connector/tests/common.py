@@ -3,7 +3,9 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import mock
+
 from odoo import fields
+
 from odoo.addons.component.tests.common import SavepointComponentCase
 from odoo.addons.queue_job.tests.common import JobMixin
 

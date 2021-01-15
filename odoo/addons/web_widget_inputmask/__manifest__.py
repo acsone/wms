@@ -3,7 +3,7 @@
     "name": "Inputmask Widget",
     "author": "Gilvan Leal",
     "category": "Extra Tools",
-    "version": "10.0.4.0",
+    "version": "10.0.4.0.0",
     "license": "AGPL-3",
     "depends": ["web"],
     "data": ["views/assets_templates.xml"],

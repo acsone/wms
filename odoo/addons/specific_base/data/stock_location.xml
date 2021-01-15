@@ -1,7 +1,7 @@
 <odoo noupdate="1">
   <record id="stock_location_vlb" model="stock.location">
     <field name="name">VLB</field>
-    <field name="location_id" ref="stock.stock_location_locations"/>
+    <field name="location_id" ref="stock.stock_location_locations" />
     <field name="usage">view</field>
   </record>
 </odoo>

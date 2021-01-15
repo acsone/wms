@@ -4,7 +4,7 @@
 
 {
     "name": "Account Invoice Sent",
-    "version": "1.0",
+    "version": "10.0.1.0.0",
     "author": "BCIM, ACSONE SA/NV",
     "license": "AGPL-3",
     "category": "Accounting & Finance",

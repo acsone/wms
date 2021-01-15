@@ -1,4 +1,5 @@
 #!/usr/bin/python
+# pylint: disable=W8116
 import getopt
 import sys
 
@@ -28,11 +29,11 @@ def main(argv):
         # Format args
         opts, args = getopt.getopt(argv, "hd:a:", ["domains=", "actions="])
     except getopt.GetoptError:
-        print "display_values.py -d <domains> -a <actions>"
+        print("display_values.py -d <domains> -a <actions>")
         sys.exit(2)
     for opt, arg in opts:
         if opt == "-h":
-            print "display_values.py -i <domains> -o <actions>"
+            print("display_values.py -i <domains> -o <actions>")
             sys.exit()
         elif opt in ("-d", "--domains"):
             domains = arg
@@ -42,7 +43,7 @@ def main(argv):
     data = {"domains": domains, "actions": actions}
 
     result = requests.get("http://localhost:8069/display_values", data=data)
-    print result.content
+    print(result.content)
 
 
 if __name__ == "__main__":

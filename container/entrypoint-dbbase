@@ -2,7 +2,6 @@
 import os
 import subprocess
 
-
 db_name = os.getenv("DB_NAME")
 db_base = os.getenv("DB_BASE")
 

@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-
-    <record id="view_partner_form" model="ir.ui.view">
-        <field name="name">view.partner.specific.form</field>
-        <field name="inherit_id" ref="delivery_rounds.view_partner_form" />
-        <field name="model">res.partner</field>
-        <field name="arch" type="xml">
-            <xpath expr="//field[@name='round_itinerary_ids']" position="after">
-                <field name="time_limit_order" widget="float_time"/>
-            </xpath>
-        </field>
-    </record>
-
+  <record id="view_partner_form" model="ir.ui.view">
+    <field name="name">view.partner.specific.form</field>
+    <field name="inherit_id" ref="delivery_rounds.view_partner_form" />
+    <field name="model">res.partner</field>
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='round_itinerary_ids']" position="after">
+        <field name="time_limit_order" widget="float_time" />
+      </xpath>
+    </field>
+  </record>
 </odoo>

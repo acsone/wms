@@ -1,9 +1,7 @@
-<?xml version="1.0"?>
+<?xml version="1.0" ?>
 <odoo noupdate="1">
-
-    <record id="vat_tax_group" model="account.tax.group">
-        <field name="name">TVA</field>
-        <field name="sequence">10</field>
-    </record>
-
+  <record id="vat_tax_group" model="account.tax.group">
+    <field name="name">TVA</field>
+    <field name="sequence">10</field>
+  </record>
 </odoo>

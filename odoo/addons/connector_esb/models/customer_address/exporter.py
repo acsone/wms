@@ -2,9 +2,10 @@
 # Copyright 2017 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+from odoo.osv.expression import AND
+
 from odoo.addons.component.core import Component
 from odoo.addons.connector.components.mapper import mapping
-from odoo.osv.expression import AND
 
 from ...components.mapper import falsy2emptystring
 

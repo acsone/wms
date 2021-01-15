@@ -5,8 +5,9 @@
 import StringIO
 
 import qrcode
-from odoo.http import Controller, request, route
 from werkzeug import exceptions
+
+from odoo.http import Controller, request, route
 
 
 class SpecificReportController(Controller):

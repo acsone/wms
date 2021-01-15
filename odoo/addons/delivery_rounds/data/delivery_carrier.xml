@@ -1,16 +1,14 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo noupdate="1">
-
-    <record id="delivery_carrier_manual_round_change" model="delivery.carrier">
-        <field name="name">Manual Delivery Round Change</field>
-        <field name="fixed_price">0</field>
-        <field name="free_if_more_than" eval="True"/>
-        <field name="amount">0</field>
-        <field name="sequence">999</field>
-        <field name="delivery_type">fixed</field>
-        <field name="product_type">service</field>
-        <field name="product_sale_ok" eval="False"/>
-        <field name="active" eval="False"/>
-    </record>
-
+  <record id="delivery_carrier_manual_round_change" model="delivery.carrier">
+    <field name="name">Manual Delivery Round Change</field>
+    <field name="fixed_price">0</field>
+    <field name="free_if_more_than" eval="True" />
+    <field name="amount">0</field>
+    <field name="sequence">999</field>
+    <field name="delivery_type">fixed</field>
+    <field name="product_type">service</field>
+    <field name="product_sale_ok" eval="False" />
+    <field name="active" eval="False" />
+  </record>
 </odoo>

@@ -85,9 +85,9 @@ class AlcDeliveryWindow(models.Model):
     def float_to_time_repr(self, value):
         pattern = "%02d:%02d"
         hour = math.floor(value)
-        min = round((value % 1) * 60)
-        if min == 60:
-            min = 0
+        min_ = round((value % 1) * 60)
+        if min_ == 60:
+            min_ = 0
             hour += 1
 
-        return pattern % (hour, min)
+        return pattern % (hour, min_)

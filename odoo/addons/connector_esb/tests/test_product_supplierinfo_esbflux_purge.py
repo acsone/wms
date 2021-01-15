@@ -13,12 +13,6 @@ class ProductSupplierInfoEsbFluxPurgeTestCase(TransactionCase):
     def create_action(self, action, real_id):
         return self.model.create({"action": action, "real_id": real_id})
 
-    def print_actions(self, rs):
-        print("|-----")
-        for r in rs:
-            print("{}: {}".format(r.action, r.real_id))
-        print("-----|")
-
     def test_start_finish_by_create(self):
         """Only keep the last create"""
         rs = self.model.browse()

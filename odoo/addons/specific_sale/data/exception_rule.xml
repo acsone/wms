@@ -1,283 +1,264 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo noupdate="0">
-
-        <!-- Main category restrictions -->
-        <record id="no_food_allowed" model="exception.rule">
-            <field name="name">No Food Product Allowed</field>
-            <field name="description">Food Product Not Allowed</field>
-            <field name="active">True</field>
-            <field name="sequence">10</field>
-            <field name="model">sale.order.line</field>
-            <field name="code">
+  <!-- Main category restrictions -->
+  <record id="no_food_allowed" model="exception.rule">
+    <field name="name">No Food Product Allowed</field>
+    <field name="description">Food Product Not Allowed</field>
+    <field name="active">True</field>
+    <field name="sequence">10</field>
+    <field name="model">sale.order.line</field>
+    <field name="code">
 failed = object.validate_no_food()
             </field>
-        </record>
-
-        <record id="no_medoc_allowed" model="exception.rule">
-            <field name="name">No Medicine Allowed</field>
-            <field name="description">Medicine Not Allowed</field>
-            <field name="active">True</field>
-            <field name="sequence">10</field>
-            <field name="model">sale.order.line</field>
-            <field name="code">
+  </record>
+  <record id="no_medoc_allowed" model="exception.rule">
+    <field name="name">No Medicine Allowed</field>
+    <field name="description">Medicine Not Allowed</field>
+    <field name="active">True</field>
+    <field name="sequence">10</field>
+    <field name="model">sale.order.line</field>
+    <field name="code">
 failed = object.validate_no_medoc()
             </field>
-        </record>
-
-        <!-- Sub category medicines restrictions -->
-        <record id="no_medoc_cascade_import" model="exception.rule">
-            <field name="name">No Medicine Cascade Import</field>
-            <field name="description">Medicine Cascade Import Not Allowed</field>
-            <field name="active">True</field>
-            <field name="sequence">20</field>
-            <field name="model">sale.order.line</field>
-            <field name="code">
+  </record>
+  <!-- Sub category medicines restrictions -->
+  <record id="no_medoc_cascade_import" model="exception.rule">
+    <field name="name">No Medicine Cascade Import</field>
+    <field name="description">Medicine Cascade Import Not Allowed</field>
+    <field name="active">True</field>
+    <field name="sequence">20</field>
+    <field name="model">sale.order.line</field>
+    <field name="code">
 failed = object.validate_no_medoc_cascade_import()
             </field>
-        </record>
-
-        <record id="no_medoc_veterinary_belge" model="exception.rule">
-            <field name="name">No Belgian Veterinary Medicine</field>
-            <field name="description">Belgian Veterinary Medicine Not Allowed</field>
-            <field name="active">True</field>
-            <field name="sequence">20</field>
-            <field name="model">sale.order.line</field>
-            <field name="code">
+  </record>
+  <record id="no_medoc_veterinary_belge" model="exception.rule">
+    <field name="name">No Belgian Veterinary Medicine</field>
+    <field name="description">Belgian Veterinary Medicine Not Allowed</field>
+    <field name="active">True</field>
+    <field name="sequence">20</field>
+    <field name="model">sale.order.line</field>
+    <field name="code">
 failed = object.validate_no_medoc_veterinary_belge()
             </field>
-        </record>
-
-        <record id="no_medoc_human" model="exception.rule">
-            <field name="name">No Human Medicine</field>
-            <field name="description">Human Medicine Not Allowed</field>
-            <field name="active">True</field>
-            <field name="sequence">20</field>
-            <field name="model">sale.order.line</field>
-            <field name="code">
+  </record>
+  <record id="no_medoc_human" model="exception.rule">
+    <field name="name">No Human Medicine</field>
+    <field name="description">Human Medicine Not Allowed</field>
+    <field name="active">True</field>
+    <field name="sequence">20</field>
+    <field name="model">sale.order.line</field>
+    <field name="code">
 failed = object.validate_no_medoc_human()
             </field>
-        </record>
-
-        <!-- Sub sub category medicines restrictions -->
-        <record id="no_medoc_vet_stup" model="exception.rule">
-            <field name="name">No Narcotic Veterinary Medicine</field>
-            <field name="description">Narcotic Veterinary Medicine Not Allowed</field>
-            <field name="active">True</field>
-            <field name="sequence">30</field>
-            <field name="model">sale.order.line</field>
-            <field name="code">
+  </record>
+  <!-- Sub sub category medicines restrictions -->
+  <record id="no_medoc_vet_stup" model="exception.rule">
+    <field name="name">No Narcotic Veterinary Medicine</field>
+    <field name="description">Narcotic Veterinary Medicine Not Allowed</field>
+    <field name="active">True</field>
+    <field name="sequence">30</field>
+    <field name="model">sale.order.line</field>
+    <field name="code">
 failed = object.validate_no_medoc_vet_stupefiant()
             </field>
-        </record>
-
-        <record id="no_medoc_vet_stupIII" model="exception.rule">
-            <field name="name">No Cat.III Medicine</field>
-            <field name="description">Category III (psychotropic) Medicine Not Allowed</field>
-            <field name="active">True</field>
-            <field name="sequence">30</field>
-            <field name="model">sale.order.line</field>
-            <field name="code">
+  </record>
+  <record id="no_medoc_vet_stupIII" model="exception.rule">
+    <field name="name">No Cat.III Medicine</field>
+    <field name="description">Category III (psychotropic) Medicine Not Allowed</field>
+    <field name="active">True</field>
+    <field name="sequence">30</field>
+    <field name="model">sale.order.line</field>
+    <field name="code">
 failed = object.validate_no_medoc_vet_psychoIII()
             </field>
-        </record>
-
-        <record id="no_medoc_belgium_only" model="exception.rule">
-            <field name="name">No Belgium Only Medicine</field>
-            <field name="description">Belgium Only Medicine Not Allowed</field>
-            <field name="active">True</field>
-            <field name="sequence">10</field>
-            <field name="model">sale.order.line</field>
-            <field name="code">
+  </record>
+  <record id="no_medoc_belgium_only" model="exception.rule">
+    <field name="name">No Belgium Only Medicine</field>
+    <field name="description">Belgium Only Medicine Not Allowed</field>
+    <field name="active">True</field>
+    <field name="sequence">10</field>
+    <field name="model">sale.order.line</field>
+    <field name="code">
 failed = object.validate_no_medoc_belgium_only()
             </field>
-        </record>
-
-        <record id="no_veterinary_product" model="exception.rule">
-            <field name="name">No Veterinary Product</field>
-            <field name="description">Veterinary Product Not Allowed</field>
-            <field name="active">True</field>
-            <field name="sequence">10</field>
-            <field name="model">sale.order.line</field>
-            <field name="code">
+  </record>
+  <record id="no_veterinary_product" model="exception.rule">
+    <field name="name">No Veterinary Product</field>
+    <field name="description">Veterinary Product Not Allowed</field>
+    <field name="active">True</field>
+    <field name="sequence">10</field>
+    <field name="model">sale.order.line</field>
+    <field name="code">
 failed = object.validate_no_veterinary_product()
             </field>
-        </record>
-
-        <record id="no_psychotropic_by_phone" model="exception.rule">
-            <field name="name">No psychotropic ordered by phone</field>
-            <field name="description">No psychotropic by phone</field>
-            <field name="active">True</field>
-            <field name="sequence">15</field>
-            <field name="model">sale.order.line</field>
-            <field name="code">
+  </record>
+  <record id="no_psychotropic_by_phone" model="exception.rule">
+    <field name="name">No psychotropic ordered by phone</field>
+    <field name="description">No psychotropic by phone</field>
+    <field name="active">True</field>
+    <field name="sequence">15</field>
+    <field name="model">sale.order.line</field>
+    <field name="code">
 failed = object.validate_no_psychotropic_ordered_by_phone()
             </field>
-        </record>
-
-        <record id="no_stupefiant_vet_by_phone" model="exception.rule">
-            <field name="name">No Stupéfiant VET ordered by phone</field>
-            <field name="description">No Stupéfiant VET by phone</field>
-            <field name="active">True</field>
-            <field name="sequence">16</field>
-            <field name="model">sale.order.line</field>
-            <field name="code">
+  </record>
+  <record id="no_stupefiant_vet_by_phone" model="exception.rule">
+    <field name="name">No Stupéfiant VET ordered by phone</field>
+    <field name="description">No Stupéfiant VET by phone</field>
+    <field name="active">True</field>
+    <field name="sequence">16</field>
+    <field name="model">sale.order.line</field>
+    <field name="code">
 failed = object.validate_no_stupefiant_vet_by_phone()
             </field>
-        </record>
-
-        <!-- Warning exceptions -->
-        <record id="warning_psychotropic" model="exception.rule">
-            <field name="name">Warning psychotropic</field>
-            <field name="description">Warning psychotropic</field>
-            <field name="active">True</field>
-            <field name="sequence">30</field>
-            <field name="model">sale.order.line</field>
-            <field name="warning_only">True</field>
-            <field name="warning_text">Psychotropic: written order, keep confirmation.</field>
-            <field name="code">
+  </record>
+  <!-- Warning exceptions -->
+  <record id="warning_psychotropic" model="exception.rule">
+    <field name="name">Warning psychotropic</field>
+    <field name="description">Warning psychotropic</field>
+    <field name="active">True</field>
+    <field name="sequence">30</field>
+    <field name="model">sale.order.line</field>
+    <field name="warning_only">True</field>
+    <field name="warning_text">Psychotropic: written order, keep confirmation.</field>
+    <field name="code">
 failed = object.warning_psychotropic()
             </field>
-        </record>
-
-        <record id="warning_stupefiant_vet" model="exception.rule">
-            <field name="name">Warning stupéfiant VET</field>
-            <field name="description">Warning stupéfiant VET</field>
-            <field name="active">True</field>
-            <field name="sequence">30</field>
-            <field name="model">sale.order.line</field>
-            <field name="warning_only">True</field>
-            <field name="warning_text">stupéfiant VET: written order, keep confirmation.</field>
-            <field name="code">
+  </record>
+  <record id="warning_stupefiant_vet" model="exception.rule">
+    <field name="name">Warning stupéfiant VET</field>
+    <field name="description">Warning stupéfiant VET</field>
+    <field name="active">True</field>
+    <field name="sequence">30</field>
+    <field name="model">sale.order.line</field>
+    <field name="warning_only">True</field>
+    <field name="warning_text">stupéfiant VET: written order, keep confirmation.</field>
+    <field name="code">
 failed = object.warning_stupefiant_vet()
             </field>
-        </record>
-
-        <record id="warning_cascade_import" model="exception.rule">
-            <field name="name">Warning cascade importation</field>
-            <field name="description">Warning cascade importation</field>
-            <field name="active">True</field>
-            <field name="sequence">30</field>
-            <field name="model">sale.order.line</field>
-            <field name="warning_only">True</field>
-            <field name="warning_text">Product of type cascade importation</field>
-            <field name="code">
+  </record>
+  <record id="warning_cascade_import" model="exception.rule">
+    <field name="name">Warning cascade importation</field>
+    <field name="description">Warning cascade importation</field>
+    <field name="active">True</field>
+    <field name="sequence">30</field>
+    <field name="model">sale.order.line</field>
+    <field name="warning_only">True</field>
+    <field name="warning_text">Product of type cascade importation</field>
+    <field name="code">
 failed = object.warning_cascade_importation()
             </field>
-        </record>
-
-        <record id="warning_human_medoc" model="exception.rule">
-            <field name="name">Warning human medicine</field>
-            <field name="description">Warning human medicine</field>
-            <field name="active">True</field>
-            <field name="sequence">30</field>
-            <field name="model">sale.order.line</field>
-            <field name="warning_only">True</field>
-            <field name="warning_text">Product of type human medicine</field>
-            <field name="code">
+  </record>
+  <record id="warning_human_medoc" model="exception.rule">
+    <field name="name">Warning human medicine</field>
+    <field name="description">Warning human medicine</field>
+    <field name="active">True</field>
+    <field name="sequence">30</field>
+    <field name="model">sale.order.line</field>
+    <field name="warning_only">True</field>
+    <field name="warning_text">Product of type human medicine</field>
+    <field name="code">
 failed = object.warning_human_medicine()
             </field>
-        </record>
-
-        <record id="provision_on_order" model="exception.rule">
-            <field name="name">Warning provision on order</field>
-            <field name="description">Provision on order</field>
-            <field name="active">True</field>
-            <field name="sequence">30</field>
-            <field name="model">sale.order.line</field>
-            <field name="warning_only">True</field>
-            <field name="warning_text">Item bought on order, neither taken back nor exchanged.</field>
-            <field name="code">
+  </record>
+  <record id="provision_on_order" model="exception.rule">
+    <field name="name">Warning provision on order</field>
+    <field name="description">Provision on order</field>
+    <field name="active">True</field>
+    <field name="sequence">30</field>
+    <field name="model">sale.order.line</field>
+    <field name="warning_only">True</field>
+    <field
+      name="warning_text"
+    >Item bought on order, neither taken back nor exchanged.</field>
+    <field name="code">
 failed = object.warning_provision_on_order()
             </field>
-        </record>
-
-        <!-- Other exceptions -->
-        <record id="no_line_under_0" model="exception.rule">
-            <field name="name">No line under 0</field>
-            <field name="description">Negative Sale Order Line Not Allowed</field>
-            <field name="active">True</field>
-            <field name="sequence">20</field>
-            <field name="model">sale.order.line</field>
-            <field name="code">
+  </record>
+  <!-- Other exceptions -->
+  <record id="no_line_under_0" model="exception.rule">
+    <field name="name">No line under 0</field>
+    <field name="description">Negative Sale Order Line Not Allowed</field>
+    <field name="active">True</field>
+    <field name="sequence">20</field>
+    <field name="model">sale.order.line</field>
+    <field name="code">
 failed = object.price_subtotal &lt; 0
             </field>
-        </record>
-
-        <record id="no_backorder" model="exception.rule">
-            <field name="name">No backorder</field>
-            <field name="description">This customer does not want backorder</field>
-            <field name="active">True</field>
-            <field name="sequence">20</field>
-<!--            <field name="rule_group">sale</field>-->
-            <field name="model">sale.order.line</field>
-            <field name="code">
+  </record>
+  <record id="no_backorder" model="exception.rule">
+    <field name="name">No backorder</field>
+    <field name="description">This customer does not want backorder</field>
+    <field name="active">True</field>
+    <field name="sequence">20</field>
+    <!--            <field name="rule_group">sale</field>-->
+    <field name="model">sale.order.line</field>
+    <field name="code">
 failed = object.validate_no_backorder()
             </field>
-        </record>
-
-        <record id="warning_free_product" model="exception.rule">
-            <field name="name">Order offer free product</field>
-            <field name="description">Will include free product</field>
-            <field name="active">True</field>
-            <field name="sequence">100</field>
-            <field name="model">sale.order.line</field>
-            <field name="warning_only">True</field>
-            <field name="code">
+  </record>
+  <record id="warning_free_product" model="exception.rule">
+    <field name="name">Order offer free product</field>
+    <field name="description">Will include free product</field>
+    <field name="active">True</field>
+    <field name="sequence">100</field>
+    <field name="model">sale.order.line</field>
+    <field name="warning_only">True</field>
+    <field name="code">
 failed = object.warning_free_product()
             </field>
-        </record>
-
-        <record id="warning_supplier_break" model="exception.rule">
-            <field name="name">Out of stock at supplier level</field>
-            <field name="description">Out of stock at supplier level</field>
-            <field name="active">True</field>
-            <field name="sequence">100</field>
-            <field name="model">sale.order.line</field>
-            <field name="warning_only">True</field>
-            <field name="warning_text">Out of stock at supplier level</field>
-            <field name="code">
+  </record>
+  <record id="warning_supplier_break" model="exception.rule">
+    <field name="name">Out of stock at supplier level</field>
+    <field name="description">Out of stock at supplier level</field>
+    <field name="active">True</field>
+    <field name="sequence">100</field>
+    <field name="model">sale.order.line</field>
+    <field name="warning_only">True</field>
+    <field name="warning_text">Out of stock at supplier level</field>
+    <field name="code">
 failed = object.warning_supplier_break()
             </field>
-        </record>
-
-      <!-- General exceptions not enabled, test only or ? Should keep ? -->
-
-        <record id="no_line_at_zero" model="exception.rule">
-            <field name="name">Pas de ligne à zéro</field>
-            <field name="description">Une ligne de vente ne peut pas être à zéro</field>
-            <field name="active">False</field>
-            <field name="sequence">20</field>
-            <field name="model">sale.order.line</field>
-            <field name="code">
+  </record>
+  <!-- General exceptions not enabled, test only or ? Should keep ? -->
+  <record id="no_line_at_zero" model="exception.rule">
+    <field name="name">Pas de ligne à zéro</field>
+    <field name="description">Une ligne de vente ne peut pas être à zéro</field>
+    <field name="active">False</field>
+    <field name="sequence">20</field>
+    <field name="model">sale.order.line</field>
+    <field name="code">
 if object.price_subtotal == 0:
     failed=True
             </field>
-        </record>
-
-        <record id="order_amount_minimum" model="exception.rule">
-            <field name="name">Montant minimum à 100 euros</field>
-            <field name="description">Le montant total de la commande ne peut pas être inférieur à 100 euros</field>
-            <field name="active">False</field>
-            <field name="sequence">30</field>
-            <field name="model">sale.order</field>
-            <field name="code">
+  </record>
+  <record id="order_amount_minimum" model="exception.rule">
+    <field name="name">Montant minimum à 100 euros</field>
+    <field
+      name="description"
+    >Le montant total de la commande ne peut pas être inférieur à 100 euros</field>
+    <field name="active">False</field>
+    <field name="sequence">30</field>
+    <field name="model">sale.order</field>
+    <field name="code">
 if object.amount_total &lt; 100:
     failed=True
             </field>
-        </record>
-
-        <record id="order_amount_material_maximum" model="exception.rule">
-            <field name="name">Montant maximum à 1000 euros (matériel)</field>
-            <field name="description">Le montant total de la commande ne peut pas être supérieur à 1000 euros pour les produits de type matériel</field>
-            <field name="active">False</field>
-            <field name="sequence">30</field>
-            <field name="model">sale.order</field>
-            <field name="code">
+  </record>
+  <record id="order_amount_material_maximum" model="exception.rule">
+    <field name="name">Montant maximum à 1000 euros (matériel)</field>
+    <field
+      name="description"
+    >Le montant total de la commande ne peut pas être supérieur à 1000 euros pour les produits de type matériel</field>
+    <field name="active">False</field>
+    <field name="sequence">30</field>
+    <field name="model">sale.order</field>
+    <field name="code">
 material_category = object.env.ref('specific_data.product_categ_materiel')
 material_categories = object.env['product.category'].search([('id', 'child_of', material_category.ids)])
 if sum([line.price_total for line in object.order_line.filtered(lambda l: l.product_id.categ_id.id in material_categories.ids)]) &gt; 1000:
     failed=True
             </field>
-        </record>
-
+  </record>
 </odoo>

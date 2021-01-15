@@ -1,16 +1,17 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-
   <template id="round_report_delivery" name="round.instance report_delivery">
     <p>Failed to deliver some shippings, you can retry manually from this view.</p>
     <br />
     <ol>
       <t t-foreach="customers" t-as="customer">
         <li t-if="customer.delivery_error">
-          <strong><span t-esc="customer.partner_id.display_name"/></strong> <span t-raw="customer.delivery_error" />
+          <strong>
+            <span t-esc="customer.partner_id.display_name" />
+          </strong>
+          <span t-raw="customer.delivery_error" />
         </li>
       </t>
     </ol>
   </template>
-
 </odoo>

@@ -1,28 +1,40 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-
-    <record id="stock_location_wizard_checksum_view_form" model="ir.ui.view">
-        <field name="name">form</field>
-        <field name="model">stock.location.wizard.checksum</field>
-        <field name="arch" type="xml">
-            <form string="Manage Checksum">
-                <footer>
-                    <button name="generate" string="Generate" type="object" class="oe_highlight" />
-                    <button name="check" string="Check" type="object" class="oe_highlight" />
+  <record id="stock_location_wizard_checksum_view_form" model="ir.ui.view">
+    <field name="name">form</field>
+    <field name="model">stock.location.wizard.checksum</field>
+    <field name="arch" type="xml">
+      <form string="Manage Checksum">
+        <footer>
+                    <button
+            name="generate"
+            string="Generate"
+            type="object"
+            class="oe_highlight"
+          />
+                    <button
+            name="check"
+            string="Check"
+            type="object"
+            class="oe_highlight"
+          />
                     or
-                    <button string="Cancel" class="btn btn-sm btn-default" special="cancel"/>
+                    <button
+            string="Cancel"
+            class="btn btn-sm btn-default"
+            special="cancel"
+          />
                 </footer>
-            </form>
-        </field>
-    </record>
-
-    <act_window name="Manage Checksum"
-        src_model="stock.location"
-        res_model="stock.location.wizard.checksum"
-        view_mode="form"
-        key2="client_action_multi"
-        target="new"
-        id="act_stock_location_wizard_checksum"
-        />
-
+      </form>
+    </field>
+  </record>
+  <act_window
+    name="Manage Checksum"
+    src_model="stock.location"
+    res_model="stock.location.wizard.checksum"
+    view_mode="form"
+    key2="client_action_multi"
+    target="new"
+    id="act_stock_location_wizard_checksum"
+  />
 </odoo>

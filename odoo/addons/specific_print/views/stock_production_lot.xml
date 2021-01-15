@@ -1,25 +1,31 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <record id="view_production_lot_form" model="ir.ui.view">
-        <field name="name">view.production.lot.form</field>
-        <field name="inherit_id" ref="stock.view_production_lot_form"/>
-        <field name="model">stock.production.lot</field>
-        <field name="arch" type="xml">
-            <xpath expr="//div[@name='button_box']" position="inside">
-                <button class="oe_stat_button"
-                    name="%(print_label_action)d" type="action" icon="fa-print"
-                    string="Print Lot" context="{'default_label_type': 'lot'}"/>
-            </xpath>
-        </field>
-    </record>
-
-    <act_window name="Print lots"
-        res_model="print.label"
-        src_model="stock.production.lot"
-        view_mode="form"
-        target="new"
-        key2="client_action_multi"
-        id="action_menu_print_lots"
-        context="{'default_label_type': 'lot'}"
-        multi="True"/>
+  <record id="view_production_lot_form" model="ir.ui.view">
+    <field name="name">view.production.lot.form</field>
+    <field name="inherit_id" ref="stock.view_production_lot_form" />
+    <field name="model">stock.production.lot</field>
+    <field name="arch" type="xml">
+      <xpath expr="//div[@name='button_box']" position="inside">
+        <button
+          class="oe_stat_button"
+          name="%(print_label_action)d"
+          type="action"
+          icon="fa-print"
+          string="Print Lot"
+          context="{'default_label_type': 'lot'}"
+        />
+      </xpath>
+    </field>
+  </record>
+  <act_window
+    name="Print lots"
+    res_model="print.label"
+    src_model="stock.production.lot"
+    view_mode="form"
+    target="new"
+    key2="client_action_multi"
+    id="action_menu_print_lots"
+    context="{'default_label_type': 'lot'}"
+    multi="True"
+  />
 </odoo>

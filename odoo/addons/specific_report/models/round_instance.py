@@ -39,12 +39,12 @@ class RoundInstance(models.Model):
 
         pattern = "%02d:%02d"
         hour = math.floor(self.time_leave_planned)
-        min = round((self.time_leave_planned % 1) * 60)
-        if min == 60:
-            min = 0
+        min_ = round((self.time_leave_planned % 1) * 60)
+        if min_ == 60:
+            min_ = 0
             hour += 1
 
-        return pattern % (hour, min)
+        return pattern % (hour, min_)
 
     @api.multi
     def get_merged_shippings(self):

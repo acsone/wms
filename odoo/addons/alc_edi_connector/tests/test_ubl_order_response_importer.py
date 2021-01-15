@@ -5,6 +5,7 @@
 import base64
 
 import mock
+
 from odoo.addons.queue_job.job import Job
 
 from .common import AlcEdiConnectorCase

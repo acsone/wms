@@ -6,8 +6,9 @@ import base64
 import logging
 
 from odoo import _, api, models
-from odoo.addons.base.res.res_bank import sanitize_account_number
 from odoo.exceptions import UserError
+
+from odoo.addons.base.res.res_bank import sanitize_account_number
 
 _logger = logging.getLogger(__name__)
 

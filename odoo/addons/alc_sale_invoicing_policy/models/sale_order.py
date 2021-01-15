@@ -9,8 +9,9 @@ from datetime import datetime
 from dateutil.relativedelta import relativedelta
 
 from odoo import api, fields, models
-from odoo.addons.queue_job.job import job
 from odoo.tools import DEFAULT_SERVER_DATE_FORMAT
+
+from odoo.addons.queue_job.job import job
 
 _logger = logging.getLogger(__name__)
 

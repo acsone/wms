@@ -3,6 +3,7 @@ import logging
 from datetime import date
 
 from domain_interface import DomainInterface, Parameters
+
 from odoo import _
 
 from .. import constants
@@ -451,7 +452,7 @@ WHERE picking.state IN ('partially_available', 'assigned')
 
         counter = 0
         while counter < MAX_RETRY:
-            self.env.cr.execute(report_query, query_values)
+            self.env.cr.execute(report_query, query_values)  # pylint: disable=E8103
             report_id = self.env.cr.fetchone()
             if not report_id:
                 break
@@ -579,7 +580,7 @@ WHERE picking.state IN ('partially_available', 'assigned')
 
         counter = 0
         while counter < MAX_RETRY:
-            self.env.cr.execute(report_query, query_values)
+            self.env.cr.execute(report_query, query_values)  # pylint: disable=E8103
             report_id = self.env.cr.fetchone()
             if not report_id:
                 break

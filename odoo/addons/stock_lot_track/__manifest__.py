@@ -21,7 +21,7 @@
 
 {
     "name": "Stock lot track",
-    "version": "1.0",
+    "version": "10.0.1.0.0",
     "category": "Stock Management",
     "author": "Sylvain Van Hoof",
     "description": """
@@ -30,7 +30,6 @@
     "depends": ["product_expiry"],
     "data": [],
     "installable": True,
-    "active": False,
     "license": "AGPL-3",
     "application": False,
 }

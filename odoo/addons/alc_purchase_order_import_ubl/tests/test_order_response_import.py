@@ -2,6 +2,8 @@
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+from odoo.tools import file_open
+
 from odoo.addons.purchase_order_import.tests.test_order_response_import import (
     TestOrderResponseImportCommon,
 )
@@ -13,7 +15,6 @@ from odoo.addons.purchase_order_import_ubl.wizard.order_response_import import (
     _ORDER_LINE_STATUS_TO_STATUS,
     _ORDER_RESPONSE_CODE_TO_STATUS,
 )
-from odoo.tools import file_open
 
 _STATUS_TO_RESPONSE_CODE = {p[1]: p[0] for p in _ORDER_RESPONSE_CODE_TO_STATUS.items()}
 

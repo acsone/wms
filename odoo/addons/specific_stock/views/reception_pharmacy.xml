@@ -1,73 +1,71 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-
-    <record id="reception_pharmacy_view_tree" model="ir.ui.view">
-        <field name="name">reception.pharmacy</field>
-        <field name="model">reception.pharmacy</field>
-        <field name="arch" type="xml">
-            <tree string="Pharmacy Receptions">
-                <field name="create_uid"/>
-                <field name="date"/>
-                <field name="state"/>
+  <record id="reception_pharmacy_view_tree" model="ir.ui.view">
+    <field name="name">reception.pharmacy</field>
+    <field name="model">reception.pharmacy</field>
+    <field name="arch" type="xml">
+      <tree string="Pharmacy Receptions">
+        <field name="create_uid" />
+        <field name="date" />
+        <field name="state" />
+      </tree>
+    </field>
+  </record>
+  <record id="reception_pharmacy_view_form" model="ir.ui.view">
+    <field name="name">reception.pharmacy</field>
+    <field name="model">reception.pharmacy</field>
+    <field name="arch" type="xml">
+      <form string="Pharmacy Reception">
+        <header>
+          <button name="validate" string="Transfer" type="object" states="draft" />
+          <field name="state" widget="statusbar" statusbar_visible="draft,done" />
+        </header>
+        <sheet>
+          <group>
+            <group>
+              <field name="product_id" />
+            </group>
+            <group>
+              <field name="date" readonly="1" />
+              <field name="create_uid" readonly="1" />
+            </group>
+          </group>
+          <field name="line_ids">
+            <tree editable="top">
+              <field name="customer_id" options="{'no_open':True,'no_create':True}" />
+              <field
+                name="partner_shipping_id"
+                options="{'no_open':True,'no_create':True}"
+              />
+              <field name="bin_id" options="{'no_open':True,'no_create':True}" />
+              <field name="product_qty" options="{'no_open':True,'no_create':True}" />
             </tree>
-        </field>
-    </record>
-
-    <record id="reception_pharmacy_view_form" model="ir.ui.view">
-        <field name="name">reception.pharmacy</field>
-        <field name="model">reception.pharmacy</field>
-        <field name="arch" type="xml">
-            <form string="Pharmacy Reception">
-                <header>
-                    <button name="validate" string="Transfer" type="object" states="draft" />
-                    <field name="state" widget="statusbar" statusbar_visible="draft,done" />
-                </header>
-
-                <sheet>
-                    <group>
-                        <group>
-                            <field name="product_id"/>
-                        </group>
-                        <group>
-                            <field name="date" readonly="1"/>
-                            <field name="create_uid" readonly="1"/>
-                        </group>
-                    </group>
-                    <field name="line_ids">
-                        <tree editable="top">
-                            <field name="customer_id" options="{'no_open':True,'no_create':True}"/>
-                            <field name="partner_shipping_id" options="{'no_open':True,'no_create':True}"/>
-                            <field name="bin_id" options="{'no_open':True,'no_create':True}"/>
-                            <field name="product_qty" options="{'no_open':True,'no_create':True}"/>
-                        </tree>
-                        <form>
-                            <group>
-                                <field name="customer_id"/>
-                                <field name="partner_shipping_id"/>
-                                <field name="bin_id"/>
-                                <field name="product_qty"/>
-                                <field name="reception_move_id"/>
-                                <field name="procurement_id"/>
-                            </group>
-                        </form>
-                    </field>
-                </sheet>
+            <form>
+              <group>
+                <field name="customer_id" />
+                <field name="partner_shipping_id" />
+                <field name="bin_id" />
+                <field name="product_qty" />
+                <field name="reception_move_id" />
+                <field name="procurement_id" />
+              </group>
             </form>
-        </field>
-    </record>
-
-    <record id="reception_pharmacy_action" model="ir.actions.act_window">
-        <field name="name">Reception Pharmacy</field>
-        <field name="type">ir.actions.act_window</field>
-        <field name="res_model">reception.pharmacy</field>
-        <field name="view_type">form</field>
-        <field name="view_mode">tree,form</field>
-    </record>
-
-    <menuitem
-        action="reception_pharmacy_action"
-        id="reception_pharmacy_menu"
-        parent="stock.menu_stock_inventory_control"
-        sequence="60"/>
-
+          </field>
+        </sheet>
+      </form>
+    </field>
+  </record>
+  <record id="reception_pharmacy_action" model="ir.actions.act_window">
+    <field name="name">Reception Pharmacy</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="res_model">reception.pharmacy</field>
+    <field name="view_type">form</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+  <menuitem
+    action="reception_pharmacy_action"
+    id="reception_pharmacy_menu"
+    parent="stock.menu_stock_inventory_control"
+    sequence="60"
+  />
 </odoo>

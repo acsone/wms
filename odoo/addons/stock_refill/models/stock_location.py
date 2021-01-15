@@ -18,9 +18,10 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
+from psycopg2.extensions import AsIs
 
 from odoo import _, fields, models
-from odoo.exceptions import Warning
+from odoo.exceptions import UserError
 
 
 class StockLocation(models.Model):
@@ -44,15 +45,11 @@ class StockLocation(models.Model):
         self._cr.execute(
             """
             SELECT distinct c.id
-            FROM """
-            + self._table
-            + " p, "
-            + self._table
-            + """ c
+            FROM %s p, %s c
             WHERE c.parent_left < p.parent_left
               AND c.parent_right > p.parent_right
               AND p.id in %s""",
-            (tuple(self.ids),),
+            (AsIs(self._table), AsIs(self._table), tuple(self.ids),),
         )
         res = self._cr.fetchall()
         return self.browse(map(lambda x: x[0], res))
@@ -76,7 +73,7 @@ class StockLocation(models.Model):
                     :1
                 ]
             if not reserve:
-                raise Warning(
+                raise UserError(
                     _(
                         "Product %s must be put in reserve but cannot "
                         "find a suitable location"

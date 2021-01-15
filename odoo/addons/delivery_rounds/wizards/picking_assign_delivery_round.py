@@ -42,29 +42,30 @@ class PickingAssignDeliveryRound(models.TransientModel):
     def _get_assignable_states(self):
         return ["pending", "draft", "close"]
 
-    @api.one
     def confirm(self):
-        act_close = {"type": "ir.actions.act_window_close"}
-        shippings = self.env["stock.picking"].browse(self._context.get("active_ids"))
-        if not shippings:
-            return act_close
-        pickings = shippings._get_all_src_pickings().filtered(
-            lambda x: x.picking_type_subcode == "PICK"
-        )
-        old_round_instance_customers = shippings.mapped("delivery_round_customer_id")
-        pickings_assigned = self.delivery_round_id.with_context(
-            manual_change_delivery_round=True
-        )._assign_pickings(pickings)
-        if not pickings_assigned:
-            raise UserError(
-                _(
-                    "No products available.\n"
-                    "Cannot assign the delivery round to the picking"
-                )
+        for rec in self:
+            shippings = rec.env["stock.picking"].browse(rec._context.get("active_ids"))
+            if not shippings:
+                continue
+            pickings = shippings._get_all_src_pickings().filtered(
+                lambda x: x.picking_type_subcode == "PICK"
             )
-        old_round_instance_customers.sudo()._remove_if_empty()
-        shippings.message_post(
-            _('Delivery round "%s" manually assigned')
-            % self.delivery_round_id.display_name
-        )
-        return act_close
+            old_round_instance_customers = shippings.mapped(
+                "delivery_round_customer_id"
+            )
+            pickings_assigned = rec.delivery_round_id.with_context(
+                manual_change_delivery_round=True
+            )._assign_pickings(pickings)
+            if not pickings_assigned:
+                raise UserError(
+                    _(
+                        "No products available.\n"
+                        "Cannot assign the delivery round to the picking"
+                    )
+                )
+            old_round_instance_customers.sudo()._remove_if_empty()
+            shippings.message_post(
+                _('Delivery round "%s" manually assigned')
+                % rec.delivery_round_id.display_name
+            )
+        return {"type": "ir.actions.act_window_close"}

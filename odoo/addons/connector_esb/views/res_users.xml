@@ -2,10 +2,10 @@
   <record id="res_users_esb_form_view" model="ir.ui.view">
     <field name="name">res.users.esb.form.view</field>
     <field name="model">res.users</field>
-    <field name="inherit_id" ref="base.view_users_simple_form"/>
+    <field name="inherit_id" ref="base.view_users_simple_form" />
     <field name="arch" type="xml">
       <field name="fax" position="after">
-        <field name="esb_ref"/>
+        <field name="esb_ref" />
       </field>
     </field>
   </record>

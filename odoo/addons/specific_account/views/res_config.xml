@@ -1,13 +1,11 @@
 <odoo>
-
-    <record id="view_account_config_settings" model="ir.ui.view">
-        <field name="model">account.config.settings</field>
-        <field name="inherit_id" ref="account.view_account_config_settings"/>
-        <field name="arch" type="xml">
-            <field name='tax_calculation_rounding_method' position="after">
-                <field name="invoice_terms_conditions"/>
-            </field>
-        </field>
-    </record>
-
+  <record id="view_account_config_settings" model="ir.ui.view">
+    <field name="model">account.config.settings</field>
+    <field name="inherit_id" ref="account.view_account_config_settings" />
+    <field name="arch" type="xml">
+      <field name='tax_calculation_rounding_method' position="after">
+        <field name="invoice_terms_conditions" />
+      </field>
+    </field>
+  </record>
 </odoo>

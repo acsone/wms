@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <!-- resolve conflicts with delivery and product_packaging_dimension -->
-    <record model="ir.ui.view" id="delivery.product_packaging_delivery_form">
-        <field name="active" eval="0"/>
-    </record>
-    <record model="ir.ui.view" id="delivery.product_packaging_delivery_tree">
-        <field name="active" eval="0"/>
-    </record>
+  <!-- resolve conflicts with delivery and product_packaging_dimension -->
+  <record model="ir.ui.view" id="delivery.product_packaging_delivery_form">
+    <field name="active" eval="0" />
+  </record>
+  <record model="ir.ui.view" id="delivery.product_packaging_delivery_tree">
+    <field name="active" eval="0" />
+  </record>
 </odoo>

@@ -1,46 +1,58 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <!-- Copyright 2020 ACSONE SA/NV
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
-
 <odoo>
-
-    <record model="ir.ui.view" id="export_report_turnover_form_view">
-        <field name="name">export.report.turnover.form (in alc_turnover_reporting)</field>
-        <field name="model">export.report.turnover</field>
-        <field name="arch" type="xml">
-            <form string="Export Report Turnover">
-                <field invisible="1" name="state"/>
-                <field name="name" invisible="1"/>
-                <div states="get">
-                    <h2>Export Complete</h2>
-                    <p>Here is the exported report file: <field name="data" readonly="1" filename="name"/></p>
-                </div>
-                <div states="choose">
-                    <h2>Click on the export button to export your report.</h2>
-                </div>
-                <footer states="choose">
-                    <button name="get_export_data" string="Export" type="object" class="btn-primary"/>
-                    <button special="cancel" string="Cancel" type="object" class="btn-default"/>
-                </footer>
-                <footer states="get">
-                    <button special="cancel" string="Close" type="object" class="btn-primary"/>
-                </footer>
-            </form>
-        </field>
-    </record>
-
-    <record model="ir.actions.act_window" id="export_report_turnover_act_window">
-        <field name="name">Export Report Turnover</field> <!-- TODO -->
-        <field name="res_model">export.report.turnover</field>
-        <field name="view_mode">form</field>
-        <field name="context">{}</field>
-        <field name="view_type">form</field>
-        <field name="target">new</field>
-    </record>
-
-
-    <menuitem id="alc_turnover_report_menu" parent="account.menu_finance_reports" name="ALC Turnover Reporting" sequence="101"/>
-    <menuitem action="export_report_turnover_act_window" id="menu_wizard_turnover_export" parent="alc_turnover_report_menu"/>
-
-
+  <record model="ir.ui.view" id="export_report_turnover_form_view">
+    <field name="name">export.report.turnover.form (in alc_turnover_reporting)</field>
+    <field name="model">export.report.turnover</field>
+    <field name="arch" type="xml">
+      <form string="Export Report Turnover">
+        <field invisible="1" name="state" />
+        <field name="name" invisible="1" />
+        <div states="get">
+          <h2>Export Complete</h2>
+          <p>Here is the exported report file: <field
+              name="data"
+              readonly="1"
+              filename="name"
+            /></p>
+        </div>
+        <div states="choose">
+          <h2>Click on the export button to export your report.</h2>
+        </div>
+        <footer states="choose">
+          <button
+            name="get_export_data"
+            string="Export"
+            type="object"
+            class="btn-primary"
+          />
+          <button special="cancel" string="Cancel" type="object" class="btn-default" />
+        </footer>
+        <footer states="get">
+          <button special="cancel" string="Close" type="object" class="btn-primary" />
+        </footer>
+      </form>
+    </field>
+  </record>
+  <record model="ir.actions.act_window" id="export_report_turnover_act_window">
+    <field name="name">Export Report Turnover</field>
+    <!-- TODO -->
+    <field name="res_model">export.report.turnover</field>
+    <field name="view_mode">form</field>
+    <field name="context">{}</field>
+    <field name="view_type">form</field>
+    <field name="target">new</field>
+  </record>
+  <menuitem
+    id="alc_turnover_report_menu"
+    parent="account.menu_finance_reports"
+    name="ALC Turnover Reporting"
+    sequence="101"
+  />
+  <menuitem
+    action="export_report_turnover_act_window"
+    id="menu_wizard_turnover_export"
+    parent="alc_turnover_report_menu"
+  />
 </odoo>

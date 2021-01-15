@@ -3,9 +3,10 @@
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl)
 
 from freezegun import freeze_time
+from openerp.osv.expression import AND, OR
+
 from odoo import fields
 from odoo.tests.common import SavepointCase
-from openerp.osv.expression import AND, OR
 
 
 def _get_time_domain(ttime):

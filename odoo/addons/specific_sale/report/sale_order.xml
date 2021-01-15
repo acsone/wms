@@ -1,141 +1,160 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-
-    <template id="report_saleorder_specific_document" inherit_id="pricelist_discount.report_saleorder_specific_document">
-
-        <!--
+  <template
+    id="report_saleorder_specific_document"
+    inherit_id="pricelist_discount.report_saleorder_specific_document"
+  >
+    <!--
             Change title
         -->
-        <xpath expr="//h2/span[1]" position="replace">
-            <span t-if="doc.state not in ['draft','sent']">Confirmed order # </span>
-        </xpath>
-
-        <!--
+    <xpath expr="//h2/span[1]" position="replace">
+      <span t-if="doc.state not in ['draft','sent']">Confirmed order # </span>
+    </xpath>
+    <!--
             Add "Quantity unavailable" column
         -->
-        <thead position="replace">
-
-            <thead>
-                <tr>
-                    <th>Product reference</th>
-                    <th>Description</th>
-                    <th class="text-right">Quantity</th>
-
-                    <!-- BEGIN: Add column -->
-                    <th class="text-right">Quantity unavailable</th>
-                    <!-- END: Add column -->
-
-                    <th class="text-right">Unit Price</th>
-                    <th t-if="display_discount" class="text-right" groups="sale.group_discount_per_so_line">Disc.(%)</th>
-                    <th class="text-right">Taxes</th>
-
-                    <!-- BEGIN: Provide from pricelist_discount module -->
-                    <th class="text-right">Promotion</th>
-                    <th class="text-right">Discount</th>
-                    <!-- END: Provide from pricelist_discount module -->
-
-                    <th class="text-right" groups="sale.group_show_price_subtotal">Price</th>
-                    <th class="text-right price_tax_included" groups="sale.group_show_price_total">Total Price</th>
-                </tr>
-            </thead>
-
-        </thead>
-
-        <!--
+    <thead position="replace">
+      <thead>
+        <tr>
+          <th>Product reference</th>
+          <th>Description</th>
+          <th class="text-right">Quantity</th>
+          <!-- BEGIN: Add column -->
+          <th class="text-right">Quantity unavailable</th>
+          <!-- END: Add column -->
+          <th class="text-right">Unit Price</th>
+          <th
+            t-if="display_discount"
+            class="text-right"
+            groups="sale.group_discount_per_so_line"
+          >Disc.(%)</th>
+          <th class="text-right">Taxes</th>
+          <!-- BEGIN: Provide from pricelist_discount module -->
+          <th class="text-right">Promotion</th>
+          <th class="text-right">Discount</th>
+          <!-- END: Provide from pricelist_discount module -->
+          <th class="text-right" groups="sale.group_show_price_subtotal">Price</th>
+          <th
+            class="text-right price_tax_included"
+            groups="sale.group_show_price_total"
+          >Total Price</th>
+        </tr>
+      </thead>
+    </thead>
+    <!--
             Always display name_list category
             And change colspan with adding "Quantity unavailable" column
         -->
-        <t t-if="layout_category_size > 1 or page_size > 1" position="replace">
-
-            <!-- BEGIN: Replace entirely -->
-            <t t-if="layout_category_size > 1 or page_size > 1">
-                <tr class="active" groups="sale.group_sale_layout" t-if="'name_list' not in layout_category">
-                    <td colspan="8" style="font-weight: bold; border-bottom: 1px solid black;">&amp;bull;
-                        <t t-esc="layout_category['name']"/>
+    <t t-if="layout_category_size > 1 or page_size > 1" position="replace">
+      <!-- BEGIN: Replace entirely -->
+      <t t-if="layout_category_size > 1 or page_size > 1">
+        <tr
+          class="active"
+          groups="sale.group_sale_layout"
+          t-if="'name_list' not in layout_category"
+        >
+          <td
+            colspan="8"
+            style="font-weight: bold; border-bottom: 1px solid black;"
+          >&amp;bull;
+                        <t t-esc="layout_category['name']" />
                     </td>
-                </tr>
-            </t>
-            <tr class="active" t-if="'name_list' in layout_category">
-                <td colspan="100%" style="font-weight: bold; border-bottom: 1px solid black;">&amp;bull;
+        </tr>
+      </t>
+      <tr class="active" t-if="'name_list' in layout_category">
+        <td
+          colspan="100%"
+          style="font-weight: bold; border-bottom: 1px solid black;"
+        >&amp;bull;
                     <t t-foreach="layout_category['name_list']" t-as="category_name">
-                        <t t-esc="category_name"/>
-                        <br/>
-                    </t>
+            <t t-esc="category_name" />
+            <br />
+          </t>
                 </td>
-            </tr>
-            <!-- END: Replace entirely -->
-
-        </t>
-
-
-        <!--
+      </tr>
+      <!-- END: Replace entirely -->
+    </t>
+    <!--
             Add "Quantity unavailable" column
             And display few columns in 'only_quantity' mode
             And display additional line text
         -->
-        <t t-foreach="layout_category['lines']" position="replace">
-
-            <t t-foreach="layout_category['lines']" t-as="l">
-
-                <!-- BEGIN: Replace entirely -->
-                <tr>
-                    <td><span t-field="l.product_id.default_code"/></td>
-                    <td><span t-field="l.name"/></td>
-                    <td class="text-right">
-                        <span t-field="l.product_uom_qty"/>
-                        <span t-field="l.product_uom" groups="product.group_uom"/>
-                    </td>
-                    <td class="text-right">
-                        <span t-field="l.product_qty_unavailable"/>
-                    </td>
-                    <td class="text-right" t-if="'only_quantity' not in layout_category">
-                        <span t-field="l.price_unit"/>
-                    </td>
-                    <td t-if="display_discount and 'only_quantity' not in layout_category" class="text-right" groups="sale.group_discount_per_so_line">
-                        <span t-field="l.discount"/>
-                    </td>
-                    <td class="text-right" t-if="'only_quantity' not in layout_category">
-                        <span t-esc="', '.join(map(lambda x: (x.description or x.name), l.tax_id))"/>
-                    </td>
-
-                    <!-- BEGIN: Provide from pricelist_discount module (add t-if) -->
-                    <td class="text-right" t-if="'only_quantity' not in layout_category">
-                        <span t-field="l.discount2"/>
-                    </td>
-                    <td class="text-right" t-if="'only_quantity' not in layout_category">
-                        <span t-field="l.discount3"/>
-                    </td>
-                    <!-- END: Provide from pricelist_discount module (add t-if) -->
-
-                    <td class="text-right" groups="sale.group_show_price_subtotal" t-if="'only_quantity' not in layout_category">
-                        <span t-field="l.price_subtotal"
-                              t-options='{"widget": "monetary", "display_currency": doc.pricelist_id.currency_id}'/>
-                    </td>
-                    <td class="text-right" groups="sale.group_show_price_total" t-if="'only_quantity' not in layout_category">
-                        <span t-field="l.price_total"
-                              t-options='{"widget": "monetary", "display_currency": doc.pricelist_id.currency_id}'/>
-                    </td>
-                </tr>
-                <t t-if="'line_additional_text' in layout_category">
-                    <tr>
-                        <td colspan="100%" style="border-top: 0px;">
-                            <t t-esc="layout_category['line_additional_text']"/>
-                        </td>
-                    </tr>
-                </t>
-                <!-- END: Replace entirely -->
-
-            </t>
-
+    <t t-foreach="layout_category['lines']" position="replace">
+      <t t-foreach="layout_category['lines']" t-as="l">
+        <!-- BEGIN: Replace entirely -->
+        <tr>
+          <td>
+            <span t-field="l.product_id.default_code" />
+          </td>
+          <td>
+            <span t-field="l.name" />
+          </td>
+          <td class="text-right">
+            <span t-field="l.product_uom_qty" />
+            <span t-field="l.product_uom" groups="product.group_uom" />
+          </td>
+          <td class="text-right">
+            <span t-field="l.product_qty_unavailable" />
+          </td>
+          <td class="text-right" t-if="'only_quantity' not in layout_category">
+            <span t-field="l.price_unit" />
+          </td>
+          <td
+            t-if="display_discount and 'only_quantity' not in layout_category"
+            class="text-right"
+            groups="sale.group_discount_per_so_line"
+          >
+            <span t-field="l.discount" />
+          </td>
+          <td class="text-right" t-if="'only_quantity' not in layout_category">
+            <span
+              t-esc="', '.join(map(lambda x: (x.description or x.name), l.tax_id))"
+            />
+          </td>
+          <!-- BEGIN: Provide from pricelist_discount module (add t-if) -->
+          <td class="text-right" t-if="'only_quantity' not in layout_category">
+            <span t-field="l.discount2" />
+          </td>
+          <td class="text-right" t-if="'only_quantity' not in layout_category">
+            <span t-field="l.discount3" />
+          </td>
+          <!-- END: Provide from pricelist_discount module (add t-if) -->
+          <td
+            class="text-right"
+            groups="sale.group_show_price_subtotal"
+            t-if="'only_quantity' not in layout_category"
+          >
+            <span
+              t-field="l.price_subtotal"
+              t-options='{"widget": "monetary", "display_currency": doc.pricelist_id.currency_id}'
+            />
+          </td>
+          <td
+            class="text-right"
+            groups="sale.group_show_price_total"
+            t-if="'only_quantity' not in layout_category"
+          >
+            <span
+              t-field="l.price_total"
+              t-options='{"widget": "monetary", "display_currency": doc.pricelist_id.currency_id}'
+            />
+          </td>
+        </tr>
+        <t t-if="'line_additional_text' in layout_category">
+          <tr>
+            <td colspan="100%" style="border-top: 0px;">
+              <t t-esc="layout_category['line_additional_text']" />
+            </td>
+          </tr>
         </t>
-
-        <!--
+        <!-- END: Replace entirely -->
+      </t>
+    </t>
+    <!--
             Change colspan in subtotal line with adding "Quantity unavailable" column
         -->
-        <td colspan="6" position="attributes">
-            <attribute name="colspan">7</attribute>
-        </td>
-
-    </template>
-
+    <td colspan="6" position="attributes">
+      <attribute name="colspan">7</attribute>
+    </td>
+  </template>
 </odoo>

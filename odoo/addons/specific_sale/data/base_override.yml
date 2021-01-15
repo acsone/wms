@@ -1,10 +1,8 @@
--
-  !python {model: exception.rule, id: False} : |
-      rule = self.env.ref('sale_exception.excep_no_zip', raise_if_not_found=False)
-      if rule:
-        rule.unlink()
--
-  !python {model: exception.rule, id: False} : |
-      rule = self.env.ref('sale_exception.excep_no_stock', raise_if_not_found=False)
-      if rule:
-        rule.unlink()
+- !python {model: exception.rule, id: False}: |
+    rule = self.env.ref('sale_exception.excep_no_zip', raise_if_not_found=False)
+    if rule:
+      rule.unlink()
+- !python {model: exception.rule, id: False}: |
+    rule = self.env.ref('sale_exception.excep_no_stock', raise_if_not_found=False)
+    if rule:
+      rule.unlink()

@@ -1,14 +1,17 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-
-  <template id="archived_products_message" name="stock.return_picking report_archived_product">
-        <p>The following products have been archived and cannot be returned: </p>
-        <br />
-        <t t-foreach="products_archived" t-as="product">
-          <li>
-            <strong><span t-esc="product.display_name"/></strong>
-          </li>
-        </t>
+  <template
+    id="archived_products_message"
+    name="stock.return_picking report_archived_product"
+  >
+    <p>The following products have been archived and cannot be returned: </p>
+    <br />
+    <t t-foreach="products_archived" t-as="product">
+      <li>
+        <strong>
+          <span t-esc="product.display_name" />
+        </strong>
+      </li>
+    </t>
   </template>
-
 </odoo>

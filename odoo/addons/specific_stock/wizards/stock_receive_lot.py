@@ -10,28 +10,28 @@ class StockPackOperationLotAdd(models.TransientModel):
 
     qty_backorder = fields.Integer(
         "Backorder",
-        compute="_get_qty_backorder",
+        compute="_compute_qty_backorder",
         help="Missing quantity of products to pick",
     )
 
     @api.depends("operation_id")
-    @api.one
-    def _get_qty_backorder(self):
+    def _compute_qty_backorder(self):
         """
         Set the quantity back-order. If the quantity available on a product
         is less than zero it means that there are some back-orders with this
         product.
         :return:
         """
-        qty_available = self.operation_id.product_id.immediately_usable_qty
+        for rec in self:
+            qty_available = rec.operation_id.product_id.immediately_usable_qty
 
-        if qty_available >= 0:
-            self.qty_backorder = 0
-        else:
-            # Take the inverse of quantity available. If the quantity available
-            # is equal to -5, it means that 5 unit of this product
-            # must be keep for BO.
-            self.qty_backorder = qty_available * -1
+            if qty_available >= 0:
+                rec.qty_backorder = 0
+            else:
+                # Take the inverse of quantity available. If the quantity available
+                # is equal to -5, it means that 5 unit of this product
+                # must be keep for BO.
+                rec.qty_backorder = qty_available * -1
 
     @api.onchange("operation_id")
     def _onchange_operation_id(self):

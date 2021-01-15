@@ -5,6 +5,7 @@
 import base64
 
 import xlrd
+
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 from odoo.tools import float_is_zero
@@ -34,6 +35,7 @@ class ProductPriceInfo(object):
         for attr in self.__slots__:
             setattr(self, attr, kwargs.get(attr))
 
+    # pylint: disable=W8106
     def copy(self):
         new = ProductPriceInfo()
         for attr in self.__slots__:

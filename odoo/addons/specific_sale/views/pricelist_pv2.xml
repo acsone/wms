@@ -1,29 +1,32 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-
-    <record id="product_pricelist_item_tree_view_search" model="ir.ui.view">
-        <field name="name">product.pricelist.item.tree.view.search</field>
-        <field name="model">product.pricelist.item</field>
-        <field name="arch" type="xml">
-            <search>
-                <field name="product_tmpl_id"/>
-            </search>
-        </field>
-    </record>
-
-    <record id="action_product_pricelist_pv2" model="ir.actions.act_window">
-        <field name="name">Pricelist Sale Price 2</field>
-        <field name="res_model">product.pricelist.item</field>
-        <field name="view_id" ref="product.product_pricelist_item_tree_view"/>
-        <field name="search_view_id" ref="product_pricelist_item_tree_view_search" />
-        <field name="domain" eval="[('pricelist_id', '=', ref('specific_data.product_pricelist_pb2'))]" />
-        <field name="context" eval="{'default_pricelist_id': ref('specific_data.product_pricelist_pb2')}"></field>
-    </record>
-
-    <menuitem id="menu_product_pricelist_pv2"
-              action="action_product_pricelist_pv2"
-              parent="sale.menu_product_pricelist_main"
-              sequence="100"
+  <record id="product_pricelist_item_tree_view_search" model="ir.ui.view">
+    <field name="name">product.pricelist.item.tree.view.search</field>
+    <field name="model">product.pricelist.item</field>
+    <field name="arch" type="xml">
+      <search>
+        <field name="product_tmpl_id" />
+      </search>
+    </field>
+  </record>
+  <record id="action_product_pricelist_pv2" model="ir.actions.act_window">
+    <field name="name">Pricelist Sale Price 2</field>
+    <field name="res_model">product.pricelist.item</field>
+    <field name="view_id" ref="product.product_pricelist_item_tree_view" />
+    <field name="search_view_id" ref="product_pricelist_item_tree_view_search" />
+    <field
+      name="domain"
+      eval="[('pricelist_id', '=', ref('specific_data.product_pricelist_pb2'))]"
     />
-
+    <field
+      name="context"
+      eval="{'default_pricelist_id': ref('specific_data.product_pricelist_pb2')}"
+    />
+  </record>
+  <menuitem
+    id="menu_product_pricelist_pv2"
+    action="action_product_pricelist_pv2"
+    parent="sale.menu_product_pricelist_main"
+    sequence="100"
+  />
 </odoo>

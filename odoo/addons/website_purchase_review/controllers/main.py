@@ -5,11 +5,12 @@ from datetime import datetime
 from urllib import urlencode
 
 from dateutil.relativedelta import relativedelta
+from werkzeug.utils import redirect
 
 from odoo import fields, http
-from odoo.addons.web.controllers.main import Home, module_boot
 from odoo.http import request
-from werkzeug.utils import redirect
+
+from odoo.addons.web.controllers.main import Home, module_boot
 
 _logger = logging.getLogger(__name__)
 
@@ -46,10 +47,10 @@ class PurchaseReview(Home):
             product = request.env["product.product"].browse(product_id)
 
         params = {}
-        for filter in FILTERS:
-            value = kw.pop(filter, None)
+        for filter_ in FILTERS:
+            value = kw.pop(filter_, None)
             if value:
-                params[filter] = value
+                params[filter_] = value
         # Pop debug key to avoid having different results with debug activated
         kw_copy = kw.copy()
         if "debug" in kw_copy:

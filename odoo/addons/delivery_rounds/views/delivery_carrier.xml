@@ -1,17 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-
-    <record model="ir.ui.view" id="view_delivery_carrier_specific_form">
-        <field name="name">delivery.carrier.specific.form</field>
-        <field name="model">delivery.carrier</field>
-        <field name="inherit_id" ref="delivery.view_delivery_carrier_form"/>
-        <field name="arch" type="xml">
-
-            <field name="delivery_type" position="after">
-                <field name="delivery_template_id"/>
-            </field>
-
-        </field>
-    </record>
-
+  <record model="ir.ui.view" id="view_delivery_carrier_specific_form">
+    <field name="name">delivery.carrier.specific.form</field>
+    <field name="model">delivery.carrier</field>
+    <field name="inherit_id" ref="delivery.view_delivery_carrier_form" />
+    <field name="arch" type="xml">
+      <field name="delivery_type" position="after">
+        <field name="delivery_template_id" />
+      </field>
+    </field>
+  </record>
 </odoo>

@@ -1,55 +1,53 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <!-- Copyright 2020 ACSONE SA/NV
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
-
 <odoo>
-    <record model="ir.ui.view" id="delivery_plan_form_view">
-        <field name="name">delivery.plan.form (in alc_geo_delivery_rounds)</field>
-        <field name="model">delivery.plan</field>
-        <field name="arch" type="xml">
-            <form>
-                <header>
+  <record model="ir.ui.view" id="delivery_plan_form_view">
+    <field name="name">delivery.plan.form (in alc_geo_delivery_rounds)</field>
+    <field name="model">delivery.plan</field>
+    <field name="arch" type="xml">
+      <form>
+        <header>
                 </header>
-                <sheet>
-                    <div class="oe_button_box" name="button_box">
-                        <button name="action_shape_file_import" type="object"
-                        icon="fa-download"
-                        help="Import shape file"
-                        class="btn-primary"
-                        >
-                        <span>Import shape file</span>
-                        </button>
-                    </div>
-                    <group>
-                        <field name="name"/>
-                        <field name="round_template_ids"/> 
-                    </group>
-                </sheet>
-                <div class="oe_chatter"></div>
-            </form>
-        </field>
-    </record>
-
-    <record model="ir.ui.view" id="delivery_plan_tree_view">
-        <field name="name">delivery.plan.tree (in alc_geo_delivery_rounds)</field>
-        <field name="model">delivery.plan</field>
-        <field name="arch" type="xml">
-            <tree>
-                <field name="name"/>
-            </tree>
-        </field>
-    </record>
-
-    <record model="ir.actions.act_window" id="delivery_plan_act_window">
-        <field name="name">Delivery plan</field> 
-        <field name="res_model">delivery.plan</field>
-        <field name="view_mode">tree,form</field>
-    </record>
-
-    <record model="ir.ui.menu" id="delivery_plan_menu">
-        <field name="name">Delivery plan</field>
-        <field name="parent_id" ref="delivery_rounds.menu_delivery_round_settings"/> 
-        <field name="action" ref="delivery_plan_act_window"/>
-        <field name="sequence" eval="16"/> 
-    </record>
+        <sheet>
+          <div class="oe_button_box" name="button_box">
+            <button
+              name="action_shape_file_import"
+              type="object"
+              icon="fa-download"
+              help="Import shape file"
+              class="btn-primary"
+            >
+              <span>Import shape file</span>
+            </button>
+          </div>
+          <group>
+            <field name="name" />
+            <field name="round_template_ids" />
+          </group>
+        </sheet>
+        <div class="oe_chatter" />
+      </form>
+    </field>
+  </record>
+  <record model="ir.ui.view" id="delivery_plan_tree_view">
+    <field name="name">delivery.plan.tree (in alc_geo_delivery_rounds)</field>
+    <field name="model">delivery.plan</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="name" />
+      </tree>
+    </field>
+  </record>
+  <record model="ir.actions.act_window" id="delivery_plan_act_window">
+    <field name="name">Delivery plan</field>
+    <field name="res_model">delivery.plan</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+  <record model="ir.ui.menu" id="delivery_plan_menu">
+    <field name="name">Delivery plan</field>
+    <field name="parent_id" ref="delivery_rounds.menu_delivery_round_settings" />
+    <field name="action" ref="delivery_plan_act_window" />
+    <field name="sequence" eval="16" />
+  </record>
 </odoo>

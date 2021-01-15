@@ -1,7 +1,16 @@
-<?xml version="1.0"?>
+<?xml version="1.0" ?>
 <odoo>
-
-        <menuitem id="menu_delivery_round" name="Delivery Rounds" parent="stock.menu_stock_root" sequence="70" groups="stock.group_stock_user"/>
-        <menuitem id="menu_delivery_round_settings" name="Settings" parent="menu_delivery_round" sequence="100"/>
-
+  <menuitem
+    id="menu_delivery_round"
+    name="Delivery Rounds"
+    parent="stock.menu_stock_root"
+    sequence="70"
+    groups="stock.group_stock_user"
+  />
+  <menuitem
+    id="menu_delivery_round_settings"
+    name="Settings"
+    parent="menu_delivery_round"
+    sequence="100"
+  />
 </odoo>

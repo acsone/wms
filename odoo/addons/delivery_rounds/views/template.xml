@@ -1,63 +1,71 @@
-<?xml version="1.0"?>
+<?xml version="1.0" ?>
 <odoo>
-
-    <record id="view_round_template_search" model="ir.ui.view">
-        <field name="name">round.template.search</field>
-        <field name="model">round.template</field>
-        <field name="arch" type="xml">
-            <search string="Delivery Rounds">
-                <field name="code" />
-                <field name="name" />
-                <field name="version_ids" />
-                <separator/>
-                <field name="partner_ids" string="Customer"/>
-                <field name="tag_ids"/>
-            </search>
-        </field>
-    </record>
-    <record id="view_round_template_tree" model="ir.ui.view">
-        <field name="name">round.template.tree</field>
-        <field name="model">round.template</field>
-        <field name="arch" type="xml">
-            <tree string="Templates">
-                <field name="time_picking_planned" widget="float_time"/>
-                <field name="time_leave_planned" widget="float_time"/>
-                <field name="code" />
-                <field name="name" />
-                <field name="version_ids" widget="many2many_tags"/>
-                <field name="tag_ids" widget="many2many_tags"/>
-            </tree>
-        </field>
-    </record>
-    <record id="view_round_template_form" model="ir.ui.view">
-        <field name="name">round.template.form</field>
-        <field name="model">round.template</field>
-        <field name="arch" type="xml">
-            <form string="Templates">
-                <group>
-                    <field name="code" />
-                    <field name="name" />
-                    <field name="version_ids" widget="many2many_tags" options="{'no_open':True,'no_create':True}"/>
-                    <field name="tag_ids" widget="many2many_tags" options="{'no_open':True,'no_create':True}"/>
-                    <field name="time_picking_planned" widget="float_time"/>
-                    <field name="time_leave_planned" widget="float_time"/>
-                </group>
-                <group string="Itineraries">
-                    <field name="itinerary_ids" nolabel="1"/>
-                </group>
-            </form>
-        </field>
-    </record>
-
-    <record id="action_round_template_tree" model="ir.actions.act_window">
-        <field name="name">Templates</field>
-        <field name="type">ir.actions.act_window</field>
-        <field name="res_model">round.template</field>
-        <field name="view_type">form</field>
-        <field name="view_mode">tree,form</field>
-    </record>
-
-    <menuitem action="action_round_template_tree" id="menu_round_template" parent="menu_delivery_round_settings" sequence="20"/>
-
-
+  <record id="view_round_template_search" model="ir.ui.view">
+    <field name="name">round.template.search</field>
+    <field name="model">round.template</field>
+    <field name="arch" type="xml">
+      <search string="Delivery Rounds">
+        <field name="code" />
+        <field name="name" />
+        <field name="version_ids" />
+        <separator />
+        <field name="partner_ids" string="Customer" />
+        <field name="tag_ids" />
+      </search>
+    </field>
+  </record>
+  <record id="view_round_template_tree" model="ir.ui.view">
+    <field name="name">round.template.tree</field>
+    <field name="model">round.template</field>
+    <field name="arch" type="xml">
+      <tree string="Templates">
+        <field name="time_picking_planned" widget="float_time" />
+        <field name="time_leave_planned" widget="float_time" />
+        <field name="code" />
+        <field name="name" />
+        <field name="version_ids" widget="many2many_tags" />
+        <field name="tag_ids" widget="many2many_tags" />
+      </tree>
+    </field>
+  </record>
+  <record id="view_round_template_form" model="ir.ui.view">
+    <field name="name">round.template.form</field>
+    <field name="model">round.template</field>
+    <field name="arch" type="xml">
+      <form string="Templates">
+        <group>
+          <field name="code" />
+          <field name="name" />
+          <field
+            name="version_ids"
+            widget="many2many_tags"
+            options="{'no_open':True,'no_create':True}"
+          />
+          <field
+            name="tag_ids"
+            widget="many2many_tags"
+            options="{'no_open':True,'no_create':True}"
+          />
+          <field name="time_picking_planned" widget="float_time" />
+          <field name="time_leave_planned" widget="float_time" />
+        </group>
+        <group string="Itineraries">
+          <field name="itinerary_ids" nolabel="1" />
+        </group>
+      </form>
+    </field>
+  </record>
+  <record id="action_round_template_tree" model="ir.actions.act_window">
+    <field name="name">Templates</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="res_model">round.template</field>
+    <field name="view_type">form</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+  <menuitem
+    action="action_round_template_tree"
+    id="menu_round_template"
+    parent="menu_delivery_round_settings"
+    sequence="20"
+  />
 </odoo>
