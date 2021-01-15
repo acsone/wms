@@ -18,9 +18,11 @@ msgstr ""
 
 #. module: alc_stock_receive_lot_expiry
 #: model:ir.ui.view,arch_db:alc_stock_receive_lot_expiry.stock_pack_operation_lot_add_form_view
+#, fuzzy
 msgid ""
-"<i class=\"fa fa-exclamation-triangle\" style=\"color:red\"><span style="
-"\"margin:0 5px\">Expired</span></i>"
+"<i class=\"fa fa-exclamation-triangle\" style=\"color:red\">\n"
+"            <span style=\"margin:0 5px\">Expired</span>\n"
+"          </i>"
 msgstr ""
 "<i class=\"fa fa-exclamation-triangle\" style=\"color:red\"><span style="
 "\"margin:0 5px\">Expired</span></i>"
