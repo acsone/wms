@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: csv_file
-#: code:addons/csv_file/models/ftp_connector.py:47
+#: code:addons/csv_file/models/ftp_connector.py:48
 #, python-format
 msgid "%s must be set in environ"
 msgstr ""
@@ -83,8 +83,8 @@ msgid "Error"
 msgstr ""
 
 #. module: csv_file
-#: code:addons/csv_file/models/ftp_connector.py:80
-#: code:addons/csv_file/models/ftp_connector.py:89
+#: code:addons/csv_file/models/ftp_connector.py:81
+#: code:addons/csv_file/models/ftp_connector.py:90
 #, python-format
 msgid "Everything seems ok"
 msgstr ""
@@ -221,7 +221,7 @@ msgid "Please configure a sFTP connector"
 msgstr ""
 
 #. module: csv_file
-#: code:addons/csv_file/models/ftp_connector.py:43
+#: code:addons/csv_file/models/ftp_connector.py:44
 #, python-format
 msgid "Please set the primary key environment variable"
 msgstr ""
