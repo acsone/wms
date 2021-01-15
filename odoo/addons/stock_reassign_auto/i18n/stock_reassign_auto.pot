@@ -14,19 +14,19 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: stock_reassign_auto
-#: code:addons/stock_reassign_auto/models/stock.py:115
+#: code:addons/stock_reassign_auto/models/stock.py:116
 #, python-format
 msgid "Reassign on priority lowered for products ids %s"
 msgstr ""
 
 #. module: stock_reassign_auto
-#: code:addons/stock_reassign_auto/models/stock.py:103
+#: code:addons/stock_reassign_auto/models/stock.py:104
 #, python-format
 msgid "Reassign trial on cancel for products ids %s"
 msgstr ""
 
 #. module: stock_reassign_auto
-#: code:addons/stock_reassign_auto/models/stock.py:86
+#: code:addons/stock_reassign_auto/models/stock.py:87
 #, python-format
 msgid "Reassign trial on reception for products ids %s"
 msgstr ""
