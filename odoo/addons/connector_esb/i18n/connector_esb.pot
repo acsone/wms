@@ -295,7 +295,7 @@ msgid "OK"
 msgstr ""
 
 #. module: connector_esb
-#: code:addons/connector_esb/models/backend.py:54
+#: code:addons/connector_esb/models/backend.py:55
 #, python-format
 msgid "Only 1 ESB configuration is allowed."
 msgstr ""
@@ -478,6 +478,12 @@ msgid "Sales Order Line"
 msgstr ""
 
 #. module: connector_esb
+#: code:addons/connector_esb/components/exporter.py:94
+#, python-format
+msgid "Skip"
+msgstr ""
+
+#. module: connector_esb
 #: selection:product.supplierinfo.esbflux,flux:0
 msgid "Special Promotion"
 msgstr ""
@@ -510,7 +516,7 @@ msgid "The customer {} has already been exported, it can be archived  but not de
 msgstr ""
 
 #. module: connector_esb
-#: code:addons/connector_esb/models/backend_timestamp.py:112
+#: code:addons/connector_esb/models/backend_timestamp.py:109
 #, python-format
 msgid "The synchronization timestamp (%s) is currently locked, probably due to an ongoing synchronization."
 msgstr ""
