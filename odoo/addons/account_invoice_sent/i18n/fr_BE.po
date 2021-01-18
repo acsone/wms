@@ -27,7 +27,7 @@ msgid "<strong>Please select operation...</strong>"
 msgstr "<strong>Veuillez choisir l'opération...</strong>"
 
 #. module: account_invoice_sent
-#: code:addons/account_invoice_sent/models/account_invoice_print.py:111
+#: code:addons/account_invoice_sent/models/account_invoice_print.py:110
 #, python-format
 msgid "A report for invoices is available."
 msgstr "Un rapport de factures est disponible."
@@ -153,7 +153,7 @@ msgstr "Méthode d'envoi de facture"
 
 #. module: account_invoice_sent
 #: code:addons/account_invoice_sent/models/account_invoice.py:63
-#: code:addons/account_invoice_sent/models/account_invoice_print.py:129
+#: code:addons/account_invoice_sent/models/account_invoice_print.py:128
 #: code:addons/account_invoice_sent/wizards/account_invoice_state.py:83
 #, python-format
 msgid "Invoice sent"
