@@ -14,13 +14,13 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: specific_barcode
-#: code:addons/specific_barcode/models/stock_picking.py:108
+#: code:addons/specific_barcode/models/stock_picking.py:110
 #, python-format
 msgid "Invalid document reference"
 msgstr ""
 
 #. module: specific_barcode
-#: code:addons/specific_barcode/models/stock_picking.py:84
+#: code:addons/specific_barcode/models/stock_picking.py:85
 #, python-format
 msgid "Lot required"
 msgstr ""
@@ -33,7 +33,7 @@ msgstr ""
 
 #. module: specific_barcode
 #: code:addons/specific_barcode/models/stock_picking.py:48
-#: code:addons/specific_barcode/models/stock_picking.py:77
+#: code:addons/specific_barcode/models/stock_picking.py:78
 #, python-format
 msgid "No operation matched for product %s"
 msgstr ""
@@ -45,13 +45,13 @@ msgid "Operation with product %s does not accept lot %s"
 msgstr ""
 
 #. module: specific_barcode
-#: code:addons/specific_barcode/models/stock_picking.py:85
+#: code:addons/specific_barcode/models/stock_picking.py:86
 #, python-format
 msgid "Operation with product %s need a lot"
 msgstr ""
 
 #. module: specific_barcode
-#: code:addons/specific_barcode/models/stock_picking.py:104
+#: code:addons/specific_barcode/models/stock_picking.py:106
 #, python-format
 msgid "Please start operation first"
 msgstr ""
@@ -62,7 +62,7 @@ msgid "Transfer"
 msgstr ""
 
 #. module: specific_barcode
-#: code:addons/specific_barcode/models/stock_picking.py:124
+#: code:addons/specific_barcode/models/stock_picking.py:126
 #, python-format
 msgid "Unsupported code"
 msgstr ""
@@ -76,7 +76,7 @@ msgid "Wrong lot"
 msgstr ""
 
 #. module: specific_barcode
-#: code:addons/specific_barcode/models/stock_picking.py:76
+#: code:addons/specific_barcode/models/stock_picking.py:77
 #, python-format
 msgid "Wrong product"
 msgstr ""
