@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_delivery_rounds_geooptimize
-#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:504
+#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:505
 #, python-format
 msgid "%s: Optimization api call failed"
 msgstr ""
@@ -47,7 +47,7 @@ msgid "Additional resources configuration (json)"
 msgstr ""
 
 #. module: alc_delivery_rounds_geooptimize
-#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:642
+#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:643
 #, python-format
 msgid "Can't export a not complete optimization for %s"
 msgstr ""
@@ -65,7 +65,7 @@ msgid "Change the default delivery duration for this specific partner"
 msgstr ""
 
 #. module: alc_delivery_rounds_geooptimize
-#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:515
+#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:516
 #, python-format
 msgid "Check geo optimization status for %s"
 msgstr ""
@@ -111,7 +111,7 @@ msgid "Error"
 msgstr ""
 
 #. module: alc_delivery_rounds_geooptimize
-#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:621
+#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:622
 #, python-format
 msgid "Export optimization result to operational planning for %s"
 msgstr ""
@@ -248,7 +248,7 @@ msgid "Optimization process max duration"
 msgstr ""
 
 #. module: alc_delivery_rounds_geooptimize
-#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:195
+#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:196
 #, python-format
 msgid "Optimization requests sent to external system."
 msgstr ""
@@ -279,7 +279,7 @@ msgid "Partner"
 msgstr ""
 
 #. module: alc_delivery_rounds_geooptimize
-#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:178
+#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:179
 #, python-format
 msgid "Please configure your timezone in your user preferences"
 msgstr ""
@@ -326,19 +326,19 @@ msgid "The cost of a resource working for an hour."
 msgstr ""
 
 #. module: alc_delivery_rounds_geooptimize
-#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:615
+#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:616
 #, python-format
 msgid "The delivery round %s will be exported to tha mobile App into background."
 msgstr ""
 
 #. module: alc_delivery_rounds_geooptimize
-#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:577
+#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:578
 #, python-format
 msgid "The following partner ids are not expected into the optimization result: %s"
 msgstr ""
 
 #. module: alc_delivery_rounds_geooptimize
-#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:569
+#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:570
 #, python-format
 msgid "The following partners are not found into the optimization result: %s"
 msgstr ""
