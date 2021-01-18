@@ -215,7 +215,7 @@ msgid "Password"
 msgstr ""
 
 #. module: csv_file
-#: code:addons/csv_file/models/csv_file.py:231
+#: code:addons/csv_file/models/csv_file.py:227
 #, python-format
 msgid "Please configure a sFTP connector"
 msgstr ""
@@ -285,12 +285,12 @@ msgid "Type"
 msgstr ""
 
 #. module: csv_file
-#: code:addons/csv_file/models/csv_file.py:140
-#: code:addons/csv_file/models/csv_file.py:155
-#: code:addons/csv_file/models/csv_file.py:172
-#: code:addons/csv_file/models/csv_file.py:194
-#: code:addons/csv_file/models/csv_file.py:214
-#: code:addons/csv_file/models/csv_file.py:224
+#: code:addons/csv_file/models/csv_file.py:136
+#: code:addons/csv_file/models/csv_file.py:151
+#: code:addons/csv_file/models/csv_file.py:168
+#: code:addons/csv_file/models/csv_file.py:190
+#: code:addons/csv_file/models/csv_file.py:210
+#: code:addons/csv_file/models/csv_file.py:220
 #, python-format
 msgid "Unknown import type"
 msgstr ""
