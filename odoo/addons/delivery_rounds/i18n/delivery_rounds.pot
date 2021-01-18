@@ -61,7 +61,7 @@ msgstr ""
 #. module: delivery_rounds
 #: code:addons/delivery_rounds/models/sale_order.py:86
 #: code:addons/delivery_rounds/models/sale_order.py:95
-#: code:addons/delivery_rounds/models/stock_move.py:96
+#: code:addons/delivery_rounds/models/stock_move.py:97
 #, python-format
 msgid "All pickings at destination of a same shipping must be in the same delivery round"
 msgstr ""
@@ -215,7 +215,7 @@ msgid "Deliver"
 msgstr ""
 
 #. module: delivery_rounds
-#: code:addons/delivery_rounds/models/round_instance.py:1130
+#: code:addons/delivery_rounds/models/round_instance.py:1131
 #, python-format
 msgid "Deliver customer %s of delivery round %s"
 msgstr ""
@@ -576,7 +576,7 @@ msgid "Next execution"
 msgstr ""
 
 #. module: delivery_rounds
-#: code:addons/delivery_rounds/models/round_instance.py:926
+#: code:addons/delivery_rounds/models/round_instance.py:928
 #, python-format
 msgid "No picking have been processed yet"
 msgstr ""
@@ -891,7 +891,7 @@ msgid "The picking type determines the picking view"
 msgstr ""
 
 #. module: delivery_rounds
-#: code:addons/delivery_rounds/models/round_instance.py:1144
+#: code:addons/delivery_rounds/models/round_instance.py:1145
 #, python-format
 msgid "The shipping is not part anymore of this delivery round"
 msgstr ""
@@ -938,7 +938,7 @@ msgid "Unassigned Pickings"
 msgstr ""
 
 #. module: delivery_rounds
-#: code:addons/delivery_rounds/models/round_instance.py:965
+#: code:addons/delivery_rounds/models/round_instance.py:967
 #, python-format
 msgid "Unexpected error (%s)"
 msgstr ""
@@ -1003,7 +1003,7 @@ msgid "You cannot delete a delivery round that has been started"
 msgstr ""
 
 #. module: delivery_rounds
-#: code:addons/delivery_rounds/models/round_instance.py:1012
+#: code:addons/delivery_rounds/models/round_instance.py:1014
 #, python-format
 msgid "You cannot deliver with ongoing picking(s): %s"
 msgstr ""
