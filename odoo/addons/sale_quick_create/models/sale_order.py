@@ -20,19 +20,19 @@ class SaleOrder(models.Model):
     @api.depends("carrier_id", "order_line")
     def _compute_delivery_price(self):
         if self._is_in_quick_edit_mode():
-            return
+            return None
         return super(SaleOrder, self)._compute_delivery_price()
 
     @api.depends("order_line.price_total")
     def _amount_all(self):
         if self._is_in_quick_edit_mode():
-            return
+            return None
         return super(SaleOrder, self)._amount_all()
 
     @api.depends("state", "order_line.invoice_status")
     def _get_invoiced(self):
         if self._is_in_quick_edit_mode():
-            return
+            return None
         return super(SaleOrder, self)._get_invoiced()
 
     def action_confirm_background(self):

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 {
     "name": "Stock Delivery Note",
     "summary": "Creates a specific delivery note in csv format",
@@ -22,7 +23,7 @@
         "views/stock_picking.xml",
         "views/stock_move.xml",
     ],
-    "website": "www.camptocamp.com",
+    "website": "https://www.camptocamp.com",
     "installable": True,
     "auto_install": False,
     "application": False,

@@ -105,7 +105,7 @@ class ProductExportMapper(Component):
         return {"Gescov": 0}
 
     @mapping
-    def measurement_unit_fields(sefl, record):
+    def measurement_unit_fields(self, record):
         """Fixed fields required by the ESB."""
         return {
             "poids_net-unit": "KILOGRAM",
@@ -153,8 +153,7 @@ class ProductExportMapper(Component):
             if category.is_business_unit:
                 unit_ref = category.esb_ref
                 break
-            else:
-                category = category.parent_id
+            category = category.parent_id
         return {"Cplz14": unit_ref or ""}
 
     @mapping
@@ -263,6 +262,7 @@ class ProductCronExporter(Component):
         # do the same here. (it bypasses the ORM to avoid to update the
         # write_date which would trigger a new update)
         templates = records.mapped("product_tmpl_id")
-        query = "UPDATE %s SET esb_exported = true " "WHERE id IN %s "
+        query = "UPDATE %s SET esb_exported = true WHERE id IN %s "
         self.env.cr.execute(query, (AsIs(templates._table), tuple(templates.ids),))
         self.model.invalidate_cache(fnames=["esb_exported"], ids=templates.ids)
+        return _super

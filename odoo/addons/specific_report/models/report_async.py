@@ -28,7 +28,7 @@ class ReportAsync(models.AbstractModel):
         existing = self.env["ir.attachment"].search(
             [("name", "=", filename), ("res_model", "=", self._name)]
         )
-        if len(existing):
+        if len(existing) > 0:
             existing[0].datas = data.encode("base_64")
         else:
             new_report = self.env["ir.attachment"].create(
@@ -43,7 +43,7 @@ class ReportAsync(models.AbstractModel):
                 }
             )
         if send_to_fax:
-            report_id = existing[0].id if len(existing) else new_report.id
+            report_id = existing[0].id if len(existing) > 0 else new_report.id
             fax = self.env.ref("external_fax.ovh")
             fax.with_delay(
                 description=_(u"Sending fax for {} with id {}").format(

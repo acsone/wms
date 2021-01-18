@@ -181,8 +181,6 @@ class TestCsvFaclign(common.SavepointCase):
         return self.env["account.move"].browse(res["res_id"])
 
     def test_00(self):
-        """
-        """
         for invoice in self.invoices:
             invoice.payment_mode_id = self.payment_mode.id
             for line in invoice.invoice_line_ids:

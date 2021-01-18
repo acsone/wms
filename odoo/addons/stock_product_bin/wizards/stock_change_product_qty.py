@@ -29,7 +29,7 @@ class StockChangeProductQty(models.TransientModel):
         if self.env.context.get(
             "active_model"
         ) != "product.template" or not self.env.context.get("active_id"):
-            return
+            return None
 
         product_tmpl_id = self.env.context["active_id"]
         stock_bins = self.env["product.stock.bin"].search(
@@ -38,5 +38,6 @@ class StockChangeProductQty(models.TransientModel):
 
         if stock_bins:
             return stock_bins.bin_location_id.id
+        return None
 
     location_id = fields.Many2one(default=_get_default_location_id)

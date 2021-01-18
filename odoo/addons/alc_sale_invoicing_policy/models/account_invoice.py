@@ -15,10 +15,10 @@ class AccountInvoice(models.Model):
     @related_action(action="related_action_open_invoice")
     def _job_validate_invoice(self, date_invoice):
         # Reload self as an invoice could have been deleted inbetween
-        self = self.search([("id", "in", self.ids)])
-        if not self:
+        instances = self.search([("id", "in", self.ids)])
+        if not instances:
             return
         # Set date
-        self.write({"date_invoice": date_invoice})
+        instances.write({"date_invoice": date_invoice})
         # Validate invoice
-        self.action_invoice_open()
+        instances.action_invoice_open()

@@ -70,20 +70,14 @@ class StockPicking(models.Model):
                     "context": {"default_picking_id": self.id},
                     "target": "new",
                 }
-            else:
-                return super(StockPicking, self).do_new_transfer()
-        else:
-            if self.check_backorder():
-                # allow to process and create backorder even if no line
-                # processed
-                wiz = self.env["stock.backorder.confirmation"].create(
-                    {"pick_id": self.id}
-                )
-                wiz.process()
-            else:
-                return super(StockPicking, self).do_new_transfer()
-
-        return {}
+            return super(StockPicking, self).do_new_transfer()
+        if self.check_backorder():
+            # allow to process and create backorder even if no line
+            # processed
+            wiz = self.env["stock.backorder.confirmation"].create({"pick_id": self.id})
+            wiz.process()
+            return {}
+        return super(StockPicking, self).do_new_transfer()
 
     @api.multi
     def do_transfer(self):
@@ -91,14 +85,14 @@ class StockPicking(models.Model):
         to_transfer = self - to_backorder
         to_backorder._create_backorder()
         if to_transfer:
-            super(StockPicking, to_transfer).do_transfer()
+            return super(StockPicking, to_transfer).do_transfer()
         return True
 
-    # pylint: disable=W8104
+    # pylint: disable=api-one-deprecated
     @api.one
     def _compute_state(self):
         # Mark as done picking transfered without any line
         if not self.move_lines and self.printed:
             self.state = "done"
-        else:
-            super(StockPicking, self)._compute_state()
+            return None
+        return super(StockPicking, self)._compute_state()

@@ -31,40 +31,40 @@ class StockConfigSettings(models.TransientModel):
     )
 
     @api.model
-    def default_get(self, fields):
-        res = super(StockConfigSettings, self).default_get(fields)
+    def default_get(self, _fields):
+        res = super(StockConfigSettings, self).default_get(_fields)
 
         config_param = self.env["ir.config_parameter"]
-        if "price_limit_for_inventory" in fields or not fields:
+        if "price_limit_for_inventory" in _fields or not _fields:
             price = float(config_param.get_param("stock.price_limit_for_inventory", 0))
             res["price_limit_for_inventory"] = price
-        if "nbr_open_days" in fields or not fields:
+        if "nbr_open_days" in _fields or not _fields:
             days = int(config_param.get_param("stock.nbr_open_days", 0))
             res["nbr_open_days"] = days
-        if "months_between_inventory" in fields or not fields:
+        if "months_between_inventory" in _fields or not _fields:
             nbr_months = int(
                 config_param.get_param("stock.months_between_inventory", 0)
             )
             res["months_between_inventory"] = nbr_months
-        if "delay_inventory_expensive_products" in fields or not fields:
+        if "delay_inventory_expensive_products" in _fields or not _fields:
             nbr_months = int(
                 config_param.get_param("stock.delay_inventory_expensive_products", 0)
             )
             res["delay_inventory_expensive_products"] = nbr_months
-        if "delay_inventory_best_sellers_products" in fields or not fields:
+        if "delay_inventory_best_sellers_products" in _fields or not _fields:
             nbr_months = int(
                 config_param.get_param("stock.delay_inventory_best_sellers_products", 0)
             )
             res["delay_inventory_best_sellers_products"] = nbr_months
-        if "delay_inventory_other_products" in fields or not fields:
+        if "delay_inventory_other_products" in _fields or not _fields:
             nbr_months = int(
                 config_param.get_param("stock.delay_inventory_other_products", 0)
             )
             res["delay_inventory_other_products"] = nbr_months
-        if "best_sellers_duration" in fields or not fields:
+        if "best_sellers_duration" in _fields or not _fields:
             nbr_months = int(config_param.get_param("stock.best_sellers_duration", 0))
             res["best_sellers_duration"] = nbr_months
-        if "best_sellers_percent" in fields or not fields:
+        if "best_sellers_percent" in _fields or not _fields:
             best_sellers_percent = int(
                 config_param.get_param("stock.best_sellers_percent", 0)
             )

@@ -335,7 +335,6 @@ class TestStockDeliveryNote(SavepointCase):
         self.assertEqual(lines, expected)
 
     def test_each_line_finishes_with_separator(self):
-        """"""
         attachments = self.env["ir.attachment"].search(
             [("res_id", "=", self.picking_csv.id)]
         )

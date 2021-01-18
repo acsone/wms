@@ -87,9 +87,6 @@ class TestItempick(ZetesTest):
         self.round.button_update()
 
     def test_requ_itempick_price(self):
-        """
-        """
-
         domain = Itempick(self._default_header(), mock.MagicMock(name="Savepoint()"))
 
         # Set the flag is_price_on_labels

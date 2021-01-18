@@ -128,6 +128,7 @@ class AlcEdiConnectorCase(SavepointComponentCase, JobMixin):
         self.mocked_sftp_push = sftp_push_patcher.start()
         self.mocked_sftp_pull = sftp_pull_patcher.start()
 
+        # pylint: disable=unused-variable
         @self.addCleanup
         def stop_mock():
             sftp_push_patcher.stop()

@@ -61,6 +61,7 @@ class Sale(models.Model):
             order.with_delay(
                 description=_("Confirmation of sales order %s") % order.name, priority=1
             ).confirm_in_background(notify=False)
+        return None
 
     @job(default_channel="root.priority.sale_confirm")
     @api.multi

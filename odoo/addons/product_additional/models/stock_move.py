@@ -19,17 +19,19 @@ class StockMove(models.Model):
         # do_unreserve on moves. As we also unlink additional moves, we need to
         # rebuild the record set otherwise it will complain for missing records
         # in the recordset
+        new_self = self
         if self.ids:
-            self = self.search([("id", "in", self.ids)])
-        return super(StockMove, self).do_unreserve()
+            new_self = self.search([("id", "in", self.ids)])
+        return super(StockMove, new_self).do_unreserve()
 
     def check_move_lots(self):
         # Called in mrp module just after action_assign
         # As recordset changed, we need to rebuild it otherwise it
         # will complain for missing records in the recordset
+        new_self = self
         if self.ids:
-            self = self.search([("id", "in", self.ids)])
-        return super(StockMove, self).check_move_lots()
+            new_self = self.search([("id", "in", self.ids)])
+        return super(StockMove, new_self).check_move_lots()
 
     def assign_picking(self):
         # Prevent any backorder of additional moves
@@ -41,7 +43,7 @@ class StockMove(models.Model):
                     no_recompute_pack=True, force_cancel=True
                 ).action_cancel()
                 move.picking_id.message_post(
-                    body=_("Remaining additional move '%s' canceled" % move.name)
+                    body=_("Remaining additional move '%s' canceled") % move.name
                 )
             else:
                 other_moves |= move

@@ -57,10 +57,10 @@ class StockProductionLot(models.Model):
         for table, column in cr.fetchall():
             qs = []
             if table in product_fields:
-                qs.append("{}={}".format(product_fields[table], product.id))
+                qs.append(u"{}={}".format(product_fields[table], product.id))
             if table in template_fields:
                 qs.append(
-                    "{}={}".format(template_fields[table], product.product_tmpl_id.id)
+                    u"{}={}".format(template_fields[table], product.product_tmpl_id.id)
                 )
             if not qs:
                 continue
@@ -85,7 +85,7 @@ class StockProductionLot(models.Model):
                     query += " OR id in %s"
                     params += (tuple(moves),)
 
-            cr.execute(query, params)  # pylint: disable=E8103
+            cr.execute(query, params)  # pylint: disable=sql-injection
 
     @api.multi
     def write(self, vals):

@@ -19,4 +19,3 @@ def migrate(cr, version):
     product_template = env.ref("specific_stock.product_colis_souverain_frigo")
     if route:
         product_template.write({"route_ids": [(6, 0, route.ids)]})
-    return

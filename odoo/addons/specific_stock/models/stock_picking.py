@@ -77,7 +77,7 @@ class StockPicking(models.Model):
         self.write({"is_put_in_pack_done": True})
 
         if not operations_total:
-            return
+            return None
 
         wizard = self.env.ref("specific_stock.put_in_pack_helper_action")
         wizard_values = wizard.read()[0]

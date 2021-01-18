@@ -105,10 +105,10 @@ class RoundTemplate(models.Model):
                 vals = vals.groups()
                 code = vals[0]
                 text = vals[1]
-                comb = operator.startswith("not ") and "|" or "&"
+                comb = "|" if operator.startswith("not ") else "&"
             else:
                 code = text = name.strip()
-                comb = operator.startswith("not ") and "&" or "|"
+                comb = "&" if operator.startswith("not ") else "|"
             domain = [comb, ("code", operator, code), ("name", operator, text)]
         records = self.search(domain + args, limit=limit)
         return records.name_get()

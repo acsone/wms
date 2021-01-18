@@ -735,8 +735,8 @@ msgstr "Ignoré"
 #. module: specific_zetes
 #: code:addons/specific_zetes/tools/domain_interface.py:280
 #, python-format
-msgid "Some attributes are not valid: {}"
-msgstr "Certains attributs sont invalides: {}"
+msgid "Some attributes are not valid: %s"
+msgstr "Certains attributs sont invalides: %s"
 
 #. module: specific_zetes
 #: selection:stock.picking,zetes_state:0
@@ -810,8 +810,8 @@ msgstr "L'utilisateur doit être dans le groupe d'inventaire"
 #. module: specific_zetes
 #: code:addons/specific_zetes/tools/domain_interface.py:299
 #, python-format
-msgid "There are some missing mandatory values: {}"
-msgstr "Certaines valeurs obligatoires manquantes: {}"
+msgid "There are some missing mandatory values: %s"
+msgstr "Certaines valeurs obligatoires manquantes: %s"
 
 #. module: specific_zetes
 #: code:addons/specific_zetes/tools/domain_itemmove.py:197

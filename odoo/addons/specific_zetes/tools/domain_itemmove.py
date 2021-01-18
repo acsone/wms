@@ -224,7 +224,7 @@ class Itemmove(DomainInterface):
                 # by lot. In some case we need to know on which lot we are
                 # working.
                 if lot:
-                    line_id = "{}_{}".format(line.id, lot.id)
+                    line_id = u"{}_{}".format(line.id, lot.id)
                 else:
                     line_id = line.id
 

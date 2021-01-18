@@ -154,8 +154,8 @@ class ResPartner(models.Model):
             self.check_access_rights("read")
             where_query = self._where_calc(args)
             self._apply_ir_rules(where_query, "read")
-            from_clause, where_clause, where_clause_params = where_query.get_sql()
-            where_str = where_clause and (" WHERE %s AND " % where_clause) or " WHERE "
+            _from_clause, where_clause, where_clause_params = where_query.get_sql()
+            where_str = " WHERE %s AND " % where_clause if where_clause else " WHERE "
 
             # search on the name of the contacts and of its company
             search_name = name
@@ -187,13 +187,13 @@ class ResPartner(models.Model):
             if limit:
                 query += u" limit %s"
                 where_clause_params.append(limit)
-            self.env.cr.execute(query, where_clause_params)  # pylint: disable=E8103
+            # pylint: disable=sql-injection
+            self.env.cr.execute(query, where_clause_params)
             partner_ids = map(lambda x: x[0], self.env.cr.fetchall())
 
             if partner_ids:
                 return self.browse(partner_ids).name_get()
-            else:
-                return []
+            return []
         return super(ResPartner, self).name_search(
             name, args, operator=operator, limit=limit
         )

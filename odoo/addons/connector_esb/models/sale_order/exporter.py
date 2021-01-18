@@ -117,6 +117,7 @@ class SaleExportMapper(Component):
         """ If an esb_ref exists, it is an update, so lets add it """
         if record.esb_ref:
             return {"increment_id": record.esb_ref or ""}
+        return None
 
 
 class SaleWebServiceExporter(Component):

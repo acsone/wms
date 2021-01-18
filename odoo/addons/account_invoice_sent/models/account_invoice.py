@@ -44,7 +44,7 @@ class AccountInvoice(models.Model):
         """Generate jobs to send invoices"""
         invoices = self.exists()
         invoices = invoices._filter_send_invoice(sending_method)
-        method_name = "_send_invoice_{}".format(sending_method)
+        method_name = u"_send_invoice_{}".format(sending_method)
         for invoice in invoices:
             getattr(invoice.with_delay(priority=50), method_name)()
 

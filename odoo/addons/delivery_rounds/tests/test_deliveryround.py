@@ -205,7 +205,7 @@ class TestDeliveryRound(common.DeliveryRoundTestCase):
             backorders must be assigned
         """
         self.partner1.is_sale_back_order_cancel = False
-        delivery_round, picks, ships = self._prepare_delivery_round()
+        delivery_round, picks, _ships = self._prepare_delivery_round()
         pickings = self.StockPicking.search([])
         delivery_round.button_close()
         delivery_round._deliver(background=False)
@@ -227,7 +227,7 @@ class TestDeliveryRound(common.DeliveryRoundTestCase):
             no backoders created
         """
         self.partner1.is_sale_back_order_cancel = True
-        delivery_round, picks, ships = self._prepare_delivery_round()
+        delivery_round, _picks, _ships = self._prepare_delivery_round()
         pickings = self.StockPicking.search([])
         delivery_round.button_close()
         delivery_round._deliver(background=False)

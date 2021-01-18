@@ -15,9 +15,9 @@ class StockPicking(models.Model):
             self.picking_type_id.avoid_shipping_cost
             and self.picking_type_code == "outgoing"
         ):
-            return
+            return None
         if self.carrier_id.use_specific_cost_calculation or not self.carrier_price:
-            return
+            return None
         return super(StockPicking, self)._add_delivery_cost_to_so()
 
     @api.multi
@@ -59,7 +59,7 @@ class StockPicking(models.Model):
             # yet been used to compute those costs.
 
             customer_round_saleorders = round_saleorders.filtered(
-                lambda r: r.partner_id == customer
+                lambda r, c=customer: r.partner_id == c
             )
             customer_carriers = customer_round_saleorders.mapped("carrier_id")
 

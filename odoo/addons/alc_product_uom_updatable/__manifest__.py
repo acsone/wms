@@ -9,7 +9,7 @@
     "version": "10.0.1.0.0",
     "license": "AGPL-3",
     "author": "Acsone SA/NV",
-    "website": "www.acsone.eu",
+    "website": "https://www.acsone.eu",
     "depends": ["stock"],
     "data": [],
     "demo": [],

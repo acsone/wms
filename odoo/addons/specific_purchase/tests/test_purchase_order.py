@@ -269,6 +269,7 @@ class TestPurchaseOrder(SavepointCase):
         self.assertEqual(line.price_unit, 90)
         self.assertEqual(purchase.amount_untaxed, 90)
 
+    # pylint: disable=no-self-argument
     @freeze_time("2018-06-01", as_arg=True)
     def test_nb_days_out_of_stock_computation(frozen_time, self):
         # without the route_mto, route_mto_mts

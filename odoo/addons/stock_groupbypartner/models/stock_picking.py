@@ -64,7 +64,6 @@ class StockPicking(models.Model):
                 (tuple(self.ids),),
             )
             _logger.info("lock acquired for pickings %s", self.ids)
-        return
 
     @api.multi
     def _create_backorder(self, backorder_moves=None):
@@ -108,12 +107,9 @@ class StockPicking(models.Model):
                     body=_(
                         "Remaining moves canceled as partner does not "
                         "accept backorder:<ul>%s</ul>"
-                        % "".join(
-                            [
-                                "<li>%s</li>" % m
-                                for m in not_done_bo_moves.mapped("name")
-                            ]
-                        )
+                    )
+                    % "".join(
+                        ["<li>%s</li>" % m for m in not_done_bo_moves.mapped("name")]
                     )
                 )
 
@@ -138,12 +134,12 @@ class StockPicking(models.Model):
                         body=_(
                             "Remaining moves canceled as partner does not "
                             "accept backorder:<ul>%s</ul>"
-                            % "".join(
-                                [
-                                    "<li>%s</li>" % m
-                                    for m in cancel_moves_bypicking.mapped("name")
-                                ]
-                            )
+                        )
+                        % "".join(
+                            [
+                                "<li>%s</li>" % m
+                                for m in cancel_moves_bypicking.mapped("name")
+                            ]
                         )
                     )
 

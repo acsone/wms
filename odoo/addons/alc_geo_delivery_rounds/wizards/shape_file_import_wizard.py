@@ -39,6 +39,8 @@ class ShapeFileImportWizard(models.TransientModel):
         self.ensure_one()
 
         # Retrieve ZIP file
+        # remove pylint deprecated once on py3
+        # pylint: disable=deprecated-method
         zip_data = base64.decodestring(self.shape_file)
         fp = io.BytesIO()
         fp.write(zip_data)
@@ -62,7 +64,7 @@ class ShapeFileImportWizard(models.TransientModel):
             try:
                 z.extractall(tmpdir)
                 files = []
-                for root, dirs, file_names in os.walk(tmpdir, topdown=True):
+                for root, _dirs, file_names in os.walk(tmpdir, topdown=True):
                     files.extend(file_names)
                     filename = files[0].split(".")[0]
                     path_to_shape_file = os.path.join(root, filename)
@@ -121,13 +123,12 @@ class ShapeFileImportWizard(models.TransientModel):
             )
             return existing_template
 
-        else:
-            # Create template
-            return self.env["round.template"].create(
-                {
-                    "name": shape_record.record.Nom,
-                    "delivery_plan_id": self.delivery_plan_id.id,
-                    "geo_optimization_resource_id": shape_record.record.Nom,
-                    "geo_polygon_shape": wkb,
-                }
-            )
+        # Create template
+        return self.env["round.template"].create(
+            {
+                "name": shape_record.record.Nom,
+                "delivery_plan_id": self.delivery_plan_id.id,
+                "geo_optimization_resource_id": shape_record.record.Nom,
+                "geo_polygon_shape": wkb,
+            }
+        )

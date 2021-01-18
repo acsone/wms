@@ -58,7 +58,7 @@ class StockInventory(models.Model):
 
         # If the current day is Saturday or Sunday we skip the inventory
         if date_today.isoweekday() in [6, 7]:
-            return
+            return None
 
         vlb_stock_location = self.env.ref("stock.stock_location_stock")
         vlb_location = vlb_stock_location.location_id
@@ -68,7 +68,7 @@ class StockInventory(models.Model):
             [("date", "=", fields.Date.to_string(date_today))]
         )
         if bank_holiday:
-            return
+            return None
 
         inventory = self.create(
             {
@@ -87,7 +87,7 @@ class StockInventory(models.Model):
 
         if not products_inventory:
             inventory.unlink()
-            return
+            return None
 
         inventory.write({"product_ids": [(6, 0, products_inventory.ids)]})
 
@@ -107,7 +107,7 @@ class StockInventory(models.Model):
                 config_param.get_param("stock.delay_inventory_%s_products" % inventory)
             )
             if not delay:
-                raise UserError(_("There is no delay for the inventory %s" % inventory))
+                raise UserError(_("There is no delay for the inventory %s") % inventory)
 
             date_start_period = fiscal_year_from
             date_end_period = (
@@ -142,7 +142,7 @@ class StockInventory(models.Model):
         exhausted_products = self.env["product.product"].search(exhausted_domain)
         for product in exhausted_products:
             bins = product.stock_bin_ids.mapped("bin_location_id")
-            location_id = bins and bins[0].id or self.location_id.id
+            location_id = bins[0].id if bins else self.location_id.id
 
             vals.append(
                 {

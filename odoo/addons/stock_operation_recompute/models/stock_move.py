@@ -25,14 +25,12 @@ class StockMove(models.Model):
         ops = self.mapped("linked_move_operation_ids.operation_id")
         for op in ops:
             _logger.debug(
-                "Old operation %s %s"
-                % (
-                    op,
-                    [
-                        "{}: {}/{}".format(plot.lot_id, plot.qty, plot.qty_todo)
-                        for plot in op.pack_lot_ids
-                    ],
-                )
+                "Old operation %s %s",
+                op,
+                [
+                    u"{}: {}/{}".format(plot.lot_id, plot.qty, plot.qty_todo)
+                    for plot in op.pack_lot_ids
+                ],
             )
         qty_done = {}
         for op in ops:
@@ -98,13 +96,15 @@ class StockMove(models.Model):
         # Recover the qty done
         for location_id, lines in qty_done.iteritems():
             for lot_id, qty in lines.iteritems():
-                nop = new_ops.filtered(lambda op: op.location_id.id == location_id)
+                nop = new_ops.filtered(
+                    lambda op, loc_id=location_id: op.location_id.id == loc_id
+                )
                 # lot_id == 0 on products without tracking
                 if not lot_id:
                     nop.qty_done = qty
                 else:
                     nol = nop.pack_lot_ids.filtered(
-                        lambda line: line.lot_id.id == lot_id
+                        lambda line, l_id=lot_id: line.lot_id.id == l_id
                     )
                     if not nol:
                         raise UserError(
@@ -129,12 +129,10 @@ class StockMove(models.Model):
 
         for new_mop in self.mapped("linked_move_operation_ids.operation_id"):
             _logger.debug(
-                "New operation %s %s"
-                % (
-                    new_mop,
-                    [
-                        "{}: {}/{}".format(plot.lot_id, plot.qty, plot.qty_todo)
-                        for plot in new_mop.pack_lot_ids
-                    ],
-                )
+                "New operation %s %s",
+                new_mop,
+                [
+                    u"{}: {}/{}".format(plot.lot_id, plot.qty, plot.qty_todo)
+                    for plot in new_mop.pack_lot_ids
+                ],
             )

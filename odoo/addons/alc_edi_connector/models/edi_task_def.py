@@ -28,7 +28,7 @@ class EdiTaskDef(models.AbstractModel):
         kind_field = self._fields["kind"]
         kind_label_by_value = dict(kind_field._description_selection(self.env))
         for record in self:
-            record.display_name = "{backend_name}: {kind_label}".format(
+            record.display_name = u"{backend_name}: {kind_label}".format(
                 backend_name=record.backend_id.name,
                 kind_label=kind_label_by_value[record.kind],
             )

@@ -377,17 +377,16 @@ class TestPricelistDiscount(SavepointCase):
         if line1.price_subtotal != 90:
             _logger.info("""=======Mythic bug is back this is a debug info=======""")
             _logger.info(
-                """price_unit: {}
-                price_subtotal: {}
-                discount: {}
-                discount2: {},
-                discount3: {}""".format(
-                    line1.price_unit,
-                    line1.price_subtotal,
-                    line1.discount,
-                    line1.discount2,
-                    line1.discount3,
-                )
+                """price_unit: %s
+                price_subtotal:%s
+                discount: %s
+                discount2: %s,
+                discount3: %s""",
+                line1.price_unit,
+                line1.price_subtotal,
+                line1.discount,
+                line1.discount2,
+                line1.discount3,
             )
             _logger.info("""=======End of debug info=======""")
         self.assertEqual(90, line1.price_subtotal)

@@ -11,11 +11,11 @@ class StockConfigSettings(models.TransientModel):
     reservation_unit_min_quantity = fields.Float("Minimum quantity")
 
     @api.model
-    def default_get(self, fields):
-        res = super(StockConfigSettings, self).default_get(fields)
+    def default_get(self, _fields):
+        res = super(StockConfigSettings, self).default_get(_fields)
         config_param = self.env["ir.config_parameter"]
 
-        if "reservation_unit_min_quantity" in fields or not fields:
+        if "reservation_unit_min_quantity" in _fields or not _fields:
             factor = float(
                 config_param.get_param("stock.reservation_unit_min_quantity_factor", 0)
             )

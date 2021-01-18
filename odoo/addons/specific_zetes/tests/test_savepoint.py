@@ -8,7 +8,7 @@ from odoo.tools import mute_logger
 from odoo.addons.specific_zetes.tools.domain_interface import Savepoint
 
 
-# pylint: disable=E8103
+# pylint: disable=sql-injection
 class TestSavepoint(SavepointCase):
     def _table_exists(self, name):
         query = (

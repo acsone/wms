@@ -42,12 +42,12 @@ class ESBXMLProducer(Component):
 
     def _apply_namespaces(self, xml):
         root = etree.XML(xml)
-        for el, ns, attr in self.namespaces:
-            if len(root.find(el)):
+        for elem, namespace, attribute in self.namespaces:
+            if len(root.find(elem)) > 0:
                 # NOTE: this sets
                 #  `xmlns:dt="urn:schemas-microsoft-com:datatypes"`
                 # as well as an empty `dt:dt=""` attribute
-                root.find(el).set("{{{}}}{}".format(ns, attr), "")
+                root.find(elem).set("{{{}}}{}".format(namespace, attribute), "")
         return etree.tostring(
             root, xml_declaration=True, encoding="utf-8", pretty_print=True
         )
@@ -135,7 +135,7 @@ class ESBXMLWriter(AbstractComponent):
             raise exceptions.UserError(_("File %s already exported.") % (filename,))
         return self._write_file(path, filename, content)
 
-    def _already_exists(path, filename):
+    def _already_exists(self, path, filename):
         raise NotImplementedError
 
     def _write_file(self, path, filename, content):

@@ -95,9 +95,9 @@ class ESBXMLTestCase(ESBTestCase, xmlunittest.XmlTestMixin):
                 elems = content_differs[key]
                 if elems:
                     message.append(u"  Content differs")
-                for tag, expected, got in elems:
+                for tag, _expected, got in elems:
                     message.append(
-                        u"   - {}: expect {!r}, got {!r}".format(tag, expected, got)
+                        u"   - {}: expect {!r}, got {!r}".format(tag, _expected, got)
                     )
                 message.append("")
 

@@ -18,6 +18,7 @@ class Base(models.AbstractModel):
     @api.multi
     def esb_export_record(self, backend, timestamp, fields=None):
         with backend.work_on(self._name, timestamp=timestamp) as work:
+            # pylint: disable=except-pass
             try:
                 exporter = work.component(usage="record.exporter")
             except NoComponentError:

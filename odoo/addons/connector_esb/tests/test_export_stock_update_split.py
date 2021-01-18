@@ -13,6 +13,23 @@ from odoo.tests.common import SavepointCase
 from odoo.addons.connector.exception import ConnectorException
 
 
+def successful_post_response(url, data, headers, auth):
+    resp = requests.Response()
+    resp.status_code = 200
+    resp.json = lambda: '{"status" : "OK", “code” : “200”, "items": []}'
+    return resp
+
+
+def failing_post_response(url, data, headers, auth):
+    """ This makes the http post fail when product 103 is in the data."""
+    if "test prod 103" in data:
+        raise ConnectorException("Failed push")
+    resp = requests.Response()
+    resp.status_code = 200
+    resp.json = lambda: '{"status" : "OK", “code” : “200”, "items": []}'
+    return resp
+
+
 class ExportStockUpdateTestCase(SavepointCase):
     @classmethod
     def setUpClass(cls):
@@ -67,13 +84,6 @@ class ExportStockUpdateTestCase(SavepointCase):
         )
         quants.refresh()
 
-    def successful_post_response(url, data, headers, auth):
-        """ """
-        resp = requests.Response()
-        resp.status_code = 200
-        resp.json = lambda: '{"status" : "OK", “code” : “200”, "items": []}'
-        return resp
-
     @mock.patch("requests.post", side_effect=successful_post_response)
     def test_successful_export(self, post):
         """
@@ -95,15 +105,6 @@ class ExportStockUpdateTestCase(SavepointCase):
             exported_until = exporter.run(max_records=0)
             self.assertEqual(exported_until, None)
             self.assertEqual(post.call_count, 4 + 2 + 1)
-
-    def failing_post_response(url, data, headers, auth):
-        """ This makes the http post fail when product 103 is in the data."""
-        if "test prod 103" in data:
-            raise ConnectorException("Failed push")
-        resp = requests.Response()
-        resp.status_code = 200
-        resp.json = lambda: '{"status" : "OK", “code” : “200”, "items": []}'
-        return resp
 
     @mock.patch("requests.post", side_effect=failing_post_response)
     def test_failing_export_1(self, post):

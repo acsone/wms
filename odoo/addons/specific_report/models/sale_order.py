@@ -133,7 +133,7 @@ class SaleOrder(models.Model):
 
         Based on `action_quotation_send`
         """
-        template_xid = "specific_report" ".email_template_pharmacist_supplier_order"
+        template_xid = "specific_report.email_template_pharmacist_supplier_order"
         mail_template = self.env.ref(template_xid)
         if not pharmacist:
             pharmacist = self._get_pharmacist()

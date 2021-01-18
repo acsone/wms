@@ -63,6 +63,7 @@ class StockPicking(models.Model):
         oplot.write({"qty": oplot.qty + 1})
         # Now update the UI
         op.qty_done = qty_done + 1
+        return None
 
     def _barcode_process_product(self, product):
         op = self.pack_operation_product_ids.filtered(
@@ -91,6 +92,7 @@ class StockPicking(models.Model):
         op.write({"qty_done": qty_done + 1})
         # Now update the UI
         op.qty_done = qty_done + 1
+        return None
 
     def on_barcode_scanned(self, barcode):
         """ Increase the product or lot quantity of a pack operation.

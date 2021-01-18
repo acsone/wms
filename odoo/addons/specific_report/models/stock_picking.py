@@ -113,44 +113,29 @@ class StockPicking(models.Model):
                     nbr_of_packages_by_zone[picking_zone].add(operation.package_id.id)
 
             picking.number_of_drug = sum(
-                [
-                    x
-                    for x in self.env["stock.quant.package"]
-                    .browse(nbr_of_packages_by_zone[zone_drug])
-                    .mapped("nbr_packages")
-                ]
+                self.env["stock.quant.package"]
+                .browse(nbr_of_packages_by_zone[zone_drug])
+                .mapped("nbr_packages")
             )
             picking.number_of_equipment = sum(
-                [
-                    x
-                    for x in self.env["stock.quant.package"]
-                    .browse(nbr_of_packages_by_zone[zone_equipment])
-                    .mapped("nbr_packages")
-                ]
+                self.env["stock.quant.package"]
+                .browse(nbr_of_packages_by_zone[zone_equipment])
+                .mapped("nbr_packages")
             )
             picking.number_of_cold = sum(
-                [
-                    x
-                    for x in self.env["stock.quant.package"]
-                    .browse(nbr_of_packages_by_zone[zone_cold])
-                    .mapped("nbr_packages")
-                ]
+                self.env["stock.quant.package"]
+                .browse(nbr_of_packages_by_zone[zone_cold])
+                .mapped("nbr_packages")
             )
             picking.number_of_food = sum(
-                [
-                    x
-                    for x in self.env["stock.quant.package"]
-                    .browse(nbr_of_packages_by_zone[zone_food])
-                    .mapped("nbr_packages")
-                ]
+                self.env["stock.quant.package"]
+                .browse(nbr_of_packages_by_zone[zone_food])
+                .mapped("nbr_packages")
             )
             picking.number_of_human_drug = sum(
-                [
-                    x
-                    for x in self.env["stock.quant.package"]
-                    .browse(nbr_of_packages_by_zone[zone_human])
-                    .mapped("nbr_packages")
-                ]
+                self.env["stock.quant.package"]
+                .browse(nbr_of_packages_by_zone[zone_human])
+                .mapped("nbr_packages")
             )
             picking.number_total = (
                 picking.number_of_drug

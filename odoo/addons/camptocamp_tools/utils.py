@@ -25,7 +25,7 @@ def create_index(cr, index_name, table, expression):
 def is_postgres_superuser(env):
     env.cr.execute("SHOW is_superuser;")
     superuser = env.cr.fetchone()
-    return superuser is not None and superuser[0] == "on" or False
+    return superuser[0] == "on" if superuser is not None else False
 
 
 def trgm_extension_exists(env):
@@ -58,12 +58,11 @@ def install_trgm_extension(env):
         if is_postgres_superuser(env):
             env.cr.execute("CREATE EXTENSION IF NOT EXISTS pg_trgm;")
             return True
-        else:
-            _logger.warning(
-                "To use pg_trgm you have to create the "
-                "extension pg_trgm in your database or you "
-                "have to be the superuser."
-            )
+        _logger.warning(
+            "To use pg_trgm you have to create the "
+            "extension pg_trgm in your database or you "
+            "have to be the superuser."
+        )
     else:
         return True
     return False

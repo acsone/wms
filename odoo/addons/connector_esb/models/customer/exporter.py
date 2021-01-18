@@ -84,8 +84,7 @@ class CustomerExportMapper(Component):
     def compute_pharmacy(self, record):
         if record.pharmacist_id:
             return {"IdPharmacy": record.pharmacist_id.ref or ""}
-        else:
-            return {"IdPharmacy": ""}
+        return {"IdPharmacy": ""}
 
     @mapping
     def compute_optional(self, record):
@@ -107,6 +106,7 @@ class CustomerExportMapper(Component):
     def compute_taxvat(self, record):
         if record.vat:
             return {"Taxvat": record.vat.replace(".", "").replace(" ", "")}
+        return None
 
     @mapping
     def compute_serialno(self, record):

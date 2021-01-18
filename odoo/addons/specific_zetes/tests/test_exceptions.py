@@ -197,6 +197,6 @@ class TestExceptions(ZetesTest):
         result_lines = result_str.split("\n")
         results = [self.format_result(result_line) for result_line in result_lines]
         # self.assertEqual(len(results), 1)
-        pick_line_id, lot_id = results[0].pickLineId.split("_")
+        results[0].pickLineId.split("_")
         # self.assertEqual(pick_line_id, str(pack_op_2.id))
         # self.assertEqual(lot_id, str(self.lot_product_2.id))

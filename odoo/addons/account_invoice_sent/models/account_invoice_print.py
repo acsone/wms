@@ -32,7 +32,7 @@ class AccountInvoicePrint(models.Model):
 
     def _compute_file_name(self):
         for record in self:
-            record.fname = "account_invoice_print_{}.pdf".format(self.id)
+            record.fname = u"account_invoice_print_{}.pdf".format(self.id)
 
     @api.model
     def _save_document_content(self, content, invoice):
@@ -91,15 +91,14 @@ class AccountInvoicePrint(models.Model):
                 os.unlink(path)
             except (OSError, IOError):
                 logging.getLogger(__name__).error(
-                    "Error when trying to remove file %s" % path
+                    "Error when trying to remove file %s", path
                 )
 
     @api.model
     def _merge_documents(self, pdfdocuments):
         if len(pdfdocuments) == 1:
             return pdfdocuments[0]
-        else:
-            return self.env["report"]._merge_pdf(pdfdocuments)
+        return self.env["report"]._merge_pdf(pdfdocuments)
 
     @api.multi
     def _notify_report_generated(self):
@@ -122,7 +121,7 @@ class AccountInvoicePrint(models.Model):
         self.state = "done"
 
         if not invoices:
-            return
+            return None
 
         template = self.env.ref("account.email_template_edi_invoice")
         for invoice in invoices:
@@ -155,7 +154,7 @@ class AccountInvoicePrint(models.Model):
         for invoice in sorted_invoices:
             path = document_by_invoice.get(invoice)
             if not path:
-                return
+                return None
             pdfdocuments.append(path)
 
         temporary_files = set(pdfdocuments)

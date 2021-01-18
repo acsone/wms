@@ -101,7 +101,7 @@ class StockLocation(models.Model):
             picklist = list(set(formated_checksum) - set(checksum_not_available))
             if not picklist:
                 raise UserError(
-                    _("There is no checksum available for location %s" % location.name)
+                    _("There is no checksum available for location %s") % location.name
                 )
 
             # Assign checksum
@@ -113,7 +113,8 @@ class StockLocation(models.Model):
             location.is_checksum_invalid = False
 
             self.filtered(
-                lambda r: r.bin_checksum_1 == old_checksum and r.is_checksum_invalid
+                lambda r, chk=old_checksum: r.bin_checksum_1 == chk
+                and r.is_checksum_invalid
             ).check_checksum_valid()
 
     @api.multi
@@ -126,7 +127,7 @@ class StockLocation(models.Model):
         self.ensure_one()
         location = self
         if not location.is_valid_location:
-            return
+            return None
 
         shelf = location.shelf
 
@@ -142,11 +143,11 @@ class StockLocation(models.Model):
         def convert(code):
             if is_letter:
                 if code < ord("A") or code > ord("Z"):
-                    return
+                    return None
                 code = chr(code)
             else:
                 if code < 1 or code > 99:
-                    return
+                    return None
                 code = "{:02d}".format(code)
             return code
 

@@ -108,4 +108,3 @@ class ProductSupplierInfo(models.Model):
             "real_id": self.id,
         }
         self.env["product.supplierinfo.esbflux"].sudo().create(values)
-        return

@@ -54,6 +54,8 @@ class TestUblDespatchAdviceImporter(AlcEdiConnectorCase):
         )
         result = {}
         for attachment in attachments:
+            # remove pylint deprecated once on py3
+            # pylint: disable=deprecated-method
             result[attachment.name] = base64.decodestring(attachment.datas)
         self.assertDictEqual(
             {"DespatchAdvice1.xml": "content1", "DespatchAdvice2.xml": "content2"},

@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
-# pylint: disable=W8116
+# pylint: disable=print-used
 """
 This script work with sale order to make a full test exchange
 with the ESB.
 """
 
 import argparse
+import sys
 import time
 
 import odoorpc
@@ -24,18 +25,18 @@ parser.add_argument("--port", default=port)
 parser.add_argument("--user", default=user)
 parser.add_argument("--password", default=password)
 parser.add_argument("--db_name", default=db_name)
-args = parser.parse_args()
 
 
 def login(args):
     # print 'Connecting to {}:{}'.format(args.hostname, args.port)
-    odoo = odoorpc.ODOO(args.hostname, port=args.port)
-    odoo.login(args.db_name, args.user, args.password)
-    return odoo
+    _odoo = odoorpc.ODOO(args.hostname, port=args.port)
+    _odoo.login(args.db_name, args.user, args.password)
+    return _odoo
     # uid = odoo.env.user
 
 
-odoo = login(args)
+parsed_args = parser.parse_args()
+odoo = login(parsed_args)
 # Search for a specific customer
 customer = odoo.execute("res.partner", "search", [("name", "like", "HOGGE")])
 product_1 = odoo.env.ref("__import__.product_2761427_product_template")[0]
@@ -71,11 +72,11 @@ so.action_confirm_background()
 while True:
     odoo.logout()
     time.sleep(10)
-    odoo = login(args)
+    odoo = login(parsed_args)
     so = odoo.env["sale.order"].browse(new_so_id)
     if not so:
         print("The sale order could not be found.")
-        exit(0)
+        sys.exit(0)
     elif so["esb_ref"]:
         print(
             u"Sale order has been sent to the"

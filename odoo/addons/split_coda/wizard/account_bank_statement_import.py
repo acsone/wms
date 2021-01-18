@@ -59,7 +59,7 @@ class AccountBankStatementImport(models.TransientModel):
                 journal, sanitized_account_number
             )
             if journal.bank_account_id and not is_valid_account:
-                _logger.info("Skip the CODA for account %s" % account_number)
+                _logger.info("Skip the CODA for account %s", account_number)
                 continue
 
             # Try to find the currency and journal in odoo

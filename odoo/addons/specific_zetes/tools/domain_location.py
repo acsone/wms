@@ -165,15 +165,13 @@ class Location(DomainInterface):
             result.update(
                 {
                     "respCode": constants.RESPONSE_CODE_ERROR,
-                    "respMsg": _(
-                        "Location %s%s%s%s%s not found"
-                        % (
-                            params.Cri01,
-                            params.Cri02,
-                            params.Cri03,
-                            params.Cri04,
-                            params.Cri05,
-                        )
+                    "respMsg": _("Location %s%s%s%s%s not found")
+                    % (
+                        params.Cri01,
+                        params.Cri02,
+                        params.Cri03,
+                        params.Cri04,
+                        params.Cri05,
                     ),
                 }
             )

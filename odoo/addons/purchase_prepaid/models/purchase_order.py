@@ -13,6 +13,7 @@ class PurchaseOrder(models.Model):
         help="Check this if the invoice is received before reception of goods",
     )
 
+    # pylint: disable=missing-return
     @api.depends(
         "state",
         "order_line.qty_invoiced",

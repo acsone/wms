@@ -58,7 +58,7 @@ class AlcAccountPaymentGlobalization(models.TransientModel):
         amount_residual = move_line.amount_residual
         vals = {
             "invoice_id": move_line.invoice_id.id,
-            "name": "{} {}".format(move_line.invoice_id.number, self.partner_id.name),
+            "name": u"{} {}".format(move_line.invoice_id.number, self.partner_id.name),
             "account_id": self.account_id.id,
             "partner_id": move_line.partner_id.id,
         }

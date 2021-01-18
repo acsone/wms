@@ -208,7 +208,7 @@ class StockHistoryMaterialized(models.AbstractModel):
             ) WITH NO DATA;""",
             (AsIs(self._table),),
         )
-        # pylint: disable=E8103
+        # pylint: disable=sql-injection
         self.env.cr.execute(
             "CREATE UNIQUE INDEX pk_{} ON {} (id)".format(self._table, self._table)
         )
@@ -260,6 +260,7 @@ class StockHistory(models.Model):
             )
             rec.inventory_value = rec.quantity * history_price
 
+    # pylint: disable=redefined-outer-name
     @api.model
     def read_group(
         self, domain, fields, groupby, offset=0, limit=None, orderby=False, lazy=True

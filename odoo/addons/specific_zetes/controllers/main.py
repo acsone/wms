@@ -38,7 +38,7 @@ class Zetes(Home):
     def wrapper(self, **kw):
         cmd = request.httprequest.data
 
-        _logger.info("Command: " + cmd)
+        _logger.info("Command: %s", cmd)
 
         # For all requests Zetes sends an extra comma.
         # We need to remove this comma before split the request
@@ -83,7 +83,7 @@ class Zetes(Home):
         # If the method return something (action REQU)
         if result and isinstance(result, str):
             # Add a # and two break line to respect Zetes requirement
-            _logger.info("Result: " + result)
+            _logger.info("Result: %s", result)
             result += "#\n\n"
         # If the method return nothing (action RESU)
         else:

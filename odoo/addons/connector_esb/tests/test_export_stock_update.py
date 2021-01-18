@@ -11,6 +11,13 @@ import requests
 from odoo.tests.common import SavepointCase
 
 
+def post_ret_status(url, data, headers, auth):
+    resp = requests.Response()
+    resp.status_code = 200
+    resp.json = lambda: '{"status" : "OK", “code” : “200”, "items": []}'
+    return resp
+
+
 class ExportStockUpdateTestCase(SavepointCase):
     def setUp(self):
         super(ExportStockUpdateTestCase, self).setUp()
@@ -295,12 +302,6 @@ class ExportStockUpdateTestCase(SavepointCase):
             exporter = work.component(usage="record.exporter.cron")
             items = exporter.get_items(None)
         self.assertEqual(len(items.mapped("product_id")), 2)
-
-    def post_ret_status(url, data, headers, auth):
-        resp = requests.Response()
-        resp.status_code = 200
-        resp.json = lambda: '{"status" : "OK", “code” : “200”, "items": []}'
-        return resp
 
     @mock.patch("requests.post", side_effect=post_ret_status)
     def test_record_exporter(self, post):

@@ -35,7 +35,7 @@ class ResPartner(models.Model):
         start_date_fiscal_year, end_date_fiscal_year = self._get_fiscal_year()
 
         if not self.ids:
-            return True
+            return
 
         all_partners_and_children = {}
         all_partner_ids = []
@@ -59,7 +59,7 @@ class ResPartner(models.Model):
             ]
         )
         account_invoice_report._apply_ir_rules(where_query, "read")
-        from_clause, where_clause, where_clause_params = where_query.get_sql()
+        _from_clause, where_clause, where_clause_params = where_query.get_sql()
 
         # price_total is in the company currency
         query = (
@@ -71,7 +71,7 @@ class ResPartner(models.Model):
                 """
             % where_clause
         )
-        self.env.cr.execute(query, where_clause_params)  # pylint: disable=E8103
+        self.env.cr.execute(query, where_clause_params)  # pylint: disable=sql-injection
         price_totals = self.env.cr.dictfetchall()
         for partner, child_ids in all_partners_and_children.items():
             partner.total_invoiced_in_current_fiscal_year = sum(

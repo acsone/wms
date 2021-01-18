@@ -22,6 +22,6 @@ class StockQuant(models.Model):
         """ Fixing issue https://github.com/odoo/odoo/issues/31186 """
         if removal_strategy == "fefo":
             return "expiry_date, in_date, id desc"
-        elif removal_strategy == "fifo":
+        if removal_strategy == "fifo":
             return "in_date, id desc"
         return super(StockQuant, self)._quants_removal_get_order(removal_strategy)

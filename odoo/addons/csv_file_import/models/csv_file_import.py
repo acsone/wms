@@ -125,7 +125,7 @@ class CSVFileImport(models.Model):
                         files_to_import.append(file_path)
 
                 for file_to_import in files_to_import:
-                    _logger.info("Import file %s" % file_to_import)
+                    _logger.info("Import file %s", file_to_import)
                     filename = file_to_import.split("/")[-1]
                     content = self.get_file_content(
                         file_to_import, encoding=self.file_encoding

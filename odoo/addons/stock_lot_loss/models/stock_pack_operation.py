@@ -51,13 +51,12 @@ class StockPackOperation(models.Model):
         if self._is_done(pack_op_lot_id=pack_op_lot_id):
             if raise_if_nothing_to_block:
                 raise UserError(_("No qty to block."))
-            else:
-                _logger.info(
-                    "No qty to block for product %s on picking %s",
-                    self.product_id.name,
-                    self.picking_id.name,
-                )
-                return
+            _logger.info(
+                "No qty to block for product %s on picking %s",
+                self.product_id.name,
+                self.picking_id.name,
+            )
+            return
 
         moves = self.linked_move_operation_ids.mapped("move_id")
 
@@ -92,13 +91,12 @@ class StockPackOperation(models.Model):
             if qty_to_block <= 0:
                 if raise_if_nothing_to_block:
                     raise UserError(_("No qty to block."))
-                else:
-                    _logger.info(
-                        "No qty to block for product %s on picking %s",
-                        self.product_id.name,
-                        self.picking_id.name,
-                    )
-                    return
+                _logger.info(
+                    "No qty to block for product %s on picking %s",
+                    self.product_id.name,
+                    self.picking_id.name,
+                )
+                return
 
             # Create a move to block this qty
             # Send to a temporary location part of the non-pickable stock

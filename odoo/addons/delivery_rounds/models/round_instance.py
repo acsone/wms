@@ -208,10 +208,10 @@ class RoundInstance(models.Model):
             if len(vals) > 1:
                 code = vals[0].strip()
                 text = vals[1].strip()
-                comb = operator.startswith("not ") and "|" or "&"
+                comb = "|" if operator.startswith("not ") else "&"
             else:
                 code = text = name.strip()
-                comb = operator.startswith("not ") and "&" or "|"
+                comb = "&" if operator.startswith("not ") else "|"
             domain = [
                 comb,
                 ("template_code", operator, code),
@@ -881,7 +881,9 @@ class RoundInstanceCustomer(models.Model):
             rank = instance_customer.rank
             # when we set a rank on a round instance customer,
             # we copy that value on the pickings
-            pickings = instance_customer.picking_ids.filtered(lambda p: p.rank != rank)
+            pickings = instance_customer.picking_ids.filtered(
+                lambda p, r=rank: p.rank != r
+            )
             if not pickings:
                 continue
             _logger.debug(
@@ -913,7 +915,7 @@ class RoundInstanceCustomer(models.Model):
                     )
                 )
             )
-            rec.count_picking_progress = "{}/{}".format(count_done, count_total)
+            rec.count_picking_progress = u"{}/{}".format(count_done, count_total)
 
     def button_deliver(self):
         """ Validate all shipping orders that are available """
@@ -979,10 +981,10 @@ class RoundInstanceCustomer(models.Model):
         # "round.instance" record. Any write or lock acquired on the related
         # "round.instance" before calling this method could make it fail.
         if not self.exists():
-            return
+            return None
         self.ensure_one()
         if self.delivered:
-            return
+            return None
         _logger.info(
             "Starting to deliver customer instance %d of instance %d",
             self.id,
@@ -998,7 +1000,7 @@ class RoundInstanceCustomer(models.Model):
             for pick in self.picking_ids:
                 if pick.state in ["cancel", "done"]:
                     continue
-                elif pick.picking_type_id.subcode == "PICK":
+                if pick.picking_type_id.subcode == "PICK":
                     pickings |= pick
                 elif pick.picking_type_id.code == "outgoing":
                     shippings |= pick
@@ -1107,17 +1109,16 @@ class RoundInstanceCustomer(models.Model):
             if background:
                 # write a result to the job
                 message = _(
-                    "Should be delivered manually, could not"
-                    " deliver because of %s" % (self.delivery_error,)
-                )
+                    "Should be delivered manually, could not" " deliver because of %s"
+                ) % (self.delivery_error,)
                 return message
-            else:
-                # if we raise the error using the normal way, the buttons
-                # on the one2many list stop to work...
-                self.env.user.notify_warning(
-                    _("Error when delivering %s: %s")
-                    % (self.display_name, self.delivery_error)
-                )
+            # if we raise the error using the normal way, the buttons
+            # on the one2many list stop to work...
+            self.env.user.notify_warning(
+                _("Error when delivering %s: %s")
+                % (self.display_name, self.delivery_error)
+            )
+        return None
 
     def _deliver(self, background=True):
         """ Validate all shipping orders that are available

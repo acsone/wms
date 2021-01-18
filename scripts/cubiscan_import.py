@@ -15,6 +15,7 @@ import pandas as pd
 import psycopg2
 
 
+# pylint: disable=unnecessary-lambda,no-value-for-parameter
 def dataframe_to_sql_table(env, dataframe, verbose):
     # Create temporary DF table for products
     # NB : index is just to stick to the DF, first column is the index
@@ -70,12 +71,13 @@ def dataframe_to_sql_table(env, dataframe, verbose):
     except (Exception, psycopg2.DatabaseError) as error:
         env.cr.rollback()
         logging.getLogger(__name__).error(
-            "Error when trying to to copy dataframe into temporary table %s" % error
+            "Error when trying to to copy dataframe into temporary table %s", error
         )
         return 1
 
     if verbose:
         click.echo("I tried,  it went well!. . .")
+    return None
 
 
 def format_files_to_dataframe(env, path_to_files, verbose):

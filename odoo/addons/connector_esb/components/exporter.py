@@ -8,7 +8,7 @@ import psycopg2
 from psycopg2.extensions import AsIs
 
 import odoo
-from odoo import _, fields
+from odoo import _, fields as odoo_fields
 from odoo.osv.expression import AND
 
 from odoo.addons.component.core import AbstractComponent, Component
@@ -79,7 +79,7 @@ class ESBWebServiceExporter(AbstractComponent):
         # Commit so we keep the external ID when we do something in
         # _after_export and it fails. The commit will also release the lock
         # acquired on the record
-        # pylint: disable=E8102
+        # pylint: disable=invalid-commit
         if not odoo.tools.config["test_enable"]:
             self.env.cr.commit()  # noqa
 
@@ -91,7 +91,7 @@ class ESBWebServiceExporter(AbstractComponent):
         assert self.record
 
         if self._has_to_skip():
-            return
+            return _("Skip")
 
         # prevent other jobs to export the same record
         # will be released on commit (or rollback)
@@ -140,7 +140,6 @@ class ESBWebServiceExporter(AbstractComponent):
 
     def _after_export(self):
         """Can do several actions after exporting a record on the backend"""
-        pass
 
     def _lock(self, records=None):
         """Lock the record.
@@ -311,14 +310,14 @@ class ESBCronExporter(AbstractComponent):
         """
         domain = []
         if export_since:
-            export_date = fields.Datetime.from_string(export_since)
+            export_date = odoo_fields.Datetime.from_string(export_since)
             export_date = export_date - datetime.timedelta(seconds=self.BASIC_LOCK_TIME)
-            export_since = fields.Datetime.to_string(export_date)
+            export_since = odoo_fields.Datetime.to_string(export_date)
             domain.append(("write_date", ">=", export_since))
         if export_to:
-            export_date = fields.Datetime.from_string(export_to)
+            export_date = odoo_fields.Datetime.from_string(export_to)
             export_date = export_date + datetime.timedelta(seconds=self.BASIC_LOCK_TIME)
-            export_to = fields.Datetime.to_string(export_date)
+            export_to = odoo_fields.Datetime.to_string(export_date)
             domain.append(("write_date", "<=", export_to))
         return domain
 
@@ -372,4 +371,3 @@ class ESBWebServiceCronExporter(AbstractComponent):
         if data:
             data = {"lines": data}
             self._create(data)
-        return

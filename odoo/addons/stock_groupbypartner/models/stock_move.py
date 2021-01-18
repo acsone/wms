@@ -54,10 +54,7 @@ class StockMove(models.Model):
 
         pick_obj = self.env["stock.picking"]
         pickings_cache = {}
-        if moves_to_group.mapped("picking_id"):
-            recompute_sale_pickings = True
-        else:
-            recompute_sale_pickings = False
+        recompute_sale_pickings = bool(moves_to_group.mapped("picking_id"))
         for move in moves_to_group:
             domain = move._assign_picking_group_domain()
             if str(domain) in pickings_cache:
@@ -76,6 +73,7 @@ class StockMove(models.Model):
             # same group_id. Necessary for pushed moves
             if len(pickings) > 1:
 
+                # pylint: disable=cell-var-from-loop
                 def key(r):
                     return not (
                         move.group_id
@@ -138,7 +136,7 @@ class StockMove(models.Model):
                 if move.state == "waiting":
                     break
                 operations_to_recompute = picking.pack_operation_ids.filtered(
-                    lambda op: op.product_id == move.product_id
+                    lambda op, m=move: op.product_id == m.product_id
                 )
                 if operations_to_recompute:
                     _logger.debug("Cleaning operations %s", operations_to_recompute.ids)
@@ -170,7 +168,7 @@ class StockMove(models.Model):
                     )
                     if backorder_orig_id:
                         picking.message_post(
-                            body=_("Backorder of %s" % backorder_orig_id.name)
+                            body=_("Backorder of %s") % backorder_orig_id.name
                         )
                         backorder_orig_id.message_post(
                             body=_(

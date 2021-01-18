@@ -24,7 +24,7 @@ class SalesService(Component):
     _usage = "sales"
 
     # api methods
-    # pylint: disable=W8106
+    # pylint: disable=method-required-super
     def create(self, **params):
         """
         Create a sale order
@@ -64,7 +64,6 @@ class SalesService(Component):
             domain.append(("b2c_ref", "in", ids))
         limit = params.get("limit", None)
         offset = params.get("offset", 0)
-        # pylint: disable=W0104
         data = (
             self.env["sale.order"]
             .suspend_security()

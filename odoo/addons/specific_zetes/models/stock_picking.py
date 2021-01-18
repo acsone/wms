@@ -247,7 +247,7 @@ class StockPackOperation(models.Model):
                 raise UserError(_("No pack operation found"))
             pack_lot = self.pack_lot_ids.filtered(lambda line: line.lot_id.id == lot_id)
             if not pack_lot:
-                raise UserError(_("No pack operation found with ID %s" % lot_id))
+                raise UserError(_("No pack operation found with ID %s") % lot_id)
 
             lot_quantity_available = pack_lot.qty_todo - pack_lot.qty
             if new_qty > lot_quantity_available:
@@ -293,7 +293,7 @@ class StockPackOperation(models.Model):
 
         # If there no existing line (quantity) for this lot
         # we will create a new line
-        if not len(pack_lot):
+        if len(pack_lot) == 0:
             self.pack_lot_ids.create(
                 {"operation_id": self.id, "qty": qty, "lot_id": lot_id}
             )

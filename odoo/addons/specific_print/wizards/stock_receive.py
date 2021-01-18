@@ -17,8 +17,9 @@ class StockPackOperationLotAdd(models.TransientModel):
     )
 
     def _add(self):
-        super(StockPackOperationLotAdd, self)._add()
+        res = super(StockPackOperationLotAdd, self)._add()
         self.print_qty = self._default_print_qty()
+        return res
 
     @api.multi
     def print_label(self):

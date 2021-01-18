@@ -23,7 +23,7 @@ class StockConfig(models.TransientModel):
         ]
 
     @api.model
-    def get_default_production_lot_base_date(self, fields):
+    def get_default_production_lot_base_date(self, _fields):
         icp = self.env["ir.config_parameter"]
         return {
             "production_lot_base_date": icp.get_param(

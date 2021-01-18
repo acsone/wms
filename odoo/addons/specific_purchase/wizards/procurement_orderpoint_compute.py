@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import logging
 import threading
 from datetime import datetime
@@ -82,13 +83,15 @@ class ProcurementOrderpointCompute(models.TransientModel):
             # As this function is in a new thread, I need to open a new cursor,
             # because the old one may be closed
             new_cr = self.pool.cursor()
-            self = self.with_env(self.env(cr=new_cr, context=context))
-            scheduler_cron = self.sudo().env.ref("procurement.ir_cron_scheduler_action")
+            self_in_new_cr = self.with_env(self.env(cr=new_cr, context=context))
+            scheduler_cron = self_in_new_cr.sudo().env.ref(
+                "procurement.ir_cron_scheduler_action"
+            )
             # Avoid to run the scheduler multiple times in the same time
             # Alcyon doesn't use this cron. It's why I can use it.
             try:
                 with tools.mute_logger("odoo.sql_db"):
-                    self._cr.execute(
+                    self_in_new_cr._cr.execute(
                         "SELECT id FROM ir_cron WHERE id = %s " "FOR UPDATE NOWAIT",
                         (scheduler_cron.id,),
                     )
@@ -97,12 +100,12 @@ class ProcurementOrderpointCompute(models.TransientModel):
                     "Attempt to run procurement scheduler aborted,"
                     " as already running"
                 )
-                self._cr.rollback()
-                self._cr.close()
+                self_in_new_cr._cr.rollback()
+                self_in_new_cr._cr.close()
                 return {}
 
             try:
-                self.env["procurement.order"]._procure_orderpoint_confirm(
+                self_in_new_cr.env["procurement.order"]._procure_orderpoint_confirm(
                     use_new_cursor=True, company_id=self.env.user.company_id.id
                 )
             finally:

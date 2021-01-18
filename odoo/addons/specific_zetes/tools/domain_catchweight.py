@@ -210,7 +210,7 @@ class Catchweight(DomainInterface):
 
         try:
             # Retrieve the quantity
-            real_qty = params.Usf02 and float(params.Usf02) or 0
+            real_qty = float(params.Usf02) if params.Usf02 else 0
             virtual_qty = self.check_picked_quantity(params, pack_op, real_qty)
             # and the lot number
             lot_number = params.Usf01
@@ -240,8 +240,8 @@ class Catchweight(DomainInterface):
                         exception=error_message,
                     )
                     return
-                else:
-                    lot_id = lot.id
+
+                lot_id = lot.id
 
             # If we receive a value for Usf03, it means that we have to
             # check if the available quantity (in Odoo) is the same than
@@ -334,7 +334,7 @@ class Catchweight(DomainInterface):
 
         self.env.cr.execute(available_qty_query, tuple(query_values))
         query_result = self.env.cr.fetchone()
-        available_qty = query_result and query_result[0] or 0
+        available_qty = query_result[0] if query_result else 0
 
         if available_qty != actual_stock:
             error_message = (

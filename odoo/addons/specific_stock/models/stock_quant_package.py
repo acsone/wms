@@ -55,5 +55,4 @@ class StockQuantPackage(models.Model):
             )
         if quant_ids:
             return [("id", "in", quant_ids)]
-        else:
-            return [("id", "=", False)]
+        return [("id", "=", False)]

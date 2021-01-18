@@ -35,7 +35,7 @@ class ProductPriceInfo(object):
         for attr in self.__slots__:
             setattr(self, attr, kwargs.get(attr))
 
-    # pylint: disable=W8106
+    # pylint: disable=method-required-super
     def copy(self):
         new = ProductPriceInfo()
         for attr in self.__slots__:
@@ -55,8 +55,10 @@ class ProductPriceImporter(models.TransientModel):
 
     @api.multi
     def doit(self):
+        # pylint: disable=deprecated-method
         self.ensure_one()
         content = base64.decodestring(self.document)
+        # pylint: disable=unnecessary-comprehension
         product_price_infos = [p for p in self._iter_data(content)]
         self._do_update_prices(product_price_infos)
         action = {
@@ -73,7 +75,7 @@ class ProductPriceImporter(models.TransientModel):
         book = xlrd.open_workbook(file_contents=content, on_demand=True)
         try:
             iterator = self.env["base_import.import"]._read_xls_book(book)
-            headers = next(iterator)
+            headers = next(iterator)  # pylint: disable=stop-iteration-return
             for values in iterator:
                 yield ProductPriceInfo(**dict(zip(headers, values)))
         finally:

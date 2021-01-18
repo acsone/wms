@@ -58,6 +58,7 @@ class StockMove(models.Model):
             delivery_round._assign_pickings(
                 self.env["stock.picking"].browse(picking_ids)
             )
+        return None
 
     @api.model
     def _find_delivery_round_candidate(self, picking):

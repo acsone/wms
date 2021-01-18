@@ -12,7 +12,6 @@ class ProcurementOrder(models.Model):
         orderpoint_ids = self.env.context.get("orderpoint_ids")
         if orderpoint_ids is not None:
             return [("id", "in", tuple(orderpoint_ids))]
-        else:
-            return super(ProcurementOrder, self)._get_orderpoint_domain(
-                company_id=company_id
-            )
+        return super(ProcurementOrder, self)._get_orderpoint_domain(
+            company_id=company_id
+        )

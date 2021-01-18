@@ -1,5 +1,6 @@
 #!/usr/bin/python
-# pylint: disable=W8116
+# -*- coding: utf-8 -*-
+# pylint: disable=print-used
 import getopt
 import sys
 
@@ -27,7 +28,7 @@ def main(argv):
     actions = None
     try:
         # Format args
-        opts, args = getopt.getopt(argv, "hd:a:", ["domains=", "actions="])
+        opts, _args = getopt.getopt(argv, "hd:a:", ["domains=", "actions="])
     except getopt.GetoptError:
         print("display_values.py -d <domains> -a <actions>")
         sys.exit(2)

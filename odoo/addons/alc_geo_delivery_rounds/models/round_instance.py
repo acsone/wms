@@ -63,6 +63,5 @@ class RoundInstance(models.Model):
 
             return round_instance
 
-        else:
-            # Keep old way of doing it
-            return super(RoundInstance, self).find_bypartner(partner)
+        # Keep old way of doing it
+        return super(RoundInstance, self).find_bypartner(partner)

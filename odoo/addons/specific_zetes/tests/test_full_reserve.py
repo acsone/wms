@@ -166,7 +166,8 @@ class TestFullReserve(ZetesReserveTest):
         self.assertEqual(line_product_1.productCode, self.product_1.default_code)
         self.assertEqual(int(line_product_1.reqQty), 20)
         self.assertEqual(
-            line_product_1.moveLineId, "{}_{}".format(pack_op.id, self.lot_product_1.id)
+            line_product_1.moveLineId,
+            u"{}_{}".format(pack_op.id, self.lot_product_1.id),
         )
 
         ##########

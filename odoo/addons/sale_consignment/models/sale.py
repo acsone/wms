@@ -55,5 +55,4 @@ class SaleOrderLine(models.Model):
 
         if self.order_id.is_consignment:
             return 0.0
-        else:
-            return super(SaleOrderLine, self)._get_delivered_qty()
+        return super(SaleOrderLine, self)._get_delivered_qty()

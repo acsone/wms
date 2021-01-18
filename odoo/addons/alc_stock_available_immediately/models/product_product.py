@@ -40,8 +40,8 @@ class ProductProduct(models.Model):
 
         if prio is not None and date is not None:
             (
-                dom_quant_loc,
-                dom_move_in_loc,
+                _dom_quant_loc,
+                _dom_move_in_loc,
                 dom_move_out_loc,
             ) = self._get_domain_locations()
             domain = dom_move_out_loc + [

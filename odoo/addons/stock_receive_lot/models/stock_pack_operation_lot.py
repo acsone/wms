@@ -16,7 +16,7 @@ class StockPackOperationLot(models.Model):
         """ The default lot name is only for an aliment """
         picking_zone = pack_op.product_id.picking_zone_id
         if picking_zone != self.env.ref("__setup__.picking_zone_aliments"):
-            return
+            return None
 
         date = fields.Datetime.from_string(life_date)
         date_with_timezone = fields.Datetime.context_timestamp(self, date)

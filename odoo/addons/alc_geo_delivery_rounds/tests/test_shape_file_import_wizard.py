@@ -22,6 +22,8 @@ class TestShapeFileImportWizard(TransactionCase):
             "alc_geo_delivery_rounds", "tests", "ressources", shape_filename
         )
         with open(shape_file_path, "rb") as f:
+            # remove pylint deprecated once on py3
+            # pylint: disable=deprecated-method
             content = base64.encodestring(f.read())
 
         delivery_plan_to_use = (

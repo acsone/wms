@@ -89,7 +89,7 @@ class TestAccountInvoicePring(SavepointCase):
                 # Instance: invoice line
                 cls.invoice_line = cls.AccountInvoiceLine.create(
                     {
-                        "name": "test {} {}".format(i, p),
+                        "name": u"test {} {}".format(i, p),
                         "account_id": cls.account_payable.id,
                         "price_unit": 100.00 * p * i,
                         "quantity": 1,
@@ -106,23 +106,24 @@ class TestAccountInvoicePring(SavepointCase):
                         "invoice_line_ids": [(4, cls.invoice_line.id)],
                     }
                 )
-                setattr(cls, "partner_{}_invoice_{}".format(p, i), invoice)
+                setattr(cls, u"partner_{}_invoice_{}".format(p, i), invoice)
                 cls.invoices |= invoice
         cls.invoices.action_invoice_open()
 
-    def setUp(cls):
-        super(TestAccountInvoicePring, cls).setUp()
+    def setUp(self):
+        super(TestAccountInvoicePring, self).setUp()
         # mute logger
         loggers = ["odoo.addons.queue_job.models.base"]
         for logger in loggers:
-            logging.getLogger(logger).addFilter(cls)
+            logging.getLogger(logger).addFilter(self)
 
-        @cls.addCleanup
+        # pylint: disable=unused-variable
+        @self.addCleanup
         def un_mute_logger():
             for logger_ in loggers:
-                logging.getLogger(logger_).removeFilter(cls)
+                logging.getLogger(logger_).removeFilter(self)
 
-    def filter(cls, record):
+    def filter(self, record):
         # required to mute logger
         return 0
 

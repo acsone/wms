@@ -29,6 +29,7 @@ ROUND_CODE = 99
 PARTNER_NAME = "Mr. Docteur Test"
 
 
+# pylint: disable=missing-return
 class ZetesTest(SavepointCase):
     post_install = True
     at_install = False

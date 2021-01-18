@@ -37,15 +37,13 @@ class SpecialPromotionExportMapper(Component):
     def compute_startdate(self, record):
         if record.date_start:
             return {"StartDate": record.date_start.replace("-", "")}
-        else:
-            return {"StartDate": ""}
+        return {"StartDate": ""}
 
     @mapping
     def compute_enddate(self, record):
         if record.date_end:
             return {"EndDate": record.date_end.replace("-", "")}
-        else:
-            return {"EndDate": ""}
+        return {"EndDate": ""}
 
     @mapping
     def compute_alcyongroup(self, record):

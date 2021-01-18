@@ -87,8 +87,7 @@ class CustomerAddressExportMapper(Component):
     def compute_country_id(self, record):
         if record.country_id:
             return {"CountryId": record.country_id.esb_ref or ""}
-        else:
-            return {"CountryId": ""}
+        return {"CountryId": ""}
 
     @mapping
     def compute_isdefaults(self, record):

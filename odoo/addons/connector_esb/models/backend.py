@@ -36,6 +36,7 @@ class ESBBackend(models.Model):
     def _compute_from_env(self):
         for record in self:
             record.sftp_host = os.getenv("ODOO_ESB_SFTP_HOST", "")
+            # pylint: disable=invalid-envvar-default
             record.sftp_port = int(os.getenv("ODOO_ESB_SFTP_PORT", 22))
             record.sftp_user = os.getenv("ODOO_ESB_SFTP_USER", "")
             record.sftp_path = os.getenv("ODOO_ESB_SFTP_PATH", "")

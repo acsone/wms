@@ -16,5 +16,5 @@ class ProductProduct(models.Model):
         copied from SO line description. """
         if self.env.context.get("type") in ("out_invoice", "out_refund"):
             self.partner_ref = self.name
-        else:
-            super(ProductProduct, self)._compute_partner_ref()
+            return None
+        return super(ProductProduct, self)._compute_partner_ref()

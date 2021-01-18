@@ -125,7 +125,7 @@ msgstr "Ratio Produit Principal"
 #: code:addons/product_additional/models/stock_move.py:44
 #, python-format
 msgid "Remaining additional move '%s' canceled"
-msgstr ""
+msgstr "Mouvement additionnel restant '%s' annulé"
 
 #. module: product_additional
 #: model:ir.model,name:product_additional.model_sale_order
