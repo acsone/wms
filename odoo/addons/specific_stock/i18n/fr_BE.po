@@ -362,7 +362,7 @@ msgid "Missing quantity of products to pick"
 msgstr "Il n'y a pas assez de quantité à prendre"
 
 #. module: specific_stock
-#: code:addons/specific_stock/wizards/stock_move_update_handler.py:58
+#: code:addons/specific_stock/wizards/stock_move_update_handler.py:57
 #, python-format
 msgid ""
 "Move for product {} with quantity {}                     of current picking "
@@ -371,7 +371,7 @@ msgstr ""
 "Mouvement du produit {} avec la quantité {} du mouvement en cours vers {}"
 
 #. module: specific_stock
-#: code:addons/specific_stock/wizards/stock_move_update_handler.py:75
+#: code:addons/specific_stock/wizards/stock_move_update_handler.py:74
 #, python-format
 msgid "Move for product {} with quantity {} canceled"
 msgstr "Mouvement annulé pour le produit {} avec la quantité {}"
