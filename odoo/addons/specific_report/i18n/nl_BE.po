@@ -1209,7 +1209,7 @@ msgstr ""
 "assigned."
 
 #. module: specific_report
-#: code:addons/specific_report/models/stock_picking.py:192
+#: code:addons/specific_report/models/stock_picking.py:177
 #, python-format
 msgid "The picking zone %s is not correct"
 msgstr "The picking zone %s is not correct"
@@ -1221,7 +1221,7 @@ msgid "There are more than one currencies on orders"
 msgstr "There are more than one currencies on orders"
 
 #. module: specific_report
-#: code:addons/specific_report/models/stock_picking.py:173
+#: code:addons/specific_report/models/stock_picking.py:158
 #, python-format
 msgid "There is no category on this product"
 msgstr "There is no category on this product"
