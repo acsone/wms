@@ -104,6 +104,9 @@ def format_files_to_dataframe(env, path_to_files, verbose):
         # new_export = new_export.append(df, ignore_index=True, sort=True)
 
     # Replace Nan values with proper value for consistancy in the SQL table
+    # Fill withe spaces with NaN to convert it to zeros after
+    all_data["User1"] = all_data["User1"].replace(r"^\s*$", np.nan, regex=True)
+
     all_data = all_data.fillna(
         value={
             "Description": "",
@@ -126,29 +129,12 @@ def format_files_to_dataframe(env, path_to_files, verbose):
     all_data["REF "] = all_data["REF "].astype(str)
     # REF is 7 char min. zeros were removed at the beginning because of np.int6' -- which is necessary
     # to prevent pandas to interpret those ref as float and then put a .0 at the end
-    # all_data[all_data['REF '].str.len() == 6] = all_data['REF '].apply(lambda x: "{}{}".format('0', x))
-    # all_data[all_data['REF '].str.len() == 5] = all_data['REF '].apply(lambda x: "{}{}".format('00', x))
+
     all_data["User1"] = all_data["User1"].astype(np.int64)
     all_data["User2"] = all_data["User2"].astype(np.int64)
     all_data["User2"] = all_data["User2"].apply(lambda x: "{:0>7}".format(x))
     all_data["User3"] = all_data["User3"].astype(np.int64)
 
-    # new_export["REF "] = new_export["REF "].astype(np.int64)
-    # new_export["REF "] = new_export["REF "].astype(str)
-    # new_export["User1"] = new_export["User1"].astype(np.int64)
-    # new_export["User2"] = new_export["User2"].astype(np.int64)
-    # new_export["User3"] = new_export["User3"].astype(np.int64)
-    # cols = ['Sequence', 'REF ', 'Secondary', 'Description', 'Length', 'Width',
-    #         'Height', 'Weight', 'Volume', 'Dim Wgt', 'Dim Unit',
-    #         'Wgt Unit', 'Vol Unit', 'Factor', 'Site ID', 'Date-Time', 'User1', 'User2',
-    #         'User3', 'User4', 'User5', 'User6', 'User7', 'User8', 'SnapShotFile', 'Updated', 'file name']
-    # all_data = all_data[cols]
-    # all_data.to_excel("/home/lma-local/Sources/odoo-alcyon/scripts/output.xlsx")
-
-    # all_data.drop(
-    #         ["file name"],
-    #         axis=1,
-    #         inplace=True)
     if verbose:
         click.echo("Dataframe Columns : {}. . .".format(all_data.columns))
         click.echo("Dataframe Head : {}. . .".format(all_data.head()))
