@@ -123,7 +123,7 @@ msgid "Transfer"
 msgstr ""
 
 #. module: stock_expired
-#: code:addons/stock_expired/models/stock_picking.py:35
+#: code:addons/stock_expired/models/stock_picking.py:33
 #, python-format
 msgid "You cannot transfer lots with an expired removal date:\n"
 "	- %s"
