@@ -37,19 +37,19 @@ msgid "Order %s will be confirmed in background."
 msgstr ""
 
 #. module: sale_confirm_background
-#: code:addons/sale_confirm_background/models/sale_order.py:78
+#: code:addons/sale_confirm_background/models/sale_order.py:79
 #, python-format
 msgid "Remove delivery block for order %s is now done."
 msgstr ""
 
 #. module: sale_confirm_background
-#: code:addons/sale_confirm_background/models/sale_order.py:88
+#: code:addons/sale_confirm_background/models/sale_order.py:89
 #, python-format
 msgid "Remove delivery block for order %s will be done in background."
 msgstr ""
 
 #. module: sale_confirm_background
-#: code:addons/sale_confirm_background/models/sale_order.py:92
+#: code:addons/sale_confirm_background/models/sale_order.py:93
 #, python-format
 msgid "Remove delivery block for sales order %s"
 msgstr ""
