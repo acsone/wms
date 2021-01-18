@@ -168,7 +168,7 @@ msgid "Lot"
 msgstr "Lot"
 
 #. module: specific_print
-#: code:addons/specific_print/wizards/stock_receive.py:28
+#: code:addons/specific_print/wizards/stock_receive.py:29
 #, python-format
 msgid "Lot is missing"
 msgstr "Le lot est manquant"
