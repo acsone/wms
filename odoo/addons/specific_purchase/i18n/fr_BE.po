@@ -149,7 +149,6 @@ msgstr "Délai de livraison par défaut (en jours)"
 msgid "Delivery lead time"
 msgstr "Délai de livraison"
 
-
 #. module: specific_purchase
 #: model:ir.model.fields,field_description:specific_purchase.field_purchase_order_line_discount_global
 msgid "Discount global"
@@ -212,7 +211,6 @@ msgstr "Dernière mise à jour par"
 msgid "Last Updated on"
 msgstr "Dernière mise à jour le"
 
-
 #. module: specific_purchase
 #: model:ir.model.fields,field_description:specific_purchase.field_procurement_orderpoint_compute_is_manage_day_1
 #: model:ir.model.fields,field_description:specific_purchase.field_res_partner_is_manage_day_1
@@ -266,13 +264,13 @@ msgid "Partner"
 msgstr "Partenaire"
 
 #. module: specific_purchase
-#: code:addons/specific_purchase/wizards/procurement_orderpoint_compute.py:57
+#: code:addons/specific_purchase/wizards/procurement_orderpoint_compute.py:58
 #, python-format
 msgid "Please select at least one day"
 msgstr "Veuillez sélectionner au moins un jour"
 
 #. module: specific_purchase
-#: code:addons/specific_purchase/wizards/procurement_orderpoint_compute.py:63
+#: code:addons/specific_purchase/wizards/procurement_orderpoint_compute.py:64
 #, python-format
 msgid "Please select at least one supplier"
 msgstr "Veuillez sélectionner au moins un fournisseur"
@@ -388,7 +386,7 @@ msgid "Supplier discount %"
 msgstr "Ristourne globale %"
 
 #. module: specific_purchase
-#: code:addons/specific_purchase/models/product_supplierinfo.py:45
+#: code:addons/specific_purchase/models/product_supplierinfo.py:46
 #, python-format
 msgid "Supplier info"
 msgstr "Informations sur le fournisseur"
@@ -495,7 +493,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:specific_purchase.field_res_users_is_manage_day_3
 msgid "Wednesday"
 msgstr "Mercredi"
-
 
 #. module: specific_purchase
 #: model:ir.ui.view,arch_db:specific_purchase.view_purchase_order_filter

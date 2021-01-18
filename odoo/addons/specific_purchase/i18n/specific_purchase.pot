@@ -246,13 +246,13 @@ msgid "Partner"
 msgstr ""
 
 #. module: specific_purchase
-#: code:addons/specific_purchase/wizards/procurement_orderpoint_compute.py:57
+#: code:addons/specific_purchase/wizards/procurement_orderpoint_compute.py:58
 #, python-format
 msgid "Please select at least one day"
 msgstr ""
 
 #. module: specific_purchase
-#: code:addons/specific_purchase/wizards/procurement_orderpoint_compute.py:63
+#: code:addons/specific_purchase/wizards/procurement_orderpoint_compute.py:64
 #, python-format
 msgid "Please select at least one supplier"
 msgstr ""
@@ -368,7 +368,7 @@ msgid "Supplier discount %"
 msgstr ""
 
 #. module: specific_purchase
-#: code:addons/specific_purchase/models/product_supplierinfo.py:45
+#: code:addons/specific_purchase/models/product_supplierinfo.py:46
 #, python-format
 msgid "Supplier info"
 msgstr ""
