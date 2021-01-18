@@ -117,7 +117,7 @@ msgid "Ratio Main Product"
 msgstr ""
 
 #. module: product_additional
-#: code:addons/product_additional/models/stock_move.py:44
+#: code:addons/product_additional/models/stock_move.py:46
 #, python-format
 msgid "Remaining additional move '%s' canceled"
 msgstr ""
