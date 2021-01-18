@@ -322,7 +322,7 @@ msgid "Private key environment variable"
 msgstr ""
 
 #. module: alc_edi_connector
-#: code:addons/alc_edi_connector/models/edi_backend.py:84
+#: code:addons/alc_edi_connector/models/edi_backend.py:83
 #, python-format
 msgid "Pull EDI %s"
 msgstr ""
@@ -348,7 +348,7 @@ msgid "Send UBL Order"
 msgstr ""
 
 #. module: alc_edi_connector
-#: code:addons/alc_edi_connector/models/purchase_order.py:43
+#: code:addons/alc_edi_connector/models/purchase_order.py:42
 #, python-format
 msgid "Sending UBL Order document is not allowed in the current context."
 msgstr ""
