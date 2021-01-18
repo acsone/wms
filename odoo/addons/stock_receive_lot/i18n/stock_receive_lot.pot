@@ -208,7 +208,7 @@ msgid "Visible in reception wizard"
 msgstr ""
 
 #. module: stock_receive_lot
-#: code:addons/stock_receive_lot/wizards/stock_pack_operation_lot_add.py:106
+#: code:addons/stock_receive_lot/wizards/stock_pack_operation_lot_add.py:105
 #, python-format
 msgid "Warning"
 msgstr ""
@@ -220,7 +220,7 @@ msgid "You receive more than the expected remaining quantity. You must confirm t
 msgstr ""
 
 #. module: stock_receive_lot
-#: code:addons/stock_receive_lot/wizards/stock_pack_operation_lot_add.py:107
+#: code:addons/stock_receive_lot/wizards/stock_pack_operation_lot_add.py:106
 #, python-format
 msgid "You received more than the expected remaining quantity. Please confirm by ticking the 'Confirm received more than expected' checkbox."
 msgstr ""

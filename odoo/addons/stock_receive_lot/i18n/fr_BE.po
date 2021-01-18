@@ -211,7 +211,7 @@ msgid "Visible in reception wizard"
 msgstr ""
 
 #. module: stock_receive_lot
-#: code:addons/stock_receive_lot/wizards/stock_pack_operation_lot_add.py:106
+#: code:addons/stock_receive_lot/wizards/stock_pack_operation_lot_add.py:105
 #, python-format
 msgid "Warning"
 msgstr ""
@@ -222,15 +222,20 @@ msgstr ""
 msgid ""
 "You receive more than the expected remaining quantity. You must confirm that "
 "you received more than the expected qty"
-msgstr "Vous avez encodé une quantité suprérieure à la quantité commandée. Vous devez confirmer que l'encodage est correct."
+msgstr ""
+"Vous avez encodé une quantité suprérieure à la quantité commandée. Vous "
+"devez confirmer que l'encodage est correct."
 
 #. module: stock_receive_lot
-#: code:addons/stock_receive_lot/wizards/stock_pack_operation_lot_add.py:107
+#: code:addons/stock_receive_lot/wizards/stock_pack_operation_lot_add.py:106
 #, python-format
 msgid ""
 "You received more than the expected remaining quantity. Please confirm by "
 "ticking the 'Confirm received more than expected' checkbox."
-msgstr "Vous avez encodé une quantité suprérieure à la quantité commandée. Veuillez confirmer que l'encodage est correct via la case à cocher 'Confirmation quantité reçue exédentaire'."
+msgstr ""
+"Vous avez encodé une quantité suprérieure à la quantité commandée. Veuillez "
+"confirmer que l'encodage est correct via la case à cocher 'Confirmation "
+"quantité reçue exédentaire'."
 
 #. module: stock_receive_lot
 #: model:ir.ui.view,arch_db:stock_receive_lot.view_pack_operation_lot_add_form
