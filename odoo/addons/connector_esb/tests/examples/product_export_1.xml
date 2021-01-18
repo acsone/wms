@@ -32,7 +32,7 @@
       <!-- weight -->
       <Gespnt>10.000</Gespnt>
       <!-- volume -->
-      <Cp2z08>10.00</Cp2z08>
+      <Cp2z08>0.60</Cp2z08>
       <!-- Free product you get -->
       <Cp2z22 />
       <!-- Qantity needed to get free product -->
@@ -118,7 +118,7 @@
       <!-- weight -->
       <Gespnt>5.000</Gespnt>
       <!-- volume -->
-      <Cp2z08>5.00</Cp2z08>
+      <Cp2z08>6.10</Cp2z08>
       <!-- Free product you get -->
       <Cp2z22 />
       <!-- Qantity needed to get free product -->
@@ -204,7 +204,7 @@
       <!-- weight -->
       <Gespnt>2.500</Gespnt>
       <!-- volume -->
-      <Cp2z08>1000.00</Cp2z08>
+      <Cp2z08>22.70</Cp2z08>
       <!-- Free product you get -->
       <Cp2z22>SKU_FREE</Cp2z22>
       <!-- Qantity needed to get free product -->

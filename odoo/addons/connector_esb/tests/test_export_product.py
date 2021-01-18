@@ -76,7 +76,6 @@ class ExportProductTestCase(ESBXMLTestCase):
                 "height": 7.0,
                 "length": 8.5,
                 "width": 9.0,
-                "volume": 0.01,
                 "tracking": "lot",
                 "uom_id": unit.id,
                 "uom_po_id": unit.id,
@@ -105,7 +104,6 @@ class ExportProductTestCase(ESBXMLTestCase):
                 "height": 17.0,
                 "length": 18.5,
                 "width": 19.0,
-                "volume": 0.005,
                 "tracking": "serial",
                 "packaging_ids": [
                     (
@@ -142,7 +140,6 @@ class ExportProductTestCase(ESBXMLTestCase):
                 "barcode": "XXX0003",
                 "cnk_code": "CNK_003",
                 "weight": 2.5,
-                "volume": 1.0,
                 "height": 27.0,
                 "length": 28.5,
                 "width": 29.0,
@@ -203,26 +200,26 @@ class ExportProductTestCase(ESBXMLTestCase):
 
     def test_mapper(self):
         expected = {
-            "Gesdem": "Export me pls",
-            "Gesart": "exportable001",
-            "Cplz05": "XXX0001",
+            "Gesdem": u"Export me pls",
+            "Gesart": u"exportable001",
+            "Cplz05": u"XXX0001",
             "Gespnt": "10.000",
-            "Refdem": "Export me pls (TLH)",
-            "Gesarc": "supplier001",
+            "Refdem": u"Export me pls (TLH)",
+            "Gesarc": u"supplier001",
             "Gescgr": "6",
-            "Gescsg": "15",
-            "Gesfou": "79001",
-            "Cplz25": "manu01",
-            "Gesunv": "0",
+            "Gescsg": u"15",
+            "Gesfou": u"79001",
+            "Cplz25": u"manu01",
+            "Gesunv": u"0",
             "Gescrt": "2017/07/13",
             "Cplz19": 1,
             "Gescde": 1,
-            "Cp2z08": "10.00",
+            "Cp2z08": "0.60",
             "Gescsa": 1,
-            "Gesctv": "006",
-            "Cplz03": "CNK_001",
+            "Gesctv": u"006",
+            "Cplz03": u"CNK_001",
             "Gescge": 0,
-            "Cplz07": "BBB",
+            "Cplz07": u"BBB",
             "Cp2z01": "7.00",
             "Cp2z03": "8.50",
             "Cp2z05": "9.00",
@@ -233,15 +230,15 @@ class ExportProductTestCase(ESBXMLTestCase):
             "IMP": False,
             # fixed values
             "Cp2z22": "",
-            "Warceg": "Aufmerksam",
-            "Warcfr": "Attention",
-            "Warcnl": "Aandacht",
+            "Warceg": u"Aufmerksam",
+            "Warcfr": u"Attention",
+            "Warcnl": u"Aandacht",
             "Cp2z02": 0,
             "Cp2z23": 0,
             "Cp2z24": 0,
-            "Cp2z17": "6",
+            "Cp2z17": u"6",
             "Cp2z19": 0,
-            "Cplz14": "medicament",
+            "Cplz14": u"medicament",
             "Gescov": 0,
             "poids_net-unit": "KILOGRAM",
             "volume-unit": "CUBIC_CENTIMETER",
@@ -261,6 +258,8 @@ class ExportProductTestCase(ESBXMLTestCase):
     def test_record_exporter_local(self):
         self.timestamp.writer = "local"
         records = self.all_records - self.unexportable_records
+        for rec in records:
+            rec._compute_volume()
         with self.backend.work_on(self.model._name, timestamp=self.timestamp) as work:
             exporter = work.component(usage="record.exporter")
             respath = exporter.run(records)
