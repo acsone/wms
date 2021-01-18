@@ -79,7 +79,7 @@ msgid "Canceled / Full"
 msgstr "Annulé / Plein"
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/wizard/manage_uop.py:193
+#: code:addons/specific_zetes/wizard/manage_uop.py:194
 #, python-format
 msgid "Cannot create the package. Please give the passport to your manager"
 msgstr ""
@@ -87,7 +87,7 @@ msgstr ""
 "responsable"
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_interface.py:251
+#: code:addons/specific_zetes/tools/domain_interface.py:250
 #, python-format
 msgid "Cannot format the value %s with type %s"
 msgstr "Impossible de formater la valeur %s du type %s"
@@ -107,7 +107,7 @@ msgid "Cannot found a printer"
 msgstr "Aucune imprimante trouvée"
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/wizard/manage_uop.py:222
+#: code:addons/specific_zetes/wizard/manage_uop.py:223
 #, python-format
 msgid "Cannot print labels. Please give the passport to your manager"
 msgstr ""
@@ -115,7 +115,7 @@ msgstr ""
 "responsable"
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/wizard/manage_uop.py:206
+#: code:addons/specific_zetes/wizard/manage_uop.py:207
 #, python-format
 msgid "Cannot validate the UOP. Please give the passport to your manager"
 msgstr ""
@@ -364,7 +364,7 @@ msgid "Location"
 msgstr "Lieu"
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_location.py:170
+#: code:addons/specific_zetes/tools/domain_location.py:168
 #, python-format
 msgid "Location %s%s%s%s%s not found"
 msgstr "Emplacement %s%s%s%s%s non trouvé"
@@ -393,13 +393,13 @@ msgid "Lot"
 msgstr "Lot"
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_location.py:231
+#: code:addons/specific_zetes/tools/domain_location.py:229
 #, python-format
 msgid "Lot %s has expired. Please contact the manager"
 msgstr "Le lot %s a expiré. Veuille contacter votre manager"
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_location.py:243
+#: code:addons/specific_zetes/tools/domain_location.py:241
 #, python-format
 msgid "Lot %s not found. Please contact the manager"
 msgstr "Lot %s non trouvé. Veuillez contacter votre manager"
@@ -596,25 +596,25 @@ msgid "Picking type"
 msgstr "Type de picking"
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/wizard/manage_uop.py:74
+#: code:addons/specific_zetes/wizard/manage_uop.py:75
 #, python-format
 msgid "Please insert the UOP or the user"
 msgstr "Veuillez insérer un numéro d'UOP ou un utilisateur"
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/wizard/manage_uop.py:91
+#: code:addons/specific_zetes/wizard/manage_uop.py:92
 #, python-format
 msgid "Please select an UOP"
 msgstr "Veuillez sélectionner un UOP"
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/wizard/manage_uop.py:168
+#: code:addons/specific_zetes/wizard/manage_uop.py:169
 #, python-format
 msgid "Please select the printer"
 msgstr "Veuillez sélectionner l'imprimante"
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/wizard/manage_uop.py:152
+#: code:addons/specific_zetes/wizard/manage_uop.py:153
 #, python-format
 msgid "Please set a lot"
 msgstr "Veuillez définir un lot"
@@ -636,7 +636,7 @@ msgid "Printer"
 msgstr "Imprimante"
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/wizard/manage_uop.py:178
+#: code:addons/specific_zetes/wizard/manage_uop.py:179
 #, python-format
 msgid "Printer not found"
 msgstr "Imprimante non trouvée"
@@ -733,7 +733,7 @@ msgid "Skipped"
 msgstr "Ignoré"
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_interface.py:280
+#: code:addons/specific_zetes/tools/domain_interface.py:278
 #, python-format
 msgid "Some attributes are not valid: %s"
 msgstr "Certains attributs sont invalides: %s"
@@ -780,7 +780,7 @@ msgid "The identifier of the deleted pack operation"
 msgstr "The identifier of the deleted pack operation"
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_interface.py:287
+#: code:addons/specific_zetes/tools/domain_interface.py:286
 #, python-format
 msgid "The number of attributes doen't correspond to the example size"
 msgstr "Le nombre d'attributs ne correspond pas à l'exemple"
@@ -808,7 +808,7 @@ msgid "The user should be in the group Inventory"
 msgstr "L'utilisateur doit être dans le groupe d'inventaire"
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_interface.py:299
+#: code:addons/specific_zetes/tools/domain_interface.py:296
 #, python-format
 msgid "There are some missing mandatory values: %s"
 msgstr "Certaines valeurs obligatoires manquantes: %s"
@@ -827,7 +827,7 @@ msgid "There is no picking checksum available"
 msgstr ""
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_location.py:190
+#: code:addons/specific_zetes/tools/domain_location.py:188
 #, python-format
 msgid "This location is not a reserve"
 msgstr "This location is not a reserve"
@@ -862,7 +862,7 @@ msgid "UOP"
 msgstr "UOP"
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/wizard/manage_uop.py:64
+#: code:addons/specific_zetes/wizard/manage_uop.py:65
 #, python-format
 msgid "UOP not found or this UOP is not open"
 msgstr "UOP non trouvé ou l'UOP n'est plus ouvert"
@@ -939,7 +939,7 @@ msgid "Write date"
 msgstr "Write date"
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/wizard/manage_uop.py:156
+#: code:addons/specific_zetes/wizard/manage_uop.py:157
 #, python-format
 msgid "You cannot pick more than %s unit of the product %s"
 msgstr "Vous ne pouvez pas picker plus de %s unités du produit %s"
@@ -965,7 +965,7 @@ msgstr ""
 "supérieure à la quantité disponible (%s)"
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/wizard/manage_uop.py:77
+#: code:addons/specific_zetes/wizard/manage_uop.py:78
 #, python-format
 msgid "You do not have an UOP"
 msgstr "Vous n'avez pas d'UOP"
