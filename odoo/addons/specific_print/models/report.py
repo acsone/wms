@@ -27,12 +27,13 @@ class Report(models.Model):
         template = report.report_name
         html = self.render(template, docargs)
         text = ""
+        # pylint: disable=except-pass
         try:
             root = lxml.html.fromstring(html)
             match_klass = (
-                "//div[contains(concat(' ', normalize-space(@class), ' '), " "' {} ')]"
+                "//div[contains(concat(' ', normalize-space(@class), ' '), ' {} ')]"
             )
-            for x in xrange(qty):
+            for _x in xrange(qty):
                 for node in root.xpath(match_klass.format("raw")):
                     text += node.text
         except lxml.etree.XMLSyntaxError:

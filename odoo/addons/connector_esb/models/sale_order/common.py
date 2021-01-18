@@ -102,7 +102,7 @@ class SaleOrder(models.Model):
             if line["product_id"] == "":
                 # Unknown product just log the error in the chatter
                 order.message_post(
-                    body=_("Product with {} : {} was not found").format(
+                    body=_(u"Product with {} : {} was not found").format(
                         line["code_type"], line["code_searched"]
                     )
                 )
@@ -160,20 +160,18 @@ class SaleOrder(models.Model):
         if " " in ws_date:
             # we have a complete datetime, use it
             return ws_date
-        else:
-            # We have only the date, if the order is for today,
-            # we use the current time (time of import). If the order
-            # is from a previous day, we hard-code the time at the middle
-            # of the day arbitrarily.
-            # With this solution, it means that an order created on Magento
-            # at days N-1 23:59 and imported at day N will have an order_date
-            # of N-1 12:00. This is maybe the best we can do if we are not
-            # provided a time anyway.
-            now_date, _spc, now_time = fields.Datetime.now().partition(" ")
-            if ws_date == now_date:
-                return ws_date + " " + now_time
-            else:
-                return ws_date + " 12:00:00"
+        # We have only the date, if the order is for today,
+        # we use the current time (time of import). If the order
+        # is from a previous day, we hard-code the time at the middle
+        # of the day arbitrarily.
+        # With this solution, it means that an order created on Magento
+        # at days N-1 23:59 and imported at day N will have an order_date
+        # of N-1 12:00. This is maybe the best we can do if we are not
+        # provided a time anyway.
+        now_date, _spc, now_time = fields.Datetime.now().partition(" ")
+        if ws_date == now_date:
+            return ws_date + " " + now_time
+        return ws_date + " 12:00:00"
 
     def _ws_create_order_data(self, data):
         order_data = {}
@@ -241,7 +239,7 @@ class SaleOrder(models.Model):
                 if not product or product.categ_id != human_categ:
                     continue
 
-            product_code = is_sku and line["sku"] or line["cnk"]
+            product_code = line["sku"] if is_sku else line["cnk"]
             if len(product) > 1:
                 message = (
                     "Webservice new saleorder, several"
@@ -251,7 +249,7 @@ class SaleOrder(models.Model):
                 raise exceptions.UserError(_(message) % product_code)
 
             sol = {}
-            if len(product):
+            if len(product) == 1:
                 sol["product_id"] = product.id
                 sol["name"] = product.name
                 sol["product_uom"] = product.uom_id.id

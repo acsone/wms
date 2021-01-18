@@ -164,7 +164,7 @@ class TestStockDeliveryNoteGetMoves(SavepointCase):
         self.assertEqual(len(res), 1)
         order, all_moves = res[0]
         self.assertEqual(order, self.so)
-        moves, bo_moves = all_moves
+        moves, _bo_moves = all_moves
         self.assertEqual(len(moves), 1)
         self.assertEqual(moves[0].product_qty, 10.0)
 
@@ -209,10 +209,10 @@ class TestStockDeliveryNoteGetMoves(SavepointCase):
         res = picking2.get_moves_by_order()
 
         self.assertEqual(len(res), 2)
-        order1, all_moves1 = res[0]
+        order1, _all_moves1 = res[0]
         self.assertEqual(order1, so2)
 
-        order2, all_moves2 = res[1]
+        order2, _all_moves2 = res[1]
         self.assertEqual(order2, self.so)
 
     def test_group_shipping(self):

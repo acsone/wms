@@ -39,7 +39,6 @@ class Picking(models.Model):
         if self.helpdesk_tickets_count == 0:
             r = self.env["create.helpdesk.ticket"].create()
             return self.env["helpdesk.ticket"].new_one(r)
-        else:
-            return self.env["helpdesk.ticket"].show_existing(
-                [("stock_picking_id", "=", self.id)]
-            )
+        return self.env["helpdesk.ticket"].show_existing(
+            [("stock_picking_id", "=", self.id)]
+        )

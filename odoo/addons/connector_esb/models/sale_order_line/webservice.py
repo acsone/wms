@@ -38,7 +38,7 @@ class ProductCustomerStatWebserviceMessage(Component):
             ]
         )
         # Compute the statistics for each month
-        for m in range(12):
+        for _m in range(12):
             periods.setdefault(fields.Date.to_string(date_start)[:-3], 0)
             date_start += relativedelta(months=1)
         for line in sol:

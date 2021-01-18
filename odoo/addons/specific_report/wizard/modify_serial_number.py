@@ -11,8 +11,8 @@ class ModifySerialNumber(models.TransientModel):
     serial_number = fields.Char(required=True)
 
     @api.model
-    def default_get(self, fields):
-        result = super(ModifySerialNumber, self).default_get(fields)
+    def default_get(self, _fields):
+        result = super(ModifySerialNumber, self).default_get(_fields)
 
         if self._context.get("active_id"):
             move = self.env["stock.move"].browse(self._context["active_id"])

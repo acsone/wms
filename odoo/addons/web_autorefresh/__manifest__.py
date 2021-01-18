@@ -30,7 +30,7 @@
     "category": "web",
     "author": "aekroft@gmail.com",
     "contributor": "Jacques-Etienne Baudoux <je@bcim.be>",
-    "website": "www.soltein.org",
+    "website": "https://www.soltein.org",
     "depends": [
         "web",
         # 'web_calendar', 'web_graph', 'web_kanban',

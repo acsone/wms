@@ -28,7 +28,7 @@ class StockMove(models.Model):
     def action_open_update_wizard(self):
         self.ensure_one()
         if self.picking_type_id.code != "incoming" or self.state in ["done"]:
-            return
+            return None
         action = self.env.ref("specific_stock.stock_move_wizard_handler_action")
         vals = action.read()[0]
         vals["context"] = {

@@ -113,11 +113,10 @@ class SaleOrderLine(models.Model):
         """
         if not pricelist:
             return price
-        else:
-            product_temporary = product.with_context(
-                override_based_price={product.id: price}, pricelist=pricelist.id
-            ).browse(product.id)
-            return product_temporary.price
+        product_temporary = product.with_context(
+            override_based_price={product.id: price}, pricelist=pricelist.id
+        ).browse(product.id)
+        return product_temporary.price
 
     @api.model
     def _prepare_add_missing_fields(self, values):

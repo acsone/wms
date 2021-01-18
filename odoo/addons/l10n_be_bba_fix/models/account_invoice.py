@@ -68,7 +68,7 @@ class AccountInvoice(models.Model):
         # sql_constraint
         return
 
-    # pylint: disable=W0622
+    # pylint: disable=redefined-builtin
     @api.multi
     def generate_bbacomm(self, type, reference_type, partner_id, reference):
         """ Support 1-6 digit partner reference number (instead of 3-7)

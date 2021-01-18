@@ -14,10 +14,10 @@ class StockReturnPicking(models.TransientModel):
     has_not_salable_product = fields.Boolean(default=False)
 
     @api.model
-    def default_get(self, fields):
+    def default_get(self, _fields):
 
         products_archived = []
-        res = super(StockReturnPicking, self).default_get(fields)
+        res = super(StockReturnPicking, self).default_get(_fields)
         moves = []
         for move in res.get("product_return_moves", []):
             product = self.env["product.product"].browse(move[2].get("product_id"))

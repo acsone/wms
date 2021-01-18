@@ -67,7 +67,7 @@ class ProductProduct(models.Model):
             # Check if we need to order this product by multiple
             # E.G: Qty to order: 14; multiple 5 => remainder = 4
             remainder = (
-                orderpoint.qty_multiple > 0 and qty % orderpoint.qty_multiple or 0.0
+                qty % orderpoint.qty_multiple if orderpoint.qty_multiple > 0 else 0.0
             )
 
             # Check if the difference between the remainder qty is greater

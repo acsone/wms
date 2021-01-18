@@ -12,6 +12,24 @@ from odoo.tests.common import SavepointCase
 from odoo.addons.connector.exception import ConnectorException
 
 
+def put_ret_status(url, data, headers, auth):
+    resp = requests.Response()
+    resp.status_code = 200
+    resp.json = lambda: {"erp_id": "42", "increment_id": "1000000348"}
+    return resp
+
+
+def post_ret_status(url, data, headers, auth):
+    resp = requests.Response()
+    resp.status_code = 200
+    resp.json = lambda: {
+        "erp_id": "42",
+        "increment_id": "1000000348",
+        "lines": [{"line_number": 10, "created_id": 106}],
+    }
+    return resp
+
+
 class ExportSaleOrderTestCase(SavepointCase):
 
     post_install = True
@@ -289,12 +307,6 @@ class ExportSaleOrderTestCase(SavepointCase):
             self.so1.order_line[0].esb_ref, result["lines"][0]["created_id"]
         )
 
-    def put_ret_status(url, data, headers, auth):
-        resp = requests.Response()
-        resp.status_code = 200
-        resp.json = lambda: {"erp_id": "42", "increment_id": "1000000348"}
-        return resp
-
     @mock.patch("requests.put", side_effect=put_ret_status)
     def test_record_exporter(self, put):
         """Test export of a sale order catching the put request."""
@@ -303,16 +315,6 @@ class ExportSaleOrderTestCase(SavepointCase):
             exporter = work.component(usage="record.exporter")
             exporter.run(self.so1)
         put.assert_called_once()
-
-    def post_ret_status(url, data, headers, auth):
-        resp = requests.Response()
-        resp.status_code = 200
-        resp.json = lambda: {
-            "erp_id": "42",
-            "increment_id": "1000000348",
-            "lines": [{"line_number": 10, "created_id": 106}],
-        }
-        return resp
 
     @mock.patch("requests.post", side_effect=post_ret_status)
     def test_record_exporter_new_pharam(self, post):

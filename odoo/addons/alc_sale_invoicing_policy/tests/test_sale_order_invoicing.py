@@ -120,6 +120,7 @@ class TestSaleOrderInvoicing(SavepointCase):
         for logger in loggers:
             logging.getLogger(logger).addFilter(self)
 
+        # pylint: disable=unused-variable
         @self.addCleanup
         def un_mute_logger():
             for logger_ in loggers:

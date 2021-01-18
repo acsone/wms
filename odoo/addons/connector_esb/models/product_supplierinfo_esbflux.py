@@ -60,15 +60,14 @@ class ProductSupplierinfoEsbflux(models.Model):
             """
             if last is None:
                 return first
-            elif first.action == "create" and last.action == "create":
+            if first.action == "create" and last.action == "create":
                 return last
-            elif first.action == "delete" and last.action == "delete":
+            if first.action == "delete" and last.action == "delete":
                 return first
-            elif first.action == "delete" and last.action == "create":
+            if first.action == "delete" and last.action == "create":
                 return self.browse() | first | last
-            else:
-                # Start with create and finish with delete, nothing to send
-                return self.browse()
+            # Start with create and finish with delete, nothing to send
+            return self.browse()
 
         if len(self) < 2:
             # A single record or nothing, leave it as is
@@ -86,8 +85,7 @@ class ProductSupplierinfoEsbflux(models.Model):
                 last_action = None
             else:
                 last_action = r
-        else:
-            new_rs |= simplify_action(first_action, last_action)
+        new_rs |= simplify_action(first_action, last_action)
 
         return new_rs
 

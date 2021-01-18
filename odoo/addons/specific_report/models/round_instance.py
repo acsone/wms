@@ -114,7 +114,7 @@ class RoundInstance(models.Model):
             shipping_values[shipping.partner_id] = partner_value
 
         result = []
-        for partner, values in shipping_values.iteritems():
+        for partner, _values in shipping_values.iteritems():
             shipping_value = shipping_values.get(partner)
             if not shipping_value:
                 continue

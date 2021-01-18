@@ -10,6 +10,17 @@ import requests
 from odoo.addons.connector_esb.tests import common
 
 
+def post_ret_status(url, data, headers, auth):
+    resp = requests.Response()
+    resp.status_code = 200
+    resp.json = lambda: {
+        "erp_id": "42",
+        "increment_id": "1000000348",
+        "lines": [{"line_number": 10, "created_id": 106}],
+    }
+    return resp
+
+
 class TestExportSaleOrder(common.ESBTestCase):
     @classmethod
     def setUpClass(cls):
@@ -104,16 +115,6 @@ class TestExportSaleOrder(common.ESBTestCase):
                 "sale_channel": "chronovet",
             }
         )
-
-    def post_ret_status(url, data, headers, auth):
-        resp = requests.Response()
-        resp.status_code = 200
-        resp.json = lambda: {
-            "erp_id": "42",
-            "increment_id": "1000000348",
-            "lines": [{"line_number": 10, "created_id": 106}],
-        }
-        return resp
 
     def test_00(self):
         """

@@ -9,7 +9,7 @@ class PurchaseConfigSettings(models.TransientModel):
 
     lead_time = fields.Integer("Default Lead time (in days)")
 
-    def get_default_lead_time(self, fields):
+    def get_default_lead_time(self, _fields):
         lead_time = int(
             self.env["ir.config_parameter"].get_param("purchase.lead_time", 0)
         )

@@ -13,4 +13,4 @@ class EdiSynchronizer(AbstractComponent):
 
     @property
     def _base_backend_adapter_usage(self):
-        return "{}.backend.adapter".format(self.backend_record.channel)
+        return u"{}.backend.adapter".format(self.backend_record.channel)

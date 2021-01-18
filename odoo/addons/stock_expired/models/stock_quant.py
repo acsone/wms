@@ -80,8 +80,8 @@ class StockQuant(models.Model):
             ("location_id.usage", "=", "internal"),
             ("location_id.ignore_quants_expiration", "=", False),
         ]
-        StockQuant = self.env["stock.quant"]
-        with StockQuant._auto_join(["lot_id", "location_id"]):
+        StockQuantModel = self.env["stock.quant"]
+        with StockQuantModel._auto_join(["lot_id", "location_id"]):
             quants = self.env["stock.quant"].search(domain)
         if len(quants) > 0:
             template = self.env.ref("stock_expired.email_template_alert_quant_expired")
@@ -104,9 +104,9 @@ class StockQuant(models.Model):
             ("location_id.ignore_quants_expiration", "=", False),
             ("id", "not in", quants_already_processed.ids),
         ]
-        StockQuant = self.env["stock.quant"]
-        with StockQuant._auto_join(["lot_id", "location_id"]):
-            quants = StockQuant.search(domain)
+        StockQuantModel = self.env["stock.quant"]
+        with StockQuantModel._auto_join(["lot_id", "location_id"]):
+            quants = StockQuantModel.search(domain)
         picking_type = self.env.ref("stock_expired.picking_type_scrap")
         location_dest = picking_type.default_location_dest_id
         for location_src, quants_bylocation in itertools.groupby(

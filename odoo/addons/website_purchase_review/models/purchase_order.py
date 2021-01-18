@@ -128,7 +128,7 @@ class PurchaseOrder(models.Model):
             "date_planned",
         ):
             if not vals.get(key):
-                _logger.error("No value for %s" % key)
+                _logger.error("No value for %s", key)
                 return False
 
         vals["is_confirmed_line"] = True
@@ -154,10 +154,10 @@ class PurchaseOrder(models.Model):
 
         if orderpoint_min or orderpoint_max or orderpoint_qty_multiple:
             product = self.env["product.product"].browse(vals["product_id"])
-            orderpoint_min = orderpoint_min and float(orderpoint_min) or 0.0
-            orderpoint_max = orderpoint_max and float(orderpoint_max) or 0.0
+            orderpoint_min = float(orderpoint_min) if orderpoint_min else 0.0
+            orderpoint_max = float(orderpoint_max) if orderpoint_max else 0.0
             orderpoint_qty_multiple = (
-                orderpoint_qty_multiple and float(orderpoint_qty_multiple) or 0.0
+                float(orderpoint_qty_multiple) if orderpoint_qty_multiple else 0.0
             )
             if (
                 product.orderpoint_min != orderpoint_min
@@ -247,9 +247,3 @@ class PurchaseOrder(models.Model):
             "menu_id": self.env.ref("purchase.menu_purchase_root").id,
         }
         return "/web#" + urllib.urlencode(vals)
-
-
-class PurchaseOrderLine(models.Model):
-    _inherit = "purchase.order.line"
-
-    is_confirmed_line = fields.Boolean("Confirmed line")

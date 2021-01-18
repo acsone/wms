@@ -47,8 +47,8 @@ class SaleOrder(models.Model):
                 )
                 if delivery_round:
                     pickins_assignable_to_round = pickins_assignable_to_round.filtered(
-                        lambda picking: picking.partner_id.is_shipping_date_allowed(
-                            delivery_round.date
+                        lambda picking, d=delivery_round: picking.partner_id.is_shipping_date_allowed(
+                            d.date
                         )
                     )
                 if pickins_assignable_to_round and delivery_round:

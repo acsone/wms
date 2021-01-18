@@ -32,8 +32,9 @@ class StockPicking(models.Model):
                 raise UserError(
                     _(
                         "You cannot transfer lots with an expired "
-                        "removal date:\n\t- %s" % ("\n\t- ".join(bad_lots))
+                        "removal date:\n\t- %s"
                     )
+                    % ("\n\t- ".join(bad_lots))
                 )
 
     @api.multi

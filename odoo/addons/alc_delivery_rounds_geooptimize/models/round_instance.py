@@ -149,11 +149,12 @@ class RoundInstance(models.Model):
 
     @api.onchange("template_id")
     def onchange_template_id(self):
-        super(RoundInstance, self).onchange_template_id()
+        res = super(RoundInstance, self).onchange_template_id()
         for record in self:
             record.geo_optimization_enabled = (
                 record.template_id.geo_optimization_enabled
             )
+        return res
 
     def _deliver(self, background=True):
         self.filtered(lambda a: a._is_geo_optimization_enabled())._geo_optimize()
@@ -235,6 +236,7 @@ class RoundInstance(models.Model):
                     record.state = "optimization_failure"
         return res
 
+    # pylint: disable=missing-return
     @job(default_channel="root.background.stock_picking_deliver")
     @api.multi
     def recheck_delivery_state(self):
@@ -255,7 +257,6 @@ class RoundInstance(models.Model):
                     "Unexpected geo optimization state %s"
                     % record.geo_optimization_state
                 )
-        return None
 
     @api.multi
     def retry_optimization(self):
@@ -268,7 +269,7 @@ class RoundInstance(models.Model):
 
     @api.multi
     def button_ignore_optimization_failure(self):
-        records = self.filtered(lambda r: r.state in ("optimization_failure"))
+        records = self.filtered(lambda r: r.state == "optimization_failure")
         records.write({"geo_optimization_enabled": False})
         records._deliver()
 
@@ -431,7 +432,7 @@ class RoundInstance(models.Model):
         )
         result = self._check_optimization_response(action, response)
         if result is False:
-            return
+            return None
         return result["taskId"]
 
     @job(default_channel="root.background.geo_optimization")
@@ -643,8 +644,7 @@ class RoundInstance(models.Model):
             )
             if background:
                 return error_message
-            else:
-                raise UserError(error_message)
+            raise UserError(error_message)
 
         action = "exportToOperationalPlanning"
         json_request = self._generate_optimization_operational_export_request()

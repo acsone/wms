@@ -244,5 +244,5 @@ class ProductTemplate(models.Model):
             action_context["search_default_remains_to_deliver"] = 1
             res["context"] = str(action_context)
         else:
-            res["context"] = "{" "'search_default_remains_to_deliver': 1," "}"
+            res["context"] = "{'search_default_remains_to_deliver': 1,}"
         return res

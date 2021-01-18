@@ -40,7 +40,7 @@ class ESBWebServiceAdapter(Component):
     def _get_headers(self):
         return {"Content-Type": "application/json", "Accept": "application/json"}
 
-    # pylint: disable=W8106
+    # pylint: disable=method-required-super
     def create(self, values):
         """ Create a record on the external system """
         url = self._get_url()
@@ -59,7 +59,7 @@ class ESBWebServiceAdapter(Component):
             )
         if res.status_code == 202:
             raise ConnectorException("Error %s on POST" % (res.status_code))
-        elif res.status_code == 200:
+        if res.status_code == 200:
             try:
                 res_data = res.json()
             except JSONDecodeError:
@@ -72,7 +72,7 @@ class ESBWebServiceAdapter(Component):
             res.raise_for_status()
         return res_data
 
-    # pylint: disable=W8106
+    # pylint: disable=method-required-super
     def write(self, id_, values):
         """ Update a record on the external system """
         url = self._get_url()
@@ -91,7 +91,7 @@ class ESBWebServiceAdapter(Component):
             )
         if res.status_code == 202:
             raise ConnectorException("Error %s on PUT" % (res.status_code))
-        elif res.status_code == 200:
+        if res.status_code == 200:
             try:
                 res_data = res.json()
             except JSONDecodeError:

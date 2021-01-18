@@ -49,5 +49,4 @@ class StockLocation(models.Model):
         is_odd_day = date.today().day % 2
         if is_odd_day:
             return self.bin_checksum_2
-        else:
-            return self.bin_checksum_1
+        return self.bin_checksum_1

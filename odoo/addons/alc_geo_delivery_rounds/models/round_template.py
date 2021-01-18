@@ -39,6 +39,8 @@ class RoundTemplate(geo_model.GeoModel):
         ).name_get()
 
         for rec in self.browse(templates_with_delivery):
-            result.append((rec.id, "{}-{}".format(rec.delivery_plan_id.name, rec.name)))
+            result.append(
+                (rec.id, u"{}-{}".format(rec.delivery_plan_id.name, rec.name))
+            )
 
         return result

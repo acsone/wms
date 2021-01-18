@@ -11,6 +11,13 @@ import requests
 from odoo.tests.common import SavepointCase
 
 
+def post_ret_status(url, data, headers, auth):
+    resp = requests.Response()
+    resp.status_code = 200
+    resp.json = lambda: '{"erp_id" : "42", “increment_id” : “1000000348”}'
+    return resp
+
+
 class ExportStockUpdateSingleTestCase(SavepointCase):
     def setUp(self):
         super(ExportStockUpdateSingleTestCase, self).setUp()
@@ -142,12 +149,6 @@ class ExportStockUpdateSingleTestCase(SavepointCase):
             mapper = work.component(usage="export.mapper")
             values = mapper.map_record(product).values()
         self.assertDictEqual(values, expected)
-
-    def post_ret_status(url, data, headers, auth):
-        resp = requests.Response()
-        resp.status_code = 200
-        resp.json = lambda: '{"erp_id" : "42", “increment_id” : “1000000348”}'
-        return resp
 
     @mock.patch("requests.post", side_effect=post_ret_status)
     def test_record_exporter(self, post):

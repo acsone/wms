@@ -240,7 +240,6 @@ class TestSaleOrderException(SavepointCase):
         rules.write({"active": 0})
 
     def test_client_pharmacist_wholesale_human(self):
-        """ """
         rules = self.env["exception.rule"].search([("active", "=", 0)])
         rules.write({"active": 1})
         warns = self.env["exception.rule"].search([("warning_only", "=", 1)])
@@ -265,7 +264,6 @@ class TestSaleOrderException(SavepointCase):
         rules.write({"active": 0})
 
     def test_client_veterinary_wholesale(self):
-        """ """
         rules = self.env["exception.rule"].search([("active", "=", 0)])
         rules.write({"active": 1})
         warns = self.env["exception.rule"].search([("warning_only", "=", 1)])

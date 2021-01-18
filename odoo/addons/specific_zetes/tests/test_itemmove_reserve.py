@@ -59,7 +59,7 @@ class TestItemmoveReserve(ZetesReserveTest):
         self.assertEqual(result.respCode, str(constants.RESPONSE_CODE_OK))
         self.assertEqual(result.groupNum, str(self.picking_reserve.id))
         self.assertEqual(
-            result.moveLineId, "{}_{}".format(pack_op.id, self.lot_product_1.id)
+            result.moveLineId, u"{}_{}".format(pack_op.id, self.lot_product_1.id)
         )
         self.assertEqual(int(result.reqQty), 20)
         self.assertEqual(int(result.effQty), 0)

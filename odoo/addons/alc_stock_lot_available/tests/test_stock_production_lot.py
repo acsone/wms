@@ -72,7 +72,6 @@ class TestStockProductionLot(SavepointCase):
             }
         )
         inventory_wizard.change_product_qty()
-        return
 
     def test_1(self):
         """

@@ -15,7 +15,7 @@ class PurchaseReport(models.Model):
     # ***********************************************************************
     # ********************** OVERRIDE FROM ORIGINAL CLASS *******************
     # ***********************************************************************
-    # pylint: disable=E8103
+    # pylint: disable=sql-injection
     @api.model_cr
     def init(self):
         tools.drop_view_if_exists(self._cr, "purchase_report")

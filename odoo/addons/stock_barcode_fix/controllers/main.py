@@ -71,13 +71,12 @@ class StockBarcodeControllerFix(StockBarcodeController):
                 # Open its form view
                 action_picking_form.update(res_id=picking.id)
                 return {"action": action_picking_form}
-            else:
-                return {
-                    "warning": _(
-                        "No internal picking type. Please "
-                        "configure one in warehouse settings."
-                    )
-                }
+            return {
+                "warning": _(
+                    "No internal picking type. Please "
+                    "configure one in warehouse settings."
+                )
+            }
 
         return {
             "warning": _(

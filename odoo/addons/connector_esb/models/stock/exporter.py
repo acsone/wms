@@ -153,7 +153,7 @@ class StockUpdateExporter(Component):
                 if last_export:
                     return self.get_exported_until(last_export)
                 raise  # No succesful export, job failed
-        return
+        return None
 
 
 class StockUpdateServiceExporter(Component):

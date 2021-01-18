@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from .common import TestDeliveryRound
 
 
@@ -129,5 +130,5 @@ class TestRefillReport(TestDeliveryRound):
         )
         prio = prio_rec.refill_priority_reassort
         self.assertTrue(
-            6000 <= prio, "reassort priority should be above 6000 (actual: %d)" % prio
+            prio >= 6000, "reassort priority should be above 6000 (actual: %d)" % prio
         )

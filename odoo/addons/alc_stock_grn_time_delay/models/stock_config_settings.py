@@ -23,10 +23,10 @@ class StockConfigSettings(models.TransientModel):
         return max_delay_to_process_receipt
 
     @api.model
-    def default_get(self, fields):
-        res = super(StockConfigSettings, self).default_get(fields)
+    def default_get(self, _fields):
+        res = super(StockConfigSettings, self).default_get(_fields)
         max_delay_to_process_receipt = self.get_max_delay_to_process_receipt_config()
-        if "max_delay_to_process_receipt" in fields or not fields:
+        if "max_delay_to_process_receipt" in _fields or not _fields:
             res["max_delay_to_process_receipt"] = max_delay_to_process_receipt
         return res
 

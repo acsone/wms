@@ -62,10 +62,10 @@ class Sale(models.Model):
         warn_lines = {}
         for category in categories:
             warn_lines[category] = self.order_line.filtered(
-                lambda r: r.product_id.categ_id.id == category.id
+                lambda r, categ=category: r.product_id.categ_id.id == categ.id
             ).sorted()
         # Get all the line ids whose product belongs to a category with warning
-        warn_line_ids = sum([l.ids for c, l in warn_lines.iteritems()], [])
+        warn_line_ids = sum([l.ids for _c, l in warn_lines.iteritems()], [])
         # Categories with specific display
         pharmacy_cat = self.env.ref("specific_data.product_categ_humain")
 
@@ -125,6 +125,7 @@ class Sale(models.Model):
         return result
 
     def sale_check_exception(self):
+        # pylint: disable=except-pass
         try:
             self._check_exception()
         except ValidationError:
@@ -562,7 +563,7 @@ class SaleOrderLine(models.Model):
         the proper quantity once the procurement is created.
         """
         if self.env.context.get("auto_cancel_unavailable_qty"):
-            return
+            return None
         backup_qty = {}
         for line in self:
             # Process only lines related to customers with the auto-cancel

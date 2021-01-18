@@ -22,8 +22,6 @@ class StockPicking(models.Model):
         create_invoice_pickings = self.filtered(
             lambda picking: picking.picking_type_id in picking_types
         )
-        if False:  # not create_invoice_pickings:
-            return SaleOrder
         proc_groups = create_invoice_pickings.mapped("move_lines.group_id")
         if not proc_groups:
             return SaleOrder

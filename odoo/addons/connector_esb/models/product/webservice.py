@@ -52,7 +52,7 @@ class ProductStockCNKWebserviceMessage(Component):
         result = []
         for line in stock_by_product:
             quantity = line["immediately_usable_qty"]
-            quantity = quantity >= 0 and quantity or 0
+            quantity = quantity if quantity >= 0 else 0
 
             result.append(
                 {
@@ -88,7 +88,7 @@ class ProductStockSKUWebserviceMessage(Component):
         result = []
         for line in stock_by_product:
             quantity = line["immediately_usable_qty"]
-            quantity = quantity >= 0 and quantity or 0
+            quantity = quantity if quantity >= 0 else 0
 
             result.append({"quantity": quantity, "sku": line["default_code"]})
 

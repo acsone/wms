@@ -123,7 +123,7 @@ class CSVFile(models.Model):
                 os.makedirs(directory_path)
 
             return True
-        elif self.ftp_connector_id.type == "sftp":
+        if self.ftp_connector_id.type == "sftp":
             with self.get_sftp_connector() as connector:
                 try:
                     connector.listdir(directory_path)
@@ -132,12 +132,8 @@ class CSVFile(models.Model):
                         connector.mkdir(directory_path)
                         return True
                     return False
-                except Exception:
-                    raise
-
             return True
-        else:
-            raise UserError(_("Unknown import type"))
+        raise UserError(_("Unknown import type"))
 
     @api.multi
     def check_file(self, file_path):
@@ -145,7 +141,7 @@ class CSVFile(models.Model):
 
         if not self.ftp_connector_id:
             return os.path.isfile(file_path)
-        elif self.ftp_connector_id.type == "sftp":
+        if self.ftp_connector_id.type == "sftp":
             with self.get_sftp_connector() as connector:
                 stat = connector.stat(file_path)
                 if stat:

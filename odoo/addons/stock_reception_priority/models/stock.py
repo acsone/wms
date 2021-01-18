@@ -142,12 +142,13 @@ class StockPicking(models.Model):
 
     @api.multi
     def button_priority_recompute(self):
-        super(StockPicking, self).button_priority_recompute()
+        res = super(StockPicking, self).button_priority_recompute()
         receptions = self.filtered(lambda r: r.location_id.usage == "supplier")
         receptions._compute_qty_backorder()
         receptions._compute_qty_outofstock()
         for record in receptions:
             record.rank = record._calc_priority()
+        return res
 
     @api.model
     def _cron_priority_recompute(self):

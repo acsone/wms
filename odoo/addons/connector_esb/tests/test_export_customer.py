@@ -187,7 +187,6 @@ class ExportCustomerTestCase(ESBXMLTestCase):
             self.assertEqual(len(items & self.all_records), 3)
 
     def test_export(self):
-        """ """
         self.timestamp.writer = "local"
         with self.backend.work_on(self.model._name, timestamp=self.timestamp) as work:
             exporter = work.component(usage="record.exporter.cron")

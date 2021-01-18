@@ -31,7 +31,7 @@ class StockMove(models.Model):
         """ When a reservation has been stolen by another move (typically a
         negative inventory adjustment), in standard, the state is updated but
         the pack operations are not updated """
-        super(StockMove, self).recalculate_move_state()
+        res = super(StockMove, self).recalculate_move_state()
         operations_to_recompute = self.env["stock.pack.operation"]
         moves_to_reassign = self.env["stock.move"]
         for move in self:
@@ -47,9 +47,11 @@ class StockMove(models.Model):
 
             operations_to_recompute |= move.picking_id.mapped(
                 "pack_operation_ids"
-            ).filtered(lambda op: op.product_id in move.product_id and not op.is_done)
+            ).filtered(
+                lambda op, m=move: op.product_id in m.product_id and not op.is_done
+            )
             moves_to_reassign |= move.picking_id.mapped("move_lines").filtered(
-                lambda m: m.product_id in move.product_id
+                lambda m, _move=move: m.product_id in _move.product_id
                 and m.state not in ("done", "cancel")
             )
 
@@ -61,6 +63,7 @@ class StockMove(models.Model):
         if moves_to_reassign:
             _logger.debug("Reserve corresponding moves %s", moves_to_reassign.ids)
             moves_to_reassign.action_assign()
+        return res
 
     def action_done(self):
         """ When product is received, check if moves can be assigned """
@@ -126,9 +129,8 @@ class StockMove(models.Model):
         products_not_available = products.filtered(lambda p: p.qty_available <= 0)
         if products_not_available:
             _logger.info(
-                "No reassign for products {} as they are not available".format(
-                    products_not_available.ids
-                )
+                "No reassign for products %s as they are not available",
+                products_not_available.ids,
             )
             products -= products_not_available
         if not products:

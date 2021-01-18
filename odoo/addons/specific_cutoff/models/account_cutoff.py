@@ -58,5 +58,5 @@ class AccountCutoff(models.Model):
                 )
             for line in lines:
                 self.env["account.cutoff.line"].create(self._prepare_line(line))
-        else:
-            return super(AccountCutoff, self).get_lines()
+            return None
+        return super(AccountCutoff, self).get_lines()

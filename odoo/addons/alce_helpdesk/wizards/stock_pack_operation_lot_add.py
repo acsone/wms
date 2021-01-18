@@ -42,7 +42,7 @@ class StockPackOperationLotAdd(models.TransientModel):
         self.helpdesk_ticket_description = False
 
     def _add(self):
-        super(StockPackOperationLotAdd, self)._add()
+        res = super(StockPackOperationLotAdd, self)._add()
         operation = self.operation_id
         self._create_helpdesk_ticket()
         precision = self.env["decimal.precision"].precision_get(
@@ -65,3 +65,4 @@ class StockPackOperationLotAdd(models.TransientModel):
                 operation.qty_done,
             )
             self._create_helpdesk_ticket()
+        return res

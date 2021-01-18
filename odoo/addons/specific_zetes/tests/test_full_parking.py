@@ -233,7 +233,7 @@ class TestFullParking(ZetesParkingTest):
         self.assertEqual(int(line_product_2.reqQty), 100)
         self.assertEqual(
             line_product_2.moveLineId,
-            "{}_{}".format(pack_op_1.id, self.lot_product_1.id),
+            u"{}_{}".format(pack_op_1.id, self.lot_product_1.id),
         )
 
         # Test line 3

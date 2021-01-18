@@ -38,12 +38,11 @@ class PurchaseOrder(models.Model):
                             "state approved"
                         )
                     )
-                else:
-                    raise UserError(
-                        _(
-                            "Sending UBL Order document is not allowed in the current context."
-                        )
+                raise UserError(
+                    _(
+                        "Sending UBL Order document is not allowed in the current context."
                     )
+                )
 
     def send_ubl_order_document(self):
         for rec in self.suspend_security():

@@ -11,6 +11,7 @@ class StockProductionLot(models.Model):
     @api.model
     def create(self, vals):
         """Disable check in src/addons/stock/models/stock_production_lot.py"""
+        new_self = self
         if self.env.context.get("active_pack_operation", False):
-            self = self.with_context(active_pack_operation=False)
-        return super(StockProductionLot, self).create(vals)
+            new_self = self.with_context(active_pack_operation=False)
+        return super(StockProductionLot, new_self).create(vals)

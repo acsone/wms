@@ -54,8 +54,8 @@ class TestReportProductPriceImport(SavepointCase):
         if data:
             if data[0].module:
                 return "{}.{}".format(data[0].module, data[0].name)
-            else:
-                return data[0].name
+            return data[0].name
+        return None
 
     def test_0(self):
         """
@@ -96,10 +96,11 @@ class TestReportProductPriceImport(SavepointCase):
              * indicated_price
             The second line contains the values for the given product.
         """
-        content, ext = self.report_action.render_report(
+        content, _ext = self.report_action.render_report(
             self.product.product_tmpl_id.id, self.report_action.report_name, {}
         )
         book = xlrd.open_workbook(file_contents=content)
+        # pylint: disable=unnecessary-comprehension
         rows = [r for r in self.BaseImport._read_xls_book(book)]
         headers = rows[0]
         self.assertListEqual(

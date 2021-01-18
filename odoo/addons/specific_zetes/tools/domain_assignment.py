@@ -247,7 +247,7 @@ class Assignment(DomainInterface):
             return
 
         picking = self.env["stock.picking"].browse(int(picking_id))
-        if not len(picking):
+        if not len(picking) > 0:
             return
         picking._lock()
         try:
@@ -452,7 +452,8 @@ WHERE picking.state IN ('partially_available', 'assigned')
 
         counter = 0
         while counter < MAX_RETRY:
-            self.env.cr.execute(report_query, query_values)  # pylint: disable=E8103
+            # pylint: disable=sql-injection
+            self.env.cr.execute(report_query, query_values)
             report_id = self.env.cr.fetchone()
             if not report_id:
                 break
@@ -474,14 +475,12 @@ WHERE picking.state IN ('partially_available', 'assigned')
 
             if is_valid_location:
                 return picking
-            else:
-                error_message = (
-                    "The picking %s contains one or more "
-                    "invalid location" % picking.display_name
-                )
-                _logger.error(error_message)
-                params.log(picking_id=picking.id, exception=error_message)
-
+            error_message = (
+                "The picking %s contains one or more "
+                "invalid location" % picking.display_name
+            )
+            _logger.error(error_message)
+            params.log(picking_id=picking.id, exception=error_message)
             counter += 1
 
         return False
@@ -580,7 +579,8 @@ WHERE picking.state IN ('partially_available', 'assigned')
 
         counter = 0
         while counter < MAX_RETRY:
-            self.env.cr.execute(report_query, query_values)  # pylint: disable=E8103
+            # pylint: disable=sql-injection
+            self.env.cr.execute(report_query, query_values)
             report_id = self.env.cr.fetchone()
             if not report_id:
                 break
@@ -599,12 +599,11 @@ WHERE picking.state IN ('partially_available', 'assigned')
 
             if is_valid_location:
                 return picking
-            else:
-                error_message = (
-                    "The picking %s contains one or more "
-                    "invalid location" % picking.display_name
-                )
-                _logger.error(error_message)
-                params.log(picking_id=picking.id, exception=error_message)
+            error_message = (
+                "The picking %s contains one or more "
+                "invalid location" % picking.display_name
+            )
+            _logger.error(error_message)
+            params.log(picking_id=picking.id, exception=error_message)
 
         return False

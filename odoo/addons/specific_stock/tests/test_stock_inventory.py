@@ -131,6 +131,7 @@ class TestStockInventory(TransactionCase):
         self.assertEqual(other_products["delay"], 12)
         self.assertEqual(other_products["nbr_inventory_per_year"], 1)
 
+    # pylint: disable=no-self-argument
     @freeze_time("2018-06-01", as_arg=True)
     def test_get_products_daily_inventory(frozen_time, self):
         """
@@ -195,7 +196,7 @@ class TestStockInventory(TransactionCase):
 
             # Create sale orders
             number_of_so = nbr_of_so.get(product_name, default_nbr_of_so)
-            for x in range(number_of_so):
+            for _x in range(number_of_so):
                 so_obj.create(
                     {
                         "partner_id": partner.id,

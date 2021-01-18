@@ -125,30 +125,30 @@ class StockConfigSettings(models.TransientModel):
         )
 
     @api.model
-    def default_get(self, fields):
-        res = super(StockConfigSettings, self).default_get(fields)
+    def default_get(self, _fields):
+        res = super(StockConfigSettings, self).default_get(_fields)
         cfg = self.get_optimization_config()
-        if "geo_optimization_enabled" in fields or not fields:
+        if "geo_optimization_enabled" in _fields or not _fields:
             res["geo_optimization_enabled"] = cfg.enabled
-        if "geo_optimization_api_url" in fields or not fields:
+        if "geo_optimization_api_url" in _fields or not _fields:
             res["geo_optimization_api_url"] = cfg.api_url
-        if "geo_optimization_api_key" in fields or not fields:
+        if "geo_optimization_api_key" in _fields or not _fields:
             res["geo_optimization_api_key"] = cfg.api_key
-        if "geo_optimization_duration" in fields or not fields:
+        if "geo_optimization_duration" in _fields or not _fields:
             res["geo_optimization_duration"] = cfg.duration
-        if "geo_optimization_delivery_duration" in fields or not fields:
+        if "geo_optimization_delivery_duration" in _fields or not _fields:
             res["geo_optimization_delivery_duration"] = cfg.delivery_duration
-        if "geo_optimization_loading_duration" in fields or not fields:
+        if "geo_optimization_loading_duration" in _fields or not _fields:
             res["geo_optimization_loading_duration"] = cfg.loading_duration
-        if "geo_optimization_resources_number" in fields or not fields:
+        if "geo_optimization_resources_number" in _fields or not _fields:
             res["geo_optimization_resources_number"] = cfg.resources_number
-        if "geo_optimization_work_penalty" in fields or not fields:
+        if "geo_optimization_work_penalty" in _fields or not _fields:
             res["geo_optimization_work_penalty"] = cfg.work_penalty
-        if "geo_optimization_travel_penalty" in fields or not fields:
+        if "geo_optimization_travel_penalty" in _fields or not _fields:
             res["geo_optimization_travel_penalty"] = cfg.travel_penalty
-        if "geo_optimization_daily_work_time" in fields or not fields:
+        if "geo_optimization_daily_work_time" in _fields or not _fields:
             res["geo_optimization_daily_work_time"] = cfg.daily_work_time
-        if "geo_optimization_resource_cfg" in fields or not fields:
+        if "geo_optimization_resource_cfg" in _fields or not _fields:
             res["geo_optimization_resource_cfg"] = json.dumps(cfg.resource_cfg)
 
         return res

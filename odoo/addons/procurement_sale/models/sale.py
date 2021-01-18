@@ -61,80 +61,71 @@ class SaleOrderLine(models.Model):
                     # if immediately usable quantity is positive,
                     # the unavailable quantity equals 0
                     return 0
-                else:
-                    # Because ordered quantity is already
-                    # computed in immediately usable quantity,
-                    # if immediately usable quantity is negative,
-                    # the unavailable quantity
-                    # equals the immediately usable quantity
-                    # minus the sum of stock move quantity
-                    # which stock move is after the order line stock move
-                    StockMove = self.env["stock.move"]
-                    with StockMove._auto_join(["procurement_id"]):
-                        order_line_stock_move = StockMove.search(
-                            [
-                                ("procurement_id.sale_line_id", "=", line_id),
-                                ("state", "not in", ["draft", "cancel", "done"]),
-                            ],
-                            limit=1,
-                        )
-                    if not order_line_stock_move:
-                        return min(abs(immediately_usable_qty), product_uom_qty)
-                    stock_move_date_expected = order_line_stock_move.date_expected
-                    with StockMove._auto_join(
-                        ["location_id", "location_dest_id", "procurement_id"]
-                    ):
-                        next_stock_moves = self.env["stock.move"].search(
-                            [
-                                ("product_id", "=", product.id),
-                                ("location_id.usage", "in", ("internal", "view")),
-                                ("location_dest_id.usage", "=", "customer"),
-                                ("procurement_id.sale_line_id", "!=", line_id),
-                                ("state", "not in", ["draft", "cancel", "done"]),
-                                "|",
-                                "|",
-                                ("priority", "<", order_line_stock_move.priority),
-                                "&",
-                                ("priority", "=", order_line_stock_move.priority),
-                                ("date_expected", ">", stock_move_date_expected),
-                                # in rare case of same date_expected,
-                                # use id to sort the moves
-                                "&",
-                                "&",
-                                ("priority", "=", order_line_stock_move.priority),
-                                ("date_expected", "=", stock_move_date_expected),
-                                ("id", ">", order_line_stock_move.id),
-                            ]
-                        )
-                    next_quantities = sum(
-                        move.product_uom_qty for move in next_stock_moves
+                # Because ordered quantity is already
+                # computed in immediately usable quantity,
+                # if immediately usable quantity is negative,
+                # the unavailable quantity
+                # equals the immediately usable quantity
+                # minus the sum of stock move quantity
+                # which stock move is after the order line stock move
+                StockMove = self.env["stock.move"]
+                with StockMove._auto_join(["procurement_id"]):
+                    order_line_stock_move = StockMove.search(
+                        [
+                            ("procurement_id.sale_line_id", "=", line_id),
+                            ("state", "not in", ["draft", "cancel", "done"]),
+                        ],
+                        limit=1,
                     )
-
-                    good_immediately_usable_qty = (
-                        immediately_usable_qty + next_quantities
+                if not order_line_stock_move:
+                    return min(abs(immediately_usable_qty), product_uom_qty)
+                stock_move_date_expected = order_line_stock_move.date_expected
+                with StockMove._auto_join(
+                    ["location_id", "location_dest_id", "procurement_id"]
+                ):
+                    next_stock_moves = self.env["stock.move"].search(
+                        [
+                            ("product_id", "=", product.id),
+                            ("location_id.usage", "in", ("internal", "view")),
+                            ("location_dest_id.usage", "=", "customer"),
+                            ("procurement_id.sale_line_id", "!=", line_id),
+                            ("state", "not in", ["draft", "cancel", "done"]),
+                            "|",
+                            "|",
+                            ("priority", "<", order_line_stock_move.priority),
+                            "&",
+                            ("priority", "=", order_line_stock_move.priority),
+                            ("date_expected", ">", stock_move_date_expected),
+                            # in rare case of same date_expected,
+                            # use id to sort the moves
+                            "&",
+                            "&",
+                            ("priority", "=", order_line_stock_move.priority),
+                            ("date_expected", "=", stock_move_date_expected),
+                            ("id", ">", order_line_stock_move.id),
+                        ]
                     )
+                next_quantities = sum(move.product_uom_qty for move in next_stock_moves)
 
-                    if good_immediately_usable_qty <= 0:
-                        return min(product_uom_qty, abs(good_immediately_usable_qty))
-                    else:
-                        return 0
-            else:
-                # If sale order line is NOT confirmed, ordered quantity
-                # is NOT already computed in immediately usable quantity
-                if immediately_usable_qty <= 0:
-                    # If immediately usable quantity is negative,
-                    # the unavailable quantity equals the sum
-                    # between ordered quantity
-                    # and immediately usable quantity absolute value
-                    return product_uom_qty
-                else:
-                    # If immediately usable quantity is positive,
-                    # the unavailable quantity equals the ordered quantity
-                    # minus the immediately usable quantity
-                    # (limited with ordered quantity)
-                    return max(product_uom_qty - immediately_usable_qty, 0)
-        else:
-            return None
+                good_immediately_usable_qty = immediately_usable_qty + next_quantities
+
+                if good_immediately_usable_qty <= 0:
+                    return min(product_uom_qty, abs(good_immediately_usable_qty))
+                return 0
+            # If sale order line is NOT confirmed, ordered quantity
+            # is NOT already computed in immediately usable quantity
+            if immediately_usable_qty <= 0:
+                # If immediately usable quantity is negative,
+                # the unavailable quantity equals the sum
+                # between ordered quantity
+                # and immediately usable quantity absolute value
+                return product_uom_qty
+            # If immediately usable quantity is positive,
+            # the unavailable quantity equals the ordered quantity
+            # minus the immediately usable quantity
+            # (limited with ordered quantity)
+            return max(product_uom_qty - immediately_usable_qty, 0)
+        return None
 
     @api.onchange(
         "product_id",

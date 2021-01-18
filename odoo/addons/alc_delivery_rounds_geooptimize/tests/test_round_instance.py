@@ -98,6 +98,7 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
         for logger in loggers:
             logging.getLogger(logger).addFilter(self)
 
+        # pylint: disable=unused-variable
         @self.addCleanup
         def un_mute_logger():
             for logger_ in loggers:
@@ -108,6 +109,7 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
         self.mocked_requests_post = requests_post_patcher.start()
         self.mocked_requests_get = requests_get_patcher.start()
 
+        # pylint: disable=unused-variable
         @self.addCleanup
         def stop_mock():
             requests_post_patcher.stop()

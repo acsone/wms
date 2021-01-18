@@ -120,8 +120,8 @@ class TestProductPriceImport(SavepointCase):
         if data:
             if data[0].module:
                 return "{}.{}".format(data[0].module, data[0].name)
-            else:
-                return data[0].name
+            return data[0].name
+        return None
 
     def test_0(self):
         """

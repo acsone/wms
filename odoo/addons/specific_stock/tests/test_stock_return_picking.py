@@ -121,5 +121,5 @@ class TestStockReturnPicking(SavepointCase):
 
         self.assertEqual(self.picking.state, "done")
         self.assertTrue(self.quants.package_id)
-        self.stock_return_picking.create_returns()["res_id"]
+        self.stock_return_picking.create_returns()
         self.assertFalse(self.quants.package_id)

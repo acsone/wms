@@ -83,7 +83,6 @@ class ControllerSaleTestCase(SavepointCase):
             self.controller._validate_create_sale_order(data)
 
     def test_sale_date_validity(self):
-        """ """
         data = deepcopy(self.order_data)
         data["date"] = "2019-02-18 12:12:12"
         self.controller._validate_create_sale_order(data)

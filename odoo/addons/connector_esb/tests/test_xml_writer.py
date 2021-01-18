@@ -125,7 +125,7 @@ class XMLTestCase(ESBXMLTestCase):
         today = fields.Date.today().replace("-", "")
         with self.backend.work_on(self.model._name, timestamp=self.timestamp) as work:
             writer = work.component_by_name("esb.xml.writer")
-            self.assertEqual(writer.filename(), "Products_{}.xml".format(today))
+            self.assertEqual(writer.filename(), u"Products_{}.xml".format(today))
 
     @tools.mute_logger("dicttoxml")
     def test_xml_base(self):

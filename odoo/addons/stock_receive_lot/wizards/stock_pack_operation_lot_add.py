@@ -54,14 +54,13 @@ class StockPackOperationLotAdd(models.TransientModel):
             if parent.parent_right < child.parent_right:
                 return False
             return True
-        else:
-            # parent_left/right could be deferred and it is disabled in init
-            # mode during unittesting
-            while child.location_id:
-                if child.location_id == parent:
-                    return True
-                child = child.location_id
-            return False
+        # parent_left/right could be deferred and it is disabled in init
+        # mode during unittesting
+        while child.location_id:
+            if child.location_id == parent:
+                return True
+            child = child.location_id
+        return False
 
     @api.onchange("operation_id")
     def _onchange_operation_id(self):
@@ -111,6 +110,7 @@ class StockPackOperationLotAdd(models.TransientModel):
                     ),
                 }
             }
+        return None
 
     @api.onchange("life_date_char")
     def _onchange_life_date_char(self):

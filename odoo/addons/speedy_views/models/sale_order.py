@@ -44,7 +44,7 @@ class SaleOrder(models.Model):
                 ]
             ).filtered(lambda r: r.type in ["out_invoice", "out_refund"])
             invoice_ids |= refunds.filtered(
-                lambda r: order.name
+                lambda r, so=order: so.name
                 in [origin.strip() for origin in r.origin.split(",")]
             )
             # Search for refunds as well

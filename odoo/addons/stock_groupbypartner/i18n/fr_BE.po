@@ -20,7 +20,7 @@ msgstr ""
 #: code:addons/stock_groupbypartner/models/stock_move.py:173
 #, python-format
 msgid "Backorder of %s"
-msgstr ""
+msgstr "Reliquat de %s"
 
 #. module: stock_groupbypartner
 #: model:ir.model.fields,field_description:stock_groupbypartner.field_procurement_group_customer_id

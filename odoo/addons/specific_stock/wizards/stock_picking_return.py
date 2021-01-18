@@ -28,8 +28,8 @@ class StockReturnPicking(models.TransientModel):
         return super(StockReturnPicking, self)._create_returns()
 
     @api.model
-    def default_get(self, fields):
-        result = super(StockReturnPicking, self).default_get(fields)
+    def default_get(self, _fields):
+        result = super(StockReturnPicking, self).default_get(_fields)
         if not result.get("product_return_moves"):
             return result
         # first get all the display_name values to have 1 sql query rather than

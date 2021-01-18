@@ -31,7 +31,7 @@ class Savepoint(object):
         self.start()
         return self
 
-    def __exit__(self, type_, value, traceback):
+    def __exit__(self, type_, value, _traceback):
         if type_:
             self.rollback()
         self.release()
@@ -65,7 +65,7 @@ class DomainInterface(object):
             # permissions.
             self.request._env = None
 
-        _logger.debug(u"User: {}".format(self._operator_user.name or "no user"))
+        _logger.debug(u"User: %s", (self._operator_user.name or "no user"))
 
     def __repr__(self):
         return u"{}({!r}, {!r}, {!r})".format(
@@ -135,7 +135,7 @@ class DomainInterface(object):
         )
 
 
-class Parameters:
+class Parameters(object):
     def __init__(self, domain, action="resp", values=None):
         """
         Init the parameter
@@ -146,7 +146,7 @@ class Parameters:
         labels = getattr(domain, action.upper())
 
         new_header = list(domain._header)
-        method = "{}_{}".format(action.upper(), domain.__class__.__name__.upper())
+        method = u"{}_{}".format(action.upper(), domain.__class__.__name__.upper())
         new_header[constants.METHOD_INDEX] = method
 
         self.__dict__.update(dict(zip(constants.HEADER_LABELS, new_header)))
@@ -181,9 +181,7 @@ class Parameters:
         default_values = self.get_example()
 
         values = []
-        for i in range(len(labels)):
-            key = labels[i]
-
+        for i, key in enumerate(labels):
             if not i:
                 values.append("----------- header -----------")
             if i == len(constants.HEADER_LABELS):
@@ -229,7 +227,7 @@ class Parameters:
         Return a list with all labels
         :return: None
         """
-        return [key for key in self.__dict__.keys() if not key.startswith("_")]
+        return [key for key in self.__dict__ if not key.startswith("_")]
 
     def format(self):
         """
@@ -240,6 +238,7 @@ class Parameters:
         ordered_values = []
         for label in constants.HEADER_LABELS + self._labels:
             value = getattr(self, label, "")
+            # pylint: disable=unidiomatic-typecheck
             if not value and type(value) is not int:
                 value = ""
             elif isinstance(value, (str, unicode)):
@@ -276,8 +275,8 @@ class Parameters:
 
         bad_values = set(current_labels) - set(labels)
         if bad_values:
-            message = _(
-                "Some attributes are not valid: {}".format(", ".join(list(bad_values)))
+            message = _("Some attributes are not valid: %s") % ", ".join(
+                list(bad_values)
             )
             _logger.error(message)
 
@@ -288,17 +287,14 @@ class Parameters:
             )
 
         empty_mandatory_values = []
-        for i in range(len(labels)):
+        for i, label in enumerate(labels):
             if default_values[i] and not ordered_values[i]:
-                empty_mandatory_values.append(labels[i])
+                empty_mandatory_values.append(label)
 
         if empty_mandatory_values:
             _logger.warning(
-                _(
-                    "There are some missing mandatory values: {}".format(
-                        ", ".join(empty_mandatory_values)
-                    )
-                )
+                _("There are some missing mandatory values: %s"),
+                ", ".join(empty_mandatory_values),
             )
 
     def log(

@@ -54,3 +54,4 @@ class ResPartner(models.Model):
                     "target": "new",
                 }
         self.active = not self.active
+        return None

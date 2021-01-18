@@ -109,6 +109,6 @@ class ESBBackendTimestamp(models.Model):
                 _(
                     "The synchronization timestamp (%s) is currently locked, "
                     "probably due to an ongoing synchronization."
-                    % (" ".join([self.model, self.kind]),)
                 )
+                % (" ".join([self.model, self.kind]),)
             )

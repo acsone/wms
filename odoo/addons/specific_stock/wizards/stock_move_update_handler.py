@@ -33,8 +33,7 @@ class StockMoveWizard(models.TransientModel):
                     self.move_id.write({"date_expected": self.new_date_expected})
                     picking.write({"min_date": self.new_date_expected})
                     return {"type": "ir.actions.act_window_close"}
-                else:
-                    need_close_action = True
+                need_close_action = True
             if appropriate_picking:
                 target_picking = appropriate_picking[0]
             else:

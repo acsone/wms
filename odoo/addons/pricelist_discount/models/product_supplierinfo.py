@@ -10,7 +10,7 @@ import odoo.addons.decimal_precision as dp
 
 class ProductSupplierinfo(models.Model):
     _inherit = "product.supplierinfo"
-    _order = "is_null_date_start, date_start DESC, " "min_qty DESC, min_qty_sale DESC"
+    _order = "is_null_date_start, date_start DESC, min_qty DESC, min_qty_sale DESC"
 
     is_null_date_start = fields.Boolean(
         "The date start is null",
@@ -66,7 +66,7 @@ class ProductSupplierinfo(models.Model):
         is null and I order on this field.
         """
         for promo in self:
-            promo.is_null_date_start = not promo.date_start and True or False
+            promo.is_null_date_start = bool(not promo.date_start)
 
     @api.constrains("date_start", "date_end", "name", "min_qty", "min_qty_sale")
     def check_dates(self):

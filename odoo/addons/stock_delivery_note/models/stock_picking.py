@@ -37,14 +37,14 @@ class StockPicking(models.Model):
         """Return the delivery note filename."""
         self.ensure_one()
         if not self.date_done:
-            return
+            return None
         sale_orders = self.move_lines.mapped("order_id")
 
         return (
             "_".join(
                 [
                     "NE",
-                    sale_orders[0].partner_id.ref or "" if len(sale_orders) else "",
+                    sale_orders[0].partner_id.ref or "" if len(sale_orders) > 0 else "",
                     str(self.id),
                     "".join(self.date_done[:10].split("-")),
                     "".join(self.date_done[-8:].split(":")),
@@ -60,7 +60,7 @@ class StockPicking(models.Model):
         filename = self._get_delivery_note_filename(extension=".csv")
         if not filename:
             # Stock picking probably not done
-            return
+            return None
         file_data = BytesIO()
         w = csv.writer(file_data, delimiter=";", encoding="iso-8859-1")
         for line in self._generate_delivery_note():
@@ -72,7 +72,7 @@ class StockPicking(models.Model):
             )
         data = file_data.getvalue()
         csv_delivery_note = self.env["ir.attachment"].search([("name", "=", filename)])
-        if len(csv_delivery_note):
+        if len(csv_delivery_note) > 0:
             csv_delivery_note[0].datas = data.encode("base_64")
         else:
             csv_delivery_note = self.env["ir.attachment"].create(
@@ -96,7 +96,7 @@ class StockPicking(models.Model):
         filename = self._get_delivery_note_filename(extension=".pdf")
         if not filename:
             # Stock picking probably not done
-            return
+            return None
 
         shippings = self.filtered(lambda p: p.picking_type_code == "outgoing")
         shipping_done = shippings.filtered(lambda shipping: shipping.state == "done")
@@ -105,7 +105,7 @@ class StockPicking(models.Model):
         )
 
         pdf_delivery_note = self.env["ir.attachment"].search([("name", "=", filename)])
-        if len(pdf_delivery_note):
+        if len(pdf_delivery_note) > 0:
             pdf_delivery_note[0].datas = report.encode("base_64")
         else:
             pdf_delivery_note = self.env["ir.attachment"].create(

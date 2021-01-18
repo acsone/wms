@@ -19,7 +19,7 @@ class XmlDeclaration(models.TransientModel):
     def _build_intrastat_line(
         self, numlgn, item, linekey, amounts, dispatchmode, extendedmode
     ):
-        super(XmlDeclaration, self)._build_intrastat_line(
+        res = super(XmlDeclaration, self)._build_intrastat_line(
             numlgn, item, linekey, amounts, dispatchmode, extendedmode
         )
         if dispatchmode:
@@ -34,6 +34,7 @@ class XmlDeclaration(models.TransientModel):
             weight = 0.01
         self._update_Dim(item, "EXWEIGHT", unicode(round(weight, 2)))
         self._update_Dim(item, "EXUNITS", unicode(round(amounts[2], 2)))
+        return res
 
     @api.multi
     def _get_lines(self, dispatchmode=False, extendedmode=False):
