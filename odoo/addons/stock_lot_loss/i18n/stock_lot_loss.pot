@@ -75,7 +75,7 @@ msgstr ""
 
 #. module: stock_lot_loss
 #: code:addons/stock_lot_loss/models/stock_pack_operation.py:53
-#: code:addons/stock_lot_loss/models/stock_pack_operation.py:94
+#: code:addons/stock_lot_loss/models/stock_pack_operation.py:93
 #, python-format
 msgid "No qty to block."
 msgstr ""
@@ -112,7 +112,7 @@ msgid "Ruptures"
 msgstr ""
 
 #. module: stock_lot_loss
-#: code:addons/stock_lot_loss/models/stock_pack_operation.py:159
+#: code:addons/stock_lot_loss/models/stock_pack_operation.py:157
 #, python-format
 msgid "Select Lot/Serial Number to skip"
 msgstr ""
