@@ -22,7 +22,7 @@ msgid "&amp;bull;"
 msgstr "&amp;bull;"
 
 #. module: specific_sale
-#: code:addons/specific_sale/models/sale.py:244
+#: code:addons/specific_sale/models/sale.py:245
 #, python-format
 msgid "A narcotic voucher is required for the data entry."
 msgstr "Bon de stupéfiant nécessaire avant l'encodage"
@@ -289,7 +289,7 @@ msgid "Narcotic Veterinary Medicine Not Allowed"
 msgstr "Médicament stupéfiant interdit"
 
 #. module: specific_sale
-#: code:addons/specific_sale/models/sale.py:243
+#: code:addons/specific_sale/models/sale.py:244
 #, python-format
 msgid "Narcotic voucher"
 msgstr "Bon de stupéfiant"
@@ -674,7 +674,7 @@ msgid "Will include free product"
 msgstr "Inclus des produits gratuits"
 
 #. module: specific_sale
-#: code:addons/specific_sale/models/sale.py:139
+#: code:addons/specific_sale/models/sale.py:140
 #, python-format
 msgid "You cannot cancel sale order %s, it's already prepared"
 msgstr "Vous ne pouvez pas annuler la commande %s, elle est déjà préparée"
