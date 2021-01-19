@@ -39,11 +39,6 @@ msgid "Fail message"
 msgstr ""
 
 #. module: stock_inventory_controller
-#: model:ir.ui.view,arch_db:stock_inventory_controller.view_inventory_form
-msgid "Failed Inventory Details"
-msgstr ""
-
-#. module: stock_inventory_controller
 #: model:ir.model.fields,field_description:stock_inventory_controller.field_stock_inventory_failed_line_ids
 msgid "Failed inventories"
 msgstr ""
