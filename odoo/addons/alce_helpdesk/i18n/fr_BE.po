@@ -456,11 +456,6 @@ msgid "Reason allows to organize tickets."
 msgstr "La cause permet d'organiser les tickets"
 
 #. module: alce_helpdesk
-#: model:ir.ui.view,arch_db:alce_helpdesk.helpdesk_ticket_reason_view_tree
-msgid "Reasons"
-msgstr "Causes"
-
-#. module: alce_helpdesk
 #: code:addons/alce_helpdesk/wizards/stock_pack_operation_lot_add.py:60
 #, python-format
 msgid ""
@@ -556,3 +551,6 @@ msgstr "create.helpdesk.ticket"
 #: model:ir.model,name:alce_helpdesk.model_stock_pack_operation_lot_add
 msgid "stock.pack.operation.lot.add"
 msgstr "stock.pack.operation.lot.add"
+
+#~ msgid "Reasons"
+#~ msgstr "Causes"

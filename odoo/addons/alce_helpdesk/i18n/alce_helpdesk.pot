@@ -336,11 +336,6 @@ msgid "Reason allows to organize tickets."
 msgstr ""
 
 #. module: alce_helpdesk
-#: model:ir.ui.view,arch_db:alce_helpdesk.helpdesk_ticket_reason_view_tree
-msgid "Reasons"
-msgstr ""
-
-#. module: alce_helpdesk
 #: code:addons/alce_helpdesk/wizards/stock_pack_operation_lot_add.py:60
 #, python-format
 msgid "Received more than expected qties for product '%s'. (Expected: %d, Received %d)"
