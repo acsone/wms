@@ -283,7 +283,6 @@ msgstr ""
 #: model:ir.ui.menu,name:delivery_rounds.menu_delivery_round
 #: model:ir.ui.menu,name:delivery_rounds.menu_round_instance
 #: model:ir.ui.view,arch_db:delivery_rounds.view_round_instance_search
-#: model:ir.ui.view,arch_db:delivery_rounds.view_round_instance_tree
 #: model:ir.ui.view,arch_db:delivery_rounds.view_round_template_search
 msgid "Delivery Rounds"
 msgstr ""
@@ -446,7 +445,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:delivery_rounds.field_stock_picking_partner_itinerary_ids
 #: model:ir.ui.menu,name:delivery_rounds.menu_round_itinerary
 #: model:ir.ui.view,arch_db:delivery_rounds.view_round_itinerary_form
-#: model:ir.ui.view,arch_db:delivery_rounds.view_round_itinerary_tree
 #: model:ir.ui.view,arch_db:delivery_rounds.view_round_template_form
 msgid "Itineraries"
 msgstr ""
@@ -634,7 +632,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_itinerary_partner_ids
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_itinerary_partner_position_ids
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_template_partner_ids
-#: model:ir.ui.view,arch_db:delivery_rounds.view_round_itinerary_form
 msgid "Partners"
 msgstr ""
 
@@ -672,11 +669,6 @@ msgstr ""
 #. module: delivery_rounds
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_instance_picking_count
 msgid "Picking count"
-msgstr ""
-
-#. module: delivery_rounds
-#: model:ir.ui.view,arch_db:delivery_rounds.view_vpicktree_ro
-msgid "Picking list"
 msgstr ""
 
 #. module: delivery_rounds
@@ -880,7 +872,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_template_version_template_ids
 #: model:ir.ui.menu,name:delivery_rounds.menu_round_template
 #: model:ir.ui.view,arch_db:delivery_rounds.view_round_template_form
-#: model:ir.ui.view,arch_db:delivery_rounds.view_round_template_tree
 #: model:ir.ui.view,arch_db:delivery_rounds.view_round_template_version_form
 msgid "Templates"
 msgstr ""
@@ -965,7 +956,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_template_version_ids
 #: model:ir.ui.menu,name:delivery_rounds.menu_round_template_version
 #: model:ir.ui.view,arch_db:delivery_rounds.view_round_template_version_form
-#: model:ir.ui.view,arch_db:delivery_rounds.view_round_template_version_tree
 msgid "Versions"
 msgstr ""
 
