@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 import logging
 
-from domain_interface import DomainInterface, Parameters
-
 from .. import constants
+from .domain_interface import DomainInterface, Parameters
 
 _logger = logging.getLogger(__name__)
 

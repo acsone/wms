@@ -210,7 +210,7 @@
     <field name="name">round.instance.tree</field>
     <field name="model">round.instance</field>
     <field name="arch" type="xml">
-      <tree string="Delivery Rounds">
+      <tree>
         <field name="date" />
         <field name="time_picking_planned" widget="float_time" />
         <field name="time_leave_planned" widget="float_time" />

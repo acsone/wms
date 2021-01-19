@@ -59,7 +59,10 @@ disable=
   line-too-long,
   manifest-required-author,
   broad-except,
-  useless-object-inheritance
+  useless-object-inheritance,
+  translation-positional-used,
+  missing-import-error,
+  rst-syntax-error
 
 extension-pkg-whitelist=lxml
 

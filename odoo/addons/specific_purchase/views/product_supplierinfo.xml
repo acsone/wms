@@ -4,7 +4,7 @@
     <field name="name">product.supplierinfo.view.form</field>
     <field name="model">product.supplierinfo</field>
     <field name="inherit_id" ref="product.product_supplierinfo_form_view" />
-    <field name="priority">40</field>
+    <field name="priority">99</field>
     <field name="arch" type="xml">
       <xpath expr="//label[@for='date_start']" position="replace" />
       <xpath expr="//div[field[@name='date_start']]" position="replace" />

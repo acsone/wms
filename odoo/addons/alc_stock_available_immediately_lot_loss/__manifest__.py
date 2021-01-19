@@ -11,6 +11,6 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": ["alc_stock_available_immediately", "stock_lot_loss"],
-    "data": [],
+    "data": ["data/stock_location.xml"],
     "demo": [],
 }

@@ -27,11 +27,6 @@ msgstr "<strong>Poids total:</strong>"
 
 #. module: purchase
 #: model:ir.ui.view,arch_db:purchase.report_purchaseorder_document
-msgid "<strong>Total Weight:</strong>"
-msgstr "<strong>Poids total:</strong>"
-
-#. module: purchase
-#: model:ir.ui.view,arch_db:purchase.report_purchaseorder_document
 msgid "<strong>%<br/>Discount<br/>global</strong>"
 msgstr "<strong>%<br/>Remise<br/>globale</strong>"
 

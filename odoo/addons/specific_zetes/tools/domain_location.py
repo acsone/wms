@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
 import re
 
-from domain_interface import DomainInterface, Parameters
-
 from odoo import _
 
 from .. import constants
+from .domain_interface import DomainInterface, Parameters
 
 
 class Location(DomainInterface):

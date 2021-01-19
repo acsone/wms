@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<openerp>
-  <data noupdate="1">
-    <template id="stock_pick_packs_label_zebra_v1">
-      <div class="raw">
-        <t t-foreach="docs" t-as="pick">
-          <t
-            t-set="packages"
-            t-value="pick.mapped('pack_operation_ids.result_package_id')"
-          />
-          <t t-foreach="packages" t-as="package">
-            <t t-foreach="xrange(package.nbr_packages)" t-as="index">
+<odoo noupdate="1">
+  <template id="stock_pick_packs_label_zebra_v1">
+    <div class="raw">
+      <t t-foreach="docs" t-as="pick">
+        <t
+          t-set="packages"
+          t-value="pick.mapped('pack_operation_ids.result_package_id')"
+        />
+        <t t-foreach="packages" t-as="package">
+          <t t-foreach="xrange(package.nbr_packages)" t-as="index">
 ^XA
 
 ^FO30,250^BQN,2,6^FDQA,<t t-esc="res_company.convert_to_ascii(package.name)" />^FS\r
@@ -24,34 +23,33 @@
 ^FO570,50,1^A0N60,60^FD<t t-esc="index + 1" /> / <t t-esc="package.nbr_packages" />^FS\r
 
 ^FO570,120,1^A0N30,30^FD<t
-                t-esc="res_company.convert_to_ascii(pick.partner_id.display_name and pick.partner_id.display_name[:29] or u'')"
-              />^FS\r
+              t-esc="res_company.convert_to_ascii(pick.partner_id.display_name and pick.partner_id.display_name[:29] or u'')"
+            />^FS\r
 ^FO570,150,1^A0N30,30^FD<t
-                t-esc="res_company.convert_to_ascii(pick.partner_id.display_name and pick.partner_id.display_name[29:50] or u'')"
-              />^FS\r
+              t-esc="res_company.convert_to_ascii(pick.partner_id.display_name and pick.partner_id.display_name[29:50] or u'')"
+            />^FS\r
 ^FO570,185,1^A0N35,30^FD<t t-esc="pick.partner_id.zip" /> <t
-                t-esc="res_company.convert_to_ascii(pick.partner_id.city)"
-              />^FS\r
+              t-esc="res_company.convert_to_ascii(pick.partner_id.city)"
+            />^FS\r
 ^FO570,230,1^A0N30,30^FD<t
-                t-esc="('customer_id' in pick) and (pick.partner_id != pick.customer_id) and res_company.convert_to_ascii(pick.customer_id.name and pick.customer_id.name[:29] or u'') or ''"
-              />^FS\r
+              t-esc="('customer_id' in pick) and (pick.partner_id != pick.customer_id) and res_company.convert_to_ascii(pick.customer_id.name and pick.customer_id.name[:29] or u'') or ''"
+            />^FS\r
 
 ^FO570,280,1^A0N30,25^FD<t t-esc="time.strftime('%d/%m/%Y')" />^FS\r
 ^FO570,310,1^A0N20,25^FD<t t-esc="pick.name" />^FS\r
 ^FO570,350,1^A0N45,45^FD<t t-esc="pick.checksum" />^FS\r
 ^XZ
 </t>
-          </t>
         </t>
-      </div>
-    </template>
-    <report
-      id="report_stock_pick_packs_label"
-      string="Alcyon Pack Label"
-      model="stock.picking"
-      report_type="qweb-pdf"
-      file="specific_print.stock_pick_packs_label_zebra_v1"
-      name="specific_print.stock_pick_packs_label_zebra_v1"
-    />
-  </data>
-</openerp>
+      </t>
+    </div>
+  </template>
+  <report
+    id="report_stock_pick_packs_label"
+    string="Alcyon Pack Label"
+    model="stock.picking"
+    report_type="qweb-pdf"
+    file="specific_print.stock_pick_packs_label_zebra_v1"
+    name="specific_print.stock_pick_packs_label_zebra_v1"
+  />
+</odoo>

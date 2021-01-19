@@ -17,7 +17,7 @@
     <field name="name">stock.grn.tree</field>
     <field name="model">stock.grn</field>
     <field name="arch" type="xml">
-      <tree string="GRN">
+      <tree>
         <field name="name" />
         <field name="date" />
         <field name="carrier_id" />

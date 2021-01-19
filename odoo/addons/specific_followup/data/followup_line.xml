@@ -1,24 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<odoo>
-  <data noupdate="1">
-    <!--By default Odoo create followup data. However all data have the no update flag-->
-    <!--It's why I want to delete existing followup data and create a specific data for Alcyon-->
-    <delete
-      model="account_followup.followup"
-      search="[('id', '=', ref('account_reports_followup.demo_followup1', False))]"
-    />
-    <record id="alcyon_followup" model="account_followup.followup">
-      <field name="company_id" ref="base.main_company" />
-    </record>
-    <record id="alcyon_followup_line1" model="account_followup.followup.line">
-      <field name="name">First reminder email</field>
-      <field name="sequence">0</field>
-      <field name="delay">15</field>
-      <field name="followup_id" ref="alcyon_followup" />
-      <field name="send_email">True</field>
-      <field
-        name="description"
-      ><![CDATA[
+<odoo noupdate="1">
+  <!--By default Odoo create followup data. However all data have the no update flag-->
+  <!--It's why I want to delete existing followup data and create a specific data for Alcyon-->
+  <delete
+    model="account_followup.followup"
+    search="[('id', '=', ref('account_reports_followup.demo_followup1', False))]"
+  />
+  <record id="alcyon_followup" model="account_followup.followup">
+    <field name="company_id" ref="base.main_company" />
+  </record>
+  <record id="alcyon_followup_line1" model="account_followup.followup.line">
+    <field name="name">First reminder email</field>
+    <field name="sequence">0</field>
+    <field name="delay">15</field>
+    <field name="followup_id" ref="alcyon_followup" />
+    <field name="send_email">True</field>
+    <field
+      name="description"
+    ><![CDATA[
 Cher(e) Docteur,
 Madame, Monsieur,
 
@@ -37,17 +36,17 @@ JF MARECHAL
 Jf.marechal@alcyonbelux.be
 04/338 84 34
   ]]></field>
-    </record>
-    <record id="alcyon_followup_line2" model="account_followup.followup.line">
-      <field name="name">Second reminder letter and email</field>
-      <field name="sequence">1</field>
-      <field name="delay">30</field>
-      <field name="followup_id" ref="alcyon_followup" />
-      <field name="send_email">True</field>
-      <field name="send_letter">True</field>
-      <field
-        name="description"
-      ><![CDATA[
+  </record>
+  <record id="alcyon_followup_line2" model="account_followup.followup.line">
+    <field name="name">Second reminder letter and email</field>
+    <field name="sequence">1</field>
+    <field name="delay">30</field>
+    <field name="followup_id" ref="alcyon_followup" />
+    <field name="send_email">True</field>
+    <field name="send_letter">True</field>
+    <field
+      name="description"
+    ><![CDATA[
 Cher(e) Docteur,
 Madame, Monsieur,
 
@@ -66,18 +65,18 @@ JF MARECHAL
 Jf.marechal@alcyonbelux.be
 04/338 84 34
   ]]></field>
-    </record>
-    <record id="alcyon_followup_line3" model="account_followup.followup.line">
-      <field name="name">Third reminder: phone the customer</field>
-      <field name="sequence">3</field>
-      <field name="delay">40</field>
-      <field name="followup_id" ref="alcyon_followup" />
-      <field eval="False" name="send_email" />
-      <field name="manual_action">True</field>
-      <field name="manual_action_note">Call the customer on the phone! </field>
-      <field
-        name="description"
-      ><![CDATA[
+  </record>
+  <record id="alcyon_followup_line3" model="account_followup.followup.line">
+    <field name="name">Third reminder: phone the customer</field>
+    <field name="sequence">3</field>
+    <field name="delay">40</field>
+    <field name="followup_id" ref="alcyon_followup" />
+    <field eval="False" name="send_email" />
+    <field name="manual_action">True</field>
+    <field name="manual_action_note">Call the customer on the phone! </field>
+    <field
+      name="description"
+    ><![CDATA[
 Cher(e) Docteur,
 Madame, Monsieur,
 
@@ -96,6 +95,5 @@ JF MARECHAL
 Jf.marechal@alcyonbelux.be
 04/338 84 34
   ]]></field>
-    </record>
-  </data>
+  </record>
 </odoo>

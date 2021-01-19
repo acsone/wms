@@ -1,21 +1,15 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-  <data>
-    <template
-      id="assets_backend"
-      name="inputmask_widget"
-      inherit_id="web.assets_backend"
-    >
-      <xpath expr="." position="inside">
-        <script
-          type="text/javascript"
-          src="/web_widget_inputmask/static/lib/Inputmask4/jquery.inputmask.bundle.js"
-        />
-        <script
-          type="text/javascript"
-          src="/web_widget_inputmask/static/src/js/widgets.js"
-        />
-      </xpath>
-    </template>
-  </data>
+  <template id="assets_backend" name="inputmask_widget" inherit_id="web.assets_backend">
+    <xpath expr="." position="inside">
+      <script
+        type="text/javascript"
+        src="/web_widget_inputmask/static/lib/Inputmask4/jquery.inputmask.bundle.js"
+      />
+      <script
+        type="text/javascript"
+        src="/web_widget_inputmask/static/src/js/widgets.js"
+      />
+    </xpath>
+  </template>
 </odoo>

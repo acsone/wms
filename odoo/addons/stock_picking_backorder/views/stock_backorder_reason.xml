@@ -19,7 +19,7 @@
     <field name="name">stock.backorder.reason.tree</field>
     <field name="model">stock.backorder.reason</field>
     <field name="arch" type="xml">
-      <tree string="Stock backorder reasons">
+      <tree>
         <field name="name" />
         <field name="backorder_action_to_do" />
         <field name="keep_grn" />

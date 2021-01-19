@@ -4,6 +4,7 @@
     <field name="name">hide tax</field>
     <field name="model">account.cutoff.line</field>
     <field name="inherit_id" ref="account_cutoff_base.account_cutoff_line_tree" />
+    <field name="priority">99</field>
     <field name="arch" type="xml">
       <!-- odoo client spawn 1 request per line every 1/2 seconds -->
       <field name="tax_ids" position="replace" />

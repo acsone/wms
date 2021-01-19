@@ -1,58 +1,56 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<openerp>
-  <data noupdate="1">
-    <template id="stock_product_label_toshiba_v1">
-      <div class="raw">
-        <t t-foreach="docs" t-as="pack">
-          <t t-foreach="pack.get_qty_by_lot()" t-as="line">
-            <t t-set="qty" t-value="line[0]" />
-            <t t-set="lot" t-value="line[1]" />
-            <t t-set="customer" t-value="pack.get_so_partner()" />
-            <t t-if="qty">{U2;0120|}\r
+<odoo noupdate="1">
+  <template id="stock_product_label_toshiba_v1">
+    <div class="raw">
+      <t t-foreach="docs" t-as="pack">
+        <t t-foreach="pack.get_qty_by_lot()" t-as="line">
+          <t t-set="qty" t-value="line[0]" />
+          <t t-set="lot" t-value="line[1]" />
+          <t t-set="customer" t-value="pack.get_so_partner()" />
+          <t t-if="qty">{U2;0120|}\r
 {D0275,0560,0250|}\r
 {C|}\r
 {PC001;0400,0040,05,05,J,00,B|}\r
 {RC001;ALCYON sa |}\r
 {PC004;0010,0040,05,05,J,00,B|}\r
 {RC004;<t
-                t-esc="res_company.convert_to_ascii(pack.picking_id.partner_id.display_name)[:30]"
-              />|}\r
+              t-esc="res_company.convert_to_ascii(pack.picking_id.partner_id.display_name)[:30]"
+            />|}\r
 {PC009;0010,0070,05,05,J,00,B|}\r
 {RC009;<t t-esc="res_company.convert_to_ascii(customer.vet_depot_number or u'')" />|}\r
 {PC005;0010,0100,05,05,J,00,B|}\r
 {RC005;<t t-if="customer.vet_subscription_number">Doc.n : 1/<t
-                  t-esc="res_company.convert_to_ascii(customer.vet_subscription_number or u'')"
-                />/</t>|}\r
+                t-esc="res_company.convert_to_ascii(customer.vet_subscription_number or u'')"
+              />/</t>|}\r
 {PC002;0010,0130,05,05,J,00,B|}\r
 {RC002;<t t-esc="res_company.convert_to_ascii(pack.product_id.name or u'')" />|}\r<t
-                t-if="pack.picking_id.partner_id.is_price_on_labels"
-              >{PC007;0350,0070,05,05,J,00,B|}\r{RC007;PVI : <t
-                  t-esc="pack.product_id.indicated_price"
-                />|}\r</t>{XB01;0030,0150,9,1,02,0,0080|}\r{RB01;S<t
-                t-esc="pack.product_id and pack.product_id.default_code[:7].ljust(7) or ''"
-              /><t t-esc="lot and lot.name[:13].ljust(13) or ''" /><t
-                t-esc="lot and lot.life_date and time.strftime('%d%m%y', time.strptime(lot.life_date,'%Y-%m-%d %H:%M:%S')) or ''"
-              />|}\r
+              t-if="pack.picking_id.partner_id.is_price_on_labels"
+            >{PC007;0350,0070,05,05,J,00,B|}\r{RC007;PVI : <t
+                t-esc="pack.product_id.indicated_price"
+              />|}\r</t>{XB01;0030,0150,9,1,02,0,0080|}\r{RB01;S<t
+              t-esc="pack.product_id and pack.product_id.default_code[:7].ljust(7) or ''"
+            /><t t-esc="lot and lot.name[:13].ljust(13) or ''" /><t
+              t-esc="lot and lot.life_date and time.strftime('%d%m%y', time.strptime(lot.life_date,'%Y-%m-%d %H:%M:%S')) or ''"
+            />|}\r
 {PC003;0030,0250,05,05,J,00,B|}\r
 {RC003;S-<t t-esc="pack.product_id.default_code[:7].ljust(7)" />-<t
-                t-esc="lot and lot.name[:13].ljust(13) or ''"
-              />-<t
-                t-esc="lot and lot.life_date and time.strftime('%d/%m/%y', time.strptime(lot.life_date,'%Y-%m-%d %H:%M:%S')) or ''"
-              />|}\r
+              t-esc="lot and lot.name[:13].ljust(13) or ''"
+            />-<t
+              t-esc="lot and lot.life_date and time.strftime('%d/%m/%y', time.strptime(lot.life_date,'%Y-%m-%d %H:%M:%S')) or ''"
+            />|}\r
 {XS;I,<t t-esc="'%04d'%qty" />,0002C3200|}\r
 {U1;0120|}\r
 </t>
-          </t>
         </t>
-      </div>
-    </template>
-    <report
-      id="report_stock_product_label"
-      string="Alcyon Product Label"
-      model="stock.pack.operation"
-      report_type="qweb-pdf"
-      file="specific_print.stock_product_label_toshiba_v1"
-      name="specific_print.stock_product_label_toshiba_v1"
-    />
-  </data>
-</openerp>
+      </t>
+    </div>
+  </template>
+  <report
+    id="report_stock_product_label"
+    string="Alcyon Product Label"
+    model="stock.pack.operation"
+    report_type="qweb-pdf"
+    file="specific_print.stock_product_label_toshiba_v1"
+    name="specific_print.stock_product_label_toshiba_v1"
+  />
+</odoo>

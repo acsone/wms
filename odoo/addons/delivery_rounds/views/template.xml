@@ -18,7 +18,7 @@
     <field name="name">round.template.tree</field>
     <field name="model">round.template</field>
     <field name="arch" type="xml">
-      <tree string="Templates">
+      <tree>
         <field name="time_picking_planned" widget="float_time" />
         <field name="time_leave_planned" widget="float_time" />
         <field name="code" />

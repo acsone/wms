@@ -58,7 +58,7 @@
     <field name="name">esb.backend.tree</field>
     <field name="model">esb.backend</field>
     <field name="arch" type="xml">
-      <tree string="ESB Backend" create="0" delete="0">
+      <tree create="0" delete="0">
         <field name="name" />
         <field name="sftp_host" />
       </tree>

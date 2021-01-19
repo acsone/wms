@@ -89,11 +89,6 @@
           string="Domain"
           filter_domain="[('domain','ilike',self)]"
         />
-        <field
-          name="command"
-          string="Complete command"
-          filter_domain="[('command','ilike',self)]"
-        />
         <field name="picking_id" />
         <field name="operation_id" />
         <field name="user_id" />

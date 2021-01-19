@@ -27,5 +27,5 @@
     "installable": True,
     "auto_install": False,
     "application": False,
-    "external_dependencies": {"python": ["unicodecsv"]},
+    "external_dependencies": {"python": ["unicodecsv", "unidecode"]},
 }

@@ -2,7 +2,7 @@
 <!-- Copyright 2020 ACSONE SA/NV
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
-  <record model="ir.ui.view" id="alc_geo_delivery_rounds.partner_view_form">
+  <record model="ir.ui.view" id="partner_view_form">
     <field name="name">res.partner.form (in alc_geo_delivery_rounds)</field>
     <field name="model">res.partner</field>
     <field name="inherit_id" ref="delivery_rounds.view_partner_form" />

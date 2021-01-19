@@ -4,7 +4,7 @@
     <field name="name">reception.pharmacy</field>
     <field name="model">reception.pharmacy</field>
     <field name="arch" type="xml">
-      <tree string="Pharmacy Receptions">
+      <tree>
         <field name="create_uid" />
         <field name="date" />
         <field name="state" />
