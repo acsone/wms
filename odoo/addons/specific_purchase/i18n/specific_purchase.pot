@@ -286,7 +286,6 @@ msgstr ""
 #: model:ir.actions.act_window,name:specific_purchase.product_state_action_form
 #: model:ir.ui.menu,name:specific_purchase.menu_product_state_config
 #: model:ir.ui.view,arch_db:specific_purchase.view_product_state_form_view
-#: model:ir.ui.view,arch_db:specific_purchase.view_product_state_tree_view
 msgid "Product state"
 msgstr ""
 
