@@ -116,7 +116,6 @@ msgstr ""
 #. module: connector_esb
 #: model:ir.model,name:connector_esb.model_esb_backend
 #: model:ir.ui.view,arch_db:connector_esb.view_esb_backend_form
-#: model:ir.ui.view,arch_db:connector_esb.view_esb_backend_tree
 msgid "ESB Backend"
 msgstr ""
 
