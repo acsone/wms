@@ -38,7 +38,6 @@ msgstr ""
 #. module: account_invoice_sent
 #: model:ir.actions.act_window,name:account_invoice_sent.action_account_invoice_print_form
 #: model:ir.ui.view,arch_db:account_invoice_sent.view_account_invoice_print_form
-#: model:ir.ui.view,arch_db:account_invoice_sent.view_account_invoice_print_tree
 msgid "Account Invoice Print"
 msgstr ""
 
