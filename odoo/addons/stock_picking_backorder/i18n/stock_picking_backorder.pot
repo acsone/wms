@@ -180,7 +180,6 @@ msgstr ""
 #. module: stock_picking_backorder
 #: model:ir.actions.act_window,name:stock_picking_backorder.action_stock_backorder_reason
 #: model:ir.ui.menu,name:stock_picking_backorder.menu_stock_backorder_reason
-#: model:ir.ui.view,arch_db:stock_picking_backorder.stock_backorder_reason_tree_view
 msgid "Stock backorder reasons"
 msgstr ""
 
