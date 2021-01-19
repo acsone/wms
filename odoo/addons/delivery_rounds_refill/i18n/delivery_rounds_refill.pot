@@ -42,7 +42,6 @@ msgstr ""
 #. module: delivery_rounds_refill
 #: model:ir.actions.act_window,name:delivery_rounds_refill.action_report_stock_refill_arrange
 #: model:ir.ui.menu,name:delivery_rounds_refill.menu_report_stock_refill_arrange
-#: model:ir.ui.view,arch_db:delivery_rounds_refill.view_report_stock_refill_arrange_tree
 msgid "Arrangement"
 msgstr ""
 
@@ -278,7 +277,6 @@ msgstr ""
 #. module: delivery_rounds_refill
 #: model:ir.actions.act_window,name:delivery_rounds_refill.action_report_stock_refill_reassort
 #: model:ir.ui.menu,name:delivery_rounds_refill.menu_report_stock_refill_reassort
-#: model:ir.ui.view,arch_db:delivery_rounds_refill.view_report_stock_refill_reassort_tree
 msgid "Reassortment"
 msgstr ""
 
