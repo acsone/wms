@@ -65,7 +65,6 @@ msgstr ""
 #. module: stock_grn
 #: model:ir.ui.view,arch_db:stock_grn.view_grn_form
 #: model:ir.ui.view,arch_db:stock_grn.view_grn_search
-#: model:ir.ui.view,arch_db:stock_grn.view_grn_tree
 #: model:ir.ui.view,arch_db:stock_grn.view_picking_withgrn_tree
 msgid "GRN"
 msgstr ""
