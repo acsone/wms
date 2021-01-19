@@ -98,11 +98,6 @@ msgid "Stock quant expired"
 msgstr ""
 
 #. module: stock_expired
-#: model:ir.ui.view,arch_db:stock_expired.view_stock_quant_expired_tree
-msgid "Stock quants"
-msgstr ""
-
-#. module: stock_expired
 #: model:ir.model.fields,help:stock_expired.field_stock_quant_alert_date
 msgid "This is the date on which an alert should be notified about the goods with this Serial Number."
 msgstr ""
