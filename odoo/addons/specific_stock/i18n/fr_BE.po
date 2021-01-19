@@ -469,11 +469,6 @@ msgid "Pharmacy Reception"
 msgstr "Réception Pharmacie"
 
 #. module: specific_stock
-#: model:ir.ui.view,arch_db:specific_stock.reception_pharmacy_view_tree
-msgid "Pharmacy Receptions"
-msgstr "Réceptions Pharmacie"
-
-#. module: specific_stock
 #: model:ir.model,name:specific_stock.model_stock_quant_package
 msgid "Physical Packages"
 msgstr "Colis physiques"
@@ -890,6 +885,9 @@ msgstr "stock.scrap"
 #: model:ir.ui.view,arch_db:specific_stock.view_picking_form
 msgid "↳Put in Pack"
 msgstr "↳Ajouter au colis"
+
+#~ msgid "Pharmacy Receptions"
+#~ msgstr "Réceptions Pharmacie"
 
 #~ msgid "Exclude from immediately usable quantity"
 #~ msgstr "Exclure de la quantité immédiatement utilisable"

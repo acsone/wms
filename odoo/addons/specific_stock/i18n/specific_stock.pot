@@ -457,11 +457,6 @@ msgid "Pharmacy Reception"
 msgstr ""
 
 #. module: specific_stock
-#: model:ir.ui.view,arch_db:specific_stock.reception_pharmacy_view_tree
-msgid "Pharmacy Receptions"
-msgstr ""
-
-#. module: specific_stock
 #: model:ir.model,name:specific_stock.model_stock_quant_package
 msgid "Physical Packages"
 msgstr ""
