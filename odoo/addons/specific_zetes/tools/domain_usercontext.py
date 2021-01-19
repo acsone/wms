@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
-from domain_interface import DomainInterface, Parameters
-
 from odoo import _
 
 from .. import constants
+from .domain_interface import DomainInterface, Parameters
 
 
 class Usercontext(DomainInterface):

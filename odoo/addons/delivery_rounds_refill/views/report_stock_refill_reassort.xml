@@ -19,7 +19,7 @@
     <field name="name">report.stock.refill.reassort.tree</field>
     <field name="model">report.stock.refill.reassort</field>
     <field name="arch" type="xml">
-      <tree string="Reassortment" create="0" delete="0">
+      <tree create="0" delete="0">
         <field name="refill_priority_reassort" />
         <field name="product_id" />
         <field name="qty" />

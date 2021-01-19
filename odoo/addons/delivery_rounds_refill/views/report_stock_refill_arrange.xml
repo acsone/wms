@@ -19,7 +19,7 @@
     <field name="name">report.stock.refill.arrange.tree</field>
     <field name="model">report.stock.refill.arrange</field>
     <field name="arch" type="xml">
-      <tree string="Arrangement" create="0" delete="0">
+      <tree create="0" delete="0">
         <field name="refill_priority_arrange" />
         <field name="product_id" />
         <field name="qty" />

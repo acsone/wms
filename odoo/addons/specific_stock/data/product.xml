@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<odoo>
-  <data noupdate="1">
-    <record id="product_colis_souverain" model="product.product">
-      <field name="name">Colis Souverain</field>
-      <field name="type">product</field>
-      <field name="tracking">lot</field>
-      <field name="purchase_ok">0</field>
-      <field name="sale_ok">0</field>
-      <field name="categ_id" ref="specific_data.product_categ_humain" />
-    </record>
-  </data>
+<odoo noupdate="1">
+  <record id="product_colis_souverain" model="product.product">
+    <field name="name">Colis Souverain</field>
+    <field name="type">product</field>
+    <field name="tracking">lot</field>
+    <field name="purchase_ok">0</field>
+    <field name="sale_ok">0</field>
+    <field name="categ_id" ref="specific_data.product_categ_humain" />
+  </record>
 </odoo>

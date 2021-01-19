@@ -4,6 +4,7 @@
     <field name="name">stock.history.report.tree</field>
     <field name="model">stock.history</field>
     <field name="inherit_id" ref="stock_account.view_stock_history_report_tree" />
+    <field name="priority">99</field>
     <field name="arch" type="xml">
       <field name="product_id" position="replace">
         <field name="product_id" />
@@ -44,6 +45,7 @@
     <field name="name">stock.history.value.pivot.inventory.value</field>
     <field name="model">stock.history</field>
     <field name="inherit_id" ref="stock_account.view_stock_history_report_pivot" />
+    <field name="priority">99</field>
     <field name="arch" type="xml">
       <field name="quantity" position="after">
         <field name="inventory_value" type="measure" />

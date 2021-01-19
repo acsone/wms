@@ -10,7 +10,6 @@
           <label for="failed_line_ids" />
           <field name="failed_line_ids">
             <tree
-              string="Failed Inventory Details"
               editable="bottom"
               decoration-info="product_qty != theoretical_qty"
               decoration-danger="theoretical_qty &lt; 0"

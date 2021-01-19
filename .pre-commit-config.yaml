@@ -103,7 +103,11 @@ repos:
       - id: pylint
         name: pylint
         args: ["--rcfile=.pylintrc"]
-        additional_dependencies: ["pylint-odoo==3.6.0"]
+        additional_dependencies:
+          [
+            "pylint-odoo @
+            git+https://github.com/acsone/pylint-odoo@master-fix-namespace-package",
+          ]
   - repo: https://github.com/asottile/pyupgrade
     rev: v1.26.2
     hooks:

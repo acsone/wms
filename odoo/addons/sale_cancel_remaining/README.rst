@@ -8,7 +8,7 @@ Sale cancel remaining
 
 This module allows you to cancel the remaining quantity on sale order:
 * On sale order line form view:
-    * Add a button to cancel the remaining quantity
+* Add a button to cancel the remaining quantity
 
 When a product is returned, it is not considered remaining to deliver
 

@@ -32,4 +32,5 @@ This addon provides:
         "report/report_product_price_import.xml",
     ],
     "demo": [],
+    "external_dependencies": {"python": ["xlrd"]},
 }

@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
 import logging
 
-from domain_interface import DomainInterface, Parameters, Savepoint
-
 from odoo import _
 
 from .. import constants
+from .domain_interface import DomainInterface, Parameters, Savepoint
 
 _logger = logging.getLogger(__name__)
 

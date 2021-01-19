@@ -4,7 +4,7 @@
     <field name="name">picking.zone.view.tree</field>
     <field name="model">picking.zone</field>
     <field name="arch" type="xml">
-      <tree string="Picking zone" editable="bottom">
+      <tree editable="bottom">
         <field name="name" />
         <field name="code" />
       </tree>

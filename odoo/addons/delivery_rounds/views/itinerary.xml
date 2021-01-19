@@ -4,7 +4,7 @@
     <field name="name">round.itinerary.tree</field>
     <field name="model">round.itinerary</field>
     <field name="arch" type="xml">
-      <tree string="Itineraries">
+      <tree>
         <field name="sequence" />
         <field name="code" />
         <field name="name" />
@@ -26,7 +26,7 @@
           </group>
         </group>
         <field name="partner_position_ids">
-          <tree string="Partners" editable="bottom">
+          <tree editable="bottom">
             <field name="sequence" />
             <field name="partner_id" />
             <field name="partner_zip" />

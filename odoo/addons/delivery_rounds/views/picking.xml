@@ -57,7 +57,6 @@
         decoration-info="state == 'draft'"
         decoration-muted="state == 'cancel'"
         decoration-danger="state not in ('cancel', 'done') and min_date &lt; current_date"
-        string="Picking list"
         create="false"
         delete="false"
         edit="false"

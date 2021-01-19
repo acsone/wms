@@ -29,6 +29,7 @@
     <field name="name">account.invoice.form.unsent</field>
     <field name="model">account.invoice</field>
     <field name="inherit_id" ref="account.invoice_form" />
+    <field name="priority">99</field>
     <field name="arch" type="xml">
       <field name="sent" position="replace" />
       <field name="move_id" position="after">

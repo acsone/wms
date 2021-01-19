@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo noupdate="1">
-  <record id="user_zetes" model="res.users">
+  <record id="user_zetes" model="res.users" context="{'no_reset_password': True}">
     <field name="login">zetes</field>
     <field name="name">Zetes Operator</field>
     <field name="company_id" ref="base.main_company" />
