@@ -81,11 +81,6 @@ msgid "Reserved"
 msgstr "Reservé"
 
 #. module: stock_quant_bylocation
-#: model:ir.ui.view,arch_db:stock_quant_bylocation.view_report_stock_quant_bylocation_tree
-msgid "Stock by location"
-msgstr "Stock par emplacement"
-
-#. module: stock_quant_bylocation
 #: model:ir.model.fields,field_description:stock_quant_bylocation.field_report_stock_quant_bylocation_product_uom_id
 msgid "Unit of Measure"
 msgstr ""
@@ -94,3 +89,6 @@ msgstr ""
 #: model:ir.model,name:stock_quant_bylocation.model_report_stock_quant_bylocation
 msgid "report.stock.quant.bylocation"
 msgstr "Stock par emplacement"
+
+#~ msgid "Stock by location"
+#~ msgstr "Stock par emplacement"
