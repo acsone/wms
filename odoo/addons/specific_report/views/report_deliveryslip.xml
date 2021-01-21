@@ -128,7 +128,7 @@
       />
       <t t-if="depot_number">
                 (<t
-          t-esc="datetime.datetime.strptime(deliveryslip.date, '%Y-%m-%d %H:%M:%S').strftime('%y')"
+          t-esc="datetime.datetime.strptime(deliveryslip.date_done, '%Y-%m-%d %H:%M:%S').strftime('%y')"
         />/<t t-esc="depot_number" />/<t t-esc="order.suite_name or '000'" />)
             </t>
       <span>of</span>
