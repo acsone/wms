@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+  <record model="ir.ui.view" id="res_partner_search_view">
+    <field name="name">res.partner.search (in alc_partner_carrier)</field>
+    <field name="model">res.partner</field>
+    <field name="inherit_id" ref="base.view_res_partner_filter" />
+    <field name="arch" type="xml">
+      <filter name="customer" position="after">
+        <filter string="Carrier" name="is_carrier" domain="[('is_carrier','=',True)]" />
+      </filter>
+    </field>
+  </record>
+</odoo>

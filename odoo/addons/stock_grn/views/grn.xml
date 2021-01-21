@@ -45,10 +45,12 @@
           <group>
             <group>
               <field name="date" />
+              <field name="carrier_category_id" invisible="1" />
               <field
                 name="carrier_id"
-                context="{'default_customer': False}"
+                context="{'default_customer': False, 'default_is_carrier': True, 'default_category_id': [(4,carrier_category_id)], 'search_default_is_carrier': 1}"
                 options="{'no_create': True}"
+                domain="[('is_carrier', '=', True)]"
               />
               <field name="carrier_ref" />
               <field name="company_id" groups="base.group_multi_company" />
