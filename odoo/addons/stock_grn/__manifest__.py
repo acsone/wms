@@ -21,12 +21,12 @@
 
 {
     "name": "Goods Received Note",
-    "version": "10.0.1.0.1",
+    "version": "10.0.1.0.2",
     "author": "BCIM",
     "maintainer": "QANSEE",
     "category": "Delivery",
     "complexity": "normal",
-    "depends": ["stock"],
+    "depends": ["stock", "alc_partner_carrier"],
     "website": "http://www.bcim.be/",
     "data": [
         "views/grn.xml",

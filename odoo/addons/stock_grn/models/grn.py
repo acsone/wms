@@ -41,6 +41,7 @@ class GRN(models.Model):
         string="Name", copy=False, index=True, required=True, default="/"
     )
     carrier_id = fields.Many2one("res.partner", string="Carrier", required=True)
+    carrier_category_id = fields.Integer(compute="_compute_carrier_category_id")
     carrier_ref = fields.Char(string="Carrier Id")
 
     from_info = fields.Char(string="From")
@@ -69,6 +70,13 @@ class GRN(models.Model):
         string="Incoming Shipments",
         domain=[("picking_type_code", "=", "incoming")],
     )
+
+    def _compute_carrier_category_id(self):
+        carrier_category = self.env.ref(
+            "alc_partner_carrier.res_partner_category_carrier"
+        )
+        for rec in self:
+            rec.carrier_category_id = carrier_category.id
 
     @api.model
     def create(self, vals):
