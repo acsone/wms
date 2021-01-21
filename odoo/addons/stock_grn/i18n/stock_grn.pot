@@ -25,6 +25,11 @@ msgid "Carrier Id"
 msgstr ""
 
 #. module: stock_grn
+#: model:ir.model.fields,field_description:stock_grn.field_stock_grn_carrier_category_id
+msgid "Carrier category id"
+msgstr ""
+
+#. module: stock_grn
 #: model:ir.model.fields,field_description:stock_grn.field_stock_grn_company_id
 msgid "Company"
 msgstr ""
@@ -157,7 +162,7 @@ msgid "Transfer"
 msgstr ""
 
 #. module: stock_grn
-#: model:ir.model.fields,field_description:stock_grn.field_stock_grn_type_id_8343
+#: model:ir.model.fields,field_description:stock_grn.field_stock_grn_type_id_8346
 #: model:ir.model.fields,field_description:stock_grn.field_stock_grn_type_name
 msgid "Type"
 msgstr ""
