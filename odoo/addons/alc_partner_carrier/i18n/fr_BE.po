@@ -25,7 +25,7 @@ msgstr "Transporteur"
 #: model:ir.model.fields,field_description:alc_partner_carrier.field_res_partner_is_carrier
 #: model:ir.model.fields,field_description:alc_partner_carrier.field_res_users_is_carrier
 msgid "Is carrier"
-msgstr Transporteur?"
+msgstr "Transporteur?"
 
 #. module: alc_partner_carrier
 #: model:ir.model,name:alc_partner_carrier.model_res_partner
