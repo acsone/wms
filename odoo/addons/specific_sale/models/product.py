@@ -35,6 +35,8 @@ class ProductProduct(models.Model):
                 done[product_id] = qty
             product.sales_count = product.sale_lines_count + done.get(product_id, 0)
 
+    # override compute of sales_count for perf..
+    sales_count = fields.Integer(compute="_compute_sales_count")
     sale_lines_count = fields.Integer(compute="_compute_sales_count")
 
     older_lot_id = fields.Many2one(
