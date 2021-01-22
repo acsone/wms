@@ -20,7 +20,7 @@ class HelpdeskTicket(models.Model):
         comodel_name="stock.picking", string="Stock picking"
     )
     stock_move_id = fields.Many2one(comodel_name="stock.move", string="Stock move")
-    lots = fields.Many2one(related="stock_move_id.quant_ids.lot_id")
+    lots = fields.Many2one(related="stock_move_id.quant_ids.lot_id", readonly=True)
     sale_order_id = fields.Many2one(comodel_name="sale.order", string="Sale order")
     purchase_order_id = fields.Many2one(
         comodel_name="purchase.order", string="Purchase order"

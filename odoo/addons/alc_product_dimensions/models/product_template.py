@@ -9,4 +9,6 @@ class ProductTemplate(models.Model):
 
     _inherit = "product.template"
 
-    volume_liter = fields.Float(related="product_variant_ids.volume_liter")
+    volume_liter = fields.Float(
+        related="product_variant_ids.volume_liter", readonly=True
+    )

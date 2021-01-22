@@ -25,12 +25,12 @@ class AccountMoveLineWithAnalyticCategory(models.Model):
     journal_id = fields.Many2one("account.journal", string="Journal")
     partner_id = fields.Many2one("res.partner", string="Partner")
     company_currency_id = fields.Many2one(
-        "res.currency", related="company_id.currency_id"
+        "res.currency", related="company_id.currency_id", readonly=True
     )
     debit = fields.Monetary(default=0.0, currency_field="company_currency_id")
     credit = fields.Monetary(default=0.0, currency_field="company_currency_id")
     balance = fields.Monetary(currency_field="company_currency_id")
-    ref = fields.Char(related="move_id.ref", string="Reference")
+    ref = fields.Char(related="move_id.ref", string="Reference", readonly=True)
     quantity = fields.Float(digits=dp.get_precision("Product Unit of Measure"))
     move_id = fields.Many2one("account.move", string="Journal Entry")
     amount = fields.Monetary(

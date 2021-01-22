@@ -13,6 +13,7 @@ class StockMove(models.Model):
         string="Order line",
         related="procurement_id.sale_line_id",
         store=True,
+        readonly=True,
     )
 
     order_id = fields.Many2one("sale.order", related="order_line_id.order_id")
