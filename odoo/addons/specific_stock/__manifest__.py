@@ -11,6 +11,7 @@
     "depends": [
         "alc_stock_receive_lot_expiry",
         "alc_stock_receive_lot_inputmask",
+        "alc_product_lot_info",
         "board",
         "delivery_rounds",
         "product",
