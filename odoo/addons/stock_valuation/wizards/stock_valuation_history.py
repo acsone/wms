@@ -245,10 +245,10 @@ class StockHistory(models.Model):
     product_supplier_id = fields.Many2one("res.partner", "Supplier", readonly=True)
 
     product_last_in_date = fields.Datetime(
-        "Last Purchasing Date", related="product_id.product_last_in_date"
+        "Last Purchasing Date", related="product_id.product_last_in_date", readonly=True
     )
     product_last_out_date = fields.Datetime(
-        "Last Selling Date", related="product_id.product_last_out_date"
+        "Last Selling Date", related="product_id.product_last_out_date", readonly=True
     )
 
     def _compute_inventory_value(self):

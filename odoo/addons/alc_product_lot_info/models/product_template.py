@@ -9,6 +9,10 @@ class ProductTemplate(models.Model):
 
     _inherit = "product.template"
 
-    volume_liter = fields.Float(
-        related="product_variant_ids.volume_liter", readonly=True
+    lot_ids = fields.One2many(
+        "stock.production.lot", string="Lots", compute="_compute_lot_ids"
     )
+
+    def _compute_lot_ids(self):
+        for rec in self:
+            rec.lot_ids = rec.mapped("product_variant_ids.lot_ids")

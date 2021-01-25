@@ -38,6 +38,7 @@ class StockPicking(models.Model):
         related="delivery_round_id.picking_launched",
         store=True,
         string="Delivery Round Launched",
+        readonly=True,
     )
     is_assignable_to_round = fields.Boolean(compute="_compute_is_assignable_to_round")
     is_assignable = fields.Boolean(compute="_compute_is_assignable")

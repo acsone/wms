@@ -12,10 +12,10 @@ class StockQuant(models.Model):
         "res.partner", string="Vendor", readonly=True, related="product_id.supplier_id"
     )
     product_last_in_date = fields.Datetime(
-        "Last Purchasing Date", related="product_id.product_last_in_date"
+        "Last Purchasing Date", related="product_id.product_last_in_date", readonly=True
     )
     product_last_out_date = fields.Datetime(
-        "Last Selling Date", related="product_id.product_last_out_date"
+        "Last Selling Date", related="product_id.product_last_out_date", readonly=True
     )
 
     def _quants_removal_get_order(self, removal_strategy):

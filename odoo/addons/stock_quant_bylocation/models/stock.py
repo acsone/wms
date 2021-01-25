@@ -68,7 +68,7 @@ class ReportStockQuantBylocation(models.Model):
     product_id = fields.Many2one("product.product", "Product", auto_join=True)
     location_id = fields.Many2one("stock.location", "Location", auto_join=True)
     qty = fields.Float("Quantity")
-    product_uom_id = fields.Many2one(related="product_id.uom_id")
+    product_uom_id = fields.Many2one(related="product_id.uom_id", readonly=True)
     owner_id = fields.Many2one("res.partner", "Owner")
     company_id = fields.Many2one("res.company", "Company")
     reservation_id = fields.Many2one("stock.move", "Reserved")

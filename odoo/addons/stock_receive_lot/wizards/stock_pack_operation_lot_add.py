@@ -27,6 +27,9 @@ class StockPackOperationLotAdd(models.TransientModel):
 
     lot_required = fields.Boolean("Lot Required", compute="_compute_lot_required")
     product_qty = fields.Float(related="operation_id.product_qty", readonly=True)
+    product_id = fields.Many2one(
+        "product.product", related="operation_id.product_id", readonly=True
+    )
     product_uom_id = fields.Many2one(
         "product.uom", related="operation_id.product_uom_id", readonly=True
     )
@@ -90,7 +93,7 @@ class StockPackOperationLotAdd(models.TransientModel):
     @api.depends("operation_id")
     def _compute_lot_required(self):
         for rec in self:
-            rec.lot_required = rec.operation_id.product_id.tracking != "none"
+            rec.lot_required = rec.product_id.tracking != "none"
 
     @api.depends("operation_id.qty_done")
     def _compute_remaining_qty(self):

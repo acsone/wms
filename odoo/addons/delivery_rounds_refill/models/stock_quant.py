@@ -14,6 +14,7 @@ class StockQuant(models.Model):
         related="location_id.kind",
         store=True,
         index=True,
+        readonly=True,
     )
 
     @api.model_cr
