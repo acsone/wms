@@ -153,6 +153,11 @@ msgid "Picking id"
 msgstr "Picking id"
 
 #. module: stock_receive_lot
+#: model:ir.model.fields,field_description:stock_receive_lot.field_stock_pack_operation_lot_add_product_id
+msgid "Product"
+msgstr ""
+
+#. module: stock_receive_lot
 #: model:ir.model.fields,field_description:stock_receive_lot.field_stock_pack_operation_lot_add_qty
 msgid "Qty Done"
 msgstr "Qté Faite"
@@ -163,7 +168,7 @@ msgid "Qty Remaining"
 msgstr "Qté Restante"
 
 #. module: stock_receive_lot
-#: code:addons/stock_receive_lot/wizards/stock_pack_operation_lot_add.py:189
+#: code:addons/stock_receive_lot/wizards/stock_pack_operation_lot_add.py:192
 #, python-format
 msgid "Quantity must be greater than 0"
 msgstr ""
@@ -211,13 +216,13 @@ msgid "Visible in reception wizard"
 msgstr ""
 
 #. module: stock_receive_lot
-#: code:addons/stock_receive_lot/wizards/stock_pack_operation_lot_add.py:105
+#: code:addons/stock_receive_lot/wizards/stock_pack_operation_lot_add.py:108
 #, python-format
 msgid "Warning"
 msgstr ""
 
 #. module: stock_receive_lot
-#: code:addons/stock_receive_lot/wizards/stock_pack_operation_lot_add.py:192
+#: code:addons/stock_receive_lot/wizards/stock_pack_operation_lot_add.py:195
 #, python-format
 msgid ""
 "You receive more than the expected remaining quantity. You must confirm that "
@@ -227,7 +232,7 @@ msgstr ""
 "devez confirmer que l'encodage est correct."
 
 #. module: stock_receive_lot
-#: code:addons/stock_receive_lot/wizards/stock_pack_operation_lot_add.py:106
+#: code:addons/stock_receive_lot/wizards/stock_pack_operation_lot_add.py:109
 #, python-format
 msgid ""
 "You received more than the expected remaining quantity. Please confirm by "
