@@ -493,7 +493,7 @@ msgid "Please insert at least one line"
 msgstr "Veuillez introduire au moins une ligne"
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/product_template.py:170
+#: code:addons/specific_stock/models/product_product.py:119
 #, python-format
 msgid ""
 "Please set the Price limit for inventory or/and the Number of open days in "
@@ -700,19 +700,19 @@ msgid "There is no delay for the inventory %s"
 msgstr "Il n'y a pas de delais pour l'inventaire %s"
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/product_template.py:247
+#: code:addons/specific_stock/models/product_product.py:196
 #, python-format
 msgid "There is no period for best sellers products"
 msgstr "Il n'y a pas de période pour les produits les plus vendus"
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/product_template.py:205
+#: code:addons/specific_stock/models/product_product.py:154
 #, python-format
 msgid "There is no period for expensive products"
 msgstr "Il n'y a pas de période pour les produits coûteux"
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/product_template.py:296
+#: code:addons/specific_stock/models/product_product.py:245
 #, python-format
 msgid "There is no period for other products"
 msgstr "Il n'y a pas de période pour les autres produits"
