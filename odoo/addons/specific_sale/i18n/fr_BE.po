@@ -232,13 +232,6 @@ msgid "Lines unavailable"
 msgstr "Lignes non disponibles"
 
 #. module: specific_sale
-#: model:ir.model.fields,field_description:specific_sale.field_delivery_carrier_lot_ids
-#: model:ir.model.fields,field_description:specific_sale.field_product_product_lot_ids
-#: model:ir.model.fields,field_description:specific_sale.field_product_template_lot_ids
-msgid "Lots"
-msgstr "Lots"
-
-#. module: specific_sale
 #: model:ir.model.fields,field_description:specific_sale.field_sale_order_line_production_lot_ids
 msgid "Lots/Serial Numbers"
 msgstr "Numéros de lots/séries"
@@ -688,6 +681,9 @@ msgstr ""
 #: model:exception.rule,warning_text:specific_sale.warning_stupefiant_vet
 msgid "stupéfiant VET: written order, keep confirmation."
 msgstr "Commande de psychotrope par écrit, gardez la confirmation."
+
+#~ msgid "Lots"
+#~ msgstr "Lots"
 
 #~ msgid "Remains to deliver"
 #~ msgstr "Reste à livrer"

@@ -227,13 +227,6 @@ msgid "Lines unavailable"
 msgstr ""
 
 #. module: specific_sale
-#: model:ir.model.fields,field_description:specific_sale.field_delivery_carrier_lot_ids
-#: model:ir.model.fields,field_description:specific_sale.field_product_product_lot_ids
-#: model:ir.model.fields,field_description:specific_sale.field_product_template_lot_ids
-msgid "Lots"
-msgstr "Partijen"
-
-#. module: specific_sale
 #: model:ir.model.fields,field_description:specific_sale.field_sale_order_line_production_lot_ids
 msgid "Lots/Serial Numbers"
 msgstr "Partij/Serienummer"
@@ -683,3 +676,6 @@ msgstr ""
 #: model:exception.rule,warning_text:specific_sale.warning_stupefiant_vet
 msgid "stupéfiant VET: written order, keep confirmation."
 msgstr ""
+
+#~ msgid "Lots"
+#~ msgstr "Partijen"

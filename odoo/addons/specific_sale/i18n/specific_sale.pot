@@ -214,13 +214,6 @@ msgid "Lines unavailable"
 msgstr ""
 
 #. module: specific_sale
-#: model:ir.model.fields,field_description:specific_sale.field_delivery_carrier_lot_ids
-#: model:ir.model.fields,field_description:specific_sale.field_product_product_lot_ids
-#: model:ir.model.fields,field_description:specific_sale.field_product_template_lot_ids
-msgid "Lots"
-msgstr ""
-
-#. module: specific_sale
 #: model:ir.model.fields,field_description:specific_sale.field_sale_order_line_production_lot_ids
 msgid "Lots/Serial Numbers"
 msgstr ""
