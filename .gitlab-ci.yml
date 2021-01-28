@@ -60,6 +60,7 @@ pre-commit:
     - install_pre_commit
     - PRE_COMMIT_HOME=$PWD/.pre-commit ./pre-commit run --all-files
   needs: []
+  interruptible: true
 
 build:
   stage: build
@@ -76,6 +77,7 @@ build:
     paths:
       - release/
     name: "${CI_PROJECT_NAME}-${CI_JOB_ID}-build"
+  interruptible: true
 
 test:
   stage: test
@@ -117,6 +119,7 @@ test:
       cobertura: coverage.xml
   dependencies:
     - build
+  interruptible: true
 
 build-and-publish-image:
   # https://docs.gitlab.com/ee/ci/docker/using_kaniko.html#building-a-docker-image-with-kaniko
