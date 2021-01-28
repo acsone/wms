@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+  <record model="ir.ui.view" id="abc_classification_profile_form_view">
+    <field
+      name="name"
+    >abc.classification.profile.form (in alc_product_abc_classification_picking_zone)</field>
+    <field name="model">abc.classification.profile</field>
+    <field
+      name="inherit_id"
+      ref="product_abc_classification_base.abc_classification_profile_form_view"
+    />
+    <field name="arch" type="xml">
+      <field name="level_ids" position="after">
+        <field name="picking_zone_ids" widget="many2many_tags" />
+      </field>
+    </field>
+  </record>
+  <record model="ir.ui.view" id="abc_classification_profile_tree_view">
+    <field
+      name="name"
+    >abc.classification.profile.tree (in alc_product_abc_classification_picking_zone)</field>
+    <field name="model">abc.classification.profile</field>
+    <field
+      name="inherit_id"
+      ref="product_abc_classification_base.abc_classification_profile_tree_view"
+    />
+    <field name="arch" type="xml">
+      <field name="name" position="after">
+        <field name="picking_zone_ids" />
+      </field>
+    </field>
+  </record>
+</odoo>

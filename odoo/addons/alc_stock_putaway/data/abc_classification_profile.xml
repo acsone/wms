@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2020 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo noupdate="1">
+  <record id="alc_abc_classification_profile" model="abc.classification.profile">
+    <field name="name">Classification Alcyon Mat + Médoc</field>
+    <field name="profile_type">sale_stock</field>
+    <field
+      name="level_ids"
+      eval="[(0, 0, {'percentage': 80, 'name': 'a'}), (0, 0, {'percentage': 15, 'name': 'b'}),(0, 0, {'percentage': 5, 'name': 'c'})]"
+    />
+    <field
+      name="picking_zone_ids"
+      eval="[(6, 0, obj().search([('code','in',('01', '02'))]).ids)]"
+      model="picking.zone"
+    />
+    <!-- Médicaments et Matériel -->
+  </record>
+</odoo>
