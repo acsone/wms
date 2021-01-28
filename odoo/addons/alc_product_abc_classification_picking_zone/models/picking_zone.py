@@ -9,6 +9,10 @@ class PickingZone(models.Model):
 
     _inherit = "picking.zone"
 
-    abc_classification_profile_id = fields.Many2one(
-        comodel_name="abc.classification.profile", string="ABC Classification Profile",
+    abc_classification_profile_ids = fields.Many2many(
+        comodel_name="abc.classification.profile",
+        string="ABC Classification Profiles",
+        relation="abc_classification_profile_picking_zone_rel",
+        column1="picking_zone_id",
+        column2="profile_id",
     )

@@ -13,7 +13,11 @@
     />
     <field name="arch" type="xml">
       <field name="level_ids" position="after">
-        <field name="picking_zone_ids" widget="many2many_tags" />
+        <field
+          name="picking_zone_ids"
+          widget="many2many_tags"
+          options="{'open': true}"
+        />
       </field>
     </field>
   </record>

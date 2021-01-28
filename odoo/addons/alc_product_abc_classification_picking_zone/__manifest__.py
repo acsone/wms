@@ -10,7 +10,11 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["product_abc_classification_base", "alc_product_picking_zone"],
+    "depends": [
+        "alc_product_picking_zone",
+        "product_abc_classification_base",
+        "web_m2x_options",
+    ],
     "data": ["views/picking_zone.xml", "views/abc_classification_profile.xml"],
     "demo": [],
 }

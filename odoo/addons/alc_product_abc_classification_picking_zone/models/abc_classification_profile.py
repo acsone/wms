@@ -10,8 +10,11 @@ class AbcClassificationProfile(models.Model):
 
     _inherit = "abc.classification.profile"
 
-    picking_zone_ids = fields.One2many(
-        comodel_name="picking.zone", inverse_name="abc_classification_profile_id",
+    picking_zone_ids = fields.Many2many(
+        comodel_name="picking.zone",
+        relation="abc_classification_profile_picking_zone_rel",
+        column1="profile_id",
+        column2="picking_zone_id",
     )
 
     @api.model
@@ -130,7 +133,7 @@ class AbcClassificationProfile(models.Model):
         template_profiles_profile_col = template_profiles_field.column2
         template_profiles_table = template_profiles_field.relation
 
-        for rec in self:
+        for rec in self.filtered("picking_zone_ids"):
             self.env.cr.execute(
                 """
                 INSERT into %(table)s (%(product_col)s, %(profile_col)s)

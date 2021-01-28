@@ -25,5 +25,5 @@ class ProductTemplate(models.Model):
         """
         for rec in self:
             rec.abc_classification_profile_ids = (
-                rec.picking_zone_id.abc_classification_profile_id
+                rec.picking_zone_id.abc_classification_profile_ids
             )

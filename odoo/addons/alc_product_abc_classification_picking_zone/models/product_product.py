@@ -20,5 +20,5 @@ class ProductProduct(models.Model):
     def _compute_abc_classification_profile_ids(self):
         for record in self:
             record.abc_classification_profile_ids = (
-                record.product_tmpl_id.picking_zone_id.abc_classification_profile_id
+                record.product_tmpl_id.picking_zone_id.abc_classification_profile_ids
             )
