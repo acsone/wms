@@ -467,9 +467,6 @@ msgid "Picking"
 msgstr ""
 
 #. module: specific_stock
-#: model:ir.model.fields,field_description:specific_stock.field_delivery_carrier_picking_zone_id
-#: model:ir.model.fields,field_description:specific_stock.field_product_product_picking_zone_id
-#: model:ir.model.fields,field_description:specific_stock.field_product_template_picking_zone_id
 #: model:ir.model.fields,field_description:specific_stock.field_stock_location_picking_zone_id
 msgid "Picking zone"
 msgstr ""
