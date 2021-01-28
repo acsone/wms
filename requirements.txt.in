@@ -24,6 +24,8 @@ odoo10-addon-stock-production-lot-expiry @ git+https://github.com/oca/product-at
 odoo10-addon-product-packaging-type @ git+https://github.com/oca/product-attribute.git@refs/pull/693/head#subdirectory=setup/product_packaging_type
 odoo10-addon-product-packaging-dimension @ git+https://github.com/oca/product-attribute.git@refs/pull/695/head#subdirectory=setup/product_packaging_dimension
 odoo10-addon-product-packaging-type-pallet @ git+https://github.com/oca/product-attribute.git@refs/pull/696/head#subdirectory=setup/product_packaging_type_pallet
+odoo10-addon-product-abc-classification-base @ git+https://github.com/oca/product-attribute.git@refs/pull/781/head#subdirectory=setup/product_abc_classification_base
+odoo10-addon-product-abc-classification-sale-stock @ git+https://github.com/oca/product-attribute.git@refs/pull/781/head#subdirectory=setup/product_abc_classification_sale_stock
 
 # oca/account-invoicing
 odoo10-addon-sale-stock-restocking-fee-invoicing @ git+https://github.com/oca/account-invoicing.git@refs/pull/784/head#subdirectory=setup/sale_stock_restocking_fee_invoicing
@@ -43,3 +45,6 @@ odoo10-addon-stock-quant-package-dimension @ git+https://github.com/oca/stock-lo
 # oca/wms
 odoo10-addon-stock-storage-type @ git+https://github.com/oca/wms.git@refs/pull/95/head#subdirectory=setup/stock_storage_type
 odoo10-addon-stock-storage-type-putaway-abc @ git+https://github.com/oca/wms.git@refs/pull/103/head#subdirectory=setup/stock_storage_type_putaway_abc
+
+# oca/web
+odoo10-addon-web-m2x-options @ git+https://github.com/oca/web.git@refs/pull/1795/head#subdirectory=setup/web_m2x_options

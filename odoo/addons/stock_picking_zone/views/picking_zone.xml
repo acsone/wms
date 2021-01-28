@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
+  <record model="ir.ui.view" id="picking_zone_form_view">
+    <field name="name">picking.zone.form (in stock_picking_zone)</field>
+    <field name="model">picking.zone</field>
+    <field name="arch" type="xml">
+      <form string="Picking zone">
+        <sheet>
+          <group>
+            <field name="name" />
+            <field name="code" />
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
   <record id="picking_zone_view_tree" model="ir.ui.view">
     <field name="name">picking.zone.view.tree</field>
     <field name="model">picking.zone</field>
