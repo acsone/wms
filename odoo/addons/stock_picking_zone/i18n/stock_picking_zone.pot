@@ -66,6 +66,7 @@ msgstr ""
 
 #. module: stock_picking_zone
 #: model:ir.model.fields,field_description:stock_picking_zone.field_stock_picking_type_picking_zone_id
+#: model:ir.ui.view,arch_db:stock_picking_zone.picking_zone_form_view
 msgid "Picking zone"
 msgstr ""
 
