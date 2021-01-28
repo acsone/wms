@@ -9,7 +9,7 @@
     "version": "10.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
-    "depends": ["alc_product_abc_classification_picking_zone", "stock_storage_type"],
+    "depends": ["product_abc_classification_base", "stock_storage_type"],
     "data": [],
     "demo": [],
 }

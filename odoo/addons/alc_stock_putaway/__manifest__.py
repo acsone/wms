@@ -17,6 +17,7 @@
         "stock_storage_type",
         "stock_storage_type_putaway_abc",
         "alc_product_abc_classification",
+        "alc_product_abc_classification_picking_zone",
         "product_abc_classification_sale_stock",
     ],
     "data": ["data/abc_classification_profile.xml"],
