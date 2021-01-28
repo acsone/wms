@@ -36,9 +36,6 @@ before_script:
             -o yaml --dry-run | kubectl apply -f -
     }
 
-after_script:
-  - dropdb --if-exists ${DB_NAME}
-
 variables:
   PYTHON: python2.7
   DB_NAME: "${CI_PROJECT_NAME}-${CI_JOB_ID}"
@@ -105,6 +102,8 @@ test:
     - venv/bin/coverage xml
     - venv/bin/coverage report
     - if [ "${CI_COMMIT_REF_NAME}" = "master" ] ; then makepot ; fi
+  after_script:
+    - dropdb --if-exists ${DB_NAME}
   coverage: '/TOTAL\s+\d+\s+\d+\s+\d+\s+\d+\s+(\d+\%)/'
   artifacts:
     expire_in: 1 week
