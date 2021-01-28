@@ -129,8 +129,9 @@ build-and-publish-image:
     - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile --destination $IMAGE
   #only:
   #  - /1\.62\.\d+/
-  dependencies:
-    - build
+  needs:
+    - job: build
+      artifacts: true
 
 deploy-test:
   stage: deploy
