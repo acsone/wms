@@ -27,15 +27,6 @@ before_script:
         venv/bin/click-odoo-makepot -c odoo-ci.cfg -d ${DB_NAME} --commit --msgmerge --addons-dir=$(pwd)/odoo/addons
         git push "git@gitlab.acsone.eu:${CI_PROJECT_PATH}" "HEAD:${CI_COMMIT_REF_NAME}"
     }
-    function build_and_push_image() {
-        echo "Building OCI image ${IMAGE}..."
-        podman build --pull-always -t ${IMAGE} --volume ${PWD}/release:/tmp/release .
-        echo "Pushing image to GitLab Container Registry..."
-        podman login ${CI_REGISTRY} -u ${CI_REGISTRY_USER} -p ${CI_REGISTRY_PASSWORD}
-        podman push ${IMAGE}
-        echo "Removing image from Runner..."
-        podman rmi ${IMAGE}
-    }
     function create_gitlab_registry_secret() {
         kubectl create secret docker-registry \
             gitlab-registry \
@@ -128,13 +119,18 @@ test:
     - build
 
 build-and-publish-image:
+  # https://docs.gitlab.com/ee/ci/docker/using_kaniko.html#building-a-docker-image-with-kaniko
   stage: build image
-  tags:
-    - podman
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
+  before_script: []
   script:
-    - build_and_push_image
-  only:
-    - /1\.62\.\d+/
+    - mkdir -p /kaniko/.docker
+    - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
+    - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile --destination $IMAGE
+  #only:
+  #  - /1\.62\.\d+/
   dependencies:
     - build
 
