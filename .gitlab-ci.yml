@@ -1,5 +1,4 @@
 stages:
-  - code quality
   - build
   - test
   - build image
@@ -50,7 +49,7 @@ variables:
   IMAGE: "${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_NAME}"
 
 pre-commit:
-  stage: code quality
+  stage: test
   tags:
     - python
   cache:
@@ -60,6 +59,7 @@ pre-commit:
   script:
     - install_pre_commit
     - PRE_COMMIT_HOME=$PWD/.pre-commit ./pre-commit run --all-files
+  needs: []
 
 build:
   stage: build
