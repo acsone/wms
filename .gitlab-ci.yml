@@ -49,6 +49,9 @@ pre-commit:
     key: pre-commit
     paths:
       - .pre-commit
+  variables:
+    KUBERNETES_MEMORY_REQUEST: 3500Mi
+    KUBERNETES_MEMORY_LIMIT: 3500Mi
   script:
     - install_pre_commit
     - PRE_COMMIT_HOME=$PWD/.pre-commit ./pre-commit run --all-files
