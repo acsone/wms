@@ -141,6 +141,7 @@ class AbcClassificationProfile(models.Model):
                 FROM product_product PP
                 JOIN product_template pt on pp.product_tmpl_id = pt.id
                 WHERE pt.picking_zone_id in %(picking_zone_ids)s
+                AND pt.type = 'product'
                 ON CONFLICT DO NOTHING;
             """,
                 {
@@ -157,6 +158,7 @@ class AbcClassificationProfile(models.Model):
                 SELECT pt.id, %(profile_id)s
                 FROM  product_template pt
                 WHERE pt.picking_zone_id in %(picking_zone_ids)s
+                AND pt.type = 'product'
                 ON CONFLICT DO NOTHING;
             """,
                 {
