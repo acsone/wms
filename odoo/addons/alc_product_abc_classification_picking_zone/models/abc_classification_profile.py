@@ -49,11 +49,15 @@ class AbcClassificationProfile(models.Model):
         template_profiles_profile_col = template_profiles_field.column2
         template_profiles_table = template_profiles_field.relation
         for rec in self:
-            obsolete_products = self.env["product.product"].search(
-                [
-                    ("picking_zone_id", "not in", rec.picking_zone_ids.ids),
-                    ("abc_classification_profile_ids", "in", rec.ids),
-                ]
+            obsolete_products = (
+                self.env["product.product"]
+                .with_context(active_test=False)
+                .search(
+                    [
+                        ("picking_zone_id", "not in", rec.picking_zone_ids.ids),
+                        ("abc_classification_profile_ids", "in", rec.ids),
+                    ]
+                )
             )
             if not obsolete_products:
                 continue
@@ -141,6 +145,7 @@ class AbcClassificationProfile(models.Model):
                 FROM product_product PP
                 JOIN product_template pt on pp.product_tmpl_id = pt.id
                 WHERE pt.picking_zone_id in %(picking_zone_ids)s
+                AND pp.active
                 AND pt.type = 'product'
                 ON CONFLICT DO NOTHING;
             """,
@@ -158,6 +163,7 @@ class AbcClassificationProfile(models.Model):
                 SELECT pt.id, %(profile_id)s
                 FROM  product_template pt
                 WHERE pt.picking_zone_id in %(picking_zone_ids)s
+                AND pt.active
                 AND pt.type = 'product'
                 ON CONFLICT DO NOTHING;
             """,
