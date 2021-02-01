@@ -15,5 +15,6 @@
     "website": "https://acsone.eu/",
     "depends": ["stock_picking_zone"],
     "external_dependencies": {"python": ["openupgradelib"]},
+    "data": ["views/product_template.xml"],
     "pre_init_hook": "pre_init_hook",
 }
