@@ -43,9 +43,18 @@ class StockQuant(models.Model):
                 "&",
                 ("location_id", "!=", output_loc.id),
                 ("state", "in", ("waiting", "confirmed", "assigned")),
-                ("date", "<", move.date),
-                ("priority", ">=", move.priority),
                 ("location_dest_id.usage", "=", "customer"),
+                "|",
+                "|",
+                ("priority", ">", move.priority),
+                "&",
+                ("priority", "=", move.priority),
+                ("date", "<", move.date),
+                "&",
+                "&",
+                ("priority", "=", move.priority),
+                ("date", "=", move.date),
+                ("id", "<", move.id),
             ]
             if move.restrict_lot_id:
                 previous_moves_domain.append(
