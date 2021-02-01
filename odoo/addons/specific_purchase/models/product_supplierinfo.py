@@ -15,27 +15,12 @@ class ProductSupplierinfo(models.Model):
         delay = self.name.delivery_lead_time
         self.delay = delay
 
-        if self.name and self.product_tmpl_id:
-            self._onchange_update_price_and_ref()
-
-    @api.onchange("product_tmpl_id")
-    def onchange_product_tmpl_id(self):
-        if self.name and self.product_tmpl_id:
-            self._onchange_update_price_and_ref()
-
-    def _onchange_update_price_and_ref(self):
-        base_info = self.search(
-            [
-                ("name", "=", self.name.id),
-                ("product_tmpl_id", "=", self.product_tmpl_id.id),
-            ],
-            limit=1,
-            order="min_qty ASC",
-        )
-        if base_info:
-            self.update(
-                {"price": base_info.price, "product_code": base_info.product_code}
-            )
+    @api.onchange("product_tmpl_id", "name")
+    def _onchange_update_product_code(self):
+        for promo in self:
+            promo.product_code = self._get_default_line(
+                promo.name.id, promo.product_tmpl_id.id
+            ).product_code
 
     @api.multi
     def open_form_view(self):
@@ -85,6 +70,8 @@ class ProductSupplierinfo(models.Model):
                 and code_product_tmpl.id
             )
             values.update({"product_tmpl_id": prod_id})
-        new_info = super(ProductSupplierinfo, self).create(values)
-        new_info._onchange_update_price_and_ref()
-        return new_info
+        if not values.get("product_code"):
+            values["product_code"] = self._get_default_line(
+                values["name"], values["product_tmpl_id"]
+            ).product_code
+        return super(ProductSupplierinfo, self).create(values)
