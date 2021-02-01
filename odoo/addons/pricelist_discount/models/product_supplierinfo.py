@@ -30,6 +30,20 @@ class ProductSupplierinfo(models.Model):
 
     min_qty = fields.Float(string="Purchase minimum qty")
 
+    @api.model
+    def _get_default_line(self, supplier_partner_id, product_tmpl_id):
+        if not supplier_partner_id or not product_tmpl_id:
+            return self.browse()
+        return self.search(
+            [
+                ("name", "=", supplier_partner_id),
+                ("product_tmpl_id", "=", product_tmpl_id),
+                ("date_start", "=", False),
+                ("date_end", "=", False),
+            ],
+            limit=1,
+        )
+
     @api.onchange("name", "product_tmpl_id")
     def compute_default_price(self):
         for promo in self:
@@ -42,15 +56,7 @@ class ProductSupplierinfo(models.Model):
             if not product_tmpl_id:
                 product_tmpl_id = self._context.get("default_product_tmpl_id")
 
-            default_line = self.search(
-                [
-                    ("name", "=", promo.name.id),
-                    ("product_tmpl_id", "=", product_tmpl_id),
-                    ("date_start", "=", False),
-                    ("date_end", "=", False),
-                ],
-                limit=1,
-            )
+            default_line = self._get_default_line(promo.name.id, product_tmpl_id)
             if not default_line:
                 continue
 
@@ -134,3 +140,13 @@ class ProductSupplierinfo(models.Model):
                     raise ValidationError(
                         _("You cannot have two promos at the same time")
                     )
+
+    @api.model
+    def create(self, vals):
+        # when the record is created by import, the price is not always given...
+        # if not takes the default one
+        if not vals.get("price"):
+            vals["price"] = self._get_default_line(
+                vals["name"], vals["product_tmpl_id"]
+            ).price
+        return super(ProductSupplierinfo, self).create(vals)
