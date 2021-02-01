@@ -141,8 +141,7 @@ build-and-publish-image:
 
 deploy-test:
   stage: deploy
-  tags:
-    - kubectl
+  image: quay.io/acsone/kubectl
   script:
     - echo "$TEST_KUBECONFIG" > .kubeconfig
     - export KUBECONFIG=$PWD/.kubeconfig
@@ -159,8 +158,7 @@ deploy-test:
 
 stop-test:
   stage: deploy
-  tags:
-    - kubectl
+  image: quay.io/acsone/kubectl
   script:
     - echo "$TEST_KUBECONFIG" > .kubeconfig
     - export KUBECONFIG=$PWD/.kubeconfig
