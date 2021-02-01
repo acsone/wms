@@ -33,7 +33,7 @@ before_script:
             --docker-username="${CI_DEPLOY_USER}" \
             --docker-password="${CI_DEPLOY_PASSWORD}" \
             --docker-email="${GITLAB_USER_EMAIL}" \
-            -o yaml --dry-run | kubectl apply -f -
+            -o yaml --dry-run=client | kubectl apply -f -
     }
 
 variables:
