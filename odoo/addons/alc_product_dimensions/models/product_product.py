@@ -28,7 +28,7 @@ class ProductProduct(models.Model):
 
     # Default unit for Alcyon is cm
     dimensional_uom_id = fields.Many2one(
-        readonly=True, default=lambda d: d.env.ref("product.product_uom_cm").id
+        default=lambda d: d.env.ref("product.product_uom_cm").id, readonly=True
     )
 
     @api.depends("length", "height", "width", "dimensional_uom_id")

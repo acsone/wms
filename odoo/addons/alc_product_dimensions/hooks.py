@@ -47,8 +47,21 @@ def _update_product_uom(cr, registry):
     )
 
 
+def _put_default_uom_id_on_products(cr, registry):
+    _logger.info("Default unit for Alcyon is cm")
+    # Default unit for Alcyon is cm
+    cr.execute(
+        """
+        UPDATE
+            product_product pp
+        SET dimensional_uom_id = 10
+
+    """
+    )
+
+
 def _delete_useless_columns_product_template(cr, registry):
-    _logger.info("Use original value for cm unit")
+    _logger.info("Drop useless columns on produt template")
     cr.execute(
         """
         ALTER TABLE
@@ -65,4 +78,5 @@ def _delete_useless_columns_product_template(cr, registry):
 def post_init_hook(cr, registry):
     _update_product_product(cr, registry)
     _update_product_uom(cr, registry)
+    _put_default_uom_id_on_products(cr, registry)
     _delete_useless_columns_product_template(cr, registry)

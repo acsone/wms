@@ -26,6 +26,12 @@
     <field name="model">product.template</field>
     <field name="inherit_id" ref="stock.view_template_property_form" />
     <field name="arch" type="xml">
+      <label for="volume" position="attributes">
+        <attribute name="invisible">True</attribute>
+      </label>
+      <field name="volume" position="attributes">
+        <attribute name="invisible">1</attribute>
+      </field>
       <xpath expr="//field[@name='volume']/.." position="after">
         <label
           for="storage_temperature_id"

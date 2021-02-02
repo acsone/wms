@@ -198,25 +198,10 @@ def split_products_and_packagings(env, all_data_dataframe, verbose):
     return product_data, product_packaging_data
 
 
-@click.command()
-@click.option(
-    "--path-to-files", required=True, help="Directory where the xlsx files are."
-)
-@click.option("--verbose", default=False, help="Helps you with short messages.")
-@click_odoo.env_options(default_log_level="info")
-def main(env, path_to_files, verbose):
-    if True and verbose:
-        click.echo("Start processing xlsx files. . .")
-
-    # Format and split input data
-    all_data = format_files_to_dataframe(env, path_to_files, verbose)
-    product_data, product_packaging_data = split_products_and_packagings(
-        env, all_data, verbose
-    )
-
+def update_products_table(env, data, verbose):
     # Working on the product
     # Put DF to sql temporary table
-    dataframe_to_sql_table(env, product_data, verbose)
+    dataframe_to_sql_table(env, data, verbose)
 
     # Check all products in the dataframe exist in Odoo
     env.cr.execute(
@@ -245,7 +230,7 @@ def main(env, path_to_files, verbose):
     )
     result = env.cr.fetchall()
     if verbose:
-        click.echo("no barcode {}, count: {}. . .".format(result, len(result)))
+        click.echo("no barcode {}. . .".format(result))
 
     # Look for no cnk
     env.cr.execute(
@@ -256,7 +241,7 @@ def main(env, path_to_files, verbose):
     )
     result = env.cr.fetchall()
     if verbose:
-        click.echo("no ucnk {}, count: {}. . .".format(result, len(result)))
+        click.echo("no ucnk {}. . .".format(result))
 
     # Look for duplicates barcode
     env.cr.execute(
@@ -270,14 +255,6 @@ def main(env, path_to_files, verbose):
     if verbose:
         click.echo("duplicated barcode {}, count: {}. . .".format(result, len(result)))
         click.echo("products_refs {},. . .".format(products_refs))
-
-    env.cr.execute(
-        """ SELECT * FROM dataframe_table
-                WHERE Ref IN %(products_refs)s ORDER BY User1 DESC
-    """,
-        {"products_refs": products_refs},
-    )
-    result = env.cr.fetchall()
 
     env.cr.execute(
         """ DELETE FROM dataframe_table
@@ -299,14 +276,6 @@ def main(env, path_to_files, verbose):
         click.echo("duplicated cnk {}, count: {}. . .".format(result2, len(result2)))
 
     env.cr.execute(
-        """ SELECT * FROM dataframe_table
-                WHERE Ref IN %(products_refs)s ORDER BY User2 DESC
-    """,
-        {"products_refs": products_refs},
-    )
-    result = env.cr.fetchall()
-
-    env.cr.execute(
         """ DELETE FROM dataframe_table
                 WHERE Ref IN %(products_refs)s
     """,
@@ -321,8 +290,17 @@ def main(env, path_to_files, verbose):
                             weight = p_df.Weight,
                             height = p_df.Height,
                             width = p_df.Width,
-                            length = p_df.Length,
-                            volume = p_df.Volume,
+                            length = p_df.Length
+                       FROM dataframe_table p_df
+                       WHERE pp.default_code = p_df.Ref
+                """
+    )
+
+    env.cr.commit()
+    env.cr.execute(
+        """ UPDATE
+                            product_product pp
+                       SET
                             barcode = p_df.User1
                        FROM dataframe_table p_df
                        WHERE p_df.User1 != 0 AND pp.default_code = p_df.Ref
@@ -338,15 +316,17 @@ def main(env, path_to_files, verbose):
     # Drop temporary table
     env.cr.execute("""DROP TABLE dataframe_table""")
 
+
+def update_product_packagings_table(env, data, verbose):
     # Working on the product packaging
     # Put DF to sql temporary table
 
     # Data in mm for packagings : conversion for now
-    product_packaging_data["Height"] = product_packaging_data["Height"] * 10
-    product_packaging_data["Width"] = product_packaging_data["Width"] * 10
-    product_packaging_data["Length"] = product_packaging_data["Length"] * 10
+    data["Height"] = data["Height"] * 10
+    data["Width"] = data["Width"] * 10
+    data["Length"] = data["Length"] * 10
 
-    dataframe_to_sql_table(env, product_packaging_data, verbose)
+    dataframe_to_sql_table(env, data, verbose)
     if verbose:
         click.echo("Updating or creating packagings for products. . .")
     # List all products that does not have packaging and are in the dataframe : create packaging for those one
@@ -430,6 +410,26 @@ def main(env, path_to_files, verbose):
         click.echo("Dropping packaging product temporary table. . .")
     # Drop temporary table
     env.cr.execute("""DROP TABLE dataframe_table""")
+
+
+@click.command()
+@click.option(
+    "--path-to-files", required=True, help="Directory where the xlsx files are."
+)
+@click.option("--verbose", default=False, help="Helps you with short messages.")
+@click_odoo.env_options(default_log_level="info")
+def main(env, path_to_files, verbose):
+    if True and verbose:
+        click.echo("Start processing xlsx files. . .")
+
+    # Format and split input data
+    all_data = format_files_to_dataframe(env, path_to_files, verbose)
+    product_data, product_packaging_data = split_products_and_packagings(
+        env, all_data, verbose
+    )
+
+    update_products_table(env, product_data, verbose)
+    update_product_packagings_table(env, product_packaging_data, verbose)
 
 
 if __name__ == "__main__":
