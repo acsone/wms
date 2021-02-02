@@ -45,6 +45,7 @@ class TestReservation(TransactionCase):
                 "location_id": location.id,
                 "location_dest_id": loc_customer.id,
                 "date": "2018-01-01 00:00:00",
+                "priority": "0",
             }
         )
         self.move_1.action_confirm()
@@ -67,6 +68,7 @@ class TestReservation(TransactionCase):
                 "location_id": location.id,
                 "location_dest_id": loc_customer.id,
                 "date": "2018-01-02 00:00:00",
+                "priority": "0",
             }
         )
         self.move_2.action_confirm()
@@ -100,9 +102,19 @@ class TestReservation(TransactionCase):
         self.assertTrue(quants.mapped("qty") == [3.0], "Unexpected quants qty in stock")
         self.assertEqual(self.product_1.qty_available, 3)
 
-    def test_reservation_1_2(self):
-        """ Reserve move 1 then move 2.
-        Reserved qty must be 2 for move 1 and 1 for move 2  """
+    def test_reservation_00(self):
+        """
+        Data:
+            Qty in stock: 3
+            Move 1: date 2018-01-01, priority 0, qty 2
+            Move 2: date 2018-01-02, priority 0, qty 2
+        Test case:
+            Reserve move 1 then move 2.
+        Expected result:
+            Move 1: Reserved qty must be 2
+            Move 2: Reserved qty must be 1
+        -> Move 1 has been reserved before move 2 and date est prior to move 2
+        """
         self.picking_1.with_context(round_autoset=False).action_assign()
 
         quant = self.move_1.reserved_quant_ids
@@ -122,9 +134,20 @@ class TestReservation(TransactionCase):
         self.assertEqual(len(quant), 1)
         self.assertEqual(quant.qty, 1)
 
-    def test_reservation_2_1(self):
-        """ Reserve move 2 then move 1
-        Reserved qty must be 2 for move 1 and 1 for move 2  """
+    def test_reservation_01(self):
+        """
+        Data:
+            Qty in stock: 3
+            Move 1: date 2018-01-01, priority 0, qty 2
+            Move 2: date 2018-01-02, priority 0, qty 2
+        Test case:
+            Reserve move 2 then move 1.
+        Expected result:
+            Move 1: Reserved qty must be 2
+            Move 2: Reserved qty must be 1
+        -> Even if move 2 has been reserved before move 1, since the date of
+        move 1 is prior to move 2, move 2 can't reserve qty required for move 1
+        """
         self.picking_2.with_context(round_autoset=False).action_assign()
 
         quant = self.move_1.reserved_quant_ids
@@ -143,3 +166,39 @@ class TestReservation(TransactionCase):
         quant = self.move_2.reserved_quant_ids
         self.assertEqual(len(quant), 1)
         self.assertEqual(quant.qty, 1)
+
+    def test_reservation_03(self):
+        """
+        Data:
+            Qty in stock: 3
+            Move 1: date 2018-01-01, priority 0, qty 2
+            Move 2: date 2018-01-02, priority 0, qty 2
+        Test case:
+            Set higher priority on move 2
+            Reserve move 1 then move 2
+        Expected result:
+            Move 1: Reserved qty must be 1
+            Move 2: Reserved qty must be 2
+        -> Even if move 1 has been reserved before move 2, since the priority
+        on move 2 is higher than move 1, move 1 can't consume qty required
+        for move 2
+        """
+        self.move_2.priority = "1"
+        self.picking_1.with_context(round_autoset=False).action_assign()
+
+        quant = self.move_1.reserved_quant_ids
+        self.assertEqual(len(quant), 1)
+        self.assertEqual(quant.qty, 1)
+
+        quant = self.move_2.reserved_quant_ids
+        self.assertEqual(len(quant), 0)
+
+        self.picking_2.with_context(round_autoset=False).action_assign()
+
+        quant = self.move_1.reserved_quant_ids
+        self.assertEqual(len(quant), 1)
+        self.assertEqual(quant.qty, 1)
+
+        quant = self.move_2.reserved_quant_ids
+        self.assertEqual(len(quant), 1)
+        self.assertEqual(quant.qty, 2)

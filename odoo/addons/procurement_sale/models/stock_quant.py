@@ -33,6 +33,18 @@ class StockQuant(models.Model):
             previous_moves_domain = [
                 ("product_id", "=", move.product_id.id),
                 ("location_id.usage", "in", ("internal", "view")),
+                ("location_dest_id.usage", "=", "customer"),
+                "|",
+                "|",
+                ("priority", ">", move.priority),
+                "&",
+                ("priority", "=", move.priority),
+                ("date", "<", move.date),
+                "&",
+                "&",
+                ("priority", "=", move.priority),
+                ("date", "=", move.date),
+                ("id", "<", move.id),
                 "|",
                 # PICK + SHIP
                 "&",
@@ -43,10 +55,16 @@ class StockQuant(models.Model):
                 "&",
                 ("location_id", "!=", output_loc.id),
                 ("state", "in", ("waiting", "confirmed", "assigned")),
-                ("date", "<", move.date),
-                ("priority", ">=", move.priority),
-                ("location_dest_id.usage", "=", "customer"),
             ]
+            if move.move_dest_id:
+                # we must exclude moves into the chain in case of multi step
+                # pickings PICK + SHIP +...
+                chained_move_ids = []
+                move_dest = move.move_dest_id
+                while move_dest:
+                    chained_move_ids.append(move_dest.id)
+                    move_dest = move_dest.move_dest_id
+                previous_moves_domain.append(("id", "not in", chained_move_ids))
             if move.restrict_lot_id:
                 previous_moves_domain.append(
                     ("restrict_lot_id", "=", move.restrict_lot_id.id)
