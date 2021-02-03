@@ -121,8 +121,8 @@ odoo10-addon-mis-builder==10.0.3.6.0
 odoo10-addon-mis-builder-budget==10.0.3.5.0
 odoo10-addon-monitoring-status @ git+https://github.com/acsone/odoo-cloud-platform.git@45a9d1f258eb93ec619202c2cfcb76978eee46cd#subdirectory=setup/monitoring_status
 odoo10-addon-onchange-helper @ git+https://github.com/acsone/server-tools.git@dcefdba5bac014076f05229ba091acd8b739e164#subdirectory=setup/onchange_helper
-odoo10-addon-product-abc-classification-base @ git+https://github.com/acsone/product-attribute.git@fa6c48f81b6aafe1e2e3c768244dab2765669740#subdirectory=setup/product_abc_classification_base
-odoo10-addon-product-abc-classification-sale-stock @ git+https://github.com/acsone/product-attribute.git@fa6c48f81b6aafe1e2e3c768244dab2765669740#subdirectory=setup/product_abc_classification_sale_stock
+odoo10-addon-product-abc-classification-base @ git+https://github.com/acsone/product-attribute.git@a0f1f9f3c3c7ffe2ea4daa5fe44e5a73d3848666#subdirectory=setup/product_abc_classification_base
+odoo10-addon-product-abc-classification-sale-stock @ git+https://github.com/acsone/product-attribute.git@a0f1f9f3c3c7ffe2ea4daa5fe44e5a73d3848666#subdirectory=setup/product_abc_classification_sale_stock
 odoo10-addon-product-analytic @ git+https://github.com/acsone/account-analytic.git@daf43630f1ca58b431bb93809a331374b8530863#subdirectory=setup/product_analytic
 odoo10-addon-product-analytic-purchase @ git+https://github.com/acsone/account-analytic.git@daf43630f1ca58b431bb93809a331374b8530863#subdirectory=setup/product_analytic_purchase
 odoo10-addon-product-assortment==10.0.1.0.0.99.dev4

@@ -13,7 +13,6 @@ class AbcClassificationLevel(models.Model):
 
     _inherit = "abc.classification.level"
     _order = "percentage desc, id desc"
-    _rec_name = "display_name"
 
     name = fields.Selection(ABC_SELECTION, required=True)
 
