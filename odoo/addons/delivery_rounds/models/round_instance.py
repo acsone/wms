@@ -44,6 +44,7 @@ class RoundInstance(models.Model):
     _name = "round.instance"
     _order = "date asc, time_picking_planned asc"
     _rec_name = "complete_name"
+    _inherit = "mail.thread"
 
     date = fields.Date(
         "Date",
@@ -93,8 +94,11 @@ class RoundInstance(models.Model):
         "State",
         readonly=True,
         default="pending",
+        track_visibility="onchange",
     )
-    picking_launched = fields.Boolean("Pickings Launched", readonly=True)
+    picking_launched = fields.Boolean(
+        "Pickings Launched", readonly=True, track_visibility="onchange",
+    )
 
     itinerary_ids = fields.Many2many("round.itinerary", string="Itineraries")
 

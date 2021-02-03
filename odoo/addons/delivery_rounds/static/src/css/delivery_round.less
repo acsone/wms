@@ -15,6 +15,10 @@
 @picking_color_stopped: #596166;
 
 div.o_delivery_round_kanban.o_kanban_view {
+  .o_invisible {
+    display: none !important;
+  }
+
   .o_kanban_card_content {
     > .row {
       > div {
@@ -23,6 +27,7 @@ div.o_delivery_round_kanban.o_kanban_view {
       }
     }
   }
+
   .btn-toggle {
     padding: 0;
     font-size: 25px;
