@@ -16,13 +16,11 @@ class AbcClassificationLevel(models.Model):
 
     name = fields.Selection(ABC_SELECTION, required=True)
 
-    display_name = fields.Char(compute="_compute_display_name")
-
-    @api.depends("name")
-    def _compute_display_name(self):
-        # required since name is a selection field... otherwise the display
-        # name is the value not the label of the selection
+    @api.multi
+    def name_get(self):
         field_name = self._fields["name"]
         label_by_value = dict(field_name._description_selection(self.env))
-        for rec in self:
-            rec.display_name = label_by_value[rec.name]
+        vals = []
+        for record in self:
+            vals.append((record.id, label_by_value[record.name]))
+        return vals
