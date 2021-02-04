@@ -14,11 +14,12 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        "stock_storage_type",
-        "stock_storage_type_putaway_abc",
         "alc_product_abc_classification",
         "alc_product_abc_classification_picking_zone",
+        "alc_product_storage_type_tracking",
         "product_abc_classification_sale_stock",
+        "stock_storage_type",
+        "stock_storage_type_putaway_abc",
     ],
     "application": True,
 }
