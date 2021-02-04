@@ -1,0 +1,79 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* alc_stock_location_content_relocation
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-02-03 15:53+0000\n"
+"PO-Revision-Date: 2021-02-03 15:53+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_stock_location_content_relocation
+#: model:ir.actions.act_window,name:alc_stock_location_content_relocation.alc_location_content_relocation_generator_act_window
+#: model:ir.ui.menu,name:alc_stock_location_content_relocation.alc_location_content_relocation_generator_menu
+#: model:ir.ui.view,arch_db:alc_stock_location_content_relocation.alc_location_content_relocation_generator_form_view
+msgid "Alc Location Content Relocation Generator"
+msgstr "Réorganisation des stocks"
+
+#. module: alc_stock_location_content_relocation
+#: model:ir.ui.view,arch_db:alc_stock_location_content_relocation.alc_location_content_relocation_generator_form_view
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: alc_stock_location_content_relocation
+#: model:ir.model.fields,field_description:alc_stock_location_content_relocation.field_alc_location_content_relocation_generator_create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: alc_stock_location_content_relocation
+#: model:ir.model.fields,field_description:alc_stock_location_content_relocation.field_alc_location_content_relocation_generator_create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: alc_stock_location_content_relocation
+#: model:ir.model.fields,field_description:alc_stock_location_content_relocation.field_alc_location_content_relocation_generator_display_name
+msgid "Display Name"
+msgstr "Nom affiché"
+
+#. module: alc_stock_location_content_relocation
+#: model:ir.ui.view,arch_db:alc_stock_location_content_relocation.alc_location_content_relocation_generator_form_view
+msgid "Do transfer for this location"
+msgstr "Créer le picking de transfert pour cet emplacement"
+
+#. module: alc_stock_location_content_relocation
+#: model:ir.model.fields,field_description:alc_stock_location_content_relocation.field_alc_location_content_relocation_generator_id
+msgid "ID"
+msgstr "ID"
+
+#. module: alc_stock_location_content_relocation
+#: model:ir.model.fields,field_description:alc_stock_location_content_relocation.field_alc_location_content_relocation_generator___last_update
+msgid "Last Modified on"
+msgstr "Dernière modification le"
+
+#. module: alc_stock_location_content_relocation
+#: model:ir.model.fields,field_description:alc_stock_location_content_relocation.field_alc_location_content_relocation_generator_write_uid
+msgid "Last Updated by"
+msgstr "Dernière mise à jour par"
+
+#. module: alc_stock_location_content_relocation
+#: model:ir.model.fields,field_description:alc_stock_location_content_relocation.field_alc_location_content_relocation_generator_write_date
+msgid "Last Updated on"
+msgstr "Dernière mise à jour le"
+
+#. module: alc_stock_location_content_relocation
+#: model:ir.model.fields,field_description:alc_stock_location_content_relocation.field_alc_location_content_relocation_generator_location_id
+msgid "Location"
+msgstr "Lieu"
+
+#. module: alc_stock_location_content_relocation
+#: model:ir.model,name:alc_stock_location_content_relocation.model_alc_location_content_relocation_generator
+msgid "alc.location.content.relocation.generator"
+msgstr "alc.location.content.relocation.generator"
+

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+  <record model="ir.ui.view" id="alc_location_content_relocation_generator_form_view">
+    <field
+      name="name"
+    >alc.location.content.relocation.generator.form (in alc_stock_transfer)</field>
+    <field name="model">alc.location.content.relocation.generator</field>
+    <field name="arch" type="xml">
+      <form string="Alc Location Content Relocation Generator">
+        <group>
+          <field name="location_id" context="{'kind': 'bin'}" />
+        </group>
+        <footer>
+          <button
+            name="dotransfer"
+            string="Do transfer for this location"
+            class="btn-primary"
+            type="object"
+          />
+          <button string="Cancel" class="btn-default" special="cancel" />
+        </footer>
+      </form>
+    </field>
+  </record>
+  <record
+    model="ir.actions.act_window"
+    id="alc_location_content_relocation_generator_act_window"
+  >
+    <field name="name">Alc Location Content Relocation Generator</field>
+    <field name="res_model">alc.location.content.relocation.generator</field>
+    <field name="view_mode">form</field>
+    <field name="context">{}</field>
+    <field name="target">new</field>
+  </record>
+  <menuitem
+    action="alc_location_content_relocation_generator_act_window"
+    id="alc_location_content_relocation_generator_menu"
+    parent="stock.menu_stock_inventory_control"
+    sequence="60"
+  />
+</odoo>
