@@ -56,6 +56,17 @@ class ProductTemplate(models.Model):
         index=True,
     )
 
+    has_no_dimensions = fields.Boolean(
+        default=False, compute="_compute_has_no_dimensions", store=True, index=True,
+    )
+
+    packaging_has_no_dimensions = fields.Boolean(
+        default=False,
+        compute="_compute_packaging_has_no_dimensions",
+        store=True,
+        index=True,
+    )
+
     has_anomaly = fields.Boolean(
         default=False, compute="_compute_has_anomaly", store=True, index=True
     )
@@ -74,6 +85,8 @@ class ProductTemplate(models.Model):
                 and not (on_command_reappro_route in product.route_ids)
             ):
                 product.no_min_max_no_on_command_reappro = True
+            else:
+                product.no_min_max_no_on_command_reappro = False
 
             if (
                 product.orderpoint_min
@@ -81,18 +94,24 @@ class ProductTemplate(models.Model):
                 and on_command_reappro_route in product.route_ids
             ):
                 product.min_max_on_command_reappro = True
+            else:
+                product.min_max_on_command_reappro = False
 
     @api.depends("sale_ok", "active")
     def _compute_sale_not_ok_not_archived(self):
         for product in self:
             if not product.sale_ok and product.active:
                 product.sale_not_ok_not_archived = True
+            else:
+                product.sale_not_ok_not_archived = False
 
     @api.depends("sale_ok", "active", "stock_bin_ids")
     def _compute_sale_not_ok_archived_bin_available(self):
         for product in self:
             if product.stock_bin_ids and not (product.sale_ok and product.active):
                 product.sale_not_ok_archived_bin_available = True
+            else:
+                product.sale_not_ok_archived_bin_available = False
 
     @api.depends("purchase_ok", "route_ids")
     def _compute_can_be_bought_without_buy_route(self):
@@ -101,6 +120,8 @@ class ProductTemplate(models.Model):
             product_routes = product.route_ids
             if product.purchase_ok and purchase_route not in product_routes:
                 product.can_be_bought_without_buy_route = True
+            else:
+                product.can_be_bought_without_buy_route = False
 
     @api.depends("route_ids")
     def _compute_mismatch_route_picking(self):
@@ -121,6 +142,8 @@ class ProductTemplate(models.Model):
             )
             if len(res) > 1:
                 product.mismatch_route_picking = True
+            else:
+                product.mismatch_route_picking = False
 
     @api.depends("picking_zone_id", "stock_bin_ids")
     def _compute_mismatch_picking_bin(self):
@@ -132,6 +155,8 @@ class ProductTemplate(models.Model):
                         != product.picking_zone_id
                     ):
                         product.mismatch_picking_bin = True
+                    else:
+                        product.mismatch_picking_bin = False
 
     @api.depends("route_ids")
     def _compute_mto_with_abnormal_route(self):
@@ -147,6 +172,57 @@ class ProductTemplate(models.Model):
                 and new_route in product_routes
             ):
                 product.mto_with_abnormal_route = True
+            else:
+                product.mto_with_abnormal_route = False
+
+    @api.depends(
+        "product_variant_ids",
+        "product_variant_ids.height",
+        "product_variant_ids.length",
+        "product_variant_ids.width",
+    )
+    def _compute_has_no_dimensions(self):
+        unique_variants = self.filtered(
+            lambda template: len(template.product_variant_ids) == 1
+        )
+        for product in unique_variants:
+            if product.type == "service":
+                # No dimensions on services
+                continue
+
+            if not product.length or not product.width or not product.height:
+                product.has_no_dimensions = True
+            else:
+                product.has_no_dimensions = False
+        for product in self - unique_variants:
+            product.has_no_dimensions = False
+
+    @api.depends(
+        "packaging_ids",
+        "packaging_ids.height",
+        "packaging_ids.length",
+        "packaging_ids.width",
+    )
+    def _compute_packaging_has_no_dimensions(self):
+        missing_dimensions = []
+        for product in self:
+            if product.type == "service":
+                # No dimensions on services
+                continue
+
+            packagings = product.mapped("packaging_ids")
+            if packagings:
+                for pack in packagings:
+                    if not pack.length or not pack.width or not pack.height:
+                        missing_dimensions.append(True)
+                    else:
+                        missing_dimensions.append(False)
+                if any(missing_dimensions):
+                    product.packaging_has_no_dimensions = True
+                else:
+                    product.packaging_has_no_dimensions = False
+            else:
+                product.packaging_has_no_dimensions = False
 
     @api.depends(
         "min_max_on_command_reappro",
@@ -157,6 +233,8 @@ class ProductTemplate(models.Model):
         "mismatch_picking_bin",
         "mto_with_abnormal_route",
         "can_be_bought_without_buy_route",
+        "has_no_dimensions",
+        "packaging_has_no_dimensions",
     )
     def _compute_has_anomaly(self):
         for product in self:
@@ -169,5 +247,9 @@ class ProductTemplate(models.Model):
                 or product.no_min_max_no_on_command_reappro
                 or product.mto_with_abnormal_route
                 or product.can_be_bought_without_buy_route
+                or product.has_no_dimensions
+                or product.packaging_has_no_dimensions
             ):
                 product.has_anomaly = True
+            else:
+                product.has_anomaly = False

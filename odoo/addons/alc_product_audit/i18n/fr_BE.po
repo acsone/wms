@@ -23,6 +23,17 @@ msgstr "- Produit acheté/vendu avec une route incohérente"
 
 #. module: alc_product_audit
 #: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
+msgid "- Product is missing dimensions"
+msgstr "- Le produit n'a pas toutes les dimensions"
+
+#. module: alc_product_audit
+#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
+msgid "- Product is missing packaging dimensions"
+msgstr "- Le produit n'a pas toutes les dimensions de conditionnement"
+
+
+#. module: alc_product_audit
+#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
 msgid ""
 "- More than one route is selected for the product, leading to a mismatch "
 "with the picking zone"
@@ -181,3 +192,14 @@ msgstr "Ne peut être vendu et non archivé"
 #: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
 msgid "can be bought without buy routes"
 msgstr "Peut être acheté sans route Acheter"
+
+
+#. module: alc_product_audit
+#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
+msgid "Missing dimensions"
+msgstr "Dimensions manquantes"
+
+#. module: alc_product_audit
+#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
+msgid "Missing packaging dimensions"
+msgstr "Dimensions de conditionnement manquantes"
