@@ -95,6 +95,19 @@ class TestProductTemplate(SavepointCase):
         )
         cls.product_template = cls.product.product_tmpl_id
 
+        cls.product1 = cls.env["product.product"].create(
+            {
+                "name": "Product without packaging",
+                "sale_ok": True,
+                "uom_id": cls.env.ref("product.product_uom_unit").id,
+                "type": "product",
+                "weight": 20.0,
+                "barcode": "XXX0003",
+                "default_code": "678910",
+            }
+        )
+        cls.product_template1 = cls.product1.product_tmpl_id
+
         cls.warehouse = cls.env.ref("stock.warehouse0")
 
         picking_sequence = cls.warehouse.pick_type_id.sequence_id
@@ -219,6 +232,28 @@ class TestProductTemplate(SavepointCase):
             }
         )
 
+        cls.ProductPackaging = cls.env["product.packaging"]
+        cls.product_palette = cls.ProductPackaging.create(
+            {
+                "packaging_type_id": cls.env.ref(
+                    "alc_product_packaging.product_packaging_type_palette"
+                ).id,
+                "name": "Palette",
+                "qty": 80,
+                "product_tmpl_id": cls.product.product_tmpl_id.id,
+            }
+        )
+        cls.product_box = cls.ProductPackaging.create(
+            {
+                "packaging_type_id": cls.env.ref(
+                    "alc_product_packaging.product_packaging_type_box"
+                ).id,
+                "name": "Box",
+                "qty": 20,
+                "product_tmpl_id": cls.product.product_tmpl_id.id,
+            }
+        )
+
     def test_1(self):
         " no min/max, and no route for 'approvisionner a la commande'"
         self.product_template._compute_min_max_and_on_command_reappro()
@@ -312,3 +347,31 @@ class TestProductTemplate(SavepointCase):
 
         self.product_template._compute_mto_with_abnormal_route()
         self.assertTrue(self.product_template.mto_with_abnormal_route)
+
+    def test_9(self):
+        "product without dimensions"
+
+        self.product_template._compute_has_no_dimensions()
+        self.assertTrue(self.product_template.has_no_dimensions)
+
+        self.product_template.write({"height": 10.0, "width": 5.0, "length": 2.0})
+
+        self.assertFalse(self.product_template.has_no_dimensions)
+
+    def test_10(self):
+        "product without packaging dimensions"
+
+        self.product_template._compute_packaging_has_no_dimensions()
+        self.assertTrue(self.product_template.packaging_has_no_dimensions)
+
+        self.product_palette.write({"height": 100.0, "width": 50.0, "length": 20.0})
+        self.assertTrue(self.product_template.packaging_has_no_dimensions)
+        self.product_box.write({"height": 100.0, "width": 50.0, "length": 20.0})
+
+        self.assertFalse(self.product_template.packaging_has_no_dimensions)
+
+    def test_11(self):
+        "product without packaging at all"
+
+        self.product_template1._compute_packaging_has_no_dimensions()
+        self.assertFalse(self.product_template1.packaging_has_no_dimensions)
