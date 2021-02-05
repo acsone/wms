@@ -121,3 +121,15 @@ class TestStockLocation(TestStorageTypeCommon):
             location.location_will_contain_lot_ids,
             self.env["stock.production.lot"].browse(),
         )
+
+    def test_location_is_empty(self):
+        location = self.pallets_bin_1_location
+        location.allowed_location_storage_type_ids.only_empty = False
+        lot_values = {"product_id": self.product.id}
+        lot1 = self.env["stock.production.lot"].create(lot_values)
+
+        self._update_qty_in_location(location, self.product, 10, lot=lot1)
+        self.assertTrue(location.location_is_empty)
+
+        location.allowed_location_storage_type_ids.only_empty = True
+        self.assertFalse(location.location_is_empty)
