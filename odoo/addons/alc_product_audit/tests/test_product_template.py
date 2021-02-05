@@ -364,9 +364,9 @@ class TestProductTemplate(SavepointCase):
         self.product_template._compute_packaging_has_no_dimensions()
         self.assertTrue(self.product_template.packaging_has_no_dimensions)
 
-        self.product_palette.write({"height": 100.0, "width": 50.0, "length": 20.0})
+        self.product_palette.write({"height": 100.0, "width": 50.0, "lngth": 20.0})
         self.assertTrue(self.product_template.packaging_has_no_dimensions)
-        self.product_box.write({"height": 100.0, "width": 50.0, "length": 20.0})
+        self.product_box.write({"height": 100.0, "width": 50.0, "lngth": 20.0})
 
         self.assertFalse(self.product_template.packaging_has_no_dimensions)
 
