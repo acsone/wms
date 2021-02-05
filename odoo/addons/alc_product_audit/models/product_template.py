@@ -200,7 +200,7 @@ class ProductTemplate(models.Model):
     @api.depends(
         "packaging_ids",
         "packaging_ids.height",
-        "packaging_ids.length",
+        "packaging_ids.lngth",
         "packaging_ids.width",
     )
     def _compute_packaging_has_no_dimensions(self):
@@ -213,7 +213,7 @@ class ProductTemplate(models.Model):
             packagings = product.mapped("packaging_ids")
             if packagings:
                 for pack in packagings:
-                    if not pack.length or not pack.width or not pack.height:
+                    if not pack.lngth or not pack.width or not pack.height:
                         missing_dimensions.append(True)
                     else:
                         missing_dimensions.append(False)
