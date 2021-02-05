@@ -330,77 +330,105 @@ def update_product_packagings_table(env, data, verbose):
     if verbose:
         click.echo("Updating or creating packagings for products. . .")
     # List all products that does not have packaging and are in the dataframe : create packaging for those one
-    env.cr.execute(
-        """ SELECT id, default_code, name
-                        FROM product_template pt
-                        JOIN dataframe_table p_df ON pt.default_code = p_df.Ref
-                        WHERE pt.id NOT IN (SELECT product_tmpl_id FROM product_packaging)
-                        """
-    )
-    result = env.cr.fetchall()
-    if result:
-        product_ids = tuple([r[0] for r in result])
-        if verbose:
-            click.echo("ids to create: {}. . .".format(product_ids))
-        # Create product packaging
-        env.cr.execute(
-            """ INSERT INTO product_packaging (name, packaging_type_id, max_weight, height, width, lngth, product_tmpl_id)
-                            SELECT p_df.Secondary, p_df.Secondary_id, p_df.Weight, p_df.Height, p_df.Width, p_df.Length, pt.id
-                            FROM dataframe_table p_df JOIN product_template pt ON p_df.Ref = pt.default_code
-                            WHERE pt.id IN %(ids)s
-        """,
-            {"ids": product_ids},
-        )
+    env.cr.execute(""" DELETE FROM product_packaging """)
 
-    if verbose:
-        click.echo("Now updating existing packaging product ids. . .")
-    # Update my product packaging table
+    # env.cr.execute(
+    #     """ SELECT id, default_code, name
+    #                     FROM product_template pt
+    #                     JOIN dataframe_table p_df ON pt.default_code = p_df.Ref
+    #                     WHERE pt.id NOT IN (SELECT product_tmpl_id FROM product_packaging)
+    #                     """
+    # )
+    # result = env.cr.fetchall()
+    # if result:
+    #     product_ids = tuple([r[0] for r in result])
+    #     if verbose:
+    #         click.echo("ids to create: {}. . .".format(product_ids))
+
+    # Create product packaging
     env.cr.execute(
-        """ UPDATE
-                            product_packaging p_pckg
-                       SET
-                            max_weight = p_df.Weight,
-                            height = p_df.Height,
-                            height_cm = p_df.Height / 10,
-                            width = p_df.Width,
-                            width_cm = p_df.Width / 10,
-                            lngth = p_df.Length,
-                            length_cm = p_df.Length / 10,
-                            barcode = p_df.User1,
-                            qty = p_df.User3
-                       FROM (dataframe_table p_df JOIN product_template pt ON p_df.Ref = pt.default_code)
-                       WHERE pt.id = p_pckg.product_tmpl_id AND p_pckg.packaging_type_id = p_df.Secondary_id
-                   """
+        """ INSERT INTO product_packaging
+                            (name,
+                            packaging_type_id,
+                            max_weight,
+                            height,
+                            height_cm,
+                            width,
+                            width_cm,
+                            lngth,
+                            length_cm,
+                            product_tmpl_id,
+                            barcode,
+                            qty)
+                    SELECT
+                        p_df.Secondary,
+                        p_df.Secondary_id,
+                        p_df.Weight,
+                        p_df.Height,
+                        p_df.Height / 10,
+                        p_df.Width,
+                        p_df.Width / 10,
+                        p_df.Length,
+                        p_df.Length / 10,
+                        pt.id,
+                        p_df.User1,
+                        p_df.User3
+                    FROM dataframe_table p_df
+                    JOIN product_template pt ON p_df.Ref = pt.default_code
+    """
     )
+
     env.cr.commit()
 
-    env.cr.execute(
-        """
-        SELECT p_pckg.id FROM product_packaging p_pckg
-        JOIN product_template pt ON pt.id = p_pckg.product_tmpl_id
-        LEFT JOIN dataframe_table p_dff ON p_pckg.packaging_type_id = p_dff.Secondary_id AND pt.default_code = p_dff.Ref
-        WHERE p_dff.Secondary_id IS NULL
+    # if verbose:
+    #     click.echo("Now updating existing packaging product ids. . .")
+    # # Update my product packaging table
+    # env.cr.execute(
+    #     """ UPDATE
+    #                         product_packaging p_pckg
+    #                    SET
+    #                         max_weight = p_df.Weight,
+    #                         height = p_df.Height,
+    #                         height_cm = p_df.Height / 10,
+    #                         width = p_df.Width,
+    #                         width_cm = p_df.Width / 10,
+    #                         lngth = p_df.Length,
+    #                         length_cm = p_df.Length / 10,
+    #                         barcode = p_df.User1,
+    #                         qty = p_df.User3
+    #                    FROM (dataframe_table p_df JOIN product_template pt ON p_df.Ref = pt.default_code)
+    #                    WHERE pt.id = p_pckg.product_tmpl_id AND p_pckg.packaging_type_id = p_df.Secondary_id
+    #                """
+    # )
+    # env.cr.commit()
 
-        """
-    )
+    # env.cr.execute(
+    #     """
+    #     SELECT p_pckg.id FROM product_packaging p_pckg
+    #     JOIN product_template pt ON pt.id = p_pckg.product_tmpl_id
+    #     LEFT JOIN dataframe_table p_dff ON p_pckg.packaging_type_id = p_dff.Secondary_id AND pt.default_code = p_dff.Ref
+    #     WHERE p_dff.Secondary_id IS NULL
 
-    result = env.cr.fetchall()
+    #     """
+    # )
 
-    if result:
-        packaging_ids = tuple([r[0] for r in result])
-        if verbose:
-            click.echo(
-                "Deleting following product packaging ids that where not in the xlsx file: {}. . .".format(
-                    packaging_ids
-                )
-            )
-        # deleting product packaging
-        env.cr.execute(
-            """ DELETE FROM product_packaging WHERE id IN %(ids)s
-        """,
-            {"ids": packaging_ids},
-        )
-        env.cr.commit()
+    # result = env.cr.fetchall()
+
+    # if result:
+    #     packaging_ids = tuple([r[0] for r in result])
+    #     if verbose:
+    #         click.echo(
+    #             "Deleting following product packaging ids that where not in the xlsx file: {}. . .".format(
+    #                 packaging_ids
+    #             )
+    #         )
+    #     # deleting product packaging
+    #     env.cr.execute(
+    #         """ DELETE FROM product_packaging WHERE id IN %(ids)s
+    #     """,
+    #         {"ids": packaging_ids},
+    #     )
+    #     env.cr.commit()
 
     if verbose:
         click.echo("Dropping packaging product temporary table. . .")
