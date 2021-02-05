@@ -11,7 +11,8 @@ from odoo.tools import ormcache
 OptimizationConfig = namedtuple(
     "OptimizationConfig",
     "enabled,api_url,api_key,duration,delivery_duration,loading_duration,"
-    "resources_number,work_penalty,travel_penalty,daily_work_time,resource_cfg",
+    "resources_number,work_penalty,travel_penalty,daily_work_time,resource_cfg,"
+    "method",
 )
 
 
@@ -24,11 +25,11 @@ class StockConfigSettings(models.TransientModel):
     geo_optimization_api_key = fields.Char("TourSolver API Key")
     geo_optimization_duration = fields.Integer(
         "Optimization process max duration",
-        help="Duration in seconds allowed to the computation of " "the optimization",
+        help="Duration in seconds allowed to the computation of the optimization",
     )
     geo_optimization_delivery_duration = fields.Integer(
         "Fixed time spent deliverying a customer",
-        help="Duration in seconds needed to deliver a cutomer",
+        help="Duration in seconds needed to deliver a customer",
     )
 
     geo_optimization_loading_duration = fields.Integer(
@@ -49,6 +50,13 @@ class StockConfigSettings(models.TransientModel):
 
     geo_optimization_resource_cfg = fields.Text(
         "Additional resources configuration (json)"
+    )
+    geo_optimization_method = fields.Selection(
+        selection=[
+            ("fixed_sequence", "Fixed sequence computed from delivery windows"),
+            ("optimized", "Computed by the geo optimisation mechanism"),
+        ],
+        default="fixed_sequence",
     )
 
     @api.model
@@ -109,6 +117,9 @@ class StockConfigSettings(models.TransientModel):
                 "alc_delivery_rounds_geooptimize.geo_optimization_resource_cfg", "{}"
             )
         )
+        method = IrConfigParameter.get_param(
+            "alc_delivery_rounds_geooptimize.geo_optimization_method", "fixed_sequence",
+        )
 
         return OptimizationConfig(
             enabled=enabled,
@@ -122,6 +133,7 @@ class StockConfigSettings(models.TransientModel):
             travel_penalty=travel_penalty,
             daily_work_time=daily_work_time,
             resource_cfg=resource_cfg,
+            method=method,
         )
 
     @api.model
@@ -150,6 +162,8 @@ class StockConfigSettings(models.TransientModel):
             res["geo_optimization_daily_work_time"] = cfg.daily_work_time
         if "geo_optimization_resource_cfg" in _fields or not _fields:
             res["geo_optimization_resource_cfg"] = json.dumps(cfg.resource_cfg)
+        if "geo_optimization_method" in _fields or not _fields:
+            res["geo_optimization_method"] = cfg.method
 
         return res
 
@@ -249,4 +263,13 @@ class StockConfigSettings(models.TransientModel):
         self.env["ir.config_parameter"].set_param(
             "alc_delivery_rounds_geooptimize.geo_optimization_resource_cfg",
             self.geo_optimization_resource_cfg or "{}",
+        )
+
+    @api.multi
+    def set_geo_optimization_method(self):
+        self.ensure_one()
+
+        self.env["ir.config_parameter"].set_param(
+            "alc_delivery_rounds_geooptimize.geo_optimization_method",
+            self.geo_optimization_method or "fixed_sequence",
         )

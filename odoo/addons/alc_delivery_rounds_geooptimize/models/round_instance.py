@@ -63,6 +63,9 @@ class RoundInstance(models.Model):
     geo_optimization_resource_id = fields.Selection(
         selection="_selection_geo_optimization_resource_id"
     )
+    geo_optimization_method = fields.Selection(
+        selection="_selection_geo_optimization_method"
+    )
     geo_optimization_result = fields.Binary(attachment=True, readonly=True)
     geo_optimization_request = fields.Binary(attachment=True, readonly=True)
 
@@ -82,6 +85,14 @@ class RoundInstance(models.Model):
     @api.model
     def _selection_geo_optimization_resource_id(self):
         return self.env["round.template"]._selection_geo_optimization_resource_id()
+
+    @api.model
+    def _selection_geo_optimization_method(self):
+        return (
+            self.env["stock.config.settings"]
+            ._fields["geo_optimization_method"]
+            .selection
+        )
 
     @api.constrains("geo_optimization_enabled", "geo_optimization_resource_id")
     def _check_geo_optimization_resource_id(self):
@@ -141,10 +152,14 @@ class RoundInstance(models.Model):
 
     @api.model
     def create(self, vals):
+        cfg = self.get_optimization_config()
         if "geo_optimization_enabled" not in vals and "template_id" in vals:
             template = self.env["round.template"].browse(vals["template_id"])
             vals["geo_optimization_enabled"] = template.geo_optimization_enabled
             vals["geo_optimization_resource_id"] = template.geo_optimization_resource_id
+            vals["geo_optimization_method"] = (
+                template.geo_optimization_method or cfg.method
+            )
         return super(RoundInstance, self).create(vals)
 
     @api.onchange("template_id")
@@ -338,6 +353,11 @@ class RoundInstance(models.Model):
         delivery_windows_by_partner_id = partners.get_delivery_windows(
             "%s" % fields.Date.from_string(self.date).weekday()
         )
+        partner_delivery_sequences = {}
+        if self.geo_optimization_method == "fixed_sequence":
+            partner_delivery_sequences = partners.get_delivery_sequence(
+                "%s" % fields.Date.from_string(self.date).weekday()
+            )
         for partner in partners:
             phones = filter(None, (partner.mobile or None, partner.phone or None))
             order = {
@@ -350,7 +370,16 @@ class RoundInstance(models.Model):
                 "x": partner.partner_longitude,
                 "y": partner.partner_latitude,
             }
+            if self.geo_optimization_method == "fixed_sequence":
+                order["evaluationInfos"] = {
+                    "orderPosition": partner_delivery_sequences[partner.id],
+                    "orderOriginalResourceId": self.geo_optimization_resource_id,
+                    "orderOriginalVisitDay": 1,
+                }
 
+            if self.geo_optimization_method == "fixed_sequence" and False:
+                order["sequenceNumber"] = partner_delivery_sequences[partner.id]
+                order["tsOrderFixed"] = True
             customDataMap = {}
             if partner.comment:
                 customDataMap["notes"] = partner.comment
@@ -412,11 +441,14 @@ class RoundInstance(models.Model):
         return [res]
 
     def _generate_optimization_options(self, cfg):
-        return {
+        res = {
             "vehicleCode": "deliveryIntermediateVehicle",
             "maxOptimDuration": seconds_to_duration(cfg.duration),
             "useForbiddenTransitAreas": False,
         }
+        if self.geo_optimization_method == "fixed_sequence":
+            res["evaluation"] = True
+        return res
 
     def _send_optimization_request(self, json_request):
         """

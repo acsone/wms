@@ -35,6 +35,7 @@ class TestStockConfigSettings(SavepointCase):
                 "geo_optimization_resources_number": 5,
                 "geo_optimization_daily_work_time": 5.0,
                 "geo_optimization_resource_cfg": json.dumps(resource_cfg),
+                "geo_optimization_method": "optimized",
             }
         ).execute()
         config = self.StockConfigSettings.get_optimization_config()
@@ -47,6 +48,7 @@ class TestStockConfigSettings(SavepointCase):
         self.assertEqual(config.resources_number, 5)
         self.assertEqual(config.daily_work_time, 5.0)
         self.assertDictEqual(config.resource_cfg, resource_cfg)
+        self.assertEqual(config.method, "optimized")
 
         # an update on the parameters invalidate the config cache
         self.IrConfigParameter.set_param(

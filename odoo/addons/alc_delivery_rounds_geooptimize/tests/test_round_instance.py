@@ -42,6 +42,7 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
                 "geo_optimization_resource_cfg": json.dumps(
                     {"dailyWorkTime": "10:00:00"}
                 ),
+                "geo_optimization_method": "optimized",
             }
         ).execute()
         cls.delivery_round_1.write(
@@ -49,6 +50,7 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
                 "geo_optimization_enabled": True,
                 "geo_optimization_resource_id": "D1",
                 "date": "2020-10-15",
+                "geo_optimization_method": "optimized",
             }
         )
         cls.partner1.write({"partner_latitude": 10.1, "partner_longitude": 10.1})
@@ -1172,6 +1174,109 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
             "simulationName": self.delivery_round_1.display_name,
         }
         self.assertJsonEqual(res, expected)
+
+    @freeze_time("2020-01-01 07:10:00")
+    def test_24(self):
+        """
+        Data:
+            A round ready to be delivered for 3 partners.
+            All partners are without delivery window.
+            partner1 name is C
+            partner2 name is A
+            partner3 name is B
+            Set optimization method to 'fixed_sequence'
+        Test case:
+            Call method _generate_optimization_request
+        Expected result:
+            The json must contains an evaluationInfos element with an orderPosition
+            the orderPosition must be the position of the partner into the list
+            of partners ordered alphabetically
+        """
+        self.delivery_round_1.geo_optimization_method = "fixed_sequence"
+        self.partner1.name = "C"
+        self.partner2.name = "A"
+        self.partner3.name = "B"
+        res = self.delivery_round_1._generate_optimization_request()
+        ordersInfo = res["orders"]
+        position_by_partner = {
+            self.partner1.id: 3,
+            self.partner2.id: 1,
+            self.partner3.id: 2,
+        }
+        for orderInfo in ordersInfo:
+            self.assertIn("evaluationInfos", orderInfo)
+            self.assertEqual(
+                orderInfo["evaluationInfos"]["orderPosition"],
+                position_by_partner[orderInfo["id"]],
+            )
+
+    @freeze_time("2020-01-01 07:10:00")
+    def test_25(self):
+        """
+        Data:
+            A round ready to be delivered for 3 partners.
+            Delivery window on partners are as follow.
+            partner1 name  13:00 14:00
+            partner2 name is 12:30 13:30
+            partner3 name is 13:30 14h30
+            Set optimization method to 'fixed_sequence'
+        Test case:
+            Call method _generate_optimization_request
+        Expected result:
+            The json must contains an evaluationInfos element with an orderPosition
+            the orderPosition must be the position of the partner into the list
+            of partners ordered by delivery window start time
+        """
+        self.delivery_round_1.geo_optimization_method = "fixed_sequence"
+        AlcDeliveryWeekDay = self.env["alc.delivery.week.day"]
+        AlcDeliveryWindow = self.env["alc.delivery.window"]
+        date_delivery = datetime.datetime.strptime(
+            self.delivery_round_1.date, "%Y-%m-%d"
+        )
+        week_day_delivery = date_delivery.weekday()
+        date_delivery_id = AlcDeliveryWeekDay._get_id_by_name("%s" % week_day_delivery)
+        AlcDeliveryWindow.create(
+            {
+                "partner_id": self.partner1.id,
+                "week_day_ids": [(4, date_delivery_id)],
+                "start": 13.0,
+                "end": 14.0,
+            }
+        )
+        AlcDeliveryWindow.create(
+            {
+                "partner_id": self.partner2.id,
+                "week_day_ids": [(4, date_delivery_id)],
+                "start": 12.5,
+                "end": 13.5,
+            }
+        )
+        AlcDeliveryWindow.create(
+            {
+                "partner_id": self.partner3.id,
+                "week_day_ids": [(4, date_delivery_id)],
+                "start": 13.5,
+                "end": 14.5,
+            }
+        )
+        res = self.delivery_round_1._generate_optimization_request()
+        ordersInfo = res["orders"]
+        position_by_partner = {
+            self.partner1.id: 2,
+            self.partner2.id: 1,
+            self.partner3.id: 3,
+        }
+        for orderInfo in ordersInfo:
+            partner = self.env["res.partner"].browse(int(orderInfo["id"]))
+            self.assertIn("evaluationInfos", orderInfo)
+            expected = position_by_partner[orderInfo["id"]]
+            effective = orderInfo["evaluationInfos"]["orderPosition"]
+            self.assertEqual(
+                expected,
+                effective,
+                "%s is not at the right position (expected: %s / effective: %s)"
+                % (partner.name, expected, effective),
+            )
 
 
 class _PseudoRequestsResponse(object):

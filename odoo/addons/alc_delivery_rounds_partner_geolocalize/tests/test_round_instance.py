@@ -34,10 +34,15 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
                 "geo_optimization_delivery_duration": 10,
                 "geo_optimization_loading_duration": 100,
                 "geo_optimization_resources_number": 1,
+                "geo_optimization_method": "optimized",
             }
         ).execute()
         cls.delivery_round_1.write(
-            {"geo_optimization_enabled": True, "geo_optimization_resource_id": "D1"}
+            {
+                "geo_optimization_enabled": True,
+                "geo_optimization_resource_id": "D1",
+                "geo_optimization_method": "optimized",
+            }
         )
         cls.partner1.write({"partner_latitude": 10.1, "partner_longitude": 10.1})
 

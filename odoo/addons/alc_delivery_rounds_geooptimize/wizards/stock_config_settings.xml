@@ -23,6 +23,11 @@
             attrs="{'invisible': [('geo_optimization_enabled', '=', False)]}"
           />
           <field
+            name="geo_optimization_method"
+            string="Method"
+            attrs="{'invisible': [('geo_optimization_enabled', '=', False)]}"
+          />
+          <field
             name="geo_optimization_resources_number"
             string="Number of resources available"
             attrs="{'invisible': [('geo_optimization_enabled', '=', False)]}"

@@ -13,6 +13,7 @@
           name="geo_optimization_resource_id"
           attrs="{'required': [('geo_optimization_enabled', '=', True)]}"
         />
+        <field name="geo_optimization_method" />
       </field>
     </field>
   </record>
@@ -43,6 +44,7 @@
           name="geo_optimization_resource_id"
           attrs="{'required': [('geo_optimization_enabled', '=', True)]}"
         />
+        <field name="geo_optimization_method" />
       </field>
     </field>
   </record>
