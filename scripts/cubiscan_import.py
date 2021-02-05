@@ -376,18 +376,14 @@ def update_product_packagings_table(env, data, verbose):
 
     env.cr.execute(
         """
-        SELECT DISTINCT p_pckg.id FROM product_packaging p_pckg
+        SELECT p_pckg.id FROM product_packaging p_pckg
         JOIN product_template pt ON pt.id = p_pckg.product_tmpl_id
-        JOIN dataframe_table p_df ON pt.default_code = p_df.Ref
-        LEFT JOIN dataframe_table p_dff ON p_pckg.packaging_type_id = p_dff.Secondary_id
+        LEFT JOIN dataframe_table p_dff ON p_pckg.packaging_type_id = p_dff.Secondary_id AND pt.default_code = p_dff.Ref
         WHERE p_dff.Secondary_id IS NULL
 
         """
     )
-    #     SELECT p_pckg.id FROM product_packaging p_pckg
-    # WHERE NOT EXISTS (SELECT p_df.Secondary_id FROM dataframe_table p_df
-    # JOIN product_template pt ON pt.default_code = p_df.Ref
-    # JOIN product_packaging p_pckg ON pt.id = p_pckg.product_tmpl_id)
+
     result = env.cr.fetchall()
 
     if result:
