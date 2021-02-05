@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+  <record model="ir.ui.view" id="res_partner_form_view">
+    <field name="name">res.partner.form (in alc_customer_audit)</field>
+    <field name="model">res.partner</field>
+    <field name="inherit_id" ref="base.view_partner_form" />
+    <field name="arch" type="xml">
+      <form position="inside">
+        <field name="has_anomaly" invisible="1" />
+        <field name="no_delivery_round" invisible="1" />
+        <field name="no_pharmacist" invisible="1" />
+      </form>
+      <div name="button_box" position="before">
+        <div
+          class="alert alert-warning"
+          attrs="{'invisible': [('has_anomaly', '=', False)]}"
+        >
+                    Following issue(s) is/are observed on the customer:
+                    <div attrs="{'invisible': [('no_delivery_round', '=', False)]}">
+            <p> - Customer is active but not in a delivery round </p>
+          </div>
+                    <div attrs="{'invisible': [('no_pharmacist', '=', False)]}">
+            <p
+            >- Customer is a veterinarian with a depot and does not have a pharmacist</p>
+          </div>
+                </div>
+      </div>
+    </field>
+  </record>
+  <record model="ir.ui.view" id="res_partner_search_view">
+    <field name="name">res.partner.search (in alc_customer_audit)</field>
+    <field name="model">res.partner</field>
+    <field name="inherit_id" ref="base.view_res_partner_filter" />
+    <field name="arch" type="xml">
+      <xpath expr="//search" position="inside">
+        <separator />
+        <filter
+          string="Customer has an anomaly"
+          name="filter_has_anomaly"
+          domain="[('has_anomaly','=',True)]"
+        />
+        <filter
+          string="No delivery round"
+          name="filter_no_delivery_round"
+          domain="[('no_delivery_round','=',True)]"
+        />
+        <filter
+          string="No pharmacist"
+          name="filter_no_pharmacist"
+          domain="[('no_pharmacist','=',True)]"
+        />
+      </xpath>
+    </field>
+  </record>
+  <record model="ir.ui.view" id="res_partner_tree_view">
+    <field name="name">res.partner.tree (in alc_customer_audit)</field>
+    <field name="model">res.partner</field>
+    <field name="inherit_id" ref="specific_partner.view_res_partner_specific_tree" />
+    <field name="arch" type="xml">
+      <field name="supplier" position="after">
+        <field name="has_anomaly" />
+      </field>
+    </field>
+  </record>
+</odoo>
