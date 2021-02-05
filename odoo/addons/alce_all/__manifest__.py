@@ -5,7 +5,7 @@
     "name": "Alc All Enterprise",
     "description": """
         Alcyon addons under Odoo Enterprise licence""",
-    "version": "10.0.1.62.13",
+    "version": "10.0.1.62.14",
     "license": "Other proprietary",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
