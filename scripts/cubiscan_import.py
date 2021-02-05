@@ -15,6 +15,7 @@ import pandas as pd
 import psycopg2
 
 
+# pylint: disable=unnecessary-lambda,no-value-for-parameter
 def dataframe_to_sql_table(env, dataframe, verbose):
     # Create temporary DF table for products
     # NB : index is just to stick to the DF, first column is the index
@@ -70,12 +71,13 @@ def dataframe_to_sql_table(env, dataframe, verbose):
     except (Exception, psycopg2.DatabaseError) as error:
         env.cr.rollback()
         logging.getLogger(__name__).error(
-            "Error when trying to to copy dataframe into temporary table %s" % error
+            "Error when trying to to copy dataframe into temporary table %s", error
         )
         return 1
 
     if verbose:
         click.echo("I tried,  it went well!. . .")
+    return None
 
 
 def format_files_to_dataframe(env, path_to_files, verbose):
@@ -102,6 +104,9 @@ def format_files_to_dataframe(env, path_to_files, verbose):
         # new_export = new_export.append(df, ignore_index=True, sort=True)
 
     # Replace Nan values with proper value for consistancy in the SQL table
+    # Fill withe spaces with NaN to convert it to zeros after
+    all_data["User1"] = all_data["User1"].replace(r"^\s*$", np.nan, regex=True)
+
     all_data = all_data.fillna(
         value={
             "Description": "",
@@ -124,29 +129,12 @@ def format_files_to_dataframe(env, path_to_files, verbose):
     all_data["REF "] = all_data["REF "].astype(str)
     # REF is 7 char min. zeros were removed at the beginning because of np.int6' -- which is necessary
     # to prevent pandas to interpret those ref as float and then put a .0 at the end
-    # all_data[all_data['REF '].str.len() == 6] = all_data['REF '].apply(lambda x: "{}{}".format('0', x))
-    # all_data[all_data['REF '].str.len() == 5] = all_data['REF '].apply(lambda x: "{}{}".format('00', x))
+
     all_data["User1"] = all_data["User1"].astype(np.int64)
     all_data["User2"] = all_data["User2"].astype(np.int64)
     all_data["User2"] = all_data["User2"].apply(lambda x: "{:0>7}".format(x))
     all_data["User3"] = all_data["User3"].astype(np.int64)
 
-    # new_export["REF "] = new_export["REF "].astype(np.int64)
-    # new_export["REF "] = new_export["REF "].astype(str)
-    # new_export["User1"] = new_export["User1"].astype(np.int64)
-    # new_export["User2"] = new_export["User2"].astype(np.int64)
-    # new_export["User3"] = new_export["User3"].astype(np.int64)
-    # cols = ['Sequence', 'REF ', 'Secondary', 'Description', 'Length', 'Width',
-    #         'Height', 'Weight', 'Volume', 'Dim Wgt', 'Dim Unit',
-    #         'Wgt Unit', 'Vol Unit', 'Factor', 'Site ID', 'Date-Time', 'User1', 'User2',
-    #         'User3', 'User4', 'User5', 'User6', 'User7', 'User8', 'SnapShotFile', 'Updated', 'file name']
-    # all_data = all_data[cols]
-    # all_data.to_excel("/home/lma-local/Sources/odoo-alcyon/scripts/output.xlsx")
-
-    # all_data.drop(
-    #         ["file name"],
-    #         axis=1,
-    #         inplace=True)
     if verbose:
         click.echo("Dataframe Columns : {}. . .".format(all_data.columns))
         click.echo("Dataframe Head : {}. . .".format(all_data.head()))
@@ -210,25 +198,10 @@ def split_products_and_packagings(env, all_data_dataframe, verbose):
     return product_data, product_packaging_data
 
 
-@click.command()
-@click.option(
-    "--path-to-files", required=True, help="Directory where the xlsx files are."
-)
-@click.option("--verbose", default=False, help="Helps you with short messages.")
-@click_odoo.env_options(default_log_level="info")
-def main(env, path_to_files, verbose):
-    if True and verbose:
-        click.echo("Start processing xlsx files. . .")
-
-    # Format and split input data
-    all_data = format_files_to_dataframe(env, path_to_files, verbose)
-    product_data, product_packaging_data = split_products_and_packagings(
-        env, all_data, verbose
-    )
-
+def update_products_table(env, data, verbose):
     # Working on the product
     # Put DF to sql temporary table
-    dataframe_to_sql_table(env, product_data, verbose)
+    dataframe_to_sql_table(env, data, verbose)
 
     # Check all products in the dataframe exist in Odoo
     env.cr.execute(
@@ -257,7 +230,7 @@ def main(env, path_to_files, verbose):
     )
     result = env.cr.fetchall()
     if verbose:
-        click.echo("no barcode {}, count: {}. . .".format(result, len(result)))
+        click.echo("no barcode {}. . .".format(result))
 
     # Look for no cnk
     env.cr.execute(
@@ -268,7 +241,7 @@ def main(env, path_to_files, verbose):
     )
     result = env.cr.fetchall()
     if verbose:
-        click.echo("no ucnk {}, count: {}. . .".format(result, len(result)))
+        click.echo("no ucnk {}. . .".format(result))
 
     # Look for duplicates barcode
     env.cr.execute(
@@ -282,14 +255,6 @@ def main(env, path_to_files, verbose):
     if verbose:
         click.echo("duplicated barcode {}, count: {}. . .".format(result, len(result)))
         click.echo("products_refs {},. . .".format(products_refs))
-
-    env.cr.execute(
-        """ SELECT * FROM dataframe_table
-                WHERE Ref IN %(products_refs)s ORDER BY User1 DESC
-    """,
-        {"products_refs": products_refs},
-    )
-    result = env.cr.fetchall()
 
     env.cr.execute(
         """ DELETE FROM dataframe_table
@@ -311,14 +276,6 @@ def main(env, path_to_files, verbose):
         click.echo("duplicated cnk {}, count: {}. . .".format(result2, len(result2)))
 
     env.cr.execute(
-        """ SELECT * FROM dataframe_table
-                WHERE Ref IN %(products_refs)s ORDER BY User2 DESC
-    """,
-        {"products_refs": products_refs},
-    )
-    result = env.cr.fetchall()
-
-    env.cr.execute(
         """ DELETE FROM dataframe_table
                 WHERE Ref IN %(products_refs)s
     """,
@@ -333,8 +290,17 @@ def main(env, path_to_files, verbose):
                             weight = p_df.Weight,
                             height = p_df.Height,
                             width = p_df.Width,
-                            length = p_df.Length,
-                            volume = p_df.Volume,
+                            length = p_df.Length
+                       FROM dataframe_table p_df
+                       WHERE pp.default_code = p_df.Ref
+                """
+    )
+
+    env.cr.commit()
+    env.cr.execute(
+        """ UPDATE
+                            product_product pp
+                       SET
                             barcode = p_df.User1
                        FROM dataframe_table p_df
                        WHERE p_df.User1 != 0 AND pp.default_code = p_df.Ref
@@ -350,15 +316,17 @@ def main(env, path_to_files, verbose):
     # Drop temporary table
     env.cr.execute("""DROP TABLE dataframe_table""")
 
+
+def update_product_packagings_table(env, data, verbose):
     # Working on the product packaging
     # Put DF to sql temporary table
 
     # Data in mm for packagings : conversion for now
-    product_packaging_data["Height"] = product_packaging_data["Height"] * 10
-    product_packaging_data["Width"] = product_packaging_data["Width"] * 10
-    product_packaging_data["Length"] = product_packaging_data["Length"] * 10
+    data["Height"] = data["Height"] * 10
+    data["Width"] = data["Width"] * 10
+    data["Length"] = data["Length"] * 10
 
-    dataframe_to_sql_table(env, product_packaging_data, verbose)
+    dataframe_to_sql_table(env, data, verbose)
     if verbose:
         click.echo("Updating or creating packagings for products. . .")
     # List all products that does not have packaging and are in the dataframe : create packaging for those one
@@ -408,18 +376,14 @@ def main(env, path_to_files, verbose):
 
     env.cr.execute(
         """
-        SELECT DISTINCT p_pckg.id FROM product_packaging p_pckg
+        SELECT p_pckg.id FROM product_packaging p_pckg
         JOIN product_template pt ON pt.id = p_pckg.product_tmpl_id
-        JOIN dataframe_table p_df ON pt.default_code = p_df.Ref
-        LEFT JOIN dataframe_table p_dff ON p_pckg.packaging_type_id = p_dff.Secondary_id
+        LEFT JOIN dataframe_table p_dff ON p_pckg.packaging_type_id = p_dff.Secondary_id AND pt.default_code = p_dff.Ref
         WHERE p_dff.Secondary_id IS NULL
 
         """
     )
-    #     SELECT p_pckg.id FROM product_packaging p_pckg
-    # WHERE NOT EXISTS (SELECT p_df.Secondary_id FROM dataframe_table p_df
-    # JOIN product_template pt ON pt.default_code = p_df.Ref
-    # JOIN product_packaging p_pckg ON pt.id = p_pckg.product_tmpl_id)
+
     result = env.cr.fetchall()
 
     if result:
@@ -442,6 +406,26 @@ def main(env, path_to_files, verbose):
         click.echo("Dropping packaging product temporary table. . .")
     # Drop temporary table
     env.cr.execute("""DROP TABLE dataframe_table""")
+
+
+@click.command()
+@click.option(
+    "--path-to-files", required=True, help="Directory where the xlsx files are."
+)
+@click.option("--verbose", default=False, help="Helps you with short messages.")
+@click_odoo.env_options(default_log_level="info")
+def main(env, path_to_files, verbose):
+    if True and verbose:
+        click.echo("Start processing xlsx files. . .")
+
+    # Format and split input data
+    all_data = format_files_to_dataframe(env, path_to_files, verbose)
+    product_data, product_packaging_data = split_products_and_packagings(
+        env, all_data, verbose
+    )
+
+    update_products_table(env, product_data, verbose)
+    update_product_packagings_table(env, product_packaging_data, verbose)
 
 
 if __name__ == "__main__":
