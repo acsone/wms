@@ -64,9 +64,8 @@ class StockLocation(models.Model):
         if location_dest.kind != "bin":
             return location_dest.id
 
-        # Do not put product in bin if lot tracking (possibly fefo) and
-        # there is already stock in reserve
-        if product.tracking == "lot" and product.qty_in_reserve > 0:
+        # Do not put product in bin if there is already stock in reserve
+        if product.qty_in_reserve > 0:
             reserve = location_dest.reserve_location_id
             if not reserve:
                 reserve = location_dest._get_ancestors().mapped("reserve_location_id")[
