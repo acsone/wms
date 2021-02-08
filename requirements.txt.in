@@ -41,6 +41,8 @@ odoo10-addon-despatch-advice-import-ubl @  git+https://github.com/oca/edi.git@re
 # oca/stock-logistics-wokflow
 odoo10-addon-stock-quant-package-product-packaging @ git+https://github.com/oca/stock-logistics-workflow.git@refs/pull/743/head#subdirectory=setup/stock_quant_package_product_packaging
 odoo10-addon-stock-quant-package-dimension @ git+https://github.com/oca/stock-logistics-workflow.git@refs/pull/744/head#subdirectory=setup/stock_quant_package_dimension
+odoo10-addon-stock_operation_cleaner @ git+https://github.com/OCA/stock-logistics-workflow@refs/pull/782/head#subdirectory=setup/stock_operation_cleaner
+
 
 # oca/wms
 odoo10-addon-stock-storage-type @ git+https://github.com/oca/wms.git@refs/pull/95/head#subdirectory=setup/stock_storage_type
