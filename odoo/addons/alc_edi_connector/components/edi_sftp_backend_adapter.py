@@ -56,7 +56,10 @@ class EdiSftpBackendAdapter(Component):
         if pk_env_variable and not private_key:
             raise ConnectorException(_("%s must be set in environ") % pk_env_variable)
 
-        pkey = paramiko.RSAKey.from_private_key(StringIO(private_key.decode("utf8")))
+        if private_key:
+            pkey = paramiko.RSAKey.from_private_key(
+                StringIO(private_key.decode("utf8"))
+            )
         return dict(
             hostname=self.backend_record.hostname,
             port=self.backend_record.port,
