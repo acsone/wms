@@ -6,7 +6,7 @@ import logging
 _logger = logging.getLogger(__name__)
 
 
-def _update_product_product(cr, registry):
+def _update_product_product(cr):
     _logger.info("Update product product from product_template with existing values")
     cr.execute(
         """
@@ -24,7 +24,7 @@ def _update_product_product(cr, registry):
     )
 
 
-def _update_product_uom(cr, registry):
+def _update_product_uom(cr):
     _logger.info("Use original value for cm unit")
     cr.execute(
         """
@@ -47,7 +47,7 @@ def _update_product_uom(cr, registry):
     )
 
 
-def _put_default_uom_id_on_products(cr, registry):
+def _put_default_uom_id_on_products(cr):
     _logger.info("Default unit for Alcyon is cm")
     # Default unit for Alcyon is cm
     cr.execute(
@@ -60,7 +60,7 @@ def _put_default_uom_id_on_products(cr, registry):
     )
 
 
-def _delete_useless_columns_product_template(cr, registry):
+def _delete_useless_columns_product_template(cr):
     _logger.info("Drop useless columns on produt template")
     cr.execute(
         """
@@ -75,8 +75,8 @@ def _delete_useless_columns_product_template(cr, registry):
     )
 
 
-def post_init_hook(cr, registry):
-    _update_product_product(cr, registry)
-    _update_product_uom(cr, registry)
-    _put_default_uom_id_on_products(cr, registry)
-    _delete_useless_columns_product_template(cr, registry)
+def pre_init_hook(cr):
+    _update_product_product(cr)
+    _update_product_uom(cr)
+    _put_default_uom_id_on_products(cr)
+    _delete_useless_columns_product_template(cr)
