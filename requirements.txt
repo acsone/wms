@@ -162,10 +162,11 @@ odoo10-addon-stock-available-immediately==10.0.1.0.0.99.dev7
 odoo10-addon-stock-disable-force-availability-button @ git+https://github.com/acsone/stock-logistics-workflow.git@73135ace7b20fc3b86dcb8b0459c9b8a203d1474#subdirectory=setup/stock_disable_force_availability_button
 odoo10-addon-stock-location-product-restriction==10.0.1.0.1
 odoo10-addon-stock-mts-mto-rule @ git+https://github.com/acsone/stock-logistics-warehouse.git@d7cedf56da46da998d63d4e03a0e9cea2099fded#subdirectory=setup/stock_mts_mto_rule
+odoo10-addon-stock-operation-cleaner @ git+https://github.com/acsone/stock-logistics-workflow@f0fdafdbf67005ce365121815e04619a5b7ee858#subdirectory=setup/stock_operation_cleaner
 odoo10-addon-stock-production-lot-expiry @ git+https://github.com/acsone/product-attribute@7e2c8cda6effefe84023848ea0c560af95e8a268#subdirectory=setup/stock_production_lot_expiry
 odoo10-addon-stock-quant-package-dimension @ git+https://github.com/acsone/stock-logistics-workflow.git@7f017cda394dd11ba2a55d47c348af9b8dd71a9f#subdirectory=setup/stock_quant_package_dimension
 odoo10-addon-stock-quant-package-product-packaging @ git+https://github.com/acsone/stock-logistics-workflow.git@3501c29e80f66a14fa9961db107c5a300a1776f3#subdirectory=setup/stock_quant_package_product_packaging
-odoo10-addon-stock-storage-type @ git+https://github.com/acsone/wms.git@c35db4ea9615033a613a49187dc337b9e44b89bb#subdirectory=setup/stock_storage_type
+odoo10-addon-stock-storage-type @ git+https://github.com/acsone/wms.git@df093b6a9f5c885d6b35e408166b8ff8958ff1b6#subdirectory=setup/stock_storage_type
 odoo10-addon-stock-storage-type-putaway-abc @ git+https://github.com/acsone/wms.git@5345619a5a61acfb19e53d044b5ad43a766e93ee#subdirectory=setup/stock_storage_type_putaway_abc
 odoo10-addon-web-cache-name-get @ git+https://github.com/acsone/web.git@f37c8ad92c2190e0bbc09444424273843a9f3cd0#subdirectory=setup/web_cache_name_get
 odoo10-addon-web-decimal-numpad-dot @ git+https://github.com/acsone/web.git@f37c8ad92c2190e0bbc09444424273843a9f3cd0#subdirectory=setup/web_decimal_numpad_dot
