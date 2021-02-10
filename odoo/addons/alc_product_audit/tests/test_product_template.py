@@ -2,6 +2,7 @@
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+from odoo import fields
 from odoo.tests.common import SavepointCase
 
 
@@ -9,6 +10,12 @@ class TestProductTemplate(SavepointCase):
     @classmethod
     def setUpClass(cls):
         super(TestProductTemplate, cls).setUpClass()
+        cls.StockLocation = cls.env["stock.location"]
+        cls.StockLocation.pool._init = False
+
+        cls.partner = cls.env["res.partner"].create(
+            {"name": "Test partner", "ref": "85789284"}
+        )
 
         cls.stock_location = cls.env.ref("stock.stock_location_stock")
 
@@ -37,7 +44,7 @@ class TestProductTemplate(SavepointCase):
             "__setup__.stock_location_route_pick_ali", raise_if_not_found=False
         )
 
-        cls.location_ali = cls.env["stock.location"].create(
+        cls.location_ali = cls.StockLocation.create(
             {
                 "name": "Aliment",
                 "usage": "internal",
@@ -47,7 +54,7 @@ class TestProductTemplate(SavepointCase):
             }
         )
 
-        cls.location_medoc = cls.env["stock.location"].create(
+        cls.location_medoc = cls.StockLocation.create(
             {
                 "name": "Medicament",
                 "usage": "internal",
@@ -56,15 +63,15 @@ class TestProductTemplate(SavepointCase):
                 "picking_zone_id": cls.picking_zone_medoc.id,
             }
         )
-        cls.zone_ali = cls.env["stock.location"].create(
+        cls.zone_ali = cls.StockLocation.create(
             {"name": "A", "location_id": cls.location_ali.id}
         )
 
-        cls.zone_gustave = cls.env["stock.location"].create(
+        cls.zone_gustave = cls.StockLocation.create(
             {"name": "G", "location_id": cls.location_medoc.id}
         )
 
-        cls.location_product = cls.env["stock.location"].create(
+        cls.location_product = cls.StockLocation.create(
             {
                 "name": "GD80B2",
                 "kind": "bin",
@@ -79,7 +86,7 @@ class TestProductTemplate(SavepointCase):
             }
         )
 
-        cls.env["stock.location"]._parent_store_compute()
+        cls.StockLocation._parent_store_compute()
         cls.route_mto = cls.env.ref("stock.route_warehouse0_mto").id
 
         cls.product = cls.env["product.product"].create(
@@ -180,6 +187,48 @@ class TestProductTemplate(SavepointCase):
                     "res_id": cls.route_new.id,
                 }
             )
+
+        cls.location_mto = cls.env.ref(
+            "__setup__.stock_location_onorder", raise_if_not_found=False
+        )
+
+        if not cls.location_mto:
+            cls.location_mto = cls.StockLocation.create({"name": "Achetés-Vendus"})
+            cls.env["ir.model.data"].create(
+                {
+                    "module": "__setup__",
+                    "name": "stock_location_onorder",
+                    "model": "stock.location",
+                    "res_id": cls.location_mto.id,
+                }
+            )
+            cls.zone_mto_aliment = cls.StockLocation.create(
+                {"name": "A", "location_id": cls.location_mto.id}
+            )
+
+            cls.location_bin_mto = cls.StockLocation.create(
+                {
+                    "name": "AZ01A1",
+                    "kind": "bin",
+                    "zone": "A",
+                    "corridor": "D",
+                    "shelf": "80",
+                    "height": "B",
+                    "box": "2",
+                    "location_id": cls.zone_mto_aliment.id,
+                    "bin_checksum_1": "45",
+                    "bin_checksum_2": "45",
+                }
+            )
+            cls.stock_quant = cls.env["stock.quant"].create(
+                {
+                    "product_id": cls.product1.id,
+                    "location_id": cls.location_bin_mto.id,
+                    "location_kind": "bin",
+                    "qty": 10,
+                }
+            )
+
         cls.categ_ali = cls.env.ref("specific_data.product_categ_ali")
         cls.categ_ali.route_ids = [(4, cls.route_aliment.id)]
         if not cls.route_medoc:
@@ -253,6 +302,28 @@ class TestProductTemplate(SavepointCase):
                 "product_tmpl_id": cls.product.product_tmpl_id.id,
             }
         )
+
+        cls.po = cls.env["purchase.order"].create(
+            {
+                "partner_id": cls.partner.id,
+                "date_planned": fields.Datetime.now(),
+                "order_line": [
+                    (
+                        0,
+                        0,
+                        {
+                            "name": cls.product1.name,
+                            "product_id": cls.product1.id,
+                            "product_uom": cls.env.ref("product.product_uom_unit").id,
+                            "product_qty": 5,
+                            "price_unit": 5,
+                            "date_planned": fields.Datetime.now(),
+                        },
+                    ),
+                ],
+            }
+        )
+        cls.po.button_confirm()
 
     def test_1(self):
         " no min/max, and no route for 'approvisionner a la commande'"
@@ -375,3 +446,40 @@ class TestProductTemplate(SavepointCase):
 
         self.product_template1._compute_packaging_has_no_dimensions()
         self.assertFalse(self.product_template1.packaging_has_no_dimensions)
+
+    def test_12(self):
+        "product not sale_ok but on website"
+
+        self.product_template1.write({"sale_ok": False, "web_published": True})
+        self.product_template1._compute_not_sold_on_website()
+        self.assertTrue(self.product_template1.not_sold_on_website)
+
+    def test_13(self):
+        "product mto without sale order but with a purchase order"
+
+        self.product_template1.is_mto_product = True
+        self.product_template1._compute_mto_purchased_not_sold()
+        self.assertTrue(self.product_template1.mto_purchased_not_sold)
+
+    def test_14(self):
+        "product in a mto bin but without mto route"
+        self.product_template1.write({"location_id": self.location_bin_mto.id})
+        self.product_template1._compute_mto_stock_no_mto_route()
+        self.assertTrue(self.product_template1.mto_stock_no_mto_route)
+
+        self.product_template1.write({"route_ids": [(6, 0, [self.route_mto])]})
+        self.product_template1._compute_mto_stock_no_mto_route()
+        self.assertFalse(self.product_template1.mto_stock_no_mto_route)
+
+    def test_15(self):
+        "product in an mto bin but with new route"
+
+        self.product_template1.write(
+            {
+                "route_ids": [(6, 0, [self.route_new.id])],
+                "location_id": self.location_bin_mto.id,
+            }
+        )
+
+        self.product_template1._compute_mto_stock_new_route()
+        self.assertTrue(self.product_template1.mto_stock_new_route)

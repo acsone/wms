@@ -23,6 +23,26 @@ msgstr "- Produit acheté/vendu avec une route incohérente"
 
 #. module: alc_product_audit
 #: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
+msgid "- MTO Product purchased by a supplier but not sold"
+msgstr "- Produit acheté/vendu avec une commande fournisseur et sans commande client"
+
+#. module: alc_product_audit
+#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
+msgid "- Product stocked in a MTO location without MTO route"
+msgstr "- Produit stocké dans un emplacement dont le parent est acheté/vendu pour lequel la route 'approvisionner à la commande' n'est pas active"
+
+#. module: alc_product_audit
+#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
+msgid "- Product stocked in a MTO location with new route"
+msgstr "- Produit stocké dans un emplacement dont le parent est acheté/vendu pour lequel la route 'nouveauté' est pas active"
+
+#. module: alc_product_audit
+#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
+msgid "- Product not sold but on website"
+msgstr "- Produit ne pouvant être vendu mais publié sur le site web"
+
+#. module: alc_product_audit
+#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
 msgid "- Product is missing dimensions"
 msgstr "- Le produit n'a pas toutes les dimensions"
 
@@ -97,6 +117,26 @@ msgstr "Produits avec anomalies"
 #: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
 msgid "MTO product has abnormal routes"
 msgstr "Produits achetés/vendus avec une route incohérente"
+
+#. module: alc_product_audit
+#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
+msgid "Mto product purchased and not sold"
+msgstr "Produits achetés/vendus sans commande client"
+
+#. module: alc_product_audit
+#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
+msgid "Product in a MTO stock location with mto route"
+msgstr "Produits dans un emplacement de stock achetés/vendus sans route 'approvisionner à la commande'"
+
+#. module: alc_product_audit
+#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
+msgid "Product in a MTO stock location with route new"
+msgstr "Produits dans un emplacement de stock achetés/vendus avec route 'nouveautés'"
+
+#. module: alc_product_audit
+#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
+msgid "Product is not sold anymore but still on website"
+msgstr "Ne peut être vendu et publié sur le site web"
 
 #. module: alc_product_audit
 #: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_min_max_on_command_reappro

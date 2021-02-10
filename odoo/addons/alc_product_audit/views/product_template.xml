@@ -64,6 +64,26 @@
           name="filter_packaging_has_no_dimensions"
           domain="[('packaging_has_no_dimensions','=',True)]"
         />
+        <filter
+          name="filter_mto_purchased_not_sold"
+          string="Mto product purchased and not sold"
+          domain="[('mto_purchased_not_sold', '=', True)]"
+        />
+        <filter
+          name="filter_mto_stock_no_mto_route"
+          string="Product in a MTO stock location with mto route"
+          domain="[('mto_stock_no_mto_route', '=', True)]"
+        />
+        <filter
+          name="filter_mto_stock_new_route"
+          string="Product in a MTO stock location with route new"
+          domain="[('mto_stock_new_route', '=', True)]"
+        />
+        <filter
+          name="filter_not_sold_on_website"
+          string="Product is not sold anymore but still on website"
+          domain="[('not_sold_on_website', '=', True)]"
+        />
       </xpath>
     </field>
   </record>
@@ -94,6 +114,10 @@
         <field name="can_be_bought_without_buy_route" invisible="1" />
         <field name="has_no_dimensions" invisible="1" />
         <field name="packaging_has_no_dimensions" invisible="1" />
+        <field name="mto_purchased_not_sold" invisible="1" />
+        <field name="mto_stock_no_mto_route" invisible="1" />
+        <field name="mto_stock_new_route" invisible="1" />
+        <field name="not_sold_on_website" invisible="1" />
       </form>
       <header position="after">
         <div
@@ -147,6 +171,22 @@
             attrs="{'invisible': [('packaging_has_no_dimensions', '=', False)]}"
           >
             <p>- Product is missing packaging dimensions</p>
+          </div>
+                    <div
+            attrs="{'invisible': [('mto_purchased_not_sold', '=', False)]}"
+          >
+            <p>- MTO Product purchased by a supplier but not sold</p>
+          </div>
+                    <div
+            attrs="{'invisible': [('mto_stock_no_mto_route', '=', False)]}"
+          >
+            <p>- Product stocked in a MTO location without MTO route</p>
+          </div>
+                    <div attrs="{'invisible': [('mto_stock_new_route', '=', False)]}">
+            <p>- Product stocked in a MTO location with new route</p>
+          </div>
+                    <div attrs="{'invisible': [('not_sold_on_website', '=', False)]}">
+            <p>- Product not sold but on website</p>
           </div>
                 </div>
       </header>

@@ -67,6 +67,28 @@ class ProductTemplate(models.Model):
         index=True,
     )
 
+    mto_purchased_not_sold = fields.Boolean(
+        default=False,
+        compute="_compute_mto_purchased_not_sold",
+        search="_search_mto_purchased_not_sold",
+    )
+
+    mto_stock_no_mto_route = fields.Boolean(
+        default=False,
+        compute="_compute_mto_stock_no_mto_route",
+        search="_search_mto_stock_no_mto_route",
+    )
+
+    mto_stock_new_route = fields.Boolean(
+        default=False,
+        compute="_compute_mto_stock_no_mto_route",
+        search="_search_mto_stock_no_mto_route",
+    )
+
+    not_sold_on_website = fields.Boolean(
+        default=False, compute="_compute_not_sold_on_website", store=True, index=True,
+    )
+
     has_anomaly = fields.Boolean(
         default=False, compute="_compute_has_anomaly", store=True, index=True
     )
@@ -224,6 +246,146 @@ class ProductTemplate(models.Model):
             else:
                 product.packaging_has_no_dimensions = False
 
+    def _get_mto_product_without_sale_order(self):
+        self.env.cr.execute(
+            """
+            SELECT DISTINCT pol.product_id
+                   FROM
+                        purchase_order_line pol
+                   JOIN
+                        product_product pp ON pp.id = pol.product_id
+                   JOIN
+                        product_template pt ON pt.id = pp.product_tmpl_id AND pt.is_mto_product = True
+                   WHERE
+                        pol.state NOT IN ('cancel', 'done') AND pol.qty_to_receive > 0
+                   AND NOT EXISTS
+                        (
+                            SELECT sol.id FROM sale_order_line sol
+                                   WHERE
+                                        sol.product_id = pol.product_id
+                                   AND
+                                        sol.product_qty_remains_to_deliver > 0
+                        )
+            """
+        )
+        result = self.env.cr.fetchall()
+        product_ids = [product_id for product in result for product_id in product]
+        products = self.env["product.product"].browse(product_ids)
+        ids = [product.product_tmpl_id.id for product in products]
+        return ids
+
+    @api.depends("is_mto_product", "route_ids")
+    def _compute_mto_purchased_not_sold(self):
+        ids = self._get_mto_product_without_sale_order()
+        products = self.browse(ids)
+        for product in products:
+            product.mto_purchased_not_sold = True
+
+    def _search_mto_purchased_not_sold(self, operator, value):
+        ids = self._get_mto_product_without_sale_order()
+        return [("id", "in", ids)]
+
+    def _get_mto_stock_no_mto_route(self):
+        stock_location_mto = self.env.ref(
+            "__setup__.stock_location_onorder", raise_if_not_found=False
+        )
+        ids = []
+        if stock_location_mto:
+            self.env.cr.execute(
+                """
+                SELECT DISTINCT sq.product_id
+                    FROM
+                            stock_quant sq
+                    JOIN
+                            stock_location sl ON sl.id = sq.location_id
+                    JOIN
+                            product_product pp ON pp.id = sq.product_id
+                    JOIN
+                            product_template pt ON pt.id = pp.product_tmpl_id AND pt.is_mto_product = False
+                    WHERE
+                            sl.parent_left >= %(stock_location_mto_parent_left)s AND sl.parent_right <= %(stock_location_mto_parent_right)s
+                    AND sq.location_kind = 'bin'
+                    AND sq.qty > 0
+                """,
+                {
+                    "stock_location_mto_parent_left": stock_location_mto.parent_left,
+                    "stock_location_mto_parent_right": stock_location_mto.parent_right,
+                },
+            )
+            result = self.env.cr.fetchall()
+            product_ids = [product_id for product in result for product_id in product]
+            products = self.env["product.product"].browse(product_ids)
+            ids = [product.product_tmpl_id.id for product in products]
+
+        return ids
+
+    @api.depends("is_mto_product", "route_ids")
+    def _compute_mto_stock_no_mto_route(self):
+        ids = self._get_mto_stock_no_mto_route()
+        products = self.browse(ids)
+        for product in products:
+            product.mto_stock_no_mto_route = True
+
+    def _search_mto_stock_no_mto_route(self, operator, value):
+        ids = self._get_mto_stock_no_mto_route()
+        return [("id", "in", ids)]
+
+    def _get_mto_stock_new_route(self):
+        ids = []
+        stock_location_mto = self.env.ref(
+            "__setup__.stock_location_onorder", raise_if_not_found=False
+        )
+        new_route = self.env.ref(
+            "__setup__.stock_location_route_new", raise_if_not_found=False
+        )
+        if stock_location_mto:
+            self.env.cr.execute(
+                """
+                SELECT DISTINCT sq.product_id
+                    FROM
+                            stock_quant sq
+                    JOIN
+                            stock_location sl ON sl.id = sq.location_id
+                    WHERE
+                            sl.parent_left > %(stock_location_mto_parent_left)s AND sl.parent_right < %(stock_location_mto_parent_right)s
+                    AND location_kind = 'bin'
+                    AND qty > 0
+                """,
+                {
+                    "stock_location_mto_parent_left": stock_location_mto.parent_left,
+                    "stock_location_mto_parent_right": stock_location_mto.parent_right,
+                },
+            )
+            result = self.env.cr.fetchall()
+            product_ids = [product_id for product in result for product_id in product]
+            products = self.env["product.product"].browse(product_ids)
+
+            product_templates = [product.product_tmpl_id for product in products]
+            for product in product_templates:
+                product_routes = product.route_ids
+                if new_route and new_route in product_routes:
+                    ids.append(product.id)
+        return ids
+
+    @api.depends("is_mto_product", "route_ids")
+    def _compute_mto_stock_new_route(self):
+        ids = self._get_mto_stock_new_route()
+        products = self.browse(ids)
+        for product in products:
+            product.mto_stock_new_route = True
+
+    def _search_mto_stock_new_route(self, operator, value):
+        ids = self._get_mto_stock_new_route()
+        return [("id", "in", ids)]
+
+    @api.depends("sale_ok", "web_published")
+    def _compute_not_sold_on_website(self):
+        for product in self:
+            if not product.sale_ok and product.web_published:
+                product.not_sold_on_website = True
+            else:
+                product.not_sold_on_website = False
+
     @api.depends(
         "min_max_on_command_reappro",
         "no_min_max_no_on_command_reappro",
@@ -235,6 +397,10 @@ class ProductTemplate(models.Model):
         "can_be_bought_without_buy_route",
         "has_no_dimensions",
         "packaging_has_no_dimensions",
+        "mto_purchased_not_sold",
+        "mto_stock_no_mto_route",
+        "mto_stock_new_route",
+        "not_sold_on_website",
     )
     def _compute_has_anomaly(self):
         for product in self:
@@ -249,6 +415,10 @@ class ProductTemplate(models.Model):
                 or product.can_be_bought_without_buy_route
                 or product.has_no_dimensions
                 or product.packaging_has_no_dimensions
+                or product.mto_purchased_not_sold
+                or product.mto_stock_no_mto_route
+                or product.mto_stock_new_route
+                or product.not_sold_on_website
             ):
                 product.has_anomaly = True
             else:
