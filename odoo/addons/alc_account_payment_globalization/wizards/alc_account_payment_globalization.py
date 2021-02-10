@@ -4,7 +4,8 @@
 
 from collections import defaultdict
 
-from odoo import api, fields, models
+from odoo import _, api, fields, models
+from odoo.exceptions import UserError
 
 
 class AlcAccountPaymentGlobalization(models.TransientModel):
@@ -118,6 +119,9 @@ class AlcAccountPaymentGlobalization(models.TransientModel):
     def doit(self):
         self.ensure_one()
         move_lines = self._get_globalizable_lines()
+        if not move_lines:
+            raise UserError(_("No accounting lines for this partner."))
+
         move_vals = self._prepare_values(move_lines)
         # create account move
         account_move = self.env["account.move"].create(move_vals)
