@@ -146,7 +146,12 @@ class StockPicking(models.Model):
             else:
                 not_done_bo_moves.assign_picking()
 
-            if not picking.date_done:
+            if (
+                picking not in not_done_bo_moves.mapped("picking_id")
+                and not picking.date_done
+            ):
+                # Only set date_done if the original picking is no more linked to the
+                # moves to do
                 picking.write(
                     {"date_done": time.strftime(DEFAULT_SERVER_DATETIME_FORMAT)}
                 )
