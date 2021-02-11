@@ -45,7 +45,7 @@ odoo10-addon-stock_operation_cleaner @ git+https://github.com/OCA/stock-logistic
 
 
 # oca/wms
-odoo10-addon-stock-storage-type @ git+https://github.com/oca/wms.git@refs/pull/95/head#subdirectory=setup/stock_storage_type
+odoo10-addon-stock-storage-type @ git+https://github.com/acsone/wms.git@10.0-alc_master#subdirectory=setup/stock_storage_type
 odoo10-addon-stock-storage-type-putaway-abc @ git+https://github.com/oca/wms.git@refs/pull/103/head#subdirectory=setup/stock_storage_type_putaway_abc
 
 # oca/web

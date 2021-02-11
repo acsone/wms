@@ -16,3 +16,14 @@
     - oca 10.0
     - oca refs/pull/1168/head #[10.0][IMP] sale_triple_discount: Improve compute_amount perf #1168
   target: origin 10.0-alc_master
+
+./src/wms:
+  remotes:
+    oca: https://github.com/oca/wms.git
+    origin: ssh://git@github.com/acsone/wms.git
+  merges:
+    - oca 10.0
+    - oca refs/pull/95/head #10.0-backport-stock-storage-type
+    - origin 10.0-stock-storage-type-priority
+    - origin 10.0-stock-storage-type-no-package
+  target: origin 10.0-alc_master
