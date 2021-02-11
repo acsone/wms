@@ -43,9 +43,6 @@ const messages_en = {
                 name: "Profile",
                 title: "Select profile",
                 profile_updated: "Profile updated",
-                action: {
-                    logout: "Logout",
-                },
             },
             fullscreen: {
                 enter: "Go fullscreen",
@@ -57,6 +54,9 @@ const messages_en = {
         profile_not_configured: "Profile not configured yet. Please select one.",
         profile_configure: "Configure profile",
         loading: "Loading...",
+        action: {
+            logout: "Logout",
+        },
         nav: {
             scenario: "Scenario:",
             op_types: "Op Types:",
@@ -94,19 +94,15 @@ const messages_en = {
         btn_manual_selection: "Manual selection",
         stock_zero_check: {
             confirm_stock_zero: "Confirm stock = 0",
-            confirm_stock_not_zero: "Confirm stock not empty",
+            confirm_stock_not_zero: "Declare stock not empty",
         },
         actions_popup: {
             btn_action: "Action",
         },
-    },
-    picking_type: {
-        lines_count: "{lines_count} lines (over {picking_count} operations).",
-        priority_lines_count:
-            "{priority_lines_count} priority lines (over {priority_picking_count} operations).",
-    },
-    zone_picking: {
-        picking_type_detail: "{lines_count} ({priority_lines_count}) {name}",
+        lines_count: "{priority_lines_count}/{lines_count}",
+        lines_count_extended: "{priority_lines_count}/{lines_count} position(s)",
+        picking_count: "{priority_picking_count}/{picking_count}",
+        picking_count_extended: "{priority_picking_count}/{picking_count} picking(s)",
     },
     order_lines_by: {
         priority: "Order by priority",

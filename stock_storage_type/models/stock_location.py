@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Copyright 2019 Camptocamp SA
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl)
 import logging
@@ -57,7 +58,9 @@ class StockLocation(models.Model):
         compute="_compute_location_is_empty",
         store=True,
         help="technical field: True if the location is empty "
-        "and there is no pending incoming products in the location",
+        "and there is no pending incoming products in the location. "
+        " Computed only if the location needs to check for emptiness "
+        '(has an "only empty" location storage type).',
     )
 
     in_move_ids = fields.One2many(
@@ -70,12 +73,21 @@ class StockLocation(models.Model):
     )
 
     in_move_line_ids = fields.One2many(
-        "stock.move.line",
+        "stock.pack.operation",
         "location_dest_id",
         domain=[
             ("state", "in", ("waiting", "confirmed", "partially_available", "assigned"))
         ],
         help="technical field: the pending incoming "
+        "stock.move.lines in the location",
+    )
+    out_move_line_ids = fields.One2many(
+        "stock.pack.operation",
+        "location_id",
+        domain=[
+            ("state", "in", ("waiting", "confirmed", "partially_available", "assigned"))
+        ],
+        help="technical field: the pending outgoing "
         "stock.move.lines in the location",
     )
     location_will_contain_lot_ids = fields.Many2many(
@@ -105,13 +117,16 @@ class StockLocation(models.Model):
         help="The max height supported among allowed location storage types.",
     )
 
+    quant_ids = fields.One2many("stock.quant", "location_id")
+
     @api.depends("child_ids.leaf_location_ids")
     def _compute_leaf_location_ids(self):
         query = """
             SELECT parent.id, ARRAY_AGG(sub.id) AS leaves
             FROM stock_location parent
             INNER JOIN stock_location sub
-            ON sub.parent_path LIKE parent.parent_path || '%%'
+            ON parent.parent_left < sub.parent_left AND
+               parent.parent_right > sub.parent_right
             AND sub.id != parent.id
             LEFT JOIN stock_location subsub
             ON subsub.location_id = sub.id
@@ -132,29 +147,92 @@ class StockLocation(models.Model):
             leaves = self.search([("id", "in", leave_ids)])
             loc.leaf_location_ids = leaves
 
-    @api.depends("quant_ids", "in_move_ids", "in_move_line_ids")
-    def _compute_location_will_contain_product_ids(self):
-        for rec in self:
-            rec.location_will_contain_product_ids = (
-                rec.mapped("quant_ids.product_id")
-                | rec.mapped("in_move_ids.product_id")
-                | rec.mapped("in_move_line_ids.product_id")
-            )
+    def _should_compute_will_contain_product_ids(self):
+        return self.usage == "internal" and any(
+            storage_type.do_not_mix_products
+            for storage_type in self.allowed_location_storage_type_ids
+        )
 
-    @api.depends("quant_ids", "in_move_line_ids")
-    def _compute_location_will_contain_lot_ids(self):
-        for rec in self:
-            rec.location_will_contain_lot_ids = rec.mapped(
-                "quant_ids.lot_id"
-            ) | rec.mapped("in_move_line_ids.lot_id")
+    def _should_compute_will_contain_lot_ids(self):
+        return self.usage == "internal" and any(
+            storage_type.do_not_mix_lots
+            for storage_type in self.allowed_location_storage_type_ids
+        )
+
+    def _should_compute_location_is_empty(self):
+        return self.usage == "internal" and any(
+            storage_type.only_empty
+            for storage_type in self.allowed_location_storage_type_ids
+        )
 
     @api.depends(
-        "quant_ids.quantity", "in_move_ids", "in_move_line_ids",
+        "quant_ids",
+        "in_move_ids",
+        "in_move_ids.state",
+        "in_move_line_ids",
+        "in_move_line_ids.state",
+        "allowed_location_storage_type_ids.do_not_mix_products",
+    )
+    def _compute_location_will_contain_product_ids(self):
+        for rec in self:
+            if not rec._should_compute_will_contain_product_ids():
+                if rec.location_will_contain_product_ids:
+                    no_product = self.env["product.product"].browse()
+                    rec.location_will_contain_product_ids = no_product
+                continue
+            products = (
+                rec.mapped("quant_ids.product_id")
+                | rec.mapped("in_move_ids.product_id")
+                | rec.mapped("in_move_line_ids.implied_product_ids")
+            )
+            rec.location_will_contain_product_ids = products
+
+    @api.depends(
+        "quant_ids",
+        "in_move_line_ids",
+        "in_move_line_ids.state",
+        "allowed_location_storage_type_ids.do_not_mix_lots",
+    )
+    def _compute_location_will_contain_lot_ids(self):
+        for rec in self:
+            if not rec._should_compute_will_contain_lot_ids():
+                if rec.location_will_contain_lot_ids:
+                    no_lot = self.env["stock.production.lot"].browse()
+                    rec.location_will_contain_lot_ids = no_lot
+                continue
+            lots = rec.mapped("quant_ids.lot_id") | rec.mapped(
+                "in_move_line_ids.implied_lot_ids"
+            )
+            rec.location_will_contain_lot_ids = lots
+
+    @api.depends(
+        "quant_ids.qty",
+        "out_move_line_ids.qty_done",
+        "out_move_line_ids.state",
+        "in_move_ids",
+        "in_move_ids.state",
+        "in_move_line_ids",
+        "in_move_line_ids.state",
+        "allowed_location_storage_type_ids.only_empty",
     )
     def _compute_location_is_empty(self):
         for rec in self:
+            # No restriction should apply on customer/supplier/...
+            # locations and we don't need to compute is empty
+            # if there is no limit on the location
+            if not rec._should_compute_location_is_empty():
+                # avoid write if not required
+                if not rec.location_is_empty:
+                    rec.location_is_empty = True
+                continue
+            # we do want to keep a write here even if the value is the same
+            # to enforce concurrent transaction safety: 2 moves taking
+            # quantities in a location have to be executed sequentially
+            # or the location could remain "not empty"
             if (
-                sum(rec.quant_ids.mapped("quantity"))
+                sum(rec.quant_ids.mapped("qty"))
+                - sum(rec.out_move_line_ids.mapped("qty_done"))
+                > 0
                 or rec.in_move_ids
                 or rec.in_move_line_ids
             ):
@@ -194,14 +272,6 @@ class StockLocation(models.Model):
             location.max_height = (
                 types_sorted.mapped("max_height")[0] if types_sorted else 0
             )
-
-    # method provided by "stock_putaway_hook"
-    def _putaway_strategy_finalizer(self, putaway_location, product):
-        putaway_location = super()._putaway_strategy_finalizer(
-            putaway_location, product
-        )
-        quant = self.env.context.get("storage_quant")
-        return self._get_pack_putaway_strategy(putaway_location, quant, product)
 
     def _get_pack_putaway_strategy(self, putaway_location, quant, product):
         package_storage_type = False
@@ -301,20 +371,51 @@ class StockLocation(models.Model):
                 ("max_height", "=", 0),
                 ("max_height", ">=", quants.package_id.height),
             ]
-        if quants.package_id.pack_weight:
+        package_weight = quants.package_id.pack_weight
+        if package_weight:
             pertinent_loc_storagetype_domain += [
                 "|",
                 ("max_weight", "=", 0),
-                ("max_weight", ">=", quants.package_id.pack_weight),
+                ("max_weight", ">=", package_weight),
             ]
         _logger.debug(
             "pertinent storage type domain: %s", pertinent_loc_storagetype_domain
         )
         return pertinent_loc_storagetype_domain
 
+    def _allowed_locations_for_location_storage_types(
+        self, location_storage_types, quants, products
+    ):
+        valid_location_ids = set()
+        for loc_storage_type in location_storage_types:
+            location_domain = loc_storage_type._domain_location_storage_type(
+                self, quants, products
+            )
+            _logger.debug("pertinent location domain: %s", location_domain)
+            locations = self.search(location_domain)
+            valid_location_ids |= set(locations.ids)
+        return self.browse(valid_location_ids)
+
+    def _select_final_valid_putaway_locations(self, limit=None):
+        """Return the valid locations using the provided limit
+
+        ``self`` contains locations already ordered and contains
+        only valid locations.
+        This method can be used as a hook to add or remove valid
+        locations based on other properties. Pay attention to
+        keep the order.
+        """
+        return self[:limit]
+
     def select_allowed_locations(
         self, package_storage_type, quants, products, limit=None
     ):
+        """Filter allowed locations for a storage type
+
+        ``self`` contains locations already ordered according to the
+        putaway strategy, so beware of the return that must keep the
+        same order
+        """
         # We have package who may be placed in a stock.location
         #
         # 1. On the stock.location there are location_storage_type and on the
@@ -350,19 +451,19 @@ class StockLocation(models.Model):
 
         # now loop over the pertinent location storage types (there should be
         # few of them) and check for properties to find suitable locations
-        valid_location_ids = set()
-        for loc_storage_type in pertinent_loc_storage_types:
-            location_domain = loc_storage_type._domain_location_storage_type(
-                compatible_locations, quants, products
-            )
-            _logger.debug("pertinent location domain: %s", location_domain)
-            locations = self.search(location_domain)
-            valid_location_ids |= set(locations.ids)
+        valid_locations = compatible_locations._allowed_locations_for_location_storage_types(  # noqa
+            pertinent_loc_storage_types, quants, products
+        )
 
         # NOTE: self.ids is ordered as expected, so we want to filter the valid
         # locations while preserving the initial order
-        valid_location_ids = [id_ for id_ in self.ids if id_ in valid_location_ids]
-        valid_locations = self.browse(valid_location_ids)[:limit]
+        valid_location_ids = set(valid_locations.ids)
+        valid_locations = self.browse(
+            id_ for id_ in self.ids if id_ in valid_location_ids
+        )
+        valid_locations = valid_locations._select_final_valid_putaway_locations(
+            limit=limit
+        )
 
         _logger.debug(
             "select allowed location for package storage"
@@ -384,7 +485,26 @@ class StockLocation(models.Model):
         Locations are ordered by max height, knowing that a max height of 0
         means "no limit" and as such it should be among the last locations.
         """
-        max_height = max(self.leaf_location_ids.mapped("max_height"))
-        return self.leaf_location_ids.sorted(
+        leaf_location_ids = self.mapped("leaf_location_ids")
+        if not leaf_location_ids:
+            return leaf_location_ids
+        max_height = max(self.mapped("leaf_location_ids.max_height"))
+        return leaf_location_ids.sorted(
             lambda l: l.max_height if l.max_height else (max_height + 1)
+        )
+
+    def write(self, vals):
+        res = super(StockLocation, self).write(vals)
+        self._invalidate_package_level_allowed_location_dest_domain()
+        return res
+
+    @api.model
+    def create(self, vals):
+        res = super(StockLocation, self).create(vals)
+        self._invalidate_package_level_allowed_location_dest_domain()
+        return res
+
+    def _invalidate_package_level_allowed_location_dest_domain(self):
+        self.env["stock.pack.operation"].invalidate_cache(
+            fnames=["allowed_location_dest_domain"]
         )

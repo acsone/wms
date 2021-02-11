@@ -1,5 +1,8 @@
 # Copyright 2020 Camptocamp SA (http://www.camptocamp.com)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+
+from werkzeug.exceptions import BadRequest
+
 from odoo import _
 
 from odoo.addons.base_rest.components.service import to_int
@@ -73,13 +76,19 @@ class Checkout(Component):
                 "selected_move_lines": self._data_for_move_lines(lines.sorted()),
                 "picking": self.data.picking(picking),
                 "packing_info": self._data_for_packing_info(picking),
+                "no_package_enabled": not self.options.get(
+                    "checkout:disable_no_package"
+                ),
             },
             message=message,
         )
 
     def _data_for_packing_info(self, picking):
-        if picking.picking_type_id.shopfloor_display_packing_info:
-            return picking.shopfloor_packing_info or ""
+        """Return the packing information
+
+        Intended to be extended.
+        """
+        # TODO: This could be avoided if included in the picking parser.
         return ""
 
     def _response_for_select_dest_package(self, picking, move_lines, message=None):
@@ -97,7 +106,9 @@ class Checkout(Component):
             )
         picking_data = self.data.picking(picking)
         packages_data = self.data.packages(
-            packages.sorted(), picking=picking, with_packaging=True
+            packages.with_context(picking_id=picking.id).sorted(),
+            picking=picking,
+            with_packaging=True,
         )
         return self._response(
             next_state="select_dest_package",
@@ -290,13 +301,16 @@ class Checkout(Component):
             if line.shopfloor_checkout_done:
                 continue
             line.qty_done = line.product_uom_qty
+            line.shopfloor_user_id = self.env.user
 
         picking = lines.mapped("picking_id")
         other_lines = picking.move_line_ids - lines
         self._deselect_lines(other_lines)
 
     def _deselect_lines(self, lines):
-        lines.filtered(lambda l: not l.shopfloor_checkout_done).qty_done = 0
+        lines.filtered(lambda l: not l.shopfloor_checkout_done).write(
+            {"qty_done": 0, "shopfloor_user_id": False}
+        )
 
     def scan_line(self, picking_id, barcode):
         """Scan move lines of the stock picking
@@ -592,7 +606,9 @@ class Checkout(Component):
 
     @staticmethod
     def _filter_lines_unpacked(move_line):
-        return move_line.qty_done == 0 and not move_line.shopfloor_checkout_done
+        return (
+            move_line.qty_done == 0 or move_line.shopfloor_user_id
+        ) and not move_line.shopfloor_checkout_done
 
     @staticmethod
     def _filter_lines_to_pack(move_line):
@@ -758,6 +774,8 @@ class Checkout(Component):
         Transitions:
         * select_line: goes back to selection of lines to work on next lines
         """
+        if self.options.get("checkout:disable_no_package"):
+            raise BadRequest("`checkout.no_package` endpoint is not enabled")
         picking = self.env["stock.picking"].browse(picking_id)
         message = self._check_picking_status(picking)
         if message:
@@ -1180,6 +1198,11 @@ class ShopfloorCheckoutValidatorResponse(Component):
             "select_package": dict(
                 self._schema_selected_lines,
                 packing_info={"type": "string", "nullable": True},
+                no_package_enabled={
+                    "type": "boolean",
+                    "nullable": True,
+                    "required": False,
+                },
             ),
             "change_quantity": self._schema_selected_lines,
             "select_dest_package": self._schema_select_package,

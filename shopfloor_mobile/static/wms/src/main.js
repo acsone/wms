@@ -87,6 +87,24 @@ const app = new Vue({
         app_info: function() {
             return shopfloor_app_info;
         },
+        available_languages: function() {
+            // FIXME: this should come from odoo and from app config
+            // They will match w/ $i18n.availableLocales
+            return [
+                {
+                    id: "en-US",
+                    name: this.$t("language.name.English"),
+                },
+                {
+                    id: "fr-FR",
+                    name: this.$t("language.name.French"),
+                },
+                {
+                    id: "de-DE",
+                    name: this.$t("language.name.German"),
+                },
+            ];
+        },
         has_profile: function() {
             return !_.isEmpty(this.profile);
         },
@@ -105,6 +123,9 @@ const app = new Vue({
         },
         profiles: function() {
             return this.appconfig ? this.appconfig.profiles || [] : [];
+        },
+        user: function() {
+            return this.appconfig ? this.appconfig.user_info || {} : {};
         },
         appmenu: {
             get: function() {
