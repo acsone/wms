@@ -16,7 +16,7 @@ class ProductTemplate(models.Model):
         store=True,
     )
 
-    @api.depends("picking_zone_id",)
+    @api.depends("picking_zone_id", "is_mto_product")
     def _compute_abc_classification_profile_ids(self):
         """
         Compute the profile from the picking_zone....
@@ -24,6 +24,8 @@ class ProductTemplate(models.Model):
         Variants are not used here...
         """
         for rec in self:
-            rec.abc_classification_profile_ids = (
-                rec.picking_zone_id.abc_classification_profile_ids
+            profiles = rec.picking_zone_id.abc_classification_profile_ids.filtered(
+                lambda profile, product=rec: not product.is_mto_product
+                or not profile.exclude_product_mto
             )
+            rec.abc_classification_profile_ids = profiles

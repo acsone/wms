@@ -10,16 +10,19 @@ class TestAbcClassificationProfile(AclAbcClassificationProfilePickingZoneBase):
         """
         Data:
             1 product in zone medoc
+            1 product in zone medoc + MTO
             1 product in zone aliment
             1 classification profile without picking_zone
         Test Case:
             1. Add zone medoc and zone alim to profile
             2. Remove the medoc zone from the profile
             3. Add zone medoc
+            4. Includes product MTO
         Expected result:
-            1. The two products are linked to the classification profile
+            1. The two non MTO products are linked to the classification profile
             2. Only the product alim is still linked to the classification profile
-            3. The two products are linked to the classification profile
+            3. The two non MTO products are linked to the classification profile
+            4. The mto product is linked
         """
         self.assertFalse(self.product_medoc.abc_classification_profile_ids)
         self.assertFalse(self.product_aliment.abc_classification_profile_ids)
@@ -34,6 +37,7 @@ class TestAbcClassificationProfile(AclAbcClassificationProfilePickingZoneBase):
             self.product_aliment.abc_classification_profile_ids,
             self.classification_profile,
         )
+        self.assertFalse(self.product_medoc_mto.abc_classification_profile_ids)
         # 2
         self.classification_profile.picking_zone_ids = self.zone_ali
         self.assertFalse(self.product_medoc.abc_classification_profile_ids)
@@ -41,6 +45,7 @@ class TestAbcClassificationProfile(AclAbcClassificationProfilePickingZoneBase):
             self.product_aliment.abc_classification_profile_ids,
             self.classification_profile,
         )
+        self.assertFalse(self.product_medoc_mto.abc_classification_profile_ids)
         # 3
         self.classification_profile.write({"picking_zone_ids": [(4, self.zone_med.id)]})
         self.assertEqual(
@@ -51,3 +56,33 @@ class TestAbcClassificationProfile(AclAbcClassificationProfilePickingZoneBase):
             self.product_aliment.abc_classification_profile_ids,
             self.classification_profile,
         )
+        self.assertFalse(self.product_medoc_mto.abc_classification_profile_ids)
+        # 4
+        self.classification_profile.exclude_product_mto = False
+        self.assertEqual(
+            self.product_medoc.abc_classification_profile_ids,
+            self.classification_profile,
+        )
+        self.assertEqual(
+            self.product_aliment.abc_classification_profile_ids,
+            self.classification_profile,
+        )
+        self.assertEqual(
+            self.product_medoc.abc_classification_profile_ids,
+            self.classification_profile,
+        )
+        self.assertEqual(
+            self.product_medoc_mto.abc_classification_profile_ids,
+            self.classification_profile,
+        )
+        # remove mto
+        self.classification_profile.exclude_product_mto = True
+        self.assertEqual(
+            self.product_medoc.abc_classification_profile_ids,
+            self.classification_profile,
+        )
+        self.assertEqual(
+            self.product_aliment.abc_classification_profile_ids,
+            self.classification_profile,
+        )
+        self.assertFalse(self.product_medoc_mto.abc_classification_profile_ids)
