@@ -12,6 +12,7 @@
         "alc_stock_receive_lot_expiry",
         "alc_stock_receive_lot_inputmask",
         "alc_product_lot_info",
+        "alc_product_mto",
         "alc_product_picking_zone",
         "board",
         "delivery_rounds",
