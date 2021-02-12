@@ -4,6 +4,7 @@
 from __future__ import print_function
 
 import logging
+from datetime import datetime
 from os import listdir
 from os.path import isfile, join
 from StringIO import StringIO
@@ -327,25 +328,60 @@ def update_product_packagings_table(env, data, verbose):
     data["Length"] = data["Length"] * 10
 
     dataframe_to_sql_table(env, data, verbose)
-    if verbose:
-        click.echo("Updating or creating packagings for products. . .")
-    # List all products that does not have packaging and are in the dataframe : create packaging for those one
-    env.cr.execute(""" DELETE FROM product_packaging """)
 
-    # env.cr.execute(
-    #     """ SELECT id, default_code, name
-    #                     FROM product_template pt
-    #                     JOIN dataframe_table p_df ON pt.default_code = p_df.Ref
-    #                     WHERE pt.id NOT IN (SELECT product_tmpl_id FROM product_packaging)
-    #                     """
-    # )
-    # result = env.cr.fetchall()
-    # if result:
-    #     product_ids = tuple([r[0] for r in result])
-    #     if verbose:
-    #         click.echo("ids to create: {}. . .".format(product_ids))
+    if verbose:
+        click.echo("Creating indexes to speed up product packagings deletion. . .")
+
+    # env.cr.execute("""CREATE INDEX idx1 ON purchase_order_line (product_packaging) """)
+    # env.cr.commit()
+    # env.cr.execute("""CREATE INDEX idx2 ON sale_order_line (product_packaging) """)
+    # env.cr.commit()
+    # env.cr.execute("""CREATE INDEX idx3 ON stock_move (product_packaging) """)
+    # env.cr.commit()
+    # # env.cr.execute(
+    # #     """CREATE INDEX idx4 ON stock_quant_package (product_packaging_id) """
+    # # )
+    # # env.cr.commit()
+    # env.cr.execute("""CREATE INDEX idx5 ON stock_quant_package (packaging_id) """)
+    # env.cr.commit()
+    # env.cr.execute("""CREATE INDEX idx6 ON stock_quant (packaging_type_id) """)
+    # env.cr.commit()
+
+    if verbose:
+        click.echo("Deleting all packagings for products. . .")
+
+    start = datetime.now()
+    env.cr.execute("""DELETE FROM product_packaging """)
+    end = datetime.now()
+    delta = end - start
+    seconds = delta.seconds
+
+    if verbose:
+        click.echo("Dropping indexes on product packagings. . .")
+
+    env.cr.execute("""DROP INDEX idx1""")
+    env.cr.commit()
+    env.cr.execute("""DROP INDEX idx2""")
+    env.cr.commit()
+    env.cr.execute("""DROP INDEX idx3""")
+    env.cr.commit()
+    # env.cr.execute("""DROP INDEX idx4""")
+    # env.cr.commit()
+    env.cr.execute("""DROP INDEX idx5""")
+    env.cr.commit()
+    env.cr.execute("""DROP INDEX idx6""")
+    env.cr.commit()
+
+    if verbose:
+        click.echo(
+            "Time needed to delete existing packagings: {} hours and {} minutes. . .".format(
+                seconds // 3600.0, (seconds // 60.0) % 60.0
+            )
+        )
+        click.echo("Creating packagings for products based on input file. . .")
 
     # Create product packaging
+    start = datetime.now()
     env.cr.execute(
         """ INSERT INTO product_packaging
                             (name,
@@ -379,56 +415,33 @@ def update_product_packagings_table(env, data, verbose):
     )
 
     env.cr.commit()
+    end = datetime.now()
+    delta = end - start
+    seconds = delta.seconds
+    if verbose:
+        click.echo(
+            "Time needed to import packagings: {} hours and {} minutes. . .".format(
+                seconds // 3600.0, (seconds // 60.0) % 60.0
+            )
+        )
 
     # if verbose:
-    #     click.echo("Now updating existing packaging product ids. . .")
-    # # Update my product packaging table
-    # env.cr.execute(
-    #     """ UPDATE
-    #                         product_packaging p_pckg
-    #                    SET
-    #                         max_weight = p_df.Weight,
-    #                         height = p_df.Height,
-    #                         height_cm = p_df.Height / 10,
-    #                         width = p_df.Width,
-    #                         width_cm = p_df.Width / 10,
-    #                         lngth = p_df.Length,
-    #                         length_cm = p_df.Length / 10,
-    #                         barcode = p_df.User1,
-    #                         qty = p_df.User3
-    #                    FROM (dataframe_table p_df JOIN product_template pt ON p_df.Ref = pt.default_code)
-    #                    WHERE pt.id = p_pckg.product_tmpl_id AND p_pckg.packaging_type_id = p_df.Secondary_id
-    #                """
-    # )
-    # env.cr.commit()
+    #     click.echo("Updating filters on missing dimensions. . .")
 
-    # env.cr.execute(
-    #     """
-    #     SELECT p_pckg.id FROM product_packaging p_pckg
-    #     JOIN product_template pt ON pt.id = p_pckg.product_tmpl_id
-    #     LEFT JOIN dataframe_table p_dff ON p_pckg.packaging_type_id = p_dff.Secondary_id AND pt.default_code = p_dff.Ref
-    #     WHERE p_dff.Secondary_id IS NULL
+    # start = datetime.now()
+    # env["product.template"].search([])._compute_has_no_dimensions()
+    # env["product.template"].search([])._compute_packaging_has_no_dimensions()
 
-    #     """
-    # )
+    # end = datetime.now()
+    # delta = end - start
+    # seconds = delta.seconds
 
-    # result = env.cr.fetchall()
-
-    # if result:
-    #     packaging_ids = tuple([r[0] for r in result])
-    #     if verbose:
-    #         click.echo(
-    #             "Deleting following product packaging ids that where not in the xlsx file: {}. . .".format(
-    #                 packaging_ids
-    #             )
+    # if verbose:
+    #     click.echo(
+    #         "Time needed to update filters: {} hours and {} minutes. . .".format(
+    #             seconds // 3600.0, (seconds // 60.0) % 60.0
     #         )
-    #     # deleting product packaging
-    #     env.cr.execute(
-    #         """ DELETE FROM product_packaging WHERE id IN %(ids)s
-    #     """,
-    #         {"ids": packaging_ids},
     #     )
-    #     env.cr.commit()
 
     if verbose:
         click.echo("Dropping packaging product temporary table. . .")
