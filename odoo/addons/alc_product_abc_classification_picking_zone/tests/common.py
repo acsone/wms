@@ -9,6 +9,7 @@ class AclAbcClassificationProfilePickingZoneBase(common.ABCClassificationLevelCa
     @classmethod
     def setUpClass(cls):
         super(AclAbcClassificationProfilePickingZoneBase, cls).setUpClass()
+        cls.env["stock.location"].search([])._parent_store_compute()
         # We create 2 zones, 2 picking types for each zone and 2 stock.location.route
         # for each picking_type.
         # These infos are required to be able to put a picking_zone on a product
@@ -40,6 +41,7 @@ class AclAbcClassificationProfilePickingZoneBase(common.ABCClassificationLevelCa
             }
         )
         location_out = cls.env.ref("stock.stock_location_output")
+        cls.route_mto = cls.env.ref("stock.route_warehouse0_mto")
         cls.route_aliment = cls.env["stock.location.route"].create(
             {
                 "name": "Aliments",
@@ -95,6 +97,15 @@ class AclAbcClassificationProfilePickingZoneBase(common.ABCClassificationLevelCa
                 "type": "product",
                 "weight": 20.0,
                 "route_ids": [(6, 0, cls.route_medoc.ids)],
+            }
+        )
+        cls.product_medoc_mto = cls.env["product.product"].create(
+            {
+                "name": "Medoc mto",
+                "uom_id": cls.env.ref("product.product_uom_unit").id,
+                "type": "product",
+                "weight": 20.0,
+                "route_ids": [(6, 0, [cls.route_medoc.id, cls.route_mto.id])],
             }
         )
         cls.no_route_product = cls.env["product.product"].create(

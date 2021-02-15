@@ -34,19 +34,6 @@
     <field name="model">product.template</field>
     <field name="inherit_id" ref="specific_purchase.product_template_search_view" />
     <field name="arch" type="xml">
-      <xpath expr="//search" position="inside">
-        <separator />
-        <filter
-          string="Normal product"
-          name="normal_product"
-          domain="[('is_mto_product','=',False)]"
-        />
-        <filter
-          string="On Order"
-          name="on_order"
-          domain="[('is_mto_product','=',True)]"
-        />
-      </xpath>
       <xpath expr="//filter[@name='group_by_supplier_id']" position="after">
         <filter
           name="group_by_internal_category"

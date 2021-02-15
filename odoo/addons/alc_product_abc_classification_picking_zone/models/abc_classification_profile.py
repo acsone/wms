@@ -17,16 +17,18 @@ class AbcClassificationProfile(models.Model):
         column2="picking_zone_id",
     )
 
+    exclude_product_mto = fields.Boolean("Excludes MTO products", default=True)
+
     @api.model
     def create(self, vals):
         res = super(AbcClassificationProfile, self).create(vals)
-        if "picking_zone_ids" in vals:
+        if "picking_zone_ids" in vals or "exclude_product_mto" in vals:
             res._manage_products()
         return res
 
     def write(self, vals):
         res = super(AbcClassificationProfile, self).write(vals)
-        if "picking_zone_ids" in vals:
+        if "picking_zone_ids" in vals or "exclude_product_mto" in vals:
             self._manage_products()
         return res
 
@@ -49,15 +51,22 @@ class AbcClassificationProfile(models.Model):
         template_profiles_profile_col = template_profiles_field.column2
         template_profiles_table = template_profiles_field.relation
         for rec in self:
+            if rec.exclude_product_mto:
+                domain = [
+                    "|",
+                    ("is_mto_product", "=", True),
+                    ("picking_zone_id", "not in", rec.picking_zone_ids.ids),
+                    ("abc_classification_profile_ids", "in", rec.ids),
+                ]
+            else:
+                domain = [
+                    ("picking_zone_id", "not in", rec.picking_zone_ids.ids),
+                    ("abc_classification_profile_ids", "in", rec.ids),
+                ]
             obsolete_products = (
                 self.env["product.product"]
                 .with_context(active_test=False)
-                .search(
-                    [
-                        ("picking_zone_id", "not in", rec.picking_zone_ids.ids),
-                        ("abc_classification_profile_ids", "in", rec.ids),
-                    ]
-                )
+                .search(domain)
             )
             if not obsolete_products:
                 continue
@@ -147,14 +156,18 @@ class AbcClassificationProfile(models.Model):
                 WHERE pt.picking_zone_id in %(picking_zone_ids)s
                 AND pp.active
                 AND pt.type = 'product'
+                %(exclude_product_mto)s
                 ON CONFLICT DO NOTHING;
-            """,
+             """,
                 {
                     "table": AsIs(product_profiles_table),
                     "product_col": AsIs(product_profiles_product_col),
                     "profile_col": AsIs(product_profiles_profile_col),
                     "profile_id": rec.id,
                     "picking_zone_ids": tuple(rec.picking_zone_ids.ids),
+                    "exclude_product_mto": AsIs("AND pt.is_mto_product = False")
+                    if rec.exclude_product_mto
+                    else AsIs(""),
                 },
             )
             self.env.cr.execute(
@@ -165,6 +178,7 @@ class AbcClassificationProfile(models.Model):
                 WHERE pt.picking_zone_id in %(picking_zone_ids)s
                 AND pt.active
                 AND pt.type = 'product'
+                %(exclude_product_mto)s
                 ON CONFLICT DO NOTHING;
             """,
                 {
@@ -173,6 +187,9 @@ class AbcClassificationProfile(models.Model):
                     "profile_col": AsIs(template_profiles_profile_col),
                     "profile_id": rec.id,
                     "picking_zone_ids": tuple(rec.picking_zone_ids.ids),
+                    "exclude_product_mto": AsIs("AND pt.is_mto_product = False")
+                    if rec.exclude_product_mto
+                    else AsIs(""),
                 },
             )
         self.env["product.template"].invalidate_cache(

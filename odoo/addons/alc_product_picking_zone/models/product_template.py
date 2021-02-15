@@ -35,13 +35,14 @@ class ProductTemplate(models.Model):
             # "standard" route
             product_routes -= route_mto
 
-            res = Rule.search(
-                [
-                    ("route_id", "in", product_routes.ids),
-                    ("picking_type_id", "in", picking_types.ids),
-                ],
-                order="route_sequence, sequence",
-                limit=1,
-            )
-            if res:
-                product.picking_zone_id = res.picking_type_id.picking_zone_id.id
+            res = Rule
+            if product_routes and picking_types:
+                res = Rule.search(
+                    [
+                        ("route_id", "in", product_routes.ids),
+                        ("picking_type_id", "in", picking_types.ids),
+                    ],
+                    order="route_sequence, sequence",
+                    limit=1,
+                )
+            product.picking_zone_id = res.picking_type_id.picking_zone_id.id
