@@ -80,6 +80,11 @@
           domain="[('mto_stock_new_route', '=', True)]"
         />
         <filter
+          name="filter_mto_stock_5_days"
+          string="Product in a MTO stock location for more than 5 days"
+          domain="[('mto_stock_5_days', '=', True)]"
+        />
+        <filter
           name="filter_not_sold_on_website"
           string="Product is not sold anymore but still on website"
           domain="[('not_sold_on_website', '=', True)]"
@@ -118,6 +123,7 @@
         <field name="mto_stock_no_mto_route" invisible="1" />
         <field name="mto_stock_new_route" invisible="1" />
         <field name="not_sold_on_website" invisible="1" />
+        <field name="mto_stock_5_days" invisible="1" />
       </form>
       <header position="after">
         <div
@@ -184,6 +190,9 @@
           </div>
                     <div attrs="{'invisible': [('mto_stock_new_route', '=', False)]}">
             <p>- Product stocked in a MTO location with new route</p>
+          </div>
+                    <div attrs="{'invisible': [('mto_stock_5_days', '=', False)]}">
+            <p>- Product stocked in a MTO location for more than 5 days</p>
           </div>
                     <div attrs="{'invisible': [('not_sold_on_website', '=', False)]}">
             <p>- Product not sold but on website</p>

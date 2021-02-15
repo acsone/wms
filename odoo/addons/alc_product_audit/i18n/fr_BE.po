@@ -26,6 +26,14 @@ msgstr "- Produit acheté/vendu avec une route incohérente"
 msgid "- MTO Product purchased by a supplier but not sold"
 msgstr "- Produit acheté/vendu avec une commande fournisseur et sans commande client"
 
+
+
+#. module: alc_product_audit
+#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
+msgid "- Product stocked in a MTO location for more than 5 days"
+msgstr "- Produit acheté/vendu non livré depuis plus de 5 jours"
+
+
 #. module: alc_product_audit
 #: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
 msgid "- Product stocked in a MTO location without MTO route"
@@ -98,7 +106,7 @@ msgstr "- Rangement et zone de picking incohérent"
 #: model:ir.model.fields,field_description:alc_product_audit.field_product_product_can_be_bought_without_buy_route
 #: model:ir.model.fields,field_description:alc_product_audit.field_product_template_can_be_bought_without_buy_route
 #, fuzzy
-msgid "Can be bought without buy route"
+msgid "can be bought without buy route"
 msgstr "Peut être acheté sans route Acheter"
 
 #. module: alc_product_audit
@@ -117,6 +125,13 @@ msgstr "Produits avec anomalies"
 #: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
 msgid "MTO product has abnormal routes"
 msgstr "Produits achetés/vendus avec une route incohérente"
+
+
+#. module: alc_product_audit
+#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
+msgid "Product in a MTO stock location for more than 5 days"
+msgstr "Produits achetés/vendus non livrés depuis plus de 5 jours"
+
 
 #. module: alc_product_audit
 #: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
