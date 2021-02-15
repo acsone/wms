@@ -105,7 +105,7 @@ odoo10-addon-component==10.0.1.1.0
 odoo10-addon-component-event==10.0.1.0.0.99.dev26
 odoo10-addon-connector @ git+https://github.com/acsone/connector@de23258a4d639e696d6e4d941ba005a1577a9935#subdirectory=setup/connector
 odoo10-addon-date-range @ git+https://github.com/acsone/server-tools.git@dcefdba5bac014076f05229ba091acd8b739e164#subdirectory=setup/date_range
-odoo10-addon-despatch-advice-import @ git+https://github.com/acsone/edi.git@89e8049647dfce24f0ae07fda1fe090aed1a4423#subdirectory=setup/despatch_advice_import
+odoo10-addon-despatch-advice-import @ git+https://github.com/acsone/edi.git@a793c37a93ed26091a49898f3e3da65b7cc50dcc#subdirectory=setup/despatch_advice_import
 odoo10-addon-despatch-advice-import-ubl @ git+https://github.com/acsone/edi.git@89e8049647dfce24f0ae07fda1fe090aed1a4423#subdirectory=setup/despatch_advice_import_ubl
 odoo10-addon-geoengine-base-geolocalize==10.0.1.0.1
 odoo10-addon-geoengine-partner==10.0.1.0.1
