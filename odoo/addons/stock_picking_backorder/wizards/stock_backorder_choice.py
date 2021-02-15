@@ -2,7 +2,7 @@
 # Copyright 2017 Camptocamp SA
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl)
 
-from odoo import fields, models
+from odoo import _, fields, models
 
 
 class StockBackorderChoice(models.TransientModel):
@@ -29,6 +29,11 @@ class StockBackorderChoice(models.TransientModel):
 
     def apply(self):
         self.ensure_one()
+
+        picking = self.env["stock.picking"].search([("id", "=", self.picking_id.id)])
+        picking.message_post(
+            body=_("Back order reason: <em>%s</em>.") % (self.reason_id.name)
+        )
         keep_backorder = self.backorder_action_to_do == "create" or (
             self.backorder_action_to_do == "use_partner_option"
             and self.picking_id.partner_id.is_purchase_back_order_accepted
