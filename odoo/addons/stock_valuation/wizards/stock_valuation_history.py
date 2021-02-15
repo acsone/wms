@@ -255,8 +255,9 @@ class StockHistory(models.Model):
         history_date = self._context.get("history_date", fields.Datetime.now())
         for rec in self:
             # get price_unit at date from product_price_history
-            history_price = rec.product_id.get_history_price(
-                rec.company_id.id, date=history_date
+            history_price = round(
+                rec.product_id.get_history_price(rec.company_id.id, date=history_date),
+                2,
             )
             rec.inventory_value = rec.quantity * history_price
 
