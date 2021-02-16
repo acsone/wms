@@ -66,7 +66,8 @@ class ReportStockOverview(models.Model):
       (avg(product_uom_qty) OVER pid
        - stddev_samp(product_uom_qty) OVER pid * 2) as lower_bound,
       (avg(product_uom_qty) OVER pid
-       + stddev_samp(product_uom_qty) OVER pid * 2) as upper_bound
+       + stddev_samp(product_uom_qty) OVER pid * 2) as upper_bound,
+      (stddev_samp(product_uom_qty) OVER pid) as std_dev
     FROM stock_move sm
     JOIN stock_location sl_src ON sm.location_id = sl_src.id
     JOIN stock_location sl_dest ON sm.location_dest_id = sl_dest.id
@@ -83,10 +84,10 @@ class ReportStockOverview(models.Model):
   deliveries_last_byproduct AS (
     SELECT
       product_id,
-      ceil(avg(product_uom_qty) FILTER
+      (ceil(sum(product_uom_qty) FILTER
         (WHERE product_uom_qty BETWEEN lower_bound AND upper_bound)
         -- consider 5 open days on 7
-        / 5.0) AS average_qty,
+        / 5.0) + std_dev) AS average_qty,
       ceil(count(product_uom_qty) FILTER
         (WHERE product_uom_qty BETWEEN lower_bound AND upper_bound)
         / 5.0) AS average_count
