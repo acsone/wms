@@ -4,6 +4,7 @@
 from psycopg2.extensions import AsIs
 
 from odoo import api, fields, models
+from odoo.osv.expression import OR
 
 
 class AbcClassificationProfile(models.Model):
@@ -18,17 +19,28 @@ class AbcClassificationProfile(models.Model):
     )
 
     exclude_product_mto = fields.Boolean("Excludes MTO products", default=True)
+    exclude_non_sellable = fields.Boolean(
+        "Excludes non sellable products", default=True
+    )
 
     @api.model
     def create(self, vals):
         res = super(AbcClassificationProfile, self).create(vals)
-        if "picking_zone_ids" in vals or "exclude_product_mto" in vals:
+        if (
+            "picking_zone_ids" in vals
+            or "exclude_product_mto" in vals
+            or "exclude_non_sellable" in vals
+        ):
             res._manage_products()
         return res
 
     def write(self, vals):
         res = super(AbcClassificationProfile, self).write(vals)
-        if "picking_zone_ids" in vals or "exclude_product_mto" in vals:
+        if (
+            "picking_zone_ids" in vals
+            or "exclude_product_mto" in vals
+            or "exclude_non_sellable" in vals
+        ):
             self._manage_products()
         return res
 
@@ -51,18 +63,14 @@ class AbcClassificationProfile(models.Model):
         template_profiles_profile_col = template_profiles_field.column2
         template_profiles_table = template_profiles_field.relation
         for rec in self:
+            domain = [
+                ("picking_zone_id", "not in", rec.picking_zone_ids.ids),
+                ("abc_classification_profile_ids", "in", rec.ids),
+            ]
             if rec.exclude_product_mto:
-                domain = [
-                    "|",
-                    ("is_mto_product", "=", True),
-                    ("picking_zone_id", "not in", rec.picking_zone_ids.ids),
-                    ("abc_classification_profile_ids", "in", rec.ids),
-                ]
-            else:
-                domain = [
-                    ("picking_zone_id", "not in", rec.picking_zone_ids.ids),
-                    ("abc_classification_profile_ids", "in", rec.ids),
-                ]
+                domain = OR([[("is_mto_product", "=", True)], domain])
+            if rec.exclude_non_sellable:
+                domain = OR([[("sale_ok", "=", False)], domain])
             obsolete_products = (
                 self.env["product.product"]
                 .with_context(active_test=False)
@@ -157,6 +165,7 @@ class AbcClassificationProfile(models.Model):
                 AND pp.active
                 AND pt.type = 'product'
                 %(exclude_product_mto)s
+                %(exclude_non_sellable)s
                 ON CONFLICT DO NOTHING;
              """,
                 {
@@ -167,6 +176,9 @@ class AbcClassificationProfile(models.Model):
                     "picking_zone_ids": tuple(rec.picking_zone_ids.ids),
                     "exclude_product_mto": AsIs("AND pt.is_mto_product = False")
                     if rec.exclude_product_mto
+                    else AsIs(""),
+                    "exclude_non_sellable": AsIs("AND pt.sale_ok = True")
+                    if rec.exclude_non_sellable
                     else AsIs(""),
                 },
             )
@@ -179,6 +191,7 @@ class AbcClassificationProfile(models.Model):
                 AND pt.active
                 AND pt.type = 'product'
                 %(exclude_product_mto)s
+                %(exclude_non_sellable)s
                 ON CONFLICT DO NOTHING;
             """,
                 {
@@ -189,6 +202,9 @@ class AbcClassificationProfile(models.Model):
                     "picking_zone_ids": tuple(rec.picking_zone_ids.ids),
                     "exclude_product_mto": AsIs("AND pt.is_mto_product = False")
                     if rec.exclude_product_mto
+                    else AsIs(""),
+                    "exclude_non_sellable": AsIs("AND pt.sale_ok = True")
+                    if rec.exclude_non_sellable
                     else AsIs(""),
                 },
             )

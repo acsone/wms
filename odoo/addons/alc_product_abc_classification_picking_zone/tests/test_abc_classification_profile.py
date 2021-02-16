@@ -86,3 +86,32 @@ class TestAbcClassificationProfile(AclAbcClassificationProfilePickingZoneBase):
             self.classification_profile,
         )
         self.assertFalse(self.product_medoc_mto.abc_classification_profile_ids)
+
+    def test_01(self):
+        """
+        Data:
+            1 product in zone medoc with sale_ok=False
+        Test case:
+            1. Add zone medoc and zone alim to profile
+            2. set exclude non sellable to False
+            3  set exclude non sellable to False
+        Expected result:
+            1. No profile on product
+            2. Product linked to the profile
+            3. No profile on product
+        """
+        self.product_medoc.sale_ok = False
+        self.classification_profile.exclude_non_sellable = True
+        self.assertFalse(self.product_medoc.abc_classification_profile_ids)
+        # 1
+        self.classification_profile.picking_zone_ids = self.zone_med
+        self.assertFalse(self.product_medoc.abc_classification_profile_ids)
+        # 2
+        self.classification_profile.exclude_non_sellable = False
+        self.assertEqual(
+            self.product_medoc.abc_classification_profile_ids,
+            self.classification_profile,
+        )
+        # 3
+        self.classification_profile.exclude_non_sellable = True
+        self.assertFalse(self.product_medoc.abc_classification_profile_ids)

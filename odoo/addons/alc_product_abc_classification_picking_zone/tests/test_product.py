@@ -175,3 +175,67 @@ class TestProduct(AclAbcClassificationProfilePickingZoneBase):
         self.product_medoc_mto.route_ids = self.route_medoc | self.route_mto
         self.assertFalse(template.abc_classification_profile_ids)
         self.assertFalse(self.product_medoc_mto.abc_classification_profile_ids)
+
+    def test_04(self):
+        """
+        Data:
+            A product with zone medoc and sale_ok=False
+            A classification profile with zone medoc
+            exclude_non_sellable is True by default
+        Test Case:
+            1. set sale_ok=True
+            2. set sale_ok=False
+        Expected result:
+            1. Test profile associated to template and variant
+            2. No profile associated to template and variant
+        """
+        product = self.product_medoc
+        template = product.product_tmpl_id
+        template.sale_ok = False
+        self.classification_profile.picking_zone_ids = self.zone_med
+        self.assertFalse(template.abc_classification_profile_ids)
+        self.assertFalse(product.abc_classification_profile_ids)
+        # 1
+        template.sale_ok = True
+        self.assertEqual(
+            template.abc_classification_profile_ids, self.classification_profile
+        )
+        self.assertEqual(
+            product.abc_classification_profile_ids, self.classification_profile,
+        )
+        # 2
+        template.sale_ok = False
+        self.assertFalse(template.abc_classification_profile_ids)
+        self.assertFalse(product.abc_classification_profile_ids)
+
+    def test_05(self):
+        """
+        Data:
+            A product variant with zone medoc and sale_ok=False
+            A classification profile with zone medoc
+            exclude_non_sellable is True by default
+        Test Case:
+            1. set sale_ok=True on variant
+            2. set sale_ok=False on variant
+        Expected result:
+            1. Test profile associated to template and variant
+            2. No profile associated to template and variant
+        """
+        product = self.product_medoc
+        template = product.product_tmpl_id
+        template.sale_ok = False
+        self.classification_profile.picking_zone_ids = self.zone_med
+        self.assertFalse(template.abc_classification_profile_ids)
+        self.assertFalse(product.abc_classification_profile_ids)
+        # 1
+        product.sale_ok = True
+        self.assertEqual(
+            template.abc_classification_profile_ids, self.classification_profile
+        )
+        self.assertEqual(
+            product.abc_classification_profile_ids, self.classification_profile,
+        )
+        # 2
+        product.sale_ok = False
+        self.assertFalse(template.abc_classification_profile_ids)
+        self.assertFalse(product.abc_classification_profile_ids)
