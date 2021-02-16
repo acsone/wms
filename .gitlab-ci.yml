@@ -146,7 +146,7 @@ deploy-test:
     - echo "$TEST_KUBECONFIG" > .kubeconfig
     - export KUBECONFIG=$PWD/.kubeconfig
     - create_gitlab_registry_secret
-    - envtpl < container/test.tpl.yaml | kubectl apply -f -
+    - envsubst < container/test.tpl.yaml | kubectl apply -f -
     - kubectl rollout status -w deployment/${CI_ENVIRONMENT_SLUG}
   environment:
     name: test/odoo-alcyon
