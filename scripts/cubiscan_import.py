@@ -200,6 +200,18 @@ def split_products_and_packagings(env, all_data_dataframe, verbose):
 
 
 def update_products_table(env, data, verbose):
+    # cleanup data
+    env.cr.execute(
+        """
+         UPDATE
+            product_product pp
+         SET
+            weight = null,
+            height = null,
+            width = null,
+            length = null
+    """
+    )
     # Working on the product
     # Put DF to sql temporary table
     dataframe_to_sql_table(env, data, verbose)
