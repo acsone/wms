@@ -64,12 +64,14 @@ class TestProductDimensions(SavepointCase):
         self.product_template.length = 20.0
         self.product_template.width = 12.0
         self.product_template.height = 1.5
+        self.product_template.weight = 4.0
 
         product = self.product_template.product_variant_ids
 
         self.assertEqual(product.length, 20.0)
         self.assertEqual(product.width, 12.0)
         self.assertEqual(product.height, 1.5)
+        self.assertEqual(product.weight, 4.0)
 
     def test_02(self):
         """
@@ -100,8 +102,10 @@ class TestProductDimensions(SavepointCase):
         self.product.length = 8.0
         self.product.width = 3.0
         self.product.height = 30.0
+        self.product.weight = 10.0
         product_template = self.product.product_tmpl_id
 
         self.assertEqual(product_template.length, 8.0)
         self.assertEqual(product_template.width, 3.0)
         self.assertEqual(product_template.height, 30.0)
+        self.assertEqual(product_template.weight, 10.0)
