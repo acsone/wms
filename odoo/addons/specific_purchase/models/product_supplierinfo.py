@@ -70,7 +70,11 @@ class ProductSupplierinfo(models.Model):
                 and code_product_tmpl.id
             )
             values.update({"product_tmpl_id": prod_id})
-        if not values.get("product_code"):
+        if (
+            not values.get("product_code")
+            and "name" in values
+            and "product_tmpl_id" in values
+        ):
             values["product_code"] = self._get_default_line(
                 values["name"], values["product_tmpl_id"]
             ).product_code
