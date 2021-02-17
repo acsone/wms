@@ -92,7 +92,7 @@ class ReportStockOverview(models.Model):
         (WHERE product_uom_qty BETWEEN lower_bound AND upper_bound)
         / 5.0) AS average_count
     FROM deliveries_last
-    GROUP BY product_id
+    GROUP BY product_id, std_dev
   )
   SELECT product_id AS id, *,
   CASE
