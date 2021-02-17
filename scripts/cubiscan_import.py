@@ -200,7 +200,7 @@ def split_products_and_packagings(env, all_data_dataframe, verbose):
 
 
 def update_products_table(env, data, verbose):
-    # cleanup data
+    # cleanup data only on mat and medoc
     env.cr.execute(
         """
          UPDATE
@@ -210,6 +210,7 @@ def update_products_table(env, data, verbose):
             height = null,
             width = null,
             length = null
+        where picking_zone_id not in (1,2)
     """
     )
     # Working on the product
