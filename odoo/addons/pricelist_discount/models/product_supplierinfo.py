@@ -145,7 +145,7 @@ class ProductSupplierinfo(models.Model):
     def create(self, vals):
         # when the record is created by import, the price is not always given...
         # if not takes the default one
-        if not vals.get("price"):
+        if not vals.get("price") and "name" in vals and "product_tmpl_id" in vals:
             vals["price"] = self._get_default_line(
                 vals["name"], vals["product_tmpl_id"]
             ).price
