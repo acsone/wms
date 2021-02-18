@@ -111,6 +111,7 @@
         "alc_product_uom_updatable",
         "alc_restocking_exclude_not_salable",
         "alc_sale_cancel_remaining_product_additional",
+        "alc_sale_channel_stock_move",
         "alc_sale_invoicing_on_transfer",
         "alc_sale_invoicing_policy",
         "alc_sale_processing_finalizer",
