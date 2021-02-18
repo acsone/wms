@@ -6,11 +6,10 @@
 import logging
 import math
 from ast import literal_eval
-from contextlib import closing, contextmanager
+from contextlib import contextmanager
 from datetime import datetime
 from itertools import groupby
 
-import odoo
 from odoo import _, api, fields, models
 from odoo.exceptions import AccessError, UserError, ValidationError
 from odoo.tools import config
@@ -930,25 +929,6 @@ class RoundInstanceCustomer(models.Model):
         if self.exists() and not self.picking_ids:
             # Nothing was picked, all pickings have been disconnected
             raise UserError(_("No picking have been processed yet"))
-
-    @contextmanager
-    def _new_env(self, new_cr=True):
-        with api.Environment.manage():
-            if new_cr:
-                registry = odoo.modules.registry.RegistryManager.get(self.env.cr.dbname)
-                with closing(registry.cursor()) as cr:
-                    try:
-                        yield self.env(cr=cr)
-                    except Exception:
-                        cr.rollback()
-                        raise
-                    else:
-                        # disable pylint error because this is a valid commit,
-                        # we are in a new env
-                        cr.commit()  # pylint: disable=invalid-commit
-            else:
-                # keep the same env
-                yield self.env
 
     @contextmanager
     def _handle_delivery_error(self):
