@@ -337,7 +337,7 @@ class ExportReportTurnover(models.TransientModel):
         worksheet1 = writer.sheets["rapportMensuel"]
         worksheet2 = writer.sheets["rapportAnnuel"]
         worksheet3 = writer.sheets["rapportJournalier"]
-        formatSheet = workbook.add_format({"num_format": "#.##0"})
+        formatSheet = workbook.add_format({"num_format": "0"})
 
         worksheet1.set_column("B:C", 10, formatSheet)
         worksheet1.set_column("D:E", 20, formatSheet)
