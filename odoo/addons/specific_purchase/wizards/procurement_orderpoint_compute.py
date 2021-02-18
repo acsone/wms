@@ -3,6 +3,7 @@ import logging
 import threading
 from datetime import datetime
 
+import odoo
 from odoo import _, api, fields, models, tools
 from odoo.exceptions import UserError
 
@@ -82,32 +83,28 @@ class ProcurementOrderpointCompute(models.TransientModel):
         with api.Environment.manage():
             # As this function is in a new thread, I need to open a new cursor,
             # because the old one may be closed
-            new_cr = self.pool.cursor()
-            self_in_new_cr = self.with_env(self.env(cr=new_cr, context=context))
-            scheduler_cron = self_in_new_cr.sudo().env.ref(
-                "procurement.ir_cron_scheduler_action"
-            )
-            # Avoid to run the scheduler multiple times in the same time
-            # Alcyon doesn't use this cron. It's why I can use it.
-            try:
-                with tools.mute_logger("odoo.sql_db"):
-                    self_in_new_cr._cr.execute(
-                        "SELECT id FROM ir_cron WHERE id = %s " "FOR UPDATE NOWAIT",
-                        (scheduler_cron.id,),
-                    )
-            except Exception:
-                _logger.info(
-                    "Attempt to run procurement scheduler aborted,"
-                    " as already running"
+            with odoo.registry(self.env.cr.dbname).cursor() as new_cr:
+                self_in_new_cr = self.with_env(self.env(cr=new_cr, context=context))
+                scheduler_cron = self_in_new_cr.sudo().env.ref(
+                    "procurement.ir_cron_scheduler_action"
                 )
-                self_in_new_cr._cr.rollback()
-                self_in_new_cr._cr.close()
-                return {}
+                # Avoid to run the scheduler multiple times in the same time
+                # Alcyon doesn't use this cron. It's why I can use it.
+                try:
+                    with tools.mute_logger("odoo.sql_db"):
+                        self_in_new_cr._cr.execute(
+                            "SELECT id FROM ir_cron WHERE id = %s " "FOR UPDATE NOWAIT",
+                            (scheduler_cron.id,),
+                        )
+                except Exception:
+                    _logger.info(
+                        "Attempt to run procurement scheduler aborted,"
+                        " as already running"
+                    )
+                    self_in_new_cr._cr.rollback()
+                    return {}
 
-            try:
                 self_in_new_cr.env["procurement.order"]._procure_orderpoint_confirm(
                     use_new_cursor=True, company_id=self.env.user.company_id.id
                 )
-            finally:
-                new_cr.close()
-            return {}
+                return {}
