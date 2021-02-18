@@ -32,8 +32,6 @@ class IrAttachment(models.Model):
             `select id from ir_attachment where url like '/web/content%'`
         """
         trgm_installed = install_trgm_extension(env)
-        env.cr.commit()
-
         if trgm_installed:
             index_name = "ir_attachment_url_trgm_index"
             create_index(

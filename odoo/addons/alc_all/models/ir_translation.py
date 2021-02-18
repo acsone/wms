@@ -22,7 +22,6 @@ class IrTranslation(models.Model):
         if "ir_translation_name_lang_res_id_id_idx" in indexes:
             # drop test index
             cr.execute("DROP INDEX ir_translation_name_lang_res_id_id_idx")
-            cr.commit()  # pylint:disable=invalid-commit
 
         if "ir_translation_name_lang_type_res_id_idx" not in indexes:
             cr.execute(
@@ -30,6 +29,5 @@ class IrTranslation(models.Model):
                 "ON ir_translation(name, lang, type, res_id) WHERE "
                 "value != ''"
             )
-            cr.commit()  # pylint:disable=invalid-commit
 
         return res
