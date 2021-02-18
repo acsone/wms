@@ -563,7 +563,7 @@
                     </table>
                   </div>
                   <div class="col-md-6 div_separator">
-                    <table class="border-left spacing_table_2">
+                    <!-- table class="border-left spacing_table_2">
                       <tr>
                         <td>ABC code</td>
                         <td>
@@ -594,7 +594,7 @@
                           <span t-field="current_product.turnover_average_nbr_lines" />
                         </td>
                       </tr>
-                    </table>
+                    </table -->
                   </div>
                 </div>
                 <hr />

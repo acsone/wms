@@ -13,7 +13,6 @@
         "account",
         "product",
         "stock",
-        "code_abc",
         "delivery",
         # FIXME specific_data should be at the root
         # of the custom addons, specific_partner as

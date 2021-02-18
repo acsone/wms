@@ -18,7 +18,6 @@
         "purchase",
         "stock",
         "stock_orderpoint_product",
-        "code_abc",
     ],
     "data": ["views/purchase_order.xml", "views/templates.xml"],
     "website": "http://www.camptocamp.com",
