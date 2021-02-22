@@ -24,6 +24,16 @@ msgid "Abc Classification Profile"
 msgstr ""
 
 #. module: alc_product_abc_classification_picking_zone
+#: model:ir.model.fields,field_description:alc_product_abc_classification_picking_zone.field_abc_classification_profile_exclude_product_mto
+msgid "Excludes MTO products"
+msgstr ""
+
+#. module: alc_product_abc_classification_picking_zone
+#: model:ir.model.fields,field_description:alc_product_abc_classification_picking_zone.field_abc_classification_profile_exclude_non_sellable
+msgid "Excludes non sellable products"
+msgstr ""
+
+#. module: alc_product_abc_classification_picking_zone
 #: model:ir.model.fields,field_description:alc_product_abc_classification_picking_zone.field_abc_classification_profile_picking_zone_ids
 msgid "Picking zone ids"
 msgstr ""
