@@ -15,6 +15,11 @@ msgstr ""
 
 #. module: alc_product_audit
 #: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
+msgid "- MTO Product purchased by a supplier but not sold"
+msgstr ""
+
+#. module: alc_product_audit
+#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
 msgid "- MTO Product with abnormal routes"
 msgstr ""
 
@@ -40,12 +45,42 @@ msgstr ""
 
 #. module: alc_product_audit
 #: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
+msgid "- Product is missing dimensions"
+msgstr ""
+
+#. module: alc_product_audit
+#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
+msgid "- Product is missing packaging dimensions"
+msgstr ""
+
+#. module: alc_product_audit
+#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
 msgid "- Product is not salable and still has a bin"
 msgstr ""
 
 #. module: alc_product_audit
 #: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
 msgid "- Product is not salable but not archived"
+msgstr ""
+
+#. module: alc_product_audit
+#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
+msgid "- Product not sold but on website"
+msgstr ""
+
+#. module: alc_product_audit
+#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
+msgid "- Product stocked in a MTO location for more than 5 days"
+msgstr ""
+
+#. module: alc_product_audit
+#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
+msgid "- Product stocked in a MTO location with new route"
+msgstr ""
+
+#. module: alc_product_audit
+#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
+msgid "- Product stocked in a MTO location without MTO route"
 msgstr ""
 
 #. module: alc_product_audit
@@ -70,6 +105,13 @@ msgstr ""
 #: model:ir.model.fields,field_description:alc_product_audit.field_product_product_has_anomaly
 #: model:ir.model.fields,field_description:alc_product_audit.field_product_template_has_anomaly
 msgid "Has anomaly"
+msgstr ""
+
+#. module: alc_product_audit
+#: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_has_no_dimensions
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_product_has_no_dimensions
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_template_has_no_dimensions
+msgid "Has no dimensions"
 msgstr ""
 
 #. module: alc_product_audit
@@ -114,6 +156,49 @@ msgid "Mismatch route picking"
 msgstr ""
 
 #. module: alc_product_audit
+#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
+msgid "Missing dimensions"
+msgstr ""
+
+#. module: alc_product_audit
+#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
+msgid "Missing packaging dimensions"
+msgstr ""
+
+#. module: alc_product_audit
+#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
+msgid "Mto product purchased and not sold"
+msgstr ""
+
+#. module: alc_product_audit
+#: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_mto_purchased_not_sold
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_product_mto_purchased_not_sold
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_template_mto_purchased_not_sold
+msgid "Mto purchased not sold"
+msgstr ""
+
+#. module: alc_product_audit
+#: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_mto_stock_5_days
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_product_mto_stock_5_days
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_template_mto_stock_5_days
+msgid "Mto stock 5 days"
+msgstr ""
+
+#. module: alc_product_audit
+#: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_mto_stock_new_route
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_product_mto_stock_new_route
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_template_mto_stock_new_route
+msgid "Mto stock new route"
+msgstr ""
+
+#. module: alc_product_audit
+#: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_mto_stock_no_mto_route
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_product_mto_stock_no_mto_route
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_template_mto_stock_no_mto_route
+msgid "Mto stock no mto route"
+msgstr ""
+
+#. module: alc_product_audit
 #: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_mto_with_abnormal_route
 #: model:ir.model.fields,field_description:alc_product_audit.field_product_product_mto_with_abnormal_route
 #: model:ir.model.fields,field_description:alc_product_audit.field_product_template_mto_with_abnormal_route
@@ -143,6 +228,20 @@ msgid "Not salable or archived but with a bin"
 msgstr ""
 
 #. module: alc_product_audit
+#: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_not_sold_on_website
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_product_not_sold_on_website
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_template_not_sold_on_website
+msgid "Not sold on website"
+msgstr ""
+
+#. module: alc_product_audit
+#: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_packaging_has_no_dimensions
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_product_packaging_has_no_dimensions
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_template_packaging_has_no_dimensions
+msgid "Packaging has no dimensions"
+msgstr ""
+
+#. module: alc_product_audit
 #: model:ir.model,name:alc_product_audit.model_product_template
 msgid "Product Template"
 msgstr ""
@@ -150,6 +249,26 @@ msgstr ""
 #. module: alc_product_audit
 #: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
 msgid "Product has an anomaly"
+msgstr ""
+
+#. module: alc_product_audit
+#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
+msgid "Product in a MTO stock location for more than 5 days"
+msgstr ""
+
+#. module: alc_product_audit
+#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
+msgid "Product in a MTO stock location with mto route"
+msgstr ""
+
+#. module: alc_product_audit
+#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
+msgid "Product in a MTO stock location with route new"
+msgstr ""
+
+#. module: alc_product_audit
+#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
+msgid "Product is not sold anymore but still on website"
 msgstr ""
 
 #. module: alc_product_audit

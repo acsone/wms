@@ -18,47 +18,14 @@ msgstr ""
 
 #. module: alc_product_audit
 #: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
+msgid "- MTO Product purchased by a supplier but not sold"
+msgstr ""
+"- Produit acheté/vendu avec une commande fournisseur et sans commande client"
+
+#. module: alc_product_audit
+#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
 msgid "- MTO Product with abnormal routes"
 msgstr "- Produit acheté/vendu avec une route incohérente"
-
-#. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
-msgid "- MTO Product purchased by a supplier but not sold"
-msgstr "- Produit acheté/vendu avec une commande fournisseur et sans commande client"
-
-
-
-#. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
-msgid "- Product stocked in a MTO location for more than 5 days"
-msgstr "- Produit acheté/vendu non livré depuis plus de 5 jours"
-
-
-#. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
-msgid "- Product stocked in a MTO location without MTO route"
-msgstr "- Produit stocké dans un emplacement dont le parent est acheté/vendu pour lequel la route 'approvisionner à la commande' n'est pas active"
-
-#. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
-msgid "- Product stocked in a MTO location with new route"
-msgstr "- Produit stocké dans un emplacement dont le parent est acheté/vendu pour lequel la route 'nouveauté' est pas active"
-
-#. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
-msgid "- Product not sold but on website"
-msgstr "- Produit ne pouvant être vendu mais publié sur le site web"
-
-#. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
-msgid "- Product is missing dimensions"
-msgstr "- Le produit n'a pas toutes les dimensions"
-
-#. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
-msgid "- Product is missing packaging dimensions"
-msgstr "- Le produit n'a pas toutes les dimensions de conditionnement"
-
 
 #. module: alc_product_audit
 #: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
@@ -72,8 +39,7 @@ msgstr ""
 #. module: alc_product_audit
 #: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
 msgid "- Product can be purchased but does not have the buy route"
-msgstr ""
-"- Le produit peut être acheté sans route Acheter "
+msgstr "- Le produit peut être acheté sans route Acheter "
 
 #. module: alc_product_audit
 #: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
@@ -84,6 +50,16 @@ msgstr "- Min/Max défini pour un produit en achetés/vendus"
 #: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
 msgid "- Product has no min/max and is not 'on command reappro'"
 msgstr "- Min/Max non défini pour un produit non achetés/vendus"
+
+#. module: alc_product_audit
+#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
+msgid "- Product is missing dimensions"
+msgstr "- Le produit n'a pas toutes les dimensions"
+
+#. module: alc_product_audit
+#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
+msgid "- Product is missing packaging dimensions"
+msgstr "- Le produit n'a pas toutes les dimensions de conditionnement"
 
 #. module: alc_product_audit
 #: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
@@ -98,6 +74,30 @@ msgstr "- Le produit ne peut être vendu et non archivé"
 
 #. module: alc_product_audit
 #: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
+msgid "- Product not sold but on website"
+msgstr "- Produit ne pouvant être vendu mais publié sur le site web"
+
+#. module: alc_product_audit
+#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
+msgid "- Product stocked in a MTO location for more than 5 days"
+msgstr "- Produit acheté/vendu non livré depuis plus de 5 jours"
+
+#. module: alc_product_audit
+#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
+msgid "- Product stocked in a MTO location with new route"
+msgstr ""
+"- Produit stocké dans un emplacement dont le parent est acheté/vendu pour "
+"lequel la route 'nouveauté' est pas active"
+
+#. module: alc_product_audit
+#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
+msgid "- Product stocked in a MTO location without MTO route"
+msgstr ""
+"- Produit stocké dans un emplacement dont le parent est acheté/vendu pour "
+"lequel la route 'approvisionner à la commande' n'est pas active"
+
+#. module: alc_product_audit
+#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
 msgid "- The selected picking zone does not match the bin"
 msgstr "- Rangement et zone de picking incohérent"
 
@@ -106,7 +106,7 @@ msgstr "- Rangement et zone de picking incohérent"
 #: model:ir.model.fields,field_description:alc_product_audit.field_product_product_can_be_bought_without_buy_route
 #: model:ir.model.fields,field_description:alc_product_audit.field_product_template_can_be_bought_without_buy_route
 #, fuzzy
-msgid "can be bought without buy route"
+msgid "Can be bought without buy route"
 msgstr "Peut être acheté sans route Acheter"
 
 #. module: alc_product_audit
@@ -122,36 +122,17 @@ msgid "Has anomaly"
 msgstr "Produits avec anomalies"
 
 #. module: alc_product_audit
+#: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_has_no_dimensions
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_product_has_no_dimensions
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_template_has_no_dimensions
+#, fuzzy
+msgid "Has no dimensions"
+msgstr "Dimensions manquantes"
+
+#. module: alc_product_audit
 #: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
 msgid "MTO product has abnormal routes"
 msgstr "Produits achetés/vendus avec une route incohérente"
-
-
-#. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
-msgid "Product in a MTO stock location for more than 5 days"
-msgstr "Produits achetés/vendus non livrés depuis plus de 5 jours"
-
-
-#. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
-msgid "Mto product purchased and not sold"
-msgstr "Produits achetés/vendus sans commande client"
-
-#. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
-msgid "Product in a MTO stock location with mto route"
-msgstr "Produits dans un emplacement de stock achetés/vendus sans route 'approvisionner à la commande'"
-
-#. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
-msgid "Product in a MTO stock location with route new"
-msgstr "Produits dans un emplacement de stock achetés/vendus avec route 'nouveautés'"
-
-#. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
-msgid "Product is not sold anymore but still on website"
-msgstr "Ne peut être vendu et publié sur le site web"
 
 #. module: alc_product_audit
 #: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_min_max_on_command_reappro
@@ -190,6 +171,52 @@ msgid "Mismatch route picking"
 msgstr "Route et zone de picking incohérente"
 
 #. module: alc_product_audit
+#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
+msgid "Missing dimensions"
+msgstr "Dimensions manquantes"
+
+#. module: alc_product_audit
+#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
+msgid "Missing packaging dimensions"
+msgstr "Dimensions de conditionnement manquantes"
+
+#. module: alc_product_audit
+#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
+msgid "Mto product purchased and not sold"
+msgstr "Produits achetés/vendus sans commande client"
+
+#. module: alc_product_audit
+#: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_mto_purchased_not_sold
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_product_mto_purchased_not_sold
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_template_mto_purchased_not_sold
+#, fuzzy
+msgid "Mto purchased not sold"
+msgstr "Produits achetés/vendus sans commande client"
+
+#. module: alc_product_audit
+#: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_mto_stock_5_days
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_product_mto_stock_5_days
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_template_mto_stock_5_days
+msgid "Mto stock 5 days"
+msgstr ""
+
+#. module: alc_product_audit
+#: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_mto_stock_new_route
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_product_mto_stock_new_route
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_template_mto_stock_new_route
+#, fuzzy
+msgid "Mto stock new route"
+msgstr "Produits achetés/vendus avec une route incohérente"
+
+#. module: alc_product_audit
+#: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_mto_stock_no_mto_route
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_product_mto_stock_no_mto_route
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_template_mto_stock_no_mto_route
+#, fuzzy
+msgid "Mto stock no mto route"
+msgstr "Produits achetés/vendus avec une route incohérente"
+
+#. module: alc_product_audit
 #: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_mto_with_abnormal_route
 #: model:ir.model.fields,field_description:alc_product_audit.field_product_product_mto_with_abnormal_route
 #: model:ir.model.fields,field_description:alc_product_audit.field_product_template_mto_with_abnormal_route
@@ -220,6 +247,22 @@ msgid "Not salable or archived but with a bin"
 msgstr "Ne peut être vendu ou est archivé et associé à un rangement"
 
 #. module: alc_product_audit
+#: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_not_sold_on_website
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_product_not_sold_on_website
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_template_not_sold_on_website
+#, fuzzy
+msgid "Not sold on website"
+msgstr "- Produit ne pouvant être vendu mais publié sur le site web"
+
+#. module: alc_product_audit
+#: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_packaging_has_no_dimensions
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_product_packaging_has_no_dimensions
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_template_packaging_has_no_dimensions
+#, fuzzy
+msgid "Packaging has no dimensions"
+msgstr "Dimensions de conditionnement manquantes"
+
+#. module: alc_product_audit
 #: model:ir.model,name:alc_product_audit.model_product_template
 msgid "Product Template"
 msgstr "Modèle de produit"
@@ -228,6 +271,29 @@ msgstr "Modèle de produit"
 #: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
 msgid "Product has an anomaly"
 msgstr "Produits avec anomalies"
+
+#. module: alc_product_audit
+#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
+msgid "Product in a MTO stock location for more than 5 days"
+msgstr "Produits achetés/vendus non livrés depuis plus de 5 jours"
+
+#. module: alc_product_audit
+#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
+msgid "Product in a MTO stock location with mto route"
+msgstr ""
+"Produits dans un emplacement de stock achetés/vendus sans route "
+"'approvisionner à la commande'"
+
+#. module: alc_product_audit
+#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
+msgid "Product in a MTO stock location with route new"
+msgstr ""
+"Produits dans un emplacement de stock achetés/vendus avec route 'nouveautés'"
+
+#. module: alc_product_audit
+#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
+msgid "Product is not sold anymore but still on website"
+msgstr "Ne peut être vendu et publié sur le site web"
 
 #. module: alc_product_audit
 #: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_sale_not_ok_archived_bin_available
@@ -247,14 +313,3 @@ msgstr "Ne peut être vendu et non archivé"
 #: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
 msgid "can be bought without buy routes"
 msgstr "Peut être acheté sans route Acheter"
-
-
-#. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
-msgid "Missing dimensions"
-msgstr "Dimensions manquantes"
-
-#. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
-msgid "Missing packaging dimensions"
-msgstr "Dimensions de conditionnement manquantes"
