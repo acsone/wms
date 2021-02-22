@@ -85,6 +85,12 @@ msgid "Last Updated on"
 msgstr ""
 
 #. module: alc_account_payment_globalization
+#: code:addons/alc_account_payment_globalization/wizards/alc_account_payment_globalization.py:123
+#, python-format
+msgid "No accounting lines for this partner."
+msgstr ""
+
+#. module: alc_account_payment_globalization
 #: model:ir.ui.view,arch_db:alc_account_payment_globalization.alc_account_payment_globalization_form_view
 msgid "OK"
 msgstr ""
