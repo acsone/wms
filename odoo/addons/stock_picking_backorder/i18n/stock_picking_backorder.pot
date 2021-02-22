@@ -25,6 +25,12 @@ msgid "Automaticaly cancel products that could not be delivered. Must be set on 
 msgstr ""
 
 #. module: stock_picking_backorder
+#: code:addons/stock_picking_backorder/wizards/stock_backorder_choice.py:35
+#, python-format
+msgid "Back order reason: <em>%s</em>."
+msgstr ""
+
+#. module: stock_picking_backorder
 #: model:ir.ui.view,arch_db:stock_picking_backorder.stock_backorder_choice_view_form
 msgid "Backorder"
 msgstr ""
