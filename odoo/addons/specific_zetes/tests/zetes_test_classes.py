@@ -428,7 +428,7 @@ class ZetesReserveTest(ZetesTest):
         )
         update_qty_wizard.change_product_qty()
 
-        self.location_product_1.write({"reserve_location_id": self.reserve_medoc.id})
+        self.zone_gustave.write({"reserve_location_id": self.reserve_medoc.id})
 
         wh = self.env.ref("stock.warehouse0")
         internal_sequence = wh.int_type_id.sequence_id
