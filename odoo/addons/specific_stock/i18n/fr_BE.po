@@ -392,11 +392,6 @@ msgid "New Scheduled Date"
 msgstr "Nouvelle date planifiée"
 
 #. module: specific_stock
-#: model:ir.ui.view,arch_db:specific_stock.product_template_search_view
-msgid "Normal product"
-msgstr "Produit normal"
-
-#. module: specific_stock
 #: model:ir.model.fields,field_description:specific_stock.field_stock_inventory_note
 msgid "Note"
 msgstr "Note"
@@ -416,14 +411,6 @@ msgstr "Nombre de jours ouvrés"
 #: model:ir.model.fields,field_description:specific_stock.field_stock_quant_package_nbr_packages
 msgid "Number of packages"
 msgstr "Nombre de paquets"
-
-#. module: specific_stock
-#: model:ir.model.fields,field_description:specific_stock.field_delivery_carrier_is_mto_product
-#: model:ir.model.fields,field_description:specific_stock.field_product_product_is_mto_product
-#: model:ir.model.fields,field_description:specific_stock.field_product_template_is_mto_product
-#: model:ir.ui.view,arch_db:specific_stock.product_template_search_view
-msgid "On Order"
-msgstr "A la commande"
 
 #. module: specific_stock
 #: model:ir.actions.act_window,name:specific_stock.open_uop_action
@@ -882,6 +869,12 @@ msgstr "stock.scrap"
 #: model:ir.ui.view,arch_db:specific_stock.view_picking_form
 msgid "↳Put in Pack"
 msgstr "↳Ajouter au colis"
+
+#~ msgid "Normal product"
+#~ msgstr "Produit normal"
+
+#~ msgid "On Order"
+#~ msgstr "A la commande"
 
 #~ msgid "Pharmacy Receptions"
 #~ msgstr "Réceptions Pharmacie"

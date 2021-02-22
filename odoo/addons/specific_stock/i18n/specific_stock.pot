@@ -380,11 +380,6 @@ msgid "New Scheduled Date"
 msgstr ""
 
 #. module: specific_stock
-#: model:ir.ui.view,arch_db:specific_stock.product_template_search_view
-msgid "Normal product"
-msgstr ""
-
-#. module: specific_stock
 #: model:ir.model.fields,field_description:specific_stock.field_stock_inventory_note
 msgid "Note"
 msgstr ""
@@ -403,14 +398,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:specific_stock.field_put_in_pack_helper_nbr_packages
 #: model:ir.model.fields,field_description:specific_stock.field_stock_quant_package_nbr_packages
 msgid "Number of packages"
-msgstr ""
-
-#. module: specific_stock
-#: model:ir.model.fields,field_description:specific_stock.field_delivery_carrier_is_mto_product
-#: model:ir.model.fields,field_description:specific_stock.field_product_product_is_mto_product
-#: model:ir.model.fields,field_description:specific_stock.field_product_template_is_mto_product
-#: model:ir.ui.view,arch_db:specific_stock.product_template_search_view
-msgid "On Order"
 msgstr ""
 
 #. module: specific_stock
