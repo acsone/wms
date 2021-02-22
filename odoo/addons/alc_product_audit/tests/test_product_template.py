@@ -11,7 +11,6 @@ class TestProductTemplate(SavepointCase):
     def setUpClass(cls):
         super(TestProductTemplate, cls).setUpClass()
         cls.StockLocation = cls.env["stock.location"]
-        cls.StockLocation.pool._init = False
 
         cls.partner = cls.env["res.partner"].create(
             {"name": "Test partner", "ref": "85789284"}
@@ -86,7 +85,6 @@ class TestProductTemplate(SavepointCase):
             }
         )
 
-        cls.StockLocation._parent_store_compute()
         cls.route_mto = cls.env.ref("stock.route_warehouse0_mto").id
 
         cls.product = cls.env["product.product"].create(
@@ -302,6 +300,8 @@ class TestProductTemplate(SavepointCase):
                 "product_tmpl_id": cls.product.product_tmpl_id.id,
             }
         )
+
+        cls.location_mto._parent_store_compute()
 
         cls.po = cls.env["purchase.order"].create(
             {
