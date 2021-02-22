@@ -15,16 +15,6 @@ msgstr ""
 
 #. module: website_purchase_review
 #: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
-msgid "% amount"
-msgstr ""
-
-#. module: website_purchase_review
-#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
-msgid "% nbr lines"
-msgstr ""
-
-#. module: website_purchase_review
-#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
 msgid "<i class=\"fa fa-check-circle-o\" aria-hidden=\"true\"/> Confirmed"
 msgstr ""
 
@@ -46,21 +36,6 @@ msgstr ""
 #. module: website_purchase_review
 #: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
 msgid "<i class=\"fa fa-refresh\" aria-hidden=\"true\"/> Refresh product list"
-msgstr ""
-
-#. module: website_purchase_review
-#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
-msgid "ABC amount"
-msgstr ""
-
-#. module: website_purchase_review
-#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
-msgid "ABC code"
-msgstr ""
-
-#. module: website_purchase_review
-#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
-msgid "ABC nbr lines"
 msgstr ""
 
 #. module: website_purchase_review

@@ -18,16 +18,6 @@ msgstr ""
 
 #. module: website_purchase_review
 #: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
-msgid "% amount"
-msgstr "Montant (%)"
-
-#. module: website_purchase_review
-#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
-msgid "% nbr lines"
-msgstr "Nbr lignes (%)"
-
-#. module: website_purchase_review
-#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
 msgid "<i class=\"fa fa-check-circle-o\" aria-hidden=\"true\"/> Confirmed"
 msgstr "<i class=\"fa fa-check-circle-o\" aria-hidden=\"true\"/> Confirmé"
 
@@ -52,21 +42,6 @@ msgstr ""
 #, fuzzy
 msgid "<i class=\"fa fa-refresh\" aria-hidden=\"true\"/> Refresh product list"
 msgstr "<i class=\"fa fa-check-circle-o\" aria-hidden=\"true\"/> Confirmé"
-
-#. module: website_purchase_review
-#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
-msgid "ABC amount"
-msgstr "Montant ABC"
-
-#. module: website_purchase_review
-#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
-msgid "ABC code"
-msgstr "Code ABC"
-
-#. module: website_purchase_review
-#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
-msgid "ABC nbr lines"
-msgstr "Nbr lignes ABC"
 
 #. module: website_purchase_review
 #: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
@@ -408,6 +383,21 @@ msgstr "Date de validation"
 #: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
 msgid "Write date"
 msgstr "Date d'écriture"
+
+#~ msgid "% amount"
+#~ msgstr "Montant (%)"
+
+#~ msgid "% nbr lines"
+#~ msgstr "Nbr lignes (%)"
+
+#~ msgid "ABC amount"
+#~ msgstr "Montant ABC"
+
+#~ msgid "ABC code"
+#~ msgstr "Code ABC"
+
+#~ msgid "ABC nbr lines"
+#~ msgstr "Nbr lignes ABC"
 
 #~ msgid "ABC"
 #~ msgstr "ABC"
