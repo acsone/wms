@@ -162,7 +162,7 @@ msgid "Transfer"
 msgstr ""
 
 #. module: stock_grn
-#: model:ir.model.fields,field_description:stock_grn.field_stock_grn_type_id_8437
+#: model:ir.model.fields,field_description:stock_grn.field_stock_grn_type_id_8441
 #: model:ir.model.fields,field_description:stock_grn.field_stock_grn_type_name
 msgid "Type"
 msgstr ""
