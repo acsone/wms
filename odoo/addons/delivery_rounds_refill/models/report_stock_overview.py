@@ -1,33 +1,48 @@
 # -*- coding: utf-8 -*-
 # Copyright 2018 Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
+# Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 from psycopg2.extensions import AsIs
 
-from odoo import fields, models
+from odoo import models
 from odoo.tools.sql import drop_view_if_exists
 
 
 class ReportStockOverview(models.Model):
     _name = "report.stock.overview"
+    _inherit = "report.stock.overview.abstract"
     _auto = False
 
     def init(self):
         drop_view_if_exists(self.env.cr, self._table)
         query = """
-  WITH stock_bykind AS (
+   WITH warehouse_root_locations As (
+    SELECT
+        parent_left,
+        parent_right,
+        sw.id as warehouse_id
+    FROM
+        stock_location sl
+        JOIN stock_warehouse sw on sw.view_location_id = sl.id
+   ),
+   stock_bykind AS (
     SELECT
       sq.product_id,
       sum(qty) FILTER (WHERE location_kind='bin') as qty_in_bin,
       sum(qty) FILTER (WHERE location_kind='bin' and reservation_id is null) as qty_in_bin_available,
       sum(qty) FILTER (WHERE location_kind='parking') as qty_in_parking,
-      sum(qty) FILTER (WHERE location_kind='reserve') as qty_in_reserve
+      sum(qty) FILTER (WHERE location_kind='reserve') as qty_in_reserve,
+      warehouse_id
     FROM stock_quant sq
+    JOIN stock_location sl on sq.location_id = sl.id
+    JOIN warehouse_root_locations wh on wh.parent_left < sl.parent_left and wh.parent_right  > sl.parent_right
     WHERE location_kind IS NOT NULL
-    GROUP BY product_id
+    GROUP BY product_id, warehouse_id
   ),
   unreserved_pick_moves AS (
     SELECT
       sm.product_id,
+      spt.warehouse_id,
       CASE
         WHEN state = 'confirmed' THEN sm.product_uom_qty
         ELSE sm.product_uom_qty - (SELECT sum(qty) FROM stock_quant WHERE reservation_id=sm.id)
@@ -44,6 +59,7 @@ class ReportStockOverview(models.Model):
   unreserved_pick_moves_byproduct AS (
     SELECT
       sm.product_id,
+      sm.warehouse_id,
       sum(missing_qty) AS confirmed_qty,
       count(distinct partner_id) AS confirmed_count,
       SUM(missing_qty)
@@ -57,44 +73,23 @@ class ReportStockOverview(models.Model):
     FROM unreserved_pick_moves sm
     LEFT JOIN stock_picking sp ON sm.picking_id = sp.id
     LEFT JOIN round_instance ri ON sp.delivery_round_id = ri.id
-    GROUP BY sm.product_id
-  ),
-  deliveries_last AS (
-    SELECT
-      sm.product_id,
-      sm.product_uom_qty,
-      (avg(product_uom_qty) OVER pid
-       - stddev_samp(product_uom_qty) OVER pid * 2) as lower_bound,
-      (avg(product_uom_qty) OVER pid
-       + stddev_samp(product_uom_qty) OVER pid * 2) as upper_bound,
-      (stddev_samp(product_uom_qty) OVER pid) as std_dev
-    FROM stock_move sm
-    JOIN stock_location sl_src ON sm.location_id = sl_src.id
-    JOIN stock_location sl_dest ON sm.location_dest_id = sl_dest.id
-    WHERE
-      sl_src.usage in ('view', 'internal')
-      AND sl_dest.usage = 'customer'
-      AND sm.priority > '0'
-      -- consider an horizon of 1 week, exclude today
-      AND sm.date BETWEEN (NOW() - INTERVAL '7 DAY')::date
-                      AND (NOW())::date
-      AND sm.state = 'done'
-    WINDOW pid AS (PARTITION BY sm.product_id)
-  ),
-  deliveries_last_byproduct AS (
-    SELECT
-      product_id,
-      (ceil(sum(product_uom_qty) FILTER
-        (WHERE product_uom_qty BETWEEN lower_bound AND upper_bound)
-        -- consider 5 open days on 7
-        / 5.0) + std_dev) AS average_qty,
-      ceil(count(product_uom_qty) FILTER
-        (WHERE product_uom_qty BETWEEN lower_bound AND upper_bound)
-        / 5.0) AS average_count
-    FROM deliveries_last
-    GROUP BY product_id, std_dev
+    GROUP BY sm.product_id, sm.warehouse_id
   )
-  SELECT product_id AS id, *,
+  SELECT
+    concat(warehouse_id, product_id)::integer as id,
+    product_id,
+    qty_in_bin,
+    qty_in_bin_available,
+    qty_in_parking,
+    qty_in_reserve,
+    confirmed_qty,
+    confirmed_count,
+    planned_qty,
+    planned_count,
+    immediate_qty,
+    immediate_count,
+    safety_bin_min_qty,
+    warehouse_id,
   CASE
     WHEN coalesce(qty_in_bin_available, 0) < immediate_qty
         THEN 6000 + LEAST(999, confirmed_count)
@@ -102,9 +97,8 @@ class ReportStockOverview(models.Model):
         THEN 5000 + LEAST(999, confirmed_count)
     WHEN coalesce(qty_in_bin_available, 0) < confirmed_qty
         THEN 1000 + LEAST(999, confirmed_count)
-    -- Days to cover = 2
-    WHEN coalesce(qty_in_bin, 0) < average_qty*2
-        THEN LEAST(999, average_count)
+    WHEN coalesce(qty_in_bin, 0) < safety_bin_min_qty
+        THEN LEAST(999, average_daily_sales_count)
     ELSE 0
   END AS refill_priority_reassort,
   CASE
@@ -114,60 +108,14 @@ class ReportStockOverview(models.Model):
         THEN 5000 + LEAST(999, planned_count)
     WHEN coalesce(qty_in_bin_available, 0) + coalesce(qty_in_reserve, 0) < confirmed_qty
         THEN 1000 + LEAST(999, confirmed_count)
-    -- Days to cover = 2
-    WHEN coalesce(qty_in_bin, 0) + coalesce(qty_in_reserve, 0) < average_qty*2
-        THEN LEAST(999, average_count)
+    WHEN coalesce(qty_in_bin, 0) + coalesce(qty_in_reserve, 0) < safety_bin_min_qty
+        THEN LEAST(999, average_daily_sales_count)
     ELSE 0
   END AS refill_priority_arrange
   FROM stock_bykind
-  FULL OUTER JOIN unreserved_pick_moves_byproduct USING (product_id)
-  FULL OUTER JOIN deliveries_last_byproduct USING (product_id)
+  FULL OUTER JOIN unreserved_pick_moves_byproduct USING (product_id, warehouse_id)
+  FULL OUTER JOIN alc_average_daily_sale USING (product_id, warehouse_id)
         """
         self.env.cr.execute(
             "CREATE OR REPLACE VIEW %s AS (%s)", (AsIs(self._table), AsIs(query))
         )
-
-    product_id = fields.Many2one("product.product", "Product")
-
-    qty_in_bin = fields.Float("Quantity in bin")
-    qty_in_bin_available = fields.Float("Quantity available in bin")
-    qty_in_parking = fields.Float("Quantity in parking")
-    qty_in_reserve = fields.Float("Quantity in reserve")
-
-    confirmed_qty = fields.Integer(
-        "Quantity to pick", help="Remaining quantity to pick"
-    )
-    confirmed_count = fields.Integer(
-        "Customers to pick",
-        help="Amount of customers having a remaining quantity to pick",
-    )
-    planned_qty = fields.Integer(
-        "Planned quantity to pick",
-        help="Remaining quantity to pick in a planned delivery round",
-    )
-    planned_count = fields.Integer(
-        "Planned customers to pick",
-        help="Amount of customers having a remaining quantity to pick"
-        " in a planned delivery round",
-    )
-    immediate_qty = fields.Integer(
-        "Immediate quantity to pick",
-        help="Remaining quantity to pick in a stared delivery round",
-    )
-    immediate_count = fields.Integer(
-        "Immediate customers to pick",
-        help="Amount of customers having a remaining quantity to pick"
-        " in a started delivery round",
-    )
-
-    average_qty = fields.Integer(
-        "Average daily usage",
-        help="Computed with an horizon of 1 week assuming 5 working days",
-    )
-    average_count = fields.Integer(
-        "Average daily customer",
-        help="Computed with an horizon of 1 week assuming 5 working days",
-    )
-
-    refill_priority_arrange = fields.Integer("Arrangement Priority")
-    refill_priority_reassort = fields.Integer("Reassortment Priority")

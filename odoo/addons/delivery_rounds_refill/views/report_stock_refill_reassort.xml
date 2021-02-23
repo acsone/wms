@@ -33,6 +33,7 @@
         <field name="immediate_qty" />
         <field name="planned_qty" />
         <field name="confirmed_qty" />
+        <field name="safety_bin_min_qty" />
       </tree>
     </field>
   </record>

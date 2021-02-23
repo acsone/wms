@@ -1,13 +1,19 @@
 # -*- coding: utf-8 -*-
 # Copyright 2016-2017 Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
+# Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 {
     "name": "Delivery Rounds Refill",
     "version": "10.0.1.1.0",
-    "author": "BCIM",
+    "author": "BCIM, ACSONE SA/NV",
     "category": "Stock Management",
-    "depends": ["stock_refill", "delivery_rounds", "stock_barcode_fix"],
+    "depends": [
+        "stock_refill",
+        "delivery_rounds",
+        "stock_barcode_fix",
+        "alc_product_average_daily_sale",
+    ],
     "data": [
         "views/stock_quant.xml",
         "security/ir.model.access.csv",

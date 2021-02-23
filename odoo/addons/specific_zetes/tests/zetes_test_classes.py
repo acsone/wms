@@ -271,6 +271,7 @@ class ZetesTest(SavepointCase):
         cls.round.button_close()
 
         cls.context = {}
+        cls.env["alc.average.daily.sale"].refresh_view()
 
     def format_result(self, result):
         """
