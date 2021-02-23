@@ -9,6 +9,7 @@
     "license": "AGPL-3",
     "category": "Base",
     "depends": [
+        "alc_product_category_business_unit",
         "base",
         "account",
         "product",
