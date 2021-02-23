@@ -24,18 +24,6 @@ msgid "ABC"
 msgstr ""
 
 #. module: code_abc
-#: model:ir.model.fields,field_description:code_abc.field_product_category_is_business_unit
-msgid "Business Unit"
-msgstr ""
-
-#. module: code_abc
-#: model:ir.model.fields,field_description:code_abc.field_delivery_carrier_business_unit_id
-#: model:ir.model.fields,field_description:code_abc.field_product_product_business_unit_id
-#: model:ir.model.fields,field_description:code_abc.field_product_template_business_unit_id
-msgid "Business unit"
-msgstr ""
-
-#. module: code_abc
 #: model:ir.model.fields,field_description:code_abc.field_purchase_config_settings_turnover_delay
 msgid "CA computation delay (in months)"
 msgstr ""
