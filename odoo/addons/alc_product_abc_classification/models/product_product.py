@@ -8,9 +8,9 @@ from odoo.addons.stock_storage_type_putaway_abc.models.stock_location import (
 )
 
 
-class ProductTemplate(models.Model):
+class ProductProduct(models.Model):
 
-    _inherit = "product.template"
+    _inherit = "product.product"
 
     abc_storage = fields.Selection(
         ABC_SELECTION, compute="_compute_abc_storage", store=True, index=True
