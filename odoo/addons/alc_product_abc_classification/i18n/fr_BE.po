@@ -17,6 +17,12 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_product_abc_classification
+#: model:ir.model,name:alc_product_abc_classification.model_product_product
+#, fuzzy
+msgid "Product"
+msgstr "Article"
+
+#. module: alc_product_abc_classification
 #: model:ir.model,name:alc_product_abc_classification.model_product_template
 msgid "Product Template"
 msgstr "Article"
