@@ -120,6 +120,7 @@ class StockPicking(models.Model):
                     "propagate": move_dest.propagate,
                     "move_dest_id": move_dest_id,
                     "procurement_id": move_dest.procurement_id.id,
+                    "warehouse_id": move_dest.warehouse_id.id,
                 }
                 move_add = self.env["stock.move"].create(move_vals)
                 move_dest_id = move_add.id

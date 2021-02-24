@@ -123,3 +123,32 @@ class TestStockPicking(common.StockPickingTestCase):
         ship.action_done()
 
         self.assertEqual(sale.order_line.qty_delivered, 1)
+
+    def test_02(self):
+        """
+        Test case:
+            Create and confirm a SO with product_additional
+            Confirm the picking (required to get the additional product into the picking)
+        Expected result:
+            The moves for the additional product are linked to a warehouse...
+
+        """
+        sale = self._confirm_sale_order(products=[self.main_product])
+        pick = sale.mapped("picking_ids").filtered(
+            lambda p: p.picking_type_subcode == "PICK"
+        )
+        # Add the move for the additional product into the picking...
+        pick.action_confirm()
+        pick.action_assign()
+        # Check that the additional product is taken into account after confirmation
+        additional_move = pick.move_lines.filtered(
+            lambda m, product=self.additional_product: m.product_id == product
+        )
+        self.assertEqual(additional_move.warehouse_id, self.warehouse_1)
+        ship = sale.mapped("picking_ids").filtered(
+            lambda p: p.picking_type_code == "outgoing"
+        )
+        additional_move = ship.move_lines.filtered(
+            lambda m, product=self.additional_product: m.product_id == product
+        )
+        self.assertEqual(additional_move.warehouse_id, self.warehouse_1)
