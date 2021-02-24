@@ -43,7 +43,7 @@ class StockPickingTestCase(SavepointCase):
             {
                 "product_id": cls.additional_product.id,
                 "product_tmpl_id": cls.additional_product.product_tmpl_id.id,
-                "new_quantity": 15,
+                "new_quantity": 500,
                 "location_id": cls.warehouse_1.lot_stock_id.id,
             }
         )
@@ -61,7 +61,7 @@ class StockPickingTestCase(SavepointCase):
                 "additional_product_id": cls.additional_product.id,
                 "uom_id": cls.env.ref("product.product_uom_unit").id,
                 "ratio_main_product": 1,
-                "ratio_additional_product": 1,
+                "ratio_additional_product": 5,
             }
         )
 
@@ -75,18 +75,73 @@ class StockPickingTestCase(SavepointCase):
         )
         update_qty_wizard.change_product_qty()
 
+        cls.main_product2 = cls.env["product.product"].create(
+            {
+                "name": "Main product2",
+                "default_code": "1234567",
+                "tracking": "none",
+                "list_price": 100,
+                "type": "product",
+                "additional_product_id": cls.additional_product.id,
+                "uom_id": cls.env.ref("product.product_uom_unit").id,
+                "ratio_main_product": 1,
+                "ratio_additional_product": 5,
+            }
+        )
+
+        update_qty_wizard = cls.env["stock.change.product.qty"].create(
+            {
+                "product_id": cls.main_product2.id,
+                "product_tmpl_id": cls.main_product2.product_tmpl_id.id,
+                "new_quantity": 100,
+                "location_id": cls.warehouse_1.lot_stock_id.id,
+            }
+        )
+
+        update_qty_wizard.change_product_qty()
+
+        # Create a product without promotion
+        cls.product_2 = cls.env["product.product"].create(
+            {
+                "name": "Product 2",
+                "default_code": "984928374",
+                "tracking": "lot",
+                "list_price": 100,
+                "type": "product",
+            }
+        )
+
+        update_qty_wizard = cls.env["stock.change.product.qty"].create(
+            {
+                "product_id": cls.product_2.id,
+                "product_tmpl_id": cls.product_2.product_tmpl_id.id,
+                "new_quantity": 100,
+                "location_id": cls.warehouse_1.lot_stock_id.id,
+            }
+        )
+
+        update_qty_wizard.change_product_qty()
+
     @classmethod
-    def _confirm_sale_order(cls, partner=None, product=None, qty=1, carrier_id=None):
+    def _confirm_sale_order(cls, partner=None, products=None, qty=1, carrier_id=None):
         if partner is None:
             partner = cls.partner1
-        if product is None:
-            product = cls.main_product
-        warehouse = cls.warehouse_1
-        Sale = cls.env["sale.order"]
-        so_values = {
-            "partner_id": partner.id,
-            "warehouse_id": warehouse.id,
-            "order_line": [
+        if products is None:
+            lines = [
+                (
+                    0,
+                    0,
+                    {
+                        "name": cls.main_product.name,
+                        "product_id": cls.main_product.id,
+                        "product_uom_qty": qty,
+                        "product_uom": cls.main_product.uom_id.id,
+                        "price_unit": 1,
+                    },
+                )
+            ]
+        else:
+            lines = [
                 (
                     0,
                     0,
@@ -98,7 +153,15 @@ class StockPickingTestCase(SavepointCase):
                         "price_unit": 1,
                     },
                 )
-            ],
+                for product in products
+            ]
+        warehouse = cls.warehouse_1
+        Sale = cls.env["sale.order"]
+
+        so_values = {
+            "partner_id": partner.id,
+            "warehouse_id": warehouse.id,
+            "order_line": lines,
         }
         if carrier_id:
             so_values["carrier_id"] = carrier_id

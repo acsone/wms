@@ -73,3 +73,25 @@ class StockMove(models.Model):
         """
         moves = super(StockMove, self)._get_moves_to_auto_reassign()
         return moves.filtered(lambda m: not m.is_additional_move)
+
+    @api.multi
+    def action_cancel(self):
+        for rec in self:
+            additional_products_to_cancel = rec.mapped(
+                "product_id.additional_product_id"
+            )
+            if additional_products_to_cancel:
+                for additional_product in additional_products_to_cancel:
+                    moves_to_cancel = rec.search(
+                        [
+                            ("product_id", "=", additional_product.id),
+                            ("state", "not in", ("cancel", "done")),
+                            ("picking_id", "=", rec.picking_id.id),
+                            ("is_additional_move", "=", True),
+                            ("procurement_id", "=", rec.procurement_id.id),
+                        ]
+                    )
+                    moves_to_cancel.with_context(
+                        no_recompute_pack=True, force_cancel=True
+                    ).action_cancel()
+        return super(StockMove, self).action_cancel()
