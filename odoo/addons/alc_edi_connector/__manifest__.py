@@ -35,5 +35,5 @@
         "data/ir_cron.xml",
     ],
     "demo": ["demo/alc_edi_connector.xml"],
-    "external_dependencies": {"python": ["paramiko"]},
+    "external_dependencies": {"python": ["paramiko", "slugify"]},
 }
