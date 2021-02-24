@@ -8,11 +8,10 @@ class TestStockPicking(common.StockPickingTestCase):
     @classmethod
     def setUpClass(cls):
         super(TestStockPicking, cls).setUpClass()
-        if "round.instance" in cls.env:
-            cls.env = cls.env(context=dict(cls.env.context, round_autoset=False))
+        cls.env = cls.env(context=dict(cls.env.context, round_autoset=False))
 
     def test_pick_and_ship(self):
-        sale = self._confirm_sale_order(product=self.main_product)
+        sale = self._confirm_sale_order(products=[self.main_product])
 
         # check the pickings
         pick = sale.mapped("picking_ids").filtered(
@@ -68,7 +67,7 @@ class TestStockPicking(common.StockPickingTestCase):
             SO and pickings must be canceled
 
         """
-        sale = self._confirm_sale_order(product=self.main_product)
+        sale = self._confirm_sale_order(products=[self.main_product])
         pick = sale.mapped("picking_ids").filtered(
             lambda p: p.picking_type_subcode == "PICK"
         )
@@ -103,7 +102,7 @@ class TestStockPicking(common.StockPickingTestCase):
         Expected result:
             The qty_delivered on the so line must be the ordered qty
         """
-        sale = self._confirm_sale_order(product=self.main_product)
+        sale = self._confirm_sale_order(products=[self.main_product])
         pick = sale.mapped("picking_ids").filtered(
             lambda p: p.picking_type_subcode == "PICK"
         )

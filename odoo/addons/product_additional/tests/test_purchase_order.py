@@ -7,9 +7,6 @@ from odoo.tests.common import SavepointCase
 
 
 class TestPurchaseOrder(SavepointCase):
-    post_install = True
-    at_install = False
-
     @classmethod
     def setUpClass(cls):
         super(TestPurchaseOrder, cls).setUpClass()

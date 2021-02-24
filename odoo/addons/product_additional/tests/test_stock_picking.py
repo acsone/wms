@@ -10,9 +10,6 @@ from odoo.tests import common
 
 
 class TestStockPicking(common.TransactionCase):
-    post_install = True
-    at_install = False
-
     def setUp(self):
         super(TestStockPicking, self).setUp()
 
@@ -38,37 +35,6 @@ class TestStockPicking(common.TransactionCase):
         self.warehouse.out_type_id.groupbypartner = True
         self.warehouse.out_type_id.create_invoice_on_transfer = True
 
-        round_template = self.env["round.template"].create(
-            {
-                "code": "78",
-                "name": "Test",
-                "time_leave_planned": 12.50,
-                "time_picking_planned": 12.50,
-            }
-        )
-
-        round_itinerary = self.env["round.itinerary"].create(
-            {
-                "sequence": 100,
-                "name": "Test itinerary",
-                "code": "TEST1",
-                "template_ids": [(6, 0, [round_template.id])],
-                "partner_position_ids": [
-                    (0, 0, {"sequence": 1, "partner_id": self.partner.id})
-                ],
-            }
-        )
-
-        self.round = self.env["round.instance"].create(
-            {
-                "template_id": round_template.id,
-                "date": fields.Date.today(),
-                "time_leave_planned": 12.50,
-                "time_picking_planned": 12.50,
-                "itinerary_ids": [(6, 0, [round_itinerary.id])],
-            }
-        )
-
         self.parent_location = location_obj.create(
             {"name": "G", "location_id": self.env.ref("stock.stock_location_stock").id}
         )
@@ -90,18 +56,7 @@ class TestStockPicking(common.TransactionCase):
         )
 
         location_add_product = location_obj.create(
-            {
-                "name": "GAA320",
-                "kind": "bin",
-                "zone": "G",
-                "corridor": "A",
-                "shelf": "A",
-                "height": "3",
-                "box": "30",
-                "location_id": self.parent_location.id,
-                "bin_checksum_1": "123",
-                "bin_checksum_2": "123",
-            }
+            {"name": "GAA320", "location_id": self.parent_location.id}
         )
         self.env["stock.location"]._parent_store_compute()
 
@@ -142,18 +97,7 @@ class TestStockPicking(common.TransactionCase):
         )
 
         location_product_1 = location_obj.create(
-            {
-                "name": "GAA210",
-                "kind": "bin",
-                "zone": "G",
-                "corridor": "A",
-                "shelf": "A",
-                "height": "2",
-                "box": "10",
-                "location_id": self.parent_location.id,
-                "bin_checksum_1": "123",
-                "bin_checksum_2": "123",
-            }
+            {"name": "GAA210", "location_id": self.parent_location.id}
         )
         self.env["stock.location"]._parent_store_compute()
 
@@ -212,7 +156,6 @@ class TestStockPicking(common.TransactionCase):
                     "location_dest_id": location_dest_id,
                     "min_date": fields.Datetime.to_string(tomorrow),
                     "picking_type_id": self.pick_type.id,
-                    "delivery_round_id": self.round.id,
                     "move_lines": [
                         (
                             0,
@@ -252,7 +195,6 @@ class TestStockPicking(common.TransactionCase):
                     "location_dest_id": location_dest_id,
                     "min_date": fields.Datetime.to_string(tomorrow),
                     "picking_type_id": self.pick_type.id,
-                    "delivery_round_id": self.round.id,
                     "move_lines": [
                         (
                             0,
@@ -292,7 +234,6 @@ class TestStockPicking(common.TransactionCase):
                     "location_dest_id": location_dest_id,
                     "min_date": fields.Datetime.to_string(tomorrow),
                     "picking_type_id": self.pick_type.id,
-                    "delivery_round_id": self.round.id,
                     "move_lines": [
                         (
                             0,
