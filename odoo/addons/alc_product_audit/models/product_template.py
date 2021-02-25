@@ -401,7 +401,7 @@ class ProductTemplate(models.Model):
                     JOIN
                             product_product pp ON pp.id = sq.product_id
                     JOIN
-                            product_template pt ON pt.id = pp.product_tmpl_id AND pt.is_mto_product = False
+                            product_template pt ON pt.id = pp.product_tmpl_id AND pt.is_mto_product = True
                     WHERE
                             sl.parent_left >= %(stock_location_mto_parent_left)s
                             AND sl.parent_right <= %(stock_location_mto_parent_right)s
