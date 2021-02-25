@@ -144,7 +144,7 @@ msgid "Edi connector"
 msgstr ""
 
 #. module: alc_edi_connector
-#: code:addons/alc_edi_connector/models/edi_backend.py:58
+#: code:addons/alc_edi_connector/models/edi_backend.py:69
 #, python-format
 msgid "Everything seems ok"
 msgstr ""
@@ -223,6 +223,11 @@ msgstr ""
 #. module: alc_edi_connector
 #: model:ir.ui.view,arch_db:alc_edi_connector.edi_backend_form_view
 msgid "Imports"
+msgstr ""
+
+#. module: alc_edi_connector
+#: model:ir.model.fields,field_description:alc_edi_connector.field_edi_backend_key
+msgid "Key"
 msgstr ""
 
 #. module: alc_edi_connector
@@ -322,7 +327,7 @@ msgid "Private key environment variable"
 msgstr ""
 
 #. module: alc_edi_connector
-#: code:addons/alc_edi_connector/models/edi_backend.py:83
+#: code:addons/alc_edi_connector/models/edi_backend.py:94
 #, python-format
 msgid "Pull EDI %s"
 msgstr ""
@@ -385,7 +390,7 @@ msgid "Timestamp last import"
 msgstr ""
 
 #. module: alc_edi_connector
-#: code:addons/alc_edi_connector/models/edi_backend.py:73
+#: code:addons/alc_edi_connector/models/edi_backend.py:84
 #, python-format
 msgid "UBL Oder Document Generation not configured on the backend %s"
 msgstr ""
