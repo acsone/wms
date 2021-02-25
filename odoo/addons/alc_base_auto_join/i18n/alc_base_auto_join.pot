@@ -88,3 +88,43 @@ msgstr ""
 msgid "base"
 msgstr ""
 
+#. module: alc_base_auto_join
+#: model:ir.model.fields,field_description:alc_base_auto_join.field_server_config_edi_backend_zoetis | channel
+msgid "edi_backend_zoetis | channel"
+msgstr ""
+
+#. module: alc_base_auto_join
+#: model:ir.model.fields,field_description:alc_base_auto_join.field_server_config_edi_backend_zoetis | hostname
+msgid "edi_backend_zoetis | hostname"
+msgstr ""
+
+#. module: alc_base_auto_join
+#: model:ir.model.fields,field_description:alc_base_auto_join.field_server_config_edi_backend_zoetis | password
+msgid "edi_backend_zoetis | password"
+msgstr ""
+
+#. module: alc_base_auto_join
+#: model:ir.model.fields,field_description:alc_base_auto_join.field_server_config_edi_backend_zoetis | path_read
+msgid "edi_backend_zoetis | path_read"
+msgstr ""
+
+#. module: alc_base_auto_join
+#: model:ir.model.fields,field_description:alc_base_auto_join.field_server_config_edi_backend_zoetis | path_write
+msgid "edi_backend_zoetis | path_write"
+msgstr ""
+
+#. module: alc_base_auto_join
+#: model:ir.model.fields,field_description:alc_base_auto_join.field_server_config_edi_backend_zoetis | pk_env_variable
+msgid "edi_backend_zoetis | pk_env_variable"
+msgstr ""
+
+#. module: alc_base_auto_join
+#: model:ir.model.fields,field_description:alc_base_auto_join.field_server_config_edi_backend_zoetis | port
+msgid "edi_backend_zoetis | port"
+msgstr ""
+
+#. module: alc_base_auto_join
+#: model:ir.model.fields,field_description:alc_base_auto_join.field_server_config_edi_backend_zoetis | username
+msgid "edi_backend_zoetis | username"
+msgstr ""
+
