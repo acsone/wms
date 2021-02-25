@@ -4,8 +4,12 @@
 
 from contextlib import contextmanager
 
+from slugify import slugify
+
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
+
+from odoo.addons.server_environment import serv_config
 
 SFTP_TIMEOUT = 30
 
@@ -16,18 +20,25 @@ class EdiBackend(models.Model):
     _description = "Edi Backend"
     _inherit = "connector.backend"
 
+    key = fields.Char(compute="_compute_key")
     name = fields.Char(required=True)
-    channel = fields.Selection([("sftp", "ftp/sftp")], required=True, default="sftp")
-    hostname = fields.Char(required=True)
-    username = fields.Char(required=True)
-    password = fields.Char()
-    port = fields.Integer(default=22)
+    channel = fields.Selection(
+        [("sftp", "ftp/sftp")],
+        required=True,
+        default="sftp",
+        compute="_compute_from_config",
+    )
+    hostname = fields.Char(required=True, compute="_compute_from_config")
+    username = fields.Char(required=True, compute="_compute_from_config")
+    password = fields.Char(compute="_compute_from_config")
+    port = fields.Integer(default=22, compute="_compute_from_config")
     pk_env_variable = fields.Char(
         "Private key environment variable",
         help="The name of the environment variable who " "contains the private sh key",
+        compute="_compute_from_config",
     )
-    path_read = fields.Char()
-    path_write = fields.Char()
+    path_read = fields.Char(compute="_compute_from_config")
+    path_write = fields.Char(compute="_compute_from_config")
 
     edi_import_task_def_ids = fields.One2many(
         comodel_name="edi.import.task.def",
@@ -82,3 +93,21 @@ class EdiBackend(models.Model):
         for importer in importers:
             description = _("Pull EDI %s") % (importer.display_name,)
             importer.with_delay(description=description).execute()
+
+    @api.depends("name")
+    def _compute_key(self):
+        self.ensure_one()
+        self.key = "edi_backend_" + slugify(self.name, separator="_", lowercase=True)
+
+    def _compute_from_config(self):
+        self.ensure_one()
+        for section in serv_config.sections():
+            if self.key and section.startswith(self.key):
+                self.channel = serv_config.get(section, "channel")
+                self.hostname = serv_config.get(section, "hostname")
+                self.username = serv_config.get(section, "username")
+                self.password = serv_config.get(section, "password")
+                self.port = serv_config.get(section, "port")
+                self.pk_env_variable = serv_config.get(section, "pk_env_variable")
+                self.path_read = serv_config.get(section, "path_read")
+                self.path_write = serv_config.get(section, "path_write")

@@ -8,6 +8,7 @@ from odoo import fields
 
 from odoo.addons.component.tests.common import SavepointComponentCase
 from odoo.addons.queue_job.tests.common import JobMixin
+from odoo.addons.server_environment import serv_config
 
 
 class AlcEdiConnectorCase(SavepointComponentCase, JobMixin):
@@ -15,12 +16,19 @@ class AlcEdiConnectorCase(SavepointComponentCase, JobMixin):
     def setUpClass(cls):
         super(AlcEdiConnectorCase, cls).setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
+        if "edi_backend_edi_test" not in serv_config.sections():
+            serv_config.add_section("edi_backend_edi_test")
+            serv_config.set("edi_backend_edi_test", "channel", "sftp")
+            serv_config.set("edi_backend_edi_test", "hostname", "localhost")
+            serv_config.set("edi_backend_edi_test", "username", "username")
+            serv_config.set("edi_backend_edi_test", "password", "password")
+            serv_config.set("edi_backend_edi_test", "port", "33")
+            serv_config.set("edi_backend_edi_test", "pk_env_variable", "")
+            serv_config.set("edi_backend_edi_test", "path_read", "path_read")
+            serv_config.set("edi_backend_edi_test", "path_write", "path_write")
         cls.edi_backend = cls.env["edi.backend"].create(
             {
                 "name": "EDI test",
-                "hostname": "localhost",
-                "password": "password",
-                "username": "username",
                 "edi_export_task_def_ids": [
                     (
                         0,

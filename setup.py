@@ -12,7 +12,9 @@ setup(
     description="Alcyon Odoo Addons",
     odoo_addons={
         "odoo_version_override": "10.0",
-        "external_dependencies_override": {"python": {"shapefile": "pyshp"}},
+        "external_dependencies_override": {
+            "python": {"shapefile": "pyshp", "slugify": "python-slugify"}
+        },
     },
     install_requires=[
         "click-odoo-contrib>=1.10.1",
