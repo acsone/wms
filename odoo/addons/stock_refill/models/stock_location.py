@@ -18,7 +18,6 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from psycopg2.extensions import AsIs
 
 from odoo import _, fields, models
 from odoo.exceptions import UserError
@@ -39,20 +38,18 @@ class StockLocation(models.Model):
         "in reserve",
     )
 
-    def _get_ancestors(self):
-        """ This method return the list of all parent locations excluding self
-        """
-        self._cr.execute(
-            """
-            SELECT distinct c.id
-            FROM %s p, %s c
-            WHERE c.parent_left < p.parent_left
-              AND c.parent_right > p.parent_right
-              AND p.id in %s""",
-            (AsIs(self._table), AsIs(self._table), tuple(self.ids),),
+    def get_location_reserve(self):
+        self.ensure_one()
+        if self.reserve_location_id:
+            return self.reserve_location_id
+
+        parent_location = self.search(
+            [("id", "parent_of", self.id), ("reserve_location_id", "!=", None)],
+            order="parent_left DESC",
+            limit=1,
         )
-        res = self._cr.fetchall()
-        return self.browse(map(lambda x: x[0], res))
+
+        return parent_location.reserve_location_id
 
     def get_putaway_strategy(self, product):
         location = self
@@ -66,11 +63,7 @@ class StockLocation(models.Model):
 
         # Do not put product in bin if there is already stock in reserve
         if product.qty_in_reserve > 0:
-            reserve = location_dest.reserve_location_id
-            if not reserve:
-                reserve = location_dest._get_ancestors().mapped("reserve_location_id")[
-                    :1
-                ]
+            reserve = location_dest.get_location_reserve()
             if not reserve:
                 raise UserError(
                     _(
