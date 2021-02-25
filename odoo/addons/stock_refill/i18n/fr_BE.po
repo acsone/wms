@@ -50,7 +50,7 @@ msgid "Product"
 msgstr "Article"
 
 #. module: stock_refill
-#: code:addons/stock_refill/models/stock_location.py:76
+#: code:addons/stock_refill/models/stock_location.py:69
 #, python-format
 msgid "Product %s must be put in reserve but cannot find a suitable location"
 msgstr ""
