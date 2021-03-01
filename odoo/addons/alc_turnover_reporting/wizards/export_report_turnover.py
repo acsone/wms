@@ -197,7 +197,7 @@ class ExportReportTurnover(models.TransientModel):
         is_today_in_current_month = pd.DataFrame()
         is_today_in_current_month["bool"] = data[start_date_name].le(today) & data[
             end_date_name
-        ].ge(today)
+        ].gt(today)
         index_in_df = is_today_in_current_month[
             is_today_in_current_month["bool"]
         ].index.values
