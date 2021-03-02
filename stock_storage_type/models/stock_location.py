@@ -247,6 +247,7 @@ class StockLocation(models.Model):
     )
     def _compute_location_is_empty(self):
         for rec in self:
+            continue
             # No restriction should apply on customer/supplier/...
             # locations and we don't need to compute is empty
             # if there is no limit on the location
