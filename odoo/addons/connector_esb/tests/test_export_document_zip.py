@@ -62,7 +62,7 @@ class ExportDocumentZipTestCase(ESBXMLTestCase):
         self.timestamp.writer = "local"
         with self.backend.work_on(self.model._name, timestamp=self.timestamp) as work:
             exporter = work.component(usage="record.exporter.cron")
-            respath = exporter.run()
+            respath, _ = exporter.run()
             self.addCleanup(os.remove, respath)
         self.assertTrue(zipfile.is_zipfile(respath))
         with zipfile.ZipFile(respath, "r") as zf:
