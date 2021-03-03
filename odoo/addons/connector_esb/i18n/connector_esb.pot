@@ -61,6 +61,11 @@ msgid "Carrier"
 msgstr ""
 
 #. module: connector_esb
+#: model:ir.ui.view,arch_db:connector_esb.esb_period_exporter_form_view
+msgid "Close"
+msgstr ""
+
+#. module: connector_esb
 #: model:ir.model.fields,field_description:connector_esb.field_account_tax_contrib_sku
 msgid "Contribution SKU"
 msgstr ""
@@ -264,7 +269,7 @@ msgid "Maximum of records to export at once."
 msgstr ""
 
 #. module: connector_esb
-#: code:addons/connector_esb/models/backend_timestamp.py:54
+#: code:addons/connector_esb/models/backend_timestamp.py:56
 #: sql_constraint:esb.backend.timestamp:0
 #, python-format
 msgid "Model must be unique"
@@ -430,6 +435,16 @@ msgid "Required field(s) missing: %s"
 msgstr ""
 
 #. module: connector_esb
+#: model:ir.model.fields,field_description:connector_esb.field_esb_period_exporter_result_content
+msgid "Result content"
+msgstr ""
+
+#. module: connector_esb
+#: model:ir.model.fields,field_description:connector_esb.field_esb_period_exporter_result_filename
+msgid "Result filename"
+msgstr ""
+
+#. module: connector_esb
 #: model:ir.model.fields,field_description:connector_esb.field_esb_backend_sftp_host
 msgid "SFTP Host"
 msgstr ""
@@ -493,6 +508,11 @@ msgid "Start Date"
 msgstr ""
 
 #. module: connector_esb
+#: model:ir.model.fields,field_description:connector_esb.field_esb_period_exporter_state
+msgid "State"
+msgstr ""
+
+#. module: connector_esb
 #: model:ir.model.fields,field_description:connector_esb.field_esb_backend_timestamp_ids
 msgid "Synchronizations"
 msgstr ""
@@ -515,7 +535,7 @@ msgid "The customer {} has already been exported, it can be archived  but not de
 msgstr ""
 
 #. module: connector_esb
-#: code:addons/connector_esb/models/backend_timestamp.py:109
+#: code:addons/connector_esb/models/backend_timestamp.py:133
 #, python-format
 msgid "The synchronization timestamp (%s) is currently locked, probably due to an ongoing synchronization."
 msgstr ""
@@ -527,8 +547,8 @@ msgid "There are several sale orders with the same increment ID"
 msgstr ""
 
 #. module: connector_esb
-#: code:addons/connector_esb/models/backend_timestamp.py:70
-#: code:addons/connector_esb/wizards/esb_period_exporter.py:40
+#: code:addons/connector_esb/models/backend_timestamp.py:72
+#: code:addons/connector_esb/wizards/esb_period_exporter.py:47
 #, python-format
 msgid "This export can not be triggered manually."
 msgstr ""
@@ -624,6 +644,11 @@ msgid "esb.period.exporter"
 msgstr ""
 
 #. module: connector_esb
+#: selection:esb.period.exporter,state:0
+msgid "input"
+msgstr ""
+
+#. module: connector_esb
 #: selection:esb.backend.timestamp,kind:0
 msgid "pharmacy"
 msgstr ""
@@ -646,6 +671,11 @@ msgstr ""
 #. module: connector_esb
 #: selection:esb.backend.timestamp,kind:0
 msgid "promotion.alcyon"
+msgstr ""
+
+#. module: connector_esb
+#: selection:esb.period.exporter,state:0
+msgid "result"
 msgstr ""
 
 #. module: connector_esb
