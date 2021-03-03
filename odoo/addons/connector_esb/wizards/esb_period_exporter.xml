@@ -7,14 +7,22 @@
     <field name="model">esb.period.exporter</field>
     <field name="arch" type="xml">
       <form string="Esb Period Exporter">
-        <group>
+        <field name="state" invisible="1" />
+        <group states="input">
           <field name="backend_timestamp_id" invisible="1" />
           <field name="export_from" />
           <field name="export_to" />
         </group>
-        <footer>
+        <footer states="input">
           <button name="doit" string="OK" class="btn-primary" type="object" />
           <button string="Cancel" class="btn-default" special="cancel" />
+        </footer>
+        <group states="result">
+          <field name="result_content" filename="result_filename" readonly="1" />
+          <field name="result_filename" invisible="1" />
+        </group>
+        <footer states="result">
+          <button special="cancel" string="Close" class="btn-primary" />
         </footer>
       </form>
     </field>
