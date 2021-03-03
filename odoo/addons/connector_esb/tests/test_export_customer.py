@@ -190,7 +190,7 @@ class ExportCustomerTestCase(ESBXMLTestCase):
         self.timestamp.writer = "local"
         with self.backend.work_on(self.model._name, timestamp=self.timestamp) as work:
             exporter = work.component(usage="record.exporter.cron")
-            respath = exporter.run()
+            respath, _ = exporter.run()
             self.addCleanup(os.remove, respath)
             with open(respath, "r") as result_file:
                 result = result_file.read()
@@ -208,10 +208,8 @@ class ExportCustomerTestCase(ESBXMLTestCase):
                 "export_to": fields.Datetime.to_string(now + timedelta(minutes=1)),
             }
         )
-        respath = wizard.doit()
-        self.addCleanup(os.remove, respath)
-        with open(respath, "r") as result_file:
-            result = result_file.read()
+        wizard.doit()
+        result = wizard.result_content.decode("base64")
         self.assertXmlEquivalentData(
             result, self.read_test_file("customer_1.xml"), "Firstname"
         )
