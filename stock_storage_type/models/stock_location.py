@@ -56,8 +56,8 @@ class StockLocation(models.Model):
         string="Storage locations sequences",
     )
     location_is_empty = fields.Boolean(
-        compute="_compute_location_is_empty",
-        store=True,
+        #compute="_compute_location_is_empty",
+        #store=True,
         help="technical field: True if the location is empty "
         "and there is no pending incoming products in the location. "
         " Computed only if the location needs to check for emptiness "
