@@ -93,15 +93,15 @@ class StockLocation(models.Model):
     )
     location_will_contain_lot_ids = fields.Many2many(
         "stock.production.lot",
-        store=True,
-        compute="_compute_location_will_contain_lot_ids",
+        #store=True,
+        #compute="_compute_location_will_contain_lot_ids",
         help="technical field: list of stock.production.lots in "
         "the location, either now or in pending operations",
     )
     location_will_contain_product_ids = fields.Many2many(
         "product.product",
-        store=True,
-        compute="_compute_location_will_contain_product_ids",
+        #store=True,
+        #compute="_compute_location_will_contain_product_ids",
         help="technical field: list of products in "
         "the location, either now or in pending operations",
     )
@@ -247,7 +247,6 @@ class StockLocation(models.Model):
     )
     def _compute_location_is_empty(self):
         for rec in self:
-            continue
             # No restriction should apply on customer/supplier/...
             # locations and we don't need to compute is empty
             # if there is no limit on the location
