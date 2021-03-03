@@ -220,7 +220,7 @@ class ESBExporterMixin(AbstractComponent):
 
         if self._mark_as_exported:
             self._mark_items_as_exported(items)
-        return path, content
+        return path
 
     def _mark_items_as_exported(self, items):
         """ Mark records as exported

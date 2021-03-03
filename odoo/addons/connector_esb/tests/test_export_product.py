@@ -262,7 +262,7 @@ class ExportProductTestCase(ESBXMLTestCase):
             rec._compute_volume()
         with self.backend.work_on(self.model._name, timestamp=self.timestamp) as work:
             exporter = work.component(usage="record.exporter")
-            respath, _ = exporter.run(records)
+            respath = exporter.run(records)
             self.addCleanup(os.remove, respath)
         with open(respath, "r") as result_file:
             result = result_file.read()

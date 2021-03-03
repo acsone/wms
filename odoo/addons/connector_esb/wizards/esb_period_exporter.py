@@ -2,8 +2,6 @@
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-import os
-
 from odoo import _, api, exceptions, fields, models
 
 from odoo.addons.component.exception import NoComponentError
@@ -22,11 +20,6 @@ class EsbPeriodExporter(models.TransientModel):
     )
     export_from = fields.Datetime(string="From", required=True)
     export_to = fields.Datetime(string="To")
-    state = fields.Selection(
-        [("input", "input"), ("result", "result")], default="input"
-    )
-    result_content = fields.Binary()
-    result_filename = fields.Char()
 
     @api.model
     def _default_backend_timestamp_id(self):
@@ -46,22 +39,8 @@ class EsbPeriodExporter(models.TransientModel):
                 raise exceptions.UserError(
                     _("This export can not be triggered manually.")
                 )
-            result = exporter.run(
+            return exporter.run(
                 export_since=self.export_from,
                 export_to=self.export_to,
                 max_records=bt.max_records,
             )
-            if bt.writer == "webservice":
-                return result
-            respath, content = result
-            filename = os.path.basename(respath)
-            self.write(
-                {
-                    "state": "result",
-                    "result_content": content.encode("base64"),
-                    "result_filename": filename,
-                }
-            )
-            action = self.get_formview_action()
-            action["target"] = "new"
-            return action

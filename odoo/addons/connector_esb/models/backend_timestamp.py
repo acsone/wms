@@ -2,8 +2,6 @@
 # Copyright 2017 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-import os
-
 import psycopg2
 
 from odoo import _, api, exceptions, fields, models
@@ -78,28 +76,6 @@ class ESBBackendTimestamp(models.Model):
                 self.last_export = result or next_last_export
             else:
                 self.last_export = next_last_export
-                job_uuid = self.env.context.get("job_uuid")
-                if job_uuid:
-                    path, content = result
-                    self._link_result_to_job(
-                        job_uuid=job_uuid, content=content, path=path
-                    )
-
-    @api.model
-    def _link_result_to_job(self, job_uuid, content, path):
-        # create attachment
-        queue_job = self.env["queue.job"].search([("uuid", "=", job_uuid)], limit=1)
-        file_name = os.path.basename(path)
-        attachment = self.env["ir.attachment"].create(
-            {
-                "name": file_name,
-                "datas": content.encode("base64"),
-                "datas_fname": file_name,
-                "res_model": "queue.job",
-                "res_id": queue_job.id,
-            }
-        )
-        return attachment.id
 
     @api.multi
     def export_period(self):

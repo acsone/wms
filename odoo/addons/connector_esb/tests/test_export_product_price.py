@@ -102,7 +102,7 @@ class ExportProductPriceTestCase(ESBXMLTestCase):
         with self.backend.work_on(self.model._name, timestamp=self.timestamp) as work:
             exporter = work.component(usage="record.exporter.cron")
         exporter.update_saleprice_2()
-        respath, _ = exporter.run()
+        respath = exporter.run()
         self.addCleanup(os.remove, respath)
         with open(respath, "r") as result_file:
             result = result_file.read()
