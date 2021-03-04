@@ -206,3 +206,25 @@ class TestGroupByPartner(GroupByPartnerCommonCase):
         backorder = picking._create_backorder()
         self.assertNotEqual(backorder, picking)
         self.assertTrue(picking.date_done)
+
+    def test_assign_grouby_06(self):
+        """ Moves are grouped by partner
+            Create a backorder but by specifying cancel_backorder=True.
+
+            The picking will be cancelled in place of creating a new backorder
+            and the date_done will be set on the picking
+        """
+        group = self._create_procurement_group(self.partner1)
+        move1 = self._create_move(group)
+        move1.assign_picking()
+
+        group2 = self._create_procurement_group(self.partner1)
+        move2 = self._create_move(group2)
+        move2.assign_picking()
+
+        self.assertEqual(move1.picking_id, move2.picking_id)
+
+        picking = move1.picking_id
+        # force reuse of the same picking as backorder since nothing is processed
+        picking.with_context(cancel_backorder=True)._create_backorder()
+        self.assertTrue(picking.date_done)
