@@ -146,6 +146,14 @@ class StockPicking(models.Model):
             else:
                 not_done_bo_moves.assign_picking()
 
+            # In the call to assign_picking, additional products have been
+            # canceled.
+            not_done_bo_moves = not_done_bo_moves.filtered(
+                # we need to check if the move exists because we can have
+                # deleted moves in case of additional products
+                lambda move: move.exists()
+                and move.state not in ("done", "cancel")
+            )
             if (
                 picking not in not_done_bo_moves.mapped("picking_id")
                 and not picking.date_done
@@ -155,14 +163,6 @@ class StockPicking(models.Model):
                 picking.write(
                     {"date_done": time.strftime(DEFAULT_SERVER_DATETIME_FORMAT)}
                 )
-            # In the call to assign_picking, additional products have been
-            # canceled.
-            not_done_bo_moves = not_done_bo_moves.filtered(
-                # we need to check if the move exists because we can have
-                # deleted moves in case of additional products
-                lambda move: move.exists()
-                and move.state not in ("done", "cancel")
-            )
             backorders |= not_done_bo_moves.mapped("picking_id")
         if backorders:
             # In standard, created backorders are assigned at the end of the
