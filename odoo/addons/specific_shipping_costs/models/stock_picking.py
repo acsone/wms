@@ -37,6 +37,8 @@ class StockPicking(models.Model):
             return
         if self.picking_type_id.avoid_shipping_cost:
             return
+        if not self.carrier_id.use_specific_cost_calculation:
+            return
         moves = (
             self.mapped("delivery_round_id.shipping_ids")
             .filtered(lambda ship: ship.partner_id == self.partner_id)
