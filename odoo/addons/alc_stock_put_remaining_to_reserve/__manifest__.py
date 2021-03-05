@@ -16,6 +16,6 @@
         "stock_picking_zone",
         "stock_refill",
     ],
-    "data": ["views/stock_pack_operation.xml"],
+    "data": ["views/stock_picking.xml"],
     "demo": [],
 }
