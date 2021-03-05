@@ -18,7 +18,12 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["sale", "alc_product_abc_classification"],
+    "depends": [
+        "sale",
+        "alc_product_abc_classification",
+        "alc_product_mto",
+        "alc_product_picking_zone",
+    ],
     "data": [
         "security/alc_product_average_daily_sale_config.xml",
         "views/alc_product_average_daily_sale_config.xml",

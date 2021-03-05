@@ -7,14 +7,20 @@ from psycopg2.extensions import AsIs
 from odoo import api, fields, models
 
 import odoo.addons.decimal_precision as dp
+from odoo.addons.stock_storage_type_putaway_abc.models.stock_location import (
+    ABC_SELECTION,
+)
 
 
 class AlcAverageDailySale(models.Model):
 
     _name = "alc.average.daily.sale"
     _auto = False
+    _order = "abc_classification_level ASC, product_id ASC"
 
-    product_id = fields.Many2one("product.product", "Product", required=True)
+    product_id = fields.Many2one(
+        "product.product", "Product", required=True, index=True
+    )
     average_qty_by_sale = fields.Float(help="Average Daily Sales Qty", required=True)
     average_daily_sales_count = fields.Integer(
         help="Avarage Daily Sales Count", required=True
@@ -32,6 +38,21 @@ class AlcAverageDailySale(models.Model):
     safety_bin_min_qty = fields.Float(
         digits=dp.get_precision("Product Unit of Measure"),
         help="Minimal safety qty into a bin location",
+    )
+    abc_classification_level = fields.Selection(
+        selection=ABC_SELECTION, required=True, read_only=True, index=True
+    )
+    picking_zone_id = fields.Many2one(
+        string="Picking zone", comodel_name="picking.zone", readonly=True, index=True
+    )
+    sale_ok = fields.Boolean(
+        string="Can be Sold",
+        readonly=True,
+        index=True,
+        help="Specify if the product can be selected in a sales order line.",
+    )
+    is_mto_product = fields.Boolean(
+        string="On Order", readonly=True, store=True, index=True,
     )
 
     @api.model
@@ -153,9 +174,15 @@ averages AS(
         date_from,
         date_to,
         config_id,
+        abc_classification_level,
+        picking_zone_id,
+        sale_ok,
+        is_mto_product,
         cfg.number_days_qty_in_stock * GREATEST(average_daily_sales_count, 1)  * (average_qty_by_sale + (std_dev * cfg.stddev_include_factor)) as safety_bin_min_qty
     FROM averages t
     JOIN alc_product_average_daily_sale_config cfg on cfg.id = t.config_id
+    JOIN product_product pp on pp.id = product_id
+    JOIN product_template pt on pt.id = pp.product_tmpl_id
 ) WITH NO DATA;""",
             (AsIs(self._table),),
         )
@@ -163,14 +190,13 @@ averages AS(
             "CREATE UNIQUE INDEX pk_%s ON %s (id)",
             (AsIs(self._table), AsIs(self._table)),
         )
-        self.env.cr.execute(
-            "CREATE INDEX %s_product_id_idx ON %s (product_id)",
-            (AsIs(self._table), AsIs(self._table)),
-        )
-        self.env.cr.execute(
-            "CREATE INDEX %s_warehouse_id_idx ON %s (warehouse_id)",
-            (AsIs(self._table), AsIs(self._table)),
-        )
+        for name, field in self._fields.iteritems():
+            if not field.index:
+                continue
+            self.env.cr.execute(
+                "CREATE INDEX %s_%s_idx ON %s (%s)",
+                (AsIs(self._table), AsIs(name), AsIs(self._table), AsIs(name)),
+            )
         self.set_refresh_date(date=False)
         cron = self.env.ref(
             "alc_product_average_daily_sale.refresh_materialized_view",

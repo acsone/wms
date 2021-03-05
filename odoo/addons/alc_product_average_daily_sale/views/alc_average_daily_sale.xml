@@ -10,6 +10,31 @@
     <field name="arch" type="xml">
       <search string="Search Average Daily Sale">
         <field name="product_id" />
+        <field name="picking_zone_id" />
+        <separator />
+        <filter
+          string="Can be Sold"
+          name="filter_to_sell"
+          domain="[('sale_ok','=',1)]"
+        />
+        <separator />
+        <filter
+          string="Normal product"
+          name="normal_product"
+          domain="[('is_mto_product','=',False)]"
+        />
+        <filter
+          string="On Order"
+          name="on_order"
+          domain="[('is_mto_product','=',True)]"
+        />
+        <group expand='0' string='Group by...'>
+          <filter
+            string="Picking zone"
+            domain="[]"
+            context="{'group_by': 'picking_zone_id'}"
+          />
+        </group>
       </search>
     </field>
   </record>
@@ -21,6 +46,7 @@
     <field name="arch" type="xml">
       <tree create="false" delete="false">
         <field name="product_id" />
+        <field name="abc_classification_level" />
         <field name="average_qty_by_sale" />
         <field name="average_daily_sales_count" />
         <field name="std_dev" />
@@ -37,7 +63,9 @@
     <field name="res_model">alc.average.daily.sale</field>
     <field name="view_mode">tree</field>
     <field name="domain">[]</field>
-    <field name="context">{}</field>
+    <field
+      name="context"
+    >{"search_default_filter_to_sell":1, "search_default_normal_product": 1}</field>
   </record>
   <record model="ir.ui.menu" id="alc_average_daily_sale_menu">
     <field name="name">Average Daily Sales</field>

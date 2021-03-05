@@ -13,6 +13,7 @@
         <field name="period_value" />
         <field name="period_name" />
         <field name="stddev_exclude_factor" />
+        <field name="stddev_include_factor" />
         <field name="warehouse_id" />
       </tree>
     </field>
