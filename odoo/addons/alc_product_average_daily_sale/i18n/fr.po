@@ -1,0 +1,231 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* alc_product_average_daily_sale
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-03-05 16:23+0000\n"
+"PO-Revision-Date: 2021-03-05 16:23+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_product_average_daily_sale
+#: model:ir.model.fields,field_description:alc_product_average_daily_sale.field_alc_average_daily_sale_abc_classification_level
+#: model:ir.model.fields,field_description:alc_product_average_daily_sale.field_alc_product_average_daily_sale_config_abc_classification_level
+msgid "Abc classification level"
+msgstr "Classe ABC"
+
+#. module: alc_product_average_daily_sale
+#: model:ir.model.fields,help:alc_product_average_daily_sale.field_alc_average_daily_sale_average_daily_sales_count
+msgid "Avarage Daily Sales Count"
+msgstr "Nbr ventes journalières"
+
+#. module: alc_product_average_daily_sale
+#: model:ir.actions.act_window,name:alc_product_average_daily_sale.alc_average_daily_sale_act_window
+#: model:ir.ui.menu,name:alc_product_average_daily_sale.alc_average_daily_sale_menu
+msgid "Average Daily Sales"
+msgstr "Statistiques de vente journalière"
+
+#. module: alc_product_average_daily_sale
+#: model:ir.model.fields,help:alc_product_average_daily_sale.field_alc_average_daily_sale_average_qty_by_sale
+msgid "Average Daily Sales Qty"
+msgstr "Qté moyenne par vente"
+
+#. module: alc_product_average_daily_sale
+#: model:ir.actions.act_window,name:alc_product_average_daily_sale.alc_product_average_daily_sale_config_act_window
+#: model:ir.model,name:alc_product_average_daily_sale.model_alc_product_average_daily_sale_config
+#: model:ir.ui.menu,name:alc_product_average_daily_sale.alc_product_average_daily_sale_config_menu
+msgid "Average daily sales computation parameters"
+msgstr "Paramètres calcul statistiques ventes journalières"
+
+#. module: alc_product_average_daily_sale
+#: model:ir.model.fields,field_description:alc_product_average_daily_sale.field_alc_average_daily_sale_average_daily_sales_count
+msgid "Average daily sales count"
+msgstr "Nbr ventes journalières"
+
+#. module: alc_product_average_daily_sale
+#: model:ir.model.fields,field_description:alc_product_average_daily_sale.field_alc_average_daily_sale_average_qty_by_sale
+msgid "Average qty by sale"
+msgstr "Qté moyenne par vente"
+
+#. module: alc_product_average_daily_sale
+#: model:ir.model.fields,field_description:alc_product_average_daily_sale.field_alc_average_daily_sale_sale_ok
+#: model:ir.ui.view,arch_db:alc_product_average_daily_sale.alc_average_daily_sale_search_view
+msgid "Can be Sold"
+msgstr "Peut être vendu"
+
+#. module: alc_product_average_daily_sale
+#: model:ir.model.fields,field_description:alc_product_average_daily_sale.field_alc_product_average_daily_sale_config_create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: alc_product_average_daily_sale
+#: model:ir.model.fields,field_description:alc_product_average_daily_sale.field_alc_product_average_daily_sale_config_create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: alc_product_average_daily_sale
+#: selection:alc.product.average.daily.sale.config,period_name:0
+msgid "Days"
+msgstr "Jours"
+
+#. module: alc_product_average_daily_sale
+#: model:ir.model.fields,field_description:alc_product_average_daily_sale.field_alc_average_daily_sale_display_name
+#: model:ir.model.fields,field_description:alc_product_average_daily_sale.field_alc_product_average_daily_sale_config_display_name
+msgid "Display Name"
+msgstr "Nom affiché"
+
+#. module: alc_product_average_daily_sale
+#: model:ir.model.fields,field_description:alc_product_average_daily_sale.field_alc_average_daily_sale_date_from
+msgid "From"
+msgstr "De"
+
+#. module: alc_product_average_daily_sale
+#: model:ir.ui.view,arch_db:alc_product_average_daily_sale.alc_average_daily_sale_search_view
+msgid "Group by..."
+msgstr "Regrouper par..."
+
+#. module: alc_product_average_daily_sale
+#: model:ir.model.fields,field_description:alc_product_average_daily_sale.field_alc_average_daily_sale_id
+#: model:ir.model.fields,field_description:alc_product_average_daily_sale.field_alc_product_average_daily_sale_config_id
+msgid "ID"
+msgstr "ID"
+
+#. module: alc_product_average_daily_sale
+#: model:ir.model.fields,field_description:alc_product_average_daily_sale.field_alc_average_daily_sale___last_update
+#: model:ir.model.fields,field_description:alc_product_average_daily_sale.field_alc_product_average_daily_sale_config___last_update
+msgid "Last Modified on"
+msgstr "Dernière modification le"
+
+#. module: alc_product_average_daily_sale
+#: model:ir.model.fields,field_description:alc_product_average_daily_sale.field_alc_product_average_daily_sale_config_write_uid
+msgid "Last Updated by"
+msgstr "Dernière mise à jour par"
+
+#. module: alc_product_average_daily_sale
+#: model:ir.model.fields,field_description:alc_product_average_daily_sale.field_alc_product_average_daily_sale_config_write_date
+msgid "Last Updated on"
+msgstr "Dernière mise à jour le"
+
+#. module: alc_product_average_daily_sale
+#: model:ir.model.fields,help:alc_product_average_daily_sale.field_alc_average_daily_sale_safety_bin_min_qty
+msgid "Minimal safety qty into a bin location"
+msgstr "Qté minimale en bin"
+
+#. module: alc_product_average_daily_sale
+#: selection:alc.product.average.daily.sale.config,period_name:0
+msgid "Months"
+msgstr "Mois"
+
+#. module: alc_product_average_daily_sale
+#: model:ir.model.fields,field_description:alc_product_average_daily_sale.field_alc_average_daily_sale_nbr_sales
+msgid "Nbr sales"
+msgstr "Nbr ventes"
+
+#. module: alc_product_average_daily_sale
+#: model:ir.ui.view,arch_db:alc_product_average_daily_sale.alc_average_daily_sale_search_view
+msgid "Normal product"
+msgstr "Produit normal"
+
+#. module: alc_product_average_daily_sale
+#: model:ir.model.fields,field_description:alc_product_average_daily_sale.field_alc_product_average_daily_sale_config_number_days_qty_in_stock
+msgid "Number of days of quantities in stock"
+msgstr "Nombre de jours en stock"
+
+#. module: alc_product_average_daily_sale
+#: model:ir.model.fields,field_description:alc_product_average_daily_sale.field_alc_average_daily_sale_is_mto_product
+#: model:ir.ui.view,arch_db:alc_product_average_daily_sale.alc_average_daily_sale_search_view
+msgid "On Order"
+msgstr "A la commande"
+
+#. module: alc_product_average_daily_sale
+#: model:ir.model.fields,field_description:alc_product_average_daily_sale.field_alc_product_average_daily_sale_config_period_name
+msgid "Period analyzed unit"
+msgstr "Période"
+
+#. module: alc_product_average_daily_sale
+#: model:ir.model.fields,field_description:alc_product_average_daily_sale.field_alc_product_average_daily_sale_config_period_value
+msgid "Period analyzed value"
+msgstr "Unité période"
+
+#. module: alc_product_average_daily_sale
+#: model:ir.model.fields,field_description:alc_product_average_daily_sale.field_alc_average_daily_sale_picking_zone_id
+#: model:ir.ui.view,arch_db:alc_product_average_daily_sale.alc_average_daily_sale_search_view
+msgid "Picking zone"
+msgstr "Zone de picking"
+
+#. module: alc_product_average_daily_sale
+#: model:ir.model.fields,field_description:alc_product_average_daily_sale.field_alc_average_daily_sale_product_id
+msgid "Product"
+msgstr "Produit"
+
+#. module: alc_product_average_daily_sale
+#: model:ir.model.fields,field_description:alc_product_average_daily_sale.field_alc_average_daily_sale_std_dev
+msgid "Qty Standard Deviation"
+msgstr "Qty Standard Deviation"
+
+#. module: alc_product_average_daily_sale
+#: model:ir.model.fields,field_description:alc_product_average_daily_sale.field_alc_average_daily_sale_safety_bin_min_qty
+msgid "Safety bin min qty"
+msgstr "Qté min en bin"
+
+#. module: alc_product_average_daily_sale
+#: model:ir.ui.view,arch_db:alc_product_average_daily_sale.alc_average_daily_sale_search_view
+msgid "Search Average Daily Sale"
+msgstr "Recherche dans les moyennes de vente journalères"
+
+#. module: alc_product_average_daily_sale
+#: model:ir.model.fields,help:alc_product_average_daily_sale.field_alc_average_daily_sale_sale_ok
+msgid "Specify if the product can be selected in a sales order line."
+msgstr "Indique si l'article peut être mis dans une ligne de commande de vente."
+
+#. module: alc_product_average_daily_sale
+#: model:ir.model.fields,field_description:alc_product_average_daily_sale.field_alc_product_average_daily_sale_config_stddev_exclude_factor
+msgid "Standard deviation exclude factor"
+msgstr "Multiplicateur Ecart Type exclu de la moyenne"
+
+#. module: alc_product_average_daily_sale
+#: model:ir.model.fields,field_description:alc_product_average_daily_sale.field_alc_product_average_daily_sale_config_stddev_include_factor
+msgid "Stddev include factor"
+msgstr "Multiplicateur Ecart Type ajouté à la moyenne"
+
+#. module: alc_product_average_daily_sale
+#: model:ir.model.fields,field_description:alc_product_average_daily_sale.field_alc_average_daily_sale_date_to
+msgid "To"
+msgstr "A"
+
+#. module: alc_product_average_daily_sale
+#: model:ir.model.fields,field_description:alc_product_average_daily_sale.field_alc_product_average_daily_sale_config_warehouse_id
+msgid "Warehouse"
+msgstr "Entrepôt"
+
+#. module: alc_product_average_daily_sale
+#: model:ir.model.fields,field_description:alc_product_average_daily_sale.field_alc_average_daily_sale_warehouse_id
+msgid "Warehouse id"
+msgstr "Entrepôt"
+
+#. module: alc_product_average_daily_sale
+#: selection:alc.product.average.daily.sale.config,period_name:0
+msgid "Weeks"
+msgstr "Semaines"
+
+#. module: alc_product_average_daily_sale
+#: selection:alc.product.average.daily.sale.config,period_name:0
+msgid "Years"
+msgstr "Années"
+
+#. module: alc_product_average_daily_sale
+#: model:ir.model,name:alc_product_average_daily_sale.model_alc_average_daily_sale
+msgid "alc.average.daily.sale"
+msgstr "Moyenne de ventes quotidienne"
+
+#. module: alc_product_average_daily_sale
+#: model:ir.model.fields,field_description:alc_product_average_daily_sale.field_alc_average_daily_sale_config_id
+msgid "computation parameters"
+msgstr "Paramètres de calcul"

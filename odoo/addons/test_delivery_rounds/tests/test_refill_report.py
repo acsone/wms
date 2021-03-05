@@ -47,6 +47,7 @@ class TestRefillReport(TestDeliveryRound):
             }
         )
         inventory.action_done()
+        cls.env["alc.average.daily.sale"].refresh_view()
 
     def setup_alcyn2323(self):
         """
@@ -88,6 +89,7 @@ class TestRefillReport(TestDeliveryRound):
             {"template_id": self.delivery_template.id, "date": "2017-01-02"}
         )
         self.delivery_round_2.button_resetdraft()
+        self.env["alc.average.daily.sale"].refresh_view()
 
     def test_alcyn2323_case1(self):
         """
