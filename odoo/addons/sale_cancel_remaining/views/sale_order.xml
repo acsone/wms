@@ -17,7 +17,7 @@
           colspan="2"
           string="Cancel remaining qty"
           style="margin-bottom: 1em;margin-top: 1em"
-          attrs="{'invisible': [('product_qty_remains_to_deliver', '=', 0)]}"
+          attrs="{'invisible': [('is_cancel_remaining_allowed', '=', False)]}"
         />
       </xpath>
       <xpath
@@ -29,7 +29,7 @@
           name="%(action_cancel_remaining_wizard)d"
           type="action"
           icon="fa-ban"
-          attrs="{'invisible': [('product_qty_remains_to_deliver', '=', 0)]}"
+          attrs="{'invisible': [('is_cancel_remaining_allowed', '=', False)]}"
         />
       </xpath>
       <xpath
@@ -54,7 +54,7 @@
           name="%(sale_cancel_remaining.action_cancel_remaining_wizard)d"
           type="action"
           icon="fa-ban"
-          attrs="{'invisible': [('product_qty_remains_to_deliver', '=', 0)]}"
+          attrs="{'invisible': [('is_cancel_remaining_allowed', '=', False)]}"
         />
       </xpath>
     </field>
