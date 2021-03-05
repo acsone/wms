@@ -152,3 +152,52 @@ class TestStockPicking(common.StockPickingTestCase):
             lambda m, product=self.additional_product: m.product_id == product
         )
         self.assertEqual(additional_move.warehouse_id, self.warehouse_1)
+
+    def test_03(self):
+        """
+        Test case:
+            Create and confirm a SO with product_additional ( 1 main for 5 additional)
+            1. Confirm the picking (required to get the additional product into the picking)
+            2. unreserve
+            3. Confirm the picking again
+        Expected result:
+            1. Move for additional product created
+            2.
+            3. No new move for additional product created
+        """
+        sale = self._confirm_sale_order(products=[self.main_product])
+        pick = sale.mapped("picking_ids").filtered(
+            lambda p: p.picking_type_subcode == "PICK"
+        )
+        # Add the move for the additional product into the picking...
+        pick.action_confirm()
+        pick.action_assign()
+        # 1
+        additional_move = pick.move_lines.filtered(
+            lambda m, product=self.additional_product: m.product_id == product
+        )
+        self.assertEqual(additional_move.product_qty, 5)
+        ship = sale.mapped("picking_ids").filtered(
+            lambda p: p.picking_type_code == "outgoing"
+        )
+        additional_move = ship.move_lines.filtered(
+            lambda m, product=self.additional_product: m.product_id == product
+        )
+        self.assertEqual(len(additional_move), 1)
+        self.assertEqual(additional_move.product_qty, 5)
+        # 2
+        pick.do_unreserve()
+        pick.action_assign()
+        # 3
+        additional_move = pick.move_lines.filtered(
+            lambda m, product=self.additional_product: m.product_id == product
+        )
+        self.assertEqual(len(additional_move), 1)
+        self.assertEqual(additional_move.product_qty, 5)
+        ship = sale.mapped("picking_ids").filtered(
+            lambda p: p.picking_type_code == "outgoing"
+        )
+        additional_move = ship.move_lines.filtered(
+            lambda m, product=self.additional_product: m.product_id == product
+        )
+        self.assertEqual(additional_move.product_qty, 5)

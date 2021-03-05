@@ -147,3 +147,17 @@ class StockPicking(models.Model):
             result += additional_result
 
         return result
+
+    @api.multi
+    def do_unreserve(self):
+        res = super(StockPicking, self).do_unreserve()
+        # unlink additional move and all the linked moves...
+        additional_moves = self.mapped("move_lines").filtered("is_additional_move")
+        additional_moves_dest = additional_moves.mapped("move_dest_id")
+        while additional_moves_dest:
+            additional_moves_dest.action_cancel()
+            additional_moves_dest.unlink()
+            additional_moves_dest = additional_moves.mapped("move_dest_id")
+        additional_moves.action_cancel()
+        additional_moves.unlink()
+        return res
