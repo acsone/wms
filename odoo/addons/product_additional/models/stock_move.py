@@ -8,11 +8,19 @@ from odoo import _, api, fields, models
 class StockMove(models.Model):
     _inherit = "stock.move"
 
-    # Use a boolean instead of reverse relation of
-    # 'stock.pack.operation' 'additional_move_id' because some pack operations
-    # are deleted when the picking is transfered through do_new_transfer() and
-    # this prevent to find the additional moves to not forward to backorder
     is_additional_move = fields.Boolean("Is Additional Move")
+    main_move_id = fields.Many2one(
+        "stock.move",
+        "Main Product Move",
+        ondelete="set null",
+        help="Link to the main product for stock moves created for additional products",
+    )
+    additional_move_ids = fields.One2many(
+        "stock.move",
+        "main_move_id",
+        "Additional Product Moves",
+        help="Optional: stock move for additional products linked to the current product",
+    )
 
     def do_unreserve(self):
         # picking do_unreserve first unlink pack operations and then calls

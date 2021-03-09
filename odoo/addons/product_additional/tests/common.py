@@ -9,6 +9,7 @@ class StockPickingTestCase(SavepointCase):
     @classmethod
     def setUpClass(cls):
         super(StockPickingTestCase, cls).setUpClass()
+        cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
         cls.partner1 = cls.env["res.partner"].create(
             {"name": "Unittest first partner", "ref": "12344566777878"}
         )

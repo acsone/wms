@@ -201,3 +201,95 @@ class TestStockPicking(common.StockPickingTestCase):
             lambda m, product=self.additional_product: m.product_id == product
         )
         self.assertEqual(additional_move.product_qty, 5)
+
+    def test_04(self):
+        """
+        Test case:
+            Create and confirm a SO with product_additional ( 1 main for 5 additional)
+            1. Confirm and assign the picking (required to get the additional product into the picking)
+            2. Confirm and assign the picking again
+        Expected result:
+            1. Move for additional product created
+            2. No new move for additional product created
+        """
+        sale = self._confirm_sale_order(products=[self.main_product])
+        pick = sale.mapped("picking_ids").filtered(
+            lambda p: p.picking_type_subcode == "PICK"
+        )
+        # Add the move for the additional product into the picking...
+        pick.action_confirm()
+        pick.action_assign()
+        # 1
+        additional_move = pick.move_lines.filtered(
+            lambda m, product=self.additional_product: m.product_id == product
+        )
+        self.assertEqual(additional_move.product_qty, 5)
+        ship = sale.mapped("picking_ids").filtered(
+            lambda p: p.picking_type_code == "outgoing"
+        )
+        additional_move = ship.move_lines.filtered(
+            lambda m, product=self.additional_product: m.product_id == product
+        )
+        self.assertEqual(len(additional_move), 1)
+        self.assertEqual(additional_move.product_qty, 5)
+        # 2
+        pick.action_assign()
+        additional_move = pick.move_lines.filtered(
+            lambda m, product=self.additional_product: m.product_id == product
+        )
+        self.assertEqual(len(additional_move), 1)
+        self.assertEqual(additional_move.product_qty, 5)
+        ship = sale.mapped("picking_ids").filtered(
+            lambda p: p.picking_type_code == "outgoing"
+        )
+        additional_move = ship.move_lines.filtered(
+            lambda m, product=self.additional_product: m.product_id == product
+        )
+        self.assertEqual(additional_move.product_qty, 5)
+
+    def test_05(self):
+        """
+        Test case:
+            Create and confirm a SO with 2 product_additional
+                (1 main for 5 additional)
+                (1 main for 3 additional)
+            main_product -> 1 / 5 additional
+            main_product_bis -> 1 / 3 additional
+            Confirm and assign the picking (required to get the additional product into the picking)
+        Expected result:
+            *. Moves for additional product created (one by main product_id)
+            *. 1 packop created for additional product (qty = 8)
+        """
+        self.main_product.ratio_additional_product = 5
+        self.main_product2.ratio_additional_product = 3
+        sale = self._confirm_sale_order(
+            products=[self.main_product, self.main_product2]
+        )
+        pick = sale.mapped("picking_ids").filtered(
+            lambda p: p.picking_type_subcode == "PICK"
+        )
+        # Add the move for the additional product into the picking...
+        pick.action_confirm()
+        pick.action_assign()
+
+        additional_moves = pick.move_lines.filtered(
+            lambda m, product=self.additional_product: m.product_id == product
+        )
+        self.assertEqual(len(additional_moves), 2)
+        self.assertEqual(sum(additional_moves.mapped("product_qty")), 8)
+        pack_op_additional = pick.pack_operation_ids.filtered(
+            lambda p, product=self.additional_product: p.product_id == product
+        )
+        self.assertEqual(len(pack_op_additional), 1)
+        self.assertEqual(pack_op_additional.product_qty, 8)
+
+        ship = sale.mapped("picking_ids").filtered(
+            lambda p: p.picking_type_code == "outgoing"
+        )
+        ship.action_confirm()
+        ship.action_assign()
+        additional_moves = ship.move_lines.filtered(
+            lambda m, product=self.additional_product: m.product_id == product
+        )
+        self.assertEqual(len(additional_moves), 2)
+        self.assertEqual(sum(additional_moves.mapped("product_qty")), 8)
