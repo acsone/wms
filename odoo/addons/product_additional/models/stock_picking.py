@@ -64,11 +64,16 @@ class StockPicking(models.Model):
             .browse(move_ids_to_unlink)
             .with_context(no_recompute_pack=True, force_cancel=True)
         )
+        # if we are not into a cancellation done by the procurement (from the SO),
         # * We need to unlink that canceled move otherwise do_unreserve
         #   will complain for 'Cannot unreserve a done move'
         # * Calling sudo as a standard picker cannot delete a stock.move
         # * Reception orders are failing on this unlink
-        if "RECEIVE" not in moves_to_unlink.mapped("picking_id.picking_type_subcode"):
+        if (
+            "cancel_procurement" not in self.env.context
+            and "RECEIVE"
+            not in moves_to_unlink.mapped("picking_id.picking_type_subcode")
+        ):
             moves_to_unlink.unlink()
 
     @api.multi  # noqa: C901
