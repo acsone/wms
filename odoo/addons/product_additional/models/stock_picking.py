@@ -92,6 +92,9 @@ class StockPicking(models.Model):
         ):
             # remove additional moves since they will be recreated there after
             self._purge_additional_moves()
+            # since some stock move could have been removed we must filter out
+            # quants for which no reservation exists
+            quants = quants.filtered("reservation_id")
         result = super(StockPicking, self)._prepare_pack_ops(quants, forced_qties)
         if self.env.context.get("skip_additional"):
             return result
@@ -189,6 +192,43 @@ class StockPicking(models.Model):
             additional_result = super(StockPicking, self)._prepare_pack_ops(
                 additional_quants, {}
             )
-            result += additional_result
+            #
+            result = self._merge_pack_ops_infos(result, additional_result)
 
         return result
+
+    def _merge_pack_ops_infos(self, info1, info2):
+        """
+        Merge 2 list of pack operations values into a unique list where
+        operations for the same 'product', 'package', 'owner', 'location',
+        'location_dst_id', 'picking_id', 'product_uom_id', are merged
+        """
+        map1 = self._get_pack_ops_info_map(info1)
+        map2 = self._get_pack_ops_info_map(info2)
+        result = []
+        for key, val in map1.items():
+            result.append(val)
+            to_merge = map2.pop(key, None)
+            if to_merge:
+                val["product_qty"] = val["product_qty"] + to_merge["product_qty"]
+        result.extend(map2.values())
+        return result
+
+    def _get_pack_ops_info_map(self, pack_ops_info):
+        """
+        Create a map of pack operation infos where the key is a tuple
+        based on 'product', 'package', 'owner', 'location', 'location_dst_id',
+        'picking_id', 'product_uom_id',
+        """
+        return {
+            (
+                i["product_id"],
+                i["package_id"],
+                i["owner_id"],
+                i["location_id"],
+                i["location_dest_id"],
+                i["picking_id"],
+                i["product_uom_id"],
+            ): i
+            for i in pack_ops_info
+        }
