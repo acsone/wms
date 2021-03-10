@@ -9,6 +9,7 @@ class TestProductAdditionalGroupByPartner(common.StockPickingTestCase):
     @classmethod
     def setUpClass(cls):
         super(TestProductAdditionalGroupByPartner, cls).setUpClass()
+        cls.env = cls.env(context=dict(cls.env.context, round_autoset=False))
         cls.warehouse_1.pick_type_id.groupbypartner = True
         cls.warehouse_1.out_type_id.groupbypartner = True
         cls.carrier_fixed = cls.env["delivery.carrier"].create(
