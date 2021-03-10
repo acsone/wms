@@ -58,7 +58,9 @@ class StockPackOperation(models.Model):
             )
             return
 
-        moves = self.linked_move_operation_ids.mapped("move_id")
+        moves = self.linked_move_operation_ids.mapped("move_id").with_context(
+            skip_additional=True
+        )
 
         # Unreserve all operations
         moves.do_unreserve()
@@ -131,6 +133,7 @@ class StockPackOperation(models.Model):
             block_picking.action_assign()
 
         # Recompute pack operations
+        moves.action_assign(no_prepare=True)
         moves._recompute_pack_op()
 
     def action_missing_qty(self):
