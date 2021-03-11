@@ -6,6 +6,11 @@ from odoo.addons.product_additional.tests import common
 
 
 class TestStockMove(common.StockPickingTestCase):
+    @classmethod
+    def setUpClass(cls):
+        super(TestStockMove, cls).setUpClass()
+        cls.env = cls.env(context=dict(cls.env.context, round_autoset=False))
+
     def test_00(self):
         """
         Data:
