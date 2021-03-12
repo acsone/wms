@@ -187,3 +187,12 @@ class SaleOrder(models.Model):
         dt = dateutil.parser.parse(dt)
         dt = dt.astimezone(pytz.timezone("UTC"))
         return fields.Datetime.to_string(dt)
+
+    @api.constrains("sale_channel")
+    def _check_sale_channel_selection(self):
+        if self.env.user != self.env.ref(
+            "alc_b2c_connector.alc_b2c_rest_api_user"
+        ) or self.env.user != self.env.ref("base.user_root"):
+            raise ValidationError(
+                _("You cannot use this sale channel for manuel order")
+            )

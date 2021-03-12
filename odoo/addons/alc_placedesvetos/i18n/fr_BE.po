@@ -1,0 +1,33 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* alc_placedesvetos
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-03-01 08:30+0000\n"
+"PO-Revision-Date: 2021-03-01 08:30+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_placedesvetos
+#: model:account.payment.mode,name:alc_placedesvetos.account_payment_mode_placedesvetos
+msgid "Domiciliation Place des Vétos"
+msgstr "Domiciliation Place des Vétos"
+
+#. module: alc_placedesvetos
+#: model:ir.model,name:alc_placedesvetos.model_sale_order
+msgid "Sales Order"
+msgstr "Bon de commande"
+
+#. module: alc_placedesvetos
+#: code:addons/alc_placedesvetos/models/sale_order.py:21
+#, python-format
+msgid "You cannot use this sale channel for manuel order"
+msgstr "Impossible d'utiliser ce canal de vente pour une vente manuelle"
+
