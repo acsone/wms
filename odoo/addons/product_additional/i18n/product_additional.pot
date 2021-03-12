@@ -29,8 +29,8 @@ msgid "Additional Product"
 msgstr ""
 
 #. module: product_additional
-#: model:ir.model.fields,field_description:product_additional.field_stock_pack_operation_additional_move_id
-msgid "Additional Product Move"
+#: model:ir.model.fields,field_description:product_additional.field_stock_move_additional_move_ids
+msgid "Additional Product Moves"
 msgstr ""
 
 #. module: product_additional
@@ -67,8 +67,18 @@ msgid "Is Additional Move"
 msgstr ""
 
 #. module: product_additional
-#: model:ir.model,name:product_additional.model_stock_pack_operation
-msgid "Packing Operation"
+#: model:ir.model.fields,help:product_additional.field_stock_move_main_move_id
+msgid "Link to the main product for stock moves created for additional products"
+msgstr ""
+
+#. module: product_additional
+#: model:ir.model.fields,field_description:product_additional.field_stock_move_main_move_id
+msgid "Main Product Move"
+msgstr ""
+
+#. module: product_additional
+#: model:ir.model.fields,help:product_additional.field_stock_move_additional_move_ids
+msgid "Optional: stock move for additional products linked to the current product"
 msgstr ""
 
 #. module: product_additional
@@ -117,7 +127,7 @@ msgid "Ratio Main Product"
 msgstr ""
 
 #. module: product_additional
-#: code:addons/product_additional/models/stock_move.py:46
+#: code:addons/product_additional/models/stock_move.py:54
 #, python-format
 msgid "Remaining additional move '%s' canceled"
 msgstr ""
