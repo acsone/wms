@@ -217,5 +217,5 @@ class StockMove(models.Model):
             _logger.debug("Recompute pack operations")
             pickings.do_prepare_partial()
             # Recompute the weight for each picking
-            self.mapped("picking_id")._cal_weight()
+            self.exists().mapped("picking_id")._cal_weight()
         return res

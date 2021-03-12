@@ -14,18 +14,14 @@ class TestStockPicking(common.StockPickingTestCase):
         sale = self._confirm_sale_order(products=[self.main_product])
 
         # check the pickings
-        pick = sale.mapped("picking_ids").filtered(
-            lambda p: p.picking_type_subcode == "PICK"
-        )
+        pick = self._get_picking_pick(sale)
         self.assertEqual(len(pick), 1)
 
         # Check that pick only has 1 move line before reservation
         self.assertEqual(len(pick.move_lines), 1)
         self.assertEqual(pick.move_lines.product_id.id, self.main_product.id)
 
-        ship = sale.mapped("picking_ids").filtered(
-            lambda p: p.picking_type_code == "outgoing"
-        )
+        ship = self._get_picking_ship(sale)
         self.assertEqual(len(ship), 1)
 
         pick.action_confirm()
@@ -68,9 +64,7 @@ class TestStockPicking(common.StockPickingTestCase):
 
         """
         sale = self._confirm_sale_order(products=[self.main_product])
-        pick = sale.mapped("picking_ids").filtered(
-            lambda p: p.picking_type_subcode == "PICK"
-        )
+        pick = self._get_picking_pick(sale)
         # Add the move for the additional product into the picking...
         pick.action_confirm()
         pick.action_assign()
@@ -87,9 +81,7 @@ class TestStockPicking(common.StockPickingTestCase):
         self.assertEqual(sale.state, "cancel")
         self.assertEqual(len(pick), 1)
         self.assertEqual(pick.state, "cancel")
-        ship = sale.mapped("picking_ids").filtered(
-            lambda p: p.picking_type_code == "outgoing"
-        )
+        ship = self._get_picking_ship(sale)
         self.assertEqual(len(ship), 1)
         self.assertEqual(ship.state, "cancel")
 
@@ -103,9 +95,7 @@ class TestStockPicking(common.StockPickingTestCase):
             The qty_delivered on the so line must be the ordered qty
         """
         sale = self._confirm_sale_order(products=[self.main_product])
-        pick = sale.mapped("picking_ids").filtered(
-            lambda p: p.picking_type_subcode == "PICK"
-        )
+        pick = self._get_picking_pick(sale)
         # Add the move for the additional product into the picking and process
         # the picking...
         pick.action_confirm()
@@ -113,9 +103,7 @@ class TestStockPicking(common.StockPickingTestCase):
         for pack_op in pick.pack_operation_ids:
             pack_op.qty_done = pack_op.product_qty
         pick.action_done()
-        ship = sale.mapped("picking_ids").filtered(
-            lambda p: p.picking_type_code == "outgoing"
-        )
+        ship = self._get_picking_ship(sale)
         ship.action_confirm()
         ship.action_assign()
         for pack_op in ship.pack_operation_ids:
@@ -134,9 +122,7 @@ class TestStockPicking(common.StockPickingTestCase):
 
         """
         sale = self._confirm_sale_order(products=[self.main_product])
-        pick = sale.mapped("picking_ids").filtered(
-            lambda p: p.picking_type_subcode == "PICK"
-        )
+        pick = self._get_picking_pick(sale)
         # Add the move for the additional product into the picking...
         pick.action_confirm()
         pick.action_assign()
@@ -145,9 +131,7 @@ class TestStockPicking(common.StockPickingTestCase):
             lambda m, product=self.additional_product: m.product_id == product
         )
         self.assertEqual(additional_move.warehouse_id, self.warehouse_1)
-        ship = sale.mapped("picking_ids").filtered(
-            lambda p: p.picking_type_code == "outgoing"
-        )
+        ship = self._get_picking_ship(sale)
         additional_move = ship.move_lines.filtered(
             lambda m, product=self.additional_product: m.product_id == product
         )
@@ -166,9 +150,7 @@ class TestStockPicking(common.StockPickingTestCase):
             3. No new move for additional product created
         """
         sale = self._confirm_sale_order(products=[self.main_product])
-        pick = sale.mapped("picking_ids").filtered(
-            lambda p: p.picking_type_subcode == "PICK"
-        )
+        pick = self._get_picking_pick(sale)
         # Add the move for the additional product into the picking...
         pick.action_confirm()
         pick.action_assign()
@@ -177,9 +159,7 @@ class TestStockPicking(common.StockPickingTestCase):
             lambda m, product=self.additional_product: m.product_id == product
         )
         self.assertEqual(additional_move.product_qty, 5)
-        ship = sale.mapped("picking_ids").filtered(
-            lambda p: p.picking_type_code == "outgoing"
-        )
+        ship = self._get_picking_ship(sale)
         additional_move = ship.move_lines.filtered(
             lambda m, product=self.additional_product: m.product_id == product
         )
@@ -194,10 +174,123 @@ class TestStockPicking(common.StockPickingTestCase):
         )
         self.assertEqual(len(additional_move), 1)
         self.assertEqual(additional_move.product_qty, 5)
-        ship = sale.mapped("picking_ids").filtered(
-            lambda p: p.picking_type_code == "outgoing"
-        )
+        ship = self._get_picking_ship(sale)
         additional_move = ship.move_lines.filtered(
             lambda m, product=self.additional_product: m.product_id == product
         )
         self.assertEqual(additional_move.product_qty, 5)
+
+    def test_04(self):
+        """
+        Test case:
+            Create and confirm a SO with product_additional ( 1 main for 5 additional)
+            1. Confirm and assign the picking (required to get the additional product into the picking)
+            2. Confirm and assign the picking again
+        Expected result:
+            1. Move for additional product created
+            2. No new move for additional product created
+        """
+        sale = self._confirm_sale_order(products=[self.main_product])
+        pick = self._get_picking_pick(sale)
+        # Add the move for the additional product into the picking...
+        pick.action_confirm()
+        pick.action_assign()
+        # 1
+        additional_move = pick.move_lines.filtered(
+            lambda m, product=self.additional_product: m.product_id == product
+        )
+        self.assertEqual(additional_move.product_qty, 5)
+        ship = self._get_picking_ship(sale)
+        additional_move = ship.move_lines.filtered(
+            lambda m, product=self.additional_product: m.product_id == product
+        )
+        self.assertEqual(len(additional_move), 1)
+        self.assertEqual(additional_move.product_qty, 5)
+        # 2
+        pick.action_assign()
+        additional_move = pick.move_lines.filtered(
+            lambda m, product=self.additional_product: m.product_id == product
+        )
+        self.assertEqual(len(additional_move), 1)
+        self.assertEqual(additional_move.product_qty, 5)
+        ship = self._get_picking_ship(sale)
+        additional_move = ship.move_lines.filtered(
+            lambda m, product=self.additional_product: m.product_id == product
+        )
+        self.assertEqual(additional_move.product_qty, 5)
+
+    def test_05(self):
+        """
+        Test case:
+            Create and confirm a SO with 2 product_additional
+                (1 main for 5 additional)
+                (1 main for 3 additional)
+            main_product -> 1 / 5 additional
+            main_product_bis -> 1 / 3 additional
+            Confirm and assign the picking (required to get the additional product into the picking)
+        Expected result:
+            *. Moves for additional product created (one by main product_id)
+            *. 1 packop created for additional product (qty = 8)
+        """
+        self.main_product.ratio_additional_product = 5
+        self.main_product2.ratio_additional_product = 3
+        sale = self._confirm_sale_order(
+            products=[self.main_product, self.main_product2]
+        )
+        pick = self._get_picking_pick(sale)
+        # Add the move for the additional product into the picking...
+        pick.action_confirm()
+        pick.action_assign()
+
+        additional_moves = pick.move_lines.filtered(
+            lambda m, product=self.additional_product: m.product_id == product
+        )
+        self.assertEqual(len(additional_moves), 2)
+        self.assertEqual(sum(additional_moves.mapped("product_qty")), 8)
+        pack_op_additional = pick.pack_operation_ids.filtered(
+            lambda p, product=self.additional_product: p.product_id == product
+        )
+        self.assertEqual(len(pack_op_additional), 1)
+        self.assertEqual(pack_op_additional.product_qty, 8)
+
+        ship = self._get_picking_ship(sale)
+        ship.action_confirm()
+        ship.action_assign()
+        additional_moves = ship.move_lines.filtered(
+            lambda m, product=self.additional_product: m.product_id == product
+        )
+        self.assertEqual(len(additional_moves), 2)
+        self.assertEqual(sum(additional_moves.mapped("product_qty")), 8)
+
+    def test_06(self):
+        """
+        Test case:
+            1. Create validate and assign a SO with:
+               * 1 main product (-> 5 additional)
+               * 1 additional_product
+            2. unreserve the picking
+        Expected result:
+            1.
+              3 moves must be created:
+                * one for main product
+                * one for 5 additional product with is_additionnal and a link to maine move
+                * one for 2 additional product without is_additionnal
+              2 pack operations must exists:
+                * one for main product (qty 1)
+                * one for product_additional (qty 6)
+            2. After unreserve, all the pack operation must be removed
+        """
+        self.main_product.ratio_additional_product = 5
+        sale = self._confirm_sale_order(
+            products=[self.main_product, self.additional_product]
+        )
+        pick = self._get_picking_pick(sale)
+        # Add the move for the additional product into the picking...
+        pick.action_confirm()
+        pick.action_assign()
+        self.assertEqual(3, len(pick.move_lines))
+        self.assertEqual(2, len(pick.pack_operation_ids))
+        packop_additional = self._get_pack_operations(pick, self.additional_product)
+        self.assertEqual(6, packop_additional.product_qty)
+        pick.do_unreserve()
+        self.assertFalse(pick.pack_operation_ids)

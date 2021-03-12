@@ -9,6 +9,7 @@ class StockPickingTestCase(SavepointCase):
     @classmethod
     def setUpClass(cls):
         super(StockPickingTestCase, cls).setUpClass()
+        cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
         cls.partner1 = cls.env["res.partner"].create(
             {"name": "Unittest first partner", "ref": "12344566777878"}
         )
@@ -168,3 +169,18 @@ class StockPickingTestCase(SavepointCase):
         so = Sale.create(so_values)
         so.action_confirm()
         return so
+
+    def _get_pack_operations(self, picking, product):
+        return picking.pack_operation_ids.filtered(
+            lambda p, prod=product: p.product_id == prod
+        )
+
+    def _get_picking_pick(self, so):
+        return so.mapped("picking_ids").filtered(
+            lambda p: p.picking_type_subcode == "PICK"
+        )
+
+    def _get_picking_ship(self, so):
+        return so.mapped("picking_ids").filtered(
+            lambda p: p.picking_type_code == "outgoing"
+        )

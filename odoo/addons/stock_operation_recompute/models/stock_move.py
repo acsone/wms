@@ -45,12 +45,10 @@ class StockMove(models.Model):
 
         # Check if product additional has been done
         additional_ctx = {}
-        additional_move = ops.mapped("additional_move_id")
+        additional_moves = self.mapped("additional_move_ids")
         if any(
-            additional_move.mapped("linked_move_operation_ids.operation_id.qty_done")
-        ):
-            # In this case, we support only recomputation for product at a time
-            additional_move.ensure_one()
+            additional_moves.mapped("linked_move_operation_ids.operation_id.qty_done")
+        ) or any(self.mapped("is_additional_move")):
             additional_ctx = dict(skip_additional=True)
 
         # Delete pack op
@@ -90,8 +88,6 @@ class StockMove(models.Model):
         # New pack operations could contain additional products.
         # Filter them out
         new_ops = new_ops.filtered(lambda o: o.product_id in self.mapped("product_id"))
-        if additional_ctx:
-            new_ops.write({"additional_move_id": additional_move.id})
 
         # Recover the qty done
         for location_id, lines in qty_done.iteritems():
