@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+  <record model="ir.ui.view" id="stock_picking_form_view">
+    <field
+      name="name"
+    >stock.picking.form (in alc_stock_put_remaining_to_reserve)</field>
+    <field name="model">stock.picking</field>
+    <field name="inherit_id" ref="stock.view_picking_form" />
+    <field name="arch" type="xml">
+      <field name="backorder_id" position="after">
+        <field
+          name="picking_reserve_id"
+          readonly="1"
+          attrs="{'invisible': [('picking_reserve_id','=',False)]}"
+        />
+      </field>
+      <xpath
+        expr="//field[@name='pack_operation_product_ids']//field[@name='qty_done']"
+        position="after"
+      >
+        <field name="is_action_put_in_reserve" invisible="1" />
+        <button
+          name="action_put_in_reserve"
+          type="object"
+          icon="fa-building-o"
+          string="Put remaining items in reserve"
+          attrs="{'invisible': [('is_action_put_in_reserve', '=', False)]}"
+        />
+      </xpath>
+    </field>
+  </record>
+  <record model="ir.ui.view" id="stock_picking_search_view">
+    <field
+      name="name"
+    >stock.picking.search (in alc_stock_put_remaining_to_reserve)</field>
+    <field name="model">stock.picking</field>
+    <field name="inherit_id" ref="stock.view_picking_internal_search" />
+    <field name="arch" type="xml">
+      <filter name="backorder" position="after">
+        <filter
+          name="picking_reserve"
+          string="Pickings remaining to reserve"
+          domain="[('picking_reserve_id','!=', False)]"
+          help="Remaining parts of picking partially sent to reserve"
+        />
+      </filter>
+    </field>
+  </record>
+  <record model="ir.ui.view" id="stock_picking_tree_view">
+    <field
+      name="name"
+    >stock.picking.tree (in alc_stock_put_remaining_to_reserve)</field>
+    <field name="model">stock.picking</field>
+    <field name="inherit_id" ref="stock.vpicktree" />
+    <field name="arch" type="xml">
+      <field name="backorder_id" position="after">
+        <field name="picking_reserve_id" readonly="1" />
+      </field>
+    </field>
+  </record>
+</odoo>

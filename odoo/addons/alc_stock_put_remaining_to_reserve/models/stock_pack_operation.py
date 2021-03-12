@@ -76,6 +76,10 @@ class StockPackOperation(models.Model):
         if picking_to_reserve:
             move_line = self.env["stock.move"].create(move_line_vals)
             picking_to_reserve.write({"move_lines": [(4, move_line.id, _)]})
+            self.picking_id.message_post(
+                body=_("Reserve picking %s updated") % picking_to_reserve.name
+            )
+
         else:
             picking_to_reserve = self.env["stock.picking"].create(
                 {
@@ -86,6 +90,10 @@ class StockPackOperation(models.Model):
                     "move_lines": [(0, 0, move_line_vals)],
                 }
             )
+            self.picking_id.message_post(
+                body=_("Reserve picking %s created") % picking_to_reserve.name
+            )
+
         picking_to_reserve.action_confirm()
         picking_to_reserve.action_assign()
 
@@ -97,4 +105,5 @@ class StockPackOperation(models.Model):
         self.ensure_one()
         self._check_is_action_put_in_reserve()
         picking = self._put_remaining_quantities_in_reserve()
+
         return picking
