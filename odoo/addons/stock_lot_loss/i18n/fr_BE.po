@@ -78,7 +78,7 @@ msgstr "Lot en rupture"
 
 #. module: stock_lot_loss
 #: code:addons/stock_lot_loss/models/stock_pack_operation.py:53
-#: code:addons/stock_lot_loss/models/stock_pack_operation.py:93
+#: code:addons/stock_lot_loss/models/stock_pack_operation.py:95
 #, python-format
 msgid "No qty to block."
 msgstr "Aucune quantité à bloquer pour rupture."
@@ -115,7 +115,7 @@ msgid "Ruptures"
 msgstr "Ruptures"
 
 #. module: stock_lot_loss
-#: code:addons/stock_lot_loss/models/stock_pack_operation.py:157
+#: code:addons/stock_lot_loss/models/stock_pack_operation.py:160
 #, python-format
 msgid "Select Lot/Serial Number to skip"
 msgstr "Sélectionner le Lot/Numéro de série en rupture"
