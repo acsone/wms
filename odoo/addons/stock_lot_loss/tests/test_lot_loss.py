@@ -12,6 +12,9 @@ class TestLotLoss(SavepointCase):
     def setUpClass(cls):
         super(TestLotLoss, cls).setUpClass()
 
+        if "round.instance" in cls.env:
+            cls.env = cls.env(context=dict(cls.env.context, round_autoset=False))
+
         cls.product_1 = cls.env["product.product"].create(
             {
                 "name": "Product stock_lot_loss",
@@ -236,7 +239,7 @@ class TestLotLoss(SavepointCase):
         # There should be 2 quant in stock
         self.initiate_values()
 
-        self.picking_1.with_context(round_autoset=False).action_assign()
+        self.picking_1.action_assign()
 
         quant = self.picking_1.move_lines.mapped("reserved_quant_ids")
         self.assertEqual(len(quant), 3)
@@ -252,7 +255,7 @@ class TestLotLoss(SavepointCase):
         pack_lot_A.qty = 1
         op.save()
 
-        op.with_context(round_autoset=False)._skip_operation(pack_op_lot_id=pack_lot_A)
+        op._skip_operation(pack_op_lot_id=pack_lot_A)
 
         # Check new pack operation
         new_op = self.picking_1.pack_operation_ids
@@ -338,7 +341,7 @@ class TestLotLoss(SavepointCase):
         """ Create loss of line2 """
         self.initiate_values()
 
-        self.picking_1.with_context(round_autoset=False).action_assign()
+        self.picking_1.action_assign()
 
         quant = self.picking_1.move_lines.mapped("reserved_quant_ids")
         self.assertEqual(len(quant), 3)
@@ -358,7 +361,7 @@ class TestLotLoss(SavepointCase):
         pack_lot_B.qty = 1
         op.save()
 
-        op.with_context(round_autoset=False)._skip_operation(pack_op_lot_id=pack_lot_B)
+        op._skip_operation(pack_op_lot_id=pack_lot_B)
 
         # Check new pack operation
         new_op = self.picking_1.pack_operation_ids
@@ -444,7 +447,7 @@ class TestLotLoss(SavepointCase):
         """ Create loss of product_2 without tracking"""
         self.initiate_values_no_tracking()
 
-        self.picking_2.with_context(round_autoset=False).action_assign()
+        self.picking_2.action_assign()
 
         quant = self.picking_2.mapped("move_lines.reserved_quant_ids")
         self.assertEqual(len(quant), 2)
@@ -457,7 +460,7 @@ class TestLotLoss(SavepointCase):
         op_2.qty_done = 1.0
         op_3.qty_done = 1.0
 
-        op_2.with_context(round_autoset=False)._skip_operation()
+        op_2._skip_operation()
         # Check new pack operation
         new_op_2 = self.picking_2.pack_operation_ids.filtered(
             lambda op: op.product_id == self.product_2
@@ -536,7 +539,7 @@ class TestLotLoss(SavepointCase):
             The picking is done and a back_order is created
         """
         self.initiate_values_no_tracking()
-        self.picking_2.with_context(round_autoset=False).action_assign()
+        self.picking_2.action_assign()
         for op in self.picking_2.pack_operation_ids:
             op.action_missing_qty()
         self.picking_2.printed = True  # HACK TO GET THE STATE DONE.... TO BE REFACTORED
@@ -558,7 +561,7 @@ class TestLotLoss(SavepointCase):
             The picking is confirmed and no pack op are available
         """
         self.initiate_values()
-        self.picking_1.with_context(round_autoset=False).action_assign()
+        self.picking_1.action_assign()
         pack_operations = self.picking_1.pack_operation_ids
         while pack_operations:
             pack_op = pack_operations[0]
@@ -597,7 +600,7 @@ class TestLotLoss(SavepointCase):
             2. False  since the picking type code is == "incoming"
         """
         self.initiate_values()
-        self.picking_1.with_context(round_autoset=False).action_assign()
+        self.picking_1.action_assign()
         self.assertTrue(
             all(
                 self.picking_1.mapped(
@@ -624,7 +627,7 @@ class TestLotLoss(SavepointCase):
             No error nor new picking
         """
         self.initiate_values_no_tracking()
-        self.picking_2.with_context(round_autoset=False).action_assign()
+        self.picking_2.action_assign()
         with self.assertRaises(UserError), self.env.cr.savepoint():
             for op in self.picking_2.pack_operation_ids:
                 op.qty_done = op.product_qty
@@ -643,7 +646,7 @@ class TestLotLoss(SavepointCase):
             No error nor new picking
         """
         self.initiate_values()
-        self.picking_1.with_context(round_autoset=False).action_assign()
+        self.picking_1.action_assign()
         with self.assertRaises(UserError), self.env.cr.savepoint():
             for op in self.picking_1.pack_operation_ids:
                 for lot in op.pack_lot_ids:
@@ -702,7 +705,7 @@ class TestLotLoss(SavepointCase):
         self.assertFalse(self._get_blocked_moves(additional_product))
 
         # assign the picking
-        self.picking_2.with_context(round_autoset=False).action_assign()
+        self.picking_2.action_assign()
 
         # at this stage we should have a pack op for the additional product and
         # a stock move
