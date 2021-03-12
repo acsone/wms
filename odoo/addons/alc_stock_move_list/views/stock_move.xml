@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+  <record model="ir.ui.view" id="stock_move_search_view">
+    <field name="name">stock.move.search (in alc_stock_move_list)</field>
+    <field name="model">stock.move</field>
+    <field name="inherit_id" ref="stock.view_move_search" />
+    <field name="arch" type="xml">
+      <search>
+        <separator />
+        <filter
+          name="last_month"
+          string="Previous Month"
+          domain="['&amp;',
+                            ('date', '>=', (context_today() - relativedelta(months=1)).strftime('%Y-%m-01')),
+                            ('date', '&lt;', context_today().strftime('%Y-%m-01')),
+                        ]"
+        />
+      </search>
+    </field>
+  </record>
+  <record model="ir.ui.view" id="stock_move_tree_view">
+    <field name="name">stock.move.tree (in alc_stock_move_list)</field>
+    <field name="model">stock.move</field>
+    <field name="inherit_id" ref="stock.view_move_tree" />
+    <field name="arch" type="xml">
+      <xpath expr="//tree" position="attributes">
+        <attribute name="default_order">date DESC</attribute>
+      </xpath>
+    </field>
+  </record>
+  <record id="stock.stock_move_action" model="ir.actions.act_window">
+    <field name="context">{'search_default_last_month': 1}</field>
+  </record>
+</odoo>
