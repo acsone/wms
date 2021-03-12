@@ -35,9 +35,9 @@ class DeliveryFees(TestDeliveryRound):
         not from the delivery round.
         """
         # create sale order
-        so1 = self._confirm_sale_order(self.partner1, product=self.p1, qty=10)
-        # add carrier to so
-        so1.carrier_id = self.delivery_method
+        so1 = self._confirm_sale_order(
+            self.partner1, product=self.p1, qty=10, carrier_id=self.delivery_method.id
+        )
         # assign picking to the delivery round
         self.delivery_round_1._assign_pickings(so1.picking_ids)
         self.delivery_round_1.button_picking_start()
@@ -65,9 +65,9 @@ class DeliveryFees(TestDeliveryRound):
         """ We want to be sure the shipping fees are invoiced.
         """
         # create sale order
-        so1 = self._confirm_sale_order(self.partner1, product=self.p1, qty=10)
-        # add carrier to so
-        so1.carrier_id = self.delivery_method
+        so1 = self._confirm_sale_order(
+            self.partner1, product=self.p1, qty=10, carrier_id=self.delivery_method.id
+        )
         # assign picking to the delivery round
         self.delivery_round_1._assign_pickings(so1.picking_ids)
         self.delivery_round_1.button_picking_start()
@@ -91,12 +91,14 @@ class DeliveryFees(TestDeliveryRound):
         """ The shipping fees are invoiced and only on the last sale order.
         """
         # create sale orders
-        so1 = self._confirm_sale_order(self.partner1, product=self.p1, qty=10)
-        so2 = self._confirm_sale_order(self.partner1, product=self.p2, qty=5)
+        so1 = self._confirm_sale_order(
+            self.partner1, product=self.p1, qty=10, carrier_id=self.delivery_method.id
+        )
+        so2 = self._confirm_sale_order(
+            self.partner1, product=self.p2, qty=5, carrier_id=self.delivery_method.id
+        )
 
         for so in [so1, so2]:
-            # add carrier to so
-            so.carrier_id = self.delivery_method
             # assign picking to the delivery round
             self.delivery_round_1._assign_pickings(so.picking_ids)
 
@@ -131,12 +133,14 @@ class DeliveryFees(TestDeliveryRound):
         The 2nd should no invoiceble.
         """
         # create sale orders
-        so1 = self._confirm_sale_order(self.partner1, product=self.p1, qty=10)
-        so2 = self._confirm_sale_order(self.partner2, product=self.p2, qty=5)
+        so1 = self._confirm_sale_order(
+            self.partner1, product=self.p1, qty=10, carrier_id=self.delivery_method.id
+        )
+        so2 = self._confirm_sale_order(
+            self.partner2, product=self.p2, qty=5, carrier_id=self.delivery_method.id
+        )
 
         for so in [so1, so2]:
-            # add carrier to so
-            so.carrier_id = self.delivery_method
             # assign picking to the delivery round
             self.delivery_round_1._assign_pickings(so.picking_ids)
 
