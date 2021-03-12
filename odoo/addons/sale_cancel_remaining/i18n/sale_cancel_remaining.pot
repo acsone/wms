@@ -50,6 +50,11 @@ msgid "ID"
 msgstr ""
 
 #. module: sale_cancel_remaining
+#: model:ir.model.fields,field_description:sale_cancel_remaining.field_sale_order_line_is_cancel_remaining_allowed
+msgid "Is cancel remaining allowed"
+msgstr ""
+
+#. module: sale_cancel_remaining
 #: model:ir.model.fields,field_description:sale_cancel_remaining.field_cancel_remaining_wizard___last_update
 msgid "Last Modified on"
 msgstr ""
