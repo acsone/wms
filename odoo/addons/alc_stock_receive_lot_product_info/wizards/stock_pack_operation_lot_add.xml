@@ -17,7 +17,7 @@
             attrs="{'invisible': [('tracking', '!=', 'lot')]}"
             nolabel="1"
           >
-            <tree limit='5' default_order="life_date DESC">
+            <tree limit='5' default_order="life_date DESC, qty_available DESC">
               <field name="name" />
               <field name="qty_available" widget="integer" />
               <field name="life_date" />
