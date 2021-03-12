@@ -121,6 +121,7 @@
         "alc_stock_available_immediately",
         "alc_stock_available_immediately_lot_loss",
         "alc_stock_grn_time_delay",
+        "alc_stock_move_list",
         "alc_stock_putaway",
         "alc_stock_put_remaining_to_reserve",
         # "alc_stock_location_content_relocation",
