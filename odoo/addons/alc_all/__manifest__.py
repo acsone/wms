@@ -103,6 +103,7 @@
         "alc_placedesvetos_to_magento",
         "alc_placedesvetos_payment_globalization",
         "alc_purchase_multipackaging",
+        "alc_print_all_deliveryslip",
         "alc_product_audit",
         "alc_product_average_daily_sale",
         "alc_product_dimensions",
