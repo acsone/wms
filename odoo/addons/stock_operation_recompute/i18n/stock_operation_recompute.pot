@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: stock_operation_recompute
-#: code:addons/stock_operation_recompute/models/stock_move.py:111
+#: code:addons/stock_operation_recompute/models/stock_move.py:107
 #, python-format
 msgid "Internal Error. Cannot match done lot in new pack operation"
 msgstr ""
