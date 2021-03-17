@@ -10,6 +10,7 @@
         position="after"
       >
         <field name="product_qty_remains_to_deliver" invisible="1" />
+        <field name="is_cancel_remaining_allowed" invisible="1" />
         <button
           name="%(action_cancel_remaining_wizard)d"
           type="action"
@@ -50,6 +51,7 @@
         <field name="product_qty_canceled" />
         <field name="product_qty_returned" />
         <field name="product_qty_remains_to_deliver" />
+        <field name="is_cancel_remaining_allowed" invisible="1" />
         <button
           name="%(sale_cancel_remaining.action_cancel_remaining_wizard)d"
           type="action"

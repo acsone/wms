@@ -1,16 +1,15 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* alc_product_average_daily_sale
+#	* alc_product_average_daily_sale
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-05 16:23+0000\n"
-"PO-Revision-Date: 2021-03-05 16:23+0000\n"
+"POT-Creation-Date: 2021-03-18 08:34+0000\n"
+"PO-Revision-Date: 2021-03-18 08:34+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -37,6 +36,11 @@ msgstr "Statistiques de vente journalière"
 #: model:ir.model.fields,help:alc_product_average_daily_sale.field_alc_average_daily_sale_average_qty_by_sale
 msgid "Average Daily Sales Qty"
 msgstr "Qté moyenne par vente"
+
+#. module: alc_product_average_daily_sale
+#: model:ir.model.fields,field_description:alc_product_average_daily_sale.field_alc_average_daily_sale_average_daily_qty
+msgid "Average daily qty"
+msgstr "Qté moyenne journalière"
 
 #. module: alc_product_average_daily_sale
 #: model:ir.actions.act_window,name:alc_product_average_daily_sale.alc_product_average_daily_sale_config_act_window
@@ -70,6 +74,11 @@ msgstr "Créé par"
 #: model:ir.model.fields,field_description:alc_product_average_daily_sale.field_alc_product_average_daily_sale_config_create_date
 msgid "Created on"
 msgstr "Créé le"
+
+#. module: alc_product_average_daily_sale
+#: model:ir.model.fields,field_description:alc_product_average_daily_sale.field_alc_average_daily_sale_stddev_daily
+msgid "Daily Qty Standard Deviation"
+msgstr "Déviation Standard Journalière
 
 #. module: alc_product_average_daily_sale
 #: selection:alc.product.average.daily.sale.config,period_name:0
@@ -116,8 +125,13 @@ msgstr "Dernière mise à jour le"
 
 #. module: alc_product_average_daily_sale
 #: model:ir.model.fields,help:alc_product_average_daily_sale.field_alc_average_daily_sale_safety_bin_min_qty
-msgid "Minimal safety qty into a bin location"
-msgstr "Qté minimale en bin"
+msgid "Minimal safety qty into a bin location computed as: average daily qty * number days in stock * safety"
+msgstr "Minimal safety qty into a bin location computed as: average daily qty * number days in stock * safety"
+
+#. module: alc_product_average_daily_sale
+#: model:ir.model.fields,help:alc_product_average_daily_sale.field_alc_average_daily_sale_safety_bin_min_qty_old
+msgid "Minimal value for the safety qty. Computed as: number days in stock * GREATEST(average daily sales count, 1) * (average qty by sale + (stddev * safety factor))"
+msgstr "Minimal value for the safety qty. Computed as: number days in stock * GREATEST(average daily sales count, 1) * (average qty by sale + (stddev * safety factor))"
 
 #. module: alc_product_average_daily_sale
 #: selection:alc.product.average.daily.sale.config,period_name:0
@@ -167,14 +181,29 @@ msgid "Product"
 msgstr "Produit"
 
 #. module: alc_product_average_daily_sale
-#: model:ir.model.fields,field_description:alc_product_average_daily_sale.field_alc_average_daily_sale_std_dev
+#: model:ir.model.fields,field_description:alc_product_average_daily_sale.field_alc_average_daily_sale_stddev
 msgid "Qty Standard Deviation"
-msgstr "Qty Standard Deviation"
+msgstr "Déviation Standard des commandes"
+
+#. module: alc_product_average_daily_sale
+#: model:ir.model.fields,field_description:alc_product_average_daily_sale.field_alc_average_daily_sale_safety
+msgid "Safety"
+msgstr "Sécurité"
 
 #. module: alc_product_average_daily_sale
 #: model:ir.model.fields,field_description:alc_product_average_daily_sale.field_alc_average_daily_sale_safety_bin_min_qty
 msgid "Safety bin min qty"
 msgstr "Qté min en bin"
+
+#. module: alc_product_average_daily_sale
+#: model:ir.model.fields,field_description:alc_product_average_daily_sale.field_alc_average_daily_sale_safety_bin_min_qty_old
+msgid "Safety bin min qty old"
+msgstr "Safety bin min qty old"
+
+#. module: alc_product_average_daily_sale
+#: model:ir.model.fields,field_description:alc_product_average_daily_sale.field_alc_product_average_daily_sale_config_safety_factor
+msgid "Safety factor"
+msgstr "Facteur de sécurité"
 
 #. module: alc_product_average_daily_sale
 #: model:ir.ui.view,arch_db:alc_product_average_daily_sale.alc_average_daily_sale_search_view
@@ -184,8 +213,7 @@ msgstr "Recherche dans les moyennes de vente journalères"
 #. module: alc_product_average_daily_sale
 #: model:ir.model.fields,help:alc_product_average_daily_sale.field_alc_average_daily_sale_sale_ok
 msgid "Specify if the product can be selected in a sales order line."
-msgstr ""
-"Indique si l'article peut être mis dans une ligne de commande de vente."
+msgstr "Indique si l'article peut être mis dans une ligne de commande de vente."
 
 #. module: alc_product_average_daily_sale
 #: model:ir.model.fields,field_description:alc_product_average_daily_sale.field_alc_product_average_daily_sale_config_stddev_exclude_factor
@@ -193,9 +221,9 @@ msgid "Standard deviation exclude factor"
 msgstr "Multiplicateur Ecart Type exclu de la moyenne"
 
 #. module: alc_product_average_daily_sale
-#: model:ir.model.fields,field_description:alc_product_average_daily_sale.field_alc_product_average_daily_sale_config_stddev_include_factor
-msgid "Stddev include factor"
-msgstr "Multiplicateur Ecart Type ajouté à la moyenne"
+#: model:ir.model.fields,help:alc_product_average_daily_sale.field_alc_average_daily_sale_average_daily_qty
+msgid "The average daily qty sold"
+msgstr "Qté moyenne journalière"
 
 #. module: alc_product_average_daily_sale
 #: model:ir.model.fields,field_description:alc_product_average_daily_sale.field_alc_average_daily_sale_date_to
@@ -231,3 +259,8 @@ msgstr "Moyenne de ventes quotidienne"
 #: model:ir.model.fields,field_description:alc_product_average_daily_sale.field_alc_average_daily_sale_config_id
 msgid "computation parameters"
 msgstr "Paramètres de calcul"
+
+#. module: alc_product_average_daily_sale
+#: model:ir.model.fields,help:alc_product_average_daily_sale.field_alc_average_daily_sale_safety
+msgid "daily stddev * safety factor * sqrt(nbr days into period without sat and sun"
+msgstr "daily stddev * safety factor * sqrt(nbr days into period without sat and sun"

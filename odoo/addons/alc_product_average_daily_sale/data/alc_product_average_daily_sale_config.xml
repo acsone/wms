@@ -10,7 +10,7 @@
     <field name="period_value">2</field>
     <field name="period_name">week</field>
     <field name="stddev_exclude_factor">3</field>
-    <field name="stddev_include_factor">2</field>
+    <field name="safety_factor">0.3</field>
     <field name="number_days_qty_in_stock">2</field>
   </record>
   <record
@@ -21,7 +21,7 @@
     <field name="period_value">13</field>
     <field name="period_name">week</field>
     <field name="stddev_exclude_factor">3</field>
-    <field name="stddev_include_factor">2</field>
+    <field name="safety_factor">0.3</field>
     <field name="number_days_qty_in_stock">2</field>
   </record>
   <record
@@ -32,7 +32,7 @@
     <field name="period_value">26</field>
     <field name="period_name">week</field>
     <field name="stddev_exclude_factor">3</field>
-    <field name="stddev_include_factor">2</field>
+    <field name="safety_factor">0.3</field>
     <field name="number_days_qty_in_stock">2</field>
   </record>
 </odoo>

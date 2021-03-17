@@ -5,6 +5,9 @@
 from odoo import fields, models
 
 import odoo.addons.decimal_precision as dp
+from odoo.addons.stock_storage_type_putaway_abc.models.stock_location import (
+    ABC_SELECTION,
+)
 
 
 class ReportStockOverview(models.AbstractModel):
@@ -48,5 +51,8 @@ class ReportStockOverview(models.AbstractModel):
         string="Min safety qty into bin",
         digits=dp.get_precision("Product Unit of Measure"),
         help="Minimal safety qty into a bin location",
+    )
+    abc_classification_level = fields.Selection(
+        selection=ABC_SELECTION, required=True, read_only=True, index=True
     )
     warehouse_id = fields.Many2one(comodel_name="stock.warehouse", required=True)

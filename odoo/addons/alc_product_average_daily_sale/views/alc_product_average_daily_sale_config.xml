@@ -14,7 +14,7 @@
         <field name="period_name" />
         <field name="number_days_qty_in_stock" />
         <field name="stddev_exclude_factor" />
-        <field name="stddev_include_factor" />
+        <field name="safety_factor" />
         <field name="warehouse_id" />
       </tree>
     </field>

@@ -18,32 +18,48 @@ class AlcAverageDailySale(models.Model):
     _auto = False
     _order = "abc_classification_level ASC, product_id ASC"
 
-    product_id = fields.Many2one(
-        "product.product", "Product", required=True, index=True
+    abc_classification_level = fields.Selection(
+        selection=ABC_SELECTION, required=True, read_only=True, index=True
     )
-    average_qty_by_sale = fields.Float(help="Average Daily Sales Qty", required=True)
-    average_daily_sales_count = fields.Integer(
+    average_daily_sales_count = fields.Float(
         help="Avarage Daily Sales Count", required=True
     )
-    std_dev = fields.Float("Qty Standard Deviation", required=True)
-    nbr_sales = fields.Integer(required=True)
-    warehouse_id = fields.Many2one(comodel_name="stock.warehouse", required=True)
-    date_from = fields.Date("From", required=True)
-    date_to = fields.Date("To", required=True)
+    average_qty_by_sale = fields.Float(help="Average Daily Sales Qty", required=True)
+    average_daily_qty = fields.Float(help="The average daily qty sold", required=True)
     config_id = fields.Many2one(
         string="computation parameters",
         comodel_name="alc.product.average.daily.sale.config",
         required=True,
     )
-    safety_bin_min_qty = fields.Float(
-        digits=dp.get_precision("Product Unit of Measure"),
-        help="Minimal safety qty into a bin location",
+    date_from = fields.Date("From", required=True)
+    date_to = fields.Date("To", required=True)
+    is_mto_product = fields.Boolean(
+        string="On Order", readonly=True, store=True, index=True,
     )
-    abc_classification_level = fields.Selection(
-        selection=ABC_SELECTION, required=True, read_only=True, index=True
-    )
+    nbr_sales = fields.Integer(required=True)
     picking_zone_id = fields.Many2one(
-        string="Picking zone", comodel_name="picking.zone", readonly=True, index=True
+        string="Picking zone", comodel_name="picking.zone", readonly=True, index=True,
+    )
+    product_id = fields.Many2one(
+        "product.product", "Product", required=True, index=True
+    )
+    safety = fields.Float(
+        required=True,
+        help="daily stddev * safety factor * sqrt(nbr days into period "
+        "without sat and sun",
+    )
+    safety_bin_min_qty = fields.Float(
+        requied=True,
+        digits=dp.get_precision("Product Unit of Measure"),
+        help="Minimal safety qty into a bin location computed as: "
+        "average daily qty * number days in stock * safety",
+    )
+    safety_bin_min_qty_old = fields.Float(
+        requied=True,
+        digits=dp.get_precision("Product Unit of Measure"),
+        help="Minimal value for the safety qty. Computed as: "
+        "number days in stock * GREATEST(average daily sales count, 1) * "
+        "(average qty by sale + (stddev * safety factor))",
     )
     sale_ok = fields.Boolean(
         string="Can be Sold",
@@ -51,9 +67,9 @@ class AlcAverageDailySale(models.Model):
         index=True,
         help="Specify if the product can be selected in a sales order line.",
     )
-    is_mto_product = fields.Boolean(
-        string="On Order", readonly=True, store=True, index=True,
-    )
+    stddev = fields.Float("Qty Standard Deviation", required=True)
+    stddev_daily = fields.Float("Daily Qty Standard Deviation", required=True)
+    warehouse_id = fields.Many2one(comodel_name="stock.warehouse", required=True)
 
     @api.model
     def get_refresh_date(self):
@@ -87,7 +103,7 @@ WITH cfg AS (
     SELECT
         *,
         -- end of the analyzed period
-        NOW()::date as date_to,
+        NOW()::date - '1 day'::interval as date_to,
         -- start of the analyzed perciod computed from the original cfg
         (NOW() - (period_value::TEXT || ' ' || period_name::TEXT)::INTERVAL):: date as date_from,
         -- the number of business days between start and end computed by
@@ -95,7 +111,7 @@ WITH cfg AS (
         (SELECT count(1) from (select EXTRACT(DOW FROM s.d::date) as dd
             FROM generate_series(
             (NOW() - (period_value::TEXT || ' ' || period_name::TEXT)::INTERVAL):: date ,
-             NOW()::date,
+             (NOW()- '1 day'::interval)::date,
              '1 day') AS s(d)) t
             WHERE dd not in(0,6)) AS nrb_days_without_sat_sun
     FROM
@@ -122,11 +138,12 @@ deliveries_last AS (
         (avg(product_uom_qty) OVER pid
             + ( stddev_samp(product_uom_qty) OVER pid * cfg.stddev_exclude_factor)
         ) as upper_bound,
-        coalesce ((stddev_samp(product_uom_qty) OVER pid), 0) as std_dev,
+        coalesce ((stddev_samp(product_uom_qty) OVER pid), 0) as stddev,
         cfg.nrb_days_without_sat_sun,
         cfg.date_from,
         cfg.date_to,
-        cfg.id as config_id
+        cfg.id as config_id,
+        sm.date
     FROM stock_move sm
         JOIN stock_location sl_src ON sm.location_id = sl_src.id
         JOIN stock_location sl_dest ON sm.location_dest_id = sl_dest.id
@@ -148,29 +165,56 @@ averages AS(
         product_id,
         warehouse_id,
         (avg(product_uom_qty) FILTER
-            (WHERE product_uom_qty BETWEEN lower_bound AND upper_bound OR std_dev = 0)
+            (WHERE product_uom_qty BETWEEN lower_bound AND upper_bound OR stddev = 0)
             )::numeric AS average_qty_by_sale,
         (count(product_uom_qty) FILTER
-            (WHERE product_uom_qty BETWEEN lower_bound AND upper_bound OR std_dev = 0)
-            / nrb_days_without_sat_sun)::numeric AS average_daily_sales_count,
+            (WHERE product_uom_qty BETWEEN lower_bound AND upper_bound OR stddev = 0)
+            / nrb_days_without_sat_sun::numeric) AS average_daily_sales_count,
         count(product_uom_qty) FILTER
-            (WHERE product_uom_qty BETWEEN lower_bound AND upper_bound OR std_dev = 0)::double precision as nbr_sales,
-        std_dev::numeric ,
+            (WHERE product_uom_qty BETWEEN lower_bound AND upper_bound OR stddev = 0)::double precision as nbr_sales,
+        stddev::numeric ,
         date_from,
         date_to,
-        config_id
+        config_id,
+        nrb_days_without_sat_sun
     FROM deliveries_last
-    GROUP BY product_id, warehouse_id, std_dev, nrb_days_without_sat_sun, date_from, date_to, config_id
+    GROUP BY product_id, warehouse_id, stddev, nrb_days_without_sat_sun, date_from, date_to, config_id
+),
+
+-- Compute the standard deviation of the average daily sales count
+-- excluding saturday and sunday
+daily_stddev AS(
+    SELECT
+        id,
+        product_id,
+        warehouse_id,
+        stddev_samp(daily_sales) as stddev_daily
+        from (
+            SELECT
+                to_char(date_trunc('day', date), 'YYYY-MM-DD'),
+                concat(warehouse_id, product_id)::integer as id,
+                product_id,
+                warehouse_id,
+                (count(product_uom_qty) FILTER
+                    (WHERE product_uom_qty BETWEEN lower_bound AND upper_bound OR stddev = 0)
+                ) as daily_sales
+            FROM deliveries_last
+            WHERE EXTRACT(DOW FROM date) <> '0' AND EXTRACT(DOW FROM date) <> '6'
+            GROUP BY product_id, warehouse_id, 1
+        ) as averages_daily group by id, product_id, warehouse_id
+
 )
+
 -- Collect the data for the materialized view
     SELECT
         t.id,
-        product_id,
+        t.product_id,
         t.warehouse_id,
         average_qty_by_sale,
         average_daily_sales_count,
+        average_qty_by_sale * average_daily_sales_count as average_daily_qty,
         nbr_sales,
-        std_dev,
+        stddev,
         date_from,
         date_to,
         config_id,
@@ -178,11 +222,20 @@ averages AS(
         picking_zone_id,
         sale_ok,
         is_mto_product,
-        cfg.number_days_qty_in_stock * GREATEST(average_daily_sales_count, 1)  * (average_qty_by_sale + (std_dev * cfg.stddev_include_factor)) as safety_bin_min_qty
+        ds.stddev_daily,
+        ds.stddev_daily * cfg.safety_factor * sqrt(nrb_days_without_sat_sun) as  safety,
+        (cfg.number_days_qty_in_stock * average_qty_by_sale * average_daily_sales_count) + (ds.stddev_daily * cfg.safety_factor * sqrt(nrb_days_without_sat_sun)) as safety_bin_min_qty,
+        cfg.number_days_qty_in_stock * GREATEST(average_daily_sales_count, 1)  * (average_qty_by_sale + (stddev * cfg.safety_factor)) as safety_bin_min_qty_old
+        -- GREATEST(
+        --    (cfg.number_days_qty_in_stock * average_qty_by_sale * average_daily_sales_count) + (ds.stddev_daily * cfg.safety_factor * sqrt(nrb_days_without_sat_sun)),
+        --    cfg.number_days_qty_in_stock * GREATEST(average_daily_sales_count, 1)  * (average_qty_by_sale + (stddev * cfg.safety_factor))
+        -- ) as safety_bin_min_qty
     FROM averages t
+    JOIN daily_stddev ds on ds.id= t.id
     JOIN alc_product_average_daily_sale_config cfg on cfg.id = t.config_id
-    JOIN product_product pp on pp.id = product_id
+    JOIN product_product pp on pp.id = t.product_id
     JOIN product_template pt on pt.id = pp.product_tmpl_id
+    ORDER BY product_id
 ) WITH NO DATA;""",
             (AsIs(self._table),),
         )

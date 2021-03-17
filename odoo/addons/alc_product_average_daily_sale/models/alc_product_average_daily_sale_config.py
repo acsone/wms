@@ -44,4 +44,6 @@ class AlcProductAverageDailySaleConfig(models.Model):
     number_days_qty_in_stock = fields.Integer(
         string="Number of days of quantities in stock", required=True, default=2
     )
-    stddev_include_factor = fields.Float(digits=(2, 2), required=True)
+    safety_factor = fields.Float(
+        digits=(2, 2), required=True, oldname="stddev_include_factor"
+    )

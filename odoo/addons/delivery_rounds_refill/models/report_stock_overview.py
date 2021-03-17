@@ -90,6 +90,7 @@ class ReportStockOverview(models.Model):
     immediate_count,
     safety_bin_min_qty,
     warehouse_id,
+    abc_classification_level,
   CASE
     WHEN coalesce(qty_in_bin_available, 0) < immediate_qty
         THEN 6000 + LEAST(999, confirmed_count)
