@@ -189,7 +189,7 @@ msgid "Standard deviation exclude factor"
 msgstr ""
 
 #. module: alc_product_average_daily_sale
-#: model:ir.model.fields,field_description:alc_product_average_daily_sale.field_alc_product_average_daily_sale_config_stddev_include_factor
+#: model:ir.model.fields,field_description:alc_product_average_daily_sale.field_alc_product_average_daily_sale_config_safety_factor
 msgid "Stddev include factor"
 msgstr ""
 

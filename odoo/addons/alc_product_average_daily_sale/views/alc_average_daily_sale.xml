@@ -49,9 +49,13 @@
         <field name="abc_classification_level" />
         <field name="average_qty_by_sale" />
         <field name="average_daily_sales_count" />
-        <field name="std_dev" />
-        <field name="nbr_sales" />
+        <field name="average_daily_qty" />
+        <field name="stddev" />
+        <field name="stddev_daily" />
+        <field name="safety" />
         <field name="safety_bin_min_qty" />
+        <!-- field name="safety_bin_min_qty_old"/ -->
+        <field name="nbr_sales" />
         <field name="date_from" />
         <field name="date_to" />
         <field name="warehouse_id" />
