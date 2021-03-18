@@ -19,7 +19,7 @@ class ResPartner(models.Model):
     specific_delivery_duration = fields.Integer(
         "Delivery duration",
         required=False,
-        help="Duration in seconds needed to deliver a specific cutomer (different from the general one)",
+        help="Duration in seconds needed to deliver a specific customer (different from the general one)",
     )
 
     @api.constrains("specific_delivery_duration", "use_specific_delivery_duration")

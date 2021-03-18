@@ -34,3 +34,29 @@ class ResPartner(models.Model):
         for window in windows:
             res[window.partner_id.id].append(window)
         return res
+
+    def get_delivery_sequence(self, day_name):
+        """
+        Return a sequence position by partner id for the given day
+
+        The sequence is computed from the delivery_widow start
+
+        :param day: The day name (see alc.delivery.week.day)
+        :return: dict partner_id:sequence
+        """
+        week_day_id = self.env["alc.delivery.week.day"]._get_id_by_name(day_name)
+        res = {}
+        windows = self.env["alc.delivery.window"].search(
+            [("partner_id", "in", self.ids), ("week_day_ids", "in", week_day_id)],
+            order="start ASC",
+        )
+        i = 1
+        for window in windows.sorted("start"):
+            if window.partner_id.id not in res:
+                res[window.partner_id.id] = i
+                i += 1
+        for partner in self.sorted("name"):
+            if partner.id not in res:
+                res[partner.id] = i
+                i += 1
+        return res

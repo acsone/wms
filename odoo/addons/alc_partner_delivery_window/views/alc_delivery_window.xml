@@ -17,6 +17,11 @@
             string="Partner"
             context="{'group_by':'partner_id'}"
           />
+          <filter
+            name="group_by_preference"
+            string="Preference"
+            context="{'group_by':'preference'}"
+          />
         </group>
       </search>
     </field>
@@ -31,6 +36,7 @@
         <field name="partner_id" />
         <field name="start" widget="float_time" />
         <field name="end" widget="float_time" />
+        <field name="preference" />
         <field name="week_day_ids" widget="many2many_tags" />
       </tree>
     </field>

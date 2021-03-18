@@ -22,6 +22,11 @@ class AlcDeliveryWindow(models.Model):
     partner_id = fields.Many2one(
         "res.partner", required=True, index=True, ondelete="cascade"
     )
+    preference = fields.Selection(
+        selection=[("mandatory", "Mandatory"), ("preferable", "Preferable")],
+        required=True,
+        default="preferable",
+    )
 
     @api.constrains("start", "end", "week_day_ids")
     def check_window_no_onverlaps(self):
