@@ -9,7 +9,6 @@
         expr="//field[@name='order_line']/form/group/group/div[field[@name='qty_delivered']]"
         position="after"
       >
-        <field name="product_qty_remains_to_deliver" invisible="1" />
         <field name="is_cancel_remaining_allowed" invisible="1" />
         <button
           name="%(action_cancel_remaining_wizard)d"
@@ -25,7 +24,7 @@
         expr="//field[@name='order_line']/tree/field[@name='qty_delivered']"
         position="after"
       >
-        <field name="product_qty_remains_to_deliver" invisible="1" />
+        <field name="is_cancel_remaining_allowed" invisible="1" />
         <button
           name="%(action_cancel_remaining_wizard)d"
           type="action"
