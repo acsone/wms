@@ -31,6 +31,10 @@ class ProductProduct(models.Model):
         default=lambda d: d.env.ref("product.product_uom_cm").id, readonly=True
     )
 
+    def convert_to_meters_no_rounding(self, measure, dimensional_uom, rounding=False):
+        uom_meters = self.env.ref("product.product_uom_meter")
+        return dimensional_uom._compute_quantity(measure, uom_meters, round=rounding)
+
     @api.depends("length", "height", "width", "dimensional_uom_id")
     def _compute_volume(self):
         for rec in self:
@@ -43,9 +47,15 @@ class ProductProduct(models.Model):
                 rec.volume = False
                 continue
 
-            length_m = rec.convert_to_meters(rec.length, rec.dimensional_uom_id)
-            height_m = rec.convert_to_meters(rec.height, rec.dimensional_uom_id)
-            width_m = rec.convert_to_meters(rec.width, rec.dimensional_uom_id)
+            length_m = rec.convert_to_meters_no_rounding(
+                rec.length, rec.dimensional_uom_id
+            )
+            height_m = rec.convert_to_meters_no_rounding(
+                rec.height, rec.dimensional_uom_id
+            )
+            width_m = rec.convert_to_meters_no_rounding(
+                rec.width, rec.dimensional_uom_id
+            )
             rec.volume = length_m * height_m * width_m
 
     @api.depends("volume")
