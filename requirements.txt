@@ -91,18 +91,19 @@ odoo10-addon-base-geoengine @ git+https://github.com/acsone/geospatial.git@035fe
 odoo10-addon-base-geolocalize-openstreetmap==10.0.1.0.1
 odoo10-addon-base-import-async @ git+https://github.com/acsone/connector-interfaces.git@cf333ca7f81e027df6c4eac3581e111b9058823b#subdirectory=setup/base_import_async
 odoo10-addon-base-import-security-group @ git+https://github.com/acsone/server-tools.git@dcefdba5bac014076f05229ba091acd8b739e164#subdirectory=setup/base_import_security_group
+odoo10-addon-base-jsonify==10.0.1.1.0
 odoo10-addon-base-m2m-custom-field @ git+https://github.com/acsone/server-tools.git@0174140279eb96d59c7c3c58084c34645e4dc1a2#subdirectory=setup/base_m2m_custom_field
 odoo10-addon-base-optional-quick-create @ git+https://github.com/acsone/server-tools.git@dcefdba5bac014076f05229ba091acd8b739e164#subdirectory=setup/base_optional_quick_create
 odoo10-addon-base-partner-sequence @ git+https://github.com/acsone/partner-contact@a9e98e0dad100bbf0ba80da7e4b83b9a65dcc3ea#subdirectory=setup/base_partner_sequence
 odoo10-addon-base-report-to-printer @ git+https://github.com/acsone/report-print-send.git@c8244592b3952b406f768f6f45faeec048b9e1a0#subdirectory=setup/base_report_to_printer
-odoo10-addon-base-rest==10.0.2.0.1
+odoo10-addon-base-rest==10.0.2.0.4
 odoo10-addon-base-suspend-security==10.0.1.0.0
 odoo10-addon-base-technical-features @ git+https://github.com/acsone/server-tools.git@dcefdba5bac014076f05229ba091acd8b739e164#subdirectory=setup/base_technical_features
 odoo10-addon-base-ubl==10.0.1.1.0
 odoo10-addon-base-unece==10.0.1.0.0.99.dev2
 odoo10-addon-base-vat-sanitized==10.0.1.0.0.99.dev9
-odoo10-addon-component==10.0.1.1.0
-odoo10-addon-component-event==10.0.1.0.0.99.dev26
+odoo10-addon-component==10.0.1.1.1
+odoo10-addon-component-event==10.0.1.0.1
 odoo10-addon-connector @ git+https://github.com/acsone/connector@de23258a4d639e696d6e4d941ba005a1577a9935#subdirectory=setup/connector
 odoo10-addon-date-range @ git+https://github.com/acsone/server-tools.git@dcefdba5bac014076f05229ba091acd8b739e164#subdirectory=setup/date_range
 odoo10-addon-despatch-advice-import @ git+https://github.com/acsone/edi.git@ec5b625a496a6bfe63f78f4e896072a3adc4f290#subdirectory=setup/despatch_advice_import
@@ -155,6 +156,8 @@ odoo10-addon-sale-stock-restocking-fee-invoicing @ git+https://github.com/acsone
 odoo10-addon-sale-triple-discount @ git+https://github.com/acsone/sale-workflow.git@0821f306cd46c82aee04452ba8bd2d9ef18706fd#subdirectory=setup/sale_triple_discount
 odoo10-addon-server-environment @ git+https://github.com/acsone/server-tools.git@dcefdba5bac014076f05229ba091acd8b739e164#subdirectory=setup/server_environment
 odoo10-addon-server-environment-ir-config-parameter @ git+https://github.com/acsone/server-tools.git@dcefdba5bac014076f05229ba091acd8b739e164#subdirectory=setup/server_environment_ir_config_parameter
+odoo10-addon-shopfloor-base @ git+https://github.com/oca/wms.git@12a38548f760b90bc0009da8fbf4c8e306ab8215#subdirectory=setup/shopfloor_base
+odoo10-addon-shopfloor-mobile-base @ git+https://github.com/oca/wms.git@12a38548f760b90bc0009da8fbf4c8e306ab8215#subdirectory=setup/shopfloor_mobile_base
 odoo10-addon-slow-statement-logger @ git+https://github.com/acsone/server-tools@a619cdf9dfae7e60ff02caa3c588058283440e16#subdirectory=setup/slow_statement_logger
 odoo10-addon-sql-request-abstract @ git+https://github.com/acsone/server-tools.git@dcefdba5bac014076f05229ba091acd8b739e164#subdirectory=setup/sql_request_abstract
 odoo10-addon-stock-available==10.0.1.0.1.99.dev6
@@ -220,6 +223,7 @@ Shapely==1.7.0
 simplejson==3.17.0
 singledispatch==3.4.0.3
 six==1.10.0
+slugify==0.0.1
 soupsieve==1.9.5
 suds-jurko==0.6
 text-unidecode==1.3

@@ -47,6 +47,8 @@ odoo10-addon-stock_operation_cleaner @ git+https://github.com/OCA/stock-logistic
 # oca/wms
 odoo10-addon-stock-storage-type @ git+https://github.com/acsone/wms.git@10.0-alc_master#subdirectory=setup/stock_storage_type
 odoo10-addon-stock-storage-type-putaway-abc @ git+https://github.com/oca/wms.git@refs/pull/103/head#subdirectory=setup/stock_storage_type_putaway_abc
+odoo10-addon-shopfloor-base @ git+https://github.com/oca/wms.git@refs/pull/204/head#subdirectory=setup/shopfloor_base
+odoo10-addon-shopfloor-mobile-base @ git+https://github.com/oca/wms.git@refs/pull/204/head#subdirectory=setup/shopfloor_mobile_base
 
 # oca/web
 odoo10-addon-web-m2x-options @ git+https://github.com/oca/web.git@refs/pull/1795/head#subdirectory=setup/web_m2x_options
