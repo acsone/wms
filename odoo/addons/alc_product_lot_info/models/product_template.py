@@ -18,5 +18,5 @@ class ProductTemplate(models.Model):
             lot_ids = rec.mapped("product_variant_ids.lot_ids")
 
             rec.lot_ids = lot_ids.sorted(
-                key=lambda l: (l.life_date, l.qty_available), reverse=True
+                key=lambda l: (l.qty_available, l.life_date), reverse=True
             )
