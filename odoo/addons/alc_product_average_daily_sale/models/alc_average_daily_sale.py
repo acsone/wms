@@ -224,12 +224,12 @@ daily_stddev AS(
         is_mto_product,
         ds.stddev_daily,
         ds.stddev_daily * cfg.safety_factor * sqrt(nrb_days_without_sat_sun) as  safety,
-        (cfg.number_days_qty_in_stock * average_qty_by_sale * average_daily_sales_count) + (ds.stddev_daily * cfg.safety_factor * sqrt(nrb_days_without_sat_sun)) as safety_bin_min_qty,
-        cfg.number_days_qty_in_stock * GREATEST(average_daily_sales_count, 1)  * (average_qty_by_sale + (stddev * cfg.safety_factor)) as safety_bin_min_qty_old
-        -- GREATEST(
-        --    (cfg.number_days_qty_in_stock * average_qty_by_sale * average_daily_sales_count) + (ds.stddev_daily * cfg.safety_factor * sqrt(nrb_days_without_sat_sun)),
-        --    cfg.number_days_qty_in_stock * GREATEST(average_daily_sales_count, 1)  * (average_qty_by_sale + (stddev * cfg.safety_factor))
-        -- ) as safety_bin_min_qty
+        (cfg.number_days_qty_in_stock * average_qty_by_sale * average_daily_sales_count) + (ds.stddev_daily * cfg.safety_factor * sqrt(nrb_days_without_sat_sun)) as safety_bin_min_qty_new,
+        cfg.number_days_qty_in_stock * GREATEST(average_daily_sales_count, 1)  * (average_qty_by_sale + (stddev * cfg.safety_factor)) as safety_bin_min_qty_old,
+        GREATEST(
+            (cfg.number_days_qty_in_stock * average_qty_by_sale * average_daily_sales_count) + (ds.stddev_daily * cfg.safety_factor * sqrt(nrb_days_without_sat_sun)),
+            (cfg.number_days_qty_in_stock *  average_qty_by_sale)
+        ) as safety_bin_min_qty
     FROM averages t
     JOIN daily_stddev ds on ds.id= t.id
     JOIN alc_product_average_daily_sale_config cfg on cfg.id = t.config_id
