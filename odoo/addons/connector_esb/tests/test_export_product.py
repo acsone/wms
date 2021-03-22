@@ -214,7 +214,7 @@ class ExportProductTestCase(ESBXMLTestCase):
             "Gescrt": "2017/07/13",
             "Cplz19": 1,
             "Gescde": 1,
-            "Cp2z08": "0.60",
+            "Cp2z08": "0.50",
             "Gescsa": 1,
             "Gesctv": u"006",
             "Cplz03": u"CNK_001",
