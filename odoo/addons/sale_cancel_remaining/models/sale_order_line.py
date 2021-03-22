@@ -29,10 +29,6 @@ class SaleOrderLine(models.Model):
         store=True,
     )
 
-    is_cancel_remaining_allowed = fields.Boolean(
-        default=False, compute="_compute_is_cancel_remaining_allowed",
-    )
-
     @api.multi
     @api.depends(
         "product_uom_qty",
@@ -49,16 +45,3 @@ class SaleOrderLine(models.Model):
                 - line.product_qty_returned
             )
             line.product_qty_remains_to_deliver = remaining_to_deliver
-
-    @api.multi
-    @api.depends("product_id", "product_qty_remains_to_deliver", "qty_invoiced")
-    def _compute_is_cancel_remaining_allowed(self):
-        for line in self:
-            if (
-                line.product_id.product_tmpl_id.type in ["consu", "product"]
-                and line.product_qty_remains_to_deliver != 0
-                and line.qty_invoiced == 0
-            ):
-                line.is_cancel_remaining_allowed = True
-            else:
-                line.is_cancel_remaining_allowed = False

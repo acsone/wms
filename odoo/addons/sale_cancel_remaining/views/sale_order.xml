@@ -9,7 +9,7 @@
         expr="//field[@name='order_line']/form/group/group/div[field[@name='qty_delivered']]"
         position="after"
       >
-        <field name="is_cancel_remaining_allowed" invisible="1" />
+        <field name="product_qty_remains_to_deliver" invisible="1" />
         <button
           name="%(action_cancel_remaining_wizard)d"
           type="action"
@@ -17,19 +17,19 @@
           colspan="2"
           string="Cancel remaining qty"
           style="margin-bottom: 1em;margin-top: 1em"
-          attrs="{'invisible': [('is_cancel_remaining_allowed', '=', False)]}"
+          attrs="{'invisible': [('product_qty_remains_to_deliver', '=', 0)]}"
         />
       </xpath>
       <xpath
         expr="//field[@name='order_line']/tree/field[@name='qty_delivered']"
         position="after"
       >
-        <field name="is_cancel_remaining_allowed" invisible="1" />
+        <field name="product_qty_remains_to_deliver" invisible="1" />
         <button
           name="%(action_cancel_remaining_wizard)d"
           type="action"
           icon="fa-ban"
-          attrs="{'invisible': [('is_cancel_remaining_allowed', '=', False)]}"
+          attrs="{'invisible': [('product_qty_remains_to_deliver', '=', 0)]}"
         />
       </xpath>
       <xpath
@@ -50,12 +50,11 @@
         <field name="product_qty_canceled" />
         <field name="product_qty_returned" />
         <field name="product_qty_remains_to_deliver" />
-        <field name="is_cancel_remaining_allowed" invisible="1" />
         <button
           name="%(sale_cancel_remaining.action_cancel_remaining_wizard)d"
           type="action"
           icon="fa-ban"
-          attrs="{'invisible': [('is_cancel_remaining_allowed', '=', False)]}"
+          attrs="{'invisible': [('product_qty_remains_to_deliver', '=', 0)]}"
         />
       </xpath>
     </field>
