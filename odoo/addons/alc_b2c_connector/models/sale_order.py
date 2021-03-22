@@ -190,9 +190,12 @@ class SaleOrder(models.Model):
 
     @api.constrains("sale_channel")
     def _check_sale_channel_selection(self):
-        if self.env.user != self.env.ref(
-            "alc_b2c_connector.alc_b2c_rest_api_user"
-        ) or self.env.user != self.env.ref("base.user_root"):
+        if (
+            self.sale_channel == "chronovet" or self.sale_channel == "placedesvetos"
+        ) and (
+            self.env.user != self.env.ref("alc_b2c_connector.alc_b2c_rest_api_user")
+            and self.env.user != self.env.ref("base.user_root")
+        ):
             raise ValidationError(
                 _("You cannot use this sale channel for manuel order")
             )
