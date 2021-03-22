@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+  <record model="ir.ui.view" id="product_pricelist_item_search_view">
+    <field name="name">product.pricelist.item.search (in alc_pricelist_items)</field>
+    <field name="model">product.pricelist.item</field>
+    <field name="arch" type="xml">
+      <search string="Products Price List Search">
+        <field name="name" />
+        <field name="min_quantity" />
+        <field name="date_start" />
+        <field name="date_end" />
+      </search>
+    </field>
+  </record>
+  <record model="ir.ui.view" id="view_product_pricelist_item_tree">
+    <field name="name">product.pricelist.item.tree (in alc_pricelist_items)</field>
+    <field name="model">product.pricelist.item</field>
+    <field name="arch" type="xml">
+      <tree create="true">
+        <field name="name" string="Applicable On" />
+        <field name="min_quantity" />
+        <field name="date_start" />
+        <field name="date_end" />
+        <field name="price" string="Price" />
+        <field name="base" invisible="1" />
+        <field name="sequence" invisible="1" />
+        <field name="price_discount" invisible="1" />
+        <field name="applied_on" invisible="1" />
+        <field name="compute_price" invisible="1" />
+      </tree>
+    </field>
+  </record>
+</odoo>
