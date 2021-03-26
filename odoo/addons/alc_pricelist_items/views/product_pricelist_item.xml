@@ -32,4 +32,14 @@
       </tree>
     </field>
   </record>
+  <record model="ir.ui.view" id="view_product_pricelist_item_form">
+    <field name="name">product.pricelist.item.form (in alc_pricelist_items)</field>
+    <field name="model">product.pricelist.item</field>
+    <field name="inherit_id" ref="product.product_pricelist_item_form_view" />
+    <field name="arch" type="xml">
+      <field name="applied_on" position="before">
+        <field name="pricelist_id" invisible="1" />
+      </field>
+    </field>
+  </record>
 </odoo>
