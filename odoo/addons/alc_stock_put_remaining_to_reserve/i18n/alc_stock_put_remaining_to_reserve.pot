@@ -52,8 +52,30 @@ msgid "Picking that goes to reserve of"
 msgstr ""
 
 #. module: alc_stock_put_remaining_to_reserve
+#: model:ir.ui.view,arch_db:alc_stock_put_remaining_to_reserve.stock_picking_search_view
+msgid "Pickings remaining to reserve"
+msgstr ""
+
+#. module: alc_stock_put_remaining_to_reserve
 #: model:ir.ui.view,arch_db:alc_stock_put_remaining_to_reserve.stock_picking_form_view
 msgid "Put remaining items in reserve"
+msgstr ""
+
+#. module: alc_stock_put_remaining_to_reserve
+#: model:ir.ui.view,arch_db:alc_stock_put_remaining_to_reserve.stock_picking_search_view
+msgid "Remaining parts of picking partially sent to reserve"
+msgstr ""
+
+#. module: alc_stock_put_remaining_to_reserve
+#: code:addons/alc_stock_put_remaining_to_reserve/models/stock_pack_operation.py:94
+#, python-format
+msgid "Reserve picking %s created"
+msgstr ""
+
+#. module: alc_stock_put_remaining_to_reserve
+#: code:addons/alc_stock_put_remaining_to_reserve/models/stock_pack_operation.py:80
+#, python-format
+msgid "Reserve picking %s updated"
 msgstr ""
 
 #. module: alc_stock_put_remaining_to_reserve
