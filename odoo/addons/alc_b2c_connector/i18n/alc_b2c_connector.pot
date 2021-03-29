@@ -214,3 +214,9 @@ msgstr ""
 msgid "Unknowns SKU(s): %s , "
 msgstr ""
 
+#. module: alc_b2c_connector
+#: code:addons/alc_b2c_connector/models/sale_order.py:200
+#, python-format
+msgid "You cannot use this sale channel for manuel order"
+msgstr ""
+
