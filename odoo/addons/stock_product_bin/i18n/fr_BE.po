@@ -92,7 +92,6 @@ msgid "Seq."
 msgstr "Séq."
 
 #. module: stock_product_bin
-#: model:ir.model.fields,field_description:stock_product_bin.field_delivery_carrier_stock_bin_ids
 #: model:ir.model.fields,field_description:stock_product_bin.field_product_product_stock_bin_ids
 #: model:ir.model.fields,field_description:stock_product_bin.field_product_template_stock_bin_ids
 msgid "Stock Bins"
