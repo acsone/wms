@@ -24,12 +24,17 @@ msgid "Display pricelist items"
 msgstr ""
 
 #. module: alc_pricelist_items
+#: model:ir.ui.view,arch_db:alc_pricelist_items.product_pricelist_item_search_view
+msgid "Name"
+msgstr ""
+
+#. module: alc_pricelist_items
 #: model:ir.ui.view,arch_db:alc_pricelist_items.view_product_pricelist_item_tree
 msgid "Price"
 msgstr ""
 
 #. module: alc_pricelist_items
-#: code:addons/alc_pricelist_items/models/product_pricelist.py:20
+#: code:addons/alc_pricelist_items/models/product_pricelist.py:23
 #, python-format
 msgid "Price list items"
 msgstr ""
@@ -41,6 +46,6 @@ msgstr ""
 
 #. module: alc_pricelist_items
 #: model:ir.ui.view,arch_db:alc_pricelist_items.product_pricelist_item_search_view
-msgid "Products Price List Search"
+msgid "Products Price List Items Search"
 msgstr ""
 
