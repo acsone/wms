@@ -34,18 +34,21 @@ msgid "Product Template"
 msgstr ""
 
 #. module: alc_product_packaging
+#: model:ir.model.fields,field_description:alc_product_packaging.field_delivery_carrier_unit_in_box
 #: model:ir.model.fields,field_description:alc_product_packaging.field_product_product_unit_in_box
 #: model:ir.model.fields,field_description:alc_product_packaging.field_product_template_unit_in_box
 msgid "Unit in box"
 msgstr ""
 
 #. module: alc_product_packaging
+#: model:ir.model.fields,field_description:alc_product_packaging.field_delivery_carrier_unit_in_pallet
 #: model:ir.model.fields,field_description:alc_product_packaging.field_product_product_unit_in_pallet
 #: model:ir.model.fields,field_description:alc_product_packaging.field_product_template_unit_in_pallet
 msgid "Unit in pallet"
 msgstr ""
 
 #. module: alc_product_packaging
+#: model:ir.model.fields,field_description:alc_product_packaging.field_delivery_carrier_unit_in_shrink_wrap
 #: model:ir.model.fields,field_description:alc_product_packaging.field_product_product_unit_in_shrink_wrap
 #: model:ir.model.fields,field_description:alc_product_packaging.field_product_template_unit_in_shrink_wrap
 msgid "Unit in shrink-wrap"
