@@ -24,14 +24,12 @@ msgid "Inactive"
 msgstr ""
 
 #. module: stock_orderpoint_product
-#: model:ir.model.fields,field_description:stock_orderpoint_product.field_delivery_carrier_orderpoint_max
 #: model:ir.model.fields,field_description:stock_orderpoint_product.field_product_product_orderpoint_max
 #: model:ir.model.fields,field_description:stock_orderpoint_product.field_product_template_orderpoint_max
 msgid "Maximum Quantity"
 msgstr ""
 
 #. module: stock_orderpoint_product
-#: model:ir.model.fields,field_description:stock_orderpoint_product.field_delivery_carrier_orderpoint_min
 #: model:ir.model.fields,field_description:stock_orderpoint_product.field_product_product_orderpoint_min
 #: model:ir.model.fields,field_description:stock_orderpoint_product.field_product_template_orderpoint_min
 msgid "Minimum Quantity"
@@ -48,7 +46,6 @@ msgid "Product Template"
 msgstr ""
 
 #. module: stock_orderpoint_product
-#: model:ir.model.fields,field_description:stock_orderpoint_product.field_delivery_carrier_orderpoint_qty_multiple
 #: model:ir.model.fields,field_description:stock_orderpoint_product.field_product_product_orderpoint_qty_multiple
 #: model:ir.model.fields,field_description:stock_orderpoint_product.field_product_template_orderpoint_qty_multiple
 msgid "Qty Multiple"
