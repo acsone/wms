@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* alc_placedesvetos
+# 	* alc_placedesvetos
 #
 msgid ""
 msgstr ""
@@ -10,6 +10,7 @@ msgstr ""
 "PO-Revision-Date: 2021-03-01 08:30+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -25,9 +26,5 @@ msgstr "Domiciliation Place des Vétos"
 msgid "Sales Order"
 msgstr "Bon de commande"
 
-#. module: alc_placedesvetos
-#: code:addons/alc_placedesvetos/models/sale_order.py:21
-#, python-format
-msgid "You cannot use this sale channel for manuel order"
-msgstr "Impossible d'utiliser ce canal de vente pour une vente manuelle"
-
+#~ msgid "You cannot use this sale channel for manuel order"
+#~ msgstr "Impossible d'utiliser ce canal de vente pour une vente manuelle"
