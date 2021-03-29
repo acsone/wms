@@ -27,12 +27,17 @@ msgid "Display pricelist items"
 msgstr "Éléments de la liste de prix"
 
 #. module: alc_pricelist_items
+#: model:ir.ui.view,arch_db:alc_pricelist_items.product_pricelist_item_search_view
+msgid "Name"
+msgstr "Nom"
+
+#. module: alc_pricelist_items
 #: model:ir.ui.view,arch_db:alc_pricelist_items.view_product_pricelist_item_tree
 msgid "Price"
 msgstr "Prix"
 
 #. module: alc_pricelist_items
-#: code:addons/alc_pricelist_items/models/product_pricelist.py:20
+#: code:addons/alc_pricelist_items/models/product_pricelist.py:23
 #, python-format
 msgid "Price list items"
 msgstr "Éléments de la liste de prix"
@@ -44,25 +49,15 @@ msgstr "Tarif"
 
 #. module: alc_pricelist_items
 #: model:ir.ui.view,arch_db:alc_pricelist_items.product_pricelist_item_search_view
-msgid "Products Price List Item Search"
+#, fuzzy
+msgid "Products Price List Items Search"
 msgstr "Recherche"
 
-#. module: alc_pricelist_items
-#: model:ir.ui.view,arch_db:alc_pricelist_items.product_pricelist_item_search_view
-msgid "Name"
-msgstr "Nom"
+#~ msgid "min_quantity"
+#~ msgstr "Quantité minimum"
 
-#. module: alc_pricelist_items
-#: model:ir.ui.view,arch_db:alc_pricelist_items.product_pricelist_item_search_view
-msgid "min_quantity"
-msgstr "Quantité minimum"
+#~ msgid "date_start"
+#~ msgstr "Date de début"
 
-#. module: alc_pricelist_items
-#: model:ir.ui.view,arch_db:alc_pricelist_items.product_pricelist_item_search_view
-msgid "date_start"
-msgstr "Date de début"
-
-#. module: alc_pricelist_items
-#: model:ir.ui.view,arch_db:alc_pricelist_items.product_pricelist_item_search_view
-msgid "date_end"
-msgstr "Date de fin"
+#~ msgid "date_end"
+#~ msgstr "Date de fin"
