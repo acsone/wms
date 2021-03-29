@@ -20,7 +20,6 @@ msgid "Business Unit"
 msgstr ""
 
 #. module: alc_product_category_business_unit
-#: model:ir.model.fields,field_description:alc_product_category_business_unit.field_delivery_carrier_business_unit_id
 #: model:ir.model.fields,field_description:alc_product_category_business_unit.field_product_product_business_unit_id
 #: model:ir.model.fields,field_description:alc_product_category_business_unit.field_product_template_business_unit_id
 #: model:ir.ui.view,arch_db:alc_product_category_business_unit.product_template_form_view
