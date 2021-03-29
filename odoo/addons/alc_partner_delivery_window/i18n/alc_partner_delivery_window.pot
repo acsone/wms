@@ -14,13 +14,13 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_partner_delivery_window
-#: code:addons/alc_partner_delivery_window/models/alc_delivery_window.py:32
+#: code:addons/alc_partner_delivery_window/models/alc_delivery_window.py:37
 #, python-format
 msgid "%s must be > %s"
 msgstr ""
 
 #. module: alc_partner_delivery_window
-#: code:addons/alc_partner_delivery_window/models/alc_delivery_window.py:72
+#: code:addons/alc_partner_delivery_window/models/alc_delivery_window.py:77
 #, python-format
 msgid "%s overlaps %s"
 msgstr ""
@@ -105,6 +105,11 @@ msgid "Last Updated on"
 msgstr ""
 
 #. module: alc_partner_delivery_window
+#: selection:alc.delivery.window,preference:0
+msgid "Mandatory"
+msgstr ""
+
+#. module: alc_partner_delivery_window
 #: selection:alc.delivery.week.day,name:0
 msgid "Monday"
 msgstr ""
@@ -137,6 +142,17 @@ msgstr ""
 #. module: alc_partner_delivery_window
 #: model:ir.model.fields,field_description:alc_partner_delivery_window.field_alc_delivery_window_partner_id
 msgid "Partner id"
+msgstr ""
+
+#. module: alc_partner_delivery_window
+#: selection:alc.delivery.window,preference:0
+msgid "Preferable"
+msgstr ""
+
+#. module: alc_partner_delivery_window
+#: model:ir.model.fields,field_description:alc_partner_delivery_window.field_alc_delivery_window_preference
+#: model:ir.ui.view,arch_db:alc_partner_delivery_window.alc_delivery_window_search_view
+msgid "Preference"
 msgstr ""
 
 #. module: alc_partner_delivery_window
