@@ -70,6 +70,8 @@ msgstr ""
 
 #. module: alc_edi_connector
 #: code:addons/alc_edi_connector/components/ubl_order_exporter.py:31
+#: code:addons/alc_edi_connector/wizards/despatch_advice_import.py:26
+#: code:addons/alc_edi_connector/wizards/order_response_import.py:32
 #, python-format
 msgid "Connector EDI"
 msgstr ""
@@ -91,6 +93,12 @@ msgstr ""
 #. module: alc_edi_connector
 #: model:ir.model,name:alc_edi_connector.model_despatch_advice_import
 msgid "Despatch Advice Import from Files"
+msgstr ""
+
+#. module: alc_edi_connector
+#: code:addons/alc_edi_connector/wizards/despatch_advice_import.py:25
+#, python-format
+msgid "DespatchAdvice received"
 msgstr ""
 
 #. module: alc_edi_connector
@@ -285,6 +293,12 @@ msgid "Name"
 msgstr ""
 
 #. module: alc_edi_connector
+#: code:addons/alc_edi_connector/wizards/order_response_import.py:25
+#, python-format
+msgid "No purchase order found for name %s."
+msgstr ""
+
+#. module: alc_edi_connector
 #: model:ir.model,name:alc_edi_connector.model_res_partner
 msgid "Partner"
 msgstr ""
@@ -343,6 +357,12 @@ msgid "Purchase Order Response Import from Files"
 msgstr ""
 
 #. module: alc_edi_connector
+#: code:addons/alc_edi_connector/wizards/order_response_import.py:49
+#, python-format
+msgid "Purchase Order has already been modified by a previous Order response."
+msgstr ""
+
+#. module: alc_edi_connector
 #: model:ir.model.fields,help:alc_edi_connector.field_edi_import_task_def_file_matcher_pattern
 msgid "Regexp used to identify the file to import"
 msgstr ""
@@ -393,6 +413,12 @@ msgstr ""
 #: code:addons/alc_edi_connector/models/edi_backend.py:84
 #, python-format
 msgid "UBL Oder Document Generation not configured on the backend %s"
+msgstr ""
+
+#. module: alc_edi_connector
+#: code:addons/alc_edi_connector/wizards/order_response_import.py:29
+#, python-format
+msgid "UBL Order document already received. This next one will not be taken into account"
 msgstr ""
 
 #. module: alc_edi_connector
