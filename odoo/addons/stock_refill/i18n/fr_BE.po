@@ -57,19 +57,16 @@ msgstr ""
 "Le produit %s doit être mis en réserve mais aucun emplacement possible trouvé"
 
 #. module: stock_refill
-#: model:ir.model.fields,field_description:stock_refill.field_delivery_carrier_qty_in_bin
 #: model:ir.model.fields,field_description:stock_refill.field_product_product_qty_in_bin
 msgid "Qty in bins"
 msgstr "Qté en bacs"
 
 #. module: stock_refill
-#: model:ir.model.fields,field_description:stock_refill.field_delivery_carrier_qty_in_parking
 #: model:ir.model.fields,field_description:stock_refill.field_product_product_qty_in_parking
 msgid "Qty in parking"
 msgstr "Qté en parking"
 
 #. module: stock_refill
-#: model:ir.model.fields,field_description:stock_refill.field_delivery_carrier_qty_in_reserve
 #: model:ir.model.fields,field_description:stock_refill.field_product_product_qty_in_reserve
 msgid "Qty in reserve"
 msgstr "Qté en réserve"
