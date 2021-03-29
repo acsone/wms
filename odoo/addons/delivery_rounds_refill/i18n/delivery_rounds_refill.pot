@@ -14,6 +14,15 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: delivery_rounds_refill
+#: model:ir.model.fields,field_description:delivery_rounds_refill.field_report_stock_overview_abc_classification_level
+#: model:ir.model.fields,field_description:delivery_rounds_refill.field_report_stock_overview_abstract_abc_classification_level
+#: model:ir.model.fields,field_description:delivery_rounds_refill.field_report_stock_refill_abstract_abc_classification_level
+#: model:ir.model.fields,field_description:delivery_rounds_refill.field_report_stock_refill_arrange_abc_classification_level
+#: model:ir.model.fields,field_description:delivery_rounds_refill.field_report_stock_refill_reassort_abc_classification_level
+msgid "Abc classification level"
+msgstr ""
+
+#. module: delivery_rounds_refill
 #: model:ir.model.fields,help:delivery_rounds_refill.field_report_stock_overview_abstract_confirmed_count
 #: model:ir.model.fields,help:delivery_rounds_refill.field_report_stock_overview_confirmed_count
 #: model:ir.model.fields,help:delivery_rounds_refill.field_report_stock_refill_abstract_confirmed_count

@@ -36,6 +36,11 @@ msgid "Average Daily Sales Qty"
 msgstr ""
 
 #. module: alc_product_average_daily_sale
+#: model:ir.model.fields,field_description:alc_product_average_daily_sale.field_alc_average_daily_sale_average_daily_qty
+msgid "Average daily qty"
+msgstr ""
+
+#. module: alc_product_average_daily_sale
 #: model:ir.actions.act_window,name:alc_product_average_daily_sale.alc_product_average_daily_sale_config_act_window
 #: model:ir.model,name:alc_product_average_daily_sale.model_alc_product_average_daily_sale_config
 #: model:ir.ui.menu,name:alc_product_average_daily_sale.alc_product_average_daily_sale_config_menu
@@ -66,6 +71,11 @@ msgstr ""
 #. module: alc_product_average_daily_sale
 #: model:ir.model.fields,field_description:alc_product_average_daily_sale.field_alc_product_average_daily_sale_config_create_date
 msgid "Created on"
+msgstr ""
+
+#. module: alc_product_average_daily_sale
+#: model:ir.model.fields,field_description:alc_product_average_daily_sale.field_alc_average_daily_sale_stddev_daily
+msgid "Daily Qty Standard Deviation"
 msgstr ""
 
 #. module: alc_product_average_daily_sale
@@ -113,7 +123,12 @@ msgstr ""
 
 #. module: alc_product_average_daily_sale
 #: model:ir.model.fields,help:alc_product_average_daily_sale.field_alc_average_daily_sale_safety_bin_min_qty
-msgid "Minimal safety qty into a bin location"
+msgid "Minimal safety qty into a bin location computed as: average daily qty * number days in stock * safety"
+msgstr ""
+
+#. module: alc_product_average_daily_sale
+#: model:ir.model.fields,help:alc_product_average_daily_sale.field_alc_average_daily_sale_safety_bin_min_qty_old
+msgid "Minimal value for the safety qty. Computed as: number days in stock * GREATEST(average daily sales count, 1) * (average qty by sale + (stddev * safety factor))"
 msgstr ""
 
 #. module: alc_product_average_daily_sale
@@ -164,13 +179,28 @@ msgid "Product"
 msgstr ""
 
 #. module: alc_product_average_daily_sale
-#: model:ir.model.fields,field_description:alc_product_average_daily_sale.field_alc_average_daily_sale_std_dev
+#: model:ir.model.fields,field_description:alc_product_average_daily_sale.field_alc_average_daily_sale_stddev
 msgid "Qty Standard Deviation"
+msgstr ""
+
+#. module: alc_product_average_daily_sale
+#: model:ir.model.fields,field_description:alc_product_average_daily_sale.field_alc_average_daily_sale_safety
+msgid "Safety"
 msgstr ""
 
 #. module: alc_product_average_daily_sale
 #: model:ir.model.fields,field_description:alc_product_average_daily_sale.field_alc_average_daily_sale_safety_bin_min_qty
 msgid "Safety bin min qty"
+msgstr ""
+
+#. module: alc_product_average_daily_sale
+#: model:ir.model.fields,field_description:alc_product_average_daily_sale.field_alc_average_daily_sale_safety_bin_min_qty_old
+msgid "Safety bin min qty old"
+msgstr ""
+
+#. module: alc_product_average_daily_sale
+#: model:ir.model.fields,field_description:alc_product_average_daily_sale.field_alc_product_average_daily_sale_config_safety_factor
+msgid "Safety factor"
 msgstr ""
 
 #. module: alc_product_average_daily_sale
@@ -189,8 +219,8 @@ msgid "Standard deviation exclude factor"
 msgstr ""
 
 #. module: alc_product_average_daily_sale
-#: model:ir.model.fields,field_description:alc_product_average_daily_sale.field_alc_product_average_daily_sale_config_safety_factor
-msgid "Stddev include factor"
+#: model:ir.model.fields,help:alc_product_average_daily_sale.field_alc_average_daily_sale_average_daily_qty
+msgid "The average daily qty sold"
 msgstr ""
 
 #. module: alc_product_average_daily_sale
@@ -226,5 +256,10 @@ msgstr ""
 #. module: alc_product_average_daily_sale
 #: model:ir.model.fields,field_description:alc_product_average_daily_sale.field_alc_average_daily_sale_config_id
 msgid "computation parameters"
+msgstr ""
+
+#. module: alc_product_average_daily_sale
+#: model:ir.model.fields,help:alc_product_average_daily_sale.field_alc_average_daily_sale_safety
+msgid "daily stddev * safety factor * sqrt(nbr days into period without sat and sun"
 msgstr ""
 

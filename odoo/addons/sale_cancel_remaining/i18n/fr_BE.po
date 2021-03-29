@@ -53,12 +53,6 @@ msgid "ID"
 msgstr "ID"
 
 #. module: sale_cancel_remaining
-#: model:ir.model.fields,field_description:sale_cancel_remaining.field_sale_order_line_is_cancel_remaining_allowed
-#, fuzzy
-msgid "Is cancel remaining allowed"
-msgstr "Annuler la quantité restante"
-
-#. module: sale_cancel_remaining
 #: model:ir.model.fields,field_description:sale_cancel_remaining.field_cancel_remaining_wizard___last_update
 msgid "Last Modified on"
 msgstr "Dernière Modification le"
@@ -134,3 +128,7 @@ msgstr ""
 #: model:ir.model,name:sale_cancel_remaining.model_cancel_remaining_wizard
 msgid "cancel.remaining.wizard"
 msgstr "cancel.remaining.wizard"
+
+#, fuzzy
+#~ msgid "Is cancel remaining allowed"
+#~ msgstr "Annuler la quantité restante"

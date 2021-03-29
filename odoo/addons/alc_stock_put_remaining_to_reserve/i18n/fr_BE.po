@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* alc_stock_put_remaining_to_reserve
+# 	* alc_stock_put_remaining_to_reserve
 #
 msgid ""
 msgstr ""
@@ -10,6 +10,7 @@ msgstr ""
 "PO-Revision-Date: 2021-03-02 13:06+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -18,8 +19,12 @@ msgstr ""
 #. module: alc_stock_put_remaining_to_reserve
 #: model:ir.model.fields,help:alc_stock_put_remaining_to_reserve.field_stock_move_picking_reserve_id
 #: model:ir.model.fields,help:alc_stock_put_remaining_to_reserve.field_stock_picking_picking_reserve_id
-msgid "If some quantities have to be put to reserve after putting some in stock, they will be placed in a new picking going to reserve"
-msgstr "Si certaines quantités doivent être placées en réserve après rangement dans le stock, elles seront placées dans un nouveau picking qui va en réserve"
+msgid ""
+"If some quantities have to be put to reserve after putting some in stock, "
+"they will be placed in a new picking going to reserve"
+msgstr ""
+"Si certaines quantités doivent être placées en réserve après rangement dans "
+"le stock, elles seront placées dans un nouveau picking qui va en réserve"
 
 #. module: alc_stock_put_remaining_to_reserve
 #: model:ir.model.fields,field_description:alc_stock_put_remaining_to_reserve.field_stock_pack_operation_is_action_put_in_reserve
@@ -69,14 +74,13 @@ msgid "Remaining parts of picking partially sent to reserve"
 msgstr "Articles restants envoyés en réserve"
 
 #. module: alc_stock_put_remaining_to_reserve
-#: code:addons/alc_stock_put_remaining_to_reserve/models/stock_pack_operation.py:93
+#: code:addons/alc_stock_put_remaining_to_reserve/models/stock_pack_operation.py:94
 #, python-format
 msgid "Reserve picking %s created"
 msgstr "Picking de réserve %s créé"
 
-
 #. module: alc_stock_put_remaining_to_reserve
-#: code:addons/alc_stock_put_remaining_to_reserve/models/stock_pack_operation.py:93
+#: code:addons/alc_stock_put_remaining_to_reserve/models/stock_pack_operation.py:80
 #, python-format
 msgid "Reserve picking %s updated"
 msgstr "Picking de réserve %s mis à jour"
@@ -96,4 +100,3 @@ msgstr "Transfert"
 #, python-format
 msgid "You are not allowed to put quantities in reserve"
 msgstr "Impossible de déplacer des quantiés en réserve"
-
