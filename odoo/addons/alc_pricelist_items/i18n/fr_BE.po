@@ -43,6 +43,27 @@ msgstr "Tarif"
 
 #. module: alc_pricelist_items
 #: model:ir.ui.view,arch_db:alc_pricelist_items.product_pricelist_item_search_view
-msgid "Products Price List Search"
+msgid "Products Price List Item Search"
 msgstr "Recherche"
+
+#. module: alc_pricelist_items
+#: model:ir.ui.view,arch_db:alc_pricelist_items.product_pricelist_item_search_view
+msgid "Name"
+msgstr "Nom"
+
+
+#. module: alc_pricelist_items
+#: model:ir.ui.view,arch_db:alc_pricelist_items.product_pricelist_item_search_view
+msgid "min_quantity"
+msgstr "Quantité minimum"
+
+#. module: alc_pricelist_items
+#: model:ir.ui.view,arch_db:alc_pricelist_items.product_pricelist_item_search_view
+msgid "date_start"
+msgstr "Date de début"
+
+#. module: alc_pricelist_items
+#: model:ir.ui.view,arch_db:alc_pricelist_items.product_pricelist_item_search_view
+msgid "date_end"
+msgstr "Date de fin"
 
