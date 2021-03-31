@@ -15,7 +15,9 @@ class ProductTemplate(models.Model):
 
     def _compute_lot_ids(self):
         for rec in self:
-            lot_ids = rec.mapped("product_variant_ids.lot_ids")
+            lot_ids = rec.mapped("product_variant_ids.lot_ids").filtered(
+                lambda l: not l.is_archived
+            )
 
             rec.lot_ids = lot_ids.sorted(
                 key=lambda l: (l.qty_available, l.life_date), reverse=True
