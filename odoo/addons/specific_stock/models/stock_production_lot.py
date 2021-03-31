@@ -6,6 +6,8 @@ import random
 import string
 from itertools import product as itertools_product
 
+from psycopg2.extensions import AsIs
+
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
@@ -357,7 +359,6 @@ class StockProductionLot(models.Model):
         - There is a new lot (with a higher expiration date) for this product
         :return:
         """
-        location_customers = self.env.ref("stock.stock_location_customers")
 
         query = """
             SELECT lot.id
@@ -370,10 +371,22 @@ class StockProductionLot(models.Model):
                           AND next_lot.id <> lot.id)
             AND NOT EXISTS (SELECT 1
                             FROM stock_quant AS quant
-                            WHERE quant.lot_id = lot.id
-                            AND quant.location_id <> %s);
+                            JOIN stock_location sl on sl.id = quant.location_id
+                            WHERE quant.lot_id = lot.id AND sl.usage = 'internal'
+                            AND (%s)
+                            );
             """
-        self.env.cr.execute(query, (location_customers.id,))
+        stock_locations = (
+            self.env["stock.warehouse"].search([]).mapped("view_location_id")
+        )
+        w = []
+        for loc in stock_locations:
+            w.append(
+                "sl.parent_left >= %s and sl.parent_right < %s"
+                % (loc.parent_left, loc.parent_right)
+            )
+        or_query = " OR ".join(w)
+        self.env.cr.execute(query, (AsIs(or_query),))
 
         result = self.env.cr.fetchall()
         lot_to_archive_ids = [lot[0] for lot in result]
