@@ -25,9 +25,9 @@ def hw_print(self, report_xmlid, printer_id=False, qty=1):
         printer.print_document(report, document, "text")
     except UnicodeEncodeError:
         raise
-    except Exception:
+    except Exception as e:
         _logger.exception("Printer unavailable")
-        raise UserError(_("Printer unavailable"))
+        raise UserError(_("Printer unavailable : %s") % str(e))
 
 
 class StockPackOperation(models.Model):
