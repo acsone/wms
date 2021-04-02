@@ -156,16 +156,21 @@ odoo10-addon-sale-stock-restocking-fee-invoicing @ git+https://github.com/acsone
 odoo10-addon-sale-triple-discount @ git+https://github.com/acsone/sale-workflow.git@0821f306cd46c82aee04452ba8bd2d9ef18706fd#subdirectory=setup/sale_triple_discount
 odoo10-addon-server-environment @ git+https://github.com/acsone/server-tools.git@dcefdba5bac014076f05229ba091acd8b739e164#subdirectory=setup/server_environment
 odoo10-addon-server-environment-ir-config-parameter @ git+https://github.com/acsone/server-tools.git@dcefdba5bac014076f05229ba091acd8b739e164#subdirectory=setup/server_environment_ir_config_parameter
-odoo10-addon-shopfloor-base @ git+https://github.com/oca/wms.git@12a38548f760b90bc0009da8fbf4c8e306ab8215#subdirectory=setup/shopfloor_base
-odoo10-addon-shopfloor-mobile-base @ git+https://github.com/oca/wms.git@12a38548f760b90bc0009da8fbf4c8e306ab8215#subdirectory=setup/shopfloor_mobile_base
+odoo10-addon-shopfloor @ git+https://github.com/acsone/wms.git@65a327b84b676fe3c9a102c35bdcbad2002ef44d#subdirectory=setup/shopfloor
+odoo10-addon-shopfloor-base @ git+https://github.com/acsone/wms.git@24249a94d3270dcd92c964e8d048dd8854e32325#subdirectory=setup/shopfloor_base
+odoo10-addon-shopfloor-mobile @ git+https://github.com/acsone/wms.git@65a327b84b676fe3c9a102c35bdcbad2002ef44d#subdirectory=setup/shopfloor_mobile
+odoo10-addon-shopfloor-mobile-base @ git+https://github.com/acsone/wms.git@24249a94d3270dcd92c964e8d048dd8854e32325#subdirectory=setup/shopfloor_mobile_base
 odoo10-addon-slow-statement-logger @ git+https://github.com/acsone/server-tools@a619cdf9dfae7e60ff02caa3c588058283440e16#subdirectory=setup/slow_statement_logger
 odoo10-addon-sql-request-abstract @ git+https://github.com/acsone/server-tools.git@dcefdba5bac014076f05229ba091acd8b739e164#subdirectory=setup/sql_request_abstract
 odoo10-addon-stock-available==10.0.1.0.1.99.dev6
 odoo10-addon-stock-available-immediately==10.0.1.0.0.99.dev7
 odoo10-addon-stock-disable-force-availability-button @ git+https://github.com/acsone/stock-logistics-workflow.git@73135ace7b20fc3b86dcb8b0459c9b8a203d1474#subdirectory=setup/stock_disable_force_availability_button
+odoo10-addon-stock-helper @ git+https://github.com/acsone/stock-logistics-warehouse@b98ba4b6b0f2720b2f9f9459eb3cb3592cc12b61#subdirectory=setup/stock_helper
 odoo10-addon-stock-location-product-restriction==10.0.1.0.1
+odoo10-addon-stock-move-common-dest @ git+https://github.com/acsone/stock-logistics-warehouse@dcc5f590c0d6db634a422bdb66710c739522f705#subdirectory=setup/stock_move_common_dest
 odoo10-addon-stock-mts-mto-rule @ git+https://github.com/acsone/stock-logistics-warehouse.git@d7cedf56da46da998d63d4e03a0e9cea2099fded#subdirectory=setup/stock_mts_mto_rule
 odoo10-addon-stock-operation-cleaner @ git+https://github.com/acsone/stock-logistics-workflow@f0fdafdbf67005ce365121815e04619a5b7ee858#subdirectory=setup/stock_operation_cleaner
+odoo10-addon-stock-picking-completion-info @ git+https://github.com/acsone/stock-logistics-warehouse@9a79c9d602932f387c1a9bd55e604e528139e88e#subdirectory=setup/stock_picking_completion_info
 odoo10-addon-stock-production-lot-expiry @ git+https://github.com/acsone/product-attribute@7e2c8cda6effefe84023848ea0c560af95e8a268#subdirectory=setup/stock_production_lot_expiry
 odoo10-addon-stock-quant-package-dimension @ git+https://github.com/acsone/stock-logistics-workflow.git@7f017cda394dd11ba2a55d47c348af9b8dd71a9f#subdirectory=setup/stock_quant_package_dimension
 odoo10-addon-stock-quant-package-product-packaging @ git+https://github.com/acsone/stock-logistics-workflow.git@3501c29e80f66a14fa9961db107c5a300a1776f3#subdirectory=setup/stock_quant_package_product_packaging

@@ -10,7 +10,7 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["shopfloor_base", "shopfloor_mobile_base"],
+    "depends": ["shopfloor", "shopfloor_mobile"],
     "data": [],
     "demo": [],
 }
