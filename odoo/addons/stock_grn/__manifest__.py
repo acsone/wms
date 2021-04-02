@@ -31,11 +31,13 @@
     "data": [
         "views/grn.xml",
         "views/stock_picking.xml",
+        "views/stock_move.xml",
         "stock_sequence.xml",
         "security/ir.model.access.csv",
         "security/ir_rule.xml",
     ],
     "tests": [],
+    "post_init_hook": "post_init_hook",
     "installable": True,
     "auto_install": False,
     "license": "AGPL-3",
