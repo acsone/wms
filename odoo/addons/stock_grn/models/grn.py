@@ -71,6 +71,10 @@ class GRN(models.Model):
         domain=[("picking_type_code", "=", "incoming")],
     )
 
+    supplier_id = fields.Many2one(
+        "res.partner", string="Supplier", related="picking_ids.partner_id", store=True
+    )
+
     def _compute_carrier_category_id(self):
         carrier_category = self.env.ref(
             "alc_partner_carrier.res_partner_category_carrier"
