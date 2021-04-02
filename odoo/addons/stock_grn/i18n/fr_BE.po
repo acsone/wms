@@ -174,3 +174,9 @@ msgstr "Type"
 #: model:ir.model,name:stock_grn.model_stock_grn_type
 msgid "stock.grn.type"
 msgstr "stock.grn.type"
+
+
+#. module: stock_grn
+#: model:ir.model,name:stock_grn.model_stock_move
+msgid "Stock Move"
+msgstr "Mouvement de stock"
