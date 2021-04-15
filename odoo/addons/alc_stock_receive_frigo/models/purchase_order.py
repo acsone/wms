@@ -25,16 +25,11 @@ class PurchaseOrder(models.Model):
                 lambda m: route_froid_frigo in m.product_id.route_ids
             )
 
-            if any(
-                [
-                    ptype in ["product", "consu"]
-                    for ptype in order.order_line.mapped("product_id.type")
-                ]
-            ):
+            if move_lines_froid_frigo:
                 pickings_frigo = order.picking_ids.filtered(
                     lambda x: x.state not in ("done", "cancel") and x.is_picking_frigo
                 )
-                if not pickings_frigo and move_lines_froid_frigo:
+                if not pickings_frigo:
 
                     res = order._prepare_picking()
                     picking_frigo = StockPicking.create(res)
