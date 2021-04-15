@@ -91,7 +91,7 @@ odoo10-addon-base-geoengine @ git+https://github.com/acsone/geospatial.git@035fe
 odoo10-addon-base-geolocalize-openstreetmap==10.0.1.0.1
 odoo10-addon-base-import-async @ git+https://github.com/acsone/connector-interfaces.git@cf333ca7f81e027df6c4eac3581e111b9058823b#subdirectory=setup/base_import_async
 odoo10-addon-base-import-security-group @ git+https://github.com/acsone/server-tools.git@dcefdba5bac014076f05229ba091acd8b739e164#subdirectory=setup/base_import_security_group
-odoo10-addon-base-jsonify==10.0.1.1.0
+odoo10-addon-base-jsonify @ git+https://github.com/acsone/server-tools.git@bf03c25182fd0f5600b1c482905a304fdd812092#subdirectory=setup/base_jsonify
 odoo10-addon-base-m2m-custom-field @ git+https://github.com/acsone/server-tools.git@0174140279eb96d59c7c3c58084c34645e4dc1a2#subdirectory=setup/base_m2m_custom_field
 odoo10-addon-base-optional-quick-create @ git+https://github.com/acsone/server-tools.git@dcefdba5bac014076f05229ba091acd8b739e164#subdirectory=setup/base_optional_quick_create
 odoo10-addon-base-partner-sequence @ git+https://github.com/acsone/partner-contact@a9e98e0dad100bbf0ba80da7e4b83b9a65dcc3ea#subdirectory=setup/base_partner_sequence
@@ -171,8 +171,9 @@ odoo10-addon-stock-move-common-dest @ git+https://github.com/acsone/stock-logist
 odoo10-addon-stock-mts-mto-rule @ git+https://github.com/acsone/stock-logistics-warehouse.git@d7cedf56da46da998d63d4e03a0e9cea2099fded#subdirectory=setup/stock_mts_mto_rule
 odoo10-addon-stock-operation-cleaner @ git+https://github.com/acsone/stock-logistics-workflow@f0fdafdbf67005ce365121815e04619a5b7ee858#subdirectory=setup/stock_operation_cleaner
 odoo10-addon-stock-picking-completion-info @ git+https://github.com/acsone/stock-logistics-warehouse@9a79c9d602932f387c1a9bd55e604e528139e88e#subdirectory=setup/stock_picking_completion_info
+odoo10-addon-stock-picking-show-backorder==10.0.1.0.0
 odoo10-addon-stock-production-lot-expiry @ git+https://github.com/acsone/product-attribute@7e2c8cda6effefe84023848ea0c560af95e8a268#subdirectory=setup/stock_production_lot_expiry
-odoo10-addon-stock-quant-package-dimension @ git+https://github.com/acsone/stock-logistics-workflow.git@7f017cda394dd11ba2a55d47c348af9b8dd71a9f#subdirectory=setup/stock_quant_package_dimension
+odoo10-addon-stock-quant-package-dimension @ git+https://github.com/acsone/stock-logistics-workflow.git@ae7de3e9637eb2c4b1d8b8cff8260ad9895585cd#subdirectory=setup/stock_quant_package_dimension
 odoo10-addon-stock-quant-package-product-packaging @ git+https://github.com/acsone/stock-logistics-workflow.git@3501c29e80f66a14fa9961db107c5a300a1776f3#subdirectory=setup/stock_quant_package_product_packaging
 odoo10-addon-stock-storage-type @ git+https://github.com/acsone/wms.git@5f5623e14fd07b61d55a9b8f14b4991ca662fe28#subdirectory=setup/stock_storage_type
 odoo10-addon-stock-storage-type-putaway-abc @ git+https://github.com/acsone/wms.git@2e6ca20271e75ed0d1e8b27dc8248e2a0837447e#subdirectory=setup/stock_storage_type_putaway_abc
