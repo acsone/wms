@@ -4,8 +4,6 @@
 
 import logging
 
-from odoo import SUPERUSER_ID, api
-
 _logger = logging.getLogger(__name__)
 
 
