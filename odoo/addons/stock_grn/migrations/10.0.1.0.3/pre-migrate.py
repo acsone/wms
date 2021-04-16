@@ -4,6 +4,8 @@
 
 import logging
 
+from odoo import SUPERUSER_ID, api
+
 _logger = logging.getLogger(__name__)
 
 
@@ -15,7 +17,7 @@ def column_exists(cr, tablename, columnname):
     return cr.rowcount
 
 
-def _set_grn_id_on_stock_move(cr, registry):
+def migrate(cr, version):
     _logger.info(
         "By default, all customers should have the flag of csv deliveryship sending to true"
     )
@@ -31,11 +33,7 @@ def _set_grn_id_on_stock_move(cr, registry):
         UPDATE
             stock_move sm
             SET grn_id = sp.grn_id
-            FROM stock_picking sp WHERE sm.picking_id = sp.id
+            FROM stock_picking sp WHERE sm.picking_id = sp.id AND sp.grn_id is not null
 
         """
     )
-
-
-def post_init_hook(cr, registry):
-    _set_grn_id_on_stock_move(cr, registry)

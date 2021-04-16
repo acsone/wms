@@ -21,7 +21,7 @@
 
 {
     "name": "Goods Received Note",
-    "version": "10.0.1.0.2",
+    "version": "10.0.1.0.3",
     "author": "BCIM",
     "maintainer": "QANSEE",
     "category": "Delivery",
@@ -37,7 +37,6 @@
         "security/ir_rule.xml",
     ],
     "tests": [],
-    "post_init_hook": "post_init_hook",
     "installable": True,
     "auto_install": False,
     "license": "AGPL-3",
