@@ -1,4 +1,5 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_01,report_stock_refill_arrange,model_report_stock_refill_arrange,stock.group_stock_user,1,0,0,0
 access_02,report_stock_refill_reassort,model_report_stock_refill_reassort,stock.group_stock_user,1,0,0,0
+access_03,report_stock_refill_arrange_retours,model_report_stock_refill_arrange_retours,stock.group_stock_user,1,0,0,0
 access_report_stock_overview,report_stock_overview,model_report_stock_overview,stock.group_stock_user,1,0,0,0
