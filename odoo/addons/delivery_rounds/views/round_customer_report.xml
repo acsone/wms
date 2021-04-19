@@ -14,4 +14,19 @@
       </t>
     </ol>
   </template>
+  <template
+    id="partner_shippings_not_allowed"
+    name="round.instance partner_shippings_not_allowed"
+  >
+    <p
+    >The following partners cannot be delivered because they are in holidays during the delivery period: </p>
+    <br />
+    <t t-foreach="customer_instances_not_allowed" t-as="partner">
+      <li>
+        <strong>
+          <span t-esc="partner.partner_id.display_name" />
+        </strong>
+      </li>
+    </t>
+  </template>
 </odoo>
