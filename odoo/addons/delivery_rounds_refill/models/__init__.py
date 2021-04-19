@@ -6,3 +6,4 @@ from . import report_stock_refill_arrange
 from . import report_stock_refill_reassort
 from . import round_instance
 from . import stock_move
+from . import report_stock_refill_arrange_retours

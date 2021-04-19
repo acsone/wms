@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+  <record id="report_stock_refill_arrange_retours_search_view" model="ir.ui.view">
+    <field
+      name="name"
+    >report.stock.refill.arrange.retours.search (in delivery_rounds_refill)</field>
+    <field name="model">report.stock.refill.arrange.retours</field>
+    <field name="arch" type="xml">
+      <search>
+        <field name="product_id" />
+        <field name="location_id" />
+        <filter
+          name="todo"
+          string="To do"
+          domain="[('refill_priority_arrange', '>', 0)]"
+        />
+      </search>
+    </field>
+  </record>
+  <record id="report_stock_refill_arrange_retours_tree_view" model="ir.ui.view">
+    <field
+      name="name"
+    >report.stock.refill.arrange.retours.tree (in delivery_rounds_refill)</field>
+    <field name="model">report.stock.refill.arrange.retours</field>
+    <field name="arch" type="xml">
+      <tree create="0" delete="0">
+        <field name="refill_priority_arrange" />
+        <field name="product_id" />
+        <field name="qty" />
+        <field name="product_uom_id" groups="product.group_uom" />
+        <field name="location_id" />
+        <field name="reservation_id" />
+        <field name="qty_in_bin" />
+        <field name="qty_in_bin_available" />
+        <field name="qty_in_reserve" />
+        <field name="qty_in_parking" />
+        <field name="immediate_qty" />
+        <field name="planned_qty" />
+        <field name="confirmed_qty" />
+        <field name="safety_bin_min_qty" />
+        <field name="abc_classification_level" />
+      </tree>
+    </field>
+  </record>
+  <record
+    model="ir.actions.act_window"
+    id="report_stock_refill_arrange_retours_act_window"
+  >
+    <field name="name">Arrangement Retours</field>
+    <field name="res_model">report.stock.refill.arrange.retours</field>
+    <field name="view_mode">tree</field>
+    <field name="context">{'search_default_todo': 1}</field>
+  </record>
+  <menuitem
+    id="menu_report_stock_refill_arrange_retours"
+    name="Arrangement Retours"
+    parent="stock.menu_stock_inventory_control"
+    sequence="40"
+    action="report_stock_refill_arrange_retours_act_window"
+  />
+</odoo>

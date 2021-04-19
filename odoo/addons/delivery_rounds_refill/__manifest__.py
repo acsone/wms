@@ -15,6 +15,7 @@
         "alc_product_average_daily_sale",
     ],
     "data": [
+        "views/report_stock_refill_arrange_retours.xml",
         "views/stock_quant.xml",
         "security/ir.model.access.csv",
         "views/report_stock_refill_arrange.xml",
