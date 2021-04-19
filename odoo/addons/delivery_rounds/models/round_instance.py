@@ -136,6 +136,34 @@ class RoundInstance(models.Model):
     delivery_failure = fields.Boolean(compute="_compute_delivery_failure")
     report_delivery = fields.Html(compute="_compute_report_delivery", readonly=True)
 
+    delivery_not_allowed = fields.Boolean(
+        "Delivery allowed", default=False, compute="_compute_delivery_not_allowed"
+    )
+    customers_delivery_not_allowed = fields.Html(
+        compute="_compute_customers_delivery_not_allowed", readonly=True
+    )
+
+    @api.depends("instance_customer_ids", "instance_customer_ids.delivery_not_allowed")
+    @api.multi
+    def _compute_delivery_not_allowed(self):
+        for record in self:
+            record.delivery_not_allowed = any(
+                icust.delivery_not_allowed for icust in record.instance_customer_ids
+            )
+
+    @api.depends("instance_customer_ids", "instance_customer_ids.delivery_not_allowed")
+    @api.multi
+    def _compute_customers_delivery_not_allowed(self):
+        customer_instances_not_allowed = []
+        for record in self:
+            for instance in record.instance_customer_ids:
+                if instance.delivery_not_allowed:
+                    customer_instances_not_allowed.append(instance)
+
+            record.customers_delivery_not_allowed = self.env.ref(
+                "delivery_rounds.partner_shippings_not_allowed"
+            ).render({"customer_instances_not_allowed": customer_instances_not_allowed})
+
     @api.depends("instance_customer_ids.delivery_error")
     @api.multi
     def _compute_delivery_failure(self):
@@ -631,6 +659,7 @@ class RoundInstance(models.Model):
     def _deliver(self, background=True):
         """ Separated for unit test """
         self.env.user.notify_info(_("Delivery round will be delivered in background."))
+
         self.filtered(lambda ri: ri.state != "done").mapped(
             "instance_customer_ids"
         ).filtered(lambda c: not c.delivered)._deliver(background=background)
@@ -797,7 +826,30 @@ class RoundInstanceCustomer(models.Model):
     )
 
     delivered = fields.Boolean("Delivered")
+    delivery_not_allowed = fields.Boolean(
+        "Delivery not allowed", compute="_compute_delivery_allowed", default=False
+    )
     delivery_error = fields.Char()
+
+    @api.depends(
+        "delivery_round_id",
+        "delivery_round_id.state",
+        "delivery_round_id.date",
+        "partner_id",
+        "delivered",
+    )
+    def _compute_delivery_allowed(self):
+        for rec in self:
+            if (
+                rec.delivery_round_id.state != "done"
+                and not rec.delivered
+                and not rec.partner_id.is_shipping_date_allowed(
+                    rec.delivery_round_id.date
+                )
+            ):
+                rec.delivery_not_allowed = True
+            else:
+                rec.delivery_not_allowed = False
 
     @api.model
     def create(self, vals):
