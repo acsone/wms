@@ -60,4 +60,7 @@
       # [FIX] web: Fix convertion of list record item to a format expected by context evaluations
     - git am "$(git format-patch -1 7495a531d4470546f31973d3b3d01abc38bf8f1c -o
       ../patches)"
+      # [FIX] web: chrome 89 event delegation #69274
+    - git am "$(git format-patch -1 121a4a3e00fc36a4c361c485b39c0cd53a0ae124 -o
+      ../patches)"
   target: acsone 10.0-alc_master
