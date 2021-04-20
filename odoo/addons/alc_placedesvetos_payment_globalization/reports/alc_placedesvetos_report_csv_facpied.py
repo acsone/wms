@@ -23,11 +23,19 @@ class AlcPlaceDesVetosReportCsvFacpied(models.AbstractModel):
                     "NFACT": invoice.number,
                     "DATFAC": invoice.date_invoice,
                     "TVA": invoice.tax_line_ids[0].tax_id.amount,
-                    "MONTHT": invoice.amount_untaxed,
+                    "MONTHT": -invoice.amount_untaxed
+                    if invoice.type == "out_refund"
+                    else invoice.amount_untaxed,
                     "ESCOMPTE": 0,
-                    "TOTALHT": invoice.amount_untaxed,
-                    "MONTTVA": invoice.amount_tax,
-                    "TOTALTTC": invoice.amount_total,
+                    "TOTALHT": -invoice.amount_untaxed
+                    if invoice.type == "out_refund"
+                    else invoice.amount_untaxed,
+                    "MONTTVA": -invoice.amount_tax
+                    if invoice.type == "out_refund"
+                    else invoice.amount_tax,
+                    "TOTALTTC": -invoice.amount_total
+                    if invoice.type == "out_refund"
+                    else invoice.amount_total,
                 }
             )
 
