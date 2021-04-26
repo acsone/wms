@@ -31,11 +31,17 @@ class AlcChronovetReportCsvFaclign(models.AbstractModel):
                             "DATFAC": invoice.date_invoice,
                             "CDART": invoice_line.product_id.default_code,
                             "DESART": invoice_line.product_id.name,
-                            "PRIXUN": invoice_line.price_unit,
-                            "PRIXREM": invoice_line.price_subtotal
-                            / invoice_line.quantity,
+                            "PRIXUN": -invoice_line.price_unit
+                            if invoice.type == "out_refund"
+                            else invoice_line.price_unit,
+                            "PRIXREM": -invoice_line.price_subtotal
+                            / invoice_line.quantity
+                            if invoice.type == "out_refund"
+                            else invoice_line.price_subtotal / invoice_line.quantity,
                             "QTFACT": invoice_line.quantity,
-                            "MONTHT": invoice_line.price_subtotal,
+                            "MONTHT": -invoice_line.price_subtotal
+                            if invoice.type == "out_refund"
+                            else invoice_line.price_subtotal,
                             "GTIN14": invoice_line.product_id.barcode,
                             "LABORATOIRE": invoice_line.product_id.supplier_id.name,
                             "TVA": invoice_line.invoice_line_tax_ids[0].amount,
@@ -43,11 +49,20 @@ class AlcChronovetReportCsvFaclign(models.AbstractModel):
                             "CATEG": invoice_line.product_id.categ_id.parent_id.name
                             if invoice_line.product_id.categ_id.parent_id
                             else invoice_line.product_id.categ_id.name,
-                            "TOTALHT": invoice_line.price_subtotal,
-                            "MONTTVA": invoice_line.price_subtotal
+                            "TOTALHT": -invoice_line.price_subtotal
+                            if invoice.type == "out_refund"
+                            else invoice_line.price_subtotal,
+                            "MONTTVA": -invoice_line.price_subtotal
+                            * invoice_line.invoice_line_tax_ids[0].amount
+                            / 100.0
+                            if invoice.type == "out_refund"
+                            else invoice_line.price_subtotal
                             * invoice_line.invoice_line_tax_ids[0].amount
                             / 100.0,
-                            "TOTALTTC": invoice_line.price_subtotal
+                            "TOTALTTC": -invoice_line.price_subtotal
+                            * (1 + invoice_line.invoice_line_tax_ids[0].amount / 100.0)
+                            if invoice.type == "out_refund"
+                            else invoice_line.price_subtotal
                             * (1 + invoice_line.invoice_line_tax_ids[0].amount / 100.0),
                             "DATLIV": sale_order.order_id.picking_ids[0].date_done,
                         }
