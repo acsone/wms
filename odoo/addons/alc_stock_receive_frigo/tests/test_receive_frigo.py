@@ -20,16 +20,12 @@ class TestReceiveFrigo(SavepointCase):
         picking_sequence = cls.warehouse.pick_type_id.sequence_id
         location_out = cls.env.ref("stock.stock_location_output")
 
-        cls.picking_zone_medoc = cls.env["picking.zone"].create(
-            {"code": "01", "name": "Medicament"}
-        )
         cls.location_medoc = cls.env["stock.location"].create(
             {
                 "name": "Medicament",
                 "usage": "internal",
                 "act_as_view": True,
                 "location_id": cls.stock_location.id,
-                "picking_zone_id": cls.picking_zone_medoc.id,
             }
         )
 
@@ -41,10 +37,8 @@ class TestReceiveFrigo(SavepointCase):
                 "default_location_src_id": cls.stock_location.id,
                 "default_location_dest_id": location_out.id,
                 "subcode": "PICK",
-                "groupbypartner": True,
                 "color": 7,
                 "sequence": 4,
-                "picking_zone_id": cls.picking_zone_medoc.id,
             }
         )
         cls.route_medoc = cls.env["stock.location.route"].create(
@@ -80,17 +74,12 @@ class TestReceiveFrigo(SavepointCase):
         cls.product_template1 = cls.product1.product_tmpl_id
         cls.product_template1.write({"route_ids": [(4, cls.route_medoc.id)]})
 
-        cls.picking_zone_froid = cls.env["picking.zone"].create(
-            {"code": "02", "name": "FROID/FRIGO"}
-        )
-
         cls.location_froid = cls.env["stock.location"].create(
             {
                 "name": "FROID/FRIGO",
                 "usage": "internal",
                 "act_as_view": True,
                 "location_id": cls.stock_location.id,
-                "picking_zone_id": cls.picking_zone_froid.id,
             }
         )
 
@@ -102,10 +91,8 @@ class TestReceiveFrigo(SavepointCase):
                 "default_location_src_id": cls.stock_location.id,
                 "default_location_dest_id": location_out.id,
                 "subcode": "PICK",
-                "groupbypartner": True,
                 "color": 7,
                 "sequence": 4,
-                "picking_zone_id": cls.picking_zone_froid.id,
             }
         )
         cls.route_froid = cls.env["stock.location.route"].create(
@@ -125,14 +112,6 @@ class TestReceiveFrigo(SavepointCase):
                         },
                     )
                 ],
-            }
-        )
-        cls.env["ir.model.data"].create(
-            {
-                "module": "__setup__",
-                "name": "stock_location_route_pick_froid",
-                "model": "stock.location.route",
-                "res_id": cls.route_froid.id,
             }
         )
 
@@ -214,6 +193,15 @@ class TestReceiveFrigo(SavepointCase):
         Test case: we confirm the po and should have 2 receptions to do
         Expected: 2 receptions (pickings) :one for medoc, one for frigo
         """
+
+        self.env["ir.model.data"].create(
+            {
+                "module": "__setup__",
+                "name": "stock_location_route_pick_froid",
+                "model": "stock.location.route",
+                "res_id": self.route_froid.id,
+            }
+        )
         self.po.button_confirm()
         pickings = self.env["stock.picking"].search([("origin", "=", self.po.name)])
         self.assertEqual(len(pickings), 2)
@@ -225,6 +213,15 @@ class TestReceiveFrigo(SavepointCase):
                     no new picking should be created for this one
         Expected: 2 receptions (pickings) :one for medoc, one for frigo
         """
+
+        self.env["ir.model.data"].create(
+            {
+                "module": "__setup__",
+                "name": "stock_location_route_pick_froid",
+                "model": "stock.location.route",
+                "res_id": self.route_froid.id,
+            }
+        )
 
         self.po.button_confirm()
         pickings = self.po.picking_ids
@@ -240,4 +237,26 @@ class TestReceiveFrigo(SavepointCase):
         picking_frigo = self.po.picking_ids.filtered(lambda x: x.is_picking_frigo)
         picking_medoc = self.po.picking_ids.filtered(lambda x: not x.is_picking_frigo)
         self.assertTrue(picking_frigo)
+        self.assertTrue(picking_medoc)
+
+    def test_02(self):
+        """
+        Data: one PO with products frigo and medoc but no route frigo
+        Test case: we confirm the po and should have 1 receptions to do.
+        Expected: 1 receptions (picking) because no route frigo
+        """
+        self.po.button_confirm()
+        pickings = self.po.picking_ids
+        self.assertEqual(len(pickings), 1)
+
+        # Resetting the state of the PO : it goes all over again into the confirm
+        # process, but pickings already exist
+        self.po.state = "draft"
+        self.po.button_confirm()
+
+        pickings = self.po.picking_ids
+        self.assertEqual(len(pickings), 1)
+        picking_frigo = self.po.picking_ids.filtered(lambda x: x.is_picking_frigo)
+        picking_medoc = self.po.picking_ids.filtered(lambda x: not x.is_picking_frigo)
+        self.assertFalse(picking_frigo)
         self.assertTrue(picking_medoc)
