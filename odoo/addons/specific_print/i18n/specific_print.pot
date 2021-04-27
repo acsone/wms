@@ -266,7 +266,7 @@ msgstr ""
 #. module: specific_print
 #: code:addons/specific_print/models/stock.py:30
 #, python-format
-msgid "Printer unavailable"
+msgid "Printer unavailable : %s"
 msgstr ""
 
 #. module: specific_print
