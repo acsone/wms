@@ -16,14 +16,15 @@ class PurchaseOrder(models.Model):
         route_froid_frigo = self.env.ref(
             "__setup__.stock_location_route_pick_froid", raise_if_not_found=False
         )
-
+        move_lines_froid_frigo = None
         for order in self:
             origin_pickings = order.picking_ids.filtered(
                 lambda x: x.state not in ("done", "cancel")
             )
-            move_lines_froid_frigo = origin_pickings.mapped("move_lines").filtered(
-                lambda m: route_froid_frigo in m.product_id.route_ids
-            )
+            if route_froid_frigo:
+                move_lines_froid_frigo = origin_pickings.mapped("move_lines").filtered(
+                    lambda m: route_froid_frigo in m.product_id.route_ids
+                )
 
             if move_lines_froid_frigo:
                 pickings_frigo = order.picking_ids.filtered(
