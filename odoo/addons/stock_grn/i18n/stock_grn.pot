@@ -68,6 +68,7 @@ msgid "From"
 msgstr ""
 
 #. module: stock_grn
+#: model:ir.ui.view,arch_db:stock_grn.stock_move_tree_view
 #: model:ir.ui.view,arch_db:stock_grn.view_grn_form
 #: model:ir.ui.view,arch_db:stock_grn.view_grn_search
 #: model:ir.ui.view,arch_db:stock_grn.view_picking_withgrn_tree
@@ -82,6 +83,7 @@ msgstr ""
 #. module: stock_grn
 #: model:ir.actions.act_window,name:stock_grn.action_grn_view
 #: model:ir.model,name:stock_grn.model_stock_grn
+#: model:ir.model.fields,field_description:stock_grn.field_stock_move_grn_id
 #: model:ir.model.fields,field_description:stock_grn.field_stock_picking_grn_id
 #: model:ir.ui.menu,name:stock_grn.menu_stock_grn
 msgid "Goods Received Note"
@@ -127,6 +129,7 @@ msgid "Name"
 msgstr ""
 
 #. module: stock_grn
+#: model:ir.ui.view,arch_db:stock_grn.stock_move_search_view
 #: model:ir.ui.view,arch_db:stock_grn.view_picking_withgrn_search
 msgid "Not Received"
 msgstr ""
@@ -142,6 +145,7 @@ msgid "Qty Pallets"
 msgstr ""
 
 #. module: stock_grn
+#: model:ir.ui.view,arch_db:stock_grn.stock_move_search_view
 #: model:ir.ui.view,arch_db:stock_grn.view_picking_withgrn_search
 msgid "Received"
 msgstr ""
@@ -149,6 +153,17 @@ msgstr ""
 #. module: stock_grn
 #: model:ir.model.fields,field_description:stock_grn.field_stock_grn_ref
 msgid "Reference"
+msgstr ""
+
+#. module: stock_grn
+#: model:ir.model,name:stock_grn.model_stock_move
+msgid "Stock Move"
+msgstr ""
+
+#. module: stock_grn
+#: model:ir.model.fields,field_description:stock_grn.field_stock_grn_supplier_id
+#: model:ir.ui.view,arch_db:stock_grn.view_grn_search
+msgid "Supplier"
 msgstr ""
 
 #. module: stock_grn
@@ -162,7 +177,7 @@ msgid "Transfer"
 msgstr ""
 
 #. module: stock_grn
-#: model:ir.model.fields,field_description:stock_grn.field_stock_grn_type_id_8451
+#: model:ir.model.fields,field_description:stock_grn.field_stock_grn_type_id_8487
 #: model:ir.model.fields,field_description:stock_grn.field_stock_grn_type_name
 msgid "Type"
 msgstr ""

@@ -71,6 +71,7 @@ msgid "From"
 msgstr "De"
 
 #. module: stock_grn
+#: model:ir.ui.view,arch_db:stock_grn.stock_move_tree_view
 #: model:ir.ui.view,arch_db:stock_grn.view_grn_form
 #: model:ir.ui.view,arch_db:stock_grn.view_grn_search
 #: model:ir.ui.view,arch_db:stock_grn.view_picking_withgrn_tree
@@ -85,6 +86,7 @@ msgstr "Date GRN"
 #. module: stock_grn
 #: model:ir.actions.act_window,name:stock_grn.action_grn_view
 #: model:ir.model,name:stock_grn.model_stock_grn
+#: model:ir.model.fields,field_description:stock_grn.field_stock_move_grn_id
 #: model:ir.model.fields,field_description:stock_grn.field_stock_picking_grn_id
 #: model:ir.ui.menu,name:stock_grn.menu_stock_grn
 msgid "Goods Received Note"
@@ -130,6 +132,7 @@ msgid "Name"
 msgstr "Nom"
 
 #. module: stock_grn
+#: model:ir.ui.view,arch_db:stock_grn.stock_move_search_view
 #: model:ir.ui.view,arch_db:stock_grn.view_picking_withgrn_search
 msgid "Not Received"
 msgstr "Pas reçu"
@@ -145,6 +148,7 @@ msgid "Qty Pallets"
 msgstr "Qté Palettes"
 
 #. module: stock_grn
+#: model:ir.ui.view,arch_db:stock_grn.stock_move_search_view
 #: model:ir.ui.view,arch_db:stock_grn.view_picking_withgrn_search
 msgid "Received"
 msgstr "Reçu"
@@ -153,6 +157,17 @@ msgstr "Reçu"
 #: model:ir.model.fields,field_description:stock_grn.field_stock_grn_ref
 msgid "Reference"
 msgstr "Référence"
+
+#. module: stock_grn
+#: model:ir.model,name:stock_grn.model_stock_move
+msgid "Stock Move"
+msgstr "Mouvement de stock"
+
+#. module: stock_grn
+#: model:ir.model.fields,field_description:stock_grn.field_stock_grn_supplier_id
+#: model:ir.ui.view,arch_db:stock_grn.view_grn_search
+msgid "Supplier"
+msgstr ""
 
 #. module: stock_grn
 #: model:ir.model,name:stock_grn.model_stock_picking_type
@@ -165,7 +180,7 @@ msgid "Transfer"
 msgstr "Transfert"
 
 #. module: stock_grn
-#: model:ir.model.fields,field_description:stock_grn.field_stock_grn_type_id_8451
+#: model:ir.model.fields,field_description:stock_grn.field_stock_grn_type_id_8487
 #: model:ir.model.fields,field_description:stock_grn.field_stock_grn_type_name
 msgid "Type"
 msgstr "Type"
@@ -174,9 +189,3 @@ msgstr "Type"
 #: model:ir.model,name:stock_grn.model_stock_grn_type
 msgid "stock.grn.type"
 msgstr "stock.grn.type"
-
-
-#. module: stock_grn
-#: model:ir.model,name:stock_grn.model_stock_move
-msgid "Stock Move"
-msgstr "Mouvement de stock"
