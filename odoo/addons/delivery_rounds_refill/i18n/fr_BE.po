@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* delivery_rounds_refill
+# 	* delivery_rounds_refill
 #
 msgid ""
 msgstr ""
@@ -10,6 +10,7 @@ msgstr ""
 "PO-Revision-Date: 2021-04-09 11:41+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -42,8 +43,12 @@ msgstr "Nombre de clients ayant une quantité restant à préparer"
 #: model:ir.model.fields,help:delivery_rounds_refill.field_report_stock_refill_arrange_planned_count
 #: model:ir.model.fields,help:delivery_rounds_refill.field_report_stock_refill_arrange_retours_planned_count
 #: model:ir.model.fields,help:delivery_rounds_refill.field_report_stock_refill_reassort_planned_count
-msgid "Amount of customers having a remaining quantity to pick in a planned delivery round"
-msgstr "Nombre de clients ayant une quantité restant à préparer dans une tournée plannifiée"
+msgid ""
+"Amount of customers having a remaining quantity to pick in a planned "
+"delivery round"
+msgstr ""
+"Nombre de clients ayant une quantité restant à préparer dans une tournée "
+"plannifiée"
 
 #. module: delivery_rounds_refill
 #: model:ir.model.fields,help:delivery_rounds_refill.field_report_stock_overview_abstract_immediate_count
@@ -52,8 +57,12 @@ msgstr "Nombre de clients ayant une quantité restant à préparer dans une tour
 #: model:ir.model.fields,help:delivery_rounds_refill.field_report_stock_refill_arrange_immediate_count
 #: model:ir.model.fields,help:delivery_rounds_refill.field_report_stock_refill_arrange_retours_immediate_count
 #: model:ir.model.fields,help:delivery_rounds_refill.field_report_stock_refill_reassort_immediate_count
-msgid "Amount of customers having a remaining quantity to pick in a started delivery round"
-msgstr "Nombre de clients ayant une quantité restant à préparer dans une tournée démarrée"
+msgid ""
+"Amount of customers having a remaining quantity to pick in a started "
+"delivery round"
+msgstr ""
+"Nombre de clients ayant une quantité restant à préparer dans une tournée "
+"démarrée"
 
 #. module: delivery_rounds_refill
 #: model:ir.actions.act_window,name:delivery_rounds_refill.action_report_stock_refill_arrange
@@ -120,7 +129,8 @@ msgstr "Clients à préparer"
 #: model:ir.model.fields,help:delivery_rounds_refill.field_report_stock_refill_arrange_retours_product_uom_id
 #: model:ir.model.fields,help:delivery_rounds_refill.field_report_stock_refill_reassort_product_uom_id
 msgid "Default Unit of Measure used for all stock operation."
-msgstr "Unité de mesure par défaut utilisée pour toutes les opérations de stock"
+msgstr ""
+"Unité de mesure par défaut utilisée pour toutes les opérations de stock"
 
 #. module: delivery_rounds_refill
 #: model:ir.model.fields,field_description:delivery_rounds_refill.field_report_stock_overview_abstract_display_name
@@ -420,8 +430,14 @@ msgstr "À faire"
 
 #. module: delivery_rounds_refill
 #: model:ir.model.fields,help:delivery_rounds_refill.field_round_instance_has_pending_reassort
-msgid "True if there are some moves in the round which are waiting availability, and for which there is a pending reassort. Delivery rounds which are not in state Open are considered as not having pending reassorts."
-msgstr "Vrai s'il existe des préparations dans la tournée qui sont en attente de disponibilité et pour lesquels on a un réassort en attente. On considère que les tournées qui ne sont pas ouvertes n'ont pas de réassort en attente."
+msgid ""
+"True if there are some moves in the round which are waiting availability, "
+"and for which there is a pending reassort. Delivery rounds which are not in "
+"state Open are considered as not having pending reassorts."
+msgstr ""
+"Vrai s'il existe des préparations dans la tournée qui sont en attente de "
+"disponibilité et pour lesquels on a un réassort en attente. On considère que "
+"les tournées qui ne sont pas ouvertes n'ont pas de réassort en attente."
 
 #. module: delivery_rounds_refill
 #: model:ir.model.fields,field_description:delivery_rounds_refill.field_report_stock_refill_abstract_product_uom_id
@@ -489,4 +505,3 @@ msgstr "report.stock.refill.wizard"
 #: model:ir.model,name:delivery_rounds_refill.model_round_instance
 msgid "round.instance"
 msgstr "round.instance"
-
