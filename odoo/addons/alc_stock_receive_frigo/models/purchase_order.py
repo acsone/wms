@@ -21,26 +21,33 @@ class PurchaseOrder(models.Model):
             origin_pickings = order.picking_ids.filtered(
                 lambda x: x.state not in ("done", "cancel")
             )
+            origin_moves = origin_pickings.mapped("move_lines")
+
             if route_froid_frigo:
                 move_lines_froid_frigo = origin_pickings.mapped("move_lines").filtered(
                     lambda m: route_froid_frigo in m.product_id.route_ids
                 )
-
             if move_lines_froid_frigo:
-                pickings_frigo = order.picking_ids.filtered(
-                    lambda x: x.state not in ("done", "cancel") and x.is_picking_frigo
-                )
-                if not pickings_frigo:
-
-                    res = order._prepare_picking()
-                    picking_frigo = StockPicking.create(res)
-                    picking_frigo.write({"is_picking_frigo": True})
-
+                # If all moves in the original picking are frigo : then all the original picking should be frigo.
+                if move_lines_froid_frigo == origin_moves:
+                    for pick in origin_pickings:
+                        pick.write({"is_picking_frigo": True})
                 else:
-                    picking_frigo = pickings_frigo[0]
+                    pickings_frigo = order.picking_ids.filtered(
+                        lambda x: x.state not in ("done", "cancel")
+                        and x.is_picking_frigo
+                    )
+                    if not pickings_frigo:
+                        res = order._prepare_picking()
+                        picking_frigo = StockPicking.create(res)
+                        picking_frigo.write({"is_picking_frigo": True})
 
-                for move_line in move_lines_froid_frigo:
-                    move_line.picking_id = picking_frigo.id
-                move_lines_froid_frigo.force_assign()
-                origin_pickings.mapped("move_lines").force_assign()
+                    else:
+                        picking_frigo = pickings_frigo[0]
+
+                    for move_line in move_lines_froid_frigo:
+                        move_line.picking_id = picking_frigo.id
+
+                    move_lines_froid_frigo.force_assign()
+                    origin_pickings.mapped("move_lines").force_assign()
         return result
