@@ -187,6 +187,38 @@ class TestReceiveFrigo(SavepointCase):
             }
         )
 
+        cls.po1 = cls.env["purchase.order"].create(
+            {
+                "partner_id": cls.partner1.id,
+                "order_line": [
+                    (
+                        0,
+                        0,
+                        {
+                            "product_id": cls.product2.id,
+                            "name": cls.product2.name,
+                            "date_planned": "2017-07-17 12:42:12",
+                            "product_qty": 30,
+                            "product_uom": cls.env.ref("product.product_uom_unit").id,
+                            "price_unit": 15,
+                        },
+                    ),
+                    (
+                        0,
+                        0,
+                        {
+                            "product_id": cls.product3.id,
+                            "name": cls.product3.name,
+                            "date_planned": "2017-07-17 12:42:12",
+                            "product_qty": 30,
+                            "product_uom": cls.env.ref("product.product_uom_unit").id,
+                            "price_unit": 15,
+                        },
+                    ),
+                ],
+            }
+        )
+
     def test_00(self):
         """
         Data: one PO with products frigo and medoc
@@ -260,3 +292,33 @@ class TestReceiveFrigo(SavepointCase):
         picking_medoc = self.po.picking_ids.filtered(lambda x: not x.is_picking_frigo)
         self.assertFalse(picking_frigo)
         self.assertTrue(picking_medoc)
+
+    def test_03(self):
+        """
+        Data: one PO with only products frigo
+        Test case: we confirm the po and should have 1 receptions to do.
+        Expected: 1 receptions (picking) because only for frigo products
+        """
+
+        self.env["ir.model.data"].create(
+            {
+                "module": "__setup__",
+                "name": "stock_location_route_pick_froid",
+                "model": "stock.location.route",
+                "res_id": self.route_froid.id,
+            }
+        )
+        self.po1.button_confirm()
+        pickings = self.env["stock.picking"].search([("origin", "=", self.po1.name)])
+        self.assertEqual(len(pickings), 1)
+        origin_picking_id = pickings.id
+
+        picking_frigo = self.po1.picking_ids.filtered(lambda x: x.is_picking_frigo)
+
+        self.assertEqual(origin_picking_id, picking_frigo.id)
+        self.assertTrue(pickings.is_picking_frigo)
+        moves_frigo = picking_frigo.mapped("move_lines")
+        self.assertEqual(len(moves_frigo), 2)
+
+        packops_frigo = picking_frigo.mapped("pack_operation_ids")
+        self.assertEqual(len(packops_frigo), 2)
