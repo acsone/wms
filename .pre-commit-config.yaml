@@ -89,13 +89,7 @@ repos:
     rev: 3.7.9
     hooks:
       - id: flake8
-        name: flake8 except __init__.py
-        exclude: /__init__\.py$
-        language_version: python2.7
-      - id: flake8
-        name: flake8 only __init__.py
-        args: ["--extend-ignore=F401"] # ignore unused imports in __init__.py
-        files: /__init__\.py$
+        name: flake8
         language_version: python2.7
   - repo: https://github.com/pre-commit/mirrors-pylint
     rev: v2.5.3
