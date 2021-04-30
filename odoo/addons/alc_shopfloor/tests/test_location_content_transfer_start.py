@@ -321,23 +321,21 @@ class LocationContentTransferStartSpecialCase(LocationContentTransferCommonCase)
         )
         self.assertEqual(len(picking), 1)
         self.assert_response_scan_destination_all(response, picking)
-        picking_operations = response["data"]["scan_destination_all"][
-            "picking_operations"
-        ]
-        self.assertEqual(3, len(picking_operations))
-        pack_operation_product_id = picking_operations[0]["id"]
-        picking_operations_pack = picking_operations[1:]
+        operations = response["data"]["scan_destination_all"]["operations"]
+        self.assertEqual(3, len(operations))
+        pack_operation_product_id = operations[0]["id"]
+        operations_pack = operations[1:]
         self.assertEqual(
             pack_operation_product_id, picking.pack_operation_product_ids.id
         )
         self.assertEqual(
-            picking_operations_pack[0]["id"], picking.pack_operation_pack_ids[0].id
+            operations_pack[0]["id"], picking.pack_operation_pack_ids[0].id
         )
-        self.assertEqual(picking_operations_pack[0]["package_src"]["id"], package.id)
+        self.assertEqual(operations_pack[0]["package_src"]["id"], package.id)
         self.assertEqual(
-            picking_operations_pack[1]["id"], picking.pack_operation_pack_ids[1].id
+            operations_pack[1]["id"], picking.pack_operation_pack_ids[1].id
         )
-        self.assertEqual(picking_operations_pack[1]["package_src"]["id"], package2.id)
+        self.assertEqual(operations_pack[1]["package_src"]["id"], package2.id)
         # product_a in a move line without package
         self.assertEqual(
             picking.pack_operation_product_ids.mapped("product_id"), self.product_a,

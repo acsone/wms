@@ -70,10 +70,10 @@ class ActionsDataCase(ActionsDataCaseBase):
 
     def test_data_operation_package(self):
         operation = self.picking.pack_operation_pack_ids[0]
-        data = self.data.picking_operations(operation)
+        data = self.data.operations(operation)
         self.assertEqual(1, len(data))
         data = data[0]
-        self.assert_schema(self.schema.picking_operation(), data)
+        self.assert_schema(self.schema.operation(), data)
         expected = {
             "id": operation.id,
             "is_done": False,
@@ -142,10 +142,10 @@ class ActionsDataCase(ActionsDataCaseBase):
             {"packaging_id": self.packaging.id}
         )
         pack_operation.write({"qty_done": 3.0, "result_package_id": result_package.id})
-        data = self.data.picking_operations(pack_operation)
+        data = self.data.operations(pack_operation)
         self.assertEqual(1, len(data))
         data = data[0]
-        self.assert_schema(self.schema.picking_operation(), data)
+        self.assert_schema(self.schema.operation(), data)
         expected = {
             "id": pack_operation.id,
             "qty_done": 3.0,
@@ -175,10 +175,10 @@ class ActionsDataCase(ActionsDataCaseBase):
 
     def test_data_pack_operation_lot(self):
         pack_operation = self.move_b.linked_move_operation_ids.operation_id
-        data = self.data.picking_operations(pack_operation)
+        data = self.data.operations(pack_operation)
         self.assertEqual(1, len(data))
         data = data[0]
-        self.assert_schema(self.schema.picking_operation(), data)
+        self.assert_schema(self.schema.operation(), data)
         lot_id = pack_operation.pack_lot_ids.lot_id
         expected = {
             "id": pack_operation.id,
@@ -198,10 +198,10 @@ class ActionsDataCase(ActionsDataCaseBase):
 
     def test_data_pack_operation_raw(self):
         pack_operation = self.move_d.linked_move_operation_ids.operation_id
-        datas = self.data.picking_operations(pack_operation)
+        datas = self.data.operations(pack_operation)
         self.assertEqual(1, len(datas))
         data = datas[0]
-        self.assert_schema(self.schema.picking_operation(), data)
+        self.assert_schema(self.schema.operation(), data)
         expected = {
             "id": pack_operation.id,
             "qty_done": 0.0,
@@ -219,10 +219,10 @@ class ActionsDataCase(ActionsDataCaseBase):
 
     def test_data_pack_operation_with_picking(self):
         pack_operation = self.move_d.linked_move_operation_ids.operation_id
-        data = self.data.picking_operations(pack_operation, with_picking=True)
+        data = self.data.operations(pack_operation, with_picking=True)
         self.assertEqual(1, len(data))
         data = data[0]
-        self.assert_schema(self.schema.picking_operation(with_picking=True), data)
+        self.assert_schema(self.schema.operation(with_picking=True), data)
         expected = {
             "id": pack_operation.id,
             "qty_done": 0.0,

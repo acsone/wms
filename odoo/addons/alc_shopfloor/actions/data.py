@@ -135,7 +135,7 @@ class DataAction(Component):
         return self._simple_record_parser() + ["ref"]
 
     @ensure_model("stock.pack.operation")
-    def _picking_operation(self, record, with_picking=False, **kw):
+    def _operation(self, record, with_picking=False, **kw):
         record = record.with_context(location=record.location_id.id)
         parser = self._pack_operation_parser
         if with_picking:
@@ -172,10 +172,10 @@ class DataAction(Component):
                 res.append(data_copy)
         return res
 
-    def picking_operations(self, records, **kw):
+    def operations(self, records, **kw):
         res = []
         for rec in records:
-            res.extend(self._picking_operation(rec, **kw))
+            res.extend(self._operation(rec, **kw))
         return res
 
     @property

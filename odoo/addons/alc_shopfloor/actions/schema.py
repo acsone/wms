@@ -22,7 +22,7 @@ class ShopfloorSchemaAction(Component):
             "scheduled_date": {"type": "string", "nullable": False, "required": True},
         }
 
-    def picking_operation(self, with_packaging=False, with_picking=False):
+    def operation(self, with_packaging=False, with_picking=False):
         schema = {
             "type": {"type": "string", "allowed": ["product", "lot", "package"]},
             "id": {"type": "integer", "required": True},

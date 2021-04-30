@@ -205,7 +205,7 @@ class ActionsDataDetailCaseBase(ActionsDataCaseBase):
         v.update(
             {
                 "complete_name": record.complete_name,
-                "reserved_picking_operations": self.data_detail.picking_operations(
+                "reserved_operations": self.data_detail.operations(
                     kw.get("pack_operations", [])
                 ),
             }

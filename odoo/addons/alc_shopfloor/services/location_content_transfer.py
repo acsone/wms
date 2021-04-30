@@ -111,11 +111,11 @@ class LocationContentTransfer(Component):
         assert len(location) == 1, "There should be only one src location at this stage"
         return {
             "location": self.data.location(location),
-            "picking_operations": self.data.picking_operations(sorter),
+            "operations": self.data.operations(sorter),
         }
 
     def _data_content_operation_for_location(self, location, next_content):
-        return {"operation": self.data.picking_operations(next_content)[0]}
+        return {"operation": self.data.operations(next_content)[0]}
 
     def _next_content(self, pickings):
         sorter = self._actions_for("location_content_transfer.sorter")
@@ -1051,9 +1051,7 @@ class ShopfloorLocationContentTransferValidatorResponse(Component):
     def _schema_all(self):
         return {
             "location": self.schemas._schema_dict_of(self.schemas.location()),
-            "picking_operations": self.schemas._schema_list_of(
-                self.schemas.picking_operation()
-            ),
+            "operations": self.schemas._schema_list_of(self.schemas.operation()),
             "confirmation_required": {
                 "type": "boolean",
                 "nullable": True,
@@ -1064,7 +1062,7 @@ class ShopfloorLocationContentTransferValidatorResponse(Component):
     @property
     def _schema_single(self):
         return {
-            "operation": self.schemas._schema_dict_of(self.schemas.picking_operation()),
+            "operation": self.schemas._schema_dict_of(self.schemas.operation()),
             "confirmation_required": {
                 "type": "boolean",
                 "nullable": True,

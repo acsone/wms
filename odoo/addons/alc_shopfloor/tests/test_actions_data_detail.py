@@ -85,7 +85,7 @@ class TestActionsDataDetailCase(ActionsDataDetailCaseBase):
             "packaging": self.data_detail.packaging(package.packaging_id),
             "weight": 20.0,
             "pickings": self.data_detail.pickings(pickings),
-            "picking_operations": self.data_detail.picking_operations(lines),
+            "operations": self.data_detail.operations(lines),
             "storage_type": {
                 "id": self.storage_type_pallet.id,
                 "name": self.storage_type_pallet.name,
@@ -121,9 +121,7 @@ class TestActionsDataDetailCase(ActionsDataDetailCaseBase):
                 "id": picking.picking_type_id.id,
                 "name": picking.picking_type_id.name,
             },
-            "picking_operations": self.data_detail.picking_operations(
-                picking.pack_operation_ids
-            ),
+            "operations": self.data_detail.operations(picking.pack_operation_ids),
             "picking_type_code": "outgoing",
         }
         self.assertEqual(data.pop("scheduled_date").split(" ")[0], "2020-05-13")
@@ -135,10 +133,10 @@ class TestActionsDataDetailCase(ActionsDataDetailCaseBase):
             {"packaging_id": self.packaging.id}
         )
         pack_operation.write({"qty_done": 3.0, "result_package_id": result_package.id})
-        data = self.data_detail.picking_operations(pack_operation)
+        data = self.data_detail.operations(pack_operation)
         self.assertEqual(1, len(data))
         data = data[0]
-        self.assert_schema(self.schema_detail.picking_operation(), data)
+        self.assert_schema(self.schema_detail.operation(), data)
         product = self.product_a.with_context(location=pack_operation.location_id.id)
         expected = {
             "id": pack_operation.id,
@@ -169,10 +167,10 @@ class TestActionsDataDetailCase(ActionsDataDetailCaseBase):
 
     def test_data_pack_operation_lot(self):
         pack_operation = self.move_b.linked_move_operation_ids.operation_id
-        data = self.data_detail.picking_operations(pack_operation)
+        data = self.data_detail.operations(pack_operation)
         self.assertEqual(1, len(data))
         data = data[0]
-        self.assert_schema(self.schema_detail.picking_operation(), data)
+        self.assert_schema(self.schema_detail.operation(), data)
         product = self.product_b.with_context(location=pack_operation.location_id.id)
         lot_id = pack_operation.pack_lot_ids.lot_id
         expected = {
@@ -193,10 +191,10 @@ class TestActionsDataDetailCase(ActionsDataDetailCaseBase):
 
     def test_data_pack_operation_raw(self):
         pack_operation = self.move_d.linked_move_operation_ids.operation_id
-        data = self.data_detail.picking_operations(pack_operation)
+        data = self.data_detail.operations(pack_operation)
         self.assertEqual(1, len(data))
         data = data[0]
-        self.assert_schema(self.schema_detail.picking_operation(), data)
+        self.assert_schema(self.schema_detail.operation(), data)
         product = self.product_d.with_context(location=pack_operation.location_id.id)
         expected = {
             "id": pack_operation.id,

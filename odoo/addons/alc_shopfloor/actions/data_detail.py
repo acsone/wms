@@ -26,8 +26,8 @@ class DataDetailAction(Component):
         return self._location_parser + [
             "complete_name",
             (
-                "reserved_pack_operation_ids:reserved_picking_operations",
-                lambda record, fname: self.picking_operations(record[fname]),
+                "reserved_pack_operation_ids:reserved_operations",
+                lambda record, fname: self.operations(record[fname]),
             ),
         ]
 
@@ -46,8 +46,8 @@ class DataDetailAction(Component):
             "min_date:scheduled_date",
             ("picking_type_id:operation_type", ["id", "name"]),
             (
-                "pack_operation_ids:picking_operations",
-                lambda record, fname: self.picking_operations(record[fname]),
+                "pack_operation_ids:operations",
+                lambda record, fname: self.operations(record[fname]),
             ),
         ]
 
@@ -68,8 +68,8 @@ class DataDetailAction(Component):
                 lambda record, fname: self.pickings(record[fname].mapped("picking_id")),
             ),
             (
-                "reserved_pack_operation_ids:picking_operations",
-                lambda record, fname: self.picking_operations(record[fname]),
+                "reserved_pack_operation_ids:operations",
+                lambda record, fname: self.operations(record[fname]),
             ),
             ("location_id:location", ["id", "display_name:name"]),
         ]

@@ -73,7 +73,7 @@ class LocationContentTransferCommonCase(CommonCase):
             response,
             next_state=state,
             data={
-                "picking_operations": self.data.picking_operations(sorter),
+                "operations": self.data.operations(sorter),
                 "location": self.data.location(location),
                 "confirmation_required": confirmation_required,
             },

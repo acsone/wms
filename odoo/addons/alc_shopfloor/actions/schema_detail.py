@@ -17,9 +17,7 @@ class ShopfloorSchemaDetailAction(Component):
                     "nullable": False,
                     "required": True,
                 },
-                "reserved_picking_operations": self._schema_list_of(
-                    self.picking_operation()
-                ),
+                "reserved_operations": self._schema_list_of(self.operation()),
             }
         )
         return schema
@@ -35,7 +33,7 @@ class ShopfloorSchemaDetailAction(Component):
                 },
                 "priority": {"type": "string", "nullable": True, "required": False},
                 "operation_type": self._schema_dict_of(self._simple_record()),
-                "picking_operations": self._schema_list_of(self.picking_operation()),
+                "operations": self._schema_list_of(self.operation()),
             }
         )
         return schema
@@ -45,7 +43,7 @@ class ShopfloorSchemaDetailAction(Component):
         schema.update(
             {
                 "pickings": self._schema_list_of(self.picking()),
-                "picking_operations": self._schema_list_of(self.picking_operation()),
+                "operations": self._schema_list_of(self.operation()),
                 "location": self._schema_dict_of(self._simple_record()),
             }
         )
