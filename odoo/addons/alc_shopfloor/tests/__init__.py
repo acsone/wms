@@ -3,6 +3,7 @@ from . import test_actions_data_detail
 from . import test_actions_search
 from . import test_location_content_transfer_putaway
 from . import test_location_content_transfer_set_destination_all
+from . import test_location_content_transfer_set_destination_lot
 from . import test_location_content_transfer_set_destination_package_or_line
 from . import test_location_content_transfer_single
 from . import test_location_content_transfer_start

@@ -335,6 +335,8 @@ class LocationContentTransfer(Component):
         for operation in operations:
             operation.qty_done = operation.product_qty
             operation.shopfloor_user_id = self.env.uid
+            for pack_lot in operation.pack_lot_ids:
+                pack_lot.qty = pack_lot.qty_todo
 
         pickings.write({"operator_id": self.env.uid})
 
@@ -605,11 +607,20 @@ class LocationContentTransfer(Component):
             # put the scanned qty (the move line) in its own move
             # (by splitting the current one)
             operation.qty_done = quantity
+            if lot_id:
+                operation.pack_lot_ids.write({"qty": 0})
+                pack_lot = operation.pack_lot_ids.filtered(
+                    lambda a, l_id=lot_id: a.lot_id.id == l_id
+                )
+                pack_lot.qty = quantity
             # We must first split pack operations and ensure that links are
             # preserved with the original move
             remaining_operation = operation._split_quantities_done_preserve_link()
             remaining_operation.qty_done = remaining_operation.product_qty
             operation.picking_id.recompute_remaining_qty(done_qtys=True)
+            # rest qty_done on pack_lot since the UI expect to have qty set to qty_todo
+            for pack_lot in remaining_operation.pack_lot_ids:
+                pack_lot.qty = pack_lot.qty_todo
             new_moves = self.env["stock.move"].browse()
             # we now must move the current operation into a new move to
             # validate it independently that the remaining operation

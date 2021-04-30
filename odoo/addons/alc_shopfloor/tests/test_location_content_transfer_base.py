@@ -52,8 +52,10 @@ class LocationContentTransferCommonCase(CommonCase):
 
         """
         pickings.write({"operator_id": cls.env.uid})
-        for line in pickings.mapped("pack_operation_ids"):
-            line.qty_done = line.product_qty
+        for operation in pickings.mapped("pack_operation_ids"):
+            operation.qty_done = operation.product_qty
+            for pack_lot in operation.pack_lot_ids:
+                pack_lot.qty = pack_lot.qty_todo
 
     def assert_response_start(self, response, message=None, popup=None):
         self.assert_response(response, next_state="start", message=message, popup=popup)

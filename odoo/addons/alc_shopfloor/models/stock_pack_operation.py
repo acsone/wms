@@ -4,7 +4,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 from odoo import _, api, exceptions, fields, models
 from odoo.exceptions import UserError
-from odoo.tools.float_utils import float_compare
+from odoo.tools.float_utils import float_compare, float_is_zero
 
 from odoo.addons.procurement.models import procurement
 
@@ -311,6 +311,14 @@ class StockPackOperation(models.Model):
                 )
                 operation.write({"product_qty": operation.qty_done})
                 operation._copy_remaining_pack_lot_ids(cpy)
+                for pack_lot in operation.pack_lot_ids:
+                    if float_is_zero(
+                        pack_lot.qty,
+                        precision_rounding=operation.product_uom_id.rounding,
+                    ):
+                        pack_lot.unlink()
+                    else:
+                        pack_lot.qty_todo = pack_lot.qty
                 for link in operation.linked_move_operation_ids:
                     link.copy(default={"operation_id": cpy.id})
                 new_op_ids.append(cpy.id)
