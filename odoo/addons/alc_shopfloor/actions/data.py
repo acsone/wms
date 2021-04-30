@@ -141,6 +141,10 @@ class DataAction(Component):
         if with_picking:
             parser += [("picking_id:picking", self._picking_parser)]
         data = self._jsonify(record, parser)
+        if record.product_id:
+            data["type"] = "product"
+        elif record.package_id:
+            data["type"] = "package"
         if data:
             data.update(
                 {
@@ -160,6 +164,7 @@ class DataAction(Component):
             )
         res = [data]
         if record.pack_lot_ids:
+            data["type"] = "lot"
             res = []
             for pack_lot in record.pack_lot_ids:
                 data_copy = data.copy()

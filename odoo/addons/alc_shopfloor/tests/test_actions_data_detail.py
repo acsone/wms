@@ -163,6 +163,7 @@ class TestActionsDataDetailCase(ActionsDataDetailCaseBase):
             "location_dest": self._expected_location(pack_operation.location_dest_id),
             "priority": "1",
             "is_done": True,
+            "type": "package",
         }
         self.assertDictEqual(data, expected)
 
@@ -186,6 +187,7 @@ class TestActionsDataDetailCase(ActionsDataDetailCaseBase):
             "location_dest": self._expected_location(pack_operation.location_dest_id),
             "priority": "1",
             "is_done": False,
+            "type": "lot",
         }
         self.assertDictEqual(data, expected)
 
@@ -207,6 +209,7 @@ class TestActionsDataDetailCase(ActionsDataDetailCaseBase):
             "location_dest": self._expected_location(pack_operation.location_dest_id),
             "priority": "1",
             "is_done": False,
+            "type": "product",
         }
         self.assertDictEqual(data, expected)
 

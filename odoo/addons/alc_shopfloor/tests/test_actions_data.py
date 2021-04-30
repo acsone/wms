@@ -87,6 +87,7 @@ class ActionsDataCase(ActionsDataCaseBase):
             "qty_done": 0.0,
             "package_dest": None,
             "priority": "1",
+            "type": "package",
         }
         self.assertDictEqual(data, expected)
 
@@ -168,6 +169,7 @@ class ActionsDataCase(ActionsDataCaseBase):
             "location_src": self._expected_location(pack_operation.location_id),
             "location_dest": self._expected_location(pack_operation.location_dest_id),
             "priority": "1",
+            "type": "package",
         }
         self.assertDictEqual(data, expected)
 
@@ -190,6 +192,7 @@ class ActionsDataCase(ActionsDataCaseBase):
             "location_src": self._expected_location(pack_operation.location_id),
             "location_dest": self._expected_location(pack_operation.location_dest_id),
             "priority": "1",
+            "type": "lot",
         }
         self.assertDictEqual(data, expected)
 
@@ -210,6 +213,7 @@ class ActionsDataCase(ActionsDataCaseBase):
             "package_src": None,
             "package_dest": None,
             "priority": "1",
+            "type": "product",
         }
         self.assertDictEqual(data, expected)
 
@@ -231,5 +235,6 @@ class ActionsDataCase(ActionsDataCaseBase):
             "picking": self.data.picking(pack_operation.picking_id),
             "priority": "1",
             "is_done": False,
+            "type": "product",
         }
         self.assertDictEqual(data, expected)
