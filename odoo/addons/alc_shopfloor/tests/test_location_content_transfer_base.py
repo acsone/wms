@@ -35,6 +35,7 @@ class LocationContentTransferCommonCase(CommonCase):
 
     def setUp(self):
         super(LocationContentTransferCommonCase, self).setUp()
+        self.env["stock.location"]._parent_store_compute()
         with self.work_on_services(menu=self.menu, profile=self.profile) as work:
             self.service = work.component(usage="location_content_transfer")
 

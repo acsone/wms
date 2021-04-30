@@ -83,6 +83,7 @@ class LocationContentTransferSetDestinationAllCase(LocationContentTransferCommon
                 }
             )
         )
+        self.env["stock.location"]._parent_store_compute()
         response = self.service.dispatch(
             "set_destination_all",
             params={"location_id": self.content_loc.id, "barcode": sub_shelf1.barcode},
@@ -122,6 +123,7 @@ class LocationContentTransferSetDestinationAllCase(LocationContentTransferCommon
                 }
             )
         )
+        self.env["stock.location"]._parent_store_compute()
         response = self.service.dispatch(
             "set_destination_all",
             params={"location_id": self.content_loc.id, "barcode": sub_shelf1.barcode},
@@ -171,6 +173,7 @@ class LocationContentTransferSetDestinationAllCase(LocationContentTransferCommon
                 }
             )
         )
+        self.env["stock.location"]._parent_store_compute()
         response = self.service.dispatch(
             "set_destination_all",
             params={"location_id": self.content_loc.id, "barcode": sub_shelf1.barcode},
@@ -216,6 +219,7 @@ class LocationContentTransferSetDestinationAllCase(LocationContentTransferCommon
                 }
             )
         )
+        self.env["stock.location"]._parent_store_compute()
         operations = self.service._find_operations(self.content_loc)
         response = self.service.dispatch(
             "set_destination_all",
