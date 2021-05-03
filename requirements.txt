@@ -96,7 +96,7 @@ odoo10-addon-base-m2m-custom-field @ git+https://github.com/acsone/server-tools.
 odoo10-addon-base-optional-quick-create @ git+https://github.com/acsone/server-tools.git@dcefdba5bac014076f05229ba091acd8b739e164#subdirectory=setup/base_optional_quick_create
 odoo10-addon-base-partner-sequence @ git+https://github.com/acsone/partner-contact@a9e98e0dad100bbf0ba80da7e4b83b9a65dcc3ea#subdirectory=setup/base_partner_sequence
 odoo10-addon-base-report-to-printer @ git+https://github.com/acsone/report-print-send.git@c8244592b3952b406f768f6f45faeec048b9e1a0#subdirectory=setup/base_report_to_printer
-odoo10-addon-base-rest==10.0.2.0.4
+odoo10-addon-base-rest==10.0.2.1.0
 odoo10-addon-base-suspend-security==10.0.1.0.0
 odoo10-addon-base-technical-features @ git+https://github.com/acsone/server-tools.git@dcefdba5bac014076f05229ba091acd8b739e164#subdirectory=setup/base_technical_features
 odoo10-addon-base-ubl==10.0.1.1.0
@@ -146,7 +146,7 @@ odoo10-addon-purchase-order-line-packaging-qty @ git+https://github.com/acsone/p
 odoo10-addon-purchase-order-ubl==10.0.1.0.0.99.dev10
 odoo10-addon-queue-job @ git+https://github.com/acsone/queue.git@1e90ecc9ba9160783d63a8f005171d0c7dabcc3d#subdirectory=setup/queue_job
 odoo10-addon-queue-job-cron @ git+https://github.com/acsone/queue.git@cecd5db2f1664e1dc14fdb590996486f638b0fb0#subdirectory=setup/queue_job_cron
-odoo10-addon-report-csv @ git+https://github.com/acsone/reporting-engine@812e21d589e65397f7e135481c8c70b146450e03#subdirectory=setup/report_csv
+odoo10-addon-report-csv==10.0.1.0.0.99.dev2
 odoo10-addon-report-xlsx @ git+https://github.com/acsone/reporting-engine.git@9d7cf09bdacc5d393bc46f8e4f43dd3bd67433a4#subdirectory=setup/report_xlsx
 odoo10-addon-report-xlsx-helper @ git+https://github.com/acsone/reporting-engine.git@9d7cf09bdacc5d393bc46f8e4f43dd3bd67433a4#subdirectory=setup/report_xlsx_helper
 odoo10-addon-report-xml==10.0.1.0.0.99.dev3
