@@ -2,4 +2,4 @@
 
 - [ ] fixes #
 
-/label ~"work in progress" /milestone %1.66 /target_branch master /wip
+/label ~"work in progress" /milestone %1.67 /target_branch master /wip
