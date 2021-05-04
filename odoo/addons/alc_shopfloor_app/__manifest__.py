@@ -13,4 +13,5 @@
     "depends": ["alc_shopfloor", "alc_shopfloor_mobile", "alc_shopfloor_user"],
     "data": [],
     "demo": [],
+    "application": True,
 }
