@@ -89,8 +89,8 @@ class StockMove(models.Model):
             self.env["stock.quant"].quants_reserve(
                 [(q, q.qty) for q in quants_to_reserve], backorder_move
             )
-            self.recalculate_move_state()
-            backorder_move.recalculate_move_state()
+            self._recompute_state()
+            backorder_move._recompute_state()
             return backorder_move
         return self.browse()
 
@@ -155,9 +155,27 @@ class StockMove(models.Model):
         return True
 
     # pylint: disable=missing-return
-    def recalculate_move_state(self):
+    def _recompute_state(self):
+        # do not use recalculate_move_state since we must also take into
+        # account the reserved_availabitlity and we MUST avoid the
+        # shit into the override done in stock_reassign_auto
         for move in self:
             if move.reserved_availability == move.product_uom_qty:
                 move.state = "assigned"
             else:
-                super(StockMove, move).recalculate_move_state()
+                vals = {}
+                reserved_quant_ids = move.reserved_quant_ids
+                if len(reserved_quant_ids) > 0 and not move.partially_available:
+                    vals["partially_available"] = True
+                if len(reserved_quant_ids) == 0 and move.partially_available:
+                    vals["partially_available"] = False
+                if move.state == "assigned":
+                    if (
+                        move.procure_method == "make_to_order"
+                        or move.find_move_ancestors()
+                    ):
+                        vals["state"] = "waiting"
+                    else:
+                        vals["state"] = "confirmed"
+                if vals:
+                    move.write(vals)
