@@ -13,4 +13,8 @@ class BaseShopfloorService(AbstractComponent):
 
     @property
     def shopfloor_user(self):
-        return request.auth_api_key.shofloor_user_id or self.env.user
+        try:
+            return request.auth_api_key.shofloor_user_id or self.env.user
+        except RuntimeError:
+            # in test mode request is unbound and raise RuntimeError
+            return self.env.user
