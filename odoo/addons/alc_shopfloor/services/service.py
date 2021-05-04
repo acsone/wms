@@ -19,6 +19,10 @@ class BaseShopfloorService(AbstractComponent):
             "search_pack_operation", propagate_kwargs=["picking_types"]
         )
 
+    @property
+    def shopfloor_user(self):
+        return self.env.user
+
 
 class BaseShopfloorProcess(AbstractComponent):
 
@@ -65,3 +69,4 @@ class BaseShopfloorProcess(AbstractComponent):
                 return self.msg_store.stock_picking_not_available(picking)
             if picking.picking_type_id not in self.picking_types:
                 return self.msg_store.cannot_move_something_in_picking_type()
+        return ""

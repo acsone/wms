@@ -12,6 +12,7 @@ odoo10-addon-purchase-order-line-packaging-qty @ git+https://github.com/oca/purc
 odoo10-addon-slow-statement-logger @ git+https://github.com/acsone/server-tools@10.0-backport-slow_statement_logger-lmi#egg=odoo10_addon_slow_statement_logger&subdirectory=setup/slow_statement_logger
 odoo10-addon-base-m2m-custom-field @ git+https://github.com/oca/server-tools.git@refs/pull/1940/head#subdirectory=setup/base_m2m_custom_field
 odoo10-addon-base-jsonify @ git+https://github.com/oca/server-tools.git@refs/pull/2068/head#subdirectory=setup/base_jsonify
+odoo10-addon-server-environment @ git+https://github.com/oca/server-tools.git@refs/pull/2076/head#subdirectory=setup/server_environment
 
 # oca/report-csv
 odoo10-addon-report-csv @ git+https://github.com/acsone/reporting-engine@10.0-backport-report_csv-lmi#egg=odoo10-addon-report-csv&subdirectory=setup/report_csv
@@ -32,7 +33,7 @@ odoo10-addon-product-abc-classification-sale-stock @ git+https://github.com/oca/
 odoo10-addon-sale-stock-restocking-fee-invoicing @ git+https://github.com/oca/account-invoicing.git@refs/pull/784/head#subdirectory=setup/sale_stock_restocking_fee_invoicing
 
 # oca/server-auth
-odoo10-addon-auth-api-key @  git+https://github.com/oca/server-auth.git@refs/pull/95/head#subdirectory=setup/auth_api_key
+odoo10-addon-auth-api-key @  git+https://github.com/oca/server-auth.git@refs/pull/271/head#subdirectory=setup/auth_api_key
 
 # oca/edi
 odoo10-addon-purchase-order-import @  git+https://github.com/oca/edi.git@refs/pull/244/head#subdirectory=setup/purchase_order_import

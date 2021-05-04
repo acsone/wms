@@ -81,7 +81,7 @@ odoo10-addon-account-type-menu @ git+https://github.com/acsone/account-financial
 odoo10-addon-analytic-tag-dimension @ git+https://github.com/acsone/account-analytic.git@daf43630f1ca58b431bb93809a331374b8530863#subdirectory=setup/analytic_tag_dimension
 odoo10-addon-analytic-tag-dimension-purchase-warning @ git+https://github.com/acsone/account-analytic.git@daf43630f1ca58b431bb93809a331374b8530863#subdirectory=setup/analytic_tag_dimension_purchase_warning
 odoo10-addon-analytic-tag-dimension-sale-warning @ git+https://github.com/acsone/account-analytic.git@daf43630f1ca58b431bb93809a331374b8530863#subdirectory=setup/analytic_tag_dimension_sale_warning
-odoo10-addon-auth-api-key @ git+https://github.com/acsone/server-auth.git@9bd64ff90b564b0995bdcf4a1757f4a1ffaa84dd#subdirectory=setup/auth_api_key
+odoo10-addon-auth-api-key @ git+https://github.com/acsone/server-auth.git@d637b768cf33f000a6120a361fa9085441f88e46#subdirectory=setup/auth_api_key
 odoo10-addon-auto-reconcile-structured-ref @ git+https://github.com/acsone/account-reconcile.git@eecb8a9dcb54145e876362efd07f76400da318f9#subdirectory=setup/auto_reconcile_structured_ref
 odoo10-addon-base-attachment-object-storage @ git+https://github.com/acsone/odoo-cloud-platform.git@45a9d1f258eb93ec619202c2cfcb76978eee46cd#subdirectory=setup/base_attachment_object_storage
 odoo10-addon-base-business-document-import==10.0.1.0.0.99.dev28
@@ -154,7 +154,7 @@ odoo10-addon-sale-exception @ git+https://github.com/acsone/sale-workflow.git@b9
 odoo10-addon-sale-stock-picking-blocking @ git+https://github.com/acsone/sale-workflow.git@b9987e4eb546f9ea8c0ee88e507072252b0d57d3#subdirectory=setup/sale_stock_picking_blocking
 odoo10-addon-sale-stock-restocking-fee-invoicing @ git+https://github.com/acsone/account-invoicing.git@9336b7cb7d51bd4cab5f8c36ebf6d7e84896b2e9#subdirectory=setup/sale_stock_restocking_fee_invoicing
 odoo10-addon-sale-triple-discount @ git+https://github.com/acsone/sale-workflow.git@0821f306cd46c82aee04452ba8bd2d9ef18706fd#subdirectory=setup/sale_triple_discount
-odoo10-addon-server-environment @ git+https://github.com/acsone/server-tools.git@dcefdba5bac014076f05229ba091acd8b739e164#subdirectory=setup/server_environment
+odoo10-addon-server-environment @ git+https://github.com/acsone/server-tools.git@9f479aae04638312da0fef70cbd9b5e22d7955f3#subdirectory=setup/server_environment
 odoo10-addon-server-environment-ir-config-parameter @ git+https://github.com/acsone/server-tools.git@dcefdba5bac014076f05229ba091acd8b739e164#subdirectory=setup/server_environment_ir_config_parameter
 odoo10-addon-shopfloor-base @ git+https://github.com/acsone/wms.git@1869b5ee0152d98321f5c71a32afbc71d5ce7787#subdirectory=setup/shopfloor_base
 odoo10-addon-shopfloor-mobile-base @ git+https://github.com/acsone/wms.git@24249a94d3270dcd92c964e8d048dd8854e32325#subdirectory=setup/shopfloor_mobile_base

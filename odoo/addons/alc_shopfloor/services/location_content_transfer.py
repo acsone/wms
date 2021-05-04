@@ -135,7 +135,7 @@ class LocationContentTransfer(Component):
 
     def _domain_recover_pickings(self):
         return [
-            ("operator_id", "=", self.env.uid),
+            ("operator_id", "=", self.shopfloor_user.id),
             ("state", "=", "assigned"),
             ("picking_type_id", "in", self.picking_types.ids),
         ]
@@ -334,11 +334,11 @@ class LocationContentTransfer(Component):
 
         for operation in operations:
             operation.qty_done = operation.product_qty
-            operation.shopfloor_user_id = self.env.uid
+            operation.shopfloor_user_id = self.shopfloor_user.id
             for pack_lot in operation.pack_lot_ids:
                 pack_lot.qty = pack_lot.qty_todo
 
-        pickings.write({"operator_id": self.env.uid})
+        pickings.write({"operator_id": self.shopfloor_user.id})
 
         unreserved_moves.action_assign()
 
@@ -358,7 +358,7 @@ class LocationContentTransfer(Component):
             ("state", "in", ("assigned", "partially_available")),
             ("qty_done", ">", 0),
             # TODO check generated SQL
-            ("picking_id.operator_id", "=", self.env.uid),
+            ("picking_id.operator_id", "=", self.shopfloor_user.id),
         ]
 
     def _find_operations(self, location):

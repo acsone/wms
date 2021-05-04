@@ -52,7 +52,7 @@ class PackOperationSearch(Component):
             domain += [
                 "|",
                 ("shopfloor_user_id", "=", False),
-                ("shopfloor_user_id", "=", self.env.uid),
+                ("shopfloor_user_id", "=", self.shopfloor_user.id),
             ]
         if picking_ready:
             domain += [("picking_id.state", "=", "assigned")]
