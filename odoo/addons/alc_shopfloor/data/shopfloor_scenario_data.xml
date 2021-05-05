@@ -1,0 +1,13 @@
+<odoo noupdate="1">
+  <record id="scenario_location_content_transfer" model="shopfloor.scenario">
+    <field name="name">Location content transfer</field>
+    <field name="key">location_content_transfer</field>
+    <field name="options_edit">
+{
+    "allow_create_moves": true,
+    "allow_unreserve_other_moves": true,
+    "allow_ignore_no_putaway_available": true
+}
+        </field>
+  </record>
+</odoo>

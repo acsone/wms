@@ -81,7 +81,7 @@ odoo10-addon-account-type-menu @ git+https://github.com/acsone/account-financial
 odoo10-addon-analytic-tag-dimension @ git+https://github.com/acsone/account-analytic.git@daf43630f1ca58b431bb93809a331374b8530863#subdirectory=setup/analytic_tag_dimension
 odoo10-addon-analytic-tag-dimension-purchase-warning @ git+https://github.com/acsone/account-analytic.git@daf43630f1ca58b431bb93809a331374b8530863#subdirectory=setup/analytic_tag_dimension_purchase_warning
 odoo10-addon-analytic-tag-dimension-sale-warning @ git+https://github.com/acsone/account-analytic.git@daf43630f1ca58b431bb93809a331374b8530863#subdirectory=setup/analytic_tag_dimension_sale_warning
-odoo10-addon-auth-api-key @ git+https://github.com/acsone/server-auth.git@9bd64ff90b564b0995bdcf4a1757f4a1ffaa84dd#subdirectory=setup/auth_api_key
+odoo10-addon-auth-api-key @ git+https://github.com/acsone/server-auth.git@d637b768cf33f000a6120a361fa9085441f88e46#subdirectory=setup/auth_api_key
 odoo10-addon-auto-reconcile-structured-ref @ git+https://github.com/acsone/account-reconcile.git@eecb8a9dcb54145e876362efd07f76400da318f9#subdirectory=setup/auto_reconcile_structured_ref
 odoo10-addon-base-attachment-object-storage @ git+https://github.com/acsone/odoo-cloud-platform.git@45a9d1f258eb93ec619202c2cfcb76978eee46cd#subdirectory=setup/base_attachment_object_storage
 odoo10-addon-base-business-document-import==10.0.1.0.0.99.dev28
@@ -91,7 +91,7 @@ odoo10-addon-base-geoengine @ git+https://github.com/acsone/geospatial.git@035fe
 odoo10-addon-base-geolocalize-openstreetmap==10.0.1.0.1
 odoo10-addon-base-import-async @ git+https://github.com/acsone/connector-interfaces.git@cf333ca7f81e027df6c4eac3581e111b9058823b#subdirectory=setup/base_import_async
 odoo10-addon-base-import-security-group @ git+https://github.com/acsone/server-tools.git@dcefdba5bac014076f05229ba091acd8b739e164#subdirectory=setup/base_import_security_group
-odoo10-addon-base-jsonify==10.0.1.1.0
+odoo10-addon-base-jsonify @ git+https://github.com/acsone/server-tools.git@bf03c25182fd0f5600b1c482905a304fdd812092#subdirectory=setup/base_jsonify
 odoo10-addon-base-m2m-custom-field @ git+https://github.com/acsone/server-tools.git@0174140279eb96d59c7c3c58084c34645e4dc1a2#subdirectory=setup/base_m2m_custom_field
 odoo10-addon-base-optional-quick-create @ git+https://github.com/acsone/server-tools.git@dcefdba5bac014076f05229ba091acd8b739e164#subdirectory=setup/base_optional_quick_create
 odoo10-addon-base-partner-sequence @ git+https://github.com/acsone/partner-contact@a9e98e0dad100bbf0ba80da7e4b83b9a65dcc3ea#subdirectory=setup/base_partner_sequence
@@ -154,20 +154,24 @@ odoo10-addon-sale-exception @ git+https://github.com/acsone/sale-workflow.git@b9
 odoo10-addon-sale-stock-picking-blocking @ git+https://github.com/acsone/sale-workflow.git@b9987e4eb546f9ea8c0ee88e507072252b0d57d3#subdirectory=setup/sale_stock_picking_blocking
 odoo10-addon-sale-stock-restocking-fee-invoicing @ git+https://github.com/acsone/account-invoicing.git@9336b7cb7d51bd4cab5f8c36ebf6d7e84896b2e9#subdirectory=setup/sale_stock_restocking_fee_invoicing
 odoo10-addon-sale-triple-discount @ git+https://github.com/acsone/sale-workflow.git@0821f306cd46c82aee04452ba8bd2d9ef18706fd#subdirectory=setup/sale_triple_discount
-odoo10-addon-server-environment @ git+https://github.com/acsone/server-tools.git@dcefdba5bac014076f05229ba091acd8b739e164#subdirectory=setup/server_environment
+odoo10-addon-server-environment @ git+https://github.com/acsone/server-tools.git@9f479aae04638312da0fef70cbd9b5e22d7955f3#subdirectory=setup/server_environment
 odoo10-addon-server-environment-ir-config-parameter @ git+https://github.com/acsone/server-tools.git@dcefdba5bac014076f05229ba091acd8b739e164#subdirectory=setup/server_environment_ir_config_parameter
-odoo10-addon-shopfloor-base @ git+https://github.com/oca/wms.git@12a38548f760b90bc0009da8fbf4c8e306ab8215#subdirectory=setup/shopfloor_base
-odoo10-addon-shopfloor-mobile-base @ git+https://github.com/oca/wms.git@12a38548f760b90bc0009da8fbf4c8e306ab8215#subdirectory=setup/shopfloor_mobile_base
+odoo10-addon-shopfloor-base @ git+https://github.com/acsone/wms.git@1869b5ee0152d98321f5c71a32afbc71d5ce7787#subdirectory=setup/shopfloor_base
+odoo10-addon-shopfloor-mobile-base @ git+https://github.com/acsone/wms.git@24249a94d3270dcd92c964e8d048dd8854e32325#subdirectory=setup/shopfloor_mobile_base
 odoo10-addon-slow-statement-logger @ git+https://github.com/acsone/server-tools@a619cdf9dfae7e60ff02caa3c588058283440e16#subdirectory=setup/slow_statement_logger
 odoo10-addon-sql-request-abstract @ git+https://github.com/acsone/server-tools.git@dcefdba5bac014076f05229ba091acd8b739e164#subdirectory=setup/sql_request_abstract
 odoo10-addon-stock-available==10.0.1.0.1.99.dev6
 odoo10-addon-stock-available-immediately==10.0.1.0.0.99.dev7
 odoo10-addon-stock-disable-force-availability-button @ git+https://github.com/acsone/stock-logistics-workflow.git@73135ace7b20fc3b86dcb8b0459c9b8a203d1474#subdirectory=setup/stock_disable_force_availability_button
+odoo10-addon-stock-helper @ git+https://github.com/acsone/stock-logistics-warehouse@b98ba4b6b0f2720b2f9f9459eb3cb3592cc12b61#subdirectory=setup/stock_helper
 odoo10-addon-stock-location-product-restriction==10.0.1.0.1
+odoo10-addon-stock-move-common-dest @ git+https://github.com/acsone/stock-logistics-warehouse@dcc5f590c0d6db634a422bdb66710c739522f705#subdirectory=setup/stock_move_common_dest
 odoo10-addon-stock-mts-mto-rule @ git+https://github.com/acsone/stock-logistics-warehouse.git@d7cedf56da46da998d63d4e03a0e9cea2099fded#subdirectory=setup/stock_mts_mto_rule
 odoo10-addon-stock-operation-cleaner @ git+https://github.com/acsone/stock-logistics-workflow@f0fdafdbf67005ce365121815e04619a5b7ee858#subdirectory=setup/stock_operation_cleaner
+odoo10-addon-stock-picking-completion-info @ git+https://github.com/acsone/stock-logistics-warehouse@9a79c9d602932f387c1a9bd55e604e528139e88e#subdirectory=setup/stock_picking_completion_info
+odoo10-addon-stock-picking-show-backorder==10.0.1.0.0
 odoo10-addon-stock-production-lot-expiry @ git+https://github.com/acsone/product-attribute@7e2c8cda6effefe84023848ea0c560af95e8a268#subdirectory=setup/stock_production_lot_expiry
-odoo10-addon-stock-quant-package-dimension @ git+https://github.com/acsone/stock-logistics-workflow.git@7f017cda394dd11ba2a55d47c348af9b8dd71a9f#subdirectory=setup/stock_quant_package_dimension
+odoo10-addon-stock-quant-package-dimension @ git+https://github.com/acsone/stock-logistics-workflow.git@ae7de3e9637eb2c4b1d8b8cff8260ad9895585cd#subdirectory=setup/stock_quant_package_dimension
 odoo10-addon-stock-quant-package-product-packaging @ git+https://github.com/acsone/stock-logistics-workflow.git@3501c29e80f66a14fa9961db107c5a300a1776f3#subdirectory=setup/stock_quant_package_product_packaging
 odoo10-addon-stock-storage-type @ git+https://github.com/acsone/wms.git@5f5623e14fd07b61d55a9b8f14b4991ca662fe28#subdirectory=setup/stock_storage_type
 odoo10-addon-stock-storage-type-putaway-abc @ git+https://github.com/acsone/wms.git@2e6ca20271e75ed0d1e8b27dc8248e2a0837447e#subdirectory=setup/stock_storage_type_putaway_abc
