@@ -10,6 +10,6 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": ["purchase", "product", "stock", "stock_picking_zone"],
-    "data": [],
+    "data": ["views/stock_picking.xml"],
     "demo": [],
 }
