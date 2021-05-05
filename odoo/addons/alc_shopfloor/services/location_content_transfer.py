@@ -591,14 +591,18 @@ class LocationContentTransfer(Component):
                 return self._response_for_scan_destination(
                     location, operation, confirmation_required=True
                 )
-
         if operation.pack_lot_ids and not lot_id:
             operations = self._find_operations(location)
             return self._response_for_start_single(
                 operations.mapped("picking_id"),
                 message=self.msg_store.scan_lot_on_product_tracked_by_lot(),
             )
-
+        if lot_id and lot_id not in operation.pack_lot_ids.mapped("lot_id").ids:
+            operations = self._find_operations(location)
+            return self._response_for_start_single(
+                operations.mapped("picking_id"),
+                message=self.msg_store.record_not_found(),
+            )
         self._lock_lines(operation)
 
         moves_to_validate = operation.mapped("linked_move_operation_ids.move_id")
@@ -618,7 +622,7 @@ class LocationContentTransfer(Component):
             remaining_operation = operation._split_quantities_done_preserve_link()
             remaining_operation.qty_done = remaining_operation.product_qty
             operation.picking_id.recompute_remaining_qty(done_qtys=True)
-            # rest qty_done on pack_lot since the UI expect to have qty set to qty_todo
+            # reset qty_done on pack_lot since the UI expect to have qty set to qty_todo
             for pack_lot in remaining_operation.pack_lot_ids:
                 pack_lot.qty = pack_lot.qty_todo
             new_moves = self.env["stock.move"].browse()
@@ -679,6 +683,81 @@ class LocationContentTransfer(Component):
             operation.shopfloor_postpone(sorter.operations())
         return self._response_for_start_single(operations.mapped("picking_id"))
 
+    def stock_out_line(self, location_id, operation_id, lot_id=None):
+        """Declare a stock out on a move line
+
+        It first ensures the stock.move only has this move line. If not, it
+        splits the move to have no side-effect on the other package levels/move
+        lines.
+
+        It unreserves the move, create an inventory at 0 in the move's source
+        location, create a second draft inventory (if none exists) to check later.
+        Finally, it cancels the move.
+
+        Transitions:
+        * start: no more content to move
+        * start_single: continue with the next package level / line
+        """
+        # TODO
+        location = self.env["stock.location"].browse(location_id)
+        if not location.exists():
+            return self._response_for_start(message=self.msg_store.record_not_found())
+        operation = self.env["stock.pack.operation"].browse(operation_id)
+        if not operation.exists():
+            operations = self._find_operations(location)
+            return self._response_for_start_single(operations.mapped("picking_id"))
+        if operation.pack_lot_ids and not lot_id:
+            operations = self._find_operations(location)
+            return self._response_for_start_single(
+                operations.mapped("picking_id"),
+                message=self.msg_store.scan_lot_on_product_tracked_by_lot(),
+            )
+        if lot_id and lot_id not in operation.pack_lot_ids.mapped("lot_id").ids:
+            operations = self._find_operations(location)
+            return self._response_for_start_single(
+                operations.mapped("picking_id"),
+                message=self.msg_store.record_not_found(),
+            )
+
+        inventory = self._actions_for("inventory")
+        src_location = operation.location_id
+        # if the stockout is for a lot, and the operation is for more than 1
+        # lot, we must split the current operation to isolate the current lot
+        # in its own operation
+        if lot_id and len(operation.pack_lot_ids) > 0:
+            operation.pack_lot_ids.write({"qty": 0})
+            pack_lot = operation.pack_lot_ids.filtered(
+                lambda a, l_id=lot_id: a.lot_id.id == l_id
+            )
+            pack_lot.qty = pack_lot.qty_todo
+            remaining_operation = operation._split_quantities_done_preserve_link()
+            remaining_operation.qty_done = remaining_operation.product_qty
+            operation.picking_id.recompute_remaining_qty(done_qtys=True)
+            # reset qty_done on pack_lot since the UI expect to have qty set to qty_todo
+            for pack_lot in remaining_operation.pack_lot_ids:
+                pack_lot.qty = pack_lot.qty_todo
+
+        lot = self.env["stock.production.lot"].browse(lot_id)
+
+        moves = operation.linked_move_operation_ids.mapped("move_id")
+        # first split other operation
+        for link in operation.linked_move_operation_ids:
+            move = link.move_id
+            move.split_other_pack_operations(operation)
+
+        package = operation.package_id
+        moves.do_unreserve()
+        moves.mapped("pack_operation_ids").unlink()
+        moves._recompute_state()
+        for move in moves:
+            # Create an inventory at 0 in the move's source location
+            inventory.create_stock_issue(move, src_location, package, lot)
+            # Create a draft inventory to control stock
+            inventory.create_control_stock(src_location, move.product_id, package, lot)
+        moves.action_cancel()
+        operations = self._find_operations(location)
+        return self._response_for_start_single(operations.mapped("picking_id"))
+
     def _unreserve_other_operations(self, location, operations):
         """Unreserve move in location in another picking type
 
@@ -711,235 +790,6 @@ class LocationContentTransfer(Component):
         unreserved_moves.do_unreserve()
         return (operations - operations_other_picking_types, unreserved_moves, None)
 
-    # ######
-    # TODO #
-    # ######
-    def __set_destination_package(
-        self, location_id, package_level_id, barcode, confirmation=False
-    ):
-        # TODO
-        """Scan destination location for package level
-
-        If the move has other move lines / package levels it has to be split
-        so we can post only this part.
-
-        After the destination is set, the move is set to done.
-
-        Transitions:
-        * scan_destination: invalid destination or could not
-        * start_single: continue with the next package level / line
-        * start: if there is no more package level / line to process
-        """
-        location = self.env["stock.location"].browse(location_id)
-        if not location.exists():
-            return self._response_for_start(message=self.msg_store.record_not_found())
-        package_level = self.env["stock.package_level"].browse(package_level_id)
-        if not package_level.exists():
-            move_lines = self._find_operations(location)
-            return self._response_for_start_single(move_lines.mapped("picking_id"))
-        search = self._actions_for("search")
-        scanned_location = search.location_from_scan(barcode)
-        if not scanned_location:
-            return self._response_for_scan_destination(
-                location, package_level, message=self.msg_store.no_location_found()
-            )
-        if not scanned_location.is_sublocation_of(
-            package_level.picking_id.picking_type_id.default_location_dest_id
-        ) or not scanned_location.is_sublocation_of(
-            # beware, package_level.move_id is not always set
-            package_level.move_line_ids.move_id.location_dest_id,
-            func=all,
-        ):
-            return self._response_for_scan_destination(
-                location,
-                package_level,
-                message=self.msg_store.dest_location_not_allowed(),
-            )
-        if not scanned_location.is_sublocation_of(package_level.location_dest_id):
-            if not confirmation:
-                return self._response_for_scan_destination(
-                    location, package_level, confirmation_required=True
-                )
-        package_move_lines = package_level.move_line_ids
-        self._lock_lines(package_move_lines)
-        package_moves = package_move_lines.mapped("move_id")
-        for package_move in package_moves:
-            # Check if there is no other lines linked to the move others than
-            # the lines related to the package itself. In such case we have to
-            # split the move to process only the lines related to the package.
-            package_move.split_other_pack_operations(package_move_lines)
-        self._write_destination_on_operations(
-            package_level.move_line_ids, scanned_location
-        )
-        stock = self._actions_for("stock")
-        stock.validate_moves(package_moves)
-        move_lines = self._find_operations(location)
-        message = self.msg_store.location_content_transfer_item_complete(
-            scanned_location
-        )
-        completion_info = self._actions_for("completion.info")
-        completion_info_popup = completion_info.popup(package_moves.move_line_ids)
-        return self._response_for_start_single(
-            move_lines.mapped("picking_id"),
-            message=message,
-            popup=completion_info_popup,
-        )
-
-    def __postpone_package(self, location_id, package_level_id):
-        """Mark a package level as postponed and return the next level/line
-
-        Transitions:
-        * start_single: continue with the next package level / line
-        """
-        # TODO
-        location = self.env["stock.location"].browse(location_id)
-        package_level = self.env["stock.package_level"].browse(package_level_id)
-        if not location.exists():
-            return self._response_for_start(message=self.msg_store.record_not_found())
-        move_lines = self._find_operations(location)
-        if package_level.exists():
-            pickings = move_lines.mapped("picking_id")
-            sorter = self._actions_for("location_content_transfer.sorter")
-            sorter.feed_pickings(pickings)
-            package_levels = sorter.package_levels()
-            package_level.shopfloor_postpone(move_lines, package_levels)
-        return self._response_for_start_single(move_lines.mapped("picking_id"))
-
-    def __stock_out_package(self, location_id, package_level_id):
-        """Declare a stock out on a package level
-
-        It first ensures the stock.move only has this package level. If not, it
-        splits the move to have no side-effect on the other package levels/move
-        lines.
-
-        It unreserves the move, create an inventory at 0 in the move's source
-        location, create a second draft inventory (if none exists) to check later.
-        Finally, it cancels the move.
-
-        Transitions:
-        * start: no more content to move
-        * start_single: continue with the next package level / line
-        """
-        # TODO
-        location = self.env["stock.location"].browse(location_id)
-        if not location.exists():
-            return self._response_for_start(message=self.msg_store.record_not_found())
-        package_level = self.env["stock.package_level"].browse(package_level_id)
-        if not package_level.exists():
-            move_lines = self._find_operations(location)
-            return self._response_for_start_single(move_lines.mapped("picking_id"))
-        inventory = self._actions_for("inventory")
-        package_move_lines = package_level.move_line_ids
-        package_moves = package_move_lines.mapped("move_id")
-        for package_move in package_moves:
-            # Check if there is no other lines linked to the move others than
-            # the lines related to the package itself. In such case we have to
-            # split the move to process only the lines related to the package.
-            package_move.split_other_pack_operations(package_move_lines)
-            lot = package_move.move_line_ids.lot_id
-            package_move._do_unreserve()
-            package_move._recompute_state()
-            # Create an inventory at 0 in the move's source location
-            inventory.create_stock_issue(
-                package_move, location, package_level.package_id, lot
-            )
-            # Create a draft inventory to control stock
-            inventory.create_control_stock(
-                location, package_move.product_id, package_level.package_id, lot
-            )
-            package_move._action_cancel()
-        # remove the package level (this is what does the `picking.do_unreserve()`
-        # method, but here we want to unreserve+unlink this package alone)
-        assert package_level.state == "draft", "Package level has to be in draft"
-        if package_level.state != "draft":
-            move_lines = self._find_operations(location)
-            return self._response_for_start_single(
-                move_lines.mapped("picking_id"),
-                message={
-                    "message_type": "error",
-                    "body": _("Package level has to be in draft"),
-                },
-            )
-        package_level.unlink()
-        move_lines = self._find_operations(location)
-        return self._response_for_start_single(move_lines.mapped("picking_id"))
-
-    def __stock_out_line(self, location_id, move_line_id):
-        """Declare a stock out on a move line
-
-        It first ensures the stock.move only has this move line. If not, it
-        splits the move to have no side-effect on the other package levels/move
-        lines.
-
-        It unreserves the move, create an inventory at 0 in the move's source
-        location, create a second draft inventory (if none exists) to check later.
-        Finally, it cancels the move.
-
-        Transitions:
-        * start: no more content to move
-        * start_single: continue with the next package level / line
-        """
-        # TODO
-        location = self.env["stock.location"].browse(location_id)
-        if not location.exists():
-            return self._response_for_start(message=self.msg_store.record_not_found())
-        move_line = self.env["stock.pack.operation"].browse(move_line_id)
-        if not move_line.exists():
-            move_lines = self._find_operations(location)
-            return self._response_for_start_single(move_lines.mapped("picking_id"))
-        inventory = self._actions_for("inventory")
-        move_line.move_id.split_other_pack_operations(move_line)
-        move_line_src_location = move_line.location_id
-        move = move_line.move_id
-        package = move_line.package_id
-        lot = move_line.lot_id
-        move._do_unreserve()
-        move._recompute_state()
-        # Create an inventory at 0 in the move's source location
-        inventory.create_stock_issue(move, move_line_src_location, package, lot)
-        # Create a draft inventory to control stock
-        inventory.create_control_stock(
-            move_line_src_location, move.product_id, package, lot
-        )
-        move._action_cancel()
-        move_lines = self._find_operations(location)
-        return self._response_for_start_single(move_lines.mapped("picking_id"))
-
-    def __dismiss_package_level(self, location_id, package_level_id):
-        """Dismiss the package level.
-
-        The result package of the related move lines is unset, then the package
-        level itself is removed from the picking. This allows to move parts
-        of the package to different locations.
-
-        The user is then redirected to process the next line of the related picking.
-
-        Transitions:
-        * start_single: continue with the next line
-        """
-        # TODO
-        location = self.env["stock.location"].browse(location_id)
-        if not location.exists():
-            return self._response_for_start(message=self.msg_store.record_not_found())
-        package_level = self.env["stock.package_level"].browse(package_level_id)
-        if not package_level.exists():
-            move_lines = self._find_operations(location)
-            return self._response_for_start_single(
-                move_lines.mapped("picking_id"),
-                message=self.msg_store.record_not_found(),
-            )
-        move_lines = package_level.move_line_ids
-        package_level.explode_package()
-        move_lines.write(
-            {
-                # ensure all the lines in the package are the next ones to be processed
-                "shopfloor_priority": 1,
-            }
-        )
-        return self._response_for_start_single(
-            move_lines.mapped("picking_id"), message=self.msg_store.package_open()
-        )
-
 
 class ShopfloorLocationContentTransferValidator(Component):
     """Validators for the Location Content Transfer endpoints"""
@@ -964,13 +814,6 @@ class ShopfloorLocationContentTransferValidator(Component):
     def go_to_single(self):
         return {"location_id": {"coerce": to_int, "required": True, "type": "integer"}}
 
-    def scan_package(self):
-        return {
-            "location_id": {"coerce": to_int, "required": True, "type": "integer"},
-            "package_level_id": {"coerce": to_int, "required": True, "type": "integer"},
-            "barcode": {"required": True, "type": "string"},
-        }
-
     def scan_line(self):
         return {
             "location_id": {"coerce": to_int, "required": True, "type": "integer"},
@@ -978,28 +821,19 @@ class ShopfloorLocationContentTransferValidator(Component):
             "barcode": {"required": True, "type": "string"},
         }
 
-    def set_destination_package(self):
-        return {
-            "location_id": {"coerce": to_int, "required": True, "type": "integer"},
-            "package_level_id": {"coerce": to_int, "required": True, "type": "integer"},
-            "barcode": {"required": True, "type": "string"},
-            "confirmation": {"type": "boolean", "nullable": True, "required": False},
-        }
-
     def set_destination_line(self):
         return {
             "location_id": {"coerce": to_int, "required": True, "type": "integer"},
             "operation_id": {"coerce": to_int, "required": True, "type": "integer"},
-            "lot_id": {"coerce": to_int, "required": False, "type": "integer"},
+            "lot_id": {
+                "coerce": to_int,
+                "required": False,
+                "nullable": True,
+                "type": "integer",
+            },
             "quantity": {"coerce": to_float, "required": True, "type": "float"},
             "barcode": {"required": True, "type": "string"},
             "confirmation": {"type": "boolean", "nullable": True, "required": False},
-        }
-
-    def postpone_package(self):
-        return {
-            "location_id": {"coerce": to_int, "required": True, "type": "integer"},
-            "package_level_id": {"coerce": to_int, "required": True, "type": "integer"},
         }
 
     def postpone_line(self):
@@ -1008,22 +842,16 @@ class ShopfloorLocationContentTransferValidator(Component):
             "operation_id": {"coerce": to_int, "required": True, "type": "integer"},
         }
 
-    def stock_out_package(self):
-        return {
-            "location_id": {"coerce": to_int, "required": True, "type": "integer"},
-            "package_level_id": {"coerce": to_int, "required": True, "type": "integer"},
-        }
-
     def stock_out_line(self):
         return {
             "location_id": {"coerce": to_int, "required": True, "type": "integer"},
-            "move_line_id": {"coerce": to_int, "required": True, "type": "integer"},
-        }
-
-    def dismiss_package_level(self):
-        return {
-            "location_id": {"coerce": to_int, "required": True, "type": "integer"},
-            "package_level_id": {"coerce": to_int, "required": True, "type": "integer"},
+            "operation_id": {"coerce": to_int, "required": True, "type": "integer"},
+            "lot_id": {
+                "coerce": to_int,
+                "required": False,
+                "nullable": True,
+                "type": "integer",
+            },
         }
 
 
@@ -1086,33 +914,16 @@ class ShopfloorLocationContentTransferValidatorResponse(Component):
     def go_to_single(self):
         return self._response_schema(next_states={"start", "start_single"})
 
-    def scan_package(self):
-        return self._response_schema(
-            next_states={"start", "start_single", "scan_destination"}
-        )
-
     def scan_line(self):
         return self._response_schema(
             next_states={"start", "start_single", "scan_destination"}
         )
 
-    def set_destination_package(self):
-        return self._response_schema(next_states={"start_single", "scan_destination"})
-
     def set_destination_line(self):
         return self._response_schema(next_states={"start_single", "scan_destination"})
-
-    def postpone_package(self):
-        return self._response_schema(next_states={"start_single"})
 
     def postpone_line(self):
         return self._response_schema(next_states={"start_single"})
 
-    def stock_out_package(self):
-        return self._response_schema(next_states={"start", "start_single"})
-
     def stock_out_line(self):
-        return self._response_schema(next_states={"start", "start_single"})
-
-    def dismiss_package_level(self):
         return self._response_schema(next_states={"start", "start_single"})

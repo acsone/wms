@@ -15,6 +15,19 @@ from odoo.addons.shopfloor_base.tests.common import CommonCase as BaseCommonCase
 # pylint: disable=missing-return
 class CommonCase(BaseCommonCase):
     @classmethod
+    def setUpClass(cls):
+        super(CommonCase, cls).setUpClass()
+        admin = cls.env["res.users"].sudo().browse(1)
+        admin.write(
+            {
+                "groups_id": [
+                    (4, cls.env.ref("stock.group_production_lot").id),
+                    (4, cls.env.ref("stock.group_tracking_lot").id),
+                ]
+            }
+        )
+
+    @classmethod
     def setUpClassVars(cls):
         super(CommonCase, cls).setUpClassVars()
         stock_location = cls.env.ref("stock.stock_location_stock")

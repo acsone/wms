@@ -3,8 +3,6 @@
 # Copyright 2021 ACSONE SA/NV (https://www.acsone.eu)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from unittest import skip
-
 from .test_location_content_transfer_base import LocationContentTransferCommonCase
 
 
@@ -411,24 +409,23 @@ class LocationContentTransferSingleCase(LocationContentTransferCommonCase):
             response, operations.mapped("picking_id"),
         )
 
-    @skip("Not yet implemented")
     def test_stock_out_package_wrong_parameters(self):
         """Wrong 'location_id' and 'package_level_id' parameters, redirect the
         user to the 'start' screen.
         """
-        package_level = self.picking1.pack_operation_pack_ids
+        operation = self.picking1.pack_operation_pack_ids
         response = self.service.dispatch(
-            "stock_out_package",
+            "stock_out_line",
             params={
                 "location_id": 1234567890,  # Doesn't exist
-                "operation_id": package_level.id,
+                "operation_id": operation.id,
             },
         )
         self.assert_response_start(
             response, message=self.service.msg_store.record_not_found()
         )
         response = self.service.dispatch(
-            "stock_out_package",
+            "stock_out_line",
             params={
                 "location_id": self.content_loc.id,
                 "operation_id": 1234567890,  # Doesn't exist
@@ -439,33 +436,28 @@ class LocationContentTransferSingleCase(LocationContentTransferCommonCase):
             response, operations.mapped("picking_id"),
         )
 
-    @skip("Not yet implemented")
     def test_stock_out_package_ok(self):
-        """Declare a stock out on a package_level."""
-        package_level = self.picking1.pack_operation_pack_ids
+        """Declare a stock out on a operation with package."""
+        operation = self.picking1.pack_operation_pack_ids
         response = self.service.dispatch(
-            "stock_out_package",
-            params={
-                "location_id": self.content_loc.id,
-                "operation_id": package_level.id,
-            },
+            "stock_out_line",
+            params={"location_id": self.content_loc.id, "operation_id": operation.id},
         )
         operations = self.service._find_operations(self.content_loc)
         self.assert_response_start_single(
             response, operations.mapped("picking_id"),
         )
 
-    @skip("Not yet implemented")
-    def test_stock_out_line_wrong_parameters(self):
+    def test_stock_out_product_wrong_parameters(self):
         """Wrong 'location_id' and 'move_line_id' parameters, redirect the
         user to the 'start' screen.
         """
-        move_line = self.picking2.pack_operation_product_ids[0]
+        operation = self.picking2.pack_operation_product_ids[0]
         response = self.service.dispatch(
             "stock_out_line",
             params={
                 "location_id": 1234567890,  # Doesn't exist
-                "operation_id": move_line.id,
+                "operation_id": operation.id,
             },
         )
         self.assert_response_start(
@@ -545,15 +537,15 @@ class LocationContentTransferSingleSpecialCase(LocationContentTransferCommonCase
         cls.picking.action_assign()
         cls._simulate_pickings_selected(cls.picking)
 
-    @skip("Not yet implemented")
     def test_stock_out_package_split_move(self):
         """Declare a stock out on a package_level related to moves containing
-        other unrelated move lines.
+        other unrelated operations.
         """
-        package_level = self.picking.move_line_ids.package_level_id
+        package_level = self.picking.pack_operation_pack_ids
+        package = package_level.package_id
         self.assertEqual(self.product_a.qty_available, 15)
         response = self.service.dispatch(
-            "stock_out_package",
+            "stock_out_line",
             params={
                 "location_id": self.content_loc.id,
                 "operation_id": package_level.id,
@@ -570,7 +562,7 @@ class LocationContentTransferSingleSpecialCase(LocationContentTransferCommonCase
         )
         self.assertEqual(len(move_product_a), 1)
         self.assertEqual(move_product_a.state, "assigned")
-        self.assertEqual(len(move_product_a.move_line_ids), 1)
+        self.assertEqual(len(move_product_a.pack_operation_ids), 1)
         # Check the inventories
         stock_issue_inventory = self.env["stock.inventory"].search(
             [
@@ -588,8 +580,8 @@ class LocationContentTransferSingleSpecialCase(LocationContentTransferCommonCase
         self.assertEqual(self.product_a.qty_available, 5)
         control_inventory = self.env["stock.inventory"].search(
             [
-                ("location_ids", "in", self.content_loc.id),
-                ("product_ids", "in", self.product_a.id),
+                ("location_id", "=", self.content_loc.id),
+                ("package_id", "=", package.id),
                 ("state", "in", ("draft", "confirm")),
             ]
         )
@@ -600,23 +592,25 @@ class LocationContentTransferSingleSpecialCase(LocationContentTransferCommonCase
             response, operations.mapped("picking_id"),
         )
 
-    @skip("Not yet implemented")
     def test_stock_out_line_split_move(self):
         """Declare a stock out on a move line related to moves containing
         other move lines.
         """
         self.assertEqual(len(self.picking.move_lines), 2)
-        self.assertEqual(len(self.move_product_b.move_line_ids), 2)
-        move_line = self.move_product_b.move_line_ids.filtered(
-            lambda ml: ml.product_uom_qty == 4  # 4/10 to stock out
+        self.assertEqual(len(self.move_product_b.pack_operation_ids), 2)
+        pack_operation = self.move_product_b.pack_operation_ids.filtered(
+            lambda po: po.product_qty == 4  # 4/10 to stock out
         )
         self.assertEqual(self.product_b.qty_available, 10)
         response = self.service.dispatch(
             "stock_out_line",
-            params={"location_id": self.content_loc.id, "operation_id": move_line.id},
+            params={
+                "location_id": self.content_loc.id,
+                "operation_id": pack_operation.id,
+            },
         )
         # Check the picking data
-        self.assertFalse(move_line.exists())
+        self.assertFalse(pack_operation.exists())
         moves_product_b = self.picking.move_lines.filtered(
             lambda m: m.product_id == self.product_b
         )
@@ -626,7 +620,7 @@ class LocationContentTransferSingleSpecialCase(LocationContentTransferCommonCase
         )
         self.assertEqual(len(move_product_b), 1)
         self.assertEqual(move_product_b.state, "assigned")
-        self.assertEqual(len(move_product_b.move_line_ids), 1)
+        self.assertEqual(len(move_product_b.pack_operation_ids), 1)
         # Check the inventories
         stock_issue_inventory = self.env["stock.inventory"].search(
             [
@@ -645,8 +639,8 @@ class LocationContentTransferSingleSpecialCase(LocationContentTransferCommonCase
         self.assertEqual(self.product_b.qty_available, 6)
         control_inventory = self.env["stock.inventory"].search(
             [
-                ("location_ids", "in", self.content_loc.id),
-                ("product_ids", "in", self.product_b.id),
+                ("location_id", "=", self.content_loc.id),
+                ("product_id", "=", self.product_b.id),
                 ("state", "in", ("draft", "confirm")),
             ]
         )

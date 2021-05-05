@@ -17,12 +17,6 @@ class InventoryAction(Component):
     _inherit = "shopfloor.process.action"
     _usage = "inventory"
 
-    @property
-    def inventory_model(self):
-        # the _sf_inventory key bypass groups checks,
-        # see comment in models/stock_inventory.py
-        return self.env["stock.inventory"].with_context(_sf_inventory=True)
-
     def create_draft_check_empty(self, location, product, ref=None):
         """Create a draft inventory for a product with a zero quantity"""
         if ref:
@@ -36,24 +30,26 @@ class InventoryAction(Component):
     ):
         """Return if an inventory for location and product exist"""
         domain = [
-            ("location_ids", "=", location.id),
-            ("product_ids", "=", product.id),
+            ("location_id", "=", location.id),
+            ("product_id", "=", product.id),
             ("state", "in", states),
         ]
         if package is not None:
             domain.append(("package_id", "=", package.id))
         if lot is not None:
             domain.append(("lot_id", "=", lot.id))
-        return self.inventory_model.search_count(domain)
+        return self.env["stock.inventory"].search_count(domain)
 
-    def _create_draft_inventory(self, location, product, name):
-        return self.inventory_model.sudo().create(
-            {
-                "name": name,
-                "location_ids": [(6, 0, location.ids)],
-                "product_ids": [(6, 0, product.ids)],
-            }
-        )
+    def _create_draft_inventory(self, location, product, name, lot=None, package=None):
+
+        vals = {"name": name, "location_id": location.id}
+        if package:
+            vals.update({"filter": "pack", "package_id": package.id})
+        elif lot:
+            vals.update({"filter": "lot", "lot_id": lot.id})
+        else:
+            vals.update({"filter": "product", "product_id": product.id})
+        return self.env["stock.inventory"].sudo().create(vals)
 
     def create_control_stock(self, location, product, package, lot, name=None):
         """Create a draft inventory so a user has to check a location
@@ -68,7 +64,9 @@ class InventoryAction(Component):
                 name = _("Control stock issue in location {} for {}").format(
                     location.name, product_name
                 )
-            self._create_draft_inventory(location, product, name)
+            self._create_draft_inventory(
+                location, product, name, lot=lot, package=package
+            )
 
     def create_stock_issue(self, move, location, package, lot):
         """Create an inventory for a stock issue
@@ -77,32 +75,44 @@ class InventoryAction(Component):
         * assigned move lines in other batch transfers stay assigned.
         * assigned move lines in same batch but already picked stay assigned.
         """
-        other_lines = self._stock_issue_get_related_move_lines(
+        other_operations = self._stock_issue_get_related_pack_operations(
             move, location, package, lot
         )
-        qty_to_keep = sum(other_lines.mapped("product_qty"))
+        if not lot:
+            qty_to_keep = sum(other_operations.mapped("product_qty"))
+        else:
+            pack_lots = other_operations.mapped("pack_lot_ids")
+            pack_lots = pack_lots.filtered(lambda pl, _lot=lot: _lot == pl.lot_id)
+            qty_to_keep = sum(pack_lots.mapped("qty_todo"))
         self.create_stock_correction(move, location, package, lot, qty_to_keep)
-        move._action_assign()
+        move.action_assign()
 
     def create_stock_correction(self, move, location, package, lot, quantity):
         """Create an inventory with a forced quantity"""
         values = self._stock_correction_inventory_values(
             move, location, package, lot, quantity
         )
-        inventory = self.inventory_model.sudo().create(values)
+        inventory = self.env["stock.inventory"].sudo().create(values)
         inventory.action_start()
-        inventory.action_validate()
+        inventory.action_done()
 
-    def _stock_issue_get_related_move_lines(self, move, location, package, lot):
-        """Lookup for all the other moves lines that match given move line"""
+    def _stock_issue_get_related_pack_operations(self, move, location, package, lot):
+        """Lookup for all the other operations that match given operation"""
         domain = [
             ("location_id", "=", location.id),
             ("product_id", "=", move.product_id.id),
             ("package_id", "=", package.id),
-            ("lot_id", "=", lot.id),
             ("state", "in", ("assigned", "partially_available")),
         ]
-        return self.env["stock.pack.operation"].search(domain)
+        operations = self.env["stock.pack.operation"].search(domain)
+        operations = operations.filtered(
+            lambda op, m=move: move in op.mapped("linked_move_operation_ids.move_id")
+        )
+        if lot:
+            operations = operations.filtered(
+                lambda op, _lot=lot: _lot in op.mapped("pack_lot_ids.lot_id")
+            )
+        return operations
 
     def _stock_correction_inventory_values(
         self, move, location, package, lot, line_qty
@@ -124,10 +134,17 @@ class InventoryAction(Component):
             "prod_lot_id": lot.id,
             "product_qty": line_qty,
         }
-        return {
+        vals = {
             "name": name,
             "line_ids": [(0, 0, line_values)],
         }
+        if package:
+            vals.update({"filter": "pack", "package_id": package.id})
+        elif lot:
+            vals.update({"filter": "lot", "lot_id": lot.id})
+        else:
+            vals.update({"filter": "product", "product_id": move.product_id.id})
+        return vals
 
     def _stock_issue_product_description(self, product, package, lot):
         parts = []

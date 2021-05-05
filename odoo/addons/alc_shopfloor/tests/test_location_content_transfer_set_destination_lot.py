@@ -242,7 +242,7 @@ class LocationContentTransferSetDestinationXCase(LocationContentTransferCommonCa
                     "operation_id": operation.id,
                     "barcode": self.dest_location.barcode,
                     "quantity": operation.pack_lot_ids.qty_todo,
-                    "lot_id": operation.pack_lot_ids.id,
+                    "lot_id": operation.pack_lot_ids.lot_id.id,
                 },
             )
             operation = self.picking.pack_operation_product_ids.filtered(
