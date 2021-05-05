@@ -251,6 +251,7 @@ class StockPackOperationLotAdd(models.TransientModel):
     def button_nextop(self):
         self.button_nextlot()
         self.operation_id = False
+        self.location_dest_id = False
 
     @api.multi
     def button_nextlot(self):
