@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+  <record id="view_pack_operation_details_form" model="ir.ui.view">
+    <field name="name">shopfloor sview_pack_operation_details_form</field>
+    <field name="model">stock.pack.operation</field>
+    <field name="inherit_id" ref="stock.view_pack_operation_details_form" />
+    <field name="arch" type="xml">
+      <field name="qty_done" position="after">
+        <!-- handy for testing / debugging -->
+        <!-- TODO: make them readonly? -->
+        <field
+          name="shopfloor_checkout_done"
+          string="SF checkout done"
+          optional="hide"
+          groups="base.group_no_one"
+        />
+        <field
+          name="shopfloor_unloaded"
+          string="SF unloaded"
+          optional="hide"
+          groups="base.group_no_one"
+        />
+        <field
+          name="shopfloor_priority"
+          string="SF Priority"
+          optional="hide"
+          groups="base.group_no_one"
+        />
+      </field>
+    </field>
+  </record>
+</odoo>

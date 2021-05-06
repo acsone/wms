@@ -11,6 +11,8 @@ odoo10-addon-purchase-order-line-packaging-qty @ git+https://github.com/oca/purc
 # oca/server-tools
 odoo10-addon-slow-statement-logger @ git+https://github.com/acsone/server-tools@10.0-backport-slow_statement_logger-lmi#egg=odoo10_addon_slow_statement_logger&subdirectory=setup/slow_statement_logger
 odoo10-addon-base-m2m-custom-field @ git+https://github.com/oca/server-tools.git@refs/pull/1940/head#subdirectory=setup/base_m2m_custom_field
+odoo10-addon-base-jsonify @ git+https://github.com/oca/server-tools.git@refs/pull/2068/head#subdirectory=setup/base_jsonify
+odoo10-addon-server-environment @ git+https://github.com/oca/server-tools.git@refs/pull/2076/head#subdirectory=setup/server_environment
 
 
 # oca/bank-payment
@@ -29,7 +31,7 @@ odoo10-addon-product-abc-classification-sale-stock @ git+https://github.com/oca/
 odoo10-addon-sale-stock-restocking-fee-invoicing @ git+https://github.com/oca/account-invoicing.git@refs/pull/784/head#subdirectory=setup/sale_stock_restocking_fee_invoicing
 
 # oca/server-auth
-odoo10-addon-auth-api-key @  git+https://github.com/oca/server-auth.git@refs/pull/95/head#subdirectory=setup/auth_api_key
+odoo10-addon-auth-api-key @  git+https://github.com/oca/server-auth.git@refs/pull/271/head#subdirectory=setup/auth_api_key
 
 # oca/edi
 odoo10-addon-purchase-order-import @  git+https://github.com/oca/edi.git@refs/pull/244/head#subdirectory=setup/purchase_order_import
@@ -41,12 +43,20 @@ odoo10-addon-stock-quant-package-product-packaging @ git+https://github.com/oca/
 odoo10-addon-stock-quant-package-dimension @ git+https://github.com/oca/stock-logistics-workflow.git@refs/pull/744/head#subdirectory=setup/stock_quant_package_dimension
 odoo10-addon-stock_operation_cleaner @ git+https://github.com/OCA/stock-logistics-workflow@refs/pull/782/head#subdirectory=setup/stock_operation_cleaner
 
+# oca/stock-logistics-warehouse
+odoo10-addon-stock-helper @ git+https://github.com/OCA/stock-logistics-warehouse@refs/pull/1117/head#subdirectory=setup/stock_helper
+odoo10-addon-stock-move-common-dest @ git+https://github.com/OCA/stock-logistics-warehouse@refs/pull/1118/head#subdirectory=setup/stock_move_common_dest
+odoo10-addon-stock-picking-completion-info @ git+https://github.com/OCA/stock-logistics-warehouse@refs/pull/1119/head#subdirectory=setup/stock_picking_completion_info
+
 
 # oca/wms
 odoo10-addon-stock-storage-type @ git+https://github.com/acsone/wms.git@10.0-alc_master#subdirectory=setup/stock_storage_type
 odoo10-addon-stock-storage-type-putaway-abc @ git+https://github.com/oca/wms.git@refs/pull/103/head#subdirectory=setup/stock_storage_type_putaway_abc
 odoo10-addon-shopfloor-base @ git+https://github.com/oca/wms.git@refs/pull/204/head#subdirectory=setup/shopfloor_base
 odoo10-addon-shopfloor-mobile-base @ git+https://github.com/oca/wms.git@refs/pull/204/head#subdirectory=setup/shopfloor_mobile_base
+odoo10-addon-shopfloor-mobile @ git+https://github.com/oca/wms.git@refs/pull/213/head#subdirectory=setup/shopfloor_mobile
+odoo10-addon-shopfloor @ git+https://github.com/oca/wms.git@refs/pull/213/head#subdirectory=setup/shopfloor
+
 
 # oca/web
 odoo10-addon-web-m2x-options @ git+https://github.com/oca/web.git@refs/pull/1795/head#subdirectory=setup/web_m2x_options

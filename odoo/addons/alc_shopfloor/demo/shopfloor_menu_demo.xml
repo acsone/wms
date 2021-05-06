@@ -1,0 +1,12 @@
+<odoo noupdate="1">
+  <record id="shopfloor_menu_location_content_transfer" model="shopfloor.menu">
+    <field name="name">Location Content Transfer</field>
+    <field name="sequence">60</field>
+    <field name="allow_move_create" eval="1" />
+    <field name="scenario_id" ref="alc_shopfloor.scenario_location_content_transfer" />
+    <field
+      name="picking_type_ids"
+      eval="[(4, ref('alc_shopfloor.picking_type_location_content_transfer_demo'))]"
+    />
+  </record>
+</odoo>

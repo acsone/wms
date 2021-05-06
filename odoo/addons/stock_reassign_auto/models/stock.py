@@ -51,8 +51,11 @@ class StockMove(models.Model):
                 lambda op, m=move: op.product_id in m.product_id and not op.is_done
             )
             moves_to_reassign |= move.picking_id.mapped("move_lines").filtered(
-                lambda m, _move=move: m.product_id in _move.product_id
+                lambda m, _move=move: m.product_id == _move.product_id
                 and m.state not in ("done", "cancel")
+                and not (
+                    m.partially_available and m.pack_operation_ids.filtered("is_done")
+                )
             )
 
         if operations_to_recompute:
