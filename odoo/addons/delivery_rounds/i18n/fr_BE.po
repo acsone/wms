@@ -305,6 +305,14 @@ msgid "Delivery Template"
 msgstr "Modèle de tournée"
 
 #. module: delivery_rounds
+#: code:addons/delivery_rounds/models/round_instance.py:287
+#, python-format
+msgid "Delivery round %s will be updated in background."
+msgstr "La tournée %s va être mise à jour en arrière-plan."
+
+
+#. module: delivery_rounds
+#: model:ir.model.fields,field_description:delivery_rounds.field_round_instance_customer_delivery_not_allowed
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_instance_delivery_not_allowed
 #, fuzzy
 msgid "Delivery allowed"

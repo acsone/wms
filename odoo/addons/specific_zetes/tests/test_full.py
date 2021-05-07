@@ -217,7 +217,7 @@ class TestFull(ZetesTest, JobMixin):
 
         self.picking.action_assign()
         # Round to the picking
-        self.round.button_update()
+        self.round.with_context(test_queue_job_no_delay=True).button_update()
 
         logger = self.env["zetes.logger"]
         logger.search([]).unlink()

@@ -111,7 +111,7 @@ class TestFullParking(ZetesParkingTest):
         self.picking.action_confirm()
         self.picking.action_assign()
         # Round to the picking
-        self.round.button_update()
+        self.round.with_context(test_queue_job_no_delay=True).button_update()
 
     @unittest.skip(
         "Test is failing randomly, see "
