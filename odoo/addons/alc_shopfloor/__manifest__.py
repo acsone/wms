@@ -27,7 +27,10 @@
         "stock_helper",
     ],
     "data": [
-        "data/shopfloor_scenario_data.xml",
+        "data/scenario_location_content_transfer.xml",
+        "data/stock_picking_type_location_content_transfer.xml",
+        "data/profile_location_content_transfer.xml",
+        "data/menu_location_content_transfer.xml",
         "security/groups.xml",
         "views/shopfloor_menu.xml",
         "views/stock_location.xml",

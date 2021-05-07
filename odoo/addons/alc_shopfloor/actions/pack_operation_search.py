@@ -93,14 +93,20 @@ class PackOperationSearch(Component):
         if order == "priority":
             # make prority negative to keep sorting ascending
             return lambda line: (
-                -int(line.linked_move_operation_ids.move_id.priority or "0"),
-                line.linked_move_operation_ids.move_id.date_expected,
+                -min(
+                    map(
+                        int,
+                        line.mapped("linked_move_operation_ids.move_id.priority")
+                        or "0",
+                    )
+                ),
+                min(line.mapped("linked_move_operation_ids.move_id.date_expected")),
             )
         if order == "location":
             return lambda line: (
                 line.location_id.shopfloor_picking_sequence or "",
                 line.location_id.name,
-                line.linked_move_operation_ids.move_id.date_expected,
+                min(line.mapped("linked_move_operation_ids.move_id.date_expected")),
             )
         return lambda line: line
 
@@ -113,9 +119,7 @@ class PackOperationSearch(Component):
         for l in lines:
             count = 1
             if l.pack_lot_ids:
-                count = len(
-                    [lot for lot in l.pack_lot_ids.filtered() if lot.qty < lot.qty_todo]
-                )
+                count = len([lot for lot in l.pack_lot_ids if lot.qty < lot.qty_todo])
             operations_count_by_line[l] = count
         operations_count = sum(operations_count_by_line.values())
         priority_operations_count = sum(
