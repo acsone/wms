@@ -39,7 +39,9 @@ class CommonCase(BaseCommonCase):
         cls.shelf1 = cls.env.ref("stock.stock_location_components")
         cls.shelf2 = cls.env.ref("stock.stock_location_14")
         cls.env.cr.execute(
-            "update stock_location set barcode=floor(random() * 100000) where barcode is null"
+            """
+            create TEMPORARY SEQUENCE barcode START 100000;
+            update stock_location set barcode=nextval('barcode') where barcode is null"""
         )
 
     @classmethod

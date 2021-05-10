@@ -107,6 +107,7 @@
         "alc_print_all_deliveryslip",
         "alc_product_audit",
         "alc_product_average_daily_sale",
+        "alc_product_consolidated_price_newpharma",
         "alc_product_dimensions",
         "alc_product_packaging",
         "alc_product_packaging_dimension",
