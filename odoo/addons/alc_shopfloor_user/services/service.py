@@ -14,7 +14,9 @@ class BaseShopfloorService(AbstractComponent):
     @property
     def shopfloor_user(self):
         try:
-            return request.auth_api_key.shofloor_user_id or self.env.user
+            return (
+                self.env["res.users"].browse(request.auth_api_key_id) or self.env.user
+            )
         except RuntimeError:
             # in test mode request is unbound and raise RuntimeError
             return self.env.user
