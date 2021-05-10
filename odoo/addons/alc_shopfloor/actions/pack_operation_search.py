@@ -93,11 +93,9 @@ class PackOperationSearch(Component):
         if order == "priority":
             # make prority negative to keep sorting ascending
             return lambda line: (
-                -min(
-                    map(
-                        int,
-                        line.mapped("linked_move_operation_ids.move_id.priority")
-                        or "0",
+                -int(
+                    min(
+                        line.mapped("linked_move_operation_ids.move_id.priority") or "0"
                     )
                 ),
                 min(line.mapped("linked_move_operation_ids.move_id.date_expected")),
