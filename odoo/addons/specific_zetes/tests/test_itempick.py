@@ -84,7 +84,7 @@ class TestItempick(ZetesTest):
         self.picking.action_assign()
         self.picking_2.action_assign()
         # Round to the picking
-        self.round.button_update()
+        self.round.with_context(test_queue_job_no_delay=True).button_update()
 
     def test_requ_itempick_price(self):
         domain = Itempick(self._default_header(), mock.MagicMock(name="Savepoint()"))
@@ -295,6 +295,7 @@ class TestItempick(ZetesTest):
         new_operation = self.env["stock.pack.operation"].search(
             [("product_id", "=", self.product_2.id)]
         )
+
         # Although the qty on the picking was 10.0, the new operation must
         # empty the existing qty on the picking location
         self.assertEqual(new_operation.product_qty, 100.0)

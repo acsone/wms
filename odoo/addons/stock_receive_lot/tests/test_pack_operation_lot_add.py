@@ -125,6 +125,7 @@ class TestPackOperationLotAdd(TransactionCase):
         # go to next lot
         wiz = wiz.create(wiz._convert_to_write(wiz._cache))
         wiz.button_nextlot()
+
         self.assertEqual(wiz.operation_id, op1)
         self.assertEqual(wiz.remaining_qty, 2)
         self.assertEqual(wiz.location_dest_id, self.bin1)
@@ -156,6 +157,8 @@ class TestPackOperationLotAdd(TransactionCase):
 
         # select operation
         wiz.operation_id = op2
+        # After next op, dest location is now reset
+        wiz.location_dest_id = self.bin1
         wiz._onchange_operation_id()
         self.assertEqual(wiz.remaining_qty, 5)
         self.assertEqual(wiz.location_dest_id, self.bin1)
@@ -283,6 +286,7 @@ class TestPackOperationLotAdd(TransactionCase):
 
         # select operation
         wiz.operation_id = op1
+        wiz.location_dest_id = self.bin1
         wiz._onchange_operation_id()
         self.assertEqual(wiz.remaining_qty, 5)
 

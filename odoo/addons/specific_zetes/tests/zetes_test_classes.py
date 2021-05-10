@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import importlib
+import logging
 from datetime import datetime
 
 import mock
@@ -272,6 +273,23 @@ class ZetesTest(SavepointCase):
 
         cls.context = {}
         cls.env["alc.average.daily.sale"].refresh_view()
+
+    def setUp(self):
+        super(ZetesTest, self).setUp()
+        # mute logger
+        loggers = ["odoo.addons.queue_job.models.base"]
+        for logger in loggers:
+            logging.getLogger(logger).addFilter(self)
+
+        # pylint: disable=unused-variable
+        @self.addCleanup
+        def un_mute_logger():
+            for logger_ in loggers:
+                logging.getLogger(logger_).removeFilter(self)
+
+    def filter(self, record):
+        # required to mute logger
+        return 0
 
     def format_result(self, result):
         """

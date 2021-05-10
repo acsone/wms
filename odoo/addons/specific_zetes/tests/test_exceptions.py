@@ -104,7 +104,7 @@ class TestExceptions(ZetesTest):
 
         self.picking.action_assign()
         # Round to the picking
-        self.round.button_update()
+        self.round.with_context(test_queue_job_no_delay=True).button_update()
 
     def test_exceptions(self):
         """
