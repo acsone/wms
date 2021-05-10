@@ -1,0 +1,33 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* alc_shopfloor_user
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_shopfloor_user
+#: model:ir.model,name:alc_shopfloor_user.model_auth_api_key
+msgid "API Key"
+msgstr ""
+
+#. module: alc_shopfloor_user
+#: model:ir.model.fields,field_description:alc_shopfloor_user.field_auth_api_key_shopfloor_user_id
+msgid "Shopfloor User"
+msgstr ""
+
+#. module: alc_shopfloor_user
+#: model:ir.model.fields,help:alc_shopfloor_user.field_auth_api_key_shopfloor_user_id
+msgid "The user operating the shopfloor app. All the operations are done\n"
+"        by using the linked user. Nevertheless, to keep a trace af the real user\n"
+"        operating the mobile app without the use of a real Odoo user, you can\n"
+"        reference here a portal user that will be linked to the operations done."
+msgstr ""
+
