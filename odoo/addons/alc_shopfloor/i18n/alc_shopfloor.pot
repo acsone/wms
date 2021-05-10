@@ -210,7 +210,9 @@ msgid "Location %s doesn't contain any package."
 msgstr ""
 
 #. module: alc_shopfloor
+#: model:shopfloor.menu,name:alc_shopfloor.menu_location_content_transfer
 #: model:shopfloor.menu,name:alc_shopfloor.shopfloor_menu_location_content_transfer
+#: model:stock.picking.type,name:alc_shopfloor.picking_type_location_content_transfer
 #: model:stock.picking.type,name:alc_shopfloor.picking_type_location_content_transfer_demo
 msgid "Location Content Transfer"
 msgstr ""
