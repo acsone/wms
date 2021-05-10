@@ -282,13 +282,22 @@ class RoundInstance(models.Model):
         partners_delivery_ids = [
             partner.address_get(["delivery"])["delivery"] for partner in partners
         ]
-        partners_to_deliver = self.env["res.partner"].browse(partners_delivery_ids)
-        self.env.user.notify_info(
+        picking_confirmed = self.env["stock.picking"].search(
+            [
+                ("delivery_round_id", "=", False),
+                ("partner_id", "in", partners_delivery_ids),
+                ("state", "not in", ("done", "cancel")),
+                ("picking_type_subcode", "=", "PICK"),
+            ]
+        )
+
+        description = (
             _("Delivery round %s will be updated in background.")
             % self.template_id.name
         )
-        self.env["stock.picking"]._delay_jobs_action_assign(
-            partners=partners_to_deliver
+        self.env.user.notify_info(description)
+        self.with_delay(description=description, priority=8)._assign_pickings(
+            picking_confirmed
         )
 
     def _check_printed_pickings(self, pickings):
@@ -328,6 +337,8 @@ class RoundInstance(models.Model):
         if errors:
             raise UserError("\n".join(errors.values()))
 
+    @api.multi
+    @job(default_channel="root.stock_picking_assign")  # priority=8
     def _assign_pickings(self, pickings, no_prepare=False):
         self.ensure_one()
 
