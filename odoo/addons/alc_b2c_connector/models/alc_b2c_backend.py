@@ -22,9 +22,7 @@ class AlcB2CBackend(models.Model):
         domain=[("is_assortment", "=", True)],
         context={"product_assortment": True},
     )
-    sale_channel = fields.Selection(
-        selection=lambda a: a.get_sale_channel_selection(), required=True
-    )
+    sale_channel = fields.Selection(selection="_selection_sale_channel", required=True)
     pricelist_id = fields.Many2one(
         "product.pricelist", string="Pricelist", required=True
     )
@@ -52,7 +50,7 @@ class AlcB2CBackend(models.Model):
     _sql_constraints = [("name_uniq", "UNIQUE(name)", _("Name must be unique"))]
 
     @api.model
-    def get_sale_channel_selection(self):
+    def _selection_sale_channel(self):
         return self.env["sale.order"]._fields["sale_channel"].selection
 
     @api.model
