@@ -40,12 +40,24 @@ class AlcB2CBackend(models.Model):
         default=True,
         help="Allows customer to order products not in stock",
     )
+    picking_policy = fields.Selection(
+        selection="_selection_picking_policy",
+        string="Shipping Policy",
+        required=True,
+        readonly=True,
+        default=lambda s: s.env["ir.values"].get_default("sale.order", "picking_policy")
+        or "direct",
+    )
 
     _sql_constraints = [("name_uniq", "UNIQUE(name)", _("Name must be unique"))]
 
     @api.model
     def get_sale_channel_selection(self):
         return self.env["sale.order"]._fields["sale_channel"].selection
+
+    @api.model
+    def _selection_picking_policy(self):
+        return self.env["sale.order"]._fields["picking_policy"].selection
 
     @classmethod
     def _get_api_key_section_name(cls, auth_api_key):

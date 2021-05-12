@@ -99,6 +99,7 @@ class SaleOrder(models.Model):
         # ensure specific values from the backend are preserved
         order_data["pricelist_id"] = b2c_backend.pricelist_id.id
         order_data["payment_term_id"] = b2c_backend.payment_term_id.id
+        order_data["picking_policy"] = b2c_backend.picking_policy
         order_data["order_line"] = [
             (0, 0, line_info)
             for line_info in self._parse_b2c_order_line(data, b2c_backend)

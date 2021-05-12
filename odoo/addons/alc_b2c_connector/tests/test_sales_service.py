@@ -289,6 +289,43 @@ class TestSalesService(CommonCase):
         self.assertTrue(new_so)
         self.assertEqual(new_so.payment_mode_id, self.vt_payment_mode)
 
+    def test_04_02(self):
+        """
+        Data:
+            A backend with a picking_policy
+        Test case:
+            1. Create a new SO for a new partner and the existing veterinary
+            2. Change the picking_policy on the backend
+            3. Create a new so
+        Expected result:
+            1. A new SO is created with:
+                picking policy -> the one from the backend
+            2. A new SO is created with:
+                picking policy -> the one from the backend
+
+        """
+        for i, policy in enumerate(["one", "direct"]):
+            self.b2c_backend.picking_policy = policy
+            recipient_info = self._gen_recipent()
+            params = {
+                "id": i + 10,
+                "customer_ref": self.vt_partner.ref,
+                "date": ISO_DT_WITH_TZ,
+                "recipient": recipient_info,
+                "lines": [
+                    {
+                        "line_id": i + 10,
+                        "sku": self.saleable_product.default_code,
+                        "quantity": 10,
+                    }
+                ],
+            }
+            res = self.sales_service.dispatch("create", params=params)
+            self.assertTrue(res)
+            new_so = self._get_so_from_name(res["ref"])
+            self.assertTrue(new_so)
+            self.assertEqual(new_so.picking_policy, policy)
+
     def test_05(self):
         """
         Test case:

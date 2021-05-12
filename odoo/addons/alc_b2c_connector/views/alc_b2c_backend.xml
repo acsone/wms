@@ -28,6 +28,7 @@
             <field name="payment_mode_id" />
             <field name="payment_term_id" />
             <field name="is_sale_back_order_accepted" />
+            <field name="picking_policy" />
           </group>
         </sheet>
       </form>
