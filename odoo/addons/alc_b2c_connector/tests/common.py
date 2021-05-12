@@ -104,6 +104,9 @@ class CommonCase(SavepointComponentCase):
                 "payment_type": "inbound",
             }
         )
+        cls.auth_api_key = cls.env["auth.api.key"].create(
+            {"name": "test api key", "key": "1234", "user_id": cls.env.user.id}
+        )
         cls.b2c_backend = cls.env["alc.b2c.backend"].create(
             {
                 "name": "B2c backend test",
@@ -115,6 +118,7 @@ class CommonCase(SavepointComponentCase):
                 "payment_mode_id": cls.payment_mode.id,
                 "sale_channel": "web",
                 "is_sale_back_order_accepted": False,
+                "auth_api_key_id": cls.auth_api_key.id,
             }
         )
 

@@ -29,6 +29,7 @@
             <field name="payment_term_id" />
             <field name="is_sale_back_order_accepted" />
             <field name="picking_policy" />
+            <field name="auth_api_key_id" />
           </group>
         </sheet>
       </form>

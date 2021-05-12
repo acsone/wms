@@ -16,5 +16,6 @@
       ref="alc_clubvetshop.account_payment_mode_clubvetshop"
     />
     <field name="sale_channel">clubvetshop</field>
+    <field name="auth_api_key_id" ref="api_key_clubvetshop_rest_api" />
   </record>
 </odoo>

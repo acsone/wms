@@ -16,5 +16,6 @@
       ref="alc_placedesvetos.account_payment_mode_placedesvetos"
     />
     <field name="sale_channel">placedesvetos</field>
+    <field name="auth_api_key_id" ref="api_key_place_des_vetos_rest_api" />
   </record>
 </odoo>
