@@ -54,6 +54,7 @@ class StockConfigSettings(models.TransientModel):
     geo_optimization_method = fields.Selection(
         selection=[
             ("fixed_sequence", "Fixed sequence computed from delivery windows"),
+            ("fixed_itinerary", "Keep fixed round itinerary order"),
             ("optimized", "Computed by the geo optimisation mechanism"),
         ],
         default="fixed_sequence",
