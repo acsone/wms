@@ -353,11 +353,20 @@ class RoundInstance(models.Model):
         delivery_windows_by_partner_id = partners.get_delivery_windows(
             "%s" % fields.Date.from_string(self.date).weekday()
         )
-        partner_delivery_sequences = {}
+        fixed_partner_delivery_sequences = {}
         if self.geo_optimization_method == "fixed_sequence":
-            partner_delivery_sequences = partners.get_delivery_sequence(
+            fixed_partner_delivery_sequences = partners.get_delivery_sequence(
                 "%s" % fields.Date.from_string(self.date).weekday()
             )
+        elif self.geo_optimization_method == "fixed_itinerary":
+            sorted_shippings = self._get_sorted_shipping_ids()
+            fixed_partner_delivery_sequences = {}
+            i = 0
+            for ship in sorted_shippings:
+                if ship.partner_id not in fixed_partner_delivery_sequences:
+                    fixed_partner_delivery_sequences[ship.partner_id.id] = i
+                    i += 1
+
         for partner in partners:
             phones = filter(None, (partner.mobile or None, partner.phone or None))
             order = {
@@ -370,16 +379,12 @@ class RoundInstance(models.Model):
                 "x": partner.partner_longitude,
                 "y": partner.partner_latitude,
             }
-            if self.geo_optimization_method == "fixed_sequence":
+            if fixed_partner_delivery_sequences:
                 order["evaluationInfos"] = {
-                    "orderPosition": partner_delivery_sequences[partner.id],
+                    "orderPosition": fixed_partner_delivery_sequences[partner.id],
                     "orderOriginalResourceId": self.geo_optimization_resource_id,
                     "orderOriginalVisitDay": 1,
                 }
-
-            if self.geo_optimization_method == "fixed_sequence" and False:
-                order["sequenceNumber"] = partner_delivery_sequences[partner.id]
-                order["tsOrderFixed"] = True
             customDataMap = {}
             if partner.comment:
                 customDataMap["notes"] = partner.comment
@@ -446,7 +451,9 @@ class RoundInstance(models.Model):
             "maxOptimDuration": seconds_to_duration(cfg.duration),
             "useForbiddenTransitAreas": False,
         }
-        if self.geo_optimization_method == "fixed_sequence":
+        if self.geo_optimization_method and self.geo_optimization_method.startswith(
+            "fixed_"
+        ):
             res["evaluation"] = True
         return res
 
