@@ -147,6 +147,7 @@
         "purchase_prepaid",
         "purchase_unlink_cancelop",
         "purchase_update_procurement_qty",
+        "rest_log",
         "sale_quick_create",
         "server_environment_files",
         "specific_account",

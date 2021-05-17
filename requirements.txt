@@ -96,7 +96,7 @@ odoo10-addon-base-m2m-custom-field @ git+https://github.com/acsone/server-tools.
 odoo10-addon-base-optional-quick-create @ git+https://github.com/acsone/server-tools.git@dcefdba5bac014076f05229ba091acd8b739e164#subdirectory=setup/base_optional_quick_create
 odoo10-addon-base-partner-sequence @ git+https://github.com/acsone/partner-contact@a9e98e0dad100bbf0ba80da7e4b83b9a65dcc3ea#subdirectory=setup/base_partner_sequence
 odoo10-addon-base-report-to-printer @ git+https://github.com/acsone/report-print-send.git@c8244592b3952b406f768f6f45faeec048b9e1a0#subdirectory=setup/base_report_to_printer
-odoo10-addon-base-rest==10.0.2.1.0
+odoo10-addon-base-rest @  git+https://github.com/acsone/rest-framework.git@67661cd6576cd4a04491d5c59be992342e605bba#subdirectory=setup/base_rest
 odoo10-addon-base-suspend-security==10.0.1.0.0
 odoo10-addon-base-technical-features @ git+https://github.com/acsone/server-tools.git@dcefdba5bac014076f05229ba091acd8b739e164#subdirectory=setup/base_technical_features
 odoo10-addon-base-ubl==10.0.1.1.0
@@ -150,6 +150,7 @@ odoo10-addon-report-csv==10.0.1.0.0.99.dev2
 odoo10-addon-report-xlsx @ git+https://github.com/acsone/reporting-engine.git@9d7cf09bdacc5d393bc46f8e4f43dd3bd67433a4#subdirectory=setup/report_xlsx
 odoo10-addon-report-xlsx-helper @ git+https://github.com/acsone/reporting-engine.git@9d7cf09bdacc5d393bc46f8e4f43dd3bd67433a4#subdirectory=setup/report_xlsx_helper
 odoo10-addon-report-xml==10.0.1.0.0.99.dev3
+odoo10-addon-rest-log @  git+https://github.com/acsone/rest-framework.git@67661cd6576cd4a04491d5c59be992342e605bba#subdirectory=setup/rest_log
 odoo10-addon-sale-exception @ git+https://github.com/acsone/sale-workflow.git@b9987e4eb546f9ea8c0ee88e507072252b0d57d3#subdirectory=setup/sale_exception
 odoo10-addon-sale-stock-picking-blocking @ git+https://github.com/acsone/sale-workflow.git@b9987e4eb546f9ea8c0ee88e507072252b0d57d3#subdirectory=setup/sale_stock_picking_blocking
 odoo10-addon-sale-stock-restocking-fee-invoicing @ git+https://github.com/acsone/account-invoicing.git@9336b7cb7d51bd4cab5f8c36ebf6d7e84896b2e9#subdirectory=setup/sale_stock_restocking_fee_invoicing
