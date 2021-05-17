@@ -22,14 +22,18 @@ class AlcProductConsolidatedPriceCsvReport(models.AbstractModel):
                     "NAME": product.name,
                     "CNK": product.cnk_code or "",
                     "INDICATED_PRICE": product.indicated_price,
-                    "TAXES": ", ".join(product.taxes_id.mapped("description")),
+                    "TAXES": ", ".join(
+                        product.taxes_id.filtered(
+                            lambda t: t.amount_type == "percent"
+                        ).mapped("description")
+                    ),
                     "LIST_PRICE": product.list_price,
                     "DISCOUNT": cons_price.supplier_discount,
                     "NET_PRICE": cons_price.net_price,
                     "SUPPLIER": product.seller_ids[0].name.name
                     if product.seller_ids
                     else "",
-                    "CATEGORY": product.categ_id.display_name,
+                    "CATEGORY": product.categ_id.parent_id.display_name,
                 }
             )
 
