@@ -6,6 +6,7 @@ import json
 import random
 import string
 
+from odoo import fields
 from odoo.exceptions import MissingError, ValidationError
 
 from .common import CommonCase
@@ -78,6 +79,7 @@ class TestSalesService(CommonCase):
                         },
                     )
                 ],
+                "sale_channel": cls.b2c_backend.sale_channel,
             }
         )
 
@@ -308,7 +310,7 @@ class TestSalesService(CommonCase):
             self.b2c_backend.picking_policy = policy
             recipient_info = self._gen_recipent()
             params = {
-                "id": i + 10,
+                "id": i + 100,
                 "customer_ref": self.vt_partner.ref,
                 "date": ISO_DT_WITH_TZ,
                 "recipient": recipient_info,
@@ -529,6 +531,51 @@ class TestSalesService(CommonCase):
         self._deliver_orders(new_so)
         res = self.sales_service.dispatch("get", _id=99)
         self.assertEqual("delivery", res["state"])
+
+    def test_10_01(self):
+        """
+        Test case:
+            1. Create a new SO with 2 lines.
+               5 saleable products are in stock
+               110  saleable product2s are in stock
+
+            2. Deliver available product and add tracking information
+        Expected result:
+            1 state is 'sale'
+            2 state is 'delivery' and deliveries info are available
+        """
+        recipient_info = self._gen_recipent()
+        params = {
+            "id": 99,
+            "customer_ref": self.vt_partner.ref,
+            "date": ISO_DT_WITH_TZ,
+            "recipient": recipient_info,
+            "lines": [
+                {
+                    "line_id": 2,
+                    "sku": self.saleable_product.default_code,
+                    "quantity": 10,
+                },
+                {
+                    "line_id": 3,
+                    "sku": self.saleable_product_2.default_code,
+                    "quantity": 1,
+                },
+            ],
+        }
+        res = self.sales_service.dispatch("create", params=params)
+        self.assertTrue(res)
+        new_so = self._get_so_from_name(res["ref"])
+        self.assertEqual("sale", res["state"])
+        self._deliver_orders(new_so)
+        new_so.picking_ids.write({"carrier_tracking_ref": "AZ123"})
+        res = self.sales_service.dispatch("get", _id=99)
+        self.assertEqual("delivery", res["state"])
+        self.assertIn("deliveries", res)
+        delivery = res["deliveries"][0]
+        self.assertEqual(delivery["tracking_reference"], "AZ123")
+        self.assertEqual(delivery["delivery_date"], fields.Date.today())
+        self.assertTrue(delivery["carrier"], new_so.carrier_id.name)
 
     def test_11(self):
         """
