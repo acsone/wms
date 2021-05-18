@@ -2,7 +2,7 @@
 <!-- Copyright 2020 ACSONE SA/NV
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
-  <record id="base_rest.menu_rest_api" model="ir.ui.menu">
+  <record id="base_rest.menu_rest_api_root" model="ir.ui.menu">
     <field
       name="groups_id"
       eval="[(6, 0, [ref('specific_security.group_res_api_user')])]"
