@@ -7,7 +7,8 @@
       <form string="Storage Location">
         <sheet>
           <h1>
-            <field name="product_id" />
+            <field name="product_id" invisible="1" />
+            <field name="variant_id" />
           </h1>
           <group>
             <group>
