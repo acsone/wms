@@ -146,6 +146,10 @@ class SaleOrder(models.Model):
         title = customer_info.get("title")
         if title:
             title = self.env.ref(TITLE_XML_ID_BY_B2C_KEY[title]).id
+        country_id = None
+        country_code = customer_info.get("country_code")
+        if country_code:
+            country_id = self.env["res.country"]._get_by_code(country_code).id
         return self.env["res.partner"].create(
             {
                 "name": name,
@@ -163,6 +167,7 @@ class SaleOrder(models.Model):
                     "specific_partner.partner_category_student"
                 ).id,
                 "ref": b2c_ref,
+                "country_id": country_id,
             }
         )
 

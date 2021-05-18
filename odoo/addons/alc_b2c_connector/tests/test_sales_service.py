@@ -529,3 +529,37 @@ class TestSalesService(CommonCase):
         self._deliver_orders(new_so)
         res = self.sales_service.dispatch("get", _id=99)
         self.assertEqual("delivery", res["state"])
+
+    def test_11(self):
+        """
+        Data:
+            An existing veterinary
+        Test case:
+            Create a new SO for a new partner and the existing veterinary
+            Partner with a specific country...
+        Expected result:
+            A new partner is created with the diven country
+        """
+        recipient_info = self._gen_recipent()
+        recipient_info["country_code"] = "BE"
+        params = {
+            "id": 2,
+            "customer_ref": self.vt_partner.ref,
+            "date": ISO_DT_WITH_TZ,
+            "recipient": recipient_info,
+            "lines": [
+                {
+                    "line_id": 2,
+                    "sku": self.saleable_product.default_code,
+                    "quantity": 10,
+                }
+            ],
+        }
+        res = self.sales_service.dispatch("create", params=params)
+        self.assertTrue(res)
+        new_so = self._get_so_from_name(res["ref"])
+        self.assertEqual(
+            new_so.partner_id.ref,
+            u"{}_{}".format(self.b2c_backend.sale_channel, recipient_info["id"]),
+        )
+        self.assertEqual("BE", new_so.partner_id.country_id.code)

@@ -103,6 +103,11 @@ class SalesService(Component):
                     "email": {"type": "string", "nullable": False, "required": True},
                     "phone": {"type": "string", "nullable": True, "required": False},
                     "mobile": {"type": "string", "nullable": True, "required": False},
+                    "country_code": {
+                        "type": "string",
+                        "nullable": True,
+                        "allowed": self.env["res.country"]._get_codes(),
+                    },
                 },
             },
             "lines": {
