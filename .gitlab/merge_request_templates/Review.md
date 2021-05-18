@@ -4,4 +4,4 @@
 
 cc @jbaudoux
 
-/label ~"needs review" /assign @laurent.mignon /milestone %1.67 /target_branch master
+/label ~"needs review" /assign @laurent.mignon /milestone %1.68 /target_branch master
