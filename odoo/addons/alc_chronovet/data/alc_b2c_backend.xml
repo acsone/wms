@@ -13,5 +13,6 @@
     <field name="sale_team_id" ref="sales_team.salesteam_website_sales" />
     <field name="payment_mode_id" ref="alc_chronovet.account_payment_mode_chronovet" />
     <field name="sale_channel">chronovet</field>
+    <field name="auth_api_key_id" ref="api_key_chronovet_rest_api" />
   </record>
 </odoo>

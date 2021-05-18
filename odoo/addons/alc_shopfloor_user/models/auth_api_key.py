@@ -12,7 +12,7 @@ class AuthApiKey(models.Model):
     shopfloor_user_id = fields.Many2one(
         comodel_name="res.users",
         string="Shopfloor User",
-        required=True,
+        required=False,
         help="""The user operating the shopfloor app. All the operations are done
         by using the linked user. Nevertheless, to keep a trace af the real user
         operating the mobile app without the use of a real Odoo user, you can

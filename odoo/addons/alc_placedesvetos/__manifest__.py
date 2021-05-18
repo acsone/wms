@@ -6,7 +6,7 @@
     "name": "Alc Placedesvetos",
     "description": """
         B2C connector for Place des Vétos""",
-    "version": "10.0.1.0.0",
+    "version": "10.0.2.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
@@ -18,6 +18,7 @@
     ],
     "data": [
         "data/account_payment_mode.xml",
+        "data/auth_api_key.xml",
         "data/alc_b2c_backend.xml",
         "data/res_partner.xml",
     ],

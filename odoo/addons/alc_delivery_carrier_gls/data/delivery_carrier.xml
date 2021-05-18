@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2020 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo noupdate="1">
+  <record id="delivery_carrier_gls_be" model="delivery.carrier">
+    <field name="name">GLS Belgique</field>
+    <field name="delivery_type">gls</field>
+    <field name="code">GLS_BE</field>
+    <field name="product_id" ref="product_product_gls_be" />
+  </record>
+  <record id="delivery_carrier_gls_fr" model="delivery.carrier">
+    <field name="name">GLS France</field>
+    <field name="delivery_type">gls</field>
+    <field name="code">GLS_FR</field>
+    <field name="product_id" ref="product_product_gls_fr" />
+  </record>
+</odoo>

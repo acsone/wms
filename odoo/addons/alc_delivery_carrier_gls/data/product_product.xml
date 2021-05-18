@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2020 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo noupdate="1">
+  <!-- PRODUCT  -->
+  <record id="product_product_gls_be" model="product.product">
+    <field name="default_code">SHIP_GLS_BE</field>
+    <field name="type">service</field>
+    <field name="sale_ok" eval="False" />
+    <field name="name">Coûts de livraison - GLS Belgique</field>
+    <field
+      name="image"
+      type="base64"
+      file="alc_delivery_carrier_gls/static/img/gls.jpg"
+    />
+  </record>
+  <record id="product_product_gls_fr" model="product.product">
+    <field name="default_code">SHIP_GLS_FR</field>
+    <field name="type">service</field>
+    <field name="sale_ok" eval="False" />
+    <field name="name">Coûts de livraison - GLS France</field>
+    <field
+      name="image"
+      type="base64"
+      file="alc_delivery_carrier_gls/static/img/gls.jpg"
+    />
+  </record>
+</odoo>

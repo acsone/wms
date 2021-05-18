@@ -13,9 +13,7 @@ _logger = logging.getLogger(__name__)
 def _initialize_product_assortment_filter(cr):
     env = api.Environment(cr, SUPERUSER_ID, {})
     _logger.info("Initialize Newpharam product assortment filter")
-    assortment_filter = env.ref(
-        "alc_product_consolidated_price_newpharma.newpharma_product_assortment_filter"
-    )
+    assortment_filter = env.ref("alc_logiweb.logiweb_product_assortment_filter")
     supplier_ids_to_exclude = (
         env["res.partner"]
         .search(
@@ -36,9 +34,15 @@ def _initialize_product_assortment_filter(cr):
         )
         .ids
     )
+    domain = [
+        ("type", "=", "product"),
+        ("active", "=", True),
+        ("sale_ok", "=", True),
+        ("default_code", "!=", False),
+    ]
     domain = AND(
         [
-            [("web_published", "=", True)],
+            domain,
             OR(
                 [
                     [
@@ -59,25 +63,12 @@ def _initialize_product_assortment_filter(cr):
                         (
                             "categ_id",
                             "child_of",
-                            env.ref("specific_data.product_categ_vet_belges").id,
-                        )
-                    ],
-                    [
-                        (
-                            "categ_id",
-                            "child_of",
                             env.ref("specific_data.product_categ_parapharmacie").id,
                         )
                     ],
                 ]
             ),
             [("supplier_id", "not in", supplier_ids_to_exclude)],
-            [
-                ("name", "not ilike", "pvd "),
-                ("name", "not ilike", "vetessentials"),
-                ("name", "not ilike", "promo"),
-                ("name", "not ilike", "sticker"),
-            ],
         ]
     )
     assortment_filter.domain = str(domain)

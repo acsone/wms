@@ -2,8 +2,9 @@
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _
+from odoo import _, fields
 from odoo.exceptions import MissingError
+from odoo.osv import expression
 
 from odoo.addons.base_rest.components.service import to_int
 from odoo.addons.component.core import Component
@@ -46,9 +47,13 @@ class SalesService(Component):
            * sale: Sale Order confirmed
            * cancel: Sale Order cancelled
            * delivery: Sale Order sent to the vet
+        * When state is "delivery" delivery info are provided by the
+        deliveries field
 
         """
-        res = self.env["sale.order"].suspend_security().search([("b2c_ref", "=", _id)])
+        domain = self._get_base_search_domain()
+        domain = expression.AND([domain, [("b2c_ref", "=", _id)]])
+        res = self.env["sale.order"].suspend_security().search(domain)
         if not res:
             raise MissingError(_("Sale order not found for id %s") % _id)
         return self._sale_order_to_search_result(res[0])
@@ -58,10 +63,10 @@ class SalesService(Component):
         Get orders info. More information on the response content is available
         on the 'get' method
         """
-        domain = []
+        domain = self._get_base_search_domain()
         ids = params.get("ids")
         if ids:
-            domain.append(("b2c_ref", "in", ids))
+            domain = expression.AND([domain, [("b2c_ref", "in", ids)]])
         limit = params.get("limit", None)
         offset = params.get("offset", 0)
         data = (
@@ -103,6 +108,11 @@ class SalesService(Component):
                     "email": {"type": "string", "nullable": False, "required": True},
                     "phone": {"type": "string", "nullable": True, "required": False},
                     "mobile": {"type": "string", "nullable": True, "required": False},
+                    "country_code": {
+                        "type": "string",
+                        "nullable": True,
+                        "allowed": self.env["res.country"]._get_codes(),
+                    },
                 },
             },
             "lines": {
@@ -159,6 +169,9 @@ class SalesService(Component):
 
     # private methods
 
+    def _get_base_search_domain(self):
+        return [("sale_channel", "=", self.b2c_backend.sale_channel)]
+
     @property
     def _sale_info_schema(self):
         return {
@@ -169,6 +182,31 @@ class SalesService(Component):
                 "type": "datetime",
                 "required": True,
                 "nullable": True,
+            },
+            "deliveries": {
+                "type": "list",
+                "nullable": False,
+                "required": False,
+                "schema": {
+                    "type": "dict",
+                    "schema": {
+                        "tracking_reference": {
+                            "type": "string",
+                            "nullable": True,
+                            "required": False,
+                        },
+                        "delivery_date": {
+                            "type": "string",
+                            "nullable": True,
+                            "required": False,
+                        },
+                        "carrier": {
+                            "type": "string",
+                            "nullable": True,
+                            "required": False,
+                        },
+                    },
+                },
             },
             "lines": {
                 "type": "list",
@@ -226,16 +264,20 @@ class SalesService(Component):
         return res
 
     def _sale_order_to_search_result(self, sale_order):
-        return {
+        state = sale_order.b2c_state
+        res = {
             "id": int(sale_order.b2c_ref),
             "ref": sale_order.name,
-            "state": sale_order.b2c_state,
+            "state": state,
             "confirmation_date": self._to_dt_utc_with_tz(sale_order.confirmation_date),
             "lines": [
                 self._line_to_search_result(line)
                 for line in sale_order.order_line.filtered("b2c_ref")
             ],
         }
+        if state == "delivery":
+            res["deliveries"] = self._deliveries_to_search_result(sale_order)
+        return res
 
     def _line_to_search_result(self, order_line):
         return {
@@ -247,3 +289,34 @@ class SalesService(Component):
             "qty_returned": int(order_line.product_qty_returned),
             "qty_backorder": int(order_line.product_qty_backorder),
         }
+
+    def _deliveries_to_search_result(self, sale_order):
+        ships = sale_order.mapped("picking_ids").filtered(
+            lambda p: p.picking_type_code == "outgoing"
+        )
+        res = []
+        for ship in ships:
+            res.append(
+                {
+                    "tracking_reference": ship.carrier_tracking_ref or "",
+                    "delivery_date": self._get_delivery_date(ship),
+                    "carrier": ship.carrier_id.name or "",
+                }
+            )
+        return res
+
+    def _get_delivery_date(self, picking):
+        """
+        Get the delivery date from given picking.
+        As the delivery date doesn't exist in Odoo, we use the write_date
+        when the state is 'done'.
+        :param picking: stock.picking
+        :return: str
+        """
+        delivery_date = ""
+        if picking.state == "done":
+            write_date = fields.Datetime.from_string(picking.write_date)
+            delivery_date = fields.Date.to_string(
+                fields.Datetime.context_timestamp(picking, write_date)
+            )
+        return delivery_date

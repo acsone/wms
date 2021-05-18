@@ -5,8 +5,6 @@
 from odoo import _, api, fields, models, tools
 from odoo.http import request
 
-from odoo.addons.server_environment import serv_config
-
 
 class AlcB2CBackend(models.Model):
 
@@ -22,9 +20,7 @@ class AlcB2CBackend(models.Model):
         domain=[("is_assortment", "=", True)],
         context={"product_assortment": True},
     )
-    sale_channel = fields.Selection(
-        selection=lambda a: a.get_sale_channel_selection(), required=True
-    )
+    sale_channel = fields.Selection(selection="_selection_sale_channel", required=True)
     pricelist_id = fields.Many2one(
         "product.pricelist", string="Pricelist", required=True
     )
@@ -40,46 +36,44 @@ class AlcB2CBackend(models.Model):
         default=True,
         help="Allows customer to order products not in stock",
     )
+    picking_policy = fields.Selection(
+        selection="_selection_picking_policy",
+        string="Shipping Policy",
+        required=True,
+        readonly=True,
+        default=lambda s: s.env["ir.values"].get_default("sale.order", "picking_policy")
+        or "direct",
+    )
 
-    _sql_constraints = [("name_uniq", "UNIQUE(name)", _("Name must be unique"))]
+    auth_api_key_id = fields.Many2one(comodel_name="auth.api.key", required=True)
+
+    _sql_constraints = [
+        ("name_uniq", "UNIQUE(name)", _("Name must be unique")),
+        (
+            "auth_api_key_uniq",
+            "UNIQUE(auth_api_key_id)",
+            _("Auth api key can only be used by 1 backend at same time"),
+        ),
+    ]
 
     @api.model
-    def get_sale_channel_selection(self):
+    def _selection_sale_channel(self):
         return self.env["sale.order"]._fields["sale_channel"].selection
 
-    @classmethod
-    def _get_api_key_section_name(cls, auth_api_key):
-        for section in serv_config.sections():
-            if section.startswith("api_key_") and serv_config.has_option(
-                section, "key"
-            ):
-                if tools.consteq(auth_api_key, serv_config.get(section, "key")):
-                    return section
-        return None
+    @api.model
+    def _selection_picking_policy(self):
+        return self.env["sale.order"]._fields["picking_policy"].selection
 
     @api.model
-    @tools.ormcache("self._uid", "auth_api_key")
-    def _get_id_from_auth_api_key(self, auth_api_key):
-        auth_api_key_section_name = self._get_api_key_section_name(auth_api_key)
-        if auth_api_key_section_name:
-            # filtered, not search because auth_api_key_name is
-            # not a searchable field
-            return (
-                self.suspend_security()
-                .search(
-                    [
-                        (
-                            "name",
-                            "=",
-                            serv_config.get(auth_api_key_section_name, "backend_name"),
-                        )
-                    ]
-                )
-                .id
-            )
-        return False
+    @tools.ormcache("self._uid", "auth_api_key_id")
+    def _get_id_from_auth_api_key(self, auth_api_key_id):
+        return (
+            self.suspend_security()
+            .search([("auth_api_key_id", "=", auth_api_key_id)])
+            .id
+        )
 
     @api.model
     def _get_from_http_request(self):
-        auth_api_key = getattr(request, "auth_api_key", None)
-        return self.browse(self._get_id_from_auth_api_key(auth_api_key))
+        auth_api_key_id = getattr(request, "auth_api_key_id", None)
+        return self.browse(self._get_id_from_auth_api_key(auth_api_key_id))

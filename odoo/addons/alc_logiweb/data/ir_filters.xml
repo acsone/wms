@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<!-- Copyright 2020 ACSONE SA/NV
+<!-- Copyright 2021 ACSONE SA/NV
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo noupdate="1">
-  <record id="b2c_product_assortment_filter" model="ir.filters">
-    <field name="name">B2C Product Assortment</field>
+  <record id="logiweb_product_assortment_filter" model="ir.filters">
+    <field name="name">Logiweb Product Assortment</field>
     <field name="model_id">product.product</field>
     <field name="domain">[(1, "!=", 1)]</field>
     <!-- initialized by the post init hook -->
