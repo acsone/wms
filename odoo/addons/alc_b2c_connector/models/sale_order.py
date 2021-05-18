@@ -104,7 +104,6 @@ class SaleOrder(models.Model):
             (0, 0, line_info)
             for line_info in self._parse_b2c_order_line(data, b2c_backend)
         ]
-        # TODO PAYMENT MODE WITH SALE_AUTOMATIC_WORKFLOW
         return order_data
 
     @api.model
