@@ -58,7 +58,6 @@ class TestFullParking(ZetesParkingTest):
                 ],
             }
         )
-
         # Set a quantity in this parking
         update_qty_wizard = self.env["stock.change.product.qty"].create(
             {

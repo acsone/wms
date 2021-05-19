@@ -67,7 +67,6 @@ class TestFull(ZetesTest, JobMixin):
                 ],
             }
         )
-
         two_years = datetime.now() + relativedelta(years=2)
         self.lot_product_2 = self.env["stock.production.lot"].create(
             {
@@ -152,7 +151,6 @@ class TestFull(ZetesTest, JobMixin):
                 ],
             }
         )
-
         two_months = datetime.now() + relativedelta(months=2)
         self.lot_product_3_1 = self.env["stock.production.lot"].create(
             {
