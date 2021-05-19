@@ -232,6 +232,11 @@ msgid "Lines unavailable"
 msgstr "Lignes non disponibles"
 
 #. module: specific_sale
+#: selection:sale.order,sale_channel:0
+msgid "Logiweb"
+msgstr ""
+
+#. module: specific_sale
 #: model:ir.model.fields,field_description:specific_sale.field_sale_order_line_production_lot_ids
 msgid "Lots/Serial Numbers"
 msgstr "Numéros de lots/séries"
