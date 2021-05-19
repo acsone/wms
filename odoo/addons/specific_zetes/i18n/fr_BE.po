@@ -93,7 +93,7 @@ msgid "Cannot format the value %s with type %s"
 msgstr "Impossible de formater la valeur %s du type %s"
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tests/test_full.py:644
+#: code:addons/specific_zetes/tests/test_full.py:642
 #: code:addons/specific_zetes/tools/domain_assignment.py:157
 #, python-format
 msgid "Cannot found a picking"
@@ -289,7 +289,7 @@ msgstr "Erreurs humaine"
 #: model:ir.model.fields,field_description:specific_zetes.field_manage_uop_line_id
 #: model:ir.model.fields,field_description:specific_zetes.field_pack_operation_reserve_rel_id
 #: model:ir.model.fields,field_description:specific_zetes.field_stock_pack_operation_deleted_id
-#: model:ir.model.fields,field_description:specific_zetes.field_stock_pack_operation_operator_id_10158
+#: model:ir.model.fields,field_description:specific_zetes.field_stock_pack_operation_operator_id_10255
 #: model:ir.model.fields,field_description:specific_zetes.field_view_picking_line_id
 #: model:ir.model.fields,field_description:specific_zetes.field_zetes_logger_id
 msgid "ID"
