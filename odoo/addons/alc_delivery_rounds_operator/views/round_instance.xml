@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+  <record model="ir.ui.view" id="round_instance_form_view">
+    <field name="name">round.instance.form (in alc_delivery_rounds_operator)</field>
+    <field name="model">round.instance</field>
+    <field name="inherit_id" ref="delivery_rounds.view_round_instance_form" />
+    <field name="arch" type="xml">
+      <field name="tag_ids" position="after">
+        <field
+          name="operator_ids"
+          widget="many2many_tags"
+          options="{'no_open':True,'no_create':True}"
+        />
+      </field>
+    </field>
+  </record>
+</odoo>

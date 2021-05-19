@@ -65,31 +65,57 @@ class TestAssignemnt(ZetesTest, JobMixin):
         result = self.format_result(result_str)
         self.assertEqual(result.groupNum, str(self.picking.id))
 
-        # Inventory desactivated
-        # # Try to create an inventory for the product 1
-        # # This picking should be not available
-        # inventory = self.env['stock.inventory'].create({
-        #     'name': 'Test',
-        #     'filter': 'partial',
-        # })
-        # inventory.line_ids.create({
-        #     'inventory_id': inventory.id,
-        #     'product_id': self.product_1.id,
-        #     'product_qty': 20,
-        #     'location_id': self.env.ref('stock.stock_location_stock').id
-        # })
-        # # Start the inventory
-        # inventory.action_start()
-        # result_str = domain.requ(request_params)
-        # result = self.format_result(result_str)
-        # self.assertEqual(result.respCode, str(constants.RESPONSE_CODE_ERROR))
+    def test_requ_assignment_operator(self):
+        """
+        Check that the assigement takes into account the allowed operators on
+        the picking
 
-        # # Now validate the inventory
-        # inventory.action_done()
-        # result_str = domain.requ(request_params)
-        # result = self.format_result(result_str)
-        # self.assertEqual(result.respCode, str(constants.RESPONSE_CODE_OK))
-        # self.assertEqual(result.groupNum, str(self.picking.id))
+        """
+        # Check with no current picking
+        domain = Assignment(self._default_header(), mock.MagicMock(name="Savepoint()"))
+        request_params = Parameters(domain, action="requ")
+        request_params.update(
+            {
+                "Cri01": None,
+                "Cri02": None,
+                "assignmentType": constants.PICKING_ASSIGNMENT,
+                "requestType": "1",
+            }
+        )
+
+        self.partner.write({"is_passport_required": True})
+        self.picking.picking_type_id.passport = True
+
+        self.assertEqual(
+            self.picking.picking_type_id.zetes_picking_type,
+            constants.PICKING_ASSIGNMENT,
+        )
+        # assign an operator the the picking
+        allowed_operator = self.operator_user.copy({"operator_code": 999})
+        self.picking.delivery_round_id.operator_ids = [(6, 0, allowed_operator.ids)]
+
+        # Search for a picking
+        # Since the operator is not into the allowed operators on the delively_round,
+        # the response should be error
+        result_str = domain.requ(request_params)
+        result = self.format_result(result_str)
+        self.assertEqual(result.respCode, str(constants.RESPONSE_CODE_ERROR))
+
+        # set the operator_user into the list of allowed operators..
+        # picking should be assigned
+        self.picking.delivery_round_id.operator_ids = [
+            (6, 0, allowed_operator.ids + self.operator_user.ids)
+        ]
+        result_str = domain.requ(request_params)
+        result = self.format_result(result_str)
+        self.assertEqual(result.respCode, str(constants.RESPONSE_CODE_OK))
+        self.assertEqual(result.groupNum, str(self.picking.id))
+        self.assertEqual(result.Usf03, str(ROUND_CODE))  # Round code
+        self.assertEqual(result.Usf06, "C")
+        self.assertEqual(result.Usf09, "1")  # Nbr of lines
+
+        # Check if the picking has been assigned to the current user
+        self.assertEqual(self.picking.operator_id.id, self.operator_user.id)
 
     def test_resu_assignement(self):
         self.assertFalse(self.picking.operator_id)

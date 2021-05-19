@@ -299,6 +299,11 @@ WHERE picking.picking_type_subcode = 'PICK'
                 picking.operator_id IS NULL
                 AND round.picking_launched
                 AND picking.zetes_state IN %(picking_zetes_states_no_operator)s
+                AND (
+                    NOT EXISTS(select 1 from res_users_round_instance_rel where round_instance_id = round.id)
+                    OR
+                    EXISTS (select 1 from res_users_round_instance_rel where round_instance_id = round.id and res_users_id = %(operator)s)
+                )
             )
            OR
            (

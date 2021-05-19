@@ -13,6 +13,7 @@
     """,
     "depends": [
         "alc_b2c_partner",
+        "alc_delivery_rounds_operator",
         "delivery_rounds",
         "delivery_rounds_refill",
         "queue_job",
