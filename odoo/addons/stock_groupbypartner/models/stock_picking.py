@@ -93,7 +93,7 @@ class StockPicking(models.Model):
 
             if backorder_moves:
                 not_done_bo_moves = backorder_moves.filtered(
-                    lambda m, dm=not_done_bo_moves: m in dm
+                    lambda m, ndm=not_done_bo_moves: m in ndm
                 )
 
             if not not_done_bo_moves:
