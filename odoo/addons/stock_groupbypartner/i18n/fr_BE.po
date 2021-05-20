@@ -58,8 +58,8 @@ msgid ""
 msgstr ""
 
 #. module: stock_groupbypartner
-#: code:addons/stock_groupbypartner/models/stock_picking.py:107
-#: code:addons/stock_groupbypartner/models/stock_picking.py:134
+#: code:addons/stock_groupbypartner/models/stock_picking.py:114
+#: code:addons/stock_groupbypartner/models/stock_picking.py:141
 #, python-format
 msgid ""
 "Remaining moves canceled as partner does not accept backorder:<ul>%s</ul>"
