@@ -198,7 +198,6 @@ class PurchaseOrderLine(models.Model):
         # discount_incl = self.env.context.get('discount_incl')
         # if 'price_unit' in vals and not discount_incl:
         #     vals['price_unit_base'] = vals['price_unit']
-
         return super(PurchaseOrderLine, self).write(vals)
 
     @api.onchange("price_unit_base", "discount_global", "promotion_supplier")
