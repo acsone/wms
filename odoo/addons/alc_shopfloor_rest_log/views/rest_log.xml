@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+  <record model="ir.ui.view" id="rest_log_form_view">
+    <field name="name">rest.log.form (in alc_shopfloor_rest_log)</field>
+    <field name="model">rest.log</field>
+    <field name="inherit_id" ref="rest_log.rest_log_form_view" />
+    <field name="arch" type="xml">
+      <field name="create_uid" position="after">
+        <field name="operator_id" />
+      </field>
+    </field>
+  </record>
+  <record model="ir.ui.view" id="rest_log_search_view">
+    <field name="name">rest.log.search (in alc_shopfloor_rest_log)</field>
+    <field name="model">rest.log</field>
+    <field name="inherit_id" ref="rest_log.rest_log_search_view" />
+    <field name="arch" type="xml">
+      <field name="collection" position="after">
+        <field name="operator_id" />
+      </field>
+      <filter name="by_user" position="before">
+        <filter
+          string="Operator"
+          name="by_operator"
+          domain="[]"
+          context="{'group_by': 'operator_id'}"
+        />
+      </filter>
+    </field>
+  </record>
+  <record model="ir.ui.view" id="rest_log_tree_view">
+    <field name="name">rest.log.tree (in alc_shopfloor_rest_log)</field>
+    <field name="model">rest.log</field>
+    <field name="inherit_id" ref="rest_log.rest_log_tree_view" />
+    <field name="arch" type="xml">
+      <field name="collection" position="attributes">
+        <attribute name="invisible">1</attribute>
+      </field>
+      <field name="create_uid" position="after">
+        <field name="operator_id" />
+      </field>
+    </field>
+  </record>
+</odoo>
