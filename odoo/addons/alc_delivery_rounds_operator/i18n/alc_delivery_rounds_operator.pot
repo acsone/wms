@@ -1,0 +1,48 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* alc_delivery_rounds_operator
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_delivery_rounds_operator
+#: code:addons/alc_delivery_rounds_operator/models/stock_picking.py:36
+#, python-format
+msgid "Operator {operator_name} is not into the list of allowed operators for the delivery round {round_name} ({allowed_operator_names})."
+msgstr ""
+
+#. module: alc_delivery_rounds_operator
+#: model:ir.model.fields,field_description:alc_delivery_rounds_operator.field_round_instance_operator_ids
+#: model:ir.model.fields,field_description:alc_delivery_rounds_operator.field_round_template_operator_ids
+msgid "Operators"
+msgstr ""
+
+#. module: alc_delivery_rounds_operator
+#: model:ir.model.fields,help:alc_delivery_rounds_operator.field_round_instance_operator_ids
+#: model:ir.model.fields,help:alc_delivery_rounds_operator.field_round_template_operator_ids
+msgid "Operators assigned to this delivery. Fill this list to restrict the processing of the pickings to specific list of operators. Leavesempty to allows the processing by any operator."
+msgstr ""
+
+#. module: alc_delivery_rounds_operator
+#: model:ir.model,name:alc_delivery_rounds_operator.model_stock_picking
+msgid "Transfer"
+msgstr ""
+
+#. module: alc_delivery_rounds_operator
+#: model:ir.model,name:alc_delivery_rounds_operator.model_round_instance
+msgid "round.instance"
+msgstr ""
+
+#. module: alc_delivery_rounds_operator
+#: model:ir.model,name:alc_delivery_rounds_operator.model_round_template
+msgid "round.template"
+msgstr ""
+

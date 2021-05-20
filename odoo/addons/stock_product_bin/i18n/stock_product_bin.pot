@@ -69,6 +69,7 @@ msgid "Location"
 msgstr ""
 
 #. module: stock_product_bin
+#: model:ir.model,name:stock_product_bin.model_product_product
 #: model:ir.model.fields,field_description:stock_product_bin.field_product_stock_bin_product_id
 msgid "Product"
 msgstr ""
@@ -104,6 +105,11 @@ msgstr ""
 #. module: stock_product_bin
 #: model:ir.actions.act_window,name:stock_product_bin.product_stock_bin_action
 msgid "Storage Locations"
+msgstr ""
+
+#. module: stock_product_bin
+#: model:ir.model.fields,field_description:stock_product_bin.field_product_stock_bin_variant_id
+msgid "Variant"
 msgstr ""
 
 #. module: stock_product_bin

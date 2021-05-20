@@ -24,6 +24,18 @@ msgid "Allows only products matching with the assortment domain"
 msgstr ""
 
 #. module: alc_b2c_connector
+#: code:addons/alc_b2c_connector/models/alc_b2c_backend.py:55
+#: sql_constraint:alc.b2c.backend:0
+#, python-format
+msgid "Auth api key can only be used by 1 backend at same time"
+msgstr ""
+
+#. module: alc_b2c_connector
+#: model:ir.model.fields,field_description:alc_b2c_connector.field_alc_b2c_backend_auth_api_key_id
+msgid "Auth api key id"
+msgstr ""
+
+#. module: alc_b2c_connector
 #: model:ir.ui.menu,name:alc_b2c_connector.alc_b2c_root_menu
 msgid "B2C\n"
 "        "
@@ -57,6 +69,11 @@ msgstr ""
 #. module: alc_b2c_connector
 #: selection:sale.order,b2c_state:0
 msgid "Cancel"
+msgstr ""
+
+#. module: alc_b2c_connector
+#: model:ir.model,name:alc_b2c_connector.model_res_country
+msgid "Country"
 msgstr ""
 
 #. module: alc_b2c_connector
@@ -115,14 +132,14 @@ msgid "Name"
 msgstr ""
 
 #. module: alc_b2c_connector
-#: code:addons/alc_b2c_connector/models/alc_b2c_backend.py:44
+#: code:addons/alc_b2c_connector/models/alc_b2c_backend.py:51
 #: sql_constraint:alc.b2c.backend:0
 #, python-format
 msgid "Name must be unique"
 msgstr ""
 
 #. module: alc_b2c_connector
-#: code:addons/alc_b2c_connector/models/sale_order.py:179
+#: code:addons/alc_b2c_connector/models/sale_order.py:184
 #, python-format
 msgid "No match found for customer_id: %s"
 msgstr ""
@@ -180,7 +197,7 @@ msgid "Sale channel"
 msgstr ""
 
 #. module: alc_b2c_connector
-#: code:addons/alc_b2c_connector/services/sales_service.py:53
+#: code:addons/alc_b2c_connector/services/sales_service.py:58
 #, python-format
 msgid "Sale order not found for id %s"
 msgstr ""
@@ -193,6 +210,11 @@ msgstr ""
 #. module: alc_b2c_connector
 #: model:ir.model,name:alc_b2c_connector.model_sale_order_line
 msgid "Sales Order Line"
+msgstr ""
+
+#. module: alc_b2c_connector
+#: model:ir.model.fields,field_description:alc_b2c_connector.field_alc_b2c_backend_picking_policy
+msgid "Shipping Policy"
 msgstr ""
 
 #. module: alc_b2c_connector
@@ -209,13 +231,19 @@ msgid "This user has no access to the B2C REST Api."
 msgstr ""
 
 #. module: alc_b2c_connector
+#: code:addons/alc_b2c_connector/models/res_country.py:29
+#, python-format
+msgid "Unknown country code %s"
+msgstr ""
+
+#. module: alc_b2c_connector
 #: code:addons/alc_b2c_connector/models/sale_order.py:119
 #, python-format
 msgid "Unknowns SKU(s): %s , "
 msgstr ""
 
 #. module: alc_b2c_connector
-#: code:addons/alc_b2c_connector/models/sale_order.py:200
+#: code:addons/alc_b2c_connector/models/sale_order.py:205
 #, python-format
 msgid "You cannot use this sale channel for manuel order"
 msgstr ""
