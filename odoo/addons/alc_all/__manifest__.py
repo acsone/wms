@@ -113,6 +113,7 @@
         "alc_product_packaging_dimension",
         "alc_product_packaging_stock_reserve",
         "alc_product_uom_updatable",
+        "alc_purchase_announced_delivery_date",
         "alc_restocking_exclude_not_salable",
         "alc_sale_cancel_remaining_product_additional",
         "alc_sale_channel_stock_move",
