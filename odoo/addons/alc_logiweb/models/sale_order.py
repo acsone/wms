@@ -26,4 +26,6 @@ class SaleOrder(models.Model):
         if not carrier:
             raise ValidationError(_("Missing carrier"))
         order_data["carrier_id"] = self.env.ref(CARRIER_XML_ID_BY_B2C_KEY[carrier]).id
+        # the shipping address must be the final customer
+        order_data["partner_shipping_id"] = order_data["partner_id"]
         return order_data
