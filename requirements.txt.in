@@ -60,7 +60,3 @@ odoo10-addon-shopfloor @ git+https://github.com/oca/wms.git@refs/pull/213/head#s
 
 # oca/web
 odoo10-addon-web-m2x-options @ git+https://github.com/oca/web.git@refs/pull/1795/head#subdirectory=setup/web_m2x_options
-
-# oca/rest-frameworkk
-odoo10-addon-base-rest @  git+https://github.com/oca/rest-framework.git@refs/pull/155/head#subdirectory=setup/base_rest
-odoo10-addon-rest-log @  git+https://github.com/oca/rest-framework.git@refs/pull/155/head#subdirectory=setup/rest_log
