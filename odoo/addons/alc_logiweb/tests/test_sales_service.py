@@ -114,6 +114,19 @@ class TestSalesService(CommonCase):
     def _get_so_from_name(self, name):
         return self.SaleOrder.search([("name", "=", name)])
 
+    def _get_customer(self, recipient_info):
+        return self.env["res.partner"].search(
+            [
+                (
+                    "ref",
+                    "=",
+                    u"{}_{}".format(
+                        self.b2c_backend.sale_channel, recipient_info["id"]
+                    ),
+                )
+            ]
+        )
+
     def test_01(self):
         """
         Data:
@@ -124,6 +137,9 @@ class TestSalesService(CommonCase):
             Specify the carrier into the SO
         Expected result:
             The specified carrier is not taken into account in new SO created
+            The partner_id  is the customer
+            The partner_invoice_id is the VT
+            The partner_shipping_id is the VT
         """
         self.b2c_backend.sale_channel = "web"
         recipient_info = self._gen_recipent()
@@ -145,14 +161,14 @@ class TestSalesService(CommonCase):
         self.assertTrue(res)
         new_so = self._get_so_from_name(res["ref"])
         self.assertTrue(new_so)
-        self.assertEqual(
-            new_so.partner_id.ref,
-            u"{}_{}".format(self.b2c_backend.sale_channel, recipient_info["id"]),
-        )
         self.assertNotEqual(
             new_so.carrier_id,
             self.env.ref("alc_delivery_carrier_gls.delivery_carrier_gls_be"),
         )
+        customer_partner = self._get_customer(recipient_info)
+        self.assertEqual(new_so.partner_id, customer_partner)
+        self.assertEqual(new_so.partner_invoice_id, self.vt_partner)
+        self.assertEqual(new_so.partner_shipping_id, self.vt_partner)
 
     @tools.mute_logger("odoo.addons.alc_delivery_carrier_gls.models.delivery_carrier")
     def test_02(self):
@@ -165,6 +181,9 @@ class TestSalesService(CommonCase):
             Specify the carrier into the SO
         Expected result:
             The specified carrier is taken into account in new SO created
+            The partner_id  is the customer
+            The partner_invoice_id is the VT
+            The partner_shipping_id is the customer
         """
         self.b2c_backend.sale_channel = "logiweb"
         recipient_info = self._gen_recipent()
@@ -187,13 +206,13 @@ class TestSalesService(CommonCase):
         new_so = self._get_so_from_name(res["ref"])
         self.assertTrue(new_so)
         self.assertEqual(
-            new_so.partner_id.ref,
-            u"{}_{}".format(self.b2c_backend.sale_channel, recipient_info["id"]),
-        )
-        self.assertEqual(
             new_so.carrier_id,
             self.env.ref("alc_delivery_carrier_gls.delivery_carrier_gls_be"),
         )
+        customer_partner = self._get_customer(recipient_info)
+        self.assertEqual(new_so.partner_id, customer_partner)
+        self.assertEqual(new_so.partner_invoice_id, self.vt_partner)
+        self.assertEqual(new_so.partner_shipping_id, customer_partner)
 
     def test_03(self):
         """
