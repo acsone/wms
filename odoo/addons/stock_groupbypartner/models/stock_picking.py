@@ -90,8 +90,15 @@ class StockPicking(models.Model):
                 not_done_bo_moves = picking.move_lines.filtered(
                     lambda move: move.state not in ("done", "cancel")
                 )
+
+            if backorder_moves:
+                not_done_bo_moves = backorder_moves.filtered(
+                    lambda m, ndm=not_done_bo_moves: m in ndm
+                )
+
             if not not_done_bo_moves:
                 continue
+
             if not picking.printed:
                 # Mark delivery as processed. When reassigning move in
                 # backorder, we look for picking not printed
@@ -173,8 +180,13 @@ class StockPicking(models.Model):
             # Do not call _create_backorder on recordset due to unsafe
             # signature "backorder_moves=[]" and ensure backorder_moves is
             # correctly set
+            bm = None
+            if backorder_moves:
+                bm = backorder_moves.filtered(lambda m, p=picking: m.picking_id == p)
+                if not bm:
+                    continue
             backorders |= super(StockPicking, picking)._create_backorder(
-                backorder_moves=picking.move_lines
+                backorder_moves=bm
             )
 
         return backorders
