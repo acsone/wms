@@ -606,16 +606,20 @@ class LocationContentTransfer(Component):
         self._lock_lines(operation)
 
         moves_to_validate = operation.mapped("linked_move_operation_ids.move_id")
-        if quantity < operation.product_qty:
+        qty_todo = operation.product_qty
+        pack_lot = self.env["stock.pack.operation.lot"].browse()
+        if lot_id:
+            pack_lot = operation.pack_lot_ids.filtered(
+                lambda a, l_id=lot_id: a.lot_id.id == l_id
+            )
+            qty_todo = sum(operation.pack_lot_ids.mapped("qty_todo"))
+        if quantity < qty_todo:
             # Update the current move line quantity and
             # put the scanned qty (the move line) in its own move
             # (by splitting the current one)
             operation.qty_done = quantity
-            if lot_id:
+            if pack_lot:
                 operation.pack_lot_ids.write({"qty": 0})
-                pack_lot = operation.pack_lot_ids.filtered(
-                    lambda a, l_id=lot_id: a.lot_id.id == l_id
-                )
                 pack_lot.qty = quantity
             # We must first split pack operations and ensure that links are
             # preserved with the original move
@@ -623,8 +627,8 @@ class LocationContentTransfer(Component):
             remaining_operation.qty_done = remaining_operation.product_qty
             operation.picking_id.recompute_remaining_qty(done_qtys=True)
             # reset qty_done on pack_lot since the UI expect to have qty set to qty_todo
-            for pack_lot in remaining_operation.pack_lot_ids:
-                pack_lot.qty = pack_lot.qty_todo
+            for _pack_lot in remaining_operation.pack_lot_ids:
+                _pack_lot.qty = _pack_lot.qty_todo
             new_moves = self.env["stock.move"].browse()
             # we now must move the current operation into a new move to
             # validate it independently that the remaining operation
@@ -698,7 +702,6 @@ class LocationContentTransfer(Component):
         * start: no more content to move
         * start_single: continue with the next package level / line
         """
-        # TODO
         location = self.env["stock.location"].browse(location_id)
         if not location.exists():
             return self._response_for_start(message=self.msg_store.record_not_found())
