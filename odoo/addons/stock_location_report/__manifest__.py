@@ -11,6 +11,8 @@
         "views/stock_location.xml",
         "views/report_location_barcode.xml",
         "views/paperformat.xml",
+        "views/report_location_barcode_medoc.xml",
+        "views/paperformat_medoc.xml",
     ],
     "installable": True,
 }

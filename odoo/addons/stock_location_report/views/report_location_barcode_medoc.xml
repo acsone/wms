@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+  <template
+    id="assets_common_medoc"
+    name="stock_location_barcodes pdf assets"
+    inherit_id="report.assets_common"
+  >
+    <xpath expr="." position="inside">
+      <link
+        href="/stock_location_report/static/src/less/location_barcode_medoc_8x2.less"
+        rel="stylesheet"
+      />
+      <link
+        href="/stock_location_report/static/src/less/location_barcode_medoc_4x2.less"
+        rel="stylesheet"
+      />
+    </xpath>
+  </template>
+  <template id="stock_location_report.report_location_barcode_medoc_8x2">
+    <t t-call="report.html_container">
+      <div class="page stock_location_barcode_medoc_8x2">
+        <t t-call="stock_location_report.qrcode_items_medoc" />
+      </div>
+    </t>
+  </template>
+  <template id="stock_location_report.report_location_barcode_medoc_4x2">
+    <t t-call="report.html_container">
+      <div class="page stock_location_barcode_medoc_4x2">
+        <t t-call="stock_location_report.barcode_items_medoc" />
+      </div>
+    </t>
+  </template>
+  <template id="stock_location_report.barcode_items_medoc">
+    <div
+      t-foreach="docs"
+      t-as="o"
+      t-att-class="'container_medoc container_%s %s' % (o.height, o.kind)"
+    >
+      <t t-if="not o.barcode">
+        <t t-set="content" t-value="'L#%s' % o.name" />
+      </t>
+      <t t-set="content" t-value="content.replace('#', '%%23')" />
+      <div class="barcode_name_medoc">
+        <t t-esc="o.name[0:1]" />
+        <t t-esc="o.name[1:3]" />
+        <t t-esc="o.name[3:5]" />
+        <t t-esc="o.name[5:6]" />
+        <t t-esc="o.name[6:8]" />
+      </div>
+      <div class="barcode_checksum_medoc">
+        <div t-esc="o.bin_checksum_1" />
+      </div>
+      <div class="barcode_medoc">
+        <img
+          t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', content, 425, 73)"
+        />
+      </div>
+    </div>
+  </template>
+  <template id="stock_location_report.qrcode_items_medoc">
+    <div
+      t-foreach="docs"
+      t-as="o"
+      t-att-class="'container_medoc container_%s %s' % (o.height, o.kind)"
+    >
+      <t t-if="o.barcode">
+        <t t-set="content" t-value="o.barcode" />
+      </t>
+      <t t-if="not o.barcode">
+        <t t-set="content" t-value="'L#%s' % o.name" />
+      </t>
+      <t t-set="content" t-value="content.replace('#', '%%23')" />
+      <t t-if="o.name[4] != 'A'">
+        <div class="barcode_right_medoc">
+          <img
+            t-att-src="'/report/qrcode/?value=%s&amp;size=5&amp;border=1' % content"
+          />
+        </div>
+        <div class="barcode_name_left_medoc">
+          <t t-esc="o.name[0:1]" />
+          <t t-esc="o.name[1:3]" />
+          <t t-esc="o.name[3:5]" />
+          <t t-esc="o.name[5:6]" />
+          <t t-esc="o.name[6:8]" />
+        </div>
+        <div class="barcode_checksum_left_medoc">
+          <div t-esc="o.bin_checksum_1" />
+          <div t-esc="o.bin_checksum_2" />
+        </div>
+      </t>
+      <t t-if="o.name[4] == 'A'">
+        <div class="barcode_name_right_medoc">
+          <t t-esc="o.name[0:1]" />
+          <t t-esc="o.name[1:3]" />
+          <t t-esc="o.name[3:5]" />
+          <t t-esc="o.name[5:6]" />
+          <t t-esc="o.name[6:8]" />
+        </div>
+        <div class="barcode_checksum_right_medoc">
+          <div t-esc="o.bin_checksum_1" />
+          <div t-esc="o.bin_checksum_2" />
+        </div>
+        <div class="barcode_left_medoc">
+          <img
+            t-att-src="'/report/qrcode/?value=%s&amp;size=5&amp;border=1' % content"
+          />
+        </div>
+      </t>
+    </div>
+  </template>
+  <report
+    string="Location Barcode 4x2 Medicaments"
+    id="action_report_location_barcode_medoc_4x2"
+    model="stock.location"
+    report_type="qweb-pdf"
+    name="stock_location_report.report_location_barcode_medoc_4x2"
+    file="stock_location_report.report_location_barcode_medoc_4x2"
+  />
+  <report
+    string="Location Barcode 8x2 Medicaments"
+    id="action_report_location_barcode_medoc_8x2"
+    model="stock.location"
+    report_type="qweb-pdf"
+    name="stock_location_report.report_location_barcode_medoc_8x2"
+    file="stock_location_report.report_location_barcode_medoc_8x2"
+  />
+</odoo>
