@@ -19,7 +19,7 @@ class LocationContentTransferSetDestinationXCase(LocationContentTransferCommonCa
         super(LocationContentTransferSetDestinationXCase, cls).setUpClassBaseData(
             *args, **kwargs
         )
-        products = cls.product_a + cls.product_b
+        products = cls.product_a + cls.product_b + cls.product_c
         cls.putway = (
             cls.env["product.putaway"]
             .sudo()
@@ -42,7 +42,11 @@ class LocationContentTransferSetDestinationXCase(LocationContentTransferCommonCa
 
         cls.product_a.tracking = "lot"
         cls.product_b.tracking = "lot"
+        cls.product_c.tracking = "lot"
 
+        # First picking:
+        # Product A -> 1 lot, 1 move
+        # Product B -> 2 lots, 1 move
         cls.picking = picking = cls._create_picking(
             lines=[(cls.product_a, 10), (cls.product_b, 10)]
         )
@@ -73,13 +77,42 @@ class LocationContentTransferSetDestinationXCase(LocationContentTransferCommonCa
 
         cls.picking.action_assign()
 
-        cls._simulate_pickings_selected(cls.picking)
         cls.dest_location = cls.shelf1
+
+        # Second picking:
+        # Product C -> 1 lot, 2 moves
+        cls.picking2 = picking2 = cls._create_picking(
+            lines=[(cls.product_c, 4), (cls.product_c, 6)]
+        )
+
+        cls.product_c_lot = cls.env["stock.production.lot"].create(
+            {"product_id": cls.product_c.id}
+        )
+
+        cls._update_qty_in_location(
+            cls.content_loc, cls.product_c, 4, lot=cls.product_c_lot
+        )
+        # create an other quant for the same lot
+        cls.env["stock.quant"].sudo().create(
+            {
+                "product_id": cls.product_c.id,
+                "location_id": cls.content_loc.id,
+                "qty": 6,
+                "lot_id": cls.product_c_lot.id,
+                "in_date": "2021 01 02",
+            }
+        )
+        cls._fill_stock_for_moves(
+            picking2.move_lines, in_package=True, location=cls.content_loc
+        )
+
+        cls.picking2.action_assign()
 
     def test_set_destination_all_with_lot(self):
         """ lot_id parameter not st, redirect the
         user to the 'start' screen.
         """
+        self._simulate_pickings_selected(self.picking)
         response = self.service.dispatch(
             "set_destination_all",
             params={
@@ -130,6 +163,7 @@ class LocationContentTransferSetDestinationXCase(LocationContentTransferCommonCa
         """ lot_id parameter not st, redirect the
         user to the 'start' screen.
         """
+        self._simulate_pickings_selected(self.picking)
         pack_lot_a = self.picking.pack_operation_product_ids[0]
         response = self.service.dispatch(
             "set_destination_line",
@@ -150,6 +184,7 @@ class LocationContentTransferSetDestinationXCase(LocationContentTransferCommonCa
         """ Execute the operation linked to 1 lot.
         The operation should be complete
         """
+        self._simulate_pickings_selected(self.picking)
         pack_lot_a = self.picking.pack_operation_product_ids[0]
         move = pack_lot_a.linked_move_operation_ids.move_id
         response = self.service.dispatch(
@@ -186,6 +221,7 @@ class LocationContentTransferSetDestinationXCase(LocationContentTransferCommonCa
         """ Execute the operation linked to 2 lots for the first lot.
         A new operation must be created for the second lot.
         """
+        self._simulate_pickings_selected(self.picking)
         pack_lot_b = self.picking.pack_operation_product_ids[1]
         move = pack_lot_b.linked_move_operation_ids.move_id
         response = self.service.dispatch(
@@ -251,11 +287,43 @@ class LocationContentTransferSetDestinationXCase(LocationContentTransferCommonCa
 
         self.assertEqual(self.picking.state, "done")
 
+    def test_set_destination_line_lot_same_lot_two_move(self):
+        """ Execute an operation for the same lot linked to 2 moves
+        The 2 moves must be done
+        """
+        self._simulate_pickings_selected(self.picking2)
+        self.assertEqual(2, len(self.picking2.move_lines))
+        self.assertEqual(1, len(self.picking2.pack_operation_ids))
+        pack_lot = self.picking2.pack_operation_product_ids
+        moves = pack_lot.mapped("linked_move_operation_ids.move_id")
+        response = self.service.dispatch(
+            "set_destination_line",
+            params={
+                "location_id": self.content_loc.id,
+                "operation_id": pack_lot.id,
+                "barcode": self.dest_location.barcode,
+                "quantity": 10,
+                "lot_id": self.product_c_lot.id,
+            },
+        )
+        # all the moves are done
+        self.assertEqual(["done", "done"], moves.mapped("state"))
+        # The picking should be complete
+        self.assertEqual("done", self.picking2.state)
+
+        self.assert_response_start(
+            response,
+            message=self.service.msg_store.location_content_transfer_item_complete(
+                self.dest_location
+            ),
+        )
+
     def test_set_destination_line_lot_partial(self):
         """ Execute partially the operation linked to 1 lot.
         The operation should be split and a new operation should be created
         for the same lot with the remaining qty
         """
+        self._simulate_pickings_selected(self.picking)
         pack_lot_a = self.picking.pack_operation_product_ids[0]
         move = pack_lot_a.linked_move_operation_ids.move_id
         response = self.service.dispatch(
