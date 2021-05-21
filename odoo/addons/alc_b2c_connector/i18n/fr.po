@@ -27,7 +27,7 @@ msgid "Allows only products matching with the assortment domain"
 msgstr "Seul les produits de l'assortiment peuvent être acheté"
 
 #. module: alc_b2c_connector
-#: code:addons/alc_b2c_connector/models/alc_b2c_backend.py:55
+#: code:addons/alc_b2c_connector/models/alc_b2c_backend.py:54
 #: sql_constraint:alc.b2c.backend:0
 #, python-format
 msgid "Auth api key can only be used by 1 backend at same time"
@@ -138,7 +138,7 @@ msgid "Name"
 msgstr "Nom"
 
 #. module: alc_b2c_connector
-#: code:addons/alc_b2c_connector/models/alc_b2c_backend.py:51
+#: code:addons/alc_b2c_connector/models/alc_b2c_backend.py:50
 #: sql_constraint:alc.b2c.backend:0
 #, python-format
 msgid "Name must be unique"
