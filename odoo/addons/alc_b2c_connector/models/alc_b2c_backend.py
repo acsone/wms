@@ -40,7 +40,6 @@ class AlcB2CBackend(models.Model):
         selection="_selection_picking_policy",
         string="Shipping Policy",
         required=True,
-        readonly=True,
         default=lambda s: s.env["ir.values"].get_default("sale.order", "picking_policy")
         or "direct",
     )
