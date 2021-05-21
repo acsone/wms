@@ -39,8 +39,18 @@ msgid "Location Barcode 4x2"
 msgstr ""
 
 #. module: stock_location_report
+#: model:ir.actions.report.xml,name:stock_location_report.action_report_location_barcode_medoc_4x2
+msgid "Location Barcode 4x2 Medicaments"
+msgstr ""
+
+#. module: stock_location_report
 #: model:ir.actions.report.xml,name:stock_location_report.action_report_location_barcode_8x2
 msgid "Location Barcode 8x2"
+msgstr ""
+
+#. module: stock_location_report
+#: model:ir.actions.report.xml,name:stock_location_report.action_report_location_barcode_medoc_8x2
+msgid "Location Barcode 8x2 Medicaments"
 msgstr ""
 
 #. module: stock_location_report
