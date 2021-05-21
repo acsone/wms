@@ -1,0 +1,180 @@
+.stock_location_barcode_medoc_8x2 {
+  .container_medoc {
+    display: inline-block;
+    width: 448px;
+    height: 180px; // 8
+    justify-content: space-around;
+    overflow: hidden;
+  }
+
+  .container_medoc:nth-child(odd) {
+    padding-left: 15px;
+    margin-right: 27px;
+    margin-left: -5px;
+  }
+  .container_medoc:nth-child(even) {
+    margin-left: 27px;
+    margin-right: -5px;
+  }
+
+  .reserve {
+    height: 180px; // =1400/8
+  }
+  .bin,
+  .parking {
+    height: 180px; // =1400/8 (no-margin paper)
+  }
+
+  .barcode_name_right_medoc {
+    float: right;
+    position: fixed !important; // relative position and size compared to the main container
+    width: 45%;
+    font-size: 50px;
+    margin-top: 40px;
+    margin-left: 60px;
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+  }
+  .reserve .barcode_name_right_medoc {
+    white-space: nowrap !important;
+    margin-top: 40px;
+    margin-left: 130px;
+    width: 30%;
+  }
+
+  .barcode_left_medoc {
+    position: relative !important;
+    margin-top: 40px;
+    padding-top: 10px;
+    float: left;
+    width: 35%;
+    z-index: 1;
+  }
+
+  .reserve .barcode_left_medoc {
+    position: relative !important;
+    margin-top: 40px;
+    padding-top: 10px;
+    float: left;
+    width: 35%;
+  }
+
+  .barcode_checksum_right_medoc {
+    position: fixed !important;
+    float: right;
+    font-size: 33px;
+    overflow: hidden;
+    z-index: 100;
+  }
+  .reserve .barcode_checksum_right_medoc {
+    position: fixed !important;
+    float: right;
+    font-size: 33px;
+  }
+  div.barcode_checksum_right_medoc > div:first-child {
+    float: left;
+    position: relative !important;
+    padding-left: 5px;
+    background-color: black !important;
+    border: 1px solid black;
+    color: white !important;
+    margin-top: 110px;
+    margin-left: 160px;
+    width: 15%;
+    height: 100%;
+  }
+  div.barcode_checksum_right_medoc > div:last-child {
+    float: right;
+    position: relative !important;
+    padding-left: 5px;
+    background-color: black !important;
+    border: 1px solid black;
+    color: white !important;
+    margin-top: -48px;
+    margin-left: 140px;
+    width: 15%;
+    height: 100%;
+  }
+
+  .barcode_name_left_medoc {
+    float: left;
+    position: fixed !important; // relative position and size compared to the main container
+    width: 28%;
+    font-size: 38px;
+    margin-top: 32px;
+    padding-top: 10px;
+    margin-left: -5px;
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+  }
+  .reserve .barcode_name_left_medoc {
+    white-space: nowrap !important;
+    margin-top: 28px;
+    padding-top: 10px;
+    width: 28%;
+  }
+
+  .barcode_right_medoc {
+    position: relative !important;
+    margin-top: 43px;
+    float: right;
+    width: 25%;
+    z-index: 1;
+  }
+
+  .reserve .barcode_right_medoc {
+    position: relative !important;
+    margin-top: 43px;
+    float: right;
+    width: 25%;
+  }
+
+  .barcode_checksum_left_medoc {
+    position: fixed !important;
+    float: left;
+    font-size: 33px;
+    overflow: hidden;
+    margin-left: -130px;
+    z-index: 100;
+  }
+  .reserve .barcode_checksum_left_medoc {
+    position: fixed !important;
+    float: left;
+    margin-left: -130px;
+    font-size: 33px;
+  }
+  div.barcode_checksum_left_medoc > div:first-child {
+    float: left;
+    position: relative !important;
+    padding-left: 5px;
+    background-color: black !important;
+    border: 1px solid black;
+    color: white !important;
+    margin-top: 100px;
+    margin-left: 150px;
+    width: 15%;
+    height: 100%;
+  }
+  div.barcode_checksum_left_medoc > div:last-child {
+    float: right;
+    position: relative !important;
+    padding-left: 5px;
+    background-color: black !important;
+    border: 1px solid black;
+    color: white !important;
+    margin-top: -48px;
+    margin-left: 140px;
+    width: 15%;
+    height: 100%;
+  }
+}
