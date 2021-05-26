@@ -1,0 +1,163 @@
+<?xml version="1.0" ?>
+<odoo noupdate="1">
+  <record id="package_st_M_M_Dyn_Hmax_22cm" model="stock.package.storage.type">
+    <field name="name">M Dyn Hmax 22cm</field>
+  </record>
+  <record id="package_st_M_M_Dyn_Hmax_27cm" model="stock.package.storage.type">
+    <field name="name">M Dyn Hmax 27cm</field>
+  </record>
+  <record id="package_st_M_M_Dyn_Hmax_33cm" model="stock.package.storage.type">
+    <field name="name">M Dyn Hmax 33cm</field>
+  </record>
+  <record id="package_st_M_M_Pal_A" model="stock.package.storage.type">
+    <field name="name">M Pal A</field>
+    <field
+      name="location_storage_type_ids"
+      eval="[(6, 0, [ref('alc_stock_storage_type.location_st_M_Palette_Chaotique')])]"
+    />
+  </record>
+  <record id="package_st_M_M_Pal_B_avec_lot" model="stock.package.storage.type">
+    <field name="name">M Pal B avec lot</field>
+    <field
+      name="location_storage_type_ids"
+      eval="[(6, 0, [ref('alc_stock_storage_type.location_st_M_Palette_Chaotique')])]"
+    />
+  </record>
+  <record id="package_st_M_M_Pal_B_sans_lot" model="stock.package.storage.type">
+    <field name="name">M Pal B sans lot</field>
+    <field
+      name="location_storage_type_ids"
+      eval="[(6, 0, [ref('alc_stock_storage_type.location_st_M_Palette_Fixe')])]"
+    />
+  </record>
+  <record id="package_st_M_M_Pal_1_2_A" model="stock.package.storage.type">
+    <field name="name">M Pal 1/2 A</field>
+    <field
+      name="location_storage_type_ids"
+      eval="[(6, 0, [ref('alc_stock_storage_type.location_st_M_1_2_Pallette_Chaotique'),ref('alc_stock_storage_type.location_st_M_1_2_Palette_Reserve_Fixe')])]"
+    />
+  </record>
+  <record id="package_st_M_M_Pal_1_2_B_avec_lot" model="stock.package.storage.type">
+    <field name="name">M Pal 1/2 B avec lot</field>
+    <field
+      name="location_storage_type_ids"
+      eval="[(6, 0, [ref('alc_stock_storage_type.location_st_M_1_2_Pallette_Chaotique'),ref('alc_stock_storage_type.location_st_M_1_2_Palette_Reserve_Fixe')])]"
+    />
+  </record>
+  <record id="package_st_M_M_Pal_1_2_B_sans_lot" model="stock.package.storage.type">
+    <field name="name">M Pal 1/2 B sans lot</field>
+    <field
+      name="location_storage_type_ids"
+      eval="[(6, 0, [ref('alc_stock_storage_type.location_st_M_1_2_Palette_Fixe'),ref('alc_stock_storage_type.location_st_M_1_2_Palette_Reserve_Fixe')])]"
+    />
+  </record>
+  <record id="package_st_M_M_Pal_1_2_C" model="stock.package.storage.type">
+    <field name="name">M Pal 1/2 C</field>
+    <field
+      name="location_storage_type_ids"
+      eval="[(6, 0, [ref('alc_stock_storage_type.location_st_M_1_2_Palette_Fixe'),ref('alc_stock_storage_type.location_st_M_1_2_Palette_Reserve_Fixe')])]"
+    />
+  </record>
+  <record id="package_st_M_M_Etagere_Small_A" model="stock.package.storage.type">
+    <field name="name">M Etagere Small A</field>
+    <field
+      name="location_storage_type_ids"
+      eval="[(6, 0, [ref('alc_stock_storage_type.location_st_M_Etagere_Chaotique'),ref('alc_stock_storage_type.location_st_M_Etagere_Reserve_Fixe')])]"
+    />
+  </record>
+  <record
+    id="package_st_M_M_Etagere_Small_B_avec_lot"
+    model="stock.package.storage.type"
+  >
+    <field name="name">M Etagere Small B avec lot</field>
+    <field
+      name="location_storage_type_ids"
+      eval="[(6, 0, [ref('alc_stock_storage_type.location_st_M_Etagere_Chaotique'),ref('alc_stock_storage_type.location_st_M_Etagere_Reserve_Fixe')])]"
+    />
+  </record>
+  <record
+    id="package_st_M_M_Etagere_Small_B_sans_lot"
+    model="stock.package.storage.type"
+  >
+    <field name="name">M Etagere Small B sans lot</field>
+    <field
+      name="location_storage_type_ids"
+      eval="[(6, 0, [ref('alc_stock_storage_type.location_st_M_Etagere_Fixe'),ref('alc_stock_storage_type.location_st_M_Etagere_Reserve_Fixe')])]"
+    />
+  </record>
+  <record id="package_st_M_M_Etagere_Small_C" model="stock.package.storage.type">
+    <field name="name">M Etagere Small C</field>
+    <field
+      name="location_storage_type_ids"
+      eval="[(6, 0, [ref('alc_stock_storage_type.location_st_M_Etagere_Fixe_Mixed_Lots'),ref('alc_stock_storage_type.location_st_M_Etagere_Reserve_Fixe')])]"
+    />
+  </record>
+  <record id="package_st_M_M_Etagere_Medium_A" model="stock.package.storage.type">
+    <field name="name">M Etagere Medium A</field>
+    <field
+      name="location_storage_type_ids"
+      eval="[(6, 0, [ref('alc_stock_storage_type.location_st_M_Etagere_Chaotique'),ref('alc_stock_storage_type.location_st_M_Etagere_Reserve_Fixe')])]"
+    />
+  </record>
+  <record
+    id="package_st_M_M_Etagere_Medium_B_avec_lot"
+    model="stock.package.storage.type"
+  >
+    <field name="name">M Etagere Medium B avec lot</field>
+    <field
+      name="location_storage_type_ids"
+      eval="[(6, 0, [ref('alc_stock_storage_type.location_st_M_Etagere_Chaotique'),ref('alc_stock_storage_type.location_st_M_Etagere_Reserve_Fixe')])]"
+    />
+  </record>
+  <record
+    id="package_st_M_M_Etagere_Medium_B_sans_lot"
+    model="stock.package.storage.type"
+  >
+    <field name="name">M Etagere Medium B sans lot</field>
+    <field
+      name="location_storage_type_ids"
+      eval="[(6, 0, [ref('alc_stock_storage_type.location_st_M_Etagere_Fixe'),ref('alc_stock_storage_type.location_st_M_Etagere_Reserve_Fixe')])]"
+    />
+  </record>
+  <record id="package_st_M_M_Etagere_Medium_C" model="stock.package.storage.type">
+    <field name="name">M Etagere Medium C</field>
+    <field
+      name="location_storage_type_ids"
+      eval="[(6, 0, [ref('alc_stock_storage_type.location_st_M_Etagere_Fixe_Mixed_Lots'),ref('alc_stock_storage_type.location_st_M_Etagere_Reserve_Fixe')])]"
+    />
+  </record>
+  <record id="package_st_M_M_Etagere_Large_A" model="stock.package.storage.type">
+    <field name="name">M Etagere Large A</field>
+    <field
+      name="location_storage_type_ids"
+      eval="[(6, 0, [ref('alc_stock_storage_type.location_st_M_Etagere_Chaotique'),ref('alc_stock_storage_type.location_st_M_Etagere_Reserve_Fixe')])]"
+    />
+  </record>
+  <record
+    id="package_st_M_M_Etagere_Large_B_avec_lot"
+    model="stock.package.storage.type"
+  >
+    <field name="name">M Etagere Large B avec lot</field>
+    <field
+      name="location_storage_type_ids"
+      eval="[(6, 0, [ref('alc_stock_storage_type.location_st_M_Etagere_Chaotique'),ref('alc_stock_storage_type.location_st_M_Etagere_Reserve_Fixe')])]"
+    />
+  </record>
+  <record
+    id="package_st_M_M_Etagere_Large_B_sans_lot"
+    model="stock.package.storage.type"
+  >
+    <field name="name">M Etagere Large B sans lot</field>
+    <field
+      name="location_storage_type_ids"
+      eval="[(6, 0, [ref('alc_stock_storage_type.location_st_M_Etagere_Fixe'),ref('alc_stock_storage_type.location_st_M_Etagere_Reserve_Fixe')])]"
+    />
+  </record>
+  <record id="package_st_M_M_Etagere_Large_C" model="stock.package.storage.type">
+    <field name="name">M Etagere Large C</field>
+    <field
+      name="location_storage_type_ids"
+      eval="[(6, 0, [ref('alc_stock_storage_type.location_st_M_Etagere_Fixe_Mixed_Lots'),ref('alc_stock_storage_type.location_st_M_Etagere_Reserve_Fixe')])]"
+    />
+  </record>
+</odoo>
