@@ -94,6 +94,7 @@ test:
     - venv/bin/pip install --no-index release/*.whl
     # although the project is part of *.whl, install it in editable mode so coverage sees it
     - venv/bin/pip install --no-deps -e .
+    - manifestoo -d odoo/addons --addons-path-python=venv/bin/python check-licenses
     - ADDONS_INIT=$(manifestoo -d odoo/addons --select-exclude=alc_all,alc_shopfloor list-depends
       --separator=,)
     - echo Installing ${ADDONS_INIT}
