@@ -207,3 +207,21 @@ deploy-prod:
   when: manual
   only:
     - /1\.68\.\d+/
+
+deploy-acsone-test:
+  stage: deploy
+  script:
+    - start_ssh_agent
+    - ./deploy-acsone
+  environment:
+    name: test/acsone-odoo-alcyon
+    url: https://odoo-alcyon-test.acsone.eu
+  variables:
+    user: odoo-alcyon-test
+    host: odoo-alcyon-test.acsone.eu
+  only:
+    - /^\d+\.\d+\.\d+$/
+  allow_failure: False
+  when: manual
+  dependencies:
+    - build
