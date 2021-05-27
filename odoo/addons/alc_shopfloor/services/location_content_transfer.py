@@ -56,6 +56,29 @@ class LocationContentTransfer(Component):
     ############
 
     def start_or_recover(self):
+        """ Start a new session or recover an existing one
+
+        If the current user had transfers in progress in this scenario
+        and reopen the menu, we want to directly reopen the screens to choose
+        destinations. Otherwise, we search for the first stock refill arrange
+        with a location with a barcode_picking_type into the list of the
+        scenario picking_types. If one is available, we start a picking for
+        this location.
+        At the end of no operation is created we go to the "start" state
+        """
+        started_pickings = self._search_recover_pickings()
+        if started_pickings:
+            return self._router_single_or_all_destination(
+                started_pickings, message=self.msg_store.recovered_previous_session()
+            )
+        refill_arrange = self._refill_arrange_search()
+        if refill_arrange:
+            return self.scan_location(refill_arrange[0].location_id.barcode)
+        return self._response_for_start(
+            message=self.msg_store.location_content_transfer_no_work()
+        )
+
+    def __start_or_recover(self):
         """Start a new session or recover an existing one
 
         If the current user had transfers in progress in this scenario
@@ -197,7 +220,7 @@ class LocationContentTransfer(Component):
             for pack_lot in operation.pack_lot_ids:
                 pack_lot.qty = pack_lot.qty_todo
 
-        pickings.write({"operator_id": self.shopfloor_user.id})
+        pickings.write({"operator_id": self.shopfloor_user.id, "printed": True})
 
         unreserved_moves.action_assign()
 
@@ -338,7 +361,7 @@ class LocationContentTransfer(Component):
             if product in operation.product_ids:
                 return self._response_for_scan_destination(location, operation)
 
-        lot = search.lot_from_scan(barcode)
+        lot = search.lot_from_scan(barcode, operation)
         if lot:
             if lot in operation.mapped("pack_lot_ids.lot_id"):
                 return self._response_for_scan_destination(location, operation)
@@ -578,13 +601,23 @@ class LocationContentTransfer(Component):
             inventory.create_stock_issue(move, src_location, package, lot)
             # Create a draft inventory to control stock
             inventory.create_control_stock(src_location, move.product_id, package, lot)
-        moves.action_cancel()
+        # no_recompute_pack required by stock_groupbypartner... what a mess
+        moves.with_context(no_recompute_pack=True).action_cancel()
         operations = self._find_operations(location)
         return self._response_for_start_single(operations.mapped("picking_id"))
 
     ##################
     # Helpers methods
     ##################
+    def _refill_arrange_search(self):
+        RefillArrange = self.env["report.stock.refill.arrange"]
+        return RefillArrange.search(
+            [
+                ("reservation_id", "=", False),
+                ("barcode_picking_type_id", "in", self.picking_types.ids),
+            ],
+            order="refill_priority_arrange desc",
+        )
 
     def _find_location_operations_domain(self, location):
         return [
