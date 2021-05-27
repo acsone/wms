@@ -134,7 +134,7 @@ build-and-publish-image:
     - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile
       --destination $IMAGE
   only:
-    - /1\.68\.\d+/
+    - /1\.69\.\d+/
   needs:
     - job: build
       artifacts: true
@@ -154,7 +154,7 @@ deploy-test:
     on_stop: stop-test
   when: manual
   only:
-    - /1\.68\.\d+/
+    - /1\.69\.\d+/
 
 stop-test:
   stage: deploy
@@ -168,7 +168,7 @@ stop-test:
     action: stop
   when: manual
   only:
-    - /1\.68\.\d+/
+    - /1\.69\.\d+/
   dependencies: []
   allow_failure: true
 
@@ -182,7 +182,7 @@ deploy-uat:
       ${CI_COMMIT_REF_NAME}
   when: manual
   only:
-    - /1\.68\.\d+/
+    - /1\.69\.\d+/
 
 deploy-preprod:
   stage: deploy
@@ -194,7 +194,7 @@ deploy-preprod:
       ${CI_COMMIT_REF_NAME}
   when: manual
   only:
-    - /1\.68\.\d+/
+    - /1\.69\.\d+/
 
 deploy-prod:
   stage: deploy
@@ -206,7 +206,7 @@ deploy-prod:
       ${CI_COMMIT_REF_NAME}
   when: manual
   only:
-    - /1\.68\.\d+/
+    - /1\.69\.\d+/
 
 deploy-acsone-test:
   stage: deploy
