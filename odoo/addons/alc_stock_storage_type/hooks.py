@@ -11,19 +11,19 @@ def pre_init_hook(cr):
     """
     # If the DB does not contain Alcyon stock setup structure, create it
     location = "stock_location_medoc"
-    cr.execute(  # pylint: disable=sql-injection
-        "SELECT model, name, res_id FROM ir_model_data WHERE module = '__setup__' and name = '%s'"
-        % location
+    cr.execute(
+        "SELECT model, name, res_id FROM ir_model_data WHERE module = '__setup__' and name = %s",
+        (location,),
     )
     res = cr.fetchone()
     if not res:
-        cr.execute(  # pylint: disable=sql-injection
+        cr.execute(
             """
             INSERT INTO ir_model_data (create_uid, write_date, date_update, noupdate, model, name, module, res_id)
-            SELECT 1, current_timestamp, current_timestamp, true, model, '%s', '__setup__', res_id
-            FROM ir_model_data WHERE module = 'stock' and name = 'stock_location_stock';
-        """
-            % location,
+            SELECT 1, current_timestamp, current_timestamp, true, model, %s, '__setup__', res_id
+            FROM ir_model_data WHERE module = 'stock' and name = 'stock_location_stock'
+        """,
+            (location,),
         )
 
     cr.execute(
@@ -36,17 +36,16 @@ def pre_init_hook(cr):
     VLB_location_id = cr.fetchone()[0]
 
     location = "stock_location_reserve_medoc"
-    cr.execute(  # pylint: disable=sql-injection
-        "SELECT model, name, res_id FROM ir_model_data WHERE module = '__setup__' and name = '%s'"
-        % location
+    cr.execute(
+        "SELECT model, name, res_id FROM ir_model_data WHERE module = '__setup__' and name = %s",
+        (location,),
     )
     res = cr.fetchone()
     if not res:
-        cr.execute(  # pylint: disable=sql-injection
+        cr.execute(
             """
             INSERT INTO ir_model_data (create_uid, write_date, date_update, noupdate, model, name, module, res_id)
-            VALUES (1, current_timestamp, current_timestamp, true, 'stock.location', '%s', '__setup__', %%(res_id)s)
-            """
-            % location,
-            {"res_id": VLB_location_id},
+            VALUES (1, current_timestamp, current_timestamp, true, 'stock.location', %(name)s, '__setup__', %(res_id)s)
+            """,
+            {"name": location, "res_id": VLB_location_id},
         )
