@@ -823,10 +823,6 @@
     <t t-call="report.html_container">
       <t t-set="company" t-value="res_company" />
       <t t-set="partner" t-value="deliveryslip.partner_id" />
-      <t
-        t-set="order"
-        t-value="deliveryslip.with_context(lang=partner.lang).get_moves_by_order()[0]"
-      />
       <div class="header">
         <div>
           <div class="logo">
@@ -837,10 +833,6 @@
             />
           </div>
           <div class="main_title">
-            <t
-              t-set="order"
-              t-value="deliveryslip.with_context(lang=partner.lang).get_moves_by_order()[0][0]"
-            />
             <t t-if="deliveryslip.picking_type_code=='outgoing'">Delivery slip</t>
             <t t-if="deliveryslip.picking_type_code=='incoming'">Goods return note</t>
           </div>
