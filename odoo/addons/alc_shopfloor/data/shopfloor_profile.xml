@@ -2,7 +2,7 @@
 <!-- Copyright 2021 ACSONE SA/NV
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo noupdate="0">
-  <record id="profile_location_content_transfer" model="shopfloor.profile">
-    <field name="name">Location Content Transfer Profile</field>
+  <record id="shopfloor_profile_medoc" model="shopfloor.profile">
+    <field name="name">Médicaments</field>
   </record>
 </odoo>

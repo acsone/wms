@@ -19,6 +19,7 @@ class TestLocationContentTransferStart(LocationContentTransferCommonCase):
     @classmethod
     def setUpClassBaseData(cls, *args, **kwargs):
         super(TestLocationContentTransferStart, cls).setUpClassBaseData(*args, **kwargs)
+        cls.env["alc.average.daily.sale"].sudo().refresh_view()
         products = cls.product_a + cls.product_b + cls.product_c + cls.product_d
         cls.putway = (
             cls.env["product.putaway"]
@@ -55,7 +56,11 @@ class TestLocationContentTransferStart(LocationContentTransferCommonCase):
     def test_start_fresh(self):
         """Start a fresh session when there is no transfer to recover"""
         response = self.service.dispatch("start_or_recover", params={})
-        self.assert_response(response, next_state="start")
+        self.assert_response(
+            response,
+            message=self.service.msg_store.location_content_transfer_no_work(),
+            next_state="start",
+        )
 
     def test_start_recover_destination_all(self):
         """Recover transfers, all move lines have the same destination"""

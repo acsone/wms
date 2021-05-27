@@ -340,6 +340,14 @@ class MessageAction(Component):
             "body": _("Transfer {} complete").format(picking.name),
         }
 
+    def location_content_transfer_no_work(self):
+        return {
+            "message_type": "info",
+            "body": _(
+                "No more refill arrange to do, please select a location to transfer."
+            ),
+        }
+
     def location_content_transfer_item_complete(self, location_dest):
         return {
             "message_type": "success",

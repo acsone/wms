@@ -51,105 +51,34 @@ class LocationContentTransfer(Component):
     _usage = "location_content_transfer"
     _description = __doc__
 
-    def _response_for_start(self, message=None, popup=None):
-        """Transition to the 'start' state"""
-        return self._response(next_state="start", message=message, popup=popup)
-
-    def _response_for_scan_destination_all(
-        self, pickings, message=None, confirmation_required=False
-    ):
-        """Transition to the 'scan_destination_all' state
-
-        The client screen shows a summary of all the products | lots | packages
-        to move to a single destination.
-
-        If `confirmation_required` is set,
-        the client will ask to scan again the destination
-        """
-        data = self._data_content_all_for_location(pickings=pickings)
-        data["confirmation_required"] = confirmation_required
-        if confirmation_required and not message:
-            message = self.msg_store.need_confirmation()
-        return self._response(
-            next_state="scan_destination_all", data=data, message=message
-        )
-
-    def _response_for_start_single(self, pickings, message=None, popup=None):
-        """Transition to the 'start_single' state
-
-        The client screen shows details of the operation.
-        """
-        location = pickings.mapped("location_id")
-        next_content = self._next_content(pickings)
-        if not next_content:
-            # TODO test (no more lines)
-            return self._response_for_start(message=message, popup=popup)
-        return self._response(
-            next_state="start_single",
-            data=self._data_content_operation_for_location(location, next_content),
-            message=message,
-            popup=popup,
-        )
-
-    def _response_for_scan_destination(
-        self, location, next_content, message=None, confirmation_required=False
-    ):
-        """Transition to the 'scan_destination' state
-
-        The client screen shows details operations to do.
-        """
-        data = self._data_content_operation_for_location(location, next_content)
-        data["confirmation_required"] = confirmation_required
-        if confirmation_required and not message:
-            message = self.msg_store.need_confirmation()
-        return self._response(next_state="scan_destination", data=data, message=message)
-
-    def _data_content_all_for_location(self, pickings):
-        sorter = self._actions_for("location_content_transfer.sorter")
-        sorter.feed_pickings(pickings)
-        location = pickings.mapped("pack_operation_ids.location_id")
-        assert len(location) == 1, "There should be only one src location at this stage"
-        return {
-            "location": self.data.location(location),
-            "operations": self.data.operations(sorter),
-        }
-
-    def _data_content_operation_for_location(self, location, next_content):
-        return {"operation": self.data.operations(next_content)[0]}
-
-    def _next_content(self, pickings):
-        sorter = self._actions_for("location_content_transfer.sorter")
-        sorter.feed_pickings(pickings)
-        try:
-            next_content = next(sorter)
-        except StopIteration:
-            return None
-        return next_content
-
-    def _router_single_or_all_destination(self, pickings, message=None):
-        location_dest = pickings.mapped("pack_operation_ids.location_dest_id")
-        location_src = pickings.mapped("pack_operation_ids.location_id")
-        if len(location_dest) == len(location_src) == 1:
-            return self._response_for_scan_destination_all(pickings, message=message)
-        return self._response_for_start_single(pickings, message=message)
-
-    def _domain_recover_pickings(self):
-        return [
-            ("operator_id", "=", self.shopfloor_user.id),
-            ("state", "=", "assigned"),
-            ("picking_type_id", "in", self.picking_types.ids),
-        ]
-
-    def _search_recover_pickings(self):
-        candidate_pickings = self.env["stock.picking"].search(
-            self._domain_recover_pickings()
-        )
-        started_pickings = candidate_pickings.filtered(
-            lambda picking: any(line.qty_done for line in picking.pack_operation_ids)
-        )
-        return started_pickings
+    ############
+    # SERVICES #
+    ############
 
     def start_or_recover(self):
+        """ Start a new session or recover an existing one
+
+        If the current user had transfers in progress in this scenario
+        and reopen the menu, we want to directly reopen the screens to choose
+        destinations. Otherwise, we search for the first stock refill arrange
+        with a location with a barcode_picking_type into the list of the
+        scenario picking_types. If one is available, we start a picking for
+        this location.
+        At the end of no operation is created we go to the "start" state
+        """
+        started_pickings = self._search_recover_pickings()
+        if started_pickings:
+            return self._router_single_or_all_destination(
+                started_pickings, message=self.msg_store.recovered_previous_session()
+            )
+        refill_arrange = self._refill_arrange_search()
+        if refill_arrange:
+            return self.scan_location(refill_arrange[0].location_id.barcode)
+        return self._response_for_start(
+            message=self.msg_store.location_content_transfer_no_work()
+        )
+
+    def __start_or_recover(self):
         """Start a new session or recover an existing one
 
         If the current user had transfers in progress in this scenario
@@ -162,53 +91,6 @@ class LocationContentTransfer(Component):
                 started_pickings, message=self.msg_store.recovered_previous_session()
             )
         return self._response_for_start()
-
-    def _find_location_operations_domain(self, location):
-        return [
-            ("location_id", "=", location.id),
-            ("qty_done", "=", 0),
-            ("state", "in", ("assigned", "partially_available")),
-            ("shopfloor_user_id", "=", False),
-        ]
-
-    def _find_location_all_operations_domain(self, location):
-        return [
-            ("location_id", "=", location.id),
-            ("state", "in", ("assigned", "partially_available")),
-        ]
-
-    def _find_location_operations(self, location):
-        """Find lines that potentially are to move in the location"""
-        return self.env["stock.pack.operation"].search(
-            self._find_location_operations_domain(location)
-        )
-
-    def _create_moves_from_location(self, location):
-        # get all quants from the scanned location
-        quants = self.env["stock.quant"].search(
-            [("location_id", "=", location.id), ("qty", ">", 0)]
-        )
-        # create moves for each quant
-        picking_type = self.work.menu.picking_type_ids
-        move_ids = []
-        for quant in quants:
-            move_ids.append(
-                self.env["stock.move"]
-                .create(
-                    {
-                        "name": quant.product_id.name,
-                        "product_id": quant.product_id.id,
-                        "product_uom": quant.product_uom_id.id,
-                        "product_uom_qty": quant.qty,
-                        "location_id": location.id,
-                        "location_dest_id": picking_type.default_location_dest_id.id,
-                        "origin": self.work.menu.name,
-                        "picking_type_id": picking_type.id,
-                    }
-                )
-                .id
-            )
-        return self.env["stock.move"].browse(move_ids)
 
     def scan_location(self, barcode):
         """Scan start location
@@ -338,51 +220,13 @@ class LocationContentTransfer(Component):
             for pack_lot in operation.pack_lot_ids:
                 pack_lot.qty = pack_lot.qty_todo
 
-        pickings.write({"operator_id": self.shopfloor_user.id})
+        pickings.write({"operator_id": self.shopfloor_user.id, "printed": True})
 
         unreserved_moves.action_assign()
 
         savepoint.release()
 
         return self._router_single_or_all_destination(pickings)
-
-    def _no_putaway_available(self, operations):
-        base_locations = self.picking_types.default_location_dest_id
-        # when no putaway is found, the move line destination stays the
-        # default's of the picking type
-        return any(op.location_dest_id in base_locations for op in operations)
-
-    def _find_operations_domain(self, location):
-        return [
-            ("location_id", "=", location.id),
-            ("state", "in", ("assigned", "partially_available")),
-            ("qty_done", ">", 0),
-            # TODO check generated SQL
-            ("picking_id.operator_id", "=", self.shopfloor_user.id),
-        ]
-
-    def _find_operations(self, location):
-        """Find move lines currently being moved by the user"""
-        lines = self.env["stock.pack.operation"].search(
-            self._find_operations_domain(location)
-        )
-        return lines
-
-    # hook used in module shopfloor_checkout_sync
-    def _write_destination_on_operations(self, operations, location):
-        operations.write({"location_dest_id": location.id})
-
-    def _set_all_destination_operations_and_done(
-        self, pickings, operations, dest_location
-    ):
-        self._write_destination_on_operations(operations, dest_location)
-        stock = self._actions_for("stock")
-        stock.validate_moves(operations.mapped("linked_move_operation_ids.move_id"))
-
-    def _lock_lines(self, lines):
-        """Lock move lines"""
-        sql = "SELECT id FROM %s WHERE ID IN %%s FOR UPDATE" % lines._table
-        self.env.cr.execute(sql, (tuple(lines.ids),), log_exceptions=False)
 
     def set_destination_all(self, location_id, barcode, confirmation=False):
         """Scan destination location for all the moves of the location
@@ -517,7 +361,7 @@ class LocationContentTransfer(Component):
             if product in operation.product_ids:
                 return self._response_for_scan_destination(location, operation)
 
-        lot = search.lot_from_scan(barcode)
+        lot = search.lot_from_scan(barcode, operation)
         if lot:
             if lot in operation.mapped("pack_lot_ids.lot_id"):
                 return self._response_for_scan_destination(location, operation)
@@ -757,9 +601,206 @@ class LocationContentTransfer(Component):
             inventory.create_stock_issue(move, src_location, package, lot)
             # Create a draft inventory to control stock
             inventory.create_control_stock(src_location, move.product_id, package, lot)
-        moves.action_cancel()
+        # no_recompute_pack required by stock_groupbypartner... what a mess
+        moves.with_context(no_recompute_pack=True).action_cancel()
         operations = self._find_operations(location)
         return self._response_for_start_single(operations.mapped("picking_id"))
+
+    ##################
+    # Helpers methods
+    ##################
+    def _refill_arrange_search(self):
+        RefillArrange = self.env["report.stock.refill.arrange"]
+        return RefillArrange.search(
+            [
+                ("reservation_id", "=", False),
+                ("barcode_picking_type_id", "in", self.picking_types.ids),
+            ],
+            order="refill_priority_arrange desc",
+        )
+
+    def _find_location_operations_domain(self, location):
+        return [
+            ("location_id", "=", location.id),
+            ("qty_done", "=", 0),
+            ("state", "in", ("assigned", "partially_available")),
+            ("shopfloor_user_id", "=", False),
+        ]
+
+    def _find_location_all_operations_domain(self, location):
+        return [
+            ("location_id", "=", location.id),
+            ("state", "in", ("assigned", "partially_available")),
+        ]
+
+    def _find_location_operations(self, location):
+        """Find lines that potentially are to move in the location"""
+        return self.env["stock.pack.operation"].search(
+            self._find_location_operations_domain(location)
+        )
+
+    def _create_moves_from_location(self, location):
+        # get all quants from the scanned location
+        quants = self.env["stock.quant"].search(
+            [("location_id", "=", location.id), ("qty", ">", 0)]
+        )
+        # create moves for each quant
+        picking_type = self.work.menu.picking_type_ids
+        move_ids = []
+        for quant in quants:
+            move_ids.append(
+                self.env["stock.move"]
+                .create(
+                    {
+                        "name": quant.product_id.name,
+                        "product_id": quant.product_id.id,
+                        "product_uom": quant.product_uom_id.id,
+                        "product_uom_qty": quant.qty,
+                        "location_id": location.id,
+                        "location_dest_id": picking_type.default_location_dest_id.id,
+                        "origin": self.work.menu.name,
+                        "picking_type_id": picking_type.id,
+                    }
+                )
+                .id
+            )
+        return self.env["stock.move"].browse(move_ids)
+
+    def _no_putaway_available(self, operations):
+        base_locations = self.picking_types.default_location_dest_id
+        # when no putaway is found, the move line destination stays the
+        # default's of the picking type
+        return any(op.location_dest_id in base_locations for op in operations)
+
+    def _find_operations_domain(self, location):
+        return [
+            ("location_id", "=", location.id),
+            ("state", "in", ("assigned", "partially_available")),
+            ("qty_done", ">", 0),
+            # TODO check generated SQL
+            ("picking_id.operator_id", "=", self.shopfloor_user.id),
+        ]
+
+    def _find_operations(self, location):
+        """Find move lines currently being moved by the user"""
+        lines = self.env["stock.pack.operation"].search(
+            self._find_operations_domain(location)
+        )
+        return lines
+
+    # hook used in module shopfloor_checkout_sync
+    def _write_destination_on_operations(self, operations, location):
+        operations.write({"location_dest_id": location.id})
+
+    def _set_all_destination_operations_and_done(
+        self, pickings, operations, dest_location
+    ):
+        self._write_destination_on_operations(operations, dest_location)
+        stock = self._actions_for("stock")
+        stock.validate_moves(operations.mapped("linked_move_operation_ids.move_id"))
+
+    def _lock_lines(self, lines):
+        """Lock move lines"""
+        sql = "SELECT id FROM %s WHERE ID IN %%s FOR UPDATE" % lines._table
+        self.env.cr.execute(sql, (tuple(lines.ids),), log_exceptions=False)
+
+    def _response_for_start(self, message=None, popup=None):
+        """Transition to the 'start' state"""
+        return self._response(next_state="start", message=message, popup=popup)
+
+    def _response_for_scan_destination_all(
+        self, pickings, message=None, confirmation_required=False
+    ):
+        """Transition to the 'scan_destination_all' state
+
+        The client screen shows a summary of all the products | lots | packages
+        to move to a single destination.
+
+        If `confirmation_required` is set,
+        the client will ask to scan again the destination
+        """
+        data = self._data_content_all_for_location(pickings=pickings)
+        data["confirmation_required"] = confirmation_required
+        if confirmation_required and not message:
+            message = self.msg_store.need_confirmation()
+        return self._response(
+            next_state="scan_destination_all", data=data, message=message
+        )
+
+    def _response_for_start_single(self, pickings, message=None, popup=None):
+        """Transition to the 'start_single' state
+
+        The client screen shows details of the operation.
+        """
+        location = pickings.mapped("location_id")
+        next_content = self._next_content(pickings)
+        if not next_content:
+            # TODO test (no more lines)
+            return self._response_for_start(message=message, popup=popup)
+        return self._response(
+            next_state="start_single",
+            data=self._data_content_operation_for_location(location, next_content),
+            message=message,
+            popup=popup,
+        )
+
+    def _response_for_scan_destination(
+        self, location, next_content, message=None, confirmation_required=False
+    ):
+        """Transition to the 'scan_destination' state
+
+        The client screen shows details operations to do.
+        """
+        data = self._data_content_operation_for_location(location, next_content)
+        data["confirmation_required"] = confirmation_required
+        if confirmation_required and not message:
+            message = self.msg_store.need_confirmation()
+        return self._response(next_state="scan_destination", data=data, message=message)
+
+    def _data_content_all_for_location(self, pickings):
+        sorter = self._actions_for("location_content_transfer.sorter")
+        sorter.feed_pickings(pickings)
+        location = pickings.mapped("pack_operation_ids.location_id")
+        assert len(location) == 1, "There should be only one src location at this stage"
+        return {
+            "location": self.data.location(location),
+            "operations": self.data.operations(sorter),
+        }
+
+    def _data_content_operation_for_location(self, location, next_content):
+        return {"operation": self.data.operations(next_content)[0]}
+
+    def _next_content(self, pickings):
+        sorter = self._actions_for("location_content_transfer.sorter")
+        sorter.feed_pickings(pickings)
+        try:
+            next_content = next(sorter)
+        except StopIteration:
+            return None
+        return next_content
+
+    def _router_single_or_all_destination(self, pickings, message=None):
+        location_dest = pickings.mapped("pack_operation_ids.location_dest_id")
+        location_src = pickings.mapped("pack_operation_ids.location_id")
+        if len(location_dest) == len(location_src) == 1:
+            return self._response_for_scan_destination_all(pickings, message=message)
+        return self._response_for_start_single(pickings, message=message)
+
+    def _domain_recover_pickings(self):
+        return [
+            ("operator_id", "=", self.shopfloor_user.id),
+            ("state", "=", "assigned"),
+            ("picking_type_id", "in", self.picking_types.ids),
+        ]
+
+    def _search_recover_pickings(self):
+        candidate_pickings = self.env["stock.picking"].search(
+            self._domain_recover_pickings()
+        )
+        started_pickings = candidate_pickings.filtered(
+            lambda picking: any(line.qty_done for line in picking.pack_operation_ids)
+        )
+        return started_pickings
 
     def _unreserve_other_operations(self, location, operations):
         """Unreserve move in location in another picking type

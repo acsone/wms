@@ -19,49 +19,60 @@ const LocationContentTransfer = {
                 v-on:found="on_scan"
                 :input_placeholder="search_input_placeholder"
                 />
+            <div class="button-list button-vertical-list full" v-if="state_is('scan_location')">
+                <v-row align="center">
+                    <v-col class="text-center" cols="12">
+                        <v-btn color="default" @click="state.on_back">Back</v-btn>
+                    </v-col>
+                </v-row>
+            </div>
+            <get-work
+                v-if="state_is('start')"
+                v-on:get_work="state.on_get_work"
+                v-on:manual_selection="state.on_manual_selection"
+                />
             <div v-if="state_in(['start_single', 'scan_destination', 'scan_destination_all']) && wrapped_context().has_records">
 
-            <item-detail-card
-            v-if="wrapped_context().location_src"
-            :key="make_state_component_key(['detail-move-line-loc-src', wrapped_context().location_src.id])"
-            :record="wrapped_context().location_src"
-            :options="{main: true, key_title: 'name', title_action_field: {action_val_path: 'barcode'}}"
-            :card_color="utils.colors.color_for(state_in(['start_single', 'scan_destination', 'scan_destination_all']) ? 'screen_step_done': 'screen_step_todo')"
-            />
-
-        <div v-for="rec in wrapped_context().records">
-            <item-detail-card
-                :key="make_state_component_key(['detail-move-line-product', rec.id, rec.lot && rec.lot.id])"
-                :record="rec"
-                :options="utils.wms.move_line_product_detail_options(rec, {fields: [{path: 'picking.name', label: 'Picking'}]})"
-                :card_color="utils.colors.color_for(state_in(['scan_destination', 'scan_destination_all']) ? 'screen_step_done': 'screen_step_todo')"
-                />
-
-            <v-card v-if="(rec.type == 'lot' || rec.type == 'product') && state_is('scan_destination')"
-                    class="pa-2" :color="utils.colors.color_for('screen_step_todo')">
-                <packaging-qty-picker
-                    :key="make_state_component_key(['packaging-qty-picker', rec.id, rec.lot && rec.lot.id])"
-                    :options="utils.wms.move_line_qty_picker_options(rec)"
+                <item-detail-card
+                    v-if="wrapped_context().location_src"
+                    :key="make_state_component_key(['detail-move-line-loc-src', wrapped_context().location_src.id])"
+                    :record="wrapped_context().location_src"
+                    :options="{main: true, key_title: 'name', title_action_field: {action_val_path: 'barcode'}}"
+                    :card_color="utils.colors.color_for(state_in(['start_single', 'scan_destination', 'scan_destination_all']) ? 'screen_step_done': 'screen_step_todo')"
                     />
-            </v-card>
 
-            <line-actions-popup
-                v-if="!wrapped_context()._multi"
-                :line="rec"
-                :actions="line_actions()"
-                :key="make_state_component_key(['line-actions', rec.id, rec.lot && rec.lot.id])"
-                v-on:action="on_line_action"
-                />
-        </div>
+                <div v-for="rec in wrapped_context().records">
+                    <item-detail-card
+                        :key="make_state_component_key(['detail-move-line-product', rec.id, rec.lot && rec.lot.id])"
+                        :record="rec"
+                        :options="utils.wms.move_line_product_detail_options(rec, {fields: [{path: 'picking.name', label: 'Picking'}]})"
+                        :card_color="utils.colors.color_for(state_in(['scan_destination', 'scan_destination_all']) ? 'screen_step_done': 'screen_step_todo')"
+                        />
 
-        <item-detail-card
-            v-if="wrapped_context().location_dest"
-            :key="make_state_component_key(['detail-move-line-loc-dest', wrapped_context().location_dest.id])"
-            :record="wrapped_context().location_dest"
-            :options="{main: true, key_title: 'name', title_action_field: {action_val_path: 'barcode'}}"
-            :card_color="utils.colors.color_for('screen_step_todo')"
-            />
+                    <v-card v-if="(rec.type == 'lot' || rec.type == 'product') && state_is('scan_destination')"
+                            class="pa-2" :color="utils.colors.color_for('screen_step_todo')">
+                        <packaging-qty-picker
+                            :key="make_state_component_key(['packaging-qty-picker', rec.id, rec.lot && rec.lot.id])"
+                            :options="utils.wms.move_line_qty_picker_options(rec)"
+                            />
+                    </v-card>
 
+                    <line-actions-popup
+                        v-if="!wrapped_context()._multi"
+                        :line="rec"
+                        :actions="line_actions()"
+                        :key="make_state_component_key(['line-actions', rec.id, rec.lot && rec.lot.id])"
+                        v-on:action="on_line_action"
+                        />
+                </div>
+
+                <item-detail-card
+                    v-if="wrapped_context().location_dest"
+                    :key="make_state_component_key(['detail-move-line-loc-dest', wrapped_context().location_dest.id])"
+                    :record="wrapped_context().location_dest"
+                    :options="{main: true, key_title: 'name', title_action_field: {action_val_path: 'barcode'}}"
+                    :card_color="utils.colors.color_for('screen_step_todo')"
+                    />
             </div>
             <line-stock-out
                 v-if="state_is('stock_issue')"
@@ -163,12 +174,15 @@ const LocationContentTransfer = {
     const self = this;
     return {
       usage: "location_content_transfer",
-      initial_state_key: "scan_location",
+      initial_state_key: "start",
       scan_destination_qty: 0,
       states: {
-        init: {
-          enter: () => {
+        start: {
+          on_get_work: evt => {
             this.wait_call(this.odoo.call("start_or_recover"));
+          },
+          on_manual_selection: evt => {
+            this.state_to("scan_location");
           },
         },
         scan_location: {
@@ -178,6 +192,10 @@ const LocationContentTransfer = {
           },
           on_scan: scanned => {
             this.wait_call(this.odoo.call("scan_location", {barcode: scanned.text}));
+          },
+          on_back: evt => {
+            this.state_to("start");
+            this.reset_notification();
           },
         },
         scan_destination_all: {

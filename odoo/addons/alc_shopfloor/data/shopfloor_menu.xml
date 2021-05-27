@@ -2,15 +2,15 @@
 <!-- Copyright 2021 ACSONE SA/NV
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo noupdate="0">
-  <record id="menu_location_content_transfer" model="shopfloor.menu">
-    <field name="name">Location Content Transfer</field>
+  <record id="shopfloor_menu_medoc_rangement" model="shopfloor.menu">
+    <field name="name">Rangement</field>
     <field name="sequence">10</field>
     <field name="allow_move_create" eval="1" />
     <field name="scenario_id" ref="alc_shopfloor.scenario_location_content_transfer" />
-    <field name="profile_id" ref="alc_shopfloor.profile_location_content_transfer" />
+    <field name="profile_id" ref="alc_shopfloor.shopfloor_profile_medoc" />
     <field
       name="picking_type_ids"
-      eval="[(4, ref('alc_shopfloor.picking_type_location_content_transfer'))]"
+      eval="[(4, ref('alc_shopfloor.stock_picking_type_rangement_medoc'))]"
     />
   </record>
 </odoo>

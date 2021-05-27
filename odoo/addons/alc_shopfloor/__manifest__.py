@@ -6,7 +6,7 @@
     "name": "Alc Shopfloor",
     "description": """
         Alcyon :Shopfloor Scan scenario""",
-    "version": "10.0.1.0.0",
+    "version": "10.0.1.0.1",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
@@ -25,12 +25,14 @@
         "stock_picking_assignment",
         "stock_picking_show_backorder",
         "stock_helper",
+        # alcyon
+        "delivery_rounds_refill",
     ],
     "data": [
         "data/scenario_location_content_transfer.xml",
-        "data/stock_picking_type_location_content_transfer.xml",
-        "data/profile_location_content_transfer.xml",
-        "data/menu_location_content_transfer.xml",
+        "data/shopfloor_profile.xml",
+        "data/stock_picking_type.xml",
+        "data/shopfloor_menu.xml",
         "security/groups.xml",
         "views/shopfloor_menu.xml",
         "views/stock_location.xml",
@@ -38,4 +40,5 @@
         "views/stock_picking_type.xml",
     ],
     "demo": ["demo/stock_picking_type_demo.xml", "demo/shopfloor_menu_demo.xml"],
+    "pre_init_hook": "pre_init_hook",
 }
