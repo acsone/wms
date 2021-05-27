@@ -15,7 +15,6 @@ class PurchaseOrderLine(models.Model):
         compute="_compute_is_modify_date_announced_allowed",
         default=True,
         readonly=True,
-        store=True,
     )
 
     @api.multi
