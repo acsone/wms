@@ -18,6 +18,12 @@ class ReportStockRefillAbstract(models.AbstractModel):
     lot_id = fields.Many2one("stock.production.lot", "Lot")
     qty = fields.Float("Quantity")
     reservation_id = fields.Many2one("stock.move", "Reservation")
+    barcode_picking_type_id = fields.Many2one(
+        "stock.picking.type",
+        "Barcode Picking Type",
+        help="Define the type of picking to create when this location (or any "
+        "children) is scanned",
+    )
 
     def _create_view(self, location_kind):
         qty_field = "qty_in_reserve"
@@ -38,7 +44,10 @@ class ReportStockRefillAbstract(models.AbstractModel):
               SELECT DISTINCT ON (rso.id)
                 sq.location_id,
                 sq.reservation_id,
-                sq.lot_id, sq.qty, rso.*
+                sq.lot_id,
+                sq.qty,
+                sl.barcode_picking_type_id,
+                rso.*
               FROM stock_quant sq
               JOIN stock_location sl on sq.location_id = sl.id
               JOIN warehouse_root_locations wh
