@@ -89,7 +89,7 @@ def main():
                         line = '{}{}">{}</field>\n'.format(begin, tag, row[i])
                     if row[i] or tag == "id":
                         xml_data.write(line)
-                xml_data.write("  </record>" + "\n\n")
+                xml_data.write("  </record>" + "\n")
             row_num += 1
         xml_data.write(ERP_FOOTER)
         xml_data.close()

@@ -1,53 +1,47 @@
 <?xml version="1.0" ?>
 <odoo noupdate="1">
-  <record id="location_st_M_Palette_Fixe" model="stock.location.storage.type">
+  <record id="location_st_Palette_Fixe" model="stock.location.storage.type">
     <field name="name">Palette Fixe</field>
     <field name="do_not_mix_products" eval="1" />
     <field name="do_not_mix_lots" eval="1" />
   </record>
-  <record id="location_st_M_Palette_Chaotique" model="stock.location.storage.type">
+  <record id="location_st_Palette_Chaotique" model="stock.location.storage.type">
     <field name="name">Palette Chaotique</field>
     <field name="only_empty" eval="1" />
   </record>
-  <record id="location_st_M_1_2_Palette_Fixe" model="stock.location.storage.type">
+  <record id="location_st_1_2_Palette_Fixe" model="stock.location.storage.type">
     <field name="name">1/2 Palette Fixe</field>
     <field name="do_not_mix_products" eval="1" />
     <field name="do_not_mix_lots" eval="1" />
   </record>
-  <record id="location_st_M_1_2_Pallette_Chaotique" model="stock.location.storage.type">
+  <record id="location_st_1_2_Pallette_Chaotique" model="stock.location.storage.type">
     <field name="name">1/2 Pallette Chaotique</field>
     <field name="only_empty" eval="1" />
   </record>
-  <record id="location_st_M_Etagere_Fixe" model="stock.location.storage.type">
+  <record id="location_st_Etagere_Fixe" model="stock.location.storage.type">
     <field name="name">Etagere Fixe</field>
     <field name="do_not_mix_products" eval="1" />
     <field name="do_not_mix_lots" eval="1" />
   </record>
-  <record id="location_st_M_Etagere_Chaotique" model="stock.location.storage.type">
+  <record id="location_st_Etagere_Chaotique" model="stock.location.storage.type">
     <field name="name">Etagere Chaotique</field>
     <field name="only_empty" eval="1" />
   </record>
-  <record id="location_st_M_Dynamique_Fixe" model="stock.location.storage.type">
+  <record id="location_st_Dynamique_Fixe" model="stock.location.storage.type">
     <field name="name">Dynamique Fixe</field>
     <field name="do_not_mix_products" eval="1" />
     <field name="do_not_mix_lots" eval="1" />
   </record>
-  <record
-    id="location_st_M_Etagere_Fixe_Mixed_Lots"
-    model="stock.location.storage.type"
-  >
+  <record id="location_st_Etagere_Fixe_Mixed_Lots" model="stock.location.storage.type">
     <field name="name">Etagere Fixe Mixed Lots</field>
     <field name="do_not_mix_products" eval="1" />
   </record>
-  <record
-    id="location_st_M_1_2_Palette_Reserve_Fixe"
-    model="stock.location.storage.type"
-  >
+  <record id="location_st_1_2_Palette_Reserve_Fixe" model="stock.location.storage.type">
     <field name="name">1/2 Palette Reserve Fixe</field>
     <field name="do_not_mix_products" eval="1" />
     <field name="do_not_mix_lots" eval="1" />
   </record>
-  <record id="location_st_M_Etagere_Reserve_Fixe" model="stock.location.storage.type">
+  <record id="location_st_Etagere_Reserve_Fixe" model="stock.location.storage.type">
     <field name="name">Etagere Reserve Fixe</field>
     <field name="do_not_mix_products" eval="1" />
     <field name="do_not_mix_lots" eval="1" />

@@ -8,152 +8,197 @@
     <field name="name">*M</field>
     <field name="location_id" ref="__setup__.stock_location_reserve_medoc" />
   </record>
-  <record id="location_M_R-2M" model="stock.location">
-    <field name="name">R-2M</field>
+  <record id="location_M_R-M2-M" model="stock.location">
+    <field name="name">R-M2-M</field>
     <field name="location_id" ref="location_M_reserve" />
     <field
       name="location_storage_type_ids"
-      eval="[(6, 0, [ref('alc_stock_storage_type.location_st_M_Etagere_Reserve_Fixe')])]"
+      eval="[(6, 0, [ref('alc_stock_storage_type.location_st_Etagere_Reserve_Fixe')])]"
     />
     <field name="pack_putaway_strategy">ordered_locations</field>
   </record>
-  <record id="location_M_R-3M" model="stock.location">
-    <field name="name">R-3M</field>
+  <record id="location_M_R-M3-M" model="stock.location">
+    <field name="name">R-M3-M</field>
     <field name="location_id" ref="location_M_reserve" />
     <field
       name="location_storage_type_ids"
-      eval="[(6, 0, [ref('alc_stock_storage_type.location_st_M_Etagere_Reserve_Fixe')])]"
+      eval="[(6, 0, [ref('alc_stock_storage_type.location_st_Etagere_Reserve_Fixe')])]"
     />
     <field name="pack_putaway_strategy">ordered_locations</field>
   </record>
-  <record id="location_M_R-5M" model="stock.location">
-    <field name="name">R-5M</field>
+  <record id="location_M_R-M5-M" model="stock.location">
+    <field name="name">R-M5-M</field>
     <field name="location_id" ref="location_M_reserve" />
     <field
       name="location_storage_type_ids"
-      eval="[(6, 0, [ref('alc_stock_storage_type.location_st_M_Etagere_Reserve_Fixe')])]"
+      eval="[(6, 0, [ref('alc_stock_storage_type.location_st_Etagere_Reserve_Fixe')])]"
     />
     <field name="pack_putaway_strategy">ordered_locations</field>
   </record>
-  <record id="location_M_R-1L" model="stock.location">
-    <field name="name">R-1L</field>
+  <record id="location_M_R-M1-L" model="stock.location">
+    <field name="name">R-M1-L</field>
     <field name="location_id" ref="location_M_reserve" />
     <field
       name="location_storage_type_ids"
-      eval="[(6, 0, [ref('alc_stock_storage_type.location_st_M_Etagere_Reserve_Fixe')])]"
+      eval="[(6, 0, [ref('alc_stock_storage_type.location_st_Etagere_Reserve_Fixe')])]"
     />
     <field name="pack_putaway_strategy">ordered_locations</field>
   </record>
-  <record id="location_M_R-1S" model="stock.location">
-    <field name="name">R-1S</field>
+  <record id="location_M_R-M1-S" model="stock.location">
+    <field name="name">R-M1-S</field>
     <field name="location_id" ref="location_M_reserve" />
     <field
       name="location_storage_type_ids"
-      eval="[(6, 0, [ref('alc_stock_storage_type.location_st_M_Etagere_Reserve_Fixe')])]"
+      eval="[(6, 0, [ref('alc_stock_storage_type.location_st_Etagere_Reserve_Fixe')])]"
     />
     <field name="pack_putaway_strategy">ordered_locations</field>
   </record>
-  <record id="location_M_R-HDYN" model="stock.location">
-    <field name="name">R-HDYN</field>
+  <record id="location_M_R-M-HDYN" model="stock.location">
+    <field name="name">R-M-HDYN</field>
     <field name="location_id" ref="location_M_reserve" />
     <field
       name="location_storage_type_ids"
-      eval="[(6, 0, [ref('alc_stock_storage_type.location_st_M_Dynamique_Fixe')])]"
+      eval="[(6, 0, [ref('alc_stock_storage_type.location_st_Dynamique_Fixe')])]"
     />
     <field name="pack_putaway_strategy">ordered_locations</field>
   </record>
-  <record id="location_M_R-PAL" model="stock.location">
-    <field name="name">R-PAL</field>
+  <record id="location_M_R-M-PAL" model="stock.location">
+    <field name="name">R-M-PAL</field>
     <field name="location_id" ref="location_M_reserve" />
     <field
       name="location_storage_type_ids"
-      eval="[(6, 0, [ref('alc_stock_storage_type.location_st_M_Palette_Chaotique'),ref('alc_stock_storage_type.location_st_M_Palette_Fixe')])]"
+      eval="[(6, 0, [ref('alc_stock_storage_type.location_st_Palette_Chaotique'),ref('alc_stock_storage_type.location_st_Palette_Fixe')])]"
     />
     <field name="pack_putaway_strategy">abc</field>
   </record>
-  <record id="location_M_B-PAL" model="stock.location">
-    <field name="name">B-PAL</field>
-    <field name="location_id" ref="location_M_bin" />
+  <record id="location_M_R-M-HPAL" model="stock.location">
+    <field name="name">R-M-HPAL</field>
+    <field name="location_id" ref="location_M_reserve" />
     <field
       name="location_storage_type_ids"
-      eval="[(6, 0, [ref('alc_stock_storage_type.location_st_M_Palette_Chaotique'),ref('alc_stock_storage_type.location_st_M_Palette_Fixe')])]"
+      eval="[(6, 0, [ref('alc_stock_storage_type.location_st_1_2_Pallette_Chaotique'),ref('alc_stock_storage_type.location_st_1_2_Palette_Fixe'),ref('alc_stock_storage_type.location_st_Dynamique_Fixe')])]"
     />
     <field name="pack_putaway_strategy">abc</field>
-    <field name="reserve_location_id" ref="location_M_R-PAL" />
   </record>
-  <record id="location_M_B-HPAL" model="stock.location">
-    <field name="name">B-HPAL</field>
+  <record id="location_M_B-M-PAL" model="stock.location">
+    <field name="name">B-M-PAL</field>
     <field name="location_id" ref="location_M_bin" />
     <field
       name="location_storage_type_ids"
-      eval="[(6, 0, [ref('alc_stock_storage_type.location_st_M_Palette_Chaotique'),ref('alc_stock_storage_type.location_st_M_Palette_Fixe')])]"
+      eval="[(6, 0, [ref('alc_stock_storage_type.location_st_Palette_Chaotique'),ref('alc_stock_storage_type.location_st_Palette_Fixe')])]"
     />
     <field name="pack_putaway_strategy">abc</field>
-    <field name="reserve_location_id" ref="location_M_R-PAL" />
+    <field name="reserve_location_id" ref="location_M_R-M-PAL" />
   </record>
-  <record id="location_M_B-1S" model="stock.location">
-    <field name="name">B-1S</field>
+  <record id="location_M_B-M-HPAL" model="stock.location">
+    <field name="name">B-M-HPAL</field>
     <field name="location_id" ref="location_M_bin" />
     <field
       name="location_storage_type_ids"
-      eval="[(6, 0, [ref('alc_stock_storage_type.location_st_M_Etagere_Chaotique'),ref('alc_stock_storage_type.location_st_M_Etagere_Fixe'),ref('alc_stock_storage_type.location_st_M_Etagere_Fixe_Mixed_Lots')])]"
+      eval="[(6, 0, [ref('alc_stock_storage_type.location_st_1_2_Pallette_Chaotique'),ref('alc_stock_storage_type.location_st_1_2_Palette_Fixe')])]"
     />
     <field name="pack_putaway_strategy">abc</field>
-    <field name="reserve_location_id" ref="location_M_R-1S" />
+    <field name="reserve_location_id" ref="location_M_R-M-PAL" />
   </record>
-  <record id="location_M_B-1L" model="stock.location">
-    <field name="name">B-1L</field>
+  <record id="location_M_B-M1-S" model="stock.location">
+    <field name="name">B-M1-S</field>
     <field name="location_id" ref="location_M_bin" />
     <field
       name="location_storage_type_ids"
-      eval="[(6, 0, [ref('alc_stock_storage_type.location_st_M_Etagere_Chaotique'),ref('alc_stock_storage_type.location_st_M_Etagere_Fixe'),ref('alc_stock_storage_type.location_st_M_Etagere_Fixe_Mixed_Lots')])]"
+      eval="[(6, 0, [ref('alc_stock_storage_type.location_st_Etagere_Chaotique'),ref('alc_stock_storage_type.location_st_Etagere_Fixe'),ref('alc_stock_storage_type.location_st_Etagere_Fixe_Mixed_Lots')])]"
     />
     <field name="pack_putaway_strategy">abc</field>
-    <field name="reserve_location_id" ref="location_M_R-1L" />
+    <field name="reserve_location_id" ref="location_M_R-M1-S" />
   </record>
-  <record id="location_M_B-2M" model="stock.location">
-    <field name="name">B-2M</field>
+  <record id="location_M_B-M1-L" model="stock.location">
+    <field name="name">B-M1-L</field>
     <field name="location_id" ref="location_M_bin" />
     <field
       name="location_storage_type_ids"
-      eval="[(6, 0, [ref('alc_stock_storage_type.location_st_M_Etagere_Chaotique'),ref('alc_stock_storage_type.location_st_M_Etagere_Fixe'),ref('alc_stock_storage_type.location_st_M_Etagere_Fixe_Mixed_Lots')])]"
+      eval="[(6, 0, [ref('alc_stock_storage_type.location_st_Etagere_Chaotique'),ref('alc_stock_storage_type.location_st_Etagere_Fixe'),ref('alc_stock_storage_type.location_st_Etagere_Fixe_Mixed_Lots')])]"
     />
     <field name="pack_putaway_strategy">abc</field>
-    <field name="reserve_location_id" ref="location_M_R-2M" />
+    <field name="reserve_location_id" ref="location_M_R-M1-L" />
   </record>
-  <record id="location_M_B-3M" model="stock.location">
-    <field name="name">B-3M</field>
+  <record id="location_M_B-M2-M" model="stock.location">
+    <field name="name">B-M2-M</field>
     <field name="location_id" ref="location_M_bin" />
     <field
       name="location_storage_type_ids"
-      eval="[(6, 0, [ref('alc_stock_storage_type.location_st_M_Etagere_Chaotique'),ref('alc_stock_storage_type.location_st_M_Etagere_Fixe'),ref('alc_stock_storage_type.location_st_M_Etagere_Fixe_Mixed_Lots')])]"
+      eval="[(6, 0, [ref('alc_stock_storage_type.location_st_Etagere_Chaotique'),ref('alc_stock_storage_type.location_st_Etagere_Fixe'),ref('alc_stock_storage_type.location_st_Etagere_Fixe_Mixed_Lots')])]"
     />
     <field name="pack_putaway_strategy">abc</field>
-    <field name="reserve_location_id" ref="location_M_R-3M" />
+    <field name="reserve_location_id" ref="location_M_R-M2-M" />
   </record>
-  <record id="location_M_B-5M" model="stock.location">
-    <field name="name">B-5M</field>
+  <record id="location_M_B-M3-M" model="stock.location">
+    <field name="name">B-M3-M</field>
     <field name="location_id" ref="location_M_bin" />
     <field
       name="location_storage_type_ids"
-      eval="[(6, 0, [ref('alc_stock_storage_type.location_st_M_Etagere_Chaotique'),ref('alc_stock_storage_type.location_st_M_Etagere_Fixe'),ref('alc_stock_storage_type.location_st_M_Etagere_Fixe_Mixed_Lots')])]"
+      eval="[(6, 0, [ref('alc_stock_storage_type.location_st_Etagere_Chaotique'),ref('alc_stock_storage_type.location_st_Etagere_Fixe'),ref('alc_stock_storage_type.location_st_Etagere_Fixe_Mixed_Lots')])]"
     />
     <field name="pack_putaway_strategy">abc</field>
-    <field name="reserve_location_id" ref="location_M_R-5M" />
+    <field name="reserve_location_id" ref="location_M_R-M3-M" />
   </record>
-  <record id="location_M_B-DYN" model="stock.location">
-    <field name="name">B-DYN</field>
+  <record id="location_M_B-M5-M" model="stock.location">
+    <field name="name">B-M5-M</field>
     <field name="location_id" ref="location_M_bin" />
     <field
       name="location_storage_type_ids"
-      eval="[(6, 0, [ref('alc_stock_storage_type.location_st_M_Dynamique_Fixe')])]"
+      eval="[(6, 0, [ref('alc_stock_storage_type.location_st_Etagere_Chaotique'),ref('alc_stock_storage_type.location_st_Etagere_Fixe'),ref('alc_stock_storage_type.location_st_Etagere_Fixe_Mixed_Lots')])]"
+    />
+    <field name="pack_putaway_strategy">abc</field>
+    <field name="reserve_location_id" ref="location_M_R-M5-M" />
+  </record>
+  <record id="location_M_B-M-DYN" model="stock.location">
+    <field name="name">B-M-DYN</field>
+    <field name="location_id" ref="location_M_bin" />
+    <field
+      name="location_storage_type_ids"
+      eval="[(6, 0, [ref('alc_stock_storage_type.location_st_Dynamique_Fixe')])]"
     />
     <field name="pack_putaway_strategy">none</field>
-    <field name="reserve_location_id" ref="location_M_R-HDYN" />
+    <field name="reserve_location_id" ref="location_M_reserve" />
   </record>
-  <record id="location_M_TDB-5M" model="stock.location">
-    <field name="name">TDB-5M</field>
+  <record id="location_M_R-M5-TDB" model="stock.location">
+    <field name="name">R-M5-TDB</field>
     <field name="location_id" ref="location_M_reserve" />
+    <field name="pack_putaway_strategy">ordered_locations</field>
+  </record>
+  <record id="location_M_B-M5-NOUV" model="stock.location">
+    <field name="name">B-M5-NOUV</field>
+    <field name="location_id" ref="location_M_bin" />
+    <field
+      name="location_storage_type_ids"
+      eval="[(6, 0, [ref('alc_stock_storage_type.location_st_Etagere_Chaotique'),ref('alc_stock_storage_type.location_st_Etagere_Fixe'),ref('alc_stock_storage_type.location_st_Etagere_Fixe_Mixed_Lots')])]"
+    />
+    <field name="pack_putaway_strategy">ordered_locations</field>
+  </record>
+  <record id="location_M_B-M5-BO" model="stock.location">
+    <field name="name">B-M5-BO</field>
+    <field name="location_id" ref="location_M_bin" />
+    <field
+      name="location_storage_type_ids"
+      eval="[(6, 0, [ref('alc_stock_storage_type.location_st_Etagere_Chaotique'),ref('alc_stock_storage_type.location_st_Etagere_Fixe'),ref('alc_stock_storage_type.location_st_Etagere_Fixe_Mixed_Lots')])]"
+    />
+    <field name="pack_putaway_strategy">ordered_locations</field>
+  </record>
+  <record id="location_M_B-M5-AV" model="stock.location">
+    <field name="name">B-M5-AV</field>
+    <field name="location_id" ref="location_M_bin" />
+    <field
+      name="location_storage_type_ids"
+      eval="[(6, 0, [ref('alc_stock_storage_type.location_st_Etagere_Chaotique'),ref('alc_stock_storage_type.location_st_Etagere_Fixe'),ref('alc_stock_storage_type.location_st_Etagere_Fixe_Mixed_Lots')])]"
+    />
+    <field name="pack_putaway_strategy">ordered_locations</field>
+  </record>
+  <record id="location_M_B-M5-HUM" model="stock.location">
+    <field name="name">B-M5-HUM</field>
+    <field name="location_id" ref="location_M_bin" />
+    <field
+      name="location_storage_type_ids"
+      eval="[(6, 0, [ref('alc_stock_storage_type.location_st_Etagere_Chaotique'),ref('alc_stock_storage_type.location_st_Etagere_Fixe'),ref('alc_stock_storage_type.location_st_Etagere_Fixe_Mixed_Lots')])]"
+    />
     <field name="pack_putaway_strategy">ordered_locations</field>
   </record>
 </odoo>
