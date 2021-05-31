@@ -76,6 +76,25 @@ class SaleOrder(models.Model):
         return order
 
     @api.model
+    def _cancel_from_b2c(self, order_id):
+        """ Cancel a sale order with data coming from b2c
+        """
+
+        order = (
+            self.env["sale.order"]
+            .with_context(mail_auto_subscribe_no_notify=True)
+            .search([("id", "=", order_id), ("state", "!=", "cancel")])
+        )
+        if order.picking_ids and any(order.mapped("picking_ids.printed")):
+            body = _("Cannot cancel order %s , being process already") % order.name
+        else:
+            body = _("Order  %s cancelled from b2c api.") % order.name
+            order.sudo().action_cancel()
+
+        order.message_post(body=body)
+        return order
+
+    @api.model
     def _parse_b2c_order(self, data, b2c_backend):
         order_data = {}
         # we create all the orders with the VET as final customer

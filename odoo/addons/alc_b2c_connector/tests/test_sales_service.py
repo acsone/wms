@@ -610,3 +610,31 @@ class TestSalesService(CommonCase):
             u"{}_{}".format(self.b2c_backend.sale_channel, recipient_info["id"]),
         )
         self.assertEqual("BE", new_so.partner_id.country_id.code)
+
+    def test_12(self):
+        """
+        Data:
+            1 existing SO
+        Test case:
+            Cancel the so while no picking is started for it
+        Expected result:
+            The so is cancelled
+        """
+        _ = self.sales_service.dispatch("cancel", _id=self.b2c_order.id)
+
+        self.assertEqual("cancel", self.b2c_order.state)
+
+    def test_13(self):
+        """
+        Data:
+            1 existing SO
+        Test case:
+            Try to cancel the SO while the picking is printed
+        Expected result:
+            The so is not cancelled
+        """
+        self._deliver_orders(self.b2c_order)
+        self.b2c_order.picking_ids.do_print_picking()
+        _ = self.sales_service.dispatch("cancel", _id=self.b2c_order.id)
+
+        self.assertEqual("sale", self.b2c_order.state)
