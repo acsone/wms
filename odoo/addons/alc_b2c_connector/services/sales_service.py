@@ -151,7 +151,7 @@ class SalesService(Component):
                 "type": "list",
                 "nullable": True,
                 "required": False,
-                "schema": {"type": "integer"},
+                "schema": {"type": "integer", "coerce": to_int},
             },
             "limit": {"coerce": to_int, "nullable": True, "type": "integer"},
             "offset": {"coerce": to_int, "nullable": True, "type": "integer"},
