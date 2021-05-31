@@ -41,11 +41,7 @@
       </t>
       <t t-set="content" t-value="content.replace('#', '%%23')" />
       <div class="barcode_name_medoc">
-        <t t-esc="o.name[0:1]" />
-        <t t-esc="o.name[1:3]" />
-        <t t-esc="o.name[3:5]" />
-        <t t-esc="o.name[5:6]" />
-        <t t-esc="o.name[6:8]" />
+        <t t-esc="o.name" />
       </div>
       <div class="barcode_checksum_medoc">
         <div t-esc="o.bin_checksum_1" />
@@ -77,11 +73,7 @@
           />
         </div>
         <div class="barcode_name_left_medoc">
-          <t t-esc="o.name[0:1]" />
-          <t t-esc="o.name[1:3]" />
-          <t t-esc="o.name[3:5]" />
-          <t t-esc="o.name[5:6]" />
-          <t t-esc="o.name[6:8]" />
+          <t t-esc="o.name" />
         </div>
         <div class="barcode_checksum_left_medoc">
           <div t-esc="o.bin_checksum_1" />
@@ -90,11 +82,7 @@
       </t>
       <t t-if="o.name[4] == 'A'">
         <div class="barcode_name_right_medoc">
-          <t t-esc="o.name[0:1]" />
-          <t t-esc="o.name[1:3]" />
-          <t t-esc="o.name[3:5]" />
-          <t t-esc="o.name[5:6]" />
-          <t t-esc="o.name[6:8]" />
+          <t t-esc="o.name" />
         </div>
         <div class="barcode_checksum_right_medoc">
           <div t-esc="o.bin_checksum_1" />
