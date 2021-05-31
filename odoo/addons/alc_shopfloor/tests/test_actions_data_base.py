@@ -73,18 +73,19 @@ class ActionsDataCaseBase(CommonCase, ActionsDataTestMixin):
         cls.picking.action_assign()
 
         cls.supplier = cls.env["res.partner"].sudo().create({"name": "Supplier"})
-        cls.product_a_vendor = (
+        ProductSupplierInfo = (
             cls.env["product.supplierinfo"]
             .sudo()
-            .create(
-                {
-                    "name": cls.supplier.id,
-                    "price": 8.0,
-                    "product_code": "VENDOR_CODE_A",
-                    "product_id": cls.product_a.id,
-                    "product_tmpl_id": cls.product_a.product_tmpl_id.id,
-                }
-            )
+            .with_context(disable_check_dates=True)
+        )  # avoid side effect with pricelist_discount
+        cls.product_a_vendor = ProductSupplierInfo.create(
+            {
+                "name": cls.supplier.id,
+                "price": 8.0,
+                "product_code": "VENDOR_CODE_A",
+                "product_id": cls.product_a.id,
+                "product_tmpl_id": cls.product_a.product_tmpl_id.id,
+            }
         )
         cls.product_a_variant = cls.product_a.copy(
             {
@@ -95,19 +96,15 @@ class ActionsDataCaseBase(CommonCase, ActionsDataTestMixin):
             }
         )
         # create another supplier info w/ lower sequence
-        cls.product_a_vendor = (
-            cls.env["product.supplierinfo"]
-            .sudo()
-            .create(
-                {
-                    "name": cls.supplier.id,
-                    "price": 12.0,
-                    "product_code": "VENDOR_CODE_VARIANT",
-                    "product_id": cls.product_a_variant.id,
-                    "product_tmpl_id": cls.product_a.product_tmpl_id.id,
-                    "sequence": 0,
-                }
-            )
+        cls.product_a_vendor = ProductSupplierInfo.create(
+            {
+                "name": cls.supplier.id,
+                "price": 12.0,
+                "product_code": "VENDOR_CODE_VARIANT",
+                "product_id": cls.product_a_variant.id,
+                "product_tmpl_id": cls.product_a.product_tmpl_id.id,
+                "sequence": 0,
+            }
         )
 
     def _expected_location(self, record, **kw):

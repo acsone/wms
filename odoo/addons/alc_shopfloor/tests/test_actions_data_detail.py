@@ -226,7 +226,11 @@ class TestActionsDataDetailCase(ActionsDataDetailCaseBase):
         )
         vendor_a = Partner.create({"name": "Supplier A"})
         vendor_b = Partner.create({"name": "Supplier B"})
-        SupplierInfo = self.env["product.supplierinfo"].sudo()
+        SupplierInfo = (
+            self.env["product.supplierinfo"]
+            .sudo()
+            .with_context(disable_check_dates=True)
+        )  # avoid side effect with pricelist_discount
         SupplierInfo.create(
             {
                 "name": vendor_a.id,
