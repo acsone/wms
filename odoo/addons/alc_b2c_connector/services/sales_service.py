@@ -76,6 +76,38 @@ class SalesService(Component):
         )
         return self._to_search_result(data)
 
+    def cancel(self, _id):
+        """
+        Cancel Sale Order.
+        Cancelling a sale order is only possible until
+        the preparation has started (i.e., the picking is printed)
+        """
+
+        so = self.env["sale.order"].suspend_security()._cancel_from_b2c(order_id=_id)
+        if so.state == "cancel":
+            return {
+                "status": "OK",
+                "message": "Order  %s cancelled from b2c api" % so.name,
+            }
+        return {
+            "status": "KO",
+            "message": "Cannot cancel so %s , being process already" % so.name,
+        }
+
+    def _validator_cancel(self):
+        return {}
+
+    def _validator_return_cancel(self):
+        return {
+            "status": {
+                "type": "string",
+                "nullable": False,
+                "required": True,
+                "allowed": ["OK", "KO"],
+            },
+            "message": {"type": "string", "nullable": True, "required": False},
+        }
+
     def _validator_create(self):
         return {
             "id": {"type": "integer", "nullable": False, "required": True},
