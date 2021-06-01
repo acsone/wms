@@ -15,16 +15,20 @@ class StockLocation(models.Model):
     barcode = fields.Char(required=True, index=True)
 
     @api.constrains("barcode")
-    def _onchange_name(self):
+    def _check_barcode(self):
         for rec in self:
-            if rec.barcode and not rec.barcode.isalnum():
+            if rec.barcode != self._sanitize_name_for_barcode(rec.name):
                 raise ValidationError(
-                    _("Barcode %S could only contains alphanumeric characters")
+                    _("Barcode %s could only contains alphanumeric characters and '*'")
                     % rec.barcode
                 )
 
     @api.model
     def create(self, vals):
         if "barcode" not in vals:
-            vals["barcode"] = re.sub("[^0-9a-zA-Z]+", "*", vals["name"])
+            vals["barcode"] = self._sanitize_name_for_barcode(vals["name"])
         return super(StockLocation, self).create(vals)
+
+    @api.model
+    def _sanitize_name_for_barcode(self, value):
+        return re.sub("[^0-9a-zA-Z*]+", "", value)

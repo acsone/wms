@@ -18,7 +18,7 @@ def pre_init_hook(cr):
             UPDATE
                 stock_location sl
             SET
-                barcode = regexp_replace(name, '[^a-zA-Z0-9]+', '', 'g')
+                barcode = regexp_replace(name, '[^a-zA-Z0-9,*]+', '', 'g')
             WHERE
                 barcode is null
                 and not exists ( select 1 from duplicate_location where name = sl.name)
