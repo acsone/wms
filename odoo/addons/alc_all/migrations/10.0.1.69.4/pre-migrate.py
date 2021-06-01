@@ -9,7 +9,7 @@ _logger = logging.getLogger(__name__)
 
 def migrate(cr, version):
 
-    _logger.info("uninstall code_abc")
+    _logger.info("uninstall alc_stock_location_barcode_required")
     cr.execute(
         "update ir_module_module set state = 'to remove' where name ='alc_stock_location_barcode_required'"
     )
