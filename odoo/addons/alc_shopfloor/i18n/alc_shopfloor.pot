@@ -31,7 +31,7 @@ msgid "Adds shopfloor priority/postpone fields"
 msgstr ""
 
 #. module: alc_shopfloor
-#: code:addons/alc_shopfloor/actions/message.py:465
+#: code:addons/alc_shopfloor/actions/message.py:473
 #, python-format
 msgid "All packages processed."
 msgstr ""
@@ -53,7 +53,7 @@ msgid "Are you sure?"
 msgstr ""
 
 #. module: alc_shopfloor
-#: code:addons/alc_shopfloor/actions/message.py:477
+#: code:addons/alc_shopfloor/actions/message.py:485
 #, python-format
 msgid "Barcode does not match with {}."
 msgstr ""
@@ -89,7 +89,7 @@ msgid "Canceled, you can scan a new pack."
 msgstr ""
 
 #. module: alc_shopfloor
-#: code:addons/alc_shopfloor/actions/message.py:457
+#: code:addons/alc_shopfloor/actions/message.py:465
 #, python-format
 msgid "Cannot change to lot {} which is entirely picked."
 msgstr ""
@@ -111,13 +111,13 @@ msgid "Confirm location change from %s to %s?"
 msgstr ""
 
 #. module: alc_shopfloor
-#: code:addons/alc_shopfloor/actions/message.py:346
+#: code:addons/alc_shopfloor/actions/message.py:354
 #, python-format
 msgid "Content transfer to {} completed"
 msgstr ""
 
 #. module: alc_shopfloor
-#: code:addons/alc_shopfloor/actions/message.py:352
+#: code:addons/alc_shopfloor/actions/message.py:360
 #, python-format
 msgid "Content transferred from {} to {}."
 msgstr ""
@@ -198,7 +198,7 @@ msgid "Last operation of transfer {}. Next operation ({}) is ready to proceed."
 msgstr ""
 
 #. module: alc_shopfloor
-#: code:addons/alc_shopfloor/actions/message.py:483
+#: code:addons/alc_shopfloor/actions/message.py:491
 #, python-format
 msgid "Lines have different destination location."
 msgstr ""
@@ -210,9 +210,7 @@ msgid "Location %s doesn't contain any package."
 msgstr ""
 
 #. module: alc_shopfloor
-#: model:shopfloor.menu,name:alc_shopfloor.menu_location_content_transfer
 #: model:shopfloor.menu,name:alc_shopfloor.shopfloor_menu_location_content_transfer
-#: model:stock.picking.type,name:alc_shopfloor.picking_type_location_content_transfer
 #: model:stock.picking.type,name:alc_shopfloor.picking_type_location_content_transfer_demo
 msgid "Location Content Transfer"
 msgstr ""
@@ -229,7 +227,7 @@ msgid "Location not allowed here."
 msgstr ""
 
 #. module: alc_shopfloor
-#: code:addons/alc_shopfloor/actions/message.py:411
+#: code:addons/alc_shopfloor/actions/message.py:419
 #, python-format
 msgid "Location {} empty"
 msgstr ""
@@ -246,7 +244,7 @@ msgid "Lot {} is for another product."
 msgstr ""
 
 #. module: alc_shopfloor
-#: code:addons/alc_shopfloor/actions/message.py:423
+#: code:addons/alc_shopfloor/actions/message.py:431
 #, python-format
 msgid "Lot {} replaced by lot {}."
 msgstr ""
@@ -274,19 +272,19 @@ msgid "Move lines processed have to share the same source location."
 msgstr ""
 
 #. module: alc_shopfloor
-#: code:addons/alc_shopfloor/actions/message.py:489
+#: code:addons/alc_shopfloor/actions/message.py:497
 #, python-format
 msgid "New move lines cannot be assigned: canceled."
 msgstr ""
 
 #. module: alc_shopfloor
-#: code:addons/alc_shopfloor/actions/message.py:521
+#: code:addons/alc_shopfloor/actions/message.py:529
 #, python-format
 msgid "No delivery package type available."
 msgstr ""
 
 #. module: alc_shopfloor
-#: code:addons/alc_shopfloor/actions/message.py:405
+#: code:addons/alc_shopfloor/actions/message.py:413
 #, python-format
 msgid "No lines to process."
 msgstr ""
@@ -307,6 +305,12 @@ msgstr ""
 #: code:addons/alc_shopfloor/actions/message.py:184
 #, python-format
 msgid "No lot found for {}"
+msgstr ""
+
+#. module: alc_shopfloor
+#: code:addons/alc_shopfloor/actions/message.py:346
+#, python-format
+msgid "No more refill arrange to do, please select a location to transfer."
 msgstr ""
 
 #. module: alc_shopfloor
@@ -346,13 +350,13 @@ msgid "No putaway destination is available."
 msgstr ""
 
 #. module: alc_shopfloor
-#: code:addons/alc_shopfloor/actions/message.py:391
+#: code:addons/alc_shopfloor/actions/message.py:399
 #, python-format
 msgid "No quantity has been processed, unable to complete the transfer."
 msgstr ""
 
 #. module: alc_shopfloor
-#: code:addons/alc_shopfloor/actions/message.py:515
+#: code:addons/alc_shopfloor/actions/message.py:523
 #, python-format
 msgid "No valid package to select."
 msgstr ""
@@ -363,7 +367,7 @@ msgid "Normal"
 msgstr ""
 
 #. module: alc_shopfloor
-#: code:addons/alc_shopfloor/actions/message.py:382
+#: code:addons/alc_shopfloor/actions/message.py:390
 #, python-format
 msgid "Not all lines have been processed with full quantity. Do you confirm partial operation?"
 msgstr ""
@@ -407,7 +411,7 @@ msgid "Pack operations linked to the move"
 msgstr ""
 
 #. module: alc_shopfloor
-#: code:addons/alc_shopfloor/actions/message.py:495
+#: code:addons/alc_shopfloor/actions/message.py:503
 #, python-format
 msgid "Package has been opened. You can move partial quantities."
 msgstr ""
@@ -419,13 +423,13 @@ msgid "Package name must be unique!"
 msgstr ""
 
 #. module: alc_shopfloor
-#: code:addons/alc_shopfloor/actions/message.py:437
+#: code:addons/alc_shopfloor/actions/message.py:445
 #, python-format
 msgid "Package {} cannot be picked, already moved by transfer {}."
 msgstr ""
 
 #. module: alc_shopfloor
-#: code:addons/alc_shopfloor/actions/message.py:451
+#: code:addons/alc_shopfloor/actions/message.py:459
 #, python-format
 msgid "Package {} cannot be used: {} "
 msgstr ""
@@ -467,13 +471,13 @@ msgid "Package {} is not empty."
 msgstr ""
 
 #. module: alc_shopfloor
-#: code:addons/alc_shopfloor/actions/message.py:429
+#: code:addons/alc_shopfloor/actions/message.py:437
 #, python-format
 msgid "Package {} replaced by package {}."
 msgstr ""
 
 #. module: alc_shopfloor
-#: code:addons/alc_shopfloor/actions/message.py:501
+#: code:addons/alc_shopfloor/actions/message.py:509
 #, python-format
 msgid "Packaging {} is not allowed for carrier {}."
 msgstr ""
@@ -489,19 +493,24 @@ msgid "Physical Packages"
 msgstr ""
 
 #. module: alc_shopfloor
+#: model:stock.picking.type,name:alc_shopfloor.stock_picking_type_medoc
+msgid "Pick Médicaments"
+msgstr ""
+
+#. module: alc_shopfloor
 #: code:addons/alc_shopfloor/actions/change_package_lot.py:134
 #, python-format
 msgid "Pick: stock issue on lot: {} found in {}"
 msgstr ""
 
 #. module: alc_shopfloor
-#: code:addons/alc_shopfloor/actions/message.py:368
+#: code:addons/alc_shopfloor/actions/message.py:376
 #, python-format
 msgid "Picking has already been started in this location in transfer(s): {}"
 msgstr ""
 
 #. module: alc_shopfloor
-#: code:addons/alc_shopfloor/actions/message.py:471
+#: code:addons/alc_shopfloor/actions/message.py:479
 #, python-format
 msgid "Picking type {} complete."
 msgstr ""
@@ -529,12 +538,22 @@ msgid "Product tracked by lot, please scan one."
 msgstr ""
 
 #. module: alc_shopfloor
+#: model:shopfloor.menu,name:alc_shopfloor.shopfloor_menu_medoc_rangement
+msgid "Rangement"
+msgstr ""
+
+#. module: alc_shopfloor
+#: model:stock.picking.type,name:alc_shopfloor.stock_picking_type_rangement_medoc
+msgid "Rangement Médicaments"
+msgstr ""
+
+#. module: alc_shopfloor
 #: model:ir.model.fields,help:alc_shopfloor.field_stock_quant_package_shopfloor_weight
 msgid "Real pack weight or the estimated one."
 msgstr ""
 
 #. module: alc_shopfloor
-#: code:addons/alc_shopfloor/actions/message.py:399
+#: code:addons/alc_shopfloor/actions/message.py:407
 #, python-format
 msgid "Recovered previous session."
 msgstr ""
@@ -549,6 +568,11 @@ msgstr ""
 #: code:addons/alc_shopfloor/actions/message.py:122
 #, python-format
 msgid "Restart the operation, someone has canceled it."
+msgstr ""
+
+#. module: alc_shopfloor
+#: model:stock.picking.type,name:alc_shopfloor.stock_picking_type_reassort_medoc
+msgid "Réassort Médicaments"
 msgstr ""
 
 #. module: alc_shopfloor
@@ -579,8 +603,8 @@ msgid "Scan the destination location"
 msgstr ""
 
 #. module: alc_shopfloor
-#: code:addons/alc_shopfloor/services/location_content_transfer.py:514
-#: code:addons/alc_shopfloor/services/location_content_transfer.py:535
+#: code:addons/alc_shopfloor/services/location_content_transfer.py:358
+#: code:addons/alc_shopfloor/services/location_content_transfer.py:379
 #, python-format
 msgid "Scan the package"
 msgstr ""
@@ -715,7 +739,7 @@ msgid "The backorder <a href=\"#\" data-oe-model=\"stock.picking\" data-oe-id=\"
 msgstr ""
 
 #. module: alc_shopfloor
-#: code:addons/alc_shopfloor/actions/message.py:360
+#: code:addons/alc_shopfloor/actions/message.py:368
 #, python-format
 msgid "The content of {} cannot be transferred with this scenario."
 msgstr ""
@@ -773,13 +797,13 @@ msgid "This line is not available in transfer {}."
 msgstr ""
 
 #. module: alc_shopfloor
-#: code:addons/alc_shopfloor/services/location_content_transfer.py:260
+#: code:addons/alc_shopfloor/services/location_content_transfer.py:142
 #, python-format
 msgid "This location content can't be moved at once."
 msgstr ""
 
 #. module: alc_shopfloor
-#: code:addons/alc_shopfloor/services/location_content_transfer.py:267
+#: code:addons/alc_shopfloor/services/location_content_transfer.py:149
 #, python-format
 msgid "This location content can't be moved using this menu."
 msgstr ""
@@ -849,7 +873,7 @@ msgid "Transfer {} complete"
 msgstr ""
 
 #. module: alc_shopfloor
-#: code:addons/alc_shopfloor/actions/message.py:376
+#: code:addons/alc_shopfloor/actions/message.py:384
 #, python-format
 msgid "Transfer {} done"
 msgstr ""
@@ -861,7 +885,7 @@ msgid "Transfer {} is not available."
 msgstr ""
 
 #. module: alc_shopfloor
-#: code:addons/alc_shopfloor/actions/message.py:445
+#: code:addons/alc_shopfloor/actions/message.py:453
 #, python-format
 msgid "Units replaced by package {}."
 msgstr ""
@@ -906,7 +930,7 @@ msgid "You cannot work on a package (%s) outside of locations: %s"
 msgstr ""
 
 #. module: alc_shopfloor
-#: code:addons/alc_shopfloor/actions/message.py:417
+#: code:addons/alc_shopfloor/actions/message.py:425
 #, python-format
 msgid "You must not pick more than {} units."
 msgstr ""
@@ -945,7 +969,7 @@ msgid "{picking.name} stock correction in location {location.name} for {product_
 msgstr ""
 
 #. module: alc_shopfloor
-#: code:addons/alc_shopfloor/actions/message.py:509
+#: code:addons/alc_shopfloor/actions/message.py:517
 #, python-format
 msgid "{} is not a valid destination package."
 msgstr ""
