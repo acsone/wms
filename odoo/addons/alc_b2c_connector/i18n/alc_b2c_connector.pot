@@ -72,7 +72,7 @@ msgid "Cancel"
 msgstr ""
 
 #. module: alc_b2c_connector
-#: code:addons/alc_b2c_connector/models/sale_order.py:86
+#: code:addons/alc_b2c_connector/models/sale_order.py:82
 #, python-format
 msgid "Cannot cancel order %s , being process already"
 msgstr ""
@@ -151,7 +151,7 @@ msgid "No match found for customer_id: %s"
 msgstr ""
 
 #. module: alc_b2c_connector
-#: code:addons/alc_b2c_connector/models/sale_order.py:88
+#: code:addons/alc_b2c_connector/models/sale_order.py:84
 #, python-format
 msgid "Order  %s cancelled from b2c api."
 msgstr ""
@@ -214,7 +214,7 @@ msgid "Sale channel"
 msgstr ""
 
 #. module: alc_b2c_connector
-#: code:addons/alc_b2c_connector/services/sales_service.py:58
+#: code:addons/alc_b2c_connector/services/sales_service.py:212
 #, python-format
 msgid "Sale order not found for id %s"
 msgstr ""
@@ -254,13 +254,13 @@ msgid "Unknown country code %s"
 msgstr ""
 
 #. module: alc_b2c_connector
-#: code:addons/alc_b2c_connector/models/sale_order.py:135
+#: code:addons/alc_b2c_connector/models/sale_order.py:131
 #, python-format
 msgid "Unknowns SKU(s): %s , "
 msgstr ""
 
 #. module: alc_b2c_connector
-#: code:addons/alc_b2c_connector/models/sale_order.py:209
+#: code:addons/alc_b2c_connector/models/sale_order.py:205
 #, python-format
 msgid "You cannot use this sale channel for manuel order"
 msgstr ""
