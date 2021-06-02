@@ -283,7 +283,9 @@ class LocationContentTransferSingleCase(LocationContentTransferCommonCase):
 
     def test_scan_line_product_nok_product_tracked(self):
         # we scan product_d's barcode but it's tracked by lot
-        operation = self.picking2.pack_operation_product_ids[1]
+        operation = self.picking2.pack_operation_product_ids.filtered(
+            lambda op, product=self.product_d: op.product_id == product
+        )
         # check we selected the good line (the one with a lot)
         self.assertEqual(operation.product_id, self.product_d)
         self._test_scan_line_nok(
