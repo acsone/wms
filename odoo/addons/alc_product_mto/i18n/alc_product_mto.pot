@@ -19,7 +19,6 @@ msgid "Normal product"
 msgstr ""
 
 #. module: alc_product_mto
-#: model:ir.model.fields,field_description:alc_product_mto.field_delivery_carrier_is_mto_product
 #: model:ir.model.fields,field_description:alc_product_mto.field_product_product_is_mto_product
 #: model:ir.model.fields,field_description:alc_product_mto.field_product_template_is_mto_product
 #: model:ir.ui.view,arch_db:alc_product_mto.product_template_search_view
