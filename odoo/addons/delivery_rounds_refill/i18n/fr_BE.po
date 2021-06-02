@@ -87,6 +87,13 @@ msgid "Arrangement Retours"
 msgstr "Rangements Retours"
 
 #. module: delivery_rounds_refill
+#: model:ir.model.fields,field_description:delivery_rounds_refill.field_report_stock_refill_abstract_barcode_picking_type_id
+#: model:ir.model.fields,field_description:delivery_rounds_refill.field_report_stock_refill_arrange_barcode_picking_type_id
+#: model:ir.model.fields,field_description:delivery_rounds_refill.field_report_stock_refill_reassort_barcode_picking_type_id
+msgid "Barcode Picking Type"
+msgstr ""
+
+#. module: delivery_rounds_refill
 #: model:ir.ui.view,arch_db:delivery_rounds_refill.view_report_stock_refill_wizard_form
 msgid "Cancel"
 msgstr "Annuler"
@@ -131,6 +138,15 @@ msgstr "Clients à préparer"
 msgid "Default Unit of Measure used for all stock operation."
 msgstr ""
 "Unité de mesure par défaut utilisée pour toutes les opérations de stock"
+
+#. module: delivery_rounds_refill
+#: model:ir.model.fields,help:delivery_rounds_refill.field_report_stock_refill_abstract_barcode_picking_type_id
+#: model:ir.model.fields,help:delivery_rounds_refill.field_report_stock_refill_arrange_barcode_picking_type_id
+#: model:ir.model.fields,help:delivery_rounds_refill.field_report_stock_refill_reassort_barcode_picking_type_id
+msgid ""
+"Define the type of picking to create when this location (or any children) is "
+"scanned"
+msgstr ""
 
 #. module: delivery_rounds_refill
 #: model:ir.model.fields,field_description:delivery_rounds_refill.field_report_stock_overview_abstract_display_name
