@@ -9,7 +9,7 @@
     "author": "BCIM",
     "license": "AGPL-3",
     "category": "",
-    "depends": ["stock_storage_type_putaway_abc"],
+    "depends": ["stock_storage_type_putaway_abc", "stock_refill"],
     "data": [
         "data/stock_location_storage_type.xml",
         "data/stock_package_storage_type.xml",
