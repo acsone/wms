@@ -78,6 +78,12 @@ msgid "Cancel"
 msgstr "Annulé"
 
 #. module: alc_b2c_connector
+#: code:addons/alc_b2c_connector/models/sale_order.py:86
+#, python-format
+msgid "Cannot cancel order %s , being process already"
+msgstr ""
+
+#. module: alc_b2c_connector
 #: model:ir.model,name:alc_b2c_connector.model_res_country
 msgid "Country"
 msgstr ""
@@ -145,15 +151,26 @@ msgid "Name must be unique"
 msgstr "Le nom doit être unique"
 
 #. module: alc_b2c_connector
-#: code:addons/alc_b2c_connector/models/sale_order.py:184
+#: code:addons/alc_b2c_connector/models/res_partner.py:57
 #, python-format
 msgid "No match found for customer_id: %s"
 msgstr "Aucun client trouvé pour customer_id: %s"
 
 #. module: alc_b2c_connector
-#: code:addons/alc_b2c_connector/models/sale_order.py:67
+#: code:addons/alc_b2c_connector/models/sale_order.py:88
+#, python-format
+msgid "Order  %s cancelled from b2c api."
+msgstr ""
+
+#. module: alc_b2c_connector
+#: code:addons/alc_b2c_connector/models/sale_order.py:64
 #, python-format
 msgid "Order created from json: %s."
+msgstr ""
+
+#. module: alc_b2c_connector
+#: model:ir.model,name:alc_b2c_connector.model_res_partner
+msgid "Partner"
 msgstr ""
 
 #. module: alc_b2c_connector
@@ -224,7 +241,7 @@ msgid "Shipping Policy"
 msgstr ""
 
 #. module: alc_b2c_connector
-#: code:addons/alc_b2c_connector/models/sale_order.py:40
+#: code:addons/alc_b2c_connector/models/sale_order.py:37
 #: sql_constraint:sale.order:0
 #, python-format
 msgid "This b2c reference already exists"
@@ -243,13 +260,13 @@ msgid "Unknown country code %s"
 msgstr ""
 
 #. module: alc_b2c_connector
-#: code:addons/alc_b2c_connector/models/sale_order.py:119
+#: code:addons/alc_b2c_connector/models/sale_order.py:135
 #, python-format
 msgid "Unknowns SKU(s): %s , "
 msgstr "SKU(s) inconnu(s): %s , "
 
 #. module: alc_b2c_connector
-#: code:addons/alc_b2c_connector/models/sale_order.py:205
+#: code:addons/alc_b2c_connector/models/sale_order.py:209
 #, python-format
 msgid "You cannot use this sale channel for manuel order"
 msgstr ""
