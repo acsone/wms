@@ -51,11 +51,7 @@ class SalesService(Component):
         deliveries field
 
         """
-        domain = self._get_base_search_domain()
-        domain = expression.AND([domain, [("b2c_ref", "=", _id)]])
-        res = self.env["sale.order"].suspend_security().search(domain)
-        if not res:
-            raise MissingError(_("Sale order not found for id %s") % _id)
+        res = self._get_order_from_b2c_ref(_id)
         return self._sale_order_to_search_result(res[0])
 
     def search(self, **params):
@@ -82,8 +78,10 @@ class SalesService(Component):
         Cancelling a sale order is only possible until
         the preparation has started (i.e., the picking is printed)
         """
-
-        so = self.env["sale.order"].suspend_security()._cancel_from_b2c(order_id=_id)
+        so = self._get_order_from_b2c_ref(
+            _id, extended_domain=[("state", "!=", "cancel")]
+        )
+        so._cancel_from_b2c()
         if so.state == "cancel":
             return {
                 "status": "OK",
@@ -203,6 +201,16 @@ class SalesService(Component):
 
     def _get_base_search_domain(self):
         return [("sale_channel", "=", self.b2c_backend.sale_channel)]
+
+    def _get_order_from_b2c_ref(self, _id, extended_domain=None):
+        domain = self._get_base_search_domain()
+        domain = expression.AND([domain, [("b2c_ref", "=", _id)]])
+        if extended_domain:
+            domain = expression.AND([domain, extended_domain])
+        res = self.env["sale.order"].suspend_security().search(domain)
+        if not res:
+            raise MissingError(_("Sale order not found for id %s") % _id)
+        return res
 
     @property
     def _sale_info_schema(self):
