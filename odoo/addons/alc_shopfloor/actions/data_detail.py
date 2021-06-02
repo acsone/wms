@@ -98,7 +98,7 @@ class DataDetailAction(Component):
         # Defined new method to not overload the base one used in many places
         data = self._jsonify(record, self._product_detail_parser, **kw)
         suppliers = self.env["product.supplierinfo"].search(
-            [("product_id", "=", record.id)]
+            [("product_id", "=", record.id)], order="sequence"
         )
         data["suppliers"] = suppliers.jsonify(self._product_supplierinfo_parser)
         return data

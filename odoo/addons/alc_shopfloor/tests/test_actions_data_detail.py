@@ -237,6 +237,7 @@ class TestActionsDataDetailCase(ActionsDataDetailCaseBase):
                 "product_tmpl_id": product.product_tmpl_id.id,
                 "product_id": product.id,
                 "product_code": "SUPP1",
+                "sequence": 10,
             }
         )
         SupplierInfo.create(
@@ -245,6 +246,7 @@ class TestActionsDataDetailCase(ActionsDataDetailCaseBase):
                 "product_tmpl_id": product.product_tmpl_id.id,
                 "product_id": product.id,
                 "product_code": "SUPP2",
+                "sequence": 20,
             }
         )
         data = self.data_detail.product_detail(product)

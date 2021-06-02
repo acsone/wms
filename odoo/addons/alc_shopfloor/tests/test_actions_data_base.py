@@ -85,6 +85,7 @@ class ActionsDataCaseBase(CommonCase, ActionsDataTestMixin):
                 "product_code": "VENDOR_CODE_A",
                 "product_id": cls.product_a.id,
                 "product_tmpl_id": cls.product_a.product_tmpl_id.id,
+                "sequence": 10,
             }
         )
         cls.product_a_variant = cls.product_a.copy(
