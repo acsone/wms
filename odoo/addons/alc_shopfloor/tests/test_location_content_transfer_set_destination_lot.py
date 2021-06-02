@@ -71,9 +71,6 @@ class LocationContentTransferSetDestinationXCase(LocationContentTransferCommonCa
         cls._update_qty_in_location(
             cls.content_loc, cls.product_b, 5, lot=cls.product_b_lot_2
         )
-        cls._fill_stock_for_moves(
-            picking.move_lines, in_package=True, location=cls.content_loc
-        )
 
         cls.picking.action_assign()
 
@@ -81,7 +78,7 @@ class LocationContentTransferSetDestinationXCase(LocationContentTransferCommonCa
 
         # Second picking:
         # Product C -> 1 lot, 2 moves
-        cls.picking2 = picking2 = cls._create_picking(
+        cls.picking2 = cls._create_picking(
             lines=[(cls.product_c, 4), (cls.product_c, 6)]
         )
 
@@ -101,9 +98,6 @@ class LocationContentTransferSetDestinationXCase(LocationContentTransferCommonCa
                 "lot_id": cls.product_c_lot.id,
                 "in_date": "2021 01 02",
             }
-        )
-        cls._fill_stock_for_moves(
-            picking2.move_lines, in_package=True, location=cls.content_loc
         )
 
         cls.picking2.action_assign()

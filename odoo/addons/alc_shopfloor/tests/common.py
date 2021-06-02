@@ -28,6 +28,21 @@ class CommonCase(BaseCommonCase):
         )
 
     @classmethod
+    def setUpComponent(cls):
+        # setUpComponent is the first setup called by setupClass. We override it
+        # to ensure that the env contains the required context to avoid trouble when
+        # test are run with delivery_rounds installed.
+        if "round.instance" in cls.env:
+            cls.env = cls.env(context=dict(cls.env.context, round_autoset=False))
+        super(CommonCase, cls).setUpComponent()
+        # DISABLE side effect of alc_stock_product_packaging_reserve
+        # This addon try to always assign a packaging if one exists for the
+        # given qty even if the stock.move is not for a packaging....
+        cls.env["ir.config_parameter"].set_param(
+            "stock.reservation_unit_min_quantity", "9999999"
+        )
+
+    @classmethod
     def setUpClassVars(cls):
         super(CommonCase, cls).setUpClassVars()
         stock_location = cls.env.ref("stock.stock_location_stock")
