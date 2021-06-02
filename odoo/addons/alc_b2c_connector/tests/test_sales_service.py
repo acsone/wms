@@ -620,7 +620,7 @@ class TestSalesService(CommonCase):
         Expected result:
             The so is cancelled
         """
-        _ = self.sales_service.dispatch("cancel", _id=self.b2c_order.id)
+        _ = self.sales_service.dispatch("cancel", _id=self.b2c_order.b2c_ref)
 
         self.assertEqual("cancel", self.b2c_order.state)
 
@@ -635,6 +635,6 @@ class TestSalesService(CommonCase):
         """
         self._deliver_orders(self.b2c_order)
         self.b2c_order.picking_ids.do_print_picking()
-        _ = self.sales_service.dispatch("cancel", _id=self.b2c_order.id)
+        _ = self.sales_service.dispatch("cancel", _id=self.b2c_order.b2c_ref)
 
         self.assertEqual("sale", self.b2c_order.state)
