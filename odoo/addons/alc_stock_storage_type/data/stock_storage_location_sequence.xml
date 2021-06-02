@@ -1,0 +1,397 @@
+<?xml version="1.0" ?>
+<odoo noupdate="1">
+  <record
+    id="package_st_M_M_Dyn_Hmax_22cm_seq_10"
+    model="stock.storage.location.sequence"
+  >
+    <field name="package_storage_type_id" ref="package_st_M_M_Dyn_Hmax_22cm" />
+    <field name="sequence" eval="10" />
+    <field name="location_id" ref="location_M_B-M-DYN" />
+  </record>
+  <record
+    id="package_st_M_M_Dyn_Hmax_27cm_seq_10"
+    model="stock.storage.location.sequence"
+  >
+    <field name="package_storage_type_id" ref="package_st_M_M_Dyn_Hmax_27cm" />
+    <field name="sequence" eval="10" />
+    <field name="location_id" ref="location_M_B-M-DYN" />
+  </record>
+  <record
+    id="package_st_M_M_Dyn_Hmax_33cm_seq_10"
+    model="stock.storage.location.sequence"
+  >
+    <field name="package_storage_type_id" ref="package_st_M_M_Dyn_Hmax_33cm" />
+    <field name="sequence" eval="10" />
+    <field name="location_id" ref="location_M_B-M-DYN" />
+  </record>
+  <record id="package_st_M_M_Pal_A_seq_10" model="stock.storage.location.sequence">
+    <field name="package_storage_type_id" ref="package_st_M_M_Pal_A" />
+    <field name="sequence" eval="10" />
+    <field name="location_id" ref="location_M_B-M-PAL" />
+  </record>
+  <record
+    id="package_st_M_M_Pal_B_avec_lot_seq_10"
+    model="stock.storage.location.sequence"
+  >
+    <field name="package_storage_type_id" ref="package_st_M_M_Pal_B_avec_lot" />
+    <field name="sequence" eval="10" />
+    <field name="location_id" ref="location_M_B-M-PAL" />
+  </record>
+  <record
+    id="package_st_M_M_Pal_B_sans_lot_seq_10"
+    model="stock.storage.location.sequence"
+  >
+    <field name="package_storage_type_id" ref="package_st_M_M_Pal_B_sans_lot" />
+    <field name="sequence" eval="10" />
+    <field name="location_id" ref="location_M_B-M-PAL" />
+  </record>
+  <record id="package_st_M_M_Pal_1_2_A_seq_10" model="stock.storage.location.sequence">
+    <field name="package_storage_type_id" ref="package_st_M_M_Pal_1_2_A" />
+    <field name="sequence" eval="10" />
+    <field name="location_id" ref="location_M_B-M-HPAL" />
+  </record>
+  <record
+    id="package_st_M_M_Pal_1_2_B_avec_lot_seq_10"
+    model="stock.storage.location.sequence"
+  >
+    <field name="package_storage_type_id" ref="package_st_M_M_Pal_1_2_B_avec_lot" />
+    <field name="sequence" eval="10" />
+    <field name="location_id" ref="location_M_B-M-HPAL" />
+  </record>
+  <record
+    id="package_st_M_M_Pal_1_2_B_sans_lot_seq_10"
+    model="stock.storage.location.sequence"
+  >
+    <field name="package_storage_type_id" ref="package_st_M_M_Pal_1_2_B_sans_lot" />
+    <field name="sequence" eval="10" />
+    <field name="location_id" ref="location_M_B-M-HPAL" />
+  </record>
+  <record id="package_st_M_M_Pal_1_2_C_seq_10" model="stock.storage.location.sequence">
+    <field name="package_storage_type_id" ref="package_st_M_M_Pal_1_2_C" />
+    <field name="sequence" eval="10" />
+    <field name="location_id" ref="location_M_B-M-HPAL" />
+  </record>
+  <record
+    id="package_st_M_M_Etagere_Small_A_seq_10"
+    model="stock.storage.location.sequence"
+  >
+    <field name="package_storage_type_id" ref="package_st_M_M_Etagere_Small_A" />
+    <field name="sequence" eval="10" />
+    <field name="location_id" ref="location_M_B-M1-S" />
+  </record>
+  <record
+    id="package_st_M_M_Etagere_Small_B_avec_lot_seq_10"
+    model="stock.storage.location.sequence"
+  >
+    <field
+      name="package_storage_type_id"
+      ref="package_st_M_M_Etagere_Small_B_avec_lot"
+    />
+    <field name="sequence" eval="10" />
+    <field name="location_id" ref="location_M_B-M1-S" />
+  </record>
+  <record
+    id="package_st_M_M_Etagere_Small_B_sans_lot_seq_10"
+    model="stock.storage.location.sequence"
+  >
+    <field
+      name="package_storage_type_id"
+      ref="package_st_M_M_Etagere_Small_B_sans_lot"
+    />
+    <field name="sequence" eval="10" />
+    <field name="location_id" ref="location_M_B-M1-S" />
+  </record>
+  <record
+    id="package_st_M_M_Etagere_Small_C_seq_10"
+    model="stock.storage.location.sequence"
+  >
+    <field name="package_storage_type_id" ref="package_st_M_M_Etagere_Small_C" />
+    <field name="sequence" eval="10" />
+    <field name="location_id" ref="location_M_B-M1-S" />
+  </record>
+  <record
+    id="package_st_M_M_Etagere_Medium_A_seq_10"
+    model="stock.storage.location.sequence"
+  >
+    <field name="package_storage_type_id" ref="package_st_M_M_Etagere_Medium_A" />
+    <field name="sequence" eval="10" />
+    <field name="location_id" ref="location_M_B-M5-M" />
+  </record>
+  <record
+    id="package_st_M_M_Etagere_Medium_B_avec_lot_seq_10"
+    model="stock.storage.location.sequence"
+  >
+    <field
+      name="package_storage_type_id"
+      ref="package_st_M_M_Etagere_Medium_B_avec_lot"
+    />
+    <field name="sequence" eval="10" />
+    <field name="location_id" ref="location_M_R-M2-M" />
+  </record>
+  <record
+    id="package_st_M_M_Etagere_Medium_B_sans_lot_seq_10"
+    model="stock.storage.location.sequence"
+  >
+    <field
+      name="package_storage_type_id"
+      ref="package_st_M_M_Etagere_Medium_B_sans_lot"
+    />
+    <field name="sequence" eval="10" />
+    <field name="location_id" ref="location_M_B-M5-M" />
+  </record>
+  <record
+    id="package_st_M_M_Etagere_Medium_C_seq_10"
+    model="stock.storage.location.sequence"
+  >
+    <field name="package_storage_type_id" ref="package_st_M_M_Etagere_Medium_C" />
+    <field name="sequence" eval="10" />
+    <field name="location_id" ref="location_M_B-M3-M" />
+  </record>
+  <record
+    id="package_st_M_M_Etagere_Large_A_seq_10"
+    model="stock.storage.location.sequence"
+  >
+    <field name="package_storage_type_id" ref="package_st_M_M_Etagere_Large_A" />
+    <field name="sequence" eval="10" />
+    <field name="location_id" ref="location_M_B-M1-L" />
+  </record>
+  <record
+    id="package_st_M_M_Etagere_Large_B_avec_lot_seq_10"
+    model="stock.storage.location.sequence"
+  >
+    <field
+      name="package_storage_type_id"
+      ref="package_st_M_M_Etagere_Large_B_avec_lot"
+    />
+    <field name="sequence" eval="10" />
+    <field name="location_id" ref="location_M_B-M1-L" />
+  </record>
+  <record
+    id="package_st_M_M_Etagere_Large_B_sans_lot_seq_10"
+    model="stock.storage.location.sequence"
+  >
+    <field
+      name="package_storage_type_id"
+      ref="package_st_M_M_Etagere_Large_B_sans_lot"
+    />
+    <field name="sequence" eval="10" />
+    <field name="location_id" ref="location_M_B-M1-L" />
+  </record>
+  <record
+    id="package_st_M_M_Etagere_Large_C_seq_10"
+    model="stock.storage.location.sequence"
+  >
+    <field name="package_storage_type_id" ref="package_st_M_M_Etagere_Large_C" />
+    <field name="sequence" eval="10" />
+    <field name="location_id" ref="location_M_B-M1-L" />
+  </record>
+  <record
+    id="package_st_M_M_Dyn_Hmax_22cm_seq_50"
+    model="stock.storage.location.sequence"
+  >
+    <field name="package_storage_type_id" ref="package_st_M_M_Dyn_Hmax_22cm" />
+    <field name="sequence" eval="50" />
+    <field name="location_id" ref="location_M_R-M-HDYN" />
+  </record>
+  <record
+    id="package_st_M_M_Dyn_Hmax_27cm_seq_50"
+    model="stock.storage.location.sequence"
+  >
+    <field name="package_storage_type_id" ref="package_st_M_M_Dyn_Hmax_27cm" />
+    <field name="sequence" eval="50" />
+    <field name="location_id" ref="location_M_R-M-HDYN" />
+  </record>
+  <record
+    id="package_st_M_M_Dyn_Hmax_33cm_seq_50"
+    model="stock.storage.location.sequence"
+  >
+    <field name="package_storage_type_id" ref="package_st_M_M_Dyn_Hmax_33cm" />
+    <field name="sequence" eval="50" />
+    <field name="location_id" ref="location_M_R-M-HDYN" />
+  </record>
+  <record
+    id="package_st_M_M_Dyn_Hmax_22cm_seq_60"
+    model="stock.storage.location.sequence"
+  >
+    <field name="package_storage_type_id" ref="package_st_M_M_Dyn_Hmax_22cm" />
+    <field name="sequence" eval="60" />
+    <field name="location_id" ref="location_M_R-M-HPAL" />
+  </record>
+  <record
+    id="package_st_M_M_Dyn_Hmax_27cm_seq_60"
+    model="stock.storage.location.sequence"
+  >
+    <field name="package_storage_type_id" ref="package_st_M_M_Dyn_Hmax_27cm" />
+    <field name="sequence" eval="60" />
+    <field name="location_id" ref="location_M_R-M-HPAL" />
+  </record>
+  <record
+    id="package_st_M_M_Dyn_Hmax_33cm_seq_60"
+    model="stock.storage.location.sequence"
+  >
+    <field name="package_storage_type_id" ref="package_st_M_M_Dyn_Hmax_33cm" />
+    <field name="sequence" eval="60" />
+    <field name="location_id" ref="location_M_R-M-HPAL" />
+  </record>
+  <record id="package_st_M_M_Pal_A_seq_50" model="stock.storage.location.sequence">
+    <field name="package_storage_type_id" ref="package_st_M_M_Pal_A" />
+    <field name="sequence" eval="50" />
+    <field name="location_id" ref="location_M_R-M-PAL" />
+  </record>
+  <record
+    id="package_st_M_M_Pal_B_avec_lot_seq_50"
+    model="stock.storage.location.sequence"
+  >
+    <field name="package_storage_type_id" ref="package_st_M_M_Pal_B_avec_lot" />
+    <field name="sequence" eval="50" />
+    <field name="location_id" ref="location_M_R-M-PAL" />
+  </record>
+  <record
+    id="package_st_M_M_Pal_B_sans_lot_seq_50"
+    model="stock.storage.location.sequence"
+  >
+    <field name="package_storage_type_id" ref="package_st_M_M_Pal_B_sans_lot" />
+    <field name="sequence" eval="50" />
+    <field name="location_id" ref="location_M_R-M-PAL" />
+  </record>
+  <record id="package_st_M_M_Pal_1_2_A_seq_50" model="stock.storage.location.sequence">
+    <field name="package_storage_type_id" ref="package_st_M_M_Pal_1_2_A" />
+    <field name="sequence" eval="50" />
+    <field name="location_id" ref="location_M_R-M-PAL" />
+  </record>
+  <record
+    id="package_st_M_M_Pal_1_2_B_avec_lot_seq_50"
+    model="stock.storage.location.sequence"
+  >
+    <field name="package_storage_type_id" ref="package_st_M_M_Pal_1_2_B_avec_lot" />
+    <field name="sequence" eval="50" />
+    <field name="location_id" ref="location_M_R-M-PAL" />
+  </record>
+  <record
+    id="package_st_M_M_Pal_1_2_B_sans_lot_seq_50"
+    model="stock.storage.location.sequence"
+  >
+    <field name="package_storage_type_id" ref="package_st_M_M_Pal_1_2_B_sans_lot" />
+    <field name="sequence" eval="50" />
+    <field name="location_id" ref="location_M_R-M-PAL" />
+  </record>
+  <record id="package_st_M_M_Pal_1_2_C_seq_50" model="stock.storage.location.sequence">
+    <field name="package_storage_type_id" ref="package_st_M_M_Pal_1_2_C" />
+    <field name="sequence" eval="50" />
+    <field name="location_id" ref="location_M_R-M-PAL" />
+  </record>
+  <record
+    id="package_st_M_M_Etagere_Small_A_seq_50"
+    model="stock.storage.location.sequence"
+  >
+    <field name="package_storage_type_id" ref="package_st_M_M_Etagere_Small_A" />
+    <field name="sequence" eval="50" />
+    <field name="location_id" ref="location_M_R-M1-S" />
+  </record>
+  <record
+    id="package_st_M_M_Etagere_Small_B_avec_lot_seq_50"
+    model="stock.storage.location.sequence"
+  >
+    <field
+      name="package_storage_type_id"
+      ref="package_st_M_M_Etagere_Small_B_avec_lot"
+    />
+    <field name="sequence" eval="50" />
+    <field name="location_id" ref="location_M_R-M1-S" />
+  </record>
+  <record
+    id="package_st_M_M_Etagere_Small_B_sans_lot_seq_50"
+    model="stock.storage.location.sequence"
+  >
+    <field
+      name="package_storage_type_id"
+      ref="package_st_M_M_Etagere_Small_B_sans_lot"
+    />
+    <field name="sequence" eval="50" />
+    <field name="location_id" ref="location_M_R-M1-S" />
+  </record>
+  <record
+    id="package_st_M_M_Etagere_Small_C_seq_50"
+    model="stock.storage.location.sequence"
+  >
+    <field name="package_storage_type_id" ref="package_st_M_M_Etagere_Small_C" />
+    <field name="sequence" eval="50" />
+    <field name="location_id" ref="location_M_R-M1-S" />
+  </record>
+  <record
+    id="package_st_M_M_Etagere_Medium_A_seq_50"
+    model="stock.storage.location.sequence"
+  >
+    <field name="package_storage_type_id" ref="package_st_M_M_Etagere_Medium_A" />
+    <field name="sequence" eval="50" />
+    <field name="location_id" ref="location_M_R-M5-M" />
+  </record>
+  <record
+    id="package_st_M_M_Etagere_Medium_B_avec_lot_seq_50"
+    model="stock.storage.location.sequence"
+  >
+    <field
+      name="package_storage_type_id"
+      ref="package_st_M_M_Etagere_Medium_B_avec_lot"
+    />
+    <field name="sequence" eval="50" />
+    <field name="location_id" ref="location_M_R-M2-M" />
+  </record>
+  <record
+    id="package_st_M_M_Etagere_Medium_B_sans_lot_seq_50"
+    model="stock.storage.location.sequence"
+  >
+    <field
+      name="package_storage_type_id"
+      ref="package_st_M_M_Etagere_Medium_B_sans_lot"
+    />
+    <field name="sequence" eval="50" />
+    <field name="location_id" ref="location_M_R-M5-M" />
+  </record>
+  <record
+    id="package_st_M_M_Etagere_Medium_C_seq_50"
+    model="stock.storage.location.sequence"
+  >
+    <field name="package_storage_type_id" ref="package_st_M_M_Etagere_Medium_C" />
+    <field name="sequence" eval="50" />
+    <field name="location_id" ref="location_M_R-M3-M" />
+  </record>
+  <record
+    id="package_st_M_M_Etagere_Large_A_seq_50"
+    model="stock.storage.location.sequence"
+  >
+    <field name="package_storage_type_id" ref="package_st_M_M_Etagere_Large_A" />
+    <field name="sequence" eval="50" />
+    <field name="location_id" ref="location_M_R-M1-L" />
+  </record>
+  <record
+    id="package_st_M_M_Etagere_Large_B_avec_lot_seq_50"
+    model="stock.storage.location.sequence"
+  >
+    <field
+      name="package_storage_type_id"
+      ref="package_st_M_M_Etagere_Large_B_avec_lot"
+    />
+    <field name="sequence" eval="50" />
+    <field name="location_id" ref="location_M_R-M1-L" />
+  </record>
+  <record
+    id="package_st_M_M_Etagere_Large_B_sans_lot_seq_50"
+    model="stock.storage.location.sequence"
+  >
+    <field
+      name="package_storage_type_id"
+      ref="package_st_M_M_Etagere_Large_B_sans_lot"
+    />
+    <field name="sequence" eval="50" />
+    <field name="location_id" ref="location_M_R-M1-L" />
+  </record>
+  <record
+    id="package_st_M_M_Etagere_Large_C_seq_50"
+    model="stock.storage.location.sequence"
+  >
+    <field name="package_storage_type_id" ref="package_st_M_M_Etagere_Large_C" />
+    <field name="sequence" eval="50" />
+    <field name="location_id" ref="location_M_R-M1-L" />
+  </record>
+</odoo>

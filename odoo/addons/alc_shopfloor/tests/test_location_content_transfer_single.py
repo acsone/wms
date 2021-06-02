@@ -247,19 +247,25 @@ class LocationContentTransferSingleCase(LocationContentTransferCommonCase):
         self._test_scan_line_ok(operation, package.name)
 
     def test_scan_line_product_ok(self):
-        operation = self.picking2.pack_operation_product_ids[0]
+        operation = self.picking2.pack_operation_product_ids.filtered(
+            lambda op, product=self.product_c: op.product_id == product
+        )
         # check we selected the good line
         self.assertEqual(operation.product_id, self.product_c)
         self._test_scan_line_ok(operation, self.product_c.barcode)
 
     def test_scan_line_product_packaging_ok(self):
-        operation = self.picking2.pack_operation_product_ids[0]
+        operation = self.picking2.pack_operation_product_ids.filtered(
+            lambda op, product=self.product_c: op.product_id == product
+        )
         # check we selected the good line
         self.assertEqual(operation.product_id, self.product_c)
         self._test_scan_line_ok(operation, self.product_c.packaging_ids[0].barcode)
 
     def test_scan_line_lot_ok(self):
-        operation = self.picking2.pack_operation_product_ids[1]
+        operation = self.picking2.pack_operation_product_ids.filtered(
+            lambda op, lot=self.product_d_lot: lot in op.pack_lot_ids.mapped("lot_id")
+        )
         # check we selected the good line (the one with a lot)
         self.assertEqual(operation.product_id, self.product_d)
         self._test_scan_line_ok(operation, self.product_d_lot.name)
@@ -277,7 +283,9 @@ class LocationContentTransferSingleCase(LocationContentTransferCommonCase):
 
     def test_scan_line_product_nok_product_tracked(self):
         # we scan product_d's barcode but it's tracked by lot
-        operation = self.picking2.pack_operation_product_ids[1]
+        operation = self.picking2.pack_operation_product_ids.filtered(
+            lambda op, product=self.product_d: op.product_id == product
+        )
         # check we selected the good line (the one with a lot)
         self.assertEqual(operation.product_id, self.product_d)
         self._test_scan_line_nok(
