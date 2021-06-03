@@ -386,7 +386,7 @@ class LocationContentTransfer(Component):
             operations.mapped("picking_id"), message=self.msg_store.barcode_not_found()
         )
 
-    def set_destination_line(
+    def set_destination_line(  # noqa: C901
         self,
         location_id,
         operation_id,
@@ -449,9 +449,9 @@ class LocationContentTransfer(Component):
             )
         self._lock_lines(operation)
 
-        moves_to_validate = operation.mapped("linked_move_operation_ids.move_id")
         qty_todo = operation.product_qty
         pack_lot = self.env["stock.pack.operation.lot"].browse()
+        remaining_operation = self.env["stock.pack.operation"].browse()
         if lot_id:
             pack_lot = operation.pack_lot_ids.filtered(
                 lambda a, l_id=lot_id: a.lot_id.id == l_id
@@ -479,14 +479,19 @@ class LocationContentTransfer(Component):
             # the remaining operation are preserved into the current move
             for link in operation.linked_move_operation_ids:
                 move = link.move_id
+                if remaining_operation not in move.pack_operation_ids:
+                    continue
                 new_moves |= move.split_other_pack_operations(remaining_operation)
-            moves_to_validate = new_moves
+                new_moves |= move.split_other_pack_operations(remaining_operation)
 
         # Ensure that we validate only a move for the current operation.
         # If a move has more than 1 pack operation linked, we must split the
         # move according to the remaining operations when processing the first
         # pack operation
-        moves_to_validate_candidate = moves_to_validate
+        moves_to_validate_candidate = operation.linked_move_operation_ids.mapped(
+            "move_id"
+        )
+        moves_to_validate_candidate._recompute_state()
         moves_to_validate_ids = []
         for move in moves_to_validate_candidate:
             remaining_operations = move.pack_operation_ids - operation
@@ -501,6 +506,13 @@ class LocationContentTransfer(Component):
         self._write_destination_on_operations(operation, scanned_location)
         stock = self._actions_for("stock")
         stock.validate_moves(moves_to_validate)
+        if set(
+            remaining_operation.linked_move_operation_ids.mapped("move_id.state")
+        ) != {"assigned"}:
+            remaining_operation.linked_move_operation_ids.mapped(
+                "move_id"
+            ).action_assign()
+        # remaining_operations.linked_move_operation_ids.mapped("move_id").action_assign()
         move_lines = self._find_operations(location)
         message = self.msg_store.location_content_transfer_item_complete(
             scanned_location

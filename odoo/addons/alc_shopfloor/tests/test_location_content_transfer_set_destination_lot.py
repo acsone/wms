@@ -296,7 +296,8 @@ class LocationContentTransferSetDestinationXCase(LocationContentTransferCommonCa
         # we split the move with the same qty as the splitted quant.
         new_move = self.env["stock.move"].browse(move.split(3))
         # reserve new_quant for new_move
-        new_quant.sudo().reservation_id = new_move
+        quant.sudo().reservation_id = new_move
+        new_quant.sudo().reservation_id = move
         # we recompute the pack operation to have an operation with 2 pack_lots
         # and 2 stock.moves
         self.picking.recompute_remaining_qty()
@@ -305,7 +306,6 @@ class LocationContentTransferSetDestinationXCase(LocationContentTransferCommonCa
         )
         self.assertEqual(len(pack_lot_b.pack_lot_ids), 2)
         self.assertEqual(len(pack_lot_b.linked_move_operation_ids), 2)
-        linked_moves = pack_lot_b.linked_move_operation_ids
         # here we start the test
         self._simulate_pickings_selected(self.picking)
         pack_lot_b = self.picking.pack_operation_product_ids[1]
@@ -319,11 +319,10 @@ class LocationContentTransferSetDestinationXCase(LocationContentTransferCommonCa
                 "lot_id": self.product_b_lot_1.id,
             },
         )
-        # the operation should be linked to a new move with only 1 pack_lot
-        move_done = pack_lot_b.linked_move_operation_ids.move_id
-        self.assertNotIn(move_done, linked_moves)
-        self.assertEqual(move_done.state, "done")
-        self.assertEqual(move_done.picking_id.state, "done")
+        # the operation should be linked to new moves with only 1 pack_lot
+        move_dones = pack_lot_b.linked_move_operation_ids.mapped("move_id")
+        self.assertEqual(move_dones.mapped("state"), ["done", "done"])
+        self.assertEqual(move_dones.mapped("picking_id.state"), ["done"])
         self.assertEqual(pack_lot_b.pack_lot_ids.lot_id, self.product_b_lot_1)
         # the move must be assigned with the remaining lot
         self.assertEqual(move.state, "assigned")
