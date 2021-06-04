@@ -2,6 +2,8 @@
 # Copyright 2020 Camptocamp SA (http://www.camptocamp.com)
 # Copyright 2021 ACSONE SA/NV (https://www.acsone.eu)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+from collections import OrderedDict
+
 from odoo import _
 
 from odoo.addons.base_rest.components.service import to_int
@@ -659,15 +661,21 @@ class LocationContentTransfer(Component):
         # create moves for each quant
         picking_type = self.work.menu.picking_type_ids
         move_ids = []
+        qty_by_product_and_uom = OrderedDict()
         for quant in quants:
+            key = (quant.product_id, quant.product_uom_id)
+            qty_by_product_and_uom[key] = (
+                qty_by_product_and_uom.setdefault(key, 0) + quant.qty
+            )
+        for (product, uom), qty in qty_by_product_and_uom.items():
             move_ids.append(
                 self.env["stock.move"]
                 .create(
                     {
-                        "name": quant.product_id.name,
-                        "product_id": quant.product_id.id,
-                        "product_uom": quant.product_uom_id.id,
-                        "product_uom_qty": quant.qty,
+                        "name": product.name,
+                        "product_id": product.id,
+                        "product_uom": uom.id,
+                        "product_uom_qty": qty,
                         "location_id": location.id,
                         "location_dest_id": picking_type.default_location_dest_id.id,
                         "origin": self.work.menu.name,
