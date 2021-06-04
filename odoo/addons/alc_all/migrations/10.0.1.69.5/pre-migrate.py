@@ -16,6 +16,6 @@ def migrate(cr, version):
             SET
                 barcode = concat('L#', barcode)
             WHERE
-                barcode like ('L#%')
+                barcode not like ('L#%')
         """
     )
