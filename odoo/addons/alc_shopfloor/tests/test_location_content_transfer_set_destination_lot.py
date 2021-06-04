@@ -281,6 +281,96 @@ class LocationContentTransferSetDestinationXCase(LocationContentTransferCommonCa
 
         self.assertEqual(self.picking.state, "done")
 
+    def test_set_destination_line_lot_one_of_two_two_move(self):
+        """ Execute the operation linked to 2 lots for the first lot.
+        The operation is also linked to 2 moves...
+        A new operation must be created for the second lot.
+        """
+        pack_lot_b = self.picking.pack_operation_product_ids[1]
+        move = pack_lot_b.linked_move_operation_ids.move_id
+        # we split a quant
+        quant = move.reserved_quant_ids.filtered(
+            lambda q, lot=self.product_b_lot_1: q.lot_id == lot
+        )
+        new_quant = quant._quant_split(3)
+        # we split the move with the same qty as the splitted quant.
+        new_move = self.env["stock.move"].browse(move.split(3))
+        # reserve new_quant for new_move
+        quant.sudo().reservation_id = new_move
+        new_quant.sudo().reservation_id = move
+        # we recompute the pack operation to have an operation with 2 pack_lots
+        # and 2 stock.moves
+        self.picking.recompute_remaining_qty()
+        pack_lot_b = self.picking.pack_operation_product_ids.filtered(
+            lambda op, p=self.product_b: op.product_id == p
+        )
+        self.assertEqual(len(pack_lot_b.pack_lot_ids), 2)
+        self.assertEqual(len(pack_lot_b.linked_move_operation_ids), 2)
+        # here we start the test
+        self._simulate_pickings_selected(self.picking)
+        pack_lot_b = self.picking.pack_operation_product_ids[1]
+        response = self.service.dispatch(
+            "set_destination_line",
+            params={
+                "location_id": self.content_loc.id,
+                "operation_id": pack_lot_b.id,
+                "barcode": self.dest_location.barcode,
+                "quantity": 5,
+                "lot_id": self.product_b_lot_1.id,
+            },
+        )
+        # the operation should be linked to new moves with only 1 pack_lot
+        move_dones = pack_lot_b.linked_move_operation_ids.mapped("move_id")
+        self.assertEqual(move_dones.mapped("state"), ["done", "done"])
+        self.assertEqual(move_dones.mapped("picking_id.state"), ["done"])
+        self.assertEqual(pack_lot_b.pack_lot_ids.lot_id, self.product_b_lot_1)
+        # the move must be assigned with the remaining lot
+        self.assertEqual(move.state, "assigned")
+        self.assertEqual(move.picking_id.state, "assigned")
+        self.assertEqual(
+            move.pack_operation_ids.pack_lot_ids.lot_id, self.product_b_lot_2
+        )
+
+        # the response should be a transfer complete for the current operation
+        operations = self.service._find_operations(self.content_loc)
+        completion_info = self.service._actions_for("completion.info")
+        completion_info_popup = completion_info.popup(move)
+        self.assert_response_start_single(
+            response,
+            operations.mapped("picking_id"),
+            message=self.service.msg_store.location_content_transfer_item_complete(
+                self.dest_location
+            ),
+            popup=completion_info_popup,
+        )
+
+        remaining_operation = self.picking.pack_operation_product_ids
+        self.assertEqual(len(remaining_operation), 2)
+        self.assertEqual(
+            remaining_operation.mapped("product_id"), self.product_a | self.product_b
+        )
+        self.assertEqual(set(remaining_operation.mapped("state")), {"assigned"})
+
+        # process remaining operation
+        operation = self.picking.pack_operation_product_ids
+        while operation:
+            operation = operation[0]
+            self.service.dispatch(
+                "set_destination_line",
+                params={
+                    "location_id": self.content_loc.id,
+                    "operation_id": operation.id,
+                    "barcode": self.dest_location.barcode,
+                    "quantity": operation.pack_lot_ids.qty_todo,
+                    "lot_id": operation.pack_lot_ids.lot_id.id,
+                },
+            )
+            operation = self.picking.pack_operation_product_ids.filtered(
+                lambda op: op.state == "assigned"
+            )
+
+        self.assertEqual(self.picking.state, "done")
+
     def test_set_destination_line_lot_same_lot_two_move(self):
         """ Execute an operation for the same lot linked to 2 moves
         The 2 moves must be done

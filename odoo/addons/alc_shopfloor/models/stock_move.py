@@ -56,9 +56,9 @@ class StockMove(models.Model):
                 )
             backorder_move_id = self.split(qty_to_split)
             backorder_move = self.browse(backorder_move_id)
-            other_pack_operations.linked_move_operation_ids.write(
-                {"move_id": backorder_move.id}
-            )
+            other_pack_operations.linked_move_operation_ids.filtered(
+                lambda lk, mv=self: lk.move_id == mv
+            ).write({"move_id": backorder_move.id})
             # we must also split quants and reassing to the backorder move
             rounding = self.product_id.uom_id.rounding
             quants_to_reserve = self.env["stock.quant"]
@@ -154,7 +154,6 @@ class StockMove(models.Model):
             new_picking.action_done()
         return True
 
-    # pylint: disable=missing-return
     def _recompute_state(self):
         # do not use recalculate_move_state since we must also take into
         # account the reserved_availabitlity and we MUST avoid the
