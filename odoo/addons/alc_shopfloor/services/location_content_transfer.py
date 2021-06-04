@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # Copyright 2020 Camptocamp SA (http://www.camptocamp.com)
+# Copyright 2020-2021 Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
 # Copyright 2021 ACSONE SA/NV (https://www.acsone.eu)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 from collections import OrderedDict
@@ -164,16 +165,14 @@ class LocationContentTransfer(Component):
         #   - no operations have been found
         #   - the menu is configured to allow the creation of moves
         #   - the menu is bind to one picking type
-        #   - scanned location is a child of the picking type source location
+        #   - scanned location is a valid source for one the menu's picking types
         # then prepare new stock moves to move goods from the scanned location.
         menu = self.work.menu
         if (
             not operations
             and menu.allow_move_create
-            and len(menu.picking_type_ids) == 1
-            and location.is_sublocation_of(
-                menu.picking_type_ids.default_location_src_id
-            )
+            and len(self.picking_types) == 1
+            and self.is_src_location_valid(location)
         ):
             new_moves = self._create_moves_from_location(location)
             if not new_moves:
@@ -190,8 +189,8 @@ class LocationContentTransfer(Component):
             pickings = new_moves.mapped("picking_id")
             operations = new_moves.mapped("linked_move_operation_ids.operation_id")
             for operation in operations:
-                if not operation.location_dest_id.is_sublocation_of(
-                    menu.picking_type_ids.default_location_dest_id
+                if not self.is_dest_location_valid(
+                    new_moves, operation.location_dest_id
                 ):
                     savepoint.rollback()
 
@@ -254,20 +253,14 @@ class LocationContentTransfer(Component):
                 pickings, message=self.msg_store.barcode_not_found()
             )
 
-        if not scanned_location.is_sublocation_of(
-            self.picking_types.mapped("default_location_dest_id")
-        ) or not scanned_location.is_sublocation_of(
-            operations.mapped("linked_move_operation_ids.move_id.location_dest_id"),
-            func=all,
-        ):
+        moves = operations.mapped("linked_move_operation_ids.move_id")
+        if not self.is_dest_location_valid(moves, scanned_location):
             return self._response_for_scan_destination_all(
                 pickings, message=self.msg_store.dest_location_not_allowed()
             )
-        if not confirmation and not scanned_location.is_sublocation_of(
-            operations.mapped("location_dest_id")
+        if not confirmation and self.is_dest_location_to_confirm(
+            operations.mapped("location_dest_id"), scanned_location
         ):
-            # the scanned location is valid (child of picking type's destination)
-            # but not the expected one: ask for confirmation
             return self._response_for_scan_destination_all(
                 pickings, confirmation_required=True
             )
@@ -423,20 +416,17 @@ class LocationContentTransfer(Component):
             return self._response_for_scan_destination(
                 location, operation, message=self.msg_store.no_location_found()
             )
-        if not scanned_location.is_sublocation_of(
-            operation.picking_id.picking_type_id.default_location_dest_id
-        ) or not scanned_location.is_sublocation_of(
-            operation.linked_move_operation_ids.mapped("move_id.location_dest_id"),
-            func=all,
-        ):
+        moves = operation.linked_move_operation_ids.mapped("move_id")
+        if not self.is_dest_location_valid(moves, scanned_location):
             return self._response_for_scan_destination(
                 location, operation, message=self.msg_store.dest_location_not_allowed()
             )
-        if not scanned_location.is_sublocation_of(operation.location_dest_id):
-            if not confirmation:
-                return self._response_for_scan_destination(
-                    location, operation, confirmation_required=True
-                )
+        if not confirmation and self.is_dest_location_to_confirm(
+            operation.location_dest_id, scanned_location
+        ):
+            return self._response_for_scan_destination(
+                location, operation, confirmation_required=True
+            )
         if operation.pack_lot_ids and not lot_id:
             operations = self._find_operations(location)
             return self._response_for_start_single(
@@ -659,7 +649,7 @@ class LocationContentTransfer(Component):
             [("location_id", "=", location.id), ("qty", ">", 0)]
         )
         # create moves for each quant
-        picking_type = self.work.menu.picking_type_ids
+        picking_type = self.picking_types
         move_ids = []
         qty_by_product_and_uom = OrderedDict()
         for quant in quants:

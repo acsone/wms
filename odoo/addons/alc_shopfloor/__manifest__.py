@@ -8,7 +8,7 @@
         Alcyon :Shopfloor Scan scenario""",
     "version": "10.0.1.0.1",
     "license": "AGPL-3",
-    "author": "ACSONE SA/NV",
+    "author": "Camptocamp SA, BCIM, ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
         "shopfloor_base",
