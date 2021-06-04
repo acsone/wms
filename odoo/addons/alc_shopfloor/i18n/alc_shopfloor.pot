@@ -603,8 +603,8 @@ msgid "Scan the destination location"
 msgstr ""
 
 #. module: alc_shopfloor
-#: code:addons/alc_shopfloor/services/location_content_transfer.py:358
-#: code:addons/alc_shopfloor/services/location_content_transfer.py:379
+#: code:addons/alc_shopfloor/services/location_content_transfer.py:360
+#: code:addons/alc_shopfloor/services/location_content_transfer.py:381
 #, python-format
 msgid "Scan the package"
 msgstr ""
@@ -797,13 +797,13 @@ msgid "This line is not available in transfer {}."
 msgstr ""
 
 #. module: alc_shopfloor
-#: code:addons/alc_shopfloor/services/location_content_transfer.py:142
+#: code:addons/alc_shopfloor/services/location_content_transfer.py:144
 #, python-format
 msgid "This location content can't be moved at once."
 msgstr ""
 
 #. module: alc_shopfloor
-#: code:addons/alc_shopfloor/services/location_content_transfer.py:149
+#: code:addons/alc_shopfloor/services/location_content_transfer.py:151
 #, python-format
 msgid "This location content can't be moved using this menu."
 msgstr ""
