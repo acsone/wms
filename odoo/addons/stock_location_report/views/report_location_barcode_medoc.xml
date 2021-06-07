@@ -36,6 +36,9 @@
       t-as="o"
       t-att-class="'container_medoc container_%s %s' % (o.height, o.kind)"
     >
+      <t t-if="o.barcode">
+        <t t-set="content" t-value="o.barcode" />
+      </t>
       <t t-if="not o.barcode">
         <t t-set="content" t-value="'L#%s' % o.name" />
       </t>
@@ -66,7 +69,7 @@
         <t t-set="content" t-value="'L#%s' % o.name" />
       </t>
       <t t-set="content" t-value="content.replace('#', '%%23')" />
-      <t t-if="o.name[4] != 'A'">
+      <t t-if="o.name[7] != 'A'">
         <div class="barcode_right_medoc">
           <img
             t-att-src="'/report/qrcode/?value=%s&amp;size=5&amp;border=1' % content"
@@ -80,7 +83,7 @@
           <div t-esc="o.bin_checksum_2" />
         </div>
       </t>
-      <t t-if="o.name[4] == 'A'">
+      <t t-if="o.name[7] == 'A'">
         <div class="barcode_name_right_medoc">
           <t t-esc="o.name" />
         </div>
