@@ -19,6 +19,7 @@ class SearchAction(Component):
         model = self.env["stock.location"]
         if not barcode:
             return model.browse()
+        barcode = barcode.replace("L#", "")
         return model.search(
             ["|", ("barcode", "=", barcode), ("name", "=", barcode)], limit=1
         )
@@ -53,7 +54,11 @@ class SearchAction(Component):
         model = self.env["stock.production.lot"]
         if not barcode:
             return model.browse()
-        domain = [("name", "=", barcode)]
+        if barcode.startswith("#"):
+            lot_id = int(barcode.split("#")[-1])
+            domain = [("id", "=", lot_id)]
+        else:
+            domain = [("name", "=", barcode)]
         if operations:
             lots_ids = operations.mapped("pack_lot_ids.lot_id") | operations.mapped(
                 "lot_ids"

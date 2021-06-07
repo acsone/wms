@@ -25,6 +25,13 @@ class ScanAnythingCase(ActionsDataDetailCaseBase, ScanAnythingTestMixin):
         data = self.data_detail.location_detail(record)
         self._test_response_ok(rec_type, data, identifier)
 
+    def test_scan_location_alcyon(self):
+        record = self.stock_location
+        rec_type = "location"
+        identifier = "L#" + record.barcode
+        data = self.data_detail.location_detail(record)
+        self._test_response_ok(rec_type, data, identifier)
+
     def test_scan_package(self):
         record = self.package
         rec_type = "package"
@@ -36,6 +43,16 @@ class ScanAnythingCase(ActionsDataDetailCaseBase, ScanAnythingTestMixin):
         record = self.lot
         rec_type = "lot"
         identifier = record.name
+        data = self.data_detail.lot_detail(record)
+        self._test_response_ok(rec_type, data, identifier)
+
+    def test_scan_lot_alcyon(self):
+        record = self.lot
+        rec_type = "lot"
+        identifier = "#{product_id}#{lot_id}".format(
+            product_id=record.product_id.id, lot_id=record.id
+        )
+
         data = self.data_detail.lot_detail(record)
         self._test_response_ok(rec_type, data, identifier)
 
