@@ -72,7 +72,7 @@
       <t t-if="o.name[7] != 'A'">
         <div class="barcode_right_medoc">
           <img
-            t-att-src="'/report/qrcode/?value=%s&amp;size=5&amp;border=1' % content"
+            t-att-src="'/report/qrcode/?value=%s&amp;size=4&amp;border=1' % content"
           />
         </div>
         <div class="barcode_name_left_medoc">
@@ -93,7 +93,7 @@
         </div>
         <div class="barcode_left_medoc">
           <img
-            t-att-src="'/report/qrcode/?value=%s&amp;size=5&amp;border=1' % content"
+            t-att-src="'/report/qrcode/?value=%s&amp;size=4&amp;border=1' % content"
           />
         </div>
       </t>
