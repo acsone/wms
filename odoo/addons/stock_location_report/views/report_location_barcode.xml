@@ -36,6 +36,9 @@
       t-as="o"
       t-att-class="'container container_%s %s' % (o.height, o.kind)"
     >
+      <t t-if="o.barcode">
+        <t t-set="content" t-value="o.barcode" />
+      </t>
       <t t-if="not o.barcode">
         <t t-set="content" t-value="'L#%s' % o.name" />
       </t>
