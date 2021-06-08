@@ -1,0 +1,26 @@
+.o_form_view {
+  .weighing_widget {
+    .o-input();
+    .o-align-items(baseline);
+
+    > .o_form_input {
+      border-style: none !important;
+      width: 100px;
+      .o-flex(1, 0, auto);
+    }
+  }
+  // Flex fields
+  .weighing_widget {
+    .o-inline-flex-display();
+    > span,
+    > button {
+      .o-flex(0, 0, auto);
+    }
+    > .weighing_widget_error {
+      &::before {
+        color: @notification-error-bg-color;
+      }
+      display: none;
+    }
+  }
+}
