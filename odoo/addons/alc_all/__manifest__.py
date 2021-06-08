@@ -99,6 +99,7 @@
         "alc_delivery_carrier_gls",
         "alc_delivery_rounds_partner_geolocalize",
         "alc_edi_connector",
+        "alc_label_printing_gls",
         "alc_partner_manual_sale_order",
         "alc_placedesvetos",
         "alc_placedesvetos_to_magento",
