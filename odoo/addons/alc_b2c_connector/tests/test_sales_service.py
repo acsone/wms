@@ -638,3 +638,167 @@ class TestSalesService(CommonCase):
         _ = self.sales_service.dispatch("cancel", _id=self.b2c_order.b2c_ref)
 
         self.assertEqual("sale", self.b2c_order.state)
+
+    def test_14(self):
+        """
+        Data:
+            An existing SO
+        Test case:
+            Update one line of the SO  (change the quantity of product) before it is started
+        Expected result:
+            one line update, second one stays unchanged
+        """
+        recipient_info = {
+            "id": "ABC",
+            "title": "mr",
+            "last_name": "B2C PARTNER",
+            "first_name": "EXISTING",
+            "street": "test street",
+            "zip": "1234",
+            "city": "test city",
+            "email": "b2c@b2c.be",
+        }
+
+        order_line2 = self.env["sale.order.line"].create(
+            {
+                "order_id": self.b2c_order.id,
+                "b2c_ref": 2,
+                "product_id": self.saleable_product_2.id,
+                "name": self.saleable_product_2.name,
+                "product_uom": self.saleable_product_2.uom_id.id,
+                "product_uom_qty": 10,
+            }
+        )
+
+        order_line1 = self.b2c_order.order_line[0]
+
+        self.assertEqual(order_line1.product_uom_qty, 10)
+        self.assertEqual(order_line2.product_uom_qty, 10)
+
+        params = {
+            "id": 10,
+            "customer_ref": self.vt_partner.ref,
+            "date": ISO_DT_WITH_TZ,
+            "recipient": recipient_info,
+            "lines": [
+                {
+                    "line_id": 1,
+                    "sku": self.saleable_product.default_code,
+                    "quantity": 10,
+                },
+                {
+                    "line_id": 2,
+                    "sku": self.saleable_product_2.default_code,
+                    "quantity": 5,
+                },
+            ],
+        }
+
+        _ = self.sales_service.dispatch(
+            "update", _id=self.b2c_order.b2c_ref, params=params
+        )
+
+        self.assertEqual(self.b2c_order.order_line[0].product_uom_qty, 10)
+        self.assertEqual(self.b2c_order.order_line[1].product_uom_qty, 5)
+
+    def test_15(self):
+        """
+        Data:
+            An existing SO
+        Test case:
+            Add a new line to the sale order
+        Expected result:
+            sale order now has 2 lines
+        """
+        recipient_info = {
+            "id": "ABC",
+            "title": "mr",
+            "last_name": "B2C PARTNER",
+            "first_name": "EXISTING",
+            "street": "test street",
+            "zip": "1234",
+            "city": "test city",
+            "email": "b2c@b2c.be",
+        }
+
+        order_line1 = self.b2c_order.order_line[0]
+        self.assertEqual(order_line1.product_uom_qty, 10)
+        self.assertEqual(len(self.b2c_order.order_line), 1)
+
+        params = {
+            "id": 10,
+            "customer_ref": self.vt_partner.ref,
+            "date": ISO_DT_WITH_TZ,
+            "recipient": recipient_info,
+            "lines": [
+                {
+                    "line_id": 1,
+                    "sku": self.saleable_product.default_code,
+                    "quantity": 10,
+                },
+                {
+                    "line_id": 2,
+                    "sku": self.saleable_product_2.default_code,
+                    "quantity": 35,
+                },
+            ],
+        }
+
+        _ = self.sales_service.dispatch(
+            "update", _id=self.b2c_order.b2c_ref, params=params
+        )
+
+        self.assertEqual(self.b2c_order.order_line[0].product_uom_qty, 10)
+        self.assertEqual(self.b2c_order.order_line[1].product_uom_qty, 35)
+        self.assertEqual(len(self.b2c_order.order_line), 2)
+
+    def test_16(self):
+        """
+        Data:
+            An existing SO
+        Test case:
+            Try to update a sale order that is already out for delivery
+        Expected result:
+            raise error
+        """
+        recipient_info = {
+            "id": "ABC",
+            "title": "mr",
+            "last_name": "B2C PARTNER",
+            "first_name": "EXISTING",
+            "street": "test street",
+            "zip": "1234",
+            "city": "test city",
+            "email": "b2c@b2c.be",
+        }
+
+        order_line1 = self.b2c_order.order_line[0]
+        self.assertEqual(order_line1.product_uom_qty, 10)
+        self.assertEqual(len(self.b2c_order.order_line), 1)
+
+        params = {
+            "id": 10,
+            "customer_ref": self.vt_partner.ref,
+            "date": ISO_DT_WITH_TZ,
+            "recipient": recipient_info,
+            "lines": [
+                {
+                    "line_id": 1,
+                    "sku": self.saleable_product.default_code,
+                    "quantity": 10,
+                },
+                {
+                    "line_id": 2,
+                    "sku": self.saleable_product_2.default_code,
+                    "quantity": 35,
+                },
+            ],
+        }
+
+        self._deliver_orders(self.b2c_order)
+        res = self.sales_service.dispatch("get", _id=10)
+        self.assertEqual("delivery", res["state"])
+        with self.assertRaises(ValidationError):
+            _ = self.sales_service.dispatch(
+                "update", _id=self.b2c_order.b2c_ref, params=params
+            )

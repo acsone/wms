@@ -37,6 +37,12 @@ class SalesService(Component):
         )
         return self._sale_order_to_search_result(so)
 
+    def update(self, _id, **params):
+        so = self._get_order_from_b2c_ref(_id)
+        so._update_from_b2c(data=params, b2c_backend=self.b2c_backend)
+
+        return self._sale_order_line_to_search_result(so)
+
     def get(self, _id):
         """
         Get order info:
@@ -169,8 +175,84 @@ class SalesService(Component):
             },
         }
 
+    def _validator_update(self):
+        return {
+            "lines": {
+                "type": "list",
+                "nullable": False,
+                "required": True,
+                "schema": {
+                    "type": "dict",
+                    "schema": {
+                        "line_id": {
+                            "type": "integer",
+                            "nullable": False,
+                            "required": False,
+                        },
+                        "sku": {"type": "string", "required": True, "nullable": False},
+                        "quantity": {
+                            "type": "integer",
+                            "required": True,
+                            "nullable": False,
+                            "coerce": to_int,
+                        },
+                    },
+                },
+            },
+        }
+
     def _validator_return_create(self):
         return self._sale_info_schema
+
+    def _validator_return_update(self):
+        return {
+            "lines": {
+                "type": "list",
+                "nullable": False,
+                "required": True,
+                "schema": {
+                    "type": "dict",
+                    "schema": {
+                        "line_id": {
+                            "type": "integer",
+                            "nullable": False,
+                            "required": False,
+                        },
+                        "sku": {"type": "string", "required": True, "nullable": False},
+                        "qty_ordered": {
+                            "type": "integer",
+                            "required": True,
+                            "nullable": False,
+                            "coerce": to_int,
+                        },
+                        "qty_delivered": {
+                            "type": "integer",
+                            "required": True,
+                            "nullable": False,
+                            "coerce": to_int,
+                        },
+                        "qty_cancelled": {
+                            "type": "integer",
+                            "required": True,
+                            "nullable": False,
+                            "coerce": to_int,
+                        },
+                        "qty_returned": {
+                            "type": "integer",
+                            "required": True,
+                            "nullable": False,
+                            "coerce": to_int,
+                        },
+                        "qty_backorder": {
+                            "type": "integer",
+                            "required": True,
+                            "nullable": False,
+                            "coerce": to_int,
+                        },
+                    },
+                },
+            },
+        }
 
     def _validator_return_get(self):
         return self._sale_info_schema
@@ -318,6 +400,14 @@ class SalesService(Component):
         if state == "delivery":
             res["deliveries"] = self._deliveries_to_search_result(sale_order)
         return res
+
+    def _sale_order_line_to_search_result(self, sale_order):
+        return {
+            "lines": [
+                self._line_to_search_result(line)
+                for line in sale_order.order_line.filtered("b2c_ref")
+            ],
+        }
 
     def _line_to_search_result(self, order_line):
         return {

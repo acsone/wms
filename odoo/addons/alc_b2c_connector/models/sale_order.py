@@ -92,7 +92,6 @@ class SaleOrder(models.Model):
         is not confirmed
         """
         self.ensure_one()
-        order_data = self._parse_b2c_order(data, b2c_backend)
 
         if self.picking_ids and (
             "done" in self.mapped("picking_ids.state")
@@ -103,7 +102,14 @@ class SaleOrder(models.Model):
             )
         self.order_line.unlink()
 
-        self.write({"order_line": order_data["order_line"]})
+        self.write(
+            {
+                "order_line": [
+                    (0, 0, line_info)
+                    for line_info in self._parse_b2c_order_line(data, b2c_backend)
+                ]
+            }
+        )
 
         body = _("Sale Order  %(sale_order)s updated from json: %(json_file)s.") % {
             "sale_order": self.name,
