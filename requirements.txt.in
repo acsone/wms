@@ -60,3 +60,7 @@ odoo10-addon-shopfloor @ git+https://github.com/oca/wms.git@refs/pull/213/head#s
 
 # oca/web
 odoo10-addon-web-m2x-options @ git+https://github.com/oca/web.git@refs/pull/1795/head#subdirectory=setup/web_m2x_options
+
+
+# oca/delivery-carrier
+odoo10-addon-delivery-carrier-label-gls @ git+https://github.com/oca/delivery-carrier.git@refs/pull/376/head#subdirectory=setup/delivery_carrier_label_gls

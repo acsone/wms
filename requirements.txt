@@ -107,6 +107,7 @@ odoo10-addon-component==10.0.1.1.1
 odoo10-addon-component-event==10.0.1.0.1
 odoo10-addon-connector @ git+https://github.com/acsone/connector@de23258a4d639e696d6e4d941ba005a1577a9935#subdirectory=setup/connector
 odoo10-addon-date-range @ git+https://github.com/acsone/server-tools.git@dcefdba5bac014076f05229ba091acd8b739e164#subdirectory=setup/date_range
+odoo10-addon-delivery-carrier-label-gls @ git+https://github.com/oca/delivery-carrier.git@4b6d9971edd8080b964a149ed7780ff27d67c749#subdirectory=setup/delivery_carrier_label_gls
 odoo10-addon-despatch-advice-import @ git+https://github.com/acsone/edi.git@e37df84dfcfb4d7afa5a2dab3412bd44c05c1dae#subdirectory=setup/despatch_advice_import
 odoo10-addon-despatch-advice-import-ubl @ git+https://github.com/acsone/edi.git@e37df84dfcfb4d7afa5a2dab3412bd44c05c1dae#subdirectory=setup/despatch_advice_import_ubl
 odoo10-addon-geoengine-base-geolocalize==10.0.1.0.1
@@ -123,6 +124,7 @@ odoo10-addon-mis-builder==10.0.3.6.0
 odoo10-addon-mis-builder-budget==10.0.3.5.0
 odoo10-addon-monitoring-status @ git+https://github.com/acsone/odoo-cloud-platform.git@45a9d1f258eb93ec619202c2cfcb76978eee46cd#subdirectory=setup/monitoring_status
 odoo10-addon-onchange-helper @ git+https://github.com/acsone/server-tools.git@dcefdba5bac014076f05229ba091acd8b739e164#subdirectory=setup/onchange_helper
+odoo10-addon-partner-helper==10.0.0.1.0
 odoo10-addon-product-abc-classification-base @ git+https://github.com/acsone/product-attribute.git@301b92b963a9c127a6c70fb994a58b1cee955064#subdirectory=setup/product_abc_classification_base
 odoo10-addon-product-abc-classification-sale-stock @ git+https://github.com/acsone/product-attribute.git@7ab2176e0df4a2efb973ed36aa56c9ee5ac5d356#subdirectory=setup/product_abc_classification_sale_stock
 odoo10-addon-product-analytic @ git+https://github.com/acsone/account-analytic.git@daf43630f1ca58b431bb93809a331374b8530863#subdirectory=setup/product_analytic
