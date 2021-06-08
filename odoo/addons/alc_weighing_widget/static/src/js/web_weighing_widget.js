@@ -7,6 +7,8 @@ odoo.define("web_weighing_widget", function(require) {
   var Model = require("web.Model");
 
   var WeighingWidget = form_widgets.FieldFloat.extend({
+    template: "WebWeighingWidget",
+
     init: function() {
       this.proxyUrl = null;
       this.status = "FIXED";
@@ -14,12 +16,8 @@ odoo.define("web_weighing_widget", function(require) {
       this._super.apply(this, arguments);
     },
 
-    process_modifiers: function() {
-      this._super();
-      this.set({readonly: true});
-    },
     start: function() {
-      var self = this;
+      const self = this;
       this.view.on("change:actual_mode", this, this.on_mode_change);
       return $.when(this._super())
         .then(() => {
@@ -36,6 +34,7 @@ odoo.define("web_weighing_widget", function(require) {
     },
 
     start_weight_pooling: function() {
+      const self = this;
       this.weightPoolingIntervalId = setInterval(async function() {
         const response = await fetch(self.proxyUrl + "/hw_proxy/" + "weight");
         const data = await response.json();
@@ -53,7 +52,7 @@ odoo.define("web_weighing_widget", function(require) {
     },
 
     on_mode_change: function() {
-      if (this.view.get("actual_mode") === "view") {
+      if (this.view.get("actual_mode") === "edit" && !this.get("effective_readonly")) {
         this.start_weight_pooling();
       } else {
         this.stop_weight_pooling();
@@ -61,10 +60,10 @@ odoo.define("web_weighing_widget", function(require) {
     },
 
     set_status: function(status) {
-      if (this.view.get("actual_mode") !== "view") {
+      if (this.view.get("actual_mode") !== "view" && !this.get("effective_readonly")) {
         this.status = status;
-        const input = this.$("input");
-        let color = "red";
+        const input = this.$el[0];
+        let color = "#F16567";
         if (status === "FIXED") {
           color = null;
         }
@@ -76,6 +75,7 @@ odoo.define("web_weighing_widget", function(require) {
       return this.status === "FIXED";
     },
   });
+
   core.form_widget_registry.add("weighing_widget", WeighingWidget);
 
   return {
