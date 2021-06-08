@@ -134,7 +134,7 @@ class TestRecipientsService(CommonCase):
         recipient_info["country_code"] = "BE"
 
         _ = self.recipient_service.dispatch(
-            "update", _id=self.b2c_partner.id, params=recipient_info
+            "update", _id=recipient_info["id"], params=recipient_info
         )
 
         self.assertEqual(self.b2c_partner.street, "new_street")
@@ -163,7 +163,7 @@ class TestRecipientsService(CommonCase):
         recipient_info["street"] = "new_street"
 
         _ = self.recipient_service.dispatch(
-            "update", _id=self.b2c_partner.id, params=recipient_info
+            "update", _id=recipient_info["id"], params=recipient_info
         )
 
         self.assertEqual(self.b2c_partner.street, "new_street")

@@ -18,8 +18,11 @@ class RecipientsService(Component):
     _usage = "recipients"
 
     def update(self, _id, **params):
-        partner = self.env["res.partner"].suspend_security().search([("id", "=", _id)])
-        partner._update_b2c_recipient(params, self.b2c_backend)
+        partner = (
+            self.env["res.partner"]
+            .suspend_security()
+            ._update_b2c_recipient(_id, self.b2c_backend, params)
+        )
         return self._partner_to_json(partner[0])
 
     def _partner_to_json(self, partner):
@@ -31,7 +34,7 @@ class RecipientsService(Component):
                 title = "mr"
 
         res = {
-            "id": int(partner.id),
+            "id": self.env["res.partner"]._b2c_ref_to_b2c_id(partner.ref),
             "title": title if title else "",
             "name": partner.name,
             "street": partner.street if partner.street else None,
@@ -71,7 +74,7 @@ class RecipientsService(Component):
 
     def _validator_return_update(self):
         return {
-            "id": {"type": "integer", "nullable": False, "required": True},
+            "id": {"type": "string", "nullable": False, "required": True},
             "title": {
                 "type": "string",
                 "nullable": False,

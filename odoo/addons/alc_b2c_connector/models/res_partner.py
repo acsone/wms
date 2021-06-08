@@ -16,11 +16,11 @@ class ResPartner(models.Model):
     _inherit = "res.partner"
 
     @api.model
-    def _update_b2c_recipient(self, data, b2c_backend):
+    def _update_b2c_recipient(self, _id, b2c_backend, data):
         """ Update the final customer
         """
-        b2c_ref = u"{}_{}".format(b2c_backend.sale_channel, data["id"])
-        partner = self._get_partner_by_ref(b2c_ref, raise_if_notfound=True)
+        b2c_ref = self._b2c_id_to_b2c_ref(_id, b2c_backend)
+        partner = self._get_partner_by_ref(b2c_ref)
         country_id = None
         country_code = data.get("country_code")
         if country_code:
@@ -50,9 +50,19 @@ class ResPartner(models.Model):
             }
         )
 
-    @api.model
-    def _get_partner_by_ref(self, ref, raise_if_notfound=True):
-        partner = self.search([("ref", "=", ref)], order="parent_id desc", limit=1,)
-        if not partner and raise_if_notfound:
-            raise ValidationError(_("No match found for customer_id: %s") % ref)
         return partner
+
+    @api.model
+    def _get_partner_by_ref(self, b2c_ref, raise_if_notfound=True):
+        partner = self.search([("ref", "=", b2c_ref)], order="parent_id desc", limit=1,)
+        if not partner and raise_if_notfound:
+            raise ValidationError(_("No match found for customer_id: %s") % b2c_ref)
+        return partner
+
+    @api.model
+    def _b2c_id_to_b2c_ref(self, _id, b2c_backend):
+        return u"{}_{}".format(b2c_backend.sale_channel, _id)
+
+    @api.model
+    def _b2c_ref_to_b2c_id(self, ref):
+        return ref.split("_")[1]

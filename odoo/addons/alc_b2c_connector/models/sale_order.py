@@ -145,7 +145,9 @@ class SaleOrder(models.Model):
     @api.model
     def _get_final_b2c_recipient(self, data, b2c_backend):
         customer_info = data["recipient"]
-        b2c_ref = u"{}_{}".format(b2c_backend.sale_channel, customer_info["id"])
+        b2c_ref = self.env["res.partner"]._b2c_id_to_b2c_ref(
+            customer_info["id"], b2c_backend
+        )
         partner = self.env["res.partner"]._get_partner_by_ref(
             b2c_ref, raise_if_notfound=False
         )
