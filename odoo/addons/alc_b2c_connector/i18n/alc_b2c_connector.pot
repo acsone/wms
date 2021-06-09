@@ -145,7 +145,7 @@ msgid "Name must be unique"
 msgstr ""
 
 #. module: alc_b2c_connector
-#: code:addons/alc_b2c_connector/models/res_partner.py:57
+#: code:addons/alc_b2c_connector/models/res_partner.py:59
 #, python-format
 msgid "No match found for customer_id: %s"
 msgstr ""
@@ -199,6 +199,12 @@ msgid "Sale"
 msgstr ""
 
 #. module: alc_b2c_connector
+#: code:addons/alc_b2c_connector/models/sale_order.py:114
+#, python-format
+msgid "Sale Order  %(sale_order)s updated from json: %(json_file)s."
+msgstr ""
+
+#. module: alc_b2c_connector
 #: model:ir.model.fields,field_description:alc_b2c_connector.field_alc_b2c_backend_sale_team_id
 msgid "Sale Team"
 msgstr ""
@@ -214,7 +220,7 @@ msgid "Sale channel"
 msgstr ""
 
 #. module: alc_b2c_connector
-#: code:addons/alc_b2c_connector/services/sales_service.py:212
+#: code:addons/alc_b2c_connector/services/sales_service.py:247
 #, python-format
 msgid "Sale order not found for id %s"
 msgstr ""
@@ -254,13 +260,19 @@ msgid "Unknown country code %s"
 msgstr ""
 
 #. module: alc_b2c_connector
-#: code:addons/alc_b2c_connector/models/sale_order.py:131
+#: code:addons/alc_b2c_connector/models/sale_order.py:164
 #, python-format
 msgid "Unknowns SKU(s): %s , "
 msgstr ""
 
 #. module: alc_b2c_connector
-#: code:addons/alc_b2c_connector/models/sale_order.py:205
+#: code:addons/alc_b2c_connector/models/sale_order.py:101
+#, python-format
+msgid "You cannot update a sale order that is already ready for delivery"
+msgstr ""
+
+#. module: alc_b2c_connector
+#: code:addons/alc_b2c_connector/models/sale_order.py:240
 #, python-format
 msgid "You cannot use this sale channel for manuel order"
 msgstr ""
