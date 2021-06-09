@@ -60,8 +60,8 @@ class ResPartner(models.Model):
         return partner
 
     @api.model
-    def _b2c_id_to_b2c_ref(self, _id, b2c_backend):
-        return u"{}_{}".format(b2c_backend.sale_channel, _id)
+    def _b2c_id_to_b2c_ref(self, b2c_id, b2c_backend):
+        return u"{}_{}".format(b2c_backend.sale_channel, b2c_id)
 
     @api.model
     def _b2c_ref_to_b2c_id(self, ref):
