@@ -81,20 +81,6 @@ class LocationContentTransfer(Component):
             message=self.msg_store.location_content_transfer_no_work()
         )
 
-    def __start_or_recover(self):
-        """Start a new session or recover an existing one
-
-        If the current user had transfers in progress in this scenario
-        and reopen the menu, we want to directly reopen the screens to choose
-        destinations. Otherwise, we go to the "start" state.
-        """
-        started_pickings = self._search_recover_pickings()
-        if started_pickings:
-            return self._router_single_or_all_destination(
-                started_pickings, message=self.msg_store.recovered_previous_session()
-            )
-        return self._response_for_start()
-
     def scan_location(self, barcode):
         """Scan start location
 
