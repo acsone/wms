@@ -87,6 +87,39 @@ class SaleOrder(models.Model):
         self.message_post(body=body)
         return self
 
+    def _update_from_b2c(self, data, b2c_backend):
+        """ Update a sale order with data coming from b2c. This is possible as long as the order
+        is not confirmed
+        """
+        self.ensure_one()
+
+        if self.picking_ids and (
+            "done" in self.mapped("picking_ids.state")
+            or "cancel" in self.mapped("picking_ids.state")
+        ):
+            raise ValidationError(
+                _("You cannot update a sale order that is already ready for delivery")
+            )
+        self.order_line.unlink()
+
+        self.write(
+            {
+                "order_line": [
+                    (0, 0, line_info)
+                    for line_info in self._parse_b2c_order_line(data, b2c_backend)
+                ]
+            }
+        )
+
+        body = _("Sale Order  %(sale_order)s updated from json: %(json_file)s.") % {
+            "sale_order": self.name,
+            "json_file": json.dumps(data, sort_keys=True),
+        }
+
+        self.message_post(body=body)
+        self.action_confirm_background()
+        return self
+
     @api.model
     def _parse_b2c_order(self, data, b2c_backend):
         order_data = {}
@@ -145,7 +178,9 @@ class SaleOrder(models.Model):
     @api.model
     def _get_final_b2c_recipient(self, data, b2c_backend):
         customer_info = data["recipient"]
-        b2c_ref = u"{}_{}".format(b2c_backend.sale_channel, customer_info["id"])
+        b2c_ref = self.env["res.partner"]._b2c_id_to_b2c_ref(
+            customer_info["id"], b2c_backend
+        )
         partner = self.env["res.partner"]._get_partner_by_ref(
             b2c_ref, raise_if_notfound=False
         )

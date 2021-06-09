@@ -37,6 +37,12 @@ class SalesService(Component):
         )
         return self._sale_order_to_search_result(so)
 
+    def update(self, _id, **params):
+        so = self._get_order_from_b2c_ref(_id)
+        so._update_from_b2c(data=params, b2c_backend=self.b2c_backend)
+
+        return self._sale_order_to_search_result(so)
+
     def get(self, _id):
         """
         Get order info:
@@ -169,7 +175,36 @@ class SalesService(Component):
             },
         }
 
+    def _validator_update(self):
+        return {
+            "lines": {
+                "type": "list",
+                "nullable": False,
+                "required": True,
+                "schema": {
+                    "type": "dict",
+                    "schema": {
+                        "line_id": {
+                            "type": "integer",
+                            "nullable": False,
+                            "required": False,
+                        },
+                        "sku": {"type": "string", "required": True, "nullable": False},
+                        "quantity": {
+                            "type": "integer",
+                            "required": True,
+                            "nullable": False,
+                            "coerce": to_int,
+                        },
+                    },
+                },
+            },
+        }
+
     def _validator_return_create(self):
+        return self._sale_info_schema
+
+    def _validator_return_update(self):
         return self._sale_info_schema
 
     def _validator_return_get(self):
