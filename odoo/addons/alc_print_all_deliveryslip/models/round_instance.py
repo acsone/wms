@@ -32,7 +32,9 @@ class RoundInstance(models.Model):
                         left.customer_id.is_b2c_customer
                         and right.customer_id.is_b2c_customer
                     ):
-                        return cmp(left.customer_id.name, right.customer_id.name)
+                        return cmp(  # pylint: disable=undefined-variable
+                            left.customer_id.name, right.customer_id.name
+                        )
                     if (
                         left.customer_id.is_b2c_customer
                         and not right.customer_id.is_b2c_customer

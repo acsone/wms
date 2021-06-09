@@ -277,7 +277,7 @@ msgstr "Imprimante"
 #: code:addons/specific_print/models/stock.py:30
 #, fuzzy, python-format
 msgid "Printer unavailable : %s"
-msgstr "Imprimante indisponible"
+msgstr "Imprimante indisponible: %s"
 
 #. module: specific_print
 #: model:ir.model,name:specific_print.model_product_product

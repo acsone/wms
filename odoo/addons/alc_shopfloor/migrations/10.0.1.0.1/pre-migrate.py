@@ -2,7 +2,6 @@
 # Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-# pylint: disable=odoo-addons-relative-import
 from odoo.addons.alc_shopfloor.hooks import pre_init_hook
 
 

@@ -46,7 +46,7 @@ class ChangePackageLot(Component):
                 move_line,
                 message=self.msg_store.several_packs_in_location(move_line.location_id),
             )
-        elif len(package_quants) == 1:
+        if len(package_quants) == 1:
             # change the package directly
             package = package_quants.package_id
             return self.change_package(
