@@ -542,7 +542,10 @@ class LocationContentTransfer(Component):
         operation = self.env["stock.pack.operation"].browse(operation_id)
         if not operation.exists():
             operations = self._find_operations(location)
-            return self._response_for_start_single(operations.mapped("picking_id"))
+            return self._response_for_start_single(
+                operations.mapped("picking_id"),
+                message=self.msg_store.record_not_found(),
+            )
         if operation.pack_lot_ids and not lot_id:
             operations = self._find_operations(location)
             return self._response_for_start_single(

@@ -441,7 +441,9 @@ class LocationContentTransferSingleCase(LocationContentTransferCommonCase):
         )
         operations = self.service._find_operations(self.content_loc)
         self.assert_response_start_single(
-            response, operations.mapped("picking_id"),
+            response,
+            operations.mapped("picking_id"),
+            message=self.service.msg_store.record_not_found(),
         )
 
     def test_stock_out_package_ok(self):
@@ -480,7 +482,9 @@ class LocationContentTransferSingleCase(LocationContentTransferCommonCase):
         )
         operations = self.service._find_operations(self.content_loc)
         self.assert_response_start_single(
-            response, operations.mapped("picking_id"),
+            response,
+            operations.mapped("picking_id"),
+            message=self.service.msg_store.record_not_found(),
         )
 
 
