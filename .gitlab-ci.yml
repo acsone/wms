@@ -46,10 +46,10 @@ pre-commit:
   stage: test
   tags:
     - python
-  cache:
-    key: pre-commit
-    paths:
-      - .pre-commit
+  #cache:
+  #  key: pre-commit
+  #  paths:
+  #    - .pre-commit
   variables:
     KUBERNETES_MEMORY_REQUEST: 3500Mi
     KUBERNETES_MEMORY_LIMIT: 3500Mi
