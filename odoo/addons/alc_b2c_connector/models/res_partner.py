@@ -16,10 +16,10 @@ class ResPartner(models.Model):
     _inherit = "res.partner"
 
     @api.model
-    def _update_b2c_recipient(self, _id, b2c_backend, data):
+    def _update_b2c_recipient(self, b2c_id, b2c_backend, data):
         """ Update the final customer
         """
-        b2c_ref = self._b2c_id_to_b2c_ref(_id, b2c_backend)
+        b2c_ref = self._b2c_id_to_b2c_ref(b2c_id, b2c_backend)
         partner = self._get_partner_by_ref(b2c_ref)
         country_id = None
         country_code = data.get("country_code")

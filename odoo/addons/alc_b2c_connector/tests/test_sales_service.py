@@ -620,7 +620,7 @@ class TestSalesService(CommonCase):
         Expected result:
             The so is cancelled
         """
-        _ = self.sales_service.dispatch("cancel", _id=self.b2c_order.b2c_ref)
+        self.sales_service.dispatch("cancel", _id=self.b2c_order.b2c_ref)
 
         self.assertEqual("cancel", self.b2c_order.state)
 
@@ -635,7 +635,7 @@ class TestSalesService(CommonCase):
         """
         self._deliver_orders(self.b2c_order)
         self.b2c_order.picking_ids.do_print_picking()
-        _ = self.sales_service.dispatch("cancel", _id=self.b2c_order.b2c_ref)
+        self.sales_service.dispatch("cancel", _id=self.b2c_order.b2c_ref)
 
         self.assertEqual("sale", self.b2c_order.state)
 
@@ -694,9 +694,7 @@ class TestSalesService(CommonCase):
             ],
         }
 
-        _ = self.sales_service.dispatch(
-            "update", _id=self.b2c_order.b2c_ref, params=params
-        )
+        self.sales_service.dispatch("update", _id=self.b2c_order.b2c_ref, params=params)
 
         self.assertEqual(self.b2c_order.order_line[0].product_uom_qty, 10)
         self.assertEqual(self.b2c_order.order_line[1].product_uom_qty, 5)
@@ -744,9 +742,7 @@ class TestSalesService(CommonCase):
             ],
         }
 
-        _ = self.sales_service.dispatch(
-            "update", _id=self.b2c_order.b2c_ref, params=params
-        )
+        self.sales_service.dispatch("update", _id=self.b2c_order.b2c_ref, params=params)
 
         self.assertEqual(self.b2c_order.order_line[0].product_uom_qty, 10)
         self.assertEqual(self.b2c_order.order_line[1].product_uom_qty, 35)
@@ -799,6 +795,6 @@ class TestSalesService(CommonCase):
         res = self.sales_service.dispatch("get", _id=10)
         self.assertEqual("delivery", res["state"])
         with self.assertRaises(ValidationError):
-            _ = self.sales_service.dispatch(
+            self.sales_service.dispatch(
                 "update", _id=self.b2c_order.b2c_ref, params=params
             )
