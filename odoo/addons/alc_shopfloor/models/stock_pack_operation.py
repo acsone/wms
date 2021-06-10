@@ -359,6 +359,7 @@ class StockPackOperation(models.Model):
         vals = {
             "product_id": self.product_id.id,
             "package_id": self.package_id.id,
+            "picking_id": self.picking_id.id,
             "location_dest_id": dest_reserve_location.id,
         }
         # apply storage_type strategy by hand since it's not applied
