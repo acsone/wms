@@ -11,8 +11,8 @@
     "depends": [
         "stock_refill",
         "delivery_rounds",
-        "stock_barcode_fix",
         "alc_product_average_daily_sale",
+        "alc_stock_barcode_picking_type",
     ],
     "data": [
         "views/report_stock_refill_arrange_retours.xml",

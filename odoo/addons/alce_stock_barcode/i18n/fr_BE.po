@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#   * stock_barcode_fix
+#   * alce_stock_barcode
 #
 msgid ""
 msgstr ""
@@ -16,35 +16,21 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
-#. module: stock_barcode_fix
-#: model:ir.model.fields,field_description:stock_barcode_fix.field_stock_location_barcode_picking_type_id
-msgid "Barcode Picking Type"
-msgstr "Barcode Picking Type"
-
-#. module: stock_barcode_fix
-#: model:ir.model.fields,help:stock_barcode_fix.field_stock_location_barcode_picking_type_id
-msgid ""
-"Define the type of picking to create when this location (or any children) is "
-"scanned"
-msgstr ""
-"Defini le type de picking à créer quand cet emplacement (ou tout sous-"
-"emplacement) est scanné"
-
-#. module: stock_barcode_fix
-#: model:ir.model,name:stock_barcode_fix.model_stock_location
+#. module: alce_stock_barcode
+#: model:ir.model,name:alce_stock_barcode.model_stock_location
 msgid "Inventory Locations"
 msgstr ""
 
-#. module: stock_barcode_fix
-#: code:addons/stock_barcode_fix/controllers/main.py:75
+#. module: alce_stock_barcode
+#: code:addons/alce_stock_barcode/controllers/main.py:75
 #, python-format
 msgid "No internal picking type. Please configure one in warehouse settings."
 msgstr ""
 "Pas de type de picking interne. Veuillez en configurer un dans la "
 "configuration de l'entrepôt."
 
-#. module: stock_barcode_fix
-#: code:addons/stock_barcode_fix/controllers/main.py:82
+#. module: alce_stock_barcode
+#: code:addons/alce_stock_barcode/controllers/main.py:82
 #, python-format
 msgid "No picking or location corresponding to barcode %(barcode)s"
 msgstr "Pas de picking ou d'emplacement correspondant au barcode %(barcode)s"

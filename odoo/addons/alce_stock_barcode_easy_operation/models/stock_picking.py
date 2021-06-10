@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 # Copyright 2018 Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 import re
 
@@ -121,6 +120,20 @@ class StockPicking(models.Model):
         )
         if product:
             return self._barcode_process_product(product)
+        # package
+        # Logic for packages in source location
+        if self.pack_operation_pack_ids:
+            package_source = self.env["stock.quant.package"].search(
+                [
+                    ("name", "=", barcode),
+                    ("location_id", "child_of", self.location_id.id),
+                ],
+                limit=1,
+            )
+            if package_source:
+                if self._check_source_package(package_source):
+                    return None
+
         # Raise error
         return {
             "warning": {"title": _("Unsupported code"), "message": _("%s") % barcode}

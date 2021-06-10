@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="stock_location_form_view">
+        <field
+      name="name"
+    >stock.location.form (in alc_stock_barcode_picking_type)</field>
+        <field name="model">stock.location</field>
+    <field name="inherit_id" ref="stock.view_location_form" />
+    <field name="priority">20</field>
+    <field name="arch" type="xml">
+      <field name="barcode" position="after">
+        <field name="barcode_picking_type_id" />
+      </field>
+    </field>
+  </record>
+
+
+</odoo>

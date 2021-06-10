@@ -6,7 +6,10 @@
 Specific Barcode
 ================
 
-Implementation of barcode scenario for stock management
+Ease picking operation processing by the barcode app.
+ * Process lot without requiring to open the pack lot wizard
+ * Auto increment product and package,
+ * ...
 
 Credits
 =======
@@ -15,3 +18,4 @@ Contributors
 ------------
 
 * Jacques-Etienne Baudoux (BCIM sprl) <je@bcim.be>
+* Laurent Mignon (ACSONE SA/NV) <laurent.mignon@acsone.eu>

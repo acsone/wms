@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # © 2016 Sylvain Van Hoof (Okia sprl) <sylvain@okia.be>
 # © 2016-2018 Jacques-Etienne Baudoux (BCIM sprl) <je@bcim.be>
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+# License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
 from odoo import api, fields, models
 

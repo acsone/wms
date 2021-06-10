@@ -37,10 +37,7 @@ class StockBarcodeControllerFix(StockBarcodeController):
             # jbaudoux FIX
             # set the right picking type by looking on scanned location source
             location = corresponding_location
-            internal_picking_type = location.barcode_picking_type_id
-            while not internal_picking_type and location.location_id:
-                location = location.location_id
-                internal_picking_type = location.barcode_picking_type_id
+            internal_picking_type = location.get_barcode_picking_type_id()
             if not internal_picking_type:
                 internal_picking_type = request.env["stock.picking.type"].search(
                     [("code", "=", "internal")]

@@ -153,7 +153,6 @@
         "sale_quick_create",
         "server_environment_files",
         "specific_account",
-        "specific_barcode",
         "specific_base",
         "specific_cutoff",
         "specific_data",
