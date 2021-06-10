@@ -178,17 +178,17 @@ odoo10-addon-stock-quant-package-product-packaging @ git+https://github.com/acso
 odoo10-addon-stock-storage-type @ git+https://github.com/acsone/wms.git@2ea05444714bd4a10107b28742e7c828a8456218#subdirectory=setup/stock_storage_type
 odoo10-addon-stock-storage-type-putaway-abc @ git+https://github.com/acsone/wms.git@2e6ca20271e75ed0d1e8b27dc8248e2a0837447e#subdirectory=setup/stock_storage_type_putaway_abc
 odoo10-addon-web-cache-name-get @ git+https://github.com/acsone/web.git@f37c8ad92c2190e0bbc09444424273843a9f3cd0#subdirectory=setup/web_cache_name_get
-odoo10-addon-web-decimal-numpad-dot @ git+https://github.com/acsone/web.git@f37c8ad92c2190e0bbc09444424273843a9f3cd0#subdirectory=setup/web_decimal_numpad_dot
+odoo10-addon-web-decimal-numpad-dot==10.0.1.1.0.99.dev1
 odoo10-addon-web-domain-field==10.0.1.0.0
-odoo10-addon-web-environment-ribbon @ git+https://github.com/acsone/web.git@f37c8ad92c2190e0bbc09444424273843a9f3cd0#subdirectory=setup/web_environment_ribbon
-odoo10-addon-web-export-view @ git+https://github.com/acsone/web.git@f37c8ad92c2190e0bbc09444424273843a9f3cd0#subdirectory=setup/web_export_view
-odoo10-addon-web-m2x-options @ git+https://github.com/acsone/web.git@aab363d15ba92bac56d67ac02c3b9dfbdeab25dd#subdirectory=setup/web_m2x_options
-odoo10-addon-web-notify @ git+https://github.com/acsone/web.git@f37c8ad92c2190e0bbc09444424273843a9f3cd0#subdirectory=setup/web_notify
-odoo10-addon-web-readonly-bypass @ git+https://github.com/acsone/web.git@f37c8ad92c2190e0bbc09444424273843a9f3cd0#subdirectory=setup/web_readonly_bypass
-odoo10-addon-web-sheet-full-width @ git+https://github.com/acsone/web.git@f37c8ad92c2190e0bbc09444424273843a9f3cd0#subdirectory=setup/web_sheet_full_width
-odoo10-addon-web-widget-color @ git+https://github.com/acsone/web.git@f37c8ad92c2190e0bbc09444424273843a9f3cd0#subdirectory=setup/web_widget_color
+odoo10-addon-web-environment-ribbon==10.0.1.0.0.99.dev7
+odoo10-addon-web-export-view==10.0.1.0.0.99.dev10
+odoo10-addon-web-m2x-options==10.0.1.1.1.99.dev3
+odoo10-addon-web-notify==10.0.1.2.0.99.dev3
+odoo10-addon-web-readonly-bypass==10.0.1.0.1.99.dev4
+odoo10-addon-web-sheet-full-width==10.0.1.0.1.99.dev1
+odoo10-addon-web-widget-color==10.0.1.0.1
 odoo10-addon-web-widget-domain-v11==10.0.1.0.1
-odoo10-addon-web-widget-many2many-tags-multi-selection @ git+https://github.com/acsone/web.git@f37c8ad92c2190e0bbc09444424273843a9f3cd0#subdirectory=setup/web_widget_many2many_tags_multi_selection
+odoo10-addon-web-widget-many2many-tags-multi-selection==10.0.1.0.0.99.dev8
 ofxparse==0.16
 openupgradelib @ git+https://github.com/OCA/openupgradelib@6c18ce0c160b9cf47c4fa898d9b6c4265d98c216
 pandas==0.24.2
