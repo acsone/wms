@@ -320,7 +320,7 @@ msgid "No operation type found for this menu and profile."
 msgstr ""
 
 #. module: alc_shopfloor
-#: code:addons/alc_shopfloor/services/service.py:41
+#: code:addons/alc_shopfloor/services/service.py:42
 #, python-format
 msgid "No operation types configured on menu {}."
 msgstr ""
@@ -353,6 +353,13 @@ msgstr ""
 #: code:addons/alc_shopfloor/actions/message.py:399
 #, python-format
 msgid "No quantity has been processed, unable to complete the transfer."
+msgstr ""
+
+#. module: alc_shopfloor
+#: code:addons/alc_shopfloor/actions/message.py:535
+#: code:addons/alc_shopfloor/models/stock_pack_operation.py:344
+#, python-format
+msgid "No reserve location associated with location %s."
 msgstr ""
 
 #. module: alc_shopfloor
@@ -603,8 +610,8 @@ msgid "Scan the destination location"
 msgstr ""
 
 #. module: alc_shopfloor
-#: code:addons/alc_shopfloor/services/location_content_transfer.py:360
-#: code:addons/alc_shopfloor/services/location_content_transfer.py:381
+#: code:addons/alc_shopfloor/services/location_content_transfer.py:340
+#: code:addons/alc_shopfloor/services/location_content_transfer.py:361
 #, python-format
 msgid "Scan the package"
 msgstr ""
@@ -797,13 +804,13 @@ msgid "This line is not available in transfer {}."
 msgstr ""
 
 #. module: alc_shopfloor
-#: code:addons/alc_shopfloor/services/location_content_transfer.py:144
+#: code:addons/alc_shopfloor/services/location_content_transfer.py:132
 #, python-format
 msgid "This location content can't be moved at once."
 msgstr ""
 
 #. module: alc_shopfloor
-#: code:addons/alc_shopfloor/services/location_content_transfer.py:151
+#: code:addons/alc_shopfloor/services/location_content_transfer.py:139
 #, python-format
 msgid "This location content can't be moved using this menu."
 msgstr ""
