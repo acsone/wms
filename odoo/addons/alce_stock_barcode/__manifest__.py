@@ -10,6 +10,7 @@
     "depends": [
         "stock_barcode",
         "alce_stock_barcode_easy_operation",
+        "alce_stock_barcode_picking_assignment",
         "alc_stock_barcode_picking_type",
     ],
     "installable": True,

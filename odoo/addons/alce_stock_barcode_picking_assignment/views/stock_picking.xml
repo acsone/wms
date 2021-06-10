@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2020 ACSONE SA/NV -->
+<odoo>
+   <record id="stock_picking_view_form_inherit_stock_barcode" model="ir.ui.view">
+       <field
+      name="name"
+    >stock.picking.form (in alce_stock_barcode_picking_assignment)</field>
+       <field name="model">stock.picking</field>
+        <field
+      name="inherit_id"
+      ref="stock_picking_assignment.view_stock_picking_operator_form"
+    />
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='assign_operator']" position="attributes">
+                <attribute name="barcode_trigger">assign-op</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>
