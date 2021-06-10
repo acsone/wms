@@ -60,6 +60,18 @@ class TestSearchCase(TestSearchBaseCase):
         self.assertEqual(handler(False), rec.browse())
         self.assertEqual(handler("NONE"), rec.browse())
 
+    def test_search_lot_alcyon(self):
+        record = (
+            self.env["stock.production.lot"]
+            .sudo()
+            .create({"product_id": self.product_a.id})
+        )
+        identifier = "#{product_default_code}#{lot_name}".format(
+            product_default_code=record.product_id.default_code, lot_name=record.name
+        )
+        handler = self.search.lot_from_scan
+        self.assertEqual(handler(identifier), record)
+
     def test_search_generic_packaging(self):
         rec = (
             self.env["product.packaging"]

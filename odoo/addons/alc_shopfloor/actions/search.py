@@ -1,7 +1,11 @@
 # -*- coding: utf-8 -*-
 # Copyright 2020 Camptocamp SA (http://www.camptocamp.com)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+import re
+
 from odoo.addons.component.core import Component
+
+LOT_BARCODE = re.compile(r"#(?P<product_default_code>\w+)#(?P<lot_name>\w+)#?")
 
 
 class SearchAction(Component):
@@ -54,9 +58,12 @@ class SearchAction(Component):
         model = self.env["stock.production.lot"]
         if not barcode:
             return model.browse()
-        if barcode.startswith("#"):
-            lot_id = int(barcode.split("#")[-1])
-            domain = [("id", "=", lot_id)]
+        m = LOT_BARCODE.match(barcode)
+        if m and len(m.groups()) == 2:
+            domain = [
+                ("product_id.default_code", "=", m.group("product_default_code")),
+                ("name", "=", m.group("lot_name")),
+            ]
         else:
             domain = [("name", "=", barcode)]
         if operations:
