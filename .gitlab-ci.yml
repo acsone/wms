@@ -118,8 +118,7 @@ test:
     - unbuffer venv/bin/coverage run --branch venv/bin/odoo -c odoo-ci.cfg -d ${DB_NAME}
       --stop-after-init --no-xmlrpc -i ${ADDONS_TEST} --test-enable | acsoo checklog
     - venv/bin/coverage html
-    - venv/bin/coverage xml
-    - venv/bin/coverage report
+    - mv .coverage .coverage_test
     - if [ "${CI_COMMIT_REF_NAME}" = "master" ] ; then makepot ; fi
 
   artifacts:
@@ -183,6 +182,7 @@ coverage-report:
     - test
     - test-shopfloor
   interruptible: true
+  allow_failure: true
 
 build-and-publish-image:
   # https://docs.gitlab.com/ee/ci/docker/using_kaniko.html#building-a-docker-image-with-kaniko
