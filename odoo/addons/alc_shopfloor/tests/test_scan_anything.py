@@ -49,8 +49,8 @@ class ScanAnythingCase(ActionsDataDetailCaseBase, ScanAnythingTestMixin):
     def test_scan_lot_alcyon(self):
         record = self.lot
         rec_type = "lot"
-        identifier = "#{product_id}#{lot_id}".format(
-            product_id=record.product_id.id, lot_id=record.id
+        identifier = "#{product_default_code}#{lot_name}".format(
+            product_default_code=record.product_id.default_code, lot_name=record.name
         )
 
         data = self.data_detail.lot_detail(record)
