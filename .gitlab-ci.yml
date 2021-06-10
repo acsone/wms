@@ -139,15 +139,16 @@ test-shopfloor:
     - venv/bin/pip install --no-index release/*.whl
     # although the project is part of *.whl, install it in editable mode so coverage sees it
     - venv/bin/pip install --no-deps -e .
-    - ADDONS_INIT=$(manifestoo -d odoo/addons --select=alc_shopfloor list-depends
-      --separator=,)
+    - ADDONS_INIT=$(manifestoo --addons-path-python=venv/bin/python
+      --select=alc_shopfloor list-depends --separator=,)
     - echo Installing ${ADDONS_INIT}
     - unbuffer venv/bin/click-odoo-initdb -c odoo-ci.cfg --new-database ${DB_NAME}
       --cache-prefix alc-sfl -m ${ADDONS_INIT} | acsoo checklog
     # do not test server_environment_files because server_environment depends on it,
     # so testing server_environment_files implies testing server_environment,
     # and the server_environment tests require a very specific server_environment_files
-    - ADDONS_TEST=$(manifestoo -d odoo/addons --select=alc_shopfloor list --separator=,)
+    - ADDONS_TEST=$(manifestoo --addons-path-python=venv/bin/python
+      --select=alc_shopfloor list --separator=,)
     - echo Testing ${ADDONS_TEST}
     - unbuffer venv/bin/coverage run --branch venv/bin/odoo -c odoo-ci.cfg -d ${DB_NAME}
       --stop-after-init --no-xmlrpc -i ${ADDONS_TEST} --test-enable | acsoo checklog
