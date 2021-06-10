@@ -8,7 +8,7 @@
         Alcyon :Shopfloor Scan scenario""",
     "version": "10.0.1.0.1",
     "license": "AGPL-3",
-    "author": "ACSONE SA/NV",
+    "author": "Camptocamp SA, BCIM, ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
         "shopfloor_base",
@@ -26,7 +26,8 @@
         "stock_picking_show_backorder",
         "stock_helper",
         # alcyon
-        "delivery_rounds_refill",
+        "delivery_rounds_refill",  # manage refill_arrange
+        "stock_refill",  # declare reserve reserve
     ],
     "data": [
         "data/scenario_location_content_transfer.xml",

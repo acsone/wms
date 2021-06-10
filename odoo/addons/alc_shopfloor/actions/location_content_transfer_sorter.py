@@ -31,9 +31,18 @@ class LocationContentTransferSorter(Component):
 
     @staticmethod
     def _sort_key(content):
+        location_dest_kind_priority = ["reserve", "bin", "parking"]
         # content can be either a move line, either a package
         # level
+        location_dest_kind = content.location_dest_id.kind or "bin"
+        kind_index = (
+            location_dest_kind_priority.index(location_dest_kind)
+            if location_dest_kind in location_dest_kind_priority
+            else float("inf")
+        )
         return (
+            # be sure that reserve comes first
+            kind_index,
             # postponed content after other contents
             content.shopfloor_priority or 10,
             # sort by shopfloor picking sequence

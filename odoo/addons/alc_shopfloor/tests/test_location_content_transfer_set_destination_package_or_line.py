@@ -133,13 +133,14 @@ class LocationContentTransferSetDestinationXCase(LocationContentTransferCommonCa
         )
 
     def test_set_destination_package_dest_location_move_nok(self):
-        """Scanned destination location not valid (different as move)"""
+        """Scanned destination location not valid (different as move and picking)"""
         package_level = self.picking1.pack_operation_pack_ids[0]
         # if the move related to the package level has a destination
         # location not a parent or equal to the scanned location,
         # refuse the action
         moves = package_level.linked_move_operation_ids.mapped("move_id")
         moves.write({"location_dest_id": self.shelf1.id})
+        moves.mapped("picking_id").write({"location_dest_id": self.shelf1.id})
         response = self.service.dispatch(
             "set_destination_line",
             params={
@@ -319,12 +320,13 @@ class LocationContentTransferSetDestinationXCase(LocationContentTransferCommonCa
         )
 
     def test_set_destination_line_dest_location_move_nok(self):
-        """Scanned destination location not valid (different as move)"""
+        """Scanned destination location not valid (different as picking and move)"""
         operation = self.picking2.pack_operation_product_ids[0]
         # if the move related to the move line has a destination
         # location not a parent or equal to the scanned location,
         # refuse the action
         operation.linked_move_operation_ids.move_id.location_dest_id = self.shelf1
+        operation.picking_id.location_dest_id = self.shelf1
         response = self.service.dispatch(
             "set_destination_line",
             params={
