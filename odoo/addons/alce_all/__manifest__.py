@@ -12,6 +12,8 @@
     "depends": [
         "alce_helpdesk",
         "alce_purchase_report",
+        "alce_account_reports_followup_data",
+        "alce_split_coda",
         "alce_stock_barcode",
         "alce_stock_picking_backorder_helpdesk",
     ],

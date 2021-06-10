@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* specific_followup
+# 	* alce_account_reports_followup_data
 #
 msgid ""
 msgstr ""
@@ -16,8 +16,8 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
-#. module: specific_followup
-#: model:account_followup.followup.line,description:specific_followup.alcyon_followup_line1
+#. module: alce_account_reports_followup_data
+#: model:account_followup.followup.line,description:alce_account_reports_followup_data.alcyon_followup_line1
 msgid ""
 "\n"
 "Cher(e) Docteur,\n"
@@ -67,9 +67,9 @@ msgstr ""
 "04/338 84 34\n"
 "  "
 
-#. module: specific_followup
-#: model:account_followup.followup.line,description:specific_followup.alcyon_followup_line2
-#: model:account_followup.followup.line,description:specific_followup.alcyon_followup_line3
+#. module: alce_account_reports_followup_data
+#: model:account_followup.followup.line,description:alce_account_reports_followup_data.alcyon_followup_line2
+#: model:account_followup.followup.line,description:alce_account_reports_followup_data.alcyon_followup_line3
 msgid ""
 "\n"
 "Cher(e) Docteur,\n"
@@ -121,17 +121,17 @@ msgstr ""
 "04/338 84 34\n"
 "  "
 
-#. module: specific_followup
-#: model:account_followup.followup.line,name:specific_followup.alcyon_followup_line1
+#. module: alce_account_reports_followup_data
+#: model:account_followup.followup.line,name:alce_account_reports_followup_data.alcyon_followup_line1
 msgid "First reminder email"
 msgstr "Premier courriel de rappel"
 
-#. module: specific_followup
-#: model:account_followup.followup.line,name:specific_followup.alcyon_followup_line2
+#. module: alce_account_reports_followup_data
+#: model:account_followup.followup.line,name:alce_account_reports_followup_data.alcyon_followup_line2
 msgid "Second reminder letter and email"
 msgstr "Deuxième lettre de relance et courriel"
 
-#. module: specific_followup
-#: model:account_followup.followup.line,name:specific_followup.alcyon_followup_line3
+#. module: alce_account_reports_followup_data
+#: model:account_followup.followup.line,name:alce_account_reports_followup_data.alcyon_followup_line3
 msgid "Third reminder: phone the customer"
 msgstr "Troisième relance: appel du client"

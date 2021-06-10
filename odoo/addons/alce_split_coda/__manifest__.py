@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 # Copyright 2018 Okia SPRL
-# License LGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 {
     "name": "Split CODA",
@@ -9,10 +8,13 @@
     "maintainer": "QANSEE",
     "category": "Accounting",
     "website": "http://www.okia.be",
+    # BE CAREFUL ALL the dependencies must BE LGPL or OEEL!!!
+    # l10n_be_coda is an Odoo enterprise module
     "depends": ["l10n_be_coda"],
     "data": [],
     "installable": True,
     "auto_install": False,
-    "license": "LGPL-3",
+    "license": "Other proprietary",
     "application": False,
+    "pre_init_hook": "pre_init_hook",
 }

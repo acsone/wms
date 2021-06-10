@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 # Copyright 2018 Okia SPRL (sylvain@okia.be)
-# License LGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 import base64
 import logging
