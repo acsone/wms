@@ -26,7 +26,8 @@
         "stock_picking_show_backorder",
         "stock_helper",
         # alcyon
-        "delivery_rounds_refill",
+        "delivery_rounds_refill",  # manage refill_arrange
+        "stock_refill",  # declare reserve reserve
     ],
     "data": [
         "data/scenario_location_content_transfer.xml",

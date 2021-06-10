@@ -375,6 +375,19 @@ class LocationContentTransferSingleCase(LocationContentTransferCommonCase):
         content_sorted2 = list(sorter)
         self.assertTrue(content_sorted1 != content_sorted2)
 
+    def test_reserve_sorter(self):
+        operations = self.service._find_operations(self.content_loc)
+        pickings = operations.mapped("picking_id")
+        sorter = self.service._actions_for("location_content_transfer.sorter")
+        sorter.feed_pickings(pickings)
+        content_sorted1 = list(sorter)
+        last_op = content_sorted1[-1]
+        last_op.sudo().location_dest_id = self.reserve
+        sorter.sort()
+        content_sorted2 = list(sorter)
+        self.assertTrue(content_sorted1 != content_sorted2)
+        self.assertEqual(last_op, content_sorted2[0])
+
     def test_postpone_line_wrong_parameters(self):
         """Wrong 'location_id' and 'move_line_id' parameters, redirect the
         user to the 'start' screen.

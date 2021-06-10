@@ -58,6 +58,17 @@ class CommonCase(BaseCommonCase):
             create TEMPORARY SEQUENCE barcode START 100000;
             update stock_location set barcode=nextval('barcode') where barcode is null"""
         )
+        cls.reserve = (
+            cls.env["stock.location"]
+            .sudo()
+            .create(
+                {
+                    "kind": "reserve",
+                    "location_id": cls.stock_location.id,
+                    "name": "Stock Reserve",
+                }
+            )
+        )
 
     @classmethod
     def _shopfloor_user_values(cls):
