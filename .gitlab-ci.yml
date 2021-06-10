@@ -86,16 +86,10 @@ build:
 licence_check:
   <<: *test_common
   script:
-    - pipx install acsoo # for checklog
-    - start_ssh_agent # for pushing translations
     - virtualenv --python=$PYTHON venv
-    - venv/bin/pip install coverage -r requirements-tests.txt
     # use --no-index so missing dependencies that would not be in *.whl are detected
     - venv/bin/pip install --no-index release/*.whl
-    # although the project is part of *.whl, install it in editable mode so coverage sees it
-    - venv/bin/pip install --no-deps -e .
     - manifestoo -d odoo/addons --addons-path-python=venv/bin/python check-licenses
-  interruptible: true
   allow_failure: true
 
 test:
