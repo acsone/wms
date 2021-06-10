@@ -528,3 +528,10 @@ class MessageAction(Component):
             "message_type": "warning",
             "body": _("No delivery package type available."),
         }
+
+    def no_reserve_location_found(self, location):
+        return {
+            "message_type": "error",
+            "body": _("No reserve location associated with location %s.")
+            % location.name,
+        }

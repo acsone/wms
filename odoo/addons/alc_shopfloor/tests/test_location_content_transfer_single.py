@@ -500,6 +500,56 @@ class LocationContentTransferSingleCase(LocationContentTransferCommonCase):
             message=self.service.msg_store.record_not_found(),
         )
 
+    def test_overstock_line_wrong_parameters(self):
+        """Wrong 'location_id' and 'operation_id' parameters, redirect the
+        user to the 'start' screen.
+        """
+        operation = self.picking1.pack_operation_pack_ids
+        response = self.service.dispatch(
+            "overstock_line",
+            params={
+                "location_id": 1234567890,  # Doesn't exist
+                "operation_id": operation.id,
+            },
+        )
+        self.assert_response_start(
+            response, message=self.service.msg_store.record_not_found()
+        )
+        response = self.service.dispatch(
+            "overstock_line",
+            params={
+                "location_id": self.content_loc.id,
+                "operation_id": 1234567890,  # Doesn't exist
+            },
+        )
+        operations = self.service._find_operations(self.content_loc)
+        self.assert_response_start_single(
+            response,
+            operations.mapped("picking_id"),
+            message=self.service.msg_store.record_not_found(),
+        )
+
+    def test_overstock_line_ok(self):
+        """Declare an overstock on an operation. The process should return
+        a new operation to a reserve location
+        """
+        self.shelf1.sudo().reserve_location_id = self.reserve
+        operation = self.picking1.pack_operation_pack_ids
+
+        response = self.service.dispatch(
+            "overstock_line",
+            params={
+                "location_id": operation.location_dest_id.id,
+                "operation_id": operation.id,
+            },
+        )
+        self.assertIn("start_single", response["data"])
+        data_operation = response["data"]["start_single"]["operation"]
+        self.assertEqual(self.reserve.id, data_operation["location_dest"]["id"])
+        moves = operation.linked_move_operation_ids.mapped("move_id")
+        self.assertEqual(self.reserve, moves.mapped("location_dest_id"))
+        self.assertEqual({"assigned"}, set(moves.mapped("state")))
+
 
 # pylint: disable=missing-return
 class LocationContentTransferSingleSpecialCase(LocationContentTransferCommonCase):

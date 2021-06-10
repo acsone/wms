@@ -10,6 +10,7 @@ from odoo import _
 from odoo.addons.base_rest.components.service import to_int
 from odoo.addons.component.core import Component
 
+from ..models.stock_pack_operation import NoReserveLocationError
 from ..utils import to_float
 
 # NOTE for the implementation: share several similarities with the "cluster
@@ -599,6 +600,35 @@ class LocationContentTransfer(Component):
         operations = self._find_operations(location)
         return self._response_for_start_single(operations.mapped("picking_id"))
 
+    def overstock_line(self, location_id, operation_id):
+        """
+        Change the location_dest to the reserve
+
+        Transitions:
+            * start_single: continue with the new operation to put products
+            into reserve
+        """
+        location = self.env["stock.location"].browse(location_id)
+        if not location.exists():
+            return self._response_for_start(message=self.msg_store.record_not_found())
+        operation = self.env["stock.pack.operation"].browse(operation_id)
+        if not operation.exists():
+            operations = self._find_operations(location)
+            return self._response_for_start_single(
+                operations.mapped("picking_id"),
+                message=self.msg_store.record_not_found(),
+            )
+        try:
+            operation._to_reserve()
+            return self._response_for_start_single(operation.picking_id)
+        except NoReserveLocationError:
+            return self._response_for_start_single(
+                operation.mapped("picking_id"),
+                message=self.msg_store.no_reserve_location_found(
+                    operation.location_dest_id
+                ),
+            )
+
     ##################
     # Helpers methods
     ##################
@@ -885,6 +915,12 @@ class ShopfloorLocationContentTransferValidator(Component):
             "operation_id": {"coerce": to_int, "required": True, "type": "integer"},
         }
 
+    def overstock_line(self):
+        return {
+            "location_id": {"coerce": to_int, "required": True, "type": "integer"},
+            "operation_id": {"coerce": to_int, "required": True, "type": "integer"},
+        }
+
     def stock_out_line(self):
         return {
             "location_id": {"coerce": to_int, "required": True, "type": "integer"},
@@ -970,3 +1006,6 @@ class ShopfloorLocationContentTransferValidatorResponse(Component):
 
     def stock_out_line(self):
         return self._response_schema(next_states={"start", "start_single"})
+
+    def overstock_line(self):
+        return self._response_schema(next_states={"start_single"})
