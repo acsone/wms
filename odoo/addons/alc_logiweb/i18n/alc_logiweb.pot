@@ -19,7 +19,7 @@ msgid "Logiweb Product Assortment"
 msgstr ""
 
 #. module: alc_logiweb
-#: code:addons/alc_logiweb/models/sale_order.py:27
+#: code:addons/alc_logiweb/models/sale_order.py:36
 #, python-format
 msgid "Missing carrier"
 msgstr ""
