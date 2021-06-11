@@ -184,7 +184,6 @@ class Assignment(DomainInterface):
         address = u"{} {}".format(partner.zip or "", partner.city or "")
         if customer.is_b2c_customer:
             customer_name = customer.name
-            address = u"{} -- {}".format(address, customer_name)
         shipping = self._get_shipping(picking)
         round_name = picking.sudo().delivery_round_id.template_id.code
 
