@@ -25,7 +25,6 @@ def _initialize_product_assortment_filter(cr):
                     [
                         "60425",  # agora_sana
                         "61645",  # ASP International
-                        "101895",  # Finest Petfood
                         "77020",  # Original Process
                         "77640",  # Phytovet
                     ],
