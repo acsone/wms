@@ -101,9 +101,6 @@ class StockPicking(models.Model):
         need to update it also. As we force changes in DB, saving or discarding
         changes on the UI does not make any difference.
         """
-        if not self.operator_id:
-            raise UserError(_("Please start operation first"))
-
         picking = self.search([("name", "=", self.name)])
         if not picking:
             return UserError(_("Invalid document reference"))

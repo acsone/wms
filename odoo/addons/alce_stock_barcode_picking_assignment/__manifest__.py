@@ -10,6 +10,10 @@
     "website": "https://acsone.eu/",
     # BE CAREFUL ALL the dependencies must BE LGPL or OEEL!!!
     # stock_barcode is an Odoo enterprise module
-    "depends": ["stock_barcode", "stock_picking_assignment"],
+    "depends": [
+        "stock_barcode",
+        "stock_picking_assignment",
+        "alce_stock_barcode_easy_operation",
+    ],
     "data": ["views/stock_picking.xml"],
 }
