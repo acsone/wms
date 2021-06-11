@@ -187,6 +187,8 @@ class TestSalesService(CommonCase):
         """
         self.b2c_backend.sale_channel = "logiweb"
         recipient_info = self._gen_recipent()
+        carrier = "GLS_BE"
+        gls_parcel_shop = "GGG"
         params = {
             "id": 2,
             "customer_ref": self.vt_partner.ref,
@@ -199,7 +201,8 @@ class TestSalesService(CommonCase):
                     "quantity": 10,
                 }
             ],
-            "carrier": "GLS_BE",
+            "carrier": carrier,
+            "gls_parcel_shop": gls_parcel_shop,
         }
         res = self.sales_service.dispatch("create", params=params)
         self.assertTrue(res)
@@ -209,10 +212,15 @@ class TestSalesService(CommonCase):
             new_so.carrier_id,
             self.env.ref("alc_delivery_carrier_gls.delivery_carrier_gls_be"),
         )
+        self.assertEqual(new_so.gls_parcel_shop, gls_parcel_shop)
         customer_partner = self._get_customer(recipient_info)
         self.assertEqual(new_so.partner_id, customer_partner)
         self.assertEqual(new_so.partner_invoice_id, self.vt_partner)
         self.assertEqual(new_so.partner_shipping_id, customer_partner)
+
+        new_so_api = self.sales_service.dispatch("get", _id=new_so.b2c_ref)
+        self.assertEqual(new_so_api["carrier"], carrier)
+        self.assertEqual(new_so_api["gls_parcel_shop"], gls_parcel_shop)
 
     def test_03(self):
         """

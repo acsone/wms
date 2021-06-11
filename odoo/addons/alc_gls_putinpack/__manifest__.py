@@ -3,14 +3,13 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
-    "name": "Alc Delivery Carrier Gls",
-    "description": """
-        Alcyon: Add GLS delivery carriers""",
+    "name": "Alc GLS: send package at 'put in pack' step",
+    "description": """Alcyon: GLS shipping customizations""",
     "version": "10.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": ["delivery_carrier_label_gls"],
-    "data": ["data/product_product.xml", "data/delivery_carrier.xml"],
+    "data": [],
     "demo": [],
 }

@@ -96,8 +96,11 @@
         "alc_chronovet_payment_globalization",
         "alc_customer_audit",
         "alc_customer_invoices_by_fiscal_year",
+        "alc_delivery_carrier_gls",
         "alc_delivery_rounds_partner_geolocalize",
         "alc_edi_connector",
+        "alc_gls_putinpack",
+        "alc_label_printing_gls",
         "alc_partner_manual_sale_order",
         "alc_placedesvetos",
         "alc_placedesvetos_to_magento",
@@ -140,6 +143,7 @@
         "csv_file_export",  # to remove
         "csv_file_import",  # to remove
         "delivery_rounds_alcyon",
+        "delivery_carrier_label_gls",
         "external_fax",
         "ir_sequence_period",
         "l10n_be_bba_fix",
