@@ -22,7 +22,7 @@ class Assignment(DomainInterface):
         "208030828,2.2.3,3iV_101,RESP_ASSIGNMENT,30,1,20170207,"
         "072820,30427733115352,0,,1,1,000000001625844,,00,,"
         "Vétérinaires,95,0,0,C,CLINIQUE VET. DU MONT-FALISE,"
-        "4520 WANZE,00018,B2C customer address,"
+        "4520 WANZE,00018,B2C customer address,WH/OUT/1234,"
     )
     EXAMPLE_RESU = (
         "208030828,2.2.3,3iV_101,RESU_ASSIGNMENT,30,1,20170207,"
@@ -93,6 +93,7 @@ class Assignment(DomainInterface):
         "Usf09",
         "Usf10",
         "Usf11",  # FOR chronovet customer
+        "Usf12",  # BL
     )
     RESU = (
         "groupNum",
@@ -184,7 +185,7 @@ class Assignment(DomainInterface):
         if customer.is_b2c_customer:
             customer_name = customer.name
             address = u"{} -- {}".format(address, customer_name)
-
+        shipping = self._get_shipping(picking)
         round_name = picking.sudo().delivery_round_id.template_id.code
 
         result.update(
@@ -200,6 +201,7 @@ class Assignment(DomainInterface):
                 "Usf08": address,
                 "Usf09": picking.nbr_actions,  # Nbr of operation
                 "Usf11": customer_name,
+                "Usf12": shipping.name,
             }
         )
 
@@ -611,3 +613,13 @@ WHERE picking.state IN ('partially_available', 'assigned')
             params.log(picking_id=picking.id, exception=error_message)
 
         return False
+
+    def _get_shipping(self, picking):
+        """
+        Return the picking out following the current picking
+        """
+        shippings = picking._get_all_dest_pickings().filtered(
+            lambda r: r.picking_type_code == "outgoing"
+            and r.state not in ("cancel", "done")
+        )
+        return shippings[0] if shippings else self.env["stock.picking"]
