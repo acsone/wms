@@ -94,7 +94,7 @@ msgstr "Impossible de formater la valeur %s du type %s"
 
 #. module: specific_zetes
 #: code:addons/specific_zetes/tests/test_full.py:642
-#: code:addons/specific_zetes/tools/domain_assignment.py:157
+#: code:addons/specific_zetes/tools/domain_assignment.py:158
 #, python-format
 msgid "Cannot found a picking"
 msgstr "Aucun UOP trouvé"
@@ -868,7 +868,7 @@ msgid "UOP not found or this UOP is not open"
 msgstr "UOP non trouvé ou l'UOP n'est plus ouvert"
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_assignment.py:148
+#: code:addons/specific_zetes/tools/domain_assignment.py:149
 #, python-format
 msgid "Unknown assignment type"
 msgstr "Type d'affectation inconnu"
@@ -912,7 +912,7 @@ msgid "Validate UOP"
 msgstr "Valider l'UOP"
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_assignment.py:258
+#: code:addons/specific_zetes/tools/domain_assignment.py:259
 #, python-format
 msgid "Validate picking %s"
 msgstr "Validation de la préparation %s"
@@ -1008,7 +1008,7 @@ msgid "Zetes state"
 msgstr "Etat de Zetes"
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_assignment.py:176
+#: code:addons/specific_zetes/tools/domain_assignment.py:177
 #, python-format
 msgid "left"
 msgstr "gauche"
@@ -1029,7 +1029,7 @@ msgid "pack.operation.reserve.rel"
 msgstr "pack.operation.reserve.rel"
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_assignment.py:178
+#: code:addons/specific_zetes/tools/domain_assignment.py:179
 #, python-format
 msgid "right"
 msgstr "droite"
