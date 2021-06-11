@@ -147,6 +147,7 @@ const LocationContentTransfer = {
       let actions = [
         {name: "Postpone line", event_name: "action_postpone"},
         {name: "Declare stock out", event_name: "action_stock_out"},
+        {name: "Declare overstock", event_name: "action_overstock"},
       ];
       return actions;
     },
@@ -165,6 +166,19 @@ const LocationContentTransfer = {
 
       this.wait_call(this.odoo.call(endpoint, endpoint_data));
     },
+
+    on_action_overstock: function() {
+      let endpoint, endpoint_data;
+      const data = this.state.data;
+      endpoint = "overstock_line";
+      endpoint_data = {
+        location_id: data.operation.location_src.id,
+        operation_id: data.operation.id,
+      };
+
+      this.wait_call(this.odoo.call(endpoint, endpoint_data));
+    },
+
     on_action_stock_out: function() {
       this.state_set_data(this.state.data, "stock_issue");
       this.state_to("stock_issue");
