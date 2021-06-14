@@ -1,15 +1,17 @@
 [paths]
 source =
     odoo/addons/
-    */odoo-alcyon/odoo/addons
+    */acsone/odoo-alcyon/odoo/addons
+
+[run]
+source =
+    ./odoo/addons
+dynamic_context = test_function
+branch = True
 
 [report]
-include =
-    */odoo/addons/*
 
 omit =
-    venv*
-    src*
     */scenario/*
     */scenarios/*
     */test/*
