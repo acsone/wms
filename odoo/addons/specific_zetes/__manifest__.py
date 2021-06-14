@@ -14,6 +14,7 @@
     "depends": [
         "alc_b2c_partner",
         "alc_delivery_rounds_operator",
+        "alc_stock_barcode_picking_type",
         "delivery_rounds",
         "delivery_rounds_refill",
         "queue_job",
@@ -24,7 +25,6 @@
         "stock_picking_assignment",
         "specific_stock",
         "stock_product_bin",
-        "stock_barcode_fix",
         "stock_picking_fillwithstock",
         "stock_production_lot_expiry",
         "stock_groupbypartner",
