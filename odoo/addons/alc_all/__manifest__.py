@@ -97,6 +97,7 @@
         "alc_customer_audit",
         "alc_customer_invoices_by_fiscal_year",
         "alc_delivery_carrier_gls",
+        "alc_delivery_rounds_gls",
         "alc_delivery_rounds_partner_geolocalize",
         "alc_edi_connector",
         "alc_gls_putinpack",
