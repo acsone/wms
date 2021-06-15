@@ -32,7 +32,7 @@ class ShapeFileImportWizard(models.TransientModel):
     tag_ids = fields.Many2many(
         "round.tag",
         string="Tags",
-        help="Only templates having one of the tags will be instanciated",
+        help="The tags set here will be added to the templates created by the shapefile",
     )
 
     @api.model
