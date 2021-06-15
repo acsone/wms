@@ -183,7 +183,7 @@ class StockPicking(models.Model):
     def create_delivery_note(self):
         """Used for the action menu."""
         for picking in self:
-            picking._save_delivery_note()
+            picking._generate_delivery_note_csv()
 
     @api.multi
     def _generate_delivery_note(self):
