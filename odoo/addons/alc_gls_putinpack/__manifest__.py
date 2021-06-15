@@ -10,6 +10,6 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": ["delivery_carrier_label_gls"],
-    "data": [],
+    "data": ["wizards/delivery_package_gls_wizard.xml"],
     "demo": [],
 }
