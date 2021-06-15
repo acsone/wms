@@ -33,12 +33,35 @@ def _fill_partner_lat_long_or_geo_point(cr, registry):
 
 
 def _fill_partner_tag(cr):
+    # explicit tags defined on the itinerary position
     cr.execute(
         """
         INSERT INTO res_partner_round_tag_rel (round_tag_id, res_partner_id)
         SELECT DISTINCT rel.round_tag_id, p.partner_id
         FROM round_itinerary_position_round_tag_rel rel, round_itinerary_position p
-        WHERE p.id = rel.round_itinerary_position_id
+        WHERE p.id = rel.round_itinerary_position_id;
+    """
+    )
+    # tags from the template if no explicit tags from itinerary position
+    cr.execute(
+        """
+        INSERT INTO res_partner_round_tag_rel (round_tag_id, res_partner_id)
+        SELECT trt.round_tag_id, p.partner_id
+        FROM round_itinerary_position p
+        JOIN round_itinerary_round_template_rel tr
+            ON tr.round_itinerary_id = p.itinerary_id
+        JOIN round_tag_round_template_rel trt
+            ON trt.round_template_id = tr.round_template_id
+        WHERE p.partner_id not in (
+            SELECT
+                partner_id
+            FROM
+                round_itinerary_position_round_tag_rel
+            WHERE
+                round_itinerary_position_id = p.id
+        )
+        ON CONFLICT ON CONSTRAINT res_partner_round_tag_rel_res_partner_id_round_tag_id_key
+        DO NOTHING;
     """
     )
 
