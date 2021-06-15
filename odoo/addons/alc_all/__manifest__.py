@@ -102,6 +102,7 @@
         "alc_edi_connector",
         "alc_gls_putinpack",
         "alc_label_printing_gls",
+        "alc_logiweb",
         "alc_partner_manual_sale_order",
         "alc_placedesvetos",
         "alc_placedesvetos_to_magento",
