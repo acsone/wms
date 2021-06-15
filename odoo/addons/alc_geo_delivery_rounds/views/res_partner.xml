@@ -10,6 +10,7 @@
       <field name="round_itinerary_ids" position="after">
         <field name="round_template_ids" widget="many2many_tags" />
         <field name="tag_ids" widget="many2many_tags" />
+        <field name="not_in_dynamic_delivery_round" />
       </field>
     </field>
   </record>

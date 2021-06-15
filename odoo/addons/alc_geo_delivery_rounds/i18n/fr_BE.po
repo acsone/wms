@@ -200,7 +200,7 @@ msgid "No file sent."
 msgstr "Aucun fichier n'a été importé."
 
 #. module: alc_geo_delivery_rounds
-#: model:geoengine.raster.layer,name:alc_geo_delivery_rounds.round_template_geoengine_raster_layer_osm
+#: model:geoengine.raster.layer,:alc_geo_delivery_rounds.round_template_geoengine_raster_layer_osm
 msgid "OSM Light layer"
 msgstr "OSM light"
 
@@ -214,6 +214,8 @@ msgstr "OSM"
 #: model:ir.model.fields,help:alc_geo_delivery_rounds.field_res_users_tag_ids
 msgid "Only partners with the right tag will be delivered"
 msgstr "Seuls les partenaires présentant les bonnes étiquettes seront livrés."
+
+
 
 #. module: alc_geo_delivery_rounds
 #: model:ir.model,name:alc_geo_delivery_rounds.model_res_partner
@@ -236,6 +238,13 @@ msgstr "Réserver le stock"
 #, fuzzy
 msgid "Round templates"
 msgstr "Modèle"
+
+
+#. module: alc_geo_delivery_rounds
+#: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_res_partner_not_in_dynamic_delivery_round
+msgid "Do not include in dynamical delivery round"
+msgstr "Ne pas inclure dans la tournée dynamique"
+
 
 #. module: alc_geo_delivery_rounds
 #: model:ir.actions.act_window,name:alc_geo_delivery_rounds.action_shape_file_import
