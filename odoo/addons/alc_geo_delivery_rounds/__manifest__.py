@@ -17,7 +17,6 @@
         "geoengine_partner",
     ],
     "data": [
-        "wizards/make_itinerary_plan_wizard.xml",
         "wizards/shape_file_import_wizard.xml",
         "views/delivery_plan.xml",
         "views/res_partner.xml",
