@@ -10,7 +10,9 @@ class TestStockPicking(SavepointCase):
     @classmethod
     def setUpClass(cls):
         super(TestStockPicking, cls).setUpClass()
-        cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
+        cls.env = cls.env(
+            context=dict(cls.env.context, tracking_disable=True, NO_GLS_SEND=True)
+        )
         cls.currency_id = cls.env.user.company_id.currency_id
         cls.carrier = cls.env.ref(
             "alc_delivery_carrier_gls.delivery_carrier_gls_be", raise_if_not_found=False
@@ -379,8 +381,11 @@ class TestStockPicking(SavepointCase):
         for pack in ship.pack_operation_ids:
             pack.qty_done = pack.product_qty
         final_pack = ship.put_in_pack()
+        final_pack_id = (
+            final_pack["res_id"] if isinstance(final_pack, dict) else final_pack.id
+        )
         self.assertEqual(
-            final_pack.id, ship.mapped("pack_operation_ids.result_package_id").id
+            final_pack_id, ship.mapped("pack_operation_ids.result_package_id").id
         )
 
     def test_02(self):
@@ -421,8 +426,11 @@ class TestStockPicking(SavepointCase):
             pack.qty_done = pack.product_qty
 
         final_pack = ship.put_in_pack()
+        final_pack_id = (
+            final_pack["res_id"] if isinstance(final_pack, dict) else final_pack.id
+        )
         self.assertEqual(
-            final_pack.id, ship.mapped("pack_operation_ids.result_package_id").id
+            final_pack_id, ship.mapped("pack_operation_ids.result_package_id").id
         )
 
     def test_03(self):
