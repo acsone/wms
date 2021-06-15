@@ -101,6 +101,12 @@ msgid "Display Name"
 msgstr ""
 
 #. module: alc_geo_delivery_rounds
+#: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_res_partner_not_in_dynamic_delivery_round
+#: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_res_users_not_in_dynamic_delivery_round
+msgid "Do not include in dynamical delivery round"
+msgstr ""
+
+#. module: alc_geo_delivery_rounds
 #: model:ir.ui.view,arch_db:alc_geo_delivery_rounds.shape_file_import_wizard_form_view
 msgid "Execute import"
 msgstr ""
