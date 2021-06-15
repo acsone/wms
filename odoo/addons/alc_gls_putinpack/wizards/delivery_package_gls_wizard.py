@@ -2,6 +2,8 @@
 # Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+import json
+
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 
@@ -25,7 +27,10 @@ class DeliveryPackageGlsWizard(models.TransientModel):
         comodel_name="stock.quant.package",
         string="Package",
         help="The package to send to GLS.",
-        domain="[('id', 'in', allowed_package_ids)]",
+        # domain="[('id', 'in', allowed_package_ids)]",  # when migrating, use this
+    )
+    package_id_domain = fields.Char(
+        compute="_compute_package_id_domain", readonly=True, store=False,
     )
     is_sent = fields.Boolean(
         string="Is sent",
@@ -44,6 +49,12 @@ class DeliveryPackageGlsWizard(models.TransientModel):
         for record in self:
             key_packages = "pack_operation_product_ids.result_package_id"
             record.allowed_package_ids = record.picking_id.mapped(key_packages)
+
+    @api.depends("allowed_package_ids")
+    def _compute_package_id_domain(self):
+        for record in self:
+            ids = record.allowed_package_ids.ids
+            record.package_id_domain = json.dumps([("id", "in", ids)])
 
     @api.depends("package_id")
     def _compute_is_sent(self):

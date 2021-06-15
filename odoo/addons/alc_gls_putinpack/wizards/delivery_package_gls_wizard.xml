@@ -8,7 +8,8 @@
         <group>
           <field name="picking_id" />
           <field name="allowed_package_ids" invisible="1" />
-          <field name="package_id" />
+          <field name="package_id_domain" invisible="1" />
+          <field name="package_id" domain="package_id_domain" />
           <field name="is_sent" invisible="1" />
           <field name="packaging_id" />
           <field name="shipping_weight" />
