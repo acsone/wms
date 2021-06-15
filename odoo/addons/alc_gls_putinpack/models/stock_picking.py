@@ -10,6 +10,15 @@ class StockPicking(models.Model):
 
     def put_in_pack(self):
         res = super(StockPicking, self).put_in_pack()
-        if res and self.carrier_id.delivery_type == "gls":
-            self.gls_send_shipping_package(package=res)
+        final_pack_id = res["res_id"] if isinstance(res, dict) else res.id
+        package = self.env["stock.quant.package"].browse(final_pack_id)
+        package.packaging_id = self.env.ref(
+            "delivery_carrier_label_gls.product_packaging_gls_parcel"
+        )
+        if (
+            res
+            and self.carrier_id.delivery_type == "gls"
+            and "NO_GLS_SEND" not in self.env.context
+        ):
+            self.gls_send_shipping_package(package=package)
         return res
