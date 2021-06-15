@@ -26,6 +26,10 @@ class ResPartner(models.Model):
 
     tag_labels = fields.Char(compute="_compute_tag_labels")
 
+    not_in_dynamic_delivery_round = fields.Boolean(
+        string="Do not include in dynamical delivery round", default=False, index=True
+    )
+
     @api.multi
     @api.depends("geo_point", "round_template_ids.geo_polygon_shape")
     def _compute_round_template_ids(self):

@@ -30,6 +30,9 @@ class RoundInstance(models.Model):
         if partner.type == "contact" and partner.parent_id:
             partner = partner.parent_id
 
+        if partner.not_in_dynamic_delivery_round:
+            return super(RoundInstance, self).find_bypartner(partner)
+
         geo_domain = [("geo_polygon_shape", "geo_contains", partner.geo_point)]
         template_ids = self.env["round.template"].geo_search(geo_domain=geo_domain)
 
