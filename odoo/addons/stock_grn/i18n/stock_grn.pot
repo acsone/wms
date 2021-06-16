@@ -90,6 +90,11 @@ msgid "Goods Received Note"
 msgstr ""
 
 #. module: stock_grn
+#: model:ir.model.fields,field_description:stock_grn.field_stock_grn_type_id_7113
+msgid "Grn Type"
+msgstr ""
+
+#. module: stock_grn
 #: model:ir.ui.view,arch_db:stock_grn.view_grn_search
 msgid "Group by..."
 msgstr ""
