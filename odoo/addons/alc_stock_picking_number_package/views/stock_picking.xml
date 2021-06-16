@@ -9,6 +9,7 @@
         <field name="inherit_id" ref="stock.view_picking_form" />
         <field name="arch" type="xml">
           <div name="button_box" position="before">
+              <field name="is_number_of_packages_outranged" invisible="1" />
             <div
           class="alert alert-warning"
           attrs="{'invisible': [('is_number_of_packages_outranged', '=', False)]}"
@@ -17,7 +18,7 @@
             </div>
           </div>
           <field name="origin" position="after">
-                <field name="is_number_of_packages_visible" invisble="1" />
+                <field name="is_number_of_packages_visible" invisible="1" />
                 <label for="number_of_packages" string="Number of packages" />
                 <div>
                   <field
