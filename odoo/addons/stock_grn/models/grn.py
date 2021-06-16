@@ -51,7 +51,7 @@ class GRN(models.Model):
         "Date", required=True, default=lambda self: fields.Datetime.now()
     )
     description = fields.Text("Description")
-    type_id = fields.Many2one("stock.grn.type", string="Type")
+    type_id = fields.Many2one("stock.grn.type", string="Grn Type")
     qty_pallet = fields.Integer(string="Qty Pallets")
     qty_box = fields.Integer(string="Qty Boxes")
 
