@@ -19,7 +19,6 @@
         "data/ir_filters.xml",
         "data/auth_api_key.xml",
         "data/alc_b2c_backend.xml",
-        "data/res_partner.xml",
     ],
     "demo": [],
     "post_init_hook": "post_init_hook",
