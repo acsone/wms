@@ -12,6 +12,7 @@
         <group>
           <field name="shape_file" filename="filename" />
           <field name="filename" invisible="1" />
+          <field name="tag_ids" widget="many2many_tags" options="{'no_create': True}" />
         </group>
         <footer>
           <button

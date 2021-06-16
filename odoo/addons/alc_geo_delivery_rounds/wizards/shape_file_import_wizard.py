@@ -29,6 +29,11 @@ class ShapeFileImportWizard(models.TransientModel):
     delivery_plan_id = fields.Many2one(
         "delivery.plan", default=lambda x: x._default_delivery_plan_id()
     )
+    tag_ids = fields.Many2many(
+        "round.tag",
+        string="Tags",
+        help="The tags set here will be added to the templates created by the shapefile",
+    )
 
     @api.model
     def _default_delivery_plan_id(self):
@@ -119,6 +124,7 @@ class ShapeFileImportWizard(models.TransientModel):
                 {
                     "geo_polygon_shape": wkb,
                     "geo_optimization_resource_id": shape_record.record.Nom,
+                    "tag_ids": [(6, 0, self.tag_ids.ids)],
                 }
             )
             return existing_template
@@ -130,5 +136,6 @@ class ShapeFileImportWizard(models.TransientModel):
                 "delivery_plan_id": self.delivery_plan_id.id,
                 "geo_optimization_resource_id": shape_record.record.Nom,
                 "geo_polygon_shape": wkb,
+                "tag_ids": [(6, 0, self.tag_ids.ids)],
             }
         )
