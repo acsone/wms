@@ -18,17 +18,17 @@ msgstr ""
 #. module: alc_geo_delivery_rounds
 #: model:ir.ui.view,arch_db:alc_geo_delivery_rounds.round_template_geoengine_view
 msgid "<b>Delivery plan:</b>"
-msgstr "<b>Delivery plan:</b>"
+msgstr "<b>Plan de livraison:</b>"
 
 #. module: alc_geo_delivery_rounds
 #: model:ir.ui.view,arch_db:alc_geo_delivery_rounds.res_partner_details_view_geoengine
 msgid "<b>Reference:</b>"
-msgstr "<b>Reference:</b>"
+msgstr "<b>Référence:</b>"
 
 #. module: alc_geo_delivery_rounds
 #: model:ir.ui.view,arch_db:alc_geo_delivery_rounds.res_partner_details_view_geoengine
 msgid "<b>Tags:</b>"
-msgstr "<b>Tags:</b>"
+msgstr "<b>Étiquettes:</b>"
 
 #. module: alc_geo_delivery_rounds
 #: model:ir.ui.view,arch_db:alc_geo_delivery_rounds.delivery_plan_form_view
@@ -112,7 +112,7 @@ msgstr "Nom du fichier"
 #. module: alc_geo_delivery_rounds
 #: model:geoengine.vector.layer,name:alc_geo_delivery_rounds.round_template_geoengine_vector_layer
 msgid "Geographic zones"
-msgstr "Geographic zones"
+msgstr "Zones Géographiques"
 
 #. module: alc_geo_delivery_rounds
 #: model:ir.ui.view,arch_db:alc_geo_delivery_rounds.round_template_form_view
@@ -153,7 +153,7 @@ msgstr "Dernière mise à jour le"
 #: model:ir.model.fields,help:alc_geo_delivery_rounds.field_res_partner_round_template_ids
 #: model:ir.model.fields,help:alc_geo_delivery_rounds.field_res_users_round_template_ids
 msgid "List all the round templates containing the partner"
-msgstr "List all the round templates containing the partner"
+msgstr "Liste de tout les modèle de livraison dans auxquels appartient le client"
 
 #. module: alc_geo_delivery_rounds
 #: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_delivery_plan_name
@@ -254,7 +254,7 @@ msgstr "round.instance"
 #. module: alc_geo_delivery_rounds
 #: model:ir.model,name:alc_geo_delivery_rounds.model_round_template
 msgid "round.template"
-msgstr "round.template"
+msgstr "Modèle"
 
 #. module: alc_geo_delivery_rounds
 #: model:ir.model,name:alc_geo_delivery_rounds.model_shape_file_import_wizard
