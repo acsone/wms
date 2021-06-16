@@ -32,6 +32,12 @@
           name="attrs"
         >{'invisible':[("is_gls_sent", '!=', True)]}</attribute>
             </xpath>
+          <xpath
+        expr="//field[@name='instance_customer_ids']//field[@name='rank']"
+        position="before"
+      >
+              <field name="is_gls_sent" invisible="1" />
+          </xpath>
             <xpath
         expr="//field[@name='instance_customer_ids']//button[@name='button_deliver']"
         position="attributes"
