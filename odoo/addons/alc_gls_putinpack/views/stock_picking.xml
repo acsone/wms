@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 ACSONE SA/NV
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl). -->
+<odoo>
+  <record id="view_picking_form" model="ir.ui.view">
+    <field name="name">stock.picking.form.print</field>
+    <field name="model">stock.picking</field>
+    <field name="inherit_id" ref="stock.view_picking_form" />
+    <field name="arch" type="xml">
+      <xpath expr="//page/button[@name='put_in_pack']" position="attributes">
+        <attribute
+          name="attrs"
+        >{'invisible': ['|', '|', '|', ('picking_type_subcode', '=', 'PICK'), ('operator_id', '=', False), ('state', 'not in', ['partially_available','assigned']), ('delivery_type', '=', 'gls')]}</attribute>
+      </xpath>
+      <xpath expr="//page/button[@name='put_in_pack']" position="after">
+        <button
+          attrs="{'invisible': ['|', '|', '|', ('picking_type_subcode', '=', 'PICK'), ('operator_id', '=', False), ('state', 'not in', ['partially_available','assigned']), ('delivery_type', '!=', 'gls')]}"
+          class="oe_link oe_right"
+          name="button_gls_put_in_pack"
+          type="object"
+          string="&#8627;Put in Pack"
+          context="{'default_picking_id': active_id}"
+          barcode_trigger="gls-put-in-pack"
+        />
+      </xpath>
+    </field>
+  </record>
+</odoo>

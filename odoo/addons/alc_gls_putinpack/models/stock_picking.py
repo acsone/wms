@@ -8,14 +8,16 @@ from odoo import models
 class StockPicking(models.Model):
     _inherit = "stock.picking"
 
-    def put_in_pack(self):
-        """For GLS deliveries, replace the returned action by the GLS wizard."""
-        # beware: the package can be edited in the picking before action_done is called.
-        # therefore, this module is unsafe: it's the responsibility of the user not to
-        # do that. They can still resend a package in case of error though.
-        res = super(StockPicking, self).put_in_pack()
-        final_pack_id = res["res_id"] if isinstance(res, dict) else res.id
-        if self.carrier_id.delivery_type == "gls":
+    def button_gls_put_in_pack(self):
+        """ Dedicated put in pack button for GLS
+
+        For GLS deliveries, we replace the default ve returned by the put_in_pack
+        method by a specific GLS wizard.
+        """
+        self.ensure_one()
+        res = self.put_in_pack()
+        if self.delivery_type == "gls":
+            final_pack_id = res["res_id"] if isinstance(res, dict) else res.id
             res = self._get_gls_put_in_pack_wizard_action(final_pack_id)
         return res
 

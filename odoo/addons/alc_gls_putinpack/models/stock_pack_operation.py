@@ -11,6 +11,6 @@ class StockPackOperation(models.Model):
     def manage_package_type(self):
         res = super(StockPackOperation, self).manage_package_type()
         picking = self.picking_id
-        if picking.carrier_id.delivery_type == "gls":
+        if picking.delivery_type == "gls":
             res = picking._get_gls_put_in_pack_wizard_action(self.result_package_id.id)
         return res

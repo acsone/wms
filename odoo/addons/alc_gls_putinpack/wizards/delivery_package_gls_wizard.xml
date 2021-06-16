@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 ACSONE SA/NV
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl). -->
 <odoo>
   <record model="ir.ui.view" id="delivery_package_gls_wizard_form_view">
     <field name="name">GLS: send package wizard</field>
@@ -10,13 +12,14 @@
           <field name="allowed_package_ids" invisible="1" />
           <field name="package_id_domain" invisible="1" />
           <field name="package_id" domain="package_id_domain" />
-          <field name="is_sent" invisible="1" />
-          <field name="packaging_id" />
-          <field name="shipping_weight" />
+          <field name="is_sent" invisible="1" required="1" />
+          <field name="packaging_id" required="1" />
+          <field name="shipping_weight" required="1" widget="weighing_widget" />
         </group>
         <footer>
                     <button
             name="send"
+            barcode_trigger="gls-send"
             class="btn btn-primary"
             type="object"
             string="GLS: Send"
