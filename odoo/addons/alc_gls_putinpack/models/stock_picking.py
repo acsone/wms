@@ -8,17 +8,24 @@ from odoo import models
 class StockPicking(models.Model):
     _inherit = "stock.picking"
 
-    def put_in_pack(self):
-        res = super(StockPicking, self).put_in_pack()
-        final_pack_id = res["res_id"] if isinstance(res, dict) else res.id
-        package = self.env["stock.quant.package"].browse(final_pack_id)
-        package.packaging_id = self.env.ref(
-            "delivery_carrier_label_gls.product_packaging_gls_parcel"
-        )
-        if (
-            res
-            and self.carrier_id.delivery_type == "gls"
-            and "NO_GLS_SEND" not in self.env.context
-        ):
-            self.gls_send_shipping_package(package=package)
+    def button_gls_put_in_pack(self):
+        """ Dedicated put in pack button for GLS
+
+        For GLS deliveries, we replace the default ve returned by the put_in_pack
+        method by a specific GLS wizard.
+        """
+        self.ensure_one()
+        res = self.put_in_pack()
+        if self.delivery_type == "gls":
+            final_pack_id = res["res_id"] if isinstance(res, dict) else res.id
+            res = self._get_gls_put_in_pack_wizard_action(final_pack_id)
         return res
+
+    def _get_gls_put_in_pack_wizard_action(self, package_id):
+        xmlid = "alc_gls_putinpack.delivery_package_gls_wizard_act_window"
+        window_action = self.env.ref(xmlid).read()[0]
+        vals_wizard = {"picking_id": self.id, "package_id": package_id}
+        wizard = self.env["delivery.package.gls.wizard"].create(vals_wizard)
+        wizard.onchange_package_id()
+        window_action["res_id"] = wizard.id
+        return window_action

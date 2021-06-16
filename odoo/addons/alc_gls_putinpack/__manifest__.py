@@ -9,7 +9,11 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["delivery_carrier_label_gls"],
-    "data": [],
+    "depends": [
+        "alc_weighing_widget",
+        "delivery_carrier_label_gls",
+        "web_domain_field",  # v10 (to remove at migration)
+    ],
+    "data": ["wizards/delivery_package_gls_wizard.xml", "views/stock_picking.xml"],
     "demo": [],
 }
