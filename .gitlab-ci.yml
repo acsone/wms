@@ -150,7 +150,6 @@ test-shopfloor:
     - unbuffer venv/bin/coverage run --parallel venv/bin/odoo -c odoo-ci.cfg -d
       ${DB_NAME} --stop-after-init --no-xmlrpc -i ${ADDONS_TEST} --test-enable | acsoo
       checklog
-    - if [ "${CI_COMMIT_REF_NAME}" = "master" ] ; then makepot ; fi
 
 coverage-report:
   stage: coverage
