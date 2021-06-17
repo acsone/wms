@@ -132,6 +132,7 @@
         "alc_stock_available_immediately_lot_loss",
         "alc_stock_grn_time_delay",
         "alc_stock_move_list",
+        "alc_stock_picking_no_pack_in_pack",
         "alc_stock_picking_number_package",
         "alc_stock_putaway",
         "alc_stock_put_remaining_to_reserve",
