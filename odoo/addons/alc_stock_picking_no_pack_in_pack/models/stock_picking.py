@@ -18,11 +18,7 @@ class StockPicking(models.Model):
                 # If it's not the picking OUT for the pick/ship mecanism, everything stays the same
                 return super(StockPicking, self).put_in_pack()
 
-            if (
-                pick.picking_type_code == "outgoing"
-                and pick.carrier_id.id
-                == self.env.ref("alc_delivery_carrier_gls.delivery_carrier_gls_be").id
-            ):
+            if pick.picking_type_code == "outgoing" and pick.delivery_type == "gls":
 
                 pack_operation_candidates = [
                     x
