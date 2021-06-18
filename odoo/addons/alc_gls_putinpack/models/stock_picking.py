@@ -2,7 +2,8 @@
 # Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import models
+from odoo import _, models
+from odoo.exceptions import ValidationError
 
 
 class StockPicking(models.Model):
@@ -16,6 +17,8 @@ class StockPicking(models.Model):
         """
         self.ensure_one()
         res = self.put_in_pack()
+        if not res:  # specific_stock bypasses the super raise
+            raise ValidationError(_("There is no package to process."))
         if self.delivery_type == "gls":
             final_pack_id = res["res_id"] if isinstance(res, dict) else res.id
             res = self._get_gls_put_in_pack_wizard_action(final_pack_id)
