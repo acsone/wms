@@ -16,7 +16,6 @@ class SaleOrder(models.Model):
     def _b2c_carriers(self):
         return {
             "GLS_BE": "alc_delivery_carrier_gls.delivery_carrier_gls_be",
-            "GLS_FR": "alc_delivery_carrier_gls.delivery_carrier_gls_fr",
         }
 
     @api.model
