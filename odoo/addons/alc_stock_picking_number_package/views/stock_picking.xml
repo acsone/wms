@@ -19,10 +19,10 @@
           </div>
           <field name="origin" position="after">
                 <field name="is_number_of_packages_visible" invisible="1" />
-                <label for="number_of_packages" string="Number of packages" />
+                <label for="number_of_packages_done" string="Number of packages" />
                 <div>
-                  <field
-            name="number_of_packages"
+                    <field
+            name="number_of_packages_done"
             class="oe_inline"
             attrs="{'invisible':[('is_number_of_packages_visible','=',False)]}"
             style="margin-right:5px"
