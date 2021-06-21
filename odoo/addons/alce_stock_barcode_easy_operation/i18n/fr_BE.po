@@ -17,38 +17,38 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alce_stock_barcode_easy_operation
-#: code:addons/alce_stock_barcode_easy_operation/models/stock_picking.py:106
+#: code:addons/alce_stock_barcode_easy_operation/models/stock_picking.py:111
 #, python-format
 msgid "Invalid document reference"
 msgstr "Référence de document invalide"
 
 #. module: alce_stock_barcode_easy_operation
-#: code:addons/alce_stock_barcode_easy_operation/models/stock_picking.py:84
+#: code:addons/alce_stock_barcode_easy_operation/models/stock_picking.py:89
 #, python-format
 msgid "Lot required"
 msgstr "Lot requis"
 
 #. module: alce_stock_barcode_easy_operation
-#: code:addons/alce_stock_barcode_easy_operation/models/stock_picking.py:35
+#: code:addons/alce_stock_barcode_easy_operation/models/stock_picking.py:38
 #, python-format
 msgid "No match for lot %s product %s"
 msgstr "Pas de correspondance pour le lot %s et article %s"
 
 #. module: alce_stock_barcode_easy_operation
-#: code:addons/alce_stock_barcode_easy_operation/models/stock_picking.py:47
-#: code:addons/alce_stock_barcode_easy_operation/models/stock_picking.py:77
+#: code:addons/alce_stock_barcode_easy_operation/models/stock_picking.py:51
+#: code:addons/alce_stock_barcode_easy_operation/models/stock_picking.py:82
 #, python-format
 msgid "No operation matched for product %s"
 msgstr "Pas d'opération correspondante pour l'article %s"
 
 #. module: alce_stock_barcode_easy_operation
-#: code:addons/alce_stock_barcode_easy_operation/models/stock_picking.py:55
+#: code:addons/alce_stock_barcode_easy_operation/models/stock_picking.py:60
 #, python-format
 msgid "Operation with product %s does not accept lot %s"
 msgstr "L'opération avec l'article %s n'accepte pas le lot %s"
 
 #. module: alce_stock_barcode_easy_operation
-#: code:addons/alce_stock_barcode_easy_operation/models/stock_picking.py:85
+#: code:addons/alce_stock_barcode_easy_operation/models/stock_picking.py:90
 #, python-format
 msgid "Operation with product %s need a lot"
 msgstr "L'operation avec l'article %s requiert un lot"
@@ -59,21 +59,21 @@ msgid "Transfer"
 msgstr "Transfert"
 
 #. module: alce_stock_barcode_easy_operation
-#: code:addons/alce_stock_barcode_easy_operation/models/stock_picking.py:136
+#: code:addons/alce_stock_barcode_easy_operation/models/stock_picking.py:151
 #, python-format
 msgid "Unsupported code"
 msgstr "Code non supporté"
 
 #. module: alce_stock_barcode_easy_operation
-#: code:addons/alce_stock_barcode_easy_operation/models/stock_picking.py:34
-#: code:addons/alce_stock_barcode_easy_operation/models/stock_picking.py:46
-#: code:addons/alce_stock_barcode_easy_operation/models/stock_picking.py:54
+#: code:addons/alce_stock_barcode_easy_operation/models/stock_picking.py:37
+#: code:addons/alce_stock_barcode_easy_operation/models/stock_picking.py:50
+#: code:addons/alce_stock_barcode_easy_operation/models/stock_picking.py:59
 #, python-format
 msgid "Wrong lot"
 msgstr "Mauvais lot"
 
 #. module: alce_stock_barcode_easy_operation
-#: code:addons/alce_stock_barcode_easy_operation/models/stock_picking.py:76
+#: code:addons/alce_stock_barcode_easy_operation/models/stock_picking.py:81
 #, python-format
 msgid "Wrong product"
 msgstr "Mauvais article"
