@@ -14,13 +14,13 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_stock_picking_no_pack_in_pack
-#: code:addons/alc_stock_picking_no_pack_in_pack/models/stock_picking.py:37
+#: code:addons/alc_stock_picking_no_pack_in_pack/models/stock_picking.py:33
 #, python-format
 msgid "More than one pack"
 msgstr ""
 
 #. module: alc_stock_picking_no_pack_in_pack
-#: code:addons/alc_stock_picking_no_pack_in_pack/models/stock_picking.py:77
+#: code:addons/alc_stock_picking_no_pack_in_pack/models/stock_picking.py:73
 #, python-format
 msgid "Please process some quantities to put in the pack first!"
 msgstr ""
