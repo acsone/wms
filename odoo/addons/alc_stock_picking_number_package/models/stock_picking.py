@@ -13,7 +13,7 @@ class StockPicking(models.Model):
         "Theoritical number of packages in a picking out",
         compute="_compute_theoritical_number_of_packages",
     )
-    number_of_packages = fields.Integer(
+    number_of_packages_done = fields.Integer(
         "Number of packages in a picking out", compute="_compute_number_of_packages",
     )
     is_number_of_packages_visible = fields.Boolean(
@@ -47,7 +47,10 @@ class StockPicking(models.Model):
     def _compute_theoritical_number_of_packages(self):
         for rec in self:
             if rec.is_number_of_packages_visible:
-                products_weights = rec.mapped("move_lines.product_id.weight")
+                products_weights = [
+                    move.product_id.weight * move.product_uom_qty
+                    for move in rec.move_lines
+                ]
                 rec.theoritical_number_of_packages = rec._number_of_packages(
                     products_weights, rec.carrier_id.maximum_weight_per_package
                 )
@@ -61,7 +64,7 @@ class StockPicking(models.Model):
     def _compute_number_of_packages(self):
         for rec in self:
             if rec.is_number_of_packages_visible:
-                rec.number_of_packages = len(
+                rec.number_of_packages_done = len(
                     rec.mapped("pack_operation_ids.result_package_id")
                 )
 
@@ -70,7 +73,7 @@ class StockPicking(models.Model):
     def _compute_is_number_of_packages_outranged(self):
         for rec in self:
             rec.is_number_of_packages_outranged = (
-                rec.number_of_packages > rec.theoritical_number_of_packages
+                rec.number_of_packages_done > rec.theoritical_number_of_packages
             )
 
     def _number_of_packages(self, products_weights, maximum_weight_per_package):

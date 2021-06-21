@@ -218,7 +218,7 @@ class TestStockPicking(SavepointCase):
         )
 
         ship._compute_theoritical_number_of_packages()
-        self.assertEqual(ship.theoritical_number_of_packages, 4)
+        self.assertEqual(ship.theoritical_number_of_packages, 7)
 
     def test_01(self):
         """
@@ -245,7 +245,7 @@ class TestStockPicking(SavepointCase):
                 {
                     "name": p.name,
                     "product_id": p.id,
-                    "product_uom_qty": 10,
+                    "product_uom_qty": 1,
                     "product_uom": p.uom_id.id,
                     "price_unit": 1,
                 },
