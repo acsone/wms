@@ -161,7 +161,7 @@ odoo10-addon-sale-triple-discount @ git+https://github.com/acsone/sale-workflow.
 odoo10-addon-server-environment @ git+https://github.com/acsone/server-tools.git@9f479aae04638312da0fef70cbd9b5e22d7955f3#subdirectory=setup/server_environment
 odoo10-addon-server-environment-ir-config-parameter @ git+https://github.com/acsone/server-tools.git@dcefdba5bac014076f05229ba091acd8b739e164#subdirectory=setup/server_environment_ir_config_parameter
 odoo10-addon-shopfloor-base @ git+https://github.com/acsone/wms.git@e8cf04b39c25c362a15f468d13c9b2a5e686af6d#subdirectory=setup/shopfloor_base
-odoo10-addon-shopfloor-mobile-base @ git+https://github.com/acsone/wms.git@24249a94d3270dcd92c964e8d048dd8854e32325#subdirectory=setup/shopfloor_mobile_base
+odoo10-addon-shopfloor-mobile-base @ git+https://github.com/acsone/wms.git@7c235e4d500f67c0e40452d414bd7ae641711a1c#subdirectory=setup/shopfloor_mobile_base
 odoo10-addon-slow-statement-logger @ git+https://github.com/acsone/server-tools@a619cdf9dfae7e60ff02caa3c588058283440e16#subdirectory=setup/slow_statement_logger
 odoo10-addon-sql-request-abstract @ git+https://github.com/acsone/server-tools.git@dcefdba5bac014076f05229ba091acd8b739e164#subdirectory=setup/sql_request_abstract
 odoo10-addon-stock-available==10.0.1.0.1.99.dev6
