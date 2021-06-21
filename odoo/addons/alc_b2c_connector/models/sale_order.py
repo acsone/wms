@@ -100,6 +100,8 @@ class SaleOrder(models.Model):
             raise ValidationError(
                 _("You cannot update a sale order that is already ready for delivery")
             )
+        self.action_cancel()
+        self.action_draft()
         self.order_line.unlink()
 
         self.write(

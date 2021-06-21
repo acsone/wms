@@ -693,11 +693,14 @@ class TestSalesService(CommonCase):
                 },
             ],
         }
+        self.b2c_order.action_confirm()
+        self.assertEqual(self.b2c_order.state, "sale")
 
         self.sales_service.dispatch("update", _id=self.b2c_order.b2c_ref, params=params)
 
         self.assertEqual(self.b2c_order.order_line[0].product_uom_qty, 10)
         self.assertEqual(self.b2c_order.order_line[1].product_uom_qty, 5)
+        self.assertEqual(self.b2c_order.state, "sale")
 
     def test_15(self):
         """
@@ -742,11 +745,14 @@ class TestSalesService(CommonCase):
             ],
         }
 
+        self.b2c_order.action_confirm()
+        self.assertEqual(self.b2c_order.state, "sale")
         self.sales_service.dispatch("update", _id=self.b2c_order.b2c_ref, params=params)
 
         self.assertEqual(self.b2c_order.order_line[0].product_uom_qty, 10)
         self.assertEqual(self.b2c_order.order_line[1].product_uom_qty, 35)
         self.assertEqual(len(self.b2c_order.order_line), 2)
+        self.assertEqual(self.b2c_order.state, "sale")
 
     def test_16(self):
         """
