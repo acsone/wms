@@ -29,6 +29,11 @@ msgid "Number of packages"
 msgstr ""
 
 #. module: alc_stock_picking_number_package
+#: model:ir.model.fields,field_description:alc_stock_picking_number_package.field_stock_picking_number_of_packages_done
+msgid "Number of packages in a picking out"
+msgstr ""
+
+#. module: alc_stock_picking_number_package
 #: model:ir.model.fields,field_description:alc_stock_picking_number_package.field_stock_picking_is_number_of_packages_visible
 msgid "Number of packages visible"
 msgstr ""
