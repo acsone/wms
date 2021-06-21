@@ -14,6 +14,11 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_pywebdriver
+#: model:ir.ui.view,arch_db:alc_pywebdriver.res_users_form_view
+msgid "Proxy IP"
+msgstr ""
+
+#. module: alc_pywebdriver
 #: model:ir.model.fields,field_description:alc_pywebdriver.field_res_users_pywebdriver_proxy_ip
 msgid "PyWebDriver IP Address"
 msgstr ""
