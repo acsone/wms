@@ -4,10 +4,10 @@
 
 from odoo.exceptions import ValidationError
 
-from odoo.addons.delivery_rounds.tests.test_deliveryround import TestDeliveryRound
+from odoo.addons.delivery_rounds.tests.common import DeliverDeliveryRoundTestCase
 
 
-class TestDeliveryRoundGls(TestDeliveryRound):
+class TestDeliveryRoundGls(DeliverDeliveryRoundTestCase):
     def test_deliver(self):
         carrier_gls = self.env.ref("delivery_carrier_label_gls.delivery_carrier_gls")
 
@@ -17,6 +17,11 @@ class TestDeliveryRoundGls(TestDeliveryRound):
 
         picking_gls = picks[0]
         picking_gls.carrier_id = carrier_gls
+
+        self.assertFalse(delivery_round.is_gls_sent)
+        self.assertEqual(
+            {False}, set(delivery_round.instance_customer_ids.mapped("is_gls_sent"))
+        )
 
         with self.assertRaises(ValidationError):
             delivery_round._deliver(background=False)
@@ -30,3 +35,8 @@ class TestDeliveryRoundGls(TestDeliveryRound):
         picking_gls.write({"state": "done"})
         delivery_round._deliver(background=False)  # now works as expected
         delivery_round.instance_customer_ids._deliver()  # same
+
+        self.assertTrue(delivery_round.is_gls_sent)
+        self.assertEqual(
+            {True}, set(delivery_round.instance_customer_ids.mapped("is_gls_sent"))
+        )
