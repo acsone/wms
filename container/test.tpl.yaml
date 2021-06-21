@@ -83,6 +83,9 @@ spec:
                 user=alc_b2c_rest_api_user
                 key= ${TEST_CHRONOVET_API_KEY}
                 backend_name=Chronovet
+                [delivery_carrier.GLS Belgique]
+                gls_login=${GLS_LOGIN}
+                gls_password=${GLS_PASSWORD}
           ports:
             - name: web
               containerPort: 8069

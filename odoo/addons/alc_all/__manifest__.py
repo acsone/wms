@@ -147,6 +147,7 @@
         "csv_file_import",  # to remove
         "delivery_rounds_alcyon",
         "delivery_carrier_label_gls",
+        "delivery_carrier_label_gls_server_env",
         "external_fax",
         "ir_sequence_period",
         "l10n_be_bba_fix",

@@ -14,15 +14,4 @@
       file="alc_delivery_carrier_gls/static/img/gls.jpg"
     />
   </record>
-  <record id="product_product_gls_fr" model="product.product">
-    <field name="default_code">SHIP_GLS_FR</field>
-    <field name="type">service</field>
-    <field name="sale_ok" eval="False" />
-    <field name="name">Coûts de livraison - GLS France</field>
-    <field
-      name="image"
-      type="base64"
-      file="alc_delivery_carrier_gls/static/img/gls.jpg"
-    />
-  </record>
 </odoo>
