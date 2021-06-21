@@ -16,6 +16,7 @@ class SaleOrder(models.Model):
     def _b2c_carriers(self):
         return {
             "GLS_BE": "alc_delivery_carrier_gls.delivery_carrier_gls_be",
+            "ALCYON": "__setup__.deliver_carrier_alcyon",  # TODO: put in a module :-/
         }
 
     @api.model
@@ -30,11 +31,15 @@ class SaleOrder(models.Model):
         order_data = super(SaleOrder, self)._parse_b2c_order(data, b2c_backend)
         if b2c_backend.sale_channel != "logiweb":
             return order_data
-        carrier = data.get("carrier")
-        if not carrier:
+        carrier_key = data.get("carrier")
+        if not carrier_key:
             raise ValidationError(_("Missing carrier"))
-        order_data["carrier_id"] = self.env.ref(self._b2c_carriers()[carrier]).id
+        carrier = self.env.ref(self._b2c_carriers()[carrier_key])
+        order_data["carrier_id"] = carrier.id
         if data.get("gls_parcel_shop"):
+            if carrier.delivery_type != "gls":
+                msg = _("Cannot have a gls_parcel_shop if the delivery is not GLS.")
+                raise ValidationError(msg)
             order_data["gls_parcel_shop"] = data["gls_parcel_shop"]
         # the shipping address must be the final customer
         order_data["partner_shipping_id"] = order_data["partner_id"]

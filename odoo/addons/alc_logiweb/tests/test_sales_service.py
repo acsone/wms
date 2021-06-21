@@ -6,7 +6,7 @@ import random
 import string
 
 from odoo import tools
-from odoo.exceptions import ValidationError
+from odoo.exceptions import UserError, ValidationError
 
 from odoo.addons.alc_b2c_connector.tests.common import CommonCase
 
@@ -90,6 +90,17 @@ class TestSalesService(CommonCase):
         with cls.work_on_services() as work:
             cls.sales_service = work.component(usage="sales")
 
+        # TODO: we should not need that of course, see other TODO in module
+        cls.carrier_alcyon = cls.env["delivery.carrier"].create({"name": "ALCYON"})
+        cls.env["ir.model.data"].create(
+            {
+                "module": "__setup__",
+                "name": "deliver_carrier_alcyon",
+                "model": "delivery.carrier",
+                "res_id": cls.carrier_alcyon.id,
+            }
+        )
+
     @classmethod
     def _gen_string(cls, length=10):
         return "".join(random.choice(string.ascii_letters) for _ in range(length))
@@ -127,6 +138,23 @@ class TestSalesService(CommonCase):
             ]
         )
 
+    def _get_base_params(self, **kwargs):
+        # missing the carrier and recipient, need to be provided
+        params = {
+            "id": 2,
+            "customer_ref": self.vt_partner.ref,
+            "date": ISO_DT_WITH_TZ,
+            "lines": [
+                {
+                    "line_id": 2,
+                    "sku": self.saleable_product.default_code,
+                    "quantity": 10,
+                }
+            ],
+        }
+        params.update(kwargs)
+        return params
+
     def test_01(self):
         """
         Data:
@@ -143,20 +171,7 @@ class TestSalesService(CommonCase):
         """
         self.b2c_backend.sale_channel = "web"
         recipient_info = self._gen_recipent()
-        params = {
-            "id": 2,
-            "customer_ref": self.vt_partner.ref,
-            "date": ISO_DT_WITH_TZ,
-            "recipient": recipient_info,
-            "lines": [
-                {
-                    "line_id": 2,
-                    "sku": self.saleable_product.default_code,
-                    "quantity": 10,
-                }
-            ],
-            "carrier": "GLS_BE",
-        }
+        params = self._get_base_params(recipient=recipient_info, carrier="GLS_BE")
         res = self.sales_service.dispatch("create", params=params)
         self.assertTrue(res)
         new_so = self._get_so_from_name(res["ref"])
@@ -189,21 +204,9 @@ class TestSalesService(CommonCase):
         recipient_info = self._gen_recipent()
         carrier = "GLS_BE"
         gls_parcel_shop = "GGG"
-        params = {
-            "id": 2,
-            "customer_ref": self.vt_partner.ref,
-            "date": ISO_DT_WITH_TZ,
-            "recipient": recipient_info,
-            "lines": [
-                {
-                    "line_id": 2,
-                    "sku": self.saleable_product.default_code,
-                    "quantity": 10,
-                }
-            ],
-            "carrier": carrier,
-            "gls_parcel_shop": gls_parcel_shop,
-        }
+        params = self._get_base_params(
+            recipient=recipient_info, carrier=carrier, gls_parcel_shop=gls_parcel_shop,
+        )
         res = self.sales_service.dispatch("create", params=params)
         self.assertTrue(res)
         new_so = self._get_so_from_name(res["ref"])
@@ -222,7 +225,7 @@ class TestSalesService(CommonCase):
         self.assertEqual(new_so_api["carrier"], carrier)
         self.assertEqual(new_so_api["gls_parcel_shop"], gls_parcel_shop)
 
-    def test_03(self):
+    def test_missing_carrier(self):
         """
         Data:
             An existing veterinary
@@ -235,18 +238,20 @@ class TestSalesService(CommonCase):
         """
         self.b2c_backend.sale_channel = "logiweb"
         recipient_info = self._gen_recipent()
-        params = {
-            "id": 2,
-            "customer_ref": self.vt_partner.ref,
-            "date": ISO_DT_WITH_TZ,
-            "recipient": recipient_info,
-            "lines": [
-                {
-                    "line_id": 2,
-                    "sku": self.saleable_product.default_code,
-                    "quantity": 10,
-                }
-            ],
-        }
+        params = self._get_base_params(recipient=recipient_info)
+        with self.assertRaises(ValidationError):
+            self.sales_service.dispatch("create", params=params)
+
+    def test_wrong_carrier(self):
+        self.b2c_backend.sale_channel = "logiweb"
+        params = self._get_base_params(recipient=self._gen_recipent(), carrier="GLC")
+        with self.assertRaises(UserError):
+            self.sales_service.dispatch("create", params=params)
+
+    def test_parcelshop_not_gls(self):
+        self.b2c_backend.sale_channel = "logiweb"
+        params = self._get_base_params(
+            recipient=self._gen_recipent(), carrier="ALCYON", gls_parcel_shop="GGG",
+        )
         with self.assertRaises(ValidationError):
             self.sales_service.dispatch("create", params=params)
