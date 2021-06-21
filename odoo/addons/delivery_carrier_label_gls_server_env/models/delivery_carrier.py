@@ -18,6 +18,7 @@ class DeliveryCarrier(models.Model):
         _gls_env_fields = [
             "gls_login",
             "gls_password",
+            "gls_contact_id",
             "gls_url",
             "gls_url_test",
             "gls_url_tracking",
