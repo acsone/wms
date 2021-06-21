@@ -26,6 +26,21 @@ class DeliveryGlsMixin(models.AbstractModel):
     @api.depends("picking_ids.state", "picking_ids.delivery_type")
     def _compute_is_gls_sent(self):
         """It is not sent yet if some GLS picking has not been confirmed yet."""
-        filter_picking = lambda p: p.delivery_type == "gls" and p.state != "done"
+        carriers = self.env["delivery.carrier"].search([("delivery_type", "=", "gls")])
+        # we search for picking group by round where the picking is not yet
+        # done and linked to a gls carrier
+        # round into the result are not yet sent...
+        picking_ids_field = self._fields["picking_ids"]
+        inverse_name = picking_ids_field.inverse_name
+        res = self.env["stock.picking"].read_group(
+            [
+                ("carrier_id", "in", carriers.ids),
+                ("state", "!=", "done"),
+                (inverse_name, "in", self.ids),
+            ],
+            [inverse_name],
+            inverse_name,
+        )
+        not_sent = {i[inverse_name][0] for i in res}
         for ri in self:
-            ri.is_gls_sent = not ri.picking_ids.filtered(filter_picking)
+            ri.is_gls_sent = ri.id not in not_sent
