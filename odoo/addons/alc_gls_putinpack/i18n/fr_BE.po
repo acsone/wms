@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* alc_gls_putinpack
+# 	* alc_gls_putinpack
 #
 msgid ""
 msgstr ""
@@ -10,6 +10,7 @@ msgstr ""
 "PO-Revision-Date: 2021-06-21 14:20+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -130,13 +131,23 @@ msgstr "Technical field to know if we need to force resend."
 #. module: alc_gls_putinpack
 #: code:addons/alc_gls_putinpack/wizards/delivery_package_gls_wizard.py:117
 #, python-format
-msgid "The package is too heavy compared to the maximum weight for carrier (%s kg). Please consider using more than one pack"
-msgstr "Le colis est trop lourd comparé au poids maximum autorisé par le transporteur (%s kg). Utilisez plusieurs paquets"
+msgid ""
+"The package is too heavy compared to the maximum weight for carrier (%s kg). "
+"Please consider using more than one pack"
+msgstr ""
+"Le colis est trop lourd comparé au poids maximum autorisé par le "
+"transporteur (%s kg). Utilisez plusieurs paquets"
 
 #. module: alc_gls_putinpack
 #: model:ir.model.fields,help:alc_gls_putinpack.field_delivery_package_gls_wizard_package_id
 msgid "The package to send to GLS."
 msgstr "Colis à transmettre à GLS."
+
+#. module: alc_gls_putinpack
+#: code:addons/alc_gls_putinpack/models/stock_picking.py:21
+#, python-format
+msgid "There is no package to process."
+msgstr ""
 
 #. module: alc_gls_putinpack
 #: model:ir.model,name:alc_gls_putinpack.model_stock_picking
@@ -152,4 +163,3 @@ msgstr "Wizard to prepare the package and send it to GLS."
 #: model:ir.ui.view,arch_db:alc_gls_putinpack.view_picking_form
 msgid "↳Put in Pack"
 msgstr "↳Ajouter au colis"
-
