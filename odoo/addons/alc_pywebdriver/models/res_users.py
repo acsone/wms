@@ -14,5 +14,5 @@ class ResUsers(models.Model):
         size=45,
         help="The hostname or ip address of the hardware proxy",
         required=True,
-        default="http://localhost:8000",
+        default="https://localhost:8069",
     )

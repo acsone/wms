@@ -6,11 +6,13 @@
     <record model="ir.ui.view" id="res_users_form_view">
         <field name="name">res.users.form (in alc_pywebdriver)</field>
         <field name="model">res.users</field>
-        <field name="inherit_id" ref="base.view_users_simple_form" />
+        <field name="inherit_id" ref="base.view_users_form" />
         <field name="arch" type="xml">
-            <field name="fax" position="after">
-                <field name="pywebdriver_proxy_ip" />
-            </field>
+            <xpath expr="//group[@name='messaging']" position="after">
+                <group string="Proxy IP" name="proxy">
+                    <field name="pywebdriver_proxy_ip" />
+                </group>
+            </xpath>
         </field>
     </record>
 
