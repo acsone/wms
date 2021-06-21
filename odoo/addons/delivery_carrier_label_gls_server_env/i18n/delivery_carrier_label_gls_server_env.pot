@@ -24,6 +24,16 @@ msgid "Carrier name must be unique."
 msgstr ""
 
 #. module: delivery_carrier_label_gls_server_env
+#: model:ir.model.fields,field_description:delivery_carrier_label_gls_server_env.field_delivery_carrier_gls_contact_id_env_default
+msgid "Gls contact id env default"
+msgstr ""
+
+#. module: delivery_carrier_label_gls_server_env
+#: model:ir.model.fields,field_description:delivery_carrier_label_gls_server_env.field_delivery_carrier_gls_contact_id_env_is_editable
+msgid "Gls contact id env is editable"
+msgstr ""
+
+#. module: delivery_carrier_label_gls_server_env
 #: model:ir.model.fields,field_description:delivery_carrier_label_gls_server_env.field_delivery_carrier_gls_login_env_default
 msgid "Gls login env default"
 msgstr ""
