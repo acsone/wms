@@ -6,7 +6,7 @@ import re
 from odoo import _, models
 from odoo.exceptions import UserError
 
-lot_barcode = re.compile(r"#(\w+)#(\w+)#?")
+LOT_BARCODE = re.compile(r"#(?P<product_default_code>\w+)#(?P<lot_name>\w+)#?")
 
 
 class StockPicking(models.Model):
@@ -23,16 +23,20 @@ class StockPicking(models.Model):
             # Now update the UI
             op.qty_done = op.product_qty
 
-    def _barcode_process_lot(self, m):
+    def _barcode_process_lot(self, product_default_code, lot_name):
         lot = self.env["stock.production.lot"].search(
-            [("product_id.default_code", "=", m.group(1)), ("name", "=", m.group(2))],
+            [
+                ("product_id.default_code", "=", product_default_code),
+                ("name", "=", lot_name),
+            ],
             limit=1,
         )
         if not lot:
             return {
                 "warning": {
                     "title": _("Wrong lot"),
-                    "message": _("No match for lot %s product %s") % m.groups(),
+                    "message": _("No match for lot %s product %s")
+                    % (lot_name, product_default_code),
                 }
             }
         op = self.pack_operation_product_ids.filtered(
@@ -44,7 +48,8 @@ class StockPicking(models.Model):
             return {
                 "warning": {
                     "title": _("Wrong lot"),
-                    "message": _("No operation matched for product %s") % m.group(1),
+                    "message": _("No operation matched for product %s")
+                    % product_default_code,
                 }
             }
         oplot = op.pack_lot_ids.filtered(lambda r: r.lot_id == lot)
@@ -53,7 +58,7 @@ class StockPicking(models.Model):
                 "warning": {
                     "title": _("Wrong lot"),
                     "message": _("Operation with product %s does not accept lot %s")
-                    % m.groups(),
+                    % (product_default_code, lot_name),
                 }
             }
         qty_done = op.qty_done
@@ -107,13 +112,23 @@ class StockPicking(models.Model):
         # Check if command 'alldone'
         if barcode == "C#ALLDONE":
             return self._barcode_process_alldone()
+        product_default_code = barcode
+        lot_name = None
         # Check if lot: #product#lot or #product#lot#
-        m = lot_barcode.match(barcode)
+        m = LOT_BARCODE.match(barcode)
         if m and len(m.groups()) == 2:
-            return self._barcode_process_lot(m)
+            product_default_code = m.group("product_default_code")
+            lot_name = m.group("lot_name")
+        # ckeck if ZETES code: S-product_code-lot_name-date...
+        if barcode.startswith("S-"):
+            parts = barcode.split("-")
+            product_default_code = parts[1]
+            lot_name = parts[2]
+        if lot_name:
+            return self._barcode_process_lot(product_default_code, lot_name)
         # Check product
         product = self.env["product.product"].search(
-            [("default_code", "=", barcode)], limit=1
+            [("default_code", "=", product_default_code)], limit=1
         )
         if product:
             return self._barcode_process_product(product)
