@@ -86,6 +86,7 @@ spec:
                 [delivery_carrier.GLS Belgique]
                 gls_login=${GLS_LOGIN}
                 gls_password=${GLS_PASSWORD}
+                prod_environment=False
           ports:
             - name: web
               containerPort: 8069

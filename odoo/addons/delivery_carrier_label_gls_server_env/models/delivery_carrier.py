@@ -21,6 +21,7 @@ class DeliveryCarrier(models.Model):
             "gls_url",
             "gls_url_test",
             "gls_url_tracking",
+            "prod_environment",
         ]
         res = super(DeliveryCarrier, self)._server_env_fields
         res.update({k: {} for k in _gls_env_fields})
