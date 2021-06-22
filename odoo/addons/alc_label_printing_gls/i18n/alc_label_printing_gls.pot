@@ -14,9 +14,14 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_label_printing_gls
+#: model:ir.model.fields,field_description:alc_label_printing_gls.field_res_users_printing_gls_printer_id
+msgid "Gls Printer"
+msgstr ""
+
+#. module: alc_label_printing_gls
 #: code:addons/alc_label_printing_gls/models/shipping_label.py:31
 #, python-format
-msgid "No printer assigned."
+msgid "No GLS printer assigned."
 msgstr ""
 
 #. module: alc_label_printing_gls
@@ -28,5 +33,10 @@ msgstr ""
 #. module: alc_label_printing_gls
 #: model:ir.model,name:alc_label_printing_gls.model_shipping_label
 msgid "Shipping Label"
+msgstr ""
+
+#. module: alc_label_printing_gls
+#: model:ir.model,name:alc_label_printing_gls.model_res_users
+msgid "Users"
 msgstr ""
 
