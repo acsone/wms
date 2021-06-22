@@ -129,16 +129,6 @@ msgid "Technical field to know if we need to force resend."
 msgstr "Technical field to know if we need to force resend."
 
 #. module: alc_gls_putinpack
-#: code:addons/alc_gls_putinpack/wizards/delivery_package_gls_wizard.py:117
-#, python-format
-msgid ""
-"The package is too heavy compared to the maximum weight for carrier (%s kg). "
-"Please consider using more than one pack"
-msgstr ""
-"Le colis est trop lourd comparé au poids maximum autorisé par le "
-"transporteur (%s kg). Utilisez plusieurs paquets"
-
-#. module: alc_gls_putinpack
 #: model:ir.model.fields,help:alc_gls_putinpack.field_delivery_package_gls_wizard_package_id
 msgid "The package to send to GLS."
 msgstr "Colis à transmettre à GLS."
@@ -163,3 +153,10 @@ msgstr "Wizard to prepare the package and send it to GLS."
 #: model:ir.ui.view,arch_db:alc_gls_putinpack.view_picking_form
 msgid "↳Put in Pack"
 msgstr "↳Ajouter au colis"
+
+#~ msgid ""
+#~ "The package is too heavy compared to the maximum weight for carrier (%s "
+#~ "kg). Please consider using more than one pack"
+#~ msgstr ""
+#~ "Le colis est trop lourd comparé au poids maximum autorisé par le "
+#~ "transporteur (%s kg). Utilisez plusieurs paquets"
