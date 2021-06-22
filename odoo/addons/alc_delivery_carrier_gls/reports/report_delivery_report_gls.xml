@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+<odoo>
+
+<!--    company address is removed from external_layout in  -->
+  <template
+    id="report_delivery_report_gls_document_sender"
+    inherit_id="delivery_carrier_label_gls.report_delivery_report_gls_document"
+  >
+    <xpath expr="//div[@id='packages_info']" position="before">
+      <div>
+          <h4>Sender:</h4>
+          <div name="sender_address">
+                <span
+            t-field="o.carrier_id.company_id.partner_id"
+            t-field-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}'
+          />
+          </div>
+      </div>
+    </xpath>
+  </template>
+
+</odoo>
