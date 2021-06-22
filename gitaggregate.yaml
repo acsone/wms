@@ -34,4 +34,5 @@
   merges:
     - oca 10.0
     - oca refs/pull/376/head #10.0-backport-stock-storage-type
+    - oca refs/pull/385/head # 10.0-packagemaxweight-len delivery_carrier_max_weight_constraint
   target: origin 10.0-alc_master
