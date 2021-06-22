@@ -45,8 +45,24 @@ odoo.define("web_weighing_widget", function(require) {
         });
     },
 
+    destroy: function() {
+      this.stop_weight_pooling();
+      this._super();
+    },
+
+    do_show: function() {
+      this.start_weight_pooling();
+      this._super();
+    },
+
+    do_hide: function() {
+      this.stop_weight_pooling();
+      this._super();
+    },
+
     start_weight_pooling: function() {
       const self = this;
+      this.stop_weight_pooling();
       this.weightPoolingIntervalId = setInterval(async function() {
         try {
           const response = await fetch(self.proxyUrl + "/hw_proxy/weight");
@@ -61,6 +77,7 @@ odoo.define("web_weighing_widget", function(require) {
     stop_weight_pooling: function() {
       if (this.weightPoolingIntervalId) {
         clearInterval(this.weightPoolingIntervalId);
+        this.weightPoolingIntervalId = null;
       }
     },
 
