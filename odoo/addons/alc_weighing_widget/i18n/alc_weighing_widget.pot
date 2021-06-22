@@ -15,28 +15,28 @@ msgstr ""
 
 #. module: alc_weighing_widget
 #. openerp-web
-#: code:addons/alc_weighing_widget/static/src/js/web_weighing_widget.js:104
+#: code:addons/alc_weighing_widget/static/src/js/web_weighing_widget.js:121
 #, python-format
 msgid "Connection restored"
 msgstr ""
 
 #. module: alc_weighing_widget
 #. openerp-web
-#: code:addons/alc_weighing_widget/static/src/js/web_weighing_widget.js:105
+#: code:addons/alc_weighing_widget/static/src/js/web_weighing_widget.js:122
 #, python-format
 msgid "Connection to weighing machine restored"
 msgstr ""
 
 #. module: alc_weighing_widget
 #. openerp-web
-#: code:addons/alc_weighing_widget/static/src/js/web_weighing_widget.js:94
+#: code:addons/alc_weighing_widget/static/src/js/web_weighing_widget.js:111
 #, python-format
 msgid "Could not connect to weighing machine"
 msgstr ""
 
 #. module: alc_weighing_widget
 #. openerp-web
-#: code:addons/alc_weighing_widget/static/src/js/web_weighing_widget.js:56
+#: code:addons/alc_weighing_widget/static/src/js/web_weighing_widget.js:72
 #, python-format
 msgid "Trying to reconnect..."
 msgstr ""
