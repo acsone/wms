@@ -64,3 +64,4 @@ odoo10-addon-web-m2x-options @ git+https://github.com/oca/web.git@refs/pull/1795
 
 # oca/delivery-carrier
 odoo10-addon-delivery-carrier-label-gls @ git+https://github.com/oca/delivery-carrier.git@refs/pull/376/head#subdirectory=setup/delivery_carrier_label_gls
+odoo10-addon-delivery-carrier-max-weight-constraint @ git+https://github.com/oca/delivery-carrier.git@refs/pull/385/head#subdirectory=setup/delivery_carrier_max_weight_constraint

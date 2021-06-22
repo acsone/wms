@@ -148,6 +148,7 @@
         "delivery_rounds_alcyon",
         "delivery_carrier_label_gls",
         "delivery_carrier_label_gls_server_env",
+        "delivery_carrier_max_weight_constraint",
         "external_fax",
         "ir_sequence_period",
         "l10n_be_bba_fix",
