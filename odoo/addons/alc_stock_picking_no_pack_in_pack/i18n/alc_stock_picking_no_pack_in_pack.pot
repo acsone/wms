@@ -20,6 +20,11 @@ msgid "More than one pack"
 msgstr ""
 
 #. module: alc_stock_picking_no_pack_in_pack
+#: model:ir.model,name:alc_stock_picking_no_pack_in_pack.model_stock_quant_package
+msgid "Physical Packages"
+msgstr ""
+
+#. module: alc_stock_picking_no_pack_in_pack
 #: code:addons/alc_stock_picking_no_pack_in_pack/models/stock_picking.py:73
 #, python-format
 msgid "Please process some quantities to put in the pack first!"
