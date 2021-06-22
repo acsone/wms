@@ -2,8 +2,14 @@
 # Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+from contextlib import contextmanager
+
+import mock
+
 from odoo.exceptions import ValidationError
 from odoo.tests.common import SavepointCase
+
+from odoo.addons.delivery_carrier_label_gls.tests.common import MockGlsClient
 
 
 class TestStockPicking(SavepointCase):
@@ -55,9 +61,16 @@ class TestStockPicking(SavepointCase):
                 ]
             }
         )
-        cls.partner1 = cls.env["res.partner"].create(
-            {"name": "Unittest partner", "ref": "12344566777878"}
-        )
+        vals_partner = {
+            "name": "Unittest partner",
+            "city": "Ramillies",
+            "zip": "1367",
+            "email": "rd@odoo.con",
+            "street": "9, rue des bourlottes",
+            "country_id": cls.env.ref("base.be").id,
+            "ref": "12344566777878",
+        }
+        cls.partner1 = cls.env["res.partner"].create(vals_partner)
         cls.p1 = cls.env["product.product"].create(
             {
                 "name": "Unittest P1",
@@ -253,6 +266,18 @@ class TestStockPicking(SavepointCase):
         cls.p4.categ_id = cls.categ_ali
         cls.p4.route_ids = [(6, 0, cls.route_aliment.ids)]
 
+        parcel_xmlid = "delivery_carrier_label_gls.product_packaging_gls_parcel"
+        cls.packaging_parcel = cls.env.ref(parcel_xmlid)
+
+    @contextmanager
+    def mock_gls_client(self):
+        mock_client = MockGlsClient()
+        mock_path_prefix = "odoo.addons.delivery_carrier_label_gls.models"
+        mock_path_class = "delivery_carrier.DeliveryCarrier._get_gls_client"
+        mock_path = ".".join((mock_path_prefix, mock_path_class))
+        with mock.patch(mock_path, return_value=mock_client) as mocked:
+            yield mocked, mock_client
+
     @classmethod
     def _set_qty_in_loc_only(cls, product, qty, location=None):
         location = location or cls.env.ref("stock.stock_location_stock")
@@ -310,7 +335,9 @@ class TestStockPicking(SavepointCase):
         """
         Data: One SO with 2 medoc and 2 ali
         Test Case: Process the pickings then the shipping
-        Expected Result: Only one pack medoc with added aliments in it
+        Expected Result:
+           Only one pack medoc with added aliments in it
+          The transfer is possible
         """
         sale = self._confirm_sale_order(
             partner=self.partner1,
@@ -348,6 +375,13 @@ class TestStockPicking(SavepointCase):
         self.assertEqual(final_pack.id, pack_medoc.id)
         for pack in ship.pack_operation_ids:
             self.assertEqual(pack.result_package_id.id, pack_medoc.id)
+
+        # add required values required to finalize the shipping on transfer
+        final_pack.packaging_id = self.packaging_parcel
+        final_pack.shipping_weight = 10
+
+        with self.mock_gls_client():
+            ship.do_transfer()
 
     def test_01(self):
         """
