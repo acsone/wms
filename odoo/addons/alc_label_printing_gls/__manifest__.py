@@ -10,7 +10,7 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": ["base_report_to_printer", "delivery_carrier_label_gls", "queue_job"],
-    "data": [],
+    "data": ["views/res_users.xml"],
     "demo": [],
     "installable": True,
 }

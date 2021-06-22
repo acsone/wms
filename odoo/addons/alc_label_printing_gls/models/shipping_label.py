@@ -24,11 +24,11 @@ class ShippingLabel(models.Model):
 
     @job
     def hw_print(self, printer=False):
-        printer = printer or self.env.user.printing_printer_id
+        printer = printer or self.env.user.printing_gls_printer_id
         if isinstance(printer, int):
             printer = self.env["printing.printer"].browse(printer)
         if not printer:
-            raise ValidationError(_("No printer assigned."))
+            raise ValidationError(_("No GLS printer assigned."))
         for label in self:
             content = base64.decodebytes(label.datas)
             printer.print_document(None, content, "pdf")
