@@ -5,7 +5,7 @@
 import json
 
 from odoo import _, api, fields, models
-from odoo.exceptions import UserError, ValidationError
+from odoo.exceptions import ValidationError
 
 
 class DeliveryPackageGlsWizard(models.TransientModel):
@@ -105,17 +105,3 @@ class DeliveryPackageGlsWizard(models.TransientModel):
         self.package_id.shipping_weight = self.shipping_weight
         self.package_id.packaging_id = self.packaging_id
         return self.picking_id.gls_send_shipping_package(self.package_id)
-
-    @api.constrains("shipping_weight")
-    def _check_shipping_weight(self):
-        if (
-            self.picking_id.carrier_id.maximum_weight_per_package
-            and self.package_id.shipping_weight
-            > self.picking_id.carrier_id.maximum_weight_per_package
-        ):
-            raise UserError(
-                _(
-                    "The package is too heavy compared to the maximum weight for carrier (%s kg). Please consider using more than one pack"
-                )
-                % self.picking_id.carrier_id.maximum_weight_per_package
-            )
