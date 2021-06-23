@@ -119,7 +119,7 @@ class SaleOrder(models.Model):
         }
 
         self.message_post(body=body)
-        self.action_confirm_background()
+        self.sudo().action_confirm_background()
         return self
 
     @api.model
