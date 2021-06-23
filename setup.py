@@ -28,6 +28,7 @@ setup(
     entry_points="""
         [console_scripts]
         click-odoo-cubiscan-import=scripts.cubiscan_import:main
+        click-odoo-gen-logiweb-po=scripts.gen_logiweb_po:main
     """,
     extras_require={
         "tests": ["xmlunittest", "freezegun==0.3.14", "unittest2", "responses"]
