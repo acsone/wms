@@ -2,14 +2,10 @@
 # Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from contextlib import contextmanager
-
-import mock
-
 from odoo.exceptions import ValidationError
 from odoo.tests.common import SavepointCase
 
-from odoo.addons.delivery_carrier_label_gls.tests.common import MockGlsClient
+from odoo.addons.delivery_carrier_label_gls.tests.common import mock_gls_client
 
 
 class TestStockPicking(SavepointCase):
@@ -269,15 +265,6 @@ class TestStockPicking(SavepointCase):
         parcel_xmlid = "delivery_carrier_label_gls.product_packaging_gls_parcel"
         cls.packaging_parcel = cls.env.ref(parcel_xmlid)
 
-    @contextmanager
-    def mock_gls_client(self):
-        mock_client = MockGlsClient()
-        mock_path_prefix = "odoo.addons.delivery_carrier_label_gls.models"
-        mock_path_class = "delivery_carrier.DeliveryCarrier._get_gls_client"
-        mock_path = ".".join((mock_path_prefix, mock_path_class))
-        with mock.patch(mock_path, return_value=mock_client) as mocked:
-            yield mocked, mock_client
-
     @classmethod
     def _set_qty_in_loc_only(cls, product, qty, location=None):
         location = location or cls.env.ref("stock.stock_location_stock")
@@ -380,7 +367,7 @@ class TestStockPicking(SavepointCase):
         final_pack.packaging_id = self.packaging_parcel
         final_pack.shipping_weight = 10
 
-        with self.mock_gls_client():
+        with mock_gls_client():
             ship.do_transfer()
 
     def test_01(self):

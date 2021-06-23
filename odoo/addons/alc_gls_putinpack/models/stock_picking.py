@@ -32,3 +32,17 @@ class StockPicking(models.Model):
         wizard.onchange_package_id()
         window_action["res_id"] = wizard.id
         return window_action
+
+    def do_transfer(self):
+        """If the packaging is missing on some package of a GLS picking, sending it
+           would fail anyway (on missing packaging). This means the user would have to
+           open the wizard on the correct package.
+           To simplify this process, we directly return the first missing one,
+           so that clicking the button repeatedly would eventually work.
+        """
+        gls_pickings = self.filtered(lambda p: p.delivery_type == "gls")
+        gls_packages = gls_pickings.mapped("package_ids")
+        for package in gls_packages:
+            if not package.packaging_id:
+                return self._get_gls_put_in_pack_wizard_action(package.id)
+        return super(StockPicking, self).do_transfer()
