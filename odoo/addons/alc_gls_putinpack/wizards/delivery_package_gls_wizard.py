@@ -4,7 +4,7 @@
 
 import json
 
-from odoo import _, api, fields, models
+from odoo import _, api, fields, models, registry
 from odoo.exceptions import ValidationError
 
 
@@ -102,6 +102,20 @@ class DeliveryPackageGlsWizard(models.TransientModel):
         self.picking_id.carrier_tracking_ref = ",".join(trackings)
 
     def _send(self):
-        self.package_id.shipping_weight = self.shipping_weight
-        self.package_id.packaging_id = self.packaging_id
+        # we want to keep the package information details in case sending fails
+        self.write_package_vals()
+        self.env.cr.after("rollback", lambda: self.write_package_vals(True))
         return self.picking_id.gls_send_shipping_package(self.package_id)
+
+    def write_package_vals(self, after_rollback=False):
+        vals_package = {
+            "shipping_weight": self.shipping_weight,
+            "packaging_id": self.packaging_id.id,
+        }
+        if after_rollback:
+            with api.Environment.manage():
+                with registry(self.env.cr.dbname).cursor() as new_cr:
+                    new_env = api.Environment(new_cr, self.env.uid, self.env.context)
+                    self.package_id.with_env(new_env).write(vals_package)
+        else:
+            self.package_id.write(vals_package)
