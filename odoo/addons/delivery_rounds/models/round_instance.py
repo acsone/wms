@@ -477,7 +477,7 @@ class RoundInstance(models.Model):
         return self.search(
             [
                 ("template_id", "=", template.id),
-                ("state", "not in", ("delivering", "done")),
+                ("state", "not in", ("delivering", "done", "close")),
             ],
             order="date asc, time_leave_planned asc",
             limit=1,
