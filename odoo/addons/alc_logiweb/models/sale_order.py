@@ -41,6 +41,7 @@ class SaleOrder(models.Model):
                 msg = _("Cannot have a gls_parcel_shop if the delivery is not GLS.")
                 raise ValidationError(msg)
             order_data["gls_parcel_shop"] = data["gls_parcel_shop"]
-        # the shipping address must be the final customer
-        order_data["partner_shipping_id"] = order_data["partner_id"]
+        if carrier.delivery_type == "gls":
+            # the shipping address must be the final customer
+            order_data["partner_shipping_id"] = order_data["partner_id"]
         return order_data

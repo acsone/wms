@@ -91,15 +91,19 @@ class TestSalesService(CommonCase):
             cls.sales_service = work.component(usage="sales")
 
         # TODO: we should not need that of course, see other TODO in module
-        cls.carrier_alcyon = cls.env["delivery.carrier"].create({"name": "ALCYON"})
-        cls.env["ir.model.data"].create(
-            {
-                "module": "__setup__",
-                "name": "deliver_carrier_alcyon",
-                "model": "delivery.carrier",
-                "res_id": cls.carrier_alcyon.id,
-            }
+        cls.carrier_alcyon = cls.env.ref(
+            "__setup__.deliver_carrier_alcyon", raise_if_not_found=False
         )
+        if not cls.carrier_alcyon:
+            cls.carrier_alcyon = cls.env["delivery.carrier"].create({"name": "ALCYON"})
+            cls.env["ir.model.data"].create(
+                {
+                    "module": "__setup__",
+                    "name": "deliver_carrier_alcyon",
+                    "model": "delivery.carrier",
+                    "res_id": cls.carrier_alcyon.id,
+                }
+            )
 
     @classmethod
     def _gen_string(cls, length=10):
@@ -162,7 +166,7 @@ class TestSalesService(CommonCase):
             A backend with sale_channel = web
         Test case:
             Create a new SO for a new partner and the existing veterinary
-            Specify the carrier into the SO
+            Specify the carrier GLS into the SO
         Expected result:
             The specified carrier is not taken into account in new SO created
             The partner_id  is the customer
@@ -193,7 +197,7 @@ class TestSalesService(CommonCase):
             A backend with sale_channel = logiweb
         Test case:
             Create a new SO for a new partner and the existing veterinary
-            Specify the carrier into the SO
+            Specify the carrier GLS into the SO
         Expected result:
             The specified carrier is taken into account in new SO created
             The partner_id  is the customer
@@ -255,3 +259,33 @@ class TestSalesService(CommonCase):
         )
         with self.assertRaises(ValidationError):
             self.sales_service.dispatch("create", params=params)
+
+    def test_03(self):
+        """
+        Data:
+            An existing veterinary
+            A backend with sale_channel = logiweb
+        Test case:
+            Create a new SO for a new partner and the existing veterinary
+            Specify the carrier ALCYON into the SO
+        Expected result:
+            The specified carrier is taken into account in new SO created
+            The partner_id  is the customer
+            The partner_invoice_id is the VT
+            The partner_shipping_id is the VT
+        """
+        self.b2c_backend.sale_channel = "logiweb"
+        recipient_info = self._gen_recipent()
+        carrier = "ALCYON"
+        params = self._get_base_params(recipient=recipient_info, carrier=carrier,)
+        res = self.sales_service.dispatch("create", params=params)
+        self.assertTrue(res)
+        new_so = self._get_so_from_name(res["ref"])
+        self.assertTrue(new_so)
+        self.assertEqual(
+            new_so.carrier_id, self.env.ref("__setup__.deliver_carrier_alcyon"),
+        )
+        customer_partner = self._get_customer(recipient_info)
+        self.assertEqual(new_so.partner_id, customer_partner)
+        self.assertEqual(new_so.partner_invoice_id, self.vt_partner)
+        self.assertEqual(new_so.partner_shipping_id, self.vt_partner)
