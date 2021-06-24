@@ -96,9 +96,11 @@ class DeliveryPackageGlsWizard(models.TransientModel):
 
     def abort(self):
         self.package_id.gls_cancel_shipment()
-        gls_package_refs = [s for s in self.allowed_package_ids.gls_package_ref if s]
+        gls_package_refs = filter(
+            None, self.mapped("allowed_package_ids.gls_package_ref")
+        )
         self.picking_id.gls_package_ref = ",".join(gls_package_refs)
-        trackings = [s for s in self.allowed_package_ids.parcel_tracking if s]
+        trackings = filter(None, self.mapped("allowed_package_ids.parcel_tracking"))
         self.picking_id.carrier_tracking_ref = ",".join(trackings)
 
     def _send(self):
