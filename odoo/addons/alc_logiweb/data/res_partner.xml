@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo noupdate="1">
+  <record id="logiweb_partner" model="res.partner">
+    <field name="name">Logiweb</field>
+    <field name="is_company" eval="True" />
+    <field name="supplier" eval="False" />
+    <field name="customer" eval="True" />
+    <field name="street">47-49 Op Zaemer</field>
+    <field name="zip">L-4959</field>
+    <field name="city">Bascharage</field>
+    <field name="country_id" ref="base.lu" />
+  </record>
+</odoo>
