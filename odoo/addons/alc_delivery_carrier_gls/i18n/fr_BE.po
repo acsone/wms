@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* alc_delivery_carrier_gls
+# 	* alc_delivery_carrier_gls
 #
 msgid ""
 msgstr ""
@@ -8,6 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -20,7 +21,8 @@ msgstr ""
 
 #. module: alc_delivery_carrier_gls
 #: model:ir.ui.view,arch_db:alc_delivery_carrier_gls.report_delivery_report_gls_document_sender
-msgid "<span itemprop=\"streetAddress\">\n"
+msgid ""
+"<span itemprop=\"streetAddress\">\n"
 "                     47-49 Op Zaemer<br/>\n"
 "                     L-4959 Bascharage<br/>\n"
 "                     Luxembourg\n"
