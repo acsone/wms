@@ -13,6 +13,7 @@ import unicodecsv as csv
 COL_FOURNISSEUR = u"Fournisseur"
 COL_REF_LOGIWEB = u"Ref interne"
 COL_REF_ALCYON = u"Ref Alcyon"
+COL_MARQUE = u"Marque"
 COL_QTY = u"Qty"
 
 _logger = logging.getLogger("IMPORT INVENTORY")
@@ -63,28 +64,31 @@ class InentoryToPoBuilder(object):
 
     def run(self):
         self.error_msgs = []
-        inventory_by_supplier = self._map_file_by_supplier()
+        inventory_by_po_descr = self._split_file_by_po_descr()
         _logger.info(
-            "Inventory contains %d suppliers and %d lines",
-            len(inventory_by_supplier),
-            sum([len(item) for item in inventory_by_supplier.values()]),
+            "Inventory will generate %d PO and %d lines",
+            len(inventory_by_po_descr),
+            sum([len(item) for item in inventory_by_po_descr.values()]),
         )
-        for supplier, lines in inventory_by_supplier.items():
-            po = self._create_po_from_inventory_for_supplier(supplier, lines)
+        for descr, lines in inventory_by_po_descr.items():
+            po = self._create_po_from_inventory_for_po_descr(descr, lines)
             _logger.info("PO %s created (id: %s)", po.name, po.id)
 
-    def _map_file_by_supplier(self):
+    def _split_file_by_po_descr(self):
         res = defaultdict(list)
         reader = csv.DictReader(self.csvfile, delimiter=";")
         for row in reader:
-            res[row[COL_FOURNISSEUR]].append(row)
+            descr = row[COL_FOURNISSEUR]
+            if "ALCYON" in descr.upper():
+                descr = descr + " / " + row[COL_MARQUE]
+            res[descr].append(row)
         return res
 
-    def _create_po_from_inventory_for_supplier(self, supplier, lines):
-        _logger.info(u"Create PO for Logiweb / %s", supplier)
+    def _create_po_from_inventory_for_po_descr(self, descr, lines):
+        _logger.info(u"Create PO for Logiweb / %s", descr)
         order_data = {
             "partner_id": self.logiweb_partner.id,
-            "partner_ref": u"Inventaire: " + supplier,
+            "partner_ref": u"Inventaire: " + descr,
         }
         updated_data = self.PurchaseOrder.play_onchanges(order_data, order_data.keys())
         order_data.update(updated_data)
