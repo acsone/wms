@@ -10,7 +10,7 @@ class StockPackOperationSqlView(models.Model):
     _name = "stock.pack.operation.operator"
     _auto = False
 
-    write_date = fields.Datetime(readonly=True)
+    date_done = fields.Datetime(readonly=True)
     qty_done = fields.Float(readonly=True)
     picking_destination_location_id = fields.Many2one(
         "stock.location", related="picking_id.location_dest_id", readonly=True
@@ -23,6 +23,7 @@ class StockPackOperationSqlView(models.Model):
         query = """
               SELECT
                   spo.*,
+                  sp.date_done as date_done,
                   sp.operator_id as operator_id
               FROM
                   stock_pack_operation as spo
