@@ -30,5 +30,5 @@ class ShippingLabel(models.Model):
         if not printer:
             raise ValidationError(_("No GLS printer assigned."))
         for label in self:
-            content = base64.decodebytes(label.datas)
+            content = base64.b64decode(label.datas)
             printer.print_document(None, content, "pdf")
