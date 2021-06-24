@@ -189,6 +189,12 @@ msgid "Cut"
 msgstr "Couper"
 
 #. module: specific_zetes
+#: model:ir.model.fields,field_description:specific_zetes.field_stock_pack_operation_operator_date_done
+#, fuzzy
+msgid "Date done"
+msgstr "Qté faite"
+
+#. module: specific_zetes
 #: model:ir.ui.view,arch_db:specific_zetes.zetes_logger_view_form
 msgid "Debug"
 msgstr ""
@@ -934,11 +940,6 @@ msgid "Wizard"
 msgstr "Assistant"
 
 #. module: specific_zetes
-#: model:ir.model.fields,field_description:specific_zetes.field_stock_pack_operation_operator_write_date
-msgid "Write date"
-msgstr "Write date"
-
-#. module: specific_zetes
 #: code:addons/specific_zetes/wizard/manage_uop.py:157
 #, python-format
 msgid "You cannot pick more than %s unit of the product %s"
@@ -1043,6 +1044,9 @@ msgstr "stock.pack.operation.operator"
 #: model:ir.model,name:specific_zetes.model_view_picking_line
 msgid "view.picking.line"
 msgstr "view.picking.line"
+
+#~ msgid "Write date"
+#~ msgstr "Write date"
 
 #~ msgid "zetes.logger"
 #~ msgstr "zetes.logger"

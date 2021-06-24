@@ -179,6 +179,11 @@ msgid "Cut"
 msgstr ""
 
 #. module: specific_zetes
+#: model:ir.model.fields,field_description:specific_zetes.field_stock_pack_operation_operator_date_done
+msgid "Date done"
+msgstr ""
+
+#. module: specific_zetes
 #: model:ir.ui.view,arch_db:specific_zetes.zetes_logger_view_form
 msgid "Debug"
 msgstr ""
@@ -916,11 +921,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:specific_zetes.field_manage_uop_line_wizard_id
 #: model:ir.model.fields,field_description:specific_zetes.field_view_picking_line_wizard_id
 msgid "Wizard"
-msgstr ""
-
-#. module: specific_zetes
-#: model:ir.model.fields,field_description:specific_zetes.field_stock_pack_operation_operator_write_date
-msgid "Write date"
 msgstr ""
 
 #. module: specific_zetes
