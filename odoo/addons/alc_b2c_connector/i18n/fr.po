@@ -222,7 +222,6 @@ msgstr "Autoriser les backorder"
 
 #. module: alc_b2c_connector
 #: model:ir.model.fields,field_description:alc_b2c_connector.field_alc_b2c_backend_sale_channel
-#: model:ir.model.fields,field_description:alc_b2c_connector.field_sale_order_line_sale_channel
 msgid "Sale channel"
 msgstr "Canal de vente"
 
@@ -249,7 +248,7 @@ msgstr ""
 
 #. module: alc_b2c_connector
 #: code:addons/alc_b2c_connector/models/sale_order.py:37
-#: code:addons/alc_b2c_connector/models/sale_order_line.py:21
+#: code:addons/alc_b2c_connector/models/sale_order_line.py:18
 #: sql_constraint:sale.order:0 sql_constraint:sale.order.line:0
 #, python-format
 msgid "This b2c reference already exists"
