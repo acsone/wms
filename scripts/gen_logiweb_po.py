@@ -80,12 +80,17 @@ class InentoryToPoBuilder(object):
         for row in reader:
             descr = row[COL_FOURNISSEUR]
             if "ALCYON" in descr.upper():
-                descr = descr + " / " + row[COL_MARQUE]
+                brand = row[COL_MARQUE]
+                if "Royal" in brand:
+                    brand = "Royal Canin"
+                elif "Hill's" in brand:
+                    brand = "Hill's"
+                descr = descr + " / " + brand
             res[descr].append(row)
         return res
 
     def _create_po_from_inventory_for_po_descr(self, descr, lines):
-        _logger.info(u"Create PO for Logiweb / %s", descr)
+        _logger.info(u"Create PO for Logiweb / %s (%d lines)", descr, len(lines))
         order_data = {
             "partner_id": self.logiweb_partner.id,
             "partner_ref": u"Inventaire: " + descr,
@@ -143,7 +148,7 @@ def main(env, csvfile):
             #    writer.writerows({k:v.encode('utf8') for k,v in msg.items()})
         _logger.info("%d lines not procesed", len(builder.error_msgs))
 
-    env.cr.commit()
+    env.cr.rollback()
 
 
 if __name__ == "__main__":
