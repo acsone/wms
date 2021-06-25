@@ -11,17 +11,12 @@ class EsbSaleExportMapper(Component):
 
     @mapping
     def compute_customer_esbref(self, record):
-        if record.sale_channel == "placedesvetos":
-            return {
-                "customer_id": self.env.ref(
-                    "alc_placedesvetos.res_partner_placedesvetos"
-                ).ref
-            }
+        if record.b2c_ref:
+            return {"customer_id": self.env.ref("alc_b2c_partner.b2c_customer").ref}
         return super(EsbSaleExportMapper, self).compute_customer_esbref(record)
 
     @mapping
     def compute_channel(self, record):
-        # Phone channel '01' is the default
-        if record.sale_channel == "placedesvetos":
-            return {"channel": "01"}  # phone
+        if record.b2c_ref:
+            return {"channel": "01"}
         return super(EsbSaleExportMapper, self).compute_channel(record)
