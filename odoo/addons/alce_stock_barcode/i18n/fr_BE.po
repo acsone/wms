@@ -17,7 +17,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alce_stock_barcode
-#: code:addons/alce_stock_barcode/controllers/main.py:72
+#: code:addons/alce_stock_barcode/controllers/main.py:76
 #, python-format
 msgid "No internal picking type. Please configure one in warehouse settings."
 msgstr ""
@@ -25,7 +25,7 @@ msgstr ""
 "configuration de l'entrepôt."
 
 #. module: alce_stock_barcode
-#: code:addons/alce_stock_barcode/controllers/main.py:79
+#: code:addons/alce_stock_barcode/controllers/main.py:83
 #, python-format
 msgid "No picking or location corresponding to barcode %(barcode)s"
 msgstr "Pas de picking ou d'emplacement correspondant au barcode %(barcode)s"
