@@ -10,7 +10,11 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "category": "Stock Management",
-    "depends": ["delivery_carrier_label_gls", "delivery_rounds"],
+    "depends": [
+        "delivery_carrier_label_gls",
+        "delivery_rounds",
+        "alc_delivery_rounds_operator",
+    ],
     "data": ["views/round_instance.xml"],
     "installable": True,
     "application": False,
