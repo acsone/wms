@@ -123,7 +123,7 @@ class StockPicking(models.Model):
         if barcode.startswith("S-"):
             parts = barcode.split("-")
             product_default_code = parts[1]
-            lot_name = parts[2]
+            lot_name = parts[2].strip()
         if lot_name:
             return self._barcode_process_lot(product_default_code, lot_name)
         # Check product
