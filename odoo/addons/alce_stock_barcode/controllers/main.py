@@ -16,6 +16,10 @@ class StockBarcodeControllerFix(StockBarcodeController):
         action_picking_form = request.env.ref("stock_barcode.stock_picking_action_form")
         action_picking_form = action_picking_form.read()[0]
 
+        if barcode.startswith("OUT/"):
+            # REMOVE ME ONCE ZETES is fixed
+            barcode = "WH/" + barcode
+
         # If the barcode represents a picking, open it
         corresponding_picking = request.env["stock.picking"].search(
             [
