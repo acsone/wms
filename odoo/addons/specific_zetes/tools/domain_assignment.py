@@ -347,7 +347,8 @@ WHERE picking.picking_type_subcode = 'PICK'
             "ORDER BY picking.operator_id, "
             "round.date, "
             "round.time_picking_planned, "
-            "picking.rank DESC "
+            "picking.rank DESC,"
+            "picking.id  ASC"
             "LIMIT 1 "
             "FOR UPDATE OF picking SKIP LOCKED;"
         )
