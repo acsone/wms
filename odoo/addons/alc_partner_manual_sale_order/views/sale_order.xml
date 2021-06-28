@@ -10,7 +10,7 @@
       <header position="attributes">
         <attribute
           name="attrs"
-        >{'invisible': [("manual_sale_order_allowed", "=", True)]}</attribute>
+        >{'invisible': [("manual_sale_order_allowed", "!=", True)]}</attribute>
       </header>
       <header position="after">
         <div
