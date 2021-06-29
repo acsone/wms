@@ -20,6 +20,10 @@ class StockBarcodeControllerFix(StockBarcodeController):
             # REMOVE ME ONCE ZETES is fixed
             barcode = "WH/" + barcode
 
+        if "WH/" in barcode:
+            # REMOVE ME ONCE ZETES is fixed
+            barcode = barcode.strip()
+
         # If the barcode represents a picking, open it
         corresponding_picking = request.env["stock.picking"].search(
             [
