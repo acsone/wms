@@ -284,7 +284,19 @@ FROM stock_picking AS picking
   INNER JOIN round_instance AS round
     ON picking.delivery_round_id = round.id
 WHERE picking.picking_type_subcode = 'PICK'
-      AND picking.state IN ('partially_available', 'assigned')
+      AND  (
+        (
+            picking.state IN ('partially_available', 'assigned')
+            AND
+            picking.move_type <> 'one'
+        )
+        OR
+        (
+            picking.state = 'assigned'
+            AND
+            picking.move_type = 'one'
+        )
+      )
       AND pick_type.zetes_picking_type = %(picking_type)s
       AND EXISTS(SELECT 1
                  FROM stock_pack_operation AS operation

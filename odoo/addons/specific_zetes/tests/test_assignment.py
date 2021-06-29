@@ -1,5 +1,10 @@
 # -*- coding: utf-8 -*-
+from datetime import datetime
+
 import mock
+from dateutil.relativedelta import relativedelta
+
+from odoo import fields
 
 from odoo.addons.queue_job.job import Job
 from odoo.addons.queue_job.tests.common import JobMixin
@@ -14,6 +19,8 @@ from .zetes_test_classes import ROUND_CODE, ZetesTest
 class TestAssignemnt(ZetesTest, JobMixin):
     def test_requ_assignment(self):
         # Check with no current picking
+        # picking.move_type = "direct"
+        # picking.state = "assigned"
         domain = Assignment(self._default_header(), mock.MagicMock(name="Savepoint()"))
         request_params = Parameters(domain, action="requ")
         request_params.update(
@@ -64,6 +71,120 @@ class TestAssignemnt(ZetesTest, JobMixin):
         result_str = domain.requ(request_params)
         result = self.format_result(result_str)
         self.assertEqual(result.groupNum, str(self.picking.id))
+
+    def test_get_picking_01(self):
+        """
+        Get picking should return picking partially_available and assigned picking if move_type = direct
+        or assigned picking only if move_type = one (all at once)
+        """
+        picking = self.picking.sudo()
+
+        domain = Assignment(self._default_header(), mock.MagicMock(name="Savepoint()"))
+        request_params = Parameters(domain, action="requ")
+        request_params.update(
+            {
+                "Cri01": None,
+                "Cri02": None,
+                "assignmentType": constants.PICKING_ASSIGNMENT,
+                "requestType": "1",
+            }
+        )
+
+        self.partner.write({"is_passport_required": True})
+        self.picking.picking_type_id.passport = True
+
+        self.assertEqual(
+            self.picking.picking_type_id.zetes_picking_type,
+            constants.PICKING_ASSIGNMENT,
+        )
+
+        # Search for a picking
+        self.assertEqual(picking.state, "assigned")
+        self.assertEqual(picking.move_type, "direct")
+        res = domain.get_picking(request_params)
+        self.assertEqual(res, picking)
+
+        # cancel picking
+        self.env.user.write(
+            {
+                "groups_id": [
+                    (4, self.env.ref("stock_constraint.group_picking_cancel").id, 0)
+                ]
+            }
+        )
+
+        delivery_round = picking.delivery_round_id
+        # makes delivery-rounf assignable
+        delivery_round.button_resetdraft()
+        picking.action_cancel()
+
+        res = domain.get_picking(request_params)
+        self.assertFalse(res)
+
+        picking.action_uncancel()
+        # add a move for a an unavailable product
+        product_2 = self.product_1.copy()
+        picking.write(
+            {
+                "move_lines": [
+                    (
+                        0,
+                        0,
+                        {
+                            "name": "Test medoc 2",
+                            "product_id": product_2.id,
+                            "product_uom_qty": 10,
+                            "product_uom": self.env.ref("product.product_uom_unit").id,
+                            "picking_type_id": self.picking_type_medoc.id,
+                            "location_id": picking.location_id.id,
+                            "location_dest_id": picking.location_dest_id.id,
+                        },
+                    )
+                ],
+            }
+        )
+
+        picking.action_confirm()
+        picking.action_assign()
+        self.assertEqual("partially_available", picking.state)
+        self.assertEqual("direct", picking.move_type)
+        res = domain.get_picking(request_params)
+        self.assertEqual(res, picking)
+
+        # change move_type to all_at_once -> the picking should no more be
+        # available for zetes
+        self.assertEqual("partially_available", picking.state)
+        picking.move_type = "one"
+        res = domain.get_picking(request_params)
+        self.assertFalse(res)
+
+        # once all the products are available, all at once pickings are
+        # available for zetes
+
+        one_year = datetime.now() + relativedelta(years=1)
+        lot_product_2 = self.env["stock.production.lot"].create(
+            {
+                "name": "000000002",
+                "product_id": product_2.id,
+                "removal_date": fields.Datetime.to_string(one_year),
+            }
+        )
+        update_qty_wizard = self.env["stock.change.product.qty"].create(
+            {
+                "product_id": product_2.id,
+                "product_tmpl_id": product_2.product_tmpl_id.id,
+                "new_quantity": 100,
+                "lot_id": lot_product_2.id,
+                "location_id": self.location_product_1.id,
+            }
+        )
+        update_qty_wizard.change_product_qty()
+
+        picking.action_assign()
+        self.assertEqual("assigned", picking.state)
+        self.assertEqual("one", picking.move_type)
+        res = domain.get_picking(request_params)
+        self.assertEqual(res, picking)
 
     def test_requ_assignment_operator(self):
         """
