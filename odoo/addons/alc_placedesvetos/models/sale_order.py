@@ -12,3 +12,8 @@ class SaleOrder(models.Model):
     sale_channel = fields.Selection(
         selection_add=[("placedesvetos", u"Place des Vétos")]
     )
+
+    def _get_b2c_sale_channels(self):
+        res = super(SaleOrder, self)._get_b2c_sale_channels()
+        res.append("placedesvetos")
+        return res

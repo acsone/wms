@@ -12,6 +12,11 @@ class SaleOrder(models.Model):
 
     sale_channel = fields.Selection(selection_add=[("logiweb", "Logiweb")])
 
+    def _get_b2c_sale_channels(self):
+        res = super(SaleOrder, self)._get_b2c_sale_channels()
+        res.append("logiweb")
+        return res
+
     @api.model
     def _b2c_carriers(self):
         return {

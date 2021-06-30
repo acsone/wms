@@ -4,7 +4,6 @@
 
 import os
 
-import mock
 import requests
 
 from odoo.addons.connector_esb.tests import common
@@ -21,10 +20,10 @@ def post_ret_status(url, data, headers, auth):
     return resp
 
 
-class TestExportSaleOrder(common.ESBTestCase):
+class ExportB2cCommon(common.ESBTestCase):
     @classmethod
     def setUpClass(cls):
-        super(TestExportSaleOrder, cls).setUpClass()
+        super(ExportB2cCommon, cls).setUpClass()
         os.environ["ODOO_ESB_WS_USER"] = "ws_user"
         os.environ["ODOO_ESB_WS_BASE_URL"] = "https://test.com"
         os.environ["ODOO_ESB_WS_PWD"] = "pwd"
@@ -36,12 +35,12 @@ class TestExportSaleOrder(common.ESBTestCase):
         # create a b2c_partner
         cls.b2c_partner = cls.env["res.partner"].create(
             {
-                "name": "EXISTING placedesvetos PARTNER",
+                "name": "EXISTING PARTNER",
                 "is_b2c_customer": True,
                 "alcyon_category_id": cls.env.ref(
                     "specific_partner.partner_category_student"
                 ).id,
-                "ref": "PLACEDESVETOS_ABC",
+                "ref": "REF",
                 "email": "b2c@b2c.be",
             }
         )
@@ -92,7 +91,7 @@ class TestExportSaleOrder(common.ESBTestCase):
                 "default_code": "12345",
             }
         )
-        cls.placesdesvetos_order = cls.env["sale.order"].create(
+        cls.order = cls.env["sale.order"].create(
             {
                 "b2c_ref": "SO1",
                 "partner_id": cls.b2c_partner.id,
@@ -112,43 +111,7 @@ class TestExportSaleOrder(common.ESBTestCase):
                         },
                     )
                 ],
-                "sale_channel": "placedesvetos",
+                # "sale_channel": logiweb, chronovet, etc*
             }
         )
-
-    def test_00(self):
-        """
-        Data:
-            A sale order with sale_channel set to PLACEDESVETOS
-        Test case:
-            Map SO info to ESB
-        Expected result;
-            The customer id into the exported data is the one from PLACEDESVETOS
-            The sale_channel is 01 (phone)
-        """
-        with self.backend.work_on("sale.order") as work:
-            mapper = work.component(usage="export.mapper")
-            values = mapper.map_record(self.placesdesvetos_order).values()
-        self.assertEqual(
-            values["customer_id"],
-            self.env.ref("alc_placedesvetos.res_partner_placedesvetos").ref,
-        )
-        self.assertEqual(values["channel"], "01")
-
-    @mock.patch("requests.post", side_effect=post_ret_status)
-    def test_01(self, post):
-        """
-        Data:
-            A sale order with sale_channel set to PLACEDESVETOS
-        Test case:
-            Export the SO to magento
-        Expected result;
-            The SO is exported
-        """
-        # Test export of a sale order catching the put request.
-        self.placesdesvetos_order.action_confirm()
-        with self.backend.work_on("sale.order") as work:
-            exporter = work.component(usage="record.exporter")
-            exporter.run(self.placesdesvetos_order)
-        post.assert_called_once()
-        self.assertEqual(self.placesdesvetos_order.esb_ref, "1000000348")
+        # note we can't put a b2c sale_channel since we don't depend on the specific b2c modules

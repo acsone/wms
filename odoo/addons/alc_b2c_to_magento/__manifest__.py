@@ -6,11 +6,11 @@
     "name": "Alc B2c To Magento",
     "description": """
         Alcyon: Manage export of B2C info to magento""",
-    "version": "10.0.1.0.0",
+    "version": "10.0.2.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["alc_chronovet", "connector_esb"],
+    "depends": ["connector_esb", "alc_b2c_connector"],
     "data": [],
     "demo": [],
 }
