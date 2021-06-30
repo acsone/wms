@@ -82,7 +82,7 @@ class SaleOrder(models.Model):
             body = _("Cannot cancel order %s , being process already") % self.name
         else:
             body = _("Order  %s cancelled from b2c api.") % self.name
-            self.action_cancel()
+            self.sudo().action_cancel()
 
         self.message_post(body=body)
         return self
@@ -100,7 +100,8 @@ class SaleOrder(models.Model):
             raise ValidationError(
                 _("You cannot update a sale order that is already ready for delivery")
             )
-        self.action_cancel()
+
+        self.sudo().action_cancel()
         self.action_draft()
         self.order_line.unlink()
 
