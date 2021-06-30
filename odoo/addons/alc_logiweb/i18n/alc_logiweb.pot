@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_logiweb
-#: code:addons/alc_logiweb/models/sale_order.py:41
+#: code:addons/alc_logiweb/models/sale_order.py:46
 #, python-format
 msgid "Cannot have a gls_parcel_shop if the delivery is not GLS."
 msgstr ""
@@ -25,7 +25,7 @@ msgid "Logiweb Product Assortment"
 msgstr ""
 
 #. module: alc_logiweb
-#: code:addons/alc_logiweb/models/sale_order.py:36
+#: code:addons/alc_logiweb/models/sale_order.py:41
 #, python-format
 msgid "Missing carrier"
 msgstr ""
