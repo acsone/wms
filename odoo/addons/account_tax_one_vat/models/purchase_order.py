@@ -2,37 +2,17 @@
 # Copyright 2020 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
-from odoo import _, api, models
-from odoo.exceptions import ValidationError
+from odoo import api, models
 
 
 class PurchaseOrderLine(models.Model):
-    _inherit = "purchase.order.line"
+    _name = "purchase.order.line"
+    _inherit = ["purchase.order.line", "one.vat.mixin"]
 
     @api.constrains("taxes_id")
     def _check_only_one_vat(self):
-        vat_group = self.env.ref("specific_data.vat_tax_group")
-        vat_taxes = self.taxes_id.filtered(lambda r: r.tax_group_id == vat_group)
-        if len(vat_taxes) > 1:
-            raise ValidationError(
-                _(
-                    "For %s multiple tax from the VAT group are selected. Only one is allowed."
-                )
-                % (self.product_id.display_name,)
-            )
+        self._check_only_one_vat_tax_field("taxes_id")
 
     @api.onchange("taxes_id")
     def _onchange_tax_id(self):
-        """Warning if multiple VAT taxes are selected."""
-        try:
-            self._check_only_one_vat()
-        except ValidationError:
-            warning_mess = {
-                "title": _("More than one VAT tax selected!"),
-                "message": _(
-                    "You selected more than one tax of type VAT on a "
-                    "line, it does not make sense."
-                ),
-            }
-            return {"warning": warning_mess}
-        return {}
+        return self._onchange_one_vat_tax_field("taxes_id")
