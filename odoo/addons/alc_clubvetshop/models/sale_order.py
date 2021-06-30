@@ -10,3 +10,8 @@ class SaleOrder(models.Model):
     _inherit = "sale.order"
 
     sale_channel = fields.Selection(selection_add=[("clubvetshop", "ClubVetShop")])
+
+    def _get_b2c_sale_channels(self):
+        res = super(SaleOrder, self)._get_b2c_sale_channels()
+        res.append("clubvetshop")
+        return res
