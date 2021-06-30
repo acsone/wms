@@ -205,7 +205,7 @@ msgid "Sale"
 msgstr "Vente"
 
 #. module: alc_b2c_connector
-#: code:addons/alc_b2c_connector/models/sale_order.py:116
+#: code:addons/alc_b2c_connector/models/sale_order.py:117
 #, python-format
 msgid "Sale Order  %(sale_order)s updated from json: %(json_file)s."
 msgstr ""
@@ -267,7 +267,7 @@ msgid "Unknown country code %s"
 msgstr ""
 
 #. module: alc_b2c_connector
-#: code:addons/alc_b2c_connector/models/sale_order.py:166
+#: code:addons/alc_b2c_connector/models/sale_order.py:167
 #, python-format
 msgid "Unknowns SKU(s): %s , "
 msgstr "SKU(s) inconnu(s): %s , "
@@ -279,7 +279,7 @@ msgid "You cannot update a sale order that is already ready for delivery"
 msgstr ""
 
 #. module: alc_b2c_connector
-#: code:addons/alc_b2c_connector/models/sale_order.py:242
+#: code:addons/alc_b2c_connector/models/sale_order.py:248
 #, python-format
 msgid "You cannot use this sale channel for manuel order"
 msgstr ""
