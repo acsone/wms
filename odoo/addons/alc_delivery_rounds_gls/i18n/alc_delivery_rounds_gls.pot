@@ -36,6 +36,11 @@ msgid "Last Modified on"
 msgstr ""
 
 #. module: alc_delivery_rounds_gls
+#: model:ir.model,name:alc_delivery_rounds_gls.model_stock_picking
+msgid "Transfer"
+msgstr ""
+
+#. module: alc_delivery_rounds_gls
 #: code:addons/alc_delivery_rounds_gls/models/delivery_gls_mixin.py:23
 #, python-format
 msgid "You need to confirm manually all GLS packages"
