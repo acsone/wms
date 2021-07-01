@@ -31,7 +31,7 @@ class StockPicking(models.Model):
         fields since we must avoid that the constrains is rechecked each
         time the list change on the delivery round.
         """
-        for rec in self.filtered(lambda s: s._check_operator()):
+        for rec in self.filtered(lambda s: s._should_check_operator()):
             if rec.operator_id not in rec.delivery_round_id.operator_ids:
                 raise ValidationError(
                     _(
