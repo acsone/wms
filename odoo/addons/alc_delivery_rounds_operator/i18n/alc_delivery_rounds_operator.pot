@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_delivery_rounds_operator
-#: code:addons/alc_delivery_rounds_operator/models/stock_picking.py:36
+#: code:addons/alc_delivery_rounds_operator/models/stock_picking.py:37
 #, python-format
 msgid "Operator {operator_name} is not into the list of allowed operators for the delivery round {round_name} ({allowed_operator_names})."
 msgstr ""
