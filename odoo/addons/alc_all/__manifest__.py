@@ -181,6 +181,7 @@
         "stock_location_report",
         "stock_lot_update",
         "stock_orderpoint_product",
+        "stock_picking_assignment_one_policy",
         "stock_putaway_defaultfixedlocation",
         "stock_putaway_route",
         "stock_valuation",
