@@ -10,6 +10,15 @@ class StockPicking(models.Model):
 
     _inherit = "stock.picking"
 
+    def _should_check_operator(self):
+        self.ensure_one()
+        return (
+            self.state not in ("done", "cancel")
+            and self.delivery_round_id.operator_ids
+            and self.operator_id
+            and self.delivery_round_id
+        )
+
     @api.constrains("operator_id", "delivery_round_id")
     def _check_allowed_operator(self):
         """ Check operator is allowed
@@ -22,15 +31,7 @@ class StockPicking(models.Model):
         fields since we must avoid that the constrains is rechecked each
         time the list change on the delivery round.
         """
-        for rec in self:
-            if rec.state in ("donce", "cancel"):
-                continue
-            if not rec.delivery_round_id.operator_ids:
-                continue
-            if not rec.operator_id:
-                continue
-            if not rec.delivery_round_id:
-                continue
+        for rec in self.filtered(lambda s: s._check_operator()):
             if rec.operator_id not in rec.delivery_round_id.operator_ids:
                 raise ValidationError(
                     _(
