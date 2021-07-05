@@ -19,22 +19,32 @@
           </div>
           <field name="origin" position="after">
                 <field name="is_number_of_packages_visible" invisible="1" />
-                <label for="number_of_packages_done" string="Number of packages" />
-                <div>
-                    <field
-            name="number_of_packages_done"
-            class="oe_inline"
+                <h1>
+                <label
+            for="number_of_packages_done"
+            string="Number of packages"
+            style="font-size:30px"
             attrs="{'invisible':[('is_number_of_packages_visible','=',False)]}"
-            style="margin-right:5px"
           />
+                </h1>
+                <div
+          attrs="{'invisible':[('is_number_of_packages_visible','=',False)]}"
+        >
+                <h1>
+                    <field
+              name="number_of_packages_done"
+              class="oe_inline"
+              attrs="{'invisible':[('is_number_of_packages_visible','=',False)]}"
+              style="margin-right:5px,font-size:30px"
+            />
                   /
                   <field
-            name="theoritical_number_of_packages"
-            nolabel="1"
-            class="oe_inline"
-            attrs="{'invisible':[('is_number_of_packages_visible','=',False)]}"
-            style="margin-left:5px"
-          />
+              name="theoritical_number_of_packages"
+              nolabel="1"
+              class="oe_inline"
+              attrs="{'invisible':[('is_number_of_packages_visible','=',False)]}"
+              style="margin-left:5px,font-size:30px"
+            /></h1>
                 </div>
           </field>
         </field>
