@@ -188,7 +188,7 @@ class SaleOrder(models.Model):
             b2c_ref, raise_if_notfound=False
         )
         if partner:
-            # DO WE HAVE TO UPDATE ADDRESS INFO?
+            partner._update_b2c_data(data["recipient"])
             return partner
         name = customer_info["first_name"]
         last_name = customer_info.get("last_name")

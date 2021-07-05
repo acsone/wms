@@ -36,6 +36,11 @@ class ResPartner(models.Model):
         data.pop("id", None)
         b2c_ref = self._b2c_id_to_b2c_ref(b2c_id, b2c_backend)
         partner = self._get_partner_by_ref(b2c_ref)
+        partner._update_b2c_data(data)
+        return partner
+
+    def _update_b2c_data(self, data):
+        self.ensure_one()
         if data.get("country_code"):
             country = self.env["res.country"]._get_by_code(data.pop("country_code"))
             data["country_id"] = country.id
@@ -46,9 +51,8 @@ class ResPartner(models.Model):
             data["name"] = name
         if data.get("title"):
             data["title"] = self.env.ref(TITLE_XML_ID_BY_B2C_KEY[data["title"]]).id
-        partner._update_b2c_recipient_validate_data(data)
-        partner.write(data)
-        return partner
+        self._update_b2c_recipient_validate_data(data)
+        return self.write(data)
 
     @api.model
     def _get_partner_by_ref(self, b2c_ref, raise_if_notfound=True):
