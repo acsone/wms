@@ -1,0 +1,27 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* delivery_carrier_label_gls
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-06-18 06:35+0000\n"
+"PO-Revision-Date: 2021-06-18 06:35+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: delivery_carrier_label_gls
+#: model:ir.actions.report.xml,name:delivery_carrier_label_gls.report_delivery_report_gls
+#: model:ir.model.fields,field_description:delivery_carrier_label_gls.field_stock_quant_package_report_id
+msgid "GLS Delivery Report"
+msgstr "Rapports d'expéditions GLS Belgique"
+
+#. module: delivery_carrier_label_gls
+#: model:ir.ui.view,arch_db:delivery_carrier_label_gls.report_delivery_report_gls_document
+msgid "GLS Delivery Report:"
+msgstr "Rapport d'expéditions GLS Belgique:"
