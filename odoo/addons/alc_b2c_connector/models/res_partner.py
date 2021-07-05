@@ -15,41 +15,39 @@ TITLE_XML_ID_BY_B2C_KEY = {
 class ResPartner(models.Model):
     _inherit = "res.partner"
 
+    def _update_b2c_recipient_validate_data(self, data):
+        """If this partner has one closed sale, only allow update of contact fields."""
+        self.ensure_one()
+        domain_orders = [("partner_id", "=", self.id), ("state", "=", "done")]
+        if self.env["sale.order"].search(domain_orders, limit=1):
+            for key in data:
+                if key not in ("mobile", "phone", "email") and data[key] != self[key]:
+                    msg = _(
+                        "You cannot update this address since there are already"
+                        " closed Sale Orders for this partner. "
+                        "Incoherent field: %s, current value: %s"
+                    )
+                    raise ValidationError(msg % (key, self[key]))
+
     @api.model
     def _update_b2c_recipient(self, b2c_id, b2c_backend, data):
         """ Update the final customer
         """
+        data.pop("id", None)
         b2c_ref = self._b2c_id_to_b2c_ref(b2c_id, b2c_backend)
         partner = self._get_partner_by_ref(b2c_ref)
-        country_id = None
-        country_code = data.get("country_code")
-        if country_code:
-            country_id = self.env["res.country"]._get_by_code(country_code).id
-
-        name = data.get("first_name")
-        last_name = data.get("last_name")
-        if last_name:
-            name = u"{} {}".format(name, last_name)
-        title = data.get("title")
-        if title:
-            title = self.env.ref(TITLE_XML_ID_BY_B2C_KEY[title]).id
-
-        partner.write(
-            {
-                "title": title if title else partner.title.id,
-                "name": name if name else partner.name,
-                "street": data.get("street") if data.get("street") else partner.street,
-                "street2": data.get("street2")
-                if data.get("street2")
-                else partner.street2,
-                "zip": data.get("zip") if data.get("zip") else partner.zip,
-                "city": data.get("city") if data.get("city") else partner.city,
-                "phone": data.get("phone") if data.get("phone") else partner.phone,
-                "mobile": data.get("mobile") if data.get("mobile") else partner.mobile,
-                "country_id": country_id if country_id else partner.country_id,
-            }
-        )
-
+        if data.get("country_code"):
+            country = self.env["res.country"]._get_by_code(data.pop("country_code"))
+            data["country_id"] = country.id
+        name = data.pop("first_name", "")
+        if data.get("last_name"):
+            name = u"{} {}".format(name, data.pop("last_name"))
+        if name:
+            data["name"] = name
+        if data.get("title"):
+            data["title"] = self.env.ref(TITLE_XML_ID_BY_B2C_KEY[data["title"]]).id
+        partner._update_b2c_recipient_validate_data(data)
+        partner.write(data)
         return partner
 
     @api.model
