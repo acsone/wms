@@ -648,17 +648,6 @@ class TestSalesService(CommonCase):
         Expected result:
             one line update, second one stays unchanged
         """
-        recipient_info = {
-            "id": "ABC",
-            "title": "mr",
-            "last_name": "B2C PARTNER",
-            "first_name": "EXISTING",
-            "street": "test street",
-            "zip": "1234",
-            "city": "test city",
-            "email": "b2c@b2c.be",
-        }
-
         order_line2 = self.env["sale.order.line"].create(
             {
                 "order_id": self.b2c_order.id,
@@ -677,9 +666,6 @@ class TestSalesService(CommonCase):
 
         params = {
             "id": 10,
-            "customer_ref": self.vt_partner.ref,
-            "date": ISO_DT_WITH_TZ,
-            "recipient": recipient_info,
             "lines": [
                 {
                     "line_id": 1,
@@ -711,26 +697,12 @@ class TestSalesService(CommonCase):
         Expected result:
             sale order now has 2 lines
         """
-        recipient_info = {
-            "id": "ABC",
-            "title": "mr",
-            "last_name": "B2C PARTNER",
-            "first_name": "EXISTING",
-            "street": "test street",
-            "zip": "1234",
-            "city": "test city",
-            "email": "b2c@b2c.be",
-        }
-
         order_line1 = self.b2c_order.order_line[0]
         self.assertEqual(order_line1.product_uom_qty, 10)
         self.assertEqual(len(self.b2c_order.order_line), 1)
 
         params = {
             "id": 10,
-            "customer_ref": self.vt_partner.ref,
-            "date": ISO_DT_WITH_TZ,
-            "recipient": recipient_info,
             "lines": [
                 {
                     "line_id": 1,
@@ -763,26 +735,12 @@ class TestSalesService(CommonCase):
         Expected result:
             raise error
         """
-        recipient_info = {
-            "id": "ABC",
-            "title": "mr",
-            "last_name": "B2C PARTNER",
-            "first_name": "EXISTING",
-            "street": "test street",
-            "zip": "1234",
-            "city": "test city",
-            "email": "b2c@b2c.be",
-        }
-
         order_line1 = self.b2c_order.order_line[0]
         self.assertEqual(order_line1.product_uom_qty, 10)
         self.assertEqual(len(self.b2c_order.order_line), 1)
 
         params = {
             "id": 10,
-            "customer_ref": self.vt_partner.ref,
-            "date": ISO_DT_WITH_TZ,
-            "recipient": recipient_info,
             "lines": [
                 {
                     "line_id": 1,
@@ -804,3 +762,46 @@ class TestSalesService(CommonCase):
             self.sales_service.dispatch(
                 "update", _id=self.b2c_order.b2c_ref, params=params
             )
+
+    def test_update_existing_recipient(self):
+        recipient_info = {
+            "id": "ABC",
+            "title": "mr",
+            "last_name": "B2C PARTNER",
+            "first_name": "EXISTING",
+            "street": "test street",
+            "zip": "1234",
+            "city": "test city",
+            "email": "b2c@b2c.be",
+        }
+        params = {"id": 10, "recipient": recipient_info}
+        self.assertFalse(self.b2c_order.partner_id.zip)
+        self.b2c_order.action_confirm()
+
+        self.sales_service.dispatch("update", _id=self.b2c_order.b2c_ref, params=params)
+
+        self.assertEqual(self.b2c_order.partner_id.zip, "1234")
+
+    def test_update_new_recipient(self):
+        recipient_info = self._gen_recipent()
+        params = {"id": 10, "recipient": recipient_info}
+        old_partner = self.b2c_order.partner_id
+
+        self.sales_service.dispatch("update", _id=self.b2c_order.b2c_ref, params=params)
+
+        self.assertNotEqual(self.b2c_order.partner_id, old_partner)
+        self.assertEqual(self.b2c_order.partner_id.zip, recipient_info["zip"])
+
+    def test_update_existing_remove_field(self):
+        self.b2c_order.partner_id.phone = "0032"
+        recipient_info = {
+            "id": "ABC",
+            "last_name": "B2C PARTNER",
+            "first_name": "EXISTING",
+            "phone": None,
+            "email": "b2c@b2c.be",
+        }
+        params = {"id": 10, "recipient": recipient_info}
+        self.sales_service.dispatch("update", _id=self.b2c_order.b2c_ref, params=params)
+
+        self.assertFalse(self.b2c_order.partner_id.phone)
