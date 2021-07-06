@@ -17,7 +17,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: stock_groupbypartner
-#: code:addons/stock_groupbypartner/models/stock_move.py:171
+#: code:addons/stock_groupbypartner/models/stock_move.py:173
 #, python-format
 msgid "Backorder of %s"
 msgstr "Reliquat de %s"
@@ -44,7 +44,7 @@ msgid "Procurement Requisition"
 msgstr ""
 
 #. module: stock_groupbypartner
-#: code:addons/stock_groupbypartner/models/stock_move.py:174
+#: code:addons/stock_groupbypartner/models/stock_move.py:177
 #, python-format
 msgid "Remaining move '%s' moved to new backorder <em>%s</em>."
 msgstr ""
