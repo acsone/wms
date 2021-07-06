@@ -61,26 +61,21 @@ class StockPicking(models.Model):
         return res
 
     @api.depends(
-        "picking_type_subcode",
-        "printed",
-        "pack_operation_product_ids",
+        "is_assignable",
         "delivery_round_customer_id",
         "delivery_round_customer_id.delivered",
     )
     def _compute_is_assignable_to_round(self):
         for picking in self:
-            not_assignable = (
-                picking.picking_type_subcode != "PICK"
-                or picking.state in ("done", "cancel")
-                or (picking.printed and picking.pack_operation_product_ids)
-                or (
-                    picking.delivery_round_customer_id
-                    and not picking.delivery_round_customer_id.delivered
-                )
+            not_assignable = not picking.is_assignable or (
+                picking.delivery_round_customer_id
+                and not picking.delivery_round_customer_id.delivered
             )
             picking.is_assignable_to_round = not not_assignable
 
-    @api.depends("picking_type_subcode", "printed", "pack_operation_product_ids")
+    @api.depends(
+        "picking_type_subcode", "printed", "pack_operation_product_ids",
+    )
     def _compute_is_assignable(self):
         for picking in self:
             not_assignable = (

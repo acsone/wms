@@ -354,6 +354,10 @@ class RoundInstance(models.Model):
             self._check_allowed_holidays_pickings(pickings)
 
         pickings_assigned = self._confirm_picking_and_assign_moves(pickings, no_prepare)
+        # fitler out picking blocked by the picking_policy
+        pickings_assigned = pickings_assigned.filtered(
+            lambda p: not p.is_blocked_by_picking_policy
+        )
         if pickings_assigned:
 
             def key(r):
