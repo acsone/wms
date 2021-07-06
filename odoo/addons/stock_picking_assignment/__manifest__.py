@@ -9,7 +9,7 @@
     "description": """
     Stock Picking Assignment
     """,
-    "depends": ["stock"],
+    "depends": ["stock", "alc_stock_picking_policy_block"],
     "data": [
         "views/stock_inventory.xml",
         "views/stock_scrap.xml",

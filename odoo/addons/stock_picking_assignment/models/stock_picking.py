@@ -26,8 +26,12 @@ class StockPicking(models.Model):
     def assign_operator(self):
         self.write(self._prepare_assign_operator_values())
 
-    @api.depends("state", "operator_id")
+    @api.depends("state", "operator_id", "is_blocked_by_picking_policy")
     def _compute_can_assign_operator(self):
         for record in self:
             to_process = record.state in ["assigned", "partially_available"]
-            record.can_assign_operator = to_process and not record.operator_id
+            record.can_assign_operator = (
+                to_process
+                and not record.operator_id
+                and not self.is_blocked_by_picking_policy
+            )
