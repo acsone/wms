@@ -258,3 +258,16 @@ class TestGroupByPartner(GroupByPartnerCommonCase):
         move4.assign_picking()
 
         self.assertEqual(backorder, move4.picking_id)
+
+    def test_assign_all_at_once(self):
+        """Moves with similar values but with a 'all at once' picking policy
+        are not grouped"""
+        group = self._create_procurement_group(self.partner1)
+        group.move_type = "one"
+        move1 = self._create_move(group)
+        move1.assign_picking()
+
+        move2 = self._create_move(group)
+        move2.assign_picking()
+
+        self.assertNotEqual(move1.picking_id, move2.picking_id)
