@@ -159,6 +159,8 @@ class StockMove(models.Model):
                 else:
                     # create a new picking
                     values = move._get_new_picking_values()
+                    if backorder_orig_id:
+                        values["carrier_id"] = backorder_orig_id.carrier_id.id
                     picking = pick_obj.create(values)
                     _logger.debug(
                         "Assign move %s to new picking %s (%s)",
@@ -170,6 +172,7 @@ class StockMove(models.Model):
                         picking.message_post(
                             body=_("Backorder of %s") % backorder_orig_id.name
                         )
+
                         backorder_orig_id.message_post(
                             body=_(
                                 "Remaining move '%s' moved to new backorder "

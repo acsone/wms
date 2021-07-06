@@ -228,3 +228,33 @@ class TestGroupByPartner(GroupByPartnerCommonCase):
         # force reuse of the same picking as backorder since nothing is processed
         picking.with_context(cancel_backorder=True)._create_backorder()
         self.assertTrue(picking.date_done)
+
+    def test_assign_grouby_07(self):
+        """ Moves are grouped by partner
+            Create a backorder. Then try to put new moves into the backorder. No new backorder should be created
+            and moves should be grouped by carrier
+        """
+        group = self._create_procurement_group(self.partner1)
+        group.carrier_id = self.carrier_fixed.id
+        move1 = self._create_move(group)
+        move1.assign_picking()
+
+        picking = move1.picking_id
+        picking.carrier_id = self.carrier_fixed.id
+        # force reuse of the same picking as backorder since nothing is processed
+        backorder = picking._create_backorder()
+
+        group2 = self._create_procurement_group(self.partner1)
+        move2 = self._create_move(group2)
+        move2.assign_picking()
+
+        group3 = self._create_procurement_group(self.partner1)
+        move3 = self._create_move(group3)
+        move3.assign_picking()
+
+        group4 = self._create_procurement_group(self.partner1)
+        group4.carrier_id = self.carrier_fixed.id
+        move4 = self._create_move(group4)
+        move4.assign_picking()
+
+        self.assertEqual(backorder, move4.picking_id)

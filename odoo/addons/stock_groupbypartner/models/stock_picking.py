@@ -171,6 +171,7 @@ class StockPicking(models.Model):
                     {"date_done": time.strftime(DEFAULT_SERVER_DATETIME_FORMAT)}
                 )
             backorders |= not_done_bo_moves.mapped("picking_id")
+
         if backorders:
             # In standard, created backorders are assigned at the end of the
             # method
