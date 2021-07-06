@@ -27,7 +27,6 @@ class StockPicking(models.Model):
         default=False,
     )
 
-    @api.multi
     @api.depends(
         "picking_type_code", "carrier_id", "carrier_id.maximum_weight_per_package"
     )
@@ -42,20 +41,18 @@ class StockPicking(models.Model):
             else:
                 rec.is_number_of_packages_visible = False
 
-    @api.multi
     @api.depends("is_number_of_packages_visible", "move_lines")
     def _compute_theoritical_number_of_packages(self):
         for rec in self:
             if rec.is_number_of_packages_visible:
-                products_weights = [
-                    move.product_id.weight * move.product_uom_qty
-                    for move in rec.move_lines
-                ]
+                products_weights = rec.move_lines.mapped("product_id.weight")
+                number_of_items = rec.move_lines.mapped("product_uom_qty")
                 rec.theoritical_number_of_packages = rec._number_of_packages(
-                    products_weights, rec.carrier_id.maximum_weight_per_package
+                    products_weights,
+                    number_of_items,
+                    rec.carrier_id.maximum_weight_per_package,
                 )
 
-    @api.multi
     @api.depends(
         "is_number_of_packages_visible",
         "pack_operation_ids",
@@ -68,7 +65,6 @@ class StockPicking(models.Model):
                     rec.mapped("pack_operation_ids.result_package_id")
                 )
 
-    @api.multi
     @api.depends("theoritical_number_of_packages", "number_of_packages")
     def _compute_is_number_of_packages_outranged(self):
         for rec in self:
@@ -76,27 +72,34 @@ class StockPicking(models.Model):
                 rec.number_of_packages_done > rec.theoritical_number_of_packages
             )
 
-    def _number_of_packages(self, products_weights, maximum_weight_per_package):
+    def _number_of_packages(
+        self, products_weights, number_of_items, maximum_weight_per_package
+    ):
 
-        # Sort the weights of the products in ascending order
-        products_weights.sort()
+        # Split the product_weights into as many items as we haves
+        products_weights_list = []
+        for weight, number in zip(products_weights, number_of_items):
+            for i in range(int(number)):
+                products_weights_list.append(weight)
+
+        products_weights_list.sort()
 
         i = 0
         weight = 0
-        j = len(products_weights) - 1
+        j = len(products_weights_list) - 1
         theoritical_number_of_packages = 0
         while i <= j:
             theoritical_number_of_packages += 1
             # Try to fit the heaviest product with the lightest.
             # If it does not work, then the heaviest should have
             # a box to himself
-            weight = products_weights[i] + products_weights[j]
+            weight = products_weights_list[i] + products_weights_list[j]
             while weight <= maximum_weight_per_package:
                 i += 1
                 if i < j:
                     # While the weight of products does not exceed the limit,
                     # continue adding products in the same package
-                    weight += products_weights[i]
+                    weight += products_weights_list[i]
                 else:
                     break
 
