@@ -76,8 +76,25 @@ class DeliveryPackageGlsWizard(models.TransientModel):
         else:
             xml_id = "delivery_carrier_label_gls.product_packaging_gls_parcel"
             packaging = self.env.ref(xml_id)
-        self.shipping_weight = self.package_id.shipping_weight
+        self._set_shipping_weight()
         self.packaging_id = packaging
+
+    def _set_shipping_weight(self):
+        for record in self:
+            if record.package_id:
+                self.shipping_weight = self.package_id.shipping_weight
+            else:
+                filter_ops = lambda o: o.qty_done > 0 and not o.result_package_id
+                ops = self.picking_id.pack_operation_ids.filtered(filter_ops)
+                package = self.picking_id._get_gls_pack_package(ops)
+                weight_ops = sum(ops.mapped(lambda o: o.qty_done * o.product_id.weight))
+                self.shipping_weight = package.shipping_weight + weight_ops
+
+    @api.model
+    def create(self, vals):
+        res = super(DeliveryPackageGlsWizard, self).create(vals)
+        res._set_shipping_weight()
+        return res
 
     def _validate_parameters(self, put_in_pack=False):
         required_keys = ["packaging_id", "shipping_weight"]
