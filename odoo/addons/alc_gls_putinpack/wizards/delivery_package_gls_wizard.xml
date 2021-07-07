@@ -18,6 +18,14 @@
         </group>
         <footer>
                     <button
+            name="put_in_pack"
+            barcode_trigger="gls-send"
+            class="btn btn-primary"
+            type="object"
+            string="Put in Pack"
+            attrs="{'invisible': [('shipping_weight','=', 0)]}"
+          />
+                    <button
             name="send"
             barcode_trigger="gls-send"
             class="btn btn-primary"

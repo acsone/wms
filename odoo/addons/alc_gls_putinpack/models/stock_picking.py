@@ -2,27 +2,16 @@
 # Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _, models
-from odoo.exceptions import ValidationError
+from odoo import models
 
 
 class StockPicking(models.Model):
     _inherit = "stock.picking"
 
     def button_gls_put_in_pack(self):
-        """ Dedicated put in pack button for GLS
-
-        For GLS deliveries, we replace the default ve returned by the put_in_pack
-        method by a specific GLS wizard.
-        """
+        """ Dedicated put in pack button for GLS"""
         self.ensure_one()
-        res = self.put_in_pack()
-        if not res:  # specific_stock bypasses the super raise
-            raise ValidationError(_("There is no package to process."))
-        if self.delivery_type == "gls":
-            final_pack_id = res["res_id"] if isinstance(res, dict) else res.id
-            res = self._get_gls_put_in_pack_wizard_action(final_pack_id)
-        return res
+        return self._get_gls_put_in_pack_wizard_action(False)
 
     def _get_gls_put_in_pack_wizard_action(self, package_id):
         xmlid = "alc_gls_putinpack.delivery_package_gls_wizard_act_window"

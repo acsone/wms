@@ -3,6 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import json
+import threading
 
 from odoo import _, api, fields, models, registry
 from odoo.exceptions import ValidationError
@@ -78,10 +79,19 @@ class DeliveryPackageGlsWizard(models.TransientModel):
         self.shipping_weight = self.package_id.shipping_weight
         self.packaging_id = packaging
 
-    def _validate_parameters(self):
-        for f in ["package_id", "packaging_id", "shipping_weight"]:
+    def _validate_parameters(self, put_in_pack=False):
+        required_keys = ["packaging_id", "shipping_weight"]
+        if not put_in_pack:
+            required_keys.append("package_id")
+        for f in required_keys:
             if not self[f]:
                 raise ValidationError(_("Missing parameter: %s") % f)
+
+    def put_in_pack(self):
+        self._validate_parameters(put_in_pack=True)
+        res = self.picking_id.put_in_pack()
+        self.package_id = res["res_id"] if isinstance(res, dict) else res.id
+        return self._send()
 
     def resend(self):
         """Cancel the package and then resend it to GLS."""
@@ -106,7 +116,11 @@ class DeliveryPackageGlsWizard(models.TransientModel):
     def _send(self):
         # we want to keep the package information details in case sending fails
         self.write_package_vals()
-        self.env.cr.after("rollback", lambda: self.write_package_vals(True))
+        if not (
+            getattr(threading.currentThread(), "testing", False)
+            or self.env.registry.in_test_mode()
+        ):  # rollback hooks explode at test cleanup
+            self.env.cr.after("rollback", lambda: self.write_package_vals(True))
         return self.picking_id.gls_send_shipping_package(self.package_id)
 
     def write_package_vals(self, after_rollback=False):
