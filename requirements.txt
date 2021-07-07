@@ -107,7 +107,7 @@ odoo10-addon-component==10.0.1.1.1
 odoo10-addon-component-event==10.0.1.0.1
 odoo10-addon-connector @ git+https://github.com/acsone/connector@de23258a4d639e696d6e4d941ba005a1577a9935#subdirectory=setup/connector
 odoo10-addon-date-range @ git+https://github.com/acsone/server-tools.git@dcefdba5bac014076f05229ba091acd8b739e164#subdirectory=setup/date_range
-odoo10-addon-delivery-carrier-label-gls @ git+https://github.com/acsone/delivery-carrier.git@ab520de032256641f250da42f3e488ee90489d1f#subdirectory=setup/delivery_carrier_label_gls
+odoo10-addon-delivery-carrier-label-gls @ git+https://github.com/acsone/delivery-carrier.git@cf29e5a87853167c2ed8912642f587037c0b2667#subdirectory=setup/delivery_carrier_label_gls
 odoo10-addon-delivery-carrier-max-weight-constraint @ git+https://github.com/acsone/delivery-carrier.git@f9c9703f8b6e3a906fd52935f222f933bd7f19f5#subdirectory=setup/delivery_carrier_max_weight_constraint
 odoo10-addon-despatch-advice-import @ git+https://github.com/acsone/edi.git@e37df84dfcfb4d7afa5a2dab3412bd44c05c1dae#subdirectory=setup/despatch_advice_import
 odoo10-addon-despatch-advice-import-ubl @ git+https://github.com/acsone/edi.git@e37df84dfcfb4d7afa5a2dab3412bd44c05c1dae#subdirectory=setup/despatch_advice_import_ubl
