@@ -79,9 +79,15 @@ msgid "Last Updated on"
 msgstr ""
 
 #. module: alc_gls_putinpack
-#: code:addons/alc_gls_putinpack/wizards/delivery_package_gls_wizard.py:84
+#: code:addons/alc_gls_putinpack/wizards/delivery_package_gls_wizard.py:105
 #, python-format
 msgid "Missing parameter: %s"
+msgstr ""
+
+#. module: alc_gls_putinpack
+#: code:addons/alc_gls_putinpack/models/stock_picking.py:19
+#, python-format
+msgid "More than one pack"
 msgstr ""
 
 #. module: alc_gls_putinpack
@@ -112,6 +118,11 @@ msgstr ""
 
 #. module: alc_gls_putinpack
 #: model:ir.ui.view,arch_db:alc_gls_putinpack.delivery_package_gls_wizard_form_view
+msgid "Put in Pack"
+msgstr ""
+
+#. module: alc_gls_putinpack
+#: model:ir.ui.view,arch_db:alc_gls_putinpack.delivery_package_gls_wizard_form_view
 msgid "Report"
 msgstr ""
 
@@ -128,12 +139,6 @@ msgstr ""
 #. module: alc_gls_putinpack
 #: model:ir.model.fields,help:alc_gls_putinpack.field_delivery_package_gls_wizard_package_id
 msgid "The package to send to GLS."
-msgstr ""
-
-#. module: alc_gls_putinpack
-#: code:addons/alc_gls_putinpack/models/stock_picking.py:21
-#, python-format
-msgid "There is no package to process."
 msgstr ""
 
 #. module: alc_gls_putinpack
