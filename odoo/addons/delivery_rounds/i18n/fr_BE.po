@@ -89,7 +89,7 @@ msgid "Assign Delivery Round"
 msgstr "Assigner une tournée"
 
 #. module: delivery_rounds
-#: code:addons/delivery_rounds/models/stock_picking.py:209
+#: code:addons/delivery_rounds/models/stock_picking.py:204
 #, python-format
 msgid "Assign pickings of partner %s"
 msgstr "Assigner les préparations du partenaire %s"
@@ -338,7 +338,7 @@ msgid "Delivery round %s will be updated in background."
 msgstr "La tournée %s va être mise à jour en arrière-plan."
 
 #. module: delivery_rounds
-#: code:addons/delivery_rounds/models/stock_picking.py:142
+#: code:addons/delivery_rounds/models/stock_picking.py:137
 #, python-format
 msgid ""
 "Delivery round assigned to a picking without reservation. Method "
@@ -1081,7 +1081,7 @@ msgstr ""
 "même temps."
 
 #. module: delivery_rounds
-#: code:addons/delivery_rounds/models/stock_picking.py:170
+#: code:addons/delivery_rounds/models/stock_picking.py:165
 #, python-format
 msgid "You cannot unassign a delivery round from a started picking"
 msgstr ""
