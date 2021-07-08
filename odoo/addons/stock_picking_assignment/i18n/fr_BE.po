@@ -32,6 +32,12 @@ msgid "Operator"
 msgstr "Opérateur"
 
 #. module: stock_picking_assignment
+#: model:ir.model.fields,field_description:stock_picking_assignment.field_stock_picking_can_assign_operator
+#, fuzzy
+msgid "Ready for Operator"
+msgstr "Opérateur"
+
+#. module: stock_picking_assignment
 #: model:ir.ui.view,arch_db:stock_picking_assignment.view_stock_picking_operator_form
 msgid "Start"
 msgstr "Démarrer"
