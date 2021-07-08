@@ -357,7 +357,7 @@ class TestStockPicking(SavepointCase):
         ship.force_assign()
         for pack in ship.pack_operation_ids:
             pack.qty_done = pack.product_qty
-        final_pack = ship.put_in_pack()
+        final_pack = pack_medoc.browse(ship.put_in_pack()["res_id"])
 
         self.assertEqual(final_pack.id, pack_medoc.id)
         for pack in ship.pack_operation_ids:

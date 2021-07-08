@@ -10,11 +10,9 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": [
-        "stock",
-        "sale",
-        "sale_stock",
         "stock_picking_subcode",
         "alc_delivery_carrier_gls",
+        "alc_gls_putinpack",
         "delivery_rounds",
     ],
     "data": [],

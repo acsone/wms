@@ -9,20 +9,20 @@ from odoo.exceptions import ValidationError
 class StockPicking(models.Model):
     _inherit = "stock.picking"
 
-    def button_gls_put_in_pack(self):
-        """ Dedicated put in pack button for GLS
+    def _get_gls_pack_package(self, operations):
+        """Private method, only call it if conditions are checked before."""
+        pack_operation_candidates = self.pack_operation_ids.browse()
+        for op in (o for o in operations if not o.result_package_id):
+            pack_operation_candidates |= op
+        package = pack_operation_candidates.mapped("package_id")
+        if len(package) > 1:
+            raise ValidationError(_("More than one pack"))
+        return package
 
-        For GLS deliveries, we replace the default ve returned by the put_in_pack
-        method by a specific GLS wizard.
-        """
+    def button_gls_put_in_pack(self):
+        """ Dedicated put in pack button for GLS"""
         self.ensure_one()
-        res = self.put_in_pack()
-        if not res:  # specific_stock bypasses the super raise
-            raise ValidationError(_("There is no package to process."))
-        if self.delivery_type == "gls":
-            final_pack_id = res["res_id"] if isinstance(res, dict) else res.id
-            res = self._get_gls_put_in_pack_wizard_action(final_pack_id)
-        return res
+        return self._get_gls_put_in_pack_wizard_action(False)
 
     def _get_gls_put_in_pack_wizard_action(self, package_id):
         xmlid = "alc_gls_putinpack.delivery_package_gls_wizard_act_window"
