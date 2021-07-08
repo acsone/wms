@@ -24,6 +24,7 @@ class StockMove(models.Model):
             ("location_dest_id", "=", self.location_dest_id.id),
             ("picking_type_id", "=", self.picking_type_id.id),
             ("printed", "=", False),
+            ("move_type", "!=", "one"),
             ("state", "not in", ("draft", "cancel", "done")),
         ]
         return domain
@@ -46,7 +47,10 @@ class StockMove(models.Model):
         (moves should already have them identical). Otherwise, create a new
         picking to Assign them to.
         """
-        moves_to_group = self.filtered(lambda x: x.picking_type_id.groupbypartner)
+        moves_to_group = self.filtered(
+            lambda x: x.picking_type_id.groupbypartner
+            and x.picking_id.move_type != "one"
+        )
 
         moves_to_not_group = self - moves_to_group
         if moves_to_not_group:

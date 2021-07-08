@@ -78,7 +78,9 @@ class StockPicking(models.Model):
         """
         backorders = self.env["stock.picking"]
 
-        picking_togroup = self.filtered(lambda p: p.picking_type_id.groupbypartner)
+        picking_togroup = self.filtered(
+            lambda p: p.picking_type_id.groupbypartner and p.move_type != "one"
+        )
         picking_notgroup = self - picking_togroup
 
         for picking in picking_togroup:

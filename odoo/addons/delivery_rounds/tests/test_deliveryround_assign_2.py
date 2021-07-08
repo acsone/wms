@@ -5,13 +5,10 @@
 from . import common
 
 
-class TestDeliveryRoundAssign2(common.DeliveryRoundTestCase):
-    """Test to run at install
-    """
-
+class DeliveryRoundAssignTestCase(common.DeliveryRoundTestCase):
     @classmethod
     def setUpClass(cls):
-        super(TestDeliveryRoundAssign2, cls).setUpClass()
+        super(DeliveryRoundAssignTestCase, cls).setUpClass()
         cls.stock_location = cls.env.ref("stock.stock_location_stock")
 
         cls.route_medoc = cls.env.ref(
@@ -196,6 +193,11 @@ class TestDeliveryRoundAssign2(common.DeliveryRoundTestCase):
         )
         inventory.action_done()
         return inventory
+
+
+class TestDeliveryRoundAssign2(DeliveryRoundAssignTestCase):
+    """Test to run at install
+    """
 
     def test_01(self):
         """

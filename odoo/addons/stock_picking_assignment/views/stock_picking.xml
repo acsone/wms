@@ -30,12 +30,13 @@
           name="assign_operator"
           string="Start"
           type="object"
-          attrs="{'invisible': ['|', ('state', 'not in', ['assigned','partially_available']), ('operator_id', '!=', False)]}"
+          attrs="{'invisible': [('can_assign_operator', '!=', True)]}"
           class="oe_highlight"
         />
       </xpath>
       <xpath expr="//field[@name='min_date']" position="before">
         <field name="operator_id" />
+        <field name="can_assign_operator" invisible="1" />
       </xpath>
     </field>
   </record>
