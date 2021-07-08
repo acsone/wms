@@ -383,15 +383,17 @@ class SalesService(Component):
     def _get_delivery_date(self, picking):
         """
         Get the delivery date from given picking.
-        As the delivery date doesn't exist in Odoo, we use the write_date
+        As the delivery date doesn't exist in Odoo, we use the date_done
         when the state is 'done'.
         :param picking: stock.picking
         :return: str
         """
         delivery_date = ""
         if picking.state == "done":
-            write_date = fields.Datetime.from_string(picking.write_date)
+            date_done = fields.Datetime.from_string(
+                picking.date_done or picking.write_date
+            )
             delivery_date = fields.Date.to_string(
-                fields.Datetime.context_timestamp(picking, write_date)
+                fields.Datetime.context_timestamp(picking, date_done)
             )
         return delivery_date
