@@ -96,6 +96,8 @@ class SaleOrder(models.Model):
             raise ValidationError(
                 _("You cannot update a sale order that is already ready for delivery")
             )
+        if "lines" not in data and "recipient" not in data:
+            raise ValidationError(_("Missing update parameters, lines or recipient."))
         self.sudo().action_cancel()
         self.action_draft()
         if "lines" in data:

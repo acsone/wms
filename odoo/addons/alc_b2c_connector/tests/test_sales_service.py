@@ -805,3 +805,10 @@ class TestSalesService(CommonCase):
         self.sales_service.dispatch("update", _id=self.b2c_order.b2c_ref, params=params)
 
         self.assertFalse(self.b2c_order.partner_id.phone)
+
+    def test_update_existing_missing_payload_raises(self):
+        params = {"id": 10}
+        with self.assertRaises(ValidationError):
+            self.sales_service.dispatch(
+                "update", _id=self.b2c_order.b2c_ref, params=params
+            )
