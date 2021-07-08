@@ -6,6 +6,8 @@
 import random
 import string
 
+from odoo.exceptions import ValidationError
+
 from .common import CommonCase
 
 
@@ -114,7 +116,7 @@ class TestRecipientsService(CommonCase):
             "mobile": cls._gen_string(),
         }
 
-    def test_00(self):
+    def test_update_existing(self):
         """
         Data:
             An existing b2c customer
@@ -149,7 +151,7 @@ class TestRecipientsService(CommonCase):
         self.assertEqual(self.b2c_order.partner_id.title.name, "Madam")
         self.assertEqual(self.b2c_order.partner_id.name, "test b2cPartner")
 
-    def test_01(self):
+    def test_update_existing_street_only(self):
         """
         Data:
             An existing b2c customer
@@ -177,3 +179,44 @@ class TestRecipientsService(CommonCase):
         self.assertEqual(self.b2c_order.partner_id.zip, "1234")
         self.assertEqual(self.b2c_order.partner_id.title.name, "Mister")
         self.assertEqual(self.b2c_order.partner_id.name, "EXISTING B2C PARTNER")
+
+    def test_update_street_for_partner_with_done_order_raises(self):
+        """Once the partner has a done order, it's not possible to update the address."""
+        vals_done_order = {"state": "done", "partner_id": self.b2c_partner.id}
+        self.env["sale.order"].create(vals_done_order)
+        recipient_info = {"id": "ABC", "street": "new_street"}
+
+        with self.assertRaises(ValidationError):
+            self.recipient_service.dispatch(
+                "update", _id=recipient_info["id"], params=recipient_info
+            )
+
+    def test_update_contact_fields_for_partner_with_done_order(self):
+        """We can always update the contact fields (phone, mobile, email)"""
+        vals_done_order = {"state": "done", "partner_id": self.b2c_partner.id}
+        self.env["sale.order"].create(vals_done_order)
+        recipient_info = {"id": "ABC", "phone": "1", "mobile": "2", "email": "3"}
+        # when
+        _ = self.recipient_service.dispatch(
+            "update", _id=recipient_info["id"], params=recipient_info
+        )
+        self.assertEqual(self.b2c_partner.phone, "1")
+        self.assertEqual(self.b2c_partner.mobile, "2")
+        self.assertEqual(self.b2c_partner.email, "3")
+
+    def test_update_contact_fields_for_partner_with_done_order_and_old_values(self):
+        """If values are the same, they can be passed to the API without raising."""
+        vals_done_order = {"state": "done", "partner_id": self.b2c_partner.id}
+        self.env["sale.order"].create(vals_done_order)
+        recipient_info = {
+            "id": "ABC",
+            "phone": "1",
+            "street": self.b2c_partner.street,
+            "zip": self.b2c_partner.zip,
+            "city": self.b2c_partner.city,
+        }
+        # when
+        _ = self.recipient_service.dispatch(
+            "update", _id=recipient_info["id"], params=recipient_info
+        )
+        self.assertEqual(self.b2c_partner.phone, "1")

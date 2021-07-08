@@ -92,36 +92,38 @@ class SaleOrder(models.Model):
         is not confirmed
         """
         self.ensure_one()
-
-        if self.picking_ids and (
-            "done" in self.mapped("picking_ids.state")
-            or "cancel" in self.mapped("picking_ids.state")
-        ):
+        if any(s in {"done", "cancel"} for s in self.mapped("picking_ids.state")):
             raise ValidationError(
                 _("You cannot update a sale order that is already ready for delivery")
             )
-
+        if "lines" not in data and "recipient" not in data:
+            raise ValidationError(_("Missing update parameters, lines or recipient."))
         self.sudo().action_cancel()
         self.action_draft()
+        if "lines" in data:
+            self._update_lines_from_b2c(data, b2c_backend)
+        if "recipient" in data:
+            self._update_recipient_from_b2c(data, b2c_backend)
+        self.sudo().action_confirm_background()
+        return self
+
+    def _update_lines_from_b2c(self, data, b2c_backend):
         self.order_line.unlink()
-
-        self.write(
-            {
-                "order_line": [
-                    (0, 0, line_info)
-                    for line_info in self._parse_b2c_order_line(data, b2c_backend)
-                ]
-            }
-        )
-
+        data_lines = self._parse_b2c_order_line(data, b2c_backend)
+        self.write({"order_line": [(0, 0, line) for line in data_lines]})
         body = _("Sale Order  %(sale_order)s updated from json: %(json_file)s.") % {
             "sale_order": self.name,
             "json_file": json.dumps(data, sort_keys=True),
         }
-
         self.message_post(body=body)
-        self.sudo().action_confirm_background()
-        return self
+
+    def _update_recipient_from_b2c(self, data, b2c_backend):
+        old_partner = self.partner_id
+        partner = self._get_final_b2c_recipient(data, b2c_backend)
+        if old_partner != partner:
+            self.partner_id = partner
+            msg = _("Recipient changed by API from, %s to %s.")
+            self.message_post(body=(msg % (old_partner.name, partner.name)))
 
     @api.model
     def _parse_b2c_order(self, data, b2c_backend):
@@ -188,7 +190,7 @@ class SaleOrder(models.Model):
             b2c_ref, raise_if_notfound=False
         )
         if partner:
-            # DO WE HAVE TO UPDATE ADDRESS INFO?
+            partner._update_b2c_data(data["recipient"])
             return partner
         name = customer_info["first_name"]
         last_name = customer_info.get("last_name")

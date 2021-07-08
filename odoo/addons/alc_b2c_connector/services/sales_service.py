@@ -24,6 +24,46 @@ class SalesService(Component):
     _name = "sales.service"
     _usage = "sales"
 
+    def _get_schema_recipient(self):
+        return {
+            "id": {"type": "string", "nullable": False, "required": True},
+            "title": {
+                "type": "string",
+                "nullable": False,
+                "required": False,
+                "allowed": ["mr", "mm"],
+            },
+            "first_name": {"type": "string", "nullable": False, "required": True},
+            "last_name": {"type": "string", "nullable": False, "required": True},
+            "street": {"type": "string", "nullable": True, "required": False},
+            "street2": {"type": "string", "nullable": True, "required": False},
+            "zip": {"type": "string", "nullable": True, "required": False},
+            "city": {"type": "string", "nullable": True, "required": False},
+            "email": {"type": "string", "nullable": False, "required": True},
+            "phone": {"type": "string", "nullable": True, "required": False},
+            "mobile": {"type": "string", "nullable": True, "required": False},
+            "country_code": {
+                "type": "string",
+                "nullable": True,
+                "allowed": self.env["res.country"]._get_codes(),
+            },
+        }
+
+    def _get_schema_lines(self):
+        return {
+            "type": "dict",
+            "schema": {
+                "line_id": {"type": "integer", "nullable": False, "required": False},
+                "sku": {"type": "string", "required": True, "nullable": False},
+                "quantity": {
+                    "type": "integer",
+                    "required": True,
+                    "nullable": False,
+                    "coerce": to_int,
+                },
+            },
+        }
+
     # api methods
     # pylint: disable=method-required-super
     def create(self, **params):
@@ -117,61 +157,12 @@ class SalesService(Component):
             "id": {"type": "integer", "nullable": False, "required": True},
             "customer_ref": {"type": "string", "nullable": False, "required": True},
             "date": {"type": "string", "nullable": False, "required": True},
-            "recipient": {
-                "type": "dict",
-                "schema": {
-                    "id": {"type": "string", "nullable": False, "required": True},
-                    "title": {
-                        "type": "string",
-                        "nullable": False,
-                        "required": False,
-                        "allowed": ["mr", "mm"],
-                    },
-                    "first_name": {
-                        "type": "string",
-                        "nullable": False,
-                        "required": True,
-                    },
-                    "last_name": {
-                        "type": "string",
-                        "nullable": False,
-                        "required": True,
-                    },
-                    "street": {"type": "string", "nullable": True, "required": False},
-                    "street2": {"type": "string", "nullable": True, "required": False},
-                    "zip": {"type": "string", "nullable": True, "required": False},
-                    "city": {"type": "string", "nullable": True, "required": False},
-                    "email": {"type": "string", "nullable": False, "required": True},
-                    "phone": {"type": "string", "nullable": True, "required": False},
-                    "mobile": {"type": "string", "nullable": True, "required": False},
-                    "country_code": {
-                        "type": "string",
-                        "nullable": True,
-                        "allowed": self.env["res.country"]._get_codes(),
-                    },
-                },
-            },
+            "recipient": {"type": "dict", "schema": self._get_schema_recipient()},
             "lines": {
                 "type": "list",
                 "nullable": False,
                 "required": True,
-                "schema": {
-                    "type": "dict",
-                    "schema": {
-                        "line_id": {
-                            "type": "integer",
-                            "nullable": False,
-                            "required": False,
-                        },
-                        "sku": {"type": "string", "required": True, "nullable": False},
-                        "quantity": {
-                            "type": "integer",
-                            "required": True,
-                            "nullable": False,
-                            "coerce": to_int,
-                        },
-                    },
-                },
+                "schema": self._get_schema_lines(),
             },
         }
 
@@ -180,24 +171,14 @@ class SalesService(Component):
             "lines": {
                 "type": "list",
                 "nullable": False,
-                "required": True,
-                "schema": {
-                    "type": "dict",
-                    "schema": {
-                        "line_id": {
-                            "type": "integer",
-                            "nullable": False,
-                            "required": False,
-                        },
-                        "sku": {"type": "string", "required": True, "nullable": False},
-                        "quantity": {
-                            "type": "integer",
-                            "required": True,
-                            "nullable": False,
-                            "coerce": to_int,
-                        },
-                    },
-                },
+                "required": False,
+                "schema": self._get_schema_lines(),
+            },
+            "recipient": {
+                "type": "dict",
+                "nullable": False,
+                "required": False,
+                "schema": self._get_schema_recipient(),
             },
         }
 
