@@ -15,16 +15,30 @@ msgstr ""
 
 #. module: alc_delivery_carrier_gls_report
 #: model:ir.ui.view,arch_db:alc_delivery_carrier_gls_report.report_delivery_report_gls_document_b2c_ref
+msgid "<span itemprop=\"name\">LOGIWEB S.A.</span>"
+msgstr ""
+
+#. module: alc_delivery_carrier_gls_report
+#: model:ir.ui.view,arch_db:alc_delivery_carrier_gls_report.report_delivery_report_gls_document_b2c_ref
+msgid "<span itemprop=\"streetAddress\">\n"
+"                     47-49 Op Zaemer<br/>\n"
+"                     L-4959 Bascharage<br/>\n"
+"                     Luxembourg\n"
+"                 </span>"
+msgstr ""
+
+#. module: alc_delivery_carrier_gls_report
+#: model:ir.ui.view,arch_db:alc_delivery_carrier_gls_report.report_delivery_report_gls_document_b2c_ref
 msgid "<strong>Reference</strong>"
 msgstr ""
 
 #. module: alc_delivery_carrier_gls_report
-#: model:ir.model,name:alc_delivery_carrier_gls_report.model_stock_quant_package
-msgid "Physical Packages"
+#: model:ir.ui.view,arch_db:alc_delivery_carrier_gls_report.report_delivery_report_gls_document_b2c_ref
+msgid "Collection point:"
 msgstr ""
 
 #. module: alc_delivery_carrier_gls_report
-#: model:ir.model.fields,field_description:alc_delivery_carrier_gls_report.field_stock_quant_package_b2c_ref
-msgid "Reference B2C"
+#: model:ir.ui.view,arch_db:alc_delivery_carrier_gls_report.report_delivery_report_gls_document_b2c_ref
+msgid "Sender:"
 msgstr ""
 
