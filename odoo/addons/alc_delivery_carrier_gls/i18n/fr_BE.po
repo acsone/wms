@@ -15,26 +15,6 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_delivery_carrier_gls
-#: model:ir.ui.view,arch_db:alc_delivery_carrier_gls.report_delivery_report_gls_document_sender
-msgid "<span itemprop=\"name\">LOGIWEB S.A.</span>"
-msgstr ""
-
-#. module: alc_delivery_carrier_gls
-#: model:ir.ui.view,arch_db:alc_delivery_carrier_gls.report_delivery_report_gls_document_sender
-msgid ""
-"<span itemprop=\"streetAddress\">\n"
-"                     47-49 Op Zaemer<br/>\n"
-"                     L-4959 Bascharage<br/>\n"
-"                     Luxembourg\n"
-"                 </span>"
-msgstr ""
-
-#. module: alc_delivery_carrier_gls
-#: model:ir.ui.view,arch_db:alc_delivery_carrier_gls.report_delivery_report_gls_document_sender
-msgid "Collection point:"
-msgstr "Point d'enlèvement :"
-
-#. module: alc_delivery_carrier_gls
 #: model:delivery.carrier,name:alc_delivery_carrier_gls.delivery_carrier_gls_be
 #: model:product.product,name:alc_delivery_carrier_gls.delivery_carrier_gls_be_product_product
 #: model:product.product,name:alc_delivery_carrier_gls.product_product_gls_be
@@ -43,7 +23,8 @@ msgstr "Point d'enlèvement :"
 msgid "GLS Belgique"
 msgstr ""
 
-#. module: alc_delivery_carrier_gls
-#: model:ir.ui.view,arch_db:alc_delivery_carrier_gls.report_delivery_report_gls_document_sender
-msgid "Sender:"
-msgstr "Expéditeur :"
+#~ msgid "Collection point:"
+#~ msgstr "Point d'enlèvement :"
+
+#~ msgid "Sender:"
+#~ msgstr "Expéditeur :"
