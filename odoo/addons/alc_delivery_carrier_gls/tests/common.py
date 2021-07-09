@@ -283,7 +283,9 @@ class GLSCommonFeatures(SavepointCase):
         return inventory
 
     @classmethod
-    def _confirm_sale_order(cls, partner=None, product=None, qty=1, carrier_id=None):
+    def _confirm_sale_order(
+        cls, partner=None, product=None, qty=1, carrier_id=None, picking_policy="direct"
+    ):
         if partner is None:
             partner = cls.partner1
         if product is None:
@@ -308,6 +310,7 @@ class GLSCommonFeatures(SavepointCase):
             "partner_id": partner.id,
             "warehouse_id": warehouse.id,
             "order_line": lines,
+            "picking_policy": picking_policy,
         }
         if carrier_id:
             so_values["carrier_id"] = carrier_id

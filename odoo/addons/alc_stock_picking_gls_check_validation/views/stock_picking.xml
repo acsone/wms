@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="stock_picking_form_view">
+        <field
+      name="name"
+    >stock.picking.form (in alc_stock_picking_gls_check_validation)</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form" />
+        <field name="arch" type="xml">
+            <div name="button_box" position="before">
+                <field name="gls_pack_in_picking" invisible="1" />
+                <div
+          class="alert alert-danger"
+          attrs="{'invisible': [('gls_pack_in_picking', '=', False)]}"
+          style="font-size:30px"
+        >
+                    <h1>
+                        You have at least one pack in the picking. Please process it/them first.
+                    </h1>
+                </div>
+            </div>
+
+            <button name="do_new_transfer" position="after">
+                <field name="is_action_force_validate_allowed" invisible="1" />
+                <button
+          name="action_force_validate"
+          string="Force validate"
+          type="object"
+          attrs="{'invisible': ['|', '|', '|', '|',  ('is_action_force_validate_allowed', '=', False), ('operator_id', '=', False), ('state', 'not in', ['draft','partially_available','assigned']), '&amp;', ('is_put_in_pack_done', '=', False), ('picking_type_subcode', '=', 'PICK')]}"
+        />
+            </button>
+
+            <field name="partner_id" position="before">
+                <field name="validate_allowed" invisible="1" />
+            </field>
+        </field>
+    </record>
+
+
+</odoo>
