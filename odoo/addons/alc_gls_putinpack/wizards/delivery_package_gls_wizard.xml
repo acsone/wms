@@ -23,7 +23,7 @@
             class="btn btn-primary"
             type="object"
             string="Put in Pack"
-            attrs="{'invisible': [('shipping_weight','=', 0)]}"
+            attrs="{'invisible': ['|', ('can_put_in_pack', '=', False), ('shipping_weight','=', 0)]}"
           />
                     <button
             name="send"
