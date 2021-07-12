@@ -134,6 +134,8 @@ class TestRecipientsService(CommonCase):
         recipient_info["zip"] = "4567"
         recipient_info["city"] = "new_city"
         recipient_info["country_code"] = "BE"
+        recipient_info["name2"] = "My Partner Society"
+        recipient_info["note"] = "Test note for delivery"
 
         _ = self.recipient_service.dispatch(
             "update", _id=recipient_info["id"], params=recipient_info
@@ -144,12 +146,16 @@ class TestRecipientsService(CommonCase):
         self.assertEqual(self.b2c_partner.zip, "4567")
         self.assertEqual(self.b2c_partner.title.name, "Madam")
         self.assertEqual(self.b2c_partner.name, "test b2cPartner")
+        self.assertEqual(self.b2c_partner.suite, "My Partner Society")
+        self.assertEqual(self.b2c_partner.comment, "Test note for delivery")
 
         self.assertEqual(self.b2c_order.partner_id.street, "new_street")
         self.assertEqual(self.b2c_order.partner_id.city, "new_city")
         self.assertEqual(self.b2c_order.partner_id.zip, "4567")
         self.assertEqual(self.b2c_order.partner_id.title.name, "Madam")
         self.assertEqual(self.b2c_order.partner_id.name, "test b2cPartner")
+        self.assertEqual(self.b2c_order.partner_id.suite, "My Partner Society")
+        self.assertEqual(self.b2c_order.partner_id.comment, "Test note for delivery")
 
     def test_update_existing_street_only(self):
         """

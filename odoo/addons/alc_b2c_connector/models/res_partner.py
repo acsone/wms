@@ -51,6 +51,10 @@ class ResPartner(models.Model):
             data["name"] = name
         if data.get("title"):
             data["title"] = self.env.ref(TITLE_XML_ID_BY_B2C_KEY[data["title"]]).id
+        if data.get("name2"):
+            data["suite"] = data.pop("name2")
+        if data.get("note"):
+            data["comment"] = data.pop("note")
         self._update_b2c_recipient_validate_data(data)
         return self.write(data)
 

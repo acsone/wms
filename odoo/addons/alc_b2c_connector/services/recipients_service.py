@@ -44,6 +44,8 @@ class RecipientsService(Component):
             "email": partner.email,
             "mobile": partner.mobile if partner.mobile else None,
             "country_code": partner.country_id.code if partner.country_id else None,
+            "name2": partner.suite if partner.suite else None,
+            "note": partner.comment if partner.comment else None,
         }
         return res
 
@@ -70,6 +72,8 @@ class RecipientsService(Component):
                 "nullable": True,
                 "allowed": self.env["res.country"]._get_codes(),
             },
+            "name2": {"type": "string", "nullable": True, "required": False},
+            "note": {"type": "string", "nullable": True, "required": False},
         }
 
     def _validator_return_update(self):
@@ -94,4 +98,6 @@ class RecipientsService(Component):
                 "nullable": True,
                 "allowed": self.env["res.country"]._get_codes(),
             },
+            "name2": {"type": "string", "nullable": True, "required": False},
+            "note": {"type": "string", "nullable": True, "required": False},
         }
