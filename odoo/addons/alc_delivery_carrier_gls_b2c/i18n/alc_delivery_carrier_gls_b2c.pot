@@ -28,3 +28,8 @@ msgstr ""
 msgid "Reference B2C"
 msgstr ""
 
+#. module: alc_delivery_carrier_gls_b2c
+#: model:ir.model.fields,field_description:alc_delivery_carrier_gls_b2c.field_stock_quant_package_company_name
+msgid "Suite Name"
+msgstr ""
+
