@@ -47,6 +47,8 @@ class SalesService(Component):
                 "nullable": True,
                 "allowed": self.env["res.country"]._get_codes(),
             },
+            "name2": {"type": "string", "nullable": True, "required": False},
+            "note": {"type": "string", "nullable": True, "required": False},
         }
 
     def _get_schema_lines(self):
