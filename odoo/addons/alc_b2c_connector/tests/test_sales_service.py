@@ -111,6 +111,7 @@ class TestSalesService(CommonCase):
             "email": cls._gen_string(),
             "phone": cls._gen_string(),
             "mobile": cls._gen_string(),
+            "name2": cls._gen_string(),
         }
 
     def _get_so_from_name(self, name):
@@ -773,6 +774,8 @@ class TestSalesService(CommonCase):
             "zip": "1234",
             "city": "test city",
             "email": "b2c@b2c.be",
+            "name2": "My company",
+            "note": "Specific note for delivery",
         }
         params = {"id": 10, "recipient": recipient_info}
         self.assertFalse(self.b2c_order.partner_id.zip)
@@ -781,6 +784,10 @@ class TestSalesService(CommonCase):
         self.sales_service.dispatch("update", _id=self.b2c_order.b2c_ref, params=params)
 
         self.assertEqual(self.b2c_order.partner_id.zip, "1234")
+        self.assertEqual(self.b2c_order.partner_id.suite, "My company")
+        self.assertEqual(
+            self.b2c_order.partner_id.comment, "Specific note for delivery"
+        )
 
     def test_update_new_recipient(self):
         recipient_info = self._gen_recipent()

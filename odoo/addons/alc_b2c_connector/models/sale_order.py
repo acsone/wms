@@ -221,6 +221,8 @@ class SaleOrder(models.Model):
                 ).id,
                 "ref": b2c_ref,
                 "country_id": country_id,
+                "suite": customer_info.get("name2"),
+                "comment": customer_info.get("note"),
             }
         )
 
