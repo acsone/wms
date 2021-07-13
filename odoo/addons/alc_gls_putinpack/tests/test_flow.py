@@ -43,6 +43,7 @@ class TestGlsFlow(TestGLSWizard):
             gls_wizard_2.put_in_pack()
         package_2 = gls_wizard_2.package_id
         self.assertEqual(package_2.shipping_weight, self.product_2.weight)
+        self.assertFalse(picking.can_put_in_pack)
 
         # after_rollback doesn't work in test mode :-/
         # mock_client_raise = MockGlsClientRaise()

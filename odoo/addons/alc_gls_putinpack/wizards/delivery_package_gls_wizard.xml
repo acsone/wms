@@ -13,6 +13,7 @@
           <field name="package_id_domain" invisible="1" />
           <field name="package_id" domain="package_id_domain" />
           <field name="is_sent" invisible="1" required="1" />
+          <field name="can_put_in_pack" invisible="1" />
           <field name="packaging_id" required="1" />
           <field name="shipping_weight" required="1" widget="weighing_widget" />
         </group>

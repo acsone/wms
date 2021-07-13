@@ -110,6 +110,8 @@ class DeliveryPackageGlsWizard(models.TransientModel):
     def put_in_pack(self):
         self._validate_parameters(put_in_pack=True)
         res = self.picking_id.put_in_pack()
+        if not res:
+            raise ValidationError(_("No package to process."))
         self.package_id = res["res_id"] if isinstance(res, dict) else res.id
         return self._send()
 
