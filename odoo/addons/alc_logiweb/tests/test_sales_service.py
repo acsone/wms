@@ -104,13 +104,20 @@ class TestSalesService(CommonCase):
                     "res_id": cls.carrier_alcyon.id,
                 }
             )
+        cls.logiweb_be_partner = cls.env.ref("alc_logiweb.logiweb_be_partner")
+        cls.logiweb_be_partner.ref = "AUNIQUESTRING"
+        cls.logiweb_partner = cls.env.ref("alc_logiweb.logiweb_partner")
+        cls.logiweb_partner.ref = "ANOTHERUNIQUESTRING"
+        cls.belgium = cls.env.ref("base.be")
+        cls.burkina_faso = cls.env.ref("base.bf")
+        cls.alcyon_category = cls.env.ref("specific_partner.partner_category_student")
 
     @classmethod
     def _gen_string(cls, length=10):
         return "".join(random.choice(string.ascii_letters) for _ in range(length))
 
     @classmethod
-    def _gen_recipent(cls, _id=None, title="mr"):
+    def _gen_recipent(cls, _id=None, title="mr", country=None):
         _id = _id or cls._gen_string()
         return {
             "id": _id,
@@ -121,6 +128,7 @@ class TestSalesService(CommonCase):
             "street2": cls._gen_string(),
             "zip": cls._gen_string(),
             "city": cls._gen_string(),
+            "country_code": (country or cls.belgium).code,
             "email": cls._gen_string(),
             "phone": cls._gen_string(),
             "mobile": cls._gen_string(),
@@ -146,7 +154,7 @@ class TestSalesService(CommonCase):
         # missing the carrier and recipient, need to be provided
         params = {
             "id": 2,
-            "customer_ref": self.vt_partner.ref,
+            "customer_ref": self.logiweb_be_partner.ref,
             "date": ISO_DT_WITH_TZ,
             "lines": [
                 {
@@ -176,6 +184,7 @@ class TestSalesService(CommonCase):
         self.b2c_backend.sale_channel = "web"
         recipient_info = self._gen_recipent()
         params = self._get_base_params(recipient=recipient_info, carrier="GLS_BE")
+        params["customer_ref"] = self.vt_partner.ref
         res = self.sales_service.dispatch("create", params=params)
         self.assertTrue(res)
         new_so = self._get_so_from_name(res["ref"])
@@ -222,7 +231,7 @@ class TestSalesService(CommonCase):
         self.assertEqual(new_so.gls_parcel_shop, gls_parcel_shop)
         customer_partner = self._get_customer(recipient_info)
         self.assertEqual(new_so.partner_id, customer_partner)
-        self.assertEqual(new_so.partner_invoice_id, self.vt_partner)
+        self.assertEqual(new_so.partner_invoice_id, self.logiweb_be_partner)
         self.assertEqual(new_so.partner_shipping_id, customer_partner)
 
         new_so_api = self.sales_service.dispatch("get", _id=new_so.b2c_ref)
@@ -276,16 +285,94 @@ class TestSalesService(CommonCase):
         """
         self.b2c_backend.sale_channel = "logiweb"
         recipient_info = self._gen_recipent()
-        carrier = "ALCYON"
-        params = self._get_base_params(recipient=recipient_info, carrier=carrier,)
+        params = self._get_base_params(recipient=recipient_info, carrier="ALCYON")
         res = self.sales_service.dispatch("create", params=params)
         self.assertTrue(res)
         new_so = self._get_so_from_name(res["ref"])
         self.assertTrue(new_so)
-        self.assertEqual(
-            new_so.carrier_id, self.env.ref("__setup__.deliver_carrier_alcyon"),
-        )
+        self.assertEqual(new_so.carrier_id, self.carrier_alcyon)
         customer_partner = self._get_customer(recipient_info)
         self.assertEqual(new_so.partner_id, customer_partner)
-        self.assertEqual(new_so.partner_invoice_id, self.vt_partner)
-        self.assertEqual(new_so.partner_shipping_id, self.vt_partner)
+        self.assertEqual(new_so.partner_invoice_id, self.logiweb_be_partner)
+        self.assertEqual(new_so.partner_shipping_id, self.logiweb_be_partner)
+
+    def test_create_through_logiweb_be_partner_be_logiweb(self):
+        self.b2c_backend.sale_channel = "logiweb"
+        b2c_be_partner = self.env["res.partner"].create(
+            {
+                "name": "B2C PARTNER in belgium",
+                "is_b2c_customer": True,
+                "alcyon_category_id": self.alcyon_category.id,
+                "ref": "%s_in_ABC" % self.b2c_backend.sale_channel,
+                "email": "b2c@b2cbe.be",
+                "country_id": self.belgium.id,
+            }
+        )
+        recipient_info = self._gen_recipent(_id="in_ABC")
+        params = self._get_base_params(recipient=recipient_info, carrier="GLS_BE")
+        params["customer_ref"] = self.logiweb_be_partner.ref
+        res = self.sales_service.dispatch("create", params=params)
+
+        customer_partner = self._get_customer(recipient_info)
+        self.assertEqual(b2c_be_partner, customer_partner)
+        so = self._get_so_from_name(res["ref"])
+        self.assertEqual(so.partner_invoice_id, self.logiweb_be_partner)
+        self.assertEqual(so.partner_shipping_id, customer_partner)
+
+    def test_create_through_logiweb_notbe_partner_notbe_logiweb(self):
+        self.b2c_backend.sale_channel = "logiweb"
+        b2c_not_be_partner = self.env["res.partner"].create(
+            {
+                "name": "B2C PARTNER outside belgium",
+                "is_b2c_customer": True,
+                "alcyon_category_id": self.alcyon_category.id,
+                "ref": "%s_out_ABC" % self.b2c_backend.sale_channel,
+                "email": "b2c@b2cnotbe.com",
+                "country_id": self.burkina_faso.id,
+            }
+        )
+        recipient_info = self._gen_recipent(_id="out_ABC", country=self.burkina_faso)
+        params = self._get_base_params(recipient=recipient_info, carrier="GLS_BE")
+        params["customer_ref"] = self.logiweb_partner.ref
+        res = self.sales_service.dispatch("create", params=params)
+        customer_partner = self._get_customer(recipient_info)
+        self.assertEqual(b2c_not_be_partner, customer_partner)
+        so = self._get_so_from_name(res["ref"])
+        self.assertEqual(so.partner_invoice_id, self.logiweb_partner)
+        self.assertEqual(so.partner_shipping_id, customer_partner)
+
+    def test_create_through_logiweb_be_partner_notbe_logiweb(self):
+        self.b2c_backend.sale_channel = "logiweb"
+        self.env["res.partner"].create(
+            {
+                "name": "B2C PARTNER in belgium",
+                "is_b2c_customer": True,
+                "alcyon_category_id": self.alcyon_category.id,
+                "ref": "%s_in_ABC" % self.b2c_backend.sale_channel,
+                "email": "b2c@b2cbe.be",
+                "country_id": self.belgium.id,
+            }
+        )
+        recipient_info = self._gen_recipent(_id="in_ABC")
+        params = self._get_base_params(recipient=recipient_info, carrier="GLS_BE")
+        params["customer_ref"] = self.logiweb_partner.ref
+        with self.assertRaises(ValidationError):
+            self.sales_service.dispatch("create", params=params)
+
+    def test_create_through_logiweb_notbe_partner_be_logiweb(self):
+        self.b2c_backend.sale_channel = "logiweb"
+        self.env["res.partner"].create(
+            {
+                "name": "B2C PARTNER outside belgium",
+                "is_b2c_customer": True,
+                "alcyon_category_id": self.alcyon_category.id,
+                "ref": "%s_out_ABC" % self.b2c_backend.sale_channel,
+                "email": "b2c@b2cnotbe.com",
+                "country_id": self.burkina_faso.id,
+            }
+        )
+        recipient_info = self._gen_recipent(_id="out_ABC", country=self.burkina_faso)
+        params = self._get_base_params(recipient=recipient_info, carrier="GLS_BE")
+        params["customer_ref"] = self.logiweb_be_partner.ref
+        with self.assertRaises(ValidationError):
+            self.sales_service.dispatch("create", params=params)
