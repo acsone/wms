@@ -16,18 +16,17 @@ class ResPartner(models.Model):
     _inherit = "res.partner"
 
     def _update_b2c_recipient_validate_data(self, data):
-        """If this partner has one closed sale, only allow update of contact fields."""
+        """If this partner has one started picking out, only update contact fields."""
         self.ensure_one()
-        domain_orders = [("partner_id", "=", self.id), ("state", "=", "done")]
-        if self.env["sale.order"].search(domain_orders, limit=1):
-            for key in data:
-                if key not in ("mobile", "phone", "email") and data[key] != self[key]:
-                    msg = _(
-                        "You cannot update this address since there are already"
-                        " closed Sale Orders for this partner. "
-                        "Incoherent field: %s, current value: %s"
-                    )
-                    raise ValidationError(msg % (key, self[key]))
+        domain_pickings = [
+            ("customer_id", "=", self.id),
+            ("picking_type_code", "=", "outgoing"),
+            ("printed", "=", True),
+        ]
+        keys = ["mobile", "phone", "email", "note"]
+        if self.env["stock.picking"].search(domain_pickings, limit=1):
+            return {key: value for key, value in data.items() if key in keys}
+        return data
 
     @api.model
     def _update_b2c_recipient(self, b2c_id, b2c_backend, data):
@@ -55,7 +54,7 @@ class ResPartner(models.Model):
             data["suite"] = data.pop("name2")
         if data.get("note"):
             data["comment"] = data.pop("note")
-        self._update_b2c_recipient_validate_data(data)
+        data = self._update_b2c_recipient_validate_data(data)
         return self.write(data)
 
     @api.model
