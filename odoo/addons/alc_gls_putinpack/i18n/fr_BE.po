@@ -17,6 +17,13 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_gls_putinpack
+#: model:ir.model.fields,field_description:alc_gls_putinpack.field_delivery_package_gls_wizard_can_put_in_pack
+#: model:ir.model.fields,field_description:alc_gls_putinpack.field_stock_picking_can_put_in_pack
+#, fuzzy
+msgid "Can put in pack"
+msgstr "↳Ajouter au colis"
+
+#. module: alc_gls_putinpack
 #: model:ir.ui.view,arch_db:alc_gls_putinpack.delivery_package_gls_wizard_form_view
 msgid "Cancel"
 msgstr "Annuler"
@@ -82,15 +89,21 @@ msgid "Last Updated on"
 msgstr "Dernière mise à jour le"
 
 #. module: alc_gls_putinpack
-#: code:addons/alc_gls_putinpack/wizards/delivery_package_gls_wizard.py:105
+#: code:addons/alc_gls_putinpack/wizards/delivery_package_gls_wizard.py:108
 #, python-format
 msgid "Missing parameter: %s"
 msgstr "Paramètre manquant: %s"
 
 #. module: alc_gls_putinpack
-#: code:addons/alc_gls_putinpack/models/stock_picking.py:19
+#: code:addons/alc_gls_putinpack/models/stock_picking.py:32
 #, python-format
 msgid "More than one pack"
+msgstr ""
+
+#. module: alc_gls_putinpack
+#: code:addons/alc_gls_putinpack/wizards/delivery_package_gls_wizard.py:114
+#, python-format
+msgid "No package to process."
 msgstr ""
 
 #. module: alc_gls_putinpack
