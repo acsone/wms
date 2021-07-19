@@ -19,6 +19,11 @@ msgid "Order Reference"
 msgstr ""
 
 #. module: alc_delivery_carrier_gls_b2c
+#: model:ir.model,name:alc_delivery_carrier_gls_b2c.model_res_partner
+msgid "Partner"
+msgstr ""
+
+#. module: alc_delivery_carrier_gls_b2c
 #: model:ir.model,name:alc_delivery_carrier_gls_b2c.model_stock_quant_package
 msgid "Physical Packages"
 msgstr ""
@@ -26,10 +31,5 @@ msgstr ""
 #. module: alc_delivery_carrier_gls_b2c
 #: model:ir.model.fields,field_description:alc_delivery_carrier_gls_b2c.field_stock_quant_package_b2c_ref
 msgid "Reference B2C"
-msgstr ""
-
-#. module: alc_delivery_carrier_gls_b2c
-#: model:ir.model.fields,field_description:alc_delivery_carrier_gls_b2c.field_stock_quant_package_company_name
-msgid "Suite Name"
 msgstr ""
 
