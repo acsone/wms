@@ -25,7 +25,7 @@ msgstr "Forcer validation"
 #: model:ir.model.fields,field_description:alc_stock_picking_gls_check_validation.field_stock_picking_gls_pack_in_picking
 #, fuzzy
 msgid "Gls pack in picking"
-msgstr "Médicaments dans le picking"
+msgstr "Pack dans le picking"
 
 #. module: alc_stock_picking_gls_check_validation
 #: model:ir.model.fields,field_description:alc_stock_picking_gls_check_validation.field_stock_picking_is_action_force_validate_allowed
@@ -60,8 +60,7 @@ msgstr "Vous ne disposez pas des droits pour forcer la validation"
 #, fuzzy, python-format
 msgid "You cannot validate the picking before all the packs are done"
 msgstr ""
-"Vous ne pouvez pas valider le picking avant d'avoir validé le pack "
-"médicaments"
+"Vous ne pouvez pas valider le picking avant d'avoir traité toutes les opérations"
 
 #. module: alc_stock_picking_gls_check_validation
 #: model:ir.ui.view,arch_db:alc_stock_picking_gls_check_validation.stock_picking_form_view
