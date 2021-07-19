@@ -44,6 +44,9 @@ class DeliveryPackageGlsWizard(models.TransientModel):
         domain=[("package_carrier_type", "=", "gls")],
     )
     shipping_weight = fields.Float(string="Shipping Weight")
+    can_put_in_pack = fields.Boolean(
+        related="picking_id.can_put_in_pack", readonly=True
+    )
 
     @api.depends("picking_id")
     def _compute_allowed_package_ids(self):
@@ -107,6 +110,8 @@ class DeliveryPackageGlsWizard(models.TransientModel):
     def put_in_pack(self):
         self._validate_parameters(put_in_pack=True)
         res = self.picking_id.put_in_pack()
+        if not res:
+            raise ValidationError(_("No package to process."))
         self.package_id = res["res_id"] if isinstance(res, dict) else res.id
         return self._send()
 

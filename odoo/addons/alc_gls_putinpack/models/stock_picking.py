@@ -2,12 +2,25 @@
 # Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _, models
+from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 
 
 class StockPicking(models.Model):
     _inherit = "stock.picking"
+
+    can_put_in_pack = fields.Boolean(compute="_compute_can_put_in_pack")
+
+    @api.depends(
+        "pack_operation_ids",
+        "pack_operation_ids.qty_done",
+        "pack_operation_ids.result_package_id",
+    )
+    def _compute_can_put_in_pack(self):
+        for record in self:
+            filter_operations = lambda o: o.qty_done and not o.result_package_id
+            operations = record.pack_operation_ids
+            record.can_put_in_pack = bool(operations.filtered(filter_operations))
 
     def _get_gls_pack_package(self, operations):
         """Private method, only call it if conditions are checked before."""
