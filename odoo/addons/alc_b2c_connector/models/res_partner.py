@@ -23,9 +23,16 @@ class ResPartner(models.Model):
             ("picking_type_code", "=", "outgoing"),
             ("printed", "=", True),
         ]
-        keys = ["mobile", "phone", "email", "note"]
+        keys = ["mobile", "phone", "email", "comment"]
         if self.env["stock.picking"].search(domain_pickings, limit=1):
-            return {key: value for key, value in data.items() if key in keys}
+            for key in data:
+                if key not in keys and data[key] != self[key]:
+                    msg = _(
+                        "You cannot update this address since there are already"
+                        " closed Sale Orders for this partner. "
+                        "Incoherent field: %s, current value: %s"
+                    )
+                    raise ValidationError(msg % (key, self[key]))
         return data
 
     @api.model
@@ -54,7 +61,7 @@ class ResPartner(models.Model):
             data["suite"] = data.pop("name2")
         if data.get("note"):
             data["comment"] = data.pop("note")
-        data = self._update_b2c_recipient_validate_data(data)
+        self._update_b2c_recipient_validate_data(data)
         return self.write(data)
 
     @api.model
