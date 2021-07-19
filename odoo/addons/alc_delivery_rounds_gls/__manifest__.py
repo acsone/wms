@@ -15,7 +15,7 @@
         "delivery_rounds",
         "alc_delivery_rounds_operator",
     ],
-    "data": ["views/round_instance.xml"],
+    "data": [],
     "installable": True,
     "application": False,
 }
