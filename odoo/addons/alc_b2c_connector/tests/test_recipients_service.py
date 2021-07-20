@@ -209,6 +209,7 @@ class TestRecipientsService(CommonCase):
             "phone": "1",
             "mobile": "2",
             "email": "3",
+            "title": "mr",  # the value that is already set
             "street": self.b2c_partner.street,
             "zip": self.b2c_partner.zip,
             "city": self.b2c_partner.city,

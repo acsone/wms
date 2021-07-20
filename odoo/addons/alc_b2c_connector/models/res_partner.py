@@ -26,13 +26,14 @@ class ResPartner(models.Model):
         keys = ["mobile", "phone", "email", "comment"]
         if self.env["stock.picking"].search(domain_pickings, limit=1):
             for key in data:
-                if key not in keys and data[key] != self[key]:
+                value = self[key] if key != "title" else self[key].id
+                if key not in keys and data[key] != value:
                     msg = _(
                         "You cannot update this address since there are already"
                         " closed Sale Orders for this partner. "
                         "Incoherent field: %s, current value: %s"
                     )
-                    raise ValidationError(msg % (key, self[key]))
+                    raise ValidationError(msg % (key, value))
         return data
 
     @api.model
