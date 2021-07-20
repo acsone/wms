@@ -15,6 +15,14 @@ TITLE_XML_ID_BY_B2C_KEY = {
 class ResPartner(models.Model):
     _inherit = "res.partner"
 
+    _sql_constraints = [
+        (
+            "ref_unique",
+            "EXCLUDE (ref WITH =) WHERE (ref <> '' or ref is not null)",
+            _("This reference already exists."),
+        )
+    ]
+
     def _update_b2c_recipient_validate_data(self, data):
         """If this partner has one started picking out, only update contact fields."""
         self.ensure_one()
