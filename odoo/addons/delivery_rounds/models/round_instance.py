@@ -834,11 +834,23 @@ class RoundInstanceCustomer(models.Model):
         "stock.picking", "delivery_round_customer_id", "Pickings", readonly=True
     )
 
-    delivered = fields.Boolean("Delivered")
+    delivered = fields.Boolean("Delivered", compute="_compute_delivered", store=True)
     delivery_not_allowed = fields.Boolean(
         "Delivery not allowed", compute="_compute_delivery_allowed", default=False
     )
     delivery_error = fields.Char()
+
+    @api.depends("picking_ids", "picking_ids.state")
+    def _compute_delivered(self):
+        inverse_name = self._fields["picking_ids"].inverse_name
+        res = self.env["stock.picking"].read_group(
+            [("state", "not in", ["cancel", "done"]), (inverse_name, "in", self.ids)],
+            [inverse_name],
+            inverse_name,
+        )
+        not_sent = {i[inverse_name][0] for i in res}
+        for rec in self:
+            rec.delivered = rec.id not in not_sent
 
     @api.depends(
         "delivery_round_id",
@@ -1060,7 +1072,7 @@ class RoundInstanceCustomer(models.Model):
                     % (", ".join(ongoing_pickings.mapped("name")))
                 )
 
-            self.write({"delivered": True, "delivery_error": ""})
+            self.write({"delivery_error": ""})
 
             # FIXME: should be moved out of delivery_round module and applied in do_transfer
             if self.partner_id.is_sale_back_order_cancel:
