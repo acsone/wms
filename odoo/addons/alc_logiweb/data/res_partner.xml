@@ -12,4 +12,14 @@
     <field name="city">Bascharage</field>
     <field name="country_id" ref="base.lu" />
   </record>
+  <record id="logiweb_be_partner" model="res.partner">
+    <field name="name">Logiweb Belgium</field>
+    <field name="is_company" eval="True" />
+    <field name="supplier" eval="False" />
+    <field name="customer" eval="True" />
+    <field name="street">Rue de l’eau 2</field>
+    <field name="zip">4920</field>
+    <field name="city">Bascharage</field>
+    <field name="country_id" ref="base.lu" />
+  </record>
 </odoo>
