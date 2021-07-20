@@ -224,3 +224,30 @@ class TestRecipientsService(CommonCase):
         self.assertEqual(self.b2c_partner.email, "3")
         self.assertEqual(self.b2c_partner.comment, "new note")
         self.assertEqual(self.b2c_partner.street, "my first street")
+
+    def test_update_nullable_fields(self):
+        """Updatable fields can be erased by passing None."""
+        self.b2c_partner.write({"phone": "0", "mobile": "1", "comment": "C"})
+        recipient_info = {"id": "ABC", "phone": None, "mobile": None, "note": None}
+        # when
+        self.recipient_service.dispatch(
+            "update", _id=recipient_info["id"], params=recipient_info
+        )
+        self.assertFalse(self.b2c_partner.phone)
+        self.assertFalse(self.b2c_partner.mobile)
+        self.assertFalse(self.b2c_partner.comment)
+
+    def test_name2(self):
+        """Suite can be nulled, and is not updatable after a picking is started."""
+        self.b2c_partner.suite = "C"
+        self.recipient_service.dispatch(
+            "update", _id="ABC", params={"id": "ABC", "name2": None}
+        )
+        self.assertFalse(self.b2c_partner.suite)
+
+        self.b2c_order.action_confirm()
+        self.b2c_order.mapped("picking_ids").write({"printed": True})
+        with self.assertRaises(ValidationError):
+            self.recipient_service.dispatch(
+                "update", _id="ABC", params={"id": "ABC", "name2": "S"}
+            )
