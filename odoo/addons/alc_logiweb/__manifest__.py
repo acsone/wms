@@ -6,7 +6,7 @@
     "name": "Alc Logiweb",
     "description": """
         Alcyon: Logiweb connector""",
-    "version": "10.0.1.0.1",
+    "version": "10.0.1.0.2",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
