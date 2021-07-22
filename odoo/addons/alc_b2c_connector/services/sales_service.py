@@ -24,7 +24,7 @@ class SalesService(Component):
     _name = "sales.service"
     _usage = "sales"
 
-    def _get_schema_recipient(self):
+    def _get_schema_recipient(self, create=True):
         return {
             "id": {"type": "string", "nullable": False, "required": True},
             "title": {
@@ -33,18 +33,19 @@ class SalesService(Component):
                 "required": False,
                 "allowed": ["mr", "mm"],
             },
-            "first_name": {"type": "string", "nullable": False, "required": True},
-            "last_name": {"type": "string", "nullable": False, "required": True},
+            "first_name": {"type": "string", "nullable": False, "required": create},
+            "last_name": {"type": "string", "nullable": False, "required": create},
             "street": {"type": "string", "nullable": True, "required": False},
             "street2": {"type": "string", "nullable": True, "required": False},
             "zip": {"type": "string", "nullable": True, "required": False},
             "city": {"type": "string", "nullable": True, "required": False},
-            "email": {"type": "string", "nullable": False, "required": True},
+            "email": {"type": "string", "nullable": False, "required": create},
             "phone": {"type": "string", "nullable": True, "required": False},
             "mobile": {"type": "string", "nullable": True, "required": False},
             "country_code": {
                 "type": "string",
-                "nullable": True,
+                "nullable": False,  # None was not in allowed anyway
+                "required": False,
                 "allowed": self.env["res.country"]._get_codes(),
             },
             "name2": {"type": "string", "nullable": True, "required": False},
@@ -180,7 +181,7 @@ class SalesService(Component):
                 "type": "dict",
                 "nullable": False,
                 "required": False,
-                "schema": self._get_schema_recipient(),
+                "schema": self._get_schema_recipient(create=False),
             },
         }
 

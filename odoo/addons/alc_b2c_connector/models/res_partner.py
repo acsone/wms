@@ -34,7 +34,7 @@ class ResPartner(models.Model):
         keys = ["mobile", "phone", "email", "comment"]
         if self.env["stock.picking"].search(domain_pickings, limit=1):
             for key in data:
-                value = self[key] if key != "title" else self[key].id
+                value = self[key].id if key in {"title", "country_id"} else self[key]
                 if key not in keys and data[key] != value:
                     msg = _(
                         "You cannot update this address since there are already"

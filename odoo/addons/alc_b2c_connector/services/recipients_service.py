@@ -69,7 +69,8 @@ class RecipientsService(Component):
             "mobile": {"type": "string", "nullable": True, "required": False},
             "country_code": {
                 "type": "string",
-                "nullable": True,
+                "nullable": False,
+                "required": False,
                 "allowed": self.env["res.country"]._get_codes(),
             },
             "name2": {"type": "string", "nullable": True, "required": False},
@@ -95,7 +96,8 @@ class RecipientsService(Component):
             "mobile": {"type": "string", "nullable": True, "required": False},
             "country_code": {
                 "type": "string",
-                "nullable": True,
+                "nullable": False,
+                "required": False,
                 "allowed": self.env["res.country"]._get_codes(),
             },
             "name2": {"type": "string", "nullable": True, "required": False},
