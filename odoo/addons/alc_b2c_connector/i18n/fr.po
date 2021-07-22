@@ -238,7 +238,7 @@ msgid "Sale channel"
 msgstr "Canal de vente"
 
 #. module: alc_b2c_connector
-#: code:addons/alc_b2c_connector/services/sales_service.py:230
+#: code:addons/alc_b2c_connector/services/sales_service.py:231
 #, python-format
 msgid "Sale order not found for id %s"
 msgstr "Bon de commande inconnu avec l'id %s"
