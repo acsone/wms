@@ -67,7 +67,7 @@ class SaleOrder(models.Model):
             if True in internal_moves.mapped("picking_id.printed"):
                 continue
 
-            if line.order_id.auto_finalize_processing:
+            if internal_moves and line.order_id.auto_finalize_processing:
                 canceled_orders |= line.order_id
                 wiz = wizard.with_context(active_id=line.id)
                 wiz.cancel_remaining_qty()
