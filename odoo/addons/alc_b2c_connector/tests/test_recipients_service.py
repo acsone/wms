@@ -15,6 +15,7 @@ class TestRecipientsService(CommonCase):
         super(TestRecipientsService, cls).setUpClass()
 
         title_id = cls.env.ref("base.res_partner_title_mister").id
+        cls.belgium = cls.env.ref("base.be")
         # create a b2c_partner
         cls.b2c_partner = cls.env["res.partner"].create(
             {
@@ -29,6 +30,7 @@ class TestRecipientsService(CommonCase):
                 ).id,
                 "ref": "%s_ABC" % cls.b2c_backend.sale_channel,
                 "email": "b2c@b2c.be",
+                "country_id": cls.belgium.id,
             }
         )
 
@@ -191,11 +193,11 @@ class TestRecipientsService(CommonCase):
             lambda p: p.picking_type_code == "outgoing"
         )
         ship.printed = True
-        recipient_info = {"id": "ABC", "street": "new_street"}
-        with self.assertRaises(ValidationError):
-            self.recipient_service.dispatch(
-                "update", _id=recipient_info["id"], params=recipient_info
-            )
+        fields = {"city", "country_code", "street", "street2", "first_name", "zip"}
+        for field in fields:
+            params = {"id": "ABC", field: "BF" if field == "country_code" else "X"}
+            with self.assertRaises(ValidationError):
+                self.recipient_service.dispatch("update", _id="ABC", params=params)
 
     def test_update_contact_fields_for_partner_with_started_picking(self):
         """We can always update the contact fields (phone, mobile, email)"""
@@ -210,6 +212,7 @@ class TestRecipientsService(CommonCase):
             "mobile": "2",
             "email": "3",
             "title": "mr",  # the value that is already set
+            "country_code": "BE",  # the value that is already set
             "street": self.b2c_partner.street,
             "zip": self.b2c_partner.zip,
             "city": self.b2c_partner.city,
