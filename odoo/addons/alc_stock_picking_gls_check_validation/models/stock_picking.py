@@ -14,11 +14,6 @@ class StockPicking(models.Model):
         compute="_compute_gls_pack_in_picking",
         help="Technical field to check if there are packs in the current picking meaning they have to be processed first",
     )
-
-    is_action_force_validate_allowed = fields.Boolean(
-        compute="_compute_is_action_force_validate_allowed"
-    )
-
     validate_allowed = fields.Boolean(compute="_compute_is_validate_allowed")
 
     @api.depends("picking_type_code", "delivery_type", "pack_operation_pack_ids")
@@ -45,19 +40,14 @@ class StockPicking(models.Model):
             else:
                 rec.validate_allowed = True
 
-    @api.depends("state")
-    def _compute_is_action_force_validate_allowed(self):
+    def _check_is_action_force_validate_allowed(self):
         has_group = (
             self.user_has_groups("base.group_no_one")
             or self.env.user.id == SUPERUSER_ID
         )
-        for rec in self:
-            rec.is_action_force_validate_allowed = has_group and (
-                rec.state in ("draft,partially_available,assigned")
-            )
-
-    def _check_is_action_force_validate_allowed(self):
-        if any(not rec.is_action_force_validate_allowed for rec in self):
+        allowed_states = ("draft", "partially_available", "assigned")
+        states = self.mapped("state")
+        if not has_group and any(s not in allowed_states for s in states):
             raise UserError(_("You are not allowed to force the validation"))
 
     @api.multi
