@@ -71,7 +71,7 @@ class StockPackOperation(models.Model):
             moves = rec.linked_move_operation_ids.mapped("move_id")
             picking = rec.picking_id
             moves = moves.filtered(lambda m, p=picking: m.picking_id == p)
-            rec.priority = max(moves.mapped("priority"))
+            rec.priority = max(moves.mapped("priority") or ["1"])
 
     def _split_pickings_from_source_location(self):
         """Ensure that the related pickings will have the same source location.
