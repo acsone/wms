@@ -147,8 +147,10 @@ class RoundInstance(models.Model):
     @api.depends("shipping_ids")
     def _compute_warehouse_id(self):
         for record in self:
-            warehouse_id = record.picking_ids[0].location_id.get_warehouse().id
-            record.warehouse_id = self.env["stock.warehouse"].browse(warehouse_id)
+            warehouse = False
+            if record.picking_ids:
+                warehouse = record.picking_ids[0].location_id.get_warehouse()
+            record.warehouse_id = warehouse
 
     @api.model
     def create(self, vals):
