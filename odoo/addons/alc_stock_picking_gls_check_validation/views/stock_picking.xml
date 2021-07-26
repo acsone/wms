@@ -10,18 +10,18 @@
         <field name="model">stock.picking</field>
         <field name="inherit_id" ref="stock.view_picking_form" />
         <field name="arch" type="xml">
-            <div name="button_box" position="before">
+            <header position="after">
                 <field name="gls_pack_in_picking" invisible="1" />
                 <div
           class="alert alert-danger"
+          style="margin-bottom:0px;font-weight: bolder;text-align: center;"
+          role="alert"
           attrs="{'invisible': [('gls_pack_in_picking', '=', False)]}"
-          style="font-size:30px"
         >
-                    <h1>
-                        You have at least one pack in the picking. Please process it/them first.
-                    </h1>
-                </div>
-            </div>
+                            You have at least one pack in the picking. Please process it/them first.
+                        </div>
+            </header>
+
 
             <button name="do_new_transfer" position="after">
                 <field name="is_action_force_validate_allowed" invisible="1" />
