@@ -28,11 +28,6 @@ msgid "Gls pack in picking"
 msgstr "Pack dans le picking"
 
 #. module: alc_stock_picking_gls_check_validation
-#: model:ir.model.fields,field_description:alc_stock_picking_gls_check_validation.field_stock_picking_is_action_force_validate_allowed
-msgid "Is action force validate allowed"
-msgstr "Is action force validate allowed"
-
-#. module: alc_stock_picking_gls_check_validation
 #: model:ir.model.fields,help:alc_stock_picking_gls_check_validation.field_stock_picking_gls_pack_in_picking
 msgid ""
 "Technical field to check if there are packs in the current picking meaning "
@@ -50,17 +45,18 @@ msgid "Validate allowed"
 msgstr "Validation autorisée"
 
 #. module: alc_stock_picking_gls_check_validation
-#: code:addons/alc_stock_picking_gls_check_validation/models/stock_picking.py:61
+#: code:addons/alc_stock_picking_gls_check_validation/models/stock_picking.py:51
 #, python-format
 msgid "You are not allowed to force the validation"
 msgstr "Vous ne disposez pas des droits pour forcer la validation"
 
 #. module: alc_stock_picking_gls_check_validation
-#: code:addons/alc_stock_picking_gls_check_validation/models/stock_picking.py:78
+#: code:addons/alc_stock_picking_gls_check_validation/models/stock_picking.py:68
 #, fuzzy, python-format
 msgid "You cannot validate the picking before all the packs are done"
 msgstr ""
-"Vous ne pouvez pas valider le picking avant d'avoir traité toutes les opérations"
+"Vous ne pouvez pas valider le picking avant d'avoir traité toutes les "
+"opérations"
 
 #. module: alc_stock_picking_gls_check_validation
 #: model:ir.ui.view,arch_db:alc_stock_picking_gls_check_validation.stock_picking_form_view
@@ -69,3 +65,6 @@ msgid ""
 msgstr ""
 "Au moins un pack se trouve dans le picking. Veuillez le/les réaliser en "
 "premier."
+
+#~ msgid "Is action force validate allowed"
+#~ msgstr "Is action force validate allowed"

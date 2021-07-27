@@ -24,11 +24,6 @@ msgid "Gls pack in picking"
 msgstr ""
 
 #. module: alc_stock_picking_gls_check_validation
-#: model:ir.model.fields,field_description:alc_stock_picking_gls_check_validation.field_stock_picking_is_action_force_validate_allowed
-msgid "Is action force validate allowed"
-msgstr ""
-
-#. module: alc_stock_picking_gls_check_validation
 #: model:ir.model.fields,help:alc_stock_picking_gls_check_validation.field_stock_picking_gls_pack_in_picking
 msgid "Technical field to check if there are packs in the current picking meaning they have to be processed first"
 msgstr ""
@@ -44,13 +39,13 @@ msgid "Validate allowed"
 msgstr ""
 
 #. module: alc_stock_picking_gls_check_validation
-#: code:addons/alc_stock_picking_gls_check_validation/models/stock_picking.py:61
+#: code:addons/alc_stock_picking_gls_check_validation/models/stock_picking.py:51
 #, python-format
 msgid "You are not allowed to force the validation"
 msgstr ""
 
 #. module: alc_stock_picking_gls_check_validation
-#: code:addons/alc_stock_picking_gls_check_validation/models/stock_picking.py:78
+#: code:addons/alc_stock_picking_gls_check_validation/models/stock_picking.py:68
 #, python-format
 msgid "You cannot validate the picking before all the packs are done"
 msgstr ""
