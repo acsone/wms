@@ -17,7 +17,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_delivery_rounds_geooptimize
-#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:544
+#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:546
 #, python-format
 msgid "%s: Optimization api call failed"
 msgstr "%s: Echec lors de l'appel à l'API d'optimisation"
@@ -52,7 +52,7 @@ msgid "Additional resources configuration (json)"
 msgstr "Paramètres additional de configuration des ressources (json)"
 
 #. module: alc_delivery_rounds_geooptimize
-#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:682
+#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:684
 #, python-format
 msgid "Can't export a not complete optimization for %s"
 msgstr "Impossible d'exporter une optimisation non terminée pour %s"
@@ -70,7 +70,7 @@ msgid "Change the default delivery duration for this specific partner"
 msgstr "Utilisation d'une durée spécifique de livraison pour ce clientr"
 
 #. module: alc_delivery_rounds_geooptimize
-#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:555
+#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:557
 #, python-format
 msgid "Check geo optimization status for %s"
 msgstr "Vérification de l'état de l'optimisation géographique pour %s"
@@ -128,7 +128,7 @@ msgid "Error"
 msgstr "Erreur"
 
 #. module: alc_delivery_rounds_geooptimize
-#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:661
+#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:663
 #, python-format
 msgid "Export optimization result to operational planning for %s"
 msgstr ""
@@ -287,7 +287,7 @@ msgid "Optimization error message"
 msgstr "Message d'erreur du processus d'optimisatione"
 
 #. module: alc_delivery_rounds_geooptimize
-#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:700
+#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:702
 #, python-format
 msgid "Optimization for %s exported to operational planning."
 msgstr "Optimisation %s exporté vers l'app mobile."
@@ -298,7 +298,7 @@ msgid "Optimization process max duration"
 msgstr "Durée maximale du processus d'optimisation"
 
 #. module: alc_delivery_rounds_geooptimize
-#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:211
+#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:213
 #, python-format
 msgid "Optimization requests sent to external system."
 msgstr "Demandes d'optimisation envoyées au système externe."
@@ -329,7 +329,7 @@ msgid "Partner"
 msgstr "Partenaire"
 
 #. module: alc_delivery_rounds_geooptimize
-#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:194
+#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:196
 #, python-format
 msgid "Please configure your timezone in your user preferences"
 msgstr ""
@@ -377,14 +377,14 @@ msgid "The cost of a resource working for an hour."
 msgstr "Le coût d'une ressource travaillant pendant une heure."
 
 #. module: alc_delivery_rounds_geooptimize
-#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:655
+#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:657
 #, python-format
 msgid ""
 "The delivery round %s will be exported to tha mobile App into background."
 msgstr "La tournée %s sera exportée vers l'application mobile en arrière-plan."
 
 #. module: alc_delivery_rounds_geooptimize
-#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:617
+#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:619
 #, python-format
 msgid ""
 "The following partner ids are not expected into the optimization result: %s"
@@ -393,7 +393,7 @@ msgstr ""
 "l'optimisation: %s"
 
 #. module: alc_delivery_rounds_geooptimize
-#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:609
+#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:611
 #, python-format
 msgid "The following partners are not found into the optimization result: %s"
 msgstr ""
