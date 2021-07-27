@@ -24,6 +24,7 @@ setup(
         "xlrd",
         "numpy",  # speedup pyshape
         "odoo10-addon-logging-json",
+        "odoo10-addon-stock-no-negative",
     ],
     entry_points="""
         [console_scripts]
