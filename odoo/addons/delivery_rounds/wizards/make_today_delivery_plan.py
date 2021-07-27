@@ -36,9 +36,8 @@ class MakeTodayDeliveryPlan(models.TransientModel):
             lambda t: any(tag in t.tag_ids for tag in self.tag_ids)
         )
         execution_date = self.execution_date
-        instances = round_instance.search(
-            [("date", "=", execution_date)], order="template_id"
-        )
+        domain = [("date", "=", execution_date), ("state", "in", ["draft", "pending"])]
+        instances = round_instance.search(domain, order="template_id")
         instances_by_template = dict(groupby(instances, key=lambda r: r.template_id))
         for template in templates:
             if template in instances_by_template:

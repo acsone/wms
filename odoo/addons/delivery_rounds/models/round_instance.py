@@ -672,12 +672,9 @@ class RoundInstance(models.Model):
         self.filtered(lambda ri: ri.state != "done").mapped(
             "instance_customer_ids"
         ).filtered(lambda c: not c.delivered)._deliver(background=background)
-        self.write(
-            {
-                "state": "delivering",
-                "stat_time_loading": self._compute_stat_time_loading(),
-            }
-        )
+        for instance in self:
+            stat_time = instance._compute_stat_time_loading()
+            instance.write({"state": "delivering", "stat_time_loading": stat_time})
         self.recheck_delivery_state()
 
     def _compute_stat_time_loading(self):

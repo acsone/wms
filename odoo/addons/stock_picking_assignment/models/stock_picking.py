@@ -33,5 +33,5 @@ class StockPicking(models.Model):
             record.can_assign_operator = (
                 to_process
                 and not record.operator_id
-                and not self.is_blocked_by_picking_policy
+                and not record.is_blocked_by_picking_policy
             )
