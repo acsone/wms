@@ -24,18 +24,14 @@
             </div>
 
             <button name="do_new_transfer" position="after">
-                <field name="is_action_force_validate_allowed" invisible="1" />
                 <button
           name="action_force_validate"
           string="Force validate"
           type="object"
-          attrs="{'invisible': ['|', '|', '|', '|',  ('is_action_force_validate_allowed', '=', False), ('operator_id', '=', False), ('state', 'not in', ['draft','partially_available','assigned']), '&amp;', ('is_put_in_pack_done', '=', False), ('picking_type_subcode', '=', 'PICK')]}"
+          groups="base.group_no_one"
+          attrs="{'invisible': ['|', '|', '|', ('operator_id', '=', False), ('state', 'not in', ['draft','partially_available','assigned']), '&amp;', ('is_put_in_pack_done', '=', False), ('picking_type_subcode', '=', 'PICK')]}"
         />
             </button>
-
-            <field name="partner_id" position="before">
-                <field name="validate_allowed" invisible="1" />
-            </field>
         </field>
     </record>
 
