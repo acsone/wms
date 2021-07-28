@@ -48,7 +48,6 @@ class ResPartner(models.Model):
     def _update_b2c_recipient(self, b2c_id, b2c_backend, data):
         """ Update the final customer
         """
-        data.pop("id", None)
         b2c_ref = self._b2c_id_to_b2c_ref(b2c_id, b2c_backend)
         partner = self._get_partner_by_ref(b2c_ref)
         partner._update_b2c_data(data)
@@ -56,6 +55,7 @@ class ResPartner(models.Model):
 
     def _update_b2c_data(self, data):
         self.ensure_one()
+        data.pop("id", None)
         if data.get("country_code"):
             country = self.env["res.country"]._get_by_code(data.pop("country_code"))
             data["country_id"] = country.id

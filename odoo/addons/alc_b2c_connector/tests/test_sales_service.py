@@ -819,3 +819,38 @@ class TestSalesService(CommonCase):
             self.sales_service.dispatch(
                 "update", _id=self.b2c_order.b2c_ref, params=params
             )
+
+    def test_create_two_so_for_same_partner(self):
+        recipient_info = self._gen_recipent()
+        params = {
+            "id": 2,
+            "customer_ref": self.vt_partner.ref,
+            "date": ISO_DT_WITH_TZ,
+            "recipient": recipient_info,
+            "lines": [
+                {
+                    "line_id": 2,
+                    "sku": self.saleable_product.default_code,
+                    "quantity": 10,
+                }
+            ],
+        }
+        res = self.sales_service.dispatch("create", params=params)
+        self.assertTrue(res)
+        new_so = self._get_so_from_name(res["ref"])
+        self._deliver_orders(new_so)
+        params2 = {
+            "id": 3,
+            "customer_ref": self.vt_partner.ref,
+            "date": ISO_DT_WITH_TZ,
+            "recipient": recipient_info,
+            "lines": [
+                {
+                    "line_id": 3,
+                    "sku": self.saleable_product.default_code,
+                    "quantity": 10,
+                }
+            ],
+        }
+        res2 = self.sales_service.dispatch("create", params=params2)
+        self.assertTrue(res2)
