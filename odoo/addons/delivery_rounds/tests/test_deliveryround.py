@@ -393,3 +393,23 @@ class TestDeliveryRound(common.DeliverDeliveryRoundTestCase):
         # the picking is the default picking type
 
         # therefore the picking will be available and
+
+    def test_picking_backorder_one_policy(self):
+        """Check that a one policy picking will be reassigned after being _delivered"""
+        sale = self._confirm_sale_order(carrier_id=self.delivery_carrier.id)
+        sale.picking_ids.write({"move_type": "one"})
+        pick = sale.picking_ids.filtered(lambda p: p.picking_type_subcode == "PICK")
+        self.assertFalse(sale.mapped("picking_ids.delivery_round_id"))
+        vals_round = {"template_id": self.delivery_template_2.id, "date": "2017-01-01"}
+        delivery_round = self.env["round.instance"].create(vals_round)
+        pick.with_context(round_autoset=True)._job_action_assign()
+        self.assertEqual(sale.mapped("picking_ids.delivery_round_id"), delivery_round)
+        self.assertEqual(pick.state, "assigned")
+        # now we _deliver, to see that the 'backorder' (pick) can be assigned to a round
+        customer = pick.delivery_round_customer_id
+        customer._deliver(background=False)
+        self.assertFalse(sale.mapped("picking_ids.delivery_round_id"))
+        # when
+        pick.with_context(round_autoset=True)._job_action_assign()
+        # then
+        self.assertEqual(sale.mapped("picking_ids.delivery_round_id"), delivery_round)

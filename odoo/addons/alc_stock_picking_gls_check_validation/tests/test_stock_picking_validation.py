@@ -68,9 +68,9 @@ class TestStockPickingValidation(GLSCommonFeatures):
 
         ship.action_force_validate()
 
-        # creating a backorder since we didn't process any packs in the ship
+        # since we didn't process any packs in the ship, it does nothing
         ships = self.env["stock.picking"].search([("origin", "=", sale.name)])
-        self.assertEqual(len(ships), 2)
+        self.assertEqual(ships, ship)  # is this really something we should test?
 
     def test_01(self):
         """

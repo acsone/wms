@@ -81,7 +81,8 @@ class StockPicking(models.Model):
         picking_togroup = self.filtered(
             lambda p: p.picking_type_id.groupbypartner and p.move_type != "one"
         )
-        picking_notgroup = self - picking_togroup
+        picking_one = self.filtered(lambda p: p.move_type == "one")
+        picking_notgroup = (self - picking_togroup) - picking_one
 
         for picking in picking_togroup:
             if self._context.get("do_only_split"):
@@ -192,4 +193,15 @@ class StockPicking(models.Model):
                 backorder_moves=bm
             )
 
-        return backorders
+        picking_one._process_as_backorder()
+        return backorders + picking_one
+
+    def _process_as_backorder(self):
+        # we bypass the _create_backorder mechanism, which is broken at this point.
+        # it does nothing of value: it creates new picking identical to the old ones,
+        # and rewires the moves, but it does not correctly update
+        # the linked_move_operation_ids.
+        # This raises many types of exception in stock's action_done.
+        # (about that, see "TDE FIXME: I bet the message error is wrong")
+        # so actually, there is nothing to do in that case.
+        return None

@@ -207,12 +207,34 @@ class StockPicking(models.Model):
     @api.multi
     @job(default_channel="root.stock_picking_assign")  # priority=8
     def _job_action_assign(self):
-        moves = self.mapped("move_lines").filtered(
-            lambda move: move.state not in ("done", "cancel")
-            and move.product_uom_qty > 0.0
-            and not move.linked_move_operation_ids
-        )
+        # is assumes that this method is never called with heterogeneous recordsets
+        # so don't break this assumption
+        # 'one' policy backorders already have linked moves
+        # because we don't unreserve them, so we need to also consider them
+        if "one" in self.mapped("move_type"):
+            moves = self.mapped("move_lines").filtered(
+                lambda move: move.state not in ("done", "cancel")
+                and move.product_uom_qty > 0.0
+            )
+        else:
+            moves = self.mapped("move_lines").filtered(
+                lambda move: move.state not in ("done", "cancel")
+                and move.product_uom_qty > 0.0
+                and not move.linked_move_operation_ids
+            )
         moves.action_assign()
+
+    def _process_as_backorder(self):
+        res = super(StockPicking, self)._process_as_backorder()
+        rounds = self.mapped("delivery_round_id")
+        current = rounds.filtered(lambda d: d.state in {"draft", "pending"})
+        remove_vals = {"delivery_round_id": False, "delivery_round_customer_id": False}
+        to_unassign = self.filtered("delivery_round_id")
+        to_reassign = to_unassign.filtered(lambda p: p.delivery_round_id not in current)
+        to_unassign.with_context(noround_write=True).write(remove_vals)
+        if to_reassign:
+            to_reassign.action_assign()
+        return res
 
 
 class StockPickingType(models.Model):
