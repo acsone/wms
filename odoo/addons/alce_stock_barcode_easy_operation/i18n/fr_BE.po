@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* alce_stock_barcode_easy_operation
+# 	* alce_stock_barcode_easy_operation
 #
 msgid ""
 msgstr ""
@@ -10,6 +10,7 @@ msgstr ""
 "PO-Revision-Date: 2021-07-28 09:41+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -68,10 +69,12 @@ msgstr "L'operation avec l'article %s requiert un lot"
 #. module: alce_stock_barcode_easy_operation
 #: code:addons/alce_stock_barcode_easy_operation/models/stock_picking.py:104
 #, python-format
-msgid "Too much lot %s scanned for operation with product %s.\n"
+msgid ""
+"Too much lot %s scanned for operation with product %s.\n"
 "Expected %s lot %s\n"
 "Remaining lot(s) to scan: %s"
-msgstr "Vous avez scanné plus de lot qu'attendu pour le lot %s pour le produit %s.\n"
+msgstr ""
+"Vous avez scanné plus de lot qu'attendu pour le lot %s pour le produit %s.\n"
 "Quantité attendue %s lot %s\n"
 "Lot(s) encore à traiter: %s"
 
@@ -79,9 +82,11 @@ msgstr "Vous avez scanné plus de lot qu'attendu pour le lot %s pour le produit 
 #: code:addons/alce_stock_barcode_easy_operation/models/stock_picking.py:79
 #: code:addons/alce_stock_barcode_easy_operation/models/stock_picking.py:161
 #, python-format
-msgid "Too much product scanned for operation with product %s.\n"
+msgid ""
+"Too much product scanned for operation with product %s.\n"
 "Expected %s."
-msgstr "Vous avez scanné plus de produits qu'attendu pour le produit %s.\n"
+msgstr ""
+"Vous avez scanné plus de produits qu'attendu pour le produit %s.\n"
 "Quantité attendue %s."
 
 #. module: alce_stock_barcode_easy_operation
