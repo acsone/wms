@@ -229,12 +229,12 @@ class StockPicking(models.Model):
         rounds = self.mapped("delivery_round_id")
         current = rounds.filtered(lambda d: d.state in {"draft", "pending"})
         remove_vals = {"delivery_round_id": False, "delivery_round_customer_id": False}
-        to_unassign = self.filtered("delivery_round_id")
-        to_reassign = to_unassign.filtered(
-            lambda p: p.delivery_round_id not in current
-            and p.state not in ("done", "cancel")
+        to_unassign = self.filtered(
+            lambda p: p.delivery_round_id and p.state not in ("done", "cancel")
         )
-        to_reassign.with_context(noround_write=True).write(remove_vals)
+        to_reassign = to_unassign.filtered(lambda p: p.delivery_round_id not in current)
+        if to_unassign:
+            to_unassign.with_context(noround_write=True).write(remove_vals)
         if to_reassign:
             to_reassign.action_assign()
         return res
