@@ -23,6 +23,14 @@ class ResPartner(models.Model):
         )
     ]
 
+    @api.depends("alcyon_category_id", "is_b2c_customer")
+    def _compute_is_veterinary_or_students(self):
+        """The student category is also used as a miscellaneous category."""
+        res = super(ResPartner, self)._compute_is_veterinary_or_students()
+        for partner in self.filtered(lambda p: p.is_students and p.is_b2c_customer):
+            partner.is_students = False
+        return res
+
     def _update_b2c_recipient_validate_data(self, data):
         """If this partner has one started picking out, only update contact fields."""
         self.ensure_one()
