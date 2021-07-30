@@ -10,11 +10,14 @@ from contextlib import contextmanager
 from datetime import datetime
 from itertools import groupby
 
+from psycopg2 import OperationalError
+
 from odoo import _, api, fields, models
 from odoo.exceptions import AccessError, UserError, ValidationError
+from odoo.service.model import PG_CONCURRENCY_ERRORS_TO_RETRY
 from odoo.tools import config
 
-from odoo.addons.queue_job.job import job
+from odoo.addons.queue_job.job import Job, job
 
 _logger = logging.getLogger(__name__)
 
@@ -1012,6 +1015,17 @@ class RoundInstanceCustomer(models.Model):
             self.env.clear()
             self.delivery_error = err.name
         except Exception as err:
+            if (
+                isinstance(err, OperationalError)
+                and err.pgcode in PG_CONCURRENCY_ERRORS_TO_RETRY
+                and "job_uuid" in self.env.context
+            ):
+                # the delivery is done by a job. Check if we can still retry
+                # the job. If we can retry, lets the error bubble
+                job_uuid = self.env.context.get("job_uuid")
+                job_instance = Job.load(self.env, job_uuid)
+                if job_instance.retry >= job_instance.max_retries:
+                    raise err
             _logger.exception(
                 "Failed to deliver a shipping during a delivery round "
                 "with an unexpected error: %s",
