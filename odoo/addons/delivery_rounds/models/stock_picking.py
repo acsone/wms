@@ -234,7 +234,7 @@ class StockPicking(models.Model):
             lambda p: p.delivery_round_id not in current
             and p.state not in ("done", "cancel")
         )
-        to_unassign.with_context(noround_write=True).write(remove_vals)
+        to_reassign.with_context(noround_write=True).write(remove_vals)
         if to_reassign:
             to_reassign.action_assign()
         return res
