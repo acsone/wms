@@ -19,7 +19,7 @@ class ShippingLabel(models.Model):
         res = super(ShippingLabel, self).create(vals)
         if res.package_id.carrier_id.delivery_type == "gls":
             description = _(u"Printing label {}").format(self.name)
-            res.with_delay(description=description, priority=10).hw_print()
+            res.with_delay(description=description, priority=4).hw_print()
         return res
 
     @job
