@@ -1024,7 +1024,7 @@ class RoundInstanceCustomer(models.Model):
                 # the job. If we can retry, lets the error bubble
                 job_uuid = self.env.context.get("job_uuid")
                 job_instance = Job.load(self.env, job_uuid)
-                if job_instance.retry >= job_instance.max_retries:
+                if job_instance.retry < job_instance.max_retries:
                     raise err
             _logger.exception(
                 "Failed to deliver a shipping during a delivery round "
