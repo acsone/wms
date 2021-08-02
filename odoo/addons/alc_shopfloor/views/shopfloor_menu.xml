@@ -33,6 +33,13 @@
           <field name="ignore_no_putaway_available_is_possible" invisible="1" />
           <field name="ignore_no_putaway_available" />
         </group>
+        <group
+          name="keep_existing_reservations"
+          attrs="{'invisible': [('keep_existing_reservations_is_possible', '=', False)]}"
+        >
+          <field name="keep_existing_reservations_is_possible" invisible="1" />
+          <field name="keep_existing_reservations" />
+        </group>
       </group>
     </field>
   </record>

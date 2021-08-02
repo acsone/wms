@@ -167,6 +167,32 @@ class TestLocationContentTransferStart(LocationContentTransferCommonCase):
             },
         )
 
+    def test_scan_location_different_picking_type_keep_existing_reservation(self):
+        """It's possible to process a location if content has different
+        picking types, and we select to keep the existing reservation.
+        In this case only available quantities will be proposed.
+
+        -> not available qty for product_a alone -> ignored
+        """
+        self.menu.sudo().keep_existing_reservations = True
+        picking_other_type = self._create_picking(
+            picking_type=self.wh.pick_type_id, lines=[(self.product_a, 10)]
+        )
+        self._fill_stock_for_moves(
+            picking_other_type.move_lines, location=self.content_loc
+        )
+        picking_other_type.action_assign()
+
+        response = self.service.dispatch(
+            "scan_location", params={"barcode": self.content_loc.barcode}
+        )
+        self.assert_response_scan_destination_all(response, self.pickings)
+
+        # ensure that the product_a is not into the picking.
+        self.assertNotIn(
+            self.product_a, self.pickings.mapped("pack_operation_ids.product_id")
+        )
+
 
 class LocationContentTransferStartSpecialCase(LocationContentTransferCommonCase):
     """Tests for start state and recover (special cases without setup)
@@ -351,3 +377,33 @@ class LocationContentTransferStartSpecialCase(LocationContentTransferCommonCase)
             self.product_b | self.product_c | self.product_d,
         )
         self.assertEqual(picking.state, "assigned")
+
+    def test_scan_location_different_picking_type_keep_existing_reservation_partial(
+        self,
+    ):
+        """It's possible to process a location if content has different
+        picking types, and we select to keep the existing reservation.
+        In this case only available quantities will be proposed.
+
+        -> 5 available qty for product_a alone -> 1 operation for 5
+        """
+        self.menu.sudo().keep_existing_reservations = True
+
+        picking = self._create_picking(
+            picking_type=self.wh.pick_type_id, lines=[(self.product_a, 10)]
+        )
+        self._update_qty_in_location(self.content_loc, self.product_a, 15)
+        picking.action_assign()
+        response = self.service.dispatch(
+            "scan_location", params={"barcode": self.content_loc.barcode}
+        )
+        new_picking = self.env["stock.picking"].search(
+            [("picking_type_id", "=", self.menu.picking_type_ids.id)]
+        )
+        self.assertEqual(len(new_picking), 1)
+        self.assert_response_scan_destination_all(response, new_picking)
+        operations = response["data"]["scan_destination_all"]["operations"]
+        self.assertEqual(1, len(operations))
+        operation = operations[0]
+        self.assertEqual(operation["quantity"], 5)
+        self.assertEqual(operation["product"]["id"], self.product_a.id)

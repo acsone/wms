@@ -40,6 +40,16 @@ class ShopfloorMenu(models.Model):
         "is different from the operation type's destination).",
     )
 
+    keep_existing_reservations_is_possible = fields.Boolean(
+        compute="_compute_keep_existing_reservations_is_possible"
+    )
+    keep_existing_reservations = fields.Boolean(
+        string="Preserve existing reservation",
+        default=False,
+        help="If you tick this box, the transfer will not include quants already"
+        "reserved by others operations.",
+    )
+
     @api.depends("scenario_id", "picking_type_ids")
     def _compute_move_create_is_possible(self):
         for menu in self:
@@ -127,4 +137,33 @@ class ShopfloorMenu(models.Model):
                         "These type(s) do not satisfy this constraint: \n{}.\n"
                         "Please, adjust your configuration."
                     ).format(scenario_name, "\n- ".join(bad_picking_types))
+                )
+
+    @api.depends("scenario_id", "keep_existing_reservations")
+    def _compute_keep_existing_reservations_is_possible(self):
+        for menu in self:
+            menu.keep_existing_reservations_is_possible = menu.scenario_id.has_option(
+                "keep_existing_reservations"
+            )
+
+    @api.constrains(
+        "scenario_id", "keep_existing_reservations", "allow_unreserve_other_moves"
+    )
+    def _check_keep_existing_reservations(self):
+        for menu in self:
+            if (
+                menu.keep_existing_reservations
+                and not menu.keep_existing_reservations_is_possible
+            ):
+                raise exceptions.ValidationError(
+                    _("Keep existing reservations is not allowed for menu {}.").format(
+                        menu.name
+                    )
+                )
+            if menu.keep_existing_reservations and menu.allow_unreserve_other_moves:
+                raise exceptions.ValidationError(
+                    _(
+                        "'Keep existing reservations' and 'Allow unreserve other moves' "
+                        "can't be used at same time"
+                    )
                 )
