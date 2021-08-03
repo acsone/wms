@@ -113,7 +113,7 @@ class DeliveryPackageGlsWizard(models.TransientModel):
         if not res:
             raise ValidationError(_("No package to process."))
         self.package_id = res["res_id"] if isinstance(res, dict) else res.id
-        return self._send()
+        return self._send(put_in_pack=True)
 
     def resend(self):
         """Cancel the package and then resend it to GLS."""
@@ -135,10 +135,12 @@ class DeliveryPackageGlsWizard(models.TransientModel):
         trackings = filter(None, self.mapped("allowed_package_ids.parcel_tracking"))
         self.picking_id.carrier_tracking_ref = ",".join(trackings)
 
-    def _send(self):
+    def _send(self, put_in_pack=False):
         # we want to keep the package information details in case sending fails
+        # however the package does not already exist if we put_in_pack; in that case,
+        # the package is also rollbacked, so we can't write the info on it
         self.write_package_vals()
-        if not (
+        if not put_in_pack and not (
             getattr(threading.currentThread(), "testing", False)
             or self.env.registry.in_test_mode()
         ):  # rollback hooks explode at test cleanup
