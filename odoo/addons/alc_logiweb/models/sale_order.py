@@ -51,15 +51,18 @@ class SaleOrder(models.Model):
             order_data["partner_shipping_id"] = order_data["partner_id"]
         return order_data
 
-    # @api.constrains("sale_channel", "partner_id", "partner_invoice_id")
-    # def _check_b2c_order_invoice_address(self):
-    #    ref = self.env.ref
-    #    belgium = ref("base.be")
-    #    for order in self.filtered(lambda o: o.sale_channel == "logiweb"):
-    #        belgian = order.partner_id.country_id == belgium
-    #        invoicing = order.partner_invoice_id
-    #        if belgian and invoicing != ref("alc_logiweb.logiweb_be_partner"):
-    #            msg = _("The invoicing partner should be Logiweb Belgium.")
-    #            raise ValidationError(msg)
-    #        if not belgian and invoicing != ref("alc_logiweb.logiweb_partner"):
-    #            raise ValidationError(_("The invoicing partner should be Logiweb."))
+    @api.constrains("sale_channel", "partner_id", "partner_invoice_id")
+    def _check_b2c_order_invoice_address(self):
+        ref = self.env.ref
+        belgium = ref("base.be")
+        for order in self.filtered(
+            lambda o: o.sale_channel == "logiweb"
+            and o.carrier_id.delivery_type == "gls"
+        ):
+            belgian = order.partner_id.country_id == belgium
+            invoicing = order.partner_invoice_id
+            if belgian and invoicing != ref("alc_logiweb.logiweb_be_partner"):
+                msg = _("The invoicing partner should be Logiweb Belgium.")
+                raise ValidationError(msg)
+            if not belgian and invoicing != ref("alc_logiweb.logiweb_partner"):
+                raise ValidationError(_("The invoicing partner should be Logiweb."))
