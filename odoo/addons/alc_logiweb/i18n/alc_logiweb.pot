@@ -35,3 +35,15 @@ msgstr ""
 msgid "Sales Order"
 msgstr ""
 
+#. module: alc_logiweb
+#: code:addons/alc_logiweb/models/sale_order.py:65
+#, python-format
+msgid "The invoicing partner should be Logiweb Belgium."
+msgstr ""
+
+#. module: alc_logiweb
+#: code:addons/alc_logiweb/models/sale_order.py:68
+#, python-format
+msgid "The invoicing partner should be Logiweb."
+msgstr ""
+
