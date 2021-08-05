@@ -17,6 +17,15 @@ class RecipientsService(Component):
     _name = "recipients.service"
     _usage = "recipients"
 
+    def get(self, _id):
+        """
+        Get recipient info
+        """
+        res_partner_model = self.env["res.partner"].suspend_security()
+        b2c_ref = res_partner_model._b2c_id_to_b2c_ref(_id, self.b2c_backend)
+        partner = res_partner_model._get_partner_by_ref(b2c_ref)
+        return self._partner_to_json(partner)
+
     def update(self, _id, **params):
         partner = (
             self.env["res.partner"]
@@ -77,7 +86,14 @@ class RecipientsService(Component):
             "note": {"type": "string", "nullable": True, "required": False},
         }
 
+    def _validator_return_get(self):
+        return self._recipient_info_schema
+
     def _validator_return_update(self):
+        return self._recipient_info_schema
+
+    @property
+    def _recipient_info_schema(self):
         return {
             "id": {"type": "string", "nullable": False, "required": True},
             "title": {

@@ -116,6 +116,23 @@ class TestRecipientsService(CommonCase):
             "mobile": cls._gen_string(),
         }
 
+    def test_get_b2c_recipient_info(self):
+        """
+        Data:
+            1 existing b2c partner
+        Test case:
+            Get recipient info with the b2c ref
+        Expected result:
+            The recipient info
+        """
+        res = self.recipient_service.dispatch("get", _id="ABC")
+        self.assertTrue(res)
+        self.assertEqual(res["id"], "ABC")
+        self.assertEqual(res["name"], "EXISTING B2C PARTNER")
+        self.assertEqual(res["street"], "my first street")
+        self.assertEqual(res["city"], "my first city")
+        self.assertEqual(res["zip"], "1234")
+
     def test_update_existing(self):
         """
         Data:
