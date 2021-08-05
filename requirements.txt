@@ -81,6 +81,10 @@ odoo10-addon-account-type-menu @ git+https://github.com/acsone/account-financial
 odoo10-addon-analytic-tag-dimension @ git+https://github.com/acsone/account-analytic.git@daf43630f1ca58b431bb93809a331374b8530863#subdirectory=setup/analytic_tag_dimension
 odoo10-addon-analytic-tag-dimension-purchase-warning @ git+https://github.com/acsone/account-analytic.git@daf43630f1ca58b431bb93809a331374b8530863#subdirectory=setup/analytic_tag_dimension_purchase_warning
 odoo10-addon-analytic-tag-dimension-sale-warning @ git+https://github.com/acsone/account-analytic.git@daf43630f1ca58b431bb93809a331374b8530863#subdirectory=setup/analytic_tag_dimension_sale_warning
+odoo10-addon-attribute-set==10.0.1.0.2.99.dev4
+odoo10-addon-attribute-set-completeness==10.0.1.2.0.99.dev5
+odoo10-addon-attribute-set-mass-edit==10.0.1.0.1.99.dev5
+odoo10-addon-attribute-set-searchable==10.0.1.0.0.99.dev5
 odoo10-addon-auth-api-key @ git+https://github.com/acsone/server-auth.git@482460eed5839ec0d116ee32b050ec4b1bc7fd8a#subdirectory=setup/auth_api_key
 odoo10-addon-auto-reconcile-structured-ref @ git+https://github.com/acsone/account-reconcile.git@eecb8a9dcb54145e876362efd07f76400da318f9#subdirectory=setup/auto_reconcile_structured_ref
 odoo10-addon-base-attachment-object-storage @ git+https://github.com/acsone/odoo-cloud-platform.git@45a9d1f258eb93ec619202c2cfcb76978eee46cd#subdirectory=setup/base_attachment_object_storage
@@ -98,6 +102,8 @@ odoo10-addon-base-optional-quick-create @ git+https://github.com/acsone/server-t
 odoo10-addon-base-partner-sequence @ git+https://github.com/acsone/partner-contact@a9e98e0dad100bbf0ba80da7e4b83b9a65dcc3ea#subdirectory=setup/base_partner_sequence
 odoo10-addon-base-report-to-printer @ git+https://github.com/acsone/report-print-send.git@c8244592b3952b406f768f6f45faeec048b9e1a0#subdirectory=setup/base_report_to_printer
 odoo10-addon-base-rest==10.0.2.2.0
+odoo10-addon-base-search-custom-field-filter==10.0.1.0.1
+odoo10-addon-base-sparse-field-list-support==10.0.1.0.0.99.dev7
 odoo10-addon-base-suspend-security==10.0.1.0.0
 odoo10-addon-base-technical-features @ git+https://github.com/acsone/server-tools.git@dcefdba5bac014076f05229ba091acd8b739e164#subdirectory=setup/base_technical_features
 odoo10-addon-base-ubl==10.0.1.1.0
@@ -126,11 +132,14 @@ odoo10-addon-mis-builder-budget==10.0.3.5.0
 odoo10-addon-monitoring-status @ git+https://github.com/acsone/odoo-cloud-platform.git@45a9d1f258eb93ec619202c2cfcb76978eee46cd#subdirectory=setup/monitoring_status
 odoo10-addon-onchange-helper @ git+https://github.com/acsone/server-tools.git@dcefdba5bac014076f05229ba091acd8b739e164#subdirectory=setup/onchange_helper
 odoo10-addon-partner-helper==10.0.0.1.0
+odoo10-addon-pim==10.0.1.1.0.99.dev3
 odoo10-addon-product-abc-classification-base @ git+https://github.com/acsone/product-attribute.git@301b92b963a9c127a6c70fb994a58b1cee955064#subdirectory=setup/product_abc_classification_base
 odoo10-addon-product-abc-classification-sale-stock @ git+https://github.com/acsone/product-attribute.git@7ab2176e0df4a2efb973ed36aa56c9ee5ac5d356#subdirectory=setup/product_abc_classification_sale_stock
 odoo10-addon-product-analytic @ git+https://github.com/acsone/account-analytic.git@daf43630f1ca58b431bb93809a331374b8530863#subdirectory=setup/product_analytic
 odoo10-addon-product-analytic-purchase @ git+https://github.com/acsone/account-analytic.git@daf43630f1ca58b431bb93809a331374b8530863#subdirectory=setup/product_analytic_purchase
 odoo10-addon-product-assortment==10.0.1.0.0.99.dev4
+odoo10-addon-product-attribute-set==10.0.1.1.0.99.dev4
+odoo10-addon-product-attribute-set-completeness==10.0.1.2.0.99.dev4
 odoo10-addon-product-dimension==10.0.1.0.0.99.dev5
 odoo10-addon-product-manufacturer @ git+https://github.com/acsone/product-attribute.git@f1dc5cd944b481993f7fb92cc98990527856cd4e#subdirectory=setup/product_manufacturer
 odoo10-addon-product-packaging-barcode==10.0.1.0.0.99.dev2
@@ -138,6 +147,7 @@ odoo10-addon-product-packaging-dimension @ git+https://github.com/acsone/product
 odoo10-addon-product-packaging-type @ git+https://github.com/acsone/product-attribute.git@c36c0392373b4252c46c6625fdec9e38af33ac9f#subdirectory=setup/product_packaging_type
 odoo10-addon-product-packaging-type-pallet @ git+https://github.com/acsone/product-attribute.git@c36c0392373b4252c46c6625fdec9e38af33ac9f#subdirectory=setup/product_packaging_type_pallet
 odoo10-addon-product-price-category @ git+https://github.com/acsone/sale-workflow.git@b9987e4eb546f9ea8c0ee88e507072252b0d57d3#subdirectory=setup/product_price_category
+odoo10-addon-product-search-multi-value==10.0.1.0.1.99.dev5
 odoo10-addon-product-sequence @ git+https://github.com/acsone/product-attribute.git@f1dc5cd944b481993f7fb92cc98990527856cd4e#subdirectory=setup/product_sequence
 odoo10-addon-product-uom-unece==10.0.1.1.0.99.dev1
 odoo10-addon-purchase-cancel-reason @ git+https://github.com/acsone/purchase-workflow.git@527ab1413ba29a34c478e83413267f41e608cd4c#subdirectory=setup/purchase_cancel_reason
