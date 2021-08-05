@@ -4,7 +4,6 @@
 
 import random
 import string
-import unittest
 
 from odoo import tools
 from odoo.exceptions import UserError, ValidationError
@@ -297,7 +296,6 @@ class TestSalesService(CommonCase):
         self.assertEqual(new_so.partner_invoice_id, self.logiweb_be_partner)
         self.assertEqual(new_so.partner_shipping_id, self.logiweb_be_partner)
 
-    @unittest.skip("Temporary disabled")
     def test_create_through_logiweb_be_partner_be_logiweb(self):
         self.b2c_backend.sale_channel = "logiweb"
         b2c_be_partner = self.env["res.partner"].create(
@@ -321,7 +319,6 @@ class TestSalesService(CommonCase):
         self.assertEqual(so.partner_invoice_id, self.logiweb_be_partner)
         self.assertEqual(so.partner_shipping_id, customer_partner)
 
-    @unittest.skip("Temporary disabled")
     def test_create_through_logiweb_notbe_partner_notbe_logiweb(self):
         self.b2c_backend.sale_channel = "logiweb"
         b2c_not_be_partner = self.env["res.partner"].create(
@@ -344,7 +341,6 @@ class TestSalesService(CommonCase):
         self.assertEqual(so.partner_invoice_id, self.logiweb_partner)
         self.assertEqual(so.partner_shipping_id, customer_partner)
 
-    @unittest.skip("Temporary disabled")
     def test_create_through_logiweb_be_partner_notbe_logiweb(self):
         self.b2c_backend.sale_channel = "logiweb"
         self.env["res.partner"].create(
@@ -363,7 +359,6 @@ class TestSalesService(CommonCase):
         with self.assertRaises(ValidationError):
             self.sales_service.dispatch("create", params=params)
 
-    @unittest.skip("Temporary disabled")
     def test_create_through_logiweb_notbe_partner_be_logiweb(self):
         self.b2c_backend.sale_channel = "logiweb"
         self.env["res.partner"].create(
@@ -381,3 +376,16 @@ class TestSalesService(CommonCase):
         params["customer_ref"] = self.logiweb_be_partner.ref
         with self.assertRaises(ValidationError):
             self.sales_service.dispatch("create", params=params)
+
+    def test_create_through_logiweb_carrier_alcyon(self):
+        self.b2c_backend.sale_channel = "logiweb"
+        recipient_info = self._gen_recipent()
+        params = self._get_base_params(recipient=recipient_info, carrier="ALCYON")
+        params["customer_ref"] = self.logiweb_partner.ref
+        res = self.sales_service.dispatch("create", params=params)
+
+        customer_partner = self._get_customer(recipient_info)
+        so = self._get_so_from_name(res["ref"])
+        self.assertEqual(so.partner_id, customer_partner)
+        self.assertEqual(so.partner_invoice_id, self.logiweb_partner)
+        self.assertEqual(so.partner_shipping_id, self.logiweb_partner)
