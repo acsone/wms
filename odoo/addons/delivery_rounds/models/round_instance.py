@@ -17,7 +17,7 @@ from odoo.exceptions import AccessError, UserError, ValidationError
 from odoo.service.model import PG_CONCURRENCY_ERRORS_TO_RETRY
 from odoo.tools import config
 
-from odoo.addons.queue_job.job import Job, job
+from odoo.addons.queue_job.job import Job, identity_exact, job
 
 _logger = logging.getLogger(__name__)
 
@@ -1199,6 +1199,7 @@ class RoundInstanceCustomer(models.Model):
                     description=_("Deliver customer %s of delivery round %s")
                     % (icust.display_name, icust.delivery_round_id.complete_name),
                     priority=5,
+                    identity_key=identity_exact,
                 )._deliver_job()
             else:
                 icust._deliver_job()

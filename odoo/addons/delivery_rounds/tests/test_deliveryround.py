@@ -413,3 +413,23 @@ class TestDeliveryRound(common.DeliverDeliveryRoundTestCase):
         pick.with_context(round_autoset=True)._job_action_assign()
         # then
         self.assertEqual(sale.mapped("picking_ids.delivery_round_id"), delivery_round)
+
+    def test_picking_deliver_background_identity_key(self):
+        """Check that we don't reenqueue jobs."""
+        sale = self._confirm_sale_order(carrier_id=self.delivery_carrier.id)
+        pick = sale.picking_ids.filtered(lambda p: p.picking_type_subcode == "PICK")
+        vals_round = {"template_id": self.delivery_template_2.id, "date": "2017-01-01"}
+        self.env["round.instance"].create(vals_round)
+        pick.with_context(round_autoset=True)._job_action_assign()
+        customer = pick.delivery_round_customer_id
+        # when
+        func_string = "%s._deliver_job()" % customer
+        customer._deliver(background=True)
+        # then
+        job = self.env["queue.job"].search([("func_string", "=", func_string)])
+        self.assertEqual(len(job), 1)
+        # when  # we do it again
+        customer._deliver(background=True)
+        # then
+        job = self.env["queue.job"].search([("func_string", "=", func_string)])
+        self.assertEqual(len(job), 1)  # No additional job
