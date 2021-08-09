@@ -55,14 +55,28 @@ class SaleOrder(models.Model):
     def _check_b2c_order_invoice_address(self):
         ref = self.env.ref
         belgium = ref("base.be")
-        for order in self.filtered(
-            lambda o: o.sale_channel == "logiweb"
-            and o.carrier_id.delivery_type == "gls"
-        ):
+        for order in self.filtered(lambda o: o.sale_channel == "logiweb"):
             belgian = order.partner_id.country_id == belgium
             invoicing = order.partner_invoice_id
-            if belgian and invoicing != ref("alc_logiweb.logiweb_be_partner"):
+            carrier_type = order.carrier_id.delivery_type
+            carrier_type_gls = carrier_type == "gls"
+            carrier_type_alcyon = carrier_type == "fixed"
+            if (
+                belgian
+                and invoicing != ref("alc_logiweb.logiweb_be_partner")
+                and carrier_type_gls
+            ):
                 msg = _("The invoicing partner should be Logiweb Belgium.")
                 raise ValidationError(msg)
-            if not belgian and invoicing != ref("alc_logiweb.logiweb_partner"):
+            if (
+                not belgian
+                and invoicing != ref("alc_logiweb.logiweb_partner")
+                and carrier_type_gls
+            ):
                 raise ValidationError(_("The invoicing partner should be Logiweb."))
+            if (
+                invoicing == ref("alc_logiweb.logiweb_be_partner")
+                and carrier_type_alcyon
+            ):
+                msg = _("The carrier 'Alcyon' is not allowed for Logiweb Belgium.")
+                raise ValidationError(msg)
