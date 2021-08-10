@@ -908,7 +908,7 @@ msgid "The picking type determines the picking view"
 msgstr ""
 
 #. module: delivery_rounds
-#: code:addons/delivery_rounds/models/round_instance.py:1213
+#: code:addons/delivery_rounds/models/round_instance.py:1214
 #, python-format
 msgid "The shipping is not part anymore of this delivery round"
 msgstr ""
