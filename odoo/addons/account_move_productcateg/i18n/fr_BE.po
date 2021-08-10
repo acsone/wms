@@ -32,14 +32,15 @@ msgid "Category"
 msgstr "Catégorie"
 
 #. module: account_move_productcateg
-#: model:ir.model.fields,field_description:account_move_productcateg.field_account_cutoff_line_categ_id
-msgid "Internal Category"
-msgstr "Catégorie interne"
-
-#. module: account_move_productcateg
 #: model:ir.model,name:account_move_productcateg.model_account_move_line
 msgid "Journal Item"
 msgstr "Écriture comptable"
+
+#. module: account_move_productcateg
+#: model:ir.model.fields,field_description:account_move_productcateg.field_account_cutoff_line_categ_id
+#, fuzzy
+msgid "Pricing/Primary Category"
+msgstr "Catégorie d'article"
 
 #. module: account_move_productcateg
 #: model:ir.model.fields,field_description:account_move_productcateg.field_account_move_line_categ_id
@@ -50,3 +51,6 @@ msgstr "Catégorie d'article"
 #: model:ir.model.fields,help:account_move_productcateg.field_account_cutoff_line_categ_id
 msgid "Select category for the current product"
 msgstr "Sélectionnez la catégorie de l'article actuel"
+
+#~ msgid "Internal Category"
+#~ msgstr "Catégorie interne"

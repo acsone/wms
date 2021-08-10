@@ -29,13 +29,13 @@ msgid "Category"
 msgstr ""
 
 #. module: account_move_productcateg
-#: model:ir.model.fields,field_description:account_move_productcateg.field_account_cutoff_line_categ_id
-msgid "Internal Category"
+#: model:ir.model,name:account_move_productcateg.model_account_move_line
+msgid "Journal Item"
 msgstr ""
 
 #. module: account_move_productcateg
-#: model:ir.model,name:account_move_productcateg.model_account_move_line
-msgid "Journal Item"
+#: model:ir.model.fields,field_description:account_move_productcateg.field_account_cutoff_line_categ_id
+msgid "Pricing/Primary Category"
 msgstr ""
 
 #. module: account_move_productcateg
