@@ -142,6 +142,7 @@ odoo10-addon-product-attribute-set==10.0.1.1.0.99.dev4
 odoo10-addon-product-attribute-set-completeness==10.0.1.2.0.99.dev4
 odoo10-addon-product-dimension==10.0.1.0.0.99.dev5
 odoo10-addon-product-manufacturer @ git+https://github.com/acsone/product-attribute.git@f1dc5cd944b481993f7fb92cc98990527856cd4e#subdirectory=setup/product_manufacturer
+odoo10-addon-product-multi-category==10.0.1.0.0
 odoo10-addon-product-packaging-barcode==10.0.1.0.0.99.dev2
 odoo10-addon-product-packaging-dimension @ git+https://github.com/acsone/product-attribute.git@eb1dd1585c929dc44e41e5bd6c4dfe0b1d18be0f#subdirectory=setup/product_packaging_dimension
 odoo10-addon-product-packaging-type @ git+https://github.com/acsone/product-attribute.git@c36c0392373b4252c46c6625fdec9e38af33ac9f#subdirectory=setup/product_packaging_type
