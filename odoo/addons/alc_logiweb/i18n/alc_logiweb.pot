@@ -17,33 +17,39 @@ msgstr ""
 #: code:addons/alc_logiweb/models/sale_order.py:46
 #, python-format
 msgid "Cannot have a gls_parcel_shop if the delivery is not GLS."
-msgstr ""
+msgstr "Impossible d'avoir un gls_parcel_shop si la livraison n'est pas une livraison GLS."
 
 #. module: alc_logiweb
 #: model:ir.filters,name:alc_logiweb.logiweb_product_assortment_filter
 msgid "Logiweb Product Assortment"
-msgstr ""
+msgstr "Assortiement de produits Logiweb."
 
 #. module: alc_logiweb
 #: code:addons/alc_logiweb/models/sale_order.py:41
 #, python-format
 msgid "Missing carrier"
-msgstr ""
+msgstr "Transporteur manquant."
 
 #. module: alc_logiweb
 #: model:ir.model,name:alc_logiweb.model_sale_order
 msgid "Sales Order"
-msgstr ""
+msgstr "Ventes"
 
 #. module: alc_logiweb
 #: code:addons/alc_logiweb/models/sale_order.py:65
 #, python-format
 msgid "The invoicing partner should be Logiweb Belgium."
-msgstr ""
+msgstr "Le partenaire de facturation devrait être Logiweb Belgique."
 
 #. module: alc_logiweb
 #: code:addons/alc_logiweb/models/sale_order.py:68
 #, python-format
 msgid "The invoicing partner should be Logiweb."
-msgstr ""
+msgstr "Le partenaire de facturation devrait être Logiweb."
 
+
+#. module: alc_logiweb
+#: code:addons/alc_logiweb/models/sale_order.py:70
+#, python-format
+msgid "The carrier 'Alcyon' is not allowed for Logiweb Belgium."
+msgstr "Le livreur 'Alcyon' n'est pas autorisé pour le partenaire de facturation Logiweb Belgique"

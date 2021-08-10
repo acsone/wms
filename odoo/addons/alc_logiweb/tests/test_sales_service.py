@@ -269,33 +269,6 @@ class TestSalesService(CommonCase):
         with self.assertRaises(ValidationError):
             self.sales_service.dispatch("create", params=params)
 
-    def test_03(self):
-        """
-        Data:
-            An existing veterinary
-            A backend with sale_channel = logiweb
-        Test case:
-            Create a new SO for a new partner and the existing veterinary
-            Specify the carrier ALCYON into the SO
-        Expected result:
-            The specified carrier is taken into account in new SO created
-            The partner_id  is the customer
-            The partner_invoice_id is the VT
-            The partner_shipping_id is the VT
-        """
-        self.b2c_backend.sale_channel = "logiweb"
-        recipient_info = self._gen_recipent()
-        params = self._get_base_params(recipient=recipient_info, carrier="ALCYON")
-        res = self.sales_service.dispatch("create", params=params)
-        self.assertTrue(res)
-        new_so = self._get_so_from_name(res["ref"])
-        self.assertTrue(new_so)
-        self.assertEqual(new_so.carrier_id, self.carrier_alcyon)
-        customer_partner = self._get_customer(recipient_info)
-        self.assertEqual(new_so.partner_id, customer_partner)
-        self.assertEqual(new_so.partner_invoice_id, self.logiweb_be_partner)
-        self.assertEqual(new_so.partner_shipping_id, self.logiweb_be_partner)
-
     def test_create_through_logiweb_be_partner_be_logiweb(self):
         self.b2c_backend.sale_channel = "logiweb"
         b2c_be_partner = self.env["res.partner"].create(
@@ -383,9 +356,18 @@ class TestSalesService(CommonCase):
         params = self._get_base_params(recipient=recipient_info, carrier="ALCYON")
         params["customer_ref"] = self.logiweb_partner.ref
         res = self.sales_service.dispatch("create", params=params)
-
+        self.assertTrue(res)
         customer_partner = self._get_customer(recipient_info)
         so = self._get_so_from_name(res["ref"])
+        self.assertTrue(so)
+        self.assertEqual(so.carrier_id, self.carrier_alcyon)
         self.assertEqual(so.partner_id, customer_partner)
         self.assertEqual(so.partner_invoice_id, self.logiweb_partner)
         self.assertEqual(so.partner_shipping_id, self.logiweb_partner)
+
+    def test_create_through_logiweb_be_carrier_alcyon(self):
+        self.b2c_backend.sale_channel = "logiweb"
+        recipient_info = self._gen_recipent()
+        params = self._get_base_params(recipient=recipient_info, carrier="ALCYON")
+        with self.assertRaises(ValidationError):
+            self.sales_service.dispatch("create", params=params)
