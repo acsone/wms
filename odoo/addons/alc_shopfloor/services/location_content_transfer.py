@@ -115,7 +115,6 @@ class LocationContentTransfer(Component):
         operations = self._find_location_operations(location)
         pickings = operations.mapped("picking_id")
         picking_types = pickings.mapped("picking_type_id")
-
         savepoint = self._actions_for("savepoint").new()
         unreserved_moves = self.env["stock.move"].browse()
         if self.work.menu.allow_unreserve_other_moves:
@@ -658,15 +657,23 @@ class LocationContentTransfer(Component):
 
     def _find_location_operations(self, location):
         """Find lines that potentially are to move in the location"""
-        return self.env["stock.pack.operation"].search(
+        operations = self.env["stock.pack.operation"].search(
             self._find_location_operations_domain(location)
         )
+        if self.work.menu.keep_existing_reservations:
+            operations = self._filter_out_existing_reservations(location, operations)
+        return operations
+
+    def _find_quants_domain(self, location):
+        domain = [("location_id", "=", location.id), ("qty", ">", 0)]
+        if self.work.menu.keep_existing_reservations:
+            domain.append(("reservation_id", "=", False))
+        return domain
 
     def _create_moves_from_location(self, location):
         # get all quants from the scanned location
-        quants = self.env["stock.quant"].search(
-            [("location_id", "=", location.id), ("qty", ">", 0)]
-        )
+        quants_domain = self._find_quants_domain(location)
+        quants = self.env["stock.quant"].search(quants_domain)
         # create moves for each quant
         picking_type = self.picking_types
         move_ids = []
@@ -862,6 +869,19 @@ class LocationContentTransfer(Component):
             )
         unreserved_moves.do_unreserve()
         return (operations - operations_other_picking_types, unreserved_moves, None)
+
+    def _filter_out_existing_reservations(self, location, operations):
+        """ Filter out operations linked to a move with reserved qties into a
+        picking type <> that the expected picking type
+
+        Returns the list of operations that stays in the location to process
+        """
+        operations_other_picking_types = operations.filtered(
+            lambda op: op.picking_id.picking_type_id not in self.picking_types
+        )
+        return self.env["stock.pack.operation"].browse(
+            set(operations.ids) - set(operations_other_picking_types.ids)
+        )
 
 
 class ShopfloorLocationContentTransferValidator(Component):
