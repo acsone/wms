@@ -14,6 +14,12 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_shopfloor
+#: code:addons/alc_shopfloor/models/shopfloor_menu.py:165
+#, python-format
+msgid "'Keep existing reservations' and 'Allow unreserve other moves' can't be used at same time"
+msgstr ""
+
+#. module: alc_shopfloor
 #: code:addons/alc_shopfloor/actions/message.py:99
 #, python-format
 msgid "A destination package is required."
@@ -135,7 +141,7 @@ msgid "Created from backorder <a href=# data-oe-model=stock.picking data-oe-id=%
 msgstr ""
 
 #. module: alc_shopfloor
-#: code:addons/alc_shopfloor/models/shopfloor_menu.py:60
+#: code:addons/alc_shopfloor/models/shopfloor_menu.py:70
 #, python-format
 msgid "Creation of moves is not allowed for menu {}."
 msgstr ""
@@ -161,6 +167,11 @@ msgid "If you tick this box, the transfer is reserved only if the put-away can f
 msgstr ""
 
 #. module: alc_shopfloor
+#: model:ir.model.fields,help:alc_shopfloor.field_shopfloor_menu_keep_existing_reservations
+msgid "If you tick this box, the transfer will not include quants alreadyreserved by others operations."
+msgstr ""
+
+#. module: alc_shopfloor
 #: model:ir.model.fields,help:alc_shopfloor.field_shopfloor_menu_allow_unreserve_other_moves
 msgid "If you tick this box, this scenario will allow operator to move goods even if a reservation is made by a different operation type."
 msgstr ""
@@ -176,7 +187,7 @@ msgid "Ignore transfers when no put-away is available"
 msgstr ""
 
 #. module: alc_shopfloor
-#: code:addons/alc_shopfloor/models/shopfloor_menu.py:93
+#: code:addons/alc_shopfloor/models/shopfloor_menu.py:103
 #, python-format
 msgid "Ignoring not found putaway is not allowed for menu {}."
 msgstr ""
@@ -184,6 +195,17 @@ msgstr ""
 #. module: alc_shopfloor
 #: model:ir.model,name:alc_shopfloor.model_stock_location
 msgid "Inventory Locations"
+msgstr ""
+
+#. module: alc_shopfloor
+#: code:addons/alc_shopfloor/models/shopfloor_menu.py:159
+#, python-format
+msgid "Keep existing reservations is not allowed for menu {}."
+msgstr ""
+
+#. module: alc_shopfloor
+#: model:ir.model.fields,field_description:alc_shopfloor.field_shopfloor_menu_keep_existing_reservations_is_possible
+msgid "Keep existing reservations is possible"
 msgstr ""
 
 #. module: alc_shopfloor
@@ -523,12 +545,17 @@ msgid "Picking type {} complete."
 msgstr ""
 
 #. module: alc_shopfloor
+#: model:ir.model.fields,field_description:alc_shopfloor.field_shopfloor_menu_keep_existing_reservations
+msgid "Preserve existing reservation"
+msgstr ""
+
+#. module: alc_shopfloor
 #: model:ir.model.fields,field_description:alc_shopfloor.field_stock_pack_operation_priority
 msgid "Priority"
 msgstr ""
 
 #. module: alc_shopfloor
-#: code:addons/alc_shopfloor/models/shopfloor_menu.py:106
+#: code:addons/alc_shopfloor/models/shopfloor_menu.py:116
 #, python-format
 msgid "Processing reserved quantities is not allowed for menu {}."
 msgstr ""
@@ -545,13 +572,13 @@ msgid "Product tracked by lot, please scan one."
 msgstr ""
 
 #. module: alc_shopfloor
-#: model:shopfloor.menu,name:alc_shopfloor.shopfloor_menu_medoc_rangement
-msgid "Rangement"
+#: model:stock.picking.type,name:alc_shopfloor.stock_picking_type_rangement_medoc
+msgid "Rangement Médicaments"
 msgstr ""
 
 #. module: alc_shopfloor
-#: model:stock.picking.type,name:alc_shopfloor.stock_picking_type_rangement_medoc
-msgid "Rangement Médicaments"
+#: model:shopfloor.menu,name:alc_shopfloor.shopfloor_menu_medoc_rangement
+msgid "Rangement médicaments"
 msgstr ""
 
 #. module: alc_shopfloor
@@ -610,14 +637,14 @@ msgid "Scan the destination location"
 msgstr ""
 
 #. module: alc_shopfloor
-#: code:addons/alc_shopfloor/services/location_content_transfer.py:340
-#: code:addons/alc_shopfloor/services/location_content_transfer.py:361
+#: code:addons/alc_shopfloor/services/location_content_transfer.py:339
+#: code:addons/alc_shopfloor/services/location_content_transfer.py:360
 #, python-format
 msgid "Scan the package"
 msgstr ""
 
 #. module: alc_shopfloor
-#: code:addons/alc_shopfloor/models/shopfloor_menu.py:124
+#: code:addons/alc_shopfloor/models/shopfloor_menu.py:134
 #, python-format
 msgid "Scenario `{}` require(s) 'Move Entire Packages' to be enabled.\n"
 "These type(s) do not satisfy this constraint: \n"
@@ -804,13 +831,13 @@ msgid "This line is not available in transfer {}."
 msgstr ""
 
 #. module: alc_shopfloor
-#: code:addons/alc_shopfloor/services/location_content_transfer.py:132
+#: code:addons/alc_shopfloor/services/location_content_transfer.py:131
 #, python-format
 msgid "This location content can't be moved at once."
 msgstr ""
 
 #. module: alc_shopfloor
-#: code:addons/alc_shopfloor/services/location_content_transfer.py:139
+#: code:addons/alc_shopfloor/services/location_content_transfer.py:138
 #, python-format
 msgid "This location content can't be moved using this menu."
 msgstr ""
