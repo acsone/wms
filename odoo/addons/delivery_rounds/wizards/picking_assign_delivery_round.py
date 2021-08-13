@@ -49,6 +49,7 @@ class PickingAssignDeliveryRound(models.TransientModel):
                 continue
             pickings = shippings._get_all_src_pickings().filtered(
                 lambda x: x.picking_type_subcode == "PICK"
+                and x.state not in {"done", "cancel"}
             )
             old_round_instance_customers = shippings.mapped(
                 "delivery_round_customer_id"
