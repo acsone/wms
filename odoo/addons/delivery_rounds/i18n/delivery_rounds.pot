@@ -318,7 +318,7 @@ msgid "Delivery not allowed"
 msgstr ""
 
 #. module: delivery_rounds
-#: code:addons/delivery_rounds/wizards/picking_assign_delivery_round.py:68
+#: code:addons/delivery_rounds/wizards/picking_assign_delivery_round.py:69
 #, python-format
 msgid "Delivery round \"%s\" manually assigned"
 msgstr ""
@@ -601,7 +601,7 @@ msgid "No picking have been processed yet"
 msgstr ""
 
 #. module: delivery_rounds
-#: code:addons/delivery_rounds/wizards/picking_assign_delivery_round.py:61
+#: code:addons/delivery_rounds/wizards/picking_assign_delivery_round.py:62
 #, python-format
 msgid "No products available.\n"
 "Cannot assign the delivery round to the picking"
