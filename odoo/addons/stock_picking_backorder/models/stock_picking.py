@@ -3,7 +3,7 @@
 # Copyright 2018 Jacques-Etienne Baudoux (BCIM sprl) <je@bcim.be>
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl)
 
-from odoo import _, api, fields, models
+from odoo import SUPERUSER_ID, _, api, fields, models
 from odoo.exceptions import UserError
 
 
@@ -18,26 +18,29 @@ class StockPicking(models.Model):
         compute="_compute_is_create_backorder_allowed"
     )
 
-    @api.depends("state", "is_create_backorder_allowed")
     def _compute_is_action_force_transfer_allowed(self):
-        allowed_states = ("draft", "partially_available", "assigned")
+        has_group = (
+            self.user_has_groups("base.group_no_one")
+            or self.env.user.id == SUPERUSER_ID
+        )
         for rec in self:
-            rec.is_action_force_transfer_allowed = (
-                rec.state in allowed_states or rec.is_create_backorder_allowed
+            rec.is_action_force_transfer_allowed = has_group and (
+                rec.state in ("draft,partially_available,assigned")
+                or rec.is_create_backorder_allowed
             )
 
-    @api.depends("pack_operation_ids.qty_done", "state", "move_lines.remaining_qty")
     def _compute_is_create_backorder_allowed(self):
-        # check_backorder is not compute-safe, it drops the cache
-        # so it has to be out of the loop
-        to_check = self.filtered(
-            lambda rec: rec.state == "draft"
-            or all(x.qty_done == 0.0 for x in rec.pack_operation_ids)
-        )
-        checks = {rec: rec.check_backorder() for rec in to_check}
         for rec in self:
-            # allow to transfer and create backorder even if no line processed
-            rec.is_create_backorder_allowed = checks.get(rec, False)
+            # allow to transfer and create backorder even if no line
+            # processed
+            rec.is_create_backorder_allowed = rec._is_create_backorder_allowed()
+
+    def _is_create_backorder_allowed(self):
+        self.ensure_one()
+        return (
+            self.state == "draft"
+            or all(x.qty_done == 0.0 for x in self.pack_operation_ids)
+        ) and self.check_backorder()
 
     def _check_is_action_force_transfer_allowed(self):
         if any(not rec.is_action_force_transfer_allowed for rec in self):
@@ -78,7 +81,7 @@ class StockPicking(models.Model):
 
     @api.multi
     def do_transfer(self):
-        to_backorder = self.filtered("is_create_backorder_allowed")
+        to_backorder = self.filtered(lambda pick: pick._is_create_backorder_allowed())
         to_transfer = self - to_backorder
         to_backorder._create_backorder()
         if to_transfer:

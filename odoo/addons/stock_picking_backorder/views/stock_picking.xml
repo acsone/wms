@@ -14,7 +14,6 @@
           name="action_force_transfer"
           string="Force transfer"
           type="object"
-          groups="base.group_no_one"
           attrs="{'invisible': [('is_action_force_transfer_allowed', '=', False)]}"
         />
       </button>
