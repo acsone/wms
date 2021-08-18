@@ -31,6 +31,12 @@ setup(
         click-odoo-gen-logiweb-po=scripts.gen_logiweb_po:main
     """,
     extras_require={
-        "tests": ["xmlunittest", "freezegun==0.3.14", "unittest2", "responses"]
+        "tests": [
+            "xmlunittest",
+            "freezegun==0.3.14",
+            "unittest2",
+            "responses",
+            "coverage",
+        ]
     },
 )

@@ -41,7 +41,7 @@ spec:
         - name: gitlab-registry
       containers:
         - name: ${CI_ENVIRONMENT_SLUG}
-          image: "${IMAGE}"
+          image: "${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_NAME}"
           imagePullPolicy: IfNotPresent
           volumeMounts:
             - name: "odoo-data"
