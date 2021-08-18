@@ -188,7 +188,7 @@ coverage-report:
 build-image:
   <<: *build-and-publish-image
   only:
-    - /1\.75\.\d+/
+    - /^1\.75\.\d+$/
 
 deploy-test:
   stage: deploy
@@ -207,7 +207,7 @@ deploy-test:
     on_stop: stop-test
   when: manual
   only:
-    - /1\.75\.\d+/
+    - /^1\.75\.\d+$/
 
 stop-test:
   stage: undeploy
@@ -221,7 +221,7 @@ stop-test:
     action: stop
   when: manual
   only:
-    - /1\.75\.\d+/
+    - /^1\.75\.\d+$/
   needs:
     - deploy-test
   allow_failure: true
@@ -234,7 +234,7 @@ deploy-test-new:
   trigger:
     include: .gitlab-ci-deploy.yml
   only:
-    - /1\.75\.\d+/
+    - /^1\.75\.\d+$/
   needs:
     - job: build-image
 
@@ -267,7 +267,7 @@ deploy-uat:
     - ssh -J acsone@194.78.105.88:23 acsone@Lnx009.abl.grp ./odoo-upgrade.sh ${CI_COMMIT_REF_NAME}
   when: manual
   only:
-    - /1\.75\.\d+/
+    - /^1\.75\.\d+$/
 
 deploy-preprod:
   stage: deploy
@@ -278,7 +278,7 @@ deploy-preprod:
     - ssh -J acsone@194.78.105.88:23 acsone@Lnx001.abl.grp ./odoo-upgrade.sh ${CI_COMMIT_REF_NAME}
   when: manual
   only:
-    - /1\.75\.\d+/
+    - /^1\.75\.\d+$/
 
 deploy-prod:
   stage: deploy
@@ -289,7 +289,7 @@ deploy-prod:
     - ssh -J acsone@194.78.105.88:23 acsone@Lnx004.abl.grp ./odoo-upgrade.sh ${CI_COMMIT_REF_NAME}
   when: manual
   only:
-    - /1\.75\.\d+/
+    - /^1\.75\.\d+$/
 
 deploy-acsone-test:
   stage: deploy
