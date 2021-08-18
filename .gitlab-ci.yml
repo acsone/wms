@@ -105,7 +105,7 @@ test:
     - pipx install acsoo # for checklog
     - start_ssh_agent # for pushing translations
     - virtualenv --python=$PYTHON venv
-    - venv/bin/pip install coverage -r requirements-tests.txt
+    - venv/bin/pip install --no-deps -r requirements-tests.txt
     # use --no-index so missing dependencies that would not be in *.whl are detected
     - venv/bin/pip install --no-index release/*.whl
     # although the project is part of *.whl, install it in editable mode so coverage sees it
@@ -127,7 +127,7 @@ test-shopfloor:
     - pipx install acsoo # for checklog
     - start_ssh_agent # for pushing translations
     - virtualenv --python=$PYTHON venv
-    - venv/bin/pip install coverage -r requirements-tests.txt
+    - venv/bin/pip install --no-deps -r requirements-tests.txt
     # use --no-index so missing dependencies that would not be in *.whl are detected
     - venv/bin/pip install --no-index release/*.whl
     # although the project is part of *.whl, install it in editable mode so coverage sees it
