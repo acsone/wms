@@ -199,15 +199,15 @@ deploy-test:
     - create_gitlab_registry_secret
     - envsubst < container/test.tpl.yaml | kubectl apply -f -
     - kubectl rollout status -w deployment/${CI_ENVIRONMENT_SLUG}
-  needs:
-    - job: build-image
   environment:
     name: test/odoo-alcyon
     url: https://odoo-alcyon-test.acscloud-6.acsone.eu
     on_stop: stop-test
-  when: manual
+  needs:
+    - job: build-image
   only:
     - /^1\.75\.\d+$/
+  when: manual
 
 stop-test:
   stage: undeploy
@@ -219,11 +219,11 @@ stop-test:
   environment:
     name: test/odoo-alcyon
     action: stop
-  when: manual
+  needs:
+    - job: deploy-test
   only:
     - /^1\.75\.\d+$/
-  needs:
-    - deploy-test
+  when: manual
   allow_failure: true
 
 deploy-test-new:
@@ -233,20 +233,20 @@ deploy-test-new:
     DEPLOY_COMMIT_REF_NAME: $CI_COMMIT_REF_NAME
   trigger:
     include: .gitlab-ci-deploy.yml
-  only:
-    - /^1\.75\.\d+$/
   needs:
     - job: build-image
+  only:
+    - /^1\.75\.\d+$/
 
 build-review-image:
   <<: *build-and-publish-image
   variables:
     IMAGE_FLAVOR: /review
-  when: manual
   only:
     - branches
   except:
     - master
+  when: manual
 
 deploy-review:
   stage: deploy
@@ -257,6 +257,10 @@ deploy-review:
     include: .gitlab-ci-deploy.yml
   needs:
     - job: build-review-image
+  only:
+    - branches
+  except:
+    - master
 
 deploy-uat:
   stage: deploy
@@ -265,9 +269,11 @@ deploy-uat:
   script:
     - start_ssh_agent
     - ssh -J acsone@194.78.105.88:23 acsone@Lnx009.abl.grp ./odoo-upgrade.sh ${CI_COMMIT_REF_NAME}
-  when: manual
+  needs:
+    - job: build-image
   only:
     - /^1\.75\.\d+$/
+  when: manual
 
 deploy-preprod:
   stage: deploy
@@ -276,9 +282,11 @@ deploy-preprod:
   script:
     - start_ssh_agent
     - ssh -J acsone@194.78.105.88:23 acsone@Lnx001.abl.grp ./odoo-upgrade.sh ${CI_COMMIT_REF_NAME}
-  when: manual
+  needs:
+    - job: build-image
   only:
     - /^1\.75\.\d+$/
+  when: manual
 
 deploy-prod:
   stage: deploy
@@ -287,9 +295,11 @@ deploy-prod:
   script:
     - start_ssh_agent
     - ssh -J acsone@194.78.105.88:23 acsone@Lnx004.abl.grp ./odoo-upgrade.sh ${CI_COMMIT_REF_NAME}
-  when: manual
+  needs:
+    - job: build-image
   only:
     - /^1\.75\.\d+$/
+  when: manual
 
 deploy-acsone-test:
   stage: deploy
@@ -303,10 +313,9 @@ deploy-acsone-test:
   variables:
     user: odoo-alcyon-test
     host: odoo-alcyon-test.acsone.eu
-  only:
-    - /^\d+\.\d+\.\d+$/
-  allow_failure: False
-  when: manual
   needs:
     - job: build
       artifacts: true
+  only:
+    - /^\d+\.\d+\.\d+$/
+  when: manual
