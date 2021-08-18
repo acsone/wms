@@ -65,11 +65,13 @@ build:
   script:
     - start_ssh_agent
     - virtualenv --python=$PYTHON venv
-    - venv/bin/pip wheel --no-deps -r requirements.txt . --wheel-dir=release
+    - venv/bin/pip wheel --no-deps -r requirements.txt --wheel-dir=release
+    - venv/bin/pip wheel --no-deps -e . --wheel-dir=release-project
   artifacts:
     expire_in: 1 week
     paths:
       - release/
+      - release-project/
     name: "${CI_PROJECT_NAME}-${CI_JOB_ID}-build"
   interruptible: true
 
@@ -95,7 +97,7 @@ licence_check:
   script:
     - virtualenv --python=$PYTHON venv
     # use --no-index so missing dependencies that would not be in *.whl are detected
-    - venv/bin/pip install --no-index release/*.whl
+    - venv/bin/pip install --no-index release*/*.whl
     - manifestoo -d odoo/addons --addons-path-python=venv/bin/python check-licenses
   allow_failure: true
 
@@ -105,10 +107,7 @@ test:
     - pipx install acsoo # for checklog
     - start_ssh_agent # for pushing translations
     - virtualenv --python=$PYTHON venv
-    - venv/bin/pip install --no-deps -r requirements-tests.txt
-    # use --no-index so missing dependencies that would not be in *.whl are detected
-    - venv/bin/pip install --no-index release/*.whl
-    # although the project is part of *.whl, install it in editable mode so coverage sees it
+    - venv/bin/pip install --no-deps -r requirements-tests.txt -r requirements.txt
     - venv/bin/pip install --no-deps -e .
     - ADDONS_INIT=$(manifestoo -d odoo/addons --select-exclude=alc_all,alc_shopfloor list-depends --separator=,)
     - echo Installing ${ADDONS_INIT}
@@ -127,10 +126,7 @@ test-shopfloor:
     - pipx install acsoo # for checklog
     - start_ssh_agent # for pushing translations
     - virtualenv --python=$PYTHON venv
-    - venv/bin/pip install --no-deps -r requirements-tests.txt
-    # use --no-index so missing dependencies that would not be in *.whl are detected
-    - venv/bin/pip install --no-index release/*.whl
-    # although the project is part of *.whl, install it in editable mode so coverage sees it
+    - venv/bin/pip install --no-deps -r requirements-tests.txt -r requirements.txt
     - venv/bin/pip install --no-deps -e .
     - ADDONS_INIT=$(manifestoo --addons-path-python=venv/bin/python --select=alc_shopfloor list-depends --separator=,)
     - echo Installing ${ADDONS_INIT}
@@ -259,6 +255,7 @@ deploy-acsone-test:
   stage: deploy
   script:
     - start_ssh_agent
+    - cp release-project/*.whl release/
     - ./deploy-acsone
   environment:
     name: test/acsone-odoo-alcyon
