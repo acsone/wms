@@ -162,7 +162,6 @@ coverage-report:
     - job: test-shopfloor
       artifacts: true
   interruptible: true
-  allow_failure: true
 
 .build-and-publish-image: &build-and-publish-image
   stage: build image
