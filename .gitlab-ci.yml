@@ -4,6 +4,7 @@ stages:
   - coverage
   - build image
   - deploy
+  - undeploy
 
 before_script:
   - |
@@ -77,8 +78,9 @@ build:
   image: ghcr.io/acsone/odoo-ci-image:v20210526.0
   tags:
     - odoo-10.0
-  dependencies:
-    - build
+  needs:
+    - job: build
+      artifacts: true
   after_script:
     - dropdb --if-exists ${DB_NAME}
   interruptible: true
@@ -159,9 +161,11 @@ coverage-report:
     expose_as: "Test coverage"
     reports:
       cobertura: coverage.xml
-  dependencies:
-    - test
-    - test-shopfloor
+  needs:
+    - job: test
+      artifacts: true
+    - job: test-shopfloor
+      artifacts: true
   interruptible: true
   allow_failure: true
 
@@ -191,6 +195,8 @@ deploy-test:
     - create_gitlab_registry_secret
     - envsubst < container/test.tpl.yaml | kubectl apply -f -
     - kubectl rollout status -w deployment/${CI_ENVIRONMENT_SLUG}
+  needs:
+    - job: build-image
   environment:
     name: test/odoo-alcyon
     url: https://odoo-alcyon-test.acscloud-6.acsone.eu
@@ -200,7 +206,7 @@ deploy-test:
     - /1\.75\.\d+/
 
 stop-test:
-  stage: deploy
+  stage: undeploy
   image: quay.io/acsone/deploy-tools
   script:
     - echo "$TEST_KUBECONFIG" > .kubeconfig
@@ -212,7 +218,8 @@ stop-test:
   when: manual
   only:
     - /1\.75\.\d+/
-  dependencies: []
+  needs:
+    - deploy-test
   allow_failure: true
 
 deploy-uat:
@@ -263,5 +270,6 @@ deploy-acsone-test:
     - /^\d+\.\d+\.\d+$/
   allow_failure: False
   when: manual
-  dependencies:
-    - build
+  needs:
+    - job: build
+      artifacts: true
