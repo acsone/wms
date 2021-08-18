@@ -226,6 +226,18 @@ stop-test:
     - deploy-test
   allow_failure: true
 
+deploy-test-new:
+  stage: deploy
+  variables:
+    DEPLOY_ENV: test
+    DEPLOY_COMMIT_REF_NAME: $CI_COMMIT_REF_NAME
+  trigger:
+    include: .gitlab-ci-deploy.yml
+  only:
+    - /1\.75\.\d+/
+  needs:
+    - job: build-image
+
 build-review-image:
   <<: *build-and-publish-image
   variables:
