@@ -239,9 +239,10 @@ build-review-image:
 deploy-review:
   stage: deploy
   variables:
-    IMAGE_FLAVOR: /review
-  script:
-    - echo "Deploying"
+    DEPLOY_ENV: review
+    DEPLOY_COMMIT_REF_NAME: $CI_COMMIT_REF_NAME
+  trigger:
+    include: .gitlab-ci-deploy.yml
   needs:
     - job: build-review-image
 
