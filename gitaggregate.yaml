@@ -36,3 +36,12 @@
     - oca refs/pull/376/head #10.0-backport-stock-storage-type
     - oca refs/pull/385/head # 10.0-packagemaxweight-len delivery_carrier_max_weight_constraint
   target: origin 10.0-alc_master
+
+./src/server-auth:
+  remotes:
+    oca: https://github.com/oca/server-auth.git
+    origin: ssh://git@github.com/acsone/server-auth.git
+  merges:
+    - oca 10.0
+    - oca refs/pull/281/head # backport auth_jwt
+  target: origin 10.0-alc_master

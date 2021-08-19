@@ -20,6 +20,7 @@ decorator==4.0.10
 dicttoxml==1.7.4
 docutils==0.12
 ebaysdk==2.1.4
+ecdsa==0.14.1
 enum34==1.1.6
 feedparser==5.2.1
 funcsigs==1.0.2
@@ -86,6 +87,7 @@ odoo10-addon-attribute-set-completeness==10.0.1.2.0.99.dev5
 odoo10-addon-attribute-set-mass-edit==10.0.1.0.1.99.dev5
 odoo10-addon-attribute-set-searchable==10.0.1.0.0.99.dev5
 odoo10-addon-auth-api-key @ git+https://github.com/acsone/server-auth.git@482460eed5839ec0d116ee32b050ec4b1bc7fd8a#subdirectory=setup/auth_api_key
+odoo10-addon-auth-jwt @ git+https://github.com/oca/server-auth.git@f62e6a80fd4d96c82a4bb51628551746bfec88d5#subdirectory=setup/auth_jwt
 odoo10-addon-auto-reconcile-structured-ref @ git+https://github.com/acsone/account-reconcile.git@eecb8a9dcb54145e876362efd07f76400da318f9#subdirectory=setup/auto_reconcile_structured_ref
 odoo10-addon-base-attachment-object-storage @ git+https://github.com/acsone/odoo-cloud-platform.git@45a9d1f258eb93ec619202c2cfcb76978eee46cd#subdirectory=setup/base_attachment_object_storage
 odoo10-addon-base-business-document-import==10.0.1.0.0.99.dev28
@@ -215,6 +217,7 @@ Pillow==3.4.1
 psutil==4.3.1
 psycogreen==1.0
 psycopg2==2.7.3.1
+pyasn1==0.4.8
 pycparser==2.19
 pycups==1.9.74
 pydot==1.2.3
@@ -227,6 +230,7 @@ pyserial==3.1.1
 pyshp==2.1.0
 Python-Chart==1.39
 python-dateutil==2.5.3
+python-jose==3.2.0
 python-json-logger==0.1.11
 python-ldap==2.4.27
 python-openid==2.2.5
@@ -238,6 +242,7 @@ PyYAML==3.12
 qrcode==5.3
 reportlab==3.3.0
 requests==2.20.0
+rsa==4.5
 scandir==1.10.0
 Shapely==1.7.0
 simplejson==3.17.0
