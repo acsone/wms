@@ -6,6 +6,8 @@ stages:
   - deploy
   - undeploy
 
+image: ghcr.io/acsone/odoo-ci-image:v20210526.0
+
 before_script:
   - |
     function install_pre_commit {
@@ -58,7 +60,6 @@ build:
   stage: build
   # use odoo-10.0 runner so we have the pre-cloned odoo
   # except for that optimization, we don't need odoo dependencies for this job
-  image: ghcr.io/acsone/odoo-ci-image:v20210526.0
   tags:
     - odoo-10.0
   script:
@@ -76,7 +77,6 @@ build:
 
 .test_common:
   stage: test
-  image: ghcr.io/acsone/odoo-ci-image:v20210526.0
   tags:
     - odoo-10.0
   needs:
