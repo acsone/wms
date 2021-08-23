@@ -19,15 +19,6 @@ before_script:
         venv/bin/click-odoo-makepot -c odoo-ci.cfg -d ${DB_NAME} --commit --msgmerge --addons-dir=$(pwd)/odoo/addons
         git push "git@gitlab.acsone.eu:${CI_PROJECT_PATH}" "HEAD:${CI_COMMIT_REF_NAME}"
     }
-    function create_gitlab_registry_secret() {
-        kubectl create secret docker-registry \
-            gitlab-registry \
-            --docker-server="${CI_REGISTRY}" \
-            --docker-username="${CI_DEPLOY_USER}" \
-            --docker-password="${CI_DEPLOY_PASSWORD}" \
-            --docker-email="${GITLAB_USER_EMAIL}" \
-            -o yaml --dry-run=client | kubectl apply -f -
-    }
 
 variables:
   PYTHON: python2.7
@@ -203,42 +194,6 @@ build-review-image:
   when: manual
 
 # deployments to acsone environments (review, test)
-
-deploy-test:
-  stage: deploy
-  image: quay.io/acsone/deploy-tools
-  script:
-    - echo "$TEST_KUBECONFIG" > .kubeconfig
-    - export KUBECONFIG=$PWD/.kubeconfig
-    - create_gitlab_registry_secret
-    - envsubst < container/test.tpl.yaml | kubectl apply -f -
-    - kubectl rollout status -w deployment/${CI_ENVIRONMENT_SLUG}
-  environment:
-    name: test/odoo-alcyon
-    url: https://odoo-alcyon-test.acscloud-6.acsone.eu
-    on_stop: stop-test
-  needs:
-    - job: build-image
-  only:
-    - /^1\.75\.\d+$/
-  when: manual
-
-stop-test:
-  stage: undeploy
-  image: quay.io/acsone/deploy-tools
-  script:
-    - echo "$TEST_KUBECONFIG" > .kubeconfig
-    - export KUBECONFIG=$PWD/.kubeconfig
-    - kubectl delete service,deployment,ingress -l app=${CI_ENVIRONMENT_SLUG}
-  environment:
-    name: test/odoo-alcyon
-    action: stop
-  needs:
-    - job: deploy-test
-  only:
-    - /^1\.75\.\d+$/
-  when: manual
-  allow_failure: true
 
 .deploy-trigger:
   stage: deploy
