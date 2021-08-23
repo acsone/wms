@@ -10,11 +10,6 @@ image: ghcr.io/acsone/odoo-ci-image:v20210526.0
 
 before_script:
   - |
-    function install_pre_commit {
-        virtualenv --python=$PYTHON venv-pre-commit
-        venv-pre-commit/bin/pip install pre-commit
-        ln -s venv-pre-commit/bin/pre-commit
-    }
     function start_ssh_agent {
         eval $(ssh-agent -s)
         ssh-add <(echo "$SSH_DEPLOY_KEY")
@@ -41,8 +36,6 @@ variables:
 
 pre-commit:
   stage: test
-  tags:
-    - python
   cache:
     key: pre-commit
     paths:
@@ -51,8 +44,8 @@ pre-commit:
     KUBERNETES_MEMORY_REQUEST: 3500Mi
     KUBERNETES_MEMORY_LIMIT: 3500Mi
   script:
-    - install_pre_commit
-    - PRE_COMMIT_HOME=$PWD/.pre-commit ./pre-commit run --all-files
+    - pipx install pre-commit
+    - PRE_COMMIT_HOME=$PWD/.pre-commit pre-commit run --all-files --show-diff-on-failure
   needs: []
   interruptible: true
 
