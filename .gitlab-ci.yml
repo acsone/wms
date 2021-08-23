@@ -294,22 +294,3 @@ deploy-prod:
   extends: .deploy-customer
   variables:
     DEPLOY_ENV: prod
-
-deploy-acsone-test:
-  stage: deploy
-  script:
-    - start_ssh_agent
-    - cp release-project/*.whl release/
-    - ./deploy-acsone
-  environment:
-    name: test/acsone-odoo-alcyon
-    url: https://odoo-alcyon-test.acsone.eu
-  variables:
-    user: odoo-alcyon-test
-    host: odoo-alcyon-test.acsone.eu
-  needs:
-    - job: build
-      artifacts: true
-  only:
-    - /^\d+\.\d+\.\d+$/
-  when: manual
