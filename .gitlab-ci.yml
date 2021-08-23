@@ -31,7 +31,6 @@ before_script:
 
 variables:
   PYTHON: python2.7
-  DB_NAME: "${CI_PROJECT_NAME}-${CI_JOB_ID}"
 
 # lint
 
@@ -80,6 +79,8 @@ build:
   needs:
     - job: build
       artifacts: true
+  variables:
+    DB_NAME: "${CI_PROJECT_NAME}-${CI_JOB_ID}"
   after_script:
     - dropdb --if-exists ${DB_NAME}
   interruptible: true
