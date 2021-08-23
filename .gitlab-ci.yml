@@ -74,7 +74,7 @@ build:
     name: "${CI_PROJECT_NAME}-${CI_JOB_ID}-build"
   interruptible: true
 
-.test_common: &test_common
+.test_common:
   stage: test
   image: ghcr.io/acsone/odoo-ci-image:v20210526.0
   tags:
@@ -92,7 +92,7 @@ build:
     name: "${CI_PROJECT_NAME}-${CI_JOB_ID}-coverage"
 
 licence_check:
-  <<: *test_common
+  extends: .test_common
   script:
     - virtualenv --python=$PYTHON venv
     # use --no-index (but not --no-deps) so missing dependencies that would not be in *.whl are detected
@@ -101,7 +101,7 @@ licence_check:
   allow_failure: true
 
 test:
-  <<: *test_common
+  extends: .test_common
   script:
     - pipx install acsoo # for checklog
     - start_ssh_agent # for pushing translations
@@ -121,7 +121,7 @@ test:
     - if [ "${CI_COMMIT_REF_NAME}" = "master" ] ; then makepot ; fi
 
 test-shopfloor:
-  <<: *test_common
+  extends: .test_common
   script:
     - pipx install acsoo # for checklog
     - start_ssh_agent # for pushing translations
@@ -165,7 +165,7 @@ coverage-report:
       artifacts: true
   interruptible: true
 
-.build-and-publish-image: &build-and-publish-image
+.build-and-publish-image:
   stage: build image
   image:
     name: gcr.io/kaniko-project/executor:debug
@@ -187,9 +187,19 @@ coverage-report:
       artifacts: true
 
 build-image:
-  <<: *build-and-publish-image
+  extends: .build-and-publish-image
   only:
     - /^1\.75\.\d+$/
+
+build-review-image:
+  extends: .build-and-publish-image
+  variables:
+    IMAGE_FLAVOR: /review
+  only:
+    - branches
+  except:
+    - master
+  when: manual
 
 deploy-test:
   stage: deploy
@@ -227,35 +237,29 @@ stop-test:
   when: manual
   allow_failure: true
 
-deploy-test-new:
+.deploy-trigger:
   stage: deploy
   variables:
-    DEPLOY_ENV: test
     DEPLOY_COMMIT_REF_NAME: $CI_COMMIT_REF_NAME
   trigger:
-    include: .gitlab-ci-deploy.yml
+    include:
+      - project: $CI_PROJECT_PATH
+        ref: deploy
+        file: .gitlab-ci.yml
+
+deploy-test-new:
+  extends: .deploy-trigger
+  variables:
+    DEPLOY_ENV: test
   needs:
     - job: build-image
   only:
     - /^1\.75\.\d+$/
 
-build-review-image:
-  <<: *build-and-publish-image
-  variables:
-    IMAGE_FLAVOR: /review
-  only:
-    - branches
-  except:
-    - master
-  when: manual
-
 deploy-review:
-  stage: deploy
+  extends: .deploy-trigger
   variables:
     DEPLOY_ENV: review
-    DEPLOY_COMMIT_REF_NAME: $CI_COMMIT_REF_NAME
-  trigger:
-    include: .gitlab-ci-deploy.yml
   needs:
     - job: build-review-image
   only:
@@ -263,44 +267,28 @@ deploy-review:
   except:
     - master
 
-deploy-uat:
-  stage: deploy
-  tags:
-    - acsone-lan-lux
-  script:
-    - start_ssh_agent
-    - ssh -J acsone@194.78.105.88:23 acsone@Lnx009.abl.grp ./odoo-upgrade.sh ${CI_COMMIT_REF_NAME}
+.deploy-customer:
+  extends: .deploy-trigger
   needs:
     - job: build-image
   only:
     - /^1\.75\.\d+$/
   when: manual
+
+deploy-uat:
+  extends: .deploy-customer
+  variables:
+    DEPLOY_ENV: uat
 
 deploy-preprod:
-  stage: deploy
-  tags:
-    - acsone-lan-lux
-  script:
-    - start_ssh_agent
-    - ssh -J acsone@194.78.105.88:23 acsone@Lnx001.abl.grp ./odoo-upgrade.sh ${CI_COMMIT_REF_NAME}
-  needs:
-    - job: build-image
-  only:
-    - /^1\.75\.\d+$/
-  when: manual
+  extends: .deploy-customer
+  variables:
+    DEPLOY_ENV: preprod
 
 deploy-prod:
-  stage: deploy
-  tags:
-    - acsone-lan-lux
-  script:
-    - start_ssh_agent
-    - ssh -J acsone@194.78.105.88:23 acsone@Lnx004.abl.grp ./odoo-upgrade.sh ${CI_COMMIT_REF_NAME}
-  needs:
-    - job: build-image
-  only:
-    - /^1\.75\.\d+$/
-  when: manual
+  extends: .deploy-customer
+  variables:
+    DEPLOY_ENV: prod
 
 deploy-acsone-test:
   stage: deploy
