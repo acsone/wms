@@ -13,7 +13,6 @@ before_script:
     function start_ssh_agent {
         eval $(ssh-agent -s)
         ssh-add <(echo "$SSH_DEPLOY_KEY")
-        echo "${SSH_AGENT_PID}" > ssh-agent.pid
     }
     function makepot {
         # if you use weblate, remove --msgmerge here and install the msgmerge addon on weblate
