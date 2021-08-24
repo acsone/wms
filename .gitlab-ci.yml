@@ -205,7 +205,7 @@ build-review-image:
         ref: deploy
         file: .gitlab-ci.yml
 
-deploy-test-new:
+deploy-test-trigger:
   extends: .deploy-trigger
   variables:
     DEPLOY_ENV: test
@@ -214,7 +214,7 @@ deploy-test-new:
   only:
     - /^1\.75\.\d+$/
 
-deploy-review:
+deploy-review-trigger:
   extends: .deploy-trigger
   variables:
     DEPLOY_ENV: review
@@ -235,17 +235,17 @@ deploy-review:
     - /^1\.75\.\d+$/
   when: manual
 
-deploy-uat:
+deploy-uat-trigger:
   extends: .deploy-customer
   variables:
     DEPLOY_ENV: uat
 
-deploy-preprod:
+deploy-preprod-trigger:
   extends: .deploy-customer
   variables:
     DEPLOY_ENV: preprod
 
-deploy-prod:
+deploy-prod-trigger:
   extends: .deploy-customer
   variables:
     DEPLOY_ENV: prod
