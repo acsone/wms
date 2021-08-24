@@ -1,10 +1,7 @@
 stages:
   - build
   - test
-  - coverage
-  - build image
   - deploy
-  - undeploy
 
 image: ghcr.io/acsone/odoo-ci-image:v20210526.0
 
@@ -130,7 +127,7 @@ test-shopfloor:
     - unbuffer venv/bin/coverage run --parallel venv/bin/odoo -c odoo-ci.cfg -d ${DB_NAME} --stop-after-init --no-xmlrpc -i ${ADDONS_TEST} --test-enable | acsoo checklog
 
 coverage-report:
-  stage: coverage
+  stage: test
   script:
     - virtualenv --python=$PYTHON venv
     - venv/bin/pip install coverage
@@ -158,7 +155,7 @@ coverage-report:
 # build container images
 
 .build-and-publish-image:
-  stage: build image
+  stage: build
   image:
     name: gcr.io/kaniko-project/executor:debug
     entrypoint: [""]
