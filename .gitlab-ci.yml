@@ -200,8 +200,7 @@ build-review-image:
   variables:
     DEPLOY_COMMIT_REF_NAME: $CI_COMMIT_REF_NAME
   trigger:
-    project: $CI_PROJECT_PATH
-    branch: deploy
+    project: acsone/odoo-alcyon-deploy
 
 deploy-test-trigger:
   extends: .deploy-trigger
