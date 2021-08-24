@@ -206,6 +206,7 @@ deploy-test-trigger:
   extends: .deploy-trigger
   variables:
     DEPLOY_ENV: test
+    DEPLOY_IMAGE: ${CI_REGISTRY_IMAGE}
   needs:
     - job: build-image
   only:
@@ -215,6 +216,7 @@ deploy-review-trigger:
   extends: .deploy-trigger
   variables:
     DEPLOY_ENV: review
+    DEPLOY_IMAGE: ${CI_REGISTRY_IMAGE}/review
   needs:
     - job: build-review-image
   only:
