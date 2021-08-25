@@ -184,6 +184,8 @@ build-review-image:
   extends: .build-and-publish-image
   variables:
     IMAGE_FLAVOR: /review
+  environment:
+    name: review/$CI_COMMIT_REF_NAME
   only:
     - branches
   except:
@@ -194,16 +196,17 @@ build-review-image:
 
 .deploy-trigger:
   stage: deploy
-  variables:
-    DEPLOY_COMMIT_REF_NAME: $CI_COMMIT_REF_NAME
-  trigger:
-    project: acsone/odoo-alcyon-deploy
+  image: ghcr.io/acsone/deploy-tools
+  script:
+    - echo "triggering deploy of ${CI_REGISTRY_IMAGE}${IMAGE_FLAVOR}:${CI_COMMIT_REF_NAME} to ${CI_ENVIRONMENT_SLUG}"
+    - >
+      curl --request POST --form "token=${CI_JOB_TOKEN}" --form "ref=deploy" --form "variables[DEPLOY_ENV]=${CI_ENVIRONMENT_SLUG}" --form "variables[DEPLOY_IMAGE]=${CI_REGISTRY_IMAGE}${IMAGE_FLAVOR}"
+      --form "variables[DEPLOY_COMMIT_REF_NAME]=${CI_COMMIT_REF_NAME}" "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/trigger/pipeline"
 
 deploy-test-trigger:
   extends: .deploy-trigger
-  variables:
-    DEPLOY_ENV: test
-    DEPLOY_IMAGE: ${CI_REGISTRY_IMAGE}
+  environment:
+    name: test
   needs:
     - job: build-image
   only:
@@ -212,14 +215,16 @@ deploy-test-trigger:
 deploy-review-trigger:
   extends: .deploy-trigger
   variables:
-    DEPLOY_ENV: review
-    DEPLOY_IMAGE: ${CI_REGISTRY_IMAGE}/review
+    IMAGE_FLAVOR: /review
+  environment:
+    name: review/$CI_COMMIT_REF_NAME
   needs:
     - job: build-review-image
   only:
     - branches
   except:
     - master
+  when: on_success # automatic after build-review-image
 
 # deployments to customer environments (uat, preprod, prod)
 
@@ -233,15 +238,15 @@ deploy-review-trigger:
 
 deploy-uat-trigger:
   extends: .deploy-customer
-  variables:
-    DEPLOY_ENV: uat
+  environment:
+    name: uat
 
 deploy-preprod-trigger:
   extends: .deploy-customer
-  variables:
-    DEPLOY_ENV: preprod
+  environment:
+    name: preprod
 
 deploy-prod-trigger:
   extends: .deploy-customer
-  variables:
-    DEPLOY_ENV: prod
+  environment:
+    name: prod
