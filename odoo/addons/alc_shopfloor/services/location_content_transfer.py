@@ -759,6 +759,8 @@ class LocationContentTransfer(Component):
         data["confirmation_required"] = confirmation_required
         if confirmation_required and not message:
             message = self.msg_store.need_confirmation()
+        if self.work.menu.keep_existing_reservations and not message:
+            message = self._existing_reservations_message(pickings=pickings)
         return self._response(
             next_state="scan_destination_all", data=data, message=message
         )
@@ -791,7 +793,51 @@ class LocationContentTransfer(Component):
         data["confirmation_required"] = confirmation_required
         if confirmation_required and not message:
             message = self.msg_store.need_confirmation()
+        if self.work.menu.keep_existing_reservations and not message:
+            message = self._existing_reservations_message(operation=next_content)
         return self._response(next_state="scan_destination", data=data, message=message)
+
+    def _existing_reservations_message(self, pickings=None, operation=None):
+        if not operation and not pickings:
+            return None
+        message = None
+        picking_ids = pickings.ids or operation.mapped("picking_id").ids
+        location = (
+            operation.location_id
+            if operation
+            else pickings.mapped("pack_operation_ids.location_id")
+        )
+        domain = [
+            ("location_id", "=", location.id),
+            ("qty", ">", 0),
+            ("reservation_id", "not in", picking_ids),
+        ]
+        if operation and operation.product_id:
+            domain.append(("product_id", "=", operation.product_id.id))
+
+        reserved_qties = self.env["stock.quant"].read_group(
+            domain,
+            ["product_id", "lot_id", "qty"],
+            ["product_id", "lot_id"],
+            lazy=False,
+            orderby="product_id, lot_id",
+        )
+        if reserved_qties:
+            bodies = [
+                _(
+                    "This location contains reserved products. You must leave the following qties into the location:"
+                )
+            ]
+            for item in reserved_qties:
+                product = item["product_id"][1]
+                lot = item["lot_id"][1] if item["lot_id"] else ""
+                item_name = product
+                if lot:
+                    item_name = product + " / " + lot
+                bodies.append(item_name + ": %s" % item["qty"])
+
+            message = {"message_type": "warning", "body": "\n".join(bodies)}
+        return message
 
     def _data_content_all_for_location(self, pickings):
         sorter = self._actions_for("location_content_transfer.sorter")
