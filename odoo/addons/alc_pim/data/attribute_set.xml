@@ -1,0 +1,14 @@
+<odoo noupdate="1">
+  <record model="attribute.set" id="attribute_set_medicaments">
+    <field ref="product.model_product_template" name="model_id" />
+    <field name="name">Médicaments</field>
+  </record>
+  <record model="attribute.set" id="attribute_set_aliments">
+    <field ref="product.model_product_template" name="model_id" />
+    <field name="name">Aliments</field>
+  </record>
+  <record model="attribute.set" id="attribute_set_materiel">
+    <field ref="product.model_product_template" name="model_id" />
+    <field name="name">Matériel</field>
+  </record>
+</odoo>

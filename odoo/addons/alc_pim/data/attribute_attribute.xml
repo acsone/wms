@@ -1,0 +1,222 @@
+<odoo noupdate="1">
+  <record model="attribute.attribute" id="attribute_barcode">
+    <field name="allow_mass_editing" eval="False" />
+    <field ref="management_attribute_group" name="attribute_group_id" />
+    <field
+      name="attribute_set_ids"
+      eval="[(6,0,[ref('attribute_set_medicaments'), ref('attribute_set_aliments'), ref('attribute_set_materiel')])]"
+    />
+    <field ref="product.field_product_template_barcode" name="field_id" />
+    <field ref="product.model_product_template" name="model_id" />
+    <field name="nature">native</field>
+  </record>
+  <record model="attribute.attribute" id="attribute_belgium_only">
+<!--    TODO: set to True-->
+    <field name="allow_mass_editing" eval="False" />
+    <field ref="management_attribute_group" name="attribute_group_id" />
+    <field
+      name="attribute_set_ids"
+      eval="[(6,0,[ref('attribute_set_medicaments'), ref('attribute_set_aliments'), ref('attribute_set_materiel')])]"
+    />
+    <field ref="specific_product.field_product_template_belgium_only" name="field_id" />
+    <field ref="product.model_product_template" name="model_id" />
+    <field name="nature">native</field>
+  </record>
+  <record model="attribute.attribute" id="attribute_category_lot_expiry_field_name">
+    <field name="allow_mass_editing" eval="False" />
+    <field ref="management_attribute_group" name="attribute_group_id" />
+    <field
+      name="attribute_set_ids"
+      eval="[(6,0,[ref('attribute_set_medicaments'), ref('attribute_set_aliments'), ref('attribute_set_materiel')])]"
+    />
+    <field
+      ref="stock_production_lot_expiry.field_product_category_lot_expiry_field_name"
+      name="field_id"
+    />
+    <field ref="product.model_product_template" name="model_id" />
+    <field name="nature">native</field>
+  </record>
+  <record model="attribute.attribute" id="attribute_cnk_code">
+    <field name="allow_mass_editing" eval="False" />
+    <field ref="management_attribute_group" name="attribute_group_id" />
+    <field name="attribute_set_ids" eval="[(6,0,[ref('attribute_set_medicaments')])]" />
+    <field ref="specific_product.field_product_template_cnk_code" name="field_id" />
+    <field ref="product.model_product_template" name="model_id" />
+    <field name="nature">native</field>
+  </record>
+  <record model="attribute.attribute" id="attribute_create_date">
+    <field name="allow_mass_editing" eval="False" />
+    <field ref="management_attribute_group" name="attribute_group_id" />
+    <field
+      name="attribute_set_ids"
+      eval="[(6,0,[ref('attribute_set_medicaments'), ref('attribute_set_aliments'), ref('attribute_set_materiel')])]"
+    />
+    <field ref="product.field_product_template_create_date" name="field_id" />
+    <field ref="product.model_product_template" name="model_id" />
+    <field name="nature">native</field>
+  </record>
+  <record model="attribute.attribute" id="attribute_default_code">
+    <field name="allow_mass_editing" eval="False" />
+    <field ref="management_attribute_group" name="attribute_group_id" />
+    <field
+      name="attribute_set_ids"
+      eval="[(6,0,[ref('attribute_set_medicaments'), ref('attribute_set_aliments'), ref('attribute_set_materiel')])]"
+    />
+    <field ref="product.field_product_template_default_code" name="field_id" />
+    <field ref="product.model_product_template" name="model_id" />
+    <field name="nature">native</field>
+  </record>
+  <record model="attribute.attribute" id="attribute_lot_expiry_field_name">
+    <field name="allow_mass_editing" eval="False" />
+    <field ref="management_attribute_group" name="attribute_group_id" />
+    <field
+      name="attribute_set_ids"
+      eval="[(6,0,[ref('attribute_set_medicaments'), ref('attribute_set_aliments'), ref('attribute_set_materiel')])]"
+    />
+    <field
+      ref="stock_production_lot_expiry.field_product_template_specific_lot_expiry_field_name"
+      name="field_id"
+    />
+    <field ref="product.model_product_template" name="model_id" />
+    <field name="nature">native</field>
+  </record>
+  <record model="attribute.attribute" id="attribute_not_sold_on_website">
+    <field name="allow_mass_editing" eval="False" />
+    <field ref="management_attribute_group" name="attribute_group_id" />
+    <field
+      name="attribute_set_ids"
+      eval="[(6,0,[ref('attribute_set_medicaments'), ref('attribute_set_aliments'), ref('attribute_set_materiel')])]"
+    />
+    <field
+      ref="alc_product_audit.field_product_template_not_sold_on_website"
+      name="field_id"
+    />
+    <field ref="product.model_product_template" name="model_id" />
+    <field name="nature">native</field>
+  </record>
+  <record model="attribute.attribute" id="attribute_taxes_id">
+    <field name="allow_mass_editing" eval="False" />
+    <field ref="management_attribute_group" name="attribute_group_id" />
+    <field
+      name="attribute_set_ids"
+      eval="[(6,0,[ref('attribute_set_medicaments'), ref('attribute_set_aliments'), ref('attribute_set_materiel')])]"
+    />
+    <field ref="account.field_product_template_taxes_id" name="field_id" />
+    <field ref="product.model_product_template" name="model_id" />
+    <field name="nature">native</field>
+  </record>
+  <record model="attribute.attribute" id="attribute_vendor_product_code">
+    <field name="allow_mass_editing" eval="False" />
+    <field ref="management_attribute_group" name="attribute_group_id" />
+    <field
+      name="attribute_set_ids"
+      eval="[(6,0,[ref('attribute_set_medicaments'), ref('attribute_set_aliments'), ref('attribute_set_materiel')])]"
+    />
+    <field
+      ref="specific_purchase.field_product_template_vendor_product_code"
+      name="field_id"
+    />
+    <field ref="product.model_product_template" name="model_id" />
+    <field name="nature">native</field>
+  </record>
+  <record model="attribute.attribute" id="attribute_packaging_ids">
+    <field name="allow_mass_editing" eval="False" />
+    <field ref="logistics_attribute_group" name="attribute_group_id" />
+    <field
+      name="attribute_set_ids"
+      eval="[(6,0,[ref('attribute_set_medicaments'), ref('attribute_set_aliments'), ref('attribute_set_materiel')])]"
+    />
+    <field ref="product.field_product_template_packaging_ids" name="field_id" />
+    <field ref="product.model_product_template" name="model_id" />
+    <field name="nature">native</field>
+  </record>
+  <record model="attribute.attribute" id="attribute_route_from_categ_ids">
+    <field name="allow_mass_editing" eval="False" />
+    <field ref="logistics_attribute_group" name="attribute_group_id" />
+    <field
+      name="attribute_set_ids"
+      eval="[(6,0,[ref('attribute_set_medicaments'), ref('attribute_set_aliments'), ref('attribute_set_materiel')])]"
+    />
+    <field ref="stock.field_product_template_route_from_categ_ids" name="field_id" />
+    <field ref="product.model_product_template" name="model_id" />
+    <field name="nature">native</field>
+  </record>
+  <record model="attribute.attribute" id="attribute_unit_in_shrink_wrap">
+    <field name="allow_mass_editing" eval="False" />
+    <field ref="logistics_attribute_group" name="attribute_group_id" />
+    <field
+      name="attribute_set_ids"
+      eval="[(6,0,[ref('attribute_set_medicaments'), ref('attribute_set_aliments'), ref('attribute_set_materiel')])]"
+    />
+    <field
+      ref="alc_product_packaging.field_product_template_unit_in_shrink_wrap"
+      name="field_id"
+    />
+    <field ref="product.model_product_template" name="model_id" />
+    <field name="nature">native</field>
+  </record>
+  <record model="attribute.attribute" id="attribute_image">
+    <field name="allow_mass_editing" eval="False" />
+    <field ref="marketing_attribute_group" name="attribute_group_id" />
+    <field
+      name="attribute_set_ids"
+      eval="[(6,0,[ref('attribute_set_medicaments'), ref('attribute_set_aliments'), ref('attribute_set_materiel')])]"
+    />
+    <field ref="product.field_product_template_image" name="field_id" />
+    <field ref="product.model_product_template" name="model_id" />
+    <field name="nature">native</field>
+  </record>
+  <record model="attribute.attribute" id="attribute_manufacturer">
+    <field name="allow_mass_editing" eval="False" />
+    <field ref="marketing_attribute_group" name="attribute_group_id" />
+    <field
+      name="attribute_set_ids"
+      eval="[(6,0,[ref('attribute_set_medicaments'), ref('attribute_set_aliments'), ref('attribute_set_materiel')])]"
+    />
+    <field
+      ref="product_manufacturer.field_product_template_manufacturer"
+      name="field_id"
+    />
+    <field ref="product.model_product_template" name="model_id" />
+    <field name="nature">native</field>
+  </record>
+  <record model="attribute.attribute" id="attribute_name">
+    <field name="allow_mass_editing" eval="False" />
+    <field ref="marketing_attribute_group" name="attribute_group_id" />
+    <field
+      name="attribute_set_ids"
+      eval="[(6,0,[ref('attribute_set_medicaments'), ref('attribute_set_aliments'), ref('attribute_set_materiel')])]"
+    />
+    <field ref="product.field_product_template_name" name="field_id" />
+    <field ref="product.model_product_template" name="model_id" />
+    <field name="nature">native</field>
+  </record>
+  <record model="attribute.attribute" id="attribute_storage_temperature_id">
+    <field name="allow_mass_editing" eval="False" />
+    <field ref="marketing_attribute_group" name="attribute_group_id" />
+    <field
+      name="attribute_set_ids"
+      eval="[(6,0,[ref('attribute_set_medicaments'), ref('attribute_set_aliments'), ref('attribute_set_materiel')])]"
+    />
+    <field
+      ref="specific_product.field_product_template_storage_temperature_id"
+      name="field_id"
+    />
+    <field ref="product.model_product_template" name="model_id" />
+    <field name="nature">native</field>
+  </record>
+  <record model="attribute.attribute" id="attribute_dimensional_uom_id">
+    <field name="allow_mass_editing" eval="False" />
+    <field ref="technical_attribute_group" name="attribute_group_id" />
+    <field
+      name="attribute_set_ids"
+      eval="[(6,0,[ref('attribute_set_medicaments'), ref('attribute_set_aliments'), ref('attribute_set_materiel')])]"
+    />
+    <field
+      ref="product_dimension.field_product_template_dimensional_uom_id"
+      name="field_id"
+    />
+    <field ref="product.model_product_template" name="model_id" />
+    <field name="nature">native</field>
+  </record>
+</odoo>
