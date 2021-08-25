@@ -186,7 +186,13 @@ class TestLocationContentTransferStart(LocationContentTransferCommonCase):
         response = self.service.dispatch(
             "scan_location", params={"barcode": self.content_loc.barcode}
         )
-        self.assert_response_scan_destination_all(response, self.pickings)
+        message = {
+            "body": u"This location contains reserved products. You must leave the following qties into the location:\n[A] Product A: 30.0\n[B] Product B: 10.0\n[C] Product C: 20.0\n[D] Product D: 20.0",
+            "message_type": "warning",
+        }
+        self.assert_response_scan_destination_all(
+            response, self.pickings, message=message
+        )
 
         # ensure that the product_a is not into the picking.
         self.assertNotIn(
@@ -401,7 +407,14 @@ class LocationContentTransferStartSpecialCase(LocationContentTransferCommonCase)
             [("picking_type_id", "=", self.menu.picking_type_ids.id)]
         )
         self.assertEqual(len(new_picking), 1)
-        self.assert_response_scan_destination_all(response, new_picking)
+        # check that the response contains a message for the reserved products:
+        message = {
+            "body": u"This location contains reserved products. You must leave the following qties into the location:\n[A] Product A: 15.0",
+            "message_type": "warning",
+        }
+        self.assert_response_scan_destination_all(
+            response, new_picking, message=message
+        )
         operations = response["data"]["scan_destination_all"]["operations"]
         self.assertEqual(1, len(operations))
         operation = operations[0]
