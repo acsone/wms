@@ -10,7 +10,7 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        "pim",
+        "alc_pim_product",
         "alc_product_shop_category",
         "alc_product_link_notice",
         # data dependencies
