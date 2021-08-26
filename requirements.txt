@@ -146,6 +146,7 @@ odoo10-addon-product-analytic-purchase @ git+https://github.com/acsone/account-a
 odoo10-addon-product-assortment==10.0.1.0.0.99.dev4
 odoo10-addon-product-attribute-set==10.0.1.1.0.99.dev4
 odoo10-addon-product-attribute-set-completeness==10.0.1.2.0.99.dev4
+odoo10-addon-product-brand @ git+https://github.com/acsone/brand.git@418e2fa4bd0683f668049fc7c7b79a289c1ce807#subdirectory=setup/product_brand
 odoo10-addon-product-dimension==10.0.1.0.0.99.dev5
 odoo10-addon-product-manufacturer @ git+https://github.com/acsone/product-attribute.git@f1dc5cd944b481993f7fb92cc98990527856cd4e#subdirectory=setup/product_manufacturer
 odoo10-addon-product-multi-category==10.0.1.0.0

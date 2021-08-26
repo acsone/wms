@@ -71,6 +71,8 @@ odoo10-addon-storage-file @ git+https://github.com/acsone/storage.git@10.0-14bp-
 odoo10-addon-storage-image @ git+https://github.com/acsone/storage.git@10.0-14bp-len#subdirectory=setup/storage_image
 odoo10-addon-storage-image-product @ git+https://github.com/acsone/storage.git@10.0-14bp-len#subdirectory=setup/storage_image_product
 odoo10-addon-storage-thumbnail @ git+https://github.com/acsone/storage.git@10.0-14bp-len#subdirectory=setup/storage_thumbnail
+# backport product_brand
+odoo10-addon-product-brand @ git+https://github.com/acsone/brand.git@10.0-14bp-len#subdirectory=setup/product_brand
 
 # oca/delivery-carrier
 odoo10-addon-delivery-carrier-label-gls @ git+https://github.com/oca/delivery-carrier.git@refs/pull/376/head#subdirectory=setup/delivery_carrier_label_gls

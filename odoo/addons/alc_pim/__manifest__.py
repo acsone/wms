@@ -19,6 +19,7 @@
         "specific_product",
         "specific_purchase",
         "alc_product_audit",
+        "product_brand",
     ],
     "application": False,
     "data": [
