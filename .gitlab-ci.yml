@@ -199,9 +199,15 @@ build-review-image:
   image: ghcr.io/acsone/deploy-tools
   script:
     - echo "triggering deploy of ${CI_REGISTRY_IMAGE}${IMAGE_FLAVOR}:${CI_COMMIT_REF_NAME} to ${CI_ENVIRONMENT_SLUG}"
-    - >
-      curl --request POST --form "token=${CI_JOB_TOKEN}" --form "ref=deploy" --form "variables[DEPLOY_ENV]=${CI_ENVIRONMENT_SLUG}" --form "variables[DEPLOY_IMAGE]=${CI_REGISTRY_IMAGE}${IMAGE_FLAVOR}"
-      --form "variables[DEPLOY_COMMIT_REF_NAME]=${CI_COMMIT_REF_NAME}" "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/trigger/pipeline"
+    - |
+      curl --request POST \
+        --form "token=${CI_JOB_TOKEN}" \
+        --form "ref=deploy" \
+        --form "variables[DEPLOY_ENV]=${CI_ENVIRONMENT_SLUG}" \
+        --form "variables[DEPLOY_IMAGE]=${CI_REGISTRY_IMAGE}${IMAGE_FLAVOR}" \
+        --form "variables[DEPLOY_COMMIT_REF_NAME]=${CI_COMMIT_REF_NAME}" \
+        --form "variables[DEPLOY_COMMIT_SHA]=${CI_COMMIT_SHA}" \
+        "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/trigger/pipeline"
 
 deploy-test-trigger:
   extends: .deploy-trigger
