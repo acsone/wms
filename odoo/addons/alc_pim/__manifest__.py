@@ -13,6 +13,7 @@
         "alc_pim_product",
         "alc_product_shop_category",
         "alc_product_link_notice",
+        "product_animal_species",
         # data dependencies
         "product_dimension",
         "stock_production_lot_expiry",
