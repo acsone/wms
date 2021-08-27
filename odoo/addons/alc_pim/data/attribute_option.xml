@@ -1,0 +1,2133 @@
+<odoo noupdate="1">
+  <record model="attribute.option" id="option_attribute_animal_size_small">
+    <field name="name">small</field>
+    <field ref="attribute_animal_size_option_ids" name="attribute_id" />
+  </record>
+  <record model="attribute.option" id="option_attribute_animal_size_medium">
+    <field name="name">medium</field>
+    <field ref="attribute_animal_size_option_ids" name="attribute_id" />
+  </record>
+  <record model="attribute.option" id="option_attribute_animal_size_big">
+    <field name="name">big</field>
+    <field ref="attribute_animal_size_option_ids" name="attribute_id" />
+  </record>
+  <record model="attribute.option" id="attribute_option_oestriol">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Oestriol</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_paramyxovirus">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Paramyxovirus</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_grapiprant">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Grapiprant</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_midazolam">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Midazolam</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_menbutone">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Menbutone</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_apomorphine">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Apomorphine</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_chlorphenamine">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Chlorphenamine</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_lotilaner">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Lotilaner</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_pegbovigrastim">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Pegbovigrastim</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_sarolaner">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Sarolaner</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_bromhexine">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Bromhexine</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_oclacitinib">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Oclacitinib</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_clodronic_acid">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Clodronic acid</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_amlodipine">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Amlodipine</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_torasemide">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Torasemide</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_desoxycortone_pivalate">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Desoxycortone (pivalate)</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_orbifloxacine">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Orbifloxacine</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_sevoflurane">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Sevoflurane</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_selenium">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Selenium</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_paromomycine">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Paromomycine</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_parvovirus">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Parvovirus</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_pasteurella_multocida">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Pasteurella multocida</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_peforelin">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Peforelin</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_penethamaat">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Penethamaat</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_pentobarbital">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Pentobarbital</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_pentosan_polysulfaat">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Pentosan polysulfaat</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_pergolide">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Pergolide</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_hondenpara_influenzavirus">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Hondenpara-influenzavirus</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_paracetamol">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Paracetamol</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_felien_panleucopenievirus">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Felien panleucopenievirus</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_omeprazol">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Omeprazol</field>
+  </record>
+  <record
+    model="attribute.option"
+    id="attribute_option_ornithobacterium_rhinotracheale"
+  >
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Ornithobacterium rhinotracheale</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_osateron">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Osateron</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_oxantel">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Oxantel</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_oxfendazole">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Oxfendazole</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_oxyclozanide">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Oxyclozanide</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_zinkoxide">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Zinkoxide</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_oxytetracycline">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Oxytetracycline</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_oxytocine">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Oxytocine</field>
+  </record>
+  <record
+    model="attribute.option"
+    id="attribute_option_felien_infectieuze_peritonitisvirus"
+  >
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Felien infectieuze peritonitisvirus</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_permethrine">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Permethrine</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_fenobarbital">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Fenobarbital</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_pradofloxacine">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Pradofloxacine</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_praziquantel">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Praziquantel</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_prednisolon">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Prednisolon</field>
+  </record>
+  <record
+    model="attribute.option"
+    id="attribute_option_pregnant_mare_serum_gonadotropin"
+  >
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Pregnant Mare Serum Gonadotropin</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_procaine">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Procaine</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_progesteron">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Progesteron</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_proligeston">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Proligeston</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_propentofylline">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Propentofylline</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_propofol">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Propofol</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_povidonum_iodinatum">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Povidonum iodinatum</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_kalium">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Kalium</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_posaconazol">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Posaconazol</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_fenoxymethylpenicilline">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Fenoxymethylpenicilline</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_fenylbutazon">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Fenylbutazon</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_fenylpropanolamine">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Fenylpropanolamine</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_phoxime_foxim">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Phoxime (foxim)</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_pi_3_virus">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">PI-3 virus</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_pimobendan">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Pimobendan</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_pirlimycine">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Pirlimycine</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_pmsg">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">PMSG</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_polymyxine_b">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Polymyxine B</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_propoxur">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Propoxur</field>
+  </record>
+  <record
+    model="attribute.option"
+    id="attribute_option_leukemievirus_kat_felien_leukemievirus"
+  >
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Leukemievirus kat (felien leukemievirus)</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_masitinib">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Masitinib</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_mavacoxib">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Mavacoxib</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_mebendazole">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Mebendazole</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_mebezoniumiodide">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Mebezoniumiodide</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_medetomidine">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Medetomidine</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_medroxyprogesteronacetaat">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Medroxyprogesteronacetaat</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_megestrolacetaat">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Megestrolacetaat</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_meloxicam">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Meloxicam</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_metamizol">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Metamizol</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_maropitant">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Maropitant</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_marbofloxacine">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Marbofloxacine</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_marekvirus">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Marekvirus</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_levamisol">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Levamisol</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_levothyroxine">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Levothyroxine</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_lidocaine">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Lidocaine</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_lincomycine">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Lincomycine</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_lufenuron">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Lufenuron</field>
+  </record>
+  <record
+    model="attribute.option"
+    id="attribute_option_lutropine_lh_luteotroop_hormoon_hcg"
+  >
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Lutropine (LH) (luteotroop hormoon) (hCG)</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_magnesium">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Magnesium</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_rhdv">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">RHDV</field>
+  </record>
+  <record
+    model="attribute.option"
+    id="attribute_option_mannheimia_pasteurella_haemolytica"
+  >
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Mannheimia (Pasteurella) haemolytica</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_metergoline">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Metergoline</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_methadon">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Methadon</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_methimazole">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Methimazole</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_mycoplasma_hyopneumoniae">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Mycoplasma hyopneumoniae</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_mycoplasma_synoviae">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Mycoplasma synoviae</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_myxomatosevirus">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Myxomatosevirus</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_nafcilline">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Nafcilline</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_nandrolon">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Nandrolon</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_neomycine">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Neomycine</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_newcastle_disease_virus">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Newcastle Disease Virus</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_nicotinamide">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Nicotinamide</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_nitroxinil">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Nitroxinil</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_mycoplasma_gallisepticum">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Mycoplasma gallisepticum</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_mucosal_disease_virus">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Mucosal Disease Virus</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_moxidectine">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Moxidectine</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_methopren">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Methopren</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_methylprednisolon">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Methylprednisolon</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_metoclopramide">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Metoclopramide</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_metronidazol">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Metronidazol</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_miconazol">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Miconazol</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_milbemycine">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Milbemycine</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_mometasonfuroaat">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Mometasonfuroaat</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_monepantel">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Monepantel</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_monensin">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Monensin</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_nystatine">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Nystatine</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_pyrantel">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Pyrantel</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_tiamuline">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Tiamuline</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_valnemuline">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Valnemuline</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_kanariepokkenvirus">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Kanariepokkenvirus</field>
+  </record>
+  <record
+    model="attribute.option"
+    id="attribute_option_respiratorisch_syncytiaal_virus_brs_virus"
+  >
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Respiratorisch Syncytiaal Virus (BRS-Virus)</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_vitamine_a">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Vitamine A</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_vitamine_b1">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Vitamine B1</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_vitamine_b12">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Vitamine B12</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_vitamine_b2">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Vitamine B2</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_vitamine_b3">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Vitamine B3</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_vitamine_b5">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Vitamine B5</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_tylvalosine">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Tylvalosine</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_tylosine">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Tylosine</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_tulathromycine">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Tulathromycine</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_tiletamine">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Tiletamine</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_tildipirosine">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Tildipirosine</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_tilmicosine">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Tilmicosine</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_toceranib">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Toceranib</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_tocoferol">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Tocoferol</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_toltrazuril">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Toltrazuril</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_triclabendazole">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Triclabendazole</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_trilostane">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Trilostane</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_trimethoprim">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Trimethoprim</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_vitamine_b6">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Vitamine B6</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_vitamine_d">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Vitamine D</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_vitamine_e">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Vitamine E</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_xylazine">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Xylazine</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_zink">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Zink</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_zolazepam">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Zolazepam</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_pyridoxine">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Pyridoxine</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_robenacoxib">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Robenacoxib</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_romifidine">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Romifidine</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_ronidazol">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Ronidazol</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_rota_virus">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Rota-virus</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_rsb_virus">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">RSB-virus</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_salicylaat">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Salicylaat</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_salmonella_enteritidis">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Salmonella enteritidis</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_salmonella_typhimurium">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Salmonella typhimurium</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_selamectine">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Selamectine</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_rifaximin">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Rifaximin</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_riboflavine">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Riboflavine</field>
+  </record>
+  <record
+    model="attribute.option"
+    id="attribute_option_infectieuze_boviene_rhinotracheitis"
+  >
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Infectieuze boviene rhinotracheitis</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_pyriprole">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Pyriprole</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_pyriproxyfen">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Pyriproxyfen</field>
+  </record>
+  <record
+    model="attribute.option"
+    id="attribute_option_rabbit_hemorrhagic_disease_virus"
+  >
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Rabbit Hemorrhagic Disease Virus</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_rabiesvirus">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Rabiesvirus</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_ramipril">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Ramipril</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_reovirus">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Reovirus</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_retinol">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Retinol</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_rhinotracheitisvirus_kalkoen">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Rhinotracheitisvirus kalkoen</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_felien_rhinotracheitisvirus">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Felien rhinotracheitisvirus</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_selegiline">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Selegiline</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_s_methopren_methopren">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">(S)-methopren (methopren)</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_natrium">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Natrium</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_monosulfiram">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Monosulfiram</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_suxibuzon">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Suxibuzon</field>
+  </record>
+  <record
+    model="attribute.option"
+    id="attribute_option_prrs_virus_porcien_reproductief_en_respiratoir_syndroom"
+  >
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">PRRS-virus (Porcien Reproductief en Respiratoir Syndroom)</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_telmisartan">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Telmisartan</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_tetanus">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Tetanus</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_tetracaine">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Tetracaine</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_thiamazole">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Thiamazole</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_thiamine">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Thiamine</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_thiamfenicol">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Thiamfenicol</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_sulfamiden">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Sulfamiden</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_sulfamethoxazol">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Sulfamethoxazol</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_sulfadoxine">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Sulfadoxine</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_sulfur">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Sulfur</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_spectinomycine">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Spectinomycine</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_spinosad">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Spinosad</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_spiramycine">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Spiramycine</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_spironolactone">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Spironolactone</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_staphylococcus_aureus">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Staphylococcus aureus</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_sulfachloorpyridazine">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Sulfachloorpyridazine</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_sulfadiazine">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Sulfadiazine</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_sulfadimethoxine">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Sulfadimethoxine</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_thymol">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Thymol</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_infectieuze_bursitisvirus">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Infectieuze bursitisvirus</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_cefalone">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Cefalone</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_cefapirine">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Cefapirine</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_cefazoline">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Cefazoline</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_cefoperazon">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Cefoperazon</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_cefovecin">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Cefovecin</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_cefquinome">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Cefquinome</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_ceftiofur">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Ceftiofur</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_chlamydophila_felis">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Chlamydophila felis</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_chloor">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Chloor</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_cefalexine">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Cefalexine</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_carre_hondenziektevirus">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Carré (hondenziektevirus)</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_not_specified">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Not specified</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_carprofen">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Carprofen</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_busereline">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Busereline</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_butafosfaan">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Butafosfaan</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_butorfanol">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Butorfanol</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_bvd_virus">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">BVD-virus</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_cabergoline">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Cabergoline</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_calcium">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Calcium</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_felien_calicivirus">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Felien calicivirus</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_carbetocine">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Carbetocine</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_carnidazol">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Carnidazol</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_chloorhexidine">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Chloorhexidine</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_chloortetracycline">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Chloortetracycline</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_cholecalciferol">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Cholecalciferol</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_clostridium_tetani">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Clostridium tetani</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_clotrimazol">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Clotrimazol</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_cloxacilline">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Cloxacilline</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_coccidia_spp">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Coccidia spp.</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_colistine_polymyxine_e">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Colistine (polymyxine E)</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_coxiella_burnetii">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Coxiella burnetii</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_cyanocobalamine">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Cyanocobalamine</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_danofloxacine">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Danofloxacine</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_clostridium_perfringens">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Clostridium perfringens</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_clostridium_novyi">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Clostridium novyi</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_clostridium_spp_clostridium">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Clostridium spp. (clostridium)</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_cyclosporine_ciclosporine">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Cyclosporine (ciclosporine)</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_cimicoxib">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Cimicoxib</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_circovirus">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Circovirus</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_clenbuterol">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Clenbuterol</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_clindamycine">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Clindamycine</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_clomipramine">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Clomipramine</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_cloprostenol">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Cloprostenol</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_clorsulon">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Clorsulon</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_closantel">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Closantel</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_delmadinonacetaat">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Delmadinonacetaat</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_salicylzuur">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Salicylzuur</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_tolfenaminezuur">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Tolfenaminezuur</field>
+  </record>
+  <record
+    model="attribute.option"
+    id="attribute_option_actinobacillus_pleuropneumoniae"
+  >
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Actinobacillus pleuropneumoniae</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_hondenadenovirus">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Hondenadenovirus</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_adrenaline">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Adrenaline</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_afoxolaner">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Afoxolaner</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_aglepriston">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Aglepriston</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_albendazole">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Albendazole</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_alfaprostol">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Alfaprostol</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_propionzuur">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Propionzuur</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_hyaluronzuur">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Hyaluronzuur</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_fusidinezuur">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Fusidinezuur</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_e_coli_as">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">E. coli-As</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_tetanus_as">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Tetanus-As</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_acepromazine">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Acepromazine</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_azijnzuur">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Azijnzuur</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_acetylisovaleryltylosine">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Acetylisovaleryltylosine</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_acetylsalicylzuur">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Acetylsalicylzuur</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_boorzuur">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Boorzuur</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_citroenzuur">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Citroenzuur</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_clavulaanzuur">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Clavulaanzuur</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_alfaxalone">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Alfaxalone</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_alfatocoferol_vitamine_e">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Alfatocoferol (vitamine E)</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_altrenogest">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Altrenogest</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_benazepril">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Benazepril</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_benzylpenicilline">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Benzylpenicilline</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_betamethason">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Betamethason</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_bismuth_subnitraat">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Bismuth subnitraat</field>
+  </record>
+  <record
+    model="attribute.option"
+    id="attribute_option_blauwtongvirus_blue_tongue_virus"
+  >
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Blauwtongvirus (Blue Tongue Virus)</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_bordetella_bronchiseptica">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Bordetella bronchiseptica</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_borrelia_burgdorferi_spp">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Borrelia burgdorferi spp</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_kaliumbromide">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Kaliumbromide</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_infectieuze_bronchitisvirus">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Infectieuze bronchitisvirus</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_bacteroides_nodosus">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Bacteroides nodosus</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_bacitracine">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Bacitracine</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_azaperon">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Azaperon</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_aluminium">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Aluminium</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_amitraz">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Amitraz</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_amoxicilline">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Amoxicilline</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_ampicilline">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Ampicilline</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_amprolium">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Amprolium</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_tetanus_anatoxine">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Tetanus anatoxine</field>
+  </record>
+  <record
+    model="attribute.option"
+    id="attribute_option_infectieuze_anaemie_virus_chicken_anaemia_virus"
+  >
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Infectieuze anaemie-virus (chicken anaemia virus)</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_apramycine">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Apramycine</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_atipamezol">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Atipamezol</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_buprenorfine">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Buprenorfine</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_deltamethrine">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Deltamethrine</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_fluralaner">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Fluralaner</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_varkensinfluenzavirus">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Varkensinfluenzavirus</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_guaifenesine">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Guaifenesine</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_gumborovirus">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Gumborovirus</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_haemophilus_parasuis">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Haemophilus parasuis</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_halofuginone">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Halofuginone</field>
+  </record>
+  <record
+    model="attribute.option"
+    id="attribute_option_infectieuze_hepatitisvirus_hond_hondenadenovirus"
+  >
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Infectieuze hepatitisvirus hond (hondenadenovirus)</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_herpesvirus">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Herpesvirus</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_kalkoen_herpesvirus">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Kalkoen herpesvirus</field>
+  </record>
+  <record
+    model="attribute.option"
+    id="attribute_option_human_chorionic_gonadotropin_hcg"
+  >
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Human Chorionic Gonadotropin (hCG)</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_paardeninfluenzavirus">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Paardeninfluenzavirus</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_serumgonadotrofine">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Serumgonadotrofine</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_choriongonadotrofine">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Choriongonadotrofine</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_follitropine">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Follitropine</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_framycetine">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Framycetine</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_furosemide">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Furosemide</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_gamithromycine">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Gamithromycine</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_gentamicine">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Gentamicine</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_glucose">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Glucose</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_glycine">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Glycine</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_gnrf_analoog">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">GnRF-analoog</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_gonadoreline">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Gonadoreline</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_hydrocortison_aceponaat">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Hydrocortison (aceponaat)</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_hyoscine">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Hyoscine</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_imepitoine">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Imepitoïne</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_ketamine">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Ketamine</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_ketanserine">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Ketanserine</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_ketoconazole">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Ketoconazole</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_ketoprofen">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Ketoprofen</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_lactose">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Lactose</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_weipoeder">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Weipoeder</field>
+  </record>
+  <record
+    model="attribute.option"
+    id="attribute_option_infectieuze_laryngo_tracheitisvirus"
+  >
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Infectieuze laryngo-tracheitisvirus</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_lawsonia_intracellularis">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Lawsonia intracellularis</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_leishmania_infantum">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Leishmania infantum</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_kanamycine">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Kanamycine</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_ivermectine">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Ivermectine</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_itraconazole">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Itraconazole</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_imidacloprid">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Imidacloprid</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_imidapril">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Imidapril</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_immunoglobuline">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Immunoglobuline</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_indoxacarb">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Indoxacarb</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_insuline">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Insuline</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_interferon">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Interferon</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_interleukine">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Interleukine</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_jodium_jood">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Jodium (jood)</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_isofluraan">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Isofluraan</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_leptospira_spp_leptospira">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Leptospira spp. (Leptospira)</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_desloreline">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Desloreline</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_dinoprost">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Dinoprost</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_dinotefuran">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Dinotefuran</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_doramectine">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Doramectine</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_doxycycline">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Doxycycline</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_escherichia_coli_e_coli">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Escherichia coli (E. coli)</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_ecg">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">ECG</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_egg_drop_syndrome_virus">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Egg Drop Syndrome-virus</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_ehv_paardenrhinopneumonievirus">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">EHV (paardenrhinopneumonievirus )</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_eimeria_spp">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Eimeria spp.</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_dimpylaat">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Dimpylaat</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_dihydrostreptomycine">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Dihydrostreptomycine</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_diethanolaminefusidaat">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Diethanolaminefusidaat</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_detomidine">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Detomidine</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_dexamethason">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Dexamethason</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_dexmedetomidine">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Dexmedetomidine</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_dexpanthenol">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Dexpanthenol</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_dextrose">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Dextrose</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_diazepam">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Diazepam</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_dibotermine_alfa">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Dibotermine alfa</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_dichelobacter_nodosus">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Dichelobacter nodosus</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_diclazuril">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Diclazuril</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_embutramide">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Embutramide</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_emodepside">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Emodepside</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_enalapril">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Enalapril</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_ijzer">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Ijzer</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_west_nile_virus">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">West Nile Virus</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_q_koorts_coxiella_burnetii">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Q-koorts (Coxiella burnetii)</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_fipronil">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Fipronil</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_firocoxib">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Firocoxib</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_florfenicol">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Florfenicol</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_flubendazole">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Flubendazole</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_flumequine">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Flumequine</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_flumethrine">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Flumethrine</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_fentanyl">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Fentanyl</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_fenbendazole">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Fenbendazole</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_febantel">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Febantel</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_enilconazol">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Enilconazol</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_enrofloxacine">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Enrofloxacine</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_efedrine">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Efedrine</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_epinefrine">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Epinefrine</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_eprinomectine">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Eprinomectine</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_equine_chorionic_gonadotropin">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Equine Chorionic Gonadotropin</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_erysipelothrix_rhusiopathiae">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Erysipelothrix rhusiopathiae</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_escherichia_coli">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Escherichia coli</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_estriol">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Estriol</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_flunixine">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Flunixine</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_triamcinolone">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Triamcinolone</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_enflicoxib">
+    <field ref="attribute_active_principle_option_ids" name="attribute_id" />
+    <field name="name">Enflicoxib</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_xs">
+    <field ref="attribute_size_clothing_option_id" name="attribute_id" />
+    <field name="name">XS</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_s">
+    <field ref="attribute_size_clothing_option_id" name="attribute_id" />
+    <field name="name">S</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_m">
+    <field ref="attribute_size_clothing_option_id" name="attribute_id" />
+    <field name="name">M</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_l">
+    <field ref="attribute_size_clothing_option_id" name="attribute_id" />
+    <field name="name">L</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_xl">
+    <field ref="attribute_size_clothing_option_id" name="attribute_id" />
+    <field name="name">XL</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_xxl">
+    <field ref="attribute_size_clothing_option_id" name="attribute_id" />
+    <field name="name">XXL</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_34_36">
+    <field ref="attribute_size_clothing_option_id" name="attribute_id" />
+    <field name="name">34-36</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_36_38">
+    <field ref="attribute_size_clothing_option_id" name="attribute_id" />
+    <field name="name">36-38</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_38_40">
+    <field ref="attribute_size_clothing_option_id" name="attribute_id" />
+    <field name="name">38-40</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_40_42">
+    <field ref="attribute_size_clothing_option_id" name="attribute_id" />
+    <field name="name">40-42</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_42_44">
+    <field ref="attribute_size_clothing_option_id" name="attribute_id" />
+    <field name="name">42-44</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_44_46">
+    <field ref="attribute_size_clothing_option_id" name="attribute_id" />
+    <field name="name">44-46</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_46_48">
+    <field ref="attribute_size_clothing_option_id" name="attribute_id" />
+    <field name="name">46-48</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_48_50">
+    <field ref="attribute_size_clothing_option_id" name="attribute_id" />
+    <field name="name">48-50</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_50_52">
+    <field ref="attribute_size_clothing_option_id" name="attribute_id" />
+    <field name="name">50-52</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_senior">
+    <field ref="attribute_categ_age_option_ids" name="attribute_id" />
+    <field name="name">senior</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_adult">
+    <field ref="attribute_categ_age_option_ids" name="attribute_id" />
+    <field name="name">adult</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_junior">
+    <field ref="attribute_categ_age_option_ids" name="attribute_id" />
+    <field name="name">junior</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_all">
+    <field ref="attribute_presentation_option_id" name="attribute_id" />
+    <field name="name">All</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_bar">
+    <field ref="attribute_presentation_option_id" name="attribute_id" />
+    <field name="name">Bar</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_croquette">
+    <field ref="attribute_presentation_option_id" name="attribute_id" />
+    <field name="name">Croquette</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_tidbit">
+    <field ref="attribute_presentation_option_id" name="attribute_id" />
+    <field name="name">Tidbit</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_pate_bites">
+    <field ref="attribute_presentation_option_id" name="attribute_id" />
+    <field name="name">Pâté / bites</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_powder_instant">
+    <field ref="attribute_presentation_option_id" name="attribute_id" />
+    <field name="name">Powder / Instant</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_granules">
+    <field ref="attribute_presentation_option_id" name="attribute_id" />
+    <field name="name">Granules</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_other">
+    <field ref="attribute_presentation_option_id" name="attribute_id" />
+    <field name="name">Other</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_science_plan">
+    <field ref="attribute_food_range_option_id" name="attribute_id" />
+    <field name="name">Science Plan</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_celtic">
+    <field ref="attribute_food_range_option_id" name="attribute_id" />
+    <field name="name">Celtic</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_fibafirst">
+    <field ref="attribute_food_range_option_id" name="attribute_id" />
+    <field name="name">Fibafirst</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_prescription_diet">
+    <field ref="attribute_food_range_option_id" name="attribute_id" />
+    <field name="name">Prescription Diet</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_trovet">
+    <field ref="attribute_food_range_option_id" name="attribute_id" />
+    <field name="name">Trovet</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_specific">
+    <field ref="attribute_food_range_option_id" name="attribute_id" />
+    <field name="name">Specific</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_sanimed">
+    <field ref="attribute_food_range_option_id" name="attribute_id" />
+    <field name="name">Sanimed</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_size_health_nutrition">
+    <field ref="attribute_food_range_option_id" name="attribute_id" />
+    <field name="name">Size Health Nutrition</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_oxbow">
+    <field ref="attribute_food_range_option_id" name="attribute_id" />
+    <field name="name">Oxbow</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_hooi">
+    <field ref="attribute_food_range_option_id" name="attribute_id" />
+    <field name="name">Hooi</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_complete">
+    <field ref="attribute_food_range_option_id" name="attribute_id" />
+    <field name="name">Complete</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_nutribird">
+    <field ref="attribute_food_range_option_id" name="attribute_id" />
+    <field name="name">Nutribird</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_orlux">
+    <field ref="attribute_food_range_option_id" name="attribute_id" />
+    <field name="name">Orlux</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_cavia_pro">
+    <field ref="attribute_food_range_option_id" name="attribute_id" />
+    <field name="name">Cavia pro</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_crispy">
+    <field ref="attribute_food_range_option_id" name="attribute_id" />
+    <field name="name">Crispy</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_vetcare_plus">
+    <field ref="attribute_food_range_option_id" name="attribute_id" />
+    <field name="name">Vetcare Plus</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_recovery">
+    <field ref="attribute_food_range_option_id" name="attribute_id" />
+    <field name="name">Recovery</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_selective">
+    <field ref="attribute_food_range_option_id" name="attribute_id" />
+    <field name="name">Selective</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_vet_complex">
+    <field ref="attribute_food_range_option_id" name="attribute_id" />
+    <field name="name">Vet Complex</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_hpm">
+    <field ref="attribute_food_range_option_id" name="attribute_id" />
+    <field name="name">HPM</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_breed_health_nutrition">
+    <field ref="attribute_food_range_option_id" name="attribute_id" />
+    <field name="name">Breed Health Nutrition</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_vet_care_nutrition">
+    <field ref="attribute_food_range_option_id" name="attribute_id" />
+    <field name="name">Vet Care Nutrition</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_veterinary_diet">
+    <field ref="attribute_food_range_option_id" name="attribute_id" />
+    <field name="name">Veterinary Diet</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_pvd">
+    <field ref="attribute_food_range_option_id" name="attribute_id" />
+    <field name="name">Pvd</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_pro_plan">
+    <field ref="attribute_food_range_option_id" name="attribute_id" />
+    <field name="name">Pro Plan</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_eukanuba_vdiet">
+    <field ref="attribute_food_range_option_id" name="attribute_id" />
+    <field name="name">Eukanuba Vdiet</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_eukanuba">
+    <field ref="attribute_food_range_option_id" name="attribute_id" />
+    <field name="name">Eukanuba</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_iams">
+    <field ref="attribute_food_range_option_id" name="attribute_id" />
+    <field name="name">Iams</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_ideal_balance">
+    <field ref="attribute_food_range_option_id" name="attribute_id" />
+    <field name="name">Ideal Balance</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_vetessentials">
+    <field ref="attribute_food_range_option_id" name="attribute_id" />
+    <field name="name">VetEssentials</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_nature_best">
+    <field ref="attribute_food_range_option_id" name="attribute_id" />
+    <field name="name">Nature Best</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_acana">
+    <field ref="attribute_food_range_option_id" name="attribute_id" />
+    <field name="name">Acana</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_allergy">
+    <field ref="attribute_indication_option_ids" name="attribute_id" />
+    <field name="name">Allergy</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_joint">
+    <field ref="attribute_indication_option_ids" name="attribute_id" />
+    <field name="name">Joint</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_oral">
+    <field ref="attribute_indication_option_ids" name="attribute_id" />
+    <field name="name">Oral</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_heart">
+    <field ref="attribute_indication_option_ids" name="attribute_id" />
+    <field name="name">Heart</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_behaviour">
+    <field ref="attribute_indication_option_ids" name="attribute_id" />
+    <field name="name">Behaviour</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_convalescence">
+    <field ref="attribute_indication_option_ids" name="attribute_id" />
+    <field name="name">Convalescence</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_diabetes">
+    <field ref="attribute_indication_option_ids" name="attribute_id" />
+    <field name="name">Diabetes</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_digestion">
+    <field ref="attribute_indication_option_ids" name="attribute_id" />
+    <field name="name">Digestion</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_liver">
+    <field ref="attribute_indication_option_ids" name="attribute_id" />
+    <field name="name">Liver</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_skin">
+    <field ref="attribute_indication_option_ids" name="attribute_id" />
+    <field name="name">Skin</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_physiological">
+    <field ref="attribute_indication_option_ids" name="attribute_id" />
+    <field name="name">Physiological</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_weight">
+    <field ref="attribute_indication_option_ids" name="attribute_id" />
+    <field name="name">Weight</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_kidney">
+    <field ref="attribute_indication_option_ids" name="attribute_id" />
+    <field name="name">Kidney</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_sterilisation">
+    <field ref="attribute_indication_option_ids" name="attribute_id" />
+    <field name="name">Sterilisation</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_thyroide">
+    <field ref="attribute_indication_option_ids" name="attribute_id" />
+    <field name="name">Thyroïde</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_urinary">
+    <field ref="attribute_indication_option_ids" name="attribute_id" />
+    <field name="name">Urinary</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_black">
+    <field ref="attribute_product_color_option_ids" name="attribute_id" />
+    <field name="name">Black</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_blue">
+    <field ref="attribute_product_color_option_ids" name="attribute_id" />
+    <field name="name">Blue</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_brown">
+    <field ref="attribute_product_color_option_ids" name="attribute_id" />
+    <field name="name">Brown</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_burgundy">
+    <field ref="attribute_product_color_option_ids" name="attribute_id" />
+    <field name="name">Burgundy</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_caribbean_blue">
+    <field ref="attribute_product_color_option_ids" name="attribute_id" />
+    <field name="name">Caribbean Blue</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_ceil_blue">
+    <field ref="attribute_product_color_option_ids" name="attribute_id" />
+    <field name="name">Ceil Blue</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_chocolate">
+    <field ref="attribute_product_color_option_ids" name="attribute_id" />
+    <field name="name">Chocolate</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_coral">
+    <field ref="attribute_product_color_option_ids" name="attribute_id" />
+    <field name="name">Coral</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_dark_olive_groen">
+    <field ref="attribute_product_color_option_ids" name="attribute_id" />
+    <field name="name">Dark Olive Groen</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_emerald">
+    <field ref="attribute_product_color_option_ids" name="attribute_id" />
+    <field name="name">Emerald</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_green">
+    <field ref="attribute_product_color_option_ids" name="attribute_id" />
+    <field name="name">Green</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_grey">
+    <field ref="attribute_product_color_option_ids" name="attribute_id" />
+    <field name="name">Grey</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_hunter_green">
+    <field ref="attribute_product_color_option_ids" name="attribute_id" />
+    <field name="name">Hunter Green</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_ivory">
+    <field ref="attribute_product_color_option_ids" name="attribute_id" />
+    <field name="name">Ivory</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_lavander">
+    <field ref="attribute_product_color_option_ids" name="attribute_id" />
+    <field name="name">Lavander</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_lemon_lime">
+    <field ref="attribute_product_color_option_ids" name="attribute_id" />
+    <field name="name">Lemon Lime</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_parma">
+    <field ref="attribute_product_color_option_ids" name="attribute_id" />
+    <field name="name">Parma</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_lilac">
+    <field ref="attribute_product_color_option_ids" name="attribute_id" />
+    <field name="name">Lilac</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_lime_green">
+    <field ref="attribute_product_color_option_ids" name="attribute_id" />
+    <field name="name">Lime Green</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_navy_blue">
+    <field ref="attribute_product_color_option_ids" name="attribute_id" />
+    <field name="name">Navy Blue</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_ocean_blue">
+    <field ref="attribute_product_color_option_ids" name="attribute_id" />
+    <field name="name">Ocean Blue</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_orange">
+    <field ref="attribute_product_color_option_ids" name="attribute_id" />
+    <field name="name">Orange</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_peach">
+    <field ref="attribute_product_color_option_ids" name="attribute_id" />
+    <field name="name">Peach</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_pine_green">
+    <field ref="attribute_product_color_option_ids" name="attribute_id" />
+    <field name="name">Pine Green</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_pink">
+    <field ref="attribute_product_color_option_ids" name="attribute_id" />
+    <field name="name">Pink</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_plum">
+    <field ref="attribute_product_color_option_ids" name="attribute_id" />
+    <field name="name">Plum</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_purple">
+    <field ref="attribute_product_color_option_ids" name="attribute_id" />
+    <field name="name">Purple</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_raspberry">
+    <field ref="attribute_product_color_option_ids" name="attribute_id" />
+    <field name="name">Raspberry</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_red">
+    <field ref="attribute_product_color_option_ids" name="attribute_id" />
+    <field name="name">Red</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_royal_blue">
+    <field ref="attribute_product_color_option_ids" name="attribute_id" />
+    <field name="name">Royal Blue</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_sand">
+    <field ref="attribute_product_color_option_ids" name="attribute_id" />
+    <field name="name">Sand</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_seafoam_green">
+    <field ref="attribute_product_color_option_ids" name="attribute_id" />
+    <field name="name">Seafoam Green</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_turquoise">
+    <field ref="attribute_product_color_option_ids" name="attribute_id" />
+    <field name="name">Turquoise</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_undyed">
+    <field ref="attribute_product_color_option_ids" name="attribute_id" />
+    <field name="name">Undyed</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_white">
+    <field ref="attribute_product_color_option_ids" name="attribute_id" />
+    <field name="name">White</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_yellow">
+    <field ref="attribute_product_color_option_ids" name="attribute_id" />
+    <field name="name">Yellow</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_tablet_tablet_per_oraal">
+    <field ref="attribute_administration_route_option_ids" name="attribute_id" />
+    <field name="name">Tablet/tablet per oraal</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_implant">
+    <field ref="attribute_administration_route_option_ids" name="attribute_id" />
+    <field name="name">Implant</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_hoeven">
+    <field ref="attribute_administration_route_option_ids" name="attribute_id" />
+    <field name="name">Hoeven</field>
+  </record>
+  <record
+    model="attribute.option"
+    id="attribute_option_vaccin_administratie_via_het_oog"
+  >
+    <field ref="attribute_administration_route_option_ids" name="attribute_id" />
+    <field name="name">Vaccin administratie via het oog</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_vaccin_intranasal">
+    <field ref="attribute_administration_route_option_ids" name="attribute_id" />
+    <field name="name">Vaccin intranasal</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_vloeistof_voor_inhalatie">
+    <field ref="attribute_administration_route_option_ids" name="attribute_id" />
+    <field name="name">Vloeistof voor inhalatie</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_plaatje_in_de_bijenkorf">
+    <field ref="attribute_administration_route_option_ids" name="attribute_id" />
+    <field name="name">Plaatje in de bijenkorf</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_poeder_korrels_per_os">
+    <field ref="attribute_administration_route_option_ids" name="attribute_id" />
+    <field name="name">Poeder/ korrels per os</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_auriculaire_toediening">
+    <field ref="attribute_administration_route_option_ids" name="attribute_id" />
+    <field name="name">auriculaire toediening</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_gemedicineerde_premix_per_os">
+    <field ref="attribute_administration_route_option_ids" name="attribute_id" />
+    <field name="name">Gemedicineerde premix per os</field>
+  </record>
+  <record
+    model="attribute.option"
+    id="attribute_option_oplossing_emulsie_gel_voor_uitwendig_gebruik"
+  >
+    <field ref="attribute_administration_route_option_ids" name="attribute_id" />
+    <field name="name">Oplossing/emulsie/gel voor uitwendig gebruik</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_oplossing_emulsie_per_os">
+    <field ref="attribute_administration_route_option_ids" name="attribute_id" />
+    <field name="name">Oplossing/emulsie per os</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_injecteerbaar_vaccin">
+    <field ref="attribute_administration_route_option_ids" name="attribute_id" />
+    <field name="name">injecteerbaar vaccin</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_drinkbaar_vaccin">
+    <field ref="attribute_administration_route_option_ids" name="attribute_id" />
+    <field name="name">Drinkbaar vaccin</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_injecteerbare_oplossing">
+    <field ref="attribute_administration_route_option_ids" name="attribute_id" />
+    <field name="name">injecteerbare oplossing</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_injecteerbare_suspensie">
+    <field ref="attribute_administration_route_option_ids" name="attribute_id" />
+    <field name="name">Injecteerbare suspensie</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_intramammaire_toediening">
+    <field ref="attribute_administration_route_option_ids" name="attribute_id" />
+    <field name="name">Intramammaire toediening</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_opthalmologische_toediening">
+    <field ref="attribute_administration_route_option_ids" name="attribute_id" />
+    <field name="name">opthalmologische toediening</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_vaginale_toediening">
+    <field ref="attribute_administration_route_option_ids" name="attribute_id" />
+    <field name="name">Vaginale toediening</field>
+  </record>
+  <record
+    model="attribute.option"
+    id="attribute_option_spray_voor_uitwendige_toediening"
+  >
+    <field ref="attribute_administration_route_option_ids" name="attribute_id" />
+    <field name="name">Spray voor uitwendige toediening</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_intra_uterine_toediening">
+    <field ref="attribute_administration_route_option_ids" name="attribute_id" />
+    <field name="name">Intra-uterine toediening</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_pasta_gel_per_os">
+    <field ref="attribute_administration_route_option_ids" name="attribute_id" />
+    <field name="name">Pasta/Gel per os</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_bolus_per_os">
+    <field ref="attribute_administration_route_option_ids" name="attribute_id" />
+    <field name="name">Bolus per os</field>
+  </record>
+  <record
+    model="attribute.option"
+    id="attribute_option_halsband_voor_uitwendig_gebruik"
+  >
+    <field ref="attribute_administration_route_option_ids" name="attribute_id" />
+    <field name="name">Halsband voor uitwendig gebruik</field>
+  </record>
+  <record
+    model="attribute.option"
+    id="attribute_option_produkt_om_te_verstuiven_voor_omgeving_en_oppervlaktes"
+  >
+    <field ref="attribute_administration_route_option_ids" name="attribute_id" />
+    <field name="name">Produkt om te verstuiven, voor omgeving en oppervlaktes</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_shampoo_voor_uitwendig_gebruik">
+    <field ref="attribute_administration_route_option_ids" name="attribute_id" />
+    <field name="name">Shampoo voor uitwendig gebruik</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_nasale_toediening">
+    <field ref="attribute_administration_route_option_ids" name="attribute_id" />
+    <field name="name">Nasale toediening</field>
+  </record>
+</odoo>

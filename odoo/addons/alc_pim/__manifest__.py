@@ -29,6 +29,7 @@
         "data/attribute_set.xml",
         "data/product_category.xml",
         "data/attribute_attribute.xml",
+        "data/attribute_option.xml",
     ],
     "demo": [],
 }
