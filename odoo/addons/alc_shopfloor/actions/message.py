@@ -76,7 +76,7 @@ class MessageAction(Component):
     def package_not_available_in_picking(self, package, picking):
         return {
             "message_type": "warning",
-            "body": _("Package {} is not available in transfer {}.").format(
+            "body": _(u"Package {} is not available in transfer {}.").format(
                 package.name, picking.name
             ),
         }
@@ -84,13 +84,13 @@ class MessageAction(Component):
     def package_not_empty(self, package):
         return {
             "message_type": "warning",
-            "body": _("Package {} is not empty.").format(package.name),
+            "body": _(u"Package {} is not empty.").format(package.name),
         }
 
     def package_already_used(self, package):
         return {
             "message_type": "warning",
-            "body": _("Package {} is already used.").format(package.name),
+            "body": _(u"Package {} is already used.").format(package.name),
         }
 
     def dest_package_required(self):
@@ -102,7 +102,7 @@ class MessageAction(Component):
     def line_not_available_in_picking(self, picking):
         return {
             "message_type": "warning",
-            "body": _("This line is not available in transfer {}.").format(
+            "body": _(u"This line is not available in transfer {}.").format(
                 picking.name
             ),
         }
@@ -175,19 +175,19 @@ class MessageAction(Component):
     def no_package_or_lot_for_barcode(self, barcode):
         return {
             "message_type": "error",
-            "body": _("No package or lot found for barcode {}.").format(barcode),
+            "body": _(u"No package or lot found for barcode {}.").format(barcode),
         }
 
     def no_lot_for_barcode(self, barcode):
         return {
             "message_type": "error",
-            "body": _("No lot found for {}").format(barcode),
+            "body": _(u"No lot found for {}").format(barcode),
         }
 
     def lot_on_wrong_product(self, barcode):
         return {
             "message_type": "error",
-            "body": _("Lot {} is for another product.").format(barcode),
+            "body": _(u"Lot {} is for another product.").format(barcode),
         }
 
     def several_lots_in_location(self, location):
@@ -231,19 +231,19 @@ class MessageAction(Component):
     def package_different_content(self, package):
         return {
             "message_type": "error",
-            "body": _("Package {} has a different content.").format(package.name),
+            "body": _(u"Package {} has a different content.").format(package.name),
         }
 
     def package_change_error_same_package(self, package):
         return {
             "message_type": "error",
-            "body": _("Same package {} is already assigned.").format(package.name),
+            "body": _(u"Same package {} is already assigned.").format(package.name),
         }
 
     def x_units_put_in_package(self, qty, product, package):
         return {
             "message_type": "success",
-            "body": _("{} {} put in {}").format(
+            "body": _(u"{} {} put in {}").format(
                 qty, product.display_name, package.name
             ),
         }
@@ -257,7 +257,7 @@ class MessageAction(Component):
     def stock_picking_not_available(self, picking):
         return {
             "message_type": "error",
-            "body": _("Transfer {} is not available.").format(picking.name),
+            "body": _(u"Transfer {} is not available.").format(picking.name),
         }
 
     def line_has_package_scan_package(self):
@@ -337,7 +337,7 @@ class MessageAction(Component):
     def transfer_complete(self, picking):
         return {
             "message_type": "success",
-            "body": _("Transfer {} complete").format(picking.name),
+            "body": _(u"Transfer {} complete").format(picking.name),
         }
 
     def location_content_transfer_no_work(self):
@@ -357,7 +357,7 @@ class MessageAction(Component):
     def location_content_transfer_complete(self, location_src, location_dest):
         return {
             "message_type": "success",
-            "body": _("Content transferred from {} to {}.").format(
+            "body": _(u"Content transferred from {} to {}.").format(
                 location_src.name, location_dest.name
             ),
         }
@@ -366,7 +366,7 @@ class MessageAction(Component):
         return {
             "message_type": "error",
             "body": _(
-                "The content of {} cannot be transferred with this scenario."
+                u"The content of {} cannot be transferred with this scenario."
             ).format(location_dest.name),
         }
 
@@ -374,8 +374,8 @@ class MessageAction(Component):
         return {
             "message_type": "error",
             "body": _(
-                "Picking has already been started in this location in transfer(s): {}"
-            ).format(", ".join(pickings.mapped("name"))),
+                u"Picking has already been started in this location in transfer(s): {}"
+            ).format(u", ".join(pickings.mapped("name"))),
         }
 
     def transfer_done_success(self, picking):
@@ -416,25 +416,25 @@ class MessageAction(Component):
     def location_empty(self, location):
         return {
             "message_type": "info",
-            "body": _("Location {} empty").format(location.name),
+            "body": _(u"Location {} empty").format(location.name),
         }
 
     def unable_to_pick_more(self, quantity):
         return {
             "message_type": "error",
-            "body": _("You must not pick more than {} units.").format(quantity),
+            "body": _(u"You must not pick more than {} units.").format(quantity),
         }
 
     def lot_replaced_by_lot(self, old_lot, new_lot):
         return {
             "message_type": "success",
-            "body": _("Lot {} replaced by lot {}.").format(old_lot.name, new_lot.name),
+            "body": _(u"Lot {} replaced by lot {}.").format(old_lot.name, new_lot.name),
         }
 
     def package_replaced_by_package(self, old_package, new_package):
         return {
             "message_type": "success",
-            "body": _("Package {} replaced by package {}.").format(
+            "body": _(u"Package {} replaced by package {}.").format(
                 old_package.name, new_package.name
             ),
         }
@@ -443,26 +443,28 @@ class MessageAction(Component):
         return {
             "message_type": "error",
             "body": _(
-                "Package {} cannot be picked, already moved by transfer {}."
+                u"Package {} cannot be picked, already moved by transfer {}."
             ).format(package.name, picking.name),
         }
 
     def units_replaced_by_package(self, new_package):
         return {
             "message_type": "success",
-            "body": _("Units replaced by package {}.").format(new_package.name),
+            "body": _(u"Units replaced by package {}.").format(new_package.name),
         }
 
     def package_change_error(self, package, error_msg):
         return {
             "message_type": "error",
-            "body": _("Package {} cannot be used: {} ").format(package.name, error_msg),
+            "body": _(u"Package {} cannot be used: {} ").format(
+                package.name, error_msg
+            ),
         }
 
     def cannot_change_lot_already_picked(self, lot):
         return {
             "message_type": "error",
-            "body": _("Cannot change to lot {} which is entirely picked.").format(
+            "body": _(u"Cannot change to lot {} which is entirely picked.").format(
                 lot.name
             ),
         }
@@ -476,13 +478,13 @@ class MessageAction(Component):
     def picking_type_complete(self, picking_type):
         return {
             "message_type": "success",
-            "body": _("Picking type {} complete.").format(picking_type.name),
+            "body": _(u"Picking type {} complete.").format(picking_type.name),
         }
 
     def barcode_no_match(self, barcode):
         return {
             "message_type": "warning",
-            "body": _("Barcode does not match with {}.").format(barcode),
+            "body": _(u"Barcode does not match with {}.").format(barcode),
         }
 
     def lines_different_dest_location(self):
@@ -506,7 +508,7 @@ class MessageAction(Component):
     def packaging_invalid_for_carrier(self, packaging, carrier):
         return {
             "message_type": "error",
-            "body": _("Packaging {} is not allowed for carrier {}.").format(
+            "body": _(u"Packaging {} is not allowed for carrier {}.").format(
                 packaging.name, carrier.name
             ),
         }
@@ -514,7 +516,7 @@ class MessageAction(Component):
     def dest_package_not_valid(self, package):
         return {
             "message_type": "error",
-            "body": _("{} is not a valid destination package.").format(package.name),
+            "body": _(u"{} is not a valid destination package.").format(package.name),
         }
 
     def no_valid_package_to_select(self):

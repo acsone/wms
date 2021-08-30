@@ -67,7 +67,9 @@ class ShopfloorMenu(models.Model):
         for menu in self:
             if menu.allow_move_create and not menu.move_create_is_possible:
                 raise exceptions.ValidationError(
-                    _("Creation of moves is not allowed for menu {}.").format(menu.name)
+                    _(u"Creation of moves is not allowed for menu {}.").format(
+                        menu.name
+                    )
                 )
 
     @api.depends("scenario_id")
@@ -100,7 +102,7 @@ class ShopfloorMenu(models.Model):
                 and not menu.ignore_no_putaway_available_is_possible
             ):
                 raise exceptions.ValidationError(
-                    _("Ignoring not found putaway is not allowed for menu {}.").format(
+                    _(u"Ignoring not found putaway is not allowed for menu {}.").format(
                         menu.name
                     )
                 )
@@ -114,7 +116,7 @@ class ShopfloorMenu(models.Model):
             ):
                 raise exceptions.ValidationError(
                     _(
-                        "Processing reserved quantities is" " not allowed for menu {}."
+                        u"Processing reserved quantities is" " not allowed for menu {}."
                     ).format(menu.name)
                 )
 
@@ -132,10 +134,10 @@ class ShopfloorMenu(models.Model):
                 scenario_name = menu.scenario_id.name
                 raise exceptions.ValidationError(
                     _(
-                        "Scenario `{}` require(s) "
-                        "'Move Entire Packages' to be enabled.\n"
-                        "These type(s) do not satisfy this constraint: \n{}.\n"
-                        "Please, adjust your configuration."
+                        u"Scenario `{}` require(s) "
+                        u"'Move Entire Packages' to be enabled.\n"
+                        u"These type(s) do not satisfy this constraint: \n{}.\n"
+                        u"Please, adjust your configuration."
                     ).format(scenario_name, "\n- ".join(bad_picking_types))
                 )
 
@@ -156,7 +158,7 @@ class ShopfloorMenu(models.Model):
                 and not menu.keep_existing_reservations_is_possible
             ):
                 raise exceptions.ValidationError(
-                    _("Keep existing reservations is not allowed for menu {}.").format(
+                    _(u"Keep existing reservations is not allowed for menu {}.").format(
                         menu.name
                     )
                 )
