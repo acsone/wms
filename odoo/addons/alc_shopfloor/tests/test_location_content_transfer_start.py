@@ -187,7 +187,7 @@ class TestLocationContentTransferStart(LocationContentTransferCommonCase):
             "scan_location", params={"barcode": self.content_loc.barcode}
         )
         message = {
-            "body": u"This location contains reserved products. You must leave the following qties into the location:\n[A] Product A: 30.0\n[B] Product B: 10.0\n[C] Product C: 20.0\n[D] Product D: 20.0",
+            "body": u"This location contains reserved products. You must leave the following qties into the location:\n[A] Product A: 20.0\n[C] Product C: 10.0\n[D] Product D: 10.0",
             "message_type": "warning",
         }
         self.assert_response_scan_destination_all(
@@ -409,7 +409,7 @@ class LocationContentTransferStartSpecialCase(LocationContentTransferCommonCase)
         self.assertEqual(len(new_picking), 1)
         # check that the response contains a message for the reserved products:
         message = {
-            "body": u"This location contains reserved products. You must leave the following qties into the location:\n[A] Product A: 15.0",
+            "body": u"This location contains reserved products. You must leave the following qties into the location:\n[A] Product A: 10.0",
             "message_type": "warning",
         }
         self.assert_response_scan_destination_all(

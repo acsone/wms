@@ -801,16 +801,20 @@ class LocationContentTransfer(Component):
         if not operation and not pickings:
             return None
         message = None
-        picking_ids = pickings.ids or operation.mapped("picking_id").ids
         location = (
             operation.location_id
             if operation
             else pickings.mapped("pack_operation_ids.location_id")
         )
+        move_ids = (
+            pickings.mapped("move_lines").ids
+            if pickings
+            else operation.mapped("picking_id.move_lines").ids
+        )
         domain = [
             ("location_id", "=", location.id),
             ("qty", ">", 0),
-            ("reservation_id", "not in", picking_ids),
+            ("reservation_id", "not in", move_ids),
         ]
         if operation and operation.product_id:
             domain.append(("product_id", "=", operation.product_id.id))
