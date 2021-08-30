@@ -17,7 +17,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_shopfloor
-#: code:addons/alc_shopfloor/models/shopfloor_menu.py:165
+#: code:addons/alc_shopfloor/models/shopfloor_menu.py:167
 #, python-format
 msgid ""
 "'Keep existing reservations' and 'Allow unreserve other moves' can't be used "
@@ -44,7 +44,7 @@ msgid "Adds shopfloor priority/postpone fields"
 msgstr "Adds shopfloor priority/postpone fields"
 
 #. module: alc_shopfloor
-#: code:addons/alc_shopfloor/actions/message.py:473
+#: code:addons/alc_shopfloor/actions/message.py:475
 #, python-format
 msgid "All packages processed."
 msgstr "Tous les colis ont été traités."
@@ -66,7 +66,7 @@ msgid "Are you sure?"
 msgstr "Confirmez-vous?"
 
 #. module: alc_shopfloor
-#: code:addons/alc_shopfloor/actions/message.py:485
+#: code:addons/alc_shopfloor/actions/message.py:487
 #, python-format
 msgid "Barcode does not match with {}."
 msgstr "Le code-barres ne correspond pas à {}."
@@ -102,7 +102,7 @@ msgid "Canceled, you can scan a new pack."
 msgstr "Annulé, vous pouvez scanner un nouveau colis."
 
 #. module: alc_shopfloor
-#: code:addons/alc_shopfloor/actions/message.py:465
+#: code:addons/alc_shopfloor/actions/message.py:467
 #, python-format
 msgid "Cannot change to lot {} which is entirely picked."
 msgstr "Cannot change to lot {} which is entirely picked."
@@ -169,6 +169,12 @@ msgid "Display Name"
 msgstr "Nom affiché"
 
 #. module: alc_shopfloor
+#: model:shopfloor.menu,name:alc_shopfloor.shopfloor_menu_medoc_relocation
+#, fuzzy
+msgid "Déménagement médicaments"
+msgstr "Rangement médicaments"
+
+#. module: alc_shopfloor
 #: model:ir.model.fields,field_description:alc_shopfloor.field_shopfloor_priority_postpone_mixin_id
 msgid "ID"
 msgstr "ID"
@@ -214,7 +220,7 @@ msgid "Ignore transfers when no put-away is available"
 msgstr "Ignorer les transferts lorsqu'aucune rêgle de rangement n'est possible"
 
 #. module: alc_shopfloor
-#: code:addons/alc_shopfloor/models/shopfloor_menu.py:103
+#: code:addons/alc_shopfloor/models/shopfloor_menu.py:105
 #, python-format
 msgid "Ignoring not found putaway is not allowed for menu {}."
 msgstr "Ignoring not found putaway is not allowed for menu {}."
@@ -225,7 +231,7 @@ msgid "Inventory Locations"
 msgstr "Emplacements de stock"
 
 #. module: alc_shopfloor
-#: code:addons/alc_shopfloor/models/shopfloor_menu.py:159
+#: code:addons/alc_shopfloor/models/shopfloor_menu.py:161
 #, python-format
 msgid "Keep existing reservations is not allowed for menu {}."
 msgstr "Keep existing reservations is not allowed for menu {}."
@@ -249,7 +255,7 @@ msgstr ""
 "être effectuée."
 
 #. module: alc_shopfloor
-#: code:addons/alc_shopfloor/actions/message.py:491
+#: code:addons/alc_shopfloor/actions/message.py:493
 #, python-format
 msgid "Lines have different destination location."
 msgstr "Les lignes ont un emplacement de destination différent."
@@ -324,13 +330,13 @@ msgid "Move lines processed have to share the same source location."
 msgstr "Les opérations traitées doivent partager le même emplacement source."
 
 #. module: alc_shopfloor
-#: code:addons/alc_shopfloor/actions/message.py:497
+#: code:addons/alc_shopfloor/actions/message.py:499
 #, python-format
 msgid "New move lines cannot be assigned: canceled."
 msgstr "Les mouvement de stock ne peuvent pas être assignés : annulation."
 
 #. module: alc_shopfloor
-#: code:addons/alc_shopfloor/actions/message.py:529
+#: code:addons/alc_shopfloor/actions/message.py:531
 #, python-format
 msgid "No delivery package type available."
 msgstr "Aucun type de colis de livraison n'est disponible."
@@ -408,14 +414,14 @@ msgid "No quantity has been processed, unable to complete the transfer."
 msgstr "Aucune quantité n'a été traitée, impossible d'effectuer le transfert."
 
 #. module: alc_shopfloor
-#: code:addons/alc_shopfloor/actions/message.py:535
+#: code:addons/alc_shopfloor/actions/message.py:537
 #: code:addons/alc_shopfloor/models/stock_pack_operation.py:344
 #, python-format
 msgid "No reserve location associated with location %s."
 msgstr "Aucun emplacement de réserve n'est associé à l'emplacement %s."
 
 #. module: alc_shopfloor
-#: code:addons/alc_shopfloor/actions/message.py:523
+#: code:addons/alc_shopfloor/actions/message.py:525
 #, python-format
 msgid "No valid package to select."
 msgstr "Aucun colis valide à sélectionner."
@@ -474,7 +480,7 @@ msgid "Pack operations linked to the move"
 msgstr "Pack operations linked to the move"
 
 #. module: alc_shopfloor
-#: code:addons/alc_shopfloor/actions/message.py:503
+#: code:addons/alc_shopfloor/actions/message.py:505
 #, python-format
 msgid "Package has been opened. You can move partial quantities."
 msgstr "Le colis a été ouvert. Vous pouvez déplacer des quantités partielles."
@@ -544,7 +550,7 @@ msgid "Package {} replaced by package {}."
 msgstr "Le paquet {} est remplacé par le paquet {}."
 
 #. module: alc_shopfloor
-#: code:addons/alc_shopfloor/actions/message.py:509
+#: code:addons/alc_shopfloor/actions/message.py:511
 #, python-format
 msgid "Packaging {} is not allowed for carrier {}."
 msgstr "L'emballage {} n'est pas autorisé pour le transporteur {}."
@@ -579,7 +585,7 @@ msgstr ""
 "{}"
 
 #. module: alc_shopfloor
-#: code:addons/alc_shopfloor/actions/message.py:479
+#: code:addons/alc_shopfloor/actions/message.py:481
 #, python-format
 msgid "Picking type {} complete."
 msgstr "Picking type {} complete."
@@ -595,7 +601,7 @@ msgid "Priority"
 msgstr "Priorité"
 
 #. module: alc_shopfloor
-#: code:addons/alc_shopfloor/models/shopfloor_menu.py:116
+#: code:addons/alc_shopfloor/models/shopfloor_menu.py:118
 #, python-format
 msgid "Processing reserved quantities is not allowed for menu {}."
 msgstr ""
@@ -687,7 +693,7 @@ msgid "Scan the package"
 msgstr "Scanner le paquet"
 
 #. module: alc_shopfloor
-#: code:addons/alc_shopfloor/models/shopfloor_menu.py:134
+#: code:addons/alc_shopfloor/models/shopfloor_menu.py:136
 #, python-format
 msgid ""
 "Scenario `{}` require(s) 'Move Entire Packages' to be enabled.\n"
@@ -904,7 +910,7 @@ msgid "This line is not available in transfer {}."
 msgstr "Cette ligne n'est pas disponible dans le transfert {}."
 
 #. module: alc_shopfloor
-#: code:addons/alc_shopfloor/services/location_content_transfer.py:827
+#: code:addons/alc_shopfloor/services/location_content_transfer.py:831
 #, python-format
 msgid ""
 "This location contains reserved products. You must leave the following qties "
@@ -1108,7 +1114,7 @@ msgstr ""
 "{product_desc}"
 
 #. module: alc_shopfloor
-#: code:addons/alc_shopfloor/actions/message.py:517
+#: code:addons/alc_shopfloor/actions/message.py:519
 #, python-format
 msgid "{} is not a valid destination package."
 msgstr "{} n'est pas un paquet de destination valide."
