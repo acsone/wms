@@ -219,6 +219,38 @@
     <field ref="product.model_product_template" name="model_id" />
     <field name="nature">native</field>
   </record>
+  <record model="attribute.attribute" id="attribute_pdf_file">
+    <field name="allow_mass_editing" eval="False" />
+    <field ref="marketing_attribute_group" name="attribute_group_id" />
+    <field name="attribute_set_ids" eval="[(6,0,[ref('attribute_set_materiel')])]" />
+    <field ref="alc_pim_product.field_product_template_pdf_file" name="field_id" />
+    <field ref="product.model_product_template" name="model_id" />
+    <field name="nature">native</field>
+  </record>
+  <record model="attribute.attribute" id="attribute_promo_bag">
+    <field name="allow_mass_editing" eval="False" />
+    <field ref="commercial_attribute_group" name="attribute_group_id" />
+    <field name="attribute_set_ids" eval="[(6,0,[ref('attribute_set_aliments')])]" />
+    <field ref="alc_pim_product.field_product_template_promo_bag" name="field_id" />
+    <field ref="product.model_product_template" name="model_id" />
+    <field name="nature">native</field>
+  </record>
+  <record model="attribute.attribute" id="attribute_sterile">
+    <field name="allow_mass_editing" eval="False" />
+    <field ref="marketing_attribute_group" name="attribute_group_id" />
+    <field name="attribute_set_ids" eval="[(6,0,[ref('attribute_set_materiel')])]" />
+    <field ref="alc_pim_product.field_product_template_sterile" name="field_id" />
+    <field ref="product.model_product_template" name="model_id" />
+    <field name="nature">native</field>
+  </record>
+  <record model="attribute.attribute" id="attribute_fabric">
+    <field name="allow_mass_editing" eval="False" />
+    <field ref="marketing_attribute_group" name="attribute_group_id" />
+    <field name="attribute_set_ids" eval="[(6,0,[ref('attribute_set_materiel')])]" />
+    <field ref="alc_pim_product.field_product_template_fabric" name="field_id" />
+    <field ref="product.model_product_template" name="model_id" />
+    <field name="nature">native</field>
+  </record>
   <record model="attribute.attribute" id="attribute_product_brand_id">
     <field name="allow_mass_editing" eval="False" />
     <field ref="marketing_attribute_group" name="attribute_group_id" />
