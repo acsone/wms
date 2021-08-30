@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!-- Copyright 2021 ACSONE SA/NV
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
-<odoo noupdate="0">
+<odoo noupdate="1">
   <record id="shopfloor_menu_medoc_rangement" model="shopfloor.menu">
     <field name="name">Rangement médicaments</field>
     <field name="sequence">10</field>
@@ -12,5 +12,14 @@
       name="picking_type_ids"
       eval="[(4, ref('alc_shopfloor.stock_picking_type_rangement_medoc'))]"
     />
+  </record>
+    <record id="shopfloor_menu_medoc_relocation" model="shopfloor.menu">
+    <field name="name">Déménagement médicaments</field>
+    <field name="sequence">15</field>
+    <field name="allow_move_create" eval="1" />
+    <field name="keep_existing_reservations" eval="1" />
+    <field name="scenario_id" ref="alc_shopfloor.scenario_location_content_transfer" />
+    <field name="profile_id" ref="alc_shopfloor.shopfloor_profile_medoc" />
+    <field name="picking_type_ids" eval="[(4, ref('stock.picking_type_internal'))]" />
   </record>
 </odoo>
