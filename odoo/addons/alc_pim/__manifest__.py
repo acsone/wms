@@ -32,4 +32,5 @@
         "data/attribute_option.xml",
     ],
     "demo": [],
+    "pre_init_hook": "pre_init_hook",
 }
