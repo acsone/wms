@@ -14,8 +14,9 @@ class MakePickingBatch(models.TransientModel):
         pickings = super(
             MakePickingBatch, self
         )._change_priority_on_unselected_pickings(pickings)
-        for picking in pickings:
-            picking.rank = 80000
+        if pickings:
+            for picking in pickings:
+                picking.rank = 80000
         return pickings
 
     def _compute_device_to_use(self, first_picking_to_cluster):

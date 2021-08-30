@@ -29,9 +29,17 @@ class TestGetDeviceToUse(AlcClusterPickingCommonFeatures):
             {
                 "user_id": self.env.user.id,
                 "picking_type_ids": [(4, self.picking_type_ali.id)],
+                "stock_device_type_line_ids": [
+                    (4, self.device_line1.id),
+                    (4, self.device_line2.id),
+                    (4, self.device_line3.id),
+                ],
             }
         )
         palette = self.env.ref("alc_stock_picking_batch_creation.palette")
         candidates_pickings = make_picking_batch._search_pickings()
-        device = make_picking_batch._compute_device_to_use(candidates_pickings[0])
+        for picking in candidates_pickings:
+            device = make_picking_batch._compute_device_to_use(picking)
+            if device:
+                break
         self.assertEqual(device, palette)

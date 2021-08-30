@@ -38,11 +38,6 @@ class AlcClusterPickingCommonFeatures(ClusterPickingCommonFeatures):
                 "subcode": "PICK",
                 "color": 7,
                 "sequence": 4,
-                "stock_device_type_ids": [
-                    (4, cls.device4.id),
-                    (4, cls.device5.id),
-                    (4, cls.device6.id),
-                ],
             }
         )
 
@@ -56,11 +51,6 @@ class AlcClusterPickingCommonFeatures(ClusterPickingCommonFeatures):
                 "subcode": "PICK",
                 "color": 7,
                 "sequence": 4,
-                "stock_device_type_ids": [
-                    (4, cls.device1.id),
-                    (4, cls.device2.id),
-                    (4, cls.device3.id),
-                ],
             }
         )
         cls.env["ir.model.data"].create(
