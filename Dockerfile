@@ -1,4 +1,4 @@
-FROM quay.io/acsone/odoo-bedrock:10.0-py27-latest
+FROM ghcr.io/acsone/odoo-bedrock:10.0-py27-latest
 
 RUN set -e \
   && apt update \
