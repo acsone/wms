@@ -9,7 +9,7 @@ class ProductStockBin(models.Model):
     _name = "product.stock.bin"
     _order = "sequence"
 
-    sequence = fields.Integer("Seq.")
+    sequence = fields.Integer("Seq.", default=1)
     location_id = fields.Many2one(
         "stock.location", "Location", required=True, ondelete="restrict"
     )
