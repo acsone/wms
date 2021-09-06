@@ -15,7 +15,7 @@ odoo10-addon-base-jsonify @ git+https://github.com/oca/server-tools.git@refs/pul
 odoo10-addon-server-environment @ git+https://github.com/oca/server-tools.git@refs/pull/2076/head#subdirectory=setup/server_environment
 
 # oca/server-auth
-odoo10-addon-auth-jwt @ git+https://github.com/oca/server-auth.git@refs/pull/281/head#subdirectory=setup/auth_jwt
+odoo10-addon-auth-jwt @ git+https://github.com/acsone/server-auth.git@refs/pull/281/head#subdirectory=setup/auth_jwt
 
 
 # oca/bank-payment
