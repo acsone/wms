@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="shopfloor_menu_form_view">
+        <field
+      name="name"
+    >shopfloor.menu.form (in alc_shopfloor_location_content_relocation)</field>
+        <field name="model">shopfloor.menu</field>
+        <field name="inherit_id" ref="alc_shopfloor.shopfloor_menu_form_view" />
+        <field name="arch" type="xml">
+            <group name="keep_existing_reservations" position="after">
+                <group
+          name="avoid_transfer_bin_to_reserve"
+          attrs="{'invisible': [('avoid_transfer_bin_to_reserve_is_possible', '=', False)]}"
+        >
+                  <field
+            name="avoid_transfer_bin_to_reserve_is_possible"
+            invisible="1"
+          />
+                  <field name="avoid_transfer_bin_to_reserve" />
+                </group>
+            </group>
+        </field>
+    </record>
+
+</odoo>
