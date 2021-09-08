@@ -12,11 +12,11 @@
     "website": "https://acsone.eu/",
     "depends": [
         "alc_shopfloor",
+        "alc_shopfloor_location_content_relocation",
         "alc_shopfloor_mobile",
         "alc_shopfloor_rest_log",
         "alc_shopfloor_user",
     ],
-    "data": [],
     "demo": [],
     "application": True,
 }

@@ -62,7 +62,9 @@ class StockLocation(models.Model):
             return location_dest.id
 
         # Do not put product in bin if there is already stock in reserve
-        if product.qty_in_reserve > 0:
+        if product.qty_in_reserve > 0 and not self.env.context.get(
+            "ignore_putaway_reserve", False
+        ):
             reserve = location_dest.get_location_reserve()
             if not reserve:
                 raise UserError(
