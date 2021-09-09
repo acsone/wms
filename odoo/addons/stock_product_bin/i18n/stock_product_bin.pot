@@ -14,8 +14,25 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: stock_product_bin
+#: model:ir.ui.view,arch_db:stock_product_bin.product_stock_bin_form_view
+msgid "<i class=\"fa fa-exclamation-triangle\" style=\"color:red\">\n"
+"                  <span style=\"margin:0 5px\">Inactive bin location</span>\n"
+"                </i>"
+msgstr ""
+
+#. module: stock_product_bin
+#: model:ir.model.fields,field_description:stock_product_bin.field_product_stock_bin_is_bin_location_active
+msgid "Active"
+msgstr ""
+
+#. module: stock_product_bin
 #: model:ir.model.fields,field_description:stock_product_bin.field_product_stock_bin_bin_location_id
 msgid "Bin"
+msgstr ""
+
+#. module: stock_product_bin
+#: model:ir.model.fields,help:stock_product_bin.field_product_stock_bin_is_bin_location_active
+msgid "By unchecking the active field, you may hide a location without deleting it."
 msgstr ""
 
 #. module: stock_product_bin
