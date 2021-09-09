@@ -16,6 +16,8 @@ class ProductStockBin(models.Model):
     bin_location_id = fields.Many2one(
         "stock.location", "Bin", required=True, ondelete="restrict"
     )
+    is_bin_location_active = fields.Boolean(related="bin_location_id.active")
+
     variant_id = fields.Many2one(
         "product.product", "Variant", required=True, ondelete="cascade"
     )
