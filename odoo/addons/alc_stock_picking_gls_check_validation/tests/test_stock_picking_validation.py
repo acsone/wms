@@ -76,15 +76,15 @@ class TestStockPickingValidation(GLSCommonFeatures):
         """
         Data: One SO, picks are done. Ship has to be done
         Test Case: We process all packs in the ship. BBut not the food products
-        Expected Result: We can validate the ship
+        Expected Result: We can't validate the ship
         """
 
         _, _, ship = self._create_pick_ship()
         for pack in ship.pack_operation_ids:
             pack.qty_done = pack.product_qty
-        ship.button_gls_put_in_pack()
         self.assertTrue(ship.gls_pack_in_picking)
-        self.assertTrue(ship.validate_allowed)
+        ship.button_gls_put_in_pack()
+        self.assertFalse(ship.validate_allowed)
 
     def test_02(self):
         """
@@ -130,7 +130,7 @@ class TestStockPickingValidation(GLSCommonFeatures):
         for pack in ship.pack_operation_ids:
             pack.qty_done = pack.product_qty
 
-        ship.button_gls_put_in_pack()
+        ship.put_in_pack()
         ship.do_new_transfer()
 
         with self.assertRaises(UserError):
@@ -138,7 +138,7 @@ class TestStockPickingValidation(GLSCommonFeatures):
 
         for pack in ship1.pack_operation_ids:
             pack.qty_done = pack.product_qty
-        ship1.button_gls_put_in_pack()
+        ship1.put_in_pack()
         ship1.do_new_transfer()
 
     def test_03(self):
@@ -188,3 +188,45 @@ class TestStockPickingValidation(GLSCommonFeatures):
 
         ships = self.env["stock.picking"].search([("origin", "=", sale.name)])
         self.assertEqual(len(ships), 2)
+
+    def test_04(self):
+        """
+        Data: Only 1 alim to ship.... (Pick done)
+        Test Case: We validate the ship without processing the operation
+        Expected Result: Validation error since the operation is not done nor into the pac
+        """
+        _, _, ship = self._create_pick_ship()
+
+        sale1 = self._confirm_sale_order(
+            partner=self.partner1,
+            product=[self.p4],
+            carrier_id=self.carrier.id,
+            picking_policy="one",
+        )
+
+        pick = sale1.mapped("picking_ids").filtered(
+            lambda p: p.picking_type_subcode == "PICK"
+        )
+        pick.force_assign()
+        for pack in pick.pack_operation_ids:
+            pack.qty_done = pack.product_qty
+
+        pick.do_transfer()
+
+        ship = sale1.mapped("picking_ids").filtered(
+            lambda p: p.picking_type_code == "outgoing"
+        )
+        # validation is not possible since qty are not processed nor put in pack
+        with self.assertRaises(UserError), self.env.cr.savepoint():
+            ship.do_new_transfer()
+
+        # process qty
+        for pack in ship.pack_operation_ids:
+            pack.qty_done = pack.product_qty
+
+        # validation is not possible since product put in pack
+        with self.assertRaises(UserError), self.env.cr.savepoint():
+            ship.do_new_transfer()
+
+        ship.put_in_pack()
+        ship.do_new_transfer()

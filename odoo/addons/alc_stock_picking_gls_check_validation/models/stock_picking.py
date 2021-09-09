@@ -27,16 +27,16 @@ class StockPicking(models.Model):
 
     @api.depends(
         "gls_pack_in_picking",
-        "pack_operation_pack_ids",
-        "pack_operation_pack_ids.is_done",
-        "pack_operation_pack_ids.result_package_id",
+        "pack_operation_ids",
+        "pack_operation_ids.is_done",
+        "pack_operation_ids.result_package_id",
     )
     def _compute_is_validate_allowed(self):
         for rec in self:
-            if rec.gls_pack_in_picking:
+            if rec.picking_type_code == "outgoing" and rec.delivery_type == "gls":
                 rec.validate_allowed = all(
                     rec.pack_operation_ids.mapped("is_done")
-                ) and all(rec.pack_operation_ids.mapped("result_package_id"))
+                ) and all(o.result_package_id for o in rec.pack_operation_ids)
             else:
                 rec.validate_allowed = True
 
