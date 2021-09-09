@@ -157,6 +157,7 @@ odoo10-addon-product-packaging-type-pallet @ git+https://github.com/acsone/produ
 odoo10-addon-product-price-category @ git+https://github.com/acsone/sale-workflow.git@b9987e4eb546f9ea8c0ee88e507072252b0d57d3#subdirectory=setup/product_price_category
 odoo10-addon-product-search-multi-value==10.0.1.0.1.99.dev5
 odoo10-addon-product-sequence @ git+https://github.com/acsone/product-attribute.git@f1dc5cd944b481993f7fb92cc98990527856cd4e#subdirectory=setup/product_sequence
+odoo10-addon-product-total-weight-from-packaging @ git+https://github.com/acsone/product-attribute.git@eef34248f9d56e07a53fb274a821e461d622d90b#subdirectory=setup/product_total_weight_from_packaging
 odoo10-addon-product-uom-unece==10.0.1.1.0.99.dev1
 odoo10-addon-purchase-cancel-reason @ git+https://github.com/acsone/purchase-workflow.git@527ab1413ba29a34c478e83413267f41e608cd4c#subdirectory=setup/purchase_cancel_reason
 odoo10-addon-purchase-delivery-split-date @ git+https://github.com/acsone/purchase-workflow.git@527ab1413ba29a34c478e83413267f41e608cd4c#subdirectory=setup/purchase_delivery_split_date
@@ -191,6 +192,8 @@ odoo10-addon-stock-location-product-restriction==10.0.1.0.1
 odoo10-addon-stock-move-common-dest @ git+https://github.com/acsone/stock-logistics-warehouse@dcc5f590c0d6db634a422bdb66710c739522f705#subdirectory=setup/stock_move_common_dest
 odoo10-addon-stock-mts-mto-rule @ git+https://github.com/acsone/stock-logistics-warehouse.git@d7cedf56da46da998d63d4e03a0e9cea2099fded#subdirectory=setup/stock_mts_mto_rule
 odoo10-addon-stock-operation-cleaner @ git+https://github.com/acsone/stock-logistics-workflow@f0fdafdbf67005ce365121815e04619a5b7ee858#subdirectory=setup/stock_operation_cleaner
+odoo10-addon-stock-packaging-calculator @ git+https://github.com/acsone/stock-logistics-warehouse@dcc9fa4e3e7bbaac325c497f8a2c94f9f02f07c2#subdirectory=setup/stock_packaging_calculator
+odoo10-addon-stock-picking-batch-creation @ git+https://github.com/acsone/wms.git@f212af90b52d3e16ab88e42afdbee195575df965#subdirectory=setup/stock_picking_batch_creation
 odoo10-addon-stock-picking-completion-info @ git+https://github.com/acsone/stock-logistics-warehouse@9a79c9d602932f387c1a9bd55e604e528139e88e#subdirectory=setup/stock_picking_completion_info
 odoo10-addon-stock-picking-show-backorder==10.0.1.0.0
 odoo10-addon-stock-production-lot-expiry @ git+https://github.com/acsone/product-attribute@7e2c8cda6effefe84023848ea0c560af95e8a268#subdirectory=setup/stock_production_lot_expiry

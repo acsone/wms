@@ -60,7 +60,7 @@ odoo10-addon-stock_operation_cleaner @ git+https://github.com/OCA/stock-logistic
 odoo10-addon-stock-helper @ git+https://github.com/OCA/stock-logistics-warehouse@refs/pull/1117/head#subdirectory=setup/stock_helper
 odoo10-addon-stock-move-common-dest @ git+https://github.com/OCA/stock-logistics-warehouse@refs/pull/1118/head#subdirectory=setup/stock_move_common_dest
 odoo10-addon-stock-picking-completion-info @ git+https://github.com/OCA/stock-logistics-warehouse@refs/pull/1119/head#subdirectory=setup/stock_picking_completion_info
-
+odoo10-addon-stock-packaging-calculator @ git+https://github.com/OCA/stock-logistics-warehouse@refs/pull/1236/head#subdirectory=setup/stock_packaging_calculator
 
 # oca/wms
 odoo10-addon-stock-storage-type @ git+https://github.com/acsone/wms.git@10.0-alc_master#subdirectory=setup/stock_storage_type
@@ -69,6 +69,7 @@ odoo10-addon-shopfloor-base @ git+https://github.com/oca/wms.git@refs/pull/204/h
 odoo10-addon-shopfloor-mobile-base @ git+https://github.com/oca/wms.git@refs/pull/204/head#subdirectory=setup/shopfloor_mobile_base
 odoo10-addon-shopfloor-mobile @ git+https://github.com/oca/wms.git@refs/pull/213/head#subdirectory=setup/shopfloor_mobile
 odoo10-addon-shopfloor @ git+https://github.com/oca/wms.git@refs/pull/213/head#subdirectory=setup/shopfloor
+odoo10-addon-stock-picking-batch-creation @ git+https://github.com/oca/wms.git@refs/pull/285/head#subdirectory=setup/stock_picking_batch_creation
 
 
 # oca/web
@@ -87,3 +88,6 @@ odoo10-addon-product-brand @ git+https://github.com/acsone/brand.git@10.0-14bp-l
 # oca/delivery-carrier
 odoo10-addon-delivery-carrier-label-gls @ git+https://github.com/oca/delivery-carrier.git@refs/pull/376/head#subdirectory=setup/delivery_carrier_label_gls
 odoo10-addon-delivery-carrier-max-weight-constraint @ git+https://github.com/oca/delivery-carrier.git@refs/pull/385/head#subdirectory=setup/delivery_carrier_max_weight_constraint
+
+# oca/product-attribute
+odoo10-addon-product-total-weight-from-packaging @ git+https://github.com/oca/product-attribute.git@refs/pull/906/head#subdirectory=setup/product_total_weight_from_packaging

@@ -29,6 +29,7 @@
         "product_expiry",
         "product_manufacturer",
         "stock_picking_assignment",
+        "stock_picking_batch_creation",
         "stock_picking_show_backorder",
         "stock_helper",
         # alcyon
