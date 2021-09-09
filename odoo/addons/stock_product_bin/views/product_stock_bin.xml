@@ -20,6 +20,12 @@
                 domain="[('id','child_of',location_id),('usage', '=', 'internal'),('act_as_view', '=', False)]"
                 attrs="{'readonly':[('location_id','=',False)]}"
               />
+              <field name="is_bin_location_active" invisible="1" />
+              <div attrs="{'invisible': [('is_bin_location_active', '=', True)]}">
+                <i class="fa fa-exclamation-triangle" style="color:red">
+                  <span style="margin:0 5px">Inactive bin location</span>
+                </i>
+              </div>
             </group>
           </group>
         </sheet>
@@ -30,10 +36,11 @@
     <field name="name">product.stock.bin.tree</field>
     <field name="model">product.stock.bin</field>
     <field name="arch" type="xml">
-      <tree>
+      <tree decoration-danger="is_bin_location_active != True">
         <field name="product_id" />
         <field name="location_id" />
         <field name="bin_location_id" />
+        <field name="is_bin_location_active" invisible="1" />
       </tree>
     </field>
   </record>

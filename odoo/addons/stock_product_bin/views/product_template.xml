@@ -8,7 +8,7 @@
       <group name="stock_property" position="before">
         <group name="stock_bins">
           <field name="stock_bin_ids" nolabel="1">
-            <tree editable="bottom">
+            <tree editable="bottom" decoration-danger="is_bin_location_active != True">
               <field name="sequence" widget="handle" />
               <field name="location_id" />
               <field
@@ -16,6 +16,7 @@
                 domain="[('id','child_of',location_id),('usage', '=', 'internal'), ('act_as_view', '=', False)]"
                 attrs="{'readonly':[('location_id','=',False)]}"
               />
+              <field name="is_bin_location_active" invisible="1" />
             </tree>
           </field>
         </group>

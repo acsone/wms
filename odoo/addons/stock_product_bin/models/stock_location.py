@@ -16,6 +16,7 @@ class StockLocation(models.Model):
         stock_bin_ids = product.product_tmpl_id.stock_bin_ids
         lbin = stock_bin_ids.filtered(
             lambda b, location_id=dest_location_id: b.location_id.id == location_id
+            and b.is_bin_location_active
         )
         if lbin:
             return lbin[0].bin_location_id.id
