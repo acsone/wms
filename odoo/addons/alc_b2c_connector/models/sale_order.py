@@ -103,7 +103,8 @@ class SaleOrder(models.Model):
         if "lines" in data:
             self._update_lines_from_b2c(data, b2c_backend)
         if "recipient" in data:
-            self._update_recipient_from_b2c(data, b2c_backend)
+            partner = self._get_final_b2c_recipient(data, b2c_backend)
+            self._update_recipient_from_b2c(partner)
         self.sudo().action_confirm_background()
         return self
 
@@ -117,13 +118,9 @@ class SaleOrder(models.Model):
         }
         self.message_post(body=body)
 
-    def _update_recipient_from_b2c(self, data, b2c_backend):
-        old_partner = self.partner_id
-        partner = self._get_final_b2c_recipient(data, b2c_backend)
-        if old_partner != partner:
+    def _update_recipient_from_b2c(self, partner):
+        if self.partner_id != partner:
             self.partner_id = partner
-            msg = _("Recipient changed by API from, %s to %s.")
-            self.message_post(body=(msg % (old_partner.name, partner.name)))
 
     @api.model
     def _parse_b2c_order(self, data, b2c_backend):
