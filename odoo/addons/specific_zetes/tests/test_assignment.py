@@ -77,6 +77,7 @@ class TestAssignemnt(ZetesTest, JobMixin):
         Get picking should return picking partially_available and assigned picking if move_type = direct
         or assigned picking only if move_type = one (all at once)
         """
+        self.round.operator_ids = self.operator_user
         picking = self.picking.sudo()
 
         domain = Assignment(self._default_header(), mock.MagicMock(name="Savepoint()"))

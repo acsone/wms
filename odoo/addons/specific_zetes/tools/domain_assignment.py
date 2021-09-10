@@ -269,6 +269,19 @@ class Assignment(DomainInterface):
             _logger.exception(str(e))
             params.log(picking_id=picking_id, exception=e)
 
+    def operator_assigned_instances(self, operator_id=None):
+        operator_id = operator_id or self.env.user
+        domain_rounds = [("state", "in", ["pending", "open", "close"])]
+        open_rounds = self.env["round.instance"].search(domain_rounds)
+        return open_rounds.filtered(lambda r: operator_id in r.operator_ids)
+
+    def rounds_to_orderby_query(self, round_instances):
+        order_clause = ""
+        if round_instances:
+            cases = ["WHEN %s THEN 0" % i for i in round_instances.ids]
+            order_clause = "CASE round.id %s ELSE 1 END, " % " ".join(cases)
+        return order_clause
+
     def get_picking(self, params):
         """
         Return a standard picking
@@ -357,7 +370,8 @@ WHERE picking.picking_type_subcode = 'PICK'
 
         picking_query += (
             "ORDER BY picking.operator_id, "
-            "round.date, "
+            + self.rounds_to_orderby_query(self.operator_assigned_instances())
+            + "round.date, "
             "round.time_picking_planned, "
             "picking.rank DESC, "
             "picking.id ASC "
