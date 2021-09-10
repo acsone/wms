@@ -36,19 +36,19 @@ msgid "Sales Order"
 msgstr ""
 
 #. module: alc_logiweb
-#: code:addons/alc_logiweb/models/sale_order.py:81
+#: code:addons/alc_logiweb/models/sale_order.py:91
 #, python-format
 msgid "The carrier 'Alcyon' is not allowed for Logiweb Belgium."
 msgstr ""
 
 #. module: alc_logiweb
-#: code:addons/alc_logiweb/models/sale_order.py:69
+#: code:addons/alc_logiweb/models/sale_order.py:79
 #, python-format
 msgid "The invoicing partner should be Logiweb Belgium."
 msgstr ""
 
 #. module: alc_logiweb
-#: code:addons/alc_logiweb/models/sale_order.py:76
+#: code:addons/alc_logiweb/models/sale_order.py:86
 #, python-format
 msgid "The invoicing partner should be Logiweb."
 msgstr ""
