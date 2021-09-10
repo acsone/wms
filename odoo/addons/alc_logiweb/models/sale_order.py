@@ -51,6 +51,16 @@ class SaleOrder(models.Model):
             order_data["partner_shipping_id"] = order_data["partner_id"]
         return order_data
 
+    def _update_recipient_from_b2c(self, partner):
+        res = super(SaleOrder, self)._update_recipient_from_b2c(partner)
+        if (
+            self.sale_channel == "logiweb"
+            and self.carrier_id.delivery_type == "gls"
+            and self.partner_shipping_id != partner
+        ):
+            self.partner_shipping_id = partner
+        return res
+
     @api.constrains("sale_channel", "partner_id", "partner_invoice_id")
     def _check_b2c_order_invoice_address(self):
         ref = self.env.ref

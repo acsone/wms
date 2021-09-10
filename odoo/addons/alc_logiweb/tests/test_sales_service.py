@@ -371,3 +371,41 @@ class TestSalesService(CommonCase):
         params = self._get_base_params(recipient=recipient_info, carrier="ALCYON")
         with self.assertRaises(ValidationError):
             self.sales_service.dispatch("create", params=params)
+
+    def test_update_partner_shipping(self):
+        """For GLS orders, the shipping partner is the final customer.
+           So in that case, we also need to update the shipping partner.
+           """
+        self.b2c_backend.sale_channel = "logiweb"
+        params = self._get_base_params(
+            recipient=self._gen_recipent(), carrier="GLS_BE",
+        )
+        res = self.sales_service.dispatch("create", params=params)
+        so = self.env["sale.order"].search([("b2c_ref", "=", res["id"])])
+        old_partner = so.partner_id
+        # when: we update the customer
+        recipient_info_new = self._gen_recipent()
+        params = {"recipient": recipient_info_new}
+        self.sales_service.dispatch("update", _id=res["id"], params=params)
+        # then: the new partner is indeed the new one
+        new_partner = so.partner_id
+        self.assertNotEqual(new_partner, old_partner)
+        self.assertEqual(new_partner.zip, recipient_info_new["zip"])
+        # then: the shipping partner was also transferred to the picking
+        self.assertEqual(so.partner_shipping_id, new_partner)
+        self.assertEqual(so.picking_ids.partner_id, new_partner)
+
+    def test_no_update_partner_shipping_alcyon(self):
+        """If the shipping partner is the VT, it follows that it should not be updated
+        when the update the customer.
+           """
+        self.b2c_backend.sale_channel = "logiweb"
+        params = self._get_base_params(recipient=self._gen_recipent(), carrier="ALCYON")
+        params["customer_ref"] = self.logiweb_partner.ref
+        res = self.sales_service.dispatch("create", params=params)
+        so = self.env["sale.order"].search([("b2c_ref", "=", res["id"])])
+        # when: we update the customer
+        params = {"recipient": self._gen_recipent()}
+        self.sales_service.dispatch("update", _id=res["id"], params=params)
+        # then: the shipping partner hasn't changed
+        self.assertEqual(so.partner_shipping_id, self.logiweb_partner)
