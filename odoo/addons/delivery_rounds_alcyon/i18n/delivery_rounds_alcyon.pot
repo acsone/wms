@@ -25,11 +25,6 @@ msgstr ""
 
 #. module: delivery_rounds_alcyon
 #: model:ir.ui.view,arch_db:delivery_rounds_alcyon.view_round_instance_kanban
-msgid "Humain"
-msgstr ""
-
-#. module: delivery_rounds_alcyon
-#: model:ir.ui.view,arch_db:delivery_rounds_alcyon.view_round_instance_kanban
 msgid "Matériel"
 msgstr ""
 
@@ -86,6 +81,11 @@ msgstr ""
 #. module: delivery_rounds_alcyon
 #: model:ir.model.fields,field_description:delivery_rounds_alcyon.field_round_instance_count_picking_done_total_pharm
 msgid "Picking Done Total Pharmacie"
+msgstr ""
+
+#. module: delivery_rounds_alcyon
+#: model:ir.ui.view,arch_db:delivery_rounds_alcyon.view_round_instance_kanban
+msgid "Zone M"
 msgstr ""
 
 #. module: delivery_rounds_alcyon
