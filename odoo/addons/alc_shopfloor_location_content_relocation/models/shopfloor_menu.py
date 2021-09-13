@@ -9,31 +9,31 @@ class ShopfloorMenu(models.Model):
 
     _inherit = "shopfloor.menu"
 
-    avoid_transfer_bin_to_reserve_is_possible = fields.Boolean(
-        compute="_compute_avoid_transfer_bin_to_reserve_is_possible"
+    preserve_origin_location_kind_is_possible = fields.Boolean(
+        compute="_compute_preserve_origin_location_kind_is_possible"
     )
-    avoid_transfer_bin_to_reserve = fields.Boolean(
-        string="Avoid transfer of bin to reserve",
+    preserve_origin_location_kind = fields.Boolean(
+        string="Preserve location kind",
         default=False,
-        help="If you tick this box, the transfer of a bin will not be put in reserve "
-        "if some location items are already into a reserve",
+        oldname="avoid_transfer_bin_to_reserve",
+        help="If you tick this box, the transfer will target a location of same kind.",
     )
 
-    @api.depends("scenario_id", "avoid_transfer_bin_to_reserve")
-    def _compute_avoid_transfer_bin_to_reserve_is_possible(self):
+    @api.depends("scenario_id", "preserve_origin_location_kind")
+    def _compute_preserve_origin_location_kind_is_possible(self):
         for menu in self:
-            menu.avoid_transfer_bin_to_reserve_is_possible = menu.scenario_id.has_option(
-                "avoid_transfer_bin_to_reserve"
+            menu.preserve_origin_location_kind_is_possible = menu.scenario_id.has_option(
+                "preserve_origin_location_kind"
             )
 
     @api.constrains(
-        "scenario_id", "avoid_transfer_bin_to_reserve",
+        "scenario_id", "preserve_origin_location_kind",
     )
-    def _check_avoid_transfer_bin_to_reserve(self):
+    def _check_preserve_origin_location_kind(self):
         for menu in self:
             if (
-                menu.avoid_transfer_bin_to_reserve
-                and not menu.avoid_transfer_bin_to_reserve_is_possible
+                menu.preserve_origin_location_kind
+                and not menu.preserve_origin_location_kind_is_possible
             ):
                 raise exceptions.ValidationError(
                     _(

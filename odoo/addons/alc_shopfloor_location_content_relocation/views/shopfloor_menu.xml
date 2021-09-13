@@ -12,14 +12,14 @@
         <field name="arch" type="xml">
             <group name="keep_existing_reservations" position="after">
                 <group
-          name="avoid_transfer_bin_to_reserve"
-          attrs="{'invisible': [('avoid_transfer_bin_to_reserve_is_possible', '=', False)]}"
+          name="preserve_origin_location_kind"
+          attrs="{'invisible': [('preserve_origin_location_kind_is_possible', '=', False)]}"
         >
                   <field
-            name="avoid_transfer_bin_to_reserve_is_possible"
+            name="preserve_origin_location_kind_is_possible"
             invisible="1"
           />
-                  <field name="avoid_transfer_bin_to_reserve" />
+                  <field name="preserve_origin_location_kind" />
                 </group>
             </group>
         </field>

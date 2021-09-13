@@ -15,9 +15,9 @@ def post_init_hook(cr, registry):
     env = api.Environment(cr, SUPERUSER_ID, {})
     scenario = env.ref("alc_shopfloor.scenario_location_content_transfer")
     options = scenario.options
-    options["avoid_transfer_bin_to_reserve"] = True
+    options["preserve_origin_location_kind"] = True
     scenario.options_edit = json.dumps(options)
 
     env.ref(
         "alc_shopfloor.shopfloor_menu_medoc_relocation"
-    ).avoid_transfer_bin_to_reserve = True
+    ).preserve_origin_location_kind = True

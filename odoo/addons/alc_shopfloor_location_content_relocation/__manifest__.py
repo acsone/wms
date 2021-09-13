@@ -6,7 +6,7 @@
     "name": "Alc Shopfloor Location Content Relocation",
     "description": """
         Alcyon: Specific process to allows safe relocation of stock location by taking into account the kind of location to relocate.""",
-    "version": "10.0.1.0.0",
+    "version": "10.0.1.0.1",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
