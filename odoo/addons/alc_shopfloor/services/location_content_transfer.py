@@ -460,7 +460,6 @@ class LocationContentTransfer(Component):
                 if remaining_operation not in move.pack_operation_ids:
                     continue
                 new_moves |= move.split_other_pack_operations(remaining_operation)
-                new_moves |= move.split_other_pack_operations(remaining_operation)
 
         # Ensure that we validate only a move for the current operation.
         # If a move has more than 1 pack operation linked, we must split the
