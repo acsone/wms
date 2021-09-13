@@ -910,7 +910,7 @@ msgid "This line is not available in transfer {}."
 msgstr "Cette ligne n'est pas disponible dans le transfert {}."
 
 #. module: alc_shopfloor
-#: code:addons/alc_shopfloor/services/location_content_transfer.py:831
+#: code:addons/alc_shopfloor/services/location_content_transfer.py:830
 #, python-format
 msgid ""
 "This location contains reserved products. You must leave the following qties "
