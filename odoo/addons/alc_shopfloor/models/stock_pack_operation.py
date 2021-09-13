@@ -365,7 +365,9 @@ class StockPackOperation(models.Model):
         # apply storage_type strategy by hand since it's not applied
         self._finalize_pack_putaway_strategy(vals)
         self.write({"location_dest_id": vals["location_dest_id"]})
-        moves.write({"location_dest_id": vals["location_dest_id"]})
+        # set the initial reserve on the location to allows to select
+        # an alternative reserve by the operator
+        moves.write({"location_dest_id": dest_reserve_location.id})
 
 
 class NoReserveLocationError(UserError):
