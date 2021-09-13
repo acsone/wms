@@ -12,6 +12,7 @@
     "depends": [
         "pim",
         "alc_product_shop_category",
+        "alc_product_link_notice",
         # data dependencies
         "product_dimension",
         "stock_production_lot_expiry",
