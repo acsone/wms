@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
 # Copyright 2018 Sylvain Van Hoof (Okia SPRL)
 # Copyright 2018 Jacques-Etienne Baudoux (BCIM sprl) <je@bcim.be>
+# Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError, ValidationError
-
-import odoo.addons.decimal_precision as dp
 
 
 class ReceptionPharmacy(models.Model):
@@ -71,14 +70,6 @@ class ReceptionPharmacy(models.Model):
         loc_supplier = self.env.ref("stock.stock_location_suppliers")
         if not loc_supplier:
             raise UserError(_("Supplier location is missing"))
-
-        for partner in self.line_ids.mapped("partner_shipping_id"):
-            if not partner.round_itinerary_ids:
-                raise UserError(
-                    _("Partner {} does not belong to any itinerary").format(
-                        partner.name
-                    )
-                )
 
         for line in self.line_ids:
             lot_vals = {
@@ -160,46 +151,3 @@ class ReceptionPharmacy(models.Model):
             if delivery_round:
                 delivery_round._assign_pickings(pickings)
         self.state = "done"
-
-
-class ReceptionPharmacyLine(models.Model):
-    _name = "reception.pharmacy.line"
-    _rec_name = "wizard_id"
-
-    wizard_id = fields.Many2one("reception.pharmacy", required=True, string="Wizard")
-    customer_id = fields.Many2one(
-        "res.partner", string="Customer", required=True, ondelete="restrict"
-    )
-    bin_id = fields.Many2one(
-        "stock.location",
-        domain=[("usage", "=", "internal"), ("act_as_view", "=", False)],
-        string="Bin",
-        required=True,
-        ondelete="restrict",
-    )
-    product_qty = fields.Float(
-        "Quantity",
-        digits=dp.get_precision("Product Unit of Measure"),
-        default=1.0,
-        required=True,
-    )
-    reception_move_id = fields.Many2one(
-        "stock.move", string="Reception Move", readonly=True
-    )
-    procurement_id = fields.Many2one(
-        "procurement.order", string="Delivery Procurement", readonly=True
-    )
-
-    partner_shipping_id = fields.Many2one(
-        "res.partner", string="Delivery Address", compute="_compute_partner_shipping_id"
-    )
-
-    @api.multi
-    def _compute_partner_shipping_id(self):
-        """
-        Trigger the change of the shipping address if the customer is modified.
-        """
-        for rec in self:
-            if rec.customer_id:
-                address = rec.customer_id.address_get(["delivery", "invoice"])
-                rec.partner_shipping_id = address["delivery"]
