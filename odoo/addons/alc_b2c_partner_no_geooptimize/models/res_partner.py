@@ -9,6 +9,11 @@ class ResPartner(models.Model):
 
     _inherit = "res.partner"
 
+    def _inverse_is_b2c_customer(self):
+        res = super(ResPartner, self)._inverse_is_b2c_customer()
+        self.filtered("is_b2c_customer").write({"not_in_dynamic_delivery_round": True})
+        return res
+
     @api.onchange("is_b2c_customer")
     def _onchange_is_b2c_customer(self):
         for record in self.filtered("is_b2c_customer"):
