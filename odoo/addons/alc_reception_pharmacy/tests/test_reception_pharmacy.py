@@ -23,7 +23,7 @@ class TestReceptionPharmacy(SavepointCase):
 
         # Create the product for reception
         cls.product = cls.env["product.template"].browse(
-            cls.env.ref("specific_stock.product_colis_souverain").id
+            cls.env.ref("alc_reception_pharmacy.product_colis_souverain").id
         )
 
         cls.bin = cls.env["stock.location"].create({"name": "Test unit"})

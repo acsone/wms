@@ -17,7 +17,9 @@ class ReceptionPharmacy(models.Model):
     product_id = fields.Many2one(
         "product.product",
         string="Product",
-        default=lambda self: self.env.ref("specific_stock.product_colis_souverain"),
+        default=lambda self: self.env.ref(
+            "alc_reception_pharmacy.product_colis_souverain"
+        ),
         required=True,
         domain=lambda s: s._domain_product_id(),
     )
@@ -38,8 +40,10 @@ class ReceptionPharmacy(models.Model):
                 "id",
                 "in",
                 [
-                    self.env.ref("specific_stock.product_colis_souverain").id,
-                    self.env.ref("specific_stock.product_colis_souverain_frigo").id,
+                    self.env.ref("alc_reception_pharmacy.product_colis_souverain").id,
+                    self.env.ref(
+                        "alc_reception_pharmacy.product_colis_souverain_frigo"
+                    ).id,
                 ],
             )
         ]
@@ -77,14 +81,20 @@ class ReceptionPharmacy(models.Model):
                 )
 
         for line in self.line_ids:
-            lot_id = lot.create(
-                {
-                    "product_id": self.product_id.id,
-                    "name": sequence.next_by_code("stock.lot.pharmacy"),
-                    "voice_identifier": "ABC",
-                    "checksum": "123",
-                }
-            )
+            lot_vals = {
+                "product_id": self.product_id.id,
+                "name": sequence.next_by_code("stock.lot.pharmacy"),
+            }
+
+            # HACK HACK HACK for fields declared in specific_Stock.... TO BE
+            # REFACTORED!!!!!!
+            if "voice_identifier" in lot._fields:
+                lot_vals["voice_identifier"] = "ABC"
+            if "checksum" in lot._fields:
+                lot_vals["checksum"] = "123"
+            # END HACK
+            lot_id = lot.create(lot_vals)
+
             # Put the lot in stock
             line.reception_move_id = move.create(
                 {
@@ -107,19 +117,22 @@ class ReceptionPharmacy(models.Model):
                     "carrier_id": carrier.id,
                 }
             )
-            line.procurement_id = proc_order.create(
-                {
-                    "name": "Pharmacy",
-                    "product_id": self.product_id.id,
-                    "product_uom": self.product_id.uom_id.id,
-                    "restrict_lot_id": lot_id.id,
-                    "product_qty": line.product_qty,
-                    "warehouse_id": warehouse.id,
-                    "location_id": loc_customer.id,
-                    "partner_dest_id": line.customer_id.id,
-                    "group_id": group_id.id,
-                }
-            )
+            proc_order_vals = {
+                "name": "Pharmacy",
+                "product_id": self.product_id.id,
+                "product_uom": self.product_id.uom_id.id,
+                "product_qty": line.product_qty,
+                "warehouse_id": warehouse.id,
+                "location_id": loc_customer.id,
+                "partner_dest_id": line.customer_id.id,
+                "group_id": group_id.id,
+            }
+            # HACK HACK HACK for fields declared in specific_Stock.... TO BE
+            # REFACTORED!!!!!!
+            if "restrict_lot_id" in proc_order._fields:
+                proc_order_vals["restrict_lot_id"] = lot_id.id
+            # END HACK
+            line.procurement_id = proc_order.create(proc_order_vals)
             # procurement_autorun_defer
             line.procurement_id.run()
             pickings = (
