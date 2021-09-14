@@ -90,6 +90,7 @@
         "alc_analytic_category_report",
         "alc_b2c_connector",
         "alc_b2c_connector_pricelist_discount",
+        "alc_b2c_partner_no_geooptimize",
         "alc_b2c_to_magento",
         "alc_chronovet",
         "alc_chronovet_payment_globalization",
