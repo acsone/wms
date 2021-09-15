@@ -1,16 +1,13 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* alc_reception_pharmacy
+#	* alc_reception_pharmacy
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-14 09:16+0000\n"
-"PO-Revision-Date: 2021-09-14 09:16+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -19,17 +16,13 @@ msgstr ""
 #. module: alc_reception_pharmacy
 #: code:addons/alc_reception_pharmacy/models/reception_pharmacy.py:142
 #, python-format
-msgid ""
-"All pickings at destination of a same shipping must be in the same delivery "
-"round"
+msgid "All pickings at destination of a same shipping must be in the same delivery round"
 msgstr ""
-"All pickings at destination of a same shipping must be in the same delivery "
-"round"
 
 #. module: alc_reception_pharmacy
 #: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy_line_bin_id
 msgid "Bin"
-msgstr "Bac"
+msgstr ""
 
 #. module: alc_reception_pharmacy
 #: model:product.product,name:alc_reception_pharmacy.product_colis_souverain
@@ -58,30 +51,30 @@ msgstr ""
 #. module: alc_reception_pharmacy
 #: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy_line_customer_id
 msgid "Customer"
-msgstr "Client"
+msgstr ""
 
 #. module: alc_reception_pharmacy
 #: code:addons/alc_reception_pharmacy/models/reception_pharmacy.py:69
 #, python-format
 msgid "Customer location is missing"
-msgstr "Customer location is missing"
+msgstr ""
 
 #. module: alc_reception_pharmacy
 #: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy_date
 msgid "Date"
-msgstr "Date "
+msgstr ""
 
 #. module: alc_reception_pharmacy
 #: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy_line_partner_shipping_id
 #: model:ir.model.fields,field_description:alc_reception_pharmacy.field_res_partner_partner_shipping_id
 #: model:ir.model.fields,field_description:alc_reception_pharmacy.field_res_users_partner_shipping_id
 msgid "Delivery Address"
-msgstr "Adresse de livraison"
+msgstr ""
 
 #. module: alc_reception_pharmacy
 #: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy_line_procurement_id
 msgid "Delivery Procurement"
-msgstr "Livraison"
+msgstr ""
 
 #. module: alc_reception_pharmacy
 #: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy_display_name
@@ -92,7 +85,7 @@ msgstr ""
 #. module: alc_reception_pharmacy
 #: selection:reception.pharmacy,state:0
 msgid "Done"
-msgstr "Fait"
+msgstr ""
 
 #. module: alc_reception_pharmacy
 #: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy_id
@@ -127,12 +120,12 @@ msgstr ""
 #. module: alc_reception_pharmacy
 #: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy_line_ids
 msgid "Lines"
-msgstr "Lignes"
+msgstr ""
 
 #. module: alc_reception_pharmacy
 #: selection:reception.pharmacy,state:0
 msgid "New"
-msgstr "Nouveau"
+msgstr ""
 
 #. module: alc_reception_pharmacy
 #: model:ir.model,name:alc_reception_pharmacy.model_res_partner
@@ -143,73 +136,74 @@ msgstr ""
 #: code:addons/alc_reception_pharmacy/models/reception_pharmacy_line.py:53
 #, python-format
 msgid "Partner {} does not belong to any itinerary"
-msgstr "Le client {} n'est pas livré par Alcyon (Aucune tournée associée)"
+msgstr ""
 
 #. module: alc_reception_pharmacy
 #: model:ir.ui.view,arch_db:alc_reception_pharmacy.reception_pharmacy_view_form
 msgid "Pharmacy Reception"
-msgstr "Réception Pharmacie"
+msgstr ""
 
 #. module: alc_reception_pharmacy
 #: code:addons/alc_reception_pharmacy/models/reception_pharmacy.py:54
 #, python-format
 msgid "Please insert at least one line"
-msgstr "Please insert at least one line"
+msgstr ""
 
 #. module: alc_reception_pharmacy
 #: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy_product_id
 msgid "Product"
-msgstr "Produit"
+msgstr ""
 
 #. module: alc_reception_pharmacy
 #: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy_line_product_qty
 msgid "Quantity"
-msgstr "Quantité"
+msgstr ""
 
 #. module: alc_reception_pharmacy
 #: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy_line_reception_move_id
 msgid "Reception Move"
-msgstr "Mouvement Réception"
+msgstr ""
 
 #. module: alc_reception_pharmacy
 #: model:ir.actions.act_window,name:alc_reception_pharmacy.reception_pharmacy_action
 #: model:ir.ui.menu,name:alc_reception_pharmacy.reception_pharmacy_menu
 msgid "Reception Pharmacy"
-msgstr "Réception Pharmacie"
+msgstr ""
 
 #. module: alc_reception_pharmacy
 #: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy_state
 msgid "State"
-msgstr "État"
+msgstr ""
 
 #. module: alc_reception_pharmacy
 #: code:addons/alc_reception_pharmacy/models/reception_pharmacy.py:72
 #, python-format
 msgid "Supplier location is missing"
-msgstr "Supplier location is missing"
+msgstr ""
 
 #. module: alc_reception_pharmacy
 #: model:ir.ui.view,arch_db:alc_reception_pharmacy.reception_pharmacy_view_form
 msgid "Transfer"
-msgstr "Transfert"
+msgstr ""
 
 #. module: alc_reception_pharmacy
 #: code:addons/alc_reception_pharmacy/models/reception_pharmacy.py:66
 #, python-format
 msgid "Warehouse is missing"
-msgstr "Warehouse is missing"
+msgstr ""
 
 #. module: alc_reception_pharmacy
 #: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy_line_wizard_id
 msgid "Wizard"
-msgstr "Assistant"
+msgstr ""
 
 #. module: alc_reception_pharmacy
 #: model:ir.model,name:alc_reception_pharmacy.model_reception_pharmacy
 msgid "reception.pharmacy"
-msgstr "Réception Pharmacie"
+msgstr ""
 
 #. module: alc_reception_pharmacy
 #: model:ir.model,name:alc_reception_pharmacy.model_reception_pharmacy_line
 msgid "reception.pharmacy.line"
-msgstr "Détail Réception Pharmacie"
+msgstr ""
+
