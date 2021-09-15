@@ -4,7 +4,7 @@
 
 {
     "name": "Specific stock for Alcyon",
-    "version": "10.0.1.0.2",
+    "version": "10.0.1.0.3",
     "author": "Camptocamp",
     "license": "AGPL-3",
     "category": "Warehouse",
@@ -49,8 +49,6 @@
         "data/ir_config_parameter.xml",
         "data/product.category.csv",
         "data/ir_sequence.xml",
-        "data/product.xml",
-        "data/product_frigo.xml",
         # Views
         "views/product_category.xml",
         "views/product_template.xml",
@@ -61,7 +59,6 @@
         "views/stock_quant_package.xml",
         "views/stock_quant.xml",
         "views/stock_move.xml",
-        "views/reception_pharmacy.xml",
         "views/stock_inventory.xml",
         # Wizards
         "wizards/location_checksum.xml",

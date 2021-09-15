@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_reception_pharmacy,access_reception_pharmacy,model_reception_pharmacy,base.group_user,1,0,0,0
+access_reception_pharmacy_stock_user,access_reception_pharmacy_stock_user,model_reception_pharmacy,stock.group_stock_user,1,1,1,0
+access_reception_pharmacy_line,access_reception_pharmacy_line,model_reception_pharmacy_line,base.group_user,1,0,0,0
+access_reception_pharmacy_line_stock_user,access_reception_pharmacy_line_stock_user,model_reception_pharmacy_line,stock.group_stock_user,1,1,1,0
