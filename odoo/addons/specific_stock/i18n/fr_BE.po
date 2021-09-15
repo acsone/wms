@@ -27,16 +27,6 @@ msgid "Additional information communicated to the customer"
 msgstr "Informations complémentaires communiquées au client"
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/reception_pharmacy.py:138
-#, python-format
-msgid ""
-"All pickings at destination of a same shipping must be in the same delivery "
-"round"
-msgstr ""
-"Tous les pickings ayant la même adresse d'expédition doivent se trouver dans "
-"la même tournée."
-
-#. module: specific_stock
 #: model:ir.model.fields,field_description:specific_stock.field_stock_production_lot_is_archived
 msgid "Archived"
 msgstr "Archivé"
@@ -47,7 +37,6 @@ msgid "Backorder"
 msgstr "Reliquat"
 
 #. module: specific_stock
-#: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy_line_bin_id
 #: model:ir.ui.view,arch_db:specific_stock.view_location_search
 msgid "Bin"
 msgstr "Bac"
@@ -104,19 +93,6 @@ msgid "Checksum"
 msgstr "Checksum"
 
 #. module: specific_stock
-#: model:product.product,name:specific_stock.product_colis_souverain
-#: model:product.template,name:specific_stock.product_colis_souverain_product_template
-msgid "Colis Souverain"
-msgstr "Colis Souverain"
-
-#. module: specific_stock
-#: model:product.product,name:specific_stock.product_colis_souverain_frigo
-#: model:product.template,name:specific_stock.product_colis_souverain_frigo_product_template
-#, fuzzy
-msgid "Colis Souverain Frigo"
-msgstr "Colis Souverain"
-
-#. module: specific_stock
 #: model:ir.model.fields,field_description:specific_stock.field_stock_location_corridor
 msgid "Corridor"
 msgstr "Couloir"
@@ -125,8 +101,6 @@ msgstr "Couloir"
 #: model:ir.model.fields,field_description:specific_stock.field_generate_voice_identifier_create_uid
 #: model:ir.model.fields,field_description:specific_stock.field_open_uop_create_uid
 #: model:ir.model.fields,field_description:specific_stock.field_put_in_pack_helper_create_uid
-#: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy_create_uid
-#: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy_line_create_uid
 #: model:ir.model.fields,field_description:specific_stock.field_stock_location_wizard_checksum_create_uid
 #: model:ir.model.fields,field_description:specific_stock.field_wizard_stock_move_update_handler_create_uid
 msgid "Created by"
@@ -136,23 +110,10 @@ msgstr "Créé par"
 #: model:ir.model.fields,field_description:specific_stock.field_generate_voice_identifier_create_date
 #: model:ir.model.fields,field_description:specific_stock.field_open_uop_create_date
 #: model:ir.model.fields,field_description:specific_stock.field_put_in_pack_helper_create_date
-#: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy_create_date
-#: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy_line_create_date
 #: model:ir.model.fields,field_description:specific_stock.field_stock_location_wizard_checksum_create_date
 #: model:ir.model.fields,field_description:specific_stock.field_wizard_stock_move_update_handler_create_date
 msgid "Created on"
 msgstr "Créé le"
-
-#. module: specific_stock
-#: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy_line_customer_id
-msgid "Customer"
-msgstr "Client"
-
-#. module: specific_stock
-#: code:addons/specific_stock/models/reception_pharmacy.py:66
-#, python-format
-msgid "Customer location is missing"
-msgstr "L'adresse du client est manquante"
 
 #. module: specific_stock
 #: model:ir.ui.view,arch_db:specific_stock.view_stock_config_settings
@@ -164,11 +125,6 @@ msgstr "Inventaire journalier"
 #, python-format
 msgid "Daily inventory: %s"
 msgstr "Inventaire journalier: %s"
-
-#. module: specific_stock
-#: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy_date
-msgid "Date"
-msgstr "Date "
 
 #. module: specific_stock
 #: model:ir.model.fields,field_description:specific_stock.field_res_partner_time_limit_order
@@ -192,31 +148,13 @@ msgid "Delay between two inventory for other products"
 msgstr "Delais entre deux inventaires pour les autres produits"
 
 #. module: specific_stock
-#: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy_line_partner_shipping_id
-#, fuzzy
-msgid "Delivery Address"
-msgstr "Livraison"
-
-#. module: specific_stock
-#: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy_line_procurement_id
-msgid "Delivery Procurement"
-msgstr "Livraison"
-
-#. module: specific_stock
 #: model:ir.model.fields,field_description:specific_stock.field_generate_voice_identifier_display_name
 #: model:ir.model.fields,field_description:specific_stock.field_open_uop_display_name
 #: model:ir.model.fields,field_description:specific_stock.field_put_in_pack_helper_display_name
-#: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy_display_name
-#: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy_line_display_name
 #: model:ir.model.fields,field_description:specific_stock.field_stock_location_wizard_checksum_display_name
 #: model:ir.model.fields,field_description:specific_stock.field_wizard_stock_move_update_handler_display_name
 msgid "Display Name"
 msgstr "Nom affiché"
-
-#. module: specific_stock
-#: selection:reception.pharmacy,state:0
-msgid "Done"
-msgstr "Fait"
 
 #. module: specific_stock
 #: model:ir.model.fields,field_description:specific_stock.field_stock_config_settings_best_sellers_duration
@@ -244,8 +182,6 @@ msgstr "Hauteur"
 #: model:ir.model.fields,field_description:specific_stock.field_generate_voice_identifier_id
 #: model:ir.model.fields,field_description:specific_stock.field_open_uop_id
 #: model:ir.model.fields,field_description:specific_stock.field_put_in_pack_helper_id
-#: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy_id
-#: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy_line_id
 #: model:ir.model.fields,field_description:specific_stock.field_stock_location_wizard_checksum_id
 #: model:ir.model.fields,field_description:specific_stock.field_wizard_stock_move_update_handler_id
 msgid "ID"
@@ -270,8 +206,6 @@ msgstr "Emplacements de stock"
 #: model:ir.model.fields,field_description:specific_stock.field_generate_voice_identifier___last_update
 #: model:ir.model.fields,field_description:specific_stock.field_open_uop___last_update
 #: model:ir.model.fields,field_description:specific_stock.field_put_in_pack_helper___last_update
-#: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy___last_update
-#: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy_line___last_update
 #: model:ir.model.fields,field_description:specific_stock.field_stock_location_wizard_checksum___last_update
 #: model:ir.model.fields,field_description:specific_stock.field_wizard_stock_move_update_handler___last_update
 msgid "Last Modified on"
@@ -291,8 +225,6 @@ msgstr "Date de dernière vente"
 #: model:ir.model.fields,field_description:specific_stock.field_generate_voice_identifier_write_uid
 #: model:ir.model.fields,field_description:specific_stock.field_open_uop_write_uid
 #: model:ir.model.fields,field_description:specific_stock.field_put_in_pack_helper_write_uid
-#: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy_line_write_uid
-#: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy_write_uid
 #: model:ir.model.fields,field_description:specific_stock.field_stock_location_wizard_checksum_write_uid
 #: model:ir.model.fields,field_description:specific_stock.field_wizard_stock_move_update_handler_write_uid
 msgid "Last Updated by"
@@ -302,8 +234,6 @@ msgstr "Dernière mise à jour par"
 #: model:ir.model.fields,field_description:specific_stock.field_generate_voice_identifier_write_date
 #: model:ir.model.fields,field_description:specific_stock.field_open_uop_write_date
 #: model:ir.model.fields,field_description:specific_stock.field_put_in_pack_helper_write_date
-#: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy_line_write_date
-#: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy_write_date
 #: model:ir.model.fields,field_description:specific_stock.field_stock_location_wizard_checksum_write_date
 #: model:ir.model.fields,field_description:specific_stock.field_wizard_stock_move_update_handler_write_date
 msgid "Last Updated on"
@@ -314,11 +244,6 @@ msgstr "Dernière mis à jour le"
 #: model:ir.model.fields,field_description:specific_stock.field_product_product_date_last_inventory
 msgid "Last inventory"
 msgstr "Dernier inventaire"
-
-#. module: specific_stock
-#: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy_line_ids
-msgid "Lines"
-msgstr "Lignes"
 
 #. module: specific_stock
 #: model:ir.ui.view,arch_db:specific_stock.stock_location_form_inherit
@@ -382,11 +307,6 @@ msgid "Move id"
 msgstr "ID du mouvement de stock"
 
 #. module: specific_stock
-#: selection:reception.pharmacy,state:0
-msgid "New"
-msgstr "Nouveau"
-
-#. module: specific_stock
 #: model:ir.model.fields,field_description:specific_stock.field_wizard_stock_move_update_handler_new_date_expected
 msgid "New Scheduled Date"
 msgstr "Nouvelle date planifiée"
@@ -445,17 +365,6 @@ msgid "Partner"
 msgstr "Partenaire"
 
 #. module: specific_stock
-#: code:addons/specific_stock/models/reception_pharmacy.py:74
-#, python-format
-msgid "Partner {} does not belong to any itinerary"
-msgstr "Le partenaire {} ne figure dans aucun itinéraire."
-
-#. module: specific_stock
-#: model:ir.ui.view,arch_db:specific_stock.reception_pharmacy_view_form
-msgid "Pharmacy Reception"
-msgstr "Réception Pharmacie"
-
-#. module: specific_stock
 #: model:ir.model,name:specific_stock.model_stock_quant_package
 msgid "Physical Packages"
 msgstr "Colis physiques"
@@ -469,12 +378,6 @@ msgstr "Opération de manutention"
 #: model:ir.model.fields,field_description:specific_stock.field_stock_location_picking_zone_id
 msgid "Picking zone"
 msgstr "Zone de picking"
-
-#. module: specific_stock
-#: code:addons/specific_stock/models/reception_pharmacy.py:51
-#, python-format
-msgid "Please insert at least one line"
-msgstr "Veuillez introduire au moins une ligne"
 
 #. module: specific_stock
 #: code:addons/specific_stock/models/product_product.py:119
@@ -498,7 +401,6 @@ msgstr "Approvisionnement"
 
 #. module: specific_stock
 #: model:ir.model,name:specific_stock.model_product_product
-#: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy_product_id
 #: model:ir.model.fields,field_description:specific_stock.field_stock_return_picking_line_product_name
 msgid "Product"
 msgstr "Article"
@@ -550,11 +452,6 @@ msgid "Put in Pack helper"
 msgstr "Aide pour l'ajout au colis"
 
 #. module: specific_stock
-#: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy_line_product_qty
-msgid "Quantity"
-msgstr "Quantité"
-
-#. module: specific_stock
 #: model:ir.model.fields,field_description:specific_stock.field_stock_config_settings_best_sellers_percent
 msgid "Quantity to take for best sellers (in percent)"
 msgstr "Quantité à prendre (en pourcent) pour les produits les plus vendus"
@@ -563,17 +460,6 @@ msgstr "Quantité à prendre (en pourcent) pour les produits les plus vendus"
 #: model:ir.model,name:specific_stock.model_stock_quant
 msgid "Quants"
 msgstr "Quants"
-
-#. module: specific_stock
-#: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy_line_reception_move_id
-msgid "Reception Move"
-msgstr "Mouvement Réception"
-
-#. module: specific_stock
-#: model:ir.actions.act_window,name:specific_stock.reception_pharmacy_action
-#: model:ir.ui.menu,name:specific_stock.reception_pharmacy_menu
-msgid "Reception Pharmacy"
-msgstr "Réception Pharmacie"
 
 #. module: specific_stock
 #: model:ir.ui.view,arch_db:specific_stock.view_location_search
@@ -596,11 +482,6 @@ msgid "Shelf"
 msgstr "Etagère"
 
 #. module: specific_stock
-#: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy_state
-msgid "State"
-msgstr "État"
-
-#. module: specific_stock
 #: model:ir.ui.view,arch_db:specific_stock.stock_location_pivot
 msgid "Stock Location"
 msgstr "Emplacement de stock"
@@ -615,12 +496,6 @@ msgstr "Mouvement de stock"
 #: model:ir.model,name:specific_stock.model_wizard_stock_move_update_handler
 msgid "Stock Move Handler"
 msgstr "Assistant de mouvement de stock"
-
-#. module: specific_stock
-#: code:addons/specific_stock/models/reception_pharmacy.py:69
-#, python-format
-msgid "Supplier location is missing"
-msgstr "L'adresse du fournisseur est manquante"
 
 #. module: specific_stock
 #: model:ir.model.fields,help:specific_stock.field_procurement_order_restrict_lot_id
@@ -715,7 +590,6 @@ msgstr "Cet UOP n'existe pas"
 
 #. module: specific_stock
 #: model:ir.model,name:specific_stock.model_stock_picking
-#: model:ir.ui.view,arch_db:specific_stock.reception_pharmacy_view_form
 msgid "Transfer"
 msgstr "Transfert"
 
@@ -750,12 +624,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:specific_stock.field_stock_production_lot_voice_identifier
 msgid "Voice Identifier"
 msgstr "Identifiant Vocal"
-
-#. module: specific_stock
-#: code:addons/specific_stock/models/reception_pharmacy.py:63
-#, python-format
-msgid "Warehouse is missing"
-msgstr "Entrepot est manquant"
 
 #. module: specific_stock
 #: model:ir.model.fields,field_description:specific_stock.field_product_category_warning_info
@@ -801,11 +669,6 @@ msgstr ""
 "dangereuses."
 
 #. module: specific_stock
-#: model:ir.model.fields,field_description:specific_stock.field_reception_pharmacy_line_wizard_id
-msgid "Wizard"
-msgstr "Assistant"
-
-#. module: specific_stock
 #: model:ir.model.fields,field_description:specific_stock.field_stock_location_zone
 msgid "Zone"
 msgstr "Zone"
@@ -829,16 +692,6 @@ msgstr ""
 #: model:ir.model,name:specific_stock.model_put_in_pack_helper
 msgid "put.in.pack.helper"
 msgstr "put.in.pack.helper"
-
-#. module: specific_stock
-#: model:ir.model,name:specific_stock.model_reception_pharmacy
-msgid "reception.pharmacy"
-msgstr "reception.pharmacy"
-
-#. module: specific_stock
-#: model:ir.model,name:specific_stock.model_reception_pharmacy_line
-msgid "reception.pharmacy.line"
-msgstr "reception.pharmacy.line"
 
 #. module: specific_stock
 #: model:ir.model,name:specific_stock.model_stock_config_settings
@@ -869,6 +722,81 @@ msgstr "stock.scrap"
 #: model:ir.ui.view,arch_db:specific_stock.view_picking_form
 msgid "↳Put in Pack"
 msgstr "↳Ajouter au colis"
+
+#~ msgid ""
+#~ "All pickings at destination of a same shipping must be in the same "
+#~ "delivery round"
+#~ msgstr ""
+#~ "Tous les pickings ayant la même adresse d'expédition doivent se trouver "
+#~ "dans la même tournée."
+
+#~ msgid "Colis Souverain"
+#~ msgstr "Colis Souverain"
+
+#, fuzzy
+#~ msgid "Colis Souverain Frigo"
+#~ msgstr "Colis Souverain"
+
+#~ msgid "Customer"
+#~ msgstr "Client"
+
+#~ msgid "Customer location is missing"
+#~ msgstr "L'adresse du client est manquante"
+
+#~ msgid "Date"
+#~ msgstr "Date "
+
+#, fuzzy
+#~ msgid "Delivery Address"
+#~ msgstr "Livraison"
+
+#~ msgid "Delivery Procurement"
+#~ msgstr "Livraison"
+
+#~ msgid "Done"
+#~ msgstr "Fait"
+
+#~ msgid "Lines"
+#~ msgstr "Lignes"
+
+#~ msgid "New"
+#~ msgstr "Nouveau"
+
+#~ msgid "Partner {} does not belong to any itinerary"
+#~ msgstr "Le partenaire {} ne figure dans aucun itinéraire."
+
+#~ msgid "Pharmacy Reception"
+#~ msgstr "Réception Pharmacie"
+
+#~ msgid "Please insert at least one line"
+#~ msgstr "Veuillez introduire au moins une ligne"
+
+#~ msgid "Quantity"
+#~ msgstr "Quantité"
+
+#~ msgid "Reception Move"
+#~ msgstr "Mouvement Réception"
+
+#~ msgid "Reception Pharmacy"
+#~ msgstr "Réception Pharmacie"
+
+#~ msgid "State"
+#~ msgstr "État"
+
+#~ msgid "Supplier location is missing"
+#~ msgstr "L'adresse du fournisseur est manquante"
+
+#~ msgid "Warehouse is missing"
+#~ msgstr "Entrepot est manquant"
+
+#~ msgid "Wizard"
+#~ msgstr "Assistant"
+
+#~ msgid "reception.pharmacy"
+#~ msgstr "reception.pharmacy"
+
+#~ msgid "reception.pharmacy.line"
+#~ msgstr "reception.pharmacy.line"
 
 #~ msgid "Normal product"
 #~ msgstr "Produit normal"
