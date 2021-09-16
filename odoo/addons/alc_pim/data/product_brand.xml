@@ -1,0 +1,167 @@
+<odoo>
+  <record model="product.brand" id="ma14">
+    <field name="name">Ecuphar</field>
+  </record>
+  <record model="product.brand" id="ma15">
+    <field name="name">Whimzees</field>
+  </record>
+  <record model="product.brand" id="ma13">
+    <field name="name">Alcyon</field>
+  </record>
+  <record model="product.brand" id="ma12">
+    <field name="name">Oxbow</field>
+  </record>
+  <record model="product.brand" id="ma10">
+    <field name="name">Supreme Science</field>
+  </record>
+  <record model="product.brand" id="ma_celtic">
+    <field name="name">Celtic</field>
+  </record>
+  <record model="product.brand" id="ma9">
+    <field name="name">Versele Laga</field>
+  </record>
+  <record model="product.brand" id="ma8">
+    <field name="name">Eukanuba</field>
+  </record>
+  <record model="product.brand" id="ma7">
+    <field name="name">Trovet</field>
+  </record>
+  <record model="product.brand" id="ma6">
+    <field name="name">Sanimed</field>
+  </record>
+  <record model="product.brand" id="ma5">
+    <field name="name">Pro Plan Purina</field>
+  </record>
+  <record model="product.brand" id="ma4">
+    <field name="name">Specific</field>
+  </record>
+  <record model="product.brand" id="ma3">
+    <field name="name">Virbac</field>
+  </record>
+  <record model="product.brand" id="ma2">
+    <field name="name">Hill's</field>
+  </record>
+  <record model="product.brand" id="ma11">
+    <field name="name">Foin</field>
+  </record>
+  <record model="product.brand" id="ma16">
+    <field name="name">Acana</field>
+  </record>
+  <record model="product.brand" id="ma17">
+    <field name="name">Sanalio</field>
+  </record>
+  <record model="product.brand" id="marqmed_agora">
+    <field name="name">Agora Sana</field>
+  </record>
+  <record model="product.brand" id="marqmed_alanine">
+    <field name="name">Alanine</field>
+  </record>
+  <record model="product.brand" id="marqmed_alcyon">
+    <field name="name">Alcyon</field>
+  </record>
+  <record model="product.brand" id="marqmed_arhoma">
+    <field name="name">Arhomani</field>
+  </record>
+  <record model="product.brand" id="marqmed_audevard">
+    <field name="name">Audevard</field>
+  </record>
+  <record model="product.brand" id="marqmed_bayer">
+    <field name="name">Bayer</field>
+  </record>
+  <record model="product.brand" id="marqmed_belgag">
+    <field name="name">Belgagri</field>
+  </record>
+  <record model="product.brand" id="marqmed_bi">
+    <field name="name">Boehringer Ingelheim</field>
+  </record>
+  <record model="product.brand" id="marqmed_ceva">
+    <field name="name">Ceva Animal health</field>
+  </record>
+  <record model="product.brand" id="marqmed_cid_l">
+    <field name="name">CID Lines</field>
+  </record>
+  <record model="product.brand" id="marqmed_dechra">
+    <field name="name">Dechra</field>
+  </record>
+  <record model="product.brand" id="marqmed_dopha">
+    <field name="name">Dopharma</field>
+  </record>
+  <record model="product.brand" id="marqmed_ecu">
+    <field name="name">Ecuphar</field>
+  </record>
+  <record model="product.brand" id="marqmed_elanco">
+    <field name="name">Elanco</field>
+  </record>
+  <record model="product.brand" id="marqmed_fendigo">
+    <field name="name">Fendigo</field>
+  </record>
+  <record model="product.brand" id="marqmed_heel">
+    <field name="name">Heel</field>
+  </record>
+  <record model="product.brand" id="marqmed_hipra">
+    <field name="name">Hipra</field>
+  </record>
+  <record model="product.brand" id="marqmed_huve">
+    <field name="name">Huvepharma</field>
+  </record>
+  <record model="product.brand" id="marqmed_kela">
+    <field name="name">Kela</field>
+  </record>
+  <record model="product.brand" id="marqmed_lpg">
+    <field name="name">LPG</field>
+  </record>
+  <record model="product.brand" id="marqmed_merial">
+    <field name="name">Merial</field>
+  </record>
+  <record model="product.brand" id="marqmed_millpl">
+    <field name="name">Millpledge</field>
+  </record>
+  <record model="product.brand" id="marqmed_miloa">
+    <field name="name">Miloa</field>
+  </record>
+  <record model="product.brand" id="marqmed_mplabo">
+    <field name="name">MP Labo</field>
+  </record>
+  <record model="product.brand" id="marqmed_msd">
+    <field name="name">MSD Animal Health</field>
+  </record>
+  <record model="product.brand" id="marqmed_nimrod">
+    <field name="name">Nimrod</field>
+  </record>
+  <record model="product.brand" id="marqmed_obione">
+    <field name="name">Obione</field>
+  </record>
+  <record model="product.brand" id="marqmed_op">
+    <field name="name">Original Process</field>
+  </record>
+  <record model="product.brand" id="marqmed_phyto">
+    <field name="name">Phytovet</field>
+  </record>
+  <record model="product.brand" id="marqmed_prodivet">
+    <field name="name">Prodivet</field>
+  </record>
+  <record model="product.brand" id="marqmed_twidyl">
+    <field name="name">Twydil/Pavesco</field>
+  </record>
+  <record model="product.brand" id="marqmed_vacci">
+    <field name="name">Vacciphar</field>
+  </record>
+  <record model="product.brand" id="marqmed_vetalis">
+    <field name="name">Vetalis</field>
+  </record>
+  <record model="product.brand" id="marqmed_vetoq">
+    <field name="name">Vétoquinol</field>
+  </record>
+  <record model="product.brand" id="marqmed_vexo">
+    <field name="name">Vexo</field>
+  </record>
+  <record model="product.brand" id="marqmed_virbac">
+    <field name="name">Virbac</field>
+  </record>
+  <record model="product.brand" id="marqmed_vmd">
+    <field name="name">VMD</field>
+  </record>
+  <record model="product.brand" id="marqmed_zoetis">
+    <field name="name">Zoetis</field>
+  </record>
+</odoo>
