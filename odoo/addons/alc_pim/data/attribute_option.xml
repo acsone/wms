@@ -2130,4 +2130,12 @@
     <field ref="attribute_administration_route_option_ids" name="attribute_id" />
     <field name="name">Nasale toediening</field>
   </record>
+  <record model="attribute.option" id="attribute_option_monofilament">
+    <field ref="attribute_thread_option_id" name="attribute_id" />
+    <field name="name">Monofilament</field>
+  </record>
+  <record model="attribute.option" id="attribute_option_polyfilament">
+    <field ref="attribute_thread_option_id" name="attribute_id" />
+    <field name="name">Polyfilament</field>
+  </record>
 </odoo>
