@@ -38,6 +38,21 @@ class InentoryToPoBuilder(object):
         self.load_partner_by_ref()
         self.ResPartner = self.env["res.partner"]
         self.week_days = self.env["alc.delivery.week.day"].search([])
+        self.top_400_tag = self.env.ref(
+            "__setup__.res_partner_category_top_400", raise_if_not_found=False
+        )
+        if not self.top_400_tag:
+            self.top_400_tag = self.env["res.partner.category"].create(
+                {"name": "TOP400"}
+            )
+            self.env["ir.model.data"].create(
+                {
+                    "module": "__setup__",
+                    "name": "res_partner_category_top_400",
+                    "model": self.top_400_tag._name,
+                    "res_id": self.top_400_tag.id,
+                }
+            )
 
     def load_partner_by_ref(self):
         _logger.info("Loads partner by ref")
@@ -74,12 +89,21 @@ class InentoryToPoBuilder(object):
             self.error_msgs.append(info)
             _logger.error("Record not found for ref %s", top_customer.ref)
             return
+        partners = self.ResPartner.browse(ids)
+        values = {"alc_delivery_window_ids": [(5, None, None)]}
+        if (
+            top_customer.rating_level == "TOP400"
+            and self.top_400_tag not in partners.mapped("category_id")
+        ):
+            values["category_id"] = [(4, self.top_400_tag.id)]
         if not top_customer.start_1 and not top_customer.start_2:
             _logger.info("No window defined for %s", top_customer.name)
+            if values:
+                partners.write(values)
             return
-        partners = self.ResPartner.browse(ids)
+
         partners.mapped("alc_delivery_window_ids").unlink()
-        values = [
+        window_values = [
             (
                 0,
                 0,
@@ -89,7 +113,7 @@ class InentoryToPoBuilder(object):
             )
         ]
         if top_customer.start_2:
-            values.append(
+            window_values.append(
                 (
                     0,
                     0,
@@ -98,7 +122,8 @@ class InentoryToPoBuilder(object):
                     ),
                 )
             )
-        partners.write({"alc_delivery_window_ids": values})
+        values["alc_delivery_window_ids"] = window_values
+        partners.write(values)
         _logger.info("%s updated", top_customer.name)
 
     def _to_delivery_window_values(self, start, end):
