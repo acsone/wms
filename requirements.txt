@@ -98,7 +98,7 @@ odoo10-addon-base-business-document-import==10.0.1.0.0.99.dev28
 odoo10-addon-base-business-document-import-stock==10.0.1.0.0.99.dev2
 odoo10-addon-base-delivery-carrier-label==10.0.1.3.0
 odoo10-addon-base-exception @ git+https://github.com/acsone/server-tools.git@dcefdba5bac014076f05229ba091acd8b739e164#subdirectory=setup/base_exception
-odoo10-addon-base-geoengine @ git+https://github.com/acsone/geospatial.git@86770be1f5cd40b184c407ff12d60bcb4e06b3a1#subdirectory=setup/base_geoengine
+odoo10-addon-base-geoengine @ git+https://github.com/acsone/geospatial.git@65e444422e9feffec6ca8809a9069f96b083643c#subdirectory=setup/base_geoengine
 odoo10-addon-base-geolocalize-openstreetmap==10.0.1.0.1
 odoo10-addon-base-import-async @ git+https://github.com/acsone/connector-interfaces.git@cf333ca7f81e027df6c4eac3581e111b9058823b#subdirectory=setup/base_import_async
 odoo10-addon-base-import-security-group @ git+https://github.com/acsone/server-tools.git@dcefdba5bac014076f05229ba091acd8b739e164#subdirectory=setup/base_import_security_group
