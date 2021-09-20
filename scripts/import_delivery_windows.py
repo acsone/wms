@@ -1,0 +1,138 @@
+#!/usr/bin/env python2
+# -*- coding: utf-8 -*-
+
+import logging
+from collections import namedtuple
+from datetime import datetime
+
+import click
+import click_odoo
+import unicodecsv as csv
+
+_logger = logging.getLogger("IMPORT delivery window")
+
+TopCustomer = namedtuple(
+    "TOP_CUSTOMER",
+    [
+        "ref",
+        "name",
+        "street",
+        "zip",
+        "city",
+        "longitude",
+        "latitude",
+        "rating_level",
+        "start_1",
+        "end_1",
+        "start_2",
+        "end_2",
+    ],
+)
+
+
+class InentoryToPoBuilder(object):
+    def __init__(self, env, csvfile):
+        self.env = env
+        self.csvfile = csvfile
+        self.error_msgs = []
+        self.load_partner_by_ref()
+        self.ResPartner = self.env["res.partner"]
+        self.week_days = self.env["alc.delivery.week.day"].search([])
+
+    def load_partner_by_ref(self):
+        _logger.info("Loads partner by ref")
+        sql = """
+            SELECT
+                ref,
+                array_agg(id)
+            FROM
+                res_partner
+            WHERE
+                active
+                and not is_b2c_customer
+            GROUP BY
+                ref;
+        """
+        self.env.cr.execute(sql)
+        self._partner_ids_by_ref = dict(self.env.cr.fetchall())
+
+    def run(self):
+        self.error_msgs = []
+        for top_customer in self._iter_read_file():
+            self._define_delivery_window(top_customer)
+
+    def _iter_read_file(self):
+        reader = csv.DictReader(self.csvfile, delimiter=";")
+        for row in reader:
+            yield TopCustomer(**row)
+
+    def _define_delivery_window(self, top_customer):
+        ids = self._partner_ids_by_ref.get(top_customer.ref)
+        if not ids:
+            info = top_customer._asdict()
+            info["error"] = "No record found"
+            self.error_msgs.append(info)
+            _logger.error("Record not found for ref %s", top_customer.ref)
+            return
+        if not top_customer.start_1 and not top_customer.start_2:
+            _logger.info("No window defined for %s", top_customer.name)
+            return
+        partners = self.ResPartner.browse(ids)
+        partners.mapped("alc_delivery_window_ids").unlink()
+        values = [
+            (
+                0,
+                0,
+                self._to_delivery_window_values(
+                    top_customer.start_1, top_customer.end_1
+                ),
+            )
+        ]
+        if top_customer.start_2:
+            values.append(
+                (
+                    0,
+                    0,
+                    self._to_delivery_window_values(
+                        top_customer.start_2, top_customer.end_2
+                    ),
+                )
+            )
+        partners.write({"alc_delivery_window_ids": values})
+        _logger.info("%s updated", top_customer.name)
+
+    def _to_delivery_window_values(self, start, end):
+        return {
+            "start": self._time_str_to_float(start),
+            "end": self._time_str_to_float(end),
+            "preference": "mandatory",
+            "week_day_ids": [(6, 0, self.week_days.ids)],
+        }
+
+    def _time_str_to_float(self, time_str):
+        dt = datetime.strptime(time_str, "%I:%M:%S %p")
+        return dt.hour + dt.minute / 60.0
+
+
+@click.command()
+@click.option("csvfile", "--csv-file", type=click.File(mode="rb"), required=True)
+@click_odoo.env_options(default_log_level="info")
+def main(env, csvfile):
+    click.echo("Start processing file. . .")
+    builder = InentoryToPoBuilder(env, csvfile)
+    builder.run()
+    if builder.error_msgs:
+        with open("erros.csv", "wb") as out_csvfile:
+            fieldnames = builder.error_msgs[0].keys()
+            writer = csv.DictWriter(out_csvfile, fieldnames=fieldnames)
+            writer.writeheader()
+            writer.writerows(builder.error_msgs)
+            # for msg in builder.error_msgs:
+            #    writer.writerows({k:v.encode('utf8') for k,v in msg.items()})
+        _logger.info("%d lines not procesed", len(builder.error_msgs))
+
+    env.cr.commit()
+
+
+if __name__ == "__main__":
+    main()  # pylint: disable=no-value-for-parameter
