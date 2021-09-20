@@ -26,4 +26,20 @@ class StockDeviceType(models.Model):
         comodel_name="stock.device.type.line",
         inverse_name="stock_device_type_id",
         string="Informations about stock device type",
+<<<<<<< HEAD
     )
+=======
+    )
+
+
+class StockDeviceTypeLine(models.Model):
+
+    _name = "stock.device.type.line"
+    _description = "Stock Device Type Line"
+
+    name = fields.Char()
+    stock_device_type_id = fields.Many2one(
+        "stock.device.type", string="Stock Device Type", required=True,
+    )
+    sequence = fields.Integer(string="Priority")
+>>>>>>> f212af90b52d3e16ab88e42afdbee195575df965

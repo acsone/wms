@@ -22,7 +22,10 @@
     ],
     "data": [
         "views/stock_device_type.xml",
+<<<<<<< HEAD
         "views/stock_device_type_line.xml",
+=======
+>>>>>>> f212af90b52d3e16ab88e42afdbee195575df965
         "views/stock_picking_wave.xml",
         "views/stock_picking.xml",
         "wizards/make_picking_batch.xml",
