@@ -117,6 +117,7 @@ class ShapeFileImportWizard(models.TransientModel):
 
         existing_template = self.delivery_plan_id.round_template_ids.filtered(
             lambda x: x.name == shape_record.record.Nom
+            or x.geo_optimization_resource_id == shape_record.record.Nom
         )
         if existing_template:
             # Update template
