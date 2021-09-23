@@ -5,7 +5,6 @@
 import base64
 import json
 import logging
-import math
 import urllib
 import urlparse
 from datetime import datetime, timedelta
@@ -71,6 +70,7 @@ class RoundInstance(models.Model):
 
     geo_optimization_json = fields.Serialized(compute="_compute_geo_optimization_json")
     geo_optimization_error_message = fields.Text("Optimization error message")
+    print_all_deliveryslip_after_geo_optimization = fields.Boolean(readonly=True)
 
     state = fields.Selection(
         selection_add=[
@@ -173,23 +173,33 @@ class RoundInstance(models.Model):
             )
         return res
 
-    def _deliver(self, background=True):
-        self.filtered(lambda a: a._is_geo_optimization_enabled())._geo_optimize()
-        res = super(RoundInstance, self)._deliver(background=background)
-        return res
+    @api.multi
+    def print_all_deliveryslip(self):
+        to_optimize = self.filtered(
+            lambda a: a._is_geo_optimization_enabled()
+            and a.geo_optimization_state not in ("success", "in_progress")
+        )
+        to_optimize._geo_optimize(print_all_deliveryslip=True)
+        not_to_optimize = self - to_optimize
+        if not_to_optimize:
+            return super(RoundInstance, not_to_optimize).print_all_deliveryslip()
+        return None
 
-    def _compute_stat_time_loading(self):
+    def _get_work_start_time(self):
         """
-        Overrides to add the delivery duration into the expected loading time
-        of the truck
+        Return the start time of the delivery rounds to geooptimize.
+
+        The start time is now + the geo optimization duration
         """
-        stat_time_loading = super(RoundInstance, self)._compute_stat_time_loading()
+        self.ensure_one()
         opti_duration = (
             self._is_geo_optimization_enabled()
             and self.get_optimization_config().duration
         )
         if not opti_duration:
-            return stat_time_loading
+            raise UserError(
+                _("Work start time is only available for geo optimized delivery rounds")
+            )
         tz_name = self.env.context.get("tz") or self.env.user.tz
         if not tz_name:
             raise UserError(
@@ -197,8 +207,7 @@ class RoundInstance(models.Model):
             )
         m, s = divmod(opti_duration, 60)
         now = fields.Datetime.context_timestamp(self, datetime.now())
-        now = now + timedelta(minutes=m, seconds=s)
-        return now.hour + (now.minute / 60.0)
+        return now + timedelta(minutes=m, seconds=s)
 
     @api.multi
     def _is_geo_optimization_enabled(self):
@@ -209,7 +218,7 @@ class RoundInstance(models.Model):
     def get_optimization_config(self):
         return self.env["stock.config.settings"].get_optimization_config()
 
-    def _geo_optimize(self):
+    def _geo_optimize(self, print_all_deliveryslip=False):
         self.env.user.notify_info(_("Optimization requests sent to external system."))
         cfg = self.get_optimization_config()
         for record in self:
@@ -226,53 +235,18 @@ class RoundInstance(models.Model):
                         "geo_optimization_request": base64.b64encode(
                             json.dumps(optimization_request)
                         ),
+                        "state": "optimizing",
+                        "print_all_deliveryslip_after_geo_optimization": print_all_deliveryslip,
                     }
                 )
                 record._delay_check_optimization_status(
                     eta_delay_seconds=cfg.duration + 10
                 )
-                record.recheck_delivery_state()
-
-    @api.multi
-    def button_done(self):
-        res = super(RoundInstance, self).button_done()
-        for record in self:
-            if not record.state == "done":
-                continue
-            if record._is_geo_optimization_enabled():
-                if not record.geo_optimization_state:
-                    # optimization not launched; relaunch
-                    self._geo_optimize()
-                    record.state = "optimizing"
-                    continue
-                if record.geo_optimization_state == "success":
-                    continue
-                if record.geo_optimization_state == "in_progress":
-                    record.state = "optimizing"
-                else:
-                    record.state = "optimization_failure"
-        return res
-
-    # pylint: disable=missing-return
-    @job(default_channel="root.background.stock_picking_deliver")
-    @api.multi
-    def recheck_delivery_state(self):
-        to_optimize = self.filtered(lambda a: a._is_geo_optimization_enabled())
-        super(RoundInstance, self - to_optimize).recheck_delivery_state()
-        for record in to_optimize:
-            if not record._is_all_customer_delivered():
-                continue
-            if record.geo_optimization_state == "success":
-                record.write({"state": "delivering"})
-                super(RoundInstance, record).recheck_delivery_state()
-            elif record.geo_optimization_state == "in_progress":
-                record.write({"state": "optimizing"})
-            elif record.geo_optimization_state in ("aborted", "error"):
-                record.write({"state": "optimization_failure"})
-            else:
-                raise ValueError(
-                    "Unexpected geo optimization state %s"
-                    % record.geo_optimization_state
+            if print_all_deliveryslip:
+                self.env.user.notify_info(
+                    _(
+                        "An optimization has been launched prior to the printing of the delivery slip. You'll be notified once the delivery slip is ready."
+                    )
                 )
 
     @api.multi
@@ -287,8 +261,7 @@ class RoundInstance(models.Model):
     @api.multi
     def button_ignore_optimization_failure(self):
         records = self.filtered(lambda r: r.state == "optimization_failure")
-        records.write({"geo_optimization_enabled": False})
-        records._deliver()
+        records.write({"geo_optimization_enabled": False, "state": "done"})
 
     @api.multi
     def _get_partners_to_deliver(self):
@@ -412,18 +385,10 @@ class RoundInstance(models.Model):
             ret.append(order)
         return ret
 
-    def float_time_to_str_time(self, float_time, pattern="%02d:%02d:00"):
-        hour = math.floor(float_time)
-        min_ = round((float_time % 1) * 60)
-        if min_ == 60:
-            min_ = 0
-            hour += 1
-        return pattern % (hour, min_)
-
     def _generate_optimization_resources(self, cfg):
         address = self.warehouse_id.partner_id
-        time_loading = self.stat_time_loading or self._compute_stat_time_loading()
-        work_start_time = self.float_time_to_str_time(time_loading)
+        time_loading = self._get_work_start_time()
+        work_start_time = time_loading.strftime("%H:%M:00")
         h, m = divmod(cfg.loading_duration, 60)
         fixed_loading_duration = "%02d:%02d:00" % (h, m)
         res = {
@@ -467,7 +432,7 @@ class RoundInstance(models.Model):
         """
         self.ensure_one()
         action = "optimize"
-        optimize_url = self._get_opitization_api_url(action)
+        optimize_url = self._get_optimization_api_url(action)
         response = requests.post(
             optimize_url, json=json_request, headers={"Accept": "application/json"}
         )
@@ -485,7 +450,7 @@ class RoundInstance(models.Model):
         """
         self.ensure_one()
         action = "status"
-        status_url = self._get_opitization_api_url(
+        status_url = self._get_optimization_api_url(
             action, taskId=self.geo_optimization_task_id
         )
         response = requests.get(status_url, headers={"Accept": "application/json"})
@@ -497,9 +462,9 @@ class RoundInstance(models.Model):
             self._delay_check_optimization_status(eta_delay_seconds=20)
         elif self.geo_optimization_state == "success":
             self._get_optimization_result()
-        elif self.geo_optimization_state == "error" and result.get("message"):
-            self.geo_optimization_error_message = result["message"]
-        self.recheck_delivery_state()
+        elif self.geo_optimization_state == "error":
+            if result.get("message"):
+                self.geo_optimization_error_message = result["message"]
 
     def _get_optimization_result(self):
         """
@@ -509,7 +474,7 @@ class RoundInstance(models.Model):
         """
         self.ensure_one()
         action = "result"
-        result_url = self._get_opitization_api_url(
+        result_url = self._get_optimization_api_url(
             action, taskId=self.geo_optimization_task_id
         )
         response = requests.get(result_url, headers={"Accept": "application/json"})
@@ -519,6 +484,14 @@ class RoundInstance(models.Model):
         self.geo_optimization_result = base64.b64encode(json.dumps(result))
         self._validate_optimization_result(result)
         self._sort_round_instance_customers()
+        if self.print_all_deliveryslip_after_geo_optimization:
+            action = self.print_all_deliveryslip()
+            self.env.user.notify_info(
+                _("Your delivery slip for %s is now ready. Click to print"),
+                sticky=True,
+                action=action,
+                action_link_name=_("Print"),
+            )
 
     def _sort_round_instance_customers(self):
         """
@@ -565,6 +538,7 @@ class RoundInstance(models.Model):
         try:
             self.geo_optimization_error_message = False
             response.raise_for_status()
+            self.state = "done"
         except requests.HTTPError as http_error:
             msg = "\n".join(filter(None, [http_error.message, response.content]))
             self.geo_optimization_error_message = msg
@@ -574,17 +548,19 @@ class RoundInstance(models.Model):
             )
             if not ignoreError:
                 self.geo_optimization_status = "failed"
+                self.state = "optimization_failure"
             return False
         result = response.json()
         if result["status"] == "ERROR":
             self.geo_optimization_error_message = result["message"]
             if not ignoreError:
                 self.geo_optimization_status = "failed"
+                self.state = "optimization_failure"
             self._notify_optimization_error(self.geo_optimization_error_message)
             return False
         return result
 
-    def _get_opitization_api_url(self, action, **url_params):
+    def _get_optimization_api_url(self, action, **url_params):
         cfg = self.get_optimization_config()
         baseurl = cfg.api_url
         url_params = url_params or {}
@@ -627,6 +603,7 @@ class RoundInstance(models.Model):
                 {
                     "geo_optimization_status": "failed",
                     "geo_optimization_error_message": "\n".join(error_messages),
+                    "state": "optimization_failure",
                 }
             )
 
@@ -689,7 +666,7 @@ class RoundInstance(models.Model):
 
         action = "exportToOperationalPlanning"
         json_request = self._generate_optimization_operational_export_request()
-        url = self._get_opitization_api_url(action)
+        url = self._get_optimization_api_url(action)
         response = requests.post(
             url, json=json_request, headers={"Accept": "application/json"}
         )

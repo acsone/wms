@@ -145,6 +145,9 @@ class RoundInstance(models.Model):
     customers_delivery_not_allowed = fields.Html(
         compute="_compute_customers_delivery_not_allowed", readonly=True
     )
+    is_all_deliveryslip_printed = fields.Boolean(
+        "Flag used to know if the delivery slip has been printed", readonly=True
+    )
 
     @api.depends("instance_customer_ids", "instance_customer_ids.delivery_not_allowed")
     @api.multi
@@ -722,6 +725,7 @@ class RoundInstance(models.Model):
 
     @api.multi
     def print_all_deliveryslip(self):
+        self.write({"is_all_deliveryslip_printed": True})
         shipping_done = self._get_sorted_shipping_ids()
         return self.env["report"].get_action(shipping_done, "stock.report_deliveryslip")
 

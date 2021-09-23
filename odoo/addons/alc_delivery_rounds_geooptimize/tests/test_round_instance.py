@@ -12,12 +12,14 @@ from freezegun import freeze_time
 from requests.exceptions import HTTPError
 
 from odoo.exceptions import ValidationError
+from odoo.tools import mute_logger
 
 from odoo.addons.delivery_rounds.tests import common
 
 
 class TestRoundInstance(common.DeliveryRoundTestCase):
     @classmethod
+    @mute_logger("odoo.addons.queue_job.models.base")
     def setUpClass(cls):
         super(TestRoundInstance, cls).setUpClass()
         cls.env = cls.env(
@@ -85,9 +87,10 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
         pick1.move_lines.write({"state": "done"})
         pick2.move_lines.write({"state": "done"})
         pick3.move_lines.write({"state": "done"})
-        # at this stage we have a round ready to be delivered
+        # at this stage we have A round delivered but not geo optimized
 
         cls.pick1 = pick1
+        cls.delivery_round_1.button_deliver()
 
     def setUp(self):
         super(TestRoundInstance, self).setUp()
@@ -157,7 +160,7 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
             (200, {"status": "OK", "optimizeStatus": "terminated"}),
             (200, expected_result),
         ):
-            self.delivery_round_1.button_deliver()
+            self.delivery_round_1._geo_optimize()
         self.assertEqual(self.delivery_round_1.state, "done")
 
     def assertJsonEqual(self, expected, value):
@@ -168,15 +171,15 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
     def test_00(self):
         """
         Data:
-            A round ready to be delivered
+            A round delivered but not geo optimized
         Test case:
-            Deliver and receive an exception from the optimization API
+            Geo optimize and receive an exception from the optimization API
         Expected result:
             delivery.round must be in state optimization_failure
             the error message must be the http_error_message
         """
         with self.api_post_optimize(400, {}):
-            self.delivery_round_1.button_deliver()
+            self.delivery_round_1._geo_optimize()
         self.assertEqual(self.delivery_round_1.state, "optimization_failure")
         self.assertEqual(
             self.delivery_round_1.geo_optimization_error_message,
@@ -186,16 +189,16 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
     def test_01(self):
         """
         Data:
-            A round ready to be delivered
+            A round delivered but not geo optimized
         Test case:
-            Deliver and receive a result with statue ERROR and an error message
+            Geo optimize and receive a result with statue ERROR and an error message
             from the optimization API
         Expected result:
             delivery.round must be in state optimization_failure
             the error message must be the error message from the api response
         """
         with self.api_post_optimize(200, {"status": "ERROR", "message": "api error"}):
-            self.delivery_round_1.button_deliver()
+            self.delivery_round_1._geo_optimize()
         self.assertEqual(self.delivery_round_1.state, "optimization_failure")
         self.assertEqual(
             self.delivery_round_1.geo_optimization_error_message, "api error"
@@ -204,9 +207,9 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
     def test_02(self):
         """
         Data:
-            A round ready to be delivered
+            A round delivered but not geo optimized
         Test case:
-            Deliver
+            Geo optimize
             Receive a result with a task id
             Receive an http exception when calling the status api
         Expected result:
@@ -217,7 +220,7 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
         with self.api_post_optimize(
             200, {"taskId": "123", "status": "OK"}
         ), self.api_get_results((400, {})):
-            self.delivery_round_1.button_deliver()
+            self.delivery_round_1._geo_optimize()
         self.assertEqual(self.delivery_round_1.state, "optimization_failure")
         self.assertEqual(
             self.delivery_round_1.geo_optimization_error_message,
@@ -228,9 +231,9 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
     def test_03(self):
         """
         Data:
-            A round ready to be delivered
+            A round delivered but not geo optimized
         Test case:
-            Deliver
+            Geo optimize
             Receive a result with a task id
             Receive a result with status ERROR and an error message when
             calling the status api
@@ -242,7 +245,7 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
         with self.api_post_optimize(
             200, {"taskId": "123", "status": "OK"}
         ), self.api_get_results((200, {"status": "ERROR", "message": "status error"})):
-            self.delivery_round_1.button_deliver()
+            self.delivery_round_1._geo_optimize()
         self.assertEqual(self.delivery_round_1.state, "optimization_failure")
         self.assertEqual(
             self.delivery_round_1.geo_optimization_error_message, "status error"
@@ -252,9 +255,9 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
     def test_04(self):
         """
         Data:
-            A round ready to be delivered
+            A round delivered but not geo optimized
         Test case:
-            Deliver
+            Geo optimize
             Receive a result with a task id
             Receive a status ok and optimizeStatus terminated
             Receive an http exception when calling optimization result
@@ -268,7 +271,7 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
         ), self.api_get_results(
             (200, {"status": "OK", "optimizeStatus": "terminated"}), (400, {})
         ):
-            self.delivery_round_1.button_deliver()
+            self.delivery_round_1._geo_optimize()
         self.assertEqual(self.delivery_round_1.state, "optimization_failure")
         self.assertEqual(
             self.delivery_round_1.geo_optimization_error_message,
@@ -279,9 +282,9 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
     def test_05(self):
         """
         Data:
-            A round ready to be delivered
+            A round delivered but not geo optimized
         Test case:
-            Deliver
+            Geo Optimize
             Receive a result with a task id
             Receive a status ok and optimizeStatus terminated
             Receive a result with status ERROR and an error message when calling optimization result
@@ -296,7 +299,7 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
             (200, {"status": "OK", "optimizeStatus": "terminated"}),
             (200, {"status": "ERROR", "message": "result error"}),
         ):
-            self.delivery_round_1.button_deliver()
+            self.delivery_round_1._geo_optimize()
         self.assertEqual(self.delivery_round_1.state, "optimization_failure")
         self.assertEqual(
             self.delivery_round_1.geo_optimization_error_message, "result error"
@@ -306,9 +309,9 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
     def test_06(self):
         """
         Data:
-            A round ready to be delivered
+            A round delivered but not geo optimized
         Test case:
-            Deliver
+            Geo Optimize
             Receive a result with a task id
             Receive a status ok and optimizeStatus terminated
             Receive a result with missing partner when calling optimization result
@@ -331,7 +334,7 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
                 },
             ),
         ):
-            self.delivery_round_1.button_deliver()
+            self.delivery_round_1._geo_optimize()
         self.assertEqual(self.delivery_round_1.state, "optimization_failure")
         self.assertEqual(
             self.delivery_round_1.geo_optimization_error_message,
@@ -342,9 +345,9 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
     def test_07(self):
         """
         Data:
-            A round ready to be delivered
+            A round delivered but not geo optimized
         Test case:
-            Deliver
+            Geo Optimize
             Receive a result with a task id
             Receive a status ok and optimizeStatus terminated
             Receive a result with unexpected partner when calling optimization result
@@ -370,7 +373,7 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
                 },
             ),
         ):
-            self.delivery_round_1.button_deliver()
+            self.delivery_round_1._geo_optimize()
         self.assertEqual(self.delivery_round_1.state, "optimization_failure")
         self.assertEqual(
             self.delivery_round_1.geo_optimization_error_message,
@@ -381,9 +384,9 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
     def test_08(self):
         """
         Data:
-            A round ready to be delivered
+            A round delivered but not geo optimized
         Test case:
-            Deliver
+            Geo optimize
             Receive a result with a task id
             Receive a status ok and optimizeStatus terminated
             Receive a result with the required infos
@@ -405,7 +408,7 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
             (200, {"status": "OK", "optimizeStatus": "terminated"}),
             (200, expected_result),
         ):
-            self.delivery_round_1.button_deliver()
+            self.delivery_round_1._geo_optimize()
         self.assertEqual(self.delivery_round_1.state, "done")
         self.assertDictEqual(
             self.delivery_round_1.geo_optimization_json, expected_result
@@ -430,6 +433,7 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
         self.assertEqual(shippings[0].partner_id, self.partner3)
         self.assertEqual(shippings[1].partner_id, self.partner1)
         self.assertEqual(shippings[2].partner_id, self.partner2)
+        self.delivery_round_1.instance_customer_ids.refresh()
         self.assertEqual(
             self.delivery_round_1.instance_customer_ids[0].partner_id, self.partner3
         )
@@ -465,7 +469,7 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
     def test_10(self):
         """
         Data:
-            A round ready to be delivered for 3 partners
+            A round delivered but not geo optimized for 3 partners
         Test case:
             Call method _generate_optimization_request
         Expected result:
@@ -545,7 +549,7 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
     def test_11(self):
         """
         Data:
-            A round ready to be delivered for 3 partners
+            A round delivered but not geo optimized for 3 partners
         Test case:
             Add 1 delivery windows on partner1 for delivery date
             Call method _generate_optimization_request
@@ -606,16 +610,16 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
     def test_12(self):
         """
         Data:
-            A round ready to be delivered
+            A round delivered but not geo optimized
         Test case:
-            1 Deliver and receive an exception from the optimization API
+            1 Optimize and receive an exception from the optimization API
             2 Call button_ignore_optimization_failure
         Expected result:
             1 delivery.round must be in state optimization_failure
             2 delivery.round must be in state done
         """
         with self.api_post_optimize(400, {}):
-            self.delivery_round_1.button_deliver()
+            self.delivery_round_1._geo_optimize()
         self.assertEqual(self.delivery_round_1.state, "optimization_failure")
         self.delivery_round_1.button_ignore_optimization_failure()
         self.assertEqual(self.delivery_round_1.state, "done")
@@ -623,18 +627,17 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
     def test_13(self):
         """
         Data:
-            A round ready to be delivered
+            A round delivered but not geo optimized
         Test case:
-            1 Deliver and receive an exception from the optimization API
+            1 Optimize and receive an exception from the optimization API
             2 Call retry_optimization and Receive a result with the required infos
         Expected result:
             1 delivery.round must be in state optimization_failure
             2 delivery.round must be in state done
         """
         with self.api_post_optimize(400, {}):
-            self.delivery_round_1.button_deliver()
+            self.delivery_round_1._geo_optimize()
         self.assertEqual(self.delivery_round_1.state, "optimization_failure")
-        self.delivery_round_1.button_ignore_optimization_failure()
         expected_result = {
             "status": "OK",
             "plannedOrders": [
@@ -667,13 +670,13 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
                 "ToursolverCloud/api/ts/toursolver/"
             }
         ).execute()
-        url = self.delivery_round_1._get_opitization_api_url("test")
+        url = self.delivery_round_1._get_optimization_api_url("test")
         self.assertEqual(
             url,
             "https://geoservices.geoconcept.com/ToursolverCloud/api/ts/"
             "toursolver/test?tsCloudApiKey=api+key",
         )
-        url = self.delivery_round_1._get_opitization_api_url("test", param1="val2")
+        url = self.delivery_round_1._get_optimization_api_url("test", param1="val2")
         self.assertEqual(
             url,
             "https://geoservices.geoconcept.com/ToursolverCloud/api/ts/"
@@ -683,7 +686,7 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
     def test_15(self):
         """
            Data:
-               A round ready to be delivered
+               A round delivered but not geo optimized
            Test case:
                Deliver
                Receive a result with a task id
@@ -709,7 +712,7 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
             (200, {"status": "OK", "optimizeStatus": "terminated"}),
             (200, expected_result),
         ):
-            self.delivery_round_1.button_deliver()
+            self.delivery_round_1._geo_optimize()
         self.assertEqual(self.delivery_round_1.state, "done")
 
         self.assertDictEqual(
@@ -800,27 +803,24 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
             A round instance
             an optimization duration set to 90 seconds
         Test Case:
-            stat_time_loading must takes into account the optimization duration
+           _get_work_start_time() must takes into account the optimization duration
         """
-        float_to_time_repr = self.env["alc.delivery.window"].float_to_time_repr
         with freeze_time("2020-01-01 07:10:00"):
             # TIME is UTC, stat_time_loading must be local since it's a float time
             # WE are GMT + 1
             self.assertEqual(
-                float_to_time_repr(self.delivery_round_1._compute_stat_time_loading()),
-                "08:11",
+                self.delivery_round_1._get_work_start_time().strftime("%H:%M"), "08:11",
             )
         with freeze_time("2020-01-01 07:59:31"):
             self.assertEqual(
-                float_to_time_repr(self.delivery_round_1._compute_stat_time_loading()),
-                "09:01",
+                self.delivery_round_1._get_work_start_time().strftime("%H:%M"), "09:01",
             )
 
     @freeze_time("2020-01-01 07:10:00")
     def test_21(self):
         """
         Data:
-            A round ready to be delivered for 3 partners. Partner 3 has an address
+            A round delivered but not geo optimized for 3 partners. Partner 3 has an address
         Test case:
             Call method _generate_optimization_request
         Expected result:
@@ -917,7 +917,7 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
     def test_22(self):
         """
         Data:
-            A round ready to be delivered for 3 partners, one has a specific fixed duration
+            A round delivered but not geo optimized for 3 partners, one has a specific fixed duration
         Test case:
             Call method _generate_optimization_request
         Expected result:
@@ -1010,7 +1010,7 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
     def test_23(self):
         """
         Data:
-            A round ready to be delivered for 3 partners, one had a specific fixed duration that is now removed
+            A round delivered but not geo optimized for 3 partners, one had a specific fixed duration that is now removed
         Test case:
             Call method _generate_optimization_request
         Expected result:
@@ -1179,7 +1179,7 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
     def test_24(self):
         """
         Data:
-            A round ready to be delivered for 3 partners.
+            A round delivered but not geo optimized for 3 partners.
             All partners are without delivery window.
             partner1 name is C
             partner2 name is A
@@ -1214,7 +1214,7 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
     def test_25(self):
         """
         Data:
-            A round ready to be delivered for 3 partners.
+            A round delivered but not geo optimized for 3 partners.
             Delivery window on partners are as follow.
             partner1 name  13:00 14:00
             partner2 name is 12:30 13:30
@@ -1277,6 +1277,66 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
                 "%s is not at the right position (expected: %s / effective: %s)"
                 % (partner.name, expected, effective),
             )
+
+    def test_26(self):
+        """
+        Data:
+            A round delivered but not geo optimized
+        Test case:
+            Ask to print all delivery slip -> will launch the optimization with
+            following steps:
+             * Receive a result with a task id
+             * Receive a status ok and optimizeStatus terminated
+             * Receive a result with the required infos
+        Expected result:
+            state: done
+            geo_optimization_json contains the result received from the api
+            the report is generated
+        """
+        expected_result = {
+            "status": "OK",
+            "plannedOrders": [
+                {"stopId": "%s" % self.partner2.id},
+                {"stopId": "%s" % self.partner1.id},
+                {"stopId": "%s" % self.partner3.id},
+            ],
+        }
+        get_action_recorder = GetActionRecorder()
+        with self.api_post_optimize(
+            200, {"taskId": "123", "status": "OK"}
+        ), self.api_get_results(
+            (200, {"status": "OK", "optimizeStatus": "terminated"}),
+            (200, expected_result),
+        ), mock.patch.object(
+            self.env["report"].__class__, "get_action"
+        ) as mocked_get_action:
+            mocked_get_action.side_effect = get_action_recorder
+            self.delivery_round_1.print_all_deliveryslip()
+
+        self.assertEqual(self.delivery_round_1.state, "done")
+        self.assertTrue(
+            self.delivery_round_1.print_all_deliveryslip_after_geo_optimization
+        )
+        self.assertDictEqual(
+            self.delivery_round_1.geo_optimization_json, expected_result
+        )
+        self.assertEqual(
+            get_action_recorder._action_called_name, "stock.report_deliveryslip"
+        )
+        self.assertEqual(
+            get_action_recorder._action_called_records,
+            self.delivery_round_1._get_sorted_shipping_ids(),
+        )
+
+
+class GetActionRecorder(object):
+    _action_called_records = None
+    _action_called_name = None
+
+    def __call__(self, records, name):
+        self._action_called_records = records
+        self._action_called_name = name
+        return {}
 
 
 class _PseudoRequestsResponse(object):
