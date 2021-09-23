@@ -73,11 +73,20 @@ class InentoryToPoBuilder(object):
 
     def run(self):
         self.error_msgs = []
+        self._reset_top_400()
         for top_customer in self._iter_read_file():
             self._define_delivery_window(top_customer)
 
+    def _reset_top_400(self):
+        top_400_partners = self.env["res.partner"].search(
+            [("category_id", "in", self.top_400_tag.ids)]
+        )
+        _logger.info("Found %d top_400 to reset", len(top_400_partners))
+        top_400_partners.mapped("alc_delivery_window_ids").unlink()
+        top_400_partners.write({"category_id": [(3, self.top_400_tag.id)]})
+
     def _iter_read_file(self):
-        reader = csv.DictReader(self.csvfile, delimiter=";")
+        reader = csv.DictReader(self.csvfile, delimiter=",")
         for row in reader:
             yield TopCustomer(**row)
 
@@ -135,7 +144,7 @@ class InentoryToPoBuilder(object):
         }
 
     def _time_str_to_float(self, time_str):
-        dt = datetime.strptime(time_str, "%I:%M:%S %p")
+        dt = datetime.strptime(time_str, "%H:%M")
         return dt.hour + dt.minute / 60.0
 
 
