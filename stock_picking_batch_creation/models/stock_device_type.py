@@ -22,8 +22,4 @@ class StockDeviceType(models.Model):
     )
     nbr_bins = fields.Integer(string="Number of compartments")
 
-    stock_device_type_line_ids = fields.One2many(
-        comodel_name="stock.device.type.line",
-        inverse_name="stock_device_type_id",
-        string="Informations about stock device type",
-    )
+    sequence = fields.Integer(string="Priority")

@@ -13,6 +13,7 @@
         <field name="max_volume" />
         <field name="max_weight" />
         <field name="nbr_bins" />
+        <field name="sequence" />
       </tree>
     </field>
   </record>
@@ -29,6 +30,7 @@
             <field name="max_volume" />
             <field name="max_weight" />
             <field name="nbr_bins" />
+            <field name="sequence" />
           </group>
         </sheet>
       </form>
