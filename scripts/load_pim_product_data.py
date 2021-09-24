@@ -3,9 +3,11 @@
 
 import os
 
+import click
+import click_odoo
 import unicodecsv as csv
 
-env = env  # pylint: disable=undefined-variable,self-assigning-variable  # noqa
+ENV = env  # pylint: disable=undefined-variable  # noqa
 
 
 def process_csv_file(root, filename, process_row_dict, delimiter=","):
@@ -27,7 +29,7 @@ def load_option_ids(root, ref):
     csv_reader = csv.reader(csv_file, delimiter=",")
     next(csv_reader)  # skip headers
     for r in csv_reader:
-        record = env["attribute.option"].search([("name", "=", r[1])])
+        record = ENV["attribute.option"].search([("name", "=", r[1])])
         record.ensure_one()
         ref[r[0]] = record
 
@@ -57,12 +59,12 @@ def load_species_ids(ref):
         "autre": "other",
     }
     for k in mapping:
-        ref[k] = env.ref("product_animal_species.%s" % mapping[k])
+        ref[k] = ENV.ref("product_animal_species.%s" % mapping[k])
 
 
 def find_record_by_id(column_name, value):
     if column_name in {"marque_medicaments", "categories"}:
-        record = env.ref("alc_pim." + value)
+        record = ENV.ref("alc_pim." + value)
     elif column_name in {"espece", "espece_principale"}:
         record = SPECIES_IDS[value]
     else:
@@ -91,8 +93,8 @@ def amcra_parser(column_name, value):
 
 def thread_parser(column_name, value):
     thread_map = {
-        "1": env.ref("alc_pim.attribute_option_monofilament").id,
-        "2": env.ref("alc_pim.attribute_option_polyfilament").id,
+        "1": ENV.ref("alc_pim.attribute_option_monofilament").id,
+        "2": ENV.ref("alc_pim.attribute_option_polyfilament").id,
     }
     return value and thread_map["value"]
 
@@ -126,7 +128,7 @@ IMGS = {"img", "img_2", "img_3", "img_4", "img_5"}
 
 def process_product_row(root, rd):
     product_domain = [("default_code", "=", rd["sku"])]
-    product = env["product.template"].search(product_domain)
+    product = ENV["product.template"].search(product_domain)
     if product:
         translations = {}
         pfm = PRODUCT_FILE_MAPPING
@@ -158,12 +160,19 @@ OPTIONS_IDS = {}  # to load based on path provided at execution
 SPECIES_IDS = {}
 
 
-if __name__ == "__main__":
-    root_folder = "tmp"
-    file_name = (
-        "1_products_export_en_GB/1_products_export_en_GB_ecom_B2B_2021"
-        "-09-02_14:46:09.csv"
-    )
+@click.command()
+@click.option("--root", required=True, help="Directory where the files are.")
+@click.option("--filename", required=True, help="Main CSV.")
+@click_odoo.env_options(default_log_level="info")
+def main(env, root, filename, delimiter=";"):
+    global ENV  # pylint: disable=global-statement
+    ENV = env
     load_species_ids(SPECIES_IDS)
-    load_option_ids(root_folder, OPTIONS_IDS)
-    process_csv_file(root_folder, file_name, process_product_row, ";")
+    load_option_ids(root, OPTIONS_IDS)
+    return process_csv_file(root, filename, process_product_row, delimiter)
+
+
+if __name__ == "__main__":
+    main()  # pylint: disable=no-value-for-parameter
+    #  USAGE: click-odoo -c .odoorc -- scripts/load_pim_product_data.py -d odoo-alcyon --root=tmp --filename=ff
+    # 1_products_export_en_GB/1_products_export_en_GB_ecom_B2B_2021-09-02_14:46:09.csv
