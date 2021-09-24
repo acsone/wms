@@ -37,10 +37,10 @@ class TestGetPickingsToClusterByDeliveryRounds(ClusterPickingDeliveryCommonFeatu
             {
                 "user_id": self.operator_1.id,
                 "picking_type_ids": [(4, self.picking_type_ali.id)],
-                "stock_device_type_line_ids": [
-                    (4, self.device_line1.id),
-                    (4, self.device_line2.id),
-                    (4, self.device_line3.id),
+                "stock_device_type_ids": [
+                    (4, self.device1.id),
+                    (4, self.device2.id),
+                    (4, self.device3.id),
                 ],
             }
         )
@@ -58,10 +58,10 @@ class TestGetPickingsToClusterByDeliveryRounds(ClusterPickingDeliveryCommonFeatu
             {
                 "user_id": self.operator_2.id,
                 "picking_type_ids": [(4, self.picking_type_ali.id)],
-                "stock_device_type_line_ids": [
-                    (4, self.device_line1.id),
-                    (4, self.device_line2.id),
-                    (4, self.device_line3.id),
+                "stock_device_type_ids": [
+                    (4, self.device1.id),
+                    (4, self.device2.id),
+                    (4, self.device3.id),
                 ],
             }
         )
