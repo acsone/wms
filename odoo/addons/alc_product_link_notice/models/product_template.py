@@ -31,14 +31,14 @@ class ProductTemplate(models.Model):
     )
 
     @api.model
-    def cron_check_links_online(self):
+    def cron_check_links_online(self, force=False):
         domain_to_check = [
-            "&",
-            ("links_offline", "=", False),
             "|",
             ("link_info", "!=", False),
             ("link_notice", "!=", False),
         ]
+        if not force:
+            domain_to_check = ["&", ("links_offline", "=", False)] + domain_to_check
         to_check = self.search(domain_to_check)
         for product in to_check:
             description = _("Check online links for product %s.") % product.name
