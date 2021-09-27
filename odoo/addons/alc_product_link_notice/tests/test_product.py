@@ -20,7 +20,7 @@ class TestProduct(SavepointCase):
         product = self.env["product.template"].create(vals_product)
         self.assertEqual(product.links_offline, "link_info")
 
-        product.link_info = "https://www.acsone.eu/"  # should be online, right?
+        product.link_info = "https://www.duckduckgo.com/"
         self.assertFalse(product.links_offline)
 
         product.link_notice = "also_not_a_link"
