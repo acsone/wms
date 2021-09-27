@@ -14,13 +14,11 @@
         "alc_product_shop_category",
         "alc_product_link_notice",
         "product_animal_species",
-        "alc_product_pharmacy",
         # data dependencies
         "product_dimension",
         "stock_production_lot_expiry",
-        "product_manufacturer",
         "specific_product",
-        "specific_purchase",
+        "specific_purchase",  # depends on alc_product_pharmacy, product_manufacturer
         "alc_product_audit",
         "product_brand",
     ],

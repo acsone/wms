@@ -2,7 +2,7 @@
 # Copyright 2017 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, fields, models
+from odoo import fields, models
 
 import odoo.addons.decimal_precision as dp
 
@@ -21,8 +21,6 @@ class ProductTemplate(models.Model):
         string="Sale Price 2",
     )
 
-    cnk_code = fields.Char(string="CNK", copy=False)
-
     indicated_price = fields.Float(
         string="Indicated price", digits=dp.get_precision("Product Price")
     )
@@ -33,16 +31,9 @@ class ProductTemplate(models.Model):
 
     web_published = fields.Boolean(string="Published on website")
 
-    veterinary_only = fields.Boolean(string="Veterinary only")
-    belgium_only = fields.Boolean(string="Belgium only")
-
     count_pickings_to_do = fields.Integer(
         string="Incoming Pickings", compute="_compute_incoming_pickings"
     )
-
-    _sql_constraints = [
-        ("uniq_cnk_code", "unique(cnk_code)", _("This cnk_code already exists."))
-    ]
 
     def _compute_sale_price_2(self):
         for product in self:
@@ -62,22 +53,6 @@ class ProductTemplate(models.Model):
                     prod_id=product.product_variant_ids[0].id, qty=1
                 )
                 product.sale_price_2 = price.get(pricelist.id, 0.0)
-
-    @api.model
-    def create(self, vals):
-        vals = ProductTemplate._remove_spaces_from_cnk(vals)
-        return super(ProductTemplate, self).create(vals)
-
-    @api.multi
-    def write(self, vals):
-        vals = ProductTemplate._remove_spaces_from_cnk(vals)
-        return super(ProductTemplate, self).write(vals)
-
-    @staticmethod
-    def _remove_spaces_from_cnk(vals):
-        if "cnk_code" in vals and vals["cnk_code"]:
-            vals["cnk_code"] = vals["cnk_code"].replace(" ", "")
-        return vals
 
     def action_open_incoming_stock_moves(self):
         action = super(ProductTemplate, self).action_view_stock_moves()

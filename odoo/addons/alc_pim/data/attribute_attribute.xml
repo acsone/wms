@@ -18,7 +18,10 @@
       name="attribute_set_ids"
       eval="[(6,0,[ref('attribute_set_medicaments'), ref('attribute_set_aliments'), ref('attribute_set_materiel')])]"
     />
-    <field ref="specific_product.field_product_template_belgium_only" name="field_id" />
+    <field
+      ref="alc_product_pharmacy.field_product_template_belgium_only"
+      name="field_id"
+    />
     <field ref="product.model_product_template" name="model_id" />
     <field name="nature">native</field>
   </record>
@@ -40,7 +43,7 @@
     <field name="allow_mass_editing" eval="False" />
     <field ref="management_attribute_group" name="attribute_group_id" />
     <field name="attribute_set_ids" eval="[(6,0,[ref('attribute_set_medicaments')])]" />
-    <field ref="specific_product.field_product_template_cnk_code" name="field_id" />
+    <field ref="alc_product_pharmacy.field_product_template_cnk_code" name="field_id" />
     <field ref="product.model_product_template" name="model_id" />
     <field name="nature">native</field>
   </record>
@@ -460,7 +463,7 @@
       eval="[(6,0,[ref('attribute_set_medicaments'), ref('attribute_set_aliments'), ref('attribute_set_materiel')])]"
     />
     <field
-      ref="specific_product.field_product_template_veterinary_only"
+      ref="alc_product_pharmacy.field_product_template_veterinary_only"
       name="field_id"
     />
     <field ref="product.model_product_template" name="model_id" />

@@ -1,31 +1,24 @@
 <odoo>
-    <record id="product_normal_form_view" model="ir.ui.view">
-    <field name="model">product.product</field>
-    <field name="inherit_id" ref="specific_product.product_normal_form_view" />
-    <field name="arch" type="xml">
-      <field name="cnk_code" position="after">
-        <field name="code_cti" />
-      </field>
-    </field>
-  </record>
   <record id="product_template_form_view_cti" model="ir.ui.view">
     <field name="model">product.template</field>
-    <field name="inherit_id" ref="specific_product.product_template_only_form_view" />
+    <field name="inherit_id" ref="product.product_template_only_form_view" />
     <field name="arch" type="xml">
-      <xpath expr="//field[@name='cnk_code']" position="after">
+      <xpath expr="//field[@name='default_code']" position="after">
+        <field name="cnk_code" />
         <field name="code_cti" />
       </xpath>
     </field>
   </record>
   <record id="product_template_form_view_pharmacy_only" model="ir.ui.view">
     <field name="model">product.template</field>
-    <field
-      name="inherit_id"
-      ref="specific_product.web_published_product_template_form_view"
-    />
+    <field name="inherit_id" ref="product.product_template_form_view" />
     <field name="arch" type="xml">
-      <xpath expr="//field[@name='veterinary_only']" position="after">
-        <field name="pharmacy_only" />
+      <xpath expr="//page[@name='sales']" position="inside">
+        <group name="sales_restriction">
+          <field name="veterinary_only" />
+          <field name="pharmacy_only" />
+          <field name="belgium_only" />
+        </group>
       </xpath>
     </field>
   </record>
