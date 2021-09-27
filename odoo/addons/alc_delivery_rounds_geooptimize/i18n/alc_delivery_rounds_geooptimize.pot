@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_delivery_rounds_geooptimize
-#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:546
+#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:519
 #, python-format
 msgid "%s: Optimization api call failed"
 msgstr ""
@@ -47,7 +47,13 @@ msgid "Additional resources configuration (json)"
 msgstr ""
 
 #. module: alc_delivery_rounds_geooptimize
-#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:684
+#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:247
+#, python-format
+msgid "An optimization has been launched prior to the printing of the delivery slip. You'll be notified once the delivery slip is ready."
+msgstr ""
+
+#. module: alc_delivery_rounds_geooptimize
+#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:661
 #, python-format
 msgid "Can't export a not complete optimization for %s"
 msgstr ""
@@ -65,7 +71,7 @@ msgid "Change the default delivery duration for this specific partner"
 msgstr ""
 
 #. module: alc_delivery_rounds_geooptimize
-#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:557
+#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:530
 #, python-format
 msgid "Check geo optimization status for %s"
 msgstr ""
@@ -116,7 +122,7 @@ msgid "Error"
 msgstr ""
 
 #. module: alc_delivery_rounds_geooptimize
-#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:663
+#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:640
 #, python-format
 msgid "Export optimization result to operational planning for %s"
 msgstr ""
@@ -264,7 +270,7 @@ msgid "Optimization error message"
 msgstr ""
 
 #. module: alc_delivery_rounds_geooptimize
-#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:702
+#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:679
 #, python-format
 msgid "Optimization for %s exported to operational planning."
 msgstr ""
@@ -275,7 +281,7 @@ msgid "Optimization process max duration"
 msgstr ""
 
 #. module: alc_delivery_rounds_geooptimize
-#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:213
+#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:222
 #, python-format
 msgid "Optimization requests sent to external system."
 msgstr ""
@@ -306,9 +312,20 @@ msgid "Partner"
 msgstr ""
 
 #. module: alc_delivery_rounds_geooptimize
-#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:196
+#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:206
 #, python-format
 msgid "Please configure your timezone in your user preferences"
+msgstr ""
+
+#. module: alc_delivery_rounds_geooptimize
+#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:493
+#, python-format
+msgid "Print"
+msgstr ""
+
+#. module: alc_delivery_rounds_geooptimize
+#: model:ir.model.fields,field_description:alc_delivery_rounds_geooptimize.field_round_instance_print_all_deliveryslip_after_geo_optimization
+msgid "Print all deliveryslip after geo optimization"
 msgstr ""
 
 #. module: alc_delivery_rounds_geooptimize
@@ -353,19 +370,19 @@ msgid "The cost of a resource working for an hour."
 msgstr ""
 
 #. module: alc_delivery_rounds_geooptimize
-#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:657
+#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:634
 #, python-format
 msgid "The delivery round %s will be exported to tha mobile App into background."
 msgstr ""
 
 #. module: alc_delivery_rounds_geooptimize
-#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:619
+#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:595
 #, python-format
 msgid "The following partner ids are not expected into the optimization result: %s"
 msgstr ""
 
 #. module: alc_delivery_rounds_geooptimize
-#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:611
+#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:587
 #, python-format
 msgid "The following partners are not found into the optimization result: %s"
 msgstr ""
@@ -383,6 +400,18 @@ msgstr ""
 #. module: alc_delivery_rounds_geooptimize
 #: model:ir.model.fields,field_description:alc_delivery_rounds_geooptimize.field_round_instance_warehouse_id
 msgid "Warehouse id"
+msgstr ""
+
+#. module: alc_delivery_rounds_geooptimize
+#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:201
+#, python-format
+msgid "Work start time is only available for geo optimized delivery rounds"
+msgstr ""
+
+#. module: alc_delivery_rounds_geooptimize
+#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:490
+#, python-format
+msgid "Your delivery slip for %s is now ready. Click to print"
 msgstr ""
 
 #. module: alc_delivery_rounds_geooptimize
