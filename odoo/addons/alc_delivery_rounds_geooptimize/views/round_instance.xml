@@ -78,7 +78,7 @@
       <xpath expr="//div[@name='pickings_progress']" position="attributes">
         <attribute
           name="t-att-style"
-        >'background-color: ' + (record.state.raw_value=='draft' and 'lightgreen' or record.state.raw_value=='close' and 'lightsalmon' or record.state.raw_value=='pending' and 'sandybrown' or record.state.raw_value=='optimizing' and 'deepskyblue' or record.state.raw_value=='optimization_failure' and 'red' or record.is_all_deliveryslip_printed and 'lightsteelblue' or 'lightgray')</attribute>
+        >'background-color: ' + (record.state.raw_value=='draft' and 'lightgreen' or record.state.raw_value=='close' and 'lightsalmon' or record.state.raw_value=='pending' and 'sandybrown' or record.state.raw_value=='optimizing' and 'deepskyblue' or record.state.raw_value=='optimization_failure' and 'red' or record.is_all_deliveryslip_printed.raw_value and 'lightsteelblue' or 'lightgray')</attribute>
       </xpath>
       <xpath
         expr="//i[@class='oe_inline fa fa-spinner fa-truck-loading']"
