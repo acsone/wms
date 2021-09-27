@@ -48,9 +48,3 @@ class RoundInstance(models.Model):
         ids = [ship.id for ship in sorted_shipping_list]
 
         return self.env["stock.picking"].browse(ids)
-
-    @api.multi
-    def print_all_deliveryslip(self):
-        super(RoundInstance, self).print_all_deliveryslip()
-        shipping_done = self._get_sorted_shipping_ids()
-        return self.env["report"].get_action(shipping_done, "stock.report_deliveryslip")

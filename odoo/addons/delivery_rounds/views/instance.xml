@@ -116,7 +116,7 @@
                   <div
                     name="pickings_progress"
                     class="col-xs-12 o_kanban_primary_bottom"
-                    t-att-style="'background-color: ' + (record.state.raw_value=='draft' and 'lightgreen' or record.state.raw_value=='close' and 'lightsalmon' or record.state.raw_value=='pending' and 'sandybrown' or 'lightgray')"
+                    t-att-style="'background-color: ' + (record.state.raw_value=='draft' and 'lightgreen' or record.state.raw_value=='close' and 'lightsalmon' or record.state.raw_value=='pending' and 'sandybrown' or record.is_all_deliveryslip_printed and 'lightsteelblue' or 'lightgray')"
                   >
                     <button
                       class="btn btn-picking"
