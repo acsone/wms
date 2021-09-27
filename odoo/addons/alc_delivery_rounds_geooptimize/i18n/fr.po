@@ -54,6 +54,7 @@ msgstr "Paramètres additional de configuration des ressources (json)"
 msgid "An optimization has been launched prior to the printing of the delivery slip. You'll be notified once the delivery slip is ready."
 msgstr "Une optimisation a été lancée en tâche de fond. Vous serez notifié lorsque l'impression des bons de livraison sera possible."
 
+
 #. module: alc_delivery_rounds_geooptimize
 #: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:661
 #, python-format
@@ -331,6 +332,18 @@ msgid "Print all deliveryslip after geo optimization"
 msgstr "Imprimer les bons de livraison après optimisation géographique"
 
 #. module: alc_delivery_rounds_geooptimize
+#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:493
+#, python-format
+msgid "Print"
+msgstr ""
+
+#. module: alc_delivery_rounds_geooptimize
+#: model:ir.model.fields,field_description:alc_delivery_rounds_geooptimize.field_round_instance_print_all_deliveryslip_after_geo_optimization
+#, fuzzy
+msgid "Print all deliveryslip after geo optimization"
+msgstr "Permettre l'optimisation géographique"
+
+#. module: alc_delivery_rounds_geooptimize
 #: model:ir.ui.view,arch_db:alc_delivery_rounds_geooptimize.stock_config_settings_form_view
 msgid "Resource additional configuration"
 msgstr "Configuration supplémentaire des ressources"
@@ -415,6 +428,7 @@ msgstr "Work start time is only available for geo optimized delivery rounds"
 #, python-format
 msgid "Your delivery slip are now ready. Click to print"
 msgstr "Vos bons de livaison sont prêts. Cliquez pour imprimer."
+
 
 #. module: alc_delivery_rounds_geooptimize
 #: model:ir.ui.view,arch_db:alc_delivery_rounds_geooptimize.stock_config_settings_form_view
