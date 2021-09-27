@@ -487,8 +487,8 @@ class RoundInstance(models.Model):
         if self.print_all_deliveryslip_after_geo_optimization:
             action = self.print_all_deliveryslip()
             self.env.user.notify_info(
+                message=_("Your delivery slip are now ready. Click to print"),
                 title=self.display_name,
-                meessage=_("Your delivery slip are now ready. Click to print"),
                 sticky=True,
                 action=action,
                 action_link_name=_("Print"),
