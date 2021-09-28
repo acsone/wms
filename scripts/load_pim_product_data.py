@@ -128,7 +128,8 @@ IMGS = {"img", "img_2", "img_3", "img_4", "img_5"}
 
 def process_product_row(root, rd):
     product_domain = [("default_code", "=", rd["sku"])]
-    product = ENV["product.template"].search(product_domain)
+    model = ENV["product.template"].with_context(active_test=False)
+    product = model.search(product_domain)
     if product:
         translations = {}
         pfm = PRODUCT_FILE_MAPPING
