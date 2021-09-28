@@ -492,7 +492,6 @@ class RoundInstance(models.Model):
                 sticky=True,
                 action=action,
                 action_link_name=_("Print"),
-                show_reload=True,
             )
 
     def _sort_round_instance_customers(self):
