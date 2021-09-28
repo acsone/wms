@@ -1,0 +1,38 @@
+# -*- coding: utf-8 -*-
+# Copyright 2021 ACSONE SA/NV
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+
+from odoo.tests.common import SavepointCase
+
+
+class TestProduct(SavepointCase):
+    @classmethod
+    def setUpClass(cls):
+        super(TestProduct, cls).setUpClass()
+        cls.cat_web = cls.env.ref("alc_product_shop_category.master")
+        cls.model_cat = cls.env["product.category"]
+
+    def test_flow(self):
+        vals_cat_1 = {"name": "1", "parent_id": self.cat_web.id}
+        cat_1 = self.model_cat.create(vals_cat_1)
+        self.assertTrue(cat_1.is_web)
+
+        vals_cat_2 = {"name": "1", "parent_id": False}
+        cat_2 = self.model_cat.create(vals_cat_2)
+        self.assertFalse(cat_2.is_web)
+
+        vals_cat_1_child = {"name": "1", "parent_id": cat_1.id}
+        cat_1_child = self.model_cat.create(vals_cat_1_child)
+        self.assertTrue(cat_1_child.is_web)
+
+        cat_1.parent_id = False
+        self.assertFalse(cat_1.is_web)
+        self.assertFalse(cat_1_child.is_web)
+
+        vals_cat_2_child = {"name": "1", "parent_id": cat_2.id}
+        cat_2_child = self.model_cat.create(vals_cat_2_child)
+        self.assertFalse(cat_2_child.is_web)
+
+        cat_2.parent_id = self.cat_web
+        self.assertTrue(cat_2.is_web)
+        self.assertTrue(cat_2_child.is_web)

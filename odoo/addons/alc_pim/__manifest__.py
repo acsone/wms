@@ -9,8 +9,28 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["pim", "product_multi_category"],
-    "application": True,
-    "data": [],
+    "depends": [
+        "alc_pim_product",
+        "alc_product_shop_category",
+        "alc_product_link_notice",
+        "product_animal_species",
+        # data dependencies
+        "product_dimension",
+        "stock_production_lot_expiry",
+        "specific_product",
+        "specific_purchase",  # depends on alc_product_pharmacy, product_manufacturer
+        "alc_product_audit",
+        "product_brand",
+    ],
+    "application": False,
+    "data": [
+        "data/attribute_group.xml",
+        "data/attribute_set.xml",
+        "data/product_category.xml",
+        "data/attribute_attribute.xml",
+        "data/attribute_option.xml",
+        "data/product_brand.xml",
+    ],
     "demo": [],
+    "pre_init_hook": "pre_init_hook",
 }

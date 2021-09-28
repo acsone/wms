@@ -54,12 +54,6 @@
       <field name="categ_id" position="after">
         <field name="web_published" />
       </field>
-      <xpath expr="//page[@name='sales']" position="inside">
-        <group name="sales_restriction">
-          <field name="veterinary_only" />
-          <field name="belgium_only" />
-        </group>
-      </xpath>
     </field>
   </record>
   <record id="product_template_specific_tree_view" model="ir.ui.view">
@@ -88,9 +82,6 @@
     <field name="model">product.template</field>
     <field name="inherit_id" ref="product.product_template_only_form_view" />
     <field name="arch" type="xml">
-      <field name="default_code" position="after">
-        <field name="cnk_code" />
-      </field>
       <field name="default_code" position="attributes">
         <attribute name="attrs">{'readonly': True}</attribute>
       </field>
@@ -124,9 +115,6 @@
   </record>
   <!--Disable the view kanban on Products-->
   <record id="product.product_template_action" model="ir.actions.act_window">
-    <field name="view_mode">tree,form</field>
-  </record>
-  <record id="purchase.product_normal_action_puchased" model="ir.actions.act_window">
     <field name="view_mode">tree,form</field>
   </record>
   <record id="product.product_template_action_all" model="ir.actions.act_window">

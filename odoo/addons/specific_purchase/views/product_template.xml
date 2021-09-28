@@ -57,4 +57,7 @@
       </xpath>
     </field>
   </record>
+  <record id="purchase.product_normal_action_puchased" model="ir.actions.act_window">
+    <field name="view_mode">tree,form</field>
+  </record>
 </odoo>

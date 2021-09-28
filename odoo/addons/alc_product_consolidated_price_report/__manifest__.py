@@ -10,7 +10,7 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["alc_product_consolidated_price", "report_csv"],
+    "depends": ["alc_product_pharmacy", "alc_product_consolidated_price", "report_csv"],
     "data": ["reports/alc_product_consolidated_price_csv_report.xml"],
     "demo": [],
 }

@@ -1,0 +1,18 @@
+<odoo>
+    <record model="ir.ui.view" id="product_template_form_view">
+        <field name="name">product.product_template_form_view.links</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view" />
+        <field name="arch" type="xml">
+            <page name="general_information" position="inside">
+                <group name="links" string="Links">
+                    <group>
+                        <field name="link_info" />
+                        <field name="link_notice" />
+                        <field name="links_offline" />
+                    </group>
+                </group>
+            </page>
+        </field>
+    </record>
+</odoo>

@@ -179,7 +179,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:specific_product.field_product_product_veterinary_only
 #: model:ir.model.fields,field_description:specific_product.field_product_template_veterinary_only
 msgid "Veterinary only"
-msgstr "Seulemenet pour les vétérinaires"
+msgstr "Seulement pour les vétérinaires"
 
 #. module: specific_product
 #: model:ir.model,name:specific_product.model_product_storage_temperature

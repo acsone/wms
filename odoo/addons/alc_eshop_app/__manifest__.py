@@ -4,7 +4,7 @@
 
 {
     "name": "Alcyon E-Shop Application",
-    "description": """Install all tha apps and modules required by the E-Shop""",
+    "description": """Install all apps and modules required by the E-Shop""",
     "version": "10.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
