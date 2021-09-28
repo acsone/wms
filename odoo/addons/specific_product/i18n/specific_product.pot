@@ -14,20 +14,6 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: specific_product
-#: model:ir.model.fields,field_description:specific_product.field_delivery_carrier_belgium_only
-#: model:ir.model.fields,field_description:specific_product.field_product_product_belgium_only
-#: model:ir.model.fields,field_description:specific_product.field_product_template_belgium_only
-msgid "Belgium only"
-msgstr ""
-
-#. module: specific_product
-#: model:ir.model.fields,field_description:specific_product.field_delivery_carrier_cnk_code
-#: model:ir.model.fields,field_description:specific_product.field_product_product_cnk_code
-#: model:ir.model.fields,field_description:specific_product.field_product_template_cnk_code
-msgid "CNK"
-msgstr ""
-
-#. module: specific_product
 #: model:ir.model.fields,field_description:specific_product.field_product_storage_temperature_create_uid
 msgid "Created by"
 msgstr ""
@@ -158,23 +144,9 @@ msgid "Temperature (°C)"
 msgstr ""
 
 #. module: specific_product
-#: code:addons/specific_product/models/product_template.py:44
-#: sql_constraint:product.template:0
-#, python-format
-msgid "This cnk_code already exists."
-msgstr ""
-
-#. module: specific_product
 #: code:addons/specific_product/models/product_price_list.py:31
 #, python-format
 msgid "Unable to print pricelist for product with current model %s"
-msgstr ""
-
-#. module: specific_product
-#: model:ir.model.fields,field_description:specific_product.field_delivery_carrier_veterinary_only
-#: model:ir.model.fields,field_description:specific_product.field_product_product_veterinary_only
-#: model:ir.model.fields,field_description:specific_product.field_product_template_veterinary_only
-msgid "Veterinary only"
 msgstr ""
 
 #. module: specific_product
