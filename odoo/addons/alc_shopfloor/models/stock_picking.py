@@ -16,6 +16,7 @@ class StockPicking(models.Model):
         compute="_compute_picking_info",
         help="Technical field. Indicates number of operation included.",
     )
+    batch_id = fields.Many2one(related="wave_id")  # ODOO>=11 compatibility
 
     @api.depends(
         "pack_operation_ids",

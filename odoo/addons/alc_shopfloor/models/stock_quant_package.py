@@ -22,6 +22,12 @@ class StockQuantPackage(models.Model):
         readonly=True,
         help="Technical field. Pack operations moving this package.",
     )
+    planned_pack_operation_ids = fields.One2many(
+        comodel_name="stock.pack.operation",
+        inverse_name="result_package_id",
+        readonly=True,
+        help="Technical field. Move lines for which destination is this package.",
+    )
     reserved_pack_operation_ids = fields.One2many(
         comodel_name="stock.pack.operation",
         compute="_compute_reserved_pack_operations",

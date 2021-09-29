@@ -14,4 +14,8 @@
 }
         </field>
   </record>
+  <record id="scenario_cluster_picking" model="shopfloor.scenario">
+    <field name="name">Cluster Picking</field>
+    <field name="key">cluster_picking</field>
+</record>
 </odoo>

@@ -3,6 +3,7 @@
 # Copyright 2021 ACSONE SA/NV (https://www.acsone.eu)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 from odoo import fields, models
+from odoo.tools import float_compare
 
 
 class StockLocation(models.Model):
@@ -35,3 +36,37 @@ class StockLocation(models.Model):
             rec.update(
                 {"reserved_pack_operation_ids": rec._get_reserved_pack_operation_ids()}
             )
+
+    def planned_qty_in_location_is_empty(self, pack_operation_ids=None):
+        """Return if a location will be empty when pack operations will be confirmed
+
+        Used for the "zero check". We need to know if a location is empty, but since
+        we set the pack operations to "done" only at the end of the unload workflow, we
+        have to look at the qty_done of the pack operations from this location.
+
+        With `pack_operation_ids` we can force the use of the given pack operations for the check.
+        This allows to know that the location will be empty if we process only
+        these pack operations.
+        """
+        self.ensure_one()
+        quants = self.env["stock.quant"].search(
+            [("qty", ">", 0), ("location_id", "=", self.id)]
+        )
+        remaining = sum(quants.mapped("qty"))
+        move_line_qty_field = "qty_done"
+        if pack_operation_ids:
+            pack_operation_ids = pack_operation_ids.filtered(
+                lambda m: m.state not in ("cancel", "done")
+            )
+            move_line_qty_field = "product_qty"
+        else:
+            pack_operation_ids = self.env["stock.pack.operation"].search(
+                [
+                    ("state", "not in", ("cancel", "done")),
+                    ("location_id", "=", self.id),
+                    ("qty_done", ">", 0),
+                ]
+            )
+        planned = remaining - sum(pack_operation_ids.mapped(move_line_qty_field))
+        compare = float_compare(planned, 0, precision_rounding=0.01)
+        return compare <= 0

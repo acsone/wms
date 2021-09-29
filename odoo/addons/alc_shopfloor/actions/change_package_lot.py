@@ -14,7 +14,9 @@ class ChangePackageLot(Component):
     _inherit = "shopfloor.process.action"
     _usage = "change.package.lot"
 
-    def change_lot(self, move_line, lot, response_ok_func, response_error_func):
+    def change_lot(
+        self, pack_operation, old_lot, new_lot, response_ok_func, response_error_func
+    ):
         """Change the lot on the move line.
 
         :param response_ok_func: callable used to return ok response
@@ -30,9 +32,9 @@ class ChangePackageLot(Component):
         #   one the operator is moving, ask to scan a package
         lot_quants = self.env["stock.quant"].search(
             [
-                ("lot_id", "=", lot.id),
-                ("location_id", "=", move_line.location_id.id),
-                ("quantity", ">", 0),
+                ("lot_id", "=", new_lot.id),
+                ("location_id", "=", pack_operation.location_id.id),
+                ("qty", ">", 0),
             ]
         )
         package_quants = lot_quants.filtered(lambda quant: quant.package_id)
@@ -43,44 +45,49 @@ class ChangePackageLot(Component):
             # If we have both units and package, they have to scan the package
             # first.
             return response_error_func(
-                move_line,
-                message=self.msg_store.several_packs_in_location(move_line.location_id),
+                pack_operation,
+                message=self.msg_store.several_packs_in_location(
+                    pack_operation.location_id
+                ),
             )
         if len(package_quants) == 1:
             # change the package directly
             package = package_quants.package_id
             return self.change_package(
-                move_line, package, response_ok_func, response_error_func
+                pack_operation, package, response_ok_func, response_error_func
             )
         return self._change_pack_lot_change_lot(
-            move_line, lot, response_ok_func, response_error_func
+            pack_operation, old_lot, new_lot, response_ok_func, response_error_func
         )
 
     def _change_pack_lot_change_lot(
-        self, move_line, lot, response_ok_func, response_error_func
+        self, pack_operation, old_lot, new_lot, response_ok_func, response_error_func
     ):
         def is_lesser(value, other, rounding):
             return float_compare(value, other, precision_rounding=rounding) == -1
 
         inventory = self._actions_for("inventory")
-        product = move_line.product_id
-        if lot.product_id != product:
+        product = pack_operation.product_id
+        if new_lot.product_id != product:
             return response_error_func(
-                move_line, message=self.msg_store.lot_on_wrong_product(lot.name)
+                pack_operation,
+                message=self.msg_store.lot_on_wrong_product(new_lot.name),
             )
-        previous_lot = move_line.lot_id
+        previous_lot = old_lot
+
         # Changing the lot on the move line updates the reservation on the quants
 
         message_parts = []
 
-        values = {"lot_id": lot.id}
+        values = {"lot_id": new_lot.id}
 
         available_quantity = self.env["stock.quant"]._get_available_quantity(
-            product, move_line.location_id, lot_id=lot, strict=True
+            product, pack_operation.location_id, lot_id=new_lot, strict=True
         )
 
-        if move_line.package_id:
-            move_line.package_level_id.explode_package()
+        if pack_operation.package_id:
+            # TODO ?????
+            # pack_operation.package_level_id.explode_package()
             values["package_id"] = False
 
         to_assign_moves = self.env["stock.move"]
@@ -88,23 +95,25 @@ class ChangePackageLot(Component):
             available_quantity, precision_rounding=product.uom_id.rounding
         ):
             quants = self.env["stock.quant"]._gather(
-                product, move_line.location_id, lot_id=lot, strict=True
+                product, pack_operation.location_id, lot_id=new_lot, strict=True
             )
             if quants:
                 # we have quants but they are all reserved by other lines:
                 # unreserve the other lines and reserve them again after
                 unreservable_lines = self.env["stock.pack.operation"].search(
                     [
-                        ("lot_id", "=", lot.id),
+                        ("lot_id", "=", new_lot.id),
                         ("product_id", "=", product.id),
-                        ("location_id", "=", move_line.location_id.id),
+                        ("location_id", "=", pack_operation.location_id.id),
                         ("qty_done", "=", 0),
                     ]
                 )
                 if not unreservable_lines:
                     return response_error_func(
-                        move_line,
-                        message=self.msg_store.cannot_change_lot_already_picked(lot),
+                        pack_operation,
+                        message=self.msg_store.cannot_change_lot_already_picked(
+                            new_lot
+                        ),
                     )
                 available_quantity = sum(unreservable_lines.mapped("product_qty"))
                 to_assign_moves = unreservable_lines.move_id
@@ -120,19 +129,19 @@ class ChangePackageLot(Component):
                 # we post an inventory to add the missing quantity, and a second
                 # draft inventory to check later
                 inventory.create_stock_correction(
-                    move_line.move_id,
-                    move_line.location_id,
+                    pack_operation.move_id,
+                    pack_operation.location_id,
                     self.env["stock.quant.package"].browse(),
-                    lot,
-                    move_line.product_qty,
+                    new_lot,
+                    pack_operation.product_qty,
                 )
                 inventory.create_control_stock(
-                    move_line.location_id,
-                    move_line.product_id,
-                    move_line.package_id,
-                    move_line.lot_id,
+                    pack_operation.location_id,
+                    pack_operation.product_id,
+                    pack_operation.package_id,
+                    pack_operation.lot_id,
                     _("Pick: stock issue on lot: {} found in {}").format(
-                        lot.name, move_line.location_id.name
+                        new_lot.name, pack_operation.location_id.name
                     ),
                 )
                 message_parts.append(
@@ -143,57 +152,62 @@ class ChangePackageLot(Component):
         if not float_is_zero(
             available_quantity, precision_rounding=product.uom_id.rounding
         ) and is_lesser(
-            available_quantity, move_line.product_qty, product.uom_id.rounding
+            available_quantity, pack_operation.product_qty, product.uom_id.rounding
         ):
             new_uom_qty = product.uom_id._compute_quantity(
-                available_quantity, move_line.product_uom_id, rounding_method="HALF-UP"
+                available_quantity,
+                pack_operation.product_uom_id,
+                rounding_method="HALF-UP",
             )
             values["product_uom_qty"] = new_uom_qty
 
-        move_line.write(values)
+        pack_operation.write(values)
 
         if "product_uom_qty" in values:
             # when we change the quantity of the move, the state
             # will still be "assigned" and be skipped by "_action_assign",
             # recompute the state to be "partially_available"
-            move_line.move_id._recompute_state()
+            pack_operation.move_id._recompute_state()
 
         # if the new package has less quantities, assign will create new move
         # lines
-        move_line.move_id._action_assign()
+        pack_operation.move_id._action_assign()
 
         # Find other available goods for the lines which were using the
         # lot before...
         to_assign_moves._action_assign()
 
-        message = self.msg_store.lot_replaced_by_lot(previous_lot, lot)
+        message = self.msg_store.lot_replaced_by_lot(previous_lot, new_lot)
         if message_parts:
             message["body"] = "{} {}".format(message["body"], " ".join(message_parts))
-        return response_ok_func(move_line, message=message)
+        return response_ok_func(pack_operation, message=message)
 
-    def _package_content_replacement_allowed(self, package, move_line):
+    def _package_content_replacement_allowed(self, package, pack_operation):
         # we can't replace by a package which doesn't contain the product...
-        return move_line.product_id in package.quant_ids.product_id
+        return pack_operation.product_id in package.quant_ids.product_id
 
-    def change_package(self, move_line, package, response_ok_func, response_error_func):
+    def change_package(
+        self, pack_operation, package, response_ok_func, response_error_func
+    ):
         # Prevent change if package is already set and it's the same
-        if move_line.package_id == package:
+        if pack_operation.package_id == package:
             return response_error_func(
-                move_line,
+                pack_operation,
                 message=self.msg_store.package_change_error_same_package(package),
             )
 
         # prevent to replace a package by a package that would not satisfy the
         # move (different product)
         content_replacement_allowed = self._package_content_replacement_allowed(
-            package, move_line
+            package, pack_operation
         )
         if not content_replacement_allowed:
             return response_error_func(
-                move_line, message=self.msg_store.package_different_content(package)
+                pack_operation,
+                message=self.msg_store.package_different_content(package),
             )
 
-        previous_package = move_line.package_id
+        previous_package = pack_operation.package_id
 
         # /!\ be sure to box the side-effects before calling "replace_package"
         # in the savepoint, as we catch the error, we must be sure that any
@@ -202,10 +216,10 @@ class ChangePackageLot(Component):
             with self.env.cr.savepoint():
                 # if no quantity is available in the package, this call will
                 # raise a UserError, which will revert the savepoint
-                move_line.replace_package(package)
+                pack_operation.replace_package(package)
         except exceptions.UserError as err:
             return response_error_func(
-                move_line,
+                pack_operation,
                 message=self.msg_store.package_change_error(package, err.name),
             )
 
@@ -215,4 +229,4 @@ class ChangePackageLot(Component):
             )
         else:
             message = self.msg_store.units_replaced_by_package(package)
-        return response_ok_func(move_line, message=message)
+        return response_ok_func(pack_operation, message=message)
