@@ -159,7 +159,7 @@ class ExportReportTurnover(models.TransientModel):
             same_month_last_year["bool"] = data_by_months["Month"].eq(date_to_get)
             index = same_month_last_year[same_month_last_year["bool"]].index.values
 
-            if index:
+            if index is not None:
                 start_year = str(last_year) + "-10-01"
                 last_year = pd.DataFrame()
                 last_year["bool"] = data_by_months["Month"].eq(start_year)
@@ -772,6 +772,9 @@ class ExportReportTurnover(models.TransientModel):
 
             credit_debit_balance = credit_debit_balance.iloc[index_two_ago[0] :]
         else:
+            if index_this_year is None:
+                index_this_year = [-1]
+
             credit_debit_last_year = credit_debit_balance_month.iloc[
                 index_last_year[0] : index_this_year[0]
             ]
@@ -802,6 +805,7 @@ class ExportReportTurnover(models.TransientModel):
             "Credit notes (stock moves)",
             "Turnover (accounting)",
         ]
+        credit_debit_balance.reset_index(drop=True, inplace=True)
         credit_debit_balance_by_year = pd.DataFrame(data=by_year_grouping, columns=cols)
         credit_debit_balance_by_year["Delta accounting - Stock moves"] = (
             credit_debit_balance_by_year["Turnover (stock moves)"]
@@ -809,6 +813,8 @@ class ExportReportTurnover(models.TransientModel):
         ) / credit_debit_balance_by_year["Turnover (accounting)"]
 
         years = credit_debit_balance_by_year["Year"]
+
+        credit_debit_balance_by_year.reset_index(drop=True, inplace=True)
         # count business days
         self._count_business_days(credit_debit_balance_by_year, "Year", "Year+1", today)
         self._compute_global_grow(
