@@ -21,7 +21,6 @@ class ClusterPickingDeliveryCommonFeatures(AlcClusterPickingCommonFeatures):
         cls.delivery_template1 = cls.env["round.template"].create(
             {
                 "name": "Unittest delivery template 1",
-                "allow_cluster_picking": True,
                 "operator_ids": [(4, cls.operator_1.id), (4, cls.operator_2.id)],
             }
         )
@@ -37,7 +36,6 @@ class ClusterPickingDeliveryCommonFeatures(AlcClusterPickingCommonFeatures):
         cls.delivery_template2 = cls.env["round.template"].create(
             {
                 "name": "Unittest delivery template 2",
-                "allow_cluster_picking": True,
                 "operator_ids": [(4, cls.operator_1.id)],
             }
         )
@@ -69,3 +67,6 @@ class ClusterPickingDeliveryCommonFeatures(AlcClusterPickingCommonFeatures):
         )
         pickings = cls.pick6
         cls.delivery_round1._assign_pickings(pickings)
+
+        pickings2 = cls.pick4 | cls.pick5
+        cls.delivery_round2._assign_pickings(pickings2)

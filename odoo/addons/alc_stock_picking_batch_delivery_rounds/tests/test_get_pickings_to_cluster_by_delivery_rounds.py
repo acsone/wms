@@ -9,21 +9,13 @@ class TestGetPickingsToClusterByDeliveryRounds(ClusterPickingDeliveryCommonFeatu
     @classmethod
     def setUpClass(cls):
         super(TestGetPickingsToClusterByDeliveryRounds, cls).setUpClass()
-        picks_ali = cls.env["stock.picking"].search(
-            [
-                ("picking_type_subcode", "=", "PICK"),
-                ("picking_type_id", "=", cls.picking_type_ali.id),
-            ]
+
+        cls.stock_location = cls.env.ref("stock.stock_location_stock")
+        cls.stock_location.write(
+            {"zone": "G", "corridor": "A", "shelf": "42", "height": "4", "box": "B12"}
         )
-        for pick in picks_ali:
-            pick.force_assign()
-
-        picks_ali[0].write({"priority": "3", "rank": 300})
-        picks_ali[1].write({"priority": "3", "rank": 700})
-        picks_ali[2].write({"priority": "1", "rank": 1300})
-
-        pickings2 = cls.pick4 | cls.pick5
-        cls.delivery_round2._assign_pickings(pickings2)
+        cls.delivery_round2.picking_launched = True
+        cls.delivery_round1.picking_launched = True
 
     def test_get_pickings_by_delivery_rounds_operator_allowed_on_both_delivery_rounds(
         self,

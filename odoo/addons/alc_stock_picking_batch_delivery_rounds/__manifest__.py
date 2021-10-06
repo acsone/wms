@@ -12,8 +12,11 @@
         "alc_delivery_rounds_operator",
         "alc_stock_picking_batch_creation",
         "delivery_rounds",
+        "stock",
+        "stock_location",
+        "specific_stock",
         "stock_picking_batch_creation",
     ],
-    "data": ["views/round_template.xml"],
+    "data": ["views/stock_picking_wave.xml"],
     "demo": [],
 }

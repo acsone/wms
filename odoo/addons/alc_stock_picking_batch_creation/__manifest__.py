@@ -21,6 +21,7 @@
         "data/devices.xml",
         "data/res_partner_category.xml",
         "views/stock_device_type.xml",
+        "views/stock_picking_wave.xml",
     ],
     "demo": [],
 }

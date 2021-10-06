@@ -10,15 +10,6 @@ class MakePickingBatch(models.TransientModel):
     _inherit = "make.picking.batch"
     picking_type_ids = fields.Many2many(domain="[('subcode','=','PICK')]")
 
-    def _change_priority_on_unselected_pickings(self, pickings):
-        pickings = super(
-            MakePickingBatch, self
-        )._change_priority_on_unselected_pickings(pickings)
-        if pickings:
-            for picking in pickings:
-                picking.rank = 80000
-        return pickings
-
     def _compute_device_to_use(self, first_picking_to_cluster):
         recommended_device = None
         palette = self.env.ref(
@@ -32,8 +23,10 @@ class MakePickingBatch(models.TransientModel):
             "__setup__.stock_picking_type_ali", raise_if_not_found=False
         )
 
+        partner = first_picking_to_cluster.partner_id
         if (
-            first_picking_to_cluster.partner_id.category_id == use_palette
+            partner.category_id == use_palette
+            or partner.parent_id.category_id == use_palette
             and self.picking_type_ids in [picking_ali]
         ):
             recommended_device = palette
