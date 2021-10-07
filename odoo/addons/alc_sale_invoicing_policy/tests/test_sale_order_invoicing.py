@@ -4,6 +4,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 
 import logging
+from datetime import datetime, timedelta
 
 from odoo import fields
 from odoo.tests.common import SavepointCase
@@ -312,3 +313,82 @@ class TestSaleOrderInvoicing(SavepointCase):
         self.assertFalse(new_invoices.mapped("payment_mode_id"))
         self.assertEqual("open", new_invoices.state)
         self.assertListEqual(["open", "open"], draft_invoices.mapped("state"))
+
+    def test_03(self):
+        """
+        Data:
+            * 2 SO to invoice together without payment_mode
+            * 2 SO to invoice together with payment_mode
+            * payment_mode:
+                invoice_frequency: False
+                invoice_grouping: False
+            * partner:
+                invoice_frequency: 14_days
+                invoice_day: on tuesday starting today
+                invoice_grouping: all_at_once
+        Test Case
+            run scheduller for a normal day that is a tuesday
+        Expected Result:
+            2 invoices must be created:
+                1 invoice without paument_mode
+                1 invoice with payment_mode
+        """
+        today = datetime.now()
+        self.partner.write(
+            {
+                "invoice_frequency": "14_days",
+                "next_invoice_date": today,
+                "invoice_grouping": "all_at_once",
+            }
+        )
+        self.assertEqual(
+            self.partner.next_invoice_date, datetime.strftime(today, "%Y-%m-%d")
+        )
+        self._deliver_orders(self.mergeable_orders)
+        invoices = self.AccountInvoice.search([])
+        self.SaleOrder._cron_invoice_makeall(0)
+        new_invoices = self.AccountInvoice.search([]) - invoices
+        self.assertEqual(2, len(new_invoices))
+        next_invoice_date = today + timedelta(days=14)
+        self.assertEqual(
+            self.partner.next_invoice_date,
+            datetime.strftime(next_invoice_date, "%Y-%m-%d"),
+        )
+
+    def test_04(self):
+        """
+        Data:
+            * 2 SO to invoice together without payment_mode
+            * 2 SO to invoice together with payment_mode
+            * payment_mode:
+                invoice_frequency: False
+                invoice_grouping: False
+            * partner:
+                invoice_frequency: 14_days
+                invoice_day: on tuesday starting today
+                invoice_grouping: all_at_once
+        Test Case
+            run scheduller for a normal day that is a wednesday
+        Expected Result:
+            No invoices created
+        """
+        today = datetime.now()
+        date_invoice = today + timedelta(days=2)
+        self.partner.write(
+            {
+                "invoice_frequency": "14_days",
+                "next_invoice_date": date_invoice,
+                "invoice_grouping": "all_at_once",
+            }
+        )
+        self.assertEqual(
+            self.partner.next_invoice_date, datetime.strftime(date_invoice, "%Y-%m-%d")
+        )
+        self._deliver_orders(self.mergeable_orders)
+        invoices = self.AccountInvoice.search([])
+        self.SaleOrder._cron_invoice_makeall(0)
+        new_invoices = self.AccountInvoice.search([]) - invoices
+        self.assertEqual(0, len(new_invoices))
+        self.assertEqual(
+            self.partner.next_invoice_date, datetime.strftime(date_invoice, "%Y-%m-%d")
+        )
