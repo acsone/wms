@@ -8,6 +8,10 @@
       <xpath expr="//page[@name='accounting']/group" position="inside">
         <group>
           <field name="invoice_frequency" />
+          <field
+            name="next_invoice_date"
+            attrs="{'invisible': [('invoice_frequency', '!=', '14_days')]}"
+          />
           <field name="invoice_grouping" />
         </group>
       </xpath>

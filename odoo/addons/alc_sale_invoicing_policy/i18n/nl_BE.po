@@ -29,6 +29,11 @@ msgid "10 Days"
 msgstr "10 Days"
 
 #. module: alc_sale_invoicing_policy
+#: selection:res.partner,invoice_frequency:0
+msgid "14 days"
+msgstr ""
+
+#. module: alc_sale_invoicing_policy
 #: selection:account.payment.mode,invoice_grouping:0
 #: selection:res.partner,invoice_grouping:0
 msgid "All at once"
@@ -69,6 +74,12 @@ msgstr "Invoice grouping"
 #, fuzzy
 msgid "Invoicing"
 msgstr "Factuur"
+
+#. module: alc_sale_invoicing_policy
+#: model:ir.model.fields,field_description:alc_sale_invoicing_policy.field_res_partner_next_invoice_date
+#: model:ir.model.fields,field_description:alc_sale_invoicing_policy.field_res_users_next_invoice_date
+msgid "Next invoice date"
+msgstr ""
 
 #. module: alc_sale_invoicing_policy
 #: model:ir.model,name:alc_sale_invoicing_policy.model_res_partner
