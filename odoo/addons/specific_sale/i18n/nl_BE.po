@@ -581,7 +581,7 @@ msgstr ""
 #. module: specific_sale
 #: model:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
 msgid "Taxes"
-msgstr "Belastingen"
+msgstr "BTW"
 
 #. module: specific_sale
 #: model:exception.rule,description:specific_sale.no_backorder

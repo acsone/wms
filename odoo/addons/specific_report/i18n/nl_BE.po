@@ -1196,7 +1196,7 @@ msgstr "Sub<br/>totaal"
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "Taxes"
-msgstr "Belastingen"
+msgstr "BTW"
 
 #. module: specific_report
 #: code:addons/specific_report/models/sale_order.py:79
