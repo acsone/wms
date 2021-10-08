@@ -17,6 +17,7 @@
     <field name="arch" type="xml">
       <field name="usage" position="after">
         <field name="kind" />
+        <field name="final_reserve_location_id" />
       </field>
     </field>
   </record>
