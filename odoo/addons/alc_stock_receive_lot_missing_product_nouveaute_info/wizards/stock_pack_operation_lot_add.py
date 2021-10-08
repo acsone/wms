@@ -28,7 +28,7 @@ class StockPackOperationLotAdd(models.TransientModel):
 
     def _check_product_is_new(self, operation):
         storage_type_new = self.env.ref(
-            "alc_stock_storage_type.package_st_M_M_Nouveaute"
+            "alc_stock_storage_type.package_st_M_M_Nouveaute", raise_if_not_found=False
         )
         product = operation.product_id
         is_new = (

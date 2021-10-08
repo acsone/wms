@@ -15,7 +15,6 @@ class TestProductTemplate(SavepointCase):
         cls.partner = cls.env["res.partner"].create(
             {"name": "Test partner", "ref": "85789284"}
         )
-
         cls.stock_location = cls.env.ref("stock.stock_location_stock")
 
         cls.route_buy = cls.env.ref("purchase.route_warehouse0_buy")

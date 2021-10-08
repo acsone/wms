@@ -3,6 +3,9 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from psycopg2.extensions import AsIs
+from datetime import datetime
+
+from dateutil.relativedelta import relativedelta
 
 from odoo import api, fields, models
 
@@ -106,7 +109,12 @@ class ProductTemplate(models.Model):
     dimensions_in_stock = fields.Boolean(
         default=False,
         compute="_compute_dimensions_in_stock",
-        search="_search_dimensions_in_stock",
+        search="_search_dimensions_in_stock",)
+    new_product_with_old_date = fields.Boolean(
+        default=False,
+        compute="_compute_new_product_with_old_date",
+        store=True,
+        index=True,
     )
 
     has_anomaly = fields.Boolean(
@@ -546,6 +554,27 @@ class ProductTemplate(models.Model):
     def _search_dimensions_in_stock(self, operator, value):
         ids = self._get_product_dimensions_in_stock(no_dimensions=False)
         return [("id", "in", ids)]
+        
+    @api.depends("product_package_storage_type_id")
+    def _compute_new_product_with_old_date(self):
+        storage_type_new = self.env.ref(
+            "alc_stock_storage_type.package_st_M_M_Nouveaute", raise_if_not_found=False
+        )
+        previous_month = datetime.now() - relativedelta(months=1)
+        for product in self:
+            if storage_type_new and product.create_date:
+                product_is_new = (
+                    product.product_package_storage_type_id.id == storage_type_new.id
+                )
+                product_is_older_than_a_month = (
+                    datetime.strptime(product.create_date, "%Y-%m-%d %H:%M:%S")
+                    < previous_month
+                )
+                product.new_product_with_old_date = bool(
+                    product_is_new and product_is_older_than_a_month
+                )
+            else:
+                product.new_product_with_old_date = False
 
     @api.depends(
         "min_max_on_command_reappro",
@@ -564,6 +593,7 @@ class ProductTemplate(models.Model):
         "not_sold_on_website",
         "mto_stock_5_days",
         "no_dimensions_in_stock",
+        "new_product_with_old_date",
     )
     def _compute_has_anomaly(self):
         for product in self:
@@ -584,6 +614,7 @@ class ProductTemplate(models.Model):
                 or product.not_sold_on_website
                 or product.mto_stock_5_days
                 or product.no_dimensions_in_stock
+                or product.new_product_with_old_date
             ):
                 product.has_anomaly = True
             else:
@@ -591,6 +622,7 @@ class ProductTemplate(models.Model):
 
     def _search_has_anomaly(self, operator, value):
         domain = [
+            "|",
             "|",
             "|",
             "|",
@@ -615,6 +647,7 @@ class ProductTemplate(models.Model):
             ("has_no_dimensions", "=", True),
             ("packaging_has_no_dimensions", "=", True),
             ("not_sold_on_website", "=", True),
+            ("new_product_with_old_date", "=", True),
         ]
 
         ids_5_days = self._search_mto_stock_5_days(operator, value)
