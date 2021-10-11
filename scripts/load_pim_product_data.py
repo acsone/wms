@@ -1,11 +1,14 @@
 #!/usr/bin/env python2
 # -*- coding: utf-8 -*-
 
+import logging
 import os
 
 import click
 import click_odoo
 import unicodecsv as csv
+
+_logger = logging.getLogger("PIM IMPORT")
 
 ENV = env  # pylint: disable=undefined-variable  # noqa
 
@@ -24,6 +27,8 @@ def process_csv_file(root, filename, process_row_dict, delimiter=","):
             record = None
         if not record:
             missing_records.append(row)
+    if missing_records:
+        _logger.warning(missing_records)
     return missing_records
 
 
