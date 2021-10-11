@@ -18,7 +18,10 @@ def process_csv_file(root, filename, process_row_dict, delimiter=","):
     missing_records = []
     for row in csv_reader:
         row_dict = dict(zip(headers, row))
-        record = process_row_dict(img_root, row_dict)
+        try:
+            record = process_row_dict(img_root, row_dict)
+        except Exception:
+            record = None
         if not record:
             missing_records.append(row)
     return missing_records
