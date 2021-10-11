@@ -17,6 +17,7 @@ TopCustomer = namedtuple(
         "ref",
         "name",
         "street",
+        "street2",
         "zip",
         "city",
         "longitude",
@@ -53,6 +54,36 @@ class InentoryToPoBuilder(object):
                     "res_id": self.top_400_tag.id,
                 }
             )
+        self.top_800_tag = self.env.ref(
+            "__setup__.res_partner_category_top_800", raise_if_not_found=False
+        )
+        if not self.top_800_tag:
+            self.top_800_tag = self.env["res.partner.category"].create(
+                {"name": "TOP800"}
+            )
+            self.env["ir.model.data"].create(
+                {
+                    "module": "__setup__",
+                    "name": "res_partner_category_top_800",
+                    "model": self.top_800_tag._name,
+                    "res_id": self.top_800_tag.id,
+                }
+            )
+        self.top_2000_tag = self.env.ref(
+            "__setup__.res_partner_category_top_2000", raise_if_not_found=False
+        )
+        if not self.top_2000_tag:
+            self.top_2000_tag = self.env["res.partner.category"].create(
+                {"name": "TOP2000"}
+            )
+            self.env["ir.model.data"].create(
+                {
+                    "module": "__setup__",
+                    "name": "res_partner_category_top_2000",
+                    "model": self.top_2000_tag._name,
+                    "res_id": self.top_2000_tag.id,
+                }
+            )
 
     def load_partner_by_ref(self):
         _logger.info("Loads partner by ref")
@@ -73,9 +104,12 @@ class InentoryToPoBuilder(object):
 
     def run(self):
         self.error_msgs = []
-        self._reset_top_400()
+        self._reset_all()
         for top_customer in self._iter_read_file():
             self._define_delivery_window(top_customer)
+
+    def _reset_all(self):
+        self.env["alc.delivery.window"].search([]).unlink()
 
     def _reset_top_400(self):
         top_400_partners = self.env["res.partner"].search(
@@ -86,7 +120,7 @@ class InentoryToPoBuilder(object):
         top_400_partners.write({"category_id": [(3, self.top_400_tag.id)]})
 
     def _iter_read_file(self):
-        reader = csv.DictReader(self.csvfile, delimiter=",")
+        reader = csv.DictReader(self.csvfile, delimiter=";")
         for row in reader:
             yield TopCustomer(**row)
 
@@ -105,6 +139,16 @@ class InentoryToPoBuilder(object):
             and self.top_400_tag not in partners.mapped("category_id")
         ):
             values["category_id"] = [(4, self.top_400_tag.id)]
+        if (
+            top_customer.rating_level == "TOP800"
+            and self.top_800_tag not in partners.mapped("category_id")
+        ):
+            values["category_id"] = [(4, self.top_800_tag.id)]
+        if (
+            top_customer.rating_level == "TOP2000"
+            and self.top_2000_tag not in partners.mapped("category_id")
+        ):
+            values["category_id"] = [(4, self.top_2000_tag.id)]
         if not top_customer.start_1 and not top_customer.start_2:
             _logger.info("No window defined for %s", top_customer.name)
             if values:
@@ -144,7 +188,8 @@ class InentoryToPoBuilder(object):
         }
 
     def _time_str_to_float(self, time_str):
-        dt = datetime.strptime(time_str, "%H:%M")
+        dt = datetime.strptime(time_str, "%I:%M:%S %p")
+        # dt = datetime.strptime(time_str, "%H:%M")
         return dt.hour + dt.minute / 60.0
 
 
