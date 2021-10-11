@@ -25,6 +25,7 @@ class ProductTemplate(models.Model):
         self.write(vals)
         for lang in translations:
             self.with_context(lang=lang).write(translations[lang])
+        img_start = len(self.image_ids)
         for sequence, img_path in enumerate(imgs):
             vals_img = {
                 "name": os.path.basename(img_path),
@@ -34,7 +35,7 @@ class ProductTemplate(models.Model):
             }
             img = self.env["storage.image"].create(vals_img)
             vals_rel = {
-                "sequence": sequence,
+                "sequence": img_start + sequence,
                 "image_id": img.id,
                 "product_tmpl_id": self.id,
             }

@@ -134,6 +134,15 @@ PRODUCT_FILE_MAPPING = {
 IMGS = {"img", "img_2", "img_3", "img_4", "img_5"}
 
 
+def process_imgs_fields(root, rd, product):
+    existing_images = product.mapped("image_ids.image_id.name")  # slow? SQL needed?
+    return [
+        os.path.join(root, rd[img])
+        for img in IMGS
+        if rd[img] and os.path.basename(rd[img]) not in existing_images
+    ]
+
+
 def process_product_row(root, rd):
     product_domain = [("default_code", "=", rd["sku"])]
     model = ENV["product.template"].with_context(active_test=False)
@@ -144,7 +153,7 @@ def process_product_row(root, rd):
         vals = {pfm[f][0]: pfm[f][1](f, rd[f]) for f in pfm}
         translations["fr_BE"] = process_lang_fields(rd, "fr_BE")
         translations["nl_BE"] = process_lang_fields(rd, "nl_BE")
-        imgs = [os.path.join(root, rd[img]) for img in IMGS if rd[img]]
+        imgs = process_imgs_fields(root, rd, product)
         desc = "PIM Import Product %s" % product.name
         product.with_delay(description=desc)._pim_import(vals, translations, imgs)
     return product
