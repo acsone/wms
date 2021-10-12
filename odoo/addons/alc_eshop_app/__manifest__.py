@@ -9,7 +9,7 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["alc_eshop", "alc_eshop_filter_data"],
+    "depends": ["alc_eshop", "alc_search_engine"],
     "application": True,
     "data": [],
     "demo": [],

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo noupdate="0">
+    <record id="ir_exp_shopinvader_variant_barcode" model="ir.exports.line">
+        <field name="name">barcode</field>
+        <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
+    </record>
+    <record id="ir_exp_shopinvader_variant_belgium_only" model="ir.exports.line">
+        <field name="name">belgium_only</field>
+        <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
+    </record>
+    <record id="ir_exp_shopinvader_variant_cnk_code" model="ir.exports.line">
+        <field name="name">cnk_code</field>
+        <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
+    </record>
+    <record
+    id="ir_exp_shopinvader_variant_category_lot_expiry_field_name"
+    model="ir.exports.line"
+  >
+        <field name="name">category_lot_expiry_field_name</field>
+        <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
+    </record>
+    <record id="ir_exp_shopinvader_variant_create_date" model="ir.exports.line">
+        <field name="name">create_date</field>
+        <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
+    </record>
+    <record id="ir_exp_shopinvader_variant_vendor_product_code" model="ir.exports.line">
+        <field name="name">vendor_product_code</field>
+        <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
+    </record>
+</odoo>
