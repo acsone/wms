@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2019 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo noupdate="0">
+
+    <record id="shopinvader_auth_key" model="auth.api.key">
+        <field name="name">shopinvader</field>
+        <field name="user_id" ref="base.user_root" />
+    </record>
+
+</odoo>
