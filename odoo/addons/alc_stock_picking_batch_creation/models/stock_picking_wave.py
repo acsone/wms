@@ -19,3 +19,12 @@ class StockPickingWave(models.Model):
     def _compute_wave_volume_liter(self):
         for rec in self:
             rec.wave_volume_liter = rec.wave_volume * 1000.0
+
+    def confirm_picking(self):
+        """
+        Context key added to hack the action_assign on the pickings in the case of a wave picking to be validated
+        (because in the case of Alcyon, pickings are already assigned)
+        """
+        return super(
+            StockPickingWave, self.with_context(from_cluster_confirm=True)
+        ).confirm_picking()

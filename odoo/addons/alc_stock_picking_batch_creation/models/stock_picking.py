@@ -21,3 +21,17 @@ class StockPicking(models.Model):
             rec.total_volume_batch_picking_liter = (
                 rec.total_volume_batch_picking * 1000.0
             )
+
+    def action_assign(self):
+        """
+        Hack: When we confirm a wave picking (confirm_picking method on stock_picking_wave),
+        the basic mecanism assign the pickings to start the cluster. In the case of Alcyon,
+        pickings are already assigned. We don't need to go through the mecanism once again.
+        """
+        self2 = None
+        if self.env.context.get("from_cluster_confirm"):
+            self2 = self.filtered(
+                lambda p: p.state not in ("assigned", "partially_available")
+            )
+
+        return True if not self2 else super(StockPicking, self).action_assign()
