@@ -19,7 +19,7 @@
 #
 ##############################################################################
 
-from odoo import _, fields, models
+from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
 
@@ -37,6 +37,19 @@ class StockLocation(models.Model):
         help="Destination for putaway strategy when the poduct must be stored "
         "in reserve",
     )
+
+    final_reserve_location_id = fields.Many2one(
+        "stock.location",
+        "Reserve",
+        domain=[("kind", "=", "reserve")],
+        help="Destination when the product must be stored " "in reserve",
+        compute="_compute_finale_reserve_location_id",
+    )
+
+    @api.depends("reserve_location_id")
+    def _compute_finale_reserve_location_id(self):
+        for rec in self:
+            rec.final_reserve_location_id = rec.get_location_reserve()
 
     def get_location_reserve(self):
         self.ensure_one()
