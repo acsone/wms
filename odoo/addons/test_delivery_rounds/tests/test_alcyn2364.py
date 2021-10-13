@@ -5,12 +5,12 @@ from odoo import tools
 from .common import TestDeliveryRound
 
 
-class DeliveryFees(TestDeliveryRound):
+class TestDeliveryFees(TestDeliveryRound):
     """Tests for ALCYN-2364. Check shipping fees invoice"""
 
     @classmethod
     def setUpClass(cls):
-        super(DeliveryFees, cls).setUpClass()
+        super(TestDeliveryFees, cls).setUpClass()
         # set the partners
         cls.partner1.help_with_fee = True
         cls.partner1.invoice_frequency = "10_days"
@@ -106,7 +106,7 @@ class DeliveryFees(TestDeliveryRound):
         preparation = so1.picking_ids.filtered(
             lambda p: p.picking_type_id == self.warehouse_1.pick_type_id
         )
-        preparation += so2.picking_ids.filtered(
+        preparation |= so2.picking_ids.filtered(
             lambda p: p.picking_type_id == self.warehouse_1.pick_type_id
         )
         pack_op = preparation.mapped("pack_operation_ids")
