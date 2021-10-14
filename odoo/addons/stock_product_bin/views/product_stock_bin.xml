@@ -21,7 +21,9 @@
                 attrs="{'readonly':[('location_id','=',False)]}"
               />
               <field name="is_bin_location_active" invisible="1" />
-              <div attrs="{'invisible': [('is_bin_location_active', '=', True)]}">
+              <div
+                attrs="{'invisible': ['|', ('bin_location_id', '=', False), ('is_bin_location_active', '=', True)]}"
+              >
                 <i class="fa fa-exclamation-triangle" style="color:red">
                   <span style="margin:0 5px">Inactive bin location</span>
                 </i>
