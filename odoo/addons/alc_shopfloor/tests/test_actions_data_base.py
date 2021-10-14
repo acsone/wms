@@ -236,7 +236,7 @@ class ActionsDataDetailCaseBase(ActionsDataCaseBase):
                             "product_name": None,
                             "product_code": v.product_code,
                         }
-                        for v in record.seller_ids
+                        for v in record.seller_ids.sorted("sequence")
                     ],
                 }
             )
