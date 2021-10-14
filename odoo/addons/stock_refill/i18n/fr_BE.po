@@ -30,6 +30,14 @@ msgstr ""
 "stocké en réserve"
 
 #. module: stock_refill
+#: model:ir.model.fields,help:stock_refill.field_stock_location_final_reserve_location_id
+#, fuzzy
+msgid "Destination when the product must be stored in reserve"
+msgstr ""
+"Destination pour la stratégie d'entrée en stock lorsque le produit doit être "
+"stocké en réserve"
+
+#. module: stock_refill
 #: model:ir.model,name:stock_refill.model_stock_location
 msgid "Inventory Locations"
 msgstr "Emplacements de stock"
@@ -50,7 +58,7 @@ msgid "Product"
 msgstr "Article"
 
 #. module: stock_refill
-#: code:addons/stock_refill/models/stock_location.py:71
+#: code:addons/stock_refill/models/stock_location.py:84
 #, python-format
 msgid "Product %s must be put in reserve but cannot find a suitable location"
 msgstr ""
@@ -72,6 +80,7 @@ msgid "Qty in reserve"
 msgstr "Qté en réserve"
 
 #. module: stock_refill
+#: model:ir.model.fields,field_description:stock_refill.field_stock_location_final_reserve_location_id
 #: model:ir.model.fields,field_description:stock_refill.field_stock_location_reserve_location_id
 #: selection:stock.location,kind:0
 msgid "Reserve"
