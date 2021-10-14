@@ -39,5 +39,5 @@ class StockPackOperationSkipLot(models.TransientModel):
                 raise ValidationError(
                     _("Pack operation and the lot to skip are required informations")
                 )
-            wizard.pack_operation_id._skip_operation(wizard.skip_pack_lot_id)
+            wizard.pack_operation_id._skip_operation(lot=wizard.skip_pack_lot_id.lot_id)
         return {"type": "ir.actions.act_window_close"}

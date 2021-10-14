@@ -300,7 +300,8 @@ class Itempick(DomainInterface):
                 try:
                     # Call the method to skip this operation
                     pack_op._skip_operation(
-                        pack_op_lot_id=pack_lot, raise_if_nothing_to_block=False
+                        lot=pack_lot.lot_id if pack_lot else None,
+                        raise_if_nothing_to_block=False,
                     )
                 except Exception as e:
                     lot_savepoint.rollback()
