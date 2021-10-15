@@ -15,6 +15,7 @@
         "alc_pim",
         "alc_storage",
         "alc_eshop_filter_data",
+        "alc_shopinvader_category",
         "shopinvader_elasticsearch",
         "shopinvader_multi_category",
         "shopinvader_assortment",
