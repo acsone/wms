@@ -15,16 +15,25 @@ class StockPackOperation(models.Model):
 
     _inherit = "stock.pack.operation"
 
+    def _should_log(self):
+        param = (
+            self.env["ir.config_parameter"]
+            .sudo()
+            .get_param("stock.pack.operation.audit.active")
+        )
+        return param.strip() if param else ""
+
     @api.multi
     def unlink(self):
-        ids = ["%s" % id for id in self.ids]
-        stack = StringIO.StringIO()
-        traceback.print_stack(file=stack)
-        stack.seek(0)
-        _logger.warning(
-            "Operations %s deleted by %s \n %s",
-            ", ".join(ids),
-            self.env.user.name,
-            stack.getvalue(),
-        )
+        if self._should_log():
+            ids = ["%s" % id for id in self.ids]
+            stack = StringIO.StringIO()
+            traceback.print_stack(file=stack)
+            stack.seek(0)
+            _logger.warning(
+                "Operations %s deleted by %s \n %s",
+                ", ".join(ids),
+                self.env.user.name,
+                stack.getvalue(),
+            )
         return super(StockPackOperation, self).unlink()

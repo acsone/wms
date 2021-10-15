@@ -14,6 +14,6 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": ["stock"],
-    "data": [],
+    "data": ["data/ir_config_parameter_data.xml"],
     "demo": [],
 }
