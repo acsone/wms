@@ -52,10 +52,10 @@ odoo10-addon-account-banking-sepa-credit-transfer==10.0.1.1.0.99.dev10
 odoo10-addon-account-banking-sepa-direct-debit==10.0.1.1.3
 odoo10-addon-account-chart-update @ git+https://github.com/acsone/account-financial-tools.git@779a120dea41eca52bab98ff847b517ba58374ab#subdirectory=setup/account_chart_update
 odoo10-addon-account-credit-control @ git+https://github.com/acsone/account-financial-tools.git@779a120dea41eca52bab98ff847b517ba58374ab#subdirectory=setup/account_credit_control
-odoo10-addon-account-cutoff-accrual-base @ git+https://github.com/acsone/account-closing@6af1e40ee29050fec6e244b523bab7302cabe9c6#subdirectory=setup/account_cutoff_accrual_base
-odoo10-addon-account-cutoff-accrual-picking @ git+https://github.com/acsone/account-closing@6af1e40ee29050fec6e244b523bab7302cabe9c6#subdirectory=setup/account_cutoff_accrual_picking
+odoo10-addon-account-cutoff-accrual-base @ git+https://github.com/acsone/account-closing@6418a96cadffa6050b9e103256cc0f437fc648c8#subdirectory=setup/account_cutoff_accrual_base
+odoo10-addon-account-cutoff-accrual-picking @ git+https://github.com/acsone/account-closing@6418a96cadffa6050b9e103256cc0f437fc648c8#subdirectory=setup/account_cutoff_accrual_picking
 odoo10-addon-account-cutoff-accrual-return @ git+https://github.com/acsone/account-closing@7a8ad29c39f58129b85cf975ea6ba2d946734ef7#subdirectory=setup/account_cutoff_accrual_return
-odoo10-addon-account-cutoff-base @ git+https://github.com/acsone/account-closing@6af1e40ee29050fec6e244b523bab7302cabe9c6#subdirectory=setup/account_cutoff_base
+odoo10-addon-account-cutoff-base @ git+https://github.com/acsone/account-closing@6418a96cadffa6050b9e103256cc0f437fc648c8#subdirectory=setup/account_cutoff_base
 odoo10-addon-account-financial-report-date-range @ git+https://github.com/acsone/account-financial-reporting.git@37e0dda2eea90b3efe046851d732443903ced004#subdirectory=setup/account_financial_report_date_range
 odoo10-addon-account-financial-report-qweb @ git+https://github.com/acsone/account-financial-reporting.git@37e0dda2eea90b3efe046851d732443903ced004#subdirectory=setup/account_financial_report_qweb
 odoo10-addon-account-group @ git+https://github.com/acsone/account-financial-tools.git@779a120dea41eca52bab98ff847b517ba58374ab#subdirectory=setup/account_group
