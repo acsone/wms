@@ -8,9 +8,9 @@
         <field name="pricelist_id" eval="False" />
         <field name="website_public_name">Alcyon</field>
         <field name="allowed_country_ids" eval="[(6,0,[ref('base.be')])]" />
-        <field name="currency_ids" eval="[(6,0,[ref('base.EUR'),])]" />
-        <field name="auth_api_key_id" ref="shopinvader_auth_key" />
-        <field name="validate_customers" eval="True" />
+<!-- BACKPORT         <field name="currency_ids" eval="[(6,0,[ref('base.EUR'),])]" />-->
+<!-- BACKPORT         <field name="tech_name">shopinvader_backend</field>-->
+<!-- BACKPORT         <field name="auth_api_key_id" ref="shopinvader_auth_key"/>-->
         <field name="product_manual_binding" eval="False" />
         <field name="product_assortment_id" ref="shopinvader_assortment_store" />
         <field
