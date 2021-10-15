@@ -28,10 +28,12 @@ class StockPicking(models.Model):
         the basic mecanism assign the pickings to start the cluster. In the case of Alcyon,
         pickings are already assigned. We don't need to go through the mecanism once again.
         """
-        self2 = None
+        self2 = self
         if self.env.context.get("from_cluster_confirm"):
             self2 = self.filtered(
                 lambda p: p.state not in ("assigned", "partially_available")
             )
-
-        return True if not self2 else super(StockPicking, self).action_assign()
+        if not self2:
+            # nothing to assign
+            return True
+        return super(StockPicking, self2).action_assign()
