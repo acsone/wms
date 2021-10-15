@@ -46,17 +46,18 @@ class AccountCutoff(models.Model):
     def _cron_cutoff_revenue_refund(self):
         self._cron_cutoff_refund("out_refund")
 
-    def get_lines(self):
-        self.ensure_one()
-        if self.type == "accrued_expense":
-            # Exclude blocked purchases
-            self.line_ids.unlink()
-            SaleOrderLine = self.env["purchase.order.line"]
-            with SaleOrderLine._auto_join(["order_id"]):
-                lines = self.env["purchase.order.line"].search(
-                    [("qty_to_invoice", "!=", 0), ("order_id.state", "!=", "done")]
-                )
-            for line in lines:
-                self.env["account.cutoff.line"].create(self._prepare_line(line))
-            return None
-        return super(AccountCutoff, self).get_lines()
+    def _get_sale_lines(self):
+        SaleOrderLine = self.env["sale.order.line"]
+        with SaleOrderLine._auto_join(["order_id"]):
+            lines = self.env["sale.order.line"].search(
+                [("qty_to_invoice", "!=", 0), ("order_id.state", "!=", "done")]
+            )
+        return lines
+
+    def _get_purchase_lines(self):
+        PurchaseOrderLine = self.env["purchase.order.line"]
+        with PurchaseOrderLine._auto_join(["order_id"]):
+            lines = self.env["purchase.order.line"].search(
+                [("qty_to_invoice", "!=", 0), ("order_id.state", "!=", "done")]
+            )
+        return lines
