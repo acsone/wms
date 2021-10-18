@@ -95,3 +95,6 @@ odoo10-addon-product-total-weight-from-packaging @ git+https://github.com/oca/pr
 # acsone/search-engine
 odoo10-addon-connector-search-engine @  git+https://github.com/acsone/search-engine.git@10.0-backport-14.0#subdirectory=setup/connector_search_engine
 odoo10-addon-connector-elasticsearch @  git+https://github.com/acsone/search-engine.git@10.0-backport-14.0#subdirectory=setup/connector_elasticsearch
+
+# acsone/odoo-shopinvader
+odoo10-addon-shopinvader-elasticsearch @  git+https://github.com/acsone/odoo-shopinvader.git@10.0-backport-14.0#subdirectory=setup/shopinvader_elasticsearch
