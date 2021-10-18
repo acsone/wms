@@ -8,7 +8,7 @@
     "author": "BCIM",
     "category": "Stock Management",
     "depends": ["stock", "product_additional"],
-    "data": [],
+    "data": ["views/stock_move.xml"],
     "installable": True,
     "auto_install": False,
     "license": "AGPL-3",
