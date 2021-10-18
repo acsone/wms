@@ -5,10 +5,7 @@
     "name": "Alcyon e-shop Product Filters",
     "description": """Alcyon e-shop Product Filters""",
     "version": "10.0.1.0.0",
-    "depends": [
-        "alc_pim",  # filter dependencies
-        "shopinvader",  # TODO: use, shopinvader_product_attribute_set replacing
-    ],  # TODO: v10 shopinvader_custom_attribute which does not work (prePIM)
+    "depends": ["alc_pim", "shopinvader_product_attribute_set"],
     "author": "ACSONE SA/NV",
     "website": "http://www.acsone.eu",
     "license": "AGPL-3",
