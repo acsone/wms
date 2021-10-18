@@ -53,7 +53,7 @@ class ClusterPickingSkipLineCase(ClusterPickingCommonCase):
         # enforce names to have reliable sorting
         self.stock_location.sudo().name = "LOC2"
         self.shelf1.sudo().name = "LOC1"
-        all_lines = self.batch.pack_operation_ids.sorted("shopfloor_priority")
+        all_lines = self.service._operations_to_do(self.batch)
         loc1_lines = all_lines.filtered(lambda line: (line.location_id == self.shelf1))
         loc2_lines = all_lines.filtered(
             lambda line: (line.location_id == self.stock_location)
