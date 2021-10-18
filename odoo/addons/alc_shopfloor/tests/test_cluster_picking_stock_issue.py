@@ -17,7 +17,7 @@ class ClusterPickingStockIssue(ClusterPickingCommonCase):
         # quants already existing are from demo data
         loc_ids = (cls.stock_location.id, cls.shelf1.id, cls.shelf2.id)
         cls.env["stock.quant"].sudo().search(
-            [("location_id", "in", loc_ids)]
+            [("location_id", "child_of", loc_ids)]
         ).with_context(force_unlink=True).unlink()
         cls.batch = cls._create_picking_batch(
             [

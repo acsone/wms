@@ -15,7 +15,7 @@ class ClusterPickingSkipLineCase(ClusterPickingCommonCase):
         super(ClusterPickingSkipLineCase, cls).setUpClassBaseData(*args, **kwargs)
         # quants already existing are from demo data
         cls.env["stock.quant"].sudo().search(
-            [("location_id", "=", cls.stock_location.id)]
+            [("location_id", "child_of", cls.stock_location.id)]
         ).with_context(force_unlink=True).unlink()
         cls.batch = cls._create_picking_batch(
             [
