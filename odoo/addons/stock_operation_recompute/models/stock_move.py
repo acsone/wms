@@ -4,7 +4,7 @@
 
 import logging
 
-from odoo import _, models
+from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 from odoo.tools.float_utils import float_compare
 
@@ -14,7 +14,16 @@ _logger = logging.getLogger(__name__)
 class StockMove(models.Model):
     _inherit = "stock.move"
 
-    def _recompute_pack_op(self):  # noqa: C901
+    missing_packop = fields.Boolean(default=False, compute="_compute_missing_packop")
+
+    @api.depends("linked_move_operation_ids", "linked_move_operation_ids.operation_id")
+    def _compute_missing_packop(self):
+        for move in self:
+            move.missing_packop = not move.mapped(
+                "linked_move_operation_ids.operation_id"
+            )
+
+    def _recompute_pack_op(self):  # noqa: C901status = fields
         picking = self.mapped("picking_id")
         picking.ensure_one()
 
@@ -132,3 +141,6 @@ class StockMove(models.Model):
                     for plot in new_mop.pack_lot_ids
                 ],
             )
+
+    def force_recompute_pack_operation(self):
+        self._recompute_pack_op()
