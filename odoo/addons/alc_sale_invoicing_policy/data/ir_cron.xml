@@ -13,8 +13,8 @@
     <field eval="'(10, )'" name="args" />
     <field name="nextcall" eval="(DateTime.now()).strftime('%Y-%m-10 22:00:00')" />
   </record>
-  <record forcecreate="True" id="ir_cron_invoice_15" model="ir.cron">
-    <field name="name">Invoice Sales day 15</field>
+  <record forcecreate="True" id="ir_cron_invoice_14" model="ir.cron">
+    <field name="name">Invoice Sales every 14 days</field>
     <field eval="True" name="active" />
     <field name="user_id" ref="base.user_root" />
     <field name="interval_number">1</field>
@@ -24,7 +24,7 @@
     <field eval="'sale.order'" name="model" />
     <field eval="'_cron_invoice_makeall'" name="function" />
     <field eval="'(0, )'" name="args" />
-    <field name="nextcall" eval="(DateTime.now()).strftime('%Y-%m-%d 22:00:00')" />
+    <field name="nextcall" eval="(DateTime.now()).strftime('%Y-%m-%d 20:00:00')" />
   </record>
 
   <record forcecreate="True" id="ir_cron_invoice_20" model="ir.cron">
