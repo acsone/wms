@@ -75,6 +75,10 @@ class ExportPromotionAlcyonTestCase(ESBXMLTestCase):
                 ],
             }
         )
+        # we can't just archive pricelists; the code operates on items, which do
+        # not have an active property, so we rely on delete cascade
+        exclude_ids = self.discount_pricelist_1.ids
+        self.clean_records("product.pricelist", archive=False, exclude_ids=exclude_ids)
 
     def test_filename(self):
         self.check_filename("AlcyonPromotion_{0}.xml")

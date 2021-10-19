@@ -25,6 +25,36 @@ class ESBTestCase(SavepointComponentCase):
         self.backend_model = self.env["esb.backend"]
         self.backend = self.backend_model.get_singleton()
 
+    def clean_records(self, model, archive=False, exclude_ids=()):
+        """Some test actually depends on the actual records in database.
+           We remove all records installed by modules that are not in the
+           dependency tree (e.g. shopinvader) to make it more robust.
+           If the data in the dependencies get updated,
+           then there won't be any choice but to update the test congruously.
+        """
+
+        def used_as_property(record_id):
+            ref = ",".join([model, str(record_id)])
+            domain = [("res_id", "=", False), ("value_reference", "=", ref)]
+            return self.env["ir.property"].search(domain)
+
+        name = "connector_esb"
+        module = self.env["ir.module.module"].search([("name", "=", name)])
+        exclude_states = ("uninstallable",)
+        dependency_modules = module.upstream_dependencies(exclude_states=exclude_states)
+        dependencies = dependency_modules.mapped("name")
+        xmlids = self.env[model].search([]).get_xml_id()
+        for rid, r_xmlid in xmlids.items():
+            if (
+                rid not in exclude_ids
+                and r_xmlid.split(".")[0] not in dependencies
+                and not used_as_property(rid)
+            ):
+                if archive:
+                    self.env[model].browse(rid).active = False
+                else:
+                    self.env[model].browse(rid).unlink()
+
     @classmethod
     def activate_lang(cls):
         """Create a fictive language to use in tests."""

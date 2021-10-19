@@ -65,6 +65,9 @@ class WSStatisticsFormTestCase(ESBXMLTestCase):
                 "categ_id": categ_specific_med.id,
             }
         )
+        # the code relies on some of the tax properties, so getting one not from l10be
+        # would break the tests. They also can't be unlinked.
+        self.clean_records("account.tax", archive=True)
         self.tax_20 = self.env["account.tax"].search(
             [("type_tax_use", "=", "sale")], limit=1
         )
