@@ -45,19 +45,21 @@ class ClusterPickingSkipLineCase(ClusterPickingCommonCase):
 
     def test_skip_operation(self):
         # put one picking in another location
+        self.batch.picking_ids.write({"location_id": self.shelf2.id})
+        self.batch.picking_ids.mapped("move_lines").write(
+            {"location_id": self.shelf2.id}
+        )
         self.batch.picking_ids[1].location_id = self.shelf1
         self.batch.picking_ids[1].move_lines[0].location_id = self.shelf1
         # select batch
         self._simulate_batch_selected(self.batch, in_package=True)
 
         # enforce names to have reliable sorting
-        self.stock_location.sudo().name = "LOC2"
+        self.shelf2.sudo().name = "LOC2"
         self.shelf1.sudo().name = "LOC1"
         all_lines = self.service._operations_to_do(self.batch)
         loc1_lines = all_lines.filtered(lambda line: (line.location_id == self.shelf1))
-        loc2_lines = all_lines.filtered(
-            lambda line: (line.location_id == self.stock_location)
-        )
+        loc2_lines = all_lines.filtered(lambda line: (line.location_id == self.shelf2))
         # no line postponed yet
         self.assertEqual(
             all_lines.mapped("shopfloor_postponed"), [False, False, False, False]
