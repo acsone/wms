@@ -5,14 +5,15 @@
 import json
 from collections import namedtuple
 
-from odoo import api, fields, models
+from odoo import _, api, fields, models
+from odoo.exceptions import ValidationError
 from odoo.tools import ormcache
 
 OptimizationConfig = namedtuple(
     "OptimizationConfig",
     "enabled,api_url,api_key,duration,delivery_duration,loading_duration,"
     "resources_number,work_penalty,travel_penalty,daily_work_time,resource_cfg,"
-    "method",
+    "method,delivery_window_start,delivery_window_end",
 )
 
 
@@ -59,6 +60,25 @@ class StockConfigSettings(models.TransientModel):
         ],
         default="fixed_sequence",
     )
+    geo_optimization_dw_start = fields.Float("From", required=True)
+    geo_optimization_dw_end = fields.Float("To", required=True)
+
+    @api.constrains("geo_optimization_dw_start", "geo_optimization_dw_end")
+    def check_window_no_onverlaps(self):
+        for record in self:
+            if record.geo_optimization_dw_start > record.geo_optimization_dw_end:
+                DeliveryWindow = self.env["alc.delivery.window"]
+                raise ValidationError(
+                    _("%s must be > %s")
+                    % (
+                        DeliveryWindow.float_to_time_repr(
+                            record.geo_optimization_dw_end
+                        ),
+                        DeliveryWindow.float_to_time_repr(
+                            record.geo_optimization_dw_start
+                        ),
+                    )
+                )
 
     @api.model
     @ormcache()
@@ -122,6 +142,17 @@ class StockConfigSettings(models.TransientModel):
             "alc_delivery_rounds_geooptimize.geo_optimization_method", "fixed_sequence",
         )
 
+        geo_optimization_dw_start = float(
+            IrConfigParameter.get_param(
+                "alc_delivery_rounds_geooptimize.geo_optimization_dw_start", "10.0",
+            )
+        )
+        geo_optimization_dw_end = float(
+            IrConfigParameter.get_param(
+                "alc_delivery_rounds_geooptimize.geo_optimization_dw_end", "18.5",
+            )
+        )
+
         return OptimizationConfig(
             enabled=enabled,
             api_url=api_url,
@@ -135,6 +166,8 @@ class StockConfigSettings(models.TransientModel):
             daily_work_time=daily_work_time,
             resource_cfg=resource_cfg,
             method=method,
+            delivery_window_start=geo_optimization_dw_start,
+            delivery_window_end=geo_optimization_dw_end,
         )
 
     @api.model
@@ -165,6 +198,10 @@ class StockConfigSettings(models.TransientModel):
             res["geo_optimization_resource_cfg"] = json.dumps(cfg.resource_cfg)
         if "geo_optimization_method" in _fields or not _fields:
             res["geo_optimization_method"] = cfg.method
+        if "geo_optimization_dw_start" in _fields or not _fields:
+            res["geo_optimization_dw_start"] = cfg.delivery_window_start
+        if "geo_optimization_dw_end" in _fields or not _fields:
+            res["geo_optimization_dw_end"] = cfg.delivery_window_end
 
         return res
 
@@ -273,4 +310,22 @@ class StockConfigSettings(models.TransientModel):
         self.env["ir.config_parameter"].set_param(
             "alc_delivery_rounds_geooptimize.geo_optimization_method",
             self.geo_optimization_method or "fixed_sequence",
+        )
+
+    @api.multi
+    def set_geo_optimization_dw_start(self):
+        self.ensure_one()
+
+        self.env["ir.config_parameter"].set_param(
+            "alc_delivery_rounds_geooptimize.geo_optimization_dw_start",
+            self.geo_optimization_dw_start or "10.0",
+        )
+
+    @api.multi
+    def set_geo_optimization_dw_end(self):
+        self.ensure_one()
+
+        self.env["ir.config_parameter"].set_param(
+            "alc_delivery_rounds_geooptimize.geo_optimization_dw_end",
+            self.geo_optimization_dw_end or "18.5",
         )

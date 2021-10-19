@@ -341,7 +341,11 @@ class RoundInstance(models.Model):
                 if ship.partner_id not in fixed_partner_delivery_sequences:
                     fixed_partner_delivery_sequences[ship.partner_id.id] = i
                     i += 1
-
+        DeliveryWindow = self.env["alc.delivery.window"]
+        default_delivery_window = {
+            "beginTime": DeliveryWindow.float_to_time_repr(cfg.delivery_window_start),
+            "endTime": DeliveryWindow.float_to_time_repr(cfg.delivery_window_end),
+        }
         for partner in partners:
             phones = filter(None, (partner.mobile or None, partner.phone or None))
             order = {
@@ -372,8 +376,8 @@ class RoundInstance(models.Model):
                 order["customDataMap"] = customDataMap
 
             delivery_windows = delivery_windows_by_partner_id[partner.id]
+            time_windows = []
             if delivery_windows:
-                time_windows = []
                 for window in delivery_windows:
                     time_windows.append(
                         {
@@ -381,7 +385,10 @@ class RoundInstance(models.Model):
                             "endTime": window.float_to_time_repr(window.end),
                         }
                     )
-                order["timeWindows"] = time_windows
+            else:
+                time_windows.append(default_delivery_window)
+
+            order["timeWindows"] = time_windows
             ret.append(order)
         return ret
 

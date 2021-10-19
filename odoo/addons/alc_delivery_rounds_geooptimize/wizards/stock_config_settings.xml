@@ -132,6 +132,37 @@
             string="Resource additional configuration"
             attrs="{'invisible': [('geo_optimization_enabled', '=', False)]}"
           />
+          <label
+            for="geo_optimization_dw_start"
+            attrs="{'invisible': [('geo_optimization_enabled', '=', False)]}"
+            string="Default delivery window"
+          />
+          <div>
+            <div>
+              <label
+                for="geo_optimization_delivery_duration"
+                string="From "
+                attrs="{'invisible': [('geo_optimization_enabled', '=', False)]}"
+              />
+              <field
+                name="geo_optimization_dw_start"
+                widget="float_time"
+                class="oe_inline"
+                attrs="{'invisible': [('geo_optimization_enabled', '=', False)], 'required': [('geo_optimization_enabled', '=', True)]}"
+              />
+              <label
+                for="geo_optimization_delivery_duration"
+                string=" to "
+                attrs="{'invisible': [('geo_optimization_enabled', '=', False)]}"
+              />
+              <field
+                name="geo_optimization_dw_end"
+                widget="float_time"
+                class="oe_inline"
+                attrs="{'invisible': [('geo_optimization_enabled', '=', False)], 'required': [('geo_optimization_enabled', '=', True)]}"
+              />
+            </div>
+          </div>
         </group>
       </xpath>
     </field>
