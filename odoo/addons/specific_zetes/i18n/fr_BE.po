@@ -295,7 +295,7 @@ msgstr "Erreurs humaine"
 #: model:ir.model.fields,field_description:specific_zetes.field_manage_uop_line_id
 #: model:ir.model.fields,field_description:specific_zetes.field_pack_operation_reserve_rel_id
 #: model:ir.model.fields,field_description:specific_zetes.field_stock_pack_operation_deleted_id
-#: model:ir.model.fields,field_description:specific_zetes.field_stock_pack_operation_operator_id_10890
+#: model:ir.model.fields,field_description:specific_zetes.field_stock_pack_operation_operator_id_10880
 #: model:ir.model.fields,field_description:specific_zetes.field_view_picking_line_id
 #: model:ir.model.fields,field_description:specific_zetes.field_zetes_logger_id
 msgid "ID"
@@ -386,7 +386,7 @@ msgid "Location Checksum Right"
 msgstr "Checksum emplacement droite"
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/tools/domain_itempick.py:417
+#: code:addons/specific_zetes/tools/domain_itempick.py:418
 #, python-format
 msgid "Location not found for the product %s"
 msgstr "Localisation non trouvé pour le produit %s"
@@ -821,7 +821,7 @@ msgstr "Certaines valeurs obligatoires manquantes: %s"
 
 #. module: specific_zetes
 #: code:addons/specific_zetes/tools/domain_itemmove.py:196
-#: code:addons/specific_zetes/tools/domain_itempick.py:335
+#: code:addons/specific_zetes/tools/domain_itempick.py:336
 #, python-format
 msgid "There is no lines for the picking %s"
 msgstr "There is no lines for the picking %s"
