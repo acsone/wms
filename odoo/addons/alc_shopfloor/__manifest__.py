@@ -29,14 +29,17 @@
         "product_expiry",
         "product_manufacturer",
         "stock_picking_assignment",
+        "stock_picking_batch_creation",
         "stock_picking_show_backorder",
         "stock_helper",
         # alcyon
         "delivery_rounds_refill",  # manage refill_arrange
         "stock_refill",  # declare reserve reserve
+        "stock_operation_recompute",
+        "stock_lot_loss",
     ],
     "data": [
-        "data/scenario_location_content_transfer.xml",
+        "data/shopfloor_scenario.xml",
         "data/shopfloor_profile.xml",
         "data/stock_picking_type.xml",
         "data/shopfloor_menu.xml",

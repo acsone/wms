@@ -237,7 +237,7 @@ class DataAction(Component):
         )
         return supplier_info.product_code or ""
 
-    @ensure_model("stock.picking.batch")
+    @ensure_model("stock.picking.wave")
     def picking_batch(self, record, with_pickings=False, **kw):
         parser = self._picking_batch_parser
         if with_pickings:

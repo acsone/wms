@@ -20,7 +20,7 @@ msgid "Internal Error. Cannot match done lot in new pack operation"
 msgstr ""
 
 #. module: stock_operation_recompute
-#: model:ir.model.fields,field_description:stock_operation_recompute.field_stock_move_missing_packop
+#: model:ir.model.fields,field_description:stock_operation_recompute.field_stock_move_is_missing_packop
 msgid "Missing packop"
 msgstr ""
 

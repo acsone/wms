@@ -1,0 +1,62 @@
+# -*- coding: utf-8 -*-
+# Copyright 2021 ACSONE SA/NV
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+
+from .common import ClusterPickingDeliveryCommonFeatures
+
+
+class TestGetPickingsToClusterByDeliveryRounds(ClusterPickingDeliveryCommonFeatures):
+    @classmethod
+    def setUpClass(cls):
+        super(TestGetPickingsToClusterByDeliveryRounds, cls).setUpClass()
+
+        cls.stock_location = cls.env.ref("stock.stock_location_stock")
+        cls.stock_location.write(
+            {"zone": "G", "corridor": "A", "shelf": "42", "height": "4", "box": "B12"}
+        )
+        cls.delivery_round2.picking_launched = True
+        cls.delivery_round1.picking_launched = True
+
+    def test_get_pickings_by_delivery_rounds_operator_allowed_on_both_delivery_rounds(
+        self,
+    ):
+        """
+        Data: 2 delivery rounds, both ok for operator 1
+        Test case: we ask for a cluster for operator 1
+        Expected result: Pickings to be retrieved are the ones related to delivery 2
+        """
+        make_picking_batch = self.makePickingBatch.create(
+            {
+                "user_id": self.operator_1.id,
+                "picking_type_ids": [(4, self.picking_type_ali.id)],
+                "stock_device_type_ids": [
+                    (4, self.device1.id),
+                    (4, self.device2.id),
+                    (4, self.device3.id),
+                ],
+            }
+        )
+        candidates_pickings = make_picking_batch._search_pickings()
+        picks_ali = self.pick4 | self.pick5
+        self.assertEqual(candidates_pickings, picks_ali)
+
+    def test_get_pickings_by_delivery_rounds_operator_allowed_only_on_delivery_1(self):
+        """
+        Data: 2 delivery rounds. Delivery 2 is only for operator 1
+        Test case: we ask for a cluster for operator 2
+        Expected result: Pickings to be retrieved are the ones related to delivery 1
+        """
+        make_picking_batch = self.makePickingBatch.create(
+            {
+                "user_id": self.operator_2.id,
+                "picking_type_ids": [(4, self.picking_type_ali.id)],
+                "stock_device_type_ids": [
+                    (4, self.device1.id),
+                    (4, self.device2.id),
+                    (4, self.device3.id),
+                ],
+            }
+        )
+        candidates_pickings = make_picking_batch._search_pickings()
+        picks_ali = self.pick6
+        self.assertEqual(candidates_pickings, picks_ali)

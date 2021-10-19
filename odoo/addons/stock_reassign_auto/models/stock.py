@@ -54,7 +54,10 @@ class StockMove(models.Model):
                 lambda m, _move=move: m.product_id == _move.product_id
                 and m.state not in ("done", "cancel")
                 and not (
-                    m.partially_available and m.pack_operation_ids.filtered("is_done")
+                    m.partially_available
+                    and m.linked_move_operation_ids.mapped("operation_id").filtered(
+                        "is_done"
+                    )
                 )
             )
 

@@ -42,6 +42,13 @@ class StockPackOperation(models.Model):
         "into this pack operation (from package or directly from the operation)",
     )
 
+    move_ids = fields.One2many(comodel_name="stock.move", compute="_compute_move_ids",)
+
+    @api.depends("linked_move_operation_ids", "linked_move_operation_ids.move_id")
+    def _compute_move_ids(self):
+        for rec in self:
+            rec.move_ids = rec.mapped("linked_move_operation_ids.move_id")
+
     @api.depends(
         "product_id", "package_id", "package_id.parent_id", "package_id.quant_ids"
     )
@@ -153,19 +160,28 @@ class StockPackOperation(models.Model):
             pickings = new_picking
         return pickings
 
-    def _split_qty_to_be_done(self, qty_done, split_partial=True, **split_default_vals):
+    def _split_qty_to_be_done(
+        self, qty_done, split_partial=True, lot_id=None, **split_default_vals
+    ):
         """Check qty to be done for current move line. Split it if needed.
 
         :param qty_done: qty expected to be done
         :param split_partial: split if qty is less than expected
             otherwise rely on a backorder.
+        :param lot_id: The lot in case of operations linked to pack operation lot
         """
+        self.ensure_one()
         # store a new line if we have split our line (not enough qty)
         new_line = self.env["stock.pack.operation"]
         rounding = self.product_uom_id.rounding
-        compare = float_compare(
-            qty_done, self.product_uom_qty, precision_rounding=rounding
-        )
+        qty_todo = self.product_qty
+        pack_lot = self.env["stock.pack.operation.lot"].browse()
+        if lot_id:
+            pack_lot = self.pack_lot_ids.filtered(
+                lambda a, l_id=lot_id: a.lot_id.id == l_id
+            )
+            qty_todo = sum(pack_lot.mapped("qty_todo"))
+        compare = float_compare(qty_done, qty_todo, precision_rounding=rounding)
         qty_lesser = compare == -1
         qty_greater = compare == 1
         if qty_greater:
@@ -173,17 +189,17 @@ class StockPackOperation(models.Model):
         if qty_lesser:
             if not split_partial:
                 return (new_line, "lesser")
+            # set the qty done one the right line.
+            if pack_lot:
+                # the qty done is on the lot
+                pack_lot.qty = qty_done
+            self.qty_done += qty_done
+
             # split the move line which will be processed later (maybe the user
             # has to pick some goods from another place because the location
             # contained less items than expected)
-            remaining = self.product_uom_qty - qty_done
-            vals = {"product_uom_qty": remaining, "qty_done": 0}
-            vals.update(split_default_vals)
-            new_line = self.copy(vals)
-            # if we didn't bypass reservation update, the quant reservation
-            # would be reduced as much as the deduced quantity, which is wrong
-            # as we only moved the quantity to a new move line
-            self.with_context(bypass_reservation_update=True).product_uom_qty = qty_done
+            new_line = self._split_quantities_done_preserve_link()
+            self.with_context(bypass_reservation_update=True).product_qty = qty_done
             return (new_line, "lesser")
         return (new_line, "full")
 

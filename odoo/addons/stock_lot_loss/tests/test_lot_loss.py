@@ -255,7 +255,7 @@ class TestLotLoss(SavepointCase):
         pack_lot_A.qty = 1
         op.save()
 
-        op._skip_operation(pack_op_lot_id=pack_lot_A)
+        op._skip_operation(lot=pack_lot_A.lot_id)
 
         # Check new pack operation
         new_op = self.picking_1.pack_operation_ids
@@ -361,7 +361,7 @@ class TestLotLoss(SavepointCase):
         pack_lot_B.qty = 1
         op.save()
 
-        op._skip_operation(pack_op_lot_id=pack_lot_B)
+        op._skip_operation(lot=pack_lot_B.lot_id)
 
         # Check new pack operation
         new_op = self.picking_1.pack_operation_ids
@@ -651,12 +651,12 @@ class TestLotLoss(SavepointCase):
             for op in self.picking_1.pack_operation_ids:
                 for lot in op.pack_lot_ids:
                     lot.qty = lot.qty_todo
-                    op._skip_operation(pack_op_lot_id=lot)
+                    op._skip_operation(lot=lot.lot_id)
 
         for op in self.picking_1.pack_operation_ids:
             for lot in op.pack_lot_ids:
                 lot.qty = lot.qty_todo
-                op._skip_operation(pack_op_lot_id=lot, raise_if_nothing_to_block=False)
+                op._skip_operation(lot=lot.lot_id, raise_if_nothing_to_block=False)
 
     def test_05(self):
         """

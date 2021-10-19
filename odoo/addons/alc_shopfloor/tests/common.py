@@ -292,6 +292,7 @@ class CommonCase(BaseCommonCase):
                     lot = cls.env["stock.production.lot"].create(
                         {"product_id": product.id}
                     )
+                product.tracking = "lot"
             if not (in_lot or in_package):
                 # always add more quantity in stock to avoid to trigger the
                 # "zero checks" in tests, not for lots which must have a qty
@@ -481,8 +482,8 @@ class PickingBatchMixin:
                     lines=[(b.product, b.quantity) for b in transfer]
                 ).id
             )
-        batch = cls.env["stock.picking.batch"].create(
-            {"picking_ids": [(6, picking_ids)]}
+        batch = cls.env["stock.picking.wave"].create(
+            {"picking_ids": [(6, None, picking_ids)]}
         )
         batch.picking_ids.action_confirm()
         batch.picking_ids.action_assign()
@@ -507,4 +508,4 @@ class PickingBatchMixin:
                 pickings.mapped("move_lines"), in_package=in_package, in_lot=in_lot
             )
         pickings.action_assign()
-        batches.write({"state": "in_progress", "operator_id": cls.env.uid})
+        batches.write({"state": "in_progress", "user_id": cls.env.uid})

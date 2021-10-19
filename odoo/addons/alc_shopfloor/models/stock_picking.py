@@ -16,6 +16,7 @@ class StockPicking(models.Model):
         compute="_compute_picking_info",
         help="Technical field. Indicates number of operation included.",
     )
+    batch_id = fields.Many2one(related="wave_id")  # ODOO>=11 compatibility
 
     @api.depends(
         "pack_operation_ids",
@@ -34,13 +35,10 @@ class StockPicking(models.Model):
     def _calc_weight(self):
         weight = 0.0
         for pop in self.mapped("pack_operation_ids"):
-            weight += (
-                pop.product_qty
-                * (pop.product_id.weight or 1)
-                * (
-                    pop.package_id.pack_weight
-                    or pop.package_id.estimated_pack_weight
-                    or 1
+            if pop.product_id:
+                weight += pop.product_qty * pop.product_id.weight
+            elif pop.package_id:
+                weight += (
+                    pop.package_id.pack_weight or pop.package_id.estimated_pack_weight
                 )
-            )
         return weight
