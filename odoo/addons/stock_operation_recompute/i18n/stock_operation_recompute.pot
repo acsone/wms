@@ -14,14 +14,18 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: stock_operation_recompute
-#: code:addons/stock_operation_recompute/models/stock_move.py:116
-#, python-format
-msgid "Internal Error. Cannot match done lot in new pack operation"
+#: model:ir.model.fields,field_description:stock_operation_recompute.field_stock_move_is_missing_packop
+msgid "Is missing packop"
 msgstr ""
 
 #. module: stock_operation_recompute
-#: model:ir.model.fields,field_description:stock_operation_recompute.field_stock_move_is_missing_packop
-msgid "Missing packop"
+#: model:ir.model,name:stock_operation_recompute.model_stock_pack_operation_lot
+msgid "Lot/Serial number for pack ops"
+msgstr ""
+
+#. module: stock_operation_recompute
+#: model:ir.model,name:stock_operation_recompute.model_stock_pack_operation
+msgid "Packing Operation"
 msgstr ""
 
 #. module: stock_operation_recompute
