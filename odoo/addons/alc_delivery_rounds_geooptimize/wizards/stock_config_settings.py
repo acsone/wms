@@ -60,8 +60,8 @@ class StockConfigSettings(models.TransientModel):
         ],
         default="fixed_sequence",
     )
-    geo_optimization_dw_start = fields.Float("From", required=True)
-    geo_optimization_dw_end = fields.Float("To", required=True)
+    geo_optimization_dw_start = fields.Float("From", required=True, default=10.0)
+    geo_optimization_dw_end = fields.Float("To", required=True, default=18.5)
 
     @api.constrains("geo_optimization_dw_start", "geo_optimization_dw_end")
     def check_window_no_onverlaps(self):
