@@ -189,12 +189,13 @@ odoo10-addon-server-environment @ git+https://github.com/acsone/server-tools.git
 odoo10-addon-server-environment-ir-config-parameter @ git+https://github.com/acsone/server-tools.git@dcefdba5bac014076f05229ba091acd8b739e164#subdirectory=setup/server_environment_ir_config_parameter
 odoo10-addon-shopfloor-base @ git+https://github.com/acsone/wms.git@e8cf04b39c25c362a15f468d13c9b2a5e686af6d#subdirectory=setup/shopfloor_base
 odoo10-addon-shopfloor-mobile-base @ git+https://github.com/acsone/wms.git@add3414600f8b20071b999ce0d2b0551b4e89b13#subdirectory=setup/shopfloor_mobile_base
-odoo10-addon-shopinvader==10.0.2.22.0
+odoo10-addon-shopinvader @ git+https://github.com/acsone/odoo-shopinvader.git@c0eff495b11b9bab25582f08ae7b5ccc8f248f8b#subdirectory=setup/shopinvader
 odoo10-addon-shopinvader-assortment==10.0.1.0.1.99.dev7
 odoo10-addon-shopinvader-elasticsearch @ git+https://github.com/acsone/odoo-shopinvader.git@c0eff495b11b9bab25582f08ae7b5ccc8f248f8b#subdirectory=setup/shopinvader_elasticsearch
 odoo10-addon-shopinvader-image==10.0.1.0.4
 odoo10-addon-shopinvader-multi-category==10.0.1.0.0.99.dev8
-odoo10-addon-shopinvader-product-attribute-set @ git+https://github.com/acsone/odoo-shopinvader.git@62a83264c6ecbff25126ab2a35992ca120a59202#subdirectory=setup/shopinvader_product_attribute_set
+odoo10-addon-shopinvader-product-attribute-set @ git+https://github.com/acsone/odoo-shopinvader.git@c0eff495b11b9bab25582f08ae7b5ccc8f248f8b#subdirectory=setup/shopinvader_product_attribute_set
+odoo10-addon-shopinvader-sale-profile @ git+https://github.com/acsone/odoo-shopinvader.git@c0eff495b11b9bab25582f08ae7b5ccc8f248f8b#subdirectory=setup/shopinvader_sale_profile
 odoo10-addon-shopinvader-search-engine==10.0.1.2.1.99.dev3
 odoo10-addon-slow-statement-logger @ git+https://github.com/acsone/server-tools@a619cdf9dfae7e60ff02caa3c588058283440e16#subdirectory=setup/slow_statement_logger
 odoo10-addon-sql-request-abstract @ git+https://github.com/acsone/server-tools.git@dcefdba5bac014076f05229ba091acd8b739e164#subdirectory=setup/sql_request_abstract
