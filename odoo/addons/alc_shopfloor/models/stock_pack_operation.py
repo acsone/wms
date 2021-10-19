@@ -176,30 +176,33 @@ class StockPackOperation(models.Model):
         rounding = self.product_uom_id.rounding
         qty_todo = self.product_qty
         pack_lot = self.env["stock.pack.operation.lot"].browse()
+        other_pack_lot = False
         if lot_id:
             pack_lot = self.pack_lot_ids.filtered(
                 lambda a, l_id=lot_id: a.lot_id.id == l_id
             )
             qty_todo = sum(pack_lot.mapped("qty_todo"))
+            other_pack_lot = self.pack_lot_ids - pack_lot
         compare = float_compare(qty_done, qty_todo, precision_rounding=rounding)
         qty_lesser = compare == -1
         qty_greater = compare == 1
         if qty_greater:
             return (new_line, "greater")
-        if qty_lesser:
-            if not split_partial:
-                return (new_line, "lesser")
-            # set the qty done one the right line.
-            if pack_lot:
-                # the qty done is on the lot
-                pack_lot.qty = qty_done
-            self.qty_done += qty_done
+        if qty_lesser and not split_partial:
+            return (new_line, "lesser")
+        # set the qty done one the right line.
+        if pack_lot:
+            # the qty done is on the lot
+            pack_lot.qty = qty_done
+        self.qty_done += qty_done
 
-            # split the move line which will be processed later (maybe the user
-            # has to pick some goods from another place because the location
-            # contained less items than expected)
+        # split the move line which will be processed later (maybe the user
+        # has to pick some goods from another place because the location
+        # contained less items than expected)
+        if qty_lesser or other_pack_lot:
             new_line = self._split_quantities_done_preserve_link()
-            self.with_context(bypass_reservation_update=True).product_qty = qty_done
+        self.with_context(bypass_reservation_update=True).product_qty = qty_done
+        if qty_lesser:
             return (new_line, "lesser")
         return (new_line, "full")
 

@@ -103,8 +103,8 @@ class ClusterPicking(Component):
             popup=popup,
         )
 
-    def _response_for_scan_destination(self, operation, message=None):
-        data = self._data_operation(operation)
+    def _response_for_scan_destination(self, operation, message=None, force_lot=None):
+        data = self._data_operation(operation, force_lot=force_lot)
         last_picked_line = self._last_picked_line(operation.picking_id)
         if last_picked_line:
             # suggest pack to be used for the next line
@@ -384,11 +384,21 @@ class ClusterPicking(Component):
     def _response_batch_does_not_exist(self):
         return self._response_for_start(message=self.msg_store.record_not_found())
 
-    def _data_operation(self, operation, **kw):
+    def _data_operation(self, operation, force_lot=None, **kw):
         picking = operation.picking_id
         batch = picking.batch_id
         product = operation.product_id
-        data = self.data.operations(operation)[0]
+        operations = self.data.operations(operation)
+        data = None
+        if force_lot:
+            for op in operations:
+                if op.get("lot", {}).get("id") == force_lot.id:
+                    data = op
+                    break
+            if not data:
+                raise SystemError("Force lot not found into operation")
+        else:
+            data = operations[0]
         # additional values
         # Ensure destination pack is never proposed on the frontend.
         # This should happen only as proposal on `scan_destination`
@@ -633,13 +643,6 @@ class ClusterPicking(Component):
                 operation, message=self.msg_store.scan_lot_on_product_tracked_by_lot(),
             )
 
-        new_line, qty_check = operation._split_qty_to_be_done(quantity, lot_id=lot_id)
-        if qty_check == "greater":
-            return self._response_for_scan_destination(
-                operation,
-                message=self.msg_store.unable_to_pick_more(operation.product_qty),
-            )
-
         search = self._actions_for("search")
         bin_package = search.package_from_scan(barcode)
         if not bin_package:
@@ -662,6 +665,13 @@ class ClusterPicking(Component):
                         "The destination bin {} is not empty, please take another."
                     ).format(bin_package.name),
                 },
+            )
+
+        new_line, qty_check = operation._split_qty_to_be_done(quantity, lot_id=lot_id)
+        if qty_check == "greater":
+            return self._response_for_scan_destination(
+                operation,
+                message=self.msg_store.unable_to_pick_more(operation.product_qty),
             )
         operation.write({"qty_done": quantity, "result_package_id": bin_package.id})
 
@@ -926,7 +936,7 @@ class ClusterPicking(Component):
             old_lot = self.env["stock.production.lot"].browse(lot_id)
             response = change_package_lot.change_lot(
                 operation,
-                old_lot=old_lot,
+                previous_lot=old_lot,
                 new_lot=lot,
                 response_ok_func=response_ok_func,
                 response_error_func=response_error_func,
@@ -1237,6 +1247,7 @@ class ShopfloorClusterPickingValidator(Component):
             "picking_batch_id": {"coerce": to_int, "required": True, "type": "integer"},
             "operation_id": {"coerce": to_int, "required": True, "type": "integer"},
             "barcode": {"required": True, "type": "string"},
+            "lot_id": {"coerce": to_int, "required": False, "type": "integer"},
         }
 
     def set_destination_all(self):

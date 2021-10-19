@@ -25,13 +25,28 @@ class ClusterPickingCommonCase(CommonCase, PickingBatchMixin):
         with self.work_on_services(menu=self.menu, profile=self.profile) as work:
             self.service = work.component(usage="cluster_picking")
 
-    def _operation_data(self, operation, qty=None, package_dest=False):
+    def _operation_data(self, operation, qty=None, package_dest=False, force_lot=None):
         picking = operation.picking_id
         # A package exists on the move line, because the quant created
         # by ``_simulate_batch_selected`` has a package.
-        data = self.data.operations(operation)[0]
+        operations = self.data.operations(operation)
+        data = None
+        if force_lot:
+            for op in operations:
+                if op.get("lot", {}).get("id") == force_lot.id:
+                    data = op
+                    break
+            if not data:
+                raise SystemError("Force lot not found into operation")
+        else:
+            data = operations[0]
         if not package_dest:
             data["package_dest"] = None
+        else:
+            package_dest = package_dest.with_context(picking_id=operation.picking_id.id)
+            data["package_dest"] = self.data.package(
+                package_dest, picking=operation.picking_id
+            )
         if qty:
             data["quantity"] = qty
         data.update(
@@ -74,8 +89,8 @@ class ClusterPickingLineCommonCase(ClusterPickingCommonCase):
             [[cls.BatchProduct(product=cls.product_a, quantity=1)]]
         )
 
-    def _operation_data(self, operation, qty=1.0, package_dest=False):
+    def _operation_data(self, operation, qty=1.0, package_dest=False, force_lot=None):
         # just force qty to 1.0
         return super(ClusterPickingLineCommonCase, self)._operation_data(
-            operation, qty=qty, package_dest=package_dest
+            operation, qty=qty, package_dest=package_dest, force_lot=None
         )
