@@ -18,12 +18,14 @@ OperationKey = namedtuple(
 class StockMove(models.Model):
     _inherit = "stock.move"
 
-    missing_packop = fields.Boolean(default=False, compute="_compute_missing_packop")
+    is_missing_packop = fields.Boolean(
+        default=False, compute="_compute_is_missing_packop"
+    )
 
     @api.depends("linked_move_operation_ids", "linked_move_operation_ids.operation_id")
-    def _compute_missing_packop(self):
+    def _compute_is_missing_packop(self):
         for move in self:
-            move.missing_packop = not move.mapped(
+            move.is_missing_packop = not move.mapped(
                 "linked_move_operation_ids.operation_id"
             )
 
@@ -184,5 +186,8 @@ class StockMove(models.Model):
                     ],
                 )
 
-    def force_recompute_pack_operation(self):
-        self._recompute_pack_op()
+    def do_recompute_pack_operation(self):
+        to_recompute = self.filtered(
+            lambda m: m.state in ("assigned", "confirmed") and m.is_missing_packop
+        )
+        to_recompute._recompute_pack_op()
