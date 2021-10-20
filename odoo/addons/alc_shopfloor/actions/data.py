@@ -166,7 +166,7 @@ class DataAction(Component):
         if record.pack_lot_ids:
             data["type"] = "lot"
             res = []
-            for pack_lot in record.pack_lot_ids:
+            for pack_lot in record.pack_lot_ids.sorted(key=lambda pl: pl.lot_id.id):
                 data_copy = data.copy()
                 data_copy.update(self._pack_operation_lot(pack_lot))
                 res.append(data_copy)
