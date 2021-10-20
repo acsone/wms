@@ -78,11 +78,11 @@ msgstr "Lot en rupture"
 
 #. module: stock_lot_loss
 #: code:addons/stock_lot_loss/models/stock_pack_operation.py:89
+#, python-format
 msgid ""
 "No qty to block for: \n"
 " %s"
-msgstr "Aucune quantité à bloquer pour rupture pour:"
-" %s"
+msgstr "Aucune quantité à bloquer pour rupture pour: %s"
 
 #. module: stock_lot_loss
 #: code:addons/stock_lot_loss/models/stock_pack_operation.py:137
