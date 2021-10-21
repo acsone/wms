@@ -2,6 +2,8 @@
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+from psycopg2.extensions import AsIs
+
 from odoo import api, fields, models
 
 
@@ -93,6 +95,18 @@ class ProductTemplate(models.Model):
 
     not_sold_on_website = fields.Boolean(
         default=False, compute="_compute_not_sold_on_website", store=True, index=True,
+    )
+
+    no_dimensions_in_stock = fields.Boolean(
+        default=False,
+        compute="_compute_no_dimensions_in_stock",
+        search="_search_no_dimensions_in_stock",
+    )
+
+    dimensions_in_stock = fields.Boolean(
+        default=False,
+        compute="_compute_dimensions_in_stock",
+        search="_search_dimensions_in_stock",
     )
 
     has_anomaly = fields.Boolean(
@@ -213,7 +227,7 @@ class ProductTemplate(models.Model):
                 # No dimensions on services
                 continue
 
-            if not product.length or not product.width or not product.height:
+            if not (product.length or product.width or product.height):
                 product.has_no_dimensions = True
             else:
                 product.has_no_dimensions = False
@@ -227,7 +241,6 @@ class ProductTemplate(models.Model):
         "packaging_ids.width",
     )
     def _compute_packaging_has_no_dimensions(self):
-        missing_dimensions = []
         for product in self:
             if product.type == "service":
                 # No dimensions on services
@@ -235,8 +248,9 @@ class ProductTemplate(models.Model):
 
             packagings = product.mapped("packaging_ids")
             if packagings:
+                missing_dimensions = []
                 for pack in packagings:
-                    if not pack.lngth or not pack.width or not pack.height:
+                    if not (pack.lngth or pack.width or pack.height):
                         missing_dimensions.append(True)
                     else:
                         missing_dimensions.append(False)
@@ -247,7 +261,17 @@ class ProductTemplate(models.Model):
             else:
                 product.packaging_has_no_dimensions = False
 
+    def _get_current_ids(self):
+        if self.ids and len(self.ids) > 1:
+            current_ids = AsIs("AND pt.id in {}".format(tuple(self.ids)))
+        elif self.ids and len(self.ids) == 1:
+            current_ids = AsIs("AND pt.id = {}".format(self.ids[0]))
+        else:
+            current_ids = AsIs("")
+        return current_ids
+
     def _get_mto_product_without_sale_order(self):
+        current_ids = self._get_current_ids()
         self.env.cr.execute(
             """
             SELECT DISTINCT pt.id
@@ -267,18 +291,19 @@ class ProductTemplate(models.Model):
                                    AND
                                         sol.product_qty_remains_to_deliver > 0
                         )
-            """
+                   %(ids)s
+            """,
+            {"ids": current_ids},
         )
         result = self.env.cr.fetchall()
-        ids = [product_id for product in result for product_id in product]
+        ids = [r[0] for r in result]
         return ids
 
     @api.depends("is_mto_product", "route_ids")
     def _compute_mto_purchased_not_sold(self):
-        ids = self._get_mto_product_without_sale_order()
-        products = self.browse(ids)
-        for product in products:
-            product.mto_purchased_not_sold = True
+        ids_mto_purchased_not_sold = set(self._get_mto_product_without_sale_order())
+        for product in self:
+            product.mto_purchased_not_sold = product.id in ids_mto_purchased_not_sold
 
     def _search_mto_purchased_not_sold(self, operator, value):
         ids = self._get_mto_product_without_sale_order()
@@ -289,6 +314,8 @@ class ProductTemplate(models.Model):
             "__setup__.stock_location_onorder", raise_if_not_found=False
         )
         ids = []
+        current_ids = self._get_current_ids()
+
         if stock_location_mto:
             self.env.cr.execute(
                 """
@@ -305,23 +332,24 @@ class ProductTemplate(models.Model):
                             sl.parent_left >= %(stock_location_mto_parent_left)s AND sl.parent_right <= %(stock_location_mto_parent_right)s
                     AND sq.location_kind = 'bin'
                     AND sq.qty > 0
+                    %(ids)s
                 """,
                 {
                     "stock_location_mto_parent_left": stock_location_mto.parent_left,
                     "stock_location_mto_parent_right": stock_location_mto.parent_right,
+                    "ids": current_ids,
                 },
             )
             result = self.env.cr.fetchall()
-            ids = [product_id for product in result for product_id in product]
+            ids = [r[0] for r in result]
 
         return ids
 
     @api.depends("is_mto_product", "route_ids")
     def _compute_mto_stock_no_mto_route(self):
-        ids = self._get_mto_stock_no_mto_route()
-        products = self.browse(ids)
-        for product in products:
-            product.mto_stock_no_mto_route = True
+        ids_mto_stock_no_mto_route = set(self._get_mto_stock_no_mto_route())
+        for product in self:
+            product.mto_stock_no_mto_route = product.id in ids_mto_stock_no_mto_route
 
     def _search_mto_stock_no_mto_route(self, operator, value):
         ids = self._get_mto_stock_no_mto_route()
@@ -335,6 +363,7 @@ class ProductTemplate(models.Model):
         new_route = self.env.ref(
             "__setup__.stock_location_route_new", raise_if_not_found=False
         )
+        current_ids = self._get_current_ids()
         if stock_location_mto:
             self.env.cr.execute(
                 """
@@ -354,24 +383,25 @@ class ProductTemplate(models.Model):
                     AND location_kind = 'bin'
                     AND qty > 0
                     AND srp.route_id = %(new_route_id)s
+                    %(ids)s
                 """,
                 {
                     "stock_location_mto_parent_left": stock_location_mto.parent_left,
                     "stock_location_mto_parent_right": stock_location_mto.parent_right,
                     "new_route_id": new_route.id,
+                    "ids": current_ids,
                 },
             )
             result = self.env.cr.fetchall()
-            ids = [product_id for product in result for product_id in product]
+            ids = [r[0] for r in result]
 
         return ids
 
     @api.depends("is_mto_product", "route_ids")
     def _compute_mto_stock_new_route(self):
-        ids = self._get_mto_stock_new_route()
-        products = self.browse(ids)
-        for product in products:
-            product.mto_stock_new_route = True
+        ids_mto_stock_new_route = set(self._get_mto_stock_new_route())
+        for product in self:
+            product.mto_stock_new_route = product.id in ids_mto_stock_new_route
 
     def _search_mto_stock_new_route(self, operator, value):
         ids = self._get_mto_stock_new_route()
@@ -390,6 +420,7 @@ class ProductTemplate(models.Model):
             "__setup__.stock_location_onorder", raise_if_not_found=False
         )
         ids = []
+        current_ids = self._get_current_ids()
         if stock_location_mto:
             self.env.cr.execute(
                 """
@@ -408,26 +439,112 @@ class ProductTemplate(models.Model):
                             AND sq.location_kind = 'bin'
                             AND sq.qty > 0
                             AND sq.write_date <  current_date - interval '5' day
+                            %(ids)s
                 """,
                 {
                     "stock_location_mto_parent_left": stock_location_mto.parent_left,
                     "stock_location_mto_parent_right": stock_location_mto.parent_right,
+                    "ids": current_ids,
                 },
             )
             result = self.env.cr.fetchall()
-            ids = [product_id for product in result for product_id in product]
+            ids = [r[0] for r in result]
 
         return ids
 
     @api.depends("is_mto_product", "route_ids")
     def _compute_mto_stock_5_days(self):
-        ids = self._get_mto_stock_5_days()
-        products = self.browse(ids)
-        for product in products:
-            product.mto_stock_5_days = True
+        ids_mto_stock_5_days = set(self._get_mto_stock_5_days())
+        for product in self:
+            product.mto_stock_5_days = product.id in ids_mto_stock_5_days
 
     def _search_mto_stock_5_days(self, operator, value):
         ids = self._get_mto_stock_5_days()
+        return [("id", "in", ids)]
+
+    def _get_product_dimensions_in_stock(self, no_dimensions):
+        human_product = self.env.ref("specific_data.product_categ_humain")
+        human_med_category_ids = (
+            self.env["product.category"]
+            .search([("id", "child_of", human_product.id)])
+            .mapped("id")
+        )
+        ids = []
+        current_ids = self._get_current_ids()
+        self.env.cr.execute(
+            """
+            SELECT DISTINCT pt.id
+                FROM
+                        product_template pt
+                JOIN
+                        product_product pp on pp.product_tmpl_id = pt.id AND pt.is_mto_product = False
+                JOIN
+                        stock_quant sq on sq.product_id = pp.id
+                WHERE
+                        sq.qty > 0
+                    AND sq.location_kind = 'bin'
+                    %(no_product_dimensions)s
+                    %(no_packaging_dimensions)s
+                    AND pt.active = True
+                    AND pt.sale_ok = True
+                    AND pt.type='product'
+                    AND pt.categ_id NOT IN %(med_human_categories)s
+                    %(ids)s
+            """,
+            {
+                "med_human_categories": tuple(human_med_category_ids),
+                "no_product_dimensions": AsIs("AND pt.has_no_dimensions = True")
+                if no_dimensions
+                else AsIs("AND pt.has_no_dimensions = False"),
+                "no_packaging_dimensions": AsIs(
+                    "OR pt.packaging_has_no_dimensions = True"
+                )
+                if no_dimensions
+                else AsIs("AND pt.packaging_has_no_dimensions = False"),
+                "ids": current_ids,
+            },
+        )
+        result = self.env.cr.fetchall()
+        ids = [r[0] for r in result]
+
+        return ids
+
+    @api.depends(
+        "sale_ok",
+        "active",
+        "is_mto_product",
+        "has_no_dimensions",
+        "packaging_has_no_dimensions",
+        "route_ids",
+    )
+    def _compute_no_dimensions_in_stock(self):
+        ids_not_in_stock = set(
+            self._get_product_dimensions_in_stock(no_dimensions=True)
+        )
+        for product in self:
+            product.no_dimensions_in_stock = product.id in ids_not_in_stock
+
+    def _search_no_dimensions_in_stock(self, operator, value):
+        ids = self._get_product_dimensions_in_stock(no_dimensions=True)
+        return [("id", "in", ids)]
+
+    @api.depends(
+        "sale_ok",
+        "active",
+        "is_mto_product",
+        "has_no_dimensions",
+        "packaging_has_no_dimensions",
+        "route_ids",
+    )
+    def _compute_dimensions_in_stock(self):
+        ids_not_in_stock = set(
+            self._get_product_dimensions_in_stock(no_dimensions=False)
+        )
+        for product in self:
+            product.no_dimensions_in_stock = product.id in ids_not_in_stock
+
+    def _search_dimensions_in_stock(self, operator, value):
+        ids = self._get_product_dimensions_in_stock(no_dimensions=False)
         return [("id", "in", ids)]
 
     @api.depends(
@@ -446,6 +563,7 @@ class ProductTemplate(models.Model):
         "mto_stock_new_route",
         "not_sold_on_website",
         "mto_stock_5_days",
+        "no_dimensions_in_stock",
     )
     def _compute_has_anomaly(self):
         for product in self:
@@ -465,6 +583,7 @@ class ProductTemplate(models.Model):
                 or product.mto_stock_new_route
                 or product.not_sold_on_website
                 or product.mto_stock_5_days
+                or product.no_dimensions_in_stock
             ):
                 product.has_anomaly = True
             else:

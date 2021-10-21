@@ -89,6 +89,16 @@
           string="Product is not sold anymore but still on website"
           domain="[('not_sold_on_website', '=', True)]"
         />
+        <filter
+          name="filter_no_dimensions_in_stock"
+          string="Product without dimensions in stock"
+          domain="[('no_dimensions_in_stock', '=', True)]"
+        />
+        <filter
+          name="filter_dimensions_in_stock"
+          string="Product with dimensions in stock"
+          domain="[('dimensions_in_stock', '=', True)]"
+        />
       </xpath>
     </field>
   </record>
@@ -124,6 +134,8 @@
         <field name="mto_stock_new_route" invisible="1" />
         <field name="not_sold_on_website" invisible="1" />
         <field name="mto_stock_5_days" invisible="1" />
+        <field name="no_dimensions_in_stock" invisible="1" />
+        <field name="dimensions_in_stock" invisible="1" />
       </form>
       <header position="after">
         <div
@@ -196,6 +208,14 @@
           </div>
                     <div attrs="{'invisible': [('not_sold_on_website', '=', False)]}">
             <p>- Product not sold but on website</p>
+          </div>
+                    <div
+            attrs="{'invisible': [('no_dimensions_in_stock', '=', False)]}"
+          >
+            <p>- Product without dimensions in stock</p>
+          </div>
+                    <div attrs="{'invisible': [('dimensions_in_stock', '=', False)]}">
+            <p>- Product with dimensions in stock</p>
           </div>
                 </div>
       </header>
