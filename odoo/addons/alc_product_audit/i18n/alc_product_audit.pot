@@ -85,6 +85,16 @@ msgstr ""
 
 #. module: alc_product_audit
 #: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
+msgid "- Product with dimensions in stock"
+msgstr ""
+
+#. module: alc_product_audit
+#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
+msgid "- Product without dimensions in stock"
+msgstr ""
+
+#. module: alc_product_audit
+#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
 msgid "- The selected picking zone does not match the bin"
 msgstr ""
 
@@ -93,6 +103,13 @@ msgstr ""
 #: model:ir.model.fields,field_description:alc_product_audit.field_product_product_can_be_bought_without_buy_route
 #: model:ir.model.fields,field_description:alc_product_audit.field_product_template_can_be_bought_without_buy_route
 msgid "Can be bought without buy route"
+msgstr ""
+
+#. module: alc_product_audit
+#: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_dimensions_in_stock
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_product_dimensions_in_stock
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_template_dimensions_in_stock
+msgid "Dimensions in stock"
 msgstr ""
 
 #. module: alc_product_audit
@@ -206,6 +223,13 @@ msgid "Mto with abnormal route"
 msgstr ""
 
 #. module: alc_product_audit
+#: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_no_dimensions_in_stock
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_product_no_dimensions_in_stock
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_template_no_dimensions_in_stock
+msgid "No dimensions in stock"
+msgstr ""
+
+#. module: alc_product_audit
 #: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_no_min_max_no_on_command_reappro
 #: model:ir.model.fields,field_description:alc_product_audit.field_product_product_no_min_max_no_on_command_reappro
 #: model:ir.model.fields,field_description:alc_product_audit.field_product_template_no_min_max_no_on_command_reappro
@@ -269,6 +293,16 @@ msgstr ""
 #. module: alc_product_audit
 #: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
 msgid "Product is not sold anymore but still on website"
+msgstr ""
+
+#. module: alc_product_audit
+#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
+msgid "Product with dimensions in stock"
+msgstr ""
+
+#. module: alc_product_audit
+#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
+msgid "Product without dimensions in stock"
 msgstr ""
 
 #. module: alc_product_audit

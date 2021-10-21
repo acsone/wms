@@ -98,6 +98,18 @@ msgstr ""
 
 #. module: alc_product_audit
 #: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
+#, fuzzy
+msgid "- Product with dimensions in stock"
+msgstr "- Le produit n'a pas toutes les dimensions"
+
+#. module: alc_product_audit
+#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
+#, fuzzy
+msgid "- Product without dimensions in stock"
+msgstr "- Le produit n'a pas toutes les dimensions"
+
+#. module: alc_product_audit
+#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
 msgid "- The selected picking zone does not match the bin"
 msgstr "- Rangement et zone de picking incohérent"
 
@@ -108,6 +120,13 @@ msgstr "- Rangement et zone de picking incohérent"
 #, fuzzy
 msgid "Can be bought without buy route"
 msgstr "Peut être acheté sans route Acheter"
+
+#. module: alc_product_audit
+#: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_dimensions_in_stock
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_product_dimensions_in_stock
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_template_dimensions_in_stock
+msgid "Dimensions in stock"
+msgstr ""
 
 #. module: alc_product_audit
 #: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
@@ -225,6 +244,14 @@ msgid "Mto with abnormal route"
 msgstr "Produits achetés/vendus avec une route incohérente"
 
 #. module: alc_product_audit
+#: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_no_dimensions_in_stock
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_product_no_dimensions_in_stock
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_template_no_dimensions_in_stock
+#, fuzzy
+msgid "No dimensions in stock"
+msgstr "Dimensions manquantes"
+
+#. module: alc_product_audit
 #: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_no_min_max_no_on_command_reappro
 #: model:ir.model.fields,field_description:alc_product_audit.field_product_product_no_min_max_no_on_command_reappro
 #: model:ir.model.fields,field_description:alc_product_audit.field_product_template_no_min_max_no_on_command_reappro
@@ -294,6 +321,18 @@ msgstr ""
 #: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
 msgid "Product is not sold anymore but still on website"
 msgstr "Ne peut être vendu et publié sur le site web"
+
+#. module: alc_product_audit
+#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
+#, fuzzy
+msgid "Product with dimensions in stock"
+msgstr "- Le produit n'a pas toutes les dimensions"
+
+#. module: alc_product_audit
+#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
+#, fuzzy
+msgid "Product without dimensions in stock"
+msgstr "- Le produit n'a pas toutes les dimensions"
 
 #. module: alc_product_audit
 #: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_sale_not_ok_archived_bin_available
