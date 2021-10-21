@@ -214,7 +214,7 @@ class ClusterPicking(Component):
             ("user_id", "=", False),
             ("state", "=", "draft"),
             "&",
-            ("user_id", "=", self.env.user.id),
+            ("user_id", "=", self.shopfloor_user.id),
             ("state", "in", ("draft", "in_progress")),
         ]
 
@@ -255,12 +255,14 @@ class ClusterPicking(Component):
         # look for in progress + assigned to self first
         candidates = batches.filtered(
             lambda batch: batch.state == "in_progress"
-            and batch.user_id == self.env.user
+            and batch.user_id == self.shopfloor_user
         )
         if candidates:
             return candidates[0]
         # then look for draft assigned to self
-        candidates = batches.filtered(lambda batch: batch.user_id == self.env.user)
+        candidates = batches.filtered(
+            lambda batch: batch.user_id == self.shopfloor_user
+        )
         if candidates:
             batch = candidates[0]
             batch.write({"state": "in_progress"})
@@ -268,7 +270,7 @@ class ClusterPicking(Component):
         # finally take any batch that search could return
         if batches:
             batch = batches[0]
-            batch.write({"user_id": self.env.uid, "state": "in_progress"})
+            batch.write({"user_id": self.shopfloor_user.id, "state": "in_progress"})
             return batch
         return self.env["stock.picking.wave"]
 
