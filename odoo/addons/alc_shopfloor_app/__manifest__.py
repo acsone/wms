@@ -12,6 +12,7 @@
     "website": "https://acsone.eu/",
     "depends": [
         "alc_shopfloor",
+        "alc_shopfloor_cluster_picking",
         "alc_shopfloor_location_content_relocation",
         "alc_shopfloor_mobile",
         "alc_shopfloor_rest_log",
