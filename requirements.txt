@@ -193,7 +193,7 @@ odoo10-addon-stock-move-common-dest @ git+https://github.com/acsone/stock-logist
 odoo10-addon-stock-mts-mto-rule @ git+https://github.com/acsone/stock-logistics-warehouse.git@d7cedf56da46da998d63d4e03a0e9cea2099fded#subdirectory=setup/stock_mts_mto_rule
 odoo10-addon-stock-operation-cleaner @ git+https://github.com/acsone/stock-logistics-workflow@f0fdafdbf67005ce365121815e04619a5b7ee858#subdirectory=setup/stock_operation_cleaner
 odoo10-addon-stock-packaging-calculator @ git+https://github.com/acsone/stock-logistics-warehouse@dcc9fa4e3e7bbaac325c497f8a2c94f9f02f07c2#subdirectory=setup/stock_packaging_calculator
-odoo10-addon-stock-picking-batch-creation @ git+https://github.com/oca/wms.git@51e57ab58797732a4fa34d4fdc328554faf2ef0c#subdirectory=setup/stock_picking_batch_creation
+odoo10-addon-stock-picking-batch-creation @ git+https://github.com/oca/wms.git@2a2fc4277ee40c79c2ba0e3117bd1b2dbbbba057#subdirectory=setup/stock_picking_batch_creation
 odoo10-addon-stock-picking-completion-info @ git+https://github.com/acsone/stock-logistics-warehouse@9a79c9d602932f387c1a9bd55e604e528139e88e#subdirectory=setup/stock_picking_completion_info
 odoo10-addon-stock-picking-show-backorder==10.0.1.0.0
 odoo10-addon-stock-production-lot-expiry @ git+https://github.com/acsone/product-attribute@7e2c8cda6effefe84023848ea0c560af95e8a268#subdirectory=setup/stock_production_lot_expiry
