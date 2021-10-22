@@ -36,12 +36,14 @@ msgstr ""
 #. module: alc_customer_audit
 #: model:ir.model.fields,field_description:alc_customer_audit.field_res_partner_has_anomaly
 #: model:ir.model.fields,field_description:alc_customer_audit.field_res_users_has_anomaly
+#: model:ir.model.fields,field_description:alc_customer_audit.field_shopinvader_partner_has_anomaly
 msgid "Has anomaly"
 msgstr ""
 
 #. module: alc_customer_audit
 #: model:ir.model.fields,field_description:alc_customer_audit.field_res_partner_no_delivery_round
 #: model:ir.model.fields,field_description:alc_customer_audit.field_res_users_no_delivery_round
+#: model:ir.model.fields,field_description:alc_customer_audit.field_shopinvader_partner_no_delivery_round
 #: model:ir.ui.view,arch_db:alc_customer_audit.res_partner_search_view
 msgid "No delivery round"
 msgstr ""
@@ -49,6 +51,7 @@ msgstr ""
 #. module: alc_customer_audit
 #: model:ir.model.fields,field_description:alc_customer_audit.field_res_partner_no_pharmacist
 #: model:ir.model.fields,field_description:alc_customer_audit.field_res_users_no_pharmacist
+#: model:ir.model.fields,field_description:alc_customer_audit.field_shopinvader_partner_no_pharmacist
 #: model:ir.ui.view,arch_db:alc_customer_audit.res_partner_search_view
 msgid "No pharmacist"
 msgstr ""
