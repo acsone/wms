@@ -25,6 +25,7 @@ msgstr ""
 
 #. module: connector_esb
 #: model:ir.model.fields,field_description:connector_esb.field_product_category_alcyon_product_type
+#: model:ir.model.fields,field_description:connector_esb.field_shopinvader_category_alcyon_product_type
 msgid "Alcyon Product Type"
 msgstr ""
 
@@ -151,6 +152,9 @@ msgstr ""
 #: model:ir.model.fields,field_description:connector_esb.field_product_template_esb_exported
 #: model:ir.model.fields,field_description:connector_esb.field_res_partner_esb_exported
 #: model:ir.model.fields,field_description:connector_esb.field_res_users_esb_exported
+#: model:ir.model.fields,field_description:connector_esb.field_shopinvader_partner_esb_exported
+#: model:ir.model.fields,field_description:connector_esb.field_shopinvader_product_esb_exported
+#: model:ir.model.fields,field_description:connector_esb.field_shopinvader_variant_esb_exported
 msgid "Esb exported"
 msgstr ""
 
@@ -395,6 +399,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:connector_esb.field_sale_order_esb_ref
 #: model:ir.model.fields,field_description:connector_esb.field_sale_order_line_esb_ref
 #: model:ir.model.fields,field_description:connector_esb.field_sale_order_line_newpharma_ref
+#: model:ir.model.fields,field_description:connector_esb.field_shopinvader_category_esb_ref
 msgid "Reference for ESB"
 msgstr ""
 
@@ -473,6 +478,7 @@ msgstr ""
 #. module: connector_esb
 #: model:ir.model.fields,field_description:connector_esb.field_delivery_carrier_sale_price_2_export
 #: model:ir.model.fields,field_description:connector_esb.field_product_product_sale_price_2_export
+#: model:ir.model.fields,field_description:connector_esb.field_shopinvader_variant_sale_price_2_export
 msgid "Sale Price 2 exported"
 msgstr ""
 
