@@ -16,6 +16,7 @@ msgstr ""
 #. module: sale_delay
 #: model:ir.model.fields,field_description:sale_delay.field_res_partner_max_delay_for_sale_order_creation
 #: model:ir.model.fields,field_description:sale_delay.field_res_users_max_delay_for_sale_order_creation
+#: model:ir.model.fields,field_description:sale_delay.field_shopinvader_partner_max_delay_for_sale_order_creation
 msgid "Max delay on sale order operation"
 msgstr ""
 
@@ -32,6 +33,7 @@ msgstr ""
 #. module: sale_delay
 #: model:ir.model.fields,help:sale_delay.field_res_partner_max_delay_for_sale_order_creation
 #: model:ir.model.fields,help:sale_delay.field_res_users_max_delay_for_sale_order_creation
+#: model:ir.model.fields,help:sale_delay.field_shopinvader_partner_max_delay_for_sale_order_creation
 msgid "Used to compute if the processing of a sale order inthe background takes too long. (0.5 is 30 minutes)"
 msgstr ""
 
