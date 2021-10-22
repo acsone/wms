@@ -251,6 +251,7 @@ msgstr "En cours de Livraison"
 #. module: delivery_rounds
 #: model:ir.model.fields,field_description:delivery_rounds.field_res_partner_round_itinerary_ids
 #: model:ir.model.fields,field_description:delivery_rounds.field_res_users_round_itinerary_ids
+#: model:ir.model.fields,field_description:delivery_rounds.field_shopinvader_partner_round_itinerary_ids
 #: model:ir.ui.view,arch_db:delivery_rounds.round_itinerary_view_search
 msgid "Delivery Itineraries"
 msgstr "Itinéraires de livraison"
