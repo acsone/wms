@@ -146,6 +146,7 @@ msgstr "Délai de livraison par défaut (en jours)"
 #. module: specific_purchase
 #: model:ir.model.fields,field_description:specific_purchase.field_res_partner_delivery_lead_time
 #: model:ir.model.fields,field_description:specific_purchase.field_res_users_delivery_lead_time
+#: model:ir.model.fields,field_description:specific_purchase.field_shopinvader_partner_delivery_lead_time
 msgid "Delivery lead time"
 msgstr "Délai de livraison"
 
@@ -164,6 +165,7 @@ msgstr "Nom affiché"
 #: model:ir.model.fields,field_description:specific_purchase.field_procurement_orderpoint_compute_is_manage_day_5
 #: model:ir.model.fields,field_description:specific_purchase.field_res_partner_is_manage_day_5
 #: model:ir.model.fields,field_description:specific_purchase.field_res_users_is_manage_day_5
+#: model:ir.model.fields,field_description:specific_purchase.field_shopinvader_partner_is_manage_day_5
 msgid "Friday"
 msgstr "Vendredi"
 
@@ -215,6 +217,7 @@ msgstr "Dernière mise à jour le"
 #: model:ir.model.fields,field_description:specific_purchase.field_procurement_orderpoint_compute_is_manage_day_1
 #: model:ir.model.fields,field_description:specific_purchase.field_res_partner_is_manage_day_1
 #: model:ir.model.fields,field_description:specific_purchase.field_res_users_is_manage_day_1
+#: model:ir.model.fields,field_description:specific_purchase.field_shopinvader_partner_is_manage_day_1
 msgid "Monday"
 msgstr "Lundi"
 
@@ -238,6 +241,8 @@ msgstr "Nom"
 #: model:ir.model.fields,field_description:specific_purchase.field_delivery_carrier_nb_days_out_of_stock
 #: model:ir.model.fields,field_description:specific_purchase.field_product_product_nb_days_out_of_stock
 #: model:ir.model.fields,field_description:specific_purchase.field_product_template_nb_days_out_of_stock
+#: model:ir.model.fields,field_description:specific_purchase.field_shopinvader_product_nb_days_out_of_stock
+#: model:ir.model.fields,field_description:specific_purchase.field_shopinvader_variant_nb_days_out_of_stock
 msgid "Nb days out of stock"
 msgstr "Nb jours en rupture de stock"
 
@@ -255,6 +260,8 @@ msgstr "Nbr lignes BO"
 #: model:ir.model.fields,help:specific_purchase.field_delivery_carrier_nb_days_out_of_stock
 #: model:ir.model.fields,help:specific_purchase.field_product_product_nb_days_out_of_stock
 #: model:ir.model.fields,help:specific_purchase.field_product_template_nb_days_out_of_stock
+#: model:ir.model.fields,help:specific_purchase.field_shopinvader_product_nb_days_out_of_stock
+#: model:ir.model.fields,help:specific_purchase.field_shopinvader_variant_nb_days_out_of_stock
 msgid "Number of days before running out of stock"
 msgstr "Nombre de jours avant de manquer de stock"
 
@@ -346,6 +353,7 @@ msgstr "Rupture chez le founisseur"
 #: model:ir.model.fields,field_description:specific_purchase.field_procurement_orderpoint_compute_is_manage_day_6
 #: model:ir.model.fields,field_description:specific_purchase.field_res_partner_is_manage_day_6
 #: model:ir.model.fields,field_description:specific_purchase.field_res_users_is_manage_day_6
+#: model:ir.model.fields,field_description:specific_purchase.field_shopinvader_partner_is_manage_day_6
 msgid "Saturday"
 msgstr "Samedi"
 
@@ -363,6 +371,8 @@ msgstr "Définir la date pour toutes les lignes de la commande"
 #: model:ir.model.fields,field_description:specific_purchase.field_delivery_carrier_state_id
 #: model:ir.model.fields,field_description:specific_purchase.field_product_product_state_id
 #: model:ir.model.fields,field_description:specific_purchase.field_product_template_state_id
+#: model:ir.model.fields,field_description:specific_purchase.field_shopinvader_product_state_id
+#: model:ir.model.fields,field_description:specific_purchase.field_shopinvader_variant_state_id
 msgid "State"
 msgstr "État"
 
@@ -375,12 +385,14 @@ msgstr "Mouvement de stock"
 #: model:ir.model.fields,field_description:specific_purchase.field_procurement_orderpoint_compute_is_manage_day_7
 #: model:ir.model.fields,field_description:specific_purchase.field_res_partner_is_manage_day_7
 #: model:ir.model.fields,field_description:specific_purchase.field_res_users_is_manage_day_7
+#: model:ir.model.fields,field_description:specific_purchase.field_shopinvader_partner_is_manage_day_7
 msgid "Sunday"
 msgstr "Dimanche"
 
 #. module: specific_purchase
 #: model:ir.model.fields,field_description:specific_purchase.field_res_partner_supplier_discount
 #: model:ir.model.fields,field_description:specific_purchase.field_res_users_supplier_discount
+#: model:ir.model.fields,field_description:specific_purchase.field_shopinvader_partner_supplier_discount
 msgid "Supplier discount %"
 msgstr "Ristourne globale %"
 
@@ -410,6 +422,8 @@ msgstr "Définit la date prévue pour toutes les lignes de la commande"
 #: model:ir.model.fields,help:specific_purchase.field_delivery_carrier_vendor_product_code
 #: model:ir.model.fields,help:specific_purchase.field_product_product_vendor_product_code
 #: model:ir.model.fields,help:specific_purchase.field_product_template_vendor_product_code
+#: model:ir.model.fields,help:specific_purchase.field_shopinvader_product_vendor_product_code
+#: model:ir.model.fields,help:specific_purchase.field_shopinvader_variant_vendor_product_code
 msgid ""
 "This vendor's product code will be used when printing a request for "
 "quotation. Keep empty to use the internal one."
@@ -419,6 +433,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:specific_purchase.field_procurement_orderpoint_compute_is_manage_day_4
 #: model:ir.model.fields,field_description:specific_purchase.field_res_partner_is_manage_day_4
 #: model:ir.model.fields,field_description:specific_purchase.field_res_users_is_manage_day_4
+#: model:ir.model.fields,field_description:specific_purchase.field_shopinvader_partner_is_manage_day_4
 msgid "Thursday"
 msgstr "Jeudi"
 
@@ -436,6 +451,7 @@ msgstr "Poids total en Kg"
 #: model:ir.model.fields,field_description:specific_purchase.field_procurement_orderpoint_compute_is_manage_day_2
 #: model:ir.model.fields,field_description:specific_purchase.field_res_partner_is_manage_day_2
 #: model:ir.model.fields,field_description:specific_purchase.field_res_users_is_manage_day_2
+#: model:ir.model.fields,field_description:specific_purchase.field_shopinvader_partner_is_manage_day_2
 msgid "Tuesday"
 msgstr "Mardi"
 
@@ -458,6 +474,8 @@ msgstr "Validité"
 #: model:ir.model.fields,field_description:specific_purchase.field_delivery_carrier_supplier_id
 #: model:ir.model.fields,field_description:specific_purchase.field_product_product_supplier_id
 #: model:ir.model.fields,field_description:specific_purchase.field_product_template_supplier_id
+#: model:ir.model.fields,field_description:specific_purchase.field_shopinvader_product_supplier_id
+#: model:ir.model.fields,field_description:specific_purchase.field_shopinvader_variant_supplier_id
 #: model:ir.ui.view,arch_db:specific_purchase.product_template_search_view
 msgid "Vendor"
 msgstr "Fournisseur"
@@ -466,6 +484,8 @@ msgstr "Fournisseur"
 #: model:ir.model.fields,field_description:specific_purchase.field_delivery_carrier_vendor_product_code
 #: model:ir.model.fields,field_description:specific_purchase.field_product_product_vendor_product_code
 #: model:ir.model.fields,field_description:specific_purchase.field_product_template_vendor_product_code
+#: model:ir.model.fields,field_description:specific_purchase.field_shopinvader_product_vendor_product_code
+#: model:ir.model.fields,field_description:specific_purchase.field_shopinvader_variant_vendor_product_code
 msgid "Vendor Product Code"
 msgstr "Référence Fournisseur"
 
@@ -473,6 +493,8 @@ msgstr "Référence Fournisseur"
 #: model:ir.model.fields,help:specific_purchase.field_delivery_carrier_supplier_id
 #: model:ir.model.fields,help:specific_purchase.field_product_product_supplier_id
 #: model:ir.model.fields,help:specific_purchase.field_product_template_supplier_id
+#: model:ir.model.fields,help:specific_purchase.field_shopinvader_product_supplier_id
+#: model:ir.model.fields,help:specific_purchase.field_shopinvader_variant_supplier_id
 #, fuzzy
 msgid "Vendor of this product"
 msgstr "Référence Fournisseur"
@@ -490,6 +512,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:specific_purchase.field_procurement_orderpoint_compute_is_manage_day_3
 #: model:ir.model.fields,field_description:specific_purchase.field_res_partner_is_manage_day_3
 #: model:ir.model.fields,field_description:specific_purchase.field_res_users_is_manage_day_3
+#: model:ir.model.fields,field_description:specific_purchase.field_shopinvader_partner_is_manage_day_3
 msgid "Wednesday"
 msgstr "Mercredi"
 
