@@ -59,6 +59,7 @@ msgstr "Facture"
 #: model:ir.model.fields,field_description:alc_sale_invoicing_policy.field_account_payment_mode_invoice_frequency
 #: model:ir.model.fields,field_description:alc_sale_invoicing_policy.field_res_partner_invoice_frequency
 #: model:ir.model.fields,field_description:alc_sale_invoicing_policy.field_res_users_invoice_frequency
+#: model:ir.model.fields,field_description:alc_sale_invoicing_policy.field_shopinvader_partner_invoice_frequency
 msgid "Invoice frequency"
 msgstr "Fréquence de facturation"
 
@@ -66,6 +67,7 @@ msgstr "Fréquence de facturation"
 #: model:ir.model.fields,field_description:alc_sale_invoicing_policy.field_account_payment_mode_invoice_grouping
 #: model:ir.model.fields,field_description:alc_sale_invoicing_policy.field_res_partner_invoice_grouping
 #: model:ir.model.fields,field_description:alc_sale_invoicing_policy.field_res_users_invoice_grouping
+#: model:ir.model.fields,field_description:alc_sale_invoicing_policy.field_shopinvader_partner_invoice_grouping
 msgid "Invoice grouping"
 msgstr "Regroupement des factures"
 
@@ -78,6 +80,7 @@ msgstr "Facture"
 #. module: alc_sale_invoicing_policy
 #: model:ir.model.fields,field_description:alc_sale_invoicing_policy.field_res_partner_next_invoice_date
 #: model:ir.model.fields,field_description:alc_sale_invoicing_policy.field_res_users_next_invoice_date
+#: model:ir.model.fields,field_description:alc_sale_invoicing_policy.field_shopinvader_partner_next_invoice_date
 msgid "Next invoice date"
 msgstr ""
 
