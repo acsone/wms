@@ -14,7 +14,7 @@
     "author": "ACSONE SA/NV",
     "website": "http://www.acsone.eu",
     "license": "AGPL-3",
-    "category": "trn",
+    "category": "alc",
     "data": ["data/storage_backends.xml"],
     "installable": True,
 }

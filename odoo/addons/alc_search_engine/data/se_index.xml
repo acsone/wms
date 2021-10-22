@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo noupdate="0">
+    <record id="index_config_shopinvader_variant" model="se.index.config">
+        <field name="name">Shopinvader Variant Index config</field>
+        <field name="body">{}</field>
+        <field name="body_str">
+{
+  "settings":{
+    "analysis":{
+      "char_filter":{
+        "replace":{
+          "type":"mapping",
+          "mappings":[
+            "&amp;=> and "
+          ]
+        }
+      },
+      "filter":{
+        "word_delimiter":{
+          "type":"word_delimiter",
+          "split_on_numerics":false,
+          "split_on_case_change":true,
+          "generate_word_parts":true,
+          "generate_number_parts":true,
+          "catenate_all":true,
+          "preserve_original":true,
+          "catenate_numbers":true
+        }
+      },
+      "analyzer":{
+        "default":{
+          "type":"custom",
+          "char_filter":[
+            "html_strip",
+            "replace"
+          ],
+          "tokenizer":"whitespace",
+          "filter":[
+            "lowercase",
+            "word_delimiter"
+          ]
+        }
+      },
+      "index" : {
+        "sort.field" : ["main", "id"],
+        "sort.order" : ["desc", "asc"]
+      }
+    }
+  },
+  "mappings":{
+    "properties":{
+      "hierarchicalCategories":{
+        "type":"nested",
+        "properties":{
+          "ancestors":{
+            "type":"keyword"
+          },
+          "order":{
+            "type":"integer"
+          },
+          "value":{
+            "type":"keyword"
+          },
+          "level":{
+            "type":"integer"
+          }
+        }
+      },
+      "url_key":{
+        "type":"keyword"
+      },
+      "main":{
+        "type":"boolean"
+      },
+      "id":{
+        "type":"integer"
+      },
+      "redirect_url_key":{
+        "type":"keyword"
+      }
+    }
+  }
+}
+        </field>
+    </record>
+
+    <record id="index_config_shopinvader_category" model="se.index.config">
+        <field name="name">Shopinvader Category Index config</field>
+        <field name="body">{}</field>
+        <field name="body_str">
+            {
+              "settings" : {
+                "index" : {
+                  "sort.field" : ["id"],
+                  "sort.order" : ["asc"]
+                }
+              },
+              "mappings": {
+                "properties": {
+                  "url_key": {
+                    "type":  "keyword"
+                  },
+                  "redirect_url_key": {
+                    "type":  "keyword"
+                  },
+                  "id": {
+                    "type":  "integer"
+                  }
+                }
+              }
+            }
+        </field>
+    </record>
+
+    <record id="elasticsearch_shopinvader_variant_index_fr_BE" model="se.index">
+        <field name="model_id" ref="shopinvader.model_shopinvader_variant" />
+        <field name="lang_id" eval="ref('base.lang_fr_BE')" />
+        <field name="backend_id" ref="elasticsearch_backend" />
+        <field name="exporter_id" ref="shopinvader.ir_exp_shopinvader_variant" />
+        <field name="config_id" ref="index_config_shopinvader_variant" />
+    </record>
+
+    <record id="elasticsearch_shopinvader_variant_index_nl_BE" model="se.index">
+        <field name="model_id" ref="shopinvader.model_shopinvader_variant" />
+        <field name="lang_id" eval="ref('base.lang_nl_BE')" />
+        <field name="backend_id" ref="elasticsearch_backend" />
+        <field name="exporter_id" ref="shopinvader.ir_exp_shopinvader_variant" />
+        <field name="config_id" ref="index_config_shopinvader_variant" />
+    </record>
+
+    <record id="elasticsearch_shopinvader_variant_index_en_US" model="se.index">
+        <field name="model_id" ref="shopinvader.model_shopinvader_variant" />
+        <field name="lang_id" eval="ref('base.lang_en')" />
+        <field name="backend_id" ref="elasticsearch_backend" />
+        <field name="exporter_id" ref="shopinvader.ir_exp_shopinvader_variant" />
+        <field name="config_id" ref="index_config_shopinvader_variant" />
+    </record>
+
+    <record id="elasticsearch_shopinvader_category_index_fr_BE" model="se.index">
+        <field name="model_id" ref="shopinvader.model_shopinvader_category" />
+        <field name="lang_id" eval="ref('base.lang_fr_BE')" />
+        <field name="backend_id" ref="elasticsearch_backend" />
+        <field name="exporter_id" ref="shopinvader.ir_exp_shopinvader_category" />
+        <field name="config_id" ref="index_config_shopinvader_category" />
+    </record>
+
+    <record id="elasticsearch_shopinvader_category_index_nl_BE" model="se.index">
+        <field name="model_id" ref="shopinvader.model_shopinvader_category" />
+        <field name="lang_id" eval="ref('base.lang_nl_BE')" />
+        <field name="backend_id" ref="elasticsearch_backend" />
+        <field name="exporter_id" ref="shopinvader.ir_exp_shopinvader_category" />
+        <field name="config_id" ref="index_config_shopinvader_category" />
+    </record>
+
+    <record id="elasticsearch_shopinvader_category_index_en_US" model="se.index">
+        <field name="model_id" ref="shopinvader.model_shopinvader_category" />
+        <field name="lang_id" eval="ref('base.lang_en')" />
+        <field name="backend_id" ref="elasticsearch_backend" />
+        <field name="exporter_id" ref="shopinvader.ir_exp_shopinvader_category" />
+        <field name="config_id" ref="index_config_shopinvader_category" />
+    </record>
+
+</odoo>

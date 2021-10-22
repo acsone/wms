@@ -1,0 +1,14 @@
+# Copyright 2021 ACSONE SA/NV
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+
+{
+    "name": "Alcyon eShop Categories",
+    "description": """Alcyon eShop Categories integration with Shopinvader""",
+    "version": "10.0.1.0.0",
+    "author": "ACSONE SA/NV",
+    "website": "http://www.acsone.eu",
+    "license": "AGPL-3",
+    "category": "alc",
+    "depends": ["shopinvader_multi_category", "alc_product_shop_category"],
+    "data": [],
+}
