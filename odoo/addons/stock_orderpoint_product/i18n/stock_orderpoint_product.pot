@@ -27,6 +27,8 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_orderpoint_product.field_delivery_carrier_orderpoint_max
 #: model:ir.model.fields,field_description:stock_orderpoint_product.field_product_product_orderpoint_max
 #: model:ir.model.fields,field_description:stock_orderpoint_product.field_product_template_orderpoint_max
+#: model:ir.model.fields,field_description:stock_orderpoint_product.field_shopinvader_product_orderpoint_max
+#: model:ir.model.fields,field_description:stock_orderpoint_product.field_shopinvader_variant_orderpoint_max
 msgid "Maximum Quantity"
 msgstr ""
 
@@ -34,6 +36,8 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_orderpoint_product.field_delivery_carrier_orderpoint_min
 #: model:ir.model.fields,field_description:stock_orderpoint_product.field_product_product_orderpoint_min
 #: model:ir.model.fields,field_description:stock_orderpoint_product.field_product_template_orderpoint_min
+#: model:ir.model.fields,field_description:stock_orderpoint_product.field_shopinvader_product_orderpoint_min
+#: model:ir.model.fields,field_description:stock_orderpoint_product.field_shopinvader_variant_orderpoint_min
 msgid "Minimum Quantity"
 msgstr ""
 
@@ -51,6 +55,8 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_orderpoint_product.field_delivery_carrier_orderpoint_qty_multiple
 #: model:ir.model.fields,field_description:stock_orderpoint_product.field_product_product_orderpoint_qty_multiple
 #: model:ir.model.fields,field_description:stock_orderpoint_product.field_product_template_orderpoint_qty_multiple
+#: model:ir.model.fields,field_description:stock_orderpoint_product.field_shopinvader_product_orderpoint_qty_multiple
+#: model:ir.model.fields,field_description:stock_orderpoint_product.field_shopinvader_variant_orderpoint_qty_multiple
 msgid "Qty Multiple"
 msgstr ""
 
