@@ -23,6 +23,7 @@ msgstr "6 mois signifie qu'il y aura 2 inventaires par an"
 
 #. module: specific_stock
 #: model:ir.model.fields,help:specific_stock.field_product_category_warning_info
+#: model:ir.model.fields,help:specific_stock.field_shopinvader_category_warning_info
 msgid "Additional information communicated to the customer"
 msgstr "Informations complémentaires communiquées au client"
 
@@ -129,6 +130,7 @@ msgstr "Inventaire journalier: %s"
 #. module: specific_stock
 #: model:ir.model.fields,field_description:specific_stock.field_res_partner_time_limit_order
 #: model:ir.model.fields,field_description:specific_stock.field_res_users_time_limit_order
+#: model:ir.model.fields,field_description:specific_stock.field_shopinvader_partner_time_limit_order
 msgid "Deadline for ordering"
 msgstr "Heure limite pour commander"
 
@@ -242,6 +244,7 @@ msgstr "Dernière mis à jour le"
 #. module: specific_stock
 #: model:ir.model.fields,field_description:specific_stock.field_delivery_carrier_date_last_inventory
 #: model:ir.model.fields,field_description:specific_stock.field_product_product_date_last_inventory
+#: model:ir.model.fields,field_description:specific_stock.field_shopinvader_variant_date_last_inventory
 msgid "Last inventory"
 msgstr "Dernier inventaire"
 
@@ -407,6 +410,7 @@ msgstr "Article"
 
 #. module: specific_stock
 #: model:ir.model.fields,field_description:specific_stock.field_product_category_alert_time
+#: model:ir.model.fields,field_description:specific_stock.field_shopinvader_category_alert_time
 msgid "Product Alert Time"
 msgstr "Délai avant alerte"
 
@@ -417,11 +421,13 @@ msgstr "Catégorie d'article"
 
 #. module: specific_stock
 #: model:ir.model.fields,field_description:specific_stock.field_product_category_life_time
+#: model:ir.model.fields,field_description:specific_stock.field_shopinvader_category_life_time
 msgid "Product Life Time"
 msgstr "Délai de consommation"
 
 #. module: specific_stock
 #: model:ir.model.fields,field_description:specific_stock.field_product_category_removal_time
+#: model:ir.model.fields,field_description:specific_stock.field_shopinvader_category_removal_time
 msgid "Product Removal Time"
 msgstr "Délai avant retrait"
 
@@ -432,6 +438,7 @@ msgstr "Modèle d'article"
 
 #. module: specific_stock
 #: model:ir.model.fields,field_description:specific_stock.field_product_category_use_time
+#: model:ir.model.fields,field_description:specific_stock.field_shopinvader_category_use_time
 msgid "Product Use Time"
 msgstr "Délai d'utilisation optimale"
 
@@ -627,11 +634,13 @@ msgstr "Identifiant Vocal"
 
 #. module: specific_stock
 #: model:ir.model.fields,field_description:specific_stock.field_product_category_warning_info
+#: model:ir.model.fields,field_description:specific_stock.field_shopinvader_category_warning_info
 msgid "Warning information"
 msgstr "Informations d'avertissement"
 
 #. module: specific_stock
 #: model:ir.model.fields,help:specific_stock.field_product_category_alert_time
+#: model:ir.model.fields,help:specific_stock.field_shopinvader_category_alert_time
 msgid ""
 "When a new a Serial Number is issued, this is the number of days before an "
 "alert should be notified."
@@ -641,6 +650,7 @@ msgstr ""
 
 #. module: specific_stock
 #: model:ir.model.fields,help:specific_stock.field_product_category_life_time
+#: model:ir.model.fields,help:specific_stock.field_shopinvader_category_life_time
 msgid ""
 "When a new a Serial Number is issued, this is the number of days before the "
 "goods may become dangerous and must not be consumed."
@@ -651,6 +661,7 @@ msgstr ""
 
 #. module: specific_stock
 #: model:ir.model.fields,help:specific_stock.field_product_category_removal_time
+#: model:ir.model.fields,help:specific_stock.field_shopinvader_category_removal_time
 msgid ""
 "When a new a Serial Number is issued, this is the number of days before the "
 "goods should be removed from the stock."
@@ -660,6 +671,7 @@ msgstr ""
 
 #. module: specific_stock
 #: model:ir.model.fields,help:specific_stock.field_product_category_use_time
+#: model:ir.model.fields,help:specific_stock.field_shopinvader_category_use_time
 msgid ""
 "When a new a Serial Number is issued, this is the number of days before the "
 "goods starts deteriorating, without being dangerous yet."
