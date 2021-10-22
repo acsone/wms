@@ -88,6 +88,7 @@ msgstr ""
 #. module: alc_geo_delivery_rounds
 #: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_res_partner_not_in_dynamic_delivery_round
 #: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_res_users_not_in_dynamic_delivery_round
+#: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_shopinvader_partner_not_in_dynamic_delivery_round
 msgid "Do not include in dynamical delivery round"
 msgstr ""
 
@@ -150,6 +151,7 @@ msgstr ""
 #. module: alc_geo_delivery_rounds
 #: model:ir.model.fields,help:alc_geo_delivery_rounds.field_res_partner_round_template_ids
 #: model:ir.model.fields,help:alc_geo_delivery_rounds.field_res_users_round_template_ids
+#: model:ir.model.fields,help:alc_geo_delivery_rounds.field_shopinvader_partner_round_template_ids
 msgid "List all the round templates containing the partner"
 msgstr ""
 
@@ -184,6 +186,7 @@ msgstr ""
 #. module: alc_geo_delivery_rounds
 #: model:ir.model.fields,help:alc_geo_delivery_rounds.field_res_partner_tag_ids
 #: model:ir.model.fields,help:alc_geo_delivery_rounds.field_res_users_tag_ids
+#: model:ir.model.fields,help:alc_geo_delivery_rounds.field_shopinvader_partner_tag_ids
 msgid "Only partners with the right tag will be delivered"
 msgstr ""
 
@@ -200,6 +203,7 @@ msgstr ""
 #. module: alc_geo_delivery_rounds
 #: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_res_partner_round_template_ids
 #: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_res_users_round_template_ids
+#: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_shopinvader_partner_round_template_ids
 msgid "Round templates"
 msgstr ""
 
@@ -212,6 +216,7 @@ msgstr ""
 #. module: alc_geo_delivery_rounds
 #: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_res_partner_tag_labels
 #: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_res_users_tag_labels
+#: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_shopinvader_partner_tag_labels
 msgid "Tag labels"
 msgstr ""
 
@@ -219,6 +224,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_res_partner_tag_ids
 #: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_res_users_tag_ids
 #: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_shape_file_import_wizard_tag_ids
+#: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_shopinvader_partner_tag_ids
 msgid "Tags"
 msgstr ""
 
