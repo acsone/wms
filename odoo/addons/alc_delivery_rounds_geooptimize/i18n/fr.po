@@ -76,12 +76,14 @@ msgstr "Impossible d'exporter une optimisation non terminée pour %s"
 #. module: alc_delivery_rounds_geooptimize
 #: model:ir.model.fields,field_description:alc_delivery_rounds_geooptimize.field_res_partner_use_specific_delivery_duration
 #: model:ir.model.fields,field_description:alc_delivery_rounds_geooptimize.field_res_users_use_specific_delivery_duration
+#: model:ir.model.fields,field_description:alc_delivery_rounds_geooptimize.field_shopinvader_partner_use_specific_delivery_duration
 msgid "Change the default delivery duration"
 msgstr "Durée spécifique de livraison pour ce client"
 
 #. module: alc_delivery_rounds_geooptimize
 #: model:ir.model.fields,help:alc_delivery_rounds_geooptimize.field_res_partner_use_specific_delivery_duration
 #: model:ir.model.fields,help:alc_delivery_rounds_geooptimize.field_res_users_use_specific_delivery_duration
+#: model:ir.model.fields,help:alc_delivery_rounds_geooptimize.field_shopinvader_partner_use_specific_delivery_duration
 msgid "Change the default delivery duration for this specific partner"
 msgstr "Utilisation d'une durée spécifique de livraison pour ce clientr"
 
@@ -114,6 +116,8 @@ msgstr "Fenêtre de livraison par défaut"
 #: model:ir.model.fields,field_description:alc_delivery_rounds_geooptimize.field_res_partner_specific_delivery_duration
 #: model:ir.model.fields,field_description:alc_delivery_rounds_geooptimize.field_res_users_delivery_duration
 #: model:ir.model.fields,field_description:alc_delivery_rounds_geooptimize.field_res_users_specific_delivery_duration
+#: model:ir.model.fields,field_description:alc_delivery_rounds_geooptimize.field_shopinvader_partner_delivery_duration
+#: model:ir.model.fields,field_description:alc_delivery_rounds_geooptimize.field_shopinvader_partner_specific_delivery_duration
 msgid "Delivery duration"
 msgstr "Durée de livraison"
 
@@ -130,6 +134,7 @@ msgstr "Durée en secondes nécessaire pour livrer un client"
 #. module: alc_delivery_rounds_geooptimize
 #: model:ir.model.fields,help:alc_delivery_rounds_geooptimize.field_res_partner_specific_delivery_duration
 #: model:ir.model.fields,help:alc_delivery_rounds_geooptimize.field_res_users_specific_delivery_duration
+#: model:ir.model.fields,help:alc_delivery_rounds_geooptimize.field_shopinvader_partner_specific_delivery_duration
 msgid ""
 "Duration in seconds needed to deliver a specific customer (different from "
 "the general one)"
