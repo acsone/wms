@@ -53,6 +53,7 @@ msgstr "Fenêtre de livraison"
 #. module: alc_partner_delivery_window
 #: model:ir.model.fields,field_description:alc_partner_delivery_window.field_res_partner_alc_delivery_window_ids
 #: model:ir.model.fields,field_description:alc_partner_delivery_window.field_res_users_alc_delivery_window_ids
+#: model:ir.model.fields,field_description:alc_partner_delivery_window.field_shopinvader_partner_alc_delivery_window_ids
 msgid "Delivery windows"
 msgstr "Fenêtres de livraison"
 
@@ -86,6 +87,7 @@ msgstr "ID"
 #. module: alc_partner_delivery_window
 #: model:ir.model.fields,help:alc_partner_delivery_window.field_res_partner_alc_delivery_window_ids
 #: model:ir.model.fields,help:alc_partner_delivery_window.field_res_users_alc_delivery_window_ids
+#: model:ir.model.fields,help:alc_partner_delivery_window.field_shopinvader_partner_alc_delivery_window_ids
 msgid ""
 "If specified, delivery is only possible into the specified time windows. "
 "(Leaves empty if no restriction)"
