@@ -19,6 +19,8 @@ msgstr ""
 #: model:ir.model.fields,field_description:alc_product_picking_zone.field_delivery_carrier_picking_zone_id
 #: model:ir.model.fields,field_description:alc_product_picking_zone.field_product_product_picking_zone_id
 #: model:ir.model.fields,field_description:alc_product_picking_zone.field_product_template_picking_zone_id
+#: model:ir.model.fields,field_description:alc_product_picking_zone.field_shopinvader_product_picking_zone_id
+#: model:ir.model.fields,field_description:alc_product_picking_zone.field_shopinvader_variant_picking_zone_id
 msgid "Picking zone"
 msgstr "Zone de picking"
 
