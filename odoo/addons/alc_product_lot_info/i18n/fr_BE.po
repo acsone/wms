@@ -20,6 +20,8 @@ msgstr ""
 #: model:ir.model.fields,field_description:alc_product_lot_info.field_delivery_carrier_lot_ids
 #: model:ir.model.fields,field_description:alc_product_lot_info.field_product_product_lot_ids
 #: model:ir.model.fields,field_description:alc_product_lot_info.field_product_template_lot_ids
+#: model:ir.model.fields,field_description:alc_product_lot_info.field_shopinvader_product_lot_ids
+#: model:ir.model.fields,field_description:alc_product_lot_info.field_shopinvader_variant_lot_ids
 msgid "Lots"
 msgstr ""
 
