@@ -21,6 +21,7 @@ msgstr ""
 #. module: pricelist_discount
 #: model:ir.model.fields,field_description:pricelist_discount.field_res_partner_discount_pricelist_id
 #: model:ir.model.fields,field_description:pricelist_discount.field_res_users_discount_pricelist_id
+#: model:ir.model.fields,field_description:pricelist_discount.field_shopinvader_partner_discount_pricelist_id
 msgid "Alcyon Discount Pricelist"
 msgstr ""
 
@@ -96,6 +97,7 @@ msgstr ""
 #. module: pricelist_discount
 #: model:ir.model.fields,field_description:pricelist_discount.field_res_partner_supplier_promotion_sale_allowed
 #: model:ir.model.fields,field_description:pricelist_discount.field_res_users_supplier_promotion_sale_allowed
+#: model:ir.model.fields,field_description:pricelist_discount.field_shopinvader_partner_supplier_promotion_sale_allowed
 msgid "Supplier promotion allowed on sale"
 msgstr ""
 
