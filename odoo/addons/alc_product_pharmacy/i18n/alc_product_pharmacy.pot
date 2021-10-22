@@ -17,6 +17,8 @@ msgstr ""
 #: model:ir.model.fields,field_description:alc_product_pharmacy.field_delivery_carrier_code_amm
 #: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_product_code_amm
 #: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_template_code_amm
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_shopinvader_product_code_amm
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_shopinvader_variant_code_amm
 msgid "AMM Number"
 msgstr ""
 
@@ -24,6 +26,8 @@ msgstr ""
 #: model:ir.model.fields,field_description:alc_product_pharmacy.field_delivery_carrier_belgium_only
 #: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_product_belgium_only
 #: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_template_belgium_only
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_shopinvader_product_belgium_only
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_shopinvader_variant_belgium_only
 msgid "Belgium only"
 msgstr ""
 
@@ -31,6 +35,8 @@ msgstr ""
 #: model:ir.model.fields,field_description:alc_product_pharmacy.field_delivery_carrier_cnk_code
 #: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_product_cnk_code
 #: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_template_cnk_code
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_shopinvader_product_cnk_code
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_shopinvader_variant_cnk_code
 msgid "CNK"
 msgstr ""
 
@@ -38,6 +44,8 @@ msgstr ""
 #: model:ir.model.fields,field_description:alc_product_pharmacy.field_delivery_carrier_code_cti
 #: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_product_code_cti
 #: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_template_code_cti
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_shopinvader_product_code_cti
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_shopinvader_variant_code_cti
 msgid "Code CTI Extended"
 msgstr ""
 
@@ -45,6 +53,8 @@ msgstr ""
 #: model:ir.model.fields,field_description:alc_product_pharmacy.field_delivery_carrier_pharmacy_only
 #: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_product_pharmacy_only
 #: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_template_pharmacy_only
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_shopinvader_product_pharmacy_only
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_shopinvader_variant_pharmacy_only
 msgid "Only Pharmacies?"
 msgstr ""
 
@@ -78,6 +88,8 @@ msgstr ""
 #: model:ir.model.fields,field_description:alc_product_pharmacy.field_delivery_carrier_veterinary_only
 #: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_product_veterinary_only
 #: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_template_veterinary_only
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_shopinvader_product_veterinary_only
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_shopinvader_variant_veterinary_only
 msgid "Veterinary only"
 msgstr ""
 
