@@ -21,6 +21,7 @@ msgstr ""
 #. module: stock_picking_backorder
 #: model:ir.model.fields,help:stock_picking_backorder.field_res_partner_is_sale_back_order_cancel
 #: model:ir.model.fields,help:stock_picking_backorder.field_res_users_is_sale_back_order_cancel
+#: model:ir.model.fields,help:stock_picking_backorder.field_shopinvader_partner_is_sale_back_order_cancel
 msgid "Automaticaly cancel products that could not be delivered. Must be set on delivery addresss"
 msgstr ""
 
@@ -82,6 +83,7 @@ msgstr ""
 #. module: stock_picking_backorder
 #: model:ir.model.fields,help:stock_picking_backorder.field_res_partner_is_sale_back_order_accepted
 #: model:ir.model.fields,help:stock_picking_backorder.field_res_users_is_sale_back_order_accepted
+#: model:ir.model.fields,help:stock_picking_backorder.field_shopinvader_partner_is_sale_back_order_accepted
 msgid "Do not let customer order products not in stock"
 msgstr ""
 
@@ -167,6 +169,7 @@ msgstr ""
 #. module: stock_picking_backorder
 #: model:ir.model.fields,field_description:stock_picking_backorder.field_res_partner_is_purchase_back_order_accepted
 #: model:ir.model.fields,field_description:stock_picking_backorder.field_res_users_is_purchase_back_order_accepted
+#: model:ir.model.fields,field_description:stock_picking_backorder.field_shopinvader_partner_is_purchase_back_order_accepted
 #: model:ir.model.fields,field_description:stock_picking_backorder.field_stock_backorder_choice_is_purchase_back_order_accepted
 msgid "Purchase backorder accepted"
 msgstr ""
@@ -174,12 +177,14 @@ msgstr ""
 #. module: stock_picking_backorder
 #: model:ir.model.fields,field_description:stock_picking_backorder.field_res_partner_is_sale_back_order_accepted
 #: model:ir.model.fields,field_description:stock_picking_backorder.field_res_users_is_sale_back_order_accepted
+#: model:ir.model.fields,field_description:stock_picking_backorder.field_shopinvader_partner_is_sale_back_order_accepted
 msgid "Sale backorder accepted"
 msgstr ""
 
 #. module: stock_picking_backorder
 #: model:ir.model.fields,field_description:stock_picking_backorder.field_res_partner_is_sale_back_order_cancel
 #: model:ir.model.fields,field_description:stock_picking_backorder.field_res_users_is_sale_back_order_cancel
+#: model:ir.model.fields,field_description:stock_picking_backorder.field_shopinvader_partner_is_sale_back_order_cancel
 msgid "Sale backorder auto-cancel"
 msgstr ""
 
