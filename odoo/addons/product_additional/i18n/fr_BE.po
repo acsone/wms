@@ -30,6 +30,8 @@ msgstr ""
 #: model:ir.model.fields,field_description:product_additional.field_delivery_carrier_additional_product_id
 #: model:ir.model.fields,field_description:product_additional.field_product_product_additional_product_id
 #: model:ir.model.fields,field_description:product_additional.field_product_template_additional_product_id
+#: model:ir.model.fields,field_description:product_additional.field_shopinvader_product_additional_product_id
+#: model:ir.model.fields,field_description:product_additional.field_shopinvader_variant_additional_product_id
 msgid "Additional Product"
 msgstr "Produit Additionnel"
 
@@ -119,6 +121,8 @@ msgstr "Ligne de commande d'achat"
 #: model:ir.model.fields,field_description:product_additional.field_delivery_carrier_ratio_additional_product
 #: model:ir.model.fields,field_description:product_additional.field_product_product_ratio_additional_product
 #: model:ir.model.fields,field_description:product_additional.field_product_template_ratio_additional_product
+#: model:ir.model.fields,field_description:product_additional.field_shopinvader_product_ratio_additional_product
+#: model:ir.model.fields,field_description:product_additional.field_shopinvader_variant_ratio_additional_product
 msgid "Ratio Additional Product"
 msgstr "Ratio Produit Additionnel"
 
@@ -132,6 +136,8 @@ msgstr "Ratio Produit Gratuit"
 #: model:ir.model.fields,field_description:product_additional.field_product_product_ratio_main_product
 #: model:ir.model.fields,field_description:product_additional.field_product_supplierinfo_ratio_main_product
 #: model:ir.model.fields,field_description:product_additional.field_product_template_ratio_main_product
+#: model:ir.model.fields,field_description:product_additional.field_shopinvader_product_ratio_main_product
+#: model:ir.model.fields,field_description:product_additional.field_shopinvader_variant_ratio_main_product
 msgid "Ratio Main Product"
 msgstr "Ratio Produit Principal"
 
