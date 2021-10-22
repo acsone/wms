@@ -17,6 +17,8 @@ msgstr ""
 #: model:ir.model.fields,field_description:alc_pim_product.field_delivery_carrier_class_amcra
 #: model:ir.model.fields,field_description:alc_pim_product.field_product_product_class_amcra
 #: model:ir.model.fields,field_description:alc_pim_product.field_product_template_class_amcra
+#: model:ir.model.fields,field_description:alc_pim_product.field_shopinvader_product_class_amcra
+#: model:ir.model.fields,field_description:alc_pim_product.field_shopinvader_variant_class_amcra
 msgid "AMCRA classification"
 msgstr ""
 
@@ -24,6 +26,8 @@ msgstr ""
 #: model:ir.model.fields,field_description:alc_pim_product.field_delivery_carrier_active_principle_option_ids
 #: model:ir.model.fields,field_description:alc_pim_product.field_product_product_active_principle_option_ids
 #: model:ir.model.fields,field_description:alc_pim_product.field_product_template_active_principle_option_ids
+#: model:ir.model.fields,field_description:alc_pim_product.field_shopinvader_product_active_principle_option_ids
+#: model:ir.model.fields,field_description:alc_pim_product.field_shopinvader_variant_active_principle_option_ids
 msgid "Active Principle"
 msgstr ""
 
@@ -31,6 +35,8 @@ msgstr ""
 #: model:ir.model.fields,field_description:alc_pim_product.field_delivery_carrier_administration_route_option_ids
 #: model:ir.model.fields,field_description:alc_pim_product.field_product_product_administration_route_option_ids
 #: model:ir.model.fields,field_description:alc_pim_product.field_product_template_administration_route_option_ids
+#: model:ir.model.fields,field_description:alc_pim_product.field_shopinvader_product_administration_route_option_ids
+#: model:ir.model.fields,field_description:alc_pim_product.field_shopinvader_variant_administration_route_option_ids
 msgid "Administration Route"
 msgstr ""
 
@@ -38,6 +44,8 @@ msgstr ""
 #: model:ir.model.fields,field_description:alc_pim_product.field_delivery_carrier_categ_age_option_ids
 #: model:ir.model.fields,field_description:alc_pim_product.field_product_product_categ_age_option_ids
 #: model:ir.model.fields,field_description:alc_pim_product.field_product_template_categ_age_option_ids
+#: model:ir.model.fields,field_description:alc_pim_product.field_shopinvader_product_categ_age_option_ids
+#: model:ir.model.fields,field_description:alc_pim_product.field_shopinvader_variant_categ_age_option_ids
 msgid "Age category"
 msgstr ""
 
@@ -45,6 +53,8 @@ msgstr ""
 #: model:ir.model.fields,field_description:alc_pim_product.field_delivery_carrier_animal_size_option_ids
 #: model:ir.model.fields,field_description:alc_pim_product.field_product_product_animal_size_option_ids
 #: model:ir.model.fields,field_description:alc_pim_product.field_product_template_animal_size_option_ids
+#: model:ir.model.fields,field_description:alc_pim_product.field_shopinvader_product_animal_size_option_ids
+#: model:ir.model.fields,field_description:alc_pim_product.field_shopinvader_variant_animal_size_option_ids
 msgid "Animal Size"
 msgstr ""
 
@@ -52,6 +62,8 @@ msgstr ""
 #: model:ir.model.fields,field_description:alc_pim_product.field_delivery_carrier_size_clothing_option_id
 #: model:ir.model.fields,field_description:alc_pim_product.field_product_product_size_clothing_option_id
 #: model:ir.model.fields,field_description:alc_pim_product.field_product_template_size_clothing_option_id
+#: model:ir.model.fields,field_description:alc_pim_product.field_shopinvader_product_size_clothing_option_id
+#: model:ir.model.fields,field_description:alc_pim_product.field_shopinvader_variant_size_clothing_option_id
 msgid "Clothing size"
 msgstr ""
 
@@ -59,6 +71,8 @@ msgstr ""
 #: model:ir.model.fields,field_description:alc_pim_product.field_delivery_carrier_product_color_option_ids
 #: model:ir.model.fields,field_description:alc_pim_product.field_product_product_product_color_option_ids
 #: model:ir.model.fields,field_description:alc_pim_product.field_product_template_product_color_option_ids
+#: model:ir.model.fields,field_description:alc_pim_product.field_shopinvader_product_product_color_option_ids
+#: model:ir.model.fields,field_description:alc_pim_product.field_shopinvader_variant_product_color_option_ids
 msgid "Colour"
 msgstr ""
 
@@ -66,6 +80,8 @@ msgstr ""
 #: model:ir.model.fields,field_description:alc_pim_product.field_delivery_carrier_fabric
 #: model:ir.model.fields,field_description:alc_pim_product.field_product_product_fabric
 #: model:ir.model.fields,field_description:alc_pim_product.field_product_template_fabric
+#: model:ir.model.fields,field_description:alc_pim_product.field_shopinvader_product_fabric
+#: model:ir.model.fields,field_description:alc_pim_product.field_shopinvader_variant_fabric
 msgid "Fabric?"
 msgstr ""
 
@@ -73,6 +89,8 @@ msgstr ""
 #: model:ir.model.fields,field_description:alc_pim_product.field_delivery_carrier_food_range_option_id
 #: model:ir.model.fields,field_description:alc_pim_product.field_product_product_food_range_option_id
 #: model:ir.model.fields,field_description:alc_pim_product.field_product_template_food_range_option_id
+#: model:ir.model.fields,field_description:alc_pim_product.field_shopinvader_product_food_range_option_id
+#: model:ir.model.fields,field_description:alc_pim_product.field_shopinvader_variant_food_range_option_id
 msgid "Food range"
 msgstr ""
 
@@ -80,6 +98,8 @@ msgstr ""
 #: model:ir.model.fields,field_description:alc_pim_product.field_delivery_carrier_indication_option_ids
 #: model:ir.model.fields,field_description:alc_pim_product.field_product_product_indication_option_ids
 #: model:ir.model.fields,field_description:alc_pim_product.field_product_template_indication_option_ids
+#: model:ir.model.fields,field_description:alc_pim_product.field_shopinvader_product_indication_option_ids
+#: model:ir.model.fields,field_description:alc_pim_product.field_shopinvader_variant_indication_option_ids
 msgid "Indications"
 msgstr ""
 
@@ -92,6 +112,8 @@ msgstr ""
 #: model:ir.model.fields,field_description:alc_pim_product.field_delivery_carrier_pdf_file
 #: model:ir.model.fields,field_description:alc_pim_product.field_product_product_pdf_file
 #: model:ir.model.fields,field_description:alc_pim_product.field_product_template_pdf_file
+#: model:ir.model.fields,field_description:alc_pim_product.field_shopinvader_product_pdf_file
+#: model:ir.model.fields,field_description:alc_pim_product.field_shopinvader_variant_pdf_file
 msgid "PDF"
 msgstr ""
 
@@ -99,6 +121,8 @@ msgstr ""
 #: model:ir.model.fields,field_description:alc_pim_product.field_delivery_carrier_presentation_option_id
 #: model:ir.model.fields,field_description:alc_pim_product.field_product_product_presentation_option_id
 #: model:ir.model.fields,field_description:alc_pim_product.field_product_template_presentation_option_id
+#: model:ir.model.fields,field_description:alc_pim_product.field_shopinvader_product_presentation_option_id
+#: model:ir.model.fields,field_description:alc_pim_product.field_shopinvader_variant_presentation_option_id
 msgid "Presentation"
 msgstr ""
 
@@ -111,6 +135,8 @@ msgstr ""
 #: model:ir.model.fields,field_description:alc_pim_product.field_delivery_carrier_promo_bag
 #: model:ir.model.fields,field_description:alc_pim_product.field_product_product_promo_bag
 #: model:ir.model.fields,field_description:alc_pim_product.field_product_template_promo_bag
+#: model:ir.model.fields,field_description:alc_pim_product.field_shopinvader_product_promo_bag
+#: model:ir.model.fields,field_description:alc_pim_product.field_shopinvader_variant_promo_bag
 msgid "Promo bag?"
 msgstr ""
 
@@ -123,6 +149,8 @@ msgstr ""
 #: model:ir.model.fields,field_description:alc_pim_product.field_delivery_carrier_description_shop_long
 #: model:ir.model.fields,field_description:alc_pim_product.field_product_product_description_shop_long
 #: model:ir.model.fields,field_description:alc_pim_product.field_product_template_description_shop_long
+#: model:ir.model.fields,field_description:alc_pim_product.field_shopinvader_product_description_shop_long
+#: model:ir.model.fields,field_description:alc_pim_product.field_shopinvader_variant_description_shop_long
 msgid "Shop long description"
 msgstr ""
 
@@ -130,6 +158,8 @@ msgstr ""
 #: model:ir.model.fields,field_description:alc_pim_product.field_delivery_carrier_description_shop_short
 #: model:ir.model.fields,field_description:alc_pim_product.field_product_product_description_shop_short
 #: model:ir.model.fields,field_description:alc_pim_product.field_product_template_description_shop_short
+#: model:ir.model.fields,field_description:alc_pim_product.field_shopinvader_product_description_shop_short
+#: model:ir.model.fields,field_description:alc_pim_product.field_shopinvader_variant_description_shop_short
 msgid "Shop short description"
 msgstr ""
 
@@ -137,6 +167,8 @@ msgstr ""
 #: model:ir.model.fields,field_description:alc_pim_product.field_delivery_carrier_sterile
 #: model:ir.model.fields,field_description:alc_pim_product.field_product_product_sterile
 #: model:ir.model.fields,field_description:alc_pim_product.field_product_template_sterile
+#: model:ir.model.fields,field_description:alc_pim_product.field_shopinvader_product_sterile
+#: model:ir.model.fields,field_description:alc_pim_product.field_shopinvader_variant_sterile
 msgid "Sterile?"
 msgstr ""
 
@@ -144,6 +176,8 @@ msgstr ""
 #: model:ir.model.fields,field_description:alc_pim_product.field_delivery_carrier_thread_option_id
 #: model:ir.model.fields,field_description:alc_pim_product.field_product_product_thread_option_id
 #: model:ir.model.fields,field_description:alc_pim_product.field_product_template_thread_option_id
+#: model:ir.model.fields,field_description:alc_pim_product.field_shopinvader_product_thread_option_id
+#: model:ir.model.fields,field_description:alc_pim_product.field_shopinvader_variant_thread_option_id
 msgid "Thread"
 msgstr ""
 
