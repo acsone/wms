@@ -20,6 +20,7 @@ msgstr ""
 
 #. module: alc_product_shop_category
 #: model:ir.model.fields,field_description:alc_product_shop_category.field_product_category_is_web
+#: model:ir.model.fields,field_description:alc_product_shop_category.field_shopinvader_category_is_web
 msgid "Is web"
 msgstr ""
 
