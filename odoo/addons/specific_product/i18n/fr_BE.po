@@ -40,6 +40,8 @@ msgstr "ID"
 #: model:ir.model.fields,field_description:specific_product.field_delivery_carrier_count_pickings_to_do
 #: model:ir.model.fields,field_description:specific_product.field_product_product_count_pickings_to_do
 #: model:ir.model.fields,field_description:specific_product.field_product_template_count_pickings_to_do
+#: model:ir.model.fields,field_description:specific_product.field_shopinvader_product_count_pickings_to_do
+#: model:ir.model.fields,field_description:specific_product.field_shopinvader_variant_count_pickings_to_do
 #, fuzzy
 msgid "Incoming Pickings"
 msgstr "Mouvement de stock entrant"
@@ -48,6 +50,8 @@ msgstr "Mouvement de stock entrant"
 #: model:ir.model.fields,field_description:specific_product.field_delivery_carrier_indicated_price
 #: model:ir.model.fields,field_description:specific_product.field_product_product_indicated_price
 #: model:ir.model.fields,field_description:specific_product.field_product_template_indicated_price
+#: model:ir.model.fields,field_description:specific_product.field_shopinvader_product_indicated_price
+#: model:ir.model.fields,field_description:specific_product.field_shopinvader_variant_indicated_price
 msgid "Indicated price"
 msgstr "Prix indiqué"
 
@@ -70,6 +74,8 @@ msgstr "Dernière mise à jour le"
 #: model:ir.model.fields,field_description:specific_product.field_delivery_carrier_medical_device
 #: model:ir.model.fields,field_description:specific_product.field_product_product_medical_device
 #: model:ir.model.fields,field_description:specific_product.field_product_template_medical_device
+#: model:ir.model.fields,field_description:specific_product.field_shopinvader_product_medical_device
+#: model:ir.model.fields,field_description:specific_product.field_shopinvader_variant_medical_device
 msgid "Medical Device"
 msgstr "Dispositif médical"
 
@@ -103,6 +109,8 @@ msgstr "Modèle d'article"
 #: model:ir.model.fields,field_description:specific_product.field_delivery_carrier_web_published
 #: model:ir.model.fields,field_description:specific_product.field_product_product_web_published
 #: model:ir.model.fields,field_description:specific_product.field_product_template_web_published
+#: model:ir.model.fields,field_description:specific_product.field_shopinvader_product_web_published
+#: model:ir.model.fields,field_description:specific_product.field_shopinvader_variant_web_published
 msgid "Published on website"
 msgstr "Publié sur le site"
 
@@ -127,6 +135,8 @@ msgstr "Prix de vente 1"
 #: model:ir.model.fields,field_description:specific_product.field_delivery_carrier_sale_price_2
 #: model:ir.model.fields,field_description:specific_product.field_product_product_sale_price_2
 #: model:ir.model.fields,field_description:specific_product.field_product_template_sale_price_2
+#: model:ir.model.fields,field_description:specific_product.field_shopinvader_product_sale_price_2
+#: model:ir.model.fields,field_description:specific_product.field_shopinvader_variant_sale_price_2
 msgid "Sale Price 2"
 msgstr "Prix de vente 2"
 
@@ -139,6 +149,8 @@ msgstr "Température de stockage"
 #: model:ir.model.fields,field_description:specific_product.field_delivery_carrier_storage_temperature_id
 #: model:ir.model.fields,field_description:specific_product.field_product_product_storage_temperature_id
 #: model:ir.model.fields,field_description:specific_product.field_product_template_storage_temperature_id
+#: model:ir.model.fields,field_description:specific_product.field_shopinvader_product_storage_temperature_id
+#: model:ir.model.fields,field_description:specific_product.field_shopinvader_variant_storage_temperature_id
 msgid "Storage temperature"
 msgstr "Température de stockage"
 
