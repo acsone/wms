@@ -24,11 +24,13 @@ msgstr ""
 #. module: alc_supplier_purchase_manager
 #: model:ir.model.fields,field_description:alc_supplier_purchase_manager.field_res_partner_purchase_manager_id
 #: model:ir.model.fields,field_description:alc_supplier_purchase_manager.field_res_users_purchase_manager_id
+#: model:ir.model.fields,field_description:alc_supplier_purchase_manager.field_shopinvader_partner_purchase_manager_id
 msgid "Purchase manager"
 msgstr "Responsable d'achat"
 
 #. module: alc_supplier_purchase_manager
 #: model:ir.model.fields,field_description:alc_supplier_purchase_manager.field_res_partner_substitute_purchase_manager_id
 #: model:ir.model.fields,field_description:alc_supplier_purchase_manager.field_res_users_substitute_purchase_manager_id
+#: model:ir.model.fields,field_description:alc_supplier_purchase_manager.field_shopinvader_partner_substitute_purchase_manager_id
 msgid "Substitute purchase manager"
 msgstr "Responsable d'achat remplaçant"
