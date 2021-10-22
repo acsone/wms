@@ -148,6 +148,7 @@ msgstr ""
 #. module: alc_edi_connector
 #: model:ir.model.fields,field_description:alc_edi_connector.field_res_partner_edi_backend_id
 #: model:ir.model.fields,field_description:alc_edi_connector.field_res_users_edi_backend_id
+#: model:ir.model.fields,field_description:alc_edi_connector.field_shopinvader_partner_edi_backend_id
 msgid "Edi connector"
 msgstr ""
 
@@ -431,6 +432,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:alc_edi_connector.field_purchase_order_is_edi_available
 #: model:ir.model.fields,field_description:alc_edi_connector.field_res_partner_use_edi_connector
 #: model:ir.model.fields,field_description:alc_edi_connector.field_res_users_use_edi_connector
+#: model:ir.model.fields,field_description:alc_edi_connector.field_shopinvader_partner_use_edi_connector
 msgid "Use edi connector"
 msgstr ""
 
