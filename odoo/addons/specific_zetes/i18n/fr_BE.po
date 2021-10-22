@@ -208,6 +208,7 @@ msgstr "Défaut"
 #. module: specific_zetes
 #: model:ir.model.fields,help:specific_zetes.field_res_partner_is_passport_required
 #: model:ir.model.fields,help:specific_zetes.field_res_users_is_passport_required
+#: model:ir.model.fields,help:specific_zetes.field_shopinvader_partner_is_passport_required
 msgid ""
 "Define if pickings for this partner need to be verify by an another picker."
 msgstr ""
@@ -295,7 +296,7 @@ msgstr "Erreurs humaine"
 #: model:ir.model.fields,field_description:specific_zetes.field_manage_uop_line_id
 #: model:ir.model.fields,field_description:specific_zetes.field_pack_operation_reserve_rel_id
 #: model:ir.model.fields,field_description:specific_zetes.field_stock_pack_operation_deleted_id
-#: model:ir.model.fields,field_description:specific_zetes.field_stock_pack_operation_operator_id_10886
+#: model:ir.model.fields,field_description:specific_zetes.field_stock_pack_operation_operator_id_12052
 #: model:ir.model.fields,field_description:specific_zetes.field_view_picking_line_id
 #: model:ir.model.fields,field_description:specific_zetes.field_zetes_logger_id
 msgid "ID"
@@ -547,6 +548,7 @@ msgstr "Passport"
 #. module: specific_zetes
 #: model:ir.model.fields,field_description:specific_zetes.field_res_partner_is_passport_required
 #: model:ir.model.fields,field_description:specific_zetes.field_res_users_is_passport_required
+#: model:ir.model.fields,field_description:specific_zetes.field_shopinvader_partner_is_passport_required
 #: model:ir.model.fields,field_description:specific_zetes.field_stock_picking_is_passport_required
 msgid "Passport required"
 msgstr "Passeport requis"
