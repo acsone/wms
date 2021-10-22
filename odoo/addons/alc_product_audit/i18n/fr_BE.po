@@ -117,6 +117,8 @@ msgstr "- Rangement et zone de picking incohérent"
 #: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_can_be_bought_without_buy_route
 #: model:ir.model.fields,field_description:alc_product_audit.field_product_product_can_be_bought_without_buy_route
 #: model:ir.model.fields,field_description:alc_product_audit.field_product_template_can_be_bought_without_buy_route
+#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_product_can_be_bought_without_buy_route
+#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_variant_can_be_bought_without_buy_route
 #, fuzzy
 msgid "Can be bought without buy route"
 msgstr "Peut être acheté sans route Acheter"
@@ -125,6 +127,8 @@ msgstr "Peut être acheté sans route Acheter"
 #: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_dimensions_in_stock
 #: model:ir.model.fields,field_description:alc_product_audit.field_product_product_dimensions_in_stock
 #: model:ir.model.fields,field_description:alc_product_audit.field_product_template_dimensions_in_stock
+#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_product_dimensions_in_stock
+#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_variant_dimensions_in_stock
 msgid "Dimensions in stock"
 msgstr ""
 
@@ -137,6 +141,8 @@ msgstr "Le/les problèmes suivants sont observés pour le produit:"
 #: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_has_anomaly
 #: model:ir.model.fields,field_description:alc_product_audit.field_product_product_has_anomaly
 #: model:ir.model.fields,field_description:alc_product_audit.field_product_template_has_anomaly
+#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_product_has_anomaly
+#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_variant_has_anomaly
 msgid "Has anomaly"
 msgstr "Produits avec anomalies"
 
@@ -144,6 +150,8 @@ msgstr "Produits avec anomalies"
 #: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_has_no_dimensions
 #: model:ir.model.fields,field_description:alc_product_audit.field_product_product_has_no_dimensions
 #: model:ir.model.fields,field_description:alc_product_audit.field_product_template_has_no_dimensions
+#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_product_has_no_dimensions
+#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_variant_has_no_dimensions
 #, fuzzy
 msgid "Has no dimensions"
 msgstr "Dimensions manquantes"
@@ -157,6 +165,8 @@ msgstr "Produits achetés/vendus avec une route incohérente"
 #: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_min_max_on_command_reappro
 #: model:ir.model.fields,field_description:alc_product_audit.field_product_product_min_max_on_command_reappro
 #: model:ir.model.fields,field_description:alc_product_audit.field_product_template_min_max_on_command_reappro
+#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_product_min_max_on_command_reappro
+#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_variant_min_max_on_command_reappro
 msgid "Min max on command reappro"
 msgstr "Min/Max défini pour des produits achetés/vendus "
 
@@ -179,6 +189,8 @@ msgstr "Route et zone de picking incohérente"
 #: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_mismatch_picking_bin
 #: model:ir.model.fields,field_description:alc_product_audit.field_product_product_mismatch_picking_bin
 #: model:ir.model.fields,field_description:alc_product_audit.field_product_template_mismatch_picking_bin
+#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_product_mismatch_picking_bin
+#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_variant_mismatch_picking_bin
 msgid "Mismatch picking bin"
 msgstr "Rangement et zone de picking incohérent"
 
@@ -186,6 +198,8 @@ msgstr "Rangement et zone de picking incohérent"
 #: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_mismatch_route_picking
 #: model:ir.model.fields,field_description:alc_product_audit.field_product_product_mismatch_route_picking
 #: model:ir.model.fields,field_description:alc_product_audit.field_product_template_mismatch_route_picking
+#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_product_mismatch_route_picking
+#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_variant_mismatch_route_picking
 msgid "Mismatch route picking"
 msgstr "Route et zone de picking incohérente"
 
@@ -208,6 +222,8 @@ msgstr "Produits achetés/vendus sans commande client"
 #: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_mto_purchased_not_sold
 #: model:ir.model.fields,field_description:alc_product_audit.field_product_product_mto_purchased_not_sold
 #: model:ir.model.fields,field_description:alc_product_audit.field_product_template_mto_purchased_not_sold
+#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_product_mto_purchased_not_sold
+#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_variant_mto_purchased_not_sold
 #, fuzzy
 msgid "Mto purchased not sold"
 msgstr "Produits achetés/vendus sans commande client"
@@ -216,6 +232,8 @@ msgstr "Produits achetés/vendus sans commande client"
 #: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_mto_stock_5_days
 #: model:ir.model.fields,field_description:alc_product_audit.field_product_product_mto_stock_5_days
 #: model:ir.model.fields,field_description:alc_product_audit.field_product_template_mto_stock_5_days
+#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_product_mto_stock_5_days
+#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_variant_mto_stock_5_days
 msgid "Mto stock 5 days"
 msgstr ""
 
@@ -223,6 +241,8 @@ msgstr ""
 #: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_mto_stock_new_route
 #: model:ir.model.fields,field_description:alc_product_audit.field_product_product_mto_stock_new_route
 #: model:ir.model.fields,field_description:alc_product_audit.field_product_template_mto_stock_new_route
+#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_product_mto_stock_new_route
+#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_variant_mto_stock_new_route
 #, fuzzy
 msgid "Mto stock new route"
 msgstr "Produits achetés/vendus avec une route incohérente"
@@ -231,6 +251,8 @@ msgstr "Produits achetés/vendus avec une route incohérente"
 #: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_mto_stock_no_mto_route
 #: model:ir.model.fields,field_description:alc_product_audit.field_product_product_mto_stock_no_mto_route
 #: model:ir.model.fields,field_description:alc_product_audit.field_product_template_mto_stock_no_mto_route
+#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_product_mto_stock_no_mto_route
+#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_variant_mto_stock_no_mto_route
 #, fuzzy
 msgid "Mto stock no mto route"
 msgstr "Produits achetés/vendus avec une route incohérente"
@@ -239,6 +261,8 @@ msgstr "Produits achetés/vendus avec une route incohérente"
 #: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_mto_with_abnormal_route
 #: model:ir.model.fields,field_description:alc_product_audit.field_product_product_mto_with_abnormal_route
 #: model:ir.model.fields,field_description:alc_product_audit.field_product_template_mto_with_abnormal_route
+#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_product_mto_with_abnormal_route
+#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_variant_mto_with_abnormal_route
 #, fuzzy
 msgid "Mto with abnormal route"
 msgstr "Produits achetés/vendus avec une route incohérente"
@@ -247,6 +271,8 @@ msgstr "Produits achetés/vendus avec une route incohérente"
 #: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_no_dimensions_in_stock
 #: model:ir.model.fields,field_description:alc_product_audit.field_product_product_no_dimensions_in_stock
 #: model:ir.model.fields,field_description:alc_product_audit.field_product_template_no_dimensions_in_stock
+#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_product_no_dimensions_in_stock
+#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_variant_no_dimensions_in_stock
 #, fuzzy
 msgid "No dimensions in stock"
 msgstr "Dimensions manquantes"
@@ -255,6 +281,8 @@ msgstr "Dimensions manquantes"
 #: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_no_min_max_no_on_command_reappro
 #: model:ir.model.fields,field_description:alc_product_audit.field_product_product_no_min_max_no_on_command_reappro
 #: model:ir.model.fields,field_description:alc_product_audit.field_product_template_no_min_max_no_on_command_reappro
+#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_product_no_min_max_no_on_command_reappro
+#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_variant_no_min_max_no_on_command_reappro
 msgid "No min max no on command reappro"
 msgstr "Min/Max non défini pour des produits non achetés/vendus"
 
@@ -277,6 +305,8 @@ msgstr "Ne peut être vendu ou est archivé et associé à un rangement"
 #: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_not_sold_on_website
 #: model:ir.model.fields,field_description:alc_product_audit.field_product_product_not_sold_on_website
 #: model:ir.model.fields,field_description:alc_product_audit.field_product_template_not_sold_on_website
+#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_product_not_sold_on_website
+#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_variant_not_sold_on_website
 #, fuzzy
 msgid "Not sold on website"
 msgstr "- Produit ne pouvant être vendu mais publié sur le site web"
@@ -285,6 +315,8 @@ msgstr "- Produit ne pouvant être vendu mais publié sur le site web"
 #: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_packaging_has_no_dimensions
 #: model:ir.model.fields,field_description:alc_product_audit.field_product_product_packaging_has_no_dimensions
 #: model:ir.model.fields,field_description:alc_product_audit.field_product_template_packaging_has_no_dimensions
+#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_product_packaging_has_no_dimensions
+#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_variant_packaging_has_no_dimensions
 #, fuzzy
 msgid "Packaging has no dimensions"
 msgstr "Dimensions de conditionnement manquantes"
@@ -338,6 +370,8 @@ msgstr "- Le produit n'a pas toutes les dimensions"
 #: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_sale_not_ok_archived_bin_available
 #: model:ir.model.fields,field_description:alc_product_audit.field_product_product_sale_not_ok_archived_bin_available
 #: model:ir.model.fields,field_description:alc_product_audit.field_product_template_sale_not_ok_archived_bin_available
+#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_product_sale_not_ok_archived_bin_available
+#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_variant_sale_not_ok_archived_bin_available
 msgid "Sale not ok archived bin available"
 msgstr "Ne peut être vendu ou est archivé et associé à un rangement"
 
@@ -345,6 +379,8 @@ msgstr "Ne peut être vendu ou est archivé et associé à un rangement"
 #: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_sale_not_ok_not_archived
 #: model:ir.model.fields,field_description:alc_product_audit.field_product_product_sale_not_ok_not_archived
 #: model:ir.model.fields,field_description:alc_product_audit.field_product_template_sale_not_ok_not_archived
+#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_product_sale_not_ok_not_archived
+#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_variant_sale_not_ok_not_archived
 msgid "Sale not ok not archived"
 msgstr "Ne peut être vendu et non archivé"
 
