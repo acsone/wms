@@ -47,6 +47,7 @@ msgstr "Factures imprimées"
 #. module: account_invoice_sent
 #: model:ir.model.fields,field_description:account_invoice_sent.field_res_partner_invoice_amount_copy
 #: model:ir.model.fields,field_description:account_invoice_sent.field_res_users_invoice_amount_copy
+#: model:ir.model.fields,field_description:account_invoice_sent.field_shopinvader_partner_invoice_amount_copy
 msgid "Amount of invoice copies to generate"
 msgstr ""
 
@@ -119,6 +120,7 @@ msgstr "ID"
 #. module: account_invoice_sent
 #: model:ir.model.fields,help:account_invoice_sent.field_res_partner_invoice_amount_copy
 #: model:ir.model.fields,help:account_invoice_sent.field_res_users_invoice_amount_copy
+#: model:ir.model.fields,help:account_invoice_sent.field_shopinvader_partner_invoice_amount_copy
 msgid ""
 "If amount = 1, then 2 invoices will be generated in the pdf (original + copy)"
 msgstr ""
@@ -147,6 +149,7 @@ msgstr "Factures"
 #. module: account_invoice_sent
 #: model:ir.model.fields,field_description:account_invoice_sent.field_res_partner_invoice_sending_method
 #: model:ir.model.fields,field_description:account_invoice_sent.field_res_users_invoice_sending_method
+#: model:ir.model.fields,field_description:account_invoice_sent.field_shopinvader_partner_invoice_sending_method
 msgid "Invoice sending method"
 msgstr "Méthode d'envoi de facture"
 
