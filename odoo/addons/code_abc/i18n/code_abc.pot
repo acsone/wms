@@ -18,6 +18,8 @@ msgstr ""
 #: model:ir.model.fields,field_description:code_abc.field_delivery_carrier_abc_id
 #: model:ir.model.fields,field_description:code_abc.field_product_product_abc_id
 #: model:ir.model.fields,field_description:code_abc.field_product_template_abc_id
+#: model:ir.model.fields,field_description:code_abc.field_shopinvader_product_abc_id
+#: model:ir.model.fields,field_description:code_abc.field_shopinvader_variant_abc_id
 #: model:ir.ui.menu,name:code_abc.menu_code_abc
 #: model:ir.ui.view,arch_db:code_abc.product_template_form_view
 msgid "ABC"
@@ -120,6 +122,9 @@ msgstr ""
 #: model:ir.model.fields,field_description:code_abc.field_product_category_turnover
 #: model:ir.model.fields,field_description:code_abc.field_product_product_turnover
 #: model:ir.model.fields,field_description:code_abc.field_product_template_turnover
+#: model:ir.model.fields,field_description:code_abc.field_shopinvader_category_turnover
+#: model:ir.model.fields,field_description:code_abc.field_shopinvader_product_turnover
+#: model:ir.model.fields,field_description:code_abc.field_shopinvader_variant_turnover
 msgid "Turnover"
 msgstr ""
 
@@ -127,6 +132,8 @@ msgstr ""
 #: model:ir.model.fields,field_description:code_abc.field_delivery_carrier_turnover_nbr_lines
 #: model:ir.model.fields,field_description:code_abc.field_product_product_turnover_nbr_lines
 #: model:ir.model.fields,field_description:code_abc.field_product_template_turnover_nbr_lines
+#: model:ir.model.fields,field_description:code_abc.field_shopinvader_product_turnover_nbr_lines
+#: model:ir.model.fields,field_description:code_abc.field_shopinvader_variant_turnover_nbr_lines
 msgid "Turnover (nbr lines)"
 msgstr ""
 
@@ -134,6 +141,8 @@ msgstr ""
 #: model:ir.model.fields,field_description:code_abc.field_delivery_carrier_turnover_average
 #: model:ir.model.fields,field_description:code_abc.field_product_product_turnover_average
 #: model:ir.model.fields,field_description:code_abc.field_product_template_turnover_average
+#: model:ir.model.fields,field_description:code_abc.field_shopinvader_product_turnover_average
+#: model:ir.model.fields,field_description:code_abc.field_shopinvader_variant_turnover_average
 msgid "Turnover average"
 msgstr ""
 
@@ -141,6 +150,8 @@ msgstr ""
 #: model:ir.model.fields,field_description:code_abc.field_delivery_carrier_turnover_average_nbr_lines
 #: model:ir.model.fields,field_description:code_abc.field_product_product_turnover_average_nbr_lines
 #: model:ir.model.fields,field_description:code_abc.field_product_template_turnover_average_nbr_lines
+#: model:ir.model.fields,field_description:code_abc.field_shopinvader_product_turnover_average_nbr_lines
+#: model:ir.model.fields,field_description:code_abc.field_shopinvader_variant_turnover_average_nbr_lines
 msgid "Turnover average (nbr lines)"
 msgstr ""
 
