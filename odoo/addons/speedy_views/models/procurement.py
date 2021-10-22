@@ -5,6 +5,8 @@
 
 from odoo import api, fields, models
 
+from .utils import create_index
+
 
 class ProcurementOrder(models.Model):
     _inherit = "procurement.order"
@@ -13,6 +15,17 @@ class ProcurementOrder(models.Model):
     purchase_line_id = fields.Many2one(index=True)
     group_id = fields.Many2one(index=True)
     move_dest_id = fields.Many2one(index=True)
+
+    @api.model_cr
+    def init(self):
+        # index for incoming and ongoing move in product qty compute
+        index_name = "procurement_order_wip_idx"
+        create_index(
+            self.env.cr,
+            index_name,
+            self._table,
+            "(orderpoint_id) where state not in ('done', 'cancel')",
+        )
 
     @api.model
     def create(self, vals):
