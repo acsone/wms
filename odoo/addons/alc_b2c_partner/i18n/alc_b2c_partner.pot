@@ -27,6 +27,7 @@ msgstr ""
 #. module: alc_b2c_partner
 #: model:ir.model.fields,field_description:alc_b2c_partner.field_res_partner_is_b2c_customer
 #: model:ir.model.fields,field_description:alc_b2c_partner.field_res_users_is_b2c_customer
+#: model:ir.model.fields,field_description:alc_b2c_partner.field_shopinvader_partner_is_b2c_customer
 msgid "Is b2c customer"
 msgstr ""
 
