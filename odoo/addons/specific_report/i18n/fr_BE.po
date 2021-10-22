@@ -781,12 +781,14 @@ msgstr "A des factures"
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_res_partner_is_hide_entry_register
 #: model:ir.model.fields,field_description:specific_report.field_res_users_is_hide_entry_register
+#: model:ir.model.fields,field_description:specific_report.field_shopinvader_partner_is_hide_entry_register
 msgid "Hide entry register on delivery slip"
 msgstr "Le client n'a pas besoin de registre d'entrée"
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_res_partner_is_hide_prices_deliveryslip
 #: model:ir.model.fields,field_description:specific_report.field_res_users_is_hide_prices_deliveryslip
+#: model:ir.model.fields,field_description:specific_report.field_shopinvader_partner_is_hide_prices_deliveryslip
 msgid "Hide prices on deliveryslip"
 msgstr "Cacher les prix sur le bon de livraison"
 
@@ -1176,6 +1178,7 @@ msgstr "Numéro de série"
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_res_partner_show_deliveryslip_cnk
 #: model:ir.model.fields,field_description:specific_report.field_res_users_show_deliveryslip_cnk
+#: model:ir.model.fields,field_description:specific_report.field_shopinvader_partner_show_deliveryslip_cnk
 msgid "Show CNK on delivery slip"
 msgstr "Montrer CNK sur le bon de livraison"
 

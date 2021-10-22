@@ -609,12 +609,14 @@ msgstr ""
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_res_partner_is_hide_entry_register
 #: model:ir.model.fields,field_description:specific_report.field_res_users_is_hide_entry_register
+#: model:ir.model.fields,field_description:specific_report.field_shopinvader_partner_is_hide_entry_register
 msgid "Hide entry register on delivery slip"
 msgstr ""
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_res_partner_is_hide_prices_deliveryslip
 #: model:ir.model.fields,field_description:specific_report.field_res_users_is_hide_prices_deliveryslip
+#: model:ir.model.fields,field_description:specific_report.field_shopinvader_partner_is_hide_prices_deliveryslip
 msgid "Hide prices on deliveryslip"
 msgstr ""
 
@@ -999,6 +1001,7 @@ msgstr ""
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_res_partner_show_deliveryslip_cnk
 #: model:ir.model.fields,field_description:specific_report.field_res_users_show_deliveryslip_cnk
+#: model:ir.model.fields,field_description:specific_report.field_shopinvader_partner_show_deliveryslip_cnk
 msgid "Show CNK on delivery slip"
 msgstr ""
 
