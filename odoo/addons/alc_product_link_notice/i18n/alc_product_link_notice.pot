@@ -17,6 +17,8 @@ msgstr ""
 #: model:ir.model.fields,field_description:alc_product_link_notice.field_delivery_carrier_link_info
 #: model:ir.model.fields,field_description:alc_product_link_notice.field_product_product_link_info
 #: model:ir.model.fields,field_description:alc_product_link_notice.field_product_template_link_info
+#: model:ir.model.fields,field_description:alc_product_link_notice.field_shopinvader_product_link_info
+#: model:ir.model.fields,field_description:alc_product_link_notice.field_shopinvader_variant_link_info
 msgid "Additional information link"
 msgstr ""
 
@@ -30,6 +32,8 @@ msgstr ""
 #: model:ir.model.fields,help:alc_product_link_notice.field_delivery_carrier_links_offline
 #: model:ir.model.fields,help:alc_product_link_notice.field_product_product_links_offline
 #: model:ir.model.fields,help:alc_product_link_notice.field_product_template_links_offline
+#: model:ir.model.fields,help:alc_product_link_notice.field_shopinvader_product_links_offline
+#: model:ir.model.fields,help:alc_product_link_notice.field_shopinvader_variant_links_offline
 msgid "Filled links for for info and notice are online"
 msgstr ""
 
@@ -42,6 +46,8 @@ msgstr ""
 #: model:ir.model.fields,field_description:alc_product_link_notice.field_delivery_carrier_link_notice
 #: model:ir.model.fields,field_description:alc_product_link_notice.field_product_product_link_notice
 #: model:ir.model.fields,field_description:alc_product_link_notice.field_product_template_link_notice
+#: model:ir.model.fields,field_description:alc_product_link_notice.field_shopinvader_product_link_notice
+#: model:ir.model.fields,field_description:alc_product_link_notice.field_shopinvader_variant_link_notice
 msgid "Notice link"
 msgstr ""
 
@@ -49,6 +55,8 @@ msgstr ""
 #: model:ir.model.fields,field_description:alc_product_link_notice.field_delivery_carrier_links_offline
 #: model:ir.model.fields,field_description:alc_product_link_notice.field_product_product_links_offline
 #: model:ir.model.fields,field_description:alc_product_link_notice.field_product_template_links_offline
+#: model:ir.model.fields,field_description:alc_product_link_notice.field_shopinvader_product_links_offline
+#: model:ir.model.fields,field_description:alc_product_link_notice.field_shopinvader_variant_links_offline
 msgid "Offline Links"
 msgstr ""
 
