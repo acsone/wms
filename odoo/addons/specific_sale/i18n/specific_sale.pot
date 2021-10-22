@@ -51,12 +51,14 @@ msgstr ""
 #. module: specific_sale
 #: model:ir.model.fields,field_description:specific_sale.field_res_partner_auto_cancel_unavailable_qty_sold
 #: model:ir.model.fields,field_description:specific_sale.field_res_users_auto_cancel_unavailable_qty_sold
+#: model:ir.model.fields,field_description:specific_sale.field_shopinvader_partner_auto_cancel_unavailable_qty_sold
 msgid "Auto-cancel Unavailable Quantity"
 msgstr ""
 
 #. module: specific_sale
 #: model:ir.model.fields,help:specific_sale.field_res_partner_auto_cancel_unavailable_qty_sold
 #: model:ir.model.fields,help:specific_sale.field_res_users_auto_cancel_unavailable_qty_sold
+#: model:ir.model.fields,help:specific_sale.field_shopinvader_partner_auto_cancel_unavailable_qty_sold
 msgid "Automatically cancel unavailable ordered quantity to avoid the generation of backorders.\n"
 "In other words it will ship only immediately usable quantity."
 msgstr ""
@@ -159,6 +161,7 @@ msgstr ""
 #. module: specific_sale
 #: model:ir.model.fields,field_description:specific_sale.field_res_partner_help_with_fee
 #: model:ir.model.fields,field_description:specific_sale.field_res_users_help_with_fee
+#: model:ir.model.fields,field_description:specific_sale.field_shopinvader_partner_help_with_fee
 msgid "Helps with fees"
 msgstr ""
 
@@ -195,6 +198,7 @@ msgstr ""
 #. module: specific_sale
 #: model:ir.model.fields,field_description:specific_sale.field_res_partner_last_suite_name
 #: model:ir.model.fields,field_description:specific_sale.field_res_users_last_suite_name
+#: model:ir.model.fields,field_description:specific_sale.field_shopinvader_partner_last_suite_name
 msgid "Last Suite Name"
 msgstr ""
 
@@ -372,6 +376,7 @@ msgstr ""
 #. module: specific_sale
 #: model:ir.model.fields,field_description:specific_sale.field_delivery_carrier_older_lot_id
 #: model:ir.model.fields,field_description:specific_sale.field_product_product_older_lot_id
+#: model:ir.model.fields,field_description:specific_sale.field_shopinvader_variant_older_lot_id
 msgid "Older lot"
 msgstr ""
 
@@ -530,6 +535,9 @@ msgstr ""
 #: model:ir.model.fields,field_description:specific_sale.field_product_template_sale_lines_count
 #: model:ir.model.fields,field_description:specific_sale.field_res_partner_sale_lines_count
 #: model:ir.model.fields,field_description:specific_sale.field_res_users_sale_lines_count
+#: model:ir.model.fields,field_description:specific_sale.field_shopinvader_partner_sale_lines_count
+#: model:ir.model.fields,field_description:specific_sale.field_shopinvader_product_sale_lines_count
+#: model:ir.model.fields,field_description:specific_sale.field_shopinvader_variant_sale_lines_count
 msgid "Sale lines count"
 msgstr ""
 
