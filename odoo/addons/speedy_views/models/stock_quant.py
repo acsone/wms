@@ -15,6 +15,10 @@ class StockQuant(models.Model):
 
     @api.model_cr
     def init(self):
+        if self.env.cr._cnx.server_version < 110000:
+            # partial index with include columns are only supported
+            # in PG >= 11
+            return
         # index for incoming and ongoing move in product qty compute
         index_name = "stock_quant_product_id_qty_in_loc_idx"
         create_index(
