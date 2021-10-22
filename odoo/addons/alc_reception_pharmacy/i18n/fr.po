@@ -75,6 +75,7 @@ msgstr "Date "
 #: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy_line_partner_shipping_id
 #: model:ir.model.fields,field_description:alc_reception_pharmacy.field_res_partner_partner_shipping_id
 #: model:ir.model.fields,field_description:alc_reception_pharmacy.field_res_users_partner_shipping_id
+#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_shopinvader_partner_partner_shipping_id
 msgid "Delivery Address"
 msgstr "Adresse de livraison"
 
@@ -103,6 +104,7 @@ msgstr ""
 #. module: alc_reception_pharmacy
 #: model:ir.model.fields,field_description:alc_reception_pharmacy.field_res_partner_is_delivered_by_alcyon
 #: model:ir.model.fields,field_description:alc_reception_pharmacy.field_res_users_is_delivered_by_alcyon
+#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_shopinvader_partner_is_delivered_by_alcyon
 msgid "Is delivered by alcyon"
 msgstr ""
 
