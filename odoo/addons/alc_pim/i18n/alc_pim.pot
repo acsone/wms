@@ -2827,7 +2827,9 @@ msgstr ""
 
 #. module: alc_pim
 #: model:attribute.attribute,field_description:alc_pim.attribute_category_lot_expiry_field_name
+#: model:attribute.attribute,field_description:alc_pim.attribute_lot_expiry_field_name
 #: model:ir.model.fields,field_description:alc_pim.attribute_category_lot_expiry_field_name_ir_model_fields
+#: model:ir.model.fields,field_description:alc_pim.attribute_lot_expiry_field_name_ir_model_fields
 msgid "Lot expiry field name"
 msgstr ""
 
@@ -3214,12 +3216,6 @@ msgstr ""
 #: model:attribute.attribute,field_description:alc_pim.attribute_name
 #: model:ir.model.fields,field_description:alc_pim.attribute_name_ir_model_fields
 msgid "Name"
-msgstr ""
-
-#. module: alc_pim
-#: model:attribute.attribute,help:alc_pim.attribute_lot_expiry_field_name
-#: model:ir.model.fields,help:alc_pim.attribute_lot_expiry_field_name_ir_model_fields
-msgid "Name of the field to use on a Lot/serial to determine if the lot is expired or not. If not provided, the one defined on the category is used"
 msgstr ""
 
 #. module: alc_pim
@@ -4463,12 +4459,6 @@ msgstr ""
 #: model:product.category,name:alc_pim.specific_chat
 #: model:product.category,name:alc_pim.specific_chien
 msgid "Specific"
-msgstr ""
-
-#. module: alc_pim
-#: model:attribute.attribute,field_description:alc_pim.attribute_lot_expiry_field_name
-#: model:ir.model.fields,field_description:alc_pim.attribute_lot_expiry_field_name_ir_model_fields
-msgid "Specific lot expiry field name"
 msgstr ""
 
 #. module: alc_pim
