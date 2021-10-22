@@ -27,6 +27,8 @@ msgstr ""
 #: model:ir.model.fields,field_description:alc_product_dimensions.field_delivery_carrier_volume_liter
 #: model:ir.model.fields,field_description:alc_product_dimensions.field_product_product_volume_liter
 #: model:ir.model.fields,field_description:alc_product_dimensions.field_product_template_volume_liter
+#: model:ir.model.fields,field_description:alc_product_dimensions.field_shopinvader_product_volume_liter
+#: model:ir.model.fields,field_description:alc_product_dimensions.field_shopinvader_variant_volume_liter
 msgid "Volume (liter)"
 msgstr ""
 
@@ -34,6 +36,8 @@ msgstr ""
 #: model:ir.model.fields,help:alc_product_dimensions.field_delivery_carrier_volume_liter
 #: model:ir.model.fields,help:alc_product_dimensions.field_product_product_volume_liter
 #: model:ir.model.fields,help:alc_product_dimensions.field_product_template_volume_liter
+#: model:ir.model.fields,help:alc_product_dimensions.field_shopinvader_product_volume_liter
+#: model:ir.model.fields,help:alc_product_dimensions.field_shopinvader_variant_volume_liter
 msgid "Volume in liter"
 msgstr ""
 
