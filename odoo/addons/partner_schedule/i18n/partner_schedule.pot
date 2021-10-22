@@ -72,6 +72,7 @@ msgstr ""
 #. module: partner_schedule
 #: model:ir.model.fields,field_description:partner_schedule.field_res_partner_working_schedules_ids
 #: model:ir.model.fields,field_description:partner_schedule.field_res_users_working_schedules_ids
+#: model:ir.model.fields,field_description:partner_schedule.field_shopinvader_partner_working_schedules_ids
 msgid "Partner Schedule"
 msgstr ""
 
