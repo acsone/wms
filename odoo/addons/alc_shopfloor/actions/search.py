@@ -23,7 +23,6 @@ class SearchAction(Component):
         model = self.env["stock.location"]
         if not barcode:
             return model.browse()
-        barcode = barcode.replace("L#", "")
         return model.search(
             ["|", ("barcode", "=", barcode), ("name", "=", barcode)], limit=1
         )
