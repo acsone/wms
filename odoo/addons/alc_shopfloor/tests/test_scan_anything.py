@@ -25,13 +25,6 @@ class ScanAnythingCase(ActionsDataDetailCaseBase, ScanAnythingTestMixin):
         data = self.data_detail.location_detail(record)
         self._test_response_ok(rec_type, data, identifier)
 
-    def test_scan_location_alcyon(self):
-        record = self.stock_location
-        rec_type = "location"
-        identifier = "L#" + record.barcode
-        data = self.data_detail.location_detail(record)
-        self._test_response_ok(rec_type, data, identifier)
-
     def test_scan_package(self):
         record = self.package
         rec_type = "package"
