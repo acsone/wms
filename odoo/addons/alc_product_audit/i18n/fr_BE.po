@@ -215,6 +215,17 @@ msgstr "Dimensions de conditionnement manquantes"
 
 #. module: alc_product_audit
 #: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
+msgid "Product without dimensions in stock"
+msgstr "Produit en stock avec dimensions manquantes"
+
+#. module: alc_product_audit
+#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
+msgid "Product with dimensions in stock"
+msgstr "Produit en stock avec toutes les dimensions"
+
+
+#. module: alc_product_audit
+#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
 msgid "Mto product purchased and not sold"
 msgstr "Produits achetés/vendus sans commande client"
 
@@ -235,7 +246,7 @@ msgstr "Produits achetés/vendus sans commande client"
 #: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_product_mto_stock_5_days
 #: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_variant_mto_stock_5_days
 msgid "Mto stock 5 days"
-msgstr ""
+msgstr "Produits achetés/vendus en stock depuis plus de 5 jours"
 
 #. module: alc_product_audit
 #: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_mto_stock_new_route
@@ -320,6 +331,19 @@ msgstr "- Produit ne pouvant être vendu mais publié sur le site web"
 #, fuzzy
 msgid "Packaging has no dimensions"
 msgstr "Dimensions de conditionnement manquantes"
+
+
+#. module: alc_product_audit
+#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
+msgid "- Product without dimensions in stock"
+msgstr ""
+"- Produit en stock et sans dimensions"
+
+#. module: alc_product_audit
+#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
+msgid "- Product with dimensions in stockk"
+msgstr ""
+"- Produit en stock et avec toutes les dimensions"
 
 #. module: alc_product_audit
 #: model:ir.model,name:alc_product_audit.model_product_template
