@@ -99,12 +99,6 @@ msgstr ""
 #. module: alc_product_audit
 #: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
 #, fuzzy
-msgid "- Product with dimensions in stock"
-msgstr "- Le produit n'a pas toutes les dimensions"
-
-#. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
-#, fuzzy
 msgid "- Product without dimensions in stock"
 msgstr "- Le produit n'a pas toutes les dimensions"
 
@@ -377,12 +371,6 @@ msgstr ""
 #: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
 msgid "Product is not sold anymore but still on website"
 msgstr "Ne peut être vendu et publié sur le site web"
-
-#. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
-#, fuzzy
-msgid "Product with dimensions in stock"
-msgstr "- Le produit n'a pas toutes les dimensions"
 
 #. module: alc_product_audit
 #: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
