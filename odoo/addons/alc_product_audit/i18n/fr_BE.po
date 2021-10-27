@@ -98,6 +98,17 @@ msgstr ""
 
 #. module: alc_product_audit
 #: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
+#, fuzzy
+msgid "- Product with dimensions in stock"
+msgstr "- Produit en stock et avec toutes les dimensions"
+
+#. module: alc_product_audit
+#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
+msgid "- Product without dimensions in stock"
+msgstr "- Produit en stock et sans dimensions"
+
+#. module: alc_product_audit
+#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
 msgid "- The selected picking zone does not match the bin"
 msgstr "- Rangement et zone de picking incohérent"
 
@@ -200,17 +211,6 @@ msgstr "Dimensions manquantes"
 #: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
 msgid "Missing packaging dimensions"
 msgstr "Dimensions de conditionnement manquantes"
-
-#. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
-msgid "Product without dimensions in stock"
-msgstr "Produit en stock avec dimensions manquantes"
-
-#. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
-msgid "Product with dimensions in stock"
-msgstr "Produit en stock avec toutes les dimensions"
-
 
 #. module: alc_product_audit
 #: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
@@ -320,19 +320,6 @@ msgstr "- Produit ne pouvant être vendu mais publié sur le site web"
 msgid "Packaging has no dimensions"
 msgstr "Dimensions de conditionnement manquantes"
 
-
-#. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
-msgid "- Product without dimensions in stock"
-msgstr ""
-"- Produit en stock et sans dimensions"
-
-#. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
-msgid "- Product with dimensions in stockk"
-msgstr ""
-"- Produit en stock et avec toutes les dimensions"
-
 #. module: alc_product_audit
 #: model:ir.model,name:alc_product_audit.model_product_template
 msgid "Product Template"
@@ -366,6 +353,15 @@ msgstr ""
 msgid "Product is not sold anymore but still on website"
 msgstr "Ne peut être vendu et publié sur le site web"
 
+#. module: alc_product_audit
+#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
+msgid "Product with dimensions in stock"
+msgstr "Produit en stock avec toutes les dimensions"
+
+#. module: alc_product_audit
+#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
+msgid "Product without dimensions in stock"
+msgstr "Produit en stock avec dimensions manquantes"
 
 #. module: alc_product_audit
 #: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_sale_not_ok_archived_bin_available
