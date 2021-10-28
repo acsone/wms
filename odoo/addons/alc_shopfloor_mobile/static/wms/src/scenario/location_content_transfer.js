@@ -298,6 +298,9 @@ const LocationContentTransfer = {
               operation_id: data.operation.id,
               location_id: data.operation.location_src.id,
             };
+            if (data.operation.type === "lot") {
+              endpoint_data.lot_id = data.operation.lot.id;
+            }
             this.wait_call(this.odoo.call(endpoint, endpoint_data));
           },
         },

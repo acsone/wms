@@ -569,12 +569,13 @@ class LocationContentTransfer(Component):
                 lambda a, l_id=lot_id: a.lot_id.id == l_id
             )
             pack_lot.qty = pack_lot.qty_todo
-            remaining_operation = operation._split_quantities_done_preserve_link()
-            remaining_operation.qty_done = remaining_operation.product_qty
-            operation.picking_id.recompute_remaining_qty(done_qtys=True)
-            # reset qty_done on pack_lot since the UI expect to have qty set to qty_todo
-            for pack_lot in remaining_operation.pack_lot_ids:
-                pack_lot.qty = pack_lot.qty_todo
+            if len(operation.pack_lot_ids) > 1:
+                remaining_operation = operation._split_quantities_done_preserve_link()
+                remaining_operation.qty_done = remaining_operation.product_qty
+                operation.picking_id.recompute_remaining_qty(done_qtys=True)
+                # reset qty_done on pack_lot since the UI expect to have qty set to qty_todo
+                for pack_lot in remaining_operation.pack_lot_ids:
+                    pack_lot.qty = pack_lot.qty_todo
 
         lot = self.env["stock.production.lot"].browse(lot_id)
 
@@ -594,7 +595,7 @@ class LocationContentTransfer(Component):
             # Create a draft inventory to control stock
             inventory.create_control_stock(src_location, move.product_id, package, lot)
         # no_recompute_pack required by stock_groupbypartner... what a mess
-        moves.with_context(no_recompute_pack=True).action_cancel()
+        moves.with_context(no_recompute_pack=True, force_cancel=True).action_cancel()
         operations = self._find_operations(location)
         return self._response_for_start_single(operations.mapped("picking_id"))
 
