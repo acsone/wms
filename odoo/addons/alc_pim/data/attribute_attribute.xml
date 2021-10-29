@@ -158,17 +158,6 @@
     <field ref="product.model_product_template" name="model_id" />
     <field name="nature">native</field>
   </record>
-  <record model="attribute.attribute" id="attribute_image">
-    <field name="allow_mass_editing" eval="False" />
-    <field ref="marketing_attribute_group" name="attribute_group_id" />
-    <field
-      name="attribute_set_ids"
-      eval="[(6,0,[ref('attribute_set_medicaments'), ref('attribute_set_aliments'), ref('attribute_set_materiel')])]"
-    />
-    <field ref="product.field_product_template_image" name="field_id" />
-    <field ref="product.model_product_template" name="model_id" />
-    <field name="nature">native</field>
-  </record>
   <record model="attribute.attribute" id="attribute_manufacturer">
     <field name="allow_mass_editing" eval="False" />
     <field ref="marketing_attribute_group" name="attribute_group_id" />
@@ -180,17 +169,6 @@
       ref="product_manufacturer.field_product_template_manufacturer"
       name="field_id"
     />
-    <field ref="product.model_product_template" name="model_id" />
-    <field name="nature">native</field>
-  </record>
-  <record model="attribute.attribute" id="attribute_name">
-    <field name="allow_mass_editing" eval="False" />
-    <field ref="marketing_attribute_group" name="attribute_group_id" />
-    <field
-      name="attribute_set_ids"
-      eval="[(6,0,[ref('attribute_set_medicaments'), ref('attribute_set_aliments'), ref('attribute_set_materiel')])]"
-    />
-    <field ref="product.field_product_template_name" name="field_id" />
     <field ref="product.model_product_template" name="model_id" />
     <field name="nature">native</field>
   </record>
