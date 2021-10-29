@@ -2,23 +2,20 @@
 # Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, fields, models
-from odoo.exceptions import UserError
+from odoo import api, fields, models
+
+from ..exceptions import MissingBarcodeError, MissingDimensionsError, MissingWeightError
 
 
 class StockPackOperationLotAdd(models.TransientModel):
 
     _inherit = "stock.pack.operation.lot.add"
 
-    missing_product_dimensions = fields.Boolean(
-        default=False, compute="_compute_missing_product_dimensions"
+    display_product_dimensions = fields.Boolean(
+        compute="_compute_display_missing_infos"
     )
-    missing_product_weight = fields.Boolean(
-        default=False, compute="_compute_missing_product_weight"
-    )
-    missing_product_barcode = fields.Boolean(
-        default=False, compute="_compute_missing_product_barcode"
-    )
+    display_product_weight = fields.Boolean(compute="_compute_display_missing_infos")
+    display_product_barcode = fields.Boolean(compute="_compute_display_missing_infos")
     no_barcode_authorized = fields.Boolean(default=False)
     product_weight = fields.Float(string="Product weight")
     product_length = fields.Float(string="Product length (cm)")
@@ -26,91 +23,67 @@ class StockPackOperationLotAdd(models.TransientModel):
     product_width = fields.Float(string="Product width (cm)")
     product_barcode = fields.Char(string="Barcode", oldname="ean13")
 
-    def _check_product_is_new(self, operation):
-        storage_type_new = self.env.ref(
-            "alc_stock_storage_type.package_st_M_M_Nouveaute", raise_if_not_found=False
-        )
-        product = operation.product_id
-        is_new = (
-            product.product_tmpl_id.product_package_storage_type_id.id
-            == storage_type_new.id
-        )
-        return product, is_new
-
-    @api.onchange("operation_id")
-    def _compute_missing_product_dimensions(self):
+    @api.depends(
+        "operation_id",
+        "operation_id.product_id",
+        "operation_id.product_id.is_new",
+        "operation_id.product_id.has_no_dimensions",
+        "operation_id.product_id.missing_barcode",
+        "operation_id.product_id.missing_weight",
+    )
+    def _compute_display_missing_infos(self):
         for rec in self:
-            product, product_is_new = self._check_product_is_new(rec.operation_id)
-            product_dimensions_missing = product and not (
-                product.width or product.length or product.width
+            product = rec.operation_id.product_id
+            rec.display_product_barcode = product.missing_barcode
+            rec.display_product_weight = (
+                product.product_tmpl_id.is_new and product.missing_weight
             )
-            rec.missing_product_dimensions = bool(
-                rec.operation_id and product_is_new and (product_dimensions_missing)
-            )
-
-    @api.onchange("operation_id")
-    def _compute_missing_product_weight(self):
-        for rec in self:
-            product, product_is_new = self._check_product_is_new(rec.operation_id)
-            rec.missing_product_weight = bool(
-                rec.operation_id and product_is_new and not product.weight
-            )
-
-    @api.onchange("operation_id")
-    def _compute_missing_product_barcode(self):
-        for rec in self:
-            product, product_is_new = self._check_product_is_new(rec.operation_id)
-            rec.missing_product_barcode = bool(
-                rec.operation_id and product_is_new and not product.barcode
+            rec.display_product_dimensions = (
+                product.product_tmpl_id.is_new
+                and product.product_tmpl_id.has_no_dimensions
             )
 
     def _add(self):
         res = super(StockPackOperationLotAdd, self)._add()
-        no_barcode_and_barcode_must_be_defined = self.missing_product_barcode and not (
+        no_barcode_and_barcode_must_be_defined = self.display_product_barcode and not (
             self.product_barcode or self.no_barcode_authorized
         )
-        missing_dimension = self.missing_product_dimensions and not (
+        missing_dimension = self.display_product_dimensions and not (
             self.product_width or self.product_length or self.product_height
         )
-        missing_weight = self.missing_product_weight and not self.product_weight
-        if missing_dimension or missing_weight:
-            raise UserError(
-                _(
-                    "Missing dimensions or weight. Please complete the info before making the reception."
-                )
-            )
+        missing_weight = self.display_product_weight and not self.product_weight
+
+        if missing_weight:
+            raise MissingWeightError()
+
+        if missing_dimension:
+            raise MissingDimensionsError()
 
         if no_barcode_and_barcode_must_be_defined:
-            raise UserError(
-                _(
-                    "Missing barcode on the product you are trying to receive. If it is intentionnal, please check the 'no barcode for this product' box, else complete barcode."
-                )
-            )
+            raise MissingBarcodeError()
 
-        if (
-            self.missing_product_dimensions
-            or self.missing_product_weight
-            or self.missing_product_barcode
-        ):
-            product = self.operation_id.product_id
-            product.write(
+        product = self.operation_id.product_id
+
+        vals = {}
+        if self.display_product_dimensions:
+            vals.update(
                 {
-                    "width": self.product_width
-                    if self.product_width
-                    else product.width,
-                    "length": self.product_length
-                    if self.product_length
-                    else product.length,
-                    "height": self.product_height
-                    if self.product_height
-                    else product.height,
-                    "weight": self.product_weight
-                    if self.product_weight
-                    else product.weight,
-                    "barcode": self.product_barcode
-                    if self.product_barcode
-                    else product.barcode,
+                    "width": self.product_width,
+                    "length": self.product_length,
+                    "height": self.product_height,
+                }
+            )
+        if self.display_product_weight:
+            vals.update({"weight": self.product_weight})
+
+        if self.display_product_barcode:
+            vals.update(
+                {
+                    "barcode": self.product_barcode,
                     "no_barcode_authorized": self.no_barcode_authorized,
                 }
             )
+        if vals:
+            product.write(vals)
+
         return res

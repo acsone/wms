@@ -1,18 +1,26 @@
 # -*- coding: utf-8 -*-
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-
-from psycopg2.extensions import AsIs
 from datetime import datetime
 
 from dateutil.relativedelta import relativedelta
+from psycopg2.extensions import AsIs
 
 from odoo import api, fields, models
+from odoo.osv.expression import OR
 
 
 class ProductTemplate(models.Model):
 
     _inherit = "product.template"
+
+    is_new = fields.Boolean(default=False, compute="_compute_is_new")
+
+    no_barcode_authorized = fields.Boolean(
+        "No barcode authorized for this product",
+        oldname="ean13",
+        related="product_variant_ids.no_barcode_authorized",
+    )
 
     no_min_max_no_on_command_reappro = fields.Boolean(
         default=False,
@@ -109,17 +117,26 @@ class ProductTemplate(models.Model):
     dimensions_in_stock = fields.Boolean(
         default=False,
         compute="_compute_dimensions_in_stock",
-        search="_search_dimensions_in_stock",)
+        search="_search_dimensions_in_stock",
+    )
+
     new_product_with_old_date = fields.Boolean(
         default=False,
         compute="_compute_new_product_with_old_date",
-        store=True,
-        index=True,
+        search="_search_new_product_with_old_date",
     )
 
     has_anomaly = fields.Boolean(
         default=False, compute="_compute_has_anomaly", search="_search_has_anomaly"
     )
+
+    @api.depends("product_package_storage_type_id")
+    def _compute_is_new(self):
+        storage_type_new = self.env.ref(
+            "alc_stock_storage_type.package_st_M_M_Nouveaute"
+        )
+        for product in self:
+            product.is_new = product.product_package_storage_type_id == storage_type_new
 
     @api.depends("route_ids", "orderpoint_min", "orderpoint_max")
     def _compute_min_max_and_on_command_reappro(self):
@@ -545,36 +562,54 @@ class ProductTemplate(models.Model):
         "route_ids",
     )
     def _compute_dimensions_in_stock(self):
-        ids_not_in_stock = set(
-            self._get_product_dimensions_in_stock(no_dimensions=False)
-        )
+        ids_in_stock = set(self._get_product_dimensions_in_stock(no_dimensions=False))
         for product in self:
-            product.no_dimensions_in_stock = product.id in ids_not_in_stock
+            product.dimensions_in_stock = product.id in ids_in_stock
 
     def _search_dimensions_in_stock(self, operator, value):
         ids = self._get_product_dimensions_in_stock(no_dimensions=False)
         return [("id", "in", ids)]
-        
-    @api.depends("product_package_storage_type_id")
+
+    @api.depends("is_new")
     def _compute_new_product_with_old_date(self):
-        storage_type_new = self.env.ref(
-            "alc_stock_storage_type.package_st_M_M_Nouveaute", raise_if_not_found=False
-        )
         previous_month = datetime.now() - relativedelta(months=1)
         for product in self:
-            if storage_type_new and product.create_date:
-                product_is_new = (
-                    product.product_package_storage_type_id.id == storage_type_new.id
-                )
+            if product.is_new and product.create_date:
                 product_is_older_than_a_month = (
                     datetime.strptime(product.create_date, "%Y-%m-%d %H:%M:%S")
                     < previous_month
                 )
                 product.new_product_with_old_date = bool(
-                    product_is_new and product_is_older_than_a_month
+                    product.is_new and product_is_older_than_a_month
                 )
             else:
                 product.new_product_with_old_date = False
+
+    def _search_new_product_with_old_date(self, operator, value):
+        previous_month = datetime.now() - relativedelta(months=1)
+        previous_month_str = datetime.strftime(previous_month, "%Y-%m-%d %H:%M:%S")
+        return [("is_new", "=", True), ("create_date", "<", previous_month_str)]
+
+    def _get_anomaly_fields(self):
+        return [
+            "mismatch_route_picking",
+            "mismatch_picking_bin",
+            "sale_not_ok_archived_bin_available",
+            "sale_not_ok_not_archived",
+            "min_max_on_command_reappro",
+            "no_min_max_no_on_command_reappro",
+            "mto_with_abnormal_route",
+            "can_be_bought_without_buy_route",
+            "has_no_dimensions",
+            "packaging_has_no_dimensions",
+            "mto_purchased_not_sold",
+            "mto_stock_no_mto_route",
+            "mto_stock_new_route",
+            "not_sold_on_website",
+            "mto_stock_5_days",
+            "no_dimensions_in_stock",
+            "new_product_with_old_date",
+        ]
 
     @api.depends(
         "min_max_on_command_reappro",
@@ -596,59 +631,13 @@ class ProductTemplate(models.Model):
         "new_product_with_old_date",
     )
     def _compute_has_anomaly(self):
+        anomalies = self._get_anomaly_fields()
         for product in self:
-            if (
-                product.mismatch_route_picking
-                or product.mismatch_picking_bin
-                or product.sale_not_ok_archived_bin_available
-                or product.sale_not_ok_not_archived
-                or product.min_max_on_command_reappro
-                or product.no_min_max_no_on_command_reappro
-                or product.mto_with_abnormal_route
-                or product.can_be_bought_without_buy_route
-                or product.has_no_dimensions
-                or product.packaging_has_no_dimensions
-                or product.mto_purchased_not_sold
-                or product.mto_stock_no_mto_route
-                or product.mto_stock_new_route
-                or product.not_sold_on_website
-                or product.mto_stock_5_days
-                or product.no_dimensions_in_stock
-                or product.new_product_with_old_date
-            ):
-                product.has_anomaly = True
-            else:
-                product.has_anomaly = False
+            product.has_anomaly = any(product[anomaly] for anomaly in anomalies)
 
     def _search_has_anomaly(self, operator, value):
-        domain = [
-            "|",
-            "|",
-            "|",
-            "|",
-            "|",
-            "|",
-            "|",
-            "|",
-            "|",
-            "|",
-            "|",
-            "|",
-            "|",
-            "|",
-            ("mismatch_route_picking", "=", True),
-            ("mismatch_picking_bin", "=", True),
-            ("sale_not_ok_archived_bin_available", "=", True),
-            ("sale_not_ok_not_archived", "=", True),
-            ("min_max_on_command_reappro", "=", True),
-            ("no_min_max_no_on_command_reappro", "=", True),
-            ("mto_with_abnormal_route", "=", True),
-            ("can_be_bought_without_buy_route", "=", True),
-            ("has_no_dimensions", "=", True),
-            ("packaging_has_no_dimensions", "=", True),
-            ("not_sold_on_website", "=", True),
-            ("new_product_with_old_date", "=", True),
-        ]
+        anomalies = self._get_anomaly_fields()
+        domain = OR([[(anomaly, "=", True)] for anomaly in anomalies])
 
         ids_5_days = self._search_mto_stock_5_days(operator, value)
         ids_new_route = self._search_mto_stock_new_route(operator, value)

@@ -14,36 +14,33 @@
     />
         <field name="arch" type="xml">
                 <xpath expr="//group[@name='operation_details']" position="after">
-                    <field name="missing_product_dimensions" invisible="1" />
-                    <field name="missing_product_weight" invisible="1" />
-                    <field name="missing_product_barcode" invisible="1" />
-                    <group
-          name="missing_infos"
-          attrs="{'invisible': [('missing_product_dimensions', '=', False), ('missing_product_barcode', '=', False)], 'required': ['|', ('missing_product_dimensions', '=', True),  ('missing_product_barcode', '=', True)]}"
-        >
+                    <field name="display_product_dimensions" invisible="1" />
+                    <field name="display_product_weight" invisible="1" />
+                    <field name="display_product_barcode" invisible="1" />
+                    <group name="missing_infos">
                         <field
             name="product_weight"
-            attrs="{'invisible': [('missing_product_weight', '=', False)], 'required': [('missing_product_weight', '=', True)]}"
+            attrs="{'invisible': [('display_product_weight', '=', False)], 'required': [('display_product_weight', '=', True)]}"
           />
                         <field
             name="product_length"
-            attrs="{'invisible': [('missing_product_dimensions', '=', False)], 'required': [('missing_product_dimensions', '=', True)]}"
+            attrs="{'invisible': [('display_product_dimensions', '=', False)], 'required': [('display_product_dimensions', '=', True)]}"
           />
                         <field
             name="product_height"
-            attrs="{'invisible': [('missing_product_dimensions', '=', False)], 'required': [('missing_product_dimensions', '=', True)]}"
+            attrs="{'invisible': [('display_product_dimensions', '=', False)], 'required': [('display_product_dimensions', '=', True)]}"
           />
                         <field
             name="product_width"
-            attrs="{'invisible': [('missing_product_dimensions', '=', False)], 'required': [('missing_product_dimensions', '=', True)]}"
+            attrs="{'invisible': [('display_product_dimensions', '=', False)], 'required': [('display_product_dimensions', '=', True)]}"
           />
                         <field
             name="product_barcode"
-            attrs="{'invisible': [('missing_product_barcode', '=', False)]}"
+            attrs="{'invisible': [('display_product_barcode', '=', False)]}"
           />
                         <field
             name="no_barcode_authorized"
-            attrs="{'invisible': [('missing_product_barcode', '=', False)], 'required': [('product_barcode', '=', False)]}"
+            attrs="{'invisible': [('display_product_barcode', '=', False)], 'required': [('product_barcode', '=', False)]}"
           />
                     </group>
                 </xpath>

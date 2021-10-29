@@ -147,6 +147,7 @@
         "alc_stock_picking_package",
         "alc_stock_receive_frigo",
         "alc_stock_receive_lot_product_info",
+        "alc_stock_receive_lot_missing_product_nouveaute_info",
         "alc_turnover_reporting",
         "camptocamp_tools",  # to remove
         "connector_esb",
