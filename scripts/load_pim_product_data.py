@@ -70,6 +70,20 @@ def load_species_ids(ref):
         ref[k] = ENV.ref("product_animal_species.%s" % mapping[k])
 
 
+def load_attribute_set_category_mapping(ref):
+    attribute_set_category_mapping_xmlids = {
+        "alc_pim.attribute_set_medicaments": "alc_pim.med",
+        "alc_pim.attribute_set_aliments": "alc_pim.ali",
+        "alc_pim.attribute_set_materiel": "alc_pim.mat",
+    }
+    for attribute in attribute_set_category_mapping_xmlids:
+        att_id = ENV.ref(attribute).id
+        parent_cat_id = ENV.ref(attribute_set_category_mapping_xmlids[attribute]).id
+        domain_cats = [("parent_id", "child_of", parent_cat_id)]
+        cats = ENV["product.category"].search(domain_cats)
+        ref[att_id] = cats.ids
+
+
 def find_record_by_id(column_name, value):
     if column_name in {"marque_medicaments", "categories"}:
         record = ENV.ref("alc_pim." + value)
@@ -154,9 +168,23 @@ def process_product_row(root, rd):
         translations["fr_BE"] = process_lang_fields(rd, "fr_BE")
         translations["nl_BE"] = process_lang_fields(rd, "nl_BE")
         imgs = process_imgs_fields(root, rd, product)
+        attribute_set_id = process_attribute_set(product, vals)
+        if attribute_set_id:
+            vals["attribute_set_id"] = attribute_set_id
         desc = "PIM Import Product %s" % product.name
         product.with_delay(description=desc)._pim_import(vals, translations, imgs)
     return product
+
+
+def process_attribute_set(product, vals):
+    if not product.attribute_set_id:
+        categ_ids = vals["categ_ids"] and vals["categ_ids"][0][2]
+        categ_ids = categ_ids or product.categ_ids.ids
+        for cat_id in categ_ids:
+            for att, cat_ids in ATTRIBUTE_SET_CATEGORY_MAPPING.items():
+                if cat_id in cat_ids:
+                    return att
+    return False
 
 
 def process_lang_fields(rd, lang):
@@ -176,6 +204,7 @@ def process_lang_fields(rd, lang):
 
 OPTIONS_IDS = {}  # to load based on path provided at execution
 SPECIES_IDS = {}
+ATTRIBUTE_SET_CATEGORY_MAPPING = {}
 
 
 @click.command()
@@ -187,6 +216,7 @@ def main(env, root, filename, delimiter=";"):
     ENV = env
     load_species_ids(SPECIES_IDS)
     load_option_ids(root, OPTIONS_IDS)
+    load_attribute_set_category_mapping(ATTRIBUTE_SET_CATEGORY_MAPPING)
     return process_csv_file(root, filename, process_product_row, delimiter)
 
 
