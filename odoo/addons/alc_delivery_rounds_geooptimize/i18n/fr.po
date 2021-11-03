@@ -222,6 +222,13 @@ msgid "Geo optimization method"
 msgstr "Méthode d'optimisation géographique"
 
 #. module: alc_delivery_rounds_geooptimize
+#: model:ir.model.fields,field_description:alc_delivery_rounds_geooptimize.field_round_instance_geo_optimization_planned_start_loading_time
+#: model:ir.model.fields,field_description:alc_delivery_rounds_geooptimize.field_round_template_geo_optimization_planned_start_loading_time
+#: model:ir.model.fields,field_description:alc_delivery_rounds_geooptimize.field_stock_config_settings_geo_optimization_planned_start_loading_time
+msgid "Planned Start Loading Time"
+msgstr "Heure de début de chargement du véhicule"
+
+#. module: alc_delivery_rounds_geooptimize
 #: model:ir.model.fields,field_description:alc_delivery_rounds_geooptimize.field_round_instance_geo_optimization_request
 msgid "Geo optimization request"
 msgstr "Requête de Géo optimisation"

@@ -72,6 +72,9 @@ class RoundInstance(models.Model):
     geo_optimization_error_message = fields.Text("Optimization error message")
     print_all_deliveryslip_after_geo_optimization = fields.Boolean(readonly=True)
 
+    geo_optimization_planned_start_loading_time = fields.Float(
+        "Planned Start Loading Time", compute="_compute_planned_start_loading_time"
+    )
     state = fields.Selection(
         selection_add=[
             ("optimizing", "Optimizing delivery"),
@@ -115,6 +118,20 @@ class RoundInstance(models.Model):
             if record.geo_optimization_result:
                 val = json.loads(base64.b64decode(record.geo_optimization_result))
             record.geo_optimization_json = val
+
+    @api.depends("time_leave_planned")
+    def _compute_planned_start_loading_time(self):
+        duration = self.get_optimization_config().loading_duration
+        for record in self:
+            leave_planned_in_minutes = record.time_leave_planned * 60
+            if leave_planned_in_minutes and duration:
+                record.geo_optimization_planned_start_loading_time = (
+                    leave_planned_in_minutes - float(duration)
+                ) / 60
+            else:
+                record.geo_optimization_planned_start_loading_time = (
+                    record.time_leave_planned
+                )
 
     @api.depends("geo_optimization_status")
     def _compute_geo_optimization_state(self):
