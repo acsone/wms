@@ -1,4 +1,4 @@
-<odoo noupdate="1">
+<odoo noupdate="0">
   <record model="attribute.attribute" id="attribute_barcode">
     <field name="allow_mass_editing" eval="False" />
     <field ref="management_attribute_group" name="attribute_group_id" />
@@ -9,9 +9,9 @@
     <field ref="product.field_product_template_barcode" name="field_id" />
     <field ref="product.model_product_template" name="model_id" />
     <field name="nature">native</field>
+    <field name="attribute_type">char</field>
   </record>
   <record model="attribute.attribute" id="attribute_belgium_only">
-<!--    TODO: set to True-->
     <field name="allow_mass_editing" eval="False" />
     <field ref="management_attribute_group" name="attribute_group_id" />
     <field
@@ -24,6 +24,7 @@
     />
     <field ref="product.model_product_template" name="model_id" />
     <field name="nature">native</field>
+    <field name="attribute_type">boolean</field>
   </record>
   <record model="attribute.attribute" id="attribute_category_lot_expiry_field_name">
     <field name="allow_mass_editing" eval="False" />
@@ -38,6 +39,7 @@
     />
     <field ref="product.model_product_template" name="model_id" />
     <field name="nature">native</field>
+    <field name="attribute_type">text</field>
   </record>
   <record model="attribute.attribute" id="attribute_cnk_code">
     <field name="allow_mass_editing" eval="False" />
@@ -46,6 +48,7 @@
     <field ref="alc_product_pharmacy.field_product_template_cnk_code" name="field_id" />
     <field ref="product.model_product_template" name="model_id" />
     <field name="nature">native</field>
+    <field name="attribute_type">char</field>
   </record>
   <record model="attribute.attribute" id="attribute_create_date">
     <field name="allow_mass_editing" eval="False" />
@@ -57,6 +60,7 @@
     <field ref="product.field_product_template_create_date" name="field_id" />
     <field ref="product.model_product_template" name="model_id" />
     <field name="nature">native</field>
+    <field name="attribute_type">datetime</field>
   </record>
   <record model="attribute.attribute" id="attribute_default_code">
     <field name="allow_mass_editing" eval="False" />
@@ -68,6 +72,7 @@
     <field ref="product.field_product_template_default_code" name="field_id" />
     <field ref="product.model_product_template" name="model_id" />
     <field name="nature">native</field>
+    <field name="attribute_type">char</field>
   </record>
   <record model="attribute.attribute" id="attribute_lot_expiry_field_name">
     <field name="allow_mass_editing" eval="False" />
@@ -82,6 +87,7 @@
     />
     <field ref="product.model_product_template" name="model_id" />
     <field name="nature">native</field>
+    <field name="attribute_type">text</field>
   </record>
   <record model="attribute.attribute" id="attribute_not_sold_on_website">
     <field name="allow_mass_editing" eval="False" />
@@ -96,6 +102,7 @@
     />
     <field ref="product.model_product_template" name="model_id" />
     <field name="nature">native</field>
+    <field name="attribute_type">boolean</field>
   </record>
   <record model="attribute.attribute" id="attribute_taxes_id">
     <field name="allow_mass_editing" eval="False" />
@@ -107,6 +114,7 @@
     <field ref="account.field_product_template_taxes_id" name="field_id" />
     <field ref="product.model_product_template" name="model_id" />
     <field name="nature">native</field>
+    <field name="attribute_type">multiselect</field>
   </record>
   <record model="attribute.attribute" id="attribute_vendor_product_code">
     <field name="allow_mass_editing" eval="False" />
@@ -121,6 +129,7 @@
     />
     <field ref="product.model_product_template" name="model_id" />
     <field name="nature">native</field>
+    <field name="attribute_type">char</field>
   </record>
   <record model="attribute.attribute" id="attribute_packaging_ids">
     <field name="allow_mass_editing" eval="False" />
@@ -132,6 +141,7 @@
     <field ref="product.field_product_template_packaging_ids" name="field_id" />
     <field ref="product.model_product_template" name="model_id" />
     <field name="nature">native</field>
+    <field name="attribute_type">multiselect</field>
   </record>
   <record model="attribute.attribute" id="attribute_route_from_categ_ids">
     <field name="allow_mass_editing" eval="False" />
@@ -143,6 +153,7 @@
     <field ref="stock.field_product_template_route_from_categ_ids" name="field_id" />
     <field ref="product.model_product_template" name="model_id" />
     <field name="nature">native</field>
+    <field name="attribute_type">multiselect</field>
   </record>
   <record model="attribute.attribute" id="attribute_unit_in_shrink_wrap">
     <field name="allow_mass_editing" eval="False" />
@@ -157,17 +168,7 @@
     />
     <field ref="product.model_product_template" name="model_id" />
     <field name="nature">native</field>
-  </record>
-  <record model="attribute.attribute" id="attribute_image">
-    <field name="allow_mass_editing" eval="False" />
-    <field ref="marketing_attribute_group" name="attribute_group_id" />
-    <field
-      name="attribute_set_ids"
-      eval="[(6,0,[ref('attribute_set_medicaments'), ref('attribute_set_aliments'), ref('attribute_set_materiel')])]"
-    />
-    <field ref="product.field_product_template_image" name="field_id" />
-    <field ref="product.model_product_template" name="model_id" />
-    <field name="nature">native</field>
+    <field name="attribute_type">integer</field>
   </record>
   <record model="attribute.attribute" id="attribute_manufacturer">
     <field name="allow_mass_editing" eval="False" />
@@ -182,17 +183,7 @@
     />
     <field ref="product.model_product_template" name="model_id" />
     <field name="nature">native</field>
-  </record>
-  <record model="attribute.attribute" id="attribute_name">
-    <field name="allow_mass_editing" eval="False" />
-    <field ref="marketing_attribute_group" name="attribute_group_id" />
-    <field
-      name="attribute_set_ids"
-      eval="[(6,0,[ref('attribute_set_medicaments'), ref('attribute_set_aliments'), ref('attribute_set_materiel')])]"
-    />
-    <field ref="product.field_product_template_name" name="field_id" />
-    <field ref="product.model_product_template" name="model_id" />
-    <field name="nature">native</field>
+    <field name="attribute_type">select</field>
   </record>
   <record model="attribute.attribute" id="attribute_storage_temperature_id">
     <field name="allow_mass_editing" eval="False" />
@@ -207,6 +198,7 @@
     />
     <field ref="product.model_product_template" name="model_id" />
     <field name="nature">native</field>
+    <field name="attribute_type">select</field>
   </record>
   <record model="attribute.attribute" id="attribute_dimensional_uom_id">
     <field name="allow_mass_editing" eval="False" />
@@ -221,6 +213,7 @@
     />
     <field ref="product.model_product_template" name="model_id" />
     <field name="nature">native</field>
+    <field name="attribute_type">select</field>
   </record>
   <record model="attribute.attribute" id="attribute_pdf_file">
     <field name="allow_mass_editing" eval="False" />
@@ -229,6 +222,7 @@
     <field ref="alc_pim_product.field_product_template_pdf_file" name="field_id" />
     <field ref="product.model_product_template" name="model_id" />
     <field name="nature">native</field>
+    <field name="attribute_type">binary</field>
   </record>
   <record model="attribute.attribute" id="attribute_promo_bag">
     <field name="allow_mass_editing" eval="False" />
@@ -237,6 +231,7 @@
     <field ref="alc_pim_product.field_product_template_promo_bag" name="field_id" />
     <field ref="product.model_product_template" name="model_id" />
     <field name="nature">native</field>
+    <field name="attribute_type">boolean</field>
   </record>
   <record model="attribute.attribute" id="attribute_sterile">
     <field name="allow_mass_editing" eval="False" />
@@ -245,6 +240,7 @@
     <field ref="alc_pim_product.field_product_template_sterile" name="field_id" />
     <field ref="product.model_product_template" name="model_id" />
     <field name="nature">native</field>
+    <field name="attribute_type">boolean</field>
   </record>
   <record model="attribute.attribute" id="attribute_fabric">
     <field name="allow_mass_editing" eval="False" />
@@ -253,6 +249,7 @@
     <field ref="alc_pim_product.field_product_template_fabric" name="field_id" />
     <field ref="product.model_product_template" name="model_id" />
     <field name="nature">native</field>
+    <field name="attribute_type">boolean</field>
   </record>
   <record model="attribute.attribute" id="attribute_link_info">
     <field name="allow_mass_editing" eval="False" />
@@ -264,6 +261,7 @@
     />
     <field ref="product.model_product_template" name="model_id" />
     <field name="nature">native</field>
+    <field name="attribute_type">char</field>
   </record>
   <record model="attribute.attribute" id="attribute_link_notice">
     <field name="allow_mass_editing" eval="False" />
@@ -275,6 +273,7 @@
     />
     <field ref="product.model_product_template" name="model_id" />
     <field name="nature">native</field>
+    <field name="attribute_type">char</field>
   </record>
   <record model="attribute.attribute" id="attribute_description_shop_short">
     <field name="allow_mass_editing" eval="False" />
@@ -286,6 +285,7 @@
     />
     <field ref="product.model_product_template" name="model_id" />
     <field name="nature">native</field>
+    <field name="attribute_type">text</field>
   </record>
   <record model="attribute.attribute" id="attribute_description_shop_long">
     <field name="allow_mass_editing" eval="False" />
@@ -297,6 +297,7 @@
     />
     <field ref="product.model_product_template" name="model_id" />
     <field name="nature">native</field>
+    <field name="attribute_type">text</field>
   </record>
   <record model="attribute.attribute" id="attribute_class_amcra">
     <field name="allow_mass_editing" eval="False" />
@@ -305,6 +306,7 @@
     <field ref="alc_pim_product.field_product_template_class_amcra" name="field_id" />
     <field ref="product.model_product_template" name="model_id" />
     <field name="nature">native</field>
+    <field name="attribute_type">char</field>
   </record>
   <record model="attribute.attribute" id="attribute_size_clothing_option_id">
     <field name="allow_mass_editing" eval="False" />
@@ -316,6 +318,7 @@
     />
     <field ref="product.model_product_template" name="model_id" />
     <field name="nature">native</field>
+    <field name="attribute_type">select</field>
   </record>
   <record model="attribute.attribute" id="attribute_thread_option_id">
     <field name="allow_mass_editing" eval="False" />
@@ -327,6 +330,7 @@
     />
     <field ref="product.model_product_template" name="model_id" />
     <field name="nature">native</field>
+    <field name="attribute_type">select</field>
   </record>
   <record model="attribute.attribute" id="attribute_food_range_option_id">
     <field name="allow_mass_editing" eval="False" />
@@ -338,6 +342,7 @@
     />
     <field ref="product.model_product_template" name="model_id" />
     <field name="nature">native</field>
+    <field name="attribute_type">select</field>
   </record>
   <record model="attribute.attribute" id="attribute_presentation_option_id">
     <field name="allow_mass_editing" eval="False" />
@@ -349,6 +354,7 @@
     />
     <field ref="product.model_product_template" name="model_id" />
     <field name="nature">native</field>
+    <field name="attribute_type">select</field>
   </record>
   <record model="attribute.attribute" id="attribute_categ_age_option_ids">
     <field name="allow_mass_editing" eval="False" />
@@ -360,6 +366,7 @@
     />
     <field ref="product.model_product_template" name="model_id" />
     <field name="nature">native</field>
+    <field name="attribute_type">multiselect</field>
   </record>
   <record model="attribute.attribute" id="attribute_product_color_option_ids">
     <field name="allow_mass_editing" eval="False" />
@@ -371,6 +378,7 @@
     />
     <field ref="product.model_product_template" name="model_id" />
     <field name="nature">native</field>
+    <field name="attribute_type">multiselect</field>
   </record>
   <record model="attribute.attribute" id="attribute_indication_option_ids">
     <field name="allow_mass_editing" eval="False" />
@@ -382,6 +390,7 @@
     />
     <field ref="product.model_product_template" name="model_id" />
     <field name="nature">native</field>
+    <field name="attribute_type">multiselect</field>
   </record>
   <record model="attribute.attribute" id="attribute_animal_size_option_ids">
     <field name="allow_mass_editing" eval="False" />
@@ -393,6 +402,7 @@
     />
     <field ref="product.model_product_template" name="model_id" />
     <field name="nature">native</field>
+    <field name="attribute_type">multiselect</field>
   </record>
   <record model="attribute.attribute" id="attribute_active_principle_option_ids">
     <field name="allow_mass_editing" eval="False" />
@@ -404,6 +414,7 @@
     />
     <field ref="product.model_product_template" name="model_id" />
     <field name="nature">native</field>
+    <field name="attribute_type">multiselect</field>
   </record>
   <record model="attribute.attribute" id="attribute_administration_route_option_ids">
     <field name="allow_mass_editing" eval="False" />
@@ -415,6 +426,7 @@
     />
     <field ref="product.model_product_template" name="model_id" />
     <field name="nature">native</field>
+    <field name="attribute_type">multiselect</field>
   </record>
   <record model="attribute.attribute" id="attribute_product_brand_id">
     <field name="allow_mass_editing" eval="False" />
@@ -426,6 +438,7 @@
     />
     <field ref="product.model_product_template" name="model_id" />
     <field name="nature">native</field>
+    <field name="attribute_type">select</field>
   </record>
   <record model="attribute.attribute" id="attribute_species_id">
     <field name="allow_mass_editing" eval="False" />
@@ -440,6 +453,7 @@
     />
     <field ref="product.model_product_template" name="model_id" />
     <field name="nature">native</field>
+    <field name="attribute_type">select</field>
   </record>
   <record model="attribute.attribute" id="attribute_species_ids">
     <field name="allow_mass_editing" eval="False" />
@@ -454,6 +468,7 @@
     />
     <field ref="product.model_product_template" name="model_id" />
     <field name="nature">native</field>
+    <field name="attribute_type">multiselect</field>
   </record>
   <record model="attribute.attribute" id="attribute_veterinary_only">
     <field name="allow_mass_editing" eval="False" />
@@ -468,6 +483,7 @@
     />
     <field ref="product.model_product_template" name="model_id" />
     <field name="nature">native</field>
+    <field name="attribute_type">boolean</field>
   </record>
   <record model="attribute.attribute" id="attribute_code_amm">
     <field name="allow_mass_editing" eval="False" />
@@ -476,6 +492,7 @@
     <field ref="alc_product_pharmacy.field_product_template_code_amm" name="field_id" />
     <field ref="product.model_product_template" name="model_id" />
     <field name="nature">native</field>
+    <field name="attribute_type">char</field>
   </record>
   <record model="attribute.attribute" id="attribute_code_cti">
     <field name="allow_mass_editing" eval="False" />
@@ -484,6 +501,7 @@
     <field ref="alc_product_pharmacy.field_product_template_code_cti" name="field_id" />
     <field ref="product.model_product_template" name="model_id" />
     <field name="nature">native</field>
+    <field name="attribute_type">char</field>
   </record>
   <record model="attribute.attribute" id="attribute_pharmacy_only">
     <field name="allow_mass_editing" eval="False" />
@@ -498,5 +516,6 @@
     />
     <field ref="product.model_product_template" name="model_id" />
     <field name="nature">native</field>
+    <field name="attribute_type">boolean</field>
   </record>
 </odoo>
