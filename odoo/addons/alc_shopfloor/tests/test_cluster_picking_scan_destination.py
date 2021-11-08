@@ -165,8 +165,10 @@ class ClusterPickingScanDestinationPackCase(ClusterPickingCommonCase):
         )
 
     def test_scan_destination_pack_bin_not_found(self):
-        """Scan a destination package that do not exist"""
-        operation = self.one_line_picking.pack_operation_ids
+        """Scan a destination package that do not exist:
+        destination package is created on the fly"""
+        operation = self.batch.pack_operation_ids[0]
+        next_operation = self.batch.pack_operation_ids[1]
         response = self.service.dispatch(
             "scan_destination_pack",
             params={
@@ -179,11 +181,13 @@ class ClusterPickingScanDestinationPackCase(ClusterPickingCommonCase):
         )
         self.assert_response(
             response,
-            next_state="scan_destination",
-            data=self._operation_data(operation),
+            next_state="start_operation",
+            data=self._operation_data(next_operation),
             message={
-                "message_type": "error",
-                "body": "Bin {} doesn't exist".format("toto"),
+                "message_type": "success",
+                "body": "{} {} put in {}".format(
+                    operation.qty_done, operation.product_id.display_name, "toto"
+                ),
             },
         )
 
