@@ -2437,12 +2437,6 @@ msgid "Ijzer"
 msgstr ""
 
 #. module: alc_pim
-#: model:attribute.attribute,field_description:alc_pim.attribute_image
-#: model:ir.model.fields,field_description:alc_pim.attribute_image_ir_model_fields
-msgid "Image"
-msgstr ""
-
-#. module: alc_pim
 #: model:product.category,name:alc_pim.image_equip_equi
 #: model:product.category,name:alc_pim.img_equip
 msgid "Imagerie"
@@ -3210,12 +3204,6 @@ msgstr ""
 #. module: alc_pim
 #: model:attribute.option,name:alc_pim.attribute_option_nafcilline
 msgid "Nafcilline"
-msgstr ""
-
-#. module: alc_pim
-#: model:attribute.attribute,field_description:alc_pim.attribute_name
-#: model:ir.model.fields,field_description:alc_pim.attribute_name_ir_model_fields
-msgid "Name"
 msgstr ""
 
 #. module: alc_pim
@@ -4714,12 +4702,6 @@ msgstr ""
 #. module: alc_pim
 #: model:attribute.option,name:alc_pim.attribute_option_thiamine
 msgid "Thiamine"
-msgstr ""
-
-#. module: alc_pim
-#: model:attribute.attribute,help:alc_pim.attribute_image
-#: model:ir.model.fields,help:alc_pim.attribute_image_ir_model_fields
-msgid "This field holds the image used as image for the product, limited to 1024x1024px."
 msgstr ""
 
 #. module: alc_pim
