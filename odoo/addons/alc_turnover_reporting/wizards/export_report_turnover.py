@@ -208,7 +208,14 @@ class ExportReportTurnover(models.TransientModel):
             lambda row: np.busday_count(row[start_date_name], row[end_date_name]),
             axis=1,
         )
-
+        if index_in_df is not None:
+            # numpy counts business days until the day before today (the current day is excluded).
+            # However, to compute the turnover of the current month ponderated by the one of the
+            # same month lastyear, we have to take today into account.
+            # If not, we artificially underestimate the turnover of the same month last year,
+            # then, overestimate the turnover of this month and thus, overestimate the
+            # mensual grow.
+            business_days.iloc[-1] = business_days.iloc[-1] + 1
         data.insert(4, "Business days", business_days)
 
     def _generate_excel_export(
