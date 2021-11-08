@@ -8,6 +8,5 @@ from . import res_partner
 from . import sale
 from . import sale_order_line
 from . import sale_report
-from . import product_category
 from . import res_users
 from . import procurement
