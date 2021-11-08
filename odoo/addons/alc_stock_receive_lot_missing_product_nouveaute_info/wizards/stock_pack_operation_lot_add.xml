@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="stock_pack_operation_lot_add_form_view">
+        <field
+      name="name"
+    >stock.pack.operation.lot.add.form (in alc_stock_receive_lot_missing_product_info)</field>
+        <field name="model">stock.pack.operation.lot.add</field>
+        <field
+      name="inherit_id"
+      ref="stock_receive_lot.view_pack_operation_lot_add_form"
+    />
+        <field name="arch" type="xml">
+                <xpath expr="//group[@name='operation_details']" position="after">
+                    <field name="display_product_dimensions" invisible="1" />
+                    <field name="display_product_weight" invisible="1" />
+                    <field name="display_product_barcode" invisible="1" />
+                    <group name="missing_infos">
+                        <field
+            name="product_weight"
+            attrs="{'invisible': [('display_product_weight', '=', False)], 'required': [('display_product_weight', '=', True)]}"
+          />
+                        <field
+            name="product_length"
+            attrs="{'invisible': [('display_product_dimensions', '=', False)], 'required': [('display_product_dimensions', '=', True)]}"
+          />
+                        <field
+            name="product_height"
+            attrs="{'invisible': [('display_product_dimensions', '=', False)], 'required': [('display_product_dimensions', '=', True)]}"
+          />
+                        <field
+            name="product_width"
+            attrs="{'invisible': [('display_product_dimensions', '=', False)], 'required': [('display_product_dimensions', '=', True)]}"
+          />
+                        <field
+            name="product_barcode"
+            attrs="{'invisible': [('display_product_barcode', '=', False)]}"
+          />
+                        <field
+            name="no_barcode_authorized"
+            attrs="{'invisible': [('display_product_barcode', '=', False)], 'required': [('product_barcode', '=', False)]}"
+          />
+                    </group>
+                </xpath>
+        </field>
+    </record>
+
+
+
+</odoo>

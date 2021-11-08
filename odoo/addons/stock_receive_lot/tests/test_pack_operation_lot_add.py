@@ -20,6 +20,7 @@ class TestPackOperationLotAdd(TransactionCase):
         self.stock_picking_model = self.env["stock.picking"]
         self.stock_reception_wizard = self.env["stock.pack.operation.lot.add"]
 
+        barcodes = ["1234567", "123453"]
         self.products = [
             self.product_model.create(d)
             for d in [
@@ -27,11 +28,13 @@ class TestPackOperationLotAdd(TransactionCase):
                     "name": "Unittest Reception P1",
                     "uom_id": self.ref("product.product_uom_unit"),
                     "tracking": "lot",
+                    "barcode": barcodes[0],
                 },
                 {
                     "name": "Unittest Reception P2",
                     "uom_id": self.ref("product.product_uom_unit"),
                     "tracking": "lot",
+                    "barcode": barcodes[1],
                 },
             ]
         ]

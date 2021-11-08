@@ -12,6 +12,8 @@
     "depends": [
         "alc_product_dimensions",
         "alc_product_packaging_dimension",
+        "alc_product_storage_type_tracking",
+        "alc_stock_storage_type",
         "delivery_rounds_refill",
         "product_dimension",
         "purchase",
