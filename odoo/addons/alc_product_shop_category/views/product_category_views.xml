@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="product_category_search_view" model="ir.ui.view">
+        <field
+      name="name"
+    >product.category.search (in alc_product_shop_category)</field>
+        <field name="model">product.category</field>
+        <field name="inherit_id" ref="product.product_category_search_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//search" position="inside">
+                <separator />
+                <filter
+          name="is_web"
+          string="Web category"
+          domain="[('is_web', '=', True)]"
+        />
+                <filter
+          name="is_not_web"
+          string="Alcyon category"
+          domain="[('is_web', '=', False)]"
+        />
+            </xpath>
+        </field>
+    </record>
+    <record id="product_category_form_view" model="ir.ui.view">
+        <field name="name">product.category.form</field>
+        <field name="model">product.category</field>
+       <field name="inherit_id" ref="product.product_category_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='type']" position="after">
+                <field name="is_web" readonly="1" />
+            </xpath>
+        </field>
+    </record>
+    <record id="product_category_action_form_web" model="ir.actions.act_window">
+        <field name="name">Product Categories Web</field>
+        <field name="res_model">product.category</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_id" ref="product.product_category_list_view" />
+        <field
+      name="search_view_id"
+      ref="alc_product_shop_category.product_category_search_view"
+    />
+        <field name="context">{'search_default_is_web': 1}</field>
+    </record>
+
+
+    <record id="product.product_category_action_form" model="ir.actions.act_window">
+        <field name="context">{'search_default_is_not_web': 1}</field>
+    </record>
+
+    <menuitem
+    action="alc_product_shop_category.product_category_action_form_web"
+    id="menu_product_category_is_web"
+    parent="sale.prod_config_main"
+    sequence="1"
+  />
+</odoo>
