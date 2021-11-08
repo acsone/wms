@@ -53,6 +53,11 @@ msgstr "- Min/Max non défini pour un produit non achetés/vendus"
 
 #. module: alc_product_audit
 #: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
+msgid "- Product has the storage type 'new' but is older than a month"
+msgstr "- Produit classé comme nouveauté mais créé il y a plus d'un mois"
+
+#. module: alc_product_audit
+#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
 msgid "- Product is missing dimensions"
 msgstr "- Le produit n'a pas toutes les dimensions"
 
@@ -76,11 +81,6 @@ msgstr "- Le produit ne peut être vendu et non archivé"
 #: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
 msgid "- Product not sold but on website"
 msgstr "- Produit ne pouvant être vendu mais publié sur le site web"
-
-#. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
-msgid "- Product has the storage type 'new' but is older than a month"
-msgstr "- Produit classé comme nouveauté mais créé il y a plus d'un mois"
 
 #. module: alc_product_audit
 #: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
@@ -155,6 +155,15 @@ msgid "Has no dimensions"
 msgstr "Dimensions manquantes"
 
 #. module: alc_product_audit
+#: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_is_new
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_product_is_new
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_template_is_new
+#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_product_is_new
+#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_variant_is_new
+msgid "Is new"
+msgstr ""
+
+#. module: alc_product_audit
 #: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
 msgid "MTO product has abnormal routes"
 msgstr "Produits achetés/vendus avec une route incohérente"
@@ -202,6 +211,14 @@ msgid "Mismatch route picking"
 msgstr "Route et zone de picking incohérente"
 
 #. module: alc_product_audit
+#: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_missing_barcode
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_product_missing_barcode
+#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_variant_missing_barcode
+#, fuzzy
+msgid "Missing barcode"
+msgstr "Dimensions manquantes"
+
+#. module: alc_product_audit
 #: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
 msgid "Missing dimensions"
 msgstr "Dimensions manquantes"
@@ -210,6 +227,14 @@ msgstr "Dimensions manquantes"
 #: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
 msgid "Missing packaging dimensions"
 msgstr "Dimensions de conditionnement manquantes"
+
+#. module: alc_product_audit
+#: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_missing_weight
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_product_missing_weight
+#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_variant_missing_weight
+#, fuzzy
+msgid "Missing weight"
+msgstr "Dimensions manquantes"
 
 #. module: alc_product_audit
 #: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
@@ -266,6 +291,29 @@ msgid "Mto with abnormal route"
 msgstr "Produits achetés/vendus avec une route incohérente"
 
 #. module: alc_product_audit
+#: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_new_product_with_old_date
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_product_new_product_with_old_date
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_template_new_product_with_old_date
+#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_product_new_product_with_old_date
+#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_variant_new_product_with_old_date
+#, fuzzy
+msgid "New product with old date"
+msgstr "- Produit acheté/vendu avec une route incohérente"
+
+#. module: alc_product_audit
+#: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_no_barcode_authorized
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_product_no_barcode_authorized
+msgid "No barcode authorized"
+msgstr ""
+
+#. module: alc_product_audit
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_template_no_barcode_authorized
+#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_product_no_barcode_authorized
+#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_variant_no_barcode_authorized
+msgid "No barcode authorized for this product"
+msgstr ""
+
+#. module: alc_product_audit
 #: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_no_dimensions_in_stock
 #: model:ir.model.fields,field_description:alc_product_audit.field_product_product_no_dimensions_in_stock
 #: model:ir.model.fields,field_description:alc_product_audit.field_product_template_no_dimensions_in_stock
@@ -320,6 +368,12 @@ msgid "Packaging has no dimensions"
 msgstr "Dimensions de conditionnement manquantes"
 
 #. module: alc_product_audit
+#: model:ir.model,name:alc_product_audit.model_product_product
+#, fuzzy
+msgid "Product"
+msgstr "Modèle de produit"
+
+#. module: alc_product_audit
 #: model:ir.model,name:alc_product_audit.model_product_template
 msgid "Product Template"
 msgstr "Modèle de produit"
@@ -349,15 +403,13 @@ msgstr ""
 
 #. module: alc_product_audit
 #: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
-msgid "Product is not sold anymore but still on website"
-msgstr "Ne peut être vendu et publié sur le site web"
-
-
-#. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
 msgid "Product is categorized as 'new' but is older than a month"
 msgstr "Produit nouveauté créé il y a plus d'un mois"
 
+#. module: alc_product_audit
+#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
+msgid "Product is not sold anymore but still on website"
+msgstr "Ne peut être vendu et publié sur le site web"
 
 #. module: alc_product_audit
 #: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
