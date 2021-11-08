@@ -14,6 +14,11 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_product_shop_category
+#: model:ir.ui.view,arch_db:alc_product_shop_category.product_category_search_view
+msgid "Alcyon category"
+msgstr ""
+
+#. module: alc_product_shop_category
 #: model:product.category,name:alc_product_shop_category.master
 msgid "Catalogue Alcyon"
 msgstr ""
@@ -25,6 +30,12 @@ msgid "Is web"
 msgstr ""
 
 #. module: alc_product_shop_category
+#: model:ir.actions.act_window,name:alc_product_shop_category.product_category_action_form_web
+#: model:ir.ui.menu,name:alc_product_shop_category.menu_product_category_is_web
+msgid "Product Categories Web"
+msgstr ""
+
+#. module: alc_product_shop_category
 #: model:ir.model,name:alc_product_shop_category.model_product_category
 msgid "Product Category"
 msgstr ""
@@ -32,5 +43,10 @@ msgstr ""
 #. module: alc_product_shop_category
 #: model:ir.model,name:alc_product_shop_category.model_product_template
 msgid "Product Template"
+msgstr ""
+
+#. module: alc_product_shop_category
+#: model:ir.ui.view,arch_db:alc_product_shop_category.product_category_search_view
+msgid "Web category"
 msgstr ""
 
