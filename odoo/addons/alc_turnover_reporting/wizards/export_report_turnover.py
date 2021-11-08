@@ -201,16 +201,19 @@ class ExportReportTurnover(models.TransientModel):
         index_in_df = is_today_in_current_month[
             is_today_in_current_month["bool"]
         ].index.values
-        if index_in_df:
+        if index_in_df is not None:
             data[end_date_name].iloc[index_in_df[0]] = today
 
         business_days = data.apply(
             lambda row: np.busday_count(row[start_date_name], row[end_date_name]),
             axis=1,
         )
+
         data.insert(4, "Business days", business_days)
 
-    def _generate_excel_export(self, data_by_day, data_by_month, data_by_year):
+    def _generate_excel_export(
+        self, data_by_day, data_by_month, data_by_year, cumulative_monthly_data
+    ):
 
         output = io.BytesIO()
         writer = pd.ExcelWriter(output, engine="xlsxwriter")
@@ -219,10 +222,10 @@ class ExportReportTurnover(models.TransientModel):
         data_by_day["Day"] = pd.to_datetime(
             data_by_day["Day"], errors="raise", format="%Y-%m-%d"
         )
-        current_month = int(today.split("-")[1])
+        previous_month = int(today.split("-")[1]) - 1
         current_year = int(today.split("-")[0])
         data_by_day = data_by_day[
-            (data_by_day["Day"].dt.month == current_month)
+            (data_by_day["Day"].dt.month >= previous_month)
             & (data_by_day["Day"].dt.year == current_year)
         ]
 
@@ -322,80 +325,6 @@ class ExportReportTurnover(models.TransientModel):
         data_by_month["Taux de croissance \nmensuel"].fillna(0, inplace=True)
         data_by_year["Taux de croissance \n global"].fillna(0, inplace=True)
         data_by_day.reset_index(drop=True, inplace=True)
-        data_by_month.to_excel(
-            writer, sheet_name="rapportMensuel", startrow=1, header=False
-        )
-        data_by_year.to_excel(
-            writer, sheet_name="rapportAnnuel", startrow=1, header=False
-        )
-        data_by_day.to_excel(
-            writer, sheet_name="rapportJournalier", startrow=1, header=False
-        )
-
-        # Format excel to something nice
-        workbook = writer.book
-        worksheet1 = writer.sheets["rapportMensuel"]
-        worksheet2 = writer.sheets["rapportAnnuel"]
-        worksheet3 = writer.sheets["rapportJournalier"]
-        formatSheet = workbook.add_format({"num_format": "0"})
-
-        worksheet1.set_column("B:C", 10, formatSheet)
-        worksheet1.set_column("D:E", 20, formatSheet)
-        worksheet1.set_column("H:J", 20, formatSheet)
-        worksheet1.set_column("M:N", 15, formatSheet)
-
-        worksheet2.set_column("B:B", 10, formatSheet)
-        worksheet2.set_column("C:C", 20, formatSheet)
-        worksheet2.set_column("E:G", 20, formatSheet)
-        worksheet2.set_column("I:I", 12, formatSheet)
-
-        worksheet3.set_column("B:B", 10, formatSheet)
-        worksheet3.set_column("C:D", 20, formatSheet)
-
-        # Add a header format.
-        header_format = workbook.add_format(
-            {"align": "center", "valign": "vcenter", "bold": True, "text_wrap": True}
-        )
-
-        worksheet1.set_row(0, 45)
-        # Write the column headers with the defined format.
-        for col_num, value in enumerate(data_by_month.columns.values):
-            worksheet1.write(0, col_num + 1, value, header_format)
-
-        worksheet2.set_row(0, 45)
-        # Write the column headers with the defined format.
-        for col_num, value in enumerate(data_by_year.columns.values):
-            worksheet2.write(0, col_num + 1, value, header_format)
-
-        worksheet3.set_row(0, 45)
-        # Write the column headers with the defined format.
-        for col_num, value in enumerate(data_by_day.columns.values):
-            worksheet3.write(0, col_num + 1, value, header_format)
-
-        red_format = workbook.add_format({"font_color": "#f50710"})
-        worksheet1.conditional_format(
-            "F2:F{}".format(len(data_by_month) + 1),
-            {"type": "cell", "criteria": "<", "value": 0, "format": red_format},
-        )
-
-        red_format = workbook.add_format({"font_color": "#f50710"})
-        worksheet2.conditional_format(
-            "D2:D{}".format(len(data_by_year) + 1),
-            {"type": "cell", "criteria": "<", "value": 0, "format": red_format},
-        )
-
-        percentFormat1 = workbook.add_format({"num_format": "0.0%"})
-        worksheet1.set_column("F:F", 20, percentFormat1)
-        worksheet1.set_column("G:G", 15, percentFormat1)
-        worksheet1.set_column("K:K", 15, percentFormat1)
-        worksheet1.set_column("L:L", 20, percentFormat1)
-
-        worksheet2.set_column("D:D", 20, percentFormat1)
-        worksheet2.set_column("H:H", 20, percentFormat1)
-
-        len_data_charts = len(data_by_month)
-        len_serie_2 = len(data_by_month[12:])
-        chart = workbook.add_chart({"type": "column"})
 
         today = datetime.today().date().strftime("%Y-%m-%d")
         current_year = today.split("-")[0]
@@ -409,6 +338,122 @@ class ExportReportTurnover(models.TransientModel):
             previous_year = int(current_year) - 1
             prev_exercice = str(previous_year) + "-" + str(current_year)
             current_exercice = str(current_year) + "-" + str(next_year)
+
+        cumulative_monthly_data.rename(
+            columns={
+                "Cumulative CA this year": u"CA cumulé exercice \n {}".format(
+                    current_exercice
+                ),
+                "Cumulative CA last year": u"CA cumulé exercice \n {} \n (période identique)".format(
+                    prev_exercice
+                ),
+                "Cumulative business days this year": u"Jours ouvrés exercice \n {}".format(
+                    current_exercice
+                ),
+                "Cumulative business days last year": u"Jours ouvrés exercice \n {} \n (période identique)".format(
+                    prev_exercice
+                ),
+                "Grow unponderated": u"Croissance non pondérée",
+                "Grow ponderated": u"Croissance pondérée",
+            },
+            inplace=True,
+        )
+
+        data_by_month.to_excel(
+            writer, sheet_name="rapportMensuel", startrow=1, header=False
+        )
+        cumulative_monthly_data.to_excel(
+            writer, sheet_name="rapportMensuelCumul", startrow=1, header=False
+        )
+        data_by_year.to_excel(
+            writer, sheet_name="rapportAnnuel", startrow=1, header=False
+        )
+        data_by_day.to_excel(
+            writer, sheet_name="rapportJournalier", startrow=1, header=False
+        )
+
+        # Format excel to something nice
+        workbook = writer.book
+        worksheet1 = writer.sheets["rapportMensuel"]
+        worksheet2 = writer.sheets["rapportMensuelCumul"]
+        worksheet3 = writer.sheets["rapportAnnuel"]
+        worksheet4 = writer.sheets["rapportJournalier"]
+        formatSheet = workbook.add_format({"num_format": "0"})
+
+        worksheet1.set_column("B:C", 10, formatSheet)
+        worksheet1.set_column("D:E", 20, formatSheet)
+        worksheet1.set_column("H:J", 20, formatSheet)
+        worksheet1.set_column("M:N", 15, formatSheet)
+
+        worksheet2.set_column("B:C", 20, formatSheet)
+        worksheet2.set_column("D:E", 15, formatSheet)
+
+        worksheet3.set_column("B:B", 10, formatSheet)
+        worksheet3.set_column("C:C", 20, formatSheet)
+        worksheet3.set_column("E:G", 20, formatSheet)
+        worksheet3.set_column("I:I", 12, formatSheet)
+
+        worksheet4.set_column("B:B", 10, formatSheet)
+        worksheet4.set_column("C:D", 20, formatSheet)
+
+        # Add a header format.
+        header_format = workbook.add_format(
+            {"align": "center", "valign": "vcenter", "bold": True, "text_wrap": True}
+        )
+
+        worksheet1.set_row(0, 45)
+        # Write the column headers with the defined format.
+        for col_num, value in enumerate(data_by_month.columns.values):
+            worksheet1.write(0, col_num + 1, value, header_format)
+
+        worksheet2.set_row(0, 65)
+        # Write the column headers with the defined format.
+        for col_num, value in enumerate(cumulative_monthly_data.columns.values):
+            worksheet2.write(0, col_num + 1, value, header_format)
+
+        worksheet3.set_row(0, 45)
+        # Write the column headers with the defined format.
+        for col_num, value in enumerate(data_by_year.columns.values):
+            worksheet3.write(0, col_num + 1, value, header_format)
+
+        worksheet4.set_row(0, 45)
+        # Write the column headers with the defined format.
+        for col_num, value in enumerate(data_by_day.columns.values):
+            worksheet4.write(0, col_num + 1, value, header_format)
+
+        red_format = workbook.add_format({"font_color": "#f50710"})
+        worksheet1.conditional_format(
+            "F2:F{}".format(len(data_by_month) + 1),
+            {"type": "cell", "criteria": "<", "value": 0, "format": red_format},
+        )
+        worksheet2.conditional_format(
+            "F2:F{}".format(len(cumulative_monthly_data) + 1),
+            {"type": "cell", "criteria": "<", "value": 0, "format": red_format},
+        )
+        worksheet2.conditional_format(
+            "G2:G{}".format(len(cumulative_monthly_data) + 1),
+            {"type": "cell", "criteria": "<", "value": 0, "format": red_format},
+        )
+
+        worksheet3.conditional_format(
+            "D2:D{}".format(len(data_by_year) + 1),
+            {"type": "cell", "criteria": "<", "value": 0, "format": red_format},
+        )
+
+        percentFormat1 = workbook.add_format({"num_format": "0.0%"})
+        worksheet1.set_column("F:F", 20, percentFormat1)
+        worksheet1.set_column("G:G", 15, percentFormat1)
+        worksheet1.set_column("K:K", 15, percentFormat1)
+        worksheet1.set_column("L:L", 20, percentFormat1)
+
+        worksheet2.set_column("F:G", 20, percentFormat1)
+
+        worksheet3.set_column("D:D", 20, percentFormat1)
+        worksheet3.set_column("H:H", 20, percentFormat1)
+
+        len_data_charts = len(data_by_month)
+        len_serie_2 = len(data_by_month[12:])
+        chart = workbook.add_chart({"type": "column"})
 
         # Configure the first series.
         chart.add_series(
@@ -735,6 +780,17 @@ class ExportReportTurnover(models.TransientModel):
             credit_debit_2_years["Turnover (accounting)"].sum(),
         ]
 
+        current_month = today.split("-")[1]
+        date_to_get_for_cumul = str(last_year) + "-" + str(current_month) + "-01"
+        current_month_last_year = pd.DataFrame()
+        current_month_last_year["bool"] = credit_debit_balance_month["Month"].eq(
+            date_to_get_for_cumul
+        )
+        index_date_cumul = (
+            current_month_last_year[current_month_last_year["bool"]].index.values
+            if current_month_last_year[current_month_last_year["bool"]].index.values
+            else [0]
+        )
         if today <= current_year + "-09-30":
             # need to go to n-3 to compute global grow
             three_years_ago = int(today.split("-")[0]) - 3
@@ -770,7 +826,14 @@ class ExportReportTurnover(models.TransientModel):
 
             by_year_grouping = [list_3_years, list_2_years, list_last_year]
 
+            credit_debit_balance_tmp = credit_debit_balance
             credit_debit_balance = credit_debit_balance.iloc[index_two_ago[0] :]
+
+            # Create cumulative monthly df
+            index_cumul1 = index_last_year[0]
+            index_cumul2 = index_two_ago[0]
+            index_cumul3 = index_date_cumul[0] + 1
+
         else:
             if index_this_year is None:
                 index_this_year = [-1]
@@ -797,7 +860,71 @@ class ExportReportTurnover(models.TransientModel):
             ]
 
             by_year_grouping = [list_2_years, list_last_year, list_this_year]
+            credit_debit_balance_tmp = credit_debit_balance
             credit_debit_balance = credit_debit_balance.iloc[index_last_year[0] :]
+
+            # Create cumulative monthly df
+            index_cumul1 = index_this_year[0]
+            index_cumul2 = index_last_year[0]
+            index_cumul3 = index_date_cumul[0] + 1
+
+        cumulative_ca_this_year = (
+            credit_debit_balance_tmp["Turnover (stock moves)"].iloc[index_cumul1:].sum()
+        )
+
+        cumulative_business_days_this_year = (
+            credit_debit_balance_tmp["Business days"].iloc[index_cumul1:].sum()
+        )
+
+        cumulative_ca_last_year = (
+            credit_debit_balance_tmp["Turnover (stock moves)"]
+            .iloc[index_cumul2:index_cumul3]
+            .sum()
+        )
+        cumulative_business_days_last_year = (
+            credit_debit_balance_tmp["Business days"]
+            .iloc[index_cumul2:index_cumul3]
+            .sum()
+        )
+
+        cumulative_monthly_ca = pd.DataFrame(
+            [
+                [
+                    cumulative_ca_this_year,
+                    cumulative_ca_last_year,
+                    cumulative_business_days_this_year,
+                    cumulative_business_days_last_year,
+                ]
+            ],
+            columns=[
+                "Cumulative CA this year",
+                "Cumulative CA last year",
+                "Cumulative business days this year",
+                "Cumulative business days last year",
+            ],
+        )
+        cumulative_monthly_ca["Grow unponderated"] = (
+            cumulative_monthly_ca["Cumulative CA this year"]
+            - cumulative_monthly_ca["Cumulative CA last year"]
+        ) / cumulative_monthly_ca["Cumulative CA last year"]
+
+        coeff = (
+            cumulative_monthly_ca["Cumulative business days this year"]
+            / cumulative_monthly_ca["Cumulative business days last year"]
+        )
+
+        if (
+            credit_debit_balance_tmp["Month"].iloc[-1].split("-")[1]
+            == today.split("-")[1]
+        ):
+            cumulative_monthly_ca["Grow ponderated"] = (
+                cumulative_monthly_ca["Cumulative CA this year"]
+                - cumulative_monthly_ca["Cumulative CA last year"] * coeff
+            ) / (cumulative_monthly_ca["Cumulative CA last year"] * coeff)
+        else:
+            cumulative_monthly_ca["Grow ponderated"] = cumulative_monthly_ca[
+                "Grow unponderated"
+            ]
 
         cols = [
             "Year",
@@ -833,8 +960,12 @@ class ExportReportTurnover(models.TransientModel):
             credit_debit_balance_by_year["Turnover (stock moves)"]
             / credit_debit_balance_by_year["Business days"],
         )
+
         data = self._generate_excel_export(
-            credit_debit_balance_day, credit_debit_balance, credit_debit_balance_by_year
+            credit_debit_balance_day,
+            credit_debit_balance,
+            credit_debit_balance_by_year,
+            cumulative_monthly_ca,
         )
 
         this.write({"state": "get", "data": data, "name": "report_compta.xlsx"})
