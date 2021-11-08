@@ -648,6 +648,10 @@ class ClusterPicking(Component):
         search = self._actions_for("search")
         bin_package = search.package_from_scan(barcode)
         if not bin_package:
+            stock = self._actions_for("stock")
+            bin_package = stock.create_bin(barcode)
+
+        if not bin_package:
             return self._response_for_scan_destination(
                 operation, message=self.msg_store.bin_not_found_for_barcode(barcode)
             )

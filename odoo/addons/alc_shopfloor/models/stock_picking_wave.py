@@ -31,6 +31,7 @@ class StockPickingWave(models.Model):
         for item in self:
             assigned_pickings = item.picking_ids.filtered(
                 lambda picking: picking.state == "assigned"
+                or picking.state == "partially_available"
             )
             item.update(
                 {

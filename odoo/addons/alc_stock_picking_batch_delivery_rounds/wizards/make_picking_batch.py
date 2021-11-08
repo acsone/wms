@@ -13,7 +13,6 @@ class MakePickingBatch(models.TransientModel):
     def _get_delivery_rounds_candidates(self, domain, user):
         query = """
             SELECT sp.id, ri.id FROM stock_picking sp
-                JOIN stock_picking_type spt ON sp.picking_type_id = spt.id
                 JOIN round_instance ri ON sp.delivery_round_id = ri.id
                 WHERE sp.picking_type_subcode = 'PICK'
                     AND sp.wave_id IS NULL
@@ -23,7 +22,7 @@ class MakePickingBatch(models.TransientModel):
                         OR
                         (sp.state = 'assigned' AND sp.move_type = 'one')
                         )
-                    AND spt.id IN %(picking_type_ids)s
+                    AND sp.picking_type_id IN %(picking_type_ids)s
                     AND ri.state IN ('draft', 'pending', 'close')
                     AND EXISTS (
                         SELECT 1 FROM stock_pack_operation spo

@@ -10,15 +10,15 @@ Vue.component("batch-picking-detail", {
   methods: {
     detail_fields() {
       return [
-        {path: "picking_count", label: "Total operations"},
-        {path: "move_line_count", label: "Total lines"},
+        {path: "picking_count", label: "Total pickings"},
+        {path: "operation_count", label: "Total operations"},
         {path: "weight", label: "Total weight"},
       ];
     },
     picking_detail_fields() {
       return [
         {path: "name", klass: "loud", action_val_path: "name"},
-        {path: "move_line_count", label: "Lines"},
+        {path: "operation_count", label: "Operations"},
         {path: "weight", label: "Weight"},
       ];
     },

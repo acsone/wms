@@ -159,7 +159,7 @@ class TestActionsDataDetailCase(ActionsDataDetailCaseBase):
             },
             "location_src": self._expected_location(pack_operation.location_id),
             "location_dest": self._expected_location(pack_operation.location_dest_id),
-            "priority": "1",
+            "priority": u"1",
             "is_done": True,
             "type": "package",
         }

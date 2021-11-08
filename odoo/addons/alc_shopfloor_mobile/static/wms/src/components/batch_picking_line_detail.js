@@ -113,7 +113,7 @@ export var batch_picking_line_actions = Vue.component("batch-picking-line-action
           </v-row>
           <v-row align="center">
             <v-col class="text-center" cols="12">
-              <btn-action @click="handle_action('action_skip_line')">Skip line</btn-action>
+              <btn-action @click="handle_action('action_skip_operation')">Skip line</btn-action>
             </v-col>
           </v-row>
           <v-row align="center">
