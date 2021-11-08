@@ -11,6 +11,6 @@
     "website": "https://acsone.eu/",
     "depends": ["product_multi_category"],
     "application": False,
-    "data": ["data/product_category.xml"],
+    "data": ["data/product_category.xml", "views/product_category_views.xml"],
     "demo": [],
 }
