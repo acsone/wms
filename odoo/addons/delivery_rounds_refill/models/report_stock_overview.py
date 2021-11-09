@@ -41,6 +41,7 @@ class ReportStockOverview(models.Model):
         location_kind IS NOT NULL
         AND (
             sq.lot_id is null
+            OR lot.expiry_date IS NULL
             OR lot.expiry_date >= Now()
         )
     GROUP BY sq.product_id, warehouse_id
