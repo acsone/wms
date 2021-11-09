@@ -12,7 +12,6 @@
     Website purchase review
     """,
     "depends": [
-        "alc_product_category_business_unit",
         "alc_product_mto",
         "alc_product_packaging",
         "purchase_order_line_packaging_qty",

@@ -12,7 +12,6 @@
     Specific security for Alcyon
     """,
     "depends": [
-        "alc_product_category_business_unit",
         "stock",
         "account",
         "sale",
