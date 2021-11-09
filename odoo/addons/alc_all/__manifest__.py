@@ -104,6 +104,7 @@
         "alc_edi_connector",
         "alc_geo_delivery_rounds",
         "alc_gls_putinpack",
+        "alc_invoices_audit",
         "alc_label_printing_gls",
         "alc_logiweb",
         "alc_partner_force_re_geolocalization",
