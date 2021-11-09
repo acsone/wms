@@ -36,8 +36,14 @@ class ReportStockOverview(models.Model):
     FROM stock_quant sq
     JOIN stock_location sl on sq.location_id = sl.id
     JOIN warehouse_root_locations wh on wh.parent_left < sl.parent_left and wh.parent_right  > sl.parent_right
-    WHERE location_kind IS NOT NULL
-    GROUP BY product_id, warehouse_id
+    LEFT JOIN stock_production_lot lot on lot.id = sq.lot_id
+    WHERE
+        location_kind IS NOT NULL
+        AND (
+            sq.lot_id is null
+            OR lot.expiry_date >= Now()
+        )
+    GROUP BY sq.product_id, warehouse_id
   ),
   unreserved_pick_moves AS (
     SELECT
