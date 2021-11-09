@@ -1,0 +1,112 @@
+# -*- coding: utf-8 -*-
+# Copyright 2021 ACSONE SA/NV
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+
+from odoo import api, fields, models
+
+
+class ProductProduct(models.Model):
+
+    _inherit = "product.product"
+
+    allowed_partner_types = fields.Char(
+        string="Allowed Partner Types",
+        store=True,
+        compute="_compute_allowed_partner_types",
+        help="Technical field. Stores all partner types allowed to access the product.",
+    )
+
+    @api.depends("categ_id")
+    def _compute_allowed_partner_types(self):
+        for product in self:
+            allowed_partner_types = product.get_allowed_partner_types()
+            product.allowed_partner_types = ",".join(allowed_partner_types)
+
+    def get_allowed_partner_types(self):
+        """Returns the set of all partner types allowed to interact with the product."""
+        self.ensure_one()
+        partner_types = self.get_all_partner_types()
+        partner_types = self._filter_partner_types_veterinary(partner_types)
+        partner_types = self._filter_partner_types_belgium(partner_types)
+        partner_types = self._filter_partner_types_human(partner_types)
+        partner_types = self._filter_partner_types_import(partner_types)
+        partner_types = self._filter_partner_types_vt_be(partner_types)
+        partner_types = self._filter_partner_types_narcotic_reg(partner_types)
+        partner_types = self._filter_partner_types_narcotic_vet(partner_types)
+        partner_types = self._filter_partner_types_psychotropic(partner_types)
+        return partner_types
+
+    @api.model
+    def get_all_partner_types(self):
+        return set(self.env["res.partner"]._get_partner_types())
+
+    def _filter_partner_types_food(self, partner_types):
+        if self.is_food:
+            partner_types -= {"equipment_only"}
+        return partner_types
+
+    def _filter_partner_types_equipement(self, partner_types):
+        if self.is_equipment:
+            partner_types -= {"food_only"}
+        return partner_types
+
+    def _filter_partner_types_meds(self, partner_types, strict=False):
+        if self.is_meds:
+            partner_types -= {"equipment_only", "food_only", "guest"}
+            if strict:
+                partner_types -= {"misc"}
+        return partner_types
+
+    def _filter_partner_types_human(self, partner_types):
+        if self.is_human:
+            partner_types &= {"veterinary", "supplier", "shareholder"}
+        return partner_types
+
+    def _filter_partner_types_import(self, partner_types):
+        if self.is_import:
+            partner_types -= {"misc", "student_like", "export_customer", "export_meds"}
+        return partner_types
+
+    def _filter_partner_types_vt_be(self, partner_types):
+        if self.is_vt_be:
+            partner_types -= {"misc", "student_like", "export_customer"}
+        return partner_types
+
+    def _filter_partner_types_narcotic_reg(self, partner_types):
+        if self.is_narcotic_reg:
+            partner_types = self.__filter_partner_types_narcotic(partner_types)
+        return partner_types
+
+    def _filter_partner_types_narcotic_vet(self, partner_types):
+        if self.is_narcotic_vet:
+            partner_types = self.__filter_partner_types_narcotic(partner_types)
+        return partner_types
+
+    def __filter_partner_types_narcotic(self, partner_types):
+        allowed = {"supplier", "wholesaler_pharmacy", "wholesaler_veterinary"}
+        return partner_types & allowed
+
+    def _filter_partner_types_psychotropic(self, partner_types):
+        if self.is_psychotropic:
+            partner_types -= {"other", "student_like", "export_customer"}
+        return partner_types
+
+    def _filter_partner_types_veterinary(self, partner_types):
+        if self.veterinary_only:
+            partner_types -= {"export_customer", "wholesaler_pharmacy", "misc"}
+        return partner_types
+
+    def _filter_partner_types_belgium(self, partner_types):
+        if self.belgium_only:
+            partner_types -= {"export_customer", "export_meds"}
+        return partner_types
+
+    @api.model
+    def get_partner_type_domain(self, partner):
+        """Domain restricting products to the given partner's type."""
+        partner.ensure_one()
+        if partner.partner_type == "supplier":
+            domain = [("supplier_id", "=", partner.id)]
+        else:
+            domain = [("allowed_partner_types", "like", partner.partner_type)]
+        return domain
