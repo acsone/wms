@@ -369,9 +369,7 @@ class SaleOrderLine(models.Model):
             "specific_partner.partner_category_student",
             "specific_partner.partner_category_med_export",
         ]
-        if not self.product_id.categ_id.has_for_parent_xml_id(
-            "specific_data.product_categ_humain"
-        ):
+        if not self.product_id.human_only:
             return False
         for group_xmlid in target_groups:
             if (
@@ -510,9 +508,7 @@ class SaleOrderLine(models.Model):
 
     def warning_human_medicine(self):
         """Add a warning for human medicine product."""
-        return self.product_id.categ_id.has_for_parent_xml_id(
-            "specific_data.product_categ_humain"
-        )
+        return self.product_id.human_only
 
     def warning_supplier_break(self):
         """Add a warning for out of stock product at the supplier."""

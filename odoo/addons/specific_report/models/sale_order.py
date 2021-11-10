@@ -50,9 +50,8 @@ class SaleOrder(models.Model):
         with human drugs. Lines with qty at 0 don't count.
         """
         self.ensure_one()
-        categ = self.env.ref("specific_data.product_categ_humain")
         for line in self.order_line:
-            if line.product_id.categ_id == categ and line.product_uom_qty > 0:
+            if line.product_id.human_only and line.product_uom_qty > 0:
                 return True
         return False
 
@@ -63,9 +62,7 @@ class SaleOrder(models.Model):
 
         """
         self.ensure_one()
-        categ = self.env.ref("specific_data.product_categ_humain")
-        lines = self.order_line
-        return lines.filtered(lambda rec: rec.product_id.categ_id == categ)
+        return self.order_line.filtered("product_id.human_only")
 
     @api.multi
     def get_report_name(self):

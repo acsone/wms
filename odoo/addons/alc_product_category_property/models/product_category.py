@@ -18,20 +18,6 @@ class ProductCategory(models.Model):
         return self.has_for_parent(self._get_id_for_xmlid(category_xml_id))
 
     @api.model
-    @tools.ormcache("category_xml_id")
-    def _get_id_for_xmlid(self, category_xml_id):
-        # By default self.env.ref is not cached.... since a lot
-        # of category xml_ids are used to validate sale_exception
-        # we cache the corresponding id to avoid n so lines * 21 queries into
-        # the db to get the id from xml id
-        record = self.env.ref(category_xml_id)
-        if record._name != self._name:
-            raise ValueError(
-                "Only category xml_id can be used not %s xml_id" % record._name
-            )
-        return record.id
-
-    @api.model
     @tools.ormcache("category_id", "parent_category_id")
     def _has_for_parent(self, category_id, parent_category_id):
         """Check if category_id is itself or a parent."""

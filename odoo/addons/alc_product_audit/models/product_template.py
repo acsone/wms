@@ -488,12 +488,6 @@ class ProductTemplate(models.Model):
         return [("id", "in", ids)]
 
     def _get_product_dimensions_in_stock(self, no_dimensions):
-        human_product = self.env.ref("specific_data.product_categ_humain")
-        human_med_category_ids = (
-            self.env["product.category"]
-            .search([("id", "child_of", human_product.id)])
-            .mapped("id")
-        )
         ids = []
         current_ids = self._get_current_ids()
         self.env.cr.execute(
@@ -513,11 +507,10 @@ class ProductTemplate(models.Model):
                     AND pt.active = True
                     AND pt.sale_ok = True
                     AND pt.type='product'
-                    AND pt.categ_id NOT IN %(med_human_categories)s
+                    AND pt.human_only = False
                     %(ids)s
             """,
             {
-                "med_human_categories": tuple(human_med_category_ids),
                 "no_product_dimensions": AsIs("AND pt.has_no_dimensions = True")
                 if no_dimensions
                 else AsIs("AND pt.has_no_dimensions = False"),

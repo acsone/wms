@@ -20,6 +20,8 @@ class ProductTemplate(models.Model):
     pharmacy_only = fields.Boolean("Only Pharmacies?")
     belgium_only = fields.Boolean(string="Belgium only")
 
+    human_only = fields.Boolean(compute="_compute_human_only", store=True)
+
     _sql_constraints = [
         (
             "uniq_cnk_code",
@@ -53,3 +55,8 @@ class ProductTemplate(models.Model):
         if "cnk_code" in vals and vals["cnk_code"]:
             vals["cnk_code"] = re.sub(r"\s+", "", vals["cnk_code"])
         return vals
+
+    @api.depends("categ_id")
+    def _compute_human_only(self):
+        root_xmlid = "specific_data.product_categ_humain"
+        self._compute_business_unit_property("human_only", root_xmlid)

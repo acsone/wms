@@ -3,14 +3,14 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
-    "name": "Alc Product Web Categories",
-    "description": """Alc Product Web Categories""",
+    "name": "Base cached xml ids",
+    "description": """Base cached xml ids""",
     "version": "10.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["base_cached_xmlid", "product_multi_category"],
+    "depends": ["base"],
     "application": False,
-    "data": ["data/product_category.xml", "views/product_category_views.xml"],
+    "data": [],
     "demo": [],
 }
