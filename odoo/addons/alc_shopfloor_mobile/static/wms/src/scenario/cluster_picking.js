@@ -270,8 +270,10 @@ const ClusterPicking = {
               operation_id: data.id,
               barcode: scanned.text,
               quantity: this.scan_destination_qty,
-              lot_id: data.lot ? data.lot.id : null,
             };
+            if (data.lot) {
+              endpoint_data.lot_id = data.lot.id;
+            }
             this.wait_call(this.odoo.call(endpoint, endpoint_data));
           },
           on_action_full_bin: () => {
@@ -417,8 +419,10 @@ const ClusterPicking = {
               picking_batch_id: this.current_batch().id,
               operation_id: data.id,
               barcode: scanned.text,
-              lot_id: data.lot ? data.lot.id : null,
             };
+            if (data.lot) {
+              endpoint_data.lot_id = data.lot.id;
+            }
             this.wait_call(this.odoo.call(endpoint, endpoint_data));
           },
         },
@@ -433,8 +437,10 @@ const ClusterPicking = {
             endpoint_data = {
               picking_batch_id: this.current_batch().id,
               operation_id: data.id,
-              lot_id: data.lot ? data.lot.id : null,
             };
+            if (data.lot) {
+              endpoint_data.lot_id = data.lot.id;
+            }
             this.wait_call(this.odoo.call(endpoint, endpoint_data));
           },
         },
