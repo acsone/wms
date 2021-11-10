@@ -32,6 +32,8 @@ class SaleOrderLine(models.Model):
 
     @api.model_cr
     def init(self):
+        # TODO CHECK if this index is still used....
+        # see https://dmitry-naumenko.medium.com/how-to-define-unused-indexes-in-postgresql-471da6f6f33f
         create_index(
             self.env.cr,
             "sale_order_line_remains_to_deliver_index",
