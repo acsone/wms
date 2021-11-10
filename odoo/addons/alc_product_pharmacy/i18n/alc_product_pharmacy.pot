@@ -50,6 +50,15 @@ msgid "Code CTI Extended"
 msgstr ""
 
 #. module: alc_product_pharmacy
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_delivery_carrier_human_only
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_product_human_only
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_template_human_only
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_shopinvader_product_human_only
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_shopinvader_variant_human_only
+msgid "Human only"
+msgstr ""
+
+#. module: alc_product_pharmacy
 #: model:ir.model.fields,field_description:alc_product_pharmacy.field_delivery_carrier_pharmacy_only
 #: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_product_pharmacy_only
 #: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_template_pharmacy_only
@@ -64,21 +73,21 @@ msgid "Product Template"
 msgstr ""
 
 #. module: alc_product_pharmacy
-#: code:addons/alc_product_pharmacy/models/product_template.py:32
+#: code:addons/alc_product_pharmacy/models/product_template.py:34
 #: sql_constraint:product.template:0
 #, python-format
 msgid "This AMM number already exists."
 msgstr ""
 
 #. module: alc_product_pharmacy
-#: code:addons/alc_product_pharmacy/models/product_template.py:37
+#: code:addons/alc_product_pharmacy/models/product_template.py:39
 #: sql_constraint:product.template:0
 #, python-format
 msgid "This CTI extended code already exists."
 msgstr ""
 
 #. module: alc_product_pharmacy
-#: code:addons/alc_product_pharmacy/models/product_template.py:27
+#: code:addons/alc_product_pharmacy/models/product_template.py:29
 #: sql_constraint:product.template:0
 #, python-format
 msgid "This cnk_code already exists."
