@@ -480,11 +480,6 @@ msgid "Product"
 msgstr ""
 
 #. module: specific_sale
-#: model:ir.model,name:specific_sale.model_product_category
-msgid "Product Category"
-msgstr "Productcategorie"
-
-#. module: specific_sale
 #: model:ir.model,name:specific_sale.model_product_template
 msgid "Product Template"
 msgstr "Productsjabloon"
@@ -689,6 +684,9 @@ msgstr ""
 #: model:exception.rule,warning_text:specific_sale.warning_stupefiant_vet
 msgid "stupéfiant VET: written order, keep confirmation."
 msgstr ""
+
+#~ msgid "Product Category"
+#~ msgstr "Productcategorie"
 
 #~ msgid "Lots"
 #~ msgstr "Partijen"

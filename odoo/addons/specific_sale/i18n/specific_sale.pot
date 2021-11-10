@@ -465,11 +465,6 @@ msgid "Product"
 msgstr ""
 
 #. module: specific_sale
-#: model:ir.model,name:specific_sale.model_product_category
-msgid "Product Category"
-msgstr ""
-
-#. module: specific_sale
 #: model:ir.model,name:specific_sale.model_product_template
 msgid "Product Template"
 msgstr ""
