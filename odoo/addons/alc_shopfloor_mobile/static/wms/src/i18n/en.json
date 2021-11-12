@@ -1,0 +1,10 @@
+{
+  "app.nav.op_types": "Operation types",
+  "app.nav.scenario": "Scenario",
+  "btn.ok.title": "OK",
+  "misc.btn_get_work": "Get work",
+  "misc.btn_manual_selection": "Manual Selection",
+  "misc.lines_count": "Number of lines",
+  "misc.stock_zero_check.confirm_stock_not_zero": "Confirm stock",
+  "misc.stock_zero_check.confirm_stock_zero": "Confirm out of stock"
+}
