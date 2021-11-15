@@ -1,4 +1,4 @@
-<odoo noupdate="0">
+<odoo noupdate="1">
   <record model="attribute.attribute" id="attribute_barcode">
     <field name="allow_mass_editing" eval="False" />
     <field ref="management_attribute_group" name="attribute_group_id" />
