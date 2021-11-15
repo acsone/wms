@@ -504,7 +504,7 @@ class ProductTemplate(models.Model):
                     AND pt.active = True
                     AND pt.sale_ok = True
                     AND pt.type='product'
-                    AND pt.human_only = False
+                    AND pt.is_human = False
                     %(ids)s
             """,
             {

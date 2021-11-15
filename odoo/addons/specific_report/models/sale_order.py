@@ -51,7 +51,7 @@ class SaleOrder(models.Model):
         """
         self.ensure_one()
         for line in self.order_line:
-            if line.product_id.human_only and line.product_uom_qty > 0:
+            if line.product_id.is_human and line.product_uom_qty > 0:
                 return True
         return False
 
@@ -62,7 +62,7 @@ class SaleOrder(models.Model):
 
         """
         self.ensure_one()
-        return self.order_line.filtered("product_id.human_only")
+        return self.order_line.filtered("product_id.is_human")
 
     @api.multi
     def get_report_name(self):

@@ -20,7 +20,7 @@ class ProductTemplate(models.Model):
     pharmacy_only = fields.Boolean("Only Pharmacies?")
     belgium_only = fields.Boolean(string="Belgium only")
 
-    human_only = fields.Boolean(
+    is_human = fields.Boolean(
         string="Human", compute="_compute_category_attributes", store=True,
     )
     is_food = fields.Boolean(
@@ -98,8 +98,9 @@ class ProductTemplate(models.Model):
             "is_meds": "specific_data.product_categ_medoc",
             "is_equipment": "specific_data.product_categ_materiel",
             "is_vt_be": "specific_data.product_categ_vet_belges",
-            "human_only": "specific_data.product_categ_humain",
-            "is_narcotic": "specific_data.product_categ_stupefiant_vet",
+            "is_human": "specific_data.product_categ_humain",
+            "is_narcotic_reg": "specific_data.product_categ_stupefiant",
+            "is_narcotic_vet": "specific_data.product_categ_stupefiant_vet",
             "is_psychotropic": "specific_data.product_categ_psychotropes_25",
             "is_pharmaceutical": "specific_data.product_categ_parapharmacie",
             "is_import": "specific_data.product_categ_importation",

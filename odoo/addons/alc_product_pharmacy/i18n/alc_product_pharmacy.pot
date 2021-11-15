@@ -50,12 +50,12 @@ msgid "Code CTI Extended"
 msgstr ""
 
 #. module: alc_product_pharmacy
-#: model:ir.model.fields,field_description:alc_product_pharmacy.field_delivery_carrier_human_only
-#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_product_human_only
-#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_template_human_only
-#: model:ir.model.fields,field_description:alc_product_pharmacy.field_shopinvader_product_human_only
-#: model:ir.model.fields,field_description:alc_product_pharmacy.field_shopinvader_variant_human_only
-msgid "Human only"
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_delivery_carrier_is_human
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_product_is_human
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_template_is_human
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_shopinvader_product_is_human
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_shopinvader_variant_is_human
+msgid "Human"
 msgstr ""
 
 #. module: alc_product_pharmacy
