@@ -17,7 +17,6 @@ class ProductTemplate(models.Model):
     code_amm = fields.Char("AMM Number")
 
     veterinary_only = fields.Boolean(string="Veterinary only")
-    pharmacy_only = fields.Boolean("Only Pharmacies?")
     belgium_only = fields.Boolean(string="Belgium only")
 
     is_human = fields.Boolean(

@@ -16,7 +16,6 @@
       <xpath expr="//page[@name='sales']" position="inside">
         <group name="sales_restriction">
           <field name="veterinary_only" />
-          <field name="pharmacy_only" />
           <field name="belgium_only" />
         </group>
       </xpath>

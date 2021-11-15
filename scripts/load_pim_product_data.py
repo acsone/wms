@@ -130,7 +130,6 @@ PRODUCT_FILE_MAPPING = {
     "code_cnk": ("cnk_code", char_parser),
     "num_amm": ("code_amm", char_parser),
     "code_cti_ext": ("code_cti", char_parser),
-    "pharma_only": ("pharmacy_only", bool_parser),
     "class_amcra": ("class_amcra", amcra_parser),
     "marque_medicaments": ("product_brand_id", m2o_parser),
     "tisse": ("fabric", bool_parser),
