@@ -132,6 +132,7 @@
           name="no_barcode_authorized"
           attrs="{'invisible': [('product_variant_count', '>', 1)]}"
         />
+        <field name="is_new" invisible="1" />
       </field>
       <form position="inside">
         <field name="has_anomaly" invisible="1" />
