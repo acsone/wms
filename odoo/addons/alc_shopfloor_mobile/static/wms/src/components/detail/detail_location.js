@@ -51,11 +51,11 @@ Vue.component("detail-location", {
 
     </item-detail-card>
 
-    <div class="products" v-if="record.reserved_move_lines.length">
+    <div class="products" v-if="record.reserved_operations.length">
         <separator-title>Reserved products</separator-title>
 
         <list
-            :records="record.reserved_move_lines"
+            :records="record.reserved_operations"
             :options="product_list_options()"
             />
 
