@@ -27,7 +27,13 @@ class ResPartner(models.Model):
         ],
         default="misc",
     )
+    is_student = fields.Boolean(string="Student", compute="_compute_is_student")
 
     @api.model
     def _get_partner_types(self):
         return [s[0] for s in self._fields["partner_type"].selection]
+
+    @api.depends("partner_type")
+    def _compute_is_student(self):
+        for partner in self:
+            partner.is_student = partner.partner_type == "student_like"
