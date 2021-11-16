@@ -32,7 +32,7 @@ Vue.component("detail-package", {
       return [
         {
           path: "product.display_name",
-          action_val_path: "product.barcode",
+          action_val_path: "product.default_code",
           klass: "loud",
         },
         {path: "product.barcode", label: "Barcode"},

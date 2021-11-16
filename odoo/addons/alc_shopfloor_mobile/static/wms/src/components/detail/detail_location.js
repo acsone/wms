@@ -23,7 +23,7 @@ Vue.component("detail-location", {
       return [
         {
           path: "product.display_name",
-          action_val_path: "product.barcode",
+          action_val_path: "product.default_code",
           klass: "loud",
         },
         {path: "product.supplier_code", label: "Vendor code", klass: "loud"},
