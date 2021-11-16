@@ -9,7 +9,7 @@
     "license": "AGPL-3",
     "category": "Sales",
     "depends": [
-        "alc_product_pharmacy",
+        "alc_partner_type",
         "alc_stock_lot_available",
         "delivery",
         "pricelist_discount",

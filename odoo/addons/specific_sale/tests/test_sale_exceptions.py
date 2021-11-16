@@ -126,11 +126,10 @@ class TestSaleOrderException(SavepointCase):
             }
         )
 
-    def test_customer_with_unknown_category(self):
-        """Check exceptions for a customer with no Alcyon Category set."""
+    def test_customer_partner_type_misc(self):
         rules = self.env["exception.rule"].search([("active", "=", 0)])
         rules.write({"active": 1})
-        self.partner.alcyon_category_id = None
+        self.partner.partner_type = "misc"
         line = self.so1.order_line[0]
         line.product_id = self.prod_food
         self.assertFalse(line.exception)
@@ -152,15 +151,12 @@ class TestSaleOrderException(SavepointCase):
         self.assertTrue(line.exception)
         rules.write({"active": 0})
 
-    def test_client_alcyonnaire(self):
+    def test_customer_partner_type_shareholder(self):
         rules = self.env["exception.rule"].search([("active", "=", 0)])
         rules.write({"active": 1})
         warns = self.env["exception.rule"].search([("warning_only", "=", 1)])
         warns.write({"active": 0})
-        # Need the correct category for this one ?
-        self.partner.alcyon_category_id = self.env.ref(
-            "specific_partner.partner_category_alcyonaire"
-        )
+        self.partner.partner_type = "shareholder"
         # Everything is allowed
         line = self.so1.order_line[0]
         line.product_id = self.prod_food
@@ -182,14 +178,12 @@ class TestSaleOrderException(SavepointCase):
         self.assertTrue(line.exception)
         rules.write({"active": 0})
 
-    def test_client_veterinary_with_depot(self):
+    def test_customer_partner_type_veterinary(self):
         rules = self.env["exception.rule"].search([("active", "=", 0)])
         rules.write({"active": 1})
         warns = self.env["exception.rule"].search([("warning_only", "=", 1)])
         warns.write({"active": 0})
-        self.partner.alcyon_category_id = self.env.ref(
-            "specific_partner.partner_category_veterinary"
-        )
+        self.partner.partner_type = "veterinary"
         # Everything is allowed
         line = self.so1.order_line[0]
         line.product_id = self.prod_food
@@ -211,15 +205,12 @@ class TestSaleOrderException(SavepointCase):
         self.assertTrue(line.exception)
         rules.write({"active": 0})
 
-    def test_client_students(self):
+    def test_customer_partner_type_student_like(self):
         rules = self.env["exception.rule"].search([("active", "=", 0)])
         rules.write({"active": 1})
         warns = self.env["exception.rule"].search([("warning_only", "=", 1)])
         warns.write({"active": 0})
-        # Test customer students
-        self.partner.alcyon_category_id = self.env.ref(
-            "specific_partner.partner_category_student"
-        )
+        self.partner.partner_type = "student_like"
         # Food and gear and medoc pharmacy are allowed
         line = self.so1.order_line[0]
         line.product_id = self.prod_food
@@ -239,14 +230,12 @@ class TestSaleOrderException(SavepointCase):
         self.assertFalse(line.exception)
         rules.write({"active": 0})
 
-    def test_client_pharmacist_wholesale_human(self):
+    def test_customer_partner_type_wholesaler_pharmacy(self):
         rules = self.env["exception.rule"].search([("active", "=", 0)])
         rules.write({"active": 1})
         warns = self.env["exception.rule"].search([("warning_only", "=", 1)])
         warns.write({"active": 0})
-        self.partner.alcyon_category_id = self.env.ref(
-            "specific_partner.partner_category_pharmacy"
-        )
+        self.partner.partner_type = "wholesaler_pharmacy"
         # Food and gear and medoc are allowed
         line = self.so1.order_line[0]
         line.product_id = self.prod_food
@@ -263,14 +252,12 @@ class TestSaleOrderException(SavepointCase):
         self.assertTrue(line.exception)
         rules.write({"active": 0})
 
-    def test_client_veterinary_wholesale(self):
+    def test_customer_partner_type_wholesaler_veterinary(self):
         rules = self.env["exception.rule"].search([("active", "=", 0)])
         rules.write({"active": 1})
         warns = self.env["exception.rule"].search([("warning_only", "=", 1)])
         warns.write({"active": 0})
-        self.partner.alcyon_category_id = self.env.ref(
-            "specific_partner.partner_category_callcenter"
-        )
+        self.partner.partner_type = "wholesaler_veterinary"
         # Food and gear and medoc are allowed
         line = self.so1.order_line[0]
         line.product_id = self.prod_food
@@ -287,13 +274,10 @@ class TestSaleOrderException(SavepointCase):
         self.assertTrue(line.exception)
         rules.write({"active": 0})
 
-    def test_client_export(self):
-        """Test client export sale order limitations."""
+    def test_customer_partner_type_export_customer(self):
         rules = self.env["exception.rule"].search([("active", "=", 0)])
         rules.write({"active": 1})
-        self.partner.alcyon_category_id = self.env.ref(
-            "specific_partner.partner_category_customerexport"
-        )
+        self.partner.partner_type = "export_customer"
         # Food and gear is allowed
         line = self.so1.order_line[0]
         line.product_id = self.prod_food
@@ -316,13 +300,11 @@ class TestSaleOrderException(SavepointCase):
         self.assertTrue(line.exception)
         rules.write({"active": 0})
 
-    def test_med_export(self):
+    def test_customer_partner_type_export_meds(self):
         """Test client medicament export sale order limitations."""
         rules = self.env["exception.rule"].search([("active", "=", 0)])
         rules.write({"active": 1})
-        self.partner.alcyon_category_id = self.env.ref(
-            "specific_partner.partner_category_med_export"
-        )
+        self.partner.partner_type = "export_meds"
         # Food and gear is allowed
         line = self.so1.order_line[0]
         line.product_id = self.prod_food
@@ -349,13 +331,10 @@ class TestSaleOrderException(SavepointCase):
         self.assertTrue(line.exception)
         rules.write({"active": 0})
 
-    def test_customer_only_material(self):
-        """Test customer only materials."""
+    def test_customer_partner_type_equipment_only(self):
         rules = self.env["exception.rule"].search([("active", "=", 0)])
         rules.write({"active": 1})
-        self.partner.alcyon_category_id = self.env.ref(
-            "specific_partner.partner_category_only_material"
-        )
+        self.partner.partner_type = "equipment_only"
         line = self.so1.order_line[0]
         # Gear is allowed
         line.product_id = self.prod_matos
@@ -443,9 +422,7 @@ class TestSaleOrderException(SavepointCase):
         warning = self.env.ref("specific_sale.warning_psychotropic")
         psycotropic = self.env.ref("specific_sale.no_psychotropic_by_phone")
         vet = self.env.ref("specific_sale.no_stupefiant_vet_by_phone")
-        self.partner.alcyon_category_id = self.env.ref(
-            "specific_partner.partner_category_pharmacy"
-        )
+        self.partner.partner_type = "wholesaler_pharmacy"
         line = self.so1.order_line[0]
         line.order_id.sale_channel = "fax"
         line.product_id = self.prod_psycho_III
