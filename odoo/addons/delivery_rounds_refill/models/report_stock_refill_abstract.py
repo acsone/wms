@@ -59,6 +59,11 @@ class ReportStockRefillAbstract(models.AbstractModel):
               LEFT JOIN stock_production_lot lot ON sq.lot_id = lot.id
               WHERE sq.location_kind = %s
                 AND rso.%s > 0
+                AND (
+                    sq.lot_id is null
+                    OR lot.expiry_date IS NULL
+                    OR lot.expiry_date >= Now()
+                )
               ORDER BY rso.id, product_id, lot.removal_date, sq.in_date
         )
         """
