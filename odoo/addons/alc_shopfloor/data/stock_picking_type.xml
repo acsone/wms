@@ -31,6 +31,7 @@
     <field name="color" eval="5" />
     <field name="code">internal</field>
     <field name="display_completion_info" eval="1" />
+    <field name="ignore_putaway_reserve" eval="1" />
   </record>
   <record id="stock_picking_type_medoc" model="stock.picking.type">
     <field name="name">Pick Médicaments</field>
