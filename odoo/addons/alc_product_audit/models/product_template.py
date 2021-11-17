@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-from datetime import datetime
-
-from dateutil.relativedelta import relativedelta
 from psycopg2.extensions import AsIs
 
 from odoo import api, fields, models
@@ -14,7 +11,7 @@ class ProductTemplate(models.Model):
 
     _inherit = "product.template"
 
-    is_new = fields.Boolean(default=False, compute="_compute_is_new")
+    is_new = fields.Boolean(default=False, store=True, compute="_compute_is_new")
 
     no_barcode_authorized = fields.Boolean(
         "No barcode authorized for this product",
@@ -563,25 +560,34 @@ class ProductTemplate(models.Model):
         ids = self._get_product_dimensions_in_stock(no_dimensions=False)
         return [("id", "in", ids)]
 
+    def _get_new_products_older_than_a_month(self):
+        ids = []
+        current_ids = self._get_current_ids()
+        self.env.cr.execute(
+            """
+            SELECT DISTINCT pt.id
+                FROM
+                        product_template pt
+                WHERE
+                        pt.is_new
+                    AND pt.create_date < NOW() - '1 month'::interval
+                %(ids)s
+            """,
+            {"ids": current_ids},
+        )
+        result = self.env.cr.fetchall()
+        ids = [r[0] for r in result]
+        return ids
+
     @api.depends("is_new")
     def _compute_new_product_with_old_date(self):
-        previous_month = datetime.now() - relativedelta(months=1)
+        ids_new_products_old_date = set(self._get_new_products_older_than_a_month())
         for product in self:
-            if product.is_new and product.create_date:
-                product_is_older_than_a_month = (
-                    datetime.strptime(product.create_date, "%Y-%m-%d %H:%M:%S")
-                    < previous_month
-                )
-                product.new_product_with_old_date = bool(
-                    product.is_new and product_is_older_than_a_month
-                )
-            else:
-                product.new_product_with_old_date = False
+            product.new_product_with_old_date = product.id in ids_new_products_old_date
 
     def _search_new_product_with_old_date(self, operator, value):
-        previous_month = datetime.now() - relativedelta(months=1)
-        previous_month_str = datetime.strftime(previous_month, "%Y-%m-%d %H:%M:%S")
-        return [("is_new", "=", True), ("create_date", "<", previous_month_str)]
+        ids = self._get_new_products_older_than_a_month()
+        return [("id", "in", ids)]
 
     def _get_anomaly_fields(self):
         return [
