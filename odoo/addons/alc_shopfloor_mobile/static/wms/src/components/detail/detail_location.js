@@ -33,7 +33,7 @@ Vue.component("detail-location", {
           action_val_path: "package_src.name",
         },
         {path: "lot.name", label: "Lot", action_val_path: "lot.name"},
-        {path: "product.qty_reserved", label: "Qty reserved"},
+        {path: "quantity", label: "Qty reserved"},
         {path: "product.qty_available", label: "Qty in stock"},
       ];
     },
