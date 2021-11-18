@@ -3,4 +3,4 @@
  * License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
  */
 
-document.querySelector(".version-number").textContent = "1.78.6";
+document.querySelector(".version-number").textContent = "1.78.7";
