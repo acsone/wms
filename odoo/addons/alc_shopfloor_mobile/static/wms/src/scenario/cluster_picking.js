@@ -244,6 +244,20 @@ const ClusterPicking = {
             this.state_set_data(this.state.data, "change_pack_lot");
             this.state_to("change_pack_lot");
           },
+
+          on_action_print_label: () => {
+            let endpoint, endpoint_data;
+            const data = this.state.data;
+            endpoint = "print_label";
+            endpoint_data = {
+              picking_batch_id: this.current_batch().id,
+              operation_id: data.id,
+            };
+            if (data.lot) {
+              endpoint_data.lot_id = data.lot.id;
+            }
+            this.wait_call(this.odoo.call(endpoint, endpoint_data));
+          },
         },
         scan_destination: {
           display_info: {
