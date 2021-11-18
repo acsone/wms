@@ -99,6 +99,13 @@ msgid "- The selected picking zone does not match the bin"
 msgstr ""
 
 #. module: alc_product_audit
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_template_no_barcode_authorized
+#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_product_no_barcode_authorized
+#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_variant_no_barcode_authorized
+msgid "Barcode not required for this product"
+msgstr ""
+
+#. module: alc_product_audit
 #: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_can_be_bought_without_buy_route
 #: model:ir.model.fields,field_description:alc_product_audit.field_product_product_can_be_bought_without_buy_route
 #: model:ir.model.fields,field_description:alc_product_audit.field_product_template_can_be_bought_without_buy_route
@@ -281,14 +288,7 @@ msgstr ""
 #. module: alc_product_audit
 #: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_no_barcode_authorized
 #: model:ir.model.fields,field_description:alc_product_audit.field_product_product_no_barcode_authorized
-msgid "Barcode not required"
-msgstr ""
-
-#. module: alc_product_audit
-#: model:ir.model.fields,field_description:alc_product_audit.field_product_template_no_barcode_authorized
-#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_product_no_barcode_authorized
-#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_variant_no_barcode_authorized
-msgid "Barcode not required for this product"
+msgid "No barcode authorized"
 msgstr ""
 
 #. module: alc_product_audit
@@ -298,7 +298,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_product_no_dimensions_in_stock
 #: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_variant_no_dimensions_in_stock
 msgid "No dimensions in stock"
-msgstr "Produit sans dimensions et en stock"
+msgstr ""
 
 #. module: alc_product_audit
 #: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_no_min_max_no_on_command_reappro
