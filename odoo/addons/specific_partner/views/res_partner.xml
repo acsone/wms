@@ -142,7 +142,6 @@
         </group>
       </xpath>
       <field name="function" position="before">
-        <field name="alcyon_category_id" />
         <field name="apb_authorization" />
       </field>
       <field name="user_id" position="after">
