@@ -14,7 +14,7 @@ class ProductTemplate(models.Model):
     is_new = fields.Boolean(default=False, store=True, compute="_compute_is_new")
 
     no_barcode_authorized = fields.Boolean(
-        "No barcode authorized for this product",
+        "Barcode not required for this product",
         oldname="ean13",
         related="product_variant_ids.no_barcode_authorized",
     )
