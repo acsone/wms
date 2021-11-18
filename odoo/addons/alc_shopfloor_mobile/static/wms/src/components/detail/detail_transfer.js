@@ -49,7 +49,7 @@ Vue.component("detail-transfer", {
       return [
         {
           path: "product.display_name",
-          action_val_path: "product.barcode",
+          action_val_path: "product.default_code",
           klass: "loud",
         },
         {

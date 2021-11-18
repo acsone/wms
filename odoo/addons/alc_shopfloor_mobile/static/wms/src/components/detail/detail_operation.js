@@ -23,7 +23,7 @@ Vue.component("detail-operation", {
           label: "Destination",
           action_val_path: "location_dest.barcode",
         },
-        {path: "product.display_name", action_val_path: "product.barcode"},
+        {path: "product.display_name", action_val_path: "product.default_code"},
         {path: "product.supplier_code", label: "Vendor code", klass: "loud"},
         {path: "package_dest.name", action_val_path: "package_dest.barcode"},
         {path: "lot.name", action_val_path: "lot.barcode"},

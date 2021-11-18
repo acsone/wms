@@ -42,7 +42,7 @@ Vue.component("picking-select-line-content", {
       let opts = this.utils.wms.move_line_product_detail_options(record);
       opts.fields.unshift({
         path: "product.display_name",
-        action_val_path: "product.barcode",
+        action_val_path: "product.default_code",
       });
       return opts;
     },
