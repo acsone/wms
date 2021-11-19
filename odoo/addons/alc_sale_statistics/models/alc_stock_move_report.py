@@ -114,7 +114,7 @@ class AlcStockMoveReport(models.Model):
                        resp.zip AS partner_invoice_zip,
                        resp.vat AS partner_invoice_vat,
                        resp.vet_depot_number AS partner_invoice_depot_number,
-                       resp.alcyon_category_id AS partner_invoice_alcyon_category,
+                       resp.partner_type AS partner_invoice_alcyon_category,
                        pick.name AS picking_reference,
                        suppl.id AS supplier_id,
                        suppl.name AS supplier_name,
