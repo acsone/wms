@@ -571,6 +571,11 @@ msgstr "Appliquer"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
+msgid "BELFIUS:"
+msgstr ""
+
+#. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "BNP PARIBAS FORTIS :"
 msgstr "BNP PARIBAS FORTIS :"
 
@@ -601,11 +606,6 @@ msgstr "Base imposable"
 #: model:ir.ui.view,arch_db:specific_report.report_passport_body
 msgid "By lot"
 msgstr "Par lot"
-
-#. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
-msgid "CBC:"
-msgstr "CBC:"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.deliveryslip_without_price
@@ -677,11 +677,6 @@ msgstr "Devise"
 #: model:ir.ui.view,arch_db:specific_report.report_passport_body
 msgid "Customer"
 msgstr "Client"
-
-#. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
-msgid "DEXIA:"
-msgstr "DEXIA:"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice
@@ -1371,6 +1366,12 @@ msgid ""
 msgstr ""
 "|\n"
 "                <span>Téléphone:</span>"
+
+#~ msgid "CBC:"
+#~ msgstr "CBC:"
+
+#~ msgid "DEXIA:"
+#~ msgstr "DEXIA:"
 
 #~ msgid "<span>Consignement</span>"
 #~ msgstr "<span> Bon de Consignation</span>"
