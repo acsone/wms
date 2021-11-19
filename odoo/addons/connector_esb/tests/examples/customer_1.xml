@@ -8,7 +8,7 @@
       <Language>TLH</Language>
       <Petits_animaux>Y</Petits_animaux>
       <IdDelegate />
-      <GroupId>TST</GroupId>
+      <GroupId>20 - Etudiants</GroupId>
       <AlcyonGroupId>REF_ESB_2</AlcyonGroupId>
       <ErpId>3162</ErpId>
       <DepositNumber>2/1234/1234</DepositNumber>
@@ -20,7 +20,7 @@
       <Firstname>Peter</Firstname>
       <Language>FR</Language>
       <IdDelegate />
-      <GroupId>TST</GroupId>
+      <GroupId>20 - Etudiants</GroupId>
       <AlcyonGroupId>REF_ESB</AlcyonGroupId>
       <ErpId>100</ErpId>
       <Email>peter@ch.ch</Email>

@@ -68,10 +68,7 @@ class CustomerExportMapper(Component):
 
     @mapping
     def compute_groupid(self, record):
-        esb_ref = ""
-        if record.alcyon_category_id:
-            esb_ref = record.alcyon_category_id.esb_ref
-        return {"GroupId": esb_ref or ""}
+        return {"GroupId": record.partner_type_esb_ref}
 
     @mapping
     def compute_iddelegate(self, record):
