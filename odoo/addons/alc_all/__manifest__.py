@@ -106,6 +106,7 @@
         "alc_gls_putinpack",
         "alc_invoices_audit",
         "alc_label_printing_gls",
+        "alc_label_printing_shopfloor",
         "alc_logiweb",
         "alc_partner_force_re_geolocalization",
         "alc_partner_manual_sale_order",

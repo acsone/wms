@@ -129,6 +129,11 @@ export var batch_picking_line_actions = Vue.component("batch-picking-line-action
           </v-row>
           <v-row align="center">
             <v-col class="text-center" cols="12">
+              <btn-action @click="handle_action('action_print_label')">Print label</btn-action>
+            </v-col>
+          </v-row>
+          <v-row align="center">
+            <v-col class="text-center" cols="12">
               <v-btn x-large @click="dialog = false">Back</v-btn>
             </v-col>
           </v-row>
