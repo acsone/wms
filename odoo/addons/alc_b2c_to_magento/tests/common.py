@@ -37,9 +37,7 @@ class ExportB2cCommon(common.ESBTestCase):
             {
                 "name": "EXISTING PARTNER",
                 "is_b2c_customer": True,
-                "alcyon_category_id": cls.env.ref(
-                    "specific_partner.partner_category_student"
-                ).id,
+                "partner_type": "student_like",
                 "ref": "REF",
                 "email": "b2c@b2c.be",
             }
@@ -72,9 +70,7 @@ class ExportB2cCommon(common.ESBTestCase):
         cls.vt_partner = cls.env["res.partner"].create(
             {
                 "name": "VT",
-                "alcyon_category_id": cls.env.ref(
-                    "specific_partner.partner_category_veterinary"
-                ).id,
+                "partner_type": "veterinary",
                 "ref": "VTREF",
                 "email": "vt@vt.be",
             }

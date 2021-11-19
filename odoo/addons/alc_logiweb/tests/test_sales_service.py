@@ -22,9 +22,7 @@ class TestSalesService(CommonCase):
             {
                 "name": "EXISTING B2C PARTNER",
                 "is_b2c_customer": True,
-                "alcyon_category_id": cls.env.ref(
-                    "specific_partner.partner_category_student"
-                ).id,
+                "partner_type": "student_like",
                 "ref": "%s_ABC" % cls.b2c_backend.sale_channel,
                 "email": "b2c@b2c.be",
             }
@@ -47,9 +45,7 @@ class TestSalesService(CommonCase):
         cls.vt_partner = cls.env["res.partner"].create(
             {
                 "name": "VT",
-                "alcyon_category_id": cls.env.ref(
-                    "specific_partner.partner_category_veterinary"
-                ).id,
+                "partner_type": "veterinary",
                 "ref": "VTREF",
                 "email": "vt@vt.be",
                 "supplier_promotion_sale_allowed": True,
@@ -110,7 +106,7 @@ class TestSalesService(CommonCase):
         cls.logiweb_partner.ref = "ANOTHERUNIQUESTRING"
         cls.belgium = cls.env.ref("base.be")
         cls.burkina_faso = cls.env.ref("base.bf")
-        cls.alcyon_category = cls.env.ref("specific_partner.partner_category_student")
+        cls.partner_type = "student_like"
 
     @classmethod
     def _gen_string(cls, length=10):
@@ -275,7 +271,7 @@ class TestSalesService(CommonCase):
             {
                 "name": "B2C PARTNER in belgium",
                 "is_b2c_customer": True,
-                "alcyon_category_id": self.alcyon_category.id,
+                "partner_type": self.partner_type,
                 "ref": "%s_in_ABC" % self.b2c_backend.sale_channel,
                 "email": "b2c@b2cbe.be",
                 "country_id": self.belgium.id,
@@ -298,7 +294,7 @@ class TestSalesService(CommonCase):
             {
                 "name": "B2C PARTNER outside belgium",
                 "is_b2c_customer": True,
-                "alcyon_category_id": self.alcyon_category.id,
+                "partner_type": self.partner_type,
                 "ref": "%s_out_ABC" % self.b2c_backend.sale_channel,
                 "email": "b2c@b2cnotbe.com",
                 "country_id": self.burkina_faso.id,
@@ -320,7 +316,7 @@ class TestSalesService(CommonCase):
             {
                 "name": "B2C PARTNER in belgium",
                 "is_b2c_customer": True,
-                "alcyon_category_id": self.alcyon_category.id,
+                "partner_type": self.partner_type,
                 "ref": "%s_in_ABC" % self.b2c_backend.sale_channel,
                 "email": "b2c@b2cbe.be",
                 "country_id": self.belgium.id,
@@ -338,7 +334,7 @@ class TestSalesService(CommonCase):
             {
                 "name": "B2C PARTNER outside belgium",
                 "is_b2c_customer": True,
-                "alcyon_category_id": self.alcyon_category.id,
+                "partner_type": self.partner_type,
                 "ref": "%s_out_ABC" % self.b2c_backend.sale_channel,
                 "email": "b2c@b2cnotbe.com",
                 "country_id": self.burkina_faso.id,
