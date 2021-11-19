@@ -37,14 +37,13 @@ class ResPartner(models.Model):
             else:
                 partner.no_delivery_round = False
 
-    @api.depends("active", "customer", "alcyon_category_id", "pharmacist_id")
+    @api.depends("active", "customer", "partner_type", "pharmacist_id")
     def _compute_no_pharmacist(self):
-        veterinary = self.env.ref("specific_partner.partner_category_veterinary")
         for partner in self:
             if (
                 partner.customer
                 and partner.active
-                and partner.alcyon_category_id.id == veterinary.id
+                and partner.partner_type == "veterinary"
                 and not partner.pharmacist_id
             ):
                 partner.no_pharmacist = True
