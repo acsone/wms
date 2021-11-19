@@ -191,7 +191,7 @@ class Assignment(DomainInterface):
             {
                 "respCode": constants.RESPONSE_CODE_OK,
                 "groupNum": picking.id,
-                "Usf02": partner.alcyon_category_id.name,
+                "Usf02": partner.partner_type,
                 "Usf03": round_name,
                 "Usf04": 0,  # Constant value
                 "Usf05": 0,  # Constant value

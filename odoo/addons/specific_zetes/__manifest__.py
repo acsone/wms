@@ -13,6 +13,7 @@
     """,
     "depends": [
         "alc_b2c_partner",
+        "alc_partner_type",
         "alc_delivery_rounds_operator",
         "alc_stock_barcode_picking_type",
         "delivery_rounds",
