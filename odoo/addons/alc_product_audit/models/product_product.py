@@ -9,6 +9,7 @@ class ProductProduct(models.Model):
 
     _inherit = "product.product"
     no_barcode_authorized = fields.Boolean(default=False)
+
     missing_weight = fields.Boolean(default=False, compute="_compute_missing_weight")
     missing_barcode = fields.Boolean(default=False, compute="_compute_missing_barcode")
 
@@ -22,6 +23,6 @@ class ProductProduct(models.Model):
     )
     def _compute_missing_barcode(self):
         for product in self:
-            product.missing_barcode = not product.product_tmpl_id.is_new and (
+            product.missing_barcode = product.product_tmpl_id.is_new and (
                 not product.barcode and not product.no_barcode_authorized
             )

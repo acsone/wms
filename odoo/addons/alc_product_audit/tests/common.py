@@ -369,6 +369,7 @@ class ProductCharacteristicsCommonFeatures(SavepointCase):
                 "height": 6.0,
             }
         )
+        cls.p3.product_tmpl_id.product_package_storage_type_id = storage_type_new.id
         cls.p4 = cls.env["product.product"].create(
             {
                 "name": "Unittest missing weight",
