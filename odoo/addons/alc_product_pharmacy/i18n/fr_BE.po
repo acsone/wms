@@ -1,0 +1,97 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* alc_product_pharmacy
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-11-22 10:01+0000\n"
+"PO-Revision-Date: 2021-11-22 10:01+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_product_pharmacy
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_delivery_carrier_code_amm
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_product_code_amm
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_template_code_amm
+msgid "AMM Number"
+msgstr "Numéro AMM"
+
+#. module: alc_product_pharmacy
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_delivery_carrier_belgium_only
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_product_belgium_only
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_template_belgium_only
+msgid "Belgium only"
+msgstr "Seulement pour la Belgique"
+
+#. module: alc_product_pharmacy
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_delivery_carrier_cnk_code
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_product_cnk_code
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_template_cnk_code
+msgid "CNK"
+msgstr "CNK"
+
+#. module: alc_product_pharmacy
+#: model:ir.ui.view,arch_db:alc_product_pharmacy.product_template_search_view
+msgid "CNK code"
+msgstr "code CNK"
+
+#. module: alc_product_pharmacy
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_delivery_carrier_code_cti
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_product_code_cti
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_template_code_cti
+msgid "Code CTI Extended"
+msgstr "Code CTI étendu"
+
+#. module: alc_product_pharmacy
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_delivery_carrier_human_only
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_product_human_only
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_template_human_only
+msgid "Human only"
+msgstr "Humain uniquement"
+
+#. module: alc_product_pharmacy
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_delivery_carrier_pharmacy_only
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_product_pharmacy_only
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_template_pharmacy_only
+msgid "Only Pharmacies?"
+msgstr "Pharmacies uniquement?"
+
+#. module: alc_product_pharmacy
+#: model:ir.model,name:alc_product_pharmacy.model_product_template
+msgid "Product Template"
+msgstr "Modèle de produit"
+
+#. module: alc_product_pharmacy
+#: code:addons/alc_product_pharmacy/models/product_template.py:34
+#: sql_constraint:product.template:0
+#, python-format
+msgid "This AMM number already exists."
+msgstr "Ce numéro AMM existe déjà."
+
+#. module: alc_product_pharmacy
+#: code:addons/alc_product_pharmacy/models/product_template.py:39
+#: sql_constraint:product.template:0
+#, python-format
+msgid "This CTI extended code already exists."
+msgstr "Le code CTI étendu existe déjà."
+
+#. module: alc_product_pharmacy
+#: code:addons/alc_product_pharmacy/models/product_template.py:29
+#: sql_constraint:product.template:0
+#, python-format
+msgid "This cnk_code already exists."
+msgstr "Ce CNK existe déjà."
+
+#. module: alc_product_pharmacy
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_delivery_carrier_veterinary_only
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_product_veterinary_only
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_template_veterinary_only
+msgid "Veterinary only"
+msgstr "Seulement pour les vétérinaires"
+

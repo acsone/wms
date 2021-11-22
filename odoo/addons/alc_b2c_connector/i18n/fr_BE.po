@@ -1,16 +1,15 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* alc_b2c_connector
+#	* alc_b2c_connector
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-05 10:14+0000\n"
-"PO-Revision-Date: 2020-11-05 10:14+0000\n"
+"POT-Creation-Date: 2021-11-22 09:51+0000\n"
+"PO-Revision-Date: 2021-11-22 09:51+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -31,20 +30,18 @@ msgstr "Seul les produits de l'assortiment peuvent être acheté"
 #: sql_constraint:alc.b2c.backend:0
 #, python-format
 msgid "Auth api key can only be used by 1 backend at same time"
-msgstr ""
+msgstr "Auth api key can only be used by 1 backend at same time"
 
 #. module: alc_b2c_connector
 #: model:ir.model.fields,field_description:alc_b2c_connector.field_alc_b2c_backend_auth_api_key_id
 msgid "Auth api key id"
-msgstr ""
+msgstr "Auth api key id"
 
 #. module: alc_b2c_connector
 #: model:ir.ui.menu,name:alc_b2c_connector.alc_b2c_root_menu
-msgid ""
-"B2C\n"
+msgid "B2C\n"
 "        "
-msgstr ""
-"B2C\n"
+msgstr "B2C\n"
 "        "
 
 #. module: alc_b2c_connector
@@ -58,9 +55,9 @@ msgid "B2C Configuration"
 msgstr "B2C Configuration"
 
 #. module: alc_b2c_connector
-#: model:ir.filters,name:alc_b2c_connector.b2c_product_assortment_filter
-msgid "B2C Product Assortment"
-msgstr "Assortiment de produits disponibles pour le B2C"
+#: model:ir.ui.view,arch_db:alc_b2c_connector.sale_order_search_view
+msgid "B2C ref"
+msgstr "référence B2C"
 
 #. module: alc_b2c_connector
 #: model:ir.model.fields,field_description:alc_b2c_connector.field_sale_order_b2c_state
@@ -81,12 +78,17 @@ msgstr "Annulé"
 #: code:addons/alc_b2c_connector/models/sale_order.py:82
 #, python-format
 msgid "Cannot cancel order %s , being process already"
-msgstr ""
+msgstr "Cannot cancel order %s , being process already"
+
+#. module: alc_b2c_connector
+#: model:ir.filters,name:alc_b2c_connector.b2c_product_assortment_filter
+msgid "ChonoVet Product Assortment"
+msgstr "ChonoVet Product Assortment"
 
 #. module: alc_b2c_connector
 #: model:ir.model,name:alc_b2c_connector.model_res_country
 msgid "Country"
-msgstr ""
+msgstr "Pays"
 
 #. module: alc_b2c_connector
 #: model:ir.model.fields,field_description:alc_b2c_connector.field_alc_b2c_backend_create_uid
@@ -121,7 +123,7 @@ msgstr "ID"
 #. module: alc_b2c_connector
 #: model:ir.model.fields,field_description:alc_b2c_connector.field_alc_b2c_backend___last_update
 msgid "Last Modified on"
-msgstr "Dernière Modification le"
+msgstr "Dernière modification le"
 
 #. module: alc_b2c_connector
 #: model:ir.model.fields,field_description:alc_b2c_connector.field_alc_b2c_backend_write_uid
@@ -131,7 +133,7 @@ msgstr "Dernière mise à jour par"
 #. module: alc_b2c_connector
 #: model:ir.model.fields,field_description:alc_b2c_connector.field_alc_b2c_backend_write_date
 msgid "Last Updated on"
-msgstr "Dernière mise à jour le"
+msgstr "Dernière mis à jour le"
 
 #. module: alc_b2c_connector
 #: model:product.pricelist,name:alc_b2c_connector.product_pricelist_b2c
@@ -142,7 +144,7 @@ msgstr "List de prix B2C"
 #: code:addons/alc_b2c_connector/models/sale_order.py:100
 #, python-format
 msgid "Missing update parameters, lines or recipient."
-msgstr ""
+msgstr "Missing update parameters, lines or recipient."
 
 #. module: alc_b2c_connector
 #: model:ir.model.fields,field_description:alc_b2c_connector.field_alc_b2c_backend_name
@@ -166,18 +168,18 @@ msgstr "Aucun client trouvé pour customer_id: %s"
 #: code:addons/alc_b2c_connector/models/sale_order.py:84
 #, python-format
 msgid "Order  %s cancelled from b2c api."
-msgstr ""
+msgstr "Order  %s cancelled from b2c api."
 
 #. module: alc_b2c_connector
 #: code:addons/alc_b2c_connector/models/sale_order.py:64
 #, python-format
 msgid "Order created from json: %s."
-msgstr ""
+msgstr "Order created from json: %s."
 
 #. module: alc_b2c_connector
 #: model:ir.model,name:alc_b2c_connector.model_res_partner
 msgid "Partner"
-msgstr ""
+msgstr "Partenaire"
 
 #. module: alc_b2c_connector
 #: model:ir.model.fields,field_description:alc_b2c_connector.field_alc_b2c_backend_payment_mode_id
@@ -214,7 +216,7 @@ msgstr "Vente"
 #: code:addons/alc_b2c_connector/models/sale_order.py:115
 #, python-format
 msgid "Sale Order  %(sale_order)s updated from json: %(json_file)s."
-msgstr ""
+msgstr "Sale Order  %(sale_order)s updated from json: %(json_file)s."
 
 #. module: alc_b2c_connector
 #: model:ir.model.fields,field_description:alc_b2c_connector.field_alc_b2c_backend_sale_team_id
@@ -250,12 +252,13 @@ msgstr "Ligne du bon de commande"
 #. module: alc_b2c_connector
 #: model:ir.model.fields,field_description:alc_b2c_connector.field_alc_b2c_backend_picking_policy
 msgid "Shipping Policy"
-msgstr ""
+msgstr "Politique de livraison"
 
 #. module: alc_b2c_connector
 #: code:addons/alc_b2c_connector/models/sale_order.py:37
 #: code:addons/alc_b2c_connector/models/sale_order_line.py:18
-#: sql_constraint:sale.order:0 sql_constraint:sale.order.line:0
+#: sql_constraint:sale.order:0
+#: sql_constraint:sale.order.line:0
 #, python-format
 msgid "This b2c reference already exists"
 msgstr "Cette référence b2c existe déjà"
@@ -263,7 +266,7 @@ msgstr "Cette référence b2c existe déjà"
 #. module: alc_b2c_connector
 #: code:addons/alc_b2c_connector/models/res_partner.py:22
 #: sql_constraint:res.partner:0
-#, fuzzy, python-format
+#, python-format
 msgid "This reference already exists."
 msgstr "Cette référence b2c existe déjà"
 
@@ -277,7 +280,7 @@ msgstr "Cet utilisateur n'a pas accès à l'API REST B2C"
 #: code:addons/alc_b2c_connector/models/res_country.py:29
 #, python-format
 msgid "Unknown country code %s"
-msgstr ""
+msgstr "Unknown country code %s"
 
 #. module: alc_b2c_connector
 #: code:addons/alc_b2c_connector/models/sale_order.py:166
@@ -289,21 +292,17 @@ msgstr "SKU(s) inconnu(s): %s , "
 #: code:addons/alc_b2c_connector/models/sale_order.py:97
 #, python-format
 msgid "You cannot update a sale order that is already ready for delivery"
-msgstr ""
+msgstr "You cannot update a sale order that is already ready for delivery"
 
 #. module: alc_b2c_connector
 #: code:addons/alc_b2c_connector/models/res_partner.py:47
 #, python-format
-msgid ""
-"You cannot update this address since there are already closed Sale Orders "
-"for this partner. Incoherent field: %s, current value: %s"
-msgstr ""
+msgid "You cannot update this address since there are already closed Sale Orders for this partner. Incoherent field: %s, current value: %s"
+msgstr "You cannot update this address since there are already closed Sale Orders for this partner. Incoherent field: %s, current value: %s"
 
 #. module: alc_b2c_connector
 #: code:addons/alc_b2c_connector/models/sale_order.py:249
 #, python-format
 msgid "You cannot use this sale channel for manuel order"
-msgstr ""
+msgstr "You cannot use this sale channel for manuel order"
 
-#~ msgid "Alcyon Discount"
-#~ msgstr "Remise Alcyon"
