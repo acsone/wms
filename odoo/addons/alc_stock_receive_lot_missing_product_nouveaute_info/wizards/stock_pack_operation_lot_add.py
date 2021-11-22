@@ -34,7 +34,9 @@ class StockPackOperationLotAdd(models.TransientModel):
     def _compute_display_missing_infos(self):
         for rec in self:
             product = rec.operation_id.product_id
-            rec.display_product_barcode = product.missing_barcode
+            rec.display_product_barcode = (
+                product.product_tmpl_id.is_new and product.missing_barcode
+            )
             rec.display_product_weight = (
                 product.product_tmpl_id.is_new and product.missing_weight
             )
