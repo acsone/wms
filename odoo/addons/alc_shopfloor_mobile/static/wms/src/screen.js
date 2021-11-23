@@ -4,7 +4,6 @@
  * @author Simone Orsi <simahawk@gmail.com>
  * License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
  */
-
 //  Override main menu template
 
 Vue.component("nav-item-content").extendOptions.template = `
@@ -34,3 +33,12 @@ Vue.component("nav-item-action").extendOptions.template = `
         </div>
     </div>
 `;
+
+Vue.component("app-bar-actions").extendOptions.template = `
+    <div :class="$options._componentTag">
+        <span> version 1.78.11 </span>
+        <v-btn icon @click="$router.push({'name': 'scan_anything'})" :disabled="this.$route.name=='scan_anything'">
+            <v-icon >mdi-magnify</v-icon>
+        </v-btn>
+    </div>
+    `;
