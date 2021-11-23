@@ -78,8 +78,8 @@ msgid ""
 "Some information are missing on new products (dimensions, weight or "
 "barcode), please complete them before picking."
 msgstr ""
-"Des informations sur une nouveauté sont manquantes (dimensions, poids), "
-"Veuillez les compléter avabt réception."
+"Des informations sur une nouveauté sont manquantes (dimensions, poids, ean), "
+"Veuillez les compléter pendant la réception."
 
 #. module: alc_stock_receive_lot_missing_product_nouveaute_info
 #: model:ir.model,name:alc_stock_receive_lot_missing_product_nouveaute_info.model_stock_picking
