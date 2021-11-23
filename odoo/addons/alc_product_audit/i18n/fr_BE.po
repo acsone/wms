@@ -310,8 +310,8 @@ msgstr "- Produit acheté/vendu avec une route incohérente"
 #. module: alc_product_audit
 #: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_no_barcode_authorized
 #: model:ir.model.fields,field_description:alc_product_audit.field_product_product_no_barcode_authorized
-msgid "Barcode not required"
-msgstr "Code barre non requis"
+msgid "No barcode authorized"
+msgstr ""
 
 #. module: alc_product_audit
 #: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_no_dimensions_in_stock
@@ -444,3 +444,5 @@ msgstr "Ne peut être vendu et non archivé"
 msgid "can be bought without buy routes"
 msgstr "Peut être acheté sans route Acheter"
 
+#~ msgid "Barcode not required"
+#~ msgstr "Code barre non requis"
