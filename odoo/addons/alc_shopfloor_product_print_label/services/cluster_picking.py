@@ -34,7 +34,7 @@ class ClusterPicking(Component):
             lot = self.env["stock.production.lot"].browse(lot_id)
             lot.print_lot_label(printer_id=printer_id)
         else:
-            operation.print_product_label(printer_id=printer_id)
+            operation.product_id.print_product_label(printer_id=printer_id)
 
         return self._response_for_print_label(
             operation, message=self.msg_store.confirm_print_label()
