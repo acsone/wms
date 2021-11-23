@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* alc_product_pharmacy
+# 	* alc_product_pharmacy
 #
 msgid ""
 msgstr ""
@@ -10,6 +10,7 @@ msgstr ""
 "PO-Revision-Date: 2021-11-22 10:01+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -19,6 +20,8 @@ msgstr ""
 #: model:ir.model.fields,field_description:alc_product_pharmacy.field_delivery_carrier_code_amm
 #: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_product_code_amm
 #: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_template_code_amm
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_shopinvader_product_code_amm
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_shopinvader_variant_code_amm
 msgid "AMM Number"
 msgstr "Numéro AMM"
 
@@ -26,6 +29,8 @@ msgstr "Numéro AMM"
 #: model:ir.model.fields,field_description:alc_product_pharmacy.field_delivery_carrier_belgium_only
 #: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_product_belgium_only
 #: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_template_belgium_only
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_shopinvader_product_belgium_only
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_shopinvader_variant_belgium_only
 msgid "Belgium only"
 msgstr "Seulement pour la Belgique"
 
@@ -33,6 +38,8 @@ msgstr "Seulement pour la Belgique"
 #: model:ir.model.fields,field_description:alc_product_pharmacy.field_delivery_carrier_cnk_code
 #: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_product_cnk_code
 #: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_template_cnk_code
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_shopinvader_product_cnk_code
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_shopinvader_variant_cnk_code
 msgid "CNK"
 msgstr "CNK"
 
@@ -45,6 +52,8 @@ msgstr "code CNK"
 #: model:ir.model.fields,field_description:alc_product_pharmacy.field_delivery_carrier_code_cti
 #: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_product_code_cti
 #: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_template_code_cti
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_shopinvader_product_code_cti
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_shopinvader_variant_code_cti
 msgid "Code CTI Extended"
 msgstr "Code CTI étendu"
 
@@ -52,6 +61,8 @@ msgstr "Code CTI étendu"
 #: model:ir.model.fields,field_description:alc_product_pharmacy.field_delivery_carrier_human_only
 #: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_product_human_only
 #: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_template_human_only
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_shopinvader_product_human_only
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_shopinvader_variant_human_only
 msgid "Human only"
 msgstr "Humain uniquement"
 
@@ -59,6 +70,8 @@ msgstr "Humain uniquement"
 #: model:ir.model.fields,field_description:alc_product_pharmacy.field_delivery_carrier_pharmacy_only
 #: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_product_pharmacy_only
 #: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_template_pharmacy_only
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_shopinvader_product_pharmacy_only
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_shopinvader_variant_pharmacy_only
 msgid "Only Pharmacies?"
 msgstr "Pharmacies uniquement?"
 
@@ -92,6 +105,7 @@ msgstr "Ce CNK existe déjà."
 #: model:ir.model.fields,field_description:alc_product_pharmacy.field_delivery_carrier_veterinary_only
 #: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_product_veterinary_only
 #: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_template_veterinary_only
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_shopinvader_product_veterinary_only
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_shopinvader_variant_veterinary_only
 msgid "Veterinary only"
 msgstr "Seulement pour les vétérinaires"
-
