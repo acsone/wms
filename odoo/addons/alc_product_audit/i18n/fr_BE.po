@@ -444,5 +444,3 @@ msgstr "Ne peut être vendu et non archivé"
 msgid "can be bought without buy routes"
 msgstr "Peut être acheté sans route Acheter"
 
-#~ msgid "Barcode not required"
-#~ msgstr "Produit sans code barre"
