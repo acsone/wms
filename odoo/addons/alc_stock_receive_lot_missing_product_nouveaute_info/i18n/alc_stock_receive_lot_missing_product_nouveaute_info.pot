@@ -41,8 +41,8 @@ msgstr ""
 
 #. module: alc_stock_receive_lot_missing_product_nouveaute_info
 #: model:ir.model.fields,field_description:alc_stock_receive_lot_missing_product_nouveaute_info.field_stock_pack_operation_lot_add_no_barcode_authorized
-msgid "Barcode not required"
-msgstr "Code barre non requis"
+msgid "No barcode authorized"
+msgstr ""
 
 #. module: alc_stock_receive_lot_missing_product_nouveaute_info
 #: model:ir.model,name:alc_stock_receive_lot_missing_product_nouveaute_info.model_stock_pack_operation
