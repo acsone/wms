@@ -2,6 +2,8 @@
 # Copyright 2020 Camptocamp SA (http://www.camptocamp.com)
 # Copyright 2021 ACSONE SA/NV (https://www.acsone.eu)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+from collections import defaultdict
+
 from odoo import _, api, fields, models
 from odoo.tools.float_utils import float_compare, float_is_zero
 
@@ -44,9 +46,9 @@ class StockMove(models.Model):
         else:
             other_pack_operations = self.pack_operation_ids - pack_operations
         if other_pack_operations or self.partially_available:
-            qty_by_operation = {
-                l.operation_id: l.qty for l in self.linked_move_operation_ids
-            }
+            qty_by_operation = defaultdict(lambda: 0)
+            for link in self.linked_move_operation_ids:
+                qty_by_operation[link.operation_id] += link.qty
             if intersection:
                 # TODO @sebalix: please check if we can abandon the flag.
                 qty_to_split = sum([qty_by_operation[o] for o in other_pack_operations])
