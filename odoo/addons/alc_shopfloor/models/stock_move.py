@@ -5,6 +5,7 @@
 from collections import defaultdict
 
 from odoo import _, api, fields, models
+from odoo.exceptions import UserError
 from odoo.tools.float_utils import float_compare, float_is_zero
 
 
@@ -68,6 +69,11 @@ class StockMove(models.Model):
             reserved_qty_to_split = reserved_qty - qty_to_split
             if float_compare(reserved_qty_to_split, 0, precision_rounding=rounding) > 0:
                 for quant in self.reserved_quant_ids:
+                    if float_compare(quant.qty, 0, precision_rounding=rounding) <= 0:
+                        raise UserError(
+                            _("Can't split negative quant %s in location %s")
+                            % (quant.id, quant.location_id.name)
+                        )
                     if (
                         quant.package_id
                         and quant.package_id == pack_operations.package_id
@@ -83,8 +89,19 @@ class StockMove(models.Model):
                         quants_to_reserve |= quant
                         qty_to_split -= quant.qty
                     else:
-                        new_quant = quant._quant_split(quant.qty - qty_to_split)
-                        quants_to_reserve |= new_quant
+                        to_split = quant.qty - qty_to_split
+                        if (
+                            float_compare(
+                                abs(quant.qty),
+                                abs(to_split),
+                                precision_rounding=rounding,
+                            )
+                            > 0
+                        ):
+                            new_quant = quant._quant_split(to_split)
+                            quants_to_reserve |= new_quant
+                        else:
+                            quants_to_reserve |= quant
                         break
                     if float_is_zero(qty_to_split, precision_rounding=rounding):
                         break
