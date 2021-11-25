@@ -237,9 +237,7 @@ class SaleOrderLine(models.Model):
     @api.onchange("product_id")
     def product_id_change(self):
         result = super(SaleOrderLine, self).product_id_change()
-        if self.product_id and self.product_id.categ_id.has_for_parent_xml_id(
-            "specific_data.product_categ_stupefiant"
-        ):
+        if self.product_id.is_narcotic_reg:
             warning_mess = {
                 "title": _("Narcotic voucher"),
                 "message": _("A narcotic voucher is " "required for the data entry."),
@@ -286,200 +284,73 @@ class SaleOrderLine(models.Model):
     #
     @api.multi
     def validate_no_food(self):
-        """Disallow all products from food categories."""
-        target_groups = ["specific_partner.partner_category_only_material"]
-        if not self.product_id.categ_id.has_for_parent_xml_id(
-            "specific_data.product_categ_ali"
-        ):
-            return False
-        for group_xmlid in target_groups:
-            if (
-                self.order_id.partner_id.alcyon_category_id
-                and self.order_id.partner_id.alcyon_category_id.is_xml_id(group_xmlid)
-            ):
-                return True
-        return False
+        all_types = self.product_id.get_all_partner_types()
+        allowed_types = self.product_id._filter_partner_types_food(all_types)
+        return self.order_id.partner_id.partner_type not in allowed_types
 
     @api.multi
     def validate_no_medoc(self):
-        """Disallow all products from medicines categories."""
-        target_groups = ["specific_partner.partner_category_only_material"]
-        if not self.product_id.categ_id.has_for_parent_xml_id(
-            "specific_data.product_categ_medoc"
-        ):
-            return False
-        if not self.order_id.partner_id.alcyon_category_id:
-            # Customer with undefined category are not allowed medoc
-            return True
-        for group_xmlid in target_groups:
-            if (
-                self.order_id.partner_id.alcyon_category_id
-                and self.order_id.partner_id.alcyon_category_id.is_xml_id(group_xmlid)
-            ):
-                return True
-        return False
+        all_types = self.product_id.get_all_partner_types()
+        allowed_types = self.product_id._filter_partner_types_meds(all_types, True)
+        return self.order_id.partner_id.partner_type not in allowed_types
 
-    # Disallow only some sub category of medicines
     @api.multi
     def validate_no_medoc_cascade_import(self):
-        """Disallow all products from medicines cascade importation."""
-        target_groups = [
-            "specific_partner.partner_category_customerexport",
-            "specific_partner.partner_category_student",
-            "specific_partner.partner_category_med_export",
-        ]
-        if not self.product_id.categ_id.has_for_parent_xml_id(
-            "specific_data.product_categ_importation"
-        ):
-            return False
-        for group_xmlid in target_groups:
-            if (
-                self.order_id.partner_id.alcyon_category_id
-                and self.order_id.partner_id.alcyon_category_id.is_xml_id(group_xmlid)
-            ):
-                return True
-        return False
+        all_types = self.product_id.get_all_partner_types()
+        allowed_types = self.product_id._filter_partner_types_import(all_types)
+        return self.order_id.partner_id.partner_type not in allowed_types
 
     @api.multi
     def validate_no_medoc_veterinary_belge(self):
-        """Disallow all products from medicines veterinary belge."""
-        target_groups = [
-            "specific_partner.partner_category_customerexport",
-            "specific_partner.partner_category_student",
-        ]
-        if not self.product_id.categ_id.has_for_parent_xml_id(
-            "specific_data.product_categ_vet_belges"
-        ):
-            return False
-        for group_xmlid in target_groups:
-            if (
-                self.order_id.partner_id.alcyon_category_id
-                and self.order_id.partner_id.alcyon_category_id.is_xml_id(group_xmlid)
-            ):
-                return True
-        return False
+        all_types = self.product_id.get_all_partner_types()
+        allowed_types = self.product_id._filter_partner_types_vt_be(all_types)
+        return self.order_id.partner_id.partner_type not in allowed_types
 
     @api.multi
     def validate_no_medoc_human(self):
-        """Disallow all products from medicines human."""
-        target_groups = [
-            "specific_partner.partner_category_customerexport",
-            "specific_partner.partner_category_callcenter",
-            "specific_partner.partner_category_pharmacy",
-            "specific_partner.partner_category_student",
-            "specific_partner.partner_category_med_export",
-        ]
-        if not self.product_id.human_only:
-            return False
-        for group_xmlid in target_groups:
-            if (
-                self.order_id.partner_id.alcyon_category_id
-                and self.order_id.partner_id.alcyon_category_id.is_xml_id(group_xmlid)
-            ):
-                return True
-        return False
+        all_types = self.product_id.get_all_partner_types()
+        allowed_types = self.product_id._filter_partner_types_human(all_types)
+        return self.order_id.partner_id.partner_type not in allowed_types
 
-    # Dissallow sub sub category of medicines
     @api.multi
     def validate_no_medoc_vet_stupefiant(self):
-        """Disallow all products from medicines stupefiants."""
-        target_groups = [
-            "specific_partner.partner_category_veterinary",
-            "specific_partner.partner_category_alcyonaire",
-            "specific_partner.partner_category_med_export",
-        ]
-        if not self.product_id.categ_id.has_for_parent_xml_id(
-            "specific_data.product_categ_stupefiant"
-        ):
-            return False
-        for group_xmlid in target_groups:
-            if (
-                self.order_id.partner_id.alcyon_category_id
-                and self.order_id.partner_id.alcyon_category_id.is_xml_id(group_xmlid)
-            ):
-                return True
-        return False
+        all_types = self.product_id.get_all_partner_types()
+        allowed_types = self.product_id._filter_partner_types_narcotic_reg(all_types)
+        return self.order_id.partner_id.partner_type not in allowed_types
 
     @api.multi
     def validate_no_medoc_vet_psychoIII(self):
-        """Disallow all products from medicines psycho III."""
-        target_groups = ["specific_partner.partner_category_med_export"]
-        if not self.product_id.categ_id.has_for_parent_xml_id(
-            "specific_data.product_categ_psychotropes_25"
-        ):
-            return False
-        for group_xmlid in target_groups:
-            if (
-                self.order_id.partner_id.alcyon_category_id
-                and self.order_id.partner_id.alcyon_category_id.is_xml_id(group_xmlid)
-            ):
-                return True
-        return False
+        all_types = self.product_id.get_all_partner_types()
+        allowed_types = self.product_id._filter_partner_types_psychotropic(all_types)
+        return self.order_id.partner_id.partner_type not in allowed_types
 
     @api.multi
     def validate_no_medoc_belgium_only(self):
-        """Disallow products which are for Belgium only"""
-        target_groups = [
-            "specific_partner.partner_category_customerexport",
-            "specific_partner.partner_category_med_export",
-        ]
-        if not self.product_id.belgium_only:
-            return False
-        for group_xmlid in target_groups:
-            if (
-                self.order_id.partner_id.alcyon_category_id
-                and self.order_id.partner_id.alcyon_category_id.is_xml_id(group_xmlid)
-            ):
-                return True
-        return False
+        all_types = self.product_id.get_all_partner_types()
+        allowed_types = self.product_id._filter_partner_types_belgium(all_types)
+        return self.order_id.partner_id.partner_type not in allowed_types
 
     def validate_no_veterinary_product(self):
         """Disallow products which are only for veterinary"""
-        target_groups = [
-            "specific_partner.partner_category_customerexport",
-            "specific_partner.partner_category_pharmacy",
-        ]
-        if not self.product_id.veterinary_only:
-            return False
-        if not self.order_id.partner_id.alcyon_category_id:
-            # Customer with undefined category are not allowed vet only
-            return True
-        for group_xmlid in target_groups:
-            if (
-                self.order_id.partner_id.alcyon_category_id
-                and self.order_id.partner_id.alcyon_category_id.is_xml_id(group_xmlid)
-            ):
-                return True
-        return False
+        all_types = self.product_id.get_all_partner_types()
+        allowed_types = self.product_id._filter_partner_types_veterinary(all_types)
+        return self.order_id.partner_id.partner_type not in allowed_types
 
     def validate_no_psychotropic_ordered_by_phone(self):
         """No psychotropic ordered on the phone."""
-        if not self.product_id.categ_id.has_for_parent_xml_id(
-            "specific_data.product_categ_psychotropes_25"
-        ):
-            return False
-        return self.order_id.sale_channel == "phone"
+        return self.product_id.is_psychotropic and self.order_id.sale_channel == "phone"
 
     def validate_no_stupefiant_vet_by_phone(self):
-        """No psychotropic ordered on the phone."""
-        if not self.product_id.categ_id.has_for_parent_xml_id(
-            "specific_data.product_categ_stupefiant_vet"
-        ):
-            return False
-        return self.order_id.sale_channel == "phone"
+        return self.product_id.is_narcotic_vet and self.order_id.sale_channel == "phone"
 
     # Warnings
     def warning_psychotropic(self):
         """Add warning for psychotropic product on sale order line."""
-        return self.product_id.categ_id.has_for_parent_xml_id(
-            "specific_data.product_categ_psychotropes_25"
-        )
+        return self.product_id.is_psychotropic
 
     def warning_stupefiant_vet(self):
         """Add warning for psychotropic product on sale order line."""
-        return self.product_id.categ_id.has_for_parent_xml_id(
-            "specific_data.product_categ_stupefiant_vet"
-        )
+        return self.product_id.is_narcotic_vet
 
     def validate_no_backorder(self):
         """Block backorder for customer that specifically do not want them."""
@@ -502,13 +373,11 @@ class SaleOrderLine(models.Model):
 
     def warning_cascade_importation(self):
         """Add a warning for cascade importation product."""
-        return self.product_id.categ_id.has_for_parent_xml_id(
-            "specific_data.product_categ_importation"
-        )
+        return self.product_id.is_import
 
     def warning_human_medicine(self):
         """Add a warning for human medicine product."""
-        return self.product_id.human_only
+        return self.product_id.is_human
 
     def warning_supplier_break(self):
         """Add a warning for out of stock product at the supplier."""

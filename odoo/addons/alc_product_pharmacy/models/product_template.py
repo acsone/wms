@@ -17,10 +17,44 @@ class ProductTemplate(models.Model):
     code_amm = fields.Char("AMM Number")
 
     veterinary_only = fields.Boolean(string="Veterinary only")
-    pharmacy_only = fields.Boolean("Only Pharmacies?")
     belgium_only = fields.Boolean(string="Belgium only")
 
-    human_only = fields.Boolean(compute="_compute_human_only", store=True)
+    is_human = fields.Boolean(
+        string="Human", compute="_compute_category_attributes", store=True,
+    )
+    is_food = fields.Boolean(
+        string="Food", compute="_compute_category_attributes", store=True,
+    )
+    is_equipment = fields.Boolean(
+        string="Equipment", compute="_compute_category_attributes", store=True,
+    )
+    is_meds = fields.Boolean(
+        string="Medicine", compute="_compute_category_attributes", store=True,
+    )
+    is_narcotic_reg = fields.Boolean(
+        string="Narcotics (Regular)",
+        compute="_compute_category_attributes",
+        store=True,
+    )
+    is_narcotic_vet = fields.Boolean(
+        string="Narcotics (Veterinary)",
+        compute="_compute_category_attributes",
+        store=True,
+    )
+    is_psychotropic = fields.Boolean(
+        string="Psychotropic", compute="_compute_category_attributes", store=True,
+    )
+    is_pharmaceutical = fields.Boolean(
+        string="Parapharmaceutical", compute="_compute_category_attributes", store=True,
+    )
+    is_import = fields.Boolean(
+        string="Importation", compute="_compute_category_attributes", store=True,
+    )
+    is_vt_be = fields.Boolean(
+        string="Belgian Veterinaries",
+        compute="_compute_category_attributes",
+        store=True,
+    )
 
     _sql_constraints = [
         (
@@ -56,7 +90,22 @@ class ProductTemplate(models.Model):
             vals["cnk_code"] = re.sub(r"\s+", "", vals["cnk_code"])
         return vals
 
+    @api.model
+    def _get_category_attributes(self):
+        return {
+            "is_food": "specific_data.product_categ_ali",
+            "is_meds": "specific_data.product_categ_medoc",
+            "is_equipment": "specific_data.product_categ_materiel",
+            "is_vt_be": "specific_data.product_categ_vet_belges",
+            "is_human": "specific_data.product_categ_humain",
+            "is_narcotic_reg": "specific_data.product_categ_stupefiant",
+            "is_narcotic_vet": "specific_data.product_categ_stupefiant_vet",
+            "is_psychotropic": "specific_data.product_categ_psychotropes_25",
+            "is_pharmaceutical": "specific_data.product_categ_parapharmacie",
+            "is_import": "specific_data.product_categ_importation",
+        }
+
     @api.depends("categ_id")
-    def _compute_human_only(self):
-        root_xmlid = "specific_data.product_categ_humain"
-        self._compute_business_unit_property("human_only", root_xmlid)
+    def _compute_category_attributes(self):
+        for field, root_xmlid in self._get_category_attributes().items():
+            self._compute_business_unit_property(field, root_xmlid)

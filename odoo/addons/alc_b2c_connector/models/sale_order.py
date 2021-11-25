@@ -213,9 +213,7 @@ class SaleOrder(models.Model):
                 "mobile": customer_info.get("mobile"),
                 "is_sale_back_order_accepted": b2c_backend.is_sale_back_order_accepted,
                 "is_b2c_customer": True,
-                "alcyon_category_id": self.env.ref(
-                    "specific_partner.partner_category_student"
-                ).id,
+                "partner_type": "student_like",
                 "ref": b2c_ref,
                 "country_id": country_id,
                 "suite": customer_info.get("name2"),

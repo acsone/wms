@@ -13,13 +13,13 @@ def _initialize_product_assortment_filter(cr):
     env = api.Environment(cr, SUPERUSER_ID, {})
     _logger.info("Initialize b2c product assortment filter")
     assortment_filter = env.ref("alc_b2c_connector.b2c_product_assortment_filter")
-    # TODO: migrate to use human_only fields, as well as other computed properties
+    # TODO: migrate to use is_human fields, as well as other computed properties
     domain = [
         ("type", "=", "product"),
         ("active", "=", True),
         ("sale_ok", "=", True),
         ("default_code", "!=", False),
-        ("human_only", "=", False),
+        ("is_human", "=", False),
     ]
     domain.extend(
         [

@@ -11,13 +11,6 @@ from .common import ESBXMLTestCase
 
 
 class ExportCustomerTestCase(ESBXMLTestCase):
-    @classmethod
-    def setUpClass(cls):
-        super(ExportCustomerTestCase, cls).setUpClass()
-        cls.alcyon_category = cls.env["partner.alcyon_category"].create(
-            {"name": "Test partner alcyon category", "esb_ref": "TST"}
-        )
-
     def setUp(self):
         super(ExportCustomerTestCase, self).setUp()
         self.setup_records()
@@ -58,7 +51,7 @@ class ExportCustomerTestCase(ESBXMLTestCase):
                 "phone": "021123123",
                 "fax": "021121212",
                 "customer": True,
-                "alcyon_category_id": self.alcyon_category.id,
+                "partner_type": "student_like",
                 "discount_pricelist_id": self.discount_pricelist_2.id,
                 "property_product_pricelist": self.env.ref(
                     "specific_data.product_pricelist_pb1"
@@ -82,7 +75,7 @@ class ExportCustomerTestCase(ESBXMLTestCase):
                 "email": "peter@ch.ch",
                 "pharmacist_id": self.env.ref("base.main_partner").id,
                 "customer": True,
-                "alcyon_category_id": self.alcyon_category.id,
+                "partner_type": "student_like",
                 "discount_pricelist_id": self.discount_pricelist.id,
                 "help_with_fee": True,
             }
@@ -118,7 +111,7 @@ class ExportCustomerTestCase(ESBXMLTestCase):
                 "fax": "021121212",
                 "email": "peter@ch.ch",
                 "pharmacist_id": self.env.ref("base.main_partner").id,
-                "alcyon_category_id": self.alcyon_category.id,
+                "partner_type": "student_like",
                 "customer": False,
             }
         )
@@ -133,7 +126,7 @@ class ExportCustomerTestCase(ESBXMLTestCase):
             "Email": u"joe@ch.ch",
             "Firstname": u"Joe",
             "Language": u"TLH",
-            "GroupId": self.alcyon_category.esb_ref,
+            "GroupId": "20 - Etudiants",
             "Taxvat": u"BE0477472701",
             "IdRound": "0000",
             "IdDelegate": "",

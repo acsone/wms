@@ -15,12 +15,6 @@ class ResPartner(models.Model):
     )
     ref = fields.Char(copy=False, readonly=True)
 
-    vet_depot_number = fields.Char(string="Depot number")
-    vet_subscription_number = fields.Char(string="Subscription number")
-
-    is_veterinary = fields.Boolean(compute="_compute_is_veterinary_or_students")
-    is_students = fields.Boolean(compute="_compute_is_veterinary_or_students")
-
     legal_entity_id = fields.Many2one("legal.entity", string="Legal entity")
 
     pharmacist_id = fields.Many2one(
@@ -42,14 +36,6 @@ class ResPartner(models.Model):
     call_name = fields.Char(string="Nickname")
 
     apb_authorization = fields.Char(string="Authorization/APB")
-
-    @api.depends("alcyon_category_id")
-    def _compute_is_veterinary_or_students(self):
-        veterinary = self.env.ref("specific_partner.partner_category_veterinary")
-        students = self.env.ref("specific_partner.partner_category_student")
-        for partner in self:
-            partner.is_veterinary = partner.alcyon_category_id == veterinary
-            partner.is_students = partner.alcyon_category_id == students
 
     @api.model
     def _commercial_fields(self):

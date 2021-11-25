@@ -12,7 +12,6 @@ class TestCustomFilterCustomer(SavepointCase):
         alcyon_delivery_id = cls.env.ref(
             "__setup__.deliver_carrier_alcyon", raise_if_not_found=False
         )
-        veterinary = cls.env.ref("specific_partner.partner_category_veterinary")
         delivery_template = cls.env["round.template"].create(
             {"name": "Unittest delivery template"}
         )
@@ -44,7 +43,7 @@ class TestCustomFilterCustomer(SavepointCase):
                 "name": "Test Customer 1",
                 "active": True,
                 "customer": True,
-                "alcyon_category_id": veterinary.id,
+                "partner_type": "veterinary",
             }
         )
 

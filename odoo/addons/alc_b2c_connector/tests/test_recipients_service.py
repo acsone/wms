@@ -25,9 +25,7 @@ class TestRecipientsService(CommonCase):
                 "street": "my first street",
                 "city": "my first city",
                 "zip": "1234",
-                "alcyon_category_id": cls.env.ref(
-                    "specific_partner.partner_category_student"
-                ).id,
+                "partner_type": "student_like",
                 "ref": "%s_ABC" % cls.b2c_backend.sale_channel,
                 "email": "b2c@b2c.be",
                 "country_id": cls.belgium.id,
@@ -51,9 +49,7 @@ class TestRecipientsService(CommonCase):
         cls.vt_partner = cls.env["res.partner"].create(
             {
                 "name": "VT",
-                "alcyon_category_id": cls.env.ref(
-                    "specific_partner.partner_category_veterinary"
-                ).id,
+                "partner_type": "veterinary",
                 "ref": "VTREF",
                 "email": "vt@vt.be",
                 "supplier_promotion_sale_allowed": True,
