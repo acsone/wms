@@ -19,7 +19,7 @@ msgid "&amp;bull;"
 msgstr ""
 
 #. module: specific_sale
-#: code:addons/specific_sale/models/sale.py:245
+#: code:addons/specific_sale/models/sale.py:243
 #, python-format
 msgid "A narcotic voucher is required for the data entry."
 msgstr ""
@@ -273,7 +273,7 @@ msgid "Narcotic Veterinary Medicine Not Allowed"
 msgstr ""
 
 #. module: specific_sale
-#: code:addons/specific_sale/models/sale.py:244
+#: code:addons/specific_sale/models/sale.py:242
 #, python-format
 msgid "Narcotic voucher"
 msgstr ""
