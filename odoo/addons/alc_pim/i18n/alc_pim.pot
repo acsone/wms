@@ -3331,12 +3331,6 @@ msgid "Omeprazol"
 msgstr ""
 
 #. module: alc_pim
-#: model:attribute.attribute,field_description:alc_pim.attribute_pharmacy_only
-#: model:ir.model.fields,field_description:alc_pim.attribute_pharmacy_only_ir_model_fields
-msgid "Only Pharmacies?"
-msgstr ""
-
-#. module: alc_pim
 #: model:product.category,name:alc_pim.ophta_equi
 #: model:product.category,name:alc_pim.ophtalmo_instru
 #: model:product.category,name:alc_pim.ophtalmo_ophtalmo_instru
