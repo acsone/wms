@@ -314,8 +314,10 @@ msgid "Partner"
 msgstr ""
 
 #. module: connector_esb
-#: model:ir.ui.view,arch_db:connector_esb.partner_alcyon_category_form_view
-msgid "Partner Alcyon Category From"
+#: model:ir.model.fields,field_description:connector_esb.field_res_partner_partner_type_esb_ref
+#: model:ir.model.fields,field_description:connector_esb.field_res_users_partner_type_esb_ref
+#: model:ir.model.fields,field_description:connector_esb.field_shopinvader_partner_partner_type_esb_ref
+msgid "Partner type esb ref"
 msgstr ""
 
 #. module: connector_esb
@@ -535,7 +537,7 @@ msgid "The client has already been exported, it can be archived but not deleted.
 msgstr ""
 
 #. module: connector_esb
-#: code:addons/connector_esb/models/customer/model.py:22
+#: code:addons/connector_esb/models/customer/model.py:24
 #, python-format
 msgid "The customer {} has already been exported, it can be archived  but not deleted."
 msgstr ""
