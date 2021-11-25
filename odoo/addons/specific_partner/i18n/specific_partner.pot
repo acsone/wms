@@ -68,20 +68,13 @@ msgid "Customer master"
 msgstr ""
 
 #. module: specific_partner
-#: model:ir.model.fields,field_description:specific_partner.field_res_partner_vet_depot_number
-#: model:ir.model.fields,field_description:specific_partner.field_res_users_vet_depot_number
-#: model:ir.model.fields,field_description:specific_partner.field_shopinvader_partner_vet_depot_number
-msgid "Depot number"
-msgstr ""
-
-#. module: specific_partner
 #: model:ir.model.fields,field_description:specific_partner.field_legal_entity_display_name
 #: model:ir.model.fields,field_description:specific_partner.field_partner_alcyon_category_display_name
 msgid "Display Name"
 msgstr ""
 
 #. module: specific_partner
-#: code:addons/specific_partner/models/res_partner.py:316
+#: code:addons/specific_partner/models/res_partner.py:302
 #, python-format
 msgid "For an invoicing or delivery address the following fields (name, street, city, zip, country) are required. And the country must have a reference ESB."
 msgstr ""
@@ -93,7 +86,7 @@ msgid "ID"
 msgstr ""
 
 #. module: specific_partner
-#: code:addons/specific_partner/models/res_partner.py:87
+#: code:addons/specific_partner/models/res_partner.py:73
 #, python-format
 msgid "Invoice and delivery"
 msgstr ""
@@ -103,20 +96,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:specific_partner.field_res_users_type_delivery
 #: model:ir.model.fields,field_description:specific_partner.field_shopinvader_partner_type_delivery
 msgid "Is Also Delivery"
-msgstr ""
-
-#. module: specific_partner
-#: model:ir.model.fields,field_description:specific_partner.field_res_partner_is_students
-#: model:ir.model.fields,field_description:specific_partner.field_res_users_is_students
-#: model:ir.model.fields,field_description:specific_partner.field_shopinvader_partner_is_students
-msgid "Is students"
-msgstr ""
-
-#. module: specific_partner
-#: model:ir.model.fields,field_description:specific_partner.field_res_partner_is_veterinary
-#: model:ir.model.fields,field_description:specific_partner.field_res_users_is_veterinary
-#: model:ir.model.fields,field_description:specific_partner.field_shopinvader_partner_is_veterinary
-msgid "Is veterinary"
 msgstr ""
 
 #. module: specific_partner
@@ -178,13 +157,6 @@ msgstr ""
 #. module: specific_partner
 #: model:ir.model.fields,field_description:specific_partner.field_partner_alcyon_category_esb_ref
 msgid "Reference for ESB"
-msgstr ""
-
-#. module: specific_partner
-#: model:ir.model.fields,field_description:specific_partner.field_res_partner_vet_subscription_number
-#: model:ir.model.fields,field_description:specific_partner.field_res_users_vet_subscription_number
-#: model:ir.model.fields,field_description:specific_partner.field_shopinvader_partner_vet_subscription_number
-msgid "Subscription number"
 msgstr ""
 
 #. module: specific_partner
