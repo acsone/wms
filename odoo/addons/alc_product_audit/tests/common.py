@@ -122,6 +122,7 @@ class ProductCharacteristicsCommonFeatures(SavepointCase):
                 "sale_ok": True,
                 "uom_id": cls.env.ref("product.product_uom_unit").id,
                 "type": "product",
+                "barcode": "XXX0002",
                 "default_code": "678911",
             }
         )
@@ -346,6 +347,7 @@ class ProductCharacteristicsCommonFeatures(SavepointCase):
                 "uom_id": cls.env.ref("product.product_uom_unit").id,
                 "type": "product",
                 "weight": 10.0,
+                "barcode": "XXX0004",
             }
         )
         cls.p1.product_tmpl_id.product_package_storage_type_id = storage_type_new.id
@@ -367,6 +369,7 @@ class ProductCharacteristicsCommonFeatures(SavepointCase):
                 "length": 2.0,
                 "width": 4.0,
                 "height": 6.0,
+                "barcode": "XXX0006",
             }
         )
         cls.p3.product_tmpl_id.product_package_storage_type_id = storage_type_new.id
@@ -400,6 +403,7 @@ class ProductCharacteristicsCommonFeatures(SavepointCase):
                 "length": 2.0,
                 "width": 4.0,
                 "height": 6.0,
+                "barcode": "XXX0007",
             }
         )
         cls.p6.product_tmpl_id.product_package_storage_type_id = storage_type_new.id
@@ -422,6 +426,7 @@ class ProductCharacteristicsCommonFeatures(SavepointCase):
                 "uom_id": cls.env.ref("product.product_uom_unit").id,
                 "type": "product",
                 "weight": 10.0,
+                "barcode": "XXX0008",
             }
         )
         cls.products = [cls.p1, cls.p2, cls.p3, cls.p4, cls.p5, cls.p6, cls.p7, cls.p8]

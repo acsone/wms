@@ -39,6 +39,7 @@ class StockDeliveryNoteAdditionalProductTestCase(SavepointCase):
             {
                 "name": "Additional product",
                 "default_code": "987654321",
+                "barcode": "LLL00001",
                 "tracking": "none",
                 "list_price": 20,
                 "uom_id": cls.env.ref("product.product_uom_unit").id,
@@ -61,6 +62,7 @@ class StockDeliveryNoteAdditionalProductTestCase(SavepointCase):
             {
                 "name": "Main product",
                 "default_code": "1234567",
+                "barcode": "LLL00002",
                 "tracking": "none",
                 "list_price": 100,
                 "type": "product",

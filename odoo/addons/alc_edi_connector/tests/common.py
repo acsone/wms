@@ -85,12 +85,14 @@ class AlcEdiConnectorCase(SavepointComponentCase, JobMixin):
         cls.product_1 = cls.env["product.product"].create(
             {
                 "name": "Product 1",
+                "barcode": "BBB0001",
                 "seller_ids": [(0, 0, {"name": cls.supplier.id, "product_code": "P1"})],
             }
         )
         cls.product_2 = cls.env["product.product"].create(
             {
                 "name": "Product 2",
+                "barcode": "BBB0002",
                 "seller_ids": [(0, 0, {"name": cls.supplier.id, "product_code": "P2"})],
             }
         )

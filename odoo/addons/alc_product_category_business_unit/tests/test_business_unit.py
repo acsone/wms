@@ -18,11 +18,13 @@ class TestBusinessUnit(SavepointCase):
             {"name": "Test", "parent_id": cls.business_unit_category.id}
         )
 
-        cls.product1 = cls.env["product.product"].create({"name": "product test 1"})
+        cls.product1 = cls.env["product.product"].create(
+            {"name": "product test 1", "barcode": "CCC0001"}
+        )
         cls.product_template1 = cls.product1.product_tmpl_id
 
         cls.product_template2 = cls.env["product.template"].create(
-            {"name": "product test 2"}
+            {"name": "product test 2", "barcode": "CCC0002"}
         )
         cls.product2 = cls.product_template2.product_variant_ids
 

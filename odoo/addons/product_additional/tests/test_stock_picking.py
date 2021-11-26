@@ -52,6 +52,7 @@ class TestStockPicking(common.TransactionCase):
                 "tracking": "lot",
                 "list_price": 20,
                 "type": "product",
+                "barcode": "JJJJ00001",
             }
         )
 
@@ -93,6 +94,7 @@ class TestStockPicking(common.TransactionCase):
                 "uom_id": product_uom_id,
                 "ratio_main_product": 2,
                 "ratio_additional_product": 1,
+                "barcode": "JJJJ00002",
             }
         )
 

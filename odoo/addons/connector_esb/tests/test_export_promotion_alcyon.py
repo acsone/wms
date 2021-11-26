@@ -22,13 +22,13 @@ class ExportPromotionAlcyonTestCase(ESBXMLTestCase):
     def setup_records(self):
         # Create 2 products
         self.p1 = self.env["product.product"].create(
-            {"name": "Unittest P1", "default_code": "0001"}
+            {"name": "Unittest P1", "barcode": "GGG00001", "default_code": "0001"}
         )
         self.p2 = self.env["product.product"].create(
-            {"name": "Unittest P2", "default_code": "0002"}
+            {"name": "Unittest P2", "barcode": "GGG00002", "default_code": "0002"}
         )
         self.p3 = self.env["product.product"].create(
-            {"name": "Unittest P3", "default_code": "0003"}
+            {"name": "Unittest P3", "barcode": "GGG00003", "default_code": "0003"}
         )
         # Could be changed when export-product is merged ?
         self.ali = self.env["product.price.category"].create({"name": "ALI"})

@@ -17,7 +17,12 @@ class TestAutoCancelUnavailableQty(SavepointCase):
             {"name": "TEST CUSTOMER", "ref": "4929752", "customer": True}
         )
         cls.product = cls.env["product.product"].create(
-            {"name": "TEST", "default_code": "TEST", "type": "product"}
+            {
+                "name": "TEST",
+                "barcode": "KKK00001",
+                "default_code": "TEST",
+                "type": "product",
+            }
         )
         cls.order = cls.env["sale.order"].create(
             {

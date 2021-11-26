@@ -73,6 +73,7 @@ class CommonReceptionPharmacyCase(SavepointCase):
                 "list_price": 20,
                 "uom_id": cls.env.ref("product.product_uom_unit").id,
                 "type": "product",
+                "barcode": "YYY0007",
             }
         )
         cls.itinerary = cls.env["round.itinerary"].create(

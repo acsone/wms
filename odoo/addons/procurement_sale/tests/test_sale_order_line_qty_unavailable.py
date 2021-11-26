@@ -32,6 +32,7 @@ class TestSaleOrderLineQtyUnavailable(TransactionCase):
         self.p1 = self.env["product.template"].create(
             {
                 "name": "Unittest P1",
+                "barcode": "DDD0001",
                 "uom_id": self.ref("product.product_uom_unit"),
                 "type": "product",
             }

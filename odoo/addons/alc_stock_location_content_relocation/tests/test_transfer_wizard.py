@@ -67,6 +67,7 @@ class TestTransferWizard(SavepointCase):
                 "default_code": "123456789",
                 "uom_id": cls.env.ref("product.product_uom_unit").id,
                 "immediately_usable_qty": 30,
+                "barcode": "EEE0001",
             }
         )
 

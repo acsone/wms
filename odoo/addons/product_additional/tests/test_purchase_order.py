@@ -28,6 +28,7 @@ class TestPurchaseOrder(SavepointCase):
                 "tracking": "lot",
                 "list_price": 100,
                 "type": "product",
+                "barcode": "JJJJ00001",
             }
         )
 
@@ -38,6 +39,7 @@ class TestPurchaseOrder(SavepointCase):
                 "tracking": "none",
                 "list_price": 20,
                 "type": "product",
+                "barcode": "JJJJ00002",
             }
         )
 

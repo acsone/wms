@@ -18,6 +18,7 @@ class TestStockMove(SavepointCase):
                 "type": "product",
                 "sale_ok": True,
                 "active": False,
+                "barcode": "DDD0001",
             }
         )
         # create a b2c_partner

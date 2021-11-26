@@ -21,6 +21,7 @@ class TestCreateTicketWizard(SavepointCase):
                 "name": "Unittest P1",
                 "uom_id": cls.env.ref("product.product_uom_unit").id,
                 "type": "consu",
+                "barcode": "FFF00001",
             }
         )
         cls.so1 = cls.env["sale.order"].create(

@@ -55,6 +55,7 @@ class TestInterruption(ZetesTest):
             {
                 "name": "Test medoc 2",
                 "default_code": "587502",
+                "barcode": "LLL00001",
                 "categ_id": self.product_categ_medoc.id,
                 "tracking": "lot",
                 "list_price": 40,

@@ -16,6 +16,7 @@ class TestReservationUnit(SavepointCase):
                 "uom_id": cls.env.ref("product.product_uom_unit").id,
                 "uom_po_id": cls.env.ref("product.product_uom_unit").id,
                 "default_code": "Code product 1",
+                "barcode": "DDD0001",
             }
         )
         cls.ProductPackaging = cls.env["product.packaging"]

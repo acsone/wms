@@ -40,6 +40,7 @@ class TestStockPicking(SavepointCase):
                 "tracking": "none",
                 "list_price": 100,
                 "type": "product",
+                "barcode": "DDD0001",
             }
         )
         cls.sale_order = cls._confirm_sale_order()

@@ -179,6 +179,7 @@ class TestDeliveryRound(common.DeliverDeliveryRoundTestCase):
                 "uom_id": self.env.ref("product.product_uom_unit").id,
                 "type": "product",
                 "weight": 20.0,
+                "barcode": "III00001",
             }
         )
         # round is in draft and open

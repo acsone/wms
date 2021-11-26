@@ -69,6 +69,7 @@ class TestReceiveFrigo(SavepointCase):
                 "list_price": 20,
                 "uom_id": cls.env.ref("product.product_uom_unit").id,
                 "type": "product",
+                "barcode": "FFF00001",
             }
         )
         cls.product_template1 = cls.product1.product_tmpl_id
@@ -123,6 +124,7 @@ class TestReceiveFrigo(SavepointCase):
                 "list_price": 20,
                 "uom_id": cls.env.ref("product.product_uom_unit").id,
                 "type": "product",
+                "barcode": "FFF00002",
             }
         )
 
@@ -137,6 +139,7 @@ class TestReceiveFrigo(SavepointCase):
                 "list_price": 20,
                 "uom_id": cls.env.ref("product.product_uom_unit").id,
                 "type": "product",
+                "barcode": "FFF00003",
             }
         )
 

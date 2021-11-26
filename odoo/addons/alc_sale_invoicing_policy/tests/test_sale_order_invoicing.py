@@ -36,7 +36,12 @@ class TestSaleOrderInvoicing(SavepointCase):
             }
         )
         cls.product = cls.env["product.product"].create(
-            {"name": u"TEST", "type": "consu", "invoice_policy": "delivery"}
+            {
+                "name": u"TEST",
+                "type": "consu",
+                "barcode": "DDD0001",
+                "invoice_policy": "delivery",
+            }
         )
         cls.orders = cls.env["sale.order"]
         cls.unique_orders = cls.env["sale.order"]

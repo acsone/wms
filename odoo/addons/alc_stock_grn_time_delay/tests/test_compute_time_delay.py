@@ -22,6 +22,7 @@ class TestComputeTimeDelay(SavepointCase):
                 "name": "Unittest P1",
                 "uom_id": cls.env.ref("product.product_uom_unit").id,
                 "type": "product",
+                "barcode": "EEE0001",
             }
         )
         cls.grn = cls.env["stock.grn"].create(

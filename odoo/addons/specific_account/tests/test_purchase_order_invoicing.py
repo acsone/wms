@@ -17,7 +17,12 @@ class TestPurchaseOrderInvoicing(SavepointCase):
             {"name": u"TEST", "supplier": True, "ref": "42"}
         )
         cls.product = cls.env["product.product"].create(
-            {"name": u"TEST", "type": "consu", "purchase_method": "receive"}
+            {
+                "name": u"TEST",
+                "barcode": "JJJJ00001",
+                "type": "consu",
+                "purchase_method": "receive",
+            }
         )
         today = fields.Date.today()
         po_vals = {

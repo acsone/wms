@@ -288,8 +288,8 @@ msgstr ""
 #. module: alc_product_audit
 #: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_no_barcode_authorized
 #: model:ir.model.fields,field_description:alc_product_audit.field_product_product_no_barcode_authorized
-msgid "No barcode authorized"
-msgstr ""
+msgid "Barcode not required"
+msgstr "Code Barre non requis"
 
 #. module: alc_product_audit
 #: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_no_dimensions_in_stock

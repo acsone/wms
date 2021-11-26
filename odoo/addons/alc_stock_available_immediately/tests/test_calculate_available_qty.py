@@ -21,6 +21,7 @@ class TestCalcAvailableQty(SavepointCase):
         cls.p1 = cls.env["product.template"].create(
             {
                 "name": "Unittest P1",
+                "barcode": "DDD0001",
                 "uom_id": cls.env.ref("product.product_uom_unit").id,
                 "type": "product",
             }

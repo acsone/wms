@@ -20,6 +20,7 @@ class TestActAsView(SavepointCase):
             {
                 "name": "Product 1",
                 "type": "product",
+                "barcode": "MMM00001",
                 "uom_id": cls.env.ref("product.product_uom_unit").id,
                 "uom_po_id": cls.env.ref("product.product_uom_unit").id,
                 "default_code": "Code product 1",

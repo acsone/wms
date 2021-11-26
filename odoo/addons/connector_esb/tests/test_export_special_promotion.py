@@ -22,10 +22,10 @@ class ExportSpecialPromotionTestCase(ESBXMLTestCase):
         self.model.search([(1, "=", 1)]).unlink()
         # Create 2 products
         self.p1 = self.env["product.template"].create(
-            {"name": "Unittest P1", "default_code": "0001"}
+            {"name": "Unittest P1", "barcode": "DDD0001", "default_code": "0001"}
         )
         self.p2 = self.env["product.template"].create(
-            {"name": "Unittest P2", "default_code": "0002"}
+            {"name": "Unittest P2", "barcode": "DDD0002", "default_code": "0002"}
         )
         # Create a supplier
         self.supplier1 = self.env["res.partner"].create(

@@ -36,6 +36,7 @@ class TestSaleOrder(common.SavepointCase):
                 "tracking": "lot",
                 "list_price": 100,
                 "type": "product",
+                "barcode": "JJJJ00001",
             }
         )
 
@@ -242,6 +243,7 @@ class TestSaleOrder(common.SavepointCase):
                 "tracking": "lot",
                 "list_price": 100,
                 "type": "product",
+                "barcode": "JJJJ000012",
             }
         )
         # Add a free product on the main product

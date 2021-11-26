@@ -90,6 +90,7 @@ class TestCsvFaclign(common.SavepointCase):
                 "list_price": 20,
                 "uom_id": cls.env.ref("product.product_uom_unit").id,
                 "type": "product",
+                "barcode": "AAA0001",
             }
         )
         cls.product2 = cls.env["product.product"].create(
@@ -100,6 +101,7 @@ class TestCsvFaclign(common.SavepointCase):
                 "list_price": 20,
                 "uom_id": cls.env.ref("product.product_uom_unit").id,
                 "type": "product",
+                "barcode": "AAA0002",
             }
         )
 

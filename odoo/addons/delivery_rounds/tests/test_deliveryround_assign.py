@@ -26,6 +26,7 @@ class TestDeliveryRoundAssignMixin(SavepointCase):
                 "name": "Unittest P1",
                 "uom_id": cls.env.ref("product.product_uom_unit").id,
                 "type": "product",
+                "barcode": "III00001",
             }
         )
         cls.p2 = cls.env["product.product"].create(
@@ -33,6 +34,7 @@ class TestDeliveryRoundAssignMixin(SavepointCase):
                 "name": "Unittest P2",
                 "uom_id": cls.env.ref("product.product_uom_unit").id,
                 "type": "product",
+                "barcode": "III00002",
             }
         )
 

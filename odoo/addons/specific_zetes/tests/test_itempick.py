@@ -32,6 +32,7 @@ class TestItempick(ZetesTest):
             {
                 "name": "Test medoc 2",
                 "default_code": "1234568",
+                "barcode": "LLL00001",
                 "categ_id": self.product_categ_medoc.id,
                 "tracking": "none",
                 "list_price": 100,

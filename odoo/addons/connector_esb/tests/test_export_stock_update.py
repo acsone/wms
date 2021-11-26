@@ -55,6 +55,7 @@ class ExportStockUpdateTestCase(SavepointCase):
                 "default_code": "test prod 2",
                 "type": "product",
                 "sale_ok": True,
+                "barcode": "HHH00001",
             }
         )
         # And product without Sku, not to be exported
@@ -64,6 +65,7 @@ class ExportStockUpdateTestCase(SavepointCase):
                 "default_code": "",
                 "type": "product",
                 "sale_ok": True,
+                "barcode": "HHH00002",
             }
         )
         # Product service not to be exported
@@ -73,6 +75,7 @@ class ExportStockUpdateTestCase(SavepointCase):
                 "default_code": "ref4",
                 "type": "service",
                 "sale_ok": True,
+                "barcode": "HHH00003",
             }
         )
         # Product not ok for sale, not to be exported
@@ -82,6 +85,7 @@ class ExportStockUpdateTestCase(SavepointCase):
                 "default_code": "ref5",
                 "type": "product",
                 "sale_ok": False,
+                "barcode": "HHH00004",
             }
         )
         # Add a sale order to test the sale_average

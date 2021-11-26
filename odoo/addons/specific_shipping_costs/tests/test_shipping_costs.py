@@ -14,7 +14,7 @@ class TestShippingCosts(SavepointCase):
 
         # Create the product used for "shipping alcyon fees" and is xmlid
         cls.product_shipping_cost = cls.env["product.product"].create(
-            {"name": "Alcyon shipping cost test"}
+            {"name": "Alcyon shipping cost test", "barcode": "KKK00006"}
         )
         # Create the delivery carrier for Alcyon
         cls.fee = 8.5
@@ -62,6 +62,7 @@ class TestShippingCosts(SavepointCase):
         cls.p1 = cls.env["product.product"].create(
             {
                 "name": "Unittest P1",
+                "barcode": "KKK00007",
                 "uom_id": cls.env.ref("product.product_uom_unit").id,
                 "type": "consu",
             }
@@ -69,6 +70,7 @@ class TestShippingCosts(SavepointCase):
         cls.p2 = cls.env["product.product"].create(
             {
                 "name": "Unittest P2",
+                "barcode": "KKK00008",
                 "uom_id": cls.env.ref("product.product_uom_unit").id,
                 "type": "product",
             }
@@ -76,6 +78,7 @@ class TestShippingCosts(SavepointCase):
         cls.p3 = cls.env["product.product"].create(
             {
                 "name": "Unittest P3",
+                "barcode": "KKK00009",
                 "uom_id": cls.env.ref("product.product_uom_unit").id,
                 "type": "product",
             }

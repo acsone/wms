@@ -22,7 +22,11 @@ class TestStockInventory(TransactionCase):
         :return:
         """
         product = self.env["product.product"].create(
-            {"name": "Unittest P1", "uom_id": self.ref("product.product_uom_unit")}
+            {
+                "name": "Unittest P1",
+                "barcode": "LLL00001",
+                "uom_id": self.ref("product.product_uom_unit"),
+            }
         )
         self.assertFalse(product.date_last_inventory)
 

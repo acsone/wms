@@ -23,6 +23,7 @@ class GroupByPartnerCommonCase(SavepointCase):
         cls.p1 = cls.env["product.product"].create(
             {
                 "name": "Unittest P1",
+                "barcode": "MMM00001",
                 "uom_id": cls.env.ref("product.product_uom_unit").id,
                 "type": "product",
                 "weight": 10.0,

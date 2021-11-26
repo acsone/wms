@@ -61,6 +61,7 @@ class ExportStockUpdateTestCase(SavepointCase):
                     "name": "test prod {}".format(product_code),
                     "default_code": "test prod {}".format(product_code),
                     "type": "product",
+                    "barcode": "tGGGG{}".format(product_code),
                     "sale_ok": True,
                 }
             )

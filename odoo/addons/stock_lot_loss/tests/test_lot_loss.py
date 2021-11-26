@@ -23,6 +23,7 @@ class TestLotLoss(SavepointCase):
                 "uom_po_id": cls.env.ref("product.product_uom_unit").id,
                 "default_code": "Code product lot_loss",
                 "tracking": "lot",
+                "barcode": "MMM00001",
             }
         )
         cls.product_2 = cls.env["product.product"].create(
@@ -33,6 +34,7 @@ class TestLotLoss(SavepointCase):
                 "uom_po_id": cls.env.ref("product.product_uom_unit").id,
                 "default_code": "Code product lot_loss no tracking 2",
                 "tracking": "none",
+                "barcode": "MMM00002",
             }
         )
         cls.product_3 = cls.env["product.product"].create(
@@ -43,6 +45,7 @@ class TestLotLoss(SavepointCase):
                 "uom_po_id": cls.env.ref("product.product_uom_unit").id,
                 "default_code": "Code product lot_loss no tracking 3",
                 "tracking": "none",
+                "barcode": "MMM00003",
             }
         )
         wh = cls.env["stock.warehouse"].search([], limit=1)
@@ -679,6 +682,7 @@ class TestLotLoss(SavepointCase):
                 "list_price": 20,
                 "uom_id": self.env.ref("product.product_uom_unit").id,
                 "type": "product",
+                "barcode": "MMM00004",
             }
         )
 

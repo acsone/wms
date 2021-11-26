@@ -24,7 +24,12 @@ class TestStockValuation(SavepointCase):
         cls.supplier1 = cls.env.ref("base.res_partner_12")
         cls.uom = cls.env.ref("product.product_uom_unit")
         cls.p1 = cls.env["product.product"].create(
-            {"name": "Sorbet", "uom_id": cls.uom.id, "property_cost_method": "average"}
+            {
+                "name": "Sorbet",
+                "uom_id": cls.uom.id,
+                "barcode": "MMM00001",
+                "property_cost_method": "average",
+            }
         )
 
     def buy(self, product, price, ttime):
