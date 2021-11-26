@@ -47,7 +47,3 @@ class StockAction(Component):
             )
         )
         return moves == assigned_moves and not has_ancestors
-
-    def create_bin(self, name):
-        vals = {"name": name}
-        return self.env["stock.quant.package"].sudo().create(vals)
