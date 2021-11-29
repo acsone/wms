@@ -6,6 +6,6 @@
 def to_float(val):
     if isinstance(val, float):
         return val
-    if val:
+    if val is not None:
         return float(val)
     return None
