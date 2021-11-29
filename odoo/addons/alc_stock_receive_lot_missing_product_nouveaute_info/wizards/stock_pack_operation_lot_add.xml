@@ -16,7 +16,7 @@
                 <xpath expr="//group[@name='operation_details']" position="after">
                     <field name="display_product_dimensions" invisible="1" />
                     <field name="display_product_weight" invisible="1" />
-                    <field name="display_product_barcode" invisible="1" />
+                    <field name="product_is_new" invisible="1" />
                     <group name="missing_infos">
                         <field
             name="product_weight"
@@ -36,11 +36,11 @@
           />
                         <field
             name="product_barcode"
-            attrs="{'invisible': [('display_product_barcode', '=', False)]}"
+            attrs="{'invisible': [('product_is_new', '=', False)]}"
           />
                         <field
             name="no_barcode_authorized"
-            attrs="{'invisible': [('display_product_barcode', '=', False)], 'required': [('product_barcode', '=', False)]}"
+            attrs="{'invisible': [('product_is_new', '=', False)], 'required': [('product_barcode', '=', False)]}"
           />
                     </group>
                 </xpath>

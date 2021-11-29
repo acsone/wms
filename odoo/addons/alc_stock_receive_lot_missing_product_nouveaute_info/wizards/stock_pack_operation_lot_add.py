@@ -12,44 +12,75 @@ class StockPackOperationLotAdd(models.TransientModel):
     _inherit = "stock.pack.operation.lot.add"
 
     display_product_dimensions = fields.Boolean(
-        compute="_compute_display_missing_infos"
+        compute="_compute_display_missing_dimensions"
     )
-    display_product_weight = fields.Boolean(compute="_compute_display_missing_infos")
-    display_product_barcode = fields.Boolean(compute="_compute_display_missing_infos")
-    no_barcode_authorized = fields.Boolean(default=False)
+    display_product_weight = fields.Boolean(compute="_compute_display_missing_weight")
+
     product_weight = fields.Float(string="Product weight")
     product_length = fields.Float(string="Product length (cm)")
     product_height = fields.Float(string="Product height (cm)")
     product_width = fields.Float(string="Product width (cm)")
-    product_barcode = fields.Char(string="Barcode", oldname="ean13")
-
-    @api.depends(
-        "operation_id",
-        "operation_id.product_id",
-        "operation_id.product_id.is_new",
-        "operation_id.product_id.has_no_dimensions",
-        "operation_id.product_id.missing_barcode",
-        "operation_id.product_id.missing_weight",
+    product_barcode = fields.Char(
+        string="Barcode",
+        oldname="ean13",
+        compute="_compute_product_barcode",
+        inverse="_inverse_product_barcode",
     )
-    def _compute_display_missing_infos(self):
+    no_barcode_authorized = fields.Boolean(
+        default=False,
+        compute="_compute_no_barcode_authorized",
+        inverse="_inverse_no_barcode_authorized",
+    )
+    product_is_new = fields.Boolean(related="product_id.is_new")
+
+    @api.depends("product_id", "product_id.is_new", "product_id.has_no_dimensions")
+    def _compute_display_missing_dimensions(self):
         for rec in self:
-            product = rec.operation_id.product_id
-            rec.display_product_barcode = (
-                product.product_tmpl_id.is_new and product.missing_barcode
-            )
-            rec.display_product_weight = (
-                product.product_tmpl_id.is_new and product.missing_weight
-            )
+            product = rec.product_id
             rec.display_product_dimensions = (
-                product.product_tmpl_id.is_new
-                and product.product_tmpl_id.has_no_dimensions
+                product.is_new and product.has_no_dimensions
             )
+
+    @api.depends("product_id", "product_id.is_new", "product_id.missing_weight")
+    def _compute_display_missing_weight(self):
+        for rec in self:
+            product = rec.product_id
+            rec.display_product_weight = product.is_new and product.missing_weight
+
+    @api.depends("product_id", "product_id.is_new", "product_id.barcode")
+    def _compute_product_barcode(self):
+        for rec in self:
+            product = rec.product_id
+            if product.is_new:
+                rec.product_barcode = product.barcode
+
+    def _inverse_product_barcode(self):
+        for rec in self:
+            product = rec.product_id
+            if product.is_new:
+                product.barcode = rec.product_barcode
+
+    @api.depends("product_id", "product_id.is_new", "product_id.no_barcode_authorized")
+    def _compute_no_barcode_authorized(self):
+        for rec in self:
+            product = rec.product_id
+            if product.is_new:
+                rec.no_barcode_authorized = product.no_barcode_authorized
+
+    def _inverse_no_barcode_authorized(self):
+        for rec in self:
+            product = rec.product_id
+            if product.is_new:
+                product.no_barcode_authorized = rec.no_barcode_authorized
 
     def _add(self):
         res = super(StockPackOperationLotAdd, self)._add()
-        no_barcode_and_barcode_must_be_defined = self.display_product_barcode and not (
-            self.product_barcode or self.no_barcode_authorized
+        no_barcode_and_barcode_must_be_defined = (
+            self.product_is_new
+            and not self.product_barcode
+            and not self.no_barcode_authorized
         )
+
         missing_dimension = self.display_product_dimensions and not (
             self.product_width or self.product_length or self.product_height
         )
@@ -64,9 +95,8 @@ class StockPackOperationLotAdd(models.TransientModel):
         if no_barcode_and_barcode_must_be_defined:
             raise MissingBarcodeError()
 
-        product = self.operation_id.product_id
-
         vals = {}
+        product = self.product_id
         if self.display_product_dimensions:
             vals.update(
                 {
@@ -78,7 +108,10 @@ class StockPackOperationLotAdd(models.TransientModel):
         if self.display_product_weight:
             vals.update({"weight": self.product_weight})
 
-        if self.display_product_barcode:
+        if self.product_is_new and (
+            self.product_barcode != product.barcode
+            or self.no_barcode_authorized != product.no_barcode_authorized
+        ):
             vals.update(
                 {
                     "barcode": self.product_barcode,

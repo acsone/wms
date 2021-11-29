@@ -218,9 +218,7 @@ class TestMissingInfoOnNewProduct(SavepointCase):
                 "location_dest_id": self.bin1.id,
             }
         )
-
         wiz._add()
-
         self.assertEqual(self.operation_missing_dimensions.product_id.length, 2)
         self.assertEqual(self.operation_missing_dimensions.product_id.width, 4)
         self.assertEqual(self.operation_missing_dimensions.product_id.height, 3)
@@ -231,7 +229,6 @@ class TestMissingInfoOnNewProduct(SavepointCase):
         self.assertEqual(
             self.operation_missing_barcode.product_id.name, "Unittest missing barcode"
         )
-        self.assertTrue(wiz.display_product_barcode)
         wiz.write({"qty": 1, "location_dest_id": self.bin1.id})
         with self.assertRaises(MissingBarcodeError), self.env.cr.savepoint():
             wiz._add()
@@ -249,7 +246,6 @@ class TestMissingInfoOnNewProduct(SavepointCase):
         wiz.write(
             {"product_barcode": "986754321", "qty": 1, "location_dest_id": self.bin1.id}
         )
-
         wiz._add()
         self.assertEqual(self.operation_missing_barcode.product_id.barcode, "986754321")
 
@@ -259,7 +255,6 @@ class TestMissingInfoOnNewProduct(SavepointCase):
         self.assertEqual(
             self.operation_missing_barcode.product_id.name, "Unittest missing barcode"
         )
-        self.assertTrue(wiz.display_product_barcode)
         wiz.write({"qty": 1, "location_dest_id": self.bin1.id})
         with self.assertRaises(MissingBarcodeError), self.env.cr.savepoint():
             wiz._add()
@@ -277,9 +272,7 @@ class TestMissingInfoOnNewProduct(SavepointCase):
         wiz.write(
             {"no_barcode_authorized": True, "qty": 1, "location_dest_id": self.bin1.id}
         )
-
         wiz._add()
-
         self.assertFalse(self.operation_missing_barcode.product_id.barcode)
         self.assertTrue(self.operation_missing_barcode.product_id.no_barcode_authorized)
 
@@ -357,9 +350,7 @@ class TestMissingInfoOnNewProduct(SavepointCase):
         wiz._add()
         self.assertEqual(self.operation_missing_weight_dimensions.product_id.length, 2)
         self.assertEqual(self.operation_missing_weight_dimensions.product_id.width, 4)
-        self.assalc_stock_receive_lot_missing_product_nouveaute_infotion_id = (
-            self.operation_not_new.id
-        )
+
         self.assertEqual(
             self.operation_not_new.product_id.name, "Unittest not new product"
         )
@@ -380,6 +371,5 @@ class TestMissingInfoOnNewProduct(SavepointCase):
         )
         self.assertFalse(wiz.display_product_weight)
         self.assertFalse(wiz.display_product_dimensions)
-        self.assertFalse(wiz.display_product_barcode)
         wiz.write({"qty": 1, "location_dest_id": self.bin1.id})
         wiz._add()
