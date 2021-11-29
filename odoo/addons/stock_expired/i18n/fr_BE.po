@@ -64,8 +64,8 @@ msgstr ""
 
 #. module: stock_expired
 #: model:ir.model.fields,field_description:stock_expired.field_stock_quant_life_date
-msgid "Expiration Date"
-msgstr "Date de péremption"
+msgid "End of Life Date"
+msgstr ""
 
 #. module: stock_expired
 #: model:ir.model.fields,field_description:stock_expired.field_stock_quant_expiry_date
@@ -157,6 +157,9 @@ msgid ""
 msgstr ""
 "Vous ne pouvez pas transférer un lot expiré:\n"
 "\t- %s"
+
+#~ msgid "Expiration Date"
+#~ msgstr "Date de péremption"
 
 #~ msgid "Stock quants"
 #~ msgstr "Stocks"
