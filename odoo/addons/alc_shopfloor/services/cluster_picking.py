@@ -34,7 +34,7 @@ class ClusterPicking(Component):
     * Scan the label of a Bin (package) in a roller-cage, put the good inside
       (physically). Once the first move line of a picking has been scanned, the
       screen will show the same destination package for all the other lines of
-      the picking to help the user grouping goods together, and will prevent
+      the picking to help the user grouping goods together, and will preventF
       lines from other pickings to be put in the same destination package.
     * If odoo thinks a source location is empty after picking the goods, a
       "zero check" is done: it asks the user to confirm if it is empty or not
@@ -647,9 +647,6 @@ class ClusterPicking(Component):
 
         search = self._actions_for("search")
         bin_package = search.package_from_scan(barcode)
-        if not bin_package:
-            stock = self._actions_for("stock")
-            bin_package = stock.create_bin(barcode)
 
         if not bin_package:
             return self._response_for_scan_destination(
