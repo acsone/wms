@@ -3,24 +3,24 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import _
-from odoo.exceptions import UserError
+from odoo.exceptions import ValidationError
 
 
-class MissingWeightError(UserError):
+class MissingWeightError(ValidationError):
     def __init__(self):
         super(MissingWeightError, self).__init__(
             _("You must enter a weight for the product to receive")
         )
 
 
-class MissingDimensionsError(UserError):
+class MissingDimensionsError(ValidationError):
     def __init__(self):
         super(MissingDimensionsError, self).__init__(
             _("You must enter dimensions for the product to receive")
         )
 
 
-class MissingBarcodeError(UserError):
+class MissingBarcodeError(ValidationError):
     def __init__(self):
         super(MissingBarcodeError, self).__init__(
             _(
