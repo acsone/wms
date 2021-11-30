@@ -56,6 +56,7 @@
     action="alc_product_shop_category.product_category_action_form_web"
     id="menu_product_category_is_web"
     parent="sale.prod_config_main"
+    groups="base.group_no_one"
     sequence="1"
   />
 </odoo>
