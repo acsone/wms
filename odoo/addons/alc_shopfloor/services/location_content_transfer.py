@@ -111,7 +111,9 @@ class LocationContentTransfer(Component):
         """
         location = self._actions_for("search").location_from_scan(barcode)
         if not location:
-            return self._response_for_start(message=self.msg_store.barcode_not_found())
+            return self._response_for_scan_location(
+                message=self.msg_store.barcode_not_found()
+            )
         operations = self._find_location_operations(location)
         pickings = operations.mapped("picking_id")
         picking_types = pickings.mapped("picking_type_id")
@@ -739,6 +741,10 @@ class LocationContentTransfer(Component):
         """Lock move lines"""
         sql = "SELECT id FROM %s WHERE ID IN %%s FOR UPDATE" % lines._table
         self.env.cr.execute(sql, (tuple(lines.ids),), log_exceptions=False)
+
+    def _response_for_scan_location(self, message=None, popup=None):
+        """Transition to the 'start' state"""
+        return self._response(next_state="scan_location", message=message, popup=popup)
 
     def _response_for_start(self, message=None, popup=None):
         """Transition to the 'start' state"""

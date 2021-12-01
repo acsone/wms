@@ -97,9 +97,12 @@ class TestLocationContentTransferStart(LocationContentTransferCommonCase):
         response = self.service.dispatch(
             "scan_location", params={"barcode": "NOT_FOUND"}
         )
-        self.assert_response_start(
-            response, message=self.service.msg_store.barcode_not_found()
-        )
+        expected = {
+            "data": {},
+            "message": self.service.msg_store.barcode_not_found(),
+            "next_state": "scan_location",
+        }
+        self.assertEqual(response, expected)
 
     def test_scan_location_find_content_destination_all(self):
         """Scan a location with content to transfer, all dest. identical"""
