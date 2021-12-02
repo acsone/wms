@@ -1,16 +1,13 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* alc_internal_stock_quant_package
+#	* alc_internal_stock_quant_package
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-01 16:30+0000\n"
-"PO-Revision-Date: 2021-12-01 16:30+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -19,38 +16,35 @@ msgstr ""
 #. module: alc_internal_stock_quant_package
 #: model:ir.model.fields,field_description:alc_internal_stock_quant_package.field_stock_picking_type_empty_internal_package_on_transfer
 msgid "Empty internal package on transfer"
-msgstr "Vider les colis internes lors du transfert?"
+msgstr ""
 
 #. module: alc_internal_stock_quant_package
 #: model:ir.model.fields,help:alc_internal_stock_quant_package.field_stock_picking_type_empty_internal_package_on_transfer
-msgid ""
-"If set internal packages are emptied after the transfer or when products are "
-"put in pack."
+msgid "If set internal packages are emptied after the transfer or when products are put in pack."
 msgstr ""
-"Si coché, les colis internes sont vidés une fois la préparation terminée ou "
-"lorsqu'on fait la mise en colis."
 
 #. module: alc_internal_stock_quant_package
 #: model:ir.ui.view,arch_db:alc_internal_stock_quant_package.stock_quant_package_search_view
 msgid "Internal"
-msgstr "Interne"
+msgstr ""
 
 #. module: alc_internal_stock_quant_package
 #: model:ir.model.fields,field_description:alc_internal_stock_quant_package.field_stock_quant_package_is_internal
 msgid "Internal use?"
-msgstr "Usage interne?"
+msgstr ""
 
 #. module: alc_internal_stock_quant_package
 #: model:ir.model,name:alc_internal_stock_quant_package.model_stock_quant_package
 msgid "Physical Packages"
-msgstr "Colis physiques"
+msgstr ""
 
 #. module: alc_internal_stock_quant_package
 #: model:ir.model,name:alc_internal_stock_quant_package.model_stock_picking_type
 msgid "The picking type determines the picking view"
-msgstr "Le type de préparation détermine la vue de préparation"
+msgstr ""
 
 #. module: alc_internal_stock_quant_package
 #: model:ir.model,name:alc_internal_stock_quant_package.model_stock_picking
 msgid "Transfer"
-msgstr "Transfert"
+msgstr ""
+
