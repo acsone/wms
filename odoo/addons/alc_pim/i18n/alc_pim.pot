@@ -3895,8 +3895,19 @@ msgid "Procaine"
 msgstr ""
 
 #. module: alc_pim
+#: model:ir.actions.act_window,name:alc_pim.product_category_action_form_web
+#: model:ir.ui.menu,name:alc_pim.menu_product_category_is_web
+msgid "Product Categories Web"
+msgstr ""
+
+#. module: alc_pim
 #: model:ir.model,name:alc_pim.model_product_template
 msgid "Product Template"
+msgstr ""
+
+#. module: alc_pim
+#: model:ir.ui.menu,name:alc_pim.menu_product_category_is_not_web
+msgid "Products Categories"
 msgstr ""
 
 #. module: alc_pim

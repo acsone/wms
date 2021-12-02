@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* alc_pim
+# 	* alc_pim
 #
 msgid ""
 msgstr ""
@@ -10,6 +10,7 @@ msgstr ""
 "PO-Revision-Date: 2021-11-30 12:31+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -2166,8 +2167,13 @@ msgstr "Gentamicine"
 #. module: alc_pim
 #: model:attribute.attribute,help:alc_pim.attribute_packaging_ids
 #: model:ir.model.fields,help:alc_pim.attribute_packaging_ids_ir_model_fields
-msgid "Gives the different ways to package the same product. This has no impact on the picking order and is mainly used if you use the EDI module."
-msgstr "Indique les différentes façons d'emballer un même article. Ceci n'a pas d'impact sur les ordres de préparation, et sert principalement si vous activez le module d'EDI."
+msgid ""
+"Gives the different ways to package the same product. This has no impact on "
+"the picking order and is mainly used if you use the EDI module."
+msgstr ""
+"Indique les différentes façons d'emballer un même article. Ceci n'a pas "
+"d'impact sur les ordres de préparation, et sert principalement si vous "
+"activez le module d'EDI."
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.glucocortico_duemvb
@@ -2605,7 +2611,8 @@ msgstr "Référence interne"
 #: model:attribute.attribute,help:alc_pim.attribute_barcode
 #: model:ir.model.fields,help:alc_pim.attribute_barcode_ir_model_fields
 msgid "International Article Number used for product identification."
-msgstr "Numéro d'article international (IAN) utilisé pour identifier cet article."
+msgstr ""
+"Numéro d'article international (IAN) utilisé pour identifier cet article."
 
 #. module: alc_pim
 #: model:attribute.option,name:alc_pim.attribute_option_intra_uterine_toediening
@@ -4714,8 +4721,12 @@ msgstr "Thiamine"
 #. module: alc_pim
 #: model:attribute.attribute,help:alc_pim.attribute_vendor_product_code
 #: model:ir.model.fields,help:alc_pim.attribute_vendor_product_code_ir_model_fields
-msgid "This vendor's product code will be used when printing a request for quotation. Keep empty to use the internal one."
-msgstr "Le référence fournisseur de l'article sera utilisé lors de l'édition d'un devis. Laissez le champ vide si vous voulez utiliser la référence interne."
+msgid ""
+"This vendor's product code will be used when printing a request for "
+"quotation. Keep empty to use the internal one."
+msgstr ""
+"Le référence fournisseur de l'article sera utilisé lors de l'édition d'un "
+"devis. Laissez le champ vide si vous voulez utiliser la référence interne."
 
 #. module: alc_pim
 #: model:attribute.attribute,field_description:alc_pim.attribute_thread_option_id
@@ -5365,4 +5376,3 @@ msgstr "à usage transdermique contre les ecto- et endoparasites"
 #: model:product.category,name:alc_pim.a_usg_transd_ctre_endopar_apaimvb
 msgid "à usage transdermique contre les endoparasites"
 msgstr "à usage transdermique contre les endoparasites"
-
