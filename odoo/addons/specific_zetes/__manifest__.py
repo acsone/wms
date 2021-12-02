@@ -16,6 +16,7 @@
         "alc_partner_type",
         "alc_delivery_rounds_operator",
         "alc_stock_barcode_picking_type",
+        "alc_stock_quant_package_nbr",
         "delivery_rounds",
         "delivery_rounds_refill",
         "queue_job",
