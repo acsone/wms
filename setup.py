@@ -24,6 +24,7 @@ setup(
         "xlrd",
         "numpy",  # speedup pyshape
         "odoo10-addon-logging-json",
+        "elasticsearch==7.12.1",  # last release compatible with opendistro
     ],
     entry_points="""
         [console_scripts]

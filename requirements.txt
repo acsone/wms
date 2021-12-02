@@ -23,7 +23,7 @@ dicttoxml==1.7.4
 docutils==0.12
 ebaysdk==2.1.4
 ecdsa==0.14.1
-elasticsearch==7.15.0
+elasticsearch==7.12.1
 enum34==1.1.6
 feedparser==5.2.1
 funcsigs==1.0.2
