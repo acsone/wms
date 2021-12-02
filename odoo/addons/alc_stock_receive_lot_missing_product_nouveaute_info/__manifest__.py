@@ -9,7 +9,12 @@
     "version": "10.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
-    "depends": ["alc_product_is_new", "alc_product_audit", "stock_receive_lot"],
+    "depends": [
+        "alc_product_is_new",
+        "alc_product_barcode_required",
+        "alc_product_audit",
+        "stock_receive_lot",
+    ],
     "data": ["views/stock_picking.xml", "wizards/stock_pack_operation_lot_add.xml"],
     "demo": [],
 }

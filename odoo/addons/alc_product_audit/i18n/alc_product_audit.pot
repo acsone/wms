@@ -99,13 +99,6 @@ msgid "- The selected picking zone does not match the bin"
 msgstr ""
 
 #. module: alc_product_audit
-#: model:ir.model.fields,field_description:alc_product_audit.field_product_template_no_barcode_authorized
-#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_product_no_barcode_authorized
-#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_variant_no_barcode_authorized
-msgid "Barcode not required for this product"
-msgstr ""
-
-#. module: alc_product_audit
 #: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_can_be_bought_without_buy_route
 #: model:ir.model.fields,field_description:alc_product_audit.field_product_product_can_be_bought_without_buy_route
 #: model:ir.model.fields,field_description:alc_product_audit.field_product_template_can_be_bought_without_buy_route
@@ -144,15 +137,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_product_has_no_dimensions
 #: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_variant_has_no_dimensions
 msgid "Has no dimensions"
-msgstr ""
-
-#. module: alc_product_audit
-#: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_is_new
-#: model:ir.model.fields,field_description:alc_product_audit.field_product_product_is_new
-#: model:ir.model.fields,field_description:alc_product_audit.field_product_template_is_new
-#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_product_is_new
-#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_variant_is_new
-msgid "Is new"
 msgstr ""
 
 #. module: alc_product_audit
@@ -200,13 +184,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_product_mismatch_route_picking
 #: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_variant_mismatch_route_picking
 msgid "Mismatch route picking"
-msgstr ""
-
-#. module: alc_product_audit
-#: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_missing_barcode
-#: model:ir.model.fields,field_description:alc_product_audit.field_product_product_missing_barcode
-#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_variant_missing_barcode
-msgid "Missing barcode"
 msgstr ""
 
 #. module: alc_product_audit
@@ -276,20 +253,6 @@ msgstr ""
 msgid "Mto with abnormal route"
 msgstr ""
 
-#. module: alc_product_audit
-#: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_new_product_with_old_date
-#: model:ir.model.fields,field_description:alc_product_audit.field_product_product_new_product_with_old_date
-#: model:ir.model.fields,field_description:alc_product_audit.field_product_template_new_product_with_old_date
-#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_product_new_product_with_old_date
-#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_variant_new_product_with_old_date
-msgid "New product with old date"
-msgstr ""
-
-#. module: alc_product_audit
-#: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_no_barcode_authorized
-#: model:ir.model.fields,field_description:alc_product_audit.field_product_product_no_barcode_authorized
-msgid "Barcode not required"
-msgstr "Code Barre non requis"
 
 #. module: alc_product_audit
 #: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_no_dimensions_in_stock

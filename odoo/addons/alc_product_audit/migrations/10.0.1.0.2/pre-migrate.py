@@ -17,3 +17,8 @@ def migrate(cr, version):
         delete from ir_ui_view where arch_db like 'is_new'
     """
     )
+    cr.execute(
+        """
+        delete from ir_ui_view where arch_db like 'no_barcode_authorized'
+    """
+    )

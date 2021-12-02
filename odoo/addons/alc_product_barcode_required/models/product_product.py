@@ -9,6 +9,7 @@ from odoo.exceptions import ValidationError
 class ProductProduct(models.Model):
 
     _inherit = "product.product"
+
     no_barcode_authorized = fields.Boolean(
         default=False, help="Barcode not required for this product",
     )
@@ -27,7 +28,7 @@ class ProductProduct(models.Model):
                 not product.barcode and not product.no_barcode_authorized
             )
 
-    @api.constrains("barcode", "no_barcode_authorized")
+    @api.constrains("active", "is_new", "barcode", "no_barcode_authorized")
     def _check_barcode_is_mandatory(self):
         if not self.env.context.get("disable_check_barcode_constrains"):
             for product in self:

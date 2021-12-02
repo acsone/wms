@@ -25,6 +25,6 @@
         "stock_orderpoint_product",
         "stock_product_bin",
     ],
-    "data": ["views/product_product.xml", "views/product_template.xml"],
+    "data": ["views/product_template.xml"],
     "demo": [],
 }

@@ -11,11 +11,6 @@ class ProductTemplate(models.Model):
 
     _inherit = "product.template"
 
-    no_barcode_authorized = fields.Boolean(
-        "Barcode not required for this product",
-        related="product_variant_ids.no_barcode_authorized",
-    )
-
     no_min_max_no_on_command_reappro = fields.Boolean(
         default=False,
         compute="_compute_min_max_and_on_command_reappro",
@@ -117,39 +112,6 @@ class ProductTemplate(models.Model):
     has_anomaly = fields.Boolean(
         default=False, compute="_compute_has_anomaly", search="_search_has_anomaly"
     )
-
-    @api.model
-    def create(self, vals):
-        template = super(
-            ProductTemplate, self.with_context(disable_check_barcode_constrains=True)
-        ).create(vals)
-        related_vals = {}
-        if vals.get("no_barcode_authorized"):
-            related_vals["no_barcode_authorized"] = vals["no_barcode_authorized"]
-        if related_vals:
-            template.write(related_vals)
-        template.with_context(
-            disable_check_barcode_constrains=False
-        ).product_variant_ids._check_barcode_is_mandatory()
-        return template
-
-    def write(self, vals):
-        result = super(
-            ProductTemplate, self.with_context(disable_check_barcode_constrains=True)
-        ).write(vals)
-        for rec in self:
-            rec.with_context(
-                disable_check_barcode_constrains=False
-            ).product_variant_ids._check_barcode_is_mandatory()
-        return result
-
-    @api.depends("product_package_storage_type_id")
-    def _compute_is_new(self):
-        storage_type_new = self.env.ref(
-            "alc_stock_storage_type.package_st_M_M_Nouveaute"
-        )
-        for product in self:
-            product.is_new = product.product_package_storage_type_id == storage_type_new
 
     @api.depends("route_ids", "orderpoint_min", "orderpoint_max")
     def _compute_min_max_and_on_command_reappro(self):
