@@ -2,10 +2,11 @@
 # Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from .common import ProductNewCharacteristicsCommonFeatures
+
+from odoo.tests.common import SavepointCase
 
 
-class TestProductIsNew(ProductNewCharacteristicsCommonFeatures):
+class TestProductIsNew(SavepointCase):
     @classmethod
     def setUpClass(cls):
         super(TestProductIsNew, cls).setUpClass()

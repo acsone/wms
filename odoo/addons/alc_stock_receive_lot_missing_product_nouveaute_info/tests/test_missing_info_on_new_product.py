@@ -2,14 +2,12 @@
 # Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo.addons.alc_product_is_new.tests.common import (
-    ProductNewCharacteristicsCommonFeatures,
-)
+from odoo.tests.common import SavepointCase
 
 from ..exceptions import MissingBarcodeError, MissingDimensionsError, MissingWeightError
 
 
-class TestMissingInfoOnNewProduct(ProductNewCharacteristicsCommonFeatures):
+class TestMissingInfoOnNewProduct(SavepointCase):
     @classmethod
     def setUpClass(cls):
         super(TestMissingInfoOnNewProduct, cls).setUpClass()
@@ -25,25 +23,27 @@ class TestMissingInfoOnNewProduct(ProductNewCharacteristicsCommonFeatures):
         cls.StockLocation = cls.env["stock.location"]
         cls.StockPicking = cls.env["stock.picking"]
         cls.ResPartner = cls.env["res.partner"]
-        cls.p1 = cls.env["product.product"].create(
+        cls.pt1 = cls.env["product.template"].create(
             {
                 "name": "Unittest missing dimensions and barcode",
                 "uom_id": cls.env.ref("product.product_uom_unit").id,
                 "type": "product",
                 "weight": 10.0,
+                "product_package_storage_type_id": storage_type_new.id,
             }
         )
-        cls.p1.product_tmpl_id.product_package_storage_type_id = storage_type_new.id
-        cls.p2 = cls.env["product.product"].create(
+        cls.p1 = cls.pt1.product_variant_ids[0]
+        cls.pt2 = cls.env["product.template"].create(
             {
                 "name": "Unittest missing dimensions and weight",
                 "uom_id": cls.env.ref("product.product_uom_unit").id,
                 "type": "product",
                 "barcode": "123456789",
+                "product_package_storage_type_id": storage_type_new.id,
             }
         )
-        cls.p2.product_tmpl_id.product_package_storage_type_id = storage_type_new.id
-        cls.p3 = cls.env["product.product"].create(
+        cls.p2 = cls.pt2.product_variant_ids[0]
+        cls.pt3 = cls.env["product.template"].create(
             {
                 "name": "Unittest missing barcode",
                 "uom_id": cls.env.ref("product.product_uom_unit").id,
@@ -52,10 +52,11 @@ class TestMissingInfoOnNewProduct(ProductNewCharacteristicsCommonFeatures):
                 "length": 2.0,
                 "width": 4.0,
                 "height": 6.0,
+                "product_package_storage_type_id": storage_type_new.id,
             }
         )
-        cls.p3.product_tmpl_id.product_package_storage_type_id = storage_type_new.id
-        cls.p4 = cls.env["product.product"].create(
+        cls.p3 = cls.pt3.product_variant_ids[0]
+        cls.pt4 = cls.env["product.template"].create(
             {
                 "name": "Unittest missing weight",
                 "uom_id": cls.env.ref("product.product_uom_unit").id,
@@ -64,20 +65,22 @@ class TestMissingInfoOnNewProduct(ProductNewCharacteristicsCommonFeatures):
                 "width": 4.0,
                 "height": 6.0,
                 "barcode": "123456778",
+                "product_package_storage_type_id": storage_type_new.id,
             }
         )
-        cls.p4.product_tmpl_id.product_package_storage_type_id = storage_type_new.id
-        cls.p5 = cls.env["product.product"].create(
+        cls.p4 = cls.pt4.product_variant_ids[0]
+        cls.pt5 = cls.env["product.template"].create(
             {
                 "name": "Unittest missing dimensions",
                 "uom_id": cls.env.ref("product.product_uom_unit").id,
                 "type": "product",
                 "weight": 10.0,
                 "barcode": "123456723",
+                "product_package_storage_type_id": storage_type_new.id,
             }
         )
-        cls.p5.product_tmpl_id.product_package_storage_type_id = storage_type_new.id
-        cls.p6 = cls.env["product.product"].create(
+        cls.p5 = cls.pt5.product_variant_ids[0]
+        cls.pt6 = cls.env["product.template"].create(
             {
                 "name": "Unittest weight and barcode",
                 "uom_id": cls.env.ref("product.product_uom_unit").id,
@@ -85,10 +88,11 @@ class TestMissingInfoOnNewProduct(ProductNewCharacteristicsCommonFeatures):
                 "length": 2.0,
                 "width": 4.0,
                 "height": 6.0,
+                "product_package_storage_type_id": storage_type_new.id,
             }
         )
-        cls.p6.product_tmpl_id.product_package_storage_type_id = storage_type_new.id
-        cls.p7 = cls.env["product.product"].create(
+        cls.p6 = cls.pt6.product_variant_ids[0]
+        cls.pt7 = cls.env["product.template"].create(
             {
                 "name": "Unittest complete product",
                 "uom_id": cls.env.ref("product.product_uom_unit").id,
@@ -98,17 +102,20 @@ class TestMissingInfoOnNewProduct(ProductNewCharacteristicsCommonFeatures):
                 "height": 6.0,
                 "weight": 10.0,
                 "barcode": "2345678910",
+                "product_package_storage_type_id": storage_type_new.id,
             }
         )
-        cls.p7.product_tmpl_id.product_package_storage_type_id = storage_type_new.id
-        cls.p8 = cls.env["product.product"].create(
+        cls.p7 = cls.pt7.product_variant_ids[0]
+        cls.pt8 = cls.env["product.template"].create(
             {
                 "name": "Unittest not new product",
                 "uom_id": cls.env.ref("product.product_uom_unit").id,
                 "type": "product",
                 "weight": 10.0,
+                "product_package_storage_type_id": storage_type_new.id,
             }
         )
+        cls.p8 = cls.pt8.product_variant_ids[0]
         cls.products = [cls.p1, cls.p2, cls.p3, cls.p4, cls.p5, cls.p6, cls.p7, cls.p8]
         cls.supplier = cls.ResPartner.create(
             {"name": "Unittest supplier", "ref": "839737475756467"}
