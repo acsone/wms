@@ -2,14 +2,14 @@
 # Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo.addons.alc_product_audit.tests.common import (
-    ProductCharacteristicsCommonFeatures,
+from odoo.addons.alc_product_is_new.tests.common import (
+    ProductNewCharacteristicsCommonFeatures,
 )
 
 from ..exceptions import MissingBarcodeError, MissingDimensionsError, MissingWeightError
 
 
-class TestMissingInfoOnNewProduct(ProductCharacteristicsCommonFeatures):
+class TestMissingInfoOnNewProduct(ProductNewCharacteristicsCommonFeatures):
     @classmethod
     def setUpClass(cls):
         super(TestMissingInfoOnNewProduct, cls).setUpClass()

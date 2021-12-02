@@ -85,11 +85,6 @@
           domain="[('mto_stock_5_days', '=', True)]"
         />
         <filter
-          name="filter_new_product_with_old_date"
-          string="Product is categorized as 'new' but is older than a month"
-          domain="[('new_product_with_old_date', '=', True)]"
-        />
-        <filter
           name="filter_not_sold_on_website"
           string="Product is not sold anymore but still on website"
           domain="[('not_sold_on_website', '=', True)]"
@@ -147,7 +142,6 @@
         <field name="mto_stock_5_days" invisible="1" />
         <field name="no_dimensions_in_stock" invisible="1" />
         <field name="dimensions_in_stock" invisible="1" />
-        <field name="new_product_with_old_date" invisible="1" />
       </form>
       <header position="after">
         <div
@@ -225,11 +219,6 @@
             attrs="{'invisible': [('no_dimensions_in_stock', '=', False)]}"
           >
             <p>- Product without dimensions in stock</p>
-          </div>
-                    <div
-            attrs="{'invisible': [('new_product_with_old_date', '=', False)]}"
-          >
-            <p>- Product has the storage type 'new' but is older than a month</p>
           </div>
         </div>
       </header>

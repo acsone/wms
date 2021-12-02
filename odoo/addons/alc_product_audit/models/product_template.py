@@ -11,8 +11,6 @@ class ProductTemplate(models.Model):
 
     _inherit = "product.template"
 
-    is_new = fields.Boolean(default=False, store=True, compute="_compute_is_new")
-
     no_barcode_authorized = fields.Boolean(
         "Barcode not required for this product",
         related="product_variant_ids.no_barcode_authorized",
@@ -114,12 +112,6 @@ class ProductTemplate(models.Model):
         default=False,
         compute="_compute_dimensions_in_stock",
         search="_search_dimensions_in_stock",
-    )
-
-    new_product_with_old_date = fields.Boolean(
-        default=False,
-        compute="_compute_new_product_with_old_date",
-        search="_search_new_product_with_old_date",
     )
 
     has_anomaly = fields.Boolean(
@@ -584,35 +576,6 @@ class ProductTemplate(models.Model):
         ids = self._get_product_dimensions_in_stock(no_dimensions=False)
         return [("id", "in", ids)]
 
-    def _get_new_products_older_than_a_month(self):
-        ids = []
-        current_ids = self._get_current_ids()
-        self.env.cr.execute(
-            """
-            SELECT DISTINCT pt.id
-                FROM
-                        product_template pt
-                WHERE
-                        pt.is_new
-                    AND pt.create_date < NOW() - '1 month'::interval
-                %(ids)s
-            """,
-            {"ids": current_ids},
-        )
-        result = self.env.cr.fetchall()
-        ids = [r[0] for r in result]
-        return ids
-
-    @api.depends("is_new")
-    def _compute_new_product_with_old_date(self):
-        ids_new_products_old_date = set(self._get_new_products_older_than_a_month())
-        for product in self:
-            product.new_product_with_old_date = product.id in ids_new_products_old_date
-
-    def _search_new_product_with_old_date(self, operator, value):
-        ids = self._get_new_products_older_than_a_month()
-        return [("id", "in", ids)]
-
     def _get_anomaly_fields(self):
         return [
             "mismatch_route_picking",
@@ -631,7 +594,6 @@ class ProductTemplate(models.Model):
             "not_sold_on_website",
             "mto_stock_5_days",
             "no_dimensions_in_stock",
-            "new_product_with_old_date",
         ]
 
     @api.depends(
@@ -651,7 +613,6 @@ class ProductTemplate(models.Model):
         "not_sold_on_website",
         "mto_stock_5_days",
         "no_dimensions_in_stock",
-        "new_product_with_old_date",
     )
     def _compute_has_anomaly(self):
         anomalies = self._get_anomaly_fields()
