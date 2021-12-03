@@ -158,6 +158,11 @@ const ClusterPicking = {
       initial_state_key: "start",
       scan_destination_qty: 0,
       states: {
+        init: {
+          enter: () => {
+            this.wait_call(this.odoo.call("find_existing_batch"));
+          },
+        },
         start: {
           on_get_work: evt => {
             this.wait_call(this.odoo.call("find_batch"));

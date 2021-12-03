@@ -206,6 +206,11 @@ const LocationContentTransfer = {
       initial_state_key: "start",
       scan_destination_qty: 0,
       states: {
+        init: {
+          enter: () => {
+            this.wait_call(this.odoo.call("start_or_recover"));
+          },
+        },
         start: {
           on_get_work: evt => {
             this.wait_call(this.odoo.call("start_or_recover"));

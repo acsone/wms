@@ -18,6 +18,13 @@ class ClusterPicking(Component):
 
     _advisory_lock_name = "shopfloor_batch_picking_create"
 
+    def find_existing_batch(self):
+        batches = self._batch_picking_search()
+        if batches:
+            selected = self._select_a_picking_batch(batches)
+            return self._response_for_confirm_start(selected)
+        return self._response_for_start()
+
     def _select_a_picking_batch(self, batches):
         batch = super(ClusterPicking, self)._select_a_picking_batch(batches)
         if not batch and self.work.menu.batch_create:
@@ -79,3 +86,21 @@ class ClusterPicking(Component):
         _logger.info(
             "lock acquired to create a picking batch (%s)", self.env.user.login
         )
+
+
+class ShopfloorClusterPickingValidatorResponse(Component):
+    """Validators for the Cluster Picking endpoints responses"""
+
+    _inherit = "shopfloor.cluster_picking.validator.response"
+
+    def find_existing_batch(self):
+        return self._response_schema(next_states={"start", "confirm_start"})
+
+
+class ShopfloorClusterPickingValidator(Component):
+    """Validators for the Cluster Picking endpoints"""
+
+    _inherit = "shopfloor.cluster_picking.validator"
+
+    def find_existing_batch(self):
+        return {}
