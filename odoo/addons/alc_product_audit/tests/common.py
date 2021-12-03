@@ -119,7 +119,6 @@ class ProductCharacteristicsCommonFeatures(SavepointCase):
                 "sale_ok": True,
                 "uom_id": cls.env.ref("product.product_uom_unit").id,
                 "type": "product",
-                "barcode": "XXX0002",
                 "default_code": "678911",
             }
         )

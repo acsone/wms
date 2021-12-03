@@ -23,7 +23,6 @@ class TestRestockingExcludeNotSalable(SavepointCase):
                 "type": "product",
                 "sale_ok": True,
                 "active": False,
-                "barcode": "YYY0001",
             }
         )
         cls.product_2 = cls.env["product.product"].create(
@@ -33,7 +32,6 @@ class TestRestockingExcludeNotSalable(SavepointCase):
                 "type": "product",
                 "sale_ok": True,
                 "active": True,
-                "barcode": "YYY0002",
             }
         )
 
@@ -44,7 +42,6 @@ class TestRestockingExcludeNotSalable(SavepointCase):
                 "type": "product",
                 "sale_ok": False,
                 "active": True,
-                "barcode": "YYY0003",
             }
         )
 

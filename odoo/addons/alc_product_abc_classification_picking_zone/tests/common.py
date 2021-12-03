@@ -89,7 +89,6 @@ class AclAbcClassificationProfilePickingZoneBase(common.ABCClassificationLevelCa
                 "weight": 10.0,
                 "route_ids": [(6, 0, cls.route_aliment.ids)],
                 "sale_ok": True,
-                "barcode": "CCC0001",
             }
         )
         cls.product_medoc = cls.env["product.product"].create(
@@ -100,7 +99,6 @@ class AclAbcClassificationProfilePickingZoneBase(common.ABCClassificationLevelCa
                 "weight": 20.0,
                 "route_ids": [(6, 0, cls.route_medoc.ids)],
                 "sale_ok": True,
-                "barcode": "CCC0002",
             }
         )
         cls.product_medoc_mto = cls.env["product.product"].create(
@@ -111,7 +109,6 @@ class AclAbcClassificationProfilePickingZoneBase(common.ABCClassificationLevelCa
                 "weight": 20.0,
                 "route_ids": [(6, 0, [cls.route_medoc.id, cls.route_mto.id])],
                 "sale_ok": True,
-                "barcode": "CCC0003",
             }
         )
         cls.no_route_product = cls.env["product.product"].create(
@@ -121,6 +118,5 @@ class AclAbcClassificationProfilePickingZoneBase(common.ABCClassificationLevelCa
                 "type": "product",
                 "weight": 10.0,
                 "sale_ok": True,
-                "barcode": "CCC0004",
             }
         )

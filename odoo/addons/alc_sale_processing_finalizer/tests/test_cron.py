@@ -35,7 +35,6 @@ class TestCron(TransactionCase):
                 "uom_id": self.env.ref("product.product_uom_unit").id,
                 "type": "product",
                 "weight": 10.0,
-                "barcode": "DDD0001",
             }
         )
         self.p2 = self.env["product.product"].create(
@@ -44,7 +43,6 @@ class TestCron(TransactionCase):
                 "uom_id": self.env.ref("product.product_uom_unit").id,
                 "type": "product",
                 "weight": 20.0,
-                "barcode": "DDD0002",
             }
         )
 

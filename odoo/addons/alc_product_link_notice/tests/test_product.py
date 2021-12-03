@@ -16,12 +16,7 @@ class TestProduct(SavepointCase):
         cls.env["ir.translation"].load_module_terms(["base"], [cls.lang.code])
 
     def test_flow(self):
-        vals_product = {
-            "name": "P",
-            "barcode": "DDD0001",
-            "link_info": "not_a_link",
-            "type": "consu",
-        }
+        vals_product = {"name": "P", "link_info": "not_a_link", "type": "consu"}
         product = self.env["product.template"].create(vals_product)
         self.assertEqual(product.links_offline, "link_info")
 

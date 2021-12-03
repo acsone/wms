@@ -52,7 +52,6 @@ class TestComparator(SavepointCase):
                 "uom_id": cls.env.ref("product.product_uom_unit").id,
                 "type": "product",
                 "weight": 10.0,
-                "barcode": "CCC0001",
             }
         )
         cls.p2 = cls.env["product.product"].create(
@@ -61,7 +60,6 @@ class TestComparator(SavepointCase):
                 "uom_id": cls.env.ref("product.product_uom_unit").id,
                 "type": "product",
                 "weight": 20.0,
-                "barcode": "CCC0002",
             }
         )
 

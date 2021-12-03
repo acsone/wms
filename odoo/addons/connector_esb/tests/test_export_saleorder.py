@@ -386,7 +386,6 @@ class ExportSaleOrderTestCase(SavepointCase):
         product = self.env["product.template"].create(
             {
                 "name": "Unittest P1",
-                "barcode": "DDD0001",
                 "uom_id": self.env.ref("product.product_uom_unit").id,
                 "type": "product",
             }

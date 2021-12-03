@@ -61,7 +61,6 @@ class WSCreateSaleOrderTestCase(SavepointCase):
                 "default_code": "0001",
                 "cnk_code": "00999",
                 "list_price": 10.0,
-                "barcode": "HHH00001",
             }
         )
         cls.delivery_1 = cls.env["delivery.carrier"].create(

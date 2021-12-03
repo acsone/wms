@@ -7,8 +7,14 @@
         <field name="model">product.product</field>
         <field name="inherit_id" ref="product.product_normal_form_view" />
         <field name="arch" type="xml">
+            <field name="barcode" position="attributes">
+                <attribute
+          name="attrs"
+        >{'required': [('is_new', '=', False), ('no_barcode_authorized', '=', False)]}</attribute>
+            </field>
             <field name="barcode" position="after">
                 <field name="no_barcode_authorized" />
+                <field name="is_new" invisible="1" />
             </field>
         </field>
     </record>

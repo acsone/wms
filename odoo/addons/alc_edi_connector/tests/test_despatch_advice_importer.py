@@ -145,7 +145,6 @@ class TestUblDespatchAdviceImporter(AlcEdiConnectorCase):
         self.product_3 = self.env["product.product"].create(
             {
                 "name": "Product 1",
-                "barcode": "BBB0003",
                 "seller_ids": [
                     (0, 0, {"name": self.supplier.id, "product_code": "P3"})
                 ],
@@ -154,7 +153,6 @@ class TestUblDespatchAdviceImporter(AlcEdiConnectorCase):
         self.product_4 = self.env["product.product"].create(
             {
                 "name": "Product 2",
-                "barcode": "BBB0004",
                 "seller_ids": [
                     (0, 0, {"name": self.supplier.id, "product_code": "P4"})
                 ],

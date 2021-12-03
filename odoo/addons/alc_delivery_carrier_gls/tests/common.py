@@ -70,7 +70,6 @@ class GLSCommonFeatures(SavepointCase):
                 "uom_id": cls.env.ref("product.product_uom_unit").id,
                 "type": "product",
                 "weight": 10.0,
-                "barcode": "AAA0003",
             }
         )
         cls.p2 = cls.env["product.product"].create(
@@ -79,7 +78,6 @@ class GLSCommonFeatures(SavepointCase):
                 "uom_id": cls.env.ref("product.product_uom_unit").id,
                 "type": "product",
                 "weight": 20.0,
-                "barcode": "AAA0004",
             }
         )
         cls.p3 = cls.env["product.product"].create(
@@ -88,7 +86,6 @@ class GLSCommonFeatures(SavepointCase):
                 "uom_id": cls.env.ref("product.product_uom_unit").id,
                 "type": "product",
                 "weight": 30.0,
-                "barcode": "AAA0005",
             }
         )
 
@@ -98,7 +95,6 @@ class GLSCommonFeatures(SavepointCase):
                 "uom_id": cls.env.ref("product.product_uom_unit").id,
                 "type": "product",
                 "weight": 40.0,
-                "barcode": "AAA0006",
             }
         )
 

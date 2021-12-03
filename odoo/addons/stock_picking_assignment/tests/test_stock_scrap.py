@@ -18,7 +18,6 @@ class TestStockScrap(SavepointCase):
             {
                 "type": "product",
                 "name": "Stockable Product",
-                "barcode": "MMM00001",
                 "uom_id": cls.env.ref("product.product_uom_unit").id,
                 "uom_po_id": cls.env.ref("product.product_uom_unit").id,
             }

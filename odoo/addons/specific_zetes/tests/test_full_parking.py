@@ -43,7 +43,6 @@ class TestFullParking(ZetesParkingTest):
                 "default_code": "587502",
                 "categ_id": self.product_categ_medoc.id,
                 "tracking": "none",
-                "barcode": "LLL00001",
                 "list_price": 5,
                 "type": "product",
                 "stock_bin_ids": [

@@ -33,7 +33,6 @@ class TestProductPriceImport(SavepointCase):
                 "list_price": 11.0,
                 "indicated_price": 13.75,
                 "default_code": "P01",
-                "barcode": "JJJJ00001",
             }
         )
 

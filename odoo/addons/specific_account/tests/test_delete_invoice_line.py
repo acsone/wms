@@ -21,11 +21,7 @@ class TestDeleteInvoiceLine(SavepointCase):
             }
         )
         cls.p1 = cls.env["product.product"].create(
-            {
-                "name": "Unittest P1",
-                "barcode": "JJJJ00001",
-                "taxes_id": [(6, False, [cls.tax.id])],
-            }
+            {"name": "Unittest P1", "taxes_id": [(6, False, [cls.tax.id])]}
         )
         cls.partner = cls.env["res.partner"].create(
             {"name": "Unittest partner", "ref": "84023435243"}

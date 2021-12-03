@@ -184,7 +184,6 @@ class ZetesTest(SavepointCase):
             {
                 "name": "Test medoc 1",
                 "default_code": "1234567",
-                "barcode": "LLL00001",
                 "categ_id": cls.product_categ_medoc.id,
                 "tracking": "lot",
                 "list_price": 100,

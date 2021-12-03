@@ -16,7 +16,6 @@ class TestReservation(TransactionCase):
                 "uom_id": self.env.ref("product.product_uom_unit").id,
                 "uom_po_id": self.env.ref("product.product_uom_unit").id,
                 "default_code": "Code product sale_procurement",
-                "barcode": "III00003",
             }
         )
 

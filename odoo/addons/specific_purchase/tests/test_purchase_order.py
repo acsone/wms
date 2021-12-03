@@ -18,9 +18,7 @@ class TestPurchaseOrder(SavepointCase):
 
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
         cls.supplier = cls.env.ref("base.res_partner_12")
-        cls.product = cls.env["product.product"].create(
-            {"name": "Product 1", "barcode": "KKK00001"}
-        )
+        cls.product = cls.env["product.product"].create({"name": "Product 1"})
         cls.route_mto = cls.env.ref("stock.route_warehouse0_mto")
         cls.route_buy = cls.env.ref("purchase.route_warehouse0_buy")
         cls.route_mto_mts = cls.env.ref("stock_mts_mto_rule.route_mto_mts")

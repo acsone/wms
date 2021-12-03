@@ -17,7 +17,6 @@ class AlcABCClassificationLevelCase(common.ABCClassificationLevelCase):
                 "uom_id": cls.env.ref("product.product_uom_unit").id,
                 "type": "product",
                 "weight": 10.0,
-                "barcode": "CCC0001",
             }
         )
         # force profile using SQL to avoid trouble if tests are ran with

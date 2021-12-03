@@ -82,7 +82,6 @@ class TestStockDeliveryNoteGetMoves(SavepointCase):
             {
                 "name": "Unittest P1",
                 "default_code": "5173360",
-                "barcode": "MMM00001",
                 "uom_id": cls.env.ref("product.product_uom_unit").id,
                 "type": "consu",
             }
@@ -90,7 +89,6 @@ class TestStockDeliveryNoteGetMoves(SavepointCase):
         cls.p2 = cls.env["product.product"].create(
             {
                 "name": "Unittest P2",
-                "barcode": "MMM00002",
                 "uom_id": cls.env.ref("product.product_uom_unit").id,
                 "type": "product",
             }
@@ -98,7 +96,6 @@ class TestStockDeliveryNoteGetMoves(SavepointCase):
         cls.p3 = cls.env["product.product"].create(
             {
                 "name": "Unittest P3",
-                "barcode": "MMM00003",
                 "uom_id": cls.env.ref("product.product_uom_unit").id,
                 "type": "product",
             }

@@ -37,7 +37,6 @@ class TestStockMove(SavepointCase):
                 "list_price": 20,
                 "uom_id": cls.env.ref("product.product_uom_unit").id,
                 "type": "product",
-                "barcode": "DDD0001",
             }
         )
 
@@ -64,7 +63,6 @@ class TestStockMove(SavepointCase):
                 "uom_id": cls.env.ref("product.product_uom_unit").id,
                 "ratio_main_product": 1,
                 "ratio_additional_product": 1,
-                "barcode": "DDD0002",
             }
         )
 

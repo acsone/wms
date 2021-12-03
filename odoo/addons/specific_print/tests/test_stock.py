@@ -24,7 +24,6 @@ class TestStock(SavepointCase):
                 "uom_po_id": cls.env.ref("product.product_uom_unit").id,
                 "default_code": "TOR1",
                 "tracking": "none",
-                "barcode": "JJJJ00001",
             }
         )
         wh = cls.env["stock.warehouse"].search([])

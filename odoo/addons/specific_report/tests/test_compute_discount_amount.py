@@ -24,11 +24,7 @@ class TestComputeDiscountAmount(TransactionCase):
         )
 
         self.p1 = self.env["product.product"].create(
-            {
-                "name": "Unittest P1",
-                "barcode": "KKK00001",
-                "taxes_id": [(6, False, [self.tax1.id])],
-            }
+            {"name": "Unittest P1", "taxes_id": [(6, False, [self.tax1.id])]}
         )
 
         self.partner = self.env["res.partner"].create(

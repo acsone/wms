@@ -41,7 +41,6 @@ class DeliveryRoundTestCase(SavepointCase):
                 "uom_id": cls.env.ref("product.product_uom_unit").id,
                 "type": "product",
                 "weight": 10.0,
-                "barcode": "III00001",
             }
         )
         cls.p2 = cls.env["product.product"].create(
@@ -50,7 +49,6 @@ class DeliveryRoundTestCase(SavepointCase):
                 "uom_id": cls.env.ref("product.product_uom_unit").id,
                 "type": "product",
                 "weight": 20.0,
-                "barcode": "III00002",
             }
         )
 

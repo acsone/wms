@@ -18,7 +18,6 @@ class TestRefillReport(TestDeliveryRound):
         cls.p3 = cls.env["product.product"].create(
             {
                 "name": "Unittest P3",
-                "barcode": "MMM00001",
                 "uom_id": cls.env.ref("product.product_uom_unit").id,
                 "type": "product",
                 "weight": 20.0,

@@ -16,21 +16,18 @@ class TestSaleOrderException(SavepointCase):
         cls.prod_food = cls.env["product.product"].create(
             {
                 "name": "I am some food, yam",
-                "barcode": "KKK00001",
                 "categ_id": cls.env.ref("specific_data.product_categ_ali_divers").id,
             }
         )
         cls.prod_stup = cls.env["product.product"].create(
             {
                 "name": "I am a stupefiant",
-                "barcode": "KKK00002",
                 "categ_id": cls.env.ref("specific_data.product_categ_stupefiant").id,
             }
         )
         cls.prod_matos = cls.env["product.product"].create(
             {
                 "name": "I am some gear",
-                "barcode": "KKK00003",
                 "categ_id": cls.env.ref(
                     "specific_data.product_categ_mat_instrumentation"
                 ).id,
@@ -39,28 +36,24 @@ class TestSaleOrderException(SavepointCase):
         cls.prod_medoc_pharma = cls.env["product.product"].create(
             {
                 "name": "I am  a medoc pharmacy",
-                "barcode": "KKK00004",
                 "categ_id": cls.env.ref("specific_data.product_categ_parapharmacie").id,
             }
         )
         cls.prod_medoc_human = cls.env["product.product"].create(
             {
                 "name": "I am a human medoc",
-                "barcode": "KKK00005",
                 "categ_id": cls.env.ref("specific_data.product_categ_humain").id,
             }
         )
         cls.prod_medoc_vet_belge = cls.env["product.product"].create(
             {
                 "name": "I am a beligum veterinarian product",
-                "barcode": "KKK00006",
                 "categ_id": cls.env.ref("specific_data.product_categ_vet_belges").id,
             }
         )
         cls.prod_medoc_belge_only = cls.env["product.product"].create(
             {
                 "name": "I am a beligum medoc only",
-                "barcode": "KKK00007",
                 "categ_id": cls.env.ref("specific_data.product_categ_parapharmacie").id,
                 "belgium_only": True,
             }
@@ -68,7 +61,6 @@ class TestSaleOrderException(SavepointCase):
         cls.prod_vet_only = cls.env["product.product"].create(
             {
                 "name": "I am for veterinary only",
-                "barcode": "KKK00008",
                 "categ_id": cls.env.ref("specific_data.product_categ_ali_divers").id,
                 "veterinary_only": True,
             }
@@ -76,7 +68,6 @@ class TestSaleOrderException(SavepointCase):
         cls.prod_psycho_III = cls.env["product.product"].create(
             {
                 "name": "I am a medoc belge Psychotropes III",
-                "barcode": "KKK00009",
                 "categ_id": cls.env.ref(
                     "specific_data.product_categ_psychotropes_25"
                 ).id,
@@ -85,7 +76,6 @@ class TestSaleOrderException(SavepointCase):
         cls.prod_stupefiant_vet = cls.env["product.product"].create(
             {
                 "name": "I am a Stupéfiant VET",
-                "barcode": "KKK000010",
                 "categ_id": cls.env.ref(
                     "specific_data.product_categ_stupefiant_vet"
                 ).id,
@@ -94,19 +84,17 @@ class TestSaleOrderException(SavepointCase):
         cls.prod_medoc = cls.env["product.product"].create(
             {
                 "name": "Base medicine category",
-                "barcode": "KKK000011",
                 "categ_id": cls.env.ref("specific_data.product_categ_medoc").id,
             }
         )
         cls.prod_cascade_import = cls.env["product.product"].create(
             {
                 "name": "I am a cascade import product",
-                "barcode": "KKK000012",
                 "categ_id": cls.env.ref("specific_data.product_categ_importation").id,
             }
         )
         cls.prod_provision_on_sale = cls.env["product.product"].create(
-            {"name": "product provision on sale", "barcode": "KKK000013"}
+            {"name": "product provision on sale"}
         )
         cls.prod_provision_on_sale.route_ids = [
             (4, cls.env.ref("stock.route_warehouse0_mto").id, False)

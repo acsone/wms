@@ -38,7 +38,6 @@ class TestPricelistDiscount(SavepointCase):
         cls.p1 = cls.env["product.product"].create(
             {
                 "name": "Unittest P1",
-                "barcode": "III00002",
                 "taxes_id": [(6, False, [cls.tax.id])],
                 "seller_ids": [(6, 0, [cls.supplierinfo1.id])],
             }
@@ -51,7 +50,6 @@ class TestPricelistDiscount(SavepointCase):
         cls.p2 = cls.env["product.product"].create(
             {
                 "name": "Unittest P2",
-                "barcode": "III00003",
                 "categ_id": cls.category.id,
                 "taxes_id": [(6, False, [cls.tax.id])],
                 "seller_ids": [(6, 0, [cls.supplierinfo2.id])],

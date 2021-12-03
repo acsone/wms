@@ -27,7 +27,6 @@ class WSSaleOrderStatusTestCase(SavepointCase):
                 "cnk_code": "000015",
                 "sale_ok": True,
                 "type": "product",
-                "barcode": "III00001",
             }
         )
 
@@ -38,7 +37,6 @@ class WSSaleOrderStatusTestCase(SavepointCase):
                 "cnk_code": "000062",
                 "sale_ok": True,
                 "type": "product",
-                "barcode": "III00002",
             }
         )
 

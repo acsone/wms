@@ -18,7 +18,6 @@ class BaseCase(TransactionCase):
                 "uom_po_id": self.env.ref("product.product_uom_unit").id,
                 "default_code": "TOR1",
                 "tracking": "lot",
-                "barcode": "LLL00006",
             }
         )
         self.product_1_lotA = self.env["stock.production.lot"].create(
@@ -34,7 +33,6 @@ class BaseCase(TransactionCase):
                 "uom_id": self.env.ref("product.product_uom_unit").id,
                 "uom_po_id": self.env.ref("product.product_uom_unit").id,
                 "default_code": "TOR1ADD",
-                "barcode": "LLL00001",
             }
         )
         self.product_1.write(
@@ -51,7 +49,6 @@ class BaseCase(TransactionCase):
                 "uom_id": self.env.ref("product.product_uom_unit").id,
                 "uom_po_id": self.env.ref("product.product_uom_unit").id,
                 "default_code": "TOR2",
-                "barcode": "LLL00002",
             }
         )
 

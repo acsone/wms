@@ -22,7 +22,6 @@ class TestDateAnnounced(SavepointCase):
                 "list_price": 20,
                 "uom_id": cls.env.ref("product.product_uom_unit").id,
                 "type": "product",
-                "barcode": "DDD0001",
             }
         )
         cls.product2 = cls.env["product.product"].create(
@@ -33,7 +32,6 @@ class TestDateAnnounced(SavepointCase):
                 "list_price": 20,
                 "uom_id": cls.env.ref("product.product_uom_unit").id,
                 "type": "product",
-                "barcode": "DDD0002",
             }
         )
         cls.po = cls.env["purchase.order"].create(

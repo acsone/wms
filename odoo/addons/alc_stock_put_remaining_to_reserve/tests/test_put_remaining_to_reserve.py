@@ -17,7 +17,6 @@ class TestPutRemainingToReserve(SavepointCase):
                 "list_price": 20,
                 "uom_id": cls.env.ref("product.product_uom_unit").id,
                 "type": "product",
-                "barcode": "FFF00001",
             }
         )
 
@@ -29,7 +28,6 @@ class TestPutRemainingToReserve(SavepointCase):
                 "list_price": 20,
                 "uom_id": cls.env.ref("product.product_uom_unit").id,
                 "type": "product",
-                "barcode": "FFF00002",
             }
         )
 

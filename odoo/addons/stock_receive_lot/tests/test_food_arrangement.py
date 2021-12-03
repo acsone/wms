@@ -17,13 +17,11 @@ class TestFoodArrangement(SavepointCase):
                 "name": "Unittest Reception P1",
                 "uom_id": cls.env.ref("product.product_uom_unit").id,
                 "tracking": "lot",
-                "barcode": "MMM00002",
             }
         )
         cls.product2 = cls.env["product.product"].create(
             {
                 "name": "Unittest Reception P2",
-                "barcode": "MMM00001",
                 "uom_id": cls.env.ref("product.product_uom_unit").id,
                 "tracking": "lot",
             }

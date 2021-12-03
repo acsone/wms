@@ -28,7 +28,6 @@ class SaleProcurementMTSMTOTestCase(SavepointCase):
         cls.p1_mts = cls.env["product.product"].create(
             {
                 "name": "Unittest P1 MTS",
-                "barcode": "MMM00001",
                 "uom_id": cls.env.ref("product.product_uom_unit").id,
                 "type": "product",
                 "weight": 10.0,
@@ -43,7 +42,6 @@ class SaleProcurementMTSMTOTestCase(SavepointCase):
         cls.p2_mto = cls.env["product.product"].create(
             {
                 "name": "Unittest P2 MTO",
-                "barcode": "MMM00002",
                 "uom_id": cls.env.ref("product.product_uom_unit").id,
                 "type": "product",
                 "weight": 20.0,

@@ -28,7 +28,6 @@ class TestStockReturnPicking(SavepointCase):
                 "uom_id": cls.env.ref("product.product_uom_unit").id,
                 "uom_po_id": cls.env.ref("product.product_uom_unit").id,
                 "default_code": "TOR1",
-                "barcode": "LLL00001",
             }
         )
         wh = cls.env["stock.warehouse"].search([])

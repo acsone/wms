@@ -29,7 +29,6 @@ class ExportProductPriceTestCase(ESBXMLTestCase):
                 "list_price": "12.7",
                 "type": "product",
                 "sale_ok": True,
-                "barcode": "GGG00001",
             }
         )
         self.p1.indicated_price = 0
@@ -40,7 +39,6 @@ class ExportProductPriceTestCase(ESBXMLTestCase):
                 "list_price": "82.7",
                 "type": "product",
                 "sale_ok": True,
-                "barcode": "GGG00002",
             }
         )
         self.p2.indicated_price = 12

@@ -47,9 +47,7 @@ class TestLotChecksum(TransactionCase):
             }
         )
 
-        self.product = self.env["product.product"].create(
-            {"name": "Test", "barcode": "LLL00006"}
-        )
+        self.product = self.env["product.product"].create({"name": "Test"})
         self.product.stock_bin_ids.create(
             {
                 "location_id": self.location_pa11.id,
@@ -65,9 +63,7 @@ class TestLotChecksum(TransactionCase):
             }
         )
 
-        self.product_2 = self.env["product.product"].create(
-            {"name": "Test 2", "barcode": "LLL00001"}
-        )
+        self.product_2 = self.env["product.product"].create({"name": "Test 2"})
         self.product_2.stock_bin_ids.create(
             {
                 "location_id": self.location_pe11.id,

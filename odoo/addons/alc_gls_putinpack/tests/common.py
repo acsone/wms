@@ -10,12 +10,7 @@ class TestGLSWizard(TestGLS):
     def setUpClass(cls):
         super(TestGLSWizard, cls).setUpClass()
 
-        vals_product_2 = {
-            "name": "product2",
-            "type": "product",
-            "weight": 1,
-            "barcode": "BBB0001",
-        }
+        vals_product_2 = {"name": "product2", "type": "product", "weight": 1}
         cls.product_2 = cls.env["product.product"].create(vals_product_2)
         vals_order_line_2 = {
             "name": "Line Description",

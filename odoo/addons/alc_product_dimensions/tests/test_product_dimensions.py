@@ -18,7 +18,6 @@ class TestProductDimensions(SavepointCase):
                 "height": 3.0,
                 "uom_id": cls.env.ref("product.product_uom_unit").id,
                 "type": "consu",
-                "barcode": "CCC0001",
             }
         )
 
@@ -31,7 +30,6 @@ class TestProductDimensions(SavepointCase):
                 "length": 10.0,
                 "width": 5.0,
                 "height": 3.0,
-                "barcode": "DDD0001",
                 "uom_id": cls.env.ref("product.product_uom_unit").id,
             }
         )

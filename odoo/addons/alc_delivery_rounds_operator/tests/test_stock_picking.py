@@ -42,7 +42,6 @@ class TestStockPicking(common.SavepointCase):
                 "uom_id": cls.env.ref("product.product_uom_unit").id,
                 "type": "product",
                 "weight": 10.0,
-                "barcode": "BBB0001",
             }
         )
         warehouse = cls.warehouse_1
