@@ -149,6 +149,7 @@ IMGS = {"img", "img_2", "img_3", "img_4", "img_5"}
 
 def process_imgs_fields(root, rd, product):
     existing_images = product.mapped("image_ids.image_id.name")  # slow? SQL needed?
+    existing_images += ["Proposition pharmacie.jpg"]  # the standard placeholder
     return [
         os.path.join(root, rd[img])
         for img in IMGS
