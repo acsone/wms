@@ -1,0 +1,28 @@
+# -*- coding: utf-8 -*-
+# Copyright 2021 ACSONE SA/NV
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+from odoo import _
+
+from odoo.addons.component.core import Component
+
+
+class MessageAction(Component):
+    _inherit = "shopfloor.message.action"
+
+    def stock_picking_already_packed(self, picking):
+        return {
+            "message_type": "warning",
+            "body": _(u"Transfer {} already packed.").format(picking.name),
+        }
+
+    def nbr_packages_must_be_greated_than_zero(self):
+        return {
+            "message_type": "error",
+            "body": _("The number of packages must be greater than 0."),
+        }
+
+    def notable_to_put_in_pack(self, picking):
+        return {
+            "message_type": "error",
+            "body": _(u"Not able to put in pack transfer {}.").format(picking.name),
+        }
