@@ -169,15 +169,3 @@ class TestProductTemplate(ProductCharacteristicsCommonFeatures):
 
         self.product_template1._compute_mto_stock_new_route()
         self.assertTrue(self.product_template1.mto_stock_new_route)
-
-    def test_16(self):
-        "product is new"
-        self.assertTrue(self.product_template2.is_new)
-
-    def test_17(self):
-        "product is not new"
-        storage_type_etagere = self.env.ref(
-            "alc_stock_storage_type.package_st_M_M_Etagere_Large_A"
-        )
-        self.product_template2.product_package_storage_type_id = storage_type_etagere.id
-        self.assertFalse(self.product_template2.is_new)

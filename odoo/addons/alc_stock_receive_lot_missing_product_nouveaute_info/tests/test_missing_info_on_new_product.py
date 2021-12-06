@@ -2,14 +2,12 @@
 # Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo.addons.alc_product_audit.tests.common import (
-    ProductCharacteristicsCommonFeatures,
-)
+from odoo.tests.common import SavepointCase
 
 from ..exceptions import MissingBarcodeError, MissingDimensionsError, MissingWeightError
 
 
-class TestMissingInfoOnNewProduct(ProductCharacteristicsCommonFeatures):
+class TestMissingInfoOnNewProduct(SavepointCase):
     @classmethod
     def setUpClass(cls):
         super(TestMissingInfoOnNewProduct, cls).setUpClass()
@@ -19,6 +17,151 @@ class TestMissingInfoOnNewProduct(ProductCharacteristicsCommonFeatures):
                 cls.env.context, tracking_disable=True, test_queue_job_no_delay=True
             )
         )
+        storage_type_new = cls.env.ref(
+            "alc_stock_storage_type.package_st_M_M_Nouveaute"
+        )
+        cls.StockLocation = cls.env["stock.location"]
+        cls.StockPicking = cls.env["stock.picking"]
+        cls.ResPartner = cls.env["res.partner"]
+        cls.pt1 = cls.env["product.template"].create(
+            {
+                "name": "Unittest missing dimensions and barcode",
+                "uom_id": cls.env.ref("product.product_uom_unit").id,
+                "type": "product",
+                "weight": 10.0,
+                "product_package_storage_type_id": storage_type_new.id,
+            }
+        )
+        cls.p1 = cls.pt1.product_variant_ids[0]
+        cls.pt2 = cls.env["product.template"].create(
+            {
+                "name": "Unittest missing dimensions and weight",
+                "uom_id": cls.env.ref("product.product_uom_unit").id,
+                "type": "product",
+                "barcode": "123456789",
+                "product_package_storage_type_id": storage_type_new.id,
+            }
+        )
+        cls.p2 = cls.pt2.product_variant_ids[0]
+        cls.pt3 = cls.env["product.template"].create(
+            {
+                "name": "Unittest missing barcode",
+                "uom_id": cls.env.ref("product.product_uom_unit").id,
+                "type": "product",
+                "weight": 10.0,
+                "length": 2.0,
+                "width": 4.0,
+                "height": 6.0,
+                "product_package_storage_type_id": storage_type_new.id,
+            }
+        )
+        cls.p3 = cls.pt3.product_variant_ids[0]
+        cls.pt4 = cls.env["product.template"].create(
+            {
+                "name": "Unittest missing weight",
+                "uom_id": cls.env.ref("product.product_uom_unit").id,
+                "type": "product",
+                "length": 2.0,
+                "width": 4.0,
+                "height": 6.0,
+                "barcode": "123456778",
+                "product_package_storage_type_id": storage_type_new.id,
+            }
+        )
+        cls.p4 = cls.pt4.product_variant_ids[0]
+        cls.pt5 = cls.env["product.template"].create(
+            {
+                "name": "Unittest missing dimensions",
+                "uom_id": cls.env.ref("product.product_uom_unit").id,
+                "type": "product",
+                "weight": 10.0,
+                "barcode": "123456723",
+                "product_package_storage_type_id": storage_type_new.id,
+            }
+        )
+        cls.p5 = cls.pt5.product_variant_ids[0]
+        cls.pt6 = cls.env["product.template"].create(
+            {
+                "name": "Unittest weight and barcode",
+                "uom_id": cls.env.ref("product.product_uom_unit").id,
+                "type": "product",
+                "length": 2.0,
+                "width": 4.0,
+                "height": 6.0,
+                "product_package_storage_type_id": storage_type_new.id,
+            }
+        )
+        cls.p6 = cls.pt6.product_variant_ids[0]
+        cls.pt7 = cls.env["product.template"].create(
+            {
+                "name": "Unittest complete product",
+                "uom_id": cls.env.ref("product.product_uom_unit").id,
+                "type": "product",
+                "length": 2.0,
+                "width": 4.0,
+                "height": 6.0,
+                "weight": 10.0,
+                "barcode": "2345678910",
+                "product_package_storage_type_id": storage_type_new.id,
+            }
+        )
+        cls.p7 = cls.pt7.product_variant_ids[0]
+        cls.pt8 = cls.env["product.template"].create(
+            {
+                "name": "Unittest not new product",
+                "uom_id": cls.env.ref("product.product_uom_unit").id,
+                "type": "product",
+                "weight": 10.0,
+                "product_package_storage_type_id": storage_type_new.id,
+            }
+        )
+        cls.p8 = cls.pt8.product_variant_ids[0]
+        cls.products = [cls.p1, cls.p2, cls.p3, cls.p4, cls.p5, cls.p6, cls.p7, cls.p8]
+        cls.supplier = cls.ResPartner.create(
+            {"name": "Unittest supplier", "ref": "839737475756467"}
+        )
+
+        cls.supplier_location = cls.env.ref("stock.stock_location_suppliers")
+        cls.stock_location = cls.env.ref("stock.stock_location_stock")
+        cls.reception_location = cls.StockLocation.create(
+            {
+                "name": "reception",
+                "location_id": cls.stock_location.id,
+                "usage": "internal",
+                "act_as_view": True,
+            }
+        )
+        cls.bin1 = cls.StockLocation.create(
+            {
+                "name": "bin1",
+                "location_id": cls.reception_location.id,
+                "usage": "internal",
+            }
+        )
+        cls.picking = cls.StockPicking.create(
+            {
+                "picking_type_id": cls.env.ref("stock.picking_type_in").id,
+                "location_id": cls.supplier_location.id,
+                "location_dest_id": cls.reception_location.id,
+                "move_lines": [
+                    (
+                        0,
+                        0,
+                        {
+                            "name": "move 1",
+                            "product_id": product.id,
+                            "product_uom_qty": 5,
+                            "product_uom": product.uom_id.id,
+                            "location_id": cls.supplier_location.id,
+                            "location_dest_id": cls.reception_location.id,
+                        },
+                    )
+                    for product in cls.products
+                ],
+            }
+        )
+        cls.picking.action_assign()
+
         cls.receptionWizard = cls.env["stock.pack.operation.lot.add"]
         cls.operation_ids = cls.picking.pack_operation_product_ids
         cls.operation_missing_dimensions = cls.operation_ids.search(

@@ -11,14 +11,6 @@ class ProductTemplate(models.Model):
 
     _inherit = "product.template"
 
-    is_new = fields.Boolean(default=False, store=True, compute="_compute_is_new")
-
-    no_barcode_authorized = fields.Boolean(
-        "Barcode not required for this product",
-        oldname="ean13",
-        related="product_variant_ids.no_barcode_authorized",
-    )
-
     no_min_max_no_on_command_reappro = fields.Boolean(
         default=False,
         compute="_compute_min_max_and_on_command_reappro",
@@ -117,23 +109,9 @@ class ProductTemplate(models.Model):
         search="_search_dimensions_in_stock",
     )
 
-    new_product_with_old_date = fields.Boolean(
-        default=False,
-        compute="_compute_new_product_with_old_date",
-        search="_search_new_product_with_old_date",
-    )
-
     has_anomaly = fields.Boolean(
         default=False, compute="_compute_has_anomaly", search="_search_has_anomaly"
     )
-
-    @api.depends("product_package_storage_type_id")
-    def _compute_is_new(self):
-        storage_type_new = self.env.ref(
-            "alc_stock_storage_type.package_st_M_M_Nouveaute"
-        )
-        for product in self:
-            product.is_new = product.product_package_storage_type_id == storage_type_new
 
     @api.depends("route_ids", "orderpoint_min", "orderpoint_max")
     def _compute_min_max_and_on_command_reappro(self):
@@ -560,35 +538,6 @@ class ProductTemplate(models.Model):
         ids = self._get_product_dimensions_in_stock(no_dimensions=False)
         return [("id", "in", ids)]
 
-    def _get_new_products_older_than_a_month(self):
-        ids = []
-        current_ids = self._get_current_ids()
-        self.env.cr.execute(
-            """
-            SELECT DISTINCT pt.id
-                FROM
-                        product_template pt
-                WHERE
-                        pt.is_new
-                    AND pt.create_date < NOW() - '1 month'::interval
-                %(ids)s
-            """,
-            {"ids": current_ids},
-        )
-        result = self.env.cr.fetchall()
-        ids = [r[0] for r in result]
-        return ids
-
-    @api.depends("is_new")
-    def _compute_new_product_with_old_date(self):
-        ids_new_products_old_date = set(self._get_new_products_older_than_a_month())
-        for product in self:
-            product.new_product_with_old_date = product.id in ids_new_products_old_date
-
-    def _search_new_product_with_old_date(self, operator, value):
-        ids = self._get_new_products_older_than_a_month()
-        return [("id", "in", ids)]
-
     def _get_anomaly_fields(self):
         return [
             "mismatch_route_picking",
@@ -607,7 +556,6 @@ class ProductTemplate(models.Model):
             "not_sold_on_website",
             "mto_stock_5_days",
             "no_dimensions_in_stock",
-            "new_product_with_old_date",
         ]
 
     @api.depends(
@@ -627,7 +575,6 @@ class ProductTemplate(models.Model):
         "not_sold_on_website",
         "mto_stock_5_days",
         "no_dimensions_in_stock",
-        "new_product_with_old_date",
     )
     def _compute_has_anomaly(self):
         anomalies = self._get_anomaly_fields()
