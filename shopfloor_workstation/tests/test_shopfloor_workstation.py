@@ -1,13 +1,14 @@
+# -*- coding: utf-8 -*-
 # Copyright 2020 Camptocamp SA (http://www.camptocamp.com)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo.addons.shopfloor.tests.common import CommonCase
+from odoo.addons.shopfloor_base.tests.common import CommonCase
 
 
 class ShopfloorWorkstationCase(CommonCase):
     @classmethod
     def setUpClass(cls):
-        super().setUpClass()
+        super(ShopfloorWorkstationCase, cls).setUpClass()
         cls.pserver = cls.env["printing.server"].sudo().create({})
         printer_vals = {
             "name": "P-One",
@@ -29,7 +30,7 @@ class ShopfloorWorkstationCase(CommonCase):
         cls.ws1.sudo().shopfloor_profile_id = cls.profile1
 
     def setUp(self):
-        super().setUp()
+        super(ShopfloorWorkstationCase, self).setUp()
         with self.work_on_services() as work:
             self.service = work.component(usage="workstation")
 

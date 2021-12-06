@@ -1,0 +1,104 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* shopfloor_workstation
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-12-06 17:13+0000\n"
+"PO-Revision-Date: 2021-12-06 17:13+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: shopfloor_workstation
+#: model:ir.model.fields,field_description:shopfloor_workstation.field_shopfloor_workstation_active
+msgid "Active"
+msgstr "Active"
+
+#. module: shopfloor_workstation
+#: model:ir.ui.view,arch_db:shopfloor_workstation.shopfloor_workstation_search_view
+msgid "Archived"
+msgstr "Archivé"
+
+#. module: shopfloor_workstation
+#: model:ir.model.fields,field_description:shopfloor_workstation.field_shopfloor_workstation_barcode
+msgid "Barcode"
+msgstr "Code Barre"
+
+#. module: shopfloor_workstation
+#: model:ir.model.fields,field_description:shopfloor_workstation.field_shopfloor_workstation_create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: shopfloor_workstation
+#: model:ir.model.fields,field_description:shopfloor_workstation.field_shopfloor_workstation_create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: shopfloor_workstation
+#: code:addons/shopfloor_workstation/services/workstation.py:31
+#, python-format
+msgid "Default workstation set to {}"
+msgstr "Station de travail par défaut mise à {}"
+
+#. module: shopfloor_workstation
+#: model:ir.model.fields,field_description:shopfloor_workstation.field_shopfloor_workstation_display_name
+msgid "Display Name"
+msgstr "Nom affiché"
+
+#. module: shopfloor_workstation
+#: model:ir.model.fields,field_description:shopfloor_workstation.field_shopfloor_workstation_id
+msgid "ID"
+msgstr "ID"
+
+#. module: shopfloor_workstation
+#: model:ir.model.fields,field_description:shopfloor_workstation.field_shopfloor_workstation___last_update
+msgid "Last Modified on"
+msgstr "Dernière modification le"
+
+#. module: shopfloor_workstation
+#: model:ir.model.fields,field_description:shopfloor_workstation.field_shopfloor_workstation_write_uid
+msgid "Last Updated by"
+msgstr "Derniere fois mis à jour par"
+
+#. module: shopfloor_workstation
+#: model:ir.model.fields,field_description:shopfloor_workstation.field_shopfloor_workstation_write_date
+msgid "Last Updated on"
+msgstr "Dernière mis à jour le"
+
+#. module: shopfloor_workstation
+#: model:ir.model.fields,field_description:shopfloor_workstation.field_shopfloor_workstation_name
+msgid "Name"
+msgstr "Nom"
+
+#. module: shopfloor_workstation
+#: model:ir.model.fields,field_description:shopfloor_workstation.field_shopfloor_workstation_shopfloor_profile_id
+msgid "Shopfloor Profile"
+msgstr "Profile Shopfloor"
+
+#. module: shopfloor_workstation
+#: model:ir.model,name:shopfloor_workstation.model_shopfloor_workstation
+msgid "Shopfloor workstation settings"
+msgstr "Configuration station de travail Shopfloor"
+
+#. module: shopfloor_workstation
+#: model:ir.model.fields,field_description:shopfloor_workstation.field_shopfloor_workstation_printing_printer_id
+msgid "Standard Printer"
+msgstr "Imprimante standard"
+
+#. module: shopfloor_workstation
+#: model:ir.actions.act_window,name:shopfloor_workstation.action_shopfloor_workstation
+#: model:ir.ui.menu,name:shopfloor_workstation.menu_action_shopfloor_workstation
+msgid "Workstation"
+msgstr "Station de travail"
+
+#. module: shopfloor_workstation
+#: code:addons/shopfloor_workstation/services/workstation.py:36
+#, python-format
+msgid "Workstation not found"
+msgstr "Station de travail inconnue"
