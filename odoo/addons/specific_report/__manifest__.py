@@ -10,6 +10,7 @@
     "category": "Sales",
     "depends": [
         "alc_sale_invoicing_policy",
+        "alc_stock_quant_package_nbr",
         "stock",
         "specific_base",
         "report",
