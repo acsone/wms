@@ -9,11 +9,7 @@
     "version": "10.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
-    "depends": [
-        "product",
-        "alc_stock_storage_type",
-        "alc_product_storage_type_tracking",
-    ],
+    "depends": ["alc_stock_storage_type", "product", "stock_storage_type"],
     "data": ["views/product_template.xml"],
     "external_dependencies": {"python": ["openupgradelib"]},
     "pre_init_hook": "pre_init_hook",
