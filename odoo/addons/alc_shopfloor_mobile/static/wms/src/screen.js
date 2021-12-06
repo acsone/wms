@@ -41,4 +41,4 @@ Vue.component("app-bar-actions").extendOptions.template = `
             <v-icon >mdi-magnify</v-icon>
         </v-btn>
     </div>
-    `;
+`;
