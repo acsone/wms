@@ -92,15 +92,23 @@ class StockPicking(models.Model):
 
         return wizard_values
 
+    def _filter_operations_to_pack(self, operation):
+        to_pack = operation.qty_done > 0 and (
+            not operation.result_package_id
+            or (
+                self.picking_type_id.empty_internal_package_on_transfer
+                and operation.result_package_id.is_internal
+            )
+        )
+        return to_pack
+
     @api.multi
     def put_in_pack(self):
         result = False
         for pick in self:
-            operations = [
-                x
-                for x in pick.pack_operation_ids
-                if x.qty_done > 0 and (not x.result_package_id)
-            ]
+            operations = pick.pack_operation_ids.filtered(
+                self._filter_operations_to_pack
+            )
             if operations:
                 result = super(StockPicking, self).put_in_pack()
 
