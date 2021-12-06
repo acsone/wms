@@ -60,8 +60,3 @@ msgstr ""
 #: model:ir.ui.view,arch_db:specific_base.view_company_form
 msgid "Report configuration"
 msgstr ""
-
-#. module: specific_base
-#: model:stock.location,name:specific_base.stock_location_vlb
-msgid "VLB"
-msgstr ""

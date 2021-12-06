@@ -58,8 +58,3 @@ msgstr ""
 msgid "Report configuration"
 msgstr ""
 
-#. module: specific_base
-#: model:stock.location,name:specific_base.stock_location_vlb
-msgid "VLB"
-msgstr ""
-
