@@ -10,8 +10,13 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["elasticsearch_security", "alc_partner_type", "product"],
+    "depends": [
+        "alc_search_engine",
+        "elasticsearch_security",
+        "alc_partner_type",
+        "product",
+    ],
     "application": False,
-    "data": ["data/elasticsearch_backend.xml"],
+    "data": ["data/elasticsearch_backend.xml", "data/elasticsearch_role.xml"],
     "demo": [],
 }

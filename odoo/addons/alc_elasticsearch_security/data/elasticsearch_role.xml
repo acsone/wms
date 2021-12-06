@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+  <record id="role_guest" model="elasticsearch.role">
+    <field name="backend_id" ref="alc_search_engine.elasticsearch_backend" />
+    <field name="name">guest</field>
+    <field name="body">{
+  "cluster_permissions": ["read"],
+  "index_permissions": [
+    {
+      "index_patterns":["alc*"],
+      "dls": "",
+      "fls": ["allowed_partner_types", "sku", "full_name"],
+      "allowed_actions": ["read"],
+      "masked_fields": []
+    }
+  ],
+  "tenant_permissions": []
+}
+    </field>
+  </record>
+  <record id="role_food_only" model="elasticsearch.role">
+    <field name="backend_id" ref="alc_search_engine.elasticsearch_backend" />
+    <field name="name">food_only</field>
+    <field name="body">{
+  "cluster_permissions": ["read"],
+  "index_permissions": [
+    {
+      "index_patterns":["alc*"],
+      "dls": "{\"bool\": {\"must\": {\"wildcard\": {\"allowed_partner_types\": \"*food_only*\"}}}}",
+      "fls": ["allowed_partner_types", "sku", "full_name"],
+      "allowed_actions": ["read"],
+      "masked_fields": []
+    }
+  ],
+  "tenant_permissions": []
+}
+    </field>
+  </record>
+  <record id="role_shareholder" model="elasticsearch.role">
+    <field name="backend_id" ref="alc_search_engine.elasticsearch_backend" />
+    <field name="name">shareholder</field>
+    <field name="body">{
+  "cluster_permissions": ["read"],
+  "index_permissions": [
+    {
+      "index_patterns":["alc*"],
+      "dls": "{\"bool\": {\"must\": {\"wildcard\": {\"allowed_partner_types\": \"*shareholder*\"}}}}",
+      "fls": ["allowed_partner_types", "sku", "full_name"],
+      "allowed_actions": ["read"],
+      "masked_fields": []
+    }
+  ],
+  "tenant_permissions": []
+}
+    </field>
+  </record>
+  <record id="role_supplier" model="elasticsearch.role">
+    <field name="backend_id" ref="alc_search_engine.elasticsearch_backend" />
+    <field name="name">supplier</field>
+    <field name="body">{
+  "cluster_permissions": ["read"],
+  "index_permissions": [
+    {
+      "index_patterns":["alc*"],
+      "dls": "{\"bool\": {\"must\": {\"term\": {\"supplier_id\": {\"value\": \"${user.supplier_id}\"}}}}}",
+      "fls": ["allowed_partner_types", "sku", "full_name"],
+      "allowed_actions": ["read"],
+      "masked_fields": []
+    }
+  ],
+  "tenant_permissions": []
+}
+    </field>
+  </record>
+</odoo>
