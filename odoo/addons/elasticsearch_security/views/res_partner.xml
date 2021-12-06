@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+  <record model="ir.ui.view" id="res_partner_form_view">
+    <field name="name">res.partner.form.elasticsearch_security</field>
+    <field name="model">res.partner</field>
+    <field name="inherit_id" ref="base.view_partner_form" />
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='website']" position="after">
+        <field name="elasticsearch_role" groups="base.group_no_one" />
+      </xpath>
+    </field>
+  </record>
+</odoo>
