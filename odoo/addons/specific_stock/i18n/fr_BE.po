@@ -331,7 +331,6 @@ msgstr "Nombre de jours ouvrés"
 
 #. module: specific_stock
 #: model:ir.model.fields,field_description:specific_stock.field_put_in_pack_helper_nbr_packages
-#: model:ir.model.fields,field_description:specific_stock.field_stock_quant_package_nbr_packages
 msgid "Number of packages"
 msgstr "Nombre de paquets"
 
