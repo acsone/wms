@@ -22,7 +22,9 @@ class LocationContentTransfer(Component):
         if not operation:
             return self._response_for_start(message=self.msg_store.record_not_found())
 
-        printer_id = printer_id or self.env.user.printing_shopfloor_printer_id.id
+        printer_id = (
+            printer_id or self.shopfloor_user.printing_product_label_printer_id.id
+        )
         if lot_id:
             lot = self.env["stock.production.lot"].browse(lot_id)
             lot.print_lot_label(printer_id=printer_id)

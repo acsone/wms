@@ -8,6 +8,6 @@ from odoo import fields, models
 class ResUsers(models.Model):
 
     _inherit = "res.users"
-    printing_shopfloor_printer_id = fields.Many2one(
-        comodel_name="printing.printer", string="Shopfloor Printer"
+    printing_product_label_printer_id = fields.Many2one(
+        comodel_name="printing.printer", string="Product Label Printer"
     )

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="shopfloor_workstation_form_view">
+        <field
+      name="name"
+    >shopfloor.workstation.form (in alc_shopfloor_workstation)</field>
+        <field name="model">shopfloor.workstation</field>
+        <field
+      name="inherit_id"
+      ref="shopfloor_workstation.shopfloor_workstation_form_view"
+    />
+        <field name="arch" type="xml">
+            <field name="printing_printer_id" position="after">
+                <field name="printing_product_label_printer_id" />
+            </field>
+        </field>
+    </record>
+
+</odoo>

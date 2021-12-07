@@ -70,6 +70,8 @@ odoo10-addon-shopfloor-mobile-base @ git+https://github.com/oca/wms.git@refs/pul
 odoo10-addon-shopfloor-mobile @ git+https://github.com/oca/wms.git@refs/pull/213/head#subdirectory=setup/shopfloor_mobile
 odoo10-addon-shopfloor @ git+https://github.com/oca/wms.git@refs/pull/213/head#subdirectory=setup/shopfloor
 odoo10-addon-stock-picking-batch-creation @ git+https://github.com/oca/wms.git@refs/pull/285/head#subdirectory=setup/stock_picking_batch_creation
+odoo10-addon-shopfloor-workstation @ git+https://github.com/acsone/wms.git@10.0-backport-shopfloor-workstation-lmi#subdirectory=setup/shopfloor_workstation
+odoo10-addon-shopfloor-workstation-mobile @ git+https://github.com/acsone/wms.git@10.0-backport-shopfloor-workstation-lmi#subdirectory=setup/shopfloor_workstation_mobile
 
 
 # oca/web
