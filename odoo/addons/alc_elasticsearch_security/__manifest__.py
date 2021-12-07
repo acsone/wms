@@ -12,6 +12,6 @@
     "website": "https://acsone.eu/",
     "depends": ["elasticsearch_security", "alc_partner_type", "product"],
     "application": False,
-    "data": [],
+    "data": ["data/elasticsearch_backend.xml"],
     "demo": [],
 }
