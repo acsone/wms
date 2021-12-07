@@ -67,6 +67,16 @@ class ClusterPicking(Component):
                 message=self.msg_store.nbr_packages_must_be_greated_than_zero(),
             )
         savepoint = self._actions_for("savepoint").new()
+        pack = self._put_in_pack(picking, nbr_packages)
+        if not pack:
+            savepoint.rollback()
+            return self._response_put_in_pack(
+                picking_batch_id,
+                message=self.msg_store.notable_to_put_in_pack(picking),
+            )
+        return self._response_put_in_pack(picking_batch_id)
+
+    def _put_in_pack(self, picking, nbr_packages):
         pack = picking.put_in_pack()
         picking.shopfloor_packing_done = True
         if (
@@ -75,14 +85,9 @@ class ClusterPicking(Component):
             and pack.get("res_id")
         ):
             pack = self.env["stock.quant.package"].browse(pack.get("res_id"))
-        if not isinstance(pack, self.env["stock.quant.package"].__class__):
-            savepoint.rollback()
-            return self._response_put_in_pack(
-                picking_batch_id,
-                message=self.msg_store.notable_to_put_in_pack(picking),
-            )
-        pack.nbr_packages = nbr_packages
-        return self._response_put_in_pack(picking_batch_id)
+        if isinstance(pack, self.env["stock.quant.package"].__class__):
+            pack.nbr_packages = nbr_packages
+        return pack
 
     def _response_put_in_pack(self, picking_batch_id, message=None):
         res = self.prepare_unload(picking_batch_id)

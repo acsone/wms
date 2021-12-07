@@ -22,6 +22,11 @@ msgid "Default workstation set to {}"
 msgstr "Station de travail par défaut mise à {}"
 
 #. module: alc_shopfloor_workstation
+#: model:ir.model.fields,field_description:alc_shopfloor_workstation.field_shopfloor_workstation_printing_package_label_printer_id
+msgid "Package Label Printer"
+msgstr "Imprimante Etiquette Colis"
+
+#. module: alc_shopfloor_workstation
 #: model:ir.model.fields,field_description:alc_shopfloor_workstation.field_shopfloor_workstation_printing_product_label_printer_id
 msgid "Product Label Printer"
 msgstr "Imprimante Etiquette Produit"
