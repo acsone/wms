@@ -17,7 +17,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_product_label_printer
-#: model:ir.model.fields,field_description:alc_product_label_printer.field_res_users_printing_shopfloor_printer_id
+#: model:ir.model.fields,field_description:alc_product_label_printer.field_res_users_printing_product_label_printer_id
 msgid "Product Label Printer"
 msgstr "Imprimante Etiquette Produit"
 
