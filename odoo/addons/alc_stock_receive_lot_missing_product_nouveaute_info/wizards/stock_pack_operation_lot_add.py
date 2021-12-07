@@ -41,8 +41,8 @@ class StockPackOperationLotAdd(models.TransientModel):
         compute="_compute_no_barcode_authorized",
         inverse="_inverse_no_barcode_authorized",
     )
-    product_is_new = fields.Boolean(related="product_id.is_new")
 
+    product_is_new = fields.Boolean(related="product_id.is_new")
     product_packaging_ids = fields.One2many(
         "product.packaging", "Logistical Units", related="product_id.packaging_ids",
     )
@@ -125,30 +125,25 @@ class StockPackOperationLotAdd(models.TransientModel):
             if product.is_new:
                 product.no_barcode_authorized = rec.no_barcode_authorized
 
-    @api.constrains("product_is_new", "product_barcode", "no_barcode_authorized")
     def _check_barcode_new_product(self):
         for rec in self:
             if (
-                rec.product_is_new
+                rec.product_id.is_new
                 and not rec.product_barcode
                 and not rec.no_barcode_authorized
             ):
                 raise MissingBarcodeError()
 
-    @api.constrains(
-        "product_is_new", "product_width", "product_length", "product_height"
-    )
     def _check_dimensions_new_product(self):
         for rec in self:
-            if rec.product_is_new and not (
+            if rec.product_id.is_new and not (
                 rec.product_width or rec.product_length or rec.product_height
             ):
                 raise MissingDimensionsError()
 
-    @api.constrains("product_is_new", "product_weight")
     def _check_weight_new_product(self):
         for rec in self:
-            if rec.product_is_new and not rec.product_weight:
+            if rec.product_id.is_new and not rec.product_weight:
                 raise MissingWeightError()
 
     def _add(self):
@@ -161,5 +156,13 @@ class StockPackOperationLotAdd(models.TransientModel):
 
         if vals:
             product.write(vals)
+
+        # Manually check constrains because they depends on product_id.is_new which is
+        # a computed field without an inverse. This raises a warning that triggers error.
+        # For this reason, we check the constrains exactly when we need it : when receiving
+        # the product.
+        self._check_barcode_new_product()
+        self._check_dimensions_new_product()
+        self._check_weight_new_product()
 
         return result

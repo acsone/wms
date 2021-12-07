@@ -111,8 +111,7 @@ class TestMissingInfoOnNewProduct(SavepointCase):
                 "name": "Unittest not new product",
                 "uom_id": cls.env.ref("product.product_uom_unit").id,
                 "type": "product",
-                "weight": 10.0,
-                "product_package_storage_type_id": storage_type_new.id,
+                "barcode": "23456998778910",
             }
         )
         cls.p8 = cls.pt8.product_variant_ids[0]
@@ -316,7 +315,7 @@ class TestMissingInfoOnNewProduct(SavepointCase):
 
     def test_05_not_new_product(self):
 
-        self.wiz.operation_id = self.operation_missing_weight_dimensions.id
+        self.wiz.operation_id = self.operation_not_new.id
         self.assertEqual(
             self.operation_not_new.product_id.name, "Unittest not new product"
         )
@@ -324,9 +323,9 @@ class TestMissingInfoOnNewProduct(SavepointCase):
         self.assertEqual(self.operation_not_new.product_id.length, 0.0)
         self.assertEqual(self.operation_not_new.product_id.width, 0.0)
         self.assertEqual(self.operation_not_new.product_id.height, 0.0)
-        self.assertFalse(self.operation_not_new.product_id.barcode)
+        self.assertTrue(self.operation_not_new.product_id.barcode)
         self.assertFalse(self.operation_not_new.product_id.no_barcode_authorized)
-        self.assertEqual(self.operation_not_new.product_id.weight, 10)
+        self.assertEqual(self.operation_not_new.product_id.weight, 0.0)
 
     def test_06_no_info_missing(self):
         self.wiz.operation_id = self.operation_complete_product.id

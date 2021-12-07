@@ -261,25 +261,6 @@ msgid "Mto with abnormal route"
 msgstr "Produits achetés/vendus avec une route incohérente"
 
 #. module: alc_product_audit
-<<<<<<< HEAD
-=======
-#: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_new_product_with_old_date
-#: model:ir.model.fields,field_description:alc_product_audit.field_product_product_new_product_with_old_date
-#: model:ir.model.fields,field_description:alc_product_audit.field_product_template_new_product_with_old_date
-#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_product_new_product_with_old_date
-#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_variant_new_product_with_old_date
-#, fuzzy
-msgid "New product with old date"
-msgstr "- Produit acheté/vendu avec une route incohérente"
-
-#. module: alc_product_audit
-#: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_no_barcode_authorized
-#: model:ir.model.fields,field_description:alc_product_audit.field_product_product_no_barcode_authorized
-msgid "Barcode not required"
-msgstr "Code Barre non requis"
-
-#. module: alc_product_audit
->>>>>>> [IMP] Display barcode and barcode_not_required at all time
 #: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_no_dimensions_in_stock
 #: model:ir.model.fields,field_description:alc_product_audit.field_product_product_no_dimensions_in_stock
 #: model:ir.model.fields,field_description:alc_product_audit.field_product_template_no_dimensions_in_stock
