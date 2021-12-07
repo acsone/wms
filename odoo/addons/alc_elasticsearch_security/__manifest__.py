@@ -17,6 +17,11 @@
         "product",
     ],
     "application": False,
-    "data": ["data/elasticsearch_backend.xml", "data/elasticsearch_role.xml"],
+    "data": [
+        "data/elasticsearch_backend.xml",
+        "data/elasticsearch_role.xml",
+        "views/se_backend_elasticsearch.xml",
+    ],
     "demo": [],
+    "external_dependencies": {"python": ["slugify"]},
 }

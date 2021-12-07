@@ -10,13 +10,37 @@
   "index_permissions": [
     {
       "index_patterns":["alc*"],
-      "dls": "",
-      "fls": ["allowed_partner_types", "sku", "full_name"],
+      "dls": "{\"bool\": {\"must\": {\"wildcard\": {\"allowed_partner_types\": \"*guest*\"}}}}",
+      "fls": ["allowed_partner_types", "supplier_id", "variant_attributes", "create_date", "sku", "full_name", "short_name"],
       "allowed_actions": ["read"],
       "masked_fields": []
     }
   ],
   "tenant_permissions": []
+}
+    </field>
+  </record>
+  <record id="role_misc" model="elasticsearch.role">
+    <field name="backend_id" ref="alc_search_engine.elasticsearch_backend" />
+    <field name="name">misc</field>
+    <field name="body">{
+  "index_permissions": [
+    {
+      "dls": "{\"bool\": {\"must\": {\"wildcard\": {\"allowed_partner_types\": \"*misc*\"}}}}"
+    }
+  ]
+}
+    </field>
+  </record>
+  <record id="role_student_like" model="elasticsearch.role">
+    <field name="backend_id" ref="alc_search_engine.elasticsearch_backend" />
+    <field name="name">student_like</field>
+    <field name="body">{
+  "index_permissions": [
+    {
+      "dls": "{\"bool\": {\"must\": {\"wildcard\": {\"allowed_partner_types\": \"*student_like*\"}}}}"
+    }
+  ]
 }
     </field>
   </record>
@@ -24,17 +48,90 @@
     <field name="backend_id" ref="alc_search_engine.elasticsearch_backend" />
     <field name="name">food_only</field>
     <field name="body">{
-  "cluster_permissions": ["read"],
   "index_permissions": [
     {
-      "index_patterns":["alc*"],
       "dls": "{\"bool\": {\"must\": {\"wildcard\": {\"allowed_partner_types\": \"*food_only*\"}}}}",
-      "fls": ["allowed_partner_types", "sku", "full_name"],
-      "allowed_actions": ["read"],
-      "masked_fields": []
+      "fls": ["stock"]
     }
-  ],
-  "tenant_permissions": []
+  ]
+}
+    </field>
+  </record>
+  <record id="role_equipment_only" model="elasticsearch.role">
+    <field name="backend_id" ref="alc_search_engine.elasticsearch_backend" />
+    <field name="name">equipment_only</field>
+    <field name="body">{
+  "index_permissions": [
+    {
+      "dls": "{\"bool\": {\"must\": {\"wildcard\": {\"allowed_partner_types\": \"*equipment_only*\"}}}}",
+      "fls": ["stock"]
+    }
+  ]
+}
+    </field>
+  </record>
+  <record id="role_veterinary" model="elasticsearch.role">
+    <field name="backend_id" ref="alc_search_engine.elasticsearch_backend" />
+    <field name="name">veterinary</field>
+    <field name="body">{
+  "index_permissions": [
+    {
+      "dls": "{\"bool\": {\"must\": {\"wildcard\": {\"allowed_partner_types\": \"*veterinary*\"}}}}",
+      "fls": ["stock"]
+    }
+  ]
+}
+    </field>
+  </record>
+  <record id="role_wholesaler_veterinary" model="elasticsearch.role">
+    <field name="backend_id" ref="alc_search_engine.elasticsearch_backend" />
+    <field name="name">wholesaler_veterinary</field>
+    <field name="body">{
+  "index_permissions": [
+    {
+      "dls": "{\"bool\": {\"must\": {\"wildcard\": {\"allowed_partner_types\": \"*wholesaler_veterinary*\"}}}}",
+      "fls": ["stock"]
+    }
+  ]
+}
+    </field>
+  </record>
+  <record id="role_wholesaler_pharmacy" model="elasticsearch.role">
+    <field name="backend_id" ref="alc_search_engine.elasticsearch_backend" />
+    <field name="name">wholesaler_pharmacy</field>
+    <field name="body">{
+  "index_permissions": [
+    {
+      "dls": "{\"bool\": {\"must\": {\"wildcard\": {\"allowed_partner_types\": \"*wholesaler_pharmacy*\"}}}}",
+      "fls": ["stock"]
+    }
+  ]
+}
+    </field>
+  </record>
+  <record id="role_export_customer" model="elasticsearch.role">
+    <field name="backend_id" ref="alc_search_engine.elasticsearch_backend" />
+    <field name="name">export_customer</field>
+    <field name="body">{
+  "index_permissions": [
+    {
+      "dls": "{\"bool\": {\"must\": {\"wildcard\": {\"allowed_partner_types\": \"*export_customer*\"}}}}",
+      "fls": ["stock"]
+    }
+  ]
+}
+    </field>
+  </record>
+  <record id="role_export_meds" model="elasticsearch.role">
+    <field name="backend_id" ref="alc_search_engine.elasticsearch_backend" />
+    <field name="name">export_meds</field>
+    <field name="body">{
+  "index_permissions": [
+    {
+      "dls": "{\"bool\": {\"must\": {\"wildcard\": {\"allowed_partner_types\": \"*export_meds*\"}}}}",
+      "fls": ["stock"]
+    }
+  ]
 }
     </field>
   </record>
@@ -42,17 +139,12 @@
     <field name="backend_id" ref="alc_search_engine.elasticsearch_backend" />
     <field name="name">shareholder</field>
     <field name="body">{
-  "cluster_permissions": ["read"],
   "index_permissions": [
     {
-      "index_patterns":["alc*"],
       "dls": "{\"bool\": {\"must\": {\"wildcard\": {\"allowed_partner_types\": \"*shareholder*\"}}}}",
-      "fls": ["allowed_partner_types", "sku", "full_name"],
-      "allowed_actions": ["read"],
-      "masked_fields": []
+      "fls": ["stock"]
     }
-  ],
-  "tenant_permissions": []
+  ]
 }
     </field>
   </record>
@@ -60,17 +152,12 @@
     <field name="backend_id" ref="alc_search_engine.elasticsearch_backend" />
     <field name="name">supplier</field>
     <field name="body">{
-  "cluster_permissions": ["read"],
   "index_permissions": [
     {
-      "index_patterns":["alc*"],
       "dls": "{\"bool\": {\"must\": {\"term\": {\"supplier_id\": {\"value\": \"${user.supplier_id}\"}}}}}",
-      "fls": ["allowed_partner_types", "sku", "full_name"],
-      "allowed_actions": ["read"],
-      "masked_fields": []
+      "fls": ["stock"]
     }
-  ],
-  "tenant_permissions": []
+  ]
 }
     </field>
   </record>
