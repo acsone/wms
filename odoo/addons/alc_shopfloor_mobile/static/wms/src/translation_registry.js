@@ -25,3 +25,5 @@ loadJSON(json => {
   const merged_messages = {...messages, ...original_messages};
   translation_registry.add("fr-FR", merged_messages);
 }, "/alc_shopfloor_mobile/static/wms/src/i18n/fr.json");
+
+translation_registry.set_default_lang("fr-FR");
