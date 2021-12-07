@@ -15,7 +15,7 @@ class ShopfloorWorkstation(Component):
         # as shopfloor_user
         ws = self.env["shopfloor.workstation"].search([("barcode", "=", barcode)])
         if ws:
-            ws.set_as_default_on_user(self.shopfloor_user)
+            ws.set_as_default_on_user(self.shopfloor_user.sudo())
             message = {
                 "message_type": "info",
                 "body": _("Default workstation set to {}").format(ws.name),
