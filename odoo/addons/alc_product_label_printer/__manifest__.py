@@ -5,7 +5,7 @@
 {
     "name": "Alc Product label printer",
     "description": """
-        Add a printer field on users to use when printing label""",
+        Add a printer field on users to use when printing products label""",
     "version": "10.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",

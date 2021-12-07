@@ -15,6 +15,7 @@
         <field name="arch" type="xml">
             <field name="printing_printer_id" position="after">
                 <field name="printing_product_label_printer_id" />
+                <field name="printing_package_label_printer_id" />
             </field>
         </field>
     </record>

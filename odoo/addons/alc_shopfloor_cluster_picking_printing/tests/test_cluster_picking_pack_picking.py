@@ -1,0 +1,118 @@
+# -*- coding: utf-8 -*-
+# Copyright 2021 ACSONE SA/NV
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+import mock
+
+from odoo.addons.alc_shopfloor.tests.test_cluster_picking_unload import (
+    ClusterPickingUnloadingCommonCase,
+)
+
+
+# pylint: disable=missing-return
+class ClusterPickingPutInPackPrintCase(ClusterPickingUnloadingCommonCase):
+    @classmethod
+    def setUpClassBaseData(cls, *args, **kwargs):
+        super(ClusterPickingPutInPackPrintCase, cls).setUpClassBaseData(*args, **kwargs)
+        cls.bin1.write({"name": "bin1", "is_internal": True})
+        cls.bin2.write({"name": "bin2", "is_internal": True})
+        cls.menu.sudo().pack_pickings = True
+
+        Printer = cls.env["printing.printer"].sudo()
+        Printer.search([]).unlink()
+        printer_server = (
+            cls.env["printing.server"]
+            .sudo()
+            .create({"name": "Localhost", "address": "no_printing", "port": "1234"})
+        )
+
+        cls.product_label_printer = Printer.create(
+            {
+                "name": "Toshiba printer",
+                "system_name": "toshiba_printer",
+                "code": "20",
+                "type": "toshiba",
+                "server_id": printer_server.id,
+            }
+        )
+
+        cls.package_label_printer = Printer.create(
+            {
+                "name": "Zebra printer",
+                "system_name": "zebra_printer",
+                "code": "20",
+                "type": "zebra",
+                "server_id": printer_server.id,
+            }
+        )
+
+    def test_print_after_put_in_pack(self):
+        operations = self.pack_operation_ids
+        self._set_dest_package_and_done(operations[:1], self.bin2)
+        self._set_dest_package_and_done(operations[1:], self.bin1)
+        operations.write({"location_dest_id": self.packing_location.id})
+        response = self.service.dispatch(
+            "prepare_unload", params={"picking_batch_id": self.batch.id}
+        )
+
+        # The first bin to process is bin1 we should therefore a pack_picking
+        # step with the picking info of the last operation
+        picking = operations[-1].picking_id
+        data = self.data_detail.picking_detail(picking)
+        self.assert_response(
+            response, next_state="pack_picking", data=data,
+        )
+        response = self.service.dispatch(
+            "put_in_pack",
+            params={
+                "picking_batch_id": self.batch.id,
+                "picking_id": picking.id,
+                "nbr_packages": 4,
+            },
+        )
+        # No product printer defined...
+        data = self.data_detail.picking_detail(picking)
+        self.assert_response(
+            response,
+            next_state="pack_picking",
+            data=data,
+            message=self.service.msg_store.no_product_label_printer_found(),
+        )
+        self.shopfloor_user.sudo().printing_product_label_printer_id = (
+            self.product_label_printer
+        )
+        response = self.service.dispatch(
+            "put_in_pack",
+            params={
+                "picking_batch_id": self.batch.id,
+                "picking_id": picking.id,
+                "nbr_packages": 4,
+            },
+        )
+        # No package printer defined...
+        data = self.data_detail.picking_detail(picking)
+        self.assert_response(
+            response,
+            next_state="pack_picking",
+            data=data,
+            message=self.service.msg_store.no_package_label_printer_found(),
+        )
+        self.shopfloor_user.sudo().printing_package_label_printer_id = (
+            self.package_label_printer
+        )
+
+        # we process to the put in pack
+        with mock.patch.object(
+            picking.__class__, "print_products_label"
+        ) as mocked_print_product_label, mock.patch.object(
+            picking.__class__, "print_packages_label"
+        ) as mocked_print_package_label:
+            self.service.dispatch(
+                "put_in_pack",
+                params={
+                    "picking_batch_id": self.batch.id,
+                    "picking_id": picking.id,
+                    "nbr_packages": 4,
+                },
+            )
+            mocked_print_product_label.assert_called_once()
+            mocked_print_package_label.assert_called_once()

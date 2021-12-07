@@ -12,11 +12,18 @@ class ShopfloorWorkstation(models.Model):
     printing_product_label_printer_id = fields.Many2one(
         comodel_name="printing.printer", string="Product Label Printer"
     )
+    printing_package_label_printer_id = fields.Many2one(
+        comodel_name="printing.printer", string="Package Label Printer"
+    )
 
     def set_as_default_on_user(self, user):
         res = super(ShopfloorWorkstation, self).set_as_default_on_user(user)
         if self.printing_product_label_printer_id:
             user.printing_product_label_printer_id = (
                 self.printing_product_label_printer_id
+            )
+        if self.printing_package_label_printer_id:
+            user.printing_package_label_printer_id = (
+                self.printing_package_label_printer_id
             )
         return res
