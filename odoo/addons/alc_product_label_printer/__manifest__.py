@@ -3,13 +3,14 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
-    "name": "Alc Label Printing Shopfloor",
+    "name": "Alc Product label printer",
     "description": """
-        Add a flag on users for specific printers for shopfloor""",
+        Add a printer field on users to use when printing label""",
     "version": "10.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": ["base_report_to_printer"],
     "data": ["views/res_users.xml"],
     "demo": [],
+    "pre_init_hook": "pre_init_hook",
 }

@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* alc_label_printing_shopfloor
+# 	* alc_product_label_printer
 #
 msgid ""
 msgstr ""
@@ -16,12 +16,12 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
-#. module: alc_label_printing_shopfloor
-#: model:ir.model.fields,field_description:alc_label_printing_shopfloor.field_res_users_printing_shopfloor_printer_id
-msgid "Shopfloor Printer"
-msgstr "Imprimante Shopfloor"
+#. module: alc_product_label_printer
+#: model:ir.model.fields,field_description:alc_product_label_printer.field_res_users_printing_shopfloor_printer_id
+msgid "Product Label Printer"
+msgstr "Imprimante Etiquette Produit"
 
-#. module: alc_label_printing_shopfloor
-#: model:ir.model,name:alc_label_printing_shopfloor.model_res_users
+#. module: alc_product_label_printer
+#: model:ir.model,name:alc_product_label_printer.model_res_users
 msgid "Users"
 msgstr "Utilisateurs"

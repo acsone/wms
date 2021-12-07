@@ -9,7 +9,7 @@
     "version": "10.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
-    "depends": ["alc_label_printing_shopfloor", "alc_shopfloor", "specific_print"],
+    "depends": ["alc_shopfloor", "alc_product_label_printer", "specific_print"],
     "data": [],
     "demo": [],
 }
