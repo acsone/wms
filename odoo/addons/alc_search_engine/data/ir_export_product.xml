@@ -36,4 +36,34 @@
         <field name="name">vendor_product_code</field>
         <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
     </record>
+    <record id="ir_exp_shopinvader_variant_taxes_id" model="ir.exports.line">
+        <field name="name">taxes_id</field>
+        <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
+    </record>
+    <record
+    id="ir_exp_shopinvader_variant_lot_expiry_field_name"
+    model="ir.exports.line"
+  >
+        <field name="name">lot_expiry_field_name</field>
+        <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
+    </record>
+    <record id="ir_exp_shopinvader_variant_not_sold_on_website" model="ir.exports.line">
+        <field name="name">not_sold_on_website</field>
+        <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
+    </record>
+    <record id="ir_exp_shopinvader_variant_packaging_ids" model="ir.exports.line">
+        <field name="name">packaging_ids</field>
+        <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
+    </record>
+    <record
+    id="ir_exp_shopinvader_variant_route_from_categ_ids"
+    model="ir.exports.line"
+  >
+        <field name="name">route_from_categ_ids</field>
+        <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
+    </record>
+    <record id="ir_exp_shopinvader_variant_supplier_id" model="ir.exports.line">
+        <field name="name">supplier_id</field>
+        <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
+    </record>
 </odoo>
