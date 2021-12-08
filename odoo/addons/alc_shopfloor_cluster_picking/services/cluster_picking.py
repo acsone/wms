@@ -16,8 +16,6 @@ _logger = logging.getLogger(__name__)
 class ClusterPicking(Component):
     _inherit = "shopfloor.cluster.picking"
 
-    _advisory_lock_name = "shopfloor_batch_picking_create"
-
     def find_existing_batch(self):
         batches = self._batch_picking_search()
         if batches:
@@ -62,6 +60,10 @@ class ClusterPicking(Component):
         )
         return wizard._create_batch(raise_if_not_possible=False)
 
+    @property
+    def _advisory_lock_name(self):
+        return ",".join(self.work.menu.picking_type_ids.mapped("name"))
+
     def _lock(self):
         """Lock to prevent concurrent creation of batch
         Use a blocking advisory lock to prevent 2 transactions to create
@@ -71,7 +73,8 @@ class ClusterPicking(Component):
         the users for too long.
         """
         _logger.info(
-            "trying to acquire lock to create a picking batch (%s)", self.env.user.login
+            "trying to acquire lock to create a picking batch (%s)",
+            self.shopfloor_user.name,
         )
         hasher = hashlib.sha1(str(self._advisory_lock_name).encode())
         # pg_lock accepts an int8 so we build an hash composed with
