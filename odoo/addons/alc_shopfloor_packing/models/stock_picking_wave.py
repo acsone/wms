@@ -9,15 +9,15 @@ class StockPickingWave(models.Model):
 
     _inherit = "stock.picking.wave"
 
-    shopfloor_packing_done = fields.Boolean(
-        "Picking packed into shopfloor",
-        help="If set, the picking has been put into a box by the shopfloor operator",
-        compute="_compute_shopfloor_packing_done",
+    is_shopfloor_packing_todo = fields.Boolean(
+        "Operations need to be packed",
+        help="If set, some operations need to be packed by the shopdloor operator",
+        compute="_compute_is_shopfloor_packing_todo",
     )
 
-    @api.depends("picking_ids", "picking_ids.shopfloor_packing_done")
-    def _compute_shopfloor_packing_done(self):
+    @api.depends("picking_ids", "picking_ids.is_shopfloor_packing_todo")
+    def _compute_is_shopfloor_packing_todo(self):
         for rec in self:
-            rec.shopfloor_packing_done = all(
-                rec.picking_ids.mapped("shopfloor_packing_done")
+            rec.is_shopfloor_packing_todo = any(
+                rec.picking_ids.mapped("is_shopfloor_packing_todo")
             )

@@ -20,14 +20,16 @@ class ClusterPicking(Component):
     def _get_next_picking_to_pack(self, batch):
         """
         Return a picking not yet packed. The returned picking is the first
-        one into the list of picking not yet packed (shopfloor_packing_done=Fasle).
+        one into the list of picking not yet packed (is_shopfloor_packing_todo=True).
          nbr_packages
         """
         pickings_to_pack = batch.picking_ids.filtered(
-            lambda p: not p.shopfloor_packing_done
+            lambda p: p.is_shopfloor_packing_todo
         )
         operations = pickings_to_pack.mapped("pack_operation_ids")
-        operations = operations.sorted(key=lambda op: op.result_package_id.name)
+        operations = operations.filtered(
+            lambda op: op.result_package_id.is_internal
+        ).sorted(key=lambda op: op.result_package_id.name)
         return operations[0].picking_id
 
     def _response_pack_picking(self, batch, message=None):
@@ -63,7 +65,7 @@ class ClusterPicking(Component):
         batch = self.env["stock.picking.wave"].browse(picking_batch_id)
         if not batch.exists():
             return self._response_batch_does_not_exist()
-        if not self.work.menu.pack_pickings or batch.shopfloor_packing_done:
+        if not self.work.menu.pack_pickings or not batch.is_shopfloor_packing_todo:
             return super(ClusterPicking, self).prepare_unload(picking_batch_id)
         return self._response_pack_picking(batch)
 
@@ -78,7 +80,7 @@ class ClusterPicking(Component):
             return self._response_put_in_pack(
                 picking_batch_id, message=self.msg_store.dstock_picking_not_found(),
             )
-        if picking.shopfloor_packing_done:
+        if not picking.is_shopfloor_packing_todo:
             return self._response_put_in_pack(
                 picking_batch_id,
                 message=self.msg_store.stock_picking_already_packed(picking),
@@ -100,7 +102,6 @@ class ClusterPicking(Component):
 
     def _put_in_pack(self, picking, nbr_packages):
         pack = picking.put_in_pack()
-        picking.shopfloor_packing_done = True
         if (
             isinstance(pack, dict)
             and pack.get("res_model") == "stock.quant.package"
@@ -160,5 +161,12 @@ class ShopfloorClusterPickingValidatorResponse(Component):
 
     def confirm_start(self):
         res = super(ShopfloorClusterPickingValidatorResponse, self).confirm_start()
+        res["data"]["schema"]["pack_picking"] = self._schema_pack_picking
+        return res
+
+    def scan_destination_pack(self):
+        res = super(
+            ShopfloorClusterPickingValidatorResponse, self
+        ).scan_destination_pack()
         res["data"]["schema"]["pack_picking"] = self._schema_pack_picking
         return res
