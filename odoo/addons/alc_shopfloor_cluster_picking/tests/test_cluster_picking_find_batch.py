@@ -78,3 +78,9 @@ class TestClusterPickingFindBatch(ClusterPickingCommonCase):
         self.assert_response(
             response, next_state="confirm_start", data=data,
         )
+        self.assertEqual(self.picking_id.operator_id, self.shopfloor_user)
+        self.assertTrue(self.picking_id.printed)
+        batch = self.env["stock.picking.wave"].browse(data["id"])
+        self.assertEqual(batch.operator_id, self.shopfloor_user)
+        self.assertTrue(batch.printed)
+        self.assertEqual(batch.state, "in_progress")
