@@ -15,6 +15,11 @@
         "alc_product_audit",
         "stock_receive_lot",
     ],
-    "data": ["views/stock_picking.xml", "wizards/stock_pack_operation_lot_add.xml"],
+    "data": [
+        "security/res_groups.xml",
+        "security/alc_new_product_reception.xml",
+        "views/stock_picking.xml",
+        "wizards/stock_pack_operation_lot_add.xml",
+    ],
     "demo": [],
 }
