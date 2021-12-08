@@ -35,6 +35,28 @@ class ClusterPicking(Component):
         data = self.data_detail.picking_detail(picking)
         return self._response(next_state="pack_picking", data=data, message=message)
 
+    def scan_destination_pack(
+        self, picking_batch_id, operation_id, barcode, quantity, lot_id=None
+    ):
+        search = self._actions_for("search")
+        bin_package = search.package_from_scan(barcode)
+
+        if bin_package and not bin_package.is_internal:
+            batch = self.env["stock.picking.wave"].browse(picking_batch_id)
+            if not batch.exists():
+                return self._response_batch_does_not_exist()
+            operation = self.env["stock.pack.operation"].browse(operation_id)
+            if not operation.exists():
+                return self._pick_next_operation(
+                    batch, message=self.msg_store.operation_not_found()
+                )
+            return self._response_for_scan_destination(
+                operation, message=self.msg_store.bin_should_be_internal(bin_package)
+            )
+        return super(ClusterPicking, self).scan_destination_pack(
+            picking_batch_id, operation_id, barcode, quantity, lot_id
+        )
+
     def prepare_unload(self, picking_batch_id):
         # before initializing the unloading phase we put picking in pack if
         # required by the scenario
