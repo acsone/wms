@@ -34,6 +34,8 @@ class TestStockDeliveryNoteAdditionalProduct(
                 "",
                 "",
                 "",
+                "",
+                "",
             ],
             [
                 "987654321",
@@ -42,6 +44,8 @@ class TestStockDeliveryNoteAdditionalProduct(
                 "0",
                 "0",
                 tax_amount,
+                "",
+                "",
                 "",
                 "",
                 "",

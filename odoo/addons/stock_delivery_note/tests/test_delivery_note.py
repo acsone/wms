@@ -273,6 +273,8 @@ class TestStockDeliveryNote(SavepointCase):
                     ]
                 ),
                 "",
+                datetime.strftime(datetime.today().date(), "%d-%m-%Y"),
+                "",
             ],
         ]
         lines = self.picking_csv._generate_delivery_note()
@@ -301,6 +303,8 @@ class TestStockDeliveryNote(SavepointCase):
                 "31-01-2017",
                 "customer.ref.123",
                 "",
+                datetime.strftime(datetime.today().date(), "%d-%m-%Y"),
+                "",
             ],
         ]
         lines = self.picking_csv._generate_delivery_note()
@@ -328,6 +332,8 @@ class TestStockDeliveryNote(SavepointCase):
                 "20170102",
                 "31-01-2017",
                 "customer.ref.123",
+                "",
+                datetime.strftime(datetime.today().date(), "%d-%m-%Y"),
                 "",
             ],
         ]
