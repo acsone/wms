@@ -145,6 +145,12 @@ msgid "Product Template"
 msgstr "Modèle de produit"
 
 #. module: alc_product_pharmacy
+#: model:ir.ui.view,arch_db:alc_product_pharmacy.product_template_search_view
+msgid "Product without amm and belgian veterinary med or importation"
+msgstr ""
+"Code AMM manquant pour un médicament vétérinaire belge ou produit importé"
+
+#. module: alc_product_pharmacy
 #: model:ir.model.fields,field_description:alc_product_pharmacy.field_delivery_carrier_is_psychotropic
 #: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_product_is_psychotropic
 #: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_template_is_psychotropic
@@ -182,9 +188,3 @@ msgstr "Ce CNK existe déjà."
 #: model:ir.model.fields,field_description:alc_product_pharmacy.field_shopinvader_variant_veterinary_only
 msgid "Veterinary only"
 msgstr "Seulement pour les vétérinaires"
-
-
-#. module: alc_product_pharmacy
-#: model:ir.ui.view,arch_db:alc_product_pharmacy.product_template_search_view
-msgid "Product without amm and belgian veterinary med or importation"
-msgstr "Code AMM manquant pour un médicament vétérinaire belge ou produit importé"
