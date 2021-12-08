@@ -101,6 +101,11 @@ msgid "%<br/>Supplier<br/>discount"
 msgstr "%<br/>Leveranciers<br/>korting"
 
 #. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.deliveryslip_with_price
+msgid "(AMM:"
+msgstr ""
+
+#. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.deliveryslip_b2c_customer
 #: model:ir.ui.view,arch_db:specific_report.deliveryslip_with_price
 #: model:ir.ui.view,arch_db:specific_report.deliveryslip_without_price
