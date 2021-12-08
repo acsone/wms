@@ -49,6 +49,21 @@
         />
         <separator />
       </xpath>
+      <xpath expr="//search//filter[@name='filter_to_purchase']" position="after">
+        <separator />
+          <filter
+          string="Product without amm and belgian veterinary med or importation"
+          name="filter_is_amm_missing"
+          domain="[ '|',
+          ('is_vt_be', '=', True),
+          ('is_import', '=', True),
+          '&amp;',
+          ('active', '=', True),
+          ('code_amm', '=', False),
+          ]"
+        />
+      </xpath>
     </field>
   </record>
+
 </odoo>
