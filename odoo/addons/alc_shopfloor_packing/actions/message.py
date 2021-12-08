@@ -26,3 +26,11 @@ class MessageAction(Component):
             "message_type": "error",
             "body": _(u"Not able to put in pack transfer {}.").format(picking.name),
         }
+
+    def bin_should_be_internal(self, package):
+        return {
+            "message_type": "error",
+            "body": _(u"The scanned package '{}' must be internal.").format(
+                package.name
+            ),
+        }

@@ -20,6 +20,27 @@ class ClusterPickingUnloadPackingCommonCase(ClusterPickingUnloadingCommonCase):
 
 
 class ClusterPickingPrepareUnloadCase(ClusterPickingUnloadPackingCommonCase):
+    def test_scan_destination_pack_bin_not_internal(self):
+        """Scan a destination package that is not an internal package"""
+        self.bin2.is_internal = False
+        operation = self.pack_operation_ids[0]
+        response = self.service.dispatch(
+            "scan_destination_pack",
+            params={
+                "picking_batch_id": self.batch.id,
+                "operation_id": operation.id,
+                # this bin is used for the other picking
+                "barcode": self.bin2.name,
+                "quantity": operation.product_qty,
+            },
+        )
+        self.assert_response(
+            response,
+            next_state="scan_destination",
+            data=self._operation_data(operation),
+            message=self.service.msg_store.bin_should_be_internal(self.bin2),
+        )
+
     def test_prepare_unload_all_same_dest(self):
         operations = self.pack_operation_ids
         self._set_dest_package_and_done(operations[:1], self.bin2)
