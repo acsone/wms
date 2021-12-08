@@ -28,6 +28,19 @@ msgid "Avarage Daily Sales Count"
 msgstr "Nbr ventes journalières"
 
 #. module: alc_product_average_daily_sale
+#: model:ir.model.fields,help:alc_product_average_daily_sale.field_alc_average_daily_sale_qty_in_stock
+msgid "Qty in stock"
+msgstr "Qté en stock"
+
+#. module: alc_product_average_daily_sale
+#: model:ir.model.fields,help:alc_product_average_daily_sale.field_alc_average_daily_sale_qty_in_stock
+msgid ""
+"All stock locations included (VLB), reserved product included "
+msgstr ""
+"Tous les emplacements sous stock, réserve ou parking sont inclus (emplacement VLB), produits réservés également. "
+
+
+#. module: alc_product_average_daily_sale
 #: model:ir.actions.act_window,name:alc_product_average_daily_sale.alc_average_daily_sale_act_window
 #: model:ir.ui.menu,name:alc_product_average_daily_sale.alc_average_daily_sale_menu
 msgid "Average Daily Sales"
