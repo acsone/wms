@@ -10,7 +10,11 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["alc_shopfloor", "alc_stock_picking_batch_creation"],
+    "depends": [
+        "alc_shopfloor",
+        "alc_stock_picking_batch_creation",
+        "alc_stock_picking_batch_assignment",
+    ],
     "data": ["views/shopfloor_menu.xml"],
     "demo": [],
 }

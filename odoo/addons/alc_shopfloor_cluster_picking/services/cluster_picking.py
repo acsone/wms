@@ -29,7 +29,9 @@ class ClusterPicking(Component):
         batch = super(ClusterPicking, self)._select_a_picking_batch(batches)
         if not batch and self.work.menu.batch_create:
             batch = self._batch_auto_create()
-            batch.write({"user_id": self.shopfloor_user.id, "state": "in_progress"})
+            if batch:
+                batch.assign_operator(operator=self.shopfloor_user)
+                batch.state = "in_progress"
         return batch
 
     def _batch_picking_base_search_domain(self):
