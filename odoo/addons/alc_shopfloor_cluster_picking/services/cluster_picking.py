@@ -2,9 +2,7 @@
 # Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-import hashlib
 import logging
-import struct
 
 from odoo.osv import expression
 
@@ -76,13 +74,7 @@ class ClusterPicking(Component):
             "trying to acquire lock to create a picking batch (%s)",
             self.shopfloor_user.name,
         )
-        hasher = hashlib.sha1(str(self._advisory_lock_name).encode())
-        # pg_lock accepts an int8 so we build an hash composed with
-        # contextual information and we throw away some bits
-        int_lock = struct.unpack("q", hasher.digest()[:8])
-
-        self.env.cr.execute("SELECT pg_advisory_xact_lock(%s);", (int_lock,))
-        self.env.cr.fetchone()[0]  # pylint: disable=expression-not-assigned
+        self.work.menu.picking_type_ids.lock()
         # Note: if the lock had to wait, the snapshot of the transaction is
         # very much probably outdated already (i.e. if the transaction which
         # had the lock before this one set a 'batch_id' on stock.picking this

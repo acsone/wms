@@ -1,3 +1,4 @@
+from . import picking_zone
 from . import res_users
 from . import stock_picking
 from . import res_partner

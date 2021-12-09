@@ -192,31 +192,34 @@ class ClusterPickingPrepareUnloadCase(ClusterPickingUnloadPackingCommonCase):
         )
 
         # once the unload is done, we must process the others operations
+        operation = self.service._next_operation_for_pick(self.batch)
         self.assert_response(
             # the remaining move line still needs to be picked
             response,
             next_state="start_operation",
-            data=self._operation_data(operations[1]),
+            data=self._operation_data(operation),
             message={"body": "Batch Transfer line done", "message_type": "success"},
         )
         response = self.service.dispatch(
             "scan_destination_pack",
             params={
                 "picking_batch_id": self.batch.id,
-                "operation_id": operations[1].id,
+                "operation_id": operation.id,
                 "barcode": self.bin1.name,
-                "quantity": operations[1].product_qty,
+                "quantity": operation.product_qty,
             },
         )
+        previous_operation = operation
+        operation = self.service._next_operation_for_pick(self.batch)
         self.assert_response(
             response,
             next_state="start_operation",
-            data=self._operation_data(operations[2]),
+            data=self._operation_data(operation),
             message={
                 "message_type": "success",
                 "body": "{} {} put in {}".format(
-                    operations[1].qty_done,
-                    operations[1].product_id.display_name,
+                    previous_operation.qty_done,
+                    previous_operation.product_id.display_name,
                     self.bin1.name,
                 ),
             },
@@ -225,15 +228,15 @@ class ClusterPickingPrepareUnloadCase(ClusterPickingUnloadPackingCommonCase):
             "scan_destination_pack",
             params={
                 "picking_batch_id": self.batch.id,
-                "operation_id": operations[2].id,
+                "operation_id": operation.id,
                 "barcode": self.bin1.name,
-                "quantity": operations[2].product_qty,
+                "quantity": operation.product_qty,
             },
         )
 
         # everything is processed, we should put in pack...
 
-        picking = operations[1].picking_id
+        picking = operation.picking_id
         self.assert_response(
             response,
             next_state="pack_picking",
