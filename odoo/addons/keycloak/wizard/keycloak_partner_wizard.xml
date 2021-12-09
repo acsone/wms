@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="keycloak_partner_wizard_form" model="ir.ui.view">
+        <field name="name">keycloak.partner.wizard.form</field>
+        <field name="model">keycloak.partner.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Keycloak User">
+                <group>
+                    <field name="keycloak_backend_id" />
+                    <field name="partner_id" />
+                    <field name="username" />
+                    <field name="enabled" />
+                    <field name="password" password="True" />
+                </group>
+                <footer>
+                    <button
+            string="Create Keycloak User"
+            name="execute"
+            type="object"
+            class="btn-primary"
+          />
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="keycloak_partner_wizard_action" model="ir.actions.act_window">
+        <field name="name">Create Keycloak User</field>
+        <field name="res_model">keycloak.partner.wizard</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="keycloak_partner_wizard_form" />
+        <field name="target">new</field>
+    </record>
+</odoo>

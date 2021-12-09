@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record model="ir.ui.view" id="keycloak_backend_form_view">
+        <field name="name">keycloak.backend.form</field>
+        <field name="model">keycloak.backend</field>
+        <field name="arch" type="xml">
+            <form string="Keycloak Backend">
+                <sheet>
+                    <label for="name" class="oe_edit_only" />
+                    <h1>
+                        <field name="name" class="oe_inline" />
+                    </h1>
+                    <group name="configuration" string="Configuration">
+                        <field
+              name="server_url"
+              placeholder="http://localhost:8080/auth/"
+            />
+                        <field name="client_id" />
+                        <field name="realm_name" />
+                        <field name="client_secret_key" password="True" />
+                        <field name="username" />
+                        <field name="user_realm_name" />
+                        <field name="password" password="True" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="keycloak_backend_tree_view">
+        <field name="name">keycloak.backend.tree</field>
+        <field name="model">keycloak.backend</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="keycloak_backend_act_window">
+        <field name="name">Keycloak Backends</field>
+        <field name="res_model">keycloak.backend</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <menuitem
+    id="keycloak_backend_menu"
+    name="Keycloak Backends"
+    parent="base.menu_custom"
+    action="keycloak_backend_act_window"
+  />
+
+</odoo>
