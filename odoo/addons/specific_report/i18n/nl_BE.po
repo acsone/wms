@@ -102,6 +102,7 @@ msgstr "%<br/>Leveranciers<br/>korting"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.deliveryslip_with_price
+#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_entry_register_body
 msgid "(AMM:"
 msgstr ""
 
