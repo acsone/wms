@@ -23,22 +23,17 @@ msgid "Abc classification level"
 msgstr "Classe ABC"
 
 #. module: alc_product_average_daily_sale
+#: model:ir.model.fields,help:alc_product_average_daily_sale.field_alc_average_daily_sale_qty_in_stock
+#, fuzzy
+msgid "All stock locations included (VLB), reserved product included"
+msgstr ""
+"Tous les emplacements sous stock, réserve ou parking sont inclus "
+"(emplacement VLB), produits réservés également. "
+
+#. module: alc_product_average_daily_sale
 #: model:ir.model.fields,help:alc_product_average_daily_sale.field_alc_average_daily_sale_average_daily_sales_count
 msgid "Avarage Daily Sales Count"
 msgstr "Nbr ventes journalières"
-
-#. module: alc_product_average_daily_sale
-#: model:ir.model.fields,help:alc_product_average_daily_sale.field_alc_average_daily_sale_qty_in_stock
-msgid "Qty in stock"
-msgstr "Qté en stock"
-
-#. module: alc_product_average_daily_sale
-#: model:ir.model.fields,help:alc_product_average_daily_sale.field_alc_average_daily_sale_qty_in_stock
-msgid ""
-"All stock locations included (VLB), reserved product included "
-msgstr ""
-"Tous les emplacements sous stock, réserve ou parking sont inclus (emplacement VLB), produits réservés également. "
-
 
 #. module: alc_product_average_daily_sale
 #: model:ir.actions.act_window,name:alc_product_average_daily_sale.alc_average_daily_sale_act_window
@@ -208,6 +203,11 @@ msgstr "Article"
 #: model:ir.model.fields,field_description:alc_product_average_daily_sale.field_alc_average_daily_sale_stddev
 msgid "Qty Standard Deviation"
 msgstr "Déviation Standard des commandes"
+
+#. module: alc_product_average_daily_sale
+#: model:ir.model.fields,field_description:alc_product_average_daily_sale.field_alc_average_daily_sale_qty_in_stock
+msgid "Qty in stock"
+msgstr "Qté en stock"
 
 #. module: alc_product_average_daily_sale
 #: model:ir.model.fields,field_description:alc_product_average_daily_sale.field_alc_average_daily_sale_safety

@@ -20,6 +20,11 @@ msgid "Abc classification level"
 msgstr ""
 
 #. module: alc_product_average_daily_sale
+#: model:ir.model.fields,help:alc_product_average_daily_sale.field_alc_average_daily_sale_qty_in_stock
+msgid "All stock locations included (VLB), reserved product included"
+msgstr ""
+
+#. module: alc_product_average_daily_sale
 #: model:ir.model.fields,help:alc_product_average_daily_sale.field_alc_average_daily_sale_average_daily_sales_count
 msgid "Avarage Daily Sales Count"
 msgstr ""
@@ -181,6 +186,11 @@ msgstr ""
 #. module: alc_product_average_daily_sale
 #: model:ir.model.fields,field_description:alc_product_average_daily_sale.field_alc_average_daily_sale_stddev
 msgid "Qty Standard Deviation"
+msgstr ""
+
+#. module: alc_product_average_daily_sale
+#: model:ir.model.fields,field_description:alc_product_average_daily_sale.field_alc_average_daily_sale_qty_in_stock
+msgid "Qty in stock"
 msgstr ""
 
 #. module: alc_product_average_daily_sale
