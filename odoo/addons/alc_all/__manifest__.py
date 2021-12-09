@@ -39,6 +39,7 @@
         "mis_builder",
         "account_banking_mandate",
         "account_invoice_merge_purchase",
+        "account_cutoff_accrual_picking_product_analytic",
         "account_cutoff_accrual_return",
         "account_invoice_accrual_merge",
         "l10n_be_eco_tax",
