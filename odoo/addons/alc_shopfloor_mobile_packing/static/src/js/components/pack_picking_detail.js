@@ -36,7 +36,7 @@ Vue.component("pack-picking-detail", {
     grouped_lines() {
       return this.utils.wms.group_by_pack(
         this.record.operations.filter(op => {
-          if (op.package_dest.is_internal) {
+          if (op.package_dest != null && op.package_dest.is_internal) {
             return op;
           }
         })
