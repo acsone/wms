@@ -70,6 +70,12 @@ class AlcAverageDailySale(models.Model):
     stddev = fields.Float("Qty Standard Deviation", required=True)
     stddev_daily = fields.Float("Daily Qty Standard Deviation", required=True)
     warehouse_id = fields.Many2one(comodel_name="stock.warehouse", required=True)
+    qty_in_stock = fields.Float(
+        string="Qty in stock",
+        digits=dp.get_precision("Product Unit of Measure"),
+        help="All stock locations included (VLB), reserved product included",
+        required=True,
+    )
 
     @api.model
     def get_refresh_date(self):
@@ -91,12 +97,13 @@ class AlcAverageDailySale(models.Model):
         self.set_refresh_date()
 
     def init(self):
+        location_physical = self.env.ref("specific_base.stock_location_vlb")
         self.env.cr.execute(
             "DROP MATERIALIZED VIEW IF EXISTS %s CASCADE", (AsIs(self._table),)
         )
         self.env.cr.execute(
             """
-            CREATE MATERIALIZED VIEW %s AS (
+            CREATE MATERIALIZED VIEW %(table)s AS (
 -- Create a consolidated definition of parameters used into the average daily
 -- sales computation. Parameters are specified by product ABC class
 WITH cfg AS (
@@ -180,7 +187,17 @@ averages AS(
     FROM deliveries_last
     GROUP BY product_id, warehouse_id, stddev, nrb_days_without_sat_sun, date_from, date_to, config_id
 ),
-
+-- Compute the stock by product in locations under stock, reserve or parking (VLB)
+stock_qty AS (
+    SELECT sq.product_id AS pp_id,
+           sum(sq.qty) AS qty_in_stock
+        FROM stock_quant sq
+        JOIN stock_location sl
+        ON sq.location_id = sl.id
+        WHERE sl.parent_left > %(location_physical_parent_left)s
+            AND sl.parent_right < %(location_physical_parent_right)s
+        GROUP BY sq.product_id
+),
 -- Compute the standard deviation of the average daily sales count
 -- excluding saturday and sunday
 daily_stddev AS(
@@ -222,6 +239,7 @@ daily_stddev AS(
         picking_zone_id,
         sale_ok,
         is_mto_product,
+        sqty.qty_in_stock as qty_in_stock,
         ds.stddev_daily,
         ds.stddev_daily * cfg.safety_factor * sqrt(nrb_days_without_sat_sun) as  safety,
         (cfg.number_days_qty_in_stock * average_qty_by_sale * average_daily_sales_count) + (ds.stddev_daily * cfg.safety_factor * sqrt(nrb_days_without_sat_sun)) as safety_bin_min_qty_new,
@@ -233,11 +251,16 @@ daily_stddev AS(
     FROM averages t
     JOIN daily_stddev ds on ds.id= t.id
     JOIN alc_product_average_daily_sale_config cfg on cfg.id = t.config_id
+    JOIN stock_qty sqty on sqty.pp_id = t.product_id
     JOIN product_product pp on pp.id = t.product_id
     JOIN product_template pt on pt.id = pp.product_tmpl_id
     ORDER BY product_id
 ) WITH NO DATA;""",
-            (AsIs(self._table),),
+            {
+                "table": AsIs(self._table),
+                "location_physical_parent_left": location_physical.parent_left,
+                "location_physical_parent_right": location_physical.parent_right,
+            },
         )
         self.env.cr.execute(
             "CREATE UNIQUE INDEX pk_%s ON %s (id)",

@@ -56,6 +56,7 @@
         <field name="safety_bin_min_qty" />
         <!-- field name="safety_bin_min_qty_old"/ -->
         <field name="nbr_sales" />
+        <field name="qty_in_stock" />
         <field name="date_from" />
         <field name="date_to" />
         <field name="warehouse_id" />
