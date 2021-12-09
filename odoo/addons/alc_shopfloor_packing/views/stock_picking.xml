@@ -9,7 +9,7 @@
         <field name="inherit_id" ref="stock.view_picking_form" />
         <field name="arch" type="xml">
             <field name="priority" postion="after">
-                <field name="shopfloor_packing_done" />
+                <field name="is_shopfloor_packing_todo" />
             </field>
         </field>
     </record>

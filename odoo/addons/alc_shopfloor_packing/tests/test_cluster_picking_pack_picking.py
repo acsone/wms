@@ -146,3 +146,114 @@ class ClusterPickingPrepareUnloadCase(ClusterPickingUnloadPackingCommonCase):
         self.assert_response(
             response, next_state="unload_single", data=data,
         )
+
+    def test_prepare_full_bin_unload(self):
+        # process one operation and call unload
+        # the unload should return a pack_picking state
+        # and once processed continue with next operations
+        operations = self.pack_operation_ids
+        self._set_dest_package_and_done(operations[0], self.bin1)
+        operations.write({"location_dest_id": self.packing_location.id})
+        response = self.service.dispatch(
+            "prepare_unload", params={"picking_batch_id": self.batch.id}
+        )
+        location = self.packing_location
+        # step with the picking info of the last operation
+        picking = operations[0].picking_id
+        data = self.data_detail.picking_detail(picking)
+        self.assert_response(
+            response, next_state="pack_picking", data=data,
+        )
+        # we process to the put in pack
+        response = self.service.dispatch(
+            "put_in_pack",
+            params={
+                "picking_batch_id": self.batch.id,
+                "picking_id": picking.id,
+                "nbr_packages": 4,
+            },
+        )
+        result_package = picking.pack_operation_ids.mapped("result_package_id")
+        self.assertEqual(len(result_package), 1)
+        self.assertEqual(result_package[0].nbr_packages, 4)
+
+        # now we must unload
+        location = operations[0].location_dest_id
+        data = self._data_for_batch(self.batch, location)
+        self.assert_response(
+            response, next_state="unload_all", data=data,
+        )
+        response = self.service.dispatch(
+            "set_destination_all",
+            params={
+                "picking_batch_id": self.batch.id,
+                "barcode": self.packing_location.barcode,
+            },
+        )
+
+        # once the unload is done, we must process the others operations
+        self.assert_response(
+            # the remaining move line still needs to be picked
+            response,
+            next_state="start_operation",
+            data=self._operation_data(operations[1]),
+            message={"body": "Batch Transfer line done", "message_type": "success"},
+        )
+        response = self.service.dispatch(
+            "scan_destination_pack",
+            params={
+                "picking_batch_id": self.batch.id,
+                "operation_id": operations[1].id,
+                "barcode": self.bin1.name,
+                "quantity": operations[1].product_qty,
+            },
+        )
+        self.assert_response(
+            response,
+            next_state="start_operation",
+            data=self._operation_data(operations[2]),
+            message={
+                "message_type": "success",
+                "body": "{} {} put in {}".format(
+                    operations[1].qty_done,
+                    operations[1].product_id.display_name,
+                    self.bin1.name,
+                ),
+            },
+        )
+        response = self.service.dispatch(
+            "scan_destination_pack",
+            params={
+                "picking_batch_id": self.batch.id,
+                "operation_id": operations[2].id,
+                "barcode": self.bin1.name,
+                "quantity": operations[2].product_qty,
+            },
+        )
+
+        # everything is processed, we should put in pack...
+
+        picking = operations[1].picking_id
+        self.assert_response(
+            response,
+            next_state="pack_picking",
+            data=self.data_detail.picking_detail(picking),
+        )
+
+        # we process to the put in pack
+        response = self.service.dispatch(
+            "put_in_pack",
+            params={
+                "picking_batch_id": self.batch.id,
+                "picking_id": picking.id,
+                "nbr_packages": 2,
+            },
+        )
+        data = self._data_for_batch(self.batch, location)
+        self.assert_response(
+            response, next_state="unload_all", data=data,
+        )
+
+        result_package = picking.pack_operation_ids.mapped("result_package_id")
+        self.assertEqual(len(result_package), 1)
+        self.assertEqual(result_package[0].nbr_packages, 2)
