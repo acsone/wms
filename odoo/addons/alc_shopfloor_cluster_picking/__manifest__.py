@@ -14,6 +14,7 @@
         "alc_shopfloor",
         "alc_stock_picking_batch_creation",
         "alc_stock_picking_batch_assignment",
+        "alc_stock_picking_type_locking",
     ],
     "data": ["views/shopfloor_menu.xml"],
     "demo": [],

@@ -365,8 +365,10 @@ WHERE picking.picking_type_subcode = 'PICK'
         # Search a picking in a specific zone (like Food)
         zone_code = params.Cri01
         if zone_code:
+            query_values["zone_code"] = zone_code
             picking_query += "AND picking_zone.code = %(zone_code)s "
             query_values["zone_code"] = zone_code
+            self.env["stock.picking.type"]._get_by_zone_code(zone_code).lock()
 
         picking_query += (
             "ORDER BY picking.operator_id, "
@@ -439,6 +441,7 @@ WHERE picking.state IN ('partially_available', 'assigned')
         if zone_code:
             picking_query += "AND picking_zone.code = %(zone_code)s "
             query_values["zone_code"] = zone_code
+            self.env["stock.picking.type"]._get_by_zone_code(zone_code).lock()
 
         picking_query += (
             "ORDER BY picking.operator_id, " "picking.rank DESC " "LIMIT 1;"
@@ -567,6 +570,7 @@ WHERE picking.state IN ('partially_available', 'assigned')
         if zone_code:
             picking_query += "AND picking_zone.code = %(zone_code)s "
             query_values["zone_code"] = zone_code
+            self.env["stock.picking.type"]._get_by_zone_code(zone_code).lock()
 
         picking_query += (
             "ORDER BY picking.operator_id, " "picking.rank DESC " "LIMIT 1;"
