@@ -17,6 +17,6 @@
         "alc_shopfloor_packing",
         "specific_print",
     ],
-    "data": [],
+    "data": ["views/shopfloor_menu.xml"],
     "demo": [],
 }
