@@ -13,7 +13,7 @@ class Report(models.Model):
     _inherit = "report"
 
     @api.model
-    def _get_raw(self, oids, report_name, qty=1):
+    def _get_raw(self, oids, report_name, qty=1, **extra):
         report = self.env.ref(report_name)
         report_obj = report.env[report.model]
         docs = report_obj.browse(oids)
@@ -24,6 +24,7 @@ class Report(models.Model):
             "report": report,
             "qty": qty,
         }
+        docargs.update(extra)
         template = report.report_name
         html = self.render(template, docargs)
         text = ""

@@ -1,0 +1,85 @@
+# -*- coding: utf-8 -*-
+# © 2016-2017 Jacques-Etienne Baudoux (BCIM)
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+
+from odoo import _, api, models
+
+from ..utils import hw_print
+
+
+class StockPackOperation(models.Model):
+    _inherit = "stock.pack.operation"
+
+    @api.multi
+    def get_so_partner(self):
+        """ Find SO Customer:
+            - first find the related move (picking)
+            - then find the delivery move (shipping)
+            - then find the related procurement
+            - then find the originate sales order
+            - finally have the customer
+        """
+        self.ensure_one()
+        moves = self.linked_move_operation_ids.mapped("move_id")
+
+        def descend_moves(lvl):
+            next_lvl = lvl.mapped("move_dest_id")
+            if next_lvl:
+                lvl |= descend_moves(next_lvl)
+            return lvl
+
+        moves = descend_moves(moves)
+        partners = moves.mapped("procurement_id.sale_line_id.order_id.partner_id")
+        # While we could potentially have multiple SO, and so partners,
+        # practically it won't be the case in 99% otherwise it's not important
+        # which one we return
+        return partners and partners[0]
+
+    def button_print_product_label(self):
+        """
+        Using a wrapper to prevent the context from being passed as argument,
+        using default arguments instead.
+        """
+        self.print_product_label()
+
+    @api.multi
+    def print_product_label(self, printer_id=False, quantity=1):
+        for op in self:
+            if not op.picking_id.partner_id:
+                raise Warning(_("No destination partner defined"))
+        hw_print(
+            self,
+            "specific_print.report_stock_product_label",
+            printer_id=printer_id,
+            qty=quantity,
+        )
+
+    def button_print_product_product_label(self):
+        """
+        Using a wrapper to prevent the context from being passed as argument,
+        using default arguments instead.
+        """
+        self.print_product_product_label()
+
+    @api.multi
+    def print_product_product_label(self, printer_id=False, quantity=1):
+        self.product_id.print_product_label(quantity, printer_id)
+
+    @api.multi
+    def get_qty_by_lot(self):
+        """
+        This method will return the quantity by lot.
+        If the product is not track by lot
+        we return the quantity done without lot
+        :return:
+        """
+        self.ensure_one()
+
+        if not self.pack_lot_ids:
+            return [(int(self.qty_done), None)]
+
+        result = []
+        for pack in self.pack_lot_ids:
+            result.append((int(pack.qty), pack.lot_id))
+
+        return result
