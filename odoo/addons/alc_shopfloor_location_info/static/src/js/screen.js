@@ -6,6 +6,7 @@
 //  Override main menu template
 let methods = Vue.component("detail-location").extendOptions.methods;
 Vue.component("detail-location").extendOptions.methods = {
+  ...methods,
   ...{
     available_product_list_options() {
       return {
