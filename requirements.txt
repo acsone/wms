@@ -55,6 +55,7 @@ odoo10-addon-account-chart-update @ git+https://github.com/acsone/account-financ
 odoo10-addon-account-credit-control @ git+https://github.com/acsone/account-financial-tools.git@779a120dea41eca52bab98ff847b517ba58374ab#subdirectory=setup/account_credit_control
 odoo10-addon-account-cutoff-accrual-base @ git+https://github.com/acsone/account-closing@b0d0b5e81000e47a89069491ec5ccc9e34299772#subdirectory=setup/account_cutoff_accrual_base
 odoo10-addon-account-cutoff-accrual-picking @ git+https://github.com/acsone/account-closing@b0d0b5e81000e47a89069491ec5ccc9e34299772#subdirectory=setup/account_cutoff_accrual_picking
+odoo10-addon-account-cutoff-accrual-picking-product-analytic @ git+https://github.com/acsone/account-closing@c2592d61473af7cc76be637088a2d146a607232e#subdirectory=setup/account_cutoff_accrual_picking_product_analytic
 odoo10-addon-account-cutoff-accrual-return @ git+https://github.com/acsone/account-closing@7a8ad29c39f58129b85cf975ea6ba2d946734ef7#subdirectory=setup/account_cutoff_accrual_return
 odoo10-addon-account-cutoff-base @ git+https://github.com/acsone/account-closing@b0d0b5e81000e47a89069491ec5ccc9e34299772#subdirectory=setup/account_cutoff_base
 odoo10-addon-account-financial-report-date-range @ git+https://github.com/acsone/account-financial-reporting.git@37e0dda2eea90b3efe046851d732443903ced004#subdirectory=setup/account_financial_report_date_range

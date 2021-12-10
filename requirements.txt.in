@@ -37,6 +37,7 @@ odoo10-addon-account-cutoff-base @ git+https://github.com/acsone/account-closing
 odoo10-addon-account-cutoff-accrual-base @ git+https://github.com/acsone/account-closing@10-20180423-accrual#subdirectory=setup/account_cutoff_accrual_base
 #odoo10-addon-account-cutoff-accrual-picking @ git+https://github.com/OCA/account-closing@refs/pull/73/head#subdirectory=setup/account_cutoff_accrual_picking
 odoo10-addon-account-cutoff-accrual-picking @ git+https://github.com/acsone/account-closing@10-20180423-accrual#subdirectory=setup/account_cutoff_accrual_picking
+odoo10-addon-account-cutoff-accrual-picking-product-analytic @ git+https://github.com/acsone/account-closing@10-20180423-accrual#subdirectory=setup/account_cutoff_accrual_picking_product_analytic
 #odoo10-addon-account-cutoff-accrual-return @ git+https://github.com/OCA/account-closing@refs/pull/70/head#subdirectory=setup/account_cutoff_accrual_return
 odoo10-addon-account-cutoff-accrual-return @ git+https://github.com/acsone/account-closing@10-accrual-return#subdirectory=setup/account_cutoff_accrual_return
 
