@@ -25,7 +25,7 @@ class ClusterPicking(Component):
 
     def _put_in_pack(self, picking, nbr_packages):
         pack = super(ClusterPicking, self)._put_in_pack(picking, nbr_packages)
-        if pack:
+        if pack and self.work.menu.print_on_pack_pickings:
             self._print_picking_labels(picking)
         return pack
 

@@ -15,7 +15,7 @@ class ClusterPickingPutInPackPrintCase(ClusterPickingUnloadingCommonCase):
         super(ClusterPickingPutInPackPrintCase, cls).setUpClassBaseData(*args, **kwargs)
         cls.bin1.write({"name": "bin1", "is_internal": True})
         cls.bin2.write({"name": "bin2", "is_internal": True})
-        cls.menu.sudo().pack_pickings = True
+        cls.menu.sudo().write(dict(pack_pickings=True, print_on_pack_pickings=True))
 
         Printer = cls.env["printing.printer"].sudo()
         Printer.search([]).unlink()
