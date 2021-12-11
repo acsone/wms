@@ -17,6 +17,7 @@
         "alc_shopfloor_location_content_relocation",
         "alc_shopfloor_location_info",
         "alc_shopfloor_mobile",
+        "alc_shopfloor_mobile_cluster_picking",
         "alc_shopfloor_mobile_packing",
         "alc_shopfloor_product_print_label",
         "alc_shopfloor_rest_log",
