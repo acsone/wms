@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+import mock
 
 from odoo.addons.alc_shopfloor.tests.test_cluster_picking_base import (
     ClusterPickingCommonCase,
@@ -31,6 +32,21 @@ class TestClusterPickingFindBatch(ClusterPickingCommonCase):
         )
         cls.menu.sudo().stock_device_type_ids = cls.device1
         cls.menu.sudo().batch_create = True
+
+    def setUp(self):
+        super(TestClusterPickingFindBatch, self).setUp()
+        # Avoid to have to create a delivery round for our simple tests
+        MakePickingBatch = self.env["make.picking.batch"].__class__
+        get_delivery_round_patcher = mock.patch.object(
+            MakePickingBatch, "_get_delivery_round_id"
+        )
+        self.mocked_get_delivery_round = get_delivery_round_patcher.start()
+        self.mocked_get_delivery_round.return_value = None
+
+        # pylint: disable=unused-variable
+        @self.addCleanup
+        def stop_mock():
+            get_delivery_round_patcher.stop()
 
     @classmethod
     def _create_device(
