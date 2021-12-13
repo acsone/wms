@@ -34,3 +34,11 @@ class MessageAction(Component):
                 package.name
             ),
         }
+
+    def bin_is_for_another_picking(self, package):
+        return {
+            "message_type": "error",
+            "body": _(u"The scanned package '{}' is for an other picking.").format(
+                package.name
+            ),
+        }

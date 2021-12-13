@@ -54,12 +54,24 @@ class ClusterPickingPutInPackPrintCase(ClusterPickingUnloadingCommonCase):
             "prepare_unload", params={"picking_batch_id": self.batch.id}
         )
 
-        # The first bin to process is bin1 we should therefore a pack_picking
-        # step with the picking info of the last operation
+        # The first bin to process is bin1 scan the pack and try to put in pack
         picking = operations[-1].picking_id
-        data = self.data_detail.picking_detail(picking)
+        data = self.data_detail.pack_picking_detail(picking)
         self.assert_response(
-            response, next_state="pack_picking", data=data,
+            response, next_state="pack_picking_scan_pack", data=data,
+        )
+        # we scan the pack
+        response = self.service.dispatch(
+            "scan_packing_to_pack",
+            params={
+                "picking_batch_id": self.batch.id,
+                "picking_id": picking.id,
+                "barcode": self.bin1.name,
+            },
+        )
+        data = self.data_detail.pack_picking_detail(picking)
+        self.assert_response(
+            response, next_state="pack_picking_put_in_pack", data=data,
         )
         response = self.service.dispatch(
             "put_in_pack",
@@ -70,10 +82,10 @@ class ClusterPickingPutInPackPrintCase(ClusterPickingUnloadingCommonCase):
             },
         )
         # No product printer defined...
-        data = self.data_detail.picking_detail(picking)
+        data = self.data_detail.pack_picking_detail(picking)
         self.assert_response(
             response,
-            next_state="pack_picking",
+            next_state="pack_picking_put_in_pack",
             data=data,
             message=self.service.msg_store.no_product_label_printer_found(),
         )
@@ -89,10 +101,10 @@ class ClusterPickingPutInPackPrintCase(ClusterPickingUnloadingCommonCase):
             },
         )
         # No package printer defined...
-        data = self.data_detail.picking_detail(picking)
+        data = self.data_detail.pack_picking_detail(picking)
         self.assert_response(
             response,
-            next_state="pack_picking",
+            next_state="pack_picking_put_in_pack",
             data=data,
             message=self.service.msg_store.no_package_label_printer_found(),
         )

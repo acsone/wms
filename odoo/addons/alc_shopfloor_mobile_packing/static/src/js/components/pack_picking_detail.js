@@ -7,13 +7,27 @@
 Vue.component("pack-picking-detail", {
   props: ["record"],
   methods: {
+    operations_color_klass(rec) {
+      let line = rec;
+      if (line._is_group) {
+        line = line.records[0];
+      }
+      let klass = "";
+      if (this.record.scanned_packs.includes(line.package_dest.id)) {
+        klass = "done screen_step_done lighten-1";
+      } else {
+        klass = "not-done screen_step_todo lighten-1";
+      }
+      return "move-line-" + klass;
+    },
     line_list_options() {
       return {
         card_klass: "loud-labels",
         key_title: "",
+        showCounters: true,
         list_item_options: {
           fields: this.line_list_fields(),
-          list_item_klass_maker: this.utils.wms.move_line_color_klass,
+          list_item_klass_maker: this.operations_color_klass,
         },
       };
     },
@@ -34,13 +48,20 @@ Vue.component("pack-picking-detail", {
       ];
     },
     grouped_lines() {
-      return this.utils.wms.group_by_pack(
+      let groups = this.utils.wms.group_by_pack(
         this.record.operations.filter(op => {
           if (op.package_dest != null && op.package_dest.is_internal) {
             return op;
           }
         })
       );
+      let self = this;
+      _.forEach(groups, function(item) {
+        item.group_color = self.record.scanned_packs.includes(item.pack.id)
+          ? self.utils.colors.color_for("screen_step_done")
+          : self.utils.colors.color_for("screen_step_todo");
+      });
+      return groups;
     },
   },
   template: `
@@ -52,18 +73,11 @@ Vue.component("pack-picking-detail", {
             </div>
         </v-card-title>
     </v-card>
-    <div class="lines" v-if="(record.operations || []).length">
-            <div v-for="group in grouped_lines()">
-                <separator-title>
-                    {{group.title}}
-                </separator-title>
-                <list
-                    :records="group.records"
-                    :key="'group-' + group.key"
-                    :options="line_list_options()"
-                    />
-            </div>
-        </div>
+    <list
+        :records="record.operations"
+        :grouped_records="grouped_lines()"
+        :options="line_list_options()"
+        />
   </div>
 
 `,
