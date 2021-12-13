@@ -26,13 +26,15 @@ class ClusterPicking(Component):
     def _put_in_pack(self, picking, nbr_packages):
         pack = super(ClusterPicking, self)._put_in_pack(picking, nbr_packages)
         if pack and self.work.menu.print_on_pack_pickings:
-            self._print_picking_labels(picking)
+            self._print_picking_labels(picking, pack)
         return pack
 
-    def _print_picking_labels(self, picking):
+    def _print_picking_labels(self, picking, package):
         picking.sudo().print_products_label(
-            printer_id=self.shopfloor_user.printing_product_label_printer_id.id
+            printer_id=self.shopfloor_user.printing_product_label_printer_id.id,
+            packages=package,
         )
         picking.sudo().print_packages_label(
-            printer_id=self.shopfloor_user.printing_product_label_printer_id.id
+            printer_id=self.shopfloor_user.printing_product_label_printer_id.id,
+            packages=package,
         )

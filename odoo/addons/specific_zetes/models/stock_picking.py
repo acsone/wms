@@ -13,8 +13,6 @@ from .. import constants
 
 class StockPicking(models.Model):
     _inherit = "stock.picking"
-
-    checksum = fields.Char("Checksum", copy=False)
     zetes_state = fields.Selection(
         [
             (constants.AS_DEFAULT, "Default"),

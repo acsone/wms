@@ -3,6 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 import mock
 
+from odoo.fields import first
 from odoo.tests.common import SavepointCase
 
 
@@ -10,6 +11,34 @@ class TestStock(SavepointCase):
     @classmethod
     def setUpClass(cls):
         super(TestStock, cls).setUpClass()
+        # create printer
+        Printer = cls.env["printing.printer"].sudo()
+        Printer.search([]).unlink()
+        printer_server = (
+            cls.env["printing.server"]
+            .sudo()
+            .create({"name": "Localhost", "address": "no_printing", "port": "1234"})
+        )
+
+        cls.product_label_printer = Printer.create(
+            {
+                "name": "Toshiba printer",
+                "system_name": "toshiba_printer",
+                "code": "20",
+                "type": "toshiba",
+                "server_id": printer_server.id,
+            }
+        )
+
+        cls.package_label_printer = Printer.create(
+            {
+                "name": "Zebra printer",
+                "system_name": "zebra_printer",
+                "code": "20",
+                "type": "zebra",
+                "server_id": printer_server.id,
+            }
+        )
 
         # Create Partner and customer
         cls.partner = cls.env["res.partner"].create({"name": "my b2c partner"})
@@ -80,6 +109,9 @@ class TestStock(SavepointCase):
         inventory.action_done()
 
         cls.picking.with_context(round_autoset=False).action_assign()
+        for pack_op in cls.picking.pack_operation_ids:
+            pack_op.qty_done = pack_op.product_qty
+        cls.picking.put_in_pack()
 
     def test_1(self):
         # Case 1 : partner wants the labels, customer is b2c : no labels should be printed
@@ -125,3 +157,26 @@ class TestStock(SavepointCase):
             self.picking.print_products_label()
             # expected result : no call to the print method
             self.assertEqual(patched_print.call_count, 0)
+
+    def test_5(self):
+        # print for specific package...
+        self.picking.partner_id.no_labels_products = False
+        self.picking.customer_id.is_b2c_customer = False
+        PrintingPrinter = self.env["printing.printer"].__class__
+        package = first(self.picking.pack_operation_ids).result_package_id
+        self.assertTrue(package)
+        with mock.patch.object(
+            PrintingPrinter, "print_document"
+        ) as patched_print_document:
+            self.picking.print_products_label(
+                printer_id=self.product_label_printer, packages=package
+            )
+            patched_print_document.assert_called_once()
+
+        with mock.patch.object(
+            PrintingPrinter, "print_document"
+        ) as patched_print_document:
+            self.picking.print_packages_label(
+                printer_id=self.product_label_printer, packages=package
+            )
+            patched_print_document.assert_called_once()
