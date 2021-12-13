@@ -260,3 +260,13 @@ class ClusterPickingPrepareUnloadCase(ClusterPickingUnloadPackingCommonCase):
         result_package = picking.pack_operation_ids.mapped("result_package_id")
         self.assertEqual(len(result_package), 1)
         self.assertEqual(result_package[0].nbr_packages, 2)
+
+    def test_response_for_scan_destination(self):
+        """Check that non internal package are not proposed as package_dest"""
+        line1 = self.two_lines_picking.pack_operation_ids[0]
+        # we already scan and put the first line in bin1
+        self._set_dest_package_and_done(line1, self.bin1)
+        self.bin1.is_internal = False
+        self.assertFalse(self.service._last_picked_line(line1.picking_id))
+        response = self.service._response_for_scan_destination(line1)
+        self.assertFalse(response["data"]["scan_destination"]["package_dest"])

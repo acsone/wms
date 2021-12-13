@@ -2,12 +2,26 @@
 # Copyright 2021 ACSONE SA/NV (https://www.acsone.eu)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
+from odoo import fields
+
 from odoo.addons.base_rest.components.service import to_int
 from odoo.addons.component.core import Component
 
 
 class ClusterPicking(Component):
     _inherit = "shopfloor.cluster.picking"
+
+    def _last_picked_line(self, picking):
+        # a complete override to add a condition on internal package
+        return fields.first(
+            picking.pack_operation_ids.filtered(
+                lambda l: l.qty_done > 0
+                and l.result_package_id.is_internal
+                # if we are moving the entire package, we shouldn't
+                # add stuff inside it, it's not a new package
+                and l.package_id != l.result_package_id
+            ).sorted(key="write_date", reverse=True)
+        )
 
     def _response_for_start_operation(self, operation, message=None, popup=None):
         return self._response(
