@@ -45,6 +45,10 @@ class AlcB2CBackend(models.Model):
     )
 
     auth_api_key_id = fields.Many2one(comodel_name="auth.api.key", required=True)
+    allow_customer_modifications = fields.Boolean(
+        default=False,
+        help="If set to True, first name, last name and address can be modified for the customer without any check",
+    )
 
     _sql_constraints = [
         ("name_uniq", "UNIQUE(name)", _("Name must be unique")),

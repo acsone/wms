@@ -187,7 +187,7 @@ class SaleOrder(models.Model):
             b2c_ref, raise_if_notfound=False
         )
         if partner:
-            partner._update_b2c_data(data["recipient"])
+            partner._update_b2c_data(data["recipient"], b2c_backend)
             return partner
         name = customer_info["first_name"]
         last_name = customer_info.get("last_name")

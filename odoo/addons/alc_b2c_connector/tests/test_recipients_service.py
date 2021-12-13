@@ -267,3 +267,26 @@ class TestRecipientsService(CommonCase):
             self.recipient_service.dispatch(
                 "update", _id="ABC", params={"id": "ABC", "name2": "S"}
             )
+
+    def test_update_recipient_if_allowed_on_b2c_backend(self):
+        self.b2c_backend.allow_customer_modifications = True
+        self.b2c_order.action_confirm()
+        ship = self.b2c_order.mapped("picking_ids").filtered(
+            lambda p: p.picking_type_code == "outgoing"
+        )
+        ship.printed = True
+        recipient_info = {
+            "id": "ABC",
+            "first_name": "RENAMED",
+            "last_name": "B2C PARTNER",
+            "street": "new street info no check",
+            "zip": "new zip info no check",
+            "city": "new city info no check",
+        }
+        self.recipient_service.dispatch(
+            "update", _id=recipient_info["id"], params=recipient_info
+        )
+        self.assertEqual(self.b2c_partner.street, "new street info no check")
+        self.assertEqual(self.b2c_partner.zip, "new zip info no check")
+        self.assertEqual(self.b2c_partner.city, "new city info no check")
+        self.assertEqual(self.b2c_partner.name, "RENAMED B2C PARTNER")

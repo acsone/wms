@@ -233,6 +233,18 @@ msgid "Sale backorder accepted"
 msgstr "Autoriser les backorder"
 
 #. module: alc_b2c_connector
+#: model:ir.model.fields,field_description:alc_b2c_connector.field_alc_b2c_backend_allow_customer_modifications
+msgid "Allow Customer Modifications"
+msgstr "Autoriser les modifications du client"
+
+
+#. module: alc_b2c_connector
+#: model:ir.model.fields,help:alc_b2c_connector.field_alc_b2c_backend_allow_customer_modifications
+msgid "If set to True, first name, last name and address can be modified for the customer without any check"
+msgstr "Permettre de modifier le nom, prénom et adresse du client B2C"
+
+
+#. module: alc_b2c_connector
 #: model:ir.model.fields,field_description:alc_b2c_connector.field_alc_b2c_backend_sale_channel
 msgid "Sale channel"
 msgstr "Canal de vente"
