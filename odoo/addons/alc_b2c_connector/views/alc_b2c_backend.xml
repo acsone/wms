@@ -28,6 +28,7 @@
             <field name="payment_mode_id" />
             <field name="payment_term_id" />
             <field name="is_sale_back_order_accepted" />
+            <field name="allow_customer_modifications" />
             <field name="picking_policy" />
             <field name="auth_api_key_id" />
           </group>

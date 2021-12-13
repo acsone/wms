@@ -31,7 +31,7 @@ class ResPartner(models.Model):
             partner.is_student = False
         return res
 
-    def _update_b2c_recipient_validate_data(self, data):
+    def _update_b2c_recipient_validate_data(self, data, b2c_backend):
         """If this partner has one started picking out, only update contact fields."""
         self.ensure_one()
         domain_pickings = [
@@ -40,7 +40,10 @@ class ResPartner(models.Model):
             ("printed", "=", True),
         ]
         keys = ["mobile", "phone", "email", "comment"]
-        if self.env["stock.picking"].search(domain_pickings, limit=1):
+        if (
+            self.env["stock.picking"].search(domain_pickings, limit=1)
+            and not b2c_backend.allow_customer_modifications
+        ):
             for key in data:
                 value = self[key].id if key in {"title", "country_id"} else self[key]
                 if key not in keys and data[key] != value and (data[key] or value):
@@ -58,10 +61,10 @@ class ResPartner(models.Model):
         """
         b2c_ref = self._b2c_id_to_b2c_ref(b2c_id, b2c_backend)
         partner = self._get_partner_by_ref(b2c_ref)
-        partner._update_b2c_data(data)
+        partner._update_b2c_data(data, b2c_backend)
         return partner
 
-    def _update_b2c_data(self, data):
+    def _update_b2c_data(self, data, b2c_backend):
         self.ensure_one()
         data.pop("id", None)
         if data.get("country_code"):
@@ -78,7 +81,7 @@ class ResPartner(models.Model):
             data["suite"] = data.pop("name2")
         if "note" in data:  # passing None is allowed, so no get here
             data["comment"] = data.pop("note")
-        self._update_b2c_recipient_validate_data(data)
+        self._update_b2c_recipient_validate_data(data, b2c_backend)
         return self.write(data)
 
     @api.model
