@@ -272,8 +272,8 @@ class TestStockDeliveryNote(SavepointCase):
                         self.so_csv.suite_name,
                     ]
                 ),
-                "",
                 datetime.strftime(datetime.today().date(), "%d-%m-%Y"),
+                "",
                 "",
             ],
         ]
@@ -302,8 +302,8 @@ class TestStockDeliveryNote(SavepointCase):
                 "20170102",
                 "31-01-2017",
                 "customer.ref.123",
-                "",
                 datetime.strftime(datetime.today().date(), "%d-%m-%Y"),
+                "",
                 "",
             ],
         ]
@@ -332,8 +332,8 @@ class TestStockDeliveryNote(SavepointCase):
                 "20170102",
                 "31-01-2017",
                 "customer.ref.123",
-                "",
                 datetime.strftime(datetime.today().date(), "%d-%m-%Y"),
+                "",
                 "",
             ],
         ]
