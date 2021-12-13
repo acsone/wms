@@ -57,6 +57,11 @@ msgid "Cancel"
 msgstr ""
 
 #. module: specific_print
+#: model:ir.model.fields,field_description:specific_print.field_stock_picking_checksum
+msgid "Checksum"
+msgstr ""
+
+#. module: specific_print
 #: model:ir.model.fields,field_description:specific_print.field_printing_printer_code
 msgid "Code"
 msgstr ""
@@ -77,7 +82,7 @@ msgid "Created on"
 msgstr ""
 
 #. module: specific_print
-#: code:addons/specific_print/models/stock.py:151
+#: code:addons/specific_print/models/stock_picking.py:58
 #: model:ir.model.fields,help:specific_print.field_res_partner_no_labels_products
 #: model:ir.model.fields,help:specific_print.field_res_users_no_labels_products
 #: model:ir.model.fields,help:specific_print.field_shopinvader_partner_no_labels_products
@@ -184,14 +189,14 @@ msgid "Lots"
 msgstr ""
 
 #. module: specific_print
-#: code:addons/specific_print/models/stock.py:72
-#: code:addons/specific_print/models/stock.py:132
+#: code:addons/specific_print/models/stock_pack_operation.py:49
+#: code:addons/specific_print/models/stock_picking.py:38
 #, python-format
 msgid "No destination partner defined"
 msgstr ""
 
 #. module: specific_print
-#: code:addons/specific_print/models/stock.py:23
+#: code:addons/specific_print/utils.py:23
 #, python-format
 msgid "No printer assigned"
 msgstr ""
@@ -269,7 +274,7 @@ msgid "Printer"
 msgstr ""
 
 #. module: specific_print
-#: code:addons/specific_print/models/stock.py:30
+#: code:addons/specific_print/utils.py:30
 #, python-format
 msgid "Printer unavailable : %s"
 msgstr ""
