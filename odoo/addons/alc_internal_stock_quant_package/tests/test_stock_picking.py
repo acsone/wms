@@ -15,7 +15,7 @@ class TestStockPicking(SavepointCase):
                 cls.env.context, tracking_disable=True, test_queue_job_no_delay=True,
             )
         )
-        cls.picking_type_in = cls.env.ref("stock.picking_type_in")
+        cls.picking_type_out = cls.env.ref("stock.picking_type_out")
         cls.internal_package = cls.env["stock.quant.package"].create(
             {"is_internal": True}
         )
@@ -23,13 +23,13 @@ class TestStockPicking(SavepointCase):
         cls.product_a = cls.env["product.product"].create(
             {"name": "Product A", "type": "product"}
         )
-        cls.supplier_location = cls.env.ref("stock.stock_location_suppliers")
+        cls.customer_location = cls.env.ref("stock.stock_location_customers")
         cls.stock_location = cls.env.ref("stock.stock_location_stock")
         cls.picking = cls.env["stock.picking"].create(
             {
-                "picking_type_id": cls.picking_type_in.id,
-                "location_id": cls.supplier_location.id,
-                "location_dest_id": cls.stock_location.id,
+                "picking_type_id": cls.picking_type_out.id,
+                "location_dest_id": cls.customer_location.id,
+                "location_id": cls.stock_location.id,
             }
         )
         cls.env["stock.move"].create(
@@ -39,14 +39,24 @@ class TestStockPicking(SavepointCase):
                 "product_uom_qty": 1,
                 "product_uom": cls.product_a.uom_id.id,
                 "picking_id": cls.picking.id,
-                "location_id": cls.supplier_location.id,
-                "location_dest_id": cls.stock_location.id,
+                "location_dest_id": cls.customer_location.id,
+                "location_id": cls.stock_location.id,
             }
         )
+        wiz = cls.env["stock.change.product.qty"].create(
+            {
+                "product_id": cls.product_a.id,
+                "product_tmpl_id": cls.product_a.product_tmpl_id.id,
+                "new_quantity": 1,
+                "location_id": cls.stock_location.id,
+            }
+        )
+        wiz.change_product_qty()
+
         cls.picking.action_assign()
 
-    def test_internal_package_emptied_on_transfer(self):
-        self.assertTrue(self.picking_type_in.empty_internal_package_on_transfer)
+    def test_internal_result_package_emptied_on_transfer(self):
+        self.assertTrue(self.picking_type_out.empty_internal_package_on_transfer)
         self.assertEqual(self.picking.state, "assigned")
         packop = self.picking.pack_operation_ids
         packop.write(
@@ -58,9 +68,24 @@ class TestStockPicking(SavepointCase):
         self.assertEqual(self.picking.state, "done")
         self.assertFalse(self.internal_package.quant_ids)
 
+    def test_internal_package_emptied_on_transfer(self):
+        self.assertTrue(self.picking_type_out.empty_internal_package_on_transfer)
+        self.assertEqual(self.picking.state, "assigned")
+        # create a pack operation on package
+        self.internal_package.quant_ids = self.picking.move_lines.reserved_quant_ids
+        self.picking.do_unreserve()
+        self.picking.action_assign()
+
+        packop = self.picking.pack_operation_ids
+        self.assertEqual(self.internal_package, packop.package_id)
+        packop.qty_done = packop.product_qty
+        self.picking.do_new_transfer()
+        self.assertEqual(self.picking.state, "done")
+        self.assertFalse(self.internal_package.quant_ids)
+
     def test_internal_package_not_emptied_on_transfer(self):
-        self.assertTrue(self.picking_type_in.empty_internal_package_on_transfer)
-        self.picking_type_in.empty_internal_package_on_transfer = False
+        self.assertTrue(self.picking_type_out.empty_internal_package_on_transfer)
+        self.picking_type_out.empty_internal_package_on_transfer = False
         self.assertEqual(self.picking.state, "assigned")
         packop = self.picking.pack_operation_ids
         packop.write(
@@ -73,7 +98,7 @@ class TestStockPicking(SavepointCase):
         self.assertTrue(self.internal_package.quant_ids)
 
     def test_external_package_not_emptied_on_transfer(self):
-        self.assertTrue(self.picking_type_in.empty_internal_package_on_transfer)
+        self.assertTrue(self.picking_type_out.empty_internal_package_on_transfer)
         self.assertEqual(self.picking.state, "assigned")
         packop = self.picking.pack_operation_ids
         packop.write(
@@ -86,7 +111,7 @@ class TestStockPicking(SavepointCase):
         self.assertTrue(self.external_package.quant_ids)
 
     def test_internal_package_emptied_on_put_in_pack(self):
-        self.assertTrue(self.picking_type_in.empty_internal_package_on_transfer)
+        self.assertTrue(self.picking_type_out.empty_internal_package_on_transfer)
         self.assertEqual(self.picking.state, "assigned")
         packop = self.picking.pack_operation_ids
         packop.write(
@@ -101,8 +126,8 @@ class TestStockPicking(SavepointCase):
         self.assertFalse(self.internal_package.quant_ids)
 
     def test_internal_package_not_emptied_on_put_in_pack(self):
-        self.assertTrue(self.picking_type_in.empty_internal_package_on_transfer)
-        self.picking_type_in.empty_internal_package_on_transfer = False
+        self.assertTrue(self.picking_type_out.empty_internal_package_on_transfer)
+        self.picking_type_out.empty_internal_package_on_transfer = False
         self.assertEqual(self.picking.state, "assigned")
         packop = self.picking.pack_operation_ids
         packop.write(
