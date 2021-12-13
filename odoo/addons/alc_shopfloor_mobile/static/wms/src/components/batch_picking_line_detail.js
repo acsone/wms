@@ -52,7 +52,7 @@ export var batch_picking_line = Vue.component("batch-picking-line-detail", {
     :key="'batch-picking-line-detail-3'"
     :record="line"
     :options="{main: true, key_title: defaultDestinationKey + '.name', title_action_field:  {action_val_path: defaultDestinationKey + '.name'}}"
-    :card_color="utils.colors.color_for(showQtyPicker ? 'screen_step_todo', 'screen_step_done')"
+    :card_color="utils.colors.color_for(showQtyPicker ? 'screen_step_todo': 'screen_step_done')"
     />
 
   <v-card class="pa-2" :color="utils.colors.color_for('screen_step_todo')" v-if="showQtyPicker">
