@@ -33,9 +33,7 @@ class StockLocation(models.Model):
 
     def _compute_reserved_pack_operation_ids(self):
         for rec in self:
-            rec.update(
-                {"reserved_pack_operation_ids": rec._get_reserved_pack_operation_ids()}
-            )
+            rec.reserved_pack_operation_ids = rec._get_reserved_pack_operation_ids()
 
     def planned_qty_in_location_is_empty(self, pack_operation_ids=None):
         """Return if a location will be empty when pack operations will be confirmed
