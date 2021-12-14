@@ -316,10 +316,10 @@ class StockPicking(models.Model):
                             format_use_date(quant[2] or ""),
                             get_last_column(sol.order_id, self.date_done),
                             # Product AMM if exist and delivery date
+                            format_use_date(self.date_done or ""),
                             product.product_tmpl_id.code_amm
                             if product.product_tmpl_id.code_amm
                             else "",
-                            format_use_date(self.date_done or ""),
                             "",
                         ]
                     )

@@ -9,6 +9,7 @@
     "category": "Stock",
     "depends": [
         "alc_b2c_partner",
+        "alc_partner_veterinary",
         "product_additional",
         "product_expiry",
         "specific_data",
