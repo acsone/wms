@@ -27,7 +27,9 @@ class DataDetailAction(Component):
             "complete_name",
             (
                 "reserved_pack_operation_ids:reserved_operations",
-                lambda record, fname: self.operations(record[fname]),
+                lambda record, fname: self.operations(
+                    record.with_prefetch(None)[fname]
+                ),
             ),
         ]
 
