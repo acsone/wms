@@ -34,6 +34,10 @@ class CommonCase(BaseCommonCase):
         # test are run with delivery_rounds installed.
         if "round.instance" in cls.env:
             cls.env = cls.env(context=dict(cls.env.context, round_autoset=False))
+        PType = cls.env["stock.picking.type"]
+        if "picking_type_subcode" in PType._fields:
+            # disable preferred quant comain modification from procurement_sale
+            PType.search([]).write({"picking_type_subcode": False})
         super(CommonCase, cls).setUpComponent()
         # DISABLE side effect of alc_stock_product_packaging_reserve
         # This addon try to always assign a packaging if one exists for the

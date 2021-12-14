@@ -339,7 +339,7 @@ class ClusterPicking(Component):
             min(operation.move_ids.mapped("date_expected")),
             -int(min(operation.move_ids.mapped("sequence") or "0")),
             min(operation.move_ids.ids),
-            operation.id,
+            # operation.id,
         )
 
     def _operations_for_picking_batch(self, picking_batch, filter_func=lambda x: x):
