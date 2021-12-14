@@ -44,7 +44,10 @@ class StockPackOperationLotAdd(models.TransientModel):
 
     product_is_new = fields.Boolean(related="product_id.is_new")
     product_packaging_ids = fields.One2many(
-        "product.packaging", "Logistical Units", related="product_id.packaging_ids",
+        comodel_name="product.packaging",
+        String="Logistical Units",
+        compute="_compute_product_packaging_ids",
+        inverse="_inverse_product_packaging_ids",
     )
 
     @api.depends("product_id", "product_id.is_new", "product_id.weight")
@@ -58,7 +61,7 @@ class StockPackOperationLotAdd(models.TransientModel):
         for rec in self:
             product = rec.product_id
             if product.is_new:
-                product.weight = rec.product_weight
+                product.sudo().write({"weight": rec.product_weight})
 
     @api.depends("product_id", "product_id.is_new", "product_id.length")
     def _compute_product_length(self):
@@ -71,7 +74,7 @@ class StockPackOperationLotAdd(models.TransientModel):
         for rec in self:
             product = rec.product_id
             if product.is_new:
-                product.length = rec.product_length
+                product.sudo().write({"length": rec.product_length})
 
     @api.depends("product_id", "product_id.is_new", "product_id.height")
     def _compute_product_height(self):
@@ -84,7 +87,7 @@ class StockPackOperationLotAdd(models.TransientModel):
         for rec in self:
             product = rec.product_id
             if product.is_new:
-                product.height = rec.product_height
+                product.sudo().write({"height": rec.product_height})
 
     @api.depends("product_id", "product_id.is_new", "product_id.width")
     def _compute_product_width(self):
@@ -97,7 +100,7 @@ class StockPackOperationLotAdd(models.TransientModel):
         for rec in self:
             product = rec.product_id
             if product.is_new:
-                product.width = rec.product_width
+                product.sudo().write({"width": rec.product_width})
 
     @api.depends("product_id", "product_id.is_new", "product_id.barcode")
     def _compute_product_barcode(self):
@@ -110,7 +113,7 @@ class StockPackOperationLotAdd(models.TransientModel):
         for rec in self:
             product = rec.product_id
             if product.is_new:
-                product.barcode = rec.product_barcode
+                product.sudo().write({"barcode": rec.product_barcode})
 
     @api.depends("product_id", "product_id.is_new", "product_id.no_barcode_authorized")
     def _compute_no_barcode_authorized(self):
@@ -123,7 +126,24 @@ class StockPackOperationLotAdd(models.TransientModel):
         for rec in self:
             product = rec.product_id
             if product.is_new:
-                product.no_barcode_authorized = rec.no_barcode_authorized
+                product.sudo().write(
+                    {"no_barcode_authorized": rec.no_barcode_authorized}
+                )
+
+    @api.depends("product_id", "product_id.is_new", "product_id.packaging_ids")
+    def _compute_product_packaging_ids(self):
+        for rec in self:
+            product = rec.product_id
+            if product.is_new and product.packaging_ids:
+                rec.product_packaging_ids = product.packaging_ids.ids
+
+    def _inverse_product_packaging_ids(self):
+        for rec in self:
+            product = rec.product_id
+            if product.is_new:
+                product.sudo().write(
+                    {"packaging_ids": [(6, 0, rec.product_packaging_ids.ids)]}
+                )
 
     def _check_barcode_new_product(self):
         for rec in self:
@@ -148,14 +168,6 @@ class StockPackOperationLotAdd(models.TransientModel):
 
     def _add(self):
         result = super(StockPackOperationLotAdd, self)._add()
-
-        vals = {}
-        product = self.product_id
-        if self.product_is_new and self.product_packaging_ids:
-            vals.update({"packaging_ids": [(6, 0, self.product_packaging_ids.ids)]})
-
-        if vals:
-            product.write(vals)
 
         # Manually check constrains because they depends on product_id.is_new which is
         # a computed field without an inverse. This raises a warning that triggers error.
