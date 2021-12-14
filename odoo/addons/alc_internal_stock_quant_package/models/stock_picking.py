@@ -28,6 +28,10 @@ class StockPicking(models.Model):
         pickings = self.filtered(lambda p: p.state == "done")
         pack_operations = pickings._get_packops_internal_package_used_to_empty()
         pack_operations.mapped("result_package_id").unpack()
+        internal_packages = pickings.mapped(
+            "pack_operation_pack_ids.package_id"
+        ).filtered("is_internal")
+        internal_packages.unpack()
 
     @api.multi
     def _packop_empty_internal_packages(self):
