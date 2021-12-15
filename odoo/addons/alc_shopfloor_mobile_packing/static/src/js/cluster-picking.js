@@ -13,7 +13,11 @@ ClusterPickingBase.component.template = template.replace(
   "</Screen>",
   `
     <pack-picking-detail
-         v-if="state_is('pack_picking')"
+         v-if="state_is('pack_picking_scan_pack')"
+         :record="state.data"
+    />
+    <pack-picking-detail
+         v-if="state_is('pack_picking_put_in_pack')"
          :record="state.data"
     />
 
@@ -32,10 +36,12 @@ let data = function() {
   // the object context
   let result = data_result_method.bind(this)();
   // add our new state
-  result.states.pack_picking = {
+  result.states.pack_picking_put_in_pack = {
     display_info: {
-      title: this.$t("cluster_picking.put_in_pack.title"),
-      scan_placeholder: this.$t("cluster_picking.put_in_pack.scan_placeholder"),
+      title: this.$t("cluster_picking.pack_picking_put_in_pack.title"),
+      scan_placeholder: this.$t(
+        "cluster_picking.pack_picking_put_in_pack.scan_placeholder"
+      ),
     },
     on_scan: scanned => {
       let endpoint, endpoint_data;
@@ -45,6 +51,25 @@ let data = function() {
         picking_batch_id: this.current_batch().id,
         picking_id: data.id,
         nbr_packages: parseInt(scanned.text, 10),
+      };
+      this.wait_call(this.odoo.call(endpoint, endpoint_data));
+    },
+  };
+  result.states.pack_picking_scan_pack = {
+    display_info: {
+      title: this.$t("cluster_picking.pack_picking_scan_pack.title"),
+      scan_placeholder: this.$t(
+        "cluster_picking.pack_picking_scan_pack.scan_placeholder"
+      ),
+    },
+    on_scan: scanned => {
+      let endpoint, endpoint_data;
+      const data = this.state.data;
+      endpoint = "scan_packing_to_pack";
+      endpoint_data = {
+        picking_batch_id: this.current_batch().id,
+        picking_id: data.id,
+        barcode: scanned.text,
       };
       this.wait_call(this.odoo.call(endpoint, endpoint_data));
     },

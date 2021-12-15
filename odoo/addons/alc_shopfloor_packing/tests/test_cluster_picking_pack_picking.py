@@ -19,7 +19,7 @@ class ClusterPickingUnloadPackingCommonCase(ClusterPickingUnloadingCommonCase):
         cls.menu.sudo().pack_pickings = True
 
 
-class ClusterPickingPrepareUnloadCase(ClusterPickingUnloadPackingCommonCase):
+class TestClusterPickingPrepareUnload(ClusterPickingUnloadPackingCommonCase):
     def test_scan_destination_pack_bin_not_internal(self):
         """Scan a destination package that is not an internal package"""
         self.bin2.is_internal = False
@@ -50,12 +50,25 @@ class ClusterPickingPrepareUnloadCase(ClusterPickingUnloadPackingCommonCase):
             "prepare_unload", params={"picking_batch_id": self.batch.id}
         )
         location = self.packing_location
-        # The first bin to process is bin1 we should therefore a pack_picking
-        # step with the picking info of the last operation
+        # The first bin to process is bin1 we should therefore scan the bin 1
+        # to pack and put in pack
         picking = operations[-1].picking_id
-        data = self.data_detail.picking_detail(picking)
+        data = self.data_detail.pack_picking_detail(picking)
         self.assert_response(
-            response, next_state="pack_picking", data=data,
+            response, next_state="pack_picking_scan_pack", data=data,
+        )
+        # we scan the pack
+        response = self.service.dispatch(
+            "scan_packing_to_pack",
+            params={
+                "picking_batch_id": self.batch.id,
+                "picking_id": picking.id,
+                "barcode": self.bin1.name,
+            },
+        )
+        data = self.data_detail.pack_picking_detail(picking)
+        self.assert_response(
+            response, next_state="pack_picking_put_in_pack", data=data,
         )
         # we process to the put in pack
         response = self.service.dispatch(
@@ -71,11 +84,23 @@ class ClusterPickingPrepareUnloadCase(ClusterPickingUnloadPackingCommonCase):
         self.assertEqual(result_package[0].nbr_packages, 4)
 
         picking = operations[0].picking_id
-        data = self.data_detail.picking_detail(picking)
+        data = self.data_detail.pack_picking_detail(picking)
         self.assert_response(
-            response, next_state="pack_picking", data=data,
+            response, next_state="pack_picking_scan_pack", data=data,
         )
-
+        # we scan the pack
+        response = self.service.dispatch(
+            "scan_packing_to_pack",
+            params={
+                "picking_batch_id": self.batch.id,
+                "picking_id": picking.id,
+                "barcode": self.bin2.name,
+            },
+        )
+        data = self.data_detail.pack_picking_detail(picking)
+        self.assert_response(
+            response, next_state="pack_picking_put_in_pack", data=data,
+        )
         # we process to the put in pack
         response = self.service.dispatch(
             "put_in_pack",
@@ -104,14 +129,25 @@ class ClusterPickingPrepareUnloadCase(ClusterPickingUnloadPackingCommonCase):
         response = self.service.dispatch(
             "prepare_unload", params={"picking_batch_id": self.batch.id}
         )
-        first_line = operations[0]
-        location = first_line.location_dest_id
         # The first bin to process is bin1 we should therefore a pack_picking
         # step with the picking info of the last operation
         picking = operations[-1].picking_id
-        data = self.data_detail.picking_detail(picking)
+        data = self.data_detail.pack_picking_detail(picking)
         self.assert_response(
-            response, next_state="pack_picking", data=data,
+            response, next_state="pack_picking_scan_pack", data=data,
+        )
+        # we scan the pack
+        response = self.service.dispatch(
+            "scan_packing_to_pack",
+            params={
+                "picking_batch_id": self.batch.id,
+                "picking_id": picking.id,
+                "barcode": self.bin1.name,
+            },
+        )
+        data = self.data_detail.pack_picking_detail(picking)
+        self.assert_response(
+            response, next_state="pack_picking_put_in_pack", data=data,
         )
         # we process to the put in pack
         response = self.service.dispatch(
@@ -123,12 +159,25 @@ class ClusterPickingPrepareUnloadCase(ClusterPickingUnloadPackingCommonCase):
             },
         )
 
+        # next picking..
         picking = operations[0].picking_id
-        data = self.data_detail.picking_detail(picking)
+        data = self.data_detail.pack_picking_detail(picking)
         self.assert_response(
-            response, next_state="pack_picking", data=data,
+            response, next_state="pack_picking_scan_pack", data=data,
         )
-
+        # we scan the pack
+        response = self.service.dispatch(
+            "scan_packing_to_pack",
+            params={
+                "picking_batch_id": self.batch.id,
+                "picking_id": picking.id,
+                "barcode": self.bin2.name,
+            },
+        )
+        data = self.data_detail.pack_picking_detail(picking)
+        self.assert_response(
+            response, next_state="pack_picking_put_in_pack", data=data,
+        )
         # we process to the put in pack
         response = self.service.dispatch(
             "put_in_pack",
@@ -157,14 +206,25 @@ class ClusterPickingPrepareUnloadCase(ClusterPickingUnloadPackingCommonCase):
         response = self.service.dispatch(
             "prepare_unload", params={"picking_batch_id": self.batch.id}
         )
-        location = self.packing_location
         # step with the picking info of the last operation
         picking = operations[0].picking_id
-        data = self.data_detail.picking_detail(picking)
+        data = self.data_detail.pack_picking_detail(picking)
         self.assert_response(
-            response, next_state="pack_picking", data=data,
+            response, next_state="pack_picking_scan_pack", data=data,
         )
-        # we process to the put in pack
+        # we scan the pack and  process to the put in pack
+        response = self.service.dispatch(
+            "scan_packing_to_pack",
+            params={
+                "picking_batch_id": self.batch.id,
+                "picking_id": picking.id,
+                "barcode": self.bin1.name,
+            },
+        )
+        data = self.data_detail.pack_picking_detail(picking)
+        self.assert_response(
+            response, next_state="pack_picking_put_in_pack", data=data,
+        )
         response = self.service.dispatch(
             "put_in_pack",
             params={
@@ -208,13 +268,23 @@ class ClusterPickingPrepareUnloadCase(ClusterPickingUnloadPackingCommonCase):
             operation = self.service._next_operation_for_pick(self.batch)
 
         # everything is processed, we should put in pack...
+        data = self.data_detail.pack_picking_detail(picking)
         self.assert_response(
-            response,
-            next_state="pack_picking",
-            data=self.data_detail.picking_detail(picking),
+            response, next_state="pack_picking_scan_pack", data=data,
         )
-
-        # we process to the put in pack
+        # we scan the pack and  process to the put in pack
+        response = self.service.dispatch(
+            "scan_packing_to_pack",
+            params={
+                "picking_batch_id": self.batch.id,
+                "picking_id": picking.id,
+                "barcode": self.bin1.name,
+            },
+        )
+        data = self.data_detail.pack_picking_detail(picking)
+        self.assert_response(
+            response, next_state="pack_picking_put_in_pack", data=data,
+        )
         response = self.service.dispatch(
             "put_in_pack",
             params={

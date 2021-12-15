@@ -46,10 +46,17 @@ class ClusterPicking(Component):
         ).sorted(key=lambda op: op.result_package_id.name)
         return operations[0].picking_id
 
-    def _response_pack_picking(self, batch, message=None):
-        picking = self._get_next_picking_to_pack(batch)
-        data = self.data_detail.picking_detail(picking)
-        return self._response(next_state="pack_picking", data=data, message=message)
+    def _response_pack_picking_put_in_pack(self, picking, message=None):
+        data = self.data_detail.pack_picking_detail(picking)
+        return self._response(
+            next_state="pack_picking_put_in_pack", data=data, message=message
+        )
+
+    def _response_pack_picking_scan_pack(self, picking, message=None):
+        data = self.data_detail.pack_picking_detail(picking)
+        return self._response(
+            next_state="pack_picking_scan_pack", data=data, message=message
+        )
 
     def scan_destination_pack(
         self, picking_batch_id, operation_id, barcode, quantity, lot_id=None
@@ -73,6 +80,47 @@ class ClusterPicking(Component):
             picking_batch_id, operation_id, barcode, quantity, lot_id
         )
 
+    def scan_packing_to_pack(self, picking_batch_id, picking_id, barcode):
+        batch = self.env["stock.picking.wave"].browse(picking_batch_id)
+        if not batch.exists():
+            return self._response_batch_does_not_exist()
+        picking = batch.picking_ids.filtered(
+            lambda p, picking_id=picking_id: p.id == picking_id
+        )
+        if not picking:
+            return self._prepare_pack_picking(
+                batch, message=self.msg_store.dstock_picking_not_found(),
+            )
+        if not picking.is_shopfloor_packing_todo:
+            return self._prepare_pack_picking(
+                batch, message=self.msg_store.stock_picking_already_packed(picking),
+            )
+
+        search = self._actions_for("search")
+        bin_package = search.package_from_scan(barcode)
+
+        if not bin_package:
+            return self._prepare_pack_picking(
+                batch, message=self.msg_store.bin_not_found_for_barcode(barcode)
+            )
+        if not bin_package.is_internal:
+            return self._prepare_pack_picking(
+                batch, message=self.msg_store.bin_should_be_internal(bin_package)
+            )
+        if bin_package not in picking.mapped("pack_operation_ids.result_package_id"):
+            return self._prepare_pack_picking(
+                batch, message=self.msg_store.bin_is_for_another_picking(bin_package)
+            )
+
+        picking._set_packing_pack_scanned(bin_package.id)
+        return self._prepare_pack_picking(batch,)
+
+    def _prepare_pack_picking(self, batch, message=None):
+        picking = self._get_next_picking_to_pack(batch)
+        if picking.is_shopfloor_packing_pack_to_scan():
+            return self._response_pack_picking_scan_pack(picking, message=message)
+        return self._response_pack_picking_put_in_pack(picking, message=message)
+
     def prepare_unload(self, picking_batch_id):
         # before initializing the unloading phase we put picking in pack if
         # required by the scenario
@@ -81,7 +129,7 @@ class ClusterPicking(Component):
             return self._response_batch_does_not_exist()
         if not self.work.menu.pack_pickings or not batch.is_shopfloor_packing_todo:
             return super(ClusterPicking, self).prepare_unload(picking_batch_id)
-        return self._response_pack_picking(batch)
+        return self._prepare_pack_picking(batch)
 
     def put_in_pack(self, picking_batch_id, picking_id, nbr_packages):
         batch = self.env["stock.picking.wave"].browse(picking_batch_id)
@@ -106,6 +154,7 @@ class ClusterPicking(Component):
             )
         savepoint = self._actions_for("savepoint").new()
         pack = self._put_in_pack(picking, nbr_packages)
+        picking._reset_packing_packs_scanned()
         if not pack:
             savepoint.rollback()
             return self._response_put_in_pack(
@@ -149,6 +198,17 @@ class ShopfloorClusterPickingValidator(Component):
             "nbr_packages": {"coerce": to_int, "required": True, "type": "integer"},
         }
 
+    def scan_packing_to_pack(self):
+        return {
+            "picking_batch_id": {
+                "coerce": to_int,
+                "required": True,
+                "type": "integer",
+            },
+            "picking_id": {"coerce": to_int, "required": True, "type": "integer"},
+            "barcode": {"required": True, "type": "string"},
+        }
+
 
 class ShopfloorClusterPickingValidatorResponse(Component):
     """Validators for the Cluster Picking endpoints responses"""
@@ -157,17 +217,19 @@ class ShopfloorClusterPickingValidatorResponse(Component):
 
     def _states(self):
         states = super(ShopfloorClusterPickingValidatorResponse, self)._states()
-        states["pack_picking"] = self._schema_pack_picking
+        states["pack_picking_put_in_pack"] = self.schemas_detail.pack_picking_detail()
+        states["pack_picking_scan_pack"] = self.schemas_detail.pack_picking_detail()
         return states
 
     @property
     def _schema_pack_picking(self):
-        schema = self.schemas_detail.picking_detail()
+        schema = self.schemas_detail.pack_picking_detail()
         return {"type": "dict", "nullable": True, "schema": schema}
 
     def prepare_unload(self):
         res = super(ShopfloorClusterPickingValidatorResponse, self).prepare_unload()
-        res["data"]["schema"]["pack_picking"] = self._schema_pack_picking
+        res["data"]["schema"]["pack_picking_put_in_pack"] = self._schema_pack_picking
+        res["data"]["schema"]["pack_picking_scan_pack"] = self._schema_pack_picking
         return res
 
     def put_in_pack(self):
@@ -175,12 +237,24 @@ class ShopfloorClusterPickingValidatorResponse(Component):
 
     def confirm_start(self):
         res = super(ShopfloorClusterPickingValidatorResponse, self).confirm_start()
-        res["data"]["schema"]["pack_picking"] = self._schema_pack_picking
+        res["data"]["schema"]["pack_picking_put_in_pack"] = self._schema_pack_picking
+        res["data"]["schema"]["pack_picking_scan_pack"] = self._schema_pack_picking
         return res
 
     def scan_destination_pack(self):
         res = super(
             ShopfloorClusterPickingValidatorResponse, self
         ).scan_destination_pack()
-        res["data"]["schema"]["pack_picking"] = self._schema_pack_picking
+        res["data"]["schema"]["pack_picking_put_in_pack"] = self._schema_pack_picking
+        res["data"]["schema"]["pack_picking_scan_pack"] = self._schema_pack_picking
         return res
+
+    def scan_packing_to_pack(self):
+        return self._response_schema(
+            next_states={
+                "unload_all",
+                "unload_single",
+                "pack_picking_put_in_pack",
+                "pack_picking_scan_pack",
+            }
+        )
