@@ -11,30 +11,30 @@ class StockPicking(models.Model):
 
     @api.multi
     def put_in_pack(self):
-        self._packop_empty_internal_packages()
+        self._packop_clear_internal_result_packages()
         return super(StockPicking, self).put_in_pack()
 
     @api.multi
     def do_transfer(self):
+        self._packop_clear_internal_result_packages()
         res = super(StockPicking, self).do_transfer()
-        self._empty_internal_packages()
+        self._empty_transferred_internal_packages()
         return res
 
     @api.multi
-    def _empty_internal_packages(self):
+    def _empty_transferred_internal_packages(self):
         """
         Remove products from internal quant packages on picking done
         """
-        pickings = self.filtered(lambda p: p.state == "done")
-        pack_operations = pickings._get_packops_internal_package_used_to_empty()
-        pack_operations.mapped("result_package_id").unpack()
-        internal_packages = pickings.mapped(
-            "pack_operation_pack_ids.package_id"
-        ).filtered("is_internal")
+        pickings = self._get_picking_to_empty_internal_packages().filtered(
+            lambda p: p.state == "done"
+        )
+        packages = pickings.mapped("pack_operation_pack_ids.package_id")
+        internal_packages = packages.filtered("is_internal")
         internal_packages.unpack()
 
     @api.multi
-    def _packop_empty_internal_packages(self):
+    def _packop_clear_internal_result_packages(self):
         """
         Remove links between pack operations and stock quant package to ensure
         that pack operations are put into a non internal stock.quant.package

@@ -87,6 +87,22 @@ class TestStockPicking(SavepointCase):
         self.assertTrue(self.picking_type_out.empty_internal_package_on_transfer)
         self.picking_type_out.empty_internal_package_on_transfer = False
         self.assertEqual(self.picking.state, "assigned")
+        # create a pack operation on package
+        self.internal_package.quant_ids = self.picking.move_lines.reserved_quant_ids
+        self.picking.do_unreserve()
+        self.picking.action_assign()
+
+        packop = self.picking.pack_operation_ids
+        self.assertEqual(self.internal_package, packop.package_id)
+        packop.qty_done = packop.product_qty
+        self.picking.do_new_transfer()
+        self.assertEqual(self.picking.state, "done")
+        self.assertTrue(self.internal_package.quant_ids)
+
+    def test_internal_result_package_not_emptied_on_transfer(self):
+        self.assertTrue(self.picking_type_out.empty_internal_package_on_transfer)
+        self.picking_type_out.empty_internal_package_on_transfer = False
+        self.assertEqual(self.picking.state, "assigned")
         packop = self.picking.pack_operation_ids
         packop.write(
             dict(
