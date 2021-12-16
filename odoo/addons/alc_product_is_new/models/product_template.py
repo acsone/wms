@@ -16,6 +16,14 @@ class ProductTemplate(models.Model):
         search="_search_new_product_with_old_date",
     )
 
+    product_package_storage_type_id = fields.Many2one(
+        "stock.package.storage.type",
+        default=lambda self: self.env.ref(
+            "alc_stock_storage_type.package_st_M_M_Nouveaute"
+        ),
+        copy=False,
+    )
+
     @api.depends("product_package_storage_type_id")
     def _compute_is_new(self):
         storage_type_new = self.env.ref(
