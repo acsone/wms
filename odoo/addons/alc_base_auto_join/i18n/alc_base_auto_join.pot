@@ -88,13 +88,3 @@ msgstr ""
 msgid "base"
 msgstr ""
 
-#. module: alc_base_auto_join
-#: model:ir.model.fields,field_description:alc_base_auto_join.field_server_config_ir_config_parameter_I_storage_image_backend_id
-msgid "ir_config_parameter | storage_image_backend_id"
-msgstr ""
-
-#. module: alc_base_auto_join
-#: model:ir.model.fields,field_description:alc_base_auto_join.field_server_config_ir_config_parameter_I_storage_thumbnail_backend_id
-msgid "ir_config_parameter | storage_thumbnail_backend_id"
-msgstr ""
-
