@@ -35,6 +35,6 @@ class ClusterPicking(Component):
             packages=package,
         )
         picking.sudo().print_packages_label(
-            printer_id=self.shopfloor_user.printing_product_label_printer_id.id,
+            printer_id=self.shopfloor_user.printing_package_label_printer_id.id,
             packages=package,
         )

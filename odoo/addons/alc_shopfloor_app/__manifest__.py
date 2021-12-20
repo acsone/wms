@@ -14,6 +14,7 @@
         "alc_shopfloor",
         "alc_shopfloor_cluster_picking",
         "alc_shopfloor_cluster_picking_printing",
+        "alc_shopfloor_cluster_picking_transfer_async",
         "alc_shopfloor_location_content_relocation",
         "alc_shopfloor_location_info",
         "alc_shopfloor_mobile",

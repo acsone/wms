@@ -3,6 +3,7 @@
 # Copyright 2021 ACSONE SA/NV (https://www.acsone.eu)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 import difflib
+import logging
 import pprint
 from collections import namedtuple
 
@@ -32,6 +33,10 @@ class CommonCase(BaseCommonCase):
         # setUpComponent is the first setup called by setupClass. We override it
         # to ensure that the env contains the required context to avoid trouble when
         # test are run with delivery_rounds installed.
+        if "queue.job" in cls.env:
+            cls.env = cls.env(
+                context=dict(cls.env.context, test_queue_job_no_delay=True)
+            )
         if "round.instance" in cls.env:
             cls.env = cls.env(context=dict(cls.env.context, round_autoset=False))
         PType = cls.env["stock.picking.type"]
@@ -461,6 +466,24 @@ class CommonCase(BaseCommonCase):
                 ]
 
         self.fail("\n".join(errors))
+
+    def setUp(self):
+        super(CommonCase, self).setUp()
+        if "queue.job" in self.env:
+            # mute logger
+            loggers = ["odoo.addons.queue_job.models.base"]
+            for logger in loggers:
+                logging.getLogger(logger).addFilter(self)
+
+            # pylint: disable=unused-variable
+            @self.addCleanup
+            def un_mute_logger():
+                for logger_ in loggers:
+                    logging.getLogger(logger_).removeFilter(self)
+
+    def filter(self, record):
+        # required to mute logger
+        return 0
 
 
 class PickingBatchMixin:
