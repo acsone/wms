@@ -1018,7 +1018,14 @@ class ClusterPicking(Component):
                 continue
             operations = picking.mapped("pack_operation_ids")
             if all(p.shopfloor_unloaded for p in operations):
+                self._do_transfer(pickings=picking)
+
+    def _do_transfer(self, pickings):
+        for picking in pickings:
+            if picking.pack_operation_ids:
                 picking.do_transfer()
+        pickings_not_done = pickings.filtered(lambda p: p.state != "done")
+        pickings_not_done.write({"batch_id": False})
 
     def _unload_end(self, batch, completion_info_popup=None):
         """Try to close the batch if all transfers are done.
@@ -1042,13 +1049,20 @@ class ClusterPicking(Component):
                 message=self.msg_store.batch_transfer_line_done(),
                 popup=completion_info_popup,
             )
+        # because a move was unassigned, we want to validate the batch to
+        # produce backorders)
+        self._do_transfer(pickings=batch.mapped("picking_ids"))
         batch.state = "done"
         # Unassign not validated pickings from the batch, they will be
         # processed in another batch automatically later on
-        pickings_not_done = batch.mapped("picking_ids").filtered(
-            lambda p: p.state != "done"
-        )
-        pickings_not_done.write({"batch_id": False})
+
+        # CODE MOVED to async exec of picking validation....
+        # pickings_not_done = batch.mapped("picking_ids").filtered(
+        #    lambda p: p.state != "done"
+        # )
+        # pickings_not_done.write({"batch_id": False})
+        # END CODE MOVED
+
         return self._response_for_start(
             message=self.msg_store.batch_transfer_complete(),
             popup=completion_info_popup,
