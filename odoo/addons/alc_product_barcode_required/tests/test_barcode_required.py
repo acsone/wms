@@ -10,6 +10,9 @@ class TestBarcodeRequired(SavepointCase):
     @classmethod
     def setUpClass(cls):
         super(TestBarcodeRequired, cls).setUpClass()
+        cls.dummy_storage_type = cls.env["stock.package.storage.type"].create(
+            {"name": "dummy"}
+        )
 
     def test_00_create_product_product_missing_barcode(self):
         with self.assertRaises(ValidationError), self.env.cr.savepoint():
@@ -19,6 +22,7 @@ class TestBarcodeRequired(SavepointCase):
                     "uom_id": self.env.ref("product.product_uom_unit").id,
                     "type": "product",
                     "weight": 6.0,
+                    "product_package_storage_type_id": self.dummy_storage_type.id,
                 }
             )
 
@@ -30,6 +34,7 @@ class TestBarcodeRequired(SavepointCase):
                 "type": "product",
                 "weight": 6.0,
                 "barcode": "1234567892",
+                "product_package_storage_type_id": self.dummy_storage_type.id,
             }
         )
 
@@ -44,6 +49,7 @@ class TestBarcodeRequired(SavepointCase):
                 "type": "product",
                 "weight": 6.0,
                 "no_barcode_authorized": True,
+                "product_package_storage_type_id": self.dummy_storage_type.id,
             }
         )
 
@@ -58,6 +64,7 @@ class TestBarcodeRequired(SavepointCase):
                     "uom_id": self.env.ref("product.product_uom_unit").id,
                     "type": "product",
                     "weight": 6.0,
+                    "product_package_storage_type_id": self.dummy_storage_type.id,
                 }
             )
 
@@ -69,6 +76,7 @@ class TestBarcodeRequired(SavepointCase):
                 "type": "product",
                 "weight": 6.0,
                 "barcode": "1234567892",
+                "product_package_storage_type_id": self.dummy_storage_type.id,
             }
         )
         with self.assertRaises(ValidationError), self.env.cr.savepoint():
@@ -88,3 +96,32 @@ class TestBarcodeRequired(SavepointCase):
             }
         )
         self.assertFalse(template.no_barcode_authorized)
+
+    def test_copy_product(self):
+        product = self.env["product.product"].create(
+            {
+                "name": "Unittest missing barcode on write",
+                "uom_id": self.env.ref("product.product_uom_unit").id,
+                "type": "product",
+                "weight": 6.0,
+                "barcode": "1234567892",
+                "no_barcode_authorized": True,
+            }
+        )
+        p2 = product.copy()
+        self.assertTrue(p2)
+
+    def test_copy_template(self):
+        product = self.env["product.product"].create(
+            {
+                "name": "Unittest missing barcode on write",
+                "uom_id": self.env.ref("product.product_uom_unit").id,
+                "type": "product",
+                "weight": 6.0,
+                "barcode": "1234567892",
+                "no_barcode_authorized": True,
+            }
+        )
+        product_tmpl = product.product_tmpl_id
+        p2 = product_tmpl.copy()
+        self.assertTrue(p2)

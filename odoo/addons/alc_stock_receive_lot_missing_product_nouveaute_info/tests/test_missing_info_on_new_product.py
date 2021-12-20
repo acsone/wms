@@ -20,6 +20,9 @@ class TestMissingInfoOnNewProduct(SavepointCase):
         storage_type_new = cls.env.ref(
             "alc_stock_storage_type.package_st_M_M_Nouveaute"
         )
+        cls.dummy_storage_type = cls.env["stock.package.storage.type"].create(
+            {"name": "dummy"}
+        )
         cls.StockLocation = cls.env["stock.location"]
         cls.StockPicking = cls.env["stock.picking"]
         cls.ResPartner = cls.env["res.partner"]
@@ -112,6 +115,7 @@ class TestMissingInfoOnNewProduct(SavepointCase):
                 "uom_id": cls.env.ref("product.product_uom_unit").id,
                 "type": "product",
                 "barcode": "23456998778910",
+                "product_package_storage_type_id": cls.dummy_storage_type.id,
             }
         )
         cls.p8 = cls.pt8.product_variant_ids[0]

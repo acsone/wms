@@ -10,16 +10,28 @@ class ProductTemplate(models.Model):
     _inherit = "product.template"
 
     length = fields.Float(
-        compute="_compute_pt_length", inverse="_inverse_pp_length", store=False
+        compute="_compute_pt_length",
+        inverse="_inverse_pp_length",
+        store=False,
+        copy=False,
     )
     height = fields.Float(
-        compute="_compute_pt_height", inverse="_inverse_pp_height", store=False
+        compute="_compute_pt_height",
+        inverse="_inverse_pp_height",
+        store=False,
+        copy=False,
     )
     width = fields.Float(
-        compute="_compute_pt_width", inverse="_inverse_pp_width", store=False
+        compute="_compute_pt_width",
+        inverse="_inverse_pp_width",
+        store=False,
+        copy=False,
     )
     weight = fields.Float(
-        compute="_compute_pt_weight", inverse="_inverse_pp_weight", store=False
+        compute="_compute_pt_weight",
+        inverse="_inverse_pp_weight",
+        store=False,
+        copy=False,
     )
     volume_liter = fields.Float(
         related="product_variant_ids.volume_liter", readonly=True

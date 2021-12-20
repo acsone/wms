@@ -9,6 +9,11 @@ class ProductProduct(models.Model):
 
     _inherit = "product.product"
 
+    length = fields.Float(copy=False)
+    height = fields.Float(copy=False)
+    width = fields.Float(copy=False)
+    weight = fields.Float(copy=False)
+
     volume_liter = fields.Float(
         digits=(8, 4),
         compute="_compute_volume_liter",
