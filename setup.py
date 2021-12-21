@@ -13,7 +13,11 @@ setup(
     odoo_addons={
         "odoo_version_override": "10.0",
         "external_dependencies_override": {
-            "python": {"shapefile": "pyshp", "slugify": "python-slugify"}
+            "python": {
+                "shapefile": "pyshp",
+                "slugify": "python-slugify",
+                "keycloak": "python-keycloak",
+            }
         },
     },
     install_requires=[
