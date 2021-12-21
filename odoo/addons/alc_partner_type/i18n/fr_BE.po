@@ -1,0 +1,110 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* alc_partner_type
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-12-21 09:35+0000\n"
+"PO-Revision-Date: 2021-12-21 09:35+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_partner_type
+#: model:ir.model.fields,field_description:alc_partner_type.field_res_partner_partner_type
+#: model:ir.model.fields,field_description:alc_partner_type.field_res_users_partner_type
+msgid "Alcyon Partner Category"
+msgstr "Type de client"
+
+#. module: alc_partner_type
+#: model:ir.model.fields,field_description:alc_partner_type.field_delivery_carrier_allowed_partner_types
+#: model:ir.model.fields,field_description:alc_partner_type.field_product_product_allowed_partner_types
+msgid "Allowed Partner Types"
+msgstr "Types de client autorisés"
+
+#. module: alc_partner_type
+#: selection:res.partner,partner_type:0
+msgid "Equipment Only"
+msgstr "Exclusif matériel"
+
+#. module: alc_partner_type
+#: selection:res.partner,partner_type:0
+msgid "Export Customer"
+msgstr "Clients export"
+
+#. module: alc_partner_type
+#: selection:res.partner,partner_type:0
+msgid "Export Medicine"
+msgstr "Médicament export"
+
+#. module: alc_partner_type
+#: selection:res.partner,partner_type:0
+msgid "Food Only"
+msgstr "Exclusif aliments (Non supporté par akénéo)"
+
+#. module: alc_partner_type
+#: selection:res.partner,partner_type:0
+msgid "Guest"
+msgstr "Mode non connecté (Non supporté par akénéo)"
+
+#. module: alc_partner_type
+#: selection:res.partner,partner_type:0
+msgid "Miscellaneous"
+msgstr "Divers (Non supporté par akénéo)"
+
+#. module: alc_partner_type
+#: model:ir.model,name:alc_partner_type.model_res_partner
+msgid "Partner"
+msgstr "Partenaire"
+
+#. module: alc_partner_type
+#: selection:res.partner,partner_type:0
+msgid "Pharmacy Wholesaler"
+msgstr "Pharmaciens et Grossistes humains"
+
+#. module: alc_partner_type
+#: model:ir.model,name:alc_partner_type.model_product_product
+msgid "Product"
+msgstr "Produit"
+
+#. module: alc_partner_type
+#: selection:res.partner,partner_type:0
+msgid "Shareholder"
+msgstr "Alcyonnaire"
+
+#. module: alc_partner_type
+#: model:ir.model.fields,field_description:alc_partner_type.field_res_partner_is_student
+#: model:ir.model.fields,field_description:alc_partner_type.field_res_users_is_student
+msgid "Student"
+msgstr "Etudiant"
+
+#. module: alc_partner_type
+#: selection:res.partner,partner_type:0
+msgid "Student and similar"
+msgstr "Etudiants et assimilés sans dépôt"
+
+#. module: alc_partner_type
+#: selection:res.partner,partner_type:0
+msgid "Suppliers"
+msgstr "Fournisseurs (Non supporté par akénéo)"
+
+#. module: alc_partner_type
+#: model:ir.model.fields,help:alc_partner_type.field_delivery_carrier_allowed_partner_types
+#: model:ir.model.fields,help:alc_partner_type.field_product_product_allowed_partner_types
+msgid "Technical field. Stores all partner types allowed to access the product."
+msgstr "Technical field. Stores all partner types allowed to access the product."
+
+#. module: alc_partner_type
+#: selection:res.partner,partner_type:0
+msgid "Veterinary"
+msgstr "Vétérinaires avec dépôt"
+
+#. module: alc_partner_type
+#: selection:res.partner,partner_type:0
+msgid "Veterinary Wholesaler"
+msgstr "Grossistes vétérinaires"
