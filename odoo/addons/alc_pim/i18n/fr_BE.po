@@ -912,12 +912,6 @@ msgid "Castration immunitaire"
 msgstr "Castration immunitaire"
 
 #. module: alc_pim
-#: model:attribute.attribute,field_description:alc_pim.attribute_route_from_categ_ids
-#: model:ir.model.fields,field_description:alc_pim.attribute_route_from_categ_ids_ir_model_fields
-msgid "Category Routes"
-msgstr "Catégorie de route"
-
-#. module: alc_pim
 #: model:product.category,name:alc_pim.catheter_perftransfu_inj_cons
 msgid "Cathéters"
 msgstr "Cathéters"
@@ -1358,12 +1352,6 @@ msgstr "Crispy"
 #: model:attribute.option,name:alc_pim.attribute_option_croquette
 msgid "Croquette"
 msgstr "Croquette"
-
-#. module: alc_pim
-#: model:attribute.attribute,field_description:alc_pim.attribute_taxes_id
-#: model:ir.model.fields,field_description:alc_pim.attribute_taxes_id_ir_model_fields
-msgid "Customer Taxes"
-msgstr "Taxes à la vente"
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.cuve_developmt_img_equip
@@ -2165,17 +2153,6 @@ msgid "Gentamicine"
 msgstr "Gentamicine"
 
 #. module: alc_pim
-#: model:attribute.attribute,help:alc_pim.attribute_packaging_ids
-#: model:ir.model.fields,help:alc_pim.attribute_packaging_ids_ir_model_fields
-msgid ""
-"Gives the different ways to package the same product. This has no impact on "
-"the picking order and is mainly used if you use the EDI module."
-msgstr ""
-"Indique les différentes façons d'emballer un même article. Ceci n'a pas "
-"d'impact sur les ordres de préparation, et sert principalement si vous "
-"activez le module d'EDI."
-
-#. module: alc_pim
 #: model:product.category,name:alc_pim.glucocortico_duemvb
 msgid "Glucocorticoïdes"
 msgstr "Glucocorticoïdes"
@@ -2602,12 +2579,6 @@ msgid "Interleukine"
 msgstr "Interleukine"
 
 #. module: alc_pim
-#: model:attribute.attribute,field_description:alc_pim.attribute_default_code
-#: model:ir.model.fields,field_description:alc_pim.attribute_default_code_ir_model_fields
-msgid "Internal Reference"
-msgstr "Référence interne"
-
-#. module: alc_pim
 #: model:attribute.attribute,help:alc_pim.attribute_barcode
 #: model:ir.model.fields,help:alc_pim.attribute_barcode_ir_model_fields
 msgid "International Article Number used for product identification."
@@ -2823,16 +2794,8 @@ msgid "Liver"
 msgstr "Liver"
 
 #. module: alc_pim
-#: model:attribute.attribute,field_description:alc_pim.attribute_packaging_ids
-#: model:ir.model.fields,field_description:alc_pim.attribute_packaging_ids_ir_model_fields
-msgid "Logistical Units"
-msgstr "Unités logistique"
-
-#. module: alc_pim
 #: model:attribute.attribute,field_description:alc_pim.attribute_category_lot_expiry_field_name
-#: model:attribute.attribute,field_description:alc_pim.attribute_lot_expiry_field_name
 #: model:ir.model.fields,field_description:alc_pim.attribute_category_lot_expiry_field_name_ir_model_fields
-#: model:ir.model.fields,field_description:alc_pim.attribute_lot_expiry_field_name_ir_model_fields
 msgid "Lot expiry field name"
 msgstr "Lot expiry field name"
 
@@ -3275,12 +3238,6 @@ msgstr "Nicotinamide"
 #: model:attribute.option,name:alc_pim.attribute_option_nitroxinil
 msgid "Nitroxinil"
 msgstr "Nitroxinil"
-
-#. module: alc_pim
-#: model:attribute.attribute,field_description:alc_pim.attribute_not_sold_on_website
-#: model:ir.model.fields,field_description:alc_pim.attribute_not_sold_on_website_ir_model_fields
-msgid "Not sold on website"
-msgstr "Not sold on website"
 
 #. module: alc_pim
 #: model:attribute.option,name:alc_pim.attribute_option_not_specified
@@ -4719,16 +4676,6 @@ msgid "Thiamine"
 msgstr "Thiamine"
 
 #. module: alc_pim
-#: model:attribute.attribute,help:alc_pim.attribute_vendor_product_code
-#: model:ir.model.fields,help:alc_pim.attribute_vendor_product_code_ir_model_fields
-msgid ""
-"This vendor's product code will be used when printing a request for "
-"quotation. Keep empty to use the internal one."
-msgstr ""
-"Le référence fournisseur de l'article sera utilisé lors de l'édition d'un "
-"devis. Laissez le champ vide si vous voulez utiliser la référence interne."
-
-#. module: alc_pim
 #: model:attribute.attribute,field_description:alc_pim.attribute_thread_option_id
 #: model:ir.model.fields,field_description:alc_pim.attribute_thread_option_id_ir_model_fields
 msgid "Thread"
@@ -5032,12 +4979,6 @@ msgstr "Varkensinfluenzavirus"
 #: model:product.category,name:alc_pim.vasodil_periph_et_cereb_scvmvb
 msgid "Vasodilatateurs périphériques et cérébraux"
 msgstr "Vasodilatateurs périphériques et cérébraux"
-
-#. module: alc_pim
-#: model:attribute.attribute,field_description:alc_pim.attribute_vendor_product_code
-#: model:ir.model.fields,field_description:alc_pim.attribute_vendor_product_code_ir_model_fields
-msgid "Vendor Product Code"
-msgstr "Référence Fournisseur"
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.vers_laga_nac
@@ -5376,3 +5317,36 @@ msgstr "à usage transdermique contre les ecto- et endoparasites"
 #: model:product.category,name:alc_pim.a_usg_transd_ctre_endopar_apaimvb
 msgid "à usage transdermique contre les endoparasites"
 msgstr "à usage transdermique contre les endoparasites"
+
+#~ msgid "Category Routes"
+#~ msgstr "Catégorie de route"
+
+#~ msgid "Customer Taxes"
+#~ msgstr "Taxes à la vente"
+
+#~ msgid ""
+#~ "Gives the different ways to package the same product. This has no impact "
+#~ "on the picking order and is mainly used if you use the EDI module."
+#~ msgstr ""
+#~ "Indique les différentes façons d'emballer un même article. Ceci n'a pas "
+#~ "d'impact sur les ordres de préparation, et sert principalement si vous "
+#~ "activez le module d'EDI."
+
+#~ msgid "Internal Reference"
+#~ msgstr "Référence interne"
+
+#~ msgid "Logistical Units"
+#~ msgstr "Unités logistique"
+
+#~ msgid "Not sold on website"
+#~ msgstr "Not sold on website"
+
+#~ msgid ""
+#~ "This vendor's product code will be used when printing a request for "
+#~ "quotation. Keep empty to use the internal one."
+#~ msgstr ""
+#~ "Le référence fournisseur de l'article sera utilisé lors de l'édition d'un "
+#~ "devis. Laissez le champ vide si vous voulez utiliser la référence interne."
+
+#~ msgid "Vendor Product Code"
+#~ msgstr "Référence Fournisseur"

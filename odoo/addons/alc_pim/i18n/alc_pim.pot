@@ -909,12 +909,6 @@ msgid "Castration immunitaire"
 msgstr ""
 
 #. module: alc_pim
-#: model:attribute.attribute,field_description:alc_pim.attribute_route_from_categ_ids
-#: model:ir.model.fields,field_description:alc_pim.attribute_route_from_categ_ids_ir_model_fields
-msgid "Category Routes"
-msgstr ""
-
-#. module: alc_pim
 #: model:product.category,name:alc_pim.catheter_perftransfu_inj_cons
 msgid "Cathéters"
 msgstr ""
@@ -1354,12 +1348,6 @@ msgstr ""
 #. module: alc_pim
 #: model:attribute.option,name:alc_pim.attribute_option_croquette
 msgid "Croquette"
-msgstr ""
-
-#. module: alc_pim
-#: model:attribute.attribute,field_description:alc_pim.attribute_taxes_id
-#: model:ir.model.fields,field_description:alc_pim.attribute_taxes_id_ir_model_fields
-msgid "Customer Taxes"
 msgstr ""
 
 #. module: alc_pim
@@ -2162,12 +2150,6 @@ msgid "Gentamicine"
 msgstr ""
 
 #. module: alc_pim
-#: model:attribute.attribute,help:alc_pim.attribute_packaging_ids
-#: model:ir.model.fields,help:alc_pim.attribute_packaging_ids_ir_model_fields
-msgid "Gives the different ways to package the same product. This has no impact on the picking order and is mainly used if you use the EDI module."
-msgstr ""
-
-#. module: alc_pim
 #: model:product.category,name:alc_pim.glucocortico_duemvb
 msgid "Glucocorticoïdes"
 msgstr ""
@@ -2594,12 +2576,6 @@ msgid "Interleukine"
 msgstr ""
 
 #. module: alc_pim
-#: model:attribute.attribute,field_description:alc_pim.attribute_default_code
-#: model:ir.model.fields,field_description:alc_pim.attribute_default_code_ir_model_fields
-msgid "Internal Reference"
-msgstr ""
-
-#. module: alc_pim
 #: model:attribute.attribute,help:alc_pim.attribute_barcode
 #: model:ir.model.fields,help:alc_pim.attribute_barcode_ir_model_fields
 msgid "International Article Number used for product identification."
@@ -2814,16 +2790,8 @@ msgid "Liver"
 msgstr ""
 
 #. module: alc_pim
-#: model:attribute.attribute,field_description:alc_pim.attribute_packaging_ids
-#: model:ir.model.fields,field_description:alc_pim.attribute_packaging_ids_ir_model_fields
-msgid "Logistical Units"
-msgstr ""
-
-#. module: alc_pim
 #: model:attribute.attribute,field_description:alc_pim.attribute_category_lot_expiry_field_name
-#: model:attribute.attribute,field_description:alc_pim.attribute_lot_expiry_field_name
 #: model:ir.model.fields,field_description:alc_pim.attribute_category_lot_expiry_field_name_ir_model_fields
-#: model:ir.model.fields,field_description:alc_pim.attribute_lot_expiry_field_name_ir_model_fields
 msgid "Lot expiry field name"
 msgstr ""
 
@@ -3265,12 +3233,6 @@ msgstr ""
 #. module: alc_pim
 #: model:attribute.option,name:alc_pim.attribute_option_nitroxinil
 msgid "Nitroxinil"
-msgstr ""
-
-#. module: alc_pim
-#: model:attribute.attribute,field_description:alc_pim.attribute_not_sold_on_website
-#: model:ir.model.fields,field_description:alc_pim.attribute_not_sold_on_website_ir_model_fields
-msgid "Not sold on website"
 msgstr ""
 
 #. module: alc_pim
@@ -4710,12 +4672,6 @@ msgid "Thiamine"
 msgstr ""
 
 #. module: alc_pim
-#: model:attribute.attribute,help:alc_pim.attribute_vendor_product_code
-#: model:ir.model.fields,help:alc_pim.attribute_vendor_product_code_ir_model_fields
-msgid "This vendor's product code will be used when printing a request for quotation. Keep empty to use the internal one."
-msgstr ""
-
-#. module: alc_pim
 #: model:attribute.attribute,field_description:alc_pim.attribute_thread_option_id
 #: model:ir.model.fields,field_description:alc_pim.attribute_thread_option_id_ir_model_fields
 msgid "Thread"
@@ -5018,12 +4974,6 @@ msgstr ""
 #. module: alc_pim
 #: model:product.category,name:alc_pim.vasodil_periph_et_cereb_scvmvb
 msgid "Vasodilatateurs périphériques et cérébraux"
-msgstr ""
-
-#. module: alc_pim
-#: model:attribute.attribute,field_description:alc_pim.attribute_vendor_product_code
-#: model:ir.model.fields,field_description:alc_pim.attribute_vendor_product_code_ir_model_fields
-msgid "Vendor Product Code"
 msgstr ""
 
 #. module: alc_pim
