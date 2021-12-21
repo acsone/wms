@@ -1,0 +1,26 @@
+# -*- coding: utf-8 -*-
+# Copyright 2021 ACSONE SA/NV
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+
+
+{
+    "name": "Keycloak",
+    "description": """Keycloak""",
+    "version": "10.0.1.0.0",
+    "license": "AGPL-3",
+    "author": "ACSONE SA/NV",
+    "website": "https://acsone.eu/",
+    "depends": ["server_environment", "queue_job"],
+    "application": False,
+    "data": [
+        "security/ir.model.access.csv",
+        "data/keycloak_backend.xml",
+        "views/keycloak_backend.xml",
+        "views/keycloak_user.xml",
+        "wizard/keycloak_partner_wizard.xml",
+        "wizard/keycloak_user_wizard.xml",
+        "views/res_partner.xml",
+    ],
+    "demo": [],
+    "external_dependencies": {"python": ["keycloak"]},
+}

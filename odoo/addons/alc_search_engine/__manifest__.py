@@ -9,7 +9,7 @@
     "website": "http://www.acsone.eu",
     "license": "AGPL-3",
     "category": "alc",
-    "depends": ["alc_eshop"],
+    "depends": ["alc_eshop", "alc_partner_type"],
     "data": [
         "data/ir_export_product.xml",
         "data/se_backend.xml",
