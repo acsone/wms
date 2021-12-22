@@ -110,6 +110,16 @@
             type="module"
         />
         <script
+            id="script_load_translation"
+            t-attf-src="/shopfloor_mobile_base/static/wms/src/i18n/load_translation.js?v=#{app_version}"
+            type="module"
+        />
+        <script
+            id="script_add translations_registry"
+            t-attf-src="/shopfloor_mobile_base/static/wms/src/i18n/add_translations_to_registry.js?v=#{app_version}"
+            type="module"
+        />
+        <script
             id="script_utils"
             t-attf-src="/shopfloor_mobile_base/static/wms/src/utils.js?v=#{app_version}"
             type="module"
@@ -195,7 +205,6 @@
             t-attf-src="/shopfloor_mobile_base/static/wms/src/scenario/form.js?v=#{app_version}"
             type="module"
         />
-
         <t
             id="new_scenario_hook"
             t-if="0"
