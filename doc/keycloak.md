@@ -6,10 +6,16 @@
 
 ## keycloak configuration
 
-Create `OdooAlcyonLocal` realm
+Create `OdooAlcyonLocal` realm. In `Login` panel, deactivate `login with email`
+and activate `duplicate emails`.
 In master realm, create `alcyon` client. 
 Set it to `confidential` access type, then activate `Service Accounts Enabled`.
-
+Once saved, you can find the client secret in a new panel `Credentials`.
+In `Service Account Roles` panel, assign it admin role.
+In the `Mappers` panel, you can now create new protocol mappers for the added fields
+using a `User Attribute` type to link it to the token
+(e.g. `shopinvader-vt-roles`, `supplier_id`).
+More details at https://www.baeldung.com/keycloak-custom-user-attributes.
 
 ## python client
 
