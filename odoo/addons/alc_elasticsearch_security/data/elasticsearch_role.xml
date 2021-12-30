@@ -19,6 +19,7 @@
   "tenant_permissions": []
 }
     </field>
+    <field name="extra_backend_roles">opendistro_security_anonymous_backendrole</field>
   </record>
   <record id="role_misc" model="elasticsearch.role">
     <field name="backend_id" ref="alc_search_engine.elasticsearch_backend" />
