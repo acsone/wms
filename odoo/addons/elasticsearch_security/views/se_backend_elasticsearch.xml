@@ -26,6 +26,7 @@
                     <field name="role_ids" nolabel="1">
                         <tree editable="bottom">
                             <field name="name" />
+                            <field name="extra_backend_roles" />
                             <field name="body" />
                         </tree>
                     </field>
