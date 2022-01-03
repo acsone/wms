@@ -159,7 +159,7 @@ class ExportReportTurnover(models.TransientModel):
             same_month_last_year["bool"] = data_by_months["Month"].eq(date_to_get)
             index = same_month_last_year[same_month_last_year["bool"]].index.values
 
-            if index is not None:
+            if index.size:
                 start_year = str(last_year) + "-10-01"
                 last_year = pd.DataFrame()
                 last_year["bool"] = data_by_months["Month"].eq(start_year)
@@ -201,14 +201,14 @@ class ExportReportTurnover(models.TransientModel):
         index_in_df = is_today_in_current_month[
             is_today_in_current_month["bool"]
         ].index.values
-        if index_in_df is not None:
+        if index_in_df.size:
             data[end_date_name].iloc[index_in_df[0]] = today
 
         business_days = data.apply(
             lambda row: np.busday_count(row[start_date_name], row[end_date_name]),
             axis=1,
         )
-        if index_in_df is not None:
+        if index_in_df.size:
             # numpy counts business days until the day before today (the current day is excluded).
             # However, to compute the turnover of the current month ponderated by the one of the
             # same month lastyear, we have to take today into account.
