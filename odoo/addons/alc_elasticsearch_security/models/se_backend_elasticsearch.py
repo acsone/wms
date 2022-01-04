@@ -2,7 +2,7 @@
 # Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import fields, models
+from odoo import api, fields, models
 
 
 class SeBackendElasticsearch(models.Model):
@@ -28,3 +28,13 @@ class SeBackendElasticsearch(models.Model):
             existing_role.create(values)
         else:
             existing_role.write(values)
+
+    @api.model
+    def get_exported_fields(self):
+        """Return the list of field names exported, to authorize them."""
+        # could be split into one generic, OCA function, and an ALC override
+        export = self.env.ref("shopinvader.ir_exp_shopinvader_variant")
+        s = lambda x: x.split(":")[-1]  # keep the alias
+        g = lambda y: s(y[0]) if isinstance(y, tuple) else s(y)  # root subparser
+        fs = [g(e) for e in export.get_json_parser()]
+        return [f for f in fs if not any(e in f for e in ("price", "stock"))]
