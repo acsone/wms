@@ -108,7 +108,8 @@ class ActionsDataCase(ActionsDataCaseBase):
             "partner": {"id": self.customer.id, "name": self.customer.name},
             "carrier": {"id": carrier.id, "name": carrier.name},
         }
-        self.assertEqual(data.pop("scheduled_date").split(" ")[0], "2020-08-03")
+        # we might get a datetime
+        self.assertTrue("2020-08-03" in data.pop("scheduled_date").split(" ")[0])
         self.assertDictEqual(data, expected)
 
     def test_data_product(self):

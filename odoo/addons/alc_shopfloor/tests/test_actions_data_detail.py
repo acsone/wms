@@ -58,8 +58,8 @@ class TestActionsDataDetailCase(ActionsDataDetailCaseBase):
             "product": self._expected_product_detail(self.product_b, full=True),
         }
         # ignore time and TZ, we don't care here
-        self.assertEqual(data.pop("removal_date").split(" ")[0], "2020-05-20")
-        self.assertEqual(data.pop("expire_date").split(" ")[0], "2020-05-31")
+        self.assertTrue("2020-05-20" in data.pop("removal_date").split(" ")[0])
+        self.assertTrue("2020-05-31" in data.pop("expire_date").split(" ")[0])
         self.assertDictEqual(data, expected)
 
     def test_data_package(self):
@@ -124,7 +124,8 @@ class TestActionsDataDetailCase(ActionsDataDetailCaseBase):
             "operations": self.data_detail.operations(picking.pack_operation_ids),
             "picking_type_code": "outgoing",
         }
-        self.assertEqual(data.pop("scheduled_date").split(" ")[0], "2020-05-13")
+        # we might get a datetime
+        self.assertTrue("2020-05-13" in data.pop("scheduled_date").split(" ")[0])
         self.assertDictEqual(data, expected)
 
     def test_data_pack_operation_package(self):
