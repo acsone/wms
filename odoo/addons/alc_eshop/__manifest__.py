@@ -17,6 +17,7 @@
         "alc_eshop_filter_data",
         "alc_shopinvader_category",
         "shopinvader_elasticsearch",
+        "shopinvader_product_stock",
         "shopinvader_multi_category",
         "shopinvader_assortment",
         "shopinvader_image",

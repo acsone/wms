@@ -14,6 +14,15 @@ class ElasticSearchRole(models.Model):
     backend_id = fields.Many2one(
         comodel_name="se.backend.elasticsearch", ondelete="cascade", required=True
     )
+    extra_backend_roles = fields.Char(help="Separate roles by a comma, without spaces")
+
+    def get_backend_roles(self):
+        self.ensure_one()
+        if self.extra_backend_roles:
+            backend_roles = list(set(self.extra_backend_roles.split(",") + [self.name]))
+        else:
+            backend_roles = [self.name]
+        return backend_roles
 
     _sql_constraints = [
         (
