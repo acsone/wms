@@ -1,0 +1,23 @@
+{
+  "app.action.logout": "Déconnexion",
+  "app.loading": "Chargement...",
+  "app.nav.scenario": "Scénario:",
+  "app.profile_configure": "Configurer un profil",
+  "app.profile_not_configured": "Profil non configuré. Choisissez-en un.",
+  "btn.back.title": "Retour",
+  "btn.cancel.title": "Annuler",
+  "btn.reload_config.title": "Recharger la configuration et le menu",
+  "btn.reset.title": "Reset",
+  "list.no_items": "Pas d'item dans la liste.",
+  "misc.actions_popup.btn_action": "Action",
+  "screen.home.action.nuke_data_and_reload": "Recharger les données et rafraichir la page",
+  "screen.home.main_title": "Barcode scanner",
+  "screen.home.version": "Version:",
+  "screen.login.action.login": "Connexion",
+  "screen.login.api_key_label": "API key",
+  "screen.login.api_key_placeholder": "Entrez votre API key",
+  "screen.settings.home.title": "Réglages",
+  "screen.settings.language.title": "Choisir la langue",
+  "screen.settings.profile.title": "Choisissez un profil",
+  "select.no_items": "Pas d'item à sélectionner."
+}
