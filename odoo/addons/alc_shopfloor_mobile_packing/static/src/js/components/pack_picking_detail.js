@@ -44,7 +44,19 @@ Vue.component("pack-picking-detail", {
           action_val_path: "package_src.name",
         },
         {path: "lot.name", label: "Lot", action_val_path: "lot.name"},
-        {path: "qty_done", label: "Qty"},
+        {
+          path: "qty_done",
+          label: "Qty",
+          render_component: "packaging-qty-picker-display",
+          render_options: function(record) {
+            let opts = {
+              init_value: record.qty_done,
+              available_packaging: record.product.packaging,
+              uom: record.product.uom,
+            };
+            return opts;
+          },
+        },
       ];
     },
     grouped_lines() {
