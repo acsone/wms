@@ -36,7 +36,7 @@ msgstr "A colis de destination est requis."
 #: code:addons/alc_shopfloor/actions/change_package_lot.py:139
 #, python-format
 msgid "A draft inventory has been created for control."
-msgstr "A inventaire brouillon a été créé pour le contrôle."
+msgstr "Un inventaire brouillon a été créé pour le contrôle."
 
 #. module: alc_shopfloor
 #: model:ir.model,name:alc_shopfloor.model_shopfloor_priority_postpone_mixin
@@ -105,7 +105,7 @@ msgstr "Annulé, vous pouvez scanner un nouveau colis."
 #: code:addons/alc_shopfloor/actions/message.py:467
 #, python-format
 msgid "Cannot change to lot {} which is entirely picked."
-msgstr "Cannot change to lot {} which is entirely picked."
+msgstr "Impossible de changer vers le lot {} qui est entièrement traité."
 
 #. module: alc_shopfloor
 #: model:stock.picking.type,name:alc_shopfloor.picking_type_checkout_demo
@@ -186,9 +186,9 @@ msgid ""
 "a sublocation (when putaway destination is different from the operation "
 "type's destination)."
 msgstr ""
-"Si vous cochez cette case, le transfert est résevé seuement si la règle de "
-"rangement permet de trouver un sous emplacement. (lorsque la destination du "
-"transfer est différente de la destination du type d'opération)."
+"Si vous cochez cette case, le transfert est réservé seulement si la règle de "
+"rangement permet de trouver un sous-emplacement. (lorsque la destination du "
+"transfert est différente de la destination du type d'opération)."
 
 #. module: alc_shopfloor
 #: model:ir.model.fields,help:alc_shopfloor.field_shopfloor_menu_keep_existing_reservations
@@ -223,7 +223,7 @@ msgstr "Ignorer les transferts lorsqu'aucune rêgle de rangement n'est possible"
 #: code:addons/alc_shopfloor/models/shopfloor_menu.py:105
 #, python-format
 msgid "Ignoring not found putaway is not allowed for menu {}."
-msgstr "Ignoring not found putaway is not allowed for menu {}."
+msgstr "Ignorer qu'aucune règle de rangement n'est pas permis pour le menu {}."
 
 #. module: alc_shopfloor
 #: model:ir.model,name:alc_shopfloor.model_stock_location
@@ -234,12 +234,12 @@ msgstr "Emplacements de stock"
 #: code:addons/alc_shopfloor/models/shopfloor_menu.py:161
 #, python-format
 msgid "Keep existing reservations is not allowed for menu {}."
-msgstr "Keep existing reservations is not allowed for menu {}."
+msgstr "Garder les réservations existantes n'est pas permis pour le menu {}."
 
 #. module: alc_shopfloor
 #: model:ir.model.fields,field_description:alc_shopfloor.field_shopfloor_menu_keep_existing_reservations_is_possible
 msgid "Keep existing reservations is possible"
-msgstr "Keep existing reservations is possible"
+msgstr "Garder les réservations existantes est possible"
 
 #. module: alc_shopfloor
 #: model:ir.model.fields,field_description:alc_shopfloor.field_shopfloor_priority_postpone_mixin___last_update
@@ -305,7 +305,7 @@ msgstr "Le lot {} est pour un autre produit."
 #: code:addons/alc_shopfloor/actions/message.py:431
 #, python-format
 msgid "Lot {} replaced by lot {}."
-msgstr "Lot {} replacé par le lot {}."
+msgstr "Lot {} remplacé par le lot {}."
 
 #. module: alc_shopfloor
 #: code:addons/alc_shopfloor/actions/inventory.py:155
@@ -369,19 +369,19 @@ msgstr "Aucun lot trouvé pour {}"
 #: code:addons/alc_shopfloor/actions/message.py:346
 #, python-format
 msgid "No more refill arrange to do, please select a location to transfer."
-msgstr "No more refill arrange to do, please select a location to transfer."
+msgstr "Il n'y a plus de rangements à faire. Sélectionner un emplacement pour commencer un nouveau transfert"
 
 #. module: alc_shopfloor
 #: code:addons/alc_shopfloor/actions/message.py:15
 #, python-format
 msgid "No operation type found for this menu and profile."
-msgstr "No operation type found for this menu and profile."
+msgstr "Pas de type d'opération trouvé pour ce menu et pour ce profil"
 
 #. module: alc_shopfloor
 #: code:addons/alc_shopfloor/services/service.py:42
 #, python-format
 msgid "No operation types configured on menu {}."
-msgstr "No operation types configured on menu {}."
+msgstr "Pas de types d'opération configuré pour ce menu {}."
 
 #. module: alc_shopfloor
 #: code:addons/alc_shopfloor/actions/message.py:178
@@ -588,7 +588,7 @@ msgstr ""
 #: code:addons/alc_shopfloor/actions/message.py:481
 #, python-format
 msgid "Picking type {} complete."
-msgstr "Picking type {} complete."
+msgstr "Type de préparation {} complet."
 
 #. module: alc_shopfloor
 #: model:ir.model.fields,field_description:alc_shopfloor.field_shopfloor_menu_keep_existing_reservations
@@ -677,7 +677,7 @@ msgstr "SF unloaded"
 #: code:addons/alc_shopfloor/actions/message.py:240
 #, python-format
 msgid "Same package {} is already assigned."
-msgstr "Same package {} is already assigned."
+msgstr "Le paquet {} est déjà assigné."
 
 #. module: alc_shopfloor
 #: code:addons/alc_shopfloor/actions/message.py:50
@@ -701,10 +701,10 @@ msgid ""
 "{}.\n"
 "Please, adjust your configuration."
 msgstr ""
-"Scenario `{}` require(s) 'Move Entire Packages' to be enabled.\n"
-"These type(s) do not satisfy this constraint: \n"
+"Le/les scénario `{}` nécessite que l'option 'Déplacer des paquet entiers' soit autorisée.\n"
+"Ce/ces type(s) ne satisfait/satisfont pas la contrainte: \n"
 "{}.\n"
-"Please, adjust your configuration."
+"Veuillez modifier votre configuration."
 
 #. module: alc_shopfloor
 #: code:addons/alc_shopfloor/actions/message.py:196
@@ -716,7 +716,7 @@ msgstr "Plusieurs lots trouvés dans %s, veuillez scanner un lot."
 #: code:addons/alc_shopfloor/actions/message.py:21
 #, python-format
 msgid "Several operation types found for this menu and profile."
-msgstr "Several operation types found for this menu and profile."
+msgstr "Plusieurs types d'opération ont été trouvé pour ce menu et ce profile."
 
 #. module: alc_shopfloor
 #: code:addons/alc_shopfloor/actions/message.py:171
@@ -1019,7 +1019,7 @@ msgstr "Transfert {} indisponible."
 #: code:addons/alc_shopfloor/actions/message.py:453
 #, python-format
 msgid "Units replaced by package {}."
-msgstr "Units replaced by package {}."
+msgstr "Unités remplacées par le paquet {}."
 
 #. module: alc_shopfloor
 #: code:addons/alc_shopfloor/actions/message.py:228

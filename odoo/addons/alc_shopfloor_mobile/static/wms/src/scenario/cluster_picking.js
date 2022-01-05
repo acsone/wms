@@ -184,7 +184,7 @@ const ClusterPicking = {
             );
           },
           display_info: {
-            title: "Select a batch and start",
+            title: this.$t("cluster_picking.manual_selection.title"),
           },
         },
         confirm_start: {
@@ -208,8 +208,10 @@ const ClusterPicking = {
         },
         start_operation: {
           display_info: {
-            title: "Pick the product by scanning something",
-            scan_placeholder: "Scan location / pack / product / lot",
+            title: this.$t("cluster_picking.start_operation.title"),
+            scan_placeholder: this.$t(
+              "cluster_picking.start_operation.scan_placeholder"
+            ),
           },
           // Here we have to use some info sent back from `select`
           // or from `find_batch` that we pass to scan line
@@ -266,8 +268,10 @@ const ClusterPicking = {
         },
         scan_destination: {
           display_info: {
-            title: "Check qty and scan a destination bin",
-            scan_placeholder: "Scan destination bin",
+            title: this.$t("cluster_picking.scan_destination.title"),
+            scan_placeholder: this.$t(
+              "cluster_picking.scan_destination.scan_placeholder"
+            ),
           },
           events: {
             qty_edit: "on_qty_edit",
@@ -328,8 +332,8 @@ const ClusterPicking = {
         },
         unload_all: {
           display_info: {
-            title: "Unload all bins",
-            scan_placeholder: "Scan location",
+            title: this.$t("cluster_picking.unload_all.title"),
+            scan_placeholder: this.$t("scan_placeholder_translation"),
           },
           on_scan: (scanned, confirmation = false) => {
             this.state_set_data({location_barcode: scanned.text});
@@ -353,8 +357,8 @@ const ClusterPicking = {
         },
         confirm_unload_all: {
           display_info: {
-            title: "Unload all bins confirm",
-            scan_placeholder: "Scan location",
+            title: this.$t("cluster_picking.confirm_unload_all.title"),
+            scan_placeholder: this.$t("scan_placeholder_translation"),
           },
           on_user_confirm: answer => {
             // TODO: check if this used
@@ -378,8 +382,8 @@ const ClusterPicking = {
         },
         unload_single: {
           display_info: {
-            title: "Unload single bin",
-            scan_placeholder: "Scan location",
+            title: this.$t("cluster_picking.unload_single.title"),
+            scan_placeholder: this.$t("scan_placeholder_translation"),
           },
           on_scan: scanned => {
             let endpoint, endpoint_data;
@@ -394,8 +398,8 @@ const ClusterPicking = {
         },
         unload_set_destination: {
           display_info: {
-            title: "Set destination",
-            scan_placeholder: "Scan location",
+            title: this.$t("cluster_picking.unload_set_destination.title"),
+            scan_placeholder: this.$t("scan_placeholder_translation"),
           },
           on_scan: scanned => {
             let endpoint, endpoint_data;
@@ -410,8 +414,8 @@ const ClusterPicking = {
         },
         confirm_unload_set_destination: {
           display_info: {
-            title: "Set destination confirm",
-            scan_placeholder: "Scan location",
+            title: this.$t("cluster_picking.confirm_unload_set_destination.title"),
+            scan_placeholder: this.$t("scan_placeholder_translation"),
           },
           on_scan: scanned => {
             let endpoint, endpoint_data;
@@ -427,8 +431,10 @@ const ClusterPicking = {
         },
         change_pack_lot: {
           display_info: {
-            title: "Change pack or lot",
-            scan_placeholder: "Scan pack or lot",
+            title: this.$t("cluster_picking.change_pack_lot.title"),
+            scan_placeholder: this.$t(
+              "cluster_picking.change_pack_lot.scan_placeholder"
+            ),
           },
           on_scan: scanned => {
             let endpoint, endpoint_data;
