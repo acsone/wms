@@ -79,14 +79,16 @@ class TestClusterPickingPrepareUnload(ClusterPickingUnloadPackingCommonCase):
                 "nbr_packages": 4,
             },
         )
+        message = self.service.msg_store.stock_picking_packed_successfully(picking)
         result_package = picking.pack_operation_ids.mapped("result_package_id")
         self.assertEqual(len(result_package), 1)
         self.assertEqual(result_package[0].nbr_packages, 4)
 
         picking = operations[0].picking_id
         data = self.data_detail.pack_picking_detail(picking)
+        # message = self.service.msg_store.stock_picking_packed_successfully(picking)
         self.assert_response(
-            response, next_state="pack_picking_scan_pack", data=data,
+            response, next_state="pack_picking_scan_pack", data=data, message=message
         )
         # we scan the pack
         response = self.service.dispatch(
@@ -111,8 +113,9 @@ class TestClusterPickingPrepareUnload(ClusterPickingUnloadPackingCommonCase):
             },
         )
         data = self._data_for_batch(self.batch, location)
+        message = self.service.msg_store.stock_picking_packed_successfully(picking)
         self.assert_response(
-            response, next_state="unload_all", data=data,
+            response, next_state="unload_all", data=data, message=message
         )
 
         result_package = picking.pack_operation_ids.mapped("result_package_id")
@@ -159,11 +162,13 @@ class TestClusterPickingPrepareUnload(ClusterPickingUnloadPackingCommonCase):
             },
         )
 
+        message = self.service.msg_store.stock_picking_packed_successfully(picking)
+
         # next picking..
         picking = operations[0].picking_id
         data = self.data_detail.pack_picking_detail(picking)
         self.assert_response(
-            response, next_state="pack_picking_scan_pack", data=data,
+            response, next_state="pack_picking_scan_pack", data=data, message=message
         )
         # we scan the pack
         response = self.service.dispatch(
@@ -192,8 +197,9 @@ class TestClusterPickingPrepareUnload(ClusterPickingUnloadPackingCommonCase):
         new_bin = operations[-1].result_package_id
         location = operations[-1].location_dest_id
         data = self._data_for_batch(self.batch, location, pack=new_bin)
+        message = self.service.msg_store.stock_picking_packed_successfully(picking)
         self.assert_response(
-            response, next_state="unload_single", data=data,
+            response, next_state="unload_single", data=data, message=message
         )
 
     def test_prepare_full_bin_unload(self):
@@ -241,7 +247,10 @@ class TestClusterPickingPrepareUnload(ClusterPickingUnloadPackingCommonCase):
         location = operations[0].location_dest_id
         data = self._data_for_batch(self.batch, location)
         self.assert_response(
-            response, next_state="unload_all", data=data,
+            response,
+            next_state="unload_all",
+            data=data,
+            message=self.service.msg_store.stock_picking_packed_successfully(picking),
         )
         response = self.service.dispatch(
             "set_destination_all",
@@ -295,7 +304,10 @@ class TestClusterPickingPrepareUnload(ClusterPickingUnloadPackingCommonCase):
         )
         data = self._data_for_batch(self.batch, location)
         self.assert_response(
-            response, next_state="unload_all", data=data,
+            response,
+            next_state="unload_all",
+            data=data,
+            message=self.service.msg_store.stock_picking_packed_successfully(picking),
         )
 
         result_package = picking.pack_operation_ids.mapped("result_package_id")

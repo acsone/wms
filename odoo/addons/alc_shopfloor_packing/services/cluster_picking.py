@@ -161,7 +161,10 @@ class ClusterPicking(Component):
                 picking_batch_id,
                 message=self.msg_store.notable_to_put_in_pack(picking),
             )
-        return self._response_put_in_pack(picking_batch_id)
+        return self._response_put_in_pack(
+            picking_batch_id,
+            message=self.msg_store.stock_picking_packed_successfully(picking),
+        )
 
     def _put_in_pack(self, picking, nbr_packages):
         pack = picking.put_in_pack()
