@@ -658,8 +658,6 @@ class RoundInstance(models.Model):
     def button_close(self):
         """ Do not accept new picking automaticaly.
         """
-        not_started = self.filtered(lambda r: not r.picking_launched)
-        not_started.button_picking_start()
         self.write({"state": "close", "stat_time_closed": time_now(self)})
 
     @api.multi
