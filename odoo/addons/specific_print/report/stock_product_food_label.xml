@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+  <template id="stock_product_food_label_zebra_v1">
+    <div class="raw">
+      <t t-foreach="docs" t-as="pack">
+        <t t-set="product" t-value="pack.product_id" />
+        <t t-set="ship" t-value="pack.picking_id" />
+^XA
+
+^FWR
+
+^FO380,60^A035,35^FDTOURNEE<t t-esc="ship.delivery_round_id.template_id.code" />^FS\r
+
+^FO380,380^A025,25^FDPVI <t t-esc="product.indicated_price" />^FS\r
+
+^FO350,70^A030,30^FD<t
+          t-esc="res_company.convert_to_ascii(ship.partner_id.display_name and ship.partner_id.display_name[:29] or u'')"
+        />^FS\r
+^FO315,70^A030,30^FD<t
+          t-esc="res_company.convert_to_ascii(ship.partner_id.display_name and ship.partner_id.display_name[29:50] or u'')"
+        />^FS\r
+^FO275, 70^A030,30^FD<t t-esc="ship.partner_id.zip" /> <t
+          t-esc="res_company.convert_to_ascii(ship.partner_id.city)"
+        />^FS\r
+<t t-if="('customer_id' in pick) and ship.customer_id.is_b2c_customer">
+^FO235,70^A030,30^FDB2C: <t
+            t-esc="('customer_id' in pick) and (ship.partner_id != ship.customer_id) and res_company.convert_to_ascii(ship.customer_id.name and ship.customer_id.name[:29] or u'') or ''"
+          />^FS\r
+</t>
+
+^FO200,70^A025,25^FD<t t-esc="res_company.convert_to_ascii(product.name)" />^FS\r
+
+^FO245,370^BQN,2,4^FDQA, <t t-esc="ship.name" /> ^FS\r
+^FO205,375^A020,20^FD<t t-esc="ship.name" />^FS\r
+
+^FO100,60^BC,40,Y,Y,N,D^FD<t
+          t-esc="res_company.convert_to_ascii(product.barcode)"
+        />^FS\r
+
+^FWN
+^XZ
+      </t>
+    </div>
+  </template>
+  <report
+    id="report_stock_product_food_label"
+    string="Alcyon Product Food Label"
+    model="stock.pack.operation"
+    report_type="qweb-pdf"
+    file="specific_print.stock_product_food_label_zebra_v1"
+    name="specific_print.stock_product_food_label_zebra_v1"
+  />
+</odoo>

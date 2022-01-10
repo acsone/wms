@@ -9,7 +9,12 @@ class PrintLabel(models.TransientModel):
     _name = "print.label"
 
     label_type = fields.Selection(
-        [("product", "Product"), ("package", "Package"), ("lot", "Lot")],
+        [
+            ("product", "Product"),
+            ("package", "Package"),
+            ("lot", "Lot"),
+            ("food_product", "Food Product"),
+        ],
         string="Label type",
         required=True,
     )
@@ -63,3 +68,12 @@ class PrintLabel(models.TransientModel):
 
             for lot in self.lot_ids:
                 lot.print_lot_label(printer_id=self.printer_id.id, quantity=self.qty)
+
+        elif self.label_type == "food_product":
+            if self.printer_id.type != "zebra":
+                raise UserError(_("Invalid printer"))
+
+            for picking in self.picking_ids:
+                picking.print_food_products_label(
+                    printer_id=self.printer_id.id, quantity=self.qty
+                )

@@ -180,3 +180,11 @@ class TestStock(SavepointCase):
                 printer_id=self.product_label_printer, packages=package
             )
             patched_print_document.assert_called_once()
+
+    def test_6_print_food_label(self):
+        self.picking.customer_id.is_b2c_customer = True
+        with mock.patch.object(
+            self.env["stock.pack.operation"].__class__, "print_food_product_label"
+        ) as patched_print:
+            self.picking.print_food_products_label()
+            self.assertEqual(patched_print.call_count, 1)
