@@ -72,18 +72,6 @@ msgid "AINS"
 msgstr "AINS"
 
 #. module: alc_pim
-#: model:attribute.attribute,field_description:alc_pim.attribute_class_amcra
-#: model:ir.model.fields,field_description:alc_pim.attribute_class_amcra_ir_model_fields
-msgid "AMCRA classification"
-msgstr "AMCRA classification"
-
-#. module: alc_pim
-#: model:attribute.attribute,field_description:alc_pim.attribute_code_amm
-#: model:ir.model.fields,field_description:alc_pim.attribute_code_amm_ir_model_fields
-msgid "AMM Number"
-msgstr "Numéro AMM"
-
-#. module: alc_pim
 #: model:product.category,name:alc_pim.abat_rur
 msgid "Abattoir/Abattage"
 msgstr "Abattoir/Abattage"
@@ -164,12 +152,6 @@ msgstr "Actinobacillus pleuropneumoniae"
 #: model:ir.model.fields,field_description:alc_pim.attribute_active_principle_option_ids_ir_model_fields
 msgid "Active Principle"
 msgstr "Active Principle"
-
-#. module: alc_pim
-#: model:attribute.attribute,field_description:alc_pim.attribute_link_info
-#: model:ir.model.fields,field_description:alc_pim.attribute_link_info_ir_model_fields
-msgid "Additional information link"
-msgstr "Additional information link"
 
 #. module: alc_pim
 #: model:attribute.attribute,field_description:alc_pim.attribute_administration_route_option_ids
@@ -610,21 +592,9 @@ msgid "Bar"
 msgstr "Bar"
 
 #. module: alc_pim
-#: model:attribute.attribute,field_description:alc_pim.attribute_barcode
-#: model:ir.model.fields,field_description:alc_pim.attribute_barcode_ir_model_fields
-msgid "Barcode"
-msgstr "Code Barre"
-
-#. module: alc_pim
 #: model:attribute.option,name:alc_pim.attribute_option_behaviour
 msgid "Behaviour"
 msgstr "Behaviour"
-
-#. module: alc_pim
-#: model:attribute.attribute,field_description:alc_pim.attribute_belgium_only
-#: model:ir.model.fields,field_description:alc_pim.attribute_belgium_only_ir_model_fields
-msgid "Belgium only"
-msgstr "Seulement pour la Belgique"
 
 #. module: alc_pim
 #: model:attribute.option,name:alc_pim.attribute_option_benazepril
@@ -740,12 +710,6 @@ msgid "Boîtes, plateaux et tambours"
 msgstr "Boîtes, plateaux et tambours"
 
 #. module: alc_pim
-#: model:attribute.attribute,field_description:alc_pim.attribute_product_brand_id
-#: model:ir.model.fields,field_description:alc_pim.attribute_product_brand_id_ir_model_fields
-msgid "Brand"
-msgstr "Brand"
-
-#. module: alc_pim
 #: model:product.category,name:alc_pim.breed_rccha
 #: model:product.category,name:alc_pim.breed_rcchi
 msgid "Breed"
@@ -837,12 +801,6 @@ msgstr "CLM"
 #: model:product.category,name:alc_pim.clr_osteoalcy_instru
 msgid "CLR"
 msgstr "CLR"
-
-#. module: alc_pim
-#: model:attribute.attribute,field_description:alc_pim.attribute_cnk_code
-#: model:ir.model.fields,field_description:alc_pim.attribute_cnk_code_ir_model_fields
-msgid "CNK"
-msgstr "CNK"
 
 #. module: alc_pim
 #: model:attribute.option,name:alc_pim.attribute_option_cabergoline
@@ -1187,12 +1145,6 @@ msgid "Coccidia spp."
 msgstr "Coccidia spp."
 
 #. module: alc_pim
-#: model:attribute.attribute,field_description:alc_pim.attribute_code_cti
-#: model:ir.model.fields,field_description:alc_pim.attribute_code_cti_ir_model_fields
-msgid "Code CTI Extended"
-msgstr "Code CTI étendu"
-
-#. module: alc_pim
 #: model:attribute.option,name:alc_pim.attribute_option_colistine_polymyxine_e
 msgid "Colistine (polymyxine E)"
 msgstr "Colistine (polymyxine E)"
@@ -1335,12 +1287,6 @@ msgstr "Coton"
 #: model:attribute.option,name:alc_pim.attribute_option_coxiella_burnetii
 msgid "Coxiella burnetii"
 msgstr "Coxiella burnetii"
-
-#. module: alc_pim
-#: model:attribute.attribute,field_description:alc_pim.attribute_create_date
-#: model:ir.model.fields,field_description:alc_pim.attribute_create_date_ir_model_fields
-msgid "Created on"
-msgstr "Créé le"
 
 #. module: alc_pim
 #: model:attribute.option,name:alc_pim.attribute_option_crispy
@@ -1571,12 +1517,6 @@ msgstr "Digestion"
 #: model:attribute.option,name:alc_pim.attribute_option_dihydrostreptomycine
 msgid "Dihydrostreptomycine"
 msgstr "Dihydrostreptomycine"
-
-#. module: alc_pim
-#: model:attribute.attribute,field_description:alc_pim.attribute_dimensional_uom_id
-#: model:ir.model.fields,field_description:alc_pim.attribute_dimensional_uom_id_ir_model_fields
-msgid "Dimensional UoM"
-msgstr "Dimensional UoM"
 
 #. module: alc_pim
 #: model:attribute.option,name:alc_pim.attribute_option_dimpylaat
@@ -1909,12 +1849,6 @@ msgstr "Examen de l’ŒIL"
 #: model:product.category,name:alc_pim.comext_com_vieprat
 msgid "External communication"
 msgstr "External communication"
-
-#. module: alc_pim
-#: model:attribute.attribute,field_description:alc_pim.attribute_fabric
-#: model:ir.model.fields,field_description:alc_pim.attribute_fabric_ir_model_fields
-msgid "Fabric?"
-msgstr "Fabric?"
 
 #. module: alc_pim
 #: model:attribute.option,name:alc_pim.attribute_option_febantel
@@ -2579,13 +2513,6 @@ msgid "Interleukine"
 msgstr "Interleukine"
 
 #. module: alc_pim
-#: model:attribute.attribute,help:alc_pim.attribute_barcode
-#: model:ir.model.fields,help:alc_pim.attribute_barcode_ir_model_fields
-msgid "International Article Number used for product identification."
-msgstr ""
-"Numéro d'article international (IAN) utilisé pour identifier cet article."
-
-#. module: alc_pim
 #: model:attribute.option,name:alc_pim.attribute_option_intra_uterine_toediening
 msgid "Intra-uterine toediening"
 msgstr "Intra-uterine toediening"
@@ -2794,12 +2721,6 @@ msgid "Liver"
 msgstr "Liver"
 
 #. module: alc_pim
-#: model:attribute.attribute,field_description:alc_pim.attribute_category_lot_expiry_field_name
-#: model:ir.model.fields,field_description:alc_pim.attribute_category_lot_expiry_field_name_ir_model_fields
-msgid "Lot expiry field name"
-msgstr "Lot expiry field name"
-
-#. module: alc_pim
 #: model:attribute.option,name:alc_pim.attribute_option_lotilaner
 msgid "Lotilaner"
 msgstr "Lotilaner"
@@ -2850,12 +2771,6 @@ msgstr "Manches et transformateurs"
 #: model:attribute.option,name:alc_pim.attribute_option_mannheimia_pasteurella_haemolytica
 msgid "Mannheimia (Pasteurella) haemolytica"
 msgstr "Mannheimia (Pasteurella) haemolytica"
-
-#. module: alc_pim
-#: model:attribute.attribute,field_description:alc_pim.attribute_manufacturer
-#: model:ir.model.fields,field_description:alc_pim.attribute_manufacturer_ir_model_fields
-msgid "Manufacturer"
-msgstr "Fabricant"
 
 #. module: alc_pim
 #: model:attribute.option,name:alc_pim.attribute_option_marbofloxacine
@@ -3245,12 +3160,6 @@ msgid "Not specified"
 msgstr "Not specified"
 
 #. module: alc_pim
-#: model:attribute.attribute,field_description:alc_pim.attribute_link_notice
-#: model:ir.model.fields,field_description:alc_pim.attribute_link_notice_ir_model_fields
-msgid "Notice link"
-msgstr "Notice link"
-
-#. module: alc_pim
 #: model:attribute.option,name:alc_pim.attribute_option_nutribird
 #: model:product.category,name:alc_pim.nutribird_vlnac
 msgid "Nutribird"
@@ -3330,7 +3239,6 @@ msgstr "Oral"
 
 #. module: alc_pim
 #: model:attribute.option,name:alc_pim.attribute_option_orange
-#: selection:product.template,class_amcra:0
 msgid "Orange"
 msgstr "Orange"
 
@@ -3422,12 +3330,6 @@ msgstr "Oxytetracycline"
 #: model:attribute.option,name:alc_pim.attribute_option_oxytocine
 msgid "Oxytocine"
 msgstr "Oxytocine"
-
-#. module: alc_pim
-#: model:attribute.attribute,field_description:alc_pim.attribute_pdf_file
-#: model:ir.model.fields,field_description:alc_pim.attribute_pdf_file_ir_model_fields
-msgid "PDF"
-msgstr "PDF"
 
 #. module: alc_pim
 #: model:attribute.option,name:alc_pim.attribute_option_pi_3_virus
@@ -3907,12 +3809,6 @@ msgid "Proligeston"
 msgstr "Proligeston"
 
 #. module: alc_pim
-#: model:attribute.attribute,field_description:alc_pim.attribute_promo_bag
-#: model:ir.model.fields,field_description:alc_pim.attribute_promo_bag_ir_model_fields
-msgid "Promo bag?"
-msgstr "Promo bag?"
-
-#. module: alc_pim
 #: model:attribute.option,name:alc_pim.attribute_option_propentofylline
 msgid "Propentofylline"
 msgstr "Propentofylline"
@@ -4070,7 +3966,6 @@ msgstr "Recovery"
 
 #. module: alc_pim
 #: model:attribute.option,name:alc_pim.attribute_option_red
-#: selection:product.template,class_amcra:0
 msgid "Red"
 msgstr "Red"
 
@@ -4270,12 +4165,6 @@ msgid "Selamectine"
 msgstr "Selamectine"
 
 #. module: alc_pim
-#: model:attribute.attribute,help:alc_pim.attribute_product_brand_id
-#: model:ir.model.fields,help:alc_pim.attribute_product_brand_id_ir_model_fields
-msgid "Select a brand for this product"
-msgstr "Select a brand for this product"
-
-#. module: alc_pim
 #: model:attribute.option,name:alc_pim.attribute_option_selective
 #: model:product.category,name:alc_pim.selectiv_ssnac
 msgid "Selective"
@@ -4319,18 +4208,6 @@ msgstr "Sevoflurane"
 #: model:attribute.option,name:alc_pim.attribute_option_shampoo_voor_uitwendig_gebruik
 msgid "Shampoo voor uitwendig gebruik"
 msgstr "Shampoo voor uitwendig gebruik"
-
-#. module: alc_pim
-#: model:attribute.attribute,field_description:alc_pim.attribute_description_shop_long
-#: model:ir.model.fields,field_description:alc_pim.attribute_description_shop_long_ir_model_fields
-msgid "Shop long description"
-msgstr "Shop long description"
-
-#. module: alc_pim
-#: model:attribute.attribute,field_description:alc_pim.attribute_description_shop_short
-#: model:ir.model.fields,field_description:alc_pim.attribute_description_shop_short_ir_model_fields
-msgid "Shop short description"
-msgstr "Shop short description"
 
 #. module: alc_pim
 #: model:attribute.option,name:alc_pim.attribute_option_size_health_nutrition
@@ -4451,12 +4328,6 @@ msgid "Staphylococcus aureus"
 msgstr "Staphylococcus aureus"
 
 #. module: alc_pim
-#: model:attribute.attribute,field_description:alc_pim.attribute_sterile
-#: model:ir.model.fields,field_description:alc_pim.attribute_sterile_ir_model_fields
-msgid "Sterile?"
-msgstr "Sterile?"
-
-#. module: alc_pim
 #: model:attribute.option,name:alc_pim.attribute_option_sterilisation
 msgid "Sterilisation"
 msgstr "Sterilisation"
@@ -4465,12 +4336,6 @@ msgstr "Sterilisation"
 #: model:product.category,name:alc_pim.stock_mob_equip
 msgid "Stockage"
 msgstr "Stockage"
-
-#. module: alc_pim
-#: model:attribute.attribute,field_description:alc_pim.attribute_storage_temperature_id
-#: model:ir.model.fields,field_description:alc_pim.attribute_storage_temperature_id_ir_model_fields
-msgid "Storage temperature"
-msgstr "Température de stockage"
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.steri_vehchi
@@ -4879,18 +4744,6 @@ msgid "Undyed"
 msgstr "Undyed"
 
 #. module: alc_pim
-#: model:attribute.attribute,field_description:alc_pim.attribute_unit_in_shrink_wrap
-#: model:ir.model.fields,field_description:alc_pim.attribute_unit_in_shrink_wrap_ir_model_fields
-msgid "Unit in shrink-wrap"
-msgstr "Nombre d'unités par fardelage"
-
-#. module: alc_pim
-#: model:attribute.attribute,help:alc_pim.attribute_dimensional_uom_id
-#: model:ir.model.fields,help:alc_pim.attribute_dimensional_uom_id_ir_model_fields
-msgid "UoM for length, height, width"
-msgstr "UoM for length, height, width"
-
-#. module: alc_pim
 #: model:product.category,name:alc_pim.urin_evdecha
 #: model:product.category,name:alc_pim.urin_evdechi
 #: model:product.category,name:alc_pim.urin_hpmvcha
@@ -5024,12 +4877,6 @@ msgid "Veterinary Diet"
 msgstr "Veterinary Diet"
 
 #. module: alc_pim
-#: model:attribute.attribute,field_description:alc_pim.attribute_veterinary_only
-#: model:ir.model.fields,field_description:alc_pim.attribute_veterinary_only_ir_model_fields
-msgid "Veterinary only"
-msgstr "Seulement pour les vétérinaires"
-
-#. module: alc_pim
 #: model:product.category,name:alc_pim.vieprat
 msgid "Vie pratique"
 msgstr "Vie pratique"
@@ -5158,7 +5005,6 @@ msgstr "Xylazine"
 
 #. module: alc_pim
 #: model:attribute.option,name:alc_pim.attribute_option_yellow
-#: selection:product.template,class_amcra:0
 msgid "Yellow"
 msgstr "Yellow"
 
@@ -5317,6 +5163,82 @@ msgstr "à usage transdermique contre les ecto- et endoparasites"
 #: model:product.category,name:alc_pim.a_usg_transd_ctre_endopar_apaimvb
 msgid "à usage transdermique contre les endoparasites"
 msgstr "à usage transdermique contre les endoparasites"
+
+#~ msgid "AMCRA classification"
+#~ msgstr "AMCRA classification"
+
+#~ msgid "AMM Number"
+#~ msgstr "Numéro AMM"
+
+#~ msgid "Additional information link"
+#~ msgstr "Additional information link"
+
+#~ msgid "Barcode"
+#~ msgstr "Code Barre"
+
+#~ msgid "Belgium only"
+#~ msgstr "Seulement pour la Belgique"
+
+#~ msgid "Brand"
+#~ msgstr "Brand"
+
+#~ msgid "CNK"
+#~ msgstr "CNK"
+
+#~ msgid "Code CTI Extended"
+#~ msgstr "Code CTI étendu"
+
+#~ msgid "Created on"
+#~ msgstr "Créé le"
+
+#~ msgid "Dimensional UoM"
+#~ msgstr "Dimensional UoM"
+
+#~ msgid "Fabric?"
+#~ msgstr "Fabric?"
+
+#~ msgid "International Article Number used for product identification."
+#~ msgstr ""
+#~ "Numéro d'article international (IAN) utilisé pour identifier cet article."
+
+#~ msgid "Lot expiry field name"
+#~ msgstr "Lot expiry field name"
+
+#~ msgid "Manufacturer"
+#~ msgstr "Fabricant"
+
+#~ msgid "Notice link"
+#~ msgstr "Notice link"
+
+#~ msgid "PDF"
+#~ msgstr "PDF"
+
+#~ msgid "Promo bag?"
+#~ msgstr "Promo bag?"
+
+#~ msgid "Select a brand for this product"
+#~ msgstr "Select a brand for this product"
+
+#~ msgid "Shop long description"
+#~ msgstr "Shop long description"
+
+#~ msgid "Shop short description"
+#~ msgstr "Shop short description"
+
+#~ msgid "Sterile?"
+#~ msgstr "Sterile?"
+
+#~ msgid "Storage temperature"
+#~ msgstr "Température de stockage"
+
+#~ msgid "Unit in shrink-wrap"
+#~ msgstr "Nombre d'unités par fardelage"
+
+#~ msgid "UoM for length, height, width"
+#~ msgstr "UoM for length, height, width"
+
+#~ msgid "Veterinary only"
+#~ msgstr "Seulement pour les vétérinaires"
 
 #~ msgid "Category Routes"
 #~ msgstr "Catégorie de route"
