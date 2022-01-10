@@ -105,6 +105,7 @@ class ProcurementOrderpointCompute(models.TransientModel):
                     return {}
 
                 self_in_new_cr.env["procurement.order"]._procure_orderpoint_confirm(
-                    use_new_cursor=True, company_id=self.env.user.company_id.id
+                    use_new_cursor=True,
+                    company_id=self_in_new_cr.env.user.company_id.id,
                 )
                 return {}
