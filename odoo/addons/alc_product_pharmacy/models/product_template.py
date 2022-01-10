@@ -63,11 +63,6 @@ class ProductTemplate(models.Model):
             _("This cnk_code already exists."),
         ),
         (
-            "uniq_code_amm",
-            "EXCLUDE (code_amm WITH =) WHERE (code_amm <> '' or code_amm is not null)",
-            _("This AMM number already exists."),
-        ),
-        (
             "uniq_code_cti",
             "EXCLUDE (code_cti WITH =) WHERE (code_cti <> '' or code_cti is not null)",
             _("This CTI extended code already exists."),

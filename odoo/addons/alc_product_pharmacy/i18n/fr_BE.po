@@ -160,13 +160,6 @@ msgid "Psychotropic"
 msgstr ""
 
 #. module: alc_product_pharmacy
-#: code:addons/alc_product_pharmacy/models/product_template.py:68
-#: sql_constraint:product.template:0
-#, python-format
-msgid "This AMM number already exists."
-msgstr "Ce numéro AMM existe déjà."
-
-#. module: alc_product_pharmacy
 #: code:addons/alc_product_pharmacy/models/product_template.py:73
 #: sql_constraint:product.template:0
 #, python-format
