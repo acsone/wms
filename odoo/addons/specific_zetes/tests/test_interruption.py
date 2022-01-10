@@ -233,6 +233,9 @@ class TestInterruption(ZetesTest):
         result = self.format_result(result_str)
         self.assertEqual(result.unitSlam, "0")
 
+        # Closing the delivery is not starting the picking anymore
+        self.picking.delivery_round_id.button_picking_start()
+
         medic_picking_type = self.picking_type_medoc
         medic_picking_code = medic_picking_type.picking_zone_id.code
 

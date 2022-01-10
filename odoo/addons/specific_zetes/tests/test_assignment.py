@@ -34,6 +34,8 @@ class TestAssignemnt(ZetesTest, JobMixin):
 
         self.partner.write({"is_passport_required": True})
         self.picking.picking_type_id.passport = True
+        # Closing the delivery is not starting the picking anymore
+        self.picking.delivery_round_id.button_picking_start()
 
         self.assertEqual(
             self.picking.picking_type_id.zetes_picking_type,
@@ -93,6 +95,8 @@ class TestAssignemnt(ZetesTest, JobMixin):
 
         self.partner.write({"is_passport_required": True})
         self.picking.picking_type_id.passport = True
+        # Closing the delivery is not starting the picking anymore
+        self.picking.delivery_round_id.button_picking_start()
 
         self.assertEqual(
             self.picking.picking_type_id.zetes_picking_type,
@@ -207,6 +211,8 @@ class TestAssignemnt(ZetesTest, JobMixin):
 
         self.partner.write({"is_passport_required": True})
         self.picking.picking_type_id.passport = True
+        # Closing the delivery is not starting the picking anymore
+        self.picking.delivery_round_id.button_picking_start()
 
         self.assertEqual(
             self.picking.picking_type_id.zetes_picking_type,

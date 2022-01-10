@@ -311,6 +311,10 @@ class TestFull(ZetesTest, JobMixin):
                 "Cri02": None,
             }
         )
+
+        # Closing the delivery is not starting the picking anymore
+        self.picking.delivery_round_id.button_picking_start()
+
         result_str = assignement_obj.requ(request_picking_params)
         result = self.format_result(result_str)
         self.assertEqual(result.respCode, str(constants.RESPONSE_CODE_OK))
