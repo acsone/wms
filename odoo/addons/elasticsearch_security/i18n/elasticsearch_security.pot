@@ -24,9 +24,15 @@ msgid "Body"
 msgstr ""
 
 #. module: elasticsearch_security
-#: code:addons/elasticsearch_security/components/adapter.py:39
+#: code:addons/elasticsearch_security/components/adapter.py:45
 #, python-format
 msgid "Could not put role %s. Original error: %s"
+msgstr ""
+
+#. module: elasticsearch_security
+#: code:addons/elasticsearch_security/components/adapter.py:51
+#, python-format
+msgid "Could not put role mapping for %s. Original error: %s"
 msgstr ""
 
 #. module: elasticsearch_security
@@ -59,6 +65,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:elasticsearch_security.field_res_users_elasticsearch_role
 #: model:ir.model.fields,field_description:elasticsearch_security.field_shopinvader_partner_elasticsearch_role
 msgid "Elasticsearch role"
+msgstr ""
+
+#. module: elasticsearch_security
+#: model:ir.model.fields,field_description:elasticsearch_security.field_elasticsearch_role_extra_backend_roles
+msgid "Extra backend roles"
 msgstr ""
 
 #. module: elasticsearch_security
@@ -115,6 +126,11 @@ msgstr ""
 #. module: elasticsearch_security
 #: model:ir.ui.view,arch_db:elasticsearch_security.se_backend_elasticsearch_form_view
 msgid "Security Roles"
+msgstr ""
+
+#. module: elasticsearch_security
+#: model:ir.model.fields,help:elasticsearch_security.field_elasticsearch_role_extra_backend_roles
+msgid "Separate roles by a comma, without spaces"
 msgstr ""
 
 #. module: elasticsearch_security
