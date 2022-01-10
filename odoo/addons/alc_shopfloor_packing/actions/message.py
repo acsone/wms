@@ -42,3 +42,11 @@ class MessageAction(Component):
                 package.name
             ),
         }
+
+    def stock_picking_packed_successfully(self, picking):
+        return {
+            "message_type": "success",
+            "body": _(u"Transfer {} has been packed successfully.").format(
+                picking.name
+            ),
+        }

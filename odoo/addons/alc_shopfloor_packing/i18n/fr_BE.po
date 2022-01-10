@@ -86,3 +86,10 @@ msgstr "Transfert"
 #, python-format
 msgid "Transfer {} already packed."
 msgstr "La préparation {} est déjà emballée."
+
+
+#. module: alc_shopfloor_packing
+#: code:addons/alc_shopfloor_packing/actions/message.py:50
+#, python-format
+msgid "Transfer {} has been packed successfully."
+msgstr "La préparation {} a été emballée avec succès."
