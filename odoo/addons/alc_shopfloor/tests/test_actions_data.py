@@ -172,6 +172,9 @@ class ActionsDataCase(ActionsDataCaseBase):
             "priority": "1",
             "type": "package",
         }
+        # here, equality will not care if we have a str or unicode, whereas
+        # it matters in DictEqual, so popping is what we want
+        self.assertEqual(data.pop("priority"), expected.pop("priority"))
         self.assertDictEqual(data, expected)
 
     def test_data_pack_operation_lot(self):
