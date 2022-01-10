@@ -242,11 +242,11 @@ export var PackagingQtyPicker = Vue.component("packaging-qty-picker", {
                         <span class="qty-todo">/ {{ qty_todo }}</span>
                     </v-col>
                     <v-col>
-                        Pieces
+                        {{ unit_uom.name }}
                     </v-col>
                 </v-row>
             </v-expansion-panel-header>
-            <v-expansion-panel-content>
+            <v-expansion-panel-content v-if="sorted_packaging.length > 1">
                 <v-row dense
                     v-for="(pkg, index) in sorted_packaging"
                     :key="make_component_key([pkg.id])"
