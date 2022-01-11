@@ -28,6 +28,7 @@ setup(
         "xlrd",
         "numpy",  # speedup pyshape
         "odoo10-addon-logging-json",
+        "future==0.18.2",  # silently required by keycloak
         "elasticsearch==7.12.1",  # last release compatible with opendistro
     ],
     entry_points="""
