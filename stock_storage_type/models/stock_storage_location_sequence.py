@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Copyright 2019 Camptocamp SA
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl)
 from odoo import _, fields, models
@@ -12,10 +13,15 @@ class StockStorageLocationSequence(models.Model):
     package_storage_type_id = fields.Many2one(
         "stock.package.storage.type", required=True
     )
-    sequence = fields.Integer(required=True)
+    sequence = fields.Integer(required=True, default=1)
     location_id = fields.Many2one("stock.location", required=True,)
     location_putaway_strategy = fields.Selection(
         related="location_id.pack_putaway_strategy"
+    )
+    location_sequence_cond_ids = fields.Many2many(
+        string="Conditions",
+        comodel_name="stock.storage.location.sequence.cond",
+        relation="stock_location_sequence_cond_rel",
     )
 
     def _format_package_storage_type_message(self, last=False):
@@ -35,7 +41,7 @@ class StockStorageLocationSequence(models.Model):
                 if strat[0] == self.location_id.pack_putaway_strategy:
                     pack_storage_strat = strat[1]
                     break
-            msg = ' * <span style="color: green;">{} ({})</span>'.format(
+            msg = u' * <span style="color: green;">{} ({})</span>'.format(
                 self.location_id.name, pack_storage_strat,
             )
             if last:
@@ -67,3 +73,24 @@ class StockStorageLocationSequence(models.Model):
                 % self.location_id.name
             )
         return msg
+
+    def button_show_locations(self):
+        action = self.env.ref("stock.action_location_form").read()[0]
+        action["domain"] = [
+            ("parent_left", ">=", self.location_id.parent_left),
+            ("parent_right", "<=", self.location_id.parent_right),
+            (
+                "allowed_location_storage_type_ids",
+                "in",
+                self.package_storage_type_id.location_storage_type_ids.ids,
+            ),
+        ]
+        return action
+
+    def can_be_applied(self, putaway_location, quant, product):
+        """Check if conditions are met."""
+        self.ensure_one()
+        for cond in self.location_sequence_cond_ids:
+            if not cond.evaluate(self, putaway_location, quant, product):
+                return False
+        return True

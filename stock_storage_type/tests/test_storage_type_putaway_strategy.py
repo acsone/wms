@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Copyright 2019 Camptocamp SA
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl)
 from .common import TestStorageTypeCommon
@@ -6,7 +7,7 @@ from .common import TestStorageTypeCommon
 class TestPutawayStorageTypeStrategy(TestStorageTypeCommon):
     @classmethod
     def setUpClass(cls):
-        super().setUpClass()
+        super(TestPutawayStorageTypeStrategy, cls).setUpClass()
         cls.areas.write({"pack_putaway_strategy": "ordered_locations"})
 
     def test_storage_strategy_ordered_locations_cardboxes(self):
@@ -33,12 +34,12 @@ class TestPutawayStorageTypeStrategy(TestStorageTypeCommon):
         # Mark as todo
         in_picking.action_confirm()
         # Put in pack
-        in_picking.move_line_ids.qty_done = 4.0
+        in_picking.pack_operation_ids.qty_done = 4.0
         first_package = in_picking.put_in_pack()
         # Ensure packaging is set properly on pack
         first_package.product_packaging_id = self.product_cardbox_product_packaging
         # Put in pack again
-        ml_without_package = in_picking.move_line_ids.filtered(
+        ml_without_package = in_picking.pack_operation_ids.filtered(
             lambda ml: not ml.result_package_id
         )
         ml_without_package.qty_done = 4.0
@@ -47,17 +48,34 @@ class TestPutawayStorageTypeStrategy(TestStorageTypeCommon):
         second_pack.product_packaging_id = self.product_cardbox_product_packaging
 
         # Validate picking
-        in_picking.button_validate()
+        in_picking.do_new_transfer()
         # Assign internal picking
-        int_picking = in_picking.move_lines.move_dest_ids.picking_id
+        int_picking = in_picking.move_lines.mapped("move_dest_id.picking_id")
         int_picking.action_assign()  # TODO drop ?
         self.assertEqual(int_picking.location_dest_id, self.stock_location)
         self.assertEqual(
             int_picking.move_lines.mapped("location_dest_id"), self.stock_location
         )
         self.assertEqual(
-            int_picking.move_line_ids.mapped("location_dest_id"),
+            int_picking.pack_operation_ids.mapped("location_dest_id"),
             self.cardboxes_bin_1_location,
+        )
+        # Archive all leaf locations. Ensure that the intermediate location is
+        # not returned as a valid leaf location and that the next location in
+        # the sequence (reserve) is selected
+        int_picking.do_unreserve()
+        cardboxes_stock = self.env.ref("stock_storage_type.stock_location_cardboxes")
+        cardboxes_stock.child_ids.write({"active": False})
+        int_picking.action_assign()
+        self.assertEqual(int_picking.location_dest_id, self.stock_location)
+        self.assertEqual(
+            int_picking.move_lines.mapped("location_dest_id"), self.stock_location
+        )
+        reserve_cardbox = self.env.ref(
+            "stock_storage_type.stock_location_cardboxes_reserve_bin_1"
+        )
+        self.assertEqual(
+            int_picking.pack_operation_ids.mapped("location_dest_id"), reserve_cardbox
         )
 
     def test_storage_strategy_only_empty_ordered_locations_pallets(self):
@@ -90,12 +108,12 @@ class TestPutawayStorageTypeStrategy(TestStorageTypeCommon):
         # Mark as todo
         in_picking.action_confirm()
         # Put in pack
-        in_picking.move_line_ids.qty_done = 48.0
+        in_picking.pack_operation_ids.qty_done = 48.0
         first_package = in_picking.put_in_pack()
         # Ensure packaging is set properly on pack
         first_package.product_packaging_id = self.product_pallet_product_packaging
         # Put in pack again
-        ml_without_package = in_picking.move_line_ids.filtered(
+        ml_without_package = in_picking.pack_operation_ids.filtered(
             lambda ml: not ml.result_package_id
         )
         ml_without_package.qty_done = 48.0
@@ -104,9 +122,9 @@ class TestPutawayStorageTypeStrategy(TestStorageTypeCommon):
         second_pack.product_packaging_id = self.product_pallet_product_packaging
 
         # Validate picking
-        in_picking.button_validate()
+        in_picking.do_new_transfer()
         # Assign internal picking
-        int_picking = in_picking.move_lines.move_dest_ids.picking_id
+        int_picking = in_picking.move_lines.mapped("move_dest_id.picking_id")
         int_picking.action_assign()
         self.assertEqual(int_picking.location_dest_id, self.stock_location)
         self.assertEqual(
@@ -116,7 +134,7 @@ class TestPutawayStorageTypeStrategy(TestStorageTypeCommon):
         # Second move line goes into pallets bin 3 as bin 1 is planned for
         # first move line and bin 2 is already used
         self.assertEqual(
-            int_picking.move_line_ids.mapped("location_dest_id"),
+            int_picking.pack_operation_ids.mapped("location_dest_id"),
             self.pallets_bin_1_location | self.pallets_bin_3_location,
         )
 
@@ -155,14 +173,14 @@ class TestPutawayStorageTypeStrategy(TestStorageTypeCommon):
         # Mark as todo
         in_picking.action_confirm()
         # Put in pack
-        in_picking.move_line_ids.qty_done = 48.0
+        in_picking.pack_operation_ids.qty_done = 48.0
         first_package = in_picking.put_in_pack()
         # Ensure packaging is set properly on pack
         first_package.product_packaging_id = self.product_pallet_product_packaging
         first_package.onchange_product_packaging_id()
         self.assertEqual(first_package.pack_weight, 60)
         # Put in pack again
-        ml_without_package = in_picking.move_line_ids.filtered(
+        ml_without_package = in_picking.pack_operation_ids.filtered(
             lambda ml: not ml.result_package_id
         )
         ml_without_package.qty_done = 48.0
@@ -172,9 +190,9 @@ class TestPutawayStorageTypeStrategy(TestStorageTypeCommon):
         second_pack.onchange_product_packaging_id()
         self.assertEqual(second_pack.pack_weight, 60)
         # Validate picking
-        in_picking.button_validate()
+        in_picking.do_new_transfer()
         # Assign internal picking
-        int_picking = in_picking.move_lines.move_dest_ids.picking_id
+        int_picking = in_picking.move_lines.mapped("move_dest_id.picking_id")
         int_picking.action_assign()
         self.assertEqual(int_picking.location_dest_id, self.stock_location)
         self.assertEqual(
@@ -184,7 +202,7 @@ class TestPutawayStorageTypeStrategy(TestStorageTypeCommon):
         # Second move line goes into pallets bin 3 as bin 1 is planned for
         # first move line and bin 2 is already used
         self.assertEqual(
-            int_picking.move_line_ids.mapped("location_dest_id"),
+            int_picking.pack_operation_ids.mapped("location_dest_id"),
             self.pallets_bin_1_location | self.pallets_bin_3_location,
         )
 
@@ -233,7 +251,7 @@ class TestPutawayStorageTypeStrategy(TestStorageTypeCommon):
         # Mark as todo
         in_picking.action_confirm()
         # Put in pack product
-        in_picking.move_line_ids.filtered(
+        in_picking.pack_operation_ids.filtered(
             lambda ml: ml.product_id == self.product
         ).qty_done = 4.0
         product_first_package = in_picking.put_in_pack()
@@ -242,7 +260,7 @@ class TestPutawayStorageTypeStrategy(TestStorageTypeCommon):
             self.product_cardbox_product_packaging
         )
         # Put in pack product again
-        product_ml_without_package = in_picking.move_line_ids.filtered(
+        product_ml_without_package = in_picking.pack_operation_ids.filtered(
             lambda ml: not ml.result_package_id and ml.product_id == self.product
         )
         product_ml_without_package.qty_done = 4.0
@@ -253,20 +271,30 @@ class TestPutawayStorageTypeStrategy(TestStorageTypeCommon):
         )
 
         # Put in pack product lot
-        product_lot_ml = in_picking.move_line_ids.filtered(
+        product_lot_ml = in_picking.pack_operation_ids.filtered(
             lambda ml: not ml.result_package_id and ml.product_id == self.product_lot
         )
-        product_lot_ml.write({"qty_done": 5.0, "lot_name": "A0001"})
+        product_lot_ml.write(
+            {
+                "qty_done": 5.0,
+                "pack_lot_ids": [(0, 0, {"lot_name": "A0001", "qty": 5.0})],
+            }
+        )
         product_lot_first_pack = in_picking.put_in_pack()
         # Ensure packaging is set properly on pack
         product_lot_first_pack.product_packaging_id = (
             self.product_lot_cardbox_product_packaging
         )
         # Put in pack product lot again
-        product_lot_ml_without_package = in_picking.move_line_ids.filtered(
+        product_lot_ml_without_package = in_picking.pack_operation_ids.filtered(
             lambda ml: not ml.result_package_id and ml.product_id == self.product_lot
         )
-        product_lot_ml_without_package.write({"qty_done": 5.0, "lot_name": "A0002"})
+        product_lot_ml_without_package.write(
+            {
+                "qty_done": 5.0,
+                "pack_lot_ids": [(0, 0, {"lot_name": "A0002", "qty": 5.0})],
+            }
+        )
         product_lot_second_pack = in_picking.put_in_pack()
         # Ensure packaging is set properly on pack
         product_lot_second_pack.product_packaging_id = (
@@ -274,22 +302,22 @@ class TestPutawayStorageTypeStrategy(TestStorageTypeCommon):
         )
 
         # Validate picking
-        in_picking.button_validate()
+        in_picking.do_new_transfer()
         # Assign internal picking
-        int_picking = in_picking.move_lines.mapped("move_dest_ids.picking_id")
+        int_picking = in_picking.move_lines.mapped("move_dest_id.picking_id")
         int_picking.action_assign()
         self.assertEqual(int_picking.location_dest_id, self.stock_location)
         self.assertEqual(
             int_picking.move_lines.mapped("location_dest_id"), self.stock_location
         )
-        product_mls = int_picking.move_line_ids.filtered(
-            lambda ml: ml.product_id == self.product
+        product_mls = int_picking.pack_operation_ids.filtered(
+            lambda ml: ml.implied_product_ids == self.product
         )
         self.assertEqual(
             product_mls.mapped("location_dest_id"), self.cardboxes_bin_1_location
         )
-        product_lot_mls = int_picking.move_line_ids.filtered(
-            lambda ml: ml.product_id == self.product_lot
+        product_lot_mls = int_picking.pack_operation_ids.filtered(
+            lambda ml: ml.implied_product_ids == self.product_lot
         )
         self.assertEqual(
             product_lot_mls.mapped("location_dest_id"),
@@ -313,7 +341,7 @@ class TestPutawayStorageTypeStrategy(TestStorageTypeCommon):
         """
         move = self._create_single_move(self.product)
         # move.location_dest_id = self.cardboxes_location.id
-        move._assign_picking()
+        move.assign_picking()
         package = self.env["stock.quant.package"].create(
             {"product_packaging_id": self.product_lot_cardbox_product_packaging.id}
         )
@@ -342,9 +370,131 @@ class TestPutawayStorageTypeStrategy(TestStorageTypeCommon):
             }
         )
 
-        move._action_assign()
-        move_line = move.move_line_ids
-        package_level = move_line.package_level_id
+        move.action_assign()
+        package_level = move.linked_move_operation_ids.operation_id
+
+        self.assertEqual(
+            package_level.location_dest_id,
+            self.warehouse.lot_stock_id,
+            "the move line's destination must stay in Stock as we have"
+            " a 'none' strategy on it and it is in the sequence",
+        )
+
+        package_level.location_dest_id = self.cardboxes_location
+        # if we reapply the strategy, it should now apply the ordered
+        # location of the cardbox location
+        package_level.recompute_pack_putaway()
+
+        self.assertTrue(
+            package_level.location_dest_id in self.cardboxes_location.child_ids
+        )
+
+    def test_storage_strategy_do_not_mix_products_reuse_location(self):
+        """Location with restriction 'do_not_mix_products' should have priority
+
+        When locations are configured with 'do_not_mix_products' the strategy
+        must give priority to location that already contains the product
+        (less qty first).
+        """
+        StockLocation = self.env["stock.location"]
+        self.cardboxes_location_storage_type.write({"do_not_mix_products": True})
+        product = self.product
+        packaging = self.product_cardbox_product_packaging
+        dest_location = self.cardboxes_location
+        package = self.env["stock.quant.package"].create(
+            {"name": "TEST1", "product_packaging_id": packaging.id}
+        )
+        quant = self.env["stock.quant"].create(
+            {
+                "product_id": product.id,
+                "package_id": package.id,
+                "location_id": self.input_location.id,
+                "qty": 0,
+            }
+        )
+
+        location = StockLocation._get_pack_putaway_strategy(
+            dest_location, quant, product
+        )
+
+        # No location with given product -> the first bin should be returned
+        self.assertEqual(location, self.cardboxes_bin_1_location)
+
+        # Set a quantity in cardbox bin 4 to trigger the priority on the
+        # location that already contains the product
+        self.env["stock.quant"]._update_available_quantity(
+            product, self.cardboxes_bin_3_location, 10.0,
+        )
+        location = StockLocation._get_pack_putaway_strategy(
+            dest_location, quant, product
+        )
+        self.assertEqual(location, self.cardboxes_bin_3_location)
+
+        # Set less quantity on bin 4. Since it's the location with less quantity
+        # that should have priority
+        self.env["stock.quant"]._update_available_quantity(
+            product, self.cardboxes_bin_4_location, 1.0,
+        )
+        location = StockLocation._get_pack_putaway_strategy(
+            dest_location, quant, product
+        )
+        self.assertEqual(location, self.cardboxes_bin_4_location)
+
+    def test_storage_strategy_sequence_condition(self):
+        """If a condition is not met on storage location sequence, it's ignored"""
+        move = self._create_single_move(self.product)
+        move.assign_picking()
+        original_location_dest = move.location_dest_id
+        package = self.env["stock.quant.package"].create(
+            {"product_packaging_id": self.product_lot_cardbox_product_packaging.id}
+        )
+        self._update_qty_in_location(
+            move.location_id, move.product_id, move.product_qty, package=package
+        )
+
+        # configure a new sequence with none in the parent location
+        self.cardboxes_package_storage_type.storage_location_sequence_ids.unlink()
+        self.warehouse.lot_stock_id.pack_putaway_strategy = "none"
+        self.warehouse.lot_stock_id.location_storage_type_ids = (
+            self.cardboxes_location_storage_type
+        )
+        condition = self.env["stock.storage.location.sequence.cond"].create(
+            {"name": "Always False", "code_snippet": "result = False"}
+        )
+        self.none_sequence = self.env["stock.storage.location.sequence"].create(
+            {
+                "package_storage_type_id": self.cardboxes_package_storage_type.id,
+                "location_id": self.warehouse.lot_stock_id.id,
+                "sequence": 1,
+                "location_sequence_cond_ids": [(6, 0, condition.ids)],
+            }
+        )
+        self.env["stock.storage.location.sequence"].create(
+            {
+                "package_storage_type_id": self.cardboxes_package_storage_type.id,
+                "location_id": self.cardboxes_location.id,
+                "sequence": 2,
+            }
+        )
+
+        move.action_assign()
+        package_level = move.linked_move_operation_ids.operation_id
+
+        self.assertIn(
+            package_level.location_dest_id,
+            self.cardboxes_location.child_ids,
+            "the move line's destination must go into the cardbox location"
+            " since the the first sequence is ignored due to the False"
+            " condition on it",
+        )
+
+        # if we update the condition to always be True, reset the
+        # location_dest on the package_level and reapply the put away strategy
+        # the move line's destination must be in Stock as we have a 'none'
+        # strategy the first putaway sequence
+        condition.code_snippet = "result = True"
+        package_level.location_dest_id = original_location_dest.id
+        package_level.recompute_pack_putaway()
 
         self.assertEqual(
             package_level.location_dest_id,
