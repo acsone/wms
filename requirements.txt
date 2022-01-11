@@ -219,7 +219,7 @@ odoo10-addon-stock-picking-show-backorder==10.0.1.0.0
 odoo10-addon-stock-production-lot-expiry @ git+https://github.com/acsone/product-attribute@7e2c8cda6effefe84023848ea0c560af95e8a268#subdirectory=setup/stock_production_lot_expiry
 odoo10-addon-stock-quant-package-dimension @ git+https://github.com/acsone/stock-logistics-workflow.git@7f83580938ccf5d0be85996d08738077f02010f1#subdirectory=setup/stock_quant_package_dimension
 odoo10-addon-stock-quant-package-product-packaging @ git+https://github.com/acsone/stock-logistics-workflow.git@fe3e90c7f909d8a2465422d0b7cc9945a58dd4f0#subdirectory=setup/stock_quant_package_product_packaging
-odoo10-addon-stock-storage-type @ git+https://github.com/acsone/wms.git@1553d6e53f11820224f503e5e69b686c0eb75d5c#subdirectory=setup/stock_storage_type
+odoo10-addon-stock-storage-type @ git+https://github.com/acsone/wms.git@a2231a3d16e64d313d7bae84e899e1cd6cce9c3f#subdirectory=setup/stock_storage_type
 odoo10-addon-stock-storage-type-putaway-abc @ git+https://github.com/acsone/wms.git@e4333c7dcea3115f9e4d8af4809e1e6d9b3f142c#subdirectory=setup/stock_storage_type_putaway_abc
 odoo10-addon-storage-backend @ git+https://github.com/acsone/storage.git@98ae1b9e780f7ed2cfafb5748c8cd85978f7bd2e#subdirectory=setup/storage_backend
 odoo10-addon-storage-backend-s3 @ git+https://github.com/acsone/storage.git@98ae1b9e780f7ed2cfafb5748c8cd85978f7bd2e#subdirectory=setup/storage_backend_s3
