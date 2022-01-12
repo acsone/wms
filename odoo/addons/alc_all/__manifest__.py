@@ -109,6 +109,7 @@
         "alc_internal_stock_quant_package",
         "alc_label_printing_gls",
         "alc_logiweb",
+        "alc_mrp_repair",
         "alc_partner_force_re_geolocalization",
         "alc_partner_manual_sale_order",
         "alc_placedesvetos",
