@@ -17,6 +17,7 @@
         "alc_product_abc_classification",
         "alc_product_abc_classification_picking_zone",
         "alc_product_storage_type_tracking",
+        "alc_stock_storage_type_fixed_location",
         "product_abc_classification_sale_stock",
         "stock_storage_type",
         "stock_storage_type_putaway_abc",
