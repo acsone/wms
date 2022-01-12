@@ -12,7 +12,7 @@ class StockPicking(models.Model):
     _inherit = "stock.picking"
 
     def _get_picking_to_validate(self):
-        return self.filtered(lambda p: p.state not in ("state", "cancel"))
+        return self.filtered(lambda p: p.state not in ("done", "cancel"))
 
     def _delay_do_transfer(self):
         for picking in self._get_picking_to_validate():
