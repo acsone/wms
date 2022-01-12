@@ -29,6 +29,11 @@ msgid "Destination when the product must be stored in reserve"
 msgstr ""
 
 #. module: stock_refill
+#: model:ir.model.fields,field_description:stock_refill.field_stock_config_settings_enable_reserve_on_putaway
+msgid "Enable reserve on putaway"
+msgstr ""
+
+#. module: stock_refill
 #: model:ir.model.fields,help:stock_refill.field_stock_picking_type_ignore_putaway_reserve
 msgid "Ignore putaway location when computing the putaway location"
 msgstr ""
@@ -59,7 +64,7 @@ msgid "Product"
 msgstr ""
 
 #. module: stock_refill
-#: code:addons/stock_refill/models/stock_location.py:84
+#: code:addons/stock_refill/models/stock_location.py:85
 #, python-format
 msgid "Product %s must be put in reserve but cannot find a suitable location"
 msgstr ""
@@ -100,5 +105,15 @@ msgstr ""
 #. module: stock_refill
 #: model:ir.model,name:stock_refill.model_stock_picking
 msgid "Transfer"
+msgstr ""
+
+#. module: stock_refill
+#: model:ir.model,name:stock_refill.model_ir_config_parameter
+msgid "ir.config_parameter"
+msgstr ""
+
+#. module: stock_refill
+#: model:ir.model,name:stock_refill.model_stock_config_settings
+msgid "stock.config.settings"
 msgstr ""
 
