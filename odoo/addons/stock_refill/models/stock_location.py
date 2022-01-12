@@ -74,18 +74,19 @@ class StockLocation(models.Model):
         if location_dest.kind != "bin":
             return location_dest.id
 
-        # Do not put product in bin if there is already stock in reserve
-        if product.qty_in_reserve > 0 and not self.env.context.get(
-            "ignore_putaway_reserve", False
-        ):
-            reserve = location_dest.get_location_reserve()
-            if not reserve:
-                raise UserError(
-                    _(
-                        "Product %s must be put in reserve but cannot "
-                        "find a suitable location"
+        if self.env["stock.config.settings"]._is_reserve_on_putway_enabled():
+            # Do not put product in bin if there is already stock in reserve
+            if product.qty_in_reserve > 0 and not self.env.context.get(
+                "ignore_putaway_reserve", False
+            ):
+                reserve = location_dest.get_location_reserve()
+                if not reserve:
+                    raise UserError(
+                        _(
+                            "Product %s must be put in reserve but cannot "
+                            "find a suitable location"
+                        )
+                        % product.display_name
                     )
-                    % product.display_name
-                )
-            return reserve.id
+                return reserve.id
         return super(StockLocation, self).get_putaway_strategy(product) or location.id
