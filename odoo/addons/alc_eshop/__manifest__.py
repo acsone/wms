@@ -22,6 +22,7 @@
         "shopinvader_assortment",
         "shopinvader_image",
         "shopinvader_sale_profile",
+        "shopinvader_wishlist",
     ],
     "application": False,
     "data": [
