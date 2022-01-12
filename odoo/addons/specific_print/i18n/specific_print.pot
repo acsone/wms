@@ -47,6 +47,11 @@ msgid "Alcyon Pack Label"
 msgstr ""
 
 #. module: specific_print
+#: model:ir.actions.report.xml,name:specific_print.report_stock_product_food_label
+msgid "Alcyon Product Food Label"
+msgstr ""
+
+#. module: specific_print
 #: model:ir.actions.report.xml,name:specific_print.report_stock_product_label
 msgid "Alcyon Product Label"
 msgstr ""
@@ -82,7 +87,7 @@ msgid "Created on"
 msgstr ""
 
 #. module: specific_print
-#: code:addons/specific_print/models/stock_picking.py:58
+#: code:addons/specific_print/models/stock_picking.py:76
 #: model:ir.model.fields,help:specific_print.field_res_partner_no_labels_products
 #: model:ir.model.fields,help:specific_print.field_res_users_no_labels_products
 #: model:ir.model.fields,help:specific_print.field_shopinvader_partner_no_labels_products
@@ -124,20 +129,26 @@ msgid "Doc.n : 1/"
 msgstr ""
 
 #. module: specific_print
+#: selection:print.label,label_type:0
+msgid "Food Product"
+msgstr ""
+
+#. module: specific_print
 #: model:ir.model.fields,field_description:specific_print.field_print_label_id
 msgid "ID"
 msgstr ""
 
 #. module: specific_print
-#: code:addons/specific_print/wizards/print_label.py:35
+#: code:addons/specific_print/wizards/print_label.py:40
 #, python-format
 msgid "Invalid model"
 msgstr ""
 
 #. module: specific_print
-#: code:addons/specific_print/wizards/print_label.py:45
-#: code:addons/specific_print/wizards/print_label.py:53
-#: code:addons/specific_print/wizards/print_label.py:62
+#: code:addons/specific_print/wizards/print_label.py:50
+#: code:addons/specific_print/wizards/print_label.py:58
+#: code:addons/specific_print/wizards/print_label.py:67
+#: code:addons/specific_print/wizards/print_label.py:74
 #, python-format
 msgid "Invalid printer"
 msgstr ""
@@ -191,6 +202,7 @@ msgstr ""
 #. module: specific_print
 #: code:addons/specific_print/models/stock_pack_operation.py:49
 #: code:addons/specific_print/models/stock_picking.py:38
+#: code:addons/specific_print/models/stock_picking.py:56
 #, python-format
 msgid "No destination partner defined"
 msgstr ""
@@ -338,13 +350,38 @@ msgid "^FO200,47^A0N60,60^FDB2C^FS\\r"
 msgstr ""
 
 #. module: specific_print
+#: model:ir.ui.view,arch_db:specific_print.stock_product_food_label_zebra_v1
+msgid "^FO200,70^A025,25^FD"
+msgstr ""
+
+#. module: specific_print
+#: model:ir.ui.view,arch_db:specific_print.stock_product_food_label_zebra_v1
+msgid "^FO235,70^A030,30^FDB2C:"
+msgstr ""
+
+#. module: specific_print
 #: model:ir.ui.view,arch_db:specific_print.stock_pick_packs_label_zebra_v1
 msgid "^FO570,50,1^A0N60,60^FD"
 msgstr ""
 
 #. module: specific_print
 #: model:ir.ui.view,arch_db:specific_print.stock_pick_packs_label_zebra_v1
+#: model:ir.ui.view,arch_db:specific_print.stock_product_food_label_zebra_v1
 msgid "^FS\\r"
+msgstr ""
+
+#. module: specific_print
+#: model:ir.ui.view,arch_db:specific_print.stock_product_food_label_zebra_v1
+msgid "^FS\\r\n"
+"\n"
+"^FO100,60^BC,40,Y,Y,N,D^FD"
+msgstr ""
+
+#. module: specific_print
+#: model:ir.ui.view,arch_db:specific_print.stock_product_food_label_zebra_v1
+msgid "^FS\\r\n"
+"\n"
+"^FO245,370^BQN,2,4^FDQA,"
 msgstr ""
 
 #. module: specific_print
@@ -352,6 +389,20 @@ msgstr ""
 msgid "^FS\\r\n"
 "\n"
 "^FO30,30^GB"
+msgstr ""
+
+#. module: specific_print
+#: model:ir.ui.view,arch_db:specific_print.stock_product_food_label_zebra_v1
+msgid "^FS\\r\n"
+"\n"
+"^FO350,70^A030,30^FD"
+msgstr ""
+
+#. module: specific_print
+#: model:ir.ui.view,arch_db:specific_print.stock_product_food_label_zebra_v1
+msgid "^FS\\r\n"
+"\n"
+"^FO380,380^A025,25^FDPVI"
 msgstr ""
 
 #. module: specific_print
@@ -366,6 +417,20 @@ msgstr ""
 msgid "^FS\\r\n"
 "\n"
 "^FO570,280,1^A0N30,25^FD"
+msgstr ""
+
+#. module: specific_print
+#: model:ir.ui.view,arch_db:specific_print.stock_product_food_label_zebra_v1
+msgid "^FS\\r\n"
+"\n"
+"^FWN\n"
+"^XZ"
+msgstr ""
+
+#. module: specific_print
+#: model:ir.ui.view,arch_db:specific_print.stock_product_food_label_zebra_v1
+msgid "^FS\\r\n"
+"^FO205,375^A020,20^FD"
 msgstr ""
 
 #. module: specific_print
@@ -414,6 +479,18 @@ msgstr ""
 #: model:ir.ui.view,arch_db:specific_print.stock_lot_label_zebra_v1
 msgid "^FS\\r\n"
 "^FO25,342^A0N,31,23^CI13^FR^FD"
+msgstr ""
+
+#. module: specific_print
+#: model:ir.ui.view,arch_db:specific_print.stock_product_food_label_zebra_v1
+msgid "^FS\\r\n"
+"^FO275, 70^A030,30^FD"
+msgstr ""
+
+#. module: specific_print
+#: model:ir.ui.view,arch_db:specific_print.stock_product_food_label_zebra_v1
+msgid "^FS\\r\n"
+"^FO315,70^A030,30^FD"
 msgstr ""
 
 #. module: specific_print
@@ -486,6 +563,15 @@ msgstr ""
 msgid "^XA\n"
 "\n"
 "^FO30,250^BQN,2,6^FDQA,"
+msgstr ""
+
+#. module: specific_print
+#: model:ir.ui.view,arch_db:specific_print.stock_product_food_label_zebra_v1
+msgid "^XA\n"
+"\n"
+"^FWR\n"
+"\n"
+"^FO380,60^A035,35^FDTOURNEE"
 msgstr ""
 
 #. module: specific_print
