@@ -94,7 +94,7 @@ odoo10-addon-attribute-set-completeness==10.0.1.2.0.99.dev5
 odoo10-addon-attribute-set-mass-edit==10.0.1.0.1.99.dev5
 odoo10-addon-attribute-set-searchable==10.0.1.0.0.99.dev5
 odoo10-addon-auth-api-key @ git+https://github.com/acsone/server-auth.git@482460eed5839ec0d116ee32b050ec4b1bc7fd8a#subdirectory=setup/auth_api_key
-odoo10-addon-auth-jwt @ git+https://github.com/acsone/server-auth.git@6fd2d05f7b1ab8caeee218a7e1bd22786ad49868#subdirectory=setup/auth_jwt
+odoo10-addon-auth-jwt @ git+https://github.com/acsone/server-auth.git@7a0b47c529825c8aae7460ae1b01c659ab0fc187#subdirectory=setup/auth_jwt
 odoo10-addon-auto-reconcile-structured-ref @ git+https://github.com/acsone/account-reconcile.git@eecb8a9dcb54145e876362efd07f76400da318f9#subdirectory=setup/auto_reconcile_structured_ref
 odoo10-addon-base-attachment-object-storage @ git+https://github.com/acsone/odoo-cloud-platform.git@45a9d1f258eb93ec619202c2cfcb76978eee46cd#subdirectory=setup/base_attachment_object_storage
 odoo10-addon-base-business-document-import==10.0.1.0.0.99.dev28
