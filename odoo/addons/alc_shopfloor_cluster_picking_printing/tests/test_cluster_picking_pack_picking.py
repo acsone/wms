@@ -128,3 +128,22 @@ class ClusterPickingPutInPackPrintCase(ClusterPickingUnloadingCommonCase):
             )
             mocked_print_product_label.assert_called_once()
             mocked_print_package_label.assert_called_once()
+
+    def test_print_after_scan_destination_food(self):
+        self.bin1.is_internal = False
+        operation = self.batch.pack_operation_ids[0]
+        qty_done = operation.product_qty
+        picking = operation.picking_id
+        with mock.patch.object(
+            picking.__class__, "print_food_products_label"
+        ) as mocked_print_food_product_label:
+            self.service.dispatch(
+                "scan_destination_pack",
+                params={
+                    "picking_batch_id": self.batch.id,
+                    "operation_id": operation.id,
+                    "barcode": self.bin1.name,
+                    "quantity": qty_done,
+                },
+            )
+            mocked_print_food_product_label.assert_called_once()
