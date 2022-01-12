@@ -9,7 +9,11 @@
     "maintainer": "Camptocamp",
     "category": "Stock Management",
     "depends": ["stock", "stock_quant_bylocation"],
-    "data": ["views/stock_picking_type.xml", "views/stock_location.xml"],
+    "data": [
+        "wizards/stock_config_settings.xml",
+        "views/stock_picking_type.xml",
+        "views/stock_location.xml",
+    ],
     "installable": True,
     "auto_install": False,
     "license": "AGPL-3",
