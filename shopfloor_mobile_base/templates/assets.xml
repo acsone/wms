@@ -201,6 +201,7 @@
             type="module"
         />
 
+
         <t
             id="new_scenario_hook"
             t-if="0"
