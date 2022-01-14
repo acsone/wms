@@ -10,7 +10,7 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": ["mrp_repair"],
-    "data": ["data/sav_location.xml"],
+    "data": ["data/sav_location.xml", "views/mrp_repair.xml"],
     "demo": [],
     "pre_init_hook": "pre_init_hook",
 }
