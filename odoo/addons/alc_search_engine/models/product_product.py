@@ -9,7 +9,7 @@ class ProductProduct(models.Model):
 
     _inherit = "product.product"
 
-    allowed_partner_types_list = fields.Serializd(
+    allowed_partner_types_list = fields.Serialized(
         string="Allowed Partner Types List",
         compute="_compute_allowed_partner_types_list",
         help="Technical field. Stores all partner types allowed to access the product.",
