@@ -5,84 +5,141 @@
     <record id="index_config_shopinvader_variant" model="se.index.config">
         <field name="name">Shopinvader Variant Index config</field>
         <field name="body">{}</field>
-        <field name="body_str">
+        <field
+      name="body_str"
+    > <![CDATA[
 {
-  "settings":{
-    "analysis":{
-      "char_filter":{
-        "replace":{
-          "type":"mapping",
-          "mappings":[
-            "&amp;=> and "
-          ]
-        }
+  "mappings": {
+    "properties": {
+      "supplier_id": {
+        "type": "keyword"
       },
-      "filter":{
-        "word_delimiter":{
-          "type":"word_delimiter",
-          "split_on_numerics":false,
-          "split_on_case_change":true,
-          "generate_word_parts":true,
-          "generate_number_parts":true,
-          "catenate_all":true,
-          "preserve_original":true,
-          "catenate_numbers":true
-        }
+      "redirect_url_key": {
+        "type": "keyword"
       },
-      "analyzer":{
-        "default":{
-          "type":"custom",
-          "char_filter":[
-            "html_strip",
-            "replace"
-          ],
-          "tokenizer":"whitespace",
-          "filter":[
-            "lowercase",
-            "word_delimiter"
-          ]
-        }
+      "packaging_ids": {
+        "type": "keyword"
       },
-      "index" : {
-        "sort.field" : ["main", "id"],
-        "sort.order" : ["desc", "asc"]
-      }
-    }
-  },
-  "mappings":{
-    "properties":{
-      "hierarchicalCategories":{
-        "type":"nested",
-        "properties":{
-          "ancestors":{
-            "type":"keyword"
+      "hierarchicalCategories": {
+        "type": "nested",
+        "properties": {
+          "ancestors": {
+            "type": "keyword"
           },
-          "order":{
-            "type":"integer"
+          "order": {
+            "type": "integer"
           },
-          "value":{
-            "type":"keyword"
+          "value": {
+            "type": "keyword"
           },
-          "level":{
-            "type":"integer"
+          "level": {
+            "type": "integer"
           }
         }
       },
-      "url_key":{
-        "type":"keyword"
+      "storage_temperature_id": {
+        "properties": {
+          "name": {
+            "type": "keyword"
+          },
+          "id": {
+            "type": "integer"
+          }
+        }
       },
-      "main":{
-        "type":"boolean"
+      "attributes": {
+        "properties": {
+          "administration_route_option_ids": {
+            "type": "keyword"
+          },
+          "species_id": {
+            "type": "keyword"
+          },
+          "active_principle_option_ids": {
+            "type": "keyword"
+          },
+          "species_ids": {
+            "type": "keyword"
+          },
+          "taxes_id": {
+            "type": "keyword"
+          }
+        }
       },
-      "id":{
-        "type":"integer"
+      "main": {
+        "type": "boolean"
       },
-      "redirect_url_key":{
-        "type":"keyword"
+      "url_key": {
+        "type": "keyword"
+      },
+      "id": {
+        "type": "integer"
+      },
+      "categories": {
+        "type": "nested"
+      },
+      "dimensional_uom_id": {
+        "properties": {
+          "name": {
+            "type": "keyword"
+          },
+          "id": {
+            "type": "integer"
+          }
+        }
+      }
+    }
+  },
+  "settings": {
+    "analysis": {
+      "filter": {
+        "word_delimiter": {
+          "catenate_all": true,
+          "catenate_numbers": true,
+          "generate_word_parts": true,
+          "split_on_numerics": false,
+          "generate_number_parts": true,
+          "preserve_original": true,
+          "type": "word_delimiter",
+          "split_on_case_change": true
+        }
+      },
+      "index": {
+        "sort.order": [
+          "desc",
+          "asc"
+        ],
+        "sort.field": [
+          "main",
+          "id"
+        ]
+      },
+      "char_filter": {
+        "replace": {
+          "type": "mapping",
+          "mappings": [
+            "&=> and "
+          ]
+        }
+      },
+      "analyzer": {
+        "default": {
+          "filter": [
+            "lowercase",
+            "word_delimiter"
+          ],
+          "char_filter": [
+            "html_strip",
+            "replace"
+          ],
+          "type": "custom",
+          "tokenizer": "whitespace"
+        }
       }
     }
   }
 }
+]]>
         </field>
     </record>
 
