@@ -6,7 +6,8 @@
     id="ir_exp_shopinvader_variant_allowed_partner_types"
     model="ir.exports.line"
   >
-        <field name="name">allowed_partner_types</field>
+        <field name="name">allowed_partner_types_list</field>
+        <field name="alias">allowed_partner_types_list:allowed_partner_types</field>
         <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
     </record>
     <record id="ir_exp_shopinvader_variant_barcode" model="ir.exports.line">
