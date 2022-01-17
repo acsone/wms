@@ -17,7 +17,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alce_stock_barcode_picking_assignment
-#: code:addons/alce_stock_barcode_picking_assignment/models/stock_picking.py:63
+#: code:addons/alce_stock_barcode_picking_assignment/models/stock_picking.py:64
 #, python-format
 msgid "Please scan your user badge first to start the operations"
 msgstr "Veuillez scanner votre badge pour commencer la préparation."
