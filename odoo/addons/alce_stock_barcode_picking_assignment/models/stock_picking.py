@@ -45,7 +45,7 @@ class StockPicking(models.Model):
 
     def on_barcode_scanned(self, barcode):
         """ Try to assign the operator if not yet assigned and barcode is
-        an operator
+        an operator. Once operator is assigned, printed is set to True
         """
         if not self.operator_id:
             try:
@@ -54,6 +54,7 @@ class StockPicking(models.Model):
                 user = self.env["res.users"].search([("login", "=", login)])
                 if user:
                     self.operator_id = user
+                    self.printed = True
                     return None
             except Exception:
                 _logger.exception(
