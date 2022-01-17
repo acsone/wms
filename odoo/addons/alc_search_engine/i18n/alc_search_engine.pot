@@ -1,5 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
+#	* alc_search_engine
 #
 msgid ""
 msgstr ""
@@ -11,4 +12,23 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
+
+#. module: alc_search_engine
+#: model:ir.model.fields,field_description:alc_search_engine.field_delivery_carrier_allowed_partner_types_list
+#: model:ir.model.fields,field_description:alc_search_engine.field_product_product_allowed_partner_types_list
+#: model:ir.model.fields,field_description:alc_search_engine.field_shopinvader_variant_allowed_partner_types_list
+msgid "Allowed Partner Types List"
+msgstr ""
+
+#. module: alc_search_engine
+#: model:ir.model,name:alc_search_engine.model_product_product
+msgid "Product"
+msgstr ""
+
+#. module: alc_search_engine
+#: model:ir.model.fields,help:alc_search_engine.field_delivery_carrier_allowed_partner_types_list
+#: model:ir.model.fields,help:alc_search_engine.field_product_product_allowed_partner_types_list
+#: model:ir.model.fields,help:alc_search_engine.field_shopinvader_variant_allowed_partner_types_list
+msgid "Technical field. Stores all partner types allowed to access the product."
+msgstr ""
 
