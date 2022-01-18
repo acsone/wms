@@ -16,6 +16,19 @@ class ProductProduct(models.Model):
         help="Technical field. Stores all partner types allowed to access the product.",
     )
 
+    allowed_partner_types_list = fields.Serialized(
+        string="Allowed Partner Types List",
+        compute="_compute_allowed_partner_types_list",
+        help="Technical field. Stores all partner types allowed to access the product.",
+    )
+
+    @api.depends("categ_id")
+    def _compute_allowed_partner_types_list(self):
+        for product in self:
+            product.allowed_partner_types_list = list(
+                product.get_allowed_partner_types()
+            )
+
     @api.depends("categ_id")
     def _compute_allowed_partner_types(self):
         for product in self:
@@ -25,7 +38,12 @@ class ProductProduct(models.Model):
     def get_allowed_partner_types(self):
         """Returns the set of all partner types allowed to interact with the product."""
         self.ensure_one()
+        if not self.categ_id:
+            return set()
         partner_types = self.get_all_partner_types()
+        partner_types = self._filter_partner_types_food(partner_types)
+        partner_types = self._filter_partner_types_equipement(partner_types)
+        partner_types = self._filter_partner_types_meds(partner_types)
         partner_types = self._filter_partner_types_veterinary(partner_types)
         partner_types = self._filter_partner_types_belgium(partner_types)
         partner_types = self._filter_partner_types_human(partner_types)
@@ -42,7 +60,7 @@ class ProductProduct(models.Model):
 
     def _filter_partner_types_food(self, partner_types):
         if self.is_food:
-            partner_types -= {"equipment_only"}
+            partner_types -= {"equipment_only", "guest"}
         return partner_types
 
     def _filter_partner_types_equipement(self, partner_types):
@@ -86,7 +104,7 @@ class ProductProduct(models.Model):
 
     def _filter_partner_types_psychotropic(self, partner_types):
         if self.is_psychotropic:
-            partner_types -= {"other", "student_like", "export_customer"}
+            partner_types -= {"misc", "student_like", "export_customer", "export_meds"}
         return partner_types
 
     def _filter_partner_types_veterinary(self, partner_types):
