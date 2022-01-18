@@ -31,6 +31,14 @@ msgid "Allowed Partner Types"
 msgstr "Types de client autorisés"
 
 #. module: alc_partner_type
+#: model:ir.model.fields,field_description:alc_partner_type.field_delivery_carrier_allowed_partner_types_list
+#: model:ir.model.fields,field_description:alc_partner_type.field_product_product_allowed_partner_types_list
+#: model:ir.model.fields,field_description:alc_partner_type.field_shopinvader_variant_allowed_partner_types_list
+#, fuzzy
+msgid "Allowed Partner Types List"
+msgstr "Types de client autorisés"
+
+#. module: alc_partner_type
 #: selection:res.partner,partner_type:0
 msgid "Equipment Only"
 msgstr "Exclusif matériel"
@@ -99,8 +107,11 @@ msgstr "Fournisseurs (Non supporté par akénéo)"
 
 #. module: alc_partner_type
 #: model:ir.model.fields,help:alc_partner_type.field_delivery_carrier_allowed_partner_types
+#: model:ir.model.fields,help:alc_partner_type.field_delivery_carrier_allowed_partner_types_list
 #: model:ir.model.fields,help:alc_partner_type.field_product_product_allowed_partner_types
+#: model:ir.model.fields,help:alc_partner_type.field_product_product_allowed_partner_types_list
 #: model:ir.model.fields,help:alc_partner_type.field_shopinvader_variant_allowed_partner_types
+#: model:ir.model.fields,help:alc_partner_type.field_shopinvader_variant_allowed_partner_types_list
 msgid ""
 "Technical field. Stores all partner types allowed to access the product."
 msgstr ""
