@@ -9,7 +9,11 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["base_cached_xmlid", "alc_product_pharmacy"],
+    "depends": [
+        "alc_product_pharmacy",
+        "base_cached_xmlid",
+        "base_sparse_field_list_support",
+    ],
     "application": False,
     "data": ["views/res_partner.xml"],
     "demo": [],
