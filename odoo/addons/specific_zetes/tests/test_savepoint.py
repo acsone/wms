@@ -48,7 +48,9 @@ class TestSavepoint(SavepointCase):
         self.create_table(name)
         savepoint.release()
         self.assert_table_exists(name)
-        with self.assertRaisesRegexp(psycopg2.InternalError, "no such savepoint"):
+        with self.assertRaisesRegexp(
+            psycopg2.InternalError, 'savepoint "%s" does not exist' % savepoint._name
+        ):
             savepoint.release()
 
     @mute_logger("odoo.sql_db")
@@ -67,5 +69,7 @@ class TestSavepoint(SavepointCase):
             savepoint.release()
             self.assert_table_exists(name)
 
-        with self.assertRaisesRegexp(psycopg2.InternalError, "no such savepoint"):
+        with self.assertRaisesRegexp(
+            psycopg2.InternalError, 'savepoint "%s" does not exist' % savepoint._name
+        ):
             savepoint.release()
