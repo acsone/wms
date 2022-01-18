@@ -15,7 +15,7 @@
     },
     {
       "index_patterns":["alc_shopinvader_variant_*"],
-      "dls": "{\"bool\": {\"must\": {\"wildcard\": {\"allowed_partner_types\": \"*guest*\"}}}}",
+      "dls": "{\"bool\": {\"must\": {\"term\": {\"allowed_partner_types\": \"guest\"}}}}",
       "fls": ["allowed_partner_types", "supplier_id", "objectID", "model", "url_key", "redirect_url_key", "main", "short_description", "description", "name", "short_name", "seo_title", "meta_keywords", "meta_description", "variant_count", "categories", "categories.*", "sku", "variant_attributes", "images", "attributes", ""attributes.*", "structured_attributes", "structured_attributes.*" "attribute_set", "hierarchicalCategories", "barcode", "belgium_only", "cnk_code", "category_lot_expiry_field_name", "create_date", "vendor_product_code", "veterinary_only", "taxes_id", "lot_expiry_field_name", "not_sold_on_website", "packaging_ids", "route_from_categ_ids", "unit_in_shrink_wrap", "promo_bag", "sterile", "fabric", "link_info", "link_notice", "description_shop_short", "description_shop_long", "class_amcra", "code_amm", "code_cti", "storage_temperature_id", "dimensional_uom_id", "manufacturer", "manufacturer.*"],
       "allowed_actions": ["read"],
       "masked_fields": []
@@ -33,7 +33,7 @@
   "index_permissions": [
     {
       "index_patterns":["alc_shopinvader_variant_*"],
-      "dls": "{\"bool\": {\"must\": {\"wildcard\": {\"allowed_partner_types\": \"*misc*\"}}}}"
+      "dls": "{\"bool\": {\"must\": {\"term\": {\"allowed_partner_types\": \"misc\"}}}}"
     }
   ]
 }
@@ -46,7 +46,7 @@
   "index_permissions": [
     {
       "index_patterns":["alc_shopinvader_variant_*"],
-      "dls": "{\"bool\": {\"must\": {\"wildcard\": {\"allowed_partner_types\": \"*student_like*\"}}}}"
+      "dls": "{\"bool\": {\"must\": {\"term\": {\"allowed_partner_types\": \"student_like\"}}}}"
     }
   ]
 }
@@ -59,7 +59,7 @@
   "index_permissions": [
     {
       "index_patterns":["alc_shopinvader_variant_*"],
-      "dls": "{\"bool\": {\"must\": {\"wildcard\": {\"allowed_partner_types\": \"*food_only*\"}}}}",
+      "dls": "{\"bool\": {\"must\": {\"term\": {\"allowed_partner_types\": \"food_only\"}}}}",
       "fls": ["stock"]
     }
   ]
@@ -73,7 +73,7 @@
   "index_permissions": [
     {
       "index_patterns":["alc_shopinvader_variant_*"],
-      "dls": "{\"bool\": {\"must\": {\"wildcard\": {\"allowed_partner_types\": \"*equipment_only*\"}}}}",
+      "dls": "{\"bool\": {\"must\": {\"term\": {\"allowed_partner_types\": \"equipment_only\"}}}}",
       "fls": ["stock"]
     }
   ]
@@ -87,7 +87,7 @@
   "index_permissions": [
     {
       "index_patterns":["alc_shopinvader_variant_*"],
-      "dls": "{\"bool\": {\"must\": {\"wildcard\": {\"allowed_partner_types\": \"*veterinary*\"}}}}",
+      "dls": "{\"bool\": {\"must\": {\"term\": {\"allowed_partner_types\": \"veterinary\"}}}}",
       "fls": ["stock"]
     }
   ]
@@ -101,7 +101,7 @@
   "index_permissions": [
     {
       "index_patterns":["alc_shopinvader_variant_*"],
-      "dls": "{\"bool\": {\"must\": {\"wildcard\": {\"allowed_partner_types\": \"*wholesaler_veterinary*\"}}}}",
+      "dls": "{\"bool\": {\"must\": {\"term\": {\"allowed_partner_types\": \"wholesaler_veterinary\"}}}}",
       "fls": ["stock"]
     }
   ]
@@ -115,7 +115,7 @@
   "index_permissions": [
     {
       "index_patterns":["alc_shopinvader_variant_*"],
-      "dls": "{\"bool\": {\"must\": {\"wildcard\": {\"allowed_partner_types\": \"*wholesaler_pharmacy*\"}}}}",
+      "dls": "{\"bool\": {\"must\": {\"term\": {\"allowed_partner_types\": \"wholesaler_pharmacy\"}}}}",
       "fls": ["stock"]
     }
   ]
@@ -129,7 +129,7 @@
   "index_permissions": [
     {
       "index_patterns":["alc_shopinvader_variant_*"],
-      "dls": "{\"bool\": {\"must\": {\"wildcard\": {\"allowed_partner_types\": \"*export_customer*\"}}}}",
+      "dls": "{\"bool\": {\"must\": {\"term\": {\"allowed_partner_types\": \"export_customer\"}}}}",
       "fls": ["stock"]
     }
   ]
@@ -143,7 +143,7 @@
   "index_permissions": [
     {
       "index_patterns":["alc_shopinvader_variant_*"],
-      "dls": "{\"bool\": {\"must\": {\"wildcard\": {\"allowed_partner_types\": \"*export_meds*\"}}}}",
+      "dls": "{\"bool\": {\"must\": {\"term\": {\"allowed_partner_types\": \"export_meds\"}}}}",
       "fls": ["stock"]
     }
   ]
@@ -157,7 +157,7 @@
   "index_permissions": [
     {
       "index_patterns":["alc_shopinvader_variant_*"],
-      "dls": "{\"bool\": {\"must\": {\"wildcard\": {\"allowed_partner_types\": \"*shareholder*\"}}}}",
+      "dls": "{\"bool\": {\"must\": {\"term\": {\"allowed_partner_types\": \"shareholder\"}}}}",
       "fls": ["stock"]
     }
   ]
