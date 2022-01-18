@@ -44,7 +44,8 @@ build:
   # use odoo-10.0 runner so we have the pre-cloned odoo
   # except for that optimization, we don't need odoo dependencies for this job
   tags:
-    - odoo-10.0
+    - git-autoshare
+    - pip-cache
   script:
     - start_ssh_agent
     - virtualenv --python=$PYTHON venv
@@ -63,7 +64,8 @@ build:
 .test_common:
   stage: test
   tags:
-    - odoo-10.0
+    - speedy
+    - postgres
   needs:
     - job: build
       artifacts: true
