@@ -17,6 +17,56 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_s_methopren_methopren
+msgid "(S)-methopren (methopren)"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_34_36
+msgid "34-36"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_36_38
+msgid "36-38"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_38_40
+msgid "38-40"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_40_42
+msgid "40-42"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_42_44
+msgid "42-44"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_44_46
+msgid "44-46"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_46_48
+msgid "46-48"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_48_50
+msgid "48-50"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_50_52
+msgid "50-52"
+msgstr ""
+
+#. module: alc_pim
 #: model:product.category,name:alc_pim.ains_fdimvb
 msgid "AINS"
 msgstr "AINS"
@@ -27,6 +77,7 @@ msgid "Abattoir/Abattage"
 msgstr "Abattoir/Abattage"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_acana
 #: model:product.category,name:alc_pim.alichat_acana
 #: model:product.category,name:alc_pim.alichien_acana
 msgid "Acana"
@@ -77,21 +128,54 @@ msgid "Accessoires pour tondeuses"
 msgstr "Accessoires pour tondeuses"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_acepromazine
+msgid "Acepromazine"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_acetylisovaleryltylosine
+msgid "Acetylisovaleryltylosine"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_acetylsalicylzuur
+msgid "Acetylsalicylzuur"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_actinobacillus_pleuropneumoniae
+msgid "Actinobacillus pleuropneumoniae"
+msgstr ""
+
+#. module: alc_pim
 #: model:attribute.attribute,field_description:alc_pim.attribute_active_principle_option_ids
 #: model:ir.model.fields,field_description:alc_pim.attribute_active_principle_option_ids_ir_model_fields
-msgid "Active Principle"
+#, fuzzy
+msgid "Active Principles"
 msgstr "Active Principle"
 
 #. module: alc_pim
 #: model:attribute.attribute,field_description:alc_pim.attribute_administration_route_option_ids
 #: model:ir.model.fields,field_description:alc_pim.attribute_administration_route_option_ids_ir_model_fields
-msgid "Administration Route"
+#, fuzzy
+msgid "Administration Routes"
 msgstr "Administration Route"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_adrenaline
+msgid "Adrenaline"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_afoxolaner
+msgid "Afoxolaner"
+msgstr ""
 
 #. module: alc_pim
 #: model:attribute.attribute,field_description:alc_pim.attribute_categ_age_option_ids
 #: model:ir.model.fields,field_description:alc_pim.attribute_categ_age_option_ids_ir_model_fields
-msgid "Age category"
+#, fuzzy
+msgid "Age categories"
 msgstr "Age category"
 
 #. module: alc_pim
@@ -103,6 +187,11 @@ msgstr "Agents utilisés pour l'euthanasie"
 #: model:product.category,name:alc_pim.agility_chien_anmxcie
 msgid "Agility"
 msgstr "Agility"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_aglepriston
+msgid "Aglepriston"
+msgstr ""
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.agonist_alpha2_adrenerg_sncepmvb
@@ -130,10 +219,35 @@ msgid "Aiguilles à sutures"
 msgstr "Aiguilles à sutures"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_albendazole
+msgid "Albendazole"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_alfaprostol
+msgid "Alfaprostol"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_alfatocoferol_vitamine_e
+msgid "Alfatocoferol (vitamine E)"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_alfaxalone
+msgid "Alfaxalone"
+msgstr ""
+
+#. module: alc_pim
 #: model:attribute.set,name:alc_pim.attribute_set_aliments
 #: model:product.category,name:alc_pim.ali
 msgid "Aliments"
 msgstr "Aliments"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_all
+msgid "All"
+msgstr ""
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.allerg_evdecha
@@ -158,14 +272,57 @@ msgid "Allergie"
 msgstr "Allergie"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_allergy
+#, fuzzy
+msgid "Allergy"
+msgstr "Allergie"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_altrenogest
+msgid "Altrenogest"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_aluminium
+msgid "Aluminium"
+msgstr ""
+
+#. module: alc_pim
 #: model:product.category,name:alc_pim.aminosid_antibact_aimvb
 msgid "Aminosides"
 msgstr "Aminosides"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_amitraz
+msgid "Amitraz"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_amlodipine
+msgid "Amlodipine"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_amoxicilline
+#, fuzzy
+msgid "Amoxicilline"
+msgstr "Pénicillines"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_ampicilline
+#, fuzzy
+msgid "Ampicilline"
+msgstr "Pénicillines"
+
+#. module: alc_pim
 #: model:product.category,name:alc_pim.ampetbat_pcdetach
 msgid "Ampoules et batteries"
 msgstr "Ampoules et batteries"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_amprolium
+msgid "Amprolium"
+msgstr ""
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.analg_et_antipyr_fdimvb
@@ -216,7 +373,8 @@ msgstr "Anesthésiques volatils"
 #. module: alc_pim
 #: model:attribute.attribute,field_description:alc_pim.attribute_animal_size_option_ids
 #: model:ir.model.fields,field_description:alc_pim.attribute_animal_size_option_ids_ir_model_fields
-msgid "Animal Size"
+#, fuzzy
+msgid "Animal Sizes"
 msgstr "Animal Size"
 
 #. module: alc_pim
@@ -312,6 +470,11 @@ msgid "Antiépileptiques"
 msgstr "Antiépileptiques"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_apomorphine
+msgid "Apomorphine"
+msgstr ""
+
+#. module: alc_pim
 #: model:product.category,name:alc_pim.app_anesth_equip
 #: model:product.category,name:alc_pim.app_centri_labo_equip
 #: model:product.category,name:alc_pim.app_developmt_img_equip
@@ -330,6 +493,11 @@ msgstr "Appareils de Radiologie"
 #: model:product.category,name:alc_pim.appdester_hygetster_equip
 msgid "Appareils de stérilisation"
 msgstr "Appareils de stérilisation"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_apramycine
+msgid "Apramycine"
+msgstr ""
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.armoirrefrig_chaindufr_mob_equip
@@ -370,9 +538,40 @@ msgid "Associations"
 msgstr "Associations"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_atipamezol
+msgid "Atipamezol"
+msgstr ""
+
+#. module: alc_pim
 #: model:product.category,name:alc_pim.attel_pansem_cons
 msgid "Attelles"
 msgstr "Attelles"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_azaperon
+msgid "Azaperon"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_azijnzuur
+msgid "Azijnzuur"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_bvd_virus
+msgid "BVD-virus"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_bacitracine
+#: model:product.category,name:alc_pim.bacitraci_antibact_aimvb
+msgid "Bacitracine"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_bacteroides_nodosus
+msgid "Bacteroides nodosus"
+msgstr ""
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.bandadhes_pansem_cons
@@ -395,9 +594,36 @@ msgid "Bandes Immobilisation"
 msgstr "Bandes Immobilisation"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_bar
+#, fuzzy
+msgid "Bar"
+msgstr "Code Barre"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_behaviour
+msgid "Behaviour"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_benazepril
+msgid "Benazepril"
+msgstr ""
+
+#. module: alc_pim
 #: model:product.category,name:alc_pim.benzodiazepin_sncepmvb
 msgid "Benzodiazépines"
 msgstr "Benzodiazépines"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_benzylpenicilline
+#, fuzzy
+msgid "Benzylpenicilline"
+msgstr "Pénicillines"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_betamethason
+msgid "Betamethason"
+msgstr ""
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.bioprelev_labo_cons
@@ -418,9 +644,24 @@ msgid "Biscuits"
 msgstr "Biscuits"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_bismuth_subnitraat
+msgid "Bismuth subnitraat"
+msgstr ""
+
+#. module: alc_pim
 #: model:product.category,name:alc_pim.bistetcautelec_chir_equip
 msgid "Bistouris et cautères électriques"
 msgstr "Bistouris et cautères électriques"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_black
+msgid "Black"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_blauwtongvirus_blue_tongue_virus
+msgid "Blauwtongvirus (Blue Tongue Virus)"
+msgstr ""
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.bleu_film_img_equip
@@ -433,9 +674,34 @@ msgid "Blouse"
 msgstr "Blouse"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_blue
+msgid "Blue"
+msgstr ""
+
+#. module: alc_pim
 #: model:product.category,name:alc_pim.devid_sutur_cons
 msgid "Bobine et cassette"
 msgstr "Bobine et cassette"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_bolus_per_os
+msgid "Bolus per os"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_boorzuur
+msgid "Boorzuur"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_bordetella_bronchiseptica
+msgid "Bordetella bronchiseptica"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_borrelia_burgdorferi_spp
+msgid "Borrelia burgdorferi spp"
+msgstr ""
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.botte_habil_habi_rur
@@ -459,6 +725,17 @@ msgid "Breed"
 msgstr "Breed"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_breed_health_nutrition
+#, fuzzy
+msgid "Breed Health Nutrition"
+msgstr "Vet Care Nutrition"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_bromhexine
+msgid "Bromhexine"
+msgstr ""
+
+#. module: alc_pim
 #: model:product.category,name:alc_pim.bronchodilat_srmvb
 msgid "Bronchodilatateurs"
 msgstr "Bronchodilatateurs"
@@ -467,6 +744,11 @@ msgstr "Bronchodilatateurs"
 #: model:product.category,name:alc_pim.bross_gant_cons
 msgid "Brosses"
 msgstr "Brosses"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_brown
+msgid "Brown"
+msgstr ""
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.bucco_dent_evdecha
@@ -491,6 +773,31 @@ msgid "Bucco-dentaire"
 msgstr "Bucco-dentaire"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_buprenorfine
+msgid "Buprenorfine"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_burgundy
+msgid "Burgundy"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_busereline
+msgid "Busereline"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_butafosfaan
+msgid "Butafosfaan"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_butorfanol
+msgid "Butorfanol"
+msgstr ""
+
+#. module: alc_pim
 #: model:product.category,name:alc_pim.beta_bloq_scvmvb
 msgid "Bêta-bloquants"
 msgstr "Bêta-bloquants"
@@ -506,9 +813,45 @@ msgid "CLR"
 msgstr "CLR"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_cabergoline
+msgid "Cabergoline"
+msgstr ""
+
+#. module: alc_pim
 #: model:product.category,name:alc_pim.cag_chenil_equip
 msgid "Cages"
 msgstr "Cages"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_calcium
+msgid "Calcium"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_carbetocine
+msgid "Carbetocine"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_caribbean_blue
+msgid "Caribbean Blue"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_carnidazol
+#, fuzzy
+msgid "Carnidazol"
+msgstr "Métronidazole"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_carprofen
+msgid "Carprofen"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_carre_hondenziektevirus
+msgid "Carré (hondenziektevirus)"
+msgstr ""
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.casc_imp
@@ -548,6 +891,59 @@ msgid "Cavia Pro"
 msgstr "Cavia Pro"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_cavia_pro
+#, fuzzy
+msgid "Cavia pro"
+msgstr "Cavia Pro"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_cefalexine
+msgid "Cefalexine"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_cefalone
+msgid "Cefalone"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_cefapirine
+msgid "Cefapirine"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_cefazoline
+msgid "Cefazoline"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_cefoperazon
+msgid "Cefoperazon"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_cefovecin
+msgid "Cefovecin"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_cefquinome
+#, fuzzy
+msgid "Cefquinome"
+msgstr "Equine"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_ceftiofur
+msgid "Ceftiofur"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_ceil_blue
+msgid "Ceil Blue"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_celtic
 #: model:product.category,name:alc_pim.Celtic
 #: model:product.category,name:alc_pim.alichat_celtic
 msgid "Celtic"
@@ -616,14 +1012,130 @@ msgid "Chirurgie générale"
 msgstr "Chirurgie générale"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_chlamydophila_felis
+msgid "Chlamydophila felis"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_chloor
+msgid "Chloor"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_chloorhexidine
+msgid "Chloorhexidine"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_chloortetracycline
+#, fuzzy
+msgid "Chloortetracycline"
+msgstr "Tétracyclines"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_chlorphenamine
+msgid "Chlorphenamine"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_chocolate
+msgid "Chocolate"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_cholecalciferol
+msgid "Cholecalciferol"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_choriongonadotrofine
+msgid "Choriongonadotrofine"
+msgstr ""
+
+#. module: alc_pim
 #: model:product.category,name:alc_pim.cicathemo_pansem_cons
 msgid "Cicatrisation-Hémostase"
 msgstr "Cicatrisation-Hémostase"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_cimicoxib
+msgid "Cimicoxib"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_circovirus
+msgid "Circovirus"
+msgstr ""
+
+#. module: alc_pim
 #: model:product.category,name:alc_pim.ciseau_chirgen_instru
 msgid "Ciseaux"
 msgstr "Ciseaux"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_citroenzuur
+msgid "Citroenzuur"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_clavulaanzuur
+msgid "Clavulaanzuur"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_clenbuterol
+msgid "Clenbuterol"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_clindamycine
+msgid "Clindamycine"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_clodronic_acid
+msgid "Clodronic acid"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_clomipramine
+msgid "Clomipramine"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_cloprostenol
+msgid "Cloprostenol"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_clorsulon
+msgid "Clorsulon"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_closantel
+msgid "Closantel"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_clostridium_novyi
+msgid "Clostridium novyi"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_clostridium_perfringens
+msgid "Clostridium perfringens"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_clostridium_spp_clostridium
+msgid "Clostridium spp. (clostridium)"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_clostridium_tetani
+msgid "Clostridium tetani"
+msgstr ""
 
 #. module: alc_pim
 #: model:attribute.attribute,field_description:alc_pim.attribute_size_clothing_option_id
@@ -632,9 +1144,30 @@ msgid "Clothing size"
 msgstr "Clothing size"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_clotrimazol
+msgid "Clotrimazol"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_cloxacilline
+msgid "Cloxacilline"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_coccidia_spp
+msgid "Coccidia spp."
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_colistine_polymyxine_e
+msgid "Colistine (polymyxine E)"
+msgstr ""
+
+#. module: alc_pim
 #: model:attribute.attribute,field_description:alc_pim.attribute_product_color_option_ids
 #: model:ir.model.fields,field_description:alc_pim.attribute_product_color_option_ids_ir_model_fields
-msgid "Colour"
+#, fuzzy
+msgid "Colours"
 msgstr "Colour"
 
 #. module: alc_pim
@@ -646,6 +1179,13 @@ msgstr "Combinaison AINS"
 #: model:product.category,name:alc_pim.com_vieprat
 msgid "Communication"
 msgstr "Communication"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_complete
+#: model:product.category,name:alc_pim.complet_vlnac
+#, fuzzy
+msgid "Complete"
+msgstr "Compléments"
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.complement_paraph
@@ -717,6 +1257,7 @@ msgid "Contrôle sanitaire et Insémination"
 msgstr "Contrôle sanitaire et Insémination"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_convalescence
 #: model:product.category,name:alc_pim.conval_evdecha
 #: model:product.category,name:alc_pim.conval_evdechi
 #: model:product.category,name:alc_pim.conval_hpmvcha
@@ -744,6 +1285,11 @@ msgid "Coprologie"
 msgstr "Coprologie"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_coral
+msgid "Coral"
+msgstr ""
+
+#. module: alc_pim
 #: model:product.category,name:alc_pim.corbeil_chien_anmxcie
 msgid "Corbeilles"
 msgstr "Corbeilles"
@@ -754,14 +1300,35 @@ msgid "Coton"
 msgstr "Coton"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_coxiella_burnetii
+msgid "Coxiella burnetii"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_crispy
 #: model:product.category,name:alc_pim.crispy_vlnac
 msgid "Crispy"
 msgstr "Crispy"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_croquette
+msgid "Croquette"
+msgstr ""
+
+#. module: alc_pim
 #: model:product.category,name:alc_pim.cuve_developmt_img_equip
 msgid "Cuves"
 msgstr "Cuves"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_cyanocobalamine
+msgid "Cyanocobalamine"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_cyclosporine_ciclosporine
+msgid "Cyclosporine (ciclosporine)"
+msgstr ""
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.cephalosporin_antibact_aimvb
@@ -791,6 +1358,26 @@ msgid "Cœur"
 msgstr "Cœur"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_danofloxacine
+msgid "Danofloxacine"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_dark_olive_groen
+msgid "Dark Olive Groen"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_delmadinonacetaat
+msgid "Delmadinonacetaat"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_deltamethrine
+msgid "Deltamethrine"
+msgstr ""
+
+#. module: alc_pim
 #: model:product.category,name:alc_pim.dent_nac_nac
 #: model:product.category,name:alc_pim.dentis_dentist_equi
 #: model:product.category,name:alc_pim.dentist_equi
@@ -808,6 +1395,47 @@ msgstr "Dentisterie NAC"
 #: model:product.category,name:alc_pim.dermato_uemvb
 msgid "Dermatologique"
 msgstr "Dermatologique"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_desloreline
+msgid "Desloreline"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_desoxycortone_pivalate
+msgid "Desoxycortone (pivalate)"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_detomidine
+msgid "Detomidine"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_dexamethason
+msgid "Dexamethason"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_dexmedetomidine
+msgid "Dexmedetomidine"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_dexpanthenol
+msgid "Dexpanthenol"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_dextrose
+msgid "Dextrose"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_diabetes
+#, fuzzy
+msgid "Diabetes"
+msgstr "Diabète"
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.diabet_evdecha
@@ -847,6 +1475,31 @@ msgid "Diagnostique - Laboratoire"
 msgstr "Diagnostique - Laboratoire"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_diazepam
+msgid "Diazepam"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_dibotermine_alfa
+msgid "Dibotermine alfa"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_dichelobacter_nodosus
+msgid "Dichelobacter nodosus"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_diclazuril
+msgid "Diclazuril"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_diethanolaminefusidaat
+msgid "Diethanolaminefusidaat"
+msgstr ""
+
+#. module: alc_pim
 #: model:product.category,name:alc_pim.digest_digest_equi
 #: model:product.category,name:alc_pim.digest_digest_rur
 #: model:product.category,name:alc_pim.digest_equi
@@ -855,6 +1508,7 @@ msgid "Digestif"
 msgstr "Digestif"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_digestion
 #: model:product.category,name:alc_pim.digest_evdecha
 #: model:product.category,name:alc_pim.digest_evdechi
 #: model:product.category,name:alc_pim.digest_hpmvcha
@@ -875,6 +1529,26 @@ msgstr "Digestif"
 #: model:product.category,name:alc_pim.digest_vdrcchi
 msgid "Digestion"
 msgstr "Digestion"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_dihydrostreptomycine
+msgid "Dihydrostreptomycine"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_dimpylaat
+msgid "Dimpylaat"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_dinoprost
+msgid "Dinoprost"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_dinotefuran
+msgid "Dinotefuran"
+msgstr ""
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.direct_ophta_diagno_equip
@@ -905,9 +1579,24 @@ msgid "Divers"
 msgstr "Divers"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_doramectine
+msgid "Doramectine"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_doxycycline
+msgid "Doxycycline"
+msgstr ""
+
+#. module: alc_pim
 #: model:product.category,name:alc_pim.drainimpl_sonde_cons
 msgid "Drains - Implants"
 msgstr "Drains - Implants"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_drinkbaar_vaccin
+msgid "Drinkbaar vaccin"
+msgstr ""
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.drog_rur
@@ -970,9 +1659,25 @@ msgid "Développeuse"
 msgstr "Développeuse"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_e_coli_as
+msgid "E. coli-As"
+msgstr ""
+
+#. module: alc_pim
 #: model:product.category,name:alc_pim.ecg_diagno_equip
 msgid "E.C.G."
 msgstr "E.C.G."
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_ecg
+#, fuzzy
+msgid "ECG"
+msgstr "E.C.G."
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_ehv_paardenrhinopneumonievirus
+msgid "EHV (paardenrhinopneumonievirus )"
+msgstr ""
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.esf_osteoalcy_instru
@@ -1011,15 +1716,66 @@ msgid "Education"
 msgstr "Education"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_efedrine
+msgid "Efedrine"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_egg_drop_syndrome_virus
+msgid "Egg Drop Syndrome-virus"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_eimeria_spp
+msgid "Eimeria spp."
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_embutramide
+msgid "Embutramide"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_emerald
+msgid "Emerald"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_emodepside
+#, fuzzy
+msgid "Emodepside"
+msgstr "Aminosides"
+
+#. module: alc_pim
 #: model:product.category,name:alc_pim.emetiq_sgimvb
 msgid "Emétique"
 msgstr "Emétique"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_enalapril
+msgid "Enalapril"
+msgstr ""
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.endo_img_equip
 #: model:product.category,name:alc_pim.endosc_nac_nac
 msgid "Endoscopie"
 msgstr "Endoscopie"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_enflicoxib
+msgid "Enflicoxib"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_enilconazol
+msgid "Enilconazol"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_enrofloxacine
+msgid "Enrofloxacine"
+msgstr ""
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.enseig_mob_equip
@@ -1033,9 +1789,24 @@ msgid "Environnement"
 msgstr "Environnement"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_epinefrine
+msgid "Epinefrine"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_eprinomectine
+msgid "Eprinomectine"
+msgstr ""
+
+#. module: alc_pim
 #: model:product.category,name:alc_pim.equi
 msgid "Equine"
 msgstr "Equine"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_equine_chorionic_gonadotropin
+msgid "Equine Chorionic Gonadotropin"
+msgstr ""
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.equip
@@ -1044,11 +1815,38 @@ msgid "Equipement"
 msgstr "Equipement"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_erysipelothrix_rhusiopathiae
+msgid "Erysipelothrix rhusiopathiae"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_escherichia_coli
+msgid "Escherichia coli"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_escherichia_coli_e_coli
+msgid "Escherichia coli (E. coli)"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_estriol
+msgid "Estriol"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_eukanuba
 #: model:product.category,name:alc_pim.euka_echa
 #: model:product.category,name:alc_pim.euka_echi
 #: model:product.category,name:alc_pim.eukanuba_chat
 #: model:product.category,name:alc_pim.eukanuba_chien
 msgid "Eukanuba"
+msgstr "Eukanuba"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_eukanuba_vdiet
+#, fuzzy
+msgid "Eukanuba Vdiet"
 msgstr "Eukanuba"
 
 #. module: alc_pim
@@ -1073,6 +1871,67 @@ msgid "External communication"
 msgstr "External communication"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_febantel
+msgid "Febantel"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_felien_calicivirus
+msgid "Felien calicivirus"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_felien_infectieuze_peritonitisvirus
+msgid "Felien infectieuze peritonitisvirus"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_felien_panleucopenievirus
+msgid "Felien panleucopenievirus"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_felien_rhinotracheitisvirus
+msgid "Felien rhinotracheitisvirus"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_fenbendazole
+msgid "Fenbendazole"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_fenobarbital
+msgid "Fenobarbital"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_fenoxymethylpenicilline
+msgid "Fenoxymethylpenicilline"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_fentanyl
+msgid "Fentanyl"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_fenylbutazon
+msgid "Fenylbutazon"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_fenylpropanolamine
+msgid "Fenylpropanolamine"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_fibafirst
+#: model:product.category,name:alc_pim.fibafirst_cnac
+msgid "Fibafirst"
+msgstr ""
+
+#. module: alc_pim
 #: model:product.category,name:alc_pim.film_img_equip
 msgid "Films"
 msgstr "Films"
@@ -1092,11 +1951,58 @@ msgid "Fils résorbable"
 msgstr "Fils résorbable"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_fipronil
+msgid "Fipronil"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_firocoxib
+msgid "Firocoxib"
+msgstr ""
+
+#. module: alc_pim
 #: model:product.category,name:alc_pim.fiev_doul_inflam_casc_imp
 #: model:product.category,name:alc_pim.fiev_doul_inflam_med_vt_bg
 #: model:product.category,name:alc_pim.fievre_doul_infl_complement_paraph
 msgid "Fièvre, Douleur et Inflammation"
 msgstr "Fièvre, Douleur et Inflammation"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_florfenicol
+msgid "Florfenicol"
+msgstr ""
+
+#. module: alc_pim
+#: model:product.category,name:alc_pim.florfenicol_antibact_aimvb
+msgid "Florfénicol"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_flubendazole
+msgid "Flubendazole"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_flumequine
+#, fuzzy
+msgid "Flumequine"
+msgstr "Equine"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_flumethrine
+msgid "Flumethrine"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_flunixine
+msgid "Flunixine"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_fluralaner
+#, fuzzy
+msgid "Fluralaner"
+msgstr "Rurale"
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.foie_evdecha
@@ -1121,15 +2027,40 @@ msgid "Foie"
 msgstr "Foie"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_follitropine
+msgid "Follitropine"
+msgstr ""
+
+#. module: alc_pim
 #: model:attribute.attribute,field_description:alc_pim.attribute_food_range_option_id
 #: model:ir.model.fields,field_description:alc_pim.attribute_food_range_option_id_ir_model_fields
 msgid "Food range"
 msgstr "Food range"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_framycetine
+msgid "Framycetine"
+msgstr ""
+
+#. module: alc_pim
 #: model:product.category,name:alc_pim.frgodetransp_chaindufr_mob_equip
 msgid "Frigo de transport"
 msgstr "Frigo de transport"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_furosemide
+msgid "Furosemide"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_fusidinezuur
+msgid "Fusidinezuur"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_gamithromycine
+msgid "Gamithromycine"
+msgstr ""
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.osteoalcy_instru
@@ -1168,14 +2099,65 @@ msgid "Garrots et Collecteurs d'aiguilles"
 msgstr "Garrots et Collecteurs d'aiguilles"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_gemedicineerde_premix_per_os
+msgid "Gemedicineerde premix per os"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_gentamicine
+msgid "Gentamicine"
+msgstr ""
+
+#. module: alc_pim
 #: model:product.category,name:alc_pim.glucocortico_duemvb
 msgid "Glucocorticoïdes"
 msgstr "Glucocorticoïdes"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_glucose
+#: model:product.category,name:alc_pim.gluco_mmvb
+msgid "Glucose"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_glycine
+msgid "Glycine"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_gnrf_analoog
+msgid "GnRF-analoog"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_gonadoreline
+msgid "Gonadoreline"
+msgstr ""
+
+#. module: alc_pim
 #: model:product.category,name:alc_pim.gonadotro_et_med_agis_sur_liber_hssrhmvb
 msgid "Gonadotrophines et médicaments agissant sur leur libération"
 msgstr "Gonadotrophines et médicaments agissant sur leur libération"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_granules
+msgid "Granules"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_grapiprant
+msgid "Grapiprant"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_green
+msgid "Green"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_grey
+msgid "Grey"
+msgstr ""
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.group_coxib_afdimvb
@@ -1186,6 +2168,16 @@ msgstr "Groupe des coxibs"
 #: model:product.category,name:alc_pim.group_oxycam_afdimvb
 msgid "Groupe des oxicams"
 msgstr "Groupe des oxicams"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_guaifenesine
+msgid "Guaifenesine"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_gumborovirus
+msgid "Gumborovirus"
+msgstr ""
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.gyn_rur
@@ -1204,6 +2196,7 @@ msgid "Gynécologie – vêlage"
 msgstr "Gynécologie – vêlage"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_hpm
 #: model:product.category,name:alc_pim.hpm_vcha
 #: model:product.category,name:alc_pim.hpm_vchi
 msgid "HPM"
@@ -1224,15 +2217,60 @@ msgid "Habitat"
 msgstr "Habitat"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_haemophilus_parasuis
+msgid "Haemophilus parasuis"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_halofuginone
+msgid "Halofuginone"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_halsband_voor_uitwendig_gebruik
+msgid "Halsband voor uitwendig gebruik"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_heart
+msgid "Heart"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_herpesvirus
+msgid "Herpesvirus"
+msgstr ""
+
+#. module: alc_pim
 #: model:product.category,name:alc_pim.hills_chat
 #: model:product.category,name:alc_pim.hills_chien
 msgid "Hill's"
 msgstr "Hill's"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_hoeven
+msgid "Hoeven"
+msgstr ""
+
+#. module: alc_pim
 #: model:product.category,name:alc_pim.homeopathie_med_vt_bg
 msgid "Homéopathie"
 msgstr "Homéopathie"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_hondenadenovirus
+msgid "Hondenadenovirus"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_hondenpara_influenzavirus
+msgid "Hondenpara-influenzavirus"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_hooi
+msgid "Hooi"
+msgstr ""
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.hormo_casc_imp
@@ -1250,6 +2288,26 @@ msgstr "Hormones cortico-surrénales"
 #: model:product.category,name:alc_pim.hormo_sex_sys_repro_hmvb
 msgid "Hormones sexuelles - système reproducteur"
 msgstr "Hormones sexuelles - système reproducteur"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_human_chorionic_gonadotropin_hcg
+msgid "Human Chorionic Gonadotropin (hCG)"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_hunter_green
+msgid "Hunter Green"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_hyaluronzuur
+msgid "Hyaluronzuur"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_hydrocortison_aceponaat
+msgid "Hydrocortison (aceponaat)"
+msgstr ""
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.hyg_chat_anmxcie
@@ -1281,9 +2339,27 @@ msgid "Hygiène et stérilisation"
 msgstr "Hygiène et stérilisation"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_hyoscine
+msgid "Hyoscine"
+msgstr ""
+
+#. module: alc_pim
 #: model:product.category,name:alc_pim.hyperplas_beni_prostat_hssrhmvb
 msgid "Hyperplasie bénigne de la prostate"
 msgstr "Hyperplasie bénigne de la prostate"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_iams
+#: model:product.category,name:alc_pim.iams_echa
+msgid "Iams"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_ideal_balance
+#: model:product.category,name:alc_pim.ideal_bal_hcha
+#: model:product.category,name:alc_pim.ideal_bal_hchi
+msgid "Ideal Balance"
+msgstr ""
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.ident_vol_rur
@@ -1297,10 +2373,36 @@ msgid "Identification canine"
 msgstr "Identification canine"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_ijzer
+msgid "Ijzer"
+msgstr ""
+
+#. module: alc_pim
 #: model:product.category,name:alc_pim.image_equip_equi
 #: model:product.category,name:alc_pim.img_equip
 msgid "Imagerie"
 msgstr "Imagerie"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_imepitoine
+msgid "Imepitoïne"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_imidacloprid
+msgid "Imidacloprid"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_imidapril
+msgid "Imidapril"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_immunoglobuline
+#, fuzzy
+msgid "Immunoglobuline"
+msgstr "Immunologie"
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.immuno_casc_imp
@@ -1315,6 +2417,11 @@ msgid "Immunomodulateurs"
 msgstr "Immunomodulateurs"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_implant
+msgid "Implant"
+msgstr ""
+
+#. module: alc_pim
 #: model:attribute.attribute,field_description:alc_pim.attribute_indication_option_ids
 #: model:ir.model.fields,field_description:alc_pim.attribute_indication_option_ids_ir_model_fields
 msgid "Indications"
@@ -1326,9 +2433,49 @@ msgid "Indirect"
 msgstr "Indirect"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_indoxacarb
+msgid "Indoxacarb"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_infectieuze_anaemie_virus_chicken_anaemia_virus
+msgid "Infectieuze anaemie-virus (chicken anaemia virus)"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_infectieuze_boviene_rhinotracheitis
+msgid "Infectieuze boviene rhinotracheitis"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_infectieuze_bronchitisvirus
+msgid "Infectieuze bronchitisvirus"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_infectieuze_bursitisvirus
+msgid "Infectieuze bursitisvirus"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_infectieuze_hepatitisvirus_hond_hondenadenovirus
+msgid "Infectieuze hepatitisvirus hond (hondenadenovirus)"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_infectieuze_laryngo_tracheitisvirus
+msgid "Infectieuze laryngo-tracheitisvirus"
+msgstr ""
+
+#. module: alc_pim
 #: model:product.category,name:alc_pim.inib_secret_gastri_sgimvb
 msgid "Inhibiteur de la sécrétion gastrique"
 msgstr "Inhibiteur de la sécrétion gastrique"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_injecteerbare_suspensie
+msgid "Injecteerbare suspensie"
+msgstr ""
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.inj_cons
@@ -1358,6 +2505,13 @@ msgid "Insuffisance cardiaque"
 msgstr "Insuffisance cardiaque"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_insuline
+#: model:product.category,name:alc_pim.insuline_hmvb
+#, fuzzy
+msgid "Insuline"
+msgstr "Consultation"
+
+#. module: alc_pim
 #: model:product.category,name:alc_pim.insearttransfembr_equi
 msgid "Insémination artificielle - Transfert d'embryon"
 msgstr "Insémination artificielle - Transfert d'embryon"
@@ -1373,6 +2527,23 @@ msgid "Insémination ovins / porcs"
 msgstr "Insémination ovins / porcs"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_interferon
+#, fuzzy
+msgid "Interferon"
+msgstr "Référence interne"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_interleukine
+#, fuzzy
+msgid "Interleukine"
+msgstr "Référence interne"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_intra_uterine_toediening
+msgid "Intra-uterine toediening"
+msgstr ""
+
+#. module: alc_pim
 #: model:product.category,name:alc_pim.intra_uter_uemvb
 msgid "Intra-utérin"
 msgstr "Intra-utérin"
@@ -1383,11 +2554,100 @@ msgid "Intramammaire"
 msgstr "Intramammaire"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_intramammaire_toediening
+#, fuzzy
+msgid "Intramammaire toediening"
+msgstr "Intramammaire"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_isofluraan
+msgid "Isofluraan"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_itraconazole
+#, fuzzy
+msgid "Itraconazole"
+msgstr "Métronidazole"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_ivermectine
+#, fuzzy
+msgid "Ivermectine"
+msgstr "Injection"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_ivory
+msgid "Ivory"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_jodium_jood
+msgid "Jodium (jood)"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_joint
+msgid "Joint"
+msgstr ""
+
+#. module: alc_pim
 #: model:product.category,name:alc_pim.jouetfriand_chat_anmxcie
 #: model:product.category,name:alc_pim.jouetfriand_chien_anmxcie
 #: model:product.category,name:alc_pim.jouetfriand_nacanmxcie
 msgid "Jouets et friandises"
 msgstr "Jouets et friandises"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_kalium
+msgid "Kalium"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_kaliumbromide
+msgid "Kaliumbromide"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_kalkoen_herpesvirus
+msgid "Kalkoen herpesvirus"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_kanamycine
+msgid "Kanamycine"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_kanariepokkenvirus
+msgid "Kanariepokkenvirus"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_ketamine
+msgid "Ketamine"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_ketanserine
+msgid "Ketanserine"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_ketoconazole
+#, fuzzy
+msgid "Ketoconazole"
+msgstr "Métronidazole"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_ketoprofen
+msgid "Ketoprofen"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_kidney
+msgid "Kidney"
+msgstr ""
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.labo_cons
@@ -1401,14 +2661,79 @@ msgid "Laboratoires"
 msgstr "Laboratoires"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_lactose
+msgid "Lactose"
+msgstr ""
+
+#. module: alc_pim
 #: model:product.category,name:alc_pim.lampafent_diagno_equip
 msgid "Lampe à fente"
 msgstr "Lampe à fente"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_lavander
+msgid "Lavander"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_lawsonia_intracellularis
+msgid "Lawsonia intracellularis"
+msgstr ""
+
+#. module: alc_pim
 #: model:product.category,name:alc_pim.lectdepuce_identcan_identif_equip
 msgid "Lecteurs de puces"
 msgstr "Lecteurs de puces"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_leishmania_infantum
+msgid "Leishmania infantum"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_lemon_lime
+msgid "Lemon Lime"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_leptospira_spp_leptospira
+msgid "Leptospira spp. (Leptospira)"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_leukemievirus_kat_felien_leukemievirus
+msgid "Leukemievirus kat (felien leukemievirus)"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_levamisol
+msgid "Levamisol"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_levothyroxine
+msgid "Levothyroxine"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_lidocaine
+msgid "Lidocaine"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_lilac
+msgid "Lilac"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_lime_green
+msgid "Lime Green"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_lincomycine
+msgid "Lincomycine"
+msgstr ""
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.linge_hygdupers_hyg_vieprat
@@ -1421,9 +2746,35 @@ msgid "Litière"
 msgstr "Litière"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_liver
+#, fuzzy
+msgid "Liver"
+msgstr "Divers"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_lotilaner
+msgid "Lotilaner"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_lufenuron
+msgid "Lufenuron"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_lutropine_lh_luteotroop_hormoon_hcg
+msgid "Lutropine (LH) (luteotroop hormoon) (hCG)"
+msgstr ""
+
+#. module: alc_pim
 #: model:product.category,name:alc_pim.marco_linco_pleuro_antibact_aimvb
 msgid "Macrolides, Lincosamides, Pleuromutulines"
 msgstr "Macrolides, Lincosamides, Pleuromutulines"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_magnesium
+msgid "Magnesium"
+msgstr ""
 
 #. module: alc_pim
 #: model:attribute.attribute,field_description:alc_pim.attribute_species_id
@@ -1448,6 +2799,26 @@ msgid "Manches et transformateurs"
 msgstr "Manches et transformateurs"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_mannheimia_pasteurella_haemolytica
+msgid "Mannheimia (Pasteurella) haemolytica"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_marbofloxacine
+msgid "Marbofloxacine"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_marekvirus
+msgid "Marekvirus"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_maropitant
+msgid "Maropitant"
+msgstr ""
+
+#. module: alc_pim
 #: model:product.category,name:alc_pim.marq_rur
 msgid "Marquage"
 msgstr "Marquage"
@@ -1457,6 +2828,11 @@ msgstr "Marquage"
 #: model:product.category,name:alc_pim.marech_mare_equi
 msgid "Maréchalerie"
 msgstr "Maréchalerie"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_masitinib
+msgid "Masitinib"
+msgstr ""
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.matern_gyn_rur
@@ -1475,9 +2851,99 @@ msgid "Matériel Médical"
 msgstr "Matériel Médical"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_mavacoxib
+msgid "Mavacoxib"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_mebendazole
+#, fuzzy
+msgid "Mebendazole"
+msgstr "Métronidazole"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_mebezoniumiodide
+msgid "Mebezoniumiodide"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_medetomidine
+msgid "Medetomidine"
+msgstr ""
+
+#. module: alc_pim
 #: model:attribute.group,name:alc_pim.media_attribute_group
 msgid "Medias"
 msgstr "Medias"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_medroxyprogesteronacetaat
+msgid "Medroxyprogesteronacetaat"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_megestrolacetaat
+msgid "Megestrolacetaat"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_meloxicam
+msgid "Meloxicam"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_menbutone
+msgid "Menbutone"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_metamizol
+msgid "Metamizol"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_metergoline
+#, fuzzy
+msgid "Metergoline"
+msgstr "Papeterie"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_methadon
+msgid "Methadon"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_methimazole
+#, fuzzy
+msgid "Methimazole"
+msgstr "Métronidazole"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_methopren
+msgid "Methopren"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_methylprednisolon
+msgid "Methylprednisolon"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_metoclopramide
+msgid "Metoclopramide"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_metronidazol
+#, fuzzy
+msgid "Metronidazol"
+msgstr "Métronidazole"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_miconazol
+#, fuzzy
+msgid "Miconazol"
+msgstr "Métronidazole"
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.microsccolfix_labo_cons
@@ -1488,6 +2954,17 @@ msgstr "Microscope - Colorants - Fixateurs"
 #: model:product.category,name:alc_pim.microsc_labo_equip
 msgid "Microscopes"
 msgstr "Microscopes"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_midazolam
+#, fuzzy
+msgid "Midazolam"
+msgstr "Métronidazole"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_milbemycine
+msgid "Milbemycine"
+msgstr ""
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.minervetcarc_pansem_cons
@@ -1510,9 +2987,45 @@ msgid "Mobilier"
 msgstr "Mobilier"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_mometasonfuroaat
+msgid "Mometasonfuroaat"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_monensin
+#: model:product.category,name:alc_pim.monensin_sgimvb
+msgid "Monensin"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_monepantel
+msgid "Monepantel"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_monofilament
+msgid "Monofilament"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_monosulfiram
+msgid "Monosulfiram"
+msgstr ""
+
+#. module: alc_pim
 #: model:product.category,name:alc_pim.moteur_osteoalcy_instru
 msgid "Moteurs"
 msgstr "Moteurs"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_moxidectine
+msgid "Moxidectine"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_mucosal_disease_virus
+msgid "Mucosal Disease Virus"
+msgstr ""
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.multiusg_ser_inj_rur
@@ -1530,9 +3043,29 @@ msgid "Muselière"
 msgstr "Muselière"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_mycoplasma_gallisepticum
+msgid "Mycoplasma gallisepticum"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_mycoplasma_hyopneumoniae
+msgid "Mycoplasma hyopneumoniae"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_mycoplasma_synoviae
+msgid "Mycoplasma synoviae"
+msgstr ""
+
+#. module: alc_pim
 #: model:product.category,name:alc_pim.myorelax_sncepmvb
 msgid "Myorelaxants"
 msgstr "Myorelaxants"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_myxomatosevirus
+msgid "Myxomatosevirus"
+msgstr ""
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.med_antitus_expecto_et_broncho_srmvb
@@ -1593,6 +3126,28 @@ msgid "NAC"
 msgstr "NAC"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_nafcilline
+#, fuzzy
+msgid "Nafcilline"
+msgstr "Pénicillines"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_nandrolon
+msgid "Nandrolon"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_nasale_toediening
+msgid "Nasale toediening"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_natrium
+msgid "Natrium"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_nature_best
 #: model:product.category,name:alc_pim.nat_best_hchi
 msgid "Nature Best"
 msgstr "Nature Best"
@@ -1601,6 +3156,16 @@ msgstr "Nature Best"
 #: model:product.category,name:alc_pim.nat_best_hcha
 msgid "Nature best"
 msgstr "Nature best"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_navy_blue
+msgid "Navy Blue"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_neomycine
+msgid "Neomycine"
+msgstr ""
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.nettulson_hygetster_equip
@@ -1613,9 +3178,50 @@ msgid "Neuroleptiques"
 msgstr "Neuroleptiques"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_newcastle_disease_virus
+msgid "Newcastle Disease Virus"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_nicotinamide
+msgid "Nicotinamide"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_nitroxinil
+msgid "Nitroxinil"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_not_specified
+msgid "Not specified"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_nutribird
+#: model:product.category,name:alc_pim.nutribird_vlnac
+msgid "Nutribird"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_nystatine
+msgid "Nystatine"
+msgstr ""
+
+#. module: alc_pim
 #: model:product.category,name:alc_pim.negato_img_equip
 msgid "Négatoscopes"
 msgstr "Négatoscopes"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_ocean_blue
+msgid "Ocean Blue"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_oclacitinib
+msgid "Oclacitinib"
+msgstr ""
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.ocytociq_hssrhmvb
@@ -1623,9 +3229,20 @@ msgid "Ocytociques"
 msgstr "Ocytociques"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_oestriol
+#, fuzzy
+msgid "Oestriol"
+msgstr "Oestrogènes"
+
+#. module: alc_pim
 #: model:product.category,name:alc_pim.oestrogen_hssrhmvb
 msgid "Oestrogènes"
 msgstr "Oestrogènes"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_omeprazol
+msgid "Omeprazol"
+msgstr ""
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.ophta_equi
@@ -1645,6 +3262,32 @@ msgid "Ophtalmoscope"
 msgstr "Ophtalmoscope"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_oplossing_emulsie_per_os
+msgid "Oplossing/emulsie per os"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_oplossing_emulsie_gel_voor_uitwendig_gebruik
+msgid "Oplossing/emulsie/gel voor uitwendig gebruik"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_oral
+msgid "Oral"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_orange
+#, fuzzy
+msgid "Orange"
+msgstr "Food range"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_orbifloxacine
+msgid "Orbifloxacine"
+msgstr ""
+
+#. module: alc_pim
 #: model:product.category,name:alc_pim.Oreilles_soinhyg_paraph
 msgid "Oreilles"
 msgstr "Oreilles"
@@ -1656,15 +3299,37 @@ msgid "Orijen"
 msgstr "Orijen"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_orlux
+#: model:product.category,name:alc_pim.orlux_vlnac
+msgid "Orlux"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_ornithobacterium_rhinotracheale
+msgid "Ornithobacterium rhinotracheale"
+msgstr ""
+
+#. module: alc_pim
 #: model:product.category,name:alc_pim.orthochro_developmt_img_equip
 #: model:product.category,name:alc_pim.orthochro_film_img_equip
 msgid "Orthochromatiques"
 msgstr "Orthochromatiques"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_osateron
+msgid "Osateron"
+msgstr ""
+
+#. module: alc_pim
 #: model:product.category,name:alc_pim.osteo_instru
 msgid "Ostéosynthèse"
 msgstr "Ostéosynthèse"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_other
+#, fuzzy
+msgid "Other"
+msgstr "other"
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.otique_uemvb
@@ -1677,9 +3342,62 @@ msgid "Otoscopes"
 msgstr "Otoscopes"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_oxantel
+msgid "Oxantel"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_oxbow
+#: model:product.category,name:alc_pim.oxbow_nac
+msgid "Oxbow"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_oxfendazole
+msgid "Oxfendazole"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_oxyclozanide
+msgid "Oxyclozanide"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_oxytetracycline
+#, fuzzy
+msgid "Oxytetracycline"
+msgstr "Tétracyclines"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_oxytocine
+#, fuzzy
+msgid "Oxytocine"
+msgstr "Ocytociques"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_pi_3_virus
+msgid "PI-3 virus"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_pmsg
+msgid "PMSG"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_prrs_virus_porcien_reproductief_en_respiratoir_syndroom
+msgid "PRRS-virus (Porcien Reproductief en Respiratoir Syndroom)"
+msgstr ""
+
+#. module: alc_pim
 #: model:product.category,name:alc_pim.pwm_osteoalcy_instru
 msgid "PWM"
 msgstr "PWM"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_paardeninfluenzavirus
+msgid "Paardeninfluenzavirus"
+msgstr ""
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.pansem_cons
@@ -1702,6 +3420,16 @@ msgid "Papier"
 msgstr "Papier"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_paracetamol
+msgid "Paracetamol"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_paramyxovirus
+msgid "Paramyxovirus"
+msgstr ""
+
+#. module: alc_pim
 #: model:product.category,name:alc_pim.paraph
 msgid "Parapharmacie"
 msgstr "Parapharmacie"
@@ -1710,6 +3438,36 @@ msgstr "Parapharmacie"
 #: model:product.category,name:alc_pim.Parasites_envir_paraph
 msgid "Parasites"
 msgstr "Parasites"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_parma
+msgid "Parma"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_paromomycine
+msgid "Paromomycine"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_parvovirus
+msgid "Parvovirus"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_pasta_gel_per_os
+msgid "Pasta/Gel per os"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_pasteurella_multocida
+msgid "Pasteurella multocida"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_peach
+msgid "Peach"
+msgstr ""
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.peau_evdecha
@@ -1740,6 +3498,31 @@ msgid "Peau et phanères"
 msgstr "Peau et phanères"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_peforelin
+msgid "Peforelin"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_pegbovigrastim
+msgid "Pegbovigrastim"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_penethamaat
+msgid "Penethamaat"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_pentobarbital
+msgid "Pentobarbital"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_pentosan_polysulfaat
+msgid "Pentosan polysulfaat"
+msgstr ""
+
+#. module: alc_pim
 #: model:product.category,name:alc_pim.perfus_perftransfu_inj_cons
 msgid "Perfuseurs"
 msgstr "Perfuseurs"
@@ -1765,9 +3548,30 @@ msgid "Perfusion - transfusion"
 msgstr "Perfusion - transfusion"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_pergolide
+msgid "Pergolide"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_permethrine
+msgid "Permethrine"
+msgstr ""
+
+#. module: alc_pim
 #: model:product.category,name:alc_pim.petimobpes_mob_equip
 msgid "Petit mobilier - pesée"
 msgstr "Petit mobilier - pesée"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_phoxime_foxim
+msgid "Phoxime (foxim)"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_physiological
+#, fuzzy
+msgid "Physiological"
+msgstr "Physiologique"
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.chat_sofivet_physio
@@ -1809,14 +3613,39 @@ msgid "Physiologique"
 msgstr "Physiologique"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_pimobendan
+msgid "Pimobendan"
+msgstr ""
+
+#. module: alc_pim
 #: model:product.category,name:alc_pim.pince_chirgen_instru
 msgid "Pinces"
 msgstr "Pinces"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_pine_green
+msgid "Pine Green"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_pink
+msgid "Pink"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_pirlimycine
+msgid "Pirlimycine"
+msgstr ""
+
+#. module: alc_pim
 #: model:product.category,name:alc_pim.pcdetach
 msgid "Pièces détachées"
 msgstr "Pièces détachées"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_plaatje_in_de_bijenkorf
+msgid "Plaatje in de bijenkorf"
+msgstr ""
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.plafonnier_eclair_mob_equip
@@ -1834,6 +3663,11 @@ msgid "Plastique - Verreries"
 msgstr "Plastique - Verreries"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_plum
+msgid "Plum"
+msgstr ""
+
+#. module: alc_pim
 #: model:product.category,name:alc_pim.platr_bandimmobil_pansem_cons
 msgid "Plâtrées"
 msgstr "Plâtrées"
@@ -1847,6 +3681,11 @@ msgstr "Pochette non sertie"
 #: model:product.category,name:alc_pim.aiguillee_sutur_cons
 msgid "Pochette sertie"
 msgstr "Pochette sertie"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_poeder_korrels_per_os
+msgid "Poeder/ korrels per os"
+msgstr ""
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.poids_evdecha
@@ -1871,6 +3710,18 @@ msgid "Poids"
 msgstr "Poids"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_polyfilament
+#, fuzzy
+msgid "Polyfilament"
+msgstr "Aliments"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_polymyxine_b
+#, fuzzy
+msgid "Polymyxine B"
+msgstr "Polymyxines"
+
+#. module: alc_pim
 #: model:product.category,name:alc_pim.polym_antibact_aimvb
 msgid "Polymyxines"
 msgstr "Polymyxines"
@@ -1886,6 +3737,42 @@ msgid "Porte – aiguilles"
 msgstr "Porte – aiguilles"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_posaconazol
+msgid "Posaconazol"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_povidonum_iodinatum
+msgid "Povidonum iodinatum"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_powder_instant
+msgid "Powder / Instant"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_pradofloxacine
+msgid "Pradofloxacine"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_praziquantel
+msgid "Praziquantel"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_prednisolon
+msgid "Prednisolon"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_pregnant_mare_serum_gonadotropin
+msgid "Pregnant Mare Serum Gonadotropin"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_prescription_diet
 #: model:product.category,name:alc_pim.pres_diet_hcha
 #: model:product.category,name:alc_pim.pres_diet_hchi
 msgid "Prescription Diet"
@@ -1898,6 +3785,7 @@ msgid "Presentation"
 msgstr "Presentation"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_pro_plan
 #: model:product.category,name:alc_pim.pro_plan_pppcha
 #: model:product.category,name:alc_pim.pro_plan_pppchi
 msgid "Pro Plan"
@@ -1914,6 +3802,11 @@ msgstr "Pro Plan Purina"
 #: model:product.category,name:alc_pim.pp_pur_vet_d_pppchi
 msgid "Pro Plan Purina Veterinary Diet"
 msgstr "Pro Plan Purina Veterinary Diet"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_procaine
+msgid "Procaine"
+msgstr ""
 
 #. module: alc_pim
 #: model:ir.actions.act_window,name:alc_pim.product_category_action_form_web
@@ -1942,9 +3835,46 @@ msgid "Produits désodorisants Chenil et Cages"
 msgstr "Produits désodorisants Chenil et Cages"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_produkt_om_te_verstuiven_voor_omgeving_en_oppervlaktes
+msgid "Produkt om te verstuiven, voor omgeving en oppervlaktes"
+msgstr ""
+
+#. module: alc_pim
 #: model:product.category,name:alc_pim.prostagen_hssrhmvb
 msgid "Progestagènes"
 msgstr "Progestagènes"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_progesteron
+#, fuzzy
+msgid "Progesteron"
+msgstr "Progestagènes"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_proligeston
+#, fuzzy
+msgid "Proligeston"
+msgstr "Digestion"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_propentofylline
+msgid "Propentofylline"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_propionzuur
+msgid "Propionzuur"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_propofol
+msgid "Propofol"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_propoxur
+msgid "Propoxur"
+msgstr ""
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.proped_nac_nac
@@ -1992,9 +3922,49 @@ msgid "Préparation cicatrisante"
 msgstr "Préparation cicatrisante"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_purple
+msgid "Purple"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_pvd
+msgid "Pvd"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_pyrantel
+msgid "Pyrantel"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_pyridoxine
+msgid "Pyridoxine"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_pyriprole
+msgid "Pyriprole"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_pyriproxyfen
+msgid "Pyriproxyfen"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_pate_bites
+msgid "Pâté / bites"
+msgstr ""
+
+#. module: alc_pim
 #: model:product.category,name:alc_pim.penicillin_antibact_aimvb
 msgid "Pénicillines"
 msgstr "Pénicillines"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_q_koorts_coxiella_burnetii
+msgid "Q-koorts (Coxiella burnetii)"
+msgstr ""
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.quinolo_fluoroq_antibact_aimvb
@@ -2002,9 +3972,50 @@ msgid "Quinolones, Fluoroquinolones"
 msgstr "Quinolones, Fluoroquinolones"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_rhdv
+msgid "RHDV"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_rsb_virus
+msgid "RSB-virus"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_rabbit_hemorrhagic_disease_virus
+msgid "Rabbit Hemorrhagic Disease Virus"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_rabiesvirus
+msgid "Rabiesvirus"
+msgstr ""
+
+#. module: alc_pim
 #: model:product.category,name:alc_pim.radio_img_equip
 msgid "Radioprotection"
 msgstr "Radioprotection"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_ramipril
+msgid "Ramipril"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_raspberry
+msgid "Raspberry"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_recovery
+#: model:product.category,name:alc_pim.recovery_ssnac
+msgid "Recovery"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_red
+msgid "Red"
+msgstr ""
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.reins_evdecha
@@ -2029,10 +4040,66 @@ msgid "Reins"
 msgstr "Reins"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_reovirus
+msgid "Reovirus"
+msgstr ""
+
+#. module: alc_pim
 #: model:product.category,name:alc_pim.respi_equi
 #: model:product.category,name:alc_pim.respi_respi_equi
 msgid "Respiratoire"
 msgstr "Respiratoire"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_respiratorisch_syncytiaal_virus_brs_virus
+msgid "Respiratorisch Syncytiaal Virus (BRS-Virus)"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_retinol
+msgid "Retinol"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_rhinotracheitisvirus_kalkoen
+msgid "Rhinotracheitisvirus kalkoen"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_riboflavine
+msgid "Riboflavine"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_rifaximin
+msgid "Rifaximin"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_robenacoxib
+msgid "Robenacoxib"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_romifidine
+msgid "Romifidine"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_ronidazol
+#, fuzzy
+msgid "Ronidazol"
+msgstr "Métronidazole"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_rota_virus
+msgid "Rota-virus"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_royal_blue
+msgid "Royal Blue"
+msgstr ""
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.roy_can_chat
@@ -2076,9 +4143,31 @@ msgid "Sabot"
 msgstr "Sabot"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_salicylaat
+#, fuzzy
+msgid "Salicylaat"
+msgstr "Salicylates"
+
+#. module: alc_pim
 #: model:product.category,name:alc_pim.salicylat_afdimvb
 msgid "Salicylates"
 msgstr "Salicylates"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_salicylzuur
+#, fuzzy
+msgid "Salicylzuur"
+msgstr "Salicylates"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_salmonella_enteritidis
+msgid "Salmonella enteritidis"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_salmonella_typhimurium
+msgid "Salmonella typhimurium"
+msgstr ""
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.chi_sanalio
@@ -2086,6 +4175,12 @@ msgid "Sanalio"
 msgstr "Sanalio"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_sand
+msgid "Sand"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_sanimed
 #: model:product.category,name:alc_pim.sanimed_chat
 #: model:product.category,name:alc_pim.sanimed_chien
 #: model:product.category,name:alc_pim.sanimed_scha
@@ -2099,10 +4194,42 @@ msgid "Sanitaires"
 msgstr "Sanitaires"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_sarolaner
+msgid "Sarolaner"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_science_plan
 #: model:product.category,name:alc_pim.scie_plan_hcha
 #: model:product.category,name:alc_pim.scie_plan_hchi
 msgid "Science Plan"
 msgstr "Science Plan"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_seafoam_green
+msgid "Seafoam Green"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_selamectine
+msgid "Selamectine"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_selective
+#: model:product.category,name:alc_pim.selectiv_ssnac
+msgid "Selective"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_selegiline
+msgid "Selegiline"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_selenium
+msgid "Selenium"
+msgstr ""
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.sell_chat_anmxcie
@@ -2117,6 +4244,33 @@ msgstr "Sellerie"
 #: model:product.category,name:alc_pim.ser_pcdetach
 msgid "Seringues"
 msgstr "Seringues"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_serumgonadotrofine
+msgid "Serumgonadotrofine"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_sevoflurane
+msgid "Sevoflurane"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_shampoo_voor_uitwendig_gebruik
+msgid "Shampoo voor uitwendig gebruik"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_size_health_nutrition
+#: model:product.category,name:alc_pim.size_health_nutri_rcchi
+#, fuzzy
+msgid "Size Health Nutrition"
+msgstr "Vet Care Nutrition"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_skin
+msgid "Skin"
+msgstr ""
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.SOFIVET
@@ -2187,12 +4341,49 @@ msgid "Species"
 msgstr "Species"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_specific
 #: model:product.category,name:alc_pim.speci_scha
 #: model:product.category,name:alc_pim.speci_schi
 #: model:product.category,name:alc_pim.specific_chat
 #: model:product.category,name:alc_pim.specific_chien
 msgid "Specific"
 msgstr "Specific"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_spectinomycine
+msgid "Spectinomycine"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_spinosad
+msgid "Spinosad"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_spiramycine
+msgid "Spiramycine"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_spironolactone
+msgid "Spironolactone"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_spray_voor_uitwendige_toediening
+msgid "Spray voor uitwendige toediening"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_staphylococcus_aureus
+msgid "Staphylococcus aureus"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_sterilisation
+#, fuzzy
+msgid "Sterilisation"
+msgstr "Stérilisation"
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.stock_mob_equip
@@ -2215,9 +4406,44 @@ msgid "Stéthoscopes"
 msgstr "Stéthoscopes"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_sulfachloorpyridazine
+msgid "Sulfachloorpyridazine"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_sulfadiazine
+msgid "Sulfadiazine"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_sulfadimethoxine
+msgid "Sulfadimethoxine"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_sulfadoxine
+msgid "Sulfadoxine"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_sulfamethoxazol
+msgid "Sulfamethoxazol"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_sulfamiden
+msgid "Sulfamiden"
+msgstr ""
+
+#. module: alc_pim
 #: model:product.category,name:alc_pim.sulfa_et_trimed_antibact_aimvb
 msgid "Sulfamides et triméthoprime"
 msgstr "Sulfamides et triméthoprime"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_sulfur
+msgid "Sulfur"
+msgstr ""
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.supr_scie_nac
@@ -2238,6 +4464,11 @@ msgstr "Surveillance"
 #: model:product.category,name:alc_pim.sutur_cons
 msgid "Sutures"
 msgstr "Sutures"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_suxibuzon
+msgid "Suxibuzon"
+msgstr ""
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.sys_cario_vasc_casc_imp
@@ -2303,9 +4534,19 @@ msgid "Tables"
 msgstr "Tables"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_tablet_tablet_per_oraal
+msgid "Tablet/tablet per oraal"
+msgstr ""
+
+#. module: alc_pim
 #: model:product.category,name:alc_pim.tatetpincatat_identcan_identif_equip
 msgid "Tatoueurs et pinces à tatouer"
 msgstr "Tatoueurs et pinces à tatouer"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_telmisartan
+msgid "Telmisartan"
+msgstr ""
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.tests_labo_cons
@@ -2313,15 +4554,87 @@ msgid "Tests"
 msgstr "Tests"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_tetanus
+msgid "Tetanus"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_tetanus_anatoxine
+msgid "Tetanus anatoxine"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_tetanus_as
+msgid "Tetanus-As"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_tetracaine
+#, fuzzy
+msgid "Tetracaine"
+msgstr "Tétracyclines"
+
+#. module: alc_pim
 #: model:product.category,name:alc_pim.thermo_diagno_equip
 msgid "Thermomètres"
 msgstr "Thermomètres"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_thiamazole
+msgid "Thiamazole"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_thiamfenicol
+msgid "Thiamfenicol"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_thiamine
+msgid "Thiamine"
+msgstr ""
 
 #. module: alc_pim
 #: model:attribute.attribute,field_description:alc_pim.attribute_thread_option_id
 #: model:ir.model.fields,field_description:alc_pim.attribute_thread_option_id_ir_model_fields
 msgid "Thread"
 msgstr "Thread"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_thymol
+msgid "Thymol"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_thyroide
+#: model:product.category,name:alc_pim.thyro_pdhcha
+msgid "Thyroïde"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_tiamuline
+msgid "Tiamuline"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_tidbit
+msgid "Tidbit"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_tildipirosine
+msgid "Tildipirosine"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_tiletamine
+msgid "Tiletamine"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_tilmicosine
+msgid "Tilmicosine"
+msgstr ""
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.tiss_habil_habi_rur
@@ -2331,9 +4644,29 @@ msgid "Tissés"
 msgstr "Tissés"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_toceranib
+msgid "Toceranib"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_tocoferol
+msgid "Tocoferol"
+msgstr ""
+
+#. module: alc_pim
 #: model:product.category,name:alc_pim.tocolytiq_hssrhmvb
 msgid "Tocolytiques"
 msgstr "Tocolytiques"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_tolfenaminezuur
+msgid "Tolfenaminezuur"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_toltrazuril
+msgid "Toltrazuril"
+msgstr ""
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.tond_pcdetach
@@ -2356,6 +4689,11 @@ msgstr "Tondeuses électriques"
 #: model:product.category,name:alc_pim.tonte_equip_equi
 msgid "Tonte"
 msgstr "Tonte"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_torasemide
+msgid "Torasemide"
+msgstr ""
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.tranchant_chirurg_chirurg_cons
@@ -2390,6 +4728,27 @@ msgid "Trempage des trayons"
 msgstr "Trempage des trayons"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_triamcinolone
+msgid "Triamcinolone"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_triclabendazole
+msgid "Triclabendazole"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_trilostane
+msgid "Trilostane"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_trimethoprim
+msgid "Trimethoprim"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_trovet
 #: model:product.category,name:alc_pim.trovet_chat
 #: model:product.category,name:alc_pim.trovet_chien
 #: model:product.category,name:alc_pim.trovet_nac
@@ -2399,9 +4758,29 @@ msgid "Trovet"
 msgstr "Trovet"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_tulathromycine
+msgid "Tulathromycine"
+msgstr ""
+
+#. module: alc_pim
 #: model:product.category,name:alc_pim.tuniq_vetdeconsult_vieprat
 msgid "Tunique"
 msgstr "Tunique"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_turquoise
+msgid "Turquoise"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_tylosine
+msgid "Tylosine"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_tylvalosine
+msgid "Tylvalosine"
+msgstr ""
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.tetracycl_antibact_aimvb
@@ -2412,6 +4791,11 @@ msgstr "Tétracyclines"
 #: model:product.category,name:alc_pim.tetdecoup_tonte_equip
 msgid "Tête de coupe"
 msgstr "Tête de coupe"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_undyed
+msgid "Undyed"
+msgstr ""
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.urin_evdecha
@@ -2436,6 +4820,12 @@ msgid "Urinaire"
 msgstr "Urinaire"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_urinary
+#, fuzzy
+msgid "Urinary"
+msgstr "Urinaire"
+
+#. module: alc_pim
 #: model:product.category,name:alc_pim.usage_ext_casc_imp
 #: model:product.category,name:alc_pim.usage_ext_med_vt_bg
 msgid "Usage externe"
@@ -2447,6 +4837,17 @@ msgstr "Usage externe"
 #: model:product.category,name:alc_pim.uu_vetrur_habi_cons
 msgid "Usage unique"
 msgstr "Usage unique"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_vaccin_administratie_via_het_oog
+msgid "Vaccin administratie via het oog"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_vaccin_intranasal
+#, fuzzy
+msgid "Vaccin intranasal"
+msgstr "Vaccins antirabiques"
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.vacci_vol_rur
@@ -2464,9 +4865,24 @@ msgid "Vaccins antirabiques"
 msgstr "Vaccins antirabiques"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_vaginale_toediening
+msgid "Vaginale toediening"
+msgstr ""
+
+#. module: alc_pim
 #: model:product.category,name:alc_pim.vaissel_labo_labo_equip
 msgid "Vaisselle"
 msgstr "Vaisselle"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_valnemuline
+msgid "Valnemuline"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_varkensinfluenzavirus
+msgid "Varkensinfluenzavirus"
+msgstr ""
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.vasodil_periph_et_cereb_scvmvb
@@ -2479,12 +4895,14 @@ msgid "Versele Laga"
 msgstr "Versele Laga"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_vet_care_nutrition
 #: model:product.category,name:alc_pim.vet_care_nut_rccha
 #: model:product.category,name:alc_pim.vet_care_nut_rcchi
 msgid "Vet Care Nutrition"
 msgstr "Vet Care Nutrition"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_vet_complex
 #: model:product.category,name:alc_pim.vet_comp_vcha
 #: model:product.category,name:alc_pim.vet_comp_vchi
 msgid "Vet Complex"
@@ -2497,6 +4915,19 @@ msgid "Vet Essentials"
 msgstr "Vet Essentials"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_vetessentials
+#, fuzzy
+msgid "VetEssentials"
+msgstr "Vet Essentials"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_vetcare_plus
+#: model:product.category,name:alc_pim.vetcare_p_ssnac
+msgid "Vetcare Plus"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_veterinary_diet
 #: model:product.category,name:alc_pim.vt_diet_rccha
 #: model:product.category,name:alc_pim.vt_diet_rcchi
 msgid "Veterinary Diet"
@@ -2517,6 +4948,56 @@ msgstr "Virbac"
 #: model:product.category,name:alc_pim.vis_osteo_instru
 msgid "Vis"
 msgstr "Vis"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_vitamine_a
+msgid "Vitamine A"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_vitamine_b1
+msgid "Vitamine B1"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_vitamine_b12
+msgid "Vitamine B12"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_vitamine_b2
+msgid "Vitamine B2"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_vitamine_b3
+msgid "Vitamine B3"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_vitamine_b5
+msgid "Vitamine B5"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_vitamine_b6
+msgid "Vitamine B6"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_vitamine_d
+msgid "Vitamine D"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_vitamine_e
+msgid "Vitamine E"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_vloeistof_voor_inhalatie
+msgid "Vloeistof voor inhalatie"
+msgstr ""
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.vol_rur
@@ -2540,10 +5021,85 @@ msgid "Vêtements rurale"
 msgstr "Vêtements rurale"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_weight
+msgid "Weight"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_weipoeder
+msgid "Weipoeder"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_west_nile_virus
+msgid "West Nile Virus"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_white
+msgid "White"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_xl
+msgid "XL"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_xs
+msgid "XS"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_xxl
+msgid "XXL"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_xylazine
+msgid "Xylazine"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_yellow
+msgid "Yellow"
+msgstr ""
+
+#. module: alc_pim
 #: model:product.category,name:alc_pim.Yeux_soinhyg_paraph
 #: model:product.category,name:alc_pim.yeux_complement_paraph
 msgid "Yeux"
 msgstr "Yeux"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_zink
+msgid "Zink"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_zinkoxide
+msgid "Zinkoxide"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_zolazepam
+msgid "Zolazepam"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_adult
+msgid "adult"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_auriculaire_toediening
+msgid "auriculaire toediening"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.option_attribute_animal_size_big
+msgid "big"
+msgstr ""
 
 #. module: alc_pim
 #: model:attribute.group,name:alc_pim.commercial_attribute_group
@@ -2566,6 +5122,21 @@ msgid "injectables et à usage oral contre les endoparasites"
 msgstr "injectables et à usage oral contre les endoparasites"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_injecteerbaar_vaccin
+msgid "injecteerbaar vaccin"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_injecteerbare_oplossing
+msgid "injecteerbare oplossing"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_junior
+msgid "junior"
+msgstr ""
+
+#. module: alc_pim
 #: model:attribute.group,name:alc_pim.logistics_attribute_group
 msgid "logistics"
 msgstr "logistics"
@@ -2581,6 +5152,16 @@ msgid "marketing"
 msgstr "marketing"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.option_attribute_animal_size_medium
+msgid "medium"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_opthalmologische_toediening
+msgid "opthalmologische toediening"
+msgstr ""
+
+#. module: alc_pim
 #: model:attribute.group,name:alc_pim.other_attribute_group
 msgid "other"
 msgstr "other"
@@ -2589,6 +5170,16 @@ msgstr "other"
 #: model:product.category,name:alc_pim.pour_abeilles_apaimvb
 msgid "pour les abeilles"
 msgstr "pour les abeilles"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_senior
+msgid "senior"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.option_attribute_animal_size_small
+msgid "small"
+msgstr ""
 
 #. module: alc_pim
 #: model:attribute.group,name:alc_pim.technical_attribute_group
@@ -2638,9 +5229,6 @@ msgstr "à usage transdermique contre les endoparasites"
 
 #~ msgid "Additional information link"
 #~ msgstr "Additional information link"
-
-#~ msgid "Barcode"
-#~ msgstr "Code Barre"
 
 #~ msgid "Belgium only"
 #~ msgstr "Seulement pour la Belgique"
@@ -2719,9 +5307,6 @@ msgstr "à usage transdermique contre les endoparasites"
 #~ "Indique les différentes façons d'emballer un même article. Ceci n'a pas "
 #~ "d'impact sur les ordres de préparation, et sert principalement si vous "
 #~ "activez le module d'EDI."
-
-#~ msgid "Internal Reference"
-#~ msgstr "Référence interne"
 
 #~ msgid "Logistical Units"
 #~ msgstr "Unités logistique"

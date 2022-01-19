@@ -147,13 +147,13 @@ msgstr ""
 #. module: alc_pim
 #: model:attribute.attribute,field_description:alc_pim.attribute_active_principle_option_ids
 #: model:ir.model.fields,field_description:alc_pim.attribute_active_principle_option_ids_ir_model_fields
-msgid "Active Principle"
+msgid "Active Principles"
 msgstr ""
 
 #. module: alc_pim
 #: model:attribute.attribute,field_description:alc_pim.attribute_administration_route_option_ids
 #: model:ir.model.fields,field_description:alc_pim.attribute_administration_route_option_ids_ir_model_fields
-msgid "Administration Route"
+msgid "Administration Routes"
 msgstr ""
 
 #. module: alc_pim
@@ -169,7 +169,7 @@ msgstr ""
 #. module: alc_pim
 #: model:attribute.attribute,field_description:alc_pim.attribute_categ_age_option_ids
 #: model:ir.model.fields,field_description:alc_pim.attribute_categ_age_option_ids_ir_model_fields
-msgid "Age category"
+msgid "Age categories"
 msgstr ""
 
 #. module: alc_pim
@@ -364,7 +364,7 @@ msgstr ""
 #. module: alc_pim
 #: model:attribute.attribute,field_description:alc_pim.attribute_animal_size_option_ids
 #: model:ir.model.fields,field_description:alc_pim.attribute_animal_size_option_ids_ir_model_fields
-msgid "Animal Size"
+msgid "Animal Sizes"
 msgstr ""
 
 #. module: alc_pim
@@ -1149,7 +1149,7 @@ msgstr ""
 #. module: alc_pim
 #: model:attribute.attribute,field_description:alc_pim.attribute_product_color_option_ids
 #: model:ir.model.fields,field_description:alc_pim.attribute_product_color_option_ids_ir_model_fields
-msgid "Colour"
+msgid "Colours"
 msgstr ""
 
 #. module: alc_pim
