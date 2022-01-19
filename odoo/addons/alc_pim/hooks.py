@@ -33,6 +33,8 @@ def _load_attribute_options_translations(cr):
         all_options_records = env["attribute.option"].search([])
         options_by_en_name = {r.name: r for r in all_options_records}
         for r in csv_reader:
-            record = options_by_en_name[r["en_GB"]]
+            record = options_by_en_name.get(r["en_GB"])
+            if not record:
+                continue
             for lang in langs_alcyon:
                 record.with_context(lang=lang).write({"name": r[lang]})
