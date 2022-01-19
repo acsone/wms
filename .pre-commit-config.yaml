@@ -12,7 +12,6 @@ exclude: |
   ^docs/_templates/.*\.html$|
   # You don't usually want a bot to modify your legal texts
   (LICENSE.*|COPYING.*)
-  ()
 default_language_version:
   python: python3
   node: "14.13.0"
