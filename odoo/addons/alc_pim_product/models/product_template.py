@@ -29,20 +29,32 @@ class ProductTemplate(models.Model):
     presentation_option_id = fields.Many2one("attribute.option", "Presentation")
 
     product_color_option_ids = fields.Many2many(
-        string="Colour", comodel_name="attribute.option"
+        string="Colours",
+        comodel_name="attribute.option",
+        relation="product_template_color_options_rel",
     )
     categ_age_option_ids = fields.Many2many(
-        string="Age category", comodel_name="attribute.option"
+        string="Age categories",
+        comodel_name="attribute.option",
+        relation="product_template_age_options_rel",
     )
     indication_option_ids = fields.Many2many(
-        string="Indications", comodel_name="attribute.option"
+        string="Indications",
+        comodel_name="attribute.option",
+        relation="product_template_indication_options_rel",
     )
     active_principle_option_ids = fields.Many2many(
-        string="Active Principle", comodel_name="attribute.option"
+        string="Active Principles",
+        comodel_name="attribute.option",
+        relation="product_template_active_principle_options_rel",
     )
     animal_size_option_ids = fields.Many2many(
-        string="Animal Size", comodel_name="attribute.option"
+        string="Animal Sizes",
+        comodel_name="attribute.option",
+        relation="product_template_animal_size_options_rel",
     )
     administration_route_option_ids = fields.Many2many(
-        string="Administration Route", comodel_name="attribute.option"
+        string="Administration Routes",
+        comodel_name="attribute.option",
+        relation="product_template_administration_route_options_rel",
     )

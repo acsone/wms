@@ -84,6 +84,25 @@ def load_attribute_set_category_mapping(ref):
         ref[att_id] = cats.ids
 
 
+def load_product_image_mapping(ref):
+    ENV.cr.execute(
+        """
+        SELECT
+            pt.id,
+            sf.name
+        FROM
+            product_template pt
+            JOIN product_image_relation pr
+                ON pr.product_tmpl_id = pt.id
+            JOIN storage_image si
+                ON pr.image_id = si.id
+            JOIN storage_file sf
+                ON sf.id = si.file_id;
+    """
+    )
+    ref.update(ENV.cr.fetchall())
+
+
 def find_record_by_id(column_name, value):
     if column_name in {"marque_medicaments", "categories"}:
         record = ENV.ref("alc_pim." + value)
@@ -148,7 +167,7 @@ IMGS = {"img", "img_2", "img_3", "img_4", "img_5"}
 
 
 def process_imgs_fields(root, rd, product):
-    existing_images = product.mapped("image_ids.image_id.name")  # slow? SQL needed?
+    existing_images = IMAGE_MAME_BY_PRODUCT_TMPL_ID.get(product.id, [])
     existing_images += ["Proposition pharmacie.jpg"]  # the standard placeholder
     return [
         os.path.join(root, rd[img])
@@ -205,6 +224,7 @@ def process_lang_fields(rd, lang):
 OPTIONS_IDS = {}  # to load based on path provided at execution
 SPECIES_IDS = {}
 ATTRIBUTE_SET_CATEGORY_MAPPING = {}
+IMAGE_MAME_BY_PRODUCT_TMPL_ID = {}
 
 
 @click.command()
@@ -217,6 +237,7 @@ def main(env, root, filename, delimiter=";"):
     load_species_ids(SPECIES_IDS)
     load_option_ids(root, OPTIONS_IDS)
     load_attribute_set_category_mapping(ATTRIBUTE_SET_CATEGORY_MAPPING)
+    load_product_image_mapping(IMAGE_MAME_BY_PRODUCT_TMPL_ID)
     return process_csv_file(root, filename, process_product_row, delimiter)
 
 
