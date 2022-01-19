@@ -21,7 +21,7 @@ def pre_init_hook(cr):
             env["ir.translation"].load_module_terms(["base"], [lang.code])
 
 
-def post_init_hook(cr):
+def post_init_hook(cr, registry=None):
     _load_attribute_options_translations(cr)
 
 
