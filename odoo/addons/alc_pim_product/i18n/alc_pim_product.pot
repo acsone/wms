@@ -28,7 +28,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:alc_pim_product.field_product_template_active_principle_option_ids
 #: model:ir.model.fields,field_description:alc_pim_product.field_shopinvader_product_active_principle_option_ids
 #: model:ir.model.fields,field_description:alc_pim_product.field_shopinvader_variant_active_principle_option_ids
-msgid "Active Principle"
+msgid "Active Principles"
 msgstr ""
 
 #. module: alc_pim_product
@@ -37,7 +37,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:alc_pim_product.field_product_template_administration_route_option_ids
 #: model:ir.model.fields,field_description:alc_pim_product.field_shopinvader_product_administration_route_option_ids
 #: model:ir.model.fields,field_description:alc_pim_product.field_shopinvader_variant_administration_route_option_ids
-msgid "Administration Route"
+msgid "Administration Routes"
 msgstr ""
 
 #. module: alc_pim_product
@@ -46,7 +46,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:alc_pim_product.field_product_template_categ_age_option_ids
 #: model:ir.model.fields,field_description:alc_pim_product.field_shopinvader_product_categ_age_option_ids
 #: model:ir.model.fields,field_description:alc_pim_product.field_shopinvader_variant_categ_age_option_ids
-msgid "Age category"
+msgid "Age categories"
 msgstr ""
 
 #. module: alc_pim_product
@@ -55,7 +55,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:alc_pim_product.field_product_template_animal_size_option_ids
 #: model:ir.model.fields,field_description:alc_pim_product.field_shopinvader_product_animal_size_option_ids
 #: model:ir.model.fields,field_description:alc_pim_product.field_shopinvader_variant_animal_size_option_ids
-msgid "Animal Size"
+msgid "Animal Sizes"
 msgstr ""
 
 #. module: alc_pim_product
@@ -73,7 +73,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:alc_pim_product.field_product_template_product_color_option_ids
 #: model:ir.model.fields,field_description:alc_pim_product.field_shopinvader_product_product_color_option_ids
 #: model:ir.model.fields,field_description:alc_pim_product.field_shopinvader_variant_product_color_option_ids
-msgid "Colour"
+msgid "Colours"
 msgstr ""
 
 #. module: alc_pim_product
