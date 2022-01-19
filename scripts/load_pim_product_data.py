@@ -25,6 +25,7 @@ def process_csv_file(root, filename, process_row_dict, delimiter=","):
             record = process_row_dict(img_root, row_dict)
         except Exception:
             record = None
+            _logger.exception("Unable to import row %s", row_dict)
         if not record:
             missing_records.append(row)
     if missing_records:
@@ -100,7 +101,10 @@ def load_product_image_mapping(ref):
                 ON sf.id = si.file_id;
     """
     )
-    ref.update(ENV.cr.fetchall())
+    for _id, name in ENV.cr.fetchall():
+        names = ref.get(_id, [])
+        names.append(name)
+        ref[_id] = names
 
 
 def find_record_by_id(column_name, value):
