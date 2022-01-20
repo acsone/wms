@@ -210,6 +210,10 @@ export var PackagingQtyPicker = Vue.component("packaging-qty-picker", {
       },
     },
   },
+  created: function() {
+    this.$root.trigger("qty_edit", this.qty_done);
+  },
+
   updated: function() {
     // Put in updated to prevent triggerring when the component is initialized
     this.$root.trigger("qty_edit", this.qty_done);
