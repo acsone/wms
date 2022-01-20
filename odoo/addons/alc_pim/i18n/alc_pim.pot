@@ -145,18 +145,6 @@ msgid "Actinobacillus pleuropneumoniae"
 msgstr ""
 
 #. module: alc_pim
-#: model:attribute.attribute,field_description:alc_pim.attribute_active_principle_option_ids
-#: model:ir.model.fields,field_description:alc_pim.attribute_active_principle_option_ids_ir_model_fields
-msgid "Active Principles"
-msgstr ""
-
-#. module: alc_pim
-#: model:attribute.attribute,field_description:alc_pim.attribute_administration_route_option_ids
-#: model:ir.model.fields,field_description:alc_pim.attribute_administration_route_option_ids_ir_model_fields
-msgid "Administration Routes"
-msgstr ""
-
-#. module: alc_pim
 #: model:attribute.option,name:alc_pim.attribute_option_adrenaline
 msgid "Adrenaline"
 msgstr ""
@@ -164,12 +152,6 @@ msgstr ""
 #. module: alc_pim
 #: model:attribute.option,name:alc_pim.attribute_option_afoxolaner
 msgid "Afoxolaner"
-msgstr ""
-
-#. module: alc_pim
-#: model:attribute.attribute,field_description:alc_pim.attribute_categ_age_option_ids
-#: model:ir.model.fields,field_description:alc_pim.attribute_categ_age_option_ids_ir_model_fields
-msgid "Age categories"
 msgstr ""
 
 #. module: alc_pim
@@ -233,7 +215,6 @@ msgid "Alfaxalone"
 msgstr ""
 
 #. module: alc_pim
-#: model:attribute.set,name:alc_pim.alc_pim_attribute_group.attribute_set_aliments
 #: model:product.category,name:alc_pim.ali
 msgid "Aliments"
 msgstr ""
@@ -359,12 +340,6 @@ msgstr ""
 #. module: alc_pim
 #: model:product.category,name:alc_pim.anesth_volatil_sncepmvb
 msgid "Anesthésiques volatils"
-msgstr ""
-
-#. module: alc_pim
-#: model:attribute.attribute,field_description:alc_pim.attribute_animal_size_option_ids
-#: model:ir.model.fields,field_description:alc_pim.attribute_animal_size_option_ids_ir_model_fields
-msgid "Animal Sizes"
 msgstr ""
 
 #. module: alc_pim
@@ -1121,12 +1096,6 @@ msgid "Clostridium tetani"
 msgstr ""
 
 #. module: alc_pim
-#: model:attribute.attribute,field_description:alc_pim.attribute_size_clothing_option_id
-#: model:ir.model.fields,field_description:alc_pim.attribute_size_clothing_option_id_ir_model_fields
-msgid "Clothing size"
-msgstr ""
-
-#. module: alc_pim
 #: model:attribute.option,name:alc_pim.attribute_option_clotrimazol
 msgid "Clotrimazol"
 msgstr ""
@@ -1144,12 +1113,6 @@ msgstr ""
 #. module: alc_pim
 #: model:attribute.option,name:alc_pim.attribute_option_colistine_polymyxine_e
 msgid "Colistine (polymyxine E)"
-msgstr ""
-
-#. module: alc_pim
-#: model:attribute.attribute,field_description:alc_pim.attribute_product_color_option_ids
-#: model:ir.model.fields,field_description:alc_pim.attribute_product_color_option_ids_ir_model_fields
-msgid "Colours"
 msgstr ""
 
 #. module: alc_pim
@@ -2007,12 +1970,6 @@ msgid "Follitropine"
 msgstr ""
 
 #. module: alc_pim
-#: model:attribute.attribute,field_description:alc_pim.attribute_food_range_option_id
-#: model:ir.model.fields,field_description:alc_pim.attribute_food_range_option_id_ir_model_fields
-msgid "Food range"
-msgstr ""
-
-#. module: alc_pim
 #: model:attribute.option,name:alc_pim.attribute_option_framycetine
 msgid "Framycetine"
 msgstr ""
@@ -2393,12 +2350,6 @@ msgstr ""
 #. module: alc_pim
 #: model:attribute.option,name:alc_pim.attribute_option_implant
 msgid "Implant"
-msgstr ""
-
-#. module: alc_pim
-#: model:attribute.attribute,field_description:alc_pim.attribute_indication_option_ids
-#: model:ir.model.fields,field_description:alc_pim.attribute_indication_option_ids_ir_model_fields
-msgid "Indications"
 msgstr ""
 
 #. module: alc_pim
@@ -2806,7 +2757,6 @@ msgid "Maternité"
 msgstr ""
 
 #. module: alc_pim
-#: model:attribute.set,name:alc_pim.alc_pim_attribute_group.attribute_set_materiel
 #: model:product.category,name:alc_pim.materiel_hyg_vieprat
 msgid "Matériel"
 msgstr ""
@@ -2834,11 +2784,6 @@ msgstr ""
 #. module: alc_pim
 #: model:attribute.option,name:alc_pim.attribute_option_medetomidine
 msgid "Medetomidine"
-msgstr ""
-
-#. module: alc_pim
-#: model:attribute.group,name:alc_pim.media_attribute_group
-msgid "Medias"
 msgstr ""
 
 #. module: alc_pim
@@ -3033,7 +2978,6 @@ msgid "Médicament antitussif, expectorant et bronchodilatateur"
 msgstr ""
 
 #. module: alc_pim
-#: model:attribute.set,name:alc_pim.alc_pim_attribute_group.attribute_set_medicaments
 #: model:product.category,name:alc_pim.med
 msgid "Médicaments"
 msgstr ""
@@ -3727,12 +3671,6 @@ msgstr ""
 #: model:product.category,name:alc_pim.pres_diet_hcha
 #: model:product.category,name:alc_pim.pres_diet_hchi
 msgid "Prescription Diet"
-msgstr ""
-
-#. module: alc_pim
-#: model:attribute.attribute,field_description:alc_pim.attribute_presentation_option_id
-#: model:ir.model.fields,field_description:alc_pim.attribute_presentation_option_id_ir_model_fields
-msgid "Presentation"
 msgstr ""
 
 #. module: alc_pim
@@ -4538,12 +4476,6 @@ msgid "Thiamine"
 msgstr ""
 
 #. module: alc_pim
-#: model:attribute.attribute,field_description:alc_pim.attribute_thread_option_id
-#: model:ir.model.fields,field_description:alc_pim.attribute_thread_option_id_ir_model_fields
-msgid "Thread"
-msgstr ""
-
-#. module: alc_pim
 #: model:attribute.option,name:alc_pim.attribute_option_thymol
 msgid "Thymol"
 msgstr ""
@@ -5042,11 +4974,6 @@ msgid "big"
 msgstr ""
 
 #. module: alc_pim
-#: model:attribute.group,name:alc_pim.commercial_attribute_group
-msgid "commercial"
-msgstr ""
-
-#. module: alc_pim
 #: model:product.category,name:alc_pim.inj_et_usg_or_ctre_ecto_et_endo_apaimvb
 msgid "injectables et à usage oral contre les ecto- et endoparasites"
 msgstr ""
@@ -5077,21 +5004,6 @@ msgid "junior"
 msgstr ""
 
 #. module: alc_pim
-#: model:attribute.group,name:alc_pim.logistics_attribute_group
-msgid "logistics"
-msgstr ""
-
-#. module: alc_pim
-#: model:attribute.group,name:alc_pim.management_attribute_group
-msgid "management"
-msgstr ""
-
-#. module: alc_pim
-#: model:attribute.group,name:alc_pim.marketing_attribute_group
-msgid "marketing"
-msgstr ""
-
-#. module: alc_pim
 #: model:attribute.option,name:alc_pim.option_attribute_animal_size_medium
 msgid "medium"
 msgstr ""
@@ -5099,11 +5011,6 @@ msgstr ""
 #. module: alc_pim
 #: model:attribute.option,name:alc_pim.attribute_option_opthalmologische_toediening
 msgid "opthalmologische toediening"
-msgstr ""
-
-#. module: alc_pim
-#: model:attribute.group,name:alc_pim.other_attribute_group
-msgid "other"
 msgstr ""
 
 #. module: alc_pim
@@ -5119,11 +5026,6 @@ msgstr ""
 #. module: alc_pim
 #: model:attribute.option,name:alc_pim.option_attribute_animal_size_small
 msgid "small"
-msgstr ""
-
-#. module: alc_pim
-#: model:attribute.group,name:alc_pim.technical_attribute_group
-msgid "technical"
 msgstr ""
 
 #. module: alc_pim

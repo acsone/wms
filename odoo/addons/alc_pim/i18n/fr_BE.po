@@ -148,20 +148,6 @@ msgid "Actinobacillus pleuropneumoniae"
 msgstr ""
 
 #. module: alc_pim
-#: model:attribute.attribute,field_description:alc_pim.attribute_active_principle_option_ids
-#: model:ir.model.fields,field_description:alc_pim.attribute_active_principle_option_ids_ir_model_fields
-#, fuzzy
-msgid "Active Principles"
-msgstr "Active Principle"
-
-#. module: alc_pim
-#: model:attribute.attribute,field_description:alc_pim.attribute_administration_route_option_ids
-#: model:ir.model.fields,field_description:alc_pim.attribute_administration_route_option_ids_ir_model_fields
-#, fuzzy
-msgid "Administration Routes"
-msgstr "Administration Route"
-
-#. module: alc_pim
 #: model:attribute.option,name:alc_pim.attribute_option_adrenaline
 msgid "Adrenaline"
 msgstr ""
@@ -170,13 +156,6 @@ msgstr ""
 #: model:attribute.option,name:alc_pim.attribute_option_afoxolaner
 msgid "Afoxolaner"
 msgstr ""
-
-#. module: alc_pim
-#: model:attribute.attribute,field_description:alc_pim.attribute_categ_age_option_ids
-#: model:ir.model.fields,field_description:alc_pim.attribute_categ_age_option_ids_ir_model_fields
-#, fuzzy
-msgid "Age categories"
-msgstr "Age category"
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.agts_util_pour_eutha_sncepmvb
@@ -239,7 +218,6 @@ msgid "Alfaxalone"
 msgstr ""
 
 #. module: alc_pim
-#: model:attribute.set,name:alc_pim.alc_pim_attribute_group.attribute_set_aliments
 #: model:product.category,name:alc_pim.ali
 msgid "Aliments"
 msgstr "Aliments"
@@ -369,13 +347,6 @@ msgstr "Anesthésiques locaux"
 #: model:product.category,name:alc_pim.anesth_volatil_sncepmvb
 msgid "Anesthésiques volatils"
 msgstr "Anesthésiques volatils"
-
-#. module: alc_pim
-#: model:attribute.attribute,field_description:alc_pim.attribute_animal_size_option_ids
-#: model:ir.model.fields,field_description:alc_pim.attribute_animal_size_option_ids_ir_model_fields
-#, fuzzy
-msgid "Animal Sizes"
-msgstr "Animal Size"
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.anmxcie
@@ -1138,12 +1109,6 @@ msgid "Clostridium tetani"
 msgstr ""
 
 #. module: alc_pim
-#: model:attribute.attribute,field_description:alc_pim.attribute_size_clothing_option_id
-#: model:ir.model.fields,field_description:alc_pim.attribute_size_clothing_option_id_ir_model_fields
-msgid "Clothing size"
-msgstr "Clothing size"
-
-#. module: alc_pim
 #: model:attribute.option,name:alc_pim.attribute_option_clotrimazol
 msgid "Clotrimazol"
 msgstr ""
@@ -1162,13 +1127,6 @@ msgstr ""
 #: model:attribute.option,name:alc_pim.attribute_option_colistine_polymyxine_e
 msgid "Colistine (polymyxine E)"
 msgstr ""
-
-#. module: alc_pim
-#: model:attribute.attribute,field_description:alc_pim.attribute_product_color_option_ids
-#: model:ir.model.fields,field_description:alc_pim.attribute_product_color_option_ids_ir_model_fields
-#, fuzzy
-msgid "Colours"
-msgstr "Colour"
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.combin_ains_afdimvb
@@ -2032,12 +1990,6 @@ msgid "Follitropine"
 msgstr ""
 
 #. module: alc_pim
-#: model:attribute.attribute,field_description:alc_pim.attribute_food_range_option_id
-#: model:ir.model.fields,field_description:alc_pim.attribute_food_range_option_id_ir_model_fields
-msgid "Food range"
-msgstr "Food range"
-
-#. module: alc_pim
 #: model:attribute.option,name:alc_pim.attribute_option_framycetine
 msgid "Framycetine"
 msgstr ""
@@ -2420,12 +2372,6 @@ msgstr "Immunomodulateurs"
 #: model:attribute.option,name:alc_pim.attribute_option_implant
 msgid "Implant"
 msgstr ""
-
-#. module: alc_pim
-#: model:attribute.attribute,field_description:alc_pim.attribute_indication_option_ids
-#: model:ir.model.fields,field_description:alc_pim.attribute_indication_option_ids_ir_model_fields
-msgid "Indications"
-msgstr "Indications"
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.indirect_ophta_diagno_equip
@@ -2840,7 +2786,6 @@ msgid "Maternité"
 msgstr "Maternité"
 
 #. module: alc_pim
-#: model:attribute.set,name:alc_pim.alc_pim_attribute_group.attribute_set_materiel
 #: model:product.category,name:alc_pim.materiel_hyg_vieprat
 msgid "Matériel"
 msgstr "Matériel"
@@ -2870,11 +2815,6 @@ msgstr ""
 #: model:attribute.option,name:alc_pim.attribute_option_medetomidine
 msgid "Medetomidine"
 msgstr ""
-
-#. module: alc_pim
-#: model:attribute.group,name:alc_pim.media_attribute_group
-msgid "Medias"
-msgstr "Medias"
 
 #. module: alc_pim
 #: model:attribute.option,name:alc_pim.attribute_option_medroxyprogesteronacetaat
@@ -3073,7 +3013,6 @@ msgid "Médicament antitussif, expectorant et bronchodilatateur"
 msgstr "Médicament antitussif, expectorant et bronchodilatateur"
 
 #. module: alc_pim
-#: model:attribute.set,name:alc_pim.alc_pim_attribute_group.attribute_set_medicaments
 #: model:product.category,name:alc_pim.med
 msgid "Médicaments"
 msgstr "Médicaments"
@@ -3777,12 +3716,6 @@ msgstr ""
 #: model:product.category,name:alc_pim.pres_diet_hchi
 msgid "Prescription Diet"
 msgstr "Prescription Diet"
-
-#. module: alc_pim
-#: model:attribute.attribute,field_description:alc_pim.attribute_presentation_option_id
-#: model:ir.model.fields,field_description:alc_pim.attribute_presentation_option_id_ir_model_fields
-msgid "Presentation"
-msgstr "Presentation"
 
 #. module: alc_pim
 #: model:attribute.option,name:alc_pim.attribute_option_pro_plan
@@ -4595,12 +4528,6 @@ msgid "Thiamine"
 msgstr ""
 
 #. module: alc_pim
-#: model:attribute.attribute,field_description:alc_pim.attribute_thread_option_id
-#: model:ir.model.fields,field_description:alc_pim.attribute_thread_option_id_ir_model_fields
-msgid "Thread"
-msgstr "Thread"
-
-#. module: alc_pim
 #: model:attribute.option,name:alc_pim.attribute_option_thymol
 msgid "Thymol"
 msgstr ""
@@ -5102,11 +5029,6 @@ msgid "big"
 msgstr ""
 
 #. module: alc_pim
-#: model:attribute.group,name:alc_pim.commercial_attribute_group
-msgid "commercial"
-msgstr "commercial"
-
-#. module: alc_pim
 #: model:product.category,name:alc_pim.inj_et_usg_or_ctre_ecto_et_endo_apaimvb
 msgid "injectables et à usage oral contre les ecto- et endoparasites"
 msgstr "injectables et à usage oral contre les ecto- et endoparasites"
@@ -5137,21 +5059,6 @@ msgid "junior"
 msgstr ""
 
 #. module: alc_pim
-#: model:attribute.group,name:alc_pim.logistics_attribute_group
-msgid "logistics"
-msgstr "logistics"
-
-#. module: alc_pim
-#: model:attribute.group,name:alc_pim.management_attribute_group
-msgid "management"
-msgstr "management"
-
-#. module: alc_pim
-#: model:attribute.group,name:alc_pim.marketing_attribute_group
-msgid "marketing"
-msgstr "marketing"
-
-#. module: alc_pim
 #: model:attribute.option,name:alc_pim.option_attribute_animal_size_medium
 msgid "medium"
 msgstr ""
@@ -5160,11 +5067,6 @@ msgstr ""
 #: model:attribute.option,name:alc_pim.attribute_option_opthalmologische_toediening
 msgid "opthalmologische toediening"
 msgstr ""
-
-#. module: alc_pim
-#: model:attribute.group,name:alc_pim.other_attribute_group
-msgid "other"
-msgstr "other"
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.pour_abeilles_apaimvb
@@ -5180,11 +5082,6 @@ msgstr ""
 #: model:attribute.option,name:alc_pim.option_attribute_animal_size_small
 msgid "small"
 msgstr ""
-
-#. module: alc_pim
-#: model:attribute.group,name:alc_pim.technical_attribute_group
-msgid "technical"
-msgstr "technical"
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.equipmenag_hyg_vieprat
@@ -5220,6 +5117,62 @@ msgstr "à usage transdermique contre les ecto- et endoparasites"
 #: model:product.category,name:alc_pim.a_usg_transd_ctre_endopar_apaimvb
 msgid "à usage transdermique contre les endoparasites"
 msgstr "à usage transdermique contre les endoparasites"
+
+#, fuzzy
+#~ msgid "Active Principles"
+#~ msgstr "Active Principle"
+
+#, fuzzy
+#~ msgid "Administration Routes"
+#~ msgstr "Administration Route"
+
+#, fuzzy
+#~ msgid "Age categories"
+#~ msgstr "Age category"
+
+#, fuzzy
+#~ msgid "Animal Sizes"
+#~ msgstr "Animal Size"
+
+#~ msgid "Clothing size"
+#~ msgstr "Clothing size"
+
+#, fuzzy
+#~ msgid "Colours"
+#~ msgstr "Colour"
+
+#~ msgid "Food range"
+#~ msgstr "Food range"
+
+#~ msgid "Indications"
+#~ msgstr "Indications"
+
+#~ msgid "Medias"
+#~ msgstr "Medias"
+
+#~ msgid "Presentation"
+#~ msgstr "Presentation"
+
+#~ msgid "Thread"
+#~ msgstr "Thread"
+
+#~ msgid "commercial"
+#~ msgstr "commercial"
+
+#~ msgid "logistics"
+#~ msgstr "logistics"
+
+#~ msgid "management"
+#~ msgstr "management"
+
+#~ msgid "marketing"
+#~ msgstr "marketing"
+
+#~ msgid "other"
+#~ msgstr "other"
+
+#~ msgid "technical"
+#~ msgstr "technical"
 
 #~ msgid "AMCRA classification"
 #~ msgstr "AMCRA classification"
