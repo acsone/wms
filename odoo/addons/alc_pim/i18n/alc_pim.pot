@@ -233,7 +233,7 @@ msgid "Alfaxalone"
 msgstr ""
 
 #. module: alc_pim
-#: model:attribute.set,name:alc_pim.attribute_set_aliments
+#: model:attribute.set,name:alc_pim.alc_pim_attribute_group.attribute_set_aliments
 #: model:product.category,name:alc_pim.ali
 msgid "Aliments"
 msgstr ""
@@ -2806,7 +2806,7 @@ msgid "Maternité"
 msgstr ""
 
 #. module: alc_pim
-#: model:attribute.set,name:alc_pim.attribute_set_materiel
+#: model:attribute.set,name:alc_pim.alc_pim_attribute_group.attribute_set_materiel
 #: model:product.category,name:alc_pim.materiel_hyg_vieprat
 msgid "Matériel"
 msgstr ""
@@ -3033,7 +3033,7 @@ msgid "Médicament antitussif, expectorant et bronchodilatateur"
 msgstr ""
 
 #. module: alc_pim
-#: model:attribute.set,name:alc_pim.attribute_set_medicaments
+#: model:attribute.set,name:alc_pim.alc_pim_attribute_group.attribute_set_medicaments
 #: model:product.category,name:alc_pim.med
 msgid "Médicaments"
 msgstr ""

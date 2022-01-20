@@ -11,6 +11,7 @@
     "website": "https://acsone.eu/",
     "depends": [
         "alc_pim_product",
+        "alc_pim_attribute_group",
         "alc_product_shop_category",
         "alc_product_link_notice",
         "product_animal_species",
@@ -24,8 +25,6 @@
     ],
     "application": False,
     "data": [
-        "data/attribute_group.xml",
-        "data/attribute_set.xml",
         "data/product_category.xml",
         "data/attribute_attribute.xml",
         "data/attribute_option.xml",

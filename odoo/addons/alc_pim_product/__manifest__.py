@@ -5,12 +5,12 @@
 {
     "name": "Alc PIM Product fields",
     "description": """Alcyon PIM Product fields""",
-    "version": "10.0.1.0.0",
+    "version": "10.0.1.0.1",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["pim"],
+    "depends": ["alc_pim_attribute_group", "pim"],
     "application": False,
-    "data": [],
+    "data": ["data/attribute_attribute.xml"],
     "demo": [],
 }
