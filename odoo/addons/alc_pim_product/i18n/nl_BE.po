@@ -26,6 +26,8 @@ msgid "AMCRA classification"
 msgstr "AMCRA classificatie"
 
 #. module: alc_pim_product
+#: model:attribute.attribute,field_description:alc_pim_product.attribute_active_principle_option_ids
+#: model:ir.model.fields,field_description:alc_pim_product.attribute_active_principle_option_ids_ir_model_fields
 #: model:ir.model.fields,field_description:alc_pim_product.field_delivery_carrier_active_principle_option_ids
 #: model:ir.model.fields,field_description:alc_pim_product.field_product_product_active_principle_option_ids
 #: model:ir.model.fields,field_description:alc_pim_product.field_product_template_active_principle_option_ids
@@ -35,6 +37,8 @@ msgid "Active Principles"
 msgstr "Actieve bestanddelen"
 
 #. module: alc_pim_product
+#: model:attribute.attribute,field_description:alc_pim_product.attribute_administration_route_option_ids
+#: model:ir.model.fields,field_description:alc_pim_product.attribute_administration_route_option_ids_ir_model_fields
 #: model:ir.model.fields,field_description:alc_pim_product.field_delivery_carrier_administration_route_option_ids
 #: model:ir.model.fields,field_description:alc_pim_product.field_product_product_administration_route_option_ids
 #: model:ir.model.fields,field_description:alc_pim_product.field_product_template_administration_route_option_ids
@@ -44,6 +48,8 @@ msgid "Administration Routes"
 msgstr "Toedieningswijze"
 
 #. module: alc_pim_product
+#: model:attribute.attribute,field_description:alc_pim_product.attribute_categ_age_option_ids
+#: model:ir.model.fields,field_description:alc_pim_product.attribute_categ_age_option_ids_ir_model_fields
 #: model:ir.model.fields,field_description:alc_pim_product.field_delivery_carrier_categ_age_option_ids
 #: model:ir.model.fields,field_description:alc_pim_product.field_product_product_categ_age_option_ids
 #: model:ir.model.fields,field_description:alc_pim_product.field_product_template_categ_age_option_ids
@@ -53,6 +59,8 @@ msgid "Age categories"
 msgstr "Leeftijdscategorie"
 
 #. module: alc_pim_product
+#: model:attribute.attribute,field_description:alc_pim_product.attribute_animal_size_option_ids
+#: model:ir.model.fields,field_description:alc_pim_product.attribute_animal_size_option_ids_ir_model_fields
 #: model:ir.model.fields,field_description:alc_pim_product.field_delivery_carrier_animal_size_option_ids
 #: model:ir.model.fields,field_description:alc_pim_product.field_product_product_animal_size_option_ids
 #: model:ir.model.fields,field_description:alc_pim_product.field_product_template_animal_size_option_ids
@@ -63,6 +71,8 @@ msgid "Animal Sizes"
 msgstr "Grote dier"
 
 #. module: alc_pim_product
+#: model:attribute.attribute,field_description:alc_pim_product.attribute_size_clothing_option_id
+#: model:ir.model.fields,field_description:alc_pim_product.attribute_size_clothing_option_id_ir_model_fields
 #: model:ir.model.fields,field_description:alc_pim_product.field_delivery_carrier_size_clothing_option_id
 #: model:ir.model.fields,field_description:alc_pim_product.field_product_product_size_clothing_option_id
 #: model:ir.model.fields,field_description:alc_pim_product.field_product_template_size_clothing_option_id
@@ -72,6 +82,8 @@ msgid "Clothing size"
 msgstr "Kledingmaat"
 
 #. module: alc_pim_product
+#: model:attribute.attribute,field_description:alc_pim_product.attribute_product_color_option_ids
+#: model:ir.model.fields,field_description:alc_pim_product.attribute_product_color_option_ids_ir_model_fields
 #: model:ir.model.fields,field_description:alc_pim_product.field_delivery_carrier_product_color_option_ids
 #: model:ir.model.fields,field_description:alc_pim_product.field_product_product_product_color_option_ids
 #: model:ir.model.fields,field_description:alc_pim_product.field_product_template_product_color_option_ids
@@ -90,6 +102,8 @@ msgid "Fabric?"
 msgstr "Geweven?"
 
 #. module: alc_pim_product
+#: model:attribute.attribute,field_description:alc_pim_product.attribute_food_range_option_id
+#: model:ir.model.fields,field_description:alc_pim_product.attribute_food_range_option_id_ir_model_fields
 #: model:ir.model.fields,field_description:alc_pim_product.field_delivery_carrier_food_range_option_id
 #: model:ir.model.fields,field_description:alc_pim_product.field_product_product_food_range_option_id
 #: model:ir.model.fields,field_description:alc_pim_product.field_product_template_food_range_option_id
@@ -99,6 +113,8 @@ msgid "Food range"
 msgstr "Merk"
 
 #. module: alc_pim_product
+#: model:attribute.attribute,field_description:alc_pim_product.attribute_indication_option_ids
+#: model:ir.model.fields,field_description:alc_pim_product.attribute_indication_option_ids_ir_model_fields
 #: model:ir.model.fields,field_description:alc_pim_product.field_delivery_carrier_indication_option_ids
 #: model:ir.model.fields,field_description:alc_pim_product.field_product_product_indication_option_ids
 #: model:ir.model.fields,field_description:alc_pim_product.field_product_template_indication_option_ids
@@ -122,6 +138,8 @@ msgid "PDF"
 msgstr "PDF"
 
 #. module: alc_pim_product
+#: model:attribute.attribute,field_description:alc_pim_product.attribute_presentation_option_id
+#: model:ir.model.fields,field_description:alc_pim_product.attribute_presentation_option_id_ir_model_fields
 #: model:ir.model.fields,field_description:alc_pim_product.field_delivery_carrier_presentation_option_id
 #: model:ir.model.fields,field_description:alc_pim_product.field_product_product_presentation_option_id
 #: model:ir.model.fields,field_description:alc_pim_product.field_product_template_presentation_option_id
@@ -177,6 +195,8 @@ msgid "Sterile?"
 msgstr "Steriel?"
 
 #. module: alc_pim_product
+#: model:attribute.attribute,field_description:alc_pim_product.attribute_thread_option_id
+#: model:ir.model.fields,field_description:alc_pim_product.attribute_thread_option_id_ir_model_fields
 #: model:ir.model.fields,field_description:alc_pim_product.field_delivery_carrier_thread_option_id
 #: model:ir.model.fields,field_description:alc_pim_product.field_product_product_thread_option_id
 #: model:ir.model.fields,field_description:alc_pim_product.field_product_template_thread_option_id
