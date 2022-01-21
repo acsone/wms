@@ -9,6 +9,4 @@ class KeycloakUser(models.Model):
 
     _inherit = "keycloak.user"
 
-    elasticsearch_role = fields.Char(
-        related="partner_id.elasticsearch_role", store=True
-    )
+    elasticsearch_role = fields.Char(related="partner_id.elasticsearch_role")
