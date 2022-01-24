@@ -11,7 +11,12 @@ class KeycloakBackend(models.Model):
 
     def _get_update_fields(self):
         res = super(KeycloakBackend, self)._get_update_fields()
-        res.update({"elasticsearch_role": "shopinvader-vt-roles"})
+        new = {  # elasticsearch_role is a compute depending on these
+            "partner_type": "shopinvader-vt-roles",
+            "property_product_pricelist": "shopinvader-vt-roles",
+            "lang": "locale",
+        }
+        res.update(new)
         return res
 
     def _keycloak_user_to_payload(self, keycloak_user):
