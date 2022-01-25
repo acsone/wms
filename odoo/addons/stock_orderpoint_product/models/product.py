@@ -8,134 +8,126 @@ from odoo import api, fields, models
 class ProductTemplate(models.Model):
     _inherit = "product.template"
 
-    orderpoint_min = fields.Float("Minimum Quantity")
-    orderpoint_max = fields.Float("Maximum Quantity")
-    orderpoint_qty_multiple = fields.Float("Qty Multiple")
+    orderpoint_qty_multiple = fields.Float(
+        "Qty Multiple",
+        compute="_compute_orderpoint",
+        inverse="_inverse_orderpoint",
+        store=True,
+    )
 
-    _orderpoint_fields = ("orderpoint_min", "orderpoint_max", "orderpoint_qty_multiple")
+    orderpoint_min = fields.Float(
+        "Minimum Quantity",
+        compute="_compute_orderpoint",
+        inverse="_inverse_orderpoint",
+        store=True,
+    )
+    orderpoint_max = fields.Float(
+        "Maximum Quantity",
+        compute="_compute_orderpoint",
+        inverse="_inverse_orderpoint",
+        store=True,
+    )
 
-    def _propagate_orderpoint(self):
-        """
-        Set orderpoint values from products to the model orderpoint
-        :return:
-        """
-        # Use only for songs
-        if self.env.context.get("disable_constrains_orderpoint"):
-            return
+    @api.depends(
+        "product_variant_ids",
+        "product_variant_ids.orderpoint_qty_multiple",
+        "product_variant_ids.orderpoint_min",
+        "product_variant_ids.orderpoint_max",
+    )
+    def _compute_orderpoint(self):
+        unique_variants = self.filtered(
+            lambda template: len(template.product_variant_ids) == 1
+        )
+        for template in unique_variants:
+            product = template.product_variant_ids
+            template.orderpoint_min = product.orderpoint_min
+            template.orderpoint_max = product.orderpoint_max
+            template.orderpoint_qty_multiple = product.orderpoint_qty_multiple
 
-        for product_tmpl in self:
-            # In some case (see the method create on product.product)
-            # the product_template may not have a variant.
-            # In this case, we have to skip this constrains
-            product_variant = product_tmpl.with_context(
-                active_test=False
-            ).product_variant_ids
+        for template in self - unique_variants:
+            template.orderpoint_min = 0
+            template.orderpoint_max = 0
+            template.orderpoint_qty_multiple = 0
 
-            if not product_variant:
-                continue
-            product = product_variant[0]
-
-            rules = product.orderpoint_ids.filtered(
-                lambda r: r.company_id == self.env.user.company_id
+    def _inverse_orderpoint(self):
+        if len(self.product_variant_ids) == 1:
+            self.product_variant_id.write(
+                {
+                    "orderpoint_min": self.orderpoint_min,
+                    "orderpoint_max": self.orderpoint_max,
+                    "orderpoint_qty_multiple": self.orderpoint_qty_multiple,
+                }
             )
-            if rules:
-                rules.write(
-                    {
-                        "product_min_qty": product.orderpoint_min,
-                        "product_max_qty": product.orderpoint_max,
-                        "qty_multiple": product.orderpoint_qty_multiple,
-                        "active": product.active,
-                    }
-                )
-            else:
-                product.orderpoint_ids.create(
-                    {
-                        "product_id": product.id,
-                        "product_uom": product.uom_id,
-                        "product_min_qty": product.orderpoint_min,
-                        "product_max_qty": product.orderpoint_max,
-                        "qty_multiple": product.orderpoint_qty_multiple,
-                        "location_id": self.env.ref(
-                            "stock.stock_location_stock"
-                        ).location_id.id,
-                        "active": product.active,
-                    }
-                )
-
-    @api.model
-    def create(self, vals):
-        record = super(ProductTemplate, self).create(vals)
-        if any(field in vals for field in self._orderpoint_fields):
-            record._propagate_orderpoint()
-        return record
-
-    @api.multi
-    def write(self, values):
-        """If a product has been changed to a type service
-        you can archive the orderpoints with context.
-
-        Used only for import.
-        """
-        if (
-            self._context.get("force_archive_orderpoint")
-            and "type" in values
-            and values["type"] != "product"
-            and sum(self.mapped("nbr_reordering_rules")) != 0
-        ):
-            ops = self.mapped("product_variant_ids.orderpoint_ids").filtered(
-                lambda r: r.active
-            )
-            ops.write({"active": False})
-            # recompute value of `nbr_reordering_rules`
-            self.invalidate_cache(["nbr_reordering_rules"])
-
-        result = super(ProductTemplate, self).write(values)
-
-        if any(field in values for field in self._orderpoint_fields):
-            self._propagate_orderpoint()
-        return result
 
 
 class ProductProduct(models.Model):
     _inherit = "product.product"
 
-    @api.model
-    def create(self, vals):
-        """
-        When a product.product is created, Odoo will create the product
-        and only after that create the product.template. At the end, Odoo
-        will write the link between the product and the template.
-        :param vals:
-        :return:
-        """
-        orderpoint_min = vals.pop("orderpoint_min", 0)
-        orderpoint_max = vals.pop("orderpoint_max", 0)
-        orderpoint_qty_multiple = vals.pop("orderpoint_qty_multiple", 0)
+    orderpoint_qty_multiple = fields.Float(
+        "Qty Multiple",
+        compute="_compute_orderpoint",
+        inverse="_inverse_orderpoint",
+        store=True,
+    )
+    orderpoint_min = fields.Float(
+        "Minimum Quantity",
+        compute="_compute_orderpoint",
+        inverse="_inverse_orderpoint",
+        store=True,
+    )
+    orderpoint_max = fields.Float(
+        "Maximum Quantity",
+        compute="_compute_orderpoint",
+        inverse="_inverse_orderpoint",
+        store=True,
+    )
 
-        result = super(ProductProduct, self).create(vals)
+    def _create_orderpoint(self, product):
+        return self.env["stock.warehouse.orderpoint"].create(
+            {
+                "product_id": product.id,
+                "product_uom": product.uom_id,
+                "product_min_qty": product.orderpoint_min,
+                "product_max_qty": product.orderpoint_max,
+                "qty_multiple": product.orderpoint_qty_multiple,
+                "active": product.active,
+                "location_id": self.env.ref(
+                    "stock.stock_location_stock"
+                ).location_id.id,
+            }
+        )
 
-        if orderpoint_min or orderpoint_max or orderpoint_qty_multiple:
-            result.product_tmpl_id.write(
-                {
-                    "orderpoint_min": orderpoint_min,
-                    "orderpoint_max": orderpoint_max,
-                    "orderpoint_qty_multiple": orderpoint_qty_multiple,
-                }
-            )
+    @api.depends(
+        "orderpoint_ids",
+        "orderpoint_ids.qty_multiple",
+        "orderpoint_ids.product_min_qty",
+        "orderpoint_ids.active",
+        "orderpoint_ids.product_max_qty",
+    )
+    def _compute_orderpoint(self):
+        for product in self:
+            orderpoints = product.orderpoint_ids.filtered(lambda o: o.active)
+            if orderpoints:
+                orderpoint = orderpoints[0]
+                product.orderpoint_min = orderpoint.product_min_qty
+                product.orderpoint_max = orderpoint.product_max_qty
+                product.orderpoint_qty_multiple = orderpoint.qty_multiple
+            else:
+                product.orderpoint_min = 0.0
+                product.orderpoint_max = 0.0
+                product.orderpoint_qty_multiple = 0.0
 
-        return result
-
-    def write(self, values):
-        """If a product is archived you can propagate
-        archiving to orderpoints with context.
-
-        Used only for import.
-        """
-        if (
-            self._context.get("force_archive_orderpoint")
-            and "active" in values
-            and not values["active"]
-        ):
-            ops = self.mapped("orderpoint_ids").filtered(lambda r: r.active)
-            ops.write({"active": False})
-        return super(ProductProduct, self).write(values)
+    def _inverse_orderpoint(self):
+        for product in self:
+            orderpoints = product.orderpoint_ids.filtered(lambda o: o.active)
+            if orderpoints:
+                orderpoint = orderpoints[0]
+                orderpoint.write(
+                    {
+                        "product_min_qty": product.orderpoint_min,
+                        "product_max_qty": product.orderpoint_max,
+                        "qty_multiple": product.orderpoint_qty_multiple,
+                    }
+                )
+            else:
+                self._create_orderpoint(product)
