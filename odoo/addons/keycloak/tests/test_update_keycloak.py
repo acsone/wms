@@ -36,6 +36,11 @@ class TestKeycloakUpdateFlow(TestKeycloak):
         # then it does not trigger an update: identity_key on the job
         self.assertEqual(len(job_counter.search_created()), 1)
 
+        # when we write on the name, it triggers another update
+        self.partner.name = "NewFirstname NewLastname"
+        # then
+        self.assertEqual(len(job_counter.search_created()), 2)
+
     def test_update_keycloak_partner(self):
         keycloak_user = self.env["keycloak.user"].create(self.vals_user)
         job_counter = self.job_counter()
