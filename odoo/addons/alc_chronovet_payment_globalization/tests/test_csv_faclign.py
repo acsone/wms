@@ -2,6 +2,10 @@
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+import base64
+import csv
+import StringIO
+
 from odoo import fields
 from odoo.tests import common
 
@@ -21,8 +25,10 @@ class TestCsvFaclign(common.SavepointCase):
         )
         cls.warehouse_1.pick_type_id.subcode = "PICK"
 
-        cls.partner_1 = cls.env["res.partner"].create({"name": "partner1"})
-        cls.partner_2 = cls.env["res.partner"].create({"name": "partner1"})
+        cls.partner_1 = cls.env["res.partner"].create(
+            {"name": "partner1", "ref": "1234564"}
+        )
+        cls.partner_2 = cls.env["res.partner"].create({"name": "partner2"})
         cls.partner_3 = cls.env["res.partner"].create({"name": "partner3"})
 
         cls.payment_mode = cls.env["account.payment.mode"].create(
@@ -208,3 +214,78 @@ class TestCsvFaclign(common.SavepointCase):
         self.assertEqual(len(attachments), 2)
         for attachment in attachments:
             self.assertTrue(attachment.datas_fname.endswith(".csv"))
+
+    def test_01_make_sure_faclign_content_is_complete(self):
+        """
+        We create a refund from scratch : in that case, we wnat to make sure that
+        a line for the refund is created in the faclign file.
+        """
+        for invoice in self.invoices:
+            invoice.payment_mode_id = self.payment_mode.id
+            for line in invoice.invoice_line_ids:
+                line.write(
+                    {
+                        "account_id": self.account_revenue.id,
+                        "invoice_line_tax_ids": [(6, 0, [self.tax_fixed.id])],
+                    }
+                )
+            invoice.action_invoice_open()
+        refund = self.env["account.invoice"].create(
+            {
+                "partner_id": self.partner_1.id,
+                "account_id": self.account_receivable_1.id,
+                "payment_mode_id": self.payment_mode.id,
+                "invoice_line_ids": [
+                    (
+                        0,
+                        False,
+                        {
+                            "name": self.product.name,
+                            "product_id": self.product.id,
+                            "quantity": 1,
+                            "uom_id": self.env.ref("product.product_uom_unit").id,
+                            "price_unit": 100.0,
+                            "account_id": self.account_revenue.id,
+                            "invoice_line_tax_ids": [(6, 0, [self.tax_fixed.id])],
+                        },
+                    )
+                ],
+                "type": "out_refund",
+            }
+        )
+        refund.action_invoice_open()
+        account_globalization = self._do_globalization(
+            self.partner_1, self.account_receivable_1
+        )
+        self.assertTrue(account_globalization)
+
+        attachments = self.env["ir.attachment"].search(
+            [
+                ("res_id", "=", account_globalization.id),
+                ("res_model", "=", account_globalization._name),
+            ]
+        )
+        # Faclign & Facpied are generated now
+        self.assertEqual(len(attachments), 2)
+
+        for attachment in attachments:
+            self.assertTrue(attachment.datas_fname.endswith(".csv"))
+            if attachment.datas_fname == u"__faclign.csv":
+                data = base64.b64decode(attachment.datas)
+                reader = csv.DictReader(
+                    StringIO.StringIO(data),
+                    delimiter=";",
+                    lineterminator="\r\n",
+                    quoting=csv.QUOTE_ALL,
+                )
+                for row in reader:
+                    if row["TYPE"] == "out_refund":
+                        self.assertEqual(row["CDART"], u"987654321")
+                        self.assertEqual(row["DESART"], u"test product1")
+                        self.assertEqual(row["CFACT"], u"1234564")
+                        self.assertEqual(row["CLIVR"], u"1234564")
+                        self.assertEqual(row["TOTALHT"], "-100.0")
+                        self.assertEqual(row["QTFACT"], "1.0")
+                        self.assertEqual(row["TVA"], "10.0")
+                        self.assertEqual(row["MONTHT"], "-100.0")
+                        self.assertEqual(row["MONTTVA"], "-10.0")

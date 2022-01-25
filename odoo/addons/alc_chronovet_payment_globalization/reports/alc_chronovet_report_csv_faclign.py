@@ -10,63 +10,87 @@ class AlcChronovetReportCsvFaclign(models.AbstractModel):
     _name = "report.alc_chronovet_report_csv_faclign"
     _inherit = "report.report_csv.abstract"
 
+    def _get_common_data(self, invoice, invoice_line):
+        return {
+            "CFACT": invoice.partner_id.ref,
+            "CLIVR": invoice.partner_id.ref,
+            "NOM": invoice.partner_id.name,
+            "TYPE": invoice.type,
+            "NFACT": invoice.number,
+            "DATFAC": invoice.date_invoice,
+            "CDART": invoice_line.product_id.default_code,
+            "DESART": invoice_line.product_id.name,
+            "PRIXUN": -invoice_line.price_unit
+            if invoice.type == "out_refund"
+            else invoice_line.price_unit,
+            "PRIXREM": -invoice_line.price_subtotal / invoice_line.quantity
+            if invoice.type == "out_refund"
+            else invoice_line.price_subtotal / invoice_line.quantity,
+            "QTFACT": invoice_line.quantity,
+            "MONTHT": -invoice_line.price_subtotal
+            if invoice.type == "out_refund"
+            else invoice_line.price_subtotal,
+            "GTIN14": invoice_line.product_id.barcode,
+            "LABORATOIRE": invoice_line.product_id.supplier_id.name,
+            "TVA": invoice_line.invoice_line_tax_ids[0].amount,
+            "CATEG": invoice_line.product_id.categ_id.parent_id.name
+            if invoice_line.product_id.categ_id.parent_id
+            else invoice_line.product_id.categ_id.name,
+            "TOTALHT": -invoice_line.price_subtotal
+            if invoice.type == "out_refund"
+            else invoice_line.price_subtotal,
+            "MONTTVA": -invoice_line.price_subtotal
+            * invoice_line.invoice_line_tax_ids[0].amount
+            / 100.0
+            if invoice.type == "out_refund"
+            else invoice_line.price_subtotal
+            * invoice_line.invoice_line_tax_ids[0].amount
+            / 100.0,
+            "TOTALTTC": -invoice_line.price_subtotal
+            * (1 + invoice_line.invoice_line_tax_ids[0].amount / 100.0)
+            if invoice.type == "out_refund"
+            else invoice_line.price_subtotal
+            * (1 + invoice_line.invoice_line_tax_ids[0].amount / 100.0),
+        }
+
+    def _add_sale_order_data(self, sale_order, common_data):
+        sale_order_data = {
+            "COMMANDE": sale_order.order_id.name,
+            "NCOMM": sale_order.order_id.b2c_ref,
+            "DATCDE": sale_order.date_order,
+            "NLIVR": sale_order.order_id.picking_ids[0].name,
+            "PROPRIETAIRE": sale_order.order_id.partner_id.name,
+            "DATLIV": sale_order.order_id.picking_ids[0].date_done,
+        }
+        common_data.update(sale_order_data)
+        return common_data
+
+    def _add_data_for_no_so(self, common_data):
+        no_so_data = {
+            "COMMANDE": "",
+            "NCOMM": "",
+            "DATCDE": "",
+            "NLIVR": "",
+            "PROPRIETAIRE": "",
+            "DATLIV": "",
+        }
+        common_data.update(no_so_data)
+        return common_data
+
     def generate_csv_report(self, file, data, account_move):
         # Write header first
         file.writeheader()
         invoices = self._get_all_invoices(account_move)
         for invoice in invoices:
             for invoice_line in invoice.invoice_line_ids:
-                for sale_order in invoice_line.sale_line_ids:
-                    file.writerow(
-                        {
-                            "CFACT": invoice.partner_id.ref,
-                            "CLIVR": invoice.partner_id.ref,
-                            "NOM": invoice.partner_id.name,
-                            "TYPE": invoice.type,
-                            "COMMANDE": sale_order.order_id.name,
-                            "NCOMM": sale_order.order_id.b2c_ref,
-                            "DATCDE": sale_order.date_order,
-                            "NLIVR": sale_order.order_id.picking_ids[0].name,
-                            "NFACT": invoice.number,
-                            "DATFAC": invoice.date_invoice,
-                            "CDART": invoice_line.product_id.default_code,
-                            "DESART": invoice_line.product_id.name,
-                            "PRIXUN": -invoice_line.price_unit
-                            if invoice.type == "out_refund"
-                            else invoice_line.price_unit,
-                            "PRIXREM": -invoice_line.price_subtotal
-                            / invoice_line.quantity
-                            if invoice.type == "out_refund"
-                            else invoice_line.price_subtotal / invoice_line.quantity,
-                            "QTFACT": invoice_line.quantity,
-                            "MONTHT": -invoice_line.price_subtotal
-                            if invoice.type == "out_refund"
-                            else invoice_line.price_subtotal,
-                            "GTIN14": invoice_line.product_id.barcode,
-                            "LABORATOIRE": invoice_line.product_id.supplier_id.name,
-                            "TVA": invoice_line.invoice_line_tax_ids[0].amount,
-                            "PROPRIETAIRE": sale_order.order_id.partner_id.name,
-                            "CATEG": invoice_line.product_id.categ_id.parent_id.name
-                            if invoice_line.product_id.categ_id.parent_id
-                            else invoice_line.product_id.categ_id.name,
-                            "TOTALHT": -invoice_line.price_subtotal
-                            if invoice.type == "out_refund"
-                            else invoice_line.price_subtotal,
-                            "MONTTVA": -invoice_line.price_subtotal
-                            * invoice_line.invoice_line_tax_ids[0].amount
-                            / 100.0
-                            if invoice.type == "out_refund"
-                            else invoice_line.price_subtotal
-                            * invoice_line.invoice_line_tax_ids[0].amount
-                            / 100.0,
-                            "TOTALTTC": -invoice_line.price_subtotal
-                            * (1 + invoice_line.invoice_line_tax_ids[0].amount / 100.0)
-                            if invoice.type == "out_refund"
-                            else invoice_line.price_subtotal
-                            * (1 + invoice_line.invoice_line_tax_ids[0].amount / 100.0),
-                            "DATLIV": sale_order.order_id.picking_ids[0].date_done,
-                        }
-                    )
+                common_data = self._get_common_data(invoice, invoice_line)
+                if invoice_line.sale_line_ids:
+                    for sale_order in invoice_line.sale_line_ids:
+                        vals = self._add_sale_order_data(sale_order, common_data.copy())
+                        file.writerow(vals)
+                else:
+                    vals = self._add_data_for_no_so(common_data.copy())
+                    file.writerow(vals)
 
     def csv_report_options(self):
         res = super(AlcChronovetReportCsvFaclign, self).csv_report_options()
