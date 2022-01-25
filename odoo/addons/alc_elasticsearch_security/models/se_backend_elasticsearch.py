@@ -18,7 +18,7 @@ class SeBackendElasticsearch(models.Model):
             self.create_or_update_pricelist_role(pricelist)
 
     def create_or_update_pricelist_role(self, pricelist):
-        BODY = """{"index_permissions": [{"fls": ["%s"]}]}"""
+        BODY = """{"index_permissions": [{"fls": ["indicated_price", "%s"]}]}"""
         role_name = pricelist.role_name
         domain = [("name", "=", role_name), ("backend_id", "=", self.id)]
         existing_role = self.env["elasticsearch.role"].search(domain)

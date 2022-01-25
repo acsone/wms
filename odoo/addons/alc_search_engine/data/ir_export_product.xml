@@ -168,4 +168,8 @@
         <field name="name">product_brand_id/name</field>
         <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
     </record>
+    <record id="ir_exp_shopinvader_variant_indicated_price" model="ir.exports.line">
+        <field name="name">indicated_price</field>
+        <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
+    </record>
 </odoo>
