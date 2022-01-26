@@ -4,6 +4,8 @@
 
 from odoo import _, api, fields, models
 
+from odoo.addons.queue_job.job import identity_exact
+
 
 class KeycloakUser(models.Model):
 
@@ -65,7 +67,7 @@ class KeycloakUser(models.Model):
                 for user in self:
                     user.keycloak_backend_id.with_delay(
                         description=_("Update Keycloak User %s") % user.username,
-                        identity_key=self.keycloak_id,  # optimize chained writes
+                        identity_key=identity_exact,  # optimize chained writes
                     ).update_user_fields(user, list(updated_fields))
 
     def action_open_update_wizard(self):

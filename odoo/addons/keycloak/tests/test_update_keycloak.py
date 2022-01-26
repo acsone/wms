@@ -36,8 +36,13 @@ class TestKeycloakUpdateFlow(TestKeycloak):
         # then it does not trigger an update: identity_key on the job
         self.assertEqual(len(job_counter.search_created()), 1)
 
+        # when we write on the name, it triggers another update
+        self.partner.name = "NewFirstname NewLastname"
+        # then
+        self.assertEqual(len(job_counter.search_created()), 2)
+
     def test_update_keycloak_partner(self):
-        self.env["keycloak.user"].create(self.vals_user)
+        keycloak_user = self.env["keycloak.user"].create(self.vals_user)
         job_counter = self.job_counter()
 
         # if we write on the ref, it does not trigger an update
@@ -51,6 +56,9 @@ class TestKeycloakUpdateFlow(TestKeycloak):
         # then
         queue_job = job_counter.search_created()
         self.assertTrue("Update" in queue_job.name)
+        expected_payload = {"lastName": "NewLastname", "firstName": "NewFirstname"}
+        payload = keycloak_user.keycloak_backend_id._get_user_payload(*queue_job.args)
+        self.assertEqual(payload, expected_payload)
 
     @unittest.skip("Needs a running Keycloak backend.")
     def test_wizard(self):

@@ -10,7 +10,7 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["attribute_set"],
+    "depends": ["product", "attribute_set"],
     "data": ["data/attribute_group.xml", "data/attribute_set.xml"],
     "pre_init_hook": "pre_init_hook",
 }

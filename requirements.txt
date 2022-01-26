@@ -165,6 +165,7 @@ odoo10-addon-product-packaging-type-pallet @ git+https://github.com/acsone/produ
 odoo10-addon-product-price-category @ git+https://github.com/acsone/sale-workflow.git@b9987e4eb546f9ea8c0ee88e507072252b0d57d3#subdirectory=setup/product_price_category
 odoo10-addon-product-search-multi-value==10.0.1.0.1.99.dev5
 odoo10-addon-product-sequence @ git+https://github.com/acsone/product-attribute.git@f1dc5cd944b481993f7fb92cc98990527856cd4e#subdirectory=setup/product_sequence
+odoo10-addon-product-stock-state==10.0.1.0.0.99.dev7
 odoo10-addon-product-total-weight-from-packaging @ git+https://github.com/acsone/product-attribute.git@eef34248f9d56e07a53fb274a821e461d622d90b#subdirectory=setup/product_total_weight_from_packaging
 odoo10-addon-product-uom-unece==10.0.1.1.0.99.dev1
 odoo10-addon-purchase-cancel-reason @ git+https://github.com/acsone/purchase-workflow.git@527ab1413ba29a34c478e83413267f41e608cd4c#subdirectory=setup/purchase_cancel_reason
@@ -203,6 +204,7 @@ odoo10-addon-shopinvader-image==10.0.1.0.4
 odoo10-addon-shopinvader-multi-category==10.0.1.0.0.99.dev8
 odoo10-addon-shopinvader-product-attribute-set @ git+https://github.com/acsone/odoo-shopinvader.git@c0eff495b11b9bab25582f08ae7b5ccc8f248f8b#subdirectory=setup/shopinvader_product_attribute_set
 odoo10-addon-shopinvader-product-stock==10.0.1.0.1.99.dev10
+odoo10-addon-shopinvader-product-stock-state==10.0.1.0.0.99.dev5
 odoo10-addon-shopinvader-sale-profile @ git+https://github.com/acsone/odoo-shopinvader.git@c0eff495b11b9bab25582f08ae7b5ccc8f248f8b#subdirectory=setup/shopinvader_sale_profile
 odoo10-addon-shopinvader-search-engine==10.0.1.2.1.99.dev3
 odoo10-addon-shopinvader-wishlist @ git+https://github.com/acsone/odoo-shopinvader.git@5f47d82cbb6d9774d744a534ed9f6af7c361ce27#subdirectory=setup/shopinvader_wishlist

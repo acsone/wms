@@ -28,12 +28,12 @@
             >{PC007;0350,0070,05,05,J,00,B|}\r{RC007;PVI : <t
                 t-esc="pack.product_id.indicated_price"
               />|}\r</t>{XB01;0030,0150,9,1,02,0,0080|}\r{RB01;S<t
-              t-esc="pack.product_id and pack.product_id.default_code[:7].ljust(7) or ''"
+              t-esc="pack.product_id and pack.product_id.default_code[:8].ljust(8) or ''"
             /><t t-esc="lot and lot.name[:13].ljust(13) or ''" /><t
               t-esc="lot and lot.life_date and time.strftime('%d%m%y', time.strptime(lot.life_date,'%Y-%m-%d %H:%M:%S')) or ''"
             />|}\r
 {PC003;0030,0250,05,05,J,00,B|}\r
-{RC003;S-<t t-esc="pack.product_id.default_code[:7].ljust(7)" />-<t
+{RC003;S-<t t-esc="pack.product_id.default_code[:8].ljust(8)" />-<t
               t-esc="lot and lot.name[:13].ljust(13) or ''"
             />-<t
               t-esc="lot and lot.life_date and time.strftime('%d/%m/%y', time.strptime(lot.life_date,'%Y-%m-%d %H:%M:%S')) or ''"
