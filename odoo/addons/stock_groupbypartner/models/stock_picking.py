@@ -81,8 +81,10 @@ class StockPicking(models.Model):
         picking_togroup = self.filtered(
             lambda p: p.picking_type_id.groupbypartner and p.move_type != "one"
         )
-        picking_one = self.filtered(lambda p: p.move_type == "one")
-        picking_notgroup = (self - picking_togroup) - picking_one
+        picking_out_one = self.filtered(
+            lambda p: p.move_type == "one" and p.picking_type_code == "outgoing"
+        )
+        picking_notgroup = (self - picking_togroup) - picking_out_one
 
         for picking in picking_togroup:
             if self._context.get("do_only_split"):
@@ -193,8 +195,9 @@ class StockPicking(models.Model):
                 backorder_moves=bm
             )
 
-        picking_one._process_as_backorder()
-        return backorders + picking_one
+        # For picking PICK, even in all at once, we want to create backorders
+        picking_out_one._process_as_backorder()
+        return backorders + picking_out_one
 
     def _process_as_backorder(self):
         # we bypass the _create_backorder mechanism, which is broken at this point.

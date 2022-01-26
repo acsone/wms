@@ -17,7 +17,9 @@ class StockPicking(models.Model):
     def action_cancel(self):
         codes = self.mapped("picking_type_code")
         if "outgoing" in codes or "PICK" in self.mapped("picking_type_subcode"):
-            if not self.user_has_groups("stock_constraint.group_picking_cancel"):
+            if not self.user_has_groups(
+                "stock_constraint.group_picking_cancel"
+            ) and not self.env.context.get("force_cancel"):
                 raise UserError(_("You are not allowed to cancel such operation"))
         return super(StockPicking, self).action_cancel()
 
