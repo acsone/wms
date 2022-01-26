@@ -152,6 +152,7 @@ class StockMove(models.Model):
                         "pack_operation_ids": [],
                         "backorder_id": picking.id,
                         "operator_id": picking.operator_id.id,
+                        "printed": True,
                     }
                 )
                 new_picking.message_post(
