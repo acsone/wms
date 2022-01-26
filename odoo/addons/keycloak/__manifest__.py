@@ -13,6 +13,7 @@
     "depends": ["server_environment", "queue_job"],
     "application": False,
     "data": [
+        "security/groups.xml",
         "security/ir.model.access.csv",
         "data/keycloak_backend.xml",
         "views/keycloak_backend.xml",

@@ -132,9 +132,12 @@ class KeycloakBackend(models.Model):
     @job()
     def update_user_fields(self, user, updated_fields):
         client = self._get_admin_client()
-        payload_all = self._keycloak_user_to_payload(user)
-        payload = self._filter_payload_fields(payload_all, updated_fields)
+        payload = self._get_user_payload(user, updated_fields)
         return client.update_user(user_id=user.keycloak_id, payload=payload)
+
+    def _get_user_payload(self, user, updated_fields):
+        payload_all = self._keycloak_user_to_payload(user)
+        return self._filter_payload_fields(payload_all, updated_fields)
 
     @api.model
     def _get_available_actions(self):
