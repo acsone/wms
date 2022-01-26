@@ -74,7 +74,7 @@ msgid "Create Keycloak User"
 msgstr ""
 
 #. module: keycloak
-#: code:addons/keycloak/models/keycloak_user.py:45
+#: code:addons/keycloak/models/keycloak_user.py:47
 #, python-format
 msgid "Create Keycloak User %s"
 msgstr ""
@@ -96,7 +96,7 @@ msgid "Created on"
 msgstr ""
 
 #. module: keycloak
-#: code:addons/keycloak/models/keycloak_user.py:51
+#: code:addons/keycloak/models/keycloak_user.py:53
 #, python-format
 msgid "Delete Keycloak User %s"
 msgstr ""
@@ -140,9 +140,15 @@ msgid "Keycloak Backends"
 msgstr ""
 
 #. module: keycloak
+#: model:res.groups,name:keycloak.group_keycloak_manager
+msgid "Keycloak Manager"
+msgstr ""
+
+#. module: keycloak
 #: model:ir.ui.view,arch_db:keycloak.keycloak_partner_wizard_form
 #: model:ir.ui.view,arch_db:keycloak.keycloak_user_form_view
 #: model:ir.ui.view,arch_db:keycloak.keycloak_user_wizard_form
+#: model:res.groups,name:keycloak.group_keycloak_user
 msgid "Keycloak User"
 msgstr ""
 
@@ -287,7 +293,7 @@ msgid "Update Keycloak User"
 msgstr ""
 
 #. module: keycloak
-#: code:addons/keycloak/models/keycloak_user.py:67
+#: code:addons/keycloak/models/keycloak_user.py:69
 #, python-format
 msgid "Update Keycloak User %s"
 msgstr ""
