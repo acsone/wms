@@ -14,6 +14,7 @@
         "product_discount_specials",
         "alc_pim",
         "alc_storage",
+        "alc_supplier_promotion",
         "alc_eshop_auth_jwt",
         "alc_eshop_cart_confirm",
         "alc_eshop_cart_recovery",
