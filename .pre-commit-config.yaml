@@ -62,7 +62,7 @@ repos:
         # SPECIAL CASE: barcode scanner app use Vue.js +
         # advanced JS (modules, classes, etc)
         # which are not supported by OCA rules yet.
-        exclude: shopfloor_mobile/.*|alc_shopfloor_location_info/.*|alc_shopfloor_mobile_packing/.*|alc_shopfloor_mobile_cluster_picking/.*
+        exclude: shopfloor_mobile/.*|alc_shopfloor_location_info/.*|alc_shopfloor_mobile_packing/.*|alc_shopfloor_mobile_cluster_picking/.*|alc_shopfloor_mobile_stock_refill/.*
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v2.4.0
     hooks:

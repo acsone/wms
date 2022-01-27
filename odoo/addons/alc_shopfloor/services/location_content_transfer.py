@@ -75,12 +75,7 @@ class LocationContentTransfer(Component):
             return self._router_single_or_all_destination(
                 started_pickings, message=self.msg_store.recovered_previous_session()
             )
-        refill_arrange = self._refill_arrange_search()
-        if refill_arrange:
-            return self.scan_location(refill_arrange[0].location_id.barcode)
-        return self._response_for_start(
-            message=self.msg_store.location_content_transfer_no_work()
-        )
+        return self._response_for_start()
 
     def scan_location(self, barcode):
         """Scan start location
@@ -633,16 +628,6 @@ class LocationContentTransfer(Component):
     ##################
     # Helpers methods
     ##################
-    def _refill_arrange_search(self):
-        RefillArrange = self.env["report.stock.refill.arrange"]
-        return RefillArrange.search(
-            [
-                ("reservation_id", "=", False),
-                ("barcode_picking_type_id", "in", self.picking_types.ids),
-            ],
-            order="refill_priority_arrange desc",
-        )
-
     def _find_location_operations_domain(self, location):
         return [
             ("location_id", "=", location.id),

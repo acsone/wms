@@ -26,11 +26,6 @@ const LocationContentTransfer = {
                     </v-col>
                 </v-row>
             </div>
-            <get-work
-                v-if="state_is('start')"
-                v-on:get_work="state.on_get_work"
-                v-on:manual_selection="state.on_manual_selection"
-                />
             <div v-if="state_in(['start_single', 'scan_destination', 'scan_destination_all']) && wrapped_context().has_records">
 
                 <item-detail-card
@@ -209,14 +204,6 @@ const LocationContentTransfer = {
         init: {
           enter: () => {
             this.wait_call(this.odoo.call("start_or_recover"));
-          },
-        },
-        start: {
-          on_get_work: evt => {
-            this.wait_call(this.odoo.call("start_or_recover"));
-          },
-          on_manual_selection: evt => {
-            this.state_to("scan_location");
           },
         },
         scan_location: {

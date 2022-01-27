@@ -344,7 +344,7 @@ class MessageAction(Component):
         return {
             "message_type": "info",
             "body": _(
-                "No more refill arrange to do, please select a location to transfer."
+                "No more work to do, please select a location to transfer manually or ask for work."
             ),
         }
 

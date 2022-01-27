@@ -368,8 +368,8 @@ msgstr "Aucun lot trouvé pour {}"
 #. module: alc_shopfloor
 #: code:addons/alc_shopfloor/actions/message.py:346
 #, python-format
-msgid "No more refill arrange to do, please select a location to transfer."
-msgstr "Il n'y a plus de rangements à faire. Sélectionner un emplacement pour commencer un nouveau transfert"
+msgid "No more work to do, please select a location to transfer manually or ask for work."
+msgstr "Il n'y a plus de rangements à faire. Sélectionner un emplacement pour commencer un nouveau transfert ou demandez du travail"
 
 #. module: alc_shopfloor
 #: code:addons/alc_shopfloor/actions/message.py:15
