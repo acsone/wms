@@ -11,6 +11,7 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
+        "product_discount_specials",
         "alc_pim",
         "alc_storage",
         "alc_eshop_auth_jwt",

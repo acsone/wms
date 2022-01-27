@@ -172,4 +172,28 @@
         <field name="name">indicated_price</field>
         <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
     </record>
+    <record
+    id="ir_exp_shopinvader_variant_product_discount_special_ids_sequence"
+    model="ir.exports.line"
+  >
+        <field name="name">product_discount_special_ids/sequence</field>
+        <field name="alias">product_discount_special_ids:specials/sequence</field>
+        <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
+    </record>
+    <record
+    id="ir_exp_shopinvader_variant_product_discount_special_ids_date_start"
+    model="ir.exports.line"
+  >
+        <field name="name">product_discount_special_ids/date_start</field>
+        <field name="alias">product_discount_special_ids:specials/date_start</field>
+        <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
+    </record>
+    <record
+    id="ir_exp_shopinvader_variant_product_discount_special_ids_date_end"
+    model="ir.exports.line"
+  >
+        <field name="name">product_discount_special_ids/date_end</field>
+        <field name="alias">product_discount_special_ids:specials/date_end</field>
+        <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
+    </record>
 </odoo>
