@@ -21,7 +21,7 @@ class ResPartner(models.Model):
             partner.pricelist_role = partner.property_product_pricelist.role_name
             partner.discount_pricelist_role = partner.discount_pricelist_id.role_name
 
-    @api.depends("partner_type", "pricelist_role")
+    @api.depends("partner_type", "pricelist_role", "supplier_promotion_sale_allowed")
     def _compute_elasticsearch_role(self):
         # depends on property_product_pricelist.name, but this isn't stored
         roles = {
@@ -33,6 +33,7 @@ class ResPartner(models.Model):
                         p.partner_type,
                         p.pricelist_role,
                         p.discount_pricelist_role,
+                        p.supplier_promotion_sale_allowed and "supplier_promotion",
                     }
                     if e
                 }

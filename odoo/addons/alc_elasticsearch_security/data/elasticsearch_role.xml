@@ -178,4 +178,17 @@
 }
     </field>
   </record>
+  <record id="role_supplier_promotion" model="elasticsearch.role">
+    <field name="backend_id" ref="alc_search_engine.elasticsearch_backend" />
+    <field name="name">supplier_promotion</field>
+    <field name="body">{
+  "index_permissions": [
+    {
+      "index_patterns":["alc_shopinvader_variant_*"],
+      "fls": ["supplier_promotion", "supplier_promotion.*", "supplier_discount", "supplier_discount.*"]
+    }
+  ]
+}
+    </field>
+  </record>
 </odoo>
