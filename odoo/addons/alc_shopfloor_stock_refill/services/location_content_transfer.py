@@ -11,7 +11,7 @@ class LocationContentTransfer(Component):
     # SERVICES #
     ############
 
-    def recover(self):
+    def get_work(self):
         refill_arrange = self._refill_arrange_search()
         if refill_arrange:
             return super(LocationContentTransfer, self).scan_location(
@@ -40,7 +40,7 @@ class ShopfloorLocationContentTransferValidator(Component):
 
     _inherit = "shopfloor.location.content.transfer.validator"
 
-    def recover(self):
+    def get_work(self):
         return {}
 
 
@@ -49,7 +49,7 @@ class ShopfloorLocationContentTransferValidatorResponse(Component):
 
     _inherit = "shopfloor.location.content.transfer.validator.response"
 
-    def recover(self):
+    def get_work(self):
         return self._response_schema(
             next_states={"start", "scan_destination_all", "start_single"}
         )

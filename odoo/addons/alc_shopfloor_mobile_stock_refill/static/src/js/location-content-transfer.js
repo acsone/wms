@@ -37,7 +37,7 @@ let data = function() {
   };
   result.states.start = {
     on_get_work: evt => {
-      this.wait_call(this.odoo.call("recover"));
+      this.wait_call(this.odoo.call("get_work"));
     },
     on_manual_selection: evt => {
       this.state_to("scan_location");

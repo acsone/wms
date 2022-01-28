@@ -83,7 +83,7 @@ class TestLocationContentTransferRefill(LocationContentTransferCommonCase):
         )
 
     def test_no_refill_todo(self):
-        response = self.service.dispatch("recover", params={})
+        response = self.service.dispatch("get_work", params={})
         self.assert_response(
             response,
             message=self.service.msg_store.location_content_transfer_no_work(),
@@ -92,7 +92,7 @@ class TestLocationContentTransferRefill(LocationContentTransferCommonCase):
 
     def test_refill_todo(self):
         self._get_rearrange()
-        response = self.service.dispatch("recover", params={})
+        response = self.service.dispatch("get_work", params={})
         pickings = self.env["stock.picking"].search(
             [("picking_type_id", "=", self.picking_type.id)]
         )
