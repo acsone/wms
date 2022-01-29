@@ -11,11 +11,12 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        "auth_jwt",
         "alc_pim",
         "alc_storage",
+        "alc_eshop_auth_jwt",
         "alc_eshop_filter_data",
         "alc_shopinvader_category",
+        "shopinvader_auth_jwt",
         "shopinvader_elasticsearch",
         "shopinvader_product_stock_state",
         "shopinvader_multi_category",
@@ -26,7 +27,7 @@
     ],
     "application": False,
     "data": [
-        "data/auth_api_key.xml",
+        "data/auth_jwt_validator.xml",
         "data/shopinvader_image_resize.xml",
         "data/shopinvader_assortment.xml",
         "data/product_pricelist.xml",
