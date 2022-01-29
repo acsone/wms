@@ -27,12 +27,17 @@ class KeycloakUser(models.Model):
         (
             "backend_partner_uniq",
             "unique(keycloak_backend_id, partner_id)",
-            "This partner already has a user on this backend.",
+            _("This partner already has a user on this backend."),
         ),
         (
             "backend_keycloak_id_uniq",
             "unique(keycloak_backend_id, keycloak_id)",
-            "This Keycloak ID already exists, which should be impossible.",
+            _("This Keycloak ID already exists, which should be impossible."),
+        ),
+        (
+            "backend_username_unique",
+            "unique(keycloak_backend_id, username)",
+            _("This username already exists on this backend"),
         ),
     ]
 
