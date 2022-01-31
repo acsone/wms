@@ -27,6 +27,7 @@
         "shopinvader_image",
         "shopinvader_sale_profile",
         "shopinvader_wishlist",
+        "shopinvader_search_engine_update",
     ],
     "application": False,
     "data": [
