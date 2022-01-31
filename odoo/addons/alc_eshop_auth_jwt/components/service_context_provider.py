@@ -11,8 +11,8 @@ _logger = logging.getLogger(__name__)
 
 class ShopinvaderAuthJwtServiceContextProvider(Component):
     _inherit = [
-        "auth_jwt.shopinvader.service.context.provider",
         "abstract.auth.jwt.authenticated.partner.provider",
+        "auth_jwt.shopinvader.service.context.provider",
     ]
 
     _name = "auth_jwt.shopinvader.service.context.provider"
