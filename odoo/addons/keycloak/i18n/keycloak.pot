@@ -74,7 +74,7 @@ msgid "Create Keycloak User"
 msgstr ""
 
 #. module: keycloak
-#: code:addons/keycloak/models/keycloak_user.py:47
+#: code:addons/keycloak/models/keycloak_user.py:52
 #, python-format
 msgid "Create Keycloak User %s"
 msgstr ""
@@ -96,7 +96,7 @@ msgid "Created on"
 msgstr ""
 
 #. module: keycloak
-#: code:addons/keycloak/models/keycloak_user.py:53
+#: code:addons/keycloak/models/keycloak_user.py:58
 #, python-format
 msgid "Delete Keycloak User %s"
 msgstr ""
@@ -271,13 +271,24 @@ msgid "Temporary"
 msgstr ""
 
 #. module: keycloak
+#: code:addons/keycloak/models/keycloak_user.py:35
 #: sql_constraint:keycloak.user:0
+#, python-format
 msgid "This Keycloak ID already exists, which should be impossible."
 msgstr ""
 
 #. module: keycloak
+#: code:addons/keycloak/models/keycloak_user.py:30
 #: sql_constraint:keycloak.user:0
+#, python-format
 msgid "This partner already has a user on this backend."
+msgstr ""
+
+#. module: keycloak
+#: code:addons/keycloak/models/keycloak_user.py:40
+#: sql_constraint:keycloak.user:0
+#, python-format
+msgid "This username already exists on this backend"
 msgstr ""
 
 #. module: keycloak
@@ -293,7 +304,7 @@ msgid "Update Keycloak User"
 msgstr ""
 
 #. module: keycloak
-#: code:addons/keycloak/models/keycloak_user.py:69
+#: code:addons/keycloak/models/keycloak_user.py:74
 #, python-format
 msgid "Update Keycloak User %s"
 msgstr ""
