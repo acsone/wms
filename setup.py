@@ -43,6 +43,7 @@ setup(
             "unittest2",
             "responses",
             "coverage",
-        ]
+        ],
+        "dev": ["ipython", "pudb"],
     },
 )
