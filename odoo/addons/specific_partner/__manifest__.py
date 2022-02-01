@@ -11,7 +11,6 @@
     "depends": ["sale", "base_partner_sequence", "specific_base"],
     "website": "http://www.camptocamp.com",
     "data": [
-        "data/partner.alcyon_category.csv",
         "security/ir.model.access.csv",
         "views/res_partner.xml",
         "views/legal_entity.xml",

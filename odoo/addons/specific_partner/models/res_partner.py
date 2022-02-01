@@ -10,9 +10,6 @@ from odoo.osv.expression import get_unaccent_wrapper
 class ResPartner(models.Model):
     _inherit = "res.partner"
 
-    alcyon_category_id = fields.Many2one(
-        "partner.alcyon_category", string="Alcyon category"
-    )
     ref = fields.Char(copy=False, readonly=True)
 
     legal_entity_id = fields.Many2one("legal.entity", string="Legal entity")
