@@ -21,13 +21,6 @@ msgid "Address Type Name"
 msgstr ""
 
 #. module: specific_partner
-#: model:ir.model.fields,field_description:specific_partner.field_res_partner_alcyon_category_id
-#: model:ir.model.fields,field_description:specific_partner.field_res_users_alcyon_category_id
-#: model:ir.model.fields,field_description:specific_partner.field_shopinvader_partner_alcyon_category_id
-msgid "Alcyon category"
-msgstr ""
-
-#. module: specific_partner
 #: model:ir.model.fields,help:specific_partner.field_res_partner_type_delivery
 #: model:ir.model.fields,help:specific_partner.field_res_users_type_delivery
 #: model:ir.model.fields,help:specific_partner.field_shopinvader_partner_type_delivery
@@ -50,13 +43,11 @@ msgstr ""
 
 #. module: specific_partner
 #: model:ir.model.fields,field_description:specific_partner.field_legal_entity_create_uid
-#: model:ir.model.fields,field_description:specific_partner.field_partner_alcyon_category_create_uid
 msgid "Created by"
 msgstr ""
 
 #. module: specific_partner
 #: model:ir.model.fields,field_description:specific_partner.field_legal_entity_create_date
-#: model:ir.model.fields,field_description:specific_partner.field_partner_alcyon_category_create_date
 msgid "Created on"
 msgstr ""
 
@@ -69,24 +60,22 @@ msgstr ""
 
 #. module: specific_partner
 #: model:ir.model.fields,field_description:specific_partner.field_legal_entity_display_name
-#: model:ir.model.fields,field_description:specific_partner.field_partner_alcyon_category_display_name
 msgid "Display Name"
 msgstr ""
 
 #. module: specific_partner
-#: code:addons/specific_partner/models/res_partner.py:302
+#: code:addons/specific_partner/models/res_partner.py:299
 #, python-format
 msgid "For an invoicing or delivery address the following fields (name, street, city, zip, country) are required. And the country must have a reference ESB."
 msgstr ""
 
 #. module: specific_partner
 #: model:ir.model.fields,field_description:specific_partner.field_legal_entity_id
-#: model:ir.model.fields,field_description:specific_partner.field_partner_alcyon_category_id
 msgid "ID"
 msgstr ""
 
 #. module: specific_partner
-#: code:addons/specific_partner/models/res_partner.py:73
+#: code:addons/specific_partner/models/res_partner.py:70
 #, python-format
 msgid "Invoice and delivery"
 msgstr ""
@@ -100,19 +89,16 @@ msgstr ""
 
 #. module: specific_partner
 #: model:ir.model.fields,field_description:specific_partner.field_legal_entity___last_update
-#: model:ir.model.fields,field_description:specific_partner.field_partner_alcyon_category___last_update
 msgid "Last Modified on"
 msgstr ""
 
 #. module: specific_partner
 #: model:ir.model.fields,field_description:specific_partner.field_legal_entity_write_uid
-#: model:ir.model.fields,field_description:specific_partner.field_partner_alcyon_category_write_uid
 msgid "Last Updated by"
 msgstr ""
 
 #. module: specific_partner
 #: model:ir.model.fields,field_description:specific_partner.field_legal_entity_write_date
-#: model:ir.model.fields,field_description:specific_partner.field_partner_alcyon_category_write_date
 msgid "Last Updated on"
 msgstr ""
 
@@ -131,7 +117,6 @@ msgstr ""
 
 #. module: specific_partner
 #: model:ir.model.fields,field_description:specific_partner.field_legal_entity_name
-#: model:ir.model.fields,field_description:specific_partner.field_partner_alcyon_category_name
 msgid "Name"
 msgstr ""
 
@@ -155,22 +140,10 @@ msgid "Pharmacist associated to"
 msgstr ""
 
 #. module: specific_partner
-#: model:ir.model.fields,field_description:specific_partner.field_partner_alcyon_category_esb_ref
-msgid "Reference for ESB"
-msgstr ""
-
-#. module: specific_partner
 #: model:ir.model.fields,field_description:specific_partner.field_res_partner_suite
 #: model:ir.model.fields,field_description:specific_partner.field_res_users_suite
 #: model:ir.model.fields,field_description:specific_partner.field_shopinvader_partner_suite
 msgid "Suite Name"
-msgstr ""
-
-#. module: specific_partner
-#: code:addons/specific_partner/models/partner_alcyon_category.py:14
-#: sql_constraint:partner.alcyon_category:0
-#, python-format
-msgid "This category name already exists"
 msgstr ""
 
 #. module: specific_partner
@@ -181,13 +154,6 @@ msgid "This legal entity already exists"
 msgstr ""
 
 #. module: specific_partner
-#: code:addons/specific_partner/models/partner_alcyon_category.py:15
-#: sql_constraint:partner.alcyon_category:0
-#, python-format
-msgid "This reference esb already exists"
-msgstr ""
-
-#. module: specific_partner
 #: model:ir.model,name:specific_partner.model_ir_qweb_field_contact
 msgid "ir.qweb.field.contact"
 msgstr ""
@@ -195,10 +161,5 @@ msgstr ""
 #. module: specific_partner
 #: model:ir.model,name:specific_partner.model_legal_entity
 msgid "legal.entity"
-msgstr ""
-
-#. module: specific_partner
-#: model:ir.model,name:specific_partner.model_partner_alcyon_category
-msgid "partner.alcyon_category"
 msgstr ""
 
