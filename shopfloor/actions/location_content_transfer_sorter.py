@@ -56,8 +56,7 @@ class LocationContentTransferSorter(Component):
             )
         )
 
-    @staticmethod
-    def _sort_key(content):
+    def _sort_key(self, content):
         # content can be either a move line, either a package
         # level
         return (
