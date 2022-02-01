@@ -142,8 +142,6 @@ const LocationContentTransfer = {
       let actions = [
         {name: "Postpone line", event_name: "action_postpone"},
         {name: "Declare stock out", event_name: "action_stock_out"},
-        {name: "Declare overstock", event_name: "action_overstock"},
-        {name: "Print label", event_name: "action_print_label"},
       ];
       return actions;
     },
@@ -160,32 +158,6 @@ const LocationContentTransfer = {
         operation_id: data.operation.id,
       };
 
-      this.wait_call(this.odoo.call(endpoint, endpoint_data));
-    },
-
-    on_action_overstock: function() {
-      let endpoint, endpoint_data;
-      const data = this.state.data;
-      endpoint = "overstock_line";
-      endpoint_data = {
-        location_id: data.operation.location_src.id,
-        operation_id: data.operation.id,
-      };
-
-      this.wait_call(this.odoo.call(endpoint, endpoint_data));
-    },
-
-    on_action_print_label: function() {
-      let endpoint, endpoint_data;
-      const data = this.state.data;
-      endpoint = "print_label";
-      endpoint_data = {
-        location_id: data.operation.location_src.id,
-        operation_id: data.operation.id,
-      };
-      if (data.operation.type === "lot") {
-        endpoint_data.lot_id = data.operation.lot.id;
-      }
       this.wait_call(this.odoo.call(endpoint, endpoint_data));
     },
 
