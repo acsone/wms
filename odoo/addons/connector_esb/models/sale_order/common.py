@@ -83,7 +83,7 @@ class SaleOrder(models.Model):
 
     def _ws_create_new(self, data, creation_date):
         order_data = self._ws_create_order_data(data)
-        order_data = self.env["sale.order"].play_onchanges(
+        updated_data = self.env["sale.order"].play_onchanges(
             order_data,
             [
                 "discount_pricelist_id",
@@ -92,6 +92,7 @@ class SaleOrder(models.Model):
                 "team_id",
             ],
         )
+        order_data.update(updated_data)
         # never send notify mail on creation from jobs
         order = self.with_context(mail_auto_subscribe_no_notify=True).create(order_data)
 
@@ -108,10 +109,11 @@ class SaleOrder(models.Model):
                 )
                 continue
             line["order_id"] = order.id
-            changed_line = self.env["sale.order.line"].play_onchanges(
+            updated_line_data = self.env["sale.order.line"].play_onchanges(
                 line, ["product_id"]
             )
-            line_rec = self.env["sale.order.line"].create(changed_line)
+            line.update(updated_line_data)
+            line_rec = self.env["sale.order.line"].create(line)
 
             # Check if the line contains an exception.
             # In this case, change the qty to 0
