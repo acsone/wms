@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2022 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="alc_promotion_subscription_search_view">
+        <field name="name">alc.product.promotion.subscription.search (in
+            alc_product_promotion_subscription)
+        </field>
+        <field name="model">alc.product.promotion.subscription</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="product_id" string="Product" />
+                <field name="partner_id" string="Partner" />
+                <group expand="0" string="Group By" name="group_by">
+                    <filter
+            name="group_by_product_id"
+            string="Product"
+            context="{'group_by':'product_id'}"
+          />
+                    <filter
+            name="group_by_partner_id"
+            string="Partner"
+            context="{'group_by':'partner_id'}"
+          />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="alc_promotion_subscription_tree_view">
+        <field name="name">alc.product.promotion.subscription.tree (in
+            alc_product_promotion_subscription)
+        </field>
+        <field name="model">alc.product.promotion.subscription</field>
+        <field name="arch" type="xml">
+            <tree editable="top">
+                <field name="partner_id" />
+                <field name="product_id" />
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="alc_promotion_subscription_act_window">
+        <field name="name">Product Promotion Subscriptions</field>
+        <field name="res_model">alc.product.promotion.subscription</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record model="ir.ui.menu" id="alc_promotion_subscription_menu">
+        <field name="name">Product Promotion Subscriptions</field>
+        <field name="parent_id" ref="sales_team.menu_sales" />
+        <field name="action" ref="alc_promotion_subscription_act_window" />
+        <field name="sequence" eval="66" />
+    </record>
+
+</odoo>
