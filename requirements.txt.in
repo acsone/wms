@@ -13,6 +13,7 @@ odoo10-addon-slow-statement-logger @ git+https://github.com/acsone/server-tools@
 odoo10-addon-base-m2m-custom-field @ git+https://github.com/oca/server-tools.git@refs/pull/1940/head#subdirectory=setup/base_m2m_custom_field
 odoo10-addon-base-jsonify @ git+https://github.com/oca/server-tools.git@refs/pull/2068/head#subdirectory=setup/base_jsonify
 odoo10-addon-server-environment @ git+https://github.com/oca/server-tools.git@refs/pull/2076/head#subdirectory=setup/server_environment
+odoo10-addon-base-suspend-security @ git+https://github.com/oca/server-tools.git@refs/pull/2270/head#subdirectory=setup/base_suspend_security
 
 # oca/server-auth
 odoo10-addon-auth-jwt @ git+https://github.com/oca/server-auth.git@refs/pull/281/head#subdirectory=setup/auth_jwt
