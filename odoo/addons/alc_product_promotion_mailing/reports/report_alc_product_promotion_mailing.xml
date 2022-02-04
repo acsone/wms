@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2022 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <template
+    id="report_alc_product_promotion_mailing"
+    name="alc_product_promotion_mailing.report_alc_product_promotion_mailing"
+  >
+        <t t-set="title">Alcyon: Alert fin de promotion.</t>
+        <t t-call="report.html_container">
+            <t t-call="report.external_layout">
+                <div class="page">
+                    <div class="oe_structure" />
+                    <div class="row">
+                        <p>Chère / Cher
+                            <span t-esc="partner.name" />,
+                        </p>
+                    </div>
+                    <div class="row" t-foreach="promotions" t-as="promo_date">
+                        <p>La promotion sur les articles suivants se termine le
+                            <span t-esc="promo_date" style="font-weight: bold" />, sauf
+                            modification de la part
+                            du fournisseur.
+                        </p>
+                        <ul>
+                            <t t-foreach="promotions[promo_date]" t-as="shop_variant">
+                                <li>
+                                    <t t-if="shop_variant.images">
+                                        <t
+                      t-set="image"
+                      t-value="shop_variant.images[0]"
+                    />
+                                        <img
+                      t-att-src="image['src']"
+                      t-att-alt="image['alt']"
+                      t-att-tag="image['tag']"
+                      style="height: 80px; box-shadow: 10px 10px 20px black;"
+                    />
+                                    </t>
+                                    <a t-att-href="get_variant_url(shop_variant)">
+                                        <span
+                      itemprop="website"
+                      t-esc="shop_variant.name"
+                    />
+                                    </a>
+                                </li>
+                            </t>
+                        </ul>
+                    </div>
+                    <p />
+                    <p>Votre équipe Alcyon.</p>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

@@ -1,0 +1,1 @@
+from . import test_product_promotion_subscription

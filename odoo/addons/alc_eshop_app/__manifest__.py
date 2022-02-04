@@ -9,8 +9,21 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["alc_eshop", "alc_search_engine", "alc_keycloak"],
+    "depends": [
+        "alc_eshop",
+        "alc_search_engine",
+        "alc_keycloak",
+        "alc_product_promotion_mailing",
+        "alc_eshop_product_promotion_subscription",
+    ],
     "application": True,
-    "data": [],
+    "data": [
+        "security/res_groups.xml",
+        "security/rule+acl_alc_product_promotion_subscription.xml",
+        "security/rule+acl_product_product.xml",
+        "security/rule+acl_res_partner.xml",
+        "data/res_users.xml",
+        "data/auth_jwt_validator.xml",
+    ],
     "demo": [],
 }
