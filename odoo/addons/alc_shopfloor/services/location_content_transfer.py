@@ -164,11 +164,11 @@ class LocationContentTransfer(Component):
                 )
             new_moves.action_confirm()
             new_moves.action_assign()
-            if not all([x.state == "assigned" for x in new_moves]):
+            unassigned_moves_message = self._check_moves_assignation(new_moves)
+            if unassigned_moves_message:
                 savepoint.rollback()
-                return self._response_for_start(
-                    message=self.msg_store.new_move_lines_not_assigned()
-                )
+                return self._response_for_start(message=unassigned_moves_message)
+
             pickings = new_moves.mapped("picking_id")
             operations = new_moves.mapped("linked_move_operation_ids.operation_id")
             for operation in operations:
@@ -628,6 +628,12 @@ class LocationContentTransfer(Component):
     ##################
     # Helpers methods
     ##################
+
+    def _check_moves_assignation(self, new_moves):
+        if not all([x.state == "assigned" for x in new_moves]):
+            return self.msg_store.new_move_lines_not_assigned()
+        return False
+
     def _find_location_operations_domain(self, location):
         return [
             ("location_id", "=", location.id),
