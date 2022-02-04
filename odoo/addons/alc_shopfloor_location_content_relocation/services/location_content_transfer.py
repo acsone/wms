@@ -3,7 +3,9 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from odoo import _
 
-from odoo.addons.alc_shopfloor.models.stock_pack_operation import NoReserveLocationError
+from odoo.addons.alc_shopfloor_stock_reserve.models.stock_pack_operation import (
+    NoReserveLocationError,
+)
 from odoo.addons.component.core import Component
 
 

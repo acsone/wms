@@ -33,8 +33,6 @@
         "stock_picking_show_backorder",
         "stock_helper",
         # alcyon
-        # "delivery_rounds_refill",  # manage refill_arrange
-        "stock_refill",  # declare reserve reserve
         "stock_operation_recompute",
         "stock_lot_loss",
     ],
