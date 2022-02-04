@@ -12,8 +12,19 @@ class AlcProductPromotionSubscription(models.Model):
 
     _name = "alc.product.promotion.subscription"
 
-    partner_id = fields.Many2one(comodel_name="res.partner", string="Partner")
-    product_id = fields.Many2one(comodel_name="product.product", string="Product")
+    partner_id = fields.Many2one(
+        comodel_name="res.partner", string="Partner", ondelete="cascade"
+    )
+    product_id = fields.Many2one(
+        comodel_name="product.product", string="Product", ondelete="cascade"
+    )
+    product_tmpl_id = fields.Many2one(
+        comodel_name="product.template",
+        related="product_id.product_tmpl_id",
+        store=True,
+        readonly=True,
+        ondelete="cascade",
+    )
     active = fields.Boolean(compute="_compute_active", store=True)
 
     _sql_constraints = [

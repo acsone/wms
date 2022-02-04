@@ -13,6 +13,7 @@
         "alc_eshop",
         "alc_search_engine",
         "alc_keycloak",
+        "alc_product_promotion_mailing",
         "alc_eshop_product_promotion_subscription",
     ],
     "application": True,
