@@ -355,11 +355,10 @@ class LocationContentTransfer(Component):
                 )
             new_moves._action_confirm(merge=False)
             new_moves._action_assign()
-            if not all([x.state == "assigned" for x in new_moves]):
+            unassigned_moves_message = self._check_moves_assignation(new_moves)
+            if unassigned_moves_message:
                 savepoint.rollback()
-                return self._response_for_start(
-                    message=self.msg_store.new_move_lines_not_assigned()
-                )
+                return self._response_for_start(message=unassigned_moves_message)
             pickings = new_moves.mapped("picking_id")
             move_lines = new_moves.move_line_ids
             for move_line in move_lines:
@@ -401,6 +400,11 @@ class LocationContentTransfer(Component):
         savepoint.release()
 
         return self._router_single_or_all_destination(pickings)
+
+    def _check_moves_assignation(self, new_moves):
+        if not all([x.state == "assigned" for x in new_moves]):
+            return self.msg_store.new_move_lines_not_assigned()
+        return False
 
     def _find_transfer_move_lines_domain(self, location):
         return [
