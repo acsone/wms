@@ -65,7 +65,7 @@ msgid "Last Updated on"
 msgstr ""
 
 #. module: sale_cancel_remaining
-#: code:addons/sale_cancel_remaining/wizard/cancel_remaining_wizard.py:26
+#: code:addons/sale_cancel_remaining/wizard/cancel_remaining_wizard.py:29
 #, python-format
 msgid "No picking can be canceled"
 msgstr ""
@@ -114,7 +114,7 @@ msgid "Validate"
 msgstr ""
 
 #. module: sale_cancel_remaining
-#: code:addons/sale_cancel_remaining/wizard/cancel_remaining_wizard.py:29
+#: code:addons/sale_cancel_remaining/wizard/cancel_remaining_wizard.py:32
 #, python-format
 msgid "You cannot cancel a quantity that is part of a started picking"
 msgstr ""
