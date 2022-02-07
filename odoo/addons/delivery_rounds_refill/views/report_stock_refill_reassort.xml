@@ -19,7 +19,7 @@
     <field name="name">report.stock.refill.reassort.tree</field>
     <field name="model">report.stock.refill.reassort</field>
     <field name="arch" type="xml">
-      <tree create="0" delete="0">
+      <tree create="0" delete="0" decoration-warning="all_at_once_qty &gt; 0">
         <field name="refill_priority_reassort" />
         <field name="product_id" />
         <field name="qty" />
@@ -33,9 +33,11 @@
         <field name="immediate_qty" />
         <field name="planned_qty" />
         <field name="confirmed_qty" />
+        <field name="all_at_once_qty" />
         <field name="safety_bin_min_qty" />
         <field name="abc_classification_level" />
       </tree>
+
     </field>
   </record>
   <record id="action_report_stock_refill_reassort" model="ir.actions.act_window">

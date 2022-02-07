@@ -76,7 +76,9 @@ class ReportStockOverview(models.Model):
       SUM(missing_qty)
         FILTER (WHERE ri.picking_launched) AS immediate_qty,
       count(distinct partner_id)
-        FILTER (WHERE ri.picking_launched) AS immediate_count
+        FILTER (WHERE ri.picking_launched) AS immediate_count,
+      sum(missing_qty)
+        FILTER (WHERE sp.move_type = 'one') AS all_at_once_qty
     FROM unreserved_pick_moves sm
     LEFT JOIN stock_picking sp ON sm.picking_id = sp.id
     LEFT JOIN round_instance ri ON sp.delivery_round_id = ri.id
@@ -95,6 +97,7 @@ class ReportStockOverview(models.Model):
     planned_count,
     immediate_qty,
     immediate_count,
+    all_at_once_qty,
     safety_bin_min_qty,
     warehouse_id,
     abc_classification_level,
