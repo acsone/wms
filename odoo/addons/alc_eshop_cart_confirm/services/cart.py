@@ -20,3 +20,14 @@ class CartService(Component):
 
     def _validator_confirm(self):
         return {}
+
+    # CODE TO MOVE: REQUIRED FOR A DEMO
+    def search(self):
+        """Return the cart that have been set in the session or
+           search an existing cart for the current partner"""
+        if not self.cart_id:
+            # By default, shopinvader doesn't create a cart on a search
+            # to avoir to be polluted by google calling search on
+            # guest user... it's not the case for alcyon
+            return self._to_json(self._get(create_if_not_found=True))
+        return super(CartService, self).search()
