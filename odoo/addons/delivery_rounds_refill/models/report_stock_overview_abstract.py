@@ -45,6 +45,9 @@ class ReportStockOverview(models.AbstractModel):
         help="Amount of customers having a remaining quantity to pick"
         " in a started delivery round",
     )
+    all_at_once_qty = fields.Integer(
+        "All at once qty", help="Quantity for products in all at once picking",
+    )
     refill_priority_arrange = fields.Integer("Arrangement Priority")
     refill_priority_reassort = fields.Integer("Reassortment Priority")
     safety_bin_min_qty = fields.Float(
