@@ -24,6 +24,15 @@ msgid "Abc classification level"
 msgstr ""
 
 #. module: delivery_rounds_refill
+#: model:ir.model.fields,field_description:delivery_rounds_refill.field_report_stock_overview_abstract_all_at_once_qty
+#: model:ir.model.fields,field_description:delivery_rounds_refill.field_report_stock_overview_all_at_once_qty
+#: model:ir.model.fields,field_description:delivery_rounds_refill.field_report_stock_refill_abstract_all_at_once_qty
+#: model:ir.model.fields,field_description:delivery_rounds_refill.field_report_stock_refill_arrange_all_at_once_qty
+#: model:ir.model.fields,field_description:delivery_rounds_refill.field_report_stock_refill_reassort_all_at_once_qty
+msgid "All at once qty"
+msgstr ""
+
+#. module: delivery_rounds_refill
 #: model:ir.model.fields,help:delivery_rounds_refill.field_report_stock_overview_abstract_confirmed_count
 #: model:ir.model.fields,help:delivery_rounds_refill.field_report_stock_overview_confirmed_count
 #: model:ir.model.fields,help:delivery_rounds_refill.field_report_stock_refill_abstract_confirmed_count
@@ -312,6 +321,15 @@ msgstr ""
 #: model:ir.model.fields,field_description:delivery_rounds_refill.field_report_stock_refill_arrange_retours_qty_in_bin_available
 #: model:ir.model.fields,field_description:delivery_rounds_refill.field_report_stock_refill_reassort_qty_in_bin_available
 msgid "Quantity available in bin"
+msgstr ""
+
+#. module: delivery_rounds_refill
+#: model:ir.model.fields,help:delivery_rounds_refill.field_report_stock_overview_abstract_all_at_once_qty
+#: model:ir.model.fields,help:delivery_rounds_refill.field_report_stock_overview_all_at_once_qty
+#: model:ir.model.fields,help:delivery_rounds_refill.field_report_stock_refill_abstract_all_at_once_qty
+#: model:ir.model.fields,help:delivery_rounds_refill.field_report_stock_refill_arrange_all_at_once_qty
+#: model:ir.model.fields,help:delivery_rounds_refill.field_report_stock_refill_reassort_all_at_once_qty
+msgid "Quantity for products in all at once picking"
 msgstr ""
 
 #. module: delivery_rounds_refill

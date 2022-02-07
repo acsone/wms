@@ -27,6 +27,15 @@ msgid "Abc classification level"
 msgstr "Classe ABC"
 
 #. module: delivery_rounds_refill
+#: model:ir.model.fields,field_description:delivery_rounds_refill.field_report_stock_overview_abstract_all_at_once_qty
+#: model:ir.model.fields,field_description:delivery_rounds_refill.field_report_stock_overview_all_at_once_qty
+#: model:ir.model.fields,field_description:delivery_rounds_refill.field_report_stock_refill_abstract_all_at_once_qty
+#: model:ir.model.fields,field_description:delivery_rounds_refill.field_report_stock_refill_arrange_all_at_once_qty
+#: model:ir.model.fields,field_description:delivery_rounds_refill.field_report_stock_refill_reassort_all_at_once_qty
+msgid "All at once qty"
+msgstr "Qté 'all at once'"
+
+#. module: delivery_rounds_refill
 #: model:ir.model.fields,help:delivery_rounds_refill.field_report_stock_overview_abstract_confirmed_count
 #: model:ir.model.fields,help:delivery_rounds_refill.field_report_stock_overview_confirmed_count
 #: model:ir.model.fields,help:delivery_rounds_refill.field_report_stock_refill_abstract_confirmed_count
@@ -196,16 +205,6 @@ msgid "Immediate quantity to pick"
 msgstr "Qté immediate à préparer"
 
 #. module: delivery_rounds_refill
-#: model:ir.model.fields,field_description:delivery_rounds_refill.field_report_stock_overview_abstract_all_at_once_qty
-#: model:ir.model.fields,field_description:delivery_rounds_refill.field_report_stock_overview_all_at_once_qty
-#: model:ir.model.fields,field_description:delivery_rounds_refill.field_report_stock_refill_abstract_all_at_once_qty
-#: model:ir.model.fields,field_description:delivery_rounds_refill.field_report_stock_refill_arrange_all_at_once_qty
-#: model:ir.model.fields,field_description:delivery_rounds_refill.field_report_stock_refill_arrange_retours_all_at_once_qty
-#: model:ir.model.fields,field_description:delivery_rounds_refill.field_report_stock_refill_reassort_all_at_once_qty
-msgid "All at once qty"
-msgstr "Qté 'all at once'"
-
-#. module: delivery_rounds_refill
 #: model:ir.model.fields,field_description:delivery_rounds_refill.field_stock_quant_location_kind
 msgid "Kind"
 msgstr "Nature"
@@ -337,6 +336,15 @@ msgstr "Quantité"
 #: model:ir.model.fields,field_description:delivery_rounds_refill.field_report_stock_refill_reassort_qty_in_bin_available
 msgid "Quantity available in bin"
 msgstr "Qté disponible en bin"
+
+#. module: delivery_rounds_refill
+#: model:ir.model.fields,help:delivery_rounds_refill.field_report_stock_overview_abstract_all_at_once_qty
+#: model:ir.model.fields,help:delivery_rounds_refill.field_report_stock_overview_all_at_once_qty
+#: model:ir.model.fields,help:delivery_rounds_refill.field_report_stock_refill_abstract_all_at_once_qty
+#: model:ir.model.fields,help:delivery_rounds_refill.field_report_stock_refill_arrange_all_at_once_qty
+#: model:ir.model.fields,help:delivery_rounds_refill.field_report_stock_refill_reassort_all_at_once_qty
+msgid "Quantity for products in all at once picking"
+msgstr ""
 
 #. module: delivery_rounds_refill
 #: model:ir.model.fields,field_description:delivery_rounds_refill.field_report_stock_overview_abstract_qty_in_bin
