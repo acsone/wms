@@ -53,8 +53,8 @@ msgid "Remaining move '%s' of qty %s and origin '%s' moved to exiting picking <e
 msgstr ""
 
 #. module: stock_groupbypartner
-#: code:addons/stock_groupbypartner/models/stock_picking.py:117
-#: code:addons/stock_groupbypartner/models/stock_picking.py:144
+#: code:addons/stock_groupbypartner/models/stock_picking.py:119
+#: code:addons/stock_groupbypartner/models/stock_picking.py:146
 #, python-format
 msgid "Remaining moves canceled as partner does not accept backorder:<ul>%s</ul>"
 msgstr ""
