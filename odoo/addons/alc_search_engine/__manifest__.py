@@ -4,7 +4,7 @@
 {
     "name": "Alcyon ElasticSearch",
     "description": """Alcyon Shopinvader ElasticSearch Configuration""",
-    "version": "10.0.1.0.0",
+    "version": "10.0.1.0.1",
     "author": "ACSONE SA/NV",
     "website": "http://www.acsone.eu",
     "license": "AGPL-3",

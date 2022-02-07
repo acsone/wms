@@ -258,4 +258,9 @@
         <field name="alias">supplier_promotion_ids:supplier_promotion/date_end</field>
         <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
     </record>
+    <record id="ir_exp_shopinvader_variant_price_cache" model="ir.exports.line">
+        <field name="name">price_cache</field>
+        <field name="alias">price_cache:price</field>
+        <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
+    </record>
 </odoo>
