@@ -272,7 +272,7 @@ class TestGroupByPartner(GroupByPartnerCommonCase):
 
         self.assertNotEqual(move1.picking_id, move2.picking_id)
 
-    def test_backorder_picking_one_policy_does_not_create_new_picking(self):
+    def test_backorder_picking_one_policy_does_create_new_picking(self):
         # given
         group = self._create_procurement_group(self.partner1)
         move1 = self._create_move(group)
@@ -282,4 +282,4 @@ class TestGroupByPartner(GroupByPartnerCommonCase):
         # when
         backorder = picking._create_backorder()
         # then
-        self.assertEquals(backorder, picking)
+        self.assertEqual(backorder.backorder_id, picking)

@@ -18,10 +18,13 @@ class CancelRemainingWizard(models.TransientModel):
             raise UserError(_("No sale order line ID found"))
         line = self.env["sale.order.line"].browse(active_id)
 
-        internal_pickings = line.order_id.picking_ids.filtered(
-            lambda picking: picking.picking_type_code == "internal"
-            and picking.state not in ("cancel", "done")
+        internal_pickings = self._get_internal_pickings(line)
+        cancelled_backorders_all_at_once = self._get_cancelled_backorders_all_at_once(
+            line
         )
+        if cancelled_backorders_all_at_once:
+            internal_pickings |= cancelled_backorders_all_at_once
+
         if not internal_pickings:
             raise UserError(_("No picking can be canceled"))
         if True in internal_pickings.mapped("printed"):
@@ -46,3 +49,17 @@ class CancelRemainingWizard(models.TransientModel):
             cancel_moves.mapped("procurement_id").check()
 
         line.write({"product_qty_canceled": line.product_qty_remains_to_deliver})
+
+    def _get_internal_pickings(self, line):
+        return line.order_id.picking_ids.filtered(
+            lambda picking: picking.picking_type_code == "internal"
+            and picking.state not in ("cancel", "done")
+        )
+
+    def _get_cancelled_backorders_all_at_once(self, line):
+        return line.order_id.picking_ids.filtered(
+            lambda picking: picking.picking_type_code == "internal"
+            and picking.state == "cancel"
+            and picking.move_type == "one"
+            and picking.backorder_id
+        )

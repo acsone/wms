@@ -395,7 +395,7 @@ class TestDeliveryRound(common.DeliverDeliveryRoundTestCase):
         # therefore the picking will be available and
 
     def test_picking_backorder_one_policy(self):
-        """Check that a one policy picking will be reassigned after being _delivered"""
+        """Check that picking not done will generate a backorder when we close delivery round"""
         sale = self._confirm_sale_order(carrier_id=self.delivery_carrier.id)
         sale.picking_ids.write({"move_type": "one"})
         pick = sale.picking_ids.filtered(lambda p: p.picking_type_subcode == "PICK")
@@ -405,14 +405,15 @@ class TestDeliveryRound(common.DeliverDeliveryRoundTestCase):
         pick.with_context(round_autoset=True)._job_action_assign()
         self.assertEqual(sale.mapped("picking_ids.delivery_round_id"), delivery_round)
         self.assertEqual(pick.state, "assigned")
-        # now we _deliver, to see that the 'backorder' (pick) can be assigned to a round
-        customer = pick.delivery_round_customer_id
-        customer._deliver(background=False)
+        # # now we _deliver, to see that the pick is detached from the delivery round
+
+        pickings = self.StockPicking.search([])
+        delivery_round.button_close()
+        delivery_round._deliver(background=False)
+
+        new_pickings = self.StockPicking.search([]) - pickings
         self.assertFalse(sale.mapped("picking_ids.delivery_round_id"))
-        # when
-        pick.with_context(round_autoset=True)._job_action_assign()
-        # then
-        self.assertEqual(sale.mapped("picking_ids.delivery_round_id"), delivery_round)
+        self.assertEqual(new_pickings.mapped("backorder_id"), pick)
 
     def test_picking_deliver_background_identity_key(self):
         """Check that we don't reenqueue jobs."""
