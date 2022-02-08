@@ -36,6 +36,20 @@ class XmlDeclaration(models.TransientModel):
         self._update_Dim(item, "EXUNITS", unicode(round(amounts[2], 2)))
         return res
 
+    def _get_intrastat_linekey(self, declcode, inv_line, dispatchmode, extendedmode):
+        linekey = super(XmlDeclaration, self)._get_intrastat_linekey(
+            declcode, inv_line, dispatchmode, extendedmode
+        )
+        # linekey is a namedtuple, get value as dict
+        vals = linekey._asdict()
+        # hardcoded to 11 according TO Mm Mahy to be cooform to 2022 rules
+        vals["EXTTA"] = unicode(11)
+        # the namedtuple definition is inner to the method (not available)
+        # use the __class__ attribute from the current object to build a new
+        # instance with the updated values.
+        new_linekey = linekey.__class__(**vals)
+        return new_linekey
+
     @api.multi
     def _get_lines(self, dispatchmode=False, extendedmode=False):
         decl = super(XmlDeclaration, self)._get_lines(dispatchmode, extendedmode)
