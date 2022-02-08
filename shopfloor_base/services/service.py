@@ -23,11 +23,9 @@ class BaseShopfloorService(AbstractComponent):
     _collection = "shopfloor.service"
     _expose_model = None
 
-    def dispatch(self, method_name, _id=None, params=None):
+    def dispatch(self, method_name, *args, **kwargs):
         self._validate_headers_update_work_context(request, method_name)
-        return super(BaseShopfloorService, self).dispatch(
-            method_name, _id=_id, params=params
-        )
+        return super(BaseShopfloorService, self).dispatch(method_name, *args, **kwargs)
 
     def _actions_for(self, usage, **kw):
         return get_actions_for(self, usage, **kw)
