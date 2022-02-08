@@ -60,7 +60,7 @@ class PromoSubscriptionService(Component):
         )
         return self._convert_one_record(record)
 
-    @restapi.method([(["/<int:product_id>"], "DELETE")],)
+    @restapi.method([(["/<int:product_id>"], "DELETE")])
     def delete(self, product_id):
         """Unsubscribe the customer to the promotions of the given product
         id."""
@@ -78,9 +78,7 @@ class PromoSubscriptionService(Component):
         Output validator for the search
         :return: dict
         """
-        promo_schema = self._get_return_promo_schema()
-        schema = {"data": {"type": "dict", "schema": promo_schema}}
-        return schema
+        return self._get_promo_schema()
 
     def _search_input_schema(self):
         return {
@@ -104,7 +102,7 @@ class PromoSubscriptionService(Component):
         Output validator for the search
         :return: dict
         """
-        promo_schema = self._get_return_promo_schema()
+        promo_schema = self._get_promo_schema()
         return {
             "size": {"type": "integer"},
             "data": {
@@ -124,12 +122,12 @@ class PromoSubscriptionService(Component):
         }
 
     def _create_output_schema(self):
-        return self._get_return_promo_schema()
+        return self._get_promo_schema()
 
     ################
     # implementation
     ################
-    def _get_return_promo_schema(self):
+    def _get_promo_schema(self):
         """
         Get details about invoice to return
         (used into validator_return)
