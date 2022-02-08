@@ -5,6 +5,7 @@
 from odoo import _
 from odoo.exceptions import MissingError
 
+from odoo.addons.base_rest import restapi
 from odoo.addons.base_rest.components.service import to_int
 from odoo.addons.component.core import Component
 
@@ -17,22 +18,38 @@ class PromoSubscriptionService(Component):
     _collection = "shopinvader.backend"
     _usage = "promo_subscriptions"
 
-    def get(self, _id):
+    @restapi.method(
+        [(["/<int:product_id>"], "GET")],
+        output_param=restapi.CerberusValidator("_get_output_schema"),
+    )
+    def get(self, product_id):
         """Check if a subscription exists for the given product_id.
 
         Return 404 if not found
         """
         record = self.env["alc.product.promotion.subscription"].search(
-            [("product_id", "=", _id), ("partner_id", "=", self.partner.id)]
+            [("product_id", "=", product_id), ("partner_id", "=", self.partner.id)]
         )
         if not record:
-            raise MissingError(_("No subscription found for product id %s") % (_id))
+            raise MissingError(
+                _("No subscription found for product id %s") % (product_id)
+            )
         return self._convert_one_record(record)
 
+    @restapi.method(
+        [(["/"], "GET")],
+        input_param=restapi.CerberusValidator("_search_input_schema"),
+        output_param=restapi.CerberusValidator("_search_output_schema"),
+    )
     def search(self, **params):
         """Get all the products the customer has subscribed to."""
         return self._paginate_search(**params)
 
+    @restapi.method(
+        [(["/create"], "POST")],
+        input_param=restapi.CerberusValidator("_create_input_schema"),
+        output_param=restapi.CerberusValidator("_create_output_schema"),
+    )
     # pylint: disable=method-required-super
     def create(self, product_id):
         """Subscribe the customer to the promotions for the given product
@@ -43,10 +60,11 @@ class PromoSubscriptionService(Component):
         )
         return self._convert_one_record(record)
 
-    def delete(self, _id):
+    @restapi.method([(["/<int:product_id>"], "DELETE")],)
+    def delete(self, product_id):
         """Unsubscribe the customer to the promotions of the given product
         id."""
-        product = self.env["product.product"].browse(_id)
+        product = self.env["product.product"].browse(product_id)
         self.env["alc.product.promotion.subscription"].unsubscribe(
             partner=self.partner, product=product
         )
@@ -55,10 +73,7 @@ class PromoSubscriptionService(Component):
     ############
     # validators
     ############
-    def _validator_get(self):
-        return {}
-
-    def _validator_return_get(self):
+    def _get_output_schema(self):
         """
         Output validator for the search
         :return: dict
@@ -67,7 +82,7 @@ class PromoSubscriptionService(Component):
         schema = {"data": {"type": "dict", "schema": promo_schema}}
         return schema
 
-    def _validator_search(self):
+    def _search_input_schema(self):
         return {
             "page": {
                 "coerce": to_int,
@@ -84,7 +99,7 @@ class PromoSubscriptionService(Component):
             "product_id": {"coerce": to_int, "nullable": True, "type": "integer"},
         }
 
-    def _validator_return_search(self):
+    def _search_output_schema(self):
         """
         Output validator for the search
         :return: dict
@@ -98,7 +113,7 @@ class PromoSubscriptionService(Component):
             },
         }
 
-    def _validator_create(self):
+    def _create_input_schema(self):
         return {
             "product_id": {
                 "coerce": to_int,
@@ -108,14 +123,8 @@ class PromoSubscriptionService(Component):
             },
         }
 
-    def _validator_return_create(self):
+    def _create_output_schema(self):
         return self._get_return_promo_schema()
-
-    def _validator_delete(self):
-        return {}
-
-    def _validator_return_delete(self):
-        return {}
 
     ################
     # implementation

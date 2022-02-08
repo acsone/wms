@@ -28,10 +28,10 @@ class BaseB2CService(AbstractComponent):
             self.b2c_backend.suspend_security().product_assortment_id._get_eval_domain()
         )
 
-    def dispatch(self, method_name, _id=None, params=None):
+    def dispatch(self, method_name, *args, **kwargs):
         if self.env.user != self.env.ref("alc_b2c_connector.alc_b2c_rest_api_user"):
             raise AccessDenied(_("This user has no access to the B2C REST Api."))
-        return super(BaseB2CService, self).dispatch(method_name, _id=_id, params=params)
+        return super(BaseB2CService, self).dispatch(method_name, *args, **kwargs)
 
     def _get_openapi_default_parameters(self):
         defaults = super(BaseB2CService, self)._get_openapi_default_parameters()

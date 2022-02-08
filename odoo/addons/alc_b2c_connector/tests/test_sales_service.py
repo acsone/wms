@@ -146,7 +146,7 @@ class TestSalesService(CommonCase):
         Expected result:
             The so info
         """
-        res = self.sales_service.dispatch("get", _id=10)
+        res = self.sales_service.dispatch("get", 10)
         self.assertTrue(res)
         self.assertEqual(res["state"], self.b2c_order.state)
         self.assertEqual(res["ref"], self.b2c_order.name)
@@ -161,7 +161,7 @@ class TestSalesService(CommonCase):
             Missing error is raised
         """
         with self.assertRaises(MissingError):
-            self.sales_service.dispatch("get", _id=9999)
+            self.sales_service.dispatch("get", 9999)
 
     def test_02(self):
         """
@@ -526,7 +526,7 @@ class TestSalesService(CommonCase):
         new_so = self._get_so_from_name(res["ref"])
         self.assertEqual("sale", res["state"])
         self._deliver_orders(new_so)
-        res = self.sales_service.dispatch("get", _id=99)
+        res = self.sales_service.dispatch("get", 99)
         self.assertEqual("delivery", res["state"])
 
     def test_10_01(self):
@@ -566,7 +566,7 @@ class TestSalesService(CommonCase):
         self.assertEqual("sale", res["state"])
         self._deliver_orders(new_so)
         new_so.picking_ids.write({"carrier_tracking_ref": "AZ123"})
-        res = self.sales_service.dispatch("get", _id=99)
+        res = self.sales_service.dispatch("get", 99)
         self.assertEqual("delivery", res["state"])
         self.assertIn("deliveries", res)
         delivery = res["deliveries"][0]
@@ -617,7 +617,7 @@ class TestSalesService(CommonCase):
         Expected result:
             The so is cancelled
         """
-        self.sales_service.dispatch("cancel", _id=self.b2c_order.b2c_ref)
+        self.sales_service.dispatch("cancel", self.b2c_order.b2c_ref)
 
         self.assertEqual("cancel", self.b2c_order.state)
 
@@ -632,7 +632,7 @@ class TestSalesService(CommonCase):
         """
         self._deliver_orders(self.b2c_order)
         self.b2c_order.picking_ids.do_print_picking()
-        self.sales_service.dispatch("cancel", _id=self.b2c_order.b2c_ref)
+        self.sales_service.dispatch("cancel", self.b2c_order.b2c_ref)
 
         self.assertEqual("sale", self.b2c_order.state)
 
@@ -679,7 +679,7 @@ class TestSalesService(CommonCase):
         self.b2c_order.action_confirm()
         self.assertEqual(self.b2c_order.state, "sale")
 
-        self.sales_service.dispatch("update", _id=self.b2c_order.b2c_ref, params=params)
+        self.sales_service.dispatch("update", self.b2c_order.b2c_ref, params=params)
 
         self.assertEqual(self.b2c_order.order_line[0].product_uom_qty, 10)
         self.assertEqual(self.b2c_order.order_line[1].product_uom_qty, 5)
@@ -716,7 +716,7 @@ class TestSalesService(CommonCase):
 
         self.b2c_order.action_confirm()
         self.assertEqual(self.b2c_order.state, "sale")
-        self.sales_service.dispatch("update", _id=self.b2c_order.b2c_ref, params=params)
+        self.sales_service.dispatch("update", self.b2c_order.b2c_ref, params=params)
 
         self.assertEqual(self.b2c_order.order_line[0].product_uom_qty, 10)
         self.assertEqual(self.b2c_order.order_line[1].product_uom_qty, 35)
@@ -753,12 +753,10 @@ class TestSalesService(CommonCase):
         }
 
         self._deliver_orders(self.b2c_order)
-        res = self.sales_service.dispatch("get", _id=10)
+        res = self.sales_service.dispatch("get", 10)
         self.assertEqual("delivery", res["state"])
         with self.assertRaises(ValidationError):
-            self.sales_service.dispatch(
-                "update", _id=self.b2c_order.b2c_ref, params=params
-            )
+            self.sales_service.dispatch("update", self.b2c_order.b2c_ref, params=params)
 
     def test_update_existing_recipient(self):
         recipient_info = {
@@ -777,7 +775,7 @@ class TestSalesService(CommonCase):
         self.assertFalse(self.b2c_order.partner_id.zip)
         self.b2c_order.action_confirm()
 
-        self.sales_service.dispatch("update", _id=self.b2c_order.b2c_ref, params=params)
+        self.sales_service.dispatch("update", self.b2c_order.b2c_ref, params=params)
 
         self.assertEqual(self.b2c_order.partner_id.zip, "1234")
         self.assertEqual(self.b2c_order.partner_id.suite, "My company")
@@ -790,7 +788,7 @@ class TestSalesService(CommonCase):
         params = {"id": 10, "recipient": recipient_info}
         old_partner = self.b2c_order.partner_id
 
-        self.sales_service.dispatch("update", _id=self.b2c_order.b2c_ref, params=params)
+        self.sales_service.dispatch("update", self.b2c_order.b2c_ref, params=params)
 
         self.assertNotEqual(self.b2c_order.partner_id, old_partner)
         self.assertEqual(self.b2c_order.partner_id.zip, recipient_info["zip"])
@@ -805,16 +803,14 @@ class TestSalesService(CommonCase):
             "email": "b2c@b2c.be",
         }
         params = {"id": 10, "recipient": recipient_info}
-        self.sales_service.dispatch("update", _id=self.b2c_order.b2c_ref, params=params)
+        self.sales_service.dispatch("update", self.b2c_order.b2c_ref, params=params)
 
         self.assertFalse(self.b2c_order.partner_id.phone)
 
     def test_update_existing_missing_payload_raises(self):
         params = {"id": 10}
         with self.assertRaises(ValidationError):
-            self.sales_service.dispatch(
-                "update", _id=self.b2c_order.b2c_ref, params=params
-            )
+            self.sales_service.dispatch("update", self.b2c_order.b2c_ref, params=params)
 
     def test_create_two_so_for_same_partner(self):
         recipient_info = self._gen_recipent()

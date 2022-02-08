@@ -67,7 +67,7 @@ odoo10-addon-stock-packaging-calculator @ git+https://github.com/OCA/stock-logis
 # oca/wms
 odoo10-addon-stock-storage-type @ git+https://github.com/acsone/wms.git@10.0-alc_master#subdirectory=setup/stock_storage_type
 odoo10-addon-stock-storage-type-putaway-abc @ git+https://github.com/oca/wms.git@refs/pull/103/head#subdirectory=setup/stock_storage_type_putaway_abc
-odoo10-addon-shopfloor-base @ git+https://github.com/oca/wms.git@refs/pull/204/head#subdirectory=setup/shopfloor_base
+odoo10-addon-shopfloor-base @ git+https://github.com/acsone/wms.git@10.0-backport-shopfloor-base-backport-base-rest#subdirectory=setup/shopfloor_base
 odoo10-addon-shopfloor-mobile-base @ git+https://github.com/oca/wms.git@refs/pull/204/head#subdirectory=setup/shopfloor_mobile_base
 odoo10-addon-shopfloor-mobile @ git+https://github.com/oca/wms.git@refs/pull/213/head#subdirectory=setup/shopfloor_mobile
 odoo10-addon-shopfloor @ git+https://github.com/oca/wms.git@refs/pull/213/head#subdirectory=setup/shopfloor
@@ -116,5 +116,6 @@ odoo10-addon-shopinvader-sale-profile @  git+https://github.com/acsone/odoo-shop
 odoo10-addon-shopinvader-wishlist @  git+https://github.com/acsone/odoo-shopinvader.git@10.0-backport-14.0#subdirectory=setup/shopinvader_wishlist
 
 # oca/res-framework
-odoo10-addon-base-rest @ git+https://github.com/acsone/rest-framework.git@10.0-backport-context-provider-lmi#subdirectory=setup/base_rest
-odoo10-addon-base-rest-auth-jwt @ git+https://github.com/acsone/rest-framework.git@10.0-backport-context-provider-lmi#subdirectory=setup/base_rest_auth_jwt
+odoo10-addon-base-rest @ git+https://github.com/acsone/rest-framework.git@10.0-backport-from-14.0#subdirectory=setup/base_rest
+odoo10-addon-base-rest-auth-jwt @ git+https://github.com/acsone/rest-framework.git@10.0-backport-from-14.0#subdirectory=setup/base_rest_auth_jwt
+odoo10-addon-rest-log @ git+https://github.com/acsone/rest-framework.git@10.0-backport-from-14.0#subdirectory=setup/rest_log
