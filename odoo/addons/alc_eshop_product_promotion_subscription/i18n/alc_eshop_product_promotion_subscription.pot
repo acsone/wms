@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_eshop_product_promotion_subscription
-#: code:addons/alc_eshop_product_promotion_subscription/services/promo_subscription.py:29
+#: code:addons/alc_eshop_product_promotion_subscription/services/promo_subscription.py:35
 #, python-format
 msgid "No subscription found for product id %s"
 msgstr ""
