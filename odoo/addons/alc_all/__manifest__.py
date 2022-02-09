@@ -87,6 +87,7 @@
         "account_move_productcateg",
         "account_payment_order_background",
         "account_tax_one_vat",
+        "alc_account_invoice_cancel_permissions",
         "alc_account_payment_globalization",
         "alc_analytic_category_report",
         "alc_b2c_connector",
