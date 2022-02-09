@@ -74,7 +74,7 @@ msgid "Create Keycloak User"
 msgstr ""
 
 #. module: keycloak
-#: code:addons/keycloak/models/keycloak_user.py:52
+#: code:addons/keycloak/models/keycloak_user.py:67
 #, python-format
 msgid "Create Keycloak User %s"
 msgstr ""
@@ -96,7 +96,7 @@ msgid "Created on"
 msgstr ""
 
 #. module: keycloak
-#: code:addons/keycloak/models/keycloak_user.py:58
+#: code:addons/keycloak/models/keycloak_user.py:73
 #, python-format
 msgid "Delete Keycloak User %s"
 msgstr ""
@@ -121,6 +121,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:keycloak.field_keycloak_user_id
 #: model:ir.model.fields,field_description:keycloak.field_keycloak_user_wizard_id
 msgid "ID"
+msgstr ""
+
+#. module: keycloak
+#: model:ir.model.fields,help:keycloak.field_keycloak_user_keycloak_username
+msgid "In keycloak, username is stored in lowercase. The username is also case insensitive into the login form. Nevertheless, the information into the token is always lower case. To ease thematching between the token and keycloak.user, we also storethe username in lower case into a dedicated column."
 msgstr ""
 
 #. module: keycloak
@@ -174,6 +179,11 @@ msgstr ""
 #. module: keycloak
 #: model:ir.model.fields,field_description:keycloak.field_keycloak_user_wizard_keycloak_user_id
 msgid "Keycloak user id"
+msgstr ""
+
+#. module: keycloak
+#: model:ir.model.fields,field_description:keycloak.field_keycloak_user_keycloak_username
+msgid "Keycloak username"
 msgstr ""
 
 #. module: keycloak
@@ -271,21 +281,21 @@ msgid "Temporary"
 msgstr ""
 
 #. module: keycloak
-#: code:addons/keycloak/models/keycloak_user.py:35
+#: code:addons/keycloak/models/keycloak_user.py:44
 #: sql_constraint:keycloak.user:0
 #, python-format
 msgid "This Keycloak ID already exists, which should be impossible."
 msgstr ""
 
 #. module: keycloak
-#: code:addons/keycloak/models/keycloak_user.py:30
+#: code:addons/keycloak/models/keycloak_user.py:39
 #: sql_constraint:keycloak.user:0
 #, python-format
 msgid "This partner already has a user on this backend."
 msgstr ""
 
 #. module: keycloak
-#: code:addons/keycloak/models/keycloak_user.py:40
+#: code:addons/keycloak/models/keycloak_user.py:49
 #: sql_constraint:keycloak.user:0
 #, python-format
 msgid "This username already exists on this backend"
@@ -304,7 +314,7 @@ msgid "Update Keycloak User"
 msgstr ""
 
 #. module: keycloak
-#: code:addons/keycloak/models/keycloak_user.py:74
+#: code:addons/keycloak/models/keycloak_user.py:89
 #, python-format
 msgid "Update Keycloak User %s"
 msgstr ""
