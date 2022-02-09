@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* alc_eshop_product_promotion_subscription
+#	* alc_sale_processing_finalizer_exclude_logiweb
 #
 msgid ""
 msgstr ""
@@ -13,9 +13,8 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
-#. module: alc_eshop_product_promotion_subscription
-#: code:addons/alc_eshop_product_promotion_subscription/services/promo_subscription.py:35
-#, python-format
-msgid "No subscription found for product id %s"
+#. module: alc_sale_processing_finalizer_exclude_logiweb
+#: model:ir.model,name:alc_sale_processing_finalizer_exclude_logiweb.model_sale_order
+msgid "Sales Order"
 msgstr ""
 

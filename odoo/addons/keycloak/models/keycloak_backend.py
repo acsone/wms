@@ -74,7 +74,7 @@ class KeycloakBackend(models.Model):
         credentials = [{"value": keycloak_user.password, "type": "password"}]
         return {
             "email": keycloak_user.partner_id.email,
-            "username": keycloak_user.username,
+            "username": keycloak_user.keycloak_username,
             "enabled": keycloak_user.enabled,
             "firstName": split_name[0] if len(split_name) > 0 else "",
             "lastName": split_name[1] if len(split_name) > 1 else "",

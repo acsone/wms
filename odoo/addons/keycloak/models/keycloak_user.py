@@ -18,6 +18,15 @@ class KeycloakUser(models.Model):
     )
     partner_id = fields.Many2one("res.partner", string="Partner", required=True)
     username = fields.Char()
+    keycloak_username = fields.Char(
+        compute="_compute_keycloak_username",
+        store=True,
+        help="In keycloak, username is stored in lowercase. The username is "
+        "also case insensitive into the login form. Nevertheless, "
+        "the information into the token is always lower case. To ease the"
+        "matching between the token and keycloak.user, we also store"
+        "the username in lower case into a dedicated column.",
+    )
     password = fields.Char(readonly=True)  # update through wizard
     enabled = fields.Boolean(default=True)
 
@@ -35,8 +44,8 @@ class KeycloakUser(models.Model):
             _("This Keycloak ID already exists, which should be impossible."),
         ),
         (
-            "backend_username_unique",
-            "unique(keycloak_backend_id, username)",
+            "backend_keycloak_username_unique",
+            "unique(keycloak_backend_id, keycloak_username)",
             _("This username already exists on this backend"),
         ),
     ]
@@ -45,6 +54,12 @@ class KeycloakUser(models.Model):
     def _compute_display_name(self):
         for u in self:
             u.display_name = u.username + " (" + (u.partner_id.name or "") + ")"
+
+    @api.depends("username")
+    def _compute_keycloak_username(self):
+        for rec in self:
+            username = rec.username or ""
+            rec.keycloak_username = username.lower()
 
     @api.model
     def create(self, vals):
