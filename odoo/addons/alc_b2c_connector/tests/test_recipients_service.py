@@ -121,7 +121,7 @@ class TestRecipientsService(CommonCase):
         Expected result:
             The recipient info
         """
-        res = self.recipient_service.dispatch("get", _id="ABC")
+        res = self.recipient_service.dispatch("get", "ABC")
         self.assertTrue(res)
         self.assertEqual(res["id"], "ABC")
         self.assertEqual(res["name"], "EXISTING B2C PARTNER")
@@ -151,7 +151,7 @@ class TestRecipientsService(CommonCase):
         recipient_info["note"] = "Test note for delivery"
 
         _ = self.recipient_service.dispatch(
-            "update", _id=recipient_info["id"], params=recipient_info
+            "update", recipient_info["id"], params=recipient_info
         )
 
         self.assertEqual(self.b2c_partner.street, "new_street")
@@ -184,7 +184,7 @@ class TestRecipientsService(CommonCase):
         recipient_info["street"] = "new_street"
 
         _ = self.recipient_service.dispatch(
-            "update", _id=recipient_info["id"], params=recipient_info
+            "update", recipient_info["id"], params=recipient_info
         )
 
         self.assertEqual(self.b2c_partner.street, "new_street")
@@ -210,7 +210,7 @@ class TestRecipientsService(CommonCase):
         for field in fields:
             params = {"id": "ABC", field: "BF" if field == "country_code" else "X"}
             with self.assertRaises(ValidationError):
-                self.recipient_service.dispatch("update", _id="ABC", params=params)
+                self.recipient_service.dispatch("update", "ABC", params=params)
 
     def test_update_contact_fields_for_partner_with_started_picking(self):
         """We can always update the contact fields (phone, mobile, email)"""
@@ -233,7 +233,7 @@ class TestRecipientsService(CommonCase):
         }
         # when
         self.recipient_service.dispatch(
-            "update", _id=recipient_info["id"], params=recipient_info
+            "update", recipient_info["id"], params=recipient_info
         )
         self.assertEqual(self.b2c_partner.phone, "1")
         self.assertEqual(self.b2c_partner.mobile, "2")
@@ -247,7 +247,7 @@ class TestRecipientsService(CommonCase):
         recipient_info = {"id": "ABC", "phone": None, "mobile": None, "note": None}
         # when
         self.recipient_service.dispatch(
-            "update", _id=recipient_info["id"], params=recipient_info
+            "update", recipient_info["id"], params=recipient_info
         )
         self.assertFalse(self.b2c_partner.phone)
         self.assertFalse(self.b2c_partner.mobile)
@@ -257,7 +257,7 @@ class TestRecipientsService(CommonCase):
         """Suite can be nulled, and is not updatable after a picking is started."""
         self.b2c_partner.suite = "C"
         self.recipient_service.dispatch(
-            "update", _id="ABC", params={"id": "ABC", "name2": None}
+            "update", "ABC", params={"id": "ABC", "name2": None}
         )
         self.assertFalse(self.b2c_partner.suite)
 
@@ -265,7 +265,7 @@ class TestRecipientsService(CommonCase):
         self.b2c_order.mapped("picking_ids").write({"printed": True})
         with self.assertRaises(ValidationError):
             self.recipient_service.dispatch(
-                "update", _id="ABC", params={"id": "ABC", "name2": "S"}
+                "update", "ABC", params={"id": "ABC", "name2": "S"}
             )
 
     def test_update_recipient_if_allowed_on_b2c_backend(self):
@@ -284,7 +284,7 @@ class TestRecipientsService(CommonCase):
             "city": "new city info no check",
         }
         self.recipient_service.dispatch(
-            "update", _id=recipient_info["id"], params=recipient_info
+            "update", recipient_info["id"], params=recipient_info
         )
         self.assertEqual(self.b2c_partner.street, "new street info no check")
         self.assertEqual(self.b2c_partner.zip, "new zip info no check")

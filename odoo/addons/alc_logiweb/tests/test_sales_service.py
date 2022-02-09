@@ -230,7 +230,7 @@ class TestSalesService(CommonCase):
         self.assertEqual(new_so.partner_invoice_id, self.logiweb_be_partner)
         self.assertEqual(new_so.partner_shipping_id, customer_partner)
 
-        new_so_api = self.sales_service.dispatch("get", _id=new_so.b2c_ref)
+        new_so_api = self.sales_service.dispatch("get", new_so.b2c_ref)
         self.assertEqual(new_so_api["carrier"], carrier)
         self.assertEqual(new_so_api["gls_parcel_shop"], gls_parcel_shop)
 
@@ -382,7 +382,7 @@ class TestSalesService(CommonCase):
         # when: we update the customer
         recipient_info_new = self._gen_recipent()
         params = {"recipient": recipient_info_new}
-        self.sales_service.dispatch("update", _id=res["id"], params=params)
+        self.sales_service.dispatch("update", res["id"], params=params)
         # then: the new partner is indeed the new one
         new_partner = so.partner_id
         self.assertNotEqual(new_partner, old_partner)
@@ -402,6 +402,6 @@ class TestSalesService(CommonCase):
         so = self.env["sale.order"].search([("b2c_ref", "=", res["id"])])
         # when: we update the customer
         params = {"recipient": self._gen_recipent()}
-        self.sales_service.dispatch("update", _id=res["id"], params=params)
+        self.sales_service.dispatch("update", res["id"], params=params)
         # then: the shipping partner hasn't changed
         self.assertEqual(so.partner_shipping_id, self.logiweb_partner)
