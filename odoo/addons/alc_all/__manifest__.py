@@ -149,6 +149,7 @@
         "alc_stock_picking_no_pack_in_pack",
         "alc_stock_picking_number_package",
         "alc_stock_picking_gls_check_validation",
+        "alc_stock_picking_wave_release_pickings",
         "alc_stock_putaway",
         "alc_stock_put_remaining_to_reserve",
         # "alc_stock_location_content_relocation",
