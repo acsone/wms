@@ -138,6 +138,7 @@
         "alc_sale_invoicing_policy",
         "alc_sale_processing_finalizer",
         "alc_sale_processing_finalizer_exclude_logiweb",
+        "alc_sale_product_qty_available_to_promise",
         "alc_sale_statistics",
         "alc_sale_stock_restocking_fee_invoicing_additional_product",
         "alc_shopfloor_app",
