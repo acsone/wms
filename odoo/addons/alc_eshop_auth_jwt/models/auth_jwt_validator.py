@@ -24,7 +24,7 @@ class AuthJwtValidator(models.Model):
                 _logger.debug("JWT payload does not have a preferred_username claim")
                 return None
             keycloak_user = self.env["keycloak.user"].search(
-                [("username", "=", username), ("enabled", "=", True)]
+                [("keycloak_username", "=", username), ("enabled", "=", True)]
             )
             if len(keycloak_user) != 1:
                 _logger.debug(
