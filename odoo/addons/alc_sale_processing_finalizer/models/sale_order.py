@@ -41,10 +41,7 @@ class SaleOrder(models.Model):
 
         canceled_orders = self.env["sale.order"]
 
-        lines = lines.filtered(
-            lambda line: line.order_id.carrier_id
-            != self.env.ref("alc_sale_processing_finalizer.deliver_carrier_long_term")
-        )
+        lines = self._filter_sale_order_lines_to_cancel(lines)
 
         for line in lines:
 
@@ -77,3 +74,9 @@ class SaleOrder(models.Model):
             return
         for canceled_order in canceled_orders:
             mail_template.send_mail(canceled_order.id)
+
+    def _filter_sale_order_lines_to_cancel(self, lines):
+        return lines.filtered(
+            lambda line: line.order_id.carrier_id
+            != self.env.ref("alc_sale_processing_finalizer.deliver_carrier_long_term")
+        )
