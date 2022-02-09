@@ -15,6 +15,7 @@
         "alc_storage",
         "alc_eshop_auth_jwt",
         "alc_eshop_cart_confirm",
+        "alc_eshop_cart_recovery",
         "alc_eshop_filter_data",
         "alc_shopinvader_category",
         "shopinvader_auth_jwt",
