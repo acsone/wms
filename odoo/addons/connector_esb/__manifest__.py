@@ -11,6 +11,7 @@
     "depends": [
         "alc_partner_veterinary",
         "alc_base_auto_join",
+        "alc_sale_channel",
         "alc_sale_product_qty_backorder",
         "alc_product_packaging",
         "alc_product_dimensions",

@@ -9,8 +9,7 @@
     "version": "10.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
-    "depends": ["specific_sale", "stock_delivery_note"],
+    "depends": ["alc_sale_channel", "stock_delivery_note"],
     "data": [],
     "demo": [],
-    "pre_init_hook": "pre_init_hook",
 }

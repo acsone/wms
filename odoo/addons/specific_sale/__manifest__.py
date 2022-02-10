@@ -10,6 +10,7 @@
     "category": "Sales",
     "depends": [
         "alc_partner_type",
+        "alc_sale_channel",
         "alc_stock_lot_available",
         "delivery",
         "pricelist_discount",
