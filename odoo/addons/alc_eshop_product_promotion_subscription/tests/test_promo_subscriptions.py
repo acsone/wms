@@ -33,8 +33,8 @@ class TestPromoSubscriptions(SavepointCase, ComponentMixin):
                 "type": "product",
             }
         )
-        cls.parther_1 = cls.env["res.partner"].create({"name": "partner_1"})
-        cls.parther_2 = cls.env["res.partner"].create({"name": "partner_2"})
+        cls.partner_1 = cls.env["res.partner"].create({"name": "partner_1"})
+        cls.partner_2 = cls.env["res.partner"].create({"name": "partner_2"})
 
     # pylint: disable=method-required-super
     def setUp(self):
@@ -45,7 +45,7 @@ class TestPromoSubscriptions(SavepointCase, ComponentMixin):
 
     @classmethod
     @contextmanager
-    def promo_subcriptions_service(cls, authenticated_partner_id):
+    def promo_subscriptions_service(cls, authenticated_partner_id):
         env = cls.env(
             context=dict(
                 cls.env.context, authenticated_partner_id=authenticated_partner_id
@@ -61,15 +61,15 @@ class TestPromoSubscriptions(SavepointCase, ComponentMixin):
         yield work.component(usage="promo_subscriptions")
 
     def test_create(self):
-        with self.promo_subcriptions_service(
-            authenticated_partner_id=self.parther_1.id
+        with self.promo_subscriptions_service(
+            authenticated_partner_id=self.partner_1.id
         ) as service:
             result = service.create(product_id=self.product_1.id)
             self.assertDictEqual({"product_id": self.product_1.id}, result)
 
     def test_unlink(self):
-        with self.promo_subcriptions_service(
-            authenticated_partner_id=self.parther_1.id
+        with self.promo_subscriptions_service(
+            authenticated_partner_id=self.partner_1.id
         ) as service:
             result = service.create(product_id=self.product_1.id)
             self.assertDictEqual({"product_id": self.product_1.id}, result)
@@ -80,15 +80,15 @@ class TestPromoSubscriptions(SavepointCase, ComponentMixin):
                 service.get(self.product_1.id)
 
     def test_acl(self):
-        with self.promo_subcriptions_service(
-            authenticated_partner_id=self.parther_1.id
+        with self.promo_subscriptions_service(
+            authenticated_partner_id=self.partner_1.id
         ) as service:
             service.create(product_id=self.product_1.id)
             result = service.search()
             self.assertTrue(result["data"])
 
-        with self.promo_subcriptions_service(
-            authenticated_partner_id=self.parther_2.id
+        with self.promo_subscriptions_service(
+            authenticated_partner_id=self.partner_2.id
         ) as service:
             with self.assertRaises(MissingError):
                 service.get(self.product_1.id)
