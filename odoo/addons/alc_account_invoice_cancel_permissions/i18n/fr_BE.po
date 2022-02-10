@@ -1,0 +1,32 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* alc_account_invoice_cancel_permissions
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-02-09 15:22+0000\n"
+"PO-Revision-Date: 2022-02-09 15:22+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_account_invoice_cancel_permissions
+#: model:ir.model.fields,field_description:alc_account_invoice_cancel_permissions.field_account_invoice_action_invoice_cancel_allowed
+msgid "Action invoice cancel allowed"
+msgstr "Autorisation de l'annulation de factures"
+
+#. module: alc_account_invoice_cancel_permissions
+#: model:res.groups,name:alc_account_invoice_cancel_permissions.cancel_invoice_permission
+msgid "INVOICING - Can cancel invoices"
+msgstr "FACTURATION - Annulation de factures"
+
+#. module: alc_account_invoice_cancel_permissions
+#: model:ir.model,name:alc_account_invoice_cancel_permissions.model_account_invoice
+msgid "Invoice"
+msgstr "Facture"
+
