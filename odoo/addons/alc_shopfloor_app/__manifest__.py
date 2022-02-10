@@ -19,6 +19,7 @@
         "alc_shopfloor_location_info",
         "alc_shopfloor_assignation_issue_message",
         "alc_shopfloor_mobile",
+        "alc_shopfloor_mobile_change_pack_lot_back_button",
         "alc_shopfloor_mobile_cluster_picking",
         "alc_shopfloor_mobile_packing",
         "alc_shopfloor_mobile_product_print_label",
