@@ -11,10 +11,11 @@
     "website": "https://acsone.eu/",
     "depends": [
         "alc_eshop",
-        "alc_search_engine",
+        "alc_eshop_product_promotion_subscription",
+        "alc_eshop_sale_statistic",
         "alc_keycloak",
         "alc_product_promotion_mailing",
-        "alc_eshop_product_promotion_subscription",
+        "alc_search_engine",
     ],
     "application": True,
     "data": [
