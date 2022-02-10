@@ -11,9 +11,6 @@ from odoo.exceptions import UserError, ValidationError
 class Sale(models.Model):
     _inherit = "sale.order"
 
-    sale_channel = fields.Selection(
-        [("phone", "Phone"), ("mail", "Mail"), ("fax", "Fax"), ("web", "Web")]
-    )
     suite_name = fields.Char(string="Suite Id", copy=False)
 
     @api.model_cr
@@ -30,15 +27,6 @@ class Sale(models.Model):
         """
         self.env.cr.execute(query)
         return res
-
-    @api.onchange("team_id")
-    def onchange_team_id(self):
-        if not self.sale_channel:
-            self.sale_channel = "phone"
-
-        team_web = self.env.ref("sales_team.salesteam_website_sales")
-        if self.team_id == team_web:
-            self.sale_channel = "web"
 
     @api.multi
     def order_lines_layouted(self):
