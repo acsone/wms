@@ -212,6 +212,7 @@
         "security/sale_order.xml",
         "views/product_packaging.xml",
         "views/product_template.xml",
+        "data/ir_config_parameter.xml",
     ],
     "demo": [],
 }
