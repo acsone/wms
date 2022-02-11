@@ -14,7 +14,7 @@
         "alc_search_engine",
         "elasticsearch_security",
         "alc_partner_type",
-        "product",
+        "pricelist_role_name",
     ],
     "application": False,
     "data": [
@@ -23,5 +23,4 @@
         "views/se_backend_elasticsearch.xml",
     ],
     "demo": [],
-    "external_dependencies": {"python": ["slugify"]},
 }

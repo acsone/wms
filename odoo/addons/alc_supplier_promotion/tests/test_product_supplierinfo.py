@@ -1,0 +1,41 @@
+# Copyright 2022 ACSONE SA/NV
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+
+
+from .common import TestSupplierInfo
+
+
+class TestSupplierInfoFlow(TestSupplierInfo):
+    def test_discounts(self):
+        vals_discount_past = self.get_supplierinfo_vals(
+            date_start=self.yesterday, date_end=self.yesterday, discount_sale=9
+        )
+        discount_past = self.supplierinfo_model.create(vals_discount_past)
+        vals_discount_tomorrow = self.get_supplierinfo_vals(
+            date_start=self.tomorrow, date_end=self.tomorrow, discount_sale=11
+        )
+        discount_tomorrow = self.supplierinfo_model.create(vals_discount_tomorrow)
+
+        expected_seller_ids = discount_tomorrow + discount_past
+        self.assertEqual(self.product_template.seller_ids, expected_seller_ids)
+        self.assertTrue(self.product_template.supplier_discount_ids, discount_tomorrow)
+
+    def test_promos(self):
+        vals_promo_past = self.get_supplierinfo_vals(
+            date_start=self.yesterday,
+            date_end=self.yesterday,
+            ratio_promotional_product=4,
+            ratio_main_product=5,
+        )
+        promo_past = self.supplierinfo_model.create(vals_promo_past)
+        vals_promo_tomorrow = self.get_supplierinfo_vals(
+            date_start=self.tomorrow,
+            date_end=self.tomorrow,
+            ratio_promotional_product=5,
+            ratio_main_product=4,
+        )
+        promo_tomorrow = self.supplierinfo_model.create(vals_promo_tomorrow)
+
+        expected_seller_ids = promo_tomorrow + promo_past
+        self.assertEqual(self.product_template.seller_ids, expected_seller_ids)
+        self.assertTrue(self.product_template.supplier_promotion_ids, promo_tomorrow)

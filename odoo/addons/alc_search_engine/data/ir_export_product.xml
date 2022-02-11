@@ -168,4 +168,99 @@
         <field name="name">product_brand_id/name</field>
         <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
     </record>
+    <record id="ir_exp_shopinvader_variant_indicated_price" model="ir.exports.line">
+        <field name="name">indicated_price</field>
+        <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
+    </record>
+    <record
+    id="ir_exp_shopinvader_variant_product_discount_special_ids_sequence"
+    model="ir.exports.line"
+  >
+        <field name="name">product_discount_special_ids/sequence</field>
+        <field name="alias">product_discount_special_ids:specials/sequence</field>
+        <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
+    </record>
+    <record
+    id="ir_exp_shopinvader_variant_product_discount_special_ids_date_start"
+    model="ir.exports.line"
+  >
+        <field name="name">product_discount_special_ids/date_start</field>
+        <field name="alias">product_discount_special_ids:specials/date_start</field>
+        <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
+    </record>
+    <record
+    id="ir_exp_shopinvader_variant_product_discount_special_ids_date_end"
+    model="ir.exports.line"
+  >
+        <field name="name">product_discount_special_ids/date_end</field>
+        <field name="alias">product_discount_special_ids:specials/date_end</field>
+        <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
+    </record>
+    <record
+    id="ir_exp_shopinvader_variant_supplier_discount_ids_discount"
+    model="ir.exports.line"
+  >
+        <field name="name">supplier_discount_ids/discount_sale</field>
+        <field
+      name="alias"
+    >supplier_discount_ids:supplier_discount/discount_sale</field>
+        <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
+    </record>
+    <record
+    id="ir_exp_shopinvader_variant_supplier_discount_ids_date_start"
+    model="ir.exports.line"
+  >
+        <field name="name">supplier_discount_ids/date_start</field>
+        <field name="alias">supplier_discount_ids:supplier_discount/date_start</field>
+        <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
+    </record>
+    <record
+    id="ir_exp_shopinvader_variant_supplier_discount_ids_date_end"
+    model="ir.exports.line"
+  >
+        <field name="name">supplier_discount_ids/date_end</field>
+        <field name="alias">supplier_discount_ids:supplier_discount/date_end</field>
+        <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
+    </record>
+    <record
+    id="ir_exp_shopinvader_variant_supplier_promotion_ids_ratio_main"
+    model="ir.exports.line"
+  >
+        <field name="name">supplier_promotion_ids/ratio_main_product</field>
+        <field
+      name="alias"
+    >supplier_promotion_ids:supplier_promotion/ratio_main_product</field>
+        <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
+    </record>
+    <record
+    id="ir_exp_shopinvader_variant_supplier_promotion_ids_ratio_promo"
+    model="ir.exports.line"
+  >
+        <field name="name">supplier_promotion_ids/ratio_promotional_product</field>
+        <field
+      name="alias"
+    >supplier_promotion_ids:supplier_promotion/ratio_promotional_product</field>
+        <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
+    </record>
+    <record
+    id="ir_exp_shopinvader_variant_supplier_promotion_ids_date_start"
+    model="ir.exports.line"
+  >
+        <field name="name">supplier_promotion_ids/date_start</field>
+        <field name="alias">supplier_promotion_ids:supplier_promotion/date_start</field>
+        <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
+    </record>
+    <record
+    id="ir_exp_shopinvader_variant_supplier_promotion_ids_date_end"
+    model="ir.exports.line"
+  >
+        <field name="name">supplier_promotion_ids/date_end</field>
+        <field name="alias">supplier_promotion_ids:supplier_promotion/date_end</field>
+        <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
+    </record>
+    <record id="ir_exp_shopinvader_variant_price_cache" model="ir.exports.line">
+        <field name="name">price_cache</field>
+        <field name="alias">price_cache:price</field>
+        <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
+    </record>
 </odoo>

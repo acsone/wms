@@ -1,0 +1,42 @@
+# Copyright 2022 ACSONE SA/NV
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+
+from odoo.tests.common import SavepointCase
+
+from odoo.addons.queue_job.tests.common import JobMixin
+
+
+class TestPrices(SavepointCase, JobMixin):
+    @classmethod
+    def setUpClass(cls):
+        super(TestPrices, cls).setUpClass()
+        cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
+
+        cls.cat_1 = cls.env["product.category"].create({"name": "C1"})
+        cls.cat_2 = cls.env["product.category"].create({"name": "C2"})
+
+        vals_product_1 = {"name": "P1", "categ_id": cls.cat_1.id, "list_price": 10}
+        cls.product_1 = cls.env["product.product"].create(vals_product_1)
+        vals_product_2 = {"name": "P2", "categ_id": cls.cat_2.id, "list_price": 20}
+        cls.product_2 = cls.env["product.product"].create(vals_product_2)
+
+        cls.cat_price = cls.env["product.price.category"].create({"name": "C"})
+
+        cls.model_pl = cls.env["product.pricelist"]
+        cls.model_pl_nodelay = cls.model_pl.with_context(test_queue_job_no_delay=True)
+
+    def _get_item_vals(self, pricelist=None, **kwargs):
+        vals = {
+            "applied_on": "3_global",
+            "compute_price": "percentage",
+            "percent_price": 10,
+        }
+        if pricelist:
+            vals["pricelist_id"] = pricelist.id
+        return dict(vals, **kwargs)
+
+    def _get_pricelist_vals(self, name, item_val_list):
+        return {
+            "name": name,
+            "item_ids": [(0, 0, item) for item in item_val_list],
+        }

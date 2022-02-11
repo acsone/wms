@@ -1,3 +1,2 @@
-from . import product_pricelist
 from . import res_partner
 from . import se_backend_elasticsearch

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="product_discount_special_search_view" model="ir.ui.view">
+            <field name="name">product.discount.special.search</field>
+            <field name="model">product.discount.special</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="date_start" />
+                    <field name="date_end" />
+                    <field name="product_template_id" />
+                </search>
+            </field>
+    </record>
+    <record id="product_discount_special_tree_view" model="ir.ui.view">
+        <field name="name">product.discount.special.tree</field>
+        <field name="model">product.discount.special</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="sequence" widget="handle" />
+                <field name="date_start" />
+                <field name="date_end" />
+                <field name="product_template_id" options="{'no_create':True}" />
+            </tree>
+        </field>
+    </record>
+    <record id="product_discount_special_form_view" model="ir.ui.view">
+        <field name="name">product.discount.special.form</field>
+        <field name="model">product.discount.special</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="sequence" widget="handle" />
+                    <field name="date_start" />
+                    <field name="date_end" />
+                    <field name="product_template_id" />
+                </group>
+            </form>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="product_discount_special_act_window">
+        <field name="name">Discount Specials</field>
+        <field name="res_model">product.discount.special</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_type">tree</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+        <field name="search_view_id" ref="product_discount_special_search_view" />
+        <field name="view_id" ref="product_discount_special_tree_view" />
+    </record>
+    <menuitem
+    id="product_discount_special_menu"
+    name="Discount Specials"
+    parent="sales_team.menu_sale_config"
+    action="product_discount_special_act_window"
+    sequence="99"
+  />
+</odoo>

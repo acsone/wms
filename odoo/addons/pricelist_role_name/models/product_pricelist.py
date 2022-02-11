@@ -12,7 +12,10 @@ class ProductPricelist(models.Model):
     _inherit = "product.pricelist"
 
     role_name = fields.Char(compute="_compute_role_name", store=False)
+    discount_role_name = fields.Char(compute="_compute_role_name", store=False)
 
     def _compute_role_name(self):
         for pl in self:
-            pl.role_name = slugify("price_" + pl.name)
+            role_name = slugify("price_" + pl.name)
+            pl.role_name = role_name
+            pl.discount_role_name = "discount_%s" % role_name
