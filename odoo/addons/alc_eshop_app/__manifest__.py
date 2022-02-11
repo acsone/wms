@@ -16,6 +16,7 @@
         "alc_keycloak",
         "alc_product_promotion_mailing",
         "alc_search_engine",
+        "alc_price_cache_shop_domain",
     ],
     "application": True,
     "data": [
