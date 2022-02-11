@@ -14,14 +14,8 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_sale_channel_stock_move
-#: model:ir.model.fields,field_description:alc_sale_channel_stock_move.field_sale_order_line_sale_channel
 #: model:ir.model.fields,field_description:alc_sale_channel_stock_move.field_stock_move_sale_channel
 msgid "Sale channel"
-msgstr ""
-
-#. module: alc_sale_channel_stock_move
-#: model:ir.model,name:alc_sale_channel_stock_move.model_sale_order_line
-msgid "Sales Order Line"
 msgstr ""
 
 #. module: alc_sale_channel_stock_move
