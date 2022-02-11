@@ -28,6 +28,7 @@ msgstr "Ligne du bon de commande"
 #. module: alc_sale_channel
 #: model:ir.model.fields,field_description:alc_sale_channel.field_sale_order_line_sale_channel
 #: model:ir.model.fields,field_description:alc_sale_channel.field_stock_move_sale_channel
+#: model:ir.model.fields,field_description:alc_sale_channel.field_sale_order_sale_channel
 msgid "Sale channel"
 msgstr "Canal de vente"
 
@@ -40,11 +41,6 @@ msgstr "Email"
 #: selection:sale.order,sale_channel:0
 msgid "Phone"
 msgstr "Téléphone"
-
-#. module: alc_sale_channel
-#: model:ir.model.fields,field_description:alc_sale_channel.field_sale_order_sale_channel
-msgid "Sale channel"
-msgstr "Canal de vente"
 
 #. module: alc_sale_channel
 #: selection:sale.order,sale_channel:0
