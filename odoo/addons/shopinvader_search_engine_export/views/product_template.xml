@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2022 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+  <record id="view_product_template_form" model="ir.ui.view">
+        <field name="model">product.template</field>
+         <field name="inherit_id" ref="shopinvader.view_product_template_form" />
+        <field name="arch" type="xml">
+            <xpath
+        expr="/form/sheet/notebook//field[@name='shopinvader_bind_ids']"
+        position="before"
+      >
+                <button
+          name="shopinvader_manual_export"
+          string="Export"
+          type="object"
+          class="btn-primary"
+          groups="base.group_no_one"
+        />
+            </xpath>
+        </field>
+    </record>
+</odoo>
