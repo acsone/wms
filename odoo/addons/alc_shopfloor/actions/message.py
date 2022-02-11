@@ -537,3 +537,9 @@ class MessageAction(Component):
             "body": _("No reserve location associated with location %s.")
             % location.name,
         }
+
+    def same_lot_selected(self, lot):
+        return {
+            "message_type": "error",
+            "body": _(u"Lot {} is already the current one.").format(lot.name),
+        }
