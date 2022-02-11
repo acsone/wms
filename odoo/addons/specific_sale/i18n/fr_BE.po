@@ -22,7 +22,7 @@ msgid "&amp;bull;"
 msgstr "&amp;bull;"
 
 #. module: specific_sale
-#: code:addons/specific_sale/models/sale.py:243
+#: code:addons/specific_sale/models/sale.py:231
 #, python-format
 msgid "A narcotic voucher is required for the data entry."
 msgstr "Bon de stupéfiant nécessaire avant l'encodage"
@@ -47,7 +47,7 @@ msgid "April"
 msgstr "Avril"
 
 #. module: specific_sale
-#: code:addons/specific_sale/models/sale.py:108
+#: code:addons/specific_sale/models/sale.py:96
 #, python-format
 msgid "Article transferred to dispensing pharmacy: %s"
 msgstr "Article transféré vers la pharmacie distributrice : %s"
@@ -93,16 +93,6 @@ msgid "Category III (psychotropic) Medicine Not Allowed"
 msgstr "Médicament vétérinaire psychotrope interdit"
 
 #. module: specific_sale
-#: selection:sale.order,sale_channel:0
-msgid "Chronovet"
-msgstr ""
-
-#. module: specific_sale
-#: selection:sale.order,sale_channel:0
-msgid "ClubVetShop"
-msgstr ""
-
-#. module: specific_sale
 #: model:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
 msgid "Confirmed order #"
 msgstr "Commande confirmée #"
@@ -141,11 +131,6 @@ msgstr "Exception"
 #: model:ir.model.fields,field_description:specific_sale.field_sale_order_line_older_lot_life_date
 msgid "Expiration date"
 msgstr "Date de péremption"
-
-#. module: specific_sale
-#: selection:sale.order,sale_channel:0
-msgid "Fax"
-msgstr "Fax"
 
 #. module: specific_sale
 #: selection:sale.report,month:0
@@ -236,19 +221,9 @@ msgid "Lines unavailable"
 msgstr "Lignes non disponibles"
 
 #. module: specific_sale
-#: selection:sale.order,sale_channel:0
-msgid "Logiweb"
-msgstr ""
-
-#. module: specific_sale
 #: model:ir.model.fields,field_description:specific_sale.field_sale_order_line_production_lot_ids
 msgid "Lots/Serial Numbers"
 msgstr "Numéros de lots/séries"
-
-#. module: specific_sale
-#: selection:sale.order,sale_channel:0
-msgid "Mail"
-msgstr "Email"
 
 #. module: specific_sale
 #: selection:sale.report,month:0
@@ -291,7 +266,7 @@ msgid "Narcotic Veterinary Medicine Not Allowed"
 msgstr "Médicament stupéfiant interdit"
 
 #. module: specific_sale
-#: code:addons/specific_sale/models/sale.py:242
+#: code:addons/specific_sale/models/sale.py:230
 #, python-format
 msgid "Narcotic voucher"
 msgstr "Bon de stupéfiant"
@@ -300,11 +275,6 @@ msgstr "Bon de stupéfiant"
 #: model:exception.rule,description:specific_sale.no_line_under_0
 msgid "Negative Sale Order Line Not Allowed"
 msgstr "Ligne de vente ne peut pas être négative"
-
-#. module: specific_sale
-#: selection:sale.order,sale_channel:0
-msgid "NewPharma"
-msgstr ""
 
 #. module: specific_sale
 #: model:exception.rule,name:specific_sale.no_medoc_veterinary_belge
@@ -432,18 +402,8 @@ msgid "Pas de ligne à zéro"
 msgstr "Pas de ligne à zéro"
 
 #. module: specific_sale
-#: selection:sale.order,sale_channel:0
-msgid "Phone"
-msgstr "Téléphone"
-
-#. module: specific_sale
 #: model:ir.model.fields,field_description:specific_sale.field_sale_order_line_picking_zone_id
 msgid "Picking zone"
-msgstr ""
-
-#. module: specific_sale
-#: selection:sale.order,sale_channel:0
-msgid "Place des Vétos"
 msgstr ""
 
 #. module: specific_sale
@@ -538,11 +498,6 @@ msgstr "BO"
 #: model:ir.actions.act_window,name:specific_sale.action_sale_lines_unavailable_list
 msgid "Sale Order Lines"
 msgstr "Lignes de ventes"
-
-#. module: specific_sale
-#: model:ir.model.fields,field_description:specific_sale.field_sale_order_sale_channel
-msgid "Sale channel"
-msgstr "Canal de vente"
 
 #. module: specific_sale
 #: model:ir.model.fields,field_description:specific_sale.field_delivery_carrier_sale_lines_count
@@ -665,17 +620,12 @@ msgid "Warning text"
 msgstr "Texte d'avertissement"
 
 #. module: specific_sale
-#: selection:sale.order,sale_channel:0
-msgid "Web"
-msgstr "Web"
-
-#. module: specific_sale
 #: model:exception.rule,description:specific_sale.warning_free_product
 msgid "Will include free product"
 msgstr "Inclus des produits gratuits"
 
 #. module: specific_sale
-#: code:addons/specific_sale/models/sale.py:140
+#: code:addons/specific_sale/models/sale.py:128
 #, python-format
 msgid "You cannot cancel sale order %s, it's already prepared"
 msgstr "Vous ne pouvez pas annuler la commande %s, elle est déjà préparée"
@@ -689,6 +639,21 @@ msgstr ""
 #: model:exception.rule,warning_text:specific_sale.warning_stupefiant_vet
 msgid "stupéfiant VET: written order, keep confirmation."
 msgstr "Commande de psychotrope par écrit, gardez la confirmation."
+
+#~ msgid "Fax"
+#~ msgstr "Fax"
+
+#~ msgid "Mail"
+#~ msgstr "Email"
+
+#~ msgid "Phone"
+#~ msgstr "Téléphone"
+
+#~ msgid "Sale channel"
+#~ msgstr "Canal de vente"
+
+#~ msgid "Web"
+#~ msgstr "Web"
 
 #~ msgid "Product Category"
 #~ msgstr "Catégorie d'article"
