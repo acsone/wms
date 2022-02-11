@@ -262,6 +262,7 @@ deploy-test-trigger:
     - job: build-image
   only:
     - /^1\.81\.\d+$/
+  when: manual
 
 deploy-review-trigger:
   extends: .deploy-trigger
