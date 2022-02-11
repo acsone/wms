@@ -32,3 +32,13 @@ class TestPricelistDiscountConstraint(TestPricelistDiscount):
     def test_cannot_assign_base_pricelist_as_discount(self):
         with self.assertRaises(ValidationError):
             self.partner.property_product_pricelist = self.pricelist_discount
+
+    def test_disable_constraints(self):
+        """After having disabled the constraint, we can do whatever."""
+        self.parameter_model.set_param("constrain_discount_pricelist", "0")
+        self.partner.discount_pricelist_id = self.pricelist_base  # would raise
+
+        self.partner.discount_pricelist_id = self.pricelist_discount
+        self.pricelist_discount.is_discount = False  # would raise
+
+        self.assertFalse(self.partner.discount_pricelist_id.is_discount)

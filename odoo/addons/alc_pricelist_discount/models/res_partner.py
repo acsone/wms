@@ -15,6 +15,8 @@ class ResPartner(models.Model):
 
     @api.constrains("property_product_pricelist", "discount_pricelist_id")
     def _constrain_discount_pricelists(self):
+        if not self.env["product.pricelist"].enforce_discount_constraint():
+            return
         if any(self.mapped("property_product_pricelist.is_discount")):
             msg = _("Some partners have a discount pricelist set as base pricelist.")
             raise ValidationError(msg)

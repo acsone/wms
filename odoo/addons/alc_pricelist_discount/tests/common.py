@@ -9,6 +9,8 @@ class TestPricelistDiscount(SavepointCase):
     def setUpClass(cls):
         super(TestPricelistDiscount, cls).setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
+        cls.parameter_model = cls.env["ir.config_parameter"]
+        cls.parameter_model.set_param("constrain_discount_pricelist", "1")
 
         cls.pricelist_model = cls.env["product.pricelist"]
         vals_pricelist_base = {"name": "Base", "is_discount": False}
