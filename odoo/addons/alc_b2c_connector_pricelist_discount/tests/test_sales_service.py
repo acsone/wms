@@ -5,6 +5,8 @@
 import random
 import string
 
+from odoo.tools import mute_logger
+
 from odoo.addons.alc_b2c_connector.tests.common import CommonCase
 
 ISO_DT_WITH_TZ = "2020-05-28T13:45:47+02:00"
@@ -12,6 +14,7 @@ ISO_DT_WITH_TZ = "2020-05-28T13:45:47+02:00"
 
 class TestSalesService(CommonCase):
     @classmethod
+    @mute_logger("odoo.addons.queue_job.models.base")
     def setUpClass(cls):
         super(TestSalesService, cls).setUpClass()
         # create a b2c_partner
