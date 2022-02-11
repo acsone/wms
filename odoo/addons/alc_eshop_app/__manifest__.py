@@ -11,6 +11,7 @@
     "website": "https://acsone.eu/",
     "depends": [
         "alc_eshop",
+        "alc_eshop_ads",
         "alc_eshop_product_promotion_subscription",
         "alc_eshop_sale_statistic",
         "alc_keycloak",
