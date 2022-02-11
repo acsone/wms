@@ -19,6 +19,13 @@ msgid "Create Pricelist Roles"
 msgstr ""
 
 #. module: alc_elasticsearch_security
+#: model:ir.model.fields,field_description:alc_elasticsearch_security.field_res_partner_discount_pricelist_role
+#: model:ir.model.fields,field_description:alc_elasticsearch_security.field_res_users_discount_pricelist_role
+#: model:ir.model.fields,field_description:alc_elasticsearch_security.field_shopinvader_partner_discount_pricelist_role
+msgid "Discount pricelist role"
+msgstr ""
+
+#. module: alc_elasticsearch_security
 #: model:ir.model,name:alc_elasticsearch_security.model_se_backend_elasticsearch
 msgid "Elasticsearch Backend"
 msgstr ""
@@ -29,19 +36,9 @@ msgid "Partner"
 msgstr ""
 
 #. module: alc_elasticsearch_security
-#: model:ir.model,name:alc_elasticsearch_security.model_product_pricelist
-msgid "Pricelist"
-msgstr ""
-
-#. module: alc_elasticsearch_security
 #: model:ir.model.fields,field_description:alc_elasticsearch_security.field_res_partner_pricelist_role
 #: model:ir.model.fields,field_description:alc_elasticsearch_security.field_res_users_pricelist_role
 #: model:ir.model.fields,field_description:alc_elasticsearch_security.field_shopinvader_partner_pricelist_role
 msgid "Pricelist role"
-msgstr ""
-
-#. module: alc_elasticsearch_security
-#: model:ir.model.fields,field_description:alc_elasticsearch_security.field_product_pricelist_role_name
-msgid "Role name"
 msgstr ""
 
