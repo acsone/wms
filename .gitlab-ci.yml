@@ -223,7 +223,7 @@ coverage-report:
 build-image:
   extends: .build-and-publish-image
   only:
-    - /^1\.81\.\d+$/
+    - /^1\.82\.\d+$/
 
 build-review-image:
   extends: .build-and-publish-image
@@ -261,7 +261,7 @@ deploy-test-trigger:
   needs:
     - job: build-image
   only:
-    - /^1\.81\.\d+$/
+    - /^1\.82\.\d+$/
 
 deploy-review-trigger:
   extends: .deploy-trigger
@@ -284,7 +284,7 @@ deploy-review-trigger:
   needs:
     - job: build-image
   only:
-    - /^1\.81\.\d+$/
+    - /^1\.82\.\d+$/
   when: manual
 
 deploy-uat-trigger:

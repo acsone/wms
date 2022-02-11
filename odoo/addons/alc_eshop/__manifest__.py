@@ -30,6 +30,7 @@
         "shopinvader_sale_profile",
         "shopinvader_wishlist",
         "shopinvader_search_engine_update",
+        "shopinvader_search_engine_export",
     ],
     "application": False,
     "data": [
