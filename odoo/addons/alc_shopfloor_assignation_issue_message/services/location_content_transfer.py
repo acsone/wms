@@ -16,7 +16,11 @@ class LocationContentTransfer(Component):
             products = unassigned_moves.mapped("product_id")
             product_templates = products.mapped("product_tmpl_id")
             quants = self.env["stock.quant"].search(
-                [("product_id", "in", products.ids), ("location_id", "=", location.id)]
+                [
+                    ("product_id", "in", products.ids),
+                    ("location_id", "=", location.id),
+                    ("reservation_id", "not in", new_moves.ids),
+                ]
             )
             reserved_moves = quants.mapped("reservation_id")
             blocking_pickings = reserved_moves.mapped("picking_id")
