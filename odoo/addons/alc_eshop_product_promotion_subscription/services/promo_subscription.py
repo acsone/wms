@@ -2,9 +2,6 @@
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _
-from odoo.exceptions import MissingError
-
 from odoo.addons.base_rest import restapi
 from odoo.addons.base_rest.components.service import to_int
 from odoo.addons.component.core import Component
@@ -24,17 +21,14 @@ class PromoSubscriptionService(Component):
     )
     def get(self, product_id):
         """Check if a subscription exists for the given product_id.
-
-        Return 404 if not found
         """
         record = self.env["alc.product.promotion.subscription"].search(
             [("product_id", "=", product_id), ("partner_id", "=", self.partner.id)]
         )
+        status = True
         if not record:
-            raise MissingError(
-                _("No subscription found for product id %s") % (product_id)
-            )
-        return self._convert_one_record(record)
+            status = False
+        return {"status": status}
 
     @restapi.method(
         [(["/"], "GET")],
@@ -46,7 +40,7 @@ class PromoSubscriptionService(Component):
         return self._paginate_search(**params)
 
     @restapi.method(
-        [(["/create"], "POST")],
+        [(["/"], "POST")],
         input_param=restapi.CerberusValidator("_create_input_schema"),
         output_param=restapi.CerberusValidator("_create_output_schema"),
     )
@@ -55,10 +49,10 @@ class PromoSubscriptionService(Component):
         """Subscribe the customer to the promotions for the given product
         id."""
         product = self.env["product.product"].browse(product_id)
-        record = self.env["alc.product.promotion.subscription"].subscribe(
+        self.env["alc.product.promotion.subscription"].subscribe(
             partner=self.partner, product=product
         )
-        return self._convert_one_record(record)
+        return {"status": True}
 
     @restapi.method([(["/<int:product_id>"], "DELETE")])
     def delete(self, product_id):
@@ -78,7 +72,7 @@ class PromoSubscriptionService(Component):
         Output validator for the search
         :return: dict
         """
-        return self._get_promo_schema()
+        return self._get_status_schema()
 
     def _search_input_schema(self):
         return {
@@ -122,11 +116,15 @@ class PromoSubscriptionService(Component):
         }
 
     def _create_output_schema(self):
-        return self._get_promo_schema()
+        return self._get_status_schema()
 
     ################
     # implementation
     ################
+
+    def _get_status_schema(self):
+        return {"status": {"ype": "boolean", "required": True, "nullable": False}}
+
     def _get_promo_schema(self):
         """
         Get details about invoice to return
@@ -134,7 +132,7 @@ class PromoSubscriptionService(Component):
         :return: dict
         """
         promo_schema = {
-            "product_id": {"type": "integer"},
+            "product_id": {"type": "integer", "required": True, "nullable": False},
         }
         return promo_schema
 
