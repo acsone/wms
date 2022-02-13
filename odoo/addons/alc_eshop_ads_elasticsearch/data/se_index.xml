@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo noupdate="1">
+
+    <record id="index_config_eshop_ads" model="se.index.config">
+        <field name="name">EShop Ads Index config</field>
+        <field name="body">{}</field>
+        <field name="body_str">
+            {
+            "settings" : {
+            "index" : {
+            "sort.field" : ["date_start"],
+            "sort.order" : ["asc"]
+            }
+            },
+            "mappings": {
+            "id": {
+            "type": "integer"
+            },
+            "date_start": {
+            "type": "date"
+            },
+            "date_end": {
+            "type": "date"
+            }
+            }
+            }
+        </field>
+    </record>
+
+</odoo>

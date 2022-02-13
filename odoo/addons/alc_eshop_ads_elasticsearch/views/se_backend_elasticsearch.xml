@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2022 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="se_backend_elasticsearch_form_view">
+        <field
+      name="name"
+    >se.backend.elasticsearch.form (in alc_eshop_ads_elasticsearch)</field>
+        <field name="model">se.backend.elasticsearch</field>
+        <field
+      name="inherit_id"
+      ref="connector_elasticsearch.se_backend_elasticsearch_form_view"
+    />
+        <field name="arch" type="xml">
+           <xpath expr="//sheet" position="inside">
+                <group name="eshop_ads" string="Ads">
+                    <button
+            name="synchronize_ads"
+            string="Synchronize ads"
+            class="oe_highlight"
+            type="object"
+          />
+                </group>
+           </xpath>
+        </field>
+    </record>
+
+
+
+</odoo>
