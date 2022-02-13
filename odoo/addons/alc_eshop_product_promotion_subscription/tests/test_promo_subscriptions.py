@@ -5,7 +5,6 @@ from contextlib import contextmanager
 
 import mock
 
-from odoo.exceptions import MissingError
 from odoo.tests.common import SavepointCase
 
 from odoo.addons.base_rest.controllers.main import _PseudoCollection
@@ -65,19 +64,19 @@ class TestPromoSubscriptions(SavepointCase, ComponentMixin):
             authenticated_partner_id=self.partner_1.id
         ) as service:
             result = service.create(product_id=self.product_1.id)
-            self.assertDictEqual({"product_id": self.product_1.id}, result)
+            self.assertDictEqual({"status": True}, result)
 
     def test_unlink(self):
         with self.promo_subscriptions_service(
             authenticated_partner_id=self.partner_1.id
         ) as service:
             result = service.create(product_id=self.product_1.id)
-            self.assertDictEqual({"product_id": self.product_1.id}, result)
+            self.assertDictEqual({"status": True}, result)
             result = service.get(self.product_1.id)
             self.assertTrue(result)
             service.delete(self.product_1.id)
-            with self.assertRaises(MissingError):
-                service.get(self.product_1.id)
+            result = service.get(self.product_1.id)
+            self.assertDictEqual({"status": False}, result)
 
     def test_acl(self):
         with self.promo_subscriptions_service(
@@ -90,7 +89,7 @@ class TestPromoSubscriptions(SavepointCase, ComponentMixin):
         with self.promo_subscriptions_service(
             authenticated_partner_id=self.partner_2.id
         ) as service:
-            with self.assertRaises(MissingError):
-                service.get(self.product_1.id)
+            result = service.get(self.product_1.id)
+            self.assertDictEqual({"status": False}, result)
             result = service.search()
             self.assertFalse(result["data"])
