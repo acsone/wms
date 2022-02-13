@@ -1,0 +1,87 @@
+# -*- coding: utf-8 -*-
+# Copyright 2022 ACSONE SA/NV
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+
+from odoo import api, fields, models
+
+
+class AlcEshopAds(models.Model):
+
+    _inherit = "alc.eshop.ads"
+
+    sync_state = fields.Selection(
+        [
+            ("new", "New"),
+            ("to_update", "To update"),
+            ("scheduled", "Scheduled"),
+            ("done", "Done"),
+        ],
+        default="new",
+        readonly=True,
+    )
+
+    se_index_ids = fields.Many2many(
+        comodel_name="se.index", compute="_compute_se_index"
+    )
+
+    json_doc = fields.Serialized(compute="_compute_json_doc")
+
+    def write(self, vals):
+        if "sync_state" not in vals:
+            vals["sync_state"] = "to_update"
+        return super(AlcEshopAds, self).write(vals)
+
+    @api.model
+    def _get_ads_to_sync(self):
+        today = fields.Date.today()
+        return self.search(
+            [
+                ("date_start", "<=", today),
+                ("date_end", ">=", today),
+                ("sync_state", "in", ["new", "to_update"]),
+            ]
+        )
+
+    def _compute_se_index(self):
+        model = self.env.ref("alc_eshop_ads.model_alc_eshop_ads")
+        indexes = self.env["se.index"].search([("model_id", "=", model.id)])
+        for rec in self:
+            rec.se_index_ids = indexes
+
+    def action_export_to_se(self):
+        self.se_index_ids.mapped("backend_id.specific_backend").export_ads(self)
+
+    def _compute_json_doc(self):
+        for rec in self:
+            doc = dict(
+                id=rec.id,
+                name=rec.name,
+                date_start=rec.date_start,
+                date_end=rec.date_end,
+                site_url=rec.site_url or "",
+                display_rotation=rec.images_display_rotation,
+                display_slot=rec.display_slot,
+            )
+            if rec.file_id:
+                doc.update(
+                    {
+                        "file": {
+                            "url": rec.file_id.url,
+                            "name": rec.name,
+                            "mimetype": rec.mimetype,
+                        }
+                    }
+                )
+            images = []
+            for image_rel in rec.image_ids:
+                image = image_rel.image_id
+                images.append(
+                    {
+                        "name": image.name,
+                        "url": image.url,
+                        "sequence": image_rel.sequence,
+                        "display_time": image_rel.display_time,
+                    }
+                )
+            doc["images"] = images
+            rec.json_doc = doc

@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2022 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="alc_eshop_ads_form_view">
+        <field name="name">alc.eshop.ads.form (in
+            alc_eshop_ads)
+        </field>
+        <field name="model">alc.eshop.ads</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box" />
+                    <group>
+                        <group>
+                            <field name="name" />
+                            <field name="file_id" />
+                            <field name="site_url" />
+                            <field name="images_display_rotation" />
+                        </group>
+                        <group>
+                            <field name="date_start" />
+                            <field name="date_end" />
+                            <field name="display_slot" />
+                            <field name="lang_id" />
+                        </group>
+                    </group>
+                    <group name="images" title="Images">
+                        <field name="image_ids" mode="kanban" widget="image_handle" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="alc_eshop_ads_kanban_view">
+       <field name="name">alc.eshop.ads.kanban (in
+            alc_eshop_ads)
+        </field>
+        <field name="model">alc.eshop.ads</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="image_small_url" widget="image_url" class="oe_avatar" />
+                <field name="date_start" />
+                <field name="date_end" />
+                <field name="display_slot" />
+                <field name="lang_id" />
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click">
+                            <div class="o_kanban_image">
+                                <img t-att-src="record.image_small_url.value" />
+                            </div>
+                            <div class="oe_kanban_details">
+                                <strong>
+                                    <field name="name" />
+                                </strong>
+                                <ul>
+                                    <li>From
+                                        <field name="date_start" /> to <field
+                      name="date_end"
+                    />
+                                    </li>
+                                    <li>Slot:
+                                        <field name="display_slot" />
+                                    </li>
+                                    <li>Lang:
+                                        <field name="lang_id" />
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="alc_eshop_ads_search_view">
+        <field name="name">alc.eshop.ads.search (in
+            alc_eshop_ads)
+        </field>
+        <field name="model">alc.eshop.ads</field>
+        <field name="arch" type="xml">
+            <search>
+                <filter
+          string="Past"
+          name="past"
+          domain="[('date_end','&lt;', datetime.datetime.combine(context_today(), datetime.time(0,0,0)))]"
+          help="Past ads from today"
+        />
+                <filter
+          string="Current"
+          name="current"
+          domain="['&amp;', ('date_start','&lt;=', datetime.datetime.combine(context_today(), datetime.time(0,0,0))), ('date_end','&gt;=', datetime.datetime.combine(context_today(), datetime.time(0,0,0)))]"
+          help="Current ads"
+        />
+                <filter
+          string="Upcoming"
+          name="upcoming"
+          domain="[('date_start','&gt;', datetime.datetime.combine(context_today(), datetime.time(0,0,0)))]"
+          help="Upcoming ads from today"
+        />
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="alc_eshop_ads_tree_view">
+        <field name="name">alc.eshop.ads.tree (in
+            alc_eshop_ads)
+        </field>
+        <field name="model">alc.eshop.ads</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="date_start" />
+                <field name="date_end" />
+                <field name="display_slot" />
+                <field name="lang_id" />
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="alc_eshop_ads_act_window">
+        <field name="name">EShop Ads</field>
+        <field name="res_model">alc.eshop.ads</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{"search_default_upcoming":1,
+            "search_default_current":1}
+        </field>
+    </record>
+
+    <record model="ir.ui.menu" id="alc_eshop_ads_menu">
+        <field name="name">EShop Ads</field>
+        <field name="parent_id" ref="sales_team.menu_sale_config" />
+        <field name="action" ref="alc_eshop_ads_act_window" />
+        <field name="sequence" eval="16" />
+    </record>
+
+</odoo>

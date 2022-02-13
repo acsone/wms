@@ -15,6 +15,7 @@
         "elasticsearch_security",
         "alc_partner_type",
         "pricelist_role_name",
+        "alc_eshop_ads_elasticsearch",
     ],
     "application": False,
     "data": [
