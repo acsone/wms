@@ -2,5 +2,5 @@
 
 - [ ] fixes #
 
-/label ~"needs review" /assign @laurent.mignon /milestone %1.80 /target_branch
-alcyon_iteration_1.80
+/label ~"needs review" /assign @laurent.mignon /milestone %1.81 /target_branch
+alcyon_iteration_1.81
