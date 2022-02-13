@@ -1,6 +1,5 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* alc_eshop_product_promotion_subscription
 #
 msgid ""
 msgstr ""
@@ -12,10 +11,4 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
-
-#. module: alc_eshop_product_promotion_subscription
-#: code:addons/alc_eshop_product_promotion_subscription/services/promo_subscription.py:35
-#, python-format
-msgid "No subscription found for product id %s"
-msgstr ""
 
