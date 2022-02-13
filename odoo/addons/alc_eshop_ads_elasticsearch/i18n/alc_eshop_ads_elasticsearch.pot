@@ -59,6 +59,11 @@ msgid "Scheduled"
 msgstr ""
 
 #. module: alc_eshop_ads_elasticsearch
+#: model:ir.model,name:alc_eshop_ads_elasticsearch.model_se_index
+msgid "Se Index"
+msgstr ""
+
+#. module: alc_eshop_ads_elasticsearch
 #: model:ir.model.fields,field_description:alc_eshop_ads_elasticsearch.field_alc_eshop_ads_se_index_ids
 msgid "Se index ids"
 msgstr ""
