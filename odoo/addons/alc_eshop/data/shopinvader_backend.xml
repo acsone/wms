@@ -3,7 +3,7 @@
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo noupdate="0">
 <!--TODO: set to noupdate-->
-    <record id="backend" model="shopinvader.backend" forcecreate="True">
+    <record id="backend" model="shopinvader.backend">
         <field name="name">Alcyon Store</field>
         <field name="pricelist_id" eval="False" />
         <field name="use_sale_profile" eval="True" />
