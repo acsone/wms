@@ -20,6 +20,10 @@ class AlcEshopAds(models.Model):
         readonly=True,
     )
 
+    # technical field. Never used. Used only to avoid but with methods searching
+    # from index to bindings
+    index_id = fields.Many2one("se.index", string="Index",)
+
     se_index_ids = fields.Many2many(
         comodel_name="se.index", compute="_compute_se_index"
     )
