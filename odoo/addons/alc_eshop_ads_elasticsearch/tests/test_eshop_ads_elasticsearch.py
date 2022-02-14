@@ -1,14 +1,12 @@
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-import datetime
-
 import mock
 
-from odoo.addons.component.tests.common import SavepointComponentCase
+from odoo.addons.alc_eshop_ads.tests import common
 
 
-class TestEShopAdsElasticsearch(SavepointComponentCase):
+class TestEShopAdsElasticsearch(common.TestEShopAdsCommon):
     @classmethod
     def setUpClass(cls):
         super(TestEShopAdsElasticsearch, cls).setUpClass()
@@ -45,6 +43,7 @@ class TestEShopAdsElasticsearch(SavepointComponentCase):
                 date_start=date_start,
                 date_end=date_end,
                 display_slot="top_left",
+                image=cls.image,
             )
         )
         cls.adv_bottom_left = cls.EShopAds.create(
@@ -53,6 +52,7 @@ class TestEShopAdsElasticsearch(SavepointComponentCase):
                 date_start=date_start,
                 date_end=date_end,
                 display_slot="bottom_left",
+                image=cls.image,
             )
         )
         cls.adv_top_right_fr = cls.EShopAds.create(
@@ -62,6 +62,7 @@ class TestEShopAdsElasticsearch(SavepointComponentCase):
                 date_end=date_end,
                 display_slot="top_right",
                 lang_id=cls.env.ref("base.lang_fr_BE").id,
+                image=cls.image,
             )
         )
 
@@ -72,13 +73,10 @@ class TestEShopAdsElasticsearch(SavepointComponentCase):
                 date_end=date_end,
                 display_slot="top_right",
                 lang_id=cls.env.ref("base.lang_en_GB").id,
+                image=cls.image,
             )
         )
         cls.all_ads = cls.EShopAds.search([])
-
-    @classmethod
-    def _get_date(cls, day_offset=0):
-        return datetime.date.today() + datetime.timedelta(days=day_offset)
 
     def test_export_only_lang(self):
         """Test that adds are exported according to the index lang"""

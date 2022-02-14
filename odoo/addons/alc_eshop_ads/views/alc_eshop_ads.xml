@@ -14,23 +14,26 @@
                 </header>
                 <sheet>
                     <div class="oe_button_box" name="button_box" />
+                     <field name="image_url" widget="image_url" />
+                    <div class="oe_title">
+                        <label class="oe_edit_only" for="name" string="Name" />
+                        <h1><field name="name" placeholder="nameame" /></h1>
+                    </div>
                     <group>
                         <group>
-                            <field name="name" />
+                            <field name="image" filename="image_filename" />
+                            <field name="image_filename" invisible="1" />
                             <field name="file" filename="filename" />
                             <field name="filename" invisible="1" />
                             <field name="site_url" />
-                            <field name="images_display_rotation" />
+                            <field name="lang_id" />
                         </group>
                         <group>
                             <field name="date_start" />
                             <field name="date_end" />
                             <field name="display_slot" />
-                            <field name="lang_id" />
+                            <field name="display_time" />
                         </group>
-                    </group>
-                    <group name="images" title="Images">
-                        <field name="image_ids" mode="kanban" widget="image_handle" />
                     </group>
                 </sheet>
             </form>
@@ -44,7 +47,7 @@
         <field name="model">alc.eshop.ads</field>
         <field name="arch" type="xml">
             <kanban>
-                <field name="image_small_url" widget="image_url" class="oe_avatar" />
+                <field name="image_url" widget="image_url" />
                 <field name="date_start" />
                 <field name="date_end" />
                 <field name="display_slot" />
@@ -53,7 +56,7 @@
                     <t t-name="kanban-box">
                         <div class="oe_kanban_global_click">
                             <div class="o_kanban_image">
-                                <img t-att-src="record.image_small_url.value" />
+                                <img t-att-src="record.image_url.value" />
                             </div>
                             <div class="oe_kanban_details">
                                 <strong>

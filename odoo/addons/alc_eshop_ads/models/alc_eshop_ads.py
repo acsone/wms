@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-from psycopg2.extensions import AsIs
 
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
@@ -14,20 +13,21 @@ class AlcEshopAds(models.Model):
 
     name = fields.Char(required=True)
 
-    image_ids = fields.One2many(
-        string="Images", comodel_name="alc.eshop.ads.image", inverse_name="ads_id",
+    image_id = fields.Many2one(string="storage image", comodel_name="storage.image",)
+    image = fields.Binary(
+        compute="_compute_image", inverse="_inverse_image", required=True
     )
-    image_small_url = fields.Char(
-        related="image_ids.image_id.image_small_url", store=True
-    )
+    image_filename = fields.Char(related="image_id.name")
+    image_url = fields.Char(related="image_id.url")
+    image_small_url = fields.Char(related="image_id.image_small_url")
+    image_medium_url = fields.Char(related="image_id.image_medium_url")
+
     file_id = fields.Many2one(
-        string="storage dile",
+        string="storage file",
         comodel_name="storage.file",
         help="If specified, the file will be downloaded by the customer on "
         "click on the ads banner into the website.",
-        ondelete="cascade",
     )
-
     file = fields.Binary(compute="_compute_file", inverse="_inverse_file")
     filename = fields.Char(related="file_id.name")
 
@@ -35,11 +35,6 @@ class AlcEshopAds(models.Model):
         string="Site url",
         help="If specified, the customer will be redirected to this url click "
         "on the ads banner into the website.",
-    )
-    images_display_rotation = fields.Selection(
-        selection=[("based_on_sequence", "Based on sequence"), ("random", "Random")],
-        required=True,
-        default="based_on_sequence",
     )
     date_start = fields.Date(required=True)
     date_end = fields.Date(required=True)
@@ -58,6 +53,7 @@ class AlcEshopAds(models.Model):
         help="If set, the ads will be only visible into the specified "
         "lang on the website",
     )
+    display_time = fields.Integer(required=True, default=-1)
 
     @api.constrains("site_url", "file_id")
     def _check_site_url_or_file_id(self):
@@ -70,8 +66,8 @@ class AlcEshopAds(models.Model):
                     )
                 )
 
-    @api.constrains("date_start", "date_end", "display_slot", "lang_id")
-    def _validate_slot(self):
+    @api.constrains("date_start", "date_end")
+    def _validate_dates(self):
         for this in self:
             start = fields.Date.from_string(this.date_start)
             end = fields.Date.from_string(this.date_end)
@@ -80,44 +76,31 @@ class AlcEshopAds(models.Model):
                     _("The defined period on %s is not a valid (%s > %s)")
                     % (this.name, this.date_start, this.date_end)
                 )
-            # here we use a plain SQL query to benefit of the daterange
-            # function available in PostgresSQL
-            # (http://www.postgresql.org/docs/current/static/rangetypes.html)
-            SQL = """
-                    SELECT
-                        id
-                    FROM
-                        %(table)s dt
-                    WHERE
-                        DATERANGE(dt.date_start, dt.date_end, '[]') &&
-                            DATERANGE(%(date_start)s::date, %(date_end)s::date, '[]')
-                        AND dt.display_slot=%(display_slot)s
-                        AND id != %(id)s"""
-            if this.lang_id:
-                SQL += " AND (dt.lang_id = %(lang_id)s OR dt.lang_id is null)"
-            self.env.cr.execute(
-                SQL,
-                dict(
-                    table=AsIs(self._table),
-                    date_start=this.date_start,
-                    date_end=this.date_end,
-                    lang_id=this.lang_id.id,
-                    display_slot=this.display_slot,
-                    id=this.id,
-                ),
-            )
-            res = self.env.cr.fetchall()
-            if res:
-                dt = self.browse(res[0][0])
-                raise ValidationError(
-                    _("%s overlaps %s on slot %s")
-                    % (this.name, dt.name, this.get_display_slot_label())
-                )
 
     def get_display_slot_label(self):
         return self._fields.get("display_slot").convert_to_export(
             self.display_slot, self
         )
+
+    @api.depends("file_id")
+    def _compute_image(self):
+        for rec in self:
+            rec.image = rec.image_id.data
+
+    def _inverse_image(self):
+        for rec in self:
+            new_image = rec.image
+            if rec.image_id:
+                rec.image_id.unlink()
+            if not new_image:
+                continue
+            rec.image_id = rec.image_id.create(
+                {
+                    "backend_id": rec._get_default_backend_id(),
+                    "name": rec.image_filename or rec.name,
+                    "data": new_image,
+                }
+            )
 
     @api.depends("file_id")
     def _compute_file(self):
@@ -126,28 +109,18 @@ class AlcEshopAds(models.Model):
 
     def _inverse_file(self):
         for rec in self:
-            if not rec.file and rec.file_id:
+            new_file = rec.file
+            if rec.file_id:
                 rec.file_id.unlink()
+            if not new_file:
                 continue
-            if rec.file:
-                if rec.file_id:
-                    rec.file_id.data = rec.file
-                    continue
-                rec.file_id = rec.file_id.create(
-                    {
-                        "backend_id": rec._get_default_backend_id(),
-                        "name": rec.filename,
-                        "data": rec.file,
-                    }
-                )
-
-    def _get_or_create_file_id(self):
-        self.ensure_one()
-        if not self.file_id:
-            self.file_id = self.file_id.create(
-                {"backend_id": self._get_default_backend_id(), "name": self.name}
+            rec.file_id = rec.file_id.create(
+                {
+                    "backend_id": rec._get_default_backend_id(),
+                    "name": rec.filename or rec.name,
+                    "data": new_file,
+                }
             )
-        return self.file_id
 
     def _get_default_backend_id(self):
         return self.env["storage.backend"]._get_backend_id_from_param(
@@ -164,3 +137,8 @@ class AlcEshopAds(models.Model):
                 qweb_date.value_to_html(rec.date_start, rec),
                 qweb_date.value_to_html(rec.date_end, rec),
             )
+
+    def unlink(self):
+        self.mapped("image_id").unlink()
+        self.mapped("file_id").unlink()
+        return super(AlcEshopAds, self).unlink()

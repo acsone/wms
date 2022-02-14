@@ -63,8 +63,10 @@ class AlcEshopAds(models.Model):
                 date_start=rec.date_start,
                 date_end=rec.date_end,
                 site_url=rec.site_url or "",
-                display_rotation=rec.images_display_rotation,
+                display_time=rec.display_time,
                 display_slot=rec.display_slot,
+                file=None,
+                image=None,
             )
             if rec.file_id:
                 doc.update(
@@ -76,16 +78,8 @@ class AlcEshopAds(models.Model):
                         }
                     }
                 )
-            images = []
-            for image_rel in rec.image_ids:
-                image = image_rel.image_id
-                images.append(
-                    {
-                        "name": image.name,
-                        "url": image.url,
-                        "sequence": image_rel.sequence,
-                        "display_time": image_rel.display_time,
-                    }
+            if rec.image_id:
+                doc.update(
+                    {"image": {"name": rec.image_id.name, "url": rec.image_id.url}}
                 )
-            doc["images"] = images
             rec.json_doc = doc

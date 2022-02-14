@@ -16,8 +16,6 @@
         "security/storage_backend.xml",
         "security/storage_file.xml",
         "security/storage_image.xml",
-        "security/alc_eshop_ads_image.xml",
-        "views/alc_eshop_ads_image.xml",
         "security/alc_eshop_ads.xml",
         "views/alc_eshop_ads.xml",
     ],
