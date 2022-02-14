@@ -125,3 +125,9 @@ class ChangePackageLot(Component):
         self, pack_operation, package, response_ok_func, response_error_func
     ):
         raise SystemError("Change packge not implemented")
+
+    def check_new_lot(self, operation, new_lot, old_lot, response_error_func):
+        if new_lot == old_lot:
+            message = self.msg_store.same_lot_selected(new_lot)
+            return response_error_func(operation, message=message)
+        return False

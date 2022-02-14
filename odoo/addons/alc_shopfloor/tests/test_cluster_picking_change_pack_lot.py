@@ -127,6 +127,30 @@ class ClusterPickingChangePackLotCase(ClusterPickingCommonCase):
         )
         self.assertRecordValues(operation.pack_lot_ids, [{"lot_id": new_lot.id}])
 
+    def test_change_pack_lot_with_same_lot_ok(self):
+        self.product_a.tracking = "lot"
+        initial_lot = self._create_lot(self.product_a)
+        self._update_qty_in_location(self.shelf1, self.product_a, 10, lot=initial_lot)
+        self._simulate_batch_selected(self.batch, fill_stock=False)
+        operation = self.batch.picking_ids.pack_operation_ids
+        new_lot = initial_lot
+
+        batch = operation.picking_id.batch_id
+        params = {
+            "picking_batch_id": batch.id,
+            "operation_id": operation.id,
+            "barcode": new_lot.name,
+            "lot_id": initial_lot.id,
+        }
+        response = self.service.dispatch("change_pack_lot", params=params,)
+        message = self.msg_store.same_lot_selected(new_lot)
+        self.assert_response(
+            response,
+            message=message,
+            next_state="change_pack_lot",
+            data=self._operation_data(operation),
+        )
+
     def test_change_pack_lot_change_lot_existing_lot_01(self):
         """
         Data:

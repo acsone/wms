@@ -1127,3 +1127,9 @@ msgstr "{} {} mis dans {}"
 
 #~ msgid "Rangement Medicaments"
 #~ msgstr "Rangement Medicaments"
+
+#. module: alc_shopfloor
+#: code:addons/alc_shopfloor/actions/message.py:544
+#, python-format
+msgid "Lot {} is already the current one."
+msgstr "Le lot {} est déjà le lot actuel."

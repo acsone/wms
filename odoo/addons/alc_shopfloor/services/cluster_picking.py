@@ -937,6 +937,14 @@ class ClusterPicking(Component):
         lot = search.lot_from_scan(barcode)
         if lot and lot_id:
             old_lot = self.env["stock.production.lot"].browse(lot_id)
+            check_lot = change_package_lot.check_new_lot(
+                operation=operation,
+                new_lot=lot,
+                old_lot=old_lot,
+                response_error_func=response_error_func,
+            )
+            if check_lot:
+                return check_lot
             response = change_package_lot.change_lot(
                 operation,
                 previous_lot=old_lot,

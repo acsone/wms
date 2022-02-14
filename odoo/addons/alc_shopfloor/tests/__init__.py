@@ -3,7 +3,7 @@ from . import test_actions_data_detail
 from . import test_actions_search
 from . import test_cluster_picking_batch
 
-# from . import test_cluster_picking_change_pack_lot
+from . import test_cluster_picking_change_pack_lot
 
 from . import test_cluster_picking_is_zero
 from . import test_cluster_picking_scan_destination
