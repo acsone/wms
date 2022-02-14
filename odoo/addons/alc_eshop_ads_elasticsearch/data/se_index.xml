@@ -8,23 +8,25 @@
         <field name="body">{}</field>
         <field name="body_str">
             {
-            "settings" : {
-            "index" : {
-            "sort.field" : ["date_start"],
-            "sort.order" : ["asc"]
-            }
-            },
-            "mappings": {
-            "id": {
-            "type": "integer"
-            },
-            "date_start": {
-            "type": "date"
-            },
-            "date_end": {
-            "type": "date"
-            }
-            }
+                "settings" : {
+                    "index" : {
+                        "sort.field" : ["date_start"],
+                        "sort.order" : ["asc"]
+                    }
+                },
+                "properties": {
+                    "mappings": {
+                        "id": {
+                        "type": "integer"
+                        },
+                            "date_start": {
+                            "type": "date"
+                        },
+                        "date_end": {
+                            "type": "date"
+                        }
+                    }
+                }
             }
         </field>
     </record>
