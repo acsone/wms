@@ -21,12 +21,16 @@ class AlcEshopAds(models.Model):
         related="image_ids.image_id.image_small_url", store=True
     )
     file_id = fields.Many2one(
-        string="File",
+        string="storage dile",
         comodel_name="storage.file",
         help="If specified, the file will be downloaded by the customer on "
         "click on the ads banner into the website.",
         ondelete="cascade",
     )
+
+    file = fields.Binary(compute="_compute_file", inverse="_inverse_file")
+    filename = fields.Char(related="file_id.name")
+
     site_url = fields.Char(
         string="Site url",
         help="If specified, the customer will be redirected to this url click "
@@ -114,3 +118,49 @@ class AlcEshopAds(models.Model):
         return self._fields.get("display_slot").convert_to_export(
             self.display_slot, self
         )
+
+    @api.depends("file_id")
+    def _compute_file(self):
+        for rec in self:
+            rec.file = rec.file_id.data
+
+    def _inverse_file(self):
+        for rec in self:
+            if not rec.file and rec.file_id:
+                rec.file_id.unlink()
+                continue
+            if rec.file:
+                if rec.file_id:
+                    rec.file_id.data = rec.file
+                    continue
+                rec.file_id = rec.file_id.create(
+                    {
+                        "backend_id": rec._get_default_backend_id(),
+                        "name": rec.filename,
+                        "data": rec.file,
+                    }
+                )
+
+    def _get_or_create_file_id(self):
+        self.ensure_one()
+        if not self.file_id:
+            self.file_id = self.file_id.create(
+                {"backend_id": self._get_default_backend_id(), "name": self.name}
+            )
+        return self.file_id
+
+    def _get_default_backend_id(self):
+        return self.env["storage.backend"]._get_backend_id_from_param(
+            self.env, "storage.image.backend_id"
+        )
+
+    @api.depends("name", "date_start", "date_end", "display_slot")
+    def _compute_display_name(self):
+        qweb_date = self.env["ir.qweb.field.date"]
+        for rec in self:
+            rec.display_name = u"{} - {} ({} -> {})".format(
+                rec.name,
+                rec.get_display_slot_label(),
+                qweb_date.value_to_html(rec.date_start, rec),
+                qweb_date.value_to_html(rec.date_end, rec),
+            )

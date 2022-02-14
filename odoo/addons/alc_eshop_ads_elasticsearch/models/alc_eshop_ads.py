@@ -71,8 +71,8 @@ class AlcEshopAds(models.Model):
                     {
                         "file": {
                             "url": rec.file_id.url,
-                            "name": rec.name,
-                            "mimetype": rec.mimetype,
+                            "name": rec.file_id.name,
+                            "mimetype": rec.file_id.mimetype,
                         }
                     }
                 )
