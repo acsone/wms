@@ -11,7 +11,7 @@
     "website": "https://acsone.eu/",
     "depends": ["shopinvader_search_engine"],
     "application": False,
-    "data": [],
+    "data": ["data/ir_cron.xml"],
     "demo": [],
     "installable": True,
 }
