@@ -24,6 +24,12 @@ msgid "Ads"
 msgstr ""
 
 #. module: alc_eshop_ads_elasticsearch
+#: code:addons/alc_eshop_ads_elasticsearch/models/se_index.py:27
+#, python-format
+msgid "Batch export EShop Ads"
+msgstr ""
+
+#. module: alc_eshop_ads_elasticsearch
 #: selection:alc.eshop.ads,sync_state:0
 msgid "Done"
 msgstr ""
@@ -41,6 +47,11 @@ msgstr ""
 #. module: alc_eshop_ads_elasticsearch
 #: model:ir.actions.server,name:alc_eshop_ads_elasticsearch.action_eshop_manual_export
 msgid "Force EShop Export"
+msgstr ""
+
+#. module: alc_eshop_ads_elasticsearch
+#: model:ir.model.fields,field_description:alc_eshop_ads_elasticsearch.field_alc_eshop_ads_index_id
+msgid "Index"
 msgstr ""
 
 #. module: alc_eshop_ads_elasticsearch
