@@ -53,7 +53,7 @@ class AlcEshopAds(models.Model):
             rec.se_index_ids = indexes
 
     def action_export_to_se(self):
-        self.se_index_ids.mapped("backend_id.specific_backend").export_ads(self)
+        self.sudo().se_index_ids.mapped("backend_id.specific_backend").export_ads(self)
 
     def _compute_json_doc(self):
         for rec in self:
