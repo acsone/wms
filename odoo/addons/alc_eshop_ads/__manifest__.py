@@ -13,6 +13,7 @@
     "depends": ["storage_image", "sales_team"],
     "data": [
         "security/res_groups.xml",
+        "security/storage_backend.xml",
         "security/storage_file.xml",
         "security/storage_image.xml",
         "security/alc_eshop_ads_image.xml",
