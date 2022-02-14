@@ -94,7 +94,7 @@ class ProductPricelist(models.Model):
             "WHERE (item.product_tmpl_id IS NULL OR item.product_tmpl_id = %(tmpl_id)s)"
             "AND (item.product_id IS NULL OR item.product_id = %(prod_id)s)"
             "AND (item.categ_id IS NULL OR item.categ_id = %(categ_id)s) "
-            "AND (item.price_category_id IS NULL" + price_category_subquery + ") "
+            "AND (item.price_category_id IS NULL " + price_category_subquery + ") "
             "AND (item.pricelist_id = %(self_id)s) "
             "AND (item.date_start IS NULL OR item.date_start<=%(date)s) "
             "AND (item.date_end IS NULL OR item.date_end>=%(date)s)"
