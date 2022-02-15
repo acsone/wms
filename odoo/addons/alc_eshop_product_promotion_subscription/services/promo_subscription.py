@@ -123,7 +123,7 @@ class PromoSubscriptionService(Component):
     ################
 
     def _get_status_schema(self):
-        return {"status": {"ype": "boolean", "required": True, "nullable": False}}
+        return {"status": {"type": "boolean", "required": True, "nullable": False}}
 
     def _get_promo_schema(self):
         """
