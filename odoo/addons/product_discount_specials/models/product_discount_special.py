@@ -5,17 +5,7 @@
 
 from dateutil.relativedelta import relativedelta
 
-from odoo import fields, models
-
-
-def default_today(recordset):
-    return recordset._context.get("date", fields.Date.context_today(recordset))
-
-
-def default_in_one_month(recordset):
-    today_str = default_today(recordset)
-    today = fields.Date.from_string(today_str)
-    return fields.Date.to_string(today + relativedelta(months=1))
+from odoo import api, fields, models
 
 
 class ProductDiscountSpecial(models.Model):
@@ -23,7 +13,21 @@ class ProductDiscountSpecial(models.Model):
 
     sequence = fields.Integer("Sequence")
 
-    date_start = fields.Date("Start Date", required=True, default=default_today)
-    date_end = fields.Date("End Date", required=True, default=default_in_one_month)
+    date_start = fields.Date(
+        "Start Date", required=True, default=lambda a: a.default_today()
+    )
+    date_end = fields.Date(
+        "End Date", required=True, default=lambda a: a.default_in_one_month()
+    )
 
     product_template_id = fields.Many2one("product.template", required=True)
+
+    @api.model
+    def default_today(self):
+        return self.env.context.get("date", fields.Date.context_today(self))
+
+    @api.model
+    def default_in_one_month(self):
+        today_str = self.default_today()
+        today = fields.Date.from_string(today_str)
+        return fields.Date.to_string(today + relativedelta(months=1))
