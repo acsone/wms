@@ -1,36 +1,42 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <record id="product_discount_special_search_view" model="ir.ui.view">
-        <field name="name">product.discount.special.search (in product_discount_specials)</field>
+        <field
+      name="name"
+    >product.discount.special.search (in product_discount_specials)
+        </field>
         <field name="model">product.discount.special</field>
         <field name="arch" type="xml">
             <search>
-                <field name="date_start"/>
-                <field name="date_end"/>
-                <field name="product_template_id"/>
+                <field name="date_start" />
+                <field name="date_end" />
+                <field name="product_template_id" />
                 <filter
-                        string="Past"
-                        name="past"
-                        domain="[('date_end','&lt;', datetime.datetime.combine(context_today(), datetime.time(0,0,0)))]"
-                        help="Past ads from today"
-                />
+          string="Past"
+          name="past"
+          domain="[('date_end','&lt;', datetime.datetime.combine(context_today(), datetime.time(0,0,0)))]"
+          help="Past ads from today"
+        />
                 <filter
-                        string="Current"
-                        name="current"
-                        domain="['&amp;', ('date_start','&lt;=', datetime.datetime.combine(context_today(), datetime.time(0,0,0))), ('date_end','&gt;=', datetime.datetime.combine(context_today(), datetime.time(0,0,0)))]"
-                        help="Current ads"
-                />
+          string="Current"
+          name="current"
+          domain="['&amp;', ('date_start','&lt;=', datetime.datetime.combine(context_today(), datetime.time(0,0,0))), ('date_end','&gt;=', datetime.datetime.combine(context_today(), datetime.time(0,0,0)))]"
+          help="Current ads"
+        />
                 <filter
-                        string="Upcoming"
-                        name="upcoming"
-                        domain="[('date_start','&gt;', datetime.datetime.combine(context_today(), datetime.time(0,0,0)))]"
-                        help="Upcoming ads from today"
-                />
+          string="Upcoming"
+          name="upcoming"
+          domain="[('date_start','&gt;', datetime.datetime.combine(context_today(), datetime.time(0,0,0)))]"
+          help="Upcoming ads from today"
+        />
             </search>
         </field>
     </record>
+
     <record id="product_discount_special_tree_view" model="ir.ui.view">
-        <field name="name">product.discount.special.tree</field>
+        <field name="name">product.discount.special.tree (in
+            product_discount_specials)
+        </field>
         <field name="model">product.discount.special</field>
         <field name="arch" type="xml">
             <tree>
@@ -41,20 +47,28 @@
             </tree>
         </field>
     </record>
+
     <record id="product_discount_special_form_view" model="ir.ui.view">
-        <field name="name">product.discount.special.form</field>
+        <field name="name">product.discount.special.form (in
+            product_discount_specials)
+        </field>
         <field name="model">product.discount.special</field>
         <field name="arch" type="xml">
             <form>
-                <group>
-                    <field name="sequence" widget="handle" />
-                    <field name="date_start" />
-                    <field name="date_end" />
-                    <field name="product_template_id" />
-                </group>
+                <header>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="sequence" />
+                        <field name="date_start" />
+                        <field name="date_end" />
+                        <field name="product_template_id" />
+                    </group>
+                </sheet>
             </form>
         </field>
     </record>
+
     <record model="ir.actions.act_window" id="product_discount_special_act_window">
         <field name="name">Discount Specials</field>
         <field name="res_model">product.discount.special</field>
@@ -64,10 +78,10 @@
         <field name="context">{"search_default_upcoming":1,
             "search_default_current":1}
         </field>
-        <field name="search_view_id"
-               ref="product_discount_special_search_view"/>
-        <field name="view_id" ref="product_discount_special_tree_view"/>
+        <field name="search_view_id" ref="product_discount_special_search_view" />
+        <field name="view_id" ref="product_discount_special_tree_view" />
     </record>
+
     <menuitem
     id="product_discount_special_menu"
     name="Discount Specials"
