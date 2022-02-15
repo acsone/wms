@@ -12,7 +12,7 @@
     "depends": ["sale"],  # security_group above product
     "application": False,
     "data": [
-        "security/ir.model.access.csv",
+        "security/product_discount_special.xml",
         "views/product_discount_special.xml",
         "views/product_template.xml",
     ],
