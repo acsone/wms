@@ -24,6 +24,16 @@ msgid "Created on"
 msgstr ""
 
 #. module: product_discount_specials
+#: model:ir.ui.view,arch_db:product_discount_specials.product_discount_special_search_view
+msgid "Current"
+msgstr ""
+
+#. module: product_discount_specials
+#: model:ir.ui.view,arch_db:product_discount_specials.product_discount_special_search_view
+msgid "Current ads"
+msgstr ""
+
+#. module: product_discount_specials
 #: model:ir.actions.act_window,name:product_discount_specials.product_discount_special_act_window
 #: model:ir.ui.menu,name:product_discount_specials.product_discount_special_menu
 #: model:ir.ui.view,arch_db:product_discount_specials.product_template_form_view_discount_specials
@@ -61,6 +71,16 @@ msgid "Last Updated on"
 msgstr ""
 
 #. module: product_discount_specials
+#: model:ir.ui.view,arch_db:product_discount_specials.product_discount_special_search_view
+msgid "Past"
+msgstr ""
+
+#. module: product_discount_specials
+#: model:ir.ui.view,arch_db:product_discount_specials.product_discount_special_search_view
+msgid "Past ads from today"
+msgstr ""
+
+#. module: product_discount_specials
 #: model:ir.model,name:product_discount_specials.model_product_template
 msgid "Product Template"
 msgstr ""
@@ -87,6 +107,16 @@ msgstr ""
 #. module: product_discount_specials
 #: model:ir.model.fields,field_description:product_discount_specials.field_product_discount_special_date_start
 msgid "Start Date"
+msgstr ""
+
+#. module: product_discount_specials
+#: model:ir.ui.view,arch_db:product_discount_specials.product_discount_special_search_view
+msgid "Upcoming"
+msgstr ""
+
+#. module: product_discount_specials
+#: model:ir.ui.view,arch_db:product_discount_specials.product_discount_special_search_view
+msgid "Upcoming ads from today"
 msgstr ""
 
 #. module: product_discount_specials
