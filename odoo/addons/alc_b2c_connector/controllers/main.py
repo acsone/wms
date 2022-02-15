@@ -19,11 +19,11 @@ class RestController(main.RestController):
         backend_model = request.env["alc.b2c.backend"]
         return backend_model._get_from_http_request()
 
-    def _get_component_context(self):
+    def _get_component_context(self, collection=None):
         """
         This method adds into the component context:
         * the b2c_backend
         """
-        res = super(RestController, self)._get_component_context()
+        res = super(RestController, self)._get_component_context(collection=collection)
         res["b2c_backend"] = self._get_b2c_backend_from_request()
         return res
