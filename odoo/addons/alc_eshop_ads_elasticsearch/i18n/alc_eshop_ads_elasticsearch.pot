@@ -14,6 +14,12 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_eshop_ads_elasticsearch
+#: code:addons/alc_eshop_ads_elasticsearch/models/se_index.py:35
+#, python-format
+msgid "%s: Batch export EShop Ads"
+msgstr ""
+
+#. module: alc_eshop_ads_elasticsearch
 #: model:ir.ui.view,arch_db:alc_eshop_ads_elasticsearch.alc_eshop_ads_form_view
 msgid "<span>Export to EShop</span>"
 msgstr ""
@@ -21,12 +27,6 @@ msgstr ""
 #. module: alc_eshop_ads_elasticsearch
 #: model:ir.ui.view,arch_db:alc_eshop_ads_elasticsearch.se_backend_elasticsearch_form_view
 msgid "Ads"
-msgstr ""
-
-#. module: alc_eshop_ads_elasticsearch
-#: code:addons/alc_eshop_ads_elasticsearch/models/se_index.py:27
-#, python-format
-msgid "Batch export EShop Ads"
 msgstr ""
 
 #. module: alc_eshop_ads_elasticsearch
