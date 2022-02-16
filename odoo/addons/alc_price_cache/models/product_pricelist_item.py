@@ -82,8 +82,8 @@ class ProductPricelistItem(models.Model):
         return {
             "id": self.id,
             "price": self._get_price(product),
-            "date_start": self.date_start,
-            "date_end": self.date_end,
+            "date_start": self.date_start or None,
+            "date_end": self.date_end or None,
         }
 
     def _cache_discount(self, product):
@@ -93,8 +93,8 @@ class ProductPricelistItem(models.Model):
             {
                 "id": self.id,
                 "discount": alcyon_discount,
-                "date_start": self.date_start,
-                "date_end": self.date_end,
+                "date_start": self.date_start or None,
+                "date_end": self.date_end or None,
             }
             if alcyon_discount
             else {}
