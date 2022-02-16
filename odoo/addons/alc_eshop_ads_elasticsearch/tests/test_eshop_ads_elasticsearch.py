@@ -85,3 +85,15 @@ class TestEShopAdsElasticsearch(common.TestEShopAdsCommon):
             patched_index.assert_called_once()
             json_docs = patched_index.call_args[0][0]
             self.assertEqual(len(json_docs), 3)
+
+    def test_batch_export(self):
+        indexes = self.se_index_en | self.se_index_en
+        existing_jobs = self.env["queue.job"].search(
+            [("method_name", "=", "export_ads")]
+        )
+        indexes.force_batch_export()
+        new_jobs = (
+            self.env["queue.job"].search([("method_name", "=", "export_ads")])
+            - existing_jobs
+        )
+        self.assertEqual(1, len(new_jobs))
