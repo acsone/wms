@@ -4,10 +4,13 @@
 
 from odoo import api, models
 
+from odoo.addons.queue_job.job import job
+
 
 class SeBackendElasticsearch(models.Model):
     _inherit = "se.backend.elasticsearch"
 
+    @job(default_channel="root.search_engine.prepare_batch_export")
     def export_ads(self, ads=None):
         for rec in self:
             ads = ads or rec.env["alc.eshop.ads"]._get_ads_to_sync()
