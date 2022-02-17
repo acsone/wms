@@ -20,6 +20,7 @@
         "alc_eshop_cart_confirm",
         "alc_eshop_cart_recovery",
         "alc_eshop_filter_data",
+        "alc_eshop_sale_channel",
         "alc_shopinvader_category",
         "shopinvader_auth_jwt",
         "shopinvader_elasticsearch",
