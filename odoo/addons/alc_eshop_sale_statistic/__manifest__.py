@@ -10,7 +10,15 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["base_rest", "sale", "sale_cancel_remaining", "alc_sale_channel"],
-    "data": [],
+    "depends": [
+        "alc_product_pharmacy",
+        "alc_sale_channel",
+        "base_rest",
+        "sale",
+        "sale_cancel_remaining",
+        "pricelist_discount",  # discount_sale
+        "product_additional",  # ratio_main_product
+    ],
+    "data": ["security/alc_eshop_product_ordered_qty.xml", "data/ir_cron.xml"],
     "demo": [],
 }
