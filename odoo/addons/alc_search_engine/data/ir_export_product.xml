@@ -33,13 +33,6 @@
         <field name="name">cnk_code</field>
         <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
     </record>
-    <record
-    id="ir_exp_shopinvader_variant_category_lot_expiry_field_name"
-    model="ir.exports.line"
-  >
-        <field name="name">category_lot_expiry_field_name</field>
-        <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
-    </record>
     <record id="ir_exp_shopinvader_variant_create_date" model="ir.exports.line">
         <field name="name">create_date</field>
         <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
@@ -50,13 +43,6 @@
     </record>
     <record id="ir_exp_shopinvader_variant_taxes_id" model="ir.exports.line">
         <field name="name">taxes_id</field>
-        <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
-    </record>
-    <record
-    id="ir_exp_shopinvader_variant_lot_expiry_field_name"
-    model="ir.exports.line"
-  >
-        <field name="name">lot_expiry_field_name</field>
         <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
     </record>
     <record id="ir_exp_shopinvader_variant_not_sold_on_website" model="ir.exports.line">
