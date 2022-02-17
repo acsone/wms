@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="alc_document_search_view" model="ir.ui.view">
+        <field name="name">alc.document.search</field>
+        <field name="model">alc.document</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <field name="format" />
+                <field name="partner_id" />
+                <field name="allowed_partner_types" />
+                <field name="sale_channel" />
+                <field name="res_model" />
+            </search>
+        </field>
+    </record>
+
+    <record id="alc_document_tree_view" model="ir.ui.view">
+        <field name="name">alc.document.tree</field>
+        <field name="model">alc.document</field>
+        <field name="arch" type="xml">
+            <tree create="false">
+                <field name="name" />
+                <field name="format" />
+                <field name="partner_id" />
+                <field name="allowed_partner_types" />
+                <field name="sale_channel" />
+                <field name="res_model" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="alc_document_form_view" model="ir.ui.view">
+        <field name="name">alc.document.form</field>
+        <field name="model">alc.document</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name" />
+                        <field name="format" />
+                        <field name="res_model" />
+                        <field name="attachment_id" />
+                    </group>
+                    <group>
+                        <field name="partner_id" />
+                        <field name="allowed_partner_types" />
+                    </group>
+                    <group>
+                        <field name="sale_channel" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="alc_document_act_window">
+        <field name="name">Alcyon Documents</field>
+        <field name="res_model">alc.document</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_type">form</field>
+        <field name="domain">[]</field>
+        <field name="search_view_id" ref="alc_document_search_view" />
+        <field name="view_id" ref="alc_document_tree_view" />
+    </record>
+
+    <menuitem
+    id="alc_document_menu"
+    name="Alcyon Documents"
+    parent="sales_team.menu_sales"
+    action="alc_document_act_window"
+    sequence="99"
+  />
+</odoo>

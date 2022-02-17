@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2022 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo noupdate="1">
+  <record model="res.groups" id="group_alc_document_user">
+    <field name="name">Alcyon Documents User</field>
+    <field name="implied_ids" eval="[(4, ref('base.group_user'))]" />
+  </record>
+  <record model="res.groups" id="group_alc_document_manager">
+    <field name="name">Alcyon Documents Manager</field>
+    <field name="implied_ids" eval="[(4, ref('group_alc_document_user'))]" />
+    <field name="users" eval="[(4, ref('base.user_root'))]" />
+  </record>
+</odoo>
