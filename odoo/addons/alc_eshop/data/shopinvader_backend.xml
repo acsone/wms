@@ -5,13 +5,8 @@
 <!--TODO: set to noupdate-->
     <record id="backend" model="shopinvader.backend">
         <field name="name">Alcyon Store</field>
-        <field name="pricelist_id" eval="False" />
-        <field name="use_sale_profile" eval="True" />
+        <field name="pricelist_id" ref="shopinvader_default_pricelist" />
         <field name="jwt_aud">alcyon_test</field>
-        <field
-      name="sale_profile_ids"
-      eval="[(6, 0, [ref('shopinvader_default_profile')])]"
-    />
         <field name="website_public_name">Alcyon</field>
         <field name="allowed_country_ids" eval="[(6,0,[ref('base.be')])]" />
 <!-- BACKPORT         <field name="currency_ids" eval="[(6,0,[ref('base.EUR'),])]" />-->
