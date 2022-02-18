@@ -12,7 +12,7 @@ from odoo.exceptions import MissingError
 from odoo.tools import float_round
 
 from odoo.addons.base_rest import restapi
-from odoo.addons.base_rest.components.service import to_int
+from odoo.addons.base_rest.components.service import to_bool, to_int
 from odoo.addons.component.core import Component
 
 
@@ -48,14 +48,14 @@ class SaleStatsService(Component):
         self,
         page=None,
         per_page=None,
-        product_family=None,
+        product_families=None,
         supplier_discount_only=False,
     ):
         """Search the most ordered product along the last 12 months."""
         return self._get_top_ordered(
             page=page,
             per_page=per_page,
-            product_family=product_family,
+            product_families=product_families,
             supplier_discount_only=supplier_discount_only,
         )
 
@@ -97,14 +97,13 @@ class SaleStatsService(Component):
                 "type": "integer",
                 "default": 10,
             },
-            "product_family": {
-                "type": "string",
-                "allowed": ["all", "meds", "food", "equipment"],
-                "default": "all",
-                "nullable": False,
+            "product_families": {
+                "type": "list",
+                "allowed": ["meds", "food", "equipment"],
             },
             "supplier_discount_only": {
                 "type": "boolean",
+                "coerce": to_bool,
                 "default": False,
                 "nullable": False,
             },
@@ -214,7 +213,7 @@ class SaleStatsService(Component):
         self,
         page=None,
         per_page=None,
-        product_family=None,
+        product_families=None,
         supplier_discount_only=False,
     ):
         sql = """
@@ -249,12 +248,13 @@ class SaleStatsService(Component):
     )
         """
         wheres = ["\n"]
-        if product_family == "meds":
-            wheres.append("AND is_meds")
-        elif product_family == "food":
-            wheres.append("AND is_food")
-        elif product_family == "equipment":
-            wheres.append("AND is_equipment")
+        for product_family in product_families or []:
+            if product_family == "meds":
+                wheres.append("AND is_meds")
+            elif product_family == "food":
+                wheres.append("AND is_food")
+            elif product_family == "equipment":
+                wheres.append("AND is_equipment")
         if supplier_discount_only:
             wheres.append("AND in_supplier_promotion")
         self.env.cr.execute(

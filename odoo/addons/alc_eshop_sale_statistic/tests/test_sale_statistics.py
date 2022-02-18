@@ -254,11 +254,11 @@ class TestSaleStatistics(SavepointCase, ComponentMixin):
         with self.sale_statistics_service(
             authenticated_partner_id=self.partner_1.id
         ) as service:
-            res = service.top_ordered(product_family="meds")
+            res = service.top_ordered(product_families=["meds"])
             self.assertEqual(1, res["size"])
             self.assertEqual(1, len(res["data"]))
             self.assertEqual(res["data"][0]["product_id"], self.product_2.id)
-            res = service.top_ordered(product_family="equipment")
+            res = service.top_ordered(product_families=["equipment"])
             self.assertEqual(0, res["size"])
             self.assertEqual(0, len(res["data"]))
 
