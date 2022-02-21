@@ -28,6 +28,8 @@
         "security/rule+acl_res_partner.xml",
         "security/rule+acl_alc_eshop_product_on_order.xml",
         "security/rule+acl_alc_eshop_product_ordered_qty.xml",
+        "security/rule+acl_sale_order.xml",
+        "security/rule+acl_sale_order_line.xml",
         "data/res_users.xml",
         "data/auth_jwt_validator.xml",
     ],

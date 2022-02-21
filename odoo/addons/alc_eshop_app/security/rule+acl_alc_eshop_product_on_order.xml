@@ -24,7 +24,6 @@
       ref="alc_eshop_product_on_order.model_alc_eshop_product_on_order"
     />
     <field name="domain_force">[
-      '|',
       ("partner_id", '=', authenticated_partner_id)
       ]
     </field>
