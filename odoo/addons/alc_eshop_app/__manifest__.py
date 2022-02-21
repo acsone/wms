@@ -14,6 +14,7 @@
         "alc_eshop_ads",
         "alc_eshop_models_url",
         "alc_eshop_product_on_order",
+        "alc_documents_eshop_services",
         "alc_eshop_product_promotion_subscription",
         "alc_eshop_sale_statistic",
         "alc_keycloak",
