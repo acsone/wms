@@ -1,0 +1,14 @@
+# -*- coding: utf-8 -*-
+# Copyright 2022 ACSONE SA/NV
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+
+from odoo.tools import mute_logger
+
+from odoo.addons.alc_documents.tests.common import TestAlcDocuments
+
+
+class TestAlcDocumentsPrices(TestAlcDocuments):
+    @classmethod
+    @mute_logger("odoo.addons.queue_job.models.base")
+    def setUpClass(cls):
+        super(TestAlcDocumentsPrices, cls).setUpClass()
