@@ -12,6 +12,7 @@
     "depends": [
         "alc_eshop",
         "alc_eshop_ads",
+        "alc_eshop_product_on_order",
         "alc_eshop_product_promotion_subscription",
         "alc_eshop_sale_statistic",
         "alc_keycloak",
@@ -25,6 +26,7 @@
         "security/rule+acl_alc_product_promotion_subscription.xml",
         "security/rule+acl_product_product.xml",
         "security/rule+acl_res_partner.xml",
+        "security/rule+acl_alc_eshop_product_on_order.xml",
         "security/rule+acl_alc_eshop_product_ordered_qty.xml",
         "data/res_users.xml",
         "data/auth_jwt_validator.xml",
