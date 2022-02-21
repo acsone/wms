@@ -14,6 +14,7 @@
         "alc_eshop_ads_elasticsearch",
         "alc_partner_type",
         "alc_product_pharmacy",
+        "alc_product_mto",
     ],
     "data": [
         "data/ir_export_category.xml",
