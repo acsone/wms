@@ -5,11 +5,13 @@
 from psycopg2 import sql
 from psycopg2.extensions import AsIs
 
-from odoo import fields
+from odoo import _, fields
 
 from odoo.addons.base_rest import restapi
 from odoo.addons.base_rest.components.service import to_int
 from odoo.addons.component.core import Component
+
+from ..exceptions import NoBackOrderError
 
 
 class ProductsOnOrderService(Component):
@@ -36,7 +38,7 @@ class ProductsOnOrderService(Component):
         customer_ref=None,
         restricts=None,
     ):
-        """Get products on order"""
+        """Get products on order."""
         return self._get_search(
             page=page,
             per_page=per_page,
@@ -47,6 +49,30 @@ class ProductsOnOrderService(Component):
             customer_ref=customer_ref,
             restricts=restricts,
         )
+
+    @restapi.method(
+        [(["/cancel/<int:order_line_id>"], "POST")],
+        output_param=restapi.CerberusValidator("_cancel_output_schema"),
+    )
+    def cancel(self, order_line_id):
+        """Request cancellation of specified order line.
+
+        The cancellation is only possible for purchased products in back
+        order
+        """
+        product_on_order = self.env["alc.eshop.product.on.order"].search(
+            [("id", "=", order_line_id), ("partner_id", "=", self.partner.id)]
+        )
+        if not product_on_order.exists():
+            return {
+                "status": False,
+                "error_msg": _("Requested order line no more exists"),
+            }
+        try:
+            product_on_order.request_backorder_cancellation()
+        except NoBackOrderError as error:
+            return {"status": False, "error_msg": error.message}
+        return {"status": True}
 
     ############
     # validators
@@ -140,6 +166,17 @@ class ProductsOnOrderService(Component):
                         "has_backorder": {"type": "boolean", "nullable": False},
                     },
                 },
+            },
+        }
+
+    def _cancel_output_schema(self):
+        return {
+            "status": {"type": "boolean", "required": True, "nullable": False},
+            "error_msg": {
+                "type": "string",
+                "required": False,
+                "nullable": False,
+                "meta": {"description": "Error message in case of status=False "},
             },
         }
 

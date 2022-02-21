@@ -175,3 +175,28 @@ class TestProductOnOrder(SavepointCase, ComponentMixin):
                 order_date_max="2020-01-03 15:00:00",
             )
             self.assertEqual(1, res["size"])
+
+    def test_cancel_wrong_ref(self):
+        with self.products_on_order_service(self.partner_1.id) as service:
+            res = service.cancel(order_line_id=-1)
+            self.assertEqual(False, res["status"])
+
+    def test_cancel_no_back_order(self):
+        with self.products_on_order_service(self.partner_1.id) as service:
+            res = service.cancel(order_line_id=self.so_medoc_in_stock.order_line.id)
+            self.assertEqual(False, res["status"])
+
+    def test_cancel(self):
+        template = self.env.ref(
+            "alc_eshop_product_on_order.sale_order_request_backorder_cancellation"
+        )
+        template.auto_delete = False
+
+        all_mails = self.env["mail.mail"].search([])
+        with self.products_on_order_service(self.partner_1.id) as service:
+            res = service.cancel(order_line_id=self.so_ali_out_of_stock.order_line.id)
+            self.assertTrue(res["status"])
+        new_mail = self.env["mail.mail"].search([]) - all_mails
+        self.assertTrue(new_mail)
+        self.assertEqual(self.so_ali_out_of_stock.id, new_mail.res_id)
+        self.assertEqual(self.so_ali_out_of_stock._name, new_mail.model)

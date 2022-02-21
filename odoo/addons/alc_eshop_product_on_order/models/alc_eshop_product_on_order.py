@@ -7,6 +7,8 @@ from psycopg2.extensions import AsIs
 from odoo import api, fields, models
 from odoo.tools.sql import drop_view_if_exists
 
+from ..exceptions import NoBackOrderError
+
 
 class AlcEshopProductOnOrder(models.Model):
 
@@ -15,6 +17,9 @@ class AlcEshopProductOnOrder(models.Model):
     _auto = False
 
     product_id = fields.Many2one(comodel_name="product.product", readonly=True)
+    order_id = fields.Many2one(comodel_name="sale.order", readonly=True)
+    order_line_id = fields.Many2one(comodel_name="sale.order.line", readonly=True)
+    partner_id = fields.Many2one(comodel_name="res.partner", readonly=True)
     description = fields.Char(readonly=True)
     order_ref = fields.Char(readonly=True)
     customer_ref = fields.Char(readonly=True)
@@ -66,6 +71,8 @@ class AlcEshopProductOnOrder(models.Model):
             CREATE OR REPLACE VIEW %(table)s AS (
 SELECT
     sol.id,
+    so.id as order_id,
+    sol.id as order_line_id,
     sol.product_id,
     sol.name as description,
     so.name as order_ref,
@@ -105,3 +112,15 @@ WHERE
             )
                 """
         self._cr.execute(query, dict(table=AsIs(self._table)))
+
+    def request_backorder_cancellation(self):
+        for record in self:
+            if not record.qty_unavailable:
+                raise NoBackOrderError(record.product_id.name, record.order_ref)
+        template = self.env.ref(
+            "alc_eshop_product_on_order.sale_order_request_backorder_cancellation"
+        )
+        for record in self:
+            template.with_context(product=record.product_id).send_mail(
+                record.order_id.id
+            )

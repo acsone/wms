@@ -19,6 +19,6 @@
         "sale_cancel_remaining",
         "sale_consignment",
     ],
-    "data": ["security/alc_eshop_product_on_order.xml"],
+    "data": ["data/mail_template.xml", "security/alc_eshop_product_on_order.xml"],
     "demo": [],
 }
