@@ -19,10 +19,6 @@ def create_index(cr, index_name, table, expression):
 class SaleOrderLine(models.Model):
     _inherit = "sale.order.line"
 
-    # used for the search filter "Remains to deliver" on the order line view
-    product_type = fields.Selection(
-        related="product_id.type", readonly=True, store=True
-    )
     # add index on the core field, used for the SQL query used in the method
     # `_sales_count` in the current addon
     state = fields.Selection(index=True)
