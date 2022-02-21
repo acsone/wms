@@ -14,6 +14,8 @@ class KeycloakBackend(models.Model):
         new = {  # elasticsearch_role is a compute depending on these
             "partner_type": "shopinvader-vt-roles",
             "property_product_pricelist": "shopinvader-vt-roles",
+            "discount_pricelist_id": "shopinvader-vt-roles",
+            "supplier_promotion_sale_allowed": "shopinvader-vt-roles",
             "lang": "locale",
         }
         res.update(new)
