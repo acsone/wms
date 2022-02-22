@@ -126,8 +126,8 @@ odoo10-addon-base-vat-sanitized==10.0.1.0.0.99.dev9
 odoo10-addon-component==10.0.1.1.1
 odoo10-addon-component-event==10.0.1.0.1
 odoo10-addon-connector @ git+https://github.com/acsone/connector@de23258a4d639e696d6e4d941ba005a1577a9935#subdirectory=setup/connector
-odoo10-addon-connector-elasticsearch @ git+https://github.com/acsone/search-engine.git@337c0cc68824eb4f4d4080df880e20a7c02b1092#subdirectory=setup/connector_elasticsearch
-odoo10-addon-connector-search-engine @ git+https://github.com/acsone/search-engine.git@6d9d6391d190435364aec7e691c4100873979cbf#subdirectory=setup/connector_search_engine
+odoo10-addon-connector-elasticsearch @ git+https://github.com/acsone/search-engine.git@2468c673debedd5be39973bb1cd7d2a649f9fbe3#subdirectory=setup/connector_elasticsearch
+odoo10-addon-connector-search-engine @ git+https://github.com/acsone/search-engine.git@2468c673debedd5be39973bb1cd7d2a649f9fbe3#subdirectory=setup/connector_search_engine
 odoo10-addon-date-range @ git+https://github.com/acsone/server-tools.git@dcefdba5bac014076f05229ba091acd8b739e164#subdirectory=setup/date_range
 odoo10-addon-delivery-carrier-label-gls @ git+https://github.com/acsone/delivery-carrier.git@58839a1c96904a43e1d0c2ab652ebdae3b6a2074#subdirectory=setup/delivery_carrier_label_gls
 odoo10-addon-delivery-carrier-max-weight-constraint @ git+https://github.com/acsone/delivery-carrier.git@f9c9703f8b6e3a906fd52935f222f933bd7f19f5#subdirectory=setup/delivery_carrier_max_weight_constraint
