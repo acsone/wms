@@ -33,7 +33,8 @@ class TestKeycloakUpdateFlow(TestKeycloak):
         # when
         self.partner.property_product_pricelist = pricelist
         # then
-        job = job_counter.search_created()
+        jobs = job_counter.search_created()
+        job = jobs.filtered(lambda j: j.model_name == "keycloak.backend")
         self.assertEqual(job.args, [keycloak_user, ["property_product_pricelist"]])
         payload = keycloak_user.keycloak_backend_id._get_user_payload(*job.args)
         self.assertEqual(payload, expected_payload)
@@ -72,7 +73,8 @@ class TestKeycloakUpdateFlow(TestKeycloak):
         self.partner.write(vals)
 
         # then
-        job = job_counter.search_created()
+        jobs = job_counter.search_created()
+        job = jobs.filtered(lambda j: j.model_name == "keycloak.backend")
         self.assertEqual(set(job.args[1]), set(vals))
         payload = keycloak_user.keycloak_backend_id._get_user_payload(*job.args)
         self.assertEqual(payload, expected_payload)
