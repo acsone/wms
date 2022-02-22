@@ -9,7 +9,7 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["sale"],  # security_group above product
+    "depends": ["mixin_past", "sale"],  # security_group above product
     "application": False,
     "data": [
         "security/product_discount_special.xml",
