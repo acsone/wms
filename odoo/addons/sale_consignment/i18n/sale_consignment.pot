@@ -22,6 +22,7 @@ msgstr ""
 
 #. module: sale_consignment
 #: model:ir.model.fields,field_description:sale_consignment.field_sale_order_is_consignment
+#: model:ir.model.fields,field_description:sale_consignment.field_sale_order_line_is_consignment
 msgid "For Consignment"
 msgstr ""
 
@@ -32,6 +33,7 @@ msgstr ""
 
 #. module: sale_consignment
 #: model:ir.model.fields,help:sale_consignment.field_sale_order_is_consignment
+#: model:ir.model.fields,help:sale_consignment.field_sale_order_line_is_consignment
 msgid "Procurement will be generated for the consignment location of the selected customer"
 msgstr ""
 
