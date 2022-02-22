@@ -18,6 +18,10 @@ class SaleOrder(models.Model):
 class SaleOrderLine(models.Model):
     _inherit = "sale.order.line"
 
+    is_consignment = fields.Boolean(
+        related="order_id.is_consignment", readonly=True, store=True
+    )
+
     @api.multi
     def _prepare_order_line_procurement(self, group_id=False):
         vals = super(SaleOrderLine, self)._prepare_order_line_procurement(

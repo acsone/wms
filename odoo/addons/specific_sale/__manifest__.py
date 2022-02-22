@@ -11,6 +11,7 @@
     "depends": [
         "alc_partner_type",
         "alc_sale_channel",
+        "alc_sale_order_line_product_type",
         "alc_stock_lot_available",
         "delivery",
         "pricelist_discount",
