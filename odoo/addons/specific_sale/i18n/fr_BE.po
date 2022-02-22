@@ -28,20 +28,6 @@ msgid "A narcotic voucher is required for the data entry."
 msgstr "Bon de stupéfiant nécessaire avant l'encodage"
 
 #. module: specific_sale
-#: model:ir.model.fields,help:specific_sale.field_sale_order_line_product_type
-msgid ""
-"A stockable product is a product for which you manage stock. The \"Inventory"
-"\" app has to be installed.\n"
-"A consumable product, on the other hand, is a product for which stock is not "
-"managed.\n"
-"A service is a non-material product you provide.\n"
-"A digital content is a non-material product you sell online. The files "
-"attached to the products are the one that are sold on the e-commerce such as "
-"e-books, music, pictures,... The \"Digital Product\" module has to be "
-"installed."
-msgstr ""
-
-#. module: specific_sale
 #: selection:sale.report,month:0
 msgid "April"
 msgstr "Avril"
@@ -141,11 +127,6 @@ msgstr "Février"
 #: model:exception.rule,description:specific_sale.no_food_allowed
 msgid "Food Product Not Allowed"
 msgstr "Nourriture interdite"
-
-#. module: specific_sale
-#: model:ir.model.fields,field_description:specific_sale.field_sale_order_line_is_consignment
-msgid "For Consignment"
-msgstr ""
 
 #. module: specific_sale
 #: model:ir.model.fields,field_description:specific_sale.field_res_users_is_for_newpharma
@@ -433,13 +414,6 @@ msgid "Procurement"
 msgstr ""
 
 #. module: specific_sale
-#: model:ir.model.fields,help:specific_sale.field_sale_order_line_is_consignment
-msgid ""
-"Procurement will be generated for the consignment location of the selected "
-"customer"
-msgstr ""
-
-#. module: specific_sale
 #: model:ir.model,name:specific_sale.model_product_product
 msgid "Product"
 msgstr "Article"
@@ -448,11 +422,6 @@ msgstr "Article"
 #: model:ir.model,name:specific_sale.model_product_template
 msgid "Product Template"
 msgstr "Modèle de produit"
-
-#. module: specific_sale
-#: model:ir.model.fields,field_description:specific_sale.field_sale_order_line_product_type
-msgid "Product Type"
-msgstr "Type de produit"
 
 #. module: specific_sale
 #: model:exception.rule,warning_text:specific_sale.warning_cascade_import
@@ -639,6 +608,9 @@ msgstr ""
 #: model:exception.rule,warning_text:specific_sale.warning_stupefiant_vet
 msgid "stupéfiant VET: written order, keep confirmation."
 msgstr "Commande de psychotrope par écrit, gardez la confirmation."
+
+#~ msgid "Product Type"
+#~ msgstr "Type de produit"
 
 #~ msgid "Fax"
 #~ msgstr "Fax"
