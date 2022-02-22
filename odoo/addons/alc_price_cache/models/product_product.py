@@ -108,3 +108,19 @@ class ProductProduct(models.Model):
         if to_update:
             to_update.delay_update_price_cache()
         return res
+
+    def _price_cache_get(self, key, date_ref=None):
+        self.ensure_one()
+        items = self.price_cache.get(key, [])  # TODO: we should not be in that case
+        # however, in tests, the matter is different...
+        mixin = self.env["mixin.past"]
+        date_ref = date_ref or fields.Date.today()
+        filter_date = lambda it: (
+            not mixin._is_past_date(it["date_end"], date_ref)
+            and not mixin._is_future_date(it["date_start"], date_ref)
+        )
+        candidates = filter(filter_date, items)
+        item = {}
+        if candidates:
+            item = min(candidates, key=lambda it: it["date_start"] or date_ref)
+        return item
