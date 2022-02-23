@@ -343,13 +343,6 @@ msgid "October"
 msgstr "Octobre"
 
 #. module: specific_sale
-#: model:ir.model.fields,field_description:specific_sale.field_delivery_carrier_older_lot_id
-#: model:ir.model.fields,field_description:specific_sale.field_product_product_older_lot_id
-#: model:ir.model.fields,field_description:specific_sale.field_shopinvader_variant_older_lot_id
-msgid "Older lot"
-msgstr ""
-
-#. module: specific_sale
 #: model:ir.model.fields,field_description:specific_sale.field_sale_report_only_narcotic
 #: model:ir.ui.view,arch_db:specific_sale.sale_report_specific_search
 msgid "Only narcotics"
