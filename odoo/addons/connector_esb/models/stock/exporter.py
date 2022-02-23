@@ -44,8 +44,8 @@ class StockUpdateMapper(Component):
     @mapping
     def compute_date_peremption(self, record):
         """Get the closest (to now) expiration date."""
-        value = record.older_lot_id.life_date or ""
-        return {"date_peremption": value[:10]}
+        value = record.best_before_date or ""
+        return {"date_peremption": value}
 
     @mapping
     def compute_sales_average(self, record):

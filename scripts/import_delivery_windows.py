@@ -17,16 +17,19 @@ TopCustomer = namedtuple(
         "ref",
         "name",
         "street",
-        "street2",
         "zip",
         "city",
-        "longitude",
-        "latitude",
-        "rating_level",
+        "partner_longitude",
+        "partner_latitude",
         "start_1",
         "end_1",
         "start_2",
         "end_2",
+        "start_3",
+        "end_3",
+        "start_4",
+        "end_4",
+        "rating_level",
     ],
 )
 
@@ -39,6 +42,10 @@ class InentoryToPoBuilder(object):
         self.load_partner_by_ref()
         self.ResPartner = self.env["res.partner"]
         self.week_days = self.env["alc.delivery.week.day"].search([])
+        self.monday = self.week_days.filtered(lambda d: d.name == "0")
+        self.tuesday = self.week_days.filtered(lambda d: d.name == "1")
+        self.thursday = self.week_days.filtered(lambda d: d.name == "3")
+        self.friday = self.week_days.filtered(lambda d: d.name == "4")
         self.top_400_tag = self.env.ref(
             "__setup__.res_partner_category_top_400", raise_if_not_found=False
         )
@@ -156,40 +163,69 @@ class InentoryToPoBuilder(object):
             return
 
         partners.mapped("alc_delivery_window_ids").unlink()
-        window_values = [
-            (
-                0,
-                0,
-                self._to_delivery_window_values(
-                    top_customer.start_1, top_customer.end_1
-                ),
-            )
-        ]
-        if top_customer.start_2:
-            window_values.append(
+        if top_customer.rating_level == "TOP400":
+            window_values = [
                 (
                     0,
                     0,
                     self._to_delivery_window_values(
-                        top_customer.start_2, top_customer.end_2
+                        top_customer.start_1,
+                        top_customer.end_1,
+                        self.monday | self.thursday,
                     ),
                 )
-            )
-        values["alc_delivery_window_ids"] = window_values
-        partners.write(values)
-        _logger.info("%s updated", top_customer.name)
+            ]
+            if top_customer.start_2:
+                window_values.append(
+                    (
+                        0,
+                        0,
+                        self._to_delivery_window_values(
+                            top_customer.start_2,
+                            top_customer.end_2,
+                            self.monday | self.thursday,
+                        ),
+                    )
+                )
+            if top_customer.start_3:
+                window_values.append(
+                    (
+                        0,
+                        0,
+                        self._to_delivery_window_values(
+                            top_customer.start_3,
+                            top_customer.end_3,
+                            self.tuesday | self.friday,
+                        ),
+                    )
+                )
+            if top_customer.start_4:
+                window_values.append(
+                    (
+                        0,
+                        0,
+                        self._to_delivery_window_values(
+                            top_customer.start_4,
+                            top_customer.end_4,
+                            self.tuesday | self.friday,
+                        ),
+                    )
+                )
+            values["alc_delivery_window_ids"] = window_values
+            partners.write(values)
+            _logger.info("%s updated", top_customer.name)
 
-    def _to_delivery_window_values(self, start, end):
+    def _to_delivery_window_values(self, start, end, days):
         return {
             "start": self._time_str_to_float(start),
             "end": self._time_str_to_float(end),
             "preference": "mandatory",
-            "week_day_ids": [(6, 0, self.week_days.ids)],
+            "week_day_ids": [(6, 0, days.ids)],
         }
 
     def _time_str_to_float(self, time_str):
-        dt = datetime.strptime(time_str, "%I:%M:%S %p")
-        # dt = datetime.strptime(time_str, "%H:%M")
+        # dt = datetime.strptime(time_str, "%I:%M:%S %p")
+        dt = datetime.strptime(time_str, "%H:%M")
         return dt.hour + dt.minute / 60.0
 
 

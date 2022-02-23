@@ -289,4 +289,13 @@
         <field name="alias">is_mto_product:is_mto</field>
         <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
     </record>
+    <record id="ir_exp_shopinvader_variant_brand_name" model="ir.exports.line">
+        <field name="name">product_brand_id/name</field>
+        <field name="alias">product_brand_id:brand/name</field>
+        <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
+    </record>
+    <record id="ir_exp_shopinvader_variant_best_before_date" model="ir.exports.line">
+        <field name="name">best_before_date</field>
+        <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
+    </record>
 </odoo>

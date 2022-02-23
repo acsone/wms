@@ -54,11 +54,30 @@ class ProductTemplate(models.Model):
         selection=[("yellow", "Yellow"), ("orange", "Orange"), ("red", "Red")],
     )
 
-    size_clothing_option_id = fields.Many2one("attribute.option", "Clothing size")
-    thread_option_id = fields.Many2one("attribute.option", "Thread")
-    food_range_option_id = fields.Many2one("attribute.option", "Food range")
-    presentation_option_id = fields.Many2one("attribute.option", "Presentation")
-
+    size_clothing_option_id = fields.Many2one(
+        "attribute.option",
+        "Clothing size",
+        domain=lambda a: a._get_domain("size_clothing_option_id"),
+        context=LazyDefaultAttributeIdContext(),
+    )
+    thread_option_id = fields.Many2one(
+        "attribute.option",
+        "Thread",
+        domain=lambda a: a._get_domain("thread_option_id"),
+        context=LazyDefaultAttributeIdContext(),
+    )
+    food_range_option_id = fields.Many2one(
+        "attribute.option",
+        "Food range",
+        domain=lambda a: a._get_domain("food_range_option_id"),
+        context=LazyDefaultAttributeIdContext(),
+    )
+    presentation_option_id = fields.Many2one(
+        "attribute.option",
+        "Presentation",
+        domain=lambda a: a._get_domain("presentation_option_id"),
+        context=LazyDefaultAttributeIdContext(),
+    )
     product_color_option_ids = fields.Many2many(
         string="Colours",
         comodel_name="attribute.option",
