@@ -12,6 +12,7 @@
     "depends": [
         "alc_eshop",
         "alc_eshop_ads_elasticsearch",
+        "alc_older_stock_production_lot",
         "alc_partner_type",
         "alc_product_pharmacy",
         "alc_product_mto",
