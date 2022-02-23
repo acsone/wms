@@ -12,3 +12,5 @@ class RestLog(models.Model):
     operator_id = fields.Many2one(
         "res.users", string="Operator", copy=False, index=True
     )
+
+    location_scanned = fields.Boolean(default=False)
