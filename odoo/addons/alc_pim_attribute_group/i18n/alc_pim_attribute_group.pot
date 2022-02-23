@@ -44,11 +44,6 @@ msgid "logistics"
 msgstr ""
 
 #. module: alc_pim_attribute_group
-#: model:attribute.group,name:alc_pim_attribute_group.management_attribute_group
-msgid "management"
-msgstr ""
-
-#. module: alc_pim_attribute_group
 #: model:attribute.group,name:alc_pim_attribute_group.marketing_attribute_group
 msgid "marketing"
 msgstr ""
