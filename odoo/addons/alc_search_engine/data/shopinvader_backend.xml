@@ -4,7 +4,11 @@
 <odoo noupdate="0">
 
     <record id="alc_eshop.backend" model="shopinvader.backend">
-        <field name="se_backend_id" ref="alc_search_engine.elasticsearch_backend" />
+        <field
+      name="se_backend_id"
+      search="[('tech_name','=','elasticsearch_backend')]"
+      model='se.backend'
+    />
     </record>
 
 </odoo>
