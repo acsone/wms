@@ -82,7 +82,7 @@ class AlcEshopAds(models.Model):
             self.display_slot, self
         )
 
-    @api.depends("file_id")
+    @api.depends("image_id")
     def _compute_image(self):
         for rec in self:
             rec.image = rec.image_id.data
