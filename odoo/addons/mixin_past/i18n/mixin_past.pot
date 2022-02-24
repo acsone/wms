@@ -24,7 +24,16 @@ msgid "ID"
 msgstr ""
 
 #. module: mixin_past
+#: model:ir.model.fields,field_description:mixin_past.field_mixin_past_is_future
+#: model:ir.model.fields,field_description:mixin_past.field_product_discount_special_is_future
+#: model:ir.model.fields,field_description:mixin_past.field_product_pricelist_item_is_future
+#: model:ir.model.fields,field_description:mixin_past.field_product_supplierinfo_is_future
+msgid "Is future"
+msgstr ""
+
+#. module: mixin_past
 #: model:ir.model.fields,field_description:mixin_past.field_mixin_past_is_past
+#: model:ir.model.fields,field_description:mixin_past.field_product_discount_special_is_past
 #: model:ir.model.fields,field_description:mixin_past.field_product_pricelist_item_is_past
 #: model:ir.model.fields,field_description:mixin_past.field_product_supplierinfo_is_past
 msgid "Is past"
