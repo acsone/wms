@@ -10,6 +10,7 @@ from odoo import api, fields, models
 
 class ProductDiscountSpecial(models.Model):
     _name = "product.discount.special"
+    _inherit = "mixin.past"
 
     sequence = fields.Integer("Sequence")
 
