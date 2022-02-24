@@ -138,6 +138,7 @@ class ExportStockUpdateSingleTestCase(SavepointCase):
     def test_mapper(self):
         """ Generate data dict with mapper and check with what is expected """
         product = self.prod1
+        self.prod1.tracking = "lot"
         expected = {
             "sku": u"ref1",
             "qty": product.immediately_usable_qty,
