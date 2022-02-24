@@ -16,15 +16,32 @@ class TestAlcEShopModelsUrls(common.ProductCommonCase):
         cls.lang = cls.env["res.lang"]._lang_get("en_US")
 
     def test_categ_url_prfx(self):
-        shop_categ = self.shopinvader_categ_obj.create(
+        shop_parent = self.shopinvader_categ_obj.create(
+            {
+                "name": self.categ_parent.name,
+                "lang_id": self.lang.id,
+                "backend_id": self.backend.id,
+                "record_id": self.categ_parent.id,
+                "sequence": 10,
+            }
+        )
+        self.assertEqual(shop_parent.url_key, "c/" + self.categ_parent.name.lower())
+        shop_child = self.shopinvader_categ_obj.create(
             {
                 "name": self.product_category.name,
                 "lang_id": self.lang.id,
                 "backend_id": self.backend.id,
                 "record_id": self.product_category.id,
+                "sequence": 20,
             }
         )
-        self.assertTrue(shop_categ.url_key.startswith("c/"))
+        self.assertEqual(
+            shop_child.url_key,
+            "c/"
+            + self.categ_parent.name.lower()
+            + "/"
+            + self.product_category.name.lower(),
+        )
 
     def test_product_url_prfx(self):
         self.assertTrue(self.shopinvader_variant.url_key.startswith("p/"))

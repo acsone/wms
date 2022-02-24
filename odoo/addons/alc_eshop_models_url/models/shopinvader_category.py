@@ -11,4 +11,7 @@ class ShopinvaderCategory(models.Model):
 
     def _post_process_url_key(self, key):
         value = super(ShopinvaderCategory, self)._post_process_url_key(key)
-        return u"c/" + value
+        if not self.parent_id or not self.shopinvader_parent_id.active:
+            # we are at the root category. We must add the prefix
+            value = u"c/" + value
+        return value
