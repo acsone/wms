@@ -21,13 +21,8 @@ class DocumentService(Component):
     _collection = "shopinvader.backend"
     _usage = "documents"
 
-    def _map_model_types(self):
-        return {
-            "order": "sale.order",
-            "invoice": "account.invoice",
-            "promotion": "product.supplierinfo",  # TODO
-            "pricelist": "product.pricelist",
-        }
+    def _get_types(self):
+        return [s[0] for s in self.model._fields["type"].selection]
 
     @restapi.method(
         [(["/"], "GET")],
@@ -38,7 +33,7 @@ class DocumentService(Component):
         document_type = params.pop("type", None)
         domain = self._get_base_domain()
         if document_type:
-            domain.append(("res_model", "=", self._map_model_types()[document_type]))
+            domain.append(("type", "=", document_type))
         return self._paginate_search(domain, **params)
 
     @restapi.method(
@@ -73,7 +68,7 @@ class DocumentService(Component):
             },
             "type": {
                 "type": "string",
-                "allowed": ["order", "invoice", "promotion", "pricelist"],
+                "allowed": self._get_types(),
                 "required": False,
                 "nullable": True,
             },
@@ -83,6 +78,7 @@ class DocumentService(Component):
         return {
             "id": {"type": "integer", "required": True, "nullable": False},
             "name": {"type": "string", "required": True, "nullable": False},
+            "type": {"type": "string", "required": True, "nullable": True},
             "res_model": {"type": "string", "required": True, "nullable": False},
             "format": {"type": "string", "required": True, "nullable": True},
             "sale_channel": {"type": "string", "required": False, "nullable": True},
