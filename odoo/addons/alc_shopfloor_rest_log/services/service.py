@@ -15,4 +15,7 @@ class BaseShopfloorService(AbstractComponent):
             _request, _id, params=params, **kw
         )
         values["operator_id"] = self.shopfloor_user.id
+
+        if "barcode" in params and params["barcode"].startswith("L#"):
+            values["location_scanned"] = True
         return values

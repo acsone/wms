@@ -9,6 +9,7 @@
     <field name="arch" type="xml">
       <field name="create_uid" position="after">
         <field name="operator_id" />
+        <field name="location_scanned" />
       </field>
     </field>
   </record>
@@ -19,6 +20,12 @@
     <field name="arch" type="xml">
       <field name="collection" position="after">
         <field name="operator_id" />
+         <separator />
+                <filter
+          name="location_scanned"
+          string="Location scanned"
+          domain="[('location_scanned', '=', True)]"
+        />
       </field>
       <filter name="by_user" position="before">
         <filter
@@ -40,6 +47,7 @@
       </field>
       <field name="create_uid" position="after">
         <field name="operator_id" />
+        <field name="location_scanned" />
       </field>
     </field>
   </record>
