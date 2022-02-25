@@ -174,7 +174,11 @@
     <record id="elasticsearch_shopinvader_variant_index_fr_BE" model="se.index">
         <field name="model_id" ref="shopinvader.model_shopinvader_variant" />
         <field name="lang_id" eval="ref('base.lang_fr_BE')" />
-        <field name="backend_id" ref="elasticsearch_backend" />
+        <field
+      name="backend_id"
+      search="[('tech_name','=','elasticsearch_backend')]"
+      model='se.backend'
+    />
         <field name="exporter_id" ref="shopinvader.ir_exp_shopinvader_variant" />
         <field name="config_id" ref="index_config_shopinvader_variant" />
     </record>
@@ -182,7 +186,11 @@
     <record id="elasticsearch_shopinvader_variant_index_nl_BE" model="se.index">
         <field name="model_id" ref="shopinvader.model_shopinvader_variant" />
         <field name="lang_id" eval="ref('base.lang_nl_BE')" />
-        <field name="backend_id" ref="elasticsearch_backend" />
+        <field
+      name="backend_id"
+      search="[('tech_name','=','elasticsearch_backend')]"
+      model='se.backend'
+    />
         <field name="exporter_id" ref="shopinvader.ir_exp_shopinvader_variant" />
         <field name="config_id" ref="index_config_shopinvader_variant" />
     </record>
@@ -190,7 +198,11 @@
     <record id="elasticsearch_shopinvader_variant_index_en_US" model="se.index">
         <field name="model_id" ref="shopinvader.model_shopinvader_variant" />
         <field name="lang_id" eval="ref('base.lang_en')" />
-        <field name="backend_id" ref="elasticsearch_backend" />
+        <field
+      name="backend_id"
+      search="[('tech_name','=','elasticsearch_backend')]"
+      model='se.backend'
+    />
         <field name="exporter_id" ref="shopinvader.ir_exp_shopinvader_variant" />
         <field name="config_id" ref="index_config_shopinvader_variant" />
     </record>
@@ -198,7 +210,11 @@
     <record id="elasticsearch_shopinvader_category_index_fr_BE" model="se.index">
         <field name="model_id" ref="shopinvader.model_shopinvader_category" />
         <field name="lang_id" eval="ref('base.lang_fr_BE')" />
-        <field name="backend_id" ref="elasticsearch_backend" />
+        <field
+      name="backend_id"
+      search="[('tech_name','=','elasticsearch_backend')]"
+      model='se.backend'
+    />
         <field name="exporter_id" ref="shopinvader.ir_exp_shopinvader_category" />
         <field name="config_id" ref="index_config_shopinvader_category" />
     </record>
@@ -206,7 +222,11 @@
     <record id="elasticsearch_shopinvader_category_index_nl_BE" model="se.index">
         <field name="model_id" ref="shopinvader.model_shopinvader_category" />
         <field name="lang_id" eval="ref('base.lang_nl_BE')" />
-        <field name="backend_id" ref="elasticsearch_backend" />
+        <field
+      name="backend_id"
+      search="[('tech_name','=','elasticsearch_backend')]"
+      model='se.backend'
+    />
         <field name="exporter_id" ref="shopinvader.ir_exp_shopinvader_category" />
         <field name="config_id" ref="index_config_shopinvader_category" />
     </record>
@@ -214,14 +234,22 @@
     <record id="elasticsearch_shopinvader_category_index_en_US" model="se.index">
         <field name="model_id" ref="shopinvader.model_shopinvader_category" />
         <field name="lang_id" eval="ref('base.lang_en')" />
-        <field name="backend_id" ref="elasticsearch_backend" />
+        <field
+      name="backend_id"
+      search="[('tech_name','=','elasticsearch_backend')]"
+      model='se.backend'
+    />
         <field name="exporter_id" ref="shopinvader.ir_exp_shopinvader_category" />
         <field name="config_id" ref="index_config_shopinvader_category" />
     </record>
 
     <record id="eshop_ads_index_fr_BE" model="se.index">
         <field name="model_id" ref="alc_eshop_ads.model_alc_eshop_ads" />
-        <field name="backend_id" ref="elasticsearch_backend" />
+        <field
+      name="backend_id"
+      search="[('tech_name','=','elasticsearch_backend')]"
+      model='se.backend'
+    />
         <field name="lang_id" eval="ref('base.lang_fr_BE')" />
         <field
       name="config_id"
@@ -230,7 +258,11 @@
     </record>
     <record id="eshop_ads_index_nl_BE" model="se.index">
         <field name="model_id" ref="alc_eshop_ads.model_alc_eshop_ads" />
-        <field name="backend_id" ref="elasticsearch_backend" />
+        <field
+      name="backend_id"
+      search="[('tech_name','=','elasticsearch_backend')]"
+      model='se.backend'
+    />
         <field name="lang_id" eval="ref('base.lang_nl_BE')" />
         <field
       name="config_id"
@@ -239,7 +271,11 @@
     </record>
     <record id="eshop_ads_index_en" model="se.index">
         <field name="model_id" ref="alc_eshop_ads.model_alc_eshop_ads" />
-        <field name="backend_id" ref="elasticsearch_backend" />
+        <field
+      name="backend_id"
+      search="[('tech_name','=','elasticsearch_backend')]"
+      model='se.backend'
+    />
         <field name="lang_id" eval="ref('base.lang_en')" />
         <field
       name="config_id"
