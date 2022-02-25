@@ -15,6 +15,9 @@ class AlcDocument(models.Model):
     compute = fields.Selection(
         selection_add=[("pricelist", "Pricelist"), ("discount", "Discount")]
     )
+    type = fields.Selection(
+        selection_add=[("pricelist", "Pricelist"), ("discount", "Discount")]
+    )
 
     @api.model
     def _generation_formats(self):
@@ -27,6 +30,7 @@ class AlcDocument(models.Model):
             vals = {
                 "name": "FR_PromotionsAlcyon.%s" % file_format,
                 "compute": "discount",
+                "type": "discount",
                 "partner_id": partner.id,
                 "format": file_format,
             }
@@ -40,6 +44,7 @@ class AlcDocument(models.Model):
             vals = {
                 "name": "Liste de prix Alcyon Belux.%s" % file_format,
                 "compute": "pricelist",
+                "type": "pricelist",
                 "partner_id": partner.id,
                 "format": file_format,
             }

@@ -23,6 +23,15 @@ class AlcDocument(models.Model):
     partner_id = fields.Many2one("res.partner", readonly=True, ondelete="cascade")
     sale_channel = fields.Char(readonly=True)
     allowed_partner_types = fields.Char(string="Allowed Partner Types", readonly=True)
+    type = fields.Selection(
+        selection=[
+            ("order", "Order"),
+            ("delivery_note", "Delivery Note"),
+            ("invoice", "Invoice"),
+            ("credit_note", "Credit Note"),
+        ],
+        readonly=True,
+    )
 
     name = fields.Char(required=True, readonly=True)
     format = fields.Char(readonly=True)
@@ -100,6 +109,18 @@ class AlcDocument(models.Model):
         return sale_channel
 
     @api.model
+    def _get_type(self, attachment):
+        document_type = False
+        if attachment.res_model == "sale.order":
+            document_type = "order"
+        elif attachment.res_model == "stock.picking":
+            document_type = "delivery_note"
+        elif attachment.res_model == "account.invoice":
+            is_invoice = self._record(attachment).type == "out_invoice"
+            document_type = "invoice" if is_invoice else "credit_note"
+        return document_type
+
+    @api.model
     def _partner_needs_dossier(self, attachment):
         partner = self._get_partner(attachment)
         return not partner or partner.needs_dossier
@@ -120,6 +141,7 @@ class AlcDocument(models.Model):
             "partner_id": self._get_partner(attachment).id,
             "format": self._get_format(attachment),
             "sale_channel": self._get_sale_channel(attachment),
+            "type": self._get_type(attachment),
         }
 
     @api.model
