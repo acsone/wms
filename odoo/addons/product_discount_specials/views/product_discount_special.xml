@@ -85,7 +85,7 @@
     <menuitem
     id="product_discount_special_menu"
     name="Discount Specials"
-    parent="sales_team.menu_sale_config"
+    parent="sales_team.menu_sales"
     action="product_discount_special_act_window"
     sequence="99"
   />
