@@ -14,7 +14,38 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: shopinvader_search_engine_update
+#: model:ir.model.fields,field_description:shopinvader_search_engine_update.field_ir_model_continous_update
+msgid "Continous update"
+msgstr ""
+
+#. module: shopinvader_search_engine_update
+#: model:ir.model,name:shopinvader_search_engine_update.model_ir_model
+msgid "Models"
+msgstr ""
+
+#. module: shopinvader_search_engine_update
 #: model:ir.model,name:shopinvader_search_engine_update.model_product_product
 msgid "Product"
+msgstr ""
+
+#. module: shopinvader_search_engine_update
+#: code:addons/shopinvader_search_engine_update/models/se_index.py:39
+#, python-format
+msgid "Recompute json for %s record(s)."
+msgstr ""
+
+#. module: shopinvader_search_engine_update
+#: model:ir.model,name:shopinvader_search_engine_update.model_se_index
+msgid "Se Index"
+msgstr ""
+
+#. module: shopinvader_search_engine_update
+#: model:ir.model,name:shopinvader_search_engine_update.model_shopinvader_variant
+msgid "Shopinvader Variant"
+msgstr ""
+
+#. module: shopinvader_search_engine_update
+#: model:ir.model.fields,field_description:shopinvader_search_engine_update.field_shopinvader_variant_to_update
+msgid "To update"
 msgstr ""
 
