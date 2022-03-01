@@ -209,7 +209,7 @@ odoo10-addon-shopinvader-product-attribute-set @ git+https://github.com/acsone/o
 odoo10-addon-shopinvader-product-stock @ git+https://github.com/acsone/odoo-shopinvader.git@a0519f6e027c43e91835249e2a83274d824308da#subdirectory=setup/shopinvader_product_stock
 odoo10-addon-shopinvader-product-stock-state==10.0.1.0.0.99.dev5
 odoo10-addon-shopinvader-search-engine==10.0.1.2.1.99.dev3
-odoo10-addon-shopinvader-wishlist @ git+https://github.com/acsone/odoo-shopinvader.git@a0519f6e027c43e91835249e2a83274d824308da#subdirectory=setup/shopinvader_wishlist
+odoo10-addon-shopinvader-wishlist @ git+https://github.com/acsone/odoo-shopinvader.git@9d0516759f68ac286aab1ccb04119b8baad0b664#subdirectory=setup/shopinvader_wishlist
 odoo10-addon-slow-statement-logger @ git+https://github.com/acsone/server-tools@a619cdf9dfae7e60ff02caa3c588058283440e16#subdirectory=setup/slow_statement_logger
 odoo10-addon-sql-request-abstract @ git+https://github.com/acsone/server-tools.git@dcefdba5bac014076f05229ba091acd8b739e164#subdirectory=setup/sql_request_abstract
 odoo10-addon-stock-available==10.0.1.0.1.99.dev6
