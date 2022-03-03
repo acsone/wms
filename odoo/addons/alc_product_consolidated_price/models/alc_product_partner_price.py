@@ -40,22 +40,6 @@ class AlcProductPartnerPrice(models.Model):
         )
         return seller.discount_sale or 0.0
 
-    @api.model
-    def _get_alcyon_discount(self, product, partner):
-        price_rule = partner.discount_pricelist_id.get_product_price_rule(
-            product, 1.0, partner
-        )
-        alcyon_discount = 0.0
-        if price_rule and len(price_rule) == 2 and price_rule[1]:
-            rule = self.env["product.pricelist.item"].browse(price_rule[1])
-
-            if rule.compute_price == "percentage":
-                alcyon_discount = rule.percent_price
-            else:
-                price_unit = product.price
-                alcyon_discount = (price_unit - price_rule[0]) / price_unit * 100
-        return alcyon_discount
-
     def _get_final_discount(self, *discounts):
         discounts = [1 - (discount or 0.0) / 100 for discount in discounts]
         final_discount = 1
@@ -76,13 +60,17 @@ class AlcProductPartnerPrice(models.Model):
             pricelist=partner.property_product_pricelist.id,
             quantity=1.0,
         )
+        price_key = partner.property_product_pricelist.role_name
+        discount_key = partner.discount_pricelist_id.discount_role_name
         for product in products:
+            base_price = product._price_cache_get(price_key).get("price", 0)
+            discount = product._price_cache_get(discount_key) if discount_key else {}
+            alcyon_discount = discount.get("discount", 0)
             supplier_discount = self._get_supplier_discount(product)
-            alcyon_discount = self._get_alcyon_discount(product, partner)
             final_discount = self._get_final_discount(
                 supplier_discount, alcyon_discount
             )
-            price = product.price * (1.0 - final_discount / 100.0)
+            price = base_price * (1.0 - final_discount / 100.0)
             vals = {
                 "product_id": product.id,
                 "partner_id": partner.id,
