@@ -10,7 +10,12 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["specific_product", "pricelist_discount", "sales_team"],
+    "depends": [
+        "specific_product",
+        "pricelist_discount",
+        "sales_team",
+        "alc_price_cache",
+    ],
     "data": ["security/alc_product_partner_price.xml"],
     "demo": [],
 }
