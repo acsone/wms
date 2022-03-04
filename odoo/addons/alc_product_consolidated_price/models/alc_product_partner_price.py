@@ -75,7 +75,7 @@ class AlcProductPartnerPrice(models.Model):
             vals = {
                 "product_id": product.id,
                 "partner_id": partner.id,
-                "unit_price": product.price,
+                "unit_price": base_price,
                 "supplier_discount": supplier_discount,
                 "alcyon_discount": alcyon_discount,
                 "net_price": price,
