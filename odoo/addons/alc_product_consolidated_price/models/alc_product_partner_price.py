@@ -60,13 +60,14 @@ class AlcProductPartnerPrice(models.Model):
             pricelist=partner.property_product_pricelist.id,
             quantity=1.0,
         )
+        has_sd = partner.supplier_promotion_sale_allowed
         price_key = partner.property_product_pricelist.role_name
         discount_key = partner.discount_pricelist_id.discount_role_name
         for product in products:
             base_price = product._price_cache_get(price_key).get("price", 0)
             discount = product._price_cache_get(discount_key) if discount_key else {}
             alcyon_discount = discount.get("discount", 0)
-            supplier_discount = self._get_supplier_discount(product)
+            supplier_discount = self._get_supplier_discount(product) if has_sd else 0
             final_discount = self._get_final_discount(
                 supplier_discount, alcyon_discount
             )
