@@ -33,17 +33,19 @@ class ProductProduct(models.Model):
     @api.constrains("active", "is_new", "barcode", "no_barcode_authorized")
     def _check_barcode_is_mandatory(self):
         if not self.env.context.get("disable_check_barcode_constrains"):
-            for product in self:
-                if (
-                    product.active
-                    and not product.is_new
-                    and not product.no_barcode_authorized
-                    and not product.barcode
-                ):
-                    msg = _(
-                        "You must enter a barcode or specify product without barcode"
-                    )
-                    raise ValidationError(msg)
+            filter_bad = lambda p: (
+                p.active
+                and not p.is_new
+                and not p.no_barcode_authorized
+                and not p.barcode
+            )
+            bad_products = self.filtered(filter_bad)
+            if bad_products:
+                msg = _(
+                    "You must enter a barcode or specify product without barcode. "
+                    "Affected products ids: %s"
+                )
+                raise ValidationError(msg % bad_products.ids)
 
     def write(self, vals):
         result = super(ProductProduct, self).write(vals)
