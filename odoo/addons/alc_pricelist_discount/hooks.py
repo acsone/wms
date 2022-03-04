@@ -15,7 +15,7 @@ def column_exists(cr, tablename, columnname):
 def pre_init_hook(cr):
     """Fix data that does not follow the new constraints."""
     # Only Alcyon specific line:
-    base_pl_ids = [2, 3, 67]  # prix de vente brut 1, 2, Alcyon France
+    base_pl_ids = [2, 3, 67, 119]  # prix de vente brut 1, 2, Alcyon France, newpharma
 
     table = "product_pricelist"
     column = "is_discount"
