@@ -146,19 +146,8 @@ class RoundInstance(models.Model):
                 state = "cancelled"
             elif status == "terminated":
                 state = "success"
-            elif status in (
-                "undefined",
-                "waiting",
-                "geocoding",
-                "mileageChartBuilding",
-                "running",
-                "sectorizationRunning",
-                "sectorizationFinished",
-                "sectorizationAborted",
-            ):
-                state = "in_progress"
             else:
-                raise ValueError("unknow optimization status %s" % status)
+                state = "in_progress"
             record.geo_optimization_state = state
 
     @api.depends("shipping_ids")
