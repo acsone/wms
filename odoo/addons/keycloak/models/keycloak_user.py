@@ -98,3 +98,7 @@ class KeycloakUser(models.Model):
         window_action = self.env.ref(action_xml_id).read()[0]
         window_action["res_id"] = wizard.id
         return window_action
+
+    def _get_token(self):
+        self.ensure_one()
+        return self.keycloak_backend_id._get_token(self)
