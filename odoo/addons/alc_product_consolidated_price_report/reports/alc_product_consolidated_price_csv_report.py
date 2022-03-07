@@ -27,7 +27,7 @@ class AlcProductConsolidatedPriceCsvReport(models.AbstractModel):
                             lambda t: t.amount_type == "percent"
                         ).mapped("description")
                     ),
-                    "LIST_PRICE": product.list_price,
+                    "LIST_PRICE": cons_price.unit_price,
                     "DISCOUNT": cons_price.supplier_discount,
                     "NET_PRICE": cons_price.net_price,
                     "SUPPLIER": product.seller_ids[0].name.name
