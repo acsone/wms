@@ -30,3 +30,9 @@ class SeBackendElasticsearch(models.Model):
         with self.work_on(self._name, index=None) as work:
             adapter = work.component(usage="se.backend.adapter")
             return adapter.put_roles()
+
+    def synchronize_role(self, role):
+        self.ensure_one()
+        with self.work_on(self._name, index=None) as work:
+            adapter = work.component(usage="se.backend.adapter")
+            return adapter.put_role(role)

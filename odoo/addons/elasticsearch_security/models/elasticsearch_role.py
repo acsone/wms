@@ -24,6 +24,10 @@ class ElasticSearchRole(models.Model):
             backend_roles = [self.name]
         return backend_roles
 
+    def synchronize(self):
+        for role in self:
+            role.backend_id.synchronize_role(role)
+
     _sql_constraints = [
         (
             "name_backend_uniq",

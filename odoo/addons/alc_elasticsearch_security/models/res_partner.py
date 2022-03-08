@@ -21,23 +21,24 @@ class ResPartner(models.Model):
             partner.pricelist_role = partner.property_product_pricelist.role_name
             partner.discount_pricelist_role = partner.discount_pricelist_id.role_name
 
+    def _get_elasticearch_roles(self):
+        self.ensure_one()
+        partner_type = self.partner_type
+        roles = {
+            partner_type,
+            self.pricelist_role,
+            self.discount_pricelist_role,
+            self.supplier_promotion_sale_allowed and "supplier_promotion",
+        }
+        if partner_type != "supplier":  # supplier can see prices...
+            roles.add("guest")
+        return {r for r in roles if r}
+
     @api.depends("partner_type", "pricelist_role", "supplier_promotion_sale_allowed")
     def _compute_elasticsearch_role(self):
         # depends on property_product_pricelist.name, but this isn't stored
         roles = {
-            p: ",".join(
-                {
-                    e
-                    for e in {
-                        "guest",
-                        p.partner_type,
-                        p.pricelist_role,
-                        p.discount_pricelist_role,
-                        p.supplier_promotion_sale_allowed and "supplier_promotion",
-                    }
-                    if e
-                }
-            )
+            p: ",".join(p._get_elasticearch_roles())
             for p in self.with_context(lang=False)
         }
         for partner in self:
