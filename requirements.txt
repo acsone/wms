@@ -123,6 +123,7 @@ odoo10-addon-base-ubl==10.0.1.1.0
 odoo10-addon-base-unece==10.0.1.0.0.99.dev2
 odoo10-addon-base-url==10.0.0.2.0
 odoo10-addon-base-vat-sanitized==10.0.1.0.0.99.dev9
+odoo10-addon-bi-sql-editor==10.0.1.0.2
 odoo10-addon-component==10.0.1.1.1
 odoo10-addon-component-event==10.0.1.0.1
 odoo10-addon-connector @ git+https://github.com/acsone/connector@de23258a4d639e696d6e4d941ba005a1577a9935#subdirectory=setup/connector
@@ -211,7 +212,7 @@ odoo10-addon-shopinvader-product-stock-state==10.0.1.0.0.99.dev5
 odoo10-addon-shopinvader-search-engine==10.0.1.2.1.99.dev3
 odoo10-addon-shopinvader-wishlist @ git+https://github.com/acsone/odoo-shopinvader.git@57bcedac2bd10524ce082d3a93255a3470153508#subdirectory=setup/shopinvader_wishlist
 odoo10-addon-slow-statement-logger @ git+https://github.com/acsone/server-tools@a619cdf9dfae7e60ff02caa3c588058283440e16#subdirectory=setup/slow_statement_logger
-odoo10-addon-sql-request-abstract @ git+https://github.com/acsone/server-tools.git@dcefdba5bac014076f05229ba091acd8b739e164#subdirectory=setup/sql_request_abstract
+odoo10-addon-sql-request-abstract==10.0.1.0.1.99.dev5
 odoo10-addon-stock-available==10.0.1.0.1.99.dev6
 odoo10-addon-stock-available-immediately==10.0.1.0.0.99.dev7
 odoo10-addon-stock-disable-force-availability-button @ git+https://github.com/acsone/stock-logistics-workflow.git@73135ace7b20fc3b86dcb8b0459c9b8a203d1474#subdirectory=setup/stock_disable_force_availability_button

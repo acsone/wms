@@ -81,6 +81,7 @@
         "product_packaging_type",
         "product_packaging_type_pallet",
         "product_packaging_dimension",
+        "bi_sql_editor",
         # specific
         "alc_running_env",
         # "alc_geo_delivery_rounds",
