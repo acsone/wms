@@ -176,6 +176,7 @@
         "l10n_be_vat",
         "partner_archive_new_partner",
         "product_price_import",
+        "product_animal_species_business_unit_view",
         "purchase_prepaid",
         "purchase_unlink_cancelop",
         "purchase_update_procurement_qty",
