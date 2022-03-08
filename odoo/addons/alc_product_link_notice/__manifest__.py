@@ -16,4 +16,5 @@
         "views/product_template.xml",
     ],
     "demo": [],
+    "pre_init_hook": "pre_init_hook",
 }
