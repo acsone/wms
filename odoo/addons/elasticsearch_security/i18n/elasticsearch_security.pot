@@ -150,6 +150,11 @@ msgstr ""
 
 #. module: elasticsearch_security
 #: model:ir.ui.view,arch_db:elasticsearch_security.se_backend_elasticsearch_form_view
+msgid "Synchronize"
+msgstr ""
+
+#. module: elasticsearch_security
+#: model:ir.ui.view,arch_db:elasticsearch_security.se_backend_elasticsearch_form_view
 msgid "Synchronize Roles"
 msgstr ""
 
