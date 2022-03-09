@@ -48,6 +48,7 @@ class ProductProduct(models.Model):
         """If pricelists (or discount_pricelists) is not given,
            it is assumed to mean all pricelists."""
         clean = False  # whether to clean up the cache
+        currency = self.env.ref("base.EUR")
         # if we changed the default price of the product, all prices have to be updated
         if not pricelists:
             pricelists = self.env["product.pricelist"].search([])
@@ -62,6 +63,7 @@ class ProductProduct(models.Model):
                         pl_prices = self.remove_from_cache(pl_prices, eids)
                     for date in dates[pricelist]:
                         price = pricelist._get_cache_price(product, date)
+                        price["price"] = currency.round(price["price"])
                         pl_prices = self.add_to_cache(pl_prices, price)
                     price_cache[pricelist.role_name] = pl_prices
                 else:
