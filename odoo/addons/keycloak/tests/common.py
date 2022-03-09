@@ -25,6 +25,5 @@ class TestKeycloak(SavepointCase, JobMixin):
             "keycloak_backend_id": cls.keycloak_backend.id,
             "partner_id": cls.partner.id,
             "username": "username",
-            "password": "password",
             "enabled": True,
         }

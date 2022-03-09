@@ -27,7 +27,6 @@ class KeycloakUser(models.Model):
         "matching between the token and keycloak.user, we also store"
         "the username in lower case into a dedicated column.",
     )
-    password = fields.Char(readonly=True)  # update through wizard
     enabled = fields.Boolean(default=True)
 
     keycloak_id = fields.Char(readonly=True)
