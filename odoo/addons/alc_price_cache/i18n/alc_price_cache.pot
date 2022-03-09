@@ -48,7 +48,7 @@ msgid "Update products prices for pricelist %s."
 msgstr ""
 
 #. module: alc_price_cache
-#: code:addons/alc_price_cache/models/product_product.py:94
+#: code:addons/alc_price_cache/models/product_product.py:96
 #, python-format
 msgid "Update products prices for product %s."
 msgstr ""

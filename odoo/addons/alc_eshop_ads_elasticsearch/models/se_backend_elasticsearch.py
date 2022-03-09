@@ -14,10 +14,12 @@ class SeBackendElasticsearch(models.Model):
     def export_ads(self, ads=None):
         for rec in self:
             ads = ads or rec.env["alc.eshop.ads"]._get_ads_to_sync()
-            for index in rec.index_ids:
+            for index in rec.index_ids.filtered(
+                lambda i: i.model_id.model == "alc.eshop.ads"
+            ):
                 with rec.work_on(rec._name, index=index) as work:
                     adapter = work.component(usage="se.backend.adapter")
-                    return adapter.put_ads(ads)
+                    adapter.put_ads(ads)
             ads.write({"sync_state": "done"})
 
     def synchronize_ads(self):

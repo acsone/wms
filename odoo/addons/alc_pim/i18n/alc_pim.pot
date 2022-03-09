@@ -2694,12 +2694,6 @@ msgid "Magnesium"
 msgstr ""
 
 #. module: alc_pim
-#: model:attribute.attribute,field_description:alc_pim.attribute_species_id
-#: model:ir.model.fields,field_description:alc_pim.attribute_species_id_ir_model_fields
-msgid "Main Species"
-msgstr ""
-
-#. module: alc_pim
 #: model:product.category,name:alc_pim.mains_antietdes_hygetster_equip
 #: model:product.category,name:alc_pim.mains_hygdupers_hyg_vieprat
 msgid "Mains"
