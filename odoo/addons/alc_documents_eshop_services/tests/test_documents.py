@@ -25,7 +25,9 @@ class TestDocumentsServiceFlow(TestDocumentsService):
         domain_documents = self.alc_document_model.get_partner_domain(self.partner)
         document = self.alc_document_model.search(domain_documents)
         document.write({"sale_channel": False})
+        document.attachment_id.write({"res_model": False})
         with self.documents_service() as service:
             result = service.search()
             self.assertEqual(result["size"], 1)
             self.assertEqual(None, result["data"][0]["sale_channel"])
+            self.assertEqual(None, result["data"][0]["res_model"])

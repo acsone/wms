@@ -79,7 +79,7 @@ class DocumentService(Component):
             "id": {"type": "integer", "required": True, "nullable": False},
             "name": {"type": "string", "required": True, "nullable": False},
             "type": {"type": "string", "required": True, "nullable": True},
-            "res_model": {"type": "string", "required": True, "nullable": False},
+            "res_model": {"type": "string", "required": False, "nullable": True},
             "format": {"type": "string", "required": True, "nullable": True},
             "sale_channel": {"type": "string", "required": False, "nullable": True},
         }
