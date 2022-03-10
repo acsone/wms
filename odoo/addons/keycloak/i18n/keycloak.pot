@@ -230,7 +230,6 @@ msgstr ""
 #. module: keycloak
 #: model:ir.model.fields,field_description:keycloak.field_keycloak_backend_password
 #: model:ir.model.fields,field_description:keycloak.field_keycloak_partner_wizard_password
-#: model:ir.model.fields,field_description:keycloak.field_keycloak_user_password
 #: model:ir.model.fields,field_description:keycloak.field_keycloak_user_wizard_password
 msgid "Password"
 msgstr ""
@@ -281,21 +280,21 @@ msgid "Temporary"
 msgstr ""
 
 #. module: keycloak
-#: code:addons/keycloak/models/keycloak_user.py:44
+#: code:addons/keycloak/models/keycloak_user.py:43
 #: sql_constraint:keycloak.user:0
 #, python-format
 msgid "This Keycloak ID already exists, which should be impossible."
 msgstr ""
 
 #. module: keycloak
-#: code:addons/keycloak/models/keycloak_user.py:39
+#: code:addons/keycloak/models/keycloak_user.py:38
 #: sql_constraint:keycloak.user:0
 #, python-format
 msgid "This partner already has a user on this backend."
 msgstr ""
 
 #. module: keycloak
-#: code:addons/keycloak/models/keycloak_user.py:49
+#: code:addons/keycloak/models/keycloak_user.py:48
 #: sql_constraint:keycloak.user:0
 #, python-format
 msgid "This username already exists on this backend"
