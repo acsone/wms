@@ -63,8 +63,9 @@ class KeycloakUser(models.Model):
     @api.model
     def create(self, vals):
         res = super(KeycloakUser, self).create(vals)
-        desc = _("Create Keycloak User %s") % res.username
-        res.keycloak_backend_id.with_delay(description=desc).create_user(res)
+        if not self.env.context.get("disable_keycloak_sync", False):
+            desc = _("Create Keycloak User %s") % res.username
+            res.keycloak_backend_id.with_delay(description=desc).create_user(res)
         return res
 
     def unlink(self):
