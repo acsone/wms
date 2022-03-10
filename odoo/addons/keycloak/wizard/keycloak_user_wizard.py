@@ -47,5 +47,6 @@ class KeycloakPartnerWizard(models.TransientModel):
         user = self.keycloak_user_id
         if not self.password:
             raise ValidationError(_("You need to enter a password."))
-        user.password = self.password
-        return user.keycloak_backend_id.update_user_password(user, self.temporary)
+        return user.keycloak_backend_id.update_user_password(
+            user, self.password, self.temporary
+        )

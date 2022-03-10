@@ -24,7 +24,6 @@
                         <field name="keycloak_backend_id" />
                         <field name="partner_id" />
                         <field name="enabled" />
-                        <field name="password" password="True" />
                     </group>
                 </sheet>
             </form>

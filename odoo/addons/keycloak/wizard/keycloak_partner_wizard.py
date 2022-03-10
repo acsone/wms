@@ -29,14 +29,15 @@ class KeycloakPartnerWizard(models.TransientModel):
             "keycloak_backend_id": self.keycloak_backend_id.id,
             "partner_id": self.partner_id.id,
             "username": self.username,
-            "password": self.password,
             "enabled": self.enabled,
         }
 
     def _create_keycloak_user(self):
         vals = self._get_vals()
         user_model = self.env["keycloak.user"]
-        return user_model.with_context(test_queue_job_no_delay=True).create(vals)
+        return user_model.with_context(
+            test_queue_job_no_delay=True, keycloak_password=self.password
+        ).create(vals)
 
     @api.model
     def create(self, vals):

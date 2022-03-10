@@ -71,16 +71,18 @@ class KeycloakBackend(models.Model):
         """
         keycloak_user.ensure_one()
         split_name = keycloak_user.partner_id.name.split(None, 1)
-        credentials = [{"value": keycloak_user.password, "type": "password"}]
-        return {
+        payload = {
             "email": keycloak_user.partner_id.email,
             "username": keycloak_user.keycloak_username,
             "enabled": keycloak_user.enabled,
             "firstName": split_name[0] if len(split_name) > 0 else "",
             "lastName": split_name[1] if len(split_name) > 1 else "",
-            "credentials": credentials,
             "attributes": {},
         }
+        keycloak_password = self.env.context.get("keycloak_password", None)
+        if keycloak_password:
+            payload["credentials"] = [{"value": keycloak_password, "type": "password"}]
+        return payload
 
     @job()
     def delete_user(self, keycloak_user):
@@ -89,10 +91,10 @@ class KeycloakBackend(models.Model):
         client = self._get_admin_client()
         return client.delete_user(user_id=keycloak_user.keycloak_id)
 
-    def update_user_password(self, user, temporary=True):
+    def update_user_password(self, user, password, temporary=True):
         client = self._get_admin_client()
         return client.set_user_password(
-            user_id=user.keycloak_id, password=user.password, temporary=temporary
+            user_id=user.keycloak_id, password=password, temporary=temporary
         )
 
     @api.model
