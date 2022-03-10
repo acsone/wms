@@ -117,5 +117,6 @@ odoo10-addon-shopinvader-wishlist @  git+https://github.com/acsone/odoo-shopinva
 
 # oca/res-framework
 odoo10-addon-base-rest @ git+https://github.com/acsone/rest-framework.git@10.0-backport-from-14.0#subdirectory=setup/base_rest
+odoo10-addon-base-rest-auth-api-key @ git+https://github.com/acsone/rest-framework.git@10.0-backport-from-14.0#subdirectory=setup/base_rest_auth_api_key
 odoo10-addon-base-rest-auth-jwt @ git+https://github.com/acsone/rest-framework.git@10.0-backport-from-14.0#subdirectory=setup/base_rest_auth_jwt
 odoo10-addon-rest-log @ git+https://github.com/acsone/rest-framework.git@10.0-backport-from-14.0#subdirectory=setup/rest_log

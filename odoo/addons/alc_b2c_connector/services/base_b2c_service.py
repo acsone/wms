@@ -33,20 +33,6 @@ class BaseB2CService(AbstractComponent):
             raise AccessDenied(_("This user has no access to the B2C REST Api."))
         return super(BaseB2CService, self).dispatch(method_name, *args, **kwargs)
 
-    def _get_openapi_default_parameters(self):
-        defaults = super(BaseB2CService, self)._get_openapi_default_parameters()
-        defaults.append(
-            {
-                "name": "API-KEY",
-                "in": "header",
-                "description": "Auth API key",
-                "required": True,
-                "schema": {"type": "string"},
-                "style": "simple",
-            }
-        )
-        return defaults
-
     def _to_dt_utc_with_tz(self, value_str):
         if not value_str:
             return None
