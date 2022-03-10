@@ -339,6 +339,13 @@
                 </td>
               </tr>
               <tr>
+               <td>
+                                CBC:
+                                <span t-esc="bank_cbc.bank_acc_number" />
+                                <br />
+                                BIC:
+                                <span t-esc="bank_cbc.bank_id.bic" />
+                            </td>
                 <td>
                                 ING:
                                 <span t-esc="bank_ing.bank_acc_number" />
@@ -346,6 +353,8 @@
                                 BIC:
                                 <span t-esc="bank_ing.bank_id.bic" />
                             </td>
+                </tr>
+                <tr>
                 <td>
                                 BELFIUS:
                                 <span t-esc="bank_dexia.bank_acc_number" />
@@ -353,8 +362,6 @@
                                 BIC:
                                 <span t-esc="bank_dexia.bank_id.bic" />
                             </td>
-              </tr>
-              <tr>
                 <td>
                                 BNP PARIBAS FORTIS :
                                 <span t-esc="bank_bnp.bank_acc_number" />
