@@ -239,6 +239,15 @@ class StockPicking(models.Model):
             to_reassign.action_assign()
         return res
 
+    def _create_backorder(self, backorder_moves=None):
+        backorders = super(StockPicking, self)._create_backorder(backorder_moves)
+        backorders_all_at_once = backorders.filtered(
+            lambda bo: bo.mapped("backorder_id.move_type") == "one"
+        )
+        for bo in backorders_all_at_once:
+            bo.delivery_round_id = bo.backorder_id.delivery_round_id
+        return backorders
+
 
 class StockPickingType(models.Model):
     _inherit = "stock.picking.type"
