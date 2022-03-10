@@ -614,6 +614,11 @@ msgid "By lot"
 msgstr "Par lot"
 
 #. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
+msgid "CBC:"
+msgstr "CBC:"
+
+#. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.deliveryslip_without_price
 msgid "CNK"
 msgstr "CNK"
@@ -1372,9 +1377,6 @@ msgid ""
 msgstr ""
 "|\n"
 "                <span>Téléphone:</span>"
-
-#~ msgid "CBC:"
-#~ msgstr "CBC:"
 
 #~ msgid "DEXIA:"
 #~ msgstr "DEXIA:"
