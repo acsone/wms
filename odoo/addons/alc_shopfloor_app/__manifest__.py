@@ -21,6 +21,7 @@
         "alc_shopfloor_mobile",
         "alc_shopfloor_mobile_change_pack_lot_back_button",
         "alc_shopfloor_mobile_cluster_picking",
+        "alc_shopfloor_mobile_cluster_picking_workstation",
         "alc_shopfloor_mobile_packing",
         "alc_shopfloor_mobile_product_print_label",
         "alc_shopfloor_mobile_qty_picker_font_style",
