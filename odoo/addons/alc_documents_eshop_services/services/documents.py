@@ -145,7 +145,7 @@ class DocumentService(Component):
 
     def _convert_one_record(self, record):
         record.ensure_one()
-        return {key: record[key] or None for key in self._get_model_schema()}
+        return record.jsonify(self._get_model_schema().keys(), one=True)
 
     def _get_binary_content(self, target):
         content = target._get_data()

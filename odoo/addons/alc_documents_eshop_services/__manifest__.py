@@ -9,6 +9,6 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["base_rest", "alc_documents"],
+    "depends": ["alc_documents", "base_jsonify", "base_rest"],
     "demo": [],
 }
