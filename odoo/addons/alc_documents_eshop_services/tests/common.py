@@ -2,9 +2,11 @@
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from contextlib import contextmanager
+from datetime import datetime, timedelta
 
 import mock
 
+from odoo import fields
 from odoo.tools import mute_logger
 
 from odoo.addons.alc_documents.tests.common import TestAlcDocuments
@@ -27,6 +29,9 @@ class TestDocumentsService(TestAlcDocuments, ComponentMixin):
         sale_order = cls.so_model_no_delay.create(vals_sale_order)
         sale_order.action_confirm()
         sale_order.create_reports()
+
+        cls.yesterday = fields.Date.to_string(datetime.now() - timedelta(days=1))
+        cls.tomorrow = fields.Date.to_string(datetime.now() + timedelta(days=1))
 
     @classmethod
     @contextmanager
