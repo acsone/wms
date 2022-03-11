@@ -21,13 +21,13 @@ msgid "# of documents"
 msgstr ""
 
 #. module: alc_documents
-#: code:addons/alc_documents/models/alc_document.py:83
+#: code:addons/alc_documents/models/alc_document.py:86
 #, python-format
 msgid "A document without an attachment needs a compute method."
 msgstr ""
 
 #. module: alc_documents
-#: code:addons/alc_documents/models/alc_document.py:75
+#: code:addons/alc_documents/models/alc_document.py:78
 #, python-format
 msgid "A public document should be accessible."
 msgstr ""
@@ -56,7 +56,7 @@ msgid "Alcyon Documents User"
 msgstr ""
 
 #. module: alc_documents
-#: code:addons/alc_documents/models/alc_document.py:77
+#: code:addons/alc_documents/models/alc_document.py:80
 #, python-format
 msgid "All partner_types should be valid."
 msgstr ""
@@ -89,6 +89,11 @@ msgstr ""
 #. module: alc_documents
 #: selection:alc.document,type:0
 msgid "Credit Note"
+msgstr ""
+
+#. module: alc_documents
+#: model:ir.model.fields,field_description:alc_documents.field_alc_document_document_date
+msgid "Date Created"
 msgstr ""
 
 #. module: alc_documents
@@ -171,7 +176,7 @@ msgid "Pricelist"
 msgstr ""
 
 #. module: alc_documents
-#: code:addons/alc_documents/models/alc_document.py:149
+#: code:addons/alc_documents/models/alc_document.py:152
 #, python-format
 msgid "Process dossier for attachment %s"
 msgstr ""
@@ -202,7 +207,7 @@ msgid "Type"
 msgstr ""
 
 #. module: alc_documents
-#: code:addons/alc_documents/models/alc_document.py:70
+#: code:addons/alc_documents/models/alc_document.py:73
 #, python-format
 msgid "You cannot have a public document with a partner."
 msgstr ""
