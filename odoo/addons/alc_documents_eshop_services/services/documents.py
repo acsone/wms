@@ -145,7 +145,9 @@ class DocumentService(Component):
 
     def _convert_one_record(self, record):
         record.ensure_one()
-        return record.jsonify(self._get_model_schema().keys(), one=True)
+        values = record.jsonify(self._get_model_schema().keys(), one=True)
+        values["document_date"] = None
+        return values
 
     def _get_binary_content(self, target):
         content = target._get_data()
