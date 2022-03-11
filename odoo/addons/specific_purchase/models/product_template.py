@@ -23,7 +23,6 @@ class ProductTemplate(models.Model):
         store=True,
         index=True,
     )
-    state_id = fields.Many2one("product.state", string="State")
     nb_days_out_of_stock = fields.Integer(
         help="Number of days before running out of stock",
         compute="_compute_date_out_of_stock",
@@ -45,15 +44,6 @@ class ProductTemplate(models.Model):
                 daily_csp = (12 * avg_csp) / 365.0
                 nb_days_out_of_stock = product.virtual_available * daily_csp
                 product.nb_days_out_of_stock = nb_days_out_of_stock
-
-
-class ProductState(models.Model):
-    _name = "product.state"
-    _order = "sequence"
-
-    name = fields.Char(required=True, translate=True)
-    code = fields.Char(required=True)
-    sequence = fields.Integer()
 
 
 class ProductProduct(models.Model):

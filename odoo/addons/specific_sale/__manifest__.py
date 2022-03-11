@@ -10,6 +10,7 @@
     "category": "Sales",
     "depends": [
         "alc_partner_type",
+        "alc_product_state",
         "alc_older_stock_production_lot",
         "alc_sale_channel",
         "alc_sale_order_line_product_type",

@@ -48,7 +48,7 @@ class ExportStockUpdateTestCase(SavepointCase):
         self.prod1.default_code = "ref1"
         self.prod1.type = "product"
         self.prod1.sale_ok = True
-        self.prod1.state_id = self.env.ref("specific_purchase.product_state_a")
+        self.prod1.state_id = self.env.ref("alc_product_state.product_state_a")
         self.prod2 = self.env["product.product"].create(
             {
                 "name": "test prod 2",
