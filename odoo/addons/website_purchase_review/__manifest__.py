@@ -14,6 +14,7 @@
     "depends": [
         "alc_product_mto",
         "alc_product_packaging",
+        "alc_product_state",
         "purchase_order_line_packaging_qty",
         "purchase",
         "stock",

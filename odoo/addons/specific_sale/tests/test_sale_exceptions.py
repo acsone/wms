@@ -505,7 +505,7 @@ class TestSaleOrderException(SavepointCase):
         line = self.so1.order_line[0]
         # Set the Out Of Stock At Supplier Level state on the product
         # And switch the product to trigger the exceptions
-        self.prod1.state_id = self.env.ref("specific_purchase.product_state_h")
+        self.prod1.state_id = self.env.ref("alc_product_state.product_state_h")
         line.product_id = self.prod_medoc_human
         line.product_id = self.prod1
         self.assertTrue(exception.warning_text in line.warning_text)

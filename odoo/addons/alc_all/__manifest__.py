@@ -213,6 +213,7 @@
     "application": True,
     "data": [
         "security/sale_order.xml",
+        "security/product_state.xml",
         "views/product_packaging.xml",
         "views/product_template.xml",
         "data/ir_config_parameter.xml",

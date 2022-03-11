@@ -34,7 +34,6 @@
         "views/email_template.xml",
         "views/ir_ui_menu.xml",
         # Data
-        "data/product_state.xml",
         "data/ir_config_parameter.xml",
         "data/ir_cron.xml",
         # Wizards

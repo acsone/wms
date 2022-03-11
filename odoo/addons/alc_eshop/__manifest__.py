@@ -23,6 +23,7 @@
         "alc_eshop_sale_channel",
         "alc_shopinvader_category",
         "alc_eshop_wishlist",
+        "alc_product_stock_state",
         "shopinvader_auth_jwt",
         "shopinvader_elasticsearch",
         "shopinvader_product_stock_state",

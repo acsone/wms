@@ -369,7 +369,7 @@ class SaleOrderLine(models.Model):
 
     def warning_supplier_break(self):
         """Add a warning for out of stock product at the supplier."""
-        supplier_nostock = self.env.ref("specific_purchase.product_state_h")
+        supplier_nostock = self.env.ref("alc_product_state.product_state_h")
         if self.product_id.state_id != supplier_nostock:
             return False
         product = self.product_id.with_context(
