@@ -4,7 +4,7 @@
 
 import mimetypes
 
-from odoo import _
+from odoo import _, fields
 from odoo.exceptions import MissingError
 from odoo.http import content_disposition, request
 
@@ -31,9 +31,18 @@ class DocumentService(Component):
     )
     def search(self, **params):
         document_type = params.pop("type", None)
+        for date in ("from_date", "to_date"):
+            if date in params and not isinstance(params[date], str):
+                params[date] = fields.Datetime.to_string(params[date])
         domain = self._get_base_domain()
         if document_type:
             domain.append(("type", "=", document_type))
+        from_date = params.pop("from_date", None)
+        if from_date:
+            domain.append(("document_date", ">=", from_date))
+        to_date = params.pop("to_date", None)
+        if to_date:
+            domain.append(("document_date", "<=", to_date))
         return self._paginate_search(domain, **params)
 
     @restapi.method(
@@ -72,6 +81,8 @@ class DocumentService(Component):
                 "required": False,
                 "nullable": True,
             },
+            "from_date": {"type": "datetime", "required": False, "nullable": True},
+            "to_date": {"type": "datetime", "required": False, "nullable": True},
         }
 
     def _get_model_schema(self):
@@ -82,6 +93,7 @@ class DocumentService(Component):
             "res_model": {"type": "string", "required": False, "nullable": True},
             "format": {"type": "string", "required": True, "nullable": True},
             "sale_channel": {"type": "string", "required": False, "nullable": True},
+            "document_date": {"type": "datetime", "required": False, "nullable": True},
         }
 
     def _search_output_schema(self):

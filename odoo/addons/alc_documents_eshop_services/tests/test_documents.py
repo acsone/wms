@@ -17,6 +17,18 @@ class TestDocumentsServiceFlow(TestDocumentsService):
             result = service.search(type="order")
             self.assertEqual(result["size"], 1)
 
+            result = service.search(from_date=self.yesterday)
+            self.assertEqual(result["size"], 1)
+
+            result = service.search(from_date=self.tomorrow)
+            self.assertEqual(result["size"], 0)
+
+            result = service.search(to_date=self.yesterday)
+            self.assertEqual(result["size"], 0)
+
+            result = service.search(to_date=self.tomorrow)
+            self.assertEqual(result["size"], 1)
+
         with self.documents_service(partner=self.partner_other) as service:
             result = service.search()
             self.assertEqual(result["size"], 0)

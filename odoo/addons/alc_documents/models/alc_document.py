@@ -20,6 +20,9 @@ class AlcDocument(models.Model):
     attachment_id = fields.Many2one("ir.attachment", readonly=True)
     compute = fields.Selection([], readonly=True)  # to extend
     res_model = fields.Char(related="attachment_id.res_model", readonly=True)
+    document_date = fields.Datetime(
+        related="attachment_id.create_date", store=True, readonly=True
+    )
     partner_id = fields.Many2one("res.partner", readonly=True, ondelete="cascade")
     sale_channel = fields.Char(readonly=True)
     allowed_partner_types = fields.Char(string="Allowed Partner Types", readonly=True)
