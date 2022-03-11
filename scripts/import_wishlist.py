@@ -40,6 +40,20 @@ class WhishlistImporter(object):
         """
         self.env.cr.execute(sql)
         self._partner_ids_by_ref = dict(self.env.cr.fetchall())
+        sql = """
+            SELECT
+                ref,
+                array_agg(id)
+            FROM
+                res_partner
+            WHERE
+                not active
+                and not is_b2c_customer
+            GROUP BY
+                ref;
+        """
+        self.env.cr.execute(sql)
+        self._inactive_partner_ids_by_ref = dict(self.env.cr.fetchall())
 
     def load_wishlist_by_partner(self):
         _logger.info("Loads wishlist by partner")
@@ -88,6 +102,9 @@ class WhishlistImporter(object):
 
     def _create_wishlist(self, csv_line):
         partner_id = self._partner_ids_by_ref.get(str(csv_line.erp_id))
+        if not partner_id and str(csv_line.erp_id) in self._inactive_partner_ids_by_ref:
+            _logger.info("Inactive partner for ref %s", csv_line.erp_id)
+            return
         if not partner_id:
             info = csv_line._asdict()
             info["error"] = "Partner not found %s" % csv_line.erp_id
