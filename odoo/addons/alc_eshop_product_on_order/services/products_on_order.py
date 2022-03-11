@@ -5,8 +5,9 @@
 from psycopg2 import sql
 from psycopg2.extensions import AsIs
 
-from odoo import _, fields
+from odoo import _
 
+from odoo.addons.alc_cerberus_utils import utils
 from odoo.addons.base_rest import restapi
 from odoo.addons.base_rest.components.service import to_int
 from odoo.addons.component.core import Component
@@ -98,8 +99,16 @@ class ProductsOnOrderService(Component):
             },
             "order_ref": {"type": "string", "nullable": False},
             "customer_ref": {"type": "string", "nullable": False},
-            "order_date_min": {"type": "date", "nullable": False},
-            "order_date_max": {"type": "date", "nullable": False},
+            "order_date_min": {
+                "type": "datetime",
+                "nullable": False,
+                "coerce": utils.isoformat_str_dt_to_dt_utc,
+            },
+            "order_date_max": {
+                "type": "datetime",
+                "nullable": False,
+                "coerce": utils.isoformat_str_dt_to_dt_utc,
+            },
         }
 
     def _search_output_schema(self):
@@ -123,7 +132,7 @@ class ProductsOnOrderService(Component):
                             "type": "integer",
                         },
                         "description": {
-                            "nullable": False,
+                            "nullable": True,
                             "required": True,
                             "type": "string",
                         },
@@ -138,8 +147,8 @@ class ProductsOnOrderService(Component):
                             "type": "datetime",
                         },
                         "customer_ref": {
-                            "nullable": False,
-                            "required": True,
+                            "nullable": True,
+                            "required": False,
                             "type": "string",
                         },
                         "qty_ordered": {
@@ -271,13 +280,6 @@ class ProductsOnOrderService(Component):
         res["size"] = size
         return res
 
-    def _dt_to_isoformat(self, date_str):
-        value = fields.Datetime.from_string(date_str)
-        # Get the timestamp converted to the client's timezone.
-        # This call also add the tzinfo into the datetime object
-        value = fields.Datetime.context_timestamp(self.partner, value)
-        return value.isoformat()
-
     def _search_row_to_json(self, row):
         product_family = ""
         if row["is_food"]:
@@ -289,9 +291,9 @@ class ProductsOnOrderService(Component):
         return dict(
             order_line_id=row["id"],
             product_id=row["product_id"],
-            desciption=row["description"],
+            description=row["description"],
             order_ref=row["order_ref"],
-            order_date=self._dt_to_isoformat(row["order_date"]),
+            order_date=utils.odoo_str_dt_to_dt_utc(row["order_date"]),
             customer_ref=(row["customer_ref"] or None),
             qty_ordered=row["qty_ordered"],
             qty_to_deliver=row["qty_to_deliver"],

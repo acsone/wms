@@ -11,6 +11,7 @@ from freezegun import freeze_time
 from odoo import fields
 from odoo.tests.common import SavepointCase
 
+from odoo.addons.alc_cerberus_utils import utils
 from odoo.addons.base_rest.controllers.main import _PseudoCollection
 from odoo.addons.component.core import WorkContext
 from odoo.addons.component.tests.common import ComponentMixin
@@ -219,7 +220,7 @@ class TestSaleStatistics(SavepointCase, ComponentMixin):
                 [
                     {
                         "product_family": "meds",
-                        "date_last_ordered": service._dt_to_isoformat(
+                        "date_last_ordered": utils.odoo_str_dt_to_dt_utc(
                             self.last_date_order
                         ),
                         "product_id": self.product_2.id,
@@ -227,7 +228,7 @@ class TestSaleStatistics(SavepointCase, ComponentMixin):
                     },
                     {
                         "product_family": "food",
-                        "date_last_ordered": service._dt_to_isoformat(
+                        "date_last_ordered": utils.odoo_str_dt_to_dt_utc(
                             self.last_date_order
                         ),
                         "product_id": self.product_1.id,

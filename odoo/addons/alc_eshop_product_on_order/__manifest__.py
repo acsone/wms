@@ -11,6 +11,7 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
+        "alc_cerberus_utils",
         "alc_product_mto",
         "alc_product_pharmacy",
         "alc_sale_order_line_product_type",

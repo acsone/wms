@@ -11,6 +11,7 @@ from odoo import _, fields
 from odoo.exceptions import MissingError
 from odoo.tools import float_round
 
+from odoo.addons.alc_cerberus_utils import utils
 from odoo.addons.base_rest import restapi
 from odoo.addons.base_rest.components.service import to_bool, to_int
 from odoo.addons.component.core import Component
@@ -135,7 +136,7 @@ class SaleStatsService(Component):
                             "nullable": False,
                         },
                         "date_last_ordered": {
-                            "type": "string",
+                            "type": "datetime",
                             "required": True,
                             "nullable": False,
                         },
@@ -286,7 +287,7 @@ class SaleStatsService(Component):
                 {
                     "product_id": row["product_id"],
                     "ordered_count": row["ordered_count"],
-                    "date_last_ordered": self._dt_to_isoformat(
+                    "date_last_ordered": utils.odoo_str_dt_to_dt_utc(
                         row["date_last_ordered"]
                     ),
                     "product_family": product_family,
@@ -294,10 +295,3 @@ class SaleStatsService(Component):
             )
         res["size"] = size
         return res
-
-    def _dt_to_isoformat(self, date_str):
-        value = fields.Datetime.from_string(date_str)
-        # Get the timestamp converted to the client's timezone.
-        # This call also add the tzinfo into the datetime object
-        value = fields.Datetime.context_timestamp(self.partner, value)
-        return value.isoformat()

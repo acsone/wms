@@ -3,12 +3,14 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
-    "name": "Alc Eshop Documents",
-    "description": """Alcyon: Webservices for customer documents""",
+    "name": "Alc Cerberus Utils",
+    "description": """
+        Alcyon: Cerberu utility methods""",
     "version": "10.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["alc_cerberus_utils", "alc_documents", "base_jsonify", "base_rest"],
+    "depends": [],
+    "data": [],
     "demo": [],
 }

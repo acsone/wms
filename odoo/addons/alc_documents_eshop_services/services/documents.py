@@ -8,6 +8,7 @@ from odoo import _, fields
 from odoo.exceptions import MissingError
 from odoo.http import content_disposition, request
 
+from odoo.addons.alc_cerberus_utils import utils
 from odoo.addons.base_rest import restapi
 from odoo.addons.base_rest.components.service import to_int
 from odoo.addons.component.core import Component
@@ -81,8 +82,18 @@ class DocumentService(Component):
                 "required": False,
                 "nullable": True,
             },
-            "from_date": {"type": "datetime", "required": False, "nullable": True},
-            "to_date": {"type": "datetime", "required": False, "nullable": True},
+            "from_date": {
+                "type": "datetime",
+                "required": False,
+                "nullable": False,
+                "coerce": utils.isoformat_str_dt_to_dt_utc,
+            },
+            "to_date": {
+                "type": "datetime",
+                "required": False,
+                "nullable": False,
+                "coerce": utils.isoformat_str_dt_to_dt_utc,
+            },
         }
 
     def _get_model_schema(self):
@@ -146,7 +157,12 @@ class DocumentService(Component):
     def _convert_one_record(self, record):
         record.ensure_one()
         values = record.jsonify(self._get_model_schema().keys(), one=True)
-        values["document_date"] = None
+        # jsonify convert string to string with tzinfo...
+        # cerberus validator requires datetime for date and datetime fields
+        # Since the jsonencoder into base_rest will convert dt into isoformat
+        # at serialization, it's possible to keep a dt into our message
+        # to allow cerberus to validate the data.
+        values["document_date"] = utils.odoo_str_dt_to_dt_utc(record.document_date)
         return values
 
     def _get_binary_content(self, target):
