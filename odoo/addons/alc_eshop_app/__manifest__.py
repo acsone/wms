@@ -28,6 +28,8 @@
     "application": True,
     "data": [
         "security/res_groups.xml",
+        "security/alc_shopinvader_backend.xml",
+        "security/rule+acl_alc_document.xml",
         "security/rule+acl_alc_product_promotion_subscription.xml",
         "security/rule+acl_product_product.xml",
         "security/rule+acl_res_partner.xml",
