@@ -2,6 +2,7 @@
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+import base64
 import mimetypes
 
 from odoo import _, fields
@@ -167,6 +168,7 @@ class DocumentService(Component):
 
     def _get_binary_content(self, target):
         content = target._get_data()
+        content = base64.b64decode(content) if content else ""
         mimetype_guess = mimetypes.guess_type(target.name)
         mimetype = mimetype_guess[0] if mimetype_guess else mimetype_guess
         headers = [
