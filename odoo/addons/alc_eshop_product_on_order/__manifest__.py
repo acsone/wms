@@ -14,6 +14,7 @@
         "alc_cerberus_utils",
         "alc_product_mto",
         "alc_product_pharmacy",
+        "alc_sale_channel",
         "alc_sale_order_line_product_type",
         "base_rest",
         "procurement_sale",
