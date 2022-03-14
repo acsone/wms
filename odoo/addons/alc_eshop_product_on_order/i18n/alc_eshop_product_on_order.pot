@@ -129,7 +129,7 @@ msgid "Ref ${object.name}: Demande annulation backorder ${ctx.product.name}"
 msgstr ""
 
 #. module: alc_eshop_product_on_order
-#: code:addons/alc_eshop_product_on_order/services/products_on_order.py:69
+#: code:addons/alc_eshop_product_on_order/services/products_on_order.py:70
 #, python-format
 msgid "Requested order line no more exists"
 msgstr ""
