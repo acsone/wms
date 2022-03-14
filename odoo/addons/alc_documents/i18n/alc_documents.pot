@@ -21,13 +21,13 @@ msgid "# of documents"
 msgstr ""
 
 #. module: alc_documents
-#: code:addons/alc_documents/models/alc_document.py:86
+#: code:addons/alc_documents/models/alc_document.py:118
 #, python-format
 msgid "A document without an attachment needs a compute method."
 msgstr ""
 
 #. module: alc_documents
-#: code:addons/alc_documents/models/alc_document.py:78
+#: code:addons/alc_documents/models/alc_document.py:110
 #, python-format
 msgid "A public document should be accessible."
 msgstr ""
@@ -56,7 +56,7 @@ msgid "Alcyon Documents User"
 msgstr ""
 
 #. module: alc_documents
-#: code:addons/alc_documents/models/alc_document.py:80
+#: code:addons/alc_documents/models/alc_document.py:112
 #, python-format
 msgid "All partner_types should be valid."
 msgstr ""
@@ -176,7 +176,7 @@ msgid "Pricelist"
 msgstr ""
 
 #. module: alc_documents
-#: code:addons/alc_documents/models/alc_document.py:152
+#: code:addons/alc_documents/models/alc_document.py:184
 #, python-format
 msgid "Process dossier for attachment %s"
 msgstr ""
@@ -197,6 +197,11 @@ msgid "The database object this attachment will be attached to."
 msgstr ""
 
 #. module: alc_documents
+#: model:ir.model.fields,field_description:alc_documents.field_alc_document_is_null_document_date_start
+msgid "The document date is null"
+msgstr ""
+
+#. module: alc_documents
 #: sql_constraint:alc.document:0
 msgid "There can be only one document per attachment."
 msgstr ""
@@ -207,7 +212,7 @@ msgid "Type"
 msgstr ""
 
 #. module: alc_documents
-#: code:addons/alc_documents/models/alc_document.py:73
+#: code:addons/alc_documents/models/alc_document.py:105
 #, python-format
 msgid "You cannot have a public document with a partner."
 msgstr ""
