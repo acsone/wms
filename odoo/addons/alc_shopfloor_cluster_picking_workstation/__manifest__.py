@@ -10,7 +10,7 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": ["alc_shopfloor", "alc_shopfloor_packing", "alc_shopfloor_workstation"],
-    "data": ["views/shopfloor_menu.xml"],
+    "data": ["views/shopfloor_menu.xml", "views/stock_picking_wave.xml"],
     "demo": [],
     "pre_init_hook": "pre_init_hook",
 }
