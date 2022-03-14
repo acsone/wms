@@ -54,7 +54,7 @@ msgstr "Technical field set to True if the workstation has already been selected
 #. module: alc_shopfloor_cluster_picking_workstation
 #: model:ir.model.fields,field_description:alc_shopfloor_cluster_picking_workstation.field_stock_picking_wave_workstation_id
 msgid "Workstation id"
-msgstr "Workstation id"
+msgstr "Station de travail"
 
 #. module: alc_shopfloor_cluster_picking_workstation
 #: code:addons/alc_shopfloor_cluster_picking_workstation/actions/message.py:21
