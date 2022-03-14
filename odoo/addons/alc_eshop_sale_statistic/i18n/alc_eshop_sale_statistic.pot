@@ -74,7 +74,7 @@ msgid "Product id"
 msgstr ""
 
 #. module: alc_eshop_sale_statistic
-#: code:addons/alc_eshop_sale_statistic/services/sale_statistic.py:39
+#: code:addons/alc_eshop_sale_statistic/services/sale_statistic.py:40
 #, python-format
 msgid "Product not found for id %s"
 msgstr ""
