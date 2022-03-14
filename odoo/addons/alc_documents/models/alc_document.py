@@ -2,10 +2,21 @@
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+from psycopg2.extensions import AsIs
+
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 
 from odoo.addons.queue_job.job import job
+
+
+def create_index(cr, index_name, table, expression):
+    cr.execute("SELECT indexname FROM pg_indexes WHERE indexname = %s", (index_name,))
+    if not cr.fetchone():
+        cr.execute(
+            "CREATE INDEX %s " "ON %s %s",
+            (AsIs(index_name), AsIs(table), AsIs(expression)),
+        )
 
 
 class AlcDocument(models.Model):
@@ -16,6 +27,7 @@ class AlcDocument(models.Model):
 
     _name = "alc.document"
     _description = "Alcyon Document"
+    _order = "is_null_document_date_start desc, document_date desc, type, name"
 
     attachment_id = fields.Many2one("ir.attachment", readonly=True)
     compute = fields.Selection([], readonly=True)  # to extend
@@ -23,7 +35,15 @@ class AlcDocument(models.Model):
     document_date = fields.Datetime(
         related="attachment_id.create_date", store=True, readonly=True
     )
-    partner_id = fields.Many2one("res.partner", readonly=True, ondelete="cascade")
+    is_null_document_date_start = fields.Boolean(
+        "The document date is null",
+        compute="_compute_is_null_document_date_start",
+        store=True,
+        readonly=True,
+    )
+    partner_id = fields.Many2one(
+        "res.partner", readonly=True, ondelete="cascade", index=True
+    )
     sale_channel = fields.Char(readonly=True)
     allowed_partner_types = fields.Char(string="Allowed Partner Types", readonly=True)
     type = fields.Selection(
@@ -46,6 +66,18 @@ class AlcDocument(models.Model):
             "There can be only one document per attachment.",
         ),
     ]
+
+    @api.model_cr
+    def init(self):
+        index_name = "alc_document_allowed_partner_types_index"
+        self.env.cr.execute(
+            "SELECT indexname FROM pg_indexes WHERE indexname = %s", (index_name,)
+        )
+        if not self.env.cr.fetchone():
+            self.env.cr.execute(
+                "CREATE INDEX %s ON %s USING GIN (allowed_partner_types gin_trgm_ops)",
+                (AsIs(index_name), AsIs(self._table)),
+            )
 
     def _get_data(self):
         self.ensure_one()
@@ -169,3 +201,15 @@ class AlcDocument(models.Model):
             ("partner_id", "=", partner.id),
             ("allowed_partner_types", "like", "%%%s%%" % partner.partner_type),
         ]
+
+    @api.depends("document_date")
+    def _compute_is_null_document_date_start(self):
+        """
+        By default we cannot order DESC and put all nulls at the end with Odoo
+        (ORDER BY document_date DESC NULLS FIRST)
+        Change the code of Odoo to allows ordering nulls first is really touchy.
+        To avoid that I create a simply boolean to say if the field document_date
+        is null and I order on this field.
+        """
+        for rec in self:
+            rec.is_null_document_date_start = bool(not rec.document_date)
