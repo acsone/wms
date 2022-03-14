@@ -52,7 +52,6 @@ class TestDocumentsServiceFlow(TestDocumentsService):
         value = document.document_date
         value = fields.Datetime.from_string(value)
         value = fields.Datetime.context_timestamp(document, value)
-        value = value.isoformat()
         with self.documents_service() as service:
             result = service.search()
             self.assertEqual(value, result["data"][0]["document_date"])

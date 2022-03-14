@@ -108,7 +108,7 @@ WHERE
     AND sol.product_type in ('consu', 'product')
     AND sol.is_consignment = False
     AND sol.state not in ('draft', 'cancel')
-
+    AND so.sale_channel IN ('web', 'mail', 'phone', 'fax')
             )
                 """
         self._cr.execute(query, dict(table=AsIs(self._table)))
