@@ -19,18 +19,25 @@ class SaleOrder(models.Model):
         """
         if not carrier.fixed_price:
             return
-        sale_orders = self.search(
-            [
-                ("partner_id", "=", customer.id),
-                ("state", "!=", "cancel"),
-                ("used_for_delivery_fee", "=", False),
-                ("carrier_id", "=", carrier.id),
-            ]
-        )
-        if not sale_orders:
+        # this query checks all existing SOs for the customer, which might be massive if
+        # his 'help_with_fee' setting has been changed overnight.
+        # in particular the SQL write allows to skip triggering an export to the ESB
+        # for each historical SO
+        query_args = (customer.id, carrier.id)
+        query_select = """SELECT amount_untaxed FROM sale_order
+        WHERE partner_id = %s AND state != 'cancel'
+        AND used_for_delivery_fee = false AND carrier_id = %s;
+        """
+        self.env.cr.execute(query_select, query_args)
+        result = self.env.cr.fetchall()
+        if not result:
             return
-        sum_ordered = sum(sale_orders.mapped("amount_untaxed"))
-        sale_orders.write({"used_for_delivery_fee": True})
+        sum_ordered = sum(r[0] for r in result)
+        query_update = """UPDATE sale_order SET used_for_delivery_fee = true
+        WHERE partner_id = %s AND state != 'cancel'
+        AND used_for_delivery_fee = false AND carrier_id = %s;
+        """
+        self.env.cr.execute(query_update, query_args)
         if sum_ordered == 0 or sum_ordered >= carrier.amount:
             return
         # Find the last sale order passed and charge the customer
