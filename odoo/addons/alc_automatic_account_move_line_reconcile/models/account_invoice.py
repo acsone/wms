@@ -4,14 +4,17 @@
 
 import json
 
-from odoo import models
+from odoo import api, models
 
 
 class AccountInvoice(models.Model):
 
     _inherit = "account.invoice"
 
+    # pylint: disable=api-one-deprecated
+    @api.one
     def _get_outstanding_info_JSON(self):
+        # We use api.one here just to be consistent with the overridden method
         result = super(AccountInvoice, self)._get_outstanding_info_JSON()
         info = json.loads(self.outstanding_credits_debits_widget)
         if info and "content" in info.keys() and info["content"]:
