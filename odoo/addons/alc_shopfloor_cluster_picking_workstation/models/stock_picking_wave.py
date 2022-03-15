@@ -21,3 +21,13 @@ class StockPickingWave(models.Model):
     def _compute_workstation_selected(self):
         for rec in self:
             rec.workstation_selected = rec.workstation_id
+
+    def write(self, vals):
+        result = super(StockPickingWave, self).write(vals)
+        if "workstation_id" in vals and vals["workstation_id"]:
+            ws = self.env["shopfloor.workstation"].search(
+                [("id", "=", vals["workstation_id"])]
+            )
+            for rec in self:
+                ws.set_as_default_on_user(rec.user_id.sudo())
+        return result
