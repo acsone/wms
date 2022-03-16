@@ -11,8 +11,21 @@
 {
   "mappings": {
     "properties": {
+      "dimensional_uom_id": {
+        "properties": {
+          "name": {
+            "type": "keyword"
+          },
+          "id": {
+            "type": "integer"
+          }
+        }
+      },
       "supplier_id": {
         "type": "keyword"
+      },
+      "supplier_promotion": {
+        "type": "nested"
       },
       "redirect_url_key": {
         "type": "keyword"
@@ -37,6 +50,9 @@
           }
         }
       },
+      "supplier_discount": {
+        "type": "nested"
+      },
       "storage_temperature_id": {
         "properties": {
           "name": {
@@ -49,10 +65,10 @@
       },
       "attributes": {
         "properties": {
-          "administration_route_option_ids": {
+          "species_id": {
             "type": "keyword"
           },
-          "species_id": {
+          "presentation_option_id": {
             "type": "keyword"
           },
           "active_principle_option_ids": {
@@ -61,7 +77,25 @@
           "species_ids": {
             "type": "keyword"
           },
+          "administration_route_option_ids": {
+            "type": "keyword"
+          },
+          "categ_age_option_ids": {
+            "type": "keyword"
+          },
+          "indication_option_ids": {
+            "type": "keyword"
+          },
           "taxes_id": {
+            "type": "keyword"
+          },
+          "product_color_option_ids": {
+            "type": "keyword"
+          },
+          "animal_size_option_ids": {
+            "type": "keyword"
+          },
+          "food_range_option_id": {
             "type": "keyword"
           }
         }
@@ -78,13 +112,14 @@
       "categories": {
         "type": "nested"
       },
-      "dimensional_uom_id": {
+      "stock": {
         "properties": {
-          "name": {
-            "type": "keyword"
-          },
-          "id": {
-            "type": "integer"
+          "global": {
+            "properties": {
+              "state": {
+                "type": "keyword"
+              }
+            }
           }
         }
       }
