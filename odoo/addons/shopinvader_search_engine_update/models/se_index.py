@@ -16,13 +16,13 @@ class SeIndex(models.Model):
     @api.model
     def cron_recompute_all_continuous(self, force_export=False, batch_size=500):
         self._cron_recompute_all(
-            continuous=False, force_export=force_export, batch_size=batch_size
+            continuous=True, force_export=force_export, batch_size=batch_size
         )
 
     @api.model
     def cron_recompute_all_to_update(self, force_export=False, batch_size=500):
         self._cron_recompute_all(
-            continuous=True, force_export=force_export, batch_size=batch_size
+            continuous=False, force_export=force_export, batch_size=batch_size
         )
 
     @api.model
