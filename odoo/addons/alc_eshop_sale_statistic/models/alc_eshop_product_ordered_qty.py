@@ -46,6 +46,7 @@ class AlcEshopProductOrderedQty(models.Model):
         self.env.cr.execute(
             "DROP MATERIALIZED VIEW IF EXISTS %s CASCADE", (AsIs(self._table),)
         )
+        channels = tuple(self.env["sale.order"]._get_sale_channels_internal())
         self.env.cr.execute(
             """
             CREATE MATERIALIZED VIEW %(table)s AS (
@@ -76,7 +77,7 @@ FROM
     JOIN product_product pp ON sol.product_id = pp.id
     JOIN product_template pt ON pp.product_tmpl_id = pt.id
 where
-    so.sale_channel IN ('web', 'mail', 'phone', 'fax')
+    so.sale_channel IN %(channels)s
     AND so.state in ('done', 'sale')
     AND date_order >= DATE_TRUNC('month', NOW() - INTERVAL '1 year')
 
@@ -89,7 +90,7 @@ CREATE UNIQUE INDEX pk_%(table)s ON %(table)s (id);
 
 CREATE INDEX idx_%(table)s_partner_id_index ON %(table)s (partner_id);
 """,
-            {"table": AsIs(self._table)},
+            {"table": AsIs(self._table), "channels": channels},
         )
         self.set_refresh_date(date=False)
         cron = self.env.ref(

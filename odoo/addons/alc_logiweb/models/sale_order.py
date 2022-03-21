@@ -2,7 +2,7 @@
 # Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, fields, models
+from odoo import _, api, models
 from odoo.exceptions import ValidationError
 
 
@@ -10,11 +10,10 @@ class SaleOrder(models.Model):
 
     _inherit = "sale.order"
 
-    sale_channel = fields.Selection(selection_add=[("logiweb", "Logiweb")])
-
-    def _get_b2c_sale_channels(self):
-        res = super(SaleOrder, self)._get_b2c_sale_channels()
-        res.append("logiweb")
+    @api.model
+    def _get_sale_channels_external_selection(self):
+        res = super(SaleOrder, self)._get_sale_channels_external_selection()
+        res.append(("logiweb", "Logiweb"))
         return res
 
     @api.model

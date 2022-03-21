@@ -230,19 +230,12 @@ class SaleOrder(models.Model):
         dt = dt.astimezone(pytz.timezone("UTC"))
         return fields.Datetime.to_string(dt)
 
-    @api.model
-    def _get_b2c_sale_channels(self):
-        """Return a list of sale_channels reserved to b2c usage.
-           Needs to be overriden in each specific b2c module.
-        """
-        return []
-
     @api.constrains("sale_channel")
     def _check_sale_channel_selection(self):
         user = self.env.user
         b2c_xmlid = "alc_b2c_connector.alc_b2c_rest_api_user"
         if not user._is_superuser() and user != self.env.ref(b2c_xmlid):
-            b2c_channels = self._get_b2c_sale_channels()
+            b2c_channels = self._get_sale_channels_external()
             if any(c in b2c_channels for c in self.mapped("sale_channel")):
                 msg = _("You cannot use this sale channel for manuel order")
                 raise ValidationError(msg)

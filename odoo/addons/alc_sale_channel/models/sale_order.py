@@ -9,9 +9,37 @@ class SaleOrder(models.Model):
 
     _inherit = "sale.order"
 
-    sale_channel = fields.Selection(
-        [("phone", "Phone"), ("mail", "Mail"), ("fax", "Fax"), ("web", "Web")]
-    )
+    @api.model
+    def _get_sale_channels_internal(self):
+        return [pair[0] for pair in self._get_sale_channels_internal_selection()]
+
+    @api.model
+    def _get_sale_channels_internal_selection(self):
+        return [
+            ("phone", "Phone"),
+            ("mail", "Mail"),
+            ("fax", "Fax"),
+            ("web", "Web"),
+        ]
+
+    @api.model
+    def _get_sale_channels_external(self):
+        return [pair[0] for pair in self._get_sale_channels_external_selection()]
+
+    @api.model
+    def _get_sale_channels_external_selection(self):
+        return []
+
+    @api.model
+    def _get_sale_channels_selection(self):
+        internal = self._get_sale_channels_internal_selection()
+        return internal + self._get_sale_channels_external_selection()
+
+    @api.model
+    def _get_sale_channels(self):
+        return [pair[0] for pair in self._get_sale_channels_selection()]
+
+    sale_channel = fields.Selection(selection="_get_sale_channels_selection")
 
     @api.onchange("team_id")
     def onchange_team_id(self):

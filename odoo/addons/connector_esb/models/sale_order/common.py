@@ -17,7 +17,12 @@ _logger = logging.getLogger(__name__)
 class SaleOrder(models.Model):
     _name = "sale.order"
     _inherit = ["sale.order", "esb.exportable"]
-    sale_channel = fields.Selection(selection_add=[("newpharma", "NewPharma")])
+
+    @api.model
+    def _get_sale_channels_external_selection(self):
+        res = super(SaleOrder, self)._get_sale_channels_external_selection()
+        res.append(("newpharma", "NewPharma"))
+        return res
 
     esb_ref = fields.Char(string="Reference for ESB", copy=False, index=True)
     newpharma_ref = fields.Char(

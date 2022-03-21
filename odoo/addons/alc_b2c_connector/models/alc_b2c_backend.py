@@ -61,7 +61,7 @@ class AlcB2CBackend(models.Model):
 
     @api.model
     def _selection_sale_channel(self):
-        return self.env["sale.order"]._fields["sale_channel"].selection
+        return self.env["sale.order"]._get_sale_channels_selection()
 
     @api.model
     def _selection_picking_policy(self):
