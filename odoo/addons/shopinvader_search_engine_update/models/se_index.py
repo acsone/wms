@@ -2,12 +2,14 @@
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, models
+from odoo import _, api, fields, models
 
 
 class SeIndex(models.Model):
 
     _inherit = "se.index"
+
+    continuous_update = fields.Boolean(related="model_id.continuous_update")
 
     def _get_model_domain(self, continuous):
         domain = [("index_id", "in", self.ids)]
