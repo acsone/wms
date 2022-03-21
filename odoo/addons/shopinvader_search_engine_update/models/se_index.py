@@ -15,26 +15,25 @@ class SeIndex(models.Model):
 
     @api.model
     def cron_recompute_all_continuous(self, force_export=False, batch_size=500):
-        self._cron_recompute_all(
-            continuous=False, force_export=force_export, batch_size=batch_size
+        self.search([])._cron_recompute_all(
+            continuous=True, force_export=force_export, batch_size=batch_size
         )
 
     @api.model
-    def cron_recompute_all_to_update(self, force_export=False, batch_size=500):
-        self._cron_recompute_all(
-            continuous=True, force_export=force_export, batch_size=batch_size
+    def cron_recompute_all_batch(self, force_export=False, batch_size=500):
+        self.search([])._cron_recompute_all(
+            continuous=False, force_export=force_export, batch_size=batch_size
         )
 
     @api.model
     def _cron_recompute_all(self, continuous, force_export=False, batch_size=500):
         # recompute_all_binding should be refactored to accept a configurable domain...
-        target_models = self.mapped("model_id.model").filtered(
-            lambda m: m.continous_update == continuous
-        )
+        filter_continuous = lambda m: m.continous_update == continuous
+        target_models = self.mapped("model_id").filtered(filter_continuous)
         for target_model in target_models:
-            indexes = self.filtered(lambda r, m=target_model: r.model_id.model == m)
+            indexes = self.filtered(lambda r, m=target_model: r.model_id == m)
             domain = indexes._get_model_domain(continuous)
-            bindings = self.env[target_model].search(domain)
+            bindings = self.env[target_model.model].search(domain)
             for batch in bindings.batch(batch_size):
                 description = _("Recompute json for %s record(s).") % len(batch)
                 batch.with_delay(description=description)._jobify_recompute_json(

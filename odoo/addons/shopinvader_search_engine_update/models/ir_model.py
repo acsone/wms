@@ -19,4 +19,4 @@ class IrModel(models.Model):
     def _compute_continous_update(self):
         continuous_models = self._get_continuous_models()
         for model in self:
-            model.continous_update = model._name in continuous_models
+            model.continous_update = model.model in continuous_models
