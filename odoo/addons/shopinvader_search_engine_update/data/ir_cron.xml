@@ -14,7 +14,7 @@
         <field name="numbercall">-1</field>
         <field name="doall" eval="False" />
         <field name="model">se.index</field>
-        <field name="function">cron_recompute_all_continous</field>
+        <field name="function">cron_recompute_all_continuous</field>
         <field name="args">()</field>
     </record>
 
