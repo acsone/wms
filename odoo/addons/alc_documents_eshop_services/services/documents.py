@@ -104,7 +104,12 @@ class DocumentService(Component):
             "type": {"type": "string", "required": True, "nullable": True},
             "res_model": {"type": "string", "required": False, "nullable": True},
             "format": {"type": "string", "required": True, "nullable": True},
-            "sale_channel": {"type": "string", "required": False, "nullable": True},
+            "sale_channel": {
+                "type": "string",
+                "required": False,
+                "nullable": True,
+                "allowed": self.env["sale.order"]._get_sale_channels_internal(),
+            },
             "document_date": {"type": "datetime", "required": False, "nullable": True},
         }
 
