@@ -41,3 +41,17 @@ class SeIndex(models.Model):
                 batch.with_delay(description=description)._jobify_recompute_json(
                     force_export=force_export
                 )
+
+    @api.model
+    def cron_export_all_continuous(self, domain=None):
+        domain = domain or []
+        continuous_indices = self.search(domain).filtered("continuous_update")
+        domain += [("id", "in", continuous_indices.ids)]
+        self.generate_batch_export_per_index(domain)
+
+    @api.model
+    def cron_export_all_batch(self, domain=None):
+        domain = domain or []
+        continuous_indices = self.search(domain).filtered("continuous_update")
+        domain += [("id", "not in", continuous_indices.ids)]
+        self.generate_batch_export_per_index(domain)
