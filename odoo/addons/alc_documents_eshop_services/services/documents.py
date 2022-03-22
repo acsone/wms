@@ -45,6 +45,9 @@ class DocumentService(Component):
         to_date = params.pop("to_date", None)
         if to_date:
             domain.append(("document_date", "<=", to_date))
+        sale_channel = params.pop("sale_channel", None)
+        if sale_channel:
+            domain.append(("sale_channel", "=", sale_channel))
         return self._paginate_search(domain, **params)
 
     @restapi.method(
@@ -94,6 +97,12 @@ class DocumentService(Component):
                 "required": False,
                 "nullable": False,
                 "coerce": utils.isoformat_str_dt_to_dt_utc,
+            },
+            "sale_channel": {
+                "type": "string",
+                "required": False,
+                "nullable": True,
+                "allowed": self.env["sale.order"]._get_sale_channels_internal(),
             },
         }
 
