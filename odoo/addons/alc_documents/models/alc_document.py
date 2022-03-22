@@ -44,7 +44,7 @@ class AlcDocument(models.Model):
     partner_id = fields.Many2one(
         "res.partner", readonly=True, ondelete="cascade", index=True
     )
-    sale_channel = fields.Char(readonly=True)
+    sale_channel = fields.Selection(selection="_selection_sale_channel", readonly=True)
     allowed_partner_types = fields.Char(string="Allowed Partner Types", readonly=True)
     type = fields.Selection(
         selection=[
@@ -66,6 +66,10 @@ class AlcDocument(models.Model):
             "There can be only one document per attachment.",
         ),
     ]
+
+    @api.model
+    def _selection_sale_channel(self):
+        return self.env["sale.order"]._get_sale_channels_selection()
 
     @api.model_cr
     def init(self):

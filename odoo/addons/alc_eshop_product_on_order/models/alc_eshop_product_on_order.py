@@ -108,10 +108,11 @@ WHERE
     AND sol.product_type in ('consu', 'product')
     AND sol.is_consignment = False
     AND sol.state not in ('draft', 'cancel')
-    AND so.sale_channel IN ('web', 'mail', 'phone', 'fax')
+    AND so.sale_channel IN %(channels)s
             )
                 """
-        self._cr.execute(query, dict(table=AsIs(self._table)))
+        channels = tuple(self.env["sale.order"]._get_sale_channels_internal())
+        self._cr.execute(query, dict(table=AsIs(self._table), channels=channels))
 
     def request_backorder_cancellation(self):
         for record in self:

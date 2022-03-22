@@ -179,7 +179,7 @@ class SaleStatsService(Component):
                 AND order_partner_id=%(partner_id)s
                 AND date_order >= %(date_start)s
                 AND date_order < %(date_end)s
-                AND so.sale_channel IN ('web', 'mail', 'phone', 'fax')
+                AND so.sale_channel IN %(channels)s
                 AND so.state in ('done', 'sale')
             GROUP BY
                 CAST(date_trunc('month', date_order) AS date);
@@ -187,6 +187,7 @@ class SaleStatsService(Component):
         self.env.cr.execute(
             sql,
             dict(
+                channels=tuple(self.env["sale.order"]._get_sale_channels_internal()),
                 product_id=product.id,
                 partner_id=self.partner.id,
                 date_start=date_start,
