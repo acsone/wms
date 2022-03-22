@@ -35,6 +35,14 @@ class TestDocumentsServiceFlow(TestDocumentsService):
             result = service.search()
             self.assertEqual(result["size"], 0)
 
+    def test_search_sale_channel(self):
+        with self.documents_service() as service:
+            result = service.search(sale_channel="phone")
+            self.assertEqual(result["size"], 1)
+
+            result = service.search(sale_channel="fax")
+            self.assertEqual(result["size"], 0)
+
     def test_search_document_with_false_values(self):
         domain_documents = self.alc_document_model.get_partner_domain(self.partner)
         document = self.alc_document_model.search(domain_documents)
