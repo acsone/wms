@@ -30,6 +30,11 @@ msgid "Product"
 msgstr ""
 
 #. module: shopinvader_search_engine_update
+#: model:ir.model,name:shopinvader_search_engine_update.model_product_template
+msgid "Product Template"
+msgstr ""
+
+#. module: shopinvader_search_engine_update
 #: code:addons/shopinvader_search_engine_update/models/se_index.py:40
 #, python-format
 msgid "Recompute json for %s record(s)."
