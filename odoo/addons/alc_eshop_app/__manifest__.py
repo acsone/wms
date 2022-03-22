@@ -24,6 +24,7 @@
         "alc_product_promotion_mailing",
         "alc_search_engine",
         "alc_price_cache_shop_domain",
+        "shopinvader_search_engine_update_specials",
     ],
     "application": True,
     "data": [
