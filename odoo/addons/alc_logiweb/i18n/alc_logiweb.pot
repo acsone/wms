@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_logiweb
-#: code:addons/alc_logiweb/models/sale_order.py:46
+#: code:addons/alc_logiweb/models/sale_order.py:45
 #, python-format
 msgid "Cannot have a gls_parcel_shop if the delivery is not GLS."
 msgstr ""
@@ -25,7 +25,7 @@ msgid "Logiweb Product Assortment"
 msgstr ""
 
 #. module: alc_logiweb
-#: code:addons/alc_logiweb/models/sale_order.py:41
+#: code:addons/alc_logiweb/models/sale_order.py:40
 #, python-format
 msgid "Missing carrier"
 msgstr ""
@@ -36,19 +36,19 @@ msgid "Sales Order"
 msgstr ""
 
 #. module: alc_logiweb
-#: code:addons/alc_logiweb/models/sale_order.py:91
+#: code:addons/alc_logiweb/models/sale_order.py:90
 #, python-format
 msgid "The carrier 'Alcyon' is not allowed for Logiweb Belgium."
 msgstr ""
 
 #. module: alc_logiweb
-#: code:addons/alc_logiweb/models/sale_order.py:79
+#: code:addons/alc_logiweb/models/sale_order.py:78
 #, python-format
 msgid "The invoicing partner should be Logiweb Belgium."
 msgstr ""
 
 #. module: alc_logiweb
-#: code:addons/alc_logiweb/models/sale_order.py:86
+#: code:addons/alc_logiweb/models/sale_order.py:85
 #, python-format
 msgid "The invoicing partner should be Logiweb."
 msgstr ""
