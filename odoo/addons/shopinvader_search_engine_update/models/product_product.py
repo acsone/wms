@@ -12,6 +12,9 @@ class ProductProduct(models.Model):
     def write(self, vals):
         # maybe do something more clever?
         res = super(ProductProduct, self).write(vals)
+        self.shopinvader_mark_to_update()
+        return res
+
+    def shopinvader_mark_to_update(self):
         if self.mapped("shopinvader_bind_ids"):
             self.mapped("shopinvader_bind_ids").write({"to_update": True})
-        return res
