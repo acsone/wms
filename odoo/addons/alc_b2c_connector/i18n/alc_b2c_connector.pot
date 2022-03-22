@@ -308,7 +308,7 @@ msgid "You cannot update this address since there are already closed Sale Orders
 msgstr ""
 
 #. module: alc_b2c_connector
-#: code:addons/alc_b2c_connector/models/sale_order.py:247
+#: code:addons/alc_b2c_connector/models/sale_order.py:240
 #, python-format
 msgid "You cannot use this sale channel for manuel order"
 msgstr ""
