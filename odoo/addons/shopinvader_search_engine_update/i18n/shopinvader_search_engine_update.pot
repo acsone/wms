@@ -14,8 +14,9 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: shopinvader_search_engine_update
-#: model:ir.model.fields,field_description:shopinvader_search_engine_update.field_ir_model_continous_update
-msgid "Continous update"
+#: model:ir.model.fields,field_description:shopinvader_search_engine_update.field_ir_model_continuous_update
+#: model:ir.model.fields,field_description:shopinvader_search_engine_update.field_se_index_continuous_update
+msgid "Continuous update"
 msgstr ""
 
 #. module: shopinvader_search_engine_update
@@ -29,7 +30,7 @@ msgid "Product"
 msgstr ""
 
 #. module: shopinvader_search_engine_update
-#: code:addons/shopinvader_search_engine_update/models/se_index.py:39
+#: code:addons/shopinvader_search_engine_update/models/se_index.py:40
 #, python-format
 msgid "Recompute json for %s record(s)."
 msgstr ""
