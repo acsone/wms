@@ -21,13 +21,13 @@ msgid "# of documents"
 msgstr ""
 
 #. module: alc_documents
-#: code:addons/alc_documents/models/alc_document.py:118
+#: code:addons/alc_documents/models/alc_document.py:122
 #, python-format
 msgid "A document without an attachment needs a compute method."
 msgstr ""
 
 #. module: alc_documents
-#: code:addons/alc_documents/models/alc_document.py:110
+#: code:addons/alc_documents/models/alc_document.py:114
 #, python-format
 msgid "A public document should be accessible."
 msgstr ""
@@ -56,7 +56,7 @@ msgid "Alcyon Documents User"
 msgstr ""
 
 #. module: alc_documents
-#: code:addons/alc_documents/models/alc_document.py:112
+#: code:addons/alc_documents/models/alc_document.py:116
 #, python-format
 msgid "All partner_types should be valid."
 msgstr ""
@@ -176,7 +176,7 @@ msgid "Pricelist"
 msgstr ""
 
 #. module: alc_documents
-#: code:addons/alc_documents/models/alc_document.py:184
+#: code:addons/alc_documents/models/alc_document.py:188
 #, python-format
 msgid "Process dossier for attachment %s"
 msgstr ""
@@ -212,7 +212,7 @@ msgid "Type"
 msgstr ""
 
 #. module: alc_documents
-#: code:addons/alc_documents/models/alc_document.py:105
+#: code:addons/alc_documents/models/alc_document.py:109
 #, python-format
 msgid "You cannot have a public document with a partner."
 msgstr ""
