@@ -14,46 +14,6 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_sale_channel
-#: selection:sale.order,sale_channel:0
-msgid "Chronovet"
-msgstr ""
-
-#. module: alc_sale_channel
-#: selection:sale.order,sale_channel:0
-msgid "ClubVetShop"
-msgstr ""
-
-#. module: alc_sale_channel
-#: selection:sale.order,sale_channel:0
-msgid "Fax"
-msgstr ""
-
-#. module: alc_sale_channel
-#: selection:sale.order,sale_channel:0
-msgid "Logiweb"
-msgstr ""
-
-#. module: alc_sale_channel
-#: selection:sale.order,sale_channel:0
-msgid "Mail"
-msgstr ""
-
-#. module: alc_sale_channel
-#: selection:sale.order,sale_channel:0
-msgid "NewPharma"
-msgstr ""
-
-#. module: alc_sale_channel
-#: selection:sale.order,sale_channel:0
-msgid "Phone"
-msgstr ""
-
-#. module: alc_sale_channel
-#: selection:sale.order,sale_channel:0
-msgid "Place des Vétos"
-msgstr ""
-
-#. module: alc_sale_channel
 #: model:ir.model.fields,field_description:alc_sale_channel.field_sale_order_line_sale_channel
 #: model:ir.model.fields,field_description:alc_sale_channel.field_sale_order_sale_channel
 msgid "Sale channel"
@@ -67,10 +27,5 @@ msgstr ""
 #. module: alc_sale_channel
 #: model:ir.model,name:alc_sale_channel.model_sale_order_line
 msgid "Sales Order Line"
-msgstr ""
-
-#. module: alc_sale_channel
-#: selection:sale.order,sale_channel:0
-msgid "Web"
 msgstr ""
 
