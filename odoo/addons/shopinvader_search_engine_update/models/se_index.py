@@ -2,12 +2,14 @@
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, models
+from odoo import _, api, fields, models
 
 
 class SeIndex(models.Model):
 
     _inherit = "se.index"
+
+    continuous_update = fields.Boolean(related="model_id.continuous_update")
 
     def _get_model_domain(self, continuous):
         domain = [("index_id", "in", self.ids)]
@@ -39,3 +41,17 @@ class SeIndex(models.Model):
                 batch.with_delay(description=description)._jobify_recompute_json(
                     force_export=force_export
                 )
+
+    @api.model
+    def cron_export_all_continuous(self, domain=None):
+        domain = domain or []
+        continuous_indices = self.search(domain).filtered("continuous_update")
+        domain += [("id", "in", continuous_indices.ids)]
+        self.generate_batch_export_per_index(domain)
+
+    @api.model
+    def cron_export_all_batch(self, domain=None):
+        domain = domain or []
+        continuous_indices = self.search(domain).filtered("continuous_update")
+        domain += [("id", "not in", continuous_indices.ids)]
+        self.generate_batch_export_per_index(domain)
