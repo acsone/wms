@@ -30,7 +30,7 @@ class SeIndex(models.Model):
     @api.model
     def _cron_recompute_all(self, continuous, force_export=False, batch_size=500):
         # recompute_all_binding should be refactored to accept a configurable domain...
-        filter_continuous = lambda m: m.continous_update == continuous
+        filter_continuous = lambda m: m.continuous_update == continuous
         target_models = self.mapped("model_id").filtered(filter_continuous)
         for target_model in target_models:
             indexes = self.filtered(lambda r, m=target_model: r.model_id == m)
