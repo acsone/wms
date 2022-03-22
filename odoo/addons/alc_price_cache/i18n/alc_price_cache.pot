@@ -36,6 +36,11 @@ msgid "Product"
 msgstr ""
 
 #. module: alc_price_cache
+#: model:ir.model,name:alc_price_cache.model_product_template
+msgid "Product Template"
+msgstr ""
+
+#. module: alc_price_cache
 #: code:addons/alc_price_cache/models/product_pricelist.py:30
 #, python-format
 msgid "Remove products prices for pricelist %s."
