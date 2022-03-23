@@ -5,6 +5,7 @@ from contextlib import contextmanager
 
 import mock
 from freezegun import freeze_time
+from werkzeug.exceptions import NotFound
 
 from odoo.tests.common import SavepointCase
 
@@ -206,3 +207,14 @@ class TestProductOnOrder(SavepointCase, ComponentMixin):
         self.assertTrue(new_mail)
         self.assertEqual(self.so_ali_out_of_stock.id, new_mail.res_id)
         self.assertEqual(self.so_ali_out_of_stock._name, new_mail.model)
+
+    def test_get(self):
+        with self.products_on_order_service(self.partner_1.id) as service:
+            res = service.get(order_line_id=self.so_ali_out_of_stock.order_line.id,)
+            self.assertTrue(res)
+
+    def test_get_not_found(self):
+        with self.products_on_order_service(
+            self.partner_1.id
+        ) as service, self.assertRaises(NotFound):
+            service.get(order_line_id=123459876,)
