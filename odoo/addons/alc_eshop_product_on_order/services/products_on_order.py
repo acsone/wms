@@ -53,9 +53,10 @@ class ProductsOnOrderService(Component):
 
     @restapi.method(
         [(["/cancel/<int:order_line_id>"], "POST")],
+        input_param=restapi.CerberusValidator("_cancel_input_schema"),
         output_param=restapi.CerberusValidator("_cancel_output_schema"),
     )
-    def cancel(self, order_line_id):
+    def cancel(self, order_line_id, params):
         """Request cancellation of specified order line.
 
         The cancellation is only possible for purchased products in back
@@ -70,7 +71,7 @@ class ProductsOnOrderService(Component):
                 "error_msg": _("Requested order line no more exists"),
             }
         try:
-            product_on_order.request_backorder_cancellation()
+            product_on_order.request_backorder_cancellation(quantity=params["quantity"])
         except NoBackOrderError as error:
             return {"status": False, "error_msg": error.message}
         return {"status": True}
@@ -176,6 +177,16 @@ class ProductsOnOrderService(Component):
                     },
                 },
             },
+        }
+
+    def _cancel_input_schema(self):
+        return {
+            "quantity": {
+                "type": "float",
+                "coerce": float,
+                "required": True,
+                "nullable": True,
+            }
         }
 
     def _cancel_output_schema(self):

@@ -114,7 +114,7 @@ WHERE
         channels = tuple(self.env["sale.order"]._get_sale_channels_internal())
         self._cr.execute(query, dict(table=AsIs(self._table), channels=channels))
 
-    def request_backorder_cancellation(self):
+    def request_backorder_cancellation(self, quantity):
         for record in self:
             if not record.qty_unavailable:
                 raise NoBackOrderError(record.product_id.name, record.order_ref)
@@ -122,6 +122,6 @@ WHERE
             "alc_eshop_product_on_order.sale_order_request_backorder_cancellation"
         )
         for record in self:
-            template.with_context(product=record.product_id).send_mail(
-                record.order_id.id
-            )
+            template.with_context(
+                product=record.product_id, quanity=quantity
+            ).send_mail(record.order_id.id)
