@@ -68,7 +68,7 @@ SELECT
         WHERE
             ps.product_tmpl_id=pp.product_tmpl_id
             AND date_start <= NOW() AND date_end >= NOW()
-            AND (discount_sale IS NOT NULL or ratio_main_product IS NOT NULL)
+            AND (COALESCE(discount_sale, 0) > 0   or  COALESCE(ratio_main_product, 0) > 0)
         ) AS in_supplier_promotion,
     MAX(date_order) AS date_last_ordered
 FROM
