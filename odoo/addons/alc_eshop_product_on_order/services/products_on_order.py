@@ -4,6 +4,7 @@
 
 from psycopg2 import sql
 from psycopg2.extensions import AsIs
+from werkzeug.exceptions import NotFound
 
 from odoo import _
 
@@ -22,6 +23,16 @@ class ProductsOnOrderService(Component):
     _name = "product.on.order.service"
     _collection = "shopinvader.backend"
     _usage = "products_on_order"
+
+    @restapi.method(
+        [(["/<int:order_line_id>"], "GET")],
+        output_param=restapi.CerberusValidator("_order_line_schema"),
+    )
+    def get(self, order_line_id):
+        value = self._get(order_line_id)
+        if not value:
+            raise NotFound("No order line found for id %s" % order_line_id)
+        return value
 
     @restapi.method(
         [(["/"], "GET")],
@@ -53,9 +64,10 @@ class ProductsOnOrderService(Component):
 
     @restapi.method(
         [(["/cancel/<int:order_line_id>"], "POST")],
+        input_param=restapi.CerberusValidator("_cancel_input_schema"),
         output_param=restapi.CerberusValidator("_cancel_output_schema"),
     )
-    def cancel(self, order_line_id):
+    def cancel(self, order_line_id, params):
         """Request cancellation of specified order line.
 
         The cancellation is only possible for purchased products in back
@@ -70,7 +82,7 @@ class ProductsOnOrderService(Component):
                 "error_msg": _("Requested order line no more exists"),
             }
         try:
-            product_on_order.request_backorder_cancellation()
+            product_on_order.request_backorder_cancellation(quantity=params["quantity"])
         except NoBackOrderError as error:
             return {"status": False, "error_msg": error.message}
         return {"status": True}
@@ -116,66 +128,48 @@ class ProductsOnOrderService(Component):
             "size": {"type": "integer"},
             "data": {
                 "type": "list",
-                "schema": {
-                    "type": "dict",
-                    "schema": {
-                        "order_line_id": {
-                            "coerce": to_int,
-                            "nullable": False,
-                            "required": True,
-                            "type": "integer",
-                        },
-                        "product_id": {
-                            "coerce": to_int,
-                            "nullable": False,
-                            "required": True,
-                            "type": "integer",
-                        },
-                        "description": {
-                            "nullable": True,
-                            "required": True,
-                            "type": "string",
-                        },
-                        "order_ref": {
-                            "nullable": False,
-                            "required": True,
-                            "type": "string",
-                        },
-                        "order_date": {
-                            "nullable": False,
-                            "required": True,
-                            "type": "datetime",
-                        },
-                        "customer_ref": {
-                            "nullable": True,
-                            "required": False,
-                            "type": "string",
-                        },
-                        "qty_ordered": {
-                            "nullable": False,
-                            "required": True,
-                            "type": "float",
-                        },
-                        "qty_to_deliver": {
-                            "nullable": False,
-                            "required": True,
-                            "type": "float",
-                        },
-                        "qty_in_backorder": {
-                            "nullable": False,
-                            "required": True,
-                            "type": "float",
-                        },
-                        "product_family": {
-                            "type": "string",
-                            "allowed": ["meds", "food", "equipment"],
-                            "nullable": False,
-                        },
-                        "is_mto": {"type": "boolean", "nullable": False},
-                        "has_backorder": {"type": "boolean", "nullable": False},
-                    },
-                },
+                "schema": {"type": "dict", "schema": self._order_line_schema()},
             },
+        }
+
+    def _order_line_schema(self):
+        return {
+            "order_line_id": {
+                "coerce": to_int,
+                "nullable": False,
+                "required": True,
+                "type": "integer",
+            },
+            "product_id": {
+                "coerce": to_int,
+                "nullable": False,
+                "required": True,
+                "type": "integer",
+            },
+            "description": {"nullable": True, "required": True, "type": "string"},
+            "order_ref": {"nullable": False, "required": True, "type": "string"},
+            "order_date": {"nullable": False, "required": True, "type": "datetime"},
+            "customer_ref": {"nullable": True, "required": False, "type": "string"},
+            "qty_ordered": {"nullable": False, "required": True, "type": "float"},
+            "qty_to_deliver": {"nullable": False, "required": True, "type": "float"},
+            "qty_in_backorder": {"nullable": False, "required": True, "type": "float"},
+            "product_family": {
+                "type": "string",
+                "allowed": ["meds", "food", "equipment"],
+                "nullable": False,
+            },
+            "is_mto": {"type": "boolean", "nullable": False},
+            "has_backorder": {"type": "boolean", "nullable": False},
+        }
+
+    def _cancel_input_schema(self):
+        return {
+            "quantity": {
+                "type": "float",
+                "coerce": float,
+                "required": True,
+                "nullable": True,
+            }
         }
 
     def _cancel_output_schema(self):
@@ -204,6 +198,29 @@ class ProductsOnOrderService(Component):
         if partner_id:
             partner = partner.browse(partner_id)
         return partner
+
+    def _get(self, order_line_id):
+        query = """
+            SELECT
+                *
+            FROM
+                %(table)s
+            WHERE
+                partner_id = %(partner_id)s
+                AND order_line_id = %(order_line_id)s
+        """
+        self.env.cr.execute(
+            query,
+            dict(
+                partner_id=self.partner.id,
+                order_line_id=order_line_id,
+                table=AsIs(self.env["alc.eshop.product.on.order"]._table),
+            ),
+        )
+        row = self.env.cr.dictfetchone()
+        if row:
+            return self._search_row_to_json(row)
+        return {}
 
     def _get_search(
         self,

@@ -5,6 +5,7 @@ from contextlib import contextmanager
 
 import mock
 from freezegun import freeze_time
+from werkzeug.exceptions import NotFound
 
 from odoo.tests.common import SavepointCase
 
@@ -178,12 +179,15 @@ class TestProductOnOrder(SavepointCase, ComponentMixin):
 
     def test_cancel_wrong_ref(self):
         with self.products_on_order_service(self.partner_1.id) as service:
-            res = service.cancel(order_line_id=-1)
+            res = service.cancel(order_line_id=-1, params={"quantity": 1})
             self.assertEqual(False, res["status"])
 
     def test_cancel_no_back_order(self):
         with self.products_on_order_service(self.partner_1.id) as service:
-            res = service.cancel(order_line_id=self.so_medoc_in_stock.order_line.id)
+            res = service.cancel(
+                order_line_id=self.so_medoc_in_stock.order_line.id,
+                params={"quantity": 1},
+            )
             self.assertEqual(False, res["status"])
 
     def test_cancel(self):
@@ -194,9 +198,23 @@ class TestProductOnOrder(SavepointCase, ComponentMixin):
 
         all_mails = self.env["mail.mail"].search([])
         with self.products_on_order_service(self.partner_1.id) as service:
-            res = service.cancel(order_line_id=self.so_ali_out_of_stock.order_line.id)
+            res = service.cancel(
+                order_line_id=self.so_ali_out_of_stock.order_line.id,
+                params={"quantity": 1},
+            )
             self.assertTrue(res["status"])
         new_mail = self.env["mail.mail"].search([]) - all_mails
         self.assertTrue(new_mail)
         self.assertEqual(self.so_ali_out_of_stock.id, new_mail.res_id)
         self.assertEqual(self.so_ali_out_of_stock._name, new_mail.model)
+
+    def test_get(self):
+        with self.products_on_order_service(self.partner_1.id) as service:
+            res = service.get(order_line_id=self.so_ali_out_of_stock.order_line.id,)
+            self.assertTrue(res)
+
+    def test_get_not_found(self):
+        with self.products_on_order_service(
+            self.partner_1.id
+        ) as service, self.assertRaises(NotFound):
+            service.get(order_line_id=123459876,)

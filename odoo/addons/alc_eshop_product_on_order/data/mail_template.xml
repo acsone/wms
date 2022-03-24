@@ -18,7 +18,7 @@
       name="body_html"
     ><![CDATA[
 <p>Bonjour,</p>
-<p>${object.partner_id.name} demande l'annulation des quantités en backorder pour le produit ${ctx.product.display_name} dans la commande ${object.name} du ${format_tz(object.date_order, tz=user.tz)}.</p>
+<p>${object.partner_id.name} demande l'annulation de ${ctx.quantity} unité(s) en backorder pour le produit ${ctx.product.display_name} dans la commande ${object.name} du ${format_tz(object.date_order, tz=user.tz)}.</p>
 <p>Merci de faire le nécessaire.</p>
 ]]></field>
         </record>

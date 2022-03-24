@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import logging
-from collections import namedtuple
+from collections import defaultdict, namedtuple
 from datetime import datetime
 
 import click
@@ -11,27 +11,9 @@ import unicodecsv as csv
 
 _logger = logging.getLogger("IMPORT delivery window")
 
-TopCustomer = namedtuple(
-    "TOP_CUSTOMER",
-    [
-        "ref",
-        "name",
-        "street",
-        "zip",
-        "city",
-        "partner_longitude",
-        "partner_latitude",
-        "start_1",
-        "end_1",
-        "start_2",
-        "end_2",
-        "start_3",
-        "end_3",
-        "start_4",
-        "end_4",
-        "rating_level",
-    ],
-)
+Window = namedtuple("WINDOW", ["day_ids", "start", "end"])
+
+TopCustomer = namedtuple("TOP_CUSTOMER", ["ref", "windows", "rating_level"])
 
 
 class InentoryToPoBuilder(object):
@@ -129,7 +111,36 @@ class InentoryToPoBuilder(object):
     def _iter_read_file(self):
         reader = csv.DictReader(self.csvfile, delimiter=";")
         for row in reader:
-            yield TopCustomer(**row)
+            windows = []
+            days_by_start_end = defaultdict(list)
+            for start, end in (
+                ("Lu CLO1", "Lu CLF1"),
+                ("Lu CLO2", "Lu CLF2"),
+                ("Ma CLO1", "Ma CLF1"),
+                ("Ma CLO2", "Ma CLF2"),
+                ("Je CLO1", "Je CLF1"),
+                ("Je CLO2", "Je CLF2"),
+                ("Ve CLO1", "Ve CLF1"),
+                ("Ve CLO2", "Ve CLF2"),
+            ):
+                day = None
+                if start.startswith("Lu"):
+                    day = self.monday
+                elif start.startswith("Ma"):
+                    day = self.tuesday
+                elif start.startswith("Je"):
+                    day = self.thursday
+                elif start.startswith("Ve"):
+                    day = self.friday
+                days_by_start_end[(row[start], row[end])].append(day.id)
+            for start_end, day_ids in days_by_start_end.items():
+                start = start_end[0]
+                end = start_end[1]
+                if start.strip() and end.strip():
+                    windows.append(Window(day_ids, start, end))
+            yield TopCustomer(
+                ref=row["ref"], rating_level=row["TOP_rating"], windows=windows
+            )
 
     def _define_delivery_window(self, top_customer):
         ids = self._partner_ids_by_ref.get(top_customer.ref)
@@ -156,8 +167,8 @@ class InentoryToPoBuilder(object):
             and self.top_2000_tag not in partners.mapped("category_id")
         ):
             values["category_id"] = [(4, self.top_2000_tag.id)]
-        if not top_customer.start_1 and not top_customer.start_2:
-            _logger.info("No window defined for %s", top_customer.name)
+        if not top_customer.windows:
+            _logger.info("No window defined for %s", top_customer.ref)
             if values:
                 partners.write(values)
             return
@@ -169,58 +180,21 @@ class InentoryToPoBuilder(object):
                     0,
                     0,
                     self._to_delivery_window_values(
-                        top_customer.start_1,
-                        top_customer.end_1,
-                        self.monday | self.thursday,
+                        window.start, window.end, window.day_ids,
                     ),
                 )
+                for window in top_customer.windows
             ]
-            if top_customer.start_2:
-                window_values.append(
-                    (
-                        0,
-                        0,
-                        self._to_delivery_window_values(
-                            top_customer.start_2,
-                            top_customer.end_2,
-                            self.monday | self.thursday,
-                        ),
-                    )
-                )
-            if top_customer.start_3:
-                window_values.append(
-                    (
-                        0,
-                        0,
-                        self._to_delivery_window_values(
-                            top_customer.start_3,
-                            top_customer.end_3,
-                            self.tuesday | self.friday,
-                        ),
-                    )
-                )
-            if top_customer.start_4:
-                window_values.append(
-                    (
-                        0,
-                        0,
-                        self._to_delivery_window_values(
-                            top_customer.start_4,
-                            top_customer.end_4,
-                            self.tuesday | self.friday,
-                        ),
-                    )
-                )
             values["alc_delivery_window_ids"] = window_values
             partners.write(values)
-            _logger.info("%s updated", top_customer.name)
+            _logger.info("%s updated", top_customer.ref)
 
-    def _to_delivery_window_values(self, start, end, days):
+    def _to_delivery_window_values(self, start, end, day_ids):
         return {
             "start": self._time_str_to_float(start),
             "end": self._time_str_to_float(end),
             "preference": "mandatory",
-            "week_day_ids": [(6, 0, days.ids)],
+            "week_day_ids": [(6, 0, day_ids)],
         }
 
     def _time_str_to_float(self, time_str):
