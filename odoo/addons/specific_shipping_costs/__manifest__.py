@@ -18,6 +18,10 @@
         "specific_data",
     ],
     "website": "http://www.camptocamp.com",
-    "data": ["views/delivery_carrier.xml", "views/stock_picking_type.xml"],
+    "data": [
+        "views/delivery_carrier.xml",
+        "views/stock_picking_type.xml",
+        "views/sale_order.xml",
+    ],
     "installable": True,
 }

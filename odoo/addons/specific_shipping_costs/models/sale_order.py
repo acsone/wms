@@ -10,6 +10,29 @@ class SaleOrder(models.Model):
     used_for_delivery_fee = fields.Boolean(
         "Has been used for delivery fee calculation", copy=False
     )
+    used_for_fixed_fee = fields.Boolean(
+        "Has been used for fixed delivery fee calculation", copy=False
+    )
+
+    fixed_extra_fee_for_delivery = fields.Float(
+        string="Fixed extra fee", compute="_compute_fixed_extra_fee_for_delivery"
+    )
+    display_fixed_fee = fields.Boolean(
+        "Technical field to display extra fixed fee for delivery",
+        default=False,
+        compute="_compute_fixed_extra_fee_for_delivery",
+    )
+
+    @api.depends("carrier_id")
+    def _compute_fixed_extra_fee_for_delivery(self):
+        for rec in self:
+            if rec.carrier_id:
+                rec.fixed_extra_fee_for_delivery = rec.carrier_id.fixed_fee_for_delivery
+                rec.display_fixed_fee = bool(
+                    rec.fixed_extra_fee_for_delivery
+                    and rec.partner_id.help_with_fixed_fee
+                    and rec.carrier_id.use_specific_cost_calculation
+                )
 
     @api.model
     def charge_shipping_costs_by_carrier(self, carrier, round_saleorders, customer):
@@ -17,32 +40,83 @@ class SaleOrder(models.Model):
 
         And charge the customer on his last sale order if nececssary.
         """
-        if not carrier.fixed_price:
-            return
+        fixed_delivery_fee = carrier.fixed_fee_for_delivery
+        extra_delivery_fee = carrier.fixed_price
+
+        if customer.help_with_fee and extra_delivery_fee:
+            self.charge_extra_fees_on_customer(
+                round_saleorders,
+                customer,
+                carrier,
+                extra_delivery_fee,
+                "used_for_delivery_fee",
+            )
+        if customer.help_with_fixed_fee and fixed_delivery_fee:
+            self.charge_extra_fees_on_customer(
+                round_saleorders,
+                customer,
+                carrier,
+                fixed_delivery_fee,
+                "used_for_fixed_fee",
+            )
+
+    def _check_charge_fee(self, carrier, sum_ordered, used_to_charge_delivery_fee):
+        if used_to_charge_delivery_fee == "used_for_fixed_fee":
+            do_not_charge_fee = sum_ordered == 0
+        if used_to_charge_delivery_fee == "used_for_delivery_fee":
+            do_not_charge_fee = sum_ordered == 0 or sum_ordered >= carrier.amount
+        return do_not_charge_fee
+
+    def charge_extra_fees_on_customer(
+        self, round_saleorders, customer, carrier, fee, used_to_charge_delivery_fee
+    ):
         # this query checks all existing SOs for the customer, which might be massive if
         # his 'help_with_fee' setting has been changed overnight.
         # in particular the SQL write allows to skip triggering an export to the ESB
         # for each historical SO
         query_args = (customer.id, carrier.id)
-        query_select = """SELECT amount_untaxed FROM sale_order
-        WHERE partner_id = %s AND state != 'cancel'
-        AND used_for_delivery_fee = false AND carrier_id = %s;
-        """
-        self.env.cr.execute(query_select, query_args)
-        result = self.env.cr.fetchall()
-        if not result:
+        if used_to_charge_delivery_fee == "used_for_delivery_fee":
+            query_select = """SELECT amount_untaxed FROM sale_order
+            WHERE partner_id = %s AND state != 'cancel'
+            AND used_for_delivery_fee = false AND carrier_id = %s;
+            """
+            self.env.cr.execute(query_select, query_args)
+            result = self.env.cr.fetchall()
+            if not result:
+                return
+
+            sum_ordered = sum(r[0] for r in result)
+            query_update = """UPDATE sale_order SET used_for_delivery_fee = true
+            WHERE partner_id = %s AND state != 'cancel'
+            AND used_for_delivery_fee = false AND carrier_id = %s;
+            """
+            self.env.cr.execute(query_update, query_args)
+
+        if used_to_charge_delivery_fee == "used_for_fixed_fee":
+            query_select = """SELECT amount_untaxed FROM sale_order
+            WHERE partner_id = %s AND state != 'cancel'
+            AND used_for_fixed_fee = false AND carrier_id = %s;
+            """
+            self.env.cr.execute(query_select, query_args)
+            result = self.env.cr.fetchall()
+            if not result:
+                return
+
+            sum_ordered = sum(r[0] for r in result)
+            query_update = """UPDATE sale_order SET used_for_fixed_fee = true
+            WHERE partner_id = %s AND state != 'cancel'
+            AND used_for_fixed_fee = false AND carrier_id = %s;
+            """
+            self.env.cr.execute(query_update, query_args)
+
+        do_not_charge_fee = self._check_charge_fee(
+            carrier, sum_ordered, used_to_charge_delivery_fee
+        )
+        if do_not_charge_fee:
             return
-        sum_ordered = sum(r[0] for r in result)
-        query_update = """UPDATE sale_order SET used_for_delivery_fee = true
-        WHERE partner_id = %s AND state != 'cancel'
-        AND used_for_delivery_fee = false AND carrier_id = %s;
-        """
-        self.env.cr.execute(query_update, query_args)
-        if sum_ordered == 0 or sum_ordered >= carrier.amount:
-            return
-        # Find the last sale order passed and charge the customer
+
         round_saleorders = round_saleorders.filtered(
             lambda r: r.carrier_id == carrier
         ).sorted(key=lambda r: r.id, reverse=True)[0]
         for order in round_saleorders.sudo():
-            order._create_delivery_line(carrier, carrier.fixed_price)
+            order._create_delivery_line(carrier, fee)

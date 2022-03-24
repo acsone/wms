@@ -8,6 +8,9 @@
       <field name="delivery_type" position="after">
         <field name="use_specific_cost_calculation" />
       </field>
+      <field name="fixed_price" position="after">
+        <field name="fixed_fee_for_delivery" />
+      </field>
       <label for="margin" position="attributes">
         <attribute
           name="attrs"

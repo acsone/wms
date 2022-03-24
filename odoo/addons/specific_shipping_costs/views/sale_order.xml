@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+        <record id="view_order_form_with_carrier" model="ir.ui.view">
+            <field name="name">sale.order (in specific_shipping_costs)</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form" />
+            <field name="arch" type="xml">
+            <xpath expr="//field[@name='carrier_id']" position="after">
+                    <label for="fixed_extra_fee_for_delivery" />
+                    <div>
+                    <field name="display_fixed_fee" invisible="1" />
+                    <field
+            name="fixed_extra_fee_for_delivery"
+            widget='monetary'
+            attrs="{'invisible': [('display_fixed_fee', '=', False)]}"
+          />
+                        (<label for="fixed_extra_fee_for_delivery" />)
+                    </div>
+            </xpath>
+            </field>
+        </record>
+
+</odoo>
