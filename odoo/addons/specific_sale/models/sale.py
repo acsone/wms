@@ -11,23 +11,6 @@ from odoo.exceptions import UserError, ValidationError
 class Sale(models.Model):
     _inherit = "sale.order"
 
-    suite_name = fields.Char(string="Suite Id", copy=False)
-
-    @api.model_cr
-    def init(self):
-        res = super(Sale, self).init()
-        # This partial index is used by the 'last_suite_name' computed field
-        # on 'res.partner' (use of 'LIMIT 1' making PostgreSQL slow under
-        # certain circumstances).
-        query = """
-            CREATE INDEX IF NOT EXISTS
-            sale_order_partner_id_date_order_id_partial_index
-            ON sale_order (partner_id, date_order DESC, id DESC)
-            WHERE suite_name IS NOT NULL;
-        """
-        self.env.cr.execute(query)
-        return res
-
     @api.multi
     def order_lines_layouted(self):
         """Improve the sale order line on the report.

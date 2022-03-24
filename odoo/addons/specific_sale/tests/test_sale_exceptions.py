@@ -110,7 +110,6 @@ class TestSaleOrderException(SavepointCase):
                 "carrier_id": cls.delivery.id,
                 "client_order_ref": "whatever the client want",
                 "delivery_price": 23.5,
-                "suite_name": "0123434234",
                 "order_line": [
                     (
                         0,

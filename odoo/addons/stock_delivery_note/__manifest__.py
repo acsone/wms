@@ -10,6 +10,7 @@
     "depends": [
         "alc_b2c_partner",
         "alc_partner_veterinary",
+        "alc_sale_suite_name",
         "product_additional",
         "product_expiry",
         "specific_data",

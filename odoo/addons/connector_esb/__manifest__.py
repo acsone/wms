@@ -13,6 +13,7 @@
         "alc_base_auto_join",
         "alc_sale_channel",
         "alc_sale_product_qty_backorder",
+        "alc_sale_suite_name",
         "alc_product_dimensions",
         "alc_product_packaging",
         "alc_product_state",
