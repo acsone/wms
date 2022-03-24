@@ -28,3 +28,10 @@ msgstr ""
 msgid "Role name"
 msgstr ""
 
+#. module: pricelist_role_name
+#: code:addons/pricelist_role_name/models/product_pricelist.py:18
+#: sql_constraint:product.pricelist:0
+#, python-format
+msgid "Role name must be unique."
+msgstr ""
+
