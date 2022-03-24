@@ -19,7 +19,7 @@ class ProductPricelist(models.Model):
         product_model = self.env["product.product"]
         products = product_model.get_price_cache_products(domain_extend=domain_extend)
         desc = _("Update products prices for pricelist %s.") % self._get_names()
-        dates = list(dates) if dates else None
+        dates = {k: list(dates[k]) for k in dates} if dates else None
         products.with_delay(description=desc).update_price_cache(
             self, dates=dates, eids=eids
         )

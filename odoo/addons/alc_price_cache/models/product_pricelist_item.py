@@ -39,11 +39,14 @@ class ProductPricelistItem(models.Model):
             items._update_price_cache(domain_extend, dates, eids=eids)
 
     def _update_price_cache(self, domain_extend=None, dates=None, eids=None):
+        eids = (eids or []) + [False]
         pricelist = self.mapped("pricelist_id")
         pricelist.ensure_one()
         domain = self._get_domains_extend()
         extended_domain = OR([domain, domain_extend or []])
-        dates = set(dates or []) | pricelist.get_date_witnesses(items=self)
+        dates = dates or {}
+        dates_pl = pricelist.get_date_witnesses(items=self)
+        dates[pricelist.role_name] = set(dates.get(pricelist, [])) | dates_pl
         pricelist.update_price_cache(extended_domain, dates, eids=eids)
 
     @api.model
@@ -62,12 +65,13 @@ class ProductPricelistItem(models.Model):
             for pl, pl_items in items_by_pricelist.items()
         }
         dates_before = {
-            pl: pl.get_date_witnesses(pl_items)
+            pl.role_name: pl.get_date_witnesses(pl_items)
             for pl, pl_items in items_by_pricelist.items()
         }
         res = super(ProductPricelistItem, self).write(vals)
         for pricelist, pl_items in items_by_pricelist.items():
-            dates = pricelist.get_date_witnesses(pl_items) | dates_before[pricelist]
+            dates_pl = pricelist.get_date_witnesses(pl_items)
+            dates = {pricelist.role_name: dates_pl | dates_before[pricelist.role_name]}
             pl_items.update_price_cache(
                 domain_extend=extends_before[pricelist], dates=dates, eids=pl_items.ids
             )
