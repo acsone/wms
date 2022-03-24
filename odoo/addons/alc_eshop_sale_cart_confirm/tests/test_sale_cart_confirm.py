@@ -47,6 +47,7 @@ class TestSaleCartRestApi(TestSaleCartRestApiCase):
         self.assertEqual("my_ref", self.so.client_order_ref)
         self.assertEqual("my note", self.so.note)
         self.assertTrue(info)
-        self.assertEqual("sale", info["state"])
+        state = "processing" if "shopinvader.backend" in self.env else "sale"
+        self.assertEqual(state, info["state"])
         self.assertEqual("my_ref", info["customer_ref"])
         self.assertEqual("my note", info["note"])
