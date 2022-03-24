@@ -13,6 +13,10 @@ class ResPartner(models.Model):
         string="Last Suite Name", compute="_compute_last_suite_name"
     )
     help_with_fee = fields.Boolean(string="Helps with fees")
+    help_with_fixed_fee = fields.Boolean(
+        string="Fixed fee applied for deliveries",
+        help="If checked, a fixed amount for delivery will be apply, no matter the amount of the delivery",
+    )
     auto_cancel_unavailable_qty_sold = fields.Boolean(
         string="Auto-cancel Unavailable Quantity",
         default=False,

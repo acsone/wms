@@ -11,6 +11,7 @@ class DeliveryCarrier(models.Model):
     _inherit = "delivery.carrier"
 
     use_specific_cost_calculation = fields.Boolean(string="Alcyon specific cost")
+    fixed_fee_for_delivery = fields.Float(string="Fixed extra fee")
 
     def unlink(self):
         if self.env["res.partner"].search(

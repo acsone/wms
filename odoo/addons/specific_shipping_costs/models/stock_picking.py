@@ -53,7 +53,7 @@ class StockPicking(models.Model):
             # No delivery carrier that use specific shipping cost so out.
             return
         round_customers = round_saleorders.mapped("partner_id").filtered(
-            lambda r: r.help_with_fee is True
+            lambda r: r.help_with_fee is True or r.help_with_fixed_fee is True
         )
         for customer in round_customers:
             # Get all sale order used to compute fee for a customer it is not
@@ -64,7 +64,6 @@ class StockPicking(models.Model):
                 lambda r, c=customer: r.partner_id == c
             )
             customer_carriers = customer_round_saleorders.mapped("carrier_id")
-
             for delivery_carrier in customer_carriers:
                 self.env["sale.order"].charge_shipping_costs_by_carrier(
                     delivery_carrier, customer_round_saleorders, customer

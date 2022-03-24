@@ -51,13 +51,45 @@ class TestShippingCosts(SavepointCase):
                 "name": "Alcyon 3",
             }
         )
-        # Lets create 2 customers
+
+        cls.fixed_fee = 2
+        cls.delivery_method_4 = cls.env["delivery.carrier"].create(
+            {
+                "delivery_type": "fixed",
+                "use_specific_cost_calculation": True,
+                "fixed_price": 0,
+                "fixed_fee_for_delivery": cls.fixed_fee,
+                "name": "Alcyon fixed fee",
+            }
+        )
+        cls.delivery_method_5 = cls.env["delivery.carrier"].create(
+            {
+                "delivery_type": "fixed",
+                "use_specific_cost_calculation": True,
+                "fixed_price": cls.fee,
+                "free_if_more_than": True,
+                "amount": 150,
+                "fixed_fee_for_delivery": cls.fixed_fee,
+                "name": "Alcyon fixed and extra fee",
+            }
+        )
+
+        # Lets create 3 customers
         cls.partner1 = cls.env["res.partner"].create(
             {"name": "Partner One", "ref": "89328492342", "help_with_fee": True}
         )
         cls.partner2 = cls.env["res.partner"].create(
             {"name": "Partner Two", "ref": "498298349283", "help_with_fee": True}
         )
+        cls.partner3 = cls.env["res.partner"].create(
+            {
+                "name": "Partner 3",
+                "ref": "89328492111",
+                "help_with_fee": True,
+                "help_with_fixed_fee": True,
+            }
+        )
+
         # Create a couple of products
         cls.p1 = cls.env["product.product"].create(
             {
@@ -697,3 +729,107 @@ class TestShippingCosts(SavepointCase):
         self.dr1._assign_pickings(new_order.picking_ids)
         self.dr1._deliver(background=False)
         self.assertTrue(self.no_shipping_line_present(new_order))
+
+    def test_only_fixed_fee(self):
+        self.partner3.help_with_fee = False
+        so3 = self.env["sale.order"].create(
+            {
+                "partner_id": self.partner3.id,
+                "carrier_id": self.delivery_method_4.id,
+                "order_line": [
+                    (
+                        0,
+                        0,
+                        {
+                            "name": self.p1.name,
+                            "product_id": self.p1.id,
+                            "product_uom": self.ref("product.product_uom_unit"),
+                            "product_uom_qty": 1,
+                            "price_unit": 70,
+                        },
+                    )
+                ],
+            }
+        )
+        so3.action_confirm()
+        self.dr2._assign_pickings(so3.picking_ids)
+        self.dr2._deliver(background=False)
+
+        self.assertTrue(self.get_shipping_cost(so3), self.fixed_fee)
+
+    def test_only_fixed_fee_even_though_help_with_fees(self):
+        so3 = self.env["sale.order"].create(
+            {
+                "partner_id": self.partner3.id,
+                "carrier_id": self.delivery_method_4.id,
+                "order_line": [
+                    (
+                        0,
+                        0,
+                        {
+                            "name": self.p1.name,
+                            "product_id": self.p1.id,
+                            "product_uom": self.ref("product.product_uom_unit"),
+                            "product_uom_qty": 1,
+                            "price_unit": 70,
+                        },
+                    )
+                ],
+            }
+        )
+        so3.action_confirm()
+        self.dr2._assign_pickings(so3.picking_ids)
+        self.dr2._deliver(background=False)
+
+        self.assertTrue(self.get_shipping_cost(so3), self.fixed_fee)
+
+    def test_fixed_and_extra_fees(self):
+        so3 = self.env["sale.order"].create(
+            {
+                "partner_id": self.partner3.id,
+                "carrier_id": self.delivery_method_5.id,
+                "order_line": [
+                    (
+                        0,
+                        0,
+                        {
+                            "name": self.p1.name,
+                            "product_id": self.p1.id,
+                            "product_uom": self.ref("product.product_uom_unit"),
+                            "product_uom_qty": 1,
+                            "price_unit": 70,
+                        },
+                    )
+                ],
+            }
+        )
+        so3.action_confirm()
+        self.dr2._assign_pickings(so3.picking_ids)
+        self.dr2._deliver(background=False)
+
+        self.assertTrue(self.get_shipping_cost(so3), self.fixed_fee + self.fee)
+
+    def test__extra_fee_only(self):
+        so3 = self.env["sale.order"].create(
+            {
+                "partner_id": self.partner3.id,
+                "carrier_id": self.delivery_method.id,
+                "order_line": [
+                    (
+                        0,
+                        0,
+                        {
+                            "name": self.p1.name,
+                            "product_id": self.p1.id,
+                            "product_uom": self.ref("product.product_uom_unit"),
+                            "product_uom_qty": 1,
+                            "price_unit": 70,
+                        },
+                    )
+                ],
+            }
+        )
+        so3.action_confirm()
+        self.dr2._assign_pickings(so3.picking_ids)
+        self.dr2._deliver(background=False)
+        self.assertTrue(self.get_shipping_cost(so3), self.fee)
