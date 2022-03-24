@@ -116,6 +116,13 @@ msgid "February"
 msgstr ""
 
 #. module: specific_sale
+#: model:ir.model.fields,field_description:specific_sale.field_res_partner_help_with_fixed_fee
+#: model:ir.model.fields,field_description:specific_sale.field_res_users_help_with_fixed_fee
+#: model:ir.model.fields,field_description:specific_sale.field_shopinvader_partner_help_with_fixed_fee
+msgid "Fixed fee applied for deliveries"
+msgstr ""
+
+#. module: specific_sale
 #: model:exception.rule,description:specific_sale.no_food_allowed
 msgid "Food Product Not Allowed"
 msgstr ""
@@ -140,6 +147,13 @@ msgstr ""
 #. module: specific_sale
 #: model:exception.rule,description:specific_sale.no_medoc_human
 msgid "Human Medicine Not Allowed"
+msgstr ""
+
+#. module: specific_sale
+#: model:ir.model.fields,help:specific_sale.field_res_partner_help_with_fixed_fee
+#: model:ir.model.fields,help:specific_sale.field_res_users_help_with_fixed_fee
+#: model:ir.model.fields,help:specific_sale.field_shopinvader_partner_help_with_fixed_fee
+msgid "If checked, a fixed amount for delivery will be apply, no matter the amount of the delivery"
 msgstr ""
 
 #. module: specific_sale
