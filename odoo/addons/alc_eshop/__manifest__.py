@@ -22,6 +22,7 @@
         "alc_eshop_sale_channel",
         "alc_eshop_sale_no_backend",
         "alc_shopinvader_category",
+        "alc_shopinvader_fixes",
         "alc_eshop_wishlist",
         "alc_product_stock_state",
         "shopinvader_auth_jwt",
