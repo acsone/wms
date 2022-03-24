@@ -17,7 +17,7 @@ msgstr ""
 #: model:mail.template,body_html:alc_eshop_product_on_order.sale_order_request_backorder_cancellation
 msgid "\n"
 "<p>Bonjour,</p>\n"
-"<p>${object.partner_id.name} demande l'annulation des quantités en backorder pour le produit ${ctx.product.display_name} dans la commande ${object.name} du ${format_tz(object.date_order, tz=user.tz)}.</p>\n"
+"<p>${object.partner_id.name} demande l'annulation de ${ctx.quantity} unité(s) en backorder pour le produit ${ctx.product.display_name} dans la commande ${object.name} du ${format_tz(object.date_order, tz=user.tz)}.</p>\n"
 "<p>Merci de faire le nécessaire.</p>\n"
 ""
 msgstr ""
@@ -129,7 +129,7 @@ msgid "Ref ${object.name}: Demande annulation backorder ${ctx.product.name}"
 msgstr ""
 
 #. module: alc_eshop_product_on_order
-#: code:addons/alc_eshop_product_on_order/services/products_on_order.py:70
+#: code:addons/alc_eshop_product_on_order/services/products_on_order.py:82
 #, python-format
 msgid "Requested order line no more exists"
 msgstr ""
