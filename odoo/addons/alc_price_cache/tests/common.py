@@ -24,6 +24,10 @@ class TestPrices(SavepointCase, JobMixin):
 
         cls.model_pl = cls.env["product.pricelist"]
         cls.model_pl_nodelay = cls.model_pl.with_context(test_queue_job_no_delay=True)
+        cls.model_pl_item = cls.env["product.pricelist.item"]
+        cls.model_pl_item_nodelay = cls.model_pl_item.with_context(
+            test_queue_job_no_delay=True
+        )
 
     def _get_item_vals(self, pricelist=None, **kwargs):
         vals = {

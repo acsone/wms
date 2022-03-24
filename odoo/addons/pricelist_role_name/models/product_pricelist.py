@@ -4,16 +4,21 @@
 
 from slugify import slugify
 
-from odoo import fields, models
+from odoo import _, api, fields, models
 
 
 class ProductPricelist(models.Model):
 
     _inherit = "product.pricelist"
 
-    role_name = fields.Char(compute="_compute_role_name", store=False)
-    discount_role_name = fields.Char(compute="_compute_role_name", store=False)
+    role_name = fields.Char(compute="_compute_role_name", store=True)
+    discount_role_name = fields.Char(compute="_compute_role_name", store=True)
 
+    _sql_constraints = [
+        ("role_name_uniq", "UNIQUE(role_name)", _("Role name must be unique."))
+    ]
+
+    @api.depends("name")
     def _compute_role_name(self):
         for pl in self:
             role_name = slugify("price_" + pl.name)

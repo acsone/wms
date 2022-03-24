@@ -53,7 +53,7 @@ class ProductProduct(models.Model):
         if not pricelists:
             pricelists = self.env["product.pricelist"].search([])
             clean = True
-        dates = dates or {pl: pl.get_date_witnesses() for pl in pricelists}
+        dates = dates or {pl.role_name: pl.get_date_witnesses() for pl in pricelists}
         for product in self:
             price_cache = {} if clean else (product.price_cache or {})
             for pricelist in pricelists:
@@ -61,7 +61,7 @@ class ProductProduct(models.Model):
                     pl_prices = price_cache.get(pricelist.role_name, [])
                     if eids:
                         pl_prices = self.remove_from_cache(pl_prices, eids)
-                    for date in dates[pricelist]:
+                    for date in dates[pricelist.role_name]:
                         price = pricelist._get_cache_price(product, date)
                         price["price"] = currency.round(price["price"])
                         pl_prices = self.add_to_cache(pl_prices, price)
@@ -71,7 +71,7 @@ class ProductProduct(models.Model):
                     pl_discounts = price_cache.get(discount_role, [])
                     if eids:
                         pl_discounts = self.remove_from_cache(pl_discounts, eids)
-                    for date in dates[pricelist]:
+                    for date in dates[pricelist.role_name]:
                         discount = pricelist._get_cache_discount(product, date)
                         if discount:
                             pl_discounts = self.add_to_cache(pl_discounts, discount)
