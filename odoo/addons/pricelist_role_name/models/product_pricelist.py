@@ -4,7 +4,7 @@
 
 from slugify import slugify
 
-from odoo import _, fields, models
+from odoo import _, api, fields, models
 
 
 class ProductPricelist(models.Model):
@@ -18,6 +18,7 @@ class ProductPricelist(models.Model):
         ("role_name_uniq", "UNIQUE(role_name)", _("Role name must be unique."))
     ]
 
+    @api.depends("name")
     def _compute_role_name(self):
         for pl in self:
             role_name = slugify("price_" + pl.name)
