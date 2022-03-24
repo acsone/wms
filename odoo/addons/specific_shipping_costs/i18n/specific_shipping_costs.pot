@@ -29,8 +29,19 @@ msgid "Carrier"
 msgstr ""
 
 #. module: specific_shipping_costs
+#: model:ir.model.fields,field_description:specific_shipping_costs.field_delivery_carrier_fixed_fee_for_delivery
+#: model:ir.model.fields,field_description:specific_shipping_costs.field_sale_order_fixed_extra_fee_for_delivery
+msgid "Fixed extra fee"
+msgstr ""
+
+#. module: specific_shipping_costs
 #: model:ir.model.fields,field_description:specific_shipping_costs.field_sale_order_used_for_delivery_fee
 msgid "Has been used for delivery fee calculation"
+msgstr ""
+
+#. module: specific_shipping_costs
+#: model:ir.model.fields,field_description:specific_shipping_costs.field_sale_order_used_for_fixed_fee
+msgid "Has been used for fixed delivery fee calculation"
 msgstr ""
 
 #. module: specific_shipping_costs
@@ -44,6 +55,11 @@ msgid "Sales Order"
 msgstr ""
 
 #. module: specific_shipping_costs
+#: model:ir.model.fields,field_description:specific_shipping_costs.field_sale_order_display_fixed_fee
+msgid "Technical field to display extra fixed fee for delivery"
+msgstr ""
+
+#. module: specific_shipping_costs
 #: model:ir.model,name:specific_shipping_costs.model_stock_picking_type
 msgid "The picking type determines the picking view"
 msgstr ""
@@ -54,7 +70,7 @@ msgid "Transfer"
 msgstr ""
 
 #. module: specific_shipping_costs
-#: code:addons/specific_shipping_costs/models/delivery_carrier.py:19
+#: code:addons/specific_shipping_costs/models/delivery_carrier.py:20
 #, python-format
 msgid "You cannot delete a record linked from a partner"
 msgstr ""
