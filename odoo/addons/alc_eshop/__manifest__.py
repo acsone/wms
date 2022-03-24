@@ -19,6 +19,7 @@
         "alc_eshop_api_v2",
         "alc_eshop_auth_jwt",
         "alc_eshop_filter_data",
+        "alc_eshop_sale_channel",
         "alc_eshop_sale_no_backend",
         "alc_shopinvader_category",
         "alc_eshop_wishlist",
