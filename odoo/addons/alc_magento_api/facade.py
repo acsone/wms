@@ -29,6 +29,7 @@ class Facade(object):
             "packing-slip": FacadePackingSlip,
             "price-list": FacadePriceList,
             "catalog": FacadeCatalog,
+            "sales_order": FacadeOrder,
         }[service_name]
 
     def _get_odoo_service(self):
@@ -364,3 +365,49 @@ class FacadeQuoteCsv(FacadeShopinvaderCart):
 
     def apply(self, **kwargs):
         return self.service.sync(**kwargs)
+
+
+class FacadeOrder(Facade):
+    usage = "orders"
+
+    def process_kwargs(self, **kwargs):
+        kwargs["from_date"] = kwargs.pop("since")
+        return kwargs
+
+    @staticmethod
+    def _item_func(parent):
+        return "order" if parent == "data" else "line"
+
+    def apply(self, **kwargs):
+        return self.service._search(**kwargs)
+
+    def _json_for_xml(self, data):
+        for line in data["lines"]:
+            line.update(line.pop("product_id"))
+        return data
+
+    def process_result(self, result, **kwargs):
+        parser = self._get_parser()
+        records_json = result.jsonify(parser)
+        return self._json_to_xml(
+            [self._json_for_xml(r) for r in records_json],
+            custom_root="data",
+            item_func=self._item_func,
+        )
+
+    def _get_parser(self):
+        parser_lines = [
+            "id:line_id",
+            "product_qty:qty_ordered",
+            "qty_delivered",
+            "product_qty_canceled:qty_canceled",
+            ("product_id", ["default_code:sku"]),
+        ]
+        return [
+            "id:web_id",
+            "name:erp_name",
+            "suite_name",
+            "date_order_short",
+            "client_order_ref",
+            ("order_line:lines", parser_lines),
+        ]

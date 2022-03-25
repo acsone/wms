@@ -13,6 +13,7 @@
         "alc_eshop",  # bring all fields
         "alc_eshop_services_catalog",
         "alc_eshop_services_deliveries",
+        "alc_eshop_services_orders",
         "sale_cart_rest_api",
     ],
     "demo": [],
