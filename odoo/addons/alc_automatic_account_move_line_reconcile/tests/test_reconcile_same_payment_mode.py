@@ -69,6 +69,18 @@ class TestReconcileSamePaymentMode(SavepointCase):
                 "reconcile": True,
             }
         )
+        cls.account_supplier = cls.env["account.account"].search(
+            [("code", "=", "440000")]
+        )
+        if not cls.account_supplier:
+            cls.account_supplier = cls.env["account.account"].create(
+                {
+                    "name": "Test account supplier",
+                    "code": "440000",
+                    "user_type_id": cls.account_type.id,
+                    "reconcile": True,
+                }
+            )
         cls.invoice1 = cls._create_invoice(
             "out_invoice", cls.account, cls.payment_mode1
         )
@@ -98,6 +110,28 @@ class TestReconcileSamePaymentMode(SavepointCase):
         )
         for line in refund_account_move_lines:
             line.payment_mode_id = cls.payment_mode2.id
+
+        cls.invoice_supplier = cls._create_invoice(
+            "out_invoice", cls.account_supplier, cls.payment_mode2
+        )
+        supplier_invoice_account_move_lines = cls.env["account.move.line"].search(
+            [("invoice_id", "=", cls.invoice_supplier.id)]
+        )
+        for line in supplier_invoice_account_move_lines:
+            line.payment_mode_id = cls.payment_mode2.id
+        cls.refund_wiz = (
+            cls.env["account.invoice.refund"]
+            .with_context(active_ids=cls.invoice2.ids)
+            .create({"filter_refund": "refund", "description": "test"})
+        )
+        supplier_refund_id = cls.refund_wiz.invoice_refund().get("domain")[1][2]
+        cls.refund_supplier = cls.env["account.invoice"].browse(supplier_refund_id)
+        cls.refund_supplier.state = "open"
+        supplier_refund_account_move_lines = cls.env["account.move.line"].search(
+            [("invoice_id", "=", cls.refund_supplier.id)]
+        )
+        for line in supplier_refund_account_move_lines:
+            line.payment_mode_id = cls.payment_mode1.id
 
     @classmethod
     def _create_invoice(
@@ -174,3 +208,28 @@ class TestReconcileSamePaymentMode(SavepointCase):
             self.assertTrue(el["id"] in move_line_ids_to_keep)
         for el in content:
             self.assertTrue(el["id"] not in move_line_ids_to_reject)
+
+    def test_01_ignore_payment_mode_if_supplier(self):
+        self.invoice_supplier.state = "open"
+        json_infos = self.invoice_supplier.outstanding_credits_debits_widget
+        infos = json.loads(json_infos)
+        content = infos["content"]
+
+        # In this case, we keep all move lines
+        all_move_lines = (
+            self.env["account.move.line"]
+            .search(
+                [
+                    ("account_id", "=", self.account_supplier.id),
+                    ("partner_id", "=", self.partner_1.id),
+                    (
+                        "payment_mode_id",
+                        "in",
+                        (self.payment_mode1.id, self.payment_mode2.id),
+                    ),
+                ]
+            )
+            .ids
+        )
+        for el in content:
+            self.assertTrue(el["id"] in all_move_lines)

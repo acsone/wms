@@ -21,15 +21,20 @@ class AccountInvoice(models.Model):
             content = info["content"]
             line_ids = [el["id"] for el in content]
             lines = self.env["account.move.line"].browse(line_ids)
-            line_ids_to_keep = lines.filtered(
-                lambda l: l.payment_mode_id == self.payment_mode_id
-            ).ids
-            result = [el for el in content if el["id"] in line_ids_to_keep]
-            if result:
-                info["content"] = result
-                self.outstanding_credits_debits_widget = json.dumps(info)
-                self.has_outstanding = True
-            else:
-                self.outstanding_credits_debits_widget = json.dumps(False)
-                self.has_outstanding = False
+            # Allow to auto reconcile supplier invoices with provision,
+            # no matter the payment mode
+            account_code = lines.mapped("account_id").code
+            supplier_accounts_codes = ["440000", "440100", "440200"]
+            if account_code not in supplier_accounts_codes:
+                line_ids_to_keep = lines.filtered(
+                    lambda l: l.payment_mode_id == self.payment_mode_id
+                ).ids
+                result = [el for el in content if el["id"] in line_ids_to_keep]
+                if result:
+                    info["content"] = result
+                    self.outstanding_credits_debits_widget = json.dumps(info)
+                    self.has_outstanding = True
+                else:
+                    self.outstanding_credits_debits_widget = json.dumps(False)
+                    self.has_outstanding = False
         return result
