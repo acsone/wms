@@ -18,6 +18,7 @@
         "specific_stock",
         "stock",
         "stock_expired",
+        "account_tax_one_vat",
     ],
     "data": [
         "views/res_partner.xml",

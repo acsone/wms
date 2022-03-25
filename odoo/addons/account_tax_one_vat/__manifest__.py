@@ -5,11 +5,12 @@
 {
     "name": "Account Tax One VAT",
     "description": "Allow only the selection of on VAT Tax.",
-    "version": "10.0.1.0.0",
+    "version": "10.0.1.0.1",
     "author": "Camptocamp",
     "license": "AGPL-3",
     "category": "account",
-    "depends": ["account", "sale", "purchase", "specific_data"],
+    "depends": ["account", "sale", "purchase"],
+    "data": ["data/account_tax_group.xml"],
     "website": "http://www.camptocamp.com",
     "installable": True,
 }

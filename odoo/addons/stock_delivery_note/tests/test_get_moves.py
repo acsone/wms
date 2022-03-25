@@ -72,7 +72,7 @@ class TestStockDeliveryNoteGetMoves(SavepointCase):
         # Create a sale tax
         cls.tax = cls.env["account.tax"].create(
             {
-                "tax_group_id": cls.env.ref("specific_data.vat_tax_group").id,
+                "tax_group_id": cls.env.ref("account_tax_one_vat.vat_tax_group").id,
                 "amount": 6,
                 "name": "test_tax",
             }
