@@ -6,7 +6,7 @@
 {
     "name": "Alcyon E-Shop",
     "description": """Install all apps and modules required by Shopinvader""",
-    "version": "10.0.1.0.1",
+    "version": "10.0.2.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
@@ -21,6 +21,7 @@
         "alc_eshop_filter_data",
         "alc_eshop_sale_channel",
         "alc_eshop_sale_no_backend",
+        "alc_eshop_sale_suite_name",
         "alc_shopinvader_category",
         "alc_shopinvader_fixes",
         "alc_eshop_wishlist",

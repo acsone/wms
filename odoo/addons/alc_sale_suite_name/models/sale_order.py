@@ -25,3 +25,7 @@ class SaleOrder(models.Model):
         """
         self.env.cr.execute(query)
         return res
+
+    @api.model
+    def get_next_suite_name(self, cart):
+        return cart.partner_id.next_suite_name

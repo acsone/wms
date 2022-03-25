@@ -2,7 +2,9 @@
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import fields, models
+from odoo import api, fields, models
+
+from .. import utils
 
 
 class ResPartner(models.Model):
@@ -11,6 +13,10 @@ class ResPartner(models.Model):
 
     last_suite_name = fields.Char(
         string="Last Suite Name", compute="_compute_last_suite_name"
+    )
+
+    next_suite_name = fields.Char(
+        string="Next Suite Name", compute="_compute_next_suite_name"
     )
 
     def _compute_last_suite_name(self):
@@ -25,5 +31,12 @@ class ResPartner(models.Model):
                 order="date_order desc, id desc",
                 limit=1,
             )
-            if order:
-                record.last_suite_name = order.suite_name
+            record.last_suite_name = order.suite_name
+
+    @api.depends("last_suite_name")
+    def _compute_next_suite_name(self):
+        """ Compute the nest suite name used for this customer.
+
+        """
+        for record in self:
+            record.next_suite_name = utils.increment_suite_name(self.last_suite_name)

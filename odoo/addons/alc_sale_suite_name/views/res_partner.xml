@@ -9,9 +9,9 @@
         <field name="inherit_id" ref="base.view_partner_form" />
         <field name="priority" eval="999" />
         <field name="arch" type="xml">
-            <field name="ref" positon="before">
+            <xpath expr="//field[@name='ref']" position="before">
                 <field name="last_suite_name" />
-            </field>
+            </xpath>
         </field>
     </record>
 
