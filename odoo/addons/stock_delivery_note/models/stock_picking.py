@@ -273,7 +273,7 @@ class StockPicking(models.Model):
             ]
         )
 
-        vat_group = self.env.ref("specific_data.vat_tax_group")
+        vat_group = self.env.ref("account_tax_one_vat.vat_tax_group")
         # The product lines
         grouped_lines = self.get_moves_by_order()
         for group in grouped_lines:

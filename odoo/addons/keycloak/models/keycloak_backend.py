@@ -19,6 +19,8 @@ class KeycloakBackend(models.Model):
     client_id = fields.Char()
     realm_name = fields.Char()
     client_secret_key = fields.Char()
+    realm_client_id = fields.Char()
+    realm_client_secret_key = fields.Char()
 
     username = fields.Char()
     user_realm_name = fields.Char()
@@ -35,6 +37,8 @@ class KeycloakBackend(models.Model):
             "username": {},
             "user_realm_name": {},
             "password": {},
+            "realm_client_id": {},
+            "realm_client_secret_key": {},
         }
         env_fields.update(new)
         return env_fields
@@ -53,6 +57,24 @@ class KeycloakBackend(models.Model):
         if self.user_realm_name and self.user_realm_name != self.realm_name:
             params["user_realm_name"] = self.user_realm_name
         return keycloak.KeycloakAdmin(**params)
+
+    def _get_openid_client(self):
+        """The client should be defined on the target realm."""
+        self.ensure_one()
+        params = {
+            "server_url": self.server_url,
+            "client_id": self.realm_client_id,
+            "realm_name": self.realm_name,
+            "client_secret_key": self.realm_client_secret_key,
+        }
+        return keycloak.KeycloakOpenID(**params)
+
+    def _get_user_token(self, keycloak_user):
+        username = keycloak_user.keycloak_username
+        return self._get_token_from_user_info(username, keycloak_user.password)
+
+    def _get_token_from_user_info(self, username, password):
+        return self._get_openid_client().token(username, password)
 
     @job()
     def create_user(self, keycloak_user):

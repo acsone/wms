@@ -1,0 +1,62 @@
+# -*- coding: utf-8 -*-
+# Copyright 2022 ACSONE SA/NV
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+
+import base64
+
+import odoo
+from odoo.http import Controller, Response, request, route
+
+from ..facade import Facade
+
+
+class MagentoApi(Controller):
+    def _authenticate(self, sudo_env, headers, expected_username):
+        basic = headers["HTTP_AUTHORIZATION"]
+        encoded = basic.replace("Basic ", "")
+        decoded = base64.b64decode(encoded)  # TODO: Port to 3
+        username, password = decoded.split(":")
+        assert username == expected_username
+        backend = sudo_env.ref("keycloak.keycloak_backend")
+        token = backend._get_token_from_user_info(username, password)
+        assert token["token_type"] == "Bearer"
+
+    def _get_partner(self, sudo_env, username):
+        domain = [("username", "=", username)]
+        keycloak_partner = sudo_env["keycloak.user"].search(domain)
+        return keycloak_partner.partner_id
+
+    @route(
+        [
+            "/magento-api/<string:username>/<string:service>/",
+            "/magento-api/<string:username>/<string:service>/<string:param>/<string:value>",
+        ],
+        type="http",
+        auth="none",  # custom authentification step
+        csrf=False,
+    )
+    def magento_api(self, username, service, **kwargs):
+        headers = request.httprequest.environ
+        sudo_env = request.env(user=odoo.SUPERUSER_ID)
+        try:
+            self._authenticate(sudo_env, headers, username)
+            partner = self._get_partner(sudo_env, username)
+        except Exception:
+            return Response(response="User not found.", status=401)
+        try:
+            if request.httprequest.data:
+                kwargs["data"] = request.httprequest.data
+            if kwargs.get("param"):
+                key = kwargs.pop("param")
+                kwargs[key] = kwargs.pop("value")
+            facade = Facade.factory(sudo_env, partner, service)
+            result, error, location = facade(**kwargs)
+        except Exception:
+            return Response(response="Cannot resolve API call.", status=202)
+        if error:
+            response = Response(response=error, status=200)
+        else:
+            response = Response(response=result, status=201)
+        if location:
+            response.location = location
+        return response

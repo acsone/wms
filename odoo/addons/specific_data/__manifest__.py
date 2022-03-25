@@ -4,7 +4,7 @@
 
 {
     "name": "Specific datas for Alcyon",
-    "version": "10.0.1.0.0",
+    "version": "10.0.1.0.1",
     "author": "Camptocamp",
     "license": "AGPL-3",
     "category": "Base",
@@ -21,10 +21,6 @@
         "specific_partner",
     ],
     "website": "http://www.camptocamp.com",
-    "data": [
-        "data/account_tax_group.xml",
-        "data/product.category.csv",
-        "data/product.pricelist.csv",
-    ],
+    "data": ["data/product.category.csv", "data/product.pricelist.csv"],
     "installable": True,
 }

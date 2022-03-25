@@ -30,6 +30,7 @@
         "stock_delivery_note",
         "sale_consignment",
         "account_payment_partner",
+        "account_tax_one_vat",
     ],
     "website": "http://www.camptocamp.com",
     "data": [

@@ -2,33 +2,28 @@
 # Copyright 2020 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, models
-from odoo.exceptions import ValidationError
+from odoo import api, fields, models
 
 
 class ProductTemplate(models.Model):
-    _inherit = "product.template"
+    _name = "product.template"
+    _inherit = ["product.template", "one.vat.mixin"]
+
+    vat_id = fields.Many2one("account.tax", compute="_compute_product_vat")
+    vat = fields.Char(compute="_compute_product_vat")
 
     @api.constrains("taxes_id")
     def _check_only_one_vat_customer_tax(self):
-        vat_group = self.env.ref("specific_data.vat_tax_group")
-        vat_taxes = self.taxes_id.filtered(lambda r: r.tax_group_id == vat_group)
-        if len(vat_taxes) > 1:
-            raise ValidationError(
-                _(
-                    "Multiple customer tax of type VAT are selected. Only one is allowed."
-                )
-            )
+        self._check_only_one_vat_tax_field("taxes_id")
 
     @api.constrains("supplier_taxes_id")
     def _check_only_one_vat_supplier_tax(self):
-        vat_group = self.env.ref("specific_data.vat_tax_group")
-        vat_taxes = self.supplier_taxes_id.filtered(
-            lambda r: r.tax_group_id == vat_group
-        )
-        if len(vat_taxes) > 1:
-            raise ValidationError(
-                _(
-                    "Multiple supplier tax of type VAT are selected. Only one is allowed."
-                )
-            )
+        self._check_only_one_vat_tax_field("supplier_taxes_id")
+
+    @api.depends("taxes_id")
+    def _compute_product_vat(self):
+        vat_group = self.env.ref("account_tax_one_vat.vat_tax_group")
+        for record in self:
+            vat = record.taxes_id.filtered(lambda r: r.tax_group_id == vat_group)
+            record.vat_id = vat
+            record.vat = vat.name
