@@ -22,7 +22,7 @@ msgid "&amp;bull;"
 msgstr "&amp;bull;"
 
 #. module: specific_sale
-#: code:addons/specific_sale/models/sale.py:231
+#: code:addons/specific_sale/models/sale.py:214
 #, python-format
 msgid "A narcotic voucher is required for the data entry."
 msgstr "Bon de stupéfiant nécessaire avant l'encodage"
@@ -33,7 +33,7 @@ msgid "April"
 msgstr "Avril"
 
 #. module: specific_sale
-#: code:addons/specific_sale/models/sale.py:96
+#: code:addons/specific_sale/models/sale.py:79
 #, python-format
 msgid "Article transferred to dispensing pharmacy: %s"
 msgstr "Article transféré vers la pharmacie distributrice : %s"
@@ -192,13 +192,6 @@ msgid "June"
 msgstr "Juin"
 
 #. module: specific_sale
-#: model:ir.model.fields,field_description:specific_sale.field_res_partner_last_suite_name
-#: model:ir.model.fields,field_description:specific_sale.field_res_users_last_suite_name
-#: model:ir.model.fields,field_description:specific_sale.field_shopinvader_partner_last_suite_name
-msgid "Last Suite Name"
-msgstr "Dernier nom suite"
-
-#. module: specific_sale
 #: model:exception.rule,description:specific_sale.order_amount_minimum
 msgid "Le montant total de la commande ne peut pas être inférieur à 100 euros"
 msgstr "Le montant total de la commande ne peut pas être inférieur à 100 euros"
@@ -263,7 +256,7 @@ msgid "Narcotic Veterinary Medicine Not Allowed"
 msgstr "Médicament stupéfiant interdit"
 
 #. module: specific_sale
-#: code:addons/specific_sale/models/sale.py:230
+#: code:addons/specific_sale/models/sale.py:213
 #, python-format
 msgid "Narcotic voucher"
 msgstr "Bon de stupéfiant"
@@ -515,11 +508,6 @@ msgid "September"
 msgstr "Septembre"
 
 #. module: specific_sale
-#: model:ir.model.fields,field_description:specific_sale.field_sale_order_suite_name
-msgid "Suite Id"
-msgstr "Suite Id"
-
-#. module: specific_sale
 #: model:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
 msgid "Taxes"
 msgstr "Taxes"
@@ -603,7 +591,7 @@ msgid "Will include free product"
 msgstr "Inclus des produits gratuits"
 
 #. module: specific_sale
-#: code:addons/specific_sale/models/sale.py:128
+#: code:addons/specific_sale/models/sale.py:111
 #, python-format
 msgid "You cannot cancel sale order %s, it's already prepared"
 msgstr "Vous ne pouvez pas annuler la commande %s, elle est déjà préparée"
@@ -617,6 +605,12 @@ msgstr ""
 #: model:exception.rule,warning_text:specific_sale.warning_stupefiant_vet
 msgid "stupéfiant VET: written order, keep confirmation."
 msgstr "Commande de psychotrope par écrit, gardez la confirmation."
+
+#~ msgid "Last Suite Name"
+#~ msgstr "Dernier nom suite"
+
+#~ msgid "Suite Id"
+#~ msgstr "Suite Id"
 
 #~ msgid "Product Type"
 #~ msgstr "Type de produit"

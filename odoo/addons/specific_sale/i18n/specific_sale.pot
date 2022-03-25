@@ -19,7 +19,7 @@ msgid "&amp;bull;"
 msgstr ""
 
 #. module: specific_sale
-#: code:addons/specific_sale/models/sale.py:231
+#: code:addons/specific_sale/models/sale.py:214
 #, python-format
 msgid "A narcotic voucher is required for the data entry."
 msgstr ""
@@ -30,7 +30,7 @@ msgid "April"
 msgstr ""
 
 #. module: specific_sale
-#: code:addons/specific_sale/models/sale.py:96
+#: code:addons/specific_sale/models/sale.py:79
 #, python-format
 msgid "Article transferred to dispensing pharmacy: %s"
 msgstr ""
@@ -182,13 +182,6 @@ msgid "June"
 msgstr ""
 
 #. module: specific_sale
-#: model:ir.model.fields,field_description:specific_sale.field_res_partner_last_suite_name
-#: model:ir.model.fields,field_description:specific_sale.field_res_users_last_suite_name
-#: model:ir.model.fields,field_description:specific_sale.field_shopinvader_partner_last_suite_name
-msgid "Last Suite Name"
-msgstr ""
-
-#. module: specific_sale
 #: model:exception.rule,description:specific_sale.order_amount_minimum
 msgid "Le montant total de la commande ne peut pas être inférieur à 100 euros"
 msgstr ""
@@ -249,7 +242,7 @@ msgid "Narcotic Veterinary Medicine Not Allowed"
 msgstr ""
 
 #. module: specific_sale
-#: code:addons/specific_sale/models/sale.py:230
+#: code:addons/specific_sale/models/sale.py:213
 #, python-format
 msgid "Narcotic voucher"
 msgstr ""
@@ -501,11 +494,6 @@ msgid "September"
 msgstr ""
 
 #. module: specific_sale
-#: model:ir.model.fields,field_description:specific_sale.field_sale_order_suite_name
-msgid "Suite Id"
-msgstr ""
-
-#. module: specific_sale
 #: model:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
 msgid "Taxes"
 msgstr ""
@@ -585,7 +573,7 @@ msgid "Will include free product"
 msgstr ""
 
 #. module: specific_sale
-#: code:addons/specific_sale/models/sale.py:128
+#: code:addons/specific_sale/models/sale.py:111
 #, python-format
 msgid "You cannot cancel sale order %s, it's already prepared"
 msgstr ""
