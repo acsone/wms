@@ -15,6 +15,7 @@
         "product_multi_category",
         "alc_supplier_promotion",
         "product_discount_specials",
+        "account_tax_one_vat",
     ],
     "data": [],
     "demo": [],

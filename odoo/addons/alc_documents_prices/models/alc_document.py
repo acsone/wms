@@ -161,8 +161,7 @@ class AlcDocument(models.Model):
         price_key = self.partner_id.property_product_pricelist.role_name
         discount_key = self.partner_id.discount_pricelist_id.discount_role_name
         for product in products:
-            # it should be specific_data.vat_tax_group but we should not depend on this
-            tax = product.taxes_id.filtered(lambda t: t.tax_group_id.name == "TVA")
+            tax = product.vat_id
             base_price = product._price_cache_get(price_key).get("price", 0)
             if discount_key:
                 discount = product._price_cache_get(discount_key).get("discount", 0)
