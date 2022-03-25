@@ -3,20 +3,14 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
-    "name": "Alc Eshop Api V2",
+    "name": "Alc Eshop Sale Suite Name",
     "description": """
-        Alcyon: Add entry point for shopinvader api V2""",
+        Alcyon: Add suite_name into json document returned by the sale service""",
     "version": "10.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": [
-        "alc_eshop_auth_jwt",
-        "shopinvader_sale_cart",
-        "alc_eshop_sale_cart_channel",
-        "alc_eshop_sale_cart_confirm",
-        "alc_eshop_sale_cart_suite_name",
-    ],
+    "depends": ["alc_sale_suite_name", "shopinvader"],
     "data": [],
     "demo": [],
 }
