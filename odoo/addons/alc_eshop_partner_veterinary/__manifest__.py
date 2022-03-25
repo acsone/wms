@@ -10,7 +10,7 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["sale_cart_rest_api", "shopinvader"],
+    "depends": ["sale_cart_rest_api", "shopinvader", "alc_partner_veterinary"],
     "data": [],
     "demo": [],
 }
