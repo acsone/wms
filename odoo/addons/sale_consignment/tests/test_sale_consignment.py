@@ -32,7 +32,6 @@ class TestSaleconsignment(SavepointCase):
                 "sale_channel": "fax",
                 "client_order_ref": "whatever the client want",
                 "delivery_price": 23.5,
-                "suite_name": "0123434234",
                 "order_line": [
                     (
                         0,

@@ -10,12 +10,13 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": [
-        "base",
+        "alc_sale_order_line_product_type",
         "delivery",
         "queue_job_cron",
+        "procurement_sale",
         "sale",
         "sale_cancel_remaining",
-        "specific_sale",
+        "sale_consignment",
     ],
     "data": [
         "views/sale_order.xml",
