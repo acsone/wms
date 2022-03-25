@@ -2,15 +2,20 @@
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+import uuid
+
 import dicttoxml
 import xmltodict
 
 from odoo import fields
 
+from odoo.addons.base_rest.controllers.main import _PseudoCollection
 from odoo.addons.component.core import WorkContext
 
 
 class Facade(object):
+    collection = "shopinvader.backend"
+
     @staticmethod  # factory method
     def factory(env, partner, service_name):
         return Facade._get_service_class(service_name)(env, partner)
@@ -31,7 +36,7 @@ class Facade(object):
         context = dict(partner._context, authenticated_partner_id=partner.id)
         work = WorkContext(
             model_name="rest.service.registration",
-            collection=self.env(context=context)["shopinvader.backend"],
+            collection=_PseudoCollection(self.collection, self.env(context=context)),
             authenticated_partner_id=partner.id,
         )
         return work.component(usage=self.usage)
@@ -288,6 +293,7 @@ class FacadePackingSlip(Facade):
 
 class FacadeShopinvaderCart(Facade):
     usage = "cart"
+    collection = "shopinvader.api.v2"
 
     def apply(self, **kwargs):
         raise NotImplementedError
@@ -297,19 +303,11 @@ class FacadeShopinvaderCart(Facade):
         domain.append(("default_code", "=", sku))
         return self.env["product.product"].search(domain, limit=1)
 
-    def _get_line_by_product(self, product):
-        lines = self.cart.order_line.filtered(lambda l: l.product_id == product)
-        return lines[0] if lines else lines
-
     def __init__(self, env, partner):
         super(FacadeShopinvaderCart, self).__init__(env, partner)
 
         backend = self.env.ref("alc_eshop.backend")
-        setattr(self.service.work, "shopinvader_session", {})
         setattr(self.service.work, "shopinvader_backend", backend)
-        setattr(self.service.work, "partner", self.partner)
-
-        self.cart = self.service._get()
 
         location_param = "alc_magento_api.cart_location"
         self.location = self.env["ir.config_parameter"].get_param(location_param)
@@ -332,30 +330,17 @@ class FacadeQuote(FacadeShopinvaderCart):
         for line_xml in quote_dict.pop("item", []):
             product = self._get_product_by_sku(line_xml["sku"])
             if product:
-                line = self._get_line_by_product(product)
-                qty = int(line_xml["qty"])
-                if line:
-                    qty = line.product_uom_qty + qty
-                    triple = (1, line.id, {"product_uom_qty": qty})
-                else:
-                    triple = (0, 0, {"product_id": product.id, "product_uom_qty": qty})
-                lines.append(triple)
+                quantity = int(line_xml["qty"])
+                line_id = str(uuid.uuid4())
+                line = {"product_id": product.id, "quantity": quantity, "uuid": line_id}
+                lines.append(line)
             else:
                 self.errors.append(line_xml["sku"])
-        if lines:
-            kwargs["order_line"] = lines
-        args_to_fields = {
-            "comments": "note",
-            "serial_number": "suite_name",
-            "order_reference": "client_order_ref",
-        }
-        for key, value in quote_dict.items():
-            if key in args_to_fields:
-                kwargs[args_to_fields[key]] = value
+        kwargs["transactions"] = lines
         return kwargs
 
     def apply(self, **kwargs):
-        return self.service._update(self.cart, kwargs)
+        return self.service.sync(**kwargs)
 
 
 class FacadeQuoteCsv(FacadeShopinvaderCart):
@@ -363,28 +348,19 @@ class FacadeQuoteCsv(FacadeShopinvaderCart):
         quote_csv = kwargs.pop("file").read().split("\n")
         if not len(quote_csv) > 1:
             raise ValueError("Not enough lines.")  # ERROR
-        first_line = quote_csv[0].split(";")
-        kwargs["suite_name"] = first_line[0] or False
-        kwargs["client_order_ref"] = first_line[1] or False
-        # "email": first_line[2]
-        kwargs["note"] = first_line[3] or False
         lines = []
         for csv_line in [l for l in quote_csv[1:] if l]:
             sku, qty = csv_line.split(";")
-            qty = int(qty)
             product = self._get_product_by_sku(sku)
             if product:
-                line = self._get_line_by_product(product)
-                if line:
-                    qty = line.product_uom_qty + qty
-                    triple = (1, line.id, {"product_uom_qty": qty})
-                else:
-                    triple = (0, 0, {"product_id": product.id, "product_uom_qty": qty})
-                lines.append(triple)
+                quantity = int(qty)
+                line_id = str(uuid.uuid4())
+                line = {"product_id": product.id, "quantity": quantity, "uuid": line_id}
+                lines.append(line)
             else:
                 self.errors.append(sku)
-        kwargs["order_line"] = lines
+        kwargs["transactions"] = lines
         return kwargs
 
     def apply(self, **kwargs):
-        return self.service._update(self.cart, kwargs)
+        return self.service.sync(**kwargs)

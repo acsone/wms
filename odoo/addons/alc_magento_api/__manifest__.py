@@ -13,7 +13,7 @@
         "alc_eshop",  # bring all fields
         "alc_eshop_services_catalog",
         "alc_eshop_services_deliveries",
-        # TODO: cart service
+        "sale_cart_rest_api",
     ],
     "demo": [],
     "external_dependencies": {"python": ["xmltodict", "dicttoxml"]},
