@@ -53,7 +53,7 @@ class MakePickingBatch(models.TransientModel):
                             AND sp.state NOT IN ('done', 'cancel')
                         )
                         )
-                    ORDER BY ri.date, ri.time_leave_planned
+                    ORDER BY ri.date, ri.time_picking_planned
         """
         params = {
             "operator": user.id,

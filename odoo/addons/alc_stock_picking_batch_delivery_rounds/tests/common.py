@@ -28,7 +28,7 @@ class ClusterPickingDeliveryCommonFeatures(AlcClusterPickingCommonFeatures):
             {
                 "template_id": cls.delivery_template1.id,
                 "date": "2021-10-01",
-                "time_leave_planned": 8,
+                "time_picking_planned": 8,
                 "state": "draft",
             }
         )
@@ -43,7 +43,7 @@ class ClusterPickingDeliveryCommonFeatures(AlcClusterPickingCommonFeatures):
             {
                 "template_id": cls.delivery_template2.id,
                 "date": "2021-08-12",
-                "time_leave_planned": 10,
+                "time_picking_planned": 10,
                 "state": "draft",
             }
         )
