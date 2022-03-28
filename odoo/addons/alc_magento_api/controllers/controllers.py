@@ -3,11 +3,14 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import base64
+import logging
 
 import odoo
 from odoo.http import Controller, Response, request, route
 
 from ..facade import Facade
+
+_logger = logging.getLogger(__name__)
 
 
 class MagentoApi(Controller):
@@ -42,6 +45,7 @@ class MagentoApi(Controller):
             self._authenticate(sudo_env, headers, username)
             partner = self._get_partner(sudo_env, username)
         except Exception:
+            _logger.exception("Magento API: User %s not found.", username)
             return Response(response="User not found.", status=401)
         try:
             if request.httprequest.data:
@@ -51,7 +55,8 @@ class MagentoApi(Controller):
                 kwargs[key] = kwargs.pop("value")
             facade = Facade.factory(sudo_env, partner, service)
             result, error, location = facade(**kwargs)
-        except Exception:
+        except Exception as e:
+            _logger.exception("Magento API Call: %s", str(e))
             return Response(response="Cannot resolve API call.", status=202)
         if error:
             response = Response(response=error, status=200)
