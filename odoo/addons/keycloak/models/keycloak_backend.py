@@ -12,14 +12,15 @@ from odoo.addons.queue_job.job import job
 class KeycloakBackend(models.Model):
 
     _name = "keycloak.backend"
+    _description = "Keycloak Backend"
     _inherit = "server.env.mixin"
 
     name = fields.Char()
     server_url = fields.Char()
-    client_id = fields.Char()
+    client_id = fields.Char(string="Client to create users.")
     realm_name = fields.Char()
     client_secret_key = fields.Char()
-    realm_client_id = fields.Char()
+    realm_client_id = fields.Char(string="Client to get user tokens.")
     realm_client_secret_key = fields.Char()
 
     username = fields.Char()

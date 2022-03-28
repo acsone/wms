@@ -10,6 +10,7 @@ from odoo.addons.queue_job.job import identity_exact
 class KeycloakUser(models.Model):
 
     _name = "keycloak.user"
+    _description = "Keycloak User"
 
     display_name = fields.Char(compute="_compute_display_name")
 
