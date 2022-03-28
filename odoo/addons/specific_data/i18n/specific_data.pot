@@ -300,11 +300,6 @@ msgid "Sutures en pochette"
 msgstr ""
 
 #. module: specific_data
-#: model:account.tax.group,name:specific_data.vat_tax_group
-msgid "TVA"
-msgstr ""
-
-#. module: specific_data
 #: model:product.category,name:specific_data.product_categ_topiques
 msgid "Topiques"
 msgstr ""
