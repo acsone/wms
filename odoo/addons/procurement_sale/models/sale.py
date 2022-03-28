@@ -4,7 +4,7 @@
 
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
-from odoo.tools import float_compare
+from odoo.tools import float_compare, float_is_zero
 
 import odoo.addons.decimal_precision as dp
 
@@ -28,6 +28,30 @@ class SaleOrder(models.Model):
             if order.id in confirmation_dates:
                 order.confirmation_date = confirmation_dates[order.id]
 
+        return result
+
+    def refresh_product_qties_unavailable(self):
+        """Recompute the product_qty_unavailable on sale order
+
+         This method return the delta between the previous computed qty
+         and the new one by line id.
+        """
+        self.ensure_one()
+        precision = self.env["decimal.precision"].precision_get(
+            "Product Unit of Measure"
+        )
+        existing_values = {l.id: l.product_qty_unavailable for l in self.order_line}
+        new_values = {l.id: l.current_product_qty_unavailable for l in self.order_line}
+        to_update = []
+        result = {}
+        for _id in self.order_line.ids:
+            delta = new_values[_id] - existing_values[_id]
+            if float_is_zero(delta, precision_digits=precision):
+                continue
+            to_update.append((1, _id, {"product_qty_unavailable": new_values[_id]}))
+            result[_id] = delta
+        if to_update:
+            self.write({"order_line": to_update})
         return result
 
 

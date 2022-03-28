@@ -245,3 +245,10 @@ class TestSaleOrderLineQtyUnavailable(TransactionCase):
         self.assertEqual(self.sale_2.order_line[0].product_qty_unavailable, 5)
         # the current unavailable quantity on second order is now 0
         self.assertEqual(self.sale_2.order_line[0].current_product_qty_unavailable, 0)
+
+        # *******************************************
+        # ***** refresh_product_qties_unavailable *****
+        # *******************************************
+        res = self.sale_1.refresh_product_qties_unavailable()
+        self.assertDictEqual({self.sale_1.order_line[0].id: -10.0}, res)
+        self.assertEqual(self.sale_1.order_line[0].product_qty_unavailable, 0)
