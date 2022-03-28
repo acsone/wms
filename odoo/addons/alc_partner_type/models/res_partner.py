@@ -37,3 +37,8 @@ class ResPartner(models.Model):
     def _compute_is_student(self):
         for partner in self:
             partner.is_student = partner.partner_type == "student_like"
+
+    def _get_product_domain(self):
+        self.ensure_one()
+        partner_type_like = "%%%s%%" % self.partner_type
+        return [("allowed_partner_types", "like", partner_type_like)]
