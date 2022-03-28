@@ -20,11 +20,11 @@ msgstr ""
 
 #. module: alc_keycloak
 #: model:ir.model,name:alc_keycloak.model_keycloak_backend
-msgid "keycloak.backend"
+msgid "Keycloak Backend"
 msgstr ""
 
 #. module: alc_keycloak
 #: model:ir.model,name:alc_keycloak.model_keycloak_user
-msgid "keycloak.user"
+msgid "Keycloak User"
 msgstr ""
 
