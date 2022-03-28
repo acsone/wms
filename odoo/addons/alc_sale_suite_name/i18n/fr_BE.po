@@ -24,6 +24,14 @@ msgid "Last Suite Name"
 msgstr "Dernier nom suite"
 
 #. module: alc_sale_suite_name
+#: model:ir.model.fields,field_description:alc_sale_suite_name.field_res_partner_next_suite_name
+#: model:ir.model.fields,field_description:alc_sale_suite_name.field_res_users_next_suite_name
+#: model:ir.model.fields,field_description:alc_sale_suite_name.field_shopinvader_partner_next_suite_name
+#, fuzzy
+msgid "Next Suite Name"
+msgstr "Dernier nom suite"
+
+#. module: alc_sale_suite_name
 #: model:ir.model,name:alc_sale_suite_name.model_res_partner
 msgid "Partner"
 msgstr "Partenaire"
