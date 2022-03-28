@@ -55,11 +55,6 @@ msgid "Sales Order"
 msgstr ""
 
 #. module: specific_shipping_costs
-#: model:ir.model.fields,field_description:specific_shipping_costs.field_sale_order_display_fixed_fee
-msgid "Technical field to display extra fixed fee for delivery"
-msgstr ""
-
-#. module: specific_shipping_costs
 #: model:ir.model,name:specific_shipping_costs.model_stock_picking_type
 msgid "The picking type determines the picking view"
 msgstr ""
