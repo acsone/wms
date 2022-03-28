@@ -13,12 +13,8 @@ class ProductProduct(models.Model):
     price_cache = fields.Serialized(readonly=True)
 
     @api.model
-    def get_price_cache_products_domain(self):
-        return []  # TODO: should essentially be Shopinvader's domain
-
-    @api.model
     def get_price_cache_products(self, domain=None, domain_extend=None):
-        domain = domain or self.get_price_cache_products_domain()
+        domain = domain or []
         if domain_extend:
             domain += domain_extend
         return self.search(domain)
