@@ -14,10 +14,13 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: account_tax_one_vat
-#: code:addons/account_tax_one_vat/models/purchase_order.py:18
-#: code:addons/account_tax_one_vat/models/sale.py:18
-#, python-format
-msgid "For %s multiple tax from the VAT group are selected. Only one is allowed."
+#: model:ir.model.fields,field_description:account_tax_one_vat.field_one_vat_mixin_display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: account_tax_one_vat
+#: model:ir.model.fields,field_description:account_tax_one_vat.field_one_vat_mixin_id
+msgid "ID"
 msgstr ""
 
 #. module: account_tax_one_vat
@@ -26,23 +29,20 @@ msgid "Invoice Line"
 msgstr ""
 
 #. module: account_tax_one_vat
-#: code:addons/account_tax_one_vat/models/acccount_invoice.py:20
-#: code:addons/account_tax_one_vat/models/purchase_order.py:31
-#: code:addons/account_tax_one_vat/models/sale.py:31
+#: model:ir.model.fields,field_description:account_tax_one_vat.field_one_vat_mixin___last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: account_tax_one_vat
+#: code:addons/account_tax_one_vat/models/one_vat_mixin.py:28
 #, python-format
 msgid "More than one VAT tax selected!"
 msgstr ""
 
 #. module: account_tax_one_vat
-#: code:addons/account_tax_one_vat/models/product.py:18
+#: code:addons/account_tax_one_vat/models/one_vat_mixin.py:17
 #, python-format
 msgid "Multiple customer tax of type VAT are selected. Only one is allowed."
-msgstr ""
-
-#. module: account_tax_one_vat
-#: code:addons/account_tax_one_vat/models/product.py:31
-#, python-format
-msgid "Multiple supplier tax of type VAT are selected. Only one is allowed."
 msgstr ""
 
 #. module: account_tax_one_vat
@@ -61,20 +61,36 @@ msgid "Sales Order Line"
 msgstr ""
 
 #. module: account_tax_one_vat
-#: code:addons/account_tax_one_vat/models/purchase_order.py:32
-#, python-format
-msgid "You selected more than one tax of type VAT on a line, it does not make sense."
+#: model:account.tax.group,name:account_tax_one_vat.vat_tax_group
+msgid "TVA"
 msgstr ""
 
 #. module: account_tax_one_vat
-#: code:addons/account_tax_one_vat/models/sale.py:32
-#, python-format
-msgid "You selected more than one tax of type VAT on a sale order line, it does not make sense."
+#: model:ir.model.fields,field_description:account_tax_one_vat.field_delivery_carrier_vat
+#: model:ir.model.fields,field_description:account_tax_one_vat.field_product_product_vat
+#: model:ir.model.fields,field_description:account_tax_one_vat.field_product_template_vat
+#: model:ir.model.fields,field_description:account_tax_one_vat.field_shopinvader_product_vat
+#: model:ir.model.fields,field_description:account_tax_one_vat.field_shopinvader_variant_vat
+msgid "Vat"
 msgstr ""
 
 #. module: account_tax_one_vat
-#: code:addons/account_tax_one_vat/models/acccount_invoice.py:21
+#: model:ir.model.fields,field_description:account_tax_one_vat.field_delivery_carrier_vat_id
+#: model:ir.model.fields,field_description:account_tax_one_vat.field_product_product_vat_id
+#: model:ir.model.fields,field_description:account_tax_one_vat.field_product_template_vat_id
+#: model:ir.model.fields,field_description:account_tax_one_vat.field_shopinvader_product_vat_id
+#: model:ir.model.fields,field_description:account_tax_one_vat.field_shopinvader_variant_vat_id
+msgid "Vat id"
+msgstr ""
+
+#. module: account_tax_one_vat
+#: code:addons/account_tax_one_vat/models/one_vat_mixin.py:29
 #, python-format
-msgid "You selected more than one tax of type VAT on an invoice line, it does not make sense."
+msgid "You selected more than one tax of type VAT."
+msgstr ""
+
+#. module: account_tax_one_vat
+#: model:ir.model,name:account_tax_one_vat.model_one_vat_mixin
+msgid "one.vat.mixin"
 msgstr ""
 
