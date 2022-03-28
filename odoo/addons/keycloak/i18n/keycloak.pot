@@ -30,6 +30,11 @@ msgid "Cancel"
 msgstr ""
 
 #. module: keycloak
+#: model:ir.model.fields,field_description:keycloak.field_keycloak_backend_client_id
+msgid "Client"
+msgstr ""
+
+#. module: keycloak
 #: model:ir.model.fields,field_description:keycloak.field_keycloak_backend_client_id_env_default
 msgid "Client id env default"
 msgstr ""
@@ -55,12 +60,12 @@ msgid "Client secret key env is editable"
 msgstr ""
 
 #. module: keycloak
-#: model:ir.model.fields,field_description:keycloak.field_keycloak_backend_client_id
+#: model:ir.model.fields,help:keycloak.field_keycloak_backend_client_id
 msgid "Client to create users."
 msgstr ""
 
 #. module: keycloak
-#: model:ir.model.fields,field_description:keycloak.field_keycloak_backend_realm_client_id
+#: model:ir.model.fields,help:keycloak.field_keycloak_backend_realm_client_id
 msgid "Client to get user tokens."
 msgstr ""
 
@@ -249,6 +254,11 @@ msgstr ""
 #. module: keycloak
 #: model:ir.model.fields,field_description:keycloak.field_keycloak_backend_password_env_is_editable
 msgid "Password env is editable"
+msgstr ""
+
+#. module: keycloak
+#: model:ir.model.fields,field_description:keycloak.field_keycloak_backend_realm_client_id
+msgid "Realm Client"
 msgstr ""
 
 #. module: keycloak
