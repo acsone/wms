@@ -34,41 +34,15 @@ class CartService(Component):
     # schemas
     # #######
     def _confirm_input_schema(self):
-        return {
-            "uuid": {"type": "string", "required": False, "nullable": True},
-            "customer_ref": {"type": "string", "required": False, "nullable": True},
-            "note": {"type": "string", "required": False, "nullable": True},
-        }
-
-    def _cart_schema(self):
-        schema = super(CartService, self)._cart_schema()
-        schema["customer_ref"] = {
-            "type": "string",
-            "required": False,
-            "nullable": True,
-        }
-        return schema
+        res = {"uuid": {"type": "string", "required": False, "nullable": True}}
+        res.update(self._info_input_schema())
+        return res
 
     # ##############
     # implementation
     # ##############
-    def _confirm_params_to_upd_vals(self, cart, params):
-        upd_vals = {}
-        customer_ref = params.get("customer_ref")
-        if customer_ref:
-            upd_vals["client_order_ref"] = customer_ref
-        note = params.get("note")
-        if note:
-            upd_vals["note"] = note
-        return upd_vals
-
     def _prepare_cart_for_confirmation(self, cart, params):
-        upd_vals = self._confirm_params_to_upd_vals(cart, params)
+        upd_vals = self._info_params_to_vals(params)
         if upd_vals:
             upd_vals.update(cart.play_onchanges(upd_vals, upd_vals.keys()))
         return upd_vals
-
-    def _convert_cart_to_json(self, sale):
-        json = super(CartService, self)._convert_cart_to_json(sale)
-        json["customer_ref"] = sale.client_order_ref or None
-        return json
