@@ -128,7 +128,7 @@ msgstr "Février"
 #: model:ir.model.fields,field_description:specific_sale.field_res_users_help_with_fixed_fee
 #: model:ir.model.fields,field_description:specific_sale.field_shopinvader_partner_help_with_fixed_fee
 msgid "Fixed fee applied for deliveries"
-msgstr ""
+msgstr "Appliquer des frais de livraison fixes"
 
 #. module: specific_sale
 #: model:exception.rule,description:specific_sale.no_food_allowed

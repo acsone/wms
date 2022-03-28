@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# *- coding: utf-8 -*-
 # Copyright 2018 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 from odoo import api, fields, models
@@ -17,22 +17,12 @@ class SaleOrder(models.Model):
     fixed_extra_fee_for_delivery = fields.Float(
         string="Fixed extra fee", compute="_compute_fixed_extra_fee_for_delivery"
     )
-    display_fixed_fee = fields.Boolean(
-        "Technical field to display extra fixed fee for delivery",
-        default=False,
-        compute="_compute_fixed_extra_fee_for_delivery",
-    )
 
     @api.depends("carrier_id")
     def _compute_fixed_extra_fee_for_delivery(self):
         for rec in self:
             if rec.carrier_id:
                 rec.fixed_extra_fee_for_delivery = rec.carrier_id.fixed_fee_for_delivery
-                rec.display_fixed_fee = bool(
-                    rec.fixed_extra_fee_for_delivery
-                    and rec.partner_id.help_with_fixed_fee
-                    and rec.carrier_id.use_specific_cost_calculation
-                )
 
     @api.model
     def charge_shipping_costs_by_carrier(self, carrier, round_saleorders, customer):

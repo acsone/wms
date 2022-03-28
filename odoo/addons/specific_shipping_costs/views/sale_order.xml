@@ -7,15 +7,12 @@
             <field name="inherit_id" ref="sale.view_order_form" />
             <field name="arch" type="xml">
             <xpath expr="//field[@name='carrier_id']" position="after">
-                    <label for="fixed_extra_fee_for_delivery" />
                     <div>
-                    <field name="display_fixed_fee" invisible="1" />
                     <field
             name="fixed_extra_fee_for_delivery"
             widget='monetary'
-            attrs="{'invisible': [('display_fixed_fee', '=', False)]}"
+            attrs="{'invisible': [('carrier_id','=', False)]}"
           />
-                        (<label for="fixed_extra_fee_for_delivery" />)
                     </div>
             </xpath>
             </field>

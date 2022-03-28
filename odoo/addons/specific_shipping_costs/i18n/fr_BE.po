@@ -35,7 +35,7 @@ msgstr "Transporteur"
 #: model:ir.model.fields,field_description:specific_shipping_costs.field_delivery_carrier_fixed_fee_for_delivery
 #: model:ir.model.fields,field_description:specific_shipping_costs.field_sale_order_fixed_extra_fee_for_delivery
 msgid "Fixed extra fee"
-msgstr ""
+msgstr "Frais de livraison fixes supplémentaires"
 
 #. module: specific_shipping_costs
 #: model:ir.model.fields,field_description:specific_shipping_costs.field_sale_order_used_for_delivery_fee
