@@ -13,7 +13,6 @@
         "alc_eshop",
         "alc_eshop_api_v2",
         "alc_eshop_ads",
-        "alc_documents_prices_shop_domain",
         "alc_documents_eshop_services",
         "alc_eshop_models_url",
         "alc_eshop_partner_veterinary",
