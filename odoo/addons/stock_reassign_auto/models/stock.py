@@ -6,7 +6,7 @@ import logging
 
 from odoo import _, api, models
 
-from odoo.addons.queue_job.job import job
+from odoo.addons.queue_job.job import identity_exact, job
 
 _logger = logging.getLogger(__name__)
 
@@ -96,6 +96,7 @@ class StockMove(models.Model):
             description=_("Reassign trial on reception for products ids %s")
             % products.ids,
             priority=6,
+            identity_key=identity_exact,
         )._reassign_trial(products)
         return res
 
@@ -113,6 +114,7 @@ class StockMove(models.Model):
                 description=_("Reassign trial on cancel for products ids %s")
                 % products.ids,
                 priority=6,
+                identity_key=identity_exact,
             )._reassign_trial(products)
         return res
 
