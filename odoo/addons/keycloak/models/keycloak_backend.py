@@ -17,10 +17,12 @@ class KeycloakBackend(models.Model):
 
     name = fields.Char()
     server_url = fields.Char()
-    client_id = fields.Char(string="Client to create users.")
+    client_id = fields.Char(string="Client", help="Client to create users.")
     realm_name = fields.Char()
     client_secret_key = fields.Char()
-    realm_client_id = fields.Char(string="Client to get user tokens.")
+    realm_client_id = fields.Char(
+        string="Realm Client", help="Client to get user tokens."
+    )
     realm_client_secret_key = fields.Char()
 
     username = fields.Char()
