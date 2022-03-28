@@ -30,11 +30,6 @@ msgid "Cancel"
 msgstr ""
 
 #. module: keycloak
-#: model:ir.model.fields,field_description:keycloak.field_keycloak_backend_client_id
-msgid "Client id"
-msgstr ""
-
-#. module: keycloak
 #: model:ir.model.fields,field_description:keycloak.field_keycloak_backend_client_id_env_default
 msgid "Client id env default"
 msgstr ""
@@ -60,6 +55,16 @@ msgid "Client secret key env is editable"
 msgstr ""
 
 #. module: keycloak
+#: model:ir.model.fields,field_description:keycloak.field_keycloak_backend_client_id
+msgid "Client to create users."
+msgstr ""
+
+#. module: keycloak
+#: model:ir.model.fields,field_description:keycloak.field_keycloak_backend_realm_client_id
+msgid "Client to get user tokens."
+msgstr ""
+
+#. module: keycloak
 #: model:ir.ui.view,arch_db:keycloak.keycloak_backend_form_view
 #: model:ir.ui.view,arch_db:keycloak.keycloak_user_form_view
 msgid "Configuration"
@@ -74,7 +79,7 @@ msgid "Create Keycloak User"
 msgstr ""
 
 #. module: keycloak
-#: code:addons/keycloak/models/keycloak_user.py:67
+#: code:addons/keycloak/models/keycloak_user.py:68
 #, python-format
 msgid "Create Keycloak User %s"
 msgstr ""
@@ -96,7 +101,7 @@ msgid "Created on"
 msgstr ""
 
 #. module: keycloak
-#: code:addons/keycloak/models/keycloak_user.py:73
+#: code:addons/keycloak/models/keycloak_user.py:74
 #, python-format
 msgid "Delete Keycloak User %s"
 msgstr ""
@@ -134,6 +139,7 @@ msgid "Keycloak"
 msgstr ""
 
 #. module: keycloak
+#: model:ir.model,name:keycloak.model_keycloak_backend
 #: model:ir.ui.view,arch_db:keycloak.keycloak_backend_form_view
 msgid "Keycloak Backend"
 msgstr ""
@@ -150,6 +156,7 @@ msgid "Keycloak Manager"
 msgstr ""
 
 #. module: keycloak
+#: model:ir.model,name:keycloak.model_keycloak_user
 #: model:ir.ui.view,arch_db:keycloak.keycloak_partner_wizard_form
 #: model:ir.ui.view,arch_db:keycloak.keycloak_user_form_view
 #: model:ir.ui.view,arch_db:keycloak.keycloak_user_wizard_form
@@ -245,11 +252,6 @@ msgid "Password env is editable"
 msgstr ""
 
 #. module: keycloak
-#: model:ir.model.fields,field_description:keycloak.field_keycloak_backend_realm_client_id
-msgid "Realm client id"
-msgstr ""
-
-#. module: keycloak
 #: model:ir.model.fields,field_description:keycloak.field_keycloak_backend_realm_client_id_env_default
 msgid "Realm client id env default"
 msgstr ""
@@ -310,21 +312,21 @@ msgid "Temporary"
 msgstr ""
 
 #. module: keycloak
-#: code:addons/keycloak/models/keycloak_user.py:43
+#: code:addons/keycloak/models/keycloak_user.py:44
 #: sql_constraint:keycloak.user:0
 #, python-format
 msgid "This Keycloak ID already exists, which should be impossible."
 msgstr ""
 
 #. module: keycloak
-#: code:addons/keycloak/models/keycloak_user.py:38
+#: code:addons/keycloak/models/keycloak_user.py:39
 #: sql_constraint:keycloak.user:0
 #, python-format
 msgid "This partner already has a user on this backend."
 msgstr ""
 
 #. module: keycloak
-#: code:addons/keycloak/models/keycloak_user.py:48
+#: code:addons/keycloak/models/keycloak_user.py:49
 #: sql_constraint:keycloak.user:0
 #, python-format
 msgid "This username already exists on this backend"
@@ -343,7 +345,7 @@ msgid "Update Keycloak User"
 msgstr ""
 
 #. module: keycloak
-#: code:addons/keycloak/models/keycloak_user.py:89
+#: code:addons/keycloak/models/keycloak_user.py:90
 #, python-format
 msgid "Update Keycloak User %s"
 msgstr ""
@@ -400,16 +402,6 @@ msgstr ""
 #. module: keycloak
 #: model:ir.ui.view,arch_db:keycloak.keycloak_backend_form_view
 msgid "http://localhost:8080/auth/"
-msgstr ""
-
-#. module: keycloak
-#: model:ir.model,name:keycloak.model_keycloak_backend
-msgid "keycloak.backend"
-msgstr ""
-
-#. module: keycloak
-#: model:ir.model,name:keycloak.model_keycloak_user
-msgid "keycloak.user"
 msgstr ""
 
 #. module: keycloak
