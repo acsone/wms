@@ -245,6 +245,36 @@ msgid "Password env is editable"
 msgstr ""
 
 #. module: keycloak
+#: model:ir.model.fields,field_description:keycloak.field_keycloak_backend_realm_client_id
+msgid "Realm client id"
+msgstr ""
+
+#. module: keycloak
+#: model:ir.model.fields,field_description:keycloak.field_keycloak_backend_realm_client_id_env_default
+msgid "Realm client id env default"
+msgstr ""
+
+#. module: keycloak
+#: model:ir.model.fields,field_description:keycloak.field_keycloak_backend_realm_client_id_env_is_editable
+msgid "Realm client id env is editable"
+msgstr ""
+
+#. module: keycloak
+#: model:ir.model.fields,field_description:keycloak.field_keycloak_backend_realm_client_secret_key
+msgid "Realm client secret key"
+msgstr ""
+
+#. module: keycloak
+#: model:ir.model.fields,field_description:keycloak.field_keycloak_backend_realm_client_secret_key_env_default
+msgid "Realm client secret key env default"
+msgstr ""
+
+#. module: keycloak
+#: model:ir.model.fields,field_description:keycloak.field_keycloak_backend_realm_client_secret_key_env_is_editable
+msgid "Realm client secret key env is editable"
+msgstr ""
+
+#. module: keycloak
 #: model:ir.model.fields,field_description:keycloak.field_keycloak_backend_realm_name
 msgid "Realm name"
 msgstr ""
