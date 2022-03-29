@@ -28,20 +28,12 @@ class CartService(Component):
 
     def _cart_schema(self):
         schema = super(CartService, self)._cart_schema()
-        schema["suite_name"] = {
-            "type": "string",
-            "required": False,
-            "nullable": True,
-        }
+        schema["suite_name"] = {"type": "string", "required": False, "nullable": True}
         return schema
 
-    def _confirm_input_schema(self):
-        schema = super(CartService, self)._confirm_input_schema()
-        schema["suite_name"] = {
-            "type": "string",
-            "required": False,
-            "nullable": True,
-        }
+    def _info_input_schema(self):
+        schema = super(CartService, self)._info_input_schema()
+        schema["suite_name"] = {"type": "string", "required": False, "nullable": True}
         return schema
 
     def _convert_cart_to_json(self, sale):
@@ -49,8 +41,8 @@ class CartService(Component):
         json["suite_name"] = sale.suite_name or None
         return json
 
-    def _confirm_params_to_upd_vals(self, cart, params):
-        upd_vals = super(CartService, self)._confirm_params_to_upd_vals(cart, params)
+    def _info_params_to_vals(self, params):
+        upd_vals = super(CartService, self)._info_params_to_vals(params)
         suite_name = params.get("suite_name")
         if suite_name:
             upd_vals["suite_name"] = suite_name

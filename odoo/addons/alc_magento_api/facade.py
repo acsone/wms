@@ -333,7 +333,7 @@ class FacadeQuote(FacadeShopinvaderCart):
             if product:
                 quantity = int(line_xml["qty"])
                 line_id = str(uuid.uuid4())
-                line = {"product_id": product.id, "quantity": quantity, "uuid": line_id}
+                line = {"product_id": product.id, "qty": quantity, "uuid": line_id}
                 lines.append(line)
             else:
                 self.errors.append(line_xml["sku"])
@@ -356,7 +356,7 @@ class FacadeQuoteCsv(FacadeShopinvaderCart):
             if product:
                 quantity = int(qty)
                 line_id = str(uuid.uuid4())
-                line = {"product_id": product.id, "quantity": quantity, "uuid": line_id}
+                line = {"product_id": product.id, "qty": quantity, "uuid": line_id}
                 lines.append(line)
             else:
                 self.errors.append(sku)
