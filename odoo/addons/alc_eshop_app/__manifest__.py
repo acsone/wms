@@ -26,6 +26,7 @@
         "alc_product_promotion_mailing",
         "alc_search_engine",
         "shopinvader_search_engine_update_specials",
+        "alc_magento_api",
     ],
     "application": True,
     "data": [
