@@ -48,16 +48,4 @@
       </filter>
     </field>
   </record>
-  <record model="ir.ui.view" id="stock_picking_tree_view">
-    <field
-      name="name"
-    >stock.picking.tree (in alc_stock_put_remaining_to_reserve)</field>
-    <field name="model">stock.picking</field>
-    <field name="inherit_id" ref="stock.vpicktree" />
-    <field name="arch" type="xml">
-      <field name="backorder_id" position="after">
-        <field name="picking_reserve_id" readonly="1" />
-      </field>
-    </field>
-  </record>
 </odoo>
