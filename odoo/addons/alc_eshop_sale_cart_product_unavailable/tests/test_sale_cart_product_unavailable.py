@@ -17,7 +17,7 @@ class TestSaleCartRestApi(TestSaleCartRestApiCase):
             info = cart.sync(
                 uuid=None,
                 transactions=[
-                    {"uuid": "uuid1", "product_id": cls.product_1.id, "quantity": 1}
+                    {"uuid": "uuid1", "product_id": cls.product_1.id, "qty": 1}
                 ],
             )
             cls.cart = cart
