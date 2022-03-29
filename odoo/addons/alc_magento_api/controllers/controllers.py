@@ -53,6 +53,7 @@ class MagentoApi(Controller):
             if kwargs.get("param"):
                 key = kwargs.pop("param")
                 kwargs[key] = kwargs.pop("value")
+            _logger.info("Magento API Args: %s, kwargs: %s", service, kwargs)
             facade = Facade.factory(sudo_env, partner, service)
             result, error, location = facade(**kwargs)
         except Exception as e:
