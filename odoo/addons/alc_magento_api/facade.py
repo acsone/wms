@@ -133,7 +133,7 @@ class FacadeProduct(Facade):
             data["Mot_Cle"] = None
         price_key = self.partner.property_product_pricelist.role_name
         price_gross = record._price_cache_get(price_key)["price"]
-        vat = float(data["TVA"].replace("%", ""))
+        vat = float(data["TVA"].replace("%", "")) if data["TVA"] else 0
         price_net = round(price_gross * (1 + vat / 100), 2)  # round for EUR
         data["Prix_Brut_HTVA_EUR"] = price_gross
         data["Prix_Brut_TVAC_EUR"] = price_net
