@@ -123,7 +123,7 @@ class FacadeProduct(Facade):
     def _json_for_xml(self, lang, data, record):
         urls_shop = data.pop("shopinvader_bind_ids")
         urls = {u["lang_id"]["code"]: u["url_key"] for u in urls_shop}
-        data["url"] = urls[lang or "fr_BE"]
+        data["url"] = urls.get(lang or "fr_BE")  # product not on website anymore
         categ = None
         categ_ids = data.pop("categ_ids")
         if categ_ids:

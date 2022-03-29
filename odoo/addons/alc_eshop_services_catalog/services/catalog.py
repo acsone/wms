@@ -102,7 +102,7 @@ class CatalogService(Component):
         return language if language in langs else langs[0]
 
     def _get_base_domain(self):
-        return [("allowed_partner_types", "like", "%%%s%%" % self.partner.partner_type)]
+        return self.partner._get_product_domain()
 
     def _get(self, _id):
         domain_base = self._get_base_domain()
