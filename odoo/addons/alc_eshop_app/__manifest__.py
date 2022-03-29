@@ -15,6 +15,7 @@
         "alc_eshop_ads",
         "alc_documents_eshop_services",
         "alc_eshop_models_url",
+        "alc_eshop_product_domain",
         "alc_eshop_partner_veterinary",
         "alc_eshop_product_expiry",
         "alc_eshop_product_on_order",
