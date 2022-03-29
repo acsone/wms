@@ -158,6 +158,7 @@
         "alc_stock_put_remaining_to_reserve",
         # "alc_stock_location_content_relocation",
         "alc_stock_picking_package",
+        "alc_stock_picking_wave_display",
         "alc_stock_quant_package_delivery",
         "alc_stock_receive_frigo",
         "alc_stock_receive_lot_product_info",
