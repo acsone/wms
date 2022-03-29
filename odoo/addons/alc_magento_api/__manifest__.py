@@ -14,7 +14,7 @@
         "alc_eshop_services_catalog",
         "alc_eshop_services_deliveries",
         "alc_eshop_services_orders",
-        "sale_cart_rest_api",
+        "alc_eshop_sale_cart_info",
     ],
     "demo": [],
     "external_dependencies": {"python": ["xmltodict", "dicttoxml"]},

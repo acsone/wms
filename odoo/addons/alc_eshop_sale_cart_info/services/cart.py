@@ -2,8 +2,6 @@
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from werkzeug.exceptions import NotFound
-
 from odoo.addons.base_rest import restapi
 from odoo.addons.component.core import Component
 
@@ -24,9 +22,7 @@ class CartService(Component):
         No update of parameters such as shipping, etc. that could modify
         the total amount or the processing of the cart
         """
-        cart = self._find_open_cart(params.get("uuid", None))
-        if not cart:
-            raise NotFound("No cart found")
+        cart = self._find_open_cart(params.get("uuid")) or self._create_empty_cart()
         cart.write(self._info_params_to_vals(params))
         return self._response_for_cart(cart)
 

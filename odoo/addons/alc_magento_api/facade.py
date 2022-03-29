@@ -133,7 +133,7 @@ class FacadeProduct(Facade):
             data["Mot_Cle"] = None
         price_key = self.partner.property_product_pricelist.role_name
         price_gross = record._price_cache_get(price_key)["price"]
-        vat = float(data["TVA"].replace("%", ""))
+        vat = float(data["TVA"].replace("%", "")) if data["TVA"] else 0
         price_net = round(price_gross * (1 + vat / 100), 2)  # round for EUR
         data["Prix_Brut_HTVA_EUR"] = price_gross
         data["Prix_Brut_TVAC_EUR"] = price_net
@@ -297,7 +297,8 @@ class FacadeShopinvaderCart(Facade):
     collection = "shopinvader.api.v2"
 
     def apply(self, **kwargs):
-        raise NotImplementedError
+        self.service.update(**kwargs["info"])
+        return self.service.sync(**kwargs["sync"])
 
     def _get_product_by_sku(self, sku):
         domain = self.env["product.product"].get_partner_type_domain(self.partner)
@@ -327,21 +328,31 @@ class FacadeQuote(FacadeShopinvaderCart):
     def process_kwargs(self, **kwargs):
         quote_xml = kwargs.pop("data")
         quote_dict = self._xml_to_json(quote_xml)["quote"]
+
         lines = []
         for line_xml in quote_dict.pop("item", []):
             product = self._get_product_by_sku(line_xml["sku"])
             if product:
-                quantity = int(line_xml["qty"])
+                qty = int(line_xml["qty"])
                 line_id = str(uuid.uuid4())
-                line = {"product_id": product.id, "qty": quantity, "uuid": line_id}
+                line = {"product_id": product.id, "qty": qty, "uuid": line_id}
                 lines.append(line)
             else:
                 self.errors.append(line_xml["sku"])
-        kwargs["transactions"] = lines
-        return kwargs
+        kwargs["sync"] = {"transactions": lines}
 
-    def apply(self, **kwargs):
-        return self.service.sync(**kwargs)
+        info = {}
+        args_to_fields = {
+            "comments": "note",
+            "serial_number": "suite_name",
+            "order_reference": "customer_ref",
+        }
+        for key in args_to_fields:
+            if quote_dict.get(key):
+                info[args_to_fields[key]] = quote_dict[key]
+        kwargs["info"] = info
+
+        return kwargs
 
 
 class FacadeQuoteCsv(FacadeShopinvaderCart):
@@ -349,22 +360,28 @@ class FacadeQuoteCsv(FacadeShopinvaderCart):
         quote_csv = kwargs.pop("file").read().split("\n")
         if not len(quote_csv) > 1:
             raise ValueError("Not enough lines.")  # ERROR
+
         lines = []
         for csv_line in [l for l in quote_csv[1:] if l]:
             sku, qty = csv_line.split(";")
             product = self._get_product_by_sku(sku)
             if product:
-                quantity = int(qty)
                 line_id = str(uuid.uuid4())
-                line = {"product_id": product.id, "qty": quantity, "uuid": line_id}
+                line = {"product_id": product.id, "qty": int(qty), "uuid": line_id}
                 lines.append(line)
             else:
                 self.errors.append(sku)
-        kwargs["transactions"] = lines
-        return kwargs
+        kwargs["sync"] = {"transactions": lines}
 
-    def apply(self, **kwargs):
-        return self.service.sync(**kwargs)
+        info = {}
+        first_line = quote_csv[0].split(";")
+        info["suite_name"] = first_line[0] or False
+        info["client_order_ref"] = first_line[1] or False
+        # "email": first_line[2]
+        info["note"] = first_line[3] or False
+        kwargs["info"] = info
+
+        return kwargs
 
 
 class FacadeOrder(Facade):
