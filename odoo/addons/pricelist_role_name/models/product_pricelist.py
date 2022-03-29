@@ -20,7 +20,8 @@ class ProductPricelist(models.Model):
 
     @api.depends("name")
     def _compute_role_name(self):
+        names = {pl: pl.name for pl in self.with_context(lang=False)}
         for pl in self:
-            role_name = slugify("price_" + pl.name)
+            role_name = slugify("price_" + names[pl])
             pl.role_name = role_name
             pl.discount_role_name = "discount_%s" % role_name
