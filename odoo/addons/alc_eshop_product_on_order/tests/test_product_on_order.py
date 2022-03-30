@@ -185,8 +185,7 @@ class TestProductOnOrder(SavepointCase, ComponentMixin):
     def test_cancel_no_back_order(self):
         with self.products_on_order_service(self.partner_1.id) as service:
             res = service.cancel(
-                order_line_id=self.so_medoc_in_stock.order_line.id,
-                params={"quantity": 1},
+                order_line_id=self.so_medoc_in_stock.order_line.id, quantity=1,
             )
             self.assertEqual(False, res["status"])
 
@@ -199,8 +198,7 @@ class TestProductOnOrder(SavepointCase, ComponentMixin):
         all_mails = self.env["mail.mail"].search([])
         with self.products_on_order_service(self.partner_1.id) as service:
             res = service.cancel(
-                order_line_id=self.so_ali_out_of_stock.order_line.id,
-                params={"quantity": 1},
+                order_line_id=self.so_ali_out_of_stock.order_line.id, quantity=1,
             )
             self.assertTrue(res["status"])
         new_mail = self.env["mail.mail"].search([]) - all_mails

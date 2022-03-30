@@ -67,7 +67,7 @@ class ProductsOnOrderService(Component):
         input_param=restapi.CerberusValidator("_cancel_input_schema"),
         output_param=restapi.CerberusValidator("_cancel_output_schema"),
     )
-    def cancel(self, order_line_id, params):
+    def cancel(self, order_line_id, **params):
         """Request cancellation of specified order line.
 
         The cancellation is only possible for purchased products in back

@@ -193,6 +193,7 @@ odoo10-addon-sale-discount-display-amount==10.0.1.0.0.99.dev10
 odoo10-addon-sale-exception @ git+https://github.com/acsone/sale-workflow.git@b9987e4eb546f9ea8c0ee88e507072252b0d57d3#subdirectory=setup/sale_exception
 odoo10-addon-sale-order-price-recalculation==10.0.1.0.1
 odoo10-addon-sale-product-set @ git+https://github.com/acsone/sale-workflow.git@f447c04b61ae6ba8df10c2c09a9bff6d28daf494#subdirectory=setup/sale_product_set
+odoo10-addon-sale-shipping-info-helper==10.0.1.0.0.99.dev8
 odoo10-addon-sale-stock-picking-blocking @ git+https://github.com/acsone/sale-workflow.git@b9987e4eb546f9ea8c0ee88e507072252b0d57d3#subdirectory=setup/sale_stock_picking_blocking
 odoo10-addon-sale-stock-restocking-fee-invoicing @ git+https://github.com/acsone/account-invoicing.git@9336b7cb7d51bd4cab5f8c36ebf6d7e84896b2e9#subdirectory=setup/sale_stock_restocking_fee_invoicing
 odoo10-addon-sale-triple-discount @ git+https://github.com/acsone/sale-workflow.git@0821f306cd46c82aee04452ba8bd2d9ef18706fd#subdirectory=setup/sale_triple_discount
@@ -206,6 +207,7 @@ odoo10-addon-shopfloor-workstation-mobile @ git+https://github.com/acsone/wms.gi
 odoo10-addon-shopinvader @ git+https://github.com/acsone/odoo-shopinvader.git@bdf23a94fda11bcf7d6d8f05f0b14ec3e1cfc10d#subdirectory=setup/shopinvader
 odoo10-addon-shopinvader-assortment @ git+https://github.com/acsone/odoo-shopinvader.git@a0519f6e027c43e91835249e2a83274d824308da#subdirectory=setup/shopinvader_assortment
 odoo10-addon-shopinvader-auth-jwt @ git+https://github.com/acsone/odoo-shopinvader.git@9b844afc1d749b939e98374e460eab96472d82f5#subdirectory=setup/shopinvader_auth_jwt
+odoo10-addon-shopinvader-delivery-carrier @ git+https://github.com/acsone/odoo-shopinvader.git@ad56ecd91ca983a5973576387ca298b149ea05df#subdirectory=setup/shopinvader_delivery_carrier
 odoo10-addon-shopinvader-elasticsearch @ git+https://github.com/acsone/odoo-shopinvader.git@a0519f6e027c43e91835249e2a83274d824308da#subdirectory=setup/shopinvader_elasticsearch
 odoo10-addon-shopinvader-image==10.0.1.0.4
 odoo10-addon-shopinvader-multi-category==10.0.1.0.0.99.dev8
@@ -213,6 +215,7 @@ odoo10-addon-shopinvader-product-attribute-set @ git+https://github.com/acsone/o
 odoo10-addon-shopinvader-product-stock @ git+https://github.com/acsone/odoo-shopinvader.git@a0519f6e027c43e91835249e2a83274d824308da#subdirectory=setup/shopinvader_product_stock
 odoo10-addon-shopinvader-product-stock-state==10.0.1.0.0.99.dev5
 odoo10-addon-shopinvader-sale-cart @ git+https://github.com/acsone/odoo-shopinvader.git@9257a62b040f3aeca95cd610831e61b427a1baa3#subdirectory=setup/shopinvader_sale_cart
+odoo10-addon-shopinvader-sale-cart-delivery @ git+https://github.com/acsone/odoo-shopinvader.git@ad56ecd91ca983a5973576387ca298b149ea05df#subdirectory=setup/shopinvader_sale_cart_delivery
 odoo10-addon-shopinvader-search-engine==10.0.1.2.1.99.dev3
 odoo10-addon-shopinvader-wishlist @ git+https://github.com/acsone/odoo-shopinvader.git@984c0d0b4a129732404de0663230bff40762a840#subdirectory=setup/shopinvader_wishlist
 odoo10-addon-slow-statement-logger @ git+https://github.com/acsone/server-tools@a619cdf9dfae7e60ff02caa3c588058283440e16#subdirectory=setup/slow_statement_logger

@@ -21,6 +21,7 @@ class CartService(Component):
     def _prepare_cart(self):
         vals = super(CartService, self)._prepare_cart()
         vals["sale_channel"] = "web"
+        vals["team_id"] = self.env.ref("sales_team.salesteam_website_sales").id
         return vals
 
     def _convert_cart_to_json(self, sale):
