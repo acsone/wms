@@ -13,6 +13,7 @@
     "depends": [
         "alc_eshop_auth_jwt",
         "shopinvader_sale_cart",
+        "shopinvader_sale_cart_delivery",
         "alc_eshop_sale_cart_channel",
         "alc_eshop_sale_cart_confirm",
         "alc_eshop_sale_cart_suite_name",
