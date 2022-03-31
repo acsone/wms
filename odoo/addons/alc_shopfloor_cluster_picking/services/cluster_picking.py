@@ -3,7 +3,10 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import logging
+import threading
+from contextlib import contextmanager
 
+from odoo import registry
 from odoo.osv import expression
 
 from odoo.addons.component.core import Component
@@ -16,10 +19,31 @@ class ClusterPicking(Component):
 
     def find_existing_batch(self):
         batches = self._batch_picking_search()
-        if batches:
-            selected = self._select_a_picking_batch(batches)
-            return self._response_for_confirm_start(selected)
-        return self._response_for_start()
+        with self._ensure_new_cursor_closed():
+            if batches:
+                selected = self._select_a_picking_batch(batches)
+                return self._response_for_confirm_start(selected)
+            return self._response_for_start()
+
+    def find_batch(self):
+        with self._ensure_new_cursor_closed():
+            return super(ClusterPicking, self).find_batch()
+
+    @contextmanager
+    def _ensure_new_cursor_closed(self):
+        self.new_cursor = False
+        try:
+            yield
+        except:  # noqa:E722
+            if self.new_cursor:
+                self.new_cursor.rollback()
+            raise
+        else:
+            if self.new_cursor:
+                self.new_cursor.commit()
+        finally:
+            if self.new_cursor:
+                self.new_cursor.close()
 
     def _select_a_picking_batch(self, batches):
         batch = super(ClusterPicking, self)._select_a_picking_batch(batches)
@@ -47,8 +71,11 @@ class ClusterPicking(Component):
 
     def _batch_auto_create(self):
         self._lock()
+        # make new cursor to ensure that the wizard is run on a cursor aware of
+        # last changes once the lock has been released
+        env_in_new_cursor = self._create_new_env_with_new_cursor()
         menu = self.work.menu
-        wizard = self.env["make.picking.batch"].create(
+        wizard = env_in_new_cursor["make.picking.batch"].create(
             {
                 "picking_type_ids": [(6, None, menu.picking_type_ids.ids)],
                 "stock_device_type_ids": [(6, None, menu.stock_device_type_ids.ids)],
@@ -57,6 +84,17 @@ class ClusterPicking(Component):
             }
         )
         return wizard._create_batch(raise_if_not_possible=False)
+
+    def _create_new_env_with_new_cursor(self):
+        new_env = self.env
+        if not (
+            getattr(threading.currentThread(), "testing", False)
+            or self.env.registry.in_test_mode()
+        ):
+            # no new cursor in test mode
+            self.new_cursor = registry(self.env.cr.dbname).cursor()
+            new_env = self.env(cr=self.new_cursor)
+        return new_env
 
     @property
     def _advisory_lock_name(self):
