@@ -86,11 +86,11 @@ class ProductProduct(models.Model):
                 price_cache.pop("discount_%s" % pricelist_role_name, None)
             record.price_cache = price_cache
 
-    def delay_update_price_cache(self):
+    def delay_update_price_cache(self, **kwargs):
         names = ", ".join(self.mapped("name"))
         ns = names if len(names) < 300 else names[: 300 - 5] + "[...]"
         desc = _("Update products prices for product %s.") % ns
-        self.with_delay(description=desc).update_price_cache()
+        self.with_delay(description=desc).update_price_cache(**kwargs)
 
     @api.model
     def create(self, vals):
