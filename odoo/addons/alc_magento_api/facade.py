@@ -188,7 +188,7 @@ class FacadePriceList(FacadeProduct):
 
 
 class FacadeBackorders(Facade):
-    usage = "deliveries"
+    usage = "pickings"
 
     def process_kwargs(self, **kwargs):
         from_date = kwargs.pop("date_cancelled", None)
@@ -228,7 +228,7 @@ class FacadeBackorders(Facade):
 
 
 class FacadePackingSlip(Facade):
-    usage = "deliveries"
+    usage = "pickings"
 
     def process_kwargs(self, **kwargs):
         kwargs["from_date"] = kwargs.pop("date")

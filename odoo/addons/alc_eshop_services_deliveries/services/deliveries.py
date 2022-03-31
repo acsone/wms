@@ -7,12 +7,12 @@ from odoo.addons.base_rest.components.service import to_int
 from odoo.addons.component.core import Component
 
 
-class DeliveriesService(Component):
+class PickingsService(Component):
 
     _inherit = "base.rest.service"
-    _name = "deliveries.service"
+    _name = "pickings.service"
     _collection = "shopinvader.backend"
-    _usage = "deliveries"
+    _usage = "pickings"
 
     @restapi.method(
         [(["/"], "GET")],
