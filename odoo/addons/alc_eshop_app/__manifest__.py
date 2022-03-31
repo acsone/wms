@@ -15,6 +15,7 @@
         "alc_eshop_ads",
         "alc_documents_eshop_services",
         "alc_eshop_models_url",
+        "alc_eshop_product_domain",
         "alc_eshop_partner_veterinary",
         "alc_eshop_product_expiry",
         "alc_eshop_product_on_order",
@@ -25,6 +26,7 @@
         "alc_product_promotion_mailing",
         "alc_search_engine",
         "shopinvader_search_engine_update_specials",
+        "alc_magento_api",
     ],
     "application": True,
     "data": [
