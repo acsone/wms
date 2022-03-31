@@ -31,3 +31,5 @@ class TestExportFlow(TestExport):
         # then
         self.assertEqual(data["supplier_discount"], [values_discount])
         self.assertEqual(data["supplier_promotion"], [values_promo])
+        # ensure price is the price_cache
+        self.assertEqual(data["price"]["price-shopinvader-default"][0]["price"], 1)

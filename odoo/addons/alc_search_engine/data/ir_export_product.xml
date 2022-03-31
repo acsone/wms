@@ -233,10 +233,13 @@
         <field name="alias">supplier_promotion_ids:supplier_promotion/date_end</field>
         <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
     </record>
-    <record id="ir_exp_shopinvader_variant_price_cache" model="ir.exports.line">
+    <!-- override price to avoid price getting overwritten at module updates   -->
+    <record
+    id="shopinvader_search_engine.ir_exp_shopinvader_variant_price"
+    model="ir.exports.line"
+  >
         <field name="name">price_cache</field>
         <field name="alias">price_cache:price</field>
-        <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
     </record>
     <record id="ir_exp_shopinvader_variant_is_meds" model="ir.exports.line">
         <field name="name">is_meds</field>
