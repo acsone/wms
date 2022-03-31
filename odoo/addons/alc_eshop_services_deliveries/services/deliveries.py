@@ -45,7 +45,7 @@ class PickingsService(Component):
         return self._search(domain, from_date=from_date, **params)
 
     @restapi.method(
-        [(["/canceled"], "GET")],
+        [(["/done"], "GET")],
         input_param=restapi.CerberusValidator("_search_input_schema"),
         output_param=restapi.CerberusValidator("_search_output_schema"),
     )
