@@ -91,7 +91,7 @@ class TestPricelistItemFlow(TestPrices):
         expected_price_cache = {
             u"price": 10,
             u"date_start": None,
-            u"id": False,
+            u"id": None,
             u"date_end": None,
         }
         self.assertEqual(price_cache, [expected_price_cache])
@@ -130,6 +130,6 @@ class TestPricelistItemFlow(TestPrices):
                 u"id": item.id,
                 u"date_end": None,
             },
-            {u"price": 10.0, u"date_start": None, u"id": False, u"date_end": None},
+            {u"price": 10.0, u"date_start": None, u"id": None, u"date_end": None},
         ]
         self.assertEqual(price_cache_sorted, expected_price_cache)

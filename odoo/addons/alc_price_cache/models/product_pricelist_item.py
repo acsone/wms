@@ -39,7 +39,7 @@ class ProductPricelistItem(models.Model):
             items._update_price_cache(domain_extend, dates, eids=eids)
 
     def _update_price_cache(self, domain_extend=None, dates=None, eids=None):
-        eids = (eids or []) + [False]
+        eids = (eids or []) + [None]
         pricelist = self.mapped("pricelist_id")
         pricelist.ensure_one()
         domain = self._get_domains_extend()
@@ -84,7 +84,7 @@ class ProductPricelistItem(models.Model):
 
     def _cache_price(self, product):
         return {
-            "id": self.id,
+            "id": self.id or None,  # typed json compatibility
             "price": self._get_price(product),
             "date_start": self.date_start or None,
             "date_end": self.date_end or None,
