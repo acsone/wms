@@ -180,6 +180,9 @@ class FacadePriceList(FacadeProduct):
 
     def process_result(self, result, **kwargs):
         ids = [r["product_id"] for r in result["data"]]
+        if not ids:
+            self.errors = "<error>No bought product has been found</error>"
+            return None
         records = self.env["product.product"].with_context(lang="fr_BE").browse(ids)
         parser = self._get_parser_product()
         records_json = records.jsonify(parser)
@@ -207,6 +210,9 @@ class FacadeBackorders(Facade):
         return data, items
 
     def process_result(self, result, **kwargs):
+        if not result:
+            self.errors = "<error>No cancelled backorder in this range</error>"
+            return None
         parser = self._get_parser()
         data = []
         for r in result.jsonify(parser):
@@ -259,6 +265,9 @@ class FacadePackingSlip(Facade):
 
     def process_result(self, result, **kwargs):
         parser = self._get_parser()
+        if not result:
+            self.errors = "<error>no packing slips have been found</error>"
+            return None
         records_json = result.jsonify(parser)
         return self._json_to_xml(
             [self._json_for_xml(r) for r in records_json],
@@ -298,7 +307,7 @@ class FacadeShopinvaderCart(Facade):
 
     def apply(self, **kwargs):
         self.service.update(**kwargs["info"])
-        return self.service.sync(**kwargs["sync"])
+        self.service.sync(**kwargs["sync"])  # return None
 
     def _get_product_by_sku(self, sku):
         domain = self.env["product.product"].get_partner_type_domain(self.partner)
@@ -405,6 +414,9 @@ class FacadeOrder(Facade):
 
     def process_result(self, result, **kwargs):
         parser = self._get_parser()
+        if not result:
+            self.errors = "<error>No orders found in this range.</error>"
+            return None
         records_json = result.jsonify(parser)
         return self._json_to_xml(
             [self._json_for_xml(r) for r in records_json],
