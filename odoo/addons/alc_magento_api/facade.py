@@ -137,11 +137,11 @@ class FacadeProduct(Facade):
         price_net = round(price_gross * (1 + vat / 100), 2)  # round for EUR
         data["Prix_Brut_HTVA_EUR"] = price_gross
         data["Prix_Brut_TVAC_EUR"] = price_net
+        discounts = data.pop("supplier_discount_ids")
+        promotions = data.pop("supplier_promotion_ids")
         if self.partner.supplier_promotion_sale_allowed:
-            discounts = data.pop("supplier_discount_ids")
             for discount in discounts:
                 discount["promotion"] = "%s%%" % discount["promotion"]
-            promotions = data.pop("supplier_promotion_ids")
             data["promotions"] = discounts + promotions
         data["Article_EN"] = record.with_context(lang="en_US").name
         data["Article_NL"] = record.with_context(lang="nl_BE").name
