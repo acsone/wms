@@ -260,6 +260,9 @@ class TestLotLoss(SavepointCase):
         # Check new pack operation
         new_op = self.picking_1.pack_operation_ids
         self.assertNotEqual(op, new_op)
+        self.assertEqual(
+            1, new_op.qty_done
+        )  # skip operation should keep the qty already picked)
         self.assertEqual(len(new_op.pack_lot_ids), 2)
 
         new_pack_lot_A = new_op.pack_lot_ids.filtered(

@@ -879,6 +879,7 @@ class ClusterPicking(Component):
             domain
         )
         operations_to_block._skip_operation(lot=lot)
+
         return self._pick_next_operation(batch)
 
     def _domain_stock_issue_similar_operations(self, operation, lot):

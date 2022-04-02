@@ -33,6 +33,7 @@
         "stock_picking_show_backorder",
         "stock_helper",
         # alcyon
+        "alc_stock_move_operation",
         "stock_operation_recompute",
         "stock_lot_loss",
     ],

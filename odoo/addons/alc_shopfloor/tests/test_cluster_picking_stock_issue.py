@@ -258,6 +258,93 @@ class ClusterPickingStockIssue(ClusterPickingCommonCase):
             self.move3.picking_id, self.shelf2, self.move3.product_id, 0
         )
 
+    def test_stock_issue_partial_picking(self):
+        self._update_qty_in_location(self.shelf1, self.product_a, 20)
+        # ensure these moves are reserved in shelf1
+        self.move1.action_assign()
+        self.move2.action_assign()
+
+        self._update_qty_in_location(self.shelf2, self.product_a, 100)
+        # reserve move3 first to ensure this one is reserved in both
+        # shelf1 and shelf2
+        self.move3.action_assign()
+
+        # all the remaining moves will be reserved in shelf2
+        self._simulate_batch_selected(self.batch, fill_stock=False)
+        self.assertEqual(set(self.batch.picking_ids.mapped("state")), {"assigned"})
+        # The moves of our batch are reserved as:
+        self.assertEqual(self.move1.pack_operation_ids.location_id, self.shelf1)
+        self.assertEqual(self.move2.pack_operation_ids.location_id, self.shelf1)
+        self.assertEqual(
+            self.move3.pack_operation_ids.mapped("location_id"),
+            self.shelf1 | self.shelf2,
+        )
+        self.assertEqual(self.move4.pack_operation_ids.location_id, self.shelf2)
+        self.assertEqual(self.move5.pack_operation_ids.location_id, self.shelf2)
+
+        operation_shelf1 = self.move3.pack_operation_ids.filtered(
+            lambda l: l.location_id == self.shelf1
+        )
+        operation_shelf2 = self.move3.pack_operation_ids.filtered(
+            lambda l: l.location_id == self.shelf2
+        )
+
+        # pick the first 2 moves
+        self._set_dest_package_and_done(
+            self.move1.pack_operation_ids, self.dest_package
+        )
+        self._set_dest_package_and_done(
+            self.move2.pack_operation_ids, self.dest_package
+        )
+        # the operator could pick the first part of move3 in shelf1
+        self._set_dest_package_and_done(operation_shelf1, self.dest_package)
+
+        # Operator picks one part in shelf2
+        operation_shelf2.write(
+            {"qty_done": 3, "result_package_id": self.dest_package.id}
+        )
+        # on the third move, the operator can't pick anymore in shelf1
+        # because there is nothing inside, they declare a stock issue
+        self._stock_issue(operation_shelf2)
+
+        self.assertRecordValues(
+            self.moves,
+            [
+                # move 1 and 2 aren't touched: they are in another location
+                {"state": "assigned", "partially_available": False},
+                {"state": "assigned", "partially_available": False},
+                {"state": "confirmed", "partially_available": True},
+                {"state": "confirmed", "partially_available": False},
+                {"state": "confirmed", "partially_available": False},
+            ],
+        )
+        operation_shelf1 = self.move3.pack_operation_ids.filtered(
+            lambda l: l.location_id == self.shelf1
+        )
+        self.assertRecordValues(
+            # check that the other move operation of the move was not altered
+            operation_shelf1,
+            [
+                {
+                    "location_id": self.shelf1.id,
+                    "qty_done": 5.0,
+                    "result_package_id": self.dest_package.id,
+                }
+            ],
+        )
+        operation_shelf2 = self.move3.pack_operation_ids.filtered(
+            lambda l: l.location_id == self.shelf2
+        )
+        # the quantity in shelf1 should be the original one since we didn't have
+        # a stock issue here
+        self.assert_location_qty_and_reserved(self.shelf1, 20)
+        # since we declared the stock issue without picking anything, its
+        # quantity should be zero
+        self.assert_location_qty_and_reserved(self.shelf2, 3)
+        self.assert_stock_issue_reserved_qties(
+            self.move3.picking_id, self.shelf2, self.move3.product_id, 3
+        )
+
     def test_stock_issue_lot(self):
         lot_a = self.env["stock.production.lot"].create(
             {"product_id": self.product_a.id}
@@ -330,6 +417,96 @@ class ClusterPickingStockIssue(ClusterPickingCommonCase):
         self.assert_location_qty_and_reserved(
             self.shelf2, expected_reserved_qty, lot=lot_b
         )
+        self.assert_stock_issue_reserved_qties(
+            self.move3.picking_id,
+            self.shelf2,
+            self.move3.product_id,
+            expected_reserved_qty,
+            lot=lot_b,
+        )
+
+    def test_stock_issue_lot_partial_pick(self):
+        lot_a = self.env["stock.production.lot"].create(
+            {"product_id": self.product_a.id}
+        )
+        lot_b = self.env["stock.production.lot"].create(
+            {"product_id": self.product_a.id}
+        )
+        self.product_a.tracking = "lot"
+        self._update_qty_in_location(
+            self.shelf2,
+            self.product_a,
+            self.move1.product_uom_qty + self.move5.product_uom_qty,
+            lot=lot_a,
+        )
+        # ensure that move 1 and 5 take lot_a (10 + 7 units), so all of them
+        self.move1.restrict_lot_id = lot_a
+        self.move5.restrict_lot_id = lot_a
+        self.move2.restrict_lot_id = lot_b
+        self.move3.restrict_lot_id = lot_b
+        self.move4.restrict_lot_id = lot_b
+        # add stock for the rest of the moves
+        self._update_qty_in_location(self.shelf2, self.product_a, 150, lot=lot_b)
+        # reserve the remaining moves
+        self._simulate_batch_selected(self.batch, fill_stock=False)
+        self.assertEqual(set(self.batch.picking_ids.mapped("state")), {"assigned"})
+
+        # the operator could pick the 3 first lines of the batch
+        # move move1 with lot a
+        self._set_dest_package_and_done(
+            self.move1.pack_operation_ids, self.dest_package
+        )
+        # move move2 with lot b
+        self._set_dest_package_and_done(
+            self.move2.pack_operation_ids, self.dest_package
+        )
+
+        # Operator picks one part in shelf2 and put in an empty bin to ensure we
+        # don't mix picking into the same bin
+        dest_package = self.env["stock.quant.package"].create({})
+        op_done = self.move3.pack_operation_ids[0]
+        result = self.service.scan_destination_pack(
+            self.batch.id, op_done.id, dest_package.name, 3, lot_b.id
+        )
+        remaining_op_id = result["data"]["start_operation"]["id"]
+        # on the third move, the operator can't pick anymore in the location,
+        # because there is nothing inside, they declare a stock issue
+        self._stock_issue(
+            self.move3.pack_operation_ids.browse(remaining_op_id),
+            lot_id=lot_b.id,
+            next_operation_func=lambda: self.move5.pack_operation_ids,
+        )
+
+        self.assertRecordValues(
+            self.moves,
+            [
+                # still reserved because using lot a
+                {"state": "assigned"},
+                # still reserved because qty_done > 0
+                {"state": "assigned"},
+                # unreserved by the stock issue
+                {"state": "confirmed"},
+                # collaterally unreserved by the stock issue (same lot as the
+                # stock issue)
+                {"state": "confirmed"},
+                # still reserved because using lot a
+                {"state": "assigned"},
+            ],
+        )
+        # check the qty including lot a and lot b
+        total_reserved_qty = (
+            self.move1.product_uom_qty
+            + self.move2.product_uom_qty
+            + self.move5.product_uom_qty
+            + 3  # qty picked in move3
+        )
+        self.assert_location_qty_and_reserved(self.shelf2, total_reserved_qty)
+        # this is the only product reserved for lot_b
+        expected_reserved_qty = self.move2.product_uom_qty + 3  # qty picked in move3s
+        self.assert_location_qty_and_reserved(
+            self.shelf2, expected_reserved_qty, lot=lot_b
+        )
+
         self.assert_stock_issue_reserved_qties(
             self.move3.picking_id,
             self.shelf2,

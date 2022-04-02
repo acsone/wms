@@ -10,6 +10,7 @@
     "category": "Stock Management",
     "depends": [
         "stock",
+        "alc_stock_move_operation",
         "stock_operation_recompute",
         "stock_reassign_auto",
         "purchase",  # Add only for unittests

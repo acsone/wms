@@ -74,6 +74,7 @@ class StockPackOperation(models.Model):
         :param lot: stock.production.lot
         """
         blocked_operations = []
+        op_done_by_move_to_unreserve = defaultdict(dict)
         for group_key, operations in self._group_operations(lot=lot).items():
             operations_to_block = operations.filtered(
                 lambda op, lot=lot: not op._is_done(lot=lot)
@@ -100,6 +101,18 @@ class StockPackOperation(models.Model):
                 "linked_move_operation_ids.move_id"
             ).with_context(skip_additional=True)
 
+            # keep qty done and dest_package for all operations linked to the moves
+            # before unreserve. These qty must be set on the new operations created
+            # after the reservation since these qties are already packed
+            for move in moves:
+                for op in move.mapped("pack_operation_ids"):
+                    if op.qty_done:
+                        for plot in op.pack_lot_ids.filtered("qty"):
+                            op_done_by_move_to_unreserve[move][plot.lot_id] = (
+                                plot.qty,
+                                op.result_package_id,
+                            )
+
             # Unreserve all operations
             moves.do_unreserve()
 
@@ -124,13 +137,13 @@ class StockPackOperation(models.Model):
                 )
                 qty_available = sum([q.qty for q in quants])
                 if lot:
-
-                    pack_op_lots = operations_to_block.mapped("pack_lot_ids").filtered(
-                        lambda l, lot=lot: l.lot_id == lot
-                    )
+                    pack_op_lots = moves.mapped(
+                        "pack_operation_ids.pack_lot_ids"
+                    ).filtered(lambda l, lot=lot: l.lot_id.id == lot.id)
                     qty_done = sum(pack_op_lots.mapped("qty"))
                 else:
                     qty_done = sum(operations_to_block.mapped("qty_done"))
+
                 qty_to_block = qty_available - qty_done
                 if qty_to_block <= 0:
                     if raise_if_nothing_to_block:
@@ -186,6 +199,28 @@ class StockPackOperation(models.Model):
             "linked_move_operation_ids.move_id"
         ).with_context(skip_additional=True)
         moves._recompute_pack_op()
+        # restore qty already packed
+        if lot:
+            for move in moves:
+                for op in move.mapped("pack_operation_ids"):
+                    done_info = op_done_by_move_to_unreserve.get(move)
+                    if not done_info:
+                        continue
+                    result_package_id = None
+                    qty_done = 0
+                    for _lot, (qty, package_id) in done_info.items():
+                        result_package_id = package_id
+                        qty_done += qty
+                        op.pack_lot_ids.filtered(
+                            lambda plot, lot=_lot: plot.lot_id == lot
+                        ).qty = qty
+                    if qty_done and result_package_id:
+                        op.write(
+                            {
+                                "result_package_id": result_package_id.id,
+                                "qty_done": qty_done,
+                            }
+                        )
 
     def action_missing_qty(self):
         """This action process the operation and makes the remaining qty no more

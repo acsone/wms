@@ -12,6 +12,7 @@ from . import test_cluster_picking_scan_line
 from . import test_cluster_picking_select
 from . import test_cluster_picking_skip
 from . import test_cluster_picking_stock_issue
+
 from . import test_cluster_picking_unload
 from . import test_location_content_transfer_putaway
 from . import test_location_content_transfer_set_destination_all
