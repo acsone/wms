@@ -112,7 +112,7 @@ odoo10-addon-base-optional-quick-create @ git+https://github.com/acsone/server-t
 odoo10-addon-base-partition @ git+https://github.com/acsone/odoo-shopinvader.git@5f47d82cbb6d9774d744a534ed9f6af7c361ce27#subdirectory=setup/base_partition
 odoo10-addon-base-partner-sequence @ git+https://github.com/acsone/partner-contact@a9e98e0dad100bbf0ba80da7e4b83b9a65dcc3ea#subdirectory=setup/base_partner_sequence
 odoo10-addon-base-report-to-printer @ git+https://github.com/acsone/report-print-send.git@c8244592b3952b406f768f6f45faeec048b9e1a0#subdirectory=setup/base_report_to_printer
-odoo10-addon-base-rest @ git+https://github.com/acsone/rest-framework@b9edd04dabeb09cefdeeede311d928a5d77e2229#subdirectory=setup/base_rest
+odoo10-addon-base-rest @ git+https://github.com/acsone/rest-framework.git@aac2aae94c9b6ed05619988680edc0aa84c7255b#subdirectory=setup/base_rest
 odoo10-addon-base-rest-auth-api-key @ git+https://github.com/acsone/rest-framework.git@5d93f008584c29a2cdebca2ecd4a7ed7b026ab0a#subdirectory=setup/base_rest_auth_api_key
 odoo10-addon-base-rest-auth-jwt @ git+https://github.com/acsone/rest-framework.git@b9edd04dabeb09cefdeeede311d928a5d77e2229#subdirectory=setup/base_rest_auth_jwt
 odoo10-addon-base-search-custom-field-filter==10.0.1.0.1
@@ -216,8 +216,8 @@ odoo10-addon-shopinvader-product-attribute-set @ git+https://github.com/acsone/o
 odoo10-addon-shopinvader-product-stock @ git+https://github.com/acsone/odoo-shopinvader.git@a0519f6e027c43e91835249e2a83274d824308da#subdirectory=setup/shopinvader_product_stock
 odoo10-addon-shopinvader-product-stock-state==10.0.1.0.0.99.dev5
 odoo10-addon-shopinvader-sale-cart @ git+https://github.com/acsone/odoo-shopinvader.git@ded5ed9762e752597069b34f0196e7bcff82db27#subdirectory=setup/shopinvader_sale_cart
-odoo10-addon-shopinvader-sale-cart-delivery @ git+https://github.com/acsone/odoo-shopinvader.git@ad56ecd91ca983a5973576387ca298b149ea05df#subdirectory=setup/shopinvader_sale_cart_delivery
-odoo10-addon-shopinvader-search-engine==10.0.1.2.1.99.dev3
+odoo10-addon-shopinvader-sale-cart-delivery @ git+https://github.com/acsone/odoo-shopinvader.git@ded5ed9762e752597069b34f0196e7bcff82db27#subdirectory=setup/shopinvader_sale_cart_delivery
+odoo10-addon-shopinvader-search-engine @ git+https://github.com/acsone/odoo-shopinvader.git@07d2c94a18a0c0d3978f19858c77edf61b6066b8#subdirectory=setup/shopinvader_search_engine
 odoo10-addon-shopinvader-wishlist @ git+https://github.com/acsone/odoo-shopinvader.git@984c0d0b4a129732404de0663230bff40762a840#subdirectory=setup/shopinvader_wishlist
 odoo10-addon-slow-statement-logger @ git+https://github.com/acsone/server-tools@a619cdf9dfae7e60ff02caa3c588058283440e16#subdirectory=setup/slow_statement_logger
 odoo10-addon-sql-request-abstract==10.0.1.0.1.99.dev5
