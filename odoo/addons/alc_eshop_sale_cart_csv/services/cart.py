@@ -15,12 +15,13 @@ class CartService(Component):
 
     @restapi.method(
         [(["/csv"], "POST")],
-        input_param=restapi.BinaryData(mediatypes=["text/csv"]),
+        input_param=restapi.MultipartFormData(
+            {"file": restapi.BinaryData(mediatypes=["text/csv"])}
+        ),
         output_param=restapi.CerberusValidator("_cart_schema"),
     )
-    def csv(self, **params):
-        csv_file = self.request.httprequest.files["file"]
-        reader = csv.reader(csv_file, delimiter=";")
+    def csv(self, file, **params):
+        reader = csv.reader(file, delimiter=";")
         return self._csv(list(reader), **params)
 
     def _csv(self, csv_lines, **params):
