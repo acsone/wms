@@ -176,13 +176,16 @@ class ClusterPickingStockIssue(ClusterPickingCommonCase):
 
     def test_stock_issue_several_move_lines(self):
         self._update_qty_in_location(self.shelf1, self.product_a, 20)
-        # ensure these moves are reserved in shelf1
+        # ensure moves are reserved in shelf1 first
+        self.env["stock.quant"].search(
+            [("location_id", "=", self.shelf1.id)]
+        ).sudo().write({"in_date": "2000-01-01"})
         self.move1.action_assign()
         self.move2.action_assign()
 
         self._update_qty_in_location(self.shelf2, self.product_a, 100)
-        # reserve move3 first to ensure this one is reserved in both
-        # shelf1 and shelf2
+        # reserve move3 first and ensure quants in shelf1 are older than in shelf2
+        # to ensure this one is reserved in both shelf1 and shelf2
         self.move3.action_assign()
 
         # all the remaining moves will be reserved in shelf2
