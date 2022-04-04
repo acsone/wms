@@ -263,7 +263,10 @@ class ClusterPickingStockIssue(ClusterPickingCommonCase):
 
     def test_stock_issue_partial_picking(self):
         self._update_qty_in_location(self.shelf1, self.product_a, 20)
-        # ensure these moves are reserved in shelf1
+        # ensure moves are reserved in shelf1 first
+        self.env["stock.quant"].search(
+            [("location_id", "=", self.shelf1.id)]
+        ).sudo().write({"in_date": "2000-01-01"})
         self.move1.action_assign()
         self.move2.action_assign()
 
