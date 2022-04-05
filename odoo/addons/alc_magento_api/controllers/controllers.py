@@ -59,10 +59,8 @@ class MagentoApi(Controller):
         except Exception as e:
             _logger.exception("Magento API Call: %s", str(e))
             return Response(response="Cannot resolve API call.", status=202)
-        if error:
-            response = Response(response=error, status=200)
-        else:
-            response = Response(response=result, status=201)
+        status = 201 if request.httprequest.method == "POST" and not error else 200
+        response = Response(response=error or result, status=status)
         if location:
             response.location = location
         return response
