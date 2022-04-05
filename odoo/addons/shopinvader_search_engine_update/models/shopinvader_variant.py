@@ -11,10 +11,12 @@ class ShopinvaderVariant(models.Model):
 
     _inherit = "shopinvader.variant"
 
-    to_update = fields.Boolean(default=True)
+    to_update = fields.Selection(
+        selection=[("true", "True"), ("false", "False"), ("scheduled", "Scheduled")]
+    )
 
     @job(default_channel="root.search_engine.recompute_json")
     def recompute_json(self, force_export=False):
         res = super(ShopinvaderVariant, self).recompute_json(force_export=force_export)
-        self.write({"to_update": False})
+        self.write({"to_update": "false"})
         return res
