@@ -43,6 +43,11 @@ msgid "Display Name"
 msgstr ""
 
 #. module: alc_eshop_product_on_order
+#: model:ir.model.fields,field_description:alc_eshop_product_on_order.field_alc_eshop_product_on_order_has_backorder
+msgid "Has backorder"
+msgstr ""
+
+#. module: alc_eshop_product_on_order
 #: model:ir.model.fields,field_description:alc_eshop_product_on_order.field_alc_eshop_product_on_order_id
 msgid "ID"
 msgstr ""
