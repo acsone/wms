@@ -317,7 +317,7 @@ class ProductsOnOrderService(Component):
             qty_in_backorder=row["qty_backorder"],
             product_family=product_family,
             is_mto=row["is_mto"],
-            has_backorder=(row["qty_unavailable"] or 0) > 0,
+            has_backorder=row["has_backorder"],
         )
 
     def _get_search_where_clause(
@@ -357,7 +357,7 @@ class ProductsOnOrderService(Component):
         restrict_where = []
         for value in restricts or []:
             if value == "has_backorder":
-                restrict_where.append(sql.SQL("qty_unavailable > 0"))
+                restrict_where.append(sql.SQL("has_backorder"))
             elif value == "is_mto":
                 restrict_where.append(sql.SQL("is_mto"))
         if restrict_where:

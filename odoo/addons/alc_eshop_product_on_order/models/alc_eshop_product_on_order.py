@@ -33,6 +33,7 @@ class AlcEshopProductOnOrder(models.Model):
     is_meds = fields.Boolean(readonly=True)
     is_equipment = fields.Boolean(readonly=True)
     is_food = fields.Boolean(readonly=True)
+    has_backorder = fields.Boolean(readline=True)
 
     @api.model_cr
     def init(self):
@@ -79,25 +80,26 @@ SELECT
     so.date_order as order_date,
     so.client_order_ref as customer_ref,
     sol.product_uom_qty as qty_ordered,
-    sol.product_qty_remains_to_deliver as qty_to_deliver,
-    sol.product_qty_unavailable as qty_unavailable,
+    COALESCE(sol.product_qty_remains_to_deliver, 0.0) as qty_to_deliver,
+    COALESCE(sol.product_qty_unavailable, 0.0) as qty_unavailable,
     sol.order_partner_id as partner_id,
     CASE
         WHEN
-            sol.product_qty_unavailable <> 0
-            AND sol.qty_delivered = 0
-            AND sol.product_qty_canceled = 0
+            sol.product_qty_unavailable <> 0.0
+            AND COALESCE(sol.qty_delivered, 0.0) = 0.0
+            AND COALESCE(sol.product_qty_canceled, 0.0) = 0.0
         THEN sol.product_qty_unavailable
         WHEN
-            sol.product_qty_unavailable <> 0
-            AND (sol.qty_delivered <> 0 OR sol.product_qty_canceled <> 0)
+            sol.product_qty_unavailable <> 0.0
+            AND (sol.qty_delivered <> 0.0 OR sol.product_qty_canceled <> 0.0)
         THEN sol.product_qty_remains_to_deliver
-        ELSE 0
+        ELSE 0.0
     END as qty_backorder,
     pt.is_mto_product as is_mto,
     pt.is_meds,
     pt.is_equipment,
-    pt.is_food
+    pt.is_food,
+    product_qty_remains_to_deliver > 0.0 and product_qty_unavailable > 0.0 as has_backorder
 FROM
     sale_order_line sol
     JOIN sale_order so on so.id = sol.order_id
