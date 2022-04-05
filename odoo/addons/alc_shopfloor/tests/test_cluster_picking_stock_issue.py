@@ -228,12 +228,16 @@ class ClusterPickingStockIssue(ClusterPickingCommonCase):
                 # move 1 and 2 aren't touched: they are in another location
                 {"state": "assigned", "partially_available": False},
                 {"state": "assigned", "partially_available": False},
-                {"state": "confirmed", "partially_available": True},
+                {"state": "confirmed", "partially_available": False},
                 {"state": "confirmed", "partially_available": False},
                 {"state": "confirmed", "partially_available": False},
             ],
         )
-        operation_shelf1 = self.move3.pack_operation_ids.filtered(
+
+        # a new move has been created to preserve the qty picked on move 3
+        # and the associated reserved quants
+        new_move = self.moves.mapped("picking_id.move_lines") - self.moves
+        operation_shelf1 = new_move.pack_operation_ids.filtered(
             lambda l: l.location_id == self.shelf1
         )
         self.assertRecordValues(
@@ -247,10 +251,11 @@ class ClusterPickingStockIssue(ClusterPickingCommonCase):
                 }
             ],
         )
-        operation_shelf2 = self.move3.pack_operation_ids.filtered(
-            lambda l: l.location_id == self.shelf2
-        )
-        self.assertFalse(operation_shelf2.exists())
+
+        # no more operation exists on move3 since no more qty is available
+        # on shelf 2
+        self.assertFalse(self.move3.pack_operation_ids)
+
         # the quantity in shelf1 should be the original one since we didn't have
         # a stock issue here
         self.assert_location_qty_and_reserved(self.shelf1, 20)
@@ -306,8 +311,9 @@ class ClusterPickingStockIssue(ClusterPickingCommonCase):
         self._set_dest_package_and_done(operation_shelf1, self.dest_package)
 
         # Operator picks one part in shelf2
-        operation_shelf2.write(
-            {"qty_done": 3, "result_package_id": self.dest_package.id}
+        dest_package = self.env["stock.quant.package"].create({})
+        self.service.scan_destination_pack(
+            self.batch.id, operation_shelf2.id, dest_package.name, 3
         )
         # on the third move, the operator can't pick anymore in shelf1
         # because there is nothing inside, they declare a stock issue
@@ -319,12 +325,16 @@ class ClusterPickingStockIssue(ClusterPickingCommonCase):
                 # move 1 and 2 aren't touched: they are in another location
                 {"state": "assigned", "partially_available": False},
                 {"state": "assigned", "partially_available": False},
-                {"state": "confirmed", "partially_available": True},
+                {"state": "confirmed", "partially_available": False},
                 {"state": "confirmed", "partially_available": False},
                 {"state": "confirmed", "partially_available": False},
             ],
         )
-        operation_shelf1 = self.move3.pack_operation_ids.filtered(
+
+        # a new move has been created to preserve the qty picked on move 3
+        # and the associated reserved quants
+        new_move = self.moves.mapped("picking_id.move_lines") - self.moves
+        operation_shelf1 = new_move.pack_operation_ids.filtered(
             lambda l: l.location_id == self.shelf1
         )
         self.assertRecordValues(
@@ -338,9 +348,12 @@ class ClusterPickingStockIssue(ClusterPickingCommonCase):
                 }
             ],
         )
-        operation_shelf2 = self.move3.pack_operation_ids.filtered(
-            lambda l: l.location_id == self.shelf2
-        )
+
+        # The quantity not picked are still on move 3 and no pack operation
+        # exists since there is no more qty available
+        self.assertEqual(12, self.move3.product_qty)
+        self.assertFalse(self.move3.pack_operation_ids)
+
         # the quantity in shelf1 should be the original one since we didn't have
         # a stock issue here
         self.assert_location_qty_and_reserved(self.shelf1, 20)

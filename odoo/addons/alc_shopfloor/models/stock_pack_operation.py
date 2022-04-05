@@ -338,8 +338,9 @@ class StockPackOperation(models.Model):
                         pack_lot.unlink()
                     else:
                         pack_lot.qty_todo = pack_lot.qty
-                for link in operation.linked_move_operation_ids:
-                    link.copy(default={"operation_id": cpy.id})
+                # here we must recreate the link between the operations and the linked
+                # moves and distribute the qty on the links
+                self._rebuild_linked_move_links(operation, cpy)
                 new_op_ids.append(cpy.id)
             else:
                 raise UserError(
@@ -348,3 +349,31 @@ class StockPackOperation(models.Model):
                     )
                 )
         return self.browse(new_op_ids)
+
+    @api.model
+    def _rebuild_linked_move_links(self, done_operation, todo_operation):
+        precision = done_operation.product_uom_id.rounding
+        qty_done = done_operation.product_qty
+        for link in done_operation.linked_move_operation_ids:
+            if float_compare(qty_done, 0, precision_rounding=precision) <= 0:
+                # once no more qty done -> remaining links must by linked to
+                # the new operation
+                link.operation_id = todo_operation.id
+            cp = float_compare(link.qty, qty_done, precision_rounding=precision,)
+            if cp > 0:
+                # more qty on link than qty on operation done
+                # -> we set the qty_done on the link and
+                #    attribute the remaining qty to the operation to do
+                remaining_qty = link.qty - qty_done
+                link.qty = qty_done
+                link.copy(
+                    default={"operation_id": todo_operation.id, "qty": remaining_qty}
+                )
+                qty_done = 0
+            elif cp == 0:
+                # same qty on the link than remaining qty to do
+                # no more qty to pick
+                qty_done = 0
+            elif cp < 0:
+                # less qty on done link -> keep the link
+                qty_done = qty_done - link.qty

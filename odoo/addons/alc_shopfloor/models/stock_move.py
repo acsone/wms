@@ -46,7 +46,7 @@ class StockMove(models.Model):
                 )
             backorder_move_id = self.split(qty_to_split)
             backorder_move = self.browse(backorder_move_id)
-            other_pack_operations.linked_move_operation_ids.filtered(
+            other_pack_operations.mapped("linked_move_operation_ids").filtered(
                 lambda lk, mv=self: lk.move_id == mv
             ).write({"move_id": backorder_move.id})
             # we must also split quants and reassing to the backorder move
