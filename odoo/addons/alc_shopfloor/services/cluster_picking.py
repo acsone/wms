@@ -878,6 +878,12 @@ class ClusterPicking(Component):
         operations_to_block = operation | self.env["stock.pack.operation"].search(
             domain
         )
+        # split operations done into others move
+        for move in operations_to_block.mapped("move_ids"):
+            done_operations = move.pack_operation_ids.filtered("is_done")
+            if done_operations:
+                move.split_other_pack_operations(done_operations, intersection=True)
+                operations_to_block = operations_to_block - done_operations
         operations_to_block._skip_operation(lot=lot)
 
         return self._pick_next_operation(batch)
