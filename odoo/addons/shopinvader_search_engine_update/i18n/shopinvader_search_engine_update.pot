@@ -20,6 +20,11 @@ msgid "Continuous update"
 msgstr ""
 
 #. module: shopinvader_search_engine_update
+#: selection:shopinvader.variant,to_update:0
+msgid "False"
+msgstr ""
+
+#. module: shopinvader_search_engine_update
 #: model:ir.model,name:shopinvader_search_engine_update.model_ir_model
 msgid "Models"
 msgstr ""
@@ -41,6 +46,11 @@ msgid "Recompute json for %s record(s)."
 msgstr ""
 
 #. module: shopinvader_search_engine_update
+#: selection:shopinvader.variant,to_update:0
+msgid "Scheduled"
+msgstr ""
+
+#. module: shopinvader_search_engine_update
 #: model:ir.model,name:shopinvader_search_engine_update.model_se_index
 msgid "Se Index"
 msgstr ""
@@ -53,5 +63,10 @@ msgstr ""
 #. module: shopinvader_search_engine_update
 #: model:ir.model.fields,field_description:shopinvader_search_engine_update.field_shopinvader_variant_to_update
 msgid "To update"
+msgstr ""
+
+#. module: shopinvader_search_engine_update
+#: selection:shopinvader.variant,to_update:0
+msgid "True"
 msgstr ""
 
