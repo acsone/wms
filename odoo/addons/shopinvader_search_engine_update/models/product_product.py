@@ -17,4 +17,4 @@ class ProductProduct(models.Model):
 
     def shopinvader_mark_to_update(self):
         if self.mapped("shopinvader_bind_ids"):
-            self.mapped("shopinvader_bind_ids").write({"to_update": True})
+            self.mapped("shopinvader_bind_ids").write({"to_update": "true"})

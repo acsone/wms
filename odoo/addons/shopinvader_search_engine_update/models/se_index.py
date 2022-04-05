@@ -41,6 +41,8 @@ class SeIndex(models.Model):
                 batch.with_delay(description=description)._jobify_recompute_json(
                     force_export=force_export
                 )
+                if continuous:
+                    batch.write({{"to_update": "scheduled"}})
 
     @api.model
     def cron_export_all_continuous(self, domain=None):
