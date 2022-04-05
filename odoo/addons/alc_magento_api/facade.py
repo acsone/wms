@@ -25,7 +25,7 @@ class Facade(object):
         return {
             "quote": FacadeQuote,
             "quote-csv": FacadeQuoteCsv,  # TODO: endpoint?
-            "backorders_cancelled": FacadeBackorders,
+            "cancelled_backorder": FacadeBackorders,
             "packing-slip": FacadePackingSlip,
             "price-list": FacadePriceList,
             "catalog": FacadeCatalog,
