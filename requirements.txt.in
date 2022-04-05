@@ -103,6 +103,7 @@ odoo10-addon-connector-elasticsearch @  git+https://github.com/acsone/search-eng
 # oca/sale-wokflow
 odoo10-addon-sale-product-set @ git+https://github.com/acsone/sale-workflow.git@10.0-alc#subdirectory=setup/sale_product_set
 odoo10-addon-sale-wishlist @ git+https://github.com/acsone/sale-workflow.git@10.0-alc#subdirectory=setup/sale_wishlist
+odoo10-addon-sale-shipping-info-helper @ git+https://github.com/acsone/sale-workflow.git@10.0-sale-shipping-info-help-init-hook#subdirectory=setup/sale_shipping_info_helper
 
 # acsone/odoo-shopinvader
 odoo10-addon-base-partition @  git+https://github.com/acsone/odoo-shopinvader.git@10.0-backport-14.0#subdirectory=setup/base_partition
