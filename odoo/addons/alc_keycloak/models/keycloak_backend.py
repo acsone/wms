@@ -17,6 +17,7 @@ class KeycloakBackend(models.Model):
             "discount_pricelist_id": "shopinvader-vt-roles",
             "supplier_promotion_sale_allowed": "shopinvader-vt-roles",
             "lang": "locale",
+            "ref": "ref",
         }
         res.update(new)
         return res
@@ -27,6 +28,7 @@ class KeycloakBackend(models.Model):
             "locale": keycloak_user.partner_id.lang,
             "shopinvader-vt-roles": keycloak_user.partner_id.elasticsearch_role,
             "supplier_id": keycloak_user.partner_id.id,
+            "ref": keycloak_user.partner_id.ref or None,
         }
         payload["attributes"].update(new_attributes)
         return payload

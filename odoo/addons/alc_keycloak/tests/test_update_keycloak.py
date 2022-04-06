@@ -55,7 +55,7 @@ class TestKeycloakUpdateFlow(TestKeycloak):
 
     def test_update_write_everything(self):
         pricelist = self.env["product.pricelist"].create({"name": "pridamis"})
-        expected_payload = {"attributes": {"locale": "fr_BE"}}
+        expected_payload = {"attributes": {"locale": "fr_BE", "ref": "abc123"}}
         expected_roles = {"shareholder", "guest", "price-pridamis"}
         keycloak_user = self.env["keycloak.user"].create(self.vals_user)
         job_counter = self.job_counter()
@@ -65,6 +65,7 @@ class TestKeycloakUpdateFlow(TestKeycloak):
             "property_product_pricelist": pricelist.id,
             "partner_type": "shareholder",
             "lang": "fr_BE",
+            "ref": "abc123",
         }
         self.partner.write(vals)
 
@@ -74,7 +75,7 @@ class TestKeycloakUpdateFlow(TestKeycloak):
         self.assertEqual(set(job.args[1]), set(vals))
         payload = keycloak_user.keycloak_backend_id._get_user_payload(*job.args)
         self.assertEqual(list(payload.keys()), ["attributes"])
-        expected_attributes = {"shopinvader-vt-roles", "locale"}
+        expected_attributes = {"shopinvader-vt-roles", "locale", "ref"}
         self.assertEqual(set(payload["attributes"].keys()), expected_attributes)
         roles_str = payload["attributes"].pop("shopinvader-vt-roles")
         self.assertEqual(payload, expected_payload)
