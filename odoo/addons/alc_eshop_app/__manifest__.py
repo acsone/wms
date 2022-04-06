@@ -13,6 +13,7 @@
         "alc_eshop",
         "alc_eshop_api_v2",
         "alc_eshop_ads",
+        "alc_eshop_info_banner",
         "alc_documents_eshop_services",
         "alc_eshop_models_url",
         "alc_eshop_product_domain",
