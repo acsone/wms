@@ -20,7 +20,7 @@ class ProductProduct(models.Model):
         res = super(ProductProduct, self)._compute_stock_state()
         for record in self:
             if (
-                record.stock_state == "out_of_stock"
+                record.stock_state in ("resupplying", "out_of_stock")
                 and record.state_id == supplier_out_of_stock_state
             ):
                 record.stock_state = "supplier_out_of_stock"
