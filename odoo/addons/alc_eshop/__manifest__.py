@@ -20,6 +20,7 @@
         "alc_eshop_auth_jwt",
         "alc_eshop_filter_data",
         "alc_eshop_sale_channel",
+        "alc_eshop_sale_payment_info",
         "alc_eshop_sale_product_unavailable",
         "alc_eshop_sale_no_backend",
         "alc_eshop_sale_suite_name",
