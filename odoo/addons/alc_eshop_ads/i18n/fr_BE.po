@@ -212,7 +212,7 @@ msgstr "En haut à gauche"
 #. module: alc_eshop_ads
 #: selection:alc.eshop.ads,display_slot:0
 msgid "Top right"
-msgstr "En bas à droite"
+msgstr "En haut à droite"
 
 #. module: alc_eshop_ads
 #: model:ir.ui.view,arch_db:alc_eshop_ads.alc_eshop_ads_search_view
