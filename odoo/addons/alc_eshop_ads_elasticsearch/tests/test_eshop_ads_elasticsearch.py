@@ -97,3 +97,9 @@ class TestEShopAdsElasticsearch(common.TestEShopAdsCommon):
             - existing_jobs
         )
         self.assertEqual(1, len(new_jobs))
+
+    def test_action_export(self):
+        number_index = len(self.all_ads.mapped("se_index_ids"))
+        with mock.patch.object(self.adapter.__class__, "index") as patched_index:
+            self.all_ads.action_export_to_se()
+            self.assertEqual(number_index, patched_index.call_count)
