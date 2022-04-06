@@ -73,9 +73,9 @@ def load_species_ids(ref):
 
 def load_attribute_set_category_mapping(ref):
     attribute_set_category_mapping_xmlids = {
-        "alc_pim.attribute_set_medicaments": "alc_pim.med",
-        "alc_pim.attribute_set_aliments": "alc_pim.ali",
-        "alc_pim.attribute_set_materiel": "alc_pim.mat",
+        "alc_pim_attribute_group.attribute_set_medicaments": "alc_pim.med",
+        "alc_pim_attribute_group.attribute_set_aliments": "alc_pim.ali",
+        "alc_pim_attribute_group.attribute_set_materiel": "alc_pim.mat",
     }
     for attribute in attribute_set_category_mapping_xmlids:
         att_id = ENV.ref(attribute).id
