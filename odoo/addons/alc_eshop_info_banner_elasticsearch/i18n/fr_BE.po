@@ -1,0 +1,97 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* alc_eshop_info_banner_elasticsearch
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-04-06 15:51+0000\n"
+"PO-Revision-Date: 2022-04-06 15:51+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_eshop_info_banner_elasticsearch
+#: code:addons/alc_eshop_info_banner_elasticsearch/models/se_index.py:35
+#, python-format
+msgid "%s: Batch export EShop Info banners"
+msgstr "%s: Batch export EShop Info banners"
+
+#. module: alc_eshop_info_banner_elasticsearch
+#: model:ir.ui.view,arch_db:alc_eshop_info_banner_elasticsearch.alc_eshop_info_banner_form_view
+msgid "<span>Export to EShop</span>"
+msgstr "<span>Export to EShop</span>"
+
+#. module: alc_eshop_info_banner_elasticsearch
+#: selection:alc.eshop.info.banner,sync_state:0
+msgid "Done"
+msgstr "Done"
+
+#. module: alc_eshop_info_banner_elasticsearch
+#: model:ir.model,name:alc_eshop_info_banner_elasticsearch.model_se_backend_elasticsearch
+msgid "Elasticsearch Backend"
+msgstr "Elasticsearch Backend"
+
+#. module: alc_eshop_info_banner_elasticsearch
+#: model:ir.model,name:alc_eshop_info_banner_elasticsearch.model_alc_eshop_info_banner
+msgid "Eshop Info Banner"
+msgstr "Bannières d'information"
+
+#. module: alc_eshop_info_banner_elasticsearch
+#: model:ir.actions.server,name:alc_eshop_info_banner_elasticsearch.action_eshop_manual_export
+msgid "Force EShop Export"
+msgstr "Force EShop Export"
+
+#. module: alc_eshop_info_banner_elasticsearch
+#: model:ir.model.fields,field_description:alc_eshop_info_banner_elasticsearch.field_alc_eshop_info_banner_index_id
+msgid "Index"
+msgstr "Index"
+
+#. module: alc_eshop_info_banner_elasticsearch
+#: model:ir.ui.view,arch_db:alc_eshop_info_banner_elasticsearch.se_backend_elasticsearch_form_view
+msgid "Info banners"
+msgstr "Bannières info"
+
+#. module: alc_eshop_info_banner_elasticsearch
+#: model:ir.model.fields,field_description:alc_eshop_info_banner_elasticsearch.field_alc_eshop_info_banner_json_doc
+msgid "Json doc"
+msgstr "Json doc"
+
+#. module: alc_eshop_info_banner_elasticsearch
+#: selection:alc.eshop.info.banner,sync_state:0
+msgid "New"
+msgstr "New"
+
+#. module: alc_eshop_info_banner_elasticsearch
+#: selection:alc.eshop.info.banner,sync_state:0
+msgid "Scheduled"
+msgstr "Scheduled"
+
+#. module: alc_eshop_info_banner_elasticsearch
+#: model:ir.model,name:alc_eshop_info_banner_elasticsearch.model_se_index
+msgid "Se Index"
+msgstr "Se Index"
+
+#. module: alc_eshop_info_banner_elasticsearch
+#: model:ir.model.fields,field_description:alc_eshop_info_banner_elasticsearch.field_alc_eshop_info_banner_se_index_ids
+msgid "Se index ids"
+msgstr "Se index ids"
+
+#. module: alc_eshop_info_banner_elasticsearch
+#: model:ir.model.fields,field_description:alc_eshop_info_banner_elasticsearch.field_alc_eshop_info_banner_sync_state
+msgid "Sync state"
+msgstr "Sync state"
+
+#. module: alc_eshop_info_banner_elasticsearch
+#: model:ir.ui.view,arch_db:alc_eshop_info_banner_elasticsearch.se_backend_elasticsearch_form_view
+msgid "Synchronize info banners"
+msgstr "Synchronize info banners"
+
+#. module: alc_eshop_info_banner_elasticsearch
+#: selection:alc.eshop.info.banner,sync_state:0
+msgid "To update"
+msgstr "To update"

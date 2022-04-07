@@ -1,0 +1,1 @@
+from . import test_eshop_info_banner_elasticsearch

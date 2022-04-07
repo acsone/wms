@@ -317,4 +317,53 @@
       ref="alc_eshop_ads_elasticsearch.index_config_eshop_ads"
     />
     </record>
+
+    <record id="eshop_info_banner_index_fr_BE" model="se.index">
+        <field
+      name="model_id"
+      ref="alc_eshop_info_banner.model_alc_eshop_info_banner"
+    />
+        <field
+      name="backend_id"
+      search="[('tech_name','=','elasticsearch_backend')]"
+      model='se.backend'
+    />
+        <field name="lang_id" eval="ref('base.lang_fr_BE')" />
+        <field
+      name="config_id"
+      ref="alc_eshop_info_banner_elasticsearch.index_config_eshop_info_banner"
+    />
+    </record>
+    <record id="eshop_info_banner_index_nl_BE" model="se.index">
+        <field
+      name="model_id"
+      ref="alc_eshop_info_banner.model_alc_eshop_info_banner"
+    />
+        <field
+      name="backend_id"
+      search="[('tech_name','=','elasticsearch_backend')]"
+      model='se.backend'
+    />
+        <field name="lang_id" eval="ref('base.lang_nl_BE')" />
+        <field
+      name="config_id"
+      ref="alc_eshop_info_banner_elasticsearch.index_config_eshop_info_banner"
+    />
+    </record>
+    <record id="eshop_info_banner_index_en" model="se.index">
+        <field
+      name="model_id"
+      ref="alc_eshop_info_banner.model_alc_eshop_info_banner"
+    />
+        <field
+      name="backend_id"
+      search="[('tech_name','=','elasticsearch_backend')]"
+      model='se.backend'
+    />
+        <field name="lang_id" eval="ref('base.lang_en')" />
+        <field
+      name="config_id"
+      ref="alc_eshop_info_banner_elasticsearch.index_config_eshop_info_banner"
+    />
+    </record>
 </odoo>
