@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2022 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <template
+    id="report_alc_eshop_form_submission"
+    name="alc_eshop_form.report_alc_eshop_form_submission"
+  >
+        <t t-set="title">Eshop:
+            <t t-esc="eshop_form.name" />
+        </t>
+        <t t-call="report.html_container">
+            <t t-call="report.external_layout">
+                <div class="page">
+                    <div class="oe_structure" />
+                    <div class="row">
+                        <p>Vous trouverez ci-dessous les informations fournies
+                            par
+                            <t t-if="partner">
+                                <a t-att-href="partner_form_url">
+                                    <b>[<t t-esc="partner.ref" />]
+                                    </b>
+                                    <t t-esc="partner.name" />
+                                </a>
+                            </t>
+                            <t t-else="">
+                                un visiteur
+                            </t>
+                            pour le formulaire
+                            <i>
+                                <t t-esc="eshop_form.name" />
+                            </i>
+                            .
+                        </p>
+                    </div>
+                    <div class="row">
+                        <dl>
+                            <t t-foreach="info" t-as="key">
+                                <dt>
+                                    <t t-esc="key" />
+                                </dt>
+                                <dd>
+                                    <t t-esc="info[key]" />
+                                </dd>
+                            </t>
+                        </dl>
+                    </div>
+                    <p />
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

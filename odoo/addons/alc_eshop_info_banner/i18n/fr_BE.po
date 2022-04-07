@@ -18,8 +18,7 @@ msgstr ""
 
 #. module: alc_eshop_info_banner
 #: model:ir.ui.menu,name:alc_eshop_info_banner.alc_eshop_info_banner_menu
-#, fuzzy
-msgid "Alc Eshop Info Message"
+msgid "Eshop Info Banner"
 msgstr "Bannière d'information"
 
 #. module: alc_eshop_info_banner
@@ -56,17 +55,6 @@ msgstr "Date de début"
 #: model:ir.model.fields,field_description:alc_eshop_info_banner.field_alc_eshop_info_banner_display_name
 msgid "Display Name"
 msgstr "Nom affiché"
-
-#. module: alc_eshop_info_banner
-#: model:ir.model,name:alc_eshop_info_banner.model_alc_eshop_info_banner
-msgid "Eshop Info Banner"
-msgstr "Bannières d'information"
-
-#. module: alc_eshop_info_banner
-#: model:ir.actions.act_window,name:alc_eshop_info_banner.alc_eshop_info_banner_act_window
-#, fuzzy
-msgid "Eshop Info Message"
-msgstr "Bannières d'information"
 
 #. module: alc_eshop_info_banner
 #: model:ir.model.fields,field_description:alc_eshop_info_banner.field_alc_eshop_info_banner_html
