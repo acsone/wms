@@ -14,8 +14,8 @@
                         "sort.order" : ["asc"]
                     }
                 },
-                "properties": {
-                    "mappings": {
+                "mappings": {
+                    "properties": {
                         "id": {
                         "type": "integer"
                         },
