@@ -13,7 +13,7 @@ class SeIndex(models.Model):
 
     def _get_model_domain(self, continuous):
         domain = [("index_id", "in", self.ids)]
-        return domain + [("to_update", "=", True)] if continuous else domain
+        return domain + [("to_update", "=", "true")] if continuous else domain
 
     @api.model
     def cron_recompute_all_continuous(self, force_export=False, batch_size=500):
