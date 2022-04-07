@@ -42,7 +42,7 @@ class SeIndex(models.Model):
                     force_export=force_export
                 )
                 if continuous:
-                    batch.write({{"to_update": "scheduled"}})
+                    batch.write({"to_update": "scheduled"})
 
     @api.model
     def cron_export_all_continuous(self, domain=None):
