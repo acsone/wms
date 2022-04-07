@@ -36,7 +36,7 @@ class AlcEshopInfoMessage(models.Model):
         return super(AlcEshopInfoMessage, self).write(vals)
 
     @api.model
-    def _get_message_to_sync(self):
+    def _get_banners_to_sync(self):
         today = fields.Date.today()
         return self.search(
             [
