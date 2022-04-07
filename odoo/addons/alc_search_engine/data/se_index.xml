@@ -207,6 +207,7 @@
     </record>
 
     <record id="elasticsearch_shopinvader_variant_index_fr_BE" model="se.index">
+        <field name="custom_tech_name=">shopinvader_variant</field>
         <field name="model_id" ref="shopinvader.model_shopinvader_variant" />
         <field name="lang_id" eval="ref('base.lang_fr_BE')" />
         <field
@@ -219,6 +220,7 @@
     </record>
 
     <record id="elasticsearch_shopinvader_variant_index_nl_BE" model="se.index">
+        <field name="custom_tech_name=">shopinvader_variant</field>
         <field name="model_id" ref="shopinvader.model_shopinvader_variant" />
         <field name="lang_id" eval="ref('base.lang_nl_BE')" />
         <field
@@ -231,6 +233,7 @@
     </record>
 
     <record id="elasticsearch_shopinvader_variant_index_en_US" model="se.index">
+        <field name="custom_tech_name=">shopinvader_variant</field>
         <field name="model_id" ref="shopinvader.model_shopinvader_variant" />
         <field name="lang_id" eval="ref('base.lang_en')" />
         <field
@@ -243,6 +246,7 @@
     </record>
 
     <record id="elasticsearch_shopinvader_category_index_fr_BE" model="se.index">
+        <field name="custom_tech_name=">shopinvader_category</field>
         <field name="model_id" ref="shopinvader.model_shopinvader_category" />
         <field name="lang_id" eval="ref('base.lang_fr_BE')" />
         <field
@@ -255,6 +259,7 @@
     </record>
 
     <record id="elasticsearch_shopinvader_category_index_nl_BE" model="se.index">
+        <field name="custom_tech_name=">shopinvader_category</field>
         <field name="model_id" ref="shopinvader.model_shopinvader_category" />
         <field name="lang_id" eval="ref('base.lang_nl_BE')" />
         <field
@@ -267,6 +272,7 @@
     </record>
 
     <record id="elasticsearch_shopinvader_category_index_en_US" model="se.index">
+        <field name="custom_tech_name=">shopinvader_category</field>
         <field name="model_id" ref="shopinvader.model_shopinvader_category" />
         <field name="lang_id" eval="ref('base.lang_en')" />
         <field
@@ -279,6 +285,7 @@
     </record>
 
     <record id="eshop_ads_index_fr_BE" model="se.index">
+        <field name="custom_tech_name=">eshop_ads</field>
         <field name="model_id" ref="alc_eshop_ads.model_alc_eshop_ads" />
         <field
       name="backend_id"
@@ -292,6 +299,7 @@
     />
     </record>
     <record id="eshop_ads_index_nl_BE" model="se.index">
+        <field name="custom_tech_name=">eshop_ads</field>
         <field name="model_id" ref="alc_eshop_ads.model_alc_eshop_ads" />
         <field
       name="backend_id"
@@ -305,6 +313,7 @@
     />
     </record>
     <record id="eshop_ads_index_en" model="se.index">
+        <field name="custom_tech_name=">eshop_ads</field>
         <field name="model_id" ref="alc_eshop_ads.model_alc_eshop_ads" />
         <field
       name="backend_id"
@@ -319,6 +328,7 @@
     </record>
 
     <record id="eshop_info_banner_index_fr_BE" model="se.index">
+        <field name="custom_tech_name=">eshop_info_banner</field>
         <field
       name="model_id"
       ref="alc_eshop_info_banner.model_alc_eshop_info_banner"
@@ -335,6 +345,7 @@
     />
     </record>
     <record id="eshop_info_banner_index_nl_BE" model="se.index">
+        <field name="custom_tech_name=">eshop_info_banner</field>
         <field
       name="model_id"
       ref="alc_eshop_info_banner.model_alc_eshop_info_banner"
@@ -351,6 +362,7 @@
     />
     </record>
     <record id="eshop_info_banner_index_en" model="se.index">
+        <field name="custom_tech_name=">eshop_info_banner</field>
         <field
       name="model_id"
       ref="alc_eshop_info_banner.model_alc_eshop_info_banner"
