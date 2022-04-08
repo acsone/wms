@@ -40,7 +40,8 @@ class TestEShopInfoBannerElasticsearch(SavepointComponentCase):
             cls.adapter = work.component(usage="se.backend.adapter")
         cls.EShopInfoBanner = cls.env["alc.eshop.info.banner"]
 
-        date_start = date_end = cls._get_date()
+        date_start = cls._get_date()
+        date_end = cls._get_date(day_offset=1)
 
         cls.msg_1 = cls.EShopInfoBanner.create(
             dict(
@@ -75,6 +76,12 @@ class TestEShopInfoBannerElasticsearch(SavepointComponentCase):
             - existing_jobs
         )
         self.assertEqual(1, len(new_jobs))
+
+    def test_batch_export_backend(self):
+        number_index = len(self.all_info_banners.mapped("se_index_ids"))
+        with mock.patch.object(self.adapter.__class__, "index") as patched_index:
+            self.backend_specific.cron_synchronize_info_banners()
+            self.assertEqual(number_index, patched_index.call_count)
 
     def test_action_export(self):
         number_index = len(self.all_info_banners.mapped("se_index_ids"))

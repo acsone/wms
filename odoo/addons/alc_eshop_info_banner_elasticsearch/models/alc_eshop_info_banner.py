@@ -4,6 +4,8 @@
 
 from odoo import api, fields, models
 
+from odoo.addons.alc_cerberus_utils import utils
+
 
 class AlcEshopInfoMessage(models.Model):
 
@@ -37,11 +39,11 @@ class AlcEshopInfoMessage(models.Model):
 
     @api.model
     def _get_banners_to_sync(self):
-        today = fields.Date.today()
+        now = fields.Datetime.now()
         return self.search(
             [
-                ("date_start", "<=", today),
-                ("date_end", ">=", today),
+                ("date_start", "<=", now),
+                ("date_end", ">=", now),
                 ("sync_state", "in", ["new", "to_update"]),
             ]
         )
@@ -62,7 +64,7 @@ class AlcEshopInfoMessage(models.Model):
             rec.json_doc = dict(
                 id=rec.id,
                 html=rec.html,
-                date_start=rec.date_start,
-                date_end=rec.date_end,
+                date_start=utils.odoo_str_dt_to_dt_utc(rec.date_start).isoformat(),
+                date_end=utils.odoo_str_dt_to_dt_utc(rec.date_end).isoformat(),
                 type=rec.type,
             )

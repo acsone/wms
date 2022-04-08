@@ -17,14 +17,14 @@ class AlcEshopInfoBanner(models.Model):
         required=True,
         default="info",
     )
-    date_start = fields.Date(required=True)
-    date_end = fields.Date(required=True)
+    date_start = fields.Datetime(required=True)
+    date_end = fields.Datetime(required=True)
 
     @api.constrains("date_start", "date_end")
     def _validate_dates(self):
         for this in self:
-            start = fields.Date.from_string(this.date_start)
-            end = fields.Date.from_string(this.date_end)
+            start = fields.Datetime.from_string(this.date_start)
+            end = fields.Datetime.from_string(this.date_end)
             if start > end:
                 raise ValidationError(
                     _("The defined period is not a valid (%s > %s)")
