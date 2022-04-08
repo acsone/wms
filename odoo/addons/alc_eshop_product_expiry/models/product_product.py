@@ -47,7 +47,7 @@ class ProductProduct(models.Model):
                     # at it's first export
                     continue
                 data = binding.data
-                best_before_date = data.get("best_before_date")
+                best_before_date = data.get("best_before_date") or None
                 if best_before_date != binding.best_before_date:
                     data["best_before_date"] = binding.best_before_date
                     vals = {"data": data}
