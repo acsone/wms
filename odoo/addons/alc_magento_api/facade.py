@@ -94,6 +94,92 @@ class FacadeProduct(Facade):
     def apply(self, **kwargs):
         raise NotImplementedError
 
+    def __init__(self, env, partner):
+        super(FacadeProduct, self).__init__(env, partner)
+        self.today = fields.Date.today()
+
+    def _get_cache_price_key(self, price_cache, key, discount=False):
+        item_list = price_cache[key]
+        if len(item_list) == 1:
+            item = item_list[0]
+        else:
+            filter_dates = (
+                lambda x: not x["date_start"]
+                or x["date_start"] <= self.today
+                and not x["date_end"]
+                or x["date_end"] >= self.today
+            )
+            candidates = filter(filter_dates, item_list)
+            item = min(candidates, key=lambda it: it["date_start"] or self.today)
+        return item["discount"] if discount else item["price"]
+
+    def _get_cache_price(self, price_cache, price_key, discount_key):
+        price = self._get_cache_price_key(price_cache, price_key)
+        if discount_key:
+            discount = self._get_cache_price_key(price_cache, discount_key, True)
+            price = round(price - (price * discount / 100), 2)
+        return price
+
+    def _get_cache_category(self, categories):
+        return categories[-1]["name"] if categories else None
+
+    def _json_for_xml_from_cache(self, lang, records_translations):
+        records, translations = records_translations
+        json_by_id = {}
+        urls = {}
+        price_key = self.partner.property_product_pricelist.role_name
+        discount_key = self.partner.discount_pricelist_id.discount_role_name
+        for record in records:
+            record_id = record.pop("objectID")
+            vat = record.get("vat", {"amount": 21})["amount"]  # TODO
+            json_by_id[record_id] = {
+                "Article_EN": record["name"],
+                "Reference": record["sku"],
+                "Code_national": record["cnk_code"],
+                "vat": "%s%%" % vat,
+                "Prix_Vente_Indicatif": record["indicated_price"],
+                "ean_13": record["barcode"],
+                "ext_cti": record["code_cti"],
+            }
+            urls[record_id] = {"en_US": record["url_key"]}
+            price = self._get_cache_price(record["price"], price_key, discount_key)
+            price_with_vat = round(price + price * vat / 100, 2)
+            json_by_id[record_id]["Prix_Brut_HTVA_EUR"] = price
+            json_by_id[record_id]["Prix_Brut_TVAC_EUR"] = price_with_vat
+            if self.partner.supplier_promotion_sale_allowed:
+                promotions = []
+                for discount in record.get("supplier_discount", []):
+                    discount = {
+                        "promotion": discount["discount_sale"],
+                        "promotion_valid_until": discount["date_end"],
+                    }
+                    promotions.append(discount)
+                for promotion in record.get("supplier_promotion", []):
+                    # TODO: add ratio_main_product to output?
+                    promotion = {
+                        "promotion": "FREE products",
+                        "promotion_valid_until": promotion["date_end"],
+                    }
+                    promotions.append(promotion)
+                json_by_id[record_id]["promotions"] = promotions
+        for record in translations["nl_BE"]:
+            record_id = record.pop("objectID")
+            record_json = json_by_id[record_id]
+            categories = record.get("categories", [])
+            record_json["Categorie_NL"] = self._get_cache_category(categories)
+            urls[record_id]["nl_BE"] = record["url_key"]
+        for record in translations["fr_BE"]:
+            record_id = record.pop("objectID")
+            record_json = json_by_id[record_id]
+            categories = record.get("categories", [])
+            record_json["Mot_Cle"] = self._get_cache_category(categories)
+            record_json["Article"] = record["name"]
+            urls[record_id]["fr_BE"] = record["url_key"]
+            record_json["Fabricant"] = record.get("manufacturer", {}).get("name")
+        for record_id in urls:
+            json_by_id[record_id]["url"] = urls[record_id][lang]
+        return json_by_id
+
     def _get_parser_product(self):
         discounts = (
             "supplier_discount_ids",
@@ -161,15 +247,17 @@ class FacadeCatalog(FacadeProduct):
         return kwargs
 
     def apply(self, **kwargs):
-        return self.service._search(limit=10, **kwargs)  # TODO: REMOVE
+        # return self.service._search(**kwargs)  # unacceptable performance
+        return self.partner._get_shop_products()  # cache version
 
     def process_result(self, result, **kwargs):
         lang = kwargs.pop("lang")
-        records = result.with_context(lang="fr_BE")
-        parser = self._get_parser_product()
-        records_json = records.jsonify(parser)
-        data = [self._json_for_xml(lang, j, r) for j, r in zip(records_json, result)]
-        return self._json_to_xml(data, custom_root="catalog")
+        # records = result.with_context(lang="fr_BE")
+        # parser = self._get_parser_product()
+        # records_json = records.jsonify(parser)
+        # data = [self._json_for_xml(lang, j, r) for j, r in zip(records_json, result)]
+        json_by_id = self._json_for_xml_from_cache(lang, result)
+        return self._json_to_xml(json_by_id.values(), custom_root="catalog")
 
 
 class FacadePriceList(FacadeProduct):
@@ -183,10 +271,13 @@ class FacadePriceList(FacadeProduct):
         if not ids:
             self.errors = "<error>No bought product has been found</error>"
             return None
-        records = self.env["product.product"].with_context(lang="fr_BE").browse(ids)
-        parser = self._get_parser_product()
-        records_json = records.jsonify(parser)
-        data = [self._json_for_xml(None, j, r) for j, r in zip(records_json, records)]
+        # records = self.env["product.product"].with_context(lang="fr_BE").browse(ids)
+        # parser = self._get_parser_product()
+        # records_json = records.jsonify(parser)
+        # data = [self._json_for_xml(None, j, r) for j, r in zip(records_json, records)]
+        records_data = self.partner._get_shop_products(ids=ids)
+        json_by_id = self._json_for_xml_from_cache("en_US", records_data)
+        data = (json_by_id[rid] for rid in ids if rid in json_by_id)
         return self._json_to_xml(data, custom_root="price_list")
 
 
