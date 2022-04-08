@@ -227,7 +227,7 @@ msgstr ""
 
 #. module: alc_eshop_ads
 #: model:ir.ui.view,arch_db:alc_eshop_ads.alc_eshop_ads_form_view
-msgid "nameame"
+msgid "name"
 msgstr ""
 
 #. module: alc_eshop_ads
