@@ -80,12 +80,15 @@ class AlcDocument(models.Model):
             self._process_product_lines_pricelist(products, lines)
         return lines
 
+    def _get_products(self):
+        domain_products = self.partner_id._get_product_domain()
+        return self.env["product.product"].search(domain_products)
+
     def _generate_attachment_file(self):
         self.ensure_one()
         docs_by_format = self._all_by_format()
 
-        domain_products = self.partner_id._get_product_domain()
-        products = self.env["product.product"].search(domain_products)
+        products = self._get_products()
 
         lines = []
         self._process_product_lines(products, lines)
