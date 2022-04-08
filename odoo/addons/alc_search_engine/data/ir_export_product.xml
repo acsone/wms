@@ -293,8 +293,14 @@
         <field name="alias">product_brand_id:brand/image_url</field>
         <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
     </record>
-    <record id="ir_exp_shopinvader_variant_best_before_date" model="ir.exports.line">
-        <field name="name">best_before_date</field>
+    <record id="ir_exp_shopinvader_variant_vat_name" model="ir.exports.line">
+        <field name="name">vat_id/name</field>
+        <field name="alias">vat_id:vat/name</field>
+        <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
+    </record>
+    <record id="ir_exp_shopinvader_variant_vat_amount" model="ir.exports.line">
+        <field name="name">vat_id/amount</field>
+        <field name="alias">vat_id:vat/amount</field>
         <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
     </record>
 </odoo>
