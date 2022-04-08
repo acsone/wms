@@ -1,16 +1,13 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* alc_eshop_form
+#	* alc_eshop_form
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-07 13:01+0000\n"
-"PO-Revision-Date: 2022-04-07 13:01+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -19,138 +16,132 @@ msgstr ""
 #. module: alc_eshop_form
 #: model:ir.model.fields,field_description:alc_eshop_form.field_alc_eshop_form_audience
 msgid "Audience"
-msgstr "Audience"
+msgstr ""
 
 #. module: alc_eshop_form
 #: selection:alc.eshop.form,audience:0
 msgid "Authenticated"
-msgstr "Authentifié"
+msgstr ""
 
 #. module: alc_eshop_form
 #: model:ir.model.fields,field_description:alc_eshop_form.field_alc_eshop_form_create_uid
 msgid "Created by"
-msgstr "Créé par"
+msgstr ""
 
 #. module: alc_eshop_form
 #: model:ir.model.fields,field_description:alc_eshop_form.field_alc_eshop_form_create_date
 msgid "Created on"
-msgstr "Créé le"
+msgstr ""
 
 #. module: alc_eshop_form
 #: model:ir.model.fields,field_description:alc_eshop_form.field_alc_eshop_form_display_name
 #: model:ir.model.fields,field_description:alc_eshop_form.field_report_report_alc_eshop_form_submission_display_name
 msgid "Display Name"
-msgstr "Nom affiché"
+msgstr ""
 
 #. module: alc_eshop_form
 #: model:ir.model.fields,field_description:alc_eshop_form.field_alc_eshop_form_email
 msgid "Email"
-msgstr "Courriel"
+msgstr ""
 
 #. module: alc_eshop_form
 #: model:ir.model.fields,field_description:alc_eshop_form.field_alc_eshop_form_email_subject
 msgid "Email subject"
-msgstr "Sujet de l'email"
+msgstr ""
 
 #. module: alc_eshop_form
 #: model:ir.actions.act_window,name:alc_eshop_form.alc_eshop_form_act_window
 #: model:ir.model,name:alc_eshop_form.model_alc_eshop_form
 #: model:ir.ui.menu,name:alc_eshop_form.alc_eshop_form_menu
 msgid "Eshop Form"
-msgstr "Formulaire Web"
+msgstr ""
 
 #. module: alc_eshop_form
 #: model:ir.ui.view,arch_db:alc_eshop_form.report_alc_eshop_form_submission
 msgid "Eshop:"
-msgstr "Site Web:"
+msgstr ""
 
 #. module: alc_eshop_form
 #: model:ir.model.fields,field_description:alc_eshop_form.field_alc_eshop_form_form
 msgid "Form"
-msgstr "Formulaire"
+msgstr ""
 
 #. module: alc_eshop_form
 #: model:ir.model.fields,field_description:alc_eshop_form.field_alc_eshop_form_form_options
 msgid "Form options"
-msgstr "Options du formulaire"
+msgstr ""
 
 #. module: alc_eshop_form
 #: model:ir.model.fields,field_description:alc_eshop_form.field_alc_eshop_form_id
 #: model:ir.model.fields,field_description:alc_eshop_form.field_report_report_alc_eshop_form_submission_id
 msgid "ID"
-msgstr "ID"
+msgstr ""
 
 #. module: alc_eshop_form
 #: model:ir.model.fields,help:alc_eshop_form.field_alc_eshop_form_log_on_partner
-msgid ""
-"If checked, each time a partner submit a form, a comment will be added into "
-"the partner's chatter"
+msgid "If checked, each time a partner submit a form, a comment will be added into the partner's chatter"
 msgstr ""
-"Si coché, à chaque soumission d'un formulaire, une note sera enregistrée "
-"dans l'historique sur la fiche du contact"
 
 #. module: alc_eshop_form
 #: model:ir.model.fields,field_description:alc_eshop_form.field_alc_eshop_form___last_update
 #: model:ir.model.fields,field_description:alc_eshop_form.field_report_report_alc_eshop_form_submission___last_update
 msgid "Last Modified on"
-msgstr "Dernière modification le"
+msgstr ""
 
 #. module: alc_eshop_form
 #: model:ir.model.fields,field_description:alc_eshop_form.field_alc_eshop_form_write_uid
 msgid "Last Updated by"
-msgstr "Derniere fois mis à jour par"
+msgstr ""
 
 #. module: alc_eshop_form
 #: model:ir.model.fields,field_description:alc_eshop_form.field_alc_eshop_form_write_date
 msgid "Last Updated on"
-msgstr "Dernière mis à jour le"
+msgstr ""
 
 #. module: alc_eshop_form
 #: model:ir.model.fields,field_description:alc_eshop_form.field_alc_eshop_form_log_on_partner
 msgid "Log on partner"
-msgstr "Enregistrer l'historique sur les contacts"
+msgstr ""
 
 #. module: alc_eshop_form
 #: model:ir.model.fields,field_description:alc_eshop_form.field_alc_eshop_form_name
 #: model:ir.ui.view,arch_db:alc_eshop_form.alc_eshop_form_form_view
 msgid "Name"
-msgstr "Nom"
+msgstr ""
 
 #. module: alc_eshop_form
 #: selection:alc.eshop.form,audience:0
 msgid "Public"
-msgstr "Publique"
+msgstr ""
 
 #. module: alc_eshop_form
 #: model:ir.ui.view,arch_db:alc_eshop_form.report_alc_eshop_form_submission
-msgid ""
-"Vous trouverez ci-dessous les informations fournies\n"
+msgid "Vous trouverez ci-dessous les informations fournies\n"
 "                            par"
 msgstr ""
-"Vous trouverez ci-dessous les informations fournies\n"
-"                            par"
 
 #. module: alc_eshop_form
 #: model:res.groups,name:alc_eshop_form.eshop_form_manager_group
 msgid "Website form manager"
-msgstr "Gestionnaire des formulaires Web"
+msgstr ""
 
 #. module: alc_eshop_form
 #: model:ir.ui.view,arch_db:alc_eshop_form.alc_eshop_form_form_view
 msgid "name"
-msgstr "Intitullé"
+msgstr ""
 
 #. module: alc_eshop_form
 #: model:ir.ui.view,arch_db:alc_eshop_form.report_alc_eshop_form_submission
 msgid "pour le formulaire"
-msgstr "pour le formulaire"
+msgstr ""
 
 #. module: alc_eshop_form
 #: model:ir.model,name:alc_eshop_form.model_report_report_alc_eshop_form_submission
 msgid "report.report_alc_eshop_form_submission"
-msgstr "report.report_alc_eshop_form_submission"
+msgstr ""
 
 #. module: alc_eshop_form
 #: model:ir.ui.view,arch_db:alc_eshop_form.report_alc_eshop_form_submission
 msgid "un visiteur"
-msgstr "un visiteur"
+msgstr ""
+
