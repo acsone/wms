@@ -28,4 +28,4 @@ class SaleOrder(models.Model):
 
     @api.model
     def get_next_suite_name(self, cart):
-        return cart.partner_id.next_suite_name
+        return cart.partner_id.with_prefetch(None).next_suite_name

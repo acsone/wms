@@ -39,4 +39,4 @@ class ResPartner(models.Model):
 
         """
         for record in self:
-            record.next_suite_name = utils.increment_suite_name(self.last_suite_name)
+            record.next_suite_name = utils.increment_suite_name(record.last_suite_name)
