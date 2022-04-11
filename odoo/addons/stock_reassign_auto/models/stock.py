@@ -77,17 +77,7 @@ class StockMove(models.Model):
             return True
         res = super(StockMove, self).action_done()
 
-        stock = self.env.ref("stock.stock_location_stock")
-        received = self.filtered(
-            lambda m: (
-                m.location_dest_id.parent_left >= stock.parent_left
-                and m.location_dest_id.parent_right <= stock.parent_right
-                and not (
-                    m.location_id.parent_left >= stock.parent_left
-                    and m.location_id.parent_right <= stock.parent_right
-                )
-            )
-        )
+        received = self.filtered(lambda m: m._is_incoming())
         if not received:
             return res
 
