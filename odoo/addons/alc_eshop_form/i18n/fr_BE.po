@@ -138,7 +138,7 @@ msgstr "Gestionnaire des formulaires Web"
 #. module: alc_eshop_form
 #: model:ir.ui.view,arch_db:alc_eshop_form.alc_eshop_form_form_view
 msgid "name"
-msgstr "Intitullé"
+msgstr "Intitulé"
 
 #. module: alc_eshop_form
 #: model:ir.ui.view,arch_db:alc_eshop_form.report_alc_eshop_form_submission
