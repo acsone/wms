@@ -105,6 +105,7 @@
         "alc_delivery_rounds_gls",
         "alc_delivery_rounds_allatonce_assignment",
         "alc_delivery_rounds_partner_geolocalize",
+        "alc_documents_prices_elasticsearch_cache",
         "alc_edi_connector",
         "alc_geo_delivery_rounds",
         "alc_gls_putinpack",
