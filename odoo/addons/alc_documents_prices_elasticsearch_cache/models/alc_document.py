@@ -14,14 +14,15 @@ class AlcDocument(models.Model):
         if len(item_list) == 1:
             item = item_list[0]
         else:
-            filter_dates = (
-                lambda x: not x["date_start"]
-                or x["date_start"] <= today
-                and not x["date_end"]
-                or x["date_end"] >= today
-            )
+            filter_dates = lambda x: (
+                not x["date_start"] or x["date_start"] <= today
+            ) and (not x["date_end"] or x["date_end"] >= today)
             candidates = filter(filter_dates, item_list)
-            item = min(candidates, key=lambda it: it["date_start"] or today)
+            if candidates:
+                item = min(candidates, key=lambda it: it["date_start"] or today)
+            else:
+
+                item = {"discount": 0} if discount else {"price": 0}
         return item["discount"] if discount else item["price"]
 
     def _get_cache_price(self, today, price_cache, price_key, discount_key):
@@ -35,11 +36,8 @@ class AlcDocument(models.Model):
         return categories[-1]["name"] if categories else None
 
     def _get_cache_discount(self, today, discount_records):
-        filter_dates = (
-            lambda x: not x["date_start"]
-            or x["date_start"] <= today
-            and not x["date_end"]
-            or x["date_end"] >= today
+        filter_dates = lambda x: (not x["date_start"] or x["date_start"] <= today) and (
+            not x["date_end"] or x["date_end"] >= today
         )
         candidates = filter(filter_dates, discount_records)
         item = None
