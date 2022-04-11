@@ -72,6 +72,7 @@ repos:
             alc_shopfloor_mobile_cluster_picking|
             alc_shopfloor_mobile_stock_refill|
             alc_shopfloor_location_info|
+            alc_shopfloor_product_info|
             alc_shopfloor_mobile_product_print_label|
             alc_shopfloor_mobile_change_pack_lot_back_button|
             web_widget_inputmask
