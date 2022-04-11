@@ -3,14 +3,14 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
-    "name": "Alc Eshop Product Stock",
+    "name": "Alc Stock Move Direction",
     "description": """
-        Alcyon: Recompute stock state only on incoming and outgoing moves""",
+        Alcyon: Add method to know if a move is incoming or outgoing""",
     "version": "10.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["alc_stock_move_direction", "shopinvader_product_stock"],
+    "depends": ["stock", "stock_helper"],
     "data": [],
     "demo": [],
 }

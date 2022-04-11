@@ -9,6 +9,7 @@
     "category": "Stock Management",
     "depends": [
         "alc_base_auto_join",
+        "alc_stock_move_direction",
         "stock_picking_assignment",
         "stock_picking_subcode",
         "queue_job",

@@ -15,50 +15,10 @@ class StockMove(models.Model):
         # to only take into account product from incoming and outgoing
         # moves
         moves = self.filtered(
-            lambda m: m.is_outgoing_move() or m.is_incoming_move() or m.is_scrap()
+            lambda m: m._is_outgoing() or m._is_incoming() or m._is_scrap()
         )
         return super(StockMove, moves)._get_product_to_update()
 
-    def is_outgoing_move(self):
-        self.ensure_one()
-        if (
-            self.picking_type_id.code in (False, "outgoing")
-            and (
-                self.location_id.usage == "internal"
-                and self.location_dest_id.usage == "customer"
-            )
-            or (
-                self.location_id.usage == "internal"
-                and self.location_dest_id.usage == "inventory"
-            )
-            or (
-                self.location_id.usage == "internal"
-                and self.location_dest_id.usage == "supplier"
-            )
-        ):
-            return True
-        return False
-
-    def is_scrap(self):
+    def _is_scrap(self):
         self.ensure_one()
         return self.location_id.scrap_location or self.location_dest_id.scrap_location
-
-    def is_incoming_move(self):
-        self.ensure_one()
-        if (
-            self.picking_type_id.code in (False, "incoming")
-            and (
-                self.location_id.usage == "supplier"
-                and self.location_dest_id.usage == "internal"
-            )
-            or (
-                self.location_id.usage == "inventory"
-                and self.location_dest_id.usage == "internal"
-            )
-            or (
-                self.location_id.usage == "customer"
-                and self.location_dest_id.usage == "internal"
-            )
-        ):
-            return True
-        return False
