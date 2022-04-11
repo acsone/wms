@@ -103,14 +103,14 @@ class FacadeProduct(Facade):
         if len(item_list) == 1:
             item = item_list[0]
         else:
-            filter_dates = (
-                lambda x: not x["date_start"]
-                or x["date_start"] <= self.today
-                and not x["date_end"]
-                or x["date_end"] >= self.today
-            )
+            filter_dates = lambda x: (
+                not x["date_start"] or x["date_start"] <= self.today
+            ) and (not x["date_end"] or x["date_end"] >= self.today)
             candidates = filter(filter_dates, item_list)
-            item = min(candidates, key=lambda it: it["date_start"] or self.today)
+            if candidates:
+                item = min(candidates, key=lambda it: it["date_start"] or self.today)
+            else:
+                item = {"discount": 0} if discount else {"price": 0}
         return item["discount"] if discount else item["price"]
 
     def _get_cache_price(self, price_cache, price_key, discount_key):
