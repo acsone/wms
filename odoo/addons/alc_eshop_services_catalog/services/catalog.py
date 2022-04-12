@@ -11,7 +11,7 @@ from odoo.addons.component.core import Component
 
 class CatalogService(Component):
 
-    _inherit = "base.rest.service"
+    _inherit = "authenticated_partner.mixin"
     _name = "catalog.service"
     _collection = "shopinvader.backend"
     _usage = "catalog"
@@ -75,19 +75,6 @@ class CatalogService(Component):
                 "schema": {"type": "dict", "schema": self._get_model_schema()},
             },
         }
-
-    @property
-    def env(self):
-        env = self.work.env
-        return env
-
-    @property
-    def partner(self):
-        partner = self.env["res.partner"].browse()
-        partner_id = self.work.authenticated_partner_id
-        if partner_id:
-            partner = partner.browse(partner_id)
-        return partner
 
     @property
     def model(self):
