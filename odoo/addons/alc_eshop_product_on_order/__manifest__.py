@@ -16,7 +16,7 @@
         "alc_product_pharmacy",
         "alc_sale_channel",
         "alc_sale_order_line_product_type",
-        "base_rest",
+        "authenticated_partner_mixin",
         "procurement_sale",
         "sale_cancel_remaining",
         "sale_consignment",
