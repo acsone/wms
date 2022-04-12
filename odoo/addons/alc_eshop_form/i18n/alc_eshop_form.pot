@@ -20,6 +20,7 @@ msgstr ""
 
 #. module: alc_eshop_form
 #: selection:alc.eshop.form,audience:0
+#: model:ir.ui.view,arch_db:alc_eshop_form.alc_eshop_form_search_view
 msgid "Authenticated"
 msgstr ""
 
@@ -67,6 +68,12 @@ msgid "Form"
 msgstr ""
 
 #. module: alc_eshop_form
+#: code:addons/alc_eshop_form/models/alc_eshop_form.py:54
+#, python-format
+msgid "Form is not a json valid string"
+msgstr ""
+
+#. module: alc_eshop_form
 #: model:ir.model.fields,field_description:alc_eshop_form.field_alc_eshop_form_form_options
 msgid "Form options"
 msgstr ""
@@ -110,8 +117,30 @@ msgid "Name"
 msgstr ""
 
 #. module: alc_eshop_form
+#: code:addons/alc_eshop_form/models/alc_eshop_form.py:46
+#, python-format
+msgid "Options are not a json valid string"
+msgstr ""
+
+#. module: alc_eshop_form
 #: selection:alc.eshop.form,audience:0
+#: model:ir.ui.view,arch_db:alc_eshop_form.alc_eshop_form_search_view
 msgid "Public"
+msgstr ""
+
+#. module: alc_eshop_form
+#: model:ir.ui.view,arch_db:alc_eshop_form.alc_eshop_form_search_view
+msgid "Published"
+msgstr ""
+
+#. module: alc_eshop_form
+#: model:ir.model.fields,field_description:alc_eshop_form.field_alc_eshop_form_sequence
+msgid "Sequence"
+msgstr ""
+
+#. module: alc_eshop_form
+#: model:ir.model.fields,field_description:alc_eshop_form.field_alc_eshop_form_published
+msgid "Visible on EShop"
 msgstr ""
 
 #. module: alc_eshop_form
