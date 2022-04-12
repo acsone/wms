@@ -2,6 +2,7 @@
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+from odoo.addons.alc_cerberus_utils import utils
 from odoo.addons.base_rest import restapi
 from odoo.addons.base_rest.components.service import to_int
 from odoo.addons.component.core import Component
@@ -45,7 +46,12 @@ class OrdersService(Component):
                 "type": "integer",
                 "default": None,
             },
-            "from_date": {"type": "string", "required": False, "nullable": True},
+            "from_date": {
+                "type": "datetime",
+                "required": False,
+                "nullable": False,
+                "coerce": utils.isoformat_str_dt_to_dt_utc,
+            },
         }
 
     def _get_model_schema(self):
