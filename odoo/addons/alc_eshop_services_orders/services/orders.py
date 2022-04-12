@@ -2,6 +2,7 @@
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+from odoo.addons.alc_cerberus_utils import utils
 from odoo.addons.base_rest import restapi
 from odoo.addons.base_rest.components.service import to_int
 from odoo.addons.component.core import Component
@@ -37,7 +38,7 @@ class OrdersService(Component):
                 "coerce": to_int,
                 "nullable": True,
                 "type": "integer",
-                "default": 1,
+                "default": None,
             },
             "limit": {
                 "coerce": to_int,
@@ -45,13 +46,27 @@ class OrdersService(Component):
                 "type": "integer",
                 "default": None,
             },
-            "from_date": {"type": "string", "required": False, "nullable": True},
+            "per_page": {
+                "coerce": to_int,
+                "nullable": True,
+                "type": "integer",
+                "default": None,
+            },
+            "from_date": {
+                "type": "datetime",
+                "required": False,
+                "nullable": False,
+                "coerce": utils.isoformat_str_dt_to_dt_utc,
+            },
         }
 
     def _get_model_schema(self):
         return {
             "id": {"type": "integer", "required": True, "nullable": False},
             "name": {"type": "string", "required": True, "nullable": False},
+            "state": {"type": "string", "required": True, "nullable": False},
+            "amount_total": {"type": "float", "required": True, "nullable": False},
+            "date_order": {"type": "datetime", "required": True, "nullable": False},
         }
 
     def _search_output_schema(self):
@@ -91,7 +106,7 @@ class OrdersService(Component):
         return self._paginate_search_records(domain, records)
 
     def _get_parser(self):
-        return ["id", "name"]
+        return ["id", "name", "date_order", "amount_total", "state"]
 
     def _to_json(self, records):
         return records.jsonify(self._get_parser())
