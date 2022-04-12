@@ -18,7 +18,7 @@ from odoo.addons.component.core import Component
 class DocumentService(Component):
     """Manage subscription to product's promotions."""
 
-    _inherit = "base.rest.service"
+    _inherit = "authenticated_partner.mixin"
     _name = "document.service"
     _collection = "shopinvader.backend"
     _usage = "documents"
@@ -134,23 +134,9 @@ class DocumentService(Component):
     ################
     # implementation
     ################
-
-    @property
-    def env(self):
-        env = self.work.env
-        return env
-
     @property
     def model(self):
         return self.env["alc.document"]
-
-    @property
-    def partner(self):
-        partner = self.env["res.partner"].browse()
-        partner_id = self.work.authenticated_partner_id
-        if partner_id:
-            partner = partner.browse(partner_id)
-        return partner
 
     def _get_base_domain(self):
         return self.model.get_partner_domain(self.partner)

@@ -10,7 +10,7 @@ from odoo.addons.component.core import Component
 class PromoSubscriptionService(Component):
     """Manage subscription to product's promotions."""
 
-    _inherit = "base.rest.service"
+    _inherit = "authenticated_partner.mixin"
     _name = "promo.subscription.service"
     _collection = "shopinvader.backend"
     _usage = "promo_subscriptions"
@@ -135,19 +135,6 @@ class PromoSubscriptionService(Component):
             "product_id": {"type": "integer", "required": True, "nullable": False},
         }
         return promo_schema
-
-    @property
-    def env(self):
-        env = self.work.env
-        return env
-
-    @property
-    def partner(self):
-        partner = self.env["res.partner"].browse()
-        partner_id = self.work.authenticated_partner_id
-        if partner_id:
-            partner = partner.browse(partner_id)
-        return partner
 
     def _paginate_search(self, page=1, per_page=10, product_id=None):
         model_obj = self.env["alc.product.promotion.subscription"]

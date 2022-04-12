@@ -19,7 +19,7 @@ from ..exceptions import NoBackOrderError
 class ProductsOnOrderService(Component):
     """Provides services to manages products on order."""
 
-    _inherit = "base.rest.service"
+    _inherit = "authenticated_partner.mixin"
     _name = "product.on.order.service"
     _collection = "shopinvader.backend"
     _usage = "products_on_order"
@@ -186,19 +186,6 @@ class ProductsOnOrderService(Component):
     ################
     # implementation
     ################
-    @property
-    def env(self):
-        env = self.work.env
-        return env
-
-    @property
-    def partner(self):
-        partner = self.env["res.partner"].browse()
-        partner_id = self.work.authenticated_partner_id
-        if partner_id:
-            partner = partner.browse(partner_id)
-        return partner
-
     def _get(self, order_line_id):
         query = """
             SELECT
