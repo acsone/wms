@@ -58,6 +58,9 @@ class OrdersService(Component):
         return {
             "id": {"type": "integer", "required": True, "nullable": False},
             "name": {"type": "string", "required": True, "nullable": False},
+            "state": {"type": "string", "required": True, "nullable": False},
+            "amount_total": {"type": "float", "required": True, "nullable": False},
+            "date_order": {"type": "datetime", "required": True, "nullable": False},
         }
 
     def _search_output_schema(self):
@@ -97,7 +100,7 @@ class OrdersService(Component):
         return self._paginate_search_records(domain, records)
 
     def _get_parser(self):
-        return ["id", "name"]
+        return ["id", "name", "date_order", "amount_total", "state"]
 
     def _to_json(self, records):
         return records.jsonify(self._get_parser())
