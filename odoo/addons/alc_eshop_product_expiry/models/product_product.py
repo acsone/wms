@@ -49,7 +49,7 @@ class ProductProduct(models.Model):
                 data = binding.data
                 best_before_date = data.get("best_before_date") or None
                 if best_before_date != binding.best_before_date:
-                    data["best_before_date"] = binding.best_before_date
+                    data["best_before_date"] = binding.best_before_date or None
                     vals = {"data": data}
                     if binding.backend_id.synchronize_stock == "immediatly":
                         binding.write(vals)
