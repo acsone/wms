@@ -20,11 +20,13 @@ msgstr ""
 
 #. module: alc_eshop_sale_statistic
 #: model:ir.model.fields,field_description:alc_eshop_sale_statistic.field_alc_eshop_product_ordered_qty_display_name
+#: model:ir.model.fields,field_description:alc_eshop_sale_statistic.field_alc_eshop_product_ordered_yearly_display_name
 msgid "Display Name"
 msgstr ""
 
 #. module: alc_eshop_sale_statistic
 #: model:ir.model.fields,field_description:alc_eshop_sale_statistic.field_alc_eshop_product_ordered_qty_id
+#: model:ir.model.fields,field_description:alc_eshop_sale_statistic.field_alc_eshop_product_ordered_yearly_id
 msgid "ID"
 msgstr ""
 
@@ -35,22 +37,31 @@ msgstr ""
 
 #. module: alc_eshop_sale_statistic
 #: model:ir.model.fields,field_description:alc_eshop_sale_statistic.field_alc_eshop_product_ordered_qty_is_equipment
+#: model:ir.model.fields,field_description:alc_eshop_sale_statistic.field_alc_eshop_product_ordered_yearly_is_equipment
 msgid "Is equipment"
 msgstr ""
 
 #. module: alc_eshop_sale_statistic
 #: model:ir.model.fields,field_description:alc_eshop_sale_statistic.field_alc_eshop_product_ordered_qty_is_food
+#: model:ir.model.fields,field_description:alc_eshop_sale_statistic.field_alc_eshop_product_ordered_yearly_is_food
 msgid "Is food"
 msgstr ""
 
 #. module: alc_eshop_sale_statistic
 #: model:ir.model.fields,field_description:alc_eshop_sale_statistic.field_alc_eshop_product_ordered_qty_is_meds
+#: model:ir.model.fields,field_description:alc_eshop_sale_statistic.field_alc_eshop_product_ordered_yearly_is_meds
 msgid "Is meds"
 msgstr ""
 
 #. module: alc_eshop_sale_statistic
 #: model:ir.model.fields,field_description:alc_eshop_sale_statistic.field_alc_eshop_product_ordered_qty___last_update
+#: model:ir.model.fields,field_description:alc_eshop_sale_statistic.field_alc_eshop_product_ordered_yearly___last_update
 msgid "Last Modified on"
+msgstr ""
+
+#. module: alc_eshop_sale_statistic
+#: model:ir.model.fields,field_description:alc_eshop_sale_statistic.field_alc_eshop_product_ordered_yearly_order_year
+msgid "Order year"
 msgstr ""
 
 #. module: alc_eshop_sale_statistic
@@ -60,6 +71,7 @@ msgstr ""
 
 #. module: alc_eshop_sale_statistic
 #: model:ir.model.fields,field_description:alc_eshop_sale_statistic.field_alc_eshop_product_ordered_qty_partner_id
+#: model:ir.model.fields,field_description:alc_eshop_sale_statistic.field_alc_eshop_product_ordered_yearly_partner_id
 msgid "Partner id"
 msgstr ""
 
@@ -70,6 +82,7 @@ msgstr ""
 
 #. module: alc_eshop_sale_statistic
 #: model:ir.model.fields,field_description:alc_eshop_sale_statistic.field_alc_eshop_product_ordered_qty_product_id
+#: model:ir.model.fields,field_description:alc_eshop_sale_statistic.field_alc_eshop_product_ordered_yearly_product_id
 msgid "Product id"
 msgstr ""
 
@@ -81,6 +94,17 @@ msgstr ""
 
 #. module: alc_eshop_sale_statistic
 #: model:ir.model.fields,field_description:alc_eshop_sale_statistic.field_alc_eshop_product_ordered_qty_product_tmpl_id
+#: model:ir.model.fields,field_description:alc_eshop_sale_statistic.field_alc_eshop_product_ordered_yearly_product_tmpl_id
 msgid "Product tmpl id"
+msgstr ""
+
+#. module: alc_eshop_sale_statistic
+#: model:ir.model.fields,field_description:alc_eshop_sale_statistic.field_alc_eshop_product_ordered_yearly_total
+msgid "Total"
+msgstr ""
+
+#. module: alc_eshop_sale_statistic
+#: model:ir.model,name:alc_eshop_sale_statistic.model_alc_eshop_product_ordered_yearly
+msgid "Yearly Ordered Product"
 msgstr ""
 
