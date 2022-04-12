@@ -35,6 +35,11 @@ class AlcEshopAds(models.Model):
             vals["sync_state"] = "to_update"
         return super(AlcEshopAds, self).write(vals)
 
+    def unlink(self):
+        for idx in self.sudo().mapped("se_index_ids"):
+            idx.with_delay().delete_obsolete_item(self.ids)
+        return super(AlcEshopAds, self).unlink()
+
     @api.model
     def _get_ads_to_sync(self):
         today = fields.Date.today()

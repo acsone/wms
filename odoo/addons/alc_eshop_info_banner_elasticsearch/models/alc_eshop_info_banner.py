@@ -37,6 +37,11 @@ class AlcEshopInfoMessage(models.Model):
             vals["sync_state"] = "to_update"
         return super(AlcEshopInfoMessage, self).write(vals)
 
+    def unlink(self):
+        for idx in self.sudo().mapped("se_index_ids"):
+            idx.with_delay().delete_obsolete_item(self.ids)
+        return super(AlcEshopInfoMessage, self).unlink()
+
     @api.model
     def _get_banners_to_sync(self):
         now = fields.Datetime.now()

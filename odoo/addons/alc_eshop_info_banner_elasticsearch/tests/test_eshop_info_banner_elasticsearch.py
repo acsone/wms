@@ -79,12 +79,16 @@ class TestEShopInfoBannerElasticsearch(SavepointComponentCase):
 
     def test_batch_export_backend(self):
         number_index = len(self.all_info_banners.mapped("se_index_ids"))
-        with mock.patch.object(self.adapter.__class__, "index") as patched_index:
+        with mock.patch.object(
+            self.adapter.__class__, "index"
+        ) as patched_index, mock.patch.object(self.adapter.__class__, "search"):
             self.backend_specific.cron_synchronize_info_banners()
             self.assertEqual(number_index, patched_index.call_count)
 
     def test_action_export(self):
         number_index = len(self.all_info_banners.mapped("se_index_ids"))
-        with mock.patch.object(self.adapter.__class__, "index") as patched_index:
+        with mock.patch.object(
+            self.adapter.__class__, "index"
+        ) as patched_index, mock.patch.object(self.adapter.__class__, "search"):
             self.all_info_banners.action_export_to_se()
             self.assertEqual(number_index, patched_index.call_count)
