@@ -38,9 +38,15 @@ class OrdersService(Component):
                 "coerce": to_int,
                 "nullable": True,
                 "type": "integer",
-                "default": 1,
+                "default": None,
             },
             "limit": {
+                "coerce": to_int,
+                "nullable": True,
+                "type": "integer",
+                "default": None,
+            },
+            "per_page": {
                 "coerce": to_int,
                 "nullable": True,
                 "type": "integer",
