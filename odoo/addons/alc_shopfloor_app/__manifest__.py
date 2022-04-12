@@ -17,6 +17,7 @@
         "alc_shopfloor_cluster_picking_transfer_async",
         "alc_shopfloor_location_content_relocation",
         "alc_shopfloor_location_info",
+        "alc_shopfloor_product_info",
         "alc_shopfloor_assignation_issue_message",
         "alc_shopfloor_mobile",
         "alc_shopfloor_mobile_change_pack_lot_back_button",
