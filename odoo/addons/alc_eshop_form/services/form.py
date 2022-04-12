@@ -71,6 +71,7 @@ class FormService(Component):
             "name": {"type": "string", "required": True, "nullable": False},
             "form": {"type": "string", "required": True, "nullable": False},
             "form_options": {"type": "string", "required": True, "nullable": False},
+            "sequence": {"type": "integer", "required": True, "nullable": False},
         }
 
     ################
@@ -78,7 +79,11 @@ class FormService(Component):
     ################
     def _search(self):
         audience = "authenticated_only" if self.partner else "public_only"
-        forms = self.env["alc.eshop.form"].sudo().search([("audience", "=", audience)])
+        forms = (
+            self.env["alc.eshop.form"]
+            .sudo()
+            .search([("audience", "=", audience), ("published", "=", True)])
+        )
         return {
             "size": len(forms),
             "data": [self._form_to_json(f) for f in forms],
@@ -86,7 +91,11 @@ class FormService(Component):
 
     def _form_to_json(self, form):
         return dict(
-            id=form.id, name=form.name, form=form.form, form_options=form.form_options,
+            id=form.id,
+            name=form.name,
+            form=form.form,
+            form_options=form.form_options,
+            sequence=form.sequence,
         )
 
     @property

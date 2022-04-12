@@ -13,4 +13,18 @@
     <field name="perm_write" eval="0" />
   </record>
 
+  <!-- rules for the service 'eshop form'  -->
+  <record model="ir.rule" id="eshop_alc_eshop_form_rule">
+    <field name="name">alc_eshop_form eshop rule</field>
+    <field name="model_id" ref="alc_eshop_form.model_alc_eshop_form" />
+    <field name="domain_force">[
+      ("published", '=', True)
+      ]
+    </field>
+    <field name="groups" eval="[(6, 0, [ref('eshop_technical_user_group')])]" />
+    <field name="perm_read" eval="1" />
+    <field name="perm_create" eval="0" />
+    <field name="perm_write" eval="0" />
+    <field name="perm_unlink" eval="0" />
+  </record>
 </odoo>

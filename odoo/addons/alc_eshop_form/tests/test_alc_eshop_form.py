@@ -6,6 +6,7 @@ import contextlib
 
 import mock
 
+from odoo.exceptions import ValidationError
 from odoo.tests.common import SavepointCase
 
 
@@ -60,3 +61,11 @@ class TestAlcEShopForm(SavepointCase):
         self.assertEqual(1, len(self.mail_recorder.created_mails))
         new_message = self.partner.message_ids - messages
         self.assertEqual(1, len(new_message))
+
+    def test_form_validation(self):
+        with self.assertRaises(ValidationError), self.env.cr.savepoint():
+            self.form.form_options = "[123"
+        self.form.form_options = "{}"
+        with self.assertRaises(ValidationError), self.env.cr.savepoint():
+            self.form.form = "[123"
+        self.form.form = "{}"

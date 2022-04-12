@@ -27,6 +27,7 @@ class TestEShopForm(SavepointCase, ComponentMixin):
                 "email": "laurent.mignon@acsone.eu",
                 "email_subject": "test subject",
                 "form": "{}",
+                "published": True,
             }
         )
         cls.form_public = cls.EShopForm.create(
@@ -36,6 +37,17 @@ class TestEShopForm(SavepointCase, ComponentMixin):
                 "email": "laurent.mignon@acsone.eu",
                 "email_subject": "test subject",
                 "form": "{}",
+                "published": True,
+            }
+        )
+        cls.form_public_not_published = cls.EShopForm.create(
+            {
+                "name": "test form public",
+                "audience": "public_only",
+                "email": "laurent.mignon@acsone.eu",
+                "email_subject": "test subject",
+                "form": "{}",
+                "published": False,
             }
         )
 
@@ -69,6 +81,18 @@ class TestEShopForm(SavepointCase, ComponentMixin):
         self.assertTrue(res)
         self.assertEqual(1, res.get("size"))
         self.assertEqual(self.form_public.id, res["data"][0]["id"])
+
+    def test_search_published_only(self):
+        with self.form_service(None) as service:
+            res = service.dispatch("search")
+        self.assertTrue(res)
+        self.assertEqual(1, res.get("size"))
+        self.assertEqual(self.form_public.id, res["data"][0]["id"])
+        self.form_public_not_published.published = True
+        with self.form_service(None) as service:
+            res = service.dispatch("search")
+        self.assertTrue(res)
+        self.assertEqual(2, res.get("size"))
 
     def test_search_authenticated(self):
         with self.form_service(self.partner.id) as service:

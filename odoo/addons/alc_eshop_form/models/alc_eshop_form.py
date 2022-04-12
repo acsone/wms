@@ -4,13 +4,15 @@
 
 import json
 
-from odoo import api, fields, models
+from odoo import _, api, fields, models
+from odoo.exceptions import ValidationError
 
 
 class AlcEshopForm(models.Model):
 
     _name = "alc.eshop.form"
     _description = "Eshop Form"
+    _order = "sequence"
 
     name = fields.Char(required=True, translate=True)
     audience = fields.Selection(
@@ -28,10 +30,32 @@ class AlcEshopForm(models.Model):
         "be added into the partner's chatter",
         default=True,
     )
+    published = fields.Boolean("Visible on EShop", copy=False, default=False)
+    sequence = fields.Integer(default=-1, required=True)
+
+    def publish_button(self):
+        for rec in self:
+            rec.published = not rec.published
+
+    @api.constrains("form_options")
+    def _check_form_options(self):
+        for record in self:
+            try:
+                json.loads(record.form_options)
+            except ValueError:
+                raise ValidationError(_("Options are not a json valid string"))
+
+    @api.constrains("form")
+    def _check_form(self):
+        for record in self:
+            try:
+                json.loads(record.form)
+            except ValueError:
+                raise ValidationError(_("Form is not a json valid string"))
 
     @property
     def _default_form_options(self):
-        return {"options": {"i18n": {"fr": {}, "en": {}, "nl": {}}}}
+        return {"i18n": {"fr": {}, "en": {}, "nl": {}}}
 
     @api.model
     def _get_default_form_options(self):
