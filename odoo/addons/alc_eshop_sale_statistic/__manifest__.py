@@ -6,7 +6,7 @@
     "name": "Alc Eshop Sale Stats",
     "description": """
         Alcyon: EShop services providing statistics on sales""",
-    "version": "10.0.1.0.0",
+    "version": "10.0.2.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
@@ -14,12 +14,16 @@
         "alc_cerberus_utils",
         "alc_product_pharmacy",
         "alc_sale_channel",
-        "base_rest",
-        "sale",
+        "authenticated_partner_mixin",
+        "materialized_view_mixin",
         "sale_cancel_remaining",
         "pricelist_discount",  # discount_sale
         "product_additional",  # ratio_main_product
     ],
-    "data": ["security/alc_eshop_product_ordered_qty.xml", "data/ir_cron.xml"],
+    "data": [
+        "security/alc_eshop_product_ordered_qty.xml",
+        "security/alc_eshop_product_ordered_yearly.xml",
+        "data/ir_cron.xml",
+    ],
     "demo": [],
 }

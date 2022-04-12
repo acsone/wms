@@ -2,14 +2,13 @@
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from psycopg2.extensions import AsIs
-
 from odoo import api, fields, models
 
 
 class AlcEshopProductOrderedQty(models.Model):
 
     _name = "alc.eshop.product.ordered.qty"
+    _inherit = "materialized.view.mixin"
     _description = "Product Ordered Qty"
     _auto = False
 
@@ -24,31 +23,8 @@ class AlcEshopProductOrderedQty(models.Model):
     date_last_ordered = fields.Date(readonly=True)
 
     @api.model
-    def get_refresh_date(self):
-        return self.env["ir.config_parameter"].get_param(
-            "alc_eshop_product_ordered_qty_refresh_date"
-        )
-
-    @api.model
-    def set_refresh_date(self, date=None):
-        if date is None:
-            date = fields.Datetime.now()
-        self.env["ir.config_parameter"].set_param(
-            "alc_eshop_product_ordered_qty_refresh_date", date
-        )
-
-    @api.model
-    def refresh_view(self):
-        self.env.cr.execute("refresh materialized view %s", (AsIs(self._table),))
-        self.set_refresh_date()
-
-    def init(self):
-        self.env.cr.execute(
-            "DROP MATERIALIZED VIEW IF EXISTS %s CASCADE", (AsIs(self._table),)
-        )
-        channels = tuple(self.env["sale.order"]._get_sale_channels_internal())
-        self.env.cr.execute(
-            """
+    def get_init_query(self):
+        return """
             CREATE MATERIALIZED VIEW %(table)s AS (
 
 SELECT
@@ -89,15 +65,11 @@ ORDER BY partner_id, SUM(product_uom_qty - COALESCE(product_qty_canceled, 0) ) D
 CREATE UNIQUE INDEX pk_%(table)s ON %(table)s (id);
 
 CREATE INDEX idx_%(table)s_partner_id_index ON %(table)s (partner_id);
-""",
-            {"table": AsIs(self._table), "channels": channels},
-        )
-        self.set_refresh_date(date=False)
-        cron = self.env.ref(
-            "alc_eshop_sale_statistic.refresh_materialized_view",
-            # at install, won't exist yet
-            raise_if_not_found=False,
-        )
-        # refresh data asap, but not during the upgrade
-        if cron:
-            cron.nextcall = fields.Datetime.now()
+"""
+
+    @api.model
+    def get_init_query_args(self):
+        args = super(AlcEshopProductOrderedQty, self).get_init_query_args()
+        channels = tuple(self.env["sale.order"]._get_sale_channels_internal())
+        args["channels"] = channels
+        return args
