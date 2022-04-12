@@ -24,6 +24,7 @@
         "alc_eshop_product_promotion_subscription",
         "alc_eshop_product_stock",
         "alc_eshop_sale_statistic",
+        "alc_eshop_services_orders_suite_channel",
         "alc_keycloak",
         "alc_product_promotion_mailing",
         "alc_search_engine",
