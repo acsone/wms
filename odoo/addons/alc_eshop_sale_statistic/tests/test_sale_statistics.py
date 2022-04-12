@@ -150,3 +150,19 @@ class TestSaleStatisticsMonthly(TestSaleStatistics):
             res = service.top_ordered(supplier_discount_only=True)
             self.assertEqual(0, res["size"])
             self.assertEqual(0, len(res["data"]))
+
+    @freeze_time("2022-02-22 00:00:00")
+    def test_five_years(self):
+        expected_data = [
+            {"food": 0, "equipment": 0, "meds": 0},
+            {"food": 0, "equipment": 0, "meds": 0},
+            {"food": 165, "equipment": 0, "meds": 0},
+            {"food": 284, "equipment": 0, "meds": 569},
+            {"food": 4, "equipment": 0, "meds": 10},
+        ]
+        with self.sale_statistics_service(
+            authenticated_partner_id=self.partner_1.id
+        ) as service:
+            result = service.five_years()
+
+        self.assertDictEqual(result, {"size": 5, "data": expected_data})

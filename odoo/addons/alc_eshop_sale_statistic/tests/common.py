@@ -75,6 +75,7 @@ class TestSaleStatistics(SavepointCase, ComponentMixin):
             .mapped("date_order")
         )
         cls.env["alc.eshop.product.ordered.qty"].refresh_view()
+        cls.env["alc.eshop.product.ordered.yearly"].refresh_view()
 
     @classmethod
     def sell(cls, product, qty, ttime, confirm=True, deliver=False):

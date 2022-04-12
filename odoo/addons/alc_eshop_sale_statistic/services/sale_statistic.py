@@ -20,7 +20,7 @@ from odoo.addons.component.core import Component
 class SaleStatsService(Component):
     """Provides statistics on sales related to the customer."""
 
-    _inherit = "base.rest.service"
+    _inherit = "authenticated_partner.mixin"
     _name = "sale.statistic.service"
     _collection = "shopinvader.backend"
     _usage = "sale_statistics"
@@ -59,6 +59,43 @@ class SaleStatsService(Component):
             product_families=product_families,
             supplier_discount_only=supplier_discount_only,
         )
+
+    @restapi.method(
+        [(["/five_years"], "GET")],
+        input_param=restapi.CerberusValidator({}),
+        output_param=restapi.CerberusValidator("_five_years_output_schema"),
+    )
+    def five_years(self):
+        """Last five years sale statistics by product category, chronologically.
+           e.g [y-4, ..., y] with y being the current year, of the form:
+           {"is_food": 57, "is_equipment": 0, "is_meds": 1300}
+           Five years, that's all we've got We've got five years, what a surprise
+        """
+        query = """
+            SELECT *
+            FROM %(table)s
+            WHERE partner_id = %(partner_id)s
+            """
+        args = {
+            "table": AsIs(self.env["alc.eshop.product.ordered.yearly"]._table),
+            "partner_id": self.partner.id,
+        }
+        self.env.cr.execute(query, args)
+        current_year = datetime.date.today().year
+        families = ["is_food", "is_equipment", "is_meds"]
+        year_range = list(range(current_year - 4, current_year + 1))
+        years = {year: {family[3:]: 0 for family in families} for year in year_range}
+        for row in self.env.cr.dictfetchall():
+            year = row["order_year"]
+            for family in families:
+                if row[family]:
+                    years[year][family[3:]] = years[year][family[3:]] + row["total"]
+        # round everything
+        data = [years[k] for k in year_range]
+        for year in data:
+            for family in year:
+                year[family] = int(round(year[family]))
+        return {"size": 5, "data": data}
 
     ############
     # validators
@@ -145,21 +182,40 @@ class SaleStatsService(Component):
             },
         }
 
+    def _five_years_output_schema(self):
+        return {
+            "size": {"type": "integer"},
+            "data": {
+                "type": "list",
+                "schema": {
+                    "type": "dict",
+                    "schema": {
+                        "meds": {
+                            "coerce": to_int,
+                            "nullable": False,
+                            "required": True,
+                            "type": "integer",
+                        },
+                        "food": {
+                            "coerce": to_int,
+                            "nullable": False,
+                            "required": True,
+                            "type": "integer",
+                        },
+                        "equipment": {
+                            "coerce": to_int,
+                            "nullable": False,
+                            "required": True,
+                            "type": "integer",
+                        },
+                    },
+                },
+            },
+        }
+
     ################
     # implementation
     ################
-    @property
-    def env(self):
-        env = self.work.env
-        return env
-
-    @property
-    def partner(self):
-        partner = self.env["res.partner"].browse()
-        partner_id = self.work.authenticated_partner_id
-        if partner_id:
-            partner = partner.browse(partner_id)
-        return partner
 
     def _get_monthly_ordered(self, product):
         today = datetime.date.today()
