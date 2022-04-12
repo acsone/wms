@@ -19,8 +19,28 @@ class SeBackendElasticsearch(models.Model):
             ):
                 with rec.work_on(rec._name, index=index) as work:
                     adapter = work.component(usage="se.backend.adapter")
-                    adapter.put_ads(ads)
+                    self._export_ads(adapter=adapter, ads=ads)
+                    self._cleanup_obsolete_adds(adapter)
             ads.write({"sync_state": "done"})
+
+    @api.model
+    def _export_ads(self, adapter, ads):
+        adapter.put_ads(ads)
+
+    @api.model
+    def _cleanup_obsolete_adds(self, adapter):
+        existing_ids = self.env["alc.eshop.ads"]._get_ads_to_sync().ids
+        if existing_ids:
+            q = {"bool": {"must_not": [{"terms": {"_id": existing_ids}}]}}
+        else:
+            q = {"match_all": {}}
+        es_params = {"source": ["id"], "query": q}
+        params = {"size": 10000}
+        obsolete_ids = [
+            r["id"] for r in adapter.search(es_params=es_params, params=params)
+        ]
+        if obsolete_ids:
+            adapter.delete(obsolete_ids)
 
     def synchronize_ads(self):
         self.export_ads()

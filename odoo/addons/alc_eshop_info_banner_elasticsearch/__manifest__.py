@@ -14,6 +14,7 @@
         "alc_cerberus_utils",
         "alc_eshop_info_banner",
         "connector_elasticsearch",
+        "elasticsearch_search",
         "queue_job_cron",
     ],
     "data": [

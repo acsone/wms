@@ -10,7 +10,12 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["alc_eshop_ads", "connector_elasticsearch", "queue_job_cron"],
+    "depends": [
+        "alc_eshop_ads",
+        "connector_elasticsearch",
+        "elasticsearch_search",
+        "queue_job_cron",
+    ],
     "data": [
         "views/alc_eshop_ads.xml",
         "views/se_backend_elasticsearch.xml",
