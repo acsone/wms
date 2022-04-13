@@ -32,12 +32,14 @@ class StockPicking(models.Model):
             packs_to_print.print_product_label(printer_id=printer_id, quantity=quantity)
 
     @api.multi
-    def print_food_products_label(self, printer_id=False, quantity=1, packages=None):
+    def print_food_products_label(
+        self, printer_id=False, quantity=1, packages=None, operations=None
+    ):
         self.ensure_one()
         if not self.partner_id:
             raise Warning(_("No destination partner defined"))
 
-        packs_to_print = self.pack_operation_ids.filtered(
+        packs_to_print = operations or self.pack_operation_ids.filtered(
             lambda pack_op: not pack_op.product_id.is_do_not_print_label
         )
         if packages:

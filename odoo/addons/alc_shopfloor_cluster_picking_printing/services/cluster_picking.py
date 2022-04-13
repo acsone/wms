@@ -63,5 +63,5 @@ class ClusterPicking(Component):
     def _print_picking_food_product_labels(self, operation):
         operation.picking_id.sudo().print_food_products_label(
             printer_id=self.shopfloor_user.printing_product_label_printer_id.id,
-            packages=operation,
+            operations=operation,
         )
