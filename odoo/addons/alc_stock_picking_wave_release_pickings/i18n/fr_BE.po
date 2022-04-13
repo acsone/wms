@@ -32,7 +32,7 @@ msgid "Release not allowed"
 msgstr ""
 
 #. module: alc_stock_picking_wave_release_pickings
-#: code:addons/alc_stock_picking_wave_release_pickings/models/stock_picking_wave.py:44
+#: code:addons/alc_stock_picking_wave_release_pickings/models/stock_picking_wave.py:50
 #, python-format
 msgid "You cannot delete waves that are not canceled or released"
 msgstr ""
