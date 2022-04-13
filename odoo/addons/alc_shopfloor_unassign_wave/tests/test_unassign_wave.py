@@ -37,13 +37,17 @@ class TestUnassignWave(ClusterPickingCommonCase):
         self.assertEqual(response, expected)
 
     def test_01_started_batch_cannot_unassign(self):
-
-        self.bin1 = self.env["stock.quant.package"].create({})
+        bin_vals = {}
+        # Ensure that scan_destination_pack works if alc_shopfloor_packing is
+        # installed
+        if "is_internal" in self.env["stock.quant.package"]._fields:
+            bin_vals["is_internal"] = True
+        self.bin1 = self.env["stock.quant.package"].create(bin_vals)
         self._simulate_batch_selected(self.batch)
         operation = self.batch.pack_operation_ids[0]
         qty_done = operation.product_qty
         # process one operation
-        self.service.dispatch(
+        response = self.service.dispatch(
             "scan_destination_pack",
             params={
                 "picking_batch_id": self.batch.id,
@@ -52,6 +56,7 @@ class TestUnassignWave(ClusterPickingCommonCase):
                 "quantity": qty_done,
             },
         )
+        self.assertIn("start_operation", response["data"])
         self.assertTrue(
             any(self.batch.mapped("picking_ids.pack_operation_ids.qty_done"))
         )
