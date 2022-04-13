@@ -6,4 +6,11 @@
     <field name="key">constrain_discount_pricelist</field>
     <field name="value">1</field>
   </record>
+  <record
+    id="alc_stock_picking_wave_release_pickings.constrain_release_picking_wave_before_unlink_parameter"
+    model="ir.config_parameter"
+  >
+    <field name="key">constrain_release_picking_wave_before_unlink</field>
+    <field name="value">1</field>
+  </record>
 </odoo>

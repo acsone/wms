@@ -39,7 +39,13 @@ class StockPickingWave(models.Model):
         return self.write({"picking_ids": [(5, None, None)]})
 
     def unlink(self):
-        if any([rec.state not in ("cancel", "released") for rec in self]):
+        config_param = self.env["ir.config_parameter"]
+        constrain_unlink = int(
+            config_param.get_param("constrain_release_picking_wave_before_unlink", 0)
+        )
+        if constrain_unlink and any(
+            [rec.state not in ("cancel", "released") for rec in self]
+        ):
             raise ValidationError(
                 _("You cannot delete waves that are not canceled or released")
             )

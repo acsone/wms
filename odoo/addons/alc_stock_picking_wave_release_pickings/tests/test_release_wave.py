@@ -10,6 +10,11 @@ class TestReleaseWave(SavepointCase):
     @classmethod
     def setUpClass(cls):
         super(TestReleaseWave, cls).setUpClass()
+        cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
+        cls.parameter_model = cls.env["ir.config_parameter"]
+        cls.parameter_model.sudo().set_param(
+            "constrain_release_picking_wave_before_unlink", "1"
+        )
         cls.warehouse_1 = cls.env.ref("stock.warehouse0")
         cls.customer = cls.env["res.partner"].create({"name": "Customer"})
         cls.product_1 = cls.env["product.product"].create(

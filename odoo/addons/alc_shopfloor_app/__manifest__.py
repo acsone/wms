@@ -29,6 +29,7 @@
         "alc_shopfloor_mobile_stock_refill",
         "alc_shopfloor_mobile_stock_reserve",
         "alc_shopfloor_rest_log",
+        "alc_shopfloor_unassign_wave",
         "alc_shopfloor_user",
         "alc_shopfloor_workstation",
         "shopfloor_workstation_mobile",

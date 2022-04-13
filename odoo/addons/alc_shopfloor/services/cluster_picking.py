@@ -415,15 +415,19 @@ class ClusterPicking(Component):
         data.update(kw)
         return data
 
+    def _cancel_batch(self, picking_batch_id):
+        batch = self.env["stock.picking.wave"].browse(picking_batch_id)
+        if batch.exists():
+            batch.write({"state": "draft", "user_id": False})
+        return batch
+
     def unassign(self, picking_batch_id):
         """Unassign and reset to draft a started picking batch
 
         Transitions:
         * "start" to work on a new batch
         """
-        batch = self.env["stock.picking.wave"].browse(picking_batch_id)
-        if batch.exists():
-            batch.write({"state": "draft", "user_id": False})
+        self._cancel_batch(picking_batch_id)
         return self._response_for_start()
 
     def scan_line(self, picking_batch_id, operation_id, barcode):

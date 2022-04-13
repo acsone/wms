@@ -10,6 +10,6 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": ["stock_picking_wave", "alc_stock_picking_batch_assignment"],
-    "data": ["views/stock_picking_wave.xml"],
+    "data": ["views/stock_picking_wave.xml", "data/ir_config_parameter.xml"],
     "demo": [],
 }
