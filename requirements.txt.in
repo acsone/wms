@@ -117,6 +117,7 @@ odoo10-addon-shopinvader-sale-profile @  git+https://github.com/acsone/odoo-shop
 odoo10-addon-shopinvader-wishlist @  git+https://github.com/acsone/odoo-shopinvader.git@10.0-backport-14.0#subdirectory=setup/shopinvader_wishlist
 odoo10-addon-shopinvader-search-engine @  git+https://github.com/acsone/odoo-shopinvader.git@10.0-backport-14.0#subdirectory=setup/shopinvader_search_engine
 
+odoo10-addon-partner-serializer @  git+https://github.com/acsone/odoo-shopinvader.git@10.0-backport-with-new-cart-service#subdirectory=setup/partner_serializer
 odoo10-addon-sale-cart @  git+https://github.com/acsone/odoo-shopinvader.git@10.0-backport-with-new-cart-service#subdirectory=setup/sale_cart
 odoo10-addon-sale-cart-delivery-rest-api @  git+https://github.com/acsone/odoo-shopinvader.git@10.0-backport-with-new-cart-service#subdirectory=setup/sale_cart_delivery_rest_api
 odoo10-addon-sale-cart-rest-api @  git+https://github.com/acsone/odoo-shopinvader.git@10.0-backport-with-new-cart-service#subdirectory=setup/sale_cart_rest_api
