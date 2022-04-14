@@ -71,6 +71,13 @@ msgstr "Confirmez-vous?"
 msgid "Barcode does not match with {}."
 msgstr "Le code-barres ne correspond pas à {}."
 
+
+#. module: alc_shopfloor
+#: code:addons/alc_shopfloor/actions/message.py:550
+#, python-format
+msgid "Quantity must be greater than zero."
+msgstr "La quantité doit être supérieure à zéro."
+
 #. module: alc_shopfloor
 #: code:addons/alc_shopfloor/actions/message.py:117
 #, python-format

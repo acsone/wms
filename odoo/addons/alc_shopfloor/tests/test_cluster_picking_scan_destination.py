@@ -358,3 +358,26 @@ class ClusterPickingScanDestinationPackCase(ClusterPickingCommonCase):
                 ),
             },
         )
+
+    def test_scan_destination_pack_zero_quantity(self):
+        """Location will be emptied, no zero check, continue"""
+        operation = self.batch.pack_operation_ids[0]
+        response = self.service.dispatch(
+            "scan_destination_pack",
+            params={
+                "picking_batch_id": self.batch.id,
+                "operation_id": operation.id,
+                "barcode": self.bin1.name,
+                "quantity": 0,
+            },
+        )
+
+        self.assert_response(
+            response,
+            next_state="scan_destination",
+            data=self._operation_data(operation),
+            message={
+                "message_type": "error",
+                "body": "Quantity must be greater than zero.",
+            },
+        )

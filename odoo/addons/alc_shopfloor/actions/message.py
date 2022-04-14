@@ -543,3 +543,9 @@ class MessageAction(Component):
             "message_type": "error",
             "body": _(u"Lot {} is already the current one.").format(lot.name),
         }
+
+    def qty_must_be_greater_than_zero(self):
+        return {
+            "message_type": "error",
+            "body": _(u"Quantity must be greater than zero."),
+        }
