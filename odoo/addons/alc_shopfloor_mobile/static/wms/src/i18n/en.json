@@ -30,5 +30,6 @@
   "cluster_picking.btn.action.skip_line.title": "Skip line",
   "cluster_picking.btn.action.stock_issue.title": "Declare stock out",
   "cluster_picking.btn.action.change_pack_or_lot.title": "Change lot or pack",
-  "cluster_picking.btn.action.print_label.title": "Print label"
+  "cluster_picking.btn.action.print_label.title": "Print label",
+  "cluster_picking.btn.action.back.title": "Back"
 }

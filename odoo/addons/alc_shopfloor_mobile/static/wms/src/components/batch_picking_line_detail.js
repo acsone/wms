@@ -135,7 +135,7 @@ export var batch_picking_line_actions = Vue.component("batch-picking-line-action
           </v-row>
           <v-row align="center">
             <v-col class="text-center" cols="12">
-              <v-btn x-large @click="dialog = false">Back</v-btn>
+              <v-btn x-large @click="dialog = false">{{ $t('cluster_picking.btn.action.back.title') }}</v-btn>
             </v-col>
           </v-row>
         </div>

@@ -26,6 +26,7 @@
         "alc_shopfloor_mobile_packing",
         "alc_shopfloor_mobile_product_print_label",
         "alc_shopfloor_mobile_qty_picker_font_style",
+        "alc_shopfloor_mobile_stock_issue_button",
         "alc_shopfloor_mobile_stock_refill",
         "alc_shopfloor_mobile_stock_reserve",
         "alc_shopfloor_rest_log",

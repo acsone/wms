@@ -28,5 +28,6 @@
   "cluster_picking.btn.action.skip_line.title": "Passer l'opération",
   "cluster_picking.btn.action.stock_issue.title": "Rupture",
   "cluster_picking.btn.action.change_pack_or_lot.title": "Changer de lot ou de paquet",
-  "cluster_picking.btn.action.print_label.title": "Imprimer l'étiquette"
+  "cluster_picking.btn.action.print_label.title": "Imprimer l'étiquette",
+  "cluster_picking.btn.action.back.title": "Retour"
 }
