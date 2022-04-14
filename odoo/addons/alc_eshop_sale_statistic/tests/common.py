@@ -75,6 +75,10 @@ class TestSaleStatistics(SavepointCase, ComponentMixin):
             .mapped("date_order")
         )
         cls.env["alc.eshop.product.ordered.qty"].refresh_view()
+
+        cls.sell(cls.product_1, 7, "2015-12-12 00:00:00")  # old data is fine
+        cls.sell(cls.product_1, 14, "2018-12-12 00:00:00")
+        cls.sell(cls.product_1, 21, "2042-12-12 00:00:00")  # service resist to bad data
         cls.env["alc.eshop.product.ordered.yearly"].refresh_view()
 
     @classmethod

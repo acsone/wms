@@ -40,7 +40,7 @@ FROM
 where
     so.sale_channel IN %(channels)s
     AND so.state in ('done', 'sale')
-    AND date_order >= DATE_TRUNC('year', NOW() - INTERVAL '5 year')
+    AND date_order > DATE_TRUNC('year', NOW() - INTERVAL '5 year')
     GROUP BY so.partner_id, order_year, pt.is_food, pt.is_equipment, pt.is_meds
 ORDER BY partner_id
 );
