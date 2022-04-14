@@ -26,9 +26,9 @@ class ProductPricelist(models.Model):
 
     def remove_price_cache(self):
         products = self.env["product.product"].get_price_cache_products()
-        pricelist_role_names = self.mapped("role_name")
+        pl_role_names = self.mapped("role_name")
         desc = _("Remove products prices for pricelist %s.") % self._get_names()
-        products.with_delay(description=desc).remove_price_cache(pricelist_role_names)
+        products.with_delay(description=desc).delay_remove_price_cache(pl_role_names)
 
     @api.model
     def create(self, vals):

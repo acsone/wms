@@ -76,6 +76,12 @@ class ProductProduct(models.Model):
             product.price_cache = price_cache
 
     @job(default_channel="root.background.price")
+    def delay_remove_price_cache(self, pricelist_role_names):
+        dsc = _("Remove products prices for pricelist %s.") % pricelist_role_names
+        for product in self:
+            product.with_delay(description=dsc).remove_price_cache(pricelist_role_names)
+
+    @job(default_channel="root.background.price")
     def remove_price_cache(self, pricelist_role_names):
         # different API: we directly pass the role names so we don't need to access
         # records that have been deleted previously

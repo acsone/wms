@@ -44,6 +44,12 @@ class TestPricesFlow(TestPrices):
         discount_key = discount_pricelist.discount_role_name
         self.assertTrue(discount_key in self.product_1.price_cache)
 
+        pricelist.unlink()
+        self.assertFalse(price_key in self.product_1.price_cache)
+        self.assertTrue(discount_key in self.product_1.price_cache)
+        discount_pricelist.unlink()
+        self.assertFalse(discount_key in self.product_1.price_cache)
+
     @freeze_time("2022-01-01 12:00:00")
     @mute_logger("odoo.addons.queue_job.models.base")
     def test_pricelist_date_witnesses_none(self):
