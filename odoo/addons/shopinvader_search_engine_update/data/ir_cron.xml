@@ -16,6 +16,7 @@
         <field name="model">se.index</field>
         <field name="function">cron_recompute_all_continuous</field>
         <field name="args">()</field>
+        <field eval="1" name="run_as_queue_job" />
     </record>
 
     <record forcecreate="True" id="cron_recompute_all_index_batch" model="ir.cron">
@@ -29,6 +30,7 @@
         <field name="model">se.index</field>
         <field name="function">cron_recompute_all_batch</field>
         <field name="args">()</field>
+        <field eval="1" name="run_as_queue_job" />
     </record>
 
     <record id="connector_search_engine.ir_cron_export_binding" model="ir.cron">
@@ -48,6 +50,7 @@
         <field name="model">se.index</field>
         <field name="function">cron_export_all_continuous</field>
         <field name="args">()</field>
+        <field eval="1" name="run_as_queue_job" />
     </record>
 
     <record forcecreate="True" id="cron_export_all_batch" model="ir.cron">
@@ -63,6 +66,7 @@
         <field name="model">se.index</field>
         <field name="function">cron_export_all_batch</field>
         <field name="args">()</field>
+        <field eval="1" name="run_as_queue_job" />
     </record>
 
     <record forcecreate="True" id="cron_check_domain_continuous" model="ir.cron">
