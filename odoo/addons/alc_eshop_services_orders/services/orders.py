@@ -64,6 +64,7 @@ class OrdersService(Component):
         return {
             "id": {"type": "integer", "required": True, "nullable": False},
             "name": {"type": "string", "required": True, "nullable": False},
+            "customer_ref": {"type": "string", "required": False, "nullable": True},
             "state": {"type": "string", "required": True, "nullable": False},
             "amount_total": {"type": "float", "required": True, "nullable": False},
             "date_order": {"type": "datetime", "required": True, "nullable": False},
@@ -82,7 +83,7 @@ class OrdersService(Component):
     def model(self):
         return self.env["sale.order"]
 
-    def _get_domain(self, from_date=None):
+    def _get_domain(self, from_date=None, **params):
         domain = [("partner_id", "=", self.partner.id), ("typology", "=", "sale")]
         if from_date:
             domain.append(("create_date", ">=", from_date))
@@ -93,7 +94,7 @@ class OrdersService(Component):
         domain = domain_base + [("id", "=", _id)]
         return self.model.search(domain)
 
-    def _records(self, domain, page=1, per_page=10):
+    def _records(self, domain, page=1, per_page=10, **params):
         offset = per_page * (page - 1) if per_page and page else 0
         return self.model.search(domain, limit=per_page, offset=offset)
 
@@ -106,7 +107,14 @@ class OrdersService(Component):
         return self._paginate_search_records(domain, records)
 
     def _get_parser(self):
-        return ["id", "name", "date_order", "amount_total", "state"]
+        return [
+            "id",
+            "name",
+            "date_order",
+            "amount_total",
+            "state",
+            "client_order_ref:customer_ref",
+        ]
 
     def _to_json(self, records):
         return records.jsonify(self._get_parser())
