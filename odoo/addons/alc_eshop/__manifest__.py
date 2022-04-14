@@ -18,6 +18,7 @@
         "alc_price_cache",
         "alc_eshop_api_v2",
         "alc_eshop_auth_jwt",
+        "alc_eshop_customer_sales_person",
         "alc_eshop_filter_data",
         "alc_eshop_sale_channel",
         "alc_eshop_sale_payment_info",
