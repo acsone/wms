@@ -600,6 +600,11 @@ class ClusterPicking(Component):
                 move_line, message=self.msg_store.bin_not_found_for_barcode(barcode)
             )
 
+        if quantity <= 0:
+            return self._response_for_scan_destination(
+                move_line, message=self.msg_store.qty_must_be_greater_than_zero()
+            )
+
         # the scanned package can contain only move lines of the same picking
         if bin_package.quant_ids or any(
             ml.picking_id != move_line.picking_id

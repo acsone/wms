@@ -575,3 +575,9 @@ class MessageAction(Component):
                 "The system couldn't pack goods automatically."
             ).format(picking),
         }
+
+    def qty_must_be_greater_than_zero(self):
+        return {
+            "message_type": "error",
+            "body": _(u"Quantity must be greater than zero."),
+        }
