@@ -209,6 +209,7 @@ class MakePickingBatch(models.TransientModel):
             if device != picking_device:
                 continue
 
+            picking._init_nbr_bins_on_device_field(device)
             available_bins_outreached = (
                 available_nbr_bins - picking.nbr_bins_batch_picking < 0
             )
