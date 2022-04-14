@@ -334,3 +334,26 @@ class ClusterPickingScanDestinationPackCase(ClusterPickingCommonCase):
                 ),
             },
         )
+
+    def test_scan_destination_pack_zero_quantity(self):
+        """Try to enter 0 as quantity picked : should not be possible"""
+        line = self.batch.move_line_ids[0]
+        response = self.service.dispatch(
+            "scan_destination_pack",
+            params={
+                "picking_batch_id": self.batch.id,
+                "move_line_id": line.id,
+                "barcode": self.bin1.name,
+                "quantity": 0,
+            },
+        )
+
+        self.assert_response(
+            response,
+            next_state="scan_destination",
+            data=self.self._line_data(line),
+            message={
+                "message_type": "error",
+                "body": "Quantity must be greater than zero.",
+            },
+        )
