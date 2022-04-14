@@ -83,7 +83,7 @@ class OrdersService(Component):
     def model(self):
         return self.env["sale.order"]
 
-    def _get_domain(self, from_date=None):
+    def _get_domain(self, from_date=None, **params):
         domain = [("partner_id", "=", self.partner.id), ("typology", "=", "sale")]
         if from_date:
             domain.append(("create_date", ">=", from_date))
@@ -94,7 +94,7 @@ class OrdersService(Component):
         domain = domain_base + [("id", "=", _id)]
         return self.model.search(domain)
 
-    def _records(self, domain, page=1, per_page=10):
+    def _records(self, domain, page=1, per_page=10, **params):
         offset = per_page * (page - 1) if per_page and page else 0
         return self.model.search(domain, limit=per_page, offset=offset)
 
