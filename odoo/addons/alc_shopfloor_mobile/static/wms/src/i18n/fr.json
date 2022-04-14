@@ -23,5 +23,10 @@
   "location_content_transfer.scan_destination_all.title": "Scannez l'emplacement de destination pour tous les produits",
   "location_content_transfer.scan_location.title": "Commencez en scannant un emplacement",
   "location_content_transfer.start_single.scan_placeholder": "Scannez une boite / un produit / un lot",
-  "scan_placeholder_translation": "Scannez un emplacement"
+  "scan_placeholder_translation": "Scannez un emplacement",
+  "cluster_picking.btn.action.full_bin.title": "Aller au déchargement - compartiment plein",
+  "cluster_picking.btn.action.skip_line.title": "Passer l'opération",
+  "cluster_picking.btn.action.stock_issue.title": "Rupture",
+  "cluster_picking.btn.action.change_pack_or_lot.title": "Changer de lot ou de paquet",
+  "cluster_picking.btn.action.print_label.title": "Imprimer l'étiquette"
 }

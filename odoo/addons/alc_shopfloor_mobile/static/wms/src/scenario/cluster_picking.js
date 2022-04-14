@@ -47,7 +47,7 @@ const ClusterPicking = {
                     <v-row align="center">
                         <v-col class="text-center" cols="12">
                             <v-btn @click="state.on_action_full_bin">
-                                Full bin
+                            {{ $t('cluster_picking.btn.action.full_bin.title') }}
                             </v-btn>
                         </v-col>
                     </v-row>

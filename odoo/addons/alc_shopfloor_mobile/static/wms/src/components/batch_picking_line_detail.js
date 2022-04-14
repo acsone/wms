@@ -109,28 +109,28 @@ export var batch_picking_line_actions = Vue.component("batch-picking-line-action
         <div class="button-list button-vertical-list full">
           <v-row align="center">
             <v-col class="text-center" cols="12">
-              <btn-action @click="handle_action('action_full_bin')">Go to destination - full bin(s)</btn-action>
+              <btn-action @click="handle_action('action_full_bin')">{{ $t('cluster_picking.btn.action.full_bin.title') }}</btn-action>
             </v-col>
           </v-row>
           <v-row align="center">
             <v-col class="text-center" cols="12">
-              <btn-action @click="handle_action('action_skip_operation')">Skip line</btn-action>
+              <btn-action @click="handle_action('action_skip_operation')">{{ $t('cluster_picking.btn.action.skip_line.title') }}</btn-action>
             </v-col>
           </v-row>
           <v-row align="center">
             <v-col class="text-center" cols="12">
               <btn-action
-                  @click="handle_action('action_stock_out')">Declare stock out</btn-action>
+                  @click="handle_action('action_stock_out')">{{ $t('cluster_picking.btn.action.stock_issue.title') }}</btn-action>
             </v-col>
           </v-row>
           <v-row align="center">
             <v-col class="text-center" cols="12">
-              <btn-action @click="handle_action('action_change_pack_or_lot')">Change lot or pack</btn-action>
+              <btn-action @click="handle_action('action_change_pack_or_lot')">{{ $t('cluster_picking.btn.action.change_pack_or_lot.title') }}</btn-action>
             </v-col>
           </v-row>
           <v-row align="center">
             <v-col class="text-center" cols="12">
-              <btn-action @click="handle_action('action_print_label')">Print label</btn-action>
+              <btn-action @click="handle_action('action_print_label')">{{ $t('cluster_picking.btn.action.print_label.title') }}</btn-action>
             </v-col>
           </v-row>
           <v-row align="center">

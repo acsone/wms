@@ -25,5 +25,10 @@
   "location_content_transfer.scan_location.title": "Start by scanning a location",
   "location_content_transfer.start_single.scan_placeholder": "Scan pack / product / lot",
   "misc.actions_popup.btn_action": "Action",
-  "scan_placeholder_translation": "Scan location"
+  "scan_placeholder_translation": "Scan location",
+  "cluster_picking.btn.action.full_bin.title": "Go to destination - full bin(s)",
+  "cluster_picking.btn.action.skip_line.title": "Skip line",
+  "cluster_picking.btn.action.stock_issue.title": "Declare stock out",
+  "cluster_picking.btn.action.change_pack_or_lot.title": "Change lot or pack",
+  "cluster_picking.btn.action.print_label.title": "Print label"
 }
