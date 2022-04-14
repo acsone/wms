@@ -6,6 +6,8 @@ import datetime
 
 from odoo import _, api, fields, models
 
+from odoo.addons.queue_job.job import job
+
 
 class ProductPricelist(models.Model):
     _inherit = "product.pricelist"
@@ -14,15 +16,21 @@ class ProductPricelist(models.Model):
         names = ", ".join(self.mapped("name"))
         return names if len(names) < limit else names[: limit - 5] + "[...]"
 
+    def delay_update_price_cache(self, **kwargs):
+        if "dates" in kwargs:
+            for pl in kwargs["dates"]:
+                kwargs["dates"][pl] = list(kwargs["dates"][pl])
+        desc = _("Update products prices for pricelist %s.") % self._get_names()
+        self.with_delay(description=desc).update_price_cache(**kwargs)
+
+    @job(default_channel="root.background.price")
     def update_price_cache(self, domain_extend=None, dates=None, eids=None):
         domain_extend = domain_extend or []
         product_model = self.env["product.product"]
         products = product_model.get_price_cache_products(domain_extend=domain_extend)
-        desc = _("Update products prices for pricelist %s.") % self._get_names()
         dates = {k: list(dates[k]) for k in dates} if dates else None
-        products.with_delay(description=desc).update_price_cache(
-            self, dates=dates, eids=eids
-        )
+        for product in products:
+            product.delay_update_price_cache(pricelists=self, dates=dates, eids=eids)
 
     def remove_price_cache(self):
         products = self.env["product.product"].get_price_cache_products()
@@ -37,7 +45,7 @@ class ProductPricelist(models.Model):
         # to batch everything in one step.
         superself = super(ProductPricelist, self.with_context(no_update_cache=True))
         res = superself.create(vals)
-        res.update_price_cache()
+        res.delay_update_price_cache()
         return res
 
     def write(self, vals):
@@ -45,7 +53,7 @@ class ProductPricelist(models.Model):
         # can still be on partners, so we need their prices.
         # TOIMP: we could be more precise and ignore fields like country_ids, etc
         res = super(ProductPricelist, self).write(vals)
-        self.update_price_cache()
+        self.delay_update_price_cache()
         return res
 
     def unlink(self):
