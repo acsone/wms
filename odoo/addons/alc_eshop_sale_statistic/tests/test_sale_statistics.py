@@ -154,7 +154,7 @@ class TestSaleStatisticsMonthly(TestSaleStatistics):
     @freeze_time("2022-02-22 00:00:00")
     def test_five_years(self):
         expected_data = [
-            {"food": 0, "equipment": 0, "meds": 0},
+            {"food": 14, "equipment": 0, "meds": 0},
             {"food": 0, "equipment": 0, "meds": 0},
             {"food": 165, "equipment": 0, "meds": 0},
             {"food": 284, "equipment": 0, "meds": 569},

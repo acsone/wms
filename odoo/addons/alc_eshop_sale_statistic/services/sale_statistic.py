@@ -87,9 +87,9 @@ class SaleStatsService(Component):
         years = {year: {family[3:]: 0 for family in families} for year in year_range}
         for row in self.env.cr.dictfetchall():
             year = row["order_year"]
-            for family in families:
-                if row[family]:
-                    years[year][family[3:]] = years[year][family[3:]] + row["total"]
+            family = next((family for family in families if row[family]), None)
+            if family and year in years:
+                years[year][family[3:]] = years[year][family[3:]] + row["total"]
         # round everything
         data = [years[k] for k in year_range]
         for year in data:
