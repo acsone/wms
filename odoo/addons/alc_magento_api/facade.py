@@ -166,6 +166,7 @@ class FacadeProduct(Facade):
             record_id = record.pop("objectID")
             record_json = json_by_id[record_id]
             categories = record.get("categories", [])
+            record_json["Article_NL"] = record["name"]
             record_json["Categorie_NL"] = self._get_cache_category(categories)
             urls[record_id]["nl_BE"] = record["url_key"]
         for record in translations["fr_BE"]:
