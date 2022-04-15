@@ -238,6 +238,8 @@ IMAGE_MAME_BY_PRODUCT_TMPL_ID = {}
 def main(env, root, filename, delimiter=";"):
     global ENV  # pylint: disable=global-statement
     ENV = env
+    # ensure hierarchy is right
+    env["product.category"].search([])._parent_store_compute()
     load_species_ids(SPECIES_IDS)
     load_option_ids(root, OPTIONS_IDS)
     load_attribute_set_category_mapping(ATTRIBUTE_SET_CATEGORY_MAPPING)
