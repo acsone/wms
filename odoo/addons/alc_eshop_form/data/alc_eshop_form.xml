@@ -3,10 +3,979 @@
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo noupdate="1">
 
-    <!-- TODO
-    <record model="alc.eshop.form" id="alc_eshop_form_demo_1">
-       <field name="name">...</field>
-    </record>
-    -->
 
+    <record model="alc.eshop.form" id="alc_eshop_form_public_contact">
+        <field name="name">Contact</field>
+        <field name="sequence" eval="1" />
+        <field name="audience">public_only</field>
+        <field name="email">info@alcyonbelux.be</field>
+        <field name="email_subject">Demande d'information</field>
+        <field name="published" eval="1" />
+        <field name="form">{
+  "display": "form",
+  "components": [{
+    "label": "reason",
+    "widget": "html5",
+    "tableView": false,
+    "data": {
+      "values": [{
+        "label": "reason_sales_delegate_visit",
+        "value": "Request visit of representative"
+      },{
+        "label": "reason_get_login",
+        "value": "Get a login and password"
+      },{
+        "label": "reason_drugs_infos",
+        "value": "Ask for information on drugs"
+      },{
+        "label": "reason_food_infos",
+        "value": "Ask for information on food"
+      },{
+        "label": "reason_medical_infos",
+        "value": "Ask for information on medical material"
+      },{
+        "label": "reason_software",
+        "value": "Ask for information on office software"
+      },{
+        "label": "reason_other",
+        "value": "Other"
+      }]
+    },
+    "searchEnabled": false,
+    "validate": { "required": true },
+    "key": "reason",
+    "type": "select",
+    "input": true
+  },{
+    "label": "customer_type",
+    "widget": "html5",
+    "tableView": false,
+    "data": {
+      "values": [{
+        "label": "customer_type_veterinary",
+        "value": "veterinary"
+      },{
+        "label": "customer_type_asv",
+        "value": "ASV"
+      },{
+        "label": "customer_type_pharmacist",
+        "value": "pharmacist"
+      },{
+        "label": "customer_type_wholesaler",
+        "value": "wholesaler"
+      },{
+        "label": "customer_type_supplier",
+        "value": "supplier"
+      },{
+        "label": "customer_type_other",
+        "value": "other"
+      }]
+    },
+    "searchEnabled": false,
+    "validate": { "required": true },
+    "key": "customer_type",
+    "type": "select",
+    "input": true
+  },{
+    "label": "firstname",
+    "tableView": true,
+    "validate": { "required": true },
+    "key": "firstname",
+    "type": "textfield",
+    "input": true
+  },{
+    "label": "lastname",
+    "tableView": true,
+    "validate": { "required": true },
+    "key": "lastname",
+    "type": "textfield",
+    "input": true
+  },{
+    "label": "city",
+    "tableView": true,
+    "validate": { "required": true },
+    "key": "city",
+    "type": "textfield",
+    "input": true
+  },{
+    "label": "phone",
+    "description": "phone_example",
+    "tableView": true,
+    "validate": { "required": true },
+    "key": "phone",
+    "type": "textfield",
+    "input": true
+  },{
+    "label": "mobile",
+    "description": "mobile_example",
+    "tableView": true,
+    "key": "mobile",
+    "type": "textfield",
+    "input": true
+  },{
+    "label": "fax",
+    "description": "fax_example",
+    "tableView": true,
+    "key": "fax",
+    "type": "textfield",
+    "input": true
+  },{
+    "label": "email",
+    "tableView": true,
+    "validate": { "required": true },
+    "key": "email",
+    "type": "email",
+    "input": true
+  },{
+    "label": "comment",
+    "autoExpand": false,
+    "tableView": true,
+    "validate": { "required": true },
+    "key": "comment",
+    "type": "textarea",
+    "input": true
+  },{
+    "type": "button",
+    "label": "Submit",
+    "key": "submit",
+    "disableOnInvalid": true,
+    "input": true,
+    "tableView": false
+  }]
+}
+        </field>
+        <field name="form_options">{
+  "i18n": {
+    "fr": {
+      "reason": "Raison de contact",
+      "reason_sales_delegate_visit": "Visite du délégué de ma région",
+      "reason_get_login": "Obtenir un login et un mot de passe",
+      "reason_drugs_infos": "Informations sur les médicaments",
+      "reason_food_infos": "Informations sur les aliments",
+      "reason_medical_infos": "Informations sur le matériel médical",
+      "reason_software": "Logiciel de gestion de cabinet",
+      "reason_other": "Autre",
+      "customer_type": "Type de client",
+      "customer_type_veterinary": "Vétérinaire",
+      "customer_type_asv": "ASV",
+      "customer_type_pharmacist": "Pharmacien",
+      "customer_type_wholesaler": "Grossiste",
+      "customer_type_supplier": "Fournisseur",
+      "customer_type_other": "Autre",
+      "firstname": "Prénom",
+      "lastname": "Nom",
+      "city": "Localité",
+      "phone": "Téléphone",
+      "phone_example": "Exemple : 071/81.81.81 ou 0477 44 55 66",
+      "mobile": "GSM",
+      "mobile_example": "Exemple : 0477 44 55 66",
+      "fax": "Fax",
+      "fax_example": "Exemple : 071/81.81.81",
+      "email": "Email",
+      "comment": "Commentaire/Question",
+      "Submit": "Envoyer",
+      "required": "Ce champ est obligatoire.",
+      "invalid_email": "Email invalide"
+    },
+    "nl": {
+      "reason": "Reden voor",
+      "reason_sales_delegate_visit": "Bezoek van de afgevaardigde van mijn regio",
+      "reason_get_login": "Obtenir un login et un mot de passe",
+      "reason_drugs_infos": "Informatie over de geneesmiddelen",
+      "reason_food_infos": "Informatie over de voedingsmiddelen",
+      "reason_medical_infos": "Informatie over het materiaal",
+      "reason_software": "Software voor praktijkbeheer",
+      "reason_other": "Andere",
+      "customer_type": "Soort klant",
+      "customer_type_veterinary": "Dierenarts",
+      "customer_type_asv": "Dierenartsassistent",
+      "customer_type_pharmacist": "Apotheker",
+      "customer_type_wholesaler": "Groothandelaar",
+      "customer_type_supplier": "Leverancier",
+      "customer_type_other": "Andere",
+      "firstname": "Voornaam",
+      "lastname": "Naam",
+      "city": "Gemeente",
+      "phone": "Tel.",
+      "phone_example": "Voorbeeld: 071/81.81.81 of 0477 44 55 66",
+      "mobile": "Gsm",
+      "mobile_example": "Voorbeeld: 0477 44 55 66",
+      "fax": "Fax",
+      "fax_example": "Voorbeeld: 071/81.81.81",
+      "email": "E-mail",
+      "comment": "Opmerking/Vraag",
+      "Submit": "Bevestig",
+      "required": "Dit veld is verplicht.",
+      "invalid_email": "Ongeldig e-mail"
+    },
+    "en": {
+      "reason": "Reason for contact",
+      "reason_sales_delegate_visit": "Visit by my representative",
+      "reason_get_login": "Get a login and password",
+      "reason_drugs_infos": "Information about drugs",
+      "reason_food_infos": "Information about food",
+      "reason_medical_infos": "Information about medical material",
+      "reason_software": "Ask for information on office software",
+      "reason_other": "Other",
+      "customer_type": "Type of customer",
+      "customer_type_veterinary": "veterinary",
+      "customer_type_asv": "ASV",
+      "customer_type_pharmacist": "Pharmacist",
+      "customer_type_wholesaler": "wholesaler",
+      "customer_type_supplier": "supplier",
+      "customer_type_other": "other",
+      "firstname": "Firstname",
+      "lastname": "Lastname",
+      "city": "City",
+      "phone": "Phone",
+      "phone_example": "Example: 071/81.81.81 or 0477 44 55 66",
+      "mobile": "Mobile",
+      "mobile_example": "Example: 0477 44 55 66",
+      "fax": "Fax",
+      "fax_example": "Example: 071/81.81.81",
+      "email": "Email",
+      "comment": "Comment/Question",
+      "Submit": "Submit",
+      "required": "This field is mandatory.",
+      "invalid_email": "Invalid email"
+    }
+  }
+}
+        </field>
+    </record>
+    <record model="alc.eshop.form" id="alc_eshop_form_public_registration">
+        <field name="name">Registration</field>
+        <field name="sequence" eval="2" />
+        <field name="audience">public_only</field>
+        <field name="email">info@alcyonbelux.be</field>
+        <field name="email_subject">Demande d'inscription</field>
+        <field name="published" eval="1" />
+        <field name="form">	{
+  "display": "form",
+  "components": [{
+    "label": "title",
+    "optionsLabelPosition": "right",
+    "inline": false,
+    "tableView": false,
+    "values": [{
+      "label": "title_mrs",
+      "value": "Mrs",
+      "shortcut": ""
+    },{
+      "label": "title_mr",
+      "value": "Mr",
+      "shortcut": ""
+    },{
+      "label": "title_miss",
+      "value": "Miss",
+      "shortcut": ""
+    },{
+      "label": "title_dr",
+      "value": "Dr",
+      "shortcut": ""
+    }],
+    "key": "title",
+    "type": "radio",
+    "input": true
+  },{
+    "label": "firstname",
+    "tableView": true,
+    "validate": { "required": true },
+    "key": "firstname",
+    "type": "textfield",
+    "input": true
+  },{
+    "label": "lastname",
+    "tableView": true,
+    "validate": { "required": true },
+    "key": "lastname",
+    "type": "textfield",
+    "input": true
+  },{
+    "label": "function",
+    "widget": "html5",
+    "tableView": false,
+    "data": {
+      "values": [{
+        "label": "function_veterinary",
+        "value": "veterinary"
+      },{
+        "label": "function_nurse",
+        "value": "nurse"
+      },{
+        "label": "function_pharmacist",
+        "value": "pharmacist"
+      },{
+        "label": "function_wholesaler",
+        "value": "wholesaler"
+      },{
+        "label": "function_supplier",
+        "value": "supplier"
+      },{
+        "label": "function_student",
+        "value": "student"
+      }]
+    },
+    "searchEnabled": false,
+    "validate": { "required": true },
+    "key": "customer_type",
+    "type": "select",
+    "input": true
+  },{
+    "label": "company",
+    "tableView": true,
+    "validate": { "required": true },
+    "key": "company",
+    "type": "textfield",
+    "input": true
+  },{
+    "label": "address",
+    "tableView": true,
+    "validate": { "required": true },
+    "key": "address",
+    "type": "textfield",
+    "input": true
+  },{
+    "label": "zip",
+    "tableView": true,
+    "validate": { "required": true },
+    "key": "zip",
+    "type": "textfield",
+    "input": true
+  },{
+    "label": "city",
+    "tableView": true,
+    "validate": { "required": true },
+    "key": "city",
+    "type": "textfield",
+    "input": true
+  },{
+    "label": "country",
+    "tableView": true,
+    "validate": { "required": true },
+    "key": "country",
+    "type": "textfield",
+    "input": true
+  },{
+    "label": "phone",
+    "description": "phone_example",
+    "tableView": true,
+    "validate": { "required": true },
+    "key": "phone",
+    "type": "textfield",
+    "input": true
+  },{
+    "label": "mobile",
+    "description": "mobile_example",
+    "tableView": true,
+    "key": "mobile",
+    "type": "textfield",
+    "input": true
+  },{
+    "label": "fax",
+    "description": "fax_example",
+    "tableView": true,
+    "key": "fax",
+    "type": "textfield",
+    "input": true
+  },{
+    "label": "email",
+    "tableView": true,
+    "validate": { "required": true },
+    "key": "email",
+    "type": "email",
+    "input": true
+  },{
+    "label": "vat_apply",
+    "optionsLabelPosition": "right",
+    "inline": false,
+    "tableView": false,
+    "values": [{
+      "label": "vat_apply_yes",
+      "value": "yes",
+      "shortcut": ""
+    },{
+      "label": "vat_apply_no",
+      "value": "no",
+      "shortcut": ""
+    }],
+    "validate": { "required": true },
+    "key": "vat_apply",
+    "type": "radio",
+    "input": true
+  },{
+    "label": "vat",
+    "description": "vat_example",
+    "tableView": true,
+    "validate": { "required": true },
+    "key": "vat",
+    "type": "textfield",
+    "input": true
+  },{
+    "label": "activities",
+    "optionsLabelPosition": "right",
+    "tableView": false,
+    "values": [{
+      "label": "activities_pets",
+      "value": "pets",
+      "shortcut": ""
+    },{
+      "label": "activities_livestock",
+      "value": "livestock",
+      "shortcut": ""
+    },{
+      "label": "activities_equine",
+      "value": "equine",
+      "shortcut": ""
+    },{
+      "label": "activities_nac",
+      "value": "nac",
+      "shortcut": ""
+    }],
+    "validate": { "required": true },
+    "key": "activities",
+    "type": "selectboxes",
+    "input": true,
+    "inputType": "checkbox"
+  },{
+    "label": "comment",
+    "autoExpand": false,
+    "tableView": true,
+    "validate": { "required": true },
+    "key": "comment",
+    "type": "textarea",
+    "input": true
+  },{
+    "label": "accept_terms",
+    "tableView": false,
+    "validate": { "required": true },
+    "key": "accept_terms",
+    "type": "checkbox",
+    "input": true,
+    "defaultValue": false
+  },{
+    "label": "accept_marketing",
+    "tableView": false,
+    "key": "accept_marketing",
+    "type": "checkbox",
+    "input": true,
+    "defaultValue": false
+  },{
+    "type": "button",
+    "label": "Submit",
+    "key": "submit",
+    "disableOnInvalid": true,
+    "input": true,
+    "tableView": false
+  }]
+}</field>
+        <field name="form_options">	{
+  "i18n": {
+    "fr": {
+      "title": "Titre",
+      "title_mrs": "Madame",
+      "title_mr": "Monsieur",
+      "title_miss": "Mademoiselle",
+      "title_dr": "Docteur",
+      "firstname": "Prénom",
+      "lastname": "Nom",
+      "function": "Métier",
+      "function_veterinary": "Vétérinaire",
+      "function_nurse": "ASV",
+      "function_pharmacist": "Pharmacien",
+      "function_wholesaler": "Grossiste",
+      "function_supplier": "Fournisseur",
+      "function_student": "Etudiant",
+      "company": "Société",
+      "address": "Adresse",
+      "zip": "Code postal",
+      "city": "Localité",
+      "country": "Pays",
+      "phone": "Téléphone",
+      "phone_example": "Exemple : 071/81.81.81 ou 0477 44 55 66",
+      "mobile": "GSM",
+      "mobile_example": "Exemple : 0477 44 55 66",
+      "fax": "Fax",
+      "fax_example": "Exemple : 071/81.81.81",
+      "email": "Email",
+      "vat_apply": "TVA en cours d'immatriculation",
+      "vat_apply_yes": "Oui",
+      "vat_apply_no": "Non",
+      "vat": "TVA",
+      "vat_example": "Exemple : BE0250.624.702. Si vous n’avez pas de numéro de TVA, merci de compléter le champ avec: 'BE0000.000.000'.",
+      "activities": "Type de clientèle",
+      "activities_pets": "Animaux de compagnie",
+      "activities_livestock": "Animaux de rente",
+      "activities_equine": "Equine",
+      "activities_nac": "NAC",
+      "accept_terms": "J'accepte qu'Alcyon Belux conserve et traite mes données personnelles.",
+      "accept_marketing": "J’accepte qu’on me tienne au courant des promotions et des services offerts par Alcyon.",
+      "comment": "Commentaire/Question",
+      "Submit": "Envoyer",
+      "required": "Ce champ est obligatoire.",
+      "invalid_email": "Email invalide"
+    },
+    "nl": {
+      "title": "Title",
+      "title_mrs": "Mevrouw",
+      "title_mr": "Mijnheer",
+      "title_miss": "Mejuffrouw",
+      "title_dr": "Dr",
+      "firstname": "Voornaam",
+      "lastname": "Naam",
+      "function": "Functie",
+      "function_veterinary": "Dierenarts",
+      "function_nurse": "Dierenartsassistent",
+      "function_pharmacist": "Apotheker",
+      "function_wholesaler": "Groothandelaar",
+      "function_supplier": "Leverancier",
+      "function_student": "Student",
+      "company": "Bedrijf",
+      "address": "Adres",
+      "zip": "Postcode",
+      "city": "Gemeente",
+      "country": "Land",
+      "phone": "Tel.",
+      "phone_example": "Voorbeeld: 071/81.81.81 of 0477 44 55 66",
+      "mobile": "Gsm",
+      "mobile_example": "Voorbeeld: 0477 44 55 66",
+      "fax": "Fax",
+      "fax_example": "Voorbeeld: 071/81.81.81",
+      "email": "E-mail",
+      "vat_apply": "Btw nummer in aanvraag",
+      "vat_apply_yes": "Ja",
+      "vat_apply_no": "Nee",
+      "vat": "Btw-nummer",
+      "vat_example": "Voorbeeld: BE0250.624.702. Als u geen BTW nummer hebt, gelieve het veld in te vullen met: 'BE000.000.000'.",
+      "activities": "Type klanten",
+      "activities_pets": "Kleine huisdieren",
+      "activities_livestock": "Grote huisdieren",
+      "activities_equine": "Paard",
+      "activities_nac": "Knaagdieren en reptielen",
+      "accept_terms": "Ik geef mijn toestemming aan Alcyon om mijn persoonlijke gegevens te bewaren en te verwerken.",
+      "accept_marketing": "Ik geef mijn toestemming om mij op de hoogte te houden van de promoties en diensten van Alcyon.",
+      "comment": "Opmerking/Vraag",
+      "Submit": "Bevestig",
+      "required": "Dit veld is verplicht.",
+      "invalid_email": "Ongeldig e-mail"
+    },
+    "en": {
+      "title": "Title",
+      "title_mrs": "Mrs",
+      "title_mr": "Mr",
+      "title_miss": "Miss",
+      "title_dr": "Dr",
+      "firstname": "Firstname",
+      "lastname": "Lastname",
+      "function": "Fonction",
+      "function_veterinary": "Veterinary",
+      "function_nurse": "Nurse",
+      "function_pharmacist": "Pharmacist",
+      "function_wholesaler": "Wholesaler",
+      "function_supplier": "Supplier",
+      "function_student": "Student",
+      "company": "Company",
+      "address": "Address",
+      "zip": "Zip",
+      "city": "City",
+      "country": "Country",
+      "phone": "Phone",
+      "phone_example": "Example: 071/81.81.81 or 0477 44 55 66",
+      "mobile": "Mobile",
+      "mobile_example": "Example: 0477 44 55 66",
+      "fax": "Fax",
+      "fax_example": "Example: 071/81.81.81",
+      "email": "Email",
+      "vat_apply": "VAT under registration",
+      "vat_apply_yes": "Yes",
+      "vat_apply_no": "No",
+      "vat": "VAT no.",
+      "vat_example": "Example: BE0250.624.702. In case you don't have a VAT number, please fill in the field with : 'B0000.000.000'.",
+      "activities": "Activities",
+      "activities_pets": "Pets",
+      "activities_livestock": "Livestock",
+      "activities_equine": "Equine",
+      "activities_nac": "Rodents and reptiles",
+      "accept_terms": "I agree that Alcyon Belux can store and process my personal data.",
+      "accept_marketing": "I agree to be kept informed of promotions and services offered by Alcyon.",
+      "comment": "Comment/Question",
+      "Submit": "Submit",
+      "required": "This field is mandatory.",
+      "invalid_email": "Invalid email"
+    }
+  }
+}</field>
+    </record>
+    <record model="alc.eshop.form" id="alc_eshop_form_authenticated_contact">
+        <field name="name">Contact</field>
+        <field name="sequence" eval="3" />
+        <field name="audience">authenticated_only</field>
+        <field name="email">info@alcyonbelux.be</field>
+        <field name="email_subject">Demande de renseignement d'un client</field>
+        <field name="published" eval="1" />
+        <field name="form">	{
+  "display": "form",
+  "components": [{
+    "label": "reason",
+    "widget": "html5",
+    "tableView": false,
+    "data": {
+      "values": [{
+        "label": "reason_sales_delegate_visit",
+        "value": "Request visit of representative"
+      },{
+        "label": "reason_drugs_infos",
+        "value": "Ask for information on drugs"
+      },{
+        "label": "reason_food_infos",
+        "value": "Ask for information on food"
+      },{
+        "label": "reason_medical_infos",
+        "value": "Ask for information on medical material"
+      },{
+        "label": "reason_software",
+        "value": "Ask for information on office software"
+      },{
+        "label": "reason_other",
+        "value": "Other"
+      }]
+    },
+    "searchEnabled": false,
+    "validate": { "required": true },
+    "key": "sav_type",
+    "type": "select",
+    "input": true
+  },{
+    "label": "comment",
+    "autoExpand": false,
+    "tableView": true,
+    "validate": { "required": true },
+    "key": "comment",
+    "type": "textarea",
+    "input": true
+  },{
+    "type": "button",
+    "label": "Submit",
+    "key": "submit",
+    "disableOnInvalid": true,
+    "input": true,
+    "tableView": false
+  }]
+}</field>
+        <field name="form_options">	{
+  "i18n": {
+    "fr": {
+      "reason": "Raison de contact",
+      "reason_sales_delegate_visit": "Visite du délégué de ma région",
+      "reason_drugs_infos": "Informations sur les médicaments",
+      "reason_food_infos": "Informations sur les aliments",
+      "reason_medical_infos": "Informations sur le matériel médical",
+      "reason_software": "Logiciel de gestion de cabinet",
+      "reason_other": "Autre",
+      "comment": "Commentaire/Question",
+      "Submit": "Envoyer",
+      "required": "Ce champ est obligatoire."
+    },
+    "nl": {
+      "reason": "Reden voor",
+      "reason_sales_delegate_visit": "Bezoek van de afgevaardigde van mijn regio",
+      "reason_drugs_infos": "Informatie over de geneesmiddelen",
+      "reason_food_infos": "Informatie over de voedingsmiddelen",
+      "reason_medical_infos": "Informatie over het materiaal",
+      "reason_software": "Software voor praktijkbeheer",
+      "reason_other": "Andere",
+      "comment": "Opmerking/Vraag",
+      "Submit": "Bevestig",
+      "required": "Dit veld is verplicht."
+    },
+    "en": {
+      "reason": "Reason for contact",
+      "reason_sales_delegate_visit": "Visit by my representative",
+      "reason_drugs_infos": "Information about drugs",
+      "reason_food_infos": "Information about food",
+      "reason_medical_infos": "Information about medical material",
+      "reason_software": "Ask for information on office software",
+      "reason_other": "Other",
+      "comment": "Comment/Question",
+      "Submit": "Submit",
+      "required": "This field is mandatory."
+    }
+  }
+}</field>
+    </record>
+    <record model="alc.eshop.form" id="alc_eshop_form_authenticated_sav">
+        <field name="name">After-sales service</field>
+        <field name="sequence" eval="4" />
+        <field name="audience">authenticated_only</field>
+        <field name="email">info@alcyonbelux.be</field>
+        <field name="email_subject">Service après-vente</field>
+        <field name="published" eval="1" />
+        <field name="form">	{
+  "display": "form",
+  "components": [{
+    "label": "sav_type",
+    "widget": "html5",
+    "tableView": false,
+    "data": {
+      "values": [{
+        "label": "sav_type_repair",
+        "value": "repair"
+      },{
+        "label": "sav_type_maintenance",
+        "value": "maintenance"
+      },{
+        "label": "sav_type_info",
+        "value": "info"
+      }]
+    },
+    "searchEnabled": false,
+    "validate": { "required": true },
+    "key": "sav_type",
+    "type": "select",
+    "input": true
+  },{
+    "label": "comment",
+    "autoExpand": false,
+    "tableView": true,
+    "validate": { "required": true },
+    "key": "comment",
+    "type": "textarea",
+    "input": true
+  },{
+    "type": "button",
+    "label": "Submit",
+    "key": "submit",
+    "disableOnInvalid": true,
+    "input": true,
+    "tableView": false
+  }]
+}</field>
+        <field name="form_options">{
+  "i18n": {
+    "fr": {
+      "sav_type": "Raison de contact",
+      "sav_type_repair": "Réparation",
+      "sav_type_maintenance": "Maintenance",
+      "sav_type_info": "Renseignements généraux",
+      "comment": "Commentaire/Question",
+      "Submit": "Envoyer",
+      "required": "Ce champ est obligatoire."
+    },
+    "nl": {
+      "sav_type": "Reason for contact",
+      "sav_type_repair": "Reparatie",
+      "sav_type_maintenance": "Onderhoud",
+      "sav_type_info": "Algemene reparatie",
+      "comment": "Opmerking/Vraag",
+      "Submit": "Bevestig",
+      "required": "Dit veld is verplicht."
+    },
+    "en": {
+      "sav_type": "Reason for contact",
+      "sav_type_repair": "Repair",
+      "sav_type_maintenance": "Maintenance",
+      "sav_type_info": "General information",
+      "comment": "Comment/Question",
+      "Submit": "Submit",
+      "required": "This field is mandatory."
+    }
+  }
+}</field>
+    </record>
+    <record model="alc.eshop.form" id="alc_eshop_form_authenticated_rma">
+        <field name="name">Return products</field>
+        <field name="sequence" eval="5" />
+        <field name="audience">authenticated_only</field>
+        <field name="email">info@alcyonbelux.be</field>
+        <field name="email_subject">Demande de retour produit</field>
+        <field name="published" eval="1" />
+        <field name="form">{
+  "display": "form",
+  "components": [{
+    "label": "comment",
+    "autoExpand": false,
+    "tableView": true,
+    "validate": { "required": true },
+    "key": "comment",
+    "type": "textarea",
+    "input": true
+  },{
+    "type": "button",
+    "label": "Submit",
+    "key": "submit",
+    "disableOnInvalid": true,
+    "input": true,
+    "tableView": false
+  }]
+}</field>
+        <field name="form_options">	{
+  "i18n": {
+    "fr": {
+      "comment": "Commentaire/Question",
+      "Submit": "Envoyer",
+      "required": "Ce champ est obligatoire."
+    },
+    "nl": {
+      "comment": "Opmerking/Vraag",
+      "Submit": "Bevestig",
+      "required": "Dit veld is verplicht."
+    },
+    "en": {
+      "comment": "Comment/Question",
+      "Submit": "Submit",
+      "required": "This field is mandatory."
+    }
+  }
+}</field>
+    </record>
+    <record model="alc.eshop.form" id="alc_eshop_form_authenticated_pvi_labels">
+        <field name="name">Request for PVI on label</field>
+        <field name="sequence" eval="6" />
+        <field name="audience">authenticated_only</field>
+        <field name="email">info@alcyonbelux.be</field>
+        <field name="email_subject">Demande d'impression étiquette PVI</field>
+        <field name="published" eval="1" />
+        <field name="form">{
+  "display": "form",
+  "components": [{
+    "label": "confirm",
+    "tableView": false,
+    "validate": { "required": true },
+    "key": "confirm",
+    "type": "checkbox",
+    "input": true,
+    "defaultValue": false
+  },{
+    "type": "button",
+    "label": "Submit",
+    "key": "submit",
+    "disableOnInvalid": true,
+    "input": true,
+    "tableView": false
+  }]
+}</field>
+        <field name="form_options">{
+  "i18n": {
+    "fr": {
+      "confirm": "par le présent formulaire, je demande à ALCYON d'imprimer sur les étiquettes code-barres ALCYON un prix de vente indicatif TVAC calculé selon le tarif proposé par le fabricant (Aliments,...) ou, à défaut d'indications de celui-ci, en utilisant le coefficient de 1,45 + TVA par rapport au prix d'achat du tarif fabricant.",
+      "Submit": "Envoyer",
+      "required": "Ce champ est obligatoire."
+    },
+    "nl": {
+      "confirm": "hierbij vraag ik aan ALCYON om op de barcode etiketten een indicatieve verkoopprijs incl. BTW te vermelden, die berekend wordt volgens het door de fabrikant voorgestelde tarief, of, bij gebreke daarvan, door toepassing van de coëfficiënt 1,45 + BTW ten opzichte van de aankoopprijs",
+      "Submit": "Bevestig",
+      "required": "Dit veld is verplicht."
+    },
+    "en": {
+      "confirm": "by this request, I ask to ALCYON to print an informational selling price inc. VAT on the labels of my products. This price should correspond to the selling price proposed by the producer, and otherwise by applying a coefficient of 1,45 (+VAT) on the general selling price of the producer.",
+      "Submit": "Submit",
+      "required": "This field is mandatory."
+    }
+  }
+}
+</field>
+    </record>
+    <record model="alc.eshop.form" id="alc_eshop_form_authenticated_update_address">
+        <field name="name">Change my contact information</field>
+        <field name="sequence" eval="7" />
+        <field name="audience">authenticated_only</field>
+        <field name="email">info@alcyonbelux.be</field>
+        <field name="email_subject">Demande de modification des coordonnées</field>
+        <field name="published" eval="1" />
+        <field name="form">{
+  "display": "form",
+  "components": [{
+    "label": "which_info",
+    "autoExpand": false,
+    "tableView": true,
+    "validate": { "required": true },
+    "key": "comment",
+    "type": "textarea",
+    "input": true
+  },{
+    "type": "button",
+    "label": "Submit",
+    "key": "submit",
+    "disableOnInvalid": true,
+    "input": true,
+    "tableView": false
+  }]
+}</field>
+        <field name="form_options">	{
+  "i18n": {
+    "fr": {
+      "which_info": "Quelle information devons-nous modifier et/ou supprimer ?",
+      "Submit": "Envoyer",
+      "required": "Ce champ est obligatoire."
+    },
+    "nl": {
+      "which_info": "Welke informatie moeten we wijzigen en/of verwijderen?",
+      "Submit": "Bevestig",
+      "required": "Dit veld is verplicht."
+    },
+    "en": {
+      "which_info": "Which information do we have to change and/or to cancel?",
+      "Submit": "Submit",
+      "required": "This field is mandatory."
+    }
+  }
+}</field>
+    </record>
+    <record model="alc.eshop.form" id="alc_eshop_form_authenticated_opinion">
+        <field name="name">Opinion on the website</field>
+        <field name="sequence" eval="8" />
+        <field name="audience">authenticated_only</field>
+        <field name="email">info@alcyonbelux.be</field>
+        <field name="email_subject">Avis sur le site web</field>
+        <field name="published" eval="1" />
+        <field name="form">	{
+  "display": "form",
+  "components": [{
+    "html": "intro",
+    "label": "intro",
+    "refreshOnChange": false,
+    "key": "intro",
+    "type": "content",
+    "input": false,
+    "tableView": false
+  },{
+    "label": "comment",
+    "autoExpand": false,
+    "tableView": true,
+    "validate": { "required": true },
+    "key": "comment",
+    "type": "textarea",
+    "input": true
+  },{
+    "type": "button",
+    "label": "Submit",
+    "key": "submit",
+    "disableOnInvalid": true,
+    "input": true,
+    "tableView": false
+  }]
+}</field>
+        <field name="form_options">{
+  "i18n": {
+    "fr": {
+      "intro": "Via ce formulaire, vous pouvez nous faire remonter toutes vos remarques concernant le site.",
+      "comment": "Commentaire/Question",
+      "Submit": "Envoyer",
+      "required": "Ce champ est obligatoire."
+    },
+    "nl": {
+      "intro": "Via dit formulier kunt u ons uw opmerkingen over de website communiceren.",
+      "comment": "Opmerking/Vraag",
+      "Submit": "Bevestig",
+      "required": "Dit veld is verplicht."
+    },
+    "en": {
+      "intro": "Via this form you can send us all your comments about the website.",
+      "comment": "Comment/Question",
+      "Submit": "Submit",
+      "required": "This field is mandatory."
+    }
+  }
+}</field>
+    </record>
 </odoo>
