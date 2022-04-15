@@ -107,7 +107,7 @@ class MagentoUserImporter(object):
         if csv_line.login not in logins:
             self.env["magento.user"].create(
                 {
-                    "username": csv_line.login,
+                    "username": csv_line.login.lower(),
                     "partner_id": partner_id,
                     "magento_id": csv_line.magento_id,
                 }
