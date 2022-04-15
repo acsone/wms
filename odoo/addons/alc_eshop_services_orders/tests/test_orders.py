@@ -7,5 +7,6 @@ from .common import TestOrders
 class TestOrdersFlow(TestOrders):
     def test_orders_flow(self):
         with self.orders_service() as service:
-            result = service.search(page=1, per_page=10)
+            params = {"page": 1, "per_page": 10}
+            result = service.dispatch("search", params=params)
             self.assertEqual(result["size"], 1)

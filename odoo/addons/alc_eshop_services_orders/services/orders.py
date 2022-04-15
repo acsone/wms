@@ -67,7 +67,12 @@ class OrdersService(Component):
             "customer_ref": {"type": "string", "required": False, "nullable": True},
             "state": {"type": "string", "required": True, "nullable": False},
             "amount_total": {"type": "float", "required": True, "nullable": False},
-            "date_order": {"type": "datetime", "required": True, "nullable": False},
+            "date_order": {
+                "type": "datetime",
+                "required": True,
+                "nullable": False,
+                "coerce": utils.isoformat_str_dt_to_dt_utc,
+            },
         }
 
     def _search_output_schema(self):
