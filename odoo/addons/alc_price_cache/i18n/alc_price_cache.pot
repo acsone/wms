@@ -41,19 +41,20 @@ msgid "Product Template"
 msgstr ""
 
 #. module: alc_price_cache
-#: code:addons/alc_price_cache/models/product_pricelist.py:30
+#: code:addons/alc_price_cache/models/product_pricelist.py:38
+#: code:addons/alc_price_cache/models/product_product.py:80
 #, python-format
 msgid "Remove products prices for pricelist %s."
 msgstr ""
 
 #. module: alc_price_cache
-#: code:addons/alc_price_cache/models/product_pricelist.py:21
+#: code:addons/alc_price_cache/models/product_pricelist.py:23
 #, python-format
 msgid "Update products prices for pricelist %s."
 msgstr ""
 
 #. module: alc_price_cache
-#: code:addons/alc_price_cache/models/product_product.py:92
+#: code:addons/alc_price_cache/models/product_product.py:98
 #, python-format
 msgid "Update products prices for product %s."
 msgstr ""
