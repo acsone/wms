@@ -14,6 +14,11 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_eshop_form
+#: model:alc.eshop.form,name:alc_eshop_form.alc_eshop_form_authenticated_pvi_labels
+msgid "Aanvraag van de aanbevolen verkoopprijs op de etiketten"
+msgstr ""
+
+#. module: alc_eshop_form
 #: model:ir.model.fields,field_description:alc_eshop_form.field_alc_eshop_form_audience
 msgid "Audience"
 msgstr ""
@@ -22,6 +27,12 @@ msgstr ""
 #: selection:alc.eshop.form,audience:0
 #: model:ir.ui.view,arch_db:alc_eshop_form.alc_eshop_form_search_view
 msgid "Authenticated"
+msgstr ""
+
+#. module: alc_eshop_form
+#: model:alc.eshop.form,name:alc_eshop_form.alc_eshop_form_authenticated_contact
+#: model:alc.eshop.form,name:alc_eshop_form.alc_eshop_form_public_contact
+msgid "Contact"
 msgstr ""
 
 #. module: alc_eshop_form
@@ -90,6 +101,11 @@ msgid "If checked, each time a partner submit a form, a comment will be added in
 msgstr ""
 
 #. module: alc_eshop_form
+#: model:alc.eshop.form,name:alc_eshop_form.alc_eshop_form_public_registration
+msgid "Inschrijving"
+msgstr ""
+
+#. module: alc_eshop_form
 #: model:ir.model.fields,field_description:alc_eshop_form.field_alc_eshop_form___last_update
 #: model:ir.model.fields,field_description:alc_eshop_form.field_report_report_alc_eshop_form_submission___last_update
 msgid "Last Modified on"
@@ -108,6 +124,16 @@ msgstr ""
 #. module: alc_eshop_form
 #: model:ir.model.fields,field_description:alc_eshop_form.field_alc_eshop_form_log_on_partner
 msgid "Log on partner"
+msgstr ""
+
+#. module: alc_eshop_form
+#: model:alc.eshop.form,name:alc_eshop_form.alc_eshop_form_authenticated_opinion
+msgid "Mening van de website"
+msgstr ""
+
+#. module: alc_eshop_form
+#: model:alc.eshop.form,name:alc_eshop_form.alc_eshop_form_authenticated_update_address
+msgid "Mijn gegevens aanpassen"
 msgstr ""
 
 #. module: alc_eshop_form
@@ -131,6 +157,16 @@ msgstr ""
 #. module: alc_eshop_form
 #: model:ir.ui.view,arch_db:alc_eshop_form.alc_eshop_form_search_view
 msgid "Published"
+msgstr ""
+
+#. module: alc_eshop_form
+#: model:alc.eshop.form,name:alc_eshop_form.alc_eshop_form_authenticated_rma
+msgid "Retour product"
+msgstr ""
+
+#. module: alc_eshop_form
+#: model:alc.eshop.form,name:alc_eshop_form.alc_eshop_form_authenticated_sav
+msgid "SAV materiaal"
 msgstr ""
 
 #. module: alc_eshop_form
