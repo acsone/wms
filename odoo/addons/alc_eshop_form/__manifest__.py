@@ -6,7 +6,7 @@
     "name": "Alc Eshop Form",
     "description": """
         Alcyon: Manage Forms on website""",
-    "version": "10.0.1.0.0",
+    "version": "10.0.1.0.1",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
@@ -18,4 +18,6 @@
         "data/alc_eshop_form.xml",
         "reports/report_alc_eshop_form_submission.xml",
     ],
+    "post_init_hook": "post_init_hook",
+    "external_dependencies": {"python": ["unicodecsv"]},
 }

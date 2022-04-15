@@ -20,6 +20,7 @@ class TestEShopForm(SavepointCase, ComponentMixin):
         cls.setUpComponent()
         cls.partner = cls.env["res.partner"].create({"name": "partner"})
         cls.EShopForm = cls.env["alc.eshop.form"]
+        cls.EShopForm.search([]).unlink()
         cls.form_authenticated = cls.EShopForm.create(
             {
                 "name": "test form authenticated",
