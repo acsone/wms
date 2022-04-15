@@ -7,6 +7,6 @@ from odoo import SUPERUSER_ID, api
 
 def post_init_hook(cr, registry):
     env = api.Environment(cr, SUPERUSER_ID, {})
-    pricelists = env["product.pricelist"].search([])
-    for pricelist in pricelists:
-        pricelist.update_price_cache()  # creates a job
+    products = env["product.product"].search([])
+    for product in products:
+        product.delay_update_price_cache()

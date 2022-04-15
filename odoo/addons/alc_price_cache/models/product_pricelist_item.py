@@ -47,7 +47,9 @@ class ProductPricelistItem(models.Model):
         dates = dates or {}
         dates_pl = pricelist.get_date_witnesses(items=self)
         dates[pricelist.role_name] = set(dates.get(pricelist, [])) | dates_pl
-        pricelist.update_price_cache(extended_domain, dates, eids=eids)
+        pricelist.delay_update_price_cache(
+            domain_extend=extended_domain, dates=dates, eids=eids
+        )
 
     @api.model
     def create(self, vals):
