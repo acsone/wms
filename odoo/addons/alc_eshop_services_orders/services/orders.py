@@ -66,6 +66,7 @@ class OrdersService(Component):
             "name": {"type": "string", "required": True, "nullable": False},
             "customer_ref": {"type": "string", "required": False, "nullable": True},
             "state": {"type": "string", "required": True, "nullable": False},
+            "state_label": {"type": "string", "required": True, "nullable": False},
             "amount_total": {"type": "float", "required": True, "nullable": False},
             "date_order": {
                 "type": "datetime",
@@ -112,6 +113,8 @@ class OrdersService(Component):
         return self._paginate_search_records(domain, records)
 
     def _get_parser(self):
+        field = self.model._fields["shopinvader_state"]
+        state_label = lambda r, fn: field.convert_to_export(r.shopinvader_state, r)
         return [
             "id",
             "name",
@@ -119,6 +122,7 @@ class OrdersService(Component):
             "amount_total",
             "state",
             "client_order_ref:customer_ref",
+            ("state_label", state_label),
         ]
 
     def _to_json(self, records):
