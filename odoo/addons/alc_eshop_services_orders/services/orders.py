@@ -66,7 +66,7 @@ class OrdersService(Component):
             "name": {"type": "string", "required": True, "nullable": False},
             "customer_ref": {"type": "string", "required": False, "nullable": True},
             "state": {"type": "string", "required": True, "nullable": False},
-            "state_label": {"type": "string", "required": True, "nullable": False},
+            "state_label": {"type": "string", "required": True, "nullable": True},
             "amount_total": {"type": "float", "required": True, "nullable": False},
             "date_order": {
                 "type": "datetime",
@@ -114,7 +114,9 @@ class OrdersService(Component):
 
     def _get_parser(self):
         field = self.model._fields["shopinvader_state"]
-        state_label = lambda r, fn: field.convert_to_export(r.shopinvader_state, r)
+        state_label = (
+            lambda r, fn: field.convert_to_export(r.shopinvader_state, r) or None
+        )
         return [
             "id",
             "name",
