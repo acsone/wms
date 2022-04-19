@@ -106,6 +106,7 @@ odoo10-addon-sale-wishlist @ git+https://github.com/acsone/sale-workflow.git@10.
 odoo10-addon-sale-shipping-info-helper @ git+https://github.com/acsone/sale-workflow.git@10.0-sale-shipping-info-help-init-hook#subdirectory=setup/sale_shipping_info_helper
 
 # acsone/odoo-shopinvader
+odoo10-addon-base-url @  git+https://github.com/acsone/odoo-shopinvader.git@10.0-backport-14.0#subdirectory=setup/base_url
 odoo10-addon-base-partition @  git+https://github.com/acsone/odoo-shopinvader.git@10.0-backport-14.0#subdirectory=setup/base_partition
 odoo10-addon-shopinvader @  git+https://github.com/acsone/odoo-shopinvader.git@10.0-backport-14.0#subdirectory=setup/shopinvader
 odoo10-addon-shopinvader-assortment @  git+https://github.com/acsone/odoo-shopinvader.git@10.0-backport-14.0#subdirectory=setup/shopinvader_assortment
