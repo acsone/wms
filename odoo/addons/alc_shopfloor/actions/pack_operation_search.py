@@ -35,6 +35,7 @@ class PackOperationSearch(Component):
         domain = [
             ("location_id", "child_of", locations.ids),
             ("qty_done", "=", 0),
+            ("product_qty", ">", 0),
             ("state", "in", ("assigned", "partially_available")),
         ]
         if picking_type:
@@ -98,13 +99,17 @@ class PackOperationSearch(Component):
                         line.mapped("linked_move_operation_ids.move_id.priority") or "0"
                     )
                 ),
-                min(line.mapped("linked_move_operation_ids.move_id.date_expected")),
+                min(
+                    line.mapped("linked_move_operation_ids.move_id.date_expected") or ""
+                ),
             )
         if order == "location":
             return lambda line: (
                 line.location_id.shopfloor_picking_sequence or "",
                 line.location_id.name,
-                min(line.mapped("linked_move_operation_ids.move_id.date_expected")),
+                min(
+                    line.mapped("linked_move_operation_ids.move_id.date_expected" or "")
+                ),
             )
         return lambda line: line
 
