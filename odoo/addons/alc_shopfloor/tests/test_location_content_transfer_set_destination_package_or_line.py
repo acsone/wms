@@ -554,6 +554,24 @@ class LocationContentTransferSetDestinationXCase(LocationContentTransferCommonCa
         self.assertEqual(operation_product_d.state, "done")
         self.assertEqual(original_picking.state, "done")
 
+    def test_set_destination_line_zero_quantity(self):
+        """Scanned destination with quantity set to 0."""
+        package_level = self.picking1.pack_operation_pack_ids[0]
+        response = self.service.dispatch(
+            "set_destination_line",
+            params={
+                "location_id": self.content_loc.id,
+                "operation_id": package_level.id,
+                "barcode": self.env.ref("stock.stock_location_14").barcode,
+                "quantity": 0,
+            },
+        )
+        self.assert_response_scan_destination(
+            response,
+            package_level,
+            message=self.service.msg_store.qty_must_be_greater_than_zero(),
+        )
+
 
 # pylint: disable=missing-return
 class LocationContentTransferSetDestinationXSpecialCase(
