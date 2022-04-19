@@ -123,7 +123,7 @@ odoo10-addon-base-technical-features @ git+https://github.com/acsone/server-tool
 odoo10-addon-base-technical-user==10.0.1.1.0
 odoo10-addon-base-ubl==10.0.1.1.0
 odoo10-addon-base-unece==10.0.1.0.0.99.dev2
-odoo10-addon-base-url @ git+https://github.com/acsone/odoo-shopinvader.git@6d0b2a13d3ec8efc027e382ddce9b410b89f76cc#subdirectory=setup/base_url
+odoo10-addon-base-url @ git+https://github.com/acsone/odoo-shopinvader.git@72e6e354127080c54f5e58b03d66252305c3f7e7#subdirectory=setup/base_url
 odoo10-addon-base-vat-sanitized==10.0.1.0.0.99.dev9
 odoo10-addon-bi-sql-editor==10.0.1.0.2
 odoo10-addon-component==10.0.1.1.1
