@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2022 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="product_category_form_view">
+        <field
+      name="name"
+    >product.category.form (in alc_product_category_sequence)</field>
+        <field name="model">product.category</field>
+        <field name="inherit_id" ref="product.product_category_form_view" />
+        <field name="arch" type="xml">
+            <field name="type" position="before">
+                <field name="sequence" />
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="product_category_tree_view">
+        <field
+      name="name"
+    >product.category.tree (in alc_product_category_sequence)</field>
+        <field name="model">product.category</field>
+        <field name="inherit_id" ref="product.product_category_list_view" />
+        <field name="arch" type="xml">
+            <field name="display_name" position="before">
+                <field name="sequence" widget="handle" />
+            </field>
+        </field>
+    </record>
+
+</odoo>
