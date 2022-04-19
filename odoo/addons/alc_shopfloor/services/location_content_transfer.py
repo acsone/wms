@@ -392,6 +392,12 @@ class LocationContentTransfer(Component):
         if not operation.exists():
             operations = self._find_operations(location)
             return self._response_for_start_single(operations.mapped("picking_id"))
+        if quantity <= 0:
+            return self._response_for_scan_destination(
+                location,
+                operation,
+                message=self.msg_store.qty_must_be_greater_than_zero(),
+            )
         search = self._actions_for("search")
         scanned_location = search.location_from_scan(barcode)
         if not scanned_location:
