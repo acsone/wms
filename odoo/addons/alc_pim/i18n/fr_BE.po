@@ -1129,6 +1129,11 @@ msgid "Colistine (polymyxine E)"
 msgstr ""
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_halsband_voor_uitwendig_gebruik
+msgid "Collier imprégné à usage cutané"
+msgstr ""
+
+#. module: alc_pim
 #: model:product.category,name:alc_pim.combin_ains_afdimvb
 msgid "Combinaison AINS"
 msgstr "Combinaison AINS"
@@ -1179,6 +1184,11 @@ msgstr "Comportement"
 #: model:product.category,name:alc_pim.compress_pansem_cons
 msgid "Compresses"
 msgstr "Compresses"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_tablet_tablet_per_oraal
+msgid "Comprimé/capsule per os"
+msgstr ""
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.cons
@@ -1550,11 +1560,6 @@ msgstr ""
 #: model:product.category,name:alc_pim.drainimpl_sonde_cons
 msgid "Drains - Implants"
 msgstr "Drains - Implants"
-
-#. module: alc_pim
-#: model:attribute.option,name:alc_pim.attribute_option_drinkbaar_vaccin
-msgid "Drinkbaar vaccin"
-msgstr ""
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.drog_rur
@@ -2051,11 +2056,6 @@ msgid "Garrots et Collecteurs d'aiguilles"
 msgstr "Garrots et Collecteurs d'aiguilles"
 
 #. module: alc_pim
-#: model:attribute.option,name:alc_pim.attribute_option_gemedicineerde_premix_per_os
-msgid "Gemedicineerde premix per os"
-msgstr ""
-
-#. module: alc_pim
 #: model:attribute.option,name:alc_pim.attribute_option_gentamicine
 msgid "Gentamicine"
 msgstr ""
@@ -2179,11 +2179,6 @@ msgid "Halofuginone"
 msgstr ""
 
 #. module: alc_pim
-#: model:attribute.option,name:alc_pim.attribute_option_halsband_voor_uitwendig_gebruik
-msgid "Halsband voor uitwendig gebruik"
-msgstr ""
-
-#. module: alc_pim
 #: model:attribute.option,name:alc_pim.attribute_option_heart
 msgid "Heart"
 msgstr ""
@@ -2198,11 +2193,6 @@ msgstr ""
 #: model:product.category,name:alc_pim.hills_chien
 msgid "Hill's"
 msgstr "Hill's"
-
-#. module: alc_pim
-#: model:attribute.option,name:alc_pim.attribute_option_hoeven
-msgid "Hoeven"
-msgstr ""
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.homeopathie_med_vt_bg
@@ -2419,11 +2409,6 @@ msgid "Inhibiteur de la sécrétion gastrique"
 msgstr "Inhibiteur de la sécrétion gastrique"
 
 #. module: alc_pim
-#: model:attribute.option,name:alc_pim.attribute_option_injecteerbare_suspensie
-msgid "Injecteerbare suspensie"
-msgstr ""
-
-#. module: alc_pim
 #: model:product.category,name:alc_pim.inj_cons
 #: model:product.category,name:alc_pim.inj_rur
 msgid "Injection"
@@ -2485,11 +2470,6 @@ msgid "Interleukine"
 msgstr "Référence interne"
 
 #. module: alc_pim
-#: model:attribute.option,name:alc_pim.attribute_option_intra_uterine_toediening
-msgid "Intra-uterine toediening"
-msgstr ""
-
-#. module: alc_pim
 #: model:product.category,name:alc_pim.intra_uter_uemvb
 msgid "Intra-utérin"
 msgstr "Intra-utérin"
@@ -2497,12 +2477,6 @@ msgstr "Intra-utérin"
 #. module: alc_pim
 #: model:product.category,name:alc_pim.intrmam_uemvb
 msgid "Intramammaire"
-msgstr "Intramammaire"
-
-#. module: alc_pim
-#: model:attribute.option,name:alc_pim.attribute_option_intramammaire_toediening
-#, fuzzy
-msgid "Intramammaire toediening"
 msgstr "Intramammaire"
 
 #. module: alc_pim
@@ -2685,6 +2659,11 @@ msgstr ""
 #: model:product.category,name:alc_pim.linge_hygdupers_hyg_vieprat
 msgid "Linge"
 msgstr "Linge"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_vloeistof_voor_inhalatie
+msgid "Liquide pour inhalation"
+msgstr ""
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.litiere_chat_anmxcie
@@ -3070,11 +3049,6 @@ msgid "Nandrolon"
 msgstr ""
 
 #. module: alc_pim
-#: model:attribute.option,name:alc_pim.attribute_option_nasale_toediening
-msgid "Nasale toediening"
-msgstr ""
-
-#. module: alc_pim
 #: model:attribute.option,name:alc_pim.attribute_option_natrium
 msgid "Natrium"
 msgstr ""
@@ -3193,16 +3167,6 @@ msgstr "Ophtalmologique"
 #: model:product.category,name:alc_pim.ophta_diagno_equip
 msgid "Ophtalmoscope"
 msgstr "Ophtalmoscope"
-
-#. module: alc_pim
-#: model:attribute.option,name:alc_pim.attribute_option_oplossing_emulsie_per_os
-msgid "Oplossing/emulsie per os"
-msgstr ""
-
-#. module: alc_pim
-#: model:attribute.option,name:alc_pim.attribute_option_oplossing_emulsie_gel_voor_uitwendig_gebruik
-msgid "Oplossing/emulsie/gel voor uitwendig gebruik"
-msgstr ""
 
 #. module: alc_pim
 #: model:attribute.option,name:alc_pim.attribute_option_oral
@@ -3385,11 +3349,6 @@ msgstr ""
 #. module: alc_pim
 #: model:attribute.option,name:alc_pim.attribute_option_parvovirus
 msgid "Parvovirus"
-msgstr ""
-
-#. module: alc_pim
-#: model:attribute.option,name:alc_pim.attribute_option_pasta_gel_per_os
-msgid "Pasta/Gel per os"
 msgstr ""
 
 #. module: alc_pim
@@ -3576,11 +3535,6 @@ msgid "Pièces détachées"
 msgstr "Pièces détachées"
 
 #. module: alc_pim
-#: model:attribute.option,name:alc_pim.attribute_option_plaatje_in_de_bijenkorf
-msgid "Plaatje in de bijenkorf"
-msgstr ""
-
-#. module: alc_pim
 #: model:product.category,name:alc_pim.plafonnier_eclair_mob_equip
 msgid "Plafonnier"
 msgstr "Plafonnier"
@@ -3589,6 +3543,11 @@ msgstr "Plafonnier"
 #: model:product.category,name:alc_pim.plaq_osteo_instru
 msgid "Plaques"
 msgstr "Plaques"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_plaatje_in_de_bijenkorf
+msgid "Plaquette dans la ruche"
+msgstr ""
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.admindesantican_prelev_cons
@@ -3614,11 +3573,6 @@ msgstr "Pochette non sertie"
 #: model:product.category,name:alc_pim.aiguillee_sutur_cons
 msgid "Pochette sertie"
 msgstr "Pochette sertie"
-
-#. module: alc_pim
-#: model:attribute.option,name:alc_pim.attribute_option_poeder_korrels_per_os
-msgid "Poeder/ korrels per os"
-msgstr ""
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.poids_evdecha
@@ -3672,6 +3626,11 @@ msgstr "Porte – aiguilles"
 #. module: alc_pim
 #: model:attribute.option,name:alc_pim.attribute_option_posaconazol
 msgid "Posaconazol"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_poeder_korrels_per_os
+msgid "Poudre/granules per os"
 msgstr ""
 
 #. module: alc_pim
@@ -3752,6 +3711,11 @@ msgid "Products Categories"
 msgstr "Catégories d'articles non web"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_produkt_om_te_verstuiven_voor_omgeving_en_oppervlaktes
+msgid "Produit à pulvériser pour surfaces et environnement"
+msgstr ""
+
+#. module: alc_pim
 #: model:product.category,name:alc_pim.prodpierrol_dentist_intru
 msgid "Produits de dentisteries"
 msgstr "Produits de dentisteries"
@@ -3760,11 +3724,6 @@ msgstr "Produits de dentisteries"
 #: model:product.category,name:alc_pim.proddesodchenetcag_hygdupers_hyg_vieprat
 msgid "Produits désodorisants Chenil et Cages"
 msgstr "Produits désodorisants Chenil et Cages"
-
-#. module: alc_pim
-#: model:attribute.option,name:alc_pim.attribute_option_produkt_om_te_verstuiven_voor_omgeving_en_oppervlaktes
-msgid "Produkt om te verstuiven, voor omgeving en oppervlaktes"
-msgstr ""
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.prostagen_hssrhmvb
@@ -3839,6 +3798,11 @@ msgid "Prélèvements"
 msgstr "Prélèvements"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_gemedicineerde_premix_per_os
+msgid "Prémélange médicamenteux per os"
+msgstr ""
+
+#. module: alc_pim
 #: model:product.category,name:alc_pim.prepar_table_mob_equip
 msgid "Préparation"
 msgstr "Préparation"
@@ -3876,6 +3840,11 @@ msgstr ""
 #. module: alc_pim
 #: model:attribute.option,name:alc_pim.attribute_option_pyriproxyfen
 msgid "Pyriproxyfen"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_pasta_gel_per_os
+msgid "Pâte/gel per os"
 msgstr ""
 
 #. module: alc_pim
@@ -4070,6 +4039,12 @@ msgid "Sabot"
 msgstr "Sabot"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_hoeven
+#, fuzzy
+msgid "Sabots"
+msgstr "Sabot"
+
+#. module: alc_pim
 #: model:attribute.option,name:alc_pim.attribute_option_salicylaat
 #, fuzzy
 msgid "Salicylaat"
@@ -4184,7 +4159,7 @@ msgstr ""
 
 #. module: alc_pim
 #: model:attribute.option,name:alc_pim.attribute_option_shampoo_voor_uitwendig_gebruik
-msgid "Shampoo voor uitwendig gebruik"
+msgid "Shampooing à usage cutané"
 msgstr ""
 
 #. module: alc_pim
@@ -4230,6 +4205,21 @@ msgstr "Soins aux porcelets"
 #: model:product.category,name:alc_pim.sols_hygdupers_hyg_vieprat
 msgid "Sols"
 msgstr "Sols"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_injecteerbare_oplossing
+msgid "Solution injectable"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_oplossing_emulsie_per_os
+msgid "Solution/suspension per os"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_oplossing_emulsie_gel_voor_uitwendig_gebruik
+msgid "Solution/suspension/gel à usage cutané"
+msgstr ""
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.sonde_cons
@@ -4298,7 +4288,7 @@ msgstr ""
 
 #. module: alc_pim
 #: model:attribute.option,name:alc_pim.attribute_option_spray_voor_uitwendige_toediening
-msgid "Spray voor uitwendige toediening"
+msgid "Spray pour application cutanée"
 msgstr ""
 
 #. module: alc_pim
@@ -4388,6 +4378,11 @@ msgid "Surveillance"
 msgstr "Surveillance"
 
 #. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_injecteerbare_suspensie
+msgid "Suspension injectable"
+msgstr ""
+
+#. module: alc_pim
 #: model:product.category,name:alc_pim.sutur_cons
 msgid "Sutures"
 msgstr "Sutures"
@@ -4459,11 +4454,6 @@ msgstr "TTA & TTA X-GEN"
 #: model:product.category,name:alc_pim.table_mob_equip
 msgid "Tables"
 msgstr "Tables"
-
-#. module: alc_pim
-#: model:attribute.option,name:alc_pim.attribute_option_tablet_tablet_per_oraal
-msgid "Tablet/tablet per oraal"
-msgstr ""
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.tatetpincatat_identcan_identif_equip
@@ -4760,14 +4750,26 @@ msgid "Usage unique"
 msgstr "Usage unique"
 
 #. module: alc_pim
-#: model:attribute.option,name:alc_pim.attribute_option_vaccin_administratie_via_het_oog
-msgid "Vaccin administratie via het oog"
+#: model:attribute.option,name:alc_pim.attribute_option_drinkbaar_vaccin
+msgid "Vaccin buvable"
 msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_injecteerbaar_vaccin
+#, fuzzy
+msgid "Vaccin injectable"
+msgstr "Vaccins antirabiques"
 
 #. module: alc_pim
 #: model:attribute.option,name:alc_pim.attribute_option_vaccin_intranasal
 #, fuzzy
 msgid "Vaccin intranasal"
+msgstr "Vaccins antirabiques"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_vaccin_administratie_via_het_oog
+#, fuzzy
+msgid "Vaccin occulaire"
 msgstr "Vaccins antirabiques"
 
 #. module: alc_pim
@@ -4784,11 +4786,6 @@ msgstr "Vaccins"
 #: model:product.category,name:alc_pim.vaccins_antirabiq_imvb
 msgid "Vaccins antirabiques"
 msgstr "Vaccins antirabiques"
-
-#. module: alc_pim
-#: model:attribute.option,name:alc_pim.attribute_option_vaginale_toediening
-msgid "Vaginale toediening"
-msgstr ""
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.vaissel_labo_labo_equip
@@ -4916,8 +4913,36 @@ msgid "Vitamine E"
 msgstr ""
 
 #. module: alc_pim
-#: model:attribute.option,name:alc_pim.attribute_option_vloeistof_voor_inhalatie
-msgid "Vloeistof voor inhalatie"
+#: model:attribute.option,name:alc_pim.attribute_option_auriculaire_toediening
+msgid "Voie auriculaire"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_intra_uterine_toediening
+#, fuzzy
+msgid "Voie intra-utérine"
+msgstr "Intra-utérin"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_intramammaire_toediening
+#, fuzzy
+msgid "Voie intramammaire"
+msgstr "Intramammaire"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_nasale_toediening
+msgid "Voie nasale"
+msgstr ""
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_opthalmologische_toediening
+#, fuzzy
+msgid "Voie ophtalmique"
+msgstr "Vie pratique"
+
+#. module: alc_pim
+#: model:attribute.option,name:alc_pim.attribute_option_vaginale_toediening
+msgid "Voie vaginale"
 msgstr ""
 
 #. module: alc_pim
@@ -5013,11 +5038,6 @@ msgid "adult"
 msgstr ""
 
 #. module: alc_pim
-#: model:attribute.option,name:alc_pim.attribute_option_auriculaire_toediening
-msgid "auriculaire toediening"
-msgstr ""
-
-#. module: alc_pim
 #: model:attribute.option,name:alc_pim.option_attribute_animal_size_big
 msgid "big"
 msgstr ""
@@ -5038,16 +5058,6 @@ msgid "injectables et à usage oral contre les endoparasites"
 msgstr "injectables et à usage oral contre les endoparasites"
 
 #. module: alc_pim
-#: model:attribute.option,name:alc_pim.attribute_option_injecteerbaar_vaccin
-msgid "injecteerbaar vaccin"
-msgstr ""
-
-#. module: alc_pim
-#: model:attribute.option,name:alc_pim.attribute_option_injecteerbare_oplossing
-msgid "injecteerbare oplossing"
-msgstr ""
-
-#. module: alc_pim
 #: model:attribute.option,name:alc_pim.attribute_option_junior
 msgid "junior"
 msgstr ""
@@ -5055,11 +5065,6 @@ msgstr ""
 #. module: alc_pim
 #: model:attribute.option,name:alc_pim.option_attribute_animal_size_medium
 msgid "medium"
-msgstr ""
-
-#. module: alc_pim
-#: model:attribute.option,name:alc_pim.attribute_option_opthalmologische_toediening
-msgid "opthalmologische toediening"
 msgstr ""
 
 #. module: alc_pim
@@ -5111,6 +5116,10 @@ msgstr "à usage transdermique contre les ecto- et endoparasites"
 #: model:product.category,name:alc_pim.a_usg_transd_ctre_endopar_apaimvb
 msgid "à usage transdermique contre les endoparasites"
 msgstr "à usage transdermique contre les endoparasites"
+
+#, fuzzy
+#~ msgid "Intramammaire toediening"
+#~ msgstr "Intramammaire"
 
 #~ msgid "Main Species"
 #~ msgstr "Main Species"
