@@ -3296,7 +3296,7 @@
       ref="alc_pim_product.attribute_administration_route_option_ids"
       name="attribute_id"
     />
-    <field name="name">Tablet/tablet per oraal</field>
+    <field name="name">Comprimé/capsule per os</field>
   </record>
   <record model="attribute.option" id="attribute_option_implant">
     <field
@@ -3310,7 +3310,7 @@
       ref="alc_pim_product.attribute_administration_route_option_ids"
       name="attribute_id"
     />
-    <field name="name">Hoeven</field>
+    <field name="name">Sabots</field>
   </record>
   <record
     model="attribute.option"
@@ -3320,7 +3320,7 @@
       ref="alc_pim_product.attribute_administration_route_option_ids"
       name="attribute_id"
     />
-    <field name="name">Vaccin administratie via het oog</field>
+    <field name="name">Vaccin occulaire</field>
   </record>
   <record model="attribute.option" id="attribute_option_vaccin_intranasal">
     <field
@@ -3334,35 +3334,35 @@
       ref="alc_pim_product.attribute_administration_route_option_ids"
       name="attribute_id"
     />
-    <field name="name">Vloeistof voor inhalatie</field>
+    <field name="name">Liquide pour inhalation</field>
   </record>
   <record model="attribute.option" id="attribute_option_plaatje_in_de_bijenkorf">
     <field
       ref="alc_pim_product.attribute_administration_route_option_ids"
       name="attribute_id"
     />
-    <field name="name">Plaatje in de bijenkorf</field>
+    <field name="name">Plaquette dans la ruche</field>
   </record>
   <record model="attribute.option" id="attribute_option_poeder_korrels_per_os">
     <field
       ref="alc_pim_product.attribute_administration_route_option_ids"
       name="attribute_id"
     />
-    <field name="name">Poeder/ korrels per os</field>
+    <field name="name">Poudre/granules per os</field>
   </record>
   <record model="attribute.option" id="attribute_option_auriculaire_toediening">
     <field
       ref="alc_pim_product.attribute_administration_route_option_ids"
       name="attribute_id"
     />
-    <field name="name">auriculaire toediening</field>
+    <field name="name">Voie auriculaire</field>
   </record>
   <record model="attribute.option" id="attribute_option_gemedicineerde_premix_per_os">
     <field
       ref="alc_pim_product.attribute_administration_route_option_ids"
       name="attribute_id"
     />
-    <field name="name">Gemedicineerde premix per os</field>
+    <field name="name">Prémélange médicamenteux per os</field>
   </record>
   <record
     model="attribute.option"
@@ -3372,63 +3372,63 @@
       ref="alc_pim_product.attribute_administration_route_option_ids"
       name="attribute_id"
     />
-    <field name="name">Oplossing/emulsie/gel voor uitwendig gebruik</field>
+    <field name="name">Solution/suspension/gel à usage cutané</field>
   </record>
   <record model="attribute.option" id="attribute_option_oplossing_emulsie_per_os">
     <field
       ref="alc_pim_product.attribute_administration_route_option_ids"
       name="attribute_id"
     />
-    <field name="name">Oplossing/emulsie per os</field>
+    <field name="name">Solution/suspension per os</field>
   </record>
   <record model="attribute.option" id="attribute_option_injecteerbaar_vaccin">
     <field
       ref="alc_pim_product.attribute_administration_route_option_ids"
       name="attribute_id"
     />
-    <field name="name">injecteerbaar vaccin</field>
+    <field name="name">Vaccin injectable</field>
   </record>
   <record model="attribute.option" id="attribute_option_drinkbaar_vaccin">
     <field
       ref="alc_pim_product.attribute_administration_route_option_ids"
       name="attribute_id"
     />
-    <field name="name">Drinkbaar vaccin</field>
+    <field name="name">Vaccin buvable</field>
   </record>
   <record model="attribute.option" id="attribute_option_injecteerbare_oplossing">
     <field
       ref="alc_pim_product.attribute_administration_route_option_ids"
       name="attribute_id"
     />
-    <field name="name">injecteerbare oplossing</field>
+    <field name="name">Solution injectable</field>
   </record>
   <record model="attribute.option" id="attribute_option_injecteerbare_suspensie">
     <field
       ref="alc_pim_product.attribute_administration_route_option_ids"
       name="attribute_id"
     />
-    <field name="name">Injecteerbare suspensie</field>
+    <field name="name">Suspension injectable</field>
   </record>
   <record model="attribute.option" id="attribute_option_intramammaire_toediening">
     <field
       ref="alc_pim_product.attribute_administration_route_option_ids"
       name="attribute_id"
     />
-    <field name="name">Intramammaire toediening</field>
+    <field name="name">Voie intramammaire</field>
   </record>
   <record model="attribute.option" id="attribute_option_opthalmologische_toediening">
     <field
       ref="alc_pim_product.attribute_administration_route_option_ids"
       name="attribute_id"
     />
-    <field name="name">opthalmologische toediening</field>
+    <field name="name">Voie ophtalmique</field>
   </record>
   <record model="attribute.option" id="attribute_option_vaginale_toediening">
     <field
       ref="alc_pim_product.attribute_administration_route_option_ids"
       name="attribute_id"
     />
-    <field name="name">Vaginale toediening</field>
+    <field name="name">Voie vaginale</field>
   </record>
   <record
     model="attribute.option"
@@ -3438,21 +3438,21 @@
       ref="alc_pim_product.attribute_administration_route_option_ids"
       name="attribute_id"
     />
-    <field name="name">Spray voor uitwendige toediening</field>
+    <field name="name">Spray pour application cutanée</field>
   </record>
   <record model="attribute.option" id="attribute_option_intra_uterine_toediening">
     <field
       ref="alc_pim_product.attribute_administration_route_option_ids"
       name="attribute_id"
     />
-    <field name="name">Intra-uterine toediening</field>
+    <field name="name">Voie intra-utérine</field>
   </record>
   <record model="attribute.option" id="attribute_option_pasta_gel_per_os">
     <field
       ref="alc_pim_product.attribute_administration_route_option_ids"
       name="attribute_id"
     />
-    <field name="name">Pasta/Gel per os</field>
+    <field name="name">Pâte/gel per os</field>
   </record>
   <record model="attribute.option" id="attribute_option_bolus_per_os">
     <field
@@ -3469,7 +3469,7 @@
       ref="alc_pim_product.attribute_administration_route_option_ids"
       name="attribute_id"
     />
-    <field name="name">Halsband voor uitwendig gebruik</field>
+    <field name="name">Collier imprégné à usage cutané</field>
   </record>
   <record
     model="attribute.option"
@@ -3479,21 +3479,21 @@
       ref="alc_pim_product.attribute_administration_route_option_ids"
       name="attribute_id"
     />
-    <field name="name">Produkt om te verstuiven, voor omgeving en oppervlaktes</field>
+    <field name="name">Produit à pulvériser pour surfaces et environnement</field>
   </record>
   <record model="attribute.option" id="attribute_option_shampoo_voor_uitwendig_gebruik">
     <field
       ref="alc_pim_product.attribute_administration_route_option_ids"
       name="attribute_id"
     />
-    <field name="name">Shampoo voor uitwendig gebruik</field>
+    <field name="name">Shampooing à usage cutané</field>
   </record>
   <record model="attribute.option" id="attribute_option_nasale_toediening">
     <field
       ref="alc_pim_product.attribute_administration_route_option_ids"
       name="attribute_id"
     />
-    <field name="name">Nasale toediening</field>
+    <field name="name">Voie nasale</field>
   </record>
   <record model="attribute.option" id="attribute_option_monofilament">
     <field ref="alc_pim_product.attribute_thread_option_id" name="attribute_id" />

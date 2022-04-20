@@ -469,33 +469,33 @@ turquoise,Turquoise,Turquoise,Turquoise
 undyed,Undyed,Incolore,Kleurloos
 white,White,Blanc,Wit
 yellow,Yellow,Jaune,Geel
-vda1,Tablet/tablet per oraal,Comprimé/capsule per os,Comprimé/capsule per os
+vda1,Comprimé/capsule per os,Comprimé/capsule per os,Tablet/tablet per oraal
 vda24,Implant,Implant,Implant
-vda25,Hoeven,Sabots,Sabots
-vda23,Vaccin administratie via het oog,Vaccin occulaire,Vaccin occulaire
+vda25,Sabots,Sabots,Hoeven
+vda23,Vaccin occulaire,Vaccin occulaire,Vaccin administratie via het oog
 vda22,Vaccin intranasal,Vaccin intranasal,Vaccin intranasal
-vda21,Vloeistof voor inhalatie,Liquide pour inhalation,Liquide pour inhalation
-vda_pldslaruche,Plaatje in de bijenkorf,Plaquette dans la ruche,Plaquette dans la ruche
-vda2,Poeder/ korrels per os,Poudre/granules per os,Poudre/granules per os
-vda3,auriculaire toediening,Voie auriculaire,Voie auriculaire
-vda4,Gemedicineerde premix per os,Prémélange médicamenteux per os,Prémélange médicamenteux per os
-vda5,Oplossing/emulsie/gel voor uitwendig gebruik,Solution/suspension/gel à usage cutané,Solution/suspension/gel à usage cutané
-vda6,Oplossing/emulsie per os,Solution/suspension per os,Solution/suspension per os
-vda7,injecteerbaar vaccin,Vaccin injectable,Vaccin injectable
-vda8,Drinkbaar vaccin,Vaccin buvable,Vaccin buvable
-vda9,injecteerbare oplossing,Solution injectable,Solution injectable
-vda10,Injecteerbare suspensie,Suspension injectable,Suspension injectable
-vda11,Intramammaire toediening,Voie intramammaire,Voie intramammaire
-vda12,opthalmologische toediening,Voie ophtalmique,Voie ophtalmique
-vda13,Vaginale toediening,Voie vaginale,Voie vaginale
-vda14,Spray voor uitwendige toediening,Spray pour application cutanée,Spray pour application cutanée
-vda15,Intra-uterine toediening,Voie intra-utérine,Voie intra-utérine
-vda16,Pasta/Gel per os,Pâte/gel per os,Pâte/gel per os
+vda21,Liquide pour inhalation,Liquide pour inhalation,Vloeistof voor inhalatie
+vda_pldslaruche,Plaquette dans la ruche,Plaquette dans la ruche,Plaatje in de bijenkorf
+vda2,Poudre/granules per os,Poudre/granules per os,Poeder/ korrels per os
+vda3,Voie auriculaire,Voie auriculaire,auriculaire toediening
+vda4,Prémélange médicamenteux per os,Prémélange médicamenteux per os,Gemedicineerde premix per os
+vda5,Solution/suspension/gel à usage cutané,Solution/suspension/gel à usage cutané,Oplossing/emulsie/gel voor uitwendig gebruik
+vda6,Solution/suspension per os,Solution/suspension per os,Oplossing/emulsie per os
+vda7,Vaccin injectable,Vaccin injectable,injecteerbaar vaccin
+vda8,Vaccin buvable,Vaccin buvable,Drinkbaar vaccin
+vda9,Solution injectable,Solution injectable,injecteerbare oplossing
+vda10,Suspension injectable,Suspension injectable,Injecteerbare suspensie
+vda11,Voie intramammaire,Voie intramammaire,Intramammaire toediening
+vda12,Voie ophtalmique,Voie ophtalmique,opthalmologische toediening
+vda13,Voie vaginale,Voie vaginale,Vaginale toediening
+vda14,Spray pour application cutanée,Spray pour application cutanée,Spray voor uitwendige toediening
+vda15,Voie intra-utérine,Voie intra-utérine,Intra-uterine toediening
+vda16,Pâte/gel per os,Pâte/gel per os,Pasta/Gel per os
 vda17,Bolus per os,Bolus per os,Bolus per os
-vda18,Halsband voor uitwendig gebruik,Collier imprégné à usage cutané,Collier imprégné à usage cutané
-vda19,"Produkt om te verstuiven, voor omgeving en oppervlaktes",Produit à pulvériser pour surfaces et environnement,Produit à pulvériser pour surfaces et environnement
-vda20,Shampoo voor uitwendig gebruik,Shampooing à usage cutané,Shampooing à usage cutané
-vda26,Nasale toediening,Voie nasale,Voie nasale
+vda18,Collier imprégné à usage cutané,Collier imprégné à usage cutané,Halsband voor uitwendig gebruik
+vda19,Produit à pulvériser pour surfaces et environnement,Produit à pulvériser pour surfaces et environnement,Produkt om te verstuiven, voor omgeving en oppervlaktes
+vda20,Shampooing à usage cutané,Shampooing à usage cutané,Shampoo voor uitwendig gebruik
+vda26,Voie nasale,Voie nasale,Nasale toediening
 3,big,grand,groot
 2,medium,moyen,middelgroot
 1,small,petit,klein
