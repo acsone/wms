@@ -1,0 +1,856 @@
+code;en_US;fr_BE;nl_BE;parent
+master;"Alcyon Catalog";"Catalogue Alcyon";;
+med;Drugs;Médicaments;Geneesmiddelen;master
+med_vt_bg;"Belgian veterinary drugs";"Médicaments vétérinaires belges";"Belgische diergeneesmiddelen";med
+antibact_aimvb;Anti-bacterial;Antibactériens;"Antibacteriële middelen";med_vt_bg
+penicillin_antibact_aimvb;Penicillins;Pénicillines;Penicillines;antibact_aimvb
+cephalosporin_antibact_aimvb;Cephalosporins;Céphalosporines;Cefalosporines;antibact_aimvb
+aminosid_antibact_aimvb;Aminosides;Aminosides;Aminoglycosiden;antibact_aimvb
+florfenicol_antibact_aimvb;Florfenicol;Florfénicol;Florfenicol;antibact_aimvb
+tetracycl_antibact_aimvb;Tetracyclins;Tétracyclines;Tetracyclines;antibact_aimvb
+marco_linco_pleuro_antibact_aimvb;"Macrolides, Lincosamides, Pleuromutilins";"Macrolides, Lincosamides, Pleuromutulines";"Macroliden, lincosamiden, pleuromutulinen";antibact_aimvb
+polym_antibact_aimvb;Polymyxins;Polymyxines;Polymyxinen;antibact_aimvb
+bacitraci_antibact_aimvb;Bacitracine;Bacitracine;Bacitracine;antibact_aimvb
+sulfa_et_trimed_antibact_aimvb;"Sulfonamides and trimethoprim";"Sulfamides et triméthoprime";"Sulfamiden en trimethoprim";antibact_aimvb
+quinolo_fluoroq_antibact_aimvb;"Quinolones, fluoroquinolones";"Quinolones, Fluoroquinolones";"Quinolonen, Fluoroquinolonen";antibact_aimvb
+associations_antibact_aimvb;Associations;Associations;Associaties;antibact_aimvb
+metronid_aimvb;Metronidazol;Métronidazole;Metronidazol;antibact_aimvb
+antimyco_aimvb;Anti-mycotics;Antimycotiques;Antimycotica;med_vt_bg
+antipara_aimvb;Anti-parasitics;Antiparasitaires;"Antiparasitaire middelen";med_vt_bg
+inj_et_usg_or_ctre_endopar_apaimvb;"injectables and oral use against endoparasites";"injectables et à usage oral contre les endoparasites";"voor injectie of voor orale toediening bij endoparasieten";antipara_aimvb
+inj_et_usg_or_ctre_ectopar_apaimvb;"injectables and oral use against ectoparasites";"injectables et à usage oral contre les ectoparasites";"voor injectie of voor orale toediening bij ectoparasieten";antipara_aimvb
+inj_et_usg_or_ctre_ecto_et_endo_apaimvb;"injectables and oral use against ecto and endoparasites";"injectables et à usage oral contre les ecto- et endoparasites";"voor injectie of voor orale toediening bij ecto- en endoparasieten";antipara_aimvb
+a_usg_transd_ctre_endopar_apaimvb;"transdermic use against endoparasites";"à usage transdermique contre les endoparasites";"voor transdermaal gebruik bij endoparasieten";antipara_aimvb
+a_usg_transd_ctre_ecto_et_endo_apaimvb;"transdermic use against ecto and endoparasites";"à usage transdermique contre les ecto- et endoparasites";"voor transdermaal gebruik bij ecto- en endoparasieten";antipara_aimvb
+a_asg_top_ctre_ecto_apaimvb;"transdermic use against ectoparasites";"à usage topique contre les ectoparasites";"voor lokaal gebruik bij ectoparasieten";antipara_aimvb
+pour_abeilles_apaimvb;"for bees";"pour les abeilles";"voor bijen";antipara_aimvb
+hormones_med_vt_bg;Hormones;Hormones;Hormonen;med_vt_bg
+hormo_sex_sys_repro_hmvb;"Sexual hormones - reproductive system";"Hormones sexuelles - système reproducteur";"Geslachtshormonen - voortplantingsstelsel";hormones_med_vt_bg
+oestrogen_hssrhmvb;Oestrogens;Oestrogènes;Oestrogenen;hormo_sex_sys_repro_hmvb
+prostagen_hssrhmvb;Progestagens;Progestagènes;Progestagenen;hormo_sex_sys_repro_hmvb
+hyperplas_beni_prostat_hssrhmvb;"Benign prostatic hyperplasia";"Hyperplasie bénigne de la prostate";Prostaathypertrofie;hormo_sex_sys_repro_hmvb
+androgen_et_stero_anabo_hssrhmvb;"Androgens and anabolic steroids";"Androgènes et stéroïdes anabolisants";"Androgenen en anabole steroïden";hormo_sex_sys_repro_hmvb
+gonadotro_et_med_agis_sur_liber_hssrhmvb;"Gonadotropins and drugs acting on their release";"Gonadotrophines et médicaments agissant sur leur libération";"Gonadotrofinen en geneesmiddelen die hun vrijstelling beïnvloeden";hormo_sex_sys_repro_hmvb
+tocolytiq_hssrhmvb;Tocolytics;Tocolytiques;Tocolytica;hormo_sex_sys_repro_hmvb
+ocytociq_hssrhmvb;Oxytocics;Ocytociques;Oxytocine;hormo_sex_sys_repro_hmvb
+prostagland_hssrhmvb;Prostaglandins;Prostaglandines;Prostaglandinen;hormo_sex_sys_repro_hmvb
+med_agiss_liber_prolact_hssrhmvb;"Drugs acting on the release of prolactin";"Médicaments agissant sur la libération de la prolactine";"Geneesmiddelen die de vrijstelling van prolactine beïnvloeden";hormo_sex_sys_repro_hmvb
+antiprogest_hssrhmvb;Antiprogestagens;Antiprogestagènes;Antiprogestagenen;hormo_sex_sys_repro_hmvb
+hormo_cort_surre_hmvb;"Cortico-subrenal hormones";"Hormones cortico-surrénales";Bijnierschorshormonen;hormones_med_vt_bg
+mineralocor_hmvb;Minéralocorticoïdes;Minéralocorticoïdes;Mineralocorticoïden;hormones_med_vt_bg
+thyro_hmvb;"Thyroid drugs";"Médicaments de la thyroïde";"Middelen i.v.m. de schildklier";hormones_med_vt_bg
+malad_cushing_hmvb;"Cushing Illness";"Maladie de Cushing";"Ziekte van Cushing";hormones_med_vt_bg
+insuline_hmvb;Insulin;Insuline;Insuline;hormones_med_vt_bg
+fiev_doul_inflam_med_vt_bg;"Fever, Pain and Inflammation";"Fièvre, Douleur et Inflammation";"Koorts, pijn en ontsteking";med_vt_bg
+analg_et_antipyr_fdimvb;"Analgesics and antipyretics";"Analgésiques et antipyrétriques";"Analgetica en antipyretica";fiev_doul_inflam_med_vt_bg
+analg_opio_fdimvb;"Opioid analgesics";"Analgésiques opioïdes";"Opioïde analgetica";fiev_doul_inflam_med_vt_bg
+ains_fdimvb;NSAI;AINS;NSAID'S;fiev_doul_inflam_med_vt_bg
+salicylat_afdimvb;Salicylates;Salicylates;Salicylaten;ains_fdimvb
+deriv_pyrazol_afdimvb;"Pyrazolone derivatives";"Dérivés de la pyrazolone";Pyrazolonderivaten;ains_fdimvb
+deriv_acid_nicoti_et_phen_afdimvb;"Nicotinergic and phenetic acid derivatives";"Dérivés de l'acide nicotinergique et phénamates";"Nicotinezuurderivaten en fenamaten";ains_fdimvb
+deriv_acid_arylpro_afdimvb;"Arylpropionic acid derivatives";"Dérivés de l'acide arylpropionique";Arylpropionzuurderivaten;ains_fdimvb
+group_oxycam_afdimvb;"Group of oxicams";"Groupe des oxicams";Oxicamgroep;ains_fdimvb
+group_coxib_afdimvb;"Group of coxibs";"Groupe des coxibs";Coxib-groep;ains_fdimvb
+combin_ains_afdimvb;"NSAID combination";"Combinaison AINS";"Combinaties van NSAID’s";ains_fdimvb
+hormo_cortico_surre_fdimvb;"Cortico-subrenal hormones";"Hormones cortico-surrénales";Bijnierschorshormonen;fiev_doul_inflam_med_vt_bg
+Antihistaminique;Antihistaminic;Antihistaminique;Antihistaminica;fiev_doul_inflam_med_vt_bg
+sys_gastro_intes_med_vt_bg;"Gastrointestinal system";"Système gastro-intestinal";"Gastro-intestinaal stelsel";med_vt_bg
+inib_secret_gastri_sgimvb;"Gastric secretion inhibitor";"Inhibiteur de la sécrétion gastrique";Maagzuursecretie-inhibitoren;sys_gastro_intes_med_vt_bg
+antiemetiq_sgimvb;Antiemetic;Antiémétique;Anti-emetica;sys_gastro_intes_med_vt_bg
+antispasmod_digest_sgimvb;"Digestive antispasmodics";"Antispasmodiques digestifs";Spasmolytica;sys_gastro_intes_med_vt_bg
+antidiar_content_agt_ai_sgimvb;"Antidiarrheal drugs containing anti-infective agents";"Antidiarrhéiques contenant des agents anti-infectieux";"Antidiarreïca met anti-infectieuze bestanddelen";sys_gastro_intes_med_vt_bg
+monensin_sgimvb;Monensin;Monensin;Monensin;sys_gastro_intes_med_vt_bg
+emetiq_sgimvb;Emetic;Emétique;Emetica;sys_gastro_intes_med_vt_bg
+metabo_med_vt_bg;Metabolism;Métabolisme;Metabolisme;med_vt_bg
+rehydra_mmvb;"Hydration Reagents";Réhydratants;Rehydratantia;metabo_med_vt_bg
+gluco_mmvb;Glucose;Glucose;Glucose;metabo_med_vt_bg
+min_et_vit_mmvb;"Minerals and vitamins";"Minéraux et vitamines";"Mineralen en vitaminen";metabo_med_vt_bg
+sys_loco_med_vt_bg;"Musculoskeletal system";"Système locomoteur";"Locomotorisch stelsel";med_vt_bg
+sys_respi_med_vt_bg;"Respiratory system";"Système respiratoire";Ademhalingsstelsel;med_vt_bg
+bronchodilat_srmvb;Bronchodilators;Bronchodilatateurs;Bronchodilatatoren;sys_respi_med_vt_bg
+med_antitus_expecto_et_broncho_srmvb;"Cough drug, expectorant and bronchodilator";"Médicament antitussif, expectorant et bronchodilatateur";"Antitussivum, expectorantium en bonchodilatator";sys_respi_med_vt_bg
+sys_cario_vasc_med_vt_bg;"Cardiovascular system";"Système cardio-vasculaire";"Cardiovasculair stelsel";med_vt_bg
+insuf_card_scvmvb;"Cardiac insufficiency";"Insuffisance cardiaque";Hartinsufficiëntie;sys_cario_vasc_med_vt_bg
+vasodil_periph_et_cereb_scvmvb;"Peripheral and cerebral vasodilators";"Vasodilatateurs périphériques et cérébraux";"Perifere en cerebrale vasodilatoren";sys_cario_vasc_med_vt_bg
+antago_specif_recept_angio_t_at1_scvmvb;"Specific antagonist for angiotensin receptors (AT1 type)";"Antagoniste spécifique récepteurs de l’angiotensine(type AT1)";"Angiotensine II-antagonisten";sys_cario_vasc_med_vt_bg
+diuretiq_scvmvb;Diuretics;Diurétiques;Diuretica;sys_cario_vasc_med_vt_bg
+beta_bloq_scvmvb;Beta-blockers;Bêta-bloquants;Bètablokkers;sys_cario_vasc_med_vt_bg
+sys_urogeni_med_vt_bg;"Urogenital system";"Système urogénital";"Urogenitaal stelsel";med_vt_bg
+sys_nvxcentr_et_peri_med_vt_bg;"Central and peripheral nervous system";"Système nerveux central et périphérique";"Centraal en perifeer zenuwstelsel";med_vt_bg
+anesth_gen_inj_sncepmvb;"Injectable general anaesthetics";"Anesthésiques généraux injectables";"Algemene injecteerbare anesthetica";sys_nvxcentr_et_peri_med_vt_bg
+anesth_loc_sncepmvb;"Local anaesthetics";"Anesthésiques locaux";"Lokale anesthetica";sys_nvxcentr_et_peri_med_vt_bg
+agts_util_pour_eutha_sncepmvb;"Agents used for euthanasia";"Agents utilisés pour l'euthanasie";"Agentia gebruikt voor de euthanasie";sys_nvxcentr_et_peri_med_vt_bg
+anesth_volatil_sncepmvb;"Volatile anaesthetics";"Anesthésiques volatils";Inhalatieanesthetica;sys_nvxcentr_et_peri_med_vt_bg
+neurolept_sncepmvb;Neuroleptics;Neuroleptiques;Neuroleptica;sys_nvxcentr_et_peri_med_vt_bg
+benzodiazepin_sncepmvb;Benzodiazepines;Benzodiazépines;Benzodiazepines;sys_nvxcentr_et_peri_med_vt_bg
+myorelax_sncepmvb;"Muscle relaxants";Myorelaxants;"Myorelaxerende stoffen";sys_nvxcentr_et_peri_med_vt_bg
+agonist_alpha2_adrenerg_sncepmvb;"Alpha-2 andrenergic agonists";"Agonistes alpha 2-adrénergiques";"Alfa-2-adrenerge agonisten";sys_nvxcentr_et_peri_med_vt_bg
+antidepres_sncepmvb;Antidepressants;Antidépresseurs;Antidepressiva;sys_nvxcentr_et_peri_med_vt_bg
+antiepilept_sncepmvb;Antiepileptics;Antiépileptiques;Anti-epileptica;sys_nvxcentr_et_peri_med_vt_bg
+antidote_sncepmvb;Antidote;Antidote;Antidota;sys_nvxcentr_et_peri_med_vt_bg
+med_peau_med_vt_bg;"Drugs for the skin";"Médicaments pour la peau";"Geneesmiddelen voor de huid";med_vt_bg
+usage_ext_med_vt_bg;"External use";"Usage externe";"Uitwendig gebruik";med_vt_bg
+dermato_uemvb;Dermatological;Dermatologique;"Cutaan gebruik";usage_ext_med_vt_bg
+antisept_duemvb;Antiseptic;Antiseptiques;Antiseptica;dermato_uemvb
+tremp_trayons_duemvb;"Teat dips";"Trempage des trayons";Tepeldipmiddel;dermato_uemvb
+antiobio_duemvb;Antibiotics;Antibiotiques;Antibiotica;dermato_uemvb
+antifong_duemvb;"Antifungal drugs";Antifongiques;Antimycotica;dermato_uemvb
+a_usg_transd_ctre_endopar_duemvb;"For transdermic use against endoparasites";"à us. transderm. contre endoparasites";"voor transdermaal gebruik tegen endoparasieten";dermato_uemvb
+a_usg_transd_ctre_eendopar_duemvb;"For transdermic use against ecto and endoparasites";"à us. transderm. contre ecto- et endoparasites";"voor transdermaal gebruik tegen ecto- en endoparasieten";dermato_uemvb
+a_usg_top_ctre_ectopar_duemvb;"For top. use against endoparasites";"à us. top. contre ectoparasites";"voor lokaal gebruik tegen ectoparasieten";dermato_uemvb
+glucocortico_duemvb;Glucocorticoids;Glucocorticoïdes;Glucocorticoïden;dermato_uemvb
+associations_duemvb;Associations;Associations;Associaties;dermato_uemvb
+prepa_cicatri_duemvb;"Healing preparation";"Préparation cicatrisante";"Cicatriserende stoffen";dermato_uemvb
+ophtalmo_uemvb;Ophthalmological;Ophtalmologique;"Gebruik in het oog";usage_ext_med_vt_bg
+otique_uemvb;Optical;Otique;"Gebruik in het oor";usage_ext_med_vt_bg
+intra_uter_uemvb;Intra-uterine;Intra-utérin;Intra-uterien;usage_ext_med_vt_bg
+intrmam_uemvb;Intra-mammary;Intramammaire;Intramammair;usage_ext_med_vt_bg
+immuno_med_vt_bg;Immunology;Immunologie;Immunologie;med_vt_bg
+vaccin_imvb;Vaccines;Vaccins;Vaccins;immuno_med_vt_bg
+vaccins_antirabiq_imvb;"Rabies vaccines";"Vaccins antirabiques";Rabiësvaccins;immuno_med_vt_bg
+serum_et_immunoglob_imvb;"Serums and immunoglobulins";"Sérums et immunoglobines";"Antisera en immunoglobines";immuno_med_vt_bg
+immunomodul_imvb;Immunomodulators;Immunomodulateurs;Immunomodulatoren;immuno_med_vt_bg
+castra_immunit_imvb;"Immunitary castration";"Castration immunitaire";Immunocastratie;immuno_med_vt_bg
+med_antitumorx_med_vt_bg;"Anti-tumour drugs";"Médicaments antitumoraux";"Antitumorale middelen";med_vt_bg
+homeopathie_med_vt_bg;Homeopathy;Homéopathie;Homeopathie;med_vt_bg
+casc_imp;"Import cascade";"Cascade importation";"Cascade import";med
+anti_infect_casc_imp;Anti-infectives;Anti-infectieux;"Anti-infectieuze middelen";casc_imp
+hormo_casc_imp;Hormones;Hormones;Hormonen;casc_imp
+fiev_doul_inflam_casc_imp;"Fever, Pain and Inflammation";"Fièvre, Douleur et Inflammation";"Koorts, pijn en ontsteking";casc_imp
+sys_gastro_intes_casc_imp;"Gastrointestinal system";"Système gastro-intestinal";"Gastro-intestinaal stelsel";casc_imp
+metabo_casc_imp;Metabolism;Métabolisme;Metabolisme;casc_imp
+sys_loco_casc_imp;"Musculoskeletal system";"Système locomoteur";"Locomotorisch stelsel";casc_imp
+sys_respi_casc_imp;"Respiratory system";"Système respiratoire";Ademhalingsstelsel;casc_imp
+sys_cario_vasc_casc_imp;"Cardiovascular system";"Système cardio-vasculaire";"Cardiovasculair stelsel";casc_imp
+sys_urogeni_casc_imp;"Urogenital system";"Système urogénital";"Urogenitaal stelsel";casc_imp
+sys_nvxcentr_et_peri_casc_im;"Central and peripheral nervous system";"Système nerveux central et périphérique";"Centraal en perifeer zenuwstelsel";casc_imp
+med_peau_casc_imp;"Drugs for the skin";"Médicaments pour la peau";"Geneesmiddelen voor de huid";casc_imp
+usage_ext_casc_imp;"External use";"Usage externe";"Uitwendig gebruik";casc_imp
+immuno_casc_imp;Immunology;Immunologie;Immunologie;casc_imp
+antitumorx_casc_imp;"Anti-tumour drugs";"Médicaments antitumoraux";"Antitumorale middelen";casc_imp
+casc_hum;"Human drug cascade";"Cascade médicaments humains";"Cascade humane geneesmiddelen";med
+paraph;Parapharmacy;Parapharmacie;Parafarmacie;med
+complement_paraph;Complements;Compléments;Supplementen;paraph
+anti_infectieux_complement_paraph;Anti-infectives;Anti-infectieux;"Anti-infectieuze middelen";complement_paraph
+antiparasitaires_complement_paraph;Anti-parasitics;Antiparasitaires;"Antiparasitaire middelen";complement_paraph
+fievre_doul_infl_complement_paraph;"Fever, Pain and Inflammation";"Fièvre, Douleur et Inflammation";"Koorts, pijn en ontsteking";complement_paraph
+systeme_gi_complement_paraph;"Gastrointestinal system";"Système gastro-intestinal";"Gastro-intestinaal stelsel";complement_paraph
+metabolisme_complement_paraph;Metabolism;Métabolisme;Metabolisme;complement_paraph
+systeme_locomoteur_complement_paraph;"Musculoskeletal system";"Système locomoteur";"Locomotorisch stelsel";complement_paraph
+systeme_respiratoire_complement_paraph;"Respiratory system";"Système respiratoire";Ademhalingssysteem;complement_paraph
+systeme_cardio_vasc_complement_paraph;"Cardiovascular system";"Système cardio-vasculaire";"Cardiovasculair stelsel";complement_paraph
+systeme_urogenital_complement_paraph;"Urogenital system";"Système urogénital";"Urogenitaal stelsel";complement_paraph
+peau_et_phaneres_complement_paraph;"Skin and skin appendages";"Peau et phanères";"Huid en huidschilfers";complement_paraph
+immunologie_complement_paraph;Immunology;Immunologie;Immunologie;complement_paraph
+comportement_complement_paraph;Behaviour;Comportement;Gedrag;complement_paraph
+yeux_complement_paraph;Eyes;Yeux;Ogen;complement_paraph
+soin_hyg_paraph;"Health and hygiene";"Soin et hygiène";"Verzorging en hygiëne";paraph
+Yeux_soinhyg_paraph;Eyes;Yeux;Ogen;soin_hyg_paraph
+Oreilles_soinhyg_paraph;Ears;Oreilles;Oren;soin_hyg_paraph
+Peau_et_phaneres_soinhyg_paraph;"Skin and skin appendages";"Peau et phanères";"Huid en huidschilfers";soin_hyg_paraph
+Bouche_et_dents_soinhyg_paraph;"Mouth and teeth";"Bouche et dents";"Mond en tanden";soin_hyg_paraph
+Muscles_et_appareil_locomoteur_soinhyg_paraph;"Muscles and locomotion";"Muscles et appareil locomoteur";"Spieren en bewegingsapparaat";soin_hyg_paraph
+Systeme_respiratoire_soinhyg_paraph;"Respiratory system";"Système respiratoire";Ademhalingssysteem;soin_hyg_paraph
+Comportement_soinhyg_paraph;Behaviour;Comportement;Gedrag;soin_hyg_paraph
+autre_paraph;Environment;Environnement;Omgeving;paraph
+Comportement_envir_paraph;Behaviour;Comportement;Gedrag;autre_paraph
+Parasites_envir_paraph;Parasites;Parasites;Parasieten;autre_paraph
+Desinfection_envir_paraph;Desinfection;Désinfection;Ontsmetting;autre_paraph
+Desodorisant_envir_paraph;"Anti Odor";Désodorisant;Luchtverfrisser;autre_paraph
+ali;Food;Aliments;Voeding;master
+chien_ali;Dog;Chien;Hond;ali
+roy_can_chien;"Royal Canin";"Royal Canin";"Royal Canin";chien_ali
+breed_rcchi;Breed;Breed;Breed;roy_can_chien
+physio_brcchi;Physiological;Physiologique;Fysiologisch;breed_rcchi
+size_health_nutri_rcchi;"Size Health Nutrition";"Size Health Nutrition";"Size Health Nutrition";roy_can_chien
+physio_shnrcchi;Physiological;Physiologique;Fysiologisch;size_health_nutri_rcchi
+vet_care_nut_rcchi;"Vet Care Nutrition";"Vet Care Nutrition";"Vet Care Nutrition";roy_can_chien
+physio_vcnrcchi;Physiological;Physiologique;Fysiologisch;vet_care_nut_rcchi
+steril_vcnrcchi;Sterilisation;Stérilisation;Sterilisatie;vet_care_nut_rcchi
+vt_diet_rcchi;"Veterinary Diet";"Veterinary Diet";"Veterinary Diet";roy_can_chien
+allerg_vdrcchi;Allergy;Allergie;Allergie;vt_diet_rcchi
+articul_vdrcchi;Joint;Articulation;Gewricht;vt_diet_rcchi
+bucco_dent_vdrcchi;Oral;Bucco-dentaire;"Mond en gebit";vt_diet_rcchi
+coeur_vdrcchi;Heart;Cœur;Hart;vt_diet_rcchi
+comport_vdrcchi;Behaviour;Comportement;Gedrag;vt_diet_rcchi
+conval_vdrcchi;Convalescence;Convalescence;Herstel;vt_diet_rcchi
+diabet_vdrcchi;Diabetes;Diabète;Diabetes;vt_diet_rcchi
+digest_vdrcchi;Digestion;Digestion;Spijsvertering;vt_diet_rcchi
+foie_vdrcchi;Liver;Foie;Lever;vt_diet_rcchi
+peau_vdrcchi;Skin;Peau;Huid;vt_diet_rcchi
+poids_vdrcchi;Weight;Poids;Gewicht;vt_diet_rcchi
+reins_vdrcchi;Kidney;Reins;Nieren;vt_diet_rcchi
+urin_vdrcchi;Urinary;Urinaire;Urinair;vt_diet_rcchi
+hills_chien;Hill's;Hill's;Hill's;chien_ali
+scie_plan_hchi;"Science Plan";"Science Plan";"Science Plan";hills_chien
+physio_sphchi;Physiological;Physiologique;Fysiologisch;scie_plan_hchi
+vet_ess_hchi;"Vet Essentials";"Vet Essentials";VetEssentials;hills_chien
+physio_vehchi;Physiological;Physiologique;Fysiologisch;vet_ess_hchi
+steri_vehchi;Sterilisation;Stérilisation;Sterilisatie;vet_ess_hchi
+ideal_bal_hchi;"Ideal Balance";"Ideal Balance";"Ideal Balance";hills_chien
+physio_ibhchi;Physiological;Physiologique;Fysiologisch;ideal_bal_hchi
+biscuits_ibhchi;Biscuits;Biscuits;Koekjes;ideal_bal_hchi
+pres_diet_hchi;"Prescription Diet";"Prescription Diet";"Prescription Diet";hills_chien
+allerg_pdhchi;Allergy;Allergie;Allergie;pres_diet_hchi
+articul_pdhchi;Joint;Articulation;Gewricht;pres_diet_hchi
+bucco_dent_pdhchi;Oral;Bucco-dentaire;"Mond en gebit";pres_diet_hchi
+coeur_pdhchi;Heart;Cœur;Hart;pres_diet_hchi
+comport_pdhchi;Behaviour;Comportement;Gedrag;pres_diet_hchi
+conval_pdhchi;Convalescence;Convalescence;Herstel;pres_diet_hchi
+diabet_pdhchi;Diabetes;Diabète;Diabetes;pres_diet_hchi
+digest_pdhchi;Digestion;Digestion;Spijsvertering;pres_diet_hchi
+foie_pdhchi;Liver;Foie;Lever;pres_diet_hchi
+peau_pdhchi;Skin;Peau;Huid;pres_diet_hchi
+poids_pdhchi;Weight;Poids;Gewicht;pres_diet_hchi
+reins_pdhchi;Kidney;Reins;Nieren;pres_diet_hchi
+urin_pdhchi;Urinary;Urinaire;Urinair;pres_diet_hchi
+biscuits_pdhchi;Biscuits;Biscuits;Koekjes;pres_diet_hchi
+nat_best_hchi;"Nature Best";"Nature Best";"Nature Best";hills_chien
+physio_nbhchi;Physiological;Physiologique;Fysiologisch;nat_best_hchi
+virbac_chien;Virbac;Virbac;Virbac;chien_ali
+hpm_vchi;HPM;HPM;HPM;virbac_chien
+physio_hpmvchi;Physiological;Physiologique;Fysiologisch;hpm_vchi
+allerg_hpmvchi;Allergy;Allergie;Allergie;hpm_vchi
+articul_hpmvchi;Joint;Articulation;Gewricht;hpm_vchi
+bucco_dent_hpmvchi;Oral;Bucco-dentaire;"Mond en gebit";hpm_vchi
+coeur_hpmvchi;Heart;Cœur;Hart;hpm_vchi
+comport_hpmvchi;Behaviour;Comportement;Gedrag;hpm_vchi
+conval_hpmvchi;Convalescence;Convalescence;Herstel;hpm_vchi
+diabet_hpmvchi;Diabetes;Diabète;Diabetes;hpm_vchi
+digest_hpmvchi;Digestion;Digestion;Spijsvertering;hpm_vchi
+foie_hpmvchi;Liver;Foie;Lever;hpm_vchi
+peau_hpmvchi;Skin;Peau;Huid;hpm_vchi
+poids_hpmvchi;Weight;Poids;Gewicht;hpm_vchi
+reins_hpmvchi;Kidney;Reins;Nieren;hpm_vchi
+urin_hpmvchi;Urinary;Urinaire;Urinair;hpm_vchi
+vet_comp_vchi;"Vet Complex";"Vet Complex";"Vet Complex";virbac_chien
+allerg_vcvchi;Allergy;Allergie;Allergie;vet_comp_vchi
+articul_vcvchi;Joint;Articulation;Gewricht;vet_comp_vchi
+bucco_dent_vcvchi;Oral;Bucco-dentaire;"Mond en gebit";vet_comp_vchi
+coeur_vcvchi;Heart;Cœur;Hart;vet_comp_vchi
+comport_vcvchi;Behaviour;Comportement;Gedrag;vet_comp_vchi
+conval_vcvchi;Convalescence;Convalescence;Herstel;vet_comp_vchi
+diabet_vcvchi;Diabetes;Diabète;Diabetes;vet_comp_vchi
+digest_vcvchi;Digestion;Digestion;Spijsvertering;vet_comp_vchi
+foie_vcvchi;Liver;Foie;Lever;vet_comp_vchi
+peau_vcvchi;Skin;Peau;Huid;vet_comp_vchi
+poids_vcvchi;Weight;Poids;Gewicht;vet_comp_vchi
+reins_vcvchi;Kidney;Reins;Nieren;vet_comp_vchi
+urin_vcvchi;Urinary;Urinaire;Urinair;vet_comp_vchi
+specific_chien;Specific;Specific;Specific;chien_ali
+speci_schi;Specific;Specific;Specific;specific_chien
+physio_sschi;Physiological;Physiologique;Fysiologisch;speci_schi
+allerg_sschi;Allergy;Allergie;Allergie;speci_schi
+articul_sschi;Joint;Articulation;Gewricht;speci_schi
+bucco_dent_sschi;Oral;Bucco-dentaire;"Mond en gebit";speci_schi
+coeur_sschi;Heart;Cœur;Hart;speci_schi
+comport_sschi;Behaviour;Comportement;Gedrag;speci_schi
+conval_sschi;Convalescence;Convalescence;Herstel;speci_schi
+diabet_sschi;Diabetes;Diabète;Diabetes;speci_schi
+digest_sschi;Digestion;Digestion;Spijsvertering;speci_schi
+foie_sschi;Liver;Foie;Lever;speci_schi
+peau_sschi;Skin;Peau;Huid;speci_schi
+poids_sschi;Weight;Poids;Gewicht;speci_schi
+reins_sschi;Kidney;Reins;Nieren;speci_schi
+urin_sschi;Urinary;Urinaire;Urinair;speci_schi
+biscuits_sschi;Biscuits;Biscuits;Koekjes;speci_schi
+pp_pur_chien;"Purina Pro Plan";"Pro Plan Purina";"Pro Plan Purina";chien_ali
+pro_plan_pppchi;"Pro Plan";"Pro Plan";"Pro Plan";pp_pur_chien
+physio_pppppchi;Physiological;Physiologique;Fysiologisch;pro_plan_pppchi
+steril_pppppchi;Sterilisation;Stérilisation;Sterilisatie;pro_plan_pppchi
+biscuits_pppppchi;Biscuits;Biscuits;Koekjes;pro_plan_pppchi
+pp_pur_vet_d_pppchi;"Pro Plan Purina Veterinary Diet";"Pro Plan Purina Veterinary Diet";"Pro Plan Purina Veterinary Diet";pp_pur_chien
+allerg_pppvdppchi;Allergy;Allergie;Allergie;pp_pur_vet_d_pppchi
+articul_pppvdppchi;Joint;Articulation;Gewricht;pp_pur_vet_d_pppchi
+bucco_dent_pppvdppchi;Oral;Bucco-dentaire;"Mond en gebit";pp_pur_vet_d_pppchi
+coeur_pppvdppchi;Heart;Cœur;Hart;pp_pur_vet_d_pppchi
+comport_pppvdppchi;Behaviour;Comportement;Gedrag;pp_pur_vet_d_pppchi
+conval_pppvdppchi;Convalescence;Convalescence;Herstel;pp_pur_vet_d_pppchi
+diabet_pppvdppchi;Diabetes;Diabète;Diabetes;pp_pur_vet_d_pppchi
+digest_pppvdppchi;Digestion;Digestion;Spijsvertering;pp_pur_vet_d_pppchi
+foie_pppvdppchi;Liver;Foie;Lever;pp_pur_vet_d_pppchi
+peau_pppvdppchi;Skin;Peau;Huid;pp_pur_vet_d_pppchi
+poids_pppvdppchi;Weight;Poids;Gewicht;pp_pur_vet_d_pppchi
+reins_pppvdppchi;Kidney;Reins;Nieren;pp_pur_vet_d_pppchi
+urin_pppvdppchi;Urinary;Urinaire;Urinair;pp_pur_vet_d_pppchi
+sanimed_chien;Sanimed;Sanimed;Sanimed;chien_ali
+sanimed_schi;Sanimed;Sanimed;Sanimed;sanimed_chien
+physio_sanimedschi;Physiological;Physiologique;Fysiologisch;sanimed_schi
+allerg_sanimedschi;Allergy;Allergie;Allergie;sanimed_schi
+articul_sanimedschi;Joint;Articulation;Gewricht;sanimed_schi
+bucco_dent_sanimedschi;Oral;Bucco-dentaire;"Mond en gebit";sanimed_schi
+coeur_sanimedschi;Heart;Cœur;Hart;sanimed_schi
+comport_sanimedschi;Behaviour;Comportement;Gedrag;sanimed_schi
+conval_sanimedschi;Convalescence;Convalescence;Herstel;sanimed_schi
+diabet_sanimedschi;Diabetes;Diabète;Diabetes;sanimed_schi
+digest_sanimedschi;Digestion;Digestion;Spijsvertering;sanimed_schi
+foie_sanimedschi;Liver;Foie;Lever;sanimed_schi
+peau_sanimedschi;Skin;Peau;Huid;sanimed_schi
+poids_sanimedschi;Weight;Poids;Gewicht;sanimed_schi
+reins_sanimedschi;Kidney;Reins;Nieren;sanimed_schi
+urin_sanimedschi;Urinary;Urinaire;Urinair;sanimed_schi
+trovet_chien;Trovet;Trovet;Trovet;chien_ali
+trovet_tchi;Trovet;Trovet;Trovet;trovet_chien
+physio_ttchi;Physiological;Physiologique;Fysiologisch;trovet_tchi
+allerg_ttchi;Allergy;Allergie;Allergie;trovet_tchi
+articul_ttchi;Joint;Articulation;Gewricht;trovet_tchi
+bucco_dent_ttchi;Oral;Bucco-dentaire;"Mond en gebit";trovet_tchi
+coeur_ttchi;Heart;Cœur;Hart;trovet_tchi
+comport_ttchi;Behaviour;Comportement;Gedrag;trovet_tchi
+conval_ttchi;Convalescence;Convalescence;Herstel;trovet_tchi
+diabet_ttchi;Diabetes;Diabète;Diabetes;trovet_tchi
+digest_ttchi;Digestion;Digestion;Spijsvertering;trovet_tchi
+foie_ttchi;Liver;Foie;Lever;trovet_tchi
+peau_ttchi;Skin;Peau;Huid;trovet_tchi
+poids_ttchi;Weight;Poids;Gewicht;trovet_tchi
+reins_ttchi;Kidney;Reins;Nieren;trovet_tchi
+urin_ttchi;Urinary;Urinaire;Urinair;trovet_tchi
+biscuits_ttchi;Biscuits;Biscuits;Koekjes;trovet_tchi
+eukanuba_chien;Eukanuba;Eukanuba;Eukanuba;chien_ali
+euka_echi;Eukanuba;Eukanuba;Eukanuba;eukanuba_chien
+physio_eechi;Physiological;Physiologique;Fysiologisch;euka_echi
+biscuits_eechi;Biscuits;Biscuits;Koekjes;euka_echi
+euka_v_d_echi;"Eukanuba Veterinary Diet";"Eukanuba Veterinary Diet";"Eukanuba Veterinary Diet";eukanuba_chien
+allerg_evdechi;Allergy;Allergie;Allergie;euka_v_d_echi
+articul_evdechi;Joint;Articulation;Gewricht;euka_v_d_echi
+bucco_dent_evdechi;Oral;Bucco-dentaire;"Mond en gebit";euka_v_d_echi
+coeur_evdechi;Heart;Cœur;Hart;euka_v_d_echi
+comport_evdechi;Behaviour;Comportement;Gedrag;euka_v_d_echi
+conval_evdechi;Convalescence;Convalescence;Herstel;euka_v_d_echi
+diabet_evdechi;Diabetes;Diabète;Diabetes;euka_v_d_echi
+digest_evdechi;Digestion;Digestion;Spijsvertering;euka_v_d_echi
+foie_evdechi;Liver;Foie;Lever;euka_v_d_echi
+peau_evdechi;Skin;Peau;Huid;euka_v_d_echi
+poids_evdechi;Weight;Poids;Gewicht;euka_v_d_echi
+reins_evdechi;Kidney;Reins;Nieren;euka_v_d_echi
+urin_evdechi;Urinary;Urinaire;Urinair;euka_v_d_echi
+biscuits_evdechi;Biscuits;Biscuits;Koekjes;euka_v_d_echi
+Celtic;Celtic;Celtic;Celtic;chien_ali
+physio_cchi;Physiological;Physiologique;Fysiologisch;Celtic
+alichien_acana;Acana;Acana;Acana;chien_ali
+physio_acchien;Physiological;Physiologique;Fysiologisch;alichien_acana
+alichien_orijen;Orijen;Orijen;Orijen;chien_ali
+physio_orchien;Physiological;Physiologique;Fysiologisch;alichien_orijen
+chi_sanalio;Sanalio;Sanalio;Sanalio;chien_ali
+physio_sanchien;Physiological;Physiologique;Fysiologisch;chi_sanalio
+SOFIVET;Sofivet;Sofivet;Sofivet;chien_ali
+chi_sofivet_physio;Physiological;Physiologique;Fysiologisch;SOFIVET
+chat_ali;Cat;Chat;Kat;ali
+roy_can_chat;"Royal Canin";"Royal Canin";"Royal Canin";chat_ali
+breed_rccha;Breed;Breed;Breed;roy_can_chat
+physio_brccha;Physiological;Physiologique;Fysiologisch;breed_rccha
+vet_care_nut_rccha;"Vet Care Nutrition";"Vet Care Nutrition";"Vet Care Nutrition";roy_can_chat
+physio_vcnrccha;Physiological;Physiologique;Fysiologisch;vet_care_nut_rccha
+steril_vcnrccha;Sterilisation;Stérilisation;Sterilisatie;vet_care_nut_rccha
+vt_diet_rccha;"Veterinary Diet";"Veterinary Diet";"Veterinary Diet";roy_can_chat
+allerg_vdrccha;Allergy;Allergie;Allergie;vt_diet_rccha
+articul_vdrccha;Joint;Articulation;Gewricht;vt_diet_rccha
+bucco_dent_vdrccha;Oral;Bucco-dentaire;"Mond en gebit";vt_diet_rccha
+coeur_vdrccha;Heart;Cœur;Hart;vt_diet_rccha
+comport_vdrccha;Behaviour;Comportement;Gedrag;vt_diet_rccha
+conval_vdrccha;Convalescence;Convalescence;Herstel;vt_diet_rccha
+diabet_vdrccha;Diabetes;Diabète;Diabetes;vt_diet_rccha
+digest_vdrccha;Digestion;Digestion;Spijsvertering;vt_diet_rccha
+foie_vdrccha;Liver;Foie;Lever;vt_diet_rccha
+peau_vdrccha;Skin;Peau;Huid;vt_diet_rccha
+poids_vdrccha;Weight;Poids;Gewicht;vt_diet_rccha
+reins_vdrccha;Kidney;Reins;Nieren;vt_diet_rccha
+urin_vdrccha;Urinary;Urinaire;Urinair;vt_diet_rccha
+hills_chat;Hill's;Hill's;Hill's;chat_ali
+scie_plan_hcha;"Science Plan";"Science Plan";"Science Plan";hills_chat
+physio_sphcha;Physiological;Physiologique;Fysiologisch;scie_plan_hcha
+vet_ess_hcha;"Vet Essentials";"Vet Essentials";VetEssentials;hills_chat
+physio_vehcha;Physiological;Physiologique;Fysiologisch;vet_ess_hcha
+steril_vehcha;Sterilisation;Stérilisation;Sterilisatie;vet_ess_hcha
+ideal_bal_hcha;"Ideal Balance";"Ideal Balance";"Ideal Balance";hills_chat
+physio_ibhcha;Physiological;Physiologique;Fysiologisch;ideal_bal_hcha
+pres_diet_hcha;"Prescription Diet";"Prescription Diet";"Prescription Diet";hills_chat
+allergie_pdhcha;Allergy;Allergie;Allergie;pres_diet_hcha
+articul_pdhcha;Joint;Articulation;Gewricht;pres_diet_hcha
+bucco_dent_pdhcha;Oral;Bucco-dentaire;"Mond en gebit";pres_diet_hcha
+coeur_pdhcha;Heart;Cœur;Hart;pres_diet_hcha
+comport_pdhcha;Behaviour;Comportement;Gedrag;pres_diet_hcha
+conval_pdhcha;Convalescence;Convalescence;Herstel;pres_diet_hcha
+diabet_pdhcha;Diabetes;Diabète;Diabetes;pres_diet_hcha
+digest_pdhcha;Digestion;Digestion;Spijsvertering;pres_diet_hcha
+foie_pdhcha;Liver;Foie;Lever;pres_diet_hcha
+peau_pdhcha;Skin;Peau;Huid;pres_diet_hcha
+poids_pdhcha;Weight;Poids;Gewicht;pres_diet_hcha
+reins_pdhcha;Kidney;Reins;Nieren;pres_diet_hcha
+urin_pdhcha;Urinary;Urinaire;Urinair;pres_diet_hcha
+thyro_pdhcha;Thyroid;Thyroïde;Schildklier;pres_diet_hcha
+biscuits_pdhcha;Biscuits;Biscuits;Koekjes;pres_diet_hcha
+nat_best_hcha;"Nature best";"Nature best";"Nature best";hills_chat
+physio_nbhcha;Physiological;Physiologique;Fysiologisch;nat_best_hcha
+virbac_chat;Virbac;Virbac;Virbac;chat_ali
+hpm_vcha;HPM;HPM;HPM;virbac_chat
+physio_hpmvcha;Physiological;Physiologique;Fysiologisch;hpm_vcha
+allerg_hpmvcha;Allergy;Allergie;Allergie;hpm_vcha
+articul_hpmvcha;Joint;Articulation;Gewricht;hpm_vcha
+bucco_dent_hpmvcha;Oral;Bucco-dentaire;"Mond en gebit";hpm_vcha
+coeur_hpmvcha;Heart;Cœur;Hart;hpm_vcha
+comport_hpmvcha;Behaviour;Comportement;Gedrag;hpm_vcha
+conval_hpmvcha;Convalescence;Convalescence;Herstel;hpm_vcha
+diabet_hpmvcha;Diabetes;Diabète;Diabetes;hpm_vcha
+digest_hpmvcha;Digestion;Digestion;Spijsvertering;hpm_vcha
+foie_hpmvcha;Liver;Foie;Lever;hpm_vcha
+peau_hpmvcha;Skin;Peau;Huid;hpm_vcha
+poids_hpmvcha;Weight;Poids;Gewicht;hpm_vcha
+reins_hpmvcha;Kidney;Reins;Nieren;hpm_vcha
+urin_hpmvcha;Urinary;Urinaire;Urinair;hpm_vcha
+vet_comp_vcha;"Vet Complex";"Vet Complex";"Vet Complex";virbac_chat
+allerg_vcvcha;Allergy;Allergie;Allergie;vet_comp_vcha
+articul_vcvcha;Joint;Articulation;Gewricht;vet_comp_vcha
+bucco_dent_vcvcha;Oral;Bucco-dentaire;"Mond en gebit";vet_comp_vcha
+coeur_vcvcha;Heart;Cœur;Hart;vet_comp_vcha
+comport_vcvcha;Behaviour;Comportement;Gedrag;vet_comp_vcha
+conval_vcvcha;Convalescence;Convalescence;Herstel;vet_comp_vcha
+diabet_vcvcha;Diabetes;Diabète;Diabetes;vet_comp_vcha
+digest_vcvcha;Digestion;Digestion;Spijsvertering;vet_comp_vcha
+foie_vcvcha;Liver;Foie;Lever;vet_comp_vcha
+peau_vcvcha;Skin;Peau;Huid;vet_comp_vcha
+poids_vcvcha;Weight;Poids;Gewicht;vet_comp_vcha
+reins_vcvcha;Kidney;Reins;Nieren;vet_comp_vcha
+urin_vcvcha;Urinary;Urinaire;Urinair;vet_comp_vcha
+specific_chat;Specific;Specific;Specific;chat_ali
+speci_scha;Specific;Specific;Specific;specific_chat
+physio_sscha;Physiological;Physiologique;Fysiologisch;speci_scha
+allerg_sscha;Allergy;Allergie;Allergie;speci_scha
+articul_sscha;Joint;Articulation;Gewricht;speci_scha
+bucco_dent_sscha;Oral;Bucco-dentaire;"Mond en gebit";speci_scha
+coeur_sscha;Heart;Cœur;Hart;speci_scha
+comport_sscha;Behaviour;Comportement;Gedrag;speci_scha
+conval_sscha;Convalescence;Convalescence;Herstel;speci_scha
+diabet_sscha;Diabetes;Diabète;Diabetes;speci_scha
+digest_sscha;Digestion;Digestion;Spijsvertering;speci_scha
+foie_sscha;Liver;Foie;Lever;speci_scha
+peau_sscha;Skin;Peau;Huid;speci_scha
+poids_sscha;Weight;Poids;Gewicht;speci_scha
+reins_sscha;Kidney;Reins;Nieren;speci_scha
+urin_sscha;Urinary;Urinaire;Urinair;speci_scha
+pp_pur_chat;"Purina Pro Plan";"Pro Plan Purina";"Pro Plan Purina";chat_ali
+pro_plan_pppcha;"Pro Plan";"Pro Plan";"Pro Plan";pp_pur_chat
+physio_pppppcha;Physiological;Physiologique;Fysiologisch;pro_plan_pppcha
+steril_pppppcha;Sterilisation;Stérilisation;Sterilisatie;pro_plan_pppcha
+pp_pur_vet_d_pppcha;"Pro Plan Purina Veterinary Diet";"Pro Plan Purina Veterinary Diet";"Pro Plan Purina Veterinary Diet";pp_pur_chat
+allerg_pppvdppcha;Allergy;Allergie;Allergie;pp_pur_vet_d_pppcha
+articul_pppppcha;Joint;Articulation;Gewricht;pp_pur_vet_d_pppcha
+bucco_dent_pppppcha;Oral;Bucco-dentaire;"Mond en gebit";pp_pur_vet_d_pppcha
+coeur_pppppcha;Heart;Cœur;Hart;pp_pur_vet_d_pppcha
+comport_pppppcha;Behaviour;Comportement;Gedrag;pp_pur_vet_d_pppcha
+conval_pppppcha;Convalescence;Convalescence;Herstel;pp_pur_vet_d_pppcha
+diabet_pppppcha;Diabetes;Diabète;Diabetes;pp_pur_vet_d_pppcha
+digest_pppppcha;Digestion;Digestion;Spijsvertering;pp_pur_vet_d_pppcha
+foie_pppppcha;Liver;Foie;Lever;pp_pur_vet_d_pppcha
+peau_pppppcha;Skin;Peau;Huid;pp_pur_vet_d_pppcha
+poids_pppppcha;Weight;Poids;Gewicht;pp_pur_vet_d_pppcha
+reins_pppppcha;Kidney;Reins;Nieren;pp_pur_vet_d_pppcha
+urin_pppppcha;Urinary;Urinaire;Urinair;pp_pur_vet_d_pppcha
+sanimed_chat;Sanimed;Sanimed;Sanimed;chat_ali
+sanimed_scha;Sanimed;Sanimed;Sanimed;sanimed_chat
+physio_sanimedcha;Physiological;Physiologique;Fysiologisch;sanimed_scha
+allerg_sanimedcha;Allergy;Allergie;Allergie;sanimed_scha
+articul_sanimedcha;Joint;Articulation;Gewricht;sanimed_scha
+bucco_dent_sanimedcha;Oral;Bucco-dentaire;"Mond en gebit";sanimed_scha
+coeur_sanimedcha;Heart;Cœur;Hart;sanimed_scha
+comport_sanimedcha;Behaviour;Comportement;Gedrag;sanimed_scha
+conval_sanimedcha;Convalescence;Convalescence;Herstel;sanimed_scha
+diabet_sanimedcha;Diabetes;Diabète;Diabetes;sanimed_scha
+digest_sanimedcha;Digestion;Digestion;Spijsvertering;sanimed_scha
+foie_sanimedcha;Liver;Foie;Lever;sanimed_scha
+peau_sanimedcha;Skin;Peau;Huid;sanimed_scha
+poids_sanimedcha;Weight;Poids;Gewicht;sanimed_scha
+reins_sanimedcha;Kidney;Reins;Nieren;sanimed_scha
+urin_sanimedcha;Urinary;Urinaire;Urinair;sanimed_scha
+trovet_chat;Trovet;Trovet;Trovet;chat_ali
+trovet_tcha;Trovet;Trovet;Trovet;trovet_chat
+physio_ttcha;Physiological;Physiologique;Fysiologisch;trovet_tcha
+allerg_ttcha;Allergy;Allergie;Allergie;trovet_tcha
+articul_ttcha;Joint;Articulation;Gewricht;trovet_tcha
+bucco_dent_ttcha;Oral;Bucco-dentaire;"Mond en gebit";trovet_tcha
+coeur_ttcha;Heart;Cœur;Hart;trovet_tcha
+comport_ttcha;Behaviour;Comportement;Gedrag;trovet_tcha
+conval_ttcha;Convalescence;Convalescence;Herstel;trovet_tcha
+diabet_ttcha;Diabetes;Diabète;Diabetes;trovet_tcha
+digest_ttcha;Digestion;Digestion;Spijsvertering;trovet_tcha
+foie_ttcha;Liver;Foie;Lever;trovet_tcha
+peau_ttcha;Skin;Peau;Huid;trovet_tcha
+poids_ttcha;Weight;Poids;Gewicht;trovet_tcha
+reins_ttcha;Kidney;Reins;Nieren;trovet_tcha
+urin_ttcha;Urinary;Urinaire;Urinair;trovet_tcha
+biscuits_ttcha;Biscuits;Biscuits;Koekjes;trovet_tcha
+eukanuba_chat;Eukanuba;Eukanuba;Eukanuba;chat_ali
+iams_echa;Iams;Iams;Iams;eukanuba_chat
+physio_iecha;Physiological;Physiologique;Fysiologisch;iams_echa
+euka_echa;Eukanuba;Eukanuba;Eukanuba;eukanuba_chat
+physio_eecha;Physiological;Physiologique;Fysiologisch;euka_echa
+euka_v_d_echa;"Eukanuba Veterinary Diet";"Eukanuba Veterinary Diet";"Eukanuba Veterinary Diet";eukanuba_chat
+allerg_evdecha;Allergy;Allergie;Allergie;euka_v_d_echa
+articul_evdecha;Joint;Articulation;Gewricht;euka_v_d_echa
+bucco_dent_evdecha;Oral;Bucco-dentaire;"Mond en gebit";euka_v_d_echa
+coeur_evdecha;Heart;Cœur;Hart;euka_v_d_echa
+comport_evdecha;Behaviour;Comportement;Gedrag;euka_v_d_echa
+conval_evdecha;Convalescence;Convalescence;Herstel;euka_v_d_echa
+diabet_evdecha;Diabetes;Diabète;Diabetes;euka_v_d_echa
+digest_evdecha;Digestion;Digestion;Spijsvertering;euka_v_d_echa
+foie_evdecha;Liver;Foie;Lever;euka_v_d_echa
+peau_evdecha;Skin;Peau;Huid;euka_v_d_echa
+poids_evdecha;Weight;Poids;Gewicht;euka_v_d_echa
+reins_evdecha;Kidney;Reins;Nieren;euka_v_d_echa
+urin_evdecha;Urinary;Urinaire;Urinair;euka_v_d_echa
+alichat_celtic;Celtic;Celtic;Celtic;chat_ali
+physio_ccha;Pysiological;Physiologique;Fysiologisch;alichat_celtic
+alichat_acana;Acana;Acana;Acana;chat_ali
+physio_accha;Physiological;Physiologique;Fysiologisch;alichat_acana
+alichat_orijen;Orijen;Orijen;Orijen;chat_ali
+physio_orcha;Physiological;Physiologique;Fysiologisch;alichat_orijen
+alichat_sofivet;Sofivet;Sofivet;Sofivet;chat_ali
+chat_sofivet_physio;Physiological;Physiologique;Fysiologisch;alichat_sofivet
+nac_ali;NAC;NAC;Knaagdieren;ali
+vers_laga_nac;"Versele Laga";"Versele Laga";Versele-Laga;nac_ali
+complet_vlnac;Complete;Complete;Complete;vers_laga_nac
+nutribird_vlnac;Nutribird;Nutribird;Nutribird;vers_laga_nac
+orlux_vlnac;Orlux;Orlux;Orlux;vers_laga_nac
+caviapro_vlnac;"Cavia Pro";"Cavia Pro";"Cavia Pro";vers_laga_nac
+crispy_vlnac;Crispy;Crispy;Crispy;vers_laga_nac
+supr_scie_nac;"Supreme Science";"Supreme Science";"Supreme Science";nac_ali
+selectiv_ssnac;Selective;Selective;Selective;supr_scie_nac
+recovery_ssnac;Recovery;Recovery;Recovery;supr_scie_nac
+vetcare_p_ssnac;"Vetcare Plus";"Vetcare Plus";"Vetcare Plus";supr_scie_nac
+fibafirst_cnac;Fibafirst;Fibafirst;Fibafirst;supr_scie_nac
+trovet_nac;Trovet;Trovet;Trovet;nac_ali
+foin_nac;Other;Divers;Divers;nac_ali
+oxbow_nac;Oxbow;Oxbow;Oxbow;nac_ali
+mat;"Medical Material";"Matériel Médical";"Medisch materiaal";master
+cons;Consumables;Consommables;Verbruiksproducten;mat
+pansem_cons;Dressings;Pansements;Verbanden;cons
+bandadhes_pansem_cons;"Adhesive strips";"Bandes Adhésives";"Klevend verband";pansem_cons
+bandcohes_pansem_cons;"Cohesive strips";"Bandes Cohésives";"Zelf-klevend Verband";pansem_cons
+bandcrepgaztoil_pansem_cons;"Crêpes-gauze strips";"Bandes Crêpes-gazes";"Netverbanden - gaasbanden";pansem_cons
+bandimmobil_pansem_cons;"Immobilisation strips";"Bandes Immobilisation";Immobilisatieverbanden;pansem_cons
+platr_bandimmobil_pansem_cons;Plasters;Plâtrées;"Gipsverbanden - Plaasters";bandimmobil_pansem_cons
+resin_bandimmobil_pansem_cons;Resins;Résines;Harsen;bandimmobil_pansem_cons
+sousplatre_bandimmobil_pansem_cons;Sub-plaster;Sous-plâtre;Gipswindels;bandimmobil_pansem_cons
+attel_pansem_cons;Splints;Attelles;Spalken;pansem_cons
+protectdupans_pansem_cons;"Dressing protection";"Protection du pansement";Verbandbescherming;pansem_cons
+minervetcarc_pansem_cons;"Minerva collars and Restraints";"Minerves et Carcans";Kragen;pansem_cons
+sparaadhes_pansem_cons;Plaster-Adhesive;Sparadrap-Adhésif;"Hechtpleister - Klevende tapes";pansem_cons
+compress_pansem_cons;Compresses;Compresses;Kompressen;pansem_cons
+cicathemo_pansem_cons;Healing-Haemostasis;Cicatrisation-Hémostase;"Wondgenezing - bloedstelping";pansem_cons
+coton_pansem_cons;Cotton;Coton;Katoen;pansem_cons
+chirurg_cons;Surgery;Chirurgie;Chirurgie;cons
+chirurg_chirurg_cons;Surgery;Chirurgie;Chirurgie;chirurg_cons
+champs_chirurg_chirurg_cons;Fields;Champs;Operatiedoeken;chirurg_chirurg_cons
+tranchant_chirurg_chirurg_cons;Cutters;Tranchants;Skalpel;chirurg_chirurg_cons
+inj_cons;Injection;Injection;Injectie;cons
+aig_inj_cons;Needles;Aiguilles;Naalden;inj_cons
+ser_inj_cons;Syringes;Seringues;Spuiten;inj_cons
+perftransfu_inj_cons;"Infusion - Transfusion";"Perfusion - Transfusion";"Infusie - transfusie";inj_cons
+catheter_perftransfu_inj_cons;Catheters;Cathéters;Katheters;perftransfu_inj_cons
+perfus_perftransfu_inj_cons;Infusers;Perfuseurs;Infuusapparatuur;perftransfu_inj_cons
+transfus_perftransfu_inj_cons;Transfusers;Transfuseurs;Transfusieapparatuur;perftransfu_inj_cons
+access_perftransfu_inj_cons;Accessories;Accessoires;Toebehoren;perftransfu_inj_cons
+epicran_inj_cons;"Torniquets and Needle boxes";"Garrots et Collecteurs d'aiguilles";"Aderlaatkoorden en Naaldcollectors";inj_cons
+prelev_cons;Samples;Prélèvements;Staalafnames;cons
+admindesantican_prelev_cons;"Plastics and bottles";"Plastique - Verreries";"Verpakkingen Plastiek en glas";prelev_cons
+prelevsang_prelev_cons;"Blood sample";"Prélèvement sanguin";"Afname van bloedstalen";prelev_cons
+sonde_cons;Probes;Sondes;Sondes;cons
+sondstom_sonde_cons;"Stomach probes";"Sondes stomacales";Maagsondes;sonde_cons
+sondves_sonde_cons;"Bladder catheters";"Sondes vésicales";"Urine sondes";sonde_cons
+drainimpl_sonde_cons;"Drains - Implants";"Drains - Implants";"Drains - implantaten";sonde_cons
+sonddiv_sonde_cons;"Various probes";"Sondes divers";"Diverse sondes";sonde_cons
+sutur_cons;Sutures;Sutures;Hechtingsmateriaal;cons
+agraf_sutur_cons;"Staplers & Glues";"Agrafeuses & Colles";"Huidstaplers & Lijmen";sutur_cons
+aiguillee_sutur_cons;"Pochette sertie";"Pochette sertie";"Blister zonder naald";sutur_cons
+filresorb_aiguillee_sutur_cons;"Absorbable thread";"Fils résorbable";"Resorbeerbare hechtdraad";aiguillee_sutur_cons
+filiresorb_aiguillee_sutur_cons;"Non-absorbable thread";"Fils irrésorbable";"Niet-resorbeerbare hechtdraad";aiguillee_sutur_cons
+pochnonsert_sutur_cons;"Pochette non sertie";"Pochette non sertie";"Blister met naald";sutur_cons
+filresorb_nonaiguillee_sutur_cons;"Absorbable thread";"Fils résorbable";"Resorbeerbare hechtdraad";pochnonsert_sutur_cons
+filiresorb_nonaiguillee_sutur_cons;"Non-absorbable thread";"Fils irrésorbable";"Niet-resorbeerbare hechtdraad";pochnonsert_sutur_cons
+devid_sutur_cons;"Bobine et casette";"Bobine et cassette";"Bobijn en cassette";sutur_cons
+filresorb_devid_sutur_cons;"Absorbable thread";"Fils résorbable";"Resorbeerbare hechtdraad";devid_sutur_cons
+filiresorb_devid_sutur_cons;"Non-absorbable thread";"Fils irrésorbable";"Niet-resorbeerbare hechtdraad";devid_sutur_cons
+aigasut_sutur_cons;"Needles for sutures";"Aiguilles à sutures";Hechtingsnaalden;sutur_cons
+gant_cons;Gloves;Gants;Handschoenen;cons
+bross_gant_cons;Brushes;Brosses;Borstels;gant_cons
+gantdechir_gant_cons;"Surgical gloves";"Gants de chirurgie";"Chirurgische handschoenen";gant_cons
+gantdexam_gant_cons;"Examination gloves";"Gants d’examen";Onderzoekshandschoenen;gant_cons
+gantderur_gant_cons;"Rural gloves";"Gants de rurale";Verloshandschoenen;gant_cons
+habi_cons;Clothing;Habillement;Kleding;cons
+vetconsu_habi_cons;"Consultation clothing";"Vêtements de consultation";"Medische kleding";habi_cons
+vetchir_habi_cons;"Surgery clothing";"Vêtements de chirurgie";"Chirurgische kleding";habi_cons
+uu_vetchir_habi_cons;"Single use";"Usage unique";"Eenmalig gebruik";vetchir_habi_cons
+tisse_vetchir_habi_cons;Woven;Tissés;Geweven;vetchir_habi_cons
+vetrur_habi_cons;"Rural clothing";"Vêtements rurale";"Kleding landbouwdieren";habi_cons
+uu_vetrur_habi_cons;"Single use";"Usage unique";"Eenmalig gebruik";vetrur_habi_cons
+tisse_vetrur_habi_cons;Woven;Tissés;Geweven;vetrur_habi_cons
+labo_cons;Laboratory;Laboratoire;Laboratorium;cons
+microsccolfix_labo_cons;"Microscope - Dyes - Fixers";"Microscope - Colorants - Fixateurs";"Microscoop - Kleurstoffen - Fixeermiddelen";labo_cons
+copro_labo_cons;Coprology;Coprologie;Coprologie;labo_cons
+bioprelev_labo_cons;"Biopsy - Sampling";"Biopsie - Prélèvement";"Biopsie - Afname";labo_cons
+reactmach_labo_cons;"Machinery reagents";"Réactifs machines";"Labo apparatuur";labo_cons
+tests_labo_cons;Tests;Tests;Tests;labo_cons
+equip;Equipment;Equipement;Uitrusting;mat
+img_equip;Imagery;Imagerie;Beeldvorming;equip
+appderadio_img_equip;"Radiology equipment";"Appareils de Radiologie";Radiologietoestellen;img_equip
+developmt_img_equip;Development;Développement;Ontwikkeling;img_equip
+app_developmt_img_equip;Devices;Appareils;Toestellen;developmt_img_equip
+cuve_developmt_img_equip;Tanks;Cuves;Bak;developmt_img_equip
+chimie_developmt_img_equip;Chemistry;Chimie;Chemie;developmt_img_equip
+access_developmt_img_equip;Accessories;Accessoires;Toebehoren;developmt_img_equip
+casset_developmt_img_equip;Cassettes;Cassettes;Cassettes;developmt_img_equip
+ecran_img_equip;Screens;Ecrans;Schermen;img_equip
+orthochro_developmt_img_equip;Orthochromatics;Orthochromatiques;Orthochromatische;ecran_img_equip
+film_img_equip;Films;Films;Films;img_equip
+orthochro_film_img_equip;Orthochromatics;Orthochromatiques;Orthochromatische;film_img_equip
+bleu_film_img_equip;Blues;Bleus;Blauwe;film_img_equip
+accessderad_img_equip;"Radiology accessories";"Accessoires de radiologie";Radiologietoebehoren;img_equip
+negato_img_equip;Negatoscopes;Négatoscopes;Lichtbakken;img_equip
+radio_img_equip;Radioprotection;Radioprotection;Stralingsbescherming;img_equip
+echo_img_equip;Ultrasound;Echographie;Echografie;img_equip
+app_echo_img_equip;Devices;Appareils;Toestellen;echo_img_equip
+accessecho_echo_img_equip;"Ultrasound accessories";"Accessoires d’échographie";"Toebehoeren voor echografie";echo_img_equip
+endo_img_equip;Endoscopy;Endoscopie;Endoscopie;img_equip
+mob_equip;Furniture;Mobilier;Meubilair;equip
+eclair_mob_equip;Lighting;Eclairage;Verlichting;mob_equip
+exam_eclair_mob_equip;Examination;Examen;Onderzoek;eclair_mob_equip
+plafonnier_eclair_mob_equip;"Ceiling light";Plafonnier;Plafond;eclair_mob_equip
+chir_eclair_mob_equip;Surgery;Chirurgie;Chirurgie;eclair_mob_equip
+petimobpes_mob_equip;"Small furniture - weighing";"Petit mobilier - pesée";"Klein meubilair - weegschalen";mob_equip
+table_mob_equip;Tables;Tables;Tafels;mob_equip
+consult_table_mob_equip;Consultation;Consultation;Consultatie;table_mob_equip
+prepar_table_mob_equip;Preparation;Préparation;Voorbereiding;table_mob_equip
+chir_table_mob_equip;Surgery;Chirurgie;Chirurgie;table_mob_equip
+access_table_mob_equip;Accessories;Accessoires;Toebehoren;table_mob_equip
+chaindufr_mob_equip;"Cold chain";"Chaine du froid";Koeling;mob_equip
+armoirrefrig_chaindufr_mob_equip;"Refrigerated cabinets";"Armoires réfrigérées";Koelkasten;chaindufr_mob_equip
+frgodetransp_chaindufr_mob_equip;"Refrigerated transport";"Frigo de transport";Transportkoelkast;chaindufr_mob_equip
+stock_mob_equip;Storage;Stockage;Opslag;mob_equip
+cont_mob_equip;Contention;Contention;Fixatie;mob_equip
+enseig_mob_equip;Signs;Enseignes;Uithangborden;mob_equip
+enseign_enseig_mob_equip;Signs;Enseignes;Uithangborden;enseig_mob_equip
+chenil_equip;Kennel;Chenil;Kennel;equip
+cag_chenil_equip;Cages;Cages;Kooien;chenil_equip
+access_chenil_equip;Accessories;Accessoires;Toebehoren;chenil_equip
+tonte_equip;Shearing;Tonte;Scheren;equip
+app_tonte_equip;Devices;Appareils;Toestellen;tonte_equip
+tetdecoup_tonte_equip;"Cutting head";"Tête de coupe";Scheerkop;tonte_equip
+access_tonte_equip;Accessories;Accessoires;Toebehoren;tonte_equip
+chir_equip;Surgery;Chirurgie;Chirurgie;equip
+bistetcautelec_chir_equip;"Scalpels and electrocautery";"Bistouris et cautères électriques";"Scalpels en Caustiekapparaat";chir_equip
+aspi_chir_equip;Vacuums;Aspirateurs;Afzuigtoestellen;chir_equip
+accessaspi_chir_equip;"Vacuum accessories";"Accessoires aspirateurs";"Toebehoren afzuigtoestellen";chir_equip
+anesth_equip;Anaesthesia-Monitoring;Anesthésie-Surveillance;"Anesthesie - Toezicht";equip
+app_anesth_equip;Devices;Appareils;Toestellen;anesth_equip
+access_anesth_equip;Accessories;Accessoires;Toebehoren;anesth_equip
+surveil_anesth_equip;Monitoring;Surveillance;Toezicht;anesth_equip
+perfsoinsint_equip;"Infusion - Intensive care";"Perfusion - Soins intensifs";"Infusie - Intensieve zorgen";equip
+dentist_equip;Dentistry;Dentisterie;Tandheelkunde;equip
+detart_dentist_equip;Tables;Tables;Tafels;dentist_equip
+detartetpol_dentist_equip;"Scalers and polishers";"Détartreurs et Polisseurs";"Tandsteenreinigers en polijsttoestellen";dentist_equip
+accpourdetaretpol_dentist_equi;"Accessories for Scalers and Polishers";"Accessoires pour  Détartreurs et Polisseurs";"Toebehoren voor Tandsteenreinigers en polijsttoestellen";dentist_equip
+diagno_equip;Diagnosis;Diagnostic;Diagnose;equip
+ecg_diagno_equip;E.C.G.;E.C.G.;E.K.G.;diagno_equip
+ophta_diagno_equip;Ophthalmoscope;Ophtalmoscope;Oftalmoscoop;diagno_equip
+direct_ophta_diagno_equip;Direct;Direct;Direct;ophta_diagno_equip
+indirect_ophta_diagno_equip;Indirect;Indirect;Indirect;ophta_diagno_equip
+lampafent_diagno_equip;"Slit lamp";"Lampe à fente";Spleetlamp;diagno_equip
+examoeil_diagno_equip;"EYE examination";"Examen de  l’ŒIL";Oogonderzoek;diagno_equip
+otosc_diagno_equip;Otoscopes;Otoscopes;Otoscopen;diagno_equip
+manchettrans_diagno_equip;"Sleeves and transformers";"Manches et transformateurs";"Handvaten en transfo's";diagno_equip
+stetho_diagno_equip;Stethoscopes;Stéthoscopes;Stethoscopen;diagno_equip
+thermo_diagno_equip;Thermometers;Thermomètres;Thermometers;diagno_equip
+div_diagno_equip;Various;Divers;Allerlei;diagno_equip
+identif_equip;Identification;Identification;Identificatie;equip
+identcan_identif_equip;"Canine identification";"Identification canine";"Identificatie van honden";identif_equip
+lectdepuce_identcan_identif_equip;"Chip readers";"Lecteurs de puces";Chiplezer;identcan_identif_equip
+tatetpincatat_identcan_identif_equip;"Tattoo artists and tattoo pliers";"Tatoueurs et pinces à tatouer";"Oormerken en oormerktangen";identcan_identif_equip
+access_identcan_identif_equip;Accessories;Accessoires;Toebehoren;identcan_identif_equip
+labo_equip;Laboratories;Laboratoires;Laboratoriums;equip
+ana_labo_equip;Analysers;Analyseurs;Analysators;labo_equip
+centri_labo_equip;Centrifuges;Centrifugeuses;Centrifuges;labo_equip
+app_centri_labo_equip;Devices;Appareils;Toestellen;centri_labo_equip
+access_centri_labo_equip;Accessories;Accessoires;Toebehoren;centri_labo_equip
+microsc_labo_equip;Microscopes;Microscopes;Microscopen;labo_equip
+app_microsc_labo_equip;Devices;Appareils;Toestellen;microsc_labo_equip
+access_microsc_labo_equip;Accessories;Accessoires;Toebehoren;microsc_labo_equip
+labo_labo_equip;Laboratory;Laboratoire;Laboratorium;labo_equip
+vaissel_labo_labo_equip;Dishes;Vaisselle;Afwas;labo_labo_equip
+hygetster_equip;"Hygiene and sterilisation";"Hygiène et stérilisation";"Hygiëne en sterilisatie";equip
+appdester_hygetster_equip;"Sterilisation equipment";"Appareils de stérilisation";Sterilisatietoestellen;hygetster_equip
+consdester_hygetster_equip;"Sterilisation consumables";"Consommables de stérilisation";"Verbruiksgoederen voor sterilisatie";hygetster_equip
+accdester_hygetster_equip;"Sterilisation accessories";"Accessoires de stérilisation";"Toebehoren voor sterilisatie";hygetster_equip
+nettulson_hygetster_equip;"Ultrasonic cleaner";"Nettoyeur ultra sons";"Ultrasonische reinigers";hygetster_equip
+boitplatettamb_hygetster_equip;"Boxes, trays and drums";"Boîtes, plateaux et tambours";"Dozen, schalen en trommels";hygetster_equip
+antietdes_hygetster_equip;"Antiseptics and disinfectants";"Antiseptiques et désinfectants";"Antiseptica en desinfectantia";hygetster_equip
+mains_antietdes_hygetster_equip;Hands;Mains;Handen;antietdes_hygetster_equip
+predesinfdumat_antietdes_hygetster_equip;"Pre-disinfection equipment";"Prédésinfection du matériel";"Voorontsmetting van materiaal";antietdes_hygetster_equip
+desinfsteriafrd_antietdes_hygetster_equip;"Disinfectant - cold sterilisation";"Désinfectant – stérilisation à froid";"Ontsmetting - koude sterilisatie";antietdes_hygetster_equip
+divers_antietdes_hygetster_equip;Various;Divers;Allerlei;antietdes_hygetster_equip
+instru;Instrumentation;Instrumentation;Instrumentarium;mat
+chirgen_instru;"General surgery";"Chirurgie générale";"Algemene chirurgie";instru
+ciseau_chirgen_instru;Scissors;Ciseaux;Scharen;chirgen_instru
+pince_chirgen_instru;Pliers;Pinces;Pincetten;chirgen_instru
+portaig_chirgen_instru;"Needle - holder";"Porte – aiguilles";Naaldvoerders;chirgen_instru
+ecartpasdane_chirgen_instru;"Spacers – Coltsfoot";"Ecarteurs – Pas d’Anes";"Wond - en kaaksperder";chirgen_instru
+ophtalmo_instru;Ophthalmology;Ophtalmologie;Oogheelkunde;instru
+ophtalmo_ophtalmo_instru;Ophthalmology;Ophtalmologie;Oogheelkunde;ophtalmo_instru
+osteo_instru;Osteosynthesis;Ostéosynthèse;Osteosynthese;instru
+plaq_osteo_instru;Plates;Plaques;Platen;osteo_instru
+vis_osteo_instru;Screw;Vis;Schroeven;osteo_instru
+instrum_osteo_instru;Instruments;Instruments;Instrumenten;osteo_instru
+osteoalcy_instru;"Alcyon Range";"Gamme Alcyon";Alcyon-assortiment;instru
+esf_osteoalcy_instru;ESF;ESF;ESF;osteoalcy_instru
+clr_osteoalcy_instru;CLR;CLR;CLR;osteoalcy_instru
+tplo_osteoalcy_instru;TPLO;TPLO;TPLO;osteoalcy_instru
+ttaetttaxgen_osteoalcy_instru;"TTA & TTA X-GEN";"TTA & TTA X-GEN";"TTA & TTA X-GEN";osteoalcy_instru
+clm_osteoalcy_instru;CLM;CLM;CLM;osteoalcy_instru
+pwm_osteoalcy_instru;PWM;PWM;PWM;osteoalcy_instru
+moteur_osteoalcy_instru;Engines;Moteurs;Motoren;osteoalcy_instru
+dentist_intru;Dentistry;Dentisterie;Tandheelkunde;instru
+instrudedent_dentist_intru;"Dental Instruments";"Instruments de dentisterie";"Tandheelkundige instrumenten";dentist_intru
+prodpierrol_dentist_intru;"Dental products";"Produits de dentisteries";"Tandheelkundige producten";dentist_intru
+dentistnac_dentist_intru;"NAC Dentistry";"Dentisterie NAC";"Tandheelkunde nieuwe gezelschapsdieren";dentist_intru
+equi;Equine;Equine;Paarden;mat
+conso_equi;Consumables;Consommables;Verbruiksproducten;equi
+perftrans_conso_equi;"Drip - transfusion";"Perfusion - transfusion";"Infusie - transfusie";conso_equi
+protetsoindsplaie_conso_equi;"Wound protection and care";"Protection et soin des plaies";"Wondbescherming en -verzorging";conso_equi
+ponct_conso_equi;Punctures;Ponctions;Puncties;conso_equi
+chpsetgant_conso_equi;"Fields and Gloves";"Champs et Gants";"Operatiedoeken en handschoenen";conso_equi
+div_conso_equi;Various;Divers;Allerlei;conso_equi
+dentist_equi;Dentistry;Dentisterie;Tandheelkunde;equi
+dentis_dentist_equi;Dentistry;Dentisterie;Tandheelkunde;dentist_equi
+mare_equi;Farriery;Maréchalerie;Hoefsmederij;equi
+marech_mare_equi;Farriery;Maréchalerie;Hoefsmederij;mare_equi
+castra_equi;Castration;Castration;Castratie;equi
+castra_castra_equi;Castration;Castration;Castratie;castra_equi
+insearttransfembr_equi;"Artificial insemination - Embryo transfer";"Insémination artificielle - Transfert d'embryon";"Kunstmatige inseminatie - Embryotransplantatie";equi
+recoltesem_insearttransfembr_equi;"Seed harvest";"Récolte de la semence";Sperma-afname;insearttransfembr_equi
+decongetexamsem_insearttransfembr_equi;"Thawing and examination of the seed";"Décongélation et examen de la semence";"Ontdooiing en spermaonderzoek";insearttransfembr_equi
+traspetstoc_insearttransfembr_equi;"Transport and storage";"Transport et stockage";"Transport en opslag";insearttransfembr_equi
+insem_insearttransfembr_equi;"Health control and Insemination";"Contrôle sanitaire et Insémination";"Gezondheidscontrole en Inseminatie";insearttransfembr_equi
+transf_insearttransfembr_equi;"Embryo transfer";"Transfert d'embryon";Embryotransplantatie;insearttransfembr_equi
+gynuro_equi;"Gynaecology - Urology";"Gynecologie - Urologie";"Gynaecologie - Urologie";equi
+gynuro_gynuro_equi;"Gynaecology - Urology";"Gynecologie - Urologie";"Gynaecologie - Urologie";gynuro_equi
+digest_equi;Digestive;Digestif;Spijsvertering;equi
+digest_digest_equi;Digestive;Digestif;Spijsvertering;digest_equi
+respi_equi;Respiratory;Respiratoire;Ademhaling;equi
+respi_respi_equi;Respiratory;Respiratoire;Ademhaling;respi_equi
+equip_equi;Equipment;Equipement;Uitrusting;equi
+chir_equip_equi;Surgery;Chirurgie;Chirurgie;equip_equi
+anesth_equip_equi;Anaesthesia;Anesthésie;Anesthesie;equip_equi
+image_equip_equi;Imagery;Imagerie;Beeldvorming;equip_equi
+tonte_equip_equi;Shearing;Tonte;Scheren;equip_equi
+div_equip_equi;Various;Divers;Allerlei;equip_equi
+diagnolabo_equi;"Diagnosis - Laboratory";"Diagnostique - Laboratoire";"Diagnostiek - Laboratorium";equi
+ophta_equi;Ophthalmology;Ophtalmologie;Oogheelkunde;equi
+contprot_equi;"Contention - Protection";"Contention - Protection";"Fixatie - Bescherming";equi
+cont_contprot_equi;Contention;Contention;Fixatie;contprot_equi
+hygetacc_equi;"Hygiene and accessories";"Hygiène et accessoires";"Hygiëne en toebehoren";equi
+hygetacc_hygetacc_equi;"Hygiene and accessories";"Hygiène et accessoires";"Hygiëne en toebehoren";hygetacc_equi
+rur;Rural;Rurale;Landbouw;mat
+inj_rur;Injection;Injection;Injectie;rur
+aighypo_inj_rur;"Hypodermic needles";"Aiguilles hypodermique";Injectienaalden;inj_rur
+divers_aighypo_inj_rur;Various;Divers;Allerlei;aighypo_inj_rur
+ser_inj_rur;Syringes;Seringues;Spuiten;inj_rur
+multiusg_ser_inj_rur;Multifunction;"Multi – usage";Multifunctioneel;ser_inj_rur
+perf_inj_rur;Drip;Perfusion;Infusie;inj_rur
+gant_rur;Gloves;Gants;Handschoenen;rur
+gantdevel_gant_rur;"Calving gloves";"Gants de vêlage";Verloshandschoenen;gant_rur
+habi_rur;Clothing;Habillement;Kleding;rur
+habil_habi_rur;Clothing;Habillement;Kleding;habi_rur
+uu_habil_habi_rur;"Single use";"Usage unique";"Eenmalig gebruik";habil_habi_rur
+tiss_habil_habi_rur;Woven;Tissés;Geweven;habil_habi_rur
+botte_habil_habi_rur;Boots;Bottes;Laarzen;habil_habi_rur
+gyn_rur;Gynaecology;Gynecologie;Gynaecologie;rur
+gynevel_gyn_rur;"Gynaecology - calving";"Gynécologie – vêlage";"Gynaecologie - kalving";gyn_rur
+insembov_gyn_rur;"Cattle insemination";"Insémination bovins";"Inseminatie runderen";gyn_rur
+insemporc_gyn_rur;"Ovine / Swine insemination";"Insémination ovins / porcs";"Inseminatie schapen / varkens";gyn_rur
+matern_gyn_rur;Maternity;Maternité;Materniteit;gyn_rur
+soindupied_gyn_rur;"Care of piglets";"Soins aux porcelets";"Verzorging van biggen";gyn_rur
+soindelamam_gyn_rur;"Udder care";"Soin de la mamelle";Uierverzorging;gyn_rur
+castra_gyn_rur;Castration;Castration;Castratie;gyn_rur
+cont_rur;Contention;Contention;Fixatie;rur
+cont_cont_rur;Contention;Contention;Fixatie;cont_rur
+abat_rur;Abattoir/Abattage;Abattoir/Abattage;Slachthuis;rur
+soindupied_rur;"Foot care";"Soin du pied";Hoefverzorging;rur
+soindupied_soindupied_rur;"Foot care";"Soin du pied";Hoefverzorging;soindupied_rur
+ecorn_rur;Dehorning;Ecornage;Onthoorning;rur
+ecorn_ecorn_rur;Dehorning;Ecornage;Onthoorning;ecorn_rur
+digest_rur;Digestive;Digestif;Spijsvertering;rur
+digest_digest_rur;Digestive;Digestif;Spijsverterings-;digest_rur
+drog_rur;Drogage;Drogage;Verdoving;rur
+marq_rur;Marking;Marquage;Merkken;rur
+tont_rur;Shearing;Tonte;Scheren;rur
+tondelec_tont_rur;"Electric clippers";"Tondeuses électriques";"Elektrische scheerapparaten";tont_rur
+tondman_tont_rur;"Manual clippers";"Tondeuses manuelles";"Manuele scheerapparaten";tont_rur
+accpourtond_tont_rur;"Accessories for clippers";"Accessoires pour tondeuses";"Toebehoren voor scheerapparaten";tont_rur
+vol_rur;Poultry;Volaille;Pluimvee;rur
+ident_vol_rur;Identification;Identification;Identificatie;vol_rur
+vacci_vol_rur;Vaccination;Vaccination;Vaccinatie;vol_rur
+diagetlocelev_rur;"Diagnosis and livestock rearing";"Diagnostic et locaux d’élevage";"Diagnostiek en stallen";rur
+nac;NAC;NAC;Knaagdieren;mat
+nac_nac;NAC;NAC;Knaagdieren;nac
+proped_nac_nac;Preparatory;Propédeutique;Propedeuse;nac_nac
+chiranesth_nac_nac;"Surgery - Anaesthesia";"Chirurgie - Anesthésie";"Chirurgie - Anesthesie";nac_nac
+dent_nac_nac;Dentistry;Dentisterie;Tandheelkunde;nac_nac
+endosc_nac_nac;Endoscopy;Endoscopie;Endoscopie;nac_nac
+divers_nac_nac;Various;Divers;Allerlei;nac_nac
+anmxcie;Pets;"Animaux de compagnie";Huisdieren;mat
+chien_anmxcie;Dog;Chien;Hond;anmxcie
+sell_chien_anmxcie;Saddlery;Sellerie;"Hals- en leibanden";chien_anmxcie
+musel_chien_anmxcie;Muzzle;Muselière;Muilbanden;chien_anmxcie
+corbeil_chien_anmxcie;Baskets;Corbeilles;Manden;chien_anmxcie
+habil_chien_anmxcie;Clothing;Habillement;Kleding;chien_anmxcie
+hyg_chien_anmxcie;Hygiene;Hygiène;Hygiëne;chien_anmxcie
+agility_chien_anmxcie;Agility;Agility;Agility;chien_anmxcie
+jouetfriand_chien_anmxcie;"Toys and treats";"Jouets et friandises";"Speelgoed en snoepjes";chien_anmxcie
+distribetgamel_chien_anmxcie;"Dispensers and bowls";"Distributeurs et gamelles";"Verdelers en eetbakken";chien_anmxcie
+transp_chien_anmxcie;Transport;Transport;Transport;chien_anmxcie
+educ_chien_anmxci;Training;Education;Training;chien_anmxcie
+chat_anmxcie;Cat;Chat;Kat;anmxcie
+sell_chat_anmxcie;Saddlery;Sellerie;"Hals- en leibanden";chat_anmxcie
+hyg_chat_anmxcie;Hygiene;Hygiène;Hygiëne;chat_anmxcie
+litiere_chat_anmxcie;Litter;Litière;Kattenbakvulling;chat_anmxcie
+jouetfriand_chat_anmxcie;"Toys and treats";"Jouets et friandises";"Speelgoed en snoepjes";chat_anmxcie
+distribetgamel_chat_anmxcie;"Dispensers and bowls";"Distributeurs et gamelles";"Verdelers en eetbakken";chat_anmxcie
+habita_chat_anmxcie;Habitat;Habitat;Dierenverblijf;chat_anmxcie
+transp_chat_anmxcie;Transport;Transport;Transport;chat_anmxcie
+nac_anmxcie;NAC;NAC;"Knaagdieren - Reptielen";anmxcie
+sell_nac_anmxcie;Saddlery;Sellerie;"Hals- en leibanden";nac_anmxcie
+habit_nac_anmxcie;Habitat;Habitat;Dierenverblijf;nac_anmxcie
+hyg_nac_anmxcie;Hygiene;Hygiène;Hygiëne;nac_anmxcie
+jouetfriand_nacanmxcie;"Jouets et friandises";"Jouets et friandises";"Speelgoed en snoepjes";nac_anmxcie
+transp_nac_anmxcie;Transport;Transport;Transport;nac_anmxcie
+divers_nac_anmxcie;Various;Divers;Allerlei;nac_anmxcie
+vieprat;"Practical life";"Vie pratique";"Hygiene en allerlei";mat
+vetdeconsult_vieprat;"Consultation clothing";"Vêtements de consultation";"Medische kleding";vieprat
+tuniq_vetdeconsult_vieprat;Tunic;Tunique;Tuniek;vetdeconsult_vieprat
+blous_vetdeconsult_vieprat;Blouse;Blouse;Schort;vetdeconsult_vieprat
+sabot_vetdeconsult_vieprat;Clog;Sabot;Klomp;vetdeconsult_vieprat
+pantalon_vetdeconsult_vieprat;Trousers;Pantalon;Broek;vetdeconsult_vieprat
+hyg_vieprat;Hygiene;Hygiène;Hygiëne;vieprat
+hygdupers_hyg_vieprat;"Staff hygiene";"Hygiène du personnel";Personenhygiëne;hyg_vieprat
+mains_hygdupers_hyg_vieprat;Hands;Mains;Handen;hygdupers_hyg_vieprat
+linge_hygdupers_hyg_vieprat;Laundry;Linge;Linnen;hygdupers_hyg_vieprat
+sanit_hygdupers_hyg_vieprat;Toilets;Sanitaires;Hygiënische;hygdupers_hyg_vieprat
+hygdelenv_hyg_vieprat;"Environmental hygiene";"Hygiène de l’environnement";Omgevingshygiëne;hyg_vieprat
+sols_hygdupers_hyg_vieprat;Floors;Sols;Vloeren;hygdelenv_hyg_vieprat
+sufacehaut_hygdupers_hyg_vieprat;"High surfaces";"Surfaces hautes";"Hoge oppervlakken";hygdelenv_hyg_vieprat
+proddesodchenetcag_hygdupers_hyg_vieprat;"Kennel and Cage products and deodorants";"Produits désodorisants Chenil et Cages";"Desodoriserende producten voor kennels en kooien";hygdelenv_hyg_vieprat
+instrum_hyg_vieprat;Instrumentation;Instrumentation;Instrumentarium;hyg_vieprat
+equipmenag_hyg_vieprat;"Household equipment";"Équipement ménager";Inrichting;hyg_vieprat
+materiel_hyg_vieprat;Equipment;Matériel;Materiaal;hyg_vieprat
+access_hyg_vieprat;Accessories;Accessoires;Toebehoren;hyg_vieprat
+papeterie_vieprat;Papeterie;Papeterie;Papierwaren;vieprat
+papier_papeterie_vieprat;Paper;Papier;Papier;papeterie_vieprat
+com_vieprat;Communication;Communication;Communicatie;vieprat
+comext_com_vieprat;"Communication externe";"External communication";"Externe communicatie";com_vieprat
+pcdetach;"Separate parts";"Pièces détachées";Reserveonderdelen;mat
+ampetbat_pcdetach;"Bulbs and batteries";"Ampoules et batteries";"Lampen en batterijen";pcdetach
+anesth_pcdetach;Anaesthesia;Anesthésie;Anesthesie;pcdetach
+detart_pcdetach;Scalers;Détartreurs;Tandsteenreinigers;pcdetach
+develop_pcdetach;Developer;Développeuse;Ontwikkelmachine;pcdetach
+ser_pcdetach;Syringes;Seringues;Spuiten;pcdetach
+tond_pcdetach;Clippers;Tondeuses;Scheerapparaten;pcdetach
+sav_pcdetach;"SAV entretien et maintenance";"SAV entretien et maintenance";"Dienst na verkoop / onderhoud";pcdetach
