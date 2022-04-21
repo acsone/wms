@@ -18,3 +18,8 @@ msgstr ""
 msgid "Shopinvader Product"
 msgstr ""
 
+#. module: alc_shopinvader_category
+#: model:ir.model,name:alc_shopinvader_category.model_shopinvader_backend
+msgid "shopinvader.backend"
+msgstr ""
+
