@@ -3,6 +3,8 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from werkzeug.exceptions import NotFound
 
+from odoo import fields
+
 from odoo.addons.base_rest import restapi
 from odoo.addons.component.core import Component
 
@@ -43,6 +45,6 @@ class CartService(Component):
     # ##############
     def _prepare_cart_for_confirmation(self, cart, params):
         upd_vals = self._info_params_to_vals(params)
-        if upd_vals:
-            upd_vals.update(cart.play_onchanges(upd_vals, upd_vals.keys()))
+        upd_vals["date_order"] = fields.Datetime.now()
+        upd_vals.update(cart.play_onchanges(upd_vals, upd_vals.keys()))
         return upd_vals
