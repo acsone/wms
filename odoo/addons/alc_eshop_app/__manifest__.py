@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 # Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-
 {
     "name": "Alcyon E-Shop Application",
     "description": """Install all apps and modules required by the E-Shop""",
@@ -29,6 +28,7 @@
         "alc_keycloak",
         "alc_product_promotion_mailing",
         "alc_search_engine",
+        "shopinvader_assortment_bind",
         "shopinvader_search_engine_update_specials",
         "alc_magento_api",
     ],
