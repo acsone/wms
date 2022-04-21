@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2022 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record model="ir.actions.server" id="action_shopinvader_assortment_binding">
+        <field name="name">Shopinvader Assortment Binding</field>
+        <field name="model_id" ref="product.model_product_product" />
+        <field name="state">code</field>
+        <field name="code">records.shopinvader_assortment_binding()
+        </field>
+    </record>
+    <record id="run_action_shopinvader_assortment_binding" model="ir.values">
+            <field name="model_id" ref="product.model_product_product" />
+            <field name="name">Shopinvader Assortment Binding</field>
+            <field name="key2">client_action_multi</field>
+            <field name="key">action</field>
+            <field name="model">product.product</field>
+            <field
+      name="value"
+      eval="'ir.actions.server,' + str(ref('action_shopinvader_assortment_binding'))"
+    />
+    </record>
+</odoo>
