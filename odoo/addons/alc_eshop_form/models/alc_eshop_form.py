@@ -31,7 +31,10 @@ class AlcEshopForm(models.Model):
         default=True,
     )
     published = fields.Boolean("Visible on EShop", copy=False, default=False)
+    code = fields.Char(required=True, translate=False)
     sequence = fields.Integer(default=-1, required=True)
+
+    _sql_constraints = [("code_uniq", "unique(code)", "The code must be unique!")]
 
     def publish_button(self):
         for rec in self:
@@ -60,6 +63,18 @@ class AlcEshopForm(models.Model):
     @api.model
     def _get_default_form_options(self):
         return json.dumps(self._default_form_options, indent=True, sort_keys=True)
+
+    @api.model
+    def _get_default_code_from_vals(self, vals):
+        name = vals["name"]
+        audience = vals["audience"]
+        return "_".join((name[:3].upper(), audience[:3].upper()))
+
+    @api.model
+    def create(self, vals):
+        if not vals.get("code"):
+            vals["code"] = self._get_default_code_from_vals(vals)
+        return super(AlcEshopForm, self).create(vals)
 
     def _send_collected_info(self, info, partner=None):
         """ send an email with the collected info from the form submission

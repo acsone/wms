@@ -69,6 +69,7 @@ class FormService(Component):
         return {
             "id": {"type": "integer", "required": True, "nullable": False},
             "name": {"type": "string", "required": True, "nullable": False},
+            "code": {"type": "string", "required": True, "nullable": False},
             "form": {"type": "string", "required": True, "nullable": False},
             "form_options": {"type": "string", "required": True, "nullable": False},
             "sequence": {"type": "integer", "required": True, "nullable": False},
@@ -93,6 +94,7 @@ class FormService(Component):
         return dict(
             id=form.id,
             name=form.name,
+            code=form.code,
             form=form.form,
             form_options=form.form_options,
             sequence=form.sequence,

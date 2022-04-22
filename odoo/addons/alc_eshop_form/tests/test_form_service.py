@@ -44,6 +44,7 @@ class TestEShopForm(SavepointCase, ComponentMixin):
         cls.form_public_not_published = cls.EShopForm.create(
             {
                 "name": "test form public",
+                "code": "UNP_PUB",
                 "audience": "public_only",
                 "email": "laurent.mignon@acsone.eu",
                 "email_subject": "test subject",

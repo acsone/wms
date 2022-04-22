@@ -37,6 +37,7 @@
                         </h1>
                     </div>
                     <group>
+                        <field name="code" />
                         <field name="sequence" />
                         <field name="audience" />
                         <field name="email" />
@@ -60,6 +61,7 @@
                 <field name="email" />
                 <field name="published" />
                 <field name="audience" />
+                <field name="code" />
             </tree>
         </field>
     </record>
