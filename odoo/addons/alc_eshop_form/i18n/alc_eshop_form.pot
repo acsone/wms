@@ -30,6 +30,11 @@ msgid "Authenticated"
 msgstr ""
 
 #. module: alc_eshop_form
+#: model:ir.model.fields,field_description:alc_eshop_form.field_alc_eshop_form_code
+msgid "Code"
+msgstr ""
+
+#. module: alc_eshop_form
 #: model:alc.eshop.form,name:alc_eshop_form.alc_eshop_form_authenticated_contact
 #: model:alc.eshop.form,name:alc_eshop_form.alc_eshop_form_public_contact
 msgid "Contact"
@@ -79,7 +84,7 @@ msgid "Form"
 msgstr ""
 
 #. module: alc_eshop_form
-#: code:addons/alc_eshop_form/models/alc_eshop_form.py:54
+#: code:addons/alc_eshop_form/models/alc_eshop_form.py:57
 #, python-format
 msgid "Form is not a json valid string"
 msgstr ""
@@ -143,7 +148,7 @@ msgid "Name"
 msgstr ""
 
 #. module: alc_eshop_form
-#: code:addons/alc_eshop_form/models/alc_eshop_form.py:46
+#: code:addons/alc_eshop_form/models/alc_eshop_form.py:49
 #, python-format
 msgid "Options are not a json valid string"
 msgstr ""
@@ -172,6 +177,11 @@ msgstr ""
 #. module: alc_eshop_form
 #: model:ir.model.fields,field_description:alc_eshop_form.field_alc_eshop_form_sequence
 msgid "Sequence"
+msgstr ""
+
+#. module: alc_eshop_form
+#: sql_constraint:alc.eshop.form:0
+msgid "The code must be unique!"
 msgstr ""
 
 #. module: alc_eshop_form
