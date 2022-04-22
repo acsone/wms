@@ -37,15 +37,27 @@ class TestAlcEShopForm(SavepointCase):
             {"name": "partner", "email": "partner@test.com"}
         )
         cls.EShopForm = cls.env["alc.eshop.form"]
-        cls.form = cls.EShopForm.create(
-            {
-                "name": "test form",
-                "audience": "authenticated_only",
-                "email": "laurent.mignon@acsone.eu",
-                "email_subject": "test subject",
-                "form": "{}",
-            }
-        )
+        cls.vals = {
+            "name": "test form",
+            "code": "TEST",
+            "audience": "authenticated_only",
+            "email": "laurent.mignon@acsone.eu",
+            "email_subject": "test subject",
+            "form": "{}",
+        }
+        cls.form = cls.EShopForm.create(cls.vals)
+
+    def test_default_code(self):
+        # this one was manually given
+        self.assertEqual(self.form.code, "TEST")
+
+        vals = dict(self.vals, audience="public_only", name="code form", code=False)
+        form = self.EShopForm.create(vals)
+        self.assertEqual(form.code, "COD_PUB")
+
+        vals = dict(self.vals, name="code form", code=False)
+        form = self.EShopForm.create(vals)
+        self.assertEqual(form.code, "COD_AUT")
 
     def test_send_no_partner(self):
         with self.mail_recorder.record_created_mails():
