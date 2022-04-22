@@ -108,7 +108,7 @@ def load_product_image_mapping(ref):
 
 
 def find_record_by_id(column_name, value):
-    if column_name in {"marque_medicaments", "categories"}:
+    if column_name == "categories" or "marque" in column_name:
         record = ENV.ref("alc_pim." + value)
     elif column_name in {"espece", "espece_principale"}:
         record = SPECIES_IDS[value]
@@ -155,6 +155,8 @@ PRODUCT_FILE_MAPPING = {
     "code_cti_ext": ("code_cti", char_parser),
     "class_amcra": ("class_amcra", amcra_parser),
     "marque_medicaments": ("product_brand_id", m2o_parser),
+    "marque_aliments": ("product_brand_id", m2o_parser),
+    "marque_materiel": ("product_brand_id", m2o_parser),
     "tisse": ("fabric", bool_parser),
     "descr_courte-en_GB": ("description_shop_short", char_parser),
     "descr_long-en_GB": ("description_shop_long", char_parser),
