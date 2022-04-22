@@ -1,4 +1,7 @@
 <odoo>
+  <record model="product.brand" id="ma1">
+    <field name="name">Royal Canin</field>
+  </record>
   <record model="product.brand" id="ma14">
     <field name="name">Ecuphar</field>
   </record>
