@@ -16,6 +16,10 @@ class ProductTemplate(models.Model):
         store=True,
         index=True,
     )
+    # TODO: move supplier fields to new module alc_product_supplier
+    supplier_rel_id = fields.Integer(
+        string="Vendor ID", readonly=True, related="supplier_id.id", store=False,
+    )
     vendor_product_code = fields.Char(
         "Vendor Product Code",
         readonly=True,
