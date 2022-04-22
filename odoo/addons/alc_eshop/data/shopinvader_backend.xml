@@ -5,6 +5,7 @@
 <!--TODO: set to noupdate-->
     <record id="backend" model="shopinvader.backend">
         <field name="name">Alcyon Store</field>
+        <field name="tech_name">alcyon_store</field>
         <field
       name="pricelist_id"
       eval="False"
