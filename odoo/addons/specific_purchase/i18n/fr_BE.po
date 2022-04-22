@@ -419,6 +419,16 @@ msgid "Vendor"
 msgstr "Fournisseur"
 
 #. module: specific_purchase
+#: model:ir.model.fields,field_description:specific_purchase.field_delivery_carrier_supplier_rel_id
+#: model:ir.model.fields,field_description:specific_purchase.field_product_product_supplier_rel_id
+#: model:ir.model.fields,field_description:specific_purchase.field_product_template_supplier_rel_id
+#: model:ir.model.fields,field_description:specific_purchase.field_shopinvader_product_supplier_rel_id
+#: model:ir.model.fields,field_description:specific_purchase.field_shopinvader_variant_supplier_rel_id
+#, fuzzy
+msgid "Vendor ID"
+msgstr "Fournisseur"
+
+#. module: specific_purchase
 #: model:ir.model.fields,field_description:specific_purchase.field_delivery_carrier_vendor_product_code
 #: model:ir.model.fields,field_description:specific_purchase.field_product_product_vendor_product_code
 #: model:ir.model.fields,field_description:specific_purchase.field_product_template_vendor_product_code
