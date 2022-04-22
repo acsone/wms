@@ -1,0 +1,31 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* shopinvader_assortment_bind
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: shopinvader_assortment_bind
+#: model:ir.model,name:shopinvader_assortment_bind.model_product_product
+msgid "Product"
+msgstr ""
+
+#. module: shopinvader_assortment_bind
+#: model:ir.model,name:shopinvader_assortment_bind.model_product_template
+msgid "Product Template"
+msgstr ""
+
+#. module: shopinvader_assortment_bind
+#: model:ir.actions.server,name:shopinvader_assortment_bind.action_shopinvader_assortment_binding
+#: model:ir.actions.server,name:shopinvader_assortment_bind.action_shopinvader_template_assortment_binding
+msgid "Shopinvader Assortment Binding"
+msgstr ""
+
