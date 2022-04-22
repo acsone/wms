@@ -22,7 +22,7 @@
         }
       },
       "supplier_id": {
-        "type": "keyword"
+        "type": "integer"
       },
       "supplier_promotion": {
         "type": "nested"
