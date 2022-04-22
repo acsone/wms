@@ -164,6 +164,8 @@ msgid "Red"
 msgstr ""
 
 #. module: alc_pim_product
+#: model:attribute.attribute,field_description:alc_pim_product.attribute_description_shop_long
+#: model:ir.model.fields,field_description:alc_pim_product.attribute_description_shop_long_ir_model_fields
 #: model:ir.model.fields,field_description:alc_pim_product.field_delivery_carrier_description_shop_long
 #: model:ir.model.fields,field_description:alc_pim_product.field_product_product_description_shop_long
 #: model:ir.model.fields,field_description:alc_pim_product.field_product_template_description_shop_long
@@ -173,6 +175,8 @@ msgid "Shop long description"
 msgstr ""
 
 #. module: alc_pim_product
+#: model:attribute.attribute,field_description:alc_pim_product.attribute_description_shop_short
+#: model:ir.model.fields,field_description:alc_pim_product.attribute_description_shop_short_ir_model_fields
 #: model:ir.model.fields,field_description:alc_pim_product.field_delivery_carrier_description_shop_short
 #: model:ir.model.fields,field_description:alc_pim_product.field_product_product_description_shop_short
 #: model:ir.model.fields,field_description:alc_pim_product.field_product_template_description_shop_short
