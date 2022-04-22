@@ -5,7 +5,10 @@
 <!--TODO: set to noupdate-->
     <record id="backend" model="shopinvader.backend">
         <field name="name">Alcyon Store</field>
-        <field name="pricelist_id" ref="shopinvader_default_pricelist" />
+        <field
+      name="pricelist_id"
+      eval="False"
+    /> <!-- not pricelist since it come from the partner -->
         <field name="jwt_aud">alcyon_test</field>
         <field name="website_public_name">Alcyon</field>
         <field name="allowed_country_ids" eval="[(6,0,[ref('base.be')])]" />

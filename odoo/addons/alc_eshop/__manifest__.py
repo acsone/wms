@@ -47,6 +47,7 @@
         "data/shopinvader_assortment.xml",
         "data/product_pricelist.xml",
         "data/shopinvader_backend.xml",
+        "views/shopinvader_backend.xml",
     ],
     "demo": [],
 }
