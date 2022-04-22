@@ -14,6 +14,16 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_eshop
+#: model:ir.model.fields,field_description:alc_eshop.field_shopinvader_backend_jwt_aud_env_default
+msgid "Jwt aud env default"
+msgstr ""
+
+#. module: alc_eshop
+#: model:ir.model.fields,field_description:alc_eshop.field_shopinvader_backend_jwt_aud_env_is_editable
+msgid "Jwt aud env is editable"
+msgstr ""
+
+#. module: alc_eshop
 #: model:product.pricelist,name:alc_eshop.shopinvader_default_pricelist
 msgid "Shopinvader Default"
 msgstr ""
@@ -21,5 +31,10 @@ msgstr ""
 #. module: alc_eshop
 #: model:ir.filters,name:alc_eshop.shopinvader_assortment_store
 msgid "Shopinvader Product Assortment Store"
+msgstr ""
+
+#. module: alc_eshop
+#: model:ir.model,name:alc_eshop.model_shopinvader_backend
+msgid "shopinvader.backend"
 msgstr ""
 
