@@ -48,6 +48,8 @@ class ResPartner(models.Model):
         es_params = {}
         es_params["source"] = self._get_es_fields()
         q = {"bool": {"must": [{"term": {"allowed_partner_types": self.partner_type}}]}}
+        if self.partner_type == "supplier":
+            q = {"bool": {"must": [{"term": {"supplier_id": self.id}}]}}
         if ids:
             q["bool"]["must"].append({"terms": {"_id": ids}})
         es_params["query"] = q
