@@ -16,5 +16,6 @@ class ProductProduct(models.Model):
         return res
 
     def shopinvader_mark_to_update(self):
-        if self.mapped("shopinvader_bind_ids"):
-            self.mapped("shopinvader_bind_ids").write({"to_update": "true"})
+        bind_ids = self.sudo().mapped("shopinvader_bind_ids")
+        if bind_ids:
+            bind_ids.write({"to_update": "true"})

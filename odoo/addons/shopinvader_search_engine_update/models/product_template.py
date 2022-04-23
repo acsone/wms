@@ -15,4 +15,4 @@ class ProductTemplate(models.Model):
         return res
 
     def shopinvader_mark_to_update(self):
-        self.mapped("product_variant_ids").shopinvader_mark_to_update()
+        self.sudo().mapped("product_variant_ids").shopinvader_mark_to_update()
