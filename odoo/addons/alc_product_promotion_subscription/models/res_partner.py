@@ -4,21 +4,15 @@
 
 from odoo import fields, models
 
-from odoo.addons.base_m2m_custom_field.fields import Many2manyCustom
-
 
 class ResPartner(models.Model):
 
     _inherit = "res.partner"
 
-    alc_product_promotion_subscription_ids = Many2manyCustom(
+    alc_product_promotion_subscription_ids = fields.One2many(
         string="Product promotion subscriptions",
         comodel_name="alc.product.promotion.subscription",
-        relation="alc_product_promotion_subscription",
-        column1="partner_id",
-        column2="product_id",
-        create_table=False,
-        copy=False,
+        inverse_name="partner_id",
     )
 
     alc_product_promotion_subscription_count = fields.Integer(
