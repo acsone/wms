@@ -157,6 +157,7 @@ PRODUCT_FILE_MAPPING = {
     "marque_medicaments": ("product_brand_id", m2o_parser),
     "marque_aliments": ("product_brand_id", m2o_parser),
     "marque_materiel": ("product_brand_id", m2o_parser),
+    "gamme_aliments": ("food_range_option_id", m2o_parser),
     "tisse": ("fabric", bool_parser),
     "descr_courte-en_GB": ("description_shop_short", char_parser),
     "descr_long-en_GB": ("description_shop_long", char_parser),
