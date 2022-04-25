@@ -15,7 +15,7 @@
         "alc_pim",
         "alc_storage",
         "alc_supplier_promotion",
-        "alc_price_cache",
+        "alc_price_cache_import",
         "alc_eshop_api_v2",
         "alc_eshop_auth_jwt",
         "alc_eshop_customer_sales_person",
