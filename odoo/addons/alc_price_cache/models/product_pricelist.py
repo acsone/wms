@@ -43,9 +43,11 @@ class ProductPricelist(models.Model):
         # if we could batch all item creates in one call, we would not need this.
         # since it is not the case, we want to bypass incremental cache updates
         # to batch everything in one step.
-        superself = super(ProductPricelist, self.with_context(no_update_cache=True))
-        res = superself.create(vals)
-        res.delay_update_price_cache()
+        res = super(
+            ProductPricelist, self.with_context(no_update_price_cache_items=True)
+        ).create(vals)
+        if not self.env.context.get("no_update_price_cache"):
+            res.delay_update_price_cache()
         return res
 
     def write(self, vals):
@@ -53,7 +55,8 @@ class ProductPricelist(models.Model):
         # can still be on partners, so we need their prices.
         # TOIMP: we could be more precise and ignore fields like country_ids, etc
         res = super(ProductPricelist, self).write(vals)
-        self.delay_update_price_cache()
+        if not self.env.context.get("no_update_price_cache"):
+            self.delay_update_price_cache()
         return res
 
     def unlink(self):
