@@ -92,6 +92,12 @@ msgid "Colours"
 msgstr "Kleur"
 
 #. module: alc_pim_product
+#: model:ir.ui.view,arch_db:alc_pim_product.product_template_view_form
+#, fuzzy
+msgid "Descriptions"
+msgstr "Lange omschrijving"
+
+#. module: alc_pim_product
 #: model:ir.model.fields,field_description:alc_pim_product.field_delivery_carrier_fabric
 #: model:ir.model.fields,field_description:alc_pim_product.field_product_product_fabric
 #: model:ir.model.fields,field_description:alc_pim_product.field_product_template_fabric
@@ -121,6 +127,11 @@ msgstr "Merk"
 #: model:ir.model.fields,field_description:alc_pim_product.field_shopinvader_variant_indication_option_ids
 msgid "Indications"
 msgstr "Indicaties"
+
+#. module: alc_pim_product
+#: model:ir.ui.view,arch_db:alc_pim_product.product_template_view_form
+msgid "Long"
+msgstr ""
 
 #. module: alc_pim_product
 #: selection:product.template,class_amcra:0
@@ -167,8 +178,6 @@ msgid "Red"
 msgstr "Red"
 
 #. module: alc_pim_product
-#: model:attribute.attribute,field_description:alc_pim_product.attribute_description_shop_long
-#: model:ir.model.fields,field_description:alc_pim_product.attribute_description_shop_long_ir_model_fields
 #: model:ir.model.fields,field_description:alc_pim_product.field_delivery_carrier_description_shop_long
 #: model:ir.model.fields,field_description:alc_pim_product.field_product_product_description_shop_long
 #: model:ir.model.fields,field_description:alc_pim_product.field_product_template_description_shop_long
@@ -178,8 +187,6 @@ msgid "Shop long description"
 msgstr "Lange omschrijving"
 
 #. module: alc_pim_product
-#: model:attribute.attribute,field_description:alc_pim_product.attribute_description_shop_short
-#: model:ir.model.fields,field_description:alc_pim_product.attribute_description_shop_short_ir_model_fields
 #: model:ir.model.fields,field_description:alc_pim_product.field_delivery_carrier_description_shop_short
 #: model:ir.model.fields,field_description:alc_pim_product.field_product_product_description_shop_short
 #: model:ir.model.fields,field_description:alc_pim_product.field_product_template_description_shop_short
@@ -187,6 +194,11 @@ msgstr "Lange omschrijving"
 #: model:ir.model.fields,field_description:alc_pim_product.field_shopinvader_variant_description_shop_short
 msgid "Shop short description"
 msgstr "Korte omschrijving"
+
+#. module: alc_pim_product
+#: model:ir.ui.view,arch_db:alc_pim_product.product_template_view_form
+msgid "Short"
+msgstr ""
 
 #. module: alc_pim_product
 #: model:ir.model.fields,field_description:alc_pim_product.field_delivery_carrier_sterile
