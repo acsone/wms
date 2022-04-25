@@ -11,6 +11,6 @@
     "website": "https://acsone.eu/",
     "depends": ["alc_pim_attribute_group", "pim"],
     "application": False,
-    "data": ["data/attribute_attribute.xml"],
+    "data": ["data/attribute_attribute.xml", "views/product_template.xml"],
     "demo": [],
 }
