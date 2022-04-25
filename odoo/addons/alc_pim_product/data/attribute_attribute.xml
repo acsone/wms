@@ -196,6 +196,7 @@
     <field ref="product.model_product_template" name="model_id" />
     <field name="nature">native</field>
     <field name="sequence" eval="99" />
+    <field name="attribute_type">text</field>
   </record>
   <record model="attribute.attribute" id="attribute_description_shop_long">
     <field name="allow_mass_editing" eval="False" />
@@ -214,5 +215,6 @@
     <field ref="product.model_product_template" name="model_id" />
     <field name="nature">native</field>
     <field name="sequence" eval="99" />
+    <field name="attribute_type">text</field>
   </record>
 </odoo>
