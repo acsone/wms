@@ -52,3 +52,16 @@ class ResPartner(models.Model):
             document_model._create_pricelist(partner)
             if partner.supplier_promotion_sale_allowed:
                 document_model._create_discount(partner)
+
+    @api.model
+    @job(default_channel="root.background.process")
+    def _migrate_jobify_process_dossier(self, offset, id_stop, batch_size):
+        """Process batch_size partners, and create a job for the rest."""
+        domain = [("id", "<=", id_stop)]
+        to_process = self.search(domain, offset=offset, order="id", limit=batch_size)
+        to_process.jobify_process_dossier()
+        new_start = offset + batch_size
+        if new_start < id_stop:
+            self.with_delay(priority=50)._migrate_jobify_process_dossier(
+                new_start, id_stop, batch_size
+            )
