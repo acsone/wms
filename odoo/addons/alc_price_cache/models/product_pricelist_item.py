@@ -54,7 +54,9 @@ class ProductPricelistItem(models.Model):
     @api.model
     def create(self, vals):
         res = super(ProductPricelistItem, self).create(vals)
-        if not self.env.context.get("no_update_cache"):
+        if not self._context.get("no_update_price_cache") and not self._context.get(
+            "no_update_price_cache_items"
+        ):
             res.update_price_cache()
         return res
 
@@ -62,15 +64,19 @@ class ProductPricelistItem(models.Model):
         # it is possible to change what the item is applied on; therefore it affects
         # what it's domain before the change, as well as after the change.
         items_by_pricelist = self.partition("pricelist_id")
-        extends_before = {
-            pl: pl_items._get_domains_extend()
-            for pl, pl_items in items_by_pricelist.items()
-        }
-        dates_before = {
-            pl.role_name: pl.get_date_witnesses(pl_items)
-            for pl, pl_items in items_by_pricelist.items()
-        }
+        update_price_cache = not self.env.context.get("no_update_price_cache")
+        if update_price_cache:
+            extends_before = {
+                pl: pl_items._get_domains_extend()
+                for pl, pl_items in items_by_pricelist.items()
+            }
+            dates_before = {
+                pl.role_name: pl.get_date_witnesses(pl_items)
+                for pl, pl_items in items_by_pricelist.items()
+            }
         res = super(ProductPricelistItem, self).write(vals)
+        if not update_price_cache:
+            return res
         for pricelist, pl_items in items_by_pricelist.items():
             dates_pl = pricelist.get_date_witnesses(pl_items)
             dates = {pricelist.role_name: dates_pl | dates_before[pricelist.role_name]}
@@ -80,7 +86,10 @@ class ProductPricelistItem(models.Model):
         return res
 
     def unlink(self):
-        if not self.env.context.get("no_update_cache"):
+        # it is crucial that these jobs do not get lost,
+        # otherwise the id of the item will keep polluting the cache until a full reset.
+        # pricelist unlink is the exception, since the parent key gets dropped.
+        if not self.env.context.get("no_update_price_cache_items"):
             self.update_price_cache(eids=self.ids)
         return super(ProductPricelistItem, self).unlink()
 
