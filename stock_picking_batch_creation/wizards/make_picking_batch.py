@@ -153,11 +153,7 @@ class MakePickingBatch(models.TransientModel):
         vals = self._create_batch_values(user, device, selected_pickings)
         batch = self.env["stock.picking.wave"].create(vals)
         batch._init_wave_info()
-        self._assign_operator_on_selected_pickings(batch, user)
         return batch
-
-    def _assign_operator_on_selected_pickings(self, batch, user):
-        batch.picking_ids.write({"user_id": user.id})
 
     def _precision_weight(self):
         return self.env["decimal.precision"].precision_get("Product Unit of Measure")
