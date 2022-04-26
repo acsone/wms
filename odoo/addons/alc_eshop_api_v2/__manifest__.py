@@ -21,6 +21,6 @@
         "alc_eshop_sale_cart_product_unavailable",
         "alc_eshop_sale_no_cart_get",
     ],
-    "data": [],
+    "data": ["views/shopinvader_menu.xml"],
     "demo": [],
 }
