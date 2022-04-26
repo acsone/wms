@@ -92,7 +92,7 @@ class TestProductProduct(StockCommonCase):
             self.production_lot.life_date[:10],
         )
 
-        # add a lot with a older date...
+        # add a lot with an older date...
         new_lot = self.production_lot.copy(
             {
                 "name": "lot2",
@@ -105,4 +105,19 @@ class TestProductProduct(StockCommonCase):
             self._add_product_qty(self.product, production_lot=new_lot, quantity=10)
         self.assertEqual(
             self.shop_product.data.get("best_before_date"), new_lot.life_date[:10]
+        )
+
+    def test_best_before_date_in_data(self):
+        self.production_lot.life_date = fields.Datetime.to_string(
+            datetime.now() + timedelta(weeks=2)
+        )
+        with SeAdapterFake.mocked_calls():
+            self._add_product_qty(
+                self.product, production_lot=self.production_lot, quantity=10
+            )
+        self.shop_product.recompute_json()
+        self.assertIn("best_before_date", self.shop_product.data)
+        self.assertEqual(
+            self.production_lot.life_date[:10],
+            self.shop_product.data["best_before_date"],
         )
