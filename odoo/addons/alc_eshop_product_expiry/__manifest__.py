@@ -15,6 +15,6 @@
         "queue_job",
         "shopinvader_product_stock",
     ],
-    "data": [],
+    "data": ["data/ir_export_product.xml"],
     "demo": [],
 }
