@@ -72,7 +72,11 @@ class MakePickingBatch(models.TransientModel):
 
     def _compute_device_to_use(self, picking):
         available_devices = self.stock_device_type_ids.sorted(lambda d: d.sequence)
+        # disable prefetch to ensure we compute weight and volume only
+        # for one picking at a time
+        picking = picking.with_prefetch()
         picking._init_dimension_fields()
+
         for device in available_devices:
             if (
                 self._volume_condition_for_device_choice(
@@ -104,15 +108,12 @@ class MakePickingBatch(models.TransientModel):
         selected_device = None
         suitable_pick_ids = []
         for pick in pickings:
-            # disable prefetch to ensure we compute weight and volume only
-            # for one picking at a time
-            pick = pick.with_prefetch()
-            pick._init_dimension_fields()
             device = self._compute_device_to_use(pick)
             if device and not selected_device:
                 selected_device = device
             if device and device == selected_device:
                 suitable_pick_ids.append(pick.id)
+
         if selected_device:
             return (
                 selected_device,
@@ -189,10 +190,6 @@ class MakePickingBatch(models.TransientModel):
         # # - The device for the current picking is supposed to be
         available_nbr_bins = device.nbr_bins
         for picking in pickings:
-            # disable prefetch to ensure we compute weight and volume only
-            # for the related pickings
-            picking = picking.with_prefetch()
-            picking._init_dimension_fields()
             if available_nbr_bins == 0:
                 break
 
