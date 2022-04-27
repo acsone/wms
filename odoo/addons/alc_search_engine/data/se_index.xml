@@ -2,180 +2,811 @@
 <!-- Copyright 2021 ACSONE SA/NV
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo noupdate="1">
-    <record id="index_config_shopinvader_variant" model="se.index.config">
-        <field name="name">Shopinvader Variant Index config</field>
+    <record id="index_config_shopinvader_variant_fr" model="se.index.config">
+        <field name="name">Shopinvader Variant Index config FR</field>
         <field name="body">{}</field>
         <field
       name="body_str"
     > <![CDATA[
 {
-  "mappings": {
-    "properties": {
-      "dimensional_uom_id": {
+    "mappings": {
         "properties": {
-          "name": {
-            "type": "keyword"
-          },
-          "id": {
-            "type": "integer"
-          }
-        }
-      },
-      "supplier_id": {
-        "type": "integer"
-      },
-      "supplier_promotion": {
-        "type": "nested"
-      },
-      "specials": {
-        "type": "nested"
-      },
-      "redirect_url_key": {
-        "type": "keyword"
-      },
-      "packaging_ids": {
-        "type": "keyword"
-      },
-      "hierarchicalCategories": {
-        "type": "nested",
-        "properties": {
-          "ancestors": {
-            "type": "keyword"
-          },
-          "order": {
-            "type": "integer"
-          },
-          "value": {
-            "type": "keyword"
-          },
-          "level": {
-            "type": "integer"
-          }
-        }
-      },
-      "supplier_discount": {
-        "type": "nested"
-      },
-      "storage_temperature_id": {
-        "properties": {
-          "name": {
-            "type": "keyword"
-          },
-          "id": {
-            "type": "integer"
-          }
-        }
-      },
-      "attributes": {
-        "properties": {
-          "species_id": {
-            "type": "keyword"
-          },
-          "presentation_option_id": {
-            "type": "keyword"
-          },
-          "active_principle_option_ids": {
-            "type": "keyword"
-          },
-          "species_ids": {
-            "type": "keyword"
-          },
-          "administration_route_option_ids": {
-            "type": "keyword"
-          },
-          "categ_age_option_ids": {
-            "type": "keyword"
-          },
-          "indication_option_ids": {
-            "type": "keyword"
-          },
-          "taxes_id": {
-            "type": "keyword"
-          },
-          "product_color_option_ids": {
-            "type": "keyword"
-          },
-          "animal_size_option_ids": {
-            "type": "keyword"
-          },
-          "food_range_option_id": {
-            "type": "keyword"
-          }
-        }
-      },
-      "main": {
-        "type": "boolean"
-      },
-      "url_key": {
-        "type": "keyword"
-      },
-      "id": {
-        "type": "integer"
-      },
-      "categories": {
-        "type": "nested"
-      },
-      "stock": {
-        "properties": {
-          "global": {
-            "properties": {
-              "state": {
+            "dimensional_uom_id": {
+                "properties": {
+                    "name": {
+                        "index": true,
+                        "type": "text"
+                    },
+                    "id": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "indicated_price": {
+                "type": "long"
+            },
+            "supplier_id": {
+                "type": "integer"
+            },
+            "supplier_promotion": {
+                "type": "nested"
+            },
+            "name": {
+                "fields": {
+                    "raw": {
+                        "type": "text"
+                    }
+                },
                 "type": "keyword"
-              }
+            },
+            "brand": {
+                "properties": {
+                    "name": {
+                        "fields": {
+                            "raw": {
+                                "type": "text"
+                            }
+                        },
+                        "type": "keyword"
+                    }
+                }
+            },
+            "manufacturer": {
+                "properties": {
+                    "name": {
+                        "fields": {
+                            "raw": {
+                                "type": "text"
+                            }
+                        },
+                        "type": "keyword"
+                    }
+                }
+            },
+            "redirect_url_key": {
+                "type": "keyword"
+            },
+            "packaging_ids": {
+                "type": "keyword"
+            },
+            "specials": {
+                "type": "nested"
+            },
+            "hierarchicalCategories": {
+                "type": "nested",
+                "properties": {
+                    "ancestors": {
+                        "type": "keyword"
+                    },
+                    "order": {
+                        "type": "integer"
+                    },
+                    "value": {
+                        "type": "keyword"
+                    },
+                    "level": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "structured_attributes": {
+                "type": "nested",
+                "properties": {
+                    "fields": {
+                        "type": "nested"
+                    }
+                }
+            },
+            "supplier_discount": {
+                "type": "nested"
+            },
+            "storage_temperature_id": {
+                "properties": {
+                    "name": {
+                        "type": "keyword"
+                    },
+                    "id": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "attributes": {
+                "properties": {
+                    "species_id": {
+                        "type": "keyword"
+                    },
+                    "presentation_option_id": {
+                        "fields": {
+                            "raw": {
+                                "type": "text"
+                            }
+                        },
+                        "type": "keyword"
+                    },
+                    "active_principle_option_ids": {
+                        "fields": {
+                            "raw": {
+                                "type": "text"
+                            }
+                        },
+                        "type": "keyword"
+                    },
+                    "species_ids": {
+                        "fields": {
+                            "raw": {
+                                "type": "text"
+                            }
+                        },
+                        "type": "keyword"
+                    },
+                    "administration_route_option_ids": {
+                        "fields": {
+                            "raw": {
+                                "type": "text"
+                            }
+                        },
+                        "type": "keyword"
+                    },
+                    "animal_size_option_ids": {
+                        "fields": {
+                            "raw": {
+                                "type": "text"
+                            }
+                        },
+                        "type": "keyword"
+                    },
+                    "categ_age_option_ids": {
+                        "fields": {
+                            "raw": {
+                                "type": "text"
+                            }
+                        },
+                        "type": "keyword"
+                    },
+                    "indication_option_ids": {
+                        "fields": {
+                            "raw": {
+                                "type": "text"
+                            }
+                        },
+                        "type": "keyword"
+                    },
+                    "taxes_id": {
+                        "type": "keyword"
+                    },
+                    "product_color_option_ids": {
+                        "type": "keyword"
+                    },
+                    "size_clothing_option_id": {
+                        "fields": {
+                            "raw": {
+                                "type": "text"
+                            }
+                        },
+                        "type": "keyword"
+                    },
+                    "food_range_option_id": {
+                        "fields": {
+                            "raw": {
+                                "type": "text"
+                            }
+                        },
+                        "type": "keyword"
+                    }
+                }
+            },
+            "model": {
+                "properties": {
+                    "name": {
+                        "ignore_above": 256,
+                        "fields": {
+                            "raw": {
+                                "type": "text"
+                            }
+                        },
+                        "type": "keyword"
+                    }
+                }
+            },
+            "main": {
+                "type": "boolean"
+            },
+            "url_key": {
+                "type": "keyword"
+            },
+            "id": {
+                "type": "integer"
+            },
+            "categories": {
+                "type": "nested"
+            },
+            "stock": {
+                "properties": {
+                    "global": {
+                        "properties": {
+                            "state": {
+                                "type": "keyword"
+                            }
+                        }
+                    }
+                }
             }
-          }
         }
-      }
+    },
+    "settings": {
+        "analysis": {
+            "filter": {
+                "word_delimiter": {
+                    "catenate_all": true,
+                    "catenate_numbers": true,
+                    "generate_word_parts": true,
+                    "split_on_numerics": false,
+                    "generate_number_parts": true,
+                    "preserve_original": true,
+                    "type": "word_delimiter",
+                    "split_on_case_change": true
+                }
+            },
+            "index": {
+                "sort.order": ["asc"],
+                "sort.field": ["sequence"]
+            },
+            "char_filter": {
+                "replace": {
+                    "type": "mapping",
+                    "mappings": ["&=> and "]
+                }
+            },
+            "analyzer": {
+                "default": {
+                    "filter": ["lowercase", "word_delimiter"],
+                    "char_filter": ["html_strip", "replace"],
+                    "type": "custom",
+                    "tokenizer": "whitespace"
+                }
+            }
+        }
     }
-  },
-  "settings": {
-    "analysis": {
-      "filter": {
-        "word_delimiter": {
-          "catenate_all": true,
-          "catenate_numbers": true,
-          "generate_word_parts": true,
-          "split_on_numerics": false,
-          "generate_number_parts": true,
-          "preserve_original": true,
-          "type": "word_delimiter",
-          "split_on_case_change": true
+}
+]]>
+        </field>
+    </record>
+
+    <record id="index_config_shopinvader_variant_nl" model="se.index.config">
+        <field name="name">Shopinvader Variant Index config NL</field>
+        <field name="body">{}</field>
+        <field
+      name="body_str"
+    > <![CDATA[
+{
+    "mappings": {
+        "properties": {
+            "dimensional_uom_id": {
+                "properties": {
+                    "name": {
+                        "index": true,
+                        "type": "text"
+                    },
+                    "id": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "indicated_price": {
+                "type": "long"
+            },
+            "supplier_id": {
+                "type": "integer"
+            },
+            "supplier_promotion": {
+                "type": "nested"
+            },
+            "name": {
+                "fields": {
+                    "raw": {
+                        "type": "text"
+                    }
+                },
+                "type": "keyword"
+            },
+            "brand": {
+                "properties": {
+                    "name": {
+                        "fields": {
+                            "raw": {
+                                "type": "text"
+                            }
+                        },
+                        "type": "keyword"
+                    }
+                }
+            },
+            "manufacturer": {
+                "properties": {
+                    "name": {
+                        "fields": {
+                            "raw": {
+                                "type": "text"
+                            }
+                        },
+                        "type": "keyword"
+                    }
+                }
+            },
+            "redirect_url_key": {
+                "type": "keyword"
+            },
+            "packaging_ids": {
+                "type": "keyword"
+            },
+            "specials": {
+                "type": "nested"
+            },
+            "hierarchicalCategories": {
+                "type": "nested",
+                "properties": {
+                    "ancestors": {
+                        "type": "keyword"
+                    },
+                    "order": {
+                        "type": "integer"
+                    },
+                    "value": {
+                        "type": "keyword"
+                    },
+                    "level": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "structured_attributes": {
+                "type": "nested",
+                "properties": {
+                    "fields": {
+                        "type": "nested"
+                    }
+                }
+            },
+            "supplier_discount": {
+                "type": "nested"
+            },
+            "storage_temperature_id": {
+                "properties": {
+                    "name": {
+                        "type": "keyword"
+                    },
+                    "id": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "attributes": {
+                "properties": {
+                    "species_id": {
+                        "type": "keyword"
+                    },
+                    "presentation_option_id": {
+                        "fields": {
+                            "raw": {
+                                "type": "text"
+                            }
+                        },
+                        "type": "keyword"
+                    },
+                    "active_principle_option_ids": {
+                        "fields": {
+                            "raw": {
+                                "type": "text"
+                            }
+                        },
+                        "type": "keyword"
+                    },
+                    "species_ids": {
+                        "fields": {
+                            "raw": {
+                                "type": "text"
+                            }
+                        },
+                        "type": "keyword"
+                    },
+                    "administration_route_option_ids": {
+                        "fields": {
+                            "raw": {
+                                "type": "text"
+                            }
+                        },
+                        "type": "keyword"
+                    },
+                    "animal_size_option_ids": {
+                        "fields": {
+                            "raw": {
+                                "type": "text"
+                            }
+                        },
+                        "type": "keyword"
+                    },
+                    "categ_age_option_ids": {
+                        "fields": {
+                            "raw": {
+                                "type": "text"
+                            }
+                        },
+                        "type": "keyword"
+                    },
+                    "indication_option_ids": {
+                        "fields": {
+                            "raw": {
+                                "type": "text"
+                            }
+                        },
+                        "type": "keyword"
+                    },
+                    "taxes_id": {
+                        "type": "keyword"
+                    },
+                    "product_color_option_ids": {
+                        "type": "keyword"
+                    },
+                    "size_clothing_option_id": {
+                        "fields": {
+                            "raw": {
+                                "type": "text"
+                            }
+                        },
+                        "type": "keyword"
+                    },
+                    "food_range_option_id": {
+                        "fields": {
+                            "raw": {
+                                "type": "text"
+                            }
+                        },
+                        "type": "keyword"
+                    }
+                }
+            },
+            "model": {
+                "properties": {
+                    "name": {
+                        "ignore_above": 256,
+                        "fields": {
+                            "raw": {
+                                "type": "text"
+                            }
+                        },
+                        "type": "keyword"
+                    }
+                }
+            },
+            "main": {
+                "type": "boolean"
+            },
+            "url_key": {
+                "type": "keyword"
+            },
+            "id": {
+                "type": "integer"
+            },
+            "categories": {
+                "type": "nested"
+            },
+            "stock": {
+                "properties": {
+                    "global": {
+                        "properties": {
+                            "state": {
+                                "type": "keyword"
+                            }
+                        }
+                    }
+                }
+            }
         }
-      },
-      "index": {
-        "sort.order": [
-          "desc",
-          "asc"
-        ],
-        "sort.field": [
-          "main",
-          "id"
-        ]
-      },
-      "char_filter": {
-        "replace": {
-          "type": "mapping",
-          "mappings": [
-            "&=> and "
-          ]
+    },
+    "settings": {
+        "analysis": {
+            "filter": {
+                "word_delimiter": {
+                    "catenate_all": true,
+                    "catenate_numbers": true,
+                    "generate_word_parts": true,
+                    "split_on_numerics": false,
+                    "generate_number_parts": true,
+                    "preserve_original": true,
+                    "type": "word_delimiter",
+                    "split_on_case_change": true
+                }
+            },
+            "index": {
+                "sort.order": ["asc"],
+                "sort.field": ["sequence"]
+            },
+            "char_filter": {
+                "replace": {
+                    "type": "mapping",
+                    "mappings": ["&=> and "]
+                }
+            },
+            "analyzer": {
+                "default": {
+                    "filter": ["lowercase", "word_delimiter"],
+                    "char_filter": ["html_strip", "replace"],
+                    "type": "custom",
+                    "tokenizer": "whitespace"
+                }
+            }
         }
-      },
-      "analyzer": {
-        "default": {
-          "filter": [
-            "lowercase",
-            "word_delimiter"
-          ],
-          "char_filter": [
-            "html_strip",
-            "replace"
-          ],
-          "type": "custom",
-          "tokenizer": "whitespace"
-        }
-      }
     }
-  }
+}
+]]>
+        </field>
+    </record>
+
+    <record id="index_config_shopinvader_variant_en" model="se.index.config">
+        <field name="name">Shopinvader Variant Index config EN</field>
+        <field name="body">{}</field>
+        <field
+      name="body_str"
+    > <![CDATA[
+{
+    "mappings": {
+        "properties": {
+            "dimensional_uom_id": {
+                "properties": {
+                    "name": {
+                        "index": true,
+                        "type": "text"
+                    },
+                    "id": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "indicated_price": {
+                "type": "long"
+            },
+            "supplier_id": {
+                "type": "integer"
+            },
+            "supplier_promotion": {
+                "type": "nested"
+            },
+            "name": {
+                "fields": {
+                    "raw": {
+                        "type": "text"
+                    }
+                },
+                "type": "keyword"
+            },
+            "brand": {
+                "properties": {
+                    "name": {
+                        "fields": {
+                            "raw": {
+                                "type": "text"
+                            }
+                        },
+                        "type": "keyword"
+                    }
+                }
+            },
+            "manufacturer": {
+                "properties": {
+                    "name": {
+                        "fields": {
+                            "raw": {
+                                "type": "text"
+                            }
+                        },
+                        "type": "keyword"
+                    }
+                }
+            },
+            "redirect_url_key": {
+                "type": "keyword"
+            },
+            "packaging_ids": {
+                "type": "keyword"
+            },
+            "specials": {
+                "type": "nested"
+            },
+            "hierarchicalCategories": {
+                "type": "nested",
+                "properties": {
+                    "ancestors": {
+                        "type": "keyword"
+                    },
+                    "order": {
+                        "type": "integer"
+                    },
+                    "value": {
+                        "type": "keyword"
+                    },
+                    "level": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "structured_attributes": {
+                "type": "nested",
+                "properties": {
+                    "fields": {
+                        "type": "nested"
+                    }
+                }
+            },
+            "supplier_discount": {
+                "type": "nested"
+            },
+            "storage_temperature_id": {
+                "properties": {
+                    "name": {
+                        "type": "keyword"
+                    },
+                    "id": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "attributes": {
+                "properties": {
+                    "species_id": {
+                        "type": "keyword"
+                    },
+                    "presentation_option_id": {
+                        "fields": {
+                            "raw": {
+                                "type": "text"
+                            }
+                        },
+                        "type": "keyword"
+                    },
+                    "active_principle_option_ids": {
+                        "fields": {
+                            "raw": {
+                                "type": "text"
+                            }
+                        },
+                        "type": "keyword"
+                    },
+                    "species_ids": {
+                        "fields": {
+                            "raw": {
+                                "type": "text"
+                            }
+                        },
+                        "type": "keyword"
+                    },
+                    "administration_route_option_ids": {
+                        "fields": {
+                            "raw": {
+                                "type": "text"
+                            }
+                        },
+                        "type": "keyword"
+                    },
+                    "animal_size_option_ids": {
+                        "fields": {
+                            "raw": {
+                                "type": "text"
+                            }
+                        },
+                        "type": "keyword"
+                    },
+                    "categ_age_option_ids": {
+                        "fields": {
+                            "raw": {
+                                "type": "text"
+                            }
+                        },
+                        "type": "keyword"
+                    },
+                    "indication_option_ids": {
+                        "fields": {
+                            "raw": {
+                                "type": "text"
+                            }
+                        },
+                        "type": "keyword"
+                    },
+                    "taxes_id": {
+                        "type": "keyword"
+                    },
+                    "product_color_option_ids": {
+                        "type": "keyword"
+                    },
+                    "size_clothing_option_id": {
+                        "fields": {
+                            "raw": {
+                                "type": "text"
+                            }
+                        },
+                        "type": "keyword"
+                    },
+                    "food_range_option_id": {
+                        "fields": {
+                            "raw": {
+                                "type": "text"
+                            }
+                        },
+                        "type": "keyword"
+                    }
+                }
+            },
+            "model": {
+                "properties": {
+                    "name": {
+                        "ignore_above": 256,
+                        "fields": {
+                            "raw": {
+                                "type": "text"
+                            }
+                        },
+                        "type": "keyword"
+                    }
+                }
+            },
+            "main": {
+                "type": "boolean"
+            },
+            "url_key": {
+                "type": "keyword"
+            },
+            "id": {
+                "type": "integer"
+            },
+            "categories": {
+                "type": "nested"
+            },
+            "stock": {
+                "properties": {
+                    "global": {
+                        "properties": {
+                            "state": {
+                                "type": "keyword"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "settings": {
+        "analysis": {
+            "filter": {
+                "word_delimiter": {
+                    "catenate_all": true,
+                    "catenate_numbers": true,
+                    "generate_word_parts": true,
+                    "split_on_numerics": false,
+                    "generate_number_parts": true,
+                    "preserve_original": true,
+                    "type": "word_delimiter",
+                    "split_on_case_change": true
+                }
+            },
+            "index": {
+                "sort.order": ["asc"],
+                "sort.field": ["sequence"]
+            },
+            "char_filter": {
+                "replace": {
+                    "type": "mapping",
+                    "mappings": ["&=> and "]
+                }
+            },
+            "analyzer": {
+                "default": {
+                    "filter": ["lowercase", "word_delimiter"],
+                    "char_filter": ["html_strip", "replace"],
+                    "type": "custom",
+                    "tokenizer": "whitespace"
+                }
+            }
+        }
+    }
 }
 ]]>
         </field>
@@ -219,7 +850,7 @@
       model='se.backend'
     />
         <field name="exporter_id" ref="shopinvader.ir_exp_shopinvader_variant" />
-        <field name="config_id" ref="index_config_shopinvader_variant" />
+        <field name="config_id" ref="index_config_shopinvader_variant_fr" />
     </record>
 
     <record id="elasticsearch_shopinvader_variant_index_nl_BE" model="se.index">
@@ -232,7 +863,7 @@
       model='se.backend'
     />
         <field name="exporter_id" ref="shopinvader.ir_exp_shopinvader_variant" />
-        <field name="config_id" ref="index_config_shopinvader_variant" />
+        <field name="config_id" ref="index_config_shopinvader_variant_nl" />
     </record>
 
     <record id="elasticsearch_shopinvader_variant_index_en_US" model="se.index">
@@ -245,7 +876,7 @@
       model='se.backend'
     />
         <field name="exporter_id" ref="shopinvader.ir_exp_shopinvader_variant" />
-        <field name="config_id" ref="index_config_shopinvader_variant" />
+        <field name="config_id" ref="index_config_shopinvader_variant_en" />
     </record>
 
     <record id="elasticsearch_shopinvader_category_index_fr_BE" model="se.index">
