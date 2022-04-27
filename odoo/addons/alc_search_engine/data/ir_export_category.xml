@@ -9,4 +9,27 @@
         <field name="export_id" ref="shopinvader.ir_exp_shopinvader_category" />
     </record>
 
+    <record
+    id="ir_exp_shopinvader_category_childs_childs_sequence"
+    model="ir.exports.line"
+  >
+        <field name="name">shopinvader_child_ids/shopinvader_child_ids/sequence</field>
+        <field
+      name="alias"
+    >shopinvader_child_ids:childs/shopinvader_child_ids:childs/sequence</field>
+        <field name="export_id" ref="shopinvader.ir_exp_shopinvader_category" />
+    </record>
+
+    <record
+    id="ir_exp_shopinvader_category_childs_childs_childs_sequence"
+    model="ir.exports.line"
+  >
+        <field
+      name="name"
+    >shopinvader_child_ids/shopinvader_child_ids/shopinvader_child_ids/sequence</field>
+        <field
+      name="alias"
+    >shopinvader_child_ids:childs/shopinvader_child_ids:childs/shopinvader_child_ids:childs/sequence</field>
+        <field name="export_id" ref="shopinvader.ir_exp_shopinvader_category" />
+    </record>
 </odoo>
