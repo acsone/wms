@@ -19,6 +19,11 @@
         "alc_product_pharmacy",
         "alc_product_mto",
     ],
-    "data": ["data/ir_export_product.xml", "data/se_backend.xml", "data/se_index.xml"],
+    "data": [
+        "data/ir_export_product.xml",
+        "data/ir_export_category.xml",
+        "data/se_backend.xml",
+        "data/se_index.xml",
+    ],
     "post_init_hook": "post_init_hook",
 }
