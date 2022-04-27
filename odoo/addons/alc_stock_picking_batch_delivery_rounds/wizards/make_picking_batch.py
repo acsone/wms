@@ -32,7 +32,7 @@ class MakePickingBatch(models.TransientModel):
                                 )
                     AND (
                         (
-                        sp.user_id IS NULL
+                        sp.operator_id IS NULL
                         AND sp.printed = false
                         AND ri.picking_launched
                         AND (
@@ -49,7 +49,7 @@ class MakePickingBatch(models.TransientModel):
                         )
                         OR
                         (
-                            sp.user_id = %(operator)s
+                            sp.operator_id = %(operator)s
                             AND sp.state NOT IN ('done', 'cancel')
                         )
                         )
