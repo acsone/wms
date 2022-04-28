@@ -46,8 +46,12 @@ class ProductTemplate(models.Model):
     sterile = fields.Boolean("Sterile?")
     fabric = fields.Boolean("Fabric?")
 
-    description_shop_short = fields.Html("Shop short description", translate=True)
-    description_shop_long = fields.Html("Shop long description", translate=True)
+    description_shop_short = fields.Html(
+        "Shop short description", translate=True, sanitize=False
+    )
+    description_shop_long = fields.Html(
+        "Shop long description", translate=True, sanitize=False
+    )
 
     class_amcra = fields.Selection(
         string="AMCRA classification",
