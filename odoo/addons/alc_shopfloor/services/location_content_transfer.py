@@ -272,7 +272,7 @@ class LocationContentTransfer(Component):
             )
         return self._response_for_start_single(operations.mapped("picking_id"))
 
-    def scan_line(self, location_id, operation_id, barcode):
+    def scan_line(self, location_id, operation_id, barcode, lot_id=False):
         """Scan a move line to move
 
         It validates that the user scanned the correct package, lot or product.
@@ -330,6 +330,10 @@ class LocationContentTransfer(Component):
 
         lot = search.lot_from_scan(barcode, operation)
         if lot:
+            if lot.id != lot_id:
+                return self._response_for_start_single(
+                    operation.picking_id, message=self.msg_store.wrong_lot_scanned(),
+                )
             if lot in operation.mapped("pack_lot_ids.lot_id"):
                 return self._response_for_scan_destination(location, operation)
             if operation.package_id and lot in operation.lot_ids:
@@ -942,6 +946,7 @@ class ShopfloorLocationContentTransferValidator(Component):
             "location_id": {"coerce": to_int, "required": True, "type": "integer"},
             "operation_id": {"coerce": to_int, "required": True, "type": "integer"},
             "barcode": {"required": True, "type": "string"},
+            "lot_id": {"coerce": to_int, "required": True, "type": "integer"},
         }
 
     def set_destination_line(self):

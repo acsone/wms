@@ -79,6 +79,12 @@ msgid "Quantity must be greater than zero."
 msgstr "La quantité doit être supérieure à zéro."
 
 #. module: alc_shopfloor
+#: code:addons/alc_shopfloor/actions/message.py:567
+#, python-format
+msgid "You did not scan the correct lot."
+msgstr "Veuillez scanner le bon lot."
+
+#. module: alc_shopfloor
 #: code:addons/alc_shopfloor/actions/message.py:117
 #, python-format
 msgid "Barcode not found"

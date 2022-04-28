@@ -560,3 +560,9 @@ class MessageAction(Component):
 
     def wrong_record(self, record):
         return {"message_type": "error", "body": self._wrong_record_msg(record._name)}
+
+    def wrong_lot_scanned(self):
+        return {
+            "message_type": "error",
+            "body": _(u"You did not scan the correct lot."),
+        }
