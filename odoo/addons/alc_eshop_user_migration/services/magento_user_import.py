@@ -39,6 +39,7 @@ class MagentoUserImport(Component):
             _logger.info("Magento user %s already activated.", username)
             raise NotFound()
         payload = magento_user._to_keycloak_user_payload()
+        magento_user._finalize_registration()
         return payload
 
     @restapi.method(
@@ -82,7 +83,6 @@ class MagentoUserImport(Component):
         if not account_ok:
             _logger.info("Wrong password for user %s.", username)
             raise Forbidden()
-        magento_user._finalize_registration()
         return {}
 
     def _check_password_input_schema(self):
