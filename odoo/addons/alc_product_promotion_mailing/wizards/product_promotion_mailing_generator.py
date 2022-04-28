@@ -91,7 +91,7 @@ class ProductPromotionMailingGenerator(models.TransientModel):
     def _send_promotion_mailing(self, partner_id, promotions):
         partner = self.env["res.partner"].browse(partner_id)
         if partner.lang and partner.lang != self.env.lang:
-            return self.with_context(land=partner.lang)._send_promotion_mailing(
+            return self.with_context(lang=partner.lang)._send_promotion_mailing(
                 partner_id, promotions
             )
         backend = self.env.ref("alc_eshop.backend")
