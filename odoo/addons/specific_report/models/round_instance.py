@@ -76,13 +76,6 @@ class RoundInstance(models.Model):
             item_number_of_equipment = partner_value.get("item_number_of_equipment", 0)
             item_number_of_equipment += shipping.item_number_of_equipment
 
-            number_of_human_drug = partner_value.get("number_of_human_drug", 0)
-            number_of_human_drug += shipping.number_of_human_drug
-            item_number_of_human_drug = partner_value.get(
-                "item_number_of_human_drug", 0
-            )
-            item_number_of_human_drug += shipping.item_number_of_human_drug
-
             number_total = partner_value.get("number_total", 0)
             number_total += shipping.number_total
             item_number_total = partner_value.get("item_number_total", 0)
@@ -102,8 +95,6 @@ class RoundInstance(models.Model):
                     "item_number_of_food": item_number_of_food,
                     "number_of_equipment": number_of_equipment,
                     "item_number_of_equipment": item_number_of_equipment,
-                    "number_of_human_drug": number_of_human_drug,
-                    "item_number_of_human_drug": item_number_of_human_drug,
                     "number_total": number_total,
                     "item_number_total": item_number_total,
                     "note": note,

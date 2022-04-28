@@ -43,9 +43,6 @@ class StockPicking(models.Model):
     number_of_food = fields.Float(
         "Number of food", compute="_compute_number_of_products"
     )
-    number_of_human_drug = fields.Float(
-        "Number of human drug", compute="_compute_number_of_products"
-    )
     number_of_equipment = fields.Float(
         "Number of equipments", compute="_compute_number_of_products"
     )
@@ -61,9 +58,6 @@ class StockPicking(models.Model):
     )
     item_number_of_food = fields.Float(
         "Number of food products", compute="_compute_number_of_products"
-    )
-    item_number_of_human_drug = fields.Float(
-        "Number of human drug products", compute="_compute_number_of_products"
     )
     item_number_of_equipment = fields.Float(
         "Number of equipments products", compute="_compute_number_of_products"
@@ -91,11 +85,10 @@ class StockPicking(models.Model):
 
     @api.depends("move_lines", "move_lines.product_id", "move_lines.product_uom_qty")
     def _compute_number_of_products(self):
-        zone_drug = self.env.ref("__setup__.picking_zone_medicament")
         zone_equipment = self.env.ref("__setup__.picking_zone_materiel")
         zone_cold = self.env.ref("__setup__.picking_zone_frigo")
         zone_food = self.env.ref("__setup__.picking_zone_aliments")
-        zone_human = self.env.ref("__setup__.picking_zone_humain")
+        zone_med = self.env.ref("__setup__.picking_zone_humain")
 
         # Check quantities for packages
         for picking in self:
@@ -111,12 +104,6 @@ class StockPicking(models.Model):
 
                 if operation.package_id:
                     nbr_of_packages_by_zone[picking_zone].add(operation.package_id.id)
-
-            picking.number_of_drug = sum(
-                self.env["stock.quant.package"]
-                .browse(nbr_of_packages_by_zone[zone_drug])
-                .mapped("nbr_packages")
-            )
             picking.number_of_equipment = sum(
                 self.env["stock.quant.package"]
                 .browse(nbr_of_packages_by_zone[zone_equipment])
@@ -132,23 +119,21 @@ class StockPicking(models.Model):
                 .browse(nbr_of_packages_by_zone[zone_food])
                 .mapped("nbr_packages")
             )
-            picking.number_of_human_drug = sum(
+            picking.number_of_drug = sum(
                 self.env["stock.quant.package"]
-                .browse(nbr_of_packages_by_zone[zone_human])
+                .browse(nbr_of_packages_by_zone[zone_med])
                 .mapped("nbr_packages")
             )
             picking.number_total = (
-                picking.number_of_drug
-                + picking.number_of_equipment
+                picking.number_of_equipment
                 + picking.number_of_cold
                 + picking.number_of_food
-                + picking.number_of_human_drug
+                + picking.number_of_drug
             )
 
             item_number_of_drug = 0
             item_number_of_cold = 0
             item_number_of_food = 0
-            item_number_of_human_drug = 0
             item_number_of_equipment = 0
             item_number_total = 0
 
@@ -162,7 +147,7 @@ class StockPicking(models.Model):
                 qty = operation.qty_done
                 item_number_total += qty
 
-                if picking_zone == zone_drug:
+                if picking_zone == zone_med:
                     item_number_of_drug += qty
                 elif picking_zone == zone_cold:
                     item_number_of_cold += qty
@@ -170,8 +155,6 @@ class StockPicking(models.Model):
                     item_number_of_food += qty
                 elif picking_zone == zone_equipment:
                     item_number_of_equipment += qty
-                elif picking_zone == zone_human:
-                    item_number_of_human_drug += qty
                 else:
                     raise UserError(
                         _("The picking zone %s is not correct") % picking_zone.name
@@ -180,6 +163,5 @@ class StockPicking(models.Model):
             picking.item_number_of_drug = item_number_of_drug
             picking.item_number_of_cold = item_number_of_cold
             picking.item_number_of_food = item_number_of_food
-            picking.item_number_of_human_drug = item_number_of_human_drug
             picking.item_number_of_equipment = item_number_of_equipment
             picking.item_number_total = item_number_total

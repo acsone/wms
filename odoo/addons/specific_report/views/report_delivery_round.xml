@@ -77,13 +77,11 @@
                 <tr class="active">
                   <th>Seq.</th>
                   <th>Customer</th>
-                  <th>Mobile</th>
                   <th>Phone</th>
                   <th># Drug</th>
                   <th># Cold</th>
                   <th># Food</th>
                   <th># Mat.</th>
-                  <th># Hum.</th>
                   <th># Tot.</th>
                   <th>Notes</th>
                 </tr>
@@ -105,8 +103,6 @@
                   </td>
                   <td>
                     <span t-field="partner.mobile" />
-                  </td>
-                  <td>
                     <span t-field="partner.phone" />
                   </td>
                   <td>
@@ -211,31 +207,6 @@
                   </td>
                   <td>
                     <t
-                      t-set="total_human_box"
-                      t-value="shipping_value.get('number_of_human_drug', 0) + total_human_box"
-                    />
-                    <t
-                      t-set="total_human_unit"
-                      t-value="int(shipping_value.get('item_number_of_human_drug', 0)) + total_human_unit"
-                    />
-                    <t t-if="shipping_value.get('number_of_human_drug', 0)">
-                                            <span
-                        t-esc="int(shipping_value.get('number_of_human_drug', 0))"
-                      />
-                                            box(es)
-                                        </t>
-                    <br
-                      t-if="shipping_value.get('number_of_human_drug', 0) and shipping_value.get('item_number_of_human_drug', 0)"
-                    />
-                    <t t-if="shipping_value.get('item_number_of_human_drug', 0)">
-                                            <span
-                        t-esc="int(shipping_value.get('item_number_of_human_drug', 0))"
-                      />
-                                            unit(s)
-                                        </t>
-                  </td>
-                  <td>
-                    <t
                       t-set="total_total_box"
                       t-value="shipping_value.get('number_total', 0) + total_total_box"
                     />
@@ -259,7 +230,7 @@
                                             unit(s)
                                         </t>
                   </td>
-                  <td style="width: 33%;">
+                  <td style="width: 43%;">
                     <strong>
                       <span t-esc="shipping_value.get('note', '')" />
                     </strong>
