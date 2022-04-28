@@ -34,7 +34,6 @@
                         <group name="main-info">
                             <field name="name" />
                             <field name="barcode" />
-                            <field name="active" invisible="1" />
                         </group>
                         <group name="printing">
                             <field name="printing_printer_id" />
