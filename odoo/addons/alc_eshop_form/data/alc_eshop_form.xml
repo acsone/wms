@@ -318,7 +318,7 @@
     },
     "searchEnabled": false,
     "validate": { "required": true },
-    "key": "customer_type",
+    "key": "function",
     "type": "select",
     "input": true
   },{
@@ -412,6 +412,48 @@
     "type": "textfield",
     "input": true
   },{
+    "label": "veterinary_omv_number",
+    "tableView": true,
+    "validate": {
+      "required": true
+    },
+    "key": "veterinary_omv_number",
+    "conditional": {
+      "show": true,
+      "when": "function",
+      "eq": "veterinary"
+    },
+    "type": "textfield",
+    "input": true
+  },{
+    "label": "veterinary_deposit_number",
+    "tableView": true,
+    "validate": {
+      "required": true
+    },
+    "key": "veterinary_deposit_number",
+    "conditional": {
+      "show": true,
+      "when": "function",
+      "eq": "veterinary"
+    },
+    "type": "textfield",
+    "input": true
+  },{
+    "label": "pharmacist_apb_number",
+    "tableView": true,
+    "validate": {
+      "required": true
+    },
+    "key": "pharmacist_apb_number",
+    "conditional": {
+      "show": true,
+      "when": "function",
+      "eq": "pharmacist"
+    },
+    "type": "textfield",
+    "input": true
+  },{
     "label": "activities",
     "optionsLabelPosition": "right",
     "tableView": false,
@@ -441,7 +483,6 @@
     "label": "comment",
     "autoExpand": false,
     "tableView": true,
-    "validate": { "required": true },
     "key": "comment",
     "type": "textarea",
     "input": true
@@ -503,6 +544,9 @@
       "vat_apply_no": "Non",
       "vat": "TVA",
       "vat_example": "Exemple : BE0250.624.702. Si vous n’avez pas de numéro de TVA, merci de compléter le champ avec: 'BE0000.000.000'.",
+      "veterinary_omv_number": "N° d'inscription à l'OMV",
+      "veterinary_deposit_number": "N° de dépôt",
+      "pharmacist_apb_number": "Numéro APB",
       "activities": "Type de clientèle",
       "activities_pets": "Animaux de compagnie",
       "activities_livestock": "Animaux de rente",
@@ -547,6 +591,9 @@
       "vat_apply_no": "Nee",
       "vat": "Btw-nummer",
       "vat_example": "Voorbeeld: BE0250.624.702. Als u geen BTW nummer hebt, gelieve het veld in te vullen met: 'BE000.000.000'.",
+      "veterinary_omv_number": "Inschrijvingsnummer bij de Orde der Dierenartsen",
+      "veterinary_deposit_number": "Depotnummer",
+      "pharmacist_apb_number": "APB nummer",
       "activities": "Type klanten",
       "activities_pets": "Kleine huisdieren",
       "activities_livestock": "Grote huisdieren",
@@ -591,6 +638,9 @@
       "vat_apply_no": "No",
       "vat": "VAT no.",
       "vat_example": "Example: BE0250.624.702. In case you don't have a VAT number, please fill in the field with : 'B0000.000.000'.",
+      "veterinary_omv_number": "OMV registration number",
+      "veterinary_deposit_number": "Filing number",
+      "pharmacist_apb_number": "APB number",
       "activities": "Activities",
       "activities_pets": "Pets",
       "activities_livestock": "Livestock",
