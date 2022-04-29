@@ -10,7 +10,7 @@ import unicodecsv as csv
 
 _logger = logging.getLogger("PIM IMPORT")
 
-ENV = None  # pylint: disable=undefined-variable  # noqa
+ENV = None
 
 
 def process_csv_file(root, filename, process_row_dict, delimiter=","):
