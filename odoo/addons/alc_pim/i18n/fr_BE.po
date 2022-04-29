@@ -2098,6 +2098,11 @@ msgid "Gynaecology - calving"
 msgstr "Gynecologie - Urologie"
 
 #. module: alc_pim
+#: model:ir.ui.view,arch_db:alc_pim.product_template_view_form
+msgid "Général"
+msgstr ""
+
+#. module: alc_pim
 #: model:attribute.option,name:alc_pim.attribute_option_hpm
 #: model:product.category,name:alc_pim.hpm_vcha
 #: model:product.category,name:alc_pim.hpm_vchi
