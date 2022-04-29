@@ -125,7 +125,7 @@ class AlcDocument(models.Model):
                 _logger.info(
                     "Decode %s for product %s with value %s",
                     product_field,
-                    product["sku"],
+                    product,
                     records,
                 )
                 record = self._get_cache_discount(today, records)
