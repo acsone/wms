@@ -6,14 +6,11 @@ import logging
 
 from openupgradelib import openupgrade
 
-from odoo.addons.alc_pim.hooks import _load_attribute_options_translations
-
 _logger = logging.getLogger(__name__)
 
 
 def migrate(cr, version):
-    _logger.info("Load PIM Options Translations")
-    openupgrade.load_data(cr, "alc_pim", "data/attribute_option.xml", mode="init")
     if not version:
         return
-    _load_attribute_options_translations(cr)
+    _logger.info("Load Attributes Translations")
+    openupgrade.load_data(cr, "alc_eshop_form", "data/alc_eshop_form.xml", mode="init")

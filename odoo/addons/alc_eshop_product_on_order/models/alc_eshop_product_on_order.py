@@ -125,5 +125,5 @@ WHERE
         )
         for record in self:
             template.with_context(
-                product=record.product_id, quanity=quantity
+                product=record.product_id, quantity=quantity
             ).send_mail(record.order_id.id)

@@ -9,317 +9,317 @@
       name="body_str"
     > <![CDATA[
 {
-	"settings": {
-		"analysis": {
-			"filter": {
-				"french_elision": {
-					"type": "elision",
-					"articles_case": true,
-					"articles": [
-						"l", "m", "t", "qu", "n", "s",
-						"j", "d", "c", "jusqu", "quoiqu",
-						"lorsqu", "puisqu"
-					]
-				},
-				"french_stop": {
-					"type": "stop",
-					"stopwords": "_french_"
-				},
-				"french_keywords": {
-					"type": "keyword_marker",
-					"keywords": ["Example"]
-				},
-				"french_stemmer": {
-					"type": "stemmer",
-					"language": "light_french"
-				},
-				"word_delimiter": {
-					"catenate_all": true,
-					"catenate_numbers": true,
-					"generate_word_parts": true,
-					"split_on_numerics": false,
-					"generate_number_parts": true,
-					"preserve_original": true,
-					"type": "word_delimiter",
-					"split_on_case_change": true
-				}
-			},
-			"index": {
-				"sort.order": ["asc"],
-				"sort.field": ["sequence"]
-			},
-			"char_filter": {
-				"replace": {
-					"type": "mapping",
-					"mappings": ["&=> and "]
-				}
-			},
-			"analyzer": {
-				"analyzer_lang": {
-					"tokenizer": "standard",
-					"filter": [
-						"french_elision",
-						"lowercase",
-						"french_stop",
-						"french_keywords",
-						"french_stemmer"
-					]
-				},
-				"analyzer_startswith": {
-					"tokenizer": "keyword",
-					"filter": "lowercase"
-				},
-				"default": {
-					"filter": ["lowercase", "word_delimiter"],
-					"char_filter": ["html_strip", "replace"],
-					"type": "custom",
-					"tokenizer": "whitespace"
-				}
-			}
-		}
-	},
-	"mappings": {
-		"properties": {
-			"dimensional_uom_id": {
-				"properties": {
-					"name": {
-						"index": true,
-						"type": "text"
-					},
-					"id": {
-						"type": "integer"
-					}
-				}
-			},
-			"indicated_price": {
-				"type": "long"
-			},
-			"supplier_id": {
-				"type": "integer"
-			},
-			"supplier_promotion": {
-				"type": "nested"
-			},
-			"name": {
-				"fields": {
-					"raw": {
-						"type": "text",
-						"analyzer": "analyzer_lang"
-					},
-					"start": {
-						"analyzer": "analyzer_startswith",
-						"similarity": "boolean",
-						"type": "text"
-					}
-				},
-				"type": "keyword"
-			},
-			"description_shop_short": {
-				"type": "text",
-				"analyzer": "analyzer_lang"
-			},
-			"description_shop_long": {
-				"type": "text",
-				"analyzer": "analyzer_lang"
-			},
-			"short_description": {
-				"type": "text",
-				"analyzer": "analyzer_lang"
-			},
-			"brand": {
-				"properties": {
-					"name": {
-						"fields": {
-							"raw": {
-								"type": "text"
-							}
-						},
-						"type": "keyword"
-					}
-				}
-			},
-			"manufacturer": {
-				"properties": {
-					"name": {
-						"fields": {
-							"raw": {
-								"type": "text"
-							}
-						},
-						"type": "keyword"
-					}
-				}
-			},
-			"redirect_url_key": {
-				"type": "keyword"
-			},
-			"packaging_ids": {
-				"type": "keyword"
-			},
-			"specials": {
-				"type": "nested"
-			},
-			"hierarchicalCategories": {
-				"type": "nested",
-				"properties": {
-					"ancestors": {
-						"type": "keyword"
-					},
-					"order": {
-						"type": "integer"
-					},
-					"value": {
-						"type": "keyword"
-					},
-					"level": {
-						"type": "integer"
-					}
-				}
-			},
-			"structured_attributes": {
-				"type": "nested",
-				"properties": {
-					"fields": {
-						"type": "nested"
-					}
-				}
-			},
-			"supplier_discount": {
-				"type": "nested"
-			},
-			"storage_temperature_id": {
-				"properties": {
-					"name": {
-						"type": "keyword"
-					},
-					"id": {
-						"type": "integer"
-					}
-				}
-			},
-			"attributes": {
-				"properties": {
-					"species_id": {
-						"type": "keyword"
-					},
-					"presentation_option_id": {
-						"fields": {
-							"raw": {
-								"type": "text"
-							}
-						},
-						"type": "keyword"
-					},
-					"active_principle_option_ids": {
-						"fields": {
-							"raw": {
-								"type": "text"
-							}
-						},
-						"type": "keyword"
-					},
-					"species_ids": {
-						"fields": {
-							"raw": {
-								"type": "text"
-							}
-						},
-						"type": "keyword"
-					},
-					"administration_route_option_ids": {
-						"fields": {
-							"raw": {
-								"type": "text"
-							}
-						},
-						"type": "keyword"
-					},
-					"animal_size_option_ids": {
-						"fields": {
-							"raw": {
-								"type": "text"
-							}
-						},
-						"type": "keyword"
-					},
-					"categ_age_option_ids": {
-						"fields": {
-							"raw": {
-								"type": "text"
-							}
-						},
-						"type": "keyword"
-					},
-					"indication_option_ids": {
-						"fields": {
-							"raw": {
-								"type": "text"
-							}
-						},
-						"type": "keyword"
-					},
-					"taxes_id": {
-						"type": "keyword"
-					},
-					"product_color_option_ids": {
-						"type": "keyword"
-					},
-					"size_clothing_option_id": {
-						"fields": {
-							"raw": {
-								"type": "text"
-							}
-						},
-						"type": "keyword"
-					},
-					"food_range_option_id": {
-						"fields": {
-							"raw": {
-								"type": "text"
-							}
-						},
-						"type": "keyword"
-					}
-				}
-			},
-			"model": {
-				"properties": {
-					"name": {
-						"ignore_above": 256,
-						"fields": {
-							"raw": {
-								"type": "text"
-							}
-						},
-						"type": "keyword"
-					}
-				}
-			},
-			"main": {
-				"type": "boolean"
-			},
-			"url_key": {
-				"type": "keyword"
-			},
-			"id": {
-				"type": "integer"
-			},
-			"categories": {
-				"type": "nested"
-			},
-			"stock": {
-				"properties": {
-					"global": {
-						"properties": {
-							"state": {
-								"type": "keyword"
-							}
-						}
-					}
-				}
-			}
-		}
-	}
+    "settings": {
+        "analysis": {
+            "filter": {
+                "french_elision": {
+                    "type": "elision",
+                    "articles_case": true,
+                    "articles": [
+                        "l", "m", "t", "qu", "n", "s",
+                        "j", "d", "c", "jusqu", "quoiqu",
+                        "lorsqu", "puisqu"
+                    ]
+                },
+                "french_stop": {
+                    "type": "stop",
+                    "stopwords": "_french_"
+                },
+                "french_keywords": {
+                    "type": "keyword_marker",
+                    "keywords": ["Example"]
+                },
+                "french_stemmer": {
+                    "type": "stemmer",
+                    "language": "light_french"
+                },
+                "word_delimiter": {
+                    "catenate_all": true,
+                    "catenate_numbers": true,
+                    "generate_word_parts": true,
+                    "split_on_numerics": false,
+                    "generate_number_parts": true,
+                    "preserve_original": true,
+                    "type": "word_delimiter",
+                    "split_on_case_change": true
+                }
+            },
+            "index": {
+                "sort.order": ["asc"],
+                "sort.field": ["sequence"]
+            },
+            "char_filter": {
+                "replace": {
+                    "type": "mapping",
+                    "mappings": ["&=> and "]
+                }
+            },
+            "analyzer": {
+                "analyzer_lang": {
+                    "tokenizer": "standard",
+                    "filter": [
+                        "french_elision",
+                        "lowercase",
+                        "french_stop",
+                        "french_keywords",
+                        "french_stemmer"
+                    ]
+                },
+                "analyzer_startswith": {
+                    "tokenizer": "keyword",
+                    "filter": "lowercase"
+                },
+                "default": {
+                    "filter": ["lowercase", "word_delimiter"],
+                    "char_filter": ["html_strip", "replace"],
+                    "type": "custom",
+                    "tokenizer": "whitespace"
+                }
+            }
+        }
+    },
+    "mappings": {
+        "properties": {
+            "dimensional_uom_id": {
+                "properties": {
+                    "name": {
+                        "index": true,
+                        "type": "text"
+                    },
+                    "id": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "indicated_price": {
+                "type": "long"
+            },
+            "supplier_id": {
+                "type": "integer"
+            },
+            "supplier_promotion": {
+                "type": "nested"
+            },
+            "name": {
+                "fields": {
+                    "raw": {
+                        "type": "text",
+                        "analyzer": "analyzer_lang"
+                    },
+                    "start": {
+                        "analyzer": "analyzer_startswith",
+                        "similarity": "boolean",
+                        "type": "text"
+                    }
+                },
+                "type": "keyword"
+            },
+            "description_shop_short": {
+                "type": "text",
+                "analyzer": "analyzer_lang"
+            },
+            "description_shop_long": {
+                "type": "text",
+                "analyzer": "analyzer_lang"
+            },
+            "short_description": {
+                "type": "text",
+                "analyzer": "analyzer_lang"
+            },
+            "brand": {
+                "properties": {
+                    "name": {
+                        "fields": {
+                            "raw": {
+                                "type": "text"
+                            }
+                        },
+                        "type": "keyword"
+                    }
+                }
+            },
+            "manufacturer": {
+                "properties": {
+                    "name": {
+                        "fields": {
+                            "raw": {
+                                "type": "text"
+                            }
+                        },
+                        "type": "keyword"
+                    }
+                }
+            },
+            "redirect_url_key": {
+                "type": "keyword"
+            },
+            "packaging_ids": {
+                "type": "keyword"
+            },
+            "specials": {
+                "type": "nested"
+            },
+            "hierarchicalCategories": {
+                "type": "nested",
+                "properties": {
+                    "ancestors": {
+                        "type": "keyword"
+                    },
+                    "order": {
+                        "type": "integer"
+                    },
+                    "value": {
+                        "type": "keyword"
+                    },
+                    "level": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "structured_attributes": {
+                "type": "nested",
+                "properties": {
+                    "fields": {
+                        "type": "nested"
+                    }
+                }
+            },
+            "supplier_discount": {
+                "type": "nested"
+            },
+            "storage_temperature_id": {
+                "properties": {
+                    "name": {
+                        "type": "keyword"
+                    },
+                    "id": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "attributes": {
+                "properties": {
+                    "species_id": {
+                        "type": "keyword"
+                    },
+                    "presentation_option_id": {
+                        "fields": {
+                            "raw": {
+                                "type": "text"
+                            }
+                        },
+                        "type": "keyword"
+                    },
+                    "active_principle_option_ids": {
+                        "fields": {
+                            "raw": {
+                                "type": "text"
+                            }
+                        },
+                        "type": "keyword"
+                    },
+                    "species_ids": {
+                        "fields": {
+                            "raw": {
+                                "type": "text"
+                            }
+                        },
+                        "type": "keyword"
+                    },
+                    "administration_route_option_ids": {
+                        "fields": {
+                            "raw": {
+                                "type": "text"
+                            }
+                        },
+                        "type": "keyword"
+                    },
+                    "animal_size_option_ids": {
+                        "fields": {
+                            "raw": {
+                                "type": "text"
+                            }
+                        },
+                        "type": "keyword"
+                    },
+                    "categ_age_option_ids": {
+                        "fields": {
+                            "raw": {
+                                "type": "text"
+                            }
+                        },
+                        "type": "keyword"
+                    },
+                    "indication_option_ids": {
+                        "fields": {
+                            "raw": {
+                                "type": "text"
+                            }
+                        },
+                        "type": "keyword"
+                    },
+                    "taxes_id": {
+                        "type": "keyword"
+                    },
+                    "product_color_option_ids": {
+                        "type": "keyword"
+                    },
+                    "size_clothing_option_id": {
+                        "fields": {
+                            "raw": {
+                                "type": "text"
+                            }
+                        },
+                        "type": "keyword"
+                    },
+                    "food_range_option_id": {
+                        "fields": {
+                            "raw": {
+                                "type": "text"
+                            }
+                        },
+                        "type": "keyword"
+                    }
+                }
+            },
+            "model": {
+                "properties": {
+                    "name": {
+                        "ignore_above": 256,
+                        "fields": {
+                            "raw": {
+                                "type": "text"
+                            }
+                        },
+                        "type": "keyword"
+                    }
+                }
+            },
+            "main": {
+                "type": "boolean"
+            },
+            "url_key": {
+                "type": "keyword"
+            },
+            "id": {
+                "type": "integer"
+            },
+            "categories": {
+                "type": "nested"
+            },
+            "stock": {
+                "properties": {
+                    "global": {
+                        "properties": {
+                            "state": {
+                                "type": "keyword"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 ]]>
         </field>
@@ -332,317 +332,317 @@
       name="body_str"
     > <![CDATA[
 {
-	"settings": {
-		"analysis": {
-			"filter": {
-				"dutch_stop": {
-					"type": "stop",
-					"stopwords": "_dutch_"
-				},
-				"dutch_keywords": {
-					"type": "keyword_marker",
-					"keywords": ["voorbeeld"]
-				},
-				"dutch_stemmer": {
-					"type": "stemmer",
-					"language": "dutch"
-				},
-				"dutch_override": {
-					"type": "stemmer_override",
-					"rules": [
-						"fiets=>fiets",
-						"bromfiets=>bromfiets",
-						"ei=>eier",
-						"kind=>kinder"
-					]
-				},
-				"word_delimiter": {
-					"catenate_all": true,
-					"catenate_numbers": true,
-					"generate_word_parts": true,
-					"split_on_numerics": false,
-					"generate_number_parts": true,
-					"preserve_original": true,
-					"type": "word_delimiter",
-					"split_on_case_change": true
-				}
-			},
-			"index": {
-				"sort.order": ["asc"],
-				"sort.field": ["sequence"]
-			},
-			"char_filter": {
-				"replace": {
-					"type": "mapping",
-					"mappings": ["&=> and "]
-				}
-			},
-			"analyzer": {
-				"analyzer_lang": {
-					"tokenizer": "standard",
-					"filter": [
-						"lowercase",
-						"dutch_stop",
-						"dutch_keywords",
-						"dutch_override",
-						"dutch_stemmer"
-					]
-				},
-				"analyzer_startswith": {
-					"tokenizer": "keyword",
-					"filter": "lowercase"
-				},
-				"default": {
-					"filter": ["lowercase", "word_delimiter"],
-					"char_filter": ["html_strip", "replace"],
-					"type": "custom",
-					"tokenizer": "whitespace"
-				}
-			}
-		}
-	},
-	"mappings": {
-		"properties": {
-			"dimensional_uom_id": {
-				"properties": {
-					"name": {
-						"index": true,
-						"type": "text"
-					},
-					"id": {
-						"type": "integer"
-					}
-				}
-			},
-			"indicated_price": {
-				"type": "long"
-			},
-			"supplier_id": {
-				"type": "integer"
-			},
-			"supplier_promotion": {
-				"type": "nested"
-			},
-			"name": {
-				"fields": {
-					"raw": {
-						"type": "text",
-						"analyzer": "analyzer_lang"
-					},
-					"start": {
-						"analyzer": "analyzer_startswith",
-						"similarity": "boolean",
-						"type": "text"
-					}
-				},
-				"type": "keyword"
-			},
-			"description_shop_short": {
-				"type": "text",
-				"analyzer": "analyzer_lang"
-			},
-			"description_shop_long": {
-				"type": "text",
-				"analyzer": "analyzer_lang"
-			},
-			"short_description": {
-				"type": "text",
-				"analyzer": "analyzer_lang"
-			},
-			"brand": {
-				"properties": {
-					"name": {
-						"fields": {
-							"raw": {
-								"type": "text"
-							}
-						},
-						"type": "keyword"
-					}
-				}
-			},
-			"manufacturer": {
-				"properties": {
-					"name": {
-						"fields": {
-							"raw": {
-								"type": "text"
-							}
-						},
-						"type": "keyword"
-					}
-				}
-			},
-			"redirect_url_key": {
-				"type": "keyword"
-			},
-			"packaging_ids": {
-				"type": "keyword"
-			},
-			"specials": {
-				"type": "nested"
-			},
-			"hierarchicalCategories": {
-				"type": "nested",
-				"properties": {
-					"ancestors": {
-						"type": "keyword"
-					},
-					"order": {
-						"type": "integer"
-					},
-					"value": {
-						"type": "keyword"
-					},
-					"level": {
-						"type": "integer"
-					}
-				}
-			},
-			"structured_attributes": {
-				"type": "nested",
-				"properties": {
-					"fields": {
-						"type": "nested"
-					}
-				}
-			},
-			"supplier_discount": {
-				"type": "nested"
-			},
-			"storage_temperature_id": {
-				"properties": {
-					"name": {
-						"type": "keyword"
-					},
-					"id": {
-						"type": "integer"
-					}
-				}
-			},
-			"attributes": {
-				"properties": {
-					"species_id": {
-						"type": "keyword"
-					},
-					"presentation_option_id": {
-						"fields": {
-							"raw": {
-								"type": "text"
-							}
-						},
-						"type": "keyword"
-					},
-					"active_principle_option_ids": {
-						"fields": {
-							"raw": {
-								"type": "text"
-							}
-						},
-						"type": "keyword"
-					},
-					"species_ids": {
-						"fields": {
-							"raw": {
-								"type": "text"
-							}
-						},
-						"type": "keyword"
-					},
-					"administration_route_option_ids": {
-						"fields": {
-							"raw": {
-								"type": "text"
-							}
-						},
-						"type": "keyword"
-					},
-					"animal_size_option_ids": {
-						"fields": {
-							"raw": {
-								"type": "text"
-							}
-						},
-						"type": "keyword"
-					},
-					"categ_age_option_ids": {
-						"fields": {
-							"raw": {
-								"type": "text"
-							}
-						},
-						"type": "keyword"
-					},
-					"indication_option_ids": {
-						"fields": {
-							"raw": {
-								"type": "text"
-							}
-						},
-						"type": "keyword"
-					},
-					"taxes_id": {
-						"type": "keyword"
-					},
-					"product_color_option_ids": {
-						"type": "keyword"
-					},
-					"size_clothing_option_id": {
-						"fields": {
-							"raw": {
-								"type": "text"
-							}
-						},
-						"type": "keyword"
-					},
-					"food_range_option_id": {
-						"fields": {
-							"raw": {
-								"type": "text"
-							}
-						},
-						"type": "keyword"
-					}
-				}
-			},
-			"model": {
-				"properties": {
-					"name": {
-						"ignore_above": 256,
-						"fields": {
-							"raw": {
-								"type": "text"
-							}
-						},
-						"type": "keyword"
-					}
-				}
-			},
-			"main": {
-				"type": "boolean"
-			},
-			"url_key": {
-				"type": "keyword"
-			},
-			"id": {
-				"type": "integer"
-			},
-			"categories": {
-				"type": "nested"
-			},
-			"stock": {
-				"properties": {
-					"global": {
-						"properties": {
-							"state": {
-								"type": "keyword"
-							}
-						}
-					}
-				}
-			}
-		}
-	}
+    "settings": {
+        "analysis": {
+            "filter": {
+                "dutch_stop": {
+                    "type": "stop",
+                    "stopwords": "_dutch_"
+                },
+                "dutch_keywords": {
+                    "type": "keyword_marker",
+                    "keywords": ["voorbeeld"]
+                },
+                "dutch_stemmer": {
+                    "type": "stemmer",
+                    "language": "dutch"
+                },
+                "dutch_override": {
+                    "type": "stemmer_override",
+                    "rules": [
+                        "fiets=>fiets",
+                        "bromfiets=>bromfiets",
+                        "ei=>eier",
+                        "kind=>kinder"
+                    ]
+                },
+                "word_delimiter": {
+                    "catenate_all": true,
+                    "catenate_numbers": true,
+                    "generate_word_parts": true,
+                    "split_on_numerics": false,
+                    "generate_number_parts": true,
+                    "preserve_original": true,
+                    "type": "word_delimiter",
+                    "split_on_case_change": true
+                }
+            },
+            "index": {
+                "sort.order": ["asc"],
+                "sort.field": ["sequence"]
+            },
+            "char_filter": {
+                "replace": {
+                    "type": "mapping",
+                    "mappings": ["&=> and "]
+                }
+            },
+            "analyzer": {
+                "analyzer_lang": {
+                    "tokenizer": "standard",
+                    "filter": [
+                        "lowercase",
+                        "dutch_stop",
+                        "dutch_keywords",
+                        "dutch_override",
+                        "dutch_stemmer"
+                    ]
+                },
+                "analyzer_startswith": {
+                    "tokenizer": "keyword",
+                    "filter": "lowercase"
+                },
+                "default": {
+                    "filter": ["lowercase", "word_delimiter"],
+                    "char_filter": ["html_strip", "replace"],
+                    "type": "custom",
+                    "tokenizer": "whitespace"
+                }
+            }
+        }
+    },
+    "mappings": {
+        "properties": {
+            "dimensional_uom_id": {
+                "properties": {
+                    "name": {
+                        "index": true,
+                        "type": "text"
+                    },
+                    "id": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "indicated_price": {
+                "type": "long"
+            },
+            "supplier_id": {
+                "type": "integer"
+            },
+            "supplier_promotion": {
+                "type": "nested"
+            },
+            "name": {
+                "fields": {
+                    "raw": {
+                        "type": "text",
+                        "analyzer": "analyzer_lang"
+                    },
+                    "start": {
+                        "analyzer": "analyzer_startswith",
+                        "similarity": "boolean",
+                        "type": "text"
+                    }
+                },
+                "type": "keyword"
+            },
+            "description_shop_short": {
+                "type": "text",
+                "analyzer": "analyzer_lang"
+            },
+            "description_shop_long": {
+                "type": "text",
+                "analyzer": "analyzer_lang"
+            },
+            "short_description": {
+                "type": "text",
+                "analyzer": "analyzer_lang"
+            },
+            "brand": {
+                "properties": {
+                    "name": {
+                        "fields": {
+                            "raw": {
+                                "type": "text"
+                            }
+                        },
+                        "type": "keyword"
+                    }
+                }
+            },
+            "manufacturer": {
+                "properties": {
+                    "name": {
+                        "fields": {
+                            "raw": {
+                                "type": "text"
+                            }
+                        },
+                        "type": "keyword"
+                    }
+                }
+            },
+            "redirect_url_key": {
+                "type": "keyword"
+            },
+            "packaging_ids": {
+                "type": "keyword"
+            },
+            "specials": {
+                "type": "nested"
+            },
+            "hierarchicalCategories": {
+                "type": "nested",
+                "properties": {
+                    "ancestors": {
+                        "type": "keyword"
+                    },
+                    "order": {
+                        "type": "integer"
+                    },
+                    "value": {
+                        "type": "keyword"
+                    },
+                    "level": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "structured_attributes": {
+                "type": "nested",
+                "properties": {
+                    "fields": {
+                        "type": "nested"
+                    }
+                }
+            },
+            "supplier_discount": {
+                "type": "nested"
+            },
+            "storage_temperature_id": {
+                "properties": {
+                    "name": {
+                        "type": "keyword"
+                    },
+                    "id": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "attributes": {
+                "properties": {
+                    "species_id": {
+                        "type": "keyword"
+                    },
+                    "presentation_option_id": {
+                        "fields": {
+                            "raw": {
+                                "type": "text"
+                            }
+                        },
+                        "type": "keyword"
+                    },
+                    "active_principle_option_ids": {
+                        "fields": {
+                            "raw": {
+                                "type": "text"
+                            }
+                        },
+                        "type": "keyword"
+                    },
+                    "species_ids": {
+                        "fields": {
+                            "raw": {
+                                "type": "text"
+                            }
+                        },
+                        "type": "keyword"
+                    },
+                    "administration_route_option_ids": {
+                        "fields": {
+                            "raw": {
+                                "type": "text"
+                            }
+                        },
+                        "type": "keyword"
+                    },
+                    "animal_size_option_ids": {
+                        "fields": {
+                            "raw": {
+                                "type": "text"
+                            }
+                        },
+                        "type": "keyword"
+                    },
+                    "categ_age_option_ids": {
+                        "fields": {
+                            "raw": {
+                                "type": "text"
+                            }
+                        },
+                        "type": "keyword"
+                    },
+                    "indication_option_ids": {
+                        "fields": {
+                            "raw": {
+                                "type": "text"
+                            }
+                        },
+                        "type": "keyword"
+                    },
+                    "taxes_id": {
+                        "type": "keyword"
+                    },
+                    "product_color_option_ids": {
+                        "type": "keyword"
+                    },
+                    "size_clothing_option_id": {
+                        "fields": {
+                            "raw": {
+                                "type": "text"
+                            }
+                        },
+                        "type": "keyword"
+                    },
+                    "food_range_option_id": {
+                        "fields": {
+                            "raw": {
+                                "type": "text"
+                            }
+                        },
+                        "type": "keyword"
+                    }
+                }
+            },
+            "model": {
+                "properties": {
+                    "name": {
+                        "ignore_above": 256,
+                        "fields": {
+                            "raw": {
+                                "type": "text"
+                            }
+                        },
+                        "type": "keyword"
+                    }
+                }
+            },
+            "main": {
+                "type": "boolean"
+            },
+            "url_key": {
+                "type": "keyword"
+            },
+            "id": {
+                "type": "integer"
+            },
+            "categories": {
+                "type": "nested"
+            },
+            "stock": {
+                "properties": {
+                    "global": {
+                        "properties": {
+                            "state": {
+                                "type": "keyword"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 ]]>
         </field>
@@ -655,312 +655,312 @@
       name="body_str"
     > <![CDATA[
 {
-	"settings": {
-		"analysis": {
-			"filter": {
-				"english_stop": {
-					"type": "stop",
-					"stopwords": "_english_"
-				},
-				"english_keywords": {
-					"type": "keyword_marker",
-					"keywords": ["example"]
-				},
-				"english_stemmer": {
-					"type": "stemmer",
-					"language": "english"
-				},
-				"english_possessive_stemmer": {
-					"type": "stemmer",
-					"language": "possessive_english"
-				},
-				"word_delimiter": {
-					"catenate_all": true,
-					"catenate_numbers": true,
-					"generate_word_parts": true,
-					"split_on_numerics": false,
-					"generate_number_parts": true,
-					"preserve_original": true,
-					"type": "word_delimiter",
-					"split_on_case_change": true
-				}
-			},
-			"index": {
-				"sort.order": ["asc"],
-				"sort.field": ["sequence"]
-			},
-			"char_filter": {
-				"replace": {
-					"type": "mapping",
-					"mappings": ["&=> and "]
-				}
-			},
-			"analyzer": {
-				"analyzer_lang": {
-					"tokenizer": "standard",
-					"filter": [
-						"english_possessive_stemmer",
-						"lowercase",
-						"english_stop",
-						"english_keywords",
-						"english_stemmer"
-					]
-				},
-				"analyzer_startswith": {
-					"tokenizer": "keyword",
-					"filter": "lowercase"
-				},
-				"default": {
-					"filter": ["lowercase", "word_delimiter"],
-					"char_filter": ["html_strip", "replace"],
-					"type": "custom",
-					"tokenizer": "whitespace"
-				}
-			}
-		}
-	},
-	"mappings": {
-		"properties": {
-			"dimensional_uom_id": {
-				"properties": {
-					"name": {
-						"index": true,
-						"type": "text"
-					},
-					"id": {
-						"type": "integer"
-					}
-				}
-			},
-			"indicated_price": {
-				"type": "long"
-			},
-			"supplier_id": {
-				"type": "integer"
-			},
-			"supplier_promotion": {
-				"type": "nested"
-			},
-			"name": {
-				"fields": {
-					"raw": {
-						"type": "text",
-						"analyzer": "analyzer_lang"
-					},
-					"start": {
-						"analyzer": "analyzer_startswith",
-						"similarity": "boolean",
-						"type": "text"
-					}
-				},
-				"type": "keyword"
-			},
-			"description_shop_short": {
-				"type": "text",
-				"analyzer": "analyzer_lang"
-			},
-			"description_shop_long": {
-				"type": "text",
-				"analyzer": "analyzer_lang"
-			},
-			"short_description": {
-				"type": "text",
-				"analyzer": "analyzer_lang"
-			},
-			"brand": {
-				"properties": {
-					"name": {
-						"fields": {
-							"raw": {
-								"type": "text"
-							}
-						},
-						"type": "keyword"
-					}
-				}
-			},
-			"manufacturer": {
-				"properties": {
-					"name": {
-						"fields": {
-							"raw": {
-								"type": "text"
-							}
-						},
-						"type": "keyword"
-					}
-				}
-			},
-			"redirect_url_key": {
-				"type": "keyword"
-			},
-			"packaging_ids": {
-				"type": "keyword"
-			},
-			"specials": {
-				"type": "nested"
-			},
-			"hierarchicalCategories": {
-				"type": "nested",
-				"properties": {
-					"ancestors": {
-						"type": "keyword"
-					},
-					"order": {
-						"type": "integer"
-					},
-					"value": {
-						"type": "keyword"
-					},
-					"level": {
-						"type": "integer"
-					}
-				}
-			},
-			"structured_attributes": {
-				"type": "nested",
-				"properties": {
-					"fields": {
-						"type": "nested"
-					}
-				}
-			},
-			"supplier_discount": {
-				"type": "nested"
-			},
-			"storage_temperature_id": {
-				"properties": {
-					"name": {
-						"type": "keyword"
-					},
-					"id": {
-						"type": "integer"
-					}
-				}
-			},
-			"attributes": {
-				"properties": {
-					"species_id": {
-						"type": "keyword"
-					},
-					"presentation_option_id": {
-						"fields": {
-							"raw": {
-								"type": "text"
-							}
-						},
-						"type": "keyword"
-					},
-					"active_principle_option_ids": {
-						"fields": {
-							"raw": {
-								"type": "text"
-							}
-						},
-						"type": "keyword"
-					},
-					"species_ids": {
-						"fields": {
-							"raw": {
-								"type": "text"
-							}
-						},
-						"type": "keyword"
-					},
-					"administration_route_option_ids": {
-						"fields": {
-							"raw": {
-								"type": "text"
-							}
-						},
-						"type": "keyword"
-					},
-					"animal_size_option_ids": {
-						"fields": {
-							"raw": {
-								"type": "text"
-							}
-						},
-						"type": "keyword"
-					},
-					"categ_age_option_ids": {
-						"fields": {
-							"raw": {
-								"type": "text"
-							}
-						},
-						"type": "keyword"
-					},
-					"indication_option_ids": {
-						"fields": {
-							"raw": {
-								"type": "text"
-							}
-						},
-						"type": "keyword"
-					},
-					"taxes_id": {
-						"type": "keyword"
-					},
-					"product_color_option_ids": {
-						"type": "keyword"
-					},
-					"size_clothing_option_id": {
-						"fields": {
-							"raw": {
-								"type": "text"
-							}
-						},
-						"type": "keyword"
-					},
-					"food_range_option_id": {
-						"fields": {
-							"raw": {
-								"type": "text"
-							}
-						},
-						"type": "keyword"
-					}
-				}
-			},
-			"model": {
-				"properties": {
-					"name": {
-						"ignore_above": 256,
-						"fields": {
-							"raw": {
-								"type": "text"
-							}
-						},
-						"type": "keyword"
-					}
-				}
-			},
-			"main": {
-				"type": "boolean"
-			},
-			"url_key": {
-				"type": "keyword"
-			},
-			"id": {
-				"type": "integer"
-			},
-			"categories": {
-				"type": "nested"
-			},
-			"stock": {
-				"properties": {
-					"global": {
-						"properties": {
-							"state": {
-								"type": "keyword"
-							}
-						}
-					}
-				}
-			}
-		}
-	}
+    "settings": {
+        "analysis": {
+            "filter": {
+                "english_stop": {
+                    "type": "stop",
+                    "stopwords": "_english_"
+                },
+                "english_keywords": {
+                    "type": "keyword_marker",
+                    "keywords": ["example"]
+                },
+                "english_stemmer": {
+                    "type": "stemmer",
+                    "language": "english"
+                },
+                "english_possessive_stemmer": {
+                    "type": "stemmer",
+                    "language": "possessive_english"
+                },
+                "word_delimiter": {
+                    "catenate_all": true,
+                    "catenate_numbers": true,
+                    "generate_word_parts": true,
+                    "split_on_numerics": false,
+                    "generate_number_parts": true,
+                    "preserve_original": true,
+                    "type": "word_delimiter",
+                    "split_on_case_change": true
+                }
+            },
+            "index": {
+                "sort.order": ["asc"],
+                "sort.field": ["sequence"]
+            },
+            "char_filter": {
+                "replace": {
+                    "type": "mapping",
+                    "mappings": ["&=> and "]
+                }
+            },
+            "analyzer": {
+                "analyzer_lang": {
+                    "tokenizer": "standard",
+                    "filter": [
+                        "english_possessive_stemmer",
+                        "lowercase",
+                        "english_stop",
+                        "english_keywords",
+                        "english_stemmer"
+                    ]
+                },
+                "analyzer_startswith": {
+                    "tokenizer": "keyword",
+                    "filter": "lowercase"
+                },
+                "default": {
+                    "filter": ["lowercase", "word_delimiter"],
+                    "char_filter": ["html_strip", "replace"],
+                    "type": "custom",
+                    "tokenizer": "whitespace"
+                }
+            }
+        }
+    },
+    "mappings": {
+        "properties": {
+            "dimensional_uom_id": {
+                "properties": {
+                    "name": {
+                        "index": true,
+                        "type": "text"
+                    },
+                    "id": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "indicated_price": {
+                "type": "long"
+            },
+            "supplier_id": {
+                "type": "integer"
+            },
+            "supplier_promotion": {
+                "type": "nested"
+            },
+            "name": {
+                "fields": {
+                    "raw": {
+                        "type": "text",
+                        "analyzer": "analyzer_lang"
+                    },
+                    "start": {
+                        "analyzer": "analyzer_startswith",
+                        "similarity": "boolean",
+                        "type": "text"
+                    }
+                },
+                "type": "keyword"
+            },
+            "description_shop_short": {
+                "type": "text",
+                "analyzer": "analyzer_lang"
+            },
+            "description_shop_long": {
+                "type": "text",
+                "analyzer": "analyzer_lang"
+            },
+            "short_description": {
+                "type": "text",
+                "analyzer": "analyzer_lang"
+            },
+            "brand": {
+                "properties": {
+                    "name": {
+                        "fields": {
+                            "raw": {
+                                "type": "text"
+                            }
+                        },
+                        "type": "keyword"
+                    }
+                }
+            },
+            "manufacturer": {
+                "properties": {
+                    "name": {
+                        "fields": {
+                            "raw": {
+                                "type": "text"
+                            }
+                        },
+                        "type": "keyword"
+                    }
+                }
+            },
+            "redirect_url_key": {
+                "type": "keyword"
+            },
+            "packaging_ids": {
+                "type": "keyword"
+            },
+            "specials": {
+                "type": "nested"
+            },
+            "hierarchicalCategories": {
+                "type": "nested",
+                "properties": {
+                    "ancestors": {
+                        "type": "keyword"
+                    },
+                    "order": {
+                        "type": "integer"
+                    },
+                    "value": {
+                        "type": "keyword"
+                    },
+                    "level": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "structured_attributes": {
+                "type": "nested",
+                "properties": {
+                    "fields": {
+                        "type": "nested"
+                    }
+                }
+            },
+            "supplier_discount": {
+                "type": "nested"
+            },
+            "storage_temperature_id": {
+                "properties": {
+                    "name": {
+                        "type": "keyword"
+                    },
+                    "id": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "attributes": {
+                "properties": {
+                    "species_id": {
+                        "type": "keyword"
+                    },
+                    "presentation_option_id": {
+                        "fields": {
+                            "raw": {
+                                "type": "text"
+                            }
+                        },
+                        "type": "keyword"
+                    },
+                    "active_principle_option_ids": {
+                        "fields": {
+                            "raw": {
+                                "type": "text"
+                            }
+                        },
+                        "type": "keyword"
+                    },
+                    "species_ids": {
+                        "fields": {
+                            "raw": {
+                                "type": "text"
+                            }
+                        },
+                        "type": "keyword"
+                    },
+                    "administration_route_option_ids": {
+                        "fields": {
+                            "raw": {
+                                "type": "text"
+                            }
+                        },
+                        "type": "keyword"
+                    },
+                    "animal_size_option_ids": {
+                        "fields": {
+                            "raw": {
+                                "type": "text"
+                            }
+                        },
+                        "type": "keyword"
+                    },
+                    "categ_age_option_ids": {
+                        "fields": {
+                            "raw": {
+                                "type": "text"
+                            }
+                        },
+                        "type": "keyword"
+                    },
+                    "indication_option_ids": {
+                        "fields": {
+                            "raw": {
+                                "type": "text"
+                            }
+                        },
+                        "type": "keyword"
+                    },
+                    "taxes_id": {
+                        "type": "keyword"
+                    },
+                    "product_color_option_ids": {
+                        "type": "keyword"
+                    },
+                    "size_clothing_option_id": {
+                        "fields": {
+                            "raw": {
+                                "type": "text"
+                            }
+                        },
+                        "type": "keyword"
+                    },
+                    "food_range_option_id": {
+                        "fields": {
+                            "raw": {
+                                "type": "text"
+                            }
+                        },
+                        "type": "keyword"
+                    }
+                }
+            },
+            "model": {
+                "properties": {
+                    "name": {
+                        "ignore_above": 256,
+                        "fields": {
+                            "raw": {
+                                "type": "text"
+                            }
+                        },
+                        "type": "keyword"
+                    }
+                }
+            },
+            "main": {
+                "type": "boolean"
+            },
+            "url_key": {
+                "type": "keyword"
+            },
+            "id": {
+                "type": "integer"
+            },
+            "categories": {
+                "type": "nested"
+            },
+            "stock": {
+                "properties": {
+                    "global": {
+                        "properties": {
+                            "state": {
+                                "type": "keyword"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 ]]>
         </field>
