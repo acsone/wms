@@ -32,8 +32,10 @@ class ResPartner(models.Model):
         if self.supplier_promotion_sale_allowed:
             fields += [
                 "supplier_promotion.ratio_main_product",
+                "supplier_promotion.date_start",
                 "supplier_promotion.date_end",
                 "supplier_discount.discount_sale",
+                "supplier_discount.date_start",
                 "supplier_discount.date_end",
             ]
         return fields

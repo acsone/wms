@@ -122,7 +122,7 @@ class AlcDocument(models.Model):
                 "specials",
             ]:
                 records = product[product_field]
-                _logger.info(
+                _logger.debug(
                     "Decode %s for product %s with value %s",
                     product_field,
                     product,
