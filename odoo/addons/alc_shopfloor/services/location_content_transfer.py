@@ -108,6 +108,12 @@ class LocationContentTransfer(Component):
             return self._response_for_scan_location(
                 message=self.msg_store.barcode_not_found()
             )
+
+        if not self.is_src_location_valid(location):
+            return self._response_for_start(
+                message=self.msg_store.cannot_move_something_in_picking_type()
+            )
+
         operations = self._find_location_operations(location)
         pickings = operations.mapped("picking_id")
         picking_types = pickings.mapped("picking_type_id")
@@ -129,12 +135,7 @@ class LocationContentTransfer(Component):
                 )
             if picking_types - self.picking_types:
                 return self._response_for_start(
-                    message={
-                        "message_type": "error",
-                        "body": _(
-                            "This location content can't be moved using this menu."
-                        ),
-                    }
+                    message=self.msg_store.cannot_move_something_in_picking_type()
                 )
         # Ensure we process move lines related to pickings having only one source
         # location among all their move lines. If there are different source
@@ -143,23 +144,12 @@ class LocationContentTransfer(Component):
         # that share the same source location.
         pickings = operations._split_pickings_from_source_location()
 
-        # If the following criteria are met:
-        #   - no operations have been found
-        #   - the menu is configured to allow the creation of moves
-        #   - the menu is bind to one picking type
-        #   - scanned location is a valid source for one the menu's picking types
-        # then prepare new stock moves to move goods from the scanned location.
-        menu = self.work.menu
-        if (
-            not operations
-            and menu.allow_move_create
-            and len(self.picking_types) == 1
-            and self.is_src_location_valid(location)
-        ):
+        if not operations and self.is_allow_move_create():
             new_moves = self._create_moves_from_location(location)
             if not new_moves:
+                savepoint.rollback()
                 return self._response_for_start(
-                    message=self.msg_store.no_pack_in_location(location)
+                    message=self.msg_store.location_empty(location)
                 )
             new_moves.action_confirm()
             new_moves.action_assign()
@@ -175,7 +165,6 @@ class LocationContentTransfer(Component):
                     new_moves, operation.location_dest_id
                 ):
                     savepoint.rollback()
-
                     return self._response_for_start(
                         message=self.msg_store.location_content_unable_to_transfer(
                             location
@@ -193,6 +182,7 @@ class LocationContentTransfer(Component):
             )
 
         if not pickings:
+            savepoint.rollback()
             return self._response_for_start(
                 message=self.msg_store.location_empty(location)
             )
@@ -358,7 +348,15 @@ class LocationContentTransfer(Component):
                     )
                 return self._response_for_scan_destination(location, operation)
 
+        # Nothing matches what is expected from the operation.
         operations = self._find_operations(location)
+        for rec in (package, product, lot):
+            if rec:
+                return self._response_for_start_single(
+                    operations.mapped("picking_id"),
+                    message=self.msg_store.wrong_record(rec),
+                )
+
         return self._response_for_start_single(
             operations.mapped("picking_id"), message=self.msg_store.barcode_not_found()
         )

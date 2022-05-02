@@ -415,7 +415,7 @@ class MessageAction(Component):
 
     def location_empty(self, location):
         return {
-            "message_type": "info",
+            "message_type": "error",
             "body": _(u"Location {} empty").format(location.name),
         }
 
@@ -549,3 +549,14 @@ class MessageAction(Component):
             "message_type": "error",
             "body": _(u"Quantity must be greater than zero."),
         }
+
+    def _wrong_record_msg(self, model_name):
+        return {
+            "product.product": _("Wrong product."),
+            "stock.production.lot": _("Wrong lot."),
+            "stock.location": _("Wrong location."),
+            "stock.quant.package": _("Wrong pack."),
+        }.get(model_name, _("Wrong."))
+
+    def wrong_record(self, record):
+        return {"message_type": "error", "body": self._wrong_record_msg(record._name)}
