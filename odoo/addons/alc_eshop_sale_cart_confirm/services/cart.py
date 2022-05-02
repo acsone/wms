@@ -29,6 +29,7 @@ class CartService(Component):
         if upd_vals:
             cart.update(upd_vals)
         cart.action_confirm_cart()
+        cart._notify_note()
         cart.action_confirm_background()
         return self._response_for_cart(cart)
 
