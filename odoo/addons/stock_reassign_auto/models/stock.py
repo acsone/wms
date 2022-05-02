@@ -82,7 +82,7 @@ class StockMove(models.Model):
             return res
 
         products = received.mapped("product_id")
-        self.with_delay(
+        self.browse().with_delay(
             description=_("Reassign trial on reception for products ids %s")
             % products.ids,
             priority=6,
@@ -100,7 +100,7 @@ class StockMove(models.Model):
         products = self._get_moves_to_auto_reassign().mapped("product_id")
         res = super(StockMove, self).action_cancel()
         if not self.env.context.get("no_auto_reassign") and products:
-            self.with_delay(
+            self.browse().with_delay(
                 description=_("Reassign trial on cancel for products ids %s")
                 % products.ids,
                 priority=6,
@@ -113,13 +113,14 @@ class StockMove(models.Model):
         res = super(StockMove, self).write(vals)
         if vals.get("priority") == "0":
             products = self.mapped("product_id")
-            self.with_delay(
+            self.browse().with_delay(
                 description=_("Reassign on priority lowered for products ids %s")
                 % products.ids,
                 priority=6,
             )._reassign_trial(products)
         return res
 
+    @api.model
     @job(default_channel="root.background.stock_reassign_trial")  # priority=6
     def _reassign_trial(self, products):
         """ Find pickings and relaunch reservation """
