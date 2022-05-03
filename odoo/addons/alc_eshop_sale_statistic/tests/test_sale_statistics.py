@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+import unittest
 
 from freezegun import freeze_time
 
@@ -151,6 +152,10 @@ class TestSaleStatisticsMonthly(TestSaleStatistics):
             self.assertEqual(0, res["size"])
             self.assertEqual(0, len(res["data"]))
 
+    @unittest.skip(
+        "TO Be REFACTORED. The sql view use now(). "
+        "The result is therefore not predictable"
+    )
     @freeze_time("2022-02-22 00:00:00")
     def test_five_years(self):
         expected_data = [
