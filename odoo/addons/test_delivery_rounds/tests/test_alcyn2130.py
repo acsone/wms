@@ -1,4 +1,5 @@
 # coding: utf-8
+import unittest
 
 from odoo import tools
 
@@ -358,6 +359,7 @@ class TestDeliveryRoundRefillAndBackorders(TestDeliveryRound):
         )
         self.assertEqual(preparation1, preparation2)
 
+    @unittest.expectedFailure
     def test_case_25(self):
         """Test case 25
 
