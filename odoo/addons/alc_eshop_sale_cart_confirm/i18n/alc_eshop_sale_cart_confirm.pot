@@ -1,5 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
+#	* alc_eshop_sale_cart_confirm
 #
 msgid ""
 msgstr ""
@@ -11,4 +12,27 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
+
+#. module: alc_eshop_sale_cart_confirm
+#: model:mail.template,body_html:alc_eshop_sale_cart_confirm.sale_order_notify_note
+msgid "\n"
+"<p>Bonjour,</p>\n"
+"<br/>\n"
+"<p>${object.partner_id.name} vous fait part du commentaire suivant:</p>\n"
+"<p>${object.note} </p>\n"
+"<br/>\n"
+"<p>Commande ${object.name} du ${format_tz(object.date_order, tz=user.tz)}.</p>\n"
+"<p>Merci de faire le nécessaire.</p>\n"
+""
+msgstr ""
+
+#. module: alc_eshop_sale_cart_confirm
+#: model:mail.template,subject:alc_eshop_sale_cart_confirm.sale_order_notify_note
+msgid "Ref ${object.name}: Demande spécifique de ${object.partner_id.name}"
+msgstr ""
+
+#. module: alc_eshop_sale_cart_confirm
+#: model:ir.model,name:alc_eshop_sale_cart_confirm.model_sale_order
+msgid "Sales Order"
+msgstr ""
 
