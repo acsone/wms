@@ -191,7 +191,7 @@ odoo10-addon-report-xml==10.0.1.0.0.99.dev3
 odoo10-addon-rest-log @ git+https://github.com/acsone/rest-framework.git@1032dfdf3eb4442e5d39fb7ae8efe050b5fdbea1#subdirectory=setup/rest_log
 odoo10-addon-sale-cart @ git+https://github.com/acsone/odoo-shopinvader.git@3f2894b45d32157afe1355405915222e6321c52b#subdirectory=setup/sale_cart
 odoo10-addon-sale-cart-delivery-rest-api @ git+https://github.com/acsone/odoo-shopinvader.git@3f2894b45d32157afe1355405915222e6321c52b#subdirectory=setup/sale_cart_delivery_rest_api
-odoo10-addon-sale-cart-rest-api @ git+https://github.com/acsone/odoo-shopinvader.git@3f2894b45d32157afe1355405915222e6321c52b#subdirectory=setup/sale_cart_rest_api
+odoo10-addon-sale-cart-rest-api @ git+https://github.com/acsone/odoo-shopinvader.git@aff95fe55823508b0b6081d62ce7e6735a9c943e#subdirectory=setup/sale_cart_rest_api
 odoo10-addon-sale-discount-display-amount==10.0.1.0.0.99.dev10
 odoo10-addon-sale-exception @ git+https://github.com/acsone/sale-workflow.git@b9987e4eb546f9ea8c0ee88e507072252b0d57d3#subdirectory=setup/sale_exception
 odoo10-addon-sale-order-price-recalculation==10.0.1.0.1
