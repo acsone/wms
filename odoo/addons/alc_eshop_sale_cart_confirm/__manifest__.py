@@ -15,6 +15,6 @@
         "sale_confirm_background",
         "onchange_helper",
     ],
-    "data": [],
+    "data": ["data/mail_template.xml"],
     "demo": [],
 }
