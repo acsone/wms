@@ -12,7 +12,7 @@
     >Ref ${object.name}: Demande spécifique de ${object.partner_id.name}</field>
             <field name="email_to">callcenter@alcyonbelux.be</field>
             <field name="model_id" ref="sale.model_sale_order" />
-            <field name="auto_delete" eval="True" />
+            <field name="auto_delete" eval="False" />
             <field name="lang">${object.partner_id.lang}</field>
             <field
       name="body_html"
