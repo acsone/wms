@@ -244,7 +244,7 @@ odoo10-addon-storage-backend @ git+https://github.com/acsone/storage.git@98ae1b9
 odoo10-addon-storage-backend-s3 @ git+https://github.com/acsone/storage.git@98ae1b9e780f7ed2cfafb5748c8cd85978f7bd2e#subdirectory=setup/storage_backend_s3
 odoo10-addon-storage-file @ git+https://github.com/acsone/storage.git@98ae1b9e780f7ed2cfafb5748c8cd85978f7bd2e#subdirectory=setup/storage_file
 odoo10-addon-storage-image @ git+https://github.com/acsone/storage.git@98ae1b9e780f7ed2cfafb5748c8cd85978f7bd2e#subdirectory=setup/storage_image
-odoo10-addon-storage-image-product @ git+https://github.com/acsone/storage.git@98ae1b9e780f7ed2cfafb5748c8cd85978f7bd2e#subdirectory=setup/storage_image_product
+odoo10-addon-storage-image-product @ git+https://github.com/acsone/storage.git@ab653ef1e22b66563607a3ce47334c9a9711e11b#subdirectory=setup/storage_image_product
 odoo10-addon-storage-thumbnail @ git+https://github.com/acsone/storage.git@98ae1b9e780f7ed2cfafb5748c8cd85978f7bd2e#subdirectory=setup/storage_thumbnail
 odoo10-addon-web-cache-name-get @ git+https://github.com/acsone/web.git@f37c8ad92c2190e0bbc09444424273843a9f3cd0#subdirectory=setup/web_cache_name_get
 odoo10-addon-web-decimal-numpad-dot==10.0.1.1.0.99.dev1
