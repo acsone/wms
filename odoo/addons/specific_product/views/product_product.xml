@@ -45,8 +45,8 @@
       </xpath>
     </field>
   </record>
-  <!--Disable the view kanban on Products-->
+  <!--Set view mode to tree by default Products-->
   <record id="product.product_normal_action_sell" model="ir.actions.act_window">
-    <field name="view_mode">tree,form</field>
+    <field name="view_mode">tree,kanban,form</field>
   </record>
 </odoo>
