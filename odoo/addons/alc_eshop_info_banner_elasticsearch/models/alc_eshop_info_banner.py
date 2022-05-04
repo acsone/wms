@@ -53,6 +53,11 @@ class AlcEshopInfoMessage(models.Model):
             ]
         )
 
+    @api.model
+    def _get_active_banners(self):
+        now = fields.Datetime.now()
+        return self.search([("date_start", "<=", now), ("date_end", ">=", now)])
+
     def _compute_se_index(self):
         model = self.env.ref("alc_eshop_info_banner.model_alc_eshop_info_banner")
         indexes = self.env["se.index"].search([("model_id", "=", model.id)])

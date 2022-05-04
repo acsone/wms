@@ -51,6 +51,11 @@ class AlcEshopAds(models.Model):
             ]
         )
 
+    @api.model
+    def _get_active_ads(self):
+        today = fields.Date.today()
+        return self.search([("date_start", "<=", today), ("date_end", ">=", today)])
+
     def _compute_se_index(self):
         model = self.env.ref("alc_eshop_ads.model_alc_eshop_ads")
         indexes = self.env["se.index"].search([("model_id", "=", model.id)])
