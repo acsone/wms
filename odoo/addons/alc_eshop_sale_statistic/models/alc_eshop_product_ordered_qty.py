@@ -58,6 +58,7 @@ where
     AND date_order >= DATE_TRUNC('month', NOW() - INTERVAL '1 year')
 
 GROUP BY so.partner_id, sol.product_id, pp.product_tmpl_id, pt.is_food, pt.is_equipment, pt.is_meds
+HAVING SUM(product_uom_qty - COALESCE(product_qty_canceled, 0) ) > 0
 ORDER BY partner_id, SUM(product_uom_qty - COALESCE(product_qty_canceled, 0) ) DESC
 
 );
