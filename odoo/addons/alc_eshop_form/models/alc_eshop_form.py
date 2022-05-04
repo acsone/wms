@@ -103,7 +103,7 @@ class AlcEshopForm(models.Model):
         mail_values = {
             "email_to": self.email,
             "body_html": html,
-            "auto_delete": True,
+            "auto_delete": False,
             "email_from": "eshop@alcyonbelux.be",
         }
         if partner and self.log_on_partner:
