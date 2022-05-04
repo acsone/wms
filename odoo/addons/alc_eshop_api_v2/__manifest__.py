@@ -15,6 +15,7 @@
         "shopinvader_sale_cart",
         "shopinvader_sale_cart_delivery",
         "alc_eshop_sale_cart_channel",
+        "alc_eshop_sale_cart_csv",
         "alc_eshop_sale_cart_confirm",
         "alc_eshop_sale_cart_payment_info",
         "alc_eshop_sale_cart_suite_name",
