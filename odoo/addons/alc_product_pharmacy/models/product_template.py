@@ -13,7 +13,7 @@ class ProductTemplate(models.Model):
 
     cnk_code = fields.Char(string="CNK", copy=False)
 
-    code_cti = fields.Char("Code CTI Extended")
+    code_cti = fields.Char("Code CTI Extended", copy=False)
     code_amm = fields.Char("AMM Number")
 
     veterinary_only = fields.Boolean(string="Veterinary only")
