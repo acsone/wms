@@ -12,4 +12,4 @@ class SaleOrder(models.Model):
         """ Send a mail to notify the sale service when a note is specified"""
         template = self.env.ref("alc_eshop_sale_cart_confirm.sale_order_notify_note")
         for record in self.filtered("note"):
-            template.send_mail(record.id)
+            template.send_mail(record.id, force_send=True)
