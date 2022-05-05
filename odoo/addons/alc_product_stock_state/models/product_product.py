@@ -14,7 +14,12 @@ class ProductProduct(models.Model):
     )
 
     @api.multi
-    @api.depends("qty_available", "incoming_qty", "state_id")
+    def _get_qty_available(self):
+        self.ensure_one()
+        return self.immediately_usable_qty
+
+    @api.multi
+    @api.depends("immediately_usable_qty", "state_id")
     def _compute_stock_state(self):
         supplier_out_of_stock_state = self.env.ref("alc_product_state.product_state_h")
         res = super(ProductProduct, self)._compute_stock_state()
