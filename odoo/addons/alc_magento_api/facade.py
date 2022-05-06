@@ -2,6 +2,7 @@
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+import logging
 import uuid
 
 import dicttoxml
@@ -14,6 +15,8 @@ from odoo.addons.component.core import WorkContext
 
 LANGS = {"en": "en_US", "fr": "fr_BE", "nl": "nl_BE"}
 LANGS_INVERSE = {"en_US": "en", "fr_BE": "fr", "nl_BE": "nl"}
+
+_logger = logging.getLogger(__name__)
 
 
 class Facade(object):
@@ -346,6 +349,8 @@ class FacadePackingSlip(Facade):
 
     def _json_for_xml(self, data):
         partner_dict = data.pop("partner_id")
+        if not partner_dict:
+            _logger.exception("Magento API packing data: %s", data)
         country_dict = partner_dict.pop("country_id")
         partner_dict["country"] = country_dict["name"]
         data.update(partner_dict)
@@ -366,6 +371,7 @@ class FacadePackingSlip(Facade):
             self.errors = "<error>no packing slips have been found</error>"
             return None
         records_json = result.jsonify(parser)
+        _logger.info("Magento API packing Args: %s", result.ids)
         return self._json_to_xml(
             [self._json_for_xml(r) for r in records_json],
             custom_root="packing_slip",
