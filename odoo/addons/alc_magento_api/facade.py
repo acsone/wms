@@ -436,7 +436,9 @@ class FacadeQuote(FacadeShopinvaderCart):
         quote_dict = self._xml_to_json(quote_xml)["quote"]
 
         lines = []
-        for line_xml in quote_dict.pop("item", []):
+        items = quote_dict.pop("item", [])
+        items = [items] if isinstance(items, dict) else items
+        for line_xml in items:
             product = self._get_product_by_sku(line_xml["sku"])
             if product:
                 qty = int(line_xml["qty"])
