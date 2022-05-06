@@ -12,6 +12,9 @@ from odoo import fields
 from odoo.addons.base_rest.controllers.main import _PseudoCollection
 from odoo.addons.component.core import WorkContext
 
+LANGS = {"en": "en_US", "fr": "fr_BE", "nl": "nl_BE"}
+LANGS_INVERSE = {"en_US": "en", "fr_BE": "fr", "nl_BE": "nl"}
+
 
 class Facade(object):
     collection = "shopinvader.backend"
@@ -178,7 +181,10 @@ class FacadeProduct(Facade):
             urls[record_id]["fr_BE"] = record["url_key"]
             record_json["Fabricant"] = record.get("manufacturer", {}).get("name")
         for record_id in urls:
-            json_by_id[record_id]["url"] = urls[record_id][lang]
+            url_suffix = urls[record_id][lang]
+            lang_slug = LANGS_INVERSE[lang]
+            url = "https://www.alcyonbelux.be/{}/{}".format(lang_slug, url_suffix)
+            json_by_id[record_id]["url"] = url
         return json_by_id
 
     def _get_parser_product(self):
@@ -243,8 +249,7 @@ class FacadeCatalog(FacadeProduct):
     usage = "catalog"
 
     def process_kwargs(self, **kwargs):
-        langs = {"en": "en_US", "fr": "fr_BE", "nl": "nl_BE"}
-        kwargs["lang"] = langs[kwargs.pop("language").lower()]
+        kwargs["lang"] = LANGS[kwargs.pop("language").lower()]
         return kwargs
 
     def apply(self, **kwargs):
