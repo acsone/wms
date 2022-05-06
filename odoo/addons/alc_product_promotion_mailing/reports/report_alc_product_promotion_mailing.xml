@@ -30,12 +30,14 @@
                       t-set="image"
                       t-value="shop_variant.images[0]"
                     />
-                                        <img
-                      t-att-src="image['src']"
-                      t-att-alt="image['alt']"
-                      t-att-tag="image['tag']"
-                      style="height: 80px; box-shadow: 10px 10px 20px black;"
-                    />
+                                        <t t-if="image.get('src')">
+                                            <img
+                        t-att-src="image['src']"
+                        t-att-alt="image['alt']"
+                        t-att-tag="image['tag']"
+                        style="height: 80px; box-shadow: 10px 10px 20px black;"
+                      />
+                                        </t>
                                     </t>
                                     <a t-att-href="get_variant_url(shop_variant)">
                                         <span
