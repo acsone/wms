@@ -36,12 +36,15 @@ class PickingsService(Component):
         output_param=restapi.CerberusValidator("_search_output_schema"),
     )
     def search_canceled(self, from_date=None, **params):
-        domain = self._get_domain(from_date=from_date, states=["cancel"])
+        states = ["cancel"]
+        domain = self._get_domain(from_date=from_date, states=states, backorder=True)
         records = self._search_canceled(domain, from_date=from_date, **params)
         return self._paginate_search_records(domain, records)
 
     def _search_canceled(self, domain=None, from_date=None, **params):
-        domain = domain or self._get_domain(from_date=from_date, states=["cancel"])
+        domain = domain or self._get_domain(
+            from_date=from_date, states=["cancel"], backorder=True
+        )
         return self._search(domain, from_date=from_date, **params)
 
     @restapi.method(
@@ -110,10 +113,13 @@ class PickingsService(Component):
     def model(self):
         return self.env["stock.picking"]
 
-    def _get_domain(self, from_date=None, states=None):
-        domain = [("partner_id", "=", self.partner.id), ("backorder_id", "!=", False)]
+    def _get_domain(self, from_date=None, states=None, backorder=None):
+        lid = self.env.ref("stock.stock_location_output").id
+        domain = [("partner_id", "=", self.partner.id), ("location_dest_id", "=", lid)]
         if from_date:
             domain += [("create_date", ">=", from_date)]
+        if backorder:
+            domain += [("backorder_id", "!=", False)]
         if states:
             domain += [("state", "in", states)]
         return domain
