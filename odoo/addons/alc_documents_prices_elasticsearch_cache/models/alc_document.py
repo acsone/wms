@@ -31,9 +31,9 @@ class AlcDocument(models.Model):
 
     def _get_cache_price(self, today, price_cache, price_key, discount_key):
         price = self._get_cache_price_key(today, price_cache, price_key)
-        if discount_key:
-            discount = self._get_cache_price_key(today, price_cache, discount_key, True)
-            price = round(price - (price * discount / 100), 2)
+        # if discount_key:
+        #     discount = self._get_cache_price_key(today, price_cache, discount_key, True)
+        #     price = round(price - (price * discount / 100), 2)
         return price
 
     def _get_cache_category(self, categories):
