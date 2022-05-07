@@ -25,7 +25,9 @@ class MagentoApi(Controller):
         assert token["token_type"] == "Bearer"
 
     def _get_partner(self, sudo_env, username):
-        domain = [("username", "=", username)]
+        # username is case insenitive into keycloak and previously into magento
+        # search on the username stored in lower case
+        domain = [("keycloak_username", "=", (username or "").lower())]
         keycloak_partner = sudo_env["keycloak.user"].search(domain)
         return keycloak_partner.partner_id
 
