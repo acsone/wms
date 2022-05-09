@@ -19,7 +19,6 @@ class MagentoApi(Controller):
         encoded = basic.replace("Basic ", "")
         decoded = base64.b64decode(encoded)  # TODO: Port to 3
         username, password = decoded.split(":")
-        assert username == expected_username
         backend = sudo_env.ref("keycloak.keycloak_backend")
         token = backend._get_token_from_user_info(username, password)
         assert token["token_type"] == "Bearer"
