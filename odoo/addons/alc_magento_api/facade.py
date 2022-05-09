@@ -190,63 +190,6 @@ class FacadeProduct(Facade):
             json_by_id[record_id]["url"] = url
         return json_by_id
 
-    def _get_parser_product(self):
-        discounts = (
-            "supplier_discount_ids",
-            ["discount_sale:promotion", "date_end:promotion_valid_until"],
-        )
-        promotions = (
-            "supplier_promotion_ids",
-            ["ratio_display_name:promotion", "date_end:promotion_valid_until"],
-        )
-        parser = [
-            "default_code:Reference",
-            "name:Article",
-            ("categ_ids", ["id", "name:Mot_Cle"]),
-            ("manufacturer", ["name:Fabricant"]),
-            "cnk_code:Code_national",
-            "indicated_price:Prix_Vente_Indicatif",
-            "name:Article",
-            "vat:TVA",
-            "barcode:ean_13",
-            "code_cti:ext_cti",
-            ("shopinvader_bind_ids", [("lang_id", ["code"]), "url_key"]),
-        ]
-        if self.partner.supplier_promotion_sale_allowed:
-            parser += [discounts, promotions]
-        return parser
-
-    def _json_for_xml(self, lang, data, record):
-        urls_shop = data.pop("shopinvader_bind_ids")
-        urls = {u["lang_id"]["code"]: u["url_key"] for u in urls_shop}
-        data["url"] = urls.get(lang or "fr_BE")  # product not on website anymore
-        categ = None
-        categ_ids = data.pop("categ_ids")
-        if categ_ids:
-            categ = self.env["product.category"].browse(categ_ids[-1].pop("id"))
-            data.update(categ_ids[-1])
-        else:
-            data["Mot_Cle"] = None
-        price_key = self.partner.property_product_pricelist.role_name
-        price_gross = record._price_cache_get(price_key).get("price", 0)
-        vat = float(data["TVA"].replace("%", "")) if data["TVA"] else 0
-        price_net = round(price_gross * (1 + vat / 100), 2)  # round for EUR
-        data["Prix_Brut_HTVA_EUR"] = price_gross
-        data["Prix_Brut_TVAC_EUR"] = price_net
-        discounts = data.pop("supplier_discount_ids")
-        promotions = data.pop("supplier_promotion_ids")
-        if self.partner.supplier_promotion_sale_allowed:
-            for discount in discounts:
-                discount["promotion"] = "%s%%" % discount["promotion"]
-            data["promotions"] = discounts + promotions
-        data["Article_EN"] = record.with_context(lang="en_US").name
-        data["Article_NL"] = record.with_context(lang="nl_BE").name
-        categ_en = categ.with_context(lang="en_US").name if categ else None
-        data["Categorie_EN"] = categ_en
-        categ_nl = categ.with_context(lang="nl_BE").name if categ else None
-        data["Categorie_NL"] = categ_nl
-        return data
-
 
 class FacadeCatalog(FacadeProduct):
     usage = "catalog"
@@ -256,15 +199,10 @@ class FacadeCatalog(FacadeProduct):
         return kwargs
 
     def apply(self, **kwargs):
-        # return self.service._search(**kwargs)  # unacceptable performance
-        return self.partner._get_shop_products()  # cache version
+        return self.partner._get_shop_products()
 
     def process_result(self, result, **kwargs):
         lang = kwargs.pop("lang")
-        # records = result.with_context(lang="fr_BE")
-        # parser = self._get_parser_product()
-        # records_json = records.jsonify(parser)
-        # data = [self._json_for_xml(lang, j, r) for j, r in zip(records_json, result)]
         json_by_id = self._json_for_xml_from_cache(lang, result)
         return self._json_to_xml(json_by_id.values(), custom_root="catalog")
 
@@ -280,10 +218,6 @@ class FacadePriceList(FacadeProduct):
         if not ids:
             self.errors = "<error>No bought product has been found</error>"
             return None
-        # records = self.env["product.product"].with_context(lang="fr_BE").browse(ids)
-        # parser = self._get_parser_product()
-        # records_json = records.jsonify(parser)
-        # data = [self._json_for_xml(None, j, r) for j, r in zip(records_json, records)]
         records_data = self.partner._get_shop_products(ids=ids)
         json_by_id = self._json_for_xml_from_cache("en_US", records_data)
         data = (json_by_id[rid] for rid in ids if rid in json_by_id)
