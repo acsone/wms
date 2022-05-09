@@ -61,7 +61,7 @@ class AlcDocument(models.Model):
             rid = record.pop("objectID")
             json_by_id[rid] = {"Reference": record["sku"]}
             if self.compute == "pricelist":
-                vat = record.get("vat", {"amount": 21})["amount"]  # TODO
+                vat = int(record.get("vat", {"amount": 21})["amount"] or 21)
                 json_by_id[rid]["Article_EN"] = record["name"]
                 json_by_id[rid]["Code_national"] = record["cnk_code"]
                 json_by_id[rid]["TVA"] = "%s%%" % vat
