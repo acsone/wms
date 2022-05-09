@@ -30,6 +30,8 @@ class CartService(Component):
         if not len(csv_lines) > 1:
             raise ValueError("Not enough lines.")  # ERROR
         info = {}
+        if len(csv_lines[0]) < 4:
+            raise ValueError("Missing columns in contact line.")
         info["suite_name"] = csv_lines[0][0] or False
         info["customer_ref"] = csv_lines[0][1] or False
         # "email": first_line[2]
@@ -39,7 +41,11 @@ class CartService(Component):
 
     def _process_csv_lines(self, csv_lines):
         lines = []
-        for sku, qty in csv_lines:
+        for values in csv_lines:
+            if len(values) < 2:
+                raise ValueError("Missing column in product line.")
+            sku = values[0]
+            qty = values[1]
             product = self._get_product_by_sku(sku)
             if product:
                 line_id = str(uuid.uuid4())

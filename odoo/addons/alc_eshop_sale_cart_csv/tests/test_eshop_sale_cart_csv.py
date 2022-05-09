@@ -8,7 +8,8 @@ from .common import TestSaleCartRestApiCsvCase
 class TestSaleCartRestApiInfo(TestSaleCartRestApiCsvCase):
     def test_csv(self):
         first_line = ["suite", "ref", "mail@alcyonbelux.be", "note"]
-        csv_lines = [first_line, ["sku", "2"], ["missing", "4"]]
+        # one column had a trailing ';', meaning an empty column
+        csv_lines = [first_line, ["sku", "2", ""], ["missing", "4"]]
         with self.cart_service(self.partner_1.id) as cart:
             result = cart._csv(csv_lines=csv_lines)
 
