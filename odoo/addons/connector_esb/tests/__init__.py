@@ -7,7 +7,6 @@ from . import test_export_pharmacy
 from . import test_export_product
 from . import test_export_product_price
 from . import test_export_promotion_alcyon
-from . import test_export_saleorder
 from . import test_export_special_promotion
 from . import test_export_stock_update
 from . import test_export_stock_update_single
