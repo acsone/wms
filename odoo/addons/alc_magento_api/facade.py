@@ -142,7 +142,7 @@ class FacadeProduct(Facade):
                 "Article_EN": record["name"],
                 "Reference": record["sku"],
                 "Code_national": record["cnk_code"],
-                "TVA": "%s%%" % vat,
+                "TVA": vat,
                 "Prix_Vente_Indicatif": record["indicated_price"],
                 "ean_13": record["barcode"],
                 "ext_cti": record["code_cti"],
