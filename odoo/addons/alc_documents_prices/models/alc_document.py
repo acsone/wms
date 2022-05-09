@@ -214,7 +214,7 @@ class AlcDocument(models.Model):
         headers = self._get_headers()
         filename = "/tmp/%s" % self.name
         with open(filename, "w") as f:
-            writer = csv.writer(f)
+            writer = csv.writer(f, delimiter=";")
             writer.writerow(headers)
             for line in lines:
                 writer.writerow(line)
