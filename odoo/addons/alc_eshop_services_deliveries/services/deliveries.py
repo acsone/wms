@@ -115,7 +115,10 @@ class PickingsService(Component):
 
     def _get_domain(self, from_date=None, states=None, backorder=None):
         lid = self.env.ref("stock.stock_location_output").id
-        domain = [("partner_id", "=", self.partner.id), ("location_dest_id", "=", lid)]
+        domain = [
+            ("partner_id", "child_of", self.partner.id),
+            ("location_dest_id", "=", lid),
+        ]
         if from_date:
             domain += [("create_date", ">=", from_date)]
         if backorder:
