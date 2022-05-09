@@ -296,6 +296,9 @@ class FacadePackingSlip(Facade):
             if item.get("peremption"):
                 item["peremption"] = self._datetime_to_date(item["peremption"])
             item["prix_brut_htva"] = item["prix_net_htva"]
+            # TVA is from vat, which is a related to the name (e.g. 21%)
+            tva = item["tva"]
+            item["tva"] = tva[:-1] if isinstance(tva, str) else tva
         data["date"] = self._datetime_to_date(data["date"])
         return data
 
