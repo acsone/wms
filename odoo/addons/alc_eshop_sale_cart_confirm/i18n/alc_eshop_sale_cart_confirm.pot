@@ -36,3 +36,9 @@ msgstr ""
 msgid "Sales Order"
 msgstr ""
 
+#. module: alc_eshop_sale_cart_confirm
+#: code:addons/alc_eshop_sale_cart_confirm/services/cart.py:30
+#, python-format
+msgid "You are no allowed to pass an order on the EShop"
+msgstr ""
+
