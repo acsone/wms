@@ -12,6 +12,7 @@
     "website": "https://acsone.eu/",
     "depends": [
         "alc_eshop_sale_cart_info",
+        "alc_eshop_ordering_allowed",
         "sale_confirm_background",
         "onchange_helper",
     ],

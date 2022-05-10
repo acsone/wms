@@ -18,17 +18,20 @@ class KeycloakBackend(models.Model):
             "supplier_promotion_sale_allowed": "shopinvader-vt-roles",
             "lang": "locale",
             "ref": "ref",
+            "eshop_ordering_allowed": "can_order",
         }
         res.update(new)
         return res
 
     def _keycloak_user_to_payload(self, keycloak_user):
         payload = super(KeycloakBackend, self)._keycloak_user_to_payload(keycloak_user)
+        partner = keycloak_user.partner_id
         new_attributes = {
-            "locale": keycloak_user.partner_id.lang,
-            "shopinvader-vt-roles": keycloak_user.partner_id.elasticsearch_role,
-            "supplier_id": keycloak_user.partner_id.id,
-            "ref": keycloak_user.partner_id.ref or None,
+            "locale": partner.lang,
+            "shopinvader-vt-roles": partner.elasticsearch_role,
+            "supplier_id": partner.id,
+            "ref": partner.ref or None,
+            "can_order": partner.eshop_ordering_allowed,
         }
         payload["attributes"].update(new_attributes)
         return payload

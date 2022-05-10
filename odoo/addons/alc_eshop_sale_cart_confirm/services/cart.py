@@ -3,7 +3,8 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from werkzeug.exceptions import NotFound
 
-from odoo import fields
+from odoo import _, fields
+from odoo.exceptions import ValidationError
 
 from odoo.addons.base_rest import restapi
 from odoo.addons.component.core import Component
@@ -25,6 +26,8 @@ class CartService(Component):
         cart = self._find_open_cart(params.get("uuid", None))
         if not cart:
             raise NotFound("No cart found")
+        if not cart.partner_id.eshop_ordering_allowed:
+            raise ValidationError(_("You are no allowed to pass an order on the EShop"))
         upd_vals = self._prepare_cart_for_confirmation(cart, params)
         if upd_vals:
             cart.update(upd_vals)

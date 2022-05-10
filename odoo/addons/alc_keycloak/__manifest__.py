@@ -6,11 +6,11 @@
 {
     "name": "Alcyon Keycloak",
     "description": """Alcyon Keycloak""",
-    "version": "10.0.1.0.0",
+    "version": "10.0.1.0.1",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["keycloak", "alc_elasticsearch_security"],
+    "depends": ["keycloak", "alc_elasticsearch_security", "alc_eshop_ordering_allowed"],
     "application": False,
     "data": [],
     "demo": [],

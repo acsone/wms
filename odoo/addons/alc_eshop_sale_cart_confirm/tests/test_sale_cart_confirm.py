@@ -6,6 +6,8 @@ from contextlib import contextmanager
 
 from freezegun import freeze_time
 
+from odoo.exceptions import ValidationError
+
 from odoo.addons.alc_eshop_sale_cart_info.tests.common import (
     TestSaleCartRestApiInfoCase,
 )
@@ -79,3 +81,14 @@ class TestSaleCartRestApi(TestSaleCartRestApiInfoCase):
             )
         new_mail = result.new_mails
         self.assertFalse(new_mail)
+
+    def test_confirm_not_allowed(self):
+        self.so.partner_id.eshop_ordering_allowed = False
+        with self.assertRaises(ValidationError):
+            self.cart.dispatch(
+                "confirm", params={"uuid": self.so.uuid},
+            )
+        self.so.partner_id.eshop_ordering_allowed = True
+        self.cart.dispatch(
+            "confirm", params={"uuid": self.so.uuid},
+        )
