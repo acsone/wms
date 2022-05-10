@@ -24,5 +24,5 @@ class ShopinvaderBackend(models.Model):
 
     @api.model
     def _get_jwt_aud_from_domain(self, domain, aud_list):
-        res = super(ShopinvaderBackend, self)._get_jwt_aud_from_domain(domain)
+        res = super(ShopinvaderBackend, self)._get_jwt_aud_from_domain(domain, aud_list)
         return res.filtered(lambda b: b.jwt_aud in aud_list)
