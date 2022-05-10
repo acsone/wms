@@ -3,6 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import _, api, fields, models
+from odoo.exceptions import AccessError
 
 from odoo.addons.queue_job.job import identity_exact
 
@@ -100,6 +101,19 @@ class KeycloakUser(models.Model):
         window_action["res_id"] = wizard.id
         return window_action
 
+    def action_sync_keycloak_info(self):
+        if not self.env.user.has_group("keycloak.group_keycloak_manager"):
+            raise AccessError(_("You are not allowed to sync keycloak info."))
+        updated_fields = self.env["keycloak.backend"]._get_update_fields()
+        for user in self:
+            user.keycloak_backend_id.with_delay(
+                description=_("Sync Keycloak User %s") % user.username,
+                identity_key=identity_exact,  # optimize chained writes
+            ).update_user_fields(user, list(updated_fields))
+
     def _get_token(self):
         self.ensure_one()
         return self.keycloak_backend_id._get_token(self)
+
+    def _get_payload(self):
+        return self.keycloak_backend_id._get_user_payload(self)

@@ -5,6 +5,21 @@ from odoo.addons.keycloak.tests.common import TestKeycloak
 
 
 class TestKeycloakUpdateFlow(TestKeycloak):
+    def test_update_one_attribute_update_all_attributes(self):
+        keycloak_user = self.env["keycloak.user"].create(self.vals_user)
+        full_payload = keycloak_user._get_payload()
+        job_counter = self.job_counter()
+
+        # when
+        self.partner.partner_type = "shareholder"
+        # then
+        job = job_counter.search_created()
+        payload = keycloak_user.keycloak_backend_id._get_user_payload(*job.args)
+        self.assertEqual(list(payload.keys()), ["attributes"])
+        self.assertEqual(
+            list(payload["attributes"].keys()), list(full_payload["attributes"].keys())
+        )
+
     def test_update_partner_type(self):
         expected_roles = {"shareholder", "guest", "price-yourcompany"}
         keycloak_user = self.env["keycloak.user"].create(self.vals_user)
@@ -17,7 +32,6 @@ class TestKeycloakUpdateFlow(TestKeycloak):
         self.assertEqual(job.args, [keycloak_user, ["partner_type"]])
         payload = keycloak_user.keycloak_backend_id._get_user_payload(*job.args)
         self.assertEqual(list(payload.keys()), ["attributes"])
-        self.assertEqual(list(payload["attributes"].keys()), ["shopinvader-vt-roles"])
         roles = set(payload["attributes"]["shopinvader-vt-roles"].split(","))
         self.assertEqual(roles, expected_roles)
 
@@ -35,12 +49,10 @@ class TestKeycloakUpdateFlow(TestKeycloak):
         self.assertEqual(job.args, [keycloak_user, ["property_product_pricelist"]])
         payload = keycloak_user.keycloak_backend_id._get_user_payload(*job.args)
         self.assertEqual(list(payload.keys()), ["attributes"])
-        self.assertEqual(list(payload["attributes"].keys()), ["shopinvader-vt-roles"])
         roles = set(payload["attributes"]["shopinvader-vt-roles"].split(","))
         self.assertEqual(roles, expected_roles)
 
     def test_update_write_lang(self):
-        expected_payload = {"attributes": {"locale": "fr_BE"}}  # installed by PIM
         keycloak_user = self.env["keycloak.user"].create(self.vals_user)
         job_counter = self.job_counter()
 
@@ -51,11 +63,11 @@ class TestKeycloakUpdateFlow(TestKeycloak):
         job = job_counter.search_created()
         self.assertEqual(job.args, [keycloak_user, ["lang"]])
         payload = keycloak_user.keycloak_backend_id._get_user_payload(*job.args)
-        self.assertEqual(payload, expected_payload)
+        self.assertEqual(payload["attributes"]["locale"], "fr_BE")
 
     def test_update_write_everything(self):
         pricelist = self.env["product.pricelist"].create({"name": "pridamis"})
-        expected_payload = {"attributes": {"locale": "fr_BE", "ref": "abc123"}}
+        expected_attributes = {"locale": "fr_BE", "ref": "abc123"}
         expected_roles = {"shareholder", "guest", "price-pridamis"}
         keycloak_user = self.env["keycloak.user"].create(self.vals_user)
         job_counter = self.job_counter()
@@ -75,8 +87,7 @@ class TestKeycloakUpdateFlow(TestKeycloak):
         self.assertEqual(set(job.args[1]), set(vals))
         payload = keycloak_user.keycloak_backend_id._get_user_payload(*job.args)
         self.assertEqual(list(payload.keys()), ["attributes"])
-        expected_attributes = {"shopinvader-vt-roles", "locale", "ref"}
-        self.assertEqual(set(payload["attributes"].keys()), expected_attributes)
         roles_str = payload["attributes"].pop("shopinvader-vt-roles")
-        self.assertEqual(payload, expected_payload)
+        for k in expected_attributes:
+            self.assertEqual(payload["attributes"][k], expected_attributes[k])
         self.assertEqual(set(roles_str.split(",")), expected_roles)

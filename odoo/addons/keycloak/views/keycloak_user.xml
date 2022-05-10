@@ -44,6 +44,14 @@
           type="object"
           icon="fa-cog"
           help="Update password or send actions to user."
+          groups="keycloak.group_keycloak_manager"
+        />
+                <button
+          name="action_sync_keycloak_info"
+          type="object"
+          icon="fa-bolt"
+          help="Force Keycloak info synchronisation ."
+          groups="keycloak.group_keycloak_manager"
         />
             </tree>
         </field>

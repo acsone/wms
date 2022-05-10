@@ -149,11 +149,12 @@ class KeycloakBackend(models.Model):
             base_fields_to_keep |= {"firstName", "lastName"}
         result = {f: payload[f] for f in base_fields_to_keep}
         update_fields = self._get_update_fields()
-        attributes_to_keep = {update_fields[f] for f in updated_fields}
+        # if an attribute is updated, we must provides all the attributes
         attrs = payload["attributes"]
-        attributes = {a: attrs[a] for a in attributes_to_keep if a in attrs}
-        if attributes:
-            result["attributes"] = attributes
+        attributes_to_keep = {update_fields[f] for f in updated_fields}
+        updated_attributes = {a: attrs[a] for a in attributes_to_keep if a in attrs}
+        if updated_attributes:
+            result["attributes"] = attrs
         return result
 
     @job()
@@ -162,7 +163,8 @@ class KeycloakBackend(models.Model):
         payload = self._get_user_payload(user, updated_fields)
         return client.update_user(user_id=user.keycloak_id, payload=payload)
 
-    def _get_user_payload(self, user, updated_fields):
+    def _get_user_payload(self, user, updated_fields=None):
+        updated_fields = updated_fields or self._get_update_fields().keys()
         payload_all = self._keycloak_user_to_payload(user)
         return self._filter_payload_fields(payload_all, updated_fields)
 
