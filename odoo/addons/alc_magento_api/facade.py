@@ -332,7 +332,8 @@ class FacadePackingSlip(Facade):
         parser_move_lines = [
             "name",
             "product_qty:qty",
-            "price_unit:prix_net_htva",
+            ("prix_net_htva", self._get_price_from_move),
+            ("prix_brut_htva", self._get_price_from_move),
             "serial_number:numero_de_suite",
             ("product_id", parser_product),
             ("lot_ids", parser_lot),
@@ -343,6 +344,13 @@ class FacadePackingSlip(Facade):
             ("partner_id", parser_partner),
             ("move_lines:items", parser_move_lines),
         ]
+
+    def _get_price_from_move(self, stock_move, field_name):
+        if field_name == "prix_net_htva":
+            return stock_move.order_line_id.price_reduce
+        if field_name == "prix_brut_htva":
+            return stock_move.order_line_id.price_unit
+        return 0.0
 
 
 class FacadeShopinvaderCart(Facade):
