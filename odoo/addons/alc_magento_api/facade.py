@@ -478,7 +478,7 @@ class FacadeOrder(Facade):
             "id:web_id",
             "name:erp_name",
             "suite_name",
-            "date_order_short",
+            "date_order_short:date",
             "client_order_ref",
             ("order_line:lines", parser_lines),
         ]
