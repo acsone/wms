@@ -298,7 +298,7 @@ class FacadePackingSlip(Facade):
             item["prix_brut_htva"] = item["prix_net_htva"]
             # TVA is from vat, which is a related to the name (e.g. 21%)
             tva = item["tva"]
-            item["tva"] = tva[:-1] if isinstance(tva, str) else tva
+            item["tva"] = tva[:-1] if isinstance(tva, (str, unicode)) else tva
         data["date"] = self._datetime_to_date(data["date"])
         return data
 
