@@ -293,8 +293,12 @@ class FacadePackingSlip(Facade):
             lots = item.pop("lot_ids")
             if lots:  # we should not need to drop other lots in future versions
                 item.update(lots[0])
+            else:
+                item["lot"] = None
             if item.get("peremption"):
                 item["peremption"] = self._datetime_to_date(item["peremption"])
+            else:
+                item["peremption"] = None
             item["prix_brut_htva"] = item["prix_net_htva"]
             # TVA is from vat, which is a related to the name (e.g. 21%)
             tva = item["tva"]
