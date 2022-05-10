@@ -22,12 +22,14 @@ class MagentoApi(Controller):
         backend = sudo_env.ref("keycloak.keycloak_backend")
         token = backend._get_token_from_user_info(username, password)
         assert token["token_type"] == "Bearer"
+        return username
 
     def _get_partner(self, sudo_env, username):
         # username is case insenitive into keycloak and previously into magento
         # search on the username stored in lower case
         domain = [("keycloak_username", "=", (username or "").lower())]
         keycloak_partner = sudo_env["keycloak.user"].search(domain)
+        keycloak_partner.ensure_one()  # reraised as user not found below
         return keycloak_partner.partner_id
 
     @route(
@@ -43,8 +45,8 @@ class MagentoApi(Controller):
         headers = request.httprequest.environ
         sudo_env = request.env(user=odoo.SUPERUSER_ID)
         try:
-            self._authenticate(sudo_env, headers, username)
-            partner = self._get_partner(sudo_env, username)
+            keycloak_username = self._authenticate(sudo_env, headers, username)
+            partner = self._get_partner(sudo_env, keycloak_username)
         except Exception:
             _logger.exception("Magento API: User %s not found.", username)
             return Response(response="User not found.", status=401)
