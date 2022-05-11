@@ -139,7 +139,7 @@ class MakePickingBatch(models.TransientModel):
 
         if not device:
             if raise_if_not_possible:
-                raise NoSuitableDeviceError()
+                raise NoSuitableDeviceError(candidates_pickings_to_batch)
             return self.env["stock.picking.wave"].browse()
 
         selected_pickings, unselected_pickings = self._apply_limits(
