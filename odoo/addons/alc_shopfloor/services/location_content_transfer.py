@@ -629,7 +629,7 @@ class LocationContentTransfer(Component):
         )
         if self.work.menu.keep_existing_reservations:
             operations = self._filter_out_existing_reservations(location, operations)
-        return operations
+        return operations.sorted(key=self._sort_key_operations)
 
     def _find_quants_domain(self, location):
         domain = [("location_id", "=", location.id), ("qty", ">", 0)]
@@ -684,12 +684,21 @@ class LocationContentTransfer(Component):
             ("picking_id.operator_id", "=", self.shopfloor_user.id),
         ]
 
+    @staticmethod
+    def _sort_key_operations(operation):
+        return (
+            operation.shopfloor_priority or 10,
+            operation.location_dest_id.shopfloor_picking_sequence or "",
+            operation.location_dest_id.complete_name,
+            operation.id,
+        )
+
     def _find_operations(self, location):
         """Find move lines currently being moved by the user"""
         lines = self.env["stock.pack.operation"].search(
             self._find_operations_domain(location)
         )
-        return lines
+        return lines.sorted(key=self._sort_key_operations)
 
     # hook used in module shopfloor_checkout_sync
     def _write_destination_on_operations(self, operations, location):
