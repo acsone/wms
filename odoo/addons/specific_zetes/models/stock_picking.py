@@ -136,7 +136,10 @@ class StockPicking(models.Model):
     @job(default_channel="root.background.stock_picking_validate")
     @api.multi
     def validate_picking(self):
-        for picking in self.filtered(lambda p: not p.zetes_logger_requires_check):
+        for picking in self.filtered(
+            lambda p: not p.zetes_logger_requires_check
+            and p.state not in ("done", "cancel")
+        ):
             # The method "do_new_transfer" is the method called when
             # an user click on "Validate" on a picking.
             result = picking.do_new_transfer()
