@@ -30,11 +30,6 @@ msgstr ""
 
 #. module: delivery_rounds
 #: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report
-msgid "# Hum."
-msgstr ""
-
-#. module: delivery_rounds
-#: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report
 msgid "# Mat."
 msgstr ""
 
@@ -569,11 +564,6 @@ msgstr ""
 #: model:product.product,name:delivery_rounds.delivery_carrier_manual_round_change_product_product
 #: model:product.template,name:delivery_rounds.delivery_carrier_manual_round_change_product_template
 msgid "Manual Delivery Round Change"
-msgstr ""
-
-#. module: delivery_rounds
-#: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report
-msgid "Mobile"
 msgstr ""
 
 #. module: delivery_rounds

@@ -33,11 +33,6 @@ msgstr "# Alim."
 
 #. module: delivery_rounds
 #: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report
-msgid "# Hum."
-msgstr "# Hum."
-
-#. module: delivery_rounds
-#: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report
 msgid "# Mat."
 msgstr "# Mat."
 
@@ -593,11 +588,6 @@ msgstr "Générer le plan de tournée du jour"
 #: model:product.template,name:delivery_rounds.delivery_carrier_manual_round_change_product_template
 msgid "Manual Delivery Round Change"
 msgstr "Manual Delivery Round Change"
-
-#. module: delivery_rounds
-#: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report
-msgid "Mobile"
-msgstr "GSM"
 
 #. module: delivery_rounds
 #: selection:cron.delivery.plan,week_day:0
@@ -1181,3 +1171,9 @@ msgstr "unités(s)"
 #, python-format
 msgid "{} is not working day for {}"
 msgstr "{} n'est pas un jour de travail pour {}"
+
+#~ msgid "# Hum."
+#~ msgstr "# Hum."
+
+#~ msgid "Mobile"
+#~ msgstr "GSM"
