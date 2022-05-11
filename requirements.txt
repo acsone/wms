@@ -153,7 +153,7 @@ odoo10-addon-onchange-helper==10.0.3.1.2
 odoo10-addon-partner-helper==10.0.0.1.0
 odoo10-addon-partner-serializer @ git+https://github.com/acsone/odoo-shopinvader.git@3f2894b45d32157afe1355405915222e6321c52b#subdirectory=setup/partner_serializer
 odoo10-addon-pim==10.0.1.1.0.99.dev3
-odoo10-addon-product-abc-classification-base @ git+https://github.com/acsone/product-attribute.git@dcab559e621dfa66db72af82e1bb71374c9555a5#subdirectory=setup/product_abc_classification_base
+odoo10-addon-product-abc-classification-base @ git+https://github.com/acsone/product-attribute.git@c3f63c95227e9fa453d3bf93775da3fede01807e#subdirectory=setup/product_abc_classification_base
 odoo10-addon-product-abc-classification-sale-stock @ git+https://github.com/acsone/product-attribute.git@a2e548ec434ba6205f00c4a54fbd9e336931b11a#subdirectory=setup/product_abc_classification_sale_stock
 odoo10-addon-product-analytic @ git+https://github.com/acsone/account-analytic.git@daf43630f1ca58b431bb93809a331374b8530863#subdirectory=setup/product_analytic
 odoo10-addon-product-analytic-purchase @ git+https://github.com/acsone/account-analytic.git@daf43630f1ca58b431bb93809a331374b8530863#subdirectory=setup/product_analytic_purchase
