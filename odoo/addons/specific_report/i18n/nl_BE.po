@@ -925,7 +925,7 @@ msgstr "No active id found"
 
 #. module: specific_report
 #: code:addons/specific_report/models/round_instance.py:21
-#: code:addons/specific_report/models/round_instance.py:166
+#: code:addons/specific_report/models/round_instance.py:157
 #, python-format
 msgid "No invoice to print"
 msgstr "No invoice to print"
@@ -973,16 +973,6 @@ msgstr "Number of food"
 #: model:ir.model.fields,field_description:specific_report.field_stock_picking_item_number_of_food
 msgid "Number of food products"
 msgstr "Number of food products"
-
-#. module: specific_report
-#: model:ir.model.fields,field_description:specific_report.field_stock_picking_number_of_human_drug
-msgid "Number of human drug"
-msgstr "Number of human drug"
-
-#. module: specific_report
-#: model:ir.model.fields,field_description:specific_report.field_stock_picking_item_number_of_human_drug
-msgid "Number of human drug products"
-msgstr "Number of human drug products"
 
 #. module: specific_report
 #: model:ir.model.fields,field_description:specific_report.field_stock_picking_number_of_drug
@@ -1218,25 +1208,25 @@ msgstr ""
 "assigned."
 
 #. module: specific_report
-#: code:addons/specific_report/models/stock_picking.py:177
+#: code:addons/specific_report/models/stock_picking.py:160
 #, python-format
 msgid "The picking zone %s is not correct"
 msgstr "The picking zone %s is not correct"
 
 #. module: specific_report
-#: code:addons/specific_report/models/stock_picking.py:84
+#: code:addons/specific_report/models/stock_picking.py:78
 #, python-format
 msgid "There are more than one currencies on orders"
 msgstr "There are more than one currencies on orders"
 
 #. module: specific_report
-#: code:addons/specific_report/models/stock_picking.py:158
+#: code:addons/specific_report/models/stock_picking.py:143
 #, python-format
 msgid "There is no category on this product"
 msgstr "There is no category on this product"
 
 #. module: specific_report
-#: code:addons/specific_report/models/stock_picking.py:107
+#: code:addons/specific_report/models/stock_picking.py:100
 #, python-format
 msgid "There is no original picking zone on this operation."
 msgstr "There is no original picking zone on this operation."
@@ -1377,6 +1367,12 @@ msgid ""
 msgstr ""
 "|\n"
 "                    <span>Telefoon:</span>"
+
+#~ msgid "Number of human drug"
+#~ msgstr "Number of human drug"
+
+#~ msgid "Number of human drug products"
+#~ msgstr "Number of human drug products"
 
 #~ msgid "DEXIA:"
 #~ msgstr "DEXIA:"
