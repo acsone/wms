@@ -116,7 +116,10 @@ class PickingsService(Component):
     def _get_domain(self, from_date=None, states=None, backorder=None):
         lid = self.env.ref("stock.stock_location_customers").id
         domain = [
-            ("partner_id", "child_of", self.partner.id),
+            # the final client should not be a B2C customer it should be the VT
+            # that's why we search on the customer_id and not on the partner_id
+            # which is the delivery address
+            ("customer_id", "child_of", self.partner.id),
             ("location_dest_id", "=", lid),
         ]
         if from_date:
