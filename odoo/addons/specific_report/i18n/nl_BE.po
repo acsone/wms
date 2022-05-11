@@ -68,11 +68,6 @@ msgstr "# Voed."
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
-msgid "# Hum."
-msgstr "# Apo."
-
-#. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
 msgid "# Mat."
 msgstr "# Mat."
 
@@ -1367,6 +1362,9 @@ msgid ""
 msgstr ""
 "|\n"
 "                    <span>Telefoon:</span>"
+
+#~ msgid "# Hum."
+#~ msgstr "# Apo."
 
 #~ msgid "Number of human drug"
 #~ msgstr "Number of human drug"

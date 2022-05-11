@@ -47,11 +47,6 @@ msgstr ""
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
-msgid "# Hum."
-msgstr ""
-
-#. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
 msgid "# Mat."
 msgstr ""
 
