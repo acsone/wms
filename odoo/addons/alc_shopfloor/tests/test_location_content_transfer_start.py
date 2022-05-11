@@ -226,7 +226,7 @@ class LocationContentTransferStartSpecialCase(LocationContentTransferCommonCase)
             response,
             message={
                 "message_type": "error",
-                "body": "This location content can't be moved using this menu.",
+                "body": "You cannot move this using this menu.",
             },
         )
 
@@ -297,8 +297,7 @@ class LocationContentTransferStartSpecialCase(LocationContentTransferCommonCase)
             "scan_location", params={"barcode": self.content_loc.barcode}
         )
         self.assert_response_start(
-            response,
-            message=self.service.msg_store.no_pack_in_location(self.content_loc),
+            response, message=self.service.msg_store.location_empty(self.content_loc),
         )
 
     def test_scan_location_wrong_picking_type_allow_unreserve_error(self):

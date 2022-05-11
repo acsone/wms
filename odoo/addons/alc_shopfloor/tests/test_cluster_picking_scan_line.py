@@ -318,6 +318,66 @@ class ClusterPickingScanLineCase(ClusterPickingLineCommonCase):
         line.qty_done = line.product_qty
         self._scan_line_ok(new_move.pack_operation_ids[0], line.location_id.barcode)
 
+    def test_scan_line_error_wrong_package(self):
+        """Wrong package scanned"""
+        self._simulate_batch_selected(self.batch, in_package=True)
+        pack = self.env["stock.quant.package"].sudo().create({})
+        self._scan_line_error(
+            self.batch.picking_ids.pack_operation_ids,
+            pack.name,
+            {"message_type": "error", "body": "Wrong pack."},
+        )
+
+    def test_scan_line_error_wrong_product(self):
+        """Wrong product scanned"""
+        self._simulate_batch_selected(self.batch, in_package=True)
+        product = (
+            self.env["product.product"]
+            .sudo()
+            .create({"name": "Wrong", "barcode": "WRONGPRODUCT"})
+        )
+        self._scan_line_error(
+            self.batch.picking_ids.pack_operation_ids,
+            product.barcode,
+            {"message_type": "error", "body": "Wrong product."},
+        )
+
+    def test_scan_line_error_wrong_lot(self):
+        """Wrong lot scanned"""
+        self._simulate_batch_selected(self.batch)
+        lot = (
+            self.env["stock.production.lot"]
+            .sudo()
+            .create(
+                {
+                    "name": "WRONGLOT",
+                    "ref": "#FOO",
+                    "product_id": self.batch.picking_ids.pack_operation_ids[
+                        0
+                    ].product_id.id,
+                }
+            )
+        )
+        self._scan_line_error(
+            self.batch.picking_ids.pack_operation_ids,
+            lot.name,
+            {"message_type": "error", "body": "Wrong lot."},
+        )
+
+    def test_scan_line_error_wrong_location(self):
+        """Wrong product scanned"""
+        self._simulate_batch_selected(self.batch, in_package=True)
+        location = (
+            self.env["stock.location"]
+            .sudo()
+            .create({"name": "Wrong", "barcode": "WRONGLOCATION"})
+        )
+        self._scan_line_error(
+            self.batch.picking_ids.pack_operation_ids,
+            location.barcode,
+            {"message_type": "error", "body": "Wrong location."},
+        )
+
     def test_scan_line_location_error_several_lots(self):
         """Scan to check if user scans a correct location for current line
 

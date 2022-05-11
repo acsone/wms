@@ -91,18 +91,45 @@ class LocationContentTransferSingleCase(LocationContentTransferCommonCase):
         package_level = self.picking1.pack_operation_pack_ids
         self._test_scan_package_ok(package_level.package_id.name)
 
-    def test_scan_package_barcode_not_found(self):
-        package_level = self.picking1.pack_operation_pack_ids
+    def _scan_package_error(self, package_level, scanned, message):
         response = self.service.dispatch(
             "scan_line",
             params={
                 "location_id": self.content_loc.id,
                 "operation_id": package_level.id,
-                "barcode": "NOT_FOUND",
+                "barcode": scanned,
             },
         )
-        self.assert_response_start_single(
-            response, self.pickings, message=self.service.msg_store.barcode_not_found()
+        self.assert_response_start_single(response, self.pickings, message=message)
+
+    def test_scan_package_error_wrong_package(self):
+        """Wrong package scanned"""
+        pack = self.env["stock.quant.package"].sudo().create({})
+        self._scan_package_error(
+            self.picking1.pack_operation_pack_ids,
+            pack.name,
+            {"message_type": "error", "body": "Wrong pack."},
+        )
+
+    def test_scan_package_error_wrong_product(self):
+        """Wrong product scanned"""
+        product = (
+            self.env["product.product"]
+            .sudo()
+            .create({"name": "Wrong", "barcode": "WRONGPRODUCT"})
+        )
+        self._scan_package_error(
+            self.picking1.pack_operation_pack_ids,
+            product.barcode,
+            {"message_type": "error", "body": "Wrong product."},
+        )
+
+    def test_scan_package_barcode_not_found(self):
+        """Nothing found for the barcode"""
+        self._scan_package_error(
+            self.picking1.pack_operation_pack_ids,
+            "NO_EXISTING_BARCODE",
+            {"message_type": "error", "body": "Barcode not found"},
         )
 
     def test_scan_package_product_ok(self):
@@ -293,6 +320,32 @@ class LocationContentTransferSingleCase(LocationContentTransferCommonCase):
             operation.id,
             self.product_d.barcode,
             self.service.msg_store.scan_lot_on_product_tracked_by_lot(),
+        )
+
+    def test_scan_line_error_wrong_package(self):
+        """Wrong package scanned"""
+        operation = self.picking2.pack_operation_product_ids[0]
+        pack = self.env["stock.quant.package"].sudo().create({})
+        self._test_scan_line_nok(
+            self.pickings,
+            operation.id,
+            pack.name,
+            {"message_type": "error", "body": "Wrong pack."},
+        )
+
+    def test_scan_line_error_wrong_product(self):
+        """Wrong product scanned"""
+        operation = self.picking2.pack_operation_product_ids[0]
+        product = (
+            self.env["product.product"]
+            .sudo()
+            .create({"name": "Wrong", "barcode": "WRONGPRODUCT"})
+        )
+        self._test_scan_line_nok(
+            self.pickings,
+            operation.id,
+            product.barcode,
+            {"message_type": "error", "body": "Wrong product."},
         )
 
     def test_scan_line_barcode_not_found(self):
