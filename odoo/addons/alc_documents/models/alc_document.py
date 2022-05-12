@@ -33,7 +33,7 @@ class AlcDocument(models.Model):
     compute = fields.Selection([], readonly=True)  # to extend
     res_model = fields.Char(related="attachment_id.res_model", readonly=True)
     document_date = fields.Datetime(
-        related="attachment_id.create_date", store=True, readonly=True
+        compute="_compute_document_date", store=True, readonly=True
     )
     is_null_document_date_start = fields.Boolean(
         "The document date is null",
@@ -200,10 +200,18 @@ class AlcDocument(models.Model):
     @api.model
     def get_partner_domain(self, partner):
         partner.ensure_one()
+        # allowed_partner_types is unused as to now.
+        # however we distinguish between compute type that might appear once per partner
+        # and other types that might be linked to the address book,
+        # e.g. delivery notes to the shipping partner
         return [
             "|",
+            "&",
+            ("partner_id", "child_of", partner.id),
+            ("compute", "=", False),
+            "&",
             ("partner_id", "=", partner.id),
-            ("allowed_partner_types", "like", "%%%s%%" % partner.partner_type),
+            ("compute", "!=", False),
         ]
 
     @api.depends("document_date")
@@ -217,3 +225,12 @@ class AlcDocument(models.Model):
         """
         for rec in self:
             rec.is_null_document_date_start = bool(not rec.document_date)
+
+    @api.depends("attachment_id")
+    def _compute_document_date(self):
+        for document in self:
+            document.document_date = document._get_document_date()
+
+    def _get_document_date(self):
+        self.ensure_one()
+        return self.attachment_id.create_date

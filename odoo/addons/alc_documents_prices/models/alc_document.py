@@ -232,3 +232,9 @@ class AlcDocument(models.Model):
                 worksheet.write(row + 1, column, item)
         workbook.close()
         return filename
+
+    def _get_document_date(self):
+        res = super(AlcDocument, self)._get_document_date()
+        if self.compute in ["pricelist", "discount"]:
+            res = False
+        return res

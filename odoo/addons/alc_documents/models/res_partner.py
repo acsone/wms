@@ -2,7 +2,7 @@
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import api, fields, models
+from odoo import _, api, fields, models
 
 
 class ResPartner(models.Model):
@@ -25,3 +25,16 @@ class ResPartner(models.Model):
     def _compute_needs_dossier(self):
         for partner in self:
             partner.needs_dossier = not partner.is_b2c_customer
+
+    def action_show_documents(self):
+        self.ensure_one()
+        return {
+            "type": "ir.actions.act_window",
+            "name": _("Documents"),
+            "res_model": "alc.document",
+            "domain": self.env["alc.document"].get_partner_domain(self),
+            "view_type": "form",
+            "view_mode": "tree, form",
+            "context": self.env.context,
+            "target": "current",
+        }
