@@ -1,6 +1,8 @@
 # Copyright 2022 ACSONE SA/NV (<http://acsone.eu>)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+from odoo import fields
+
 from .common import TestAlcDocuments
 
 
@@ -25,5 +27,7 @@ class TestAlcDocumentsFlow(TestAlcDocuments):
         self.assertEqual(document.sale_channel, sale_channel)
         self.assertEqual(document.format, "pdf")
         self.assertEqual(document.partner_id, self.partner)
+        document_date = str(fields.Date.from_string(document.document_date))
+        self.assertEqual(document_date, fields.Date.today())
 
         self.assertEqual(self.partner.alc_document_count, 1)
