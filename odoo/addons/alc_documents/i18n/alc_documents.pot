@@ -38,7 +38,6 @@ msgid "Alcyon Document"
 msgstr ""
 
 #. module: alc_documents
-#: model:ir.actions.act_window,name:alc_documents.act_res_partner_alc_document
 #: model:ir.actions.act_window,name:alc_documents.alc_document_act_window
 #: model:ir.ui.menu,name:alc_documents.alc_document_menu
 #: model:ir.ui.view,arch_db:alc_documents.res_partner_form_view
@@ -92,11 +91,6 @@ msgid "Credit Note"
 msgstr ""
 
 #. module: alc_documents
-#: model:ir.model.fields,field_description:alc_documents.field_alc_document_document_date
-msgid "Date Created"
-msgstr ""
-
-#. module: alc_documents
 #: selection:alc.document,type:0
 msgid "Delivery Note"
 msgstr ""
@@ -110,6 +104,17 @@ msgstr ""
 #. module: alc_documents
 #: model:ir.model.fields,field_description:alc_documents.field_alc_document_display_name
 msgid "Display Name"
+msgstr ""
+
+#. module: alc_documents
+#: model:ir.model.fields,field_description:alc_documents.field_alc_document_document_date
+msgid "Document date"
+msgstr ""
+
+#. module: alc_documents
+#: code:addons/alc_documents/models/res_partner.py:33
+#, python-format
+msgid "Documents"
 msgstr ""
 
 #. module: alc_documents
