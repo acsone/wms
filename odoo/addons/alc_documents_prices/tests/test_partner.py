@@ -20,6 +20,8 @@ class TestAlcDocumentsPricesFlow(TestAlcDocumentsPrices):
         domain_partner = [("partner_id", "=", partner.id)]
         documents_partner = self.alc_document_model.search(domain_partner)
         self.assertFalse(documents_partner.mapped("attachment_id"))
+        for document in documents_partner:
+            self.assertFalse(document.document_date)
 
         domain_base = [("format", "=", "csv"), ("partner_id", "=", partner.id)]
 
@@ -38,3 +40,6 @@ class TestAlcDocumentsPricesFlow(TestAlcDocumentsPrices):
         document_discount._get_data()
         # then
         self.assertTrue(document_discount.attachment_id)
+        # even after generation, document_date is not set
+        for document in documents_partner:
+            self.assertFalse(document.document_date)
