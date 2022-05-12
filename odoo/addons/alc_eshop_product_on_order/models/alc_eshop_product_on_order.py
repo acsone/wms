@@ -109,7 +109,7 @@ WHERE
     sol.product_qty_remains_to_deliver > 0
     AND sol.product_type in ('consu', 'product')
     AND sol.is_consignment = False
-    AND sol.state not in ('draft', 'cancel')
+    AND sol.state not in ('draft', 'sent', 'cancel')
     AND so.sale_channel IN %(channels)s
             )
                 """
