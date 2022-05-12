@@ -200,10 +200,18 @@ class AlcDocument(models.Model):
     @api.model
     def get_partner_domain(self, partner):
         partner.ensure_one()
+        # allowed_partner_types is unused as to now.
+        # however we distinguish between compute type that might appear once per partner
+        # and other types that might be linked to the address book,
+        # e.g. delivery notes to the shipping partner
         return [
             "|",
+            "&",
+            ("partner_id", "child_of", partner.id),
+            ("compute", "=", False),
+            "&",
             ("partner_id", "=", partner.id),
-            ("allowed_partner_types", "like", "%%%s%%" % partner.partner_type),
+            ("compute", "!=", False),
         ]
 
     @api.depends("document_date")
