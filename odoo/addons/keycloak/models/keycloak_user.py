@@ -73,7 +73,9 @@ class KeycloakUser(models.Model):
     def unlink(self):
         for user in self:
             desc = _("Delete Keycloak User %s") % user.username
-            user.keycloak_backend_id.with_delay(description=desc).delete_user(user)
+            user.keycloak_backend_id.with_delay(description=desc).delete_user(
+                user.keycloak_id
+            )
         return super(KeycloakUser, self).unlink()
 
     def write(self, vals):

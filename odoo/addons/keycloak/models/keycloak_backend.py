@@ -110,11 +110,10 @@ class KeycloakBackend(models.Model):
         return payload
 
     @job()
-    def delete_user(self, keycloak_user):
+    def delete_user(self, keycloak_id):
         self.ensure_one()
-        keycloak_user.ensure_one()
         client = self._get_admin_client()
-        return client.delete_user(user_id=keycloak_user.keycloak_id)
+        return client.delete_user(user_id=keycloak_id)
 
     def update_user_password(self, user, password, temporary=True):
         client = self._get_admin_client()
