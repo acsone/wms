@@ -19,6 +19,7 @@ class KeycloakBackend(models.Model):
             "lang": "locale",
             "ref": "ref",
             "eshop_ordering_allowed": "can_order",
+            "help_with_fee": "help_with_fee",
         }
         res.update(new)
         return res
@@ -32,6 +33,7 @@ class KeycloakBackend(models.Model):
             "supplier_id": partner.id,
             "ref": partner.ref or None,
             "can_order": partner.eshop_ordering_allowed,
+            "help_with_fee": partner.help_with_fee,
         }
         payload["attributes"].update(new_attributes)
         return payload

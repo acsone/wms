@@ -67,7 +67,12 @@ class TestKeycloakUpdateFlow(TestKeycloak):
 
     def test_update_write_everything(self):
         pricelist = self.env["product.pricelist"].create({"name": "pridamis"})
-        expected_attributes = {"locale": "fr_BE", "ref": "abc123", "can_order": False}
+        expected_attributes = {
+            "locale": "fr_BE",
+            "ref": "abc123",
+            "can_order": False,
+            "help_with_fee": True,
+        }
         expected_roles = {"shareholder", "guest", "price-pridamis"}
         keycloak_user = self.env["keycloak.user"].create(self.vals_user)
         job_counter = self.job_counter()
@@ -79,6 +84,7 @@ class TestKeycloakUpdateFlow(TestKeycloak):
             "lang": "fr_BE",
             "ref": "abc123",
             "eshop_ordering_allowed": False,
+            "help_with_fee": True,
         }
         self.partner.write(vals)
 
