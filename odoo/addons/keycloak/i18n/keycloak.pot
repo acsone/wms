@@ -322,7 +322,7 @@ msgid "Server url env is editable"
 msgstr ""
 
 #. module: keycloak
-#: code:addons/keycloak/models/keycloak_user.py:110
+#: code:addons/keycloak/models/keycloak_user.py:112
 #, python-format
 msgid "Sync Keycloak User %s"
 msgstr ""
@@ -366,7 +366,7 @@ msgid "Update Keycloak User"
 msgstr ""
 
 #. module: keycloak
-#: code:addons/keycloak/models/keycloak_user.py:91
+#: code:addons/keycloak/models/keycloak_user.py:93
 #, python-format
 msgid "Update Keycloak User %s"
 msgstr ""
@@ -410,7 +410,7 @@ msgid "Username env is editable"
 msgstr ""
 
 #. module: keycloak
-#: code:addons/keycloak/models/keycloak_user.py:106
+#: code:addons/keycloak/models/keycloak_user.py:108
 #, python-format
 msgid "You are not allowed to sync keycloak info."
 msgstr ""
