@@ -21,21 +21,24 @@ class ProductTemplate(models.Model):
     _inherit = "product.template"
 
     link_info = fields.Char("Additional information link", translate=True)
+    link_video = fields.Char("Video link", translate=True)
     link_notice = fields.Char("Notice link", translate=True)
 
     links_offline = fields.Char(
         "Offline Links",
         store=True,
         compute="_compute_links_offline",
-        help="Filled links for for info and notice are online",
+        help="Filled links for info or video or notice are offline?",
     )
 
     @api.model
     def cron_check_links_online(self, force=False):
         domain_to_check = [
             "|",
+            "|",
             ("link_info", "!=", False),
             ("link_notice", "!=", False),
+            ("link_video", "!=", False),
         ]
         if not force:
             domain_to_check = ["&", ("links_offline", "=", False)] + domain_to_check
@@ -45,9 +48,9 @@ class ProductTemplate(models.Model):
             product.with_delay(description=description)._compute_links_offline()
 
     @job(default_channel="root.background.process")
-    @api.depends("link_info", "link_notice")
+    @api.depends("link_info", "link_notice", "link_video")
     def _compute_links_offline(self):
-        link_fields = {"link_info", "link_notice"}
+        link_fields = {"link_info", "link_notice", "link_video"}
         langs = [code_name[0] for code_name in self.env["res.lang"].get_installed()]
         offlines = {}
         for product in self:

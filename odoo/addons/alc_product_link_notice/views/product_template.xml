@@ -8,6 +8,7 @@
                 <group name="links" string="Links">
                     <group>
                         <field name="link_info" />
+                        <field name="link_video" />
                         <field name="link_notice" />
                         <field name="links_offline" />
                     </group>
