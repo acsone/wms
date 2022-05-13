@@ -27,7 +27,7 @@ class LocationContentTransfer(Component):
 
         if blocking_pickings:
             return self.msg_store.reserved_moves_in_current_location(
-                location, product_templates.mapped("name"), blocking_pickings
+                location, product_templates, blocking_pickings
             )
 
         return res

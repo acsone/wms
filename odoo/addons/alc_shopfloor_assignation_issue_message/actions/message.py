@@ -9,7 +9,8 @@ from odoo.addons.component.core import Component
 class MessageAction(Component):
     _inherit = "shopfloor.message.action"
 
-    def reserved_moves_in_current_location(self, location, product_names, picking):
+    def reserved_moves_in_current_location(self, location, products, picking):
+        product_names = products.sorted().mapped("name")
         return {
             "message_type": "error",
             "body": _(

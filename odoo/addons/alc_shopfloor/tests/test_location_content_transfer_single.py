@@ -540,6 +540,33 @@ class LocationContentTransferSingleCase(LocationContentTransferCommonCase):
             message=self.service.msg_store.record_not_found(),
         )
 
+    def test_scan_wrong_lot(self):
+        # Create 2 lots for product b on the same lcation
+        self.product_b.tracking = "lot"
+        initial_lot = self._create_lot(self.product_b)
+        self._update_qty_in_location(
+            self.content_loc, self.product_b, 10, lot=initial_lot
+        )
+        new_lot = self._create_lot(self.product_b)
+        self._update_qty_in_location(self.content_loc, self.product_b, 10, lot=new_lot)
+        picking = self._create_picking(lines=[(self.product_b, 5), (self.product_b, 6)])
+        self._simulate_pickings_selected(picking)
+        picking.action_assign()
+        operation = picking.pack_operation_product_ids[0]
+        barcode = new_lot.name
+        response = self.service.dispatch(
+            "scan_line",
+            params={
+                "location_id": self.content_loc.id,
+                "operation_id": operation.id,
+                "barcode": barcode,
+                "lot_id": initial_lot.id,
+            },
+        )
+        self.assert_response_start_single(
+            response, picking, message=self.service.msg_store.wrong_lot_scanned()
+        )
+
 
 # pylint: disable=missing-return
 class LocationContentTransferSingleSpecialCase(LocationContentTransferCommonCase):

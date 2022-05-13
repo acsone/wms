@@ -330,7 +330,7 @@ class LocationContentTransfer(Component):
 
         lot = search.lot_from_scan(barcode, operation)
         if lot:
-            if lot.id != lot_id:
+            if lot_id and lot.id != lot_id:
                 return self._response_for_start_single(
                     operation.picking_id, message=self.msg_store.wrong_lot_scanned(),
                 )
@@ -946,7 +946,7 @@ class ShopfloorLocationContentTransferValidator(Component):
             "location_id": {"coerce": to_int, "required": True, "type": "integer"},
             "operation_id": {"coerce": to_int, "required": True, "type": "integer"},
             "barcode": {"required": True, "type": "string"},
-            "lot_id": {"coerce": to_int, "required": True, "type": "integer"},
+            "lot_id": {"coerce": to_int, "required": False, "type": "integer"},
         }
 
     def set_destination_line(self):

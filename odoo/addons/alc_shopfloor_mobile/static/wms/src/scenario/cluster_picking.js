@@ -228,6 +228,9 @@ const ClusterPicking = {
               operation_id: data.id,
               barcode: scanned.text,
             };
+            if (data.lot) {
+              endpoint_data.lot_id = data.lot.id;
+            }
             this.wait_call(this.odoo.call(endpoint, endpoint_data));
           },
           // Additional actions
