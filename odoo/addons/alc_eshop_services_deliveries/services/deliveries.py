@@ -123,7 +123,7 @@ class PickingsService(Component):
             ("location_dest_id", "=", lid),
         ]
         if from_date:
-            domain += [("create_date", ">=", from_date)]
+            domain += [("date_done", ">=", from_date)]
         if backorder:
             domain += [("backorder_id", "!=", False)]
         if states:
