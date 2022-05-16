@@ -430,7 +430,7 @@ class ClusterPicking(Component):
         self._cancel_batch(picking_batch_id)
         return self._response_for_start()
 
-    def scan_line(self, picking_batch_id, operation_id, barcode):
+    def scan_line(self, picking_batch_id, operation_id, barcode, lot_id=False):
         """Scan a location, a pack, a product or a lots
 
         There is no side-effect, it is only to check that the operator takes
@@ -481,11 +481,13 @@ class ClusterPicking(Component):
             return self._scan_line_by_product(picking, operation, product)
 
         lot = search.lot_from_scan(barcode)
+
         if lot and (
             (lot in operation.mapped("pack_lot_ids.lot_id"))
             or (lot in operation.package_id._get_contained_quants().mapped("lot_id"))
+            or lot_id
         ):
-            return self._scan_line_by_lot(picking, operation, lot)
+            return self._scan_line_by_lot(picking, operation, lot, lot_id)
 
         location = search.location_from_scan(barcode)
         if location and operation.location_id == location:
@@ -538,7 +540,7 @@ class ClusterPicking(Component):
             )
         return self._response_for_scan_destination(operation)
 
-    def _scan_line_by_lot(self, picking, operation, lot):
+    def _scan_line_by_lot(self, picking, operation, lot, lot_id):
         """Lot scanned, check if we can work with it.
 
         If we scanned a lot and it's part of several packages, we can't be
@@ -560,6 +562,10 @@ class ClusterPicking(Component):
         if other_lot_operation_ids and len(other_lot_operation_ids) > 1:
             return self._response_for_start_operation(
                 operation, message=self.msg_store.lot_multiple_packages_scan_package()
+            )
+        if lot_id and lot.id != lot_id:
+            return self._response_for_start_operation(
+                operation, message=self.msg_store.wrong_lot_scanned(),
             )
         return self._response_for_scan_destination(operation)
 
@@ -1254,6 +1260,7 @@ class ShopfloorClusterPickingValidator(Component):
             "picking_batch_id": {"coerce": to_int, "required": True, "type": "integer"},
             "operation_id": {"coerce": to_int, "required": True, "type": "integer"},
             "barcode": {"required": True, "type": "string"},
+            "lot_id": {"coerce": to_int, "required": False, "type": "integer"},
         }
 
     def scan_destination_pack(self):

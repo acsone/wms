@@ -226,6 +226,9 @@ const LocationContentTransfer = {
               location_id: data.operation.location_src.id,
               barcode: scanned.text,
             };
+            if (data.operation.type === "lot") {
+              endpoint_data.lot_id = data.operation.lot.id;
+            }
             this.wait_call(this.odoo.call(endpoint, endpoint_data));
           },
         },

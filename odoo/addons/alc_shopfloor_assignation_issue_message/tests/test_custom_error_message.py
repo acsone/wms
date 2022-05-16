@@ -44,13 +44,13 @@ class TestCustomErrorMessage(LocationContentTransferCommonCase):
         # Picking was assigned, we reverse the assignation but keep the moves reserved
         self.picking.pack_operation_ids.unlink()
 
-        product_templates_names = self.products.mapped("product_tmpl_id.name")
+        product_templates = self.products.mapped("product_tmpl_id")
         response = self.service.dispatch(
             "scan_location", params={"barcode": self.content_loc.barcode}
         )
         self.assert_response_start(
             response,
             message=self.service.msg_store.reserved_moves_in_current_location(
-                self.content_loc, product_templates_names, self.picking
+                self.content_loc, product_templates, self.picking
             ),
         )
