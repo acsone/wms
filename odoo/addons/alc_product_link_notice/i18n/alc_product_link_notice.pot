@@ -23,7 +23,7 @@ msgid "Additional information link"
 msgstr ""
 
 #. module: alc_product_link_notice
-#: code:addons/alc_product_link_notice/models/product_template.py:44
+#: code:addons/alc_product_link_notice/models/product_template.py:47
 #, python-format
 msgid "Check online links for product %s."
 msgstr ""
@@ -34,7 +34,7 @@ msgstr ""
 #: model:ir.model.fields,help:alc_product_link_notice.field_product_template_links_offline
 #: model:ir.model.fields,help:alc_product_link_notice.field_shopinvader_product_links_offline
 #: model:ir.model.fields,help:alc_product_link_notice.field_shopinvader_variant_links_offline
-msgid "Filled links for for info and notice are online"
+msgid "Filled links for info or video or notice are offline?"
 msgstr ""
 
 #. module: alc_product_link_notice
@@ -63,5 +63,14 @@ msgstr ""
 #. module: alc_product_link_notice
 #: model:ir.model,name:alc_product_link_notice.model_product_template
 msgid "Product Template"
+msgstr ""
+
+#. module: alc_product_link_notice
+#: model:ir.model.fields,field_description:alc_product_link_notice.field_delivery_carrier_link_video
+#: model:ir.model.fields,field_description:alc_product_link_notice.field_product_product_link_video
+#: model:ir.model.fields,field_description:alc_product_link_notice.field_product_template_link_video
+#: model:ir.model.fields,field_description:alc_product_link_notice.field_shopinvader_product_link_video
+#: model:ir.model.fields,field_description:alc_product_link_notice.field_shopinvader_variant_link_video
+msgid "Video link"
 msgstr ""
 
