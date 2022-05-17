@@ -18,6 +18,7 @@
         "alc_product_brand_image",
         "alc_product_pharmacy",
         "alc_product_mto",
+        "alc_storage_media_lang",
     ],
     "data": [
         "data/ir_export_product.xml",
