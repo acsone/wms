@@ -32,6 +32,7 @@
         "alc_product_stock_state",
         "shopinvader_auth_jwt",
         "shopinvader_elasticsearch",
+        "shopinvader_product_media",
         "shopinvader_product_stock_state",
         "shopinvader_multi_category",
         "shopinvader_assortment",

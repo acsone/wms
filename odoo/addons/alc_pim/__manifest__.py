@@ -14,6 +14,7 @@
         "alc_pim_attribute_group",
         "alc_product_shop_category",
         "alc_product_link_notice",
+        "alc_storage_media_product",
         "product_animal_species",
         # data dependencies
         "product_dimension",
