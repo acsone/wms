@@ -112,6 +112,7 @@
         "alc_invoices_audit",
         "alc_internal_stock_quant_package",
         "alc_label_printing_gls",
+        "alc_label_printing_reception",
         "alc_logiweb",
         "alc_mrp_repair",
         "alc_partner_force_re_geolocalization",
