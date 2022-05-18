@@ -1,16 +1,13 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* alc_label_printing_reception
+#	* alc_label_printing_reception
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-16 07:34+0000\n"
-"PO-Revision-Date: 2022-05-16 07:34+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -19,74 +16,73 @@ msgstr ""
 #. module: alc_label_printing_reception
 #: model:ir.ui.view,arch_db:alc_label_printing_reception.select_printing_printer_form_view
 msgid "Cancel"
-msgstr "Annuler"
+msgstr ""
 
 #. module: alc_label_printing_reception
 #: model:ir.model.fields,field_description:alc_label_printing_reception.field_select_printing_printer_create_uid
 msgid "Created by"
-msgstr "Créé par"
+msgstr ""
 
 #. module: alc_label_printing_reception
 #: model:ir.model.fields,field_description:alc_label_printing_reception.field_select_printing_printer_create_date
 msgid "Created on"
-msgstr "Créé le"
+msgstr ""
 
 #. module: alc_label_printing_reception
 #: model:ir.model.fields,field_description:alc_label_printing_reception.field_select_printing_printer_display_name
 msgid "Display Name"
-msgstr "Nom affiché"
+msgstr ""
 
 #. module: alc_label_printing_reception
 #: model:ir.model.fields,field_description:alc_label_printing_reception.field_select_printing_printer_id
 msgid "ID"
-msgstr "ID"
+msgstr ""
 
 #. module: alc_label_printing_reception
 #: model:ir.model.fields,field_description:alc_label_printing_reception.field_select_printing_printer___last_update
 msgid "Last Modified on"
-msgstr "Dernière modification le"
+msgstr ""
 
 #. module: alc_label_printing_reception
 #: model:ir.model.fields,field_description:alc_label_printing_reception.field_select_printing_printer_write_uid
 msgid "Last Updated by"
-msgstr "Derniere fois mis à jour par"
+msgstr ""
 
 #. module: alc_label_printing_reception
 #: model:ir.model.fields,field_description:alc_label_printing_reception.field_select_printing_printer_write_date
 msgid "Last Updated on"
-msgstr "Dernière mis à jour le"
+msgstr ""
 
 #. module: alc_label_printing_reception
 #: model:ir.ui.view,arch_db:alc_label_printing_reception.select_printing_printer_form_view
 msgid "OK"
-msgstr "Ok"
+msgstr ""
 
 #. module: alc_label_printing_reception
 #: model:ir.model.fields,field_description:alc_label_printing_reception.field_select_printing_printer_printer_id
 msgid "Printer"
-msgstr "Imprimante"
+msgstr ""
 
 #. module: alc_label_printing_reception
 #: model:res.groups,name:alc_label_printing_reception.reception_change_printer
 msgid "RECEPTION - Change printer"
-msgstr "RECEPTION - Changement imprimante"
+msgstr ""
 
 #. module: alc_label_printing_reception
 #: model:ir.actions.act_window,name:alc_label_printing_reception.select_printing_printer_act_window
 #: model:ir.ui.menu,name:alc_label_printing_reception.select_printing_printer_menu
 #: model:ir.ui.view,arch_db:alc_label_printing_reception.select_printing_printer_form_view
 msgid "Select Printing Printer"
-msgstr "Sélectionner une imprimante"
+msgstr ""
 
 #. module: alc_label_printing_reception
 #: code:addons/alc_label_printing_reception/wizards/select_printing_printer.py:22
 #, python-format
 msgid "You don't have the permission to change the printer on users."
 msgstr ""
-"Vous ne disposez pas des permissions nécessaires pour changer l'imprimante "
-"sur les utilisateurs."
 
 #. module: alc_label_printing_reception
 #: model:ir.model,name:alc_label_printing_reception.model_select_printing_printer
 msgid "select.printing.printer"
-msgstr "select.printing.printer"
+msgstr ""
+
