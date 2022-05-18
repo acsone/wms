@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import base64
+import hashlib
 import logging
 import os
 
@@ -44,6 +45,8 @@ PRODUCT_FILE_MAPPING = {
 
 PDF_FIELDS = ["pdf_file-fr_BE", "pdf_file-nl_BE", "pdf_file-en_GB"]
 
+IMPORTED_FILE = {}
+
 
 def process_product_row(root, rd):
     link_video = (
@@ -72,16 +75,23 @@ def process_product_row(root, rd):
             if lang == "en_GB":
                 lang = "en_US"
             img_path = os.path.join(root, rd[pdf_field])
-            vals_media = {
-                "name": os.path.basename(img_path),
-                "file_type": "media",
-                "data": base64.b64encode(open(img_path).read()),
-                "lang": lang,
-            }
-            media = ENV["storage.media"].create(vals_media)
+
+            file_content = open(img_path).read()
+            md5_hash = hashlib.md5(file_content).hexdigest()
+            media_id = IMPORTED_FILE.get(md5_hash)
+            if not media_id:
+                vals_media = {
+                    "name": os.path.basename(img_path),
+                    "file_type": "media",
+                    "data": base64.b64encode(file_content),
+                    "lang": lang,
+                }
+                media = ENV["storage.media"].create(vals_media)
+                media_id = media.id
+                IMPORTED_FILE[md5_hash] = media_id
             vals_rel = {
                 "sequence": sequence,
-                "media_id": media.id,
+                "media_id": media_id,
                 "product_tmpl_id": product.id,
             }
             ENV["product.media.relation"].create(vals_rel)
