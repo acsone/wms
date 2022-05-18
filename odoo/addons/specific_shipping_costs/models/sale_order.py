@@ -81,6 +81,10 @@ class SaleOrder(models.Model):
             AND used_for_delivery_fee = false AND carrier_id = %s;
             """
             self.env.cr.execute(query_update, query_args)
+            # Filter out sale orders with a delivery line already
+            round_saleorders = round_saleorders.filtered(
+                lambda r: not r.used_for_fixed_fee
+            )
 
         if used_to_charge_delivery_fee == "used_for_fixed_fee":
             query_select = """SELECT amount_untaxed FROM sale_order
@@ -98,6 +102,10 @@ class SaleOrder(models.Model):
             AND used_for_fixed_fee = false AND carrier_id = %s;
             """
             self.env.cr.execute(query_update, query_args)
+            # Filter out sale orders with a delivery line already
+            round_saleorders = round_saleorders.filtered(
+                lambda r: not r.used_for_fixed_fee
+            )
 
         do_not_charge_fee = self._check_charge_fee(
             carrier, sum_ordered, used_to_charge_delivery_fee
@@ -105,8 +113,9 @@ class SaleOrder(models.Model):
         if do_not_charge_fee:
             return
 
-        round_saleorders = round_saleorders.filtered(
-            lambda r: r.carrier_id == carrier
-        ).sorted(key=lambda r: r.id, reverse=True)[0]
-        for order in round_saleorders.sudo():
-            order._create_delivery_line(carrier, fee)
+        if round_saleorders:
+            round_saleorders = round_saleorders.filtered(
+                lambda r: r.carrier_id == carrier
+            ).sorted(key=lambda r: r.id, reverse=True)[0]
+            for order in round_saleorders.sudo():
+                order._create_delivery_line(carrier, fee)
