@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+  <record id="reception_change_printer" model="res.groups">
+    <field name="name">RECEPTION - Change printer</field>
+  </record>
+</odoo>
