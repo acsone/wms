@@ -15,9 +15,9 @@ ClusterPickingBase.component.methods.screen_title = function() {
   let title = screen_title_method.bind(this)();
   if (_.isEmpty(this.current_batch()) || this.state_is("confirm_start")) return title;
 
-  const delivery_round = this.current_batch().delivery_round;
-  if (delivery_round && delivery_round.code) {
-    title = delivery_round.code + " > " + title;
+  const delivery_round_code = this?.current_picking()?.delivery_round?.code;
+  if (delivery_round_code) {
+    title = delivery_round_code + " > " + title;
   }
   return title;
 };

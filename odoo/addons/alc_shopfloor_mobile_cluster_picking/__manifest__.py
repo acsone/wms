@@ -12,6 +12,7 @@
     "website": "https://acsone.eu/",
     "depends": [
         "alc_shopfloor_cluster_picking",
+        "alc_shopfloor_delivery_rounds",
         "alc_shopfloor_mobile",
         "alc_stock_picking_batch_delivery_rounds",
     ],

@@ -14,10 +14,13 @@ methods.detail_fields = function() {
   const new_result = [
     ...result,
     {
-      path: "delivery_round.name",
+      path: "delivery_rounds",
       label: this.$t(
-        "alc_shopfloor_mobile_cluster_picking.batch_picking_detail.delivery_round"
+        "alc_shopfloor_mobile_cluster_picking.batch_picking_detail.delivery_rounds"
       ),
+      renderer: function(rec, field) {
+        return rec.delivery_rounds.map(d => d.name).join(" | ");
+      },
     },
     {
       path: "device",

@@ -18,6 +18,6 @@
         "stock_picking_batch_creation",
         "alc_stock_picking_batch_assignment",
     ],
-    "data": ["views/stock_picking_wave.xml"],
+    "data": ["views/res_users.xml", "views/stock_picking_wave.xml"],
     "demo": [],
 }

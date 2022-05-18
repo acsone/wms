@@ -25,6 +25,7 @@ class TestGetPickingsToClusterByDeliveryRounds(ClusterPickingDeliveryCommonFeatu
         Test case: we ask for a cluster for operator 1
         Expected result: Pickings to be retrieved are the ones related to delivery 2
         """
+        self.operator_1.cluster_by_delivery_round = True
         make_picking_batch = self.makePickingBatch.create(
             {
                 "user_id": self.operator_1.id,
@@ -36,7 +37,9 @@ class TestGetPickingsToClusterByDeliveryRounds(ClusterPickingDeliveryCommonFeatu
                 ],
             }
         )
-        candidates_pickings = make_picking_batch._search_pickings()
+        candidates_pickings = make_picking_batch._candidates_pickings_to_batch(
+            user=self.operator_1
+        )
         picks_ali = self.pick4 | self.pick5
         self.assertEqual(candidates_pickings, picks_ali)
 
@@ -46,6 +49,7 @@ class TestGetPickingsToClusterByDeliveryRounds(ClusterPickingDeliveryCommonFeatu
         Test case: we ask for a cluster for operator 2
         Expected result: Pickings to be retrieved are the ones related to delivery 1
         """
+        self.operator_1.cluster_by_delivery_round = True
         make_picking_batch = self.makePickingBatch.create(
             {
                 "user_id": self.operator_2.id,
@@ -57,6 +61,29 @@ class TestGetPickingsToClusterByDeliveryRounds(ClusterPickingDeliveryCommonFeatu
                 ],
             }
         )
-        candidates_pickings = make_picking_batch._search_pickings()
+        candidates_pickings = make_picking_batch._candidates_pickings_to_batch(
+            user=self.operator_1
+        )
         picks_ali = self.pick6
+        self.assertEqual(candidates_pickings, picks_ali)
+
+    def test_can_mix_delivery_rounds(self):
+        self.operator_1.cluster_by_delivery_round = False
+
+        make_picking_batch = self.makePickingBatch.create(
+            {
+                "user_id": self.operator_1.id,
+                "picking_type_ids": [(4, self.picking_type_ali.id)],
+                "stock_device_type_ids": [
+                    (4, self.device1.id),
+                    (4, self.device2.id),
+                    (4, self.device3.id),
+                ],
+            }
+        )
+        candidates_pickings = make_picking_batch._candidates_pickings_to_batch(
+            user=self.operator_1
+        )
+        # picks 4 and 5 and in deliveryround 2, pick6 is in deliveryround 1
+        picks_ali = self.pick4 | self.pick5 | self.pick6
         self.assertEqual(candidates_pickings, picks_ali)

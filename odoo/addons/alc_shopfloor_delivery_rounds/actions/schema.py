@@ -9,12 +9,9 @@ class ShopfloorSchemaAction(Component):
 
     _inherit = "shopfloor.schema.action"
 
-    def picking_batch(self, with_pickings=False):
-        schema = super(ShopfloorSchemaAction, self).picking_batch(
-            with_pickings=with_pickings
-        )
-        schema["device"] = {"required": False, "type": "string"}
-        schema["delivery_rounds"] = self._schema_list_of(
+    def picking(self, with_pickings=False):
+        schema = super(ShopfloorSchemaAction, self).picking()
+        schema["delivery_round"] = self._schema_dict_of(
             self.delivery_round(), required=False
         )
         return schema
