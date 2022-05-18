@@ -53,4 +53,4 @@ msgstr "Bon de commande"
 #: code:addons/alc_eshop_sale_cart_confirm/services/cart.py:30
 #, python-format
 msgid "You are no allowed to pass an order on the EShop"
-msgstr "Vous n'êtes pas authorisé à passer des commandes sur ce site."
+msgstr "Vous n'êtes pas autorisé à passer des commandes sur ce site."

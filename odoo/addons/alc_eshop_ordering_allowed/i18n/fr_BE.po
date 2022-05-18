@@ -21,7 +21,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:alc_eshop_ordering_allowed.field_res_users_eshop_ordering_allowed
 #: model:ir.model.fields,field_description:alc_eshop_ordering_allowed.field_shopinvader_partner_eshop_ordering_allowed
 msgid "Eshop ordering allowed"
-msgstr "Commandes en ligne authorisées"
+msgstr "Commandes en ligne autorisées"
 
 #. module: alc_eshop_ordering_allowed
 #: model:ir.ui.view,arch_db:alc_eshop_ordering_allowed.res_partner_search_view
