@@ -833,3 +833,172 @@ class TestShippingCosts(SavepointCase):
         self.dr2._assign_pickings(so3.picking_ids)
         self.dr2._deliver(background=False)
         self.assertTrue(self.get_shipping_cost(so3), self.fee)
+
+    def test_shipping_costs_twice_at_bo(self):
+
+        product = self.env["product.product"].create(
+            {
+                "name": "Unittest product out of stock",
+                "uom_id": self.env.ref("product.product_uom_unit").id,
+                "type": "consu",
+            }
+        )
+        so = self.env["sale.order"].create(
+            {
+                "partner_id": self.partner3.id,
+                "carrier_id": self.delivery_method_5.id,
+                "order_line": [
+                    (
+                        0,
+                        0,
+                        {
+                            "name": self.p1.name,
+                            "product_id": self.p1.id,
+                            "product_uom": self.ref("product.product_uom_unit"),
+                            "product_uom_qty": 5,
+                            "price_unit": 5,
+                        },
+                    ),
+                    (
+                        0,
+                        0,
+                        {
+                            "name": product.name,
+                            "product_id": product.id,
+                            "product_uom": self.ref("product.product_uom_unit"),
+                            "product_uom_qty": 15,
+                            "price_unit": 1,
+                        },
+                    ),
+                ],
+            }
+        )
+
+        so.action_confirm()
+        pick = so.picking_ids
+        self.dr1._assign_pickings(pick)
+        pick.with_context(test_mode=True).do_transfer()
+        self.dr1._deliver(background=False)
+        self.assertEqual(self.get_shipping_cost(so), self.fixed_fee + self.fee)
+
+        bo = self.env["stock.picking"].search([("backorder_id", "=", pick[0].id)])
+        inventory = self.env["stock.inventory"].create(
+            {
+                "name": "Test",
+                "location_id": self.env.ref("stock.stock_location_stock").id,
+                "filter": "partial",
+            }
+        )
+        inventory.prepare_inventory()
+        self.env["stock.inventory.line"].create(
+            {
+                "inventory_id": inventory.id,
+                "product_id": product.id,
+                "product_uom_id": self.env.ref("product.product_uom_unit").id,
+                "product_qty": 100,
+                "location_id": self.env.ref("stock.stock_location_stock").id,
+            }
+        )
+        inventory.action_done()
+        self.dr2._assign_pickings(bo)
+        bo.force_assign()
+
+        bo.with_context(test_mode=True).do_transfer()
+        self.dr2._deliver(background=False)
+        # Check shipping cost are not considered twice
+        self.assertEqual(self.get_shipping_cost(so), self.fixed_fee + self.fee)
+
+    def test_shipping_costs_twice_at_bo_and_new_so(self):
+
+        product = self.env["product.product"].create(
+            {
+                "name": "Unittest product out of stock",
+                "uom_id": self.env.ref("product.product_uom_unit").id,
+                "type": "consu",
+            }
+        )
+        so = self.env["sale.order"].create(
+            {
+                "partner_id": self.partner3.id,
+                "carrier_id": self.delivery_method_5.id,
+                "order_line": [
+                    (
+                        0,
+                        0,
+                        {
+                            "name": self.p1.name,
+                            "product_id": self.p1.id,
+                            "product_uom": self.ref("product.product_uom_unit"),
+                            "product_uom_qty": 5,
+                            "price_unit": 5,
+                        },
+                    ),
+                    (
+                        0,
+                        0,
+                        {
+                            "name": product.name,
+                            "product_id": product.id,
+                            "product_uom": self.ref("product.product_uom_unit"),
+                            "product_uom_qty": 15,
+                            "price_unit": 1,
+                        },
+                    ),
+                ],
+            }
+        )
+
+        so.action_confirm()
+        pick = so.picking_ids
+        self.dr1._assign_pickings(pick)
+        pick.with_context(test_mode=True).do_transfer()
+        self.dr1._deliver(background=False)
+        self.assertEqual(self.get_shipping_cost(so), self.fixed_fee + self.fee)
+
+        bo = self.env["stock.picking"].search([("backorder_id", "=", pick[0].id)])
+        inventory = self.env["stock.inventory"].create(
+            {
+                "name": "Test",
+                "location_id": self.env.ref("stock.stock_location_stock").id,
+                "filter": "partial",
+            }
+        )
+        inventory.prepare_inventory()
+        self.env["stock.inventory.line"].create(
+            {
+                "inventory_id": inventory.id,
+                "product_id": product.id,
+                "product_uom_id": self.env.ref("product.product_uom_unit").id,
+                "product_qty": 100,
+                "location_id": self.env.ref("stock.stock_location_stock").id,
+            }
+        )
+        inventory.action_done()
+
+        so1 = self.env["sale.order"].create(
+            {
+                "partner_id": self.partner3.id,
+                "carrier_id": self.delivery_method_5.id,
+                "order_line": [
+                    (
+                        0,
+                        0,
+                        {
+                            "name": self.p1.name,
+                            "product_id": self.p1.id,
+                            "product_uom": self.ref("product.product_uom_unit"),
+                            "product_uom_qty": 1,
+                            "price_unit": 20,
+                        },
+                    )
+                ],
+            }
+        )
+        so1.action_confirm()
+        self.dr2._assign_pickings(so1.picking_ids)
+        self.dr2._assign_pickings(bo)
+        self.dr2._deliver(background=False)
+
+        self.assertEqual(self.get_shipping_cost(so1), self.fixed_fee + self.fee)
+        # Check shipping cost are not considered twice
+        self.assertEqual(self.get_shipping_cost(so), self.fixed_fee + self.fee)
