@@ -89,13 +89,18 @@ def process_product_row(root, rd):
                 media = ENV["storage.media"].create(vals_media)
                 media_id = media.id
                 IMPORTED_FILE[md5_hash] = media_id
-            vals_rel = {
-                "sequence": sequence,
-                "media_id": media_id,
-                "product_tmpl_id": product.id,
-            }
-            ENV["product.media.relation"].create(vals_rel)
-            updated = True
+            else:
+                media = ENV["storage.media"].browse(media_id)
+                if media.lang != lang:
+                    media.lang = False
+            if media_id not in product.mapped("media_ids.media_id.id"):
+                vals_rel = {
+                    "sequence": sequence,
+                    "media_id": media_id,
+                    "product_tmpl_id": product.id,
+                }
+                ENV["product.media.relation"].create(vals_rel)
+                updated = True
 
         if updated:
             desc = "PIM Product %s updated" % product.display_name
