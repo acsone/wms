@@ -14,6 +14,16 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_eshop_info_banner
+#: selection:alc.eshop.info.banner,visibility:0
+msgid "ALL"
+msgstr ""
+
+#. module: alc_eshop_info_banner
+#: selection:alc.eshop.info.banner,visibility:0
+msgid "Authenticated Only"
+msgstr ""
+
+#. module: alc_eshop_info_banner
 #: model:ir.model.fields,field_description:alc_eshop_info_banner.field_alc_eshop_info_banner_create_uid
 msgid "Created by"
 msgstr ""
@@ -91,7 +101,12 @@ msgid "Past banners from today"
 msgstr ""
 
 #. module: alc_eshop_info_banner
-#: code:addons/alc_eshop_info_banner/models/alc_eshop_info_banner.py:30
+#: selection:alc.eshop.info.banner,visibility:0
+msgid "Public Only"
+msgstr ""
+
+#. module: alc_eshop_info_banner
+#: code:addons/alc_eshop_info_banner/models/alc_eshop_info_banner.py:39
 #, python-format
 msgid "The defined period is not a valid (%s > %s)"
 msgstr ""
@@ -109,6 +124,11 @@ msgstr ""
 #. module: alc_eshop_info_banner
 #: model:ir.ui.view,arch_db:alc_eshop_info_banner.alc_eshop_info_banner_search_view
 msgid "Upcoming banners from today"
+msgstr ""
+
+#. module: alc_eshop_info_banner
+#: model:ir.model.fields,field_description:alc_eshop_info_banner.field_alc_eshop_info_banner_visibility
+msgid "Visibility"
 msgstr ""
 
 #. module: alc_eshop_info_banner
