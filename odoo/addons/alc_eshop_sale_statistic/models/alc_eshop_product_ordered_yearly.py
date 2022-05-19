@@ -27,7 +27,7 @@ class AlcEshopProductOrderedYearly(models.Model):
 SELECT
     ROW_NUMBER() OVER (ORDER BY partner_id) AS id,
     so.partner_id,
-    SUM(price_subtotal) AS total,
+    SUM(qty_to_invoice * price_reduce_taxexcl) AS total,
     extract(year from so.date_order)::INTEGER AS order_year,
     pt.is_food,
     pt.is_meds,
