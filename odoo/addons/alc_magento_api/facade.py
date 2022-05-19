@@ -238,7 +238,9 @@ class FacadeBackorders(Facade):
     def _json_for_xml(self, data):
         date_cancelled = self._datetime_to_date(data.pop("date_cancelled"))
         items = data.pop("items")
+        items = [i for i in items if i.get("state") == "cancel"]
         for item in items:
+            item.pop("state", None)
             item["date_cancelled"] = date_cancelled
             item.update(item.pop("product_id"))
         return data, items
@@ -256,6 +258,7 @@ class FacadeBackorders(Facade):
 
     def _get_parser(self):
         parser_move_lines = [
+            "state",
             "product_qty:qty_ordered",
             "remaining_qty:qty_cancelled",
             ("product_id", ["default_code:sku"]),
