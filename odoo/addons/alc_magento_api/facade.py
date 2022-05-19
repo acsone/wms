@@ -288,7 +288,9 @@ class FacadePackingSlip(Facade):
         country_dict = partner_dict.pop("country_id")
         partner_dict["country"] = country_dict["name"]
         data.update(partner_dict)
+        data["items"] = [i for i in data["items"] if i.get("state") != "cancel"]
         for item in data["items"]:
+            item.pop("state", None)
             item.update(item.pop("product_id"))
             lots = item.pop("lot_ids")
             if lots:  # we should not need to drop other lots in future versions
@@ -331,6 +333,7 @@ class FacadePackingSlip(Facade):
         parser_lot = ["name:lot", "expiry_date:peremption"]
         parser_move_lines = [
             "name",
+            "state",
             "product_qty:qty",
             ("prix_net_htva", self._get_price_from_move),
             ("prix_brut_htva", self._get_price_from_move),
