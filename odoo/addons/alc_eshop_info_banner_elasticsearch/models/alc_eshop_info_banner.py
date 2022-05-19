@@ -77,4 +77,5 @@ class AlcEshopInfoMessage(models.Model):
                 date_start=utils.odoo_str_dt_to_dt_utc(rec.date_start).isoformat(),
                 date_end=utils.odoo_str_dt_to_dt_utc(rec.date_end).isoformat(),
                 type=rec.type,
+                visibility=rec.visibility,
             )

@@ -17,6 +17,15 @@ class AlcEshopInfoBanner(models.Model):
         required=True,
         default="info",
     )
+    visibility = fields.Selection(
+        selection=[
+            ("all", "ALL"),
+            ("auth_only", "Authenticated Only"),
+            ("public_only", "Public Only"),
+        ],
+        required=True,
+        default="auth_only",
+    )
     date_start = fields.Datetime(required=True)
     date_end = fields.Datetime(required=True)
 
