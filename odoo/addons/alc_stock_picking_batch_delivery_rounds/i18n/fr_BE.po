@@ -17,13 +17,23 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_stock_picking_batch_delivery_rounds
-#: model:ir.model.fields,field_description:alc_stock_picking_batch_delivery_rounds.field_stock_picking_wave_delivery_round_id
-msgid "Delivery Round"
+#: model:ir.model.fields,field_description:alc_stock_picking_batch_delivery_rounds.field_res_users_cluster_by_delivery_round
+msgid "Create cluster pickings by delivery rounds for this operator"
+msgstr ""
+
+#. module: alc_stock_picking_batch_delivery_rounds
+#: model:ir.model.fields,field_description:alc_stock_picking_batch_delivery_rounds.field_stock_picking_wave_delivery_round_ids
+msgid "Delivery Round(s)"
 msgstr ""
 
 #. module: alc_stock_picking_batch_delivery_rounds
 #: model:ir.model,name:alc_stock_picking_batch_delivery_rounds.model_stock_picking_wave
 msgid "Picking Wave"
+msgstr ""
+
+#. module: alc_stock_picking_batch_delivery_rounds
+#: model:ir.model,name:alc_stock_picking_batch_delivery_rounds.model_res_users
+msgid "Users"
 msgstr ""
 
 #. module: alc_stock_picking_batch_delivery_rounds
