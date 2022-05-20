@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-import unittest
 
 from freezegun import freeze_time
 
@@ -152,22 +151,11 @@ class TestSaleStatisticsMonthly(TestSaleStatistics):
             self.assertEqual(0, res["size"])
             self.assertEqual(0, len(res["data"]))
 
-    @unittest.skip(
-        "TO Be REFACTORED. The sql view use now(). "
-        "The result is therefore not predictable"
-    )
-    @freeze_time("2022-02-22 00:00:00")
     def test_five_years(self):
-        expected_data = [
-            {"food": 14, "equipment": 0, "meds": 0},
-            {"food": 0, "equipment": 0, "meds": 0},
-            {"food": 165, "equipment": 0, "meds": 0},
-            {"food": 284, "equipment": 0, "meds": 569},
-            {"food": 4, "equipment": 0, "meds": 10},
-        ]
+        # no need for freeze time, data is generated relative to now
         with self.sale_statistics_service(
-            authenticated_partner_id=self.partner_1.id
+            authenticated_partner_id=self.partner_5y.id
         ) as service:
             result = service.five_years()
 
-        self.assertDictEqual(result, {"size": 5, "data": expected_data})
+        self.assertDictEqual(result, {"size": 5, "data": self.expected_5y})

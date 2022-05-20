@@ -40,6 +40,7 @@ class TestSaleStatistics(SavepointCase, ComponentMixin):
         )
         cls.partner_1 = cls.env["res.partner"].create({"name": "partner_1"})
         cls.partner_2 = cls.env["res.partner"].create({"name": "partner_2"})
+        cls.partner_5y = cls.env["res.partner"].create({"name": "partner_5y"})
         for month, qties in [
             ("01", [5, 3]),
             ("02", [1, 3]),
@@ -76,17 +77,33 @@ class TestSaleStatistics(SavepointCase, ComponentMixin):
         )
         cls.env["alc.eshop.product.ordered.qty"].refresh_view()
 
-        cls.sell(cls.product_1, 7, "2015-12-12 00:00:00")  # old data is fine
-        cls.sell(cls.product_1, 14, "2018-12-12 00:00:00")
-        cls.sell(cls.product_1, 21, "2042-12-12 00:00:00")  # service resist to bad data
+        # 5 years test
+        year_now = datetime.now().year
+        date_exp = "%s-12-12 00:00:00"
+        cls.expected_5y = [
+            {"food": 4, "equipment": 0, "meds": 0},
+            {"food": 3, "equipment": 0, "meds": 0},
+            {"food": 2, "equipment": 0, "meds": 0},
+            {"food": 0, "equipment": 0, "meds": 0},
+            {"food": 0, "equipment": 0, "meds": 14},
+        ]
+        # old data is fine
+        cls.sell(cls.product_1, 7, date_exp % (year_now - 5), partner=cls.partner_5y)
+        cls.sell(cls.product_1, 4, date_exp % (year_now - 4), partner=cls.partner_5y)
+        cls.sell(cls.product_1, 3, date_exp % (year_now - 3), partner=cls.partner_5y)
+        cls.sell(cls.product_1, 2, date_exp % (year_now - 2), partner=cls.partner_5y)
+        cls.sell(cls.product_2, 14, date_exp % year_now, partner=cls.partner_5y)
+        # service resist to (bad) future data
+        cls.sell(cls.product_1, 21, date_exp % (year_now + 1), partner=cls.partner_5y)
         cls.env["alc.eshop.product.ordered.yearly"].refresh_view()
 
     @classmethod
-    def sell(cls, product, qty, ttime, confirm=True, deliver=False):
+    def sell(cls, product, qty, ttime, confirm=True, deliver=False, partner=False):
+        partner = partner or cls.partner_1
         with freeze_time(ttime):
             so = cls.env["sale.order"].create(
                 {
-                    "partner_id": cls.partner_1.id,
+                    "partner_id": partner.id,
                     "sale_channel": "web",
                     "date_order": ttime,
                     "order_line": [
