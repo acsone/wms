@@ -105,7 +105,13 @@ class ProductProduct(models.Model):
         return res
 
     def write(self, vals):
-        watched_fields = ["list_price", "categ_id", "price_category_id", "price_extra"]
+        watched_fields = [
+            "active",
+            "list_price",
+            "categ_id",
+            "price_category_id",
+            "price_extra",
+        ]
         updated_fields = [f for f in watched_fields if f in vals]
         v = lambda r, f: r[f].id if f in ["categ_id", "price_category_id"] else r[f]
         filter_update = lambda p: any(v(p, f) != vals[f] for f in updated_fields)
