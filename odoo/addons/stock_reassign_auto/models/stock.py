@@ -124,8 +124,48 @@ class StockMove(models.Model):
     @job(default_channel="root.background.stock_reassign_trial")  # priority=6
     def _reassign_trial(self, products):
         """ Find pickings and relaunch reservation """
-        if True:  # pylint: disable=using-constant-test
+        IrConfigParameter = self.env["ir.config_parameter"]
+        enabled = IrConfigParameter.get_param(
+            "stock_reassign_auto.reassign_trial_enabled", ""
+        ).lower() in ["true", "1", "t", "y", "yes"]
+        if not enabled:
             return
+        for product in products:
+            for picking in self._iter_and_lock_reassignable_pickings(product):
+                self._do_reassign_product(picking, product)
+                if product.qty_available <= 0:
+                    break
+
+    @api.model
+    def _do_reassign_product(self, picking, product):
+        # unreserve moves having an operation for that product
+        # Note: (re)check availability (action_assign) does not
+        # work on added move where an operation already exists for
+        # that product. To not recompute all the quants of the
+        # picking, we delete only the pack operation to recompute.
+        # No need to perform the assignment now (new pack operation
+        # creation), it is performed later when the procurement is
+        # run.
+        moves_to_assign = picking.move_lines.filtered(
+            lambda m, p=product: m.product_id == product and m.state == "confirmed"
+        )
+        operations_to_recompute = moves_to_assign.mapped("pack_operation_ids")
+        if operations_to_recompute:
+            _logger.debug("Cleaning operations %s", operations_to_recompute.ids)
+            # As we de-reserve moves, we need to include them in the following
+            # assignment. This happens when there are multiple moves for a same
+            # product but only some were assigned (we had a partial match in
+            # initial search).
+            moves_to_unreserve = operations_to_recompute.mapped(
+                "linked_move_operation_ids.move_id"
+            )
+            moves_to_assign |= moves_to_unreserve
+            moves_to_unreserve.do_unreserve()
+        _logger.debug("Reserve corresponding moves %s", moves_to_assign)
+        moves_to_assign.action_assign()
+
+    @api.model
+    def _iter_and_lock_reassignable_pickings(self, products):
         # Do not process products not available in stock
         products_not_available = products.filtered(lambda p: p.qty_available <= 0)
         if products_not_available:
@@ -150,28 +190,19 @@ class StockMove(models.Model):
             return
         _logger.debug("Products received are in backorder")
         pickings = moves_pickings.mapped("picking_id")
-        # unreserve moves having an operation for that product
-        # Note: (re)check availability (action_assign) does not
-        # work on added move where an operation already exists for
-        # that product. To not recompute all the quants of the
-        # picking, we delete only the pack operation to recompute.
-        # No need to perform the assignment now (new pack operation
-        # creation), it is performed later when the procurement is
-        # run.
-        operations_to_recompute = pickings.mapped("pack_operation_ids").filtered(
-            lambda op: op.product_id in products
-        )
-        if operations_to_recompute:
-            _logger.debug("Cleaning operations %s", operations_to_recompute.ids)
-            # As we de-reserve moves, we need to include them in the following
-            # assignment. This happens when there are multiple moves for a same
-            # product but only some were assigned (we had a partial match in
-            # initial search).
-            moves_pickings |= operations_to_recompute.mapped(
-                "linked_move_operation_ids.move_id"
+        for picking in pickings:
+            self.env.cr.execute(
+                """
+                SELECT
+                    id
+                FROM
+                    stock_picking
+                WHERE
+                    id = %s
+                FOR UPDATE OF stock_picking SKIP LOCKED;
+            """,
+                (picking.id,),
             )
-            operations_to_recompute.mapped(
-                "linked_move_operation_ids.move_id"
-            ).do_unreserve()
-        _logger.debug("Reserve corresponding moves %s", moves_pickings)
-        moves_pickings.action_assign()
+            _id = [r[0] for r in self.env.cr.fetchall()]
+            if _id:
+                yield self.env["stock.picking"].browse(_id)

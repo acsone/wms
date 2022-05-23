@@ -10,11 +10,12 @@
     "depends": [
         "alc_base_auto_join",
         "alc_stock_move_direction",
+        "alc_stock_move_operation",
         "stock_picking_assignment",
         "stock_picking_subcode",
         "queue_job",
     ],
-    "data": [],
+    "data": ["data/ir_config_parameter.xml"],
     "installable": True,
     "auto_install": False,
     "license": "AGPL-3",

@@ -38,3 +38,21 @@ class MakePickingBatch(models.TransientModel):
                 first_picking_to_cluster
             )
         )
+
+    def _lock_selected_picking(self, picking):
+        self.env.cr.execute(
+            """
+            SELECT
+                id
+            FROM
+                stock_picking
+            WHERE
+                id = %s
+            FOR UPDATE OF stock_picking SKIP LOCKED;
+        """,
+            (picking.id,),
+        )
+        _id = [r[0] for r in self.env.cr.fetchall()]
+        if _id:
+            return super(MakePickingBatch, self)._lock_selected_picking(picking)
+        return None

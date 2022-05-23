@@ -25,8 +25,8 @@ class StockPicking(models.Model):
     def action_assign(self):
         """
         Hack: When we confirm a wave picking (confirm_picking method on stock_picking_wave),
-        the basic mecanism assign the pickings to start the cluster. In the case of Alcyon,
-        pickings are already assigned. We don't need to go through the mecanism once again.
+        the basic mechanism assign the pickings to start the cluster. In the case of Alcyon,
+        pickings are already assigned. We don't need to go through the mechanism once again.
         """
         self2 = self
         if self.env.context.get("from_cluster_confirm"):
