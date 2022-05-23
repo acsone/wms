@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="veterinary_group_search_view" model="ir.ui.view">
+        <field name="name">veterinary.group.search</field>
+        <field name="model">veterinary.group</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <field name="partner_ids" />
+                <field name="product_template_ids" />
+            </search>
+        </field>
+    </record>
+
+    <record id="veterinary_group_tree_view" model="ir.ui.view">
+        <field name="name">veterinary.group.tree</field>
+        <field name="model">veterinary.group</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="veterinary_group_form_view" model="ir.ui.view">
+        <field name="name">veterinary.group.form</field>
+        <field name="model">veterinary.group</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button
+            name="action_add_partners"
+            type="object"
+            class="btn btn-primary"
+            string="Add Partners"
+          />
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name" />
+                        <field name="partner_ids" />
+                        <field name="product_template_ids" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="veterinary_group_act_window">
+        <field name="name">Veterinary Groups</field>
+        <field name="res_model">veterinary.group</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_type">form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+        <field name="search_view_id" ref="veterinary_group_search_view" />
+        <field name="view_id" ref="veterinary_group_tree_view" />
+    </record>
+
+    <menuitem
+    id="veterinary_group_menu"
+    name="Veterinary Groups"
+    parent="sales_team.menu_sales"
+    action="veterinary_group_act_window"
+    sequence="100"
+  />
+</odoo>
