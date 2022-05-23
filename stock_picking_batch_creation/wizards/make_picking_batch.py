@@ -237,15 +237,45 @@ class MakePickingBatch(models.TransientModel):
                 continue
 
             # All conditions are OK : we keep the picking in the cluster
-            selected_picking_ids.append(picking.id)
-            total_weight += picking.total_weight_batch_picking
-            total_volume += picking.total_volume_batch_picking
-            total_nbr_picking_lines += picking.nbr_picking_lines
-            available_nbr_bins -= picking.nbr_bins_batch_picking
+            if self._lock_selected_picking(picking):
+                selected_picking_ids.append(picking.id)
+                total_weight += picking.total_weight_batch_picking
+                total_volume += picking.total_volume_batch_picking
+                total_nbr_picking_lines += picking.nbr_picking_lines
+                available_nbr_bins -= picking.nbr_bins_batch_picking
 
         selected_pickings = self.env["stock.picking"].browse(selected_picking_ids)
         unselected_pickings = pickings - selected_pickings
         return selected_pickings, unselected_pickings
+
+    def _lock_selected_picking(self, picking):
+        """ Method hook called once a picking is qualified to be added to the
+        batch. IT allows you to lock the selected picking and ensure that
+        nothing has changed in the timelapse between the search request and
+        the addition to the batch that will prevent a normal commit of the
+        transaction. If noting is returned by the method, the selected picking
+        will not be added to the batch.
+
+        Implementation example:
+
+        .. code-block:: python
+
+             self.env.cr.execute('''
+                SELECT
+                    id
+                FROM
+                    stock_picking
+                WHERE
+                    id = %s
+                FOR UPDATE OF stock_picking SKIP LOCKED;
+            ''', (picking.id, ))
+            _id = [r[0] for r in self.env.cr.fetchall()]
+            if _id:
+                return self.env["stock.picking"].browse(_id)
+            return None
+
+        """
+        return picking
 
     def _create_batch_values(self, user, device, pickings):
         return {
