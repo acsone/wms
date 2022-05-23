@@ -24,11 +24,11 @@ class PickingsService(Component):
         records = self._search(domain, **params)
         return self._paginate_search_records(domain, records)
 
-    def _search(self, domain=None, from_date=None, **params):
+    def _search(self, domain=None, from_date=None, canceled=False, **params):
         limit = params.pop("limit", None)
         per_page = params.pop("per_page", None) or limit
         domain = domain or self._get_domain(from_date=from_date)
-        return self._records(domain, per_page=per_page, **params)
+        return self._records(domain, per_page=per_page, canceled=canceled)
 
     @restapi.method(
         [(["/canceled"], "GET")],
@@ -37,15 +37,15 @@ class PickingsService(Component):
     )
     def search_canceled(self, from_date=None, **params):
         states = ["cancel"]
-        domain = self._get_domain(from_date=from_date, states=states, backorder=True)
+        domain = self._get_domain(from_date=from_date, states=states, canceled=True)
         records = self._search_canceled(domain, from_date=from_date, **params)
         return self._paginate_search_records(domain, records)
 
     def _search_canceled(self, domain=None, from_date=None, **params):
         domain = domain or self._get_domain(
-            from_date=from_date, states=["cancel"], backorder=True
+            from_date=from_date, states=["cancel"], canceled=True
         )
-        return self._search(domain, from_date=from_date, **params)
+        return self._search(domain, from_date=from_date, canceled=True, **params)
 
     @restapi.method(
         [(["/done"], "GET")],
@@ -113,7 +113,7 @@ class PickingsService(Component):
     def model(self):
         return self.env["stock.picking"]
 
-    def _get_domain(self, from_date=None, states=None, backorder=None):
+    def _get_domain(self, from_date=None, states=None, canceled=False):
         lid = self.env.ref("stock.stock_location_customers").id
         domain = [
             # the final client should not be a B2C customer it should be the VT
@@ -123,10 +123,9 @@ class PickingsService(Component):
             ("location_dest_id", "=", lid),
         ]
         if from_date:
-            domain += [("date_done", ">=", from_date)]
-        if backorder:
-            domain += [("backorder_id", "!=", False)]
-        if states:
+            date_key = "date_done" if states == ["done"] else "create_date"
+            domain += [(date_key, ">=", from_date)]
+        if states and not canceled:
             domain += [("state", "in", states)]
         return domain
 
@@ -134,9 +133,21 @@ class PickingsService(Component):
         domain = self._get_domain() + [("id", "=", _id)]
         return self.model.search(domain)
 
-    def _records(self, domain, page=1, per_page=10):
+    def _records(self, domain, page=1, per_page=10, canceled=False):
         offset = per_page * (page - 1) if per_page and page else 0
-        return self.model.search(domain, limit=per_page, offset=offset)
+        records = self.model.search(domain, limit=per_page, offset=offset)
+        # of course, this violates the per_page argument.
+        # to bypass this, we should use the trick to have the ORM transform the domain
+        # and inject an additional where in the query.
+        # for now this is only used in magento-api which does not put any limit,
+        # so it's not worth the complexity
+        # BTW, at this point wouldn't it be easier to look for move lines and return the
+        # picking ids? problem is we filter on customer_id, so we need plenty of joins
+        if canceled:
+            key = "cancel"
+            filter_r = lambda r: r.state == key or key in r.mapped("move_lines.state")
+            records = records.filtered(filter_r)
+        return records
 
     def _paginate_search_records(self, domain, records):
         total_count = self.model.search_count(domain)
