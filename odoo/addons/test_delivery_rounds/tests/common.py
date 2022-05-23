@@ -84,3 +84,5 @@ class TestDeliveryRound(common.DeliveryRoundTestCase):
                 "name": "Alcyon",
             }
         )
+
+        cls.warehouse_1._clear_stock_locations_boundaries_cache()
