@@ -124,8 +124,6 @@ class StockMove(models.Model):
     @job(default_channel="root.background.stock_reassign_trial")  # priority=6
     def _reassign_trial(self, products):
         """ Find pickings and relaunch reservation """
-        if True:  # pylint: disable=using-constant-test
-            return
         # Do not process products not available in stock
         products_not_available = products.filtered(lambda p: p.qty_available <= 0)
         if products_not_available:
