@@ -15,14 +15,6 @@ TITLE_XML_ID_BY_B2C_KEY = {
 class ResPartner(models.Model):
     _inherit = "res.partner"
 
-    _sql_constraints = [
-        (
-            "ref_unique",
-            "EXCLUDE (ref WITH =) WHERE (ref <> '' or ref is not null)",
-            _("This reference already exists."),
-        )
-    ]
-
     @api.depends("partner_type", "is_b2c_customer")
     def _compute_is_student(self):
         """The student category is also used as a miscellaneous category."""
