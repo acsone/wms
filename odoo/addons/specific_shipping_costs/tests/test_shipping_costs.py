@@ -113,42 +113,8 @@ class TestShippingCosts(SavepointCase):
             }
         )
         # Add some stock for p1 and p2
-        inventory = cls.env["stock.inventory"].create(
-            {
-                "name": "Test",
-                "location_id": cls.env.ref("stock.stock_location_stock").id,
-                "filter": "partial",
-            }
-        )
-        inventory.prepare_inventory()
-        cls.env["stock.inventory.line"].create(
-            {
-                "inventory_id": inventory.id,
-                "product_id": cls.p1.id,
-                "product_uom_id": cls.env.ref("product.product_uom_unit").id,
-                "product_qty": 100,
-                "location_id": cls.env.ref("stock.stock_location_stock").id,
-            }
-        )
-        inventory.action_done()
-        inventory = cls.env["stock.inventory"].create(
-            {
-                "name": "Test",
-                "location_id": cls.env.ref("stock.stock_location_stock").id,
-                "filter": "partial",
-            }
-        )
-        inventory.prepare_inventory()
-        cls.env["stock.inventory.line"].create(
-            {
-                "inventory_id": inventory.id,
-                "product_id": cls.p2.id,
-                "product_uom_id": cls.env.ref("product.product_uom_unit").id,
-                "product_qty": 100,
-                "location_id": cls.env.ref("stock.stock_location_stock").id,
-            }
-        )
-        inventory.action_done()
+        cls._create_inventory(cls.p1, 100)
+        cls._create_inventory(cls.p2, 100)
         # Create a sale order 1 for partner 1
         cls.so1 = cls.env["sale.order"].create(
             {
@@ -202,6 +168,27 @@ class TestShippingCosts(SavepointCase):
         cls.dr2 = cls.env["round.instance"].create(
             {"template_id": cls.delivery_template2.id}
         )
+
+    @classmethod
+    def _create_inventory(cls, product, qty):
+        inventory = cls.env["stock.inventory"].create(
+            {
+                "name": "Test",
+                "location_id": cls.env.ref("stock.stock_location_stock").id,
+                "filter": "partial",
+            }
+        )
+        inventory.prepare_inventory()
+        cls.env["stock.inventory.line"].create(
+            {
+                "inventory_id": inventory.id,
+                "product_id": product.id,
+                "product_uom_id": cls.env.ref("product.product_uom_unit").id,
+                "product_qty": qty,
+                "location_id": cls.env.ref("stock.stock_location_stock").id,
+            }
+        )
+        inventory.action_done()
 
     def get_shipping_cost(self, so):
         """Returns the amount of shipping cost billed on a sale order"""
@@ -675,7 +662,7 @@ class TestShippingCosts(SavepointCase):
         new_order.action_confirm()
         self.dr1._assign_pickings(new_order.picking_ids)
         self.dr1._deliver(background=False)
-        self.assertTrue(self.get_shipping_cost(new_order), self.fee)
+        self.assertEqual(self.get_shipping_cost(new_order), self.fee)
         # Test with the same SO but we change the picking_type
         new_order = self.env["sale.order"].create(
             {
@@ -755,7 +742,7 @@ class TestShippingCosts(SavepointCase):
         self.dr2._assign_pickings(so3.picking_ids)
         self.dr2._deliver(background=False)
 
-        self.assertTrue(self.get_shipping_cost(so3), self.fixed_fee)
+        self.assertEqual(self.get_shipping_cost(so3), self.fixed_fee)
 
     def test_only_fixed_fee_even_though_help_with_fees(self):
         so3 = self.env["sale.order"].create(
@@ -781,7 +768,7 @@ class TestShippingCosts(SavepointCase):
         self.dr2._assign_pickings(so3.picking_ids)
         self.dr2._deliver(background=False)
 
-        self.assertTrue(self.get_shipping_cost(so3), self.fixed_fee)
+        self.assertEqual(self.get_shipping_cost(so3), self.fixed_fee)
 
     def test_fixed_and_extra_fees(self):
         so3 = self.env["sale.order"].create(
@@ -807,7 +794,7 @@ class TestShippingCosts(SavepointCase):
         self.dr2._assign_pickings(so3.picking_ids)
         self.dr2._deliver(background=False)
 
-        self.assertTrue(self.get_shipping_cost(so3), self.fixed_fee + self.fee)
+        self.assertEqual(self.get_shipping_cost(so3), self.fixed_fee + self.fee)
 
     def test__extra_fee_only(self):
         so3 = self.env["sale.order"].create(
@@ -832,7 +819,7 @@ class TestShippingCosts(SavepointCase):
         so3.action_confirm()
         self.dr2._assign_pickings(so3.picking_ids)
         self.dr2._deliver(background=False)
-        self.assertTrue(self.get_shipping_cost(so3), self.fee)
+        self.assertEqual(self.get_shipping_cost(so3), self.fee)
 
     def test_shipping_costs_twice_at_bo(self):
 
@@ -882,24 +869,7 @@ class TestShippingCosts(SavepointCase):
         self.assertEqual(self.get_shipping_cost(so), self.fixed_fee + self.fee)
 
         bo = self.env["stock.picking"].search([("backorder_id", "=", pick[0].id)])
-        inventory = self.env["stock.inventory"].create(
-            {
-                "name": "Test",
-                "location_id": self.env.ref("stock.stock_location_stock").id,
-                "filter": "partial",
-            }
-        )
-        inventory.prepare_inventory()
-        self.env["stock.inventory.line"].create(
-            {
-                "inventory_id": inventory.id,
-                "product_id": product.id,
-                "product_uom_id": self.env.ref("product.product_uom_unit").id,
-                "product_qty": 100,
-                "location_id": self.env.ref("stock.stock_location_stock").id,
-            }
-        )
-        inventory.action_done()
+        self._create_inventory(product, 100)
         self.dr2._assign_pickings(bo)
         bo.force_assign()
 
@@ -956,24 +926,7 @@ class TestShippingCosts(SavepointCase):
         self.assertEqual(self.get_shipping_cost(so), self.fixed_fee + self.fee)
 
         bo = self.env["stock.picking"].search([("backorder_id", "=", pick[0].id)])
-        inventory = self.env["stock.inventory"].create(
-            {
-                "name": "Test",
-                "location_id": self.env.ref("stock.stock_location_stock").id,
-                "filter": "partial",
-            }
-        )
-        inventory.prepare_inventory()
-        self.env["stock.inventory.line"].create(
-            {
-                "inventory_id": inventory.id,
-                "product_id": product.id,
-                "product_uom_id": self.env.ref("product.product_uom_unit").id,
-                "product_qty": 100,
-                "location_id": self.env.ref("stock.stock_location_stock").id,
-            }
-        )
-        inventory.action_done()
+        self._create_inventory(product, 100)
 
         so1 = self.env["sale.order"].create(
             {
@@ -1002,3 +955,130 @@ class TestShippingCosts(SavepointCase):
         self.assertEqual(self.get_shipping_cost(so1), self.fixed_fee + self.fee)
         # Check shipping cost are not considered twice
         self.assertEqual(self.get_shipping_cost(so), self.fixed_fee + self.fee)
+
+    def test_3_so_in_one_delivery_no_fee_large_amount(self):
+
+        so1 = self.env["sale.order"].create(
+            {
+                "partner_id": self.partner1.id,
+                "carrier_id": self.delivery_method.id,
+                "order_line": [
+                    (
+                        0,
+                        0,
+                        {
+                            "name": self.p1.name,
+                            "product_id": self.p1.id,
+                            "product_uom": self.ref("product.product_uom_unit"),
+                            "product_uom_qty": 1,
+                            "price_unit": 20,
+                        },
+                    )
+                ],
+            }
+        )
+
+        so2 = self.env["sale.order"].create(
+            {
+                "partner_id": self.partner1.id,
+                "carrier_id": self.delivery_method.id,
+                "order_line": [
+                    (
+                        0,
+                        0,
+                        {
+                            "name": self.p1.name,
+                            "product_id": self.p1.id,
+                            "product_uom": self.ref("product.product_uom_unit"),
+                            "product_uom_qty": 12,
+                            "price_unit": 20,
+                        },
+                    )
+                ],
+            }
+        )
+        so3 = self.env["sale.order"].create(
+            {
+                "partner_id": self.partner1.id,
+                "carrier_id": self.delivery_method.id,
+                "order_line": [
+                    (
+                        0,
+                        0,
+                        {
+                            "name": self.p1.name,
+                            "product_id": self.p1.id,
+                            "product_uom": self.ref("product.product_uom_unit"),
+                            "product_uom_qty": 2,
+                            "price_unit": 20,
+                        },
+                    )
+                ],
+            }
+        )
+
+        so1.action_confirm()
+        so2.action_confirm()
+        so3.action_confirm()
+        self.dr1._assign_pickings(so1.picking_ids)
+        self.dr1._assign_pickings(so2.picking_ids)
+        self.dr1._assign_pickings(so3.picking_ids)
+        self.dr1._deliver(background=False)
+        self.assertTrue(self.no_shipping_line_present(so1))
+        self.assertTrue(self.no_shipping_line_present(so2))
+        self.assertTrue(self.no_shipping_line_present(so3))
+
+    def test_delivery_in_3_parts(self):
+        product = self.env["product.product"].create(
+            {
+                "name": "Unittest product delivery several times",
+                "uom_id": self.env.ref("product.product_uom_unit").id,
+                "type": "consu",
+            }
+        )
+
+        self._create_inventory(product, 5)
+        so = self.env["sale.order"].create(
+            {
+                "partner_id": self.partner1.id,
+                "carrier_id": self.delivery_method.id,
+                "order_line": [
+                    (
+                        0,
+                        0,
+                        {
+                            "name": product.name,
+                            "product_id": product.id,
+                            "product_uom": self.ref("product.product_uom_unit"),
+                            "product_uom_qty": 15,
+                            "price_unit": 100,
+                        },
+                    ),
+                ],
+            }
+        )
+
+        so.action_confirm()
+        pick = so.picking_ids
+        self.dr1._assign_pickings(pick)
+        pick.with_context(test_mode=True).do_transfer()
+        self.dr1._deliver(background=False)
+        self.assertTrue(self.no_shipping_line_present(so))
+
+        bo = self.env["stock.picking"].search([("backorder_id", "=", pick[0].id)])
+        self._create_inventory(product, 5)
+        self.dr2._assign_pickings(bo)
+        bo.with_context(test_mode=True).do_transfer()
+        self.dr2._deliver(background=False)
+        self.assertTrue(self.no_shipping_line_present(so))
+
+        bo2 = self.env["stock.picking"].search([("backorder_id", "=", bo.id)])
+        self._create_inventory(product, 5)
+        delivery_template3 = self.env["round.template"].create(
+            {"name": "Unittest delivery template"}
+        )
+        dr3 = self.env["round.instance"].create({"template_id": delivery_template3.id})
+        dr3._assign_pickings(bo2)
+        bo2.with_context(test_mode=True).do_transfer()
+        dr3._deliver(background=False)
+        self.assertTrue(self.no_shipping_line_present(so))
