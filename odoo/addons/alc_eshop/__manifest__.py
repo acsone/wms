@@ -30,6 +30,7 @@
         "alc_shopinvader_fixes",
         "alc_eshop_wishlist",
         "alc_product_stock_state",
+        "alc_partner_veterinary",
         "shopinvader_auth_jwt",
         "shopinvader_elasticsearch",
         "shopinvader_product_media",
