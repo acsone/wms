@@ -66,6 +66,10 @@ class SaleOrder(models.Model):
         # for each historical SO
         query_args = (customer.id, carrier.id)
         if used_to_charge_delivery_fee == "used_for_delivery_fee":
+            # Filter out sale orders with a delivery line already
+            round_saleorders = round_saleorders.filtered(
+                lambda r: r.carrier_id == carrier and not r.used_for_delivery_fee
+            )
             query_select = """SELECT amount_untaxed FROM sale_order
             WHERE partner_id = %s AND state != 'cancel'
             AND used_for_delivery_fee = false AND carrier_id = %s;
@@ -81,12 +85,13 @@ class SaleOrder(models.Model):
             AND used_for_delivery_fee = false AND carrier_id = %s;
             """
             self.env.cr.execute(query_update, query_args)
-            # Filter out sale orders with a delivery line already
-            round_saleorders = round_saleorders.filtered(
-                lambda r: not r.used_for_fixed_fee
-            )
 
         if used_to_charge_delivery_fee == "used_for_fixed_fee":
+            # Filter out sale orders with a delivery line already
+            round_saleorders = round_saleorders.filtered(
+                lambda r: r.carrier_id == carrier and not r.used_for_fixed_fee
+            )
+
             query_select = """SELECT amount_untaxed FROM sale_order
             WHERE partner_id = %s AND state != 'cancel'
             AND used_for_fixed_fee = false AND carrier_id = %s;
@@ -102,10 +107,6 @@ class SaleOrder(models.Model):
             AND used_for_fixed_fee = false AND carrier_id = %s;
             """
             self.env.cr.execute(query_update, query_args)
-            # Filter out sale orders with a delivery line already
-            round_saleorders = round_saleorders.filtered(
-                lambda r: not r.used_for_fixed_fee
-            )
 
         do_not_charge_fee = self._check_charge_fee(
             carrier, sum_ordered, used_to_charge_delivery_fee
