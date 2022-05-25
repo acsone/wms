@@ -1,5 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
+#	* alc_eshop_cms
 #
 msgid ""
 msgstr ""
@@ -11,4 +12,228 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
+
+#. module: alc_eshop_cms
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_news_content
+msgid "Content"
+msgstr ""
+
+#. module: alc_eshop_cms
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_news_create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: alc_eshop_cms
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_news_create_date
+msgid "Created on"
+msgstr ""
+
+#. module: alc_eshop_cms
+#: model:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_news_search_view
+msgid "Current"
+msgstr ""
+
+#. module: alc_eshop_cms
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_news_date_end
+msgid "Date end"
+msgstr ""
+
+#. module: alc_eshop_cms
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_news_date_start
+msgid "Date start"
+msgstr ""
+
+#. module: alc_eshop_cms
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_content_lang_mixin_display_name
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_content_url_mixin_display_name
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_news_display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: alc_eshop_cms
+#: model:ir.ui.menu,name:alc_eshop_cms.alc_eshop_news_menu
+msgid "EShop News"
+msgstr ""
+
+#. module: alc_eshop_cms
+#: model:ir.ui.menu,name:alc_eshop_cms.alc_eshop_cms_menu
+msgid "EShop contents"
+msgstr ""
+
+#. module: alc_eshop_cms
+#: model:ir.actions.act_window,name:alc_eshop_cms.alc_eshop_news_act_window
+msgid "Eshop News"
+msgstr ""
+
+#. module: alc_eshop_cms
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_news_file
+msgid "File"
+msgstr ""
+
+#. module: alc_eshop_cms
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_news_filename
+msgid "Filename"
+msgstr ""
+
+#. module: alc_eshop_cms
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_news_foreword
+msgid "Foreword"
+msgstr ""
+
+#. module: alc_eshop_cms
+#: model:ir.model.fields,help:alc_eshop_cms.field_alc_eshop_news_image_url
+#: model:ir.model.fields,help:alc_eshop_cms.field_alc_eshop_news_thumbnail_image_url
+msgid "HTTP accessible path to the file"
+msgstr ""
+
+#. module: alc_eshop_cms
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_content_lang_mixin_id
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_content_url_mixin_id
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_news_id
+msgid "ID"
+msgstr ""
+
+#. module: alc_eshop_cms
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_news_image
+msgid "Image"
+msgstr ""
+
+#. module: alc_eshop_cms
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_news_image_filename
+msgid "Image filename"
+msgstr ""
+
+#. module: alc_eshop_cms
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_news_image_medium_url
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_news_thumbnail_image_medium_url
+msgid "Image medium url"
+msgstr ""
+
+#. module: alc_eshop_cms
+#: model:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_news_form_view
+msgid "Image preview"
+msgstr ""
+
+#. module: alc_eshop_cms
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_news_image_small_url
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_news_thumbnail_image_small_url
+msgid "Image small url"
+msgstr ""
+
+#. module: alc_eshop_cms
+#: model:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_news_form_view
+msgid "Info"
+msgstr ""
+
+#. module: alc_eshop_cms
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_content_lang_mixin_lang_ids
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_news_lang_ids
+msgid "Lang"
+msgstr ""
+
+#. module: alc_eshop_cms
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_content_lang_mixin___last_update
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_content_url_mixin___last_update
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_news___last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: alc_eshop_cms
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_news_write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: alc_eshop_cms
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_news_write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: alc_eshop_cms
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_content_lang_mixin_name
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_content_url_mixin_name
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_news_name
+#: model:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_news_form_view
+msgid "Name"
+msgstr ""
+
+#. module: alc_eshop_cms
+#: model:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_news_search_view
+msgid "Past"
+msgstr ""
+
+#. module: alc_eshop_cms
+#: model:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_news_search_view
+msgid "Past from today"
+msgstr ""
+
+#. module: alc_eshop_cms
+#: code:addons/alc_eshop_cms/models/alc_eshop_news.py:133
+#, python-format
+msgid "The defined period is not a valid (%s > %s)"
+msgstr ""
+
+#. module: alc_eshop_cms
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_news_thumbnail_image
+msgid "Thumbnail image"
+msgstr ""
+
+#. module: alc_eshop_cms
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_news_thumbnail_image_filename
+msgid "Thumbnail image filename"
+msgstr ""
+
+#. module: alc_eshop_cms
+#: model:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_news_search_view
+msgid "Upcoming"
+msgstr ""
+
+#. module: alc_eshop_cms
+#: model:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_news_search_view
+msgid "Upcoming from today"
+msgstr ""
+
+#. module: alc_eshop_cms
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_content_lang_mixin_url
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_content_url_mixin_url
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_news_image_url
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_news_thumbnail_image_url
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_news_url
+msgid "Url"
+msgstr ""
+
+#. module: alc_eshop_cms
+#: model:res.groups,name:alc_eshop_cms.eshop_cms_manager_group
+msgid "Website CMS manager"
+msgstr ""
+
+#. module: alc_eshop_cms
+#: model:ir.model,name:alc_eshop_cms.model_alc_content_lang_mixin
+msgid "alc.content.lang.mixin"
+msgstr ""
+
+#. module: alc_eshop_cms
+#: model:ir.model,name:alc_eshop_cms.model_alc_content_url_mixin
+msgid "alc.content.url.mixin"
+msgstr ""
+
+#. module: alc_eshop_cms
+#: model:ir.model,name:alc_eshop_cms.model_alc_eshop_news
+msgid "alc.eshop.news"
+msgstr ""
+
+#. module: alc_eshop_cms
+#: model:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_news_form_view
+msgid "name"
+msgstr ""
+
+#. module: alc_eshop_cms
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_news_file_id
+msgid "storage file"
+msgstr ""
+
+#. module: alc_eshop_cms
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_news_image_id
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_news_thumbnail_image_id
+msgid "storage image"
+msgstr ""
 
