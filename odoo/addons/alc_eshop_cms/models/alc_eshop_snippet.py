@@ -1,0 +1,27 @@
+# -*- coding: utf-8 -*-
+# Copyright 2022 ACSONE SA/NV
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+
+from odoo import api, fields, models
+
+
+class AlcEshopSnippet(models.Model):
+
+    _inherit = "alc.content.lang.mixin"
+    _name = "alc.eshop.snippet"
+    _content_type = "snippet"
+
+    name = fields.Char(translate=False)
+    code = fields.Char(required=True, readonly=True)
+    content = fields.Html(required=True, translate=True, sanitize=False)
+
+    @api.model
+    def _get_data_parser(self):
+        return [
+            "code",
+            "content",
+        ]
+
+    @api.model
+    def _get_contents_published(self):
+        return self.search([])

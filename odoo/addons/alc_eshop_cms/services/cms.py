@@ -8,13 +8,6 @@ from odoo.addons.base_rest import restapi
 from odoo.addons.component.core import Component
 
 DEMO_DATA = {
-    "fr/frag/the_frag": {
-        "type": "frag",
-        "lang": "fr",
-        "id": 1,
-        "url": "fr/frag/the_frag",
-        "data": {"code": "footer_info", "content": "<p> Un élément du footer </p>"},
-    },
     "fr/page/bienvenue": {
         "type": "page",
         "lang": "fr",
@@ -46,6 +39,8 @@ class CmsService(Component):
     _collection = "shopinvader.backend"
     _usage = "cms"
 
+    _content_model_names = ["alc.eshop.news", "alc.eshop.snippet"]
+
     @restapi.method(
         [(["/content"], "GET")],
         output_param=restapi.CerberusValidator("_content_search_output_schema"),
@@ -54,8 +49,9 @@ class CmsService(Component):
     def content_search(self, **params):
         """Get all cms content"""
         res = DEMO_DATA.values()
-        news = self.env["alc.eshop.news"]._get_contents_published()
-        res.extend(news._to_json())
+        for model_name in self._content_model_names:
+            records = self.env[model_name]._get_contents_published()
+            res.extend(records._to_json())
         return {"size": len(res), "data": res}
 
     @restapi.method(
@@ -70,7 +66,7 @@ class CmsService(Component):
         if content_type not in self._get_allowed_content_types():
             raise BadRequest("Content type '%s' not supported" % content_type)
         content_key = "/".join([lang, content_type, url])
-        for model_name in ["alc.eshop.news"]:
+        for model_name in self._content_model_names:
             model = self.env[model_name]
             if model._content_type != content_type:
                 continue
@@ -114,7 +110,7 @@ class CmsService(Component):
         }
 
     def _get_allowed_content_types(self):
-        return ["page", "news", "frag"]
+        return ["page", "news", "snippet"]
 
     def _get_allowed_lang(self):
         installed = self.env["res.lang"].get_installed()

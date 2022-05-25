@@ -7,7 +7,7 @@
         <field name="name">alc_eshop_news.form (in alc_eshop_cms)</field>
         <field name="model">alc.eshop.news</field>
         <field name="arch" type="xml">
-                       <form>
+            <form>
                 <header>
                 </header>
                 <sheet>
@@ -114,11 +114,6 @@
         <field name="context">{}</field>
     </record>
 
-    <record model="ir.ui.menu" id="alc_eshop_cms_menu">
-        <field name="name">EShop contents</field>
-        <field name="parent_id" ref="sales_team.menu_sale_config" />
-        <field name="sequence" eval="99" />
-    </record>
      <record model="ir.ui.menu" id="alc_eshop_news_menu">
         <field name="name">EShop News</field>
         <field name="parent_id" ref="alc_eshop_cms.alc_eshop_cms_menu" />

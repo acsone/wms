@@ -35,8 +35,8 @@ class AlcEshopNews(models.Model):
     image_small_url = fields.Char(related="image_id.image_small_url")
     image_medium_url = fields.Char(related="image_id.image_medium_url")
 
-    foreword = fields.Html(required=True, translate=True)
-    content = fields.Html(required=True, translate=True)
+    foreword = fields.Html(required=True, translate=True, sanitize=False)
+    content = fields.Html(required=True, translate=True, sanitize=False)
     date_start = fields.Date(required=True)
     date_end = fields.Date(required=True)
 

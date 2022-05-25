@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-25 11:28+0000\n"
-"PO-Revision-Date: 2022-05-25 11:28+0000\n"
+"POT-Creation-Date: 2022-05-25 11:29+0000\n"
+"PO-Revision-Date: 2022-05-25 11:29+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -22,8 +22,8 @@ msgid "\n"
 "<p>All questions concerning backorders can be addressed to our team by phone: <strong>+32 4 338 84 39</strong> or by email: <a href=\"mailto:callcenter@alcyonbelux.be\">callcenter@alcyonbelux.be</a>.</p>\n"
 ""
 msgstr "\n"
-"<p>Vous pouvez demander une modification des quantités en backorder via le formulaire ci-dessous. La modification sera visible dans votre Espace privé, section "Produits en commande" après traitement de votre demande par notre service callcenter.</p>\n"
-"<p>Pour toute question concernant vos reliquats, vous pouvez contacter notre service callcenter par téléphone au: <strong>+32 4 338 84 39</strong> ou par mail à: <a href="mailto:callcenter@alcyonbelux.be">callcenter@alcyonbelux.be</a>.</p>\n"
+"<p>U kan een aanpassing van uw backorder aanvragen via het hieronder getoonde formulier. De wijziging zal zichtbaar zijn via uw privé account onder rubriek : "Producten in bestelling", na behandeling van onze dienst callcenter.</p>\n"
+"<p>Voor al uw vragen aangaande backorders kan u steeds onze dienst callcenter bereiken per telefoon op het nummer: <strong>+32 4 338 84 39</strong> of per mail naar: <a href=\"mailto:callcenter@alcyonbelux.be\">callcenter@alcyonbelux.be</a>.</p>\n"
 ""
 
 #. module: alc_eshop_cms
@@ -35,24 +35,24 @@ msgstr "Code"
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_news_content
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_snippet_content
 msgid "Content"
-msgstr "Contenu"
+msgstr "Content"
 
 #. module: alc_eshop_cms
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_news_create_uid
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_snippet_create_uid
 msgid "Created by"
-msgstr "Créé par"
+msgstr "Aangemaakt door"
 
 #. module: alc_eshop_cms
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_news_create_date
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_snippet_create_date
 msgid "Created on"
-msgstr "Créé le"
+msgstr "Aangemaakt op"
 
 #. module: alc_eshop_cms
 #: model:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_news_search_view
 msgid "Current"
-msgstr "Non-échu"
+msgstr "Huidig"
 
 #. module: alc_eshop_cms
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_news_date_end
@@ -70,43 +70,43 @@ msgstr "Date start"
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_news_display_name
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_snippet_display_name
 msgid "Display Name"
-msgstr "Nom affiché"
+msgstr "Weergave naam"
 
 #. module: alc_eshop_cms
 #: model:ir.ui.menu,name:alc_eshop_cms.alc_eshop_news_menu
 msgid "EShop News"
-msgstr "Actualités"
+msgstr "EShop News"
 
 #. module: alc_eshop_cms
 #: model:ir.ui.menu,name:alc_eshop_cms.alc_eshop_cms_menu
 msgid "EShop contents"
-msgstr "Contenus"
+msgstr "EShop contents"
 
 #. module: alc_eshop_cms
 #: model:ir.actions.act_window,name:alc_eshop_cms.alc_eshop_news_act_window
 msgid "Eshop News"
-msgstr "Actualités"
+msgstr "Eshop News"
 
 #. module: alc_eshop_cms
 #: model:ir.actions.act_window,name:alc_eshop_cms.alc_eshop_snippet_act_window
 #: model:ir.ui.menu,name:alc_eshop_cms.alc_eshop_snippet_menu
 msgid "Eshop Snippet"
-msgstr "Extraits"
+msgstr "Eshop Snippet"
 
 #. module: alc_eshop_cms
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_news_file
 msgid "File"
-msgstr "Fichier"
+msgstr "Bestand"
 
 #. module: alc_eshop_cms
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_news_filename
 msgid "Filename"
-msgstr "Nom du fichier"
+msgstr "Bestandsnaam"
 
 #. module: alc_eshop_cms
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_news_foreword
 msgid "Foreword"
-msgstr "Préface"
+msgstr "Foreword"
 
 #. module: alc_eshop_cms
 #: model:ir.model.fields,help:alc_eshop_cms.field_alc_eshop_news_image_url
@@ -125,12 +125,12 @@ msgstr "ID"
 #. module: alc_eshop_cms
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_news_image
 msgid "Image"
-msgstr "Image"
+msgstr "Afbeelding"
 
 #. module: alc_eshop_cms
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_news_image_filename
 msgid "Image filename"
-msgstr "Nom du fichier image"
+msgstr "Image filename"
 
 #. module: alc_eshop_cms
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_news_image_medium_url
@@ -141,25 +141,25 @@ msgstr "Image medium url"
 #. module: alc_eshop_cms
 #: model:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_news_form_view
 msgid "Image preview"
-msgstr "Visualisation des images"
+msgstr "Image preview"
 
 #. module: alc_eshop_cms
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_news_image_small_url
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_news_thumbnail_image_small_url
 msgid "Image small url"
-msgstr "Url de la vignette"
+msgstr "Image small url"
 
 #. module: alc_eshop_cms
 #: model:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_news_form_view
 msgid "Info"
-msgstr "Info"
+msgstr "Informatie"
 
 #. module: alc_eshop_cms
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_content_lang_mixin_lang_ids
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_news_lang_ids
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_snippet_lang_ids
 msgid "Lang"
-msgstr "Langue"
+msgstr "Lang"
 
 #. module: alc_eshop_cms
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_content_lang_mixin___last_update
@@ -167,19 +167,19 @@ msgstr "Langue"
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_news___last_update
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_snippet___last_update
 msgid "Last Modified on"
-msgstr "Dernière modification le"
+msgstr "Laatst gewijzigd op"
 
 #. module: alc_eshop_cms
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_news_write_uid
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_snippet_write_uid
 msgid "Last Updated by"
-msgstr "Derniere fois mis à jour par"
+msgstr "Laatst bijgewerkt door"
 
 #. module: alc_eshop_cms
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_news_write_date
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_snippet_write_date
 msgid "Last Updated on"
-msgstr "Dernière mis à jour le"
+msgstr "Laatst bijgewerkt op"
 
 #. module: alc_eshop_cms
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_content_lang_mixin_name
@@ -189,28 +189,28 @@ msgstr "Dernière mis à jour le"
 #: model:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_news_form_view
 #: model:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_snippet_form_view
 msgid "Name"
-msgstr "Nom"
+msgstr "Naam"
 
 #. module: alc_eshop_cms
 #: model:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_news_search_view
 msgid "Past"
-msgstr "Echues"
+msgstr "Past"
 
 #. module: alc_eshop_cms
 #: model:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_news_search_view
 msgid "Past from today"
-msgstr "Echues"
+msgstr "Past from today"
 
 #. module: alc_eshop_cms
 #: code:addons/alc_eshop_cms/models/alc_eshop_news.py:133
 #, python-format
 msgid "The defined period is not a valid (%s > %s)"
-msgstr "La période définie n'est pas valide (%s > %s)"
+msgstr "The defined period is not a valid (%s > %s)"
 
 #. module: alc_eshop_cms
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_news_thumbnail_image
 msgid "Thumbnail image"
-msgstr "Vignette"
+msgstr "Thumbnail image"
 
 #. module: alc_eshop_cms
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_news_thumbnail_image_filename
@@ -220,12 +220,12 @@ msgstr "Thumbnail image filename"
 #. module: alc_eshop_cms
 #: model:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_news_search_view
 msgid "Upcoming"
-msgstr "A venir"
+msgstr "Upcoming"
 
 #. module: alc_eshop_cms
 #: model:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_news_search_view
 msgid "Upcoming from today"
-msgstr "A venir"
+msgstr "Upcoming from today"
 
 #. module: alc_eshop_cms
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_content_lang_mixin_url
@@ -240,7 +240,7 @@ msgstr "Url"
 #. module: alc_eshop_cms
 #: model:res.groups,name:alc_eshop_cms.eshop_cms_manager_group
 msgid "Website CMS manager"
-msgstr "Getionnaire de contenu du site web"
+msgstr "Website CMS manager"
 
 #. module: alc_eshop_cms
 #: model:ir.model,name:alc_eshop_cms.model_alc_content_lang_mixin
@@ -255,7 +255,7 @@ msgstr "alc.content.url.mixin"
 #. module: alc_eshop_cms
 #: model:ir.model,name:alc_eshop_cms.model_alc_eshop_news
 msgid "alc.eshop.news"
-msgstr "Actualité"
+msgstr "alc.eshop.news"
 
 #. module: alc_eshop_cms
 #: model:ir.model,name:alc_eshop_cms.model_alc_eshop_snippet
@@ -266,15 +266,15 @@ msgstr "alc.eshop.snippet"
 #: model:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_news_form_view
 #: model:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_snippet_form_view
 msgid "name"
-msgstr "Intitulé"
+msgstr "name"
 
 #. module: alc_eshop_cms
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_news_file_id
 msgid "storage file"
-msgstr "Fichier"
+msgstr "storage file"
 
 #. module: alc_eshop_cms
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_news_image_id
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_news_thumbnail_image_id
 msgid "storage image"
-msgstr "Image"
+msgstr "storage image"

@@ -18,9 +18,13 @@
         "storage_image",
     ],
     "data": [
+        "data/alc_eshop_snippet.xml",
         "security/res_groups.xml",
         "security/alc_eshop_news.xml",
+        "security/alc_eshop_snippet.xml",
+        "views/alc_eshop_cms_menu.xml",
         "views/alc_eshop_news.xml",
+        "views/alc_eshop_snippet.xml",
     ],
     "external_dependencies": {"python": ["slugify"]},
     "demo": [],

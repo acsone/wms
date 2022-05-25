@@ -51,9 +51,20 @@ class TestCmsService(SavepointCase, ComponentMixin, AlcEshopNewsMixin):
         self.assertTrue(res)
         self.assertIn(self.news_all_langs_json_fr, res["data"])
         self.assertIn(self.news_all_langs_json_en, res["data"])
+        for json in self.eshop_snippet_product_on_order_cancel_intro._to_json():
+            self.assertIn(json, res["data"])
 
-    def test_get_content(self):
+    def test_get_news_content(self):
         lang, content_type, url = self.news_all_langs_json_fr["url"].split("/")
         with self.cms_service() as service:
             res = service.dispatch("content_get", lang, content_type, url)
         self.assertDictEqual(self.news_all_langs_json_fr, res)
+
+    def test_get_snippet_content(self):
+        json_fr = self.eshop_snippet_product_on_order_cancel_intro._to_json(
+            self.lang_fr
+        )[0]
+        lang, content_type, url = json_fr["url"].split("/")
+        with self.cms_service() as service:
+            res = service.dispatch("content_get", lang, content_type, url)
+        self.assertDictEqual(json_fr, res)

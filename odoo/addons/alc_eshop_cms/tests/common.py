@@ -18,6 +18,12 @@ class CommonMixin(object):
         cls.env["ir.translation"].load_module_terms(["base"], [cls.lang_fr.code])
         cls.lang_en = cls.env["res.lang"]._lang_get("en_US")
         cls.all_langs = cls.lang_fr | cls.lang_en
+        cls.eshop_snippet_product_on_order_cancel_intro = cls.env.ref(
+            "alc_eshop_cms.alc_eshop_snippet_product_on_order_cancel_intro"
+        )
+        cls.eshop_snippet_product_on_order_cancel_intro.write(
+            {"lang_ids": [(6, 0, cls.all_langs.ids)]}
+        )
 
     @classmethod
     def _get_date(cls, day_offset=0):
@@ -37,8 +43,8 @@ class AlcEshopNewsMixin(CommonMixin):
         cls.AlcEshopNews = cls.env["alc.eshop.news"]
         cls.new_all_langs_vals = {
             "name": "name",
-            "foreword": "foreword",
-            "content": "content",
+            "foreword": "<p>foreword</p>",
+            "content": "<p>content</p>",
             "date_start": cls._get_date(),
             "date_end": cls._get_date(10),
             "thumbnail_image": cls._get_file("red.png"),
@@ -54,8 +60,8 @@ class AlcEshopNewsMixin(CommonMixin):
             cls.news_all_langs.with_context(lang=lang.code).write(
                 {
                     "name": cls.new_all_langs_vals["name"] + "-" + lang.code,
-                    "foreword": cls.new_all_langs_vals["foreword"] + "-" + lang.code,
-                    "content": cls.new_all_langs_vals["content"] + "-" + lang.code,
+                    "foreword": "<p>foreword-%s</p>" % lang.code,
+                    "content": "<p>content-%s</p>" % lang.code,
                 }
             )
 
@@ -91,14 +97,14 @@ class AlcEshopNewsMixin(CommonMixin):
             "type": "news",
             "id": cls.news_all_langs.id,
             "data": {
-                "foreword": "<p>foreword-en_US</p>",
+                "foreword": "<p>foreword-fr_FR</p>",
                 "title": u"name-fr_FR",
                 "image": {
                     "url": cls.news_all_langs.image_id.url,
                     "name": u"orange.png",
                     "alt_name": None,
                 },
-                "content": "<p>content-en_US</p>",
+                "content": "<p>content-fr_FR</p>",
                 "file": {
                     "url": cls.news_all_langs.file_id.url,
                     "mimetype": u"text/plain",
