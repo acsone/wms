@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="veterinary_group_user_wizard_form_view">
+        <field name="name">veterinary.group.user.wizard.form</field>
+        <field name="model">veterinary.group.user.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Add Partners to Veterinary Group">
+                <group>
+                    <field name="veterinary_group_id" />
+                    <field name="partner_ids" />
+                </group>
+                <footer>
+                    <button
+            name="execute"
+            class="btn btn-primary"
+            type="object"
+            string="Add User(s)"
+          />
+                    <button special="cancel" string="Cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="veterinary_group_user_wizard_act_window">
+        <field name="name">Add Partners to Veterinary Group</field>
+        <field name="res_model">veterinary.group.user.wizard</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+</odoo>

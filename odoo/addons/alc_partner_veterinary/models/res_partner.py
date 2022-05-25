@@ -11,3 +11,5 @@ class ResPartner(models.Model):
 
     vet_depot_number = fields.Char(string="Depot number")
     vet_subscription_number = fields.Char(string="Subscription number")
+
+    veterinary_group_id = fields.Many2one("veterinary.group", string="Veterinary Group")

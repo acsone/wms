@@ -20,6 +20,7 @@ class KeycloakBackend(models.Model):
             "ref": "ref",
             "eshop_ordering_allowed": "can_order",
             "help_with_fee": "help_with_fee",
+            "veterinary_group_id": "vt-group",
         }
         res.update(new)
         return res
@@ -34,6 +35,7 @@ class KeycloakBackend(models.Model):
             "ref": partner.ref or None,
             "can_order": partner.eshop_ordering_allowed,
             "help_with_fee": partner.help_with_fee,
+            "vt-group": partner.veterinary_group_id.id,
         }
         payload["attributes"].update(new_attributes)
         return payload
