@@ -1,19 +1,13 @@
 # -*- coding: utf-8 -*-
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-from werkzeug.exceptions import NotFound
+
+from werkzeug.exceptions import BadRequest, NotFound
 
 from odoo.addons.base_rest import restapi
 from odoo.addons.component.core import Component
 
 DEMO_DATA = {
-    "fr/news/my_news": {
-        "type": "news",
-        "lang": "fr",
-        "id": 1,
-        "url": "fr/news/my_news",
-        "data": {"title": "Ma nouvelle", "content": "<p> Ceci est une news </p>"},
-    },
     "fr/frag/the_frag": {
         "type": "frag",
         "lang": "fr",
@@ -59,16 +53,31 @@ class CmsService(Component):
     )
     def content_search(self, **params):
         """Get all cms content"""
-        return {"size": len(DEMO_DATA), "data": DEMO_DATA.values()}
+        res = DEMO_DATA.values()
+        news = self.env["alc.eshop.news"]._get_contents_published()
+        res.extend(news._to_json())
+        return {"size": len(res), "data": res}
 
     @restapi.method(
-        [(["/content/<string:lang>/<string:type_prefix>/<path:url>"], "GET")],
+        [(["/content/<string:lang>/<string:content_type>/<path:url>"], "GET")],
         output_param=restapi.CerberusValidator("_content_schema"),
         auth="public",
     )
-    def content_get(self, lang, type_prefix, url):
+    def content_get(self, lang, content_type, url):
         """Get specific cms content"""
-        content_key = "/".join([lang, type_prefix, url])
+        if lang not in self._get_allowed_lang():
+            raise BadRequest("Lang '%s' not supported" % lang)
+        if content_type not in self._get_allowed_content_types():
+            raise BadRequest("Content type '%s' not supported" % content_type)
+        content_key = "/".join([lang, content_type, url])
+        for model_name in ["alc.eshop.news"]:
+            model = self.env[model_name]
+            if model._content_type != content_type:
+                continue
+            record = model._get_from_url(url)
+            if record:
+                res_lang = self._get_lang_from_lang_prefix(lang)
+                return record.with_context(lang=res_lang.code)._to_json(res_lang)[0]
         if content_key in DEMO_DATA:
             return DEMO_DATA[content_key]
         raise NotFound(content_key)
@@ -115,3 +124,10 @@ class CmsService(Component):
     # ##############
     # implementation
     # ##############
+    def _get_lang_from_lang_prefix(self, lang_prefix):
+        all_lang = self.env["res.lang"].get_installed()
+        for lang in all_lang:
+            lang_code = lang[0]
+            if lang_code.startswith(lang_prefix):
+                return self.env["res.lang"]._lang_get(lang_code)
+        return None

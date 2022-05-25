@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2022 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="alc_eshop_news_form_view">
+        <field name="name">alc_eshop_news.form (in alc_eshop_cms)</field>
+        <field name="model">alc.eshop.news</field>
+        <field name="arch" type="xml">
+                       <form>
+                <header>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box" />
+                    <div class="oe_title">
+                        <label class="oe_edit_only" for="name" string="Name" />
+                        <h1><field name="name" placeholder="name" /></h1>
+                    </div>
+                     <notebook colspan="4">
+                         <page string="Info">
+                            <group name="content" colspan="4">
+                                <field name="foreword" />
+                                <field name="content" />
+                            </group>
+                            <group>
+                                <group name="left">
+                                    <field name="date_start" />
+                                    <field name="date_end" />
+                                    <field
+                    name="lang_ids"
+                    widget="many2many_checkboxes"
+                  />
+                                </group>
+                                <group name="right">
+                                    <field
+                    name="thumbnail_image"
+                    filename="thumbnail_image_filename"
+                  />
+                                    <field
+                    name="thumbnail_image_filename"
+                    invisible="1"
+                  />
+                                    <field name="image" filename="image_filename" />
+                                    <field name="image_filename" invisible="1" />
+                                    <field name="file" filename="filename" />
+                                    <field name="filename" invisible="1" />
+                                </group>
+                            </group>
+                         </page>
+                         <page string="Image preview">
+                             <group>
+                             <label for="thumbnail_image" />
+                             <field
+                  name="thumbnail_image_url"
+                  widget="image_url"
+                  nolabel="1"
+                />
+                             <label for="image" />
+                             <field name="image_url" widget="image_url" nolabel="1" />
+                             </group>
+                         </page>
+                     </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="alc_eshop_news_search_view">
+        <field name="name">alc_eshop_news.search (in alc_eshop_cms)</field>
+        <field name="model">alc.eshop.news</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <filter
+          string="Past"
+          name="past"
+          domain="[('date_end','&lt;', datetime.datetime.combine(context_today(), datetime.time(0,0,0)))]"
+          help="Past from today"
+        />
+                <filter
+          string="Current"
+          name="current"
+          domain="['&amp;', ('date_start','&lt;=', datetime.datetime.combine(context_today(), datetime.time(0,0,0))), ('date_end','&gt;=', datetime.datetime.combine(context_today(), datetime.time(0,0,0)))]"
+          help="Current"
+        />
+                <filter
+          string="Upcoming"
+          name="upcoming"
+          domain="[('date_start','&gt;', datetime.datetime.combine(context_today(), datetime.time(0,0,0)))]"
+          help="Upcoming from today"
+        />
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="alc_eshop_news_tree_view">
+        <field name="name">alc_eshop_news.tree (in alc_eshop_cms)</field>
+        <field name="model">alc.eshop.news</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="date_start" />
+                <field name="date_end" />
+                <field name="lang_ids" widget="many2many_tags" />
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="alc_eshop_news_act_window">
+        <field name="name">Eshop News</field>
+        <field name="res_model">alc.eshop.news</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record model="ir.ui.menu" id="alc_eshop_cms_menu">
+        <field name="name">EShop contents</field>
+        <field name="parent_id" ref="sales_team.menu_sale_config" />
+        <field name="sequence" eval="99" />
+    </record>
+     <record model="ir.ui.menu" id="alc_eshop_news_menu">
+        <field name="name">EShop News</field>
+        <field name="parent_id" ref="alc_eshop_cms.alc_eshop_cms_menu" />
+        <field name="action" ref="alc_eshop_news_act_window" />
+        <field name="sequence" eval="16" />
+    </record>
+</odoo>
