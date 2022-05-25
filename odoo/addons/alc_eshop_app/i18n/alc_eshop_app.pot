@@ -14,6 +14,16 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_eshop_app
+#: model:ir.ui.menu,name:alc_eshop_app.menu_eshop_app
+msgid "EShop"
+msgstr ""
+
+#. module: alc_eshop_app
+#: model:res.groups,name:alc_eshop_app.eshop_manager_group
+msgid "Gestionnaire EShop"
+msgstr ""
+
+#. module: alc_eshop_app
 #: model:res.groups,name:alc_eshop_app.eshop_technical_user_group
 msgid "Utilisateur technique EShop"
 msgstr ""
