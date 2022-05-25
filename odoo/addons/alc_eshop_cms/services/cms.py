@@ -39,7 +39,7 @@ class CmsService(Component):
     _collection = "shopinvader.backend"
     _usage = "cms"
 
-    _content_model_names = ["alc.eshop.news", "alc.eshop.snippet"]
+    _content_model_names = ["alc.eshop.cms.news", "alc.eshop.cms.snippet"]
 
     @restapi.method(
         [(["/content"], "GET")],

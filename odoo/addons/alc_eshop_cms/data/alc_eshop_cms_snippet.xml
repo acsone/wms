@@ -3,8 +3,8 @@
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo noupdate="1">
     <record
-    model="alc.eshop.snippet"
-    id="alc_eshop_snippet_product_on_order_cancel_intro"
+    model="alc.eshop.cms.snippet"
+    id="alc_eshop_cms_snippet_product_on_order_cancel_intro"
   >
         <field
       name="name"

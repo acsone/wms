@@ -6,10 +6,10 @@ from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 
 
-class AlcEshopNews(models.Model):
+class AlcEshopCmsNews(models.Model):
 
     _inherit = "alc.content.lang.mixin"
-    _name = "alc.eshop.news"
+    _name = "alc.eshop.cms.news"
     _content_type = "news"
     _order = "date_start desc, id desc"
 
@@ -121,7 +121,7 @@ class AlcEshopNews(models.Model):
         self.mapped("image_id").sudo().unlink()
         self.mapped("thumbnail_image_id").sudo().unlink()
         self.mapped("file_id").sudo().unlink()
-        return super(AlcEshopNews, self).unlink()
+        return super(AlcEshopCmsNews, self).unlink()
 
     @api.constrains("date_start", "date_end")
     def _validate_dates(self):
