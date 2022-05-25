@@ -76,7 +76,7 @@ msgstr "RECEPTION - Changement imprimante"
 #: model:ir.ui.menu,name:alc_label_printing_reception.select_printing_printer_menu
 #: model:ir.ui.view,arch_db:alc_label_printing_reception.select_printing_printer_form_view
 msgid "Select Printing Printer"
-msgstr "Sélectionner une imprimante"
+msgstr "Sélectionner une imprimante étiquette produit"
 
 #. module: alc_label_printing_reception
 #: code:addons/alc_label_printing_reception/wizards/select_printing_printer.py:22
