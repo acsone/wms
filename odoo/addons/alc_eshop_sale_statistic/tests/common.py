@@ -87,18 +87,29 @@ class TestSaleStatistics(SavepointCase, ComponentMixin):
             {"food": 0, "equipment": 0, "meds": 0},
             {"food": 0, "equipment": 0, "meds": 14},
         ]
+        p5y = cls.partner_5y
         # old data is fine
-        cls.sell(cls.product_1, 7, date_exp % (year_now - 5), partner=cls.partner_5y)
-        cls.sell(cls.product_1, 4, date_exp % (year_now - 4), partner=cls.partner_5y)
-        cls.sell(cls.product_1, 3, date_exp % (year_now - 3), partner=cls.partner_5y)
-        cls.sell(cls.product_1, 2, date_exp % (year_now - 2), partner=cls.partner_5y)
-        cls.sell(cls.product_2, 14, date_exp % year_now, partner=cls.partner_5y)
+        cls.sell(cls.product_1, 7, date_exp % (year_now - 5), partner=p5y, invoice=True)
+        cls.sell(cls.product_1, 4, date_exp % (year_now - 4), partner=p5y, invoice=True)
+        cls.sell(cls.product_1, 3, date_exp % (year_now - 3), partner=p5y, invoice=True)
+        cls.sell(cls.product_1, 2, date_exp % (year_now - 2), partner=p5y, invoice=True)
+        cls.sell(cls.product_2, 14, date_exp % year_now, partner=p5y, invoice=True)
         # service resist to (bad) future data
-        cls.sell(cls.product_1, 21, date_exp % (year_now + 1), partner=cls.partner_5y)
+        future_date = date_exp % (year_now + 1)
+        cls.sell(cls.product_1, 21, future_date, partner=p5y, invoice=True)
         cls.env["alc.eshop.product.ordered.yearly"].refresh_view()
 
     @classmethod
-    def sell(cls, product, qty, ttime, confirm=True, deliver=False, partner=False):
+    def sell(
+        cls,
+        product,
+        qty,
+        ttime,
+        confirm=True,
+        deliver=False,
+        partner=False,
+        invoice=False,
+    ):
         partner = partner or cls.partner_1
         with freeze_time(ttime):
             so = cls.env["sale.order"].create(
@@ -120,11 +131,13 @@ class TestSaleStatistics(SavepointCase, ComponentMixin):
                     ],
                 }
             )
-            if confirm or deliver:
+            if confirm or deliver or invoice:
                 so.action_confirm()
-            if deliver:
+            if deliver or invoice:
                 so.picking_ids.action_confirm()
                 so.picking_ids.action_done()
+            if invoice:
+                so.action_invoice_create()
         return so
 
     # pylint: disable=method-required-super
