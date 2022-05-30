@@ -3,25 +3,12 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 
-from odoo import api, models
+from odoo import models
 
 
 class ProductDiscountSpecial(models.Model):
-    _inherit = "product.discount.special"
+    _name = "product.discount.special"
+    _inherit = ["product.discount.special", "product.update.mixin"]
 
-    @api.model
-    def create(self, values):
-        res = super(ProductDiscountSpecial, self).create(values)
-        res.product_template_id.shopinvader_mark_to_update()
-        return res
-
-    def write(self, vals):
-        res = super(ProductDiscountSpecial, self).write(vals)
-        self.mapped("product_template_id").shopinvader_mark_to_update()
-        return res
-
-    def unlink(self):
-        products = self.mapped("product_template_id")
-        res = super(ProductDiscountSpecial, self).unlink()
-        products.shopinvader_mark_to_update()
-        return res
+    def get_products(self):
+        return self.mapped("product_template_id")

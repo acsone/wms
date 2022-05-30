@@ -3,10 +3,12 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 
-from .common import TestProductSpecialUpdate
+from odoo.addons.shopinvader_search_engine_update_product.tests.common import (
+    TestProductUpdate,
+)
 
 
-class TestProductExportFlow(TestProductSpecialUpdate):
+class TestProductExportFlow(TestProductUpdate):
     def test_flow(self):
         # given
         vals = {"product_template_id": self.product_template.id}

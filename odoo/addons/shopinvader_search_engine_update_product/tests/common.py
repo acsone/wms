@@ -7,10 +7,10 @@ from odoo.fields import Date
 from odoo.addons.component.tests.common import SavepointComponentCase
 
 
-class TestProductSpecialUpdate(SavepointComponentCase):
+class TestProductUpdate(SavepointComponentCase):
     @classmethod
     def setUpClass(cls):
-        super(TestProductSpecialUpdate, cls).setUpClass()
+        super(TestProductUpdate, cls).setUpClass()
         cls.product_template = cls.env["product.template"].create({"name": "P"})
         cls.product = cls.product_template.product_variant_id
 
