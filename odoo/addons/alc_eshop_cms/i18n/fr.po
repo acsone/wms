@@ -22,8 +22,8 @@ msgid "\n"
 "<p>All questions concerning backorders can be addressed to our team by phone: <strong>+32 4 338 84 39</strong> or by email: <a href=\"mailto:callcenter@alcyonbelux.be\">callcenter@alcyonbelux.be</a>.</p>\n"
 ""
 msgstr "\n"
-"<p>Vous pouvez demander une modification des quantités en backorder via le formulaire ci-dessous. La modification sera visible dans votre Espace privé, section "Produits en commande" après traitement de votre demande par notre service callcenter.</p>\n"
-"<p>Pour toute question concernant vos reliquats, vous pouvez contacter notre service callcenter par téléphone au: <strong>+32 4 338 84 39</strong> ou par mail à: <a href="mailto:callcenter@alcyonbelux.be">callcenter@alcyonbelux.be</a>.</p>\n"
+"<p>Vous pouvez demander une modification des quantités en backorder via le formulaire ci-dessous. La modification sera visible dans votre Espace privé, section \"Produits en commande\" après traitement de votre demande par notre service callcenter.</p>\n"
+"<p>Pour toute question concernant vos reliquats, vous pouvez contacter notre service callcenter par téléphone au: <strong>+32 4 338 84 39</strong> ou par mail à: <a href=\"mailto:callcenter@alcyonbelux.be\">callcenter@alcyonbelux.be</a>.</p>\n"
 ""
 
 #. module: alc_eshop_cms

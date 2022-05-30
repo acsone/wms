@@ -22,7 +22,7 @@ msgid "\n"
 "<p>All questions concerning backorders can be addressed to our team by phone: <strong>+32 4 338 84 39</strong> or by email: <a href=\"mailto:callcenter@alcyonbelux.be\">callcenter@alcyonbelux.be</a>.</p>\n"
 ""
 msgstr "\n"
-"<p>U kan een aanpassing van uw backorder aanvragen via het hieronder getoonde formulier. De wijziging zal zichtbaar zijn via uw privé account onder rubriek : "Producten in bestelling", na behandeling van onze dienst callcenter.</p>\n"
+"<p>U kan een aanpassing van uw backorder aanvragen via het hieronder getoonde formulier. De wijziging zal zichtbaar zijn via uw privé account onder rubriek : \"Producten in bestelling\", na behandeling van onze dienst callcenter.</p>\n"
 "<p>Voor al uw vragen aangaande backorders kan u steeds onze dienst callcenter bereiken per telefoon op het nummer: <strong>+32 4 338 84 39</strong> of per mail naar: <a href=\"mailto:callcenter@alcyonbelux.be\">callcenter@alcyonbelux.be</a>.</p>\n"
 ""
 
