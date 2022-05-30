@@ -9,7 +9,10 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["shopinvader_search_engine_update", "product_discount_specials"],
+    "depends": [
+        "shopinvader_search_engine_update_product",
+        "product_discount_specials",
+    ],
     "application": False,
     "data": [],
     "demo": [],
