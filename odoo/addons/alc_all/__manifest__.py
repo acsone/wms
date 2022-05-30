@@ -217,6 +217,7 @@
         "security/product_state.xml",
         "views/product_packaging.xml",
         "views/product_template.xml",
+        "views/res_partner.xml",
         "data/ir_config_parameter.xml",
     ],
     "demo": [],
