@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2022 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="alc_eshop_cms_page_form_view">
+        <field name="name">alc.eshop.cms.page.form (in alc_eshop_cms)</field>
+        <field name="model">alc.eshop.cms.page</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box" />
+                    <div class="oe_title">
+                        <label class="oe_edit_only" for="name" string="Name" />
+                        <h1>
+                            <field name="name" placeholder="name" />
+                        </h1>
+                    </div>
+                    <group>
+                        <group name="left">
+                            <field name="published" />
+                            <field name="sequence" />
+                            <field name="lang_ids" widget="many2many_checkboxes" />
+                        </group>
+                        <group name="right">
+                            <field name="cms_page_group_id" />
+                            <field
+                name="cms_page_slot_ids"
+                widget="many2many_checkboxes"
+              />
+                        </group>
+                    </group>
+                    <group colspan="4">
+                        <field name="content" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="alc_eshop_cms_page_search_view">
+        <field name="name">alc.eshop.cms.page.search (in alc_eshop_cms)</field>
+        <field name="model">alc.eshop.cms.page</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <separator />
+                <filter
+          string="Published"
+          name="published"
+          domain="[('published', '=', True)]"
+        />
+                <filter
+          string="Not published"
+          name="not_published"
+          domain="[('published', '=', False)]"
+        />
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="alc_eshop_cms_page_tree_view">
+        <field name="name">alc.eshop.cms.page.tree (in alc_eshop_cms)</field>
+        <field name="model">alc.eshop.cms.page</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="sequence" widget='handle' />
+                <field name="cms_page_group_id" />
+                <field name="name" />
+                <field name="cms_page_slot_ids" widget="many2many_tags" />
+                <field name="lang_ids" widget="many2many_tags" />
+                <field name="published" />
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="alc_eshop_cms_page_act_window">
+        <field name="name">Cms Pages</field>
+        <field name="res_model">alc.eshop.cms.page</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record model="ir.ui.menu" id="alc_eshop_cms_page_menu">
+        <field name="name">Cms Pages</field>
+        <field name="parent_id" ref="alc_eshop_cms.alc_eshop_cms_menu" />
+        <field name="action" ref="alc_eshop_cms_page_act_window" />
+        <field name="sequence" eval="36" />
+    </record>
+
+</odoo>

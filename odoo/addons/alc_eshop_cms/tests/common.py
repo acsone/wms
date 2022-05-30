@@ -67,6 +67,10 @@ class AlcEshopNewsMixin(CommonMixin):
 
         cls.news_all_langs_json_en = {
             "url": u"en/news/name-en-us-%s" % cls.news_all_langs.id,
+            "url_locales": {
+                "fr": u"fr/news/name-fr-fr-%s" % cls.news_all_langs.id,
+                "en": u"en/news/name-en-us-%s" % cls.news_all_langs.id,
+            },
             "lang": u"en",
             "type": "news",
             "id": cls.news_all_langs.id,
@@ -93,6 +97,10 @@ class AlcEshopNewsMixin(CommonMixin):
         }
         cls.news_all_langs_json_fr = {
             "url": u"fr/news/name-fr-fr-%s" % cls.news_all_langs.id,
+            "url_locales": {
+                "fr": u"fr/news/name-fr-fr-%s" % cls.news_all_langs.id,
+                "en": u"en/news/name-en-us-%s" % cls.news_all_langs.id,
+            },
             "lang": u"fr",
             "type": "news",
             "id": cls.news_all_langs.id,

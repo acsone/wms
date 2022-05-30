@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2022 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo noupdate="1">
+    <record id="ir_att_img_team_bertrand" model="ir.attachment">
+        <field name="public" eval="True" />
+        <field name="name">team-bertrand.jpg</field>
+        <field name="datas_fname">team-bertrand.jpg</field>
+        <field name="res_model">ir.ui.view</field>
+        <field name="type">url</field>
+        <field
+      name="datas"
+      type="base64"
+      file="alc_eshop_cms/static/src/img/team/team-bertrand.jpg"
+    />
+    </record>
+    <record id="ir_att_img_team_christelle" model="ir.attachment">
+        <field name="public" eval="True" />
+        <field name="name">team-christelle.jpg</field>
+        <field name="datas_fname">team-christelle.jpg</field>
+        <field name="res_model">ir.ui.view</field>
+        <field name="type">url</field>
+        <field
+      name="datas"
+      type="base64"
+      file="alc_eshop_cms/static/src/img/team/team-christelle.jpg"
+    />
+    </record>
+    <record id="ir_att_img_team_dimitry" model="ir.attachment">
+        <field name="public" eval="True" />
+        <field name="name">team-dimitry.jpg</field>
+        <field name="datas_fname">team-dimitry.jpg</field>
+        <field name="res_model">ir.ui.view</field>
+        <field name="type">url</field>
+        <field
+      name="datas"
+      type="base64"
+      file="alc_eshop_cms/static/src/img/team/team-dimitry.jpg"
+    />
+    </record>
+    <record id="ir_att_img_team_fabrice" model="ir.attachment">
+        <field name="public" eval="True" />
+        <field name="name">team-fabrice.jpg</field>
+        <field name="datas_fname">team-fabrice.jpg</field>
+        <field name="res_model">ir.ui.view</field>
+        <field name="type">url</field>
+        <field
+      name="datas"
+      type="base64"
+      file="alc_eshop_cms/static/src/img/team/team-fabrice.jpg"
+    />
+    </record>
+    <record id="ir_att_img_team_giuseppe" model="ir.attachment">
+        <field name="public" eval="True" />
+        <field name="name">team-giuseppe.jpg</field>
+        <field name="datas_fname">team-giuseppe.jpg</field>
+        <field name="res_model">ir.ui.view</field>
+        <field name="type">url</field>
+        <field
+      name="datas"
+      type="base64"
+      file="alc_eshop_cms/static/src/img/team/team-giuseppe.jpg"
+    />
+    </record>
+    <record id="ir_att_img_team_patricia" model="ir.attachment">
+        <field name="public" eval="True" />
+        <field name="name">team-patricia.jpg</field>
+        <field name="datas_fname">team-patricia.jpg</field>
+        <field name="res_model">ir.ui.view</field>
+        <field name="type">url</field>
+        <field
+      name="datas"
+      type="base64"
+      file="alc_eshop_cms/static/src/img/team/team-patricia.jpg"
+    />
+    </record>
+    <record id="ir_att_img_team_philippe" model="ir.attachment">
+        <field name="public" eval="True" />
+        <field name="name">team-philippe.jpg</field>
+        <field name="datas_fname">team-philippe.jpg</field>
+        <field name="res_model">ir.ui.view</field>
+        <field name="type">url</field>
+        <field
+      name="datas"
+      type="base64"
+      file="alc_eshop_cms/static/src/img/team/team-philippe.jpg"
+    />
+    </record>
+    <record id="ir_att_img_team_raymond" model="ir.attachment">
+        <field name="public" eval="True" />
+        <field name="name">team-raymond.jpg</field>
+        <field name="datas_fname">team-raymond.jpg</field>
+        <field name="res_model">ir.ui.view</field>
+        <field name="type">url</field>
+        <field
+      name="datas"
+      type="base64"
+      file="alc_eshop_cms/static/src/img/team/team-raymond.jpg"
+    />
+    </record>
+       <record id="ir_att_img_team_xavier" model="ir.attachment">
+        <field name="public" eval="True" />
+        <field name="name">team-xavier.jpg</field>
+        <field name="datas_fname">team-xavier.jpg</field>
+        <field name="res_model">ir.ui.view</field>
+        <field name="type">url</field>
+        <field
+      name="datas"
+      type="base64"
+      file="alc_eshop_cms/static/src/img/team/team-xavier.jpg"
+    />
+    </record>
+</odoo>

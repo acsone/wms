@@ -20,10 +20,16 @@ class AlcContentUrlMixin(models.AbstractModel):
     name = fields.Char(required=True, translate=True)
     url = fields.Char(compute="_compute_url")
 
+    def _get_url_parts(self):
+        return [self.name]
+
     @api.depends("name")
     def _compute_url(self):
         for rec in self:
-            rec.url = "-".join([slugify(rec.name), str(rec.id)])
+            parts = rec._get_url_parts()
+            parts = [slugify(p) for p in parts]
+            parts.append(str(rec.id))
+            rec.url = "-".join(parts)
 
     @api.model
     def _get_from_url(self, url):

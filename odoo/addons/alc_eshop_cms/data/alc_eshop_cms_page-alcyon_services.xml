@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2022 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo noupdate="1">
+    <record model="alc.eshop.cms.page" id="alc_eshop_cms_page_born-to-share">
+        <field name="name">Born to share</field>
+        <field name="sequence">23</field>
+        <field name="published" eval="1" />
+        <field
+      name="cms_page_group_id"
+      ref="alc_eshop_cms_page_group_alcyon-services"
+    />
+        <field
+      name="cms_page_slot_ids"
+      eval="[(4, ref('alc_eshop_cms.alc_eshop_cms_page_slot_footer'))]"
+    />
+        <field
+      name="lang_ids"
+      eval="[(4, ref('base.lang_en')), (4, ref('base.lang_fr_BE')), (4, ref('base.lang_nl_BE'))]"
+    />
+        <field
+      name="content"
+    ><![CDATA[
+<h1>Born to share</h1>
+<h2>Showroom</h2>
+<p>Our Villiers-le-Bouillet premises are designed to respond as efficiently as possible to our profession’s logistical challenges, but we also wanted to be able to receive our clients with the same degree of efficiency. Our showroom welcomes vets who would like to place their orders directly on-site and more generally all vets who take part in seminars and conferences. Each year, the general meeting allows our many shareholders (over 100 at this time) to visit our showroom. Here you will find various equipment and work instruments, which you can compare and analyse in order to meet your needs as effectively as possible.</p>
+<h2>Our training courses</h2>
+<p>Created by and for veterinary surgeons, ALCYON Belux will assist you throughout your career. ALCYON Belux is associated with carefully chosen partners to assist you with your training. These partners may either be directly linked with you at your work or connected by a series of peripheral services allowing you to devote a maximum of time and energy to your passion - your veterinary work!</p>
+<p>Please do not hesitate to communicate your needs in terms of company set-up, finances, marketing, etc. ALCYON Belux will always try to find you the training course that suits you best and provides you with the maximum added value.</p>
+<p><strong>Please do not hesitate to communicate your requests via your delegates:</strong></p>
+<p><strong>Muriel DEGROOTE</strong><br/> Verviers, Liège, Namur, Charleroi, Mons<br/> Tel. : 0471 / 78 25 25<br/> Email : <a href="mailto:muriel.degroote@alcyonbelux.be">muriel.degroote@alcyonbelux.be</a></p>
+<p><strong>Raymond PIRARD</strong><br/> South and East Wallonia<br/> Tel. : 0475 / 36 57 24<br/> Email : <a href="mailto:raymond.pirard@alcyonbelux.be">raymond.pirard@alcyonbelux.be</a></p>
+<p><strong>Patricia LEVAN</strong><br/> Western and Eastern Flanders<br/> Tel. : 0476 / 64 53 63<br/> E-mail : <a href="mailto:patricia.levan@alcyonbelux.be">patricia.levan@alcyonbelux.be</a></p>
+<p><strong>Patricia DERYCKE</strong><br/> Brussels, Walloon Brabant, Hainaut<br/> Tel. : 0486 / 63 53 65<br/> E-mail : <a href="mailto:patricia.derycke@alcyonbelux.be">patricia.derycke@alcyonbelux.be</a></p>
+<h2>Our Seminars</h2>
+<p>Would you like to organise a course, conference or product demonstration for vets? Are you looking for a completely equipped and well located room? The Alcyon seminar room is exactly what you need.</p>
+]]></field>
+    </record>
+
+    <record model="alc.eshop.cms.page" id="alc_eshop_cms_page_seminar-room">
+        <field name="name">The seminar room</field>
+        <field name="sequence">22</field>
+        <field name="published" eval="1" />
+        <field
+      name="cms_page_group_id"
+      ref="alc_eshop_cms_page_group_alcyon-services"
+    />
+        <field
+      name="cms_page_slot_ids"
+      eval="[(4, ref('alc_eshop_cms.alc_eshop_cms_page_slot_footer'))]"
+    />
+        <field
+      name="lang_ids"
+      eval="[(4, ref('base.lang_en')), (4, ref('base.lang_fr_BE')), (4, ref('base.lang_nl_BE'))]"
+    />
+        <field
+      name="content"
+    ><![CDATA[
+<h1>The seminar room</h1>
+<h2>Description</h2>
+<p>You would like to organise a course, conference or product demonstration for vets. You are looking for a completely equipped and well located room. The Alcyon seminar room is exactly what you need.</p>
+<h3>Team work: you manage the subject matter; we organise the event</h3>
+<p>In order to allow you to concentrate on your course contents, we manage communications, reservations and preparing the room.</p>
+<h2>Alcyon communication pack</h2>
+<p>Making standard visual presentations on the basis of the information and illustrations you submit to us. Printing the slides in black and white and having them distributed by our delivery service (+/- 1000 copies). Advertising the event in the Alcyon website news section with a link to the dedicated page and registration form. Email reminder to everyone who has registered (+/- 1 week before the date of the event)</p>
+<h2>Are you interested? Let us know!</h2>
+<p>Show us your project and we’ll send you a detailed estimate very soon.</p>
+<p>Contact: 04/355.85.00</p>
+]]></field>
+    </record>
+
+    <record model="alc.eshop.cms.page" id="alc_eshop_cms_page_tailor-made-setup">
+        <field name="name">My tailor-made set-up</field>
+        <field name="sequence">21</field>
+        <field name="published" eval="1" />
+        <field
+      name="cms_page_group_id"
+      ref="alc_eshop_cms_page_group_alcyon-services"
+    />
+        <field
+      name="cms_page_slot_ids"
+      eval="[(4, ref('alc_eshop_cms.alc_eshop_cms_page_slot_footer'))]"
+    />
+        <field
+      name="lang_ids"
+      eval="[(4, ref('base.lang_en')), (4, ref('base.lang_fr_BE')), (4, ref('base.lang_nl_BE'))]"
+    />
+        <field
+      name="content"
+    ><![CDATA[
+<h1>My tailor-made set-up</h1>
+<p>Created by and for vets, ALCYON Belux will assist you throughout your career. Setting up constitutes the first stage of a long-term, high-quality partnership. Your Alcyon teams are available for advising and assisting you towards a successful outcome for your project in numerous areas.</p>
+<h2>Alcyon equipment</h2>
+<p>ALCYON Belux’ equipment department offers you a range of high-quality medical equipment. Our range is constantly kept up to date and benefits from the most recent technologies available on the market. We visit international trade fairs and are constantly seeking out the most modern equipment and in particular the equipment that is best adapted to your needs and your financial resources.</p>
+<p>Thus, ALCYON Belux ensures efficient and speedy after-sales service for you.</p>
+<p>We can help you to find funding sources, if that proves necessary. ALCYON Belux is not a mere supplier. We’re your partner!</p>
+<h2>Who do i need to contact to prepare my surgery and optimise my equipment?</h2>
+<p>Contact your Advisory Rep, whose details you can find below or get from our call centre.</p>
+<p>Your rep will take the time to draw up a list with you of the equipment you really need and will help optimise your budget. Please do not hesitate to contact us to get an offer:</p>
+<p><strong>RUDY NEIRYNCK</strong><br/> E-mail : <a href="mailto:rudy.neirynck@alcyonbelux.be">rudy.neirynck@alcyonbelux.be</a></p>
+<p>And for any other questions - financial, marketing, etc. Please do not hesitate to contact the Alcyon secretariat directly and/or your delegate. We can help you or refer you to specialists in each of the areas you need!</p>
+<p>By email: <a href="mailto:secretariat@alcyonbelux.be">secretariat@alcyonbelux.be</a><br/> By phone: 04/338.34.90</p>
+<h1>After-sales service</h1>
+<p>Created by and for vets, ALCYON Belux will assist you throughout your career. Your surgery and your equipment - essential components allowing you to exercise your profession effectively and with peace of mind.</p>
+<h2>First-line intervention</h2>
+<p>The Alcyon equipment department will immediately assist you in the event of any problems in order either to find an immediate solution as far as possible or to monitor the intervention of the specialist in question.</p>
+<p>ALCYON will follow up on repairs in the maintenance contracts, which we strongly recommend taking out when making your investment.</p>
+<h2>Follow-up on warranties</h2>
+<p>In accordance with each supplier’s own conditions, ALCYON Belux can guide you and assist you in order to ensure that the supplier gives you the help you need as quickly as possible and under the best possible conditions. ALCYON Belux can be limited in its actions by a supplier’s specific terms and conditions.</p>
+<h2>Replacement equipment</h2>
+<p>Given the range and variety of the equipment made available to you, it is clearly impossible for ALCYON to have replacement equipment permanently available. However, we always do our very best to try to sort you out while your own equipment is unavailable.</p>
+<p>For your after-sales service, please contact:</p>
+<p>By email: <a href="mailto:Erik.Hoitinga@alcyonbelux.be">Erik.Hoitinga@alcyonbelux.be</a><br/> By phone: 0470/60.06.14</p>
+]]></field>
+    </record>
+
+
+</odoo>

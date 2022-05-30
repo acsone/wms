@@ -1,0 +1,662 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2022 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo noupdate="1">
+    <record model="alc.eshop.cms.page" id="alc_eshop_cms_page_export">
+        <field name="name">Export</field>
+        <field name="sequence">56</field>
+        <field name="published" eval="1" />
+        <field name="cms_page_group_id" ref="alc_eshop_cms_page_group_others" />
+        <field
+      name="lang_ids"
+      eval="[(4, ref('base.lang_en')), (4, ref('base.lang_fr_BE')), (4, ref('base.lang_nl_BE'))]"
+    />
+        <field
+      name="content"
+    ><![CDATA[
+<h1>Export</h1>
+<p>The legislation on medication in Europe does not allow the free circulation of medicines. On the other hand, as regards other products, such as over-the-counter drugs, nutrition and equipment of any kind, ALCYON Belux can help you in your choices and can supply you anywhere in the world.</p>
+<p>Our terms and conditions of sale relating to exports are entirely specific to the country in question. Thank you in advance for contacting us in order to obtain an offer and find out the precise terms and conditions for delivery and payment.</p>
+<p>ALCYON Belux has positioned itself as an exit point for the group vis-à-vis the world. Our exports cover numerous continents and countries such as, obviously, the bordering countries, Luxembourg, France etc. but also countries much further afield, like Hong-Kong, China, Saudi Arabia, Rwanda, Gabon, the Democratic Republic of Congo, etc.</p>
+<p>Do send us your questions so that we can meet your needs.</p>
+<p>The world is a village!</p>
+]]></field>
+    </record>
+
+    <record model="alc.eshop.cms.page" id="alc_eshop_cms_page_general-conditions">
+        <field name="name">General Conditions</field>
+        <field name="sequence">51</field>
+        <field name="published" eval="1" />
+        <field name="cms_page_group_id" ref="alc_eshop_cms_page_group_others" />
+        <field
+      name="cms_page_slot_ids"
+      eval="[(4, ref('alc_eshop_cms.alc_eshop_cms_page_slot_subfooter'))]"
+    />
+        <field
+      name="lang_ids"
+      eval="[(4, ref('base.lang_en')), (4, ref('base.lang_fr_BE')), (4, ref('base.lang_nl_BE'))]"
+    />
+        <field
+      name="content"
+    ><![CDATA[
+<h1>General conditions of sale</h1>
+<p>The sale and delivery of goods and the provision of services under the conditions laid down in these general terms and conditions of sale apply only to customers established in Belgium. For other customers, the conditions of sale must be negotiated on a case-by-case basis with our Alcyon Belux Distribution Vétérinaire S.A. sales department (callcenter@alcyonbelux.be).</p>
+<p>These general terms and conditions for the sale of goods or the provision of services apply exclusively to all orders placed with Alcyon Belux Distribution Veterinaire S.A (hereinafter Alcyon Belux) and shall take precedence over any other terms and conditions of sale, subject to provisions to the contrary in a written agreement.</p>
+<p>The general terms and conditions of sale and delivery set out below, which are deemed known to and unreservedly accepted by the buyers, forms an integral part of each order/ purchase by the buyer. Any contrary or derogating conditions of purchase or any other restriction on the buyer in this connection shall be void and ineffective, unless we have expressly accepted it in writing.</p>
+<p>By placing an order on a website, a natural or legal person is deemed to have accepted these terms and conditions of sale in their entirety. They can be accessed via the website at any time and, where applicable, prevail over any other version and over the customer’s own general or other terms and conditions of purchase.</p>
+<h2>1. Offers and orders</h2>
+<p>Our offers are not binding. The products are offered for sale within the limits of the stock available at the time the order is recorded at ALCYON Belux. We are only committed to the sale once the order has been confirmed. Performance will occur under the general terms and conditions of sale and delivery, with the buyer’s general terms and conditions of purchase being excluded.</p>
+<p>Confirmations of orders, orders and verbal agreements shall only bind us when they are confirmed in writing or, in the absence of a written confirmation, where we fulfil the order unreservedly by sending goods and the invoice.</p>
+<h2>2. Deliveries</h2>
+<p>Subject to express, written conditions, our delivery dates are provided solely for information purposes and are not binding on us. They shall be extended in the case of a delay on the buyer’s part in sending the necessary documents and information for the proper execution of the sale, even if the buyer is not directly answerable for this delay. Even if there is an express agreement concerning the delivery deadlines, cases of force majeure entitle us to cancel any delivery or order, in full or in part, or to suspend its execution without prior notice and without any compensation for the buyer.</p>
+<p>We deliver the products to the delivery address agreed in our agreements prior to the start of our trading relationship. We reserve the right to choose the nature and mode of dispatch. Additional costs, incurred due to the buyer’s special requests concerning dispatch or delivery, will be borne by the latter.</p>
+<p>Due to the economic conditions, from 03/14/2022, a fee of 2€ excluding VAT will be charged per delivery. For all orders with an amount less than 150€ excl. VAT, surcharges and miscellaneous contributions, a flat rate contribution of 10.50€ excl. VAT will be charged for delivery costs. Any orders to be delivered outside of Belgium require a written agreement concerning delivery modes and charges.</p>
+<h2>3. Payment</h2>
+<p>Subject to written provisions to the contrary, our invoices are payable within 7 days following the invoice date without any discounts or reductions. VAT as well as any other taxes, duties, fees or any other payments imposed by an authority in relation to the execution of the order shall be borne by the buyer.</p>
+<p>Any sum that remains unpaid on the due date will lawfully give rise to default interest calculated on the basis of the applicable interest rate of the Banque Nationale, increased by 1%, without the need for a prior notice period. Moreover, the amount will be increased by a one-off compensation payment of 10%, with a minimum of €40 per invoice.</p>
+<p>If the customer is considered a consumer pursuant to Law 6 April 2010 regarding market practices and the protection of the consumer, the aforesaid penalty clause will also be applicable to Alcyon S.A. if it has not fulfilled its own contractual obligations (reciprocity clause).</p>
+<p>Payments are deemed made one we have actual and definitive access to the sums in question.</p>
+<h2>4. Retention of ownership</h2>
+<p>The products delivered remain owned by Alcyon Belux until full and effective payment has occurred, on a definitive and binding basis, in respect of all sums owed to us.</p>
+<h2>5. Returning goods</h2>
+<p>In principle, we do not accept returns of our goods and products. In exceptional and very particular cases described in points 5.1 to 5.4 below, we are, however ready to take back certain goods or products. In all cases, the costs of returning goods will be borne by the buyer.</p>
+<p>5.1 Only return requests reported within 48 hours or receipt of the goods will be considered. The request must be accompanied by a copy of the dispatch note returning the products under dispute.</p>
+<p>5.2 The products must be in perfect condition (original packaging, not torn, with no writing and/or additional labels, etc.) and accompanied by their accessories.</p>
+<p>5.3. Products sold as part of a promotion must be returned under the business regulations set our above. The return will automatically invalidate the special conditions and lead to additional billing.</p>
+<p>5.4. Products are returned under their terms and conditions of sale (price and discount). However, Alcyon Belux reserves the right to use 90% of the return sum to cover administrative and logistical fees.</p>
+<p>5.5. The following cannot be returned:</p>
+<ul>
+<li>products whose expiry date was indicated as tight,</li>
+</ul>
+<ul>
+<li>products subject to compliance with strict preservation conditions (cold chain),</li>
+</ul>
+<ul>
+<li>specially ordered products, precursors and “spin-off” products.</li>
+</ul>
+<p>Delivery errors that can be attributed to ALCYON Belux will always be taken into consideration and the products will be credited without charge in compliance with points 5.1 and 5.2.</p>
+<h2>6. Complaints</h2>
+<p>Our products are considered to have been approved at latest 7 calendar days after their delivery to the agreed delivery address, save a specific, detailed claim communicated to us before the expiry of this term by email, fax or registered letter. Approval covers all visible defects, i.e. all those that can be detected by a diligent and competent purchaser at the time of the delivery or within the following 7 calendar days by a careful and serious inspection, including those relating to the product's characteristics and quantities.</p>
+<p>Goods in respect of which a complaint has been made can only be sent back with our prior, express agreement and in their original packaging.</p>
+<p>The complaint itself does not release the buyer from his or her payment obligation.</p>
+<h2>7. Confidentiality and privacy</h2>
+<p>All the personal details you send for the purposes of the order and its processing will be confidential and will not be communicated to third parties, save for the purpose of processing your payment.</p>
+<p>In accordance with Belgian law of 8 December 1992 on the protection of privacy in the processing of personal details, as amended by the law of 11 December 1998, you have the right to access (communication of data) and rectify (correction of errors) your personal details. Our details are indicated in the legal notice, and a contact form is available on this site.</p>
+<h2>8. Intellectual property</h2>
+<p>The entire contents of the website (illustrations, photos, videos, descriptions, trade marks, etc.) are owned by Alcyon Belux and its co-contractors and partners. Any full or partial reproduction by any means whatsoever on any medium of any kind shall be subject to Alcyon Belux’ express, prior authorisation.</p>
+<p>All goods sold by Alcyon Belux are protected by Belgian and international law concerning intellectual property and copyright. Illicit appropriation and reproduction by the user will be pursued under criminal law. Alcyon Belux can in no case be held liable for the violation by the User of rights held by third parties, committed by virtue of the User’s activities on the website.</p>
+<h2>9. Applicable law and jurisdiction</h2>
+<p>The contract concluded by the parties is governed by Belgian legislation.</p>
+<p>Any disputes come under the sole jurisdiction of the justice of peace in the county or the courts in the district in which Alcyon Belux’ head office is situated.</p>
+<h2>10. Invalid conditions</h2>
+<p>If certain clauses of these general terms and conditions of sale and delivery are invalid, this will not affect the legitimacy of the other clauses or parts thereof. The parties must replace an invalid provision by one that is valid and that comes as close as possible to achieving the economic objective of the invalid provision.</p>
+]]></field>
+    </record>
+
+    <record model="alc.eshop.cms.page" id="alc_eshop_cms_page_legal-notices">
+        <field name="name">Legal notices</field>
+        <field name="sequence">52</field>
+        <field name="published" eval="1" />
+        <field name="cms_page_group_id" ref="alc_eshop_cms_page_group_others" />
+        <field
+      name="cms_page_slot_ids"
+      eval="[(4, ref('alc_eshop_cms.alc_eshop_cms_page_slot_subfooter'))]"
+    />
+        <field
+      name="lang_ids"
+      eval="[(4, ref('base.lang_en')), (4, ref('base.lang_fr_BE')), (4, ref('base.lang_nl_BE'))]"
+    />
+        <field
+      name="content"
+    ><![CDATA[
+<h1>Legal Notices</h1>
+<p>SA ALCYON BELUX VETERINARY DISTRIBUTION</p>
+<p>Rue le Marais,17 - 4530 Villers-le-Bouillet - BELGIUM</p>
+<p>LIEGE Trade Register Number: 138.989</p>
+<p>VAT number: BE 0421801233</p>
+<table>
+<thead>
+<tr>
+<th> </th>
+<th>TEL</th>
+<th>FAX</th>
+<th>E-MAIL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ADMINISTRATION</td>
+<td><strong>04/338 34 90</strong></td>
+<td>04/338 27 83</td>
+<td><a href="mailto:secretariat@alcyonbelux.be">secretariat@alcyonbelux.be</a></td>
+</tr>
+<tr>
+<td>ORDER DEPARTMENT</td>
+<td><strong>04/338 84 39</strong></td>
+<td>04/338 34 79</td>
+<td><a href="mailto:callcenter@alcyonbelux.be">callcenter@alcyonbelux.be</a></td>
+</tr>
+<tr>
+<td>QUALITY</td>
+<td><strong>04/338 84 22</strong></td>
+<td>04/338 84 35</td>
+<td><a href="mailto:qualite@alcyonbelux.be">qualite@alcyonbelux.be</a></td>
+</tr>
+</tbody>
+</table>
+<h2>Comptes bancaires</h2>
+<p><strong>CBC Banque</strong><br/> IBAN: BE20 1960 2447 3256<br/> BIC: CREGBEBB</p>
+<p><strong>ING Belgium</strong><br/> IBAN: BE33 3400 3074 9846<br/> BIC: BBRUBEBB</p>
+<p><strong>BELFIUS Banque</strong><br/> IBAN: BE68 5523 2846 0034<br/> BIC: GKCCBEBB</p>
+<p><strong>BNP PARIBAS FORTIS</strong><br/> IBAN: BE95 0015 9777 0458<br/> BIC: GEBABEBB</p>
+<h2>Intellectual and Industrial Property</h2>
+<p>The general structure, the information, pictograms, photographs, pictures, texts, video sequences, animations, with sound or otherwise, and other documents available on the Website are protected by industrial and/or intellectual property rights and are, according to the case, owned by ALYCON BELUX SA or third parties that have authorised their limited use by ALYCON BELUX SA.</p>
+<p>Therefore, any reproduction, representation, adaptation, translation and/or transformation, partial or integral, or transfer to another website or any other medium are prohibited.</p>
+<p>Copying for private use of these protected items is authorised. Their partial or integral reproduction, without prior written authorisation from Alcyon Belux SA, is strictly prohibited.</p>
+<p>This Website respects copyright. All copyrights of the authors of protected works reproduced and communicated on this Website are reserved.</p>
+<p>Save prior written authorisation, any use of the works other than for individual and private reproduction and consultation are prohibited.</p>
+<p>The trademarks featured on the Website are registered trademarks. Any total or partial reproduction of these trademarks is prohibited.</p>
+<p>Violation of all these compulsory provisions subjects the offender, and any responsible persons, to the criminal and civil penalties provided by law.</p>
+]]></field>
+    </record>
+
+    <record model="alc.eshop.cms.page" id="alc_eshop_cms_page_privacy-policy">
+        <field name="name">Privacy policy</field>
+        <field name="sequence">54</field>
+        <field name="published" eval="1" />
+        <field name="cms_page_group_id" ref="alc_eshop_cms_page_group_others" />
+        <field
+      name="cms_page_slot_ids"
+      eval="[(4, ref('alc_eshop_cms.alc_eshop_cms_page_slot_subfooter'))]"
+    />
+        <field
+      name="lang_ids"
+      eval="[(4, ref('base.lang_en')), (4, ref('base.lang_fr_BE')), (4, ref('base.lang_nl_BE'))]"
+    />
+        <field
+      name="content"
+    ><![CDATA[
+<h1>Privacy policy</h1>
+<h2>Introduction</h2>
+<p>With the development of the new communication tools, special attention needs to be focused on protecting privacy. That is why we undertake to respect the confidentiality of the personal information we gather.</p>
+<h2>Gathering of personal information</h2>
+<p>We gather the following information:</p>
+<ul>
+<li>Name</li>
+</ul>
+<ul>
+<li>First name</li>
+</ul>
+<ul>
+<li>Mailing address</li>
+</ul>
+<ul>
+<li>Postal code</li>
+</ul>
+<ul>
+<li>Email address</li>
+</ul>
+<ul>
+<li>Phone / fax number</li>
+</ul>
+<ul>
+<li>Credit card number</li>
+</ul>
+<ul>
+<li>Gender / Sex</li>
+</ul>
+<ul>
+<li>Age / Date of birth</li>
+</ul>
+<ul>
+<li>Academic / Training record</li>
+</ul>
+<ul>
+<li>Profession</li>
+</ul>
+<ul>
+<li>Drug store number (veterinary beneficiaries)</li>
+</ul>
+<ul>
+<li>OMV registration number (veterinary beneficiaries)</li>
+</ul>
+<ul>
+<li>VAT no.</li>
+</ul>
+<p>The personal information we collect is gathered in forms and through the interactivity established between you and our Website.</p>
+<p>Some information is collected in order to meet applicable law and standards regarding the distribution of veterinary drugs.</p>
+<p>We also use, as indicated in the following section, cookies and/or log files to gather information on you.</p>
+<h2>Forms and interactivity:</h2>
+<p>Your personal information is gathered by means of forms, these being:</p>
+<ul>
+<li>Application form to become a customer</li>
+</ul>
+<ul>
+<li>Contact form</li>
+</ul>
+<p>We use the information thus gathered for the following ends:</p>
+<ul>
+<li>Follow-up of the order</li>
+</ul>
+<ul>
+<li>Information / Promotional offers</li>
+</ul>
+<ul>
+<li>Statistics</li>
+</ul>
+<ul>
+<li>Contact</li>
+</ul>
+<ul>
+<li>Management of the Website (presentation, organisation)</li>
+</ul>
+<ul>
+<li>Adherence to applicable law and standards regarding the distribution of veterinary drugs</li>
+</ul>
+<p>Your details are also gathered by means of the interactivity that may be established between you and our Website, as follows:</p>
+<ul>
+<li>Statistics</li>
+</ul>
+<ul>
+<li>Contact</li>
+</ul>
+<ul>
+<li>Management of the Website (presentation, organisation)</li>
+</ul>
+<p>We use the information thus gathered for the following ends:</p>
+<ul>
+<li>Correspondence</li>
+</ul>
+<ul>
+<li>Information for promotional offers</li>
+</ul>
+<h2>Log files and cookies</h2>
+<p>We gather certain information by means of log files and cookies. This information is mainly the following:</p>
+<ul>
+<li>IP Address</li>
+</ul>
+<ul>
+<li>Operating system</li>
+</ul>
+<ul>
+<li>Pages visited and search requests</li>
+</ul>
+<ul>
+<li>Time and day of the visit</li>
+</ul>
+<p>Use of such files enables:</p>
+<ul>
+<li>Improvement of the service and personalised reception</li>
+</ul>
+<ul>
+<li>Personalised consumption profile</li>
+</ul>
+<ul>
+<li>Follow-up of the order</li>
+</ul>
+<ul>
+<li>Statistics</li>
+</ul>
+<h2>Right of opposition and withdrawal</h2>
+<p>We have undertaken to offer you the right to oppose and withdraw your personal information.</p>
+<p>The right to oppose is understood to be the possibility offered to browsers to refuse to have their personal details used for certain ends mentioned at the time they are gathered.</p>
+<p>The right to withdraw is understood to be the possibility offered to browsers to demand that their personal details no longer figure, for example, in a mailing list.</p>
+<p>These rights can be exercised on request to:</p>
+<p>Rue le Marais 17, Villers-le-Bouillet 4530&lt;br&gt;</p>
+<p>Courriel : laurence.ulrici@alcyonbelux.be&lt;br&gt;</p>
+<p>Phone: +3243383490&lt;br&gt;</p>
+<p>Section of the website: <a href="http://www.alcyonbelux.be/"> http://www.alcyonbelux.be/ </a></p>
+<h2>Access right</h2>
+<p>We undertake to acknowledge an access and rectification right to the persons concerned who wish to consult, modify or even delete their information.</p>
+<p>These rights can be exercised on request to:</p>
+<p>Rue le Marais 17, Villers-le-Bouillet 4530&lt;br&gt;</p>
+<p>Courriel : laurence.ulrici@alcyonbelux.be&lt;br&gt;</p>
+<p>Phone: +3243383490&lt;br&gt;</p>
+<p>Section of the website: <a href="http://www.alcyonbelux.be/"> http://www.alcyonbelux.be/ </a></p>
+<h2>Safety</h2>
+<p>The personal information we gather is kept in a secure environment. The persons working for us are required to keep your information confidential.</p>
+<p>To ensure the security of your personal information, we have used the following measures:</p>
+<ul>
+<li>SSL (Secure Sockets Layer) protocol</li>
+</ul>
+<ul>
+<li>SET (Secure Electronic Transaction) protocol</li>
+</ul>
+<ul>
+<li>Management of access - authorised person</li>
+</ul>
+<ul>
+<li>Management of access - person concerned</li>
+</ul>
+<ul>
+<li>Network monitoring software</li>
+</ul>
+<ul>
+<li>Computer backup</li>
+</ul>
+<ul>
+<li>Development of digital certificate</li>
+</ul>
+<ul>
+<li>ID / password</li>
+</ul>
+<ul>
+<li>Firewalls</li>
+</ul>
+<p>We undertake to maintain a high degree of confidentiality by integrating the latest technological innovations to guarantee the confidentiality of your transactions. However, as no mechanism provides maximum safety, there is always some risk when using Internet to send personal details.</p>
+<h2>Label</h2>
+<p>Our commitments concerning protection of personal details meet the requirements of the following programme:</p>
+<ul>
+<li>Comodo</li>
+</ul>
+<h2>Legislation</h2>
+<p>We undertake to adhere to the provisions of Law 8 December 1992 regarding the protection of privacy with respect to the processing of personal details and its implementation decrees.</p>
+]]></field>
+    </record>
+
+    <record model="alc.eshop.cms.page" id="alc_eshop_cms_page_rgpd">
+        <field name="name">Privacy and personal data confidentiality policy</field>
+        <field name="sequence">53</field>
+        <field name="published" eval="1" />
+        <field name="cms_page_group_id" ref="alc_eshop_cms_page_group_others" />
+        <field
+      name="lang_ids"
+      eval="[(4, ref('base.lang_en')), (4, ref('base.lang_fr_BE')), (4, ref('base.lang_nl_BE'))]"
+    />
+        <field
+      name="content"
+    ><![CDATA[
+<h1>Privacy and personal data confidentiality policy</h1>
+<p>Alcyon is concerned with protecting the personal data that it processes. To this end, Alcyon hereby commits to respect the enforceable regulations applicable to processing of personal data and, particularly, EU regulation 2016/679 of the European Parliament and Council dated 27th April 2016 that came into effect on 25th May 2018 (also known as the “general data protection regulation”).</p>
+<p>This privacy policy declaration aims to describe how Alcyon collects and processes your personal data, whether within the scope of the assistance which we provide to you for any questions you may ask us, the supply of your data via a form, the provision of a service by ourselves or yourselves, your application for a job vacancy or simply as part of our collaboration.</p>
+<p>This privacy policy therefore applies to the personal data of applicants for job vacancies, our customers, our suppliers, our various partners and other persons that we may contact within the scope of developing our business.</p>
+<p>We would like to mention that we may be led to modify this Privacy / Confidentiality policy. Please visit this page regularly to consult any modifications that we may publish.</p>
+<h2>1. What types of personal data do we collect?</h2>
+<h3>1.1. Customers</h3>
+<p>It is possible to visit an off-line part of our web site without sending personal data to us. However, if you wish to become a customer and make orders or if you wish to view our on-line catalogue, it is essential for us to create a customer record for you and thus collect the following data within the scope of creating a personalised customer record form:</p>
+<ul>
+<li>Surname and first name(s)</li>
+</ul>
+<ul>
+<li>Company name and legal name</li>
+</ul>
+<ul>
+<li>VAT number</li>
+</ul>
+<ul>
+<li>Invoicing address and delivery address</li>
+</ul>
+<ul>
+<li>E-mail</li>
+</ul>
+<ul>
+<li>Telephone (and/or fax) number</li>
+</ul>
+<ul>
+<li>Depository number</li>
+</ul>
+<ul>
+<li>Order number</li>
+</ul>
+<ul>
+<li>Bank details if you wish to set up a direct debit</li>
+</ul>
+<ul>
+<li>Any other personal data that you have deliberately sent to us</li>
+</ul>
+<p>We may also hold further information that a person from your company has chosen to send to us. If we require further personal data, we shall inform you of this fact.</p>
+<h3>1.2. Suppliers / sub-contractors</h3>
+<p>If you are a supplier or sub-contractor for Alcyon, we may need to collect a limited amount of personal data which you provide. In principle, Alcyon solely needs the contact details for the contact persons in your company who are in charge of the contract or contracts into which your company has entered with Alcyon in order to carry out management and follow-up of such contracts. We shall therefore request the following data:</p>
+<ul>
+<li>Surname and first name(s) of the contact person</li>
+</ul>
+<ul>
+<li>Company name and legal name</li>
+</ul>
+<ul>
+<li>VAT number</li>
+</ul>
+<ul>
+<li>Invoicing address and delivery address</li>
+</ul>
+<ul>
+<li>E-mail</li>
+</ul>
+<ul>
+<li>Telephone (and/or fax) number</li>
+</ul>
+<ul>
+<li>Any other personal data that you have deliberately sent to us</li>
+</ul>
+<p>In certain cases, we may collect your bank information in order to pay you if your account is not in the name of your company. We may also hold further information that a person from your company has chosen to send to us. If we require further personal data, we shall inform you of this fact.</p>
+<h3>1.3. Applicants for a job vacancy</h3>
+<p>Within the scope of a job offer at Alcyon, we will be led to collect the following data:</p>
+<ul>
+<li>Surname and first name(s)</li>
+</ul>
+<ul>
+<li>Address</li>
+</ul>
+<ul>
+<li>Age / date of birth</li>
+</ul>
+<ul>
+<li>Birth number</li>
+</ul>
+<ul>
+<li>Gender</li>
+</ul>
+<ul>
+<li>Photograph</li>
+</ul>
+<ul>
+<li>Marital status</li>
+</ul>
+<ul>
+<li>Contact details</li>
+</ul>
+<ul>
+<li>Qualifications</li>
+</ul>
+<ul>
+<li>Professional experience</li>
+</ul>
+<ul>
+<li>Immigration status (necessity of a work permit or not)</li>
+</ul>
+<ul>
+<li>Nationality / citizenship / place of birth</li>
+</ul>
+<ul>
+<li>A copy of your driving licence and/or passport or identity card</li>
+</ul>
+<ul>
+<li>Your social security number and other fiscal information</li>
+</ul>
+<ul>
+<li>Information related to diversity, including racial or ethnic origin, religion or other similar beliefs, and to physical or mental health, including information related to handicaps.</li>
+</ul>
+<ul>
+<li>Information on any criminal conviction if such information is required for the post for which you are applying.</li>
+</ul>
+<ul>
+<li>Information on your current salary, your pension plan and your social benefits.</li>
+</ul>
+<ul>
+<li>Information on your centres of interest and needs concerning your future job.</li>
+</ul>
+<ul>
+<li>Any further information that you choose to send to us.</li>
+</ul>
+<ul>
+<li>Any further information concerning you that our customers / partners may send to us.</li>
+</ul>
+<ul>
+<li>Any personal data that you have deliberately sent to us.</li>
+</ul>
+<p>Please note that the above list of personal data categories that we may collect is not exhaustive.</p>
+<h2>2. How is the personal data collected?</h2>
+<h3>2.1. Customers / suppliers / partners</h3>
+<p>We receive personal data directly from you in two ways:</p>
+<ul>
+<li>When you contact us pro-actively, generally by telephone or by e-mail.</li>
+</ul>
+<ul>
+<li>By means of contact forms that you complete on our web site.</li>
+</ul>
+<p>If necessary and in compliance with the applicable laws and regulations, we may obtain further information concerning you via:</p>
+<ul>
+<li>Market research by third parties and analysis of on-line plus off-line media (that we may conduct ourselves or sub-contract to other companies).</li>
+</ul>
+<ul>
+<li>From public databases.</li>
+</ul>
+<h3>2.2. Applicants for a job vacancy</h3>
+<p>We collect the personal data of applicants in two ways:</p>
+<ul>
+<li>You send us your personal data directly by post or any electronic means.</li>
+</ul>
+<ul>
+<li>Your data is communicated by other sources such as our customers, an employment agency, a third party, or a job offers / services web site.</li>
+</ul>
+<h2>3. Purposes and legal basis of processing</h2>
+<p>Generally speaking, personal data is only used to communicate with you, honour the orders you make with us, improve or develop our services or products, or propose targeted adverts and services to you.</p>
+<p>More specifically, we use your personal data to:</p>
+<ul>
+<li>Carry out missions for which we have been contracted or to be able to contact you concerning our agreements. The legal basis is your explicit agreement through signing a contract and our legitimate interest in providing you with a service perfectly adapted to your demands, or to obtain a service from you that is in accordance with our desires.</li>
+</ul>
+<ul>
+<li>Communicate with you in order to respond to your questions or requests, subject to having obtained your express consent.</li>
+</ul>
+<ul>
+<li>Respond to legal and regulatory obligations.</li>
+</ul>
+<ul>
+<li>Send you invitations, promotions and offers for events, particularly networking, visits to businesses or plots, training, symposiums, seminars, exhibitions, customer events, as well as general information on business sectors that are likely to be of interest to you. The legal basis for such communication is your express consent. Similarly, subject to obtaining your prior consent, we may share your personal data with third party partners, who may send you commercial offers related to their products and services. However, at any moment, you may refuse such direct marketing communication by informing us, or via the unsubscribe link that can be found in our communication material. The legal basis for such processing is your express consent.</li>
+</ul>
+<ul>
+<li>Assess the suitability of our job offers with your profile. The legal basis is your express consent and our legitimate interest in hiring an applicate who meets our requirements.</li>
+</ul>
+<p>In the case where the legal basis for processing is our legitimate interest, Alcyon ensures that the impact of the processing on protection of your privacy shall be as limited as possible and that, in any case, the balance between the legitimate interests of Alcyon and its partners and the possible impact on protecting your privacy is not disrupted. Despite this, if you object to such processing, you may exercise your right of objection.</p>
+<h2>4. What are your rights concerning processing of your personal data by alcyon and who can you contact?</h2>
+<p>You have rights related to processing of your personal data. While Alcyon may ask you for express authorisation for specific processing of your data, we may subsequently cancel your consent at any moment.</p>
+<p>The principle rights that you have are as follows:</p>
+<ul>
+<li>Right to consult your personal data.</li>
+</ul>
+<p>You may consult your personal data at any moment. All you need to do is to contact us at the following address: secretariat@alcyonbelux.be or on our web site via the “GDPR” form. We will then provide you with as comprehensive an overview as possible of your data.</p>
+<ul>
+<li>Right to correct your data.</li>
+</ul>
+<p>It may happen that your data that is in our possession is no longer up to date or correct. At any moment, you may request that this data is corrected or supplemented.</p>
+<ul>
+<li>Right to objection or deletion of your data.</li>
+</ul>
+<p>If you feel that your data is not used in an appropriate manner, you may request that your data is deleted from our records.</p>
+<p>You may exercise your rights, ask us any questions or make any comments concerning this declaration by contacting the address mentioned in the “Data Controller” section. We shall do our utmost to process your request as soon as possible and, in any case, within one month (subject to extensions authorised by law).</p>
+<p>Please note that we will not be able to grant your right to objection if we can demonstrate that we have either legitimate and pressing reasons to process your data which take precedence over your interests or any other reason that justifies maintaining processing of your personal data (e.g., legal obligations, contracts, etc.).</p>
+<h2>5. The data controller for your personal data</h2>
+<p>In compliance with Belgian law of 8th December 1992 concerning protection of privacy with regard to processing of personal data, and its subsequent modifications, as well as with the European Regulation 2016/679, also referred to as the General Data Protection Regulation (GDPR), the data controller for your personal data is:</p>
+<p>Alcyon Belux SA – 17 rue le Marais, 4530 Villers-le-Bouillet, Belgium. Tel.: (+32) (0)4/338 34 90</p>
+<p>To contact us, you can send your request directly to the e-mail address secretariat@alcyonbelux.be or to the postal address mentioned above.</p>
+<p>For all requests, we require proof of your identity in the form of a copy of the front and back of your identity card (or the relevant pages in your passport), or provision of your customer identification number, or any other data that will allow us to ascertain your identity. We may also request any further information that we deem to be necessary concerning your request. We will not invoice access to the data that we hold concerning you, unless your request is “manifestly unfounded or clearly abusive”. In such a case, we may invoice reasonable administrative costs to you within the extent permitted by law.</p>
+<h3>Supervisory Authority</h3>
+<p>The supervisory authority is the Belgian Privacy Commission.</p>
+<p>You may contact it by the following means:</p>
+<ul>
+<li>By telephone: (+32) (0)2 274 48 00</li>
+</ul>
+<ul>
+<li>E-mail: commission@privacycommission.be</li>
+</ul>
+<ul>
+<li>By its on-line contact form: <a href="https://www.privacycommission.be/en/contact-form"> https://www.privacycommission.be/en/contact-form </a></li>
+</ul>
+<ul>
+<li>By post: Commission de la protection de la vie privée, 35 Rue de la Presse, 1000 Brussels, Belgium</li>
+</ul>
+<ul>
+<li>Fax: (+32) (0)2 274 48 35</li>
+</ul>
+<h2>6. Security</h2>
+<p>Alcyon has implemented many technical, physical and organisational security measures in order to ensure the integrity, confidentiality and availability of the data concerning people who interact with Alcyon.</p>
+<p>Alcyon has implemented security techniques in order to protect the personal data stored on its computer servers against unauthorised access, inappropriate use, alterations, illegal or accidental destruction and accidental loss.</p>
+<p>Alcyon has committed to a process of monitoring and continual improvement of its security procedures in order to take account of new technology and new risks.</p>
+<p>If you suspect improper use, loss or unauthorised access concerning your personal data, please inform us immediately at: secretariat@alcyonbelux.be</p>
+<h2>7. Who has access to your personal data?</h2>
+<p>We share your personal data with the following categories of people:</p>
+<ul>
+<li>Our employees involved in processing your files. However, should they have a pressing requirement for knowledge of your personal data, they will only have access to your data on a need-to-know basis for the mission they are responsible for accomplishing.</li>
+</ul>
+<ul>
+<li>The employees of our institutional partners such as the services of the Walloon Government, or any other Belgian ministry or public authority.</li>
+</ul>
+<ul>
+<li>The employees of the tax authorities or any other public body in the case where the law or any other regulation requires your personal data to be communicated.</li>
+</ul>
+<ul>
+<li>Service providers who work on our behalf including in particular lawyers, bailiffs, external consultants, auditors, IT service providers, communications agencies, etc.</li>
+</ul>
+<h2>8. Will your personal data be transferred outside belgium’s borders?</h2>
+<p>In principle, Alcyon does not transfer personal data outside Belgium’s borders.</p>
+<p>However, if Alcyon is led to transfer your personal data to countries located outside the European Economic Area, standard contractual clauses adopted by the European Commission shall be imposed on the recipient if protection of personal data is deemed to be insufficient in the country in question.</p>
+<h2>9. For how long will your personal data be kept?</h2>
+<p>We only keep your personal data for the time necessary to fulfil the purposes described above.</p>
+<p>In principle, we will delete your personal data from our systems in the absence of contact with you or with the company for which you work that has a business relationship with Alcyon or following the end of the contract linking your company or yourself to Alcyon for an uninterrupted period of five years. However, we may store your personal data for a longer duration if required by laws or regulations.</p>
+<p>For the personal data of the employees working for our partners or that of our customers, such personal data shall be deleted on completion of a two-year period after the notification by our partner or our customer that you no longer work for them.</p>
+<p>For applicants for a job vacancy with Alcyon, the personal data shall be kept following completion of the selection process for the job vacancy in question for a maximum period of 2 years.</p>
+<h2>10. Modifications and amendments</h2>
+<p>We may occasionally make modifications to this Privacy and Confidentiality Policy Declaration in order chiefly to comply with new regulatory requirements. Any modification shall take effect immediately after publication of the updated Privacy and Confidentiality Policy Declaration. In the case of a substantial modification, before it enters into force, a notification shall be published or shall be directly sent to you. Should you continue to use our services following the effective date of the updated Privacy and Confidentiality Policy Declaration, we shall consider that you accept these modifications.</p>
+]]></field>
+    </record>
+
+    <record model="alc.eshop.cms.page" id="alc_eshop_cms_page_fridge-return">
+        <field name="name">Procédure retours produits frigos</field>
+        <field name="sequence">55</field>
+        <field name="published" eval="1" />
+        <field name="cms_page_group_id" ref="alc_eshop_cms_page_group_others" />
+        <field
+      name="lang_ids"
+      eval="[(4, ref('base.lang_fr_BE')), (4, ref('base.lang_nl_BE'))]"
+    />
+        <field
+      name="content"
+    ><![CDATA[
+<h1>Procédure retours produits frigos</h1>
+<p>Chers clients,</p>
+<p>Lors d’inspections récentes effectuées, l’AFMPS a constaté à plusieurs reprises que la remise en stock de médicaments retournés n’était pas toujours conforme à la législation en vigueur. Nous souhaitons donc spécifiquement attirer votre attention sur les exigences liées au retour des médicaments qui exigent des conditions de stockage à basse température.</p>
+<p>Pour ce type spécifique de produits, il doit être prouvé et documenté que le médicament a été stocké sans interruption dans les conditions de conservation autorisées.</p>
+<p>En cas d'écart, une évaluation du risque doit être effectuée, sur base de laquelle l'intégrité du produit peut être démontrée. La preuve englobera :</p>
+<ol>
+<li>
+<p>la livraison au client,</p>
+</li>
+<li>
+<p>l'examen du produit,</p>
+</li>
+<li>
+<p>l'ouverture de l'emballage de transport,</p>
+</li>
+<li>
+<p>le retour du produit dans l'emballage,</p>
+</li>
+<li>
+<p>la collecte et le renvoi au distributeur,</p>
+</li>
+<li>
+<p>le renvoi au réfrigérateur du site de distribution.</p>
+</li>
+</ol>
+<p>Dès lors, une déclaration sur l’honneur n’est plus une preuve suffisante.</p>
+<p>Pour rappel et comme demandé depuis le 08 janvier 2018 pour tous les produits qui exigent une température de stockage particulière nous vous demandons de respecter la procédure suivante :</p>
+<p><em>Introduire une demande de retour de produit froid auprès de notre service qualité. Une fois la demande acceptée, notre service qualité vous renverra un document que vous devrez compléter et joindre à votre retour de produit. Vous y adjoindrez les preuves d’enregistrement de température et renvoyez l’ensemble (produit, attestation de bonne conservation complétée et copie de la note d’envoi) chez Alcyon. L’enlèvement aura lieu sur la tournée choisie par Alcyon de manière à ce que le produit revienne au plus vite et puisse être traité dès son arrivée.</em></p>
+<p>Des contrôles fréquents seront assurés par l’AFMPS afin de vérifier si la procédure de retour de produits froids est bien respectée.</p>
+<p>En absence du strict respect des consignes ci-dessus rappelées, ces produits ne pourront pas être remis dans le stock vendable. Nous serons alors contraints de vous les retourner sans pouvoir vous les créditer.</p>
+<p>Nous restons disponibles pour toute question complémentaire.</p>
+<p>Veuillez agréer chers clients, l’expression de nos sentiments dévoués.</p>
+<p><strong>Samuel Van Bael</strong><br/> Pharmacien<br/> Personne Responsable GDP<br/> Alcyon Belux SA</p>
+<p><strong>Gregory Leyens</strong><br/> Vétérinaire<br/> Directeur Scientifique<br/> Alcyon Belux SA</p>
+]]></field>
+    </record>
+
+</odoo>

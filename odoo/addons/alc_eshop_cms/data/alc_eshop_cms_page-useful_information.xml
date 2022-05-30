@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2022 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo noupdate="1">
+
+    <record
+    model="alc.eshop.cms.page"
+    id="alc_eshop_cms_page_obligations-ordering-medication"
+  >
+        <field name="name">Obligations to meet when ordering medication</field>
+        <field name="sequence">30</field>
+        <field name="published" eval="1" />
+        <field
+      name="cms_page_group_id"
+      ref="alc_eshop_cms_page_group_useful-information"
+    />
+        <field
+      name="cms_page_slot_ids"
+      eval="[(4, ref('alc_eshop_cms.alc_eshop_cms_page_slot_footer'))]"
+    />
+        <field
+      name="lang_ids"
+      eval="[(4, ref('base.lang_en')), (4, ref('base.lang_fr_BE')), (4, ref('base.lang_nl_BE'))]"
+    />
+        <field
+      name="content"
+    ><![CDATA[
+<h1>Obligations to meet when ordering medication</h1>
+<h2>For belgian veterinary practioners</h2>
+<ul>
+<li>Being the manager of a veterinary medical depot and having sent us the number of the depot in question.</li>
+</ul>
+<ul>
+<li>Being a registered and paid-up member of the Veterinary Practitioners’ Association</li>
+</ul>
+<h2>For belgian pharmacies and wholesalers</h2>
+<ul>
+<li>Being in possession of an APB number (for pharmacies) or a (933V) permit for distributing veterinary medication (for wholesalers) and having communicated this number/ permit to us.</li>
+</ul>
+<h2>Eligible persons outside of belgium</h2>
+<ul>
+<li>Please contact Alcyon in order to send a copy of a certificate/ degree/ permit on an ad hoc basis.</li>
+</ul>
+<p>Royal Decree of 21 July 2016 relating to the conditions of use of medicines by veterinary practitioners and those taking care of animals.</p>
+]]></field>
+    </record>
+
+</odoo>
