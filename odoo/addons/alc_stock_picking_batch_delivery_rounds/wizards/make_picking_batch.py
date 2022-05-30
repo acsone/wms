@@ -105,11 +105,16 @@ class MakePickingBatch(models.TransientModel):
             MakePickingBatch, self
         )._candidates_pickings_to_batch(user=user)
         if not user.cluster_by_delivery_round:
+            # Filter out delivery round unauthorized:
+            delivery_rounds_authorized = candidates_pickings.mapped(
+                "delivery_round_id"
+            ).filtered(lambda d: user in d.operator_ids if d.operator_ids else True)
             # order pickings by delivery round before processing them
             query = """
             SELECT sp.id FROM stock_picking sp
                 JOIN round_instance ri ON sp.delivery_round_id = ri.id
                 WHERE sp.id  in %(picking_ids)s
+                    AND ri.id in %(authorized_delivery_round_ids)s
                     ORDER BY sp.operator_id,
                             %(order_by)s
                             ri.date,
@@ -118,6 +123,7 @@ class MakePickingBatch(models.TransientModel):
             """
             params = {
                 "picking_ids": tuple(candidates_pickings.ids),
+                "authorized_delivery_round_ids": tuple(delivery_rounds_authorized.ids),
                 "order_by": AsIs(
                     self._rounds_to_orderby_query(
                         self._operator_assigned_instances(user)
