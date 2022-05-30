@@ -1,0 +1,35 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* shopinvader_search_engine_update_product
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: shopinvader_search_engine_update_product
+#: model:ir.model.fields,field_description:shopinvader_search_engine_update_product.field_product_update_mixin_display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: shopinvader_search_engine_update_product
+#: model:ir.model.fields,field_description:shopinvader_search_engine_update_product.field_product_update_mixin_id
+msgid "ID"
+msgstr ""
+
+#. module: shopinvader_search_engine_update_product
+#: model:ir.model.fields,field_description:shopinvader_search_engine_update_product.field_product_update_mixin___last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: shopinvader_search_engine_update_product
+#: model:ir.model,name:shopinvader_search_engine_update_product.model_product_update_mixin
+msgid "product.update.mixin"
+msgstr ""
+
