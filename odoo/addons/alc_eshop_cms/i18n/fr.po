@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* alc_eshop_cms
+# 	* alc_eshop_cms
 #
 msgid ""
 msgstr ""
@@ -10,6 +10,7 @@ msgstr ""
 "PO-Revision-Date: 2022-05-25 11:28+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -17,14 +18,25 @@ msgstr ""
 
 #. module: alc_eshop_cms
 #: model:alc.eshop.snippet,content:alc_eshop_cms.alc_eshop_snippet_product_on_order_cancel_intro
-msgid "\n"
-"<p>You can ask to modify the quantities in back order using the form here under. You will be able to see the modification in your account, under \"Product orders\", once our team will have manually modified your order.</p>\n"
-"<p>All questions concerning backorders can be addressed to our team by phone: <strong>+32 4 338 84 39</strong> or by email: <a href=\"mailto:callcenter@alcyonbelux.be\">callcenter@alcyonbelux.be</a>.</p>\n"
-""
-msgstr "\n"
-"<p>Vous pouvez demander une modification des quantités en backorder via le formulaire ci-dessous. La modification sera visible dans votre Espace privé, section \"Produits en commande\" après traitement de votre demande par notre service callcenter.</p>\n"
-"<p>Pour toute question concernant vos reliquats, vous pouvez contacter notre service callcenter par téléphone au: <strong>+32 4 338 84 39</strong> ou par mail à: <a href=\"mailto:callcenter@alcyonbelux.be\">callcenter@alcyonbelux.be</a>.</p>\n"
-""
+msgid ""
+"\n"
+"<p>You can ask to modify the quantities in back order using the form here "
+"under. You will be able to see the modification in your account, under "
+"\"Product orders\", once our team will have manually modified your order.</"
+"p>\n"
+"<p>All questions concerning backorders can be addressed to our team by "
+"phone: <strong>+32 4 338 84 39</strong> or by email: <a href=\"mailto:"
+"callcenter@alcyonbelux.be\">callcenter@alcyonbelux.be</a>.</p>\n"
+msgstr ""
+"\n"
+"<p>Vous pouvez demander une modification des quantités en backorder via le "
+"formulaire ci-dessous. La modification sera visible dans votre Espace privé, "
+"section \"Produits en commande\" après traitement de votre demande par notre "
+"service callcenter.</p>\n"
+"<p>Pour toute question concernant vos reliquats, vous pouvez contacter notre "
+"service callcenter par téléphone au: <strong>+32 4 338 84 39</strong> ou par "
+"mail à: <a href=\"mailto:callcenter@alcyonbelux.be\">callcenter@alcyonbelux."
+"be</a>.</p>\n"
 
 #. module: alc_eshop_cms
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_snippet_code

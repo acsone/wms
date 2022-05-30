@@ -14,17 +14,33 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_eshop_cms
+#: model:alc.eshop.snippet,content:alc_eshop_cms.alc_eshop_snippet_product_on_order_cancel_intro
+msgid "\n"
+"<p>You can ask to modify the quantities in back order using the form here under. You will be able to see the modification in your account, under \"Product orders\", once our team will have manually modified your order.</p>\n"
+"<p>All questions concerning backorders can be addressed to our team by phone: <strong>+32 4 338 84 39</strong> or by email: <a href=\"mailto:callcenter@alcyonbelux.be\">callcenter@alcyonbelux.be</a>.</p>\n"
+""
+msgstr ""
+
+#. module: alc_eshop_cms
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_snippet_code
+msgid "Code"
+msgstr ""
+
+#. module: alc_eshop_cms
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_news_content
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_snippet_content
 msgid "Content"
 msgstr ""
 
 #. module: alc_eshop_cms
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_news_create_uid
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_snippet_create_uid
 msgid "Created by"
 msgstr ""
 
 #. module: alc_eshop_cms
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_news_create_date
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_snippet_create_date
 msgid "Created on"
 msgstr ""
 
@@ -47,6 +63,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_content_lang_mixin_display_name
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_content_url_mixin_display_name
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_news_display_name
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_snippet_display_name
 msgid "Display Name"
 msgstr ""
 
@@ -63,6 +80,12 @@ msgstr ""
 #. module: alc_eshop_cms
 #: model:ir.actions.act_window,name:alc_eshop_cms.alc_eshop_news_act_window
 msgid "Eshop News"
+msgstr ""
+
+#. module: alc_eshop_cms
+#: model:ir.actions.act_window,name:alc_eshop_cms.alc_eshop_snippet_act_window
+#: model:ir.ui.menu,name:alc_eshop_cms.alc_eshop_snippet_menu
+msgid "Eshop Snippet"
 msgstr ""
 
 #. module: alc_eshop_cms
@@ -90,6 +113,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_content_lang_mixin_id
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_content_url_mixin_id
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_news_id
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_snippet_id
 msgid "ID"
 msgstr ""
 
@@ -128,6 +152,7 @@ msgstr ""
 #. module: alc_eshop_cms
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_content_lang_mixin_lang_ids
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_news_lang_ids
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_snippet_lang_ids
 msgid "Lang"
 msgstr ""
 
@@ -135,16 +160,19 @@ msgstr ""
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_content_lang_mixin___last_update
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_content_url_mixin___last_update
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_news___last_update
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_snippet___last_update
 msgid "Last Modified on"
 msgstr ""
 
 #. module: alc_eshop_cms
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_news_write_uid
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_snippet_write_uid
 msgid "Last Updated by"
 msgstr ""
 
 #. module: alc_eshop_cms
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_news_write_date
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_snippet_write_date
 msgid "Last Updated on"
 msgstr ""
 
@@ -152,7 +180,9 @@ msgstr ""
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_content_lang_mixin_name
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_content_url_mixin_name
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_news_name
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_snippet_name
 #: model:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_news_form_view
+#: model:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_snippet_form_view
 msgid "Name"
 msgstr ""
 
@@ -198,6 +228,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_news_image_url
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_news_thumbnail_image_url
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_news_url
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_snippet_url
 msgid "Url"
 msgstr ""
 
@@ -222,7 +253,13 @@ msgid "alc.eshop.news"
 msgstr ""
 
 #. module: alc_eshop_cms
+#: model:ir.model,name:alc_eshop_cms.model_alc_eshop_snippet
+msgid "alc.eshop.snippet"
+msgstr ""
+
+#. module: alc_eshop_cms
 #: model:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_news_form_view
+#: model:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_snippet_form_view
 msgid "name"
 msgstr ""
 
