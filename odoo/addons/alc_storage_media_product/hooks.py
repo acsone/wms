@@ -4,7 +4,7 @@
 from odoo import SUPERUSER_ID, api
 
 
-def post_init_hook(cr):
+def post_init_hook(cr, registry):
     """Loaded before installing the module.
     :param odoo.sql_db.Cursor cr:
         Database cursor.
