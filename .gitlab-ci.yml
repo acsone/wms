@@ -187,7 +187,9 @@ coverage-report:
     name: "${CI_PROJECT_NAME}-${CI_JOB_ID}-coverage-html"
     expose_as: "Test coverage"
     reports:
-      cobertura: coverage.xml
+      coverage_report:
+        coverage_format: cobertura
+        path: coverage.xml
   needs:
     - job: test
       artifacts: true
