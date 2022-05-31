@@ -3,6 +3,7 @@ odoo.define("storage_image.media_handle", function(require) {
   var core = require("web.core");
   var data = require("web.data");
   var Model = require("web.DataModel");
+  require("web_kanban.Many2ManyKanbanView");
 
   core.view_registry.get("one2many_kanban").include({
     render: function() {
