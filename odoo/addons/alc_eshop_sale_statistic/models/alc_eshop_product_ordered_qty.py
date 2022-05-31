@@ -55,6 +55,7 @@ FROM
 where
     so.sale_channel IN %(channels)s
     AND so.state in ('done', 'sale')
+    AND (pt.is_food OR pt.is_meds OR pt.is_equipment)
     AND date_order >= DATE_TRUNC('month', NOW() - INTERVAL '1 year')
 
 GROUP BY so.partner_id, sol.product_id, pp.product_tmpl_id, pt.is_food, pt.is_equipment, pt.is_meds
