@@ -88,6 +88,7 @@
         "account_move_productcateg",
         "account_payment_order_background",
         "account_tax_one_vat",
+        "alc_address_data",
         "alc_automatic_account_move_line_reconcile",
         "alc_account_invoice_cancel_permissions",
         "alc_account_payment_globalization",
