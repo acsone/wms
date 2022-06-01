@@ -12,8 +12,6 @@
         <t t-set="total_food_unit" t-value="0" />
         <t t-set="total_mat_box" t-value="0" />
         <t t-set="total_mat_unit" t-value="0" />
-        <t t-set="total_human_box" t-value="0" />
-        <t t-set="total_human_unit" t-value="0" />
         <t t-set="total_total_box" t-value="0" />
         <t t-set="total_total_unit" t-value="0" />
         <div class="page">
@@ -238,7 +236,7 @@
                   <t t-set="index" t-value="index + 1" />
                 </tr>
                 <tr>
-                  <td colspan="4" class="active">Total number of box(es)</td>
+                  <td colspan="3" class="active">Total number of box(es)</td>
                   <td>
                     <span t-esc="int(total_medoc_box)" class="pull-right" />
                   </td>
@@ -252,15 +250,12 @@
                     <span t-esc="int(total_mat_box)" class="pull-right" />
                   </td>
                   <td>
-                    <span t-esc="int(total_human_box)" class="pull-right" />
-                  </td>
-                  <td>
                     <span t-esc="int(total_total_box)" class="pull-right" />
                   </td>
                   <td class="active" />
                 </tr>
                 <tr>
-                  <td colspan="4" class="active">Total number of unit(s)</td>
+                  <td colspan="3" class="active">Total number of unit(s)</td>
                   <td>
                     <span t-esc="int(total_medoc_unit)" class="pull-right" />
                   </td>
@@ -274,15 +269,12 @@
                     <span t-esc="int(total_mat_unit)" class="pull-right" />
                   </td>
                   <td>
-                    <span t-esc="int(total_human_unit)" class="pull-right" />
-                  </td>
-                  <td>
                     <span t-esc="int(total_total_unit)" class="pull-right" />
                   </td>
                   <td class="active" />
                 </tr>
                 <tr>
-                  <td colspan="4" class="active">Total number of parcel(s)</td>
+                  <td colspan="3" class="active">Total number of parcel(s)</td>
                   <td>
                     <span
                       t-esc="int(total_medoc_unit + total_medoc_box)"
@@ -304,12 +296,6 @@
                   <td>
                     <span
                       t-esc="int(total_mat_unit + total_mat_box)"
-                      class="pull-right"
-                    />
-                  </td>
-                  <td>
-                    <span
-                      t-esc="int(total_human_unit + total_human_box)"
                       class="pull-right"
                     />
                   </td>
