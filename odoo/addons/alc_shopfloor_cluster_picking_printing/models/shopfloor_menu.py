@@ -10,7 +10,7 @@ class ShopfloorMenu(models.Model):
 
     print_on_pack_pickings = fields.Boolean(
         string="Print Labels on Pack Pickings",
-        default=True,
+        default=False,
         help="When ticked, pack and product labels are printed as result of "
         "the put in pack action.",
     )
