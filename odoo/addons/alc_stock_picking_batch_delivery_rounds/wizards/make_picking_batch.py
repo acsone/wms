@@ -2,7 +2,9 @@
 # Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _, models
+from psycopg2.extensions import AsIs
+
+from odoo import _, api, models
 from odoo.exceptions import ValidationError
 
 
@@ -53,11 +55,19 @@ class MakePickingBatch(models.TransientModel):
                             AND sp.state NOT IN ('done', 'cancel')
                         )
                         )
-                    ORDER BY ri.date, ri.time_picking_planned
+                    ORDER BY sp.operator_id,
+                            %(order_by)s
+                            ri.date,
+                            ri.time_picking_planned,
+                            ri.id ASC
+
         """
         params = {
             "operator": user.id,
             "picking_type_ids": tuple(picking_type_ids),
+            "order_by": AsIs(
+                self._rounds_to_orderby_query(self._operator_assigned_instances(user))
+            ),
         }
         self.env.cr.execute(query, params)
         result = self.env.cr.fetchall()
@@ -119,5 +129,25 @@ class MakePickingBatch(models.TransientModel):
             )
             candidates_pickings = candidates_pickings.filtered(
                 lambda p: p.delivery_round_id in delivery_rounds_authorized
+            ).sorted(
+                key=lambda p, drs=delivery_rounds_authorized: drs.ids.index(
+                    p.delivery_round_id.id
+                )
             )
+
         return candidates_pickings
+
+    @api.model
+    def _operator_assigned_instances(self, operator_id=None):
+        operator_id = operator_id or self.env.user
+        domain_rounds = [("state", "in", ["pending", "open", "close"])]
+        open_rounds = self.env["round.instance"].search(domain_rounds)
+        return open_rounds.filtered(lambda r: operator_id in r.operator_ids)
+
+    @api.model
+    def _rounds_to_orderby_query(self, round_instances):
+        order_clause = ""
+        if round_instances:
+            cases = ["WHEN %s THEN 0" % i for i in round_instances.ids]
+            order_clause = "CASE ri.id %s ELSE 1 END, " % " ".join(cases)
+        return order_clause
