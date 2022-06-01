@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2022 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo noupdate="1">
+    <record model="alc.eshop.cms.page" id="alc_eshop_cms_page_about-us">
+        <field name="name">About us</field>
+        <field name="sequence">10</field>
+        <field name="published" eval="1" />
+        <field name="cms_page_group_id" ref="alc_eshop_cms_page_group_about-us" />
+        <field
+      name="cms_page_slot_ids"
+      eval="[(4, ref('alc_eshop_cms.alc_eshop_cms_page_slot_footer'))]"
+    />
+        <field
+      name="lang_ids"
+      eval="[(4, ref('base.lang_en')), (4, ref('base.lang_fr_BE')), (4, ref('base.lang_nl_BE'))]"
+    />
+        <field
+      name="content"
+    ><![CDATA[
+<h1>About us?</h1>
+<p>Alcyon, the leader in the distribution of medicines for animals, food and equipment, was created by and for vets, in order to provide them with the best solutions in conducting their daily practice.</p>
+<h2>Alcyon is guided by a single strategy: fostering and strengthening the veterimary profession</h2>
+<p>At the level of the ALCYON group, more than 5,000 practising vets are both our customers and our shareholders. ALCYON’s logistical knowhow is at your service on a daily basis! With Alcyon, you benefit from the country’s most extensive product range. Being in the profession ourselves, we understand where you’re coming from!</p>
+<h2>Developing services tailored to your expectations</h2>
+<p>Alcyon is attuned to your expectations. We are offering you a set of services devised to make your daily life easier and allow you to evolve in better conditions.</p>
+<h2>Achieve excellence</h2>
+<p>In order to be effective, we need to be skilled. That is why your Alcyon teams receive regular training in order to ensure the best service. This is an essential point in our relationship with you: reception, information, order, after-sales service, etc.</p>
+<h2> </h2>
+<h1>100% VETERINARY</h1>
+<h2>Alcyon is your company - it is the only distribution company that is 100% owned by vets</h2>
+<p>The Board of Directors is made up of 12 practising colleagues. They share your everyday experience and make sure that Alcyon meets your expectations.</p>
+<h2> </h2>
+<h1>Alcyon’s values</h1>
+<h2>Authenticity</h2>
+<p>Our company’s articles of association, which constitute our guarantee of independence, provide that only veterinary practitioners can hold shares. Alcyon is and always will be a veterinary distribution company in the service of the profession. ALCYON is there to protect the sector. Our investment is not speculative. Our customers are our shareholders! YOU too can become an ALCYON shareholder. Find out about it!</p>
+<h2>Performance</h2>
+<p>Both economically and logistically wise.</p>
+<p>Economically because your company needs to release the necessary funds for maintaining and developing the necessary tools for meeting your needs.</p>
+<p>Logistically because every day each of our staff members will make all of our products and services needed for the most efficient and harmonious practice of your science of healing available to you precisely when and where you need them.</p>
+<h2>Ingenuity</h2>
+<p>In order to be effective, we need to be skilled, inventive and creative! That is why your ALCYON teams receive regular training in order to ensure the best service and best response to your needs. Our teams needs to constantly evolve, meet and anticipate the very least of your expectations and develop adequate services.</p>
+<h2>Adaptability</h2>
+<p>ALCYON’s size favours adaptability. We can react very quickly to deal with any situation. We don’t need to follow the arbitrary regulations of big groups more ruled by short-term profits and stock-exchange results than by their customers’ satisfaction.</p>
+<h2> </h2>
+<h1>Alcyon is the sole distributeur by and for veterinary practitioners</h1>
+]]></field>
+    </record>
+
+     <record model="alc.eshop.cms.page" id="alc_eshop_cms_page_chronology-crazy-dream">
+        <field name="name">Chronology of a rather crazy dream</field>
+        <field name="sequence">13</field>
+        <field name="published" eval="1" />
+        <field name="cms_page_group_id" ref="alc_eshop_cms_page_group_about-us" />
+        <field
+      name="cms_page_slot_ids"
+      eval="[(4, ref('alc_eshop_cms.alc_eshop_cms_page_slot_footer'))]"
+    />
+        <field
+      name="lang_ids"
+      eval="[(4, ref('base.lang_en')), (4, ref('base.lang_fr_BE')), (4, ref('base.lang_nl_BE'))]"
+    />
+        <field
+      name="content"
+    ><![CDATA[
+<h1>Chronology of a rather crazy dream</h1>
+<p>It could all be summed up by a quote from Dom Helder CAMARA: “When we are dreaming alone, it’s only a dream. When we are dreaming with others, it’s the beginning of reality. Shared utopia is the province of history.”</p>
+<p>It all began back in the nineteen nineties. In response to particular circumstances, a few kamikaze vets decided to set up a veterinary group following a model that had already existed in France for over 20 years. Two cooperatives were born, PROLIPHARM and PROLIMAT. They were joined by around fifty practising vets.</p>
+<p>The goal was simple: to create a professional tool by and for veterinary practitioners with a view to anticipating developments in the profession and protecting the profession’s economic future.</p>
+<p>Our colleagues, Eric BASLEER, a practitioner in Heure le Romain and Michel DANS, who decided to give up his rural practice in Fexhe le Haut Clocher, were entrusted respectively with the presidency and the daily management. PROLIPHARM rapidly took on a significant role in the distribution of pharmaceutical products in the Liège province.</p>
+<p>In 1996, the general management was entrusted to Dr. Pierre VAN THEMSCHE and the business management was handed over to Jean-Pierre CULOT.</p>
+<p>That same year, SOBELVET became the majority shareholder of COPHARDEL, a joint-stock corporation undertaking activities that were theoretically similar to ours.</p>
+<p>Following an action brought before the Belgian Association of Veterinary Practitioners, a mixed appeal board issued a ground-breaking judgement for us and vets, confirming that being a shareholder in a company like SOBELVET did not conflict with the code of ethics.</p>
+<p>In 1997, SOBELVET absorbed Cophardel’s activities and transferred them to Seraing along with the veterinary activities of the pharmacy CONCORDE situated in the Namur region.</p>
+<p>Initiatives were taken in a context of partnership with the veterinary world (parliamentary questions, seminar on veterinary medication, molecules and orphan diseases, etc.). We committed ourselves by a contract to meet the profession’s needs.</p>
+<p>In 2001, we innovated, making our first veterinary website available to our colleagues with an e-commerce section online. At the end of the year, we resumed the veterinary pharmacy activities of EXIMPHARM in Bastogne, managed by our colleague Guy MALDAGUE.</p>
+<p>In February 2002, the company was nominated as one of the “Gazelles 2002” [companies distinguished by their growth and dynamism] by the weekly journal TRENDS TENDANCES. It was nominated again the following year. We were given a third distinction in 2006 and several times more since then. In October 2003, we were proud to inaugurate the extension of our building in Seraing.</p>
+<p>In 2003, 4 French veterinary distribution cooperatives, COVELY, VETARVOR, CAVEGAT and SAVENOR merged to form ALCYON France. The group ALCYON was born and shares in SOBELVET that had previously been held by SAVENOR were transferred into a key holding in ALCYON INTERNATIONAL, as were the shares of the Italian subsidiary COVEL'ITALIA held by COVELY.</p>
+<p>In mid 2004, VETIPHAR, situated in Ath and founded and managed by our colleague, Guy DUQUESNE, was also absorbed. Two months later, the veterinary activities of the pharmacy HARDY in Amel (Amblève) were purchased and transferred to Seraing.</p>
+<p>In January 2005, with the aim of harmonising at European level, SOBELVET decided to change its name to ALCYON BELUX SA. The group Alcyon is positioned as the premier veterinary distribution unit with over 3,600 vets who are shareholders.</p>
+<p>At the end of the year, we took over the veterinary activities of the BON AIR pharmacy in Anderlecht.</p>
+<p>At the beginning of 2009, we innovated further in our sector by installing Voice Picking, a process whereby warehouse staff prepare your orders guided by an artificial computer voice. We are pursuing multiple objectives: as well as productivity gains, we want to ensure consistency in the traceability of products while improving the well-being of the workers when preparing them.</p>
+<p>In July, we took over the limited-liability partnership VETICOM based in Tielt-Winge, which opened up ALCYON a bit more to the Flemish-speaking part of the country.</p>
+<p>On 17 August, the much anticipated work of building lobbies, platforms and offices got underway at Villers le Bouillet. The work was certified by the AFMPS on Thursday 1 April 2010 and the very next day, which was the beginning of the Easter weekend, the transfer of all materials, offices and stocks from Seraing to Villers le Bouillet was started up. No less than 32 trailers were loaded up, unloaded and tidied away over those 4 days during which the whole ALCYON BELUX pitched in to guarantee the customers’ satisfaction, having everything ready for them on the first working day after Easter.</p>
+<p>The official inauguration of the new premises, in the presence of the ministers Marcourt and Laruelle took place on 30 April 2011. The appointment also took place of a new general manager, Serge Wuestenberghs, the first manager who was not himself a vet but a civil engineer with a masters in business management. Pierre Van Themsche was able to embark on his well-earned retirement.</p>
+<p>Armed with its partners and the group’s own strength, ALCYON keeps on developing new services and products in the service of its partner pharmacies. ALCYON is the sole wholesaler/ distributor to be 100% owned by vets and whose directors are all vets</p>
+<p>This has allowed ALCYON to remain faithful to its values, which you also share - realism, transparency, innovation and collegiality - and its promises:</p>
+<p>Creating an effective professional tool in the service of practitioners and ensuring the continued development of its economic activities.</p>
+<p>Deserving your trust is what makes us strong.</p>
+]]></field>
+    </record>
+
+    <record
+    model="alc.eshop.cms.page"
+    id="alc_eshop_cms_page_quality-identity-veterinary"
+  >
+        <field name="name">Seven qualities, one identity: veterinary!</field>
+        <field name="sequence">11</field>
+        <field name="published" eval="1" />
+        <field name="cms_page_group_id" ref="alc_eshop_cms_page_group_about-us" />
+        <field
+      name="cms_page_slot_ids"
+      eval="[(4, ref('alc_eshop_cms.alc_eshop_cms_page_slot_footer'))]"
+    />
+        <field
+      name="lang_ids"
+      eval="[(4, ref('base.lang_en')), (4, ref('base.lang_fr_BE')), (4, ref('base.lang_nl_BE'))]"
+    />
+        <field
+      name="content"
+    ><![CDATA[
+<h1>Seven qualities, one identity: veterinary!</h1>
+<h2>1. Unique identity</h2>
+<p>Alcyon is the only veterinary distribution company that is 100% owned by you. All of the directors and shareholders are colleagues. Why not join?</p>
+<h2>2. Protection of the profession</h2>
+<p>Being representative is key! Numerous directors and shareholders are active within professional structures at both national and European levels.</p>
+<p>Together we shall build your future.</p>
+<h2>3. Healthy management</h2>
+<p>Our clients are our owners. No frantic rush to make a buck.</p>
+<h2>4. Availability product</h2>
+<p>With almost 14,000 products, we are offering you the most extensive product range in order to guarantee you peace of mind in your medical practice, without substitutions.</p>
+<h2>5. Evolution</h2>
+<p>Alcyon is continually optimising its activities and developing tools allowing it to achieve absolute reliability in preparing your orders.</p>
+<h2>6. Devoted team</h2>
+<p>Each of our staff members appreciates the important role of the vet and will do their utmost to assist you in your activities. Your Alcyon team receive continuous training to this end.</p>
+<h2>7. Eco-attitude</h2>
+<p>Ecological building, recovering packaging, waste sorting, etc. Like you, we are taking steps towards a better environment.</p>
+<h2>Alcyon is a Vet. Alcyon is a Partner Alcyon is you !</h2>
+]]></field>
+    </record>
+
+    <record model="alc.eshop.cms.page" id="alc_eshop_cms_page_your-team-alcyon">
+        <field name="name">Your team Alcyon</field>
+        <field name="sequence">12</field>
+        <field name="published" eval="1" />
+        <field name="cms_page_group_id" ref="alc_eshop_cms_page_group_about-us" />
+        <field
+      name="cms_page_slot_ids"
+      eval="[(4, ref('alc_eshop_cms.alc_eshop_cms_page_slot_footer'))]"
+    />
+        <field
+      name="lang_ids"
+      eval="[(4, ref('base.lang_en')), (4, ref('base.lang_fr_BE')), (4, ref('base.lang_nl_BE'))]"
+    />
+        <field
+      name="content"
+    ><![CDATA[
+<h1>Your team Alcyon</h1>
+<p>Each employee is aware of the importance of the role of the veterinarian and does his or her utmost to support you in your activity.</p>
+<h3>Fabrice - Sales representative</h3>
+<p><img src="/web/image/alc_eshop_cms.ir_att_img_team_fabrice"/></p>
+<h3>Raymond - Sales representative</h3>
+<p><img src="/web/image/alc_eshop_cms.ir_att_img_team_raymond"/></p>
+<h3>Patricia B. - Quality department</h3>
+<p><img src="/web/image/alc_eshop_cms.ir_att_img_team_patricia"/></p>
+<h3>Christelle - Quality department</h3>
+<p><img src="/web/image/alc_eshop_cms.ir_att_img_team_christelle"/></p>
+<h3>Xavier - Quality department</h3>
+<p><img src="/web/image/alc_eshop_cms.ir_att_img_team_xavier"/></p>
+<h3>Dimitry - Deliverer</h3>
+<p><img src="/web/image/alc_eshop_cms.ir_att_img_team_dimitry"/></p>
+<h3>Giuseppe - Deliverer</h3>
+<p><img src="/web/image/alc_eshop_cms.ir_att_img_team_giuseppe"/></p>
+<h3>Bertrand - Deliverer</h3>
+<p><img src="/web/image/alc_eshop_cms.ir_att_img_team_bertrand"/></p>
+<h3>Philippe - Livreur</h3>
+<p><img src="/web/image/alc_eshop_cms.ir_att_img_team_philippe"/></p>
+]]></field>
+    </record>
+
+</odoo>

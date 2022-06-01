@@ -14,6 +14,16 @@ class AlcContentLangMixin(models.AbstractModel):
     _content_type = ""
 
     lang_ids = fields.Many2many("res.lang", string="Lang", required=True)
+    url_locales = fields.Serialized(compute="_compute_url_locales")
+
+    @api.depends("url", "lang_ids")
+    def _compute_url_locales(self):
+        result = defaultdict(dict)
+        for lang_id, records in self._get_records_by_lang().items():
+            for record in records.with_context(lang=lang_id.code):
+                result[record.id][lang_id.code] = record.url
+        for rec in self:
+            rec.url_locales = result[rec.id]
 
     @api.model
     def _get_parser(self):
@@ -21,6 +31,7 @@ class AlcContentLangMixin(models.AbstractModel):
             "id",
             ("type", lambda a, f: a._content_type),
             ("url", "_get_content_url"),
+            ("url_locales", "_get_content_url_locales"),
             ("lang", "_get_content_context_lang"),
         ]
 
@@ -37,6 +48,15 @@ class AlcContentLangMixin(models.AbstractModel):
             [self._get_content_context_lang(), self._content_type, self.url]
         )
 
+    def _get_content_url_locales(self, field_name=None):
+        self.ensure_one()
+        res = {}
+        for lang_id in self.lang_ids:
+            url = self.url_locales.get(lang_id.code, False)
+            lang = lang_id.code.split("_")[0]
+            res[lang] = "/".join([lang, self._content_type, url])
+        return res
+
     def _to_json(self, lang_ids=None):
         """Return a list of json for each record
 
@@ -44,17 +64,21 @@ class AlcContentLangMixin(models.AbstractModel):
         lang of the given record
         """
         result = []
-        records_by_lang = defaultdict(self.browse)
         parser = self._get_parser()
         data_parser = self._get_data_parser()
-        for record in self:
-            for lang_id in record.lang_ids:
-                if lang_ids and lang_id not in lang_ids:
-                    continue
-                records_by_lang[lang_id] |= record
-        for lang_id, records in records_by_lang.items():
+        for lang_id, records in self._get_records_by_lang().items():
+            if lang_ids and lang_id not in lang_ids:
+                continue
             for record in records.with_context(lang=lang_id.code):
                 json = record.jsonify(parser=parser, one=True)
                 json["data"] = record.jsonify(parser=data_parser, one=True)
                 result.append(json)
+        return result
+
+    def _get_records_by_lang(self):
+        """Return a dict of records by lang"""
+        result = defaultdict(self.browse)
+        for record in self:
+            for lang_id in record.lang_ids:
+                result[lang_id] |= record
         return result

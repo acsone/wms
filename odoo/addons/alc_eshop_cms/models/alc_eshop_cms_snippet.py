@@ -5,10 +5,10 @@
 from odoo import api, fields, models
 
 
-class AlcEshopSnippet(models.Model):
+class AlcEshopCmsSnippet(models.Model):
 
     _inherit = "alc.content.lang.mixin"
-    _name = "alc.eshop.snippet"
+    _name = "alc.eshop.cms.snippet"
     _content_type = "snippet"
 
     name = fields.Char(translate=False)

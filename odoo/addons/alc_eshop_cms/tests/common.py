@@ -19,7 +19,7 @@ class CommonMixin(object):
         cls.lang_en = cls.env["res.lang"]._lang_get("en_US")
         cls.all_langs = cls.lang_fr | cls.lang_en
         cls.eshop_snippet_product_on_order_cancel_intro = cls.env.ref(
-            "alc_eshop_cms.alc_eshop_snippet_product_on_order_cancel_intro"
+            "alc_eshop_cms.alc_eshop_cms_snippet_product_on_order_cancel_intro"
         )
         cls.eshop_snippet_product_on_order_cancel_intro.write(
             {"lang_ids": [(6, 0, cls.all_langs.ids)]}
@@ -40,7 +40,7 @@ class AlcEshopNewsMixin(CommonMixin):
     @classmethod
     def _init_news(cls):
         res = super(AlcEshopNewsMixin, cls)._init_langs()
-        cls.AlcEshopNews = cls.env["alc.eshop.news"]
+        cls.AlcEshopNews = cls.env["alc.eshop.cms.news"]
         cls.new_all_langs_vals = {
             "name": "name",
             "foreword": "<p>foreword</p>",
@@ -67,6 +67,10 @@ class AlcEshopNewsMixin(CommonMixin):
 
         cls.news_all_langs_json_en = {
             "url": u"en/news/name-en-us-%s" % cls.news_all_langs.id,
+            "url_locales": {
+                "fr": u"fr/news/name-fr-fr-%s" % cls.news_all_langs.id,
+                "en": u"en/news/name-en-us-%s" % cls.news_all_langs.id,
+            },
             "lang": u"en",
             "type": "news",
             "id": cls.news_all_langs.id,
@@ -93,6 +97,10 @@ class AlcEshopNewsMixin(CommonMixin):
         }
         cls.news_all_langs_json_fr = {
             "url": u"fr/news/name-fr-fr-%s" % cls.news_all_langs.id,
+            "url_locales": {
+                "fr": u"fr/news/name-fr-fr-%s" % cls.news_all_langs.id,
+                "en": u"en/news/name-en-us-%s" % cls.news_all_langs.id,
+            },
             "lang": u"fr",
             "type": "news",
             "id": cls.news_all_langs.id,

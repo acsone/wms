@@ -3,9 +3,9 @@
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
 
-    <record model="ir.ui.view" id="alc_eshop_snippet_form_view">
-        <field name="name">alc.eshop.snippet.form (in alc_eshop_cms)</field>
-        <field name="model">alc.eshop.snippet</field>
+    <record model="ir.ui.view" id="alc_eshop_cms_snippet_form_view">
+        <field name="name">alc.eshop.cms.snippet.form (in alc_eshop_cms)</field>
+        <field name="model">alc.eshop.cms.snippet</field>
         <field name="arch" type="xml">
             <form>
                 <header>
@@ -29,9 +29,9 @@
     </record>
 
 
-    <record model="ir.ui.view" id="alc_eshop_snippet_tree_view">
-        <field name="name">alc.eshop.snippet.tree (in alc_eshop_cms)</field>
-        <field name="model">alc.eshop.snippet</field>
+    <record model="ir.ui.view" id="alc_eshop_cms_snippet_tree_view">
+        <field name="name">alc.eshop.cms.snippet.tree (in alc_eshop_cms)</field>
+        <field name="model">alc.eshop.cms.snippet</field>
         <field name="arch" type="xml">
             <tree>
                 <field name="code" />
@@ -41,18 +41,18 @@
         </field>
     </record>
 
-    <record model="ir.actions.act_window" id="alc_eshop_snippet_act_window">
+    <record model="ir.actions.act_window" id="alc_eshop_cms_snippet_act_window">
         <field name="name">Eshop Snippet</field>
-        <field name="res_model">alc.eshop.snippet</field>
+        <field name="res_model">alc.eshop.cms.snippet</field>
         <field name="view_mode">tree,form</field>
         <field name="domain">[]</field>
         <field name="context">{}</field>
     </record>
 
-    <record model="ir.ui.menu" id="alc_eshop_snippet_menu">
+    <record model="ir.ui.menu" id="alc_eshop_cms_snippet_menu">
         <field name="name">Eshop Snippet</field>
         <field name="parent_id" ref="alc_eshop_cms.alc_eshop_cms_menu" />
-        <field name="action" ref="alc_eshop_snippet_act_window" />
+        <field name="action" ref="alc_eshop_cms_snippet_act_window" />
         <field name="sequence" eval="26" />
     </record>
 
