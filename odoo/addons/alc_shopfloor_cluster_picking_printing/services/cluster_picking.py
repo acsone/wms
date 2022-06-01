@@ -38,7 +38,11 @@ class ClusterPicking(Component):
         search = self._actions_for("search")
         bin_package = search.package_from_scan(barcode)
 
-        if bin_package and not bin_package.is_internal:
+        if (
+            bin_package
+            and bin_package.is_internal
+            and not self.work.menu.print_on_pack_pickings
+        ):
             batch = self.env["stock.picking.wave"].browse(picking_batch_id)
             if not batch.exists():
                 return self._response_batch_does_not_exist()
@@ -47,7 +51,7 @@ class ClusterPicking(Component):
                 return self._pick_next_operation(
                     batch, message=self.msg_store.operation_not_found()
                 )
-            self._print_picking_food_product_labels(operation)
+            self._print_picking_food_product_labels(operation, quantity)
         return result
 
     def _print_picking_med_products_labels(self, picking, package):
@@ -60,8 +64,9 @@ class ClusterPicking(Component):
             packages=package,
         )
 
-    def _print_picking_food_product_labels(self, operation):
+    def _print_picking_food_product_labels(self, operation, quantity):
         operation.picking_id.sudo().print_food_products_label(
             printer_id=self.shopfloor_user.printing_product_label_printer_id.id,
             operations=operation,
+            quantity=quantity,
         )

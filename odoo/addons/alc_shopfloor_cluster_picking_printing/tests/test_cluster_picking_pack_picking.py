@@ -130,7 +130,8 @@ class ClusterPickingPutInPackPrintCase(ClusterPickingUnloadingCommonCase):
             mocked_print_package_label.assert_called_once()
 
     def test_print_after_scan_destination_food(self):
-        self.bin1.is_internal = False
+        self.bin1.is_internal = True
+        self.menu.sudo().write(dict(pack_pickings=False, print_on_pack_pickings=False))
         operation = self.batch.pack_operation_ids[0]
         qty_done = operation.product_qty
         picking = operation.picking_id
