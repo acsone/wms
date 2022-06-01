@@ -38,7 +38,7 @@ class TestClusterPickingFindBatch(ClusterPickingCommonCase):
         # Avoid to have to create a delivery round for our simple tests
         MakePickingBatch = self.env["make.picking.batch"].__class__
         get_delivery_round_patcher = mock.patch.object(
-            MakePickingBatch, "_get_delivery_round_id"
+            MakePickingBatch, "_get_delivery_rounds"
         )
         self.mocked_get_delivery_round = get_delivery_round_patcher.start()
         self.mocked_get_delivery_round.return_value = None

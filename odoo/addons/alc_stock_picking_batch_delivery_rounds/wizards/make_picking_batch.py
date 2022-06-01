@@ -12,7 +12,7 @@ class MakePickingBatch(models.TransientModel):
 
     _inherit = "make.picking.batch"
 
-    def _get_delivery_rounds_candidates(self, domain, user):
+    def _get_delivery_rounds_candidates(self, picking_type_ids, user):
         query = """
             SELECT sp.id, ri.id FROM stock_picking sp
                 JOIN round_instance ri ON sp.delivery_round_id = ri.id
@@ -55,11 +55,19 @@ class MakePickingBatch(models.TransientModel):
                             AND sp.state NOT IN ('done', 'cancel')
                         )
                         )
-                    ORDER BY ri.date, ri.time_picking_planned
+                    ORDER BY sp.operator_id,
+                            %(order_by)s
+                            ri.date,
+                            ri.time_picking_planned,
+                            ri.id ASC
+
         """
         params = {
             "operator": user.id,
-            "picking_type_ids": tuple(domain["picking_type_id"]),
+            "picking_type_ids": tuple(picking_type_ids),
+            "order_by": AsIs(
+                self._rounds_to_orderby_query(self._operator_assigned_instances(user))
+            ),
         }
         self.env.cr.execute(query, params)
         result = self.env.cr.fetchall()
@@ -70,12 +78,14 @@ class MakePickingBatch(models.TransientModel):
         delivery_rounds = self.env["round.instance"].browse(ids)
         return delivery_rounds
 
-    def _get_delivery_round_id(self, domain, operator):
+    def _get_delivery_rounds(self, picking_type_ids, operator):
         """
         We want to get the first delivery_round with need to process
         for the selected operator asking for a batch picking
         """
-        delivery_rounds = self._get_delivery_rounds_candidates(domain, operator)
+        delivery_rounds = self._get_delivery_rounds_candidates(
+            picking_type_ids, operator
+        )
         if not delivery_rounds:
             msg = "No delivery rounds to prepare for the picking type you chose"
             raise ValidationError(_(msg))
@@ -88,16 +98,23 @@ class MakePickingBatch(models.TransientModel):
                 % operator.name
             )
             raise ValidationError(_(msg))
-        delivery_round = delivery_rounds_authorized[0]
-        return delivery_round.id
+        return delivery_rounds_authorized
 
     def _search_pickings_domain(self, user=None):
         domain = super(MakePickingBatch, self)._search_pickings_domain(user=user)
         domain_dict = {d[0]: d[2] for d in domain}
         operator = self.user_id if self.user_id else self.env.user
-        delivery_round_id = self._get_delivery_round_id(domain_dict, operator)
-        if delivery_round_id and operator and operator.cluster_by_delivery_round:
-            domain.append(("delivery_round_id", "=", delivery_round_id))
+        picking_type_ids = domain_dict["picking_type_id"]
+        delivery_rounds_authorized = self._get_delivery_rounds(
+            picking_type_ids, operator
+        )
+        if (
+            delivery_rounds_authorized
+            and operator
+            and operator.cluster_by_delivery_round
+        ):
+            delivery_round = delivery_rounds_authorized[0]
+            domain.append(("delivery_round_id", "=", delivery_round.id))
         return domain
 
     def _candidates_pickings_to_batch(self, user=None):
@@ -106,38 +123,18 @@ class MakePickingBatch(models.TransientModel):
         )._candidates_pickings_to_batch(user=user)
         if not user.cluster_by_delivery_round:
             # Filter out delivery round unauthorized:
-            delivery_rounds_authorized = candidates_pickings.mapped(
-                "delivery_round_id"
-            ).filtered(lambda d: user in d.operator_ids if d.operator_ids else True)
-            # order pickings by delivery round before processing them
-            query = """
-            SELECT sp.id FROM stock_picking sp
-                JOIN round_instance ri ON sp.delivery_round_id = ri.id
-                WHERE sp.id  in %(picking_ids)s
-                    AND ri.id in %(authorized_delivery_round_ids)s
-                    ORDER BY sp.operator_id,
-                            %(order_by)s
-                            ri.date,
-                            ri.time_picking_planned,
-                            ri.id ASC
-            """
-            params = {
-                "picking_ids": tuple(candidates_pickings.ids),
-                "authorized_delivery_round_ids": tuple(delivery_rounds_authorized.ids),
-                "order_by": AsIs(
-                    self._rounds_to_orderby_query(
-                        self._operator_assigned_instances(user)
-                    )
-                ),
-            }
+            picking_type_ids = candidates_pickings.mapped("picking_type_id").ids
+            delivery_rounds_authorized = self._get_delivery_rounds(
+                picking_type_ids, user
+            )
+            candidates_pickings = candidates_pickings.filtered(
+                lambda p: p.delivery_round_id in delivery_rounds_authorized
+            ).sorted(
+                key=lambda p, drs=delivery_rounds_authorized: drs.ids.index(
+                    p.delivery_round_id.id
+                )
+            )
 
-            self.env.cr.execute(query, params)
-            result = self.env.cr.fetchall()
-            ids = []
-            for row in result:
-                if not row[0] in ids:
-                    ids.append(row[0])
-            candidates_pickings = self.env["stock.picking"].browse(ids)
         return candidates_pickings
 
     @api.model
