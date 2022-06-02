@@ -73,6 +73,7 @@ class AlcClassified(models.Model):
         string="State",
         required=True,
         track_visibility="onchange",
+        domain=lambda self: [("country_id", "=", self.env.ref("base.be").id)],
     )
     email = fields.Char("Email", required=True, track_visibility="onchange")
     phone = fields.Char("Phone", required=True, track_visibility="onchange")
