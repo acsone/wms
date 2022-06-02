@@ -75,13 +75,13 @@
                 <tr class="active">
                   <th>Seq.</th>
                   <th>Customer</th>
+                  <th>Notes</th>
                   <th>Phone</th>
                   <th># Drug</th>
                   <th># Cold</th>
                   <th># Food</th>
                   <th># Mat.</th>
                   <th># Tot.</th>
-                  <th>Notes</th>
                 </tr>
               </thead>
               <tbody>
@@ -98,6 +98,11 @@
                       t-options='{"widget": "contact", "fields": ["name", "address"], "no_marker": True}'
                     />
                     <span t-field="partner.ref" />
+                  </td>
+                  <td style="width: 43%;">
+                    <strong>
+                      <span t-esc="shipping_value.get('note', '')" />
+                    </strong>
                   </td>
                   <td>
                     <span t-field="partner.mobile" />
@@ -228,15 +233,10 @@
                                             unit(s)
                                         </t>
                   </td>
-                  <td style="width: 43%;">
-                    <strong>
-                      <span t-esc="shipping_value.get('note', '')" />
-                    </strong>
-                  </td>
                   <t t-set="index" t-value="index + 1" />
                 </tr>
                 <tr>
-                  <td colspan="3" class="active">Total number of box(es)</td>
+                  <td colspan="4" class="active">Total number of box(es)</td>
                   <td>
                     <span t-esc="int(total_medoc_box)" class="pull-right" />
                   </td>
@@ -255,7 +255,7 @@
                   <td class="active" />
                 </tr>
                 <tr>
-                  <td colspan="3" class="active">Total number of unit(s)</td>
+                  <td colspan="4" class="active">Total number of unit(s)</td>
                   <td>
                     <span t-esc="int(total_medoc_unit)" class="pull-right" />
                   </td>
@@ -274,7 +274,7 @@
                   <td class="active" />
                 </tr>
                 <tr>
-                  <td colspan="3" class="active">Total number of parcel(s)</td>
+                  <td colspan="4" class="active">Total number of parcel(s)</td>
                   <td>
                     <span
                       t-esc="int(total_medoc_unit + total_medoc_box)"
