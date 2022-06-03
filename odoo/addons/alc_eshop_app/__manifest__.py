@@ -16,6 +16,7 @@
         "alc_eshop_form",
         "alc_eshop_info_banner",
         "alc_documents_eshop_services",
+        "alc_eshop_classifieds_service",
         "alc_eshop_models_url",
         "alc_eshop_product_domain",
         "alc_eshop_partner_veterinary",
