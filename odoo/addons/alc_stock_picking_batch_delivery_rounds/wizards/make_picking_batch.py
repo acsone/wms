@@ -4,13 +4,17 @@
 
 from psycopg2.extensions import AsIs
 
-from odoo import _, api, models
+from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 
 
 class MakePickingBatch(models.TransientModel):
 
     _inherit = "make.picking.batch"
+    only_one_delivery_round_by_cluster = fields.Boolean(
+        string="Create cluster pickings by delivery rounds for this scenario",
+        default=True,
+    )
 
     def _get_delivery_rounds_candidates(self, picking_type_ids, user):
         query = """
@@ -110,8 +114,11 @@ class MakePickingBatch(models.TransientModel):
         )
         if (
             delivery_rounds_authorized
-            and operator
-            and operator.cluster_by_delivery_round
+            and (self.only_one_delivery_round_by_cluster)
+            or (
+                not self.only_one_delivery_round_by_cluster
+                and operator.only_one_delivery_round_by_cluster
+            )
         ):
             delivery_round = delivery_rounds_authorized[0]
             domain.append(("delivery_round_id", "=", delivery_round.id))
@@ -121,7 +128,11 @@ class MakePickingBatch(models.TransientModel):
         candidates_pickings = super(
             MakePickingBatch, self
         )._candidates_pickings_to_batch(user=user)
-        if not user.cluster_by_delivery_round:
+
+        if (
+            not self.only_one_delivery_round_by_cluster
+            and not user.only_one_delivery_round_by_cluster
+        ):
             # Filter out delivery round unauthorized:
             picking_type_ids = candidates_pickings.mapped("picking_type_id").ids
             delivery_rounds_authorized = self._get_delivery_rounds(

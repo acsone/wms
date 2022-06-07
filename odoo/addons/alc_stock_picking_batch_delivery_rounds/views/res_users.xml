@@ -11,7 +11,7 @@
         <field name="priority">16</field>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='partner_id']" position="after">
-                <field name="cluster_by_delivery_round" />
+                <field name="only_one_delivery_round_by_cluster" />
             </xpath>
         </field>
     </record>
