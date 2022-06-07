@@ -41,6 +41,7 @@
         "shopinvader_wishlist",
         "shopinvader_search_engine_update",
         "shopinvader_search_engine_export",
+        "shopinvader_url_locales",
     ],
     "application": False,
     "data": [
