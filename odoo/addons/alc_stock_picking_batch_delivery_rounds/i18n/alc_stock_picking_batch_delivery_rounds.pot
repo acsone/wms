@@ -14,8 +14,13 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_stock_picking_batch_delivery_rounds
-#: model:ir.model.fields,field_description:alc_stock_picking_batch_delivery_rounds.field_res_users_cluster_by_delivery_round
+#: model:ir.model.fields,field_description:alc_stock_picking_batch_delivery_rounds.field_res_users_only_one_delivery_round_by_cluster
 msgid "Create cluster pickings by delivery rounds for this operator"
+msgstr ""
+
+#. module: alc_stock_picking_batch_delivery_rounds
+#: model:ir.model.fields,field_description:alc_stock_picking_batch_delivery_rounds.field_make_picking_batch_only_one_delivery_round_by_cluster
+msgid "Create cluster pickings by delivery rounds for this scenario"
 msgstr ""
 
 #. module: alc_stock_picking_batch_delivery_rounds
