@@ -4,7 +4,7 @@
 {
     "name": "Alcyon E-Shop Application",
     "description": """Install all apps and modules required by the E-Shop""",
-    "version": "10.0.1.0.1",
+    "version": "10.0.1.0.2",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
@@ -50,10 +50,13 @@
         "security/rule+acl_alc_eshop_product_ordered_qty.xml",
         "security/rule+acl_sale_order.xml",
         "security/rule+acl_sale_order_line.xml",
+        "security/rule_storage_file.xml",
         "data/res_users.xml",
         "data/auth_jwt_validator.xml",
         "data/shopinvader_backend.xml",
         "views/eshop_app_menu.xml",
     ],
     "demo": [],
+    "post_init_hook": "post_init_hook",
+    "external_dependencies": {"python": ["openupgradelib"]},
 }
