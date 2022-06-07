@@ -9,5 +9,6 @@
     "version": "10.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
-    "depends": ["alc_shopfloor", "delivery_rounds"],
+    "depends": ["alc_shopfloor_cluster_picking", "delivery_rounds"],
+    "data": ["views/shopfloor_menu.xml"],
 }

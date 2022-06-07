@@ -5,12 +5,10 @@
 from odoo import fields, models
 
 
-class ResUsers(models.Model):
+class ShopfloorMenu(models.Model):
 
-    _inherit = "res.users"
+    _inherit = "shopfloor.menu"
 
     only_one_delivery_round_by_cluster = fields.Boolean(
-        string="Create cluster pickings by delivery rounds for this operator",
-        oldname="cluster_by_delivery_round",
-        default=True,
+        string="Create cluster pickings by delivery rounds", default=True,
     )

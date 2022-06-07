@@ -69,13 +69,8 @@ class ClusterPicking(Component):
             ]
         )
 
-    def _batch_auto_create(self):
-        self._lock()
-        # make new cursor to ensure that the wizard is run on a cursor aware of
-        # last changes once the lock has been released
-        env_in_new_cursor = self._create_new_env_with_new_cursor()
-        menu = self.work.menu
-        wizard = env_in_new_cursor["make.picking.batch"].create(
+    def _create_wizard_batch_picking(self, env_in_cursor, menu):
+        return env_in_cursor["make.picking.batch"].create(
             {
                 "picking_type_ids": [(6, None, menu.picking_type_ids.ids)],
                 "stock_device_type_ids": [(6, None, menu.stock_device_type_ids.ids)],
@@ -83,6 +78,14 @@ class ClusterPicking(Component):
                 "user_id": self.shopfloor_user.id,
             }
         )
+
+    def _batch_auto_create(self):
+        self._lock()
+        # make new cursor to ensure that the wizard is run on a cursor aware of
+        # last changes once the lock has been released
+        env_in_new_cursor = self._create_new_env_with_new_cursor()
+        menu = self.work.menu
+        wizard = self._create_wizard_batch_picking(env_in_new_cursor, menu)
         return wizard._create_batch(raise_if_not_possible=False)
 
     def _create_new_env_with_new_cursor(self):
