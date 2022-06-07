@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2022 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+  <record id="province_bbr" model="res.country.state">
+    <field name="name">Brussels Capital Region</field>
+    <field name="code">BBR</field>
+    <field name="country_id" ref="base.be" />
+  </record>
+  <record id="province_wlg" model="res.country.state">
+    <field name="name">Liège</field>
+    <field name="code">WLG</field>
+    <field name="country_id" ref="base.be" />
+  </record>
+  <record id="province_wht" model="res.country.state">
+    <field name="name">Hainaut</field>
+    <field name="code">WHT</field>
+    <field name="country_id" ref="base.be" />
+  </record>
+  <record id="province_wlx" model="res.country.state">
+    <field name="name">Luxembourg</field>
+    <field name="code">WLX</field>
+    <field name="country_id" ref="base.be" />
+  </record>
+  <record id="province_wna" model="res.country.state">
+    <field name="name">Namur</field>
+    <field name="code">WNA</field>
+    <field name="country_id" ref="base.be" />
+  </record>
+  <record id="province_wbr" model="res.country.state">
+    <field name="name">Walloon Brabant</field>
+    <field name="code">WBR</field>
+    <field name="country_id" ref="base.be" />
+  </record>
+  <record id="province_vli" model="res.country.state">
+    <field name="name">Limburg</field>
+    <field name="code">VLI</field>
+    <field name="country_id" ref="base.be" />
+  </record>
+  <record id="province_van" model="res.country.state">
+    <field name="name">Antwerp</field>
+    <field name="code">VAN</field>
+    <field name="country_id" ref="base.be" />
+  </record>
+  <record id="province_vov" model="res.country.state">
+    <field name="name">East Flanders</field>
+    <field name="code">VOV</field>
+    <field name="country_id" ref="base.be" />
+  </record>
+  <record id="province_vwv" model="res.country.state">
+    <field name="name">West Flanders</field>
+    <field name="code">VWV</field>
+    <field name="country_id" ref="base.be" />
+  </record>
+  <record id="province_vbr" model="res.country.state">
+    <field name="name">Flemish Brabant</field>
+    <field name="code">VBR</field>
+    <field name="country_id" ref="base.be" />
+  </record>
+</odoo>

@@ -1,0 +1,72 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* alc_address_data
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-05-31 12:56+0000\n"
+"PO-Revision-Date: 2022-05-31 12:56+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_address_data
+#: model:res.country.state,name:alc_address_data.province_van
+msgid "Antwerp"
+msgstr "Antwerpen"
+
+#. module: alc_address_data
+#: model:res.country.state,name:alc_address_data.province_bbr
+msgid "Brussels Capital Region"
+msgstr "Brussels Hoofdstedelijk Gewest"
+
+#. module: alc_address_data
+#: model:res.country.state,name:alc_address_data.province_vov
+msgid "East Flanders"
+msgstr "Oost-Vlaanderen"
+
+#. module: alc_address_data
+#: model:res.country.state,name:alc_address_data.province_vbr
+msgid "Flemish Brabant"
+msgstr "Vlaams-Brabant"
+
+#. module: alc_address_data
+#: model:res.country.state,name:alc_address_data.province_wht
+msgid "Hainaut"
+msgstr "Henegouwen"
+
+#. module: alc_address_data
+#: model:res.country.state,name:alc_address_data.province_vli
+msgid "Limburg"
+msgstr "Limburg"
+
+#. module: alc_address_data
+#: model:res.country.state,name:alc_address_data.province_wlg
+msgid "Liège"
+msgstr "Luik"
+
+#. module: alc_address_data
+#: model:res.country.state,name:alc_address_data.province_wlx
+msgid "Luxembourg"
+msgstr "Luxemburg"
+
+#. module: alc_address_data
+#: model:res.country.state,name:alc_address_data.province_wna
+msgid "Namur"
+msgstr "Namen"
+
+#. module: alc_address_data
+#: model:res.country.state,name:alc_address_data.province_wbr
+msgid "Walloon Brabant"
+msgstr "Waals-Brabant"
+
+#. module: alc_address_data
+#: model:res.country.state,name:alc_address_data.province_vwv
+msgid "West Flanders"
+msgstr "West-Vlaanderen"
+
