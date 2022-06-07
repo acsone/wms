@@ -28,6 +28,7 @@
         "alc_eshop_services_orders_suite_channel",
         "alc_keycloak",
         "alc_product_promotion_mailing",
+        "alc_sale_cart_price_recalculation",
         "alc_search_engine",
         "shopinvader_assortment_bind",
         "shopinvader_search_engine_update_image",
