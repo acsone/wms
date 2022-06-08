@@ -894,6 +894,12 @@ msgid "Picking inspection"
 msgstr ""
 
 #. module: specific_report
+#: code:addons/specific_report/models/stock_picking.py:160
+#, python-format
+msgid "Picking zone does not exist anymore %s for picking %s and product %s"
+msgstr ""
+
+#. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.view_round_instance_form
 #: model:ir.ui.view,arch_db:specific_report.view_round_instance_kanban
 msgid "Print delivery round"
