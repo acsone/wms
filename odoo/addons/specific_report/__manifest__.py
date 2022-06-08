@@ -31,6 +31,7 @@
         "sale_consignment",
         "account_payment_partner",
         "account_tax_one_vat",
+        "web_notify",
     ],
     "website": "http://www.camptocamp.com",
     "data": [
