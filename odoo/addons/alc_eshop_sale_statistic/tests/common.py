@@ -22,12 +22,22 @@ class TestSaleStatistics(SavepointCase, ComponentMixin):
         super(TestSaleStatistics, cls).setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
         cls.setUpComponent()
+        cls.supplier = cls.env.ref("base.res_partner_12")
+        cls.supplierpromotion = cls.env["product.supplierinfo"].create(
+            {
+                "name": cls.supplier.id,
+                "discount_sale": 10,
+                "date_start": fields.Date.today(),
+                "date_end": fields.Date.today(),
+            }
+        )
         cls.product_1 = cls.env["product.product"].create(
             {
                 "name": "product_1",
                 "uom_id": cls.env.ref("product.product_uom_unit").id,
                 "type": "product",
                 "categ_id": cls.env.ref("specific_data.product_categ_ali").id,
+                "seller_ids": [(6, 0, [cls.supplierpromotion.id])],
             }
         )
         cls.product_2 = cls.env["product.product"].create(
