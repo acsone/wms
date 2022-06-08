@@ -155,10 +155,17 @@ class StockPicking(models.Model):
                     item_number_of_food += qty
                 elif picking_zone == zone_equipment:
                     item_number_of_equipment += qty
-                # else:
-                #    raise UserError(
-                #        _("The picking zone %s is not correct") % picking_zone.name
-                #    )
+                else:
+                    self.env.user.notify_error(
+                        _(
+                            "Picking zone does not exist anymore %s for picking %s and product %s"
+                        )
+                        % (
+                            picking_zone.name,
+                            picking.name,
+                            operation.product_id.product_tmpl_id.name,
+                        )
+                    )
 
             picking.item_number_of_drug = item_number_of_drug
             picking.item_number_of_cold = item_number_of_cold
