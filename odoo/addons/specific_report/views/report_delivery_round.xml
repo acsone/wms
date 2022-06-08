@@ -106,6 +106,7 @@
                   </td>
                   <td>
                     <span t-field="partner.mobile" />
+                    <br />
                     <span t-field="partner.phone" />
                   </td>
                   <td>
@@ -252,7 +253,6 @@
                   <td>
                     <span t-esc="int(total_total_box)" class="pull-right" />
                   </td>
-                  <td class="active" />
                 </tr>
                 <tr>
                   <td colspan="4" class="active">Total number of unit(s)</td>
@@ -271,7 +271,6 @@
                   <td>
                     <span t-esc="int(total_total_unit)" class="pull-right" />
                   </td>
-                  <td class="active" />
                 </tr>
                 <tr>
                   <td colspan="4" class="active">Total number of parcel(s)</td>
@@ -305,7 +304,6 @@
                       class="pull-right"
                     />
                   </td>
-                  <td class="active" />
                 </tr>
               </tbody>
             </table>
