@@ -49,6 +49,17 @@ class TestCmsService(SavepointComponentCase, AlcEshopNewsMixin):
         )._to_json():
             self.assertIn(json, res["data"])
 
+    def test_all_contents_filter(self):
+        with self.cms_service() as service:
+            res = service.dispatch("content_search", params={"type": "snippet"})
+        self.assertTrue(res)
+        self.assertEquals(res["size"], 2)
+        with self.cms_service() as service:
+            res = service.dispatch(
+                "content_search", params={"type": "snippet", "lang": "fr"}
+            )
+        self.assertEquals(res["size"], 1)
+
     def test_get_news_content(self):
         lang, content_type, url = self.news_all_langs_json_fr["url"].split("/")
         with self.cms_service() as service:

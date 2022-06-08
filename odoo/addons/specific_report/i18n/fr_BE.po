@@ -1068,6 +1068,12 @@ msgid "Picking inspection"
 msgstr "Vérification de la préparation"
 
 #. module: specific_report
+#: code:addons/specific_report/models/stock_picking.py:160
+#, python-format
+msgid "Picking zone does not exist anymore %s for picking %s and product %s"
+msgstr ""
+
+#. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.view_round_instance_form
 #: model:ir.ui.view,arch_db:specific_report.view_round_instance_kanban
 msgid "Print delivery round"
@@ -1201,12 +1207,6 @@ msgid ""
 "assigned."
 msgstr ""
 "Le devis ne peut pas être imprimé car le client {} ({}) n'a pas de référence."
-
-#. module: specific_report
-#: code:addons/specific_report/models/stock_picking.py:160
-#, python-format
-msgid "The picking zone %s is not correct"
-msgstr "La zone de picking %s n'est pas correcte"
 
 #. module: specific_report
 #: code:addons/specific_report/models/stock_picking.py:78
@@ -1362,6 +1362,9 @@ msgid ""
 msgstr ""
 "|\n"
 "                <span>Téléphone:</span>"
+
+#~ msgid "The picking zone %s is not correct"
+#~ msgstr "La zone de picking %s n'est pas correcte"
 
 #~ msgid "# Hum."
 #~ msgstr "# Hum."

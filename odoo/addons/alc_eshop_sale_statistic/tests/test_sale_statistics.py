@@ -117,6 +117,16 @@ class TestSaleStatisticsMonthly(TestSaleStatistics):
                 ],
             )
 
+    def test_top_ordered_supplier_promotion(self):
+        # supplier promotion ends today...
+        with self.sale_statistics_service(
+            authenticated_partner_id=self.partner_1.id
+        ) as service:
+            res = service.top_ordered(supplier_discount_only=True)
+            self.assertTrue(res)
+            self.assertEqual(1, res["size"])
+            self.assertEqual(1, len(res["data"]))
+
     def test_top_ordered_limit(self):
         with self.sale_statistics_service(
             authenticated_partner_id=self.partner_1.id
@@ -148,8 +158,9 @@ class TestSaleStatisticsMonthly(TestSaleStatistics):
             authenticated_partner_id=self.partner_1.id
         ) as service:
             res = service.top_ordered(supplier_discount_only=True)
-            self.assertEqual(0, res["size"])
-            self.assertEqual(0, len(res["data"]))
+            self.assertEqual(1, res["size"])
+            self.assertEqual(1, len(res["data"]))
+            self.assertEqual(res["data"][0]["product_id"], self.product_1.id)
 
     def test_five_years(self):
         # no need for freeze time, data is generated relative to now

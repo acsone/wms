@@ -1067,6 +1067,12 @@ msgid "Picking inspection"
 msgstr "Picking inspection"
 
 #. module: specific_report
+#: code:addons/specific_report/models/stock_picking.py:160
+#, python-format
+msgid "Picking zone does not exist anymore %s for picking %s and product %s"
+msgstr ""
+
+#. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.view_round_instance_form
 #: model:ir.ui.view,arch_db:specific_report.view_round_instance_kanban
 msgid "Print delivery round"
@@ -1201,12 +1207,6 @@ msgid ""
 msgstr ""
 "The Quotation can not be printed the client {} ({}) has no reference "
 "assigned."
-
-#. module: specific_report
-#: code:addons/specific_report/models/stock_picking.py:160
-#, python-format
-msgid "The picking zone %s is not correct"
-msgstr "The picking zone %s is not correct"
 
 #. module: specific_report
 #: code:addons/specific_report/models/stock_picking.py:78
@@ -1362,6 +1362,9 @@ msgid ""
 msgstr ""
 "|\n"
 "                    <span>Telefoon:</span>"
+
+#~ msgid "The picking zone %s is not correct"
+#~ msgstr "The picking zone %s is not correct"
 
 #~ msgid "# Hum."
 #~ msgstr "# Apo."

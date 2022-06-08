@@ -67,6 +67,7 @@
       <div class="row" style="page-break-inside:avoid">
         <div class="col-xs-6">
           <div class="round_table summary_deliverslip">
+            <t t-set="deliveryslip_single" t-value="deliveryslip.with_prefetch()" />
             <div style="border-bottom: 1px solid black">
                             Delivery round: <span
                 t-if="deliveryslip.delivery_round_id"
@@ -81,16 +82,26 @@
                 <th># Mat.</th>
               </tr>
               <tr>
-                <td><t t-esc="int(deliveryslip.number_of_drug)" /> boxes</td>
-                <td><t t-esc="int(deliveryslip.number_of_cold)" /> boxes</td>
-                <td><t t-esc="int(deliveryslip.number_of_food)" /> boxes</td>
-                <td><t t-esc="int(deliveryslip.number_of_equipment)" /> boxes</td>
+                <td><t t-esc="int(deliveryslip_single.number_of_drug)" /> boxes</td>
+                <td><t t-esc="int(deliveryslip_single.number_of_cold)" /> boxes</td>
+                <td><t t-esc="int(deliveryslip_single.number_of_food)" /> boxes</td>
+                <td><t
+                    t-esc="int(deliveryslip_single.number_of_equipment)"
+                  /> boxes</td>
               </tr>
               <tr>
-                <td><t t-esc="int(deliveryslip.item_number_of_drug)" /> items</td>
-                <td><t t-esc="int(deliveryslip.item_number_of_cold)" /> items</td>
-                <td><t t-esc="int(deliveryslip.item_number_of_food)" /> items</td>
-                <td><t t-esc="int(deliveryslip.item_number_of_equipment)" /> items</td>
+                <td><t
+                    t-esc="int(deliveryslip_single.item_number_of_drug)"
+                  /> items</td>
+                <td><t
+                    t-esc="int(deliveryslip_single.item_number_of_cold)"
+                  /> items</td>
+                <td><t
+                    t-esc="int(deliveryslip_single.item_number_of_food)"
+                  /> items</td>
+                <td><t
+                    t-esc="int(deliveryslip_single.item_number_of_equipment)"
+                  /> items</td>
               </tr>
             </table>
           </div>
