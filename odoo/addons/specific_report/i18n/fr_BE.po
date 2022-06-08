@@ -1203,12 +1203,6 @@ msgstr ""
 "Le devis ne peut pas être imprimé car le client {} ({}) n'a pas de référence."
 
 #. module: specific_report
-#: code:addons/specific_report/models/stock_picking.py:160
-#, python-format
-msgid "The picking zone %s is not correct"
-msgstr "La zone de picking %s n'est pas correcte"
-
-#. module: specific_report
 #: code:addons/specific_report/models/stock_picking.py:78
 #, python-format
 msgid "There are more than one currencies on orders"
@@ -1362,6 +1356,9 @@ msgid ""
 msgstr ""
 "|\n"
 "                <span>Téléphone:</span>"
+
+#~ msgid "The picking zone %s is not correct"
+#~ msgstr "La zone de picking %s n'est pas correcte"
 
 #~ msgid "# Hum."
 #~ msgstr "# Hum."

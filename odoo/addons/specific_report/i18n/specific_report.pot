@@ -1023,12 +1023,6 @@ msgid "The Quotation can not be printed the client {} ({}) has no reference assi
 msgstr ""
 
 #. module: specific_report
-#: code:addons/specific_report/models/stock_picking.py:160
-#, python-format
-msgid "The picking zone %s is not correct"
-msgstr ""
-
-#. module: specific_report
 #: code:addons/specific_report/models/stock_picking.py:78
 #, python-format
 msgid "There are more than one currencies on orders"

@@ -1203,12 +1203,6 @@ msgstr ""
 "assigned."
 
 #. module: specific_report
-#: code:addons/specific_report/models/stock_picking.py:160
-#, python-format
-msgid "The picking zone %s is not correct"
-msgstr "The picking zone %s is not correct"
-
-#. module: specific_report
 #: code:addons/specific_report/models/stock_picking.py:78
 #, python-format
 msgid "There are more than one currencies on orders"
@@ -1362,6 +1356,9 @@ msgid ""
 msgstr ""
 "|\n"
 "                    <span>Telefoon:</span>"
+
+#~ msgid "The picking zone %s is not correct"
+#~ msgstr "The picking zone %s is not correct"
 
 #~ msgid "# Hum."
 #~ msgstr "# Apo."
