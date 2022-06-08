@@ -155,10 +155,10 @@ class StockPicking(models.Model):
                     item_number_of_food += qty
                 elif picking_zone == zone_equipment:
                     item_number_of_equipment += qty
-                else:
-                    raise UserError(
-                        _("The picking zone %s is not correct") % picking_zone.name
-                    )
+                # else:
+                #    raise UserError(
+                #        _("The picking zone %s is not correct") % picking_zone.name
+                #    )
 
             picking.item_number_of_drug = item_number_of_drug
             picking.item_number_of_cold = item_number_of_cold
