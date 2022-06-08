@@ -19,3 +19,7 @@ class TestSaleCartRestApiInfo(TestSaleCartRestApiCsvCase):
         self.assertEqual("suite", so.suite_name)
         self.assertEqual(self.product, so.order_line.product_id)
         self.assertEqual(2, so.order_line.product_uom_qty)
+        self.assertTrue(so.import_warning_msg)
+        self.assertIn("missing", so.import_warning_msg)
+        self.assertIn("import_warning_msg", result)
+        self.assertEqual(result["import_warning_msg"], so.import_warning_msg)
