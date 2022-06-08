@@ -24,15 +24,22 @@ class CmsService(Component):
 
     @restapi.method(
         [(["/content"], "GET")],
+        input_param=restapi.CerberusValidator("_content_search_input_schema"),
         output_param=restapi.CerberusValidator("_content_search_output_schema"),
         auth="public",
     )
     def content_search(self, **params):
         """Get all cms content"""
         res = []
-        for model_name in self._content_model_names:
-            records = self.env[model_name]._get_contents_published()
-            res.extend(records._to_json())
+        models = self._content_model_names
+        if params.get("type"):
+            models = ["alc.eshop.cms." + params["type"]]
+        lang_ids = None
+        if params.get("lang"):
+            lang_ids = self._get_lang_from_lang_prefix(params.get("lang"))
+        for model_name in models:
+            records = self.env[model_name].sudo()._get_contents_published()
+            res.extend(records._to_json(lang_ids=lang_ids))
         return {"size": len(res), "data": res}
 
     @restapi.method(
@@ -48,7 +55,7 @@ class CmsService(Component):
             raise BadRequest("Content type '%s' not supported" % content_type)
         content_key = "/".join([lang, content_type, url])
         for model_name in self._content_model_names:
-            model = self.env[model_name]
+            model = self.env[model_name].sudo()
             if model._content_type != content_type:
                 continue
             record = model._get_from_url(url)
@@ -60,6 +67,22 @@ class CmsService(Component):
     # #######
     # schemas
     # #######
+    def _content_search_input_schema(self):
+        return {
+            "type": {
+                "type": "string",
+                "required": False,
+                "nullable": False,
+                "allowed": self._get_allowed_content_types(),
+            },
+            "lang": {
+                "type": "string",
+                "required": False,
+                "nullable": False,
+                "allowed": self._get_allowed_lang(),
+            },
+        }
+
     def _content_search_output_schema(self):
         return {
             "size": {"type": "integer"},
