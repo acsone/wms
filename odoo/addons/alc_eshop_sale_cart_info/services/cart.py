@@ -28,6 +28,7 @@ class CartService(Component):
 
     def _info_input_schema(self):
         return {
+            "uuid": {"type": "string", "required": False, "nullable": True},
             "customer_ref": {"type": "string", "required": False, "nullable": True},
             "note": {"type": "string", "required": False, "nullable": True},
         }
