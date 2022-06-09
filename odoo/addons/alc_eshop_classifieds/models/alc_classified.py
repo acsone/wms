@@ -35,7 +35,7 @@ class AlcClassified(models.Model):
         track_visibility="onchange",
     )
     name = fields.Char(string="Title", required=True, track_visibility="onchange")
-    body = fields.Html(string="Content", required=True, track_visibility="onchange")
+    body = fields.Text(string="Content", required=True, track_visibility="onchange")
     partner_id = fields.Many2one(
         "res.partner", string="Partner", required=True, index=True, ondelete="cascade",
     )
