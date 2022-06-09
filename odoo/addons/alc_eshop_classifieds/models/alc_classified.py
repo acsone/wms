@@ -18,7 +18,7 @@ class AlcClassified(models.Model):
 
     _name = "alc.classified"
     _description = "Classified Advertising"
-    _inherit = ["mixin.past", "mail.thread"]
+    _inherit = ["mixin.past", "mixin.file.id", "mail.thread"]
     _order = "sequence,id"
 
     sequence = fields.Integer("Sequence")
