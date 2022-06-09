@@ -17,6 +17,7 @@
         "pricelist_role_name",
         "alc_eshop_ads_elasticsearch",
         "alc_eshop_info_banner_elasticsearch",
+        "shopinvader_url_locales",
     ],
     "application": False,
     "data": [
