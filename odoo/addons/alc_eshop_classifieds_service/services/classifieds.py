@@ -39,18 +39,39 @@ class ClassifiedService(Component):
             raise AccessDenied(_("This classified ad cannot be retrieved."))
 
     @restapi.method(
-        [(["/"], "POST")],
+        [(["/new_simple"], "POST")],
         input_param=restapi.CerberusValidator("_input_schema"),
         output_param=restapi.CerberusValidator("_output_private_schema"),
     )
-    def create_new(self, **params):
-        """Private endpoint. Create a new draft ad, waiting for submission."""
+    def new_simple(self, **params):
+        """Private endpoint. Create a new draft ad, waiting for submission.
+           Does not allow to submit a file, giving a simple input schema that
+           is correctly serialized in Swagger.
+        """
         params = self._process_params(params, create=True)
         classified = self.model.create(params)
         return {"size": 1, "data": self._to_json(private=True, records=classified)}
 
     @restapi.method(
-        [(["/{_id}"], "DELETE")], output_param=restapi.CerberusValidator({})
+        [(["/"], "POST")],
+        input_param=restapi.MultipartFormData(
+            {
+                "file": restapi.BinaryData(mediatypes=["application/pdf"]),
+                "parameters": restapi.CerberusValidator("_input_schema"),
+            },
+        ),
+        output_param=restapi.CerberusValidator("_output_private_schema"),
+    )
+    def create_new(self, parameters=None, file=None):
+        """Private endpoint. Create a new draft ad, waiting for submission."""
+        params = parameters
+        params = self._process_params(params, create=True)
+        params = self._process_file(params, None, file, params["name"])
+        classified = self.model.create(params)
+        return {"size": 1, "data": self._to_json(private=True, records=classified)}
+
+    @restapi.method(
+        [(["/<int:_id>"], "DELETE")], output_param=restapi.CerberusValidator({})
     )
     def delete(self, _id):
         """Private endpoint. Delete an ad."""
@@ -60,7 +81,7 @@ class ClassifiedService(Component):
         return {}
 
     @restapi.method(
-        [(["/{_id}/submit"], "POST")], output_param=restapi.CerberusValidator({})
+        [(["/<int:_id>/submit"], "POST")], output_param=restapi.CerberusValidator({})
     )
     def submit(self, _id):
         """Private endpoint. Submit the ad for publication."""
@@ -70,33 +91,50 @@ class ClassifiedService(Component):
         return {}
 
     @restapi.method(
-        [(["/{_id}/update_set_to_draft"], "POST")],
-        input_param=restapi.CerberusValidator("_input_update_schema"),
+        [(["/<int:_id>/update_set_to_draft"], "POST")],
+        input_param=restapi.MultipartFormData(
+            {
+                "file": restapi.BinaryData(mediatypes=["application/pdf"]),
+                "parameters": restapi.CerberusValidator("_input_update_schema"),
+            },
+        ),
         output_param=restapi.CerberusValidator("_output_private_schema"),
     )
-    def update_set_to_draft(self, _id, **params):
+    def update_set_to_draft(self, _id, parameters, file=None):
         """Private endpoint. Allows to update any field and but unpublishes the ad."""
+        params = parameters or {}
+        params = self._process_params(params)
         classified = self.model.browse(_id)
         self._check_private_classified_access(classified)
+        params = self._process_file(params, classified, file, classified.name)
         classified.update_set_to_draft(params)
         return {"size": 1, "data": self._to_json(private=True, records=classified)}
 
     @restapi.method(
-        [(["/{_id}/update_set_to_pending"], "POST")],
-        input_param=restapi.CerberusValidator("_input_update_schema"),
+        [(["/<int:_id>/update_set_to_pending"], "POST")],
+        input_param=restapi.MultipartFormData(
+            {
+                "file": restapi.BinaryData(mediatypes=["application/pdf"]),
+                "parameters": restapi.CerberusValidator("_input_update_schema"),
+            },
+        ),
         output_param=restapi.CerberusValidator("_output_private_schema"),
     )
-    def update_set_to_pending(self, _id, **params):
+    def update_set_to_pending(self, _id, parameters, file=None):
         """Private endpoint. Allows to update any field.
            It unpublishes the ad and directly resubmit it."""
         # same thing as update_set_to_draft, then submit
+        params = parameters or {}
+        params = self._process_params(params)
         classified = self.model.browse(_id)
         self._check_private_classified_access(classified)
+        params = self._process_file(params, classified, file, classified.name)
         classified.update_set_to_pending(params)
         return {"size": 1, "data": self._to_json(private=True, records=classified)}
 
     @restapi.method(
-        [(["/{_id}"], "GET")], output_param=restapi.CerberusValidator("_output_schema"),
+        [(["/<int:_id>"], "GET")],
+        output_param=restapi.CerberusValidator("_output_schema"),
     )
     def get(self, _id):
         """This endpoint returns all private fields iff it belongs to the partner,
@@ -142,6 +180,20 @@ class ClassifiedService(Component):
             params["state_id"] = self._state_code_to_state(state_code).id
         return params
 
+    def _process_file(self, params, classified=None, file=None, name=None):
+        if file:
+            vals_new_file = {
+                "name": "%s.pdf" % name,
+                "data": file.read(),
+                "mimetype": "application/pdf",
+            }
+            new_file = self.env["mixin.file.id"]._create_file_id(vals_new_file)
+            params["file_id"] = new_file.id
+        if params.pop("file_delete", False) or file:
+            if classified:
+                classified.file_id.unlink()
+        return params
+
     def _get_domain(self, private, params):
         state = params.pop("state", None)  # only acceptable in private!
         if private:
@@ -177,6 +229,15 @@ class ClassifiedService(Component):
 
     def _get_base_parser(self):
         date_parser = lambda r, fn: utils.odoo_str_dt_to_dt_utc(r[fn])
+        file_parser = (
+            lambda r, fn: {
+                "url": r.file_id.url,
+                "name": r.file_id.name,
+                "mimetype": r.file_id.mimetype or None,
+            }
+            if r.file_id
+            else None
+        )
         return [
             "id",
             "name",
@@ -188,6 +249,7 @@ class ClassifiedService(Component):
             "phone",
             ("date_start", date_parser),
             ("date_end", date_parser),
+            ("file", file_parser),
         ]
 
     def _get_private_fields_parser(self):
@@ -223,7 +285,10 @@ class ClassifiedService(Component):
         }
 
     def _input_fields_schema(self, search=False, private=False):
-        schema = {"country_state_code": self._get_country_code_schema(search=search)}
+        schema = {
+            "country_state_code": self._get_country_code_schema(search=search),
+            "file_delete": {"type": "boolean", "required": False},
+        }
         if private:
             schema["state"] = self._state_schema(search=search)
         return schema
@@ -234,6 +299,16 @@ class ClassifiedService(Component):
             "country_state": {
                 "type": "dict",
                 "schema": self._get_country_state_schema(),
+            },
+            "file": {
+                "type": "dict",
+                "required": False,
+                "nullable": True,
+                "schema": {
+                    "name": {"type": "string", "required": True},
+                    "url": {"type": "string", "required": True},
+                    "mimetype": {"type": "string", "required": True, "nullable": True},
+                },
             },
             "state": self._state_schema(private=private),
             "rejection_reason": {"type": "string", "required": False, "nullable": True},
@@ -254,16 +329,9 @@ class ClassifiedService(Component):
             },
         }
         if not search:
-            schema["date_start"] = {
-                "type": "datetime",
-                "required": True,
-                "nullable": False,
-            }
-            schema["date_end"] = {
-                "type": "datetime",
-                "required": True,
-                "nullable": False,
-            }
+            dtt = {"type": "datetime", "required": True, "nullable": False}
+            schema["date_start"] = dtt
+            schema["date_end"] = dtt
         return schema
 
     def _get_country_code_schema(self, search=False):
@@ -303,6 +371,9 @@ class ClassifiedService(Component):
     def _input_schema(self, search=False, private=False):
         schema = self._common_fields_schema(search=search)
         schema.update(self._input_fields_schema(search=search, private=private))
+        if not search:
+            schema["date_start"]["coerce"] = utils.odoo_str_dt_to_dt_utc
+            schema["date_end"]["coerce"] = utils.odoo_str_dt_to_dt_utc
         return schema
 
     def _input_update_schema(self):
