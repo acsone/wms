@@ -25,8 +25,10 @@ class TestClassifiedCase(SavepointCase):
     def setUpClass(cls):
         super(TestClassifiedCase, cls).setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
+        cls.partner_0 = cls.env["res.partner"].create({"name": "P0"})
         cls.partner_1 = cls.env["res.partner"].create({"name": "P1"})
         cls.partner_2 = cls.env["res.partner"].create({"name": "P2"})
+        cls.partners = cls.partner_0 + cls.partner_1 + cls.partner_2
 
         cls.state_wlg = cls.env.ref("alc_address_data.province_wlg")
         cls.state_wbr = cls.env.ref("alc_address_data.province_wbr")

@@ -24,7 +24,7 @@ class ResPartner(models.Model):
         )
         counts = {r["partner_id"][0]: r["partner_id_count"] for r in results}
         for partner in self:
-            partner.alc_classified_count = counts[partner.id]
+            partner.alc_classified_count = counts.get(partner.id, 0)
 
     def action_show_classifieds(self):
         self.ensure_one()

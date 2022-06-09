@@ -6,7 +6,8 @@ from .common import TestClassifiedCase
 
 class TestClassified(TestClassifiedCase):
     def test_alc_classified_count(self):
-        (self.partner_1 | self.partner_2)._compute_alc_classified_count()
+        self.partners._compute_alc_classified_count()
+        self.assertEqual(self.partner_0.alc_classified_count, 0)
         self.assertEqual(self.partner_1.alc_classified_count, 2)
         self.assertEqual(self.partner_2.alc_classified_count, 2)
 
