@@ -59,6 +59,16 @@ WITH web_categories AS (
         *,
         row_number() OVER (PARTITION BY product_id ORDER BY categ_id DESC) as idx
     FROM product_categ_rel
+),
+single_tax AS (
+    SELECT
+        prod_id,
+        tax.*
+    FROM
+        product_taxes_rel trel
+        JOIN account_tax tax
+            ON trel.tax_id = tax.id
+            AND tax.tax_group_id = %(tax_group_one_tax_id)s
 )
 SELECT
     pp.id,
@@ -136,11 +146,8 @@ FROM
     LEFT join product_discount_special as discount_special
         ON discount_special.product_template_id = pt.id
         AND discount_special.date_start <= CURRENT_DATE AND discount_special.date_end >= CURRENT_DATE
-    LEFT join product_taxes_rel as taxes_rel
-            ON taxes_rel.prod_id = pt.id
-    LEFT join account_tax as tax
-        ON taxes_rel.tax_id = tax.id
-        and tax.tax_group_id = %(tax_group_one_tax_id)s
+    LEFT join single_tax as tax
+        ON tax.prod_id = pt.id
     LEFT join res_partner as supplier
         ON supplier.id = pt.supplier_id
 WHERE pt.active and web_published
