@@ -12,3 +12,5 @@ class TestAlcDocumentsPrices(TestAlcDocuments):
     @mute_logger("odoo.addons.queue_job.models.base")
     def setUpClass(cls):
         super(TestAlcDocumentsPrices, cls).setUpClass()
+        cls.env["product.product"].search([]).write({"web_published": True})
+        cls.env["alc.document.prices.data"].refresh_view()

@@ -73,25 +73,25 @@ class AlcDocument(models.Model):
         documents = self.search(domain)
         return documents.partition("format")
 
-    def _process_product_lines(self, products, lines):
+    def _process_prices_data_lines(self, prices_data_lines, lines):
         if self.compute == "discount":
-            self._process_product_lines_discount(products, lines)
+            self._process_prices_data_lines_discount(prices_data_lines, lines)
         elif self.compute == "pricelist":
-            self._process_product_lines_pricelist(products, lines)
+            self._process_prices_data_lines_pricelist(prices_data_lines, lines)
         return lines
 
-    def _get_products(self):
-        domain_products = self.partner_id._get_product_domain()
-        return self.env["product.product"].search(domain_products)
+    def _get_prices_data_lines(self):
+        domain_product = self.partner_id._get_product_domain()
+        return self.env["alc.document.prices.data"].search(domain_product)
 
     def _generate_attachment_file(self):
         self.ensure_one()
         docs_by_format = self._all_by_format()
 
-        products = self._get_products()
+        prices_data_lines = self._get_prices_data_lines()
 
         lines = []
-        self._process_product_lines(products, lines)
+        self._process_prices_data_lines(prices_data_lines, lines)
 
         for file_format, document in docs_by_format.items():
             if file_format == "xlsx":
@@ -109,29 +109,33 @@ class AlcDocument(models.Model):
             document.attachment_id = self.env["ir.attachment"].create(vals)
 
     def _get_lang_price_parser(self):
-        mget = lambda s: (lambda r: ",".join(r.mapped(s)))
-        return [
-            {"name": "Reference", "lang": "fr_BE", "get": "default_code"},
-            {"name": "Article", "lang": "fr_BE", "get": "name"},
-            {"name": "Code_Mot_Cle", "lang": "fr_BE", "get": lambda r: ""},  # yes...
-            {"name": "Mot_Cle", "lang": "fr_BE", "get": mget("categ_ids.name")},
-            {"name": "Fabricant", "lang": "fr_BE", "get": mget("manufacturer.name")},
-            {"name": "Code_national", "lang": "fr_BE", "get": "cnk_code"},
-            {"name": "Prix_Vente_Indicatif", "lang": "fr_BE", "get": "indicated_price"},
+        parser = [
+            {"name": "Reference", "get": "default_code"},
+            {"name": "Article", "get": "name_fr"},
+            {"name": "Code_Mot_Cle", "get": lambda r: ""},  # yes...
+            {"name": "Mot_Cle", "get": "categ_fr"},
+            {"name": "Fabricant", "get": "manufacturer"},
+            {"name": "Code_national", "get": "cnk_code"},
+            {"name": "Prix_Vente_Indicatif", "get": "indicated_price"},
             {"name": "TVA"},
             {"name": "Prix_Brut_HTVA_EUR"},
             {"name": "Prix_Brut_TVAC_EUR"},
-            {"name": "Prix_Brut_TVAC_BEF", "lang": "fr_BE", "get": lambda r: ""},  # yes
-            {"name": "Article_NL", "lang": "nl_BE", "get": "name"},
-            {"name": "Article_DE", "lang": "de_DE", "get": "name"},
-            {"name": "ean_13", "lang": "fr_BE", "get": "barcode"},
-            {"name": "Article_EN", "lang": "en_US", "get": "name"},
-            {"name": "Category_NL", "lang": "nl_BE", "get": mget("categ_ids.name")},
-            {"name": "Category_EN", "lang": "en_US", "get": mget("categ_ids.name")},
+            {"name": "Prix_Brut_TVAC_BEF", "get": lambda r: ""},  # yes
+            {"name": "Article_NL", "get": "name_nl"},
+            {"name": "Article_DE", "get": "name_de"},
+            {"name": "ean_13", "get": "barcode"},
+            {"name": "Article_EN", "get": "name_en"},
+            {"name": "Category_NL", "get": "categ_nl"},
+            {"name": "Category_EN", "get": "categ_en"},
         ]
+        if self.env["ir.config_parameter"].get_param(
+            "alc_documents_prices.include_code_amm", ""
+        ).lower() in ["true", "1", "t", "y", "yes"]:
+            parser.append({"name": "AMM_Number", "get": "code_amm"})
+        return parser
 
     def _get_headers(self):
-        # method coupled to _process_product_lines_discount
+        # method coupled to _process_prices_data_lines_discount
         headers = []
         if self.compute == "discount":
             headers = [
@@ -151,59 +155,81 @@ class AlcDocument(models.Model):
         started = discount_records.filtered(lambda d: not d.is_past and not d.is_future)
         return started.ordered("date_start")[0] if len(started) > 1 else started
 
-    def _process_product_lines_pricelist(self, products, lines):
+    def _resolve_price_cache_get(self, prices_data, key, date_ref=None):
+        return self.env["product.product"]._resolve_price_cache_get(
+            prices_data.price_cache, key, date_ref
+        )
+
+    def _process_prices_data_lines_pricelist(self, prices_data_lines, lines):
         # the langs are only used for the names, so we could possible optimize
         # by putting values in a dict from a read before, and not rely on ORM
-        langs = ["fr_BE", "en_US", "nl_BE", "de_DE"]
-        products_by_lang = {lang: products.with_context(lang=lang) for lang in langs}
         parser = self._get_lang_price_parser()
         price_key = self.partner_id.property_product_pricelist.role_name
         discount_key = self.partner_id.discount_pricelist_id.discount_role_name
-        for product in products:
-            tax = product.vat_id
-            base_price = product._price_cache_get(price_key).get("price", 0)
+        for prices_data in prices_data_lines:
+            base_price = self._resolve_price_cache_get(prices_data, price_key).get(
+                "price", 0
+            )
             if discount_key:
-                discount = product._price_cache_get(discount_key).get("discount", 0)
+                discount = self._resolve_price_cache_get(prices_data, discount_key).get(
+                    "discount", 0
+                )
                 base_price -= base_price * (1 - discount / 100)
             prices = {
-                "TVA": "%s%%" % tax.amount,
+                "TVA": "%s%%" % prices_data.tax_amount,
                 "Prix_Brut_HTVA_EUR": base_price,
-                "Prix_Brut_TVAC_EUR": base_price + base_price * tax.amount / 100,
+                "Prix_Brut_TVAC_EUR": base_price
+                + base_price * prices_data.tax_amount / 100,
             }
             line = []
             for field_parser in parser:
                 get = field_parser.get("get", field_parser["name"])
-                if get in prices:
-                    value = prices[get]
-                else:
-                    record = products_by_lang[field_parser["lang"]].browse(product.id)
-                    value = (record[get] if isinstance(get, str) else get(record)) or ""
+                value = prices.get(get, "NOVALUE")
+                if value == "NOVALUE":
+                    value = (
+                        prices_data[get] if isinstance(get, str) else get(prices_data)
+                    ) or ""
                 line.append("%s" % value)
             lines.append(line)
         return lines
 
-    def _process_product_lines_discount(self, products, lines):
-        for product in products:
-            for product_field in [
-                "supplier_discount_ids",
-                "supplier_promotion_ids",
-                "product_discount_special_ids",
+    def _process_prices_data_lines_discount(self, prices_data_lines, lines):
+        for prices_data in prices_data_lines:
+
+            for discount_def in [
+                "supplier_discount",
+                "supplier_promotion",
+                "discount_special",
             ]:
-                records = product[product_field]
-                record = self._get_first_discount(records)
-                if record:
-                    if record._name == "product.discount.special":
-                        discount_type = u"Promotion spéciale"
-                    elif record.is_promotion:
-                        discount_type = "Produits GRATUITS"
-                    else:
-                        discount_type = "%s%% off" % record.discount_sale
-                    date_end = fields.Date.from_string(record.date_end)
+                discount_type = ""
+                date_end = None
+                if (
+                    discount_def == "supplier_discount"
+                    and prices_data.supplier_discount_discount_sale
+                ):
+                    discount_type = (
+                        "%s%% off" % prices_data.supplier_discount_discount_sale
+                    )
+                    date_end = prices_data.supplier_discount_date_end
+                elif (
+                    discount_def == "supplier_promotion"
+                    and prices_data.has_supplier_promotion
+                ):
+                    discount_type = "Produits GRATUITS"
+                    date_end = prices_data.supplier_promotion_date_end
+                elif (
+                    discount_def == "discount_special"
+                    and prices_data.has_discount_special
+                ):
+                    discount_type = u"Promotion spéciale"
+                    date_end = prices_data.discount_special_date_end
+                if discount_type:
+                    date_end = fields.Date.from_string(date_end)
                     line = [
-                        product.categ_id.name,
-                        product.supplier_id.name,
-                        product.default_code,
-                        product.name,
+                        prices_data.categ_fr,
+                        prices_data.supplier_name,
+                        prices_data.default_code,
+                        prices_data.name_fr,
                         discount_type,
                         date_end.strftime("%d/%m/%Y") if date_end else "",
                     ]

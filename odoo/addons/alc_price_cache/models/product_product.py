@@ -123,7 +123,11 @@ class ProductProduct(models.Model):
 
     def _price_cache_get(self, key, date_ref=None):
         self.ensure_one()
-        items = self.price_cache.get(key, [])  # TODO: we should not be in that case
+        return self._resolve_price_cache_get(self.price_cache, key, date_ref=date_ref)
+
+    @api.model
+    def _resolve_price_cache_get(self, price_cache, key, date_ref=None):
+        items = price_cache.get(key, [])  # TODO: we should not be in that case
         # however, in tests, the matter is different...
         mixin = self.env["mixin.past"]
         date_ref = date_ref or fields.Date.today()

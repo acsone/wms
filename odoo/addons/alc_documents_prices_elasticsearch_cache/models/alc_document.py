@@ -49,6 +49,37 @@ class AlcDocument(models.Model):
             item = min(candidates, key=lambda it: it["date_start"] or today)
         return item
 
+    def _process_product_lines(self, products, lines):
+        if self.compute == "discount":
+            self._process_product_lines_discount(products, lines)
+        elif self.compute == "pricelist":
+            self._process_product_lines_pricelist(products, lines)
+        return lines
+
+    def _generate_attachment_file(self):
+        self.ensure_one()
+        docs_by_format = self._all_by_format()
+
+        products = self._get_products()
+
+        lines = []
+        self._process_product_lines(products, lines)
+
+        for file_format, document in docs_by_format.items():
+            if file_format == "xlsx":
+                tmp_file = docs_by_format[file_format]._create_attachment_xlsx(lines)
+            else:
+                tmp_file = docs_by_format[file_format]._create_attachment_csv(lines)
+            vals = {
+                "name": document.name,
+                "datas": open(tmp_file, "rb").read().encode("base64"),
+                "datas_fname": document.name,
+                "res_model": "res.partner",
+                "res_id": document.partner_id.id,
+            }
+            document.attachment_id.unlink()
+            document.attachment_id = self.env["ir.attachment"].create(vals)
+
     def _get_products(self):
         # UNSAFE override! returns a [json] instead of the records!
         # does NOT call super
