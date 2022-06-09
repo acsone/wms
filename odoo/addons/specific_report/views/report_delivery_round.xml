@@ -99,7 +99,7 @@
                     />
                     <span t-field="partner.ref" />
                   </td>
-                  <td style="width: 43%;">
+                  <td style="width: 40%;">
                     <strong>
                       <span t-esc="shipping_value.get('note', '')" />
                     </strong>
@@ -109,7 +109,7 @@
                     <br />
                     <span t-field="partner.phone" />
                   </td>
-                  <td>
+                  <td style="width: 6%;">
                     <t
                       t-set="total_medoc_box"
                       t-value="shipping_value.get('number_of_drug', 0) + total_medoc_box"
