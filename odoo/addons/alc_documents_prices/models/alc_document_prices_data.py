@@ -79,9 +79,9 @@ WITH RECURSIVE categ_info AS (
             product_category.id,
             product_category.parent_id,
             product_category.name,
-            cs.fullname_en || '/' || product_category.name as fullname_en,
-            cs.fullname_fr || '/' || coalesce(categ_fr.value, product_category.name) as fullname_fr,
-            cs.fullname_nl || '/' || coalesce(categ_nl.value, product_category.name) as fullname_nl
+            cs.fullname_en || ' / ' || product_category.name as fullname_en,
+            cs.fullname_fr || ' / ' || coalesce(categ_fr.value, product_category.name) as fullname_fr,
+            cs.fullname_nl || ' / ' || coalesce(categ_nl.value, product_category.name) as fullname_nl
         FROM
             categ_info cs
         JOIN
