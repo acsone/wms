@@ -10,13 +10,14 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
+        "account_tax_one_vat",
         "alc_documents",
         "alc_price_cache",
-        "product_multi_category",
+        "alc_product_shop_category",
         "alc_supplier_promotion",
-        "product_discount_specials",
-        "account_tax_one_vat",
         "materialized_view_mixin",
+        "product_discount_specials",
+        "product_multi_category",
         "queue_job_cron",
     ],
     "data": [

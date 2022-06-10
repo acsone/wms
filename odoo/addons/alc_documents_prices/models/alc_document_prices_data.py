@@ -7,7 +7,7 @@ from odoo import api, fields, models
 import odoo.addons.decimal_precision as dp
 
 
-class AlcDocumentPriceData(models.Model):
+class AlcDocumentPricesData(models.Model):
 
     _name = "alc.document.prices.data"
     _inherit = "materialized.view.mixin"
@@ -54,7 +54,50 @@ class AlcDocumentPriceData(models.Model):
     def get_init_query(self):
         return """
             CREATE MATERIALIZED VIEW %(table)s AS (
-WITH web_categories AS (
+WITH RECURSIVE categ_info AS (
+    SELECT
+        product_category.id,
+        parent_id,
+        product_category.name,
+        product_category.name as fullname_en,
+        coalesce(categ_fr.value, product_category.name) as fullname_fr,
+        coalesce(categ_nl.value, product_category.name) as fullname_nl
+    FROM product_category
+        LEFT join ir_translation as categ_fr
+            ON categ_fr.res_id = product_category.id
+            AND categ_fr.type = 'model'
+            AND categ_fr.name = 'product.category,name'
+            AND categ_fr.lang = 'fr_BE'
+        LEFT join ir_translation as categ_nl
+            ON categ_nl.res_id = product_category.id
+            AND categ_nl.type = 'model'
+            AND categ_nl.name = 'product.category,name'
+            AND categ_nl.lang = 'nl_BE'
+    WHERE product_category.parent_id = %(main_web_category_id)s
+    UNION
+        SELECT
+            product_category.id,
+            product_category.parent_id,
+            product_category.name,
+            cs.fullname_en || '/' || product_category.name as fullname_en,
+            cs.fullname_fr || '/' || coalesce(categ_fr.value, product_category.name) as fullname_fr,
+            cs.fullname_nl || '/' || coalesce(categ_nl.value, product_category.name) as fullname_nl
+        FROM
+            categ_info cs
+        JOIN
+            product_category on cs.id = product_category.parent_id
+            LEFT join ir_translation as categ_fr
+                ON categ_fr.res_id = product_category.id
+                AND categ_fr.type = 'model'
+                AND categ_fr.name = 'product.category,name'
+                AND categ_fr.lang = 'fr_BE'
+            LEFT join ir_translation as categ_nl
+                ON categ_nl.res_id = product_category.id
+                AND categ_nl.type = 'model'
+                AND categ_nl.name = 'product.category,name'
+                AND categ_nl.lang = 'nl_BE'
+),
+web_categories AS (
     SELECT
         *,
         row_number() OVER (PARTITION BY product_id ORDER BY categ_id DESC) as idx
@@ -84,9 +127,9 @@ SELECT
     code_amm,
     indicated_price,
     pp.barcode,
-    categ.name as categ_en,
-    coalesce(categ_fr.value, categ.name) as categ_fr,
-    coalesce(categ_nl.value, categ.name) as categ_nl,
+    categ.fullname_en as categ_en,
+    categ.fullname_fr as categ_fr,
+    categ.fullname_nl as categ_nl,
     pp.allowed_partner_types,
     price_cache,
     supplier_promotion.id is not null as has_supplier_promotion,
@@ -122,18 +165,8 @@ FROM
     LEFT join web_categories web_categs
         on web_categs.product_id = pt.id
         AND web_categs.idx = 1
-    LEFT join product_category categ
+    LEFT join categ_info categ
         on categ.id = web_categs.categ_id
-    LEFT join ir_translation as categ_fr
-        ON categ_fr.res_id = categ.id
-        AND categ_fr.type = 'model'
-        AND categ_fr.name = 'product.category,name'
-        AND categ_fr.lang = 'fr_BE'
-    LEFT join ir_translation as categ_nl
-        ON categ_nl.res_id = categ.id
-        AND categ_nl.type = 'model'
-        AND categ_nl.name = 'product.category,name'
-        AND categ_nl.lang = 'nl_BE'
     LEFT join product_supplierinfo as supplier_discount
         ON supplier_discount.product_tmpl_id = pt.id
         AND supplier_discount.date_start <= CURRENT_DATE AND supplier_discount.date_end >= CURRENT_DATE
@@ -160,8 +193,11 @@ CREATE UNIQUE INDEX pk_%(table)s ON %(table)s (id);
 
     @api.model
     def get_init_query_args(self):
-        args = super(AlcDocumentPriceData, self).get_init_query_args()
+        args = super(AlcDocumentPricesData, self).get_init_query_args()
         args["tax_group_one_tax_id"] = self.env.ref(
             "account_tax_one_vat.vat_tax_group"
+        ).id
+        args["main_web_category_id"] = self.env.ref(
+            "alc_product_shop_category.master"
         ).id
         return args
