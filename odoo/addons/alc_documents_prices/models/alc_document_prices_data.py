@@ -34,7 +34,7 @@ class AlcDocumentPricesData(models.Model):
     categ_fr = fields.Char(readonly=True)
     categ_nl = fields.Char(readonly=True)
     allowed_partner_types = fields.Char(readonly=True)
-    price_cache = fields.Serialized(readonly=True)
+    price_cache = fields.Serialized(readonly=True, prefetch=True)
     supplier_discount_discount_sale = fields.Float(
         "Sale discount (%)",
         digits=dp.get_precision("Discount"),
