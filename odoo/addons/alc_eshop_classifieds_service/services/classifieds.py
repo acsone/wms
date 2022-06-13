@@ -5,10 +5,13 @@
 from odoo import _, fields
 from odoo.exceptions import AccessDenied
 
-from odoo.addons.alc_cerberus_utils import utils
 from odoo.addons.base_rest import restapi
 from odoo.addons.base_rest.components.service import to_int
 from odoo.addons.component.core import Component
+
+
+def date_parser(date_str):
+    return fields.Date.from_string(date_str) if date_str else None
 
 
 class ClassifiedService(Component):
@@ -228,7 +231,6 @@ class ClassifiedService(Component):
         return parser
 
     def _get_base_parser(self):
-        date_parser = lambda r, fn: utils.odoo_str_dt_to_dt_utc(r[fn])
         file_parser = (
             lambda r, fn: {
                 "url": r.file_id.url,
@@ -247,8 +249,8 @@ class ClassifiedService(Component):
             "email",
             "contact",
             "phone",
-            ("date_start", date_parser),
-            ("date_end", date_parser),
+            "date_start",
+            "date_end",
             ("file", file_parser),
         ]
 
@@ -291,6 +293,13 @@ class ClassifiedService(Component):
         }
         if private:
             schema["state"] = self._state_schema(search=search)
+        if search:
+            schema["from_date"] = {
+                "type": "date",
+                "required": False,
+                "nullable": False,
+                "coerce": date_parser,
+            }
         return schema
 
     def _output_fields_schema(self, private=False):
@@ -329,7 +338,12 @@ class ClassifiedService(Component):
             },
         }
         if not search:
-            dtt = {"type": "datetime", "required": True, "nullable": False}
+            dtt = {
+                "type": "date",
+                "required": True,
+                "nullable": False,
+                "coerce": date_parser,
+            }
             schema["date_start"] = dtt
             schema["date_end"] = dtt
         return schema
@@ -371,9 +385,6 @@ class ClassifiedService(Component):
     def _input_schema(self, search=False, private=False):
         schema = self._common_fields_schema(search=search)
         schema.update(self._input_fields_schema(search=search, private=private))
-        if not search:
-            schema["date_start"]["coerce"] = utils.odoo_str_dt_to_dt_utc
-            schema["date_end"]["coerce"] = utils.odoo_str_dt_to_dt_utc
         return schema
 
     def _input_update_schema(self):

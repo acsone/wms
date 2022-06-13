@@ -48,17 +48,17 @@ class TestDocumentsServiceFlow(TestClassifiedsService):
 
             # given
             value = self.classified_1_misc.date_start  # they all have the same date
-            value = fields.Datetime.from_string(value)
-            value = fields.Datetime.context_timestamp(self.classifieds_1, value)
+            date_creation = fields.Date.from_string(value)
             # when
-            result = service.search(from_date=value)
+            result = service.dispatch("search", params={"from_date": value})
             # then
             self.assertEqual(result["size"], 4)
 
             # given
-            value += relativedelta(days=1)  # after all of them
+            date_search = date_creation + relativedelta(days=1)  # after all of them
+            value = fields.Date.to_string(date_search)
             # when
-            result = service.search(from_date=value)
+            result = service.dispatch("search", params={"from_date": value})
             # then
             self.assertEqual(result["size"], 0)
 
@@ -133,7 +133,7 @@ class TestDocumentsServiceFlow(TestClassifiedsService):
             self.assertFalse("state" in result["data"][0])
 
     def test_creation_submission_flow(self):
-        date_today = fields.Datetime.from_string(fields.Datetime.now())
+        date_today = fields.Date.from_string(fields.Date.today())
         date_in_10_days = date_today + relativedelta(days=10)
         parameters = {
             "country_state_code": "WBR",
@@ -143,8 +143,8 @@ class TestDocumentsServiceFlow(TestClassifiedsService):
             "phone": "phone",
             "email": "email",
             "contact": "contact",
-            "date_start": fields.Datetime.to_string(date_today),
-            "date_end": fields.Datetime.to_string(date_in_10_days),
+            "date_start": fields.Date.to_string(date_today),
+            "date_end": fields.Date.to_string(date_in_10_days),
         }
         with self.classifieds_service() as service:
             params = {"file": None, "parameters": json.dumps(parameters)}
