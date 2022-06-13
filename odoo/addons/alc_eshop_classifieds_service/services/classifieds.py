@@ -2,6 +2,8 @@
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+import base64
+
 from odoo import _, fields
 from odoo.exceptions import AccessDenied
 
@@ -185,16 +187,14 @@ class ClassifiedService(Component):
 
     def _process_file(self, params, classified=None, file=None, name=None):
         if file:
-            vals_new_file = {
-                "name": "%s.pdf" % name,
-                "data": file.read(),
-                "mimetype": "application/pdf",
-            }
+            data = base64.encodestring(file.read())  # pylint: disable=deprecated-method
+            vals_new_file = {"name": "%s.pdf" % name, "data": data}
             new_file = self.env["mixin.file.id"]._create_file_id(vals_new_file)
             params["file_id"] = new_file.id
         if params.pop("file_delete", False) or file:
             if classified:
                 classified.file_id.unlink()
+                classified.file_id = False
         return params
 
     def _get_domain(self, private, params):
