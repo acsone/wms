@@ -74,6 +74,8 @@
                         <field name="email" />
                         <field name="contact" />
                         <field name="phone" />
+                        <field name="file" filename="filename" />
+                        <field name="filename" invisible="1" />
                     </group>
                 </sheet>
             </form>

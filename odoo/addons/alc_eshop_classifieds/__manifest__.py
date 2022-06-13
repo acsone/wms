@@ -11,6 +11,7 @@
     "website": "https://acsone.eu/",
     "depends": [
         "mixin_past",
+        "mixin_file_id",
         "mail",
         "alc_address_data",
         "sales_team",  # for the menu

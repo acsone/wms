@@ -2,6 +2,9 @@
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+
+import json
+
 from dateutil.relativedelta import relativedelta
 
 from odoo import fields
@@ -132,7 +135,7 @@ class TestDocumentsServiceFlow(TestClassifiedsService):
     def test_creation_submission_flow(self):
         date_today = fields.Datetime.from_string(fields.Datetime.now())
         date_in_10_days = date_today + relativedelta(days=10)
-        params = {
+        parameters = {
             "country_state_code": "WBR",
             "name": "fancy name",
             "body": "body",
@@ -140,23 +143,27 @@ class TestDocumentsServiceFlow(TestClassifiedsService):
             "phone": "phone",
             "email": "email",
             "contact": "contact",
-            "date_start": date_today,
-            "date_end": date_in_10_days,
+            "date_start": fields.Datetime.to_string(date_today),
+            "date_end": fields.Datetime.to_string(date_in_10_days),
         }
         with self.classifieds_service() as service:
+            params = {"file": None, "parameters": json.dumps(parameters)}
             result = service.dispatch("create_new", params=params)
             self.assertEqual(result["size"], 1)
             _id = result["data"][0]["id"]
             classified = service.model.browse(_id)
+            self.assertEqual(result["data"][0]["name"], parameters["name"])
             self.assertEqual(result["data"][0]["name"], classified.name)
             self.assertEqual(result["data"][0]["state"], "draft")
+            self.assertEqual(result["data"][0]["file"], None)
 
             service.dispatch("submit", _id)
             self.assertEqual(classified.state, "pending")
 
-            params_update = {"name": "updated fancy name"}
+            parameters_update = {"name": "updated fancy name"}
+            params_update = {"file": None, "parameters": json.dumps(parameters_update)}
             service.dispatch("update_set_to_draft", _id, params=params_update)
-            self.assertEqual(classified.name, params_update["name"])
+            self.assertEqual(classified.name, params_update["parameters"]["name"])
             self.assertEqual(classified.state, "draft")
 
             reason = "we don't like you"
@@ -166,9 +173,10 @@ class TestDocumentsServiceFlow(TestClassifiedsService):
             self.assertEqual(result["data"][0]["rejection_reason"], reason)
             self.assertEqual(classified.state, "cancel")
 
-            params_update = {"name": "corrected fancy name"}
+            parameters_update = {"name": "corrected fancy name"}
+            params_update = {"file": None, "parameters": json.dumps(parameters_update)}
             service.dispatch("update_set_to_pending", _id, params=params_update)
-            self.assertEqual(classified.name, params_update["name"])
+            self.assertEqual(classified.name, params_update["parameters"]["name"])
             self.assertEqual(classified.state, "pending")
 
             service.dispatch("delete", _id)

@@ -9,6 +9,7 @@ from odoo.exceptions import ValidationError
 class AlcEshopAds(models.Model):
 
     _name = "alc.eshop.ads"
+    _inherit = "mixin.file.id"
     _description = "Eshop Ads"
 
     name = fields.Char(required=True)
@@ -23,13 +24,9 @@ class AlcEshopAds(models.Model):
     image_medium_url = fields.Char(related="image_id.image_medium_url")
 
     file_id = fields.Many2one(
-        string="storage file",
-        comodel_name="storage.file",
         help="If specified, the file will be downloaded by the customer on "
         "click on the ads banner into the website.",
     )
-    file = fields.Binary(compute="_compute_file", inverse="_inverse_file")
-    filename = fields.Char(related="file_id.name")
 
     site_url = fields.Char(
         string="Site url",
@@ -101,31 +98,6 @@ class AlcEshopAds(models.Model):
                     "data": new_image,
                 }
             )
-
-    @api.depends("file_id")
-    def _compute_file(self):
-        for rec in self:
-            rec.file = rec.file_id.data
-
-    def _inverse_file(self):
-        for rec in self:
-            new_file = rec.file
-            if rec.file_id:
-                rec.file_id.unlink()
-            if not new_file:
-                continue
-            rec.file_id = rec.file_id.create(
-                {
-                    "backend_id": rec._get_default_backend_id(),
-                    "name": rec.filename or rec.name,
-                    "data": new_file,
-                }
-            )
-
-    def _get_default_backend_id(self):
-        return self.env["storage.backend"]._get_backend_id_from_param(
-            self.env, "storage.image.backend_id"
-        )
 
     @api.depends("name", "date_start", "date_end", "display_slot")
     def _compute_display_name(self):
