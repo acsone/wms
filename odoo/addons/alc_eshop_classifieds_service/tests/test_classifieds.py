@@ -4,8 +4,7 @@
 
 
 import json
-
-from dateutil.relativedelta import relativedelta
+import os
 
 from odoo import fields
 
@@ -48,15 +47,13 @@ class TestDocumentsServiceFlow(TestClassifiedsService):
 
             # given
             value = self.classified_1_misc.date_start  # they all have the same date
-            date_creation = fields.Date.from_string(value)
             # when
             result = service.dispatch("search", params={"from_date": value})
             # then
             self.assertEqual(result["size"], 4)
 
             # given
-            date_search = date_creation + relativedelta(days=1)  # after all of them
-            value = fields.Date.to_string(date_search)
+            value = fields.Date.to_string(self.date_tomorrow)
             # when
             result = service.dispatch("search", params={"from_date": value})
             # then
@@ -133,19 +130,7 @@ class TestDocumentsServiceFlow(TestClassifiedsService):
             self.assertFalse("state" in result["data"][0])
 
     def test_creation_submission_flow(self):
-        date_today = fields.Date.from_string(fields.Date.today())
-        date_in_10_days = date_today + relativedelta(days=10)
-        parameters = {
-            "country_state_code": "WBR",
-            "name": "fancy name",
-            "body": "body",
-            "category": "misc",
-            "phone": "phone",
-            "email": "email",
-            "contact": "contact",
-            "date_start": fields.Date.to_string(date_today),
-            "date_end": fields.Date.to_string(date_in_10_days),
-        }
+        parameters = self._get_classified_vals()
         with self.classifieds_service() as service:
             params = {"file": None, "parameters": json.dumps(parameters)}
             result = service.dispatch("create_new", params=params)
@@ -181,3 +166,46 @@ class TestDocumentsServiceFlow(TestClassifiedsService):
 
             service.dispatch("delete", _id)
             self.assertFalse(classified.exists())
+
+    def test_creation_without_file_parameter(self):
+        """Check we can create a classified without passing a file."""
+        parameters = self._get_classified_vals()
+        with self.classifieds_service() as service:
+            params = {"parameters": json.dumps(parameters)}
+            result = service.dispatch("create_new", params=params)
+            self.assertEqual(result["size"], 1)
+            self.assertEqual(result["data"][0]["file"], None)
+
+    def test_file_flow(self):
+        """Test binary flow."""
+        filename = os.path.join(os.path.dirname(__file__), "handbook.pdf")
+        parameters = self._get_classified_vals()
+        with self.classifieds_service() as service:
+            params = {
+                "file": open(filename, "rb"),
+                "parameters": json.dumps(parameters),
+            }
+            result = service.dispatch("create_new", params=params)
+            self.assertEqual(result["size"], 1)
+            self.assertEqual(result["data"][0]["file"]["mimetype"], "application/pdf")
+
+            _id = result["data"][0]["id"]
+            classified = service.model.browse(_id)
+            file_id_old = classified.file_id
+
+            # replace the file with a new one
+            params_update = {"file": open(filename, "rb"), "parameters": json.dumps({})}
+            result = service.dispatch(
+                "update_set_to_pending", _id, params=params_update
+            )
+            self.assertEqual(result["data"][0]["file"]["mimetype"], "application/pdf")
+            self.assertTrue(file_id_old.to_delete)  # we removed the old file
+            file_id_new = classified.file_id
+            self.assertFalse(file_id_new.to_delete)  # and added a new one
+
+            params_update = {"parameters": json.dumps({"file_delete": True})}
+            result = service.dispatch(
+                "update_set_to_pending", _id, params=params_update
+            )
+            self.assertEqual(result["data"][0]["file"], None)
+            self.assertTrue(file_id_new.to_delete)  # we removed the file

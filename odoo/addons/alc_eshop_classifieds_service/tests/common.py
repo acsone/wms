@@ -5,6 +5,9 @@
 from contextlib import contextmanager
 
 import mock
+from dateutil.relativedelta import relativedelta
+
+from odoo import fields
 
 from odoo.addons.alc_eshop_classifieds.tests.common import TestClassifiedCase
 from odoo.addons.base_rest.controllers.main import _PseudoCollection
@@ -17,6 +20,9 @@ class TestClassifiedsService(TestClassifiedCase, ComponentMixin):
     def setUpClass(cls):
         super(TestClassifiedsService, cls).setUpClass()
         cls.setUpComponent()
+        cls.date_today = fields.Date.from_string(fields.Date.today())
+        cls.date_tomorrow = cls.date_today + relativedelta(days=1)
+        cls.date_in_10_days = cls.date_today + relativedelta(days=10)
 
     @classmethod
     @contextmanager
@@ -36,3 +42,17 @@ class TestClassifiedsService(TestClassifiedCase, ComponentMixin):
     def publish(self, classifieds):
         classifieds.submit()
         classifieds.confirm()
+
+    def _get_classified_vals(self, **kwargs):
+        vals = {
+            "country_state_code": "WBR",
+            "name": "fancy name",
+            "body": "body",
+            "category": "misc",
+            "phone": "phone",
+            "email": "email",
+            "contact": "contact",
+            "date_start": fields.Date.to_string(self.date_today),
+            "date_end": fields.Date.to_string(self.date_in_10_days),
+        }
+        return dict(vals, **kwargs)
