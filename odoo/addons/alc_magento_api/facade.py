@@ -127,7 +127,7 @@ class FacadeProduct(Facade):
         return price
 
     def _get_cache_category(self, categories):
-        return categories[-1]["name"] if categories else None
+        return " / ".join([cat["name"] for cat in categories])
 
     def _json_for_xml_from_cache(self, lang, records_translations):
         records, translations = records_translations
@@ -140,6 +140,7 @@ class FacadeProduct(Facade):
             vat = record.get("vat", {"amount": 21})["amount"]  # TODO
             json_by_id[record_id] = {
                 "Article_EN": record["name"],
+                "Category_EN": self._get_cache_category(record.get("categories", [])),
                 "Reference": record["sku"],
                 "Code_national": record["cnk_code"],
                 "TVA": vat,
