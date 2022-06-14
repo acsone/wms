@@ -59,6 +59,17 @@ class TestDocumentsServiceFlow(TestClassifiedsService):
             # then
             self.assertEqual(result["size"], 0)
 
+    def test_search_publication_date(self):
+        with self.classifieds_service() as service:
+            self.publish(self.classifieds)
+            self.classified_1_employment.date_start = self.date_tomorrow
+            self.classified_2_wbr.date_end = self.date_yesterday
+
+            result = service.dispatch("search", params={})
+            ids = {r["id"] for r in result["data"]}
+            expected_ids = set((self.classified_1_misc | self.classified_2_misc).ids)
+            self.assertEqual(ids, expected_ids)
+
     def test_output_shape(self):
         # private fields are only returned in private endpoints
         _id = self.classified_1_misc.id

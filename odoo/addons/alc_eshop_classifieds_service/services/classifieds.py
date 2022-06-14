@@ -205,7 +205,12 @@ class ClassifiedService(Component):
             if state:
                 domain.append(("state", "=", state))
         else:
-            domain = [("state", "=", "published")]
+            today = fields.Date.today()
+            domain = [
+                ("state", "=", "published"),
+                ("date_start", "<=", today),
+                ("date_end", ">=", today),
+            ]
         from_date = params.pop("from_date", None)
         if from_date:
             domain.append(("date_start", ">=", from_date))

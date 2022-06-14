@@ -22,6 +22,7 @@ class TestClassifiedsService(TestClassifiedCase, ComponentMixin):
         cls.setUpComponent()
         cls.date_today = fields.Date.from_string(fields.Date.today())
         cls.date_tomorrow = cls.date_today + relativedelta(days=1)
+        cls.date_yesterday = cls.date_today - relativedelta(days=1)
         cls.date_in_10_days = cls.date_today + relativedelta(days=10)
 
     @classmethod
