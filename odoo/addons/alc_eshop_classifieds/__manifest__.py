@@ -23,4 +23,5 @@
         "wizards/alc_classified_wizard_rejection.xml",
     ],
     "demo": [],
+    "external_dependencies": {"python": ["slugify"]},
 }

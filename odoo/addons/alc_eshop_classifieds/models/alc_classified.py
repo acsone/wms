@@ -3,6 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from dateutil.relativedelta import relativedelta
+from slugify import slugify
 
 from odoo import api, fields, models
 
@@ -88,6 +89,10 @@ class AlcClassified(models.Model):
         today_str = self.default_today()
         today = fields.Date.from_string(today_str)
         return fields.Date.to_string(today + relativedelta(days=7))
+
+    @api.model
+    def _get_filename(self, name):
+        return slugify(name)[:26]  # limit to 30 with extension
 
     # user methods (i.e. the partner_id) ###
 
