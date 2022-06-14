@@ -39,9 +39,10 @@ class ClassifiedService(Component):
         return states.mapped("code")
 
     def _check_private_classified_access(self, classified):
-        private = classified.partner_id == self.partner
-        if not private and not classified.state == "published":
-            raise AccessDenied(_("This classified ad cannot be retrieved."))
+        if not classified.partner_id == self.partner:
+            unpublished = classified.state != "published"
+            if unpublished or classified.is_past or classified.is_future:
+                raise AccessDenied(_("This classified ad cannot be retrieved."))
 
     @restapi.method(
         [(["/new_simple"], "POST")],
@@ -148,8 +149,7 @@ class ClassifiedService(Component):
         """
         classified = self.model.browse(_id)
         private = classified.partner_id == self.partner
-        if not private and not classified.state == "published":
-            raise AccessDenied(_("This classified ad cannot be retrieved."))
+        self._check_private_classified_access(classified)
         return {"size": 1, "data": self._to_json(private=private, records=classified)}
 
     @restapi.method(

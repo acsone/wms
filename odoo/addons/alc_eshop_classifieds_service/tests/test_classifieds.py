@@ -70,6 +70,14 @@ class TestDocumentsServiceFlow(TestClassifiedsService):
             expected_ids = set((self.classified_1_misc | self.classified_2_misc).ids)
             self.assertEqual(ids, expected_ids)
 
+    def test_get_publication_date(self):
+        """It is published in the future, so not accessible yet publicly"""
+        with self.classifieds_service(self.partner_2) as service:
+            self.classified_1_misc.date_start = self.date_tomorrow
+            self.publish(self.classified_1_misc)
+            with self.assertRaises(Exception):
+                service.dispatch("get", self.classified_1_misc.id)
+
     def test_output_shape(self):
         # private fields are only returned in private endpoints
         _id = self.classified_1_misc.id
