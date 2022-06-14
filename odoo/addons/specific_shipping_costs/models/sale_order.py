@@ -71,7 +71,7 @@ class SaleOrder(models.Model):
                 lambda r: r.carrier_id == carrier and not r.used_for_delivery_fee
             )
             query_select = """SELECT amount_untaxed FROM sale_order
-            WHERE partner_id = %s AND state != 'cancel'
+            WHERE partner_id = %s AND state in ('sale', 'done')
             AND used_for_delivery_fee = false AND carrier_id = %s;
             """
             self.env.cr.execute(query_select, query_args)
@@ -81,7 +81,7 @@ class SaleOrder(models.Model):
 
             sum_ordered = sum(r[0] for r in result)
             query_update = """UPDATE sale_order SET used_for_delivery_fee = true
-            WHERE partner_id = %s AND state != 'cancel'
+            WHERE partner_id = %s AND state in ('sale', 'done')
             AND used_for_delivery_fee = false AND carrier_id = %s;
             """
             self.env.cr.execute(query_update, query_args)
@@ -93,7 +93,7 @@ class SaleOrder(models.Model):
             )
 
             query_select = """SELECT amount_untaxed FROM sale_order
-            WHERE partner_id = %s AND state != 'cancel'
+            WHERE partner_id = %s AND state in ('sale', 'done')
             AND used_for_fixed_fee = false AND carrier_id = %s;
             """
             self.env.cr.execute(query_select, query_args)
@@ -103,7 +103,7 @@ class SaleOrder(models.Model):
 
             sum_ordered = sum(r[0] for r in result)
             query_update = """UPDATE sale_order SET used_for_fixed_fee = true
-            WHERE partner_id = %s AND state != 'cancel'
+            WHERE partner_id = %s AND state in ('sale', 'done')
             AND used_for_fixed_fee = false AND carrier_id = %s;
             """
             self.env.cr.execute(query_update, query_args)

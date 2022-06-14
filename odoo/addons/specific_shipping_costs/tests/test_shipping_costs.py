@@ -353,13 +353,8 @@ class TestShippingCosts(SavepointCase):
         op = pick.pack_operation_product_ids
         op = op.filtered(lambda r: r.product_id.id == self.p1.id)
         op.write({"qty_done": 1})
-        pick.with_context(test_mode=True).do_transfer()
-        self.dr1._deliver(background=False)
-        self.assertTrue(self.no_shipping_line_present(self.so1))
-        self.assertTrue(self.no_shipping_line_present(self.so2))
-
-        # Second delivery round
         # Create a 3rd sale order
+        # we create in draft in advance, to check it isn't messed with by the delivery
         so3 = self.env["sale.order"].create(
             {
                 "partner_id": self.partner1.id,
@@ -379,6 +374,19 @@ class TestShippingCosts(SavepointCase):
                 ],
             }
         )
+        pick.with_context(test_mode=True).do_transfer()
+        self.dr1._deliver(background=False)
+        self.assertTrue(self.no_shipping_line_present(self.so1))
+        self.assertTrue(self.no_shipping_line_present(self.so2))
+
+        # this is already covered by the fact that if it was true for so3,
+        # then no fee would be added on it afterwards. Still, it's better to be
+        # explicit, and refactor this test if implementation changes
+        self.assertTrue(self.so1.used_for_delivery_fee)
+        self.assertTrue(self.so2.used_for_delivery_fee)
+        self.assertFalse(so3.used_for_delivery_fee)
+
+        # Second delivery round
         so3.action_confirm()
         self.dr2._assign_pickings(so3.picking_ids)
         pick = self.so2.picking_ids.filtered(lambda r: r.state != "done")
@@ -530,6 +538,7 @@ class TestShippingCosts(SavepointCase):
                 ],
             }
         )
+        self.so2.action_confirm()
         self.so1.action_confirm()
         self.dr1._assign_pickings(self.so1.picking_ids)
         self.dr1._deliver(background=False)
