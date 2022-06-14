@@ -188,6 +188,7 @@ class TestDocumentsServiceFlow(TestClassifiedsService):
             result = service.dispatch("create_new", params=params)
             self.assertEqual(result["size"], 1)
             self.assertEqual(result["data"][0]["file"]["mimetype"], "application/pdf")
+            self.assertEqual(result["data"][0]["file"]["name"], "fancy-name.pdf")
 
             _id = result["data"][0]["id"]
             classified = service.model.browse(_id)

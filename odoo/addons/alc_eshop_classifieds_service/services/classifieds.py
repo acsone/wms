@@ -188,7 +188,8 @@ class ClassifiedService(Component):
     def _process_file(self, params, classified=None, file=None, name=None):
         if file:
             data = base64.encodestring(file.read())  # pylint: disable=deprecated-method
-            vals_new_file = {"name": "%s.pdf" % name, "data": data}
+            f_name = self.env["alc.classified"]._get_filename(name)
+            vals_new_file = {"name": "%s.pdf" % f_name, "data": data}
             new_file = self.env["mixin.file.id"]._create_file_id(vals_new_file)
             params["file_id"] = new_file.id
         if params.pop("file_delete", False) or file:
