@@ -22,6 +22,7 @@ class ResPartner(models.Model):
             "code_cti",
             "url_key",
             "categories.name",
+            "categories.level",
             "price.%s" % price_key,
             "price.%s" % discount_key,
             "indicated_price",
@@ -42,7 +43,14 @@ class ResPartner(models.Model):
 
     def _get_es_fields_translations(self):
         self.ensure_one()
-        return ["objectID", "name", "url_key", "categories.name", "manufacturer.name"]
+        return [
+            "objectID",
+            "name",
+            "url_key",
+            "categories.name",
+            "categories.level",
+            "manufacturer.name",
+        ]
 
     def _get_shop_products(self, langs=None, ids=None):
         self.ensure_one()

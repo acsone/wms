@@ -127,6 +127,7 @@ class FacadeProduct(Facade):
         return price
 
     def _get_cache_category(self, categories):
+        categories.sort(key=lambda c: c.get("level", 0))
         return " / ".join([cat["name"] for cat in categories])
 
     def _json_for_xml_from_cache(self, lang, records_translations):
