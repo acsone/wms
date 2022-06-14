@@ -538,6 +538,7 @@ class TestShippingCosts(SavepointCase):
                 ],
             }
         )
+        self.so2.action_confirm()
         self.so1.action_confirm()
         self.dr1._assign_pickings(self.so1.picking_ids)
         self.dr1._deliver(background=False)
