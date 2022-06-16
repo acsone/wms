@@ -55,12 +55,15 @@ class CartService(Component):
         info["note"] = csv_lines[0][3] or False
         self.update(**info)
         not_found_skus, transactions = self._csv_lines_to_transactions(csv_lines[1:])
+        cart = self._find_open_cart(params.get("uuid", None))
         if not_found_skus:
             msg = _(
                 "The following sku are unknown: %s\nThe corresponding lines have been ignored by the import process."
             ) % ", ".join(not_found_skus)
-            cart = self._find_open_cart(params.get("uuid", None))
             cart.import_warning_msg = msg
+        elif cart.import_warning_msg:
+            # reset warning message if no more unknown SKU
+            cart.import_warning_msg = None
         return self.sync(transactions=transactions)
 
     def _csv_lines_to_transactions(self, csv_lines):
