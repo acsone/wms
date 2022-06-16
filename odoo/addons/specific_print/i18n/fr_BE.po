@@ -190,12 +190,6 @@ msgid "Lot"
 msgstr "Lot"
 
 #. module: specific_print
-#: code:addons/specific_print/wizards/stock_receive.py:29
-#, python-format
-msgid "Lot is missing"
-msgstr "Le lot est manquant"
-
-#. module: specific_print
 #: model:ir.model,name:specific_print.model_stock_production_lot
 msgid "Lot/Serial"
 msgstr "Lot/N° série"
@@ -255,11 +249,6 @@ msgid "Pickings"
 msgstr "Pickings"
 
 #. module: specific_print
-#: model:ir.ui.view,arch_db:specific_print.view_pack_operation_lot_add_form
-msgid "Print"
-msgstr "Imprimer"
-
-#. module: specific_print
 #: model:ir.ui.view,arch_db:specific_print.view_pack_operation_details_form
 msgid "Print Customer Product Label"
 msgstr "Imprimer l'étiquette client"
@@ -273,11 +262,6 @@ msgstr "Imprimer le lot"
 #: model:ir.ui.view,arch_db:specific_print.view_pack_operation_details_form
 msgid "Print Product Label"
 msgstr "Imprimer l'étiquette produit"
-
-#. module: specific_print
-#: model:ir.model.fields,field_description:specific_print.field_stock_pack_operation_lot_add_print_qty
-msgid "Print Quantity"
-msgstr "Imprimer la quantité"
 
 #. module: specific_print
 #: model:ir.actions.act_window,name:specific_print.print_label_action
@@ -317,11 +301,6 @@ msgstr "Modèle de produit"
 #: model:ir.model.fields,field_description:specific_print.field_print_label_qty
 msgid "Quantity"
 msgstr "Quantité"
-
-#. module: specific_print
-#: model:ir.model.fields,help:specific_print.field_stock_pack_operation_lot_add_print_qty
-msgid "Quantity to print"
-msgstr "Quantité à imprimer"
 
 #. module: specific_print
 #: model:ir.model,name:specific_print.model_report
@@ -745,11 +724,6 @@ msgid "print.label"
 msgstr "print.label"
 
 #. module: specific_print
-#: model:ir.model,name:specific_print.model_stock_pack_operation_lot_add
-msgid "stock.pack.operation.lot.add"
-msgstr "stock.pack.operation.lot.add"
-
-#. module: specific_print
 #: model:ir.ui.view,arch_db:specific_print.stock_product_label_toshiba_v1
 msgid "{PC007;0350,0070,05,05,J,00,B|}\\r{RC007;PVI :"
 msgstr "{PC007;0350,0070,05,05,J,00,B|}\\r{RC007;PVI :"
@@ -845,6 +819,21 @@ msgstr "🖶Imprimer colis"
 #: model:ir.ui.view,arch_db:specific_print.view_picking_form
 msgid "🖶Print Products"
 msgstr "🖶Imprimer produits"
+
+#~ msgid "Lot is missing"
+#~ msgstr "Le lot est manquant"
+
+#~ msgid "Print"
+#~ msgstr "Imprimer"
+
+#~ msgid "Print Quantity"
+#~ msgstr "Imprimer la quantité"
+
+#~ msgid "Quantity to print"
+#~ msgstr "Quantité à imprimer"
+
+#~ msgid "stock.pack.operation.lot.add"
+#~ msgstr "stock.pack.operation.lot.add"
 
 #~ msgid ""
 #~ "^FS\\r\n"

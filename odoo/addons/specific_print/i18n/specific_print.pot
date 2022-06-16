@@ -179,12 +179,6 @@ msgid "Lot"
 msgstr ""
 
 #. module: specific_print
-#: code:addons/specific_print/wizards/stock_receive.py:29
-#, python-format
-msgid "Lot is missing"
-msgstr ""
-
-#. module: specific_print
 #: model:ir.model,name:specific_print.model_stock_production_lot
 msgid "Lot/Serial"
 msgstr ""
@@ -244,11 +238,6 @@ msgid "Pickings"
 msgstr ""
 
 #. module: specific_print
-#: model:ir.ui.view,arch_db:specific_print.view_pack_operation_lot_add_form
-msgid "Print"
-msgstr ""
-
-#. module: specific_print
 #: model:ir.ui.view,arch_db:specific_print.view_pack_operation_details_form
 msgid "Print Customer Product Label"
 msgstr ""
@@ -261,11 +250,6 @@ msgstr ""
 #. module: specific_print
 #: model:ir.ui.view,arch_db:specific_print.view_pack_operation_details_form
 msgid "Print Product Label"
-msgstr ""
-
-#. module: specific_print
-#: model:ir.model.fields,field_description:specific_print.field_stock_pack_operation_lot_add_print_qty
-msgid "Print Quantity"
 msgstr ""
 
 #. module: specific_print
@@ -305,11 +289,6 @@ msgstr ""
 #. module: specific_print
 #: model:ir.model.fields,field_description:specific_print.field_print_label_qty
 msgid "Quantity"
-msgstr ""
-
-#. module: specific_print
-#: model:ir.model.fields,help:specific_print.field_stock_pack_operation_lot_add_print_qty
-msgid "Quantity to print"
 msgstr ""
 
 #. module: specific_print
@@ -593,11 +572,6 @@ msgstr ""
 #. module: specific_print
 #: model:ir.model,name:specific_print.model_print_label
 msgid "print.label"
-msgstr ""
-
-#. module: specific_print
-#: model:ir.model,name:specific_print.model_stock_pack_operation_lot_add
-msgid "stock.pack.operation.lot.add"
 msgstr ""
 
 #. module: specific_print
