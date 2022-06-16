@@ -24,7 +24,7 @@ msgid "Sales Order"
 msgstr ""
 
 #. module: alc_eshop_sale_cart_csv
-#: code:addons/alc_eshop_sale_cart_csv/services/cart.py:59
+#: code:addons/alc_eshop_sale_cart_csv/services/cart.py:60
 #, python-format
 msgid "The following sku are unknown: %s\n"
 "The corresponding lines have been ignored by the import process."
