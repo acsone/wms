@@ -81,11 +81,6 @@ msgid "Eshop Ads"
 msgstr ""
 
 #. module: alc_eshop_ads
-#: model:ir.model.fields,field_description:alc_eshop_ads.field_alc_eshop_ads_file
-msgid "File"
-msgstr ""
-
-#. module: alc_eshop_ads
 #: model:ir.ui.view,arch_db:alc_eshop_ads.alc_eshop_ads_kanban_view
 msgid "From"
 msgstr ""
@@ -156,7 +151,6 @@ msgid "Last Updated on"
 msgstr ""
 
 #. module: alc_eshop_ads
-#: model:ir.model.fields,field_description:alc_eshop_ads.field_alc_eshop_ads_filename
 #: model:ir.model.fields,field_description:alc_eshop_ads.field_alc_eshop_ads_image_filename
 #: model:ir.model.fields,field_description:alc_eshop_ads.field_alc_eshop_ads_name
 #: model:ir.ui.view,arch_db:alc_eshop_ads.alc_eshop_ads_form_view
@@ -184,7 +178,7 @@ msgid "Slot:"
 msgstr ""
 
 #. module: alc_eshop_ads
-#: code:addons/alc_eshop_ads/models/alc_eshop_ads.py:76
+#: code:addons/alc_eshop_ads/models/alc_eshop_ads.py:73
 #, python-format
 msgid "The defined period on %s is not a valid (%s > %s)"
 msgstr ""
@@ -220,7 +214,7 @@ msgid "Website ads manager"
 msgstr ""
 
 #. module: alc_eshop_ads
-#: code:addons/alc_eshop_ads/models/alc_eshop_ads.py:63
+#: code:addons/alc_eshop_ads/models/alc_eshop_ads.py:60
 #, python-format
 msgid "You must choose between the download of a file OR the redirect to a website on click on the banner"
 msgstr ""
