@@ -14,8 +14,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_eshop_classifieds_service
-#: code:addons/alc_eshop_classifieds_service/services/classifieds.py:39
-#: code:addons/alc_eshop_classifieds_service/services/classifieds.py:109
+#: code:addons/alc_eshop_classifieds_service/services/classifieds.py:45
 #, python-format
 msgid "This classified ad cannot be retrieved."
 msgstr ""
