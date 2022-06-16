@@ -16,13 +16,11 @@
         "specific_report",
         "specific_product",
         "stock",
-        "stock_receive_lot",
     ],
     "data": [
         "views/stock_splitlot.xml",
         "views/printer.xml",
         "views/res_partner.xml",
-        "wizards/stock_receive.xml",
         "wizards/print_label.xml",
         "report/stock_product_label.xml",
         "report/stock_product_food_label.xml",

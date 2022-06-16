@@ -9,6 +9,15 @@
     "version": "10.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
-    "depends": ["base_report_to_printer", "alc_product_label_printer", "stock"],
-    "data": ["security/res_groups.xml", "wizards/select_printing_printer.xml"],
+    "depends": [
+        "base_report_to_printer",
+        "alc_product_label_printer",
+        "stock_receive_lot",
+        "specific_print",
+    ],
+    "data": [
+        "security/res_groups.xml",
+        "wizards/select_printing_printer.xml",
+        "wizards/stock_receive.xml",
+    ],
 }

@@ -2,7 +2,7 @@
 # © 2017 Jacques-Etienne Baudoux (BCIM)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import _, api, fields, models
+from odoo import _, fields, models
 from odoo.exceptions import UserError
 
 
@@ -21,12 +21,14 @@ class StockPackOperationLotAdd(models.TransientModel):
         self.print_qty = self._default_print_qty()
         return res
 
-    @api.multi
     def print_label(self):
         self.ensure_one()
+        printer_id = self.env.user.printing_product_label_printer_id.id
         if self.lot_required:
             if not self.lot_id:
                 raise UserError(_("Lot is missing"))
-            self.lot_id.print_lot_label(self.print_qty)
+            self.lot_id.print_lot_label(self.print_qty, printer_id=printer_id)
         else:
-            self.operation_id.product_id.print_product_label(self.print_qty)
+            self.operation_id.product_id.print_product_label(
+                self.print_qty, printer_id=printer_id
+            )
