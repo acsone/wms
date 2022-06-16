@@ -20,7 +20,7 @@ class AlcClassified(models.Model):
     _name = "alc.classified"
     _description = "Classified Advertising"
     _inherit = ["mixin.past", "mixin.file.id", "mail.thread"]
-    _order = "sequence,id"
+    _order = "date_start desc, sequence, id desc"
 
     sequence = fields.Integer("Sequence")
     date_start = fields.Date(
