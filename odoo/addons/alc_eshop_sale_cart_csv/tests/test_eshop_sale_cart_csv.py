@@ -9,7 +9,7 @@ class TestSaleCartRestApiInfo(TestSaleCartRestApiCsvCase):
     def test_csv(self):
         first_line = ["suite", "ref", "mail@alcyonbelux.be", "note"]
         # one column had a trailing ';', meaning an empty column
-        csv_lines = [first_line, ["sku", "2", ""], ["missing", "4"]]
+        csv_lines = [first_line, [self.product.default_code, "2", ""], ["missing", "4"]]
         with self.cart_service(self.partner_1.id) as cart:
             result = cart._csv(csv_lines=csv_lines)
 
@@ -23,3 +23,10 @@ class TestSaleCartRestApiInfo(TestSaleCartRestApiCsvCase):
         self.assertIn("missing", so.import_warning_msg)
         self.assertIn("import_warning_msg", result)
         self.assertEqual(result["import_warning_msg"], so.import_warning_msg)
+
+        # if we import without unknown product, the warning message is reset
+        csv_lines = [first_line, [self.product.default_code, "2", ""]]
+        with self.cart_service(self.partner_1.id) as cart:
+            result = cart._csv(csv_lines=csv_lines)
+        self.assertNotIn("import_warning_msg", result)
+        self.assertFalse(so.import_warning_msg)
