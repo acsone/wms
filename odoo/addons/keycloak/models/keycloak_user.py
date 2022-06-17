@@ -4,6 +4,7 @@
 
 from odoo import _, api, fields, models
 from odoo.exceptions import AccessError
+from odoo.osv import expression
 
 from odoo.addons.queue_job.job import identity_exact
 
@@ -19,7 +20,7 @@ class KeycloakUser(models.Model):
         "keycloak.backend", string="Backend", required=True
     )
     partner_id = fields.Many2one("res.partner", string="Partner", required=True)
-    username = fields.Char()
+    username = fields.Char(required=True)
     keycloak_username = fields.Char(
         compute="_compute_keycloak_username",
         store=True,
@@ -59,8 +60,19 @@ class KeycloakUser(models.Model):
     @api.depends("username")
     def _compute_keycloak_username(self):
         for rec in self:
-            username = rec.username or ""
-            rec.keycloak_username = username.lower()
+            rec.keycloak_username = rec.username.lower()
+
+    @api.model
+    def name_search(self, name="", args=None, operator="ilike", limit=100):
+        args = args or []
+        domain = []
+        if name:
+            triple_partner = ("partner_id.name", operator, name)
+            triple_name = ("username", operator, name)
+            op = "&" if operator in expression.NEGATIVE_TERM_OPERATORS else "|"
+            domain = [op, triple_name, triple_partner]
+        users = self.search(domain + args, limit=limit)
+        return users.name_get()
 
     @api.model
     def create(self, vals):
