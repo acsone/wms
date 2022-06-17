@@ -59,8 +59,7 @@ class KeycloakUser(models.Model):
     @api.depends("username")
     def _compute_keycloak_username(self):
         for rec in self:
-            username = rec.username or ""
-            rec.keycloak_username = username.lower()
+            rec.keycloak_username = rec.username.lower()
 
     @api.model
     def create(self, vals):
