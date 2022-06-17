@@ -19,7 +19,7 @@ class KeycloakUser(models.Model):
         "keycloak.backend", string="Backend", required=True
     )
     partner_id = fields.Many2one("res.partner", string="Partner", required=True)
-    username = fields.Char()
+    username = fields.Char(required=True)
     keycloak_username = fields.Char(
         compute="_compute_keycloak_username",
         store=True,
