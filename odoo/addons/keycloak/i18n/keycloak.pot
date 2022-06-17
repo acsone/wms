@@ -20,6 +20,7 @@ msgstr ""
 
 #. module: keycloak
 #: model:ir.model.fields,field_description:keycloak.field_keycloak_user_keycloak_backend_id
+#: model:ir.ui.view,arch_db:keycloak.keycloak_user_search_view
 msgid "Backend"
 msgstr ""
 
@@ -84,7 +85,7 @@ msgid "Create Keycloak User"
 msgstr ""
 
 #. module: keycloak
-#: code:addons/keycloak/models/keycloak_user.py:69
+#: code:addons/keycloak/models/keycloak_user.py:81
 #, python-format
 msgid "Create Keycloak User %s"
 msgstr ""
@@ -106,9 +107,14 @@ msgid "Created on"
 msgstr ""
 
 #. module: keycloak
-#: code:addons/keycloak/models/keycloak_user.py:75
+#: code:addons/keycloak/models/keycloak_user.py:87
 #, python-format
 msgid "Delete Keycloak User %s"
+msgstr ""
+
+#. module: keycloak
+#: model:ir.ui.view,arch_db:keycloak.keycloak_user_search_view
+msgid "Disabled"
 msgstr ""
 
 #. module: keycloak
@@ -122,12 +128,18 @@ msgstr ""
 #. module: keycloak
 #: model:ir.model.fields,field_description:keycloak.field_keycloak_partner_wizard_enabled
 #: model:ir.model.fields,field_description:keycloak.field_keycloak_user_enabled
+#: model:ir.ui.view,arch_db:keycloak.keycloak_user_search_view
 msgid "Enabled"
 msgstr ""
 
 #. module: keycloak
 #: model:ir.ui.view,arch_db:keycloak.keycloak_user_tree_view
 msgid "Force Keycloak info synchronisation ."
+msgstr ""
+
+#. module: keycloak
+#: model:ir.ui.view,arch_db:keycloak.keycloak_user_search_view
+msgid "Group By"
 msgstr ""
 
 #. module: keycloak
@@ -322,7 +334,7 @@ msgid "Server url env is editable"
 msgstr ""
 
 #. module: keycloak
-#: code:addons/keycloak/models/keycloak_user.py:112
+#: code:addons/keycloak/models/keycloak_user.py:124
 #, python-format
 msgid "Sync Keycloak User %s"
 msgstr ""
@@ -333,21 +345,21 @@ msgid "Temporary"
 msgstr ""
 
 #. module: keycloak
-#: code:addons/keycloak/models/keycloak_user.py:45
+#: code:addons/keycloak/models/keycloak_user.py:46
 #: sql_constraint:keycloak.user:0
 #, python-format
 msgid "This Keycloak ID already exists, which should be impossible."
 msgstr ""
 
 #. module: keycloak
-#: code:addons/keycloak/models/keycloak_user.py:40
+#: code:addons/keycloak/models/keycloak_user.py:41
 #: sql_constraint:keycloak.user:0
 #, python-format
 msgid "This partner already has a user on this backend."
 msgstr ""
 
 #. module: keycloak
-#: code:addons/keycloak/models/keycloak_user.py:50
+#: code:addons/keycloak/models/keycloak_user.py:51
 #: sql_constraint:keycloak.user:0
 #, python-format
 msgid "This username already exists on this backend"
@@ -366,7 +378,7 @@ msgid "Update Keycloak User"
 msgstr ""
 
 #. module: keycloak
-#: code:addons/keycloak/models/keycloak_user.py:93
+#: code:addons/keycloak/models/keycloak_user.py:105
 #, python-format
 msgid "Update Keycloak User %s"
 msgstr ""
@@ -410,7 +422,7 @@ msgid "Username env is editable"
 msgstr ""
 
 #. module: keycloak
-#: code:addons/keycloak/models/keycloak_user.py:108
+#: code:addons/keycloak/models/keycloak_user.py:120
 #, python-format
 msgid "You are not allowed to sync keycloak info."
 msgstr ""
