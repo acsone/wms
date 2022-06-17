@@ -2,6 +2,34 @@
 <!-- Copyright 2021 ACSONE SA/NV
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
+        <record id="keycloak_user_search_view" model="ir.ui.view">
+        <field name="name">keycloak.user.search</field>
+        <field name="model">keycloak.user</field>
+        <field name="arch" type="xml">
+            <search>
+                <filter
+          name="enabled"
+          string="Enabled"
+          domain="[('enabled', '=', True)]"
+        />
+                <filter
+          name="disabled"
+          string="Disabled"
+          domain="[('enabled', '=', False)]"
+        />
+                <field name="username" />
+                <field name="partner_id" />
+                <group string="Group By" name="groupby">
+                    <filter
+            name="backend_groupby"
+            string="Backend"
+            context="{'group_by': 'keycloak_backend_id'}"
+          />
+                </group>
+            </search>
+        </field>
+    </record>
+
     <record model="ir.ui.view" id="keycloak_user_form_view">
         <field name="name">keycloak.user.form</field>
         <field name="model">keycloak.user</field>
