@@ -261,6 +261,7 @@ odoo10-addon-web-sheet-full-width==10.0.1.0.1.99.dev1
 odoo10-addon-web-tree-image==10.0.1.1.0
 odoo10-addon-web-widget-color==10.0.1.0.1
 odoo10-addon-web-widget-domain-v11==10.0.1.0.1
+odoo10-addon-web-widget-formio @ git+https://github.com/oca/web.git@e87d1d519941a57238a3072de37f1e5f65f80436#subdirectory=setup/web_widget_formio
 odoo10-addon-web-widget-many2many-tags-multi-selection==10.0.1.0.0.99.dev8
 ofxparse==0.16
 openupgradelib @ git+https://github.com/OCA/openupgradelib@6c18ce0c160b9cf47c4fa898d9b6c4265d98c216
