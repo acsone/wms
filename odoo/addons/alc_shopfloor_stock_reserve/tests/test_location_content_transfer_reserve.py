@@ -116,6 +116,7 @@ class TestLocationContentTransferReserve(LocationContentTransferCommonCase):
         self.assertEqual({"assigned"}, set(moves.mapped("state")))
 
     def test_reserve_sorter(self):
+        """ Reserve is considered in the normal path at alc"""
         operations = self.service._find_operations(self.content_loc)
         pickings = operations.mapped("picking_id")
         sorter = self.service._actions_for("location_content_transfer.sorter")
@@ -125,5 +126,6 @@ class TestLocationContentTransferReserve(LocationContentTransferCommonCase):
         last_op.sudo().location_dest_id = self.reserve
         sorter.sort()
         content_sorted2 = list(sorter)
+        # order does not change because of reserve
         self.assertTrue(content_sorted1 != content_sorted2)
         self.assertEqual(last_op, content_sorted2[0])
