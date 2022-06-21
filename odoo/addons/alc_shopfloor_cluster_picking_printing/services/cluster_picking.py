@@ -51,7 +51,7 @@ class ClusterPicking(Component):
                 return self._pick_next_operation(
                     batch, message=self.msg_store.operation_not_found()
                 )
-            self._print_picking_food_product_labels(operation, quantity)
+            self._print_picking_food_product_labels(operation, int(quantity))
         return result
 
     def _print_picking_med_products_labels(self, picking, package):

@@ -22,9 +22,9 @@
 ^FO275, 70^A030,30^FD<t t-esc="ship.partner_id.zip" /> <t
           t-esc="res_company.convert_to_ascii(ship.partner_id.city)"
         />^FS\r
-<t t-if="('customer_id' in pick) and ship.customer_id.is_b2c_customer">
+<t t-if="('customer_id' in ship) and ship.customer_id.is_b2c_customer">
 ^FO235,70^A030,30^FDB2C: <t
-            t-esc="('customer_id' in pick) and (ship.partner_id != ship.customer_id) and res_company.convert_to_ascii(ship.customer_id.name and ship.customer_id.name[:29] or u'') or ''"
+            t-esc="('customer_id' in ship) and (ship.partner_id != ship.customer_id) and res_company.convert_to_ascii(ship.customer_id.name and ship.customer_id.name[:29] or u'') or ''"
           />^FS\r
 </t>
 
