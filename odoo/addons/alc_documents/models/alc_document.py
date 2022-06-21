@@ -89,6 +89,11 @@ class AlcDocument(models.Model):
             getattr(self, "_compute_data_%s" % self.compute)()
         return self.attachment_id.datas
 
+    def compute_data(self):
+        for document in self:
+            if document.compute:
+                getattr(document, "_compute_data_%s" % document.compute)()
+
     @api.model
     def _get_watched_models(self):
         # each one should be in a separate module extending this function
