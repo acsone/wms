@@ -71,7 +71,7 @@ msgstr "Ok"
 #: model:ir.ui.view,arch_db:alc_label_printing_reception.view_pack_operation_lot_add_form
 #, fuzzy
 msgid "Print"
-msgstr "Imprimante"
+msgstr "Imprimer"
 
 #. module: alc_label_printing_reception
 #: model:ir.model.fields,field_description:alc_label_printing_reception.field_stock_pack_operation_lot_add_print_qty
