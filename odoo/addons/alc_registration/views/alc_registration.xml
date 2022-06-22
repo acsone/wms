@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="alc_registration_search_view" model="ir.ui.view">
+        <field name="name">alc.registration.search</field>
+        <field name="model">alc.registration</field>
+        <field name="arch" type="xml">
+            <search>
+                <filter
+          name="pending"
+          string="Pending"
+          domain="[('active', '=', True), ('partner_id', '=', False)]"
+        />
+                <filter
+          name="rejected"
+          string="Rejected"
+          domain="[('active', '=', False), ('partner_id', '=', False)]"
+        />
+                <filter
+          name="accepted"
+          string="Accepted"
+          domain="[('partner_id', '!=', False)]"
+        />
+                <field name="name" />
+                <field name="partner_id" />
+                <field name="clientele" />
+                <field name="email" />
+            </search>
+        </field>
+    </record>
+
+    <record id="alc_registration_tree_view" model="ir.ui.view">
+        <field name="name">alc.registration.tree</field>
+        <field name="model">alc.registration</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="clientele" />
+                <field name="email" />
+                <field name="partner_id" />
+                <field name="state" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="alc_registration_form_view" model="ir.ui.view">
+        <field name="name">alc.registration.form</field>
+        <field name="model">alc.registration</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button
+            name="action_create_partners"
+            string="Create Partner"
+            type="object"
+            class="oe_highlight"
+            groups="alc_registration.alc_registration_manager_group"
+            attrs="{'invisible': ['|', ('partner_id', '!=', False), ('active', '=', False)]}"
+          />
+                    <button
+            name="action_archive"
+            string="Reject"
+            type="object"
+            class="oe_highlight"
+            groups="alc_registration.alc_registration_manager_group"
+            attrs="{'invisible': ['|', ('partner_id', '!=', False), ('active', '=', False)]}"
+          />
+                    <button
+            name="action_reset_to_pending"
+            string="Set to pending"
+            type="object"
+            class="oe_highlight"
+            groups="alc_registration.alc_registration_manager_group"
+            attrs="{'invisible': ['|', ('partner_id', '!=', False), ('active', '=', True)]}"
+          />
+                    <field name="state" widget="statusbar" />
+                </header>
+                <sheet>
+                    <group id="names">
+                        <field name="active" invisible="1" />
+                        <field name="partner_id" />
+                        <field name="name" />
+                        <field name="company_name" />
+                        <field name="vat" />
+                        <field name="clientele" />
+                        <field name="partner_type" />
+                    </group>
+                    <group id="details">
+                        <field name="apb_authorization" />
+                        <field name="vet_depot_number" />
+                        <field name="vet_subscription_number" />
+                    </group>
+                    <group id="contact_info">
+                        <field name="email" />
+                        <field name="phone" />
+                        <field name="mobile" />
+                        <field name="fax" />
+                    </group>
+                    <group id="address">
+                        <label for="street" string="Address" />
+                        <div class="o_address_format">
+                            <field
+                name="street"
+                placeholder="Street..."
+                class="o_address_street"
+              />
+                            <field
+                name="street2"
+                placeholder="Street 2..."
+                class="o_address_street"
+              />
+                            <field
+                name="city"
+                placeholder="City"
+                class="o_address_city"
+              />
+                            <field
+                name="state_id"
+                class="o_address_state"
+                placeholder="State"
+                options='{"no_open": True}'
+              />
+                            <field name="zip" placeholder="ZIP" class="o_address_zip" />
+                            <field
+                name="country_id"
+                placeholder="Country"
+                class="o_address_country"
+                options='{"no_open": True, "no_create": True}'
+              />
+                        </div>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="alc_registration_act_window">
+        <field name="name">Registrations</field>
+        <field name="res_model">alc.registration</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_type">form</field>
+        <field name="domain">[]</field>
+        <field name="context">{'search_default_pending': 1}</field>
+        <field name="search_view_id" ref="alc_registration_search_view" />
+        <field name="view_id" ref="alc_registration_tree_view" />
+    </record>
+
+    <menuitem
+    id="alc_registration_menu"
+    name="Registrations"
+    parent="sales_team.menu_sales"
+    action="alc_registration_act_window"
+    sequence="99"
+  />
+</odoo>
