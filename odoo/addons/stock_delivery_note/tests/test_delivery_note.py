@@ -2,6 +2,7 @@
 # Copyright 2018 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
+import base64
 import uuid
 from datetime import datetime
 
@@ -344,6 +345,7 @@ class TestStockDeliveryNote(SavepointCase):
         attachments = self.env["ir.attachment"].search(
             [("res_id", "=", self.picking_csv.id)]
         )
-        content = attachments.index_content
+        # pylint: disable=deprecated-method
+        content = base64.decodestring(attachments.datas)
         for line in content.splitlines():
             self.assertEqual(line[-1:], ";")

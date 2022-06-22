@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-
+import ujson
 import unicodecsv as csv
 import xlsxwriter
 
 from odoo import api, fields, models
+from odoo.osv.expression import expression
+from odoo.osv.query import Query
 
 
 class AlcDocument(models.Model):
@@ -80,18 +82,38 @@ class AlcDocument(models.Model):
             self._process_prices_data_lines_pricelist(prices_data_lines, lines)
         return lines
 
-    def _get_prices_data_lines(self):
+    def _get_prices_data_lines_iterator(self):
         domain_product = self.partner_id._get_product_domain()
-        return self.env["alc.document.prices.data"].search(domain_product)
+        e = expression(domain_product, self.env["alc.document.prices.data"])
+        tables = e.get_tables()
+        where_clause, where_params = e.to_sql()
+        where_clause = [where_clause] if where_clause else []
+        query = Query(tables, where_clause, where_params)
+        query_from, query_where, query_params = query.get_sql()
+        # pylint: disable=sql-injection
+        sql_query = "SELECT * from {query_from} WHERE {query_where}".format(
+            query_from=query_from, query_where=query_where
+        )
+        self.env.cr.execute(sql_query, query_params)
+        for row in self.env.cr._obj:
+            container = _Container(
+                **{d.name: row[i] for i, d in enumerate(self.env.cr.description)}
+            )
+            # here we use ujson to improve to increase perf X 5
+            container.price_cache = (
+                ujson.loads(container.price_cache) if container.price_cache else {}
+            )
+            yield container
+        # return self.env["alc.document.prices.data"].search(domain_product)
 
     def _generate_attachment_file(self):
         self.ensure_one()
         docs_by_format = self._all_by_format()
 
-        prices_data_lines = self._get_prices_data_lines()
+        prices_data_lines_iterator = self._get_prices_data_lines_iterator()
 
         lines = []
-        self._process_prices_data_lines(prices_data_lines, lines)
+        self._process_prices_data_lines(prices_data_lines_iterator, lines)
 
         for file_format, document in docs_by_format.items():
             if file_format == "xlsx":
@@ -116,7 +138,7 @@ class AlcDocument(models.Model):
             {"name": "Mot_Cle", "get": "categ_fr"},
             {"name": "Fabricant", "get": "manufacturer"},
             {"name": "Code_national", "get": "cnk_code"},
-            {"name": "Prix_Vente_Indicatif", "get": "indicated_price"},
+            {"name": "Prix_Vente_Indicatif", "get": lambda r: r.indicated_price or 0},
             {"name": "TVA"},
             {"name": "Prix_Brut_HTVA_EUR"},
             {"name": "Prix_Brut_TVAC_EUR"},
@@ -160,13 +182,13 @@ class AlcDocument(models.Model):
             prices_data.price_cache, key, date_ref
         )
 
-    def _process_prices_data_lines_pricelist(self, prices_data_lines, lines):
+    def _process_prices_data_lines_pricelist(self, prices_data_lines_iterator, lines):
         # the langs are only used for the names, so we could possible optimize
         # by putting values in a dict from a read before, and not rely on ORM
         parser = self._get_lang_price_parser()
         price_key = self.partner_id.property_product_pricelist.role_name
         discount_key = self.partner_id.discount_pricelist_id.discount_role_name
-        for prices_data in prices_data_lines:
+        for prices_data in prices_data_lines_iterator:
             base_price = self._resolve_price_cache_get(prices_data, price_key).get(
                 "price", 0
             )
@@ -176,10 +198,10 @@ class AlcDocument(models.Model):
                 )
                 base_price -= base_price * (1 - discount / 100)
             prices = {
-                "TVA": "%s%%" % prices_data.tax_amount,
+                "TVA": "%s%%" % (prices_data.tax_amount or 0),
                 "Prix_Brut_HTVA_EUR": base_price,
                 "Prix_Brut_TVAC_EUR": base_price
-                + base_price * prices_data.tax_amount / 100,
+                + base_price * (prices_data.tax_amount or 0) / 100,
             }
             line = []
             for field_parser in parser:
@@ -187,14 +209,16 @@ class AlcDocument(models.Model):
                 value = prices.get(get, "NOVALUE")
                 if value == "NOVALUE":
                     value = (
-                        prices_data[get] if isinstance(get, str) else get(prices_data)
+                        getattr(prices_data, get)
+                        if isinstance(get, str)
+                        else get(prices_data)
                     ) or ""
                 line.append("%s" % value)
             lines.append(line)
         return lines
 
-    def _process_prices_data_lines_discount(self, prices_data_lines, lines):
-        for prices_data in prices_data_lines:
+    def _process_prices_data_lines_discount(self, prices_data_lines_iterator, lines):
+        for prices_data in prices_data_lines_iterator:
 
             for discount_def in [
                 "supplier_discount",
@@ -207,8 +231,8 @@ class AlcDocument(models.Model):
                     discount_def == "supplier_discount"
                     and prices_data.supplier_discount_discount_sale
                 ):
-                    discount_type = (
-                        "%s%% off" % prices_data.supplier_discount_discount_sale
+                    discount_type = "%s%% off" % (
+                        prices_data.supplier_discount_discount_sale or 0
                     )
                     date_end = prices_data.supplier_discount_date_end
                 elif (
@@ -264,3 +288,17 @@ class AlcDocument(models.Model):
         if self.compute in ["pricelist", "discount"]:
             res = False
         return res
+
+
+class _Container(object):
+    """
+        A generic container for when you want to access to value into a dict
+        with a dot notation
+        ex:
+        >>> c = _Container(**{"a": "b"})
+        >>> c.a
+        "b"
+    """
+
+    def __init__(self, **kwargs):
+        self.__dict__.update(kwargs)

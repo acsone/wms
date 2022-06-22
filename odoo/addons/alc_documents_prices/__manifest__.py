@@ -26,6 +26,6 @@
         "security/alc_document_prices_data.xml",
     ],
     "demo": [],
-    "external_dependencies": {"python": ["unicodecsv"]},
+    "external_dependencies": {"python": ["ujson", "unicodecsv"]},
     "post_init_hook": "post_init_hook",
 }
