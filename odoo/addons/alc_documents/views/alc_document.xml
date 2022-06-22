@@ -36,11 +36,19 @@
         <field name="arch" type="xml">
             <form>
                 <header>
+                    <button
+            attrs="{'invisible': [('compute', '=', False)]}"
+            class="btn btn-primary"
+            name="compute_data"
+            type="object"
+            string="Compute"
+          />
                 </header>
                 <sheet>
                     <group>
                         <field name="name" />
                         <field name="format" />
+                        <field name="compute" />
                         <field name="res_model" />
                         <field name="attachment_id" />
                     </group>

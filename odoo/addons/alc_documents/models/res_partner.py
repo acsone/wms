@@ -34,7 +34,7 @@ class ResPartner(models.Model):
             "res_model": "alc.document",
             "domain": self.env["alc.document"].get_partner_domain(self),
             "view_type": "form",
-            "view_mode": "tree, form",
+            "view_mode": "tree,form",
             "context": self.env.context,
             "target": "current",
         }
