@@ -56,7 +56,18 @@
         "type": "nested"
       },
       "categories": {
-        "type": "nested"
+        "type": "nested",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "keyword"
+          },
+          "level": {
+            "type": "integer"
+          }
+        }
       },
       "short_description": {
         "type": "text",
@@ -163,7 +174,8 @@
           "active_principle_option_ids": {
             "fields": {
               "raw": {
-                "type": "text"
+                "type": "text",
+                "analyzer": "analyzer_lang"
               }
             },
             "type": "keyword"
@@ -319,6 +331,7 @@
           "filter": [
             "french_elision",
             "lowercase",
+            "asciifolding",
             "french_stop",
             "french_keywords",
             "french_stemmer"
@@ -326,7 +339,10 @@
           "tokenizer": "standard"
         },
         "analyzer_startswith": {
-          "filter": "lowercase",
+          "filter": [
+            "asciifolding",
+            "lowercase"
+          ],
           "tokenizer": "keyword"
         },
         "default": {
@@ -403,7 +419,18 @@
         "type": "nested"
       },
       "categories": {
-        "type": "nested"
+        "type": "nested",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "keyword"
+          },
+          "level": {
+            "type": "integer"
+          }
+        }
       },
       "short_description": {
         "type": "text",
@@ -510,7 +537,8 @@
           "active_principle_option_ids": {
             "fields": {
               "raw": {
-                "type": "text"
+                "type": "text",
+                "analyzer": "analyzer_lang"
               }
             },
             "type": "keyword"
@@ -656,6 +684,7 @@
           "filter": [
             "lowercase",
             "dutch_stop",
+            "asciifolding",
             "dutch_keywords",
             "dutch_override",
             "dutch_stemmer"
@@ -663,7 +692,10 @@
           "tokenizer": "standard"
         },
         "analyzer_startswith": {
-          "filter": "lowercase",
+          "filter": [
+            "asciifolding",
+            "lowercase"
+          ],
           "tokenizer": "keyword"
         },
         "default": {
@@ -740,7 +772,18 @@
         "type": "nested"
       },
       "categories": {
-        "type": "nested"
+        "type": "nested",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "keyword"
+          },
+          "level": {
+            "type": "integer"
+          }
+        }
       },
       "short_description": {
         "type": "text",
@@ -847,7 +890,8 @@
           "active_principle_option_ids": {
             "fields": {
               "raw": {
-                "type": "text"
+                "type": "text",
+                "analyzer": "analyzer_lang"
               }
             },
             "type": "keyword"
@@ -988,6 +1032,7 @@
           "filter": [
             "english_possessive_stemmer",
             "lowercase",
+            "asciifolding",
             "english_stop",
             "english_keywords",
             "english_stemmer"
@@ -995,7 +1040,10 @@
           "tokenizer": "standard"
         },
         "analyzer_startswith": {
-          "filter": "lowercase",
+          "filter": [
+            "asciifolding",
+            "lowercase"
+          ],
           "tokenizer": "keyword"
         },
         "default": {
