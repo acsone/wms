@@ -168,6 +168,7 @@
         "alc_stock_receive_lot_product_info",
         "alc_stock_receive_lot_missing_product_nouveaute_info",
         "alc_turnover_reporting",
+        "document_unindex_content",
         "connector_esb",
         "delivery_rounds_alcyon",
         "delivery_carrier_label_gls",

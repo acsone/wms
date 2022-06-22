@@ -91,6 +91,7 @@ odoo10-addon-account-type-menu @ git+https://github.com/acsone/account-financial
 odoo10-addon-analytic-tag-dimension @ git+https://github.com/acsone/account-analytic.git@daf43630f1ca58b431bb93809a331374b8530863#subdirectory=setup/analytic_tag_dimension
 odoo10-addon-analytic-tag-dimension-purchase-warning @ git+https://github.com/acsone/account-analytic.git@daf43630f1ca58b431bb93809a331374b8530863#subdirectory=setup/analytic_tag_dimension_purchase_warning
 odoo10-addon-analytic-tag-dimension-sale-warning @ git+https://github.com/acsone/account-analytic.git@daf43630f1ca58b431bb93809a331374b8530863#subdirectory=setup/analytic_tag_dimension_sale_warning
+odoo10-addon-attachment-unindex-content @ git+https://github.com/acsone/server-tools.git@363f4d96650008eca17cbebe33b7935c43b6ddb7#subdirectory=setup/attachment_unindex_content
 odoo10-addon-attribute-set==10.0.1.0.2.99.dev4
 odoo10-addon-attribute-set-completeness==10.0.1.2.0.99.dev5
 odoo10-addon-attribute-set-mass-edit==10.0.1.0.1.99.dev5
