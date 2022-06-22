@@ -129,7 +129,7 @@ odoo10-addon-bi-sql-editor==10.0.1.0.2
 odoo10-addon-component==10.0.1.1.1
 odoo10-addon-component-event==10.0.1.0.1
 odoo10-addon-connector @ git+https://github.com/acsone/connector@de23258a4d639e696d6e4d941ba005a1577a9935#subdirectory=setup/connector
-odoo10-addon-connector-elasticsearch @ git+https://github.com/acsone/search-engine.git@2468c673debedd5be39973bb1cd7d2a649f9fbe3#subdirectory=setup/connector_elasticsearch
+odoo10-addon-connector-elasticsearch @ git+https://github.com/acsone/search-engine.git@3121ed3432efc9e0e939f35fd53c1638823f729f#subdirectory=setup/connector_elasticsearch
 odoo10-addon-connector-search-engine @ git+https://github.com/acsone/search-engine.git@ac684d8ef243d749ff31e74a17527246ca41fb36#subdirectory=setup/connector_search_engine
 odoo10-addon-date-range @ git+https://github.com/acsone/server-tools.git@dcefdba5bac014076f05229ba091acd8b739e164#subdirectory=setup/date_range
 odoo10-addon-delivery-carrier-label-gls @ git+https://github.com/acsone/delivery-carrier.git@58839a1c96904a43e1d0c2ab652ebdae3b6a2074#subdirectory=setup/delivery_carrier_label_gls
