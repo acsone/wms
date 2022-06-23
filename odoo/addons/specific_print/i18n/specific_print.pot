@@ -324,11 +324,6 @@ msgid "Zebra"
 msgstr ""
 
 #. module: specific_print
-#: model:ir.ui.view,arch_db:specific_print.stock_product_food_label_zebra_v1
-msgid "^FO100,60^BC,40,Y,Y,N,D^FD"
-msgstr ""
-
-#. module: specific_print
 #: model:ir.ui.view,arch_db:specific_print.stock_pick_packs_label_zebra_v1
 msgid "^FO200,47^A0N60,60^FDB2C^FS\\r"
 msgstr ""
@@ -346,6 +341,11 @@ msgstr ""
 #. module: specific_print
 #: model:ir.ui.view,arch_db:specific_print.stock_pick_packs_label_zebra_v1
 msgid "^FO570,50,1^A0N60,60^FD"
+msgstr ""
+
+#. module: specific_print
+#: model:ir.ui.view,arch_db:specific_print.stock_product_food_label_zebra_v1
+msgid "^FO60,60^BC,30,Y,Y,N,D^FD"
 msgstr ""
 
 #. module: specific_print
