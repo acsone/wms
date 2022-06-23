@@ -14,6 +14,7 @@
         "alc_product_barcode_required",
         "alc_product_audit",
         "stock_receive_lot",
+        "alc_product_pharmacy",
     ],
     "data": [
         "security/res_groups.xml",
