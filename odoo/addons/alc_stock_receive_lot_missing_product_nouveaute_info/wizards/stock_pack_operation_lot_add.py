@@ -49,98 +49,121 @@ class StockPackOperationLotAdd(models.TransientModel):
         compute="_compute_product_packaging_ids",
         inverse="_inverse_product_packaging_ids",
     )
+    edit_dimensions_barcode_fields = fields.Boolean(
+        default=False, compute="_compute_edit_dimensions_barcode_fields"
+    )
 
-    @api.depends("product_id", "product_id.is_new", "product_id.weight")
+    @api.depends(
+        "product_id",
+        "product_id.is_new",
+        "product_id.is_human",
+        "product_id.is_food",
+        "product_id.is_meds",
+    )
+    def _compute_edit_dimensions_barcode_fields(self):
+        for rec in self:
+            product = rec.product_id
+            rec.edit_dimensions_barcode_fields = (
+                product.is_new or product.is_human or product.is_food or product.is_meds
+            )
+
+    @api.depends("product_id", "edit_dimensions_barcode_fields", "product_id.weight")
     def _compute_product_weight(self):
         for rec in self:
             product = rec.product_id
-            if product.is_new:
+            if rec.edit_dimensions_barcode_fields:
                 rec.product_weight = product.weight
 
     def _inverse_product_weight(self):
         for rec in self:
             product = rec.product_id
-            if product.is_new:
+            if rec.edit_dimensions_barcode_fields:
                 product.sudo().write({"weight": rec.product_weight})
 
-    @api.depends("product_id", "product_id.is_new", "product_id.length")
+    @api.depends("product_id", "edit_dimensions_barcode_fields", "product_id.length")
     def _compute_product_length(self):
         for rec in self:
             product = rec.product_id
-            if product.is_new:
+            if rec.edit_dimensions_barcode_fields:
                 rec.product_length = product.length
 
     def _inverse_product_length(self):
         for rec in self:
             product = rec.product_id
-            if product.is_new:
+            if rec.edit_dimensions_barcode_fields:
                 product.sudo().write({"length": rec.product_length})
 
-    @api.depends("product_id", "product_id.is_new", "product_id.height")
+    @api.depends("product_id", "edit_dimensions_barcode_fields", "product_id.height")
     def _compute_product_height(self):
         for rec in self:
             product = rec.product_id
-            if product.is_new:
+            if rec.edit_dimensions_barcode_fields:
                 rec.product_height = product.height
 
     def _inverse_product_height(self):
         for rec in self:
             product = rec.product_id
-            if product.is_new:
+            if rec.edit_dimensions_barcode_fields:
                 product.sudo().write({"height": rec.product_height})
 
-    @api.depends("product_id", "product_id.is_new", "product_id.width")
+    @api.depends("product_id", "edit_dimensions_barcode_fields", "product_id.width")
     def _compute_product_width(self):
         for rec in self:
             product = rec.product_id
-            if product.is_new:
+            if rec.edit_dimensions_barcode_fields:
                 rec.product_width = product.width
 
     def _inverse_product_width(self):
         for rec in self:
             product = rec.product_id
-            if product.is_new:
+            if rec.edit_dimensions_barcode_fields:
                 product.sudo().write({"width": rec.product_width})
 
-    @api.depends("product_id", "product_id.is_new", "product_id.barcode")
+    @api.depends("product_id", "edit_dimensions_barcode_fields", "product_id.barcode")
     def _compute_product_barcode(self):
         for rec in self:
             product = rec.product_id
-            if product.is_new:
+            if rec.edit_dimensions_barcode_fields:
                 rec.product_barcode = product.barcode
 
     def _inverse_product_barcode(self):
         for rec in self:
             product = rec.product_id
-            if product.is_new:
+            if rec.edit_dimensions_barcode_fields:
                 product.sudo().write({"barcode": rec.product_barcode})
 
-    @api.depends("product_id", "product_id.is_new", "product_id.no_barcode_authorized")
+    @api.depends(
+        "product_id",
+        "edit_dimensions_barcode_fields",
+        "product_id.no_barcode_authorized",
+    )
     def _compute_no_barcode_authorized(self):
         for rec in self:
             product = rec.product_id
-            if product.is_new:
+            if rec.edit_dimensions_barcode_fields:
                 rec.no_barcode_authorized = product.no_barcode_authorized
 
     def _inverse_no_barcode_authorized(self):
         for rec in self:
             product = rec.product_id
-            if product.is_new:
+            if rec.edit_dimensions_barcode_fields:
                 product.sudo().write(
                     {"no_barcode_authorized": rec.no_barcode_authorized}
                 )
 
-    @api.depends("product_id", "product_id.is_new", "product_id.packaging_ids")
+    @api.depends(
+        "product_id", "edit_dimensions_barcode_fields", "product_id.packaging_ids"
+    )
     def _compute_product_packaging_ids(self):
         for rec in self:
             product = rec.product_id
-            if product.is_new and product.packaging_ids:
+            if rec.edit_dimensions_barcode_fields and product.packaging_ids:
                 rec.product_packaging_ids = product.packaging_ids.ids
 
     def _inverse_product_packaging_ids(self):
         for rec in self:
             product = rec.product_id
-            if product.is_new:
+            if rec.edit_dimensions_barcode_fields:
                 product.sudo().write(
                     {"packaging_ids": [(6, 0, rec.product_packaging_ids.ids)]}
                 )
@@ -148,22 +171,22 @@ class StockPackOperationLotAdd(models.TransientModel):
     def _check_barcode_new_product(self):
         for rec in self:
             if (
-                rec.product_id.is_new
+                rec.edit_dimensions_barcode_fields
                 and not rec.product_barcode
                 and not rec.no_barcode_authorized
             ):
                 raise MissingBarcodeError()
 
-    def _check_dimensions_new_product(self):
+    def _check_dimensions_product(self):
         for rec in self:
-            if rec.product_id.is_new and not (
+            if rec.edit_dimensions_barcode_fields and not (
                 rec.product_width or rec.product_length or rec.product_height
             ):
                 raise MissingDimensionsError()
 
-    def _check_weight_new_product(self):
+    def _check_weight_product(self):
         for rec in self:
-            if rec.product_id.is_new and not rec.product_weight:
+            if rec.edit_dimensions_barcode_fields and not rec.product_weight:
                 raise MissingWeightError()
 
     def _add(self):
@@ -174,7 +197,7 @@ class StockPackOperationLotAdd(models.TransientModel):
         # For this reason, we check the constrains exactly when we need it : when receiving
         # the product.
         self._check_barcode_new_product()
-        self._check_dimensions_new_product()
-        self._check_weight_new_product()
+        self._check_dimensions_product()
+        self._check_weight_product()
 
         return result

@@ -6,7 +6,7 @@
     <record model="ir.ui.view" id="stock_pack_operation_lot_add_form_view">
         <field
       name="name"
-    >stock.pack.operation.lot.add.form (in alc_stock_receive_lot_missing_product_info)</field>
+    >stock.pack.operation.lot.add.form (in alc_stock_receive_lot_missing_product_nouveaute_info)</field>
         <field name="model">stock.pack.operation.lot.add</field>
         <field
       name="inherit_id"
@@ -14,35 +14,35 @@
     />
         <field name="arch" type="xml">
                 <xpath expr="//group[@name='operation_details']" position="after">
-                    <field name="product_is_new" invisible="1" />
+                    <field name="edit_dimensions_barcode_fields" invisible="1" />
                     <group name="missing_infos">
                         <field
             name="product_weight"
-            attrs="{'invisible': [('product_is_new', '=', False)], 'required': [('product_is_new', '=', True)]}"
+            attrs="{'invisible': [('edit_dimensions_barcode_fields', '=', False)], 'required': [('edit_dimensions_barcode_fields', '=', True)]}"
           />
                         <field
             name="product_length"
-            attrs="{'invisible': [('product_is_new', '=', False)], 'required': [('product_is_new', '=', True)]}"
+            attrs="{'invisible': [('edit_dimensions_barcode_fields', '=', False)], 'required': [('edit_dimensions_barcode_fields', '=', True)]}"
           />
                         <field
             name="product_height"
-            attrs="{'invisible': [('product_is_new', '=', False)], 'required': [('product_is_new', '=', True)]}"
+            attrs="{'invisible': [('edit_dimensions_barcode_fields', '=', False)], 'required': [('edit_dimensions_barcode_fields', '=', True)]}"
           />
                         <field
             name="product_width"
-            attrs="{'invisible': [('product_is_new', '=', False)], 'required': [('product_is_new', '=', True)]}"
+            attrs="{'invisible': [('edit_dimensions_barcode_fields', '=', False)], 'required': [('edit_dimensions_barcode_fields', '=', True)]}"
           />
                         <field
             name="product_barcode"
-            attrs="{'invisible': [('product_is_new', '=', False)], 'required': [('product_is_new', '=', True), ('no_barcode_authorized', '=', False)]}"
+            attrs="{'invisible': [('edit_dimensions_barcode_fields', '=', False)], 'required': [('edit_dimensions_barcode_fields', '=', True), ('no_barcode_authorized', '=', False)]}"
           />
                         <field
             name="no_barcode_authorized"
-            attrs="{'invisible': [('product_is_new', '=', False)], 'required': [('product_is_new', '=', True), ('product_barcode', '=', False)]}"
+            attrs="{'invisible': [('edit_dimensions_barcode_fields', '=', False)], 'required': [('edit_dimensions_barcode_fields', '=', True), ('product_barcode', '=', False)]}"
           />
                         <field
             name="product_packaging_ids"
-            attrs="{'invisible': [('product_is_new', '=', False)]}"
+            attrs="{'invisible': [('edit_dimensions_barcode_fields', '=', False)]}"
           />
                     </group>
                 </xpath>
