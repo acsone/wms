@@ -245,7 +245,8 @@ class StockPackOperationLotAdd(models.TransientModel):
                 ]
             pack.save()
         else:
-            pack.write({"qty_done": self.qty})
+
+            pack.qty_done += self.qty
 
     @api.multi
     def button_nextop(self):
