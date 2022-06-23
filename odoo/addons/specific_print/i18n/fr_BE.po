@@ -335,6 +335,14 @@ msgid "Zebra"
 msgstr "Zebra"
 
 #. module: specific_print
+#: model:ir.ui.view,arch_db:specific_print.stock_product_food_label_zebra_v1
+#, fuzzy
+msgid "^FO100,60^BC,40,Y,Y,N,D^FD"
+msgstr ""
+"^FS\\r\n"
+"^FO25,342^A0N,31,23^CI13^FR^FD"
+
+#. module: specific_print
 #: model:ir.ui.view,arch_db:specific_print.stock_pick_packs_label_zebra_v1
 msgid "^FO200,47^A0N60,60^FDB2C^FS\\r"
 msgstr ""
@@ -368,17 +376,6 @@ msgid "^FS\\r"
 msgstr ""
 "^FS\\r\n"
 "^PQ"
-
-#. module: specific_print
-#: model:ir.ui.view,arch_db:specific_print.stock_product_food_label_zebra_v1
-#, fuzzy
-msgid ""
-"^FS\\r\n"
-"\n"
-"^FO100,60^BC,40,Y,Y,N,D^FD"
-msgstr ""
-"^FS\\r\n"
-"^FO25,342^A0N,31,23^CI13^FR^FD"
 
 #. module: specific_print
 #: model:ir.ui.view,arch_db:specific_print.stock_product_food_label_zebra_v1
@@ -447,18 +444,6 @@ msgid ""
 msgstr ""
 "^FS\\r\n"
 "^FO25,342^A0N,31,23^CI13^FR^FD"
-
-#. module: specific_print
-#: model:ir.ui.view,arch_db:specific_print.stock_product_food_label_zebra_v1
-#, fuzzy
-msgid ""
-"^FS\\r\n"
-"\n"
-"^FWN\n"
-"^XZ"
-msgstr ""
-"^FS\\r\n"
-"^XZ"
 
 #. module: specific_print
 #: model:ir.ui.view,arch_db:specific_print.stock_product_food_label_zebra_v1
@@ -670,6 +655,16 @@ msgstr ""
 "^XZ"
 
 #. module: specific_print
+#: model:ir.ui.view,arch_db:specific_print.stock_product_food_label_zebra_v1
+#, fuzzy
+msgid ""
+"^FWN\n"
+"^XZ"
+msgstr ""
+"^FS\\r\n"
+"^XZ"
+
+#. module: specific_print
 #: model:ir.ui.view,arch_db:specific_print.stock_pick_packs_label_zebra_v1
 #, fuzzy
 msgid ""
@@ -819,6 +814,16 @@ msgstr "🖶Imprimer colis"
 #: model:ir.ui.view,arch_db:specific_print.view_picking_form
 msgid "🖶Print Products"
 msgstr "🖶Imprimer produits"
+
+#, fuzzy
+#~ msgid ""
+#~ "^FS\\r\n"
+#~ "\n"
+#~ "^FWN\n"
+#~ "^XZ"
+#~ msgstr ""
+#~ "^FS\\r\n"
+#~ "^XZ"
 
 #~ msgid "Lot is missing"
 #~ msgstr "Le lot est manquant"

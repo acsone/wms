@@ -324,6 +324,11 @@ msgid "Zebra"
 msgstr ""
 
 #. module: specific_print
+#: model:ir.ui.view,arch_db:specific_print.stock_product_food_label_zebra_v1
+msgid "^FO100,60^BC,40,Y,Y,N,D^FD"
+msgstr ""
+
+#. module: specific_print
 #: model:ir.ui.view,arch_db:specific_print.stock_pick_packs_label_zebra_v1
 msgid "^FO200,47^A0N60,60^FDB2C^FS\\r"
 msgstr ""
@@ -347,13 +352,6 @@ msgstr ""
 #: model:ir.ui.view,arch_db:specific_print.stock_pick_packs_label_zebra_v1
 #: model:ir.ui.view,arch_db:specific_print.stock_product_food_label_zebra_v1
 msgid "^FS\\r"
-msgstr ""
-
-#. module: specific_print
-#: model:ir.ui.view,arch_db:specific_print.stock_product_food_label_zebra_v1
-msgid "^FS\\r\n"
-"\n"
-"^FO100,60^BC,40,Y,Y,N,D^FD"
 msgstr ""
 
 #. module: specific_print
@@ -396,14 +394,6 @@ msgstr ""
 msgid "^FS\\r\n"
 "\n"
 "^FO570,280,1^A0N30,25^FD"
-msgstr ""
-
-#. module: specific_print
-#: model:ir.ui.view,arch_db:specific_print.stock_product_food_label_zebra_v1
-msgid "^FS\\r\n"
-"\n"
-"^FWN\n"
-"^XZ"
 msgstr ""
 
 #. module: specific_print
@@ -534,6 +524,12 @@ msgstr ""
 #: model:ir.ui.view,arch_db:specific_print.stock_lot_nolot_label_zebra_v1
 #: model:ir.ui.view,arch_db:specific_print.stock_pick_packs_label_zebra_v1
 msgid "^FS\\r\n"
+"^XZ"
+msgstr ""
+
+#. module: specific_print
+#: model:ir.ui.view,arch_db:specific_print.stock_product_food_label_zebra_v1
+msgid "^FWN\n"
 "^XZ"
 msgstr ""
 
