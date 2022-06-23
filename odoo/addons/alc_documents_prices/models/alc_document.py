@@ -187,21 +187,16 @@ class AlcDocument(models.Model):
         # by putting values in a dict from a read before, and not rely on ORM
         parser = self._get_lang_price_parser()
         price_key = self.partner_id.property_product_pricelist.role_name
-        discount_key = self.partner_id.discount_pricelist_id.discount_role_name
         for prices_data in prices_data_lines_iterator:
-            base_price = self._resolve_price_cache_get(prices_data, price_key).get(
+            price = self._resolve_price_cache_get(prices_data, price_key).get(
                 "price", 0
             )
-            if discount_key:
-                discount = self._resolve_price_cache_get(prices_data, discount_key).get(
-                    "discount", 0
-                )
-                base_price -= base_price * (1 - discount / 100)
+            vat = prices_data.tax_amount or 21
+            price_with_vat = round(price + price * vat / 100, 2)
             prices = {
-                "TVA": "%s%%" % (prices_data.tax_amount or 0),
-                "Prix_Brut_HTVA_EUR": base_price,
-                "Prix_Brut_TVAC_EUR": base_price
-                + base_price * (prices_data.tax_amount or 0) / 100,
+                "TVA": "%s%%" % vat,
+                "Prix_Brut_HTVA_EUR": price,
+                "Prix_Brut_TVAC_EUR": price_with_vat,
             }
             line = []
             for field_parser in parser:
