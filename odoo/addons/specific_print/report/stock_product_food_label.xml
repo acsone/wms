@@ -34,7 +34,7 @@
 ^FO205,375^A020,20^FD<t t-esc="ship.name" />^FS\r
 
 <t t-if="product.barcode">
-^FO100,60^BC,40,Y,Y,N,D^FD<t
+^FO60,60^BC,30,Y,Y,N,D^FD<t
             t-esc="res_company.convert_to_ascii(product.barcode)"
           />^FS\r
 </t>
