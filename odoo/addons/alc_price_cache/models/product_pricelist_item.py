@@ -20,7 +20,7 @@ class ProductPricelistItem(models.Model):
         if self.applied_on == "2_product_category":
             domain = [("categ_id", "=", self.categ_id.id)]
         if self.applied_on == "2b_product_price_category":
-            domain = [("price_category_id", "=", self.product_price_category.id)]
+            domain = [("price_category_id", "=", self.price_category_id.id)]
         if self.applied_on == "1_product":
             domain = [("product_tmpl_id", "=", self.product_tmpl_id.id)]
         if self.applied_on == "0_product_variant":

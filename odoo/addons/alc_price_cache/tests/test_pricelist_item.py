@@ -134,3 +134,41 @@ class TestPricelistItemFlow(TestPrices):
             {u"price": 10.0, u"date_start": None, u"id": None, u"date_end": None},
         ]
         self.assertEqual(price_cache_sorted, expected_price_cache)
+
+    @freeze_time("2022-01-01 12:00:00")
+    @mute_logger("odoo.addons.queue_job.models.base")
+    def test_no_delay_price_category(self):
+        # given
+        vals = self._get_pricelist_vals("nodelay", [])
+        pricelist = self.model_pl_nodelay.create(vals)
+        self.product_1.price_category_id = self.cat_price
+
+        # then: no product specific item
+        price_cache = self.product_1.price_cache[pricelist.role_name]
+        expected_price_cache = {
+            u"price": 10,
+            u"date_start": None,
+            u"id": None,
+            u"date_end": None,
+        }
+        self.assertEqual(price_cache, [expected_price_cache])
+
+        # given
+        vals_item = self._get_item_vals(
+            pricelist,
+            applied_on="2b_product_price_category",
+            price_category_id=self.cat_price.id,
+        )
+
+        # when
+        item = self.model_pl_item_nodelay.create(vals_item)
+
+        # then
+        price_cache = self.product_1.price_cache[pricelist.role_name]
+        expected_price_cache = {
+            u"price": 9.0,
+            u"date_start": None,
+            u"id": item.id,
+            u"date_end": None,
+        }
+        self.assertEqual(price_cache, [expected_price_cache])
