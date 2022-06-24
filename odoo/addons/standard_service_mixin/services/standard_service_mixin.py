@@ -5,7 +5,23 @@
 from odoo.addons.component.core import AbstractComponent
 
 
-class ModelMixin(AbstractComponent):
+class StandardServiceMixin(AbstractComponent):
+    """Gives methods to generate different schemas operating on the same fields
+       through a central generator.
+       The syntax is:
+       {"param": {attr: value, keyword: {attr: value}}}
+       Each keyword corresponds to a named schema; each keyword takes a dict of the same
+       Cerberus attributes, allowing to override the default.
+       Special attributes:
+       - operators: to automatically allow search operators
+       - field: field name in Odoo
+       - map: mapper  of input parameters
+       - mapper_keep: whether to keep the mapped key in resulting vals
+       - parser: jsonify parser
+
+       With that, it gives helpers to generate the domain and process the records.
+    """
+
     _inherit = "base.rest.service"
     _name = "standard.service.mixin"
 
@@ -32,7 +48,9 @@ class ModelMixin(AbstractComponent):
         for fn, field in self._schema_generator.items():
             if keyword not in field:
                 continue
-            operators = field.get("operators", ["="]) if search else ["="]
+            operators = ["="]
+            if search and self._field_attr(field, keyword, "operators"):
+                operators = self._field_attr(field, keyword, "operators")
             for operator in operators:
                 fn = fn if operator == "=" else "__".join((fn, operator))
                 schema_fn = {}
@@ -43,10 +61,13 @@ class ModelMixin(AbstractComponent):
                 schema[fn] = schema_fn
         return schema
 
-    def _search_param(self, field, keyword, param):
-        param, operator = param.split("__")
-        param = self._field_attr(field, keyword, "name") or param
-        return param, (operator or "=")
+    def _search_param(self, param):
+        split = param.split("__")
+        param = split[0]
+        operator = split[1] if len(split) == 2 else "="
+        if len(split) > 2:
+            raise ValueError("No param should contain dunders.")
+        return param, operator
 
     def _get_parser(self, keyword):
         parser = []
@@ -57,7 +78,7 @@ class ModelMixin(AbstractComponent):
         return parser
 
     def _field_attr(self, field_dict, keyword, attr):
-        value = field_dict.get(keyword, {}).get(attr) or field_dict.get(attr)
+        value = field_dict.get(keyword, {}).get(attr, field_dict.get(attr))
         if attr == "type" and not value:
             raise ValueError("Type cannot be None.")
         return value
@@ -69,9 +90,10 @@ class ModelMixin(AbstractComponent):
         domain = self._get_base_domain(keyword)
         ssg = self._schema_generator
         for param in params:
-            if param in ssg and keyword in ssg[param]:
-                fn, operator = self._search_param(ssg[param], keyword, param)
-                domain.append((fn, operator, params[param]))
+            fn, operator = self._search_param(param)
+            if fn in ssg and keyword in ssg[fn]:
+                field = self._field_attr(ssg[fn], keyword, "field") or fn
+                domain.append((field, operator, params[param]))
         return domain
 
     def _process_params(self, params, keyword):
