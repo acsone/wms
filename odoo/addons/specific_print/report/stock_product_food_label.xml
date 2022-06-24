@@ -5,27 +5,29 @@
       <t t-foreach="docs" t-as="pack">
         <t t-set="product" t-value="pack.product_id" />
         <t t-set="ship" t-value="pack.picking_id" />
+        <t t-set="package" t-value="pack.result_package_id" />
+         <t t-foreach="xrange(package.nbr_packages)" t-as="index">
 ^XA
 
 ^FWR
 
 ^FO380,60^A035,35^FDTOURNEE<t t-esc="ship.delivery_round_id.template_id.code" />^FS\r
-
+^FO380,280^A030,30^FD<t t-esc="index + 1" /> / <t t-esc="package.nbr_packages" />^FS\r
 ^FO380,380^A025,25^FDPVI <t t-esc="product.indicated_price" />^FS\r
 
 ^FO350,70^A030,30^FD<t
-          t-esc="res_company.convert_to_ascii(ship.partner_id.display_name and ship.partner_id.display_name[:29] or u'')"
-        />^FS\r
+            t-esc="res_company.convert_to_ascii(ship.partner_id.display_name and ship.partner_id.display_name[:29] or u'')"
+          />^FS\r
 ^FO315,70^A030,30^FD<t
-          t-esc="res_company.convert_to_ascii(ship.partner_id.display_name and ship.partner_id.display_name[29:50] or u'')"
-        />^FS\r
+            t-esc="res_company.convert_to_ascii(ship.partner_id.display_name and ship.partner_id.display_name[29:50] or u'')"
+          />^FS\r
 ^FO275, 70^A030,30^FD<t t-esc="ship.partner_id.zip" /> <t
-          t-esc="res_company.convert_to_ascii(ship.partner_id.city)"
-        />^FS\r
+            t-esc="res_company.convert_to_ascii(ship.partner_id.city)"
+          />^FS\r
 <t t-if="('customer_id' in ship) and ship.customer_id.is_b2c_customer">
 ^FO235,70^A030,30^FDB2C: <t
-            t-esc="('customer_id' in ship) and (ship.partner_id != ship.customer_id) and res_company.convert_to_ascii(ship.customer_id.name and ship.customer_id.name[:29] or u'') or ''"
-          />^FS\r
+              t-esc="('customer_id' in ship) and (ship.partner_id != ship.customer_id) and res_company.convert_to_ascii(ship.customer_id.name and ship.customer_id.name[:29] or u'') or ''"
+            />^FS\r
 </t>
 
 ^FO200,70^A025,25^FD<t t-esc="res_company.convert_to_ascii(product.name)" />^FS\r
@@ -35,11 +37,12 @@
 
 <t t-if="product.barcode">
 ^FO60,60^BC,30,Y,Y,N,D^FD<t
-            t-esc="res_company.convert_to_ascii(product.barcode)"
-          />^FS\r
+              t-esc="res_company.convert_to_ascii(product.barcode)"
+            />^FS\r
 </t>
 ^FWN
 ^XZ
+      </t>
       </t>
     </div>
   </template>
