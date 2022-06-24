@@ -15,6 +15,7 @@
         "alc_b2c_partner",
         "alc_partner_type",
         "alc_delivery_rounds_operator",
+        "alc_delivery_rounds_close_pickings_by_zone",
         "alc_stock_barcode_picking_type",
         "alc_stock_picking_type_locking",
         "alc_stock_quant_package_nbr",

@@ -31,14 +31,23 @@ class MakeTodayDeliveryPlan(models.TransientModel):
     @api.multi
     def confirm(self):
         self.ensure_one()
+        self._initialize_delivery_rounds()
+        return self.env["ir.actions.act_window"].for_xml_id(
+            "delivery_rounds", "action_round_instance"
+        )
+
+    def _initialize_delivery_rounds(self):
         round_instance = self.env["round.instance"]
         templates = self.version_id.template_ids.filtered(
             lambda t: any(tag in t.tag_ids for tag in self.tag_ids)
         )
-        execution_date = self.execution_date
-        domain = [("date", "=", execution_date), ("state", "in", ["draft", "pending"])]
+        domain = [
+            ("date", "=", self.execution_date),
+            ("state", "in", ["draft", "pending"]),
+        ]
         instances = round_instance.search(domain, order="template_id")
         instances_by_template = dict(groupby(instances, key=lambda r: r.template_id))
+        ids = []
         for template in templates:
             if template in instances_by_template:
                 for instance in instances_by_template.pop(template):
@@ -54,18 +63,20 @@ class MakeTodayDeliveryPlan(models.TransientModel):
                                 "time_leave_planned": template.time_leave_planned,
                             }
                         )
+                    ids.append(instance.id)
             else:
                 round_instance.create(
                     {
                         "template_id": template.id,
                         "state": "draft",
                         "itinerary_ids": [(6, 0, template.itinerary_ids.ids)],
-                        "date": execution_date,
+                        "date": self.execution_date,
                         "time_picking_planned": template.time_picking_planned,
                         "time_leave_planned": template.time_leave_planned,
                         "tag_ids": [(6, 0, self.tag_ids.ids)],
                     }
                 )
+                ids.append(round_instance.id)
 
         if templates and self.assign_moves:
             # Run stock reservations in background.  This process automatically
@@ -73,6 +84,4 @@ class MakeTodayDeliveryPlan(models.TransientModel):
             StockPicking = self.env["stock.picking"]
             StockPicking._delay_jobs_action_assign()
 
-        return self.env["ir.actions.act_window"].for_xml_id(
-            "delivery_rounds", "action_round_instance"
-        )
+        return ids
