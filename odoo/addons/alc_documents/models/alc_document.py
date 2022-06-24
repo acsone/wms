@@ -197,7 +197,7 @@ class AlcDocument(models.Model):
     @job(default_channel="root.background.process")
     def process_dossier(self, attachment):
         document = None
-        if self.is_dossier_attachment(attachment):
+        if attachment.exists() and self.is_dossier_attachment(attachment):
             vals = self._get_vals_from_attachment(attachment)
             document = self.create(vals)
         return document
