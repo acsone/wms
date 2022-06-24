@@ -48,7 +48,7 @@ class ResPartner(models.Model):
             ]
             to_remove = document_model.search(domain)
             to_remove.mapped("attachment_id").unlink()
-            to_remove.unlink()
+            to_remove.sudo().unlink()
             document_model._create_pricelist(partner)
             if partner.supplier_promotion_sale_allowed:
                 document_model._create_discount(partner)
