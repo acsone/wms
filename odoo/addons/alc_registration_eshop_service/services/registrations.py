@@ -33,6 +33,27 @@ class RegistrationService(Component):
         params["name"] = " ".join((firstname, lastname)).strip()
         return params
 
+    def _map_input_title_id(self, params):
+        title_str = params.get("title")
+        if title_str:
+            keys = {
+                "title_mrs": "madam",
+                "title_mr": "mister",
+                "title_miss": "miss",
+                "title_dr": "doctor",
+            }
+            title_key = keys[title_str]
+            title = self.env.ref("base.res_partner_title_%s" % title_key)
+            params["title"] = title.id
+        return params
+
+    def _map_input_function_occupation(self, params):
+        value = params.get("function")
+        if value:
+            key = "function_assistant" if value == "function_nurse" else value
+            params["occupation"] = key.replace("function_", "")
+        return params
+
     def _input_schema(self):
         return self._get_schema("input")
 
@@ -40,7 +61,6 @@ class RegistrationService(Component):
         return self._get_schema("output")
 
     def _get_schema_generator(self):
-        # TODO: title/country
         return {
             "firstname": {
                 "type": "string",
@@ -54,18 +74,32 @@ class RegistrationService(Component):
                 "nullable": False,
                 "input": {"map": "_map_input_name"},
             },
+            "title": {
+                "type": "string",
+                "required": True,
+                "nullable": False,
+                "allowed": ["title_mrs", "title_mr", "title_miss", "title_dr"],
+                "input": {"map": "_map_input_title_id", "mapper_keep": True},
+            },
             "company_name": {
                 "type": "string",
                 "required": False,
                 "nullable": True,
                 "input": {},
             },
-            "partner_type": {
+            "function": {
                 "type": "string",
                 "required": True,
                 "nullable": False,
-                "allowed": self.model._fields["partner_type"].get_values(self.env),
-                "input": {},
+                "allowed": [
+                    "function_nurse",
+                    "function_veterinary",
+                    "function_student",
+                    "function_supplier",
+                    "function_wholesaler",
+                    "function_pharmacist",
+                ],
+                "input": {"map": "_map_input_function_occupation"},
             },
             "clientele": {
                 "type": "string",
@@ -117,6 +151,12 @@ class RegistrationService(Component):
                 "input": {},
             },
             "city": {
+                "type": "string",
+                "required": True,
+                "nullable": False,
+                "input": {},
+            },
+            "country_name": {
                 "type": "string",
                 "required": True,
                 "nullable": False,

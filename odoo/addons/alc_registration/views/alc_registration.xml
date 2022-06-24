@@ -78,10 +78,12 @@
                     <group id="names">
                         <field name="active" invisible="1" />
                         <field name="partner_id" />
+                        <field name="title" />
                         <field name="name" />
                         <field name="company_name" />
                         <field name="vat" />
                         <field name="clientele" />
+                        <field name="occupation" />
                         <field name="partner_type" />
                     </group>
                     <group id="details">
@@ -96,6 +98,7 @@
                         <field name="fax" />
                     </group>
                     <group id="address">
+                        <field name="country_name" />
                         <label for="street" string="Address" />
                         <div class="o_address_format">
                             <field

@@ -12,3 +12,9 @@ class TestRegistrationServiceFlow(TestRegistrationService):
         with self.registrations_service() as service:
             result = service.dispatch("submit", params=params)
             self.assertTrue(result["id"])
+
+            registration = service.model.browse(result["id"])
+            self.assertEqual(registration.occupation, "assistant")
+            self.assertEqual(registration.country_name, "Belgik")
+            title = self.env.ref("base.res_partner_title_doctor")
+            self.assertEqual(registration.title, title)

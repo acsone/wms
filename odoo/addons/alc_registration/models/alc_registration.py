@@ -27,6 +27,18 @@ class AlcRegistration(FormatAddress, models.Model):
         ],
         default="pet",
     )
+    occupation = fields.Selection(
+        string="Occupation",
+        required=True,
+        selection=[
+            ("veterinary", "Veterinary"),
+            ("assistant", "Veterinary Assistant"),
+            ("student", "Student"),
+            ("pharmacist", "Pharmacist"),
+            ("wholesaler", "Wholesaler"),
+            ("supplier", "Supplier"),
+        ],
+    )
 
     name = fields.Char()
     title = fields.Many2one("res.partner.title")
@@ -38,6 +50,7 @@ class AlcRegistration(FormatAddress, models.Model):
     city = fields.Char("City")
     state_id = fields.Many2one("res.country.state", string="State")
     country_id = fields.Many2one("res.country", string="Country")
+    country_name = fields.Char(string="Country Name")
     phone = fields.Char("Phone")
     fax = fields.Char("Fax")
     mobile = fields.Char("Mobile")
