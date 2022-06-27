@@ -33,14 +33,20 @@ class TestAutoClosePickings(DeliveryRoundTestCase, JobMixin):
         cls.delivery_template.write(
             {
                 "auto_close_picking_launched": True,
-                "time_reopen_picking_lauched": 0.5,
+                "time_reopen_picking_launched": 0.5,
                 "time_leave_planned": 9,
                 "time_picking_planned": 6,
                 "tag_ids": [(4, cls.tag_monday.id)],
             }
         )
         cls.delivery_round_1.write(
-            {"time_leave_planned": 9, "time_picking_planned": 6, "date": "2022-07-06"}
+            {
+                "auto_close_picking_launched": True,
+                "time_reopen_picking_launched": 0.5,
+                "time_leave_planned": 9,
+                "time_picking_planned": 6,
+                "date": "2022-07-06",
+            }
         )
         cls.version = cls.env["round.template.version"].create(
             {
@@ -88,7 +94,7 @@ class TestAutoClosePickings(DeliveryRoundTestCase, JobMixin):
         self.assertFalse(self.delivery_round_1.picking_med_launched)
 
     def test_no_auto_close_all_pickings_done(self):
-        self.delivery_template.auto_close_picking_launched = False
+        self.delivery_round_1.auto_close_picking_launched = False
         pick1 = self._create_picking_pick(partner=self.partner1)
         pick2 = self._create_picking_pick(partner=self.partner2)
         pick3 = self._create_picking_pick(partner=self.partner3)
@@ -118,7 +124,7 @@ class TestAutoClosePickings(DeliveryRoundTestCase, JobMixin):
         self.assertTrue(self.delivery_round_1.picking_med_launched)
 
     def test_auto_open_pickings(self):
-        self.delivery_template.auto_close_picking_launched = False
+        self.delivery_round_1.auto_close_picking_launched = False
         job_counter = self.job_counter()
         # create delivery plan
         self.wizard.confirm()

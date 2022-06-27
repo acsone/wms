@@ -12,6 +12,6 @@ class RoundTemplate(models.Model):
     auto_close_picking_launched = fields.Boolean(
         string="Auto close picking launched", default=False
     )
-    time_reopen_picking_lauched = fields.Float(
+    time_reopen_picking_launched = fields.Float(
         "Duration before departure to re open pickings", default=0.5
     )

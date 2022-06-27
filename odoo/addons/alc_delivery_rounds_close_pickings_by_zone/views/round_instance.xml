@@ -66,6 +66,14 @@
           />
                 </button>
             </xpath>
+           <xpath expr="//field[@name='time_leave_planned']" position="after">
+        <field name="auto_close_picking_launched" />
+        <field
+          name="time_reopen_picking_launched"
+          widget="float_time"
+          attrs="{'invisible': [('auto_close_picking_launched', '=', False)]}"
+        />
+      </xpath>
         </field>
     </record>
 
@@ -120,7 +128,7 @@
           >
                 <i
               t-attf-class="fa #{record.picking_frigo_launched.raw_value ? 'fa-volume-up' : 'fa-volume-off'}"
-              title="Start/Stop med pickings"
+              title="Start/Stop frigo pickings"
             />
               </a>
             </div>
@@ -133,7 +141,7 @@
               <a name="toggle_picking_mat_launched" type="object" states="draft,close">
                 <i
               t-attf-class="fa #{record.picking_mat_launched.raw_value ? 'fa-volume-up' : 'fa-volume-off'}"
-              title="Start/Stop med pickings"
+              title="Start/Stop mat pickings"
             />
               </a>
             </div>

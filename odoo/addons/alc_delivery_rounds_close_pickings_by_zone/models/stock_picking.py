@@ -25,7 +25,7 @@ class StockPicking(models.Model):
         )
         for delivery_round in delivery_rounds:
             zones_todo = zones_todo_by_delivery_round.get(delivery_round.id)
-            if delivery_round.template_id.auto_close_picking_launched:
+            if delivery_round.auto_close_picking_launched:
                 if zones_todo:
                     self._check_picking_launched_closing(delivery_round, zones_todo)
                 else:
