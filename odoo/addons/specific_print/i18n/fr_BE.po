@@ -413,17 +413,6 @@ msgstr ""
 "^FO25,342^A0N,31,23^CI13^FR^FD"
 
 #. module: specific_print
-#: model:ir.ui.view,arch_db:specific_print.stock_product_food_label_zebra_v1
-#, fuzzy
-msgid ""
-"^FS\\r\n"
-"\n"
-"^FO380,380^A025,25^FDPVI"
-msgstr ""
-"^FS\\r\n"
-"^FO25,342^A0N,31,23^CI13^FR^FD"
-
-#. module: specific_print
 #: model:ir.ui.view,arch_db:specific_print.stock_pick_packs_label_zebra_v1
 #, fuzzy
 msgid ""
@@ -546,6 +535,26 @@ msgstr ""
 msgid ""
 "^FS\\r\n"
 "^FO315,70^A030,30^FD"
+msgstr ""
+"^FS\\r\n"
+"^FO25,342^A0N,31,23^CI13^FR^FD"
+
+#. module: specific_print
+#: model:ir.ui.view,arch_db:specific_print.stock_product_food_label_zebra_v1
+#, fuzzy
+msgid ""
+"^FS\\r\n"
+"^FO380,280^A030,30^FD"
+msgstr ""
+"^FS\\r\n"
+"^FO25,342^A0N,31,23^CI13^FR^FD"
+
+#. module: specific_print
+#: model:ir.ui.view,arch_db:specific_print.stock_product_food_label_zebra_v1
+#, fuzzy
+msgid ""
+"^FS\\r\n"
+"^FO380,380^A025,25^FDPVI"
 msgstr ""
 "^FS\\r\n"
 "^FO25,342^A0N,31,23^CI13^FR^FD"
