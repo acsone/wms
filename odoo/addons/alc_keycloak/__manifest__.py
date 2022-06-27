@@ -6,7 +6,7 @@
 {
     "name": "Alcyon Keycloak",
     "description": """Alcyon Keycloak""",
-    "version": "10.0.1.0.2",
+    "version": "10.0.1.0.3",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
