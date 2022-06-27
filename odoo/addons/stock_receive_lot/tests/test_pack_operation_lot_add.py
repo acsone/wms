@@ -295,3 +295,58 @@ class TestPackOperationLotAdd(TransactionCase):
 
         # destination is already pre-selected
         self.assertEqual(wiz.location_dest_id, self.bin1)
+
+    def test_receive_no_lot_in_several_steps(self):
+        no_lot_product = self.product_model.create(
+            {
+                "name": "Unittest Reception P3",
+                "uom_id": self.ref("product.product_uom_unit"),
+                "tracking": "none",
+                "barcode": "122345644322134",
+            }
+        )
+        picking = self.stock_picking_model.create(
+            {
+                "picking_type_id": self.ref("stock.picking_type_in"),
+                "location_id": self.supplier_location.id,
+                "location_dest_id": self.reception_location.id,
+                "move_lines": [
+                    (
+                        0,
+                        0,
+                        {
+                            "name": "move 1",
+                            "product_id": no_lot_product.id,
+                            "product_uom_qty": 5,
+                            "product_uom": no_lot_product.uom_id.id,
+                            "location_id": self.supplier_location.id,
+                            "location_dest_id": self.reception_location.id,
+                        },
+                    )
+                ],
+            }
+        )
+        picking = picking.with_context(test_mode=1)
+        picking.action_assign()
+        # launch wizard
+        wiz = self.stock_reception_wizard.with_context(
+            default_life_date_allowed=True
+        ).create({"picking_id": picking.id})
+
+        op = picking.pack_operation_product_ids[0]
+
+        op.location_dest_id = self.bin1
+        wiz.operation_id = op
+        wiz._onchange_operation_id()
+        self.assertEqual(wiz.location_dest_id, self.bin1)
+        self.assertEqual(wiz.remaining_qty, 5)
+        wiz.qty = 1
+        wiz.button_nextop()
+        wiz.operation_id = op
+        wiz._onchange_operation_id()
+        self.assertEqual(wiz.remaining_qty, 4)
+        wiz.qty = 2
+        wiz.button_nextop()
+        wiz.operation_id = op
+        wiz._onchange_operation_id()
+        self.assertEqual(wiz.remaining_qty, 2)
