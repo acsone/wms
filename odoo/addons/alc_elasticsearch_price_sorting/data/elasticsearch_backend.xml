@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2022 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+  <record id="alc_search_engine.elasticsearch_backend" model="se.backend.elasticsearch">
+    <field
+      name="net_price_sort_script"
+    ><![CDATA[
+{
+  "script": {
+    "lang": "painless",
+    "source": """
+          double gross_price = 0;
+          double discount = 0;
+          double supplier_discount = 0;
+          if (params.pricelist_gross != null) {
+            String gross_price_field = 'current_'+ params.pricelist_gross;
+            if(doc.containsKey(gross_price_field) && doc[gross_price_field].size()==1) {
+              gross_price = doc[gross_price_field].value;
+            }
+          }
+          if (params.pricelist_discount != null) {
+            String discount_field = 'current_' + params.pricelist_discount;
+            if (doc.containsKey(discount_field) && doc[discount_field].size()==1 ){
+              discount = doc[discount_field].value;
+            }
+          }
+          if (params.supplier_promotion != null && params.supplier_promotion && doc.containsKey('current_supplier_discount') && doc['current_supplier_discount'].size()==1) {
+            supplier_discount = doc.current_supplier_discount.value;
+          }
+          double price = gross_price - (gross_price * discount / 100);
+          price = price - (price * supplier_discount / 100);
+          return price
+        """
+    }
+}
+]]></field>
+    <field
+      name="current_price_pipeline_script"
+    ><![CDATA[
+{
+  "description": "compute current price information into doc",
+  "processors": [
+    {
+      "script": {
+        "lang": "painless",
+        "source": """
+            ZonedDateTime safe_get_zoned_dt(Object date){
+              if (date instanceof ZonedDateTime) {
+                return (ZonedDateTime)date;
+              } else if (date instanceof String){
+                LocalDate localDate = LocalDate.parse((String)date);
+                return localDate.atStartOfDay(ZoneId.systemDefault());
+              }
+              return null;
+            }
+            double get_price_for_day(List prices, String field, ZonedDateTime curDate){
+              for (int i = 0; i < prices.length; ++i) {
+                Map price = prices[i];
+                ZonedDateTime date_start = safe_get_zoned_dt(price['date_start']);
+                ZonedDateTime date_end = safe_get_zoned_dt(price['date_end']);
+                long date_cur_milli = curDate != null ? curDate.toInstant().toEpochMilli() : -1;
+                long date_start_milli = date_start != null ? date_start.toInstant().toEpochMilli() : -1;
+                long date_end_milli = date_end != null ? date_end.toInstant().toEpochMilli() : -1;
+
+                if (curDate == null && date_start == null && date_end == null) {
+                  return price[field];
+                } else if (curDate != null && date_start != null && date_end != null && date_cur_milli >= date_start_milli && date_cur_milli <= date_end_milli) {
+                  return price[field];
+                } else if (curDate != null && date_start != null && date_end == null && date_cur_milli >= date_start_milli) {
+                  return price[field];
+                } else if (curDate != null && date_start == null && date_end != null && date_cur_milli <= date_end_milli) {
+                  return price[field];
+                }
+              }
+              return -1;
+            }
+            double get_price(List prices, String field, ZonedDateTime curDate) {
+              double price = get_price_for_day(prices, field, curDate);
+              if (price > -1){
+                return price
+              }
+              price = get_price_for_day(prices, field, null);
+              return (price > -1)? price: 0;
+            }
+            double current_supplier_discount = 0;
+            ZonedDateTime today = ctx.timestamp;
+            ctx.toto='1';
+
+            String supplier_discount_path = 'supplier_discount';
+            if (ctx.containsKey(supplier_discount_path)) {
+              List prices = ctx.supplier_discount;
+              current_supplier_discount = get_price(prices, 'discount_sale', today);
+            }
+            ctx.current_supplier_discount = current_supplier_discount;
+            if (ctx.containsKey('price')){
+              for (String i : ctx.price.keySet()) {
+                String current_value_field = 'current_' + i;
+                String price_field = i.startsWith('discount') ? 'discount': 'price';
+                ctx[current_value_field] = get_price(ctx.price[i], price_field, today);
+              }
+            }
+"""
+      }
+    }
+  ]
+}
+]]></field>
+  </record>
+</odoo>
