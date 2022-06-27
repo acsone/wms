@@ -135,7 +135,7 @@ class ZetesTest(SavepointCase):
         )
         if not cls.picking_zone_medoc:
             cls.picking_zone_medoc = cls.env["picking.zone"].create(
-                {"code": "01", "name": "Medicament"}
+                {"code": "05", "name": "Medicament"}
             )
 
         location_obj = cls.env["stock.location"]

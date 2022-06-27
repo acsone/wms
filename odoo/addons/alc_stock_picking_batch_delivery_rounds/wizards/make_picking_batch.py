@@ -20,6 +20,8 @@ class MakePickingBatch(models.TransientModel):
         query = """
             SELECT sp.id, ri.id FROM stock_picking sp
                 JOIN round_instance ri ON sp.delivery_round_id = ri.id
+                JOIN stock_picking_type spt ON sp.picking_type_id = spt.id
+                JOIN picking_zone pz on pz.id = spt.picking_zone_id
                 WHERE sp.picking_type_subcode = 'PICK'
                     AND sp.wave_id IS NULL
                     AND (
@@ -30,6 +32,16 @@ class MakePickingBatch(models.TransientModel):
                         )
                     AND sp.picking_type_id IN %(picking_type_ids)s
                     AND ri.state IN ('draft', 'pending', 'close')
+                    AND sp.printed = false
+                    AND (
+                        (pz.code = '02' AND ri.picking_mat_launched)
+                        OR
+                        (pz.code = '03' AND ri.picking_frigo_launched)
+                        OR
+                        (pz.code = '04' AND ri.picking_ali_launched)
+                        OR
+                        (pz.code = '05' AND ri.picking_med_launched)
+                    )
                     AND EXISTS (
                         SELECT 1 FROM stock_pack_operation spo
                             JOIN stock_location sl ON spo.location_id = sl.id
@@ -39,8 +51,6 @@ class MakePickingBatch(models.TransientModel):
                     AND (
                         (
                         sp.operator_id IS NULL
-                        AND sp.printed = false
-                        AND ri.picking_launched
                         AND (
                             NOT EXISTS (SELECT 1
                                     FROM res_users_round_instance_rel

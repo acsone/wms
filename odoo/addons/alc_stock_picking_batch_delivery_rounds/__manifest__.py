@@ -17,6 +17,7 @@
         "specific_stock",
         "stock_picking_batch_creation",
         "alc_stock_picking_batch_assignment",
+        "alc_delivery_rounds_close_pickings_by_zone",
     ],
     "data": ["views/res_users.xml", "views/stock_picking_wave.xml"],
     "demo": [],

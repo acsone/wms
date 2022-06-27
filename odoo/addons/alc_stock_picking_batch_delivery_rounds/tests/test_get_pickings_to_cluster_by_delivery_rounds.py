@@ -14,8 +14,12 @@ class TestGetPickingsToClusterByDeliveryRounds(ClusterPickingDeliveryCommonFeatu
         cls.stock_location.write(
             {"zone": "G", "corridor": "A", "shelf": "42", "height": "4", "box": "B12"}
         )
-        cls.delivery_round2.picking_launched = True
-        cls.delivery_round1.picking_launched = True
+        cls.delivery_round2.button_picking_start()
+        cls.delivery_round1.button_picking_start()
+        picking_zone_ali = cls.env["picking.zone"].create(
+            {"code": "04", "name": "Aliment"}
+        )
+        cls.picking_type_ali.picking_zone_id = picking_zone_ali
 
     def test_get_pickings_by_delivery_rounds_operator_allowed_on_both_delivery_rounds(
         self,

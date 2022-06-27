@@ -323,7 +323,15 @@ WHERE picking.picking_type_subcode = 'PICK'
       AND (
             (
                 picking.operator_id IS NULL
-                AND round.picking_launched
+                AND (
+                    (picking_zone.code = '02' AND round.picking_mat_launched)
+                    OR
+                    (picking_zone.code = '03' AND round.picking_frigo_launched)
+                    OR
+                    (picking_zone.code = '04' AND round.picking_ali_launched)
+                    OR
+                    (picking_zone.code = '05' AND round.picking_med_launched)
+                        )
                 AND picking.zetes_state IN %(picking_zetes_states_no_operator)s
                 AND (
                     NOT EXISTS(select 1 from res_users_round_instance_rel where round_instance_id = round.id)
