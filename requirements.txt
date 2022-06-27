@@ -130,7 +130,7 @@ odoo10-addon-bi-sql-editor==10.0.1.0.2
 odoo10-addon-component==10.0.1.1.1
 odoo10-addon-component-event==10.0.1.0.1
 odoo10-addon-connector @ git+https://github.com/acsone/connector@de23258a4d639e696d6e4d941ba005a1577a9935#subdirectory=setup/connector
-odoo10-addon-connector-elasticsearch @ git+https://github.com/acsone/search-engine.git@a321cd9f02e8cb8fde2d5b6d2b2e2fd23e3faf71#subdirectory=setup/connector_elasticsearch
+odoo10-addon-connector-elasticsearch @ git+https://github.com/acsone/search-engine.git@2009658c738e605b9b89e008741ab62dd22f09fb#subdirectory=setup/connector_elasticsearch
 odoo10-addon-connector-search-engine @ git+https://github.com/acsone/search-engine.git@ac684d8ef243d749ff31e74a17527246ca41fb36#subdirectory=setup/connector_search_engine
 odoo10-addon-date-range @ git+https://github.com/acsone/server-tools.git@dcefdba5bac014076f05229ba091acd8b739e164#subdirectory=setup/date_range
 odoo10-addon-delivery-carrier-label-gls @ git+https://github.com/acsone/delivery-carrier.git@58839a1c96904a43e1d0c2ab652ebdae3b6a2074#subdirectory=setup/delivery_carrier_label_gls
@@ -262,7 +262,7 @@ odoo10-addon-web-sheet-full-width==10.0.1.0.1.99.dev1
 odoo10-addon-web-tree-image==10.0.1.1.0
 odoo10-addon-web-widget-color==10.0.1.0.1
 odoo10-addon-web-widget-domain-v11==10.0.1.0.1
-odoo10-addon-web-widget-formio @ git+https://github.com/oca/web.git@e87d1d519941a57238a3072de37f1e5f65f80436#subdirectory=setup/web_widget_formio
+odoo10-addon-web-widget-formio @ git+https://github.com/acsone/web.git@e87d1d519941a57238a3072de37f1e5f65f80436#subdirectory=setup/web_widget_formio
 odoo10-addon-web-widget-many2many-tags-multi-selection==10.0.1.0.0.99.dev8
 ofxparse==0.16
 openupgradelib @ git+https://github.com/OCA/openupgradelib@6c18ce0c160b9cf47c4fa898d9b6c4265d98c216

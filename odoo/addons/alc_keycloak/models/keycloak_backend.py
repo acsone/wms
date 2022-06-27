@@ -36,6 +36,9 @@ class KeycloakBackend(models.Model):
             "can_order": partner.eshop_ordering_allowed,
             "help_with_fee": partner.help_with_fee,
             "vt-group": partner.veterinary_group_id.id or None,
+            "vt-pricelist-gross": partner.property_product_pricelist.role_name,
+            "vt-pricelist-discount": partner.discount_pricelist_id.discount_role_name,
+            "vt-supplier-promotion": partner.supplier_promotion_sale_allowed,
         }
         payload["attributes"].update(new_attributes)
         return payload

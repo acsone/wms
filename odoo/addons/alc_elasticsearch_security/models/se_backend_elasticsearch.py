@@ -22,17 +22,25 @@ class SeBackendElasticsearch(models.Model):
             "index_permissions":[
                 {
                     "index_patterns":["alc_shopinvader_variant_*"],
-                    "fls": ["indicated_price", "price.%s.*", "price.%s.*"]
+                    "fls": ["indicated_price", "price.%s.*", "price.%s.*", "current_%s", "current_%s"]
                 }
             ]
             }
         """
-        role_name = pricelist.role_name
-        domain = [("name", "=", role_name), ("backend_id", "=", self.id)]
+        price_role_name = pricelist.role_name
+        domain = [("name", "=", price_role_name), ("backend_id", "=", self.id)]
         existing_role = self.env["elasticsearch.role"].search(domain)
-        values = {"body": BODY % (role_name, pricelist.discount_role_name)}
+        values = {
+            "body": BODY
+            % (
+                price_role_name,
+                pricelist.discount_role_name,
+                price_role_name,
+                pricelist.discount_role_name,
+            )
+        }
         if not existing_role:
-            values.update({"name": role_name, "backend_id": self.id})
+            values.update({"name": price_role_name, "backend_id": self.id})
             existing_role.create(values)
         else:
             existing_role.write(values)
