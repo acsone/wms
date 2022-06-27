@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* alc_delivery_rounds_close_pickings_by_zone
+# 	* alc_delivery_rounds_close_pickings_by_zone
 #
 msgid ""
 msgstr ""
@@ -10,6 +10,7 @@ msgstr ""
 "PO-Revision-Date: 2022-06-27 11:13+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -59,8 +60,8 @@ msgstr "Start/Stop préparations aliments"
 
 #. module: alc_delivery_rounds_close_pickings_by_zone
 #: model:ir.ui.view,arch_db:alc_delivery_rounds_close_pickings_by_zone.view_round_instance_kanban
-msgid "Start/Stop med pickings"
-msgstr "Start/Stop préparations médicaments"
+msgid "Start/Stop frigo pickings"
+msgstr "Start/Stop préparations frigo"
 
 #. module: alc_delivery_rounds_close_pickings_by_zone
 #: model:ir.ui.view,arch_db:alc_delivery_rounds_close_pickings_by_zone.view_round_instance_kanban
@@ -69,8 +70,8 @@ msgstr "Start/Stop préparations matériel"
 
 #. module: alc_delivery_rounds_close_pickings_by_zone
 #: model:ir.ui.view,arch_db:alc_delivery_rounds_close_pickings_by_zone.view_round_instance_kanban
-msgid "Start/Stop frigo pickings"
-msgstr "Start/Stop préparations frigo"
+msgid "Start/Stop med pickings"
+msgstr "Start/Stop préparations médicaments"
 
 #. module: alc_delivery_rounds_close_pickings_by_zone
 #: model:ir.model,name:alc_delivery_rounds_close_pickings_by_zone.model_stock_picking
@@ -91,4 +92,3 @@ msgstr "Modèle"
 #: model:ir.model,name:alc_delivery_rounds_close_pickings_by_zone.model_round_wizard_makeplan
 msgid "round.wizard.makeplan"
 msgstr "round.wizard.makeplan"
-

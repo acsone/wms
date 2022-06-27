@@ -14,12 +14,14 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_delivery_rounds_close_pickings_by_zone
+#: model:ir.model.fields,field_description:alc_delivery_rounds_close_pickings_by_zone.field_round_instance_auto_close_picking_launched
 #: model:ir.model.fields,field_description:alc_delivery_rounds_close_pickings_by_zone.field_round_template_auto_close_picking_launched
 msgid "Auto close picking launched"
 msgstr ""
 
 #. module: alc_delivery_rounds_close_pickings_by_zone
-#: model:ir.model.fields,field_description:alc_delivery_rounds_close_pickings_by_zone.time_reopen_picking_launched
+#: model:ir.model.fields,field_description:alc_delivery_rounds_close_pickings_by_zone.field_round_instance_time_reopen_picking_launched
+#: model:ir.model.fields,field_description:alc_delivery_rounds_close_pickings_by_zone.field_round_template_time_reopen_picking_launched
 msgid "Duration before departure to re open pickings"
 msgstr ""
 
@@ -51,6 +53,16 @@ msgstr ""
 #. module: alc_delivery_rounds_close_pickings_by_zone
 #: model:ir.ui.view,arch_db:alc_delivery_rounds_close_pickings_by_zone.view_round_instance_kanban
 msgid "Start/Stop ali pickings"
+msgstr ""
+
+#. module: alc_delivery_rounds_close_pickings_by_zone
+#: model:ir.ui.view,arch_db:alc_delivery_rounds_close_pickings_by_zone.view_round_instance_kanban
+msgid "Start/Stop frigo pickings"
+msgstr ""
+
+#. module: alc_delivery_rounds_close_pickings_by_zone
+#: model:ir.ui.view,arch_db:alc_delivery_rounds_close_pickings_by_zone.view_round_instance_kanban
+msgid "Start/Stop mat pickings"
 msgstr ""
 
 #. module: alc_delivery_rounds_close_pickings_by_zone
