@@ -164,9 +164,25 @@ class StockPackOperationLotAdd(models.TransientModel):
         for rec in self:
             product = rec.product_id
             if rec.edit_dimensions_barcode_fields:
+                self._check_packaging_creation(product, rec.product_packaging_ids)
                 product.sudo().write(
                     {"packaging_ids": [(6, 0, rec.product_packaging_ids.ids)]}
                 )
+
+    def _check_packaging_creation(self, product, product_packagings):
+        for product_packaging in product_packagings:
+            if product_packaging not in product.packaging_ids:
+                vals = {
+                    "height_cm": product_packaging.height_cm,
+                    "barcode": product_packaging.barcode,
+                    "name": product_packaging.name,
+                    "length_cm": product_packaging.length_cm,
+                    "qty": product_packaging.qty,
+                    "packaging_type_id": product_packaging.packaging_type_id.id,
+                    "width_cm": product_packaging.width_cm,
+                    "product_tmpl_id": product.product_tmpl_id.id,
+                }
+                self.env["product.packaging"].create(vals)
 
     def _check_barcode_new_product(self):
         for rec in self:

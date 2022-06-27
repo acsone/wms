@@ -160,6 +160,17 @@ class TestMissingInfoOnNewProduct(SavepointCase):
         cls.p11 = cls.pt11.product_variant_ids[0]
         cls.p11.categ_id = cls.env.ref("specific_data.product_categ_humain").id
 
+        cls.product_box = cls.env["product.packaging"].create(
+            {
+                "packaging_type_id": cls.env.ref(
+                    "alc_product_packaging.product_packaging_type_box"
+                ).id,
+                "name": "Box",
+                "qty": 20,
+                "product_tmpl_id": cls.p11.product_tmpl_id.id,
+            }
+        )
+
         cls.products = [
             cls.p1,
             cls.p2,
@@ -419,7 +430,7 @@ class TestMissingInfoOnNewProduct(SavepointCase):
         self.assertEqual(self.operation_med_product.product_id.width, 4)
         self.assertEqual(self.operation_med_product.product_id.height, 3)
 
-    def test_09_product_is_meds_missing_dimensions(self):
+    def test_09_product_is_food_missing_dimensions(self):
         self.wiz.operation_id = self.operation_food_product.id
         self.assertEqual(
             self.operation_food_product.product_id.name, "Unittest is food product",
@@ -428,7 +439,7 @@ class TestMissingInfoOnNewProduct(SavepointCase):
         with self.assertRaises(MissingDimensionsError), self.env.cr.savepoint():
             self.wiz._check_dimensions_product()
 
-    def test_10_product_is_meds_complete_dimensions(self):
+    def test_10_product_is_food_complete_dimensions(self):
         self.wiz.operation_id = self.operation_food_product.id
         self.assertEqual(
             self.operation_food_product.product_id.name, "Unittest is food product",
@@ -438,7 +449,7 @@ class TestMissingInfoOnNewProduct(SavepointCase):
         self.assertEqual(self.operation_food_product.product_id.width, 4)
         self.assertEqual(self.operation_food_product.product_id.height, 3)
 
-    def test_11_product_is_meds_missing_dimensions(self):
+    def test_11_product_is_human_missing_dimensions(self):
         self.wiz.operation_id = self.operation_human_product.id
         self.assertEqual(
             self.operation_human_product.product_id.name, "Unittest is human product",
@@ -447,7 +458,7 @@ class TestMissingInfoOnNewProduct(SavepointCase):
         with self.assertRaises(MissingDimensionsError), self.env.cr.savepoint():
             self.wiz._check_dimensions_product()
 
-    def test_12_product_is_meds_complete_dimensions(self):
+    def test_12_product_is_human_complete_dimensions(self):
         self.wiz.operation_id = self.operation_human_product.id
         self.assertEqual(
             self.operation_human_product.product_id.name, "Unittest is human product",
@@ -456,3 +467,56 @@ class TestMissingInfoOnNewProduct(SavepointCase):
         self.assertEqual(self.operation_human_product.product_id.length, 2)
         self.assertEqual(self.operation_human_product.product_id.width, 4)
         self.assertEqual(self.operation_human_product.product_id.height, 3)
+
+    def test_13_product_is_human_update_packaging(self):
+        self.wiz.operation_id = self.operation_human_product.id
+        self.assertEqual(
+            self.operation_human_product.product_id.name, "Unittest is human product",
+        )
+        product_packaging = self.p11.packaging_ids[0]
+
+        product_packaging.write(
+            {"height_cm": 10, "barcode": "11111112", "length_cm": 10, "width_cm": 10}
+        )
+        self.wiz.write({"product_packaging_ids": [(6, 0, product_packaging.ids)]})
+
+        self.assertEqual(
+            self.operation_human_product.product_id.packaging_ids[0].length_cm, 10
+        )
+        self.assertEqual(
+            self.operation_human_product.product_id.packaging_ids[0].width_cm, 10
+        )
+        self.assertEqual(
+            self.operation_human_product.product_id.packaging_ids[0].height_cm, 10
+        )
+
+    def test_14_product_is_med_create_packaging(self):
+        self.wiz.operation_id = self.operation_med_product.id
+
+        product_box2 = self.env["product.packaging"].create(
+            {
+                "packaging_type_id": self.env.ref(
+                    "alc_product_packaging.product_packaging_type_box"
+                ).id,
+                "name": "Box test",
+                "height_cm": 10,
+                "barcode": "1134553111112",
+                "length_cm": 10,
+                "width_cm": 10,
+            }
+        )
+        self.wiz.write({"product_packaging_ids": [(6, 0, product_box2.ids)]})
+
+        self.assertEqual(
+            self.operation_med_product.product_id.packaging_ids[0].length_cm, 10
+        )
+        self.assertEqual(
+            self.operation_med_product.product_id.packaging_ids[0].width_cm, 10
+        )
+        self.assertEqual(
+            self.operation_med_product.product_id.packaging_ids[0].height_cm, 10
+        )
+        self.assertEqual(
+            self.operation_med_product.product_id.packaging_ids[0].barcode,
+            "1134553111112",
+        )
