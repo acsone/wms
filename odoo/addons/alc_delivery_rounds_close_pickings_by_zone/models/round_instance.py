@@ -31,11 +31,17 @@ class RoundInstance(models.Model):
         inverse="_inverse_picking_launched",
         store=True,
     )
+    auto_close_picking_launched = fields.Boolean(
+        string="Auto close picking launched", default=False
+    )
+    time_reopen_picking_launched = fields.Float(
+        "Duration before departure to re open pickings", default=0.5
+    )
 
     def _delay_reopen_pickings(self):
         for rec in self:
             float_start_time_reopen = (
-                rec.time_leave_planned - rec.template_id.time_reopen_picking_lauched
+                rec.time_leave_planned - rec.time_reopen_picking_launched
             )
             start_time_reopen = float2time(float_start_time_reopen)
             eta_str = rec.date + " " + start_time_reopen
@@ -118,3 +124,17 @@ class RoundInstance(models.Model):
                         "picking_frigo_launched": False,
                     }
                 )
+
+    @api.model
+    def create(self, vals):
+        if "template_id" in vals:
+            template = self.env["round.template"].browse(vals["template_id"])
+            if "auto_close_picking_launched" not in vals:
+                vals[
+                    "auto_close_picking_launched"
+                ] = template.auto_close_picking_launched
+            if "time_reopen_picking_launched" not in vals:
+                vals[
+                    "time_reopen_picking_launched"
+                ] = template.time_reopen_picking_launched
+        return super(RoundInstance, self).create(vals)

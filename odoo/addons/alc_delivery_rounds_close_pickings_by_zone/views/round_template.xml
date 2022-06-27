@@ -12,7 +12,11 @@
         <field name="arch" type="xml">
             <field name="time_leave_planned" position="after">
                 <field name="auto_close_picking_launched" />
-                <field name="time_reopen_picking_lauched" widget="float_time" />
+                <field
+          name="time_reopen_picking_launched"
+          widget="float_time"
+          attrs="{'invisible': [('auto_close_picking_launched', '=', False)]}"
+        />
             </field>
         </field>
     </record>
@@ -26,7 +30,11 @@
         <field name="arch" type="xml">
         <field name="name" position="after">
             <field name="auto_close_picking_launched" />
-            <field name="time_reopen_picking_lauched" widget="float_time" />
+            <field
+          name="time_reopen_picking_launched"
+          widget="float_time"
+          attrs="{'invisible': [('auto_close_picking_launched', '=', False)]}"
+        />
         </field>
         </field>
     </record>
