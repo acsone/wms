@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_elasticsearch_price_sorting
-#: code:addons/alc_elasticsearch_price_sorting/models/se_index.py:33
+#: code:addons/alc_elasticsearch_price_sorting/models/se_index.py:31
 #, python-format
 msgid "Check se-current-price task completion %s for index %s"
 msgstr ""
