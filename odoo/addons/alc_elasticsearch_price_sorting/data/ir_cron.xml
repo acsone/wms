@@ -7,7 +7,7 @@
     id="alc_elasticsearch_price_sorting_refresh_prices"
     model="ir.cron"
   >
-    <field name="name">Relaunch pipeline tu update current price in Opensearch</field>
+    <field name="name">Relaunch pipeline to update current price in Opensearch</field>
     <field name="active" eval="True" />
     <field name="user_id" ref="base.user_root" />
     <field name="interval_number">1</field>

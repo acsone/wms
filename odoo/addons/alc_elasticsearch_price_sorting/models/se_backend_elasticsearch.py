@@ -55,7 +55,9 @@ class SeBackendElasticsearch(models.Model):
         shopinvader_variant_model = self.env.ref(
             "shopinvader.model_shopinvader_variant"
         )
-        indexes = self.mapped("index_ids").filtered(
-            lambda a, model=shopinvader_variant_model: a.model_id == model
+        indexes = (
+            self.search([])
+            .mapped("index_ids")
+            .filtered(lambda a, model=shopinvader_variant_model: a.model_id == model)
         )
         indexes.execute_pipeline_set_current_price()

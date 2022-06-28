@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-
-
 from datetime import datetime, timedelta
 
 from odoo import _, models
@@ -16,13 +14,13 @@ class SeIndex(models.Model):
 
     def _get_es_client(self):
         self.ensure_one()
-        return self.backend_id._get_es_client()
+        return self.backend_id.specific_backend._get_es_client()
 
     def execute_pipeline_set_current_price(self):
         for record in self:
             client = record._get_es_client()
             task_def = client.update_by_query(
-                index=record.name,
+                index=record.name.lower(),
                 pipeline="set-current-price",
                 wait_for_completion=False,
             )
@@ -42,5 +40,6 @@ class SeIndex(models.Model):
     def _check_es_task_completion(self, task_id):
         client = self._get_es_client()
         task = client.tasks.get(task_id=task_id, wait_for_completion=False)
-        if task.get("status") != 404:
+        if task.get("status") != 404 and not task.get("completed"):
             self._delay_check_task(task_id)
+        return task
