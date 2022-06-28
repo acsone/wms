@@ -37,6 +37,7 @@ class TestRegistrationService(TestRegistration, ComponentMixin):
         vals["firstname"] = "first"
         vals["lastname"] = "last"
         vals["title"] = "title_dr"
+        vals["clientele"] = ["livestock", "pet"]
         vals.pop("occupation")
         vals["function"] = "function_nurse"
         return dict(vals, **kwargs)

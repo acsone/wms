@@ -24,7 +24,7 @@ class RegistrationService(Component):
     )
     def submit(self, **params):
         vals = self._process_params(params, "input")
-        registration = self.model.create(vals)
+        registration = self.model.sudo().create(vals)  # public user needs sudo
         return self._process_records(registration, "output")[0]
 
     def _map_input_name(self, params):
@@ -52,6 +52,10 @@ class RegistrationService(Component):
         if value:
             key = "function_assistant" if value == "function_nurse" else value
             params["occupation"] = key.replace("function_", "")
+        return params
+
+    def _map_input_clientele(self, params):
+        params["clientele"] = ",".join(params["clientele"])
         return params
 
     def _input_schema(self):
@@ -102,10 +106,21 @@ class RegistrationService(Component):
                 "input": {"map": "_map_input_function_occupation"},
             },
             "clientele": {
-                "type": "string",
+                "type": "list",
                 "required": True,
                 "nullable": False,
-                "allowed": self.model._fields["clientele"].get_values(self.env),
+                "schema": {
+                    "type": "string",
+                    "required": True,
+                    "nullable": False,
+                    "allowed": ["livestock", "equine", "pet", "exotic"],
+                },
+                "input": {"map": "_map_input_clientele", "mapper_keep": True},
+            },
+            "vat": {
+                "type": "string",
+                "required": False,
+                "nullable": True,
                 "input": {},
             },
             "vet_depot_number": {

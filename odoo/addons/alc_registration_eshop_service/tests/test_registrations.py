@@ -18,3 +18,5 @@ class TestRegistrationServiceFlow(TestRegistrationService):
             self.assertEqual(registration.country_name, "Belgik")
             title = self.env.ref("base.res_partner_title_doctor")
             self.assertEqual(registration.title, title)
+            self.assertEqual(registration.vat, "vat")
+            self.assertEqual(registration.clientele, "livestock,pet")

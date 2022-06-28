@@ -13,6 +13,7 @@ class TestRegistrationFlow(TestRegistration):
         registration = self.model.create(vals)
 
         self.assertEqual(registration.state, "pending")
+        self.assertEqual(registration.clientele, "equine")
 
         partner = registration.create_partners()
 
