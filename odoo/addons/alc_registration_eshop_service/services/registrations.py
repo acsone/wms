@@ -108,6 +108,12 @@ class RegistrationService(Component):
                 "allowed": self.model._fields["clientele"].get_values(self.env),
                 "input": {},
             },
+            "vat": {
+                "type": "string",
+                "required": False,
+                "nullable": True,
+                "input": {},
+            },
             "vet_depot_number": {
                 "type": "string",
                 "required": False,
