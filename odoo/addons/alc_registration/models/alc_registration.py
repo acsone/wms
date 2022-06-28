@@ -16,17 +16,9 @@ class AlcRegistration(FormatAddress, models.Model):
     active = fields.Boolean("Active", default=True)
     partner_id = fields.Many2one("res.partner", string="Created Partner", readonly=True)
 
-    clientele = fields.Selection(
-        string="Clientele",
-        required=True,
-        selection=[
-            ("livestock", "Livestock"),
-            ("equine", "Equine"),
-            ("pet", "Pets"),
-            ("exotic", "Exotic Pets"),
-        ],
-        default="pet",
-    )
+    # we want a multiselect with "Livestock", "Equine", "Pets", "Exotic Pets"
+    # it might become a m2m if there's a real usage for it
+    clientele = fields.Char(string="Clientele", required=True)
     occupation = fields.Selection(
         string="Occupation",
         required=True,
