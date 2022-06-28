@@ -27,6 +27,7 @@
         "alc_eshop_product_promotion_subscription",
         "alc_eshop_product_stock",
         "alc_eshop_sale_statistic",
+        "alc_eshop_sale_triple_discount",
         "alc_eshop_services_orders_suite_channel",
         "alc_eshop_salesperson",
         "alc_registration_eshop_service",
