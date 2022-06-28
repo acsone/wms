@@ -24,7 +24,7 @@ class RegistrationService(Component):
     )
     def submit(self, **params):
         vals = self._process_params(params, "input")
-        registration = self.model.create(vals)
+        registration = self.model.sudo().create(vals)  # public user needs sudo
         return self._process_records(registration, "output")[0]
 
     def _map_input_name(self, params):
