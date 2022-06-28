@@ -54,6 +54,10 @@ class RegistrationService(Component):
             params["occupation"] = key.replace("function_", "")
         return params
 
+    def _map_input_clientele(self, params):
+        params["clientele"] = ",".join(params["clientele"])
+        return params
+
     def _input_schema(self):
         return self._get_schema("input")
 
@@ -102,11 +106,16 @@ class RegistrationService(Component):
                 "input": {"map": "_map_input_function_occupation"},
             },
             "clientele": {
-                "type": "string",
+                "type": "list",
                 "required": True,
                 "nullable": False,
-                "allowed": self.model._fields["clientele"].get_values(self.env),
-                "input": {},
+                "schema": {
+                    "type": "string",
+                    "required": True,
+                    "nullable": False,
+                    "allowed": ["livestock", "equine", "pet", "exotic"],
+                },
+                "input": {"map": "_map_input_clientele", "mapper_keep": True},
             },
             "vat": {
                 "type": "string",
