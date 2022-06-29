@@ -123,16 +123,16 @@ class TestAutoClosePickings(DeliveryRoundTestCase, JobMixin):
 
         self.assertTrue(self.delivery_round_1.picking_med_launched)
 
-    def test_auto_open_pickings(self):
+    def test_no_auto_open_pickings(self):
         self.delivery_round_1.auto_close_picking_launched = False
         job_counter = self.job_counter()
         # create delivery plan
         self.wizard.confirm()
-        # Then job created to reopen pickings
+        # Then no job created to reopen pickings
         queue_job = job_counter.search_created()
         self.assertEqual(len(queue_job), 0)
 
-    def test_no_auto_open_pickings(self):
+    def test_auto_open_pickings(self):
         job_counter = self.job_counter()
         # create delivery plan
         self.wizard.confirm()

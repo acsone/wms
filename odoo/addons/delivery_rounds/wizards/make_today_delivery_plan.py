@@ -65,7 +65,7 @@ class MakeTodayDeliveryPlan(models.TransientModel):
                         )
                     ids.append(instance.id)
             else:
-                round_instance.create(
+                ri = round_instance.create(
                     {
                         "template_id": template.id,
                         "state": "draft",
@@ -76,7 +76,7 @@ class MakeTodayDeliveryPlan(models.TransientModel):
                         "tag_ids": [(6, 0, self.tag_ids.ids)],
                     }
                 )
-                ids.append(round_instance.id)
+                ids.append(ri.id)
 
         if templates and self.assign_moves:
             # Run stock reservations in background.  This process automatically
