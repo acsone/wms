@@ -4,10 +4,10 @@
 
 from datetime import datetime
 
-from odoo import api, fields, models
+from odoo import _, api, fields, models
 
 from odoo.addons.delivery_rounds.models.round_instance import float2time
-from odoo.addons.queue_job.job import job
+from odoo.addons.queue_job.job import identity_exact, job
 
 
 class RoundInstance(models.Model):
@@ -38,20 +38,36 @@ class RoundInstance(models.Model):
         "Duration before departure to re open pickings", default=0.5
     )
 
-    def _delay_reopen_pickings(self):
+    def _delay_reopen_pickings_if_required(self):
         for rec in self:
-            float_start_time_reopen = (
-                rec.time_leave_planned - rec.time_reopen_picking_launched
-            )
-            start_time_reopen = float2time(float_start_time_reopen)
-            eta_str = rec.date + " " + start_time_reopen
-            eta = datetime.strptime(eta_str, "%Y-%m-%d %H:%M")
-            rec.with_delay(eta=eta, priority=99)._reopen_pickings()
+            if rec.auto_close_picking_launched and rec.time_reopen_picking_launched:
+                description = (
+                    _("Automatic reopening of pickings in delivery round %s")
+                    % rec.display_name
+                )
+                float_start_time_reopen = (
+                    rec.time_leave_planned - rec.time_reopen_picking_launched
+                )
+                start_time_reopen = float2time(float_start_time_reopen)
+                eta_str = rec.date + " " + start_time_reopen
+                eta_time = datetime.strptime(eta_str, "%Y-%m-%d %H:%M")
+                # priority 3 : those jobs should be processed first
+                rec.with_delay(
+                    eta=eta_time,
+                    priority=3,
+                    identity_key=identity_exact,
+                    description=description,
+                )._reopen_pickings()
 
-    @job(default_channel="root.background.reopen_pickings")  # priority = 99
+    @job(default_channel="root.background.reopen_pickings")
     def _reopen_pickings(self):
         for rec in self:
             rec.write({"picking_launched": True})
+
+    def button_resetdraft(self):
+        res = super(RoundInstance, self).button_resetdraft()
+        self._delay_reopen_pickings_if_required()
+        return res
 
     def _toggle_by_zone(self, picking_launched_to_toggle):
         started = self.filtered(picking_launched_to_toggle)

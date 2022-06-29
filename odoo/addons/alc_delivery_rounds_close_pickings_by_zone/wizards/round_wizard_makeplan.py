@@ -14,10 +14,5 @@ class RoundWizardMakeplan(models.TransientModel):
             RoundWizardMakeplan, self
         )._initialize_delivery_rounds()
         delivery_rounds = self.env["round.instance"].browse(delivery_round_ids)
-        for delivery_round in delivery_rounds:
-            if (
-                delivery_round.auto_close_picking_launched
-                and delivery_round.time_reopen_picking_launched
-            ):
-                delivery_round._delay_reopen_pickings()
+        delivery_rounds._delay_reopen_pickings_if_required()
         return delivery_round_ids
