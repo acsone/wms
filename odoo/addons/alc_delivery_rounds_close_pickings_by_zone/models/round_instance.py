@@ -4,6 +4,8 @@
 
 from datetime import datetime
 
+import pytz
+
 from odoo import _, api, fields, models
 
 from odoo.addons.delivery_rounds.models.round_instance import float2time
@@ -51,6 +53,12 @@ class RoundInstance(models.Model):
                 start_time_reopen = float2time(float_start_time_reopen)
                 eta_str = rec.date + " " + start_time_reopen
                 eta_time = datetime.strptime(eta_str, "%Y-%m-%d %H:%M")
+                # The time is the time in local zone
+                # eta should be in utc
+                # We must therefore convert from expected locale to  utc
+                bru_tz = pytz.timezone("Europe/Brussels")
+                utc_tz = pytz.timezone("UTC")
+                eta_time = bru_tz.localize(eta_time).astimezone(utc_tz)
                 # priority 3 : those jobs should be processed first
                 rec.with_delay(
                     eta=eta_time,
