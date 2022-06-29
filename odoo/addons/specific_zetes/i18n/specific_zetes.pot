@@ -459,7 +459,7 @@ msgid "Need to be check"
 msgstr ""
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/models/stock_picking.py:245
+#: code:addons/specific_zetes/models/stock_picking.py:248
 #: code:addons/specific_zetes/tools/domain_catchweight.py:134
 #: code:addons/specific_zetes/tools/domain_itempick.py:256
 #, python-format
@@ -467,7 +467,7 @@ msgid "No pack operation found"
 msgstr ""
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/models/stock_picking.py:248
+#: code:addons/specific_zetes/models/stock_picking.py:251
 #, python-format
 msgid "No pack operation found with ID %s"
 msgstr ""
@@ -927,13 +927,13 @@ msgid "You cannot pick more than %s unit of the product %s"
 msgstr ""
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/models/stock_picking.py:225
+#: code:addons/specific_zetes/models/stock_picking.py:228
 #, python-format
 msgid "You cannot split this pack operation because the new quantity (%s) is geater than the available quantity (%s)"
 msgstr ""
 
 #. module: specific_zetes
-#: code:addons/specific_zetes/models/stock_picking.py:253
+#: code:addons/specific_zetes/models/stock_picking.py:256
 #, python-format
 msgid "You cannot split this pack operation lot because the new quantity (%s) is greater than the available quantity (%s)"
 msgstr ""
