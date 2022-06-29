@@ -20,6 +20,12 @@ msgid "Auto close picking launched"
 msgstr ""
 
 #. module: alc_delivery_rounds_close_pickings_by_zone
+#: code:addons/alc_delivery_rounds_close_pickings_by_zone/models/round_instance.py:47
+#, python-format
+msgid "Automatic reopening of pickings in delivery round %s"
+msgstr ""
+
+#. module: alc_delivery_rounds_close_pickings_by_zone
 #: model:ir.model.fields,field_description:alc_delivery_rounds_close_pickings_by_zone.field_round_instance_time_reopen_picking_launched
 #: model:ir.model.fields,field_description:alc_delivery_rounds_close_pickings_by_zone.field_round_template_time_reopen_picking_launched
 msgid "Duration before departure to re open pickings"
