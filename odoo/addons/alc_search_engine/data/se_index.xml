@@ -264,6 +264,7 @@
     }
   },
   "settings": {
+    "default_pipeline": "set-current-price",
     "analysis": {
       "filter": {
         "french_elision": {
@@ -627,6 +628,7 @@
     }
   },
   "settings": {
+    "default_pipeline": "set-current-price",
     "analysis": {
       "filter": {
         "word_delimiter": {
@@ -980,6 +982,7 @@
     }
   },
   "settings": {
+    "default_pipeline": "set-current-price",
     "analysis": {
       "filter": {
         "word_delimiter": {
