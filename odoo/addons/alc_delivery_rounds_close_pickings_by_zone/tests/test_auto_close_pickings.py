@@ -2,6 +2,10 @@
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
+import pytz
+
+from odoo import fields
+
 from odoo.addons.delivery_rounds.tests.common import DeliveryRoundTestCase
 from odoo.addons.queue_job.tests.common import JobMixin
 
@@ -139,8 +143,13 @@ class TestAutoClosePickings(DeliveryRoundTestCase, JobMixin):
         # Then job created to reopen pickings
         queue_job = job_counter.search_created()
         self.assertEqual(len(queue_job), 1)
-        date_relaunch = self.delivery_round_1.date + " 08:30:00"
-        self.assertEqual(queue_job.eta, date_relaunch)
+        date_relaunch = fields.Datetime.from_string(
+            self.delivery_round_1.date + " 08:30:00"
+        )
+        bru_tz = pytz.timezone("Europe/Brussels")
+        utc_tz = pytz.timezone("UTC")
+        eta_time = bru_tz.localize(date_relaunch).astimezone(utc_tz)
+        self.assertEqual(queue_job.eta, fields.Datetime.to_string(eta_time))
 
     def test_toggle_by_zone(self):
         self.assertFalse(self.delivery_round_1.picking_launched)
