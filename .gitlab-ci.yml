@@ -194,7 +194,7 @@ test-new-product-barcode-required:
     - echo Testing ${ADDONS_TEST}
     - unbuffer venv/bin/coverage run --parallel venv/bin/odoo -c odoo-ci.cfg -d ${DB_NAME} --stop-after-init --no-xmlrpc -i ${ADDONS_TEST} --test-enable | acsoo checklog
 
-test-shopfloor:
+.test_shopfloor:
   extends: .test_common
   script:
     - pipx install acsoo # for checklog
@@ -221,6 +221,61 @@ test-shopfloor:
     - echo Testing ${ADDONS_TEST}
     - unbuffer venv/bin/coverage run --parallel venv/bin/odoo -c odoo-ci.cfg -d ${DB_NAME} --stop-after-init --no-xmlrpc -i ${ADDONS_TEST} --test-enable | acsoo checklog
 
+test-shopfloor-manual:
+  extends: .test_shopfloor
+  only:
+    - branches
+  except:
+    - master
+  when: manual
+
+test-shopfloor-master:
+  extends: .test_shopfloor
+  only:
+    - master
+  when: on_success
+
+test-shopfloor-branch:
+  extends: .test_common
+  script:
+    - pipx install acsoo # for checklog
+    - pipx install manifestoo # up to date with list-codepends
+    - virtualenv --python=$PYTHON venv
+    - venv/bin/pip install --no-deps -r requirements-tests.txt # test dependencies
+    - venv/bin/pip install --no-deps --no-index release/*.whl # runtime dependencies
+    - venv/bin/pip install --no-deps -e . # the project, in editable mode so coverage sees it
+    - start_ssh_agent
+    - git remote set-branches origin '*'
+    - GITROOT="git@gitlab.acsone.eu:${CI_PROJECT_PATH}"
+    - git fetch --depth=50 ${GITROOT} master:master
+    - MODIFIED_ADDONS=$(git diff --name-only master `git rev-parse --abbrev-ref HEAD` | grep "odoo/addons" | sed 's/odoo.addons.//' | sed 's/\/.*//' | uniq | tr '\n' ',')
+    - MODIFIED_ADDONS=${MODIFIED_ADDONS%?} # remove trailing comma
+    - echo $MODIFIED_ADDONS
+    - IMPACTED_ADDONS=$(manifestoo --addons-path-python venv/bin/python --select $MODIFIED_ADDONS list-codepends --separator=,)
+    - ALL_ADDONS=$(acsoo addons list)
+    - IFS=',' read -ra ADDR <<< "$ALL_ADDONS"
+    - SHOPFLOOR_ADDONS=''
+    - for i in "${ADDR[@]}"; do
+    - if [[ $i == 'alc_shopfloor'* ]] ; then
+    - SHOPFLOOR_ADDONS=$SHOPFLOOR_ADDONS$i','
+    - fi
+    - done
+    - if [[ $IMPACTED_ADDONS == *alc_shopfloor* ]] ; then
+    - ADDONS_INIT=$(manifestoo --addons-path-python=venv/bin/python --select=${SHOPFLOOR_ADDONS} list-depends --separator=,)
+    - echo Installing ${ADDONS_INIT}
+    - unbuffer venv/bin/click-odoo-initdb -c odoo-ci.cfg --new-database ${DB_NAME} --cache-prefix alc-sfl -m ${ADDONS_INIT} | acsoo checklog
+    - ADDONS_TEST=$(manifestoo --addons-path-python=venv/bin/python --select=${SHOPFLOOR_ADDONS} list --separator=,)
+    - echo Testing ${ADDONS_TEST}
+    - unbuffer venv/bin/coverage run --parallel venv/bin/odoo -c odoo-ci.cfg -d ${DB_NAME} --stop-after-init --no-xmlrpc -i ${ADDONS_TEST} --test-enable | acsoo checklog
+    - else
+    - echo "Skipping Shopfloor Tests"
+    - fi
+  only:
+    - branches
+  except:
+    - master
+  when: on_success
+
 coverage-report:
   stage: test
   script:
@@ -245,7 +300,7 @@ coverage-report:
   needs:
     - job: test-all
       artifacts: true
-    - job: test-shopfloor
+    - job: test-shopfloor-manual
       artifacts: true
     - job: test-new-product-barcode-required
       artifacts: true
