@@ -17,7 +17,11 @@
           name="vet_subscription_number"
           attrs="{'invisible': [('partner_type', 'not in', ['veterinary', 'student_like'])], 'required': [('partner_type', 'in', ['veterinary', 'student_like'])]}"
         />
-        <field name="veterinary_group_id" />
+        <field
+          name="veterinary_group_ids"
+          widget="many2many_tags"
+          options="{'no_create': True}"
+        />
       </xpath>
     </field>
   </record>
