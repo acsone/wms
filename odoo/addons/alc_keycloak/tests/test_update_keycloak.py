@@ -52,6 +52,23 @@ class TestKeycloakUpdateFlow(TestKeycloak):
         roles = set(payload["attributes"]["shopinvader-vt-roles"].split(","))
         self.assertEqual(roles, expected_roles)
 
+    def test_update_veterinary_groups(self):
+        veterinary_group = self.env["veterinary.group"].create({"name": "VTG"})
+        keycloak_user = self.env["keycloak.user"].create(self.vals_user)
+        job_counter = self.job_counter()
+
+        # when
+        self.partner.write({"veterinary_group_ids": [(6, 0, veterinary_group.ids)]})
+        # then
+        jobs = job_counter.search_created()
+        job = jobs.filtered(lambda j: j.model_name == "keycloak.backend")
+        self.assertEqual(job.args, [keycloak_user, ["veterinary_group_ids"]])
+        payload = keycloak_user.keycloak_backend_id._get_user_payload(*job.args)
+        self.assertEqual(list(payload.keys()), ["attributes"])
+        vt_groups = payload["attributes"]["vt-groups"]
+        expected_vt_groups = veterinary_group.ids
+        self.assertEqual(vt_groups, expected_vt_groups)
+
     def test_update_write_lang(self):
         keycloak_user = self.env["keycloak.user"].create(self.vals_user)
         job_counter = self.job_counter()
