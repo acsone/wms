@@ -20,6 +20,13 @@
           string="&#128438;Print Products"
           context="{'default_label_type': 'product'}"
         />
+        <button
+          class="oe_link oe_right"
+          name="print_food_report"
+          type="object"
+          string="&#128438;Print Food Products"
+          context="{'default_label_type': 'food_product'}"
+        />
       </button>
     </field>
   </record>

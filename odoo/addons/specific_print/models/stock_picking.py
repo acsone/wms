@@ -86,3 +86,15 @@ class StockPicking(models.Model):
             # sending of all context causes errors
             "context": {"default_label_type": "product"},
         }
+
+    def print_food_report(self):
+        self.ensure_one()
+        return {
+            "name": "Print food label",
+            "type": "ir.actions.act_window",
+            "id": self.env.ref("specific_print.print_label_action").id,
+            "view_mode": "form",
+            "res_model": "print.label",
+            "target": "new",
+            "context": {"default_label_type": "food_product"},
+        }
