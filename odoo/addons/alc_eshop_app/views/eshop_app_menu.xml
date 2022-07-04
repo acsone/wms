@@ -18,6 +18,13 @@
     groups="eshop_manager_group"
   />
 
+    <record
+    model="ir.ui.menu"
+    id="product_discount_specials.product_discount_special_menu"
+  >
+        <field name="parent_id" ref="alc_eshop_app.menu_eshop_app" />
+        <field name="sequence" eval="5" />
+    </record>
     <record model="ir.ui.menu" id="alc_eshop_ads.alc_eshop_ads_menu">
         <field name="parent_id" ref="alc_eshop_app.menu_eshop_app" />
         <field name="sequence" eval="10" />
