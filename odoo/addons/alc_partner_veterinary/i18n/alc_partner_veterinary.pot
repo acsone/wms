@@ -14,35 +14,12 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_partner_veterinary
-#: model:ir.ui.view,arch_db:alc_partner_veterinary.veterinary_group_form_view
-msgid "Add Partners"
-msgstr ""
-
-#. module: alc_partner_veterinary
-#: model:ir.actions.act_window,name:alc_partner_veterinary.veterinary_group_user_wizard_act_window
-#: model:ir.ui.view,arch_db:alc_partner_veterinary.veterinary_group_user_wizard_form_view
-msgid "Add Partners to Veterinary Group"
-msgstr ""
-
-#. module: alc_partner_veterinary
-#: model:ir.ui.view,arch_db:alc_partner_veterinary.veterinary_group_user_wizard_form_view
-msgid "Add User(s)"
-msgstr ""
-
-#. module: alc_partner_veterinary
-#: model:ir.ui.view,arch_db:alc_partner_veterinary.veterinary_group_user_wizard_form_view
-msgid "Cancel"
-msgstr ""
-
-#. module: alc_partner_veterinary
 #: model:ir.model.fields,field_description:alc_partner_veterinary.field_veterinary_group_create_uid
-#: model:ir.model.fields,field_description:alc_partner_veterinary.field_veterinary_group_user_wizard_create_uid
 msgid "Created by"
 msgstr ""
 
 #. module: alc_partner_veterinary
 #: model:ir.model.fields,field_description:alc_partner_veterinary.field_veterinary_group_create_date
-#: model:ir.model.fields,field_description:alc_partner_veterinary.field_veterinary_group_user_wizard_create_date
 msgid "Created on"
 msgstr ""
 
@@ -55,30 +32,25 @@ msgstr ""
 
 #. module: alc_partner_veterinary
 #: model:ir.model.fields,field_description:alc_partner_veterinary.field_veterinary_group_display_name
-#: model:ir.model.fields,field_description:alc_partner_veterinary.field_veterinary_group_user_wizard_display_name
 msgid "Display Name"
 msgstr ""
 
 #. module: alc_partner_veterinary
 #: model:ir.model.fields,field_description:alc_partner_veterinary.field_veterinary_group_id
-#: model:ir.model.fields,field_description:alc_partner_veterinary.field_veterinary_group_user_wizard_id
 msgid "ID"
 msgstr ""
 
 #. module: alc_partner_veterinary
 #: model:ir.model.fields,field_description:alc_partner_veterinary.field_veterinary_group___last_update
-#: model:ir.model.fields,field_description:alc_partner_veterinary.field_veterinary_group_user_wizard___last_update
 msgid "Last Modified on"
 msgstr ""
 
 #. module: alc_partner_veterinary
-#: model:ir.model.fields,field_description:alc_partner_veterinary.field_veterinary_group_user_wizard_write_uid
 #: model:ir.model.fields,field_description:alc_partner_veterinary.field_veterinary_group_write_uid
 msgid "Last Updated by"
 msgstr ""
 
 #. module: alc_partner_veterinary
-#: model:ir.model.fields,field_description:alc_partner_veterinary.field_veterinary_group_user_wizard_write_date
 #: model:ir.model.fields,field_description:alc_partner_veterinary.field_veterinary_group_write_date
 msgid "Last Updated on"
 msgstr ""
@@ -95,7 +67,6 @@ msgstr ""
 
 #. module: alc_partner_veterinary
 #: model:ir.model.fields,field_description:alc_partner_veterinary.field_veterinary_group_partner_ids
-#: model:ir.model.fields,field_description:alc_partner_veterinary.field_veterinary_group_user_wizard_partner_ids
 msgid "Partners"
 msgstr ""
 
@@ -118,10 +89,9 @@ msgstr ""
 
 #. module: alc_partner_veterinary
 #: model:ir.model,name:alc_partner_veterinary.model_veterinary_group
-#: model:ir.model.fields,field_description:alc_partner_veterinary.field_res_partner_veterinary_group_id
-#: model:ir.model.fields,field_description:alc_partner_veterinary.field_res_users_veterinary_group_id
-#: model:ir.model.fields,field_description:alc_partner_veterinary.field_shopinvader_partner_veterinary_group_id
-#: model:ir.model.fields,field_description:alc_partner_veterinary.field_veterinary_group_user_wizard_veterinary_group_id
+#: model:ir.model.fields,field_description:alc_partner_veterinary.field_res_partner_veterinary_group_ids
+#: model:ir.model.fields,field_description:alc_partner_veterinary.field_res_users_veterinary_group_ids
+#: model:ir.model.fields,field_description:alc_partner_veterinary.field_shopinvader_partner_veterinary_group_ids
 msgid "Veterinary Group"
 msgstr ""
 
@@ -135,10 +105,5 @@ msgstr ""
 #: model:ir.ui.menu,name:alc_partner_veterinary.veterinary_group_menu
 #: model:ir.ui.view,arch_db:alc_partner_veterinary.product_template_form_view_discount_specials
 msgid "Veterinary Groups"
-msgstr ""
-
-#. module: alc_partner_veterinary
-#: model:ir.model,name:alc_partner_veterinary.model_veterinary_group_user_wizard
-msgid "Wizard to add Partners to Veterinary Groups."
 msgstr ""
 
