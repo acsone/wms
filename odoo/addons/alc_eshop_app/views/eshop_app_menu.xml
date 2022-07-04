@@ -18,6 +18,13 @@
     groups="eshop_manager_group"
   />
 
+    <record
+    model="ir.ui.menu"
+    id="product_discount_specials.product_discount_special_menu"
+  >
+        <field name="parent_id" ref="alc_eshop_app.menu_eshop_app" />
+        <field name="sequence" eval="5" />
+    </record>
     <record model="ir.ui.menu" id="alc_eshop_ads.alc_eshop_ads_menu">
         <field name="parent_id" ref="alc_eshop_app.menu_eshop_app" />
         <field name="sequence" eval="10" />
@@ -41,5 +48,13 @@
     <record model="ir.ui.menu" id="alc_eshop_cms.alc_eshop_cms_page_slot_menu">
         <field name="parent_id" ref="alc_eshop_app.menu_eshop_app_config" />
         <field name="sequence" eval="26" />
+    </record>
+    <record model="ir.ui.menu" id="alc_eshop_classifieds.alc_classified_menu">
+        <field name="parent_id" ref="alc_eshop_app.menu_eshop_app" />
+        <field name="sequence" eval="30" />
+    </record>
+    <record model="ir.ui.menu" id="alc_registration.alc_registration_menu">
+        <field name="parent_id" ref="alc_eshop_app.menu_eshop_app" />
+        <field name="sequence" eval="34" />
     </record>
 </odoo>

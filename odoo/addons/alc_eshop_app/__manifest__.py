@@ -49,6 +49,7 @@
         "security/rule+acl_alc_product_promotion_subscription.xml",
         "security/rule+acl_product_product.xml",
         "security/rule+acl_res_partner.xml",
+        "security/rule+acl_alc_classifieds.xml",
         "security/rule+acl_alc_eshop_form.xml",
         "security/rule+acl_alc_eshop_product_on_order.xml",
         "security/rule+acl_alc_eshop_product_ordered_qty.xml",

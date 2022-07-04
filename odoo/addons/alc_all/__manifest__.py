@@ -12,6 +12,7 @@
     "website": "https://acsone.eu/",
     "depends": [
         "server_environment_files",
+        "alc_eshop_app",
         # external
         "account_invoice_merge_attachment",
         "product_sequence",
