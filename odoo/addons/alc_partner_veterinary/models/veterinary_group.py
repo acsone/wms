@@ -11,10 +11,12 @@ class VeterinaryGroup(models.Model):
     _description = "Veterinary Group"
 
     name = fields.Char(string="Name")
-    # only many2many allow to add existing records
-    # so we put it in readonly and rely on a wizard
-    partner_ids = fields.One2many(
-        "res.partner", "veterinary_group_id", string="Partners", readonly=True
+    partner_ids = fields.Many2many(
+        "res.partner",
+        "res_partner_veterinary_group_rel",
+        "res_partner_id",
+        "veterinary_group_id",
+        string="Partners",
     )
     product_template_ids = fields.Many2many(
         "product.template",

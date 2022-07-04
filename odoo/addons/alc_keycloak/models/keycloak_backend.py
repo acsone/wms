@@ -20,7 +20,7 @@ class KeycloakBackend(models.Model):
             "ref": "ref",
             "eshop_ordering_allowed": "can_order",
             "help_with_fee": "help_with_fee",
-            "veterinary_group_id": "vt-group",
+            "veterinary_group_ids": "vt-groups",
         }
         res.update(new)
         return res
@@ -35,7 +35,7 @@ class KeycloakBackend(models.Model):
             "ref": partner.ref or None,
             "can_order": partner.eshop_ordering_allowed,
             "help_with_fee": partner.help_with_fee,
-            "vt-group": partner.veterinary_group_id.id or None,
+            "vt-groups": partner.veterinary_group_ids.ids,
             "vt-pricelist-gross": partner.property_product_pricelist.role_name or None,
             "vt-pricelist-discount": partner.discount_pricelist_id.discount_role_name
             or None,

@@ -27,19 +27,15 @@
         <field name="model">veterinary.group</field>
         <field name="arch" type="xml">
             <form>
-                <header>
-                    <button
-            name="action_add_partners"
-            type="object"
-            class="btn btn-primary"
-            string="Add Partners"
-          />
-                </header>
+                <header />
                 <sheet>
                     <group>
                         <field name="name" />
-                        <field name="partner_ids" />
-                        <field name="product_template_ids" />
+                        <field name="partner_ids" options="{'no_create': True}" />
+                        <field
+              name="product_template_ids"
+              options="{'no_create': True}"
+            />
                     </group>
                 </sheet>
             </form>
