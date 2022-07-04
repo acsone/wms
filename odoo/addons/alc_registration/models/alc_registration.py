@@ -88,6 +88,13 @@ class AlcRegistration(FormatAddress, models.Model):
         compute="_compute_state",
     )
 
+    similar_partner_ids = fields.One2many(
+        comodel_name="res.partner",
+        compute="_compute_similar_partner_ids",
+        string="Similar Partners",
+        help="Restricted to 10 parnters, use the action to show all potential matches.",
+    )
+
     @api.depends("partner_id", "active")
     def _compute_state(self):
         for registration in self:
@@ -169,3 +176,33 @@ class AlcRegistration(FormatAddress, models.Model):
             window_action["views"] = [(False, "tree"), (False, "form")]
             window_action["domain"] = [("id", "in", to_reset.ids)]
         return window_action
+
+    def _get_similarity_fields(self):
+        return ["email", "vat", "mobile", "phone", "fax", "company_name", "name"]
+
+    def _get_similarity_domain(self):
+        self.ensure_one()
+        domain = []
+        for field in self._get_similarity_fields():
+            if self[field]:
+                domain.append((field, "ilike", self[field]))
+        return domain
+
+    def action_show_similar(self):
+        self.ensure_one()
+        return {
+            "type": "ir.actions.act_window",
+            "name": _("Similar Partners"),
+            "res_model": "res.partner",
+            "domain": self._get_similarity_domain(),
+            "view_type": "form",
+            "view_mode": "tree,form",
+            "context": self.env.context,
+            "target": "current",
+        }
+
+    def _compute_similar_partner_ids(self):
+        for partner in self:
+            partner_domain = partner._get_similarity_domain()
+            partners = self.env["res.partner"].search(partner_domain, limit=10)
+            partner.similar_partner_ids = partners

@@ -75,8 +75,18 @@
                     <field name="state" widget="statusbar" />
                 </header>
                 <sheet>
+                    <div class="oe_button_box" name="button_box">
+          <button
+              class="oe_stat_button"
+              name="action_show_similar"
+              type="object"
+              icon="fa-list"
+            >
+          </button>
+        </div>
                     <group id="names">
                         <field name="active" invisible="1" />
+                        <field name="similar_partner_ids" />
                         <field name="partner_id" />
                         <field name="title" />
                         <field name="name" />
