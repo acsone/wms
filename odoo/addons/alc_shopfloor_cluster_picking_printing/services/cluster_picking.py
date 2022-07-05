@@ -51,8 +51,10 @@ class ClusterPicking(Component):
                 return self._pick_next_operation(
                     batch, message=self.msg_store.operation_not_found()
                 )
+            if lot_id:
+                lot = self.env["stock.production.lot"].browse(lot_id)
             self._print_picking_food_product_labels(
-                operation, int(quantity), lot_id=lot_id
+                operation, int(quantity), lot_id=lot
             )
         return result
 
