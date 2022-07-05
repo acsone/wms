@@ -172,13 +172,13 @@ msgid "Name"
 msgstr ""
 
 #. module: alc_registration
-#: code:addons/alc_registration/models/alc_registration.py:159
+#: code:addons/alc_registration/models/alc_registration.py:166
 #, python-format
 msgid "No Registration to reset."
 msgstr ""
 
 #. module: alc_registration
-#: code:addons/alc_registration/models/alc_registration.py:135
+#: code:addons/alc_registration/models/alc_registration.py:142
 #, python-format
 msgid "No new partners."
 msgstr ""
@@ -225,7 +225,7 @@ msgid "Registration Manager"
 msgstr ""
 
 #. module: alc_registration
-#: code:addons/alc_registration/models/alc_registration.py:150
+#: code:addons/alc_registration/models/alc_registration.py:157
 #, python-format
 msgid "Registration has already been accepted."
 msgstr ""
@@ -248,6 +248,11 @@ msgid "Rejected"
 msgstr ""
 
 #. module: alc_registration
+#: model:ir.model.fields,help:alc_registration.field_alc_registration_similar_partner_ids
+msgid "Restricted to 10 parnters, use the action to show all potential matches."
+msgstr ""
+
+#. module: alc_registration
 #: model:ir.ui.view,arch_db:alc_registration.alc_registration_form_view
 msgid "Set to pending"
 msgstr ""
@@ -255,6 +260,13 @@ msgstr ""
 #. module: alc_registration
 #: selection:alc.registration,partner_type:0
 msgid "Shareholder"
+msgstr ""
+
+#. module: alc_registration
+#: code:addons/alc_registration/models/alc_registration.py:195
+#: model:ir.model.fields,field_description:alc_registration.field_alc_registration_similar_partner_ids
+#, python-format
+msgid "Similar Partners"
 msgstr ""
 
 #. module: alc_registration
