@@ -139,16 +139,16 @@ msgid "ID"
 msgstr ""
 
 #. module: specific_print
-#: code:addons/specific_print/wizards/print_label.py:40
+#: code:addons/specific_print/wizards/print_label.py:45
 #, python-format
 msgid "Invalid model"
 msgstr ""
 
 #. module: specific_print
-#: code:addons/specific_print/wizards/print_label.py:50
-#: code:addons/specific_print/wizards/print_label.py:58
-#: code:addons/specific_print/wizards/print_label.py:67
-#: code:addons/specific_print/wizards/print_label.py:74
+#: code:addons/specific_print/wizards/print_label.py:55
+#: code:addons/specific_print/wizards/print_label.py:63
+#: code:addons/specific_print/wizards/print_label.py:72
+#: code:addons/specific_print/wizards/print_label.py:79
 #, python-format
 msgid "Invalid printer"
 msgstr ""
@@ -213,6 +213,11 @@ msgid "PDF"
 msgstr ""
 
 #. module: specific_print
+#: model:ir.model.fields,field_description:specific_print.field_print_label_pack_operation_ids
+msgid "Pack operations"
+msgstr ""
+
+#. module: specific_print
 #: selection:print.label,label_type:0
 msgid "Package"
 msgstr ""
@@ -238,13 +243,13 @@ msgid "Pickings"
 msgstr ""
 
 #. module: specific_print
-#: model:ir.ui.view,arch_db:specific_print.view_pack_operation_details_form
-msgid "Print Customer Product Label"
+#: model:ir.ui.view,arch_db:specific_print.view_production_lot_form
+msgid "Print Lot"
 msgstr ""
 
 #. module: specific_print
-#: model:ir.ui.view,arch_db:specific_print.view_production_lot_form
-msgid "Print Lot"
+#: model:ir.ui.view,arch_db:specific_print.view_pack_operation_details_form
+msgid "Print Med Product Label"
 msgstr ""
 
 #. module: specific_print
@@ -633,6 +638,11 @@ msgstr ""
 #. module: specific_print
 #: model:ir.ui.view,arch_db:specific_print.view_pack_operation_lot_form
 msgid "🖶Print"
+msgstr ""
+
+#. module: specific_print
+#: model:ir.ui.view,arch_db:specific_print.view_pack_operation_details_form
+msgid "🖶Print Ali Product Label"
 msgstr ""
 
 #. module: specific_print

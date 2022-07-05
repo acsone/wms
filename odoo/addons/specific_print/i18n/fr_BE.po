@@ -145,16 +145,16 @@ msgid "ID"
 msgstr "ID"
 
 #. module: specific_print
-#: code:addons/specific_print/wizards/print_label.py:40
+#: code:addons/specific_print/wizards/print_label.py:45
 #, python-format
 msgid "Invalid model"
 msgstr "Invalid model"
 
 #. module: specific_print
-#: code:addons/specific_print/wizards/print_label.py:50
-#: code:addons/specific_print/wizards/print_label.py:58
-#: code:addons/specific_print/wizards/print_label.py:67
-#: code:addons/specific_print/wizards/print_label.py:74
+#: code:addons/specific_print/wizards/print_label.py:55
+#: code:addons/specific_print/wizards/print_label.py:63
+#: code:addons/specific_print/wizards/print_label.py:72
+#: code:addons/specific_print/wizards/print_label.py:79
 #, python-format
 msgid "Invalid printer"
 msgstr "Imprimante invalide"
@@ -219,6 +219,12 @@ msgid "PDF"
 msgstr "PDF"
 
 #. module: specific_print
+#: model:ir.model.fields,field_description:specific_print.field_print_label_pack_operation_ids
+#, fuzzy
+msgid "Pack operations"
+msgstr "Colisage"
+
+#. module: specific_print
 #: selection:print.label,label_type:0
 msgid "Package"
 msgstr "Colis"
@@ -244,19 +250,14 @@ msgid "Pickings"
 msgstr "Préparations"
 
 #. module: specific_print
-#: model:ir.ui.view,arch_db:specific_print.view_pack_operation_details_form
-msgid "Print Med Product Label"
-msgstr "Imprimer produit médicament"
-
-#. module: specific_print
-#: model:ir.ui.view,arch_db:specific_print.view_pack_operation_details_form
-msgid "Print Ali Product Label"
-msgstr "Imprimer produit aliment"
-
-#. module: specific_print
 #: model:ir.ui.view,arch_db:specific_print.view_production_lot_form
 msgid "Print Lot"
 msgstr "Imprimer le lot"
+
+#. module: specific_print
+#: model:ir.ui.view,arch_db:specific_print.view_pack_operation_details_form
+msgid "Print Med Product Label"
+msgstr "Imprimer produit médicament"
 
 #. module: specific_print
 #: model:ir.ui.view,arch_db:specific_print.view_pack_operation_details_form
@@ -268,14 +269,6 @@ msgstr "Imprimer l'étiquette réception produit"
 #: model:ir.ui.view,arch_db:specific_print.print_label_view_form
 msgid "Print label"
 msgstr "Imprimer l'étiquette médicament"
-
-
-#. module: specific_print
-#: model:ir.actions.act_window,name:specific_print.print_label_action
-#: model:ir.ui.view,arch_db:specific_print.print_label_view_form
-msgid "Print food label"
-msgstr "Imprimer l'étiquette aliment"
-
 
 #. module: specific_print
 #: model:ir.actions.act_window,name:specific_print.action_menu_print_lots
@@ -693,6 +686,12 @@ msgid "🖶Print"
 msgstr "🖶Imprimer"
 
 #. module: specific_print
+#: model:ir.ui.view,arch_db:specific_print.view_pack_operation_details_form
+#, fuzzy
+msgid "🖶Print Ali Product Label"
+msgstr "Imprimer produit aliment"
+
+#. module: specific_print
 #: model:ir.ui.view,arch_db:specific_print.view_picking_form
 msgid "🖶Print Food Products"
 msgstr "🖶Imprimer produits aliments"
@@ -706,6 +705,9 @@ msgstr "🖶Imprimer produits médicaments"
 #: model:ir.ui.view,arch_db:specific_print.view_picking_form
 msgid "🖶Print Packs"
 msgstr "🖶Imprimer colis médicaments"
+
+#~ msgid "Print food label"
+#~ msgstr "Imprimer l'étiquette aliment"
 
 #~ msgid "Print Quantity"
 #~ msgstr "Imprimer la quantité"
