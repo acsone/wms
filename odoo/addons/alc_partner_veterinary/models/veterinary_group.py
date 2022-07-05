@@ -25,12 +25,3 @@ class VeterinaryGroup(models.Model):
         "product_template_id",
         string="Products",
     )
-
-    def action_add_partners(self):
-        self.ensure_one()
-        wizard_model = self.env["veterinary.group.user.wizard"]
-        action_xml_id = "alc_partner_veterinary.veterinary_group_user_wizard_act_window"
-        window_action = self.env.ref(action_xml_id).read()[0]
-        wizard = wizard_model.create({"veterinary_group_id": self.id})
-        window_action["res_id"] = wizard.id
-        return window_action
