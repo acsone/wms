@@ -47,9 +47,18 @@ class StockPicking(models.Model):
                 lambda pack_op, packages=packages: pack_op.result_package_id in packages
             )
         if packs_to_print:
-            packs_to_print.print_food_product_label(
-                printer_id=printer_id, quantity=quantity
-            )
+            for pack in packs_to_print:
+                if pack.pack_lot_ids:
+                    for pack_lot in pack.pack_lot_ids:
+                        pack.print_food_product_label(
+                            printer_id=printer_id,
+                            quantity=quantity,
+                            lot_id=pack_lot.lot_id,
+                        )
+                else:
+                    pack.print_food_product_label(
+                        printer_id=printer_id, quantity=quantity
+                    )
 
     @api.multi
     def print_packages_label(self, quantity=1, printer_id=False, packages=None):

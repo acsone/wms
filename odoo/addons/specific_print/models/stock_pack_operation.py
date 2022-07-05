@@ -85,11 +85,12 @@ class StockPackOperation(models.Model):
         return result
 
     @api.multi
-    def print_food_product_label(self, quantity=1, printer_id=False):
+    def print_food_product_label(self, quantity=1, printer_id=False, lot_id=None):
         self.ensure_one()
         hw_print(
             self,
             "specific_print.report_stock_product_food_label",
             qty=quantity,
             printer_id=printer_id,
+            lot_id=lot_id,
         )

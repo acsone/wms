@@ -51,7 +51,9 @@ class ClusterPicking(Component):
                 return self._pick_next_operation(
                     batch, message=self.msg_store.operation_not_found()
                 )
-            self._print_picking_food_product_labels(operation, int(quantity))
+            self._print_picking_food_product_labels(
+                operation, int(quantity), lot_id=lot_id
+            )
         return result
 
     def _print_picking_med_products_labels(self, picking, package):
@@ -64,9 +66,9 @@ class ClusterPicking(Component):
             packages=package,
         )
 
-    def _print_picking_food_product_labels(self, operation, quantity):
-        operation.picking_id.sudo().print_food_products_label(
+    def _print_picking_food_product_labels(self, operation, quantity, lot_id=None):
+        operation.sudo().print_food_product_label(
             printer_id=self.shopfloor_user.printing_product_label_printer_id.id,
-            operations=operation,
             quantity=quantity,
+            lot_id=lot_id,
         )

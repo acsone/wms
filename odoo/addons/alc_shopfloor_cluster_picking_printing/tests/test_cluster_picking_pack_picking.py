@@ -134,9 +134,8 @@ class ClusterPickingPutInPackPrintCase(ClusterPickingUnloadingCommonCase):
         self.menu.sudo().write(dict(pack_pickings=False, print_on_pack_pickings=False))
         operation = self.batch.pack_operation_ids[0]
         qty_done = operation.product_qty
-        picking = operation.picking_id
         with mock.patch.object(
-            picking.__class__, "print_food_products_label"
+            operation.__class__, "print_food_product_label"
         ) as mocked_print_food_product_label:
             self.service.dispatch(
                 "scan_destination_pack",
