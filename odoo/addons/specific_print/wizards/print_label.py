@@ -78,12 +78,27 @@ class PrintLabel(models.TransientModel):
             if self.printer_id.type != "zebra":
                 raise UserError(_("Invalid printer"))
             if self.picking_ids:
-                for picking in self.picking_ids:
-                    picking.print_food_products_label(
-                        printer_id=self.printer_id.id, quantity=self.qty
-                    )
+                self.print_food_from_picking()
+
             if self.pack_operation_ids:
-                for packop in self.pack_operation_ids:
+                self.print_food_from_packop()
+
+    def print_food_from_picking(self):
+        for picking in self.picking_ids:
+            picking.print_food_products_label(
+                printer_id=self.printer_id.id, quantity=self.qty
+            )
+
+    def print_food_from_packop(self):
+        for packop in self.pack_operation_ids:
+            if packop.pack_lot_ids:
+                for pack_lot in packop.pack_lot_ids:
                     packop.print_food_product_label(
-                        printer_id=self.printer_id.id, quantity=self.qty
+                        printer_id=self.printer_id.id,
+                        quantity=self.qty,
+                        lot_id=pack_lot.lot_id,
                     )
+            else:
+                packop.print_food_product_label(
+                    printer_id=self.printer_id.id, quantity=self.qty
+                )
