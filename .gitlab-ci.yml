@@ -102,7 +102,8 @@ test-impacted:
     - git remote set-branches origin '*'
     - GITROOT="git@gitlab.acsone.eu:${CI_PROJECT_PATH}"
     - git fetch --depth=50 ${GITROOT} master:master
-    - MODIFIED_ADDONS=$(git diff --name-only master `git rev-parse --abbrev-ref HEAD` | grep "odoo/addons" | sed 's/odoo.addons.//' | sed 's/\/.*//' | uniq | tr '\n' ',')
+    - MODIFIED_ADDONS=$(git diff --name-only master `git rev-parse --abbrev-ref HEAD` | grep "odoo/addons" | sed 's/odoo.addons.//' | sed 's/\/.*//' | uniq | tr '\n' ',') || true
+    - if [[ -z "$MODIFIED_ADDONS" ]] ; then echo "No changes to test."; exit 0; fi
     - MODIFIED_ADDONS=${MODIFIED_ADDONS%?} # remove trailing comma
     - echo $MODIFIED_ADDONS
     - IMPACTED_ADDONS=$(manifestoo --addons-path-python venv/bin/python --select $MODIFIED_ADDONS list-codepends --separator=,)
@@ -243,7 +244,8 @@ test-shopfloor-branch:
     - git remote set-branches origin '*'
     - GITROOT="git@gitlab.acsone.eu:${CI_PROJECT_PATH}"
     - git fetch --depth=50 ${GITROOT} master:master
-    - MODIFIED_ADDONS=$(git diff --name-only master `git rev-parse --abbrev-ref HEAD` | grep "odoo/addons" | sed 's/odoo.addons.//' | sed 's/\/.*//' | uniq | tr '\n' ',')
+    - MODIFIED_ADDONS=$(git diff --name-only master `git rev-parse --abbrev-ref HEAD` | grep "odoo/addons" | sed 's/odoo.addons.//' | sed 's/\/.*//' | uniq | tr '\n' ',') || true # if empty, $? is 1 on gitlab, which interrupts execution.
+    - if [[ -z "$MODIFIED_ADDONS" ]] ; then echo "No changes to test."; exit 0; fi
     - MODIFIED_ADDONS=${MODIFIED_ADDONS%?} # remove trailing comma
     - echo $MODIFIED_ADDONS
     - IMPACTED_ADDONS=$(manifestoo --addons-path-python venv/bin/python --select $MODIFIED_ADDONS list-codepends --separator=,)
