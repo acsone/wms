@@ -13,6 +13,7 @@
     "depends": [
         "server_environment_files",
         "alc_eshop_app",
+        "alc_migrate",  # dummy module to force pre-migrations
         # external
         "account_invoice_merge_attachment",
         "product_sequence",
