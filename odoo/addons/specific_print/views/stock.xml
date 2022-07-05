@@ -40,7 +40,14 @@
           <button
             type="object"
             name="button_print_product_label"
-            string="Print Customer Product Label"
+            string="Print Med Product Label"
+          />
+          <button
+            class="oe_link oe_right"
+            name="print_food_report"
+            type="object"
+            string="&#128438;Print Ali Product Label"
+            context="{'default_label_type': 'food_product'}"
           />
           <button
             type="object"

@@ -245,8 +245,13 @@ msgstr "Préparations"
 
 #. module: specific_print
 #: model:ir.ui.view,arch_db:specific_print.view_pack_operation_details_form
-msgid "Print Customer Product Label"
-msgstr "Imprimer l'étiquette client"
+msgid "Print Med Product Label"
+msgstr "Imprimer produit médicament"
+
+#. module: specific_print
+#: model:ir.ui.view,arch_db:specific_print.view_pack_operation_details_form
+msgid "Print Ali Product Label"
+msgstr "Imprimer produit aliment"
 
 #. module: specific_print
 #: model:ir.ui.view,arch_db:specific_print.view_production_lot_form
@@ -262,7 +267,15 @@ msgstr "Imprimer l'étiquette réception produit"
 #: model:ir.actions.act_window,name:specific_print.print_label_action
 #: model:ir.ui.view,arch_db:specific_print.print_label_view_form
 msgid "Print label"
-msgstr "Imprimer l'étiquette"
+msgstr "Imprimer l'étiquette médicament"
+
+
+#. module: specific_print
+#: model:ir.actions.act_window,name:specific_print.print_label_action
+#: model:ir.ui.view,arch_db:specific_print.print_label_view_form
+msgid "Print food label"
+msgstr "Imprimer l'étiquette aliment"
+
 
 #. module: specific_print
 #: model:ir.actions.act_window,name:specific_print.action_menu_print_lots
@@ -682,7 +695,7 @@ msgstr "🖶Imprimer"
 #. module: specific_print
 #: model:ir.ui.view,arch_db:specific_print.view_picking_form
 msgid "🖶Print Food Products"
-msgstr "🖶Imprimer produit aliments"
+msgstr "🖶Imprimer produits aliments"
 
 #. module: specific_print
 #: model:ir.ui.view,arch_db:specific_print.view_picking_form

@@ -21,6 +21,9 @@ class PrintLabel(models.TransientModel):
     printer_id = fields.Many2one("printing.printer", string="Printer", required=True)
     picking_ids = fields.Many2many("stock.picking", string="Pickings")
     lot_ids = fields.Many2many("stock.production.lot", string="Lots")
+    pack_operation_ids = fields.Many2many(
+        "stock.pack.operation", string="Pack operations"
+    )
     qty = fields.Integer("Quantity", default=1)
 
     @api.model
@@ -36,6 +39,8 @@ class PrintLabel(models.TransientModel):
             result["picking_ids"] = [(6, 0, active_ids)]
         elif active_model == "stock.production.lot":
             result["lot_ids"] = [(6, 0, active_ids)]
+        elif active_model == "stock.pack.operation":
+            result["pack_operation_ids"] = [(6, 0, active_ids)]
         else:
             raise UserError(_("Invalid model"))
 
@@ -72,8 +77,13 @@ class PrintLabel(models.TransientModel):
         elif self.label_type == "food_product":
             if self.printer_id.type != "zebra":
                 raise UserError(_("Invalid printer"))
-
-            for picking in self.picking_ids:
-                picking.print_food_products_label(
-                    printer_id=self.printer_id.id, quantity=self.qty
-                )
+            if self.picking_ids:
+                for picking in self.picking_ids:
+                    picking.print_food_products_label(
+                        printer_id=self.printer_id.id, quantity=self.qty
+                    )
+            if self.pack_operation_ids:
+                for packop in self.pack_operation_ids:
+                    packop.print_food_product_label(
+                        printer_id=self.printer_id.id, quantity=self.qty
+                    )
