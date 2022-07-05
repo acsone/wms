@@ -147,3 +147,25 @@ class ClusterPickingPutInPackPrintCase(ClusterPickingUnloadingCommonCase):
                 },
             )
             mocked_print_food_product_label.assert_called_once()
+
+    def test_print_after_scan_destination_food_with_lot(self):
+        self.product_a.tracking = "lot"
+        initial_lot = self._create_lot(self.product_a)
+        self.bin1.is_internal = True
+        self.menu.sudo().write(dict(pack_pickings=False, print_on_pack_pickings=False))
+        operation = self.batch.pack_operation_ids[0]
+        qty_done = operation.product_qty
+        with mock.patch.object(
+            operation.__class__, "print_food_product_label"
+        ) as mocked_print_food_product_label:
+            self.service.dispatch(
+                "scan_destination_pack",
+                params={
+                    "picking_batch_id": self.batch.id,
+                    "operation_id": operation.id,
+                    "barcode": self.bin1.name,
+                    "quantity": qty_done,
+                    "lot_id": initial_lot.id,
+                },
+            )
+            mocked_print_food_product_label.assert_called_once()
