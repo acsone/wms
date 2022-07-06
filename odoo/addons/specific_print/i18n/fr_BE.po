@@ -268,7 +268,7 @@ msgstr "Imprimer l'étiquette réception produit"
 #: model:ir.actions.act_window,name:specific_print.print_label_action
 #: model:ir.ui.view,arch_db:specific_print.print_label_view_form
 msgid "Print label"
-msgstr "Imprimer l'étiquette médicament"
+msgstr "Imprimer l'étiquette"
 
 #. module: specific_print
 #: model:ir.actions.act_window,name:specific_print.action_menu_print_lots
@@ -707,7 +707,7 @@ msgid "🖶Print Packs"
 msgstr "🖶Imprimer colis médicaments"
 
 #~ msgid "Print food label"
-#~ msgstr "Imprimer l'étiquette aliment"
+#~ msgstr "Imprimer l'étiquette"
 
 #~ msgid "Print Quantity"
 #~ msgstr "Imprimer la quantité"
