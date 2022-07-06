@@ -2,47 +2,84 @@
 <odoo noupdate="1">
   <template id="stock_product_food_label_zebra_v1">
     <div class="raw">
-      <t t-foreach="docs" t-as="pack">
-        <t t-set="product" t-value="pack.product_id" />
-        <t t-set="ship" t-value="pack.picking_id" />
-        <t t-set="package" t-value="pack.result_package_id" />
-         <t t-foreach="xrange(package.nbr_packages)" t-as="index">
-^XA
+      <t t-foreach="docs" t-as="line">
+        <t t-set="pick" t-value="line.picking_id" />
+        <t
+          t-set="ships"
+          t-value="pick._get_all_dest_pickings().filtered(lambda r: r.picking_type_code == 'outgoing' and r.state not in ('cancel', 'done'))"
+        />
+        <t t-set="ship" t-value="ships and ships[0]" />
 
-^FWR
+        <!--
+        Migration note:
+        The lot_id is given in arg in v10 as it is not part of the pack operation
+        In next versions, we can extract it from the move line
 
-^FO380,60^A035,35^FDTOURNEE<t t-esc="ship.delivery_round_id.template_id.code" />^FS\r
-^FO380,280^A030,30^FD<t t-esc="index + 1" /> / <t t-esc="package.nbr_packages" />^FS\r
-^FO380,380^A025,25^FDPVI <t t-esc="product.indicated_price" />^FS\r
+        t t-set="lot_id" t-value="line.lot_id"
+        -->
 
-^FO350,70^A030,30^FD<t
-            t-esc="res_company.convert_to_ascii(ship.partner_id.display_name and ship.partner_id.display_name[:29] or u'')"
+        <t t-foreach="xrange(1, int(line.qty_done) + 1)" t-as="index">
+
+        ^XA
+        ^FWR
+
+        ^FO310,60^GB70,<t
+            t-esc="len(pick.delivery_round_id.template_id.code) * 38"
+          />,3,2^FS\r
+        ^FO310,70^A060,60^FD<t t-esc="pick.delivery_round_id.template_id.code" />^FS\r
+
+        <t t-if="('customer_id' in pick) and pick.customer_id.is_b2c_customer">
+        ^FO310,330^A060,60^FDB2C^FS\r
+        </t>
+
+        ^FO310,480^A060,60^FD<t t-esc="index" /> / <t t-esc="int(line.qty_done)" />^FS\r
+
+        ^FO255,60^A030,30^FD<t
+            t-esc="res_company.convert_to_ascii(pick.partner_id.display_name and pick.partner_id.display_name[:32] or u'')"
           />^FS\r
-^FO315,70^A030,30^FD<t
-            t-esc="res_company.convert_to_ascii(ship.partner_id.display_name and ship.partner_id.display_name[29:50] or u'')"
+        ^FO225,60^A030,30^FD<t
+            t-esc="res_company.convert_to_ascii(pick.partner_id.display_name and pick.partner_id.display_name[32:60] or u'')"
           />^FS\r
-^FO275, 70^A030,30^FD<t t-esc="ship.partner_id.zip" /> <t
-            t-esc="res_company.convert_to_ascii(ship.partner_id.city)"
+        ^FO195,60^A035,30^FD<t t-esc="pick.partner_id.zip" /> <t
+            t-esc="res_company.convert_to_ascii(pick.partner_id.city)"
           />^FS\r
-<t t-if="('customer_id' in ship) and ship.customer_id.is_b2c_customer">
-^FO235,70^A030,30^FDB2C: <t
-              t-esc="('customer_id' in ship) and (ship.partner_id != ship.customer_id) and res_company.convert_to_ascii(ship.customer_id.name and ship.customer_id.name[:29] or u'') or ''"
-            />^FS\r
-</t>
+        ^FO145,60^A030,30^FD<t
+            t-esc="('customer_id' in pick) and (pick.partner_id != pick.customer_id) and res_company.convert_to_ascii(pick.customer_id.name and pick.customer_id.name[:29] or u'') or ''"
+          />^FS\r
 
-^FO200,70^A025,25^FD<t t-esc="res_company.convert_to_ascii(product.name)" />^FS\r
 
-^FO245,370^BQN,2,4^FDQA, <t t-esc="ship.name" /> ^FS\r
-^FO205,375^A020,20^FD<t t-esc="ship.name" />^FS\r
+        <t
+            t-if="pick.partner_id.is_price_on_labels and line.product_id.indicated_price"
+          >
+        ^FO100,420^A030,30^FDPVI <t t-esc="line.product_id.indicated_price" /> EUR^FS\r
+        </t>
 
-<t t-if="product.barcode">
-^FO60,60^BC,30,Y,Y,N,D^FD<t
-              t-esc="res_company.convert_to_ascii(product.barcode)"
-            />^FS\r
-</t>
-^FWN
-^XZ
-      </t>
+        ^FO60,60^BY2
+        ^BC,40,Y,Y,N,A^FDS-<t t-esc="line.product_id.default_code" />-<t
+            t-esc="lot_id and lot_id.name or ''"
+          />-^FS\r
+
+        <!--
+        ^FO60,60^BY2
+        ^BC,40,Y,Y,N,D^FD(01)<t t-esc="'%014d' % int(line.product_id.barcode)"/><t t-if="lot_id">&gt;8(10)<t t-esc="lot_id.name[:20]"/><t t-if="lot_id.life_date">&gt;8(17)<t t-esc="lot_id.life_date[:2] + lot_id.life_date[5:7] + lot_id.life_date[8:10]"/></t></t>^FS\r
+        -->
+
+        ^FO20,60^A025,25^FD<t t-esc="line.product_id.name[:29]" />^FS\r
+
+        <!--
+        ^FO0,540^A045,45^FD<t t-esc="pick.checksum"/>^FS\r
+        -->
+
+        <t t-if="ship">
+        ^FO295,200
+        ^BQN,2,4,,,,_
+        ^FD<t t-esc="ship.name" />^FS\r
+        </t>
+
+        ^FWN
+        ^XZ
+
+        </t>
       </t>
     </div>
   </template>
