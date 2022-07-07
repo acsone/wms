@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="alc_classified_form_view" model="ir.ui.view">
+        <field name="name">alc.classified.form.responsible</field>
+        <field name="inherit_id" ref="alc_eshop_classifieds.alc_classified_form_view" />
+        <field name="model">alc.classified</field>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="before">
+                <field name="user_id" />
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
