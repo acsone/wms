@@ -139,6 +139,7 @@
         "alc_purchase_announced_delivery_date",
         "alc_reception_pharmacy",
         "alc_reception_pharmacy_geo_delivery_rounds",
+        "alc_registration_responsible",
         "alc_restocking_exclude_not_salable",
         "alc_sale_cancel_remaining_product_additional",
         "alc_sale_channel_stock_move",
