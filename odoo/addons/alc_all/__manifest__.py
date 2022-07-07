@@ -109,6 +109,7 @@
         "alc_delivery_rounds_allatonce_assignment",
         "alc_delivery_rounds_partner_geolocalize",
         "alc_edi_connector",
+        "alc_eshop_classifieds_responsible",
         "alc_geo_delivery_rounds",
         "alc_gls_putinpack",
         "alc_invoices_audit",
