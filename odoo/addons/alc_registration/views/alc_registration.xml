@@ -86,7 +86,13 @@
         </div>
                     <group id="names">
                         <field name="active" invisible="1" />
-                        <field name="similar_partner_ids" />
+                        <field name="similar_partner_ids">
+                            <tree>
+                                <field name="display_name" />
+                                <field name="vat" />
+                                <field name="vet_depot_number" />
+                            </tree>
+                        </field>
                         <field name="partner_id" />
                         <field name="title" />
                         <field name="name" />

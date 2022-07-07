@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="res_partner_similar_tree_view" model="ir.ui.view">
+        <field name="name">res.partner.similar.tree</field>
+        <field name="model">res.partner</field>
+        <field name="priority" eval="1000" />
+        <field name="arch" type="xml">
+            <tree>
+                <field name="display_name" />
+                <field name="vat" />
+                <field name="vet_depot_number" />
+            </tree>
+        </field>
+    </record>
+</odoo>
