@@ -31,10 +31,22 @@ msgid ""
 msgstr ""
 
 #. module: specific_print
+#: model:ir.ui.view,arch_db:specific_print.stock_product_food_label_zebra_v1
+msgid ""
+",3,2^FS\\r\n"
+"        ^FO310,70^A060,60^FD"
+msgstr ""
+
+#. module: specific_print
 #: model:ir.ui.view,arch_db:specific_print.stock_pick_packs_label_zebra_v1
 msgid ""
 ",75,3,2^FS\\r\n"
 "^FO40,47^A0N60,60^FD"
+msgstr ""
+
+#. module: specific_print
+#: model:ir.ui.view,arch_db:specific_print.stock_product_food_label_zebra_v1
+msgid "-^FS\\r"
 msgstr ""
 
 #. module: specific_print
@@ -133,6 +145,11 @@ msgstr "Ne pas imprimer les étiquettes du produit"
 #: model:ir.ui.view,arch_db:specific_print.stock_product_label_toshiba_v1
 msgid "Doc.n : 1/"
 msgstr "Doc.n : 1/"
+
+#. module: specific_print
+#: model:ir.ui.view,arch_db:specific_print.stock_product_food_label_zebra_v1
+msgid "EUR^FS\\r"
+msgstr ""
 
 #. module: specific_print
 #: selection:print.label,label_type:0
@@ -336,18 +353,36 @@ msgid "Zebra"
 msgstr "Zebra"
 
 #. module: specific_print
+#: model:ir.ui.view,arch_db:specific_print.stock_product_food_label_zebra_v1
+msgid "^FO100,420^A030,30^FDPVI"
+msgstr ""
+
+#. module: specific_print
+#: model:ir.ui.view,arch_db:specific_print.stock_product_food_label_zebra_v1
+msgid "^FO20,60^A025,25^FD"
+msgstr ""
+
+#. module: specific_print
 #: model:ir.ui.view,arch_db:specific_print.stock_pick_packs_label_zebra_v1
 msgid "^FO200,47^A0N60,60^FDB2C^FS\\r"
 msgstr ""
 
 #. module: specific_print
 #: model:ir.ui.view,arch_db:specific_print.stock_product_food_label_zebra_v1
-msgid "^FO200,70^A025,25^FD"
+msgid ""
+"^FO295,200\n"
+"        ^BQN,2,4,,,,_\n"
+"        ^FD"
 msgstr ""
 
 #. module: specific_print
 #: model:ir.ui.view,arch_db:specific_print.stock_product_food_label_zebra_v1
-msgid "^FO235,70^A030,30^FDB2C:"
+msgid "^FO310,330^A060,60^FDB2C^FS\\r"
+msgstr ""
+
+#. module: specific_print
+#: model:ir.ui.view,arch_db:specific_print.stock_product_food_label_zebra_v1
+msgid "^FO310,480^A060,60^FD"
 msgstr ""
 
 #. module: specific_print
@@ -357,7 +392,9 @@ msgstr ""
 
 #. module: specific_print
 #: model:ir.ui.view,arch_db:specific_print.stock_product_food_label_zebra_v1
-msgid "^FO60,60^BC,30,Y,Y,N,D^FD"
+msgid ""
+"^FO60,60^BY2\n"
+"        ^BC,40,Y,Y,N,A^FDS-"
 msgstr ""
 
 #. module: specific_print
@@ -371,7 +408,7 @@ msgstr ""
 msgid ""
 "^FS\\r\n"
 "\n"
-"^FO245,370^BQN,2,4^FDQA,"
+"        ^FO255,60^A030,30^FD"
 msgstr ""
 
 #. module: specific_print
@@ -380,14 +417,6 @@ msgid ""
 "^FS\\r\n"
 "\n"
 "^FO30,30^GB"
-msgstr ""
-
-#. module: specific_print
-#: model:ir.ui.view,arch_db:specific_print.stock_product_food_label_zebra_v1
-msgid ""
-"^FS\\r\n"
-"\n"
-"^FO350,70^A030,30^FD"
 msgstr ""
 
 #. module: specific_print
@@ -410,7 +439,21 @@ msgstr ""
 #: model:ir.ui.view,arch_db:specific_print.stock_product_food_label_zebra_v1
 msgid ""
 "^FS\\r\n"
-"^FO205,375^A020,20^FD"
+"        ^FO145,60^A030,30^FD"
+msgstr ""
+
+#. module: specific_print
+#: model:ir.ui.view,arch_db:specific_print.stock_product_food_label_zebra_v1
+msgid ""
+"^FS\\r\n"
+"        ^FO195,60^A035,30^FD"
+msgstr ""
+
+#. module: specific_print
+#: model:ir.ui.view,arch_db:specific_print.stock_product_food_label_zebra_v1
+msgid ""
+"^FS\\r\n"
+"        ^FO225,60^A030,30^FD"
 msgstr ""
 
 #. module: specific_print
@@ -466,34 +509,6 @@ msgstr ""
 msgid ""
 "^FS\\r\n"
 "^FO25,342^A0N,31,23^CI13^FR^FD"
-msgstr ""
-
-#. module: specific_print
-#: model:ir.ui.view,arch_db:specific_print.stock_product_food_label_zebra_v1
-msgid ""
-"^FS\\r\n"
-"^FO275, 70^A030,30^FD"
-msgstr ""
-
-#. module: specific_print
-#: model:ir.ui.view,arch_db:specific_print.stock_product_food_label_zebra_v1
-msgid ""
-"^FS\\r\n"
-"^FO315,70^A030,30^FD"
-msgstr ""
-
-#. module: specific_print
-#: model:ir.ui.view,arch_db:specific_print.stock_product_food_label_zebra_v1
-msgid ""
-"^FS\\r\n"
-"^FO380,280^A030,30^FD"
-msgstr ""
-
-#. module: specific_print
-#: model:ir.ui.view,arch_db:specific_print.stock_product_food_label_zebra_v1
-msgid ""
-"^FS\\r\n"
-"^FO380,380^A025,25^FDPVI"
 msgstr ""
 
 #. module: specific_print
@@ -575,7 +590,7 @@ msgstr ""
 #: model:ir.ui.view,arch_db:specific_print.stock_product_food_label_zebra_v1
 msgid ""
 "^FWN\n"
-"^XZ"
+"        ^XZ"
 msgstr ""
 
 #. module: specific_print
@@ -590,10 +605,9 @@ msgstr ""
 #: model:ir.ui.view,arch_db:specific_print.stock_product_food_label_zebra_v1
 msgid ""
 "^XA\n"
+"        ^FWR\n"
 "\n"
-"^FWR\n"
-"\n"
-"^FO380,60^A035,35^FDTOURNEE"
+"        ^FO310,60^GB70,"
 msgstr ""
 
 #. module: specific_print
