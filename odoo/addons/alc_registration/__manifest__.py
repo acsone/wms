@@ -20,6 +20,7 @@
         "security/res_groups.xml",
         "security/alc_registration.xml",
         "views/alc_registration.xml",
+        "views/res_partner.xml",
     ],
     "demo": [],
 }

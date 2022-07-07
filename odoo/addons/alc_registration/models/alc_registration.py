@@ -190,6 +190,7 @@ class AlcRegistration(FormatAddress, models.Model):
 
     def action_show_similar(self):
         self.ensure_one()
+        tree_view = self.env.ref("alc_registration.res_partner_similar_tree_view")
         return {
             "type": "ir.actions.act_window",
             "name": _("Similar Partners"),
@@ -199,6 +200,7 @@ class AlcRegistration(FormatAddress, models.Model):
             "view_mode": "tree,form",
             "context": self.env.context,
             "target": "current",
+            "views": [(tree_view.id, "tree")],
         }
 
     def _compute_similar_partner_ids(self):
