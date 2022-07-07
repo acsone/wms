@@ -9,6 +9,7 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
+        "alc_price_cache_exclusive",
         "alc_elasticsearch_price_sorting",
         "alc_eshop",
         "alc_eshop_api_v2",
