@@ -14,6 +14,7 @@
         "server_environment_files",
         "alc_eshop_app",
         "alc_migrate",  # dummy module to force pre-migrations
+        "alc_pricing",  # test module to force check pricing
         # external
         "account_invoice_merge_attachment",
         "product_sequence",
