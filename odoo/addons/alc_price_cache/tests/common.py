@@ -29,7 +29,8 @@ class TestPrices(SavepointCase, JobMixin):
             test_queue_job_no_delay=True
         )
 
-    def _get_item_vals(self, pricelist=None, **kwargs):
+    @classmethod
+    def _get_item_vals(cls, pricelist=None, **kwargs):
         vals = {
             "applied_on": "3_global",
             "compute_price": "percentage",
@@ -39,8 +40,10 @@ class TestPrices(SavepointCase, JobMixin):
             vals["pricelist_id"] = pricelist.id
         return dict(vals, **kwargs)
 
-    def _get_pricelist_vals(self, name, item_val_list):
-        return {
+    @classmethod
+    def _get_pricelist_vals(cls, name, item_val_list, **kwargs):
+        vals = {
             "name": name,
             "item_ids": [(0, 0, item) for item in item_val_list],
         }
+        return dict(vals, **kwargs)
