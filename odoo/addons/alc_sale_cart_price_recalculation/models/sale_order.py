@@ -32,6 +32,10 @@ class SaleOrder(models.Model):
         """ Recompute prices on cart.
         """
         self.write({"date_order": fields.Datetime.now()})
+        return self._recalculate_cart_price_to_date_order()
+
+    @job(default_channel="root.background.process")
+    def _recalculate_cart_price_to_date_order(self):
         for cart in self:
             cart.recalculate_prices()
         return True
