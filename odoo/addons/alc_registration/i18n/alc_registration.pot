@@ -263,7 +263,7 @@ msgid "Shareholder"
 msgstr ""
 
 #. module: alc_registration
-#: code:addons/alc_registration/models/alc_registration.py:195
+#: code:addons/alc_registration/models/alc_registration.py:196
 #: model:ir.model.fields,field_description:alc_registration.field_alc_registration_similar_partner_ids
 #, python-format
 msgid "Similar Partners"
