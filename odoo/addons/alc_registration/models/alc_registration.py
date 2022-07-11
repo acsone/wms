@@ -4,6 +4,7 @@
 
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
+from odoo.osv.expression import OR
 
 from odoo.addons.base.res.res_partner import FormatAddress
 
@@ -177,16 +178,17 @@ class AlcRegistration(FormatAddress, models.Model):
             window_action["domain"] = [("id", "in", to_reset.ids)]
         return window_action
 
+    @api.model
     def _get_similarity_fields(self):
         return ["email", "vat", "mobile", "phone", "fax", "company_name", "name"]
 
     def _get_similarity_domain(self):
         self.ensure_one()
-        domain = []
+        domains = []
         for field in self._get_similarity_fields():
             if self[field]:
-                domain.append((field, "ilike", self[field]))
-        return domain
+                domains.append([(field, "ilike", self[field])])
+        return OR(domains)
 
     def action_show_similar(self):
         self.ensure_one()
@@ -203,6 +205,7 @@ class AlcRegistration(FormatAddress, models.Model):
             "views": [(tree_view.id, "tree")],
         }
 
+    @api.depends(lambda s: s._get_similarity_fields())
     def _compute_similar_partner_ids(self):
         for partner in self:
             partner_domain = partner._get_similarity_domain()
