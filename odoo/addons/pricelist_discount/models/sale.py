@@ -61,6 +61,12 @@ class SaleOrder(models.Model):
 class SaleOrderLine(models.Model):
     _inherit = "sale.order.line"
 
+    discount_item_id = fields.Many2one(
+        comodel_name="product.pricelist.item",
+        compute="_compute_discount_item_id",
+        readonly=True,
+    )
+
     @api.multi
     def compute_supplier_promotion(self):
         for line in self:
@@ -80,25 +86,35 @@ class SaleOrderLine(models.Model):
                     discount2 = seller.discount_sale
             line.discount2 = discount2
 
-    @api.multi
+    @api.depends("order_id.discount_pricelist_id")
+    def _compute_discount_item_id(self):
+        for line in self:
+            discount_item, price_rule = False, False
+            pricelist = line.order_id.discount_pricelist_id
+            if pricelist:
+                price_rule = pricelist.get_product_price_rule(
+                    line.product_id, line.product_uom_qty, line.order_partner_id
+                )
+                # pylint: disable=sql-injection
+                self.env.cr.execute(query, query_args)
+                res = self.env.cr.fetchall()
+                if res:
+                    price_unit = line.price_unit
+                    item = min(res, key=lambda r, p=price_unit: get_price(r, p))
+                    discount_item = item[0]  # id of the item
+            line.discount_item_id = discount_item
+
     def compute_alcyon_discount(self):
         for line in self:
             discount3 = False
-
-            if line.product_id and line.order_id.discount_pricelist_id:
-                pricelist = line.order_id.discount_pricelist_id
-                price_rule = pricelist.get_product_price_rule(
-                    line.product_id, line.product_uom_qty, line.order_id.partner_id
-                )
-
-                if price_rule and len(price_rule) == 2 and price_rule[1]:
-                    rule = self.env["product.pricelist.item"].browse(price_rule[1])
-
-                    if rule.compute_price == "percentage":
-                        discount3 = rule.percent_price
-                    elif line.price_unit:
-                        price_unit = line.price_unit
-                        discount3 = (price_unit - price_rule[0]) / price_unit * 100
+            if line.product_id and line.discount_item_id:
+                rule = line.discount_item_id
+                if rule.compute_price == "percentage":
+                    discount3 = rule.percent_price
+                elif line.price_unit:
+                    price_unit = line.price_unit
+                    item_price = rule._compute_price(price_unit)
+                    discount3 = (price_unit - item_price) / price_unit * 100
 
             line.discount3 = discount3
 
