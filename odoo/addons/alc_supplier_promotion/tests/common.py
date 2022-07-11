@@ -25,11 +25,13 @@ class TestSupplierInfo(SavepointCase):
 
         cls.supplierinfo_model = cls.env["product.supplierinfo"]
 
-    def get_supplierinfo_vals(self, **kwargs):
+    @classmethod
+    def get_supplierinfo_vals(cls, product=None, **kwargs):
+        product = product or cls.product
         defaults = {
-            "name": self.vendor.id,
+            "name": cls.vendor.id,
             "price": 10,
-            "product_id": self.product.id,
-            "product_tmpl_id": self.product_template.id,
+            "product_id": product.id,
+            "product_tmpl_id": product.product_tmpl_id.id,
         }
         return dict(defaults, **kwargs)
