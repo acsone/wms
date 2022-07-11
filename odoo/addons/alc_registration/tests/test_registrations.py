@@ -36,3 +36,18 @@ class TestRegistrationFlow(TestRegistration):
 
         registration.action_reset_to_pending()
         self.assertEqual(registration.state, "pending")
+
+    def test_similar_partner(self):
+        vals = self._get_registration_vals()
+        registration = self.model.create(vals)
+        partner_name = self.env["res.partner"].create({"name": vals["name"]})
+
+        # the newly created partner does not trigger the recompute
+        registration._compute_similar_partner_ids()
+        # do not assert equality: other test data partners may be similar
+        self.assertTrue(partner_name in registration.similar_partner_ids)
+
+        partner_vat = self.env["res.partner"].create({"name": "V", "vat": vals["vat"]})
+        registration._compute_similar_partner_ids()
+        self.assertTrue(partner_name in registration.similar_partner_ids)
+        self.assertTrue(partner_vat in registration.similar_partner_ids)
