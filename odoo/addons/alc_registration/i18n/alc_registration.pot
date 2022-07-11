@@ -172,13 +172,13 @@ msgid "Name"
 msgstr ""
 
 #. module: alc_registration
-#: code:addons/alc_registration/models/alc_registration.py:166
+#: code:addons/alc_registration/models/alc_registration.py:167
 #, python-format
 msgid "No Registration to reset."
 msgstr ""
 
 #. module: alc_registration
-#: code:addons/alc_registration/models/alc_registration.py:142
+#: code:addons/alc_registration/models/alc_registration.py:143
 #, python-format
 msgid "No new partners."
 msgstr ""
@@ -225,7 +225,7 @@ msgid "Registration Manager"
 msgstr ""
 
 #. module: alc_registration
-#: code:addons/alc_registration/models/alc_registration.py:157
+#: code:addons/alc_registration/models/alc_registration.py:158
 #, python-format
 msgid "Registration has already been accepted."
 msgstr ""
@@ -263,8 +263,9 @@ msgid "Shareholder"
 msgstr ""
 
 #. module: alc_registration
-#: code:addons/alc_registration/models/alc_registration.py:196
+#: code:addons/alc_registration/models/alc_registration.py:198
 #: model:ir.model.fields,field_description:alc_registration.field_alc_registration_similar_partner_ids
+#: model:ir.ui.view,arch_db:alc_registration.alc_registration_form_view
 #, python-format
 msgid "Similar Partners"
 msgstr ""
