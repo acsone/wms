@@ -62,3 +62,26 @@ class TestPricingFlow(TestPricing):
         # then: supplier discount, no alcyon discount
         self.assertEqual(line_3.discount2, 20)
         self.assertEqual(line_3.discount3, 0)
+
+    @freeze_time("2022-01-01 12:00:00")
+    @mute_logger("odoo.addons.queue_job.models.base")
+    def test_multiple_discount_pricelists(self):
+        vals = {"discount_pricelist_ids": [(4, self.dpl_1.id), (4, self.dpl_2.id)]}
+        self.customer_1.write(vals)
+        so = self.env["sale.order"].create({"partner_id": self.customer_1.id})
+
+        # when
+        line_1 = self._new_sale_line(so, self.product_1)
+
+        # then: we got the best discount, an exclusive one from dpl_1
+        self.assertEqual(line_1.discount2, 0)
+        self.assertEqual(line_1.discount3, 50)
+        self.assertEqual(line_1.discount_item_id, self.item_1_1)
+
+        # when
+        line_2 = self._new_sale_line(so, self.product_2)
+
+        # then: we got the best discount, a non-exclusive one from dpl_2
+        self.assertEqual(line_2.discount2, 20)
+        self.assertEqual(line_2.discount3, 50)
+        self.assertEqual(line_2.discount_item_id, self.item_2_2)

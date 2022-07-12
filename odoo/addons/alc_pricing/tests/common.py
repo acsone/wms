@@ -1,14 +1,19 @@
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+from odoo.tools import mute_logger
+
 from odoo.addons.alc_price_cache.tests.common import TestPrices
 from odoo.addons.alc_supplier_promotion.tests.common import TestSupplierInfo
 
 
 class TestPricing(TestSupplierInfo, TestPrices):
     @classmethod
+    @mute_logger("odoo.addons.queue_job.models.base")
     def setUpClass(cls):
         super(TestPricing, cls).setUpClass()
+        ctx = dict(cls.env.context, tracking_disable=True, test_queue_job_no_delay=True)
+        cls.env = cls.env(context=ctx)
 
         # base pricelist with nothing, to make sure we get standard price
         vals_pricelist_base = cls._get_pricelist_vals("PLbase", [], is_discount=False)
@@ -55,7 +60,7 @@ class TestPricing(TestSupplierInfo, TestPrices):
 
         vals_customer_1 = {
             "name": "C1",
-            "discount_pricelist_id": cls.discount_pricelist_1.id,
+            "discount_pricelist_ids": [(6, 0, cls.discount_pricelist_1.ids)],
             "supplier_promotion_sale_allowed": True,
         }
         cls.customer_1 = cls.env["res.partner"].create(vals_customer_1)
@@ -65,7 +70,7 @@ class TestPricing(TestSupplierInfo, TestPrices):
 
         vals_customer_2 = {
             "name": "C2",
-            "discount_pricelist_id": cls.discount_pricelist_2.id,
+            "discount_pricelist_ids": [(6, 0, cls.discount_pricelist_2.ids)],
             "supplier_promotion_sale_allowed": True,
         }
         cls.customer_2 = cls.env["res.partner"].create(vals_customer_2)
@@ -74,6 +79,44 @@ class TestPricing(TestSupplierInfo, TestPrices):
         cls.so_2 = cls.env["sale.order"].create({"partner_id": cls.customer_2.id})
 
         cls.model_line = cls.env["sale.order.line"]
+
+        vals_dpl1 = cls._get_pricelist_vals("DPL1", [], is_discount=True)
+        cls.dpl_1 = cls.model_pl_nodelay.create(vals_dpl1)
+        vals_item_1_1 = cls._get_item_vals(
+            pricelist=cls.dpl_1,
+            applied_on="0_product_variant",
+            product_id=cls.product_1.id,
+            percent_price=50,
+            exclusive=True,
+        )
+        cls.item_1_1 = cls.model_pl_item_nodelay.create(vals_item_1_1)
+        vals_item_1_2 = cls._get_item_vals(
+            pricelist=cls.dpl_1,
+            applied_on="0_product_variant",
+            product_id=cls.product_2.id,
+            percent_price=30,
+            exclusive=True,
+        )
+        cls.item_1_2 = cls.model_pl_item_nodelay.create(vals_item_1_2)
+
+        vals_dpl2 = cls._get_pricelist_vals("DPL2", [], is_discount=True)
+        cls.dpl_2 = cls.model_pl_nodelay.create(vals_dpl2)
+        vals_item_2_1 = cls._get_item_vals(
+            pricelist=cls.dpl_2,
+            applied_on="0_product_variant",
+            product_id=cls.product_1.id,
+            percent_price=40,
+            exclusive=False,
+        )
+        cls.item_2_1 = cls.model_pl_item_nodelay.create(vals_item_2_1)
+        vals_item_2_2 = cls._get_item_vals(
+            pricelist=cls.dpl_2,
+            applied_on="0_product_variant",
+            product_id=cls.product_2.id,
+            percent_price=50,
+            exclusive=False,
+        )
+        cls.item_2_2 = cls.model_pl_item_nodelay.create(vals_item_2_2)
 
     @classmethod
     def _new_sale_line(cls, so, product, qty=1, **kwargs):
