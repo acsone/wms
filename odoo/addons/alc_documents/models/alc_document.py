@@ -7,6 +7,7 @@ from psycopg2.extensions import AsIs
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 
+from odoo.addons.alc_pg_trgm.utils import install_trgm_extension
 from odoo.addons.queue_job.job import job
 
 
@@ -73,15 +74,17 @@ class AlcDocument(models.Model):
 
     @api.model_cr
     def init(self):
-        index_name = "alc_document_allowed_partner_types_index"
-        self.env.cr.execute(
-            "SELECT indexname FROM pg_indexes WHERE indexname = %s", (index_name,)
-        )
-        if not self.env.cr.fetchone():
+        trgm_installed = install_trgm_extension(self.env)
+        if trgm_installed:
+            index_name = "alc_document_allowed_partner_types_index"
             self.env.cr.execute(
-                "CREATE INDEX %s ON %s USING GIN (allowed_partner_types gin_trgm_ops)",
-                (AsIs(index_name), AsIs(self._table)),
+                "SELECT indexname FROM pg_indexes WHERE indexname = %s", (index_name,)
             )
+            if not self.env.cr.fetchone():
+                self.env.cr.execute(
+                    "CREATE INDEX %s ON %s USING GIN (allowed_partner_types gin_trgm_ops)",
+                    (AsIs(index_name), AsIs(self._table)),
+                )
 
     def _get_data(self):
         self.ensure_one()

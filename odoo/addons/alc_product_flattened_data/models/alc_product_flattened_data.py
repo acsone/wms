@@ -1,15 +1,20 @@
 # -*- coding: utf-8 -*-
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+import ujson
+from psycopg2.extensions import AsIs
 
 from odoo import api, fields, models
+from odoo.osv.expression import expression
+from odoo.osv.query import Query
 
 import odoo.addons.decimal_precision as dp
+from odoo.addons.alc_pg_trgm.utils import install_trgm_extension
 
 
-class AlcDocumentPricesData(models.Model):
+class AlcProductFlattenedData(models.Model):
 
-    _name = "alc.document.prices.data"
+    _name = "alc.product.flattened.data"
     _inherit = "materialized.view.mixin"
     _description = "Product informations for document prices"
     _auto = False
@@ -193,7 +198,7 @@ CREATE UNIQUE INDEX pk_%(table)s ON %(table)s (id);
 
     @api.model
     def get_init_query_args(self):
-        args = super(AlcDocumentPricesData, self).get_init_query_args()
+        args = super(AlcProductFlattenedData, self).get_init_query_args()
         args["tax_group_one_tax_id"] = self.env.ref(
             "account_tax_one_vat.vat_tax_group"
         ).id
@@ -201,3 +206,63 @@ CREATE UNIQUE INDEX pk_%(table)s ON %(table)s (id);
             "alc_product_shop_category.master"
         ).id
         return args
+
+    @api.model_cr
+    def init(self):
+        res = super(AlcProductFlattenedData, self).init()
+        trgm_installed = install_trgm_extension(self.env)
+        if trgm_installed:
+            index_name = "alc_product_flatted_data_partner_types_index"
+            self.env.cr.execute(
+                "SELECT indexname FROM pg_indexes WHERE indexname = %s", (index_name,)
+            )
+            if not self.env.cr.fetchone():
+                self.env.cr.execute(
+                    "CREATE INDEX %s ON %s USING GIN (allowed_partner_types gin_trgm_ops)",
+                    (AsIs(index_name), AsIs(self._table)),
+                )
+        return res
+
+    @api.model
+    def _get_iterator(self, domain):
+        """Generator method to get one by one line as a simple object where
+        each column is accessed with a doc notation"""
+        e = expression(domain, self)
+        tables = e.get_tables()
+        where_clause, where_params = e.to_sql()
+        where_clause = [where_clause] if where_clause else []
+        query = Query(tables, where_clause, where_params)
+        query_from, query_where, query_params = query.get_sql()
+        # pylint: disable=sql-injection
+        sql_query = "SELECT * from {query_from} WHERE {query_where}".format(
+            query_from=query_from, query_where=query_where
+        )
+        self.env.cr.execute(sql_query, query_params)
+        for row in self.env.cr._obj:
+            container = _Container(
+                **{d.name: row[i] for i, d in enumerate(self.env.cr.description)}
+            )
+            # here we use ujson to improve to increase perf X 5
+            container.price_cache = (
+                ujson.loads(container.price_cache) if container.price_cache else {}
+            )
+            yield container
+
+    @api.model
+    def _get_partner_products_iterator(self, partner):
+        domain_product = partner._get_product_domain()
+        return self._get_iterator(domain_product)
+
+
+class _Container(object):
+    """
+        A generic container for when you want to access to value into a dict
+        with a dot notation
+        ex:
+        >>> c = _Container(**{"a": "b"})
+        >>> c.a
+        "b"
+    """
+
+    def __init__(self, **kwargs):
+        self.__dict__.update(kwargs)
