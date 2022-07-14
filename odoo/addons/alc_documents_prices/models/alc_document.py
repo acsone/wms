@@ -152,26 +152,15 @@ class AlcDocument(models.Model):
         started = discount_records.filtered(lambda d: not d.is_past and not d.is_future)
         return started.ordered("date_start")[0] if len(started) > 1 else started
 
-    def _resolve_price_cache_get(self, prices_data, key, date_ref=None):
-        return self.env["product.product"]._resolve_price_cache_get(
-            prices_data.price_cache, key, date_ref
-        )
-
     def _process_prices_data_lines_pricelist(self, prices_data_lines_iterator, lines):
         # the langs are only used for the names, so we could possible optimize
         # by putting values in a dict from a read before, and not rely on ORM
         parser = self._get_lang_price_parser()
-        price_key = self.partner_id.property_product_pricelist.role_name
         for prices_data in prices_data_lines_iterator:
-            price = self._resolve_price_cache_get(prices_data, price_key).get(
-                "price", 0
-            )
-            vat = prices_data.tax_amount or 21
-            price_with_vat = round(price + price * vat / 100, 2)
             prices = {
-                "TVA": "%s%%" % vat,
-                "Prix_Brut_HTVA_EUR": price,
-                "Prix_Brut_TVAC_EUR": price_with_vat,
+                "TVA": "%s%%" % prices_data.vat,
+                "Prix_Brut_HTVA_EUR": prices_data.gross_price,
+                "Prix_Brut_TVAC_EUR": prices_data.gross_price_with_vat,
             }
             line = []
             for field_parser in parser:

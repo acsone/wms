@@ -5,7 +5,7 @@ import ujson
 from psycopg2.extensions import AsIs
 
 from odoo import api, fields, models
-from odoo.osv.expression import expression
+from odoo.osv import expression
 from odoo.osv.query import Query
 
 import odoo.addons.decimal_precision as dp
@@ -224,10 +224,10 @@ CREATE UNIQUE INDEX pk_%(table)s ON %(table)s (id);
         return res
 
     @api.model
-    def _get_iterator(self, domain):
+    def _get_iterator(self, domain, partner=None):
         """Generator method to get one by one line as a simple object where
         each column is accessed with a doc notation"""
-        e = expression(domain, self)
+        e = expression.expression(domain, self)
         tables = e.get_tables()
         where_clause, where_params = e.to_sql()
         where_clause = [where_clause] if where_clause else []
@@ -239,19 +239,21 @@ CREATE UNIQUE INDEX pk_%(table)s ON %(table)s (id);
         )
         self.env.cr.execute(sql_query, query_params)
         for row in self.env.cr._obj:
-            container = _Container(
+            container = _ProductDataContainer(
+                self.env,
+                partner,
                 **{d.name: row[i] for i, d in enumerate(self.env.cr.description)}
-            )
-            # here we use ujson to improve to increase perf X 5
-            container.price_cache = (
-                ujson.loads(container.price_cache) if container.price_cache else {}
             )
             yield container
 
     @api.model
-    def _get_partner_products_iterator(self, partner):
+    def _get_partner_products_iterator(self, partner, product_ids=None):
         domain_product = partner._get_product_domain()
-        return self._get_iterator(domain_product)
+        if product_ids:
+            domain_product = expression.AND(
+                [domain_product, [("id", "in", product_ids)]]
+            )
+        return self._get_iterator(domain_product, partner)
 
 
 class _Container(object):
@@ -266,3 +268,34 @@ class _Container(object):
 
     def __init__(self, **kwargs):
         self.__dict__.update(kwargs)
+
+
+class _ProductDataContainer(_Container):
+    def __init__(self, env, partner, **kwargs):
+        self._env = env
+        self._partner = partner
+        super(_ProductDataContainer, self).__init__(**kwargs)
+        # here we use ujson to improve to increase perf X 5
+        self.price_cache = ujson.loads(self.price_cache) if self.price_cache else {}
+        # init and compute prices
+        self.gross_price = 0
+        self.gross_price_with_vat = 0
+        self._resolve_prices()
+
+    def _resolve_prices(self):
+        partner = self._partner
+        if not partner:
+            return
+        price_key = partner.property_product_pricelist.role_name
+        self.gross_price = (
+            self._env["product.product"]
+            ._resolve_price_cache_get(self.price_cache, price_key)
+            .get("price", 0)
+        )
+        self.gross_price_with_vat = round(
+            self.gross_price + self.gross_price * self.vat / 100, 2
+        )
+
+    @property
+    def vat(self):
+        return self.tax_amount or 21
