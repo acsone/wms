@@ -29,6 +29,7 @@ class AlcProductFlattenedData(models.Model):
     manufacturer = fields.Char(readonly=True)
     cnk_code = fields.Char(readonly=True)
     code_amm = fields.Char(readonly=True)
+    code_cti = fields.Char(readonly=True)
     indicated_price = fields.Float(
         string="Indicated price",
         digits=dp.get_precision("Product Price"),
@@ -54,6 +55,9 @@ class AlcProductFlattenedData(models.Model):
     web_published = fields.Boolean(readonly=True)
     supplier_name = fields.Char(readonly=True)
     tax_amount = fields.Float(readonly=True, digits=(16, 4))
+    url_key_fr = fields.Char(readonly=True)
+    url_key_en = fields.Char(readonly=True)
+    url_key_nl = fields.Char(readonly=True)
 
     @api.model
     def get_init_query(self):
@@ -130,6 +134,7 @@ SELECT
     manufacturer.name as manufacturer,
     cnk_code,
     code_amm,
+    code_cti,
     indicated_price,
     pp.barcode,
     categ.fullname_en as categ_en,
@@ -145,8 +150,10 @@ SELECT
     discount_special.date_end as discount_special_date_end,
     tax.amount as tax_amount,
     supplier.name as supplier_name,
-    web_published
-
+    web_published,
+    url_key_fr.url_key as url_key_fr,
+    url_key_nl.url_key as url_key_nl,
+    url_key_en.url_key as url_key_en
 FROM
     product_template pt
     join product_product pp on pp.product_tmpl_id = pt.id
@@ -188,7 +195,41 @@ FROM
         ON tax.prod_id = pt.id
     LEFT join res_partner as supplier
         ON supplier.id = pt.supplier_id
-WHERE pt.active and web_published
+    LEFT JOIN LATERAL (
+        SELECT
+            url_key
+        FROM shopinvader_product sp
+        JOIN res_lang
+            ON res_lang.id = sp.lang_id
+        WHERE
+            record_id = pt.id
+            AND res_lang.code = 'fr_BE'
+        limit 1
+    ) as url_key_fr ON TRUE
+    LEFT JOIN LATERAL (
+        SELECT
+            url_key
+        FROM shopinvader_product sp
+        JOIN res_lang
+            ON res_lang.id = sp.lang_id
+        WHERE
+            record_id = pt.id
+            AND res_lang.code = 'nl_BE'
+        limit 1
+    ) as url_key_nl ON TRUE
+    LEFT JOIN LATERAL (
+        SELECT
+            url_key
+        FROM shopinvader_product sp
+        JOIN res_lang
+            ON res_lang.id = sp.lang_id
+        WHERE
+            record_id = pt.id
+            AND res_lang.code = 'en_US'
+        limit 1
+    ) as url_key_en ON TRUE
+
+WHERE pp.active and web_published
 
 );
 

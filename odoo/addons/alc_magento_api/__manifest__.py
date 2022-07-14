@@ -15,6 +15,7 @@
         "alc_eshop_services_deliveries",
         "alc_eshop_services_orders",
         "alc_eshop_sale_cart_info",
+        "alc_product_flattened_data",
         "elasticsearch_product_cache",
     ],
     "demo": [],

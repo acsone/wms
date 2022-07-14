@@ -19,6 +19,7 @@
         "product_discount_specials",
         "product_multi_category",
         "queue_job_cron",
+        "shopinvader",
     ],
     "data": ["data/ir_cron.xml", "security/alc_product_flattened_data.xml"],
     "demo": [],

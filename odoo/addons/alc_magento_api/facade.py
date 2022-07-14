@@ -104,92 +104,67 @@ class FacadeProduct(Facade):
         super(FacadeProduct, self).__init__(env, partner)
         self.today = fields.Date.today()
 
-    def _get_cache_price_key(self, price_cache, key, discount=False):
-        item_list = price_cache[key]
-        if len(item_list) == 1:
-            item = item_list[0]
-        else:
-            filter_dates = lambda x: (
-                not x["date_start"] or x["date_start"] <= self.today
-            ) and (not x["date_end"] or x["date_end"] >= self.today)
-            candidates = filter(filter_dates, item_list)
-            if candidates:
-                item = min(candidates, key=lambda it: it["date_start"] or self.today)
+    def _data_parser(self, include_amm=False):
+        parser = [
+            {"name": "Article_EN", "get": "name_en"},
+            {"name": "Category_EN", "get": "categ_en"},
+            {"name": "Reference", "get": "default_code"},
+            {"name": "Code_national", "get": "cnk_code"},
+            {"name": "TVA", "get": "vat"},
+            {"name": "Prix_Vente_Indicatif", "get": lambda r: r.indicated_price or 0},
+            {"name": "ean_13", "get": "barcode"},
+            {"name": "ext_cti", "get": "code_cti"},
+            {"name": "Prix_Brut_HTVA_EUR", "get": "gross_price"},
+            {"name": "Prix_Brut_TVAC_EUR", "get": "gross_price_with_vat"},
+            {"name": "Article_NL", "get": "name_nl"},
+            {"name": "Category_NL", "get": "categ_nl"},
+            {"name": "Mot_Cle", "get": "categ_fr"},
+            {"name": "Article", "get": "name_fr"},
+            {"name": "Fabricant", "get": "manufacturer"},
+        ]
+        if include_amm in ["true", "1", "t", "y", "yes"]:
+            parser.append({"name": "Code_amm", "get": "code_amm"})
+        return parser
+
+    def _json_for_product_flattened_data_iterator(
+        self, lang, product_flattened_data_iterator, include_amm=False
+    ):
+        json_by_id = []
+        parser = self._data_parser(include_amm=include_amm)
+        for data in product_flattened_data_iterator:
+            values = {}
+            json_by_id[data.id] = values
+            for field_parser in parser:
+                get = field_parser["get"]
+                value = (
+                    getattr(data, get) if isinstance(get, str) else get(data)
+                ) or ""
+                values[field_parser["name"]] = value
+            if lang == "fr_BE":
+                url_suffix = data.url_key_fr
+            elif lang == "nl_BE":
+                url_suffix = data.url_key_nl
             else:
-                item = {"discount": 0} if discount else {"price": 0}
-        return item["discount"] if discount else item["price"]
-
-    def _get_cache_price(self, price_cache, price_key, discount_key):
-        price = self._get_cache_price_key(price_cache, price_key)
-        # if discount_key:
-        #     discount = self._get_cache_price_key(price_cache, discount_key, True)
-        #     price = round(price - (price * discount / 100), 2)
-        return price
-
-    def _get_cache_category(self, categories):
-        categories.sort(key=lambda c: c.get("level", 0))
-        return " / ".join([cat["name"] for cat in categories])
-
-    def _json_for_xml_from_cache(self, lang, records_translations):
-        records, translations = records_translations
-        json_by_id = {}
-        urls = {}
-        price_key = self.partner.property_product_pricelist.role_name
-        discount_key = self.partner.discount_pricelist_id.discount_role_name
-        for record in records:
-            record_id = record.pop("objectID")
-            vat = record.get("vat", {"amount": 21})["amount"]  # TODO
-            json_by_id[record_id] = {
-                "Article_EN": record["name"],
-                "Category_EN": self._get_cache_category(record.get("categories", [])),
-                "Reference": record["sku"],
-                "Code_national": record["cnk_code"],
-                "TVA": vat,
-                "Prix_Vente_Indicatif": record["indicated_price"],
-                "ean_13": record["barcode"],
-                "ext_cti": record["code_cti"],
-            }
-            urls[record_id] = {"en_US": record["url_key"]}
-            price = self._get_cache_price(record["price"], price_key, discount_key)
-            price_with_vat = round(price + price * vat / 100, 2)
-            json_by_id[record_id]["Prix_Brut_HTVA_EUR"] = price
-            json_by_id[record_id]["Prix_Brut_TVAC_EUR"] = price_with_vat
-            if self.partner.supplier_promotion_sale_allowed:
-                promotions = []
-                for discount in record.get("supplier_discount", []):
-                    discount = {
-                        "promotion": discount["discount_sale"],
-                        "promotion_valid_until": discount["date_end"],
-                    }
-                    promotions.append(discount)
-                for promotion in record.get("supplier_promotion", []):
-                    # TODO: add ratio_main_product to output?
-                    promotion = {
-                        "promotion": "FREE products",
-                        "promotion_valid_until": promotion["date_end"],
-                    }
-                    promotions.append(promotion)
-                json_by_id[record_id]["promotions"] = promotions
-        for record in translations["nl_BE"]:
-            record_id = record.pop("objectID")
-            record_json = json_by_id[record_id]
-            categories = record.get("categories", [])
-            record_json["Article_NL"] = record["name"]
-            record_json["Categorie_NL"] = self._get_cache_category(categories)
-            urls[record_id]["nl_BE"] = record["url_key"]
-        for record in translations["fr_BE"]:
-            record_id = record.pop("objectID")
-            record_json = json_by_id[record_id]
-            categories = record.get("categories", [])
-            record_json["Mot_Cle"] = self._get_cache_category(categories)
-            record_json["Article"] = record["name"]
-            urls[record_id]["fr_BE"] = record["url_key"]
-            record_json["Fabricant"] = record.get("manufacturer", {}).get("name")
-        for record_id in urls:
-            url_suffix = urls[record_id][lang]
+                url_suffix = data.url_key_en
             lang_slug = LANGS_INVERSE[lang]
             url = "https://www.alcyonbelux.be/{}/{}".format(lang_slug, url_suffix)
-            json_by_id[record_id]["url"] = url
+            values["url"] = url
+
+            if self.partner.supplier_promotion_sale_allowed:
+                promotions = []
+                if data.supplier_discount_discount_sale:
+                    discount = {
+                        "promotion": data.supplier_discount_discount_sale,
+                        "promotion_valid_until": data.supplier_discount_date_end,
+                    }
+                    promotions.append(discount)
+                if data.has_supplier_promotion:
+                    promotion = {
+                        "promotion": "FREE products",
+                        "promotion_valid_until": data.supplier_promotion_date_end,
+                    }
+                    promotions.append(promotion)
+                values["promotions"] = promotions
         return json_by_id
 
 
@@ -201,11 +176,16 @@ class FacadeCatalog(FacadeProduct):
         return kwargs
 
     def apply(self, **kwargs):
-        return self.partner._get_shop_products()
+        return self.env["alc.product.flattened.data"]._get_partner_products_iterator(
+            self.partner
+        )
 
     def process_result(self, result, **kwargs):
         lang = kwargs.pop("lang")
-        json_by_id = self._json_for_xml_from_cache(lang, result)
+        include_amm = kwargs.pop("include_amm", "0") in ["true", "1", "t", "y", "yes"]
+        json_by_id = self._json_for_product_flattened_data_iterator(
+            lang, result, include_amm=include_amm
+        )
         return self._json_to_xml(json_by_id.values(), custom_root="catalog")
 
 
@@ -220,8 +200,12 @@ class FacadePriceList(FacadeProduct):
         if not ids:
             self.errors = "<error>No bought product has been found</error>"
             return None
-        records_data = self.partner._get_shop_products(ids=ids)
-        json_by_id = self._json_for_xml_from_cache("en_US", records_data)
+        records_data_iterator = self.env[
+            "alc.product.flattened.data"
+        ]._get_partner_products_iterator(self.partner, product_ids=ids)
+        json_by_id = self._json_for_product_flattened_data_iterator(
+            "en_US", records_data_iterator
+        )
         data = (json_by_id[rid] for rid in ids if rid in json_by_id)
         return self._json_to_xml(data, custom_root="price_list")
 
