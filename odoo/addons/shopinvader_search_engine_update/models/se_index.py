@@ -38,9 +38,9 @@ class SeIndex(models.Model):
             bindings = self.env[target_model.model].search(domain)
             for batch in bindings.batch(batch_size):
                 description = _("Recompute json for %s record(s).") % len(batch)
-                batch.with_delay(description=description)._jobify_recompute_json(
-                    force_export=force_export
-                )
+                batch.with_delay(
+                    description=description, priority=60
+                )._jobify_recompute_json(force_export=force_export)
                 if continuous:
                     batch.write({"to_update": "scheduled"})
 
