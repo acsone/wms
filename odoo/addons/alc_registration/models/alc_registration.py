@@ -127,13 +127,20 @@ class AlcRegistration(FormatAddress, models.Model):
             "comment",
         ]
 
-    def create_partners(self):
+    def _get_partner_vals(self):
+        self.ensure_one()
         fields_to_sync = self._creation_fields()
+        g = lambda v, f: v.id if self._fields[f].relational else v
+        vals = {f: g(self[f], f) for f in fields_to_sync}
+        if vals.get("company_name"):
+            vals["suite"] = vals["name"]
+            vals["name"] = vals.pop("company_name")
+        return vals
+
+    def create_partners(self):
         partners = self.env["res.partner"]
         for contact in self.filtered(lambda c: not c.partner_id):
-            g = lambda v, f: v.id if self._fields[f].relational else v
-            vals = {f: g(contact[f], f) for f in fields_to_sync}
-            contact.partner_id = partners.create(vals)
+            contact.partner_id = partners.create(contact._get_partner_vals())
             partners |= contact.partner_id
         return partners
 

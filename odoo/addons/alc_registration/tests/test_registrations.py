@@ -9,6 +9,7 @@ from .common import TestRegistration
 class TestRegistrationFlow(TestRegistration):
     def test_creation_flow(self):
         vals = self._get_registration_vals()
+        vals.pop("company_name")
 
         registration = self.model.create(vals)
 
@@ -26,6 +27,16 @@ class TestRegistrationFlow(TestRegistration):
 
         self.assertFalse(no_partner)
         self.assertEqual(registration.state, "accepted")
+
+    def test_creation_with_company_name(self):
+        # given
+        vals = self._get_registration_vals()
+        registration = self.model.create(vals)
+        # when
+        partner = registration.create_partners()
+        # then: we moved around the name/company_name
+        self.assertEqual(registration.company_name, partner.name)
+        self.assertEqual(registration.name, partner.suite)
 
     def test_archive(self):
         vals = self._get_registration_vals()
