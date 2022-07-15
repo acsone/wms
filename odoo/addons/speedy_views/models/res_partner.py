@@ -4,7 +4,9 @@
 
 from odoo import api, models
 
-from .utils import create_index, install_trgm_extension
+from odoo.addons.alc_pg_trgm.utils import install_trgm_extension
+
+from .utils import create_index
 
 
 class ResPartner(models.Model):

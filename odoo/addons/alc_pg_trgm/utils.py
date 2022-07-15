@@ -1,0 +1,53 @@
+# -*- coding: utf-8 -*-
+# Copyright 2017 Camptocamp SA
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
+
+import logging
+
+_logger = logging.getLogger(__name__)
+
+
+def is_postgres_superuser(env):
+    env.cr.execute("SHOW is_superuser;")
+    superuser = env.cr.fetchone()
+    return superuser[0] == "on" if superuser is not None else False
+
+
+def trgm_extension_exists(env):
+    env.cr.execute(
+        """
+        SELECT name, installed_version
+        FROM pg_available_extensions
+        WHERE name = 'pg_trgm'
+        LIMIT 1;
+    """
+    )
+
+    extension = env.cr.fetchone()
+    if extension is None:
+        return "missing"
+
+    if extension[1] is None:
+        return "uninstalled"
+
+    return "installed"
+
+
+def install_trgm_extension(env):
+    extension = trgm_extension_exists(env)
+    if extension == "missing":
+        _logger.warning(
+            "To use pg_trgm you have to install the " "postgres-contrib module."
+        )
+    elif extension == "uninstalled":
+        if is_postgres_superuser(env):
+            env.cr.execute("CREATE EXTENSION IF NOT EXISTS pg_trgm;")
+            return True
+        _logger.warning(
+            "To use pg_trgm you have to create the "
+            "extension pg_trgm in your database or you "
+            "have to be the superuser."
+        )
+    else:
+        return True
+    return False

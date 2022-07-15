@@ -13,4 +13,4 @@ class TestAlcDocumentsPrices(TestAlcDocuments):
     def setUpClass(cls):
         super(TestAlcDocumentsPrices, cls).setUpClass()
         cls.env["product.product"].search([]).write({"web_published": True})
-        cls.env["alc.document.prices.data"].refresh_view()
+        cls.env["alc.product.flattened.data"].refresh_view()

@@ -9,7 +9,7 @@
     "license": "AGPL-3",
     "description": "Alcyon: Improves views preformances",
     "category": "Misc",
-    "depends": ["account", "sale_stock", "purchase", "sale_exception"],
+    "depends": ["account", "alc_pg_trgm", "sale_stock", "purchase", "sale_exception"],
     "website": "https://www.camptocamp.com",
     "data": [],
     "installable": True,

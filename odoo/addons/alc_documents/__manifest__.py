@@ -9,7 +9,7 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["queue_job", "specific_report"],
+    "depends": ["alc_pg_trgm", "queue_job", "specific_report"],
     "data": [
         "security/groups.xml",
         "security/ir.model.access.csv",

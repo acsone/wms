@@ -1,15 +1,20 @@
 # -*- coding: utf-8 -*-
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+import ujson
+from psycopg2.extensions import AsIs
 
 from odoo import api, fields, models
+from odoo.osv import expression
+from odoo.osv.query import Query
 
 import odoo.addons.decimal_precision as dp
+from odoo.addons.alc_pg_trgm.utils import install_trgm_extension
 
 
-class AlcDocumentPricesData(models.Model):
+class AlcProductFlattenedData(models.Model):
 
-    _name = "alc.document.prices.data"
+    _name = "alc.product.flattened.data"
     _inherit = "materialized.view.mixin"
     _description = "Product informations for document prices"
     _auto = False
@@ -24,6 +29,7 @@ class AlcDocumentPricesData(models.Model):
     manufacturer = fields.Char(readonly=True)
     cnk_code = fields.Char(readonly=True)
     code_amm = fields.Char(readonly=True)
+    code_cti = fields.Char(readonly=True)
     indicated_price = fields.Float(
         string="Indicated price",
         digits=dp.get_precision("Product Price"),
@@ -49,6 +55,9 @@ class AlcDocumentPricesData(models.Model):
     web_published = fields.Boolean(readonly=True)
     supplier_name = fields.Char(readonly=True)
     tax_amount = fields.Float(readonly=True, digits=(16, 4))
+    url_key_fr = fields.Char(readonly=True)
+    url_key_en = fields.Char(readonly=True)
+    url_key_nl = fields.Char(readonly=True)
 
     @api.model
     def get_init_query(self):
@@ -125,6 +134,7 @@ SELECT
     manufacturer.name as manufacturer,
     cnk_code,
     code_amm,
+    code_cti,
     indicated_price,
     pp.barcode,
     categ.fullname_en as categ_en,
@@ -140,8 +150,10 @@ SELECT
     discount_special.date_end as discount_special_date_end,
     tax.amount as tax_amount,
     supplier.name as supplier_name,
-    web_published
-
+    web_published,
+    url_key_fr.url_key as url_key_fr,
+    url_key_nl.url_key as url_key_nl,
+    url_key_en.url_key as url_key_en
 FROM
     product_template pt
     join product_product pp on pp.product_tmpl_id = pt.id
@@ -183,7 +195,41 @@ FROM
         ON tax.prod_id = pt.id
     LEFT join res_partner as supplier
         ON supplier.id = pt.supplier_id
-WHERE pt.active and web_published
+    LEFT JOIN LATERAL (
+        SELECT
+            url_key
+        FROM shopinvader_product sp
+        JOIN res_lang
+            ON res_lang.id = sp.lang_id
+        WHERE
+            record_id = pt.id
+            AND res_lang.code = 'fr_BE'
+        limit 1
+    ) as url_key_fr ON TRUE
+    LEFT JOIN LATERAL (
+        SELECT
+            url_key
+        FROM shopinvader_product sp
+        JOIN res_lang
+            ON res_lang.id = sp.lang_id
+        WHERE
+            record_id = pt.id
+            AND res_lang.code = 'nl_BE'
+        limit 1
+    ) as url_key_nl ON TRUE
+    LEFT JOIN LATERAL (
+        SELECT
+            url_key
+        FROM shopinvader_product sp
+        JOIN res_lang
+            ON res_lang.id = sp.lang_id
+        WHERE
+            record_id = pt.id
+            AND res_lang.code = 'en_US'
+        limit 1
+    ) as url_key_en ON TRUE
+
+WHERE pp.active and web_published
 
 );
 
@@ -193,7 +239,7 @@ CREATE UNIQUE INDEX pk_%(table)s ON %(table)s (id);
 
     @api.model
     def get_init_query_args(self):
-        args = super(AlcDocumentPricesData, self).get_init_query_args()
+        args = super(AlcProductFlattenedData, self).get_init_query_args()
         args["tax_group_one_tax_id"] = self.env.ref(
             "account_tax_one_vat.vat_tax_group"
         ).id
@@ -201,3 +247,96 @@ CREATE UNIQUE INDEX pk_%(table)s ON %(table)s (id);
             "alc_product_shop_category.master"
         ).id
         return args
+
+    @api.model_cr
+    def init(self):
+        res = super(AlcProductFlattenedData, self).init()
+        trgm_installed = install_trgm_extension(self.env)
+        if trgm_installed:
+            index_name = "alc_product_flatted_data_partner_types_index"
+            self.env.cr.execute(
+                "SELECT indexname FROM pg_indexes WHERE indexname = %s", (index_name,)
+            )
+            if not self.env.cr.fetchone():
+                self.env.cr.execute(
+                    "CREATE INDEX %s ON %s USING GIN (allowed_partner_types gin_trgm_ops)",
+                    (AsIs(index_name), AsIs(self._table)),
+                )
+        return res
+
+    @api.model
+    def _get_iterator(self, domain, partner=None):
+        """Generator method to get one by one line as a simple object where
+        each column is accessed with a doc notation"""
+        e = expression.expression(domain, self)
+        tables = e.get_tables()
+        where_clause, where_params = e.to_sql()
+        where_clause = [where_clause] if where_clause else []
+        query = Query(tables, where_clause, where_params)
+        query_from, query_where, query_params = query.get_sql()
+        # pylint: disable=sql-injection
+        sql_query = "SELECT * from {query_from} WHERE {query_where}".format(
+            query_from=query_from, query_where=query_where
+        )
+        self.env.cr.execute(sql_query, query_params)
+        for row in self.env.cr._obj:
+            container = _ProductDataContainer(
+                self.env,
+                partner,
+                **{d.name: row[i] for i, d in enumerate(self.env.cr.description)}
+            )
+            yield container
+
+    @api.model
+    def _get_partner_products_iterator(self, partner, product_ids=None):
+        domain_product = partner._get_product_domain()
+        if product_ids:
+            domain_product = expression.AND(
+                [domain_product, [("id", "in", product_ids)]]
+            )
+        return self._get_iterator(domain_product, partner)
+
+
+class _Container(object):
+    """
+        A generic container for when you want to access to value into a dict
+        with a dot notation
+        ex:
+        >>> c = _Container(**{"a": "b"})
+        >>> c.a
+        "b"
+    """
+
+    def __init__(self, **kwargs):
+        self.__dict__.update(kwargs)
+
+
+class _ProductDataContainer(_Container):
+    def __init__(self, env, partner, **kwargs):
+        self._env = env
+        self._partner = partner
+        super(_ProductDataContainer, self).__init__(**kwargs)
+        # here we use ujson to improve to increase perf X 5
+        self.price_cache = ujson.loads(self.price_cache) if self.price_cache else {}
+        # init and compute prices
+        self.gross_price = 0
+        self.gross_price_with_vat = 0
+        self._resolve_prices()
+
+    def _resolve_prices(self):
+        partner = self._partner
+        if not partner:
+            return
+        price_key = partner.property_product_pricelist.role_name
+        self.gross_price = (
+            self._env["product.product"]
+            ._resolve_price_cache_get(self.price_cache, price_key)
+            .get("price", 0)
+        )
+        self.gross_price_with_vat = round(
+            self.gross_price + self.gross_price * self.vat / 100, 2
+        )
+
+    @property
+    def vat(self):
+        return self.tax_amount or 21

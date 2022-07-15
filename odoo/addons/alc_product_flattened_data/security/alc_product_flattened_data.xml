@@ -3,9 +3,9 @@
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
 
-    <record model="ir.model.access" id="alc_document_prices_data_access_read">
-        <field name="name">alc.document.prices.data access read</field>
-        <field name="model_id" ref="model_alc_document_prices_data" />
+    <record model="ir.model.access" id="alc_product_flattened_data_access_read">
+        <field name="name">alc.product.flattened.data access read</field>
+        <field name="model_id" ref="model_alc_product_flattened_data" />
         <field name="group_id" ref="base.group_user" />
         <field name="perm_read" eval="1" />
         <field name="perm_create" eval="0" />

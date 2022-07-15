@@ -2,17 +2,17 @@
 <odoo noupdate="1">
   <record
     forcecreate="True"
-    id="alc_document_prices_datas_refresh_materialized_view"
+    id="alc_product_flattened_datas_refresh_materialized_view"
     model="ir.cron"
   >
-    <field name="name">Refresh Document Prices Data materialized view</field>
+    <field name="name">Refresh Flattened Product Data materialized view</field>
     <field name="active" eval="True" />
     <field name="user_id" ref="base.user_root" />
     <field name="interval_number">1</field>
     <field name="interval_type">days</field>
     <field name="numbercall">-1</field>
     <field name="doall" eval="False" />
-    <field name="model" eval="'alc.document.prices.data'" />
+    <field name="model" eval="'alc.product.flattened.data'" />
     <field name="function" eval="'refresh_view'" />
     <field name="args" eval="'()'" />
     <field
