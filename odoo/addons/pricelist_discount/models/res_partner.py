@@ -12,8 +12,12 @@ class ResPartner(models.Model):
         string="Supplier promotion allowed on sale"
     )
 
-    discount_pricelist_id = fields.Many2one(
-        string="Alcyon Discount Pricelist", comodel_name="product.pricelist"
+    discount_pricelist_ids = fields.Many2many(
+        "product.pricelist",
+        "partner_discount_pricelist_rel",
+        "partner_id",
+        "pricelist_id",
+        string="Alcyon Discount Pricelist",
     )
 
     @api.model
@@ -23,5 +27,5 @@ class ResPartner(models.Model):
         """
         return super(ResPartner, self)._commercial_fields() + [
             "supplier_promotion_sale_allowed",
-            "discount_pricelist_id",
+            "discount_pricelist_ids",
         ]

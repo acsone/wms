@@ -23,13 +23,13 @@ class TestPricelistDiscount(PricelistDiscountCase):
         sale = self.env["sale.order"].create({"partner_id": partner.id})
 
         self.assertFalse(sale.supplier_promotion_allowed)
-        self.assertFalse(sale.discount_pricelist_id)
+        self.assertFalse(sale.discount_pricelist_ids)
 
         sale.partner_id = self.partner
         sale.onchange_partner_id_discount_pricelist()
 
         self.assertTrue(sale.supplier_promotion_allowed)
-        self.assertEqual(self.discount_pricelist_id, sale.discount_pricelist_id)
+        self.assertEqual(self.discount_pricelist_id, sale.discount_pricelist_ids)
 
     @post_install(True)
     @at_install(False)
@@ -320,14 +320,14 @@ class TestPricelistDiscount(PricelistDiscountCase):
         self.sale.write(
             {
                 "supplier_promotion_allowed": False,
-                "discount_pricelist_id": False,
+                "discount_pricelist_ids": [(5, 0, 0)],
                 "partner_id": sub_partner.id,
             }
         )
 
         self.sale.onchange_partner_id_discount_pricelist()
         self.assertTrue(self.sale.supplier_promotion_allowed)
-        self.assertEqual(self.discount_pricelist_id, self.sale.discount_pricelist_id)
+        self.assertEqual(self.discount_pricelist_id, self.sale.discount_pricelist_ids)
 
     def test_check_dates(self):
         """ Test exceptions with promotion dates """

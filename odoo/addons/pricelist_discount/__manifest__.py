@@ -4,13 +4,13 @@
 
 {
     "name": "Pricelist Discount",
-    "version": "10.0.1.0.1",
+    "version": "10.0.2.0.0",
     "author": "Camptocamp",
     "license": "AGPL-3",
     "category": "Sales Management",
     "depends": [
         "account_invoice_triple_discount",
-        "product",
+        "price_compute",  # utilities on top of product
         "product_price_category",
         "sale",
         "sale_stock",
