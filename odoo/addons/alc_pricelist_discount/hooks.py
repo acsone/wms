@@ -42,6 +42,6 @@ def pre_init_hook(cr):
     env["ir.property"].search(domain_bad_properties).unlink()
 
     # remove faulty discount_pricelists
-    domain_bad_partners = [("discount_pricelist_id", "in", base_pl_ids)]
-    vals_partner = {"discount_pricelist_id": False}
+    domain_bad_partners = [("discount_pricelist_ids", "in", base_pl_ids)]
+    vals_partner = {"discount_pricelist_ids": False}
     env["res.partner"].search(domain_bad_partners).write(vals_partner)

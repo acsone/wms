@@ -37,6 +37,6 @@ class ProductPricelist(models.Model):
                 if self.env["ir.property"].search(domain_pricelist, limit=1):
                     raise ValidationError(msg)
             else:
-                domain_partners = [("discount_pricelist_id", "=", pricelist.id)]
+                domain_partners = [("discount_pricelist_ids", "in", pricelist.id)]
                 if self.env["res.partner"].search(domain_partners, limit=1):
                     raise ValidationError(msg)
