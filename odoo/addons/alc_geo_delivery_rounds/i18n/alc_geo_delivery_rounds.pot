@@ -86,6 +86,11 @@ msgid "Display Name"
 msgstr ""
 
 #. module: alc_geo_delivery_rounds
+#: model:ir.ui.view,arch_db:alc_geo_delivery_rounds.round_template_form_view
+msgid "District"
+msgstr ""
+
+#. module: alc_geo_delivery_rounds
 #: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_res_partner_not_in_dynamic_delivery_round
 #: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_res_users_not_in_dynamic_delivery_round
 #: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_shopinvader_partner_not_in_dynamic_delivery_round
@@ -111,11 +116,6 @@ msgstr ""
 #. module: alc_geo_delivery_rounds
 #: model:geoengine.vector.layer,name:alc_geo_delivery_rounds.round_template_geoengine_vector_layer
 msgid "Geographic zones"
-msgstr ""
-
-#. module: alc_geo_delivery_rounds
-#: model:ir.ui.view,arch_db:alc_geo_delivery_rounds.round_template_form_view
-msgid "Geometry"
 msgstr ""
 
 #. module: alc_geo_delivery_rounds
