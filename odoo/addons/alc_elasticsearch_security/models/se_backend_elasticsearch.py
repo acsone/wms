@@ -4,6 +4,8 @@
 
 from odoo import api, fields, models
 
+from odoo.addons.queue_job.job import job
+
 
 class SeBackendElasticsearch(models.Model):
 
@@ -17,6 +19,7 @@ class SeBackendElasticsearch(models.Model):
         for pricelist in pricelists:
             self.create_or_update_pricelist_role(pricelist)
 
+    @job(default_channel="root.background.price")
     def create_or_update_pricelist_role(self, pricelist):
         BODY = """{
             "index_permissions":[
