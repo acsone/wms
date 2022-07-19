@@ -12,5 +12,5 @@ class SaleOrder(models.Model):
     @api.model
     def _parse_b2c_order(self, data, b2c_backend):
         res = super(SaleOrder, self)._parse_b2c_order(data, b2c_backend)
-        res["discount_pricelist_id"] = b2c_backend.discount_pricelist_id.id
+        res["discount_pricelist_ids"] = [(6, 0, b2c_backend.discount_pricelist_id.ids)]
         return res

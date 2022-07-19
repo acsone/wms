@@ -52,7 +52,7 @@ class TestSalesService(CommonCase):
                 "partner_invoice_id": cls.vt_partner.id,
                 "partner_shipping_id": cls.vt_partner.id,
                 "pricelist_id": cls.pricelist_id.id,
-                "discount_pricelist_id": cls.discount_pricelist_id.id,
+                "discount_pricelist_ids": [(6, 0, cls.discount_pricelist_id.ids)],
                 "order_line": [
                     (
                         0,
