@@ -52,7 +52,7 @@ class ExportCustomerTestCase(ESBXMLTestCase):
                 "fax": "021121212",
                 "customer": True,
                 "partner_type": "student_like",
-                "discount_pricelist_id": self.discount_pricelist_2.id,
+                "discount_pricelist_ids": [(6, 0, self.discount_pricelist_2.ids)],
                 "property_product_pricelist": self.env.ref(
                     "specific_data.product_pricelist_pb1"
                 ),
@@ -76,7 +76,7 @@ class ExportCustomerTestCase(ESBXMLTestCase):
                 "pharmacist_id": self.env.ref("base.main_partner").id,
                 "customer": True,
                 "partner_type": "student_like",
-                "discount_pricelist_id": self.discount_pricelist.id,
+                "discount_pricelist_ids": [(6, 0, self.discount_pricelist.ids)],
                 "help_with_fee": True,
             }
         )

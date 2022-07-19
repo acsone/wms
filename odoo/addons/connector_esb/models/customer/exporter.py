@@ -62,8 +62,8 @@ class CustomerExportMapper(Component):
     @mapping
     def compute_alcyongroupid(self, record):
         esb_ref = ""
-        if record.discount_pricelist_id:
-            esb_ref = record.discount_pricelist_id.esb_ref
+        if record.discount_pricelist_ids:
+            esb_ref = record.discount_pricelist_ids[0].esb_ref
         return {"AlcyonGroupId": esb_ref or ""}
 
     @mapping
