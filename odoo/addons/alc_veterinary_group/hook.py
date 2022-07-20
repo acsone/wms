@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 ACSONE SA/NV
+# Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-
 import logging
 
+from openupgradelib import openupgrade
 from psycopg2.extensions import AsIs
 
 _logger = logging.getLogger(__name__)
@@ -16,13 +16,26 @@ def column_exists(cr, tablename, columnname):
     return cr.rowcount
 
 
-def migrate(cr, version):
-    if not version:
-        return
-    if column_exists(cr, "res_partner", "veterinary_group_id"):
+def table_exists(cr, tablename):
+    query = """ SELECT 1 FROM pg_tables WHERE tablename=%s """
+    cr.execute(query, (tablename,))
+    return cr.rowcount
+
+
+def pre_init_hook(cr):
+    openupgrade.update_module_moved_fields(
+        cr,
+        "res.partner",
+        ["veterinary_group_ids"],
+        "alc_partner_veterinary",
+        "alc_veterinary_group",
+    )
+    table_name = "res_partner_veterinary_group_rel"
+    if column_exists(cr, "res_partner", "veterinary_group_id") and not table_exists(
+        cr, table_name
+    ):
         _logger.info("Migrate veterinary groups")
 
-        table_name = "res_partner_veterinary_group_rel"
         column_1 = "res_partner_id"
         column_2 = "veterinary_group_id"
         query_create = """

@@ -1,29 +1,35 @@
 <?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2022 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
     <record id="veterinary_group_search_view" model="ir.ui.view">
-        <field name="name">veterinary.group.search</field>
+        <field name="name">veterinary.group.search (in alc_veterinary_group)</field>
         <field name="model">veterinary.group</field>
         <field name="arch" type="xml">
             <search>
                 <field name="name" />
                 <field name="partner_ids" />
+                <field name="is_alcyonnaire" />
                 <field name="product_template_ids" />
             </search>
         </field>
     </record>
 
     <record id="veterinary_group_tree_view" model="ir.ui.view">
-        <field name="name">veterinary.group.tree</field>
+        <field name="name">veterinary.group.tree (in alc_veterinary_group)</field>
         <field name="model">veterinary.group</field>
         <field name="arch" type="xml">
             <tree>
+                <field name="sequence" widget='handle' />
                 <field name="name" />
+                <field name="is_alcyonnaire" />
+                <field name="color" widget="color" />
             </tree>
         </field>
     </record>
 
     <record id="veterinary_group_form_view" model="ir.ui.view">
-        <field name="name">veterinary.group.form</field>
+        <field name="name">veterinary.group.form (in alc_veterinary_group)</field>
         <field name="model">veterinary.group</field>
         <field name="arch" type="xml">
             <form>
@@ -31,6 +37,9 @@
                 <sheet>
                     <group>
                         <field name="name" />
+                        <field name="is_alcyonnaire" />
+                        <field name="color" widget="color" />
+                        <field name="sequence" />
                         <field name="partner_ids" options="{'no_create': True}" />
                         <field
               name="product_template_ids"
