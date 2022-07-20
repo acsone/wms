@@ -20,6 +20,7 @@
         "alc_product_pharmacy",
         "alc_product_mto",
         "alc_storage_media_lang",
+        "alc_veterinary_group",
     ],
     "data": [
         "data/ir_export_product.xml",

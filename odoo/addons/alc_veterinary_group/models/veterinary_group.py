@@ -9,8 +9,12 @@ class VeterinaryGroup(models.Model):
 
     _name = "veterinary.group"
     _description = "Veterinary Group"
+    _order = "sequence"
 
     name = fields.Char(string="Name")
+    is_alcyonnaire = fields.Boolean()
+    color = fields.Char("Color")
+    sequence = fields.Integer(default=-1, required=True)
     partner_ids = fields.Many2many(
         "res.partner",
         "res_partner_veterinary_group_rel",
