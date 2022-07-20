@@ -31,6 +31,7 @@
         "alc_eshop_sale_triple_discount",
         "alc_eshop_services_orders_suite_channel",
         "alc_eshop_salesperson",
+        "alc_eshop_veterinary_group",
         "alc_registration_eshop_service",
         "alc_keycloak",
         "alc_product_promotion_mailing",
@@ -45,6 +46,7 @@
     "application": True,
     "data": [
         "security/res_groups.xml",
+        "security/acl_veterinary_group.xml",
         "security/alc_shopinvader_backend.xml",
         "security/rule+acl_alc_document.xml",
         "security/rule+acl_alc_product_promotion_subscription.xml",
