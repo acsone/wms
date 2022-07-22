@@ -6,7 +6,6 @@ import logging
 
 from odoo import fields
 from odoo.exceptions import ValidationError
-from odoo.tests.common import at_install, post_install
 
 from .common import PricelistDiscountCase
 
@@ -14,8 +13,6 @@ _logger = logging.getLogger(__name__)
 
 
 class TestPricelistDiscount(PricelistDiscountCase):
-    @post_install(True)
-    @at_install(False)
     def test_onchange_partner(self):
         partner = self.env["res.partner"].create(
             {"name": "Unittest other partner", "ref": "99584783994"}
@@ -31,8 +28,6 @@ class TestPricelistDiscount(PricelistDiscountCase):
         self.assertTrue(sale.supplier_promotion_allowed)
         self.assertEqual(self.discount_pricelist_id, sale.discount_pricelist_ids)
 
-    @post_install(True)
-    @at_install(False)
     def test_sale_discounts(self):
         # discounts are computed if not provided into the line info
 
@@ -51,8 +46,6 @@ class TestPricelistDiscount(PricelistDiscountCase):
 
         self.assertEqual(432, self.sale.amount_total)
 
-    @post_install(True)
-    @at_install(False)
     def test_sale_discounts_tax_excluded(self):
         self.tax.amount = 20
 
@@ -79,8 +72,6 @@ class TestPricelistDiscount(PricelistDiscountCase):
 
         self.assertEqual(518.4, self.sale.amount_total)
 
-    @post_install(True)
-    @at_install(False)
     def test_sale_discounts_tax_included(self):
         self.tax.amount = 20
         self.tax.price_include = True
@@ -108,8 +99,6 @@ class TestPricelistDiscount(PricelistDiscountCase):
 
         self.assertEqual(432, self.sale.amount_total)
 
-    @post_install(True)
-    @at_install(False)
     def test_no_supplier_promotion(self):
         self.sale.supplier_promotion_allowed = False
 
@@ -220,8 +209,6 @@ class TestPricelistDiscount(PricelistDiscountCase):
 
         self.assertEqual(0.44, self.sol_p2.price_subtotal)
 
-    @post_install(True)
-    @at_install(False)
     def test_create_invoice(self):
         self.tax.amount = 20
 
