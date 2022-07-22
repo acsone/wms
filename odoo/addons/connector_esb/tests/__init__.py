@@ -1,6 +1,5 @@
 from . import test_controller_sale
 from . import test_export_buyx_gety
-from . import test_export_customer
 from . import test_export_customer_address
 from . import test_export_document_zip
 from . import test_export_pharmacy
