@@ -64,7 +64,7 @@
         ^BC,40,Y,Y,N,D^FD(01)<t t-esc="'%014d' % int(line.product_id.barcode)"/><t t-if="lot_id">&gt;8(10)<t t-esc="lot_id.name[:20]"/><t t-if="lot_id.life_date">&gt;8(17)<t t-esc="lot_id.life_date[:2] + lot_id.life_date[5:7] + lot_id.life_date[8:10]"/></t></t>^FS\r
         -->
 
-        ^FO20,60^A025,25^FD<t t-esc="line.product_id.name[:29]" />^FS\r
+        ^FO20,60^A025,25^FD<t t-esc="line.product_id.name[:45]" />^FS\r
 
         <!--
         ^FO0,540^A045,45^FD<t t-esc="pick.checksum"/>^FS\r
