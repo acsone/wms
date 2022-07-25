@@ -108,6 +108,7 @@ class ProductProduct(models.Model):
         watched_fields = [
             "active",
             "list_price",
+            "standard_price",
             "categ_id",
             "price_category_id",
             "price_extra",

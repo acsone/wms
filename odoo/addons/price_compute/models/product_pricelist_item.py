@@ -28,12 +28,14 @@ class ProductPricelistItem(models.Model):
         # in a pricelist, we can just not find any matching rule
         # in this case, we just get the base_price
         assert len(self) <= 1
-        base_price = product.price_compute("list_price")[product.id]
+        base_price = self._get_base_price(product)
         return self._compute_price(base_price) if self else base_price
 
     @api.model
     def _get_base_price(self, product):
-        return product.price_compute("list_price")[product.id]
+        # TODO: handle case formula based on other pricelist
+        price_type = "standard_price" if self.base == "standard_price" else "list_price"
+        return product.price_compute(price_type)[product.id]
 
     def _compute_price(self, price):
         """Compute the unit price of a product in the context of a pricelist application.

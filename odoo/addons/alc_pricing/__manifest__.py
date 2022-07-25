@@ -15,6 +15,7 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
+        "alc_price_cache_exclusive",
         "alc_price_triple_discount_exclusive",
         "alc_pricelist_discount",
         "alc_supplier_promotion",
