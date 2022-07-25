@@ -12,7 +12,7 @@
     "website": "https://acsone.eu/",
     "depends": ["alc_pricelist_discount"],
     "application": False,
-    "data": [],
+    "data": ["views/product_pricelist_item.xml"],
     "demo": [],
     "installable": True,
 }
