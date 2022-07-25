@@ -129,7 +129,7 @@ class FacadeProduct(Facade):
     def _json_for_product_flattened_data_iterator(
         self, lang, product_flattened_data_iterator, include_amm=False
     ):
-        json_by_id = []
+        json_by_id = {}
         parser = self._data_parser(include_amm=include_amm)
         for data in product_flattened_data_iterator:
             values = {}
