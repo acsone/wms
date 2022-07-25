@@ -14,6 +14,11 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_stock_picking_batch_creation
+#: model:ir.ui.view,arch_db:alc_stock_picking_batch_creation.res_partner_form_view
+msgid "Cluster picking parameters"
+msgstr ""
+
+#. module: alc_stock_picking_batch_creation
 #: model:ir.model.fields,help:alc_stock_picking_batch_creation.field_stock_picking_total_volume_batch_picking_liter
 #: model:ir.model.fields,help:alc_stock_picking_batch_creation.field_stock_picking_wave_wave_volume_liter
 msgid "Indicates total volume of transfers included."
@@ -30,13 +35,20 @@ msgid "Min volume liter"
 msgstr ""
 
 #. module: alc_stock_picking_batch_creation
-#: model:res.partner.category,name:alc_stock_picking_batch_creation.res_partner_category_deliver_pal
-msgid "Palette delivery"
+#: model:ir.model,name:alc_stock_picking_batch_creation.model_res_partner
+msgid "Partner"
 msgstr ""
 
 #. module: alc_stock_picking_batch_creation
 #: model:ir.model,name:alc_stock_picking_batch_creation.model_stock_picking_wave
 msgid "Picking Wave"
+msgstr ""
+
+#. module: alc_stock_picking_batch_creation
+#: model:ir.model.fields,field_description:alc_stock_picking_batch_creation.field_res_partner_device_type_ids
+#: model:ir.model.fields,field_description:alc_stock_picking_batch_creation.field_res_users_device_type_ids
+#: model:ir.model.fields,field_description:alc_stock_picking_batch_creation.field_shopinvader_partner_device_type_ids
+msgid "Specific device types for partner"
 msgstr ""
 
 #. module: alc_stock_picking_batch_creation
