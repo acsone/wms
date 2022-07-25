@@ -41,7 +41,7 @@ class VeterinaryGroupService(Component):
         return {
             "id": {"type": "integer", "required": True, "nullable": False},
             "name": {"type": "string", "required": True, "nullable": False},
-            "color": {"type": "string", "required": True, "nullable": False},
+            "color": {"type": "string", "required": False, "nullable": True},
             "is_alcyonnaire": {"type": "boolean", "required": True, "nullable": False},
             "sequence": {"type": "integer", "required": True, "nullable": False},
         }
