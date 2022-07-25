@@ -15,4 +15,5 @@
     "data": ["views/product_pricelist_item.xml"],
     "demo": [],
     "installable": True,
+    "pre_init_hook": "pre_init_hook",
 }
