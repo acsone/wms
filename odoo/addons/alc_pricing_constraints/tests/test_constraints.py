@@ -61,3 +61,13 @@ class TestConstraintsFlow(TestConstraints):
         )
         item = self.env["product.pricelist.item"].create(vals)
         self.assertTrue(item)
+
+    def test_cannot_create_formula_based_on_pricelist(self):
+        vals = self._get_item_vals(
+            self.pricelist_discount,
+            compute_price="formula",
+            base="pricelist",
+            base_pricelist_id=self.pricelist_base.id,
+        )
+        with self.assertRaises(ValidationError):
+            self.env["product.pricelist.item"].create(vals)

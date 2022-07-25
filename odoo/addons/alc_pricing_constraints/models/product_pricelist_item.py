@@ -36,3 +36,15 @@ class ProductPricelistItem(models.Model):
             and r.compute_price == "formula"
         ):
             raise ValidationError(_("There is a useless (formula) discount."))
+
+    @api.constrains("base", "compute_price")
+    def _constrain_formula_price_base(self):
+        if not self.env["product.pricelist"].enforce_discount_constraint():
+            return
+        filter_bad = lambda r: r.base == "pricelist" and r.compute_price == "formula"
+        if self.filtered(filter_bad):
+            # we could allow that in the case of base pricelists
+            # however we'd have to add tests in the price cache to make sure this
+            # is working as intended before doing so.
+            message = _("Items based on other pricelists are not supported.")
+            raise ValidationError(message)
