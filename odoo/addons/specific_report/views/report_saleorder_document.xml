@@ -5,6 +5,12 @@
     priority="100"
     inherit_id="sale.report_saleorder_document"
   >
+    <xpath expr="//h2" position="before">
+      <div>
+          <span><center><b
+            >DON'T FORGET TO BRING BACK COOLPACK IF ANY</b></center></span>
+      </div>
+    </xpath>
     <xpath expr="//h2" position="replace">
       <h2>
         <t t-if="doc.is_consignment">
