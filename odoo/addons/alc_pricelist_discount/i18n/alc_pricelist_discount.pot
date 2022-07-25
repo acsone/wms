@@ -29,7 +29,7 @@ msgid "Pricelist"
 msgstr ""
 
 #. module: alc_pricelist_discount
-#: code:addons/alc_pricelist_discount/models/res_partner.py:24
+#: code:addons/alc_pricelist_discount/models/res_partner.py:41
 #, python-format
 msgid "Some partners have a base pricelist set as discount pricelist."
 msgstr ""
