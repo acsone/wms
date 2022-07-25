@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2022 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record model="ir.ui.view" id="res_partner_form_view">
+        <field
+      name="name"
+    >res.partner.form (in alc_stock_picking_batch_creation)</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='container_row_2']" position="inside">
+                <group
+          string="Cluster picking parameters"
+          name="cluster_picking_parameters"
+        >
+                <field name="device_type_ids" />
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>
