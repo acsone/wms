@@ -4,23 +4,15 @@
 
 
 {
-    "name": "Alcyon Price Cache",
-    "description": """Alcyon Price Cache""",
+    "name": "Price Compute",
+    "description": """Price Compute Utilities""",
     "version": "10.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": [
-        "price_compute",
-        "base_partition",
-        "mixin_past",
-        "queue_job",
-        "pricelist_role_name",
-        "alc_pricelist_discount",
-    ],
+    "depends": ["product"],
     "application": False,
     "data": [],
     "demo": [],
     "installable": True,
-    "post_init_hook": "post_init_hook",
 }

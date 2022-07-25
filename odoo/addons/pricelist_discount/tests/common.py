@@ -104,7 +104,7 @@ class PricelistDiscountCase(SavepointCase):
                 "ref": "8893294",
                 "property_product_pricelist": cls.main_pricelist.id,
                 "supplier_promotion_sale_allowed": True,
-                "discount_pricelist_id": cls.discount_pricelist_id.id,
+                "discount_pricelist_ids": [(6, 0, cls.discount_pricelist_id.ids)],
             }
         )
 

@@ -10,11 +10,7 @@ class SaleOrderLine(models.Model):
 
     def compute_supplier_promotion(self):
         res = super(SaleOrderLine, self).compute_supplier_promotion()
-        for line in self.filtered("order_id.discount_pricelist_id"):
-            pricelist = line.order_id.discount_pricelist_id
-            rule_price_id = pricelist.get_product_price_rule(
-                line.product_id, line.product_uom_qty, line.order_id.partner_id
-            )
-            if self.env["product.pricelist.item"].browse(rule_price_id[1]).exclusive:
+        for line in self:
+            if line.discount_item_id.exclusive:
                 line.discount2 = 0
         return res

@@ -91,7 +91,7 @@ class SaleOrder(models.Model):
         updated_data = self.env["sale.order"].play_onchanges(
             order_data,
             [
-                "discount_pricelist_id",
+                "discount_pricelist_ids",
                 "supplier_promotion_allowed",
                 "partner_id",
                 "team_id",
