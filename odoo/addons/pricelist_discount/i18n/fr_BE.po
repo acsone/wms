@@ -17,14 +17,14 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: pricelist_discount
-#: model:ir.model.fields,field_description:pricelist_discount.field_sale_order_discount_pricelist_id
+#: model:ir.model.fields,field_description:pricelist_discount.field_sale_order_discount_pricelist_ids
 msgid "Alcyon Discount"
 msgstr "Remise Alcyon"
 
 #. module: pricelist_discount
-#: model:ir.model.fields,field_description:pricelist_discount.field_res_partner_discount_pricelist_id
-#: model:ir.model.fields,field_description:pricelist_discount.field_res_users_discount_pricelist_id
-#: model:ir.model.fields,field_description:pricelist_discount.field_shopinvader_partner_discount_pricelist_id
+#: model:ir.model.fields,field_description:pricelist_discount.field_res_partner_discount_pricelist_ids
+#: model:ir.model.fields,field_description:pricelist_discount.field_res_users_discount_pricelist_ids
+#: model:ir.model.fields,field_description:pricelist_discount.field_shopinvader_partner_discount_pricelist_ids
 msgid "Alcyon Discount Pricelist"
 msgstr "Liste Remises Alcyon"
 
@@ -36,6 +36,12 @@ msgid "Discount (%)"
 msgstr "Remise (%)"
 
 #. module: pricelist_discount
+#: model:ir.model.fields,field_description:pricelist_discount.field_sale_order_line_discount_item_id
+#, fuzzy
+msgid "Discount item id"
+msgstr "Remise (%)"
+
+#. module: pricelist_discount
 #: model:ir.model,name:pricelist_discount.model_product_supplierinfo
 msgid "Information about a product vendor"
 msgstr "Information sur le vendeur de l'article"
@@ -44,6 +50,11 @@ msgstr "Information sur le vendeur de l'article"
 #: model:ir.model,name:pricelist_discount.model_res_partner
 msgid "Partner"
 msgstr "Partenaire"
+
+#. module: pricelist_discount
+#: model:ir.model,name:pricelist_discount.model_product_pricelist
+msgid "Pricelist"
+msgstr ""
 
 #. module: pricelist_discount
 #: model:ir.model,name:pricelist_discount.model_product_product
