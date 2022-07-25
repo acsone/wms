@@ -12,7 +12,7 @@ class AlcEshopCmsSnippet(models.Model):
     _content_type = "snippet"
 
     name = fields.Char(translate=False)
-    code = fields.Char(required=True, readonly=True)
+    code = fields.Char(required=True)
     content = fields.Html(required=True, translate=True, sanitize=False)
 
     @api.model
