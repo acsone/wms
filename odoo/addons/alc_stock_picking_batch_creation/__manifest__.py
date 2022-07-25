@@ -6,7 +6,7 @@
     "name": "Alc Stock Picking Batch Creation",
     "description": """
         stock picking batch creation""",
-    "version": "10.0.1.0.0",
+    "version": "10.0.1.0.1",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": [
@@ -19,7 +19,7 @@
     ],
     "data": [
         "data/devices.xml",
-        "data/res_partner_category.xml",
+        "views/res_partner.xml",
         "views/stock_device_type.xml",
         "views/stock_picking_wave.xml",
     ],
