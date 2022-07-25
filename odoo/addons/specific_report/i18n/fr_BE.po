@@ -125,6 +125,12 @@ msgstr ""
 "                    <span>Fax:</span>"
 
 #. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
+#: model:ir.ui.view,arch_db:specific_report.report_saleorder_document_inherit
+msgid "<b>DON'T FORGET TO BRING BACK COOLPACK IF ANY</b>"
+msgstr "<b>N'OUBLIEZ PAS DE RAPPORTER LES PACKS FROIDS S'IL Y EN A</b>"
+
+#. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid ""
 "<br/>\n"
@@ -411,12 +417,6 @@ msgstr "<span>No associated pharmacist</span>"
 #: model:ir.ui.view,arch_db:specific_report.report_picking_body
 msgid "<span>N° Document</span>"
 msgstr "<span>N° Document</span>"
-
-#. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
-#: model:ir.ui.view,arch_db:specific_report.report_saleorder_document_inherit
-msgid "<b>DON'T FORGET TO BRING BACK COOLPACK IF ANY</b>"
-msgstr "<b>N'OUBLIEZ PAS DE RAPPORTER LES PACKS FROIDS S'IL Y EN A</b>"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_saleorder_document_pharmacist_supplier
