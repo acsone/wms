@@ -107,3 +107,23 @@ class TestPricingFlow(TestPricing):
 
         # then: the base does not really matter, only the percentage is taken into account
         self.assertEqual(line_1.discount3, 50)
+
+    @freeze_time("2022-01-01 12:00:00")
+    @mute_logger("odoo.addons.queue_job.models.base")
+    def test_base_price_based_on_cost(self):
+        self.product_3.standard_price = 5
+        vals = self._get_item_vals(
+            pricelist=self.customer_1.property_product_pricelist,
+            applied_on="0_product_variant",
+            product_id=self.product_3.id,
+            compute_price="formula",
+            base="standard_price",
+            price_discount=-4,
+        )
+        self.model_pl_item_nodelay.create(vals)
+
+        # when
+        line_1 = self._new_sale_line(self.so_1, self.product_3)
+
+        self.assertEqual(line_1.price_unit, 5.2)
+        self.assertEqual(self.product_3.price_cache["price-plbase"][0]["price"], 5.2)
