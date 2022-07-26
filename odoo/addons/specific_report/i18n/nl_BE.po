@@ -128,7 +128,8 @@ msgstr ""
 #: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
 #: model:ir.ui.view,arch_db:specific_report.report_saleorder_document_inherit
 msgid "<b>DON'T FORGET TO BRING BACK COOLPACK IF ANY</b>"
-msgstr ""
+msgstr "<b>LAAT DE ALCYON KOELELEMENTEN ALTIJD IN DE KOELBOX, zodat de chauffeur ze kan verwisselen!</b>"
+
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
