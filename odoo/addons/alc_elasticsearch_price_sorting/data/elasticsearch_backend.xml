@@ -10,27 +10,48 @@
   "script": {
     "lang": "painless",
     "source": """
-          double gross_price = 0;
-          double discount = 0;
-          double supplier_discount = 0;
-          if (params.pricelist_gross != null) {
-            String gross_price_field = 'current_'+ params.pricelist_gross;
-            if(doc.containsKey(gross_price_field) && doc[gross_price_field].size()==1) {
-              gross_price = doc[gross_price_field].value;
+      double gross_price = 0;
+      double discount = 0;
+      double supplier_discount = 0;
+
+      if (params.pricelist_gross != null) {
+        String gross_price_field = 'current_'+ params.pricelist_gross;
+        if(doc.containsKey(gross_price_field) && doc[gross_price_field].size()==1) {
+          gross_price = doc[gross_price_field].value;
+        }
+      }
+
+      boolean discount_exclusive = false;
+      if (params.pricelist_discounts != null) {
+        for(String pricelist_discount: params.pricelist_discounts){
+          String discount_field = 'current_' + pricelist_discount;
+          if (doc.containsKey(discount_field)){
+            double discount_candidate = doc[discount_field].value;
+            if (discount_candidate > discount){
+              discount = discount_candidate;
+              String discount_exclusive_field = 'current_' + pricelist_discount + '_exclusive';
+              if (doc.containsKey(discount_exclusive_field)){
+                discount_exclusive = doc[discount_exclusive_field].value;
+              } else {
+                discount_exclusive = false;
             }
           }
-          if (params.pricelist_discount != null) {
-            String discount_field = 'current_' + params.pricelist_discount;
-            if (doc.containsKey(discount_field) && doc[discount_field].size()==1 ){
-              discount = doc[discount_field].value;
-            }
-          }
-          if (params.supplier_promotion != null && params.supplier_promotion && doc.containsKey('current_supplier_discount') && doc['current_supplier_discount'].size()==1) {
-            supplier_discount = doc.current_supplier_discount.value;
-          }
-          double price = gross_price - (gross_price * discount / 100);
-          price = price - (price * supplier_discount / 100);
-          return price
+        }
+      } else if (params.pricelist_discount != null) {
+        String discount_field = 'current_' + params.pricelist_discount;
+        if (doc.containsKey(discount_field)){
+          discount = doc[discount_field].value;
+        }
+      }
+
+      if (!discount_exclusive && params.supplier_promotion != null && params.supplier_promotion && doc.containsKey('current_supplier_discount')) {
+        supplier_discount = doc.current_supplier_discount.value;
+      }
+
+      double price = gross_price - (gross_price * discount / 100);
+      price = price - (price * supplier_discount / 100);
+
+      return price
         """
     }
 }
@@ -45,61 +66,73 @@
       "script": {
         "lang": "painless",
         "source": """
-            ZonedDateTime safe_get_zoned_dt(Object date){
-              if (date instanceof ZonedDateTime) {
-                return (ZonedDateTime)date;
-              } else if (date instanceof String){
-                LocalDate localDate = LocalDate.parse((String)date);
-                return localDate.atStartOfDay(ZoneId.systemDefault());
-              }
-              return null;
+          ZonedDateTime safe_get_zoned_dt(Object date){
+            if (date instanceof ZonedDateTime) {
+              return (ZonedDateTime)date;
+            } else if (date instanceof String){
+              LocalDate localDate = LocalDate.parse((String)date);
+              return localDate.atStartOfDay(ZoneId.systemDefault());
             }
-            double get_price_for_day(List prices, String field, ZonedDateTime curDate){
-              for (int i = 0; i < prices.length; ++i) {
-                Map price = prices[i];
-                ZonedDateTime date_start = safe_get_zoned_dt(price['date_start']);
-                ZonedDateTime date_end = safe_get_zoned_dt(price['date_end']);
-                long date_cur_milli = curDate != null ? curDate.toInstant().toEpochMilli() : -1;
-                long date_start_milli = date_start != null ? date_start.toInstant().toEpochMilli() : -1;
-                long date_end_milli = date_end != null ? date_end.toInstant().toEpochMilli() : -1;
+            return null;
+          }
+          Map get_price_data_for_day(List prices, ZonedDateTime curDate){
+            for (int i = 0; i < prices.length; ++i) {
+              Map price = prices[i];
+              ZonedDateTime date_start = safe_get_zoned_dt(price['date_start']);
+              ZonedDateTime date_end = safe_get_zoned_dt(price['date_end']);
+              long date_cur_milli = curDate != null ? curDate.toInstant().toEpochMilli() : -1;
+              long date_start_milli = date_start != null ? date_start.toInstant().toEpochMilli() : -1;
+              long date_end_milli = date_end != null ? date_end.toInstant().toEpochMilli() : -1;
 
-                if (curDate == null && date_start == null && date_end == null) {
-                  return price[field];
-                } else if (curDate != null && date_start != null && date_end != null && date_cur_milli >= date_start_milli && date_cur_milli <= date_end_milli) {
-                  return price[field];
-                } else if (curDate != null && date_start != null && date_end == null && date_cur_milli >= date_start_milli) {
-                  return price[field];
-                } else if (curDate != null && date_start == null && date_end != null && date_cur_milli <= date_end_milli) {
-                  return price[field];
-                }
+              if (curDate == null && date_start == null && date_end == null) {
+                return price;
+              } else if (curDate != null && date_start != null && date_end != null && date_cur_milli >= date_start_milli && date_cur_milli <= date_end_milli) {
+                return price;
+              } else if (curDate != null && date_start != null && date_end == null && date_cur_milli >= date_start_milli) {
+                return price;
+              } else if (curDate != null && date_start == null && date_end != null && date_cur_milli <= date_end_milli) {
+                return price;
               }
-              return -1;
             }
-            double get_price(List prices, String field, ZonedDateTime curDate) {
-              double price = get_price_for_day(prices, field, curDate);
-              if (price > -1){
-                return price
-              }
-              price = get_price_for_day(prices, field, null);
-              return (price > -1)? price: 0;
-            }
-            double current_supplier_discount = 0;
-            ZonedDateTime today = ctx.timestamp;
-            ctx.toto='1';
+            return null;
+          }
+          Map get_price_data(List prices, ZonedDateTime curDate) {
 
-            String supplier_discount_path = 'supplier_discount';
-            if (ctx.containsKey(supplier_discount_path)) {
-              List prices = ctx.supplier_discount;
-              current_supplier_discount = get_price(prices, 'discount_sale', today);
+            // get price for the given date
+            Map price_data = get_price_data_for_day(prices, curDate);
+            if (price_data != null){
+              return price_data
             }
-            ctx.current_supplier_discount = current_supplier_discount;
-            if (ctx.containsKey('price')){
-              for (String i : ctx.price.keySet()) {
-                String current_value_field = 'current_' + i;
+            // get price for no date
+            return get_price_data_for_day(prices, null);
+          }
+          double current_supplier_discount = 0;
+          ZonedDateTime today = ctx.timestamp;
+
+          String supplier_discount_path = 'supplier_discount';
+          if (ctx.containsKey(supplier_discount_path)) {
+            List prices = ctx.supplier_discount;
+            Map price_data = get_price_data(prices, today);
+            if (price_data != null){
+              ctx.current_supplier_discount = price_data['discount_sale'];
+            }
+          }
+          if (ctx.containsKey('price')){
+            for (String i : ctx.price.keySet()) {
+              Map price_data = get_price_data(ctx.price[i], today);
+              if (price_data != null){
                 String price_field = i.startsWith('discount') ? 'discount': 'price';
-                ctx[current_value_field] = get_price(ctx.price[i], price_field, today);
+                String current_value_field = "current_" + i;
+                ctx[current_value_field] = price_data[price_field];
+                boolean exclusive = false;
+                if (price_data.containsKey('exclusive')) {
+                  exclusive = price_data['exclusive'];
+                }
+                String current_value_exclusive_field = "current_" + i + "_exclusive";
+                ctx[current_value_exclusive_field] = exclusive;
               }
             }
+          }
 """
       }
     }
