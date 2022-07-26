@@ -278,15 +278,21 @@ CREATE UNIQUE INDEX pk_%(table)s ON %(table)s (id);
         sql_query = "SELECT * from {query_from} WHERE {query_where}".format(
             query_from=query_from, query_where=query_where
         )
-        named_cursor = self.env.cr._obj.connection.cursor("iterator")
+        # avoid name conflict; note that the problem might still occur if we try
+        # to get two iterators in the same transaction...
+        name = "iterator %s" % self.env.cr
+        named_cursor = self.env.cr._obj.connection.cursor(name)
         named_cursor.execute(sql_query, query_params)
-        for row in named_cursor:
-            container = _ProductDataContainer(
-                self.env,
-                partner,
-                **{d.name: row[i] for i, d in enumerate(named_cursor.description)}
-            )
-            yield container
+        try:
+            for row in named_cursor:
+                container = _ProductDataContainer(
+                    self.env,
+                    partner,
+                    **{d.name: row[i] for i, d in enumerate(named_cursor.description)}
+                )
+                yield container
+        finally:
+            named_cursor.close()
 
     @api.model
     def _get_partner_products_iterator(self, partner, product_ids=None):
