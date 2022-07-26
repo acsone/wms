@@ -13,4 +13,11 @@ class ProductPricelist(models.Model):
         # prevent the addition of a useless item that would violate a constraint
         if "item_ids" not in vals:
             vals["item_ids"] = [(6, 0, [])]
+        else:  # the interface already gave a useless items to arguments...
+            vals["item_ids"] = [
+                item
+                for item in vals["item_ids"]
+                if item[0] != 0  # in a create, one2many create command
+                or not self.env["product.pricelist.item"]._is_useless_vals(item[2])
+            ]
         return super(ProductPricelist, self).create(vals)
