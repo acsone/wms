@@ -5,7 +5,7 @@
 {
     "name": "Alc Magento API Facade",
     "description": """Alcyon: Magento API Facade""",
-    "version": "10.0.1.0.0",
+    "version": "10.0.2.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
@@ -16,7 +16,6 @@
         "alc_eshop_services_orders",
         "alc_eshop_sale_cart_info",
         "alc_product_flattened_data",
-        "elasticsearch_product_cache",
     ],
     "demo": [],
     "external_dependencies": {"python": ["xmltodict", "dicttoxml"]},
