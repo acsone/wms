@@ -38,5 +38,5 @@ class ResPartner(models.Model):
         self.env.cr.execute(query)
         res = self.env.cr.fetchall()
         if res:
-            msg = _("Some partners have a base pricelist set as discount pricelist.")
-            raise ValidationError(msg)
+            msg = _("Partners ids %s have a base pricelist set as discount pricelist.")
+            raise ValidationError(msg % ", ".join({str(r[0]) for r in res}))
