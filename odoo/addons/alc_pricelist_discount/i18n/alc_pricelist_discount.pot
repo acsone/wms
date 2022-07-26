@@ -24,14 +24,14 @@ msgid "Partner"
 msgstr ""
 
 #. module: alc_pricelist_discount
-#: model:ir.model,name:alc_pricelist_discount.model_product_pricelist
-msgid "Pricelist"
+#: code:addons/alc_pricelist_discount/models/res_partner.py:41
+#, python-format
+msgid "Partners ids %s have a base pricelist set as discount pricelist."
 msgstr ""
 
 #. module: alc_pricelist_discount
-#: code:addons/alc_pricelist_discount/models/res_partner.py:41
-#, python-format
-msgid "Some partners have a base pricelist set as discount pricelist."
+#: model:ir.model,name:alc_pricelist_discount.model_product_pricelist
+msgid "Pricelist"
 msgstr ""
 
 #. module: alc_pricelist_discount
