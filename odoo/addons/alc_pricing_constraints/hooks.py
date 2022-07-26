@@ -24,4 +24,11 @@ def pre_init_hook(cr):
     ]
     items_useless = env["product.pricelist.item"].search(domain_useless)
     _logger.info("Delete %s useless items.", len(items_useless))
-    items_useless.unlink()  # will trigger quite a lot of recomputes...
+    if items_useless:
+        # deleting many items would create too many jobs;
+        # at this point just recompute the cache for all products
+        q = "DELETE FROM product_pricelist_item WHERE id in %s;"
+        cr.execute(q, (tuple(items_useless.ids),))
+        products = env["product.product"].search([])
+        for product in products:
+            product.delay_update_price_cache()
