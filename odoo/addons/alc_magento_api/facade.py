@@ -126,46 +126,41 @@ class FacadeProduct(Facade):
             parser.append({"name": "Code_amm", "get": "code_amm"})
         return parser
 
-    def _json_for_product_flattened_data_iterator(
-        self, lang, product_flattened_data_iterator, include_amm=False
+    def _json_for_product_flattened_data(
+        self, lang, data, include_amm=False, by_id=False
     ):
-        json_by_id = {}
         parser = self._data_parser(include_amm=include_amm)
-        for data in product_flattened_data_iterator:
-            values = {}
-            json_by_id[data.id] = values
-            for field_parser in parser:
-                get = field_parser["get"]
-                value = (
-                    getattr(data, get) if isinstance(get, str) else get(data)
-                ) or ""
-                values[field_parser["name"]] = value
-            if lang == "fr_BE":
-                url_suffix = data.url_key_fr
-            elif lang == "nl_BE":
-                url_suffix = data.url_key_nl
-            else:
-                url_suffix = data.url_key_en
-            lang_slug = LANGS_INVERSE[lang]
-            url = "https://www.alcyonbelux.be/{}/{}".format(lang_slug, url_suffix)
-            values["url"] = url
+        values = {}
+        for field_parser in parser:
+            get = field_parser["get"]
+            value = (getattr(data, get) if isinstance(get, str) else get(data)) or ""
+            values[field_parser["name"]] = value
+        if lang == "fr_BE":
+            url_suffix = data.url_key_fr
+        elif lang == "nl_BE":
+            url_suffix = data.url_key_nl
+        else:
+            url_suffix = data.url_key_en
+        lang_slug = LANGS_INVERSE[lang]
+        url = "https://www.alcyonbelux.be/{}/{}".format(lang_slug, url_suffix)
+        values["url"] = url
 
-            if self.partner.supplier_promotion_sale_allowed:
-                promotions = []
-                if data.supplier_discount_discount_sale:
-                    discount = {
-                        "promotion": data.supplier_discount_discount_sale,
-                        "promotion_valid_until": data.supplier_discount_date_end,
-                    }
-                    promotions.append(discount)
-                if data.has_supplier_promotion:
-                    promotion = {
-                        "promotion": "FREE products",
-                        "promotion_valid_until": data.supplier_promotion_date_end,
-                    }
-                    promotions.append(promotion)
-                values["promotions"] = promotions
-        return json_by_id
+        if self.partner.supplier_promotion_sale_allowed:
+            promotions = []
+            if data.supplier_discount_discount_sale:
+                discount = {
+                    "promotion": data.supplier_discount_discount_sale,
+                    "promotion_valid_until": data.supplier_discount_date_end,
+                }
+                promotions.append(discount)
+            if data.has_supplier_promotion:
+                promotion = {
+                    "promotion": "FREE products",
+                    "promotion_valid_until": data.supplier_promotion_date_end,
+                }
+                promotions.append(promotion)
+            values["promotions"] = promotions
+        return data.id, values if by_id else values
 
 
 class FacadeCatalog(FacadeProduct):
@@ -183,17 +178,16 @@ class FacadeCatalog(FacadeProduct):
     def process_result(self, result, **kwargs):
         lang = kwargs.pop("lang")
         include_amm = kwargs.pop("include_amm", "0") in ["true", "1", "t", "y", "yes"]
-        json_by_id = self._json_for_product_flattened_data_iterator(
-            lang, result, include_amm=include_amm
-        )
-        return self._json_to_xml(json_by_id.values(), custom_root="catalog")
+        f = self._json_for_product_flattened_data
+        values = (f(lang, r, include_amm) for r in result)
+        return self._json_to_xml(values, custom_root="catalog")
 
 
 class FacadePriceList(FacadeProduct):
     usage = "sale_statistics"
 
     def apply(self, **kwargs):
-        return self.service._get_top_ordered(**kwargs)
+        return self.service._get_top_ordered()
 
     def process_result(self, result, **kwargs):
         ids = [r["product_id"] for r in result["data"]]
@@ -203,9 +197,10 @@ class FacadePriceList(FacadeProduct):
         records_data_iterator = self.env[
             "alc.product.flattened.data"
         ]._get_partner_products_iterator(self.partner, product_ids=ids)
-        json_by_id = self._json_for_product_flattened_data_iterator(
-            "en_US", records_data_iterator
-        )
+        f = self._json_for_product_flattened_data
+        values = [f("en_US", r, by_id=True) for r in records_data_iterator]
+        json_by_id = {v[0]: v[1] for v in values}
+        # we need to keep the order given by top_ordered
         data = (json_by_id[rid] for rid in ids if rid in json_by_id)
         return self._json_to_xml(data, custom_root="price_list")
 
