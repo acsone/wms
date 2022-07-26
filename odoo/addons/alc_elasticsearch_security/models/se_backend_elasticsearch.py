@@ -25,7 +25,7 @@ class SeBackendElasticsearch(models.Model):
             "index_permissions":[
                 {
                     "index_patterns":["alc_shopinvader_variant_*"],
-                    "fls": ["indicated_price", "price.%s.*", "price.%s.*", "current_%s", "current_%s"]
+                    "fls": ["indicated_price", "price.%s.*", "price.%s.*", "current_%s", "current_%s", "current_%s_exclusive"]
                 }
             ]
             }
@@ -39,6 +39,7 @@ class SeBackendElasticsearch(models.Model):
                 price_role_name,
                 pricelist.discount_role_name,
                 price_role_name,
+                pricelist.discount_role_name,
                 pricelist.discount_role_name,
             )
         }
