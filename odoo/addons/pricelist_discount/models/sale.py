@@ -113,7 +113,7 @@ class SaleOrderLine(models.Model):
         for line in self:
             discount_item = False
             pricelists = line.order_id.discount_pricelist_ids
-            if pricelists:
+            if line.product_id and pricelists:
                 date = line.order_id.date_order
                 discount_item = pricelists._get_discount_item_id(line.product_id, date)
             line.discount_item_id = discount_item

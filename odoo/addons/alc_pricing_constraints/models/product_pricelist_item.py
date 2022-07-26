@@ -21,6 +21,22 @@ class ProductPricelistItem(models.Model):
             # so to remove this constraint, tests should be added first.
             raise ValidationError(_("Formula discount items are not supported."))
 
+    def _is_useless(self):
+        """An item is useless if applying it just return the product price."""
+        self.ensure_one()
+        return self._is_useless_vals(self.read()[0])
+
+    @api.model
+    def _is_useless_vals(self, vals):
+        useless = False
+        compute_price = vals.get("compute_price", "fixed")
+        if compute_price == "percentage":
+            useless = vals.get("percent_price", 0) == 0
+        elif compute_price == "formula":
+            no_surcharge = vals.get("price_surcharge", 0) == 0
+            useless = no_surcharge and vals.get("price_discount", 0) == 0
+        return useless
+
     @api.constrains(
         "compute_price", "percent_price", "price_surcharge", "price_discount"
     )
