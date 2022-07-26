@@ -278,12 +278,13 @@ CREATE UNIQUE INDEX pk_%(table)s ON %(table)s (id);
         sql_query = "SELECT * from {query_from} WHERE {query_where}".format(
             query_from=query_from, query_where=query_where
         )
-        self.env.cr.execute(sql_query, query_params)
-        for row in self.env.cr._obj:
+        named_cursor = self.env.cr._obj.connection.cursor("iterator")
+        named_cursor.execute(sql_query, query_params)
+        for row in named_cursor:
             container = _ProductDataContainer(
                 self.env,
                 partner,
-                **{d.name: row[i] for i, d in enumerate(self.env.cr.description)}
+                **{d.name: row[i] for i, d in enumerate(named_cursor.description)}
             )
             yield container
 
