@@ -28,3 +28,8 @@ msgstr ""
 msgid "Keycloak User"
 msgstr ""
 
+#. module: alc_keycloak
+#: model:ir.model,name:alc_keycloak.model_veterinary_group
+msgid "Veterinary Group"
+msgstr ""
+
