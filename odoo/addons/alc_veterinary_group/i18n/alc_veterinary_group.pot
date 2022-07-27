@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_veterinary_group
-#: model:ir.model.fields,field_description:alc_veterinary_group.field_veterinary_group_color
+#: model:ir.model.fields,field_description:alc_veterinary_group.field_veterinary_group_display_color
 msgid "Color"
 msgstr ""
 
