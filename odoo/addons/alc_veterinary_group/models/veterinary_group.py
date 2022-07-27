@@ -20,8 +20,8 @@ class VeterinaryGroup(models.Model):
     partner_ids = fields.Many2many(
         "res.partner",
         "res_partner_veterinary_group_rel",
-        "res_partner_id",
         "veterinary_group_id",
+        "res_partner_id",
         string="Partners",
     )
     product_template_ids = fields.Many2many(

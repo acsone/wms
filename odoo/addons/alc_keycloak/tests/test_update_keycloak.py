@@ -69,6 +69,46 @@ class TestKeycloakUpdateFlow(TestKeycloak):
         expected_vt_groups = veterinary_group.ids
         self.assertEqual(vt_groups, expected_vt_groups)
 
+    def test_veterinary_group_create(self):
+        keycloak_user = self.env["keycloak.user"].create(self.vals_user)
+        job_counter = self.job_counter()
+
+        # on veterinary group creation, if we specify partners these should be exported
+        self.env["veterinary.group"].create(
+            {"name": "VTG", "partner_ids": [(6, 0, keycloak_user.partner_id.ids)]}
+        )
+        jobs = job_counter.search_created()
+        job = jobs.filtered(lambda j: j.model_name == "keycloak.backend")
+        self.assertEqual(job.args, [keycloak_user, ["veterinary_group_ids"]])
+
+    def test_veterinary_group_update_add_partner(self):
+        keycloak_user = self.env["keycloak.user"].create(self.vals_user)
+        veterinary_group = self.env["veterinary.group"].create({"name": "VTG"})
+        job_counter = self.job_counter()
+
+        # on veterinary group update if we add a partner it should be exported
+        veterinary_group.write({"partner_ids": [(6, 0, keycloak_user.partner_id.ids)]})
+
+        jobs = job_counter.search_created()
+        job = jobs.filtered(lambda j: j.model_name == "keycloak.backend")
+        self.assertEqual(job.args, [keycloak_user, ["veterinary_group_ids"]])
+
+    def test_veterinary_group_update_remove_partner(self):
+        keycloak_user = self.env["keycloak.user"].create(self.vals_user)
+        veterinary_group = self.env["veterinary.group"].create(
+            {"name": "VTG", "partner_ids": [(6, 0, keycloak_user.partner_id.ids)]}
+        )
+        # delete queue job created by the group creation
+        self.env["queue.job"].search([]).unlink()
+        job_counter = self.job_counter()
+
+        # on veterinary group update if we add a partner it should be exported
+        veterinary_group.write({"partner_ids": [(6, 0, [])]})
+
+        jobs = job_counter.search_created()
+        job = jobs.filtered(lambda j: j.model_name == "keycloak.backend")
+        self.assertEqual(job.args, [keycloak_user, ["veterinary_group_ids"]])
+
     def test_update_write_lang(self):
         keycloak_user = self.env["keycloak.user"].create(self.vals_user)
         job_counter = self.job_counter()
