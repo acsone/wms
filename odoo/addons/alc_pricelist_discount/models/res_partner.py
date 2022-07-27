@@ -33,8 +33,14 @@ class ResPartner(models.Model):
             SELECT partner_id
             FROM partner_discount_pricelist_rel rel
             JOIN product_pricelist pl on pl.id = rel.pricelist_id
+            JOIN res_partner rp on rp.id = partner_id
             WHERE pl.is_discount = False
+            AND (rp.is_company = True or rp.parent_id is null)
+
         """
+        # The condition on the company and the parent_id is there to ensure
+        # that we take into account only partners where the pricelist is not
+        # managed on the company
         self.env.cr.execute(query)
         res = self.env.cr.fetchall()
         if res:
