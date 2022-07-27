@@ -15,6 +15,7 @@
           name="discount_pricelist_ids"
           groups="product.group_sale_pricelist"
           attrs="{'invisible': [('is_company','=',False),('parent_id','!=',False)]}"
+          widget="many2many_tags"
         />
       </field>
     </field>
