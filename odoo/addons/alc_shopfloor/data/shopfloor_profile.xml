@@ -5,4 +5,8 @@
   <record id="shopfloor_profile_medoc" model="shopfloor.profile">
     <field name="name">Médicaments</field>
   </record>
+
+  <record id="shopfloor_profile_ali" model="shopfloor.profile">
+    <field name="name">Aliments</field>
+  </record>
 </odoo>

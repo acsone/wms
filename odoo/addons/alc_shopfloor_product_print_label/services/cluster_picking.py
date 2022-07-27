@@ -19,7 +19,7 @@ class ClusterPicking(Component):
         )
 
     def print_label(self, picking_batch_id, operation_id, lot_id=None, printer_id=None):
-
+        lot = None
         batch = self.env["stock.picking.wave"].browse(picking_batch_id)
         if not batch.exists():
             return self._response_batch_does_not_exist()
@@ -28,15 +28,23 @@ class ClusterPicking(Component):
             return self._pick_next_operation(
                 batch, message=self.msg_store.operation_not_found()
             )
-
         printer_id = (
             printer_id or self.shopfloor_user.printing_product_label_printer_id.id
         )
         if lot_id:
             lot = self.env["stock.production.lot"].browse(lot_id)
-            lot.print_lot_label(printer_id=printer_id)
-        else:
-            operation.product_id.print_product_label(printer_id=printer_id)
+        food_profile = self.env.ref("alc_shopfloor.shopfloor_profile_ali")
+        med_profile = self.env.ref("alc_shopfloor.shopfloor_profile_medoc")
+        if self.work.menu.profile_id == food_profile:
+            operation.sudo().print_food_product_label(
+                printer_id=printer_id, lot_id=lot,
+            )
+
+        if self.work.menu.profile_id == med_profile:
+            if lot:
+                lot.print_lot_label(printer_id=printer_id)
+            else:
+                operation.product_id.print_product_label(printer_id=printer_id)
 
         return self._response_for_print_label(
             operation, message=self.msg_store.confirm_print_label()
