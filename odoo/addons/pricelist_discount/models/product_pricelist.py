@@ -13,7 +13,7 @@ class ProductPricelistItem(models.Model):
         """Returns the id of the best discount item"""
         discount_item_id = False
         price_categ_id = product.price_category_id.id
-        subquery = "OR item.price_category_id = %(price_categ_id)s"
+        subquery = " OR item.price_category_id = %(price_categ_id)s "
         subquery = subquery if price_categ_id else ""
         query_args = {
             "pl_ids": tuple(self.ids),
