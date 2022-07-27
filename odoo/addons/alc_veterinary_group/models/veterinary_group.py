@@ -13,7 +13,9 @@ class VeterinaryGroup(models.Model):
 
     name = fields.Char(string="Name")
     is_alcyonnaire = fields.Boolean()
-    color = fields.Char("Color")
+    display_color = fields.Char(
+        "Color", oldname="color"
+    )  # field name 'color' is reserved for m2mtags widget
     sequence = fields.Integer(default=-1, required=True)
     partner_ids = fields.Many2many(
         "res.partner",

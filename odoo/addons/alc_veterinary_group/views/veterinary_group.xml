@@ -23,7 +23,7 @@
                 <field name="sequence" widget='handle' />
                 <field name="name" />
                 <field name="is_alcyonnaire" />
-                <field name="color" widget="color" />
+                <field name="display_color" widget="color" />
             </tree>
         </field>
     </record>
@@ -38,7 +38,7 @@
                     <group>
                         <field name="name" />
                         <field name="is_alcyonnaire" />
-                        <field name="color" widget="color" />
+                        <field name="display_color" widget="color" />
                         <field name="sequence" />
                         <field name="partner_ids" options="{'no_create': True}" />
                         <field

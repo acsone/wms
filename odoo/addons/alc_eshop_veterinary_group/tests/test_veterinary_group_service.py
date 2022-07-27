@@ -23,7 +23,7 @@ class TestVeterinaryGroupService(SavepointCase, ComponentMixin):
         cls.group_a = cls.VeterinaryGroup.create(
             {
                 "name": "group_a",
-                "color": "#123212",
+                "display_color": "#123212",
                 "sequence": 10,
                 "is_alcyonnaire": True,
             }
@@ -59,3 +59,7 @@ class TestVeterinaryGroupService(SavepointCase, ComponentMixin):
         self.assertTrue(res)
         self.assertEqual(1, res.get("size"))
         self.assertEqual(self.group_a.id, res["data"][0]["id"])
+        self.assertEqual("group_a", res["data"][0]["name"])
+        self.assertEqual(10, res["data"][0]["sequence"])
+        self.assertEqual(True, res["data"][0]["is_alcyonnaire"])
+        self.assertEqual("#123212", res["data"][0]["color"])

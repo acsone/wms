@@ -60,7 +60,7 @@ class VeterinaryGroupService(Component):
         return dict(
             id=group.id,
             name=group.name,
-            color=group.color or None,
+            color=group.display_color or None,
             is_alcyonnaire=group.is_alcyonnaire,
             sequence=group.sequence,
         )
