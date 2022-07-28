@@ -30,8 +30,20 @@ class ProductProduct(models.Model):
 
     @api.model
     def add_to_cache(self, cache_list, cache_element):
+        """Filters outdated element when adding a new item to the cache.
+        An element is outdated if it has the same id (which means we modified the item)
+        or the item operates on the same date range.
+        An example of the latter is that we added a new, more precise item.
+        So, there was a date-free price on the category, but we added a product-specific
+        item. The category item might still be relevant for other products.
+        """
         eid = cache_element["id"]
-        cache_list = [e for e in cache_list if e["id"] != eid]
+        ds, de = cache_element.get("date_start"), cache_element.get("date_end")
+        cache_list = [
+            e
+            for e in cache_list
+            if e["id"] != eid and (e["date_start"] != ds or e["date_end"] != de)
+        ]
         cache_list.append(cache_element)
         return cache_list
 
