@@ -15,5 +15,4 @@
     "data": ["views/product_pricelist_item.xml"],
     "demo": [],
     "installable": True,
-    # "pre_init_hook": "pre_init_hook",  # Removed for performance: apply manually!
 }
