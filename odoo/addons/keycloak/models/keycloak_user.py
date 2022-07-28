@@ -100,11 +100,14 @@ class KeycloakUser(models.Model):
             watched_fields = self[0].keycloak_backend_id._get_update_fields()
             updated_fields = list(set(watched_fields) & set(vals))  # serializable
             if updated_fields:
-                for user in self:
-                    user.keycloak_backend_id.with_delay(
-                        description=_("Update Keycloak User %s") % user.username,
-                        identity_key=identity_exact,  # optimize chained writes
-                    ).update_user_fields(user, list(updated_fields))
+                self.delay_keycloak_update(list(updated_fields))
+
+    def delay_keycloak_update(self, update_fields=None):
+        for user in self:
+            user.keycloak_backend_id.with_delay(
+                description=_("Update Keycloak User %s") % user.username,
+                identity_key=identity_exact,  # optimize chained writes
+            ).update_user_fields(user, update_fields or [])
 
     def action_open_update_wizard(self):
         self.ensure_one()
@@ -119,11 +122,7 @@ class KeycloakUser(models.Model):
         if not self.env.user.has_group("keycloak.group_keycloak_manager"):
             raise AccessError(_("You are not allowed to sync keycloak info."))
         updated_fields = self.env["keycloak.backend"]._get_update_fields()
-        for user in self:
-            user.keycloak_backend_id.with_delay(
-                description=_("Sync Keycloak User %s") % user.username,
-                identity_key=identity_exact,  # optimize chained writes
-            ).update_user_fields(user, list(updated_fields))
+        self.delay_keycloak_update(list(updated_fields))
 
     def _get_token(self):
         self.ensure_one()

@@ -18,10 +18,6 @@ class TestPricelistItemFlow(TestPrices):
         vals["is_discount"] = True
         pricelist = self.model_pl_nodelay.create(vals)
 
-        # then: no discount
-        price_cache = self.product_1.price_cache[pricelist.discount_role_name]
-        self.assertEqual(price_cache, [])
-
         # given
         vals_item = self._get_item_vals(
             pricelist,
