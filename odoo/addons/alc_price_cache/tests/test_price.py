@@ -50,6 +50,26 @@ class TestPricesFlow(TestPrices):
         discount_pricelist.unlink()
         self.assertFalse(discount_key in self.product_1.price_cache)
 
+    @mute_logger("odoo.addons.queue_job.models.base")
+    def test_pricelist_update(self):
+        vals_item_3_global = self._get_item_vals()  # global 10% discount
+        vals = self._get_pricelist_vals("T", [vals_item_3_global])
+        pricelist = self.model_pl_nodelay.create(vals)
+
+        price_key = pricelist.role_name
+        self.assertTrue(self.product_1.price_cache[price_key][0]["price"], 9)
+
+        vals_item_product = self._get_item_vals(
+            pricelist=pricelist,
+            applied_on="0_product_variant",
+            product_id=self.product_1.id,
+            percent_price=20,
+        )
+        item = self.model_pl_item_nodelay.create(vals_item_product)
+        self.assertTrue(len(self.product_1.price_cache[price_key]), 1)
+        self.assertTrue(self.product_1.price_cache[price_key][0]["price"], 8)
+        self.assertTrue(self.product_1.price_cache[price_key][0]["id"], item.id)
+
     @freeze_time("2022-01-01 12:00:00")
     @mute_logger("odoo.addons.queue_job.models.base")
     def test_pricelist_date_witnesses_none(self):
