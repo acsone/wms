@@ -172,3 +172,41 @@ class TestPricelistItemFlow(TestPrices):
             u"date_end": None,
         }
         self.assertEqual(price_cache, [expected_price_cache])
+
+    @freeze_time("2022-01-01 12:00:00")
+    @mute_logger("odoo.addons.queue_job.models.base")
+    def test_multiple_discount(self):
+        """Check that getting the best discount from the cache matches
+        what is done in the backend (so, in SQL)."""
+        today = "2022-01-01"
+        product = self.product_1
+        roles = lambda ps: ps.mapped("discount_role_name")
+        vals = self._get_pricelist_vals("DPL1", [], is_discount=True)
+        discount_pricelist_1 = self.model_pl_nodelay.create(vals)
+        pricelists = discount_pricelist_1
+        item_id = pricelists._get_discount_item_id(product, today)
+        cache_item = product._discount_cache_get(roles(pricelists), today)
+        self.assertEqual(item_id, False)
+        self.assertEqual(cache_item, None)
+
+        vals_item_global = self._get_item_vals(pricelist=discount_pricelist_1)
+        item_global = self.model_pl_item_nodelay.create(vals_item_global)
+        item_id = pricelists._get_discount_item_id(product, today)
+        cache_item = product._discount_cache_get(roles(pricelists), today)
+        self.assertEqual(item_id, item_global.id)
+        self.assertEqual(cache_item["id"], item_global.id)
+
+        vals = self._get_pricelist_vals("DPL2", [], is_discount=True)
+        discount_pricelist_2 = self.model_pl_nodelay.create(vals)
+        pricelists |= discount_pricelist_2
+        vals_item_fixed = self._get_item_vals(
+            pricelist=discount_pricelist_2,
+            compute_price="fixed",
+            fixed_price=5,  # starting from a 10$ price, that makes a 50% discount
+        )
+        item_fixed = self.model_pl_item_nodelay.create(vals_item_fixed)
+        item_id = pricelists._get_discount_item_id(product, today)
+        cache_item = product._discount_cache_get(roles(pricelists), today)
+        self.assertEqual(item_id, item_fixed.id)
+        self.assertEqual(cache_item["id"], item_fixed.id)
+        self.assertEqual(cache_item["discount"], 50)

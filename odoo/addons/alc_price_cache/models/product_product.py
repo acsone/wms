@@ -141,3 +141,25 @@ class ProductProduct(models.Model):
         if candidates:
             item = min(candidates, key=lambda it: it["date_start"] or date_ref)
         return item
+
+    def _discount_cache_get(self, discount_keys, date_ref=None):
+        self.ensure_one()
+        cache = self.price_cache
+        return self._resolve_discount_cache_get(cache, discount_keys, date_ref)
+
+    @api.model
+    def _resolve_discount_cache_get(self, price_cache, discount_keys, date_ref=None):
+        date_ref = date_ref or fields.Date.today()
+        mixin = self.env["mixin.past"]
+        filter_date = lambda it: (
+            not mixin._is_past_date(it["date_end"], date_ref)
+            and not mixin._is_future_date(it["date_start"], date_ref)
+        )
+        caches = [price_cache.get(key, []) for key in discount_keys]
+        candidates = [item for cache in caches for item in cache if filter_date(item)]
+        return max(candidates, key=lambda x: x["discount"]) if candidates else None
+
+    @api.model
+    def _resolve_discount_cache(self, price_cache, discount_keys):
+        item = self._resolve_discount_cache_get(price_cache, discount_keys)
+        return item["discount"] if item else 0
