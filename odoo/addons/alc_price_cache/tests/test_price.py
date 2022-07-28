@@ -62,6 +62,40 @@ class TestPricesFlow(TestPrices):
 
         self.assertEqual(witnesses, {Date.from_string("2022-01-01")})
 
+    @mute_logger("odoo.addons.queue_job.models.base")
+    def test_create_limited_discount_pricelist(self):
+        """When we create a discount pricelist, we only recompute necessary items.
+         No global item."""
+        vals_item_1 = {
+            "applied_on": "0_product_variant",
+            "product_id": self.product_1.id,
+            "compute_price": "percentage",
+            "percent_price": 5,
+        }
+        vals = {
+            "name": "D",
+            "is_discount": True,
+            "item_ids": [(0, 0, vals_item_1)],
+        }
+        pricelist = self.model_pl_nodelay.create(vals)
+
+        price_key = pricelist.discount_role_name
+        self.assertTrue(price_key in self.product_1.price_cache)
+        self.assertFalse(price_key in self.product_2.price_cache)
+
+        # now we add an item on product2; that should work as expected
+        vals_item_2 = {
+            "pricelist_id": pricelist.id,
+            "applied_on": "0_product_variant",
+            "product_id": self.product_2.id,
+            "compute_price": "percentage",
+            "percent_price": 5,
+        }
+        # when
+        item_2 = self.model_pl_item_nodelay.create(vals_item_2)
+        # then
+        self.assertEqual(self.product_2.price_cache[price_key][0]["id"], item_2.id)
+
     @freeze_time("2022-01-01 12:00:00")
     @mute_logger("odoo.addons.queue_job.models.base")
     def test_pricelist_date_witnesses(self):

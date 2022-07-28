@@ -5,6 +5,7 @@
 import datetime
 
 from odoo import _, api, fields, models
+from odoo.osv.expression import OR
 
 from odoo.addons.queue_job.job import job
 
@@ -47,7 +48,12 @@ class ProductPricelist(models.Model):
             ProductPricelist, self.with_context(no_update_price_cache_items=True)
         ).create(vals)
         if not self.env.context.get("no_update_price_cache"):
-            res.delay_update_price_cache()
+            if res.is_discount:
+                domains = [i._get_product_domain() for i in res.mapped("item_ids")]
+                if domains:
+                    res.delay_update_price_cache(domain_extend=OR(domains))
+            else:
+                res.delay_update_price_cache()
         return res
 
     def _needs_price_cache_recompute(self, vals):
