@@ -12,9 +12,6 @@ class TestRegistrationFlow(TestRegistration):
 
         registration = self.model.create(vals)
 
-        domain_message = [
-            ("partner_ids", "in", registration.user_id.partner_id.ids),
-            ("model", "=", "alc.registration"),
-        ]
+        domain_message = [("model", "=", "alc.registration")]
         message = self.env["mail.message"].search(domain_message)
         self.assertTrue(registration.name in message.subject)

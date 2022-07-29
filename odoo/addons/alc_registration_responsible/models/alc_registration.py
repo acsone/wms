@@ -17,7 +17,8 @@ class AlcRegistration(models.Model):
 
     @api.model
     def create(self, vals):
-        res = super(AlcRegistration, self).create(vals)
+        no_send_self = self.with_context(tracking_disable=True)
+        res = super(AlcRegistration, no_send_self).create(vals)
         template_xmlid = "alc_registration_responsible.create_mail_template"
         res.notify_responsible(template_xmlid)
         return res

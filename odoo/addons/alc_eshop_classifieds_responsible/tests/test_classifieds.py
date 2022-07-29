@@ -8,10 +8,6 @@ class TestClassified(TestClassifiedCase):
     def test_send_mail(self):
         classified = self.classified_1_misc
         classified.submit()
-
-        domain_message = [
-            ("partner_ids", "in", classified.user_id.partner_id.ids),
-            ("model", "=", "alc.classified"),
-        ]
+        domain_message = [("model", "=", "alc.classified")]
         message = self.env["mail.message"].search(domain_message)
         self.assertTrue(classified.name in message.subject)
