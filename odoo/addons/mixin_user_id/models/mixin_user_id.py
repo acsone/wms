@@ -21,6 +21,11 @@ class MixinUserId(models.AbstractModel):
         return self.env.user
 
     def notify_responsible(self, template_xmlid):
+        mail_template = self.env.ref(template_xmlid)
+        for record in self:
+            mail_template.send_mail(record.id)
+
+    def notify_responsible_and_followers(self, template_xmlid):
         mail_template_id = self.env.ref(template_xmlid).id
         for record in self:
             ctx = {
