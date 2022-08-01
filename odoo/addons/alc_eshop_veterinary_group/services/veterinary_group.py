@@ -49,8 +49,12 @@ class VeterinaryGroupService(Component):
     ################
     # implementation
     ################
+    def _get_domain(self):
+        return [("id", "in", self.partner.veterinary_group_ids.ids)]
+
     def _search(self):
-        groups = self.env["veterinary.group"].search([])
+        domain = self._get_domain()
+        groups = self.env["veterinary.group"].search(domain)
         return {
             "size": len(groups),
             "data": [self._group_to_json(g) for g in groups],

@@ -19,7 +19,6 @@ class TestVeterinaryGroupService(SavepointCase, ComponentMixin):
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
         cls.setUpComponent()
         cls.VeterinaryGroup = cls.env["veterinary.group"]
-        cls.VeterinaryGroup.search([]).unlink()
         cls.group_a = cls.VeterinaryGroup.create(
             {
                 "name": "group_a",
@@ -28,6 +27,15 @@ class TestVeterinaryGroupService(SavepointCase, ComponentMixin):
                 "is_alcyonnaire": True,
             }
         )
+        vals_partner = {"name": "P", "veterinary_group_ids": [(6, 0, cls.group_a.ids)]}
+        cls.partner = cls.env["res.partner"].create(vals_partner)
+        vals_group_b = {
+            "name": "group_b",
+            "display_color": "#123212",
+            "sequence": 5,
+            "is_alcyonnaire": False,
+        }
+        cls.group_b = cls.VeterinaryGroup.create(vals_group_b)
 
     # pylint: disable=method-required-super
     def setUp(self):
@@ -53,13 +61,22 @@ class TestVeterinaryGroupService(SavepointCase, ComponentMixin):
         )
         yield work.component(usage="veterinary_groups")
 
-    def test_search(self):
+    def test_no_partner_search(self):
         with self.veterinary_group_service(None) as service:
             res = service.dispatch("search")
-        self.assertTrue(res)
-        self.assertEqual(1, res.get("size"))
+        self.assertEqual(0, res["size"])
+
+    def test_search(self):
+        with self.veterinary_group_service(self.partner.id) as service:
+            res = service.dispatch("search")
+        self.assertEqual(1, res["size"])
         self.assertEqual(self.group_a.id, res["data"][0]["id"])
         self.assertEqual("group_a", res["data"][0]["name"])
         self.assertEqual(10, res["data"][0]["sequence"])
         self.assertEqual(True, res["data"][0]["is_alcyonnaire"])
         self.assertEqual("#123212", res["data"][0]["color"])
+
+        self.partner.write({"veterinary_group_ids": [(4, self.group_b.id)]})
+        with self.veterinary_group_service(self.partner.id) as service:
+            res = service.dispatch("search")
+        self.assertEqual(2, res["size"])
