@@ -88,6 +88,34 @@ class TestPricingFlow(TestPricing):
 
     @freeze_time("2022-01-01 12:00:00")
     @mute_logger("odoo.addons.queue_job.models.base")
+    def test_discount_priority(self):
+        self.customer_1.write({"discount_pricelist_ids": [(4, self.dpl_1.id)]})
+        vals_item_global = self._get_item_vals(
+            pricelist=self.dpl_1,
+            applied_on="3_global",
+            percent_price=90,
+            exclusive=False,
+        )
+        item_global = self.model_pl_item_nodelay.create(vals_item_global)
+        so = self.env["sale.order"].create({"partner_id": self.customer_1.id})
+
+        # when
+        line_1 = self._new_sale_line(so, self.product_1)
+
+        # then: the global item was ignored because there is a more precise one
+        self.assertEqual(line_1.discount2, 0)
+        self.assertEqual(line_1.discount3, 50)
+        self.assertEqual(line_1.discount_item_id, self.item_1_1)
+
+        # when
+        line_product_3 = self._new_sale_line(so, self.product_3)
+
+        # then: the global item was applied
+        self.assertEqual(line_product_3.discount3, 90)
+        self.assertEqual(line_product_3.discount_item_id, item_global)
+
+    @freeze_time("2022-01-01 12:00:00")
+    @mute_logger("odoo.addons.queue_job.models.base")
     def test_discount_based_on_cost(self):
         """For a percentage discount item, basing on standard_price has no effect."""
         # given: percentage item based on standard_price (cost), differing from price
