@@ -2627,6 +2627,13 @@ msgstr ""
 "<p><img src=\"/web/image/alc_eshop_cms.ir_att_img_team_philippe\"/></p>\n"
 
 #. module: alc_eshop_cms
+#: model:alc.eshop.cms.snippet,content:alc_eshop_cms.alc_eshop_cms_snippet_alcyonnaire_howto
+msgid ""
+"\n"
+"<p>Devenir Alcyonnaire...</p>\n"
+msgstr ""
+
+#. module: alc_eshop_cms
 #: model:alc.eshop.cms.snippet,content:alc_eshop_cms.alc_eshop_cms_snippet_product_on_order_cancel_intro
 msgid ""
 "\n"
