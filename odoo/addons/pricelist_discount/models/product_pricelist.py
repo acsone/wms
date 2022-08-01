@@ -25,7 +25,8 @@ class ProductPricelistItem(models.Model):
         }
         query = (
             """
-SELECT item.id, compute_price, item.percent_price
+SELECT DISTINCT ON (pricelist_id)
+       item.id, compute_price, item.percent_price, pricelist_id
 FROM product_pricelist_item AS item
 LEFT JOIN product_category AS categ
 ON item.categ_id = categ.id
@@ -38,7 +39,7 @@ AND (item.price_category_id IS NULL"""
 AND (item.pricelist_id in %(pl_ids)s)
 AND (item.date_start IS NULL OR item.date_start<=%(date)s)
 AND (item.date_end IS NULL OR item.date_end>=%(date)s)
-ORDER BY item.applied_on, item.min_quantity desc, categ.parent_left desc
+ORDER BY pricelist_id, item.applied_on, item.min_quantity desc, categ.parent_left desc
 """
         )
         # pylint: disable=sql-injection
