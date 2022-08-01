@@ -12,8 +12,22 @@ class ProductPricelist(models.Model):
     @api.model
     def create(self, vals):
         res = super(ProductPricelist, self).create(vals)
+        res.delay_create_or_update_pricelist_role()
+        return res
+
+    def unlink(self):
+        domain_roles = [("pricelist_id", "in", self.ids)]
+        self.env["elasticsearch.role"].search(domain_roles).delay_delete_role()
+        return super(ProductPricelist, self).unlink()
+
+    def delay_create_or_update_pricelist_role(self):
         backends = self.env["se.backend.elasticsearch"].search([])
         for backend in backends:
-            desc = _("Create Pricelist on ElasticSearch: %s") % res.name
-            backend.with_delay(description=desc).create_or_update_pricelist_role(res)
-        return res
+            for pl in self:
+                desc = _("Create Pricelist Role on ElasticSearch: %s") % pl.name
+                backend.with_delay(description=desc).create_or_update_pricelist_role(pl)
+
+    def write(self, vals):
+        if "name" in vals:
+            self.delay_create_or_update_pricelist_role()
+        return super(ProductPricelist, self).write(vals)
