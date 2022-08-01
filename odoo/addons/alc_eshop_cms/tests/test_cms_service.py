@@ -53,7 +53,7 @@ class TestCmsService(SavepointComponentCase, AlcEshopNewsMixin):
         with self.cms_service() as service:
             res = service.dispatch("content_search", params={"type": "snippet"})
         self.assertTrue(res)
-        self.assertEquals(res["size"], 2)
+        self.assertEquals(res["size"], 3)
         with self.cms_service() as service:
             res = service.dispatch(
                 "content_search", params={"type": "snippet", "lang": "fr"}
