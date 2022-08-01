@@ -23,4 +23,20 @@
                       (4, ref('base.lang_nl_BE'))]"
     />
     </record>
+        <record
+    model="alc.eshop.cms.snippet"
+    id="alc_eshop_cms_snippet_alcyonnaire_howto"
+  >
+        <field name="name">Devenir Alcyonnaire.</field>
+        <field name="code">alcyonnaire_howto</field>
+        <field name="content"><![CDATA[
+<p>Devenir Alcyonnaire...</p>
+]]></field>
+        <field
+      name="lang_ids"
+      eval="[(4, ref('base.lang_en')),
+                      (4, ref('base.lang_fr_BE')),
+                      (4, ref('base.lang_nl_BE'))]"
+    />
+    </record>
 </odoo>
