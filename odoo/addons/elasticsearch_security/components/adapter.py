@@ -50,3 +50,17 @@ class ElasticsearchAdapter(Component):
             if r.status_code not in [200, 201]:
                 msg = _("Could not put role mapping for %s. Original error: %s")
                 raise ValidationError(msg % (role.name, r.content))
+
+    def delete_role(self, role_name):
+        host = self.backend_record.es_server_host
+        host = host if host.endswith("/") else host + "/"
+        base_url = host + "_plugins/_security/api/"
+        url = base_url + "roles/" + role_name
+        auth = (self.backend_record.es_user, self.backend_record.es_password)
+        headers = {"Content-Type": "application/json"}
+        ssl = self.backend_record.ssl
+        r = requests.delete(url=url, auth=auth, headers=headers, verify=ssl)
+        if r.status_code not in [200, 201, 404]:
+            # 404 means the role already doesn't exist, so it should be fine
+            msg = _("Could not delete role %s. Original error: %s")
+            raise ValidationError(msg % (role_name, r.content))

@@ -4,6 +4,8 @@
 
 from odoo import fields, models
 
+from odoo.addons.queue_job.job import job
+
 
 class SeBackendElasticsearch(models.Model):
 
@@ -31,8 +33,16 @@ class SeBackendElasticsearch(models.Model):
             adapter = work.component(usage="se.backend.adapter")
             return adapter.put_roles()
 
+    @job(default_channel="root.background.process")
     def synchronize_role(self, role):
         self.ensure_one()
         with self.work_on(self._name, index=None) as work:
             adapter = work.component(usage="se.backend.adapter")
             return adapter.put_role(role)
+
+    @job(default_channel="root.background.process")
+    def delete_role(self, role_name):
+        self.ensure_one()
+        with self.work_on(self._name, index=None) as work:
+            adapter = work.component(usage="se.backend.adapter")
+            return adapter.delete_role(role_name)
