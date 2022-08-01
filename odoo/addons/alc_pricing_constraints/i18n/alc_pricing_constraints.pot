@@ -20,7 +20,7 @@ msgid "Formula discount items are not supported."
 msgstr ""
 
 #. module: alc_pricing_constraints
-#: code:addons/alc_pricing_constraints/models/product_pricelist_item.py:65
+#: code:addons/alc_pricing_constraints/models/product_pricelist_item.py:33
 #, python-format
 msgid "Items based on other pricelists are not supported."
 msgstr ""
@@ -39,17 +39,5 @@ msgstr ""
 #: model:ir.actions.act_window,name:alc_pricing_constraints.product_pricelist_item_action
 #: model:ir.ui.menu,name:alc_pricing_constraints.menu_product_pricelist_item
 msgid "Pricelists Items"
-msgstr ""
-
-#. module: alc_pricing_constraints
-#: code:addons/alc_pricing_constraints/models/product_pricelist_item.py:48
-#, python-format
-msgid "There is a useless (0%) discount."
-msgstr ""
-
-#. module: alc_pricing_constraints
-#: code:addons/alc_pricing_constraints/models/product_pricelist_item.py:54
-#, python-format
-msgid "There is a useless (formula) discount."
 msgstr ""
 
