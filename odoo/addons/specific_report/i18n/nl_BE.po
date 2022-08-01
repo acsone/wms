@@ -125,13 +125,6 @@ msgstr ""
 "                    <span>Fax:</span>"
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
-#: model:ir.ui.view,arch_db:specific_report.report_saleorder_document_inherit
-msgid "DON'T FORGET TO BRING BACK COOLPACK IF ANY"
-msgstr "LAAT DE ALCYON KOELELEMENTEN ALTIJD IN DE KOELBOX, zodat de chauffeur ze kan verwisselen!"
-
-
-#. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid ""
 "<br/>\n"
@@ -690,6 +683,14 @@ msgstr "Valuta"
 #: model:ir.ui.view,arch_db:specific_report.report_passport_body
 msgid "Customer"
 msgstr "Klant"
+
+#. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
+#: model:ir.ui.view,arch_db:specific_report.report_saleorder_document_inherit
+msgid "DON'T FORGET TO BRING BACK COOLPACK IF ANY"
+msgstr ""
+"LAAT DE ALCYON KOELELEMENTEN ALTIJD IN DE KOELBOX, zodat de chauffeur ze kan "
+"verwisselen!"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice

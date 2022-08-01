@@ -125,12 +125,6 @@ msgstr ""
 "                    <span>Fax:</span>"
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
-#: model:ir.ui.view,arch_db:specific_report.report_saleorder_document_inherit
-msgid "DON'T FORGET TO BRING BACK COOLPACK IF ANY"
-msgstr "Merci de SYSTÉMATIQUEMENT LAISSER LES BLOCS RÉFRIGÉRANTS ALCYON DANS LA GLACIÈRE afin que le chauffeur fasse l'échange!"
-
-#. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid ""
 "<br/>\n"
@@ -689,6 +683,14 @@ msgstr "Devise"
 #: model:ir.ui.view,arch_db:specific_report.report_passport_body
 msgid "Customer"
 msgstr "Client"
+
+#. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
+#: model:ir.ui.view,arch_db:specific_report.report_saleorder_document_inherit
+msgid "DON'T FORGET TO BRING BACK COOLPACK IF ANY"
+msgstr ""
+"Merci de SYSTÉMATIQUEMENT LAISSER LES BLOCS RÉFRIGÉRANTS ALCYON DANS LA "
+"GLACIÈRE afin que le chauffeur fasse l'échange!"
 
 #. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice
