@@ -2,10 +2,6 @@
   <template id="specific_report.report_deliveryslip_alcyon">
     <div class="page">
       <div id="left_header" class="remove_padding_top">
-        <div>
-            <span><center><b
-              >DON'T FORGET TO BRING BACK COOLPACK IF ANY</b></center></span>
-        </div>
         <table id="invoice_reference" class="border_table round_table">
           <tr>
             <td>
@@ -47,6 +43,10 @@
           t-field="deliveryslip.partner_id"
           t-options='{"widget": "contact", "fields": ["name", "address"], "no_marker": True}'
         />
+      </div>
+      <div>
+        <span style="font-weight:bold;text-decoration:underline;font-size:25px;"><center
+          >DON'T FORGET TO BRING BACK COOLPACK IF ANY</center></span>
       </div>
       <t
         t-call="specific_report.deliveryslip_with_price"
