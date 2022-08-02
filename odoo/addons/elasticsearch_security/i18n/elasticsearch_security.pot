@@ -24,6 +24,12 @@ msgid "Body"
 msgstr ""
 
 #. module: elasticsearch_security
+#: code:addons/elasticsearch_security/components/adapter.py:65
+#, python-format
+msgid "Could not delete role %s. Original error: %s"
+msgstr ""
+
+#. module: elasticsearch_security
 #: code:addons/elasticsearch_security/components/adapter.py:45
 #, python-format
 msgid "Could not put role %s. Original error: %s"
@@ -43,6 +49,12 @@ msgstr ""
 #. module: elasticsearch_security
 #: model:ir.model.fields,field_description:elasticsearch_security.field_elasticsearch_role_create_date
 msgid "Created on"
+msgstr ""
+
+#. module: elasticsearch_security
+#: code:addons/elasticsearch_security/models/elasticsearch_role.py:49
+#, python-format
+msgid "Delete Security Role %s"
 msgstr ""
 
 #. module: elasticsearch_security
@@ -156,6 +168,18 @@ msgstr ""
 #. module: elasticsearch_security
 #: model:ir.ui.view,arch_db:elasticsearch_security.se_backend_elasticsearch_form_view
 msgid "Synchronize Roles"
+msgstr ""
+
+#. module: elasticsearch_security
+#: code:addons/elasticsearch_security/models/elasticsearch_role.py:40
+#, python-format
+msgid "Synchronize Security Role %s"
+msgstr ""
+
+#. module: elasticsearch_security
+#: code:addons/elasticsearch_security/models/elasticsearch_role.py:26
+#, python-format
+msgid "The name must be unique by backend!"
 msgstr ""
 
 #. module: elasticsearch_security
