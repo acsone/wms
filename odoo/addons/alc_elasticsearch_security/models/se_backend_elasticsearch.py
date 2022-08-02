@@ -30,8 +30,9 @@ class SeBackendElasticsearch(models.Model):
             ]
             }
         """
+        pricelist._compute_role_name()  # it is a compute store, value might be outdated
         price_role_name = pricelist.role_name
-        domain = [("name", "=", price_role_name), ("backend_id", "=", self.id)]
+        domain = [("pricelist_id", "=", pricelist.id)]
         existing_role = self.env["elasticsearch.role"].search(domain)
         values = {
             "body": BODY
@@ -41,10 +42,11 @@ class SeBackendElasticsearch(models.Model):
                 price_role_name,
                 pricelist.discount_role_name,
                 pricelist.discount_role_name,
-            )
+            ),
+            "name": price_role_name,
         }
         if not existing_role:
-            values.update({"name": price_role_name, "backend_id": self.id})
+            values.update({"backend_id": self.id, "pricelist_id": pricelist.id})
             existing_role.create(values)
         else:
             existing_role.write(values)
