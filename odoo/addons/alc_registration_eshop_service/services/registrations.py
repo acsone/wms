@@ -30,7 +30,7 @@ class RegistrationService(Component):
     def _map_input_name(self, params):
         firstname = params.pop("firstname", "")
         lastname = params.pop("lastname", "")
-        params["name"] = " ".join((firstname, lastname)).strip()
+        params["name"] = " ".join((lastname, firstname)).strip()
         return params
 
     def _map_input_title_id(self, params):

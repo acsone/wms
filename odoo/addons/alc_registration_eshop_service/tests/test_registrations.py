@@ -20,3 +20,11 @@ class TestRegistrationServiceFlow(TestRegistrationService):
             self.assertEqual(registration.title, title)
             self.assertEqual(registration.vat, "vat")
             self.assertEqual(registration.clientele, "livestock,pet")
+
+    def test_creation_veterinary(self):
+        params = self._get_registration_service_vals()
+        params["function"] = "function_veterinary"
+        with self.registrations_service() as service:
+            result = service.dispatch("submit", params=params)
+            registration = service.model.browse(result["id"])
+            self.assertEqual(registration.occupation, "veterinary")
