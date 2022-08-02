@@ -59,6 +59,10 @@
   "description": "compute current price information into doc",
   "processors": [
     {
+      "set": {
+        "field": "_source.ingest_time",
+        "value": "{{_ingest.timestamp}}"
+      },
       "script": {
         "lang": "painless",
         "source": """
@@ -99,7 +103,7 @@
             return get_price_data_for_day(prices, null);
           }
           double current_supplier_discount = 0;
-          ZonedDateTime today = ctx.timestamp;
+          ZonedDateTime today = ZonedDateTime.parse(ctx['ingest_time']);
           String supplier_discount_path = 'supplier_discount';
           if (ctx.containsKey(supplier_discount_path)) {
             List prices = ctx.supplier_discount;
