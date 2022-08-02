@@ -14,19 +14,26 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_elasticsearch_security
+#: code:addons/alc_elasticsearch_security/models/product_pricelist.py:27
+#, python-format
+msgid "Create Pricelist Role on ElasticSearch: %s"
+msgstr ""
+
+#. module: alc_elasticsearch_security
 #: model:ir.ui.view,arch_db:alc_elasticsearch_security.se_backend_elasticsearch_form_view
 msgid "Create Pricelist Roles"
 msgstr ""
 
 #. module: alc_elasticsearch_security
-#: code:addons/alc_elasticsearch_security/models/product_pricelist.py:17
-#, python-format
-msgid "Create Pricelist on ElasticSearch: %s"
+#: model:ir.model,name:alc_elasticsearch_security.model_se_backend_elasticsearch
+msgid "Elasticsearch Backend"
 msgstr ""
 
 #. module: alc_elasticsearch_security
-#: model:ir.model,name:alc_elasticsearch_security.model_se_backend_elasticsearch
-msgid "Elasticsearch Backend"
+#: code:addons/alc_elasticsearch_security/models/elasticsearch_role.py:20
+#: sql_constraint:elasticsearch.role:0
+#, python-format
+msgid "Only one role by pricelist per backend."
 msgstr ""
 
 #. module: alc_elasticsearch_security
@@ -36,6 +43,12 @@ msgstr ""
 
 #. module: alc_elasticsearch_security
 #: model:ir.model,name:alc_elasticsearch_security.model_product_pricelist
+#: model:ir.model.fields,field_description:alc_elasticsearch_security.field_elasticsearch_role_pricelist_id
 msgid "Pricelist"
+msgstr ""
+
+#. module: alc_elasticsearch_security
+#: model:ir.model,name:alc_elasticsearch_security.model_elasticsearch_role
+msgid "elasticsearch.role"
 msgstr ""
 
