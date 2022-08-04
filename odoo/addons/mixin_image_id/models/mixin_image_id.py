@@ -43,3 +43,7 @@ class MixinImageId(models.AbstractModel):
                     "data": new_image,
                 }
             )
+
+    def unlink(self):
+        self.mapped("image_id").unlink()
+        return super(MixinImageId, self).unlink()
