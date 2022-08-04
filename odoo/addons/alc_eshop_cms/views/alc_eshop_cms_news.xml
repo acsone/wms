@@ -48,6 +48,14 @@
                             </group>
                          </page>
                          <page string="Image preview">
+                             <div class="alert alert-warning" id="images_info">
+                                 <p>Images should be in the following format:
+                                     <ul>
+                                         <li>Thumbnail: 288x128 (px)</li>
+                                         <li>Header: 1176x384 (px)</li>
+                                     </ul>
+                                 </p>
+                             </div>
                              <group>
                              <label for="thumbnail_image" />
                              <field
