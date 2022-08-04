@@ -22,11 +22,13 @@ class MixinFileId(models.AbstractModel):
         for rec in self:
             new_file = rec.file
             if rec.file_id:
-                rec.file_id.unlink()
+                rec.file_id.with_context(cleanning_storage_file=True).unlink()
             if not new_file:
-                continue
-            vals_file = {"name": rec.filename or rec.name, "data": new_file}
-            rec.file_id = self._create_file_id(vals_file)
+                rec.file_id = None
+                rec.filename = None
+            else:
+                vals_file = {"name": rec.filename or rec.name, "data": new_file}
+                rec.file_id = self._create_file_id(vals_file)
 
     @api.model
     def _create_file_id(self, vals):
