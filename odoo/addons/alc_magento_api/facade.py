@@ -160,7 +160,7 @@ class FacadeProduct(Facade):
                 }
                 promotions.append(promotion)
             values["promotions"] = promotions
-        return data.id, values if by_id else values
+        return (data.id, values) if by_id else values
 
 
 class FacadeCatalog(FacadeProduct):
