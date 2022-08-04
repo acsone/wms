@@ -7,7 +7,7 @@ from odoo import api, fields, models
 
 class AlcEshopCmsSnippet(models.Model):
 
-    _inherit = "alc.content.lang.mixin"
+    _inherit = ["alc.content.lang.mixin", "mixin.image.id"]
     _name = "alc.eshop.cms.snippet"
     _content_type = "snippet"
 
@@ -20,6 +20,7 @@ class AlcEshopCmsSnippet(models.Model):
         return [
             "code",
             "content",
+            "image",
         ]
 
     @api.model

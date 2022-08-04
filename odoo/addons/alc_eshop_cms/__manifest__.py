@@ -15,7 +15,7 @@
         "base_jsonify",
         "base_rest",
         "sales_team",
-        "storage_image",
+        "mixin_image_id",
     ],
     "data": [
         "data/ir_attachment.xml",
