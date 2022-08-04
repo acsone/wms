@@ -89,6 +89,7 @@
         # specific
         "alc_running_env",
         # "alc_geo_delivery_rounds",
+        "account_invoice_email",
         "account_move_productcateg",
         "account_payment_order_background",
         "account_tax_one_vat",
