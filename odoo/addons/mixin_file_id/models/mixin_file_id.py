@@ -39,3 +39,7 @@ class MixinFileId(models.AbstractModel):
         return self.env["storage.backend"]._get_backend_id_from_param(
             self.env, "storage.image.backend_id"
         )
+
+    def unlink(self):
+        self.mapped("file_id").unlink()
+        return super(MixinFileId, self).unlink()
