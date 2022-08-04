@@ -86,11 +86,6 @@ msgid "From"
 msgstr ""
 
 #. module: alc_eshop_ads
-#: model:ir.model.fields,help:alc_eshop_ads.field_alc_eshop_ads_image_url
-msgid "HTTP accessible path to the file"
-msgstr ""
-
-#. module: alc_eshop_ads
 #: model:ir.model.fields,field_description:alc_eshop_ads.field_alc_eshop_ads_id
 msgid "ID"
 msgstr ""
@@ -108,21 +103,6 @@ msgstr ""
 #. module: alc_eshop_ads
 #: model:ir.model.fields,help:alc_eshop_ads.field_alc_eshop_ads_file_id
 msgid "If specified, the file will be downloaded by the customer on click on the ads banner into the website."
-msgstr ""
-
-#. module: alc_eshop_ads
-#: model:ir.model.fields,field_description:alc_eshop_ads.field_alc_eshop_ads_image
-msgid "Image"
-msgstr ""
-
-#. module: alc_eshop_ads
-#: model:ir.model.fields,field_description:alc_eshop_ads.field_alc_eshop_ads_image_medium_url
-msgid "Image medium url"
-msgstr ""
-
-#. module: alc_eshop_ads
-#: model:ir.model.fields,field_description:alc_eshop_ads.field_alc_eshop_ads_image_small_url
-msgid "Image small url"
 msgstr ""
 
 #. module: alc_eshop_ads
@@ -151,7 +131,6 @@ msgid "Last Updated on"
 msgstr ""
 
 #. module: alc_eshop_ads
-#: model:ir.model.fields,field_description:alc_eshop_ads.field_alc_eshop_ads_image_filename
 #: model:ir.model.fields,field_description:alc_eshop_ads.field_alc_eshop_ads_name
 #: model:ir.ui.view,arch_db:alc_eshop_ads.alc_eshop_ads_form_view
 msgid "Name"
@@ -178,7 +157,7 @@ msgid "Slot:"
 msgstr ""
 
 #. module: alc_eshop_ads
-#: code:addons/alc_eshop_ads/models/alc_eshop_ads.py:73
+#: code:addons/alc_eshop_ads/models/alc_eshop_ads.py:64
 #, python-format
 msgid "The defined period on %s is not a valid (%s > %s)"
 msgstr ""
@@ -204,17 +183,12 @@ msgid "Upcoming ads from today"
 msgstr ""
 
 #. module: alc_eshop_ads
-#: model:ir.model.fields,field_description:alc_eshop_ads.field_alc_eshop_ads_image_url
-msgid "Url"
-msgstr ""
-
-#. module: alc_eshop_ads
 #: model:res.groups,name:alc_eshop_ads.eshop_ads_manager_group
 msgid "Website ads manager"
 msgstr ""
 
 #. module: alc_eshop_ads
-#: code:addons/alc_eshop_ads/models/alc_eshop_ads.py:60
+#: code:addons/alc_eshop_ads/models/alc_eshop_ads.py:51
 #, python-format
 msgid "You must choose between the download of a file OR the redirect to a website on click on the banner"
 msgstr ""
@@ -227,11 +201,6 @@ msgstr ""
 #. module: alc_eshop_ads
 #: model:ir.model.fields,field_description:alc_eshop_ads.field_alc_eshop_ads_file_id
 msgid "storage file"
-msgstr ""
-
-#. module: alc_eshop_ads
-#: model:ir.model.fields,field_description:alc_eshop_ads.field_alc_eshop_ads_image_id
-msgid "storage image"
 msgstr ""
 
 #. module: alc_eshop_ads

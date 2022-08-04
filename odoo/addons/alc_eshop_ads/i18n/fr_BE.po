@@ -89,11 +89,6 @@ msgid "From"
 msgstr "De"
 
 #. module: alc_eshop_ads
-#: model:ir.model.fields,help:alc_eshop_ads.field_alc_eshop_ads_image_url
-msgid "HTTP accessible path to the file"
-msgstr ""
-
-#. module: alc_eshop_ads
 #: model:ir.model.fields,field_description:alc_eshop_ads.field_alc_eshop_ads_id
 msgid "ID"
 msgstr "ID"
@@ -124,23 +119,6 @@ msgstr ""
 "client."
 
 #. module: alc_eshop_ads
-#: model:ir.model.fields,field_description:alc_eshop_ads.field_alc_eshop_ads_image
-#, fuzzy
-msgid "Image"
-msgstr "Images"
-
-#. module: alc_eshop_ads
-#: model:ir.model.fields,field_description:alc_eshop_ads.field_alc_eshop_ads_image_medium_url
-#, fuzzy
-msgid "Image medium url"
-msgstr "Url de la vignette"
-
-#. module: alc_eshop_ads
-#: model:ir.model.fields,field_description:alc_eshop_ads.field_alc_eshop_ads_image_small_url
-msgid "Image small url"
-msgstr "Url de la vignette"
-
-#. module: alc_eshop_ads
 #: model:ir.model.fields,field_description:alc_eshop_ads.field_alc_eshop_ads_lang_id
 msgid "Lang"
 msgstr "Langue"
@@ -166,7 +144,6 @@ msgid "Last Updated on"
 msgstr "Dernière mis à jour le"
 
 #. module: alc_eshop_ads
-#: model:ir.model.fields,field_description:alc_eshop_ads.field_alc_eshop_ads_image_filename
 #: model:ir.model.fields,field_description:alc_eshop_ads.field_alc_eshop_ads_name
 #: model:ir.ui.view,arch_db:alc_eshop_ads.alc_eshop_ads_form_view
 msgid "Name"
@@ -193,7 +170,7 @@ msgid "Slot:"
 msgstr "Emplacement dans le bandeau:"
 
 #. module: alc_eshop_ads
-#: code:addons/alc_eshop_ads/models/alc_eshop_ads.py:73
+#: code:addons/alc_eshop_ads/models/alc_eshop_ads.py:64
 #, python-format
 msgid "The defined period on %s is not a valid (%s > %s)"
 msgstr "La période définie pour %s n'est pas valide (%s > %s)"
@@ -219,17 +196,12 @@ msgid "Upcoming ads from today"
 msgstr "Annonces futures"
 
 #. module: alc_eshop_ads
-#: model:ir.model.fields,field_description:alc_eshop_ads.field_alc_eshop_ads_image_url
-msgid "Url"
-msgstr ""
-
-#. module: alc_eshop_ads
 #: model:res.groups,name:alc_eshop_ads.eshop_ads_manager_group
 msgid "Website ads manager"
 msgstr "Gestionnaire des publicités web"
 
 #. module: alc_eshop_ads
-#: code:addons/alc_eshop_ads/models/alc_eshop_ads.py:60
+#: code:addons/alc_eshop_ads/models/alc_eshop_ads.py:51
 #, python-format
 msgid ""
 "You must choose between the download of a file OR the redirect to a website "
@@ -249,15 +221,24 @@ msgid "storage file"
 msgstr ""
 
 #. module: alc_eshop_ads
-#: model:ir.model.fields,field_description:alc_eshop_ads.field_alc_eshop_ads_image_id
-#, fuzzy
-msgid "storage image"
-msgstr "Image publicitaire"
-
-#. module: alc_eshop_ads
 #: model:ir.ui.view,arch_db:alc_eshop_ads.alc_eshop_ads_kanban_view
 msgid "to"
 msgstr "au"
+
+#, fuzzy
+#~ msgid "Image"
+#~ msgstr "Images"
+
+#, fuzzy
+#~ msgid "Image medium url"
+#~ msgstr "Url de la vignette"
+
+#~ msgid "Image small url"
+#~ msgstr "Url de la vignette"
+
+#, fuzzy
+#~ msgid "storage image"
+#~ msgstr "Image publicitaire"
 
 #~ msgid "File"
 #~ msgstr "Fichier"
