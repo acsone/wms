@@ -104,6 +104,7 @@
         "alc_b2c_to_magento",
         "alc_chronovet",
         "alc_chronovet_payment_globalization",
+        "alc_country",
         "alc_customer_audit",
         "alc_customer_invoices_by_fiscal_year",
         "alc_delivery_carrier_gls",
