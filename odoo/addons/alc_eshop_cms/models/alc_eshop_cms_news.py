@@ -8,7 +8,7 @@ from odoo.exceptions import ValidationError
 
 class AlcEshopCmsNews(models.Model):
 
-    _inherit = "alc.content.lang.mixin"
+    _inherit = ["alc.content.lang.mixin", "mixin.file.id", "mixin.image.id"]
     _name = "alc.eshop.cms.news"
     _content_type = "news"
     _order = "date_start desc, id desc"
@@ -28,21 +28,12 @@ class AlcEshopCmsNews(models.Model):
         related="thumbnail_image_id.image_medium_url"
     )
 
-    image_id = fields.Many2one(string="storage image", comodel_name="storage.image")
-    image = fields.Binary(compute="_compute_image", inverse="_inverse_image")
-    image_filename = fields.Char()
-    image_url = fields.Char(related="image_id.url")
-    image_small_url = fields.Char(related="image_id.image_small_url")
-    image_medium_url = fields.Char(related="image_id.image_medium_url")
-
     foreword = fields.Html(required=True, translate=True, sanitize=False)
     content = fields.Html(required=True, translate=True, sanitize=False)
     date_start = fields.Date(required=True)
     date_end = fields.Date(required=True)
 
-    file_id = fields.Many2one(string="storage file", comodel_name="storage.file",)
-    file = fields.Binary(compute="_compute_file", inverse="_inverse_file")
-    filename = fields.Char()
+    filename = fields.Char(related=False)
 
     @api.depends("thumbnail_image_id")
     def _compute_thumbnail_image(self):
@@ -68,59 +59,8 @@ class AlcEshopCmsNews(models.Model):
                 }
             )
 
-    @api.depends("image_id")
-    def _compute_image(self):
-        for rec in self:
-            rec.image = rec.image_id.data
-
-    def _inverse_image(self):
-        for rec in self:
-            image = rec.image
-            if rec.image_id:
-                rec.image_id.with_context(cleanning_storage_file=True).sudo().unlink()
-            if not image:
-                rec.image_id = None
-                rec.image_filename = None
-                return
-            rec.image_id = rec.image_id.create(
-                {
-                    "backend_id": rec._get_default_backend_id(),
-                    "name": rec.image_filename or rec.name,
-                    "data": image,
-                }
-            )
-
-    @api.depends("file_id")
-    def _compute_file(self):
-        for rec in self:
-            rec.file = rec.file_id.data
-
-    def _inverse_file(self):
-        for rec in self:
-            new_file = rec.file
-            if rec.file_id:
-                rec.file_id.with_context(cleanning_storage_file=True).sudo().unlink()
-            if not new_file:
-                rec.file_id = None
-                rec.filename = None
-                return
-            rec.file_id = rec.file_id.create(
-                {
-                    "backend_id": rec._get_default_backend_id(),
-                    "name": rec.filename or rec.name,
-                    "data": new_file,
-                }
-            )
-
-    def _get_default_backend_id(self):
-        return self.env["storage.backend"]._get_backend_id_from_param(
-            self.env, "storage.image.backend_id"
-        )
-
     def unlink(self):
-        self.mapped("image_id").sudo().unlink()
         self.mapped("thumbnail_image_id").sudo().unlink()
-        self.mapped("file_id").sudo().unlink()
         return super(AlcEshopCmsNews, self).unlink()
 
     @api.constrains("date_start", "date_end")
