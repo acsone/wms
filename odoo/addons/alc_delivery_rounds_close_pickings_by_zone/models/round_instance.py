@@ -48,7 +48,8 @@ class RoundInstance(models.Model):
                     % rec.display_name
                 )
                 float_start_time_reopen = (
-                    rec.time_leave_planned - rec.time_reopen_picking_launched
+                    rec.geo_optimization_planned_start_loading_time
+                    - rec.time_reopen_picking_launched
                 )
                 start_time_reopen = float2time(float_start_time_reopen)
                 eta_str = rec.date + " " + start_time_reopen

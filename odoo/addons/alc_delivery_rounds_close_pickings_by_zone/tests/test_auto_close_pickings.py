@@ -144,7 +144,7 @@ class TestAutoClosePickings(DeliveryRoundTestCase, JobMixin):
         queue_job = job_counter.search_created()
         self.assertEqual(len(queue_job), 1)
         date_relaunch = fields.Datetime.from_string(
-            self.delivery_round_1.date + " 08:30:00"
+            self.delivery_round_1.date + " 07:45:00"
         )
         bru_tz = pytz.timezone("Europe/Brussels")
         utc_tz = pytz.timezone("UTC")
