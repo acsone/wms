@@ -11,7 +11,9 @@ class SeBackendElasticsearch(models.Model):
 
     _inherit = "se.backend.elasticsearch"
 
-    @job(default_channel="root.background.price")
+    # The queue capacity must be set to 1 since OpensSearch doesn't support
+    # concurrent update of roles
+    @job(default_channel="root.background.opensearch.role")
     def create_or_update_linked_role(self, record):
         values = record._get_vals()
         domain = record._get_linked_roles_domain()

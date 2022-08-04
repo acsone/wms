@@ -12,7 +12,7 @@
     "website": "https://acsone.eu/",
     "depends": [
         "alc_search_engine",
-        "elasticsearch_security",
+        "elasticsearch_security_mixin",
         "alc_partner_type",
         "pricelist_role_name",
         "alc_eshop_ads_elasticsearch",
