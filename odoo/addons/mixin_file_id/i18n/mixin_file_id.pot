@@ -21,6 +21,7 @@ msgstr ""
 #. module: mixin_file_id
 #: model:ir.model.fields,field_description:mixin_file_id.field_alc_classified_file
 #: model:ir.model.fields,field_description:mixin_file_id.field_alc_eshop_ads_file
+#: model:ir.model.fields,field_description:mixin_file_id.field_alc_eshop_cms_news_file
 #: model:ir.model.fields,field_description:mixin_file_id.field_mixin_file_id_file
 msgid "File"
 msgstr ""
@@ -49,6 +50,7 @@ msgstr ""
 
 #. module: mixin_file_id
 #: model:ir.model.fields,field_description:mixin_file_id.field_alc_classified_file_id
+#: model:ir.model.fields,field_description:mixin_file_id.field_alc_eshop_cms_news_file_id
 #: model:ir.model.fields,field_description:mixin_file_id.field_mixin_file_id_file_id
 msgid "storage file"
 msgstr ""
