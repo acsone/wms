@@ -964,11 +964,6 @@ msgid "Export"
 msgstr ""
 
 #. module: alc_eshop_cms
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news_file
-msgid "File"
-msgstr ""
-
-#. module: alc_eshop_cms
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news_filename
 msgid "Filename"
 msgstr ""
@@ -989,9 +984,13 @@ msgid "Group"
 msgstr ""
 
 #. module: alc_eshop_cms
-#: model:ir.model.fields,help:alc_eshop_cms.field_alc_eshop_cms_news_image_url
 #: model:ir.model.fields,help:alc_eshop_cms.field_alc_eshop_cms_news_thumbnail_image_url
 msgid "HTTP accessible path to the file"
+msgstr ""
+
+#. module: alc_eshop_cms
+#: model:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_news_form_view
+msgid "Header: 1176x384 (px)"
 msgstr ""
 
 #. module: alc_eshop_cms
@@ -1006,19 +1005,12 @@ msgid "ID"
 msgstr ""
 
 #. module: alc_eshop_cms
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news_image
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_ir_attachment_storage_image_id
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_shipping_label_storage_image_id
 msgid "Image"
 msgstr ""
 
 #. module: alc_eshop_cms
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news_image_filename
-msgid "Image filename"
-msgstr ""
-
-#. module: alc_eshop_cms
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news_image_medium_url
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news_thumbnail_image_medium_url
 msgid "Image medium url"
 msgstr ""
@@ -1029,9 +1021,13 @@ msgid "Image preview"
 msgstr ""
 
 #. module: alc_eshop_cms
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news_image_small_url
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news_thumbnail_image_small_url
 msgid "Image small url"
+msgstr ""
+
+#. module: alc_eshop_cms
+#: model:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_news_form_view
+msgid "Images should be in the following format:"
 msgstr ""
 
 #. module: alc_eshop_cms
@@ -1172,7 +1168,7 @@ msgid "Slots"
 msgstr ""
 
 #. module: alc_eshop_cms
-#: code:addons/alc_eshop_cms/models/alc_eshop_cms_news.py:133
+#: code:addons/alc_eshop_cms/models/alc_eshop_cms_news.py:73
 #, python-format
 msgid "The defined period is not a valid (%s > %s)"
 msgstr ""
@@ -1193,6 +1189,11 @@ msgid "Thumbnail image filename"
 msgstr ""
 
 #. module: alc_eshop_cms
+#: model:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_news_form_view
+msgid "Thumbnail: 288x128 (px)"
+msgstr ""
+
+#. module: alc_eshop_cms
 #: model:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_news_search_view
 msgid "Upcoming"
 msgstr ""
@@ -1205,7 +1206,6 @@ msgstr ""
 #. module: alc_eshop_cms
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_content_lang_mixin_url
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_content_url_mixin_url
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news_image_url
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news_thumbnail_image_url
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news_url
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_url
@@ -1284,12 +1284,6 @@ msgid "name"
 msgstr ""
 
 #. module: alc_eshop_cms
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news_file_id
-msgid "storage file"
-msgstr ""
-
-#. module: alc_eshop_cms
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news_image_id
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news_thumbnail_image_id
 msgid "storage image"
 msgstr ""
