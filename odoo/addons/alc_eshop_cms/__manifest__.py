@@ -15,6 +15,7 @@
         "base_jsonify",
         "base_rest",
         "sales_team",
+        "mixin_file_id",
         "mixin_image_id",
     ],
     "data": [

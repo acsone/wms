@@ -80,8 +80,3 @@ class AlcEshopAds(models.Model):
                 qweb_date.value_to_html(rec.date_start, rec),
                 qweb_date.value_to_html(rec.date_end, rec),
             )
-
-    def unlink(self):
-        self.mapped("image_id").unlink()
-        self.mapped("file_id").unlink()
-        return super(AlcEshopAds, self).unlink()
