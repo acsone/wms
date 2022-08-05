@@ -34,6 +34,7 @@
         "alc_eshop_veterinary_group",
         "alc_registration_eshop_service",
         "alc_keycloak",
+        "alc_elasticsearch_security_vt_groups",
         "alc_product_promotion_mailing",
         "alc_sale_cart_price_recalculation",
         "alc_search_engine",
