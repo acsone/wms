@@ -20,6 +20,7 @@ msgstr ""
 
 #. module: mixin_image_id
 #: model:ir.model.fields,help:mixin_image_id.field_alc_eshop_ads_image_url
+#: model:ir.model.fields,help:mixin_image_id.field_alc_eshop_cms_news_image_url
 #: model:ir.model.fields,help:mixin_image_id.field_alc_eshop_cms_snippet_image_url
 #: model:ir.model.fields,help:mixin_image_id.field_mixin_image_id_image_url
 msgid "HTTP accessible path to the file"
@@ -32,6 +33,7 @@ msgstr ""
 
 #. module: mixin_image_id
 #: model:ir.model.fields,field_description:mixin_image_id.field_alc_eshop_ads_image
+#: model:ir.model.fields,field_description:mixin_image_id.field_alc_eshop_cms_news_image
 #: model:ir.model.fields,field_description:mixin_image_id.field_alc_eshop_cms_snippet_image
 #: model:ir.model.fields,field_description:mixin_image_id.field_mixin_image_id_image
 msgid "Image"
@@ -39,6 +41,7 @@ msgstr ""
 
 #. module: mixin_image_id
 #: model:ir.model.fields,field_description:mixin_image_id.field_alc_eshop_ads_image_medium_url
+#: model:ir.model.fields,field_description:mixin_image_id.field_alc_eshop_cms_news_image_medium_url
 #: model:ir.model.fields,field_description:mixin_image_id.field_alc_eshop_cms_snippet_image_medium_url
 #: model:ir.model.fields,field_description:mixin_image_id.field_mixin_image_id_image_medium_url
 msgid "Image medium url"
@@ -46,6 +49,7 @@ msgstr ""
 
 #. module: mixin_image_id
 #: model:ir.model.fields,field_description:mixin_image_id.field_alc_eshop_ads_image_small_url
+#: model:ir.model.fields,field_description:mixin_image_id.field_alc_eshop_cms_news_image_small_url
 #: model:ir.model.fields,field_description:mixin_image_id.field_alc_eshop_cms_snippet_image_small_url
 #: model:ir.model.fields,field_description:mixin_image_id.field_mixin_image_id_image_small_url
 msgid "Image small url"
@@ -58,6 +62,7 @@ msgstr ""
 
 #. module: mixin_image_id
 #: model:ir.model.fields,field_description:mixin_image_id.field_alc_eshop_ads_image_filename
+#: model:ir.model.fields,field_description:mixin_image_id.field_alc_eshop_cms_news_image_filename
 #: model:ir.model.fields,field_description:mixin_image_id.field_alc_eshop_cms_snippet_image_filename
 #: model:ir.model.fields,field_description:mixin_image_id.field_mixin_image_id_image_filename
 msgid "Name"
@@ -65,6 +70,7 @@ msgstr ""
 
 #. module: mixin_image_id
 #: model:ir.model.fields,field_description:mixin_image_id.field_alc_eshop_ads_image_url
+#: model:ir.model.fields,field_description:mixin_image_id.field_alc_eshop_cms_news_image_url
 #: model:ir.model.fields,field_description:mixin_image_id.field_alc_eshop_cms_snippet_image_url
 #: model:ir.model.fields,field_description:mixin_image_id.field_mixin_image_id_image_url
 msgid "Url"
@@ -77,6 +83,7 @@ msgstr ""
 
 #. module: mixin_image_id
 #: model:ir.model.fields,field_description:mixin_image_id.field_alc_eshop_ads_image_id
+#: model:ir.model.fields,field_description:mixin_image_id.field_alc_eshop_cms_news_image_id
 #: model:ir.model.fields,field_description:mixin_image_id.field_alc_eshop_cms_snippet_image_id
 #: model:ir.model.fields,field_description:mixin_image_id.field_mixin_image_id_image_id
 msgid "storage image"
