@@ -90,9 +90,10 @@ class StockPackOperation(models.Model):
         hw_print(
             self,
             "specific_print.report_stock_product_food_label",
-            qty=quantity,
+            qty=1,
             printer_id=printer_id,
             lot_id=lot_id,
+            qty_done=quantity,
         )
 
     def print_food_report(self):

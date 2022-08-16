@@ -52,7 +52,9 @@ class ClusterPicking(Component):
                     batch, message=self.msg_store.operation_not_found()
                 )
             lot = self.env["stock.production.lot"].browse(lot_id) if lot_id else None
-            self._print_picking_food_product_labels(operation, lot_id=lot)
+            self._print_picking_food_product_labels(
+                operation, quantity=quantity, lot_id=lot
+            )
         return result
 
     def _print_picking_med_products_labels(self, picking, package):
