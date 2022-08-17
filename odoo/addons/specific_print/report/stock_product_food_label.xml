@@ -18,7 +18,7 @@
     t t-set="lot_id" t-value="line.lot_id"
     -->
 
-    <t t-foreach="xrange(1, int(line.qty_done) + 1)" t-as="index">
+    <t t-foreach="xrange(1, int(qty_done) + 1)" t-as="index">
 
     ^XA
     ^FWR
@@ -32,7 +32,7 @@
     ^FO310,330^A060,60^FDB2C^FS\r
     </t>
 
-    ^FO310,480^A060,60^FD<t t-esc="index" /> / <t t-esc="int(line.qty_done)" />^FS\r
+    ^FO310,480^A060,60^FD<t t-esc="index" /> / <t t-esc="int(qty_done)" />^FS\r
 
     ^FO255,60^A030,30^FD<t
             t-esc="res_company.convert_to_ascii(pick.partner_id.display_name and pick.partner_id.display_name[:32] or u'')"
