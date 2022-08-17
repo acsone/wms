@@ -25,11 +25,19 @@ class TestComputeTimeDelay(SavepointCase):
             }
         )
         cls.grn = cls.env["stock.grn"].create(
-            {"carrier_id": cls.partner.id, "date": fake_grn_date}
+            {
+                "carrier_id": cls.partner.id,
+                "date": fake_grn_date,
+                "delivery_note_supplier_number": "12345678",
+            }
         )
 
         cls.grn2 = cls.env["stock.grn"].create(
-            {"carrier_id": cls.partner.id, "date": fake_grn_date2}
+            {
+                "carrier_id": cls.partner.id,
+                "date": fake_grn_date2,
+                "delivery_note_supplier_number": "12345655",
+            }
         )
         cls.warehouse_1 = cls.env["stock.warehouse"].create(
             {"name": "Warehouse1", "code": "WH1"}

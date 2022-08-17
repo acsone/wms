@@ -18,6 +18,7 @@
     <field name="arch" type="xml">
       <field name="state" position="after">
         <field name="grn_id" widget="boolean" string="GRN" />
+        <field name="delivery_note_supplier_number" />
         <field name="grn_date" widget="date" />
       </field>
     </field>
@@ -36,6 +37,10 @@
         />
         <field
           name="grn_date"
+          attrs="{'invisible':[('picking_type_code','!=','incoming')]}"
+        />
+        <field
+          name="delivery_note_supplier_number"
           attrs="{'invisible':[('picking_type_code','!=','incoming')]}"
         />
       </field>
