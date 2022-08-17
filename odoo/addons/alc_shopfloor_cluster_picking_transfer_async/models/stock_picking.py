@@ -29,4 +29,4 @@ class StockPicking(models.Model):
             if rec.state != "done" and rec.batch_id:
                 # Unassign not validated pickings from the batch, they will be
                 # processed in another batch automatically later on
-                rec.batch_id = False
+                rec.write({"batch_id": False, "operator_id": False, "printed": False})
