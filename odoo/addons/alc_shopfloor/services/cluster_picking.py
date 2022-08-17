@@ -560,9 +560,19 @@ class ClusterPicking(Component):
             ):
                 other_lot_operation_ids.append(op.id)
         if other_lot_operation_ids and len(other_lot_operation_ids) > 1:
-            return self._response_for_start_operation(
-                operation, message=self.msg_store.lot_multiple_packages_scan_package()
+            # We already processed some quantities for this lot on same location,
+            # we filter the operation with no quantity done. If there is more than one,
+            # then you need to scan location to reconcile quanitities
+            other_lot_operation = self.env["stock.pack.operation"].browse(
+                other_lot_operation_ids
             )
+            operations = other_lot_operation.filtered(lambda op: op.qty_done <= 0)
+            if len(operations) > 1:
+                return self._response_for_start_operation(
+                    operation,
+                    message=self.msg_store.lot_multiple_packages_scan_location(),
+                )
+            operation = operations
         if lot_id and lot.id != lot_id:
             return self._response_for_start_operation(
                 operation, message=self.msg_store.wrong_lot_scanned(),

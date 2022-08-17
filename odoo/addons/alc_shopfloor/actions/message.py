@@ -304,10 +304,12 @@ class MessageAction(Component):
             ),
         }
 
-    def lot_multiple_packages_scan_package(self):
+    def lot_multiple_packages_scan_location(self):
         return {
             "message_type": "warning",
-            "body": _("This lot is part of multiple packages, please scan a package."),
+            "body": _(
+                "You already processed part of the quantities for this lot. Please, scan the location."
+            ),
         }
 
     def lot_not_found(self):
