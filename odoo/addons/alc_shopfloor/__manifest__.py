@@ -36,6 +36,7 @@
         "alc_stock_move_operation",
         "stock_operation_recompute",
         "stock_lot_loss",
+        "specific_stock",
     ],
     "data": [
         "data/shopfloor_scenario.xml",
