@@ -160,6 +160,24 @@ class TestMissingInfoOnNewProduct(SavepointCase):
         cls.p11 = cls.pt11.product_variant_ids[0]
         cls.p11.categ_id = cls.env.ref("specific_data.product_categ_humain").id
 
+        cls.pt13 = cls.env["product.template"].create(
+            {
+                "name": "Unittest is food mto product",
+                "uom_id": cls.env.ref("product.product_uom_unit").id,
+                "type": "product",
+                "weight": 10.0,
+                "barcode": "23456920009578910",
+                "product_package_storage_type_id": cls.dummy_storage_type.id,
+            }
+        )
+        cls.p13 = cls.pt13.product_variant_ids[0]
+        cls.p13.write(
+            {
+                "categ_id": cls.env.ref("specific_data.product_categ_ali").id,
+                "route_ids": [(6, 0, cls.env.ref("stock.route_warehouse0_mto").ids)],
+            }
+        )
+
         cls.product_box = cls.env["product.packaging"].create(
             {
                 "packaging_type_id": cls.env.ref(
@@ -183,6 +201,7 @@ class TestMissingInfoOnNewProduct(SavepointCase):
             cls.p9,
             cls.p10,
             cls.p11,
+            cls.p13,
         ]
         cls.supplier = cls.ResPartner.create(
             {"name": "Unittest supplier", "ref": "839737475756467"}
@@ -257,6 +276,9 @@ class TestMissingInfoOnNewProduct(SavepointCase):
         )
         cls.operation_human_product = cls.operation_ids.search(
             [("product_id", "=", cls.p11.id)]
+        )
+        cls.operation_food_mto_product = cls.operation_ids.search(
+            [("product_id", "=", cls.p13.id)]
         )
 
         cls.wiz = cls.receptionWizard.create(
@@ -520,3 +542,11 @@ class TestMissingInfoOnNewProduct(SavepointCase):
             self.operation_med_product.product_id.packaging_ids[0].barcode,
             "1134553111112",
         )
+
+    def test_16_food_mto_product(self):
+        self.wiz.operation_id = self.operation_food_mto_product.id
+        self.assertEqual(
+            self.operation_food_mto_product.product_id.name,
+            "Unittest is food mto product",
+        )
+        self.wiz._add()
