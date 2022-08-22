@@ -21,7 +21,7 @@ class ProductPricelist(models.Model):
             "ON item.categ_id = categ.id "
             "WHERE (item.product_tmpl_id IS NULL OR item.product_tmpl_id = %(tmpl_id)s)"
             "AND (item.product_id IS NULL OR item.product_id = %(prod_id)s)"
-            "AND (item.categ_id IS NULL OR item.categ_id = %(categ_id)s) "
+            "AND (item.categ_id IS NULL OR (categ.parent_left <= %(categ_parent_left)s AND categ.parent_right >= %(categ_parent_right)s) ) "
             "AND (item.price_category_id IS NULL " + price_category_subquery + ") "
             "AND (item.pricelist_id = %(self_id)s) "
             "AND (item.date_start IS NULL OR item.date_start<=%(date)s) "
@@ -32,9 +32,10 @@ class ProductPricelist(models.Model):
             "self_id": self.id,
             "tmpl_id": product.product_tmpl_id.id,
             "prod_id": product.id,
-            "categ_id": product.categ_id.id,
             "price_categ_id": price_categ_id,  # might be False
             "date": date,
+            "categ_parent_left": product.categ_id.parent_left,
+            "categ_parent_right": product.categ_id.parent_right,
         }
         self._cr.execute(query, query_args)  # pylint: disable=sql-injection
         ids = [x[0] for x in self._cr.fetchall()]

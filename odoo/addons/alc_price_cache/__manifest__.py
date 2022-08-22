@@ -6,7 +6,7 @@
 {
     "name": "Alcyon Price Cache",
     "description": """Alcyon Price Cache""",
-    "version": "10.0.1.0.0",
+    "version": "10.0.1.0.1",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",

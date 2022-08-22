@@ -89,7 +89,7 @@ class PricelistDiscountCase(SavepointCase):
                         False,
                         {
                             "applied_on": "2_product_category",
-                            "categ_id": cls.category.id,
+                            "categ_id": cls.category.parent_id.id,
                             "compute_price": "percentage",
                             "percent_price": 5,
                         },
