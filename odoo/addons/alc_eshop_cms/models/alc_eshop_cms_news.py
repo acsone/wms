@@ -27,7 +27,7 @@ class AlcEshopCmsNews(models.Model):
     thumbnail_image_medium_url = fields.Char(
         related="thumbnail_image_id.image_medium_url"
     )
-
+    image = fields.Binary(required=False)
     foreword = fields.Html(required=True, translate=True, sanitize=False)
     content = fields.Html(required=True, translate=True, sanitize=False)
     date_start = fields.Date(required=True)
