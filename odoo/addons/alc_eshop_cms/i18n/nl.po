@@ -2824,6 +2824,7 @@ msgid "ID"
 msgstr "ID"
 
 #. module: alc_eshop_cms
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news_image
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_ir_attachment_storage_image_id
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_shipping_label_storage_image_id
 msgid "Image"
