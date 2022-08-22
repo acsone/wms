@@ -37,7 +37,7 @@ class LocationContentTransferSorter(Component):
             # sort by shopfloor picking sequence
             content.location_dest_id.shopfloor_picking_sequence or "",
             # sort by similar destination
-            content.location_dest_name,
+            content.location_dest_id.name,
             # lines before packages (if we have raw products and packages, raw
             # will be on top? wild guess)
             0 if content.product_id else 1,
