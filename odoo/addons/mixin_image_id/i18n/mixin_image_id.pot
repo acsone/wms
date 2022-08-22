@@ -33,7 +33,6 @@ msgstr ""
 
 #. module: mixin_image_id
 #: model:ir.model.fields,field_description:mixin_image_id.field_alc_eshop_ads_image
-#: model:ir.model.fields,field_description:mixin_image_id.field_alc_eshop_cms_news_image
 #: model:ir.model.fields,field_description:mixin_image_id.field_alc_eshop_cms_snippet_image
 #: model:ir.model.fields,field_description:mixin_image_id.field_mixin_image_id_image
 msgid "Image"
