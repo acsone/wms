@@ -15,6 +15,7 @@
         "alc_product_audit",
         "stock_receive_lot",
         "alc_product_pharmacy",
+        "alc_product_mto",
     ],
     "data": [
         "security/res_groups.xml",

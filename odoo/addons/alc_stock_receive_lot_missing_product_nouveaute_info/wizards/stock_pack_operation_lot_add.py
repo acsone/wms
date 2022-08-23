@@ -59,13 +59,14 @@ class StockPackOperationLotAdd(models.TransientModel):
         "product_id.is_human",
         "product_id.is_food",
         "product_id.is_meds",
+        "product_id.is_mto_product",
     )
     def _compute_edit_dimensions_barcode_fields(self):
         for rec in self:
             product = rec.product_id
             rec.edit_dimensions_barcode_fields = (
                 product.is_new or product.is_human or product.is_food or product.is_meds
-            )
+            ) and not product.is_mto_product
 
     @api.depends("product_id", "edit_dimensions_barcode_fields", "product_id.weight")
     def _compute_product_weight(self):
