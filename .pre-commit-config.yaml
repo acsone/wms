@@ -77,6 +77,7 @@ repos:
             alc_shopfloor_mobile_product_print_label|
             alc_shopfloor_mobile_change_pack_lot_back_button|
             alc_shopfloor_mobile_stock_issue_button|
+            alc_shopfloor_mobile_workstation|
             web_widget_inputmask
           )/.*\.js$
   - repo: https://github.com/pre-commit/pre-commit-hooks
