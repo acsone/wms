@@ -1,0 +1,248 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* alc_eshop_classifieds
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-08-03 11:56+0000\n"
+"PO-Revision-Date: 2022-08-03 11:56+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_eshop_classifieds
+#: model:ir.model.fields,field_description:alc_eshop_classifieds.field_res_partner_alc_classified_count
+#: model:ir.model.fields,field_description:alc_eshop_classifieds.field_res_users_alc_classified_count
+#: model:ir.model.fields,field_description:alc_eshop_classifieds.field_shopinvader_partner_alc_classified_count
+msgid "# of classifieds"
+msgstr "# de petites annonces"
+
+#. module: alc_eshop_classifieds
+#: selection:alc.classified,category:0
+msgid "Animals"
+msgstr "Animaux"
+
+#. module: alc_eshop_classifieds
+#: selection:alc.classified,state:0
+msgid "Approval Pending"
+msgstr "En attente d'approbation"
+
+#. module: alc_eshop_classifieds
+#: model:ir.ui.view,arch_db:alc_eshop_classifieds.alc_classified_wizard_rejection_form_view
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: alc_eshop_classifieds
+#: model:ir.model.fields,field_description:alc_eshop_classifieds.field_alc_classified_category
+#: model:ir.ui.view,arch_db:alc_eshop_classifieds.alc_classified_search_view
+msgid "Category"
+msgstr "Catégorie"
+
+#. module: alc_eshop_classifieds
+#: model:ir.model.fields,field_description:alc_eshop_classifieds.field_alc_classified_wizard_rejection_alc_classified_id
+msgid "Classified"
+msgstr "Petite annonce"
+
+#. module: alc_eshop_classifieds
+#: model:ir.model,name:alc_eshop_classifieds.model_alc_classified
+msgid "Classified Advertising"
+msgstr "Classified Advertising"
+
+#. module: alc_eshop_classifieds
+#: code:addons/alc_eshop_classifieds/models/res_partner.py:33
+#: model:ir.actions.act_window,name:alc_eshop_classifieds.alc_classified_act_window
+#: model:ir.model.fields,field_description:alc_eshop_classifieds.field_res_partner_alc_classified_ids
+#: model:ir.model.fields,field_description:alc_eshop_classifieds.field_res_users_alc_classified_ids
+#: model:ir.model.fields,field_description:alc_eshop_classifieds.field_shopinvader_partner_alc_classified_ids
+#: model:ir.ui.menu,name:alc_eshop_classifieds.alc_classified_menu
+#: model:ir.ui.view,arch_db:alc_eshop_classifieds.view_partner_form
+#, python-format
+msgid "Classifieds"
+msgstr "Petites annonces"
+
+#. module: alc_eshop_classifieds
+#: selection:alc.classified,category:0
+msgid "Clientele"
+msgstr "Clientèle"
+
+#. module: alc_eshop_classifieds
+#: model:ir.model.fields,field_description:alc_eshop_classifieds.field_alc_classified_contact
+msgid "Contact"
+msgstr "Contact"
+
+#. module: alc_eshop_classifieds
+#: model:ir.model.fields,field_description:alc_eshop_classifieds.field_alc_classified_body
+msgid "Content"
+msgstr "Contenu"
+
+#. module: alc_eshop_classifieds
+#: model:ir.model.fields,field_description:alc_eshop_classifieds.field_alc_classified_create_uid
+#: model:ir.model.fields,field_description:alc_eshop_classifieds.field_alc_classified_wizard_rejection_create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: alc_eshop_classifieds
+#: model:ir.model.fields,field_description:alc_eshop_classifieds.field_alc_classified_create_date
+#: model:ir.model.fields,field_description:alc_eshop_classifieds.field_alc_classified_wizard_rejection_create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: alc_eshop_classifieds
+#: model:ir.model.fields,field_description:alc_eshop_classifieds.field_alc_classified_display_name
+#: model:ir.model.fields,field_description:alc_eshop_classifieds.field_alc_classified_wizard_rejection_display_name
+msgid "Display Name"
+msgstr "Nom affiché"
+
+#. module: alc_eshop_classifieds
+#: selection:alc.classified,state:0
+msgid "Draft"
+msgstr "Brouillon"
+
+#. module: alc_eshop_classifieds
+#: model:ir.model.fields,field_description:alc_eshop_classifieds.field_alc_classified_email
+msgid "Email"
+msgstr "Courriel"
+
+#. module: alc_eshop_classifieds
+#: selection:alc.classified,category:0
+msgid "Employment"
+msgstr "Emploi"
+
+#. module: alc_eshop_classifieds
+#: model:ir.model.fields,field_description:alc_eshop_classifieds.field_alc_classified_date_end
+msgid "End Date"
+msgstr "Date de fin"
+
+#. module: alc_eshop_classifieds
+#: selection:alc.classified,category:0
+msgid "Equipment"
+msgstr "Matériel"
+
+#. module: alc_eshop_classifieds
+#: model:ir.ui.view,arch_db:alc_eshop_classifieds.alc_classified_search_view
+msgid "Group By"
+msgstr "Grouper par"
+
+#. module: alc_eshop_classifieds
+#: model:ir.model.fields,field_description:alc_eshop_classifieds.field_alc_classified_id
+#: model:ir.model.fields,field_description:alc_eshop_classifieds.field_alc_classified_wizard_rejection_id
+msgid "ID"
+msgstr "ID"
+
+#. module: alc_eshop_classifieds
+#: model:ir.model.fields,field_description:alc_eshop_classifieds.field_alc_classified___last_update
+#: model:ir.model.fields,field_description:alc_eshop_classifieds.field_alc_classified_wizard_rejection___last_update
+msgid "Last Modified on"
+msgstr "Dernière modification le"
+
+#. module: alc_eshop_classifieds
+#: model:ir.model.fields,field_description:alc_eshop_classifieds.field_alc_classified_wizard_rejection_write_uid
+#: model:ir.model.fields,field_description:alc_eshop_classifieds.field_alc_classified_write_uid
+msgid "Last Updated by"
+msgstr "Derniere fois mis à jour par"
+
+#. module: alc_eshop_classifieds
+#: model:ir.model.fields,field_description:alc_eshop_classifieds.field_alc_classified_wizard_rejection_write_date
+#: model:ir.model.fields,field_description:alc_eshop_classifieds.field_alc_classified_write_date
+msgid "Last Updated on"
+msgstr "Dernière mis à jour le"
+
+#. module: alc_eshop_classifieds
+#: selection:alc.classified,category:0
+msgid "Miscellaneous"
+msgstr "Divers"
+
+#. module: alc_eshop_classifieds
+#: model:ir.model,name:alc_eshop_classifieds.model_res_partner
+#: model:ir.model.fields,field_description:alc_eshop_classifieds.field_alc_classified_partner_id
+#: model:ir.ui.view,arch_db:alc_eshop_classifieds.alc_classified_search_view
+msgid "Partner"
+msgstr "Partenaire"
+
+#. module: alc_eshop_classifieds
+#: model:ir.ui.view,arch_db:alc_eshop_classifieds.alc_classified_search_view
+msgid "Pending"
+msgstr "En attente"
+
+#. module: alc_eshop_classifieds
+#: model:ir.model.fields,field_description:alc_eshop_classifieds.field_alc_classified_phone
+msgid "Phone"
+msgstr "Téléphone"
+
+#. module: alc_eshop_classifieds
+#: model:ir.ui.view,arch_db:alc_eshop_classifieds.alc_classified_form_view
+msgid "Publish"
+msgstr "Publier"
+
+#. module: alc_eshop_classifieds
+#: selection:alc.classified,state:0
+#: model:ir.ui.view,arch_db:alc_eshop_classifieds.alc_classified_search_view
+msgid "Published"
+msgstr "Publié"
+
+#. module: alc_eshop_classifieds
+#: model:ir.ui.view,arch_db:alc_eshop_classifieds.alc_classified_form_view
+#: model:ir.ui.view,arch_db:alc_eshop_classifieds.alc_classified_wizard_rejection_form_view
+msgid "Reject"
+msgstr "Rejeter"
+
+#. module: alc_eshop_classifieds
+#: model:ir.actions.act_window,name:alc_eshop_classifieds.alc_classified_wizard_rejection_act_window
+#: model:ir.ui.view,arch_db:alc_eshop_classifieds.alc_classified_wizard_rejection_form_view
+msgid "Reject Classified"
+msgstr "Rejeter l'annonce"
+
+#. module: alc_eshop_classifieds
+#: selection:alc.classified,state:0
+#: model:ir.ui.view,arch_db:alc_eshop_classifieds.alc_classified_search_view
+msgid "Rejected"
+msgstr "Rejeté"
+
+#. module: alc_eshop_classifieds
+#: model:ir.model.fields,field_description:alc_eshop_classifieds.field_alc_classified_rejection_reason
+msgid "Rejection"
+msgstr "Rejet"
+
+#. module: alc_eshop_classifieds
+#: model:ir.model.fields,field_description:alc_eshop_classifieds.field_alc_classified_wizard_rejection_reason
+msgid "Rejection Reason"
+msgstr "Raison du rejet"
+
+#. module: alc_eshop_classifieds
+#: model:ir.model.fields,field_description:alc_eshop_classifieds.field_alc_classified_sequence
+msgid "Sequence"
+msgstr "Séquence"
+
+#. module: alc_eshop_classifieds
+#: model:ir.model.fields,field_description:alc_eshop_classifieds.field_alc_classified_date_start
+msgid "Start Date"
+msgstr "Date de début"
+
+#. module: alc_eshop_classifieds
+#: model:ir.model.fields,field_description:alc_eshop_classifieds.field_alc_classified_state_id
+#: model:ir.ui.view,arch_db:alc_eshop_classifieds.alc_classified_search_view
+msgid "State"
+msgstr "État"
+
+#. module: alc_eshop_classifieds
+#: model:ir.model.fields,field_description:alc_eshop_classifieds.field_alc_classified_state
+#: model:ir.ui.view,arch_db:alc_eshop_classifieds.alc_classified_search_view
+msgid "Status"
+msgstr "État"
+
+#. module: alc_eshop_classifieds
+#: model:ir.model.fields,field_description:alc_eshop_classifieds.field_alc_classified_name
+#: model:ir.model.fields,field_description:alc_eshop_classifieds.field_alc_classified_wizard_rejection_name
+msgid "Title"
+msgstr "Civilité"
+
+#. module: alc_eshop_classifieds
+#: model:ir.model,name:alc_eshop_classifieds.model_alc_classified_wizard_rejection
+msgid "Wizard to Reject Classifieds."
+msgstr "Wizard de rejet des petites annonces."
+
