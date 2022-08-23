@@ -16,6 +16,7 @@
         "stock_picking_assignment",
         "stock_picking_wave",
         "alc_stock_picking_batch_assignment",
+        "alc_delivery_rounds_geooptimize",
     ],
     "data": ["views/round_template.xml", "views/round_instance.xml", "views/css.xml"],
     "demo": [],
