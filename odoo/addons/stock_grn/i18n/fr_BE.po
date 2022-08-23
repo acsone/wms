@@ -173,7 +173,13 @@ msgstr "Mouvement de stock"
 #: model:ir.model.fields,field_description:stock_grn.field_stock_grn_supplier_id
 #: model:ir.ui.view,arch_db:stock_grn.view_grn_search
 msgid "Supplier"
-msgstr ""
+msgstr "Fournisseur"
+
+#. module: stock_grn
+#: model:ir.model.fields,field_description:stock_grn.field_stock_grn_delivery_note_supplier_number
+#: model:ir.model.fields,field_description:stock_grn.field_stock_picking_delivery_note_supplier_number
+msgid "Supplier delivery note number"
+msgstr "Numéro du BL fournisseur"
 
 #. module: stock_grn
 #: model:ir.model,name:stock_grn.model_stock_picking_type

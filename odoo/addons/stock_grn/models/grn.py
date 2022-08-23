@@ -54,6 +54,9 @@ class GRN(models.Model):
     type_id = fields.Many2one("stock.grn.type", string="Grn Type")
     qty_pallet = fields.Integer(string="Qty Pallets")
     qty_box = fields.Integer(string="Qty Boxes")
+    delivery_note_supplier_number = fields.Char(
+        string="Supplier delivery note number", required=True
+    )
 
     company_id = fields.Many2one(
         "res.company",

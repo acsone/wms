@@ -49,7 +49,12 @@ class TestPickingTransfer(TransactionCase):
         self.stock_location = self.location_model.browse(
             self.ref("stock.stock_location_stock")
         )
-        self.grn = self.env["stock.grn"].create({"carrier_id": self.supplier.id})
+        self.grn = self.env["stock.grn"].create(
+            {
+                "carrier_id": self.supplier.id,
+                "delivery_note_supplier_number": "12345678",
+            }
+        )
 
     @post_install(True)
     @at_install(False)

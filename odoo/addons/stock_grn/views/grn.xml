@@ -27,6 +27,7 @@
         <field name="ref" />
         <field name="qty_pallet" />
         <field name="qty_box" />
+        <field name="delivery_note_supplier_number" />
       </tree>
     </field>
   </record>
@@ -59,6 +60,7 @@
               <field name="company_id" groups="base.group_multi_company" />
               <field name="qty_pallet" />
               <field name="qty_box" />
+              <field name="delivery_note_supplier_number" />
             </group>
             <group>
               <field name="from_info" />

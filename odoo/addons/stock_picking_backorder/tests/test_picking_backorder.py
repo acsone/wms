@@ -39,7 +39,9 @@ class TestPickingBackorder(SavepointCase):
         cls.customer_location = cls.env.ref("stock.stock_location_customers")
         cls.stock_location = cls.env.ref("stock.stock_location_stock")
         cls.output_location = cls.env.ref("stock.stock_location_output")
-        cls.grn = cls.env["stock.grn"].create({"carrier_id": cls.partner.id})
+        cls.grn = cls.env["stock.grn"].create(
+            {"carrier_id": cls.partner.id, "delivery_note_supplier_number": "112223421"}
+        )
 
         picking_type_id = cls.env.ref("stock.picking_type_in").id
         location_id = cls.supplier_location.id
