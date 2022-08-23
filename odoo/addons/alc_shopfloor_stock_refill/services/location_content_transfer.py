@@ -17,6 +17,12 @@ class LocationContentTransfer(Component):
             return super(LocationContentTransfer, self).scan_location(
                 refill_arrange[0].location_id.barcode
             )
+
+        refill_reassort = self._refill_reassort_search()
+        if refill_reassort:
+            return super(LocationContentTransfer, self).scan_location(
+                refill_reassort[0].location_id.barcode
+            )
         return super(LocationContentTransfer, self)._response_for_start(
             message=self.msg_store.location_content_transfer_no_work()
         )
@@ -32,6 +38,16 @@ class LocationContentTransfer(Component):
                 ("barcode_picking_type_id", "in", self.picking_types.ids),
             ],
             order="refill_priority_arrange desc",
+        )
+
+    def _refill_reassort_search(self):
+        RefillReassort = self.env["report.stock.refill.reassort"]
+        return RefillReassort.search(
+            [
+                ("reservation_id", "=", False),
+                ("barcode_picking_type_id", "in", self.picking_types.ids),
+            ],
+            order="refill_priority_reassort desc",
         )
 
 
