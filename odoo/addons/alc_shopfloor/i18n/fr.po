@@ -964,8 +964,8 @@ msgstr ""
 #. module: alc_shopfloor
 #: code:addons/alc_shopfloor/actions/message.py:310
 #, python-format
-msgid "This lot is part of multiple packages, please scan a package."
-msgstr "Ce lot fait partie de plusieurs paquets, veuillez scanner un paquet."
+msgid "You already processed part of the quantities for this lot. Please, scan the location."
+msgstr "Vous avez déjà traité une partie des quantités pour ce lot, veuillez scanner l'emplacement."
 
 #. module: alc_shopfloor
 #: code:addons/alc_shopfloor/actions/message.py:61
