@@ -21,7 +21,7 @@ class SeBackendElasticsearch(models.Model):
 
     # The queue capacity must be set to 1 since OpensSearch doesn't support
     # concurrent update of roles
-    @job(default_channel="root.background.ellasticsearch.role")
+    @job(default_channel="root.background.opensearch.role")
     def create_or_update_pricelist_role(self, pricelist):
         BODY = """{
             "index_permissions":[
