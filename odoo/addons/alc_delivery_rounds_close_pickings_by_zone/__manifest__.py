@@ -10,6 +10,7 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": [
+        "queue_job",
         "delivery_rounds",
         "delivery_rounds_alcyon",
         "stock_picking_zone",

@@ -2,6 +2,7 @@
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
+import json
 from datetime import datetime
 
 import pytz
@@ -40,11 +41,52 @@ class RoundInstance(models.Model):
         "Duration before departure to re open pickings", default=0.5
     )
 
+    def write(self, vals):
+        res = super(RoundInstance, self).write(vals)
+        if (
+            "time_leave_planned" in vals
+            or "auto_close_picking_launched" in vals
+            or "time_reopen_picking_launched" in vals
+        ):
+            # First delete previous job
+            self._delete_previous_existing_job_if_required()
+            # Then create new job
+            self._delay_reopen_pickings_if_required()
+        return res
+
+    def _delete_previous_existing_job_if_required(self):
+        # Retrieve jobs already started for the round instance
+        self.env.cr.execute(
+            """
+                        SELECT id from queue_job
+                            WHERE model_name = %(model)s
+                            AND method_name = %(method)s
+                            AND record_ids = %(ids)s
+                            AND state = %(state)s
+                        """,
+            {
+                "model": "round.instance",
+                "method": "_reopen_pickings",
+                "ids": json.dumps(self.ids),
+                "state": "pending",
+            },
+        )
+        result = self.env.cr.fetchall()
+        ids = [r[0] for r in result]
+        jobs_to_delete = self.env["queue.job"].browse(ids)
+        # In v14, state cancelled exists on jobs and we could use jobs_to_delete.button_cancelled()
+        # to cancel the previous job while keeping the history.
+        # In v10 : cancelled does not exist... So let's put the state to DONE with an explicit reason
+        if jobs_to_delete:
+            jobs_to_delete.action_done(
+                reason="Change on hours for delivery rounds or autoclosing config. This job is set to done, a new one is created."
+            )
+
     def _delay_reopen_pickings_if_required(self):
         for rec in self:
             if rec.auto_close_picking_launched and rec.time_reopen_picking_launched:
                 description = (
-                    _("Automatic reopening of pickings in delivery round %s")
+                    _("%s : Automatic reopening of pickings in delivery round.")
                     % rec.display_name
                 )
                 float_start_time_reopen = (

@@ -2,6 +2,8 @@
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
+import logging
+
 import pytz
 
 from odoo import fields
@@ -9,12 +11,15 @@ from odoo import fields
 from odoo.addons.delivery_rounds.tests.common import DeliveryRoundTestCase
 from odoo.addons.queue_job.tests.common import JobMixin
 
+_logger = logging.getLogger(__name__)
+
 
 class TestAutoClosePickings(DeliveryRoundTestCase, JobMixin):
     @classmethod
     def setUpClass(cls):
         super(TestAutoClosePickings, cls).setUpClass()
-
+        modules = cls.env["ir.module.module"].search([("state", "=", "installed")])
+        _logger.info(",".join(modules.mapped("name")))
         PickingZone = cls.env["picking.zone"]
         cls.zone_med = PickingZone.create({"name": "M (Med)", "code": "05"})
 
@@ -34,22 +39,15 @@ class TestAutoClosePickings(DeliveryRoundTestCase, JobMixin):
         )
 
         cls.tag_monday = cls.env["round.tag"].create({"name": "Monday"})
-        cls.delivery_template.write(
+
+        cls.delivery_template = cls.env["round.template"].create(
             {
+                "name": "Unittest delivery template relaunch",
                 "auto_close_picking_launched": True,
                 "time_reopen_picking_launched": 0.5,
                 "time_leave_planned": 9,
                 "time_picking_planned": 6,
                 "tag_ids": [(4, cls.tag_monday.id)],
-            }
-        )
-        cls.delivery_round_1.write(
-            {
-                "auto_close_picking_launched": True,
-                "time_reopen_picking_launched": 0.5,
-                "time_leave_planned": 9,
-                "time_picking_planned": 6,
-                "date": "2022-07-06",
             }
         )
         cls.version = cls.env["round.template.version"].create(
@@ -69,6 +67,15 @@ class TestAutoClosePickings(DeliveryRoundTestCase, JobMixin):
         )
 
     def test_auto_close_all_pickings_done(self):
+        self.delivery_round_1.write(
+            {
+                "auto_close_picking_launched": True,
+                "time_reopen_picking_launched": 0.5,
+                "time_leave_planned": 9,
+                "time_picking_planned": 6,
+                "date": "2022-07-06",
+            }
+        )
         pick1 = self._create_picking_pick(partner=self.partner1)
         pick2 = self._create_picking_pick(partner=self.partner2)
         pick3 = self._create_picking_pick(partner=self.partner3)
@@ -128,7 +135,7 @@ class TestAutoClosePickings(DeliveryRoundTestCase, JobMixin):
         self.assertTrue(self.delivery_round_1.picking_med_launched)
 
     def test_no_auto_open_pickings(self):
-        self.delivery_round_1.auto_close_picking_launched = False
+        self.delivery_template.auto_close_picking_launched = False
         job_counter = self.job_counter()
         # create delivery plan
         self.wizard.confirm()
@@ -143,9 +150,11 @@ class TestAutoClosePickings(DeliveryRoundTestCase, JobMixin):
         # Then job created to reopen pickings
         queue_job = job_counter.search_created()
         self.assertEqual(len(queue_job), 1)
-        date_relaunch = fields.Datetime.from_string(
-            self.delivery_round_1.date + " 07:45:00"
+
+        delivery_round = self.env["round.instance"].search(
+            [("template_id", "=", self.delivery_template.id)]
         )
+        date_relaunch = fields.Datetime.from_string(delivery_round.date + " 07:45:00")
         bru_tz = pytz.timezone("Europe/Brussels")
         utc_tz = pytz.timezone("UTC")
         eta_time = bru_tz.localize(date_relaunch).astimezone(utc_tz)
@@ -188,6 +197,15 @@ class TestAutoClosePickings(DeliveryRoundTestCase, JobMixin):
         self.assertTrue(self.delivery_round_1.picking_launched)
 
     def test_assign_batch_one_picking_left_todo(self):
+        self.delivery_round_1.write(
+            {
+                "auto_close_picking_launched": True,
+                "time_reopen_picking_launched": 0.5,
+                "time_leave_planned": 9,
+                "time_picking_planned": 6,
+                "date": "2022-07-06",
+            }
+        )
         # 3 picks in the delivery round, we create a batch with 2
         pick1 = self._create_picking_pick(partner=self.partner1)
         pick2 = self._create_picking_pick(partner=self.partner2)
@@ -225,6 +243,15 @@ class TestAutoClosePickings(DeliveryRoundTestCase, JobMixin):
         self.assertTrue(self.delivery_round_1.picking_med_launched)
 
     def test_assign_batch_close_zone(self):
+        self.delivery_round_1.write(
+            {
+                "auto_close_picking_launched": True,
+                "time_reopen_picking_launched": 0.5,
+                "time_leave_planned": 9,
+                "time_picking_planned": 6,
+                "date": "2022-07-06",
+            }
+        )
         # 3 picks in the delivery round, we create a batch with 2
         pick1 = self._create_picking_pick(partner=self.partner1)
         pick2 = self._create_picking_pick(partner=self.partner2)
@@ -259,3 +286,85 @@ class TestAutoClosePickings(DeliveryRoundTestCase, JobMixin):
 
         batch.assign_operator()
         self.assertFalse(self.delivery_round_1.picking_med_launched)
+
+    def test_kill_job_if_auto_close_false(self):
+        job_counter = self.job_counter()
+        # create delivery plan
+        self.wizard.confirm()
+        # Then job created to reopen pickings
+        queue_job = job_counter.search_created()
+        self.assertEqual(len(queue_job), 1)
+
+        delivery_round = self.env["round.instance"].search(
+            [("template_id", "=", self.delivery_template.id)]
+        )
+        # No more autoclosing : auto reopen should also be killed
+        delivery_round.auto_close_picking_launched = False
+        self.assertEqual(queue_job.state, "done")
+
+    def test_create_job_if_auto_close_set_to_true(self):
+        job_counter = self.job_counter()
+        # create delivery plan
+        self.wizard.confirm()
+        # Then job created to reopen pickings
+        queue_job = job_counter.search_created()
+        self.assertEqual(len(queue_job), 1)
+
+        delivery_round = self.env["round.instance"].search(
+            [("template_id", "=", self.delivery_template.id)]
+        )
+        # No more autoclosing : auto reopen should also be killed
+        delivery_round.auto_close_picking_launched = False
+        self.assertEqual(queue_job.state, "done")
+        # Set auto_close back to true : recreate a job
+        delivery_round.auto_close_picking_launched = True
+        queue_job2 = job_counter.search_created().filtered(lambda j: j.state != "done")
+        self.assertEqual(len(queue_job2), 1)
+
+    def test_change_time_reopen_pickings(self):
+        job_counter = self.job_counter()
+        self.wizard.confirm()
+        queue_job = job_counter.search_created()
+        self.assertEqual(len(queue_job), 1)
+
+        delivery_round = self.env["round.instance"].search(
+            [("template_id", "=", self.delivery_template.id)]
+        )
+        date_relaunch = fields.Datetime.from_string(delivery_round.date + " 07:45:00")
+        bru_tz = pytz.timezone("Europe/Brussels")
+        utc_tz = pytz.timezone("UTC")
+        eta_time = bru_tz.localize(date_relaunch).astimezone(utc_tz)
+        self.assertEqual(queue_job.eta, fields.Datetime.to_string(eta_time))
+
+        delivery_round.time_reopen_picking_launched = 1.5
+        queue_job2 = job_counter.search_created().filtered(lambda j: j.state != "done")
+        self.assertEqual(len(queue_job2), 1)
+        date_relaunch = fields.Datetime.from_string(delivery_round.date + " 06:45:00")
+        bru_tz = pytz.timezone("Europe/Brussels")
+        utc_tz = pytz.timezone("UTC")
+        eta_time = bru_tz.localize(date_relaunch).astimezone(utc_tz)
+        self.assertEqual(queue_job2.eta, fields.Datetime.to_string(eta_time))
+
+    def test_change_time_leave_planned(self):
+        job_counter = self.job_counter()
+        self.wizard.confirm()
+        queue_job = job_counter.search_created()
+        self.assertEqual(len(queue_job), 1)
+
+        delivery_round = self.env["round.instance"].search(
+            [("template_id", "=", self.delivery_template.id)]
+        )
+        date_relaunch = fields.Datetime.from_string(delivery_round.date + " 07:45:00")
+        bru_tz = pytz.timezone("Europe/Brussels")
+        utc_tz = pytz.timezone("UTC")
+        eta_time = bru_tz.localize(date_relaunch).astimezone(utc_tz)
+        self.assertEqual(queue_job.eta, fields.Datetime.to_string(eta_time))
+
+        delivery_round.time_leave_planned = 11
+        queue_job2 = job_counter.search_created().filtered(lambda j: j.state != "done")
+        self.assertEqual(len(queue_job2), 1)
+        date_relaunch = fields.Datetime.from_string(delivery_round.date + " 09:45:00")
+        bru_tz = pytz.timezone("Europe/Brussels")
+        utc_tz = pytz.timezone("UTC")
+        eta_time = bru_tz.localize(date_relaunch).astimezone(utc_tz)
+        self.assertEqual(queue_job2.eta, fields.Datetime.to_string(eta_time))
