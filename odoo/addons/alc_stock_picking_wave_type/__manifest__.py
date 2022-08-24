@@ -9,7 +9,7 @@
     "version": "10.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
-    "depends": [],
+    "depends": ["stock_picking_wave"],
     "data": ["views/stock_picking_wave.xml"],
     "demo": [],
 }
