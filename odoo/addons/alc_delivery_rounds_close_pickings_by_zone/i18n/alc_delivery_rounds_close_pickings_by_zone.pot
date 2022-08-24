@@ -14,15 +14,15 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_delivery_rounds_close_pickings_by_zone
-#: model:ir.model.fields,field_description:alc_delivery_rounds_close_pickings_by_zone.field_round_instance_auto_close_picking_launched
-#: model:ir.model.fields,field_description:alc_delivery_rounds_close_pickings_by_zone.field_round_template_auto_close_picking_launched
-msgid "Auto close picking launched"
+#: code:addons/alc_delivery_rounds_close_pickings_by_zone/models/round_instance.py:89
+#, python-format
+msgid "%s : Automatic reopening of pickings in delivery round."
 msgstr ""
 
 #. module: alc_delivery_rounds_close_pickings_by_zone
-#: code:addons/alc_delivery_rounds_close_pickings_by_zone/models/round_instance.py:47
-#, python-format
-msgid "Automatic reopening of pickings in delivery round %s"
+#: model:ir.model.fields,field_description:alc_delivery_rounds_close_pickings_by_zone.field_round_instance_auto_close_picking_launched
+#: model:ir.model.fields,field_description:alc_delivery_rounds_close_pickings_by_zone.field_round_template_auto_close_picking_launched
+msgid "Auto close picking launched"
 msgstr ""
 
 #. module: alc_delivery_rounds_close_pickings_by_zone
