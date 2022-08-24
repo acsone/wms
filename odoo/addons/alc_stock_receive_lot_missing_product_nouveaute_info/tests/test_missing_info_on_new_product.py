@@ -189,6 +189,31 @@ class TestMissingInfoOnNewProduct(SavepointCase):
             }
         )
 
+        cls.pt12 = cls.env["product.template"].create(
+            {
+                "name": "Unittest is mat product",
+                "uom_id": cls.env.ref("product.product_uom_unit").id,
+                "type": "product",
+                "weight": 10.0,
+                "barcode": "2345696511178910",
+                "is_equipment": True,
+                "product_package_storage_type_id": cls.dummy_storage_type.id,
+            }
+        )
+        cls.p12 = cls.pt12.product_variant_ids[0]
+        cls.p12.categ_id = cls.env.ref("specific_data.product_categ_materiel").id
+
+        cls.product_box = cls.env["product.packaging"].create(
+            {
+                "packaging_type_id": cls.env.ref(
+                    "alc_product_packaging.product_packaging_type_box"
+                ).id,
+                "name": "Box",
+                "qty": 20,
+                "product_tmpl_id": cls.p12.product_tmpl_id.id,
+            }
+        )
+
         cls.products = [
             cls.p1,
             cls.p2,
@@ -201,6 +226,7 @@ class TestMissingInfoOnNewProduct(SavepointCase):
             cls.p9,
             cls.p10,
             cls.p11,
+            cls.p12,
             cls.p13,
         ]
         cls.supplier = cls.ResPartner.create(
@@ -277,10 +303,12 @@ class TestMissingInfoOnNewProduct(SavepointCase):
         cls.operation_human_product = cls.operation_ids.search(
             [("product_id", "=", cls.p11.id)]
         )
+        cls.operation_mat_product = cls.operation_ids.search(
+            [("product_id", "=", cls.p12.id)]
+        )
         cls.operation_food_mto_product = cls.operation_ids.search(
             [("product_id", "=", cls.p13.id)]
         )
-
         cls.wiz = cls.receptionWizard.create(
             {"picking_id": cls.picking.id, "qty": 1, "location_dest_id": cls.bin1.id}
         )
@@ -543,7 +571,26 @@ class TestMissingInfoOnNewProduct(SavepointCase):
             "1134553111112",
         )
 
-    def test_16_food_mto_product(self):
+    def test_15_product_is_mat_missing_dimensions(self):
+        self.wiz.operation_id = self.operation_mat_product.id
+        self.assertEqual(
+            self.operation_mat_product.product_id.name, "Unittest is mat product",
+        )
+        self.assertTrue(self.operation_mat_product.product_id.is_equipment)
+        with self.assertRaises(MissingDimensionsError), self.env.cr.savepoint():
+            self.wiz._check_dimensions_product()
+
+    def test_16_product_is_mat_complete_dimensions(self):
+        self.wiz.operation_id = self.operation_mat_product.id
+        self.assertEqual(
+            self.operation_mat_product.product_id.name, "Unittest is mat product",
+        )
+        self.wiz.write({"product_length": 2, "product_width": 4, "product_height": 3})
+        self.assertEqual(self.operation_mat_product.product_id.length, 2)
+        self.assertEqual(self.operation_mat_product.product_id.width, 4)
+        self.assertEqual(self.operation_mat_product.product_id.height, 3)
+
+    def test_17_food_mto_product(self):
         self.wiz.operation_id = self.operation_food_mto_product.id
         self.assertEqual(
             self.operation_food_mto_product.product_id.name,
