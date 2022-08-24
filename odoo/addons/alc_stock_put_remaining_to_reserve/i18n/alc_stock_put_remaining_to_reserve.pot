@@ -25,13 +25,13 @@ msgid "Is action put in reserve"
 msgstr ""
 
 #. module: alc_stock_put_remaining_to_reserve
-#: code:addons/alc_stock_put_remaining_to_reserve/models/stock_pack_operation.py:54
+#: code:addons/alc_stock_put_remaining_to_reserve/models/stock_pack_operation.py:53
 #, python-format
 msgid "No qty to move to reserve."
 msgstr ""
 
 #. module: alc_stock_put_remaining_to_reserve
-#: code:addons/alc_stock_put_remaining_to_reserve/models/stock_pack_operation.py:40
+#: code:addons/alc_stock_put_remaining_to_reserve/models/stock_pack_operation.py:39
 #, python-format
 msgid "No reserve associated to this stock location."
 msgstr ""
@@ -57,6 +57,11 @@ msgid "Pickings remaining to reserve"
 msgstr ""
 
 #. module: alc_stock_put_remaining_to_reserve
+#: model:ir.model.fields,field_description:alc_stock_put_remaining_to_reserve.field_stock_picking_type_put_in_reserve_allowed
+msgid "Put in reserve allowed"
+msgstr ""
+
+#. module: alc_stock_put_remaining_to_reserve
 #: model:ir.ui.view,arch_db:alc_stock_put_remaining_to_reserve.stock_picking_form_view
 msgid "Put remaining items in reserve"
 msgstr ""
@@ -67,13 +72,13 @@ msgid "Remaining parts of picking partially sent to reserve"
 msgstr ""
 
 #. module: alc_stock_put_remaining_to_reserve
-#: code:addons/alc_stock_put_remaining_to_reserve/models/stock_pack_operation.py:94
+#: code:addons/alc_stock_put_remaining_to_reserve/models/stock_pack_operation.py:93
 #, python-format
 msgid "Reserve picking %s created"
 msgstr ""
 
 #. module: alc_stock_put_remaining_to_reserve
-#: code:addons/alc_stock_put_remaining_to_reserve/models/stock_pack_operation.py:80
+#: code:addons/alc_stock_put_remaining_to_reserve/models/stock_pack_operation.py:79
 #, python-format
 msgid "Reserve picking %s updated"
 msgstr ""
@@ -84,12 +89,17 @@ msgid "Stock Move"
 msgstr ""
 
 #. module: alc_stock_put_remaining_to_reserve
+#: model:ir.model,name:alc_stock_put_remaining_to_reserve.model_stock_picking_type
+msgid "The picking type determines the picking view"
+msgstr ""
+
+#. module: alc_stock_put_remaining_to_reserve
 #: model:ir.model,name:alc_stock_put_remaining_to_reserve.model_stock_picking
 msgid "Transfer"
 msgstr ""
 
 #. module: alc_stock_put_remaining_to_reserve
-#: code:addons/alc_stock_put_remaining_to_reserve/models/stock_pack_operation.py:34
+#: code:addons/alc_stock_put_remaining_to_reserve/models/stock_pack_operation.py:33
 #, python-format
 msgid "You are not allowed to put quantities in reserve"
 msgstr ""

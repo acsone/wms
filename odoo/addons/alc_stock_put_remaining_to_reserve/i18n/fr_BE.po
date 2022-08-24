@@ -32,13 +32,13 @@ msgid "Is action put in reserve"
 msgstr "Possibilité de mettre en réserve pour cet article"
 
 #. module: alc_stock_put_remaining_to_reserve
-#: code:addons/alc_stock_put_remaining_to_reserve/models/stock_pack_operation.py:54
+#: code:addons/alc_stock_put_remaining_to_reserve/models/stock_pack_operation.py:53
 #, python-format
 msgid "No qty to move to reserve."
 msgstr "Pas de quantités à déplacer en réserve."
 
 #. module: alc_stock_put_remaining_to_reserve
-#: code:addons/alc_stock_put_remaining_to_reserve/models/stock_pack_operation.py:40
+#: code:addons/alc_stock_put_remaining_to_reserve/models/stock_pack_operation.py:39
 #, python-format
 msgid "No reserve associated to this stock location."
 msgstr "Pas de réserve associée à cet emplacement de rangement."
@@ -53,13 +53,6 @@ msgstr "Colisage"
 msgid "Picking To reserve of"
 msgstr "Picking de réserve associé à"
 
-
-#. module: alc_stock_put_remaining_to_reserve
-#: model:ir.model.fields,field_description:alc_stock_put_remaining_to_reserve.field_stock_picking_type_put_in_reserve_allowed
-msgid "Put in reserve allowed"
-msgstr "Autoriser l'envoi en réserve"
-
-
 #. module: alc_stock_put_remaining_to_reserve
 #: model:ir.model.fields,field_description:alc_stock_put_remaining_to_reserve.field_stock_picking_picking_reserve_id
 msgid "Picking that goes to reserve of"
@@ -69,6 +62,11 @@ msgstr "Picking de réserve associé à"
 #: model:ir.ui.view,arch_db:alc_stock_put_remaining_to_reserve.stock_picking_search_view
 msgid "Pickings remaining to reserve"
 msgstr "Pickings de réserve associés à"
+
+#. module: alc_stock_put_remaining_to_reserve
+#: model:ir.model.fields,field_description:alc_stock_put_remaining_to_reserve.field_stock_picking_type_put_in_reserve_allowed
+msgid "Put in reserve allowed"
+msgstr "Autoriser l'envoi en réserve"
 
 #. module: alc_stock_put_remaining_to_reserve
 #: model:ir.ui.view,arch_db:alc_stock_put_remaining_to_reserve.stock_picking_form_view
@@ -81,13 +79,13 @@ msgid "Remaining parts of picking partially sent to reserve"
 msgstr "Articles restants envoyés en réserve"
 
 #. module: alc_stock_put_remaining_to_reserve
-#: code:addons/alc_stock_put_remaining_to_reserve/models/stock_pack_operation.py:94
+#: code:addons/alc_stock_put_remaining_to_reserve/models/stock_pack_operation.py:93
 #, python-format
 msgid "Reserve picking %s created"
 msgstr "Picking de réserve %s créé"
 
 #. module: alc_stock_put_remaining_to_reserve
-#: code:addons/alc_stock_put_remaining_to_reserve/models/stock_pack_operation.py:80
+#: code:addons/alc_stock_put_remaining_to_reserve/models/stock_pack_operation.py:79
 #, python-format
 msgid "Reserve picking %s updated"
 msgstr "Picking de réserve %s mis à jour"
@@ -98,12 +96,17 @@ msgid "Stock Move"
 msgstr "Mouvement de stock"
 
 #. module: alc_stock_put_remaining_to_reserve
+#: model:ir.model,name:alc_stock_put_remaining_to_reserve.model_stock_picking_type
+msgid "The picking type determines the picking view"
+msgstr ""
+
+#. module: alc_stock_put_remaining_to_reserve
 #: model:ir.model,name:alc_stock_put_remaining_to_reserve.model_stock_picking
 msgid "Transfer"
 msgstr "Transfert"
 
 #. module: alc_stock_put_remaining_to_reserve
-#: code:addons/alc_stock_put_remaining_to_reserve/models/stock_pack_operation.py:34
+#: code:addons/alc_stock_put_remaining_to_reserve/models/stock_pack_operation.py:33
 #, python-format
 msgid "You are not allowed to put quantities in reserve"
 msgstr "Impossible de déplacer des quantiés en réserve"
