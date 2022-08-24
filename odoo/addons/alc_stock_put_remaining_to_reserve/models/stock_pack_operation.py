@@ -18,15 +18,14 @@ class StockPackOperation(models.Model):
         compute="_compute_is_action_put_in_reserve", default=False
     )
 
-    @api.depends("product_qty", "qty_done", "picking_id.picking_type_code")
+    @api.depends("product_qty", "qty_done", "picking_id.picking_type_id")
     def _compute_is_action_put_in_reserve(self):
-        # force prefetch
-        self.mapped("picking_id.picking_type_id.code")
+
         for rec in self:
             rec.is_action_put_in_reserve = (
                 (rec.qty_done - rec.product_qty <= 0)
                 and rec.state not in ("done", "draft")
-                and rec.picking_id.picking_type_code == "internal"
+                and rec.picking_id.picking_type_id.put_in_reserve_allowed
             )
 
     def _check_is_action_put_in_reserve(self):
