@@ -53,6 +53,7 @@ class TestPutRemainingToReserve(SavepointCase):
         cls.picking_zone_medoc = cls.env["picking.zone"].create(
             {"code": "01", "name": "Medicament"}
         )
+
         cls.picking_type_med = cls.PickingType.create(
             {
                 "name": "Pick Med",
@@ -60,6 +61,7 @@ class TestPutRemainingToReserve(SavepointCase):
                 "picking_zone_id": cls.picking_zone_medoc.id,
                 "sequence_id": picking_sequence.id,
                 "default_location_src_id": cls.stock_location.id,
+                "put_in_reserve_allowed": True,
             }
         )
 

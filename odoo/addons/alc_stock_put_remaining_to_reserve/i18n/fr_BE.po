@@ -53,6 +53,13 @@ msgstr "Colisage"
 msgid "Picking To reserve of"
 msgstr "Picking de réserve associé à"
 
+
+#. module: alc_stock_put_remaining_to_reserve
+#: model:ir.model.fields,field_description:alc_stock_put_remaining_to_reserve.field_stock_picking_type_put_in_reserve_allowed
+msgid "Put in reserve allowed"
+msgstr "Autoriser l'envoi en réserve"
+
+
 #. module: alc_stock_put_remaining_to_reserve
 #: model:ir.model.fields,field_description:alc_stock_put_remaining_to_reserve.field_stock_picking_picking_reserve_id
 msgid "Picking that goes to reserve of"
