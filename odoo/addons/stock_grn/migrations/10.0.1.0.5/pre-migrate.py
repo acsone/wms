@@ -19,20 +19,6 @@ def migrate(cr, version):
     _logger.info(
         "By default, all customers should have the flag of csv deliveryship sending to true"
     )
-    if not column_exists(cr, "stock_grn", "delivery_note_supplier_number"):
-        cr.execute(
-            """
-            ALTER TABLE stock_grn
-            ADD COLUMN delivery_note_supplier_number VARCHAR;
-        """
-        )
-    cr.execute(
-        """
-        UPDATE
-            stock_grn
-            SET delivery_note_supplier_number = ' ';
-        """
-    )
     if not column_exists(cr, "stock_picking", "delivery_note_supplier_number"):
         cr.execute(
             """
