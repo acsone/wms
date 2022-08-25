@@ -1,0 +1,14 @@
+# -*- coding: utf-8 -*-
+# Copyright 2022 ACSONE SA/NV
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+
+{
+    "name": "Alc Delivery Rounds Exclude Only Bo Or Only Human Or Only Free Products Pickings",
+    "description": """
+        Exclude pickings from delivery rounds if it is only backorders, or only human products, or only free products in the picking""",
+    "version": "10.0.1.0.0",
+    "license": "AGPL-3",
+    "author": "ACSONE SA/NV",
+    "depends": ["sale", "delivery_rounds", "alc_product_pharmacy"],
+    "data": ["views/sale_order.xml"],
+}
