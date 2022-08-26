@@ -32,7 +32,7 @@ msgstr "Fermeture automatique des préparations"
 #: model:ir.model.fields,field_description:alc_delivery_rounds_close_pickings_by_zone.field_round_instance_time_reopen_picking_launched
 #: model:ir.model.fields,field_description:alc_delivery_rounds_close_pickings_by_zone.field_round_template_time_reopen_picking_launched
 msgid "Duration before departure to re open pickings"
-msgstr "Durée avant départ du véhicule pour la réouverture des préparations"
+msgstr "Durée avant le début du chargement du véhicule pour la réouverture des préparations"
 
 #. module: alc_delivery_rounds_close_pickings_by_zone
 #: model:ir.model,name:alc_delivery_rounds_close_pickings_by_zone.model_stock_picking_wave
