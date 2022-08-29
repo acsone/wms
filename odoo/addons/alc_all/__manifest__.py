@@ -14,6 +14,7 @@
         "server_environment_files",
         "alc_eshop_app",
         "alc_migrate",  # dummy module to force pre-migrations
+        "alc_partner_delivery_window_import",
         "alc_pricing",  # test module to force check pricing
         "alc_pricing_constraints",
         # external

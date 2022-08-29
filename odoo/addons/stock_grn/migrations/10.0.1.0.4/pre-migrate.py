@@ -16,9 +16,7 @@ def column_exists(cr, tablename, columnname):
 
 
 def migrate(cr, version):
-    _logger.info(
-        "By default, all customers should have the flag of csv deliveryship sending to true"
-    )
+    _logger.info("Initialize delivery_note_supplier_number field on stock_grn")
     if not column_exists(cr, "stock_grn", "delivery_note_supplier_number"):
         cr.execute(
             """
@@ -33,6 +31,7 @@ def migrate(cr, version):
             SET delivery_note_supplier_number = ' ';
         """
     )
+    _logger.info("Initialize delivery_note_supplier_number field on stock_picking")
     if not column_exists(cr, "stock_picking", "delivery_note_supplier_number"):
         cr.execute(
             """
