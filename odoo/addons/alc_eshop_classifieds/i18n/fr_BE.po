@@ -23,6 +23,13 @@ msgstr ""
 msgid "# of classifieds"
 msgstr "# de petites annonces"
 
+
+#. module: alc_eshop_classifieds
+#: model:ir.model.fields,field_description:alc_eshop_classifieds.field_user_id
+msgid "Responsible"
+msgstr "Responsable"
+
+
 #. module: alc_eshop_classifieds
 #: selection:alc.classified,category:0
 msgid "Animals"
