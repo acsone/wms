@@ -23,13 +23,6 @@ msgstr ""
 msgid "# of classifieds"
 msgstr "# de petites annonces"
 
-
-#. module: alc_eshop_classifieds
-#: model:ir.model.fields,field_description:alc_eshop_classifieds.field_user_id
-msgid "Responsible"
-msgstr "Responsable"
-
-
 #. module: alc_eshop_classifieds
 #: selection:alc.classified,category:0
 msgid "Animals"
@@ -253,3 +246,6 @@ msgstr "Civilité"
 #: model:ir.model,name:alc_eshop_classifieds.model_alc_classified_wizard_rejection
 msgid "Wizard to Reject Classifieds."
 msgstr "Wizard de rejet des petites annonces."
+
+#~ msgid "Responsible"
+#~ msgstr "Responsable"
