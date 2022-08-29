@@ -6,7 +6,7 @@
     <record model="ir.ui.view" id="sale_order_form_view">
         <field
       name="name"
-    >sale.order.form (in alc_delivery_rounds_exclude_only_bo_or_only_human_or_only_free_products_pickings)</field>
+    >sale.order.form (in alc_delivery_rounds_assign_blocking)</field>
         <field name="model">sale.order</field>
         <field name="inherit_id" ref="sale.view_order_form" />
         <field name="arch" type="xml">
@@ -15,7 +15,5 @@
             </field>
         </field>
     </record>
-
-
 
 </odoo>

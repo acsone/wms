@@ -8,9 +8,9 @@ from odoo import fields, models
 class ProcurementOrder(models.Model):
 
     _inherit = "procurement.order"
-    do_not_deliver_line = fields.Boolean(defaut=False)
+    delivery_requires_other_lines = fields.Boolean(defaut=False)
 
     def _get_stock_move_values(self):
         res = super(ProcurementOrder, self)._get_stock_move_values()
-        res["do_not_deliver_line"] = self.do_not_deliver_line
+        res["delivery_requires_other_lines"] = self.delivery_requires_other_lines
         return res

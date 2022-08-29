@@ -9,6 +9,6 @@
     "version": "10.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
-    "depends": ["sale", "delivery_rounds", "alc_product_pharmacy"],
+    "depends": ["base_partition", "delivery_rounds"],
     "data": ["views/sale_order.xml"],
 }
