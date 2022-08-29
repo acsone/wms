@@ -124,6 +124,7 @@
         "alc_mrp_repair",
         "alc_partner_force_re_geolocalization",
         "alc_partner_manual_sale_order",
+        "alc_partner_delivery_window_import",
         "alc_placedesvetos",
         "alc_placedesvetos_payment_globalization",
         "alc_purchase_multipackaging",
