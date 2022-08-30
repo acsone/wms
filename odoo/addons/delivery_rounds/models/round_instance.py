@@ -346,6 +346,9 @@ class RoundInstance(models.Model):
     @api.multi
     @job(default_channel="root.stock_picking_assign")  # priority=8
     def _assign_pickings(self, pickings, no_prepare=False):
+        return self._do_assign_pickings(pickings, no_prepare=no_prepare)
+
+    def _do_assign_pickings(self, pickings, no_prepare=False):
         self.ensure_one()
 
         _logger.info(

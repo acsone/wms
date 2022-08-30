@@ -32,13 +32,9 @@ class TestInstancePickingState(DeliveryRoundTestCase):
     def test_round_fully_delivered(self):
         """Round goes from delivering to done"""
         self.assertEqual(self.delivery_round_1.state, "pending")
-        pick1 = self._create_picking_pick(partner=self.partner1)
-        pick2 = self._create_picking_pick(partner=self.partner2)
-        pick3 = self._create_picking_pick(partner=self.partner3)
-
-        ship1 = self._create_picking_out(self.partner1)
-        ship2 = self._create_picking_out(self.partner2)
-        ship3 = self._create_picking_out(self.partner3)
+        pick1, ship1 = self._create_picking_pick_ship(partner=self.partner1)
+        pick2, ship2 = self._create_picking_pick_ship(partner=self.partner2)
+        pick3, ship3 = self._create_picking_pick_ship(partner=self.partner3)
 
         # we don't care about the details if it is really
         # in that state, it is only for the round to think it is
@@ -55,11 +51,14 @@ class TestInstancePickingState(DeliveryRoundTestCase):
 
         icusts = self.delivery_round_1.instance_customer_ids
         self.assertEqual(len(icusts), 2)
-        # We did not manage move_dest_id so ship1/2 will be exluded
-        self.assertEqual(set(icusts.mapped("picking_ids")), {pick1, pick2})
 
+        # only pick 1 et 2 are assignable and ship1, ship2 are linked to picks
+        self.assertEqual(
+            set(icusts.mapped("picking_ids")), {pick1, pick2, ship1, ship2}
+        )
+
+        # execute pick1
         pick1.move_lines.write({"state": "done"})
-        ship1.move_lines.write({"state": "done"})
 
         with self.mock_with_delay() as (__, __):
             self.delivery_round_1.button_deliver()

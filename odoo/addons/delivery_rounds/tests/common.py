@@ -124,7 +124,7 @@ class DeliveryRoundTestCase(SavepointCase):
         return Picking.create(picking_values)
 
     @classmethod
-    def _create_picking_out(cls, partner=None):
+    def _create_picking_out(cls, partner=None, picking_pick=None):
         if not partner:
             partner = cls.partner1
         warehouse = cls.warehouse_1
@@ -152,11 +152,26 @@ class DeliveryRoundTestCase(SavepointCase):
                 )
             ],
         }
-        return Picking.create(picking_values)
+        picking = Picking.create(picking_values)
+        if picking_pick:
+            picking_pick.move_lines.move_dest_id = picking.move_lines
+        return picking
+
+    @classmethod
+    def _create_picking_pick_ship(cls, partner=None):
+        pick = cls._create_picking_pick(partner=partner)
+        ship = cls._create_picking_out(partner=partner, picking_pick=pick)
+        return pick, ship
 
     @classmethod
     def _confirm_sale_order(
-        cls, partner=None, product=None, qty=1, carrier_id=None, picking_policy=None
+        cls,
+        partner=None,
+        product=None,
+        qty=1,
+        carrier_id=None,
+        picking_policy=None,
+        so_values=None,
     ):
         if partner is None:
             partner = cls.partner1
@@ -178,11 +193,14 @@ class DeliveryRoundTestCase(SavepointCase):
             )
             for p in product
         ]
-        so_values = {
-            "partner_id": partner.id,
-            "warehouse_id": warehouse.id,
-            "order_line": lines,
-        }
+        so_values = so_values or {}
+        so_values.update(
+            {
+                "partner_id": partner.id,
+                "warehouse_id": warehouse.id,
+                "order_line": lines,
+            }
+        )
         if picking_policy:
             so_values["picking_policy"] = picking_policy
         if carrier_id:
