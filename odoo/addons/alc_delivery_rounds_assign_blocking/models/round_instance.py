@@ -13,19 +13,22 @@ class RoundInstance(models.Model):
         pickings_by_partner = pickings.partition("partner_id")
         to_assign_ids = []
         for partner, partner_pickings in pickings_by_partner.items():
-            if self._check_picking_assignable_to_round(partner_pickings, partner):
+            if self._check_picking_assignable_to_round(partner, partner_pickings):
                 to_assign_ids.extend(partner_pickings.ids)
+                to_assign_ids.extend(
+                    self._get_assignable_picking_domain(partner, partner_pickings)
+                )
         pickings_to_assign = self.env["stock.picking"].browse(to_assign_ids)
         return super(RoundInstance, self)._do_assign_pickings(
             pickings_to_assign, no_prepare=no_prepare
         )
 
-    def _check_picking_assignable_to_round(self, pickings, partner):
+    def _check_picking_assignable_to_round(self, partner, pickings):
         """
         return true if the all the prickings of the same partner are assignable
         to the delivery round
         """
-        if partner in self.partner_ids:
+        if partner in self.mapped("instance_customer_ids.partner_id"):
             # we already have pickings for the same partner
             return True
         # first we filter out all the backorders
@@ -36,3 +39,11 @@ class RoundInstance(models.Model):
             if not move.delivery_requires_other_lines:
                 return True
         return False
+
+    def _get_assignable_picking_domain(self, partner, pickings):
+        StockPicking = self.env["stock.picking"]
+        domain = StockPicking._get_domain_picking_assignable_to_delivery_round(
+            partners=partner
+        )
+        domain.append(("id", "not in", pickings.ids))
+        return StockPicking.search(domain).ids
