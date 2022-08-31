@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_reception_pharmacy
-#: code:addons/alc_reception_pharmacy/models/reception_pharmacy.py:142
+#: code:addons/alc_reception_pharmacy/models/reception_pharmacy.py:132
 #, python-format
 msgid "All pickings at destination of a same shipping must be in the same delivery round"
 msgstr ""
