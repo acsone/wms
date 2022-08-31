@@ -11,7 +11,7 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     # TODO split delivery_rounds...
-    "depends": ["delivery_rounds", "specific_data", "stock"],
+    "depends": ["alc_delivery_rounds_assign_blocking", "specific_data", "stock"],
     "data": [
         "data/ir_sequence.xml",
         "data/product_product.xml",

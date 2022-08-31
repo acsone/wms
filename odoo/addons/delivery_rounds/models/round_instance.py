@@ -475,6 +475,7 @@ class RoundInstance(models.Model):
                     }
                 )
             )
+            self.instance_customer_ids |= ric
         return ric
 
     @api.model

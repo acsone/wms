@@ -83,10 +83,11 @@ class TestReceptionPharmacy(CommonReceptionPharmacyCase):
             }
         )
 
-        reception.validate()
+        pickings = reception.validate()
 
         # after pharmacy reception, 2 items to be delivered
         self.assertEqual(len(self.shipping.move_lines), 2)
+        self.assertTrue(pickings.mapped("delivery_round_id"))
 
     def test_is_delivered_by_alcyon(self):
         """
@@ -95,3 +96,16 @@ class TestReceptionPharmacy(CommonReceptionPharmacyCase):
         self.assertTrue(self.partner.is_delivered_by_alcyon)
         self.itinerary.unlink()
         self.assertFalse(self.partner.is_delivered_by_alcyon)
+
+    def test_no_round_auto_assign_if_alone(self):
+        reception = self.ReceptionPharmacy.create({"product_id": self.product.id})
+        self.ReceptionPharmacyLine.create(
+            {
+                "customer_id": self.partner.id,
+                "bin_id": self.bin.id,
+                "wizard_id": reception.id,
+            }
+        )
+
+        pickings = reception.validate()
+        self.assertFalse(pickings.mapped("delivery_round_id"))

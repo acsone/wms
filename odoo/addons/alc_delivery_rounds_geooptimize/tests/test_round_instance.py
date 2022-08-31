@@ -60,13 +60,9 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
         cls.partner3.write({"partner_latitude": 10.3, "partner_longitude": 10.3})
 
         # makes all the pickings done into the for the round...
-        pick1 = cls._create_picking_pick(partner=cls.partner1)
-        pick2 = cls._create_picking_pick(partner=cls.partner2)
-        pick3 = cls._create_picking_pick(partner=cls.partner3)
-
-        ship1 = cls._create_picking_out(cls.partner1)
-        ship2 = cls._create_picking_out(cls.partner2)
-        ship3 = cls._create_picking_out(cls.partner3)
+        pick1, ship1 = cls._create_picking_pick_ship(partner=cls.partner1)
+        pick2, ship2 = cls._create_picking_pick_ship(partner=cls.partner2)
+        pick3, ship3 = cls._create_picking_pick_ship(partner=cls.partner3)
 
         # we don't care about the details if it is really
         # in that state, we force the state to assigned to be sure that
