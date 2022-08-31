@@ -185,9 +185,7 @@ class StockPicking(models.Model):
         )
 
     @api.model
-    def _delay_jobs_action_assign(self, partners=None):
-        # Group picking by partner
-        pickings_by_partner = defaultdict(lambda: self.env["stock.picking"])
+    def _get_domain_picking_assignable_to_delivery_round(self, partners=None):
         domain = [
             ("delivery_round_id", "=", False),
             ("state", "not in", ("done", "cancel")),
@@ -195,6 +193,15 @@ class StockPicking(models.Model):
         ]
         if partners:
             domain += [("partner_id", "in", partners.ids)]
+        return domain
+
+    @api.model
+    def _delay_jobs_action_assign(self, partners=None):
+        # Group picking by partner
+        pickings_by_partner = defaultdict(lambda: self.env["stock.picking"])
+        domain = self._get_domain_picking_assignable_to_delivery_round(
+            partners=partners
+        )
         pickings = self.search(domain)
         for picking in pickings:
             pickings_by_partner[picking.partner_id] |= picking

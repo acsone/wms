@@ -82,14 +82,9 @@ class TestInstancePickingState(DeliveryRoundTestCase):
         """Test that after round is delivered, the customer instances are deleted"""
         self.assertEqual(self.delivery_round_1.state, "pending")
         pick = self._create_picking_pick(partner=self.partner2)
-        ship = self._create_picking_out(self.partner2)
-
         pick.move_lines.write({"state": "assigned"})
 
-        ship.move_lines.write({"state": "waiting"})
-
-        pickings = pick | ship
-        self.delivery_round_1._assign_pickings(pickings)
+        self.delivery_round_1._assign_pickings(pick)
 
         self.assertEqual(len(self.delivery_round_1.instance_customer_ids), 1)
 

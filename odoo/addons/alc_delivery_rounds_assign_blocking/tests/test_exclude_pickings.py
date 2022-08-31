@@ -46,13 +46,8 @@ class TestExcludePickings(DeliverDeliveryRoundTestCase):
             lambda p: p.picking_type_subcode == "PICK"
         )
         self.assertEqual(len(picks), 2)
-        # outgoring has picking_type.groupbypartner = True -> 1 for the 2 SO
-        ships = sales.mapped("picking_ids").filtered(
-            lambda p: p.picking_type_code == "outgoing"
-        )
-        self.assertEqual(len(ships), 1)
 
-        # create the delivery rounf
+        # create the delivery round
         delivery_round = self.env["round.instance"].create(
             {"template_id": self.delivery_template_2.id, "date": "2017-01-01"}
         )
@@ -79,3 +74,70 @@ class TestExcludePickings(DeliverDeliveryRoundTestCase):
         self.assertListEqual(
             picks.mapped("state"), ["assigned", "assigned", "assigned"]
         )
+
+    def test_assign_non_blocking_picking_assign_blocked_picking(self):
+        """Test that the assignation of a new picking will also assign pickings
+        previously blocked
+        """
+        # assign blocked picking -> not assigned
+        blocked_pick = self._create_picking_pick(partner=self.partner2)
+        blocked_pick.move_lines.delivery_requires_other_lines = True
+        # we do not take care of reservation but put the picking into
+        # the rigth state to be available...
+        blocked_pick.move_lines.write({"state": "assigned"})
+        self.delivery_round_1._assign_pickings(blocked_pick)
+        self.assertFalse(blocked_pick.delivery_round_id)
+
+        # assign normal picking for the same partner
+        # -> both pickings are assigned
+        pick = self._create_picking_pick(partner=self.partner2)
+        pick.move_lines.write({"state": "assigned"})
+        self.delivery_round_1._assign_pickings(pick)
+        self.assertTrue(pick.delivery_round_id)
+        self.assertTrue(blocked_pick.delivery_round_id)
+
+    def test_assign_on_so_confirm(self):
+        """In this test we check that a blocked picking is not assigned at
+        conformation to a delivery round if blocked and no other pickings for
+        the same partner are already part of the delivery. We also check that
+        if a new SO is confirmed, the 2 pickings are assigned to the delivery"""
+
+        # we create the delivery round for the same template as the one linked
+        # to the carrier
+        self.env["round.instance"].create(
+            {"template_id": self.delivery_template_2.id, "date": "2017-01-01"}
+        )
+        sale1 = self._confirm_sale_order(
+            carrier_id=self.delivery_carrier.id,
+            so_values={"do_not_deliver_if_alone": True},
+        )
+        # at this stage, even if the pick is available and a delivery exists
+        # the pick is not part of the delivery since it's alone...
+        pick1 = sale1.mapped("picking_ids").filtered(
+            lambda p: p.picking_type_subcode == "PICK"
+        )
+        self.assertFalse(pick1.delivery_round_id)
+
+        # we create a new order for the same partner
+        sale2 = self._confirm_sale_order(carrier_id=self.delivery_carrier.id)
+        pick2 = sale2.mapped("picking_ids").filtered(
+            lambda p: p.picking_type_subcode == "PICK"
+        )
+        self.assertTrue(pick2.delivery_round_id)
+        self.assertTrue(pick1.delivery_round_id)
+
+        # if we create a new 'blocked' picking now, it will be assigned to
+        # the delivery since we already have pickings for the same partner into
+        # the delivery
+        sale3 = self._confirm_sale_order(
+            carrier_id=self.delivery_carrier.id,
+            so_values={"do_not_deliver_if_alone": True},
+        )
+        pick3 = sale3.mapped("picking_ids").filtered(
+            lambda p: p.picking_type_subcode == "PICK"
+        )
+        self.assertTrue(pick3.delivery_round_id)
+
+        # this test is only valide if PICK has picking_type.groupbypartner
+        # = False  -> 1 by SO
+        self.assertNotEqual(pick3, pick2)
