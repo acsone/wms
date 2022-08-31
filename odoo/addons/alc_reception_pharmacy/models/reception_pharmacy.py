@@ -71,6 +71,7 @@ class ReceptionPharmacy(models.Model):
         if not loc_supplier:
             raise UserError(_("Supplier location is missing"))
 
+        new_picking_ids = []
         for line in self.line_ids:
             lot_vals = {
                 "product_id": self.product_id.id,
@@ -108,21 +109,9 @@ class ReceptionPharmacy(models.Model):
                     "carrier_id": carrier.id,
                 }
             )
-            proc_order_vals = {
-                "name": "Pharmacy",
-                "product_id": self.product_id.id,
-                "product_uom": self.product_id.uom_id.id,
-                "product_qty": line.product_qty,
-                "warehouse_id": warehouse.id,
-                "location_id": loc_customer.id,
-                "partner_dest_id": line.customer_id.id,
-                "group_id": group_id.id,
-            }
-            # HACK HACK HACK for fields declared in specific_Stock.... TO BE
-            # REFACTORED!!!!!!
-            if "restrict_lot_id" in proc_order._fields:
-                proc_order_vals["restrict_lot_id"] = lot_id.id
-            # END HACK
+            proc_order_vals = self._prepare_procurement_order(
+                line, lot_id, warehouse.id, loc_customer.id, group_id.id
+            )
             line.procurement_id = proc_order.create(proc_order_vals)
             # procurement_autorun_defer
             line.procurement_id.run()
@@ -131,6 +120,7 @@ class ReceptionPharmacy(models.Model):
                 .search([("group_id", "=", group_id.id)])
                 .mapped("picking_id")
             )
+            new_picking_ids.extend(pickings.ids)
             pickings = pickings.filtered(
                 lambda picking: picking.picking_type_subcode == "PICK"
                 and picking.state not in ("draft", "done", "cancel")
@@ -151,3 +141,25 @@ class ReceptionPharmacy(models.Model):
             if delivery_round:
                 delivery_round._assign_pickings(pickings)
         self.state = "done"
+        return self.env["stock.picking"].browse(new_picking_ids)
+
+    def _prepare_procurement_order(
+        self, line, lot_id, warehouse_id, loc_customer_id, group_id
+    ):
+        proc_order = self.env["procurement.order"]
+        proc_order_vals = {
+            "name": "Pharmacy",
+            "product_id": self.product_id.id,
+            "product_uom": self.product_id.uom_id.id,
+            "product_qty": line.product_qty,
+            "warehouse_id": warehouse_id,
+            "location_id": loc_customer_id,
+            "partner_dest_id": line.customer_id.id,
+            "group_id": group_id,
+            "delivery_requires_other_lines": True,
+        }
+        # HACK HACK HACK for fields declared in specific_Stock.... TO BE
+        # REFACTORED!!!!!!
+        if "restrict_lot_id" in proc_order._fields:
+            proc_order_vals["restrict_lot_id"] = lot_id
+        return proc_order_vals

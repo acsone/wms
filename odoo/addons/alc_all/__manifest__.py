@@ -113,7 +113,6 @@
         "alc_delivery_rounds_gls",
         "alc_delivery_rounds_allatonce_assignment",
         "alc_delivery_rounds_assign_blocking",
-        "alc_delivery_rounds_assign_blocking_human",
         "alc_delivery_rounds_partner_geolocalize",
         "alc_edi_connector",
         "alc_eshop_classifieds_responsible",
