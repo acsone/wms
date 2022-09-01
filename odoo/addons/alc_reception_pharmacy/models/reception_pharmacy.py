@@ -110,7 +110,7 @@ class ReceptionPharmacy(models.Model):
                 }
             )
             proc_order_vals = self._prepare_procurement_order(
-                line, lot_id, warehouse.id, loc_customer.id, group_id.id
+                line, lot_id.id, warehouse.id, loc_customer.id, group_id.id
             )
             line.procurement_id = proc_order.create(proc_order_vals)
             # procurement_autorun_defer
