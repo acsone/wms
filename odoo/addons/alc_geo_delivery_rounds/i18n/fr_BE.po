@@ -1,16 +1,15 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* alc_geo_delivery_rounds
+#	* alc_geo_delivery_rounds
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-15 15:40+0000\n"
-"PO-Revision-Date: 2021-06-15 15:40+0000\n"
+"POT-Creation-Date: 2022-09-06 14:08+0000\n"
+"PO-Revision-Date: 2022-09-06 14:08+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -37,7 +36,7 @@ msgid "<span>Import shape file</span>"
 msgstr "<span>Importer un fichier shape</span>"
 
 #. module: alc_geo_delivery_rounds
-#: code:addons/alc_geo_delivery_rounds/models/round_template.py:21
+#: code:addons/alc_geo_delivery_rounds/models/round_template.py:25
 #, python-format
 msgid "A shape is required if a delivery plan is set for %s"
 msgstr "Un geopolygone est requis si un plan de livraison est donné pour %s"
@@ -91,12 +90,11 @@ msgstr "Nom affiché"
 #. module: alc_geo_delivery_rounds
 #: model:ir.ui.view,arch_db:alc_geo_delivery_rounds.round_template_form_view
 msgid "District"
-msgstr ""
+msgstr "District"
 
 #. module: alc_geo_delivery_rounds
 #: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_res_partner_not_in_dynamic_delivery_round
 #: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_res_users_not_in_dynamic_delivery_round
-#: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_shopinvader_partner_not_in_dynamic_delivery_round
 msgid "Do not include in dynamical delivery round"
 msgstr "Ne pas inclure dans la tournée dynamique"
 
@@ -143,21 +141,19 @@ msgstr "Dernière modification le"
 #: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_delivery_plan_write_uid
 #: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_shape_file_import_wizard_write_uid
 msgid "Last Updated by"
-msgstr "Dernière mise à jour par"
+msgstr "Derniere fois mis à jour par"
 
 #. module: alc_geo_delivery_rounds
 #: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_delivery_plan_write_date
 #: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_shape_file_import_wizard_write_date
 msgid "Last Updated on"
-msgstr "Dernière mise à jour le"
+msgstr "Dernière mis à jour le"
 
 #. module: alc_geo_delivery_rounds
 #: model:ir.model.fields,help:alc_geo_delivery_rounds.field_res_partner_round_template_ids
 #: model:ir.model.fields,help:alc_geo_delivery_rounds.field_res_users_round_template_ids
-#: model:ir.model.fields,help:alc_geo_delivery_rounds.field_shopinvader_partner_round_template_ids
 msgid "List all the round templates containing the partner"
-msgstr ""
-"Liste de tout les modèle de livraison dans auxquels appartient le client"
+msgstr "Liste de tout les modèle de livraison dans auxquels appartient le client"
 
 #. module: alc_geo_delivery_rounds
 #: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_delivery_plan_name
@@ -190,7 +186,6 @@ msgstr "OSM"
 #. module: alc_geo_delivery_rounds
 #: model:ir.model.fields,help:alc_geo_delivery_rounds.field_res_partner_tag_ids
 #: model:ir.model.fields,help:alc_geo_delivery_rounds.field_res_users_tag_ids
-#: model:ir.model.fields,help:alc_geo_delivery_rounds.field_shopinvader_partner_tag_ids
 msgid "Only partners with the right tag will be delivered"
 msgstr "Seuls les partenaires présentant les bonnes étiquettes seront livrés."
 
@@ -207,7 +202,6 @@ msgstr "Partners positions"
 #. module: alc_geo_delivery_rounds
 #: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_res_partner_round_template_ids
 #: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_res_users_round_template_ids
-#: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_shopinvader_partner_round_template_ids
 msgid "Round templates"
 msgstr "Modèle"
 
@@ -218,9 +212,18 @@ msgid "Shape File Import Wizard"
 msgstr "Importer un fichier shape"
 
 #. module: alc_geo_delivery_rounds
+#: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_round_template_shape_name
+msgid "Shape name"
+msgstr "Identifiant"
+
+#. module: alc_geo_delivery_rounds
+#: model:ir.model.fields,help:alc_geo_delivery_rounds.field_round_template_shape_name
+msgid "Shape resource name into the imported shape file"
+msgstr "Nom de l'enregistrement dans le fichier shape importé"
+
+#. module: alc_geo_delivery_rounds
 #: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_res_partner_tag_labels
 #: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_res_users_tag_labels
-#: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_shopinvader_partner_tag_labels
 msgid "Tag labels"
 msgstr "Tag labels"
 
@@ -228,7 +231,6 @@ msgstr "Tag labels"
 #: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_res_partner_tag_ids
 #: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_res_users_tag_ids
 #: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_shape_file_import_wizard_tag_ids
-#: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_shopinvader_partner_tag_ids
 msgid "Tags"
 msgstr "Étiquettes"
 
@@ -239,11 +241,8 @@ msgstr "Modèles"
 
 #. module: alc_geo_delivery_rounds
 #: model:ir.model.fields,help:alc_geo_delivery_rounds.field_shape_file_import_wizard_tag_ids
-msgid ""
-"The tags set here will be added to the templates created by the shapefile"
-msgstr ""
-"Les tags listés ici seront reportés sur les modèles créés par l'import du "
-"fichier shape"
+msgid "The tags set here will be added to the templates created by the shapefile"
+msgstr "Les tags listés ici seront reportés sur les modèles créés par l'import du fichier shape"
 
 #. module: alc_geo_delivery_rounds
 #: code:addons/alc_geo_delivery_rounds/wizards/shape_file_import_wizard.py:81
@@ -266,9 +265,3 @@ msgstr "Modèle"
 #: model:ir.model,name:alc_geo_delivery_rounds.model_shape_file_import_wizard
 msgid "shape.file.import.wizard"
 msgstr "Importer un fichier shape"
-
-#~ msgid "Geometry"
-#~ msgstr "Forme"
-
-#~ msgid "make.itinerary.plan.wizard"
-#~ msgstr "Générer l'itinéraire du jour à partir d'un plan de tournées"

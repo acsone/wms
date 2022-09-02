@@ -1,16 +1,15 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* alc_delivery_rounds_geooptimize
+#	* alc_delivery_rounds_geooptimize
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-19 08:30+0000\n"
-"PO-Revision-Date: 2021-10-19 08:30+0000\n"
+"POT-Creation-Date: 2022-09-06 13:54+0000\n"
+"PO-Revision-Date: 2022-09-06 13:54+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -23,19 +22,23 @@ msgid "%s must be > %s"
 msgstr "%s must be > %s"
 
 #. module: alc_delivery_rounds_geooptimize
-#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:533
+#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:544
 #, python-format
 msgid "%s: Optimization api call failed"
 msgstr "%s: Echec lors de l'appel à l'API d'optimisation"
 
 #. module: alc_delivery_rounds_geooptimize
-#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:105
-#: code:addons/alc_delivery_rounds_geooptimize/models/round_template.py:40
+#: code:addons/alc_delivery_rounds_geooptimize/models/alc_delivery_resource.py:102
 #, python-format
-msgid "A resource identifier is required if geo_optimization is enabled for %s"
-msgstr ""
-"Un identifiant de ressource est obligatoire si la geo optimisation est "
-"activée pour %s"
+msgid "A delivery person with a geolocalized address is required if you want to end the delivey round at the delivery person's address."
+msgstr "Un livreur Alcyon avec une adresse géolocalisée est requis si on désire terminer la tournée à l'adresse du livreur."
+
+#. module: alc_delivery_rounds_geooptimize
+#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:100
+#: code:addons/alc_delivery_rounds_geooptimize/models/round_template.py:34
+#, python-format
+msgid "A delivery resource is required if geo_optimization is enabled for %s"
+msgstr "Une ressource de livraison est nécessaire si la tournée %s peut être geo optimisée."
 
 #. module: alc_delivery_rounds_geooptimize
 #: model:ir.ui.view,arch_db:alc_delivery_rounds_geooptimize.stock_config_settings_form_view
@@ -58,17 +61,18 @@ msgid "Additional resources configuration (json)"
 msgstr "Paramètres additional de configuration des ressources (json)"
 
 #. module: alc_delivery_rounds_geooptimize
-#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:253
-#, python-format
-msgid ""
-"An optimization has been launched prior to the printing of the delivery "
-"slip. You'll be notified once the delivery slip is ready."
-msgstr ""
-"Une optimisation a été lancée en tâche de fond. Vous serez notifié lorsque "
-"l'impression des bons de livraison sera possible."
+#: model:ir.model,name:alc_delivery_rounds_geooptimize.model_alc_delivery_resource
+msgid "Alc Delivery Resource"
+msgstr "Ressource de livraison"
 
 #. module: alc_delivery_rounds_geooptimize
-#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:675
+#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:251
+#, python-format
+msgid "An optimization has been launched prior to the printing of the delivery slip. You'll be notified once the delivery slip is ready."
+msgstr "Une optimisation a été lancée en tâche de fond. Vous serez notifié lorsque l'impression des bons de livraison sera possible."
+
+#. module: alc_delivery_rounds_geooptimize
+#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:686
 #, python-format
 msgid "Can't export a not complete optimization for %s"
 msgstr "Impossible d'exporter une optimisation non terminée pour %s"
@@ -76,19 +80,17 @@ msgstr "Impossible d'exporter une optimisation non terminée pour %s"
 #. module: alc_delivery_rounds_geooptimize
 #: model:ir.model.fields,field_description:alc_delivery_rounds_geooptimize.field_res_partner_use_specific_delivery_duration
 #: model:ir.model.fields,field_description:alc_delivery_rounds_geooptimize.field_res_users_use_specific_delivery_duration
-#: model:ir.model.fields,field_description:alc_delivery_rounds_geooptimize.field_shopinvader_partner_use_specific_delivery_duration
 msgid "Change the default delivery duration"
 msgstr "Durée spécifique de livraison pour ce client"
 
 #. module: alc_delivery_rounds_geooptimize
 #: model:ir.model.fields,help:alc_delivery_rounds_geooptimize.field_res_partner_use_specific_delivery_duration
 #: model:ir.model.fields,help:alc_delivery_rounds_geooptimize.field_res_users_use_specific_delivery_duration
-#: model:ir.model.fields,help:alc_delivery_rounds_geooptimize.field_shopinvader_partner_use_specific_delivery_duration
 msgid "Change the default delivery duration for this specific partner"
 msgstr "Utilisation d'une durée spécifique de livraison pour ce clientr"
 
 #. module: alc_delivery_rounds_geooptimize
-#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:544
+#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:555
 #, python-format
 msgid "Check geo optimization status for %s"
 msgstr "Vérification de l'état de l'optimisation géographique pour %s"
@@ -99,12 +101,19 @@ msgid "Computed by the geo optimisation mechanism"
 msgstr "Calculé par le mécanisme d'optimisation géographique"
 
 #. module: alc_delivery_rounds_geooptimize
+#: model:ir.model.fields,field_description:alc_delivery_rounds_geooptimize.field_alc_delivery_resource_create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: alc_delivery_rounds_geooptimize
+#: model:ir.model.fields,field_description:alc_delivery_rounds_geooptimize.field_alc_delivery_resource_create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: alc_delivery_rounds_geooptimize
 #: model:ir.model.fields,help:alc_delivery_rounds_geooptimize.field_round_instance_geo_optimization_start_dt
-msgid ""
-"Date and time the optimization task was submitted to the TourSolver service."
-msgstr ""
-"Date et heure auxquelles la tâche d'optimisation a été soumise au service "
-"TourSolver."
+msgid "Date and time the optimization task was submitted to the TourSolver service."
+msgstr "Date et heure auxquelles la tâche d'optimisation a été soumise au service TourSolver."
 
 #. module: alc_delivery_rounds_geooptimize
 #: model:ir.ui.view,arch_db:alc_delivery_rounds_geooptimize.stock_config_settings_form_view
@@ -112,14 +121,34 @@ msgid "Default delivery window"
 msgstr "Fenêtre de livraison par défaut"
 
 #. module: alc_delivery_rounds_geooptimize
+#: model:ir.actions.act_window,name:alc_delivery_rounds_geooptimize.alc_delivery_resource_act_window
+#: model:ir.ui.menu,name:alc_delivery_rounds_geooptimize.alc_delivery_resource_menu
+msgid "Delivery Resource"
+msgstr "Ressource de livraison"
+
+#. module: alc_delivery_rounds_geooptimize
 #: model:ir.model.fields,field_description:alc_delivery_rounds_geooptimize.field_res_partner_delivery_duration
 #: model:ir.model.fields,field_description:alc_delivery_rounds_geooptimize.field_res_partner_specific_delivery_duration
 #: model:ir.model.fields,field_description:alc_delivery_rounds_geooptimize.field_res_users_delivery_duration
 #: model:ir.model.fields,field_description:alc_delivery_rounds_geooptimize.field_res_users_specific_delivery_duration
-#: model:ir.model.fields,field_description:alc_delivery_rounds_geooptimize.field_shopinvader_partner_delivery_duration
-#: model:ir.model.fields,field_description:alc_delivery_rounds_geooptimize.field_shopinvader_partner_specific_delivery_duration
 msgid "Delivery duration"
 msgstr "Durée de livraison"
+
+#. module: alc_delivery_rounds_geooptimize
+#: model:ir.model.fields,field_description:alc_delivery_rounds_geooptimize.field_alc_delivery_resource_delivery_person_id
+msgid "Delivery person's contact information"
+msgstr "Livreur Alcyon associé"
+
+#. module: alc_delivery_rounds_geooptimize
+#: model:ir.model.fields,field_description:alc_delivery_rounds_geooptimize.field_round_instance_delivery_resource_ids
+#: model:ir.model.fields,field_description:alc_delivery_rounds_geooptimize.field_round_template_delivery_resource_ids
+msgid "Delivery resource ids"
+msgstr "Ressources de livraison"
+
+#. module: alc_delivery_rounds_geooptimize
+#: model:ir.model.fields,field_description:alc_delivery_rounds_geooptimize.field_alc_delivery_resource_display_name
+msgid "Display Name"
+msgstr "Nom affiché"
 
 #. module: alc_delivery_rounds_geooptimize
 #: model:ir.model.fields,help:alc_delivery_rounds_geooptimize.field_stock_config_settings_geo_optimization_duration
@@ -134,13 +163,8 @@ msgstr "Durée en secondes nécessaire pour livrer un client"
 #. module: alc_delivery_rounds_geooptimize
 #: model:ir.model.fields,help:alc_delivery_rounds_geooptimize.field_res_partner_specific_delivery_duration
 #: model:ir.model.fields,help:alc_delivery_rounds_geooptimize.field_res_users_specific_delivery_duration
-#: model:ir.model.fields,help:alc_delivery_rounds_geooptimize.field_shopinvader_partner_specific_delivery_duration
-msgid ""
-"Duration in seconds needed to deliver a specific customer (different from "
-"the general one)"
-msgstr ""
-"Durée en secondes nécessaire pour livrer un client spécifique (différente de "
-"la durée générale)"
+msgid "Duration in seconds needed to deliver a specific customer (different from the general one)"
+msgstr "Durée en secondes nécessaire pour livrer un client spécifique (différente de la durée générale)"
 
 #. module: alc_delivery_rounds_geooptimize
 #: model:ir.model.fields,field_description:alc_delivery_rounds_geooptimize.field_round_instance_geo_optimization_enabled
@@ -154,12 +178,10 @@ msgid "Error"
 msgstr "Erreur"
 
 #. module: alc_delivery_rounds_geooptimize
-#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:654
+#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:665
 #, python-format
 msgid "Export optimization result to operational planning for %s"
-msgstr ""
-"Exporter le résultat de l'optimisation vers le planning opérationnelle pour "
-"%s"
+msgstr "Exporter le résultat de l'optimisation vers le planning opérationnelle pour %s"
 
 #. module: alc_delivery_rounds_geooptimize
 #: model:ir.ui.view,arch_db:alc_delivery_rounds_geooptimize.round_instance_form_view
@@ -227,8 +249,7 @@ msgid "Geo optimization request"
 msgstr "Requête de Géo optimisation"
 
 #. module: alc_delivery_rounds_geooptimize
-#: model:ir.model.fields,field_description:alc_delivery_rounds_geooptimize.field_round_instance_geo_optimization_resource_id
-#: model:ir.model.fields,field_description:alc_delivery_rounds_geooptimize.field_round_template_geo_optimization_resource_id
+#: model:ir.model.fields,field_description:alc_delivery_rounds_geooptimize.field_alc_delivery_resource_geo_optimization_resource_id
 msgid "Geo optimization resource id"
 msgstr "Identifiant de la ressource dans l'omptimisation Géo"
 
@@ -238,28 +259,29 @@ msgid "Geo optimization result"
 msgstr "Résultat de la géo optimisation"
 
 #. module: alc_delivery_rounds_geooptimize
+#: model:ir.model.fields,field_description:alc_delivery_rounds_geooptimize.field_alc_delivery_resource_id
+msgid "ID"
+msgstr "ID"
+
+#. module: alc_delivery_rounds_geooptimize
 #: model:ir.model.fields,help:alc_delivery_rounds_geooptimize.field_round_instance_geo_optimization_task_id
-msgid ""
-"Identifier of the task submitted to the TourSolver service to optimize the "
-"planning/path of the delivery round."
-msgstr ""
-"Identificateur de la tâche soumise au service TourSolver pour optimiser la "
-"planification/le parcours de la tournée de livraison."
+msgid "Identifier of the task submitted to the TourSolver service to optimize the planning/path of the delivery round."
+msgstr "Identificateur de la tâche soumise au service TourSolver pour optimiser la planification/le parcours de la tournée de livraison."
+
+#. module: alc_delivery_rounds_geooptimize
+#: model:ir.model.fields,help:alc_delivery_rounds_geooptimize.field_alc_delivery_resource_use_delivery_person_coordinates_as_end
+msgid "If true the computed delivery will end at the delivery person's address. Otherwise it will end at the Alcyon warehouse"
+msgstr "Si spécifié, le trajet de livraison calculé se terminera à l'adresse du livreur. Dans le cas contraire, le trajet sera calculé pour se terminer chez Alcyon."
 
 #. module: alc_delivery_rounds_geooptimize
 #: code:addons/alc_delivery_rounds_geooptimize/models/res_partner.py:33
 #, python-format
-msgid ""
-"If you enable the specific delivery duration for this user, you must provide "
-"a duration."
-msgstr ""
-"Si vous activez la durée de livraison spécifique pour cet utilisateur, vous "
-"devez fournir une durée."
+msgid "If you enable the specific delivery duration for this user, you must provide a duration."
+msgstr "Si vous activez la durée de livraison spécifique pour cet utilisateur, vous devez fournir une durée."
 
 #. module: alc_delivery_rounds_geooptimize
 #: model:ir.ui.view,arch_db:alc_delivery_rounds_geooptimize.view_round_instance_kanban
-msgid ""
-"Ignore Optimization\n"
+msgid "Ignore Optimization\n"
 "                        Failure"
 msgstr "Ignorer les erreurs d'optimisation"
 
@@ -282,6 +304,21 @@ msgstr "Rang calculé?"
 #: selection:stock.config.settings,geo_optimization_method:0
 msgid "Keep fixed round itinerary order"
 msgstr "Dans l'ordre fixé par l'itinéraire"
+
+#. module: alc_delivery_rounds_geooptimize
+#: model:ir.model.fields,field_description:alc_delivery_rounds_geooptimize.field_alc_delivery_resource___last_update
+msgid "Last Modified on"
+msgstr "Dernière modification le"
+
+#. module: alc_delivery_rounds_geooptimize
+#: model:ir.model.fields,field_description:alc_delivery_rounds_geooptimize.field_alc_delivery_resource_write_uid
+msgid "Last Updated by"
+msgstr "Derniere fois mis à jour par"
+
+#. module: alc_delivery_rounds_geooptimize
+#: model:ir.model.fields,field_description:alc_delivery_rounds_geooptimize.field_alc_delivery_resource_write_date
+msgid "Last Updated on"
+msgstr "Dernière mis à jour le"
 
 #. module: alc_delivery_rounds_geooptimize
 #: model:ir.model.fields,help:alc_delivery_rounds_geooptimize.field_stock_config_settings_geo_optimization_loading_duration
@@ -319,7 +356,7 @@ msgid "Optimization error message"
 msgstr "Message d'erreur du processus d'optimisatione"
 
 #. module: alc_delivery_rounds_geooptimize
-#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:693
+#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:704
 #, python-format
 msgid "Optimization for %s exported to operational planning."
 msgstr "Optimisation %s exporté vers l'app mobile."
@@ -330,7 +367,7 @@ msgid "Optimization process max duration"
 msgstr "Durée maximale du processus d'optimisation"
 
 #. module: alc_delivery_rounds_geooptimize
-#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:228
+#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:226
 #, python-format
 msgid "Optimization requests sent to external system."
 msgstr "Demandes d'optimisation envoyées au système externe."
@@ -366,14 +403,13 @@ msgid "Planned Start Loading Time"
 msgstr "Heure de début de chargement du véhicule"
 
 #. module: alc_delivery_rounds_geooptimize
-#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:212
+#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:210
 #, python-format
 msgid "Please configure your timezone in your user preferences"
-msgstr ""
-"Veuillez configurer votre fuseau horaire dans vos préférences d'utilisateur"
+msgstr "Veuillez configurer votre fuseau horaire dans vos préférences d'utilisateur"
 
 #. module: alc_delivery_rounds_geooptimize
-#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:507
+#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:518
 #, python-format
 msgid "Print"
 msgstr "Imprimer"
@@ -382,6 +418,13 @@ msgstr "Imprimer"
 #: model:ir.model.fields,field_description:alc_delivery_rounds_geooptimize.field_round_instance_print_all_deliveryslip_after_geo_optimization
 msgid "Print all deliveryslip after geo optimization"
 msgstr "Imprimer les bons de livraison après optimisation géographique"
+
+#. module: alc_delivery_rounds_geooptimize
+#: code:addons/alc_delivery_rounds_geooptimize/models/alc_delivery_resource.py:71
+#: sql_constraint:alc.delivery.resource:0
+#, python-format
+msgid "Resource ID must be unique"
+msgstr "Resource ID must be unique"
 
 #. module: alc_delivery_rounds_geooptimize
 #: model:ir.ui.view,arch_db:alc_delivery_rounds_geooptimize.stock_config_settings_form_view
@@ -425,33 +468,27 @@ msgid "The cost of a resource working for an hour."
 msgstr "Le coût d'une ressource travaillant pendant une heure."
 
 #. module: alc_delivery_rounds_geooptimize
-#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:648
+#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:659
 #, python-format
-msgid ""
-"The delivery round %s will be exported to tha mobile App into background."
+msgid "The delivery round %s will be exported to tha mobile App into background."
 msgstr "La tournée %s sera exportée vers l'application mobile en arrière-plan."
 
 #. module: alc_delivery_rounds_geooptimize
-#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:609
+#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:620
 #, python-format
-msgid ""
-"The following partner ids are not expected into the optimization result: %s"
-msgstr ""
-"Les identifiants client suivants ne sont pas attendus dans le résultat de "
-"l'optimisation: %s"
+msgid "The following partner ids are not expected into the optimization result: %s"
+msgstr "Les identifiants client suivants ne sont pas attendus dans le résultat de l'optimisation: %s"
 
 #. module: alc_delivery_rounds_geooptimize
-#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:601
+#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:612
 #, python-format
 msgid "The following partners are not found into the optimization result: %s"
-msgstr ""
-"Les clients suivants ne sont pas trouvés dans le résultat de l'optimisation: "
-"%s"
+msgstr "Les clients suivants ne sont pas trouvés dans le résultat de l'optimisation: %s"
 
 #. module: alc_delivery_rounds_geooptimize
 #: model:ir.model.fields,field_description:alc_delivery_rounds_geooptimize.field_stock_config_settings_geo_optimization_dw_end
 msgid "To"
-msgstr "A"
+msgstr "Vers"
 
 #. module: alc_delivery_rounds_geooptimize
 #: model:ir.model.fields,field_description:alc_delivery_rounds_geooptimize.field_stock_config_settings_geo_optimization_api_key
@@ -464,18 +501,23 @@ msgid "TourSolver API url"
 msgstr "Url API TourSolver"
 
 #. module: alc_delivery_rounds_geooptimize
+#: model:ir.model.fields,field_description:alc_delivery_rounds_geooptimize.field_alc_delivery_resource_use_delivery_person_coordinates_as_end
+msgid "Use delivery person coordinates as end"
+msgstr "Terminer le trajet à l'adresse du livreur"
+
+#. module: alc_delivery_rounds_geooptimize
 #: model:ir.model.fields,field_description:alc_delivery_rounds_geooptimize.field_round_instance_warehouse_id
 msgid "Warehouse id"
 msgstr "Entrepôt"
 
 #. module: alc_delivery_rounds_geooptimize
-#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:207
+#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:205
 #, python-format
 msgid "Work start time is only available for geo optimized delivery rounds"
 msgstr "Work start time is only available for geo optimized delivery rounds"
 
 #. module: alc_delivery_rounds_geooptimize
-#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:503
+#: code:addons/alc_delivery_rounds_geooptimize/models/round_instance.py:514
 #, python-format
 msgid "Your delivery slip are now ready. Click to print"
 msgstr "Vos bons de livaison sont prêts. Cliquez pour imprimer."

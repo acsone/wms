@@ -59,12 +59,11 @@ class RoundInstance(models.Model):
         compute="_compute_geo_optimization_state",
     )
     geo_optimization_enabled = fields.Boolean("Enable geo optimization")
-    geo_optimization_resource_id = fields.Selection(
-        selection="_selection_geo_optimization_resource_id"
-    )
+
     geo_optimization_method = fields.Selection(
         selection="_selection_geo_optimization_method"
     )
+    delivery_resource_ids = fields.Many2many(comodel_name="alc.delivery.resource")
     geo_optimization_result = fields.Binary(attachment=True, readonly=True)
     geo_optimization_request = fields.Binary(attachment=True, readonly=True)
 
@@ -86,10 +85,6 @@ class RoundInstance(models.Model):
     )
 
     @api.model
-    def _selection_geo_optimization_resource_id(self):
-        return self.env["round.template"]._selection_geo_optimization_resource_id()
-
-    @api.model
     def _selection_geo_optimization_method(self):
         return (
             self.env["stock.config.settings"]
@@ -97,13 +92,13 @@ class RoundInstance(models.Model):
             .selection
         )
 
-    @api.constrains("geo_optimization_enabled", "geo_optimization_resource_id")
-    def _check_geo_optimization_resource_id(self):
+    @api.constrains("geo_optimization_enabled", "delivery_resource_ids")
+    def _check_delivery_resource_ids(self):
         for rec in self:
-            if rec.geo_optimization_enabled and not rec.geo_optimization_resource_id:
+            if rec.geo_optimization_enabled and not rec.delivery_resource_ids:
                 raise ValidationError(
                     _(
-                        "A resource identifier is required if geo_optimization is enabled for %s"
+                        "A delivery resource is required if geo_optimization is enabled for %s"
                     )
                     % rec.display_name
                 )
@@ -164,7 +159,10 @@ class RoundInstance(models.Model):
         if "geo_optimization_enabled" not in vals and "template_id" in vals:
             template = self.env["round.template"].browse(vals["template_id"])
             vals["geo_optimization_enabled"] = template.geo_optimization_enabled
-            vals["geo_optimization_resource_id"] = template.geo_optimization_resource_id
+            if template.delivery_resource_ids:
+                vals["delivery_resource_ids"] = [
+                    (6, 0, template.delivery_resource_ids.ids)
+                ]
             vals["geo_optimization_method"] = (
                 template.geo_optimization_method or cfg.method
             )
@@ -367,7 +365,9 @@ class RoundInstance(models.Model):
             if fixed_partner_delivery_sequences:
                 order["evaluationInfos"] = {
                     "orderPosition": fixed_partner_delivery_sequences[partner.id],
-                    "orderOriginalResourceId": self.geo_optimization_resource_id,
+                    "orderOriginalResourceId": self.delivery_resource_ids[
+                        0
+                    ].geo_optimization_resource_id,
                     "orderOriginalVisitDay": 1,
                 }
             customDataMap = {}
@@ -404,26 +404,37 @@ class RoundInstance(models.Model):
         work_start_time = time_loading.strftime("%H:%M:00")
         h, m = divmod(cfg.loading_duration, 60)
         fixed_loading_duration = "%02d:%02d:00" % (h, m)
-        res = {
-            "id": self.geo_optimization_resource_id,
-            "mobileLogin": "%s@alcyonbelux.be"
-            % self.geo_optimization_resource_id.lower(),
-            "startX": address.partner_longitude,
-            "startY": address.partner_latitude,
-            "endX": address.partner_longitude,
-            "endY": address.partner_latitude,
-            "openStart": False,  # begin the tour at the resource start location.
-            "workStartTime": work_start_time,
-            "fixedLoadingDuration": fixed_loading_duration,
-            "loadBeforeDeparture": True,
-            "noReload": True,
-            "globalCapacity": 9999,
-            "useAllCapacities": False,
-            "travelPenalty": cfg.travel_penalty,
-            "workPenalty": cfg.work_penalty,
-        }
-        res.update(cfg.resource_cfg)
-        return [res]
+        resources = []
+        for resource in self.delivery_resource_ids:
+            res = {
+                "id": resource.geo_optimization_resource_id,
+                "mobileLogin": "%s@alcyonbelux.be"
+                % resource.geo_optimization_resource_id.lower(),
+                "startX": address.partner_longitude,
+                "startY": address.partner_latitude,
+                "endX": address.partner_longitude,
+                "endY": address.partner_latitude,
+                "openStart": False,  # begin the tour at the resource start location.
+                "workStartTime": work_start_time,
+                "fixedLoadingDuration": fixed_loading_duration,
+                "loadBeforeDeparture": True,
+                "noReload": True,
+                "globalCapacity": 9999,
+                "useAllCapacities": False,
+                "travelPenalty": cfg.travel_penalty,
+                "workPenalty": cfg.work_penalty,
+            }
+            if resource.use_delivery_person_coordinates_as_end:
+                delivery_person_id = resource.delivery_person_id
+                res.update(
+                    {
+                        "endX": delivery_person_id.partner_longitude,
+                        "endY": delivery_person_id.partner_latitude,
+                    }
+                )
+            res.update(cfg.resource_cfg)
+            resources.append(res)
+        return resources
 
     def _generate_optimization_options(self, cfg):
         res = {
@@ -701,10 +712,11 @@ class RoundInstance(models.Model):
             "taskId": self.geo_optimization_task_id,
             "resourceMapping": [
                 {
-                    "id": self.geo_optimization_resource_id,
+                    "id": r.geo_optimization_resource_id,
                     "operationalId": "%s@alcyonbelux.be"
-                    % self.geo_optimization_resource_id.lower(),
+                    % r.geo_optimization_resource_id.lower(),
                 }
+                for r in self.delivery_resource_ids
             ],
             "force": True,  # override if exists
             "startDate": self._date_to_geo_date(self.date),

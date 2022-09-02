@@ -20,8 +20,9 @@
           <group>
             <field name="geo_optimization_enabled" />
             <field
-              name="geo_optimization_resource_id"
+              name="delivery_resource_ids"
               attrs="{'required': [('geo_optimization_enabled', '=', True)]}"
+              widget="many2many_tags"
             />
             <field name="geo_optimization_method" />
             <field name="geo_optimization_task_id" />

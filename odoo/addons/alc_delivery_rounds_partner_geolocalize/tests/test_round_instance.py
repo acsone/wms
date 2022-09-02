@@ -37,10 +37,13 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
                 "geo_optimization_method": "optimized",
             }
         ).execute()
+        cls.delivery_resource_d1 = cls.env["alc.delivery.resource"].create(
+            {"geo_optimization_resource_id": "D1"}
+        )
         cls.delivery_round_1.write(
             {
                 "geo_optimization_enabled": True,
-                "geo_optimization_resource_id": "D1",
+                "delivery_resource_ids": [(6, False, cls.delivery_resource_d1.ids)],
                 "geo_optimization_method": "optimized",
             }
         )

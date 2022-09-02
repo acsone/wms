@@ -10,8 +10,9 @@
       <field name="name" position="after">
         <field name="geo_optimization_enabled" />
         <field
-          name="geo_optimization_resource_id"
+          name="delivery_resource_ids"
           attrs="{'required': [('geo_optimization_enabled', '=', True)]}"
+          widget="many2many_tags"
         />
         <field name="geo_optimization_method" />
       </field>
@@ -41,8 +42,9 @@
       <field name="name" position="after">
         <field name="geo_optimization_enabled" />
         <field
-          name="geo_optimization_resource_id"
+          name="delivery_resource_ids"
           attrs="{'required': [('geo_optimization_enabled', '=', True)]}"
+          widget="many2many_tags"
         />
         <field name="geo_optimization_method" />
       </field>

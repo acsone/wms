@@ -117,14 +117,14 @@ class ShapeFileImportWizard(models.TransientModel):
 
         existing_template = self.delivery_plan_id.round_template_ids.filtered(
             lambda x: x.name == shape_record.record.Nom
-            or x.geo_optimization_resource_id == shape_record.record.Nom
+            or x.shape_name == shape_record.record.Nom
         )
         if existing_template:
             # Update template
             existing_template.write(
                 {
                     "geo_polygon_shape": wkb,
-                    "geo_optimization_resource_id": shape_record.record.Nom,
+                    "shape_name": shape_record.record.Nom,
                     "tag_ids": [(6, 0, self.tag_ids.ids)],
                 }
             )
@@ -135,7 +135,7 @@ class ShapeFileImportWizard(models.TransientModel):
             {
                 "name": shape_record.record.Nom,
                 "delivery_plan_id": self.delivery_plan_id.id,
-                "geo_optimization_resource_id": shape_record.record.Nom,
+                "shape_name": shape_record.record.Nom,
                 "geo_polygon_shape": wkb,
                 "tag_ids": [(6, 0, self.tag_ids.ids)],
             }
