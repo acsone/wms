@@ -9,6 +9,35 @@ class TestExcludePickings(DeliverDeliveryRoundTestCase):
     """Test to run at install
     """
 
+    def _get_backorder(self, picking):
+        backorder = picking.browse()
+        while True:
+            picking = picking.search([("backorder_id", "=", picking.id)])
+            if picking:
+                backorder = picking
+            else:
+                break
+        return backorder
+
+    def _process_and_create_backorder(self, picking):
+        result = picking.do_new_transfer()
+        if result:
+            backorder_reason = self.backorder_reason_model.create(
+                {"name": "Unittest backorder", "backorder_action_to_do": "create"}
+            )
+
+            result = picking.do_new_transfer()
+
+            # Check that the transfer action return the good wizard
+            self.assertEqual(result["res_model"], "stock.backorder.choice")
+
+            # Create backorder choice wizard and execute it
+            wizard = self.backorder_choice_model.with_context(result["context"]).create(
+                {"reason_id": backorder_reason.id}
+            )
+            wizard.apply()
+        return self._get_backorder(picking)
+
     def test_picking_assign_blocked_by_so(self):
         """
         Data:
@@ -141,3 +170,48 @@ class TestExcludePickings(DeliverDeliveryRoundTestCase):
         # this test is only valide if PICK has picking_type.groupbypartner
         # = False  -> 1 by SO
         self.assertNotEqual(pick3, pick2)
+
+    def test_backorder_blocked(self):
+        # here we create a backorder since the picking is not done
+        # we create a sale
+        sale = self._confirm_sale_order(carrier_id=self.delivery_carrier.id,)
+        # we create a RI for the sale's carrier
+        delivery_round = self.env["round.instance"].create(
+            {"template_id": self.delivery_template_2.id, "date": "2017-01-01"}
+        )
+        picks = sale.picking_ids.filtered(lambda p: p.picking_type_subcode == "PICK")
+        delivery_round._assign_pickings(picks)
+        self.assertTrue(picks.delivery_round_id)
+        # we deliver the delivery_round without preparation
+        delivery_round._deliver(background=False)
+
+        # the move_line into the pic should be marked as to not deliver alone
+        picks = sale.picking_ids.filtered(lambda p: p.picking_type_subcode == "PICK")
+        self.assertListEqual(
+            [True], picks.mapped("move_lines.delivery_requires_other_lines")
+        )
+
+    def test_backorder_blocked_2(self):
+        # here we create a backorder since the picking is partially processed
+        # we create a sale
+        sale = self._confirm_sale_order(carrier_id=self.delivery_carrier.id, qty=2)
+        # we create a RI for the sale's carrier
+        delivery_round = self.env["round.instance"].create(
+            {"template_id": self.delivery_template_2.id, "date": "2017-01-01"}
+        )
+        picks = sale.picking_ids.filtered(lambda p: p.picking_type_subcode == "PICK")
+        delivery_round._assign_pickings(picks)
+        self.assertTrue(picks.delivery_round_id)
+
+        # we partially process the backorder
+        pack_operation = picks.pack_operation_product_ids
+        pack_operation.write({"qty_done": 1})
+        picks.do_new_transfer()
+        # we deliver the delivery_round without preparation
+        delivery_round._deliver(background=False)
+
+        backorder = self._get_backorder(picks)
+        # the move_line into the pic should be marked as to not deliver alone
+        self.assertListEqual(
+            [True], backorder.mapped("move_lines.delivery_requires_other_lines")
+        )

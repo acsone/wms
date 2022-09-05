@@ -35,7 +35,9 @@ class RoundInstance(models.Model):
         pickings = pickings.filtered(lambda p: not p.backorder_id)
         # if we've at least one move that doens't require other lines -> we could
         # add all the pickings to the round
-        for move in pickings.mapped("move_lines"):
+        for move in pickings.mapped("move_lines").filtered(
+            lambda m: m.state not in ("cancel", "done")
+        ):
             if not move.delivery_requires_other_lines:
                 return True
         return False
