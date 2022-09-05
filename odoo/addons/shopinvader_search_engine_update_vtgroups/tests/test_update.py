@@ -23,7 +23,7 @@ class TestProductExportFlow(TestProductUpdate):
         self.binding.to_update = False
         partner = self.env["res.partner"].create({"name": "P"})
         # when  # just modifying the partner does not mark products to update
-        vt_group.partner_ids.write([(6, 0, partner.id)])
+        vt_group.write({"partner_ids": [(6, 0, partner.ids)]})
         # then
         self.assertFalse(self.binding.to_update)
 
