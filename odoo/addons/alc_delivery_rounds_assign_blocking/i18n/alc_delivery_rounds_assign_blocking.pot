@@ -45,6 +45,11 @@ msgid "Stock Move"
 msgstr ""
 
 #. module: alc_delivery_rounds_assign_blocking
+#: model:ir.model,name:alc_delivery_rounds_assign_blocking.model_stock_picking
+msgid "Transfer"
+msgstr ""
+
+#. module: alc_delivery_rounds_assign_blocking
 #: model:ir.model,name:alc_delivery_rounds_assign_blocking.model_round_instance
 msgid "round.instance"
 msgstr ""
