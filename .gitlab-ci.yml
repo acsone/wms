@@ -249,7 +249,7 @@ test-shopfloor-branch:
     - MODIFIED_ADDONS=${MODIFIED_ADDONS%?} # remove trailing comma
     - echo $MODIFIED_ADDONS
     - IMPACTED_ADDONS=$(manifestoo --addons-path-python venv/bin/python --select $MODIFIED_ADDONS list-codepends --separator=,)
-    - ALL_ADDONS=$(acsoo addons list)
+    - ALL_ADDONS=$(manifestoo -d odoo/addons list)
     - IFS=',' read -ra ADDR <<< "$ALL_ADDONS"
     - SHOPFLOOR_ADDONS=''
     - for i in "${ADDR[@]}"; do
