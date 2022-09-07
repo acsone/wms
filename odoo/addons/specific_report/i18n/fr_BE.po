@@ -424,6 +424,16 @@ msgid "<span>RPM Liège division Huy - TVA</span>"
 msgstr "<span>RPM Liège division Huy - TVA</span>"
 
 #. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.report_saleorder_document_inherit
+msgid "<strong>Discount subtotal</strong>"
+msgstr "<strong>Montant de la remise</strong>"
+
+#. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.report_saleorder_document_inherit
+msgid "<strong>Subtotal without discount</strong>"
+msgstr "<strong>Sous-total sans la remise</strong>"
+
+#. module: specific_report
 #: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 #, fuzzy
 msgid ""

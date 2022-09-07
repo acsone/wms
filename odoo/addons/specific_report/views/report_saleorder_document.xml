@@ -50,6 +50,26 @@
           t-field="doc.partner_shipping_id.vet_depot_number"
         /></p>
     </xpath>
+    <xpath expr="//t[@t-foreach='doc._get_tax_amount_by_group()']" position="after">
+        <tr>
+          <td><strong>Subtotal without discount</strong></td>
+          <td class="text-right">
+              <span
+            t-field="doc.price_total_no_discount"
+            t-options='{"widget": "monetary", "display_currency": doc.pricelist_id.currency_id}'
+          />
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Discount subtotal</strong></td>
+          <td class="text-right">
+              <span
+            t-field="doc.discount_total"
+            t-options='{"widget": "monetary", "display_currency": doc.pricelist_id.currency_id}'
+          />
+          </td>
+        </tr>
+    </xpath>
   </template>
   <template id="report_saleorder_document_pharmacist_supplier">
     <t t-call="report.external_layout">
