@@ -91,6 +91,8 @@ licence_check:
 
 test-impacted:
   extends: .test_common
+  variables:
+    GIT_FETCH_EXTRA_FLAGS: "master:master"
   script:
     - pipx install acsoo # for checklog
     - pipx install manifestoo # up to date with list-codepends
@@ -98,10 +100,6 @@ test-impacted:
     - venv/bin/pip install --no-deps -r requirements-tests.txt # test dependencies
     - venv/bin/pip install --no-deps --no-index release/*.whl # runtime dependencies
     - venv/bin/pip install --no-deps -e .
-    - start_ssh_agent # fetch
-    - git remote set-branches origin '*'
-    - GITROOT="git@gitlab.acsone.eu:${CI_PROJECT_PATH}"
-    - git fetch --depth=50 ${GITROOT} master:master
     - MODIFIED_ADDONS=$(git diff --name-only master `git rev-parse --abbrev-ref HEAD` | grep "odoo/addons" | sed 's/odoo.addons.//' | sed 's/\/.*//' | uniq | tr '\n' ',') || true
     - if [[ -z "$MODIFIED_ADDONS" ]] ; then echo "No changes to test."; exit 0; fi
     - MODIFIED_ADDONS=${MODIFIED_ADDONS%?} # remove trailing comma
@@ -233,6 +231,8 @@ test-shopfloor-master:
 
 test-shopfloor-branch:
   extends: .test_common
+  variables:
+    GIT_FETCH_EXTRA_FLAGS: "master:master"
   script:
     - pipx install acsoo # for checklog
     - pipx install manifestoo # up to date with list-codepends
@@ -240,10 +240,6 @@ test-shopfloor-branch:
     - venv/bin/pip install --no-deps -r requirements-tests.txt # test dependencies
     - venv/bin/pip install --no-deps --no-index release/*.whl # runtime dependencies
     - venv/bin/pip install --no-deps -e . # the project, in editable mode so coverage sees it
-    - start_ssh_agent
-    - git remote set-branches origin '*'
-    - GITROOT="git@gitlab.acsone.eu:${CI_PROJECT_PATH}"
-    - git fetch --depth=50 ${GITROOT} master:master
     - MODIFIED_ADDONS=$(git diff --name-only master `git rev-parse --abbrev-ref HEAD` | grep "odoo/addons" | sed 's/odoo.addons.//' | sed 's/\/.*//' | uniq | tr '\n' ',') || true # if empty, $? is 1 on gitlab, which interrupts execution.
     - if [[ -z "$MODIFIED_ADDONS" ]] ; then echo "No changes to test."; exit 0; fi
     - MODIFIED_ADDONS=${MODIFIED_ADDONS%?} # remove trailing comma
