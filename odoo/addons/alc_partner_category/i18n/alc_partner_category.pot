@@ -1,0 +1,175 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* alc_partner_category
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_partner_category
+#: model:res.partner.category,name:alc_partner_category.toarchive
+msgid "A archiver"
+msgstr ""
+
+#. module: alc_partner_category
+#: model:res.partner.category,name:alc_partner_category.alpharepartition
+msgid "Alpha-Répartition"
+msgstr ""
+
+#. module: alc_partner_category
+#: model:res.partner.category,name:alc_partner_category.took
+msgid "Attest n°dépôt ok"
+msgstr ""
+
+#. module: alc_partner_category
+#: model:res.partner.category,name:alc_partner_category.autres
+msgid "Autres"
+msgstr ""
+
+#. module: alc_partner_category
+#: model:res.partner.category,name:alc_partner_category.clinique
+msgid "Clinique petits animaux"
+msgstr ""
+
+#. module: alc_partner_category
+#: model:res.partner.category,name:alc_partner_category.divers
+msgid "Divers"
+msgstr ""
+
+#. module: alc_partner_category
+#: model:res.partner.category,name:alc_partner_category.enseignant
+msgid "Enseignant Université"
+msgstr ""
+
+#. module: alc_partner_category
+#: model:res.partner.category,name:alc_partner_category.epece
+msgid "Epécé"
+msgstr ""
+
+#. module: alc_partner_category
+#: model:res.partner.category,name:alc_partner_category.equins
+msgid "Equins"
+msgstr ""
+
+#. module: alc_partner_category
+#: model:res.partner.category,name:alc_partner_category.grands_animaux
+msgid "Grands animaux"
+msgstr ""
+
+#. module: alc_partner_category
+#: model:res.partner.category,name:alc_partner_category.inseminateur
+msgid "Inseminateur"
+msgstr ""
+
+#. module: alc_partner_category
+#: model:res.partner.category,name:alc_partner_category.life
+msgid "Lifé"
+msgstr ""
+
+#. module: alc_partner_category
+#: model:res.partner.category,name:alc_partner_category.multipharma
+msgid "Multipharma"
+msgstr ""
+
+#. module: alc_partner_category
+#: model:res.partner.category,name:alc_partner_category.nac
+msgid "NAC"
+msgstr ""
+
+#. module: alc_partner_category
+#: model:res.partner.category,name:alc_partner_category.depotattente
+msgid "N°dépôt en attente"
+msgstr ""
+
+#. module: alc_partner_category
+#: model:res.partner.category,name:alc_partner_category.sous_veto
+msgid "Organisme sous resp. véto"
+msgstr ""
+
+#. module: alc_partner_category
+#: model:res.partner.category,name:alc_partner_category.palette_delivery
+msgid "Palette delivery"
+msgstr ""
+
+#. module: alc_partner_category
+#: model:res.partner.category,name:alc_partner_category.petit_grossiste
+msgid "Petit grossiste"
+msgstr ""
+
+#. module: alc_partner_category
+#: model:res.partner.category,name:alc_partner_category.petits_animaux
+msgid "Petits animaux"
+msgstr ""
+
+#. module: alc_partner_category
+#: model:res.partner.category,name:alc_partner_category.pharma_belge
+msgid "Pharma Belge"
+msgstr ""
+
+#. module: alc_partner_category
+#: model:res.partner.category,name:alc_partner_category.pharma_sante
+msgid "Pharma Santé"
+msgstr ""
+
+#. module: alc_partner_category
+#: model:res.partner.category,name:alc_partner_category.qv
+msgid "QV"
+msgstr ""
+
+#. module: alc_partner_category
+#: model:res.partner.category,name:alc_partner_category.top_2000
+msgid "TOP2000"
+msgstr ""
+
+#. module: alc_partner_category
+#: model:res.partner.category,name:alc_partner_category.top_400
+msgid "TOP400"
+msgstr ""
+
+#. module: alc_partner_category
+#: model:res.partner.category,name:alc_partner_category.top_800
+msgid "TOP800"
+msgstr ""
+
+#. module: alc_partner_category
+#: model:res.partner.category,name:alc_partner_category.tvaattente
+msgid "TVA en attente"
+msgstr ""
+
+#. module: alc_partner_category
+#: model:res.partner.category,name:alc_partner_category.universite
+msgid "Université"
+msgstr ""
+
+#. module: alc_partner_category
+#: model:res.partner.category,name:alc_partner_category.vpharma
+msgid "V Pharma"
+msgstr ""
+
+#. module: alc_partner_category
+#: model:res.partner.category,name:alc_partner_category.actionnaire
+msgid "actionnaire"
+msgstr ""
+
+#. module: alc_partner_category
+#: model:res.partner.category,name:alc_partner_category.cledispo
+msgid "clé dispo"
+msgstr ""
+
+#. module: alc_partner_category
+#: model:res.partner.category,name:alc_partner_category.comportementaliste
+msgid "comportementaliste"
+msgstr ""
+
+#. module: alc_partner_category
+#: model:res.partner.category,name:alc_partner_category.nonassujetti
+msgid "non-assujetti"
+msgstr ""
+
