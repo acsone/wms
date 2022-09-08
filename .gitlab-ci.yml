@@ -298,6 +298,44 @@ coverage-report:
     - job: test-new-product-barcode-required
       artifacts: true
   interruptible: true
+  only:
+    - branches
+  except:
+    - master
+  when: on_success
+
+coverage-report-master:
+  stage: test
+  script:
+    - virtualenv --python=$PYTHON venv
+    - venv/bin/pip install coverage
+    - venv/bin/coverage combine
+    - venv/bin/coverage html --skip-empty --show-contexts
+    - venv/bin/coverage xml
+    - venv/bin/coverage report --skip-empty
+  coverage: '/TOTAL\s+\d+\s+\d+\s+\d+\s+\d+\s+(\d+\%)/'
+  artifacts:
+    expire_in: 1 day
+    paths:
+      - htmlcov/
+      - coverage.xml
+    name: "${CI_PROJECT_NAME}-${CI_JOB_ID}-coverage-html"
+    expose_as: "Test coverage"
+    reports:
+      coverage_report:
+        coverage_format: cobertura
+        path: coverage.xml
+  needs:
+    - job: test-master
+      artifacts: true
+    - job: test-shopfloor-master
+      artifacts: true
+    - job: test-new-product-barcode-required
+      artifacts: true
+  interruptible: true
+  only:
+    - master
+  when: on_success
 
 # build container images
 
