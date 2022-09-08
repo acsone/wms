@@ -498,6 +498,18 @@ msgid "<strong>Date Ordered:</strong>"
 msgstr "<strong>Date Ordered:</strong>"
 
 #. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.report_saleorder_document_inherit
+#, fuzzy
+msgid "<strong>Discount subtotal</strong>"
+msgstr "<strong>Klant:</strong>"
+
+#. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.report_saleorder_document_inherit
+#, fuzzy
+msgid "<strong>Subtotal without discount</strong>"
+msgstr "Amount without discount"
+
+#. module: specific_report
 #: model:mail.template,subject:specific_report.email_template_pharmacist_supplier_order
 msgid "Alcyon Medicine order ${object.name}"
 msgstr "Alcyon Medicine order ${object.name}"
