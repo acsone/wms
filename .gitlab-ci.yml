@@ -137,7 +137,7 @@ test-impacted:
     - venv/bin/pip install --no-deps -r requirements-tests.txt # test dependencies
     - venv/bin/pip install --no-deps --no-index release/*.whl # runtime dependencies
     - venv/bin/pip install --no-deps -e . # the project, in editable mode so coverage sees it
-    - ALL_ADDONS=$(acsoo addons list)
+    - ALL_ADDONS=$(manifestoo -d odoo/addons list --separator=,)
     - IFS=',' read -ra ADDR <<< "$ALL_ADDONS"
     - SHOPFLOOR_ADDONS=''
     - for i in "${ADDR[@]}"; do
@@ -181,7 +181,7 @@ test-new-product-barcode-required:
     - venv/bin/pip install --no-deps -r requirements-tests.txt # test dependencies
     - venv/bin/pip install --no-deps --no-index release/*.whl # runtime dependencies
     - venv/bin/pip install --no-deps -e . # the project, in editable mode so coverage sees it
-    - ALL_ADDONS=$(acsoo addons list)
+    - ALL_ADDONS=$(manifestoo -d odoo/addons list --separator=,)
     - IFS=',' read -ra ADDR <<< "$ALL_ADDONS"
     - ADDONS_INIT=$(manifestoo --addons-path-python=venv/bin/python --select=alc_product_is_new,alc_product_barcode_required,alc_stock_receive_lot_missing_product_nouveaute_info list-depends
       --separator=,)
@@ -202,7 +202,7 @@ test-new-product-barcode-required:
     - venv/bin/pip install --no-deps -r requirements-tests.txt # test dependencies
     - venv/bin/pip install --no-deps --no-index release/*.whl # runtime dependencies
     - venv/bin/pip install --no-deps -e . # the project, in editable mode so coverage sees it
-    - ALL_ADDONS=$(acsoo addons list)
+    - ALL_ADDONS=$(manifestoo -d odoo/addons list --separator=,)
     - IFS=',' read -ra ADDR <<< "$ALL_ADDONS"
     - SHOPFLOOR_ADDONS=''
     - for i in "${ADDR[@]}"; do
@@ -249,7 +249,7 @@ test-shopfloor-branch:
     - MODIFIED_ADDONS=${MODIFIED_ADDONS%?} # remove trailing comma
     - echo $MODIFIED_ADDONS
     - IMPACTED_ADDONS=$(manifestoo --addons-path-python venv/bin/python --select $MODIFIED_ADDONS list-codepends --separator=,)
-    - ALL_ADDONS=$(manifestoo -d odoo/addons list)
+    - ALL_ADDONS=$(manifestoo -d odoo/addons list --separator=,)
     - IFS=',' read -ra ADDR <<< "$ALL_ADDONS"
     - SHOPFLOOR_ADDONS=''
     - for i in "${ADDR[@]}"; do
