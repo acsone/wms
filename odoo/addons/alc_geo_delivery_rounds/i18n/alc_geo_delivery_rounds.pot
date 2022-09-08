@@ -34,7 +34,7 @@ msgid "<span>Import shape file</span>"
 msgstr ""
 
 #. module: alc_geo_delivery_rounds
-#: code:addons/alc_geo_delivery_rounds/models/round_template.py:21
+#: code:addons/alc_geo_delivery_rounds/models/round_template.py:25
 #, python-format
 msgid "A shape is required if a delivery plan is set for %s"
 msgstr ""
@@ -211,6 +211,16 @@ msgstr ""
 #: model:ir.actions.act_window,name:alc_geo_delivery_rounds.action_shape_file_import
 #: model:ir.ui.view,arch_db:alc_geo_delivery_rounds.shape_file_import_wizard_form_view
 msgid "Shape File Import Wizard"
+msgstr ""
+
+#. module: alc_geo_delivery_rounds
+#: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_round_template_shape_name
+msgid "Shape name"
+msgstr ""
+
+#. module: alc_geo_delivery_rounds
+#: model:ir.model.fields,help:alc_geo_delivery_rounds.field_round_template_shape_name
+msgid "Shape resource name into the imported shape file"
 msgstr ""
 
 #. module: alc_geo_delivery_rounds

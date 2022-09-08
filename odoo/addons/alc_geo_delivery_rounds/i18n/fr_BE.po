@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* alc_geo_delivery_rounds
+# 	* alc_geo_delivery_rounds
 #
 msgid ""
 msgstr ""
@@ -10,6 +10,7 @@ msgstr ""
 "PO-Revision-Date: 2022-09-06 14:08+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -95,6 +96,7 @@ msgstr "District"
 #. module: alc_geo_delivery_rounds
 #: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_res_partner_not_in_dynamic_delivery_round
 #: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_res_users_not_in_dynamic_delivery_round
+#: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_shopinvader_partner_not_in_dynamic_delivery_round
 msgid "Do not include in dynamical delivery round"
 msgstr "Ne pas inclure dans la tournée dynamique"
 
@@ -152,8 +154,10 @@ msgstr "Dernière mis à jour le"
 #. module: alc_geo_delivery_rounds
 #: model:ir.model.fields,help:alc_geo_delivery_rounds.field_res_partner_round_template_ids
 #: model:ir.model.fields,help:alc_geo_delivery_rounds.field_res_users_round_template_ids
+#: model:ir.model.fields,help:alc_geo_delivery_rounds.field_shopinvader_partner_round_template_ids
 msgid "List all the round templates containing the partner"
-msgstr "Liste de tout les modèle de livraison dans auxquels appartient le client"
+msgstr ""
+"Liste de tout les modèle de livraison dans auxquels appartient le client"
 
 #. module: alc_geo_delivery_rounds
 #: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_delivery_plan_name
@@ -186,6 +190,7 @@ msgstr "OSM"
 #. module: alc_geo_delivery_rounds
 #: model:ir.model.fields,help:alc_geo_delivery_rounds.field_res_partner_tag_ids
 #: model:ir.model.fields,help:alc_geo_delivery_rounds.field_res_users_tag_ids
+#: model:ir.model.fields,help:alc_geo_delivery_rounds.field_shopinvader_partner_tag_ids
 msgid "Only partners with the right tag will be delivered"
 msgstr "Seuls les partenaires présentant les bonnes étiquettes seront livrés."
 
@@ -202,6 +207,7 @@ msgstr "Partners positions"
 #. module: alc_geo_delivery_rounds
 #: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_res_partner_round_template_ids
 #: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_res_users_round_template_ids
+#: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_shopinvader_partner_round_template_ids
 msgid "Round templates"
 msgstr "Modèle"
 
@@ -224,6 +230,7 @@ msgstr "Nom de l'enregistrement dans le fichier shape importé"
 #. module: alc_geo_delivery_rounds
 #: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_res_partner_tag_labels
 #: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_res_users_tag_labels
+#: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_shopinvader_partner_tag_labels
 msgid "Tag labels"
 msgstr "Tag labels"
 
@@ -231,6 +238,7 @@ msgstr "Tag labels"
 #: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_res_partner_tag_ids
 #: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_res_users_tag_ids
 #: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_shape_file_import_wizard_tag_ids
+#: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_shopinvader_partner_tag_ids
 msgid "Tags"
 msgstr "Étiquettes"
 
@@ -241,8 +249,11 @@ msgstr "Modèles"
 
 #. module: alc_geo_delivery_rounds
 #: model:ir.model.fields,help:alc_geo_delivery_rounds.field_shape_file_import_wizard_tag_ids
-msgid "The tags set here will be added to the templates created by the shapefile"
-msgstr "Les tags listés ici seront reportés sur les modèles créés par l'import du fichier shape"
+msgid ""
+"The tags set here will be added to the templates created by the shapefile"
+msgstr ""
+"Les tags listés ici seront reportés sur les modèles créés par l'import du "
+"fichier shape"
 
 #. module: alc_geo_delivery_rounds
 #: code:addons/alc_geo_delivery_rounds/wizards/shape_file_import_wizard.py:81
