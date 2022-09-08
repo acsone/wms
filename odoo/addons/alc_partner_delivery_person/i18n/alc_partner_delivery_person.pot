@@ -1,16 +1,13 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* alc_partner_delivery_person
+#	* alc_partner_delivery_person
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-06 13:50+0000\n"
-"PO-Revision-Date: 2022-09-06 13:50+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -20,27 +17,28 @@ msgstr ""
 #: model:ir.ui.view,arch_db:alc_partner_delivery_person.res_partner_search_view
 #: model:res.partner.category,name:alc_partner_delivery_person.res_partner_category_delivery_person
 msgid "Delivery person"
-msgstr "Livreur Alcyon"
+msgstr ""
 
 #. module: alc_partner_delivery_person
 #: model:ir.model.fields,field_description:alc_partner_delivery_person.field_res_partner_is_delivery_person
 #: model:ir.model.fields,field_description:alc_partner_delivery_person.field_res_users_is_delivery_person
 #: model:ir.model.fields,field_description:alc_partner_delivery_person.field_shopinvader_partner_is_delivery_person
 msgid "Is delivery person"
-msgstr "Est un livreur Alcyon"
+msgstr ""
 
 #. module: alc_partner_delivery_person
 #: model:ir.model,name:alc_partner_delivery_person.model_res_partner
 msgid "Partner"
-msgstr "Partenaire"
+msgstr ""
 
 #. module: alc_partner_delivery_person
 #: model:ir.model,name:alc_partner_delivery_person.model_res_partner_category
 msgid "Partner Tags"
-msgstr "Étiquettes du partenaire"
+msgstr ""
 
 #. module: alc_partner_delivery_person
 #: code:addons/alc_partner_delivery_person/models/res_partner_category.py:17
 #, python-format
 msgid "The category 'Delivery person' can't be removed."
-msgstr "La catégorie 'Livreur Alcyon' ne peut pas être supprimée."
+msgstr ""
+
