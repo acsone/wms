@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2022 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+  <record model="res.partner.category" id="toarchive">
+    <field name="name">A archiver</field>
+  </record>
+  <record model="res.partner.category" id="alpharepartition">
+    <field name="name">Alpha-Répartition</field>
+  </record>
+  <record model="res.partner.category" id="took">
+    <field name="name">Attest n°dépôt ok</field>
+  </record>
+  <record model="res.partner.category" id="autres">
+    <field name="name">Autres</field>
+  </record>
+  <record model="res.partner.category" id="clinique">
+    <field name="name">Clinique petits animaux</field>
+  </record>
+  <record model="res.partner.category" id="divers">
+    <field name="name">Divers</field>
+  </record>
+  <record model="res.partner.category" id="enseignant">
+    <field name="name">Enseignant Université</field>
+  </record>
+  <record model="res.partner.category" id="epece">
+    <field name="name">Epécé</field>
+  </record>
+  <record model="res.partner.category" id="equins">
+    <field name="name">Equins</field>
+  </record>
+  <record model="res.partner.category" id="grands_animaux">
+    <field name="name">Grands animaux</field>
+  </record>
+  <record model="res.partner.category" id="inseminateur">
+    <field name="name">Inseminateur</field>
+  </record>
+  <record model="res.partner.category" id="life">
+    <field name="name">Lifé</field>
+  </record>
+  <record model="res.partner.category" id="multipharma">
+    <field name="name">Multipharma</field>
+  </record>
+  <record model="res.partner.category" id="nac">
+    <field name="name">NAC</field>
+  </record>
+  <record model="res.partner.category" id="depotattente">
+    <field name="name">N°dépôt en attente</field>
+  </record>
+  <record model="res.partner.category" id="sous_veto">
+    <field name="name">Organisme sous resp. véto</field>
+  </record>
+  <record model="res.partner.category" id="palette_delivery">
+    <field name="name">Palette delivery</field>
+  </record>
+  <record model="res.partner.category" id="petit_grossiste">
+    <field name="name">Petit grossiste</field>
+  </record>
+  <record model="res.partner.category" id="petits_animaux">
+    <field name="name">Petits animaux</field>
+  </record>
+  <record model="res.partner.category" id="pharma_belge">
+    <field name="name">Pharma Belge</field>
+  </record>
+  <record model="res.partner.category" id="pharma_sante">
+    <field name="name">Pharma Santé</field>
+  </record>
+  <record model="res.partner.category" id="top_2000">
+    <field name="name">TOP2000</field>
+  </record>
+  <record model="res.partner.category" id="top_400">
+    <field name="name">TOP400</field>
+    <field name="color" eval="4" />
+  </record>
+  <record model="res.partner.category" id="top_800">
+    <field name="name">TOP800</field>
+  </record>
+  <record model="res.partner.category" id="tvaattente">
+    <field name="name">TVA en attente</field>
+  </record>
+  <record model="res.partner.category" id="universite">
+    <field name="name">Université</field>
+  </record>
+  <record model="res.partner.category" id="vpharma">
+    <field name="name">V Pharma</field>
+  </record>
+  <record model="res.partner.category" id="actionnaire">
+    <field name="name">actionnaire</field>
+  </record>
+  <record model="res.partner.category" id="cledispo">
+    <field name="name">clé dispo</field>
+  </record>
+  <record model="res.partner.category" id="comportementaliste">
+    <field name="name">comportementaliste</field>
+  </record>
+  <record model="res.partner.category" id="nonassujetti">
+    <field name="name">non-assujetti</field>
+  </record>
+  <record model="res.partner.category" id="qv">
+    <field name="name">QV</field>
+  </record>
+</odoo>

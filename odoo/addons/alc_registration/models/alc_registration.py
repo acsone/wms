@@ -19,6 +19,7 @@ class AlcRegistration(FormatAddress, models.Model):
 
     # we want a multiselect with "Livestock", "Equine", "Pets", "Exotic Pets"
     # it might become a m2m if there's a real usage for it
+    # if refactor is needed as a M2M we could directly use res.partner.category
     clientele = fields.Char(string="Clientele", required=True)
     occupation = fields.Selection(
         string="Occupation",
@@ -127,6 +128,19 @@ class AlcRegistration(FormatAddress, models.Model):
             "comment",
         ]
 
+    def _get_partner_categories_from_clientele(self):
+        categories = []
+        mapping = {
+            "livestock": "alc_partner_category.grands_animaux",
+            "pet": "alc_partner_category.petits_animaux",
+            "equine": "alc_partner_category.equins",
+            "exotic": "alc_partner_category.nac",
+        }
+        for key in mapping:
+            if key in self.clientele:
+                categories.append(self.env.ref(mapping[key]).id)
+        return categories
+
     def _get_partner_vals(self):
         self.ensure_one()
         fields_to_sync = self._creation_fields()
@@ -135,6 +149,9 @@ class AlcRegistration(FormatAddress, models.Model):
         if vals.get("company_name"):
             vals["suite"] = vals["name"]
             vals["name"] = vals.pop("company_name")
+        categories = self._get_partner_categories_from_clientele()
+        if categories:
+            vals["category_id"] = [(6, 0, categories)]
         return vals
 
     def create_partners(self):

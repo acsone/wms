@@ -11,6 +11,7 @@
     "website": "https://acsone.eu/",
     "depends": [
         "mail",
+        "alc_partner_category",
         "specific_partner",  # pharmacy field
         "alc_partner_veterinary",
         "sales_team",  # for the menu

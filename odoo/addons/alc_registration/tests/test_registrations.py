@@ -21,12 +21,32 @@ class TestRegistrationFlow(TestRegistration):
         self.assertEqual(registration.state, "accepted")
         self.assertEqual(registration.name, partner.name)
         self.assertEqual(registration.partner_id, partner)
+        category_equine = self.env.ref("alc_partner_category.equins")
+        self.assertEqual(partner.category_id, category_equine)
 
         # the partner already exist, do nothing
         no_partner = registration.create_partners()
 
         self.assertFalse(no_partner)
         self.assertEqual(registration.state, "accepted")
+
+    def test_multiple_clientele(self):
+        vals = self._get_registration_vals()
+        vals["clientele"] = "livestock,pet"
+        registration = self.model.create(vals)
+        partner = registration.create_partners()
+
+        category_petit = self.env.ref("alc_partner_category.petits_animaux")
+        category_grand = self.env.ref("alc_partner_category.grands_animaux")
+        self.assertEqual(partner.category_id, category_petit + category_grand)
+
+    def test_clientele_no_category(self):
+        vals = self._get_registration_vals()
+        vals["clientele"] = "nobody"
+        registration = self.model.create(vals)
+        partner = registration.create_partners()
+
+        self.assertFalse(partner.category_id)
 
     def test_creation_with_company_name(self):
         # given

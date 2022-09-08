@@ -124,6 +124,7 @@
         "alc_label_printing_reception",
         "alc_logiweb",
         "alc_mrp_repair",
+        "alc_partner_category",
         "alc_partner_force_re_geolocalization",
         "alc_partner_manual_sale_order",
         "alc_partner_delivery_window_import",
