@@ -125,6 +125,23 @@ class TestExcludePickings(DeliverDeliveryRoundTestCase):
         self.assertTrue(pick.delivery_round_id)
         self.assertTrue(blocked_pick.delivery_round_id)
 
+    def test_ignore_delivery_round_assign_block(self):
+        blocked_pick, blocked_ship = self._create_picking_pick_ship(
+            partner=self.partner2
+        )
+        blocked_pick.move_lines.delivery_requires_other_lines = True
+        # we do not take care of reservation but put the picking into
+        # the rigth state to be available...
+        blocked_pick.move_lines.write({"state": "assigned"})
+        blocked_ship.move_lines.write({"state": "assigned"})
+        self.delivery_round_1._assign_pickings(blocked_pick)
+        self.assertFalse(blocked_pick.delivery_round_id)
+        self.assertFalse(blocked_ship.delivery_round_id)
+        blocked_pick.ignore_delivery_round_assign_block = True
+        self.delivery_round_1._assign_pickings(blocked_pick)
+        self.assertTrue(blocked_pick.delivery_round_id)
+        self.assertTrue(blocked_ship.delivery_round_id)
+
     def test_assign_on_so_confirm(self):
         """In this test we check that a blocked picking is not assigned at
         conformation to a delivery round if blocked and no other pickings for
