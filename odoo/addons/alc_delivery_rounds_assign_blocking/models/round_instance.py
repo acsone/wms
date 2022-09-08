@@ -31,6 +31,8 @@ class RoundInstance(models.Model):
         if partner in self.mapped("instance_customer_ids.partner_id"):
             # we already have pickings for the same partner
             return True
+        if pickings.filtered("ignore_delivery_round_assign_block"):
+            return True
         # first we filter out all the backorders
         pickings = pickings.filtered(lambda p: not p.backorder_id)
         # if we've at least one move that doens't require other lines -> we could
