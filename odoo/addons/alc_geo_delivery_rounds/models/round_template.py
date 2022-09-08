@@ -12,6 +12,10 @@ class RoundTemplate(geo_model.GeoModel):
 
     delivery_plan_id = fields.Many2one("delivery.plan", string="Delivery")
     geo_polygon_shape = geo_fields.GeoMultiPolygon("Delivery round Shape")
+    shape_name = fields.Char(
+        oldname="geo_optimization_resource_id",
+        help="Shape resource name into the imported shape file",
+    )
 
     @api.constrains("delivery_plan_id", "geo_polygon_shape")
     def _check_geo_polygon_shape(self):

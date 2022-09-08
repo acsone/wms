@@ -45,7 +45,7 @@ class TestShapeFileImportWizard(TransactionCase):
 
         # Assert Template 1 creation
         self.assertEqual(template.name, created_template_name)
-        self.assertEqual(template.geo_optimization_resource_id, created_template_name)
+        self.assertEqual(template.shape_name, created_template_name)
 
     def test_template_update(self):
         # template 2 already exist on delivery_plan => do update
@@ -67,14 +67,14 @@ class TestShapeFileImportWizard(TransactionCase):
             {"name": "test_update", "round_template_ids": [(4, template.id)]}
         )
 
-        self.assertFalse(template.geo_optimization_resource_id)
+        self.assertFalse(template.shape_name)
 
         self._do_import("shape_test_2.zip", delivery_plan_id=delivery_plan.id)
 
         # after update : shape does exists on template
         geo_shape_after = isinstance(template.geo_polygon_shape, MultiPolygon)
         self.assertTrue(geo_shape_after)
-        self.assertEqual(template.geo_optimization_resource_id, template.name)
+        self.assertEqual(template.shape_name, template.name)
 
     def test_template_deletion(self):
         # template 3 does not exist but template 1 does => delete template 1 on delivery plan

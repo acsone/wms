@@ -38,7 +38,7 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
                 "geo_optimization_duration": 90,
                 "geo_optimization_delivery_duration": 10,
                 "geo_optimization_loading_duration": 100,
-                "geo_optimization_resources_number": 1,
+                "geo_optimization_resources_number": 2,
                 "geo_optimization_work_penalty": 4.0,
                 "geo_optimization_travel_penalty": 3.5,
                 "geo_optimization_resource_cfg": json.dumps(
@@ -47,10 +47,13 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
                 "geo_optimization_method": "optimized",
             }
         ).execute()
+        cls.delivery_resource_d1 = cls.env["alc.delivery.resource"].create(
+            {"geo_optimization_resource_id": "D1"}
+        )
         cls.delivery_round_1.write(
             {
                 "geo_optimization_enabled": True,
-                "geo_optimization_resource_id": "D1",
+                "delivery_resource_ids": [(6, False, cls.delivery_resource_d1.ids)],
                 "date": "2020-10-15",
                 "geo_optimization_method": "optimized",
             }
@@ -744,16 +747,22 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
         Test Case:
             Set geo_optimization_enabled True
         Expected Result:
-            ValidationError is raised since geo_optimization_resource_id is not set
+            ValidationError is raised since delivery_resource_ids is not set
         """
         template = self.delivery_template
         template.write(
-            {"geo_optimization_enabled": False, "geo_optimization_resource_id": False}
+            {
+                "geo_optimization_enabled": False,
+                "delivery_resource_ids": [(5, False, False)],
+            }
         )
         with self.assertRaises(ValidationError):
             template.geo_optimization_enabled = True
         template.write(
-            {"geo_optimization_enabled": True, "geo_optimization_resource_id": "D1"}
+            {
+                "geo_optimization_enabled": True,
+                "delivery_resource_ids": [(6, False, self.delivery_resource_d1.ids)],
+            }
         )
 
     def test_18(self):
@@ -763,38 +772,43 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
         Test Case:
             Set geo_optimization_enabled True
         Expected Result:
-            ValidationError is raised since geo_optimization_resource_id is not set
+            ValidationError is raised since delivery_resource_ids is not set
         """
         delivery_round = self.delivery_round_1
         delivery_round.write(
-            {"geo_optimization_enabled": False, "geo_optimization_resource_id": False}
+            {
+                "geo_optimization_enabled": False,
+                "delivery_resource_ids": [(5, False, False)],
+            }
         )
         with self.assertRaises(ValidationError):
             delivery_round.geo_optimization_enabled = True
         delivery_round.write(
-            {"geo_optimization_enabled": True, "geo_optimization_resource_id": "D1"}
+            {
+                "geo_optimization_enabled": True,
+                "delivery_resource_ids": [(6, False, self.delivery_resource_d1.ids)],
+            }
         )
 
     def test_19(self):
         """
         Data:
-            A round instance
-            A template instance
+            A delivery resource
             A configuration with 5 resources number available
         Test Case:
             Check that the geo_optimization_resource_id selection is based on
             the number od available resources
         """
         resources_number = (
-            self.delivery_template.get_optimization_config().resources_number
+            self.delivery_resource_d1.get_optimization_config().resources_number
         )
-        for model in ("round.instance", "round.template"):
+        for model in ("alc.delivery.resource",):
             field = self.env[model]._fields["geo_optimization_resource_id"]
             self.assertEqual(len(field.get_values(self.env)), resources_number)
         self.env["ir.config_parameter"].set_param(
             "alc_delivery_rounds_geooptimize.geo_optimization_resources_number", "10"
         )
-        for model in ("round.instance", "round.template"):
+        for model in ("alc.delivery.resource",):
             field = self.env[model]._fields["geo_optimization_resource_id"]
             self.assertEqual(len(field.get_values(self.env)), 10)
 
@@ -1340,6 +1354,71 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
             get_action_recorder._action_called_records,
             self.delivery_round_1._get_sorted_shipping_ids(),
         )
+
+    @freeze_time("2020-01-01 07:10:00")
+    def test_27(self):
+        """
+        Data:
+            A round delivered but not geo optimized for 3 partners
+            A round with 2 resources: D1 (default) D2 linked to a partner
+            whre to ends the delivery
+        Test case:
+            Call method _generate_optimization_request
+        Expected result:
+            The json is conform to what's expected
+        """
+        delivery_person = self.env["res.partner"].create(
+            {"name": "D2", "partner_latitude": "13", "partner_longitude": "14"}
+        )
+        deliveyr_resource = self.env["alc.delivery.resource"].create(
+            {
+                "geo_optimization_resource_id": "D2",
+                "delivery_person_id": delivery_person.id,
+                "use_delivery_person_coordinates_as_end": True,
+            }
+        )
+        self.delivery_round_1.delivery_resource_ids |= deliveyr_resource
+        res = self.delivery_round_1._generate_optimization_request()
+        self.maxDiff = 2000
+        expected_resources = [
+            {
+                "dailyWorkTime": "10:00:00",
+                "endX": 5.2758074,
+                "endY": 50.5825464,
+                "fixedLoadingDuration": "01:40:00",
+                "globalCapacity": 9999,
+                "id": "D1",
+                "loadBeforeDeparture": True,
+                "mobileLogin": "d1@alcyonbelux.be",
+                "noReload": True,
+                "openStart": False,
+                "startX": 5.2758074,
+                "startY": 50.5825464,
+                "travelPenalty": 3.5,
+                "useAllCapacities": False,
+                "workPenalty": 4.0,
+                "workStartTime": "08:11:00",
+            },
+            {
+                "dailyWorkTime": "10:00:00",
+                "endX": delivery_person.partner_longitude,
+                "endY": delivery_person.partner_latitude,
+                "fixedLoadingDuration": "01:40:00",
+                "globalCapacity": 9999,
+                "id": "D2",
+                "loadBeforeDeparture": True,
+                "mobileLogin": "d2@alcyonbelux.be",
+                "noReload": True,
+                "openStart": False,
+                "startX": 5.2758074,
+                "startY": 50.5825464,
+                "travelPenalty": 3.5,
+                "useAllCapacities": False,
+                "workPenalty": 4.0,
+                "workStartTime": "08:11:00",
+            },
+        ]
+        self.assertJsonEqual(res["resources"], expected_resources)
 
 
 class GetActionRecorder(object):

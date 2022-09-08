@@ -37,7 +37,7 @@
     <field name="model">round.template</field>
     <field name="inherit_id" ref="delivery_rounds.view_round_template_tree" />
     <field name="arch" type="xml">
-      <field name="geo_optimization_resource_id" position="after">
+      <field name="delivery_resource_ids" position="after">
         <field name="delivery_plan_id" />
       </field>
     </field>
