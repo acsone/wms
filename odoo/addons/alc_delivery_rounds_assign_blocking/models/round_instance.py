@@ -33,8 +33,6 @@ class RoundInstance(models.Model):
             return True
         if pickings.filtered("ignore_delivery_round_assign_block"):
             return True
-        # first we filter out all the backorders
-        pickings = pickings.filtered(lambda p: not p.backorder_id)
         # if we've at least one move that doens't require other lines -> we could
         # add all the pickings to the round
         for move in pickings.mapped("move_lines").filtered(
