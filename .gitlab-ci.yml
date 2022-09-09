@@ -100,7 +100,7 @@ test-impacted:
     - venv/bin/pip install --no-deps -r requirements-tests.txt # test dependencies
     - venv/bin/pip install --no-deps --no-index release/*.whl # runtime dependencies
     - venv/bin/pip install --no-deps -e .
-    - MODIFIED_ADDONS=$(git diff --name-only master `git rev-parse --abbrev-ref HEAD` | grep "odoo/addons" | sed 's/odoo.addons.//' | sed 's/\/.*//' | uniq | tr '\n' ',') || true
+    - MODIFIED_ADDONS=$(git diff --name-only master... | grep "odoo/addons" | sed 's/odoo.addons.//' | sed 's/\/.*//' | uniq | tr '\n' ',') || true
     - if [[ -z "$MODIFIED_ADDONS" ]] ; then echo "No changes to test."; exit 0; fi
     - MODIFIED_ADDONS=${MODIFIED_ADDONS%?} # remove trailing comma
     - echo $MODIFIED_ADDONS
@@ -240,7 +240,7 @@ test-shopfloor-branch:
     - venv/bin/pip install --no-deps -r requirements-tests.txt # test dependencies
     - venv/bin/pip install --no-deps --no-index release/*.whl # runtime dependencies
     - venv/bin/pip install --no-deps -e . # the project, in editable mode so coverage sees it
-    - MODIFIED_ADDONS=$(git diff --name-only master `git rev-parse --abbrev-ref HEAD` | grep "odoo/addons" | sed 's/odoo.addons.//' | sed 's/\/.*//' | uniq | tr '\n' ',') || true # if empty, $? is 1 on gitlab, which interrupts execution.
+    - MODIFIED_ADDONS=$(git diff --name-only master... | grep "odoo/addons" | sed 's/odoo.addons.//' | sed 's/\/.*//' | uniq | tr '\n' ',') || true # if empty, $? is 1 on gitlab, which interrupts execution.
     - if [[ -z "$MODIFIED_ADDONS" ]] ; then echo "No changes to test."; exit 0; fi
     - MODIFIED_ADDONS=${MODIFIED_ADDONS%?} # remove trailing comma
     - echo $MODIFIED_ADDONS
