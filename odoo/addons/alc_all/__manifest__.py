@@ -143,6 +143,7 @@
         "alc_product_packaging_dimension",
         "alc_product_packaging_stock_reserve",
         "alc_product_pharmacy",
+        "alc_product_search_cnk",
         "alc_product_uom_updatable",
         "alc_purchase_announced_delivery_date",
         "alc_reception_pharmacy",
