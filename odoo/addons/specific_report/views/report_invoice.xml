@@ -148,9 +148,7 @@
               <tr t-foreach="line.contribution_ids" t-as="contribution">
                 <td />
                 <td>
-                  <t t-if="contribution.amount">
-                    <span t-esc="contribution.description or contribution.name" />
-                  </t>
+                  <span t-esc="contribution.description or contribution.name" />
                 </td>
                 <td>
                   <span t-esc="int(line.quantity)" />
