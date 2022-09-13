@@ -17,5 +17,9 @@ def migrate(cr, version):
         UPDATE stock_picking_type
         SET put_in_reserve_allowed=true
         WHERE name ilike '%Rangement%'
+        RETURNING name
     """
     )
+    names = [i[0] for i in cr.fetchall()]
+
+    _logger.info("%d stock_picking_type updated: (%s)", len(names), ", ".join(names))
