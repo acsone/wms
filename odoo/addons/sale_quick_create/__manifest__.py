@@ -21,4 +21,5 @@
     ],
     "data": ["views/sale_order_line.xml", "views/sale_order.xml"],
     "demo": [],
+    'installable': False
 }

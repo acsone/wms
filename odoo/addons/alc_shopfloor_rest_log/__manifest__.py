@@ -13,4 +13,5 @@
     "depends": ["alc_shopfloor_user", "rest_log"],
     "data": ["views/rest_log.xml"],
     "demo": [],
+    'installable': False
 }

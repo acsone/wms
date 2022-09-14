@@ -27,7 +27,7 @@
     "category": "Stock Management",
     "depends": ["stock"],
     "data": ["views/stock.xml"],
-    "installable": True,
+    "installable": False,
     "auto_install": False,
     "license": "LGPL-3",
     "application": False,

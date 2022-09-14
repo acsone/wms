@@ -12,4 +12,5 @@
     "depends": ["account"],
     "data": ["views/account_invoice.xml", "security/res_groups.xml"],
     "demo": [],
+    'installable': False
 }

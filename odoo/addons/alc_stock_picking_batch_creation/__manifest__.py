@@ -24,4 +24,5 @@
         "views/stock_picking_wave.xml",
     ],
     "demo": [],
+    'installable': False
 }

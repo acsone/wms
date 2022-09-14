@@ -13,4 +13,5 @@
     "depends": ["shopinvader", "partner_serializer"],
     "data": [],
     "demo": [],
+    'installable': False
 }

@@ -13,4 +13,5 @@
     "depends": ["alc_b2c_connector", "pricelist_discount"],
     "data": ["views/alc_b2c_backend.xml"],
     "demo": [],
+    'installable': False
 }

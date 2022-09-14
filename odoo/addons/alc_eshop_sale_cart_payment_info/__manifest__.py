@@ -13,4 +13,5 @@
     "depends": ["account_payment_sale", "sale_cart_rest_api"],
     "data": [],
     "demo": [],
+    'installable': False
 }

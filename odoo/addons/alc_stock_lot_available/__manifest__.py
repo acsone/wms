@@ -11,4 +11,5 @@
     "depends": ["stock"],
     "data": ["views/stock_production_lot.xml"],
     "demo": [],
+    'installable': False
 }

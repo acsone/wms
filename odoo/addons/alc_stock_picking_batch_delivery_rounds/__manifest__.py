@@ -21,4 +21,5 @@
     ],
     "data": ["views/res_users.xml", "views/stock_picking_wave.xml"],
     "demo": [],
+    'installable': False
 }

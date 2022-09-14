@@ -12,4 +12,5 @@
     "depends": ["product"],
     "data": ["views/product_pricelist_item.xml", "views/product_pricelist.xml"],
     "demo": [],
+    'installable': False
 }

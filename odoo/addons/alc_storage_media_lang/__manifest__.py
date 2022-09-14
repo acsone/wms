@@ -13,4 +13,5 @@
     "depends": ["alc_storage_file_lang", "storage_media"],
     "data": ["views/storage_media.xml"],
     "demo": [],
+    'installable': False
 }

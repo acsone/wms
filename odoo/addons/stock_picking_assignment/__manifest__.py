@@ -15,7 +15,7 @@
         "views/stock_scrap.xml",
         "views/stock_picking.xml",
     ],
-    "installable": True,
+    "installable": False,
     "license": "LGPL-3",
     "application": False,
 }

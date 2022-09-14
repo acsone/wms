@@ -15,4 +15,5 @@
         "data/stock_backorder_reason.xml",
     ],
     "demo": [],
+    'installable': False
 }

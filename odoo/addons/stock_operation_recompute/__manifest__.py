@@ -9,7 +9,7 @@
     "category": "Stock Management",
     "depends": ["stock", "product_additional"],
     "data": ["views/stock_move.xml"],
-    "installable": True,
+    "installable": False,
     "auto_install": False,
     "license": "AGPL-3",
     "application": False,

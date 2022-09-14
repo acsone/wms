@@ -12,4 +12,5 @@
     "depends": ["stock", "delivery", "delivery_rounds", "alc_product_dimensions"],
     "data": ["views/delivery_carrier.xml", "views/stock_picking.xml"],
     "demo": [],
+    'installable': False
 }

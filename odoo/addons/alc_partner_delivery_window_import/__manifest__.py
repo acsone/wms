@@ -14,4 +14,5 @@
     "data": ["wizards/alc_delivery_window_importer.xml"],
     "demo": [],
     "external_dependencies": {"python": ["xlrd"]},
+    'installable': False
 }

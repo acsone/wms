@@ -37,7 +37,7 @@
         "views/stock_move.xml",
         "data/ticket_sequence.xml",
     ],
-    "installable": True,
+    "installable": False,
     "external_dependencies": {"python": ["openupgradelib"]},
     "pre_init_hook": "pre_init_hook",
 }

@@ -12,5 +12,5 @@
     "depends": ["account", "alc_pg_trgm", "sale_stock", "purchase", "sale_exception"],
     "website": "https://www.camptocamp.com",
     "data": [],
-    "installable": True,
+    "installable": False,
 }

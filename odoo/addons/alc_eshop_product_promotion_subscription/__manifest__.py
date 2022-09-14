@@ -12,4 +12,5 @@
     "website": "https://acsone.eu/",
     "depends": ["authenticated_partner_mixin", "alc_product_promotion_subscription"],
     "demo": [],
+    'installable': False
 }

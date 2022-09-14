@@ -12,4 +12,5 @@
     "depends": ["base"],
     "data": [],
     "demo": [],
+    'installable': False
 }

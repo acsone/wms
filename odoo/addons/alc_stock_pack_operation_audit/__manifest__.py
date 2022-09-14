@@ -16,4 +16,5 @@
     "depends": ["stock"],
     "data": ["data/ir_config_parameter_data.xml"],
     "demo": [],
+    'installable': False
 }

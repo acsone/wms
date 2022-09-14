@@ -21,4 +21,5 @@
     ],
     "data": ["views/round_template.xml", "views/round_instance.xml", "views/css.xml"],
     "demo": [],
+    'installable': False
 }

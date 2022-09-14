@@ -17,4 +17,5 @@
     "external_dependencies": {"python": ["openupgradelib"]},
     "data": ["views/product_template.xml"],
     "pre_init_hook": "pre_init_hook",
+    'installable': False
 }

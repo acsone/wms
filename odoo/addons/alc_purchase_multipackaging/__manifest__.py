@@ -12,4 +12,5 @@
     "depends": ["purchase_order_line_packaging_qty", "purchase"],
     "data": [],
     "demo": [],
+    'installable': False
 }

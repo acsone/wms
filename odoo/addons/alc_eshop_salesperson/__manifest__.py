@@ -12,4 +12,5 @@
     "depends": ["sale_cart_rest_api"],
     "data": ["data/res_users.xml"],
     "demo": [],
+    'installable': False
 }

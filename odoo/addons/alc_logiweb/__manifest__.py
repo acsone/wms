@@ -23,4 +23,5 @@
     ],
     "demo": [],
     "post_init_hook": "post_init_hook",
+    'installable': False
 }

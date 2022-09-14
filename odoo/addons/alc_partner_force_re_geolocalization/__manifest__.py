@@ -13,4 +13,5 @@
     "depends": ["base_geolocalize_openstreetmap", "alc_b2c_partner"],
     "data": ["views/res_partner.xml"],
     "demo": [],
+    'installable': False
 }

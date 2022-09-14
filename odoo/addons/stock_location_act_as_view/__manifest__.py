@@ -8,7 +8,7 @@
     "category": "Stock Management",
     "depends": ["stock"],
     "data": ["views/stock_location_views.xml"],
-    "installable": True,
+    "installable": False,
     "license": "LGPL-3",
     "application": False,
 }

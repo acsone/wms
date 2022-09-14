@@ -13,4 +13,5 @@
     "depends": ["alc_sale_channel", "shopinvader"],
     "data": [],
     "demo": [],
+    'installable': False
 }

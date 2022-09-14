@@ -14,4 +14,5 @@
     "data": ["views/res_partner.xml"],
     "demo": [],
     "pre_init_hook": "pre_init_hook",
+    'installable': False
 }

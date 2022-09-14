@@ -13,4 +13,5 @@
     "depends": ["procurement_sale", "shopinvader"],
     "data": [],
     "demo": [],
+    'installable': False
 }

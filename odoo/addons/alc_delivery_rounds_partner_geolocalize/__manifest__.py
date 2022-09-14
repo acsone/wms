@@ -11,4 +11,5 @@
     "author": "ACSONE SA/NV",
     "depends": ["alc_delivery_rounds_geooptimize", "base_geolocalize_openstreetmap"],
     "data": [],
+    'installable': False
 }

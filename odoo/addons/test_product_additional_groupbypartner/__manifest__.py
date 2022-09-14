@@ -13,4 +13,5 @@
     "depends": ["product_additional", "stock_groupbypartner"],
     "data": [],
     "demo": [],
+    'installable': False
 }

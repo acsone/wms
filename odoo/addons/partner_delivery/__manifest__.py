@@ -13,4 +13,5 @@
     "depends": ["delivery"],
     "data": ["views/res_partner.xml"],
     "demo": [],
+    'installable': False
 }

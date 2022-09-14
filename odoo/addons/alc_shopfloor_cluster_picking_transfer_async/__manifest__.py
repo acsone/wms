@@ -13,4 +13,5 @@
     "depends": ["alc_shopfloor", "queue_job"],
     "data": [],
     "demo": [],
+    'installable': False
 }

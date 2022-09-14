@@ -12,4 +12,5 @@
     "depends": ["alc_delivery_carrier_gls", "alc_gls_putinpack", "specific_stock"],
     "data": ["views/stock_picking.xml"],
     "demo": [],
+    'installable': False
 }

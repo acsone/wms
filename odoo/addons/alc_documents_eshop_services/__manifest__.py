@@ -16,4 +16,5 @@
         "authenticated_partner_mixin",
     ],
     "demo": [],
+    'installable': False
 }

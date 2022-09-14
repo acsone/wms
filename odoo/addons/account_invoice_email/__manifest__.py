@@ -11,6 +11,6 @@
     "category": "Accounting & Finance",
     "depends": ["account"],
     "data": ["data/mail_template.xml", "views/res_partner.xml"],
-    "installable": True,
+    "installable": False,
     "pre_init_hook": "pre_init_hook",  # load no_update data
 }

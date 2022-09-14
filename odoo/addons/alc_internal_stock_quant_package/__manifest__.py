@@ -19,4 +19,5 @@
     "depends": ["stock"],
     "data": ["views/stock_quant_package.xml", "views/stock_picking_type.xml"],
     "demo": [],
+    'installable': False
 }

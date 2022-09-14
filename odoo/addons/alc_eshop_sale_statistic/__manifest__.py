@@ -26,4 +26,5 @@
         "data/ir_cron.xml",
     ],
     "demo": [],
+    'installable': False
 }

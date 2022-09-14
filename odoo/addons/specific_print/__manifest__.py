@@ -30,7 +30,7 @@
         "views/product_template.xml",
         "views/stock_production_lot.xml",
     ],
-    "installable": True,
+    "installable": False,
     "license": "AGPL-3",
     "application": False,
 }

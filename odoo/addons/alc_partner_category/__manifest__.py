@@ -13,4 +13,5 @@
     "data": ["data/res_partner_category.xml"],
     "demo": [],
     "pre_init_hook": "pre_init_hook",
+    'installable': False
 }

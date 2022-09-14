@@ -18,4 +18,5 @@
         "paginated_service_mixin",
     ],
     "demo": [],
+    'installable': False
 }

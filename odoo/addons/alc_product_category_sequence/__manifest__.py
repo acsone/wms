@@ -13,4 +13,5 @@
     "depends": ["product"],
     "data": ["views/product_category.xml"],
     "demo": [],
+    'installable': False
 }

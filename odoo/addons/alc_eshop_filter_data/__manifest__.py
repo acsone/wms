@@ -11,5 +11,5 @@
     "license": "AGPL-3",
     "category": "alc",
     "data": ["data/product_filter.xml"],
-    "installable": True,
+    "installable": False,
 }

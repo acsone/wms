@@ -13,4 +13,5 @@
     "depends": ["alc_stock_available_immediately", "stock_lot_loss"],
     "data": ["data/stock_location.xml"],
     "demo": [],
+    'installable': False
 }

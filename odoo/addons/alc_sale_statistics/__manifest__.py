@@ -22,4 +22,5 @@
         "security/alc_sale_statistics_security.xml",
     ],
     "demo": [],
+    'installable': False
 }

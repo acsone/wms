@@ -11,4 +11,5 @@
     "depends": ["delivery_rounds", "alc_partner_type"],
     "data": ["views/res_partner.xml"],
     "demo": [],
+    'installable': False
 }

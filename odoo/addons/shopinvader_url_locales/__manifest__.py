@@ -14,4 +14,5 @@
     "data": ["data/ir_export_category.xml", "data/ir_export_product.xml"],
     "demo": [],
     "post_init_hook": "post_init_hook",
+    'installable': False
 }

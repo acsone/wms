@@ -12,4 +12,5 @@
     "depends": ["specific_purchase"],
     "data": ["views/stock_move.xml"],
     "demo": [],
+    'installable': False
 }

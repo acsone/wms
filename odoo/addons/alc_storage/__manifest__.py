@@ -16,5 +16,5 @@
     "license": "AGPL-3",
     "category": "alc",
     "data": ["data/storage_backends.xml"],
-    "installable": True,
+    "installable": False,
 }

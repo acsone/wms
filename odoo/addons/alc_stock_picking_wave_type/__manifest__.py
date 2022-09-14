@@ -12,4 +12,5 @@
     "depends": ["stock_picking_wave"],
     "data": ["views/stock_picking_wave.xml"],
     "demo": [],
+    'installable': False
 }

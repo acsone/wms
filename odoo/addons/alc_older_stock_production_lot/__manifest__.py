@@ -13,4 +13,5 @@
     "depends": ["product_expiry", "specific_base"],
     "data": [],
     "demo": [],
+    'installable': False
 }

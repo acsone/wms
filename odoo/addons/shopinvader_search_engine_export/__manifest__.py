@@ -17,5 +17,5 @@
         "data/action_product_product.xml",
     ],
     "demo": [],
-    "installable": True,
+    "installable": False,
 }

@@ -13,4 +13,5 @@
     "depends": ["sale_cart_rest_api", "shopinvader", "alc_partner_veterinary"],
     "data": [],
     "demo": [],
+    'installable': False
 }

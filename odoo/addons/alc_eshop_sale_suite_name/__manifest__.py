@@ -13,4 +13,5 @@
     "depends": ["alc_sale_suite_name", "shopinvader"],
     "data": [],
     "demo": [],
+    'installable': False
 }

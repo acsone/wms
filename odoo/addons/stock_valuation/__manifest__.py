@@ -19,7 +19,7 @@
         "data/ir_cron.xml",
         "security/menu.xml",
     ],
-    "installable": True,
+    "installable": False,
     "license": "AGPL-3",
     "application": False,
 }

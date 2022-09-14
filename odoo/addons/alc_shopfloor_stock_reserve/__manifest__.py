@@ -12,4 +12,5 @@
     "depends": ["alc_shopfloor", "stock_refill"],
     "data": [],
     "demo": [],
+    'installable': False
 }

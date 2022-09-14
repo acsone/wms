@@ -10,7 +10,7 @@
     "category": "Stock Management",
     "depends": ["specific_sale", "stock_orderpoint_product"],
     "data": [],
-    "installable": True,
+    "installable": False,
     "auto_install": False,
     "license": "AGPL-3",
     "application": False,

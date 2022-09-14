@@ -14,4 +14,5 @@
     "data": ["security/ir.model.access.csv", "data/animal_species.xml"],
     "demo": [],
     "external_dependencies": {"python": ["unicodecsv"]},
+    'installable': False
 }

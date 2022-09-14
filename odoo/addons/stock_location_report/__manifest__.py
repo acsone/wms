@@ -14,5 +14,5 @@
         "views/report_location_barcode_medoc.xml",
         "views/paperformat_medoc.xml",
     ],
-    "installable": True,
+    "installable": False,
 }

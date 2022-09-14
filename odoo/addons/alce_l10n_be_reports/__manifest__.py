@@ -11,4 +11,5 @@
     "depends": ["l10n_be_reports"],
     "data": [],
     "demo": [],
+    'installable': False
 }

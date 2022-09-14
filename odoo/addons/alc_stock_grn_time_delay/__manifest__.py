@@ -13,4 +13,5 @@
     "data": ["views/stock_config_settings.xml", "views/stock_picking.xml"],
     "external_dependencies": {"python": ["numpy"]},
     "demo": [],
+    'installable': False
 }

@@ -31,5 +31,5 @@
         "views/product_assortment.xml",
     ],
     "website": "http://www.camptocamp.com",
-    "installable": True,
+    "installable": False,
 }

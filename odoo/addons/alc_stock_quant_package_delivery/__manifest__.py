@@ -13,4 +13,5 @@
     "depends": ["alc_stock_quant_package_nbr", "delivery"],
     "data": ["views/stock_quant_package.xml"],
     "demo": [],
+    'installable': False
 }

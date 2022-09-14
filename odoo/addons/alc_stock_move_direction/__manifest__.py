@@ -13,4 +13,5 @@
     "depends": ["stock", "stock_helper"],
     "data": [],
     "demo": [],
+    'installable': False
 }

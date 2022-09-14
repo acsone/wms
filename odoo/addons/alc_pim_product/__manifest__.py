@@ -13,4 +13,5 @@
     "application": False,
     "data": ["data/attribute_attribute.xml", "views/product_template.xml"],
     "demo": [],
+    'installable': False
 }

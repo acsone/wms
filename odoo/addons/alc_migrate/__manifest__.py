@@ -13,4 +13,5 @@
     "application": True,
     "data": [],
     "demo": [],
+    'installable': False
 }

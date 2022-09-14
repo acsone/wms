@@ -16,4 +16,5 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": ["stock_product_bin", "stock_storage_type"],
+    'installable': False
 }

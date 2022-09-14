@@ -17,4 +17,5 @@
     "depends": ["alc_geo_delivery_rounds", "alc_reception_pharmacy"],
     "data": [],
     "demo": [],
+    'installable': False
 }

@@ -9,7 +9,7 @@
     "category": "Stock Management",
     "depends": ["sale_stock", "account"],
     "data": ["views/account_payment_term.xml", "views/stock_picking.xml"],
-    "installable": True,
+    "installable": False,
     "auto_install": False,
     "license": "AGPL-3",
     "application": False,

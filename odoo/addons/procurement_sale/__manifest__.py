@@ -18,7 +18,7 @@
         "web_readonly_bypass",
     ],
     "data": ["views/sale_order.xml", "views/stock_location_route.xml"],
-    "installable": True,
+    "installable": False,
     "auto_install": False,
     "license": "AGPL-3",
     "application": False,

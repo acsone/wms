@@ -13,4 +13,5 @@
     "data": ["wizards/export_report_turnover.xml"],
     "demo": [],
     "external_dependencies": {"python": ["pandas", "numpy"]},
+    'installable': False
 }

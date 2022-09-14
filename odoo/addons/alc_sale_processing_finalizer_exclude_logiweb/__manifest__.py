@@ -12,4 +12,5 @@
     "depends": ["alc_logiweb", "alc_sale_processing_finalizer"],
     "data": [],
     "demo": [],
+    'installable': False
 }

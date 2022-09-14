@@ -11,4 +11,5 @@
     "category": "alc",
     "depends": ["shopinvader_multi_category", "alc_product_shop_category"],
     "data": [],
+    'installable': False
 }

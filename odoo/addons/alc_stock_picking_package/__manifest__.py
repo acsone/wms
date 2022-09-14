@@ -13,4 +13,5 @@
     "depends": ["stock"],
     "data": ["views/stock_picking.xml"],
     "demo": [],
+    'installable': False
 }

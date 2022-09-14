@@ -10,7 +10,7 @@
     "author": "BCIM",
     "depends": ["account"],
     "data": ["views/ir_sequence.xml"],
-    "installable": True,
+    "installable": False,
     "auto_install": False,
     "application": False,
 }

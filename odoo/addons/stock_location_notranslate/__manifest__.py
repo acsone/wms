@@ -8,7 +8,7 @@
     "author": "BCIM",
     "category": "Stock Management",
     "depends": ["stock"],
-    "installable": True,
+    "installable": False,
     "auto_install": False,
     "license": "AGPL-3",
     "application": False,

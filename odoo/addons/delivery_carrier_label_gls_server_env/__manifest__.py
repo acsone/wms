@@ -12,4 +12,5 @@
     "depends": ["delivery_carrier_label_gls", "server_environment"],
     "data": [],
     "demo": [],
+    'installable': False
 }

@@ -13,4 +13,5 @@
     "data": ["views/res_users.xml"],
     "demo": [],
     "pre_init_hook": "pre_init_hook",
+    'installable': False
 }

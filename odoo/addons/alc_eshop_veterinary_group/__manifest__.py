@@ -13,4 +13,5 @@
     "depends": ["alc_veterinary_group", "authenticated_partner_mixin", "base_rest"],
     "data": [],
     "demo": [],
+    'installable': False
 }

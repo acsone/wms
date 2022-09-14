@@ -19,4 +19,5 @@
     ],
     "data": ["views/shopfloor_menu.xml"],
     "demo": [],
+    'installable': False
 }

@@ -13,4 +13,5 @@
     "depends": ["alc_product_category_sequence", "shopinvader"],
     "data": [],
     "demo": [],
+    'installable': False
 }

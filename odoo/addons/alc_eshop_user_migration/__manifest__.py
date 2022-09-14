@@ -21,4 +21,5 @@
         "data/ir_config_parameter.xml",
     ],
     "external_dependencies": {"python": ["apispec", "requests"]},
+    'installable': False
 }

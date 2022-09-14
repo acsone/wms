@@ -13,4 +13,5 @@
     "depends": ["storage_file"],
     "data": ["views/storage_file.xml"],
     "demo": [],
+    'installable': False
 }

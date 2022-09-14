@@ -23,5 +23,5 @@
         "views/stock_picking_type.xml",
         "views/sale_order.xml",
     ],
-    "installable": True,
+    "installable": False,
 }

@@ -43,4 +43,5 @@
     ],
     "external_dependencies": {"python": ["slugify"]},
     "demo": [],
+    'installable': False
 }

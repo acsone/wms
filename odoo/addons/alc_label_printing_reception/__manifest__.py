@@ -20,4 +20,5 @@
         "wizards/select_printing_printer.xml",
         "wizards/stock_receive.xml",
     ],
+    'installable': False
 }

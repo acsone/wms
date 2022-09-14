@@ -12,4 +12,5 @@
     "depends": ["alc_sale_channel"],
     "data": ["wizards/sale_config_settings.xml"],
     "demo": [],
+    'installable': False
 }

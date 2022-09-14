@@ -22,4 +22,5 @@
         "reports/faclign_report.xml",
     ],
     "demo": [],
+    'installable': False
 }

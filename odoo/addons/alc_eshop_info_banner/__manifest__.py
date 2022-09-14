@@ -17,4 +17,5 @@
         "views/alc_eshop_info_banner.xml",
     ],
     "demo": [],
+    'installable': False
 }

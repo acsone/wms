@@ -16,4 +16,5 @@
     "depends": ["shopinvader_auth_jwt", "base_rest_auth_jwt", "keycloak"],
     "data": [],
     "demo": [],
+    'installable': False
 }

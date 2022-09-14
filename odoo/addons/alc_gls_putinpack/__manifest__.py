@@ -18,4 +18,5 @@
     ],
     "data": ["wizards/delivery_package_gls_wizard.xml", "views/stock_picking.xml"],
     "demo": [],
+    'installable': False
 }

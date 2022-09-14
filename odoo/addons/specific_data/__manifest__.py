@@ -22,5 +22,5 @@
     ],
     "website": "http://www.camptocamp.com",
     "data": ["data/product.category.csv", "data/product.pricelist.csv"],
-    "installable": True,
+    "installable": False,
 }

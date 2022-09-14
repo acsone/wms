@@ -44,6 +44,6 @@
         "views/res_config.xml",
         "security/ir.model.access.csv",
     ],
-    "installable": True,
+    "installable": False,
     "external_dependencies": {"python": ["openupgradelib"]},
 }

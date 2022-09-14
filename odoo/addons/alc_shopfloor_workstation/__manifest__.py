@@ -17,4 +17,5 @@
     ],
     "data": ["views/shopfloor_workstation.xml"],
     "demo": [],
+    'installable': False
 }

@@ -13,4 +13,5 @@
     "depends": ["shopinvader_search_engine_update", "shopinvader_image"],
     "data": [],
     "demo": [],
+    'installable': False
 }

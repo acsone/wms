@@ -24,4 +24,5 @@
     ],
     "demo": [],
     "external_dependencies": {"python": ["keycloak"]},
+    'installable': False
 }

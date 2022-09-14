@@ -14,5 +14,5 @@
     "application": False,
     "data": ["views/product_pricelist_item.xml"],
     "demo": [],
-    "installable": True,
+    "installable": False,
 }

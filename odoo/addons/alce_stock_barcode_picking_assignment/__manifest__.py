@@ -16,4 +16,5 @@
         "alce_stock_barcode_easy_operation",
     ],
     "data": ["views/stock_picking.xml"],
+    'installable': False
 }

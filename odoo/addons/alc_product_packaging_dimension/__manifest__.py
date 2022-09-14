@@ -12,4 +12,5 @@
     "depends": ["product_packaging_dimension"],
     "data": ["views/product_packaging.xml"],
     "demo": [],
+    'installable': False
 }

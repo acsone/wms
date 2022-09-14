@@ -13,4 +13,5 @@
     "depends": [],
     "data": ["views/res_partner.xml", "data/res_partner_category.xml"],
     "demo": [],
+    'installable': False
 }

@@ -13,4 +13,5 @@
     "data": ["views/product_template.xml", "views/product_product.xml"],
     "external_dependencies": {"python": ["openupgradelib"]},
     "pre_init_hook": "pre_init_hook",
+    'installable': False
 }

@@ -12,4 +12,5 @@
     "depends": ["sale", "stock", "specific_stock"],
     "data": ["wizards/stock_return_picking.xml", "views/product_archived_report.xml"],
     "demo": [],
+    'installable': False
 }

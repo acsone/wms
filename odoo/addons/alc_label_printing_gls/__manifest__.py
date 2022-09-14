@@ -12,5 +12,5 @@
     "depends": ["base_report_to_printer", "delivery_carrier_label_gls", "queue_job"],
     "data": ["views/res_users.xml"],
     "demo": [],
-    "installable": True,
+    "installable": False,
 }

@@ -12,4 +12,5 @@
     "depends": ["alc_shopfloor", "delivery_rounds_refill"],  # manage refill_arrange
     "data": [],
     "demo": [],
+    'installable': False
 }

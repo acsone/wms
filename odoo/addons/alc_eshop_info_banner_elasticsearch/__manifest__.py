@@ -24,4 +24,5 @@
         "data/se_index.xml",
     ],
     "demo": [],
+    'installable': False
 }

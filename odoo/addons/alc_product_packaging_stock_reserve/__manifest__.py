@@ -16,7 +16,7 @@
         "views/product_packaging_type.xml",
         "views/stock_config_settings.xml",
     ],
-    "installable": True,
+    "installable": False,
     "auto_install": False,
     "license": "AGPL-3",
     "application": False,

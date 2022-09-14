@@ -13,4 +13,5 @@
     "depends": ["account_credit_control"],
     "data": ["report/report_credit_control_summary.xml"],
     "demo": [],
+    'installable': False
 }

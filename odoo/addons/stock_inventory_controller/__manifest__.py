@@ -8,7 +8,7 @@
     "category": "Stock Management",
     "depends": ["stock"],
     "data": ["views/stock_inventory.xml"],
-    "installable": True,
+    "installable": False,
     "license": "AGPL-3",
     "application": False,
 }

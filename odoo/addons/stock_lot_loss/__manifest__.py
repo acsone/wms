@@ -22,7 +22,7 @@
         "data/stock.picking.type.csv",
         "views/stock_pack_operation.xml",
     ],
-    "installable": True,
+    "installable": False,
     "auto_install": False,
     "license": "AGPL-3",
     "application": False,

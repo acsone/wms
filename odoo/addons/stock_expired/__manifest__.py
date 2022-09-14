@@ -24,5 +24,5 @@
         "views/stock_quant.xml",
         "views/stock_picking.xml",
     ],
-    "installable": True,
+    "installable": False,
 }

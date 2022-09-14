@@ -13,4 +13,5 @@
     "depends": ["sale_cancel_remaining", "shopinvader"],
     "data": [],
     "demo": [],
+    'installable': False
 }

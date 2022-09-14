@@ -13,4 +13,5 @@
     "depends": ["stock_picking_assignment"],
     "data": ["views/stock_picking_wave.xml"],
     "demo": [],
+    'installable': False
 }

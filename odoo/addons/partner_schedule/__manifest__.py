@@ -9,7 +9,7 @@
     "category": "Other",
     "depends": ["sales_team"],
     "data": ["views/res_partner.xml", "security/ir.model.access.csv"],
-    "installable": True,
+    "installable": False,
     "auto_install": False,
     "license": "AGPL-3",
     "application": False,

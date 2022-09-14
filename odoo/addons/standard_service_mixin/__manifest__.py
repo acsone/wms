@@ -12,4 +12,5 @@
     "depends": ["base_rest", "base_jsonify"],
     "data": [],
     "demo": [],
+    'installable': False
 }

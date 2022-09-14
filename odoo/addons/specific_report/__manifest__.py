@@ -55,5 +55,5 @@
         "data/report_filename.xml",
         "data/mail_template.xml",
     ],
-    "installable": True,
+    "installable": False,
 }

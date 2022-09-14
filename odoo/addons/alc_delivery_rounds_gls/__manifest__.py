@@ -16,6 +16,6 @@
         "alc_delivery_rounds_operator",
     ],
     "data": [],
-    "installable": True,
+    "installable": False,
     "application": False,
 }

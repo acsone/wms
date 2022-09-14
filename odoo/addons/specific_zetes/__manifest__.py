@@ -55,5 +55,5 @@
         "wizard/manage_uop.xml",
     ],
     "website": "http://www.camptocamp.com",
-    "installable": True,
+    "installable": False,
 }

@@ -10,5 +10,5 @@
     "category": "Tools",
     "website": "http://www.camptocamp.com",
     "depends": ["base"],
-    "installable": True,
+    "installable": False,
 }

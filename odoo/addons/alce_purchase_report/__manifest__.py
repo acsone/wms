@@ -10,7 +10,7 @@
     "depends": ["alce_helpdesk", "purchase"],
     "website": "http://www.camptocamp.com",
     "data": [],
-    "installable": True,
+    "installable": False,
     "external_dependencies": {"python": ["openupgradelib"]},
     "pre_init_hook": "pre_init_hook",
 }

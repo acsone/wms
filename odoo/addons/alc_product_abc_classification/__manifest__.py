@@ -12,4 +12,5 @@
     "depends": ["product_abc_classification_base", "stock_storage_type_putaway_abc"],
     "data": [],
     "demo": [],
+    'installable': False
 }

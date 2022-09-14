@@ -16,5 +16,5 @@
         "wizards/stock_pack_operation_lot_add.xml",
         "views/stock_picking.xml",
     ],
-    "installable": True,
+    "installable": False,
 }

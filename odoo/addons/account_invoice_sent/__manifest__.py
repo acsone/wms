@@ -16,5 +16,5 @@
         "security/ir.model.access.csv",
         "wizards/account_invoice_state_view.xml",
     ],
-    "installable": True,
+    "installable": False,
 }

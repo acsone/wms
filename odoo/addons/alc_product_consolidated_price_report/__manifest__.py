@@ -13,4 +13,5 @@
     "depends": ["alc_product_pharmacy", "alc_product_consolidated_price", "report_csv"],
     "data": ["reports/alc_product_consolidated_price_csv_report.xml"],
     "demo": [],
+    'installable': False
 }

@@ -33,4 +33,5 @@ This addon provides:
     ],
     "demo": [],
     "external_dependencies": {"python": ["xlrd"]},
+    'installable': False
 }

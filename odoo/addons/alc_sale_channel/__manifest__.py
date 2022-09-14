@@ -17,4 +17,5 @@
     "data": ["views/sale_order.xml"],
     "external_dependencies": {"python": ["openupgradelib"]},
     "pre_init_hook": "pre_init_hook",
+    'installable': False
 }

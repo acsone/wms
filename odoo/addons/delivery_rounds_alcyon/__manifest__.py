@@ -10,7 +10,7 @@
     "category": "Stock Management",
     "depends": ["delivery_rounds", "stock_picking_zone"],
     "data": ["views/round_instance.xml", "views/css.xml"],
-    "installable": True,
+    "installable": False,
     "auto_install": False,
     "license": "AGPL-3",
     "application": False,

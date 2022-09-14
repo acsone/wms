@@ -53,4 +53,5 @@
         "views/shopinvader_backend.xml",
     ],
     "demo": [],
+    'installable': False
 }

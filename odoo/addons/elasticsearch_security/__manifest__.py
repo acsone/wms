@@ -18,4 +18,5 @@
         "views/se_backend_elasticsearch.xml",
     ],
     "demo": [],
+    'installable': False
 }

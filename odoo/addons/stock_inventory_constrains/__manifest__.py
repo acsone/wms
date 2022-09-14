@@ -11,5 +11,5 @@
     "depends": ["stock"],
     "data": ["views/stock_location.xml"],
     "website": "http://www.acsone.eu",
-    "installable": True,
+    "installable": False,
 }

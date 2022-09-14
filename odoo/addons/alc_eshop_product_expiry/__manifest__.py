@@ -17,4 +17,5 @@
     ],
     "data": ["data/ir_export_product.xml"],
     "demo": [],
+    'installable': False
 }

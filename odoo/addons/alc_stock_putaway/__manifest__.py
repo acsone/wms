@@ -23,4 +23,5 @@
         "stock_storage_type_putaway_abc",
     ],
     "application": True,
+    'installable': False
 }

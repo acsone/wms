@@ -11,4 +11,5 @@
     "author": "ACSONE SA/NV",
     "depends": ["alc_shopfloor_mobile", "alc_shopfloor_workstation"],
     "data": ["templates/assets.xml"],
+    'installable': False
 }

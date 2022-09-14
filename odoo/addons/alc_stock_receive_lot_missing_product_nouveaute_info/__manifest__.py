@@ -24,4 +24,5 @@
         "wizards/stock_pack_operation_lot_add.xml",
     ],
     "demo": [],
+    'installable': False
 }

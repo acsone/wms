@@ -13,4 +13,5 @@
     "depends": ["connector_esb", "alc_b2c_connector"],
     "data": [],
     "demo": [],
+    'installable': False
 }

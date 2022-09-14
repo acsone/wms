@@ -26,4 +26,5 @@
     "depends": ["stock", "stock_picking_subcode"],
     "data": [],
     "demo": [],
+    'installable': False
 }

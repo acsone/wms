@@ -12,4 +12,5 @@
     "depends": ["purchase"],
     "data": ["views/purchase_order.xml"],
     "demo": [],
+    'installable': False
 }

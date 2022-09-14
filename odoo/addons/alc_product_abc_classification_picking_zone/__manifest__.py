@@ -18,4 +18,5 @@
     ],
     "data": ["views/picking_zone.xml", "views/abc_classification_profile.xml"],
     "demo": [],
+    'installable': False
 }

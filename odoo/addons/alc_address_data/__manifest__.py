@@ -12,4 +12,5 @@
     "depends": ["base"],
     "data": ["data/states_belgium.xml"],
     "demo": [],
+    'installable': False
 }

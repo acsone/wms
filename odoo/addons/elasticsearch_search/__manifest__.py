@@ -15,4 +15,5 @@
     "data": [],
     "demo": [],
     "external_dependencies": {"python": ["elasticsearch_dsl"]},
+    'installable': False
 }

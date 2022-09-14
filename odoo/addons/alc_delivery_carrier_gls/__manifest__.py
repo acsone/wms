@@ -13,4 +13,5 @@
     "depends": ["delivery_carrier_label_gls"],
     "data": ["data/product_product.xml", "data/delivery_carrier.xml"],
     "demo": [],
+    'installable': False
 }

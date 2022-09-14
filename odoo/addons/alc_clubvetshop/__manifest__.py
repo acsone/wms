@@ -23,4 +23,5 @@
         "data/res_partner.xml",
     ],
     "demo": [],
+    'installable': False
 }

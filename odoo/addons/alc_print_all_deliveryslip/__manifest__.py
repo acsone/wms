@@ -12,4 +12,5 @@
     "depends": ["delivery_rounds", "alc_b2c_partner"],
     "data": [],
     "demo": [],
+    'installable': False
 }

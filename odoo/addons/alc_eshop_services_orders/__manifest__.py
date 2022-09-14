@@ -11,4 +11,5 @@
     "website": "https://acsone.eu/",
     "depends": ["authenticated_partner_mixin", "sale", "shopinvader"],
     "demo": [],
+    'installable': False
 }

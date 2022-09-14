@@ -14,4 +14,5 @@
     "data": ["views/shopfloor_menu.xml"],
     "demo": [],
     "post_init_hook": "post_init_hook",
+    'installable': False
 }

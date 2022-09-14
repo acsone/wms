@@ -12,4 +12,5 @@
     "depends": ["alc_shopfloor"],
     "data": [],
     "demo": [],
+    'installable': False
 }

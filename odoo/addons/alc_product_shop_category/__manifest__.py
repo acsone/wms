@@ -17,4 +17,5 @@
     "application": False,
     "data": ["data/product_category.xml", "views/product_category_views.xml"],
     "demo": [],
+    'installable': False
 }

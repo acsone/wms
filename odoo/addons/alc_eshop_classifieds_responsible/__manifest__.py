@@ -12,4 +12,5 @@
     "depends": ["mixin_user_id", "alc_eshop_classifieds"],
     "data": ["views/alc_classified.xml", "data/mail_templates.xml"],
     "demo": [],
+    'installable': False
 }

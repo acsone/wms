@@ -22,5 +22,5 @@
     ],
     "data": ["views/purchase_order.xml", "views/templates.xml"],
     "website": "http://www.camptocamp.com",
-    "installable": True,
+    "installable": False,
 }

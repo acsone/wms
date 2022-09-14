@@ -13,4 +13,5 @@
     "depends": ["shopinvader_wishlist"],
     "data": [],
     "demo": [],
+    'installable': False
 }

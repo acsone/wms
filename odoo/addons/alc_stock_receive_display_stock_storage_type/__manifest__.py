@@ -11,4 +11,5 @@
     "author": "ACSONE SA/NV",
     "depends": ["stock_receive_lot", "alc_product_storage_type_tracking"],
     "data": ["wizards/stock_pack_operation_lot_add.xml"],
+    'installable': False
 }

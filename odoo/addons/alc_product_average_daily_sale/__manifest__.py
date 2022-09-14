@@ -33,4 +33,5 @@
         "data/alc_product_average_daily_sale_config.xml",
         "data/ir_cron.xml",
     ],
+    'installable': False
 }

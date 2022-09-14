@@ -12,4 +12,5 @@
     "depends": ["delivery_carrier_label_gls", "alc_b2c_connector"],
     "data": [],
     "demo": [],
+    'installable': False
 }

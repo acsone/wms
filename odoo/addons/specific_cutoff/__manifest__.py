@@ -10,7 +10,7 @@
     "category": "Accounting & Finance",
     "depends": ["alc_base_auto_join", "account_invoice_accrual"],
     "data": ["data/ir_cron.xml"],
-    "installable": True,
+    "installable": False,
     "auto_install": False,
     "license": "AGPL-3",
     "application": False,

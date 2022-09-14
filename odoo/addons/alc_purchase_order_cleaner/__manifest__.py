@@ -13,4 +13,5 @@
     "depends": ["purchase"],
     "data": [],
     "demo": [],
+    'installable': False
 }

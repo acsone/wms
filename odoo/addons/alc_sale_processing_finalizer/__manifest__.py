@@ -25,4 +25,5 @@
         "data/delivery_carrier_long_term.xml",
     ],
     "pre_init_hook": "pre_init_hook",
+    'installable': False
 }

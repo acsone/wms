@@ -13,4 +13,5 @@
     "depends": ["alc_product_state", "product_stock_state", "stock_available"],
     "data": [],
     "demo": [],
+    'installable': False
 }

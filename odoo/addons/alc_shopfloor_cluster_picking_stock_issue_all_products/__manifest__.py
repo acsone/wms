@@ -14,4 +14,5 @@
         "alc_shopfloor_unassign_wave",
         "alc_shopfloor_cluster_picking_workstation",
     ],
+    'installable': False
 }

@@ -11,4 +11,5 @@
     "website": "https://acsone.eu/",
     "depends": ["alc_eshop", "alc_partner_type"],
     "demo": [],
+    'installable': False
 }

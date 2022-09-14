@@ -13,4 +13,5 @@
     "depends": ["alc_stock_lot_available", "product_expiry", "stock"],
     "data": ["views/product_template.xml"],
     "demo": [],
+    'installable': False
 }

@@ -16,7 +16,7 @@
         "delivery_rounds",
     ],
     "data": ["views/stock.xml", "data/data.xml"],
-    "installable": True,
+    "installable": False,
     "auto_install": False,
     "license": "AGPL-3",
     "application": False,

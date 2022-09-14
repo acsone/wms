@@ -11,7 +11,7 @@
     "author": "Camptocamp SA," "Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "application": False,
-    "installable": True,
+    "installable": False,
     "depends": ["sale", "stock", "account"],
     "data": ["wizards/partner_archive_views.xml", "views/res_partner.xml"],
 }

@@ -19,4 +19,5 @@
     ],
     "demo": [],
     "external_dependencies": {"python": ["xmltodict", "dicttoxml"]},
+    'installable': False
 }

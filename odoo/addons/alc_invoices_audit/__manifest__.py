@@ -12,4 +12,5 @@
     "depends": ["alc_sale_invoicing_policy", "specific_partner"],
     "data": ["views/account_invoice.xml"],
     "demo": [],
+    'installable': False
 }

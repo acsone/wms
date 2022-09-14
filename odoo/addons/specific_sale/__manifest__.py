@@ -57,5 +57,5 @@
         "security/ir_ui_menu.xml",
     ],
     "demo": ["demo/exception_rule.xml"],
-    "installable": True,
+    "installable": False,
 }

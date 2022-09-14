@@ -12,4 +12,5 @@
     "depends": ["product", "stock_available"],
     "data": ["views/product_product.xml"],
     "demo": [],
+    'installable': False
 }

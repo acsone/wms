@@ -12,4 +12,5 @@
     "depends": ["account", "account_payment_partner"],
     "data": [],
     "demo": [],
+    'installable': False
 }

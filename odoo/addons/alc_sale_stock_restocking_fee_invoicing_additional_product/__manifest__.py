@@ -12,4 +12,5 @@
     "depends": ["sale_stock_restocking_fee_invoicing", "product_additional"],
     "data": [],
     "demo": [],
+    'installable': False
 }

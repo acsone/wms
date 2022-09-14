@@ -12,4 +12,5 @@
     "depends": ["alc_sale_channel", "stock_delivery_note"],
     "data": [],
     "demo": [],
+    'installable': False
 }

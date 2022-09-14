@@ -13,4 +13,5 @@
     "depends": ["stock_refill", "stock_storage_type"],
     "data": [],
     "demo": [],
+    'installable': False
 }

@@ -12,4 +12,5 @@
     "depends": ["base_rest", "alc_registration", "standard_service_mixin"],
     "data": [],
     "demo": [],
+    'installable': False
 }

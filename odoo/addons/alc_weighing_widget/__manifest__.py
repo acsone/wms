@@ -14,4 +14,5 @@
     "data": ["views/web_weighing_widget.xml"],
     "qweb": ["static/src/xml/*.xml"],
     "demo": [],
+    'installable': False
 }

@@ -13,4 +13,5 @@
     "depends": ["alc_shopfloor", "auth_api_key"],
     "data": ["views/auth_api_key.xml"],
     "demo": [],
+    'installable': False
 }

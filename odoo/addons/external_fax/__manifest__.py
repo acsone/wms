@@ -12,5 +12,5 @@
     "depends": ["mail", "queue_job"],
     "website": "http://www.camptocamp.com",
     "data": ["data/fax.external.csv", "security/ir.model.access.csv"],
-    "installable": True,
+    "installable": False,
 }

@@ -13,4 +13,5 @@
     "depends": ["sale_cart_rest_api", "alc_sale_channel"],
     "data": [],
     "demo": [],
+    'installable': False
 }

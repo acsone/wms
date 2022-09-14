@@ -13,4 +13,5 @@
     "depends": ["base_report_to_printer"],
     "data": ["views/res_users.xml"],
     "demo": [],
+    'installable': False
 }

@@ -13,4 +13,5 @@
     "depends": ["product", "attribute_set"],
     "data": ["data/attribute_group.xml", "data/attribute_set.xml"],
     "pre_init_hook": "pre_init_hook",
+    'installable': False
 }

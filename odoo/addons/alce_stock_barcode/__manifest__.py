@@ -13,7 +13,7 @@
         "alce_stock_barcode_picking_assignment",
         "alc_stock_barcode_picking_type",
     ],
-    "installable": True,
+    "installable": False,
     "auto_install": False,
     "license": "Other proprietary",
     "application": False,

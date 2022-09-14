@@ -17,4 +17,5 @@
         "views/alc_product_promotion_subscription.xml",
     ],
     "demo": [],
+    'installable': False
 }

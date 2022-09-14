@@ -12,4 +12,5 @@
     "depends": ["mixin_user_id", "alc_registration"],
     "data": ["views/alc_registration.xml", "data/mail_templates.xml"],
     "demo": [],
+    'installable': False
 }

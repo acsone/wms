@@ -12,5 +12,5 @@
     "depends": ["account_payment_order", "queue_job"],
     "website": "https://www.camptocamp.com",
     "data": [],
-    "installable": True,
+    "installable": False,
 }

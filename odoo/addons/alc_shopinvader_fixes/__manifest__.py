@@ -13,4 +13,5 @@
     "depends": ["alc_cerberus_utils", "shopinvader"],
     "data": [],
     "demo": [],
+    'installable': False
 }

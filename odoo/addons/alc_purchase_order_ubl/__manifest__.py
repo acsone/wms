@@ -13,4 +13,5 @@
     "depends": ["alc_purchase_order_cleaner", "purchase_order_ubl", "report_xml"],
     "data": ["report/report_xml_purchase_order_ubl.xml"],
     "demo": [],
+    'installable': False
 }

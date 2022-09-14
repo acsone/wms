@@ -11,7 +11,7 @@
     "maintainer": "Camptocamp",
     "depends": ["account", "account_cutoff_accrual_picking"],
     "data": ["views/account_move.xml"],
-    "installable": True,
+    "installable": False,
     "auto_install": False,
     "application": False,
 }

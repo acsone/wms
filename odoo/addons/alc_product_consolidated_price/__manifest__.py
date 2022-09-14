@@ -18,4 +18,5 @@
     ],
     "data": ["security/alc_product_partner_price.xml"],
     "demo": [],
+    'installable': False
 }

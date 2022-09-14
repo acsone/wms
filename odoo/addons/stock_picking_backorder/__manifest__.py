@@ -18,5 +18,5 @@
         "security/ir.model.access.csv",
         "data/stock_backorder_reason.xml",
     ],
-    "installable": True,
+    "installable": False,
 }

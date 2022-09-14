@@ -70,6 +70,6 @@
         "views/sale_order.xml",
         "security/ir.model.access.csv",
     ],
-    "installable": True,
+    "installable": False,
     "external_dependencies": {"python": ["paramiko", "simplejson", "dicttoxml"]},
 }

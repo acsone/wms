@@ -13,4 +13,5 @@
     "depends": ["procurement_sale", "sale_cancel_remaining"],
     "data": [],
     "demo": [],
+    'installable': False
 }

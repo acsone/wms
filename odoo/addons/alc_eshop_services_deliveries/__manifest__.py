@@ -16,4 +16,5 @@
         "stock_groupbypartner",  # customer_id
     ],
     "demo": [],
+    'installable': False
 }

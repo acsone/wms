@@ -29,7 +29,7 @@
     """,
     "depends": ["product_expiry"],
     "data": [],
-    "installable": True,
+    "installable": False,
     "license": "AGPL-3",
     "application": False,
 }

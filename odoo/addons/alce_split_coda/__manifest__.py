@@ -12,7 +12,7 @@
     # l10n_be_coda is an Odoo enterprise module
     "depends": ["l10n_be_coda"],
     "data": [],
-    "installable": True,
+    "installable": False,
     "auto_install": False,
     "license": "Other proprietary",
     "application": False,

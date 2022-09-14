@@ -27,5 +27,5 @@
         "views/product_supplierinfo.xml",
         "views/purchase_order.xml",
     ],
-    "installable": True,
+    "installable": False,
 }

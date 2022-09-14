@@ -13,4 +13,5 @@
     "depends": ["storage_image", "product_brand"],
     "data": ["views/product_brand.xml"],
     "demo": [],
+    'installable': False
 }

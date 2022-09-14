@@ -18,4 +18,5 @@
     ],
     "data": ["data/mail_template.xml"],
     "demo": [],
+    'installable': False
 }

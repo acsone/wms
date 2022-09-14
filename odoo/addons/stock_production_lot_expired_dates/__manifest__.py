@@ -11,5 +11,5 @@
     "depends": ["product_expiry", "stock"],
     "website": "http://www.camptocamp.com",
     "data": ["views/stock_config.xml"],
-    "installable": True,
+    "installable": False,
 }

@@ -9,4 +9,5 @@
     "data": ["views/assets_templates.xml"],
     "qweb": ["static/src/xml/mask.xml"],
     "images": ["static/description/main_screenshot.png"],
+    'installable': False
 }

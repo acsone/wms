@@ -12,4 +12,5 @@
     "depends": ["alc_shopfloor_mobile", "alc_shopfloor_cluster_picking_workstation"],
     "data": ["templates/assets.xml"],
     "demo": [],
+    'installable': False
 }

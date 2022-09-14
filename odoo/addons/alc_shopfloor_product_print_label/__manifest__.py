@@ -12,4 +12,5 @@
     "depends": ["alc_shopfloor", "alc_product_label_printer", "specific_print"],
     "data": [],
     "demo": [],
+    'installable': False
 }

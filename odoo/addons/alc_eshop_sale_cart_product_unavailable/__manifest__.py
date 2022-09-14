@@ -13,4 +13,5 @@
     "depends": ["procurement_sale", "sale_cart_rest_api"],
     "data": [],
     "demo": [],
+    'installable': False
 }

@@ -12,4 +12,5 @@
     "depends": ["purchase", "product", "stock", "stock_picking_zone"],
     "data": ["views/stock_picking.xml"],
     "demo": [],
+    'installable': False
 }

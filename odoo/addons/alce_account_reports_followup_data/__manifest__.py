@@ -13,6 +13,6 @@
     "depends": ["account_reports_followup"],
     "data": ["data/followup_line.xml"],
     "website": "http://www.camptocamp.com",
-    "installable": True,
+    "installable": False,
     "pre_init_hook": "pre_init_hook",
 }

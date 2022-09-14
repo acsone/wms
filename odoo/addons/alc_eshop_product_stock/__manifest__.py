@@ -13,4 +13,5 @@
     "depends": ["alc_stock_move_direction", "shopinvader_product_stock"],
     "data": [],
     "demo": [],
+    'installable': False
 }

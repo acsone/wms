@@ -14,7 +14,7 @@
         "views/stock_picking_type.xml",
         "views/stock_location.xml",
     ],
-    "installable": True,
+    "installable": False,
     "auto_install": False,
     "license": "AGPL-3",
     "application": False,

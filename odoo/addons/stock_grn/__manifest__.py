@@ -37,7 +37,7 @@
         "security/ir_rule.xml",
     ],
     "tests": [],
-    "installable": True,
+    "installable": False,
     "auto_install": False,
     "license": "LGPL-3",
     "application": False,

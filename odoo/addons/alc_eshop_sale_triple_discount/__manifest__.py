@@ -13,4 +13,5 @@
     "depends": ["sale_cart_rest_api", "sale_triple_discount", "shopinvader_sale_cart"],
     "data": [],
     "demo": [],
+    'installable': False
 }

@@ -24,4 +24,5 @@
     ],
     "data": ["views/shopinvader_menu.xml"],
     "demo": [],
+    'installable': False
 }

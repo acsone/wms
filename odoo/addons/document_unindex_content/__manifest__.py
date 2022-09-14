@@ -13,4 +13,5 @@
     "depends": ["attachment_unindex_content", "document"],
     "data": [],
     "demo": [],
+    'installable': False
 }

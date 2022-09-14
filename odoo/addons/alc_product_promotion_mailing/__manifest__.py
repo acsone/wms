@@ -26,4 +26,5 @@
         "reports/report_alc_product_promotion_mailing.xml",
     ],
     "demo": [],
+    'installable': False
 }

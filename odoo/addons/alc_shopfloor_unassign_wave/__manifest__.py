@@ -11,4 +11,5 @@
     "author": "ACSONE SA/NV",
     "depends": ["alc_shopfloor", "alc_stock_picking_wave_release_pickings"],
     "data": [],
+    'installable': False
 }

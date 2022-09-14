@@ -15,5 +15,5 @@
         "views/res_partner.xml",
         "views/legal_entity.xml",
     ],
-    "installable": True,
+    "installable": False,
 }

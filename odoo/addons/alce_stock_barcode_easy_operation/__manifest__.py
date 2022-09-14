@@ -10,7 +10,7 @@
     "category": "Stock Management",
     "depends": ["stock_barcode"],
     "data": [],
-    "installable": True,
+    "installable": False,
     "auto_install": False,
     "license": "Other proprietary",
     "application": False,

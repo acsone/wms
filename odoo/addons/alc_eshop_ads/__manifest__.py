@@ -20,4 +20,5 @@
         "views/alc_eshop_ads.xml",
     ],
     "demo": [],
+    'installable': False
 }

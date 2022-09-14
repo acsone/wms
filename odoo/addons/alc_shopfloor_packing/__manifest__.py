@@ -18,4 +18,5 @@
     "data": ["views/shopfloor_menu.xml", "views/stock_picking.xml"],
     "demo": [],
     "pre_init_hook": "pre_init_hook",
+    'installable': False
 }

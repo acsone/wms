@@ -12,5 +12,5 @@
     "depends": ["account", "sale", "purchase"],
     "data": ["data/account_tax_group.xml"],
     "website": "http://www.camptocamp.com",
-    "installable": True,
+    "installable": False,
 }

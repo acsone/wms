@@ -13,4 +13,5 @@
     "depends": ["delivery_rounds", "stock_picking_assignment"],
     "data": ["views/round_instance.xml", "views/round_template.xml"],
     "demo": [],
+    'installable': False
 }

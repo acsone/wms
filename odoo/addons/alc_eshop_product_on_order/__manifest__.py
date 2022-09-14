@@ -23,4 +23,5 @@
     ],
     "data": ["data/mail_template.xml", "security/alc_eshop_product_on_order.xml"],
     "demo": [],
+    'installable': False
 }

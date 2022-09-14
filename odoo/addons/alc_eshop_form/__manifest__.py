@@ -25,4 +25,5 @@
     ],
     "post_init_hook": "post_init_hook",
     "external_dependencies": {"python": ["unicodecsv"]},
+    'installable': False
 }

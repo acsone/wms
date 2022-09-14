@@ -11,4 +11,5 @@
     "author": "ACOSNE SA/NV",
     "depends": ["specific_zetes", "stock_picking_wave"],
     "data": ["views/stock_picking.xml"],
+    'installable': False
 }

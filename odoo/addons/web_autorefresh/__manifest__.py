@@ -36,5 +36,5 @@
         # 'web_calendar', 'web_graph', 'web_kanban',
     ],
     "data": ["assets.xml"],
-    "installable": True,
+    "installable": False,
 }

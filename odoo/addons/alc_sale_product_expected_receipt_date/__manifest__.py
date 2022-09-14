@@ -11,4 +11,5 @@
     "depends": ["alc_base_auto_join", "sale", "sale_stock"],
     "data": ["views/sale_order.xml"],
     "demo": [],
+    'installable': False
 }

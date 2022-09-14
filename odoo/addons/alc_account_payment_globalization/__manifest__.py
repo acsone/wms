@@ -26,4 +26,5 @@ Translated with www.DeepL.com/Translator (free version)""",
     ],
     "data": ["wizards/alc_account_payment_globalization.xml"],
     "demo": [],
+    'installable': False
 }

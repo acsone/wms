@@ -13,4 +13,5 @@
     "depends": ["pricelist_discount", "sale_order_price_recalculation"],
     "data": [],
     "demo": [],
+    'installable': False
 }

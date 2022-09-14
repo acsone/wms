@@ -14,6 +14,6 @@
     "application": False,
     "data": ["views/product_pricelist.xml"],
     "demo": [],
-    "installable": True,
+    "installable": False,
     "pre_init_hook": "pre_init_hook",
 }

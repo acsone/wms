@@ -11,4 +11,5 @@
     "author": "ACSONE SA/NV",
     "depends": ["sale_cancel_remaining", "product_additional"],
     "data": [],
+    'installable': False
 }

@@ -11,5 +11,5 @@
     "depends": ["stock", "stock_product_bin"],
     "data": ["views/stock_inventory.xml"],
     "website": "http://www.camptocamp.com",
-    "installable": True,
+    "installable": False,
 }

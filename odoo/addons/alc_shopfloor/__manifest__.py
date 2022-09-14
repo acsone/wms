@@ -50,4 +50,5 @@
     ],
     "demo": ["demo/stock_picking_type_demo.xml", "demo/shopfloor_menu_demo.xml"],
     "pre_init_hook": "pre_init_hook",
+    'installable': False
 }

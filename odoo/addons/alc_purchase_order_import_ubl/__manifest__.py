@@ -13,4 +13,5 @@
     "depends": ["alc_purchase_order_ubl", "purchase_order_import_ubl"],
     "data": [],
     "demo": [],
+    'installable': False
 }

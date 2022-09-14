@@ -28,4 +28,5 @@
     "external_dependencies": {"python": ["shapely", "shapefile"]},
     "auto_install": True,
     "application": True,
+    'installable': False
 }

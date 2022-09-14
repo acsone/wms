@@ -11,4 +11,5 @@
     "author": "ACSONE SA/NV",
     "depends": ["alc_shopfloor_cluster_picking", "delivery_rounds"],
     "data": ["views/shopfloor_menu.xml"],
+    'installable': False
 }

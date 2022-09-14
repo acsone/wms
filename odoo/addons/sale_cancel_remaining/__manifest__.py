@@ -14,5 +14,5 @@
     "depends": ["sale", "stock", "sale_stock"],
     "data": ["wizard/cancel_remaining_wizard.xml", "views/sale_order.xml"],
     "website": "http://www.camptocamp.com",
-    "installable": True,
+    "installable": False,
 }

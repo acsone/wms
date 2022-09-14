@@ -13,5 +13,5 @@
     "application": False,
     "data": ["data/ir_cron.xml"],
     "demo": [],
-    "installable": True,
+    "installable": False,
 }

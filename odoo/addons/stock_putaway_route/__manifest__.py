@@ -27,7 +27,7 @@
     "category": "Stock Management",
     "depends": ["stock"],
     "data": ["views/stock.xml", "security/ir.model.access.csv"],
-    "installable": True,
+    "installable": False,
     "auto_install": False,
     "license": "AGPL-3",
     "application": False,

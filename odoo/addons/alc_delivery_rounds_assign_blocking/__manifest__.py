@@ -11,4 +11,5 @@
     "author": "ACSONE SA/NV",
     "depends": ["base_partition", "delivery_rounds"],
     "data": ["views/sale_order.xml", "views/stock_picking.xml"],
+    'installable': False
 }

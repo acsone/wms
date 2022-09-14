@@ -13,4 +13,5 @@
     "depends": ["alc_stock_picking_policy_block", "delivery_rounds"],
     "data": [],
     "demo": [],
+    'installable': False
 }

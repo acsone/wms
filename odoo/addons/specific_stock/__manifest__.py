@@ -75,5 +75,5 @@
         "security/ir.model.access.csv",
         "security/ir_ui_menu.xml",
     ],
-    "installable": True,
+    "installable": False,
 }

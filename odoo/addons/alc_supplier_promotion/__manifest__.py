@@ -14,5 +14,5 @@
     "application": False,
     "data": [],
     "demo": [],
-    "installable": True,
+    "installable": False,
 }
