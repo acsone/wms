@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
+  <!--
   <record model="ir.ui.view" id="sale.res_partner_view_buttons">
     <field name="priority">10</field>
   </record>
@@ -19,5 +20,5 @@
   <record model="ir.ui.view" id="sale_wishlist.res_partner_view_form">
     <field name="priority">80</field>
   </record>
-
+  -->
 </odoo>

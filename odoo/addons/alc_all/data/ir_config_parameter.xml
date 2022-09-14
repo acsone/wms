@@ -2,6 +2,7 @@
 <!-- Copyright 2022 ACSONE SA/NV
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
+  <!--
   <record id="constrain_discount_pricelist_parameter" model="ir.config_parameter">
     <field name="key">constrain_discount_pricelist</field>
     <field name="value">1</field>
@@ -13,4 +14,5 @@
     <field name="key">constrain_release_picking_wave_before_unlink</field>
     <field name="value">1</field>
   </record>
+  -->
 </odoo>

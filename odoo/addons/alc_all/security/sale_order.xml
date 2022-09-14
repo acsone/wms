@@ -3,6 +3,7 @@
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
   <!-- remove unlink to sale manager -->
+  <!--
   <record model="ir.model.access" id="sale.access_sale_order_manager">
     <field name="name">sale.order.manager</field>
     <field name="model_id" ref="sale.model_sale_order" />
@@ -12,4 +13,5 @@
     <field name="perm_write" eval="1" />
     <field name="perm_unlink" eval="0" />
   </record>
+  -->
 </odoo>
