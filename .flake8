@@ -1,5 +1,5 @@
 [flake8]
-max-complexity = 16
+max-complexity = 12
 # B = bugbear
 # B9 = bugbear opinionated (incl line length)
 select = C,E,F,W,B,B9

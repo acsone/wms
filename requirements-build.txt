@@ -1,0 +1,5 @@
+# These come from the requires section of the build-system table in pyproject.toml.
+# Ideally, this file should be maintained automatically by pip-deepfreeze.
+hatchling
+hatch-odoo
+setuptools-odoo>=3.1.4

@@ -29,13 +29,4 @@ exclude_lines =
     if context is None:
     raise NotImplementedError
     except ImportError:
-    def _onchange_
     except AccessError:
-    def name_search\(
-    def search_read\(
-    def _search_
-    def fields_view_get\(.*
-    def name_get\(
-    def default_get\(
-    def _get_default_.*\(self\):
-    def show_.*\(self\):

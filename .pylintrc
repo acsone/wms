@@ -2,6 +2,8 @@
 
 load-plugins=pylint_odoo
 
+ignore=
+
 [MESSAGES CONTROL]
 
 # Only show warnings with the listed confidence levels. Leave empty to show
@@ -56,13 +58,6 @@ disable=
   fixme,
   locally-disabled,
   copy-wo-api-one,
-  line-too-long,
-  manifest-required-author,
-  broad-except,
-  useless-object-inheritance,
-  translation-positional-used,
-  missing-import-error,
-  rst-syntax-error
 
 extension-pkg-whitelist=lxml
 
@@ -80,24 +75,24 @@ reports=no
 # used to format the message information. See doc for all details
 msg-template={path}:{line}:{column}: {msg_id} {msg} ({symbol})
 
-[VARIABLES]
-additional-builtins=unicode,xrange,reduce,unichr,basestring
-
 [ODOOLINT]
 
-valid_odoo_versions=10.0
+valid_odoo_versions=16.0
 
 # URL of README.rst template file
 readme_template_url=https://github.com/OCA/maintainer-tools/blob/master/template/module/README.rst
 
+# List of extension files to check separated by a comma.
+extfiles_to_lint=xml,csv,po,js,mako
+
 # Name of author required in manifest file.
-manifest_required_authors=
+manifest_required_authors=ACSONE SA/NV
 
 # List of keys required in manifest file, separated by a comma.
-manifest_required_keys=license
+manifest_required_keys=license,author
 
 # List of keys deprecated in manifest file, separated by a comma.
-manifest_deprecated_keys=active
+manifest_deprecated_keys=
 
 # List of license allowed in manifest file, separated by a comma.
 license_allowed=AGPL-3,LGPL-3,Other proprietary
