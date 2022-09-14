@@ -4,8 +4,13 @@
         origin: ssh://git@github.com/acsone/enterprise.git
     merges:
         - odoo master
-        - origin master-with-setup
     shell_command_after:
+        # add pyproject.toml so pip wheel works
+        - gh --repo acsone/enterprise pr diff 12 --patch | git am
+        # fix invalid manifests
+        - gh --repo odoo/enterprise pr diff 31116 --patch | git am
+        - gh --repo odoo/enterprise pr diff 31042 --patch | git am
+        # remove broken/useless stuff
         - git rm -r data_cleaning
         - git commit -m "Remove unused auto install addon data_cleaning"
         - git rm -r test_marketing_automation
@@ -27,6 +32,7 @@
         - curl -sSL https://github.com/odoo/odoo/pull/44001.patch | git am
         # 15.5 is 16.0
         - curl -sSL https://github.com/acsone/odoo/pull/62.patch | git am
+        # remove broken/useless stuff
         - git rm -r addons/test_mail_sms
         - git commit -m "Remove unused auto install addon test_mail_sms"
     target: origin 16.0-alc_master
