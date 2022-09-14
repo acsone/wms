@@ -61,6 +61,9 @@ disable=
 
 extension-pkg-whitelist=lxml
 
+[FORMAT]
+max-line-length=240
+
 [REPORTS]
 
 # Set the output format. Available formats are text, parseable, colorized, msvs

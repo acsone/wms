@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -11,7 +10,7 @@ class IrTranslation(models.Model):
 
     @api.model_cr_context
     def _auto_init(self):
-        res = super(IrTranslation, self)._auto_init()
+        res = super()._auto_init()
         cr = self._cr
 
         cr.execute(
