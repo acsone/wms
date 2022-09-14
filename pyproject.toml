@@ -1,6 +1,6 @@
 # Use the hatchling build backend, with the hatch-odoo plugin.
 [build-system]
-requires = ["hatchling", "hatch-odoo"]
+requires = ["hatchling", "setuptools-odoo>=3.1.4", "hatch-odoo"]
 build-backend = "hatchling.build"
 
 [project]
@@ -13,16 +13,11 @@ dynamic = ["dependencies"]
 
 [project.optional-dependencies]
 tests = [
-  "freezegun",
   "pytest-cov",
   "pytest-odoo",
-  "xmlunittest",
-  "responses",
-  "coverage",
 ]
 dev = [
   "ipython",
-  "pudb"
 ]
 
 [project.scripts]
@@ -39,6 +34,7 @@ dependencies = [
   "openupgradelib",
   "odoo-addons-enterprise",
   # optional Odoo dependencies
+  "num2words",
 ]
 addons_dirs = ["odoo/addons"]
 

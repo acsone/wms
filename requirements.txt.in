@@ -3,4 +3,4 @@
 # odoo
 -r https://raw.githubusercontent.com/odoo/odoo/master/requirements.txt
 odoo @ git+https://github.com/acsone/odoo.git@16.0-alc_master
-odoo-addons-enterprise @ git+ssh://git@github.com/acsone/enterprise.git@16.0-alc_master#subdirectory=setup
+odoo-addons-enterprise @ git+ssh://git@github.com/acsone/enterprise.git@16.0-alc_master
