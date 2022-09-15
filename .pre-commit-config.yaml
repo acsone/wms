@@ -482,3 +482,13 @@ repos:
     rev: v0.7.2
     hooks:
       - id: pydocstringformatter
+  - repo: local
+    hooks:
+    - id: update-coverage-omit-addons
+      name: update .coveragerc omit addons
+      entry: ./scripts/update_coverage_omit_addons.py
+      language: system
+      types: [python]
+      pass_filenames: false
+      always_run: true
+      args: ["--addons-dir=odoo/addons"]
