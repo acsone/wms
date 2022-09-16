@@ -42,7 +42,7 @@ db_category_maping = [
 
 def pre_init_hook(cr):
     env = odoo.api.Environment(cr, odoo.SUPERUSER_ID, {})
-    vals_default = {"module": "alc_par  tner_category", "model": "res.partner.category"}
+    vals_default = {"module": "alc_partner_category", "model": "res.partner.category"}
     for res_id, record_name, xmlid in db_category_maping:
         record = env["res.partner.category"].browse(res_id)
         if record.exists() and record.name == record_name:
