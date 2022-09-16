@@ -9,13 +9,14 @@ class ProductPricelistItem(models.Model):
     _inherit = "product.pricelist"
 
     @api.model
-    def _get_discount_item_id(self, product, date):
+    def _get_discount_item_id(self, product, date, qty=1):
         """Returns the id of the best discount item"""
         discount_item_id = False
         price_categ_id = product.price_category_id.id
         subquery = " OR item.price_category_id = %(price_categ_id)s "
         subquery = subquery if price_categ_id else ""
         query_args = {
+            "qty": qty,
             "pl_ids": tuple(self.ids),
             "tmpl_id": product.product_tmpl_id.id,
             "prod_id": product.id,
@@ -33,6 +34,7 @@ LEFT JOIN product_category AS categ
 ON item.categ_id = categ.id
 WHERE (item.product_tmpl_id IS NULL OR item.product_tmpl_id = %(tmpl_id)s)
 AND (item.product_id IS NULL OR item.product_id = %(prod_id)s)
+AND (item.min_quantity IS NULL OR item.min_quantity <= %(qty)s)
 AND (item.categ_id IS NULL OR (categ.parent_left <= %(categ_parent_left)s AND categ.parent_right >= %(categ_parent_right)s) )
 AND (item.price_category_id IS NULL"""
             + subquery

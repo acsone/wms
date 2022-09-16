@@ -115,7 +115,10 @@ class SaleOrderLine(models.Model):
             pricelists = line.order_id.discount_pricelist_ids
             if line.product_id and pricelists:
                 date = line.order_id.date_order
-                discount_item = pricelists._get_discount_item_id(line.product_id, date)
+                # we don't use UOMs, if that changes then apply it here:
+                qty = line.product_uom_qty or 1
+                product = line.product_id
+                discount_item = pricelists._get_discount_item_id(product, date, qty)
             line.discount_item_id = discount_item
 
     def compute_alcyon_discount(self):
