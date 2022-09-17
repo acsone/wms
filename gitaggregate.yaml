@@ -7,9 +7,6 @@
     shell_command_after:
         # add pyproject.toml so pip wheel works
         - gh --repo acsone/enterprise pr diff 12 --patch | git am
-        # fix invalid manifests
-        - gh --repo odoo/enterprise pr diff 31116 --patch | git am
-        - gh --repo odoo/enterprise pr diff 31042 --patch | git am
         # remove broken/useless stuff
         - git rm -r data_cleaning
         - git commit -m "Remove unused auto install addon data_cleaning"
