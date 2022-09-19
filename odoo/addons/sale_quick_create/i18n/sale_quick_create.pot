@@ -39,6 +39,16 @@ msgid "Ordered Qty"
 msgstr ""
 
 #. module: sale_quick_create
+#: model:ir.model.fields,field_description:sale_quick_create.field_sale_order_line_order_pricelist_id
+msgid "Pricelist"
+msgstr ""
+
+#. module: sale_quick_create
+#: model:ir.model.fields,help:sale_quick_create.field_sale_order_line_order_pricelist_id
+msgid "Pricelist for current sales order."
+msgstr ""
+
+#. module: sale_quick_create
 #: model:ir.ui.view,arch_db:sale_quick_create.sale_order_line_tree_edit
 msgid "Promotion (%)"
 msgstr ""
@@ -52,6 +62,11 @@ msgstr ""
 #. module: sale_quick_create
 #: model:ir.model,name:sale_quick_create.model_sale_order
 msgid "Sales Order"
+msgstr ""
+
+#. module: sale_quick_create
+#: model:ir.model,name:sale_quick_create.model_sale_order_line
+msgid "Sales Order Line"
 msgstr ""
 
 #. module: sale_quick_create
