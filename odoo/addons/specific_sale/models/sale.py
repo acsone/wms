@@ -150,7 +150,6 @@ class SaleOrderLine(models.Model):
         readonly=True,
     )
     order_partner_id = fields.Many2one(readonly=True)
-    order_pricelist_id = fields.Many2one(related="order_id.pricelist_id", readonly=True)
     picking_zone_id = fields.Many2one(
         related="product_id.picking_zone_id", readonly=True
     )
