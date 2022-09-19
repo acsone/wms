@@ -198,6 +198,7 @@
         "purchase_update_procurement_qty",
         "rest_log",
         "sale_quick_create",
+        "sale_quick_create_pricelist_discount",
         "sale_internal_confirmation_mail",
         "server_environment_files",
         "specific_account",
