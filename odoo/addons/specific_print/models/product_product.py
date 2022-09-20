@@ -16,6 +16,6 @@ class ProductProduct(models.Model):
         hw_print(
             self,
             "specific_print.report_lot_nolot_label",
-            qty=quantity,
+            qty=quantity * self.number_labels_to_print,
             printer_id=printer_id,
         )
