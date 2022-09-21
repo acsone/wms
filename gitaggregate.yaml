@@ -23,12 +23,12 @@
         odoo: git@github.com:odoo/odoo.git
         origin: git@github.com:acsone/odoo.git
     merges:
-        - odoo master
+        - odoo 16.0
     shell_command_after:
         # pyproject.toml
         - curl -sSL https://github.com/odoo/odoo/pull/44001.patch | git am
-        # 15.5 is 16.0
-        - curl -sSL https://github.com/acsone/odoo/pull/62.patch | git am
+        # Support python -m odoo, for debugging configuration comfort.
+        - curl -sL https://github.com/odoo/odoo/pull/81864.patch | git am
         # remove broken/useless stuff
         - git rm -r addons/test_mail_sms
         - git commit -m "Remove unused auto install addon test_mail_sms"
