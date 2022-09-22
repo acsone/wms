@@ -96,7 +96,7 @@ class StockPicking(models.Model):
         to_pack = operation.qty_done > 0 and (
             not operation.result_package_id
             or (
-                self.picking_type_id.empty_internal_package_on_transfer
+                self.empty_internal_package_on_transfer
                 and operation.result_package_id.is_internal
             )
         )
