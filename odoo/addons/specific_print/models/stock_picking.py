@@ -22,7 +22,7 @@ class StockPicking(models.Model):
             return
 
         packs_to_print = self.pack_operation_ids.filtered(
-            lambda pack_op: not pack_op.product_id.is_do_not_print_label
+            lambda pack_op: pack_op.product_id.number_labels_to_print
         )
         if packages:
             packs_to_print = packs_to_print.filtered(
@@ -40,7 +40,7 @@ class StockPicking(models.Model):
             raise Warning(_("No destination partner defined"))
 
         packs_to_print = operations or self.pack_operation_ids.filtered(
-            lambda pack_op: not pack_op.product_id.is_do_not_print_label
+            lambda pack_op: pack_op.product_id.number_labels_to_print
         )
         if packages:
             packs_to_print = packs_to_print.filtered(
