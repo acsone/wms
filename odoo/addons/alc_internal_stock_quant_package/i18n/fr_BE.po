@@ -17,9 +17,40 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_internal_stock_quant_package
+#: model:ir.model.fields,field_description:alc_internal_stock_quant_package.field_stock_internal_package_config_line_create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: alc_internal_stock_quant_package
+#: model:ir.model.fields,field_description:alc_internal_stock_quant_package.field_stock_internal_package_config_line_create_date
+msgid "Created on"
+msgstr ""
+
+#. module: alc_internal_stock_quant_package
+#: model:ir.model.fields,field_description:alc_internal_stock_quant_package.field_stock_internal_package_config_line_delivery_carrier_id
+msgid "Delivery carrier id"
+msgstr ""
+
+#. module: alc_internal_stock_quant_package
+#: model:ir.model.fields,field_description:alc_internal_stock_quant_package.field_stock_internal_package_config_line_display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: alc_internal_stock_quant_package
+#: model:ir.model.fields,field_description:alc_internal_stock_quant_package.field_stock_internal_package_config_line_empty
+msgid "Empty"
+msgstr ""
+
+#. module: alc_internal_stock_quant_package
+#: model:ir.model.fields,field_description:alc_internal_stock_quant_package.field_stock_picking_empty_internal_package_on_transfer
 #: model:ir.model.fields,field_description:alc_internal_stock_quant_package.field_stock_picking_type_empty_internal_package_on_transfer
 msgid "Empty internal package on transfer"
 msgstr "Vider les colis internes lors du transfert?"
+
+#. module: alc_internal_stock_quant_package
+#: model:ir.model.fields,field_description:alc_internal_stock_quant_package.field_stock_internal_package_config_line_id
+msgid "ID"
+msgstr ""
 
 #. module: alc_internal_stock_quant_package
 #: model:ir.model.fields,help:alc_internal_stock_quant_package.field_stock_picking_type_empty_internal_package_on_transfer
@@ -36,14 +67,46 @@ msgid "Internal"
 msgstr "Interne"
 
 #. module: alc_internal_stock_quant_package
+#: model:ir.model,name:alc_internal_stock_quant_package.model_stock_internal_package_config_line
+#, fuzzy
+msgid "Internal Package Configuration Line"
+msgstr "Vider les colis internes lors du transfert?"
+
+#. module: alc_internal_stock_quant_package
 #: model:ir.model.fields,field_description:alc_internal_stock_quant_package.field_stock_quant_package_is_internal
 msgid "Internal use?"
 msgstr "Usage interne?"
 
 #. module: alc_internal_stock_quant_package
+#: model:ir.model.fields,field_description:alc_internal_stock_quant_package.field_stock_internal_package_config_line___last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: alc_internal_stock_quant_package
+#: model:ir.model.fields,field_description:alc_internal_stock_quant_package.field_stock_internal_package_config_line_write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: alc_internal_stock_quant_package
+#: model:ir.model.fields,field_description:alc_internal_stock_quant_package.field_stock_internal_package_config_line_write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: alc_internal_stock_quant_package
 #: model:ir.model,name:alc_internal_stock_quant_package.model_stock_quant_package
 msgid "Physical Packages"
 msgstr "Colis physiques"
+
+#. module: alc_internal_stock_quant_package
+#: model:ir.model.fields,field_description:alc_internal_stock_quant_package.field_stock_picking_type_stock_internal_package_config_line_ids
+#, fuzzy
+msgid "Stock internal package config line ids"
+msgstr "Vider les colis internes lors du transfert?"
+
+#. module: alc_internal_stock_quant_package
+#: model:ir.model.fields,field_description:alc_internal_stock_quant_package.field_stock_internal_package_config_line_stock_picking_type_id
+msgid "Stock picking type id"
+msgstr ""
 
 #. module: alc_internal_stock_quant_package
 #: model:ir.model,name:alc_internal_stock_quant_package.model_stock_picking_type
