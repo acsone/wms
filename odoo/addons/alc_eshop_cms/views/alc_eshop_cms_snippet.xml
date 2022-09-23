@@ -21,7 +21,11 @@
                     <group colspan="4">
                         <field name="code" />
                         <field name="content" />
+                        <field name="image" filename="image_filename" />
+                        <field name="image_filename" invisible="1" />
                         <field name="lang_ids" widget="many2many_checkboxes" />
+                        <label for="image" />
+                        <field name="image_url" widget="image_url" nolabel="1" />
                     </group>
                 </sheet>
             </form>
