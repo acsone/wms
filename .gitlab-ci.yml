@@ -114,7 +114,6 @@ test-impacted:
     - ADDONS_INIT=$(manifestoo --addons-path-python venv/bin/python --select=${ADDONS_TEST} list-depends --separator=,);
     - echo Installing ${ADDONS_INIT}
     - unbuffer venv/bin/click-odoo-initdb -c odoo-ci.cfg --new-database ${DB_NAME} --cache-prefix alc -m ${ADDONS_INIT} | acsoo checklog
-    - if [[ ! -z "$ADDONS_TEST" ]] ; then
     - unbuffer venv/bin/coverage run --parallel venv/bin/odoo -c odoo-ci.cfg -d ${DB_NAME} --stop-after-init --no-xmlrpc -i ${ADDONS_TEST} --test-enable | acsoo checklog
   only:
     - branches
