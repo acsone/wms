@@ -135,7 +135,7 @@ test-impacted:
     - IFS=',' read -ra ADDR <<< "$ALL_ADDONS"
     - SHOPFLOOR_ADDONS=''
     - for i in "${ADDR[@]}"; do
-    - if [[ $i == 'alc_shopfloor'* ]] ; then
+    - if [[ $i =~ (test_){0,1}alc_shopfloor.* ]] ; then
     - SHOPFLOOR_ADDONS=$SHOPFLOOR_ADDONS$i','
     - fi
     - done
