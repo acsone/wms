@@ -108,18 +108,14 @@ test-impacted:
     - ADDONS_TEST=$(sed 's/\(alc.\?_all\|server_environment_files\|alc_product_is_new\|alc_product_barcode_required\|alc_stock_receive_lot_missing_product_nouveaute_info\),\?//g' <<<
       "$IMPACTED_ADDONS")
     - echo $ADDONS_TEST
-    - ADDONS_TEST=$(sed 's/alc_shopfloor[^,]*\(,\|$\)//g' <<< "$ADDONS_TEST");
+    - ADDONS_TEST=$(sed 's/\(test_\)\{0,1\}alc_shopfloor[^,]*\(,\|$\)//g' <<< "$ADDONS_TEST");
     - ADDONS_TEST=$(sed 's/,$//' <<< "$ADDONS_TEST"); # remove trailing comma if any
-    - echo $ADDONS_TEST
+    - if [[ -z "$ADDONS_TEST" ]] ; then echo "No changes to test."; exit 0; fi
     - ADDONS_INIT=$(manifestoo --addons-path-python venv/bin/python --select=${ADDONS_TEST} list-depends --separator=,);
     - echo Installing ${ADDONS_INIT}
     - unbuffer venv/bin/click-odoo-initdb -c odoo-ci.cfg --new-database ${DB_NAME} --cache-prefix alc -m ${ADDONS_INIT} | acsoo checklog
     - if [[ ! -z "$ADDONS_TEST" ]] ; then
-    - echo Testing ${ADDONS_TEST}
     - unbuffer venv/bin/coverage run --parallel venv/bin/odoo -c odoo-ci.cfg -d ${DB_NAME} --stop-after-init --no-xmlrpc -i ${ADDONS_TEST} --test-enable | acsoo checklog
-    - else
-    - echo "Nothing to test."
-    - fi
   only:
     - branches
   except:
@@ -139,7 +135,7 @@ test-impacted:
     - IFS=',' read -ra ADDR <<< "$ALL_ADDONS"
     - SHOPFLOOR_ADDONS=''
     - for i in "${ADDR[@]}"; do
-    - if [[ $i == 'alc_shopfloor'* ]] ; then
+    - if [[ $i =~ (test_){0,1}alc_shopfloor.* ]] ; then
     - SHOPFLOOR_ADDONS=$SHOPFLOOR_ADDONS$i','
     - fi
     - done
