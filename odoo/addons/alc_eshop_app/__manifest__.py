@@ -64,6 +64,7 @@
         "data/res_users.xml",
         "data/auth_jwt_validator.xml",
         "data/shopinvader_backend.xml",
+        "data/ir_export_product.xml",
         "views/eshop_app_menu.xml",
     ],
     "demo": [],
