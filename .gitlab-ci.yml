@@ -108,7 +108,7 @@ test-impacted:
     - ADDONS_TEST=$(sed 's/\(alc.\?_all\|server_environment_files\|alc_product_is_new\|alc_product_barcode_required\|alc_stock_receive_lot_missing_product_nouveaute_info\),\?//g' <<<
       "$IMPACTED_ADDONS")
     - echo $ADDONS_TEST
-    - ADDONS_TEST=$(sed 's/alc_shopfloor[^,]*\(,\|$\)//g' <<< "$ADDONS_TEST");
+    - ADDONS_TEST=$(sed 's/\(test_\)\{0,1\}alc_shopfloor[^,]*\(,\|$\)//g' <<< "$ADDONS_TEST");
     - ADDONS_TEST=$(sed 's/,$//' <<< "$ADDONS_TEST"); # remove trailing comma if any
     - echo $ADDONS_TEST
     - ADDONS_INIT=$(manifestoo --addons-path-python venv/bin/python --select=${ADDONS_TEST} list-depends --separator=,);
