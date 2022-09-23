@@ -3,6 +3,25 @@
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
 
+        <record model="ir.ui.view" id="stock_internal_package_config_line_form_view">
+        <field name="name">stock.internal.package.config.line.form</field>
+        <field name="model">stock.internal.package.config.line</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="empty" />
+                            <field name="delivery_carrier_id" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
     <record model="ir.ui.view" id="stock_picking_type_form_view">
         <field
       name="name"
