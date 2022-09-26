@@ -13,9 +13,11 @@ class ProductProduct(models.Model):
     @api.multi
     def print_product_label(self, quantity=1, printer_id=False):
         self.ensure_one()
-        hw_print(
-            self,
-            "specific_print.report_lot_nolot_label",
-            qty=quantity * self.number_labels_to_print,
-            printer_id=printer_id,
-        )
+        qty = quantity * self.number_labels_to_print
+        if qty:
+            hw_print(
+                self,
+                "specific_print.report_lot_nolot_label",
+                qty=qty,
+                printer_id=printer_id,
+            )

@@ -89,14 +89,16 @@ class StockPackOperation(models.Model):
         self, quantity=1, printer_id=False, lot_id=None, quantity_done=1
     ):
         self.ensure_one()
-        hw_print(
-            self,
-            "specific_print.report_stock_product_food_label",
-            qty=quantity * self.product_id.number_labels_to_print,
-            printer_id=printer_id,
-            lot_id=lot_id,
-            qty_done=quantity_done,
-        )
+        qty = quantity * self.product_id.number_labels_to_print
+        if qty:
+            hw_print(
+                self,
+                "specific_print.report_stock_product_food_label",
+                qty=qty,
+                printer_id=printer_id,
+                lot_id=lot_id,
+                qty_done=quantity_done,
+            )
 
     def print_food_report(self):
         self.ensure_one()
