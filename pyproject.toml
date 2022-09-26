@@ -21,6 +21,7 @@ dev = [
 ]
 
 [project.scripts]
+migrate-module = 'scripts.migrate_module:main'
 
 # Enable the hatch-odoo metadata hook to generate dependencies from addons manifests.
 [tool.hatch.metadata.hooks.odoo-addons-dependencies]
