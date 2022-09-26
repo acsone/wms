@@ -13,10 +13,25 @@ class StockPicking(models.Model):
         compute="_compute_empty_internal_package_on_transfer",
     )
 
+    def _get_carrier(self):
+        self.ensure_one()
+        if self.picking_type_id.code != "outgoing":
+            domain = [
+                ("group_id", "=", self.group_id.id),
+                ("picking_type_id.code", "=", "outgoing"),
+                ("state", "not in", ["cancel", "done"]),
+            ]
+            # Very dubious: what should we do if we got more than 1?
+            out = self.search(domain, limit=1)
+            carrier = out.carrier_id
+        else:
+            carrier = self.carrier_id
+        return carrier
+
     @api.depends("picking_type_id.empty_internal_package_on_transfer", "carrier_id")
     def _compute_empty_internal_package_on_transfer(self):
         for record in self:
-            carrier_id = record.carrier_id.id
+            carrier_id = record._get_carrier().id
             picking_type_id = record.picking_type_id.id
             value = self.env["stock.picking.type"]._empty_internal_package_on_transfer(
                 picking_type_id, carrier_id,
