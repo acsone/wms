@@ -160,6 +160,7 @@
         "alc_sale_statistics",
         "alc_sale_stock_restocking_fee_invoicing_additional_product",
         "alc_shopfloor_app",
+        "alc_standby_delivery",
         "alc_stock_available_immediately",
         "alc_stock_available_immediately_lot_loss",
         "alc_stock_grn_time_delay",
