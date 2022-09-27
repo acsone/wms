@@ -40,13 +40,14 @@ class StockPackOperation(models.Model):
         Using a wrapper to prevent the context from being passed as argument,
         using default arguments instead.
         """
-        self.print_product_label()
+        for pack_operation in self:
+            pack_operation.print_product_label()
 
     @api.multi
     def print_product_label(self, printer_id=False, quantity=1):
-        for op in self:
-            if not op.picking_id.partner_id:
-                raise Warning(_("No destination partner defined"))
+        self.ensure_one()
+        if not self.picking_id.partner_id:
+            raise Warning(_("No destination partner defined"))
         qty = self.product_id.number_labels_to_print * quantity
         if qty:
             report = "specific_print.report_stock_product_label"
