@@ -203,7 +203,7 @@ msgid "Lots"
 msgstr ""
 
 #. module: specific_print
-#: code:addons/specific_print/models/stock_pack_operation.py:49
+#: code:addons/specific_print/models/stock_pack_operation.py:50
 #: code:addons/specific_print/models/stock_picking.py:40
 #: code:addons/specific_print/models/stock_picking.py:67
 #, python-format
