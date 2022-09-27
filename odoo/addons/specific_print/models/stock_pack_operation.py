@@ -47,12 +47,10 @@ class StockPackOperation(models.Model):
         for op in self:
             if not op.picking_id.partner_id:
                 raise Warning(_("No destination partner defined"))
-        hw_print(
-            self,
-            "specific_print.report_stock_product_label",
-            printer_id=printer_id,
-            qty=quantity,
-        )
+        qty = self.product_id.number_labels_to_print * quantity
+        if qty:
+            report = "specific_print.report_stock_product_label"
+            hw_print(self, report, printer_id=printer_id, qty=qty)
 
     def button_print_product_product_label(self):
         """
