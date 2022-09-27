@@ -13,17 +13,21 @@ class StockPicking(models.Model):
         compute="_compute_empty_internal_package_on_transfer",
     )
 
+    def _get_out_picking(self):
+        # this method is coupled with sale.order _compute_picking_ids, so any override
+        # there should have an equivalent override of this method
+        self.ensure_one()
+        domain = [
+            ("group_id", "=", self.group_id.id),
+            ("picking_type_id.code", "=", "outgoing"),
+            ("state", "not in", ["cancel", "done"]),
+        ]
+        return self.search(domain, limit=1)  # what should we do if we got more than 1?
+
     def _get_carrier(self):
         self.ensure_one()
         if self.picking_type_id.code != "outgoing":
-            domain = [
-                ("group_id", "=", self.group_id.id),
-                ("picking_type_id.code", "=", "outgoing"),
-                ("state", "not in", ["cancel", "done"]),
-            ]
-            # Very dubious: what should we do if we got more than 1?
-            out = self.search(domain, limit=1)
-            carrier = out.carrier_id
+            carrier = self._get_out_picking().carrier_id
         else:
             carrier = self.carrier_id
         return carrier
