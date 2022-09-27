@@ -119,7 +119,7 @@
         "alc_geo_delivery_rounds",
         "alc_gls_putinpack",
         "alc_invoices_audit",
-        "alc_internal_stock_quant_package",
+        "alc_internal_package_groupbypartner",
         "alc_label_printing_gls",
         "alc_label_printing_reception",
         "alc_logiweb",
