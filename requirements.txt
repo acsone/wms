@@ -30,8 +30,8 @@ lxml==4.6.5
 MarkupSafe==1.1.0
 mock==4.0.3
 num2words==0.5.6
-odoo @ git+https://github.com/acsone/odoo.git@2367020e1d8ff43ada4e23cd2bb4cc4b3c8dbb11
-odoo-addons-enterprise @ git+ssh://git@github.com/acsone/enterprise.git@4aee1d9314f83c41aadfa542e125a4eaf02af16c
+odoo @ git+https://github.com/acsone/odoo.git@d968c04ac75e98c64cb7b81d7d76631345a4ecba
+odoo-addons-enterprise @ git+ssh://git@github.com/acsone/enterprise.git@3b2a21d0b5ba084946794f73292e32fd8f894c1d
 ofxparse==0.21
 openupgradelib==3.3.4
 passlib==1.7.3
