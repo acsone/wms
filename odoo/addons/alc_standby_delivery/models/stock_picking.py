@@ -76,6 +76,8 @@ WHERE id in %s AND
     @api.model
     def _find_bypartners_geo(self, partner_ids):
         # coupled to _find_bypartners from the alc_geo_delivery_rounds module
+        if not partner_ids:
+            return []
         query = """
 SELECT res_partner.id
 FROM
@@ -116,9 +118,9 @@ WHERE id in %s AND EXISTS (
         for p in partners_mapping:
             partners |= p
         ps_dynamic = partners.filtered(lambda p: not p.not_in_dynamic_delivery_round)
-        ps_dyn_del = self._find_bypartners_geo(ps_dynamic.ids)
+        ps_dyn_del = self._find_bypartners_geo(ps_dynamic.ids) if ps_dynamic else []
         rest = partners.filtered(lambda p: p.id in ps_dyn_del)
-        ps_sta_del = self._find_bypartners(rest.ids)
+        ps_sta_del = self._find_bypartners(rest.ids) if rest else []
         pids = ps_sta_del + ps_dyn_del
         for p in self:
             p.standby_delivery = (
