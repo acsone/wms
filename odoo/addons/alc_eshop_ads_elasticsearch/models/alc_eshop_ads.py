@@ -65,10 +65,21 @@ class AlcEshopAds(models.Model):
     def action_export_to_se(self):
         self.sudo().mapped("se_index_ids.backend_id.specific_backend").export_ads(self)
 
+    def _compute_security(self):
+        self.ensure_one()
+        partner_types = ["guest", "supplier"]  # Default: everyone
+        if self.visibility == "non-shareholder":
+            partner_types = self.env["res.partner"]._get_partner_types()
+            partner_types = [p for p in partner_types if p != "shareholder"]
+        elif self.visibility == "shareholder":
+            partner_types = ["shareholder"]
+        return partner_types
+
     def _compute_json_doc(self):
         for rec in self:
             doc = dict(
                 id=rec.id,
+                allowed_partner_types=",".join(rec._compute_security()),
                 name=rec.name,
                 date_start=rec.date_start,
                 date_end=rec.date_end,
