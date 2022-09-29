@@ -35,6 +35,8 @@ class ClusterPicking(Component):
         result = super(ClusterPicking, self).scan_destination_pack(
             picking_batch_id, operation_id, barcode, quantity, lot_id
         )
+        if result.get("message", {}).get("message_type") == "error":
+            return result
         search = self._actions_for("search")
         bin_package = search.package_from_scan(barcode)
 
