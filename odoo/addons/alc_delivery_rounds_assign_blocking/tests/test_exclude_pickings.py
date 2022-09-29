@@ -109,7 +109,9 @@ class TestExcludePickings(DeliverDeliveryRoundTestCase):
         previously blocked
         """
         # assign blocked picking -> not assigned
-        blocked_pick = self._create_picking_pick(partner=self.partner2)
+        blocked_pick, blocked_ship = self._create_picking_pick_ship(
+            partner=self.partner2
+        )
         blocked_pick.move_lines.delivery_requires_other_lines = True
         # we do not take care of reservation but put the picking into
         # the rigth state to be available...
@@ -120,6 +122,7 @@ class TestExcludePickings(DeliverDeliveryRoundTestCase):
         # assign normal picking for the same partner
         # -> both pickings are assigned
         pick = self._create_picking_pick(partner=self.partner2)
+        self._add_picking_pick_to_picking_out(pick, blocked_ship)
         pick.move_lines.write({"state": "assigned"})
         self.delivery_round_1._assign_pickings(pick)
         self.assertTrue(pick.delivery_round_id)
