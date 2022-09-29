@@ -12,12 +12,16 @@
         in pack' operation occurs or when the picking is validated (except
         if configured to not do it on the picking type).
         """,
-    "version": "10.0.1.0.0",
+    "version": "10.0.2.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["stock"],
-    "data": ["views/stock_quant_package.xml", "views/stock_picking_type.xml"],
+    "depends": ["stock", "delivery"],
+    "data": [
+        "security/ir.model.access.csv",
+        "views/stock_quant_package.xml",
+        "views/stock_picking_type.xml",
+    ],
     "demo": [],
     'installable': False
 }

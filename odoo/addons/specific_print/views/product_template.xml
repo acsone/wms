@@ -6,7 +6,7 @@
     <field name="inherit_id" ref="stock.view_template_property_form" />
     <field name="arch" type="xml">
       <xpath expr="//group[@name='group_lots_and_weight']" position="inside">
-        <field name="is_do_not_print_label" />
+        <field name="number_labels_to_print" />
       </xpath>
     </field>
   </record>

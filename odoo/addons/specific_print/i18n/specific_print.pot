@@ -75,11 +75,6 @@ msgid "Cancel"
 msgstr ""
 
 #. module: specific_print
-#: model:ir.model.fields,field_description:specific_print.field_stock_picking_checksum
-msgid "Checksum"
-msgstr ""
-
-#. module: specific_print
 #: model:ir.model.fields,field_description:specific_print.field_printing_printer_code
 msgid "Code"
 msgstr ""
@@ -118,15 +113,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:specific_print.field_res_users_is_price_on_labels
 #: model:ir.model.fields,field_description:specific_print.field_shopinvader_partner_is_price_on_labels
 msgid "Display price on labels"
-msgstr ""
-
-#. module: specific_print
-#: model:ir.model.fields,field_description:specific_print.field_delivery_carrier_is_do_not_print_label
-#: model:ir.model.fields,field_description:specific_print.field_product_product_is_do_not_print_label
-#: model:ir.model.fields,field_description:specific_print.field_product_template_is_do_not_print_label
-#: model:ir.model.fields,field_description:specific_print.field_shopinvader_product_is_do_not_print_label
-#: model:ir.model.fields,field_description:specific_print.field_shopinvader_variant_is_do_not_print_label
-msgid "Do not print label"
 msgstr ""
 
 #. module: specific_print
@@ -212,7 +198,7 @@ msgid "Lots"
 msgstr ""
 
 #. module: specific_print
-#: code:addons/specific_print/models/stock_pack_operation.py:49
+#: code:addons/specific_print/models/stock_pack_operation.py:50
 #: code:addons/specific_print/models/stock_picking.py:40
 #: code:addons/specific_print/models/stock_picking.py:67
 #, python-format
@@ -223,6 +209,15 @@ msgstr ""
 #: code:addons/specific_print/utils.py:23
 #, python-format
 msgid "No printer assigned"
+msgstr ""
+
+#. module: specific_print
+#: model:ir.model.fields,field_description:specific_print.field_delivery_carrier_number_labels_to_print
+#: model:ir.model.fields,field_description:specific_print.field_product_product_number_labels_to_print
+#: model:ir.model.fields,field_description:specific_print.field_product_template_number_labels_to_print
+#: model:ir.model.fields,field_description:specific_print.field_shopinvader_product_number_labels_to_print
+#: model:ir.model.fields,field_description:specific_print.field_shopinvader_variant_number_labels_to_print
+msgid "Number of Labels to Print."
 msgstr ""
 
 #. module: specific_print

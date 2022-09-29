@@ -42,6 +42,7 @@
         "stock_production_lot_expiry",
         "stock_receive_lot",
         "stock_reception_priority",
+        "stock_refill",  # field 'kind' on stock.location
         "mrp",
     ],
     "website": "http://www.camptocamp.com",

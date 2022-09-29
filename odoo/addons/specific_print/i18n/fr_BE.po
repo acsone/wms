@@ -83,11 +83,6 @@ msgid "Cancel"
 msgstr "Annuler"
 
 #. module: specific_print
-#: model:ir.model.fields,field_description:specific_print.field_stock_picking_checksum
-msgid "Checksum"
-msgstr ""
-
-#. module: specific_print
 #: model:ir.model.fields,field_description:specific_print.field_printing_printer_code
 msgid "Code"
 msgstr "Code"
@@ -127,15 +122,6 @@ msgstr "Nom affiché"
 #: model:ir.model.fields,field_description:specific_print.field_shopinvader_partner_is_price_on_labels
 msgid "Display price on labels"
 msgstr "Afficher le prix sur les étiquettes"
-
-#. module: specific_print
-#: model:ir.model.fields,field_description:specific_print.field_delivery_carrier_is_do_not_print_label
-#: model:ir.model.fields,field_description:specific_print.field_product_product_is_do_not_print_label
-#: model:ir.model.fields,field_description:specific_print.field_product_template_is_do_not_print_label
-#: model:ir.model.fields,field_description:specific_print.field_shopinvader_product_is_do_not_print_label
-#: model:ir.model.fields,field_description:specific_print.field_shopinvader_variant_is_do_not_print_label
-msgid "Do not print label"
-msgstr "Ne pas imprimer d'étiquette"
 
 #. module: specific_print
 #: model:ir.model.fields,field_description:specific_print.field_res_partner_no_labels_products
@@ -220,7 +206,7 @@ msgid "Lots"
 msgstr "Lots"
 
 #. module: specific_print
-#: code:addons/specific_print/models/stock_pack_operation.py:49
+#: code:addons/specific_print/models/stock_pack_operation.py:50
 #: code:addons/specific_print/models/stock_picking.py:40
 #: code:addons/specific_print/models/stock_picking.py:67
 #, python-format
@@ -232,6 +218,15 @@ msgstr "Aucun destinaire défini"
 #, python-format
 msgid "No printer assigned"
 msgstr "Aucune imprimante assignée"
+
+#. module: specific_print
+#: model:ir.model.fields,field_description:specific_print.field_delivery_carrier_number_labels_to_print
+#: model:ir.model.fields,field_description:specific_print.field_product_product_number_labels_to_print
+#: model:ir.model.fields,field_description:specific_print.field_product_template_number_labels_to_print
+#: model:ir.model.fields,field_description:specific_print.field_shopinvader_product_number_labels_to_print
+#: model:ir.model.fields,field_description:specific_print.field_shopinvader_variant_number_labels_to_print
+msgid "Number of Labels to Print."
+msgstr ""
 
 #. module: specific_print
 #: selection:printing.printer,type:0
@@ -717,6 +712,9 @@ msgstr "🖶Imprimer produits médicaments"
 #: model:ir.ui.view,arch_db:specific_print.view_picking_form
 msgid "🖶Print Packs"
 msgstr "🖶Imprimer colis médicaments"
+
+#~ msgid "Do not print label"
+#~ msgstr "Ne pas imprimer d'étiquette"
 
 #~ msgid "Print food label"
 #~ msgstr "Imprimer l'étiquette"

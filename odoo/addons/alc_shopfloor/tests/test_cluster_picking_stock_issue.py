@@ -55,7 +55,7 @@ class ClusterPickingStockIssue(ClusterPickingCommonCase):
             self.assert_response(
                 response,
                 next_state="unload_all",
-                data=self._data_for_batch(self.batch, self.packing_location),
+                data=self._data_for_batch(batch, self.packing_location),
             )
         return response
 

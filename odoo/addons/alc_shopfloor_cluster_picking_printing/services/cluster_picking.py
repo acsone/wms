@@ -35,6 +35,8 @@ class ClusterPicking(Component):
         result = super(ClusterPicking, self).scan_destination_pack(
             picking_batch_id, operation_id, barcode, quantity, lot_id
         )
+        if result.get("message", {}).get("message_type") == "error":
+            return result
         search = self._actions_for("search")
         bin_package = search.package_from_scan(barcode)
 
@@ -68,8 +70,12 @@ class ClusterPicking(Component):
         )
 
     def _print_picking_food_product_labels(self, operation, quantity=1, lot_id=None):
+        # report template relies on quantity_done, but it might not be computed yet
+        # when the report is generated.
+        # bug observed by Jacques-Etienne and Lindsay who might know more.
         operation.sudo().print_food_product_label(
             printer_id=self.shopfloor_user.printing_product_label_printer_id.id,
-            quantity=quantity,
+            quantity=1,
+            quantity_done=quantity,
             lot_id=lot_id,
         )

@@ -14,6 +14,7 @@ class AlcEshopCmsSnippet(models.Model):
     name = fields.Char(translate=False)
     code = fields.Char(required=True)
     content = fields.Html(required=True, translate=True, sanitize=False)
+    image = fields.Binary(required=False)
 
     @api.model
     def _get_data_parser(self):

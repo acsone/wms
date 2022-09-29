@@ -45,10 +45,15 @@ class StockMove(models.Model):
                     [qty_by_operation[o] for o in pack_operations]
                 )
             backorder_move_id = self.split(qty_to_split)
-            backorder_move = self.browse(backorder_move_id)
-            other_pack_operations.mapped("linked_move_operation_ids").filtered(
-                lambda lk, mv=self: lk.move_id == mv
-            ).write({"move_id": backorder_move.id})
+            if backorder_move_id:
+                # We have to check if a backorder_move_id exists because
+                # in alcyon, we don't have any backorder moves for additional products.
+                # So, in case of a stock issue on an additional product, we don't split
+                # the move
+                backorder_move = self.browse(backorder_move_id)
+                other_pack_operations.mapped("linked_move_operation_ids").filtered(
+                    lambda lk, mv=self: lk.move_id == mv
+                ).write({"move_id": backorder_move.id})
             # we must also split quants and reassing to the backorder move
             rounding = self.product_id.uom_id.rounding
             quants_to_reserve = self.env["stock.quant"]

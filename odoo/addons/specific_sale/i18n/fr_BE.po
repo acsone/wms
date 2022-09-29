@@ -22,7 +22,7 @@ msgid "&amp;bull;"
 msgstr "&amp;bull;"
 
 #. module: specific_sale
-#: code:addons/specific_sale/models/sale.py:214
+#: code:addons/specific_sale/models/sale.py:213
 #, python-format
 msgid "A narcotic voucher is required for the data entry."
 msgstr "Bon de stupéfiant nécessaire avant l'encodage"
@@ -256,7 +256,7 @@ msgid "Narcotic Veterinary Medicine Not Allowed"
 msgstr "Médicament stupéfiant interdit"
 
 #. module: specific_sale
-#: code:addons/specific_sale/models/sale.py:213
+#: code:addons/specific_sale/models/sale.py:212
 #, python-format
 msgid "Narcotic voucher"
 msgstr "Bon de stupéfiant"
@@ -395,20 +395,10 @@ msgid "Price"
 msgstr "Prix"
 
 #. module: specific_sale
-#: model:ir.model.fields,field_description:specific_sale.field_sale_order_line_order_pricelist_id
-msgid "Pricelist"
-msgstr "Liste de prix"
-
-#. module: specific_sale
 #: model:ir.actions.act_window,name:specific_sale.action_product_pricelist_pv2
 #: model:ir.ui.menu,name:specific_sale.menu_product_pricelist_pv2
 msgid "Pricelist Sale Price 2"
 msgstr "Liste de prix PV 2"
-
-#. module: specific_sale
-#: model:ir.model.fields,help:specific_sale.field_sale_order_line_order_pricelist_id
-msgid "Pricelist for current sales order."
-msgstr ""
 
 #. module: specific_sale
 #: model:ir.model,name:specific_sale.model_procurement_order
@@ -605,6 +595,9 @@ msgstr ""
 #: model:exception.rule,warning_text:specific_sale.warning_stupefiant_vet
 msgid "stupéfiant VET: written order, keep confirmation."
 msgstr "Commande de psychotrope par écrit, gardez la confirmation."
+
+#~ msgid "Pricelist"
+#~ msgstr "Liste de prix"
 
 #~ msgid "Last Suite Name"
 #~ msgstr "Dernier nom suite"

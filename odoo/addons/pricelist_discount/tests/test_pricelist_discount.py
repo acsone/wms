@@ -656,3 +656,32 @@ class TestPricelistDiscount(PricelistDiscountCase):
             partner_id=self.supplier, quantity=40, date="2018-05-01"
         )
         self.assertEqual(promo, promo_2_min_sale_50)
+
+    def test_multiple_min_qty(self):
+        vals_item_10 = {
+            "pricelist_id": self.discount_pricelist_id.id,
+            "applied_on": "2_product_category",
+            "categ_id": self.category.parent_id.id,
+            "compute_price": "percentage",
+            "min_quantity": 10,
+            "percent_price": 10,
+        }
+        vals_item_20 = dict(vals_item_10, min_quantity=20, percent_price=20)
+
+        self.env["product.pricelist.item"].create(vals_item_10)
+        self.env["product.pricelist.item"].create(vals_item_20)
+
+        line = self.sol_p2
+        line._compute_discount_item_id()
+        line.onchange_product_id_reset_discount()
+        self.assertEqual(5, line.discount3)
+
+        line.product_uom_qty = 10
+        line._compute_discount_item_id()
+        line.onchange_product_id_reset_discount()
+        self.assertEqual(10, line.discount3)
+
+        line.product_uom_qty = 20
+        line._compute_discount_item_id()
+        line.onchange_product_id_reset_discount()
+        self.assertEqual(20, line.discount3)
