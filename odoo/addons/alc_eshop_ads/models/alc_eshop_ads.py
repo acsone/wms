@@ -14,6 +14,16 @@ class AlcEshopAds(models.Model):
 
     name = fields.Char(required=True)
 
+    visibility = fields.Selection(
+        required=True,
+        selection=[
+            ("everyone", "Everyone"),
+            ("shareholder", "Shareholder"),
+            ("non-shareholder", "Non Shareholder"),
+        ],
+        default="everyone",
+    )
+
     file_id = fields.Many2one(
         help="If specified, the file will be downloaded by the customer on "
         "click on the ads banner into the website.",
