@@ -154,6 +154,13 @@ class ClusterPickingPutInPackPrintCase(ClusterPickingUnloadingCommonCase):
         self.bin1.is_internal = True
         self.menu.sudo().write(dict(pack_pickings=False, print_on_pack_pickings=False))
         operation = self.batch.pack_operation_ids[0]
+        # we need to put the lot on the operation for this to work
+        vals = {
+            "operation_id": operation.id,
+            "lot_id": initial_lot.id,
+            "qty_todo": operation.product_qty,
+        }
+        self.env["stock.pack.operation.lot"].create(vals)
         qty_done = operation.product_qty
         with mock.patch.object(
             operation.__class__, "print_food_product_label"
