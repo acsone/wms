@@ -176,3 +176,30 @@ class ClusterPickingPutInPackPrintCase(ClusterPickingUnloadingCommonCase):
                 },
             )
             mocked_print_food_product_label.assert_called_once()
+
+    def test_errors_are_not_overwritten(self):
+        """Here we give a lot that is not on the operation; this initial error should
+           bubble up, and not something else, like 'cannot print document'"""
+        self.product_a.tracking = "lot"
+        initial_lot = self._create_lot(self.product_a)
+        self.bin1.is_internal = True
+        self.menu.sudo().write(dict(pack_pickings=False, print_on_pack_pickings=False))
+        operation = self.batch.pack_operation_ids[0]
+        qty_done = operation.product_qty
+        with mock.patch.object(
+            operation.__class__, "print_food_product_label"
+        ) as mocked_print_food_product_label:
+            result = self.service.dispatch(
+                "scan_destination_pack",
+                params={
+                    "picking_batch_id": self.batch.id,
+                    "operation_id": operation.id,
+                    "barcode": self.bin1.name,
+                    "quantity": qty_done,
+                    "lot_id": initial_lot.id,
+                },
+            )
+            message = result["message"]
+            self.assertEqual(message["message_type"], "error")
+            self.assertTrue("not found on packing operation" in message["body"])
+            mocked_print_food_product_label.assert_not_called()
