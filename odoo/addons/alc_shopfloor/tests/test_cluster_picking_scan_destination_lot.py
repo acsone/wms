@@ -103,7 +103,7 @@ class ClusterPickingScanDestinationLotPackCase(ClusterPickingCommonCase):
             response,
             next_state="scan_destination",
             data=self._operation_data(operation),
-            message=self.service.msg_store.record_not_found(),
+            message=self.service.msg_store.lot_not_found_on_operation(-1, operation.id),
         )
 
     def test_scan_destination_pack_lot_quantity_more(self):

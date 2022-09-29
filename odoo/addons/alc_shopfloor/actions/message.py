@@ -433,6 +433,16 @@ class MessageAction(Component):
             "body": _(u"Lot {} replaced by lot {}.").format(old_lot.name, new_lot.name),
         }
 
+    def lot_not_found_on_operation(self, lot_id, operation_id):
+        # we don't try to look up the lot name in case lot does not exist
+        # this is less useful for a user but should be helpful enough to investigate
+        # not sure this should pop up in real situations anyway
+        msg = _(u"Lot of id {} not found on packing operation of id {}.")
+        return {
+            "message_type": "error",
+            "body": msg.format(lot_id, operation_id),
+        }
+
     def package_replaced_by_package(self, old_package, new_package):
         return {
             "message_type": "success",
