@@ -12,12 +12,14 @@ readme = "README.rst"
 dynamic = ["dependencies"]
 
 [project.optional-dependencies]
-tests = [
-  "pytest-cov",
-  "pytest-odoo",
+test = [
+  "coverage",
+  "pygments",
 ]
 dev = [
   "ipython",
+  "pytest-cov",
+  "pytest-odoo",
 ]
 
 [project.scripts]
@@ -36,6 +38,7 @@ dependencies = [
   "odoo-addons-enterprise",
   # optional Odoo dependencies
   "num2words",
+  "pdfminer",
 ]
 addons_dirs = ["odoo/addons"]
 

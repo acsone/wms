@@ -1,5 +1,13 @@
-# These come from the requires section of the build-system table in pyproject.toml.
-# Ideally, this file should be maintained automatically by pip-deepfreeze.
-hatchling
-hatch-odoo
-setuptools-odoo>=3.1.4
+editables==0.3
+hatch-odoo==0.1
+hatchling==1.10.0
+manifestoo_core==0.10.1
+packaging==21.3
+pathspec==0.10.1
+pluggy==1.0.0
+pyparsing==3.0.9
+setuptools==59.6.0
+setuptools-odoo==3.1.5
+setuptools-scm==7.0.5
+tomli==2.0.1
+typing_extensions==4.3.0
