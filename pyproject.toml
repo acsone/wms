@@ -15,6 +15,7 @@ dynamic = ["dependencies"]
 test = [
   "coverage",
   "pygments",
+  "freezegun",
 ]
 dev = [
   "ipython",

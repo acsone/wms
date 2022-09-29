@@ -400,7 +400,7 @@ default_language_version:
   node: "16.17.0"
 repos:
   - repo: https://github.com/acsone/maintainer-tools
-    rev: a689ba80ca1e4d5a615ce946fe2e222fb7816939
+    rev: 12183a1c51435fa0853583b8119a7ca8a4347f45
     hooks:
       # update the NOT INSTALLABLE ADDONS section above
       - id: oca-update-pre-commit-excluded-addons
