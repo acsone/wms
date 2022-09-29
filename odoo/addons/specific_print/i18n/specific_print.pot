@@ -75,11 +75,6 @@ msgid "Cancel"
 msgstr ""
 
 #. module: specific_print
-#: model:ir.model.fields,field_description:specific_print.field_stock_picking_checksum
-msgid "Checksum"
-msgstr ""
-
-#. module: specific_print
 #: model:ir.model.fields,field_description:specific_print.field_printing_printer_code
 msgid "Code"
 msgstr ""
