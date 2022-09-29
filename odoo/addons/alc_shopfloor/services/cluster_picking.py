@@ -663,9 +663,8 @@ class ClusterPicking(Component):
             )
 
         if lot_id and lot_id not in operation.pack_lot_ids.mapped("lot_id").ids:
-            return self._response_for_scan_destination(
-                operation, message=self.msg_store.record_not_found(),
-            )
+            message = self.msg_store.lot_not_found_on_operation(lot_id, operation.id)
+            return self._response_for_scan_destination(operation, message=message)
 
         if operation.pack_lot_ids and not lot_id:
             return self._response_for_scan_destination(
