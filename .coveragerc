@@ -15,8 +15,6 @@ parallel = True
 omit =
     */scenario/*
     */scenarios/*
-    */test/*
-    */tests/*
     */lib/*
     *_example/*
     *__init__.py
