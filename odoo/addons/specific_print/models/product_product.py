@@ -13,7 +13,7 @@ class ProductProduct(models.Model):
     @api.multi
     def print_product_label(self, quantity=1, printer_id=False):
         self.ensure_one()
-        qty = quantity * self.number_labels_to_print
+        qty = quantity  # not affected by number_labels_to_print
         if qty:
             hw_print(
                 self,

@@ -13,7 +13,7 @@ class StockProductionLot(models.Model):
     @api.multi
     def print_lot_label(self, quantity=1, printer_id=False):
         self.ensure_one()
-        qty = self.product_id.number_labels_to_print * quantity
+        qty = quantity  # not affected by number_labels_to_print
         if qty:
             report = "specific_print.report_lot_label"
             hw_print(self, report, qty=qty, printer_id=printer_id)
