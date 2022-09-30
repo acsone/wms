@@ -45,6 +45,7 @@ class StockPackOperation(models.Model):
 
     @api.multi
     def print_product_label(self, printer_id=False, quantity=1):
+        # Product/Customer label
         self.ensure_one()
         if not self.picking_id.partner_id:
             raise Warning(_("No destination partner defined"))
@@ -87,6 +88,7 @@ class StockPackOperation(models.Model):
     def print_food_product_label(
         self, quantity=1, printer_id=False, lot_id=None, quantity_done=1
     ):
+        # Product/Customer label
         self.ensure_one()
         qty = quantity * self.product_id.number_labels_to_print
         if qty:

@@ -69,7 +69,7 @@ class StockPicking(models.Model):
             self,
             "specific_print.report_stock_pick_packs_label",
             printer_id=printer_id,
-            qty=quantity,
+            qty=quantity,  # not affected by number_labels_to_print
             packages_only=packages,
         )
 
