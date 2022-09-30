@@ -20,6 +20,9 @@
                         <h1><field name="name" placeholder="name" /></h1>
                     </div>
                     <group>
+                        <group id="access">
+                            <field name="visibility" placeholder="name" />
+                        </group>
                         <group>
                             <field name="image" filename="image_filename" />
                             <field name="image_filename" invisible="1" />
