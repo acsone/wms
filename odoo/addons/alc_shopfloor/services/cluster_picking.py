@@ -480,7 +480,7 @@ class ClusterPicking(Component):
         ):
             return self._scan_line_by_product(picking, operation, product)
 
-        lot = search.lot_from_scan(barcode)
+        lot = search.lot_from_scan(barcode, product=operation.product_id)
 
         if lot and (
             (lot in operation.mapped("pack_lot_ids.lot_id"))
@@ -972,7 +972,7 @@ class ClusterPicking(Component):
         response_ok_func = self._response_for_scan_destination
         response_error_func = self._response_for_change_pack_lot
         change_package_lot = self._actions_for("change.package.lot")
-        lot = search.lot_from_scan(barcode)
+        lot = search.lot_from_scan(barcode, product=operation.product_id)
         if lot and lot_id:
             old_lot = self.env["stock.production.lot"].browse(lot_id)
             check_lot = change_package_lot.check_new_lot(

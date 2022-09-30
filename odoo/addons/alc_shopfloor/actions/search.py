@@ -53,7 +53,16 @@ class SearchAction(Component):
             product = packaging.product_tmpl_id.product_variant_id
         return product
 
-    def lot_from_scan(self, barcode, operations=None):
+    def lot_from_scan(self, barcode, operations=None, product=None):
+        """ Return the first lot found for the given barcode.
+        If operations is passed, we only return lot if the lot is linked to the
+        operations. This parameter is used when we want to be sure that
+        the user scanned the expected lot for the given operations.
+        If product is passed, we search for lot for the specified product. This
+        parameter is used when we want a lot for a given product without constrain
+        on the operations. (It avoid retrieving lots with the same name but for
+        others products)
+        """
         model = self.env["stock.production.lot"]
         if not barcode:
             return model.browse()
@@ -70,6 +79,8 @@ class SearchAction(Component):
                 "lot_ids"
             )
             domain.append(("id", "in", lots_ids.ids))
+        if product:
+            domain.append(("product_id", "=", product.id))
         return model.search(domain, limit=1)
 
     def generic_packaging_from_scan(self, barcode):
