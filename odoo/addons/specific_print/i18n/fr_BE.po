@@ -206,7 +206,7 @@ msgid "Lots"
 msgstr "Lots"
 
 #. module: specific_print
-#: code:addons/specific_print/models/stock_pack_operation.py:50
+#: code:addons/specific_print/models/stock_pack_operation.py:51
 #: code:addons/specific_print/models/stock_picking.py:40
 #: code:addons/specific_print/models/stock_picking.py:67
 #, python-format
@@ -329,6 +329,17 @@ msgstr "Rapport"
 #, python-format
 msgid "The printer code must be unique by type"
 msgstr "Le code de l'imprimante doit être unique par type d'imprimante"
+
+#. module: specific_print
+#: model:ir.model.fields,help:specific_print.field_delivery_carrier_number_labels_to_print
+#: model:ir.model.fields,help:specific_print.field_product_product_number_labels_to_print
+#: model:ir.model.fields,help:specific_print.field_product_template_number_labels_to_print
+#: model:ir.model.fields,help:specific_print.field_shopinvader_product_number_labels_to_print
+#: model:ir.model.fields,help:specific_print.field_shopinvader_variant_number_labels_to_print
+msgid ""
+"This field determines how many Product/Customer labels to print, and only "
+"these labels. Set to 0 to skip printing any."
+msgstr ""
 
 #. module: specific_print
 #: selection:printing.printer,type:0
