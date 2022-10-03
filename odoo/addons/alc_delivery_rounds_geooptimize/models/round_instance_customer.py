@@ -10,3 +10,7 @@ class RoundInstanceCustomer(models.Model):
     _inherit = "round.instance.customer"
 
     is_rank_computed = fields.Boolean(readonly=True)
+
+    delivery_resource_id = fields.Many2one(
+        comodel_name="alc.delivery.resource", string="Image", ondelete="set null",
+    )
