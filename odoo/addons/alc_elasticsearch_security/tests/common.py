@@ -9,5 +9,7 @@ class TestESRoles(SavepointCase):
     @classmethod
     def setUpClass(cls):
         super(TestESRoles, cls).setUpClass()
+        ctx = dict(cls.env.context, tracking_disable=True)
+        cls.env = cls.env(context=ctx)
         vals_pricelist = {"name": "Bons prixs"}
         cls.pricelist = cls.env["product.pricelist"].create(vals_pricelist)
