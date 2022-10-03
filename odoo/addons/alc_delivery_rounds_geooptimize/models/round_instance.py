@@ -526,7 +526,7 @@ class RoundInstance(models.Model):
         self.ensure_one()
         DeliveryResource = self.env["alc.delivery.resource"]
         if self.geo_optimization_state != "success" or not self.geo_optimization_result:
-            self.instance_customer_ids._propagate_rank()
+            self.instance_customer_ids._propagate_data_to_picks()
             self.instance_customer_ids.write({"is_rank_computed": False})
             return
         expected_partner_and_resource = self._get_planned_partner_ids(
