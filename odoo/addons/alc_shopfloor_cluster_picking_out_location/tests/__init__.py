@@ -1,0 +1,1 @@
+from . import test_out_locations_cluster_picking
