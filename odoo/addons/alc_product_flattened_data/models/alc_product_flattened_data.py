@@ -313,6 +313,25 @@ CREATE UNIQUE INDEX pk_%(table)s ON %(table)s (id);
             )
         return self._get_iterator(domain_product, partner, limit, offset)
 
+    @api.model
+    def _product_domain_to_model_domain(self, domain):
+        # we could also convert id to product_id
+        new_domain = []
+        suffix = "en"
+        lang = self.env.lang or ""
+        for prefix in ("fr", "nl"):
+            if prefix in lang:
+                suffix = prefix
+        for elem in domain:
+            if isinstance(elem, (unicode, str)):
+                new_domain.append(elem)
+            else:  # we have a triple
+                x, y, z = elem
+                if x in ["url_key", "name", "categ"]:
+                    x = "_".join((x, suffix))
+                new_domain.append((x, y, z))
+        return new_domain
+
 
 class _Container(object):
     """
@@ -357,3 +376,30 @@ class _ProductDataContainer(_Container):
     @property
     def vat(self):
         return self.tax_amount or 21
+
+    @property
+    def name(self):
+        lang = self._env.lang or ""
+        if "fr" in lang:
+            return self.name_fr
+        if "nl" in lang:
+            return self.name_nl
+        return self.name_en
+
+    @property
+    def url_key(self):
+        lang = self._env.lang or ""
+        if "fr" in lang:
+            return self.url_key_fr
+        if "nl" in lang:
+            return self.url_key_nl
+        return self.url_key_en
+
+    @property
+    def categ(self):
+        lang = self._env.lang or ""
+        if "fr" in lang:
+            return self.categ_fr
+        if "nl" in lang:
+            return self.categ_nl
+        return self.categ_en
