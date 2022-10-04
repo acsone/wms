@@ -302,9 +302,11 @@ CREATE UNIQUE INDEX pk_%(table)s ON %(table)s (id);
 
     @api.model
     def _get_partner_products_iterator(
-        self, partner, product_ids=None, limit=None, offset=None
+        self, partner, product_ids=None, domain_extend=None, limit=None, offset=None
     ):
         domain_product = partner._get_product_domain()
+        if domain_extend:
+            domain_product = expression.AND([domain_product, domain_extend])
         if product_ids:
             domain_product = expression.AND(
                 [domain_product, [("id", "in", product_ids)]]
