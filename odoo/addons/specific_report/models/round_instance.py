@@ -47,10 +47,15 @@ class RoundInstance(models.Model):
         return pattern % (hour, min_)
 
     @api.multi
-    def get_merged_shippings(self):
+    def get_merged_shippings(self, delivery_resource=None):
         self.ensure_one()
 
         shippings = self._get_sorted_shipping_ids()
+        if delivery_resource:
+            shippings = shippings.filtered(
+                lambda p, delivery_resource=delivery_resource: p.delivery_resource_id
+                == delivery_resource
+            )
 
         shipping_values = OrderedDict()
         for shipping in shippings:
