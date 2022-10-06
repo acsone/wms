@@ -86,7 +86,7 @@ class SaleOrderLine(models.Model):
     discount_item_id = fields.Many2one(
         comodel_name="product.pricelist.item",
         compute="_compute_discount_item_id",
-        readonly=True,
+        store=True,
     )
 
     @api.multi
@@ -120,6 +120,7 @@ class SaleOrderLine(models.Model):
                 product = line.product_id
                 discount_item = pricelists._get_discount_item_id(product, date, qty)
             line.discount_item_id = discount_item
+        self.onchange_product_id_reset_discount()
 
     def compute_alcyon_discount(self):
         for line in self:
