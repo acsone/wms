@@ -887,6 +887,7 @@ msgid "Code"
 msgstr ""
 
 #. module: alc_eshop_cms
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_content_image_mixin_content
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news_content
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_content
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_snippet_content
@@ -927,6 +928,7 @@ msgid "Date start"
 msgstr ""
 
 #. module: alc_eshop_cms
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_content_image_mixin_display_name
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_content_lang_mixin_display_name
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_content_url_mixin_display_name
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news_display_name
@@ -994,6 +996,7 @@ msgid "Header: 1176x384 (px)"
 msgstr ""
 
 #. module: alc_eshop_cms
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_content_image_mixin_id
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_content_lang_mixin_id
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_content_url_mixin_id
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news_id
@@ -1006,7 +1009,6 @@ msgstr ""
 
 #. module: alc_eshop_cms
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news_image
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_snippet_image
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_ir_attachment_storage_image_id
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_shipping_label_storage_image_id
 msgid "Image"
@@ -1046,6 +1048,7 @@ msgid "Lang"
 msgstr ""
 
 #. module: alc_eshop_cms
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_content_image_mixin___last_update
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_content_lang_mixin___last_update
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_content_url_mixin___last_update
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news___last_update
@@ -1246,6 +1249,11 @@ msgstr ""
 #. module: alc_eshop_cms
 #: model:alc.eshop.cms.page,name:alc_eshop_cms.alc_eshop_cms_page_your-team-alcyon
 msgid "Your team Alcyon"
+msgstr ""
+
+#. module: alc_eshop_cms
+#: model:ir.model,name:alc_eshop_cms.model_alc_content_image_mixin
+msgid "alc.content.image.mixin"
 msgstr ""
 
 #. module: alc_eshop_cms
