@@ -75,15 +75,6 @@ class TestCmsService(SavepointComponentCase, AlcEshopNewsMixin):
             res = service.dispatch("content_get", lang, content_type, url)
         self.assertDictEqual(json_fr, res)
 
-    def test_get_snippet_contentimg(self):
-        snippet = self.eshop_snippet_product_on_order_cancel_intro
-        snippet.image = self._get_file("orange.png")
-        json_fr = snippet._to_json(self.lang_fr)[0]
-        lang, content_type, url = json_fr["url"].split("/")
-        with self.cms_service() as service:
-            res = service.dispatch("content_get", lang, content_type, url)
-        self.assertEqual(res["data"]["image"], snippet.image)
-
     def test_get_page_content(self):
         page = self.env.ref("alc_eshop_cms.alc_eshop_cms_page_about-us")
         page.lang_ids = self.lang_fr
