@@ -42,7 +42,8 @@ class TestOrders(SavepointCase, ComponentMixin):
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
         vals_partner = {"name": "P", "ref": "1214"}
         cls.partner = cls.env["res.partner"].create(vals_partner)
-        cls.product = cls.env["product.product"].create({"name": "Product"})
+        vals_product = {"name": "Product", "default_code": "REF"}
+        cls.product = cls.env["product.product"].create(vals_product)
 
         cls.so_model = cls.env["sale.order"]
         vals_sale_order = cls._get_vals_sale_order()
