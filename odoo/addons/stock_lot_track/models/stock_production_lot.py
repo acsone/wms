@@ -21,12 +21,12 @@ from odoo import fields, models
 
 
 class StockProductionLot(models.Model):
-    _inherit = "stock.production.lot"
+    _inherit = "stock.lot"
 
     product_id = fields.Many2one(tracking=True)
     name = fields.Char(tracking=True)
 
     use_date = fields.Datetime(tracking=True)
     removal_date = fields.Datetime(tracking=True)
-    life_date = fields.Datetime(tracking=True)
+    expiration_date = fields.Datetime(tracking=True)
     alert_date = fields.Datetime(tracking=True)
