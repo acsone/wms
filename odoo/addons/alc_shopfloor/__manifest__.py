@@ -32,6 +32,7 @@
         "stock_picking_batch_creation",
         "stock_picking_show_backorder",
         "stock_helper",
+        "storage_image_product",
         # alcyon
         "alc_stock_move_operation",
         "stock_operation_recompute",

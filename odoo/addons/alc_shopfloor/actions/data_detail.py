@@ -117,7 +117,6 @@ class DataDetailAction(Component):
     @property
     def _product_detail_parser(self):
         return self._product_parser + [
-            ("image_small:image", self._product_image_url),
             (
                 "product_tmpl_id:manufacturer",
                 lambda rec, fname: self._jsonify(
@@ -125,11 +124,6 @@ class DataDetailAction(Component):
                 ),
             ),
         ]
-
-    def _product_image_url(self, record, field_name):
-        if not record[field_name]:
-            return None
-        return "/web/image/product.product/{}/{}".format(record.id, field_name)
 
     @property
     def _product_supplierinfo_parser(self):
