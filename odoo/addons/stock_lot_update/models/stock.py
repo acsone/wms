@@ -18,7 +18,7 @@
 #
 ##############################################################################
 
-from odoo import api, models
+from odoo import models
 
 
 class StockProductionLot(models.Model):
@@ -56,11 +56,9 @@ class StockProductionLot(models.Model):
         for table, column in cr.fetchall():
             qs = []
             if table in product_fields:
-                qs.append(u"{}={}".format(product_fields[table], product.id))
+                qs.append(f"{product_fields[table]}={product.id}")
             if table in template_fields:
-                qs.append(
-                    u"{}={}".format(template_fields[table], product.product_tmpl_id.id)
-                )
+                qs.append(f"{template_fields[table]}={product.product_tmpl_id.id}")
             if not qs:
                 continue
 
@@ -94,4 +92,4 @@ class StockProductionLot(models.Model):
                 new_prod = self.env["product.product"].browse(vals["product_id"])
                 self._update_relations(new_prod)
                 break
-        return super(StockProductionLot, self).write(vals)
+        return super().write(vals)

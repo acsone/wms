@@ -22,7 +22,7 @@
     "name": "Stock Lot Update",
     "version": "16.0.1.0.0",
     "category": "Stock Management",
-    "author": "BCIM",
+    "author": "BCIM, ACSONE SA/NV",
     "depends": ["stock"],
     "data": ["views/stock.xml", "views/stock_change_product_qty.xml"],
     "installable": True,

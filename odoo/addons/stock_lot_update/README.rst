@@ -24,7 +24,7 @@ Usage
 =====
 
 Create an incoming shipment and add a line with product1 and lot. Make the
-reception and optionaly move or use the product. Go on the lot and change the
+reception and optionally move or use the product. Go on the lot and change the
 reference to product2.
 
 If the product need a lot this module will force
@@ -48,7 +48,6 @@ the lot.
 Bug Tracker
 ===========
 
-Bugs are tracked on `GitHub Issues <https://github.com/OCA/<project>/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us smashing it by providing a detailed and
 welcomed feedback.
