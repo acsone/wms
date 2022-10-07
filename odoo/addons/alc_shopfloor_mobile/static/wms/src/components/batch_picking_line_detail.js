@@ -40,6 +40,7 @@ export var batch_picking_line = Vue.component("batch-picking-line-detail", {
     :options="{main: true, key_title: 'location_src.name', title_action_field: {action_val_path: 'location_src.barcode'}}"
     :card_color="utils.colors.color_for(articleScanned ? 'screen_step_done': 'screen_step_todo')"
     />
+  <img :src="line.product.image" v-if="line.product.image" class="product_image"/>
   <item-detail-card
     :key="'batch-picking-line-detail-2'"
     :record="line"

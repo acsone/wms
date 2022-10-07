@@ -70,3 +70,8 @@ I tested only w/ checkout/select_package for now
   top: 5px;
   right: 5px;
 }
+
+.product_image {
+  display: block;
+  margin: auto;
+}
