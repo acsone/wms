@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    Author: Sylvain Van Hoof <svh@sylvainvh.be>
@@ -21,7 +20,7 @@
 
 {
     "name": "Stock lot track",
-    "version": "10.0.1.0.0",
+    "version": "16.0.1.0.0",
     "category": "Stock Management",
     "author": "Sylvain Van Hoof",
     "description": """
@@ -29,7 +28,7 @@
     """,
     "depends": ["product_expiry"],
     "data": [],
-    "installable": False,
+    "installable": True,
     "license": "AGPL-3",
     "application": False,
 }

@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    Author: Sylvain Van Hoof <svh@sylvainvh.be>
@@ -24,10 +23,10 @@ from odoo import fields, models
 class StockProductionLot(models.Model):
     _inherit = "stock.production.lot"
 
-    product_id = fields.Many2one(track_visibility="onchange")
-    name = fields.Char(track_visibility="onchange")
+    product_id = fields.Many2one(tracking=True)
+    name = fields.Char(tracking=True)
 
-    use_date = fields.Datetime(track_visibility="onchange")
-    removal_date = fields.Datetime(track_visibility="onchange")
-    life_date = fields.Datetime(track_visibility="onchange")
-    alert_date = fields.Datetime(track_visibility="onchange")
+    use_date = fields.Datetime(tracking=True)
+    removal_date = fields.Datetime(tracking=True)
+    life_date = fields.Datetime(tracking=True)
+    alert_date = fields.Datetime(tracking=True)
