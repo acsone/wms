@@ -11,7 +11,9 @@
     "website": "https://acsone.eu/",
     "depends": [
         "authenticated_partner_mixin",
-        "sale_stock",
+        "base_jsonify",
+        "stock_delivery_note",
+        "specific_report",
         "account_tax_one_vat",
         "stock_groupbypartner",  # customer_id
     ],
