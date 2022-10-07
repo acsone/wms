@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    Author: Jacques-Etienne Baudoux <je@bcim.be>
@@ -87,7 +86,6 @@ class StockProductionLot(models.Model):
 
             cr.execute(query, params)  # pylint: disable=sql-injection
 
-    @api.multi
     def write(self, vals):
         if not self._context.get("product_noupdate") and vals.get("product_id"):
             for rec in self:

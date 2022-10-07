@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    Author: Jacques-Etienne Baudoux <je@bcim.be>
@@ -21,12 +20,12 @@
 
 {
     "name": "Stock Lot Update",
-    "version": "10.0.1.0.0",
+    "version": "16.0.1.0.0",
     "category": "Stock Management",
     "author": "BCIM",
     "depends": ["stock"],
     "data": ["views/stock.xml", "views/stock_change_product_qty.xml"],
-    "installable": False,
+    "installable": True,
     "license": "AGPL-3",
     "application": False,
 }
