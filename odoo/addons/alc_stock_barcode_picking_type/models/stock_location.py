@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2021 ACSONE SA/NV
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
@@ -18,7 +17,8 @@ class StockLocation(models.Model):
 
     def get_barcode_picking_type_id(self):
         """
-        Return the type of picking to create for the given location when
+        Return the type of picking to create for the given location when.
+
         scanned by the barcode app
         """
         self.ensure_one()
