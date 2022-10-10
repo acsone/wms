@@ -24,8 +24,14 @@
     "category": "Stock Management",
     "author": "BCIM, ACSONE SA/NV",
     "depends": ["stock"],
-    "data": ["views/stock.xml", "views/stock_change_product_qty.xml"],
+    "data": [
+        "security/stock_lot_update_groups.xml",
+        "security/stock_lot_update_access.xml",
+        "views/stock_lot.xml",
+        "wizard/stock_lot_update.xml",
+    ],
     "installable": True,
     "license": "AGPL-3",
     "application": False,
+    "pre_init_hook": "pre_init_hook",
 }
