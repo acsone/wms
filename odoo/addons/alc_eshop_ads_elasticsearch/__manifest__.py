@@ -12,6 +12,7 @@
     "website": "https://acsone.eu/",
     "depends": [
         "alc_eshop_ads",
+        "alc_partner_type",  # visibility
         "connector_elasticsearch",
         "elasticsearch_search",
         "queue_job_cron",
