@@ -59,6 +59,8 @@ class TestCmsService(SavepointComponentCase, AlcEshopNewsMixin):
                 "content_search", params={"type": "snippet", "lang": "fr"}
             )
         self.assertEquals(res["size"], 1)
+        expected = "You can ask to modify the quantities in back order using the form"
+        self.assertTrue(expected in res["data"][0]["data"]["content"])
 
     def test_get_news_content(self):
         lang, content_type, url = self.news_all_langs_json_fr["url"].split("/")

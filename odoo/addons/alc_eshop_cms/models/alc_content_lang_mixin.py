@@ -35,10 +35,6 @@ class AlcContentLangMixin(models.AbstractModel):
             ("lang", "_get_content_context_lang"),
         ]
 
-    @api.model
-    def _get_data_parser(self):
-        return []
-
     def _get_content_context_lang(self, field_name=None):
         return self.env.lang.split("_")[0]
 
