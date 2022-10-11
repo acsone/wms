@@ -16,6 +16,7 @@ except ImportError:
 class AlcContentUrlMixin(models.AbstractModel):
 
     _name = "alc.content.url.mixin"
+    _inherit = "alc.cms.mixin"
 
     name = fields.Char(required=True, translate=True)
     url = fields.Char(compute="_compute_url")

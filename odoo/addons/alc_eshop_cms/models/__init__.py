@@ -1,3 +1,4 @@
+from . import alc_cms_mixin
 from . import alc_content_image_mixin
 from . import alc_content_url_mixin
 from . import alc_content_lang_mixin

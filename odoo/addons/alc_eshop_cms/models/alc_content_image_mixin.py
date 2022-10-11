@@ -29,14 +29,15 @@ URL_MAPPER = IMAGE_URL_MAP.bind("localhost")
 class AlcContentUrlMixin(models.AbstractModel):
 
     _name = "alc.content.image.mixin"
+    _inherit = "alc.cms.mixin"
 
     content = fields.Html(required=True, translate=True, sanitize=False)
 
     @api.model
     def _get_data_parser(self):
-        return [
-            ("content", "_get_content"),
-        ]
+        parser = super(AlcContentUrlMixin, self)._get_data_parser()
+        parser.append(("content", "_get_content"))
+        return parser
 
     def _get_content(self, fn):
         """ return html content and ensure images are published """
