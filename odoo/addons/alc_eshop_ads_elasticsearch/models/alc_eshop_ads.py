@@ -67,9 +67,11 @@ class AlcEshopAds(models.Model):
 
     def _compute_security(self):
         self.ensure_one()
-        partner_types = ["guest", "supplier"]  # Default: everyone
+        # rights are additive: we cannot really give something to guest and remove it
+        # to shareholders.
+        ps = self.env["res.partner"]._get_partner_types()
+        partner_types = [p for p in ps if p != "guest"]  # default: everyone (connected)
         if self.visibility == "non-shareholder":
-            partner_types = self.env["res.partner"]._get_partner_types()
             partner_types = [p for p in partner_types if p != "shareholder"]
         elif self.visibility == "shareholder":
             partner_types = ["shareholder"]
