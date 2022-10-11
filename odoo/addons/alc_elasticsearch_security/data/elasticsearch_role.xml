@@ -14,12 +14,6 @@
       "masked_fields": []
     },
     {
-      "index_patterns":["alc_eshop_ads_*"],
-      "allowed_actions": ["read"],
-      "dls": "{\"bool\": {\"must\": {\"term\": {\"allowed_partner_types\": \"guest\"}}}}",
-      "masked_fields": []
-    },
-    {
       "index_patterns":["alc_eshop_info_banner_*"],
       "allowed_actions": ["read"],
       "masked_fields": []
