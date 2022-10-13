@@ -36,6 +36,7 @@ class RoundTemplate(models.Model):
     _name = "round.template"
     _order = "time_leave_planned"
 
+    active = fields.Boolean(default=True)
     name = fields.Char("Name", required=True)
     code = fields.Char("Code", required=True, default="0")
     itinerary_ids = fields.Many2many("round.itinerary", string="Itineraries")
