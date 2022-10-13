@@ -33,20 +33,36 @@
     <field name="model">round.template</field>
     <field name="arch" type="xml">
       <form string="Templates">
+        <header />
+        <sheet>
+        <div class="oe_button_box" name="button_box">
+          <button
+              name="toggle_active"
+              type="object"
+              class="oe_stat_button"
+              icon="fa-archive"
+            >
+            <field
+                name="active"
+                widget="boolean_button"
+                options='{"terminology": "archive"}'
+              />
+          </button>
+        </div>
         <group>
             <group>
           <field name="code" />
           <field name="name" />
           <field
-              name="version_ids"
-              widget="many2many_tags"
-              options="{'no_open':True,'no_create':True}"
-            />
+                name="version_ids"
+                widget="many2many_tags"
+                options="{'no_open':True,'no_create':True}"
+              />
           <field
-              name="tag_ids"
-              widget="many2many_tags"
-              options="{'no_open':True,'no_create':True}"
-            />
+                name="tag_ids"
+                widget="many2many_tags"
+                options="{'no_open':True,'no_create':True}"
+              />
           <field name="time_picking_planned" widget="float_time" />
           <field name="time_leave_planned" widget="float_time" />
           </group>
@@ -60,6 +76,7 @@
                 </group>
             </page>
         </notebook>
+        </sheet>
       </form>
     </field>
   </record>
