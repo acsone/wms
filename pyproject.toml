@@ -37,6 +37,7 @@ dependencies = [
   "click-odoo-contrib>=1.4.1",
   "openupgradelib",
   "odoo-addons-enterprise",
+  "typodoo",
   # optional Odoo dependencies
   "num2words",
   "pdfminer",

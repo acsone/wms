@@ -29,6 +29,9 @@
         - curl -sSL https://github.com/odoo/odoo/pull/44001.patch | git am
         # Support python -m odoo, for debugging configuration comfort.
         - curl -sL https://github.com/odoo/odoo/pull/81864.patch | git am
+        # odoo typing support
+        - git cherry-pick 8d0ba8687898edc8d38f3cf1342b455b16f91e15
+        - git cherry-pick aae7b0e2d3aa7eb0681fd983feb00d6cd493bac6
         # remove broken/useless stuff
         - git rm -r addons/test_mail_sms
         - git commit -m "Remove unused auto install addon test_mail_sms"
