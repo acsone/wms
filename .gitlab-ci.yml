@@ -61,7 +61,8 @@ build:
 .test_common:
   stage: test
   tags:
-    - odoo-16.0
+    - speedy
+    - postgres
   image: ghcr.io/acsone/odoo-ci-image:v20220907.0
   needs:
     - job: build
