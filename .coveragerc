@@ -383,7 +383,6 @@ omit =
     odoo/addons/stock_location_notranslate/*
     odoo/addons/stock_location_report/*
     odoo/addons/stock_lot_loss/*
-    odoo/addons/stock_lot_track/*
     odoo/addons/stock_lot_update/*
     odoo/addons/stock_operation_recompute/*
     odoo/addons/stock_orderpoint_product/*

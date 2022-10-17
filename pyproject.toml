@@ -38,6 +38,7 @@ dependencies = [
   "openupgradelib",
   "odoo-addons-enterprise",
   "typodoo",
+  "typing_extensions", # Should be declared into typodoo
   # optional Odoo dependencies
   "num2words",
   "pdfminer",
