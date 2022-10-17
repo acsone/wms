@@ -140,7 +140,7 @@ SELECT
     categ.fullname_en as categ_en,
     categ.fullname_fr as categ_fr,
     categ.fullname_nl as categ_nl,
-    pp.allowed_partner_types,
+    pt.allowed_partner_types,
     price_cache,
     supplier_promotion.id is not null as has_supplier_promotion,
     supplier_promotion.date_end as supplier_promotion_date_end,
