@@ -40,6 +40,11 @@ msgid "A shape is required if a delivery plan is set for %s"
 msgstr ""
 
 #. module: alc_geo_delivery_rounds
+#: model:ir.model.fields,field_description:alc_geo_delivery_rounds.field_delivery_plan_active
+msgid "Active"
+msgstr ""
+
+#. module: alc_geo_delivery_rounds
 #: model:ir.ui.view,arch_db:alc_geo_delivery_rounds.shape_file_import_wizard_form_view
 msgid "Cancel"
 msgstr ""
@@ -161,7 +166,7 @@ msgid "Name"
 msgstr ""
 
 #. module: alc_geo_delivery_rounds
-#: code:addons/alc_geo_delivery_rounds/models/delivery_plan.py:13
+#: code:addons/alc_geo_delivery_rounds/models/delivery_plan.py:14
 #: sql_constraint:delivery.plan:0
 #, python-format
 msgid "Name must be unique"
