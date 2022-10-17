@@ -53,6 +53,8 @@ msgstr "Actions"
 
 #. module: delivery_rounds
 #: model:ir.model.fields,field_description:delivery_rounds.field_cron_delivery_plan_active
+#: model:ir.model.fields,field_description:delivery_rounds.field_round_template_active
+#: model:ir.model.fields,field_description:delivery_rounds.field_round_template_version_active
 msgid "Active"
 msgstr "Active"
 
@@ -1053,7 +1055,7 @@ msgstr ""
 "Vous ne pouvez pas livrer une tournée avec des préparations en cours: %s"
 
 #. module: delivery_rounds
-#: code:addons/delivery_rounds/models/round_template.py:31
+#: code:addons/delivery_rounds/models/round_template.py:32
 #, python-format
 msgid "You cannot have more than one default version at once."
 msgstr "Vous ne pouvez pas avoir plus d'une version par défaut à la fois"
