@@ -17,13 +17,15 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from odoo import fields, models
+from odoo import fields
+
+from odoo.addons.product.models.product_product import ProductProduct
+from odoo.addons.product_expiry.models.production_lot import StockLot as StockLotBase
 
 
-class StockProductionLot(models.Model):
-    _inherit = "stock.lot"
+class StockLot(StockLotBase, extends=True):
 
-    product_id = fields.Many2one(tracking=True)
+    product_id = fields.Many2one[ProductProduct](tracking=True)
     name = fields.Char(tracking=True)
 
     use_date = fields.Datetime(tracking=True)
