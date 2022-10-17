@@ -38,6 +38,8 @@
   "index_permissions": [
     {
       "index_patterns":["alc_eshop_ads_*"],
+      "allowed_actions": ["read"],
+      "masked_fields": [],
       "dls": "{\"bool\": {\"must\": {\"term\": {\"allowed_partner_types\": \"misc\"}}}}"
     },
     {
@@ -55,6 +57,8 @@
   "index_permissions": [
     {
       "index_patterns":["alc_eshop_ads_*"],
+      "allowed_actions": ["read"],
+      "masked_fields": [],
       "dls": "{\"bool\": {\"must\": {\"term\": {\"allowed_partner_types\": \"student_like\"}}}}"
     },
     {
@@ -72,6 +76,8 @@
   "index_permissions": [
     {
       "index_patterns":["alc_eshop_ads_*"],
+      "allowed_actions": ["read"],
+      "masked_fields": [],
       "dls": "{\"bool\": {\"must\": {\"term\": {\"allowed_partner_types\": \"food_only\"}}}}"
     },
     {
@@ -90,6 +96,8 @@
   "index_permissions": [
     {
       "index_patterns":["alc_eshop_ads_*"],
+      "allowed_actions": ["read"],
+      "masked_fields": [],
       "dls": "{\"bool\": {\"must\": {\"term\": {\"allowed_partner_types\": \"equipment_only\"}}}}"
     },
     {
@@ -108,6 +116,8 @@
   "index_permissions": [
     {
       "index_patterns":["alc_eshop_ads_*"],
+      "allowed_actions": ["read"],
+      "masked_fields": [],
       "dls": "{\"bool\": {\"must\": {\"term\": {\"allowed_partner_types\": \"veterinary\"}}}}"
     },
     {
@@ -126,6 +136,8 @@
   "index_permissions": [
     {
       "index_patterns":["alc_eshop_ads_*"],
+      "allowed_actions": ["read"],
+      "masked_fields": [],
       "dls": "{\"bool\": {\"must\": {\"term\": {\"allowed_partner_types\": \"wholesaler_veterinary\"}}}}"
     },
     {
@@ -144,6 +156,8 @@
   "index_permissions": [
     {
       "index_patterns":["alc_eshop_ads_*"],
+      "allowed_actions": ["read"],
+      "masked_fields": [],
       "dls": "{\"bool\": {\"must\": {\"term\": {\"allowed_partner_types\": \"wholesaler_pharmacy\"}}}}"
     },
     {
@@ -162,6 +176,8 @@
   "index_permissions": [
     {
       "index_patterns":["alc_eshop_ads_*"],
+      "allowed_actions": ["read"],
+      "masked_fields": [],
       "dls": "{\"bool\": {\"must\": {\"term\": {\"allowed_partner_types\": \"export_customer\"}}}}"
     },
     {
@@ -180,6 +196,8 @@
   "index_permissions": [
     {
       "index_patterns":["alc_eshop_ads_*"],
+      "allowed_actions": ["read"],
+      "masked_fields": [],
       "dls": "{\"bool\": {\"must\": {\"term\": {\"allowed_partner_types\": \"export_meds\"}}}}"
     },
     {
@@ -198,6 +216,8 @@
   "index_permissions": [
     {
       "index_patterns":["alc_eshop_ads_*"],
+      "allowed_actions": ["read"],
+      "masked_fields": [],
       "dls": "{\"bool\": {\"must\": {\"term\": {\"allowed_partner_types\": \"shareholder\"}}}}"
     },
     {
