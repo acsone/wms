@@ -16,3 +16,9 @@ class ResPartner(models.Model):
         "veterinary_group_id",
         string="Veterinary Group",
     )
+    is_alcyonnaire = fields.Boolean(compute="_compute_is_alcyonnaire")
+
+    def _compute_is_alcyonnaire(self):
+        for partner in self:
+            groups = partner.veterinary_group_ids.filtered("is_alcyonnaire")
+            partner.is_alcyonnaire = bool(groups)
