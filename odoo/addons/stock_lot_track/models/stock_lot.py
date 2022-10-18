@@ -7,7 +7,7 @@ from odoo.addons.product.models.product_product import ProductProduct
 from odoo.addons.product_expiry.models.production_lot import StockLot as StockLotBase
 
 
-class StockLot(StockLotBase, extends=True):
+class StockLot(StockLotBase, extends=True):  # type: ignore
 
     product_id = fields.Many2one[ProductProduct](tracking=True)
     name = fields.Char(tracking=True)
