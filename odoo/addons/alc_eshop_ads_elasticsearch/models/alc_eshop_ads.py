@@ -67,21 +67,18 @@ class AlcEshopAds(models.Model):
 
     def _compute_security(self):
         self.ensure_one()
-        # rights are additive: we cannot really give something to guest and remove it
-        # to shareholders.
-        ps = self.env["res.partner"]._get_partner_types()
-        partner_types = [p for p in ps if p != "guest"]  # default: everyone (connected)
+        rights = ["is_alcyonnaire", "non_alcyonnaire"]
         if self.visibility == "non-shareholder":
-            partner_types = [p for p in partner_types if p != "shareholder"]
+            rights = ["non_alcyonnaire"]
         elif self.visibility == "shareholder":
-            partner_types = ["shareholder"]
-        return partner_types
+            rights = ["is_alcyonnaire"]
+        return rights
 
     def _compute_json_doc(self):
         for rec in self:
             doc = dict(
                 id=rec.id,
-                allowed_partner_types=",".join(rec._compute_security()),
+                allowed_roles=",".join(rec._compute_security()),
                 name=rec.name,
                 date_start=rec.date_start,
                 date_end=rec.date_end,
