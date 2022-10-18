@@ -21,7 +21,12 @@ class TestKeycloakUpdateFlow(TestKeycloak):
         )
 
     def test_update_partner_type(self):
-        expected_roles = {"shareholder", "guest", "price-yourcompany"}
+        expected_roles = {
+            "shareholder",
+            "guest",
+            "price-yourcompany",
+            "non_alcyonnaire",
+        }
         keycloak_user = self.env["keycloak.user"].create(self.vals_user)
         job_counter = self.job_counter()
 
@@ -37,7 +42,7 @@ class TestKeycloakUpdateFlow(TestKeycloak):
 
     def test_update_pricelist(self):
         pricelist = self.env["product.pricelist"].create({"name": "pridamis"})
-        expected_roles = {"misc", "guest", "price-pridamis"}
+        expected_roles = {"misc", "guest", "price-pridamis", "non_alcyonnaire"}
         keycloak_user = self.env["keycloak.user"].create(self.vals_user)
         job_counter = self.job_counter()
 
@@ -130,7 +135,7 @@ class TestKeycloakUpdateFlow(TestKeycloak):
             "can_order": False,
             "help_with_fee": True,
         }
-        expected_roles = {"shareholder", "guest", "price-pridamis"}
+        expected_roles = {"shareholder", "guest", "price-pridamis", "non_alcyonnaire"}
         keycloak_user = self.env["keycloak.user"].create(self.vals_user)
         job_counter = self.job_counter()
 

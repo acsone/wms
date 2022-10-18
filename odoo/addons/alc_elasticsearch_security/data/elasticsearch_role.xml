@@ -37,12 +37,6 @@
     <field name="body">{
   "index_permissions": [
     {
-      "index_patterns":["alc_eshop_ads_*"],
-      "allowed_actions": ["read"],
-      "masked_fields": [],
-      "dls": "{\"bool\": {\"must\": {\"term\": {\"allowed_partner_types\": \"misc\"}}}}"
-    },
-    {
       "index_patterns":["alc_shopinvader_variant_*"],
       "dls": "{\"bool\": {\"must\": {\"term\": {\"allowed_partner_types\": \"misc\"}}}}"
     }
@@ -56,12 +50,6 @@
     <field name="body">{
   "index_permissions": [
     {
-      "index_patterns":["alc_eshop_ads_*"],
-      "allowed_actions": ["read"],
-      "masked_fields": [],
-      "dls": "{\"bool\": {\"must\": {\"term\": {\"allowed_partner_types\": \"student_like\"}}}}"
-    },
-    {
       "index_patterns":["alc_shopinvader_variant_*"],
       "dls": "{\"bool\": {\"must\": {\"term\": {\"allowed_partner_types\": \"student_like\"}}}}"
     }
@@ -74,12 +62,6 @@
     <field name="name">food_only</field>
     <field name="body">{
   "index_permissions": [
-    {
-      "index_patterns":["alc_eshop_ads_*"],
-      "allowed_actions": ["read"],
-      "masked_fields": [],
-      "dls": "{\"bool\": {\"must\": {\"term\": {\"allowed_partner_types\": \"food_only\"}}}}"
-    },
     {
       "index_patterns":["alc_shopinvader_variant_*"],
       "dls": "{\"bool\": {\"must\": {\"term\": {\"allowed_partner_types\": \"food_only\"}}}}",
@@ -95,12 +77,6 @@
     <field name="body">{
   "index_permissions": [
     {
-      "index_patterns":["alc_eshop_ads_*"],
-      "allowed_actions": ["read"],
-      "masked_fields": [],
-      "dls": "{\"bool\": {\"must\": {\"term\": {\"allowed_partner_types\": \"equipment_only\"}}}}"
-    },
-    {
       "index_patterns":["alc_shopinvader_variant_*"],
       "dls": "{\"bool\": {\"must\": {\"term\": {\"allowed_partner_types\": \"equipment_only\"}}}}",
       "fls": ["stock.*"]
@@ -114,12 +90,6 @@
     <field name="name">veterinary</field>
     <field name="body">{
   "index_permissions": [
-    {
-      "index_patterns":["alc_eshop_ads_*"],
-      "allowed_actions": ["read"],
-      "masked_fields": [],
-      "dls": "{\"bool\": {\"must\": {\"term\": {\"allowed_partner_types\": \"veterinary\"}}}}"
-    },
     {
       "index_patterns":["alc_shopinvader_variant_*"],
       "dls": "{\"bool\": {\"must\": {\"term\": {\"allowed_partner_types\": \"veterinary\"}}}}",
@@ -135,12 +105,6 @@
     <field name="body">{
   "index_permissions": [
     {
-      "index_patterns":["alc_eshop_ads_*"],
-      "allowed_actions": ["read"],
-      "masked_fields": [],
-      "dls": "{\"bool\": {\"must\": {\"term\": {\"allowed_partner_types\": \"wholesaler_veterinary\"}}}}"
-    },
-    {
       "index_patterns":["alc_shopinvader_variant_*"],
       "dls": "{\"bool\": {\"must\": {\"term\": {\"allowed_partner_types\": \"wholesaler_veterinary\"}}}}",
       "fls": ["stock.*"]
@@ -154,12 +118,6 @@
     <field name="name">wholesaler_pharmacy</field>
     <field name="body">{
   "index_permissions": [
-    {
-      "index_patterns":["alc_eshop_ads_*"],
-      "allowed_actions": ["read"],
-      "masked_fields": [],
-      "dls": "{\"bool\": {\"must\": {\"term\": {\"allowed_partner_types\": \"wholesaler_pharmacy\"}}}}"
-    },
     {
       "index_patterns":["alc_shopinvader_variant_*"],
       "dls": "{\"bool\": {\"must\": {\"term\": {\"allowed_partner_types\": \"wholesaler_pharmacy\"}}}}",
@@ -175,12 +133,6 @@
     <field name="body">{
   "index_permissions": [
     {
-      "index_patterns":["alc_eshop_ads_*"],
-      "allowed_actions": ["read"],
-      "masked_fields": [],
-      "dls": "{\"bool\": {\"must\": {\"term\": {\"allowed_partner_types\": \"export_customer\"}}}}"
-    },
-    {
       "index_patterns":["alc_shopinvader_variant_*"],
       "dls": "{\"bool\": {\"must\": {\"term\": {\"allowed_partner_types\": \"export_customer\"}}}}",
       "fls": ["stock.*"]
@@ -195,12 +147,6 @@
     <field name="body">{
   "index_permissions": [
     {
-      "index_patterns":["alc_eshop_ads_*"],
-      "allowed_actions": ["read"],
-      "masked_fields": [],
-      "dls": "{\"bool\": {\"must\": {\"term\": {\"allowed_partner_types\": \"export_meds\"}}}}"
-    },
-    {
       "index_patterns":["alc_shopinvader_variant_*"],
       "dls": "{\"bool\": {\"must\": {\"term\": {\"allowed_partner_types\": \"export_meds\"}}}}",
       "fls": ["stock.*"]
@@ -214,12 +160,6 @@
     <field name="name">shareholder</field>
     <field name="body">{
   "index_permissions": [
-    {
-      "index_patterns":["alc_eshop_ads_*"],
-      "allowed_actions": ["read"],
-      "masked_fields": [],
-      "dls": "{\"bool\": {\"must\": {\"term\": {\"allowed_partner_types\": \"shareholder\"}}}}"
-    },
     {
       "index_patterns":["alc_shopinvader_variant_*"],
       "dls": "{\"bool\": {\"must\": {\"term\": {\"allowed_partner_types\": \"shareholder\"}}}}",
@@ -239,12 +179,6 @@
     {
       "index_patterns":["alc_shopinvader_category_*"],
       "allowed_actions": ["read"],
-      "masked_fields": []
-    },
-    {
-      "index_patterns":["alc_eshop_ads_*"],
-      "allowed_actions": ["read"],
-      "dls": "{\"bool\": {\"must\": {\"term\": {\"allowed_partner_types\": \"supplier\"}}}}",
       "masked_fields": []
     },
     {
@@ -270,6 +204,40 @@
     {
       "index_patterns":["alc_shopinvader_variant_*"],
       "fls": ["supplier_promotion", "supplier_promotion.*", "supplier_discount", "supplier_discount.*", "current_supplier_promotion", "current_supplier_discount"]
+    }
+  ]
+}
+    </field>
+  </record>
+  <record id="role_is_alcyonnaire" model="elasticsearch.role">
+    <field name="backend_id" ref="alc_search_engine.elasticsearch_backend" />
+    <field name="name">is_alcyonnaire</field>
+    <field name="body">{
+  "cluster_permissions": ["read"],
+  "tenant_permissions": [],
+  "index_permissions": [
+    {
+      "index_patterns":["alc_eshop_ads_*"],
+      "allowed_actions": ["read"],
+      "dls": "{\"bool\": {\"must\": {\"term\": {\"allowed_roles\": \"is_alcyonnaire\"}}}}",
+      "masked_fields": []
+    }
+  ]
+}
+    </field>
+  </record>
+  <record id="role_non_alcyonnaire" model="elasticsearch.role">
+    <field name="backend_id" ref="alc_search_engine.elasticsearch_backend" />
+    <field name="name">non_alcyonnaire</field>
+    <field name="body">{
+  "cluster_permissions": ["read"],
+  "tenant_permissions": [],
+  "index_permissions": [
+    {
+      "index_patterns":["alc_eshop_ads_*"],
+      "allowed_actions": ["read"],
+      "dls": "{\"bool\": {\"must\": {\"term\": {\"allowed_roles\": \"non_alcyonnaire\"}}}}",
+      "masked_fields": []
     }
   ]
 }

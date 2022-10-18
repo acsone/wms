@@ -27,5 +27,7 @@ class ResPartner(models.Model):
             vt_roles = partner_vt_roles[partner]
             if vt_roles:
                 roles = ",".join((partner.elasticsearch_role, vt_roles))
+            role_a = "is_alcyonnaire" if partner.is_alcyonnaire else "non_alcyonnaire"
+            roles = ",".join((roles, role_a))
             partner.elasticsearch_role = roles
         return res

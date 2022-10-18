@@ -16,5 +16,6 @@ class TestESRolesVTGroupsFlow(TestESRolesVTGroups):
         # when
         partner = self.env["res.partner"].create(vals_partner)
         # then
-        expected = {"guest", "price-yourcompany", self.vt_group._get_role_name()}
+        vt_role = self.vt_group._get_role_name()
+        expected = {"guest", "price-yourcompany", vt_role, "non_alcyonnaire"}
         self.assertEqual(set(partner.elasticsearch_role.split(",")), expected)
