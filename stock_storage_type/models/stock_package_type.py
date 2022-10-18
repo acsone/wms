@@ -5,15 +5,13 @@ from odoo import _, api, fields, models
 from odoo.addons.base_m2m_custom_field.fields import Many2manyCustom
 
 
-class StockPackageStorageType(models.Model):
+class StockPackageType(models.Model):
 
-    _name = "stock.package.storage.type"
-    _description = "Package storage type"
+    _inherit = "stock.package.type"
 
-    name = fields.Char(required=True)
     location_storage_type_ids = Many2manyCustom(
         "stock.location.storage.type",
-        "stock_location_package_storage_type_rel",
+        "stock_location_package_type_rel",
         "package_type_id",
         "location_storage_type_id",
         create_table=False,
@@ -70,3 +68,13 @@ class StockPackageStorageType(models.Model):
                     % pst.name
                 )
             pst.storage_type_message = msg
+
+    def action_view_storage_locations(self):
+        return {
+            "name": _("Put-away sequence"),
+            "type": "ir.actions.act_window",
+            "res_model": "stock.storage.location.sequence",
+            "view_mode": "list",
+            "domain": [("package_type_id", "=", self.id)],
+            "context": {"default_package_type_id": self.id},
+        }
