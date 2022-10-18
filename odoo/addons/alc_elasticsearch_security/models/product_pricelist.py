@@ -7,7 +7,8 @@ from odoo import models
 
 class ProductPricelist(models.Model):
 
-    _inherit = "product.pricelist"
+    _name = "product.pricelist"
+    _inherit = ["product.pricelist", "elasticsearch.role.mixin"]
 
     def _get_role_name(self):
         return self.role_name
