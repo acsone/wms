@@ -164,6 +164,8 @@ msgid "Product Template"
 msgstr "Productsjabloon"
 
 #. module: alc_pim_product
+#: model:attribute.attribute,field_description:alc_pim_product.attribute_promo_bag
+#: model:ir.model.fields,field_description:alc_pim_product.attribute_promo_bag_ir_model_fields
 #: model:ir.model.fields,field_description:alc_pim_product.field_delivery_carrier_promo_bag
 #: model:ir.model.fields,field_description:alc_pim_product.field_product_product_promo_bag
 #: model:ir.model.fields,field_description:alc_pim_product.field_product_template_promo_bag
