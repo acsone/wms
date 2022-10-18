@@ -92,151 +92,187 @@
                     <t t-set="partner" t-value="line[0]" />
                     <t t-set="shipping" t-value="line[1]" />
                     <t t-set="shipping_value" t-value="line[2]" />
-                    <td>
-                      <span t-esc="index" />
-                    </td>
-                    <td>
-                      <div
-                        t-field="shipping.partner_id"
-                        t-options='{"widget": "contact", "fields": ["name", "address"], "no_marker": True}'
-                      />
-                      <span t-field="partner.ref" />
-                    </td>
-                    <td style="width: 40%;">
-                      <strong>
-                        <span t-esc="shipping_value.get('note', '')" />
-                      </strong>
-                    </td>
-                    <td>
-                      <span t-field="partner.mobile" />
-                      <br />
-                      <span t-field="partner.phone" />
-                    </td>
-                    <td style="width: 6%;">
-                      <t
-                        t-set="total_medoc_box"
-                        t-value="shipping_value.get('number_of_drug', 0) + total_medoc_box"
-                      />
-                      <t
-                        t-set="total_medoc_unit"
-                        t-value="int(shipping_value.get('item_number_of_drug', 0)) + total_medoc_unit"
-                      />
-                      <t t-if="shipping_value.get('number_of_drug', 0)">
-                                              <span
-                          t-esc="int(shipping_value.get('number_of_drug', 0))"
+                    <tr>
+                      <td>
+                        <span t-esc="index" />
+                      </td>
+                      <td>
+                        <div
+                          t-field="shipping.partner_id"
+                          t-options='{"widget": "contact", "fields": ["name", "address"], "no_marker": True}'
                         />
-                                              box(es)
-                                          </t>
-                      <br
-                        t-if="shipping_value.get('number_of_drug', 0) and shipping_value.get('item_number_of_drug', 0)"
-                      />
-                      <t t-if="shipping_value.get('item_number_of_drug', 0)">
-                                              <span
-                          t-esc="int(shipping_value.get('item_number_of_drug', 0))"
+                        <span t-field="partner.ref" />
+                      </td>
+                      <td style="width: 40%;">
+                        <strong>
+                          <span t-esc="shipping_value.get('note', '')" />
+                        </strong>
+                      </td>
+                      <td>
+                        <span t-field="partner.mobile" />
+                        <br />
+                        <span t-field="partner.phone" />
+                      </td>
+                      <td style="width: 6%;">
+                        <t
+                          t-set="total_medoc_box"
+                          t-value="shipping_value.get('number_of_drug', 0) + total_medoc_box"
                         />
-                                              unit(s)
-                                          </t>
-                    </td>
-                    <td>
-                      <t
-                        t-set="total_cold_box"
-                        t-value="shipping_value.get('number_of_cold', 0) + total_cold_box"
-                      />
-                      <t
-                        t-set="total_cold_unit"
-                        t-value="int(shipping_value.get('item_number_of_cold', 0)) + total_cold_unit"
-                      />
-                      <t t-if="shipping_value.get('number_of_cold', 0)">
-                                              <span
-                          t-esc="int(shipping_value.get('number_of_cold', 0))"
+                        <t
+                          t-set="total_medoc_unit"
+                          t-value="int(shipping_value.get('item_number_of_drug', 0)) + total_medoc_unit"
                         />
-                                              box(es)
-                                          </t>
-                      <br
-                        t-if="shipping_value.get('number_of_cold', 0) and shipping_value.get('item_number_of_cold', 0)"
-                      />
-                      <t t-if="shipping_value.get('item_number_of_cold', 0)">
-                                              <span
-                          t-esc="int(shipping_value.get('item_number_of_cold', 0))"
+                        <t t-if="shipping_value.get('number_of_drug', 0)">
+                                                <span
+                            t-esc="int(shipping_value.get('number_of_drug', 0))"
+                          />
+                                                box(es)
+                                            </t>
+                        <br
+                          t-if="shipping_value.get('number_of_drug', 0) and shipping_value.get('item_number_of_drug', 0)"
                         />
-                                              unit(s)
-                                          </t>
-                    </td>
-                    <td>
-                      <t
-                        t-set="total_food_box"
-                        t-value="shipping_value.get('number_of_food', 0) + total_food_box"
-                      />
-                      <t
-                        t-set="total_food_unit"
-                        t-value="int(shipping_value.get('item_number_of_food', 0)) + total_food_unit"
-                      />
-                      <t t-if="shipping_value.get('number_of_food', 0)">
-                                              <span
-                          t-esc="int(shipping_value.get('number_of_food', 0))"
+                        <t t-if="shipping_value.get('item_number_of_drug', 0)">
+                                                <span
+                            t-esc="int(shipping_value.get('item_number_of_drug', 0))"
+                          />
+                                                unit(s)
+                                            </t>
+                      </td>
+                      <td>
+                        <t
+                          t-set="total_cold_box"
+                          t-value="shipping_value.get('number_of_cold', 0) + total_cold_box"
                         />
-                                              box(es)
-                                          </t>
-                      <br
-                        t-if="shipping_value.get('number_of_food', 0) and shipping_value.get('item_number_of_food', 0)"
-                      />
-                      <t t-if="shipping_value.get('item_number_of_food', 0)">
-                                              <span
-                          t-esc="int(shipping_value.get('item_number_of_food', 0))"
+                        <t
+                          t-set="total_cold_unit"
+                          t-value="int(shipping_value.get('item_number_of_cold', 0)) + total_cold_unit"
                         />
-                                              unit(s)
-                                          </t>
-                    </td>
-                    <td>
-                      <t
-                        t-set="total_mat_box"
-                        t-value="shipping_value.get('number_of_equipment', 0) + total_mat_box"
-                      />
-                      <t
-                        t-set="total_mat_unit"
-                        t-value="int(shipping_value.get('item_number_of_equipment', 0)) + total_mat_unit"
-                      />
-                      <t t-if="shipping_value.get('number_of_equipment', 0)">
-                                              <span
-                          t-esc="int(shipping_value.get('number_of_equipment', 0))"
+                        <t t-if="shipping_value.get('number_of_cold', 0)">
+                                                <span
+                            t-esc="int(shipping_value.get('number_of_cold', 0))"
+                          />
+                                                box(es)
+                                            </t>
+                        <br
+                          t-if="shipping_value.get('number_of_cold', 0) and shipping_value.get('item_number_of_cold', 0)"
                         />
-                                              box(es)
-                                          </t>
-                      <br
-                        t-if="shipping_value.get('number_of_equipment', 0) and shipping_value.get('item_number_of_equipment', 0)"
-                      />
-                      <t t-if="shipping_value.get('item_number_of_equipment', 0)">
-                                              <span
-                          t-esc="int(shipping_value.get('item_number_of_equipment', 0))"
+                        <t t-if="shipping_value.get('item_number_of_cold', 0)">
+                                                <span
+                            t-esc="int(shipping_value.get('item_number_of_cold', 0))"
+                          />
+                                                unit(s)
+                                            </t>
+                      </td>
+                      <td>
+                        <t
+                          t-set="total_food_box"
+                          t-value="shipping_value.get('number_of_food', 0) + total_food_box"
                         />
-                                              unit(s)
-                                          </t>
-                    </td>
-                    <td>
-                      <t
-                        t-set="total_total_box"
-                        t-value="shipping_value.get('number_total', 0) + total_total_box"
-                      />
-                      <t
-                        t-set="total_total_unit"
-                        t-value="int(shipping_value.get('item_number_total', 0)) + total_total_unit"
-                      />
-                      <t t-if="shipping_value.get('number_total', 0)">
-                                              <span
-                          t-esc="int(shipping_value.get('number_total', 0))"
+                        <t
+                          t-set="total_food_unit"
+                          t-value="int(shipping_value.get('item_number_of_food', 0)) + total_food_unit"
                         />
-                                              box(es)
-                                          </t>
-                      <br
-                        t-if="shipping_value.get('number_total', 0) and shipping_value.get('item_number_total', 0)"
-                      />
-                      <t t-if="shipping_value.get('item_number_total', 0)">
-                                              <span
-                          t-esc="int(shipping_value.get('item_number_total', 0))"
+                        <t t-if="shipping_value.get('number_of_food', 0)">
+                                                <span
+                            t-esc="int(shipping_value.get('number_of_food', 0))"
+                          />
+                                                box(es)
+                                            </t>
+                        <br
+                          t-if="shipping_value.get('number_of_food', 0) and shipping_value.get('item_number_of_food', 0)"
                         />
-                                              unit(s)
-                                          </t>
-                    </td>
+                        <t t-if="shipping_value.get('item_number_of_food', 0)">
+                                                <span
+                            t-esc="int(shipping_value.get('item_number_of_food', 0))"
+                          />
+                                                unit(s)
+                                            </t>
+                      </td>
+                      <td>
+                        <t
+                          t-set="total_mat_box"
+                          t-value="shipping_value.get('number_of_equipment', 0) + total_mat_box"
+                        />
+                        <t
+                          t-set="total_mat_unit"
+                          t-value="int(shipping_value.get('item_number_of_equipment', 0)) + total_mat_unit"
+                        />
+                        <t t-if="shipping_value.get('number_of_equipment', 0)">
+                                                <span
+                            t-esc="int(shipping_value.get('number_of_equipment', 0))"
+                          />
+                                                box(es)
+                                            </t>
+                        <br
+                          t-if="shipping_value.get('number_of_equipment', 0) and shipping_value.get('item_number_of_equipment', 0)"
+                        />
+                        <t t-if="shipping_value.get('item_number_of_equipment', 0)">
+                                                <span
+                            t-esc="int(shipping_value.get('item_number_of_equipment', 0))"
+                          />
+                                                unit(s)
+                                            </t>
+                      </td>
+                      <td>
+                        <t
+                          t-set="total_total_box"
+                          t-value="shipping_value.get('number_total', 0) + total_total_box"
+                        />
+                        <t
+                          t-set="total_total_unit"
+                          t-value="int(shipping_value.get('item_number_total', 0)) + total_total_unit"
+                        />
+                        <t t-if="shipping_value.get('number_total', 0)">
+                                                <span
+                            t-esc="int(shipping_value.get('number_total', 0))"
+                          />
+                                                box(es)
+                                            </t>
+                        <br
+                          t-if="shipping_value.get('number_total', 0) and shipping_value.get('item_number_total', 0)"
+                        />
+                        <t t-if="shipping_value.get('item_number_total', 0)">
+                                                <span
+                            t-esc="int(shipping_value.get('item_number_total', 0))"
+                          />
+                                                unit(s)
+                                            </t>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td colspan='9'>
+                        <table class="table table-bordered table-condensed">
+                          <thead>
+                            <tr class="active">
+                              <th colspan='4'>Product or package</th>
+                              <th colspan='3'>Location on trolley</th>
+                              <th colspan='2'>Quantity</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <t
+                              t-set="products_list"
+                              t-value="shipping_value.get('products_or_packages_list', [])"
+                            />
+                            <tr t-foreach="products_list" t-as="product_or_package">
+                              <td colspan='4'>
+                                <span t-esc="product_or_package.get('product', '')" />
+                              </td>
+                              <td colspan='3'>
+                                  <span
+                                  t-esc="product_or_package.get('location', '')"
+                                />
+                              </td>
+                              <td colspan='2'>
+                                <span
+                                  t-esc="product_or_package.get('qty_to_ship', 0)"
+                                />
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
                     <t t-set="index" t-value="index + 1" />
                   </tr>
                   <tr>

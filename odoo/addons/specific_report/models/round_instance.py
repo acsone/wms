@@ -60,7 +60,7 @@ class RoundInstance(models.Model):
         shipping_values = OrderedDict()
         for shipping in shippings:
             partner_value = shipping_values.get(shipping.partner_id, {})
-
+            products_or_packages_list = []
             number_of_drug = partner_value.get("number_of_drug", 0)
             number_of_drug += shipping.number_of_drug
             item_number_of_drug = partner_value.get("item_number_of_drug", 0)
@@ -90,6 +90,24 @@ class RoundInstance(models.Model):
             if shipping.partner_id.comment:
                 note = shipping.partner_id.comment
 
+            for pack in shipping.pack_operation_ids:
+                if pack.package_id and pack.package_id.is_internal:
+                    for op in pack.package_id.planned_pack_operation_ids:
+                        products_or_packages_values = {}
+                        products_or_packages_values["product"] = op.product_id.name
+                        products_or_packages_values["qty_to_ship"] = int(op.qty_done)
+                        products_or_packages_values["location"] = pack.package_id.name
+                        products_or_packages_list.append(products_or_packages_values)
+                if pack.package_id and not pack.package_id.is_internal:
+                    products_or_packages_values = {}
+                    # Med or cold pack
+                    products_or_packages_values["product"] = pack.package_id.name
+                    products_or_packages_values[
+                        "qty_to_ship"
+                    ] = pack.package_id.nbr_packages
+                    products_or_packages_values["location"] = pack.from_loc
+                    products_or_packages_list.append(products_or_packages_values)
+
             partner_value.update(
                 {
                     "number_of_drug": number_of_drug,
@@ -107,6 +125,14 @@ class RoundInstance(models.Model):
                     "shipping": shipping,
                 }
             )
+            # Maybe more than one shipping for the customer
+            if "products_or_packages_list" in partner_value.keys():
+                tmp = partner_value["products_or_packages_list"]
+                partner_value["products_or_packages_list"] = (
+                    tmp + products_or_packages_list
+                )
+            else:
+                partner_value["products_or_packages_list"] = products_or_packages_list
             shipping_values[shipping.partner_id] = partner_value
 
         result = []
