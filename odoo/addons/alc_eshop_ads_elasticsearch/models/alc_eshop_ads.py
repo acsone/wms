@@ -52,9 +52,12 @@ class AlcEshopAds(models.Model):
         )
 
     @api.model
-    def _get_active_ads(self):
+    def _get_active_ads(self, lang=None):
         today = fields.Date.today()
-        return self.search([("date_start", "<=", today), ("date_end", ">=", today)])
+        domain = [("date_start", "<=", today), ("date_end", ">=", today)]
+        if lang:
+            domain += ["|", ("lang_id", "=", False), ("lang_id", "=", lang.id)]
+        return self.search(domain)
 
     def _compute_se_index(self):
         model = self.env.ref("alc_eshop_ads.model_alc_eshop_ads")
