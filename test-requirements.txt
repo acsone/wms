@@ -1,0 +1,7 @@
+odoo-addon-base-m2m-custom-field @ git+https://github.com/acsone/server-tools.git@16.0-mig-base_m2m_custom_field-dro#subdirectory=setup/base_m2m_custom_field
+odoo-addon-product-logistics-uom @ git+https://github.com/acsone/product-attribute.git@16.0-mig-product_logistics_uom#subdirectory=setup/product_logistics_uom
+odoo-addon-stock-putaway_hook @ git+https://github.com/acsone/stock-logistics-workflow.git@16.0-mig-stock_putaway_hook-dro#subdirectory=setup/stock_putaway_hook
+odoo-addon-product-packaging-dimension @ git+https://github.com/acsone/product-attribute.git@16.0-mig-product_packaging_dimension#subdirectory=setup/product_packaging_dimension
+odoo-addon-stock-quant-package-product-packaging @ git+https://github.com/acsone/stock-logistics-workflow.git@16.0-mig-stock_quant_package_product_packaging-dro#subdirectory=setup/stock_quant_package_product_packaging
+odoo-addon-stock-quant-package-dimension @ git+https://github.com/acsone/stock-logistics-workflow.git@16.0-mig-stock_quant_package_dimension-dro#subdirectory=setup/stock_quant_package_dimension
+odoo-addon-stock-package-type-button-box @ git+https://github.com/acsone/stock-logistics-warehouse.git@16.0-add-stock_package_type_button_box-dro#subdirectory=setup/stock_package_type_button_box
