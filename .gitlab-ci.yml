@@ -68,6 +68,11 @@ build:
     - job: build
       artifacts: true
   interruptible: true
+  artifacts:
+    expire_in: 1 day
+    paths:
+      - .coverage.*
+    name: "${CI_PROJECT_NAME}-${CI_JOB_ID}-coverage"
 
 license_check:
   extends: .test_common
@@ -100,23 +105,8 @@ test:
     - echo Testing ${ADDONS_TEST}
     - unbuffer venv/bin/odoo -c odoo-ci.cfg -d ${DB_NAME} --stop-after-init -i ${ADDONS_TEST} | acsoo checklog
     - unbuffer coverage run venv/bin/odoo -c odoo-ci.cfg -d ${DB_NAME} --stop-after-init --test-enable --test-tags ${ADDONS_TEST} | acsoo checklog
-    - coverage combine
-    - coverage html --show-contexts
-    - coverage xml
-    - coverage report  # Show coverage report so the GitLab coverage regex below works
-    - if [ "${CI_COMMIT_REF_NAME}" = "master" ] ; then start_ssh_agent ; makepot ; fi
   after_script:
     - dropdb --if-exists ${DB_NAME}
-  coverage: '/TOTAL\s+\d+\s+\d+\s+\d+\s+\d+\s+(\d+\%)/'
-  artifacts:
-    expire_in: 1 week
-    paths:
-      - htmlcov/
-    name: "${CI_PROJECT_NAME}-${CI_JOB_ID}-coverage-html"
-    reports:
-      coverage_report:
-        coverage_format: cobertura
-        path: coverage.xml
 
 coverage-report:
   stage: coverage
@@ -139,8 +129,9 @@ coverage-report:
       coverage_report:
         coverage_format: cobertura
         path: coverage.xml
-  dependencies:
-    - test
+  needs:
+  - job: test
+    artifacts: true
 
 # build container images
 
