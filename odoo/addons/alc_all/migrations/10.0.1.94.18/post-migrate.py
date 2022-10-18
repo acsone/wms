@@ -9,5 +9,5 @@ def migrate(cr, version):
     if not version:
         return
     env = api.Environment(cr, SUPERUSER_ID, {})
-    keycloak_users = env["keycloak_user"].search([])
+    keycloak_users = env["keycloak.user"].search([])
     keycloak_users.delay_keycloak_update()
