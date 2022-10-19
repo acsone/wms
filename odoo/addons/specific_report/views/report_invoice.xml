@@ -122,7 +122,7 @@
                   <span t-field="line.product_id.default_code" />
                 </td>
                 <td class="text-left">
-                  <span t-field="line.name" />
+                  <span t-field="line.product_id.name" />
                 </td>
                 <td>
                   <span t-esc="int(line.quantity)" />
@@ -148,7 +148,9 @@
               <tr t-foreach="line.contribution_ids" t-as="contribution">
                 <td />
                 <td>
-                  <span t-esc="contribution.description or contribution.name" />
+                  <t t-if="contribution.amount">
+                    <span t-esc="contribution.description or contribution.name" />
+                  </t>
                 </td>
                 <td>
                   <span t-esc="int(line.quantity)" />
