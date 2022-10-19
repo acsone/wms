@@ -881,15 +881,13 @@ class RoundInstanceCustomer(models.Model):
     @api.model
     def create(self, vals):
         record = super(RoundInstanceCustomer, self).create(vals)
-        if "rank" in vals:
-            record._propagate_rank()
+        record._propagate_data_to_picks(vals)
         return record
 
     @api.multi
     def write(self, vals):
         result = super(RoundInstanceCustomer, self).write(vals)
-        if "rank" in vals:
-            self._propagate_rank()
+        self._propagate_data_to_picks(vals)
         return result
 
     @api.multi
@@ -957,24 +955,40 @@ class RoundInstanceCustomer(models.Model):
             )
             self.unlink()
 
+    def _fields_to_propagate_to_picks(self):
+        return ["rank"]
+
+    def _prepare_data_to_propagate(self):
+        self.ensure_one()
+        return {"rank": self.rank}
+
     @api.multi
-    def _propagate_rank(self):
+    def _propagate_data_to_picks(self, vals=None):
+        if vals and not set(vals.keys()).intersection(
+            set(self._fields_to_propagate_to_picks())
+        ):
+            return
         for instance_customer in self:
-            rank = instance_customer.rank
-            # when we set a rank on a round instance customer,
-            # we copy that value on the pickings
-            pickings = instance_customer.picking_ids.filtered(
-                lambda p, r=rank: p.rank != r
-            )
+            data = instance_customer._prepare_data_to_propagate()
+            ids_to_update = []
+            tmp_pick = self.env["stock.picking"].new(data)
+            for pick in instance_customer.picking_ids:
+                for k in data.keys():
+                    if pick[k] != tmp_pick[k]:
+                        ids_to_update.append(pick.id)
+                        break
+
+            pickings = instance_customer.picking_ids.browse(ids_to_update)
             if not pickings:
                 continue
             _logger.debug(
-                "Rank set on round instance customer %s. Propagate to "
-                "pickings and shippings %s",
+                "Data updated on round instance customer %s. Propagate to "
+                "pickings and shippings %s: %s",
                 instance_customer.id,
                 pickings.ids,
+                data,
             )
-            pickings.write({"rank": rank})
+            pickings.write(data)
 
     count_picking_progress = fields.Char(
         "Picking Progress", compute="_compute_count_picking", readonly=True

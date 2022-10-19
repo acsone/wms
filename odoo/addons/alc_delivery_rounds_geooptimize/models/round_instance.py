@@ -524,19 +524,30 @@ class RoundInstance(models.Model):
         into the opimization result
         """
         self.ensure_one()
+        DeliveryResource = self.env["alc.delivery.resource"]
         if self.geo_optimization_state != "success" or not self.geo_optimization_result:
-            self.instance_customer_ids._propagate_rank()
+            self.instance_customer_ids._propagate_data_to_picks()
             self.instance_customer_ids.write({"is_rank_computed": False})
             return
-        expected_partner_order = self._get_planned_partner_ids(
+        expected_partner_and_resource = self._get_planned_partner_ids(
             self.geo_optimization_json
         )
+        expected_partner_order = [i[0] for i in expected_partner_and_resource]
         for round_instance_customer in self.instance_customer_ids:
             partner_id = round_instance_customer.partner_id.id
             rank = -1
+            resource_id = None
             if partner_id in expected_partner_order:
                 rank = expected_partner_order.index(partner_id) + 1
-            round_instance_customer.write({"rank": rank, "is_rank_computed": True})
+                resource_name = expected_partner_and_resource[rank - 1][1]
+                resource_id = DeliveryResource.get_id_by_name(resource_name)
+            round_instance_customer.write(
+                {
+                    "rank": rank,
+                    "is_rank_computed": True,
+                    "delivery_resource_id": resource_id,
+                }
+            )
 
     def _notify_optimization_error(self, message):
         self.env.user.notify_warning(
@@ -601,7 +612,7 @@ class RoundInstance(models.Model):
         """
         self.ensure_one()
         expected_partners = set(self._get_partners_to_deliver().ids)
-        received_partners = set(self._get_planned_partner_ids(result))
+        received_partners = {i[0] for i in self._get_planned_partner_ids(result)}
         missing_partners = self.env["res.partner"].browse(
             list(expected_partners - received_partners)
         )
@@ -635,10 +646,11 @@ class RoundInstance(models.Model):
     @api.model
     def _get_planned_partner_ids(self, json_result):
         """
-        Return the list of planned partners in the same order as in the json document
+        Return the list of tuple(partner_id, resource name) forplanned partners
+        in the same order as in the json document
         """
         return [
-            int(o["stopId"])
+            (int(o["stopId"]), o.get("resourceId"))
             for o in json_result["plannedOrders"]
             if o["stopId"].isdigit()
         ]
