@@ -9,8 +9,10 @@ class SaleOrderLine(models.Model):
 
     _inherit = "sale.order.line"
 
-    def _check_delivery_requires_other_lines(self):
+    def _prepare_order_line_procurement(self, group_id):
         self.ensure_one()
-        if self.product_qty_unavailable > 0:
-            return True
-        return super(SaleOrderLine, self)._check_delivery_requires_other_lines()
+        vals = super(SaleOrderLine, self)._prepare_order_line_procurement(
+            group_id=group_id
+        )
+        vals["product_qty_unavailable"] = self.product_qty_unavailable
+        return vals
