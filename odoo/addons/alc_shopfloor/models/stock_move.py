@@ -54,55 +54,61 @@ class StockMove(models.Model):
                 other_pack_operations.mapped("linked_move_operation_ids").filtered(
                     lambda lk, mv=self: lk.move_id == mv
                 ).write({"move_id": backorder_move.id})
-            # we must also split quants and reassing to the backorder move
-            rounding = self.product_id.uom_id.rounding
-            quants_to_reserve = self.env["stock.quant"]
-            reserved_qty = sum(self.reserved_quant_ids.mapped("qty"))
-            reserved_qty_to_split = reserved_qty - qty_to_split
-            if float_compare(reserved_qty_to_split, 0, precision_rounding=rounding) > 0:
-                for quant in self.reserved_quant_ids:
-                    if float_compare(quant.qty, 0, precision_rounding=rounding) <= 0:
-                        raise UserError(
-                            _("Can't split negative quant %s in location %s")
-                            % (quant.id, quant.location_id.name)
-                        )
-                    if (
-                        quant.package_id
-                        and quant.package_id == pack_operations.package_id
-                    ):
-                        # don't split package linked to pack_operations.
-                        continue
-                    if (
-                        float_compare(
-                            quant.qty, qty_to_split, precision_rounding=rounding
-                        )
-                        <= 0
-                    ):
-                        quants_to_reserve |= quant
-                        qty_to_split -= quant.qty
-                    else:
-                        to_split = quant.qty - qty_to_split
+                # we must also split quants and reassing to the backorder move
+                rounding = self.product_id.uom_id.rounding
+                quants_to_reserve = self.env["stock.quant"]
+                reserved_qty = sum(self.reserved_quant_ids.mapped("qty"))
+                reserved_qty_to_split = reserved_qty - qty_to_split
+                if (
+                    float_compare(reserved_qty_to_split, 0, precision_rounding=rounding)
+                    > 0
+                ):
+                    for quant in self.reserved_quant_ids:
+                        if (
+                            float_compare(quant.qty, 0, precision_rounding=rounding)
+                            <= 0
+                        ):
+                            raise UserError(
+                                _("Can't split negative quant %s in location %s")
+                                % (quant.id, quant.location_id.name)
+                            )
+                        if (
+                            quant.package_id
+                            and quant.package_id == pack_operations.package_id
+                        ):
+                            # don't split package linked to pack_operations.
+                            continue
                         if (
                             float_compare(
-                                abs(quant.qty),
-                                abs(to_split),
-                                precision_rounding=rounding,
+                                quant.qty, qty_to_split, precision_rounding=rounding
                             )
-                            > 0
+                            <= 0
                         ):
-                            new_quant = quant._quant_split(to_split)
-                            quants_to_reserve |= new_quant
-                        else:
                             quants_to_reserve |= quant
-                        break
-                    if float_is_zero(qty_to_split, precision_rounding=rounding):
-                        break
-            self.env["stock.quant"].quants_reserve(
-                [(q, q.qty) for q in quants_to_reserve], backorder_move
-            )
-            self._recompute_state()
-            backorder_move._recompute_state()
-            return backorder_move
+                            qty_to_split -= quant.qty
+                        else:
+                            to_split = quant.qty - qty_to_split
+                            if (
+                                float_compare(
+                                    abs(quant.qty),
+                                    abs(to_split),
+                                    precision_rounding=rounding,
+                                )
+                                > 0
+                            ):
+                                new_quant = quant._quant_split(to_split)
+                                quants_to_reserve |= new_quant
+                            else:
+                                quants_to_reserve |= quant
+                            break
+                        if float_is_zero(qty_to_split, precision_rounding=rounding):
+                            break
+                self.env["stock.quant"].quants_reserve(
+                    [(q, q.qty) for q in quants_to_reserve], backorder_move
+                )
+                self._recompute_state()
+                backorder_move._recompute_state()
+                return backorder_move
         return self.browse()
 
     def split_unavailable_qty(self):
