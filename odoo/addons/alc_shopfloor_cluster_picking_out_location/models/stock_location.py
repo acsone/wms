@@ -13,6 +13,6 @@ class StockLocation(models.Model):
         "round.instance",
         string="Delivery Round",
         store=True,
-        readonly=True,
+        readonly=False,
         index=True,
     )
