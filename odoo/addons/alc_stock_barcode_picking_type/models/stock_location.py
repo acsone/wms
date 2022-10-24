@@ -7,10 +7,9 @@ from odoo.addons.stock.models.stock_location import Location as LocationBase
 from odoo.addons.stock.models.stock_picking import PickingType
 
 
-class StockLocation(LocationBase, extends=True):  # type: ignore
+class StockLocation(LocationBase):
 
     barcode_picking_type_id = fields.Many2one[PickingType](
-        comodel_name="stock.picking.type",
         string="Barcode Picking Type",
         help="Define the type of picking to create when this location (or any "
         "children) is scanned",

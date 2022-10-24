@@ -29,8 +29,8 @@ libsass==0.18.0
 lxml==4.6.5
 MarkupSafe==1.1.0
 num2words==0.5.6
-odoo @ git+https://github.com/acsone/odoo.git@5e398bd86841f6bc8d68c8bf38642a43a078c901
-odoo-addons-enterprise @ git+ssh://git@github.com/acsone/enterprise.git@7e24afa2684f5c8fd0fc6d9ed9fd79975ac92c1d
+odoo @ git+https://github.com/acsone/odoo.git@87cf624bc23e7cabb4ef19e92b508571ea3249eb
+odoo-addons-enterprise @ git+ssh://git@github.com/acsone/enterprise.git@2bb56391052a901b880a38925111e11c3216b821
 ofxparse==0.21
 openupgradelib==3.3.4
 passlib==1.7.3
@@ -61,7 +61,7 @@ rsa==4.9
 six==1.16.0
 soupsieve==2.3.2.post1
 typing_extensions==4.4.0
-typodoo==0.1
+typodoo==0.2
 urllib3==1.26.5
 vobject==0.9.6.1
 Werkzeug==2.0.2
