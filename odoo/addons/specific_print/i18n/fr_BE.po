@@ -226,7 +226,7 @@ msgstr "Aucune imprimante assignée"
 #: model:ir.model.fields,field_description:specific_print.field_shopinvader_product_number_labels_to_print
 #: model:ir.model.fields,field_description:specific_print.field_shopinvader_variant_number_labels_to_print
 msgid "Number of Labels to Print."
-msgstr ""
+msgstr "Nombre d'étiquettes à imprimer"
 
 #. module: specific_print
 #: selection:printing.printer,type:0
