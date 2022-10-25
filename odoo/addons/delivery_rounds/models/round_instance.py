@@ -14,6 +14,7 @@ from psycopg2 import OperationalError
 
 from odoo import _, api, fields, models
 from odoo.exceptions import AccessError, UserError, ValidationError
+from odoo.osv.expression import NEGATIVE_TERM_OPERATORS
 from odoo.service.model import PG_CONCURRENCY_ERRORS_TO_RETRY
 from odoo.tools import config
 
@@ -445,13 +446,8 @@ class RoundInstance(models.Model):
     def _add_customer(self, customer):
         self.ensure_one()
         customer.ensure_one()
-        ric = self.env["round.instance.customer"].search(
-            [
-                ("delivery_round_id", "=", self.id),
-                ("partner_id", "=", customer.id),
-                ("delivered", "!=", True),
-            ],
-            limit=1,
+        ric = self.env["round.instance.customer"]._get_not_delivered_for_customer(
+            delivery_round_id=self.id, partner_id=customer.id
         )
         rank = 0
         if not ric:
@@ -840,7 +836,9 @@ class RoundInstanceCustomer(models.Model):
         "stock.picking", "delivery_round_customer_id", "Pickings", readonly=True
     )
 
-    delivered = fields.Boolean("Delivered", compute="_compute_delivered", store=True)
+    delivered = fields.Boolean(
+        "Delivered", compute="_compute_delivered", search="_search_delivered"
+    )
     delivery_not_allowed = fields.Boolean(
         "Delivery not allowed", compute="_compute_delivery_allowed", default=False
     )
@@ -858,12 +856,66 @@ class RoundInstanceCustomer(models.Model):
         for rec in self:
             rec.delivered = rec.id not in not_sent
 
+    @api.model
+    def _search_delivered(self, operator, value):
+        search_delivered = (
+            # delivered != False
+            (operator in NEGATIVE_TERM_OPERATORS and not value)
+            or
+            # delivered = True
+            (operator not in NEGATIVE_TERM_OPERATORS and value)
+        )
+        not_delivered_sql = """
+            SELECT
+                ric.id
+            FROM
+                round_instance_customer ric
+            JOIN
+                stock_picking sp
+                    ON sp.delivery_round_customer_id = ric.id,
+            WHERE
+                 sp.state not in ('cancel', 'done')
+                 sp.delivery_round_id IS NOT NULL
+        """
+        self.env.cr.execute(not_delivered_sql)
+        res = self.env.cr.fetchall()
+        not_delivered_ids = [r[0] for r in res]
+        if search_delivered:
+            return [("id", "not in", not_delivered_ids)]
+        return [("id", "in", not_delivered_ids)]
+
+    @api.model
+    def _get_not_delivered_for_customer(self, delivery_round_id, partner_id):
+        not_deliverd_sql = """
+            SELECT
+                ric.id
+            FROM
+                round_instance_customer ric
+            JOIN
+                stock_picking sp
+                    ON sp.delivery_round_customer_id = ric.id
+            WHERE
+                ric.delivery_round_id = %(delivery_round_id)s
+                AND ric.partner_id = %(partner_id)s
+                AND sp.state not in ('cancel', 'done')
+        """
+        self.env.cr.execute(
+            not_deliverd_sql,
+            dict(delivery_round_id=delivery_round_id, partner_id=partner_id),
+        )
+        res = self.env.cr.fetchone()
+        if res:
+            return self.browse(res[0])
+        return self.browse()
+
     @api.depends(
         "delivery_round_id",
         "delivery_round_id.state",
         "delivery_round_id.date",
         "partner_id",
         "delivered",
+        "picking_ids",
+        "picking_ids.state",
     )
     def _compute_delivery_allowed(self):
         for rec in self:
