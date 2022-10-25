@@ -914,8 +914,6 @@ class RoundInstanceCustomer(models.Model):
         "delivery_round_id.date",
         "partner_id",
         "delivered",
-        "picking_ids",
-        "picking_ids.state",
     )
     def _compute_delivery_allowed(self):
         for rec in self:
