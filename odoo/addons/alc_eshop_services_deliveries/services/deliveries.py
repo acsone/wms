@@ -2,9 +2,16 @@
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+from odoo import fields
+
+from odoo.addons.alc_cerberus_utils import utils
 from odoo.addons.base_rest import restapi
 from odoo.addons.base_rest.components.service import to_int
 from odoo.addons.component.core import Component
+
+
+def date_parser(date_str):
+    return fields.Date.from_string(date_str) if date_str else None
 
 
 class PickingsService(Component):
@@ -39,6 +46,9 @@ class PickingsService(Component):
         states = ["cancel"]
         domain = self._get_domain(from_date=from_date, states=states, canceled=True)
         records = self._search_canceled(domain, from_date=from_date, **params)
+        # TODO: search count is wrong in this case because of the post search filtering
+        # we should add a compute field, a special case in the count query,
+        # or something like that. Maybe it will go away by itself at migration?
         return self._paginate_search_records(domain, records)
 
     def _search_canceled(self, domain=None, from_date=None, **params):
@@ -86,18 +96,60 @@ class PickingsService(Component):
 
     def _get_model_schema(self):
         return {
-            # "id": {"type": "integer", "required": True, "nullable": False},
+            "id": {"type": "integer", "required": True, "nullable": False},
+            "date": {
+                "type": "datetime",
+                "required": True,
+                "nullable": False,
+                "coerce": utils.isoformat_str_dt_to_dt_utc,
+            },
+            "date_done": {
+                "type": "datetime",
+                "required": True,
+                "nullable": True,
+                "coerce": utils.isoformat_str_dt_to_dt_utc,
+            },
             "name": {"type": "string", "required": True, "nullable": False},
             "move_lines": {
                 "type": "list",
                 "schema": {"type": "dict", "schema": self._get_model_line_schema()},
             },
+            "partner": {"type": "dict", "schema": self._get_address_schema()},
         }
 
     def _get_model_line_schema(self):
         return {
-            "id": {"type": "integer", "required": True, "nullable": False},
             "name": {"type": "string", "required": True, "nullable": False},
+            "qty_ordered": {"type": "float", "required": True, "nullable": False},
+            "remaining_qty": {"type": "float", "required": True, "nullable": False},
+            "state": {"type": "string", "required": True, "nullable": False},
+            "reference": {"type": "string", "required": True, "nullable": False},
+            "lots": {
+                "type": "list",
+                "schema": {"type": "dict", "schema": self._get_lot_schema()},
+            },
+            "serial_number": {"type": "string", "required": True, "nullable": True},
+            "prix_brut_htva": {"type": "float", "required": True, "nullable": False},
+            "prix_net_htva": {"type": "float", "required": True, "nullable": False},
+        }
+
+    def _get_lot_schema(self):
+        return {
+            "name": {"type": "string", "required": True, "nullable": False},
+            "peremption": {
+                "type": "date",
+                "required": True,
+                "nullable": False,
+                "coerce": date_parser,
+            },
+        }
+
+    def _get_address_schema(self):
+        return {
+            "name": {"type": "string", "required": True, "nullable": False},
+            "street": {"type": "string", "required": True, "nullable": False},
+            "city": {"type": "string", "required": True, "nullable": False},
+            "country": {"type": "string", "required": True, "nullable": False},
         }
 
     def _search_output_schema(self):
@@ -158,9 +210,32 @@ class PickingsService(Component):
         return self._paginate_search_records(domain, records)
 
     def _get_parser(self):
-        return [
+        parser_partner = [
             "name",
-            ("move_lines", ["id", "name"]),
+            "email",
+            "street:address",
+            "city:locality",
+            ("country_id", ["name"]),
+        ]
+        parser_lot = ["name:lot", "expiry_date:peremption"]
+        parser_move_lines = [
+            "name",
+            "state",
+            "product_qty:qty_ordered",
+            "remaining_qty",
+            ("reference", lambda ml, fn: ml.product_id.default_code),
+            ("prix_net_htva", lambda ml, fn: ml.order_line_id.price_reduce),
+            ("prix_brut_htva", lambda ml, fn: ml.order_line_id.price_unit),
+            "serial_number",
+            ("lot_ids:lots", parser_lot),
+        ]
+        return [
+            "id",
+            "name",
+            "date",
+            "date_done",
+            ("partner_id", parser_partner),
+            ("move_lines", parser_move_lines),
         ]
 
     def _to_json(self, records, parser=None):

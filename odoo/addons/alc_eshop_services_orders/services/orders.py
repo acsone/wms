@@ -74,6 +74,20 @@ class OrdersService(Component):
                 "nullable": False,
                 "coerce": utils.isoformat_str_dt_to_dt_utc,
             },
+            "lines": {
+                "type": "list",
+                "schema": {"type": "dict", "schema": self._get_model_line_schema()},
+            },
+        }
+
+    def _get_model_line_schema(self):
+        return {
+            "line_id": {"type": "integer", "required": True, "nullable": False},
+            "reference": {"type": "string", "required": True, "nullable": False},
+            "price": {"type": "float", "required": True, "nullable": False},
+            "qty_ordered": {"type": "float", "required": True, "nullable": False},
+            "qty_delivered": {"type": "float", "required": True, "nullable": False},
+            "qty_canceled": {"type": "float", "required": True, "nullable": False},
         }
 
     def _search_output_schema(self):
@@ -117,6 +131,7 @@ class OrdersService(Component):
         state_label = (
             lambda r, fn: field.convert_to_export(r.shopinvader_state, r) or None
         )
+        parser_lines = self._get_parser_lines()
         return [
             "id",
             "name",
@@ -125,7 +140,22 @@ class OrdersService(Component):
             "state",
             "client_order_ref:customer_ref",
             ("state_label", state_label),
+            ("order_line:lines", parser_lines),
+        ]
+
+    def _get_parser_lines(self):
+        return [
+            "id:line_id",
+            "price_reduce_taxexcl:price",
+            "product_uom_qty:qty_ordered",
+            "qty_delivered",
+            "product_qty_canceled:qty_canceled",
+            ("product_id", ["default_code:sku"]),
         ]
 
     def _to_json(self, records):
-        return records.jsonify(self._get_parser())
+        records_json = records.jsonify(self._get_parser())
+        for record_json in records_json:
+            for line in record_json["lines"]:
+                line["reference"] = line.pop("product_id")["sku"]
+        return records_json

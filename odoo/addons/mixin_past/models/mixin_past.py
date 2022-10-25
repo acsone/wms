@@ -10,8 +10,12 @@ class MixinPast(models.AbstractModel):
 
     _name = "mixin.past"
 
-    is_past = fields.Boolean(compute="_compute_is_past", store=False)
-    is_future = fields.Boolean(compute="_compute_is_future", store=False)
+    is_past = fields.Boolean(
+        compute="_compute_is_past", search="_search_is_past", store=False
+    )
+    is_future = fields.Boolean(
+        compute="_compute_is_future", search="_search_is_future", store=False
+    )
 
     @api.model
     def _is_past_date(self, maybe_date_end, reference_date=False):
@@ -46,3 +50,17 @@ class MixinPast(models.AbstractModel):
         today = fields.Date.context_today(self)
         for record in self:
             record.is_future = self._is_future_date(record.date_start, today)
+
+    def _search_is_past(self, operator, value):
+        today = fields.Date.context_today(self)
+        result_operator = "<"
+        if (not value and operator == "=") or (value and operator == "!="):
+            result_operator = ">"
+        return [("date_end", result_operator, today)]
+
+    def _search_is_future(self, operator, value):
+        today = fields.Date.context_today(self)
+        result_operator = ">"
+        if (not value and operator == "=") or (value and operator == "!="):
+            result_operator = "<"
+        return [("date_start", result_operator, today)]

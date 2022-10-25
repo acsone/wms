@@ -21,8 +21,12 @@ class TestDeliveriesService(SavepointCase, ComponentMixin):
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
 
         cls.partner = cls.env["res.partner"].create({"name": "Partner"})
-        cls.product_ship = cls.env["product.product"].create({"name": "Shipit"})
-        cls.product_cancel = cls.env["product.product"].create({"name": "Cancel"})
+        cls.product_ship = cls.env["product.product"].create(
+            {"name": "Shipit", "default_code": "SHP"}
+        )
+        cls.product_cancel = cls.env["product.product"].create(
+            {"name": "Cancel", "default_code": "CNL"}
+        )
 
         cls.location_customer = cls.env.ref("stock.stock_location_customers")
         cls.location_stock = cls.env.ref("stock.stock_location_stock")
