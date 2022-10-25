@@ -211,9 +211,6 @@ class DataAction(Component):
     def products(self, record, **kw):
         return self.product(record, multi=True)
 
-    def _product_image_url(self, record, field_name):
-        return record[field_name] or None
-
     @property
     def _product_parser(self):
         return [
@@ -222,7 +219,6 @@ class DataAction(Component):
             "display_name",
             "default_code",
             "barcode",
-            ("image_medium_url:image", self._product_image_url),
             ("packaging_ids:packaging", self._product_packaging),
             ("uom_id:uom", self._simple_record_parser() + ["factor", "rounding"]),
             ("seller_ids:supplier_code", self._product_supplier_code),

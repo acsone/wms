@@ -71,7 +71,6 @@ class ShopfloorSchemaAction(Component):
                     rounding={"required": True, "nullable": True, "type": "float"},
                 )
             ),
-            "image": {"type": "string", "nullable": True, "required": False},
         }
 
     def package(self, with_packaging=False):
