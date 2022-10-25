@@ -13,7 +13,7 @@ OptimizationConfig = namedtuple(
     "OptimizationConfig",
     "enabled,api_url,api_key,duration,delivery_duration,loading_duration,"
     "resources_number,work_penalty,travel_penalty,daily_work_time,resource_cfg,"
-    "method,delivery_window_start,delivery_window_end",
+    "method,delivery_window_start,delivery_window_end,delivery_window_disabled",
 )
 
 
@@ -62,6 +62,10 @@ class StockConfigSettings(models.TransientModel):
     )
     geo_optimization_dw_start = fields.Float("From", required=True, default=10.0)
     geo_optimization_dw_end = fields.Float("To", required=True, default=18.5)
+
+    geo_optimization_dw_disabled = fields.Boolean(
+        "Disable delivery windows", default=False
+    )
 
     @api.constrains("geo_optimization_dw_start", "geo_optimization_dw_end")
     def check_window_no_onverlaps(self):
@@ -152,6 +156,9 @@ class StockConfigSettings(models.TransientModel):
                 "alc_delivery_rounds_geooptimize.geo_optimization_dw_end", "18.5",
             )
         )
+        delivery_window_disabled = IrConfigParameter.get_param(
+            "alc_delivery_rounds_geooptimize.geo_optimization_dw_disabled", ""
+        ).lower() in ["true", "1", "t", "y", "yes"]
 
         return OptimizationConfig(
             enabled=enabled,
@@ -168,6 +175,7 @@ class StockConfigSettings(models.TransientModel):
             method=method,
             delivery_window_start=geo_optimization_dw_start,
             delivery_window_end=geo_optimization_dw_end,
+            delivery_window_disabled=delivery_window_disabled,
         )
 
     @api.model
@@ -202,6 +210,8 @@ class StockConfigSettings(models.TransientModel):
             res["geo_optimization_dw_start"] = cfg.delivery_window_start
         if "geo_optimization_dw_end" in _fields or not _fields:
             res["geo_optimization_dw_end"] = cfg.delivery_window_end
+        if "geo_optimization_dw_disabled" in _fields or not _fields:
+            res["geo_optimization_dw_disabled"] = cfg.delivery_window_disabled
 
         return res
 
@@ -328,4 +338,13 @@ class StockConfigSettings(models.TransientModel):
         self.env["ir.config_parameter"].set_param(
             "alc_delivery_rounds_geooptimize.geo_optimization_dw_end",
             self.geo_optimization_dw_end or "18.5",
+        )
+
+    @api.multi
+    def set_get_delivery_window_disabled(self):
+        self.ensure_one()
+
+        self.env["ir.config_parameter"].set_param(
+            "alc_delivery_rounds_geooptimize.geo_optimization_dw_disabled",
+            self.geo_optimization_dw_disabled or "",
         )

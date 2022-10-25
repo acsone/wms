@@ -383,18 +383,19 @@ class RoundInstance(models.Model):
 
             delivery_windows = delivery_windows_by_partner_id[partner.id]
             time_windows = []
-            if delivery_windows:
-                for window in delivery_windows:
-                    time_windows.append(
-                        {
-                            "beginTime": window.float_to_time_repr(window.start),
-                            "endTime": window.float_to_time_repr(window.end),
-                        }
-                    )
-            else:
-                time_windows.append(default_delivery_window)
+            if not cfg.delivery_window_disabled:
+                if delivery_windows:
+                    for window in delivery_windows:
+                        time_windows.append(
+                            {
+                                "beginTime": window.float_to_time_repr(window.start),
+                                "endTime": window.float_to_time_repr(window.end),
+                            }
+                        )
+                else:
+                    time_windows.append(default_delivery_window)
 
-            order["timeWindows"] = time_windows
+                order["timeWindows"] = time_windows
             ret.append(order)
         return ret
 
