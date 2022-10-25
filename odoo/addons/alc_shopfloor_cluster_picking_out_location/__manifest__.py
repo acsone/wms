@@ -9,7 +9,16 @@
     "version": "10.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
-    "depends": ["alc_shopfloor", "delivery_rounds", "stock"],
-    "data": ["views/stock_location.xml", "views/shopfloor_menu.xml"],
+    "depends": [
+        "alc_shopfloor",
+        "delivery_rounds",
+        "stock",
+        "alc_stock_picking_batch_delivery_rounds",
+    ],
+    "data": [
+        "views/delivery_carrier.xml",
+        "views/stock_location.xml",
+        "views/shopfloor_menu.xml",
+    ],
     "demo": [],
 }
