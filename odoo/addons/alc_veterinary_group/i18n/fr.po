@@ -42,6 +42,9 @@ msgid "ID"
 msgstr ""
 
 #. module: alc_veterinary_group
+#: model:ir.model.fields,field_description:alc_veterinary_group.field_res_partner_is_alcyonnaire
+#: model:ir.model.fields,field_description:alc_veterinary_group.field_res_users_is_alcyonnaire
+#: model:ir.model.fields,field_description:alc_veterinary_group.field_shopinvader_partner_is_alcyonnaire
 #: model:ir.model.fields,field_description:alc_veterinary_group.field_veterinary_group_is_alcyonnaire
 msgid "Is alcyonnaire"
 msgstr ""
