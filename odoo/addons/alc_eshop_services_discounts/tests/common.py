@@ -34,7 +34,7 @@ class TestDiscountService(SavepointCase, ComponentMixin):
         vals_template_meds = {"name": "Meds", "default_code": "MDS14"}
         cls.product_template_meds = product_template.create(vals_template_meds)
 
-        vals_template_food = {"name": "Food", "default_code": "FD16"}
+        vals_template_food = {"name": "Food", "default_code": "FDS16"}
         cls.product_template_food = product_template.create(vals_template_food)
 
         cls.now = datetime.now()

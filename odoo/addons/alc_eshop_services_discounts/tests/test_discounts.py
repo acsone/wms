@@ -15,15 +15,15 @@ class TestDiscountServiceFlow(TestDiscountService):
 
     def test_results_no_past_discount(self):
         with self.discount_service(self.partner) as service:
-            result = service.dispatch("search", params={})
-            self.assertEqual(result["size"], 2)
+            result = service.dispatch("search", params={"reference": "MDS14"})
+            self.assertEqual(result["size"], 1)
 
     def test_results_search_reference(self):
         with self.discount_service(self.partner) as service:
             result = service.dispatch("search", params={"reference__ilike": "14"})
             self.assertEqual(result["size"], 1)
 
-            result = service.dispatch("search", params={"reference__ilike": "1"})
+            result = service.dispatch("search", params={"reference__ilike": "DS"})
             self.assertEqual(result["size"], 2)
 
             result = service.dispatch("search", params={"reference": "1"})
