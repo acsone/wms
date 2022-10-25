@@ -17,6 +17,7 @@
         "queue_job",
         "pricelist_role_name",
         "alc_pricelist_discount",
+        "alc_pricing_constraints",  # many assumptions rely on it
     ],
     "application": False,
     "data": [],
