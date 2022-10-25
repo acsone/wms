@@ -12,4 +12,5 @@
     "depends": ["alc_shopfloor_mobile"],
     "data": ["templates/assets.xml"],
     "demo": [],
+    "installable": True,
 }

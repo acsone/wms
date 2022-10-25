@@ -11,4 +11,5 @@
     "author": "ACSONE SA/NV",
     "depends": ["alc_shopfloor", "storage_image_product"],
     "data": [],
+    "installable": True,
 }
