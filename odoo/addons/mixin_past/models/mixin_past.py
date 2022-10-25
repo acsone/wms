@@ -3,6 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import api, fields, models
+from odoo.osv.expression import FALSE_LEAF, NEGATIVE_TERM_OPERATORS, TRUE_LEAF
 
 
 class MixinPast(models.AbstractModel):
@@ -53,14 +54,42 @@ class MixinPast(models.AbstractModel):
 
     def _search_is_past(self, operator, value):
         today = fields.Date.context_today(self)
-        result_operator = "<"
-        if (not value and operator == "=") or (value and operator == "!="):
-            result_operator = ">"
-        return [("date_end", result_operator, today)]
+        domain = []
+        negative_op = operator in NEGATIVE_TERM_OPERATORS
+        is_past = (value and not negative_op) or (not value and negative_op)
+        if "in" in operator:  # value should be a list
+            if not value:
+                domain = TRUE_LEAF if negative_op else FALSE_LEAF
+            elif True in value and False in value:
+                domain = FALSE_LEAF if negative_op else TRUE_LEAF
+            elif False in value:  # not in [False]
+                is_past = negative_op
+            else:  # in [True]
+                is_past = not negative_op
+        if not domain:
+            if is_past:
+                domain = domain or [("date_end", "<", today)]
+            else:
+                domain = ["|", ("date_end", ">", today), ("date_end", "=", False)]
+        return domain
 
     def _search_is_future(self, operator, value):
         today = fields.Date.context_today(self)
-        result_operator = ">"
-        if (not value and operator == "=") or (value and operator == "!="):
-            result_operator = "<"
-        return [("date_start", result_operator, today)]
+        domain = []
+        negative_op = operator in NEGATIVE_TERM_OPERATORS
+        is_future = (value and not negative_op) or (not value and negative_op)
+        if "in" in operator:  # value should be a list
+            if not value:
+                domain = TRUE_LEAF if negative_op else FALSE_LEAF
+            elif True in value and False in value:
+                domain = FALSE_LEAF if negative_op else TRUE_LEAF
+            elif False in value:  # not in [False]
+                is_future = negative_op
+            else:  # in [True]
+                is_future = not negative_op
+        if not domain:
+            if is_future:
+                domain = domain or [("date_start", ">", today)]
+            else:
+                domain = ["|", ("date_start", "<", today), ("date_start", "=", False)]
+        return domain
