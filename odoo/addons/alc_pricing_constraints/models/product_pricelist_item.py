@@ -32,3 +32,15 @@ class ProductPricelistItem(models.Model):
             # is working as intended before doing so.
             message = _("Items based on other pricelists are not supported.")
             raise ValidationError(message)
+
+    @api.constrains("min_quantity", "applied_on", "pricelist_id")
+    def _constrain_min_quantity(self):
+        if not self.env["product.pricelist"].enforce_discount_constraint():
+            return
+        # this is predicated on the fact that variants are not allowed in Alcyon
+        filter_bad = lambda r: r.min_quantity > 1 and (
+            r.applied_on != "1_product" or not r.pricelist_id.is_discount
+        )
+        if self.filtered(filter_bad):
+            message = _("Minimal quantities are only supported on product items.")
+            raise ValidationError(message)

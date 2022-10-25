@@ -28,3 +28,25 @@ class TestConstraintsFlow(TestConstraints):
         )
         with self.assertRaises(ValidationError):
             self.env["product.pricelist.item"].create(vals)
+
+    def test_cannot_create_min_qty_on_anything_but_product(self):
+        # this is OK:
+        vals = self._get_item_vals(
+            self.pricelist_discount,
+            applied_on="1_product",
+            product_tmpl_id=self.product_template.id,
+            min_quantity=2,
+        )
+        item = self.env["product.pricelist.item"].create(vals)
+        self.assertTrue(item)
+
+        # cannot create a global item with a minimum quantity
+        vals = self._get_item_vals(self.pricelist_discount, min_quantity=2)
+        with self.assertRaises(ValidationError):
+            self.env["product.pricelist.item"].create(vals)
+
+        # creating on a variant is also bad
+        vals["applied_on"] = "0_product_variant"
+        vals["product_id"] = self.product.id
+        with self.assertRaises(ValidationError):
+            self.env["product.pricelist.item"].create(vals)
