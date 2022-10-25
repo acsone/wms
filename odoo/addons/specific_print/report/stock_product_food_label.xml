@@ -32,13 +32,13 @@
     ^FO310,330^A060,60^FDB2C^FS\r
     </t>
 
-    ^FO310,480^A060,60^FD<t t-esc="index" /> / <t t-esc="int(qty_done)" />^FS\r
+    ^FO310,480^A040,40^FD<t t-esc="index" /> / <t t-esc="int(qty_done)" />^FS\r
 
     ^FO255,60^A030,30^FD<t
-            t-esc="res_company.convert_to_ascii(pick.partner_id.display_name and pick.partner_id.display_name[:32] or u'')"
+            t-esc="res_company.convert_to_ascii(pick.partner_id.display_name and pick.partner_id.display_name[:38] or u'')"
           />^FS\r
     ^FO225,60^A030,30^FD<t
-            t-esc="res_company.convert_to_ascii(pick.partner_id.display_name and pick.partner_id.display_name[32:60] or u'')"
+            t-esc="res_company.convert_to_ascii(pick.partner_id.display_name and pick.partner_id.display_name[38:60] or u'')"
           />^FS\r
     ^FO195,60^A035,30^FD<t t-esc="pick.partner_id.zip" /> <t
             t-esc="res_company.convert_to_ascii(pick.partner_id.city)"
@@ -57,12 +57,13 @@
             t-esc="lot_id and lot_id.name or ''"
           />-^FS\r
 
-    ^FO20,60^A025,25^FD<t t-esc="line.product_id.name[:45]" />^FS\r
+    ^FO20,60^A013,13^FD<t t-esc="line.product_id.name[:80]" />^FS\r
 
     <t t-if="ship">
     ^FO295,200
     ^BQ,2,4
     ^FDQA,<t t-esc="ship.name" />^FS\r
+    ^FO290,300^A015,15^FD<t t-esc="ship.name" />^FS\r
     </t>
 
     ^FWN
