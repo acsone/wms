@@ -653,7 +653,7 @@ class RoundInstance(models.Model):
         return [
             (int(o["stopId"]), o.get("resourceId"))
             for o in json_result["plannedOrders"]
-            if o["stopId"].isdigit()
+            if o["stopId"].isdigit() and o["stopType"] == 0
         ]
 
     def button_export_to_mobile_app(self):
