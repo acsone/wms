@@ -447,6 +447,7 @@ class RoundInstance(models.Model):
             "fixed_"
         ):
             res["evaluation"] = True
+        res.update(cfg.options_cfg)
         return res
 
     def _send_optimization_request(self, json_request):
