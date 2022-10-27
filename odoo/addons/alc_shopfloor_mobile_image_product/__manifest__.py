@@ -9,8 +9,9 @@
     "version": "10.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
-    "depends": ["alc_shopfloor_mobile"],
+    "depends": ["alc_shopfloor_mobile", "alc_shopfloor_image_product"],
     "data": ["templates/assets.xml"],
     "demo": [],
     "installable": True,
+    "auto_install": True,
 }
