@@ -50,7 +50,7 @@ class TestDocumentsServiceFlow(TestDeliveriesService):
                             "qty_ordered": 1.0,
                             "reference": u"SHP",
                             "remaining_qty": 0.0,
-                            "serial_number": None,
+                            "suite": "",
                             "state": u"done",
                         }
                     ],
@@ -73,7 +73,7 @@ class TestDocumentsServiceFlow(TestDeliveriesService):
                             "qty_ordered": 1.0,
                             "reference": u"CNL",
                             "remaining_qty": 1.0,
-                            "serial_number": None,
+                            "suite": "",
                             "state": u"cancel",
                         },
                         {
@@ -84,7 +84,7 @@ class TestDocumentsServiceFlow(TestDeliveriesService):
                             "qty_ordered": 1.0,
                             "reference": u"SHP",
                             "remaining_qty": 0.0,
-                            "serial_number": None,
+                            "suite": "",
                             "state": u"done",
                         },
                     ],
