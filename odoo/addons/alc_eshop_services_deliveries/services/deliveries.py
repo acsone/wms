@@ -217,7 +217,7 @@ class PickingsService(Component):
             "city:locality",
             ("country_id", ["name"]),
         ]
-        parser_lot = ["name:lot", "expiry_date:peremption"]
+        parser_lot = ["name:lot", "life_date:peremption"]
         parser_move_lines = [
             "name",
             "state",
