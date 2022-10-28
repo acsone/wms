@@ -6,6 +6,14 @@
 def migrate(cr, version):
     if not version:
         return
+    query_exists = """
+        SELECT 1
+        FROM information_schema.columns
+        WHERE table_name='product_template' AND column_name='allowed_partner_types'
+    """
+    cr.execute(query_exists)
+    if cr.rowcount:
+        return
     query_create = """
         ALTER TABLE product_template
         ADD COLUMN allowed_partner_types VARCHAR;
