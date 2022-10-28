@@ -26,6 +26,12 @@ msgid "Items based on other pricelists are not supported."
 msgstr ""
 
 #. module: alc_pricing_constraints
+#: code:addons/alc_pricing_constraints/models/product_pricelist_item.py:45
+#, python-format
+msgid "Minimal quantities are only supported on product items."
+msgstr ""
+
+#. module: alc_pricing_constraints
 #: model:ir.model,name:alc_pricing_constraints.model_product_pricelist
 msgid "Pricelist"
 msgstr ""
