@@ -133,7 +133,7 @@ odoo10-addon-connector @ git+https://github.com/acsone/connector@de23258a4d639e6
 odoo10-addon-connector-elasticsearch @ git+https://github.com/acsone/search-engine.git@2009658c738e605b9b89e008741ab62dd22f09fb#subdirectory=setup/connector_elasticsearch
 odoo10-addon-connector-search-engine @ git+https://github.com/acsone/search-engine.git@ac684d8ef243d749ff31e74a17527246ca41fb36#subdirectory=setup/connector_search_engine
 odoo10-addon-date-range @ git+https://github.com/acsone/server-tools.git@dcefdba5bac014076f05229ba091acd8b739e164#subdirectory=setup/date_range
-odoo10-addon-delivery-carrier-label-gls @ git+https://github.com/acsone/delivery-carrier.git@58839a1c96904a43e1d0c2ab652ebdae3b6a2074#subdirectory=setup/delivery_carrier_label_gls
+odoo10-addon-delivery-carrier-label-gls @ git+https://github.com/acsone/delivery-carrier.git@7a8997f7df2a646286c5ee26d2b3cd99a69989e0#subdirectory=setup/delivery_carrier_label_gls
 odoo10-addon-delivery-carrier-max-weight-constraint @ git+https://github.com/acsone/delivery-carrier.git@f9c9703f8b6e3a906fd52935f222f933bd7f19f5#subdirectory=setup/delivery_carrier_max_weight_constraint
 odoo10-addon-despatch-advice-import @ git+https://github.com/acsone/edi.git@e37df84dfcfb4d7afa5a2dab3412bd44c05c1dae#subdirectory=setup/despatch_advice_import
 odoo10-addon-despatch-advice-import-ubl @ git+https://github.com/acsone/edi.git@e37df84dfcfb4d7afa5a2dab3412bd44c05c1dae#subdirectory=setup/despatch_advice_import_ubl
