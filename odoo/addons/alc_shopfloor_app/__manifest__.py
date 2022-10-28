@@ -34,6 +34,7 @@
         "alc_shopfloor_mobile_stock_issue_button",
         "alc_shopfloor_mobile_stock_refill",
         "alc_shopfloor_mobile_stock_reserve",
+        "alc_shopfloor_version",
         "alc_shopfloor_mobile_workstation",
         "alc_shopfloor_rest_log",
         "alc_shopfloor_unassign_wave",
