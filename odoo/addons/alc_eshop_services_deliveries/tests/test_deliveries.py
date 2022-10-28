@@ -91,4 +91,6 @@ class TestDocumentsServiceFlow(TestDeliveriesService):
                     "name": self.picking_half.name,
                 },
             ]
-            self.assertEqual(result["data"], expected)
+            # ignore order for equality
+            self.assertEqual(len(result["data"]), len(expected))
+            self.assertTrue(all(r in expected for r in result["data"]))
