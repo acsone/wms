@@ -320,7 +320,7 @@ class FacadePackingSlip(Facade):
             "product_qty:qty",
             ("prix_net_htva", self._get_price_from_move),
             ("prix_brut_htva", self._get_price_from_move),
-            "serial_number:numero_de_suite",
+            "suite_name:numero_de_suite",
             ("product_id", parser_product),
             ("lot_ids", parser_lot),
         ]
