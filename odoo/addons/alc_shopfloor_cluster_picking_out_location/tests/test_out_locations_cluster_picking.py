@@ -59,7 +59,7 @@ class TestOutLocationsClusterPicking(ClusterPickingUnloadingCommonCase):
             )
         )
         cls.env["stock.location"]._parent_store_compute()
-        cls.delivery_template = (
+        delivery_template = (
             cls.env["round.template"]
             .sudo()
             .create({"name": "Unittest delivery template"})
@@ -67,7 +67,7 @@ class TestOutLocationsClusterPicking(ClusterPickingUnloadingCommonCase):
         cls.delivery_round = (
             cls.env["round.instance"]
             .sudo()
-            .create({"template_id": cls.delivery_template.id, "date": "2017-01-01"})
+            .create({"template_id": delivery_template.id, "date": "2017-01-01"})
         )
         delivery_template2 = (
             cls.env["round.template"]
@@ -230,66 +230,4 @@ class TestOutLocationsClusterPicking(ClusterPickingUnloadingCommonCase):
             response,
             next_state="start",
             message={"body": "Batch Transfer complete", "message_type": "success"},
-        )
-
-    def test_02_cannot_unload_on_specific_locations(self):
-        """ Carrier is specified to not unload on specific locations :
-         redirection to unload_all as it previously was
-        """
-        carrier = (
-            self.env["delivery.carrier"]
-            .sudo()
-            .create(
-                {
-                    "name": "Unittest delivery carrier",
-                    "delivery_template_id": self.delivery_template.id,
-                    "unload_on_specific_location": False,
-                }
-            )
-        )
-        wh = self.env.ref("stock.warehouse0")
-        wh.sudo().write(
-            {
-                "name": "Test Warehouse",
-                "reception_steps": "one_step",
-                "delivery_steps": "pick_ship",
-                "code": "TST",
-            }
-        )
-        wh.sudo().pick_type_id.subcode = "PICK"
-        partner = self.env["res.partner"].sudo().create({"name": "partner1"})
-        so_values = {
-            "partner_id": partner.id,
-            "warehouse_id": wh.id,
-            "carrier_id": carrier.id,
-            "order_line": [
-                (
-                    0,
-                    0,
-                    {
-                        "name": self.product_a.name,
-                        "product_id": self.product_a.id,
-                        "product_uom_qty": 1,
-                        "product_uom": self.product_a.uom_id.id,
-                        "price_unit": 1,
-                    },
-                )
-            ],
-        }
-
-        new_so = self.env["sale.order"].sudo().create(so_values)
-        new_so.action_confirm()
-        pick = new_so.picking_ids.filtered(lambda p: p.picking_type_subcode == "PICK")
-        batch = self.env["stock.picking.wave"].create(
-            {"picking_ids": [(6, None, pick.ids)]}
-        )
-        batch.picking_ids.action_confirm()
-        batch.picking_ids.action_assign()
-        self.delivery_round._assign_pickings(self.batch.picking_ids)
-        response = self.service.dispatch(
-            "prepare_unload", params={"picking_batch_id": self.batch.id}
-        )
-        data = self._data_for_batch(self.batch, location=self.out_location)
-        self.assert_response(
-            response, next_state="unload_all", data=data,
         )

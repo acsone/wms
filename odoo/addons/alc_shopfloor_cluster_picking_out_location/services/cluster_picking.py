@@ -12,13 +12,7 @@ class ClusterPicking(Component):
         batch = self.env["stock.picking.wave"].browse(picking_batch_id)
         if not batch.exists():
             return self._response_batch_does_not_exist()
-        batch_can_be_unloaded_on_specific_locations = self._check_pickings_can_be_unloaded_on_specific_locations(
-            batch
-        )
-        if (
-            not batch_can_be_unloaded_on_specific_locations
-            or not self.work.menu.unload_on_specific_location
-        ):
+        if not self.work.menu.unload_on_specific_location:
             return super(ClusterPicking, self).prepare_unload(picking_batch_id)
         return self._unload_next_package(batch)
 
@@ -104,12 +98,4 @@ class ClusterPicking(Component):
         return (
             self.env["stock.location"].browse(location_id),
             self.env["round.instance"].browse(delivery_round_id),
-        )
-
-    def _check_pickings_can_be_unloaded_on_specific_locations(self, batch):
-        return all(
-            unload_on_specific_location
-            for unload_on_specific_location in batch.mapped(
-                "delivery_round_ids.shipping_ids.carrier_id.unload_on_specific_location"
-            )
         )
