@@ -18,6 +18,6 @@ class TestProductUpdate(SavepointComponentCase):
         cls.backend.bind_all_product(domain=[("id", "=", cls.product_template.id)])
 
         cls.binding = cls.product.shopinvader_bind_ids
-        cls.binding.to_update = False
+        cls.binding.to_update = "false"
 
         cls.today = Date.context_today(cls.product_template)
