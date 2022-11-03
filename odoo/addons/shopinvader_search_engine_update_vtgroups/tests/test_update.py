@@ -17,25 +17,25 @@ class TestProductExportFlow(TestProductUpdate):
         # when
         vt_group = self.env["veterinary.group"].create(vals)
         # then
-        self.assertTrue(self.binding.to_update)
+        self.assertEqual(self.binding.to_update, "true")
 
         # given
-        self.binding.to_update = False
+        self.binding.to_update = "false"
         partner = self.env["res.partner"].create({"name": "P"})
         # when  # just modifying the partner does not mark products to update
         vt_group.write({"partner_ids": [(6, 0, partner.ids)]})
         # then
-        self.assertFalse(self.binding.to_update)
+        self.assertEqual(self.binding.to_update, "false")
 
         # when
         vt_group.product_template_ids = [(5, 0, 0)]
         # then: if we removed the product, it is updated
-        self.assertTrue(self.binding.to_update)
+        self.assertEqual(self.binding.to_update, "true")
 
         # given: we add it back in to test unlink
         vt_group.product_template_ids = [(4, self.product_template.id, 0)]
-        self.binding.to_update = False
+        self.binding.to_update = "false"
         # when
         vt_group.unlink()
         # then
-        self.assertTrue(self.binding.to_update)
+        self.assertEqual(self.binding.to_update, "true")
