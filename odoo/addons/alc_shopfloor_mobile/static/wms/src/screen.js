@@ -36,7 +36,7 @@ Vue.component("nav-item-action").extendOptions.template = `
 
 Vue.component("app-bar-actions").extendOptions.template = `
     <div :class="$options._componentTag">
-        <span> version 1.95.12 </span>
+        <span> version 1.95.13 </span>
         <v-btn icon @click="$router.push({'name': 'scan_anything'})" :disabled="this.$route.name=='scan_anything'">
             <v-icon >mdi-magnify</v-icon>
         </v-btn>
