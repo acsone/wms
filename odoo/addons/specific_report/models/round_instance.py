@@ -4,7 +4,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 import math
-from collections import OrderedDict
+from collections import OrderedDict, defaultdict
 
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
@@ -59,8 +59,8 @@ class RoundInstance(models.Model):
 
         shipping_values = OrderedDict()
         for shipping in shippings:
+            specific_out_locations = defaultdict(list)
             partner_value = shipping_values.get(shipping.partner_id, {})
-            products_or_packages_list = []
             number_of_drug = partner_value.get("number_of_drug", 0)
             number_of_drug += shipping.number_of_drug
             item_number_of_drug = partner_value.get("item_number_of_drug", 0)
@@ -90,23 +90,9 @@ class RoundInstance(models.Model):
             if shipping.partner_id.comment:
                 note = shipping.partner_id.comment
 
-            for pack in shipping.pack_operation_ids:
-                if pack.package_id and pack.package_id.is_internal:
-                    for op in pack.package_id.planned_pack_operation_ids:
-                        products_or_packages_values = {}
-                        products_or_packages_values["product"] = op.product_id.name
-                        products_or_packages_values["qty_to_ship"] = int(op.qty_done)
-                        products_or_packages_values["location"] = pack.package_id.name
-                        products_or_packages_list.append(products_or_packages_values)
-                if pack.package_id and not pack.package_id.is_internal:
-                    products_or_packages_values = {}
-                    # Med or cold pack
-                    products_or_packages_values["product"] = pack.package_id.name
-                    products_or_packages_values[
-                        "qty_to_ship"
-                    ] = pack.package_id.nbr_packages
-                    products_or_packages_values["location"] = pack.from_loc
-                    products_or_packages_list.append(products_or_packages_values)
+            specific_out_locations = self._list_specific_out_locations(
+                shipping, partner_value
+            )
 
             partner_value.update(
                 {
@@ -120,19 +106,12 @@ class RoundInstance(models.Model):
                     "item_number_of_equipment": item_number_of_equipment,
                     "number_total": number_total,
                     "item_number_total": item_number_total,
+                    "specific_out_locations": specific_out_locations,
                     "note": note,
                     "rank": shipping.rank,
                     "shipping": shipping,
                 }
             )
-            # Maybe more than one shipping for the customer
-            if "products_or_packages_list" in partner_value.keys():
-                tmp = partner_value["products_or_packages_list"]
-                partner_value["products_or_packages_list"] = (
-                    tmp + products_or_packages_list
-                )
-            else:
-                partner_value["products_or_packages_list"] = products_or_packages_list
             shipping_values[shipping.partner_id] = partner_value
 
         result = []
@@ -149,6 +128,111 @@ class RoundInstance(models.Model):
             result.append((partner, shipping_value["shipping"], shipping_value))
 
         return result
+
+    def _list_specific_out_locations(self, shipping, partner_value):
+        # Maybe more than one shipping for the customer : complete the out locations
+        specific_out_locations = partner_value.get("specific_out_locations", {})
+        zone_equipment = self.env.ref("__setup__.picking_zone_materiel")
+        zone_cold = self.env.ref("__setup__.picking_zone_frigo")
+        zone_food = self.env.ref("__setup__.picking_zone_aliments")
+        zone_med = self.env.ref("__setup__.picking_zone_humain")
+        out_locations_med = []
+        out_locations_cold = []
+        out_locations_food = []
+        out_locations_equipment = []
+
+        for pack in shipping.pack_operation_ids:
+            picking_zones = pack.mapped("move_ids.product_id.picking_zone_id")
+            for picking_zone in picking_zones:
+                if picking_zone == zone_med and (
+                    shipping.number_of_drug or shipping.item_number_of_drug
+                ):
+                    out_locations_med.append(pack.from_loc)
+                if picking_zone == zone_cold and (
+                    shipping.number_of_cold or shipping.item_number_of_cold
+                ):
+                    out_locations_cold.append(pack.from_loc)
+                if picking_zone == zone_food and (
+                    shipping.number_of_food or shipping.item_number_of_food
+                ):
+                    # We kept internal packages or not
+                    if pack.package_id and pack.package_id.is_internal:
+                        out_locations_food.append(pack.package_id.name)
+                    else:
+                        out_locations_food.append(pack.from_loc)
+                if picking_zone == zone_equipment and (
+                    shipping.number_of_equipment or shipping.item_number_of_equipment
+                ):
+                    # We kept internal packages or not
+                    if pack.package_id and pack.package_id.is_internal:
+                        out_locations_equipment.append(pack.package_id.name)
+                    else:
+                        out_locations_equipment.append(pack.from_loc)
+
+        # Create or update specific_out_locations on the partner
+        return self._create_or_update_specific_out_locations_dict(
+            specific_out_locations,
+            out_locations_med,
+            out_locations_food,
+            out_locations_cold,
+            out_locations_equipment,
+        )
+
+    def _create_or_update_specific_out_locations_dict(
+        self,
+        specific_out_locations,
+        out_locations_med,
+        out_locations_food,
+        out_locations_cold,
+        out_locations_equipment,
+    ):
+        if "med_out_locations" in specific_out_locations.keys():
+            new_out_locations = list(
+                set(
+                    specific_out_locations["med_out_locations"]
+                    + list(set(out_locations_med))
+                )
+            )
+            specific_out_locations["med_out_locations"] = new_out_locations
+        else:
+            specific_out_locations["med_out_locations"] = list(set(out_locations_med))
+
+        if "cold_out_locations" in specific_out_locations.keys():
+            new_out_locations = list(
+                set(
+                    specific_out_locations["cold_out_locations"]
+                    + list(set(out_locations_cold))
+                )
+            )
+            specific_out_locations["cold_out_locations"] = new_out_locations
+        else:
+            specific_out_locations["cold_out_locations"] = list(set(out_locations_cold))
+
+        if "food_out_locations" in specific_out_locations.keys():
+            new_out_locations = list(
+                set(
+                    specific_out_locations["food_out_locations"]
+                    + list(set(out_locations_food))
+                )
+            )
+            specific_out_locations["food_out_locations"] = new_out_locations
+        else:
+            specific_out_locations["food_out_locations"] = list(set(out_locations_food))
+
+        if "equipment_out_locations" in specific_out_locations.keys():
+            new_out_locations = list(
+                set(
+                    specific_out_locations["equipment_out_locations"]
+                    + list(set(out_locations_equipment))
+                )
+            )
+            specific_out_locations["equipment_out_locations"] = new_out_locations
+        else:
+            specific_out_locations["equipment_out_locations"] = list(
+                set(out_locations_equipment)
+            )
+
+        return specific_out_locations
 
 
 class RoundInstanceCustomer(models.Model):
