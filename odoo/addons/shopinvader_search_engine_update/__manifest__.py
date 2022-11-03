@@ -9,7 +9,7 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["shopinvader_search_engine"],
+    "depends": ["shopinvader_search_engine", "queue_job_cron"],
     "application": False,
     "data": ["data/ir_cron.xml"],
     "demo": [],
