@@ -144,6 +144,21 @@ const app = new Vue({
             }
             return new OdooClass(params);
         },
+        _checkVersionRefresh: function(odoo) {
+            odoo.call("shopfloor_version").then(function(result) {
+                if (result.data.version != shopfloor_app_info.app_version) {
+                    const url = new URL(window.location.href);
+                    const headers = {
+                        Pragma: "no-cache",
+                        Expires: -1,
+                        "Cache-Control": "no-cache",
+                    };
+                    fetch(url, {headers: headers}).then(function() {
+                        window.location.reload();
+                    });
+                }
+            });
+        },
         loadConfig: function(force) {
             if (this.appconfig && !force) {
                 return this.appconfig;
@@ -194,6 +209,7 @@ const app = new Vue({
                 usage: "user",
                 profile_id: this.profile.id,
             });
+            this._checkVersionRefresh(odoo);
             return odoo.call("menu").then(function(result) {
                 self.appmenu = result.data;
             });

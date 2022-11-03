@@ -9,9 +9,8 @@ import json
 import os
 
 from odoo import http
-from odoo.modules.module import load_information_from_description_file
 
-APP_VERSIONS = {}
+from odoo.addons.shopfloor_base.utils import _get_app_version
 
 
 class ShopfloorMobileAppMixin(object):
@@ -32,22 +31,13 @@ class ShopfloorMobileAppMixin(object):
             **kw
         )
 
-    def _get_version(self, module_name, module_path=None):
-        """Return module version straight from manifest."""
-        global APP_VERSIONS
-        if APP_VERSIONS.get(module_name):
-            return APP_VERSIONS[module_name]
-        try:
-            info = load_information_from_description_file(
-                module_name, mod_path=module_path
-            )
-            APP_VERSIONS[module_name] = info["version"]
-            return APP_VERSIONS[module_name]
-        except Exception:
-            return "dev"
+    def _get_app_version(self, module_name=None, module_path=None):
+        return self._get_version(module_name, module_path)
 
-    def _get_app_version(self):
-        return self._get_version("shopfloor_mobile_base", module_path=self.module_path)
+    def _get_version(self, module_name, module_path=None):
+        module_name = module_name or "shopfloor_mobile_base"
+        module_path = module_path or self.module_path
+        return _get_app_version(module_name, module_path=module_path)
 
     def _serve_assets(self, path_fragment="", **kw):
         # TODO Should be authorized via api.key except for the login ?
@@ -129,13 +119,15 @@ class ShopfloorMobileAppMixin(object):
 
 class ShopfloorMobileAppController(http.Controller, ShopfloorMobileAppMixin):
     @http.route(
-        ["/shopfloor_mobile/app", "/shopfloor_mobile/app/<string:demo>"], auth="public",
+        ["/shopfloor_mobile/app", "/shopfloor_mobile/app/<string:demo>"],
+        auth="public",
     )
     def load_app(self, demo=False, **kw):
         return self._load_app(demo=True if demo else False, **kw)
 
     @http.route(
-        ["/shopfloormobile/scanner"], auth="public",
+        ["/shopfloormobile/scanner"],
+        auth="public",
     )
     def load_app_backward(self, demo=False):
         # Backward compat redirect (url changed from /scanner to /app)
@@ -143,7 +135,8 @@ class ShopfloorMobileAppController(http.Controller, ShopfloorMobileAppMixin):
 
     # TODO: do we really need this?
     @http.route(
-        ["/shopfloor_mobile/assets/<path:path_fragment>"], auth="public",
+        ["/shopfloor_mobile/assets/<path:path_fragment>"],
+        auth="public",
     )
     def load_assets(self, path_fragment="", **kw):
         return self._serve_assets(path_fragment=path_fragment, **kw)
