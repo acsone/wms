@@ -15,18 +15,18 @@ class TestProductExportFlow(TestProductUpdate):
         # when
         special = self.env["product.discount.special"].create(vals)
         # then
-        self.assertTrue(self.binding.to_update)
+        self.assertEqual(self.binding.to_update, "true")
 
         # given
-        self.binding.to_update = False
+        self.binding.to_update = "false"
         # when
         special.date_start = self.today
         # then
-        self.assertTrue(self.binding.to_update)
+        self.assertEqual(self.binding.to_update, "true")
 
         # given
-        self.binding.to_update = False
+        self.binding.to_update = "false"
         # when
         special.unlink()
         # then
-        self.assertTrue(self.binding.to_update)
+        self.assertEqual(self.binding.to_update, "true")
