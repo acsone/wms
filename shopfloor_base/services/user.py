@@ -4,6 +4,8 @@
 from odoo.addons.base_rest.components.service import to_int
 from odoo.addons.component.core import Component
 
+from ..utils import _get_app_version
+
 
 class ShopfloorUser(Component):
     """Generic endpoints for user specific info."""
@@ -29,6 +31,9 @@ class ShopfloorUser(Component):
     @property
     def _user_info_parser(self):
         return ["id", "name"]
+
+    def shopfloor_version(self):
+        return self._response(data={"version": _get_app_version()})
 
 
 class ShopfloorUserValidator(Component):
