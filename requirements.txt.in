@@ -68,8 +68,8 @@ odoo10-addon-stock-packaging-calculator @ git+https://github.com/OCA/stock-logis
 # oca/wms
 odoo10-addon-stock-storage-type @ git+https://github.com/acsone/wms.git@10.0-alc_master#subdirectory=setup/stock_storage_type
 odoo10-addon-stock-storage-type-putaway-abc @ git+https://github.com/oca/wms.git@refs/pull/103/head#subdirectory=setup/stock_storage_type_putaway_abc
-odoo10-addon-shopfloor-base @ git+https://github.com/acsone/wms.git@10.0-backport-shopfloor-base-backport-base-rest#subdirectory=setup/shopfloor_base
-odoo10-addon-shopfloor-mobile-base @ git+https://github.com/oca/wms.git@refs/pull/204/head#subdirectory=setup/shopfloor_mobile_base
+odoo10-addon-shopfloor-base @ git+https://github.com/acsone/wms.git@10.0-backport-shopfloor-base-refresh#subdirectory=setup/shopfloor_base
+odoo10-addon-shopfloor-mobile-base @ git+https://github.com/acsone/wms.git@10.0-backport-shopfloor-base-refresh#subdirectory=setup/shopfloor_mobile_base
 odoo10-addon-shopfloor-mobile @ git+https://github.com/oca/wms.git@refs/pull/213/head#subdirectory=setup/shopfloor_mobile
 odoo10-addon-shopfloor @ git+https://github.com/oca/wms.git@refs/pull/213/head#subdirectory=setup/shopfloor
 odoo10-addon-stock-picking-batch-creation @ git+https://github.com/oca/wms.git@refs/pull/285/head#subdirectory=setup/stock_picking_batch_creation
