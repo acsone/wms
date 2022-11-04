@@ -128,7 +128,7 @@ class PickingsService(Component):
                 "type": "list",
                 "schema": {"type": "dict", "schema": self._get_lot_schema()},
             },
-            "serial_number": {"type": "string", "required": True, "nullable": True},
+            "suite": {"type": "string", "required": True, "nullable": True},
             "prix_brut_htva": {"type": "float", "required": True, "nullable": False},
             "prix_net_htva": {"type": "float", "required": True, "nullable": False},
         }
@@ -217,7 +217,7 @@ class PickingsService(Component):
             "city:locality",
             ("country_id", ["name"]),
         ]
-        parser_lot = ["name:lot", "expiry_date:peremption"]
+        parser_lot = ["name:lot", "life_date:peremption"]
         parser_move_lines = [
             "name",
             "state",
@@ -226,7 +226,7 @@ class PickingsService(Component):
             ("reference", lambda ml, fn: ml.product_id.default_code),
             ("prix_net_htva", lambda ml, fn: ml.order_line_id.price_reduce),
             ("prix_brut_htva", lambda ml, fn: ml.order_line_id.price_unit),
-            "serial_number",
+            "suite_name:suite",
             ("lot_ids:lots", parser_lot),
         ]
         return [

@@ -2,7 +2,6 @@
 # Copyright 2018 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 from collections import defaultdict
-from datetime import datetime
 from io import BytesIO
 
 import unicodecsv as csv
@@ -227,28 +226,6 @@ class StockPicking(models.Model):
             s = formater.format(number)
             return ",".join(s.split("."))
 
-        def get_last_column(sale_order, delivery_date):
-            """ Compute last column of the delivery note.
-
-            Don't know what it is called but it is also found on the
-            deliverslip report.
-            """
-            customer = sale_order.partner_id
-            depot_number = (
-                customer.vet_depot_number or customer.parent_id.vet_depot_number
-            )
-            if not depot_number:
-                return sale_order.client_order_ref or ""
-            return "/".join(
-                [
-                    datetime.strptime(delivery_date, "%Y-%m-%d %H:%M:%S").strftime(
-                        "%y"
-                    ),
-                    depot_number,
-                    sale_order.suite_name or "0000",
-                ]
-            )
-
         def format_use_date(use_date):
             """Get the use dates in format dd-mm-yyyy"""
             if not use_date:
@@ -314,7 +291,7 @@ class StockPicking(models.Model):
                             # Lots name
                             quant[0] or "",
                             format_use_date(quant[2] or ""),
-                            get_last_column(sol.order_id, self.date_done),
+                            move_line._get_suite_name(sol.order_id, self.date_done),
                             # Product AMM if exist and delivery date
                             format_use_date(self.date_done or ""),
                             product.product_tmpl_id.code_amm
