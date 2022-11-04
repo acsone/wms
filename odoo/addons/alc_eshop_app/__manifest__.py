@@ -40,6 +40,7 @@
         "alc_search_engine",
         "shopinvader_assortment_bind",
         "shopinvader_search_engine_update_image",
+        "shopinvader_search_engine_update_links",
         "shopinvader_search_engine_update_media",
         "shopinvader_search_engine_update_specials",
         "shopinvader_search_engine_update_vtgroups",
