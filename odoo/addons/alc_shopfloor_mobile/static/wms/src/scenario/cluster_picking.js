@@ -466,6 +466,7 @@ const ClusterPicking = {
             this.reset_notification();
           },
           on_confirm_stock_issue: () => {
+            const self = this;
             let endpoint, endpoint_data;
             const data = this.state.data;
             endpoint = "stock_issue";
@@ -476,7 +477,9 @@ const ClusterPicking = {
             if (data.lot) {
               endpoint_data.lot_id = data.lot.id;
             }
-            this.wait_call(this.odoo.call(endpoint, endpoint_data));
+            this.wait_call(this.odoo.call(endpoint, endpoint_data)).then(function() {
+              self.state_reset_data_all();
+            });
           },
         },
       },
