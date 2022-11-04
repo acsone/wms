@@ -92,6 +92,10 @@
                     <t t-set="partner" t-value="line[0]" />
                     <t t-set="shipping" t-value="line[1]" />
                     <t t-set="shipping_value" t-value="line[2]" />
+                    <t
+                      t-set="specific_locations"
+                      t-value="shipping_value.get('specific_out_locations', {})"
+                    />
                     <tr>
                       <td>
                         <span t-esc="index" />
@@ -122,10 +126,12 @@
                           t-set="total_medoc_unit"
                           t-value="int(shipping_value.get('item_number_of_drug', 0)) + total_medoc_unit"
                         />
+                        <t
+                          t-set="specific_med_locations"
+                          t-value="specific_locations.get('med_out_locations', [])"
+                        />
                         <t t-if="shipping_value.get('number_of_drug', 0)">
-                                                <span
-                            t-esc="int(shipping_value.get('number_of_drug', 0))"
-                          />
+                          <span t-esc="int(shipping_value.get('number_of_drug', 0))" />
                                                 box(es)
                                             </t>
                         <br
@@ -136,7 +142,12 @@
                             t-esc="int(shipping_value.get('item_number_of_drug', 0))"
                           />
                                                 unit(s)
-                                            </t>
+                        </t>
+                        <br t-if="specific_locations.get('med_out_locations', [])" />
+                        <t t-foreach="specific_med_locations" t-as="med_location">
+                          <span t-esc="med_location" />
+                          <br />
+                        </t>
                       </td>
                       <td>
                         <t
@@ -146,6 +157,10 @@
                         <t
                           t-set="total_cold_unit"
                           t-value="int(shipping_value.get('item_number_of_cold', 0)) + total_cold_unit"
+                        />
+                        <t
+                          t-set="specific_cold_locations"
+                          t-value="specific_locations.get('cold_out_locations', [])"
                         />
                         <t t-if="shipping_value.get('number_of_cold', 0)">
                                                 <span
@@ -161,7 +176,12 @@
                             t-esc="int(shipping_value.get('item_number_of_cold', 0))"
                           />
                                                 unit(s)
-                                            </t>
+                        </t>
+                        <br t-if="specific_locations.get('cold_out_locations', [])" />
+                        <t t-foreach="specific_cold_locations" t-as="cold_location">
+                          <span t-esc="cold_location" />
+                          <br />
+                        </t>
                       </td>
                       <td>
                         <t
@@ -171,6 +191,10 @@
                         <t
                           t-set="total_food_unit"
                           t-value="int(shipping_value.get('item_number_of_food', 0)) + total_food_unit"
+                        />
+                        <t
+                          t-set="specific_food_locations"
+                          t-value="specific_locations.get('food_out_locations', [])"
                         />
                         <t t-if="shipping_value.get('number_of_food', 0)">
                                                 <span
@@ -187,6 +211,11 @@
                           />
                                                 unit(s)
                                             </t>
+                        <br t-if="specific_locations.get('food_out_locations', [])" />
+                        <t t-foreach="specific_food_locations" t-as="food_location">
+                          <span t-esc="food_location" />
+                          <br />
+                        </t>
                       </td>
                       <td>
                         <t
@@ -196,6 +225,10 @@
                         <t
                           t-set="total_mat_unit"
                           t-value="int(shipping_value.get('item_number_of_equipment', 0)) + total_mat_unit"
+                        />
+                        <t
+                          t-set="specific_equipment_locations"
+                          t-value="specific_locations.get('equipment_out_locations', [])"
                         />
                         <t t-if="shipping_value.get('number_of_equipment', 0)">
                                                 <span
@@ -212,6 +245,16 @@
                           />
                                                 unit(s)
                                             </t>
+                        <br
+                          t-if="specific_locations.get('equipment_out_locations', [])"
+                        />
+                        <t
+                          t-foreach="specific_equipment_locations"
+                          t-as="equipment_location"
+                        >
+                          <span t-esc="equipment_location" />
+                          <br />
+                        </t>
                       </td>
                       <td>
                         <t
@@ -227,7 +270,7 @@
                             t-esc="int(shipping_value.get('number_total', 0))"
                           />
                                                 box(es)
-                                            </t>
+                        </t>
                         <br
                           t-if="shipping_value.get('number_total', 0) and shipping_value.get('item_number_total', 0)"
                         />
@@ -237,40 +280,6 @@
                           />
                                                 unit(s)
                                             </t>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td colspan='9'>
-                        <table class="table table-bordered table-condensed">
-                          <thead>
-                            <tr class="active">
-                              <th colspan='4'>Product or package</th>
-                              <th colspan='3'>Location on trolley</th>
-                              <th colspan='2'>Quantity</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <t
-                              t-set="products_list"
-                              t-value="shipping_value.get('products_or_packages_list', [])"
-                            />
-                            <tr t-foreach="products_list" t-as="product_or_package">
-                              <td colspan='4'>
-                                <span t-esc="product_or_package.get('product', '')" />
-                              </td>
-                              <td colspan='3'>
-                                  <span
-                                  t-esc="product_or_package.get('location', '')"
-                                />
-                              </td>
-                              <td colspan='2'>
-                                <span
-                                  t-esc="product_or_package.get('qty_to_ship', 0)"
-                                />
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
                       </td>
                     </tr>
                     <t t-set="index" t-value="index + 1" />
