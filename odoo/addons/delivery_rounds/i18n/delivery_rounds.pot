@@ -540,11 +540,6 @@ msgid "List of pickings to process. Only pickings linked to confirmed delivery r
 msgstr ""
 
 #. module: delivery_rounds
-#: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report
-msgid "Location on trolley"
-msgstr ""
-
-#. module: delivery_rounds
 #: model:ir.ui.view,arch_db:delivery_rounds.view_round_instance_form
 msgid "Lock Destinations"
 msgstr ""
@@ -740,16 +735,6 @@ msgstr ""
 #. module: delivery_rounds
 #: model:ir.ui.view,arch_db:delivery_rounds.view_round_instance_form
 msgid "Print delivery slip"
-msgstr ""
-
-#. module: delivery_rounds
-#: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report
-msgid "Product or package"
-msgstr ""
-
-#. module: delivery_rounds
-#: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report
-msgid "Quantity"
 msgstr ""
 
 #. module: delivery_rounds

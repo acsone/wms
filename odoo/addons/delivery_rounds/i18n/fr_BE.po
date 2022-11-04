@@ -563,11 +563,6 @@ msgstr ""
 "tournées confirmées sont affichées."
 
 #. module: delivery_rounds
-#: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report
-msgid "Location on trolley"
-msgstr ""
-
-#. module: delivery_rounds
 #: model:ir.ui.view,arch_db:delivery_rounds.view_round_instance_form
 msgid "Lock Destinations"
 msgstr "Verrouiller les destinations"
@@ -767,16 +762,6 @@ msgstr "Imprimer tous les bon de livraisons"
 #: model:ir.ui.view,arch_db:delivery_rounds.view_round_instance_form
 msgid "Print delivery slip"
 msgstr "Imprimer le bon de livraison"
-
-#. module: delivery_rounds
-#: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report
-msgid "Product or package"
-msgstr ""
-
-#. module: delivery_rounds
-#: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report
-msgid "Quantity"
-msgstr ""
 
 #. module: delivery_rounds
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_instance_customer_rank
