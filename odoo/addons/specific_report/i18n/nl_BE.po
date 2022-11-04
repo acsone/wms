@@ -940,7 +940,7 @@ msgstr "No active id found"
 
 #. module: specific_report
 #: code:addons/specific_report/models/round_instance.py:21
-#: code:addons/specific_report/models/round_instance.py:188
+#: code:addons/specific_report/models/round_instance.py:272
 #, python-format
 msgid "No invoice to print"
 msgstr "No invoice to print"
