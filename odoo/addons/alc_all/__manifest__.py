@@ -5,11 +5,11 @@
     "name": "Alc All",
     "description": """
         Alcyon Odoo App""",
-    "version": "16.0.1.95.1",
+    "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["base"],
+    "depends": ["base", "alc_putaway_app"],
     "application": True,
     "data": [
         "security/sale_order.xml",
