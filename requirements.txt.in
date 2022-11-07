@@ -5,4 +5,10 @@
 odoo @ git+https://github.com/acsone/odoo.git@16.0-alc_master
 odoo-addons-enterprise @ git+ssh://git@github.com/acsone/enterprise.git@16.0-alc_master
 
-odoo16-addon-stock_available-to-promise-release @ git+https://github.com/oca/wms.git@refs/pull/478/head#subdirectory=setup/stock_available_to_promise_release
+# wms
+odoo-addon-stock-available-to-promise-release @ git+https://github.com/oca/wms.git@refs/pull/478/head#subdirectory=setup/stock_available_to_promise_release
+odoo-addon-stock-dynamic-routing @ git+https://github.com/oca/wms.git@refs/pull/484/head#subdirectory=setup/stock_dynamic_routing
+
+
+# stock-logistics-warehouse
+odoo-addon-stock-helper @ git+https://github.com/oca/stock-logistics-warehouse.git@refs/pull/1539/head#subdirectory=setup/stock_helper

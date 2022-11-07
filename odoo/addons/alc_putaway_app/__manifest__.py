@@ -12,5 +12,6 @@
     "application": True,
     "depends": [
         "stock_available_to_promise_release",
+        "stock_dynamic_routing",
     ],
 }
