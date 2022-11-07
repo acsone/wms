@@ -9,7 +9,7 @@ from odoo.exceptions import ValidationError
 class AlcEshopAds(models.Model):
 
     _name = "alc.eshop.ads"
-    _inherit = ["mixin.file.id", "mixin.image.id"]
+    _inherit = ["mixin.file.id", "mixin.image.id", "mixin.past"]
     _description = "Eshop Ads"
 
     name = fields.Char(required=True)
