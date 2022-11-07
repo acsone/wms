@@ -7,8 +7,9 @@ _logger = logging.getLogger(__name__)
 
 
 def migrate(cr, version):
-
-    _logger.info("uninstall alc_stock_picking_policy_block")
+    ADDONS_TO_UNINSTALL = ["alc_stock_picking_policy_block", "stock_reassign_auto"]
+    _logger.info("uninstall %s", ",".join(ADDONS_TO_UNINSTALL))
     cr.execute(
-        "update ir_module_module set state = 'to remove' where name in('alc_stock_picking_policy_block')"
+        "update ir_module_module set state = 'to remove' where name in %s",
+        (tuple(ADDONS_TO_UNINSTALL),),
     )

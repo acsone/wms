@@ -30,7 +30,11 @@ lxml==4.6.5
 MarkupSafe==1.1.0
 num2words==0.5.6
 odoo @ git+https://github.com/acsone/odoo.git@87cf624bc23e7cabb4ef19e92b508571ea3249eb
+odoo-addon-queue-job==16.0.1.1.0.1
 odoo-addon-stock-available-to-promise-release @ git+ssh://git@github.com/acsone/wms@999feeb90ca12fc29bd5f6953c08ee1e95489f04#subdirectory=setup/stock_available_to_promise_release
+odoo-addon-stock-dynamic-routing @ git+https://github.com/acsone/wms.git@999feeb90ca12fc29bd5f6953c08ee1e95489f04#subdirectory=setup/stock_dynamic_routing
+odoo-addon-stock-helper @ git+https://github.com/acsone/stock-logistics-warehouse.git@3332bd22db6d1d5d31c0ea383de5d6ab1c6ccbb3#subdirectory=setup/stock_helper
+odoo-addon-stock-move-auto-assign @ git+https://github.com/acsone/stock-logistics-warehouse.git@f66e73fa9e0de5fcf4ae278ce79454c5e270ff03#subdirectory=setup/stock_move_auto_assign
 odoo-addons-enterprise @ git+ssh://git@github.com/acsone/enterprise.git@2bb56391052a901b880a38925111e11c3216b821
 ofxparse==0.21
 openupgradelib==3.3.4
