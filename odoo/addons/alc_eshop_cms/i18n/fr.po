@@ -2994,7 +2994,7 @@ msgid "Slots"
 msgstr "Emplacements"
 
 #. module: alc_eshop_cms
-#: code:addons/alc_eshop_cms/models/alc_eshop_cms_news.py:73
+#: code:addons/alc_eshop_cms/models/alc_eshop_cms_news.py:78
 #, python-format
 msgid "The defined period is not a valid (%s > %s)"
 msgstr "La période définie n'est pas valide (%s > %s)"
