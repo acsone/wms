@@ -11,4 +11,4 @@ class ShopfloorUser(Component):
     _inherit = "shopfloor.user"
 
     def shopfloor_version(self):
-        return self._response(data={"version": _get_alc_version()})
+        return self._response(data={"version": _get_alc_version(self.env.cr)})

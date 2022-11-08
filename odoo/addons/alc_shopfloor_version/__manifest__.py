@@ -9,7 +9,7 @@
     "version": "10.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
-    "depends": ["alc_shopfloor"],
+    "depends": ["web_environment_ribbon", "alc_shopfloor"],  # get the right version
     "data": [],
     "demo": [],
     "installable": True,

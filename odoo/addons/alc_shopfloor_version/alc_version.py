@@ -2,13 +2,11 @@
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-import re
-
-from odoo.addons.shopfloor_base.utils import _get_app_version
+from odoo import SUPERUSER_ID, api
 
 
-def _get_alc_version():
-    module_name = "alc_all"
-    regex = r"alc_shopfloor_version/alc_version.pyc?"
-    module_path = re.sub(regex, module_name, __file__)
-    return _get_app_version(module_name, module_path=module_path)
+def _get_alc_version(cr, memo={}):  # noqa # pylint: disable=dangerous-default-value
+    if "alc" not in memo:
+        env = api.Environment(cr, SUPERUSER_ID, {})
+        memo["alc"] = env["ir.config_parameter"].get_param("ribbon.name", default="dev")
+    return memo["alc"]
