@@ -137,6 +137,13 @@ class RoundInstance(models.Model):
         string="Customers",
         states={"done": [("readonly", True)], "delivering": [("readonly", True)]},
     )
+    instance_customer_to_deliver_ids = fields.One2many(
+        comodel_name="round.instance.customer",
+        inverse_name="delivery_round_id",
+        string="Customers to deliver",
+        domain=[("delivered", "=", False)],
+        states={"done": [("readonly", True)], "delivering": [("readonly", True)]},
+    )
     delivery_failure = fields.Boolean(compute="_compute_delivery_failure")
     report_delivery = fields.Html(compute="_compute_report_delivery", readonly=True)
 
@@ -872,10 +879,10 @@ class RoundInstanceCustomer(models.Model):
                 round_instance_customer ric
             JOIN
                 stock_picking sp
-                    ON sp.delivery_round_customer_id = ric.id,
+                    ON sp.delivery_round_customer_id = ric.id
             WHERE
                  sp.state not in ('cancel', 'done')
-                 sp.delivery_round_id IS NOT NULL
+                 AND sp.delivery_round_id IS NOT NULL
         """
         self.env.cr.execute(not_delivered_sql)
         res = self.env.cr.fetchall()
