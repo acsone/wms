@@ -11,8 +11,11 @@
     "website": "https://acsone.eu",
     "application": True,
     "depends": [
+        "alc_stock_scrap_responsible",
         "stock_available_to_promise_release",
         "stock_dynamic_routing",
+        "stock_picking_start",
         "stock_move_auto_assign",
     ],
+    "data": ["data/res_company.xml"],
 }
