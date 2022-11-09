@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2022 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <!-- Config Settings -->
+    <record id="base.main_company" model="res.company">
+        <field name="stock_picking_assign_operator_at_start" eval="1" />
+    </record>
+</odoo>
