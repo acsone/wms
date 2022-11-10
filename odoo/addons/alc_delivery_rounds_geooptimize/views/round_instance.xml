@@ -58,19 +58,27 @@
           class="oe_highlight"
         />
       </button>
-      <xpath expr="//page[@name='customers']//field[@name='rank']" position="before">
+    </field>
+  </record>
+
+  <record id="view_round_instance_customer_tree" model="ir.ui.view">
+    <field name="name">round.instance.customer.tree (in
+            alc_delivery_rounds_geooptimize)
+        </field>
+    <field name="model">round.instance.customer</field>
+    <field name="inherit_id" ref="delivery_rounds.view_round_instance_customer_tree" />
+    <field name="arch" type="xml">
+      <field name="rank" position="before">
         <field name="is_rank_computed" invisible="1" />
-      </xpath>
-      <xpath
-        expr="//page[@name='customers']//field[@name='rank']"
-        position="attributes"
-      >
+      </field>
+      <field name="rank" position="attributes">
         <attribute
           name="attrs"
         >{'readonly': [('is_rank_computed', '==', True)]}</attribute>
-      </xpath>
+      </field>
     </field>
   </record>
+
   <record id="view_round_instance_kanban" model="ir.ui.view">
     <field name="name">round.instance.kanban (in
             alc_delivery_rounds_geooptimize)
