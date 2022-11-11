@@ -2,19 +2,20 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 {
-    "name": "Alc Putaway App",
+    "name": "Alc Order Picking App",
     "description": """
-        Allows to collect all modules for putaway application""",
+        Order Picking App""",
     "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
-    "website": "https://acsone.eu",
-    "application": True,
+    "website": "https://acsone.eu/",
     "depends": [
-        "alc_stock_scrap_responsible",
+        "stock_available_to_promise_release",
         "stock_dynamic_routing",
         "stock_picking_start",
-        "stock_move_auto_assign",
     ],
     "data": [],
+    "demo": [],
+    "application": True,
+    "installable": True,
 }
