@@ -4,7 +4,7 @@
 {
     "name": "Alcyon ElasticSearch",
     "description": """Alcyon Shopinvader ElasticSearch Configuration""",
-    "version": "10.0.1.0.2",
+    "version": "10.0.1.0.3",
     "author": "ACSONE SA/NV",
     "website": "http://www.acsone.eu",
     "license": "AGPL-3",
@@ -26,6 +26,7 @@
         "data/ir_export_product.xml",
         "data/ir_export_category.xml",
         "data/se_backend.xml",
+        "data/se_index_config_variants.xml",
         "data/se_index.xml",
     ],
     "post_init_hook": "post_init_hook",
