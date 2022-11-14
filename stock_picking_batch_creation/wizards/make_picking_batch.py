@@ -108,6 +108,8 @@ class MakePickingBatch(models.TransientModel):
         selected_device = None
         suitable_pick_ids = []
         for pick in pickings:
+            if not self._lock_selected_picking(pick):
+                continue
             device = self._compute_device_to_use(pick)
             if device and not selected_device:
                 selected_device = device
@@ -190,6 +192,8 @@ class MakePickingBatch(models.TransientModel):
         # # - The device for the current picking is supposed to be
         available_nbr_bins = device.nbr_bins
         for picking in pickings:
+            if not self._lock_selected_picking(picking):
+                continue
             if available_nbr_bins == 0:
                 break
 
@@ -237,23 +241,21 @@ class MakePickingBatch(models.TransientModel):
                 continue
 
             # All conditions are OK : we keep the picking in the cluster
-            if self._lock_selected_picking(picking):
-                selected_picking_ids.append(picking.id)
-                total_weight += picking.total_weight_batch_picking
-                total_volume += picking.total_volume_batch_picking
-                total_nbr_picking_lines += picking.nbr_picking_lines
-                available_nbr_bins -= picking.nbr_bins_batch_picking
+            selected_picking_ids.append(picking.id)
+            total_weight += picking.total_weight_batch_picking
+            total_volume += picking.total_volume_batch_picking
+            total_nbr_picking_lines += picking.nbr_picking_lines
+            available_nbr_bins -= picking.nbr_bins_batch_picking
 
         selected_pickings = self.env["stock.picking"].browse(selected_picking_ids)
         unselected_pickings = pickings - selected_pickings
         return selected_pickings, unselected_pickings
 
     def _lock_selected_picking(self, picking):
-        """ Method hook called once a picking is qualified to be added to the
-        batch. IT allows you to lock the selected picking and ensure that
+        """ Method hook called to lock the selected picking and ensure that
         nothing has changed in the timelapse between the search request and
         the addition to the batch that will prevent a normal commit of the
-        transaction. If noting is returned by the method, the selected picking
+        transaction. If nothing is returned by the method, the selected picking
         will not be added to the batch.
 
         Implementation example:
