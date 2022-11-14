@@ -8,6 +8,7 @@ odoo-addons-enterprise @ git+ssh://git@github.com/acsone/enterprise.git@16.0-alc
 # wms
 odoo-addon-stock-available-to-promise-release @ git+https://github.com/oca/wms.git@refs/pull/478/head#subdirectory=setup/stock_available_to_promise_release
 odoo-addon-stock-dynamic-routing @ git+https://github.com/oca/wms.git@refs/pull/484/head#subdirectory=setup/stock_dynamic_routing
+odoo-addon-stock-release-channel @ git+https://github.com/oca/wms.git@refs/pull/493/head#subdirectory=setup/stock_release_channel
 
 
 # stock-logistics-warehouse

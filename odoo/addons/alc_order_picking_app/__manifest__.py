@@ -13,6 +13,7 @@
         "stock_available_to_promise_release",
         "stock_dynamic_routing",
         "stock_picking_start",
+        "stock_release_channel",
     ],
     "data": [],
     "demo": [],
