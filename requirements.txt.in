@@ -12,7 +12,6 @@ odoo-addon-stock-release-channel @ git+https://github.com/oca/wms.git@refs/pull/
 
 
 # stock-logistics-warehouse
-odoo-addon-stock-helper @ git+https://github.com/oca/stock-logistics-warehouse.git@refs/pull/1539/head#subdirectory=setup/stock_helper
 odoo-addon-stock-move-auto-assign @ git+https://github.com/oca/stock-logistics-warehouse.git@refs/pull/1532/head#subdirectory=setup/stock_move_auto_assign
 
 # stock-logistics-workflow

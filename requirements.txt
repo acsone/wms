@@ -33,7 +33,7 @@ odoo @ git+https://github.com/acsone/odoo.git@87cf624bc23e7cabb4ef19e92b508571ea
 odoo-addon-queue-job==16.0.1.1.0.1
 odoo-addon-stock-available-to-promise-release @ git+ssh://git@github.com/acsone/wms@6b5d1952be3e33d589f5439b72ed935ebc6f0994#subdirectory=setup/stock_available_to_promise_release
 odoo-addon-stock-dynamic-routing @ git+https://github.com/acsone/wms.git@999feeb90ca12fc29bd5f6953c08ee1e95489f04#subdirectory=setup/stock_dynamic_routing
-odoo-addon-stock-helper @ git+https://github.com/acsone/stock-logistics-warehouse.git@3332bd22db6d1d5d31c0ea383de5d6ab1c6ccbb3#subdirectory=setup/stock_helper
+odoo-addon-stock-helper==16.0.1.0.1
 odoo-addon-stock-move-auto-assign @ git+https://github.com/acsone/stock-logistics-warehouse.git@f66e73fa9e0de5fcf4ae278ce79454c5e270ff03#subdirectory=setup/stock_move_auto_assign
 odoo-addon-stock-picking-start @ git+https://github.com/acsone/stock-logistics-workflow.git@fb95dafafd5522a0f43bbf9aa0d81ba819c1ba44#subdirectory=setup/stock_picking_start
 odoo-addon-stock-release-channel @ git+https://github.com/oca/wms.git@4b05fb5ff17acfe73f5d5761f32d066d447c4ace#subdirectory=setup/stock_release_channel
