@@ -22,3 +22,11 @@ class MessageAction(Component):
             "message_type": "error",
             "body": _("Package already scanned. Please scan another one."),
         }
+
+    def package_not_in_batch(self):
+        return {
+            "message_type": "error",
+            "body": _(
+                "Package not in the picking wave. Please scan a correct package."
+            ),
+        }

@@ -28,6 +28,11 @@ class ClusterPicking(Component):
                 return self._response_for_unload_single(
                     batch, package, message=self.msg_store.package_already_scanned(),
                 )
+            packages = batch.picking_ids.mapped("pack_operation_ids.result_package_id")
+            if package not in packages:
+                return self._response_for_unload_single(
+                    batch, package, message=self.msg_store.package_not_in_batch(),
+                )
             return self._response_for_unload_set_destination(batch, package)
 
         return super(ClusterPicking, self).unload_scan_pack(
