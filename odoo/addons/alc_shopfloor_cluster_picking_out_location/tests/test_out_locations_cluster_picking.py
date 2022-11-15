@@ -287,3 +287,27 @@ class TestOutLocationsClusterPicking(ClusterPickingUnloadingCommonCase):
                 "message_type": "error",
             },
         )
+
+    def test_03_unload_not_existing_package(self):
+        packs_batch1 = self._prepare_out_packages(self.batch, self.operations)
+        response = self.service.dispatch(
+            "unload_scan_pack",
+            params={
+                "picking_batch_id": self.batch.id,
+                "package_id": packs_batch1[0].id,
+                "barcode": "PACKDOESNOTEXIST",
+            },
+        )
+        data = self._data_for_batch(
+            self.batch, location=self.out_location, pack=packs_batch1[0]
+        )
+
+        self.assert_response(
+            response,
+            next_state="unload_single",
+            data=data,
+            message={
+                "body": "Package does not exist. Please scan a correct package.",
+                "message_type": "error",
+            },
+        )

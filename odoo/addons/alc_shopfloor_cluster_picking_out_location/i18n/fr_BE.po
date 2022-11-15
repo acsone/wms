@@ -79,6 +79,14 @@ msgstr "Ce chariot est déjà occupé par une tournée. Veuillez en prendre un a
 msgid "Package not in the picking wave. Please scan a correct package."
 msgstr "Le paquet que vous avez scanné ne correspond pas aux préparations de cette vague. Veuillez scanner un paquet de la liste de préparations."
 
+
+#. module: alc_shopfloor_cluster_picking_out_location
+#: code:addons/alc_shopfloor_cluster_picking_out_location/actions/message.py:37
+#, python-format
+msgid "Package does not exist. Please scan a correct package."
+msgstr "Le paquet que vous avez scanné n'existe pas. Veuillez scanner un paquet de la liste de préparations."
+
+
 #. module: alc_shopfloor_cluster_picking_out_location
 #: model:ir.model.fields,field_description:alc_shopfloor_cluster_picking_out_location.field_delivery_carrier_unload_on_specific_location
 #: model:ir.model.fields,field_description:alc_shopfloor_cluster_picking_out_location.field_shopfloor_menu_unload_on_specific_location
