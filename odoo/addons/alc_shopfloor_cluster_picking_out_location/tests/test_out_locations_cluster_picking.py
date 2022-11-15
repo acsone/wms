@@ -86,16 +86,14 @@ class TestOutLocationsClusterPicking(ClusterPickingUnloadingCommonCase):
         cls.operations.write({"location_dest_id": cls.out_location.id})
         cls.batch.picking_ids.write({"location_dest_id": cls.out_location.id})
 
-    def _prepare_out_packages(self):
-        self.service.dispatch(
-            "prepare_unload", params={"picking_batch_id": self.batch.id}
-        )
-        result_packages = self.operations.mapped("result_package_id")
+    def _prepare_out_packages(self, batch, operations):
+        self.service.dispatch("prepare_unload", params={"picking_batch_id": batch.id})
+        result_packages = operations.mapped("result_package_id")
         return result_packages
 
     def test_00_unload_specific_location_and_deliver(self):
         self.delivery_round._assign_pickings(self.batch.picking_ids)
-        packs_to_unload = self._prepare_out_packages()
+        packs_to_unload = self._prepare_out_packages(self.batch, self.operations)
         pack1 = packs_to_unload[0]
         pack2 = packs_to_unload[1]
         response = self.service.dispatch(
@@ -162,7 +160,7 @@ class TestOutLocationsClusterPicking(ClusterPickingUnloadingCommonCase):
         self.delivery_round._assign_pickings(pick1)
         self.delivery_round2._assign_pickings(pick2)
 
-        packs_to_unload = self._prepare_out_packages()
+        packs_to_unload = self._prepare_out_packages(self.batch, self.operations)
         pack1 = packs_to_unload[0]
         pack2 = packs_to_unload[1]
         response = self.service.dispatch(
@@ -230,4 +228,62 @@ class TestOutLocationsClusterPicking(ClusterPickingUnloadingCommonCase):
             response,
             next_state="start",
             message={"body": "Batch Transfer complete", "message_type": "success"},
+        )
+
+    def test_02_unload_wrong_package(self):
+        self.bin3 = self.env["stock.quant.package"].create({})
+        pick = self.env["stock.picking"].create(
+            {
+                "partner_id": self.customer.id,
+                "picking_type_id": self.picking_type.id,
+                "location_id": self.picking_type.default_location_src_id.id,
+                "location_dest_id": self.picking_type.default_location_dest_id.id,
+                "move_lines": [
+                    (
+                        0,
+                        0,
+                        {
+                            "name": self.product_b.name,
+                            "product_id": self.product_b.id,
+                            "picking_type_id": self.picking_type.id,
+                            "product_uom_qty": 10,
+                            "product_uom": self.product_b.uom_id.id,
+                            "location_id": self.picking_type.default_location_src_id.id,
+                            "location_dest_id": self.picking_type.default_location_dest_id.id,
+                        },
+                    ),
+                ],
+            }
+        )
+        self.batch2 = self.env["stock.picking.wave"].create(
+            {"picking_ids": [(6, None, pick.ids)]}
+        )
+        self.batch2.picking_ids.action_confirm()
+        self.batch2.picking_ids.action_assign()
+
+        self.operations2 = self.batch2.picking_ids.mapped("pack_operation_ids")
+        self._set_dest_package_and_done(self.operations2[:1], self.bin3)
+        self.operations2.write({"location_dest_id": self.out_location.id})
+        self.batch2.picking_ids.write({"location_dest_id": self.out_location.id})
+        packs_to_unload = self._prepare_out_packages(self.batch2, self.operations2)
+        pack1 = packs_to_unload[0]
+        packs_batch1 = self._prepare_out_packages(self.batch, self.operations)
+        response = self.service.dispatch(
+            "unload_scan_pack",
+            params={
+                "picking_batch_id": self.batch.id,
+                "package_id": packs_batch1[0].id,
+                "barcode": pack1.name,
+            },
+        )
+        data = self._data_for_batch(self.batch, location=self.out_location, pack=pack1)
+
+        self.assert_response(
+            response,
+            next_state="unload_single",
+            data=data,
+            message={
+                "body": "Package not in the picking wave. Please scan a correct package.",
+                "message_type": "error",
+            },
         )
