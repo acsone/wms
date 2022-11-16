@@ -12,6 +12,7 @@
     "application": True,
     "depends": [
         "alc_stock_scrap_responsible",
+        "product_abc_classification_sale_stock",
         "stock_dynamic_routing",
         "stock_picking_start",
         "stock_move_auto_assign",

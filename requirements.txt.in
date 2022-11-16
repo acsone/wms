@@ -9,6 +9,11 @@ odoo-addons-enterprise @ git+ssh://git@github.com/acsone/enterprise.git@16.0-alc
 odoo-addon-stock-available-to-promise-release @ git+https://github.com/oca/wms.git@refs/pull/478/head#subdirectory=setup/stock_available_to_promise_release
 odoo-addon-stock-release-channel @ git+https://github.com/oca/wms.git@refs/pull/493/head#subdirectory=setup/stock_release_channel
 
+# product-attribute
+# https://github.com/OCA/product-attribute/pull/1192
+odoo-addon-product-abc-classification @ git+https://github.com/acsone/product-attribute.git@16.0-mig-product_abc_classification-dro#subdirectory=setup/product_abc_classification
+# https://github.com/OCA/product-attribute/pull/1196
+odoo-addon-product-abc-classification-sale-stock @ git+https://github.com/acsone/product-attribute.git@16.0-mig-product-abc-sale-dro#subdirectory=setup/product_abc_classification_sale_stock
 
 # stock-logistics-warehouse
 odoo-addon-stock-move-auto-assign @ git+https://github.com/oca/stock-logistics-warehouse.git@refs/pull/1532/head#subdirectory=setup/stock_move_auto_assign
