@@ -6,8 +6,10 @@ odoo @ git+https://github.com/acsone/odoo.git@16.0-alc_master
 odoo-addons-enterprise @ git+ssh://git@github.com/acsone/enterprise.git@16.0-alc_master
 
 # wms
-odoo-addon-stock-available-to-promise-release @ git+https://github.com/oca/wms.git@refs/pull/478/head#subdirectory=setup/stock_available_to_promise_release
-odoo-addon-stock-release-channel @ git+https://github.com/oca/wms.git@refs/pull/493/head#subdirectory=setup/stock_release_channel
+# https://github.com/OCA/wms/pull/478
+odoo-addon-stock-available-to-promise-release @ git+https://github.com/acsone/wms.git@16.0-stock-available-to-promise-manage-backorder-lmi#subdirectory=setup/stock_available_to_promise_release
+# https://github.com/OCA/wms/pull/493
+odoo-addon-stock-release-channel @ git+https://github.com/acsone/wms.git@16.0-mig-stock_release_channel#subdirectory=setup/stock_release_channel
 
 # product-attribute
 # https://github.com/OCA/product-attribute/pull/1192
@@ -16,7 +18,13 @@ odoo-addon-product-abc-classification @ git+https://github.com/acsone/product-at
 odoo-addon-product-abc-classification-sale-stock @ git+https://github.com/acsone/product-attribute.git@16.0-mig-product-abc-sale-dro#subdirectory=setup/product_abc_classification_sale_stock
 
 # stock-logistics-warehouse
-odoo-addon-stock-move-auto-assign @ git+https://github.com/oca/stock-logistics-warehouse.git@refs/pull/1532/head#subdirectory=setup/stock_move_auto_assign
+# https://github.com/OCA/stock-logistics-warehouse/pull/1532
+odoo-addon-stock-move-auto-assign @ git+https://github.com/acsone/stock-logistics-warehouse.git@16.0-stock_move_auto_assign-reassing_on_cancel#subdirectory=setup/stock_move_auto_assign
 
 # stock-logistics-workflow
-odoo-addon-stock-picking-start @ git+https://github.com/oca/stock-logistics-workflow.git@refs/pull/1127/head#subdirectory=setup/stock_picking_start
+# https://github.com/OCA/stock-logistics-workflow/pull/1127
+odoo-addon-stock-picking-start @ git+https://github.com/acsone/stock-logistics-workflow.git@16.0-add-stock_picking_start-lmi#subdirectory=setup/stock_picking_start
+
+# queue
+# https://github.com/OCA/queue/pull/483
+odoo-addon-queue-job @ git+https://github.com/acsone/queue.git@16.0-port-pr476#subdirectory=setup/queue_job

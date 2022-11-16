@@ -3,7 +3,7 @@
         odoo: git@github.com:odoo/enterprise.git
         origin: ssh://git@github.com/acsone/enterprise.git
     merges:
-        - odoo master
+        - odoo 16.0
     shell_command_after:
         # add pyproject.toml so pip wheel works
         - gh --repo acsone/enterprise pr diff 12 --patch | git am

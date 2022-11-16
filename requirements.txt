@@ -6,42 +6,43 @@ Babel==2.9.1
 beautifulsoup4==4.11.1
 cached-property==1.5.2
 cachetools==5.2.0
-certifi==2022.6.15.2
+certifi==2022.9.24
 cffi==1.15.1
 chardet==3.0.4
 click==8.1.3
-click-odoo==1.5.0
-click-odoo-contrib==1.15.1
+click-odoo==1.6.0
+click-odoo-contrib==1.16.1
 cryptography==3.4.8
-cssselect==1.1.0
+cssselect==1.2.0
 dbfread==2.0.7
 decorator==4.4.2
 defusedxml==0.7.1
 docutils==0.16
 ebaysdk==2.1.5
 gevent==21.8.0
-google-auth==2.11.0
+google-auth==2.14.1
 greenlet==1.1.2
 idna==2.8
 isodate==0.6.1
 Jinja2==2.11.3
 libsass==0.18.0
 lxml==4.6.5
+manifestoo_core==0.10.3
 MarkupSafe==1.1.0
 num2words==0.5.6
-odoo @ git+https://github.com/acsone/odoo.git@87cf624bc23e7cabb4ef19e92b508571ea3249eb
+odoo @ git+https://github.com/acsone/odoo.git@09391b74a218a377933fb2459d91e8dd93ca452e
 odoo-addon-product-abc-classification @ git+https://github.com/acsone/product-attribute.git@340dffd0a755da5feef04b5df27861c65e5d3ec4#subdirectory=setup/product_abc_classification
 odoo-addon-product-abc-classification-sale-stock @ git+https://github.com/acsone/product-attribute.git@f9690a9c1f19ece371effeb200a417e96fddb158#subdirectory=setup/product_abc_classification_sale_stock
-odoo-addon-queue-job==16.0.1.1.0.1
-odoo-addon-stock-available-to-promise-release @ git+ssh://git@github.com/acsone/wms@6b5d1952be3e33d589f5439b72ed935ebc6f0994#subdirectory=setup/stock_available_to_promise_release
-odoo-addon-stock-dynamic-routing==16.0.1.0.0.2
+odoo-addon-queue-job @ git+https://github.com/acsone/queue.git@2a2be55491d563c225a6270f6f5045ed3e3f3558#subdirectory=setup/queue_job
+odoo-addon-stock-available-to-promise-release @ git+https://github.com/acsone/wms.git@6b5d1952be3e33d589f5439b72ed935ebc6f0994#subdirectory=setup/stock_available_to_promise_release
+odoo-addon-stock-dynamic-routing==16.0.1.0.0.3
 odoo-addon-stock-helper==16.0.1.0.1
 odoo-addon-stock-move-auto-assign @ git+https://github.com/acsone/stock-logistics-warehouse.git@f66e73fa9e0de5fcf4ae278ce79454c5e270ff03#subdirectory=setup/stock_move_auto_assign
 odoo-addon-stock-picking-start @ git+https://github.com/acsone/stock-logistics-workflow.git@fb95dafafd5522a0f43bbf9aa0d81ba819c1ba44#subdirectory=setup/stock_picking_start
-odoo-addon-stock-release-channel @ git+https://github.com/oca/wms.git@4b05fb5ff17acfe73f5d5761f32d066d447c4ace#subdirectory=setup/stock_release_channel
-odoo-addons-enterprise @ git+ssh://git@github.com/acsone/enterprise.git@2bb56391052a901b880a38925111e11c3216b821
+odoo-addon-stock-release-channel @ git+https://github.com/acsone/wms.git@4b05fb5ff17acfe73f5d5761f32d066d447c4ace#subdirectory=setup/stock_release_channel
+odoo-addons-enterprise @ git+ssh://git@github.com/acsone/enterprise.git@31da8268ad69f1bf770127c5e449cbf230fe73ce
 ofxparse==0.21
-openupgradelib==3.3.4
+openupgradelib==3.4.0
 passlib==1.7.3
 pdfminer==20191125
 Pillow==9.0.1
@@ -53,7 +54,7 @@ pyasn1-modules==0.2.8
 pycparser==2.21
 pycryptodome==3.15.0
 pydot==1.4.1
-PyJWT==2.4.0
+PyJWT==2.6.0
 pyOpenSSL==19.0.0
 pyparsing==3.0.9
 PyPDF2==1.26.0
@@ -65,7 +66,7 @@ pyusb==1.0.2
 qrcode==6.1
 reportlab==3.5.59
 requests==2.25.1
-requests-toolbelt==0.9.1
+requests-toolbelt==0.10.1
 rsa==4.9
 six==1.16.0
 soupsieve==2.3.2.post1
@@ -80,4 +81,4 @@ XlsxWriter==1.1.2
 xlwt==1.3.0
 zeep==3.4.0
 zope.event==4.5.0
-zope.interface==5.4.0
+zope.interface==5.5.1
