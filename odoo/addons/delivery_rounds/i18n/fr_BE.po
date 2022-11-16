@@ -17,27 +17,27 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: delivery_rounds
-#: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report
+#: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report_lines
 msgid "# Cold"
 msgstr "# Froid"
 
 #. module: delivery_rounds
-#: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report
+#: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report_lines
 msgid "# Drug"
 msgstr "# Médic."
 
 #. module: delivery_rounds
-#: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report
+#: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report_lines
 msgid "# Food"
 msgstr "# Alim."
 
 #. module: delivery_rounds
-#: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report
+#: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report_lines
 msgid "# Mat."
 msgstr "# Mat."
 
 #. module: delivery_rounds
-#: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report
+#: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report_lines
 msgid "# Tot."
 msgstr "# Tot."
 
@@ -76,7 +76,7 @@ msgid "Anticipated"
 msgstr "Anticipé"
 
 #. module: delivery_rounds
-#: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report
+#: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report_lines
 msgid "Arriving time"
 msgstr "Heure d'arrivée"
 
@@ -184,7 +184,7 @@ msgstr "Non-échu"
 
 #. module: delivery_rounds
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_instance_customer_partner_id
-#: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report
+#: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report_lines
 #: model:ir.ui.view,arch_db:delivery_rounds.round_itinerary_view_search
 #: model:ir.ui.view,arch_db:delivery_rounds.view_round_template_search
 msgid "Customer"
@@ -358,7 +358,7 @@ msgid "Delivery round will be delivered in background."
 msgstr "La tournée sera livrée en arrière-plan."
 
 #. module: delivery_rounds
-#: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report
+#: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report_lines
 msgid "Departure time"
 msgstr "Heure de départ"
 
@@ -389,7 +389,7 @@ msgid "Done"
 msgstr "Fini"
 
 #. module: delivery_rounds
-#: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report
+#: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report_lines
 msgid "Driver"
 msgstr "Conducteur"
 
@@ -404,7 +404,7 @@ msgid "Effective Customer"
 msgstr "Client effectif"
 
 #. module: delivery_rounds
-#: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report
+#: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report_lines
 msgid "End mileage"
 msgstr "Kilométrage final"
 
@@ -638,7 +638,7 @@ msgstr ""
 "Impossible d'assigner cette tournée à ce bon de transfert"
 
 #. module: delivery_rounds
-#: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report
+#: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report_lines
 msgid "Notes"
 msgstr "Notes"
 
@@ -687,7 +687,7 @@ msgid "Partners"
 msgstr "Partenaires"
 
 #. module: delivery_rounds
-#: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report
+#: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report_lines
 msgid "Phone"
 msgstr "Téléphone"
 
@@ -775,7 +775,7 @@ msgid "Rank"
 msgstr "Rang"
 
 #. module: delivery_rounds
-#: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report
+#: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report_lines
 msgid "Registration"
 msgstr "Immatriculation"
 
@@ -825,7 +825,7 @@ msgid "Saturday"
 msgstr "Samedi"
 
 #. module: delivery_rounds
-#: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report
+#: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report_lines
 msgid "Seq."
 msgstr "Seq."
 
@@ -862,7 +862,7 @@ msgid "Should be delivered manually, could not deliver because of %s"
 msgstr "Doit être livré manuellement, n'a pas pu être livré en raison de %s"
 
 #. module: delivery_rounds
-#: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report
+#: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report_lines
 msgid "Start mileage"
 msgstr "Kilométrage au départ"
 
@@ -893,7 +893,7 @@ msgid "Stock Operations"
 msgstr "Opérations de stock"
 
 #. module: delivery_rounds
-#: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report
+#: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report_lines
 msgid "Stops"
 msgstr "Arrêts"
 
@@ -958,17 +958,17 @@ msgid "Today"
 msgstr "Aujourd'hui"
 
 #. module: delivery_rounds
-#: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report
+#: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report_lines
 msgid "Total number of box(es)"
 msgstr "Nombre total de boîte(s)"
 
 #. module: delivery_rounds
-#: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report
+#: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report_lines
 msgid "Total number of parcel(s)"
 msgstr "Nombre total de colis"
 
 #. module: delivery_rounds
-#: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report
+#: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report_lines
 msgid "Total number of unit(s)"
 msgstr "Nombre total d'unité(s)"
 
@@ -996,7 +996,7 @@ msgstr "Erreur inattendue (%s)"
 
 #. module: delivery_rounds
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_itinerary_template_ids
-#: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report
+#: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report_lines
 msgid "Vehicle"
 msgstr "Modèle de Tournée"
 
@@ -1098,7 +1098,7 @@ msgid "You have to set the week day or the date overwrite"
 msgstr "Vous devez définir un jour de la semaine ou une date spécifique"
 
 #. module: delivery_rounds
-#: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report
+#: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report_lines
 msgid "box(es)"
 msgstr "Boîte(s)"
 
@@ -1170,7 +1170,7 @@ msgid "round.wizard.makeplan"
 msgstr "round.wizard.makeplan"
 
 #. module: delivery_rounds
-#: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report
+#: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report_lines
 msgid "unit(s)"
 msgstr "unités(s)"
 
