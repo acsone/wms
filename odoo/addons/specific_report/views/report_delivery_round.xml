@@ -1,10 +1,7 @@
 <odoo>
-  <template id="delivery_rounds.delivery_round_report">
-    <t t-foreach="docs" t-as="delivery">
-      <t t-foreach="delivery.delivery_resource_ids" t-as="delivery_resource">
+  <template id="delivery_rounds.delivery_round_report_lines">
         <t t-call="report.html_container">
           <t t-set="index" t-value="1" />
-          <t t-set="lines" t-value="delivery.get_merged_shippings(delivery_resource)" />
           <t t-set="total_medoc_box" t-value="0" />
           <t t-set="total_medoc_unit" t-value="0" />
           <t t-set="total_cold_box" t-value="0" />
@@ -17,9 +14,14 @@
           <t t-set="total_total_unit" t-value="0" />
           <div class="page">
             <h2>
+              <t t-if="delivery_resource">
               <span t-field="delivery.display_name" /> - <span
-                t-field="delivery_resource.display_name"
-              />
+              t-field="delivery_resource.display_name"
+            />
+              </t>
+              <t t-else="">
+                <span t-field="delivery.display_name" />
+              </t>
             </h2>
             <div class="row" style="margin-top: 15px;">
               <div class="col-xs-5">
@@ -93,18 +95,18 @@
                     <t t-set="shipping" t-value="line[1]" />
                     <t t-set="shipping_value" t-value="line[2]" />
                     <t
-                      t-set="specific_locations"
-                      t-value="shipping_value.get('specific_out_locations', {})"
-                    />
+                  t-set="specific_locations"
+                  t-value="shipping_value.get('specific_out_locations', {})"
+                />
                     <tr>
                       <td>
                         <span t-esc="index" />
                       </td>
                       <td>
                         <div
-                          t-field="shipping.partner_id"
-                          t-options='{"widget": "contact", "fields": ["name", "address"], "no_marker": True}'
-                        />
+                      t-field="shipping.partner_id"
+                      t-options='{"widget": "contact", "fields": ["name", "address"], "no_marker": True}'
+                    />
                         <span t-field="partner.ref" />
                       </td>
                       <td style="width: 40%;">
@@ -119,28 +121,28 @@
                       </td>
                       <td style="width: 7%;">
                         <t
-                          t-set="total_medoc_box"
-                          t-value="shipping_value.get('number_of_drug', 0) + total_medoc_box"
-                        />
+                      t-set="total_medoc_box"
+                      t-value="shipping_value.get('number_of_drug', 0) + total_medoc_box"
+                    />
                         <t
-                          t-set="total_medoc_unit"
-                          t-value="int(shipping_value.get('item_number_of_drug', 0)) + total_medoc_unit"
-                        />
+                      t-set="total_medoc_unit"
+                      t-value="int(shipping_value.get('item_number_of_drug', 0)) + total_medoc_unit"
+                    />
                         <t
-                          t-set="specific_med_locations"
-                          t-value="specific_locations.get('med_out_locations', [])"
-                        />
+                      t-set="specific_med_locations"
+                      t-value="specific_locations.get('med_out_locations', [])"
+                    />
                         <t t-if="shipping_value.get('number_of_drug', 0)">
                           <span t-esc="int(shipping_value.get('number_of_drug', 0))" />
                                                 box(es)
                                             </t>
                         <br
-                          t-if="shipping_value.get('number_of_drug', 0) and shipping_value.get('item_number_of_drug', 0)"
-                        />
+                      t-if="shipping_value.get('number_of_drug', 0) and shipping_value.get('item_number_of_drug', 0)"
+                    />
                         <t t-if="shipping_value.get('item_number_of_drug', 0)">
                                                 <span
-                            t-esc="int(shipping_value.get('item_number_of_drug', 0))"
-                          />
+                        t-esc="int(shipping_value.get('item_number_of_drug', 0))"
+                      />
                                                 unit(s)
                         </t>
                         <br t-if="specific_locations.get('med_out_locations', [])" />
@@ -151,30 +153,30 @@
                       </td>
                       <td style="width: 7%;">
                         <t
-                          t-set="total_cold_box"
-                          t-value="shipping_value.get('number_of_cold', 0) + total_cold_box"
-                        />
+                      t-set="total_cold_box"
+                      t-value="shipping_value.get('number_of_cold', 0) + total_cold_box"
+                    />
                         <t
-                          t-set="total_cold_unit"
-                          t-value="int(shipping_value.get('item_number_of_cold', 0)) + total_cold_unit"
-                        />
+                      t-set="total_cold_unit"
+                      t-value="int(shipping_value.get('item_number_of_cold', 0)) + total_cold_unit"
+                    />
                         <t
-                          t-set="specific_cold_locations"
-                          t-value="specific_locations.get('cold_out_locations', [])"
-                        />
+                      t-set="specific_cold_locations"
+                      t-value="specific_locations.get('cold_out_locations', [])"
+                    />
                         <t t-if="shipping_value.get('number_of_cold', 0)">
                                                 <span
-                            t-esc="int(shipping_value.get('number_of_cold', 0))"
-                          />
+                        t-esc="int(shipping_value.get('number_of_cold', 0))"
+                      />
                                                 box(es)
                                             </t>
                         <br
-                          t-if="shipping_value.get('number_of_cold', 0) and shipping_value.get('item_number_of_cold', 0)"
-                        />
+                      t-if="shipping_value.get('number_of_cold', 0) and shipping_value.get('item_number_of_cold', 0)"
+                    />
                         <t t-if="shipping_value.get('item_number_of_cold', 0)">
                                                 <span
-                            t-esc="int(shipping_value.get('item_number_of_cold', 0))"
-                          />
+                        t-esc="int(shipping_value.get('item_number_of_cold', 0))"
+                      />
                                                 unit(s)
                         </t>
                         <br t-if="specific_locations.get('cold_out_locations', [])" />
@@ -185,30 +187,30 @@
                       </td>
                       <td style="width: 7%;">
                         <t
-                          t-set="total_food_box"
-                          t-value="shipping_value.get('number_of_food', 0) + total_food_box"
-                        />
+                      t-set="total_food_box"
+                      t-value="shipping_value.get('number_of_food', 0) + total_food_box"
+                    />
                         <t
-                          t-set="total_food_unit"
-                          t-value="int(shipping_value.get('item_number_of_food', 0)) + total_food_unit"
-                        />
+                      t-set="total_food_unit"
+                      t-value="int(shipping_value.get('item_number_of_food', 0)) + total_food_unit"
+                    />
                         <t
-                          t-set="specific_food_locations"
-                          t-value="specific_locations.get('food_out_locations', [])"
-                        />
+                      t-set="specific_food_locations"
+                      t-value="specific_locations.get('food_out_locations', [])"
+                    />
                         <t t-if="shipping_value.get('number_of_food', 0)">
                                                 <span
-                            t-esc="int(shipping_value.get('number_of_food', 0))"
-                          />
+                        t-esc="int(shipping_value.get('number_of_food', 0))"
+                      />
                                                 box(es)
                                             </t>
                         <br
-                          t-if="shipping_value.get('number_of_food', 0) and shipping_value.get('item_number_of_food', 0)"
-                        />
+                      t-if="shipping_value.get('number_of_food', 0) and shipping_value.get('item_number_of_food', 0)"
+                    />
                         <t t-if="shipping_value.get('item_number_of_food', 0)">
                                                 <span
-                            t-esc="int(shipping_value.get('item_number_of_food', 0))"
-                          />
+                        t-esc="int(shipping_value.get('item_number_of_food', 0))"
+                      />
                                                 unit(s)
                                             </t>
                         <br t-if="specific_locations.get('food_out_locations', [])" />
@@ -219,65 +221,65 @@
                       </td>
                       <td style="width: 7%;">
                         <t
-                          t-set="total_mat_box"
-                          t-value="shipping_value.get('number_of_equipment', 0) + total_mat_box"
-                        />
+                      t-set="total_mat_box"
+                      t-value="shipping_value.get('number_of_equipment', 0) + total_mat_box"
+                    />
                         <t
-                          t-set="total_mat_unit"
-                          t-value="int(shipping_value.get('item_number_of_equipment', 0)) + total_mat_unit"
-                        />
+                      t-set="total_mat_unit"
+                      t-value="int(shipping_value.get('item_number_of_equipment', 0)) + total_mat_unit"
+                    />
                         <t
-                          t-set="specific_equipment_locations"
-                          t-value="specific_locations.get('equipment_out_locations', [])"
-                        />
+                      t-set="specific_equipment_locations"
+                      t-value="specific_locations.get('equipment_out_locations', [])"
+                    />
                         <t t-if="shipping_value.get('number_of_equipment', 0)">
                                                 <span
-                            t-esc="int(shipping_value.get('number_of_equipment', 0))"
-                          />
+                        t-esc="int(shipping_value.get('number_of_equipment', 0))"
+                      />
                                                 box(es)
                                             </t>
                         <br
-                          t-if="shipping_value.get('number_of_equipment', 0) and shipping_value.get('item_number_of_equipment', 0)"
-                        />
+                      t-if="shipping_value.get('number_of_equipment', 0) and shipping_value.get('item_number_of_equipment', 0)"
+                    />
                         <t t-if="shipping_value.get('item_number_of_equipment', 0)">
                                                 <span
-                            t-esc="int(shipping_value.get('item_number_of_equipment', 0))"
-                          />
+                        t-esc="int(shipping_value.get('item_number_of_equipment', 0))"
+                      />
                                                 unit(s)
                                             </t>
                         <br
-                          t-if="specific_locations.get('equipment_out_locations', [])"
-                        />
+                      t-if="specific_locations.get('equipment_out_locations', [])"
+                    />
                         <t
-                          t-foreach="specific_equipment_locations"
-                          t-as="equipment_location"
-                        >
+                      t-foreach="specific_equipment_locations"
+                      t-as="equipment_location"
+                    >
                           <span t-esc="equipment_location" style="font-size:10px;" />
                           <br />
                         </t>
                       </td>
                       <td>
                         <t
-                          t-set="total_total_box"
-                          t-value="shipping_value.get('number_total', 0) + total_total_box"
-                        />
+                      t-set="total_total_box"
+                      t-value="shipping_value.get('number_total', 0) + total_total_box"
+                    />
                         <t
-                          t-set="total_total_unit"
-                          t-value="int(shipping_value.get('item_number_total', 0)) + total_total_unit"
-                        />
+                      t-set="total_total_unit"
+                      t-value="int(shipping_value.get('item_number_total', 0)) + total_total_unit"
+                    />
                         <t t-if="shipping_value.get('number_total', 0)">
                                                 <span
-                            t-esc="int(shipping_value.get('number_total', 0))"
-                          />
+                        t-esc="int(shipping_value.get('number_total', 0))"
+                      />
                                                 box(es)
                         </t>
                         <br
-                          t-if="shipping_value.get('number_total', 0) and shipping_value.get('item_number_total', 0)"
-                        />
+                      t-if="shipping_value.get('number_total', 0) and shipping_value.get('item_number_total', 0)"
+                    />
                         <t t-if="shipping_value.get('item_number_total', 0)">
                                                 <span
-                            t-esc="int(shipping_value.get('item_number_total', 0))"
-                          />
+                        t-esc="int(shipping_value.get('item_number_total', 0))"
+                      />
                                                 unit(s)
                                             </t>
                       </td>
@@ -324,33 +326,33 @@
                     <td colspan="4" class="active">Total number of parcel(s)</td>
                     <td>
                       <span
-                        t-esc="int(total_medoc_unit + total_medoc_box)"
-                        class="pull-right"
-                      />
+                    t-esc="int(total_medoc_unit + total_medoc_box)"
+                    class="pull-right"
+                  />
                     </td>
                     <td>
                       <span
-                        t-esc="int(total_cold_unit + total_cold_box)"
-                        class="pull-right"
-                      />
+                    t-esc="int(total_cold_unit + total_cold_box)"
+                    class="pull-right"
+                  />
                     </td>
                     <td>
                       <span
-                        t-esc="int(total_food_unit + total_food_box)"
-                        class="pull-right"
-                      />
+                    t-esc="int(total_food_unit + total_food_box)"
+                    class="pull-right"
+                  />
                     </td>
                     <td>
                       <span
-                        t-esc="int(total_mat_unit + total_mat_box)"
-                        class="pull-right"
-                      />
+                    t-esc="int(total_mat_unit + total_mat_box)"
+                    class="pull-right"
+                  />
                     </td>
                     <td>
                       <span
-                        t-esc="int(total_total_unit + total_total_box)"
-                        class="pull-right"
-                      />
+                    t-esc="int(total_total_unit + total_total_box)"
+                    class="pull-right"
+                  />
                     </td>
                   </tr>
                 </tbody>
@@ -358,9 +360,28 @@
             </div>
           </div>
         </t>
+  </template>
+
+<template id="delivery_rounds.delivery_round_report">
+  <t t-foreach="docs" t-as="delivery">
+    <t
+        t-if="delivery.geo_optimization_enabled and delivery.geo_optimization_state == 'success'"
+      >
+      <t t-foreach="delivery.delivery_resource_ids" t-as="delivery_resource">
+          <t t-set="lines" t-value="delivery.get_merged_shippings(delivery_resource)" />
+          <t t-call="delivery_rounds.delivery_round_report_lines">
+          </t>
       </t>
     </t>
-  </template>
+    <t t-else="">
+      <t t-set="lines" t-value="delivery.get_merged_shippings()" />
+      <t t-set="delivery_resource" t-value="False" />
+      <t t-call="delivery_rounds.delivery_round_report_lines">
+      </t>
+    </t>
+  </t>
+</template>
+
   <report
     string="Delivery round"
     id="action_report_delivery_round"
