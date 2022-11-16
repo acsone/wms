@@ -30,3 +30,9 @@ class MessageAction(Component):
                 "Package not in the picking wave. Please scan a correct package."
             ),
         }
+
+    def package_does_not_exist(self):
+        return {
+            "message_type": "error",
+            "body": _("Package does not exist. Please scan a correct package."),
+        }

@@ -20,10 +20,22 @@ class ClusterPicking(Component):
         batch = self.env["stock.picking.wave"].browse(picking_batch_id)
         if not batch.exists():
             return self._response_batch_does_not_exist()
-        package = self.env["stock.quant.package"].browse(package_id)
-        if package.name != barcode and self.work.menu.unload_on_specific_location:
+        package_from_id = self.env["stock.quant.package"].browse(package_id)
+        if (
+            package_from_id.name != barcode
+            and self.work.menu.unload_on_specific_location
+        ):
             search = self._actions_for("search")
             package = search.package_from_scan(barcode)
+            if not package:
+                # Response single needs a package id to work.
+                # If package does not exist, we loose it in the frontend
+                # => keep using package_id that was first provided
+                return self._response_for_unload_single(
+                    batch,
+                    package_from_id,
+                    message=self.msg_store.package_does_not_exist(),
+                )
             if package.is_scanned:
                 return self._response_for_unload_single(
                     batch, package, message=self.msg_store.package_already_scanned(),
