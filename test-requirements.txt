@@ -1,0 +1,1 @@
+odoo-addon-stock-storage-type @ git+https://github.com/OCA/wms.git@refs/pull/470/head#subdirectory=setup/stock_storage_type
