@@ -34,6 +34,7 @@ odoo @ git+https://github.com/acsone/odoo.git@09391b74a218a377933fb2459d91e8dd93
 odoo-addon-product-abc-classification @ git+https://github.com/acsone/product-attribute.git@340dffd0a755da5feef04b5df27861c65e5d3ec4#subdirectory=setup/product_abc_classification
 odoo-addon-product-abc-classification-sale-stock @ git+https://github.com/acsone/product-attribute.git@f9690a9c1f19ece371effeb200a417e96fddb158#subdirectory=setup/product_abc_classification_sale_stock
 odoo-addon-queue-job @ git+https://github.com/acsone/queue.git@2a2be55491d563c225a6270f6f5045ed3e3f3558#subdirectory=setup/queue_job
+odoo-addon-session-db @ git+https://github.com/acsone/server-tools.git@22a7d3cef17dd51a1612880dc75906c04c17c98a#subdirectory=setup/session_db
 odoo-addon-stock-available-to-promise-release @ git+https://github.com/acsone/wms.git@6b5d1952be3e33d589f5439b72ed935ebc6f0994#subdirectory=setup/stock_available_to_promise_release
 odoo-addon-stock-dynamic-routing==16.0.1.0.0.3
 odoo-addon-stock-helper==16.0.1.0.1

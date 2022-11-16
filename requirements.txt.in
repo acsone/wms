@@ -28,3 +28,6 @@ odoo-addon-stock-picking-start @ git+https://github.com/acsone/stock-logistics-w
 # queue
 # https://github.com/OCA/queue/pull/483
 odoo-addon-queue-job @ git+https://github.com/acsone/queue.git@16.0-port-pr476#subdirectory=setup/queue_job
+
+# server-tools
+odoo-addon-session-db @ git+https://github.com/acsone/server-tools.git@16.0-session_db-sbi#subdirectory=setup/session_db
