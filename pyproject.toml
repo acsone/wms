@@ -16,6 +16,7 @@ test = [
   "coverage",
   "pygments",
   "freezegun",
+  "odoo-test-helper",
 ]
 dev = [
   "ipython",

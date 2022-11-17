@@ -10,12 +10,18 @@ odoo-addons-enterprise @ git+ssh://git@github.com/acsone/enterprise.git@16.0-alc
 odoo-addon-stock-available-to-promise-release @ git+https://github.com/acsone/wms.git@16.0-stock-available-to-promise-manage-backorder-lmi#subdirectory=setup/stock_available_to_promise_release
 # https://github.com/OCA/wms/pull/493
 odoo-addon-stock-release-channel @ git+https://github.com/acsone/wms.git@16.0-mig-stock_release_channel#subdirectory=setup/stock_release_channel
+# https://github.com/OCA/wms/pull/470 - [MIG] stock_storage_type: Migration to 16.0
+odoo-addon-stock-storage-type @ git+https://github.com/acsone/wms.git@16.0-mig-stock_storage_type-dro#subdirectory=setup/stock_storage_type
 
 # product-attribute
 # https://github.com/OCA/product-attribute/pull/1192
 odoo-addon-product-abc-classification @ git+https://github.com/acsone/product-attribute.git@16.0-mig-product_abc_classification-dro#subdirectory=setup/product_abc_classification
 # https://github.com/OCA/product-attribute/pull/1196
 odoo-addon-product-abc-classification-sale-stock @ git+https://github.com/acsone/product-attribute.git@16.0-mig-product-abc-sale-dro#subdirectory=setup/product_abc_classification_sale_stock
+# https://github.com/OCA/product-attribute/pull/1160 - [16.0] [MIG] product_logistics_uom
+odoo-addon-product-logistics-uom @ git+https://github.com/acsone/product-attribute.git@16.0-mig-product_logistics_uom#subdirectory=setup/product_logistics_uom
+# https://github.com/OCA/product-attribute/pull/1161 - [16.0] [MIG] product_packaging_dimension
+odoo-addon-product-packaging-dimension @ git+https://github.com/acsone/product-attribute.git@16.0-mig-product_packaging_dimension#subdirectory=setup/product_packaging_dimension
 
 # stock-logistics-warehouse
 # https://github.com/OCA/stock-logistics-warehouse/pull/1532
@@ -24,6 +30,12 @@ odoo-addon-stock-move-auto-assign @ git+https://github.com/acsone/stock-logistic
 # stock-logistics-workflow
 # https://github.com/OCA/stock-logistics-workflow/pull/1127
 odoo-addon-stock-picking-start @ git+https://github.com/acsone/stock-logistics-workflow.git@16.0-add-stock_picking_start-lmi#subdirectory=setup/stock_picking_start
+# https://github.com/OCA/stock-logistics-workflow/pull/1102 - [MIG] stock_putaway_hook: Migration to 16.0
+odoo-addon-stock-putaway_hook @ git+https://github.com/acsone/stock-logistics-workflow.git@16.0-mig-stock_putaway_hook-dro#subdirectory=setup/stock_putaway_hook
+# https://github.com/OCA/stock-logistics-workflow/pull/1103 - [MIG] stock_quant_package_product_packaging: Migration to 16.0
+odoo-addon-stock-quant-package-product-packaging @ git+https://github.com/acsone/stock-logistics-workflow.git@16.0-mig-stock_quant_package_product_packaging-dro#subdirectory=setup/stock_quant_package_product_packaging
+# https://github.com/OCA/stock-logistics-workflow/pull/1104 - [MIG] stock_quant_package_dimension: Migration to 16.0 
+odoo-addon-stock-quant-package-dimension @ git+https://github.com/acsone/stock-logistics-workflow.git@16.0-mig-stock_quant_package_dimension-dro#subdirectory=setup/stock_quant_package_dimension
 
 # queue
 # https://github.com/OCA/queue/pull/483
@@ -31,3 +43,6 @@ odoo-addon-queue-job @ git+https://github.com/acsone/queue.git@16.0-port-pr476#s
 
 # server-tools
 odoo-addon-session-db @ git+https://github.com/acsone/server-tools.git@16.0-session_db-sbi#subdirectory=setup/session_db
+
+# OCA/web
+odoo-addon-web-domain-field @ git+https://github.com/acsone/web.git@16.0-mig-web_domain_field-dro#subdirectory=setup/web_domain_field

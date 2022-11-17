@@ -16,6 +16,7 @@
         "stock_dynamic_routing",
         "stock_picking_start",
         "stock_move_auto_assign",
+        "stock_storage_type",
     ],
     "data": [],
 }
