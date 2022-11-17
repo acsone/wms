@@ -92,7 +92,7 @@ licence_check:
 test-impacted:
   extends: .test_common
   variables:
-    GIT_FETCH_EXTRA_FLAGS: "master:master"
+    GIT_FETCH_EXTRA_FLAGS: "10.0:10.0"
   script:
     - pipx install acsoo # for checklog
     - pipx install manifestoo # up to date with list-codepends
@@ -100,7 +100,7 @@ test-impacted:
     - venv/bin/pip install --no-deps -r requirements-tests.txt # test dependencies
     - venv/bin/pip install --no-deps --no-index release/*.whl # runtime dependencies
     - venv/bin/pip install --no-deps -e .
-    - MODIFIED_ADDONS=$(git diff --name-only master... | grep "odoo/addons" | sed 's/odoo.addons.//' | sed 's/\/.*//' | uniq | tr '\n' ',') || true
+    - MODIFIED_ADDONS=$(git diff --name-only 10.0... | grep "odoo/addons" | sed 's/odoo.addons.//' | sed 's/\/.*//' | uniq | tr '\n' ',') || true
     - if [[ -z "$MODIFIED_ADDONS" ]] ; then echo "No changes to test."; exit 0; fi
     - MODIFIED_ADDONS=${MODIFIED_ADDONS%?} # remove trailing comma
     - echo $MODIFIED_ADDONS
@@ -118,7 +118,7 @@ test-impacted:
   only:
     - branches
   except:
-    - master
+    - '10.0'
   when: on_success
 
 .test_all:
@@ -150,20 +150,20 @@ test-impacted:
       --separator=,)
     - echo Testing ${ADDONS_TEST}
     - unbuffer venv/bin/coverage run --parallel venv/bin/odoo -c odoo-ci.cfg -d ${DB_NAME} --stop-after-init --no-xmlrpc -i ${ADDONS_TEST} --test-enable | acsoo checklog
-    - if [ "${CI_COMMIT_REF_NAME}" = "master" ] ; then makepot ; fi
+    - if [ "${CI_COMMIT_REF_NAME}" = "10.0" ] ; then makepot ; fi
 
 test-all:
   extends: .test_all
   only:
     - branches
   except:
-    - master
+    - '10.0'
   when: manual
 
-test-master:
+test-10.0:
   extends: .test_all
   only:
-    - master
+    - '10.0'
   when: on_success
 
 test-new-product-barcode-required:
@@ -215,19 +215,19 @@ test-shopfloor-manual:
   only:
     - branches
   except:
-    - master
+    - '10.0'
   when: manual
 
-test-shopfloor-master:
+test-shopfloor-10.0:
   extends: .test_shopfloor
   only:
-    - master
+    - '10.0'
   when: on_success
 
 test-shopfloor-branch:
   extends: .test_common
   variables:
-    GIT_FETCH_EXTRA_FLAGS: "master:master"
+    GIT_FETCH_EXTRA_FLAGS: "10.0:10.0"
   script:
     - pipx install acsoo # for checklog
     - pipx install manifestoo # up to date with list-codepends
@@ -235,7 +235,7 @@ test-shopfloor-branch:
     - venv/bin/pip install --no-deps -r requirements-tests.txt # test dependencies
     - venv/bin/pip install --no-deps --no-index release/*.whl # runtime dependencies
     - venv/bin/pip install --no-deps -e . # the project, in editable mode so coverage sees it
-    - MODIFIED_ADDONS=$(git diff --name-only master... | grep "odoo/addons" | sed 's/odoo.addons.//' | sed 's/\/.*//' | uniq | tr '\n' ',') || true # if empty, $? is 1 on gitlab, which interrupts execution.
+    - MODIFIED_ADDONS=$(git diff --name-only 10.0... | grep "odoo/addons" | sed 's/odoo.addons.//' | sed 's/\/.*//' | uniq | tr '\n' ',') || true # if empty, $? is 1 on gitlab, which interrupts execution.
     - if [[ -z "$MODIFIED_ADDONS" ]] ; then echo "No changes to test."; exit 0; fi
     - MODIFIED_ADDONS=${MODIFIED_ADDONS%?} # remove trailing comma
     - echo $MODIFIED_ADDONS
@@ -261,7 +261,7 @@ test-shopfloor-branch:
   only:
     - branches
   except:
-    - master
+    - '10.0'
   when: on_success
 
 coverage-report:
@@ -296,10 +296,10 @@ coverage-report:
   only:
     - branches
   except:
-    - master
+    - '10.0'
   when: on_success
 
-coverage-report-master:
+coverage-report-10.0:
   stage: test
   script:
     - virtualenv --python=$PYTHON venv
@@ -321,15 +321,15 @@ coverage-report-master:
         coverage_format: cobertura
         path: coverage.xml
   needs:
-    - job: test-master
+    - job: test-10.0
       artifacts: true
-    - job: test-shopfloor-master
+    - job: test-shopfloor-10.0
       artifacts: true
     - job: test-new-product-barcode-required
       artifacts: true
   interruptible: true
   only:
-    - master
+    - '10.0'
   when: on_success
 
 # build container images
@@ -369,7 +369,7 @@ build-review-image:
   only:
     - branches
   except:
-    - master
+    - '10.0'
   when: manual
 
 # deployments to acsone environments (review, test)
@@ -409,7 +409,7 @@ deploy-review-trigger:
   only:
     - branches
   except:
-    - master
+    - '10.0'
   when: on_success # automatic after build-review-image
 
 # deployments to customer environments (uat, preprod, prod)
