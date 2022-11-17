@@ -1,0 +1,44 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* alc_product_promoted_links
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_product_promoted_links
+#: model:ir.model,name:alc_product_promoted_links.model_product_template
+msgid "Product Template"
+msgstr ""
+
+#. module: alc_product_promoted_links
+#: model:product.template.link.type,inverse_name:alc_product_promoted_links.link_type_promotes
+msgid "Promoted By"
+msgstr ""
+
+#. module: alc_product_promoted_links
+#: model:ir.model.fields,field_description:alc_product_promoted_links.field_delivery_carrier_promoted_by
+#: model:ir.model.fields,field_description:alc_product_promoted_links.field_product_product_promoted_by
+#: model:ir.model.fields,field_description:alc_product_promoted_links.field_product_template_promoted_by
+#: model:ir.model.fields,field_description:alc_product_promoted_links.field_shopinvader_product_promoted_by
+#: model:ir.model.fields,field_description:alc_product_promoted_links.field_shopinvader_variant_promoted_by
+msgid "Promoted by"
+msgstr ""
+
+#. module: alc_product_promoted_links
+#: model:ir.model.fields,field_description:alc_product_promoted_links.field_delivery_carrier_promotes
+#: model:ir.model.fields,field_description:alc_product_promoted_links.field_product_product_promotes
+#: model:ir.model.fields,field_description:alc_product_promoted_links.field_product_template_promotes
+#: model:ir.model.fields,field_description:alc_product_promoted_links.field_shopinvader_product_promotes
+#: model:ir.model.fields,field_description:alc_product_promoted_links.field_shopinvader_variant_promotes
+#: model:product.template.link.type,name:alc_product_promoted_links.link_type_promotes
+msgid "Promotes"
+msgstr ""
+
