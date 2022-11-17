@@ -42,6 +42,8 @@ dependencies = [
   # optional Odoo dependencies
   "num2words",
   "pdfminer",
+  # addons we want in the package but not installed
+  "odoo-addon-session_db",
 ]
 addons_dirs = ["odoo/addons"]
 
