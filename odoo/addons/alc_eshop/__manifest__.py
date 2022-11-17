@@ -29,6 +29,7 @@
         "alc_shopinvader_category",
         "alc_shopinvader_fixes",
         "alc_eshop_wishlist",
+        "alc_product_promoted_links",
         "alc_product_stock_state",
         "alc_partner_veterinary",
         "shopinvader_auth_jwt",
