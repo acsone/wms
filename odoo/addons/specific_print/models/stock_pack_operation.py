@@ -86,11 +86,24 @@ class StockPackOperation(models.Model):
 
     @api.multi
     def print_food_product_label(
-        self, quantity=1, printer_id=False, lot_id=None, quantity_done=1
+        self,
+        quantity=1,
+        printer_id=False,
+        lot_id=None,
+        quantity_done=1,
+        do_not_print_food_labels=False,
     ):
         # Product/Customer label
         self.ensure_one()
         qty = quantity * self.product_id.number_labels_to_print
+
+        if do_not_print_food_labels:
+            # If we arrive here by another entry point than cluster picking
+            # scan destination flow, this means we specifically required the print.
+            # In that case, we want only one label
+            qty = 1
+            quantity_done = 1
+
         if qty:
             hw_print(
                 self,
