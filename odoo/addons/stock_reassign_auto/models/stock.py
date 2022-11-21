@@ -4,9 +4,7 @@
 
 import logging
 
-from odoo import _, api, models
-
-from odoo.addons.queue_job.job import identity_exact, job
+from odoo import api, models
 
 _logger = logging.getLogger(__name__)
 
@@ -81,13 +79,7 @@ class StockMove(models.Model):
         if not received:
             return res
 
-        products = received.mapped("product_id")
-        self.browse().with_delay(
-            description=_("Reassign trial on reception for products ids %s")
-            % products.ids,
-            priority=6,
-            identity_key=identity_exact,
-        )._reassign_trial(products)
+        received.mapped("product_id")._prepare_reassign()
         return res
 
     @api.multi
@@ -100,41 +92,15 @@ class StockMove(models.Model):
         products = self._get_moves_to_auto_reassign().mapped("product_id")
         res = super(StockMove, self).action_cancel()
         if not self.env.context.get("no_auto_reassign") and products:
-            self.browse().with_delay(
-                description=_("Reassign trial on cancel for products ids %s")
-                % products.ids,
-                priority=6,
-                identity_key=identity_exact,
-            )._reassign_trial(products)
+            products._prepare_reassign()
         return res
 
     def write(self, vals):
         """ When priority is lowered, check if other moves can be assigned """
         res = super(StockMove, self).write(vals)
         if vals.get("priority") == "0":
-            products = self.mapped("product_id")
-            self.browse().with_delay(
-                description=_("Reassign on priority lowered for products ids %s")
-                % products.ids,
-                priority=6,
-            )._reassign_trial(products)
+            self.mapped("product_id")._prepare_reassign()
         return res
-
-    @api.model
-    @job(default_channel="root.background.stock_reassign_trial")  # priority=6
-    def _reassign_trial(self, products):
-        """ Find pickings and relaunch reservation """
-        IrConfigParameter = self.env["ir.config_parameter"]
-        enabled = IrConfigParameter.get_param(
-            "stock_reassign_auto.reassign_trial_enabled", ""
-        ).lower() in ["true", "1", "t", "y", "yes"]
-        if not enabled:
-            return
-        for product in products:
-            for picking in self._iter_and_lock_reassignable_pickings(product):
-                self._do_reassign_product(picking, product)
-                if product.qty_available <= 0:
-                    break
 
     @api.model
     def _do_reassign_product(self, picking, product):
@@ -163,46 +129,3 @@ class StockMove(models.Model):
             moves_to_unreserve.do_unreserve()
         _logger.debug("Reserve corresponding moves %s", moves_to_assign)
         moves_to_assign.action_assign()
-
-    @api.model
-    def _iter_and_lock_reassignable_pickings(self, products):
-        # Do not process products not available in stock
-        products_not_available = products.filtered(lambda p: p.qty_available <= 0)
-        if products_not_available:
-            _logger.info(
-                "No reassign for products %s as they are not available",
-                products_not_available.ids,
-            )
-            products -= products_not_available
-        if not products:
-            _logger.info("No product to reassign, exiting")
-            return
-        with self._auto_join(["picking_id"]):
-            moves_pickings = self.search(
-                [
-                    ("picking_id.picking_type_subcode", "=", "PICK"),
-                    ("state", "=", "confirmed"),
-                    ("product_id", "in", products.ids),
-                    ("picking_id.operator_id", "=", False),
-                ]
-            )
-        if not moves_pickings:
-            return
-        _logger.debug("Products received are in backorder")
-        pickings = moves_pickings.mapped("picking_id")
-        for picking in pickings:
-            self.env.cr.execute(
-                """
-                SELECT
-                    id
-                FROM
-                    stock_picking
-                WHERE
-                    id = %s
-                FOR UPDATE OF stock_picking SKIP LOCKED;
-            """,
-                (picking.id,),
-            )
-            _id = [r[0] for r in self.env.cr.fetchall()]
-            if _id:
-                yield self.env["stock.picking"].browse(_id)

@@ -11,6 +11,7 @@
         "alc_base_auto_join",
         "alc_stock_move_direction",
         "alc_stock_move_operation",
+        "base_partition",
         "stock_picking_assignment",
         "stock_picking_subcode",
         "queue_job",
