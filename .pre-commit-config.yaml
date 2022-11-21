@@ -69,6 +69,7 @@ repos:
             alc_shopfloor_mobile_stock_reserve|
             alc_shopfloor_mobile_packing|
             alc_shopfloor_mobile_qty_picker_font_style|
+            alc_shopfloor_mobile_cluster_picking_informations|
             alc_shopfloor_mobile_cluster_picking_workstation|
             alc_shopfloor_mobile_cluster_picking|
             alc_shopfloor_mobile_image_product|
