@@ -118,7 +118,7 @@ test-impacted:
   only:
     - branches
   except:
-    - '10.0'
+    - "10.0"
   when: on_success
 
 .test_all:
@@ -157,13 +157,13 @@ test-all:
   only:
     - branches
   except:
-    - '10.0'
+    - "10.0"
   when: manual
 
 test-10.0:
   extends: .test_all
   only:
-    - '10.0'
+    - "10.0"
   when: on_success
 
 test-new-product-barcode-required:
@@ -215,13 +215,13 @@ test-shopfloor-manual:
   only:
     - branches
   except:
-    - '10.0'
+    - "10.0"
   when: manual
 
 test-shopfloor-10.0:
   extends: .test_shopfloor
   only:
-    - '10.0'
+    - "10.0"
   when: on_success
 
 test-shopfloor-branch:
@@ -261,7 +261,7 @@ test-shopfloor-branch:
   only:
     - branches
   except:
-    - '10.0'
+    - "10.0"
   when: on_success
 
 coverage-report:
@@ -296,7 +296,7 @@ coverage-report:
   only:
     - branches
   except:
-    - '10.0'
+    - "10.0"
   when: on_success
 
 coverage-report-10.0:
@@ -329,7 +329,7 @@ coverage-report-10.0:
       artifacts: true
   interruptible: true
   only:
-    - '10.0'
+    - "10.0"
   when: on_success
 
 # build container images
@@ -369,7 +369,7 @@ build-review-image:
   only:
     - branches
   except:
-    - '10.0'
+    - "10.0"
   when: manual
 
 # deployments to acsone environments (review, test)
@@ -409,7 +409,7 @@ deploy-review-trigger:
   only:
     - branches
   except:
-    - '10.0'
+    - "10.0"
   when: on_success # automatic after build-review-image
 
 # deployments to customer environments (uat, preprod, prod)
