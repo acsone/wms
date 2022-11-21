@@ -14,21 +14,8 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: stock_reassign_auto
-#: code:addons/stock_reassign_auto/models/stock.py:117
-#, python-format
-msgid "Reassign on priority lowered for products ids %s"
-msgstr ""
-
-#. module: stock_reassign_auto
-#: code:addons/stock_reassign_auto/models/stock.py:104
-#, python-format
-msgid "Reassign trial on cancel for products ids %s"
-msgstr ""
-
-#. module: stock_reassign_auto
-#: code:addons/stock_reassign_auto/models/stock.py:86
-#, python-format
-msgid "Reassign trial on reception for products ids %s"
+#: model:ir.model,name:stock_reassign_auto.model_product_product
+msgid "Product"
 msgstr ""
 
 #. module: stock_reassign_auto
@@ -39,5 +26,11 @@ msgstr ""
 #. module: stock_reassign_auto
 #: model:ir.model,name:stock_reassign_auto.model_stock_picking
 msgid "Transfer"
+msgstr ""
+
+#. module: stock_reassign_auto
+#: code:addons/stock_reassign_auto/models/product_product.py:80
+#, python-format
+msgid "Try reserving for product %s"
 msgstr ""
 
