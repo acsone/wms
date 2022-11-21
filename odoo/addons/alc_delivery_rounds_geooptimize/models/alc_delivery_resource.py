@@ -116,16 +116,26 @@ class AlcDeliveryResource(models.Model):
     def create(self, vals):
         result = super(AlcDeliveryResource, self).create(vals)
         self.get_id_by_name.clear_cache(self)
+        self.get_id_by_geo_optimization_resource_id.clear_cache(self)
         return result
 
     @api.multi
     def write(self, vals):
         result = super(AlcDeliveryResource, self).write(vals)
         self.get_id_by_name.clear_cache(self)
+        self.get_id_by_geo_optimization_resource_id.clear_cache(self)
         return result
 
     @api.multi
     def unlink(self):
         result = super(AlcDeliveryResource, self).unlink()
         self.get_id_by_name.clear_cache(self)
+        self.get_id_by_geo_optimization_resource_id.clear_cache(self)
         return result
+
+    @api.model
+    @tools.ormcache("geo_optimization_resource_id")
+    def get_id_by_geo_optimization_resource_id(self, geo_optimization_resource_id):
+        return self.search(
+            [("geo_optimization_resource_id", "=", geo_optimization_resource_id)]
+        ).id

@@ -531,18 +531,26 @@ class RoundInstance(models.Model):
             self.instance_customer_ids._propagate_data_to_picks()
             self.instance_customer_ids.write({"is_rank_computed": False})
             return
-        expected_partner_and_resource = self._get_planned_partner_ids(
+        expected_partner_and_geo_optimization_resource_id = self._get_planned_partner_ids(
             self.geo_optimization_json
         )
-        expected_partner_order = [i[0] for i in expected_partner_and_resource]
+        expected_partner_order = [
+            i[0] for i in expected_partner_and_geo_optimization_resource_id
+        ]
         for round_instance_customer in self.instance_customer_ids:
             partner_id = round_instance_customer.partner_id.id
             rank = -1
             resource_id = None
             if partner_id in expected_partner_order:
                 rank = expected_partner_order.index(partner_id) + 1
-                resource_name = expected_partner_and_resource[rank - 1][1]
-                resource_id = DeliveryResource.get_id_by_name(resource_name)
+                geo_optimization_resource_id = expected_partner_and_geo_optimization_resource_id[
+                    rank - 1
+                ][
+                    1
+                ]
+                resource_id = DeliveryResource.get_id_by_geo_optimization_resource_id(
+                    geo_optimization_resource_id
+                )
             round_instance_customer.write(
                 {
                     "rank": rank,
