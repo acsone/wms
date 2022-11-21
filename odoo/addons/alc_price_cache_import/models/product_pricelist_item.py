@@ -14,5 +14,6 @@ class ProductPricelistItem(models.Model):
         self_no_update = self.with_context(no_update_price_cache=True)
         res = super(ProductPricelistItem, self_no_update).load(fields, data)
         pricelists = self.browse(res["ids"]).mapped("pricelist_id")
-        pricelists.delay_update_price_cache()
+        eids = res["ids"] if res.get("ids") else None
+        pricelists.delay_update_price_cache(eids=eids)
         return res
