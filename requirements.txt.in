@@ -26,6 +26,8 @@ odoo-addon-product-packaging-dimension @ git+https://github.com/acsone/product-a
 # stock-logistics-warehouse
 # https://github.com/OCA/stock-logistics-warehouse/pull/1532
 odoo-addon-stock-move-auto-assign @ git+https://github.com/acsone/stock-logistics-warehouse.git@16.0-stock_move_auto_assign-reassing_on_cancel#subdirectory=setup/stock_move_auto_assign
+# https://github.com/OCA/stock-logistics-warehouse/pull/1510 - [16.0][MIG] stock_location_product_restriction
+odoo-addon-stock-location-product-restriction @ git+https://github.com/acsone/stock-logistics-warehouse.git@16.0-mig-stock_location_product_restriction-dro#subdirectory=setup/stock_location_product_restriction
 
 # stock-logistics-workflow
 # https://github.com/OCA/stock-logistics-workflow/pull/1127
