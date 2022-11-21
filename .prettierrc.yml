@@ -5,7 +5,7 @@ printWidth: 88
 proseWrap: always
 semi: true
 trailingComma: "es5"
-xmlWhitespaceSensitivity: "strict"
+htmlWhitespaceSensitivity: "strict"
 overrides:
   - files: ".gitlab-ci.yml"
     options:
