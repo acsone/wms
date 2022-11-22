@@ -20,6 +20,7 @@
 
     <t t-foreach="xrange(1, int(qty_done) + 1)" t-as="index">
 
+
     ^XA
     ^FWR
 
@@ -29,7 +30,7 @@
     ^FO310,70^A060,60^FD<t t-esc="pick.delivery_round_id.template_id.code" />^FS\r
 
     <t t-if="('customer_id' in pick) and pick.customer_id.is_b2c_customer">
-    ^FO310,330^A030,30^FDB2C^FS\r
+    ^FO330,330^A030,30^FDB2C^FS\r
     </t>
 
     ^FO310,480^A040,40^FD<t t-esc="index" /> / <t t-esc="int(qty_done)" />^FS\r
@@ -43,21 +44,22 @@
     ^FO195,60^A030,25^FD<t t-esc="pick.partner_id.zip" /> <t
             t-esc="res_company.convert_to_ascii(pick.partner_id.city)"
           />^FS\r
-    ^FO145,60^A025,25^FD<t
+    ^FO165,60^A025,25^FD<t
             t-esc="('customer_id' in pick) and (pick.partner_id != pick.customer_id) and res_company.convert_to_ascii(pick.customer_id.name and pick.customer_id.name[:29] or u'') or ''"
           />^FS\r
 
 
     <t t-if="pick.partner_id.is_price_on_labels and line.product_id.indicated_price">
-    ^FO100,420^A025,25^FDPVI <t t-esc="line.product_id.indicated_price" /> EUR^FS\r
+    ^FO130,420^A025,25^FDPVI <t t-esc="line.product_id.indicated_price" /> EUR^FS\r
     </t>
 
-    ^FO60,60^BY2
+    ^FO80,60^BY2
     ^BC,40,Y,Y,N,A^FDS-<t t-esc="line.product_id.default_code" />-<t
             t-esc="lot_id and lot_id.name or ''"
           />-^FS\r
 
-    ^FO20,60^A015,15^FD<t t-esc="line.product_id.name[:60]" />^FS\r
+    ^FO50,60^A018,18^FD<t t-esc="line.product_id.name[:60]" />^FS\r
+    ^FO25,60^A018,18^FD<t t-esc="line.product_id.name[60:120]" />^FS\r
 
     <t t-if="ship">
     ^FO295,200
