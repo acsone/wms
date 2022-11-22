@@ -13,6 +13,7 @@
     "depends": [
         "alc_stock_scrap_responsible",
         "product_abc_classification_sale_stock",
+        "product_dimension",
         "stock_dynamic_routing",
         "stock_location_product_restriction",
         "stock_move_auto_assign",
