@@ -283,3 +283,134 @@ class TestPricelistItemFlow(TestPrices):
         # we check set equivalence of dicts, but dicts are unhashable
         self.assertEqual(len(price_cache), len(expected_price_cache))
         self.assertTrue(all(x in price_cache for x in expected_price_cache))
+
+    @freeze_time("2022-01-01 12:00:00")
+    @mute_logger("odoo.addons.queue_job.models.base")
+    def test_no_delay_write_min_qty_out(self):
+        # given
+        tmpl = self.product_1.product_tmpl_id
+        vals = self._get_pricelist_vals("DPL", [], is_discount=True)
+        discount_pricelist = self.model_pl_nodelay.create(vals)
+        role = discount_pricelist.discount_role_name
+        self.assertEqual(self.product_1.price_cache, {})
+
+        # given
+        vals_item_min_qty = self._get_item_vals(
+            discount_pricelist,
+            min_quantity=2,
+            applied_on="1_product",
+            product_tmpl_id=tmpl.id,
+        )
+        # when
+        item_min_qty = self.model_pl_item_nodelay.create(vals_item_min_qty)
+        # then
+        price_cache = self.product_1.price_cache[role]
+        expected_cache_element = {
+            "discount": 10.0,
+            "date_start": None,
+            "id": item_min_qty.id,
+            "date_end": None,
+            "min_quantity": 2,
+        }
+        self.assertEqual(price_cache, [expected_cache_element])
+
+        # when: we make it a normal element by removing the minimum quantity
+        item_min_qty.write({"min_quantity": 1})
+        # then
+        price_cache_updated = self.product_1.price_cache[role]
+        expected_cache_element.pop("min_quantity")
+        self.assertEqual(price_cache_updated, [expected_cache_element])
+
+    @freeze_time("2022-01-01 12:00:00")
+    @mute_logger("odoo.addons.queue_job.models.base")
+    def test_no_delay_write_min_qty_in(self):
+        # given
+        tmpl = self.product_1.product_tmpl_id
+        vals = self._get_pricelist_vals("DPL", [], is_discount=True)
+        discount_pricelist = self.model_pl_nodelay.create(vals)
+        role = discount_pricelist.discount_role_name
+        self.assertEqual(self.product_1.price_cache, {})
+
+        # given
+        vals_item_min_qty = self._get_item_vals(
+            discount_pricelist,
+            min_quantity=0,
+            applied_on="3_global",
+            product_tmpl_id=tmpl.id,
+        )
+        # when
+        item_min_qty = self.model_pl_item_nodelay.create(vals_item_min_qty)
+        # then
+        price_cache = self.product_1.price_cache[role]
+        expected_cache_element = {
+            "discount": 10.0,
+            "date_start": None,
+            "id": item_min_qty.id,
+            "date_end": None,
+        }
+        expected_price_cache = [expected_cache_element]
+        self.assertEqual(price_cache, expected_price_cache)
+
+        vals = {
+            "min_quantity": 5,
+            "applied_on": "1_product",
+            "product_tmpl_id": tmpl.id,
+        }
+        item_min_qty.write(vals)
+
+        price_cache_updated = self.product_1.price_cache[role]
+        expected_cache_element["min_quantity"] = 5
+        self.assertEqual(price_cache_updated, [expected_cache_element])
+
+    @freeze_time("2022-01-01 12:00:00")
+    @mute_logger("odoo.addons.queue_job.models.base")
+    def test_no_delay_write_min_qtys(self):
+        # given
+        tmpl = self.product_1.product_tmpl_id
+        vals = self._get_pricelist_vals("DPL", [], is_discount=True)
+        discount_pricelist = self.model_pl_nodelay.create(vals)
+        role = discount_pricelist.discount_role_name
+        self.assertEqual(self.product_1.price_cache, {})
+
+        # given
+        vals_item_min_qty_0 = self._get_item_vals(
+            discount_pricelist,
+            min_quantity=0,
+            applied_on="1_product",
+            product_tmpl_id=tmpl.id,
+        )
+        vals_item_min_qty_1 = self._get_item_vals(
+            discount_pricelist,
+            percent_price=11,
+            min_quantity=1,
+            applied_on="1_product",
+            product_tmpl_id=tmpl.id,
+        )
+        vals_item_min_qty_2 = self._get_item_vals(
+            discount_pricelist,
+            percent_price=12,
+            min_quantity=2,
+            applied_on="1_product",
+            product_tmpl_id=tmpl.id,
+        )
+        # when
+        self.model_pl_item_nodelay.create(vals_item_min_qty_0)
+        item_min_qty_1 = self.model_pl_item_nodelay.create(vals_item_min_qty_1)
+        item_min_qty_2 = self.model_pl_item_nodelay.create(vals_item_min_qty_2)
+        # then
+        price_cache = self.product_1.price_cache[role]
+        expected_cache_element_1 = {
+            "discount": 11.0,
+            "date_start": None,
+            "id": item_min_qty_1.id,
+            "date_end": None,
+        }
+        expected_cache_element_2 = {
+            "discount": 12.0,
+            "date_start": None,
+            "id": item_min_qty_2.id,
+            "date_end": None,
+            "min_quantity": 2,
+        }
+        expected_price_cache = [expected_cache_element_1, expected_cache_element_2]
+        self.assertEqual(price_cache, expected_price_cache)
