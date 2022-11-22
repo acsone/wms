@@ -7,7 +7,7 @@ def _rename_abc(env):
     modules = [
         (
             "alc_product_abc_classification",
-            "stock_storage_type_putaway_abc_classification",
+            "stock_storage_type_putaway_abc_classification_sale_stock",
         )
     ]
     openupgrade.update_module_names(env.cr, modules, merge_modules=True)
