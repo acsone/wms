@@ -478,7 +478,8 @@ const ClusterPicking = {
               endpoint_data.lot_id = data.lot.id;
             }
             this.wait_call(this.odoo.call(endpoint, endpoint_data)).then(function() {
-              self.state_reset_data_all();
+              // We only need to reset state for the stock issue
+              self.state_reset_data("stock_issue");
             });
           },
         },
