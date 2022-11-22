@@ -12,6 +12,7 @@
     "depends": [
         "stock_available_to_promise_release",
         "stock_dynamic_routing",
+        "stock_move_auto_assign_auto_release",
         "stock_picking_start",
         "stock_release_channel",
     ],
