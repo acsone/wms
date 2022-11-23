@@ -1,18 +1,18 @@
-# -*- coding: utf-8 -*-
 # Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import api, fields, models
+from odoo import api, fields
+
+from odoo.addons.product.models.product_product import ProductProduct as ProductBase
+from odoo.addons.uom.models.uom_uom import UoM
 
 
-class ProductProduct(models.Model):
+class ProductProduct(ProductBase):
 
-    _inherit = "product.product"
-
-    length = fields.Float(copy=False)
-    height = fields.Float(copy=False)
-    width = fields.Float(copy=False)
-    weight = fields.Float(copy=False)
+    product_length = fields.Float(copy=False)
+    product_height = fields.Float(copy=False)
+    product_width = fields.Float(copy=False)
+    product_weight = fields.Float(copy=False)
 
     volume_liter = fields.Float(
         digits=(8, 4),
@@ -24,46 +24,21 @@ class ProductProduct(models.Model):
     )
     volume = fields.Float(
         digits=(8, 4),
-        compute="_compute_volume",
         readonly=True,
         store=False,
-        string="Volume",
-        help="Volume",
     )
 
     # Default unit for Alcyon is cm
-    dimensional_uom_id = fields.Many2one(
-        default=lambda d: d.env.ref("product.product_uom_cm").id, readonly=True
+    dimensional_uom_id = fields.Many2one[UoM](
+        default=lambda d: d.env.ref("uom.product_uom_cm").id, readonly=True
     )
 
-    def convert_to_meters_no_rounding(self, measure, dimensional_uom, rounding=False):
-        uom_meters = self.env.ref("product.product_uom_meter")
-        return dimensional_uom._compute_quantity(measure, uom_meters, round=rounding)
-
-    @api.depends("length", "height", "width", "dimensional_uom_id")
-    def _compute_volume(self):
-        for rec in self:
-            if (
-                not rec.length
-                or not rec.height
-                or not rec.width
-                or not rec.dimensional_uom_id
-            ):
-                rec.volume = False
-                continue
-
-            length_m = rec.convert_to_meters_no_rounding(
-                rec.length, rec.dimensional_uom_id
-            )
-            height_m = rec.convert_to_meters_no_rounding(
-                rec.height, rec.dimensional_uom_id
-            )
-            width_m = rec.convert_to_meters_no_rounding(
-                rec.width, rec.dimensional_uom_id
-            )
-            rec.volume = length_m * height_m * width_m
-
     @api.depends("volume")
-    def _compute_volume_liter(self):
+    def _compute_volume_liter(self) -> None:
+        """
+        As volume is always expressed in m³, the liter volume.
+
+        does not depends on dimensional uom
+        """
         for rec in self:
             rec.volume_liter = rec.volume * 1000

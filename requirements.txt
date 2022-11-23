@@ -33,7 +33,7 @@ num2words==0.5.6
 odoo @ git+https://github.com/acsone/odoo.git@09391b74a218a377933fb2459d91e8dd93ca452e
 odoo-addon-product-abc-classification @ git+https://github.com/acsone/product-attribute.git@340dffd0a755da5feef04b5df27861c65e5d3ec4#subdirectory=setup/product_abc_classification
 odoo-addon-product-abc-classification-sale-stock @ git+https://github.com/acsone/product-attribute.git@f9690a9c1f19ece371effeb200a417e96fddb158#subdirectory=setup/product_abc_classification_sale_stock
-odoo-addon-product-dimension @ git+https://github.com/acsone/product-attribute.git@36a5f6a767fd0b61b2a0434ce0c32a4a68f38641#subdirectory=setup/product_dimension
+odoo-addon-product-dimension @ git+https://github.com/acsone/product-attribute.git@36e6216efe4a7cbff6346f36e0d5b80d7d700705#subdirectory=setup/product_dimension
 odoo-addon-product-logistics-uom @ git+https://github.com/acsone/product-attribute.git@0441c940ae518227ecb04066a204d1c5c2dd1605#subdirectory=setup/product_logistics_uom
 odoo-addon-product-packaging-dimension @ git+https://github.com/acsone/product-attribute.git@095d793d8100ee46adf072a593fedf7adb5c1957#subdirectory=setup/product_packaging_dimension
 odoo-addon-queue-job==16.0.2.0.0
