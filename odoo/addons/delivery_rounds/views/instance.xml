@@ -56,6 +56,7 @@
                         states="draft,close"
                       >
                         <i
+                          name="start_stop_pickings"
                           t-attf-class="oe_inline fa #{record.picking_launched.raw_value ? 'fa-volume-up' : 'fa-volume-off'}"
                           title="Start/Stop pickings"
                         />

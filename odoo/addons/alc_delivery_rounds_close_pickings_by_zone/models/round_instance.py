@@ -40,6 +40,11 @@ class RoundInstance(models.Model):
     time_reopen_picking_launched = fields.Float(
         "Duration before departure to re open pickings", default=0.5
     )
+    partially_open = fields.Boolean(
+        help="tech field for color mic display",
+        default=False,
+        compute="_compute_partially_open",
+    )
 
     def write(self, vals):
         res = super(RoundInstance, self).write(vals)
@@ -191,6 +196,28 @@ class RoundInstance(models.Model):
                         "picking_frigo_launched": False,
                     }
                 )
+
+    @api.depends(
+        "picking_mat_launched",
+        "picking_ali_launched",
+        "picking_med_launched",
+        "picking_frigo_launched",
+    )
+    def _compute_partially_open(self):
+        for rec in self:
+            zones_open = [
+                rec.picking_mat_launched,
+                rec.picking_ali_launched,
+                rec.picking_med_launched,
+                rec.picking_frigo_launched,
+            ]
+
+            if any(open for open in zones_open) and not all(
+                open for open in zones_open
+            ):
+                rec.partially_open = True
+            else:
+                rec.partially_open = False
 
     @api.model
     def create(self, vals):

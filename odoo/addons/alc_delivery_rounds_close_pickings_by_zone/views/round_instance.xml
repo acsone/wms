@@ -89,7 +89,13 @@
         <field name="picking_med_launched" />
         <field name="picking_frigo_launched" />
         <field name="picking_mat_launched" />
+        <field name="partially_open" />
       </xpath>
+        <xpath expr="//i[@name='start_stop_pickings']" position="attributes">
+        <attribute name="t-attf-class">
+        oe_inline fa #{record.picking_launched.raw_value ? 'fa-volume-up' : 'fa-volume-off'} #{record.partially_open.raw_value ? 'orange-mic' : ''}
+        </attribute>
+        </xpath>
       <xpath expr="//div[@id='progress-bar-ali']" position="attributes">
           <attribute name="class">resize-progress-bar</attribute>
       </xpath>
