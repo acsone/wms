@@ -11,9 +11,12 @@ class ProductTemplate(models.Model):
 
     promotes = fields.Char(compute="_compute_promotes")
     promoted_by = fields.Char(compute="_compute_promotes")
+    cross = fields.Serialized(compute="_compute_promotes")
 
-    @api.depends("categ_id")
+    @api.depends("product_template_link_ids")
     def _compute_promotes(self):
+        # it is useful for display to have both fields as string
+        # but for research it is better to have the field as array
         ids = self.ids
         ptype = self.env.ref("alc_product_promoted_links.link_type_promotes")
         domain = [
@@ -29,13 +32,15 @@ class ProductTemplate(models.Model):
                 lambda pl, pt=tmpl: pl.type_id == ptype
                 and pl.right_product_tmpl_id == pt
             )
-            promoted_by = ",".join(promotes_right.mapped("left_product_tmpl_id.name"))
-            tmpl.promoted_by = promoted_by
+            promoted_by_ns = promotes_right.mapped("left_product_tmpl_id.display_name")
+            tmpl.promoted_by = ",".join(promoted_by_ns)
+            tmpl.cross = promoted_by_ns
 
             promoted_by_left = links.filtered(
                 lambda pl, pt=tmpl: pl.type_id == ptype
                 and pl.left_product_tmpl_id == pt
             )
-            promotes = ",".join(promoted_by_left.mapped("right_product_tmpl_id.name"))
+            promotes_ns = promoted_by_left.mapped("right_product_tmpl_id.display_name")
+            promotes = ",".join(promotes_ns)
 
             tmpl.promotes = promotes
