@@ -329,8 +329,7 @@
         <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
     </record>
     <record id="ir_exp_shopinvader_variant_cross" model="ir.exports.line">
-        <field name="name">promoted_by</field>
-        <field name="alias">promoted_by:cross</field>
+        <field name="name">cross</field>
         <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
     </record>
 </odoo>
