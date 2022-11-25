@@ -16,4 +16,5 @@ COPY ./container/entrypoint-dbbase /odoo/start-entrypoint.d/
 
 # Install the app in editable mode
 COPY . /app
-RUN pip install --no-deps --no-index --editable /app
+RUN --mount=type=bind,target=/release-build,source=.,from=release-build \
+  pip install --no-deps --no-index --find-links /release-build --editable /app
