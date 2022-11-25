@@ -172,34 +172,26 @@ build-review-image:
     - master
   when: manual
 
-# deployments to acsone environments (review, test)
+# deployments
 
 .deploy-trigger:
   image: ghcr.io/acsone/deploy-tools
   script:
-    - echo "triggering deploy of ${CI_REGISTRY_IMAGE}${IMAGE_FLAVOR}:${CI_COMMIT_REF_NAME} to ${CI_ENVIRONMENT_SLUG}"
+    - echo "triggering deploy of ${CI_REGISTRY_IMAGE}${IMAGE_FLAVOR}:${CI_COMMIT_REF_NAME} to ${CI_ENVIRONMENT_NAME}"
     - |
       curl --request POST \
         --form "token=${CI_JOB_TOKEN}" \
-        --form "ref=deploy" \
+        --form "ref=${DEPLOY_BRANCH}" \
         --form "variables[DEPLOY_ENV]=${DEPLOY_ENV:-$CI_ENVIRONMENT_NAME}" \
         --form "variables[DEPLOY_IMAGE]=${CI_REGISTRY_IMAGE}${IMAGE_FLAVOR}" \
         --form "variables[DEPLOY_COMMIT_REF_NAME]=${CI_COMMIT_REF_NAME}" \
         --form "variables[DEPLOY_COMMIT_SHA]=${CI_COMMIT_SHA}" \
         "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/trigger/pipeline"
 
-deploy-dev-trigger:
-  extends: .deploy-trigger
-  environment:
-    name: dev
-  needs:
-    - job: build-image
-  only:
-    - /^\d+\.\d+\.\d+$/
-
 deploy-review-trigger:
   extends: .deploy-trigger
   variables:
+    DEPLOY_BRANCH: deploy-test
     DEPLOY_ENV: review16/${CI_COMMIT_REF_NAME}
     IMAGE_FLAVOR: /review
   needs:
@@ -208,23 +200,15 @@ deploy-review-trigger:
     - branches
   except:
     - master
-  when: on_success # automatic after build-review-image
-  allow_failure: true
 
-deploy-test:
-  stage: deploy
-  tags:
-    # use odoo-16.0 runner so we have the pre-cloned odoo
-    # except for that optimization, we don't need odoo dependencies for this job
-    - odoo-16.0
-  script:
-    - start_ssh_agent
-    - ./deploy-test
+deploy-test-trigger:
+  extends: .deploy-trigger
+  variables:
+    DEPLOY_BRANCH: deploy-test
   environment:
-    name: test
-    url: https://odoo-alcyon-test16.acsone.eu
+    name: test16
+  needs:
+    - job: build-image
   only:
-    - /\d+\.\d+\.\d+/
-  when: manual
-  dependencies:
-    - build
+    - /^\d+\.\d+\.\d+$/
+
