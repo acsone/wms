@@ -49,8 +49,6 @@ build:
       for group in '' '-test' '-build' ; do
           pip wheel --no-build-isolation --use-pep517 --wheel-dir=./release${group} -r requirements${group}.txt
       done
-    # build the project
-    - pip wheel --no-build-isolation --no-index --no-deps --wheel-dir=./release-project .
   artifacts:
     expire_in: 1 week
     paths:
