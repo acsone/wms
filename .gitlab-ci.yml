@@ -139,21 +139,19 @@ coverage-report:
 # build container images
 
 .build-and-publish-image:
-  image:
-    name: gcr.io/kaniko-project/executor:debug
-    entrypoint: [""]
+  image: quay.io/podman/stable:v4.2
   before_script: []
   script:
-    # https://docs.gitlab.com/ee/ci/docker/using_kaniko.html#building-a-docker-image-with-kaniko
-    - mkdir -p /kaniko/.docker
-    - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
-    - |
-      /kaniko/executor \
-        --context $CI_PROJECT_DIR \
-        --cache=true \
-        --cache-repo=${CI_REGISTRY_IMAGE}/cache \
-        --use-new-run \
-        --destination ${CI_REGISTRY_IMAGE}${IMAGE_FLAVOR}:${CI_COMMIT_REF_NAME}
+    - podman login ${CI_REGISTRY_IMAGE} -u "${CI_REGISTRY_USER}" -p "${CI_REGISTRY_PASSWORD}"
+    - | 
+      podman build \
+        --cache-from ${CI_REGISTRY_IMAGE}/cache \
+        --cache-to ${CI_REGISTRY_IMAGE}/cache \
+        --tag ${CI_REGISTRY_IMAGE}${IMAGE_FLAVOR}:${CI_COMMIT_REF_NAME} \
+        --build-context release=./release \
+        --build-context release-build=./release-build \
+        .
+    - podman push ${CI_REGISTRY_IMAGE}${IMAGE_FLAVOR}:${CI_COMMIT_REF_NAME}
   needs:
     - job: build
       artifacts: true
