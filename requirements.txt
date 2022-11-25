@@ -30,7 +30,7 @@ lxml==4.6.5
 manifestoo_core==0.10.3
 MarkupSafe==1.1.0
 num2words==0.5.6
-odoo @ git+https://github.com/acsone/odoo.git@09391b74a218a377933fb2459d91e8dd93ca452e
+odoo @ git+https://github.com/acsone/odoo.git@39b334125bee7679908fca4bc6786e1b51830f27
 odoo-addon-product-abc-classification @ git+https://github.com/acsone/product-attribute.git@340dffd0a755da5feef04b5df27861c65e5d3ec4#subdirectory=setup/product_abc_classification
 odoo-addon-product-abc-classification-sale-stock @ git+https://github.com/acsone/product-attribute.git@f9690a9c1f19ece371effeb200a417e96fddb158#subdirectory=setup/product_abc_classification_sale_stock
 odoo-addon-product-dimension @ git+https://github.com/acsone/product-attribute.git@36e6216efe4a7cbff6346f36e0d5b80d7d700705#subdirectory=setup/product_dimension
