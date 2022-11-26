@@ -14,6 +14,15 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_product_promoted_links
+#: model:ir.model.fields,field_description:alc_product_promoted_links.field_delivery_carrier_cross
+#: model:ir.model.fields,field_description:alc_product_promoted_links.field_product_product_cross
+#: model:ir.model.fields,field_description:alc_product_promoted_links.field_product_template_cross
+#: model:ir.model.fields,field_description:alc_product_promoted_links.field_shopinvader_product_cross
+#: model:ir.model.fields,field_description:alc_product_promoted_links.field_shopinvader_variant_cross
+msgid "Cross"
+msgstr ""
+
+#. module: alc_product_promoted_links
 #: model:ir.model,name:alc_product_promoted_links.model_product_template
 msgid "Product Template"
 msgstr ""
