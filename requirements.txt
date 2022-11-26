@@ -43,12 +43,13 @@ odoo-addon-stock-dynamic-routing==16.0.1.0.0.3
 odoo-addon-stock-helper==16.0.1.0.1
 odoo-addon-stock-location-product-restriction==16.0.1.0.0.3
 odoo-addon-stock-move-auto-assign @ git+https://github.com/acsone/stock-logistics-warehouse.git@1b79ba58a4bb7b9bb334a79b3843735088090d1f#subdirectory=setup/stock_move_auto_assign
-odoo-addon-stock-move-auto-assign-auto-release @ git+https://github.com/acsone/stock-logistics-warehouse.git@1b79ba58a4bb7b9bb334a79b3843735088090d1f#subdirectory=setup/stock_move_auto_assign_auto_release
+odoo-addon-stock-move-auto-assign-auto-release @ git+https://github.com/acsone/stock-logistics-warehouse.git@11d1faad4c9f4aacc92052ef2e53df9f5fe8b518#subdirectory=setup/stock_move_auto_assign_auto_release
 odoo-addon-stock-picking-start @ git+https://github.com/acsone/stock-logistics-workflow.git@fb95dafafd5522a0f43bbf9aa0d81ba819c1ba44#subdirectory=setup/stock_picking_start
 odoo-addon-stock-putaway-hook @ git+https://github.com/acsone/stock-logistics-workflow.git@4aca08e554f4a30464a0b9019ec1ddeb2ca7ced9#subdirectory=setup/stock_putaway_hook
 odoo-addon-stock-quant-package-dimension @ git+https://github.com/acsone/stock-logistics-workflow.git@978211aab22c1d0a1c90eb61d444a802dedfddd2#subdirectory=setup/stock_quant_package_dimension
 odoo-addon-stock-quant-package-product-packaging @ git+https://github.com/acsone/stock-logistics-workflow.git@2dcf8cada421667914f565f7deeada61d5e82b70#subdirectory=setup/stock_quant_package_product_packaging
-odoo-addon-stock-release-channel @ git+https://github.com/acsone/wms.git@4b05fb5ff17acfe73f5d5761f32d066d447c4ace#subdirectory=setup/stock_release_channel
+odoo-addon-stock-release-channel @ git+https://github.com/acsone/wms.git@e9f392536f88c5d6297857e59601adde89c42264#subdirectory=setup/stock_release_channel
+odoo-addon-stock-release-channel-auto-release @ git+https://github.com/acsone/wms.git@e9f392536f88c5d6297857e59601adde89c42264#subdirectory=setup/stock_release_channel_auto_release
 odoo-addon-stock-storage-type @ git+https://github.com/acsone/wms.git@fd484bfeb2110f1dbcaec071acab1a41dc57d935#subdirectory=setup/stock_storage_type
 odoo-addons-enterprise @ git+ssh://git@github.com/acsone/enterprise.git@31da8268ad69f1bf770127c5e449cbf230fe73ce
 ofxparse==0.21
