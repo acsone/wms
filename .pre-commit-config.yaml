@@ -143,7 +143,6 @@ exclude:  |
   ^odoo/addons/alc_product_consolidated_price/|
   ^odoo/addons/alc_product_consolidated_price_newpharma/|
   ^odoo/addons/alc_product_consolidated_price_report/|
-  ^odoo/addons/alc_product_dimensions/|
   ^odoo/addons/alc_product_flattened_data/|
   ^odoo/addons/alc_product_is_new/|
   ^odoo/addons/alc_product_label_printer/|

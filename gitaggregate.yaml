@@ -25,6 +25,7 @@
     merges:
         - odoo 16.0
         - origin 16.0-type-annotations
+        - odoo refs/pull/106512/head # [IMP] Use importlib find_spec() instead of find_module()
     shell_command_after:
         # pyproject.toml
         - curl -sSL https://github.com/odoo/odoo/pull/44001.patch | git am
