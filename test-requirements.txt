@@ -1,3 +1,10 @@
+# stock-logistics-warehouse
+# https://github.com/OCA/stock-logistics-warehouse/pull/1532
+odoo-addon-stock-move-auto-assign @ git+https://github.com/oca/stock-logistics-warehouse.git@refs/pull/1560/head#subdirectory=setup/stock_move_auto_assign
+# https://github.com/OCA/stock-logistics-warehouse/pull/1560
+odoo-addon-stock-move-auto-assign-auto-release @ git+https://github.com/oca/stock-logistics-warehouse.git@refs/pull/1560/head#subdirectory=setup/stock_move_auto_assign_auto_release
+odoo-addon-stock-picking-commercial-partner @ git+https://github.com/oca/stock-logistics-warehouse.git@refs/pull/1681/head#subdirectory=setup/stock_picking_commercial_partner
+
 # wms
 # https://github.com/OCA/wms/pull/478
 odoo-addon-stock-available-to-promise-release @ git+https://github.com/oca/wms.git@refs/pull/478/head#subdirectory=setup/stock_available_to_promise_release
