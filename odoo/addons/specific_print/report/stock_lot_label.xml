@@ -29,7 +29,6 @@
 ^FO420,150\r
 ^BQN,2,6\r
 ^FDQA,#<t t-esc="lot.product_id.default_code" />#<t t-esc="lot.name" />^FS\r
-^PQ<t t-esc="qty" />,0,0,N\r
 ^XZ
 </t>
     </div>

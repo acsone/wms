@@ -25,7 +25,7 @@
     ^FWR
 
     ^FO310,60^GB70,<t
-            t-esc="len(pick.delivery_round_id.template_id.code) * 38"
+            t-esc="pick.delivery_round_id.template_id.code and len(pick.delivery_round_id.template_id.code) * 38"
           />,3,2^FS\r
     ^FO310,70^A060,60^FD<t t-esc="pick.delivery_round_id.template_id.code" />^FS\r
 
@@ -42,7 +42,7 @@
             t-esc="res_company.convert_to_ascii(pick.partner_id.display_name and pick.partner_id.display_name[38:60] or u'')"
           />^FS\r
     ^FO195,60^A030,25^FD<t t-esc="pick.partner_id.zip" /> <t
-            t-esc="res_company.convert_to_ascii(pick.partner_id.city)"
+            t-esc="pick.partner_id.city and res_company.convert_to_ascii(pick.partner_id.city)"
           />^FS\r
     ^FO165,60^A025,25^FD<t
             t-esc="('customer_id' in pick) and (pick.partner_id != pick.customer_id) and res_company.convert_to_ascii(pick.customer_id.name and pick.customer_id.name[:29] or u'') or ''"
