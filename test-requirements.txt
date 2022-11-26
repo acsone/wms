@@ -1,0 +1,3 @@
+# wms
+# https://github.com/OCA/wms/pull/478
+odoo-addon-stock-available-to-promise-release @ git+https://github.com/oca/wms.git@refs/pull/478/head#subdirectory=setup/stock_available_to_promise_release
