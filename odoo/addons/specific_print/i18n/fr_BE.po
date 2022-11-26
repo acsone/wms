@@ -17,13 +17,6 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: specific_print
-#: model:ir.ui.view,arch_db:specific_print.stock_lot_label_zebra_v1
-msgid ""
-",0,0,N\\r\n"
-"^XZ"
-msgstr ""
-
-#. module: specific_print
 #: model:ir.ui.view,arch_db:specific_print.stock_product_label_toshiba_v1
 msgid ""
 ",0002C3200|}\\r\n"
@@ -41,7 +34,7 @@ msgstr ""
 #: model:ir.ui.view,arch_db:specific_print.stock_pick_packs_label_zebra_v1
 msgid ""
 ",75,3,2^FS\\r\n"
-"^FO40,47^A0N60,60^FD"
+"            ^FO40,47^A0N60,60^FD"
 msgstr ""
 
 #. module: specific_print
@@ -49,7 +42,7 @@ msgstr ""
 msgid ""
 "-^FS\\r\n"
 "\n"
-"    ^FO20,60^A015,15^FD"
+"    ^FO50,60^A018,18^FD"
 msgstr ""
 
 #. module: specific_print
@@ -363,12 +356,15 @@ msgstr "Zebra"
 
 #. module: specific_print
 #: model:ir.ui.view,arch_db:specific_print.stock_product_food_label_zebra_v1
-msgid "^FO100,420^A025,25^FDPVI"
+msgid "^FO130,420^A025,25^FDPVI"
 msgstr ""
 
 #. module: specific_print
 #: model:ir.ui.view,arch_db:specific_print.stock_pick_packs_label_zebra_v1
-msgid "^FO200,47^A0N60,60^FDB2C^FS\\r"
+msgid ""
+"^FO200,20\n"
+"              ^BQN,2,4\n"
+"              ^FDQA,"
 msgstr ""
 
 #. module: specific_print
@@ -381,23 +377,28 @@ msgstr ""
 
 #. module: specific_print
 #: model:ir.ui.view,arch_db:specific_print.stock_product_food_label_zebra_v1
-msgid "^FO310,330^A030,30^FDB2C^FS\\r"
-msgstr ""
-
-#. module: specific_print
-#: model:ir.ui.view,arch_db:specific_print.stock_product_food_label_zebra_v1
 msgid "^FO310,480^A040,40^FD"
 msgstr ""
 
 #. module: specific_print
+#: model:ir.ui.view,arch_db:specific_print.stock_product_food_label_zebra_v1
+msgid "^FO330,330^A030,30^FDB2C^FS\\r"
+msgstr ""
+
+#. module: specific_print
 #: model:ir.ui.view,arch_db:specific_print.stock_pick_packs_label_zebra_v1
-msgid "^FO570,50,1^A0N60,60^FD"
+msgid "^FO340,47^A0N60,60^FDB2C^FS\\r"
+msgstr ""
+
+#. module: specific_print
+#: model:ir.ui.view,arch_db:specific_print.stock_pick_packs_label_zebra_v1
+msgid "^FO570,47,1^A0N60,60^FD"
 msgstr ""
 
 #. module: specific_print
 #: model:ir.ui.view,arch_db:specific_print.stock_product_food_label_zebra_v1
 msgid ""
-"^FO60,60^BY2\n"
+"^FO80,60^BY2\n"
 "    ^BC,40,Y,Y,N,A^FDS-"
 msgstr ""
 
@@ -405,6 +406,41 @@ msgstr ""
 #: model:ir.ui.view,arch_db:specific_print.stock_pick_packs_label_zebra_v1
 #: model:ir.ui.view,arch_db:specific_print.stock_product_food_label_zebra_v1
 msgid "^FS\\r"
+msgstr ""
+
+#. module: specific_print
+#: model:ir.ui.view,arch_db:specific_print.stock_pick_packs_label_zebra_v1
+msgid ""
+"^FS\\r\n"
+"\n"
+"\n"
+"            ^FO30,310^A0N20,25^FD"
+msgstr ""
+
+#. module: specific_print
+#: model:ir.ui.view,arch_db:specific_print.stock_pick_packs_label_zebra_v1
+msgid ""
+"^FS\\r\n"
+"\n"
+"            ^FO30,140^A0N30,30^FD"
+msgstr ""
+
+#. module: specific_print
+#: model:ir.ui.view,arch_db:specific_print.stock_pick_packs_label_zebra_v1
+msgid ""
+"^FS\\r\n"
+"\n"
+"            ^FO570,310,1\n"
+"            ^BXN,5,200\n"
+"            ^FD"
+msgstr ""
+
+#. module: specific_print
+#: model:ir.ui.view,arch_db:specific_print.stock_pick_packs_label_zebra_v1
+msgid ""
+"^FS\\r\n"
+"\n"
+"            ^XZ"
 msgstr ""
 
 #. module: specific_print
@@ -419,31 +455,35 @@ msgstr ""
 #: model:ir.ui.view,arch_db:specific_print.stock_pick_packs_label_zebra_v1
 msgid ""
 "^FS\\r\n"
-"\n"
-"^FO30,30^GB"
+"            ^FO30,170^A0N30,30^FD"
 msgstr ""
 
 #. module: specific_print
 #: model:ir.ui.view,arch_db:specific_print.stock_pick_packs_label_zebra_v1
 msgid ""
 "^FS\\r\n"
-"\n"
-"^FO570,120,1^A0N30,30^FD"
+"            ^FO30,205^A0N35,30^FD"
 msgstr ""
 
 #. module: specific_print
 #: model:ir.ui.view,arch_db:specific_print.stock_pick_packs_label_zebra_v1
 msgid ""
 "^FS\\r\n"
-"\n"
-"^FO570,280,1^A0N30,25^FD"
+"            ^FO30,250^A0N30,30^FD"
+msgstr ""
+
+#. module: specific_print
+#: model:ir.ui.view,arch_db:specific_print.stock_pick_packs_label_zebra_v1
+msgid ""
+"^FS\\r\n"
+"            ^FO30,350^A0N45,45^FD"
 msgstr ""
 
 #. module: specific_print
 #: model:ir.ui.view,arch_db:specific_print.stock_product_food_label_zebra_v1
 msgid ""
 "^FS\\r\n"
-"    ^FO145,60^A025,25^FD"
+"    ^FO165,60^A025,25^FD"
 msgstr ""
 
 #. module: specific_print
@@ -464,22 +504,37 @@ msgstr ""
 #: model:ir.ui.view,arch_db:specific_print.stock_product_food_label_zebra_v1
 msgid ""
 "^FS\\r\n"
-"    ^FO290,300^A020,20^FD"
+"    ^FO25,60^A018,18^FD"
 msgstr ""
 
 #. module: specific_print
-#: model:ir.ui.view,arch_db:specific_print.stock_lot_nolot_label_zebra_v1
+#: model:ir.ui.view,arch_db:specific_print.stock_product_food_label_zebra_v1
 msgid ""
 "^FS\\r\n"
-"^FO25,115^A0N,37,32^CI13^FR^FDArticle:^FS\\r\n"
-"^FO140,115^A0N,37,40^CI13^FR^FD"
+"    ^FO290,300^A020,20^FD"
 msgstr ""
 
 #. module: specific_print
 #: model:ir.ui.view,arch_db:specific_print.stock_lot_label_zebra_v1
 msgid ""
 "^FS\\r\n"
-"^FO25,145^A0N,37,32^CI13^FR^FDLot:^FS\\r\n"
+"^FO25,105^A0N,37,32^CI13^FR^FDLot:^FS\\r\n"
+"^FO90,105^A0N,37,32^CI13^FR^FD"
+msgstr ""
+
+#. module: specific_print
+#: model:ir.ui.view,arch_db:specific_print.stock_lot_nolot_label_zebra_v1
+msgid ""
+"^FS\\r\n"
+"^FO25,135^A0N,37,32^CI13^FR^FDArticle:^FS\\r\n"
+"^FO140,135^A0N,37,40^CI13^FR^FD"
+msgstr ""
+
+#. module: specific_print
+#: model:ir.ui.view,arch_db:specific_print.stock_lot_label_zebra_v1
+msgid ""
+"^FS\\r\n"
+"^FO25,145^A0N,37,32^CI13^FR^FDBac:^FS\\r\n"
 "^FO90,145^A0N,37,32^CI13^FR^FD"
 msgstr ""
 
@@ -495,31 +550,37 @@ msgstr ""
 #: model:ir.ui.view,arch_db:specific_print.stock_lot_label_zebra_v1
 msgid ""
 "^FS\\r\n"
-"^FO25,190^A0N,37,32^CI13^FR^FDBac:^FS\\r\n"
-"^FO90,190^A0N,37,32^CI13^FR^FD"
+"^FO25,190^A0N,37,32^CI13^FR^FDDate limite:^FS\\r\n"
+"^FO190,180^A0N,50,40^CI13^FR^FD"
 msgstr ""
 
 #. module: specific_print
 #: model:ir.ui.view,arch_db:specific_print.stock_lot_label_zebra_v1
 msgid ""
 "^FS\\r\n"
-"^FO25,240^A0N,37,32^CI13^FR^FDDate limite:^FS\\r\n"
-"^FO190,230^A0N,50,40^CI13^FR^FD"
+"^FO25,240^A0N,37,32^CI13^FR^FDArticle:^FS\\r\n"
+"^FO140,240^A0N,37,40^CI13^FR^FD"
 msgstr ""
 
 #. module: specific_print
 #: model:ir.ui.view,arch_db:specific_print.stock_lot_label_zebra_v1
 msgid ""
 "^FS\\r\n"
-"^FO25,290^A0N,37,32^CI13^FR^FDArticle:^FS\\r\n"
-"^FO140,290^A0N,37,40^CI13^FR^FD"
+"^FO25,283^A0N,31,23^CI13^FR^FD"
 msgstr ""
 
 #. module: specific_print
 #: model:ir.ui.view,arch_db:specific_print.stock_lot_label_zebra_v1
 msgid ""
 "^FS\\r\n"
-"^FO25,342^A0N,31,23^CI13^FR^FD"
+"^FO25,322^A0N,31,23^CI13^FR^FD"
+msgstr ""
+
+#. module: specific_print
+#: model:ir.ui.view,arch_db:specific_print.stock_lot_nolot_label_zebra_v1
+msgid ""
+"^FS\\r\n"
+"^FO25,80^A0N,40,30^CI13^FR^FD"
 msgstr ""
 
 #. module: specific_print
@@ -544,54 +605,12 @@ msgstr ""
 #: model:ir.ui.view,arch_db:specific_print.stock_lot_label_zebra_v1
 msgid ""
 "^FS\\r\n"
-"^FO420,33^A0N,118,103^CI13^FR^FD"
-msgstr ""
-
-#. module: specific_print
-#: model:ir.ui.view,arch_db:specific_print.stock_pick_packs_label_zebra_v1
-msgid ""
-"^FS\\r\n"
-"^FO570,150,1^A0N30,30^FD"
-msgstr ""
-
-#. module: specific_print
-#: model:ir.ui.view,arch_db:specific_print.stock_pick_packs_label_zebra_v1
-msgid ""
-"^FS\\r\n"
-"^FO570,185,1^A0N35,30^FD"
-msgstr ""
-
-#. module: specific_print
-#: model:ir.ui.view,arch_db:specific_print.stock_pick_packs_label_zebra_v1
-msgid ""
-"^FS\\r\n"
-"^FO570,230,1^A0N30,30^FD"
-msgstr ""
-
-#. module: specific_print
-#: model:ir.ui.view,arch_db:specific_print.stock_pick_packs_label_zebra_v1
-msgid ""
-"^FS\\r\n"
-"^FO570,310,1^A0N20,25^FD"
-msgstr ""
-
-#. module: specific_print
-#: model:ir.ui.view,arch_db:specific_print.stock_pick_packs_label_zebra_v1
-msgid ""
-"^FS\\r\n"
-"^FO570,350,1^A0N45,45^FD"
+"^FO420,33^A0N,59,51^CI13^FR^FD"
 msgstr ""
 
 #. module: specific_print
 #: model:ir.ui.view,arch_db:specific_print.stock_lot_label_zebra_v1
-msgid ""
-"^FS\\r\n"
-"^PQ"
-msgstr ""
-
-#. module: specific_print
 #: model:ir.ui.view,arch_db:specific_print.stock_lot_nolot_label_zebra_v1
-#: model:ir.ui.view,arch_db:specific_print.stock_pick_packs_label_zebra_v1
 msgid ""
 "^FS\\r\n"
 "^XZ"
@@ -608,8 +627,7 @@ msgstr ""
 #: model:ir.ui.view,arch_db:specific_print.stock_pick_packs_label_zebra_v1
 msgid ""
 "^XA\n"
-"\n"
-"^FO30,250^BQN,2,6^FDQA,"
+"            ^FO30,30^GB"
 msgstr ""
 
 #. module: specific_print
@@ -627,7 +645,7 @@ msgid ""
 "^XA\n"
 "^PRC\n"
 "^LH0,0^FS\\r\n"
-"^FO25,33^A0N,118,103^CI13^FR^FD"
+"^FO25,33^A0N,59,51^CI13^FR^FD"
 msgstr ""
 
 #. module: specific_print
@@ -636,7 +654,7 @@ msgid ""
 "^XA\n"
 "^PRC\n"
 "^LH0,0^FS\\r\n"
-"^FO25,40^A0N,50,40^CI13^FR^FD"
+"^FO25,40^A0N,40,30^CI13^FR^FD"
 msgstr ""
 
 #. module: specific_print
