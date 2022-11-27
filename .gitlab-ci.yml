@@ -24,7 +24,10 @@ pre-commit:
   stage: test
   image: python:3.9
   cache:
-    key: pre-commit
+    key:
+      files:
+        - .pre-commit-config.yaml
+      prefix: $CI_JOB_NAME
     paths:
     - .pre-commit
   script:
