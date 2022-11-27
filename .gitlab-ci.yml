@@ -31,7 +31,7 @@ pre-commit:
     paths:
     - .pre-commit
   script:
-    - pip install pre-commit click
+    - pip install pre-commit
     - PRE_COMMIT_HOME=$PWD/.pre-commit pre-commit run --all-files --show-diff-on-failure
   needs: []
   interruptible: true

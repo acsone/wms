@@ -1,8 +1,7 @@
 #!/usr/bin/env python
+import argparse
 import ast
 import os
-
-import click
 
 FILE_PATH = "pyproject.toml"
 EXCLUDE_SEPARATOR = "# MYPY NOT INSTALLABLE ADDONS"
@@ -42,8 +41,6 @@ def is_not_installable_addon(addon_dir):
     return not manifest.get("installable", True)
 
 
-@click.command()
-@click.option("--addons-dir", default="")
 def main(addons_dir):
     """ Update pyproject.tom  [MYPY] exclude section with the list of
         uninstallable addons. The section must begin with a line
@@ -80,4 +77,7 @@ def main(addons_dir):
 
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--addons-dir")
+    args = parser.parse_args()
+    main(args.addons_dir)
