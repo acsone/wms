@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<odoo noupdate="1">
+  <record
+    id="alc_stock_storage_type.package_st_M_M_Nouveaute"
+    model="stock.package.storage.type"
+  >
+    <field name="is_new" eval="1" />
+  </record>
+</odoo>
