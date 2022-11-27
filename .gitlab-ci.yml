@@ -116,12 +116,12 @@ coverage-report:
   stage: coverage
   image: ghcr.io/acsone/odoo-ci-image:v20220518.0
   script:
-    - virtualenv --python=$PYTHON venv
-    - venv/bin/pip install coverage
-    - venv/bin/coverage combine
-    - venv/bin/coverage html --skip-empty --show-contexts
-    - venv/bin/coverage xml
-    - venv/bin/coverage report --skip-empty
+    - virtualenv --python=$PYTHON venv && source venv/bin/activate
+    - pip install coverage
+    - coverage combine
+    - coverage html --skip-empty --show-contexts
+    - coverage xml
+    - coverage report --skip-empty
   coverage: '/TOTAL\s+\d+\s+\d+\s+\d+\s+\d+\s+(\d+\%)/'
   artifacts:
     expire_in: 1 week
