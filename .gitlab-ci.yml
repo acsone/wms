@@ -116,7 +116,7 @@ coverage-report:
   stage: coverage
   image: python:3.10
   script:
-    - pip install coverage
+    - pip install $(grep coverage requirements-test.txt)
     - coverage combine
     - coverage html --skip-empty --show-contexts
     - coverage xml
