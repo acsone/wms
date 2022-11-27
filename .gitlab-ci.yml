@@ -105,7 +105,7 @@ test:
     - ADDONS_TEST=$(manifestoo -d odoo/addons list --separator=,)
     - PYTEST_ADDONS_TEST=$(sed -E 's;([^,]+)(,|$);odoo/addons/\1 ;g' <<< $ADDONS_TEST)
     - echo Installing ${ADDONS_TEST}
-    - unbuffer venv/bin/odoo -c odoo-ci.cfg -d ${DB_NAME} --stop-after-init -i ${ADDONS_TEST} | acsoo checklog
+    - unbuffer odoo -c odoo-ci.cfg -d ${DB_NAME} --stop-after-init -i ${ADDONS_TEST} | acsoo checklog
     - echo Testing ${PYTEST_ADDONS_TEST}
     - unbuffer coverage run -m pytest --color=yes -v --odoo-config=odoo-ci.cfg --odoo-database=${DB_NAME} ${PYTEST_ADDONS_TEST}
 
