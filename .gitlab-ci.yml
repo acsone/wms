@@ -40,7 +40,7 @@ build:
   stage: build
   image: ghcr.io/acsone/odoo-ci-image:v20220907.0
   tags:
-    - odoo-16.0
+    - pip-cache
   script:
     - start_ssh_agent
     - virtualenv --python=$PYTHON venv && source venv/bin/activate
