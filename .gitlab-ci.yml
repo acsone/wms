@@ -114,9 +114,8 @@ test:
 
 coverage-report:
   stage: coverage
-  image: ghcr.io/acsone/odoo-ci-image:v20220518.0
+  image: python:3.10
   script:
-    - virtualenv --python=$PYTHON venv && source venv/bin/activate
     - pip install coverage
     - coverage combine
     - coverage html --skip-empty --show-contexts
