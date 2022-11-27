@@ -22,7 +22,7 @@ variables:
 
 pre-commit:
   stage: test
-  image: python:3.9
+  image: python:3.10
   cache:
     key:
       files:
