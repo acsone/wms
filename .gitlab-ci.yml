@@ -106,7 +106,6 @@ test:
     - PYTEST_ADDONS_TEST=$(sed -E 's/(^|,)/&odoo\/addons\//g; s/(,|$)/ /g' <<< $ADDONS_TEST)
     - echo Testing ${ADDONS_TEST}
     - unbuffer venv/bin/odoo -c odoo-ci.cfg -d ${DB_NAME} --stop-after-init -i ${ADDONS_TEST} | acsoo checklog
-    # Use a COVERAGE_FILE=.coverage.<specific test> to use with pytest --cov-append if having several tests jobs
     - unbuffer coverage run -m pytest --color=yes -v --odoo-config=odoo-ci.cfg --odoo-database=${DB_NAME} ${PYTEST_ADDONS_TEST}
 
   after_script:
