@@ -91,14 +91,18 @@ class PrintLabel(models.TransientModel):
 
     def print_food_from_packop(self):
         for packop in self.pack_operation_ids:
+            do_not_print_food_labels = packop.partner_id.no_labels_food_products
             if packop.pack_lot_ids:
                 for pack_lot in packop.pack_lot_ids:
                     packop.print_food_product_label(
                         printer_id=self.printer_id.id,
                         quantity=self.qty,
                         lot_id=pack_lot.lot_id,
+                        do_not_print_food_labels=do_not_print_food_labels,
                     )
             else:
                 packop.print_food_product_label(
-                    printer_id=self.printer_id.id, quantity=self.qty
+                    printer_id=self.printer_id.id,
+                    quantity=self.qty,
+                    do_not_print_food_labels=do_not_print_food_labels,
                 )

@@ -117,11 +117,18 @@ msgid "Display price on labels"
 msgstr "Afficher le prix sur les étiquettes"
 
 #. module: specific_print
+#: model:ir.model.fields,field_description:specific_print.field_res_partner_no_labels_food_products
+#: model:ir.model.fields,field_description:specific_print.field_res_users_no_labels_food_products
+#: model:ir.model.fields,field_description:specific_print.field_shopinvader_partner_no_labels_food_products
+msgid "Do not print food product labels"
+msgstr "Ne pas imprimer les étiquettes du produit aliment"
+
+#. module: specific_print
 #: model:ir.model.fields,field_description:specific_print.field_res_partner_no_labels_products
 #: model:ir.model.fields,field_description:specific_print.field_res_users_no_labels_products
 #: model:ir.model.fields,field_description:specific_print.field_shopinvader_partner_no_labels_products
 msgid "Do not print product labels"
-msgstr "Ne pas imprimer les étiquettes du produit"
+msgstr "Ne pas imprimer les étiquettes du produit médicament"
 
 #. module: specific_print
 #: model:ir.ui.view,arch_db:specific_print.stock_product_label_toshiba_v1

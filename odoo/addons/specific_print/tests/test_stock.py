@@ -188,3 +188,13 @@ class TestStock(SavepointCase):
         ) as patched_print:
             self.picking.print_food_products_label()
             self.assertEqual(patched_print.call_count, 1)
+
+    def test_7_print_food_label_forced_from_picking(self):
+        # We do not wants labels but we call it from a picking :
+        # specific call ==> we force print
+        self.picking.partner_id.no_labels_food_products = True
+        with mock.patch.object(
+            self.env["stock.pack.operation"].__class__, "print_food_product_label"
+        ) as patched_print:
+            self.picking.print_food_products_label()
+            self.assertEqual(patched_print.call_count, 1)

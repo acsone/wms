@@ -38,7 +38,6 @@ class StockPicking(models.Model):
         self.ensure_one()
         if not self.partner_id:
             raise Warning(_("No destination partner defined"))
-
         packs_to_print = operations or self.pack_operation_ids.filtered(
             lambda pack_op: pack_op.product_id.number_labels_to_print
         )
@@ -46,19 +45,29 @@ class StockPicking(models.Model):
             packs_to_print = packs_to_print.filtered(
                 lambda pack_op, packages=packages: pack_op.result_package_id in packages
             )
+        do_not_print_food_labels = self.partner_id.no_labels_food_products
         if packs_to_print:
-            for pack in packs_to_print:
-                if pack.pack_lot_ids:
-                    for pack_lot in pack.pack_lot_ids:
+            if do_not_print_food_labels:
+                # We call the print, we need just one label in force printing
+                # We don't need lot or anything
+                packs_to_print[0].print_food_product_label(
+                    printer_id=printer_id,
+                    quantity=quantity,
+                    do_not_print_food_labels=do_not_print_food_labels,
+                )
+            else:
+                for pack in packs_to_print:
+                    if pack.pack_lot_ids:
+                        for pack_lot in pack.pack_lot_ids:
+                            pack.print_food_product_label(
+                                printer_id=printer_id,
+                                quantity=quantity,
+                                lot_id=pack_lot.lot_id,
+                            )
+                    else:
                         pack.print_food_product_label(
-                            printer_id=printer_id,
-                            quantity=quantity,
-                            lot_id=pack_lot.lot_id,
+                            printer_id=printer_id, quantity=quantity,
                         )
-                else:
-                    pack.print_food_product_label(
-                        printer_id=printer_id, quantity=quantity
-                    )
 
     @api.multi
     def print_packages_label(self, quantity=1, printer_id=False, packages=None):
