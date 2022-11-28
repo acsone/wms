@@ -89,12 +89,19 @@ msgid "Created on"
 msgstr ""
 
 #. module: specific_print
-#: code:addons/specific_print/models/stock_picking.py:87
+#: code:addons/specific_print/models/stock_picking.py:96
 #: model:ir.model.fields,help:specific_print.field_res_partner_no_labels_products
 #: model:ir.model.fields,help:specific_print.field_res_users_no_labels_products
 #: model:ir.model.fields,help:specific_print.field_shopinvader_partner_no_labels_products
 #, python-format
 msgid "Customer does not need product labels"
+msgstr ""
+
+#. module: specific_print
+#: model:ir.model.fields,help:specific_print.field_res_partner_no_labels_food_products
+#: model:ir.model.fields,help:specific_print.field_res_users_no_labels_food_products
+#: model:ir.model.fields,help:specific_print.field_shopinvader_partner_no_labels_food_products
+msgid "Customer does not need product labels."
 msgstr ""
 
 #. module: specific_print
@@ -107,6 +114,13 @@ msgstr ""
 #: model:ir.model.fields,field_description:specific_print.field_res_users_is_price_on_labels
 #: model:ir.model.fields,field_description:specific_print.field_shopinvader_partner_is_price_on_labels
 msgid "Display price on labels"
+msgstr ""
+
+#. module: specific_print
+#: model:ir.model.fields,field_description:specific_print.field_res_partner_no_labels_food_products
+#: model:ir.model.fields,field_description:specific_print.field_res_users_no_labels_food_products
+#: model:ir.model.fields,field_description:specific_print.field_shopinvader_partner_no_labels_food_products
+msgid "Do not print food product labels"
 msgstr ""
 
 #. module: specific_print
@@ -194,7 +208,7 @@ msgstr ""
 #. module: specific_print
 #: code:addons/specific_print/models/stock_pack_operation.py:51
 #: code:addons/specific_print/models/stock_picking.py:40
-#: code:addons/specific_print/models/stock_picking.py:67
+#: code:addons/specific_print/models/stock_picking.py:76
 #, python-format
 msgid "No destination partner defined"
 msgstr ""

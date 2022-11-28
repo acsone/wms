@@ -96,12 +96,20 @@ msgid "Created on"
 msgstr "Créé le"
 
 #. module: specific_print
-#: code:addons/specific_print/models/stock_picking.py:87
+#: code:addons/specific_print/models/stock_picking.py:96
 #: model:ir.model.fields,help:specific_print.field_res_partner_no_labels_products
 #: model:ir.model.fields,help:specific_print.field_res_users_no_labels_products
 #: model:ir.model.fields,help:specific_print.field_shopinvader_partner_no_labels_products
 #, python-format
 msgid "Customer does not need product labels"
+msgstr "Le client n'a pas besoin d'étiquettes de produits"
+
+#. module: specific_print
+#: model:ir.model.fields,help:specific_print.field_res_partner_no_labels_food_products
+#: model:ir.model.fields,help:specific_print.field_res_users_no_labels_food_products
+#: model:ir.model.fields,help:specific_print.field_shopinvader_partner_no_labels_food_products
+#, fuzzy
+msgid "Customer does not need product labels."
 msgstr "Le client n'a pas besoin d'étiquettes de produits"
 
 #. module: specific_print
@@ -208,7 +216,7 @@ msgstr "Lots"
 #. module: specific_print
 #: code:addons/specific_print/models/stock_pack_operation.py:51
 #: code:addons/specific_print/models/stock_picking.py:40
-#: code:addons/specific_print/models/stock_picking.py:67
+#: code:addons/specific_print/models/stock_picking.py:76
 #, python-format
 msgid "No destination partner defined"
 msgstr "Aucun destinaire défini"
