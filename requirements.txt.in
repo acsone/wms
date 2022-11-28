@@ -138,3 +138,7 @@ odoo10-addon-rest-log @ git+https://github.com/acsone/rest-framework.git@10.0-ba
 
 # oca/queue
 odoo10-addon-queue-job @ git+https://github.com/oca/queue.git@10.0-alc_master#subdirectory=setup/queue_job/
+
+# camptocamp/odoo-cloud-platform
+odoo10-addon-base-attachment-object-storage @ git+https://github.com/acsone/odoo-cloud-platform.git@10.0#subdirectory=setup/base_attachment_objet_storage
+odoo10-addon-attachment-s3 @ git+https://github.com/acsone/odoo-cloud-platform.git@10.0#subdirectory=setup/attachment_s3

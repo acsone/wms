@@ -25,6 +25,7 @@ setup(
         "odoo-autodiscover",
         "odoo-addons-enterprise",
         "odoo10-addon-slow-statement-logger",
+        "odoo10-addon-attachment_s3",
         "xlrd",
         "numpy",  # speedup pyshape
         "odoo10-addon-logging-json",
