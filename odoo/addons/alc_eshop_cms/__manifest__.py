@@ -17,6 +17,7 @@
         "sales_team",
         "mixin_file_id",
         "mixin_image_id",
+        "mixin_past",
     ],
     "data": [
         "data/ir_attachment.xml",

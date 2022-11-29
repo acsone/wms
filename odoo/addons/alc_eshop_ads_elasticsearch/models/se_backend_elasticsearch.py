@@ -29,7 +29,8 @@ class SeBackendElasticsearch(models.Model):
 
     @api.model
     def _cleanup_obsolete_adds(self, adapter):
-        existing_ids = self.env["alc.eshop.ads"]._get_active_ads().ids
+        lang = adapter.work.index.lang_id
+        existing_ids = self.env["alc.eshop.ads"]._get_active_ads(lang=lang).ids
         if existing_ids:
             q = {"bool": {"must_not": [{"terms": {"_id": existing_ids}}]}}
         else:

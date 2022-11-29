@@ -84,6 +84,11 @@ msgid "Eshop Ads"
 msgstr "Annonce Publicitaire"
 
 #. module: alc_eshop_ads
+#: selection:alc.eshop.ads,visibility:0
+msgid "Everyone"
+msgstr ""
+
+#. module: alc_eshop_ads
 #: model:ir.ui.view,arch_db:alc_eshop_ads.alc_eshop_ads_kanban_view
 msgid "From"
 msgstr "De"
@@ -150,6 +155,11 @@ msgid "Name"
 msgstr "Nom"
 
 #. module: alc_eshop_ads
+#: selection:alc.eshop.ads,visibility:0
+msgid "Non Shareholder"
+msgstr ""
+
+#. module: alc_eshop_ads
 #: model:ir.ui.view,arch_db:alc_eshop_ads.alc_eshop_ads_search_view
 msgid "Past"
 msgstr "Echues"
@@ -158,6 +168,11 @@ msgstr "Echues"
 #: model:ir.ui.view,arch_db:alc_eshop_ads.alc_eshop_ads_search_view
 msgid "Past ads from today"
 msgstr "Annonces échues au jour d'aujourd'hui"
+
+#. module: alc_eshop_ads
+#: selection:alc.eshop.ads,visibility:0
+msgid "Shareholder"
+msgstr ""
 
 #. module: alc_eshop_ads
 #: model:ir.model.fields,field_description:alc_eshop_ads.field_alc_eshop_ads_site_url
@@ -170,7 +185,7 @@ msgid "Slot:"
 msgstr "Emplacement dans le bandeau:"
 
 #. module: alc_eshop_ads
-#: code:addons/alc_eshop_ads/models/alc_eshop_ads.py:64
+#: code:addons/alc_eshop_ads/models/alc_eshop_ads.py:74
 #, python-format
 msgid "The defined period on %s is not a valid (%s > %s)"
 msgstr "La période définie pour %s n'est pas valide (%s > %s)"
@@ -196,12 +211,17 @@ msgid "Upcoming ads from today"
 msgstr "Annonces futures"
 
 #. module: alc_eshop_ads
+#: model:ir.model.fields,field_description:alc_eshop_ads.field_alc_eshop_ads_visibility
+msgid "Visibility"
+msgstr ""
+
+#. module: alc_eshop_ads
 #: model:res.groups,name:alc_eshop_ads.eshop_ads_manager_group
 msgid "Website ads manager"
 msgstr "Gestionnaire des publicités web"
 
 #. module: alc_eshop_ads
-#: code:addons/alc_eshop_ads/models/alc_eshop_ads.py:51
+#: code:addons/alc_eshop_ads/models/alc_eshop_ads.py:61
 #, python-format
 msgid ""
 "You must choose between the download of a file OR the redirect to a website "

@@ -313,14 +313,14 @@ class FacadePackingSlip(Facade):
             ("country_id", ["name"]),
         ]
         parser_product = ["default_code:reference", "name:article", "vat:tva"]
-        parser_lot = ["name:lot", "expiry_date:peremption"]
+        parser_lot = ["name:lot", "life_date:peremption"]
         parser_move_lines = [
             "name",
             "state",
             "product_qty:qty",
             ("prix_net_htva", self._get_price_from_move),
             ("prix_brut_htva", self._get_price_from_move),
-            "serial_number:numero_de_suite",
+            "suite_name:numero_de_suite",
             ("product_id", parser_product),
             ("lot_ids", parser_lot),
         ]

@@ -89,21 +89,42 @@ class StockPicking(models.Model):
         zone_cold = self.env.ref("__setup__.picking_zone_frigo")
         zone_food = self.env.ref("__setup__.picking_zone_aliments")
         zone_med = self.env.ref("__setup__.picking_zone_humain")
-
+        zones = (zone_med, zone_cold, zone_food, zone_equipment)
         # Check quantities for packages
         for picking in self:
             nbr_of_packages_by_zone = defaultdict(set)
-
-            for operation in picking.pack_operation_pack_ids:
-                if not operation.package_id.original_picking_zone_id:
-                    raise UserError(
-                        _("There is no original picking zone on " "this operation.")
+            item_number_of_drug = 0
+            item_number_of_cold = 0
+            item_number_of_food = 0
+            item_number_of_equipment = 0
+            item_number_total = 0
+            item_numbers = (
+                item_number_of_drug,
+                item_number_of_cold,
+                item_number_of_food,
+                item_number_of_equipment,
+                item_number_total,
+            )
+            for operation in picking.pack_operation_ids:
+                if operation.package_id and operation.package_id.is_internal:
+                    for op in operation.package_id.planned_pack_operation_ids:
+                        item_numbers = self._compute_number_of_items(
+                            picking, op, item_numbers, zones
+                        )
+                elif operation.package_id and not operation.package_id.is_internal:
+                    if not operation.package_id.original_picking_zone_id:
+                        raise UserError(
+                            _("There is no original picking zone on " "this operation.")
+                        )
+                    picking_zone = operation.package_id.original_picking_zone_id
+                    if operation.package_id:
+                        nbr_of_packages_by_zone[picking_zone].add(
+                            operation.package_id.id
+                        )
+                else:
+                    item_numbers = self._compute_number_of_items(
+                        picking, operation, item_numbers, zones
                     )
-
-                picking_zone = operation.package_id.original_picking_zone_id
-
-                if operation.package_id:
-                    nbr_of_packages_by_zone[picking_zone].add(operation.package_id.id)
             picking.number_of_equipment = sum(
                 self.env["stock.quant.package"]
                 .browse(nbr_of_packages_by_zone[zone_equipment])
@@ -131,44 +152,55 @@ class StockPicking(models.Model):
                 + picking.number_of_drug
             )
 
-            item_number_of_drug = 0
-            item_number_of_cold = 0
-            item_number_of_food = 0
-            item_number_of_equipment = 0
-            item_number_total = 0
+            picking.item_number_of_drug = item_numbers[0]
+            picking.item_number_of_cold = item_numbers[1]
+            picking.item_number_of_food = item_numbers[2]
+            picking.item_number_of_equipment = item_numbers[3]
+            picking.item_number_total = item_numbers[4]
 
-            # Check quantities for products without pack
-            for operation in picking.pack_operation_product_ids:
-                if not operation.product_id.categ_id:
-                    raise UserError(_("There is no category on this product"))
+    def _compute_number_of_items(self, picking, operation, item_numbers, zones):
+        """
+        item_numbers = (item_number_of_drug, item_number_of_cold, item_number_of_food, item_number_of_equipment, item_number_total)
+        zones = (zone_med, zone_cold, zone_food, zone_equipment)
+        """
+        if not operation.product_id.categ_id:
+            raise UserError(_("There is no category on this product"))
 
-                picking_zone = operation.product_id.picking_zone_id
+        picking_zone = operation.product_id.picking_zone_id
+        qty = operation.qty_done
 
-                qty = operation.qty_done
-                item_number_total += qty
+        item_number_of_drug = item_numbers[0]
+        item_number_of_cold = item_numbers[1]
+        item_number_of_food = item_numbers[2]
+        item_number_of_equipment = item_numbers[3]
+        item_number_total = item_numbers[4]
 
-                if picking_zone == zone_med:
-                    item_number_of_drug += qty
-                elif picking_zone == zone_cold:
-                    item_number_of_cold += qty
-                elif picking_zone == zone_food:
-                    item_number_of_food += qty
-                elif picking_zone == zone_equipment:
-                    item_number_of_equipment += qty
-                else:
-                    self.env.user.notify_error(
-                        _(
-                            "Picking zone does not exist anymore %s for picking %s and product %s"
-                        )
-                        % (
-                            picking_zone.name,
-                            picking.name,
-                            operation.product_id.product_tmpl_id.name,
-                        )
-                    )
+        item_number_total += qty
 
-            picking.item_number_of_drug = item_number_of_drug
-            picking.item_number_of_cold = item_number_of_cold
-            picking.item_number_of_food = item_number_of_food
-            picking.item_number_of_equipment = item_number_of_equipment
-            picking.item_number_total = item_number_total
+        if picking_zone == zones[0]:
+            item_number_of_drug += qty
+        elif picking_zone == zones[1]:
+            item_number_of_cold += qty
+        elif picking_zone == zones[2]:
+            item_number_of_food += qty
+        elif picking_zone == zones[3]:
+            item_number_of_equipment += qty
+        else:
+            self.env.user.notify_error(
+                _(
+                    "Picking zone does not exist anymore %s for picking %s and product %s"
+                )
+                % (
+                    picking_zone.name,
+                    picking.name,
+                    operation.product_id.product_tmpl_id.name,
+                )
+            )
+        item_numbers = (
+            item_number_of_drug,
+            item_number_of_cold,
+            item_number_of_food,
+            item_number_of_equipment,
+            item_number_total,
+        )
+        return item_numbers

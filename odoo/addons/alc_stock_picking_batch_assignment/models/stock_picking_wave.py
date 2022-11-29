@@ -2,7 +2,7 @@
 # Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import api, fields, models
+from odoo import _, api, fields, models
 
 
 class StockPickingWave(models.Model):
@@ -19,6 +19,14 @@ class StockPickingWave(models.Model):
         track_visibility="onchange",
         inverse="_inverse_operator_id",
     )
+
+    _sql_constraints = [
+        (
+            "operator_id_unique",
+            "EXCLUDE (operator_id WITH =) WHERE ( operator_id is not null and state not in ('done', 'cancel', 'released'))",
+            _("This operator is already assigned to a wave"),
+        )
+    ]
 
     def _prepare_assign_operator_values(self, operator=None):
         operator_id = operator.id if operator else self.env.uid

@@ -10,7 +10,12 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["sale_cart_rest_api", "sale_triple_discount", "shopinvader_sale_cart"],
+    "depends": [
+        "pricelist_discount",
+        "sale_cart_rest_api",
+        "sale_triple_discount",
+        "shopinvader_sale_cart",
+    ],
     "data": [],
     "demo": [],
     'installable': False

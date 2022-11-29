@@ -119,7 +119,7 @@ WHERE id in %s AND EXISTS (
             partners |= p
         ps_dynamic = partners.filtered(lambda p: not p.not_in_dynamic_delivery_round)
         ps_dyn_del = self._find_bypartners_geo(ps_dynamic.ids) if ps_dynamic else []
-        rest = partners.filtered(lambda p: p.id in ps_dyn_del)
+        rest = partners.filtered(lambda p: p.id not in ps_dyn_del)
         ps_sta_del = self._find_bypartners(rest.ids) if rest else []
         pids = ps_sta_del + ps_dyn_del
         for p in self:

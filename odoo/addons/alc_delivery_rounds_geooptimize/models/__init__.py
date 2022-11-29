@@ -4,3 +4,4 @@ from . import round_template
 from . import round_instance_customer
 from . import res_partner
 from . import alc_delivery_resource
+from . import stock_picking

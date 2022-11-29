@@ -6,7 +6,7 @@
 import itertools
 
 from odoo import api, fields, models
-from odoo.osv.expression import NEGATIVE_TERM_OPERATORS
+from odoo.osv.expression import FALSE_LEAF, NEGATIVE_TERM_OPERATORS, TRUE_LEAF
 
 
 class StockQuant(models.Model):
@@ -28,20 +28,33 @@ class StockQuant(models.Model):
             rec.is_expired = rec.lot_id.is_expired
 
     def _search_is_expired(self, operator, value):
-        search_expired = (
+        domain = []
+        negative_operator = operator in NEGATIVE_TERM_OPERATORS
+        search_expired = (  # atomic case
             # is_expired != False
-            (operator in NEGATIVE_TERM_OPERATORS and not value)
+            (negative_operator and not value)
             or
             # is_expired = True
-            (operator not in NEGATIVE_TERM_OPERATORS and value)
+            (not negative_operator and value)
         )
+        if "in" in operator:  # value should be a list
+            if not value:
+                domain = TRUE_LEAF if negative_operator else FALSE_LEAF
+            elif True in value and False in value:
+                domain = FALSE_LEAF if negative_operator else TRUE_LEAF
+            elif False in value:  # not in [False]
+                search_expired = negative_operator
+            else:  # in [True]
+                search_expired = not negative_operator
         if search_expired:
-            return [("expiry_date", "<", fields.Datetime.now())]
-        return [
-            "|",
-            ("expiry_date", "=", False),
-            ("expiry_date", ">=", fields.Datetime.now()),
-        ]
+            domain = domain or [("expiry_date", "<", fields.Datetime.now())]
+        else:
+            domain = domain or [
+                "|",
+                ("expiry_date", "=", False),
+                ("expiry_date", ">=", fields.Datetime.now()),
+            ]
+        return domain
 
     def _quants_get_reservation_domain(
         self,

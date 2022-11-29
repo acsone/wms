@@ -10,7 +10,10 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["shopinvader_search_engine_update", "shopinvader_product_media"],
+    "depends": [
+        "shopinvader_search_engine_update_product",
+        "shopinvader_product_media",
+    ],
     "data": [],
     "demo": [],
     'installable': False

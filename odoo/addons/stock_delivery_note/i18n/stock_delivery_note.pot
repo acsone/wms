@@ -71,6 +71,11 @@ msgid "Stock Move"
 msgstr ""
 
 #. module: stock_delivery_note
+#: model:ir.model.fields,field_description:stock_delivery_note.field_stock_move_suite_name
+msgid "Suite name"
+msgstr ""
+
+#. module: stock_delivery_note
 #: model:ir.model,name:stock_delivery_note.model_stock_picking
 msgid "Transfer"
 msgstr ""

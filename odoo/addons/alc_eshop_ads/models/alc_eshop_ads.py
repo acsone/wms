@@ -9,10 +9,20 @@ from odoo.exceptions import ValidationError
 class AlcEshopAds(models.Model):
 
     _name = "alc.eshop.ads"
-    _inherit = ["mixin.file.id", "mixin.image.id"]
+    _inherit = ["mixin.file.id", "mixin.image.id", "mixin.past"]
     _description = "Eshop Ads"
 
     name = fields.Char(required=True)
+
+    visibility = fields.Selection(
+        required=True,
+        selection=[
+            ("everyone", "Everyone"),
+            ("shareholder", "Shareholder"),
+            ("non-shareholder", "Non Shareholder"),
+        ],
+        default="everyone",
+    )
 
     file_id = fields.Many2one(
         help="If specified, the file will be downloaded by the customer on "

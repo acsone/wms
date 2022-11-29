@@ -50,6 +50,7 @@ omit =
     odoo/addons/alc_delivery_carrier_gls_report/*
     odoo/addons/alc_delivery_rounds_allatonce_assignment/*
     odoo/addons/alc_delivery_rounds_assign_blocking/*
+    odoo/addons/alc_delivery_rounds_assign_blocking_unavailable_product/*
     odoo/addons/alc_delivery_rounds_close_pickings_by_zone/*
     odoo/addons/alc_delivery_rounds_geooptimize/*
     odoo/addons/alc_delivery_rounds_gls/*
@@ -61,6 +62,7 @@ omit =
     odoo/addons/alc_edi_connector/*
     odoo/addons/alc_elasticsearch_price_sorting/*
     odoo/addons/alc_elasticsearch_security/*
+    odoo/addons/alc_elasticsearch_security_vt_groups/*
     odoo/addons/alc_eshop/*
     odoo/addons/alc_eshop_ads/*
     odoo/addons/alc_eshop_ads_elasticsearch/*
@@ -92,6 +94,7 @@ omit =
     odoo/addons/alc_eshop_sale_cart_info/*
     odoo/addons/alc_eshop_sale_cart_payment_info/*
     odoo/addons/alc_eshop_sale_cart_product_unavailable/*
+    odoo/addons/alc_eshop_sale_cart_product_unavailable_pharmacy/*
     odoo/addons/alc_eshop_sale_cart_suite_name/*
     odoo/addons/alc_eshop_sale_channel/*
     odoo/addons/alc_eshop_sale_no_backend/*
@@ -105,6 +108,7 @@ omit =
     odoo/addons/alc_eshop_salesperson/*
     odoo/addons/alc_eshop_services_catalog/*
     odoo/addons/alc_eshop_services_deliveries/*
+    odoo/addons/alc_eshop_services_discounts/*
     odoo/addons/alc_eshop_services_orders/*
     odoo/addons/alc_eshop_services_orders_suite_channel/*
     odoo/addons/alc_eshop_user_migration/*
@@ -171,6 +175,7 @@ omit =
     odoo/addons/alc_product_packaging_stock_reserve/*
     odoo/addons/alc_product_pharmacy/*
     odoo/addons/alc_product_picking_zone/*
+    odoo/addons/alc_product_promoted_links/*
     odoo/addons/alc_product_promotion_mailing/*
     odoo/addons/alc_product_promotion_subscription/*
     odoo/addons/alc_product_search_cnk/*
@@ -213,17 +218,21 @@ omit =
     odoo/addons/alc_shopfloor_app/*
     odoo/addons/alc_shopfloor_assignation_issue_message/*
     odoo/addons/alc_shopfloor_cluster_picking/*
+    odoo/addons/alc_shopfloor_cluster_picking_out_location/*
     odoo/addons/alc_shopfloor_cluster_picking_printing/*
     odoo/addons/alc_shopfloor_cluster_picking_stock_issue_all_products/*
     odoo/addons/alc_shopfloor_cluster_picking_transfer_async/*
     odoo/addons/alc_shopfloor_cluster_picking_workstation/*
     odoo/addons/alc_shopfloor_delivery_rounds/*
+    odoo/addons/alc_shopfloor_image_product/*
     odoo/addons/alc_shopfloor_location_content_relocation/*
     odoo/addons/alc_shopfloor_location_info/*
     odoo/addons/alc_shopfloor_mobile/*
     odoo/addons/alc_shopfloor_mobile_change_pack_lot_back_button/*
     odoo/addons/alc_shopfloor_mobile_cluster_picking/*
+    odoo/addons/alc_shopfloor_mobile_cluster_picking_informations/*
     odoo/addons/alc_shopfloor_mobile_cluster_picking_workstation/*
+    odoo/addons/alc_shopfloor_mobile_image_product/*
     odoo/addons/alc_shopfloor_mobile_packing/*
     odoo/addons/alc_shopfloor_mobile_product_print_label/*
     odoo/addons/alc_shopfloor_mobile_qty_picker_font_style/*
@@ -239,6 +248,7 @@ omit =
     odoo/addons/alc_shopfloor_stock_reserve/*
     odoo/addons/alc_shopfloor_unassign_wave/*
     odoo/addons/alc_shopfloor_user/*
+    odoo/addons/alc_shopfloor_version/*
     odoo/addons/alc_shopfloor_workstation/*
     odoo/addons/alc_shopinvader_category/*
     odoo/addons/alc_shopinvader_fixes/*
@@ -307,6 +317,7 @@ omit =
     odoo/addons/elasticsearch_product_cache/*
     odoo/addons/elasticsearch_search/*
     odoo/addons/elasticsearch_security/*
+    odoo/addons/elasticsearch_security_mixin/*
     odoo/addons/external_fax/*
     odoo/addons/ir_sequence_period/*
     odoo/addons/keycloak/*
@@ -345,6 +356,7 @@ omit =
     odoo/addons/shopinvader_search_engine_export/*
     odoo/addons/shopinvader_search_engine_update/*
     odoo/addons/shopinvader_search_engine_update_image/*
+    odoo/addons/shopinvader_search_engine_update_links/*
     odoo/addons/shopinvader_search_engine_update_media/*
     odoo/addons/shopinvader_search_engine_update_product/*
     odoo/addons/shopinvader_search_engine_update_specials/*

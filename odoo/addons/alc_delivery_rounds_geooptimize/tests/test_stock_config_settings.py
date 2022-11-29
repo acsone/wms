@@ -24,6 +24,7 @@ class TestStockConfigSettings(SavepointCase):
             Values retrieved are those saved
         """
         resource_cfg = {"key": "val"}
+        options_cfg = {"useOTSolver": False}
         self.StockConfigSettings.create(
             {
                 "geo_optimization_enabled": True,
@@ -36,6 +37,7 @@ class TestStockConfigSettings(SavepointCase):
                 "geo_optimization_daily_work_time": 5.0,
                 "geo_optimization_resource_cfg": json.dumps(resource_cfg),
                 "geo_optimization_method": "optimized",
+                "geo_optimization_options_cfg": json.dumps(options_cfg),
             }
         ).execute()
         config = self.StockConfigSettings.get_optimization_config()
@@ -49,6 +51,7 @@ class TestStockConfigSettings(SavepointCase):
         self.assertEqual(config.daily_work_time, 5.0)
         self.assertDictEqual(config.resource_cfg, resource_cfg)
         self.assertEqual(config.method, "optimized")
+        self.assertDictEqual(config.options_cfg, options_cfg)
 
         # an update on the parameters invalidate the config cache
         self.IrConfigParameter.set_param(

@@ -25,6 +25,8 @@ msgstr ""
 
 #. module: mixin_past
 #: model:ir.model.fields,field_description:mixin_past.field_alc_classified_is_future
+#: model:ir.model.fields,field_description:mixin_past.field_alc_eshop_ads_is_future
+#: model:ir.model.fields,field_description:mixin_past.field_alc_eshop_cms_news_is_future
 #: model:ir.model.fields,field_description:mixin_past.field_mixin_past_is_future
 #: model:ir.model.fields,field_description:mixin_past.field_product_discount_special_is_future
 #: model:ir.model.fields,field_description:mixin_past.field_product_pricelist_item_is_future
@@ -34,6 +36,8 @@ msgstr ""
 
 #. module: mixin_past
 #: model:ir.model.fields,field_description:mixin_past.field_alc_classified_is_past
+#: model:ir.model.fields,field_description:mixin_past.field_alc_eshop_ads_is_past
+#: model:ir.model.fields,field_description:mixin_past.field_alc_eshop_cms_news_is_past
 #: model:ir.model.fields,field_description:mixin_past.field_mixin_past_is_past
 #: model:ir.model.fields,field_description:mixin_past.field_product_discount_special_is_past
 #: model:ir.model.fields,field_description:mixin_past.field_product_pricelist_item_is_past

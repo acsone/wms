@@ -11,7 +11,7 @@ class MixinFileId(models.AbstractModel):
 
     file_id = fields.Many2one(string="storage file", comodel_name="storage.file")
     file = fields.Binary(compute="_compute_file", inverse="_inverse_file")
-    filename = fields.Char(related="file_id.name")
+    filename = fields.Char()  # should not be a computed field
 
     @api.depends("file_id")
     def _compute_file(self):

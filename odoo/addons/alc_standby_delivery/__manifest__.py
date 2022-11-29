@@ -8,7 +8,7 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": ["alc_geo_delivery_rounds"],
-    "data": [],
+    "data": ["views/stock_picking.xml"],
     "demo": [],
     "installable": False,
 }

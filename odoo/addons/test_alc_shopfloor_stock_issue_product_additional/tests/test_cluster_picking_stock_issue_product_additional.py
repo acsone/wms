@@ -69,3 +69,30 @@ class TestClusterPickingStockIssueProductAdditional(
         self.assert_stock_issue_reserved_qties(
             additional_move.picking_id, self.shelf2, additional_move.product_id, 0
         )
+
+    def test_stock_issue_product_additional_partial_picking(self):
+
+        self._update_qty_in_location(self.shelf1, self.main_product, 20)
+        self._update_qty_in_location(self.shelf2, self.additional_product, 50)
+        self.batch_additional_product = self._create_batch_additional_products(
+            [self.main_product], qty=3
+        )
+        self._simulate_batch_selected(self.batch_additional_product, fill_stock=False)
+        main_move = self.batch_additional_product.picking_ids.mapped(
+            "move_lines"
+        ).filtered(lambda m: not m.is_additional_move)
+        additional_move = self.batch_additional_product.picking_ids.mapped(
+            "move_lines"
+        ).filtered(lambda m: m.is_additional_move)
+        self._set_dest_package_and_done(main_move.pack_operation_ids, self.dest_package)
+
+        operation_shelf2 = additional_move.pack_operation_ids.filtered(
+            lambda l: l.location_id == self.shelf2
+        )
+        self.service.scan_destination_pack(
+            self.batch.id, operation_shelf2.id, self.dest_package.name, 3
+        )
+        self._stock_issue(operation_shelf2)
+        self.assert_stock_issue_reserved_qties(
+            additional_move.picking_id, self.shelf2, additional_move.product_id, 0
+        )

@@ -940,7 +940,7 @@ msgstr "No active id found"
 
 #. module: specific_report
 #: code:addons/specific_report/models/round_instance.py:21
-#: code:addons/specific_report/models/round_instance.py:157
+#: code:addons/specific_report/models/round_instance.py:272
 #, python-format
 msgid "No invoice to print"
 msgstr "No invoice to print"
@@ -1087,7 +1087,7 @@ msgid "Picking inspection"
 msgstr "Picking inspection"
 
 #. module: specific_report
-#: code:addons/specific_report/models/stock_picking.py:160
+#: code:addons/specific_report/models/stock_picking.py:190
 #, python-format
 msgid "Picking zone does not exist anymore %s for picking %s and product %s"
 msgstr ""
@@ -1099,6 +1099,7 @@ msgid "Print delivery round"
 msgstr "Print delivery round"
 
 #. module: specific_report
+#: model:ir.ui.view,arch_db:specific_report.view_round_instance_customer_tree
 #: model:ir.ui.view,arch_db:specific_report.view_round_instance_form
 #: model:ir.ui.view,arch_db:specific_report.view_round_instance_kanban
 msgid "Print invoices"
@@ -1235,13 +1236,13 @@ msgid "There are more than one currencies on orders"
 msgstr "There are more than one currencies on orders"
 
 #. module: specific_report
-#: code:addons/specific_report/models/stock_picking.py:143
+#: code:addons/specific_report/models/stock_picking.py:167
 #, python-format
 msgid "There is no category on this product"
 msgstr "There is no category on this product"
 
 #. module: specific_report
-#: code:addons/specific_report/models/stock_picking.py:100
+#: code:addons/specific_report/models/stock_picking.py:117
 #, python-format
 msgid "There is no original picking zone on this operation."
 msgstr "There is no original picking zone on this operation."

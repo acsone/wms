@@ -49,9 +49,9 @@ odoo.define("storage_image.media_handle", function(require) {
           var reader = new FileReader();
           reader.readAsDataURL(file);
           reader.onload = function(upload) {
-            var data = upload.target.result;
-            data = data.split(",")[1];
-            resolve([file.name, data]);
+            var content = upload.target.result;
+            content = content.split(",")[1];
+            resolve([file.name, content]);
           };
         });
         promises.push(filePromise);

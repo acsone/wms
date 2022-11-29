@@ -20,6 +20,8 @@
         "product_multi_category",
         "queue_job_cron",
         "shopinvader",
+        # create alc_product_supplier and remove this dependency (field supplier_id)
+        "specific_purchase",
     ],
     "data": ["data/ir_cron.xml", "security/alc_product_flattened_data.xml"],
     "demo": [],

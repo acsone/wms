@@ -132,6 +132,15 @@
             string="Resource additional configuration"
             attrs="{'invisible': [('geo_optimization_enabled', '=', False)]}"
           />
+          <field
+            name="geo_optimization_options_cfg"
+            string="Options additional configuration"
+            attrs="{'invisible': [('geo_optimization_enabled', '=', False)]}"
+          />
+          <field
+            name="geo_optimization_dw_disabled"
+            string="Delivery Windows disabled?"
+          />
           <label
             for="geo_optimization_dw_start"
             attrs="{'invisible': [('geo_optimization_enabled', '=', False)]}"

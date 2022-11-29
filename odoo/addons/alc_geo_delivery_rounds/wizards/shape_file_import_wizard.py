@@ -92,10 +92,10 @@ class ShapeFileImportWizard(models.TransientModel):
         for shape_record in self._iter_shape_record(content):
             new_template_ids.add(self._create_or_update_round_template(shape_record).id)
 
-        # Remove templates that does not exist anymore
-        self.env["round.template"].browse(
-            existing_template_ids - new_template_ids
-        ).unlink()
+        # Some templates may be rendered useless by the new plan.
+        # But they may not be removed if they are required by other models
+        to_archive_ids = existing_template_ids - new_template_ids
+        self.env["round.template"].browse(to_archive_ids).write({"active": False})
 
     @api.multi
     def _create_or_update_round_template(self, shape_record):
