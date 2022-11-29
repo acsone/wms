@@ -13,6 +13,8 @@
         "stock_dynamic_routing",
         "stock_picking_start",
         "stock_release_channel_auto_release",
+        "stock_production_lot_expiry",
+        "stock_release_channel",
     ],
     "data": [],
     "demo": [],
