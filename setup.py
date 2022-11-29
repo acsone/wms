@@ -24,8 +24,9 @@ setup(
         "click-odoo-contrib>=1.10.1",
         "odoo-autodiscover",
         "odoo-addons-enterprise",
-        "odoo10-addon-slow-statement-logger",
         "odoo10-addon-attachment_s3",
+        "odoo10-addon-session-db",
+        "odoo10-addon-slow-statement-logger",
         "xlrd",
         "numpy",  # speedup pyshape
         "odoo10-addon-logging-json",
