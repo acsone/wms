@@ -89,7 +89,7 @@ class ClusterPicking(Component):
         )
         if not picking:
             return self._prepare_pack_picking(
-                batch, message=self.msg_store.dstock_picking_not_found(),
+                batch, message=self.msg_store.stock_picking_not_found(),
             )
         if not picking.is_shopfloor_packing_todo:
             return self._prepare_pack_picking(
@@ -140,7 +140,7 @@ class ClusterPicking(Component):
         )
         if not picking:
             return self._response_put_in_pack(
-                picking_batch_id, message=self.msg_store.dstock_picking_not_found(),
+                picking_batch_id, message=self.msg_store.stock_picking_not_found(),
             )
         if not picking.is_shopfloor_packing_todo:
             return self._response_put_in_pack(

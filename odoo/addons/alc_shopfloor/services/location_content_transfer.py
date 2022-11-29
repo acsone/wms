@@ -328,7 +328,7 @@ class LocationContentTransfer(Component):
             if product in operation.product_ids:
                 return self._response_for_scan_destination(location, operation)
 
-        lot = search.lot_from_scan(barcode, operation)
+        lot = search.lot_from_scan(barcode, operations=operation)
         if lot:
             if lot_id and lot.id != lot_id:
                 return self._response_for_start_single(

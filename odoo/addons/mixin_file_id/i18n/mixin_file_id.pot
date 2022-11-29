@@ -27,6 +27,13 @@ msgid "File"
 msgstr ""
 
 #. module: mixin_file_id
+#: model:ir.model.fields,field_description:mixin_file_id.field_alc_classified_filename
+#: model:ir.model.fields,field_description:mixin_file_id.field_alc_eshop_ads_filename
+#: model:ir.model.fields,field_description:mixin_file_id.field_mixin_file_id_filename
+msgid "Filename"
+msgstr ""
+
+#. module: mixin_file_id
 #: model:ir.model.fields,field_description:mixin_file_id.field_mixin_file_id_id
 msgid "ID"
 msgstr ""
@@ -34,13 +41,6 @@ msgstr ""
 #. module: mixin_file_id
 #: model:ir.model.fields,field_description:mixin_file_id.field_mixin_file_id___last_update
 msgid "Last Modified on"
-msgstr ""
-
-#. module: mixin_file_id
-#: model:ir.model.fields,field_description:mixin_file_id.field_alc_classified_filename
-#: model:ir.model.fields,field_description:mixin_file_id.field_alc_eshop_ads_filename
-#: model:ir.model.fields,field_description:mixin_file_id.field_mixin_file_id_filename
-msgid "Name"
 msgstr ""
 
 #. module: mixin_file_id

@@ -1,0 +1,19 @@
+# Copyright 2022 ACSONE SA/NV
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+
+
+{
+    "name": "Alcyon Elasticsearch Security: VT Groups",
+    "description": """Compute Alcyon-specific Veterinary Groups ElasticSearch roles.""",
+    "version": "10.0.1.0.1",
+    "license": "AGPL-3",
+    "author": "ACSONE SA/NV",
+    "website": "https://acsone.eu/",
+    "depends": ["alc_veterinary_group", "alc_elasticsearch_security"],
+    "application": False,
+    "data": [],
+    "demo": [],
+    "post_init_hook": "post_init_hook",
+    "external_dependencies": {"python": ["slugify"]},
+    "installable": False,
+}

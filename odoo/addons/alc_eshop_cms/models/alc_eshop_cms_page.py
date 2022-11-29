@@ -1,34 +1,13 @@
 # -*- coding: utf-8 -*-
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-import re
-
-from werkzeug.routing import Map, Rule
 
 from odoo import api, fields, models
-
-IMG_RULES = [
-    "/web/image/<string:xmlid>",
-    "/web/image/<string:xmlid>/<string:filename>",
-    "/web/image/<string:xmlid>/<int:width>x<int:height>",
-    "/web/image/<string:xmlid>/<int:width>x<int:height>/<string:filename>",
-    "/web/image/<int:id>",
-    "/web/image/<int:id>/<string:filename>",
-    "/web/image/<int:id>/<int:width>x<int:height>",
-    "/web/image/<int:id>/<int:width>x<int:height>/<string:filename>",
-    "/web/image/<int:id>-<string:unique>",
-    "/web/image/<int:id>-<string:unique>/<string:filename>",
-    "/web/image/<int:id>-<string:unique>/<int:width>x<int:height>",
-    "/web/image/<int:id>-<string:unique>/<int:width>x<int:height>/<string:filename>",
-]
-
-IMAGE_URL_MAP = Map([Rule(r) for r in IMG_RULES])
-URL_MAPPER = IMAGE_URL_MAP.bind("localhost")
 
 
 class AlcEshopCmsPage(models.Model):
 
-    _inherit = "alc.content.lang.mixin"
+    _inherit = ["alc.content.lang.mixin", "alc.content.image.mixin"]
     _name = "alc.eshop.cms.page"
     _content_type = "page"
     _order = "sequence, id desc"
@@ -41,7 +20,6 @@ class AlcEshopCmsPage(models.Model):
     cms_page_slot_ids = fields.Many2many(
         string="Slots", comodel_name="alc.eshop.cms.page.slot"
     )
-    content = fields.Html(required=True, translate=True, sanitize=False)
 
     def _get_url_parts(self):
         return [self.cms_page_group_id.name] + super(
@@ -50,48 +28,23 @@ class AlcEshopCmsPage(models.Model):
 
     @api.model
     def _get_data_parser(self):
-        return [
-            "name:title",
-            ("content", "_get_content"),
-            "sequence",
-            ("group", "_get_group"),
-            ("slots", "_get_slots"),
-        ]
+        res = super(AlcEshopCmsPage, self)._get_data_parser()
+        res.extend(
+            [
+                "name:title",
+                ("content", "_get_content"),
+                "sequence",
+                ("group", "_get_group"),
+                ("slots", "_get_slots"),
+            ]
+        )
+        return res
 
     def _get_group(self, fn):
         return self.cms_page_group_id.name
 
     def _get_slots(self, fn):
         return self.cms_page_slot_ids.mapped("name")
-
-    def _get_content(self, fn):
-        """ return html content and ensure images are published """
-        content = self.content
-        for match in re.finditer(r'<img src="(/[^"]+)"', content):
-            url = match.group(1)
-            if not url.startswith("/web/image/"):
-                continue
-            # ensure image is published
-            result = URL_MAPPER.match(url)
-            if not result:
-                continue
-            args = result[1]
-            _id = None
-            if args.get("id"):
-                _id = int(args["id"])
-            xmlid = args.get("xmlid")
-            attachment = None
-            if xmlid:
-                attachment = self.env.ref(xmlid)
-            elif _id:
-                attachment = self.env["ir.attachment"].browse(_id)
-            if not attachment:
-                continue
-            if not attachment.storage_image_id:
-                attachment.sudo()._publish_to_storage_image()
-            public_url = attachment.storage_image_id.url
-            content = content.replace(url, public_url)
-        return content
 
     @api.model
     def _get_contents_published(self):

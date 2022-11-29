@@ -83,7 +83,9 @@
               long date_cur_milli = curDate != null ? curDate.toInstant().toEpochMilli() : -1;
               long date_start_milli = date_start != null ? date_start.toInstant().toEpochMilli() : -1;
               long date_end_milli = date_end != null ? date_end.toInstant().toEpochMilli() : -1;
-              if (curDate == null && date_start == null && date_end == null) {
+              if (price.containsKey('min_quantity') && price['min_quantity'] > 1) {
+                return price;
+              } else if (curDate == null && date_start == null && date_end == null) {
                 return price;
               } else if (curDate != null && date_start != null && date_end != null && date_cur_milli >= date_start_milli && date_cur_milli <= date_end_milli) {
                 return price;
@@ -119,6 +121,9 @@
                 String price_field = i.startsWith('discount') ? 'discount': 'price';
                 String current_value_field = 'current_' + i;
                 ctx[current_value_field] = price_data[price_field];
+                if (price_data.containsKey('min_quantity') && price_data['min_quantity'] > 1) {
+                  ctx[current_value_field] = 0;
+                }
                 boolean exclusive = false;
                 if (price_data.containsKey('exclusive')) {
                   exclusive = price_data['exclusive'];

@@ -109,3 +109,80 @@ class TestShopinvaderSaleCart(CommonCase):
             line = info["lines"]["items"][0]
             self.assertEqual(line["unit_price"]["untaxed_with_discount"], 607.5)
             self.assertEqual(line["discount"]["rate"], 19)
+
+    def test_priclist_discount_multiple_min_qty(self):
+        discount_pricelist_5 = self.env["product.pricelist"].create(
+            {
+                "name": "Unittest Discount Pricelist 5",
+                "item_ids": [
+                    (
+                        0,
+                        False,
+                        {
+                            "applied_on": "1_product",
+                            "product_id": self.product_1.id,
+                            "compute_price": "percentage",
+                            "percent_price": 5,
+                        },
+                    )
+                ],
+            }
+        )
+        discount_pricelist_10 = self.env["product.pricelist"].create(
+            {
+                "name": "Unittest Discount Pricelist 10",
+                "item_ids": [
+                    (
+                        0,
+                        False,
+                        {
+                            "applied_on": "1_product",
+                            "product_id": self.product_1.id,
+                            "compute_price": "percentage",
+                            "percent_price": 10,
+                            "min_quantity": 10,
+                        },
+                    )
+                ],
+            }
+        )
+        discount_item_5 = discount_pricelist_5.item_ids
+        discount_item_10 = discount_pricelist_10.item_ids
+        line = self.so.order_line
+        self.assertFalse(line.discount_item_id)
+        self.so.discount_pricelist_ids = discount_pricelist_5 | discount_pricelist_10
+        with self.cart_service() as cart:
+            info = cart.sync(
+                uuid=self.so.uuid,
+                transactions=[
+                    {"uuid": "uuid1", "product_id": self.product_1.id, "qty": 5}
+                ],
+            )
+            self.assertTrue(info)
+
+        line = self.so.order_line
+        line.refresh()
+        self.assertEqual(discount_item_5, line.discount_item_id)
+        self.assertEqual(5, line.discount3)
+
+        with self.cart_service() as cart:
+            info = cart.sync(
+                uuid=self.so.uuid,
+                transactions=[
+                    {"uuid": "uuid1", "product_id": self.product_1.id, "qty": 5}
+                ],
+            )
+            self.assertTrue(info)
+        self.assertEqual(discount_item_10, line.discount_item_id)
+        self.assertEqual(10, line.discount3)
+
+        with self.cart_service() as cart:
+            info = cart.sync(
+                uuid=self.so.uuid,
+                transactions=[
+                    {"uuid": "uuid1", "product_id": self.product_1.id, "qty": -5}
+                ],
+            )
+            self.assertTrue(info)
+        self.assertEqual(discount_item_5, line.discount_item_id)
+        self.assertEqual(5, line.discount3)

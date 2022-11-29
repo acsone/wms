@@ -8,6 +8,7 @@ from collections import defaultdict
 
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
+from odoo.osv.expression import NEGATIVE_TERM_OPERATORS
 
 from odoo.addons.queue_job.job import job
 
@@ -35,10 +36,13 @@ class StockPicking(models.Model):
         index=True,
     )
     delivery_round_launched = fields.Boolean(
-        related="delivery_round_id.picking_launched",
-        store=True,
+        # This field is not stored to avoid write on a batch of picking
+        # each time the picking_launched field is updated on the delivery round
+        # instance and therefore avoid deadlock
         string="Delivery Round Launched",
         readonly=True,
+        compute="_compute_delivery_round_launched",
+        search="_search_delivery_round_launched",
     )
     is_assignable_to_round = fields.Boolean(compute="_compute_is_assignable_to_round")
     is_assignable = fields.Boolean(compute="_compute_is_assignable")
@@ -84,6 +88,34 @@ class StockPicking(models.Model):
                 or (picking.printed and picking.pack_operation_product_ids)
             )
             picking.is_assignable = not not_assignable
+
+    @api.depends("delivery_round_id.state", "delivery_round_id.picking_launched")
+    def _compute_delivery_round_launched(self):
+        for rec in self:
+            round_instance = rec.delivery_round_id
+            rec.delivery_round_launched = (
+                round_instance.state in ("draft", "pending")
+                and round_instance.picking_launched
+            )
+
+    def _search_delivery_round_launched(self, operator, value):
+        search_delivery_round_launched = (
+            # delivery_round_launched != False
+            (operator in NEGATIVE_TERM_OPERATORS and not value)
+            or
+            # delivery_round_launched = True
+            (operator not in NEGATIVE_TERM_OPERATORS and value)
+        )
+        launched_round_ids = (
+            self.env["round.instance"]
+            .search(
+                [("state", "in", ["draft", "pending"]), ("picking_launched", "=", True)]
+            )
+            .ids
+        )
+        if search_delivery_round_launched:
+            return [("delivery_round_id", "in", launched_round_ids)]
+        return [("delivery_round_id", "not in", launched_round_ids)]
 
     def _compute_partner_itinerary_ids(self):
         for picking in self:

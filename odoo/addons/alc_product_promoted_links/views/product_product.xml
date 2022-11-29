@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+  <record id="product_normal_form_view" model="ir.ui.view">
+    <field name="name">product.product.form.promotes</field>
+    <field name="model">product.product</field>
+    <field name="inherit_id" ref="product.product_normal_form_view" />
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='sale_ok']" position="before">
+        <div groups="base.group_no_one">
+          <group>
+            <field name="promotes" />
+            <field name="promoted_by" />
+          </group>
+        </div>
+      </xpath>
+    </field>
+  </record>
+</odoo>

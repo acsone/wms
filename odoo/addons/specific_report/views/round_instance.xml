@@ -44,10 +44,14 @@
           class="oe_highlight"
         />
       </xpath>
-      <xpath
-        expr="//field[@name='instance_customer_ids']/tree/button[@name='print_deliveryslip']"
-        position="after"
-      >
+    </field>
+  </record>
+  <record id="view_round_instance_customer_tree" model="ir.ui.view">
+    <field name="name">view.round.instance.customer.tree</field>
+    <field name="model">round.instance.customer</field>
+    <field name="inherit_id" ref="delivery_rounds.view_round_instance_customer_tree" />
+    <field name="arch" type="xml">
+      <button name="print_deliveryslip" position="after">
         <field name="has_cash_on_delivery_invoice" invisible="1" />
         <button
           name="print_cash_on_delivery_invoices"
@@ -55,7 +59,7 @@
           string="Print invoices"
           attrs="{'invisible': [('has_cash_on_delivery_invoice', '=', False)]}"
         />
-      </xpath>
+      </button>
     </field>
   </record>
 </odoo>

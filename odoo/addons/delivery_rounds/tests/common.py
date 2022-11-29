@@ -158,6 +158,14 @@ class DeliveryRoundTestCase(SavepointCase):
         return picking
 
     @classmethod
+    def _add_picking_pick_to_picking_out(cls, picking_pick, picking_out):
+        picking_out.move_lines.product_uom_qty += (
+            picking_pick.move_lines.product_uom_qty
+        )
+        picking_out.move_lines.move_orig_ids |= picking_pick.move_lines
+        picking_pick.move_lines.move_dest_id = picking_out.move_lines
+
+    @classmethod
     def _create_picking_pick_ship(cls, partner=None):
         pick = cls._create_picking_pick(partner=partner)
         ship = cls._create_picking_out(partner=partner, picking_pick=pick)

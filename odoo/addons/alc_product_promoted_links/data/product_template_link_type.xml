@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2022 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record model="product.template.link.type" id="link_type_promotes">
+        <field name="is_symmetric" eval="False" />
+        <field name="name">Promotes</field>
+        <field name="code">promotes</field>
+        <field name="inverse_name">Promoted By</field>
+        <field name="inverse_code">promotedby</field>
+    </record>
+</odoo>

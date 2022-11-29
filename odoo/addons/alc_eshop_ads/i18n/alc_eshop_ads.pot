@@ -81,6 +81,11 @@ msgid "Eshop Ads"
 msgstr ""
 
 #. module: alc_eshop_ads
+#: selection:alc.eshop.ads,visibility:0
+msgid "Everyone"
+msgstr ""
+
+#. module: alc_eshop_ads
 #: model:ir.ui.view,arch_db:alc_eshop_ads.alc_eshop_ads_kanban_view
 msgid "From"
 msgstr ""
@@ -137,6 +142,11 @@ msgid "Name"
 msgstr ""
 
 #. module: alc_eshop_ads
+#: selection:alc.eshop.ads,visibility:0
+msgid "Non Shareholder"
+msgstr ""
+
+#. module: alc_eshop_ads
 #: model:ir.ui.view,arch_db:alc_eshop_ads.alc_eshop_ads_search_view
 msgid "Past"
 msgstr ""
@@ -144,6 +154,11 @@ msgstr ""
 #. module: alc_eshop_ads
 #: model:ir.ui.view,arch_db:alc_eshop_ads.alc_eshop_ads_search_view
 msgid "Past ads from today"
+msgstr ""
+
+#. module: alc_eshop_ads
+#: selection:alc.eshop.ads,visibility:0
+msgid "Shareholder"
 msgstr ""
 
 #. module: alc_eshop_ads
@@ -157,7 +172,7 @@ msgid "Slot:"
 msgstr ""
 
 #. module: alc_eshop_ads
-#: code:addons/alc_eshop_ads/models/alc_eshop_ads.py:64
+#: code:addons/alc_eshop_ads/models/alc_eshop_ads.py:74
 #, python-format
 msgid "The defined period on %s is not a valid (%s > %s)"
 msgstr ""
@@ -183,12 +198,17 @@ msgid "Upcoming ads from today"
 msgstr ""
 
 #. module: alc_eshop_ads
+#: model:ir.model.fields,field_description:alc_eshop_ads.field_alc_eshop_ads_visibility
+msgid "Visibility"
+msgstr ""
+
+#. module: alc_eshop_ads
 #: model:res.groups,name:alc_eshop_ads.eshop_ads_manager_group
 msgid "Website ads manager"
 msgstr ""
 
 #. module: alc_eshop_ads
-#: code:addons/alc_eshop_ads/models/alc_eshop_ads.py:51
+#: code:addons/alc_eshop_ads/models/alc_eshop_ads.py:61
 #, python-format
 msgid "You must choose between the download of a file OR the redirect to a website on click on the banner"
 msgstr ""

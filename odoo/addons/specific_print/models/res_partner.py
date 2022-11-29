@@ -12,3 +12,7 @@ class ResPartner(models.Model):
         string="Do not print product labels",
         help="Customer does not need product labels",
     )
+    no_labels_food_products = fields.Boolean(
+        string="Do not print food product labels",
+        help="Customer does not need product labels.",
+    )

@@ -8,7 +8,7 @@ from odoo import models
 class ProductPricelist(models.Model):
     _inherit = "product.pricelist"
 
-    def _get_rule(self, product, date):
+    def _get_rule(self, product, date, qty=1):
         # this comes basically from _compute_price_rule / Low-level method
         # we don't care about partner or min_qty
         price_categ_id = product.price_category_id.id
@@ -26,6 +26,7 @@ class ProductPricelist(models.Model):
             "AND (item.pricelist_id = %(self_id)s) "
             "AND (item.date_start IS NULL OR item.date_start<=%(date)s) "
             "AND (item.date_end IS NULL OR item.date_end>=%(date)s)"
+            "AND (item.min_quantity IS NULL OR item.min_quantity<=%(qty)s)"
             "ORDER BY item.applied_on, item.min_quantity desc, categ.parent_left desc"
         )
         query_args = {
@@ -36,6 +37,7 @@ class ProductPricelist(models.Model):
             "date": date,
             "categ_parent_left": product.categ_id.parent_left,
             "categ_parent_right": product.categ_id.parent_right,
+            "qty": qty,
         }
         self._cr.execute(query, query_args)  # pylint: disable=sql-injection
         ids = [x[0] for x in self._cr.fetchall()]

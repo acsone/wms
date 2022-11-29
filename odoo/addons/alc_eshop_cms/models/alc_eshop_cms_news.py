@@ -8,7 +8,12 @@ from odoo.exceptions import ValidationError
 
 class AlcEshopCmsNews(models.Model):
 
-    _inherit = ["alc.content.lang.mixin", "mixin.file.id", "mixin.image.id"]
+    _inherit = [
+        "alc.content.lang.mixin",
+        "mixin.file.id",
+        "mixin.image.id",
+        "mixin.past",
+    ]
     _name = "alc.eshop.cms.news"
     _content_type = "news"
     _order = "date_start desc, id desc"

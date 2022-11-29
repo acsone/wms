@@ -9,6 +9,7 @@
     "license": "AGPL-3",
     "category": "Sales",
     "depends": [
+        "alc_delivery_rounds_geooptimize",
         "alc_sale_invoicing_policy",
         "alc_sale_suite_name",
         "alc_stock_quant_package_nbr",

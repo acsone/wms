@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # Copyright 2021 ACSONE SA/NV
+# Copyright 2022 Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import api, fields, models
@@ -9,7 +10,9 @@ class ProductTemplate(models.Model):
 
     _inherit = "product.template"
 
-    is_new = fields.Boolean(default=False, store=True, compute="_compute_is_new")
+    is_new = fields.Boolean(
+        related="product_package_storage_type_id.is_new", readonly=True,
+    )
     new_product_with_old_date = fields.Boolean(
         default=False,
         compute="_compute_new_product_with_old_date",
@@ -24,14 +27,6 @@ class ProductTemplate(models.Model):
         copy=False,
     )
 
-    @api.depends("product_package_storage_type_id")
-    def _compute_is_new(self):
-        storage_type_new = self.env.ref(
-            "alc_stock_storage_type.package_st_M_M_Nouveaute"
-        )
-        for product in self:
-            product.is_new = product.product_package_storage_type_id == storage_type_new
-
     def _get_new_products_older_than_a_month(self):
         ids = []
         current_ids = self._get_current_ids()
@@ -40,8 +35,10 @@ class ProductTemplate(models.Model):
             SELECT DISTINCT pt.id
                 FROM
                         product_template pt
+                JOIN stock_package_storage_type pst
+                    ON pt.product_package_storage_type_id = pst.id
                 WHERE
-                        pt.is_new
+                        pst.is_new
                     AND pt.create_date < NOW() - '1 month'::interval
                 %(ids)s
             """,

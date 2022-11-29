@@ -16,6 +16,7 @@
         "product_brand",
         "standard_service_mixin",
         "paginated_service_mixin",
+        "alc_product_flattened_data",
     ],
     "demo": [],
     'installable': False

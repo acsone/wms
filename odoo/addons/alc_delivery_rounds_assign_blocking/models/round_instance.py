@@ -16,7 +16,7 @@ class RoundInstance(models.Model):
             if self._check_picking_assignable_to_round(partner, partner_pickings):
                 to_assign_ids.extend(partner_pickings.ids)
                 to_assign_ids.extend(
-                    self._get_assignable_picking_domain(partner, partner_pickings)
+                    self._get_assignable_picking_ids(partner, partner_pickings)
                 )
         pickings_to_assign = self.env["stock.picking"].browse(to_assign_ids)
         return super(RoundInstance, self)._do_assign_pickings(
@@ -25,7 +25,7 @@ class RoundInstance(models.Model):
 
     def _check_picking_assignable_to_round(self, partner, pickings):
         """
-        return true if the all the prickings of the same partner are assignable
+        return true if all the pickings of the same partner are assignable
         to the delivery round
         """
         if partner in self.mapped("instance_customer_ids.partner_id"):
@@ -42,10 +42,19 @@ class RoundInstance(models.Model):
                 return True
         return False
 
-    def _get_assignable_picking_domain(self, partner, pickings):
+    def _get_assignable_picking_ids(self, partner, pickings):
+        """Return all the pickings linked to the same shippings that are
+        assignable.
+        It's important to only takes pickings for the same shippings to
+        ensure to not mix delivery carrier and therefore mix he delivery_rounds
+        """
+        shippings = pickings._get_all_dest_pickings().filtered(
+            lambda r: r.picking_type_code == "outgoing"
+            and r.state not in ("cancel", "done")
+        )
+        others_pickings = shippings._get_all_src_pickings() - pickings
         StockPicking = self.env["stock.picking"]
         domain = StockPicking._get_domain_picking_assignable_to_delivery_round(
             partners=partner
         )
-        domain.append(("id", "not in", pickings.ids))
-        return StockPicking.search(domain).ids
+        return others_pickings.filtered_domain(domain).ids

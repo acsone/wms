@@ -11,6 +11,7 @@ class TestProductUpdate(SavepointComponentCase):
     @classmethod
     def setUpClass(cls):
         super(TestProductUpdate, cls).setUpClass()
+        cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
         cls.product_template = cls.env["product.template"].create({"name": "P"})
         cls.product = cls.product_template.product_variant_id
 
@@ -18,6 +19,6 @@ class TestProductUpdate(SavepointComponentCase):
         cls.backend.bind_all_product(domain=[("id", "=", cls.product_template.id)])
 
         cls.binding = cls.product.shopinvader_bind_ids
-        cls.binding.to_update = False
+        cls.binding.to_update = "false"
 
         cls.today = Date.context_today(cls.product_template)

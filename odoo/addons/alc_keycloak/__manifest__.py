@@ -12,9 +12,8 @@
     "website": "https://acsone.eu/",
     "depends": [
         "keycloak",
-        "alc_elasticsearch_security",
         "alc_eshop_ordering_allowed",
-        "alc_veterinary_group",
+        "alc_elasticsearch_security_vt_groups",
         "specific_sale",  # for help_with_fee to be moved in a dedicated addon
     ],
     "application": False,

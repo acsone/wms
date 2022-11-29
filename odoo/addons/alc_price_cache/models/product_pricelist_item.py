@@ -2,13 +2,40 @@
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import api, models
-from odoo.osv.expression import OR
+from odoo import api, fields, models
+from odoo.osv.expression import FALSE_LEAF, NEGATIVE_TERM_OPERATORS, OR, TRUE_LEAF
 
 
 class ProductPricelistItem(models.Model):
     _name = "product.pricelist.item"
     _inherit = ["product.pricelist.item", "mixin.past"]
+
+    has_min_quantity = fields.Boolean(
+        compute="_compute_has_min_quantity",
+        search="_search_has_min_quantity",
+        store=False,
+    )
+
+    @api.depends("min_quantity")
+    def _compute_has_min_quantity(self):
+        for record in self:
+            record.has_min_quantity = record.min_quantity and record.min_quantity > 1
+
+    def _search_has_min_quantity(self, operator, value):
+        negative_op = operator in NEGATIVE_TERM_OPERATORS
+        domain = []
+        has_min_quantity = (not value and negative_op) or (value and not negative_op)
+        if "in" in operator:  # value should be a list
+            if not value:
+                domain = TRUE_LEAF if negative_op else FALSE_LEAF
+            elif True in value and False in value:
+                domain = FALSE_LEAF if negative_op else TRUE_LEAF
+            elif False in value:  # not in [False]
+                has_min_quantity = negative_op
+            else:  # in [True]
+                has_min_quantity = not negative_op
+        result_operator = ">=" if has_min_quantity else "<"
+        return domain or [("min_quantity", result_operator, 2)]
 
     def _get_product_domain(self):
         self.ensure_one()
@@ -58,7 +85,7 @@ class ProductPricelistItem(models.Model):
 
     def write(self, vals):
         # it is possible to change what the item is applied on; therefore it affects
-        # what it's domain before the change, as well as after the change.
+        # its domain before the change, as well as after the change.
         items_by_pricelist = self.partition("pricelist_id")
         update_price_cache = not self.env.context.get("no_update_price_cache")
         if update_price_cache:
@@ -100,13 +127,14 @@ class ProductPricelistItem(models.Model):
     def _cache_discount(self, product):
         self.ensure_one()
         alcyon_discount = self._get_product_discount(product)
-        return (
-            {
+        cache = {}
+        if alcyon_discount:
+            cache = {
                 "id": self.id,
                 "discount": alcyon_discount,
                 "date_start": self.date_start or None,
                 "date_end": self.date_end or None,
             }
-            if alcyon_discount
-            else {}
-        )
+            if self.has_min_quantity:
+                cache["min_quantity"] = self.min_quantity
+        return cache

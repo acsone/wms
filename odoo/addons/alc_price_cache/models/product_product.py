@@ -83,9 +83,34 @@ class ProductProduct(models.Model):
                         discount = pricelist._get_cache_discount(product, date)
                         if discount:
                             pl_discounts = self.add_to_cache(pl_discounts, discount)
+                    pl_discounts = product._update_pricelist_cache_min_quantities(
+                        pricelist, pl_discounts
+                    )
                     price_cache[discount_role] = pl_discounts
 
             product.price_cache = price_cache
+
+    def _update_pricelist_cache_min_quantities(self, pricelist, price_cache):
+        # Simpler algorithm: we remove and start anew for all min_qty items
+        # we could have a "refresh_min_qty" parameter passed through items, pricelists,
+        # and products; however it seems it would not be worth the complexity,
+        # especially given all cases that would have to be considered.
+        # For most products, it only adds 1 query to find no such items and that's it.
+        cleaned_cache = [it for it in price_cache if (it.get("min_quantity") or 1) < 2]
+        min_qty_items = self._get_min_qty_items(pricelist)
+        cache_min_qty_items = [item._cache_discount(self) for item in min_qty_items]
+        return cleaned_cache + cache_min_qty_items
+
+    def _get_min_qty_items(self, pricelist):
+        self.ensure_one()
+        domain = [
+            ("pricelist_id", "=", pricelist.id),
+            ("product_tmpl_id", "=", self.product_tmpl_id.id),
+            ("applied_on", "=", "1_product"),
+            ("has_min_quantity", "=", True),
+            ("is_past", "=", False),
+        ]
+        return self.env["product.pricelist.item"].search(domain)
 
     @job(default_channel="root.background.price")
     def delay_remove_price_cache(self, pricelist_role_names):

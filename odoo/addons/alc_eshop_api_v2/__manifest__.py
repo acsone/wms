@@ -20,6 +20,7 @@
         "alc_eshop_sale_cart_payment_info",
         "alc_eshop_sale_cart_suite_name",
         "alc_eshop_sale_cart_product_unavailable",
+        "alc_eshop_sale_cart_product_unavailable_pharmacy",  # REMOVE MIG: see manifest
         "alc_eshop_sale_no_cart_get",
     ],
     "data": ["views/shopinvader_menu.xml"],

@@ -4,7 +4,7 @@
 import inspect
 import logging
 
-from odoo import _, api, fields, models
+from odoo import _, api, fields, models, tools
 from odoo.exceptions import ValidationError
 
 _logger = logging.getLogger(__name__)
@@ -106,3 +106,36 @@ class AlcDeliveryResource(models.Model):
                         "address."
                     )
                 )
+
+    @api.model
+    @tools.ormcache("name")
+    def get_id_by_name(self, name):
+        return self.search([("name", "=", name)], limit=1).id
+
+    @api.model
+    def create(self, vals):
+        result = super(AlcDeliveryResource, self).create(vals)
+        self.get_id_by_name.clear_cache(self)
+        self.get_id_by_geo_optimization_resource_id.clear_cache(self)
+        return result
+
+    @api.multi
+    def write(self, vals):
+        result = super(AlcDeliveryResource, self).write(vals)
+        self.get_id_by_name.clear_cache(self)
+        self.get_id_by_geo_optimization_resource_id.clear_cache(self)
+        return result
+
+    @api.multi
+    def unlink(self):
+        result = super(AlcDeliveryResource, self).unlink()
+        self.get_id_by_name.clear_cache(self)
+        self.get_id_by_geo_optimization_resource_id.clear_cache(self)
+        return result
+
+    @api.model
+    @tools.ormcache("geo_optimization_resource_id")
+    def get_id_by_geo_optimization_resource_id(self, geo_optimization_resource_id):
+        return self.search(
+            [("geo_optimization_resource_id", "=", geo_optimization_resource_id)]
+        ).id

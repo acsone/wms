@@ -36,8 +36,14 @@ class ClusterPicking(Component):
         food_profile = self.env.ref("alc_shopfloor.shopfloor_profile_ali")
         med_profile = self.env.ref("alc_shopfloor.shopfloor_profile_medoc")
         if self.work.menu.profile_id == food_profile:
+            # We force the print : just need one label
+            do_not_print_food_labels = (
+                operation.picking_id.partner_id.no_labels_food_products
+            )
             operation.sudo().print_food_product_label(
-                printer_id=printer_id, lot_id=lot,
+                printer_id=printer_id,
+                lot_id=lot,
+                do_not_print_food_labels=do_not_print_food_labels,
             )
 
         if self.work.menu.profile_id == med_profile:

@@ -1,4 +1,19 @@
 <odoo noupdate="1">
+  <record model="attribute.attribute" id="attribute_promo_bag">
+    <field name="allow_mass_editing" eval="False" />
+    <field
+      ref="alc_pim_attribute_group.marketing_attribute_group"
+      name="attribute_group_id"
+    />
+    <field
+      name="attribute_set_ids"
+      eval="[(6,0,[ref('alc_pim_attribute_group.attribute_set_aliments')])]"
+    />
+    <field ref="alc_pim_product.field_product_template_promo_bag" name="field_id" />
+    <field ref="product.model_product_template" name="model_id" />
+    <field name="nature">native</field>
+    <field name="attribute_type">integer</field>
+  </record>
   <record model="attribute.attribute" id="attribute_size_clothing_option_id">
     <field name="allow_mass_editing" eval="False" />
     <field

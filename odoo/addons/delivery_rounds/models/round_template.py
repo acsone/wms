@@ -13,6 +13,7 @@ re_name = re.compile(r"(\w+) ?- ?(\w+)( .*)?")
 class RoundTemplateVersion(models.Model):
     _name = "round.template.version"
 
+    active = fields.Boolean(default=True)
     name = fields.Char("Name", required=True)
     template_ids = fields.Many2many("round.template", string="Templates")
     is_default_version = fields.Boolean("Default version")
@@ -36,6 +37,7 @@ class RoundTemplate(models.Model):
     _name = "round.template"
     _order = "time_leave_planned"
 
+    active = fields.Boolean(default=True)
     name = fields.Char("Name", required=True)
     code = fields.Char("Code", required=True, default="0")
     itinerary_ids = fields.Many2many("round.itinerary", string="Itineraries")

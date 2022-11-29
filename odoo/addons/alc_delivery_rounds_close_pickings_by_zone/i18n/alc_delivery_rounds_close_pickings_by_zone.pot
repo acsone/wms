@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_delivery_rounds_close_pickings_by_zone
-#: code:addons/alc_delivery_rounds_close_pickings_by_zone/models/round_instance.py:89
+#: code:addons/alc_delivery_rounds_close_pickings_by_zone/models/round_instance.py:94
 #, python-format
 msgid "%s : Automatic reopening of pickings in delivery round."
 msgstr ""
@@ -29,6 +29,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:alc_delivery_rounds_close_pickings_by_zone.field_round_instance_time_reopen_picking_launched
 #: model:ir.model.fields,field_description:alc_delivery_rounds_close_pickings_by_zone.field_round_template_time_reopen_picking_launched
 msgid "Duration before departure to re open pickings"
+msgstr ""
+
+#. module: alc_delivery_rounds_close_pickings_by_zone
+#: model:ir.model.fields,field_description:alc_delivery_rounds_close_pickings_by_zone.field_round_instance_partially_open
+msgid "Partially open"
 msgstr ""
 
 #. module: alc_delivery_rounds_close_pickings_by_zone
@@ -94,5 +99,10 @@ msgstr ""
 #. module: alc_delivery_rounds_close_pickings_by_zone
 #: model:ir.model,name:alc_delivery_rounds_close_pickings_by_zone.model_round_wizard_makeplan
 msgid "round.wizard.makeplan"
+msgstr ""
+
+#. module: alc_delivery_rounds_close_pickings_by_zone
+#: model:ir.model.fields,help:alc_delivery_rounds_close_pickings_by_zone.field_round_instance_partially_open
+msgid "tech field for color mic display"
 msgstr ""
 

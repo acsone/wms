@@ -140,7 +140,7 @@ SELECT
     categ.fullname_en as categ_en,
     categ.fullname_fr as categ_fr,
     categ.fullname_nl as categ_nl,
-    pp.allowed_partner_types,
+    pt.allowed_partner_types,
     price_cache,
     supplier_promotion.id is not null as has_supplier_promotion,
     supplier_promotion.date_end as supplier_promotion_date_end,
@@ -265,7 +265,7 @@ CREATE UNIQUE INDEX pk_%(table)s ON %(table)s (id);
         return res
 
     @api.model
-    def _get_iterator(self, domain, partner=None):
+    def _get_iterator(self, domain, partner=None, limit=None, offset=None):
         """Generator method to get one by one line as a simple object where
         each column is accessed with a doc notation"""
         e = expression.expression(domain, self)
@@ -278,6 +278,12 @@ CREATE UNIQUE INDEX pk_%(table)s ON %(table)s (id);
         sql_query = "SELECT * from {query_from} WHERE {query_where}".format(
             query_from=query_from, query_where=query_where
         )
+        if limit:
+            query_params.append(limit)
+            sql_query += " limit %s"
+        if offset:
+            query_params.append(offset)
+            sql_query += " offset %s"
         # avoid name conflict; note that the problem might still occur if we try
         # to get two iterators in the same transaction...
         name = "iterator %s" % self.env.cr
@@ -295,13 +301,36 @@ CREATE UNIQUE INDEX pk_%(table)s ON %(table)s (id);
             named_cursor.close()
 
     @api.model
-    def _get_partner_products_iterator(self, partner, product_ids=None):
+    def _get_partner_products_iterator(
+        self, partner, product_ids=None, domain_extend=None, limit=None, offset=None
+    ):
         domain_product = partner._get_product_domain()
+        if domain_extend:
+            domain_product = expression.AND([domain_product, domain_extend])
         if product_ids:
             domain_product = expression.AND(
                 [domain_product, [("id", "in", product_ids)]]
             )
-        return self._get_iterator(domain_product, partner)
+        return self._get_iterator(domain_product, partner, limit, offset)
+
+    @api.model
+    def _product_domain_to_model_domain(self, domain):
+        # we could also convert id to product_id
+        new_domain = []
+        suffix = "en"
+        lang = self.env.lang or ""
+        for prefix in ("fr", "nl"):
+            if prefix in lang:
+                suffix = prefix
+        for elem in domain:
+            if isinstance(elem, (unicode, str)):
+                new_domain.append(elem)
+            else:  # we have a triple
+                x, y, z = elem
+                if x in ["url_key", "name", "categ"]:
+                    x = "_".join((x, suffix))
+                new_domain.append((x, y, z))
+        return new_domain
 
 
 class _Container(object):
@@ -347,3 +376,30 @@ class _ProductDataContainer(_Container):
     @property
     def vat(self):
         return self.tax_amount or 21
+
+    @property
+    def name(self):
+        lang = self._env.lang or ""
+        if "fr" in lang:
+            return self.name_fr
+        if "nl" in lang:
+            return self.name_nl
+        return self.name_en
+
+    @property
+    def url_key(self):
+        lang = self._env.lang or ""
+        if "fr" in lang:
+            return self.url_key_fr
+        if "nl" in lang:
+            return self.url_key_nl
+        return self.url_key_en
+
+    @property
+    def categ(self):
+        lang = self._env.lang or ""
+        if "fr" in lang:
+            return self.categ_fr
+        if "nl" in lang:
+            return self.categ_nl
+        return self.categ_en

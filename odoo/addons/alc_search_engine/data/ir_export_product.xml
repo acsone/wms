@@ -328,4 +328,8 @@
         <field name="alias">veterinary_group_ids:veterinary_groups/name</field>
         <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
     </record>
+    <record id="ir_exp_shopinvader_variant_cross" model="ir.exports.line">
+        <field name="name">cross</field>
+        <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
+    </record>
 </odoo>

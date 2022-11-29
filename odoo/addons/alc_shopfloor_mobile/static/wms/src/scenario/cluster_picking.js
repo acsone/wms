@@ -390,14 +390,15 @@ const ClusterPicking = {
         unload_single: {
           display_info: {
             title: this.$t("cluster_picking.unload_single.title"),
-            scan_placeholder: this.$t("scan_placeholder_translation"),
+            scan_placeholder: this.$t("cluster_picking.unload_single.scan_placeholder"),
           },
           on_scan: scanned => {
+            const data = this.state.data;
             let endpoint, endpoint_data;
             endpoint = "unload_scan_pack";
             endpoint_data = {
               picking_batch_id: this.current_batch().id,
-              package_id: null, // FIXME: where does it come from? backend data?
+              package_id: data.package.id,
               barcode: scanned.text,
             };
             this.wait_call(this.odoo.call(endpoint, endpoint_data));
@@ -409,11 +410,12 @@ const ClusterPicking = {
             scan_placeholder: this.$t("scan_placeholder_translation"),
           },
           on_scan: scanned => {
+            const data = this.state.data;
             let endpoint, endpoint_data;
             endpoint = "unload_scan_destination";
             endpoint_data = {
               picking_batch_id: this.current_batch().id,
-              package_id: null, // FIXME: where does it come from? backend data?
+              package_id: data.package.id,
               barcode: scanned.text,
             };
             this.wait_call(this.odoo.call(endpoint, endpoint_data));
@@ -425,11 +427,12 @@ const ClusterPicking = {
             scan_placeholder: this.$t("scan_placeholder_translation"),
           },
           on_scan: scanned => {
+            const data = this.state.data;
             let endpoint, endpoint_data;
             endpoint = "unload_scan_destination";
             endpoint_data = {
               picking_batch_id: this.current_batch().id,
-              package_id: null, // FIXME: where does it come from? backend data?
+              package_id: data.package.id,
               barcode: scanned.text,
               confirmation: true,
             };
@@ -463,6 +466,7 @@ const ClusterPicking = {
             this.reset_notification();
           },
           on_confirm_stock_issue: () => {
+            const self = this;
             let endpoint, endpoint_data;
             const data = this.state.data;
             endpoint = "stock_issue";
@@ -473,7 +477,10 @@ const ClusterPicking = {
             if (data.lot) {
               endpoint_data.lot_id = data.lot.id;
             }
-            this.wait_call(this.odoo.call(endpoint, endpoint_data));
+            this.wait_call(this.odoo.call(endpoint, endpoint_data)).then(function() {
+              // We only need to reset state for the stock issue
+              self.state_reset_data("stock_issue");
+            });
           },
         },
       },
