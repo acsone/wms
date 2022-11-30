@@ -1,3 +1,4 @@
+# syntax=docker/dockerfile:1.4
 FROM ghcr.io/acsone/odoo-bedrock:16.0-py310-latest
 
 RUN set -e \
@@ -6,15 +7,14 @@ RUN set -e \
   && apt -y clean \
   && rm -rf /var/lib/apt/lists/*
 
+# install dependencies that change infrequently first, so that they are cached as a layer
+COPY requirements.txt /tmp/requirements.txt
+RUN --mount=type=bind,target=/release,source=.,from=release \
+  pip install --no-deps --no-index /release/*.whl
+
 COPY ./container/entrypoint-dbbase /odoo/start-entrypoint.d/
 
-# Install dependencies first, separately from the project.
-# They don't change so often, so by doing this we benefit from the layers cache.
-COPY ./release-deps /tmp/release-deps
-RUN pip install --no-index --no-deps /tmp/release-deps/*.whl
-
-# Now install the project.
-# This is the part that changes most often so we do it last.
-COPY ./release /tmp/release
-RUN pip install --no-index --no-deps /tmp/release/*.whl
-
+# Install the app in editable mode
+COPY . /app
+RUN --mount=type=bind,target=/release-build,source=.,from=release-build \
+  pip install --no-deps --no-index --find-links /release-build --editable /app
