@@ -28,6 +28,16 @@ class ProductSupplierinfo(models.Model):
         "Promotion", compute="_compute_ratio_display_name", readonly=True
     )
 
+    # TODO should be a list of promotion scopes and defined in
+    #  pricelist_discount/product_supplier_info.py
+    # a promotion scope could be based on partner_type or whatever scopes
+    # emerging from the business needs
+    only_for_veterinaries = fields.Boolean(
+        "Only for veterinaries",
+        default=False,
+        help="This field only apply to buyx_gety promotion",
+    )
+
     @api.multi
     def _compute_ratio_display_name(self):
         for supplierinfo in self:
@@ -40,4 +50,6 @@ class ProductSupplierinfo(models.Model):
                 supplierinfo.ratio_main_product,
                 supplierinfo.ratio_promotional_product,
             )
+            if supplierinfo.only_for_veterinaries:
+                display_name += _(" (only for veterinaries)")
             supplierinfo.ratio_display_name = display_name
