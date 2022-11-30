@@ -57,3 +57,8 @@ odoo-addon-session-db @ git+https://github.com/acsone/server-tools.git@16.0-sess
 
 # OCA/web
 odoo-addon-web-domain-field @ git+https://github.com/acsone/web.git@16.0-mig-web_domain_field-dro#subdirectory=setup/web_domain_field
+
+# camptocamp/odoo-cloud-platform
+odoo-addon-base-attachment-object-storage @ git+https://github.com/acsone/odoo-cloud-platform@16.0#subdirectory=setup/base_attachment_object_storage
+# https://github.com/camptocamp/odoo-cloud-platform/pull/394
+odoo-addon-attachment-s3 @ git+https://github.com/acsone/odoo-cloud-platform@16.0-mig-s3-lmi#subdirectory=setup/attachment_s3
