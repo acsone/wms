@@ -37,12 +37,16 @@ odoo-addon-product-packaging-dimension @ git+https://github.com/acsone/product-a
 odoo-addon-product-packaging-level @ git+https://github.com/acsone/product-attribute.git@16.0-mig-product-packaging-level-dro#subdirectory=setup/product_packaging_level
 # https://github.com/OCA/product-attribute/pull/1216 - [MIG][16.0] product_packaging_type_pallet => product_packaging_level_pallet
 odoo-addon-product-packaging-level-pallet @ git+https://github.com/acsone/product-attribute.git@16.0-mig-product-packaging-level-pallet-dro#subdirectory=setup/product_packaging_level_pallet
+# https://github.com/OCA/product-attribute/pull/1221 - [MIG][16.0] product total weight from packaging
+odoo-addon-product-total-weight-from-packaging @ git+https://github.com/acsone/product-attribute.git@16.0-mig-product_total_weight_from_packaging#subdirectory=setup/product_total_weight_from_packaging
 
 # stock-logistics-warehouse
 # https://github.com/OCA/stock-logistics-warehouse/pull/1532
 odoo-addon-stock-move-auto-assign @ git+https://github.com/acsone/stock-logistics-warehouse.git@16.0-add-stock_move_auto_assign_auto_release-lmi#subdirectory=setup/stock_move_auto_assign
 # https://github.com/OCA/stock-logistics-warehouse/pull/1560
 odoo-addon-stock-move-auto-assign-auto-release @ git+https://github.com/acsone/stock-logistics-warehouse.git@16.0-add-stock_move_auto_assign_auto_release-lmi#subdirectory=setup/stock_move_auto_assign_auto_release
+# https://github.com/OCA/stock-logistics-warehouse/pull/1502
+odoo-addon-stock-packaging-calculator @ git+https://github.com/acsone/stock-logistics-warehouse.git@16.0-mig-stock_packaging_calculator#subdirectory=setup/stock_packaging_calculator
 
 # stock-logistics-workflow
 # https://github.com/OCA/stock-logistics-workflow/pull/1127
