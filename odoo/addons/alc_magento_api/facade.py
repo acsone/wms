@@ -153,7 +153,10 @@ class FacadeProduct(Facade):
                     "promotion_valid_until": data.supplier_discount_date_end,
                 }
                 promotions.append(discount)
-            if data.has_supplier_promotion:
+            if data.has_supplier_promotion and (
+                not data.supplier_promotion_only_for_veterinaries
+                or self.partner.partner_type == "veterinary"
+            ):
                 promotion = {
                     "promotion": "FREE products",
                     "promotion_valid_until": data.supplier_promotion_date_end,

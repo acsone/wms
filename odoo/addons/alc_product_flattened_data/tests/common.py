@@ -59,6 +59,7 @@ class TestProductFlattenedData(SavepointCase):
             "supplier_discount_discount_sale": 0.0,
             "supplier_name": u"KRUUSE *",
             "supplier_promotion_date_end": False,
+            "supplier_promotion_only_for_veterinaries": False,
             "tax_amount": 21.0,
             "url_key_en": u"p/matelas-foam-dogbed-gris-120x100cm-8248538",
             "url_key_fr": u"p/matelas-foam-dogbed-gris-120x100cm-8248538",
