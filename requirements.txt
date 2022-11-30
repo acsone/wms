@@ -46,6 +46,7 @@ odoo-addon-stock-location-product-restriction==16.0.1.0.0.3
 odoo-addon-stock-move-auto-assign @ git+https://github.com/acsone/stock-logistics-warehouse.git@1b79ba58a4bb7b9bb334a79b3843735088090d1f#subdirectory=setup/stock_move_auto_assign
 odoo-addon-stock-move-auto-assign-auto-release @ git+https://github.com/acsone/stock-logistics-warehouse.git@11d1faad4c9f4aacc92052ef2e53df9f5fe8b518#subdirectory=setup/stock_move_auto_assign_auto_release
 odoo-addon-stock-picking-start @ git+https://github.com/acsone/stock-logistics-workflow.git@fb95dafafd5522a0f43bbf9aa0d81ba819c1ba44#subdirectory=setup/stock_picking_start
+odoo-addon-stock-production-lot-expiry @ git+https://github.com/acsone/product-attribute.git@b20adf8c23b831004b3ed097ffe9950e5d791cae#subdirectory=setup/stock_production_lot_expiry
 odoo-addon-stock-putaway-hook @ git+https://github.com/acsone/stock-logistics-workflow.git@4aca08e554f4a30464a0b9019ec1ddeb2ca7ced9#subdirectory=setup/stock_putaway_hook
 odoo-addon-stock-quant-package-dimension @ git+https://github.com/acsone/stock-logistics-workflow.git@978211aab22c1d0a1c90eb61d444a802dedfddd2#subdirectory=setup/stock_quant_package_dimension
 odoo-addon-stock-quant-package-product-packaging @ git+https://github.com/acsone/stock-logistics-workflow.git@2dcf8cada421667914f565f7deeada61d5e82b70#subdirectory=setup/stock_quant_package_product_packaging
