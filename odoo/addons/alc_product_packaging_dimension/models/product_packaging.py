@@ -1,72 +1,103 @@
-# -*- coding: utf-8 -*-
 # Copyright 2021 ACSONE SA/NV
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+from odoo import api, fields
 
-from odoo import api, fields, models
+from odoo.addons.product.models.product_packaging import (
+    ProductPackaging as PackagingBase,
+)
+from odoo.addons.uom.models.uom_uom import UoM
 
 
-class ProductPackaging(models.Model):
-    _inherit = "product.packaging"
+class ProductPackaging(PackagingBase):
 
-    length_cm = fields.Integer(
-        "Length (cm)",
-        compute="_compute_length",
-        help="length in centimeters",
+    displayed_length = fields.Integer(
+        compute="_compute_displayed_length",
+        help="length in unit",
         store=True,
-        inverse="_inverse_length_cm",
+        inverse="_inverse_displayed_length",
     )
-    width_cm = fields.Integer(
-        "Width (cm)",
-        compute="_compute_width",
-        help="width in centimeters",
+    displayed_width = fields.Integer(
+        compute="_compute_displayed_width",
+        help="width in unit",
         store=True,
-        inverse="_inverse_width_cm",
+        inverse="_inverse_displayed_width",
     )
-    height_cm = fields.Integer(
-        "Height (cm)",
-        compute="_compute_height",
-        help="height in centimeters",
+    displayed_height = fields.Integer(
+        compute="_compute_displayed_height",
+        help="height in unit",
         store=True,
-        inverse="_inverse_height_cm",
+        inverse="_inverse_displayed_height",
     )
+    displayed_uom_id = fields.Many2one[UoM](compute="_compute_displayed_uom_id")
+    displayed_uom_name = fields.Char(compute="_compute_displayed_uom_id")
 
     volume_l = fields.Float(
         digits=(8, 4),
-        compute="_compute_volume",
+        compute="_compute_volume_l",
         readonly=True,
         store=False,
         string="Volume (liter)",
         help="Volume in liter",
     )
 
-    @api.depends("lngth")
-    def _compute_length(self):
+    @api.depends_context("company_id")
+    @api.depends("length_uom_id")
+    def _compute_displayed_uom_id(self):
+        # If displayed uom is configured, use that one
+        # else, use the one defined on the packaging
         for pack in self:
-            pack.length_cm = pack.lngth / 10.0
+            displayed_uom_id = (
+                self.env.company.packaging_displayed_uom_id
+                if self.env.company.packaging_displayed_uom_id
+                else pack.length_uom_id
+            )
+            pack.displayed_uom_id = displayed_uom_id
+            pack.displayed_uom_name = displayed_uom_id.display_name
 
-    def _inverse_length_cm(self):
+    @api.depends("packaging_length", "length_uom_id", "displayed_uom_id")
+    def _compute_displayed_length(self):
         for pack in self:
-            pack.lngth = pack.length_cm * 10.0
+            pack.displayed_length = pack.length_uom_id._compute_quantity(
+                pack.packaging_length, pack.displayed_uom_id
+            )
 
-    @api.depends("width")
-    def _compute_width(self):
+    def _inverse_displayed_length(self):
         for pack in self:
-            pack.width_cm = pack.width / 10.0
+            pack.packaging_length = pack.displayed_uom_id._compute_quantity(
+                pack.displayed_length, pack.length_uom_id
+            )
 
-    def _inverse_width_cm(self):
+    @api.depends("width", "length_uom_id", "displayed_uom_id")
+    def _compute_displayed_width(self):
         for pack in self:
-            pack.width = pack.width_cm * 10.0
+            pack.displayed_width = pack.length_uom_id._compute_quantity(
+                pack.width, pack.displayed_uom_id
+            )
 
-    @api.depends("height")
-    def _compute_height(self):
+    def _inverse_displayed_width(self):
         for pack in self:
-            pack.height_cm = pack.height / 10.0
+            pack.width = pack.displayed_uom_id._compute_quantity(
+                pack.displayed_width, pack.length_uom_id
+            )
 
-    def _inverse_height_cm(self):
+    @api.depends("height", "length_uom_id", "displayed_uom_id")
+    def _compute_displayed_height(self):
         for pack in self:
-            pack.height = pack.height_cm * 10.0
+            pack.displayed_height = pack.length_uom_id._compute_quantity(
+                pack.height, pack.displayed_uom_id
+            )
 
-    @api.depends("length_cm", "width_cm", "height_cm")
-    def _compute_volume(self):
+    def _inverse_displayed_height(self):
         for pack in self:
-            pack.volume_l = (pack.length_cm * pack.width_cm * pack.height_cm) / 1000.0
+            pack.height = pack.displayed_uom_id._compute_quantity(
+                pack.displayed_height, pack.length_uom_id
+            )
+
+    @api.depends("displayed_length", "displayed_width", "displayed_height")
+    def _compute_volume_l(self):
+        mm_uom = self.env.ref("uom.product_uom_millimeter")
+        for pack in self:
+            length = pack.length_uom_id._compute_quantity(pack.displayed_length, mm_uom)
+            width = pack.length_uom_id._compute_quantity(pack.displayed_width, mm_uom)
+            height = pack.length_uom_id._compute_quantity(pack.displayed_height, mm_uom)
+            pack.volume_l = (length * width * height) / 1000.0

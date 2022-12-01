@@ -11,6 +11,7 @@
     "website": "https://acsone.eu",
     "application": True,
     "depends": [
+        "alc_product_packaging_dimension",
         "alc_product_dimensions",
         "alc_stock_scrap_responsible",
         "product_abc_classification_sale_stock",

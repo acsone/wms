@@ -221,7 +221,6 @@ exclude = [
   'odoo/addons/alc_product_lot_info/*',
   'odoo/addons/alc_product_mto/*',
   'odoo/addons/alc_product_packaging/*',
-  'odoo/addons/alc_product_packaging_dimension/*',
   'odoo/addons/alc_product_packaging_stock_reserve/*',
   'odoo/addons/alc_product_pharmacy/*',
   'odoo/addons/alc_product_picking_zone/*',
