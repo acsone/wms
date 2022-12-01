@@ -12,6 +12,9 @@ class ProductTemplate(models.Model):
     supplier_promotion_ids = fields.One2many(
         "product.supplierinfo", compute="_compute_seller_ids_subfields"
     )
+    supplier_promotion_for_veterinaries_ids = fields.One2many(
+        "product.supplierinfo", compute="_compute_seller_ids_subfields"
+    )
     supplier_discount_ids = fields.One2many(
         "product.supplierinfo", compute="_compute_seller_ids_subfields"
     )
@@ -20,5 +23,10 @@ class ProductTemplate(models.Model):
     def _compute_seller_ids_subfields(self):
         for product in self:
             current_info = product.seller_ids.filtered(lambda si: not si.is_past)
-            product.supplier_promotion_ids = current_info.filtered("is_promotion")
+            product.supplier_promotion_ids = current_info.filtered(
+                lambda a: a.is_promotion and not a.only_for_veterinaries
+            )
+            product.supplier_promotion_for_veterinaries_ids = current_info.filtered(
+                lambda a: a.is_promotion and not a.only_for_veterinaries
+            )
             product.supplier_discount_ids = current_info.filtered("is_sale_discount")
