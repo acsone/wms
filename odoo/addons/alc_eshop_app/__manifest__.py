@@ -44,6 +44,7 @@
         "shopinvader_search_engine_update_media",
         "shopinvader_search_engine_update_specials",
         "shopinvader_search_engine_update_vtgroups",
+        "alc_eshop_services_discounts",
         "alc_magento_api",
     ],
     "application": True,
