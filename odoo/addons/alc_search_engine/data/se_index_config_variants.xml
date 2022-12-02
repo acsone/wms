@@ -61,7 +61,14 @@
         "type": "integer"
       },
       "supplier_promotion": {
-        "type": "nested"
+        "type": "nested",
+        "include_in_parent": true,
+        "properties": {
+          "time_frame": {
+            "type": "date_range",
+            "format": "yyyy-MM-dd"
+          }
+        }
       },
       "cross": {
         "type": "text",
@@ -172,7 +179,14 @@
         "type": "nested"
       },
       "supplier_discount": {
-        "type": "nested"
+        "type": "nested",
+        "include_in_parent": true,
+        "properties": {
+          "time_frame": {
+            "type": "date_range",
+            "format": "yyyy-MM-dd"
+          }
+        }
       },
       "attributes": {
         "properties": {
@@ -441,7 +455,14 @@
         "type": "integer"
       },
       "supplier_promotion": {
-        "type": "nested"
+        "type": "nested",
+        "include_in_parent": true,
+        "properties": {
+          "time_frame": {
+            "type": "date_range",
+            "format": "yyyy-MM-dd"
+          }
+        }
       },
       "categories": {
         "type": "nested",
@@ -552,7 +573,14 @@
         "type": "nested"
       },
       "supplier_discount": {
-        "type": "nested"
+        "type": "nested",
+        "include_in_parent": true,
+        "properties": {
+          "time_frame": {
+            "type": "date_range",
+            "format": "yyyy-MM-dd"
+          }
+        }
       },
       "attributes": {
         "properties": {
@@ -811,7 +839,14 @@
         "type": "integer"
       },
       "supplier_promotion": {
-        "type": "nested"
+        "type": "nested",
+        "include_in_parent": true,
+        "properties": {
+          "time_frame": {
+            "type": "date_range",
+            "format": "yyyy-MM-dd"
+          }
+        }
       },
       "categories": {
         "type": "nested",
@@ -922,7 +957,14 @@
         "type": "nested"
       },
       "supplier_discount": {
-        "type": "nested"
+        "type": "nested",
+        "include_in_parent": true,
+        "properties": {
+          "time_frame": {
+            "type": "date_range",
+            "format": "yyyy-MM-dd"
+          }
+        }
       },
       "attributes": {
         "properties": {

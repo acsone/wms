@@ -29,7 +29,18 @@ class TestExportFlow(TestExport):
         data = binding.jsonify(parser)[0]
 
         # then
-        self.assertEqual(data["supplier_discount"], [values_discount])
-        self.assertEqual(data["supplier_promotion"], [values_promo])
+        expected_discounts = [
+            dict(
+                values_discount, time_frame={"lte": self.tomorrow, "gte": self.tomorrow}
+            )
+        ]
+        self.assertEqual(data["supplier_discount"], expected_discounts)
+        expected_promos = [
+            dict(
+                values_promo,
+                time_frame={"lte": self.in_two_days, "gte": self.in_two_days},
+            )
+        ]
+        self.assertEqual(data["supplier_promotion"], expected_promos)
         # ensure price is the price_cache
         self.assertEqual(data["price"]["price-shopinvader-default"][0]["price"], 1)
