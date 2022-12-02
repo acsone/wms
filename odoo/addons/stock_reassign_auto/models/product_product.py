@@ -24,12 +24,14 @@ class ProductProduct(models.Model):
             ("product_id", "in", self.ids),
             ("picking_id.operator_id", "=", False),
             ("procure_method", "=", "make_to_stock"),
+            ("picking_id.is_assignable", "=", True),
         ]
         return domain
 
-    @job(default_channel="root.background.stock_reassign_trial")  # priority=6
-    def _moves_auto_assign(self):
-        """ Find pickings and relaunch reservation """
+    # priority=6, capacity=1 to avoid concurrency issues
+    @job(default_channel="root.background.stock_reassign_trial")
+    def _moves_auto_assign(self, picking):
+        """ relaunch reservation for a picking """
         IrConfigParameter = self.env["ir.config_parameter"]
         enabled = IrConfigParameter.get_param(
             "stock_reassign_auto.reassign_trial_enabled", ""
@@ -45,10 +47,6 @@ class ProductProduct(models.Model):
         )
         if not available:
             return
-        move = self.env["stock.move"].search(self._moves_to_assign_domain(), limit=1)
-        if not move:
-            return
-        picking = move.picking_id
         try:
             self.env.cr.execute(
                 "SELECT id FROM stock_picking WHERE id = %s FOR UPDATE NOWAIT",
@@ -66,19 +64,18 @@ class ProductProduct(models.Model):
                 )
             raise
         self.env["stock.move"]._do_reassign_product(picking, self)
-        if (
-            float_compare(
-                self.qty_available, 0, precision_rounding=self.uom_id.rounding
-            )
-            > 0
-        ):
-            self._prepare_reassign()
 
     def _prepare_reassign(self):
         for product in self:
-            product.with_delay(
-                description=_("Try reserving for product %s") % product.id,
-                priority=6,
-                identity_key=identity_exact,
-            )._moves_auto_assign()
-        # Path: odoo/addons/stock_reassign_auto/models/stock.py
+            pickings = (
+                self.env["stock.move"]
+                .search(self._moves_to_assign_domain())
+                .mapped("picking_id")
+            )
+            for picking in pickings:
+                product.with_delay(
+                    description=_("Try reserving for product %s for picking %s")
+                    % (product.name, picking.name),
+                    priority=6,
+                    identity_key=identity_exact,
+                )._moves_auto_assign(picking)

@@ -11,6 +11,7 @@
         "alc_base_auto_join",
         "alc_stock_move_direction",
         "alc_stock_move_operation",
+        "alc_stock_picking_assignable",
         "base_partition",
         "stock_picking_assignment",
         "stock_picking_subcode",
