@@ -11,11 +11,13 @@
     "website": "https://acsone.eu",
     "application": True,
     "depends": [
+        "alc_product_packaging_dimension",
         "alc_product_dimensions",
         "alc_stock_scrap_responsible",
         "product_abc_classification_sale_stock",
         "product_dimension",
         "product_packaging_level",
+        "product_packaging_level_pallet",
         "stock_dynamic_routing",
         "stock_location_product_restriction",
         "stock_move_auto_assign",

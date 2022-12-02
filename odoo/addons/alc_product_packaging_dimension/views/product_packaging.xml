@@ -1,33 +1,57 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!-- Copyright 2021 ACSONE SA/NV
-     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
-  <record id="product_packaging_form_view_inherit" model="ir.ui.view">
-    <field name="name">product.packaging.form (in alc_product_packaging)</field>
-    <field name="model">product.packaging</field>
-    <field
+    <record id="product_packaging_form_view_inherit" model="ir.ui.view">
+        <field name="name">product.packaging.form (in alc_product_packaging)</field>
+        <field name="model">product.packaging</field>
+        <field
       name="inherit_id"
       ref="product_packaging_dimension.product_packaging_form_view_inherit"
     />
-    <field name="arch" type="xml">
-      <field name="lngth" position="attributes">
-        <attribute name="invisible">1</attribute>
-      </field>
-      <field name="width" position="attributes">
-        <attribute name="invisible">1</attribute>
-      </field>
-      <field name="height" position="attributes">
-        <attribute name="invisible">1</attribute>
-      </field>
-      <field name="volume" position="attributes">
-        <attribute name="invisible">1</attribute>
-      </field>
-      <field name="lngth" position="after">
-        <field name="length_cm" />
-        <field name="width_cm" />
-        <field name="height_cm" />
-        <field name="volume_l" />
-      </field>
-    </field>
-  </record>
+        <field name="arch" type="xml">
+            <group id="group_packaging_length" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </group>
+            <group id="group_width" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </group>
+            <group id="group_height" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </group>
+            <group id="group_volume" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </group>
+            <group id="group_packaging_length" position="after">
+                <group id="group_displayed_length">
+                    <label string="Length" for="displayed_length" />
+                    <div class="o_row">
+                        <field name="displayed_length" />
+                        <field name="displayed_uom_name" />
+                    </div>
+                </group>
+                <group id="group_displayed_width">
+                    <label string="Width" for="displayed_width" />
+                    <div class="o_row">
+                        <field name="displayed_width" />
+                        <field name="displayed_uom_name" />
+                    </div>
+                </group>
+                <group id="group_displayed_height">
+                    <label string="Height" for="displayed_height" />
+                    <div class="o_row">
+                        <field name="displayed_height" />
+                        <field name="displayed_uom_name" />
+                    </div>
+                </group>
+                <group id="group_volume_l">
+                    <label for="volume_l" />
+                    <div class="o_row">
+                        <field name="volume_l" />
+                        <span>l</span>
+                    </div>
+                </group>
+            </group>
+        </field>
+    </record>
 </odoo>

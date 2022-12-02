@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-01 11:01+0000\n"
-"PO-Revision-Date: 2022-12-01 11:01+0000\n"
+"POT-Creation-Date: 2022-12-01 13:06+0000\n"
+"PO-Revision-Date: 2022-12-01 13:06+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -23,53 +23,63 @@ msgstr ""
 #. module: alc_product_packaging_dimension
 #: model:ir.model,name:alc_product_packaging_dimension.model_res_company
 msgid "Companies"
-msgstr ""
+msgstr "Sociétés"
 
 #. module: alc_product_packaging_dimension
 #: model:ir.model,name:alc_product_packaging_dimension.model_res_config_settings
 msgid "Config Settings"
-msgstr ""
+msgstr "Paramètres de config"
 
 #. module: alc_product_packaging_dimension
 #: model_terms:ir.ui.view,arch_db:alc_product_packaging_dimension.res_config_settings_view_form
 msgid "Define your unit of measure to display on packagings"
-msgstr ""
+msgstr "Définissez votre unité de mesure à afficher sur les conditionnements de produit"
 
 #. module: alc_product_packaging_dimension
 #: model:ir.model.fields,field_description:alc_product_packaging_dimension.field_product_packaging__displayed_height
 msgid "Displayed Height"
-msgstr ""
+msgstr "Hauteur affichée"
 
 #. module: alc_product_packaging_dimension
 #: model:ir.model.fields,field_description:alc_product_packaging_dimension.field_product_packaging__displayed_length
 msgid "Displayed Length"
-msgstr ""
+msgstr "Longueur affichée"
 
 #. module: alc_product_packaging_dimension
 #: model:ir.model.fields,field_description:alc_product_packaging_dimension.field_product_packaging__displayed_uom_id
 msgid "Displayed Uom"
-msgstr ""
+msgstr "Unité de mesure affichée"
 
 #. module: alc_product_packaging_dimension
 #: model:ir.model.fields,field_description:alc_product_packaging_dimension.field_product_packaging__displayed_uom_name
 msgid "Displayed Uom Name"
-msgstr ""
+msgstr "Nom de l'unité de mesure affichée"
 
 #. module: alc_product_packaging_dimension
 #: model:ir.model.fields,field_description:alc_product_packaging_dimension.field_product_packaging__displayed_width
 msgid "Displayed Width"
-msgstr ""
+msgstr "Largeur affichée"
+
+#. module: alc_product_packaging_dimension
+#: model_terms:ir.ui.view,arch_db:alc_product_packaging_dimension.product_packaging_form_view_inherit
+msgid "Height"
+msgstr "Hauteur"
+
+#. module: alc_product_packaging_dimension
+#: model_terms:ir.ui.view,arch_db:alc_product_packaging_dimension.product_packaging_form_view_inherit
+msgid "Length"
+msgstr "Longueur"
 
 #. module: alc_product_packaging_dimension
 #: model:ir.model.fields,field_description:alc_product_packaging_dimension.field_res_company__packaging_displayed_uom_id
 #: model:ir.model.fields,field_description:alc_product_packaging_dimension.field_res_config_settings__packaging_displayed_uom_id
 msgid "Packaging Displayed Uom"
-msgstr ""
+msgstr "Unité de mesure de conditionnement affichée"
 
 #. module: alc_product_packaging_dimension
 #: model:ir.model,name:alc_product_packaging_dimension.model_product_packaging
 msgid "Product Packaging"
-msgstr ""
+msgstr "Conditionnement des articles"
 
 #. module: alc_product_packaging_dimension
 #: model:ir.model.fields,help:alc_product_packaging_dimension.field_res_company__packaging_displayed_uom_id
@@ -77,22 +87,27 @@ msgstr ""
 msgid ""
 "The unit from which displaying length, width and height in Product "
 "Packagings"
-msgstr ""
+msgstr "L'unité utilisée pour afficher la longueur, largeur, hauteur dans les conditionnements produit"
 
 #. module: alc_product_packaging_dimension
 #: model:ir.model.fields,field_description:alc_product_packaging_dimension.field_product_packaging__volume_l
 msgid "Volume (liter)"
-msgstr ""
+msgstr "Volume (litre)"
 
 #. module: alc_product_packaging_dimension
 #: model:ir.model.fields,help:alc_product_packaging_dimension.field_product_packaging__volume_l
 msgid "Volume in liter"
-msgstr ""
+msgstr "Volume en litre"
 
 #. module: alc_product_packaging_dimension
 #: model_terms:ir.ui.view,arch_db:alc_product_packaging_dimension.res_config_settings_view_form
 msgid "Weight"
-msgstr ""
+msgstr "Poids"
+
+#. module: alc_product_packaging_dimension
+#: model_terms:ir.ui.view,arch_db:alc_product_packaging_dimension.product_packaging_form_view_inherit
+msgid "Width"
+msgstr "Largeur"
 
 #. module: alc_product_packaging_dimension
 #: model:ir.model.fields,help:alc_product_packaging_dimension.field_product_packaging__displayed_height
@@ -107,4 +122,4 @@ msgstr ""
 #. module: alc_product_packaging_dimension
 #: model:ir.model.fields,help:alc_product_packaging_dimension.field_product_packaging__displayed_width
 msgid "width in unit"
-msgstr ""
+msgstr "Largeur"

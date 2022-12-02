@@ -31,10 +31,12 @@ odoo-addon-product-dimension @ git+https://github.com/acsone/product-attribute.g
 odoo-addon-stock-production-lot-expiry @ git+https://github.com/acsone/product-attribute.git@16.0-mig-stock_production_lot_expiry#subdirectory=setup/stock_production_lot_expiry
 # https://github.com/OCA/product-attribute/pull/1160 - [16.0] [MIG] product_logistics_uom
 odoo-addon-product-logistics-uom @ git+https://github.com/acsone/product-attribute.git@16.0-mig-product_logistics_uom#subdirectory=setup/product_logistics_uom
-# https://github.com/OCA/product-attribute/pull/1161 - [16.0] [MIG] product_packaging_dimension
-odoo-addon-product-packaging-dimension @ git+https://github.com/acsone/product-attribute.git@16.0-mig-product_packaging_dimension#subdirectory=setup/product_packaging_dimension
+# https://github.com/OCA/product-attribute/pull/1220 - [IMP] product_packaging_dimension: Improve view in order to easy inheritance
+odoo-addon-product-packaging-dimension @ git+https://github.com/acsone/product-attribute.git@16.0-imp-product-packaging-dimension-dro#subdirectory=setup/product_packaging_dimension
 # https://github.com/OCA/product-attribute/pull/1215 - MIG][16.0] product_packaging_type + renaming to product_packaging_level
 odoo-addon-product-packaging-level @ git+https://github.com/acsone/product-attribute.git@16.0-mig-product-packaging-level-dro#subdirectory=setup/product_packaging_level
+# https://github.com/OCA/product-attribute/pull/1216 - [MIG][16.0] product_packaging_type_pallet => product_packaging_level_pallet
+odoo-addon-product-packaging-level-pallet @ git+https://github.com/acsone/product-attribute.git@16.0-mig-product-packaging-level-pallet-dro#subdirectory=setup/product_packaging_level_pallet
 
 # stock-logistics-warehouse
 # https://github.com/OCA/stock-logistics-warehouse/pull/1532
