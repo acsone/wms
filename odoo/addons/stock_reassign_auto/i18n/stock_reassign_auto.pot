@@ -29,8 +29,8 @@ msgid "Transfer"
 msgstr ""
 
 #. module: stock_reassign_auto
-#: code:addons/stock_reassign_auto/models/product_product.py:80
+#: code:addons/stock_reassign_auto/models/product_product.py:77
 #, python-format
-msgid "Try reserving for product %s"
+msgid "Try reserving for product %s for picking %s"
 msgstr ""
 
