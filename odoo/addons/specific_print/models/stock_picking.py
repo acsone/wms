@@ -52,7 +52,6 @@ class StockPicking(models.Model):
                 # We don't need lot or anything
                 packs_to_print[0].print_food_product_label(
                     printer_id=printer_id,
-                    quantity=quantity,
                     do_not_print_food_labels=do_not_print_food_labels,
                 )
             else:
@@ -62,11 +61,14 @@ class StockPicking(models.Model):
                             pack.print_food_product_label(
                                 printer_id=printer_id,
                                 quantity=quantity,
+                                quantity_done=pack.qty_done,
                                 lot_id=pack_lot.lot_id,
                             )
                     else:
                         pack.print_food_product_label(
-                            printer_id=printer_id, quantity=quantity,
+                            printer_id=printer_id,
+                            quantity=quantity,
+                            quantity_done=pack.qty_done,
                         )
 
     @api.multi
