@@ -6,7 +6,7 @@ import time
 
 
 def check_call(cmd):
-    print(" ".join(cmd))
+    print(" ".join(cmd))  # pylint: disable=print-used
     sys.stdout.flush()
     subprocess.check_call(cmd)
 
@@ -49,5 +49,5 @@ if db_name:
         )
 
 while subprocess.call(["wkhtmltopdf", "--version"]) != 0:
-    print("Waiting for wkhtmltopdf...")
+    print("Waiting for wkhtmltopdf...")  # pylint: disable=print-used
     time.sleep(10)
