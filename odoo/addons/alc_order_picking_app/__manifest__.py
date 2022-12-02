@@ -11,6 +11,7 @@
     "website": "https://acsone.eu/",
     "depends": [
         "product_total_weight_from_packaging",
+        "stock_delivery_note",
         "stock_dynamic_routing",
         "stock_move_common_dest",
         "stock_picking_completion_info",
