@@ -70,6 +70,16 @@
           }
         }
       },
+      "supplier_promotion_veterinary": {
+        "type": "nested",
+        "include_in_parent": true,
+        "properties": {
+          "time_frame": {
+            "type": "date_range",
+            "format": "yyyy-MM-dd"
+          }
+        }
+      },
       "cross": {
         "type": "text",
         "analyzer": "analyzer_lang"
@@ -464,6 +474,16 @@
           }
         }
       },
+      "supplier_promotion_veterinary": {
+        "type": "nested",
+        "include_in_parent": true,
+        "properties": {
+          "time_frame": {
+            "type": "date_range",
+            "format": "yyyy-MM-dd"
+          }
+        }
+      },
       "categories": {
         "type": "nested",
         "properties": {
@@ -839,6 +859,16 @@
         "type": "integer"
       },
       "supplier_promotion": {
+        "type": "nested",
+        "include_in_parent": true,
+        "properties": {
+          "time_frame": {
+            "type": "date_range",
+            "format": "yyyy-MM-dd"
+          }
+        }
+      },
+      "supplier_promotion_veterinary": {
         "type": "nested",
         "include_in_parent": true,
         "properties": {
