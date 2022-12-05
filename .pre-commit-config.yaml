@@ -381,7 +381,6 @@ exclude:  |
   ^odoo/addons/stock_picking_subcode/|
   ^odoo/addons/stock_picking_zone/|
   ^odoo/addons/stock_product_bin/|
-  ^odoo/addons/stock_production_lot_expired_dates/|
   ^odoo/addons/stock_putaway_defaultfixedlocation/|
   ^odoo/addons/stock_putaway_route/|
   ^odoo/addons/stock_quant_bylocation/|

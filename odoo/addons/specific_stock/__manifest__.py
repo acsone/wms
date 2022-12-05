@@ -38,8 +38,6 @@
         "stock_picking_backorder",
         "stock_picking_zone",
         "stock_product_bin",
-        "stock_production_lot_expired_dates",
-        "stock_production_lot_expiry",
         "stock_receive_lot",
         "stock_reception_priority",
         "stock_refill",  # field 'kind' on stock.location
