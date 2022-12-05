@@ -47,6 +47,7 @@ odoo-addon-product-total-weight-from-packaging @ git+https://github.com/acsone/p
 odoo-addon-queue-job==16.0.2.0.0
 odoo-addon-session-db @ git+https://github.com/acsone/server-tools.git@22a7d3cef17dd51a1612880dc75906c04c17c98a#subdirectory=setup/session_db
 odoo-addon-stock-available-to-promise-release @ git+https://github.com/acsone/wms.git@d5fd1e0db43309f6e4ef93ca1611294e66263d12#subdirectory=setup/stock_available_to_promise_release
+odoo-addon-stock-delivery-note @ git+https://github.com/acsone/stock-logistics-workflow.git@f4b97993bc2611b1fd889f0ddb201299d129dde1#subdirectory=setup/stock_delivery_note
 odoo-addon-stock-dynamic-routing==16.0.1.0.0.3
 odoo-addon-stock-helper==16.0.1.0.1
 odoo-addon-stock-location-product-restriction==16.0.1.0.0.3
