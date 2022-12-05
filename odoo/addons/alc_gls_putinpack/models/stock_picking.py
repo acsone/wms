@@ -10,6 +10,14 @@ class StockPicking(models.Model):
     _inherit = "stock.picking"
 
     can_put_in_pack = fields.Boolean(compute="_compute_can_put_in_pack")
+    can_unreserve_moves = fields.Boolean(
+        compute="_compute_can_unreserve_moves", default=True
+    )
+
+    @api.depends("gls_package_ref")
+    def _compute_can_unreserve_moves(self):
+        for rec in self:
+            rec.can_unreserve_moves = not bool(rec.gls_package_ref)
 
     @api.depends(
         "pack_operation_ids",
@@ -59,3 +67,11 @@ class StockPicking(models.Model):
             if not package.packaging_id:
                 return self._get_gls_put_in_pack_wizard_action(package.id)
         return super(StockPicking, self).do_transfer()
+
+    def do_unreserve(self):
+        for rec in self:
+            if not rec.can_unreserve_moves:
+                raise ValidationError(
+                    _("Moves cannot be unreserved because a GLS package already exist.")
+                )
+        return super(StockPicking, self).do_unreserve()
