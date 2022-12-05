@@ -1,0 +1,138 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* product_discount_specials
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-12-02 10:02+0000\n"
+"PO-Revision-Date: 2022-12-02 10:02+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: product_discount_specials
+#: code:addons/product_discount_specials/models/product_discount_special.py:43
+#, python-format
+msgid "%s must be > %s"
+msgstr "%s doit être > %s"
+
+#. module: product_discount_specials
+#: model:ir.model.fields,field_description:product_discount_specials.field_product_discount_special_create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: product_discount_specials
+#: model:ir.model.fields,field_description:product_discount_specials.field_product_discount_special_create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: product_discount_specials
+#: model:ir.ui.view,arch_db:product_discount_specials.product_discount_special_search_view
+msgid "Current"
+msgstr "Non-échu"
+
+#. module: product_discount_specials
+#: model:ir.ui.view,arch_db:product_discount_specials.product_discount_special_search_view
+msgid "Current ads"
+msgstr "Annonces en cours"
+
+#. module: product_discount_specials
+#: model:ir.actions.act_window,name:product_discount_specials.product_discount_special_act_window
+#: model:ir.ui.menu,name:product_discount_specials.product_discount_special_menu
+#: model:ir.ui.view,arch_db:product_discount_specials.product_template_form_view_discount_specials
+msgid "Discount Specials"
+msgstr "Discount Specials"
+
+#. module: product_discount_specials
+#: model:ir.model.fields,field_description:product_discount_specials.field_product_discount_special_display_name
+msgid "Display Name"
+msgstr "Nom affiché"
+
+#. module: product_discount_specials
+#: model:ir.model.fields,field_description:product_discount_specials.field_product_discount_special_date_end
+msgid "End Date"
+msgstr "Date de fin"
+
+#. module: product_discount_specials
+#: model:ir.model.fields,field_description:product_discount_specials.field_product_discount_special_id
+msgid "ID"
+msgstr "ID"
+
+#. module: product_discount_specials
+#: model:ir.model.fields,field_description:product_discount_specials.field_product_discount_special___last_update
+msgid "Last Modified on"
+msgstr "Dernière modification le"
+
+#. module: product_discount_specials
+#: model:ir.model.fields,field_description:product_discount_specials.field_product_discount_special_write_uid
+msgid "Last Updated by"
+msgstr "Derniere fois mis à jour par"
+
+#. module: product_discount_specials
+#: model:ir.model.fields,field_description:product_discount_specials.field_product_discount_special_write_date
+msgid "Last Updated on"
+msgstr "Dernière mis à jour le"
+
+#. module: product_discount_specials
+#: model:ir.ui.view,arch_db:product_discount_specials.product_discount_special_search_view
+msgid "Past"
+msgstr "Echues"
+
+#. module: product_discount_specials
+#: model:ir.ui.view,arch_db:product_discount_specials.product_discount_special_search_view
+msgid "Past ads from today"
+msgstr "Annonces échues au jour d'aujourd'hui"
+
+#. module: product_discount_specials
+#: model:ir.model,name:product_discount_specials.model_product_template
+msgid "Product Template"
+msgstr "Modèle d'article"
+
+#. module: product_discount_specials
+#: model:ir.model.fields,field_description:product_discount_specials.field_delivery_carrier_product_discount_special_ids
+#: model:ir.model.fields,field_description:product_discount_specials.field_product_product_product_discount_special_ids
+#: model:ir.model.fields,field_description:product_discount_specials.field_product_template_product_discount_special_ids
+msgid "Product discount special ids"
+msgstr "Product discount special ids"
+
+#. module: product_discount_specials
+#: model:ir.model.fields,field_description:product_discount_specials.field_product_discount_special_product_template_id
+msgid "Product template id"
+msgstr "Product template id"
+
+#. module: product_discount_specials
+#: model:ir.model.fields,field_description:product_discount_specials.field_product_discount_special_sequence
+msgid "Sequence"
+msgstr "Séquence"
+
+#. module: product_discount_specials
+#: model:ir.model.fields,field_description:product_discount_specials.field_product_discount_special_date_start
+msgid "Start Date"
+msgstr "Date de début"
+
+#. module: product_discount_specials
+#: model:ir.ui.view,arch_db:product_discount_specials.product_discount_special_search_view
+msgid "Upcoming"
+msgstr "A venir"
+
+#. module: product_discount_specials
+#: model:ir.ui.view,arch_db:product_discount_specials.product_discount_special_search_view
+msgid "Upcoming ads from today"
+msgstr "Annonces futures"
+
+#. module: product_discount_specials
+#: code:addons/product_discount_specials/models/product_discount_special.py:75
+#, python-format
+msgid "date start %s, date end %s for product %s overlaps already existing date start %s, date end %s"
+msgstr "la date de début %s, ou la date de fin %s pour le produit %s recouvre une/des date(s) de début %s, ou de fin %s déjà existantes pour ce produit."
+
+#. module: product_discount_specials
+#: model:ir.model,name:product_discount_specials.model_product_discount_special
+msgid "product.discount.special"
+msgstr "product.discount.special"
+
