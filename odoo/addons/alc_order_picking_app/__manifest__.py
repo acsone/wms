@@ -13,6 +13,7 @@
         "product_total_weight_from_packaging",
         "stock_dynamic_routing",
         "stock_move_common_dest",
+        "stock_picking_completion_info",
         "stock_picking_start",
         "stock_release_channel_auto_release",
         "stock_production_lot_expiry",
