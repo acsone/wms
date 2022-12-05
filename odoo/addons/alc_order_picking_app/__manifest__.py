@@ -10,6 +10,7 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
+        "product_total_weight_from_packaging",
         "stock_dynamic_routing",
         "stock_picking_start",
         "stock_release_channel_auto_release",

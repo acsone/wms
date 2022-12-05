@@ -43,6 +43,7 @@ odoo-addon-product-logistics-uom @ git+https://github.com/acsone/product-attribu
 odoo-addon-product-packaging-dimension @ git+https://github.com/acsone/product-attribute.git@acfce3cbe8e463ed080b483b00058941e533cada#subdirectory=setup/product_packaging_dimension
 odoo-addon-product-packaging-level @ git+https://github.com/acsone/product-attribute.git@5382722d152e1e534d4d9c684a7a3919ee6ea3de#subdirectory=setup/product_packaging_level
 odoo-addon-product-packaging-level-pallet @ git+https://github.com/acsone/product-attribute.git@0902b25c2ec0564e9dfef2b35c78bc4f0a8d6a71#subdirectory=setup/product_packaging_level_pallet
+odoo-addon-product-total-weight-from-packaging @ git+https://github.com/acsone/product-attribute.git@0ae6102ff01a7ea8622e20a5a47ecfbe68314a4d#subdirectory=setup/product_total_weight_from_packaging
 odoo-addon-queue-job==16.0.2.0.0
 odoo-addon-session-db @ git+https://github.com/acsone/server-tools.git@22a7d3cef17dd51a1612880dc75906c04c17c98a#subdirectory=setup/session_db
 odoo-addon-stock-available-to-promise-release @ git+https://github.com/acsone/wms.git@d5fd1e0db43309f6e4ef93ca1611294e66263d12#subdirectory=setup/stock_available_to_promise_release
@@ -51,6 +52,7 @@ odoo-addon-stock-helper==16.0.1.0.1
 odoo-addon-stock-location-product-restriction==16.0.1.0.0.3
 odoo-addon-stock-move-auto-assign @ git+https://github.com/acsone/stock-logistics-warehouse.git@1b79ba58a4bb7b9bb334a79b3843735088090d1f#subdirectory=setup/stock_move_auto_assign
 odoo-addon-stock-move-auto-assign-auto-release @ git+https://github.com/acsone/stock-logistics-warehouse.git@11d1faad4c9f4aacc92052ef2e53df9f5fe8b518#subdirectory=setup/stock_move_auto_assign_auto_release
+odoo-addon-stock-packaging-calculator @ git+https://github.com/acsone/stock-logistics-warehouse.git@7a62f663ee6d0c2393ad2d09c79e88d6308e6efd#subdirectory=setup/stock_packaging_calculator
 odoo-addon-stock-picking-start @ git+https://github.com/acsone/stock-logistics-workflow.git@fb95dafafd5522a0f43bbf9aa0d81ba819c1ba44#subdirectory=setup/stock_picking_start
 odoo-addon-stock-production-lot-expiry @ git+https://github.com/acsone/product-attribute.git@b20adf8c23b831004b3ed097ffe9950e5d791cae#subdirectory=setup/stock_production_lot_expiry
 odoo-addon-stock-putaway-hook @ git+https://github.com/acsone/stock-logistics-workflow.git@4aca08e554f4a30464a0b9019ec1ddeb2ca7ced9#subdirectory=setup/stock_putaway_hook
