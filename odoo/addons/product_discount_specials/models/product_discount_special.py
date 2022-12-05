@@ -4,8 +4,10 @@
 
 
 from dateutil.relativedelta import relativedelta
+from psycopg2.extensions import AsIs
 
-from odoo import api, fields, models
+from odoo import _, api, fields, models
+from odoo.exceptions import ValidationError
 
 
 class ProductDiscountSpecial(models.Model):
@@ -32,3 +34,48 @@ class ProductDiscountSpecial(models.Model):
         today_str = self.default_today()
         today = fields.Date.from_string(today_str)
         return fields.Date.to_string(today + relativedelta(months=1))
+
+    @api.constrains("product_template_id", "date_start", "date_end")
+    def _check_dates_no_overlap(self):
+        for record in self:
+            if record.date_start > record.date_end:
+                raise ValidationError(
+                    _("%s must be > %s") % (record.date_end, record.date_start,)
+                )
+            SQL = """
+                SELECT
+                    id
+                FROM
+                    %(table)s discount
+                WHERE
+                    (discount.date_start, discount.date_end) OVERLAPS (%(start)s, %(end)s)
+                    AND discount.id != %(discount_id)s
+                    AND discount.product_template_id = %(template_id)s"""
+            self.env.cr.execute(
+                SQL,
+                dict(
+                    table=AsIs(self._table),
+                    start=record.date_start,
+                    end=record.date_end,
+                    discount_id=record.id,
+                    template_id=record.product_template_id.id,
+                ),
+            )
+            res = self.env.cr.fetchall()
+            if res:
+                ids = [r[0] for r in res]
+                others = self.browse(ids)
+                others_date_start = others.mapped("date_start")
+                others_date_end = others.mapped("date_end")
+                raise ValidationError(
+                    _(
+                        "date start %s, date end %s for product %s overlaps already existing date start %s, date end %s"
+                    )
+                    % (
+                        record.date_start,
+                        record.date_end,
+                        record.product_template_id.name,
+                        others_date_start,
+                        others_date_end,
+                    )
+                )
