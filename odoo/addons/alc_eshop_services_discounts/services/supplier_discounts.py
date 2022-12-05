@@ -33,6 +33,8 @@ class DiscountService(Component):
             domain = [(0, "=", 1)]
         else:
             domain = self.partner._get_product_domain()
+            if self.partner.partner_type != "veterinary":
+                domain.append(["only_for_veterinaries", "=", False])
             domain[0] = ("product_tmpl_id." + domain[0][0], domain[0][1], domain[0][2])
             domain.append(("is_past", "=", False))
         return domain

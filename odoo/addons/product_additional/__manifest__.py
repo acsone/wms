@@ -11,6 +11,7 @@
     "license": "AGPL-3",
     "category": "Product",
     "depends": [
+        "alc_partner_type",
         "product",
         "product_expiry",
         "pricelist_discount",

@@ -42,7 +42,7 @@ class ProductTemplate(models.Model):
         )
 
     @api.multi
-    def get_promotional_product(self, qty, uom):
+    def get_promotional_product(self, qty, uom, partner_id):
         """Compute how many promotional product are offered.
 
         Given a quantity and a unity of measure, returns for the current
@@ -52,23 +52,25 @@ class ProductTemplate(models.Model):
         """
         if uom != self.uom_id:
             qty = uom._compute_quantity(qty, self.uom_id)
+        domain = []
+        if partner_id.partner_type != "veterinary":
+            domain.append(("only_for_veterinaries", "=", False))
+        domain = domain + [
+            ("ratio_promotional_product", ">", 0),
+            ("ratio_main_product", ">", 0),
+            "|",
+            ("date_start", "=", False),
+            ("date_start", "<=", fields.Date.today()),
+            "|",
+            ("date_end", "=", False),
+            ("date_end", ">=", fields.Date.today()),
+            "|",
+            ("min_qty_sale", "=", False),
+            ("min_qty_sale", "<=", qty),
+            ("product_tmpl_id", "=", self.id),
+        ]
         result = self.env["product.supplierinfo"].search(
-            [
-                ("ratio_promotional_product", ">", 0),
-                ("ratio_main_product", ">", 0),
-                "|",
-                ("date_start", "=", False),
-                ("date_start", "<=", fields.Date.today()),
-                "|",
-                ("date_end", "=", False),
-                ("date_end", ">=", fields.Date.today()),
-                "|",
-                ("min_qty_sale", "=", False),
-                ("min_qty_sale", "<=", qty),
-                ("product_tmpl_id", "=", self.id),
-            ],
-            order="sequence, min_qty_sale desc, price",
-            limit=1,
+            domain, order="sequence, min_qty_sale desc, price", limit=1,
         )
         if not result:
             return 0
