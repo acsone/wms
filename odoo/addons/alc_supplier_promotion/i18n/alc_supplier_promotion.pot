@@ -43,11 +43,47 @@ msgid "Supplier discount ids"
 msgstr ""
 
 #. module: alc_supplier_promotion
+#: model:ir.model.fields,field_description:alc_supplier_promotion.field_delivery_carrier_supplier_discount_json
+#: model:ir.model.fields,field_description:alc_supplier_promotion.field_product_product_supplier_discount_json
+#: model:ir.model.fields,field_description:alc_supplier_promotion.field_product_template_supplier_discount_json
+#: model:ir.model.fields,field_description:alc_supplier_promotion.field_shopinvader_product_supplier_discount_json
+#: model:ir.model.fields,field_description:alc_supplier_promotion.field_shopinvader_variant_supplier_discount_json
+msgid "Supplier discount json"
+msgstr ""
+
+#. module: alc_supplier_promotion
+#: model:ir.model.fields,field_description:alc_supplier_promotion.field_delivery_carrier_supplier_promotion_for_veterinaries_ids
+#: model:ir.model.fields,field_description:alc_supplier_promotion.field_product_product_supplier_promotion_for_veterinaries_ids
+#: model:ir.model.fields,field_description:alc_supplier_promotion.field_product_template_supplier_promotion_for_veterinaries_ids
+#: model:ir.model.fields,field_description:alc_supplier_promotion.field_shopinvader_product_supplier_promotion_for_veterinaries_ids
+#: model:ir.model.fields,field_description:alc_supplier_promotion.field_shopinvader_variant_supplier_promotion_for_veterinaries_ids
+msgid "Supplier promotion for veterinaries ids"
+msgstr ""
+
+#. module: alc_supplier_promotion
 #: model:ir.model.fields,field_description:alc_supplier_promotion.field_delivery_carrier_supplier_promotion_ids
 #: model:ir.model.fields,field_description:alc_supplier_promotion.field_product_product_supplier_promotion_ids
 #: model:ir.model.fields,field_description:alc_supplier_promotion.field_product_template_supplier_promotion_ids
 #: model:ir.model.fields,field_description:alc_supplier_promotion.field_shopinvader_product_supplier_promotion_ids
 #: model:ir.model.fields,field_description:alc_supplier_promotion.field_shopinvader_variant_supplier_promotion_ids
 msgid "Supplier promotion ids"
+msgstr ""
+
+#. module: alc_supplier_promotion
+#: model:ir.model.fields,field_description:alc_supplier_promotion.field_delivery_carrier_supplier_promotion_json
+#: model:ir.model.fields,field_description:alc_supplier_promotion.field_product_product_supplier_promotion_json
+#: model:ir.model.fields,field_description:alc_supplier_promotion.field_product_template_supplier_promotion_json
+#: model:ir.model.fields,field_description:alc_supplier_promotion.field_shopinvader_product_supplier_promotion_json
+#: model:ir.model.fields,field_description:alc_supplier_promotion.field_shopinvader_variant_supplier_promotion_json
+msgid "Supplier promotion json"
+msgstr ""
+
+#. module: alc_supplier_promotion
+#: model:ir.model.fields,field_description:alc_supplier_promotion.field_delivery_carrier_supplier_promotion_json_for_veterinaries
+#: model:ir.model.fields,field_description:alc_supplier_promotion.field_product_product_supplier_promotion_json_for_veterinaries
+#: model:ir.model.fields,field_description:alc_supplier_promotion.field_product_template_supplier_promotion_json_for_veterinaries
+#: model:ir.model.fields,field_description:alc_supplier_promotion.field_shopinvader_product_supplier_promotion_json_for_veterinaries
+#: model:ir.model.fields,field_description:alc_supplier_promotion.field_shopinvader_variant_supplier_promotion_json_for_veterinaries
+msgid "Supplier promotion json for veterinaries"
 msgstr ""
 
