@@ -11,5 +11,6 @@
     "website": "https://acsone.eu",
     "depends": [
         "purchase",
+        "purchase_stock_packaging",
     ],
 }
