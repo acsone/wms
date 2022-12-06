@@ -13,6 +13,7 @@ def migrate(cr, version):
         "alc_stock_picking_policy_block",
         "stock_reassign_auto",
         "stock_picking_assignment",
+        "stock_putaway_route",
     ]
     for addon in addons_to_uninstall:
         _logger.info("uninstall %s", ",".join(addon))

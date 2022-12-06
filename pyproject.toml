@@ -450,7 +450,6 @@ exclude = [
   'odoo/addons/stock_picking_zone/*',
   'odoo/addons/stock_product_bin/*',
   'odoo/addons/stock_putaway_defaultfixedlocation/*',
-  'odoo/addons/stock_putaway_route/*',
   'odoo/addons/stock_quant_bylocation/*',
   'odoo/addons/stock_receive_lot/*',
   'odoo/addons/stock_reception_priority/*',
