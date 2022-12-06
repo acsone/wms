@@ -183,7 +183,6 @@ omit =
     odoo/addons/alc_product_storage_type_tracking/*
     odoo/addons/alc_product_uom_updatable/*
     odoo/addons/alc_purchase_announced_delivery_date/*
-    odoo/addons/alc_purchase_multipackaging/*
     odoo/addons/alc_purchase_order_cleaner/*
     odoo/addons/alc_purchase_order_import_ubl/*
     odoo/addons/alc_purchase_order_ubl/*
