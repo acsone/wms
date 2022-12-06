@@ -1,14 +1,12 @@
-# -*- coding: utf-8 -*-
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import api, fields, models
+from odoo import api, fields
+
+from odoo.addons.product.models.product_template import ProductTemplate as TemplateBase
 
 
-class ProductTemplate(models.Model):
-    _inherit = "product.template"
-
-    # TO BE REMOVED, ONLY USED by website purchase...
+class ProductTemplate(TemplateBase):
 
     unit_in_pallet = fields.Integer(
         "Unit in pallet", compute="_compute_unit_in_package"
@@ -19,7 +17,7 @@ class ProductTemplate(models.Model):
     )
 
     @api.depends(
-        "packaging_ids", "packaging_ids.qty", "packaging_ids.packaging_type_id"
+        "packaging_ids", "packaging_ids.qty", "packaging_ids.packaging_level_id"
     )
     def _compute_unit_in_package(self):
         type_pallet = self.env.ref(
@@ -30,10 +28,17 @@ class ProductTemplate(models.Model):
             "alc_product_packaging.product_packaging_type_shrink_wrap"
         )
         for record in self:
+            record.update(
+                {
+                    "unit_in_pallet": False,
+                    "unit_in_box": False,
+                    "unit_in_shrink_wrap": False,
+                }
+            )
             for pack in record.packaging_ids:
-                if pack.packaging_type_id == type_pallet:
+                if pack.packaging_level_id == type_pallet:
                     record.unit_in_pallet = pack.qty
-                elif pack.packaging_type_id == type_box:
+                elif pack.packaging_level_id == type_box:
                     record.unit_in_box = pack.qty
-                elif pack.packaging_type_id == type_wrap:
+                elif pack.packaging_level_id == type_wrap:
                     record.unit_in_shrink_wrap = pack.qty
