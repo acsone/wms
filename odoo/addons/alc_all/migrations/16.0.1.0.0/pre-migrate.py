@@ -12,6 +12,7 @@ def migrate(cr, version):
     addons_to_uninstall = [
         "alc_stock_location_content_relocation",
         "alc_stock_picking_policy_block",
+        "alc_stock_storage_type_fixed_location",
         "stock_inventory_controller",
         "stock_inventory_products",
         "stock_location",

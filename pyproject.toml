@@ -332,7 +332,6 @@ exclude = [
   'odoo/addons/alc_stock_receive_lot_missing_product_nouveaute_info/*',
   'odoo/addons/alc_stock_receive_lot_product_info/*',
   'odoo/addons/alc_stock_storage_type/*',
-  'odoo/addons/alc_stock_storage_type_fixed_location/*',
   'odoo/addons/alc_storage/*',
   'odoo/addons/alc_storage_file_lang/*',
   'odoo/addons/alc_storage_media_lang/*',
