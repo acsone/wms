@@ -1,1 +1,0 @@
-from . import alc_location_content_relocation_generator
