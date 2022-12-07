@@ -363,7 +363,6 @@ exclude:  |
   ^odoo/addons/stock_grn/|
   ^odoo/addons/stock_groupbypartner/|
   ^odoo/addons/stock_inventory_constrains/|
-  ^odoo/addons/stock_inventory_controller/|
   ^odoo/addons/stock_location_act_as_view/|
   ^odoo/addons/stock_location_notranslate/|
   ^odoo/addons/stock_lot_loss/|
