@@ -16,6 +16,7 @@ def migrate(cr, version):
         "stock_inventory_controller",
         "stock_inventory_products",
         "stock_location",
+        "stock_location_notranslate",
         "stock_location_report",
         "stock_reassign_auto",
         "stock_picking_assignment",
