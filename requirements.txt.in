@@ -49,6 +49,9 @@ odoo-addon-stock-production-lot-expired-date @ git+https://github.com/acsone/pro
 # https://github.com/OCA/product-attribute/pull/1225 - [ADD] product_template_has_one_variant
 odoo-addon-product-template-has-one-variant @ git+https://github.com/acsone/product-attribute.git@16.0-add-product-template-has-one-variant-dro#subdirectory=setup/product_template_has_one_variant
 
+# purchase-workflow
+odoo-addon-purchase-stock-packaging @ git+https://github.com/acsone/purchase-workflow.git@16.0-add-purchase_stock_packaging-dro#subdirectory=setup/purchase_stock_packaging
+
 # stock-logistics-warehouse
 # https://github.com/OCA/stock-logistics-warehouse/pull/1532
 odoo-addon-stock-move-auto-assign @ git+https://github.com/acsone/stock-logistics-warehouse.git@16.0-add-stock_move_auto_assign_auto_release-lmi#subdirectory=setup/stock_move_auto_assign

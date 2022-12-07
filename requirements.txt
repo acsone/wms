@@ -47,6 +47,7 @@ odoo-addon-product-packaging-level @ git+https://github.com/acsone/product-attri
 odoo-addon-product-packaging-level-pallet @ git+https://github.com/acsone/product-attribute.git@0902b25c2ec0564e9dfef2b35c78bc4f0a8d6a71#subdirectory=setup/product_packaging_level_pallet
 odoo-addon-product-template-has-one-variant @ git+https://github.com/acsone/product-attribute.git@07c1609e5ec906cbca3377a62ea55ff8e78c9a2c#subdirectory=setup/product_template_has_one_variant
 odoo-addon-product-total-weight-from-packaging @ git+https://github.com/acsone/product-attribute.git@0ae6102ff01a7ea8622e20a5a47ecfbe68314a4d#subdirectory=setup/product_total_weight_from_packaging
+odoo-addon-purchase-stock-packaging @ git+https://github.com/acsone/purchase-workflow.git@02adbbcaf2c174f3cbfadc74e0b477bddb1886bf#subdirectory=setup/purchase_stock_packaging
 odoo-addon-queue-job==16.0.2.0.0
 odoo-addon-session-db @ git+https://github.com/acsone/server-tools.git@22a7d3cef17dd51a1612880dc75906c04c17c98a#subdirectory=setup/session_db
 odoo-addon-stock-available-to-promise-release @ git+https://github.com/acsone/wms.git@d5fd1e0db43309f6e4ef93ca1611294e66263d12#subdirectory=setup/stock_available_to_promise_release

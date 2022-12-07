@@ -9,7 +9,11 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["alc_putaway_app", "alc_order_picking_app"],
+    "depends": [
+        "alc_purchase_app",
+        "alc_putaway_app",
+        "alc_order_picking_app",
+    ],
     "application": True,
     "data": [
         "security/sale_order.xml",
