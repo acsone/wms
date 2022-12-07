@@ -36,6 +36,8 @@ num2words==0.5.6
 odoo @ git+https://github.com/acsone/odoo.git@39b334125bee7679908fca4bc6786e1b51830f27
 odoo-addon-attachment-s3 @ git+https://github.com/acsone/odoo-cloud-platform@25cf2a9bfb287a4ca5696651f448401264b8df2a#subdirectory=setup/attachment_s3
 odoo-addon-base-attachment-object-storage @ git+https://github.com/acsone/odoo-cloud-platform@fc452c6a2abbae4ab7d4bd041c5d2212691a8096#subdirectory=setup/base_attachment_object_storage
+odoo-addon-base-delivery-carrier-label @ git+https://github.com/acsone/delivery-carrier.git@98d8844e5be456e1189ea41401fc2f957f221165#subdirectory=setup/base_delivery_carrier_label
+odoo-addon-delivery-carrier-info==16.0.1.0.0.2
 odoo-addon-product-abc-classification @ git+https://github.com/acsone/product-attribute.git@cc97df93b3f97e947c2ed38cc6232c0a642f65e1#subdirectory=setup/product_abc_classification
 odoo-addon-product-abc-classification-sale-stock @ git+https://github.com/acsone/product-attribute.git@f9690a9c1f19ece371effeb200a417e96fddb158#subdirectory=setup/product_abc_classification_sale_stock
 odoo-addon-product-dimension @ git+https://github.com/acsone/product-attribute.git@36e6216efe4a7cbff6346f36e0d5b80d7d700705#subdirectory=setup/product_dimension
@@ -43,8 +45,8 @@ odoo-addon-product-logistics-uom @ git+https://github.com/acsone/product-attribu
 odoo-addon-product-packaging-dimension @ git+https://github.com/acsone/product-attribute.git@acfce3cbe8e463ed080b483b00058941e533cada#subdirectory=setup/product_packaging_dimension
 odoo-addon-product-packaging-level @ git+https://github.com/acsone/product-attribute.git@5382722d152e1e534d4d9c684a7a3919ee6ea3de#subdirectory=setup/product_packaging_level
 odoo-addon-product-packaging-level-pallet @ git+https://github.com/acsone/product-attribute.git@0902b25c2ec0564e9dfef2b35c78bc4f0a8d6a71#subdirectory=setup/product_packaging_level_pallet
-odoo-addon-product-total-weight-from-packaging @ git+https://github.com/acsone/product-attribute.git@0ae6102ff01a7ea8622e20a5a47ecfbe68314a4d#subdirectory=setup/product_total_weight_from_packaging
 odoo-addon-product-template-has-one-variant @ git+https://github.com/acsone/product-attribute.git@07c1609e5ec906cbca3377a62ea55ff8e78c9a2c#subdirectory=setup/product_template_has_one_variant
+odoo-addon-product-total-weight-from-packaging @ git+https://github.com/acsone/product-attribute.git@0ae6102ff01a7ea8622e20a5a47ecfbe68314a4d#subdirectory=setup/product_total_weight_from_packaging
 odoo-addon-queue-job==16.0.2.0.0
 odoo-addon-session-db @ git+https://github.com/acsone/server-tools.git@22a7d3cef17dd51a1612880dc75906c04c17c98a#subdirectory=setup/session_db
 odoo-addon-stock-available-to-promise-release @ git+https://github.com/acsone/wms.git@d5fd1e0db43309f6e4ef93ca1611294e66263d12#subdirectory=setup/stock_available_to_promise_release
