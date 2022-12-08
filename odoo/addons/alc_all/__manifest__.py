@@ -13,6 +13,8 @@
         "alc_purchase_app",
         "alc_putaway_app",
         "alc_order_picking_app",
+        # TO BE REMOVED
+        "base_report_to_printer",
     ],
     "application": True,
     "data": [
