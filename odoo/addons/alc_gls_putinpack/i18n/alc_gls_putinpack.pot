@@ -20,6 +20,11 @@ msgid "Can put in pack"
 msgstr ""
 
 #. module: alc_gls_putinpack
+#: model:ir.model.fields,field_description:alc_gls_putinpack.field_stock_picking_can_unreserve_moves
+msgid "Can unreserve moves"
+msgstr ""
+
+#. module: alc_gls_putinpack
 #: model:ir.ui.view,arch_db:alc_gls_putinpack.delivery_package_gls_wizard_form_view
 msgid "Cancel"
 msgstr ""
@@ -91,9 +96,15 @@ msgid "Missing parameter: %s"
 msgstr ""
 
 #. module: alc_gls_putinpack
-#: code:addons/alc_gls_putinpack/models/stock_picking.py:32
+#: code:addons/alc_gls_putinpack/models/stock_picking.py:40
 #, python-format
 msgid "More than one pack"
+msgstr ""
+
+#. module: alc_gls_putinpack
+#: code:addons/alc_gls_putinpack/models/stock_picking.py:75
+#, python-format
+msgid "Moves cannot be unreserved because a GLS package already exist."
 msgstr ""
 
 #. module: alc_gls_putinpack
