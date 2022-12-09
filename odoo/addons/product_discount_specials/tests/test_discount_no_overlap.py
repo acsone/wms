@@ -69,3 +69,23 @@ class TestDiscountNoOverlap(SavepointCase):
             }
         )
         self.assertTrue(discount2)
+
+    def test_05_discount_starts_when_discount1_ends(self):
+        with self.assertRaises(ValidationError):
+            self.env["product.discount.special"].create(
+                {
+                    "date_start": "2023-01-30",
+                    "date_end": "2023-02-06",
+                    "product_template_id": self.product.id,
+                }
+            )
+
+    def test_06_discount_ends_when_discount1_start(self):
+        with self.assertRaises(ValidationError):
+            self.env["product.discount.special"].create(
+                {
+                    "date_start": "2023-01-05",
+                    "date_end": "2023-01-20",
+                    "product_template_id": self.product.id,
+                }
+            )

@@ -42,15 +42,20 @@ class ProductDiscountSpecial(models.Model):
                 raise ValidationError(
                     _("%s must be > %s") % (record.date_end, record.date_start,)
                 )
+            # OVERLAPS in postgresql allows to start range 2 the same day range 1 ends.
+            # We check no overlaps at borders in addition
             SQL = """
                 SELECT
                     id
                 FROM
                     %(table)s discount
                 WHERE
-                    (discount.date_start, discount.date_end) OVERLAPS (%(start)s, %(end)s)
+                    ((discount.date_start, discount.date_end) OVERLAPS (%(start)s, %(end)s)
+                    OR discount.date_end = %(start)s
+                    OR discount.date_start = %(end)s)
                     AND discount.id != %(discount_id)s
-                    AND discount.product_template_id = %(template_id)s"""
+                    AND discount.product_template_id = %(template_id)s
+                    """
             self.env.cr.execute(
                 SQL,
                 dict(
