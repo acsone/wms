@@ -1,0 +1,4 @@
+ci_access:
+  projects:
+    - id: acsone/odoo-alcyon
+    - id: acsone/odoo-pharmasouverain
