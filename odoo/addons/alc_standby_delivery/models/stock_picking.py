@@ -2,7 +2,10 @@
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+import itertools
+
 from odoo import api, fields, models
+from odoo.tools.float_utils import float_compare
 
 
 class StockPicking(models.Model):
@@ -122,11 +125,94 @@ WHERE id in %s AND EXISTS (
         rest = partners.filtered(lambda p: p.id not in ps_dyn_del)
         ps_sta_del = self._find_bypartners(rest.ids) if rest else []
         pids = ps_sta_del + ps_dyn_del
+        picking_ids_with_stock = self._get_pickings_with_qty_avaible_in_stock()
+
         for p in self:
             p.standby_delivery = (
-                p.state == "confirmed"
-                and p.picking_type_subcode == "PICK"
-                and not p.delivery_round_id
-                and p.partner_id
-                and partners_mapping[p.partner_id].id in pids
+                partners_mapping[p.partner_id].id in pids
+                and p.id in picking_ids_with_stock
             )
+
+    @api.model
+    def _get_pickings_with_qty_avaible_in_stock(self):
+        # Get all location child of stock
+        stock_location = self.env.ref("stock.stock_location_stock")
+        customer_location = self.env.ref("stock.stock_location_customers")
+        colis_souverain_id = self.env.ref(
+            "alc_reception_pharmacy.product_colis_souverain"
+        ).id
+
+        # Get available stock for products on candidate pickings
+        stock_query = """
+        SELECT DISTINCT pp.id, SUM(sq.qty), array_agg(sp.id) FROM stock_picking sp
+            JOIN stock_move sm ON sp.id = sm.picking_id
+            JOIN product_product pp ON pp.id=sm.product_id
+            JOIN stock_quant sq on sq.product_id=pp.id
+            JOIN stock_location sl ON sl.id=sq.location_id
+            JOIN stock_picking_type spt on spt.id=sp.picking_type_id
+        WHERE sq.qty > 0 AND sq.reservation_id is null
+            AND sl.scrap_location=false
+            AND sl.parent_left > %(stock_parent_left)s
+            AND sl.parent_right < %(stock_parent_right)s
+            AND sp.state = 'confirmed'
+            AND sp.delivery_round_id is null
+            AND sp.partner_id is not null
+            AND sm.state not in ('done', 'cancel')
+            AND spt.subcode='PICK'
+            AND pp.id != %(colis_souverain_id)s
+        GROUP BY pp.id
+        ORDER BY pp.id asc;
+
+        """
+        stock_args = {
+            "stock_parent_left": stock_location.parent_left,
+            "stock_parent_right": stock_location.parent_right,
+            "colis_souverain_id": colis_souverain_id,
+        }
+        self.env.cr.execute(stock_query, stock_args)
+        stock_by_product_id = {}
+        picking_ids_by_product_id = {}
+        for row in self.env.cr.fetchall():
+            product_id = row[0]
+            qty = row[1]
+            ids = row[2]
+            stock_by_product_id[product_id] = qty
+            picking_ids_by_product_id[product_id] = ids
+
+        # Check if out move exists for those products
+        product_ids = stock_by_product_id.keys()
+        move_out_query = """
+        SELECT DISTINCT pp.id, SUM(sm.product_qty) FROM product_product pp
+            JOIN stock_move sm on sm.product_id=pp.id
+            JOIN stock_location sl on sl.id=sm.location_dest_id
+        WHERE pp.id in %(product_ids)s
+            AND sm.product_qty > 0
+            AND sl.parent_left >= %(stock_parent_left)s
+            AND sl.parent_right <= %(stock_parent_right)s
+            AND sm.state not in ('done', 'cancel')
+        GROUP BY pp.id
+        ORDER BY pp.id ASC;
+        """
+        move_out_args = {
+            "product_ids": tuple(product_ids),
+            "stock_parent_left": customer_location.parent_left,
+            "stock_parent_right": customer_location.parent_right,
+        }
+        self.env.cr.execute(move_out_query, move_out_args)
+        precision = self.env["decimal.precision"].precision_get(
+            "Product Unit of Measure"
+        )
+        picking_ids = []
+        move_out_result = self.env.cr.fetchall()
+        # Difference between stock and out moves for those products
+        # keep only products with positive quantities
+        if move_out_result:
+            for product_id, qty in move_out_result:
+                initial_qty = stock_by_product_id.get(product_id, 0)
+                remaining_qty = initial_qty - qty
+                if float_compare(remaining_qty, 0, precision_digits=precision) > 0:
+                    picking_ids += picking_ids_by_product_id.get(product_id, [])
+        else:
+            picking_ids = list(itertools.chain(*picking_ids_by_product_id.values()))
+
+        return list(set(picking_ids))  # remove duplicate ids
