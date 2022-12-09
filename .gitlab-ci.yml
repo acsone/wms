@@ -364,8 +364,6 @@ build-review-image:
   extends: .build-and-publish-image
   variables:
     IMAGE_FLAVOR: /review
-  environment:
-    name: review/$CI_COMMIT_REF_NAME
   only:
     - branches
   except:
@@ -383,7 +381,7 @@ build-review-image:
       curl --request POST \
         --form "token=${CI_JOB_TOKEN}" \
         --form "ref=deploy" \
-        --form "variables[DEPLOY_ENV]=${CI_ENVIRONMENT_SLUG}" \
+        --form "variables[DEPLOY_ENV]=${DEPLOY_ENV:-$CI_ENVIRONMENT_NAME}" \
         --form "variables[DEPLOY_IMAGE]=${CI_REGISTRY_IMAGE}${IMAGE_FLAVOR}" \
         --form "variables[DEPLOY_COMMIT_REF_NAME]=${CI_COMMIT_REF_NAME}" \
         --form "variables[DEPLOY_COMMIT_SHA]=${CI_COMMIT_SHA}" \
@@ -402,8 +400,7 @@ deploy-review-trigger:
   extends: .deploy-trigger
   variables:
     IMAGE_FLAVOR: /review
-  environment:
-    name: review/$CI_COMMIT_REF_NAME
+    DEPLOY_ENV: review/$CI_COMMIT_REF_NAME
   needs:
     - job: build-review-image
   only:
