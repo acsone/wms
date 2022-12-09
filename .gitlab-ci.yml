@@ -412,9 +412,9 @@ deploy-review-trigger:
     - "10.0"
   when: on_success # automatic after build-review-image
 
-# deployments to customer environments (uat, preprod, prod)
+# deployments to docker environments (uat, preprod, prod)
 
-.deploy-customer:
+.deploy-docker:
   extends: .deploy-trigger
   needs:
     - job: build-image
@@ -423,16 +423,16 @@ deploy-review-trigger:
   when: manual
 
 deploy-uat-trigger:
-  extends: .deploy-customer
+  extends: .deploy-docker
   environment:
     name: uat
 
 deploy-preprod-trigger:
-  extends: .deploy-customer
+  extends: .deploy-docker
   environment:
     name: preprod
 
 deploy-prod-trigger:
-  extends: .deploy-customer
+  extends: .deploy-docker
   environment:
     name: prod
