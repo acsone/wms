@@ -129,7 +129,7 @@ msgid "Upcoming ads from today"
 msgstr "Annonces futures"
 
 #. module: product_discount_specials
-#: code:addons/product_discount_specials/models/product_discount_special.py:71
+#: code:addons/product_discount_specials/models/product_discount_special.py:76
 #, python-format
 msgid ""
 "date start %s, date end %s for product %s overlaps already existing date "
