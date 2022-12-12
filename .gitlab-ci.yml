@@ -424,15 +424,21 @@ deploy-review-trigger:
 
 deploy-uat-trigger:
   extends: .deploy-docker
+  variables:
+    DEPLOY_BRANCH: deploy
   environment:
     name: uat
 
 deploy-preprod-trigger:
   extends: .deploy-docker
+  variables:
+    DEPLOY_BRANCH: deploy
   environment:
     name: preprod
 
 deploy-prod-trigger:
   extends: .deploy-docker
+  variables:
+    DEPLOY_BRANCH: deploy
   environment:
     name: prod
