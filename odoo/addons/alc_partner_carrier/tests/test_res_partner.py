@@ -1,14 +1,13 @@
-# -*- coding: utf-8 -*-
 # Copyright 2021 ACSONE SA/NV
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
-from odoo.tests.common import SavepointCase
+from odoo.tests.common import TransactionCase
 
 
-class TestResPartner(SavepointCase):
+class TestResPartner(TransactionCase):
     @classmethod
     def setUpClass(cls):
-        super(TestResPartner, cls).setUpClass()
+        super().setUpClass()
         cls.ResPartner = cls.env["res.partner"]
         cls.carrier_category = cls.env.ref(
             "alc_partner_carrier.res_partner_category_carrier"
@@ -18,6 +17,7 @@ class TestResPartner(SavepointCase):
     def test_00(self):
         """
         Data:
+
             partner without category
         Test case:
             set is_carrier
@@ -35,6 +35,7 @@ class TestResPartner(SavepointCase):
     def test_01(self):
         """
         Data:
+
             partner without category
         Test case:
             add carrier_category

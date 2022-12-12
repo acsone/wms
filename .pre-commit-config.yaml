@@ -111,7 +111,6 @@ exclude:  |
   ^odoo/addons/alc_mrp_repair/|
   ^odoo/addons/alc_older_stock_production_lot/|
   ^odoo/addons/alc_package_label_printer/|
-  ^odoo/addons/alc_partner_carrier/|
   ^odoo/addons/alc_partner_category/|
   ^odoo/addons/alc_partner_delivery_person/|
   ^odoo/addons/alc_partner_delivery_window/|

@@ -10,6 +10,7 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
+        "alc_partner_carrier",
         "base_delivery_carrier_label",
         "product_total_weight_from_packaging",
         "stock_dynamic_routing",
