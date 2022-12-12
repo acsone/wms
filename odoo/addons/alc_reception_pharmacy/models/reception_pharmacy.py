@@ -139,7 +139,14 @@ class ReceptionPharmacy(models.Model):
                     pickings[0].partner_id
                 )
             if delivery_round:
-                delivery_round._assign_pickings(pickings)
+                description = (
+                    _("Assign pickings to delivery round %s after pharmacy reception.")
+                    % delivery_round.name
+                )
+                delivery_round.with_delay(
+                    description=description, priority=8
+                )._assign_pickings(pickings)
+
         self.state = "done"
         return self.env["stock.picking"].browse(new_picking_ids)
 
