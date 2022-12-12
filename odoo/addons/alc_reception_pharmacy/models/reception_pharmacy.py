@@ -141,7 +141,7 @@ class ReceptionPharmacy(models.Model):
             if delivery_round:
                 description = (
                     _("Assign pickings to delivery round %s after pharmacy reception.")
-                    % delivery_round.name
+                    % delivery_round.display_name
                 )
                 delivery_round.with_delay(
                     description=description, priority=8
