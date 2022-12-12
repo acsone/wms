@@ -20,6 +20,12 @@ msgid "All pickings at destination of a same shipping must be in the same delive
 msgstr ""
 
 #. module: alc_reception_pharmacy
+#: code:addons/alc_reception_pharmacy/models/reception_pharmacy.py:143
+#, python-format
+msgid "Assign pickings to delivery round %s after pharmacy reception."
+msgstr ""
+
+#. module: alc_reception_pharmacy
 #: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy_line_bin_id
 msgid "Bin"
 msgstr ""
