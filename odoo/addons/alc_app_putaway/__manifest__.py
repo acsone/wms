@@ -22,6 +22,7 @@
         "product_route_mto",
         "stock_dynamic_routing",
         "stock_location_product_restriction",
+        "stock_location_zone",
         "stock_move_auto_assign",
         "stock_picking_start",
         "stock_route_mto",

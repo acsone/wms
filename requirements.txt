@@ -66,6 +66,7 @@ odoo-addon-stock-dynamic-routing==16.0.1.0.0.5
 odoo-addon-stock-grn @ git+https://github.com/acsone/stock-logistics-workflow.git@3abfffe5161a7c6ffe43131d615cd512bd3eab2c#subdirectory=setup/stock_grn
 odoo-addon-stock-helper==16.0.1.0.1
 odoo-addon-stock-location-product-restriction==16.0.1.0.0.3
+odoo-addon-stock-location-zone==16.0.1.0.1
 odoo-addon-stock-move-auto-assign @ git+https://github.com/acsone/stock-logistics-warehouse.git@1b79ba58a4bb7b9bb334a79b3843735088090d1f#subdirectory=setup/stock_move_auto_assign
 odoo-addon-stock-move-auto-assign-auto-release @ git+https://github.com/acsone/stock-logistics-warehouse.git@11d1faad4c9f4aacc92052ef2e53df9f5fe8b518#subdirectory=setup/stock_move_auto_assign_auto_release
 odoo-addon-stock-move-common-dest==16.0.1.0.1
