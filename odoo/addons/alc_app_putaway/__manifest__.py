@@ -23,6 +23,7 @@
         "stock_location_product_restriction",
         "stock_move_auto_assign",
         "stock_picking_start",
+        "stock_route_mto",
         "stock_storage_type",
         "stock_picking_start",
         "stock_storage_type_putaway_abc_classification_sale_stock",

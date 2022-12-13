@@ -80,6 +80,7 @@ odoo-addon-stock-quant-package-dimension @ git+https://github.com/acsone/stock-l
 odoo-addon-stock-quant-package-product-packaging @ git+https://github.com/acsone/stock-logistics-workflow.git@2dcf8cada421667914f565f7deeada61d5e82b70#subdirectory=setup/stock_quant_package_product_packaging
 odoo-addon-stock-release-channel @ git+https://github.com/acsone/wms.git@0c9450759aca70988281e4577ffbb5082bae4c8f#subdirectory=setup/stock_release_channel
 odoo-addon-stock-release-channel-auto-release @ git+https://github.com/acsone/wms.git@0c9450759aca70988281e4577ffbb5082bae4c8f#subdirectory=setup/stock_release_channel_auto_release
+odoo-addon-stock-route-mto @ git+https://github.com/acsone/stock-logistics-warehouse.git@3acb2ea38a2cac932a01fe6284b80feeae695ce0#subdirectory=setup/stock_route_mto
 odoo-addon-stock-storage-type @ git+https://github.com/acsone/wms.git@fd484bfeb2110f1dbcaec071acab1a41dc57d935#subdirectory=setup/stock_storage_type
 odoo-addon-stock-storage-type-putaway-abc @ git+https://github.com/acsone/wms.git@2cca4a20b17686fe5cfee096215035b9fdef3e09#subdirectory=setup/stock_storage_type_putaway_abc
 odoo-addon-stock-storage-type-putaway-abc-classification-sale-stock @ git+https://github.com/acsone/wms.git@980b444e365da2752f5bc1345f22d2cf5ca80657#subdirectory=setup/stock_storage_type_putaway_abc_classification_sale_stock

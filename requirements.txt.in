@@ -85,6 +85,8 @@ odoo-addon-stock-move-auto-assign @ git+https://github.com/acsone/stock-logistic
 odoo-addon-stock-move-auto-assign-auto-release @ git+https://github.com/acsone/stock-logistics-warehouse.git@16.0-add-stock_move_auto_assign_auto_release-lmi#subdirectory=setup/stock_move_auto_assign_auto_release
 # https://github.com/OCA/stock-logistics-warehouse/pull/1502
 odoo-addon-stock-packaging-calculator @ git+https://github.com/acsone/stock-logistics-warehouse.git@16.0-mig-stock_packaging_calculator#subdirectory=setup/stock_packaging_calculator
+# https://github.com/OCA/stock-logistics-warehouse/pull/1580
+odoo-addon-stock-route-mto @ git+https://github.com/acsone/stock-logistics-warehouse.git@16.0-add-stock_route_mto-dro#subdirectory=setup/stock_route_mto
 
 # stock-logistics-workflow
 # https://github.com/OCA/stock-logistics-workflow/pull/1127
