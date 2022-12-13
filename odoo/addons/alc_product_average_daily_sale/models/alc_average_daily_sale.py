@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -6,7 +5,6 @@ from psycopg2.extensions import AsIs
 
 from odoo import api, fields, models
 
-import odoo.addons.decimal_precision as dp
 from odoo.addons.stock_storage_type_putaway_abc.models.stock_location import (
     ABC_SELECTION,
 )
@@ -17,9 +15,10 @@ class AlcAverageDailySale(models.Model):
     _name = "alc.average.daily.sale"
     _auto = False
     _order = "abc_classification_level ASC, product_id ASC"
+    _description = "Average Daily Sale for Products"
 
     abc_classification_level = fields.Selection(
-        selection=ABC_SELECTION, required=True, read_only=True, index=True
+        selection=ABC_SELECTION, required=True, readonly=True, index=True
     )
     average_daily_sales_count = fields.Float(
         help="Avarage Daily Sales Count", required=True
@@ -33,13 +32,19 @@ class AlcAverageDailySale(models.Model):
     )
     date_from = fields.Date("From", required=True)
     date_to = fields.Date("To", required=True)
-    is_mto_product = fields.Boolean(
-        string="On Order", readonly=True, store=True, index=True,
+    is_mto = fields.Boolean(
+        string="On Order",
+        readonly=True,
+        store=True,
+        index=True,
     )
     nbr_sales = fields.Integer(required=True)
-    picking_zone_id = fields.Many2one(
-        string="Picking zone", comodel_name="picking.zone", readonly=True, index=True,
-    )
+    # location_zone_id = fields.Many2one(
+    #     string="Location Zone", comodel_name="stock.location", readonly=True, index=True,
+    # )
+    # location_zone_kind = fields.Selection(
+    #     selection=lambda self: self.env["stock.location"]._fields["location_kind"].selection
+    # )
     product_id = fields.Many2one(
         "product.product", "Product", required=True, index=True
     )
@@ -49,14 +54,14 @@ class AlcAverageDailySale(models.Model):
         "without sat and sun",
     )
     safety_bin_min_qty = fields.Float(
-        requied=True,
-        digits=dp.get_precision("Product Unit of Measure"),
+        required=True,
+        digits="Product Unit of Measure",
         help="Minimal safety qty into a bin location computed as: "
         "average daily qty * number days in stock * safety",
     )
     safety_bin_min_qty_old = fields.Float(
-        requied=True,
-        digits=dp.get_precision("Product Unit of Measure"),
+        required=True,
+        digits="Product Unit of Measure",
         help="Minimal value for the safety qty. Computed as: "
         "number days in stock * GREATEST(average daily sales count, 1) * "
         "(average qty by sale + (stddev * safety factor))",
@@ -72,7 +77,7 @@ class AlcAverageDailySale(models.Model):
     warehouse_id = fields.Many2one(comodel_name="stock.warehouse", required=True)
     qty_in_stock = fields.Float(
         string="Qty in stock",
-        digits=dp.get_precision("Product Unit of Measure"),
+        digits="Product Unit of Measure",
         help="All stock locations included (VLB), reserved product included",
         required=True,
     )
@@ -97,7 +102,8 @@ class AlcAverageDailySale(models.Model):
         self.set_refresh_date()
 
     def init(self):
-        location_physical = self.env.ref("specific_base.stock_location_vlb")
+        # location_physical = self.env.ref("specific_base.stock_location_vlb")
+        location_physical = self.env.ref("stock.warehouse0").lot_stock_id
         self.env.cr.execute(
             "DROP MATERIALIZED VIEW IF EXISTS %s CASCADE", (AsIs(self._table),)
         )
@@ -155,9 +161,11 @@ deliveries_last AS (
         JOIN stock_location sl_src ON sm.location_id = sl_src.id
         JOIN stock_location sl_dest ON sm.location_dest_id = sl_dest.id
         JOIN product_product pp on pp.id = sm.product_id
-        JOIN cfg on cfg.abc_classification_level = coalesce(pp.abc_storage, 'c')
+        JOIN product_template pt on pp.product_tmpl_id = pt.id
+        JOIN cfg on cfg.abc_classification_level = coalesce(pt.abc_storage, 'c')
     WHERE
       sl_src.usage in ('view', 'internal')
+      AND sl_src.location_kind = cfg.stock_location_kind
       AND sl_dest.usage = 'customer'
       AND sm.priority > '0'
       AND sm.date BETWEEN cfg.date_from AND cfg.date_to
@@ -190,12 +198,11 @@ averages AS(
 -- Compute the stock by product in locations under stock, reserve or parking (VLB)
 stock_qty AS (
     SELECT sq.product_id AS pp_id,
-           sum(sq.qty) AS qty_in_stock
+           sum(sq.quantity) AS qty_in_stock
         FROM stock_quant sq
         JOIN stock_location sl
         ON sq.location_id = sl.id
-        WHERE sl.parent_left > %(location_physical_parent_left)s
-            AND sl.parent_right < %(location_physical_parent_right)s
+        WHERE sl.parent_path LIKE concat('%%/', %(location_physical_id)s, '/%%')
         GROUP BY sq.product_id
 ),
 -- Compute the standard deviation of the average daily sales count
@@ -236,9 +243,9 @@ daily_stddev AS(
         date_to,
         config_id,
         abc_classification_level,
-        picking_zone_id,
+        -- location_zone_id,
         sale_ok,
-        is_mto_product,
+        is_mto,
         sqty.qty_in_stock as qty_in_stock,
         ds.stddev_daily,
         ds.stddev_daily * cfg.safety_factor * sqrt(nrb_days_without_sat_sun) as  safety,
@@ -258,15 +265,14 @@ daily_stddev AS(
 ) WITH NO DATA;""",
             {
                 "table": AsIs(self._table),
-                "location_physical_parent_left": location_physical.parent_left,
-                "location_physical_parent_right": location_physical.parent_right,
+                "location_physical_id": AsIs(location_physical.id),
             },
         )
         self.env.cr.execute(
             "CREATE UNIQUE INDEX pk_%s ON %s (id)",
             (AsIs(self._table), AsIs(self._table)),
         )
-        for name, field in self._fields.iteritems():
+        for name, field in self._fields.items():
             if not field.index:
                 continue
             self.env.cr.execute(

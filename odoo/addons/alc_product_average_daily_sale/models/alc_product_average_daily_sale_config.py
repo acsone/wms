@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -15,7 +14,7 @@ class AlcProductAverageDailySaleConfig(models.Model):
     _description = "Average daily sales computation parameters"
 
     abc_classification_level = fields.Selection(
-        selection=ABC_SELECTION, required=True, read_only=True
+        selection=ABC_SELECTION, required=True, readonly=True
     )
     stddev_exclude_factor = fields.Float(
         string="Standard deviation exclude factor", required=True, digits=(2, 2)
@@ -29,6 +28,12 @@ class AlcProductAverageDailySaleConfig(models.Model):
             [("company_id", "=", self.env.user.company_id.id)], limit=1
         ),
         readonly=True,
+    )
+    stock_location_kind = fields.Selection(
+        selection=lambda self: self.env["stock.location"]
+        ._fields["location_kind"]
+        .selection,
+        default="zone",
     )
     period_name = fields.Selection(
         string="Period analyzed unit",
@@ -44,6 +49,4 @@ class AlcProductAverageDailySaleConfig(models.Model):
     number_days_qty_in_stock = fields.Integer(
         string="Number of days of quantities in stock", required=True, default=2
     )
-    safety_factor = fields.Float(
-        digits=(2, 2), required=True, oldname="stddev_include_factor"
-    )
+    safety_factor = fields.Float(digits=(2, 2), required=True)

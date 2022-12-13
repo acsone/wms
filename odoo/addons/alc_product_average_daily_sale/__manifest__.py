@@ -1,6 +1,5 @@
-# -*- coding: utf-8 -*-
 # Copyright 2021 ACSONE SA/NV
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 {
     "name": "Alc Product Average Daily Sale",
@@ -14,23 +13,26 @@
 
         The computation is done by a materialized view refreshed daily
         """,
-    "version": "10.0.1.0.0",
+    "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
         "sale",
-        "alc_product_abc_classification",
-        "alc_product_mto",
-        "specific_base",
+        "stock_storage_type_putaway_abc",
+        # "alc_product_abc_classification",
+        "product_abc_classification",
+        "product_route_mto",
+        "stock_location_zone",
+        # "specific_base",
     ],
     "data": [
-        "security/alc_product_average_daily_sale_config.xml",
-        "views/alc_product_average_daily_sale_config.xml",
-        "security/alc_average_daily_sale.xml",
-        "views/alc_average_daily_sale.xml",
+        # "security/alc_product_average_daily_sale_config.xml",
+        # "views/alc_product_average_daily_sale_config.xml",
+        # "security/alc_average_daily_sale.xml",
+        # "views/alc_average_daily_sale.xml",
         "data/alc_product_average_daily_sale_config.xml",
-        "data/ir_cron.xml",
+        # "data/ir_cron.xml",
     ],
-    'installable': False
+    "installable": True,
 }
