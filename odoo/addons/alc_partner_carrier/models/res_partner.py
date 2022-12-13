@@ -1,13 +1,12 @@
-# -*- coding: utf-8 -*-
 # Copyright 2021 ACSONE SA/NV
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
-from odoo import api, fields, models
+from odoo import api, fields
+
+from odoo.addons.base.models.res_partner import Partner
 
 
-class ResPartner(models.Model):
-
-    _inherit = "res.partner"
+class ResPartner(Partner):
 
     is_carrier = fields.Boolean(
         compute="_compute_is_carrier",
