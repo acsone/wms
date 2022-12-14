@@ -34,6 +34,11 @@
                         <field name="maximum_number_of_preparation_lines">
                         </field>
                     </div>
+                    <label for="group_pickings_by_partner" colspan="2" />
+                    <div colspan="2">
+                        <field name="group_pickings_by_partner">
+                        </field>
+                    </div>
                 </group>
                 <footer>
                     <button

@@ -2,6 +2,9 @@
 # Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+import math
+from collections import defaultdict
+
 from odoo import api, fields, models, tools
 
 from ..exceptions import NoPickingCandidateError, NoSuitableDeviceError
@@ -32,6 +35,11 @@ class MakePickingBatch(models.TransientModel):
         default=20,
         string="Maximum number of preparation lines for the batch",
         required=True,
+    )
+    group_pickings_by_partner = fields.Boolean(
+        default=False,
+        string="Group pickings by partner",
+        help="If set to true, all the pickings related to one partner will be put in one bin",
     )
 
     @api.multi
@@ -68,6 +76,7 @@ class MakePickingBatch(models.TransientModel):
         candidates_pickings = self._search_pickings(user=user)
         if not candidates_pickings:
             candidates_pickings = self._search_pickings()
+        candidates_pickings.sorted(lambda pick: pick.partner_id.id)
         return candidates_pickings
 
     def _compute_device_to_use(self, picking):
@@ -144,9 +153,11 @@ class MakePickingBatch(models.TransientModel):
                 raise NoSuitableDeviceError(candidates_pickings_to_batch)
             return self.env["stock.picking.wave"].browse()
 
-        selected_pickings, unselected_pickings = self._apply_limits(
-            candidates_pickings_to_batch, device
-        )
+        (
+            selected_pickings,
+            unselected_pickings,
+            volume_and_bins_by_partners,
+        ) = self._apply_limits(candidates_pickings_to_batch, device)
         if not selected_pickings:
             selected_pickings = unselected_pickings[:1]
         if not selected_pickings:
@@ -156,6 +167,11 @@ class MakePickingBatch(models.TransientModel):
         vals = self._create_batch_values(user, device, selected_pickings)
         batch = self.env["stock.picking.wave"].create(vals)
         batch._init_wave_info()
+        if self.group_pickings_by_partner:
+            wave_nbr_bins = 0
+            for partner, volume_and_bins in volume_and_bins_by_partners.items():
+                wave_nbr_bins += volume_and_bins[1]
+            batch.wave_nbr_bins = wave_nbr_bins
         return batch
 
     def _precision_weight(self):
@@ -191,6 +207,7 @@ class MakePickingBatch(models.TransientModel):
         # # - numbers of bins available is greater than 0
         # # - The device for the current picking is supposed to be
         available_nbr_bins = device.nbr_bins
+        volume_and_bins_by_partners = defaultdict(list)
         for picking in pickings:
             if not self._lock_selected_picking(picking):
                 continue
@@ -205,11 +222,21 @@ class MakePickingBatch(models.TransientModel):
             picking_device = self._compute_device_to_use(picking)
             if device != picking_device:
                 continue
-
             picking._init_nbr_bins_on_device_field(device)
-            available_bins_outreached = (
-                available_nbr_bins - picking.nbr_bins_batch_picking < 0
-            )
+            if self.group_pickings_by_partner:
+                (
+                    bins_for_pickings_by_partner,
+                    volume_and_bins_by_partners,
+                ) = self._get_nbr_bins_by_partner(
+                    picking, device, volume_and_bins_by_partners
+                )
+                available_bins_outreached = (
+                    available_nbr_bins - bins_for_pickings_by_partner < 0
+                )
+            else:
+                available_bins_outreached = (
+                    available_nbr_bins - picking.nbr_bins_batch_picking < 0
+                )
             if available_bins_outreached:
                 continue
 
@@ -245,11 +272,37 @@ class MakePickingBatch(models.TransientModel):
             total_weight += picking.total_weight_batch_picking
             total_volume += picking.total_volume_batch_picking
             total_nbr_picking_lines += picking.nbr_picking_lines
-            available_nbr_bins -= picking.nbr_bins_batch_picking
-
+            if self.group_pickings_by_partner:
+                available_nbr_bins -= bins_for_pickings_by_partner
+            else:
+                available_nbr_bins -= picking.nbr_bins_batch_picking
         selected_pickings = self.env["stock.picking"].browse(selected_picking_ids)
         unselected_pickings = pickings - selected_pickings
-        return selected_pickings, unselected_pickings
+        return selected_pickings, unselected_pickings, volume_and_bins_by_partners
+
+    def _get_nbr_bins_by_partner(self, picking, device, volume_and_bins_by_partners):
+        if picking.partner_id.id in volume_and_bins_by_partners.keys():
+            old_nb_bins = volume_and_bins_by_partners[picking.partner_id.id][1]
+            new_volume = (
+                volume_and_bins_by_partners[picking.partner_id.id][0]
+                + picking.total_volume_batch_picking
+            )
+            new_nb_bins = math.ceil(new_volume / device.volume_per_bin)
+            if new_nb_bins > old_nb_bins:
+                bins_for_pickings_by_partner = new_nb_bins - old_nb_bins
+            else:
+                bins_for_pickings_by_partner = 0
+            volume_and_bins_by_partners[picking.partner_id.id] = [
+                new_volume,
+                new_nb_bins,
+            ]
+        else:
+            bins_for_pickings_by_partner = picking.nbr_bins_batch_picking
+            volume_and_bins_by_partners[picking.partner_id.id] = [
+                picking.total_volume_batch_picking,
+                picking.nbr_bins_batch_picking,
+            ]
+        return bins_for_pickings_by_partner, volume_and_bins_by_partners
 
     def _lock_selected_picking(self, picking):
         """ Method hook called to lock the selected picking and ensure that

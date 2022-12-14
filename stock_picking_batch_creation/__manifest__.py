@@ -14,6 +14,7 @@
     "application": False,
     "installable": True,
     "depends": [
+        "base_partition",
         "product_packaging_dimension",  # OCA/product-attribute
         "product_dimension",
         "product_total_weight_from_packaging",  # OCA/product-attribute
