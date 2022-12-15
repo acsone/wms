@@ -1,13 +1,18 @@
 # Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+import logging
+
+from psycopg2.errors import ObjectNotInPrerequisiteState
 from psycopg2.extensions import AsIs
 
-from odoo import api, fields, models
+from odoo import _, api, fields, models
 
 from odoo.addons.stock_storage_type_putaway_abc.models.stock_location import (
     ABC_SELECTION,
 )
+
+_logger = logging.getLogger(__name__)
 
 
 class AlcAverageDailySale(models.Model):
@@ -39,12 +44,6 @@ class AlcAverageDailySale(models.Model):
         index=True,
     )
     nbr_sales = fields.Integer(required=True)
-    # location_zone_id = fields.Many2one(
-    #     string="Location Zone", comodel_name="stock.location", readonly=True, index=True,
-    # )
-    # location_zone_kind = fields.Selection(
-    #     selection=lambda self: self.env["stock.location"]._fields["location_kind"].selection
-    # )
     product_id = fields.Many2one(
         "product.product", "Product", required=True, index=True
     )
@@ -75,12 +74,42 @@ class AlcAverageDailySale(models.Model):
     stddev = fields.Float("Qty Standard Deviation", required=True)
     stddev_daily = fields.Float("Daily Qty Standard Deviation", required=True)
     warehouse_id = fields.Many2one(comodel_name="stock.warehouse", required=True)
+    zone_location_id = fields.Many2one(comodel_name="stock.location", index=True)
     qty_in_stock = fields.Float(
         string="Qty in stock",
         digits="Product Unit of Measure",
         help="All stock locations included (VLB), reserved product included",
         required=True,
     )
+
+    @api.model
+    def _check_view(self):
+        try:
+            self.env.cr.execute("SELECT COUNT(1) FROM %s", (AsIs(self._table),))
+            return True
+        except ObjectNotInPrerequisiteState:
+            _logger.warning(
+                _("The materialized view has not been populated. Launch the cron.")
+            )
+            return False
+        except Exception as e:
+            raise e
+
+    # pylint: disable=redefined-outer-name
+    @api.model
+    def search_read(
+        self, domain=None, fields=None, offset=0, limit=None, order=None, **read_kwargs
+    ):
+        if not self._check_view():
+            return self.browse()
+        return super().search_read(
+            domain=domain,
+            fields=fields,
+            offset=offset,
+            limit=limit,
+            order=order,
+            **read_kwargs
+        )
 
     @api.model
     def get_refresh_date(self):
@@ -101,7 +130,7 @@ class AlcAverageDailySale(models.Model):
         self.env.cr.execute("refresh materialized view %s", (AsIs(self._table),))
         self.set_refresh_date()
 
-    def init(self):
+    def _create_materialized_view(self):
         # location_physical = self.env.ref("specific_base.stock_location_vlb")
         location_physical = self.env.ref("stock.warehouse0").lot_stock_id
         self.env.cr.execute(
@@ -145,6 +174,7 @@ deliveries_last AS (
         sm.product_id,
         sm.product_uom_qty,
         sm.warehouse_id,
+        sl_src.zone_location_id,
         (avg(product_uom_qty) OVER pid
             - (stddev_samp(product_uom_qty) OVER pid * cfg.stddev_exclude_factor)
         )  as lower_bound,
@@ -165,12 +195,11 @@ deliveries_last AS (
         JOIN cfg on cfg.abc_classification_level = coalesce(pt.abc_storage, 'c')
     WHERE
       sl_src.usage in ('view', 'internal')
-      AND sl_src.location_kind = cfg.stock_location_kind
       AND sl_dest.usage = 'customer'
       AND sm.priority > '0'
       AND sm.date BETWEEN cfg.date_from AND cfg.date_to
       AND sm.state = 'done'
-      AND sm.warehouse_id is not null
+      -- AND sm.warehouse_id is not null -- Check why warehouse_id is not filled in
     WINDOW pid AS (PARTITION BY sm.product_id, sm.warehouse_id)
 ),
 
@@ -179,6 +208,7 @@ averages AS(
         concat(warehouse_id, product_id)::integer as id,
         product_id,
         warehouse_id,
+        zone_location_id,
         (avg(product_uom_qty) FILTER
             (WHERE product_uom_qty BETWEEN lower_bound AND upper_bound OR stddev = 0)
             )::numeric AS average_qty_by_sale,
@@ -193,7 +223,7 @@ averages AS(
         config_id,
         nrb_days_without_sat_sun
     FROM deliveries_last
-    GROUP BY product_id, warehouse_id, stddev, nrb_days_without_sat_sun, date_from, date_to, config_id
+    GROUP BY product_id, warehouse_id, zone_location_id, stddev, nrb_days_without_sat_sun, date_from, date_to, config_id
 ),
 -- Compute the stock by product in locations under stock, reserve or parking (VLB)
 stock_qty AS (
@@ -234,6 +264,7 @@ daily_stddev AS(
         t.id,
         t.product_id,
         t.warehouse_id,
+        t.zone_location_id,
         average_qty_by_sale,
         average_daily_sales_count,
         average_qty_by_sale * average_daily_sales_count as average_daily_qty,
@@ -288,3 +319,6 @@ daily_stddev AS(
         # refresh data asap, but not during the upgrade
         if cron:
             cron.nextcall = fields.Datetime.now()
+
+    def init(self):
+        self._create_materialized_view()

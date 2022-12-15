@@ -18,6 +18,7 @@ test = [
   "pygments",
   "freezegun",
   "odoo-test-helper",
+  "python-dateutil",
 ]
 dev = [
   "ipython",
