@@ -54,11 +54,15 @@ class ClusterPicking(Component):
                     batch, message=self.msg_store.operation_not_found()
                 )
             lot = self.env["stock.production.lot"].browse(lot_id) if lot_id else None
-
-            if not operation.picking_id.partner_id.no_labels_food_products:
-                self._print_picking_food_product_labels(
-                    operation, quantity=quantity, lot_id=lot
-                )
+            do_not_print_food_labels = (
+                operation.picking_id.partner_id.no_labels_food_products
+            )
+            self._print_picking_food_product_labels(
+                operation,
+                quantity=quantity,
+                lot_id=lot,
+                do_not_print_food_labels=do_not_print_food_labels,
+            )
         return result
 
     def _print_picking_med_products_labels(self, picking, package):
@@ -71,13 +75,18 @@ class ClusterPicking(Component):
             packages=package,
         )
 
-    def _print_picking_food_product_labels(self, operation, quantity=1, lot_id=None):
+    def _print_picking_food_product_labels(
+        self, operation, quantity=1, lot_id=None, do_not_print_food_labels=False
+    ):
         # report template relies on quantity_done, but it might not be computed yet
         # when the report is generated.
         # bug observed by Jacques-Etienne and Lindsay who might know more.
-        operation.sudo().print_food_product_label(
-            printer_id=self.shopfloor_user.printing_product_label_printer_id.id,
-            quantity=1,
-            quantity_done=quantity,
-            lot_id=lot_id,
-        )
+        if not operation.picking_id.printed_once:
+            operation.sudo().print_food_product_label(
+                printer_id=self.shopfloor_user.printing_product_label_printer_id.id,
+                quantity=1,
+                quantity_done=quantity,
+                lot_id=lot_id,
+                do_not_print_food_labels=do_not_print_food_labels,
+            )
+        operation.picking_id.printed_once = True

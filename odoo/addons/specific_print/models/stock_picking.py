@@ -12,6 +12,10 @@ class StockPicking(models.Model):
     _inherit = "stock.picking"
 
     checksum = fields.Char("Checksum", copy=False)
+    printed_once = fields.Boolean(
+        default=False,
+        help="Technical field to see if labels for food products in case of wholesaler have already been printed once since we only need one label",
+    )
 
     @api.multi
     def print_products_label(self, printer_id=False, quantity=1, packages=None):
