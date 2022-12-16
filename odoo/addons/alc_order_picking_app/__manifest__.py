@@ -13,6 +13,7 @@
         "alc_partner_carrier",
         "base_delivery_carrier_label",
         "product_total_weight_from_packaging",
+        "shipment_advice",
         "stock_dynamic_routing",
         "stock_move_common_dest",
         "stock_picking_completion_info",
