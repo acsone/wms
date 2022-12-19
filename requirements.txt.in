@@ -73,6 +73,8 @@ odoo-addon-stock-putaway_hook @ git+https://github.com/acsone/stock-logistics-wo
 odoo-addon-stock-quant-package-product-packaging @ git+https://github.com/acsone/stock-logistics-workflow.git@16.0-mig-stock_quant_package_product_packaging-dro#subdirectory=setup/stock_quant_package_product_packaging
 # https://github.com/OCA/stock-logistics-workflow/pull/1104 - [MIG] stock_quant_package_dimension: Migration to 16.0 
 odoo-addon-stock-quant-package-dimension @ git+https://github.com/acsone/stock-logistics-workflow.git@16.0-mig-stock_quant_package_dimension-dro#subdirectory=setup/stock_quant_package_dimension
+# https://github.com/OCA/stock-logistics-workflow/pull/1163 - [ADD] stock_grn
+odoo-addon-stock-grn @ git+https://github.com/acsone/stock-logistics-workflow.git@16.0-add-stock_grn-hda#subdirectory=setup/stock_grn
 
 # server-tools
 odoo-addon-session-db @ git+https://github.com/acsone/server-tools.git@16.0-session_db-sbi#subdirectory=setup/session_db

@@ -357,7 +357,6 @@ exclude:  |
   ^odoo/addons/stock_constraint/|
   ^odoo/addons/stock_delivery_note/|
   ^odoo/addons/stock_expired/|
-  ^odoo/addons/stock_grn/|
   ^odoo/addons/stock_groupbypartner/|
   ^odoo/addons/stock_inventory_constrains/|
   ^odoo/addons/stock_location_act_as_view/|

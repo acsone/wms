@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+  <record model="ir.ui.view" id="view_grn_form">
+    <field name="name">stock.grn.form (in alc_stock_grn_partner_carrier)</field>
+    <field name="model">stock.grn</field>
+    <field name="inherit_id" ref="stock_grn.view_grn_form" />
+    <field name="arch" type="xml">
+      <field name="date" position="after">
+          <field name="carrier_category_id" invisible="1" />
+      </field>
+      <field name="carrier_id" position="attributes">
+        <attribute name="context">
+            {'default_customer': False, 'default_is_carrier': True, 'default_category_id': [(4,carrier_category_id)], 'search_default_is_carrier': 1}
+        </attribute>
+      </field>
+   </field>
+  </record>
+</odoo>
