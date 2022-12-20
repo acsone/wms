@@ -39,6 +39,7 @@ odoo-addon-base-attachment-object-storage @ git+https://github.com/acsone/odoo-c
 odoo-addon-base-delivery-carrier-label @ git+https://github.com/acsone/delivery-carrier.git@98d8844e5be456e1189ea41401fc2f957f221165#subdirectory=setup/base_delivery_carrier_label
 odoo-addon-base-report-to-printer @ git+https://github.com/acsone/report-print-send.git@220cf83641f885356e0b159edfe3f51bf2c7d709#subdirectory=setup/base_report_to_printer
 odoo-addon-delivery-carrier-info==16.0.1.0.0.2
+odoo-addon-delivery-carrier-max-weight-constraint @ git+https://github.com/acsone/delivery-carrier.git@fda42e202dadc910841eb276721409419d26a5c7#subdirectory=setup/delivery_carrier_max_weight_constraint
 odoo-addon-product-abc-classification @ git+https://github.com/acsone/product-attribute.git@cc97df93b3f97e947c2ed38cc6232c0a642f65e1#subdirectory=setup/product_abc_classification
 odoo-addon-product-abc-classification-sale-stock @ git+https://github.com/acsone/product-attribute.git@f9690a9c1f19ece371effeb200a417e96fddb158#subdirectory=setup/product_abc_classification_sale_stock
 odoo-addon-product-dimension @ git+https://github.com/acsone/product-attribute.git@36e6216efe4a7cbff6346f36e0d5b80d7d700705#subdirectory=setup/product_dimension
