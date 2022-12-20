@@ -4,7 +4,7 @@
 {
     "name": "Alc Putaway App",
     "description": """
-        Allows to collect all modules for putaway application""",
+        Gather all putaway related modules for Alcyon""",
     "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",

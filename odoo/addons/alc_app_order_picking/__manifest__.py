@@ -4,7 +4,7 @@
 {
     "name": "Alc Order Picking App",
     "description": """
-        Order Picking App""",
+        Gather all order picking related modules for Alcyon""",
     "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
