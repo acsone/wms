@@ -9,6 +9,3 @@ from odoo import fields, models
 
 class StockPickingType(models.Model):
     _inherit = "stock.picking.type"
-
-    groupbypartner = fields.Boolean("Use existing picking having same partner")
-    groupbypartner_maxweight = fields.Integer("Max Weight")

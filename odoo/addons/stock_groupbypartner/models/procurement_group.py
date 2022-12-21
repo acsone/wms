@@ -9,15 +9,18 @@ from odoo import fields, models
 class ProcurementGroup(models.Model):
     _inherit = "procurement.group"
 
-    carrier_id = fields.Many2one(
-        comodel_name="delivery.carrier",
-        string="Delivery Method",
-        help="The partner shipping on the SO",
-    )
-    customer_id = fields.Many2one(
-        comodel_name="res.partner",
-        string="Customer",
-        help="The partner customer on the SO. In the same time, the partner_id "
-        "is the partner_shipping_id from the SO. This fiels help us to "
-        "keep the information of the real/final customer from the SO",
-    )
+    # This is not necessary anymore as we have the link to sale orders
+    # carrier_id = fields.Many2one(
+    #     comodel_name="delivery.carrier",
+    #     string="Delivery Method",
+    #     help="The partner shipping on the SO",
+    # )
+    #
+    # NOTE: This has been implemented in stock_procurement_customer
+    # customer_id = fields.Many2one(
+    #     comodel_name="res.partner",
+    #     string="Customer",
+    #     help="The partner customer on the SO. In the same time, the partner_id "
+    #     "is the partner_shipping_id from the SO. This fiels help us to "
+    #     "keep the information of the real/final customer from the SO",
+    # )
