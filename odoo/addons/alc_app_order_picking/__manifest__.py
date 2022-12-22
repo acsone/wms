@@ -12,6 +12,7 @@
     "depends": [
         "alc_partner_carrier",
         "base_delivery_carrier_label",
+        "delivery_carrier_max_weight_constraint",
         "product_total_weight_from_packaging",
         "shipment_advice",
         "stock_dynamic_routing",
