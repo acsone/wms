@@ -39,7 +39,7 @@ The main page for documentation is at:
 
 ### Catalog
 
-[Documentation](https://odoo-alcyon-test.acsone-k8s-test.acsone.eu/api-docs?urls.primaryName=shopinvader_jwt%3A%20catalog)
+[Documentation](https://erp.alcyonbelux.be/api-docs?urls.primaryName=shopinvader_jwt%3A%20catalog)
 
 This service offers a `/` endpoint that returns the paginated catalog, 
 and can be filtered by AMM code, name or reference.
@@ -47,7 +47,7 @@ By passing any of these fields with `__ilike` it is possible to search on a subs
 
 ### Discounts
 
-[Documentation](https://odoo-alcyon-test.acsone-k8s-test.acsone.eu/api-docs?urls.primaryName=shopinvader_jwt%3A%20discounts)
+[Documentation](https://erp.alcyonbelux.be/api-docs?urls.primaryName=shopinvader_jwt%3A%20discounts)
 
 This service offers a `/` endpoint that returns all the current and planned discounts.
 It is possible to look up discounts for a given product by passing the product reference.
@@ -57,7 +57,7 @@ price (e.g. 10%), or promotions, which give additional products when buying a ce
 
 ### Cart
 
-[Documentation](https://odoo-alcyon-test.acsone-k8s-test.acsone.eu/api-docs?debug=1&urls.primaryName=shopinvader_jwt%2Fv2%3A%20cart)
+[Documentation](https://erp.alcyonbelux.be/api-docs?debug=1&urls.primaryName=shopinvader_jwt%2Fv2%3A%20cart)
 
 This service offers different endpoints to interact with the current cart.
 There can be only one cart at a given time.
@@ -73,14 +73,14 @@ In that case there is no uuid for safe retries, and it is not possible to remove
 
 ### Orders
 
-[Documentation](https://odoo-alcyon-test.acsone-k8s-test.acsone.eu/api-docs?urls.primaryName=shopinvader_jwt%3A%20orders)
+[Documentation](https://erp.alcyonbelux.be/api-docs?urls.primaryName=shopinvader_jwt%3A%20orders)
 
 This service offers a `/` endpoint that returns the orders.
 It is possible to filter them by date, channel (phone, mail, fax, web).
 
 ### Deliveries
 
-[Documentation](https://odoo-alcyon-test.acsone-k8s-test.acsone.eu/api-docs?urls.primaryName=shopinvader_jwt%3A%20pickings)
+[Documentation](https://erp.alcyonbelux.be/api-docs?urls.primaryName=shopinvader_jwt%3A%20pickings)
 
 This service offers two endpoints of interest:
 - `/done` returns delivered quantities
@@ -88,7 +88,7 @@ This service offers two endpoints of interest:
 
 ### Sale Statistics
 
-[Documentation](https://odoo-alcyon-test.acsone-k8s-test.acsone.eu/api-docs?urls.primaryName=shopinvader_jwt%3A%20sale_statistics)
+[Documentation](https://erp.alcyonbelux.be/api-docs?urls.primaryName=shopinvader_jwt%3A%20sale_statistics)
 
 This service offers one main endpoint of interest, `/top_ordered`,
 which returns the most ordered product along the last 12 months.
