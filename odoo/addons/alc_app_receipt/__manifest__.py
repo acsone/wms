@@ -10,5 +10,7 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "application": True,
-    "depends": [],
+    "depends": [
+        "alc_stock_grn_partner_carrier",
+    ],
 }
