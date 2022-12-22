@@ -685,11 +685,8 @@ class ClusterPicking(Component):
             )
 
         # the scanned package can contain only move lines of the same picking
-        if bin_package.quant_ids or any(
-            ml.picking_id != operation.picking_id
-            for ml in bin_package.planned_pack_operation_ids.filtered(
-                lambda x: x.state not in ("done", "cancel")
-            )
+        if bin_package.quant_ids or self._check_picking_condition(
+            bin_package, operation
         ):
             return self._response_for_scan_destination(
                 operation,
@@ -722,6 +719,16 @@ class ClusterPicking(Component):
             # split right now
             force_operation=new_line,
         )
+
+    def _check_picking_condition(self, bin_package, operation):
+        if any(
+            ml.picking_id != operation.picking_id
+            for ml in bin_package.planned_pack_operation_ids.filtered(
+                lambda x: x.state not in ("done", "cancel")
+            )
+        ):
+            return True
+        return False
 
     def _are_all_dest_location_same(self, batch):
         lines_to_unload = self._lines_to_unload(batch)
