@@ -12,6 +12,7 @@
     "website": "https://acsone.eu/",
     "depends": [
         "server_environment_files",
+        "storage_file_url_store",
         "alc_eshop_app",
         "alc_migrate",  # dummy module to force pre-migrations
         "alc_partner_delivery_window_import",
