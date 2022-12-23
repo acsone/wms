@@ -13,6 +13,7 @@
     "depends": [
         "alc_shopfloor",
         "alc_shopfloor_cluster_picking",
+        "alc_shopfloor_cluster_picking_by_partners",
         "alc_shopfloor_cluster_picking_out_location",
         "alc_shopfloor_cluster_picking_printing",
         "alc_shopfloor_cluster_picking_stock_issue_all_products",
