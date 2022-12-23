@@ -93,7 +93,7 @@ msgid "Goods Received Note"
 msgstr "Accusé de réception de marchandises"
 
 #. module: stock_grn
-#: model:ir.model.fields,field_description:stock_grn.field_stock_grn_type_id_10664
+#: model:ir.model.fields,field_description:stock_grn.field_stock_grn_type_id_10665
 #, fuzzy
 msgid "Grn Type"
 msgstr "Type"
