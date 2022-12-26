@@ -55,12 +55,8 @@ class ReceptionPharmacy(models.Model):
 
         proc_group = self.env["procurement.group"]
         proc_order = self.env["procurement.order"]
-        lot = self.env["stock.production.lot"]
         move = self.env["stock.move"]
-        sequence = self.env["ir.sequence"]
-
         warehouse = self.env.ref("stock.warehouse0")
-
         carrier = self.env.ref("__setup__.deliver_carrier_alcyon")
         if not warehouse:
             raise UserError(_("Warehouse is missing"))
@@ -73,27 +69,13 @@ class ReceptionPharmacy(models.Model):
 
         new_picking_ids = []
         for line in self.line_ids:
-            lot_vals = {
-                "product_id": self.product_id.id,
-                "name": sequence.next_by_code("stock.lot.pharmacy"),
-            }
-
-            # HACK HACK HACK for fields declared in specific_Stock.... TO BE
-            # REFACTORED!!!!!!
-            if "voice_identifier" in lot._fields:
-                lot_vals["voice_identifier"] = "ABC"
-            if "checksum" in lot._fields:
-                lot_vals["checksum"] = "123"
-            # END HACK
-            lot_id = lot.create(lot_vals)
-
             # Put the lot in stock
             line.reception_move_id = move.create(
                 {
                     "name": "Pharmacy",
                     "product_id": self.product_id.id,
                     "product_uom": self.product_id.uom_id.id,
-                    "restrict_lot_id": lot_id.id,
+                    "restrict_lot_id": line.lot_id.id,
                     "product_uom_qty": line.product_qty,
                     "location_id": loc_supplier.id,
                     "location_dest_id": line.bin_id.id,
@@ -110,7 +92,7 @@ class ReceptionPharmacy(models.Model):
                 }
             )
             proc_order_vals = self._prepare_procurement_order(
-                line, lot_id.id, warehouse.id, loc_customer.id, group_id.id
+                line, line.lot_id.id, warehouse.id, loc_customer.id, group_id.id
             )
             line.procurement_id = proc_order.create(proc_order_vals)
             # procurement_autorun_defer
@@ -170,3 +152,9 @@ class ReceptionPharmacy(models.Model):
         if "restrict_lot_id" in proc_order._fields:
             proc_order_vals["restrict_lot_id"] = lot_id
         return proc_order_vals
+
+    def button_receive(self):
+        self.ensure_one()
+        return self.env.ref(
+            "alc_reception_pharmacy.receive_pharmacy_products_act_window"
+        ).read()[0]

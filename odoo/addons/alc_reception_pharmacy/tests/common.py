@@ -86,3 +86,47 @@ class CommonReceptionPharmacyCase(SavepointCase):
             }
         )
         cls.delivery_round_1.itinerary_ids = cls.itinerary
+
+    @classmethod
+    def _create_and_prepare_so(cls):
+        cls.so1 = cls.env["sale.order"].create(
+            {
+                "partner_id": cls.partner.id,
+                "warehouse_id": cls.warehouse_1.id,
+                "carrier_id": cls.carrier.id,
+                "partner_invoice_id": cls.partner.id,
+                "partner_shipping_id": cls.partner.id,
+                "order_line": [
+                    (
+                        0,
+                        0,
+                        {
+                            "name": cls.product2.name,
+                            "product_id": cls.product2.id,
+                            "product_uom_qty": 15.0,
+                            "product_uom": cls.product2.uom_id.id,
+                        },
+                    )
+                ],
+            }
+        )
+        cls.so1.action_confirm()
+
+        cls.picking = cls.so1.mapped("picking_ids").filtered(
+            lambda p: p.picking_type_subcode == "PICK"
+        )
+
+        cls.picking.action_confirm()
+        cls.picking.action_assign()
+        for pack_op in cls.picking.pack_operation_ids:
+            pack_op.qty_done = pack_op.product_qty
+        cls.picking.action_done()
+        cls.shipping = cls.so1.mapped("picking_ids").filtered(
+            lambda p: p.picking_type_code == "outgoing"
+        )
+
+        cls.shipping.action_confirm()
+        cls.shipping.action_assign()
+        for pack_op in cls.shipping.pack_operation_ids:
+            pack_op.qty_done = pack_op.product_qty
+        cls.shipping.delivery_round_id = cls.delivery_round_1.id
