@@ -38,6 +38,7 @@ class ResPartner(models.Model):
             SELECT res_partner.id, round_template.id
             FROM res_partner JOIN round_template ON
             ST_contains(round_template.geo_polygon_shape, res_partner.geo_point)
+            WHERE round_template.active = true
             """
         )
 
