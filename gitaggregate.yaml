@@ -45,3 +45,12 @@
     - oca 10.0
     - oca refs/pull/281/head # backport auth_jwt
   target: origin 10.0-alc_master
+
+./src/odoo-cloud-platform:
+  remotes:
+    camptocamp: https://github.com/camptocamp/odoo-cloud-platform.git
+    origin: ssh://git@github.com/acsone/odoo-cloud-platform.git
+  merges:
+    - camptocamp 10.0
+    - origin 10.0-attachment_s3-subdirs-sbi
+  target: origin 10.0-alc_master

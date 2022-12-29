@@ -5,43 +5,38 @@ It is based on the _force_storage_to_object_storage() function of attachment_str
 modified to commit regularly and not delete files from the filestore.
 """
 
-import logging
+# pylint: disable=print-used
+# pylint: disable=import-outside-toplevel
+
+import multiprocessing
+import os
+import signal
+import traceback
 
 import psycopg2
 
-_logger = logging.getLogger(__name__)
+dbname = os.environ["DB_NAME"]
 
 
-# pylint: disable=self-assigning-variable
-# pylint: disable=undefined-variable
-env = env  # noqa
+def chunks(l, n):
+    for i in range(0, len(l), n):
+        yield l[i : i + n]
 
 
-def _force_storage_to_object_storage():
-    _logger.info("migrating files to the object storage")
-    storage = env["ir.attachment"]._storage()
-    # The weird "res_field = False OR res_field != False" domain
-    # is required! It's because of an override of _search in ir.attachment
-    # which adds ('res_field', '=', False) when the domain does not
-    # contain 'res_field'.
-    # https://github.com/odoo/odoo/blob/9032617120138848c63b3cfa5d1913c5e5ad76db/odoo/addons/base/ir/ir_attachment.py#L344-L347
-    domain = [
-        "!",
-        ("store_fname", "=like", "{}://%".format(storage)),
-        "|",
-        ("res_field", "=", False),
-        ("res_field", "!=", False),
-    ]
-    # We do a copy of the environment so we can workaround the cache issue
-    # below. We do not create a new cursor by default because it causes
-    # serialization issues due to concurrent updates on attachments during
-    # the installation
-    with env["ir.attachment"].do_in_new_env() as new_env:
-        model_env = new_env["ir.attachment"]
-        ids = model_env.search(domain).ids
-        for i, attachment_id in enumerate(ids):
+def _migrate_batch(attachment_ids):
+    print("migrating attachments", attachment_ids)
+    from click_odoo import OdooEnvironment
+    from odoo import api
+
+    @api.model
+    def _storage(self):
+        return "s3"
+
+    with OdooEnvironment(database=dbname) as env:
+        env["ir.attachment"]._patch_method("_storage", _storage)
+        for attachment_id in attachment_ids:
             try:
-                with new_env.cr.savepoint():
+                with env.cr.savepoint():
                     # check that no other transaction has
                     # locked the row, don't send a file to storage
                     # in that case
@@ -59,19 +54,46 @@ def _force_storage_to_object_storage():
                     # each iteration of the loop. The former issue
                     # being that it reads the content of the file of
                     # ALL the attachments on each loop.
-                    new_env.clear()
-                    attachment = model_env.browse(attachment_id)
+                    env.clear()
+                    attachment = env["ir.attachment"].browse(attachment_id)
+                    attachment_path = attachment._full_path(attachment.store_fname)
+                    if not os.path.exists(attachment_path):
+                        print("File", attachment.store_fname, "does not exist")
+                        continue
                     attachment._move_attachment_to_store()
-                if (i + 1) % 100 == 0:
-                    _logger.info(
-                        "migrated %s/%s attachments to the object storage",
-                        i + 1,
-                        len(ids),
-                    )
-                    new_env.cr.commit()
             except psycopg2.OperationalError:
-                _logger.error("Could not migrate attachment %s to S3", attachment_id)
+                print("Could not migrate attachment", attachment_id, "to s3")
+            except Exception:
+                traceback.print_exc()
+                raise
+
+
+def _migrate():
+    pool = multiprocessing.Pool(5)
+
+    from click_odoo import OdooEnvironment
+
+    with OdooEnvironment(dbname) as env:
+        print("migrating files to the s3 object storage")
+        # The weird "res_field = False OR res_field != False" domain
+        # is required! It's because of an override of _search in ir.attachment
+        # which adds ('res_field', '=', False) when the domain does not
+        # contain 'res_field'.
+        # https://github.com/odoo/odoo/blob/9032617120138848c63b3cfa5d1913c5e5ad76db/odoo/addons/base/ir/ir_attachment.py#L344-L347
+        domain = [
+            "!",
+            ("store_fname", "=like", "s3://%"),
+            "|",
+            ("res_field", "=", False),
+            ("res_field", "!=", False),
+        ]
+        attachment_ids = env["ir.attachment"].search(domain, order="create_date").ids
+        pool.map(_migrate_batch, chunks(attachment_ids, 100))
+        pool.close()
+        pool.join()
 
 
 if __name__ == "__main__":
-    _force_storage_to_object_storage()
+    signal.signal(signal.SIGINT, signal.SIG_DFL)
+    os.environ["ODOO_LOGGING_JSON"] = ""
+    _migrate()
