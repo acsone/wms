@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2016 Camptocamp SA
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
@@ -9,7 +8,7 @@ from odoo.tests.common import SavepointCase
 class PricelistDiscountCase(SavepointCase):
     @classmethod
     def setUpClass(cls):
-        super(PricelistDiscountCase, cls).setUpClass()
+        super().setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
 
         cls.env.user.company_id.tax_calculation_rounding_method = "round_globally"

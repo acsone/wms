@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2016 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -264,8 +263,7 @@ class TestPricelistDiscount(PricelistDiscountCase):
         self.assertEqual(86.4, invoice.amount_tax)
 
     def test_coverage(self):
-        """ Test special cases for coverage.
-        """
+        """Test special cases for coverage."""
 
         # Supplier promotion 100%
         self.supplierinfo1.discount_sale = 100
@@ -317,7 +315,7 @@ class TestPricelistDiscount(PricelistDiscountCase):
         self.assertEqual(self.discount_pricelist_id, self.sale.discount_pricelist_ids)
 
     def test_check_dates(self):
-        """ Test exceptions with promotion dates """
+        """Test exceptions with promotion dates."""
 
         ProductSupplierinfo = self.env["product.supplierinfo"]
         ProductSupplierinfo.search(
@@ -486,7 +484,8 @@ class TestPricelistDiscount(PricelistDiscountCase):
             )
 
     def test_select_seller(self):
-        """ Test the method _select_seller_for_sale
+        """Test the method _select_seller_for_sale.
+
         and _select_seller_for_sale.
 
         Default price: 100€

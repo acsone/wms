@@ -42,9 +42,6 @@
       <label for="discount3" position="attributes">
         <attribute name="string">Discount (%)</attribute>
       </label>
-      <div name="discoun3" position="attributes">
-        <attribute name="string">Discount (%)</attribute>
-      </div>
       <xpath expr="//tree/field[@name='discounting_type']" position="after">
         <field name="discount_item_id" invisible="1" />
         <field name="state" invisible="1" />

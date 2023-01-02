@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -10,7 +9,7 @@ class ProductPricelistItem(models.Model):
 
     @api.model
     def _get_discount_item_id(self, product, date, qty=1):
-        """Returns the id of the best discount item"""
+        """Returns the id of the best discount item."""
         discount_item_id = False
         price_categ_id = product.price_category_id.id
         subquery = " OR item.price_category_id = %(price_categ_id)s "

@@ -366,7 +366,6 @@ exclude = [
   'odoo/addons/partner_archive_new_partner/*',
   'odoo/addons/partner_schedule/*',
   'odoo/addons/price_compute/*',
-  'odoo/addons/pricelist_discount/*',
   'odoo/addons/pricelist_role_name/*',
   'odoo/addons/procurement_sale/*',
   'odoo/addons/product_additional/*',
