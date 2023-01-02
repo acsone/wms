@@ -10,7 +10,6 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        "base_cached_xmlid",
         "product_multi_category",
         "sale",  # because of the view menu
     ],

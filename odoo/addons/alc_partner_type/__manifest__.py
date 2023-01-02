@@ -11,7 +11,6 @@
     "website": "https://acsone.eu/",
     "depends": [
         "alc_product_pharmacy",
-        "base_cached_xmlid",
         "base_sparse_field_list_support",
     ],
     "application": False,
