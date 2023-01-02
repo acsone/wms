@@ -14,12 +14,16 @@
         # Odoo
         "sale",
         # OCA
+        # OCA/sale-workflow
         "sale_triple_discount",
         "product_price_category",
+        # OCA/product-attribute
+        "product_manufacturer",
         # ALC
         "alc_product_category_data",
         "alc_product_pricelist_data",
         "alc_product_category_business_unit",
         "alc_product_category_property",
+        "alc_product_pharmacy",
     ],
 }

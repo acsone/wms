@@ -1,15 +1,16 @@
-# -*- coding: utf-8 -*-
 # Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import re
 
-from odoo import _, api, fields, models
+from odoo import _, api, fields
+
+from odoo.addons.product.models.product_template import (
+    ProductTemplate as ProductTemplateBase,
+)
 
 
-class ProductTemplate(models.Model):
-
-    _inherit = "product.template"
+class ProductTemplate(ProductTemplateBase):
 
     cnk_code = fields.Char(string="CNK", copy=False)
 
@@ -20,16 +21,24 @@ class ProductTemplate(models.Model):
     belgium_only = fields.Boolean(string="Belgium only")
 
     is_human = fields.Boolean(
-        string="Human", compute="_compute_category_attributes", store=True,
+        string="Human",
+        compute="_compute_category_attributes",
+        store=True,
     )
     is_food = fields.Boolean(
-        string="Food", compute="_compute_category_attributes", store=True,
+        string="Food",
+        compute="_compute_category_attributes",
+        store=True,
     )
     is_equipment = fields.Boolean(
-        string="Equipment", compute="_compute_category_attributes", store=True,
+        string="Equipment",
+        compute="_compute_category_attributes",
+        store=True,
     )
     is_meds = fields.Boolean(
-        string="Medicine", compute="_compute_category_attributes", store=True,
+        string="Medicine",
+        compute="_compute_category_attributes",
+        store=True,
     )
     is_narcotic_reg = fields.Boolean(
         string="Narcotics (Regular)",
@@ -42,13 +51,19 @@ class ProductTemplate(models.Model):
         store=True,
     )
     is_psychotropic = fields.Boolean(
-        string="Psychotropic", compute="_compute_category_attributes", store=True,
+        string="Psychotropic",
+        compute="_compute_category_attributes",
+        store=True,
     )
     is_pharmaceutical = fields.Boolean(
-        string="Parapharmaceutical", compute="_compute_category_attributes", store=True,
+        string="Parapharmaceutical",
+        compute="_compute_category_attributes",
+        store=True,
     )
     is_import = fields.Boolean(
-        string="Importation", compute="_compute_category_attributes", store=True,
+        string="Importation",
+        compute="_compute_category_attributes",
+        store=True,
     )
     is_vt_be = fields.Boolean(
         string="Belgian Veterinaries",
@@ -69,15 +84,16 @@ class ProductTemplate(models.Model):
         ),
     ]
 
-    @api.model
-    def create(self, vals):
-        vals = ProductTemplate._remove_spaces_from_cnk(vals)
-        return super(ProductTemplate, self).create(vals)
+    @api.model_create_multi
+    def create(self, vals_list):
+        vals_list = [
+            ProductTemplate._remove_spaces_from_cnk(vals) for vals in vals_list
+        ]
+        return super().create(vals_list)
 
-    @api.multi
     def write(self, vals):
         vals = ProductTemplate._remove_spaces_from_cnk(vals)
-        return super(ProductTemplate, self).write(vals)
+        return super().write(vals)
 
     @staticmethod
     def _remove_spaces_from_cnk(vals):
