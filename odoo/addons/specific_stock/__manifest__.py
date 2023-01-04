@@ -28,7 +28,7 @@
         "specific_purchase",
         "stock",
         "stock_available_immediately",
-        "stock_expired",
+        # TODO: has been removed "stock_expired",
         "stock_groupbypartner",
         "stock_inventory_products",
         "stock_location",
