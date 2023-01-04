@@ -306,7 +306,6 @@ exclude:  |
   ^odoo/addons/mixin_user_id/|
   ^odoo/addons/paginated_service_mixin/|
   ^odoo/addons/partner_archive_new_partner/|
-  ^odoo/addons/partner_delivery/|
   ^odoo/addons/partner_schedule/|
   ^odoo/addons/price_compute/|
   ^odoo/addons/pricelist_discount/|
