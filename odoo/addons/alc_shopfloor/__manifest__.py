@@ -34,7 +34,7 @@
         "stock_helper",
         # alcyon
         "alc_stock_move_operation",
-        "stock_operation_recompute",
+        # TODO: has been replaced by STD "stock_operation_recompute",
         "stock_lot_loss",
     ],
     "data": [
