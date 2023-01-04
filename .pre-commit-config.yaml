@@ -245,7 +245,6 @@ exclude:  |
   ^odoo/addons/alc_stock_picking_gls_check_validation/|
   ^odoo/addons/alc_stock_picking_no_pack_in_pack/|
   ^odoo/addons/alc_stock_picking_number_package/|
-  ^odoo/addons/alc_stock_picking_package/|
   ^odoo/addons/alc_stock_picking_type_locking/|
   ^odoo/addons/alc_stock_picking_wave_display/|
   ^odoo/addons/alc_stock_picking_wave_release_pickings/|
