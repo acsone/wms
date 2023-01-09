@@ -39,6 +39,12 @@ class SaleOrderLine(models.Model):
             line.apb_ids = apb_ids
             line.amount_contribution = amount_contribution
 
+    def _prepare_invoice_line(self, qty):
+        res = super(SaleOrderLine, self)._prepare_invoice_line(qty)
+        # Remove warnings from the invoice line description. Just keep the product name
+        res["name"] = self.product_id.name
+        return res
+
 
 class SaleOrder(models.Model):
     _name = "sale.order"

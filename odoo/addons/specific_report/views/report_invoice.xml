@@ -122,7 +122,7 @@
                   <span t-field="line.product_id.default_code" />
                 </td>
                 <td class="text-left">
-                  <span t-field="line.product_id.name" />
+                  <span t-field="line.name" />
                 </td>
                 <td>
                   <span t-esc="int(line.quantity)" />
