@@ -15,6 +15,7 @@ def migrate(cr, version):
         "alc_stock_picking_package",
         "alc_stock_picking_policy_block",
         "alc_stock_storage_type_fixed_location",
+        "partner_delivery",
         "stock_inventory_controller",
         "stock_inventory_products",
         "stock_location",
