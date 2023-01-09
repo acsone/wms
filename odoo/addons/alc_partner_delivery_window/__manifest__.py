@@ -10,7 +10,10 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["partner_delivery", "sales_team"],
+    "depends": [
+        # TODO: has been removed "partner_delivery",
+        "sales_team"
+    ],
     "data": [
         "data/alc_delivery_week_day.xml",
         "security/alc_delivery_week_day.xml",
