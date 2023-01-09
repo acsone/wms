@@ -357,7 +357,6 @@ exclude:  |
   ^odoo/addons/stock_location_act_as_view/|
   ^odoo/addons/stock_lot_loss/|
   ^odoo/addons/stock_lot_update/|
-  ^odoo/addons/stock_operation_recompute/|
   ^odoo/addons/stock_orderpoint_product/|
   ^odoo/addons/stock_picking_backorder/|
   ^odoo/addons/stock_picking_fillwithstock/|
