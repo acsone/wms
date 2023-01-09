@@ -153,7 +153,6 @@ exclude:  |
   ^odoo/addons/alc_product_mto/|
   ^odoo/addons/alc_product_packaging_stock_reserve/|
   ^odoo/addons/alc_product_pharmacy/|
-  ^odoo/addons/alc_product_picking_zone/|
   ^odoo/addons/alc_product_promoted_links/|
   ^odoo/addons/alc_product_promotion_mailing/|
   ^odoo/addons/alc_product_promotion_subscription/|
