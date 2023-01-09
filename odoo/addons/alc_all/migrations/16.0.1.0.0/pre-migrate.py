@@ -17,6 +17,7 @@ def migrate(cr, version):
         "alc_stock_storage_type_fixed_location",
         "partner_delivery",
         "partner_helper",
+        "product_packaging_barcode",
         "specific_zetes",
         "stock_expired",
         "stock_inventory_controller",
