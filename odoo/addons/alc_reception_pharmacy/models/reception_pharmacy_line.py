@@ -8,6 +8,7 @@ from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 
 import odoo.addons.decimal_precision as dp
+from odoo.addons.specific_print.utils import hw_print
 
 
 class ReceptionPharmacyLine(models.Model):
@@ -44,6 +45,7 @@ class ReceptionPharmacyLine(models.Model):
         related="customer_id.partner_shipping_id",
         readonly=True,
     )
+    lot_id = fields.Many2one("stock.production.lot", "Lot")
 
     @api.constrains("customer_id")
     def _check_customer_id(self):
@@ -54,3 +56,14 @@ class ReceptionPharmacyLine(models.Model):
                         rec.partner_shipping_id.name
                     )
                 )
+
+    def print_reception_pharmacy_label(self, printer=False):
+        self.ensure_one()
+        if not printer:
+            printer = self.env.user.printing_pharmacy_reception_printer_id
+        hw_print(
+            self,
+            "alc_reception_pharmacy.report_pharmacy_lot_label",
+            qty=1,
+            printer_id=printer.id,
+        )
