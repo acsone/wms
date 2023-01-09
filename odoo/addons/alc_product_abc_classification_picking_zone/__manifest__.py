@@ -12,7 +12,6 @@
     "website": "https://acsone.eu/",
     "depends": [
         "alc_product_mto",
-        "alc_product_picking_zone",
         "product_abc_classification_base",
         "web_m2x_options",
     ],
