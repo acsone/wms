@@ -18,6 +18,7 @@ def migrate(cr, version):
         "partner_delivery",
         "partner_helper",
         "specific_zetes",
+        "stock_expired",
         "stock_inventory_controller",
         "stock_inventory_products",
         "stock_location",
