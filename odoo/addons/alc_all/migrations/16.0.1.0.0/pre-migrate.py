@@ -24,6 +24,7 @@ def migrate(cr, version):
         "stock_location",
         "stock_location_notranslate",
         "stock_location_report",
+        "stock_operation_cleaner",
         "stock_reassign_auto",
         "stock_picking_assignment",
         "stock_putaway_route",
