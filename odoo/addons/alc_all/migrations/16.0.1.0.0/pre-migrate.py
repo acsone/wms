@@ -29,6 +29,7 @@ def migrate(cr, version):
         "stock_operation_recompute",
         "stock_reassign_auto",
         "stock_picking_assignment",
+        "stock_picking_show_backorder",
         "stock_putaway_route",
     ]
     for addon in addons_to_uninstall:
