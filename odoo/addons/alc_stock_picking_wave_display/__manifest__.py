@@ -9,7 +9,10 @@
     "version": "10.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACOSNE SA/NV",
-    "depends": ["specific_zetes", "stock_picking_wave"],
+    "depends": [
+        # TODO: has been removed "specific_zetes",
+        "stock_picking_wave"
+    ],
     "data": ["views/stock_picking.xml"],
     'installable': False
 }
