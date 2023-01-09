@@ -171,7 +171,6 @@ omit =
     odoo/addons/alc_product_mto/*
     odoo/addons/alc_product_packaging_stock_reserve/*
     odoo/addons/alc_product_pharmacy/*
-    odoo/addons/alc_product_picking_zone/*
     odoo/addons/alc_product_promoted_links/*
     odoo/addons/alc_product_promotion_mailing/*
     odoo/addons/alc_product_promotion_subscription/*
@@ -263,7 +262,6 @@ omit =
     odoo/addons/alc_stock_picking_gls_check_validation/*
     odoo/addons/alc_stock_picking_no_pack_in_pack/*
     odoo/addons/alc_stock_picking_number_package/*
-    odoo/addons/alc_stock_picking_package/*
     odoo/addons/alc_stock_picking_type_locking/*
     odoo/addons/alc_stock_picking_wave_display/*
     odoo/addons/alc_stock_picking_wave_release_pickings/*
@@ -324,7 +322,6 @@ omit =
     odoo/addons/mixin_user_id/*
     odoo/addons/paginated_service_mixin/*
     odoo/addons/partner_archive_new_partner/*
-    odoo/addons/partner_delivery/*
     odoo/addons/partner_schedule/*
     odoo/addons/price_compute/*
     odoo/addons/pricelist_discount/*
@@ -369,7 +366,6 @@ omit =
     odoo/addons/specific_security/*
     odoo/addons/specific_shipping_costs/*
     odoo/addons/specific_stock/*
-    odoo/addons/specific_zetes/*
     odoo/addons/speedy_views/*
     odoo/addons/standard_service_mixin/*
     odoo/addons/stock_constraint/*

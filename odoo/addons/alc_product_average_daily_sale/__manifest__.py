@@ -22,7 +22,6 @@
         "sale",
         "alc_product_abc_classification",
         "alc_product_mto",
-        "alc_product_picking_zone",
         "specific_base",
     ],
     "data": [
