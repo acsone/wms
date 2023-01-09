@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_stock_picking_wave_display
-#: model:ir.model.fields,field_description:alc_stock_picking_wave_display.field_stock_picking_wave_state_13350
+#: model:ir.model.fields,field_description:alc_stock_picking_wave_display.field_stock_picking_wave_state_13373
 msgid "Picking wave state"
 msgstr ""
 
