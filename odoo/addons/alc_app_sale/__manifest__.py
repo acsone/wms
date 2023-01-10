@@ -12,5 +12,6 @@
     "application": True,
     "depends": [
         "sale",
+        "sale_triple_discount",
     ],
 }
