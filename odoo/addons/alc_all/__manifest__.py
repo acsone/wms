@@ -14,6 +14,7 @@
         "alc_app_purchase",
         "alc_app_putaway",
         "alc_app_receipt",
+        "alc_app_sale",
         # TO BE REMOVED
         "base_report_to_printer",
     ],
