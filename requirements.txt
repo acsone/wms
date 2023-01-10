@@ -38,6 +38,7 @@ odoo-addon-account-invoice-triple-discount==16.0.1.0.0.2
 odoo-addon-attachment-s3 @ git+https://github.com/acsone/odoo-cloud-platform@25cf2a9bfb287a4ca5696651f448401264b8df2a#subdirectory=setup/attachment_s3
 odoo-addon-base-attachment-object-storage @ git+https://github.com/acsone/odoo-cloud-platform@fc452c6a2abbae4ab7d4bd041c5d2212691a8096#subdirectory=setup/base_attachment_object_storage
 odoo-addon-base-delivery-carrier-label==16.0.1.0.0.3
+odoo-addon-base-exception==16.0.1.0.1.3
 odoo-addon-base-report-to-printer==16.0.1.1.0.1
 odoo-addon-delivery-carrier-account==16.0.1.0.0.4
 odoo-addon-delivery-carrier-info==16.0.1.0.0.2
@@ -59,6 +60,7 @@ odoo-addon-product-template-has-one-variant @ git+https://github.com/acsone/prod
 odoo-addon-product-total-weight-from-packaging @ git+https://github.com/acsone/product-attribute.git@0ae6102ff01a7ea8622e20a5a47ecfbe68314a4d#subdirectory=setup/product_total_weight_from_packaging
 odoo-addon-purchase-stock-packaging @ git+https://github.com/acsone/purchase-workflow.git@02adbbcaf2c174f3cbfadc74e0b477bddb1886bf#subdirectory=setup/purchase_stock_packaging
 odoo-addon-queue-job==16.0.2.0.0
+odoo-addon-sale-exception @ git+https://github.com/acsone/sale-workflow.git@5a6c9d98f8e45570b510ed8369e0af6ba8ac8c2e#subdirectory=setup/sale_exception
 odoo-addon-sale-procurement-customer @ git+https://github.com/acsone/sale-workflow.git@ef0c216f30a0fd7fd1fb0d782f8b9aaac3f7d487#subdirectory=setup/sale_procurement_customer
 odoo-addon-sale-triple-discount @ git+https://github.com/acsone/sale-workflow.git@ca0a364df9943ae0b37f8d2ae739ff42e69c4e35#subdirectory=setup/sale_triple_discount
 odoo-addon-session-db==16.0.1.0.2
