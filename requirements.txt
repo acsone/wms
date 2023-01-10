@@ -40,6 +40,7 @@ odoo-addon-base-delivery-carrier-label @ git+https://github.com/acsone/delivery-
 odoo-addon-base-report-to-printer @ git+https://github.com/acsone/report-print-send.git@220cf83641f885356e0b159edfe3f51bf2c7d709#subdirectory=setup/base_report_to_printer
 odoo-addon-delivery-carrier-info==16.0.1.0.0.2
 odoo-addon-delivery-carrier-max-weight-constraint @ git+https://github.com/acsone/delivery-carrier.git@fda42e202dadc910841eb276721409419d26a5c7#subdirectory=setup/delivery_carrier_max_weight_constraint
+odoo-addon-delivery-package-type-number-parcels @ git+https://github.com/acsone/delivery-carrier.git@504070583a2d8a68924824ecc16a2a2808fcf2bd#subdirectory=setup/delivery_package_type_number_parcels
 odoo-addon-product-abc-classification @ git+https://github.com/acsone/product-attribute.git@cc97df93b3f97e947c2ed38cc6232c0a642f65e1#subdirectory=setup/product_abc_classification
 odoo-addon-product-abc-classification-sale-stock @ git+https://github.com/acsone/product-attribute.git@f9690a9c1f19ece371effeb200a417e96fddb158#subdirectory=setup/product_abc_classification_sale_stock
 odoo-addon-product-dimension @ git+https://github.com/acsone/product-attribute.git@36e6216efe4a7cbff6346f36e0d5b80d7d700705#subdirectory=setup/product_dimension
@@ -64,6 +65,7 @@ odoo-addon-stock-move-auto-assign-auto-release @ git+https://github.com/acsone/s
 odoo-addon-stock-move-common-dest==16.0.1.0.1
 odoo-addon-stock-packaging-calculator @ git+https://github.com/acsone/stock-logistics-warehouse.git@7a62f663ee6d0c2393ad2d09c79e88d6308e6efd#subdirectory=setup/stock_packaging_calculator
 odoo-addon-stock-picking-completion-info @ git+https://github.com/acsone/wms.git@008729166985bcb41891442e6491e09e7f0aede4#subdirectory=setup/stock_picking_completion_info
+odoo-addon-stock-picking-delivery-link @ git+https://github.com/acsone/delivery-carrier.git@9c37fc2ea1af705e4a4d06067b64690b31d8ef79#subdirectory=setup/stock_picking_delivery_link
 odoo-addon-stock-picking-start @ git+https://github.com/acsone/stock-logistics-workflow.git@fb95dafafd5522a0f43bbf9aa0d81ba819c1ba44#subdirectory=setup/stock_picking_start
 odoo-addon-stock-production-lot-expired-date @ git+https://github.com/acsone/product-attribute.git@d76d655034abd4070b6e96debf60597903429dd7#subdirectory=setup/stock_production_lot_expired_date
 odoo-addon-stock-production-lot-expiry @ git+https://github.com/acsone/product-attribute.git@d1d1d4bc64d8464c621b0a5823ff43fd3ee03406#subdirectory=setup/stock_production_lot_expiry

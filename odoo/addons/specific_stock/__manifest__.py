@@ -14,7 +14,6 @@
         "alc_stock_receive_lot_inputmask",
         "alc_product_lot_info",
         "alc_product_mto",
-        "alc_stock_quant_package_nbr",
         "board",
         "delivery_rounds",
         "product",

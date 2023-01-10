@@ -268,8 +268,6 @@ omit =
     odoo/addons/alc_stock_picking_wave_type/*
     odoo/addons/alc_stock_put_remaining_to_reserve/*
     odoo/addons/alc_stock_putaway/*
-    odoo/addons/alc_stock_quant_package_delivery/*
-    odoo/addons/alc_stock_quant_package_nbr/*
     odoo/addons/alc_stock_receive_display_stock_storage_type/*
     odoo/addons/alc_stock_receive_frigo/*
     odoo/addons/alc_stock_receive_lot_expiry/*
