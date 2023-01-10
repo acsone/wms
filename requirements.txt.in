@@ -58,6 +58,9 @@ odoo-addon-purchase-stock-packaging @ git+https://github.com/acsone/purchase-wor
 # https://github.com/OCA/report-print-send/pull/307
 odoo-addon-base-report-to-printer @ git+https://github.com/acsone/report-print-send.git@16.0-mig-base_report_to_printer-hda#subdirectory=setup/base_report_to_printer
 
+
+# sale-workflow
+
 # stock-logistics-warehouse
 # https://github.com/OCA/stock-logistics-warehouse/pull/1532
 odoo-addon-stock-move-auto-assign @ git+https://github.com/acsone/stock-logistics-warehouse.git@16.0-add-stock_move_auto_assign_auto_release-lmi#subdirectory=setup/stock_move_auto_assign
