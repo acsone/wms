@@ -57,10 +57,13 @@ class ReceptionPharmacyLine(models.Model):
                     )
                 )
 
-    def print_reception_pharmacy_label(self, printer=False):
+    def print_reception_pharmacy_label(self):
         self.ensure_one()
+        printer = self.env.user.printing_pharmacy_reception_printer_id
         if not printer:
-            printer = self.env.user.printing_pharmacy_reception_printer_id
+            raise ValidationError(
+                _("No printer defined for reception, please select one first")
+            )
         hw_print(
             self,
             "alc_reception_pharmacy.report_pharmacy_lot_label",
