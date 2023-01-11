@@ -53,7 +53,7 @@ odoo-addon-purchase-stock-packaging @ git+https://github.com/acsone/purchase-wor
 odoo-addon-queue-job==16.0.2.0.0
 odoo-addon-session-db @ git+https://github.com/acsone/server-tools.git@22a7d3cef17dd51a1612880dc75906c04c17c98a#subdirectory=setup/session_db
 odoo-addon-shipment-advice @ git+https://github.com/acsone/stock-logistics-transport.git@4f4b6169a35e1f99b3e92ebab55dc2ada2e1e00e#subdirectory=setup/shipment_advice
-odoo-addon-stock-available-to-promise-release @ git+https://github.com/acsone/wms.git@8eaf4e0b1814b340c535af3ba0dea48c1dbc3a97#subdirectory=setup/stock_available_to_promise_release
+odoo-addon-stock-available-to-promise-release @ git+https://github.com/acsone/wms.git@9528f1625dede8e39c1bdb2e1b038ee5ff8db1e0#subdirectory=setup/stock_available_to_promise_release
 odoo-addon-stock-dock @ git+https://github.com/acsone/stock-logistics-transport.git@4f4b6169a35e1f99b3e92ebab55dc2ada2e1e00e#subdirectory=setup/stock_dock
 odoo-addon-stock-dynamic-routing==16.0.1.0.0.3
 odoo-addon-stock-grn @ git+https://github.com/acsone/stock-logistics-workflow.git@3abfffe5161a7c6ffe43131d615cd512bd3eab2c#subdirectory=setup/stock_grn
@@ -70,8 +70,8 @@ odoo-addon-stock-production-lot-expiry @ git+https://github.com/acsone/product-a
 odoo-addon-stock-putaway-hook @ git+https://github.com/acsone/stock-logistics-workflow.git@4aca08e554f4a30464a0b9019ec1ddeb2ca7ced9#subdirectory=setup/stock_putaway_hook
 odoo-addon-stock-quant-package-dimension @ git+https://github.com/acsone/stock-logistics-workflow.git@978211aab22c1d0a1c90eb61d444a802dedfddd2#subdirectory=setup/stock_quant_package_dimension
 odoo-addon-stock-quant-package-product-packaging @ git+https://github.com/acsone/stock-logistics-workflow.git@2dcf8cada421667914f565f7deeada61d5e82b70#subdirectory=setup/stock_quant_package_product_packaging
-odoo-addon-stock-release-channel @ git+https://github.com/acsone/wms.git@e9f392536f88c5d6297857e59601adde89c42264#subdirectory=setup/stock_release_channel
-odoo-addon-stock-release-channel-auto-release @ git+https://github.com/acsone/wms.git@e9f392536f88c5d6297857e59601adde89c42264#subdirectory=setup/stock_release_channel_auto_release
+odoo-addon-stock-release-channel @ git+https://github.com/acsone/wms.git@0c9450759aca70988281e4577ffbb5082bae4c8f#subdirectory=setup/stock_release_channel
+odoo-addon-stock-release-channel-auto-release @ git+https://github.com/acsone/wms.git@0c9450759aca70988281e4577ffbb5082bae4c8f#subdirectory=setup/stock_release_channel_auto_release
 odoo-addon-stock-storage-type @ git+https://github.com/acsone/wms.git@fd484bfeb2110f1dbcaec071acab1a41dc57d935#subdirectory=setup/stock_storage_type
 odoo-addon-stock-storage-type-putaway-abc @ git+https://github.com/acsone/wms.git@2cca4a20b17686fe5cfee096215035b9fdef3e09#subdirectory=setup/stock_storage_type_putaway_abc
 odoo-addon-stock-storage-type-putaway-abc-classification-sale-stock @ git+https://github.com/acsone/wms.git@980b444e365da2752f5bc1345f22d2cf5ca80657#subdirectory=setup/stock_storage_type_putaway_abc_classification_sale_stock
