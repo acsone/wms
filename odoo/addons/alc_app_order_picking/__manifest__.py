@@ -12,6 +12,7 @@
     "depends": [
         "alc_delivery_carrier_gls",
         "alc_partner_carrier",
+        "alc_stock_picking_wave_display",
         "base_delivery_carrier_label",
         "delivery_carrier_max_weight_constraint",
         "delivery_package_type_number_parcels",

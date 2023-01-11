@@ -312,7 +312,6 @@ exclude = [
   'odoo/addons/alc_stock_picking_no_pack_in_pack/*',
   'odoo/addons/alc_stock_picking_number_package/*',
   'odoo/addons/alc_stock_picking_type_locking/*',
-  'odoo/addons/alc_stock_picking_wave_display/*',
   'odoo/addons/alc_stock_picking_wave_release_pickings/*',
   'odoo/addons/alc_stock_picking_wave_type/*',
   'odoo/addons/alc_stock_put_remaining_to_reserve/*',
