@@ -12,7 +12,6 @@
     "website": "https://acsone.eu/",
     "depends": [
         "alc_shopfloor",
-        "alc_stock_quant_package_nbr",
         "alc_internal_stock_quant_package",
     ],
     "data": ["views/shopfloor_menu.xml", "views/stock_picking.xml"],

@@ -11,7 +11,6 @@
     "depends": [
         "alc_b2c_partner",
         "alc_partner_veterinary",
-        "alc_stock_quant_package_nbr",
         "base_report_to_printer",  # OCA/report-print-send.git
         "specific_report",
         "specific_product",
