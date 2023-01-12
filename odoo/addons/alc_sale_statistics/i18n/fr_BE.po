@@ -195,6 +195,12 @@ msgid "Sale Price 2"
 msgstr "Prix de vente 2"
 
 #. module: alc_sale_statistics
+#: model:ir.model.fields,field_description:alc_sale_statistics.field_alc_stock_move_report_sale_channel
+#: model:ir.ui.view,arch_db:alc_sale_statistics.stock_moves_with_partner_view_search
+msgid "Sale channel"
+msgstr "Canal de vente"
+
+#. module: alc_sale_statistics
 #: model:ir.model.fields,field_description:alc_sale_statistics.field_alc_stock_move_report_location_id
 msgid "Source Location"
 msgstr "Emplacement d'origine"
@@ -244,12 +250,6 @@ msgstr "Prix unitaire"
 #: model:ir.model.fields,field_description:alc_sale_statistics.field_alc_stock_move_report_validation_date
 msgid "Validation date"
 msgstr "Date de validation"
-
-
-#. module: alc_sale_statistics
-#: model:ir.model.fields,field_description:alc_sale_statistics.field_alc_stock_move_report_sale_channel
-msgid "Sale channel"
-msgstr "Canal de vente"
 
 #. module: alc_sale_statistics
 #: model:ir.model.fields,field_description:alc_sale_statistics.field_alc_stock_move_report_supplier_ref
