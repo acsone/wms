@@ -93,13 +93,6 @@ class ReceivePharmacyProducts(models.TransientModel):
     def print_reception_pharmacy_label(self, reception_pharmacy_line):
         return reception_pharmacy_line.print_reception_pharmacy_label()
 
-    def transfer_reception(self):
-        self._check_reception_state()
-        self._add()
-        pickings = self.reception_pharmacy_id.validate()
-        self._clean_wizard()
-        return pickings
-
     def _clean_wizard(self):
         self.bin_id = False
         self.product_qty = 1

@@ -6,13 +6,13 @@
 ^XA
 ^PRC
 ^LH0,0^FS\r
-^FO25,33^A0N,29,31^FD<t t-esc="line.lot_id.voice_identifier" />^FS\r
+^FO32,33^A0N,29,31^FD<t t-esc="line.lot_id.voice_identifier" />^FS\r
 ^FO420,33^A0N,29,31^FD<t t-esc="line.lot_id.checksum" />^FS\r
-^FO25,70^A0N,29,31^FDClient:^FS\r
+^FO32,70^A0N,29,31^FDClient:^FS\r
 ^FO120,68^A0N,34,28^FD<t t-esc="line.customer_id.name" />^FS\r
-^FO25,105^A0N,34,28^FDLot:^FS\r
+^FO32,105^A0N,34,28^FDLot:^FS\r
 ^FO90,105^A0N,34,28^FD<t t-esc="line.lot_id.name" />^FS\r
-^FO25,145^A0N,34,28^FDBac:^FS\r
+^FO32,145^A0N,34,28^FDBac:^FS\r
 ^FO90,145^A0N,34,28^FD<t
           t-esc="line.lot_id.product_id.product_tmpl_id._bin().zone"
         />-<t t-esc="line.lot_id.product_id.product_tmpl_id._bin().corridor" />-<t
@@ -20,13 +20,13 @@
         />-<t t-esc="line.lot_id.product_id.product_tmpl_id._bin().height" />-<t
           t-esc="line.lot_id.product_id.product_tmpl_id._bin().box"
         />^FS\r
-^FO25,190^A0N,34,28^FDDate limite:^FS\r
+^FO32,190^A0N,34,28^FDDate limite:^FS\r
 ^FO175,186^A0N,40,30^FD<t
           t-esc="line.lot_id.life_date and time.strftime('%d/%m/%Y', time.strptime(line.lot_id.life_date,'%Y-%m-%d %H:%M:%S')) or ''"
         />^FS\r
-^FO25,240^A0N,34,28^FDArticle:^FS\r
+^FO32,240^A0N,34,28^FDArticle:^FS\r
 ^FO120,240^A0N,34,36^FD<t t-esc="line.lot_id.product_id.default_code" />^FS\r
-^FO25,283^A0N,31,23^FD<t t-esc="line.lot_id.product_id.name[:30]" />^FS\r
+^FO32,283^A0N,31,23^FD<t t-esc="line.lot_id.product_id.name[:30]" />^FS\r
 ^FO420,150\r
 ^BQN,2,6\r
 ^FDQA,#<t t-esc="line.lot_id.product_id.default_code" />#<t

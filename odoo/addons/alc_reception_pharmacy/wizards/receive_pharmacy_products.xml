@@ -27,12 +27,6 @@
               class="btn btn-primary"
               attrs="{'invisible': [('state', '!=', 'draft')]}"
             />
-                    <button
-              name="transfer_reception"
-              type="object"
-              string="TRANSFER"
-              class="btn btn-secondary"
-            />
                     </footer>
                 </sheet>
             </form>
