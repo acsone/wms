@@ -1,16 +1,14 @@
-# -*- coding: utf-8 -*-
 # Copyright 2018 Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
+# 2023 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 {
     "name": "Cash on delivery",
-    "version": "10.0.1.0.0",
-    "author": "BCIM",
+    "version": "16.0.1.0.0",
+    "author": "BCIM,ACSONE SA/NV",
     "category": "Stock Management",
     "depends": ["sale_stock", "account"],
-    "data": ["views/account_payment_term.xml", "views/stock_picking.xml"],
-    "installable": False,
-    "auto_install": False,
+    "data": ["views/account_payment_term_views.xml", "views/stock_picking_views.xml"],
+    "installable": True,
     "license": "AGPL-3",
-    "application": False,
 }
