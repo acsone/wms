@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* cash_on_delivery
+# 	* alc_cash_on_delivery
 #
 msgid ""
 msgstr ""
@@ -15,27 +15,27 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
-#. module: cash_on_delivery
+#. module: alc_cash_on_delivery
 #: model:ir.model.fields,field_description:cash_on_delivery.field_account_payment_term__cash_on_delivery
 msgid "Cash On Delivery"
-msgstr "Contre remboursement"
+msgstr ""
 
-#. module: cash_on_delivery
-#: model:ir.model.fields,field_description:cash_on_delivery.field_stock_picking__cash_on_delivery_invoice_ids
+#. module: alc_cash_on_delivery
+#: model:ir.model.fields,field_description:alc_cash_on_delivery.field_stock_picking__cash_on_delivery_invoice_ids
 msgid "Invoice"
-msgstr "Facture"
+msgstr ""
 
-#. module: cash_on_delivery
-#: model_terms:ir.ui.view,arch_db:cash_on_delivery.view_picking_form
+#. module: alc_cash_on_delivery
+#: model_terms:ir.ui.view,arch_db:alc_cash_on_delivery.view_picking_form
 msgid "Invoices"
 msgstr ""
 
-#. module: cash_on_delivery
-#: model:ir.model,name:cash_on_delivery.model_account_payment_term
+#. module: alc_cash_on_delivery
+#: model:ir.model,name:alc_cash_on_delivery.model_account_payment_term
 msgid "Payment Terms"
-msgstr "Conditions de paiement"
+msgstr ""
 
-#. module: cash_on_delivery
-#: model:ir.model,name:cash_on_delivery.model_stock_picking
+#. module: alc_cash_on_delivery
+#: model:ir.model,name:alc_cash_on_delivery.model_stock_picking
 msgid "Transfer"
-msgstr "Transfert"
+msgstr ""

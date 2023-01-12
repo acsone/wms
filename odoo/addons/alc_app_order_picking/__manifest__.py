@@ -12,7 +12,6 @@
     "depends": [
         "alc_partner_carrier",
         "base_delivery_carrier_label",
-        "cash_on_delivery",
         "delivery_carrier_max_weight_constraint",
         "delivery_package_type_number_parcels",
         "product_total_weight_from_packaging",

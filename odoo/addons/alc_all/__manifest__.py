@@ -10,6 +10,7 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
+        "alc_app_invoicing",
         "alc_app_order_picking",
         "alc_app_purchase",
         "alc_app_putaway",
