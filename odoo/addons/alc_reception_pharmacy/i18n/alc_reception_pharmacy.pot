@@ -177,6 +177,12 @@ msgid "New"
 msgstr ""
 
 #. module: alc_reception_pharmacy
+#: code:addons/alc_reception_pharmacy/models/reception_pharmacy_line.py:65
+#, python-format
+msgid "No printer defined for reception, please select one first"
+msgstr ""
+
+#. module: alc_reception_pharmacy
 #: model:ir.ui.view,arch_db:alc_reception_pharmacy.select_pharmacy_printing_printer_form_view
 msgid "OK"
 msgstr ""
@@ -284,11 +290,6 @@ msgid "Supplier location is missing"
 msgstr ""
 
 #. module: alc_reception_pharmacy
-#: model:ir.ui.view,arch_db:alc_reception_pharmacy.receive_pharmacy_products_form_view
-msgid "TRANSFER"
-msgstr ""
-
-#. module: alc_reception_pharmacy
 #: code:addons/alc_reception_pharmacy/wizards/receive_pharmacy_products.py:46
 #, python-format
 msgid "This reception is transferred, please create a new one before adding products to receive."
@@ -318,41 +319,41 @@ msgstr ""
 #. module: alc_reception_pharmacy
 #: model:ir.ui.view,arch_db:alc_reception_pharmacy.pharmacy_lot_label
 msgid "^FS\\r\n"
-"^FO25,105^A0N,34,28^FDLot:^FS\\r\n"
+"^FO32,105^A0N,34,28^FDLot:^FS\\r\n"
 "^FO90,105^A0N,34,28^FD"
 msgstr ""
 
 #. module: alc_reception_pharmacy
 #: model:ir.ui.view,arch_db:alc_reception_pharmacy.pharmacy_lot_label
 msgid "^FS\\r\n"
-"^FO25,145^A0N,34,28^FDBac:^FS\\r\n"
+"^FO32,145^A0N,34,28^FDBac:^FS\\r\n"
 "^FO90,145^A0N,34,28^FD"
 msgstr ""
 
 #. module: alc_reception_pharmacy
 #: model:ir.ui.view,arch_db:alc_reception_pharmacy.pharmacy_lot_label
 msgid "^FS\\r\n"
-"^FO25,190^A0N,34,28^FDDate limite:^FS\\r\n"
+"^FO32,190^A0N,34,28^FDDate limite:^FS\\r\n"
 "^FO175,186^A0N,40,30^FD"
 msgstr ""
 
 #. module: alc_reception_pharmacy
 #: model:ir.ui.view,arch_db:alc_reception_pharmacy.pharmacy_lot_label
 msgid "^FS\\r\n"
-"^FO25,240^A0N,34,28^FDArticle:^FS\\r\n"
+"^FO32,240^A0N,34,28^FDArticle:^FS\\r\n"
 "^FO120,240^A0N,34,36^FD"
 msgstr ""
 
 #. module: alc_reception_pharmacy
 #: model:ir.ui.view,arch_db:alc_reception_pharmacy.pharmacy_lot_label
 msgid "^FS\\r\n"
-"^FO25,283^A0N,31,23^FD"
+"^FO32,283^A0N,31,23^FD"
 msgstr ""
 
 #. module: alc_reception_pharmacy
 #: model:ir.ui.view,arch_db:alc_reception_pharmacy.pharmacy_lot_label
 msgid "^FS\\r\n"
-"^FO25,70^A0N,29,31^FDClient:^FS\\r\n"
+"^FO32,70^A0N,29,31^FDClient:^FS\\r\n"
 "^FO120,68^A0N,34,28^FD"
 msgstr ""
 
@@ -381,7 +382,7 @@ msgstr ""
 msgid "^XA\n"
 "^PRC\n"
 "^LH0,0^FS\\r\n"
-"^FO25,33^A0N,29,31^FD"
+"^FO32,33^A0N,29,31^FD"
 msgstr ""
 
 #. module: alc_reception_pharmacy
