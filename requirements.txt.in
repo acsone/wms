@@ -5,6 +5,11 @@
 odoo @ git+https://github.com/acsone/odoo.git@16.0-alc_master
 odoo-addons-enterprise @ git+ssh://git@github.com/acsone/enterprise.git@16.0-alc_master
 
+
+# account-invoicing
+# https://github.com/OCA/account-invoicing/pull/1269
+odoo-addon-account-invoice-triple-discount @ git+https://github.com/OCA/account-invoicing.git@refs/pull/1269/head#subdirectory=setup/account_invoice_triple_discount
+
 # delivery-carrier
 # https://github.com/OCA/delivery-carrier/pull/570
 odoo-addon-base-delivery-carrier-label @ git+https://github.com/acsone/delivery-carrier.git@16-mig-delivery-carrier-label-and-split#subdirectory=setup/base_delivery_carrier_label
@@ -62,8 +67,9 @@ odoo-addon-purchase-stock-packaging @ git+https://github.com/acsone/purchase-wor
 # https://github.com/OCA/report-print-send/pull/307
 odoo-addon-base-report-to-printer @ git+https://github.com/acsone/report-print-send.git@16.0-mig-base_report_to_printer-hda#subdirectory=setup/base_report_to_printer
 
-
 # sale-workflow
+# https://github.com/OCA/sale-workflow/pull/2317
+odoo-addon-sale-triple-discount @ git+https://github.com/acsone/sale-workflow.git@16.0-mig-sale_triple_discount-sbj#subdirectory=setup/sale_triple_discount
 
 # stock-logistics-warehouse
 # https://github.com/OCA/stock-logistics-warehouse/pull/1532
