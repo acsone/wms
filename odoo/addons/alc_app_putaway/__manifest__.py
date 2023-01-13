@@ -20,6 +20,7 @@
         "product_packaging_level",
         "product_packaging_level_pallet",
         "product_route_mto",
+        "stock_average_daily_sale",
         "stock_dynamic_routing",
         "stock_location_product_restriction",
         "stock_location_zone",
