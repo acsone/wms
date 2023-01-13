@@ -69,6 +69,7 @@ odoo-addon-stock-packaging-calculator @ git+https://github.com/acsone/stock-logi
 odoo-addon-stock-picking-completion-info @ git+https://github.com/acsone/wms.git@008729166985bcb41891442e6491e09e7f0aede4#subdirectory=setup/stock_picking_completion_info
 odoo-addon-stock-picking-delivery-link @ git+https://github.com/acsone/delivery-carrier.git@9c37fc2ea1af705e4a4d06067b64690b31d8ef79#subdirectory=setup/stock_picking_delivery_link
 odoo-addon-stock-picking-start @ git+https://github.com/acsone/stock-logistics-workflow.git@fb95dafafd5522a0f43bbf9aa0d81ba819c1ba44#subdirectory=setup/stock_picking_start
+odoo-addon-stock-picking-type-shipping-policy @ git+https://github.com/acsone/wms.git@12dbcd20834849758e681098005f9386cb2c22a6#subdirectory=setup/stock_picking_type_shipping_policy
 odoo-addon-stock-production-lot-expired-date @ git+https://github.com/acsone/product-attribute.git@d76d655034abd4070b6e96debf60597903429dd7#subdirectory=setup/stock_production_lot_expired_date
 odoo-addon-stock-production-lot-expiry @ git+https://github.com/acsone/product-attribute.git@d1d1d4bc64d8464c621b0a5823ff43fd3ee03406#subdirectory=setup/stock_production_lot_expiry
 odoo-addon-stock-putaway-hook @ git+https://github.com/acsone/stock-logistics-workflow.git@4aca08e554f4a30464a0b9019ec1ddeb2ca7ced9#subdirectory=setup/stock_putaway_hook
