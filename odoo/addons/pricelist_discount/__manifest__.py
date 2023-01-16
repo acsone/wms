@@ -13,6 +13,7 @@
         "sale",
         "sale_stock",
         "sale_triple_discount",
+        "alc_product_override_price",
     ],
     "website": "http://www.camptocamp.com",
     "data": [

@@ -118,7 +118,7 @@ class PricelistDiscountCase(SavepointCase):
                             "name": cls.p1.name,
                             "product_id": cls.p1.id,
                             "product_uom_qty": 1,
-                            "product_uom": cls.env.ref("product.product_uom_unit").id,
+                            "product_uom": cls.env.ref("uom.product_uom_unit").id,
                         },
                     ),
                     (
@@ -128,7 +128,7 @@ class PricelistDiscountCase(SavepointCase):
                             "name": cls.p2.name,
                             "product_id": cls.p2.id,
                             "product_uom_qty": 2,
-                            "product_uom": cls.env.ref("product.product_uom_unit").id,
+                            "product_uom": cls.env.ref("uom.product_uom_unit").id,
                         },
                     ),
                 ],
