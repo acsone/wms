@@ -15,6 +15,7 @@
         "sale_triple_discount",
         "alc_product_override_price",
         "alc_partner_pricelist",
+        "alc_product_supplierinfo_default_price",
     ],
     "website": "http://www.camptocamp.com",
     "data": [

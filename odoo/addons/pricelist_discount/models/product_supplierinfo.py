@@ -7,61 +7,14 @@ from odoo.exceptions import ValidationError
 
 class ProductSupplierinfo(models.Model):
     _inherit = "product.supplierinfo"
-    _order = "is_null_date_start, date_start DESC, min_qty DESC, min_qty_sale DESC"
+    _order = "date_start DESC, min_qty DESC, min_qty_sale DESC"
 
-    is_null_date_start = fields.Boolean(
-        "The date start is null",
-        compute="_compute_is_null_date_start",
-        store=True,
-        readonly=True,
-    )
     discount_purchase = fields.Float(
         "Purchase discount (%)", digits="Discount", default=0.0
     )
     discount_sale = fields.Float("Sale discount (%)", digits="Discount", default=0.0)
     min_qty_sale = fields.Float(string="Sale minimum qty", default=0.0)
     min_qty = fields.Float(string="Purchase minimum qty")
-
-    @api.model
-    def _get_default_line(self, supplier_partner_id, product_tmpl_id):
-        if not supplier_partner_id or not product_tmpl_id:
-            return self.browse()
-        return self.search(
-            [
-                ("name", "=", supplier_partner_id),
-                ("product_tmpl_id", "=", product_tmpl_id),
-                ("date_start", "=", False),
-                ("date_end", "=", False),
-            ],
-            limit=1,
-        )
-
-    @api.onchange("partner_id", "product_tmpl_id")
-    def _onchange_default_price(self):
-        for rec in self:
-            if rec.price or (not rec.name or not rec.product_tmpl_id):
-                continue
-            # When open the wizard to create a new promotion, the value
-            # for product_tmpl_id is a temporary id (NewID).
-            product_tmpl_id = rec.product_tmpl_id.id
-            if not product_tmpl_id:
-                product_tmpl_id = self._context.get("default_product_tmpl_id")
-            default_line = self._get_default_line(rec.partner_id.id, product_tmpl_id)
-            if default_line:
-                rec.price = default_line.price
-
-    @api.depends("date_start")
-    def _compute_is_null_date_start(self):
-        """
-        By default we cannot order DESC and put all nulls at the end with Odoo.
-
-        (ORDER BY date_start DESC NULLS LAST)
-        Change the code of Odoo to allows ordering nulls last is really touchy.
-        To avoid that I create a simply boolean to say if the field date_start
-        is null and I order on this field.
-        """
-        for rec in self:
-            rec.is_null_date_start = bool(not rec.date_start)
 
     def _check_unique_supplier(self):
         self.ensure_one()
@@ -146,23 +99,3 @@ class ProductSupplierinfo(models.Model):
                 self._check_date_end()
                 self._check_dates()
                 self._check_existing_promo()
-
-    @api.model_create_multi
-    def create(self, vals_list):
-        """
-        When the record is created by import, the price is not always given...
-
-        if not takes the default one
-        """
-        new_vals_list = []
-        for vals in vals_list:
-            if (
-                not vals.get("price")
-                and "partner_id" in vals
-                and "product_tmpl_id" in vals
-            ):
-                vals["price"] = self._get_default_line(
-                    vals["partner_id"], vals["product_tmpl_id"]
-                ).price
-                new_vals_list.append(vals)
-        return super().create(new_vals_list)

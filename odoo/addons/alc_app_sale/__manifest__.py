@@ -27,5 +27,6 @@
         "alc_product_pharmacy",
         "alc_product_override_price",
         "alc_partner_pricelist",
+        "alc_product_supplierinfo_default_price",
     ],
 }
