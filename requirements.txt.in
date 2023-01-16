@@ -19,6 +19,8 @@ odoo-addon-delivery-carrier-max-weight-constraint @ git+https://github.com/acson
 odoo-addon-stock-picking-delivery-link @ git+https://github.com/acsone/delivery-carrier.git@16.0-mig-stock_picking_delivery_link-hda#subdirectory=setup/stock_picking_delivery_link
 # https://github.com/OCA/delivery-carrier/pull/598 - [16.0][ADD] delivery_package_type_number_parcels
 odoo-addon-delivery-package-type-number-parcels @ git+https://github.com/acsone/delivery-carrier.git@16.0-add-delivery_package_type_number_parcels-hda#subdirectory=setup/delivery_package_type_number_parcels
+# https://github.com/OCA/delivery-carrier/pull/599 - [16.0][MIG] delivery_carrier_label_gls
+odoo-addon-delivery-carrier-label-gls @ git+https://github.com/acsone/delivery-carrier.git@16.0-mig-delivery_carrier_label_gls-hda#subdirectory=setup/delivery_carrier_label_gls
 
 # wms
 # https://github.com/OCA/wms/pull/508
