@@ -14,6 +14,7 @@
         "sale_stock",
         "sale_triple_discount",
         "alc_product_override_price",
+        "alc_partner_pricelist",
     ],
     "website": "http://www.camptocamp.com",
     "data": [
@@ -22,7 +23,6 @@
         # Views
         "views/account_move.xml",
         "views/product_supplierinfo.xml",
-        "views/res_partner.xml",
         "views/sale_order.xml",
     ],
     "installable": True,
