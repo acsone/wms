@@ -21,6 +21,7 @@
         "stock_picking_completion_info",
         "stock_picking_delivery_link",
         "stock_picking_start",
+        "stock_picking_type_shipping_policy",
         "stock_production_lot_expired_date",
         "stock_production_lot_expiry",
         "stock_release_channel_auto_release",
