@@ -33,6 +33,7 @@ def migrate(cr, version):
         "stock_picking_assignment",
         "stock_picking_show_backorder",
         "stock_putaway_route",
+        "base_cached_xmlid",
     ]
     for addon in addons_to_uninstall:
         _logger.info("uninstall %s", ",".join(addon))
