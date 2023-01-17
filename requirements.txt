@@ -56,7 +56,7 @@ odoo-addon-purchase-stock-packaging @ git+https://github.com/acsone/purchase-wor
 odoo-addon-queue-job==16.0.2.0.0
 odoo-addon-sale-triple-discount @ git+https://github.com/acsone/sale-workflow.git@ca0a364df9943ae0b37f8d2ae739ff42e69c4e35#subdirectory=setup/sale_triple_discount
 odoo-addon-session-db @ git+https://github.com/acsone/server-tools.git@22a7d3cef17dd51a1612880dc75906c04c17c98a#subdirectory=setup/session_db
-odoo-addon-shipment-advice @ git+https://github.com/acsone/stock-logistics-transport.git@4f4b6169a35e1f99b3e92ebab55dc2ada2e1e00e#subdirectory=setup/shipment_advice
+odoo-addon-shipment-advice @ git+https://github.com/acsone/stock-logistics-transport.git@8349baf3993be31f1140b500de11a39081f69120#subdirectory=setup/shipment_advice
 odoo-addon-stock-available-to-promise-release @ git+https://github.com/acsone/wms.git@9528f1625dede8e39c1bdb2e1b038ee5ff8db1e0#subdirectory=setup/stock_available_to_promise_release
 odoo-addon-stock-dock @ git+https://github.com/acsone/stock-logistics-transport.git@4f4b6169a35e1f99b3e92ebab55dc2ada2e1e00e#subdirectory=setup/stock_dock
 odoo-addon-stock-dynamic-routing==16.0.1.0.0.3
