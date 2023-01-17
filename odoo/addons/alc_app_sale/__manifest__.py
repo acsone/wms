@@ -13,5 +13,6 @@
     "depends": [
         "sale",
         "sale_triple_discount",
+        "product_price_category",
     ],
 }
