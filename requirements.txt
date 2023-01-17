@@ -59,7 +59,7 @@ odoo-addon-session-db @ git+https://github.com/acsone/server-tools.git@22a7d3cef
 odoo-addon-shipment-advice @ git+https://github.com/acsone/stock-logistics-transport.git@8349baf3993be31f1140b500de11a39081f69120#subdirectory=setup/shipment_advice
 odoo-addon-stock-available-to-promise-release @ git+https://github.com/acsone/wms.git@9528f1625dede8e39c1bdb2e1b038ee5ff8db1e0#subdirectory=setup/stock_available_to_promise_release
 odoo-addon-stock-dock @ git+https://github.com/acsone/stock-logistics-transport.git@4f4b6169a35e1f99b3e92ebab55dc2ada2e1e00e#subdirectory=setup/stock_dock
-odoo-addon-stock-dynamic-routing==16.0.1.0.0.3
+odoo-addon-stock-dynamic-routing==16.0.1.0.0.5
 odoo-addon-stock-grn @ git+https://github.com/acsone/stock-logistics-workflow.git@3abfffe5161a7c6ffe43131d615cd512bd3eab2c#subdirectory=setup/stock_grn
 odoo-addon-stock-helper==16.0.1.0.1
 odoo-addon-stock-location-product-restriction==16.0.1.0.0.3
