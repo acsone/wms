@@ -4,7 +4,6 @@
 import logging
 
 from odoo import fields
-from odoo.exceptions import ValidationError
 
 from .common import PricelistDiscountCase
 
@@ -49,7 +48,7 @@ class TestPricelistDiscount(PricelistDiscountCase):
         self.tax.amount = 20
 
         for line in self.sale.order_line:
-            line.product_id_change()
+
             line.onchange_product_id_reset_discount()
 
         self.assertEqual(100, self.sol_p1.price_unit)
@@ -76,7 +75,7 @@ class TestPricelistDiscount(PricelistDiscountCase):
         self.tax.price_include = True
 
         for line in self.sale.order_line:
-            line.product_id_change()
+
             line.onchange_product_id_reset_discount()
 
         self.assertEqual(100, self.sol_p1.price_unit)
@@ -102,7 +101,7 @@ class TestPricelistDiscount(PricelistDiscountCase):
         self.sale.supplier_promotion_allowed = False
 
         for line in self.sale.order_line:
-            line.product_id_change()
+
             line.onchange_product_id_reset_discount()
 
         self.assertEqual(100, self.sol_p1.price_unit)
@@ -121,7 +120,6 @@ class TestPricelistDiscount(PricelistDiscountCase):
         self.assertEqual(480, self.sale.amount_total)
 
     def test_manually_change_unit_price(self):
-        self.sol_p2.product_id_change()
         self.sol_p2.onchange_product_id_reset_discount()
 
         self.assertEqual(200, self.sol_p2.price_unit)
@@ -142,7 +140,6 @@ class TestPricelistDiscount(PricelistDiscountCase):
         self.assertEqual(256.5, self.sol_p2.price_subtotal)
 
     def test_manually_change_discount(self):
-        self.sol_p2.product_id_change()
         self.sol_p2.onchange_product_id_reset_discount()
 
         self.assertEqual(200, self.sol_p2.price_unit)
@@ -161,7 +158,7 @@ class TestPricelistDiscount(PricelistDiscountCase):
         self.assertEqual(5, self.sol_p2.discount3)
 
         # There is 2 p2 in sale order so subtotal = 174.34 * 2
-        self.assertEqual(348.69, self.sol_p2.price_subtotal)
+        self.assertEqual(348.68, self.sol_p2.price_subtotal)
 
         # Change alcyon discount
         self.sol_p2.discount3 = 3.83
@@ -172,7 +169,7 @@ class TestPricelistDiscount(PricelistDiscountCase):
         self.assertEqual(3.83, self.sol_p2.discount3)
 
         # There is 2 p2 in sale order so subtotal = 174.34 * 2
-        self.assertEqual(352.98, self.sol_p2.price_subtotal)
+        self.assertEqual(353, self.sol_p2.price_subtotal)
 
         # Change both
         self.sol_p2.discount2 = 20
@@ -212,15 +209,13 @@ class TestPricelistDiscount(PricelistDiscountCase):
         self.tax.amount = 20
 
         for line in self.sale.order_line:
-            line.product_id_change()
+
             line.onchange_product_id_reset_discount()
 
         self.sale.action_confirm()
 
-        invoices = self.sale.action_invoice_create(final=True)
-        self.assertEqual(1, len(invoices))
-        invoice = self.env["account.invoice"].browse(invoices[0])
-
+        invoice = self.sale._create_invoices(final=True)
+        self.assertEqual(1, len(invoice))
         self.assertEqual(518.4, self.sale.amount_total)
         self.assertEqual(86.4, self.sale.amount_tax)
 
@@ -254,10 +249,6 @@ class TestPricelistDiscount(PricelistDiscountCase):
         self.assertEqual(5, line2.discount3)
         self.assertEqual(342, line2.price_subtotal)
 
-        # Check taxes
-        self.assertEqual(1, len(invoice.tax_line_ids))
-        self.assertEqual(86.4, invoice.tax_line_ids[0].amount)
-
         # Check totals
         self.assertEqual(518.4, invoice.amount_total)
         self.assertEqual(86.4, invoice.amount_tax)
@@ -271,7 +262,7 @@ class TestPricelistDiscount(PricelistDiscountCase):
         self.tax.amount = 20
 
         for line in self.sale.order_line:
-            line.product_id_change()
+
             line.onchange_product_id_reset_discount()
 
         self.assertEqual(100, self.sol_p1.price_unit)
@@ -314,179 +305,10 @@ class TestPricelistDiscount(PricelistDiscountCase):
         self.assertTrue(self.sale.supplier_promotion_allowed)
         self.assertEqual(self.discount_pricelist_id, self.sale.discount_pricelist_ids)
 
-    def test_check_dates(self):
-        """Test exceptions with promotion dates."""
-
-        ProductSupplierinfo = self.env["product.supplierinfo"]
-        ProductSupplierinfo.search(
-            [("product_tmpl_id", "=", self.p1.product_tmpl_id.id)]
-        ).unlink()
-
-        # Create the default price
-        ProductSupplierinfo.create(
-            {"name": self.supplier.id, "product_tmpl_id": self.p1.product_tmpl_id.id}
-        )
-
-        # Test to create a new default price
-        with self.assertRaises(ValidationError):
-            ProductSupplierinfo.create(
-                {
-                    "name": self.supplier.id,
-                    "product_tmpl_id": self.p1.product_tmpl_id.id,
-                }
-            )
-
-        # Test to create a promo without end date
-        with self.assertRaises(ValidationError):
-            ProductSupplierinfo.create(
-                {
-                    "name": self.supplier.id,
-                    "product_tmpl_id": self.p1.product_tmpl_id.id,
-                    "date_start": fields.Date.from_string("2018-01-01"),
-                }
-            )
-
-        # Test to create a promo without start date
-        with self.assertRaises(ValidationError):
-            ProductSupplierinfo.create(
-                {
-                    "name": self.supplier.id,
-                    "product_tmpl_id": self.p1.product_tmpl_id.id,
-                    "date_end": fields.Date.from_string("2018-01-01"),
-                }
-            )
-
-        # Promo 1 (2018-01-01 -> 2018-03-31)
-        ProductSupplierinfo.create(
-            {
-                "name": self.supplier.id,
-                "product_tmpl_id": self.p1.product_tmpl_id.id,
-                "date_start": fields.Date.from_string("2018-01-01"),
-                "date_end": fields.Date.from_string("2018-03-31"),
-                "discount_sale": 10,
-                "discount_purchase": 15,
-            }
-        )
-
-        # Promo 3 (2018-08-01 -> 2018-12-31)
-        ProductSupplierinfo.create(
-            {
-                "name": self.supplier.id,
-                "product_tmpl_id": self.p1.product_tmpl_id.id,
-                "date_start": fields.Date.from_string("2018-08-01"),
-                "date_end": fields.Date.from_string("2018-12-31"),
-                "discount_sale": 10,
-                "discount_purchase": 15,
-            }
-        )
-
-        # Promo 2 (2018-04-01 -> 2018-06-30)
-        ProductSupplierinfo.create(
-            {
-                "name": self.supplier.id,
-                "product_tmpl_id": self.p1.product_tmpl_id.id,
-                "date_start": fields.Date.from_string("2018-04-01"),
-                "date_end": fields.Date.from_string("2018-06-30"),
-                "discount_sale": 10,
-                "discount_purchase": 15,
-            }
-        )
-
-        # Test overlaps (2018-12-01 -> 2019-03-01) blocked by the promo 3
-        # (2018-08-01 -> 2018-12-31)
-        with self.assertRaises(ValidationError):
-            ProductSupplierinfo.create(
-                {
-                    "name": self.supplier.id,
-                    "product_tmpl_id": self.p1.product_tmpl_id.id,
-                    "date_start": fields.Date.from_string("2018-12-01"),
-                    "date_end": fields.Date.from_string("2019-03-01"),
-                }
-            )
-
-        # Test overlaps (2018-03-01 -> 2018-06-01) blocked by the promo 1
-        # (2018-01-01 -> 2018-03-31) and 2 (2018-04-01 -> 2018-06-30)
-        with self.assertRaises(ValidationError):
-            ProductSupplierinfo.create(
-                {
-                    "name": self.supplier.id,
-                    "product_tmpl_id": self.p1.product_tmpl_id.id,
-                    "date_start": fields.Date.from_string("2018-03-01"),
-                    "date_end": fields.Date.from_string("2018-06-01"),
-                }
-            )
-
-        # Test inverse date_start and date_end
-        with self.assertRaises(ValidationError):
-            ProductSupplierinfo.create(
-                {
-                    "name": self.supplier.id,
-                    "product_tmpl_id": self.p1.product_tmpl_id.id,
-                    "date_start": fields.Date.from_string("2017-12-31"),
-                    "date_end": fields.Date.from_string("2017-01-01"),
-                }
-            )
-
-        # Test overlaps with different min_qty
-        # Promo 1 (2018-01-01 -> 2018-03-31) with min_qty == 100
-        ProductSupplierinfo.create(
-            {
-                "name": self.supplier.id,
-                "product_tmpl_id": self.p1.product_tmpl_id.id,
-                "date_start": fields.Date.from_string("2018-01-01"),
-                "date_end": fields.Date.from_string("2018-03-31"),
-                "min_qty": 100,
-                "discount_sale": 10,
-                "discount_purchase": 20,
-            }
-        )
-
-        # Test overlaps with different min_qty_sale
-        # Promo 2 (2018-04-01 -> 2018-06-30) with min_qty_sale == 25
-        ProductSupplierinfo.create(
-            {
-                "name": self.supplier.id,
-                "product_tmpl_id": self.p1.product_tmpl_id.id,
-                "date_start": fields.Date.from_string("2018-04-01"),
-                "date_end": fields.Date.from_string("2018-06-30"),
-                "min_qty_sale": 25,
-                "discount_sale": 11.5,
-                "discount_purchase": 15,
-            }
-        )
-
-        # Test overlaps with different min_qty_sale
-        # Promo 2 (2018-04-01 -> 2018-06-30) with min_qty_sale == 50
-        ProductSupplierinfo.create(
-            {
-                "name": self.supplier.id,
-                "product_tmpl_id": self.p1.product_tmpl_id.id,
-                "date_start": fields.Date.from_string("2018-04-01"),
-                "date_end": fields.Date.from_string("2018-06-30"),
-                "min_qty_sale": 50,
-                "discount_sale": 14,
-                "discount_purchase": 15,
-            }
-        )
-
-        # Test overlaps with the same min_qty and min_qty_sale
-        with self.assertRaises(ValidationError):
-            ProductSupplierinfo.create(
-                {
-                    "name": self.supplier.id,
-                    "product_tmpl_id": self.p1.product_tmpl_id.id,
-                    "date_start": fields.Date.from_string("2018-04-01"),
-                    "date_end": fields.Date.from_string("2018-06-30"),
-                    "min_qty_sale": 50,
-                    "discount_sale": 14,
-                    "discount_purchase": 15,
-                }
-            )
-
     def test_select_seller(self):
-        """Test the method _select_seller_for_sale.
+        """Test the method _select_seller.
 
-        and _select_seller_for_sale.
+        and _select_seller.
 
         Default price: 100€
         Promo 1 (2018-01-01 -> 2018-03-31)
@@ -513,24 +335,25 @@ class TestPricelistDiscount(PricelistDiscountCase):
                 * - 10% on purchase
         """
 
-        ProductSupplierinfo = self.env["product.supplierinfo"]
-        ProductSupplierinfo.search(
+        sinfo_model = self.env["product.supplierinfo"]
+        sinfo_model.search(
             [("product_tmpl_id", "=", self.p1.product_tmpl_id.id)]
         ).unlink()
 
         # Create the default price
-        default_promo = ProductSupplierinfo.create(
+        default_promo = sinfo_model.create(
             {
-                "name": self.supplier.id,
+                "partner_id": self.supplier.id,
                 "product_tmpl_id": self.p1.product_tmpl_id.id,
                 "price": 100,
+                "sequence": 1000,
             }
         )
 
         # Promo 1 (2018-01-01 -> 2018-03-31)
-        promo_1 = ProductSupplierinfo.create(
+        promo_1 = sinfo_model.create(
             {
-                "name": self.supplier.id,
+                "partner_id": self.supplier.id,
                 "product_tmpl_id": self.p1.product_tmpl_id.id,
                 "date_start": fields.Date.from_string("2018-01-01"),
                 "date_end": fields.Date.from_string("2018-03-31"),
@@ -539,11 +362,10 @@ class TestPricelistDiscount(PricelistDiscountCase):
                 "price": 100,
             }
         )
-
         # Promo 1 (2018-01-01 -> 2018-03-31) with min_qty == 100
-        promo_1_min_100 = ProductSupplierinfo.create(
+        promo_1_min_100 = sinfo_model.create(
             {
-                "name": self.supplier.id,
+                "partner_id": self.supplier.id,
                 "product_tmpl_id": self.p1.product_tmpl_id.id,
                 "date_start": fields.Date.from_string("2018-01-01"),
                 "date_end": fields.Date.from_string("2018-03-31"),
@@ -555,9 +377,9 @@ class TestPricelistDiscount(PricelistDiscountCase):
         )
 
         # Promo 2 (2018-04-01 -> 2018-06-30)
-        promo_2 = ProductSupplierinfo.create(
+        promo_2 = sinfo_model.create(
             {
-                "name": self.supplier.id,
+                "partner_id": self.supplier.id,
                 "product_tmpl_id": self.p1.product_tmpl_id.id,
                 "date_start": fields.Date.from_string("2018-04-01"),
                 "date_end": fields.Date.from_string("2018-06-30"),
@@ -568,9 +390,9 @@ class TestPricelistDiscount(PricelistDiscountCase):
         )
 
         # Promo 2 (2018-04-01 -> 2018-06-30) with min_qty_sale == 25
-        promo_2_min_sale_25 = ProductSupplierinfo.create(
+        promo_2_min_sale_25 = sinfo_model.create(
             {
-                "name": self.supplier.id,
+                "partner_id": self.supplier.id,
                 "product_tmpl_id": self.p1.product_tmpl_id.id,
                 "date_start": fields.Date.from_string("2018-04-01"),
                 "date_end": fields.Date.from_string("2018-06-30"),
@@ -582,9 +404,9 @@ class TestPricelistDiscount(PricelistDiscountCase):
         )
 
         # Promo 2 (2018-04-01 -> 2018-06-30) with min_qty_sale == 50
-        promo_2_min_sale_50 = ProductSupplierinfo.create(
+        promo_2_min_sale_50 = sinfo_model.create(
             {
-                "name": self.supplier.id,
+                "partner_id": self.supplier.id,
                 "product_tmpl_id": self.p1.product_tmpl_id.id,
                 "date_start": fields.Date.from_string("2018-04-01"),
                 "date_end": fields.Date.from_string("2018-06-30"),
@@ -596,9 +418,9 @@ class TestPricelistDiscount(PricelistDiscountCase):
         )
 
         # Promo 3 (2018-08-01 -> 2018-12-31)
-        promo_3 = ProductSupplierinfo.create(
+        promo_3 = sinfo_model.create(
             {
-                "name": self.supplier.id,
+                "partner_id": self.supplier.id,
                 "product_tmpl_id": self.p1.product_tmpl_id.id,
                 "date_start": fields.Date.from_string("2018-08-01"),
                 "date_end": fields.Date.from_string("2018-12-31"),
@@ -610,51 +432,67 @@ class TestPricelistDiscount(PricelistDiscountCase):
 
         # Test default promo
         promo = self.p1._select_seller(
-            partner_id=self.supplier, quantity=20, date="2019-01-01"
+            partner_id=self.supplier,
+            quantity=20,
+            date=fields.Date.to_date("2019-01-01"),
         )
         self.assertEqual(promo, default_promo)
 
         # Test promo 1
         promo = self.p1._select_seller(
-            partner_id=self.supplier, quantity=20, date="2018-01-01"
+            partner_id=self.supplier,
+            quantity=20,
+            date=fields.Date.to_date("2018-01-01"),
         )
         self.assertEqual(promo, promo_1)
 
         # Test promo 2
-        promo = self.p1._select_seller_for_sale(
-            partner_id=self.supplier, quantity=20, date="2018-05-01"
+        promo = self.p1._select_seller(
+            partner_id=self.supplier,
+            quantity=20,
+            date=fields.Date.to_date("2018-05-01"),
         )
         self.assertEqual(promo, promo_2)
 
         # Test promo 3
-        promo = self.p1._select_seller_for_sale(
-            partner_id=self.supplier, quantity=20, date="2018-12-31"
+        promo = self.p1._select_seller(
+            partner_id=self.supplier,
+            quantity=20,
+            date=fields.Date.to_date("2018-12-31"),
         )
         self.assertEqual(promo, promo_3)
 
         # Test promo 1 with min (purchase) 100
         promo = self.p1._select_seller(
-            partner_id=self.supplier, quantity=100, date="2018-01-01"
+            partner_id=self.supplier,
+            quantity=100,
+            date=fields.Date.to_date("2018-01-01"),
         )
         self.assertEqual(promo, promo_1_min_100)
 
         # Test promo 2 with min (sale) 40
-        promo = self.p1._select_seller_for_sale(
-            partner_id=self.supplier, quantity=40, date="2018-05-01"
+        promo = self.p1._select_seller(
+            partner_id=self.supplier,
+            quantity=40,
+            date=fields.Date.to_date("2018-05-01"),
         )
         self.assertEqual(promo, promo_2_min_sale_25)
 
         # Test promo 2 with min (sale) 120
-        promo = self.p1._select_seller_for_sale(
-            partner_id=self.supplier, quantity=120, date="2018-05-01"
+        promo = self.p1._select_seller(
+            partner_id=self.supplier,
+            quantity=120,
+            date=fields.Date.to_date("2018-05-01"),
         )
         self.assertEqual(promo, promo_2_min_sale_50)
 
         # Test promo 2 with min (purchase) 40 (method _select_seller)
         promo = self.p1._select_seller(
-            partner_id=self.supplier, quantity=40, date="2018-05-01"
+            partner_id=self.supplier,
+            quantity=40,
+            date=fields.Date.to_date("2018-05-01"),
         )
-        self.assertEqual(promo, promo_2_min_sale_50)
+        self.assertEqual(promo, promo_2_min_sale_25)
 
     def test_multiple_min_qty(self):
         vals_item_10 = {

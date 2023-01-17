@@ -19,11 +19,10 @@ class SaleOrderLine(models.Model):
 
             condition = line.product_id and line.order_id.supplier_promotion_allowed
             if condition:
-
-                seller = line.product_id._select_seller_for_sale(
+                seller = line.product_id._select_seller(
                     partner_id=False,
                     quantity=line.product_uom_qty,
-                    date=(line.order_id.date_order and line.order_id.date_order[:10]),
+                    date=line.order_id.date_order,
                     uom_id=line.product_uom,
                 )
 
@@ -34,14 +33,15 @@ class SaleOrderLine(models.Model):
     @api.depends("order_id.discount_pricelist_ids", "product_id", "product_uom_qty")
     def _compute_discount_item_id(self):
         for line in self:
-            discount_item = False
-            pricelists = line.order_id.discount_pricelist_ids
-            if line.product_id and pricelists:
-                date = line.order_id.date_order
-                # we don't use UOMs, if that changes then apply it here:
-                qty = line.product_uom_qty or 1
-                product = line.product_id
-                discount_item = pricelists._get_discount_item_id(product, date, qty)
+            # we don't use UOMs, if that changes then apply it here:
+            line.discount_item_id = (
+                discount_item
+            ) = line.product_id._get_best_applicable_pricelist_item(
+                line.order_id.date_order,
+                quantity=line.product_uom_qty or 1,
+                pricelists=line.order_id.discount_pricelist_ids,
+                currency=line.currency_id,
+            )
             line.discount_item_id = discount_item
         self.onchange_product_id_reset_discount()
 

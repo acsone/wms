@@ -104,7 +104,7 @@ class ProductSupplierinfo(models.Model):
                 _("The end date must be equal or greater than the start date")
             )
 
-    @api.constrains("date_start", "date_end", "name", "min_qty", "min_qty_sale")
+    @api.constrains("date_start", "date_end", "partner_id", "min_qty", "min_qty_sale")
     def check_dates(self):
         # Used by imports to avoid problems with imported data
         if self._context.get("disable_check_dates"):
@@ -112,10 +112,10 @@ class ProductSupplierinfo(models.Model):
         for rec in self:
             rec._check_unique_supplier()
             if not rec.date_start and not rec.date_end:
-                self._check_min_qty()
-                self._check_existing_open_promo()
+                rec._check_min_qty()
+                rec._check_existing_open_promo()
             else:
-                self._check_date_start()
-                self._check_date_end()
-                self._check_dates()
-                self._check_existing_promo()
+                rec._check_date_start()
+                rec._check_date_end()
+                rec._check_dates()
+                rec._check_existing_promo()

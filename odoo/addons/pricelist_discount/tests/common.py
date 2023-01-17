@@ -2,10 +2,10 @@
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo.tests.common import SavepointCase
+from odoo.tests.common import TransactionCase
 
 
-class PricelistDiscountCase(SavepointCase):
+class PricelistDiscountCase(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -27,7 +27,7 @@ class PricelistDiscountCase(SavepointCase):
         cls.supplier = cls.env.ref("base.res_partner_12")
 
         cls.supplierinfo1 = cls.env["product.supplierinfo"].create(
-            {"name": cls.supplier.id, "discount_sale": 10}
+            {"partner_id": cls.supplier.id, "discount_sale": 10}
         )
 
         cls.p1 = cls.env["product.product"].create(
@@ -39,7 +39,7 @@ class PricelistDiscountCase(SavepointCase):
         )
 
         cls.supplierinfo2 = cls.env["product.supplierinfo"].create(
-            {"name": cls.supplier.id, "discount_sale": 10}
+            {"partner_id": cls.supplier.id, "discount_sale": 10}
         )
 
         cls.p2 = cls.env["product.product"].create(

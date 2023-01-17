@@ -10,10 +10,10 @@ class TestProductSupplierinfoDefaultPrice(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.sinfo_model = cls.env["product.supplierinfo"]
-        cls.product = cls.env["product.template"].create(
-            {"name": "Virtual Home Staging"}
+        cls.sinfo_model = cls.env["product.supplierinfo"].with_context(
+            disable_check_dates=True
         )
+        cls.product = cls.env.ref("product.product_product_4").product_tmpl_id
         cls.partner_1 = cls.env["res.partner"].create({"name": "partner 1"})
         cls.partner_2 = cls.env["res.partner"].create({"name": "partner 2"})
         cls.sinfo_model.create(
