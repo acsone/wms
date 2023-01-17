@@ -81,12 +81,20 @@ class ClusterPicking(Component):
         # report template relies on quantity_done, but it might not be computed yet
         # when the report is generated.
         # bug observed by Jacques-Etienne and Lindsay who might know more.
-        if not operation.picking_id.printed_once:
+        if do_not_print_food_labels:
+            if not operation.picking_id.printed_once:
+                operation.sudo().print_food_product_label(
+                    printer_id=self.shopfloor_user.printing_product_label_printer_id.id,
+                    quantity=1,
+                    quantity_done=quantity,
+                    lot_id=lot_id,
+                    do_not_print_food_labels=do_not_print_food_labels,
+                )
+            operation.picking_id.printed_once = True
+        else:
             operation.sudo().print_food_product_label(
                 printer_id=self.shopfloor_user.printing_product_label_printer_id.id,
                 quantity=1,
                 quantity_done=quantity,
                 lot_id=lot_id,
-                do_not_print_food_labels=do_not_print_food_labels,
             )
-        operation.picking_id.printed_once = True
