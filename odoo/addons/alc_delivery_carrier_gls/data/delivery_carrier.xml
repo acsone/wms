@@ -17,8 +17,6 @@
       name="gls_url_tracking"
     >https://gls-group.eu/EU/en/parcel-tracking/match=%s</field>
     <field name="gls_label_format">pdf</field>
-    <field name="gls_login">TO BE SPECIFIED</field>
-    <field name="gls_password">TO BE SPECIFIED</field>
-    <field name="gls_contact_id">TO BE SPECIFIED</field>
+    <field name="gls_contact_id">CHANGE ME</field>
   </record>
 </odoo>
