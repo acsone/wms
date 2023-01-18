@@ -112,3 +112,7 @@ odoo-addon-attachment-s3 @ git+https://github.com/acsone/odoo-cloud-platform@16.
 # https://github.com/OCA/stock-logistics-transport/pull/87
 odoo-addon-stock-dock @ git+https://github.com/acsone/stock-logistics-transport.git@16.0-mig-shipment_advice-lmi#subdirectory=setup/stock_dock
 odoo-addon-shipment-advice @ git+https://github.com/acsone/stock-logistics-transport.git@16.0-mig-shipment_advice-lmi#subdirectory=setup/shipment_advice
+
+# stock-logistics-availability
+# https://github.com/OCA/stock-logistics-availability/pull/6 - [16.0][ADD] stock_available_immediately_exclude_location
+odoo-addon-stock-available-immediately-exclude-location @ git+https://github.com/acsone/stock-logistics-availability.git@16.0-mig-stock_available_immediately_exclude_location-hda#subdirectory=setup/stock_available_immediately_exclude_location
