@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2017 Sylvain Van Hoof (Okia SPRL)
 # Copyright 2017-2018 Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
@@ -6,17 +5,14 @@
 import logging
 from collections import defaultdict
 
-from odoo import api, models
+from odoo.addons.stock.models.stock_picking import Picking
 
 _logger = logging.getLogger(__name__)
 
 
-class StockPicking(models.Model):
-    _inherit = "stock.picking"
-
+class StockPicking(Picking):
     def _get_moves_by_main_product(self):
-        """ Return a list of moves of products defined with an additional_product_id
-        """
+        """Return a list of moves of products defined with an additional_product_id."""
         moves_by_main_product = defaultdict(list)
         for move in self.mapped("move_lines").filtered(lambda m: m.state == "assigned"):
             product = move.product_id
@@ -76,10 +72,10 @@ class StockPicking(models.Model):
         ):
             moves_to_unlink.unlink()
 
-    @api.multi  # noqa: C901
-    def _prepare_pack_ops(self, quants, forced_qties):
+    def _prepare_pack_ops(self, quants, forced_qties):  # noqa: C901
         """
-        This method will add additional products on stock
+        This method will add additional products on stock.
+
         moves and pack operations.
         There are three main steps:
         1. Call super and retrieve the result
@@ -100,7 +96,7 @@ class StockPicking(models.Model):
             # since some stock move could have been removed we must filter out
             # quants for which no reservation exists
             quants = quants.filtered("reservation_id")
-        result = super(StockPicking, self)._prepare_pack_ops(quants, forced_qties)
+        result = super()._prepare_pack_ops(quants, forced_qties)
         if self.env.context.get("skip_additional"):
             return result
 
@@ -158,8 +154,8 @@ class StockPicking(models.Model):
                 for move_dest in chained_moves:
                     target_picking = move_dest.picking_id
                     move_vals = {
-                        "name": u"ADDITIONAL PRODUCT: %s (FROM %s)"
-                        % (additional_product.display_name, product.display_name),
+                        "name": f"ADDITIONAL PRODUCT: {additional_product.display_name}"
+                        f" (FROM {product.display_name})",
                         "sequence": 9999,
                         "product_id": additional_product.id,
                         "product_uom_qty": additional_qty,
@@ -194,9 +190,7 @@ class StockPicking(models.Model):
             additional_moves.action_confirm()
             additional_moves.action_assign(no_prepare=True)
             additional_quants = additional_moves.mapped("reserved_quant_ids")
-            additional_result = super(StockPicking, self)._prepare_pack_ops(
-                additional_quants, {}
-            )
+            additional_result = super()._prepare_pack_ops(additional_quants, {})
             #
             result = self._merge_pack_ops_infos(result, additional_result)
 
@@ -204,7 +198,8 @@ class StockPicking(models.Model):
 
     def _merge_pack_ops_infos(self, info1, info2):
         """
-        Merge 2 list of pack operations values into a unique list where
+        Merge 2 list of pack operations values into a unique list where.
+
         operations for the same 'product', 'package', 'owner', 'location',
         'location_dst_id', 'picking_id', 'product_uom_id', are merged
         """
@@ -221,7 +216,8 @@ class StockPicking(models.Model):
 
     def _get_pack_ops_info_map(self, pack_ops_info):
         """
-        Create a map of pack operation infos where the key is a tuple
+        Create a map of pack operation infos where the key is a tuple.
+
         based on 'product', 'package', 'owner', 'location', 'location_dst_id',
         'picking_id', 'product_uom_id',
         """

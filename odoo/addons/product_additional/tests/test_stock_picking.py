@@ -1,9 +1,6 @@
-# -*- coding: utf-8 -*-
 # © 2017 Okia SPRL
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 from datetime import datetime
-
-from dateutil.relativedelta import relativedelta
 
 from odoo import fields
 from odoo.tests import common
@@ -11,7 +8,7 @@ from odoo.tests import common
 
 class TestStockPicking(common.TransactionCase):
     def setUp(self):
-        super(TestStockPicking, self).setUp()
+        super().setUp()
 
         location_obj = self.env["stock.location"]
 
@@ -59,8 +56,8 @@ class TestStockPicking(common.TransactionCase):
             {"name": "GAA320", "location_id": self.parent_location.id}
         )
         self.env["stock.location"]._parent_store_compute()
-
-        one_year = datetime.now() + relativedelta(years=1)
+        now = datetime.now()
+        one_year = now.replace(year=now.year + 1)
         lot_additional_product = self.env["stock.production.lot"].create(
             {
                 "name": "000000001",
@@ -101,7 +98,8 @@ class TestStockPicking(common.TransactionCase):
         )
         self.env["stock.location"]._parent_store_compute()
 
-        one_year = datetime.now() + relativedelta(years=1)
+        now = datetime.now()
+        one_year = now.replace(year=now.year + 1)
         lot_product_1 = self.env["stock.production.lot"].create(
             {
                 "name": "000000001",
@@ -122,7 +120,8 @@ class TestStockPicking(common.TransactionCase):
 
     def test_prepare_pack_ops_1(self):
         """
-        Test the method _prepare_pack_ops
+        Test the method _prepare_pack_ops.
+
         We have 100 units of main product
         and 15 units of additional product.
 
@@ -146,7 +145,8 @@ class TestStockPicking(common.TransactionCase):
 
         # Picking 1
         # Stock additional product: 15.0
-        tomorrow = datetime.now() + relativedelta(days=1)
+        now = datetime.now()
+        tomorrow = now.replace(day=now.day + 1)
         picking_1 = (
             self.env["stock.picking"]
             .create(

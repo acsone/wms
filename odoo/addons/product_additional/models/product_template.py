@@ -1,20 +1,23 @@
-# -*- coding: utf-8 -*-
 # Copyright 2017 Sylvain Van Hoof (Okia SPRL)
 # Copyright 2018 Camptocamp SA
+# Copyright 2023 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-from odoo import api, fields, models
+from odoo import api, fields
+
+from odoo.addons.product.models.product_product import ProductProduct
+from odoo.addons.product.models.product_template import (
+    ProductTemplate as ProductTemplateBase,
+)
 
 
-class ProductTemplate(models.Model):
-    _inherit = "product.template"
+class ProductTemplate(ProductTemplateBase):
 
-    additional_product_id = fields.Many2one(
-        "product.product", string="Additional Product", ondelete="restrict"
+    additional_product_id = fields.Many2one[ProductProduct](
+        string="Additional Product", ondelete="restrict"
     )
-    ratio_main_product = fields.Integer("Ratio Main Product")
-    ratio_additional_product = fields.Integer("Ratio Additional Product")
+    ratio_main_product = fields.Integer(string="Ratio Main Product")
+    ratio_additional_product = fields.Integer(string="Ratio Additional Product")
 
-    @api.multi
     def get_qty_additional_product(self, ordered_qty):
         self.ensure_one()
 
@@ -30,26 +33,19 @@ class ProductTemplate(models.Model):
 
         return qty_additional_product
 
-    @api.multi
-    def is_an_additional_product(self):
-        self.ensure_one()
-        return bool(
-            len(
-                self.env["product.template"].search(
-                    [("additional_product_id", "=", self.id)]
-                )
-            )
-        )
+    @api.model
+    def is_an_additional_product(self, product):
+        # FIXME: is this used?
+        return bool(self.search([("additional_product_id", "=", product.id)]))
 
-    @api.multi
     def get_promotional_product(self, qty, uom):
         """Compute how many promotional product are offered.
 
         Given a quantity and a unity of measure, returns for the current
         day how many promotional (free) product will be given.
         The unit of measure is adapted if needs be.
-
         """
+        self.ensure_one()
         if uom != self.uom_id:
             qty = uom._compute_quantity(qty, self.uom_id)
         result = self.env["product.supplierinfo"].search(

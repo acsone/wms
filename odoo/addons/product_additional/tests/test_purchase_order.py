@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2018 Okia SPRL
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
@@ -9,7 +8,7 @@ from odoo.tests.common import SavepointCase
 class TestPurchaseOrder(SavepointCase):
     @classmethod
     def setUpClass(cls):
-        super(TestPurchaseOrder, cls).setUpClass()
+        super().setUpClass()
 
         # Create partner
         cls.partner = cls.env["res.partner"].create(
@@ -65,7 +64,8 @@ class TestPurchaseOrder(SavepointCase):
 
     def test_action_confirm_1(self):
         """
-        Confirm a purchase order without additional product
+        Confirm a purchase order without additional product.
+
         :return:
         """
         self.assertEqual(len(self.purchase_order.order_line), 1)
@@ -75,7 +75,8 @@ class TestPurchaseOrder(SavepointCase):
 
     def test_button_compute_additional_products(self):
         """
-        Set an additional product with ratio (5/2) and cancel this purchase
+        Set an additional product with ratio (5/2) and cancel this purchase.
+
         order
         :return:
         """

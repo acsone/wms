@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # © 2017 Okia SPRL
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
@@ -9,7 +8,7 @@ from odoo.tests import common
 class TestSaleOrder(common.SavepointCase):
     @classmethod
     def setUpClass(cls):
-        super(TestSaleOrder, cls).setUpClass()
+        super().setUpClass()
 
         context = dict(cls.env.context)
         context.update({"tracking_disable": True})
@@ -102,7 +101,8 @@ class TestSaleOrder(common.SavepointCase):
 
     def test_action_confirm_1(self):
         """
-        Add a simple supplier info (ratio 3/1) without date or min quantity
+        Add a simple supplier info (ratio 3/1) without date or min quantity.
+
         :return:
         """
         self.env["product.supplierinfo"].create(
@@ -135,7 +135,8 @@ class TestSaleOrder(common.SavepointCase):
 
     def test_action_confirm_2(self):
         """
-        Add the first supplier info (ratio 3/1) and a second supplier info
+        Add the first supplier info (ratio 3/1) and a second supplier info.
+
         (ratio 2/1) with a min quantity
         :return:
         """
@@ -184,7 +185,8 @@ class TestSaleOrder(common.SavepointCase):
 
     def test_action_confirm_3(self):
         """
-        Create a supplier info with a expired date_start and date_end
+        Create a supplier info with a expired date_start and date_end.
+
         :return:
         """
         self.env["product.supplierinfo"].create(
@@ -206,7 +208,8 @@ class TestSaleOrder(common.SavepointCase):
 
     def test_action_draft_1(self):
         """
-        Confirm a sale order and reset the state to draft
+        Confirm a sale order and reset the state to draft.
+
         :return:
         """
         self.env["product.supplierinfo"].create(

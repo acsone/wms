@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -8,18 +7,18 @@ from . import common
 class TestStockMove(common.StockPickingTestCase):
     @classmethod
     def setUpClass(cls):
-        super(TestStockMove, cls).setUpClass()
+        super().setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, round_autoset=False))
 
     def test_00(self):
         """
         Data:
+
         one SO is created with one picking and stock moves associated
         Test case:
         we cancel one move for the main product, the move for the additionnal one should also be cancelled
         Expected:
         move for the additionnal product is cancelled
-
         """
         # Create the sale order without setting a sequence on sale order lines
         so = self._confirm_sale_order(products=[self.main_product, self.product_2])
@@ -54,6 +53,7 @@ class TestStockMove(common.StockPickingTestCase):
     def test_01(self):
         """
         Data:
+
         one SO is created with one picking and stock moves associated.
         We have 2 products with the same additional product
         Test case:
@@ -61,7 +61,6 @@ class TestStockMove(common.StockPickingTestCase):
         but not the additional move for the other product
         Expected:
         one additional move is cancelled
-
         """
 
         # Create the sale order without setting a sequence on sale order lines

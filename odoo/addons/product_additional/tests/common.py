@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2018 Camptocamp
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -8,7 +7,7 @@ from odoo.tests.common import SavepointCase
 class StockPickingTestCase(SavepointCase):
     @classmethod
     def setUpClass(cls):
-        super(StockPickingTestCase, cls).setUpClass()
+        super().setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
         cls.partner1 = cls.env["res.partner"].create(
             {"name": "Unittest first partner", "ref": "12344566777878"}

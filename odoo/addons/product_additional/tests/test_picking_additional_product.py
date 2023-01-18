@@ -1,13 +1,10 @@
-# -*- coding: utf-8 -*-
-
-
 from . import common
 
 
 class TestStockPicking(common.StockPickingTestCase):
     @classmethod
     def setUpClass(cls):
-        super(TestStockPicking, cls).setUpClass()
+        super().setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, round_autoset=False))
 
     def test_pick_and_ship(self):
@@ -56,12 +53,12 @@ class TestStockPicking(common.StockPickingTestCase):
     def test_00(self):
         """
         Test case:
+
             Create and confirm a SO with product_additional
             Confirm the picking (required to get the additional product into the picking)
             Cancel the SO
         Expected result:
             SO and pickings must be canceled
-
         """
         sale = self._confirm_sale_order(products=[self.main_product])
         pick = self._get_picking_pick(sale)
@@ -88,6 +85,7 @@ class TestStockPicking(common.StockPickingTestCase):
     def test_01(self):
         """
         Test case:
+
             Create and confirm a SO with product_additional
             Confirm the picking (required to get the additional product into the picking) and process
             Confirm and process the delivery
@@ -115,11 +113,11 @@ class TestStockPicking(common.StockPickingTestCase):
     def test_02(self):
         """
         Test case:
+
             Create and confirm a SO with product_additional
             Confirm the picking (required to get the additional product into the picking)
         Expected result:
             The moves for the additional product are linked to a warehouse...
-
         """
         sale = self._confirm_sale_order(products=[self.main_product])
         pick = self._get_picking_pick(sale)
@@ -140,6 +138,7 @@ class TestStockPicking(common.StockPickingTestCase):
     def test_03(self):
         """
         Test case:
+
             Create and confirm a SO with product_additional ( 1 main for 5 additional)
             1. Confirm the picking (required to get the additional product into the picking)
             2. unreserve
@@ -183,6 +182,7 @@ class TestStockPicking(common.StockPickingTestCase):
     def test_04(self):
         """
         Test case:
+
             Create and confirm a SO with product_additional ( 1 main for 5 additional)
             1. Confirm and assign the picking (required to get the additional product into the picking)
             2. Confirm and assign the picking again
@@ -222,6 +222,7 @@ class TestStockPicking(common.StockPickingTestCase):
     def test_05(self):
         """
         Test case:
+
             Create and confirm a SO with 2 product_additional
                 (1 main for 5 additional)
                 (1 main for 3 additional)
@@ -265,6 +266,7 @@ class TestStockPicking(common.StockPickingTestCase):
     def test_06(self):
         """
         Test case:
+
             1. Create validate and assign a SO with:
                * 1 main product (-> 5 additional)
                * 1 additional_product
