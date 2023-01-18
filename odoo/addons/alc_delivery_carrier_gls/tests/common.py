@@ -1,14 +1,13 @@
-# -*- coding: utf-8 -*-
 # Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo.tests.common import SavepointCase
+from odoo.tests.common import TransactionCase
 
 
-class GLSCommonFeatures(SavepointCase):
+class GLSCommonFeatures(TransactionCase):
     @classmethod
     def setUpClass(cls):
-        super(GLSCommonFeatures, cls).setUpClass()
+        super().setUpClass()
         cls.env = cls.env(
             context=dict(cls.env.context, tracking_disable=True, NO_GLS_SEND=True)
         )

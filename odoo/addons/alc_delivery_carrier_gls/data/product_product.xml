@@ -9,7 +9,7 @@
     <field name="sale_ok" eval="False" />
     <field name="name">Coûts de livraison - GLS Belgique</field>
     <field
-      name="image"
+      name="image_1920"
       type="base64"
       file="alc_delivery_carrier_gls/static/img/gls.jpg"
     />
