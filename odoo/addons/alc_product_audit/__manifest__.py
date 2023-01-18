@@ -19,7 +19,6 @@
         "purchase_open_qty",
         "product",
         "sale_cancel_remaining",
-        "specific_data",
         "specific_stock",
         "stock",
         "stock_orderpoint_product",

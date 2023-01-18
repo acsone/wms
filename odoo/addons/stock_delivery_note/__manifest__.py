@@ -13,7 +13,6 @@
         "alc_sale_suite_name",
         "product_additional",
         "product_expiry",
-        "specific_data",
         "specific_sale",
         "specific_stock",
         "stock",

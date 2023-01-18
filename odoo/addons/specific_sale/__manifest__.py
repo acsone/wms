@@ -25,7 +25,6 @@
         "stock",
         "stock_available_immediately",
         "sale_triple_discount",
-        "specific_data",
         "specific_partner",
         "specific_stock",
         "stock_lot_track",
@@ -39,6 +38,7 @@
         "procurement_sale",
         "sale_consignment",
         "alc_product_category_data",
+        "alc_product_pricelist_data",
     ],
     "website": "http://www.camptocamp.com",
     "data": [

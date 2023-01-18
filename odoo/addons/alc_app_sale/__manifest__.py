@@ -11,10 +11,14 @@
     "website": "https://acsone.eu",
     "application": True,
     "depends": [
+        # Odoo
         "sale",
-        "alc_product_category_data",
+        # OCA
         "sale_triple_discount",
         "product_price_category",
+        # ALC
+        "alc_product_category_data",
+        "alc_product_pricelist_data",
         "alc_product_category_business_unit",
     ],
 }

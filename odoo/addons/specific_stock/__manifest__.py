@@ -22,7 +22,6 @@
         "purchase",
         "sale",
         "sale_stock",
-        "specific_data",
         "specific_purchase",
         "stock",
         "stock_available_immediately",

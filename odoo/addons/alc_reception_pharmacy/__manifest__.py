@@ -13,7 +13,6 @@
     # TODO split delivery_rounds...
     "depends": [
         "alc_delivery_rounds_assign_blocking",
-        "specific_data",
         "stock",
         "alc_product_category_data",
     ],

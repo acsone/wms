@@ -42,7 +42,7 @@ class ExportProductPriceTestCase(ESBXMLTestCase):
             }
         )
         self.p2.indicated_price = 12
-        self.pricelist_pb2 = self.env.ref("specific_data.product_pricelist_pb2")
+        self.pricelist_pb2 = self.env.ref("alc_product_pricelist_data.product_pricelist_pb2")
         self.pricelist_pb2.item_ids = [
             (
                 0,

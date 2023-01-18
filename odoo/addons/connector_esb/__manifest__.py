@@ -38,7 +38,6 @@
         "specific_product",
         "specific_purchase",
         "specific_stock",
-        "specific_data",
         "specific_sale",
         "stock",
         "product_additional",
@@ -47,6 +46,7 @@
         "l10n_be_apb_tax",
         "delivery",
         "alc_product_category_data",
+        "alc_product_pricelist_data",
     ],
     "website": "http://www.camptocamp.com",
     "data": [

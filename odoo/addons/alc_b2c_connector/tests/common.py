@@ -27,7 +27,7 @@ class CommonCase(BaseRestCase):
         )
         _initialize_product_assortment_filter(cls.env.cr)
         cls.currency_id = cls.env.user.company_id.currency_id
-        cls.pricelist_id = cls.env.ref("specific_data.product_pricelist_pb1")
+        cls.pricelist_id = cls.env.ref("alc_product_pricelist_data.product_pricelist_pb1")
         # ensure same currency across products and pricelists
         cls.pricelist_id.currency_id = cls.currency_id
         cls.ProductProduct = cls.env["product.product"]

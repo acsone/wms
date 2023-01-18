@@ -26,6 +26,7 @@ This addon provides:
         "specific_purchase",
         "report_xlsx_helper",
         "base_import",
+        "alc_product_pricelist_data",
     ],
     "data": [
         "wizards/product_price_importer.xml",

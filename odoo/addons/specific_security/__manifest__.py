@@ -16,7 +16,6 @@
         "account",
         "sale",
         "mrp",
-        "specific_data",
         "account_cutoff_base",
         "product_assortment",
         "base_rest",

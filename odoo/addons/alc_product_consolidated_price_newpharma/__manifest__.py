@@ -12,7 +12,6 @@
     "website": "https://acsone.eu/",
     "depends": [
         "alc_product_consolidated_price_report",
-        "specific_data",
         "specific_product",
         "queue_job_cron",
         "alc_product_category_data",

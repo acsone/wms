@@ -31,7 +31,7 @@ class TestReportProductPriceImport(SavepointCase):
         )
         cls.product.write({"seller_ids": [(6, 0, cls.supplierinfo.ids)]})
 
-        cls.pricelist_pb2 = cls.env.ref("specific_data.product_pricelist_pb2")
+        cls.pricelist_pb2 = cls.env.ref("alc_product_pricelist_data.product_pricelist_pb2")
         cls.pricelist_pb2.item_ids = [
             (
                 0,
