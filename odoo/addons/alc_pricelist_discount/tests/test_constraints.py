@@ -4,10 +4,10 @@
 
 from odoo.exceptions import ValidationError
 
-from .common import TestPricelistDiscount
+from .common import TestPricelistDiscountCommon
 
 
-class TestPricelistDiscountConstraint(TestPricelistDiscount):
+class TestPricelistDiscountConstraint(TestPricelistDiscountCommon):
     def test_can_update_unassigned_pricelist(self):
         """As long as a pricelist is not in use, it can be updated."""
         self.pricelist_discount.is_discount = False

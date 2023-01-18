@@ -1,0 +1,110 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* alc_pricelist_discount
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-01-18 09:57+0000\n"
+"PO-Revision-Date: 2023-01-18 09:57+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_pricelist_discount
+#: model:ir.model.fields,field_description:alc_pricelist_discount.field_sale_order__discount_pricelist_ids
+msgid "Alcyon Discount"
+msgstr ""
+
+#. module: alc_pricelist_discount
+#: model:ir.model.fields,field_description:alc_pricelist_discount.field_res_partner__discount_pricelist_ids
+#: model:ir.model.fields,field_description:alc_pricelist_discount.field_res_users__discount_pricelist_ids
+msgid "Alcyon Discount Pricelist"
+msgstr ""
+
+#. module: alc_pricelist_discount
+#: model:ir.model,name:alc_pricelist_discount.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: alc_pricelist_discount
+#: model_terms:ir.ui.view,arch_db:alc_pricelist_discount.invoice_triple_discount_form_view
+#: model_terms:ir.ui.view,arch_db:alc_pricelist_discount.view_order_form
+msgid "Discount (%)"
+msgstr ""
+
+#. module: alc_pricelist_discount
+#: model:ir.model.fields,field_description:alc_pricelist_discount.field_sale_order_line__discount_item_id
+msgid "Discount Item"
+msgstr ""
+
+#. module: alc_pricelist_discount
+#: model:ir.model.fields,field_description:alc_pricelist_discount.field_product_pricelist__is_discount
+msgid "Is Discount"
+msgstr ""
+
+#. module: alc_pricelist_discount
+#: model:ir.model,name:alc_pricelist_discount.model_product_pricelist
+#: model:ir.model.fields,field_description:alc_pricelist_discount.field_res_partner__property_product_pricelist
+#: model:ir.model.fields,field_description:alc_pricelist_discount.field_res_users__property_product_pricelist
+msgid "Pricelist"
+msgstr ""
+
+#. module: alc_pricelist_discount
+#: model:ir.model,name:alc_pricelist_discount.model_product_product
+msgid "Product Variant"
+msgstr ""
+
+#. module: alc_pricelist_discount
+#: model_terms:ir.ui.view,arch_db:alc_pricelist_discount.invoice_triple_discount_form_view
+#: model_terms:ir.ui.view,arch_db:alc_pricelist_discount.view_order_form
+msgid "Promotion (%)"
+msgstr ""
+
+#. module: alc_pricelist_discount
+#: model:ir.model,name:alc_pricelist_discount.model_sale_order
+msgid "Sales Order"
+msgstr ""
+
+#. module: alc_pricelist_discount
+#: model:ir.model,name:alc_pricelist_discount.model_sale_order_line
+msgid "Sales Order Line"
+msgstr ""
+
+#. module: alc_pricelist_discount
+#. odoo-python
+#: code:addons/alc_pricelist_discount/models/res_partner.py:0
+#, python-format
+msgid "Some partners have a base pricelist set as discount pricelist."
+msgstr ""
+
+#. module: alc_pricelist_discount
+#. odoo-python
+#: code:addons/alc_pricelist_discount/models/res_partner.py:0
+#, python-format
+msgid "Some partners have a discount pricelist set as base pricelist."
+msgstr ""
+
+#. module: alc_pricelist_discount
+#: model:ir.model.fields,field_description:alc_pricelist_discount.field_sale_order__supplier_promotion_allowed
+msgid "Supplier promotion allowed"
+msgstr ""
+
+#. module: alc_pricelist_discount
+#: model:ir.model.fields,help:alc_pricelist_discount.field_res_partner__property_product_pricelist
+#: model:ir.model.fields,help:alc_pricelist_discount.field_res_users__property_product_pricelist
+msgid ""
+"This pricelist will be used, instead of the default one, for sales to the "
+"current partner"
+msgstr ""
+
+#. module: alc_pricelist_discount
+#. odoo-python
+#: code:addons/alc_pricelist_discount/models/product_pricelist.py:0
+#, python-format
+msgid "You cannot change a pricelist that is already in use."
+msgstr ""

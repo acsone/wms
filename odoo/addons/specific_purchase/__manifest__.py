@@ -11,7 +11,7 @@
     "depends": [
         "alc_product_pharmacy",
         "alc_supplier_purchase_manager",
-        "pricelist_discount",
+        "alc_pricelist_discount",
         "purchase",
         "stock",
         "calendar",

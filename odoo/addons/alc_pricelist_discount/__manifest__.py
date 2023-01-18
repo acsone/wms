@@ -1,19 +1,31 @@
-# -*- coding: utf-8 -*-
-# Copyright 2022 ACSONE SA/NV
+# Copyright 2016 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-
 {
-    "name": "Alcyon Discount Pricelist",
-    "description": """Alcyon Discount Pricelist""",
-    "version": "10.0.1.0.0",
+    "name": "Pricelist Discount",
+    "version": "16.0.1.0.0",
+    "author": "Camptocamp, ACSONE SA/NV",
     "license": "AGPL-3",
-    "author": "ACSONE SA/NV",
-    "website": "https://acsone.eu/",
-    "depends": ["pricelist_discount"],
-    "application": False,
-    "data": ["views/product_pricelist.xml"],
-    "demo": [],
-    "installable": False,
-    "pre_init_hook": "pre_init_hook",
+    "category": "Sales Management",
+    "depends": [
+        "account_invoice_triple_discount",
+        "product_price_category",
+        "sale",
+        "sale_stock",
+        "sale_triple_discount",
+        "alc_product_override_price",
+        "alc_partner_pricelist",
+        "alc_product_supplierinfo_default_price",
+        "alc_product_supplierinfo_check",
+    ],
+    "website": "http://www.camptocamp.com",
+    "data": [
+        # Report
+        "report/sale_order.xml",
+        # Views
+        "views/account_move.xml",
+        "views/sale_order.xml",
+        "views/product_pricelist.xml",
+    ],
+    "installable": True,
 }

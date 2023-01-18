@@ -13,7 +13,7 @@
     "depends": [
         "product",
         "product_expiry",
-        "pricelist_discount",
+        "alc_pricelist_discount",
         "stock",
         "purchase",
         "sale",

@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -20,29 +19,7 @@ class ResPartner(models.Model):
         if any(self.mapped("property_product_pricelist.is_discount")):
             msg = _("Some partners have a discount pricelist set as base pricelist.")
             raise ValidationError(msg)
-        # in version 10, verifying constraint on many2many doesn't work,
-        # because __set__ does:
-        #     record.write({self.name: write_value})
-        #     env.cache[self][record.id] = value
-        # in that order.
-        # Which means during the write that triggers the constraint,
-        # the value is not set yet so the constraint is not actually checked.
-        # in case we directly do a write, same problem, the cache is not set.
-        # As a result, we need to check in SQL...
-        query = """
-            SELECT partner_id
-            FROM partner_discount_pricelist_rel rel
-            JOIN product_pricelist pl on pl.id = rel.pricelist_id
-            JOIN res_partner rp on rp.id = partner_id
-            WHERE pl.is_discount = False
-            AND (rp.is_company = True or rp.parent_id is null)
-
-        """
-        # The condition on the company and the parent_id is there to ensure
-        # that we take into account only partners where the pricelist is not
-        # managed on the company
-        self.env.cr.execute(query)
-        res = self.env.cr.fetchall()
-        if res:
-            msg = _("Partners ids %s have a base pricelist set as discount pricelist.")
-            raise ValidationError(msg % ", ".join({str(r[0]) for r in res}))
+        if not all(self.mapped("discount_pricelist_ids.is_discount")):
+            raise ValidationError(
+                _("Some partners have a base pricelist set as discount pricelist.")
+            )

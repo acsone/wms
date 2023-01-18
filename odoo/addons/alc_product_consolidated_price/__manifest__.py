@@ -12,7 +12,7 @@
     "website": "https://acsone.eu/",
     "depends": [
         "specific_product",
-        "pricelist_discount",
+        "alc_pricelist_discount",
         "sales_team",
         "alc_price_cache",
     ],

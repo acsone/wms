@@ -21,7 +21,7 @@ This addon provides:
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        "pricelist_discount",
+        "alc_pricelist_discount",
         "specific_product",
         "specific_purchase",
         "report_xlsx_helper",

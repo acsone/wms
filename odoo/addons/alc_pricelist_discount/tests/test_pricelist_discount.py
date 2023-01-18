@@ -5,12 +5,12 @@ import logging
 
 from odoo import fields
 
-from .common import PricelistDiscountCase
+from .common import TestPricelistDiscountCommon
 
 _logger = logging.getLogger(__name__)
 
 
-class TestPricelistDiscount(PricelistDiscountCase):
+class TestPricelistDiscount(TestPricelistDiscountCommon):
     def test_onchange_partner(self):
         partner = self.env["res.partner"].create(
             {"name": "Unittest other partner", "ref": "99584783994"}

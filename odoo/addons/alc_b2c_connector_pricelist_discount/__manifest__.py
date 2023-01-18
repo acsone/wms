@@ -10,7 +10,7 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["alc_b2c_connector", "pricelist_discount"],
+    "depends": ["alc_b2c_connector", "alc_pricelist_discount"],
     "data": ["views/alc_b2c_backend.xml"],
     "demo": [],
     'installable': False

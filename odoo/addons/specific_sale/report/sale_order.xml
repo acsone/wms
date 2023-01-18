@@ -2,7 +2,7 @@
 <odoo>
   <template
     id="report_saleorder_specific_document"
-    inherit_id="pricelist_discount.report_saleorder_specific_document"
+    inherit_id="alc_pricelist_discount.report_saleorder_specific_document"
   >
     <!--
             Change title
@@ -29,10 +29,10 @@
             groups="sale.group_discount_per_so_line"
           >Disc.(%)</th>
           <th class="text-right">Taxes</th>
-          <!-- BEGIN: Provide from pricelist_discount module -->
+          <!-- BEGIN: Provide from alc_pricelist_discount module -->
           <th class="text-right">Promotion</th>
           <th class="text-right">Discount</th>
-          <!-- END: Provide from pricelist_discount module -->
+          <!-- END: Provide from alc_pricelist_discount module -->
           <th class="text-right" groups="sale.group_show_price_subtotal">Price</th>
           <th
             class="text-right price_tax_included"
@@ -111,14 +111,14 @@
               t-esc="', '.join(map(lambda x: (x.description or x.name), l.tax_id))"
             />
           </td>
-          <!-- BEGIN: Provide from pricelist_discount module (add t-if) -->
+          <!-- BEGIN: Provide from alc_pricelist_discount module (add t-if) -->
           <td class="text-right" t-if="'only_quantity' not in layout_category">
             <span t-field="l.discount2" />
           </td>
           <td class="text-right" t-if="'only_quantity' not in layout_category">
             <span t-field="l.discount3" />
           </td>
-          <!-- END: Provide from pricelist_discount module (add t-if) -->
+          <!-- END: Provide from alc_pricelist_discount module (add t-if) -->
           <td
             class="text-right"
             groups="sale.group_show_price_subtotal"

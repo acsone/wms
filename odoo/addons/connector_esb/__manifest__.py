@@ -20,7 +20,7 @@
         "connector",
         "delivery_rounds",
         "onchange_helper",
-        "pricelist_discount",
+        "alc_pricelist_discount",
         "procurement_sale",
         "product",
         "product",

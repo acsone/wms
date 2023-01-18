@@ -16,7 +16,7 @@
         "alc_sale_order_line_product_type",
         "alc_stock_lot_available",
         "delivery",
-        "pricelist_discount",
+        "alc_pricelist_discount",
         "product_additional",
         "sale",
         "sale_exception",

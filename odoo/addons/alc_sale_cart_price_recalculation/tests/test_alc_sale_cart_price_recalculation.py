@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 import mock
 
-from odoo.addons.pricelist_discount.tests.common import PricelistDiscountCase
+from odoo.addons.alc_pricelist_discount.tests.common import PricelistDiscountCase
 
 
 class TestAlcSaleCartPriceRecalculation(PricelistDiscountCase):

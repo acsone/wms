@@ -198,7 +198,6 @@ exclude = [
   'odoo/addons/alc_price_cache_exclusive/*',
   'odoo/addons/alc_price_cache_import/*',
   'odoo/addons/alc_price_triple_discount_exclusive/*',
-  'odoo/addons/alc_pricelist_discount/*',
   'odoo/addons/alc_pricelist_items/*',
   'odoo/addons/alc_pricing/*',
   'odoo/addons/alc_pricing_constraints/*',
