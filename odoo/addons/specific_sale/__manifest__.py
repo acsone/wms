@@ -38,6 +38,7 @@
         "stock_refill",
         "procurement_sale",
         "sale_consignment",
+        "alc_product_category_data",
     ],
     "website": "http://www.camptocamp.com",
     "data": [

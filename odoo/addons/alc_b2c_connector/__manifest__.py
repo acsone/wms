@@ -38,6 +38,7 @@
         "alc_sale_channel",  # sale_channel field on SO
         "stock_groupbypartner",
         "pricelist_discount",
+        "alc_product_category_data",
     ],
     "data": [
         "views/sale_order.xml",

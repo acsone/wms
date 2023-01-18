@@ -36,7 +36,7 @@ class WSProductStockCNKTestCase(ESBXMLTestCase):
                 "cnk_code": "000225",
                 "sale_ok": False,
                 "veterinary_only": True,
-                "categ_id": self.env.ref("specific_data.product_categ_vet_belges").id,
+                "categ_id": self.env.ref("alc_product_category_data.product_categ_vet_belges").id,
             }
         )
         self.product5 = self.model.create(
@@ -47,7 +47,7 @@ class WSProductStockCNKTestCase(ESBXMLTestCase):
                 "sale_ok": False,
                 "veterinary_only": True,
                 "categ_id": self.env.ref(
-                    "specific_data.product_categ_psychotropes_25"
+                    "alc_product_category_data.product_categ_psychotropes_25"
                 ).id,
             }
         )

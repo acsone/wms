@@ -36,7 +36,7 @@ class TestSaleStatistics(SavepointCase, ComponentMixin):
                 "name": "product_1",
                 "uom_id": cls.env.ref("product.product_uom_unit").id,
                 "type": "product",
-                "categ_id": cls.env.ref("specific_data.product_categ_ali").id,
+                "categ_id": cls.env.ref("alc_product_category_data.product_categ_ali").id,
                 "seller_ids": [(6, 0, [cls.supplierpromotion.id])],
             }
         )
@@ -45,7 +45,7 @@ class TestSaleStatistics(SavepointCase, ComponentMixin):
                 "name": "product_2",
                 "uom_id": cls.env.ref("product.product_uom_unit").id,
                 "type": "product",
-                "categ_id": cls.env.ref("specific_data.product_categ_medoc").id,
+                "categ_id": cls.env.ref("alc_product_category_data.product_categ_medoc").id,
             }
         )
         cls.partner_1 = cls.env["res.partner"].create({"name": "partner_1"})

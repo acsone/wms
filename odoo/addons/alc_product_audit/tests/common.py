@@ -237,7 +237,7 @@ class ProductCharacteristicsCommonFeatures(SavepointCase):
                 }
             )
 
-        cls.categ_ali = cls.env.ref("specific_data.product_categ_ali")
+        cls.categ_ali = cls.env.ref("alc_product_category_data.product_categ_ali")
         cls.categ_ali.route_ids = [(4, cls.route_aliment.id)]
         if not cls.route_medoc:
             cls.route_medoc = cls.env["stock.location.route"].create(
@@ -259,7 +259,7 @@ class ProductCharacteristicsCommonFeatures(SavepointCase):
                     ],
                 }
             )
-        cls.categ_medoc = cls.env.ref("specific_data.product_categ_medoc")
+        cls.categ_medoc = cls.env.ref("alc_product_category_data.product_categ_medoc")
         cls.categ_medoc.route_ids = [(4, cls.route_medoc.id)]
 
         cls.group = cls.env["procurement.group"].create({"name": "test"})

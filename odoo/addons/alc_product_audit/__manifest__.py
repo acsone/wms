@@ -24,6 +24,7 @@
         "stock",
         "stock_orderpoint_product",
         "stock_product_bin",
+        "alc_product_category_data",
     ],
     "data": ["views/product_template.xml"],
     "demo": [],

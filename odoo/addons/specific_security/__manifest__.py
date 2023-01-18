@@ -20,6 +20,7 @@
         "account_cutoff_base",
         "product_assortment",
         "base_rest",
+        "alc_product_category_data",
     ],
     "data": [
         # Security

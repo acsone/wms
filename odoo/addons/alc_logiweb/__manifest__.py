@@ -14,6 +14,7 @@
         "alc_b2c_connector",
         "alc_b2c_connector_pricelist_discount",
         "alc_delivery_carrier_gls",
+        "alc_product_category_data",
     ],
     "data": [
         "data/ir_filters.xml",

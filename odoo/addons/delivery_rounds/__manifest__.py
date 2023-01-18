@@ -22,6 +22,7 @@
         "partner_schedule",
         "queue_job",
         "web_notify",
+        "alc_product_category_data",
     ],
     "data": [
         # Views

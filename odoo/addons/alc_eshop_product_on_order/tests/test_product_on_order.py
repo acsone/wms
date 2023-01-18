@@ -29,7 +29,7 @@ class TestProductOnOrder(SavepointCase, ComponentMixin):
                 "name": "product_ali",
                 "uom_id": cls.env.ref("product.product_uom_unit").id,
                 "type": "product",
-                "categ_id": cls.env.ref("specific_data.product_categ_ali").id,
+                "categ_id": cls.env.ref("alc_product_category_data.product_categ_ali").id,
             }
         )
         cls.product_medoc = cls.env["product.product"].create(
@@ -37,7 +37,7 @@ class TestProductOnOrder(SavepointCase, ComponentMixin):
                 "name": "product_medoc",
                 "uom_id": cls.env.ref("product.product_uom_unit").id,
                 "type": "product",
-                "categ_id": cls.env.ref("specific_data.product_categ_medoc").id,
+                "categ_id": cls.env.ref("alc_product_category_data.product_categ_medoc").id,
             }
         )
         cls.product_mto = cls.env["product.product"].create(
@@ -45,7 +45,7 @@ class TestProductOnOrder(SavepointCase, ComponentMixin):
                 "name": "product_medoc",
                 "uom_id": cls.env.ref("product.product_uom_unit").id,
                 "type": "product",
-                "categ_id": cls.env.ref("specific_data.product_categ_materiel").id,
+                "categ_id": cls.env.ref("alc_product_category_data.product_categ_materiel").id,
                 "route_ids": [(6, 0, cls.env.ref("stock.route_warehouse0_mto").ids)],
             }
         )

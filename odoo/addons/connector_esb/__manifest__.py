@@ -46,6 +46,7 @@
         "sale_confirm_background",
         "l10n_be_apb_tax",
         "delivery",
+        "alc_product_category_data",
     ],
     "website": "http://www.camptocamp.com",
     "data": [

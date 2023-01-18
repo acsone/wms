@@ -14,6 +14,7 @@
         "alc_sale_suite_name",
         "alc_eshop_sale_cart_confirm",
         "alc_product_pharmacy",
+        "alc_product_category_data",
     ],
     "data": [],
     "demo": [],

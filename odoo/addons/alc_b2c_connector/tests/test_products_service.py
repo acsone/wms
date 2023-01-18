@@ -126,9 +126,9 @@ class TestProductsService(CommonCase):
         """
         default_categ = self.saleable_product.categ_id
         for categ_xml_id in (
-            "specific_data.product_categ_humain",
-            "specific_data.product_categ_vet_belges",
-            "specific_data.product_categ_importation",
+            "alc_product_category_data.product_categ_humain",
+            "alc_product_category_data.product_categ_vet_belges",
+            "alc_product_category_data.product_categ_importation",
         ):
             self.saleable_product.categ_id = self.env.ref(categ_xml_id)
             res = self.products_service.dispatch("search", params=False)

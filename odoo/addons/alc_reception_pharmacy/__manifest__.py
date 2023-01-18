@@ -11,7 +11,12 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     # TODO split delivery_rounds...
-    "depends": ["alc_delivery_rounds_assign_blocking", "specific_data", "stock"],
+    "depends": [
+        "alc_delivery_rounds_assign_blocking",
+        "specific_data",
+        "stock",
+        "alc_product_category_data",
+    ],
     "data": [
         "data/ir_sequence.xml",
         "data/product_product.xml",
@@ -21,5 +26,5 @@
     "demo": [],
     "external_dependencies": {"python": ["openupgradelib"]},
     "pre_init_hook": "pre_init_hook",
-    'installable': False
+    "installable": False,
 }

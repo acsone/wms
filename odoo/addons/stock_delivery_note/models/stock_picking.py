@@ -363,8 +363,8 @@ class StockPicking(models.Model):
         return result
 
     def get_entry_register_lines(self):
-        categ_vet = self.env.ref("specific_data.product_categ_vet_belges")
-        categ_import = self.env.ref("specific_data.product_categ_importation")
+        categ_vet = self.env.ref("alc_product_category_data.product_categ_vet_belges")
+        categ_import = self.env.ref("alc_product_category_data.product_categ_importation")
 
         all_products = self.mapped("move_lines.product_id")
         medic_products = self.env["product.product"].search(

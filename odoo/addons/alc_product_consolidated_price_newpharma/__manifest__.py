@@ -15,6 +15,7 @@
         "specific_data",
         "specific_product",
         "queue_job_cron",
+        "alc_product_category_data",
     ],
     "data": ["data/ir_cron.xml", "data/ir_filters.xml"],
     "demo": [],

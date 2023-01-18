@@ -19,6 +19,7 @@
         "stock",
         # TODO: has been removed "stock_expired",
         "account_tax_one_vat",
+        "alc_product_category_data",
     ],
     "data": [
         "views/res_partner.xml",

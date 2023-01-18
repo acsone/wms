@@ -20,6 +20,7 @@
         "procurement_sale",
         "sale_cancel_remaining",
         "sale_consignment",
+        "alc_product_category_data",
     ],
     "data": ["data/mail_template.xml", "security/alc_eshop_product_on_order.xml"],
     "demo": [],

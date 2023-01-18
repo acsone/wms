@@ -301,7 +301,7 @@ class WSCreateSaleOrderTestCase(SavepointCase):
         on create of sale order from WS
 
         """
-        human_categ = self.env.ref("specific_data.product_categ_humain")
+        human_categ = self.env.ref("alc_product_category_data.product_categ_humain")
         data = deepcopy(self.order_data)
         self.p1.categ_id = human_categ
         self.p1.list_price = 0.0

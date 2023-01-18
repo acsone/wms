@@ -131,7 +131,7 @@ class TestMissingInfoOnNewProduct(SavepointCase):
             }
         )
         cls.p9 = cls.pt9.product_variant_ids[0]
-        cls.p9.categ_id = cls.env.ref("specific_data.product_categ_medoc").id
+        cls.p9.categ_id = cls.env.ref("alc_product_category_data.product_categ_medoc").id
 
         cls.pt10 = cls.env["product.template"].create(
             {
@@ -144,7 +144,7 @@ class TestMissingInfoOnNewProduct(SavepointCase):
             }
         )
         cls.p10 = cls.pt10.product_variant_ids[0]
-        cls.p10.categ_id = cls.env.ref("specific_data.product_categ_ali").id
+        cls.p10.categ_id = cls.env.ref("alc_product_category_data.product_categ_ali").id
 
         cls.pt11 = cls.env["product.template"].create(
             {
@@ -158,7 +158,7 @@ class TestMissingInfoOnNewProduct(SavepointCase):
             }
         )
         cls.p11 = cls.pt11.product_variant_ids[0]
-        cls.p11.categ_id = cls.env.ref("specific_data.product_categ_humain").id
+        cls.p11.categ_id = cls.env.ref("alc_product_category_data.product_categ_humain").id
 
         cls.pt13 = cls.env["product.template"].create(
             {
@@ -173,7 +173,7 @@ class TestMissingInfoOnNewProduct(SavepointCase):
         cls.p13 = cls.pt13.product_variant_ids[0]
         cls.p13.write(
             {
-                "categ_id": cls.env.ref("specific_data.product_categ_ali").id,
+                "categ_id": cls.env.ref("alc_product_category_data.product_categ_ali").id,
                 "route_ids": [(6, 0, cls.env.ref("stock.route_warehouse0_mto").ids)],
             }
         )
@@ -201,7 +201,7 @@ class TestMissingInfoOnNewProduct(SavepointCase):
             }
         )
         cls.p12 = cls.pt12.product_variant_ids[0]
-        cls.p12.categ_id = cls.env.ref("specific_data.product_categ_materiel").id
+        cls.p12.categ_id = cls.env.ref("alc_product_category_data.product_categ_materiel").id
 
         cls.product_box = cls.env["product.packaging"].create(
             {

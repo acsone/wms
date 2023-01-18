@@ -19,6 +19,7 @@
         "sale_cancel_remaining",
         "pricelist_discount",  # discount_sale
         "product_additional",  # ratio_main_product
+        "alc_product_category_data",
     ],
     "data": [
         "security/alc_eshop_product_ordered_qty.xml",

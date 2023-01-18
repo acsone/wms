@@ -106,7 +106,7 @@ class WSProductStockSKUTestCase(ESBXMLTestCase):
             )
 
         # Assign the supplier Virbac to product 2 ans set this product as food
-        categ_diet = self.env.ref("specific_data.product_categ_ali_dietetique")
+        categ_diet = self.env.ref("alc_product_category_data.product_categ_ali_dietetique")
         self.product2.write(
             {
                 "seller_ids": [
@@ -125,7 +125,7 @@ class WSProductStockSKUTestCase(ESBXMLTestCase):
         )
 
         # Assign the supplier Virbac to product 3 and set this product as drug
-        categ_pis = self.env.ref("specific_data.product_categ_pis")
+        categ_pis = self.env.ref("alc_product_category_data.product_categ_pis")
         self.product3.write(
             {
                 "seller_ids": [

@@ -12,6 +12,7 @@
     "application": True,
     "depends": [
         "sale",
+        "alc_product_category_data",
         "sale_triple_discount",
         "product_price_category",
         "alc_product_category_business_unit",

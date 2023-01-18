@@ -43,17 +43,17 @@ class WSStatCustomerTestCase(ESBXMLTestCase):
                 "email": "joe@ch.ch",
             }
         )
-        cat_medic = self.env.ref("specific_data.product_categ_medoc")
+        cat_medic = self.env.ref("alc_product_category_data.product_categ_medoc")
         cat_medic.esb_ref = "MED"
         cat_medic.is_business_unit = True
-        cat_materiel = self.env.ref("specific_data.product_categ_materiel")
+        cat_materiel = self.env.ref("alc_product_category_data.product_categ_materiel")
         cat_materiel.esb_ref = "MAT"
         cat_materiel.is_business_unit = True
-        cat_ali = self.env.ref("specific_data.product_categ_ali")
+        cat_ali = self.env.ref("alc_product_category_data.product_categ_ali")
         cat_ali.is_business_unit = True
         cat_ali.esb_ref = "ALI"
         # Test with a sub category of medic
-        cat_microb = self.env.ref("specific_data.product_categ_antimicrobiens")
+        cat_microb = self.env.ref("alc_product_category_data.product_categ_antimicrobiens")
         self.supplier = self.env["res.partner"].create(
             {"name": "Guerra", "supplier": True, "ref": "987654321"}
         )

@@ -88,16 +88,16 @@ class ProductTemplate(models.Model):
     @api.model
     def _get_category_attributes(self):
         return {
-            "is_food": "specific_data.product_categ_ali",
-            "is_meds": "specific_data.product_categ_medoc",
-            "is_equipment": "specific_data.product_categ_materiel",
-            "is_vt_be": "specific_data.product_categ_vet_belges",
-            "is_human": "specific_data.product_categ_humain",
-            "is_narcotic_reg": "specific_data.product_categ_stupefiant",
-            "is_narcotic_vet": "specific_data.product_categ_stupefiant_vet",
-            "is_psychotropic": "specific_data.product_categ_psychotropes_25",
-            "is_pharmaceutical": "specific_data.product_categ_parapharmacie",
-            "is_import": "specific_data.product_categ_importation",
+            "is_food": "alc_product_category_data.product_categ_ali",
+            "is_meds": "alc_product_category_data.product_categ_medoc",
+            "is_equipment": "alc_product_category_data.product_categ_materiel",
+            "is_vt_be": "alc_product_category_data.product_categ_vet_belges",
+            "is_human": "alc_product_category_data.product_categ_humain",
+            "is_narcotic_reg": "alc_product_category_data.product_categ_stupefiant",
+            "is_narcotic_vet": "alc_product_category_data.product_categ_stupefiant_vet",
+            "is_psychotropic": "alc_product_category_data.product_categ_psychotropes_25",
+            "is_pharmaceutical": "alc_product_category_data.product_categ_parapharmacie",
+            "is_import": "alc_product_category_data.product_categ_importation",
         }
 
     @api.depends("categ_id")

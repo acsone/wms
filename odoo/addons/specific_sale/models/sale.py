@@ -38,7 +38,7 @@ class Sale(models.Model):
         # Get all the line ids whose product belongs to a category with warning
         warn_line_ids = sum([l.ids for _c, l in warn_lines.iteritems()], [])
         # Categories with specific display
-        pharmacy_cat = self.env.ref("specific_data.product_categ_humain")
+        pharmacy_cat = self.env.ref("alc_product_category_data.product_categ_humain")
 
         new_report_pages = []
         for report_page_category in report_pages:

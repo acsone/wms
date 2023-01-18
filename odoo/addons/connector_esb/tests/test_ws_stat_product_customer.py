@@ -29,10 +29,10 @@ class WSStatProductCustomerTestCase(ESBXMLTestCase):
                 "email": "joe@ch.ch",
             }
         )
-        cat_materiel = self.env.ref("specific_data.product_categ_materiel")
-        cat_ali = self.env.ref("specific_data.product_categ_ali")
+        cat_materiel = self.env.ref("alc_product_category_data.product_categ_materiel")
+        cat_ali = self.env.ref("alc_product_category_data.product_categ_ali")
         # Test with a sub category of medic
-        cat_microb = self.env.ref("specific_data.product_categ_antimicrobiens")
+        cat_microb = self.env.ref("alc_product_category_data.product_categ_antimicrobiens")
         # Set up products with different category
         self.p1 = self.env.ref("product.product_product_8")
         self.p1.product_tmpl_id.categ_id = cat_microb
