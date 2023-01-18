@@ -29,19 +29,21 @@ class ProductPricelist(models.Model):
         if not self.enforce_discount_constraint():
             return
         msg = _("You cannot change a pricelist that is already in use.")
-        for pricelist in self:
-            if pricelist.is_discount:
-                if self.env["ir.property"].search(
+        property_model = self.env["ir.property"]
+        partner_model = self.env["res.partner"]
+        for rec in self:
+            if rec.is_discount:
+                if property_model.search(
                     [
                         ("name", "=", "property_product_pricelist"),
                         ("res_id", "like", "res.partner%"),
-                        ("value_reference", "=", f"product.pricelist,{pricelist.id}"),
+                        ("value_reference", "=", f"product.pricelist,{rec.id}"),
                     ],
                     limit=1,
                 ):
                     raise ValidationError(msg)
             else:
-                if self.env["res.partner"].search(
-                    [("discount_pricelist_ids", "in", pricelist.id)], limit=1
+                if partner_model.search(
+                    [("discount_pricelist_ids", "in", rec.id)], limit=1
                 ):
                     raise ValidationError(msg)

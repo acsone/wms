@@ -4,6 +4,8 @@
 
 from odoo import api, fields, models
 
+from odoo.addons.product.models.product_pricelist import Pricelist
+
 
 class ResPartner(models.Model):
     _inherit = "res.partner"
@@ -11,8 +13,7 @@ class ResPartner(models.Model):
     supplier_promotion_sale_allowed = fields.Boolean(
         string="Supplier promotion allowed on sale"
     )
-    discount_pricelist_ids = fields.Many2many(
-        comodel_name="product.pricelist",
+    discount_pricelist_ids = fields.Many2many[Pricelist](
         relation="partner_discount_pricelist_rel",
         column1="partner_id",
         column2="pricelist_id",

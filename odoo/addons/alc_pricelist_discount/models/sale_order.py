@@ -3,6 +3,8 @@
 
 from odoo import api, fields, models
 
+from odoo.addons.product.models.product_pricelist import Pricelist
+
 
 class SaleOrder(models.Model):
     _inherit = "sale.order"
@@ -11,8 +13,7 @@ class SaleOrder(models.Model):
         string="Supplier promotion allowed",
         states={"draft": [("readonly", False)], "sent": [("readonly", False)]},
     )
-    discount_pricelist_ids = fields.Many2many(
-        comodel_name="product.pricelist",
+    discount_pricelist_ids = fields.Many2many[Pricelist](
         relation="order_discount_pricelist_rel",
         column1="order_id",
         column2="pricelist_id",

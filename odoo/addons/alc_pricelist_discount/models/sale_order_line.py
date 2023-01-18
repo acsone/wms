@@ -3,14 +3,14 @@
 
 from odoo import api, fields, models
 
+from odoo.addons.product.models.product_pricelist_item import PricelistItem
+
 
 class SaleOrderLine(models.Model):
     _inherit = "sale.order.line"
 
-    discount_item_id = fields.Many2one(
-        comodel_name="product.pricelist.item",
-        compute="_compute_discount_item_id",
-        store=True,
+    discount_item_id = fields.Many2one[PricelistItem](
+        compute="_compute_discount_item_id", store=True
     )
 
     def compute_supplier_promotion(self):
