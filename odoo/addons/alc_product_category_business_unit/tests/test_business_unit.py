@@ -1,20 +1,19 @@
-# -*- coding: utf-8 -*-
 # Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo.tests.common import SavepointCase
+from odoo.tests.common import TransactionCase
 
 
-class TestBusinessUnit(SavepointCase):
+class TestBusinessUnit(TransactionCase):
     @classmethod
     def setUpClass(cls):
-        super(TestBusinessUnit, cls).setUpClass()
-        cls.ProductCategory = cls.env["product.category"]
-        cls.business_unit_category = cls.ProductCategory.create(
+        super().setUpClass()
+        cls.product_category_model = cls.env["product.category"]
+        cls.business_unit_category = cls.product_category_model.create(
             {"name": "Business Unit Category", "is_business_unit": True}
         )
 
-        cls.sub_category = cls.ProductCategory.create(
+        cls.sub_category = cls.product_category_model.create(
             {"name": "Test", "parent_id": cls.business_unit_category.id}
         )
 
@@ -28,10 +27,10 @@ class TestBusinessUnit(SavepointCase):
 
     def test_00(self):
         """
-        Data: business unit on product
+        Data: business unit on product.
+
         Test case: check that if we set the business unit on product, its propagated to the product template
         expected: business unit on product template
-
         """
         self.product1.categ_id = self.sub_category.id
         self.assertEqual(self.product1.business_unit_id, self.business_unit_category)
@@ -41,10 +40,10 @@ class TestBusinessUnit(SavepointCase):
 
     def test_01(self):
         """
-        Data: business unit on product template
+        Data: business unit on product template.
+
         Test case: check that if we set the business unit on product template, its propagated to the product
         expected: business unit on product
-
         """
         self.product_template2.categ_id = self.sub_category.id
         self.assertEqual(

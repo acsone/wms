@@ -14,5 +14,6 @@
         "sale",
         "sale_triple_discount",
         "product_price_category",
+        "alc_product_category_business_unit",
     ],
 }

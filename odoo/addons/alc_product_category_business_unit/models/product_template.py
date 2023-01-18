@@ -1,15 +1,15 @@
-# -*- coding: utf-8 -*-
 # Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import api, fields, models
 
+from odoo.addons.product.models.product_category import ProductCategory
+
 
 class ProductTemplate(models.Model):
 
     _inherit = "product.template"
-    business_unit_id = fields.Many2one(
-        "product.category",
+    business_unit_id = fields.Many2one[ProductCategory](
         string="Business unit",
         compute="_compute_business_unit_id",
         inverse="_inverse_business_unit_id",
