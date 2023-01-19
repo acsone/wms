@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "odoo-addons-alcyon"
-version = "16.0.1.0.0"
+version = "16.0.1.0.1"
 readme = "README.rst"
 #license = "LicenseRef-Proprietary"  # waiting for hatchling>1.8.1
 # Dependencies are dynamic because they will be generated from Odoo addons manifests.
