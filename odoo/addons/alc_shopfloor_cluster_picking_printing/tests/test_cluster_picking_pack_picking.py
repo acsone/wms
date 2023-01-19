@@ -180,8 +180,78 @@ class ClusterPickingPutInPackPrintCase(ClusterPickingUnloadingCommonCase):
     def test_print_after_scan_destination_food_one_and_only_once(self):
         self.bin1.is_internal = True
         self.menu.sudo().write(dict(pack_pickings=False, print_on_pack_pickings=False))
-        operation = self.batch.pack_operation_ids[0]
+        pick1 = self.batch.picking_ids.filtered(
+            lambda p: len(p.pack_operation_ids) == 2
+        )
+        operations1 = pick1.mapped("pack_operation_ids")
+        self.assertEqual(len(operations1), 2)
+        operation = operations1[0]
         operation.picking_id.partner_id.sudo().no_labels_food_products = True
+        qty_done = operation.product_qty
+        self.assertFalse(operation.picking_id.printed_once)
+        with mock.patch.object(
+            operation.__class__, "print_food_product_label"
+        ) as mocked_print_food_product_label:
+            self.service.dispatch(
+                "scan_destination_pack",
+                params={
+                    "picking_batch_id": self.batch.id,
+                    "operation_id": operation.id,
+                    "barcode": self.bin1.name,
+                    "quantity": qty_done,
+                },
+            )
+            mocked_print_food_product_label.assert_called_once()
+
+        operation2 = operations1[1]
+        qty_done = operation2.product_qty
+        self.assertTrue(operation2.picking_id.printed_once)
+        with mock.patch.object(
+            operation2.__class__, "print_food_product_label"
+        ) as mocked_print_food_product_label:
+            self.service.dispatch(
+                "scan_destination_pack",
+                params={
+                    "picking_batch_id": self.batch.id,
+                    "operation_id": operation2.id,
+                    "barcode": self.bin1.name,
+                    "quantity": qty_done,
+                },
+            )
+            mocked_print_food_product_label.assert_not_called()
+
+        bin3 = self.env["stock.quant.package"].create(
+            {"name": "bin3", "is_internal": True}
+        )
+
+        pick2 = self.batch.picking_ids.filtered(
+            lambda p: len(p.pack_operation_ids) == 1
+        )
+        operations2 = pick2.mapped("pack_operation_ids")
+        operation3 = operations2[0]
+        qty_done = operation3.product_qty
+        # Third op is on another picking : print again
+        self.assertFalse(operation3.picking_id.printed_once)
+        with mock.patch.object(
+            operation3.__class__, "print_food_product_label"
+        ) as mocked_print_food_product_label:
+            self.service.dispatch(
+                "scan_destination_pack",
+                params={
+                    "picking_batch_id": self.batch.id,
+                    "operation_id": operation3.id,
+                    "barcode": bin3.name,
+                    "quantity": qty_done,
+                },
+            )
+            mocked_print_food_product_label.assert_called_once()
+        self.assertTrue(operation3.picking_id.printed_once)
+
+    def test_print_after_scan_destination_food_for_all_products(self):
+        self.bin1.is_internal = True
+        self.bin2.is_internal = True
+        self.menu.sudo().write(dict(pack_pickings=False, print_on_pack_pickings=False))
+        operation = self.batch.pack_operation_ids[0]
         qty_done = operation.product_qty
         with mock.patch.object(
             operation.__class__, "print_food_product_label"
@@ -207,11 +277,11 @@ class ClusterPickingPutInPackPrintCase(ClusterPickingUnloadingCommonCase):
                 params={
                     "picking_batch_id": self.batch.id,
                     "operation_id": operation2.id,
-                    "barcode": self.bin1.name,
+                    "barcode": self.bin2.name,
                     "quantity": qty_done,
                 },
             )
-            mocked_print_food_product_label.assert_not_called()
+            mocked_print_food_product_label.assert_called_once()
 
     def test_errors_are_not_overwritten(self):
         """Here we give a lot that is not on the operation; this initial error should
