@@ -18,6 +18,7 @@ test = [
   "pygments",
   "freezegun",
   "odoo-test-helper",
+  "python-dateutil",
 ]
 dev = [
   "ipython",
@@ -204,7 +205,6 @@ exclude = [
   'odoo/addons/alc_print_all_deliveryslip/*',
   'odoo/addons/alc_product_abc_classification_picking_zone/*',
   'odoo/addons/alc_product_audit/*',
-  'odoo/addons/alc_product_average_daily_sale/*',
   'odoo/addons/alc_product_barcode_required/*',
   'odoo/addons/alc_product_brand_image/*',
   'odoo/addons/alc_product_category_business_unit/*',
