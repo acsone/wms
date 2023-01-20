@@ -37,7 +37,7 @@ odoo @ git+https://github.com/acsone/odoo.git@8b570eea226208232d5fe2eb76715182e6
 odoo-addon-account-invoice-triple-discount @ git+https://github.com/OCA/account-invoicing.git@9f5ba13e1d13253eb030ebe6b70846490de38e26#subdirectory=setup/account_invoice_triple_discount
 odoo-addon-attachment-s3 @ git+https://github.com/acsone/odoo-cloud-platform@25cf2a9bfb287a4ca5696651f448401264b8df2a#subdirectory=setup/attachment_s3
 odoo-addon-base-attachment-object-storage @ git+https://github.com/acsone/odoo-cloud-platform@fc452c6a2abbae4ab7d4bd041c5d2212691a8096#subdirectory=setup/base_attachment_object_storage
-odoo-addon-base-delivery-carrier-label @ git+https://github.com/acsone/delivery-carrier.git@98d8844e5be456e1189ea41401fc2f957f221165#subdirectory=setup/base_delivery_carrier_label
+odoo-addon-base-delivery-carrier-label==16.0.1.0.0.3
 odoo-addon-base-report-to-printer @ git+https://github.com/acsone/report-print-send.git@220cf83641f885356e0b159edfe3f51bf2c7d709#subdirectory=setup/base_report_to_printer
 odoo-addon-delivery-carrier-account==16.0.1.0.0.4
 odoo-addon-delivery-carrier-info==16.0.1.0.0.2
@@ -46,8 +46,8 @@ odoo-addon-delivery-carrier-max-weight-constraint @ git+https://github.com/acson
 odoo-addon-delivery-package-type-number-parcels @ git+https://github.com/acsone/delivery-carrier.git@504070583a2d8a68924824ecc16a2a2808fcf2bd#subdirectory=setup/delivery_package_type_number_parcels
 odoo-addon-product-abc-classification @ git+https://github.com/acsone/product-attribute.git@cc97df93b3f97e947c2ed38cc6232c0a642f65e1#subdirectory=setup/product_abc_classification
 odoo-addon-product-abc-classification-sale-stock @ git+https://github.com/acsone/product-attribute.git@f9690a9c1f19ece371effeb200a417e96fddb158#subdirectory=setup/product_abc_classification_sale_stock
-odoo-addon-product-dimension @ git+https://github.com/acsone/product-attribute.git@36e6216efe4a7cbff6346f36e0d5b80d7d700705#subdirectory=setup/product_dimension
-odoo-addon-product-logistics-uom @ git+https://github.com/acsone/product-attribute.git@0441c940ae518227ecb04066a204d1c5c2dd1605#subdirectory=setup/product_logistics_uom
+odoo-addon-product-dimension==16.0.1.1.0.1
+odoo-addon-product-logistics-uom==16.0.1.0.0.5
 odoo-addon-product-packaging-dimension @ git+https://github.com/acsone/product-attribute.git@acfce3cbe8e463ed080b483b00058941e533cada#subdirectory=setup/product_packaging_dimension
 odoo-addon-product-packaging-level @ git+https://github.com/acsone/product-attribute.git@5382722d152e1e534d4d9c684a7a3919ee6ea3de#subdirectory=setup/product_packaging_level
 odoo-addon-product-packaging-level-pallet @ git+https://github.com/acsone/product-attribute.git@0902b25c2ec0564e9dfef2b35c78bc4f0a8d6a71#subdirectory=setup/product_packaging_level_pallet
@@ -70,14 +70,14 @@ odoo-addon-stock-move-auto-assign-auto-release @ git+https://github.com/acsone/s
 odoo-addon-stock-move-common-dest==16.0.1.0.1
 odoo-addon-stock-packaging-calculator @ git+https://github.com/acsone/stock-logistics-warehouse.git@7a62f663ee6d0c2393ad2d09c79e88d6308e6efd#subdirectory=setup/stock_packaging_calculator
 odoo-addon-stock-picking-completion-info @ git+https://github.com/acsone/wms.git@008729166985bcb41891442e6491e09e7f0aede4#subdirectory=setup/stock_picking_completion_info
-odoo-addon-stock-picking-delivery-link @ git+https://github.com/acsone/delivery-carrier.git@9c37fc2ea1af705e4a4d06067b64690b31d8ef79#subdirectory=setup/stock_picking_delivery_link
+odoo-addon-stock-picking-delivery-link==16.0.1.0.1
 odoo-addon-stock-picking-start @ git+https://github.com/acsone/stock-logistics-workflow.git@fb95dafafd5522a0f43bbf9aa0d81ba819c1ba44#subdirectory=setup/stock_picking_start
 odoo-addon-stock-picking-type-shipping-policy @ git+https://github.com/acsone/wms.git@12dbcd20834849758e681098005f9386cb2c22a6#subdirectory=setup/stock_picking_type_shipping_policy
 odoo-addon-stock-production-lot-expired-date @ git+https://github.com/acsone/product-attribute.git@d76d655034abd4070b6e96debf60597903429dd7#subdirectory=setup/stock_production_lot_expired_date
 odoo-addon-stock-production-lot-expiry @ git+https://github.com/acsone/product-attribute.git@d1d1d4bc64d8464c621b0a5823ff43fd3ee03406#subdirectory=setup/stock_production_lot_expiry
-odoo-addon-stock-putaway-hook @ git+https://github.com/acsone/stock-logistics-workflow.git@4aca08e554f4a30464a0b9019ec1ddeb2ca7ced9#subdirectory=setup/stock_putaway_hook
-odoo-addon-stock-quant-package-dimension @ git+https://github.com/acsone/stock-logistics-workflow.git@978211aab22c1d0a1c90eb61d444a802dedfddd2#subdirectory=setup/stock_quant_package_dimension
-odoo-addon-stock-quant-package-product-packaging @ git+https://github.com/acsone/stock-logistics-workflow.git@2dcf8cada421667914f565f7deeada61d5e82b70#subdirectory=setup/stock_quant_package_product_packaging
+odoo-addon-stock-putaway-hook==16.0.1.0.0.4
+odoo-addon-stock-quant-package-dimension==16.0.1.0.0.2
+odoo-addon-stock-quant-package-product-packaging==16.0.1.0.1
 odoo-addon-stock-release-channel @ git+https://github.com/acsone/wms.git@0c9450759aca70988281e4577ffbb5082bae4c8f#subdirectory=setup/stock_release_channel
 odoo-addon-stock-release-channel-auto-release @ git+https://github.com/acsone/wms.git@0c9450759aca70988281e4577ffbb5082bae4c8f#subdirectory=setup/stock_release_channel_auto_release
 odoo-addon-stock-storage-type @ git+https://github.com/acsone/wms.git@fd484bfeb2110f1dbcaec071acab1a41dc57d935#subdirectory=setup/stock_storage_type

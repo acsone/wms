@@ -11,12 +11,8 @@ odoo-addons-enterprise @ git+ssh://git@github.com/acsone/enterprise.git@16.0-alc
 odoo-addon-account-invoice-triple-discount @ git+https://github.com/OCA/account-invoicing.git@refs/pull/1269/head#subdirectory=setup/account_invoice_triple_discount
 
 # delivery-carrier
-# https://github.com/OCA/delivery-carrier/pull/570
-odoo-addon-base-delivery-carrier-label @ git+https://github.com/acsone/delivery-carrier.git@16-mig-delivery-carrier-label-and-split#subdirectory=setup/base_delivery_carrier_label
 # https://github.com/OCA/delivery-carrier/pull/594 - [16.0][ADD] delivery_carrier_max_weight_constraint
 odoo-addon-delivery-carrier-max-weight-constraint @ git+https://github.com/acsone/delivery-carrier.git@16.0-mig-delivery_carrier_max_weight_constraint-hda#subdirectory=setup/delivery_carrier_max_weight_constraint
-# https://github.com/OCA/delivery-carrier/pull/596 - [16.0][MIG] stock_picking_delivery_link
-odoo-addon-stock-picking-delivery-link @ git+https://github.com/acsone/delivery-carrier.git@16.0-mig-stock_picking_delivery_link-hda#subdirectory=setup/stock_picking_delivery_link
 # https://github.com/OCA/delivery-carrier/pull/598 - [16.0][ADD] delivery_package_type_number_parcels
 odoo-addon-delivery-package-type-number-parcels @ git+https://github.com/acsone/delivery-carrier.git@16.0-add-delivery_package_type_number_parcels-hda#subdirectory=setup/delivery_package_type_number_parcels
 # https://github.com/OCA/delivery-carrier/pull/599 - [16.0][MIG] delivery_carrier_label_gls
@@ -46,12 +42,8 @@ odoo-addon-stock-picking-type-shipping-policy @ git+https://github.com/acsone/wm
 odoo-addon-product-abc-classification @ git+https://github.com/acsone/product-attribute.git@16.0-mig-product_abc_classification-dro#subdirectory=setup/product_abc_classification
 # https://github.com/OCA/product-attribute/pull/1196
 odoo-addon-product-abc-classification-sale-stock @ git+https://github.com/acsone/product-attribute.git@16.0-mig-product-abc-sale-dro#subdirectory=setup/product_abc_classification_sale_stock
-# https://github.com/OCA/product-attribute/pull/1212 - [16.0][IMP] product_dimension: Remove onchange method to computed readonly False one / Allow to create product template with dimensions
-odoo-addon-product-dimension @ git+https://github.com/acsone/product-attribute.git@16.0-imp-product-dimension-dro#subdirectory=setup/product_dimension
 # https://github.com/OCA/product-attribute/pull/1214
 odoo-addon-stock-production-lot-expiry @ git+https://github.com/acsone/product-attribute.git@16.0-mig-stock_production_lot_expiry#subdirectory=setup/stock_production_lot_expiry
-# https://github.com/OCA/product-attribute/pull/1160 - [16.0] [MIG] product_logistics_uom
-odoo-addon-product-logistics-uom @ git+https://github.com/acsone/product-attribute.git@16.0-mig-product_logistics_uom#subdirectory=setup/product_logistics_uom
 # https://github.com/OCA/product-attribute/pull/1220 - [IMP] product_packaging_dimension: Improve view in order to easy inheritance
 odoo-addon-product-packaging-dimension @ git+https://github.com/acsone/product-attribute.git@16.0-imp-product-packaging-dimension-dro#subdirectory=setup/product_packaging_dimension
 # https://github.com/OCA/product-attribute/pull/1215 - MIG][16.0] product_packaging_type + renaming to product_packaging_level
@@ -89,12 +81,6 @@ odoo-addon-stock-packaging-calculator @ git+https://github.com/acsone/stock-logi
 # stock-logistics-workflow
 # https://github.com/OCA/stock-logistics-workflow/pull/1127
 odoo-addon-stock-picking-start @ git+https://github.com/acsone/stock-logistics-workflow.git@16.0-add-stock_picking_start-lmi#subdirectory=setup/stock_picking_start
-# https://github.com/OCA/stock-logistics-workflow/pull/1102 - [MIG] stock_putaway_hook: Migration to 16.0
-odoo-addon-stock-putaway_hook @ git+https://github.com/acsone/stock-logistics-workflow.git@16.0-mig-stock_putaway_hook-dro#subdirectory=setup/stock_putaway_hook
-# https://github.com/OCA/stock-logistics-workflow/pull/1103 - [MIG] stock_quant_package_product_packaging: Migration to 16.0
-odoo-addon-stock-quant-package-product-packaging @ git+https://github.com/acsone/stock-logistics-workflow.git@16.0-mig-stock_quant_package_product_packaging-dro#subdirectory=setup/stock_quant_package_product_packaging
-# https://github.com/OCA/stock-logistics-workflow/pull/1104 - [MIG] stock_quant_package_dimension: Migration to 16.0 
-odoo-addon-stock-quant-package-dimension @ git+https://github.com/acsone/stock-logistics-workflow.git@16.0-mig-stock_quant_package_dimension-dro#subdirectory=setup/stock_quant_package_dimension
 # https://github.com/OCA/stock-logistics-workflow/pull/1163 - [ADD] stock_grn
 odoo-addon-stock-grn @ git+https://github.com/acsone/stock-logistics-workflow.git@16.0-add-stock_grn-hda#subdirectory=setup/stock_grn
 
