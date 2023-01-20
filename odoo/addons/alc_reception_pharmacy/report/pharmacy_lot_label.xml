@@ -29,9 +29,7 @@
 ^FO32,283^A0N,31,23^FD<t t-esc="line.lot_id.product_id.name[:30]" />^FS\r
 ^FO420,150\r
 ^BQN,2,6\r
-^FDQA,#<t t-esc="line.lot_id.product_id.default_code" />#<t
-          t-esc="line.lot_id.name"
-        />^FS\r
+^FDQA,<t t-esc="line.lot_id.name" />^FS\r
 ^XZ
 </t>
     </div>
