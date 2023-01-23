@@ -108,6 +108,7 @@ odoo-addon-stock-quant-package-dimension @ git+https://github.com/acsone/stock-l
 odoo-addon-stock-grn @ git+https://github.com/acsone/stock-logistics-workflow.git@16.0-add-stock_grn-hda#subdirectory=setup/stock_grn
 
 # server-tools
+# https://github.com/OCA/server-tools/pull/2531
 odoo-addon-session-db @ git+https://github.com/acsone/server-tools.git@16.0-session_db-sbi#subdirectory=setup/session_db
 
 # OCA/web
