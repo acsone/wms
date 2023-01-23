@@ -33,7 +33,7 @@ lxml==4.6.5
 manifestoo_core==0.10.3
 MarkupSafe==1.1.0
 num2words==0.5.6
-odoo @ git+https://github.com/acsone/odoo.git@b77881e800b93d4715da734611af63e6d8ece732
+odoo @ git+https://github.com/acsone/odoo.git@3bec08cbbb29d3fe4441d35c823176722ecc7842
 odoo-addon-account-invoice-triple-discount @ git+https://github.com/OCA/account-invoicing.git@9f5ba13e1d13253eb030ebe6b70846490de38e26#subdirectory=setup/account_invoice_triple_discount
 odoo-addon-attachment-s3 @ git+https://github.com/acsone/odoo-cloud-platform@25cf2a9bfb287a4ca5696651f448401264b8df2a#subdirectory=setup/attachment_s3
 odoo-addon-base-attachment-object-storage @ git+https://github.com/acsone/odoo-cloud-platform@fc452c6a2abbae4ab7d4bd041c5d2212691a8096#subdirectory=setup/base_attachment_object_storage
@@ -76,12 +76,12 @@ odoo-addon-stock-move-common-dest==16.0.1.0.1
 odoo-addon-stock-packaging-calculator @ git+https://github.com/acsone/stock-logistics-warehouse.git@7a62f663ee6d0c2393ad2d09c79e88d6308e6efd#subdirectory=setup/stock_packaging_calculator
 odoo-addon-stock-picking-completion-info @ git+https://github.com/acsone/wms.git@008729166985bcb41891442e6491e09e7f0aede4#subdirectory=setup/stock_picking_completion_info
 odoo-addon-stock-picking-delivery-link==16.0.1.0.1
-odoo-addon-stock-picking-start==16.0.1.0.1
-odoo-addon-stock-picking-type-shipping-policy @ git+https://github.com/acsone/wms.git@12dbcd20834849758e681098005f9386cb2c22a6#subdirectory=setup/stock_picking_type_shipping_policy
 odoo-addon-stock-picking-group-by-base @ git+https://github.com/acsone/stock-logistics-workflow.git@20afe143fb8e3b31e154024d74b979a6d9c6f3f7#subdirectory=setup/stock_picking_group_by_base
 odoo-addon-stock-picking-group-by-max-weight @ git+https://github.com/acsone/stock-logistics-workflow.git@ec1809573d449907146ebcdcda9821cf2b519b6e#subdirectory=setup/stock_picking_group_by_max_weight
 odoo-addon-stock-picking-group-by-partner-by-carrier @ git+https://github.com/acsone/stock-logistics-workflow.git@c72ab4708b78ee0c068523ed9b0a2e645da71da8#subdirectory=setup/stock_picking_group_by_partner_by_carrier
 odoo-addon-stock-picking-group-by-partner-by-carrier-by-customer @ git+https://github.com/acsone/stock-logistics-workflow.git@8486bf88795420832c0588ccacf9840c3f9b9056#subdirectory=setup/stock_picking_group_by_partner_by_carrier_by_customer
+odoo-addon-stock-picking-start==16.0.1.0.1
+odoo-addon-stock-picking-type-shipping-policy @ git+https://github.com/acsone/wms.git@12dbcd20834849758e681098005f9386cb2c22a6#subdirectory=setup/stock_picking_type_shipping_policy
 odoo-addon-stock-procurement-customer @ git+https://github.com/acsone/stock-logistics-workflow.git@0ca3d1ab0e0ee3bf90628dfd63051dbdba6c460c#subdirectory=setup/stock_procurement_customer
 odoo-addon-stock-production-lot-expired-date @ git+https://github.com/acsone/product-attribute.git@d76d655034abd4070b6e96debf60597903429dd7#subdirectory=setup/stock_production_lot_expired_date
 odoo-addon-stock-production-lot-expiry @ git+https://github.com/acsone/product-attribute.git@d1d1d4bc64d8464c621b0a5823ff43fd3ee03406#subdirectory=setup/stock_production_lot_expiry
