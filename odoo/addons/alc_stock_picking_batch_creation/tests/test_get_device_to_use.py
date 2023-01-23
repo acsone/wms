@@ -31,7 +31,7 @@ class TestGetDeviceToUse(AlcClusterPickingCommonFeatures):
                 ],
             }
         )
-        candidates_pickings = make_picking_batch._search_pickings()
+        candidates_pickings = make_picking_batch._candidates_pickings_to_batch()
         for picking in candidates_pickings:
             device = make_picking_batch._compute_device_to_use(picking)
             if device:
@@ -59,7 +59,7 @@ class TestGetDeviceToUse(AlcClusterPickingCommonFeatures):
                 ],
             }
         )
-        candidates_pickings = make_picking_batch._search_pickings()
+        candidates_pickings = make_picking_batch._candidates_pickings_to_batch()
         for picking in candidates_pickings:
             device = make_picking_batch._compute_device_to_use(picking)
             if device:
@@ -84,7 +84,7 @@ class TestGetDeviceToUse(AlcClusterPickingCommonFeatures):
                 ],
             }
         )
-        candidates_pickings = make_picking_batch._search_pickings()
+        candidates_pickings = make_picking_batch._candidates_pickings_to_batch()
         for picking in candidates_pickings:
             device = make_picking_batch._compute_device_to_use(picking)
             if device:
@@ -105,7 +105,7 @@ class TestGetDeviceToUse(AlcClusterPickingCommonFeatures):
                 "stock_device_type_ids": [(4, self.device1.id)],
             }
         )
-        candidates_pickings = make_picking_batch._search_pickings()
+        candidates_pickings = make_picking_batch._candidates_pickings_to_batch()
         volume_pickings = candidates_pickings.mapped("total_volume_batch_picking")
         for volume in volume_pickings:
             self.assertEqual(volume, 0)
