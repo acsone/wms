@@ -33,7 +33,7 @@ lxml==4.6.5
 manifestoo_core==0.10.3
 MarkupSafe==1.1.0
 num2words==0.5.6
-odoo @ git+https://github.com/acsone/odoo.git@8b570eea226208232d5fe2eb76715182e613ad07
+odoo @ git+https://github.com/acsone/odoo.git@b77881e800b93d4715da734611af63e6d8ece732
 odoo-addon-account-invoice-triple-discount @ git+https://github.com/OCA/account-invoicing.git@9f5ba13e1d13253eb030ebe6b70846490de38e26#subdirectory=setup/account_invoice_triple_discount
 odoo-addon-attachment-s3 @ git+https://github.com/acsone/odoo-cloud-platform@25cf2a9bfb287a4ca5696651f448401264b8df2a#subdirectory=setup/attachment_s3
 odoo-addon-base-attachment-object-storage @ git+https://github.com/acsone/odoo-cloud-platform@fc452c6a2abbae4ab7d4bd041c5d2212691a8096#subdirectory=setup/base_attachment_object_storage
@@ -87,7 +87,7 @@ odoo-addon-stock-route-mto @ git+https://github.com/acsone/stock-logistics-wareh
 odoo-addon-stock-storage-type @ git+https://github.com/acsone/wms.git@fd484bfeb2110f1dbcaec071acab1a41dc57d935#subdirectory=setup/stock_storage_type
 odoo-addon-stock-storage-type-putaway-abc @ git+https://github.com/acsone/wms.git@2cca4a20b17686fe5cfee096215035b9fdef3e09#subdirectory=setup/stock_storage_type_putaway_abc
 odoo-addon-stock-storage-type-putaway-abc-classification-sale-stock @ git+https://github.com/acsone/wms.git@980b444e365da2752f5bc1345f22d2cf5ca80657#subdirectory=setup/stock_storage_type_putaway_abc_classification_sale_stock
-odoo-addons-enterprise @ git+ssh://git@github.com/acsone/enterprise.git@31da8268ad69f1bf770127c5e449cbf230fe73ce
+odoo-addons-enterprise @ git+ssh://git@github.com/acsone/enterprise.git@b6a086972c8f24173c0ec818069965b294babe5b
 ofxparse==0.21
 openupgradelib==3.4.0
 passlib==1.7.3
