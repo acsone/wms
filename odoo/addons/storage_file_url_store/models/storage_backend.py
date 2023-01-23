@@ -34,7 +34,7 @@ class StorageBackend(models.Model):
         if to_recompute:
             query = """
             UPDATE storage_file sf
-            SET url = CONCAT(sb.base_url_for_files, sf.relative_path)
+            SET url = CONCAT(sb.base_url_for_files, '/', sf.relative_path)
             FROM storage_backend sb
             WHERE sf.backend_id IN %s AND sf.backend_id = sb.id
             """
