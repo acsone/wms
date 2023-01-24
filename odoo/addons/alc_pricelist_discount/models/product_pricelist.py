@@ -1,14 +1,14 @@
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, fields, models
+from odoo import _, api, fields
 from odoo.exceptions import ValidationError
 from odoo.tools import ormcache
 
+from odoo.addons.product.models.product_pricelist import Pricelist
 
-class ProductPricelist(models.Model):
 
-    _inherit = "product.pricelist"
+class ProductPricelist(Pricelist):
 
     is_discount = fields.Boolean(default=False)
 

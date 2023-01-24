@@ -1,13 +1,13 @@
 # Copyright 2017 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import api, fields, models
+from odoo import api, fields
 
 from odoo.addons.product.models.product_pricelist import Pricelist
+from odoo.addons.sale.models.sale_order import SaleOrder as SaleOrderBase
 
 
-class SaleOrder(models.Model):
-    _inherit = "sale.order"
+class SaleOrder(SaleOrderBase):
 
     supplier_promotion_allowed = fields.Boolean(
         string="Supplier promotion allowed",

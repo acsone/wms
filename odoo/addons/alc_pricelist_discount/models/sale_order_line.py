@@ -1,13 +1,13 @@
 # Copyright 2017 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import api, fields, models
+from odoo import api, fields
 
 from odoo.addons.product.models.product_pricelist_item import PricelistItem
+from odoo.addons.sale.models.sale_order_line import SaleOrderLine as SaleOrderLineBase
 
 
-class SaleOrderLine(models.Model):
-    _inherit = "sale.order.line"
+class SaleOrderLine(SaleOrderLineBase):
 
     discount_item_id = fields.Many2one[PricelistItem](
         compute="_compute_discount_item_id", store=True

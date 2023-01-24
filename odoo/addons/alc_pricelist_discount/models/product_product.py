@@ -1,14 +1,15 @@
 # Copyright 2023 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import fields, models
+from odoo import fields
 from odoo.tools import float_compare
 
+from odoo.addons.product.models.product_product import (
+    ProductProduct as ProductProductBase,
+)
 
-class ProductProduct(models.Model):
 
-    _inherit = "product.product"
-
+class ProductProduct(ProductProductBase):
     def _get_applicable_pricelist_item(self, date, quantity, pricelists=None):
         self.ensure_one()
         if not pricelists:

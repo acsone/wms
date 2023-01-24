@@ -9,11 +9,14 @@
     "license": "AGPL-3",
     "category": "Sales Management",
     "depends": [
-        "account_invoice_triple_discount",
-        "product_price_category",
+        # Odoo
         "sale",
         "sale_stock",
+        # OCA
+        "account_invoice_triple_discount",
         "sale_triple_discount",
+        "product_price_category",
+        # ALC
         "alc_product_override_price",
         "alc_partner_pricelist",
         "alc_product_supplierinfo_default_price",
