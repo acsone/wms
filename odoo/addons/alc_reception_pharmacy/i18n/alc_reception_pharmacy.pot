@@ -362,7 +362,7 @@ msgstr ""
 msgid "^FS\\r\n"
 "^FO420,150\\r\n"
 "^BQN,2,6\\r\n"
-"^FDQA,#"
+"^FDQA,"
 msgstr ""
 
 #. module: alc_reception_pharmacy
