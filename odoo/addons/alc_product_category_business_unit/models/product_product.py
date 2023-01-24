@@ -1,6 +1,7 @@
 # Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+
 from odoo import api, fields
 
 from odoo.addons.product.models.product_category import ProductCategory
@@ -18,42 +19,30 @@ class ProductProduct(ProductProductBase):
         store=True,
     )
 
-    @api.depends("categ_id")
+    @api.depends("categ_id", "categ_id.is_business_unit", "categ_id.parent_path")
     def _compute_business_unit_id(self):
-        business_units = self.env["product.category"].search(
-            [("is_business_unit", "=", True)]
-        )
-
-        # If there is business units, we can stop this method now
-        # to avoid to loop on each product for nothing
-        if not business_units:
-            return
-
-        bu_by_categ = {}
-        for business_unit in business_units:
-            business_unit_id = business_unit.id
-            bu_by_categ[business_unit_id] = business_unit_id
-            children_categ_query = """
-            WITH RECURSIVE tree AS (
-              SELECT id, ARRAY[]::INTEGER[] AS ancestors
-              FROM product_category WHERE parent_id IS NULL
-
-              UNION ALL
-
-              SELECT
-                product_category.id,
-                tree.ancestors || product_category.parent_id
-              FROM product_category, tree
-              WHERE product_category.parent_id = tree.id
-            ) SELECT id FROM tree WHERE %s = ANY(tree.ancestors);
+        categ_ids = self.mapped("categ_id.id")
+        if not categ_ids:
+            self.write({"business_unit_id": False})
+            return True
+        sql = """
+                SELECT
+                    categ.id,
+                    bu.id as business_unit_id
+                FROM
+                    product_category categ
+                    JOIN product_category bu ON (
+                        bu.is_business_unit = True
+                        AND (
+                            categ.id = bu.id
+                            OR categ.parent_path like bu.parent_path || %s
+                        )
+                    )
+                WHERE
+                    categ.id in %s
             """
-            self.env.cr.execute(children_categ_query, (business_unit.id,))
-
-            for categ in self.env.cr.fetchall():
-                bu_by_categ[categ[0]] = business_unit_id
-
+        self.env.cr.execute(sql, ["%", tuple(categ_ids)])
+        bu_id_by_categ_id = dict(self.env.cr.fetchall())
         for product in self:
-            if not product.categ_id or product.categ_id.id not in bu_by_categ:
-                product.business_unit_id = None
-            else:
-                product.business_unit_id = bu_by_categ[product.categ_id.id]
+            product.business_unit_id = bu_id_by_categ_id.get(product.categ_id.id)
+        return True

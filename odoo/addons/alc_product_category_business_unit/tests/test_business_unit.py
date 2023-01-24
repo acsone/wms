@@ -50,3 +50,37 @@ class TestBusinessUnit(TransactionCase):
             self.product_template2.business_unit_id, self.business_unit_category
         )
         self.assertEqual(self.product2.business_unit_id, self.business_unit_category)
+
+    def test_02(self):
+        """Business unit is computed when the variant categ.is_business_unit changes."""
+        self.assertTrue(self.product1.categ_id)
+        self.assertFalse(self.product1.business_unit_id)
+        self.product1.categ_id.is_business_unit = True
+        self.assertTrue(self.product1.business_unit_id)
+        self.assertEqual(self.product1.business_unit_id, self.product1.categ_id)
+
+    def test_03(self):
+        """Business unit is computed when the tmpl categ.is_business_unit changes."""
+        self.assertTrue(self.product_template1.categ_id)
+        self.assertFalse(self.product_template1.business_unit_id)
+        self.product_template1.categ_id.is_business_unit = True
+        self.assertTrue(self.product_template1.business_unit_id)
+        self.assertEqual(
+            self.product_template1.business_unit_id, self.product1.categ_id
+        )
+
+    def test_04(self):
+        """Current categ change parent."""
+        self.assertTrue(self.product1.categ_id)
+        self.assertFalse(self.product1.business_unit_id)
+        self.product1.categ_id.parent_id = self.business_unit_category
+        self.assertEqual(self.product1.business_unit_id, self.business_unit_category)
+
+    def test_05(self):
+        """Current categ change parent."""
+        self.assertTrue(self.product_template1.categ_id)
+        self.assertFalse(self.product_template1.business_unit_id)
+        self.product_template1.categ_id.parent_id = self.business_unit_category
+        self.assertEqual(
+            self.product_template1.business_unit_id, self.business_unit_category
+        )
