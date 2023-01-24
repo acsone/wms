@@ -19,17 +19,13 @@ class ProductTemplate(ProductTemplateBase):
         store=True,
     )
 
-    @api.depends("product_variant_ids", "product_variant_ids.business_unit_id")
+    @api.depends("has_one_variant", "product_variant_ids.business_unit_id")
     def _compute_business_unit_id(self):
-        unique_variants = self.filtered(
-            lambda template: len(template.product_variant_ids) == 1
-        )
+        unique_variants = self.filtered("has_one_variant")
         for template in unique_variants:
             template.business_unit_id = template.product_variant_ids.business_unit_id
-
-        for template in self - unique_variants:
-            template.business_unit_id = False
+        (self - unique_variants).update({"business_unit_id": False})
 
     def _inverse_business_unit_id(self):
-        if len(self.product_variant_ids) == 1:
+        if self.has_one_variant:
             self.product_variant_ids.business_unit_id = self.business_unit_id
