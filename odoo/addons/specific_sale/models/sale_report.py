@@ -21,7 +21,7 @@ class SaleReport(models.Model):
         # Use only in search view
         domain = []
         category_narcotic = self.env.ref(
-            "specific_data.product_categ_medoc", raise_if_not_found=False
+            "alc_product_category_data.product_categ_medoc", raise_if_not_found=False
         )
         if category_narcotic:
             domain.append(("categ_id", "child_of", category_narcotic.ids))

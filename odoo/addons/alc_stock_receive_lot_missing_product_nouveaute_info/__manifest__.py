@@ -16,6 +16,7 @@
         "stock_receive_lot",
         "alc_product_pharmacy",
         "alc_product_mto",
+        "alc_product_category_data",
     ],
     "data": [
         "security/res_groups.xml",

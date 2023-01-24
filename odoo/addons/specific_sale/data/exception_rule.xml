@@ -255,7 +255,7 @@ if object.amount_total &lt; 100:
     <field name="sequence">30</field>
     <field name="model">sale.order</field>
     <field name="code">
-material_category = object.env.ref('specific_data.product_categ_materiel')
+material_category = object.env.ref('alc_product_category_data.product_categ_materiel')
 material_categories = object.env['product.category'].search([('id', 'child_of', material_category.ids)])
 if sum([line.price_total for line in object.order_line.filtered(lambda l: l.product_id.categ_id.id in material_categories.ids)]) &gt; 1000:
     failed=True

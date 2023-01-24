@@ -48,21 +48,21 @@ def _initialize_product_assortment_filter(cr):
                         (
                             "categ_id",
                             "child_of",
-                            env.ref("specific_data.product_categ_materiel").id,
+                            env.ref("alc_product_category_data.product_categ_materiel").id,
                         )
                     ],
                     [
                         (
                             "categ_id",
                             "child_of",
-                            env.ref("specific_data.product_categ_ali").id,
+                            env.ref("alc_product_category_data.product_categ_ali").id,
                         )
                     ],
                     [
                         (
                             "categ_id",
                             "child_of",
-                            env.ref("specific_data.product_categ_parapharmacie").id,
+                            env.ref("alc_product_category_data.product_categ_parapharmacie").id,
                         )
                     ],
                 ]

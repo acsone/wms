@@ -16,11 +16,11 @@
     <field name="search_view_id" ref="product_pricelist_item_tree_view_search" />
     <field
       name="domain"
-      eval="[('pricelist_id', '=', ref('specific_data.product_pricelist_pb2'))]"
+      eval="[('pricelist_id', '=', ref('alc_product_pricelist_data.product_pricelist_pb2'))]"
     />
     <field
       name="context"
-      eval="{'default_pricelist_id': ref('specific_data.product_pricelist_pb2')}"
+      eval="{'default_pricelist_id': ref('alc_product_pricelist_data.product_pricelist_pb2')}"
     />
   </record>
   <menuitem

@@ -222,7 +222,7 @@ class SaleOrder(models.Model):
     def _ws_create_order_line_data(self, data):
         lines = []
         partner_ref = data["customer_id"]
-        human_categ = self.env.ref("specific_data.product_categ_humain")
+        human_categ = self.env.ref("alc_product_category_data.product_categ_humain")
         for line in data["lines"]:
             if "sku" in line:
                 is_sku = True

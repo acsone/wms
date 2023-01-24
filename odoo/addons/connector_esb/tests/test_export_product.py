@@ -36,7 +36,7 @@ class ExportProductTestCase(ESBXMLTestCase):
             {"name": "Manufacturer", "supplier": True, "ref": "manu01"}
         )
         self.p_cat_all = self.env.ref("product.product_category_all")
-        self.p_cat = self.env.ref("specific_data.product_categ_humain")
+        self.p_cat = self.env.ref("alc_product_category_data.product_categ_humain")
         # Set the esb_ref of the business unit
         self.p_cat.parent_id.esb_ref = "medicament"
         self.p_cat.with_context({"lang": "nl_BE"}).warning_info = "Aandacht"

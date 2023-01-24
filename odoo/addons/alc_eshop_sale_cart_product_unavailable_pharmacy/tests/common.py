@@ -10,6 +10,6 @@ class TestSaleCartRestApiPharmacy(TestSaleCartRestApiCase):
     def setUpClass(cls):
         super(TestSaleCartRestApiPharmacy, cls).setUpClass()
 
-        cls.category_human = cls.env.ref("specific_data.product_categ_humain")
+        cls.category_human = cls.env.ref("alc_product_category_data.product_categ_humain")
         vals_product_human = {"name": "Human", "categ_id": cls.category_human.id}
         cls.product_human = cls.env["product.product"].create(vals_product_human)

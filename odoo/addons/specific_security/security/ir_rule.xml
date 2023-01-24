@@ -5,7 +5,7 @@
     <field name="model_id" ref="product.model_product_product" />
     <field
       name="domain_force"
-    >[('categ_id', 'child_of' , [user.env.ref('specific_data.product_categ_materiel').id])]</field>
+    >[('categ_id', 'child_of' , [user.env.ref('alc_product_category_data.product_categ_materiel').id])]</field>
     <field
       name="groups"
       eval="[(4, ref('specific_security.group_materials_manager'))]"
@@ -20,7 +20,7 @@
     <field name="model_id" ref="product.model_product_template" />
     <field
       name="domain_force"
-    >[('categ_id', 'child_of' , [user.env.ref('specific_data.product_categ_materiel').id])]</field>
+    >[('categ_id', 'child_of' , [user.env.ref('alc_product_category_data.product_categ_materiel').id])]</field>
     <field
       name="groups"
       eval="[(4, ref('specific_security.group_materials_manager'))]"

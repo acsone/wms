@@ -12,56 +12,56 @@ class TestSaleOrderException(SavepointCase):
         cls.partner = cls.env.ref("base.res_partner_1")
         cls.partner.ref = "888534954"
         cls.prod1 = cls.env.ref("product.product_product_1")
-        cls.prod1.categ_id = cls.env.ref("specific_data.product_categ_materiel")
+        cls.prod1.categ_id = cls.env.ref("alc_product_category_data.product_categ_materiel")
         cls.prod_food = cls.env["product.product"].create(
             {
                 "name": "I am some food, yam",
-                "categ_id": cls.env.ref("specific_data.product_categ_ali_divers").id,
+                "categ_id": cls.env.ref("alc_product_category_data.product_categ_ali_divers").id,
             }
         )
         cls.prod_stup = cls.env["product.product"].create(
             {
                 "name": "I am a stupefiant",
-                "categ_id": cls.env.ref("specific_data.product_categ_stupefiant").id,
+                "categ_id": cls.env.ref("alc_product_category_data.product_categ_stupefiant").id,
             }
         )
         cls.prod_matos = cls.env["product.product"].create(
             {
                 "name": "I am some gear",
                 "categ_id": cls.env.ref(
-                    "specific_data.product_categ_mat_instrumentation"
+                    "alc_product_category_data.product_categ_mat_instrumentation"
                 ).id,
             }
         )
         cls.prod_medoc_pharma = cls.env["product.product"].create(
             {
                 "name": "I am  a medoc pharmacy",
-                "categ_id": cls.env.ref("specific_data.product_categ_parapharmacie").id,
+                "categ_id": cls.env.ref("alc_product_category_data.product_categ_parapharmacie").id,
             }
         )
         cls.prod_medoc_human = cls.env["product.product"].create(
             {
                 "name": "I am a human medoc",
-                "categ_id": cls.env.ref("specific_data.product_categ_humain").id,
+                "categ_id": cls.env.ref("alc_product_category_data.product_categ_humain").id,
             }
         )
         cls.prod_medoc_vet_belge = cls.env["product.product"].create(
             {
                 "name": "I am a beligum veterinarian product",
-                "categ_id": cls.env.ref("specific_data.product_categ_vet_belges").id,
+                "categ_id": cls.env.ref("alc_product_category_data.product_categ_vet_belges").id,
             }
         )
         cls.prod_medoc_belge_only = cls.env["product.product"].create(
             {
                 "name": "I am a beligum medoc only",
-                "categ_id": cls.env.ref("specific_data.product_categ_parapharmacie").id,
+                "categ_id": cls.env.ref("alc_product_category_data.product_categ_parapharmacie").id,
                 "belgium_only": True,
             }
         )
         cls.prod_vet_only = cls.env["product.product"].create(
             {
                 "name": "I am for veterinary only",
-                "categ_id": cls.env.ref("specific_data.product_categ_ali_divers").id,
+                "categ_id": cls.env.ref("alc_product_category_data.product_categ_ali_divers").id,
                 "veterinary_only": True,
             }
         )
@@ -69,7 +69,7 @@ class TestSaleOrderException(SavepointCase):
             {
                 "name": "I am a medoc belge Psychotropes III",
                 "categ_id": cls.env.ref(
-                    "specific_data.product_categ_psychotropes_25"
+                    "alc_product_category_data.product_categ_psychotropes_25"
                 ).id,
             }
         )
@@ -77,20 +77,20 @@ class TestSaleOrderException(SavepointCase):
             {
                 "name": "I am a Stupéfiant VET",
                 "categ_id": cls.env.ref(
-                    "specific_data.product_categ_stupefiant_vet"
+                    "alc_product_category_data.product_categ_stupefiant_vet"
                 ).id,
             }
         )
         cls.prod_medoc = cls.env["product.product"].create(
             {
                 "name": "Base medicine category",
-                "categ_id": cls.env.ref("specific_data.product_categ_medoc").id,
+                "categ_id": cls.env.ref("alc_product_category_data.product_categ_medoc").id,
             }
         )
         cls.prod_cascade_import = cls.env["product.product"].create(
             {
                 "name": "I am a cascade import product",
-                "categ_id": cls.env.ref("specific_data.product_categ_importation").id,
+                "categ_id": cls.env.ref("alc_product_category_data.product_categ_importation").id,
             }
         )
         cls.prod_provision_on_sale = cls.env["product.product"].create(

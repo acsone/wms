@@ -43,7 +43,7 @@ class TestSaleCartRestApi(TestSaleCartRestApiCase):
         info = self.cart.dispatch("get_next_suite_name")
         self.assertEqual(None, info["value"])
         # only for cart with meds
-        self.product_1.categ_id = self.env.ref("specific_data.product_categ_medoc")
+        self.product_1.categ_id = self.env.ref("alc_product_category_data.product_categ_medoc")
         info = self.cart.dispatch("get_next_suite_name")
         self.assertEqual("1", info["value"])
         # if a suite_name is already on the cat, it's returned...

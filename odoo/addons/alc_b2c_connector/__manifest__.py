@@ -33,11 +33,12 @@
         "sales_team",
         "stock_available",
         "stock_picking_backorder",  # is_sale_back_order_accepted on respartner
-        "specific_data",  # categs for product_assortment
         "alc_partner_veterinary",
         "alc_sale_channel",  # sale_channel field on SO
         "stock_groupbypartner",
         "pricelist_discount",
+        "alc_product_category_data",
+        "alc_product_pricelist_data",
     ],
     "data": [
         "views/sale_order.xml",

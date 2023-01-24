@@ -225,7 +225,7 @@ class ProductPriceImporter(models.TransientModel):
           starting from now.
         """
         ProductPricelistItem = self.env["product.pricelist.item"]
-        pricelist = self.env.ref("specific_data.product_pricelist_pb2")
+        pricelist = self.env.ref("alc_product_pricelist_data.product_pricelist_pb2")
 
         pricelist_items = self.env["product.pricelist.item"].search(
             [

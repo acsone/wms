@@ -77,7 +77,7 @@ class ProductProduct(models.Model):
         for the ones in the category 'Médicaments vétérinaires Belges' and its
         children.
         """
-        belgium_medoc = self.env.ref("specific_data.product_categ_vet_belges")
+        belgium_medoc = self.env.ref("alc_product_category_data.product_categ_vet_belges")
         laroyduro_suppliers = self.env["res.partner"].search(
             [("supplier", "=", True), ("ref", "=", "73657")]
         )
@@ -130,8 +130,8 @@ class ProductProduct(models.Model):
             [("supplier", "=", True), ("ref", "in", ["81200", "81201"])]
         )
 
-        categ_ali = self.env.ref("specific_data.product_categ_ali")
-        categ_parapharmacie = self.env.ref("specific_data.product_categ_parapharmacie")
+        categ_ali = self.env.ref("alc_product_category_data.product_categ_ali")
+        categ_parapharmacie = self.env.ref("alc_product_category_data.product_categ_parapharmacie")
 
         domain = [
             "|",

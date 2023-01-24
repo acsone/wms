@@ -27,7 +27,7 @@ def _initialize_product_assortment_filter(cr):
             (
                 "categ_id",
                 "child_of",
-                env.ref("specific_data.product_categ_vet_belges").id,
+                env.ref("alc_product_category_data.product_categ_vet_belges").id,
             ),
         ]
     )
@@ -37,7 +37,7 @@ def _initialize_product_assortment_filter(cr):
             (
                 "categ_id",
                 "child_of",
-                env.ref("specific_data.product_categ_importation").id,
+                env.ref("alc_product_category_data.product_categ_importation").id,
             ),
         ]
     )
