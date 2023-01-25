@@ -6,7 +6,7 @@ from odoo import fields
 from odoo.addons.stock_grn.models import stock_grn
 
 
-class GRN(stock_grn.GRN):
+class StockGrn(stock_grn.StockGrn):
 
     carrier_category_id = fields.Integer(compute="_compute_carrier_category_id")
 
