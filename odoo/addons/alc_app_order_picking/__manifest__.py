@@ -13,6 +13,7 @@
         "alc_delivery_carrier_gls",
         "alc_partner_carrier",
         "alc_stock_available_immediately",
+        "alc_stock_picking_backorder_reason",
         "alc_stock_picking_wave_display",
         "base_delivery_carrier_label",
         "delivery_carrier_max_weight_constraint",

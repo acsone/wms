@@ -31,6 +31,7 @@ def migrate(cr, version):
         "stock_operation_recompute",
         "stock_reassign_auto",
         "stock_picking_assignment",
+        "stock_picking_backorder",
         "stock_picking_show_backorder",
         "stock_putaway_route",
         "base_cached_xmlid",
