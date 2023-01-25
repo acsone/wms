@@ -4,7 +4,7 @@
 
 from odoo import fields
 
-from odoo.addons.pricelist_discount.tests.common import PricelistDiscountCase
+from odoo.addons.alc_pricelist_discount.tests.common import PricelistDiscountCase
 
 
 class TestAlcSaleOrderPriceRecalculation(PricelistDiscountCase):

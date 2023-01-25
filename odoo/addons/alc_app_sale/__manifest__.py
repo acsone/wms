@@ -25,5 +25,10 @@
         "alc_product_category_business_unit",
         "alc_product_category_property",
         "alc_product_pharmacy",
+        "alc_product_override_price",
+        "alc_partner_pricelist",
+        "alc_product_supplierinfo_default_price",
+        "alc_product_supplierinfo_check",
+        "alc_pricelist_discount",
     ],
 }

@@ -1,15 +1,14 @@
-# -*- coding: utf-8 -*-
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, fields, models
+from odoo import _, api, fields
 from odoo.exceptions import ValidationError
 from odoo.tools import ormcache
 
+from odoo.addons.product.models.product_pricelist import Pricelist
 
-class ProductPricelist(models.Model):
 
-    _inherit = "product.pricelist"
+class ProductPricelist(Pricelist):
 
     is_discount = fields.Boolean(default=False)
 
@@ -22,21 +21,29 @@ class ProductPricelist(models.Model):
 
     @api.constrains("is_discount")
     def _constrain_is_discount(self):
+        """
+        Since is_discount usages are exclusive, that means that if the pricelist.
+
+        is used somewhere, you cannot change its value.
+        """
         if not self.enforce_discount_constraint():
             return
-        # since is_discount usages are exclusive, that means that if the pricelist
-        # is used somewhere, you cannot change its value.
-        field = self.env.ref("product.field_res_partner_property_product_pricelist")
         msg = _("You cannot change a pricelist that is already in use.")
-        for pricelist in self:
-            if pricelist.is_discount:
-                domain_pricelist = [
-                    ("fields_id", "=", field.id),
-                    ("value_reference", "=", "product.pricelist,%s" % pricelist.id),
-                ]
-                if self.env["ir.property"].search(domain_pricelist, limit=1):
+        property_model = self.env["ir.property"]
+        partner_model = self.env["res.partner"]
+        for rec in self:
+            if rec.is_discount:
+                if property_model.search(
+                    [
+                        ("name", "=", "property_product_pricelist"),
+                        ("res_id", "like", "res.partner%"),
+                        ("value_reference", "=", f"product.pricelist,{rec.id}"),
+                    ],
+                    limit=1,
+                ):
                     raise ValidationError(msg)
             else:
-                domain_partners = [("discount_pricelist_ids", "in", pricelist.id)]
-                if self.env["res.partner"].search(domain_partners, limit=1):
+                if partner_model.search(
+                    [("discount_pricelist_ids", "in", rec.id)], limit=1
+                ):
                     raise ValidationError(msg)

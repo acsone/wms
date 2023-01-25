@@ -36,7 +36,7 @@
         "alc_partner_veterinary",
         "alc_sale_channel",  # sale_channel field on SO
         "stock_groupbypartner",
-        "pricelist_discount",
+        "alc_pricelist_discount",
         "alc_product_category_data",
         "alc_product_pricelist_data",
     ],

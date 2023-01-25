@@ -19,7 +19,7 @@
         "l10n_be_apb_tax",
         "l10n_be_invoice_bba",
         "sale",
-        "pricelist_discount",
+        "alc_pricelist_discount",
         "product_analytic",
         "purchase",
         "report_intrastat",

@@ -11,7 +11,7 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        "pricelist_discount",
+        "alc_pricelist_discount",
         "sale_cart_rest_api",
         "sale_triple_discount",
         "shopinvader_sale_cart",

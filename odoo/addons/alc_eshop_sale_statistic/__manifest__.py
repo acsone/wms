@@ -17,7 +17,7 @@
         "authenticated_partner_mixin",
         "materialized_view_mixin",
         "sale_cancel_remaining",
-        "pricelist_discount",  # discount_sale
+        "alc_pricelist_discount",  # discount_sale
         "product_additional",  # ratio_main_product
         "alc_product_category_data",
     ],

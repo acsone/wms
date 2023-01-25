@@ -1,0 +1,51 @@
+<odoo>
+  <record id="view_order_form" model="ir.ui.view">
+    <field name="model">sale.order</field>
+    <field
+      name="inherit_id"
+      ref="sale_triple_discount.sale_order_triple_discount_form_view"
+    />
+    <field name="arch" type="xml">
+      <!-- Adds supplierinfo_discount_sale_allowed and discount_pricelist_ids in sale.order form view -->
+      <field name="pricelist_id" position="after">
+        <field name="supplier_promotion_allowed" />
+        <field
+          name="discount_pricelist_ids"
+          groups="product.group_sale_pricelist"
+          widget="many2many_tags"
+        />
+      </field>
+      <!-- Hide discount field -->
+      <xpath expr="//tree/field[@name='discount']" position="attributes">
+        <attribute name="invisible">True</attribute>
+      </xpath>
+      <label for="discount" position="attributes">
+        <attribute name="invisible">True</attribute>
+      </label>
+      <div name="discount" position="attributes">
+        <attribute name="invisible">True</attribute>
+      </div>
+      <!-- Replace discount2 string -->
+      <xpath expr="//tree/field[@name='discount2']" position="attributes">
+        <attribute name="string">Promotion (%)</attribute>
+      </xpath>
+      <label for="discount2" position="attributes">
+        <attribute name="string">Promotion (%)</attribute>
+      </label>
+      <div name="discount2" position="attributes">
+        <attribute name="string">Promotion (%)</attribute>
+      </div>
+      <!-- Replace discount3 string -->
+      <xpath expr="//tree/field[@name='discount3']" position="attributes">
+        <attribute name="string">Discount (%)</attribute>
+      </xpath>
+      <label for="discount3" position="attributes">
+        <attribute name="string">Discount (%)</attribute>
+      </label>
+      <xpath expr="//tree/field[@name='discounting_type']" position="after">
+        <field name="discount_item_id" invisible="1" />
+        <field name="state" invisible="1" />
+      </xpath>
+    </field>
+  </record>
+</odoo>

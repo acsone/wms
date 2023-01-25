@@ -35,6 +35,7 @@ def migrate(cr, version):
         "stock_putaway_route",
         "base_cached_xmlid",
         "specific_data",
+        "pricelist_discount",
     ]
     for addon in addons_to_uninstall:
         _logger.info("uninstall %s", ",".join(addon))

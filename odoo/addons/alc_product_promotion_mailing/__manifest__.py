@@ -15,7 +15,7 @@
         "alc_eshop",
         "alc_product_promotion_subscription",
         "mail",
-        "pricelist_discount",
+        "alc_pricelist_discount",
         "queue_job_cron",
         "sale",
         "report",

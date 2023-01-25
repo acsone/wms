@@ -1,0 +1,109 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* alc_product_supplierinfo_check
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-01-18 08:30+0000\n"
+"PO-Revision-Date: 2023-01-18 08:30+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_product_supplierinfo_check
+#: model:ir.model.fields,field_description:alc_product_supplierinfo_check.field_product_supplierinfo__discount_purchase
+msgid "Purchase discount (%)"
+msgstr ""
+
+#. module: alc_product_supplierinfo_check
+#: model:ir.model.fields,field_description:alc_product_supplierinfo_check.field_product_supplierinfo__min_qty
+msgid "Purchase minimum qty"
+msgstr ""
+
+#. module: alc_product_supplierinfo_check
+#: model_terms:ir.ui.view,arch_db:alc_product_supplierinfo_check.view_product_supplierinfo_specific_form
+msgid "Sale"
+msgstr ""
+
+#. module: alc_product_supplierinfo_check
+#: model:ir.model.fields,field_description:alc_product_supplierinfo_check.field_product_supplierinfo__discount_sale
+msgid "Sale discount (%)"
+msgstr ""
+
+#. module: alc_product_supplierinfo_check
+#: model:ir.model.fields,field_description:alc_product_supplierinfo_check.field_product_supplierinfo__min_qty_sale
+msgid "Sale minimum qty"
+msgstr ""
+
+#. module: alc_product_supplierinfo_check
+#: model:ir.model,name:alc_product_supplierinfo_check.model_product_supplierinfo
+msgid "Supplier Pricelist"
+msgstr ""
+
+#. module: alc_product_supplierinfo_check
+#: model:ir.model.fields,field_description:alc_product_supplierinfo_check.field_product_supplierinfo__is_null_date_start
+msgid "The date start is null"
+msgstr ""
+
+#. module: alc_product_supplierinfo_check
+#. odoo-python
+#: code:addons/alc_product_supplierinfo_check/models/product_supplierinfo.py:0
+#, python-format
+msgid "The end date must be equal or greater than the start date"
+msgstr ""
+
+#. module: alc_product_supplierinfo_check
+#: model:ir.model.fields,help:alc_product_supplierinfo_check.field_product_supplierinfo__min_qty
+msgid ""
+"The quantity to purchase from this vendor to benefit from the price, "
+"expressed in the vendor Product Unit of Measure if not any, in the default "
+"unit of measure of the product otherwise."
+msgstr ""
+
+#. module: alc_product_supplierinfo_check
+#. odoo-python
+#: code:addons/alc_product_supplierinfo_check/models/product_supplierinfo.py:0
+#, python-format
+msgid "You cannot have a promo without end date"
+msgstr ""
+
+#. module: alc_product_supplierinfo_check
+#. odoo-python
+#: code:addons/alc_product_supplierinfo_check/models/product_supplierinfo.py:0
+#, python-format
+msgid "You cannot have a promo without start date"
+msgstr ""
+
+#. module: alc_product_supplierinfo_check
+#. odoo-python
+#: code:addons/alc_product_supplierinfo_check/models/product_supplierinfo.py:0
+#, python-format
+msgid "You cannot have two promos at the same time"
+msgstr ""
+
+#. module: alc_product_supplierinfo_check
+#. odoo-python
+#: code:addons/alc_product_supplierinfo_check/models/product_supplierinfo.py:0
+#, python-format
+msgid "You cannot have two promos without start and end date"
+msgstr ""
+
+#. module: alc_product_supplierinfo_check
+#. odoo-python
+#: code:addons/alc_product_supplierinfo_check/models/product_supplierinfo.py:0
+#, python-format
+msgid ""
+"You cannot set a minimum quantity (sale and/or purchase) on a default promo"
+msgstr ""
+
+#. module: alc_product_supplierinfo_check
+#. odoo-python
+#: code:addons/alc_product_supplierinfo_check/models/product_supplierinfo.py:0
+#, python-format
+msgid "You cannot two different supplier for a product"
+msgstr ""
