@@ -137,7 +137,6 @@ exclude:  |
   ^odoo/addons/alc_product_audit/|
   ^odoo/addons/alc_product_barcode_required/|
   ^odoo/addons/alc_product_brand_image/|
-  ^odoo/addons/alc_product_category_property/|
   ^odoo/addons/alc_product_category_sequence/|
   ^odoo/addons/alc_product_consolidated_price/|
   ^odoo/addons/alc_product_consolidated_price_newpharma/|
@@ -149,7 +148,6 @@ exclude:  |
   ^odoo/addons/alc_product_lot_info/|
   ^odoo/addons/alc_product_mto/|
   ^odoo/addons/alc_product_packaging_stock_reserve/|
-  ^odoo/addons/alc_product_pharmacy/|
   ^odoo/addons/alc_product_promoted_links/|
   ^odoo/addons/alc_product_promotion_mailing/|
   ^odoo/addons/alc_product_promotion_subscription/|

@@ -1,43 +1,20 @@
-# -*- coding: utf-8 -*-
 # Copyright 2018 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
-from odoo import api, models, tools
+
+from odoo.addons.product.models.product_category import (
+    ProductCategory as ProductCategoryBase,
+)
 
 
-class ProductCategory(models.Model):
-    _inherit = "product.category"
-
-    @api.multi
-    def has_for_parent(self, category_id):
+class ProductCategory(ProductCategoryBase):
+    def has_for_parent(self, category):
         self.ensure_one()
-        return self._has_for_parent(self.id, category_id)
+        return self == category or category.id in self._get_parent_ids()
 
-    @api.multi
     def has_for_parent_xml_id(self, category_xml_id):
-        return self.has_for_parent(self._get_id_for_xmlid(category_xml_id))
+        return self.has_for_parent(self.env.ref(category_xml_id))
 
-    @api.model
-    @tools.ormcache("category_id", "parent_category_id")
-    def _has_for_parent(self, category_id, parent_category_id):
-        """Check if category_id is itself or a parent."""
-        if category_id == parent_category_id:
-            return True
-        category_id = self.browse(category_id).parent_id.id
-        if not category_id:
-            return False
-        return self._has_for_parent(category_id, parent_category_id)
-
-    @api.multi
-    def write(self, vals):
-        result = super(ProductCategory, self).write(vals)
-        if "parent_id" in vals:
-            self._has_for_parent.clear_cache(self)
-        return result
-
-    @api.multi
-    def unlink(self):
-        result = super(ProductCategory, self).unlink()
-        self._has_for_parent.clear_cache(self)
-        self._get_id_for_xmlid.clear_cache(self)
-        return result
+    def _get_parent_ids(self):
+        self.ensure_one()
+        return [int(cat_id) for cat_id in self.parent_path.split("/") if cat_id]

@@ -1,0 +1,1 @@
+from . import test_alc_product_category_property
