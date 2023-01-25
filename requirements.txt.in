@@ -86,6 +86,10 @@ odoo-addon-stock-route-mto @ git+https://github.com/acsone/stock-logistics-wareh
 # stock-logistics-workflow
 # https://github.com/OCA/stock-logistics-workflow/pull/1158
 odoo-addon-delivery-procurement-group-carrier @ git+https://github.com/acsone/stock-logistics-workflow.git@16.0-mig-delivery_procurement_group_carrier-dro#subdirectory=setup/delivery_procurement_group_carrier
+# https://github.com/OCA/stock-logistics-workflow/pull/1199
+odoo-addon-stock-picking-backorder-reason @ git+https://github.com/acsone/stock-logistics-workflow.git@16.0-picking-backorder-reason-dro#subdirectory=setup/stock_picking_backorder_reason
+# https://github.com/OCA/stock-logistics-workflow/pull/1200
+odoo-addon-stock-picking-backorder-reason-grn @ git+https://github.com/acsone/stock-logistics-workflow.git@16.0-add-backorder-reason-grn-dro#subdirectory=setup/stock_picking_backorder_reason_grn
 # https://github.com/OCA/stock-logistics-workflow/pull/1187
 odoo-addon-stock-picking-group-by-base @ git+https://github.com/acsone/stock-logistics-workflow.git@16.0-add-stock-picking-group-by-base-dro#subdirectory=setup/stock_picking_group_by_base
 # https://github.com/OCA/stock-logistics-workflow/pull/1188

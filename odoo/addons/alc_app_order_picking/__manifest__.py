@@ -22,6 +22,8 @@
         "stock_dynamic_routing",
         "stock_move_common_dest",
         "stock_move_manage_priority",
+        "stock_picking_backorder_reason",
+        "stock_picking_backorder_reason_grn",
         "stock_picking_completion_info",
         "stock_picking_delivery_link",
         "stock_picking_group_by_partner_by_carrier",
