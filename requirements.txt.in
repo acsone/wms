@@ -61,6 +61,8 @@ odoo-addon-purchase-stock-packaging @ git+https://github.com/acsone/purchase-wor
 # sale-workflow
 # https://github.com/OCA/sale-workflow/pull/2317
 odoo-addon-sale-triple-discount @ git+https://github.com/acsone/sale-workflow.git@16.0-mig-sale_triple_discount-sbj#subdirectory=setup/sale_triple_discount
+# https://github.com/OCA/sale-workflow/pull/2266
+odoo-addon-sale-exception @ git+https://github.com/acsone/sale-workflow.git@16.0-sale_exception-sbj#subdirectory=setup/sale_exception
 # https://github.com/OCA/sale-workflow/pull/2322
 odoo-addon-product-price-category @ git+https://github.com/acsone/sale-workflow.git@16.0-mig-product_price_category-sbj#subdirectory=setup/product_price_category
 # https://github.com/OCA/sale-workflow/pull/2329

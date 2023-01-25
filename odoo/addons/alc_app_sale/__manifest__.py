@@ -30,5 +30,6 @@
         "alc_product_supplierinfo_default_price",
         "alc_product_supplierinfo_check",
         "alc_pricelist_discount",
+        "sale_exception",
     ],
 }
