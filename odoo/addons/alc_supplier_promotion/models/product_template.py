@@ -1,19 +1,22 @@
-# -*- coding: utf-8 -*-
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import api, fields, models
+from odoo import api, fields
+
+from odoo.addons.product.models.product_template import (
+    ProductTemplate as ProductTemplateBase,
+)
+
+from .product_supplierinfo import ProductSupplierInfo
 
 
-class ProductTemplate(models.Model):
+class ProductTemplate(ProductTemplateBase):
 
-    _inherit = "product.template"
-
-    supplier_promotion_ids = fields.One2many(
-        "product.supplierinfo", compute="_compute_seller_ids_subfields"
+    supplier_promotion_ids = fields.One2many[ProductSupplierInfo](
+        compute="_compute_seller_ids_subfields"
     )
-    supplier_discount_ids = fields.One2many(
-        "product.supplierinfo", compute="_compute_seller_ids_subfields"
+    supplier_discount_ids = fields.One2many[ProductSupplierInfo](
+        compute="_compute_seller_ids_subfields"
     )
 
     @api.depends("seller_ids")

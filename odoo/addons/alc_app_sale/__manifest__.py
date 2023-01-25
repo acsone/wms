@@ -17,6 +17,7 @@
         # OCA/sale-workflow
         "sale_triple_discount",
         "product_price_category",
+        "sale_exception",
         # OCA/product-attribute
         "product_manufacturer",
         # ALC
@@ -30,6 +31,6 @@
         "alc_product_supplierinfo_default_price",
         "alc_product_supplierinfo_check",
         "alc_pricelist_discount",
-        "sale_exception",
+        "alc_supplier_promotion",
     ],
 }

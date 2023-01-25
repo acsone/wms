@@ -20,7 +20,7 @@
         "alc_product_override_price",
         "alc_partner_pricelist",
         "alc_product_supplierinfo_default_price",
-        "alc_product_supplierinfo_check",
+        "alc_supplier_promotion",
     ],
     "website": "http://www.camptocamp.com",
     "data": [

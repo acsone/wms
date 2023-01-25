@@ -2,6 +2,10 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 
+from psycopg2.errors import CheckViolation
+
+from odoo.tools import mute_logger
+
 from .common import TestSupplierInfo
 
 
@@ -39,3 +43,53 @@ class TestSupplierInfoFlow(TestSupplierInfo):
         expected_seller_ids = promo_tomorrow + promo_past
         self.assertEqual(self.product_template.seller_ids, expected_seller_ids)
         self.assertTrue(self.product_template.supplier_promotion_ids, promo_tomorrow)
+
+    @mute_logger("odoo.sql_db")
+    def test_valid_promo(self):
+        with self.assertRaises(CheckViolation):
+            self.supplierinfo_model.create(
+                self.get_supplierinfo_vals(
+                    date_start=self.tomorrow,
+                    date_end=self.tomorrow,
+                    ratio_promotional_product=5,
+                    ratio_main_product=-4,
+                )
+            )
+        with self.assertRaises(CheckViolation):
+            self.supplierinfo_model.create(
+                self.get_supplierinfo_vals(
+                    date_start=self.tomorrow,
+                    date_end=self.tomorrow,
+                    ratio_promotional_product=-5,
+                    ratio_main_product=4,
+                )
+            )
+        with self.assertRaises(CheckViolation):
+            self.supplierinfo_model.create(
+                self.get_supplierinfo_vals(
+                    date_start=self.tomorrow,
+                    date_end=self.tomorrow,
+                    ratio_promotional_product=5,
+                    ratio_main_product=0,
+                )
+            )
+        with self.assertRaises(CheckViolation):
+            self.supplierinfo_model.create(
+                self.get_supplierinfo_vals(
+                    date_start=self.tomorrow,
+                    date_end=self.tomorrow,
+                    ratio_promotional_product=0,
+                    ratio_main_product=5,
+                )
+            )
+
+    def test_ratio_display_name(self):
+        supplierinfo = self.supplierinfo_model.create(
+            self.get_supplierinfo_vals(
+                date_start=self.tomorrow,
+                date_end=self.tomorrow,
+                ratio_promotional_product=5,
+                ratio_main_product=4,
+            )
+        )
+        self.assertEqual(supplierinfo.ratio_display_name, "For 4 products, 5 free")
