@@ -4,18 +4,18 @@
 from odoo import _, api, fields
 from odoo.exceptions import ValidationError
 
-from odoo.addons.base.models.res_partner import Partner
+from odoo.addons.alc_partner_pricelist.models import ResPartner as BaseResPartner
 
 from .product_pricelist import ProductPricelist
 
 
-class ResPartner(Partner):
+class ResPartner(BaseResPartner):
 
     discount_pricelist_ids = fields.Many2many[ProductPricelist](
-        comodel_name="product.pricelist", domain=[("is_discount", "=", True)]
+        domain=[("is_discount", "=", True)]
     )
     property_product_pricelist = fields.Many2one[ProductPricelist](
-        comodel_name="product.pricelist", domain=[("is_discount", "=", False)]
+        domain=[("is_discount", "=", False)]
     )
 
     @api.constrains("property_product_pricelist", "discount_pricelist_ids")
