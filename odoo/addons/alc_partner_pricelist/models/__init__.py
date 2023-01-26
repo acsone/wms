@@ -1,1 +1,1 @@
-from . import res_partner
+from .res_partner import ResPartner

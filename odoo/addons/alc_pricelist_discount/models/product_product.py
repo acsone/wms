@@ -1,9 +1,6 @@
 # Copyright 2023 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import fields
-from odoo.tools import float_compare
-
 from odoo.addons.product.models.product_product import (
     ProductProduct as ProductProductBase,
 )
@@ -36,51 +33,43 @@ class ProductProduct(ProductProductBase):
             return False
         return min(price_by_rule.items(), key=lambda item: item[1])[0]
 
-    def _select_seller(
-        self, partner_id=False, quantity=0.0, date=None, uom_id=False, params=False
-    ):
-        # FIXME: Copy from _select_seller function, find better way
-        self.ensure_one()
-        if date is None:
-            date = fields.Date.context_today(self)
-        precision = self.env["decimal.precision"].precision_get(
-            "Product Unit of Measure"
+    def _prepare_sellers(self, params=False):
+        sellers = super()._prepare_sellers(params)
+        # makes sure we process the list of sellers in the same order as the
+        # one defined on the supplierinfo
+        sellers = sellers.sorted(
+            lambda a: (a.is_null_date_start, a.date_start, -a.min_qty, -a.min_qty_sale)
         )
+        # filter out the ones that are not applicable for the current quantity based on the min_qty_sale
+        return self._filter_for_min_sale_qty(sellers)
 
-        res = self.env["product.supplierinfo"]
-        sellers = self.seller_ids
-        sellers = sellers.filtered(
-            lambda s: not s.company_id or s.company_id.id == self.env.company.id
-        )
+    def _filter_for_min_sale_qty(self, sellers):
+        quantity = self.env.context.get("quantity")
+        uom_id = self.env.context.get("uom_id")
+        if not quantity:
+            return sellers
+        selected_ids = []
         for seller in sellers:
-            # Set quantity in UoM of seller
             quantity_uom_seller = quantity
             if quantity_uom_seller and uom_id and uom_id != seller.product_uom:
                 quantity_uom_seller = uom_id._compute_quantity(
                     quantity_uom_seller, seller.product_uom
                 )
-
-            if seller.date_start and seller.date_start > date:
-                continue
-            if seller.date_end and seller.date_end < date:
-                continue
-            if partner_id and seller.partner_id not in [
-                partner_id,
-                partner_id.parent_id,
-            ]:
-                continue
-            if (
-                quantity is not None
-                and float_compare(
-                    quantity_uom_seller, seller.min_qty, precision_digits=precision
-                )
-                == -1
-            ):
-                continue
             if quantity_uom_seller < seller.min_qty_sale:
                 continue
-            if seller.product_id and seller.product_id != self:
-                continue
-            if not res or res.partner_id == seller.partner_id:
-                res |= seller
-        return res.sorted("price")[:1]
+            selected_ids.append(seller.id)
+        return self.seller_ids.browse(selected_ids)
+
+    def _select_seller(
+        self, partner_id=False, quantity=0.0, date=None, uom_id=False, params=False
+    ):
+        self_with_context = self.with_context(
+            partner_id=partner_id, quantity=quantity, date=date, uom_id=uom_id
+        )
+        return super(ProductProduct, self_with_context)._select_seller(
+            partner_id=partner_id,
+            quantity=quantity,
+            date=date,
+            uom_id=uom_id,
+            params=params,
+        )

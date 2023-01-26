@@ -2,13 +2,13 @@
 # Copyright 2023 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import api, fields, models
+from odoo import api, fields
 
 from odoo.addons.product.models.product_pricelist import Pricelist
+from odoo.addons.sale.models.res_partner import ResPartner as BaseResPartner
 
 
-class ResPartner(models.Model):
-    _inherit = "res.partner"
+class ResPartner(BaseResPartner):
 
     supplier_promotion_sale_allowed = fields.Boolean(
         string="Supplier promotion allowed on sale"
