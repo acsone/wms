@@ -64,7 +64,7 @@ odoo-addon-sale-exception @ git+https://github.com/acsone/sale-workflow.git@5a6c
 odoo-addon-sale-procurement-customer @ git+https://github.com/acsone/sale-workflow.git@ef0c216f30a0fd7fd1fb0d782f8b9aaac3f7d487#subdirectory=setup/sale_procurement_customer
 odoo-addon-sale-triple-discount @ git+https://github.com/acsone/sale-workflow.git@ca0a364df9943ae0b37f8d2ae739ff42e69c4e35#subdirectory=setup/sale_triple_discount
 odoo-addon-session-db==16.0.1.0.2
-odoo-addon-shipment-advice @ git+https://github.com/acsone/stock-logistics-transport.git@8349baf3993be31f1140b500de11a39081f69120#subdirectory=setup/shipment_advice
+odoo-addon-shipment-advice @ git+https://github.com/acsone/stock-logistics-transport.git@654bd86571e1ccae1d07988bb47927364333cedc#subdirectory=setup/shipment_advice
 odoo-addon-stock-available==16.0.1.0.1.1
 odoo-addon-stock-available-immediately==16.0.1.0.0.4
 odoo-addon-stock-available-immediately-exclude-location @ git+https://github.com/acsone/stock-logistics-availability.git@17e6e34765fd01ed1a3b2f4c021526f3c3ba11be#subdirectory=setup/stock_available_immediately_exclude_location
