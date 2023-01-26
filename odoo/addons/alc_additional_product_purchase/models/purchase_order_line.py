@@ -19,31 +19,20 @@ class PurchaseOrderLine(PurchaseOrderLineBase):
 
     def _compute_additional_product(self):
         self.ensure_one()
-        ratio_main_product = self.product_id.ratio_main_product
-        ratio_additional_product = self.product_id.ratio_additional_product
-        additional_product_id = self.product_id.additional_product_id
+        additional_product_qty = self.product_id._get_qty_additional_product(
+            self.product_qty
+        )
+        if additional_product_qty:
+            return self.copy(
+                default=self._prepare_compute_additional_product_vals(
+                    additional_product_qty
+                )
+            )
+        return self.browse()
 
-        if (
-            not ratio_main_product
-            or not ratio_additional_product
-            or not additional_product_id
-        ):
-            return False
-
-        coefficient = int(self.product_qty / ratio_main_product)
-        additional_product = coefficient * ratio_additional_product
-        if not additional_product:
-            return False
-
-        return self.copy(default=self._prepare_compute_additional_product_vals())
-
-    def _prepare_compute_additional_product_vals(self):
+    def _prepare_compute_additional_product_vals(self, additional_product_qty):
         self.ensure_one()
-        ratio_main_product = self.product_id.ratio_main_product
-        ratio_additional_product = self.product_id.ratio_additional_product
         additional_product = self.product_id.additional_product_id
-        coefficient = int(self.product_qty / ratio_main_product)
-        product_qty = coefficient * ratio_additional_product
         # Set the language of the supplier
         additional_product_lang = additional_product.with_context(
             lang=self.partner_id.lang, partner_id=self.partner_id.id
@@ -53,7 +42,7 @@ class PurchaseOrderLine(PurchaseOrderLineBase):
             "order_id": self.order_id.id,
             "price_unit": 0,
             "product_id": additional_product.id,
-            "product_uom": self.product_uom.id,
-            "product_qty": product_qty,
+            "product_uom": additional_product.uom_id.id,
+            "product_qty": additional_product_qty,
             "is_additional_product": True,
         }
