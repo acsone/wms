@@ -1,10 +1,10 @@
-# Copyright 2021 ACSONE SA/NV
+# Copyright 2023 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from . import common
+from .common import StockPickingTestCase
 
 
-class TestStockMove(common.StockPickingTestCase):
+class TestStockMove(StockPickingTestCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -23,28 +23,24 @@ class TestStockMove(common.StockPickingTestCase):
         # Create the sale order without setting a sequence on sale order lines
         so = self._confirm_sale_order(products=[self.main_product, self.product_2])
         # check the pickings
-        pick = so.mapped("picking_ids").filtered(
-            lambda p: p.picking_type_subcode == "PICK"
-        )
+        pick = self._get_picking_pick(so)
 
-        ship = so.mapped("picking_ids").filtered(
-            lambda p: p.picking_type_code == "outgoing"
-        )
+        ship = self._get_picking_ship(so)
 
         pick.action_confirm()
         pick.action_assign()
 
         # Check that the additional product is also added to the shipping after confirmation
-        self.assertEqual(len(ship.move_lines), 3)
+        self.assertEqual(len(ship.move_ids), 3)
 
         # Cancel stock move for main product
-        main_product_move = ship.move_lines.filtered(
+        main_product_move = ship.move_ids.filtered(
             lambda m: m.product_id.id == self.main_product.id
         )
-        main_product_move.action_cancel()
+        main_product_move._action_cancel()
 
         self.assertEqual(main_product_move.state, "cancel")
-        additionnal_product_move = ship.move_lines.filtered(
+        additionnal_product_move = ship.move_ids.filtered(
             lambda a, additional_product=self.additional_product: a.product_id
             == additional_product
         )
@@ -67,38 +63,27 @@ class TestStockMove(common.StockPickingTestCase):
         so2 = self._confirm_sale_order(products=[self.main_product, self.main_product2])
 
         # check the pickings
-        pick = so2.mapped("picking_ids").filtered(
-            lambda p: p.picking_type_subcode == "PICK"
-        )
+        pick = self._get_picking_pick(so2)
 
-        ship = so2.mapped("picking_ids").filtered(
-            lambda p: p.picking_type_code == "outgoing"
-        )
-
+        ship = self._get_picking_ship(so2)
         pick.action_confirm()
         pick.action_assign()
 
         # Check that the additional product is also added to the shipping after confirmation
-        self.assertEqual(len(ship.move_lines), 4)
+        self.assertEqual(len(ship.move_ids), 4)
 
         # Cancel stock move for main product
-        main_product_move = ship.move_lines.filtered(
+        main_product_move = ship.move_ids.filtered(
             lambda m: m.product_id.id == self.main_product.id
         )
-        main_product_move.action_cancel()
+        main_product_move._action_cancel()
 
         self.assertEqual(main_product_move.state, "cancel")
-        additional_product_move = ship.move_lines.filtered(
-            lambda a: a.is_additional_move
-            and a.procurement_id == main_product_move.procurement_id
-        )
+        additional_product_move = main_product_move.additional_move_ids
         self.assertEqual(additional_product_move.state, "cancel")
 
-        second_main_product = ship.move_lines.filtered(
+        second_main_product = ship.move_ids.filtered(
             lambda m: m.product_id.id == self.main_product2.id
         )
-        second_additional_product_move = ship.move_lines.filtered(
-            lambda a: a.is_additional_move
-            and a.procurement_id == second_main_product.procurement_id
-        )
+        second_additional_product_move = second_main_product.additional_move_ids
         self.assertEqual(second_additional_product_move.state, "waiting")

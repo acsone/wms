@@ -1,10 +1,11 @@
 # Copyright 2018 Camptocamp
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo.tests.common import SavepointCase
+from odoo import Command
+from odoo.tests.common import TransactionCase
 
 
-class StockPickingTestCase(SavepointCase):
+class StockPickingTestCase(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -22,11 +23,7 @@ class StockPickingTestCase(SavepointCase):
                 "code": "TST",
             }
         )
-        cls.warehouse_1.pick_type_id.subcode = "PICK"
-        cls.warehouse_1.pick_type_id.groupbypartner = False
-        cls.warehouse_1.out_type_id.groupbypartner = True
-        cls.warehouse_1.out_type_id.create_invoice_on_transfer = True
-
+        cls.loc_stock = cls.warehouse_1.lot_stock_id
         # Create additional product and update the available quantity (15)
         cls.additional_product = cls.env["product.product"].create(
             {
@@ -34,20 +31,13 @@ class StockPickingTestCase(SavepointCase):
                 "default_code": "987654321",
                 "tracking": "none",
                 "list_price": 20,
-                "uom_id": cls.env.ref("product.product_uom_unit").id,
+                "uom_id": cls.env.ref("uom.product_uom_unit").id,
                 "type": "product",
             }
         )
-
-        update_qty_wizard = cls.env["stock.change.product.qty"].create(
-            {
-                "product_id": cls.additional_product.id,
-                "product_tmpl_id": cls.additional_product.product_tmpl_id.id,
-                "new_quantity": 500,
-                "location_id": cls.warehouse_1.lot_stock_id.id,
-            }
+        cls.env["stock.quant"]._update_available_quantity(
+            cls.additional_product, cls.loc_stock, 500.0
         )
-        update_qty_wizard.change_product_qty()
 
         # Create main product linked to the additional product with quanity 20
 
@@ -59,21 +49,14 @@ class StockPickingTestCase(SavepointCase):
                 "list_price": 100,
                 "type": "product",
                 "additional_product_id": cls.additional_product.id,
-                "uom_id": cls.env.ref("product.product_uom_unit").id,
+                "uom_id": cls.env.ref("uom.product_uom_unit").id,
                 "ratio_main_product": 1,
                 "ratio_additional_product": 5,
             }
         )
-
-        update_qty_wizard = cls.env["stock.change.product.qty"].create(
-            {
-                "product_id": cls.main_product.id,
-                "product_tmpl_id": cls.main_product.product_tmpl_id.id,
-                "new_quantity": 100,
-                "location_id": cls.warehouse_1.lot_stock_id.id,
-            }
+        cls.env["stock.quant"]._update_available_quantity(
+            cls.main_product, cls.loc_stock, 100.0
         )
-        update_qty_wizard.change_product_qty()
 
         cls.main_product2 = cls.env["product.product"].create(
             {
@@ -83,22 +66,14 @@ class StockPickingTestCase(SavepointCase):
                 "list_price": 100,
                 "type": "product",
                 "additional_product_id": cls.additional_product.id,
-                "uom_id": cls.env.ref("product.product_uom_unit").id,
+                "uom_id": cls.env.ref("uom.product_uom_unit").id,
                 "ratio_main_product": 1,
                 "ratio_additional_product": 5,
             }
         )
-
-        update_qty_wizard = cls.env["stock.change.product.qty"].create(
-            {
-                "product_id": cls.main_product2.id,
-                "product_tmpl_id": cls.main_product2.product_tmpl_id.id,
-                "new_quantity": 100,
-                "location_id": cls.warehouse_1.lot_stock_id.id,
-            }
+        cls.env["stock.quant"]._update_available_quantity(
+            cls.main_product2, cls.loc_stock, 100.0
         )
-
-        update_qty_wizard.change_product_qty()
 
         # Create a product without promotion
         cls.product_2 = cls.env["product.product"].create(
@@ -110,17 +85,13 @@ class StockPickingTestCase(SavepointCase):
                 "type": "product",
             }
         )
-
-        update_qty_wizard = cls.env["stock.change.product.qty"].create(
-            {
-                "product_id": cls.product_2.id,
-                "product_tmpl_id": cls.product_2.product_tmpl_id.id,
-                "new_quantity": 100,
-                "location_id": cls.warehouse_1.lot_stock_id.id,
-            }
+        cls.env["stock.quant"]._update_available_quantity(
+            cls.product_2, cls.loc_stock, 100.0
         )
-
-        update_qty_wizard.change_product_qty()
+        cls.pick_type = cls.warehouse_1.out_type_id
+        cls.pick_type.search([]).write(
+            {"allow_additional_product_on_reserved_qty": True}
+        )
 
     @classmethod
     def _confirm_sale_order(cls, partner=None, products=None, qty=1, carrier_id=None):
@@ -128,9 +99,7 @@ class StockPickingTestCase(SavepointCase):
             partner = cls.partner1
         if products is None:
             lines = [
-                (
-                    0,
-                    0,
+                Command.create(
                     {
                         "name": cls.main_product.name,
                         "product_id": cls.main_product.id,
@@ -142,9 +111,7 @@ class StockPickingTestCase(SavepointCase):
             ]
         else:
             lines = [
-                (
-                    0,
-                    0,
+                Command.create(
                     {
                         "name": product.name,
                         "product_id": product.id,
@@ -169,17 +136,12 @@ class StockPickingTestCase(SavepointCase):
         so.action_confirm()
         return so
 
-    def _get_pack_operations(self, picking, product):
-        return picking.pack_operation_ids.filtered(
-            lambda p, prod=product: p.product_id == prod
-        )
-
     def _get_picking_pick(self, so):
         return so.mapped("picking_ids").filtered(
-            lambda p: p.picking_type_subcode == "PICK"
+            lambda p: p.picking_type_id.code == "internal"
         )
 
     def _get_picking_ship(self, so):
         return so.mapped("picking_ids").filtered(
-            lambda p: p.picking_type_code == "outgoing"
+            lambda p: p.picking_type_id.code == "outgoing"
         )

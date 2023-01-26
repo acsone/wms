@@ -33,7 +33,8 @@ odoo-addon-stock-storage-type-putaway-abc-classification-sale-stock @ git+https:
 odoo-addon-stock-picking-completion-info @ git+https://github.com/acsone/wms.git@16.0-mig-stock_picking_completion_info-hda#subdirectory=setup/stock_picking_completion_info
 # https://github.com/OCA/wms/pull/535 - [MIG][16.0] stock_picking_type_shipping_policy
 odoo-addon-stock-picking-type-shipping-policy @ git+https://github.com/acsone/wms.git@16.0-mig-stock_picking_type_shipping_policy-lma#subdirectory=setup/stock_picking_type_shipping_policy
-
+# https://github.com/OCA/wms/pull/548 [FIX] - stock_dynamic_routing: fix method params
+odoo-addon-stock-dynamic-routing @ git+https://github.com/acsone/wms.git@16.0-stock_dynamic_routing-sbj#subdirectory=setup/stock_dynamic_routing
 
 # product-attribute
 # https://github.com/OCA/product-attribute/pull/1192
@@ -105,7 +106,7 @@ odoo-addon-stock-picking-low-priority @ git+https://github.com/acsone/stock-logi
 # https://github.com/OCA/stock-logistics-workflow/pull/1197 - [16.0][ADD] stock_move_manage_priority
 odoo-addon-stock-move-manage-priority @ git+https://github.com/acsone/stock-logistics-workflow.git@16.0-mig-stock_move_manage_priority-hda#subdirectory=setup/stock_move_manage_priority
 # https://github.com/OCA/stock-logistics-workflow/pull/1202
-odoo-addon-stock-move-picking-type-origin @ git+https://github.com/acsone/stock-logistics-workflow.git@16.0-stock_move_picking_type_origin-sbj#subdirectory=setup/stock_move_picking_type_origin
+odoo-addon-stock-move-propagate-first-move @ git+https://github.com/acsone/stock-logistics-workflow.git@16.0-stock_move_picking_type_origin-sbj#subdirectory=setup/stock_move_propagate_first_move
 
 # server-tools
 # https://github.com/OCA/server-tools/pull/2533 - [16.0][MIG] base_sparse_field_list_support

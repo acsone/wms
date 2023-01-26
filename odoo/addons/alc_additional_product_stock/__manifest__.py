@@ -7,25 +7,18 @@
 {
     "name": "Product additional for Alcyon",
     "version": "16.0.1.0.0",
-    "author": "Camptocamp, ACSONE SA/NV",
     "license": "AGPL-3",
-    "category": "Product",
+    "author": "ACSONE SA/NV",
+    "website": "https://acsone.eu",
     "depends": [
-        # Odoo
-        "product",
-        "product_expiry",
-        "stock",
-        "sale",
-        "purchase",
+        "sale_stock",
         # OCA
-        "stock_available_immediately",
+        "stock_move_propagate_first_move",
         # ALC
-        "alc_pricelist_discount",
+        "alc_additional_product_base",
     ],
-    "website": "http://www.camptocamp.com",
     "data": [
-        "views/purchase_order.xml",
+        "views/stock_picking_type.xml",
     ],
     "installable": True,
-    "external_dependencies": {"python": ["types-python-dateutil"]},
 }

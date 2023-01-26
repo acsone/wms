@@ -22,7 +22,7 @@ class SaleOrderLine(SaleOrderLineBase):
                 seller = line.product_id._select_seller(
                     partner_id=False,
                     quantity=line.product_uom_qty,
-                    date=line.order_id.date_order,
+                    date=line.order_id.date_order.date(),
                     uom_id=line.product_uom,
                 )
 

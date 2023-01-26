@@ -16,7 +16,7 @@ class ProductTemplate(ProductTemplateBase):
     ratio_main_product = fields.Integer(string="Ratio Main Product")
     ratio_additional_product = fields.Integer(string="Ratio Additional Product")
 
-    def get_qty_additional_product(self, ordered_qty):
+    def _get_qty_additional_product(self, ordered_qty):
         self.ensure_one()
 
         if (
@@ -26,7 +26,7 @@ class ProductTemplate(ProductTemplateBase):
         ):
             return 0
 
-        coefficient = self.ratio_main_product / ordered_qty
+        coefficient = int(ordered_qty / self.ratio_main_product)
         qty_additional_product = coefficient * self.ratio_additional_product
 
         return qty_additional_product
