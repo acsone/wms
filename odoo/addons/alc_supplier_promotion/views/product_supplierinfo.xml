@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-  <record model="ir.ui.view" id="view_product_supplierinfo_specific_form">
+  <record id="product_supplierinfo_form_view" model="ir.ui.view">
     <field name="model">product.supplierinfo</field>
     <field name="inherit_id" ref="product.product_supplierinfo_form_view" />
-    <field name="priority">16</field>
+    <field name="priority">20</field>
     <field name="arch" type="xml">
+      <xpath expr="//group[@name='vendor']" position="inside">
+        <p colspan="2">For <field
+            name="ratio_main_product"
+            class="oe_inline"
+          /> products, <field
+            name="ratio_promotional_product"
+            class="oe_inline"
+          /> free.</p>
+      </xpath>
       <xpath expr="//group[field[@name='product_tmpl_id']]" position="inside">
         <field name="discount_purchase" />
       </xpath>
@@ -26,10 +35,13 @@
       </xpath>
     </field>
   </record>
-  <record model="ir.ui.view" id="view_product_supplierinfo_specific_tree">
+  <record id="product_supplierinfo_tree_view" model="ir.ui.view">
     <field name="model">product.supplierinfo</field>
     <field name="inherit_id" ref="product.product_supplierinfo_tree_view" />
     <field name="arch" type="xml">
+      <xpath expr="//tree" position="inside">
+        <field name="ratio_display_name" />
+      </xpath>
       <xpath expr="//field[@name='sequence']" position="attributes">
         <attribute name="widget" />
         <attribute name="invisible">1</attribute>

@@ -253,7 +253,6 @@ exclude:  |
   ^odoo/addons/alc_storage_file_lang/|
   ^odoo/addons/alc_storage_media_lang/|
   ^odoo/addons/alc_storage_media_product/|
-  ^odoo/addons/alc_supplier_promotion/|
   ^odoo/addons/alc_supplier_purchase_manager/|
   ^odoo/addons/alc_turnover_reporting/|
   ^odoo/addons/alc_veterinary_group/|
@@ -464,8 +463,12 @@ repos:
         pass_filenames: false
         always_run: true
         args: ["--addons-dir=odoo/addons"]
-  - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v0.982
-    hooks:
-    -   id: mypy
-        additional_dependencies: [types-python-dateutil]
+  # disabled because it's difficult to make it work with the current
+  # structure of the repo and odoo
+  #- repo: https://github.com/pre-commit/mirrors-mypy
+  #  rev: v0.982
+  #  hooks:
+  #  -   id: mypy
+  #      args: ["--namespace-packages", "--explicit-package-bases", "--ignore-missing-imports", "--follow-imports=skip"]
+  #      exclude : ^odoo/addons/.*/migrations/.*$
+  #      additional_dependencies: [types-python-dateutil]

@@ -1,10 +1,10 @@
 # Copyright 2023 ACSONE SA/NV
-# License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+
 from openupgradelib import openupgrade
 
 
-def pre_init_hook(cr):
-
+def migrate(cr, version):
     # Moved fields from alc_b2c_connector
     openupgrade.update_module_moved_fields(
         cr,
@@ -17,5 +17,5 @@ def pre_init_hook(cr):
             "min_qty",
         ],
         "pricelist_discount",
-        "alc_product_supplierinfo_check",
+        "alc_supplier_promotion",
     )

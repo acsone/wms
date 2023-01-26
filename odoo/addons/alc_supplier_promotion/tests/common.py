@@ -4,13 +4,13 @@
 import datetime
 
 from odoo.fields import Date
-from odoo.tests.common import SavepointCase
+from odoo.tests.common import TransactionCase
 
 
-class TestSupplierInfo(SavepointCase):
+class TestSupplierInfo(TransactionCase):
     @classmethod
     def setUpClass(cls):
-        super(TestSupplierInfo, cls).setUpClass()
+        super().setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
 
         cls.vendor = cls.env["res.partner"].create({"name": "V"})
@@ -29,7 +29,7 @@ class TestSupplierInfo(SavepointCase):
     def get_supplierinfo_vals(cls, product=None, **kwargs):
         product = product or cls.product
         defaults = {
-            "name": cls.vendor.id,
+            "partner_id": cls.vendor.id,
             "price": 10,
             "product_id": product.id,
             "product_tmpl_id": product.product_tmpl_id.id,
