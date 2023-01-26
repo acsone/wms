@@ -12,5 +12,6 @@
     "application": True,
     "depends": [
         "alc_stock_grn_partner_carrier",
+        "alc_stock_grn_time_delay",
     ],
 }

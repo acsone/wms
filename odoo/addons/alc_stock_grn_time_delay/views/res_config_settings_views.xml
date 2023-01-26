@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2020 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+  <record model="ir.ui.view" id="res_config_settings_view_form">
+    <field name="name">res.config.settings.form (in alc_stock_grn_time_delay)</field>
+    <field name="model">res.config.settings</field>
+    <field name="inherit_id" ref="stock.res_config_settings_view_form" />
+    <field name="arch" type="xml">
+      <xpath
+        expr="//div[@name='warehouse_setting_container']/parent::div"
+        position="inside"
+      >
+        <h2>GRN</h2>
+        <div class="row mt16 o_settings_container" name="grn_container">
+          <div class="col-12 col-lg-6 o_setting_box" id="group_grn">
+              <div class="o_setting_right_pane">
+                  <label for="max_delay_to_process_receipt" />
+                  <div class="text-muted">
+                      Maximum delay to handle the receipt of goods.
+                  </div>
+                  <div class="content-group">
+                      <field
+                  name="max_delay_to_process_receipt"
+                  class="o_light_label"
+                  style="width: 30px;"
+                /> days
+                  </div>
+              </div>
+          </div>
+        </div>
+      </xpath>
+    </field>
+  </record>
+</odoo>

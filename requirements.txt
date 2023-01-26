@@ -33,6 +33,7 @@ lxml==4.6.5
 manifestoo_core==0.10.3
 MarkupSafe==1.1.0
 num2words==0.5.6
+numpy==1.24.1
 odoo @ git+https://github.com/acsone/odoo.git@74e2a6ca3154f5568d554dc6179c43b2a23c0630
 odoo-addon-account-invoice-triple-discount==16.0.1.0.0.2
 odoo-addon-attachment-s3 @ git+https://github.com/acsone/odoo-cloud-platform@25cf2a9bfb287a4ca5696651f448401264b8df2a#subdirectory=setup/attachment_s3
