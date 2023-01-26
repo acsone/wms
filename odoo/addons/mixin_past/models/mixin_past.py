@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -10,6 +9,7 @@ class MixinPast(models.AbstractModel):
     """Adds 'is_past' and 'is_future' fields, using existing date_start/end fields."""
 
     _name = "mixin.past"
+    _description = "Mixin Past"
 
     is_past = fields.Boolean(
         compute="_compute_is_past", search="_search_is_past", store=False
@@ -23,10 +23,6 @@ class MixinPast(models.AbstractModel):
         if not maybe_date_end:
             return False
         reference_date = reference_date or fields.Date.context_today(self)
-        if isinstance(reference_date, str):
-            reference_date = fields.Date.from_string(reference_date)
-        if isinstance(maybe_date_end, str):
-            maybe_date_end = fields.Date.from_string(maybe_date_end)
         return maybe_date_end < reference_date
 
     @api.model
@@ -34,10 +30,6 @@ class MixinPast(models.AbstractModel):
         if not maybe_date_start:
             return False
         reference_date = reference_date or fields.Date.context_today(self)
-        if isinstance(reference_date, str):
-            reference_date = fields.Date.from_string(reference_date)
-        if isinstance(maybe_date_start, str):
-            maybe_date_start = fields.Date.from_string(maybe_date_start)
         return maybe_date_start > reference_date
 
     @api.depends("date_end")

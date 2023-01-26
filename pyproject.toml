@@ -359,7 +359,6 @@ exclude = [
   'odoo/addons/materialized_view_mixin/*',
   'odoo/addons/mixin_file_id/*',
   'odoo/addons/mixin_image_id/*',
-  'odoo/addons/mixin_past/*',
   'odoo/addons/mixin_user_id/*',
   'odoo/addons/paginated_service_mixin/*',
   'odoo/addons/partner_archive_new_partner/*',
