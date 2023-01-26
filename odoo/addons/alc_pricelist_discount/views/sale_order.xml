@@ -7,14 +7,14 @@
     />
     <field name="arch" type="xml">
       <!-- Adds supplierinfo_discount_sale_allowed and discount_pricelist_ids in sale.order form view -->
-      <field name="pricelist_id" position="after">
+      <group name="order_details" position="inside">
         <field name="supplier_promotion_allowed" />
         <field
           name="discount_pricelist_ids"
           groups="product.group_sale_pricelist"
           widget="many2many_tags"
         />
-      </field>
+      </group>
       <!-- Hide discount field -->
       <xpath expr="//tree/field[@name='discount']" position="attributes">
         <attribute name="invisible">True</attribute>

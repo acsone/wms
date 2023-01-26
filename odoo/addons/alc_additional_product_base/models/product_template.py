@@ -35,36 +35,3 @@ class ProductTemplate(ProductTemplateBase):
     def is_an_additional_product(self, product):
         # FIXME: is this used?
         return bool(self.search([("additional_product_id", "=", product.id)]))
-
-    def get_promotional_product(self, qty, uom):
-        """Compute how many promotional product are offered.
-
-        Given a quantity and a unity of measure, returns for the current
-        day how many promotional (free) product will be given.
-        The unit of measure is adapted if needs be.
-        """
-        self.ensure_one()
-        if uom != self.uom_id:
-            qty = uom._compute_quantity(qty, self.uom_id)
-        result = self.env["product.supplierinfo"].search(
-            [
-                ("ratio_promotional_product", ">", 0),
-                ("ratio_main_product", ">", 0),
-                "|",
-                ("date_start", "=", False),
-                ("date_start", "<=", fields.Date.today()),
-                "|",
-                ("date_end", "=", False),
-                ("date_end", ">=", fields.Date.today()),
-                "|",
-                ("min_qty_sale", "=", False),
-                ("min_qty_sale", "<=", qty),
-                ("product_tmpl_id", "=", self.id),
-            ],
-            order="sequence, min_qty_sale desc, price",
-            limit=1,
-        )
-        if not result:
-            return 0
-        coefficient = int(qty / result.ratio_main_product)
-        return coefficient * result.ratio_promotional_product

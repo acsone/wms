@@ -64,6 +64,7 @@ class ProductSupplierInfo(SupplierInfo, MixinPast):
     def _compute_ratio_display_name(self):
         for rec in self:
             if not rec.ratio_promotional_product or not rec.ratio_main_product:
+                rec.ratio_display_name = ""
                 continue
             display_name = _(
                 "For %(ratio_main_product)s products, %(ratio_promotional_product)s free"
@@ -80,3 +81,36 @@ class ProductSupplierInfo(SupplierInfo, MixinPast):
             record.is_promotion = (
                 record.ratio_main_product and record.ratio_promotional_product
             )
+
+    def get_promotional_product(self, qty, uom):
+        """Compute how many promotional product are offered.
+
+        Given a quantity and a unity of measure, returns for the current
+        day how many promotional (free) product will be given.
+        The unit of measure is adapted if needs be.
+        """
+        self.ensure_one()
+        if uom != self.uom_id:
+            qty = uom._compute_quantity(qty, self.uom_id)
+        result = self.env["product.supplierinfo"].search(
+            [
+                ("ratio_promotional_product", ">", 0),
+                ("ratio_main_product", ">", 0),
+                "|",
+                ("date_start", "=", False),
+                ("date_start", "<=", fields.Date.today()),
+                "|",
+                ("date_end", "=", False),
+                ("date_end", ">=", fields.Date.today()),
+                "|",
+                ("min_qty_sale", "=", False),
+                ("min_qty_sale", "<=", qty),
+                ("product_tmpl_id", "=", self.id),
+            ],
+            order="sequence, min_qty_sale desc, price",
+            limit=1,
+        )
+        if not result:
+            return 0
+        coefficient = int(qty / result.ratio_main_product)
+        return coefficient * result.ratio_promotional_product

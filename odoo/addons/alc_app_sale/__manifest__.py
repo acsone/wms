@@ -34,5 +34,6 @@
         "alc_product_supplierinfo_check",
         "alc_pricelist_discount",
         "alc_supplier_promotion",
+        "alc_supplier_promotion_sale",
     ],
 }
