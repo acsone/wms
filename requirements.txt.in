@@ -13,6 +13,8 @@ odoo-addons-enterprise @ git+ssh://git@github.com/acsone/enterprise.git@16.0-alc
 odoo-addon-delivery-carrier-max-weight-constraint @ git+https://github.com/acsone/delivery-carrier.git@16.0-mig-delivery_carrier_max_weight_constraint-hda#subdirectory=setup/delivery_carrier_max_weight_constraint
 # https://github.com/OCA/delivery-carrier/pull/599 - [16.0][MIG] delivery_carrier_label_gls
 odoo-addon-delivery-carrier-label-gls @ git+https://github.com/acsone/delivery-carrier.git@16.0-mig-delivery_carrier_label_gls-hda#subdirectory=setup/delivery_carrier_label_gls
+# https://github.com/OCA/delivery-carrier/pull/604 - [16.0][ADD] delivery_package_number_theoretical
+odoo-addon-delivery-package-number-theoretical @ git+https://github.com/acsone/delivery-carrier.git@16.0-add-delivery_package_number_theoretical-hda#subdirectory=setup/delivery_package_number_theoretical
 
 # wms
 # https://github.com/OCA/wms/pull/508
