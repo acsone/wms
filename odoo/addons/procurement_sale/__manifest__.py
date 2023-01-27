@@ -14,7 +14,6 @@
         "sale_cancel_remaining",
         "sale_stock",
         "stock_available",
-        "stock_picking_subcode",
         "web_readonly_bypass",
     ],
     "data": ["views/sale_order.xml", "views/stock_location_route.xml"],

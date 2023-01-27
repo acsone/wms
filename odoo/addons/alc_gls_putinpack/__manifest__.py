@@ -13,7 +13,6 @@
         "alc_weighing_widget",
         "delivery_carrier_label_gls",
         "web_domain_field",  # v10 (to remove at migration)
-        "stock_picking_subcode",  # subcode in button visibility domain
         "stock_picking_assignment",  # operator in button visibility domain
     ],
     "data": ["wizards/delivery_package_gls_wizard.xml", "views/stock_picking.xml"],

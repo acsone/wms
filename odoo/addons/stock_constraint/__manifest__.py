@@ -7,7 +7,7 @@
     "version": "10.0.1.0.0",
     "author": "BCIM",
     "category": "Stock Management",
-    "depends": ["stock", "stock_picking_subcode"],
+    "depends": ["stock"],
     "data": ["security/res_groups.xml", "views/stock_picking.xml"],
     "installable": False,
     "auto_install": False,

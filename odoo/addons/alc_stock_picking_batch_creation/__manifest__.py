@@ -15,7 +15,6 @@
         "sale_stock",
         "stock_picking_assignment",
         "stock_picking_sequence",
-        "stock_picking_subcode",
     ],
     "data": [
         "data/devices.xml",
