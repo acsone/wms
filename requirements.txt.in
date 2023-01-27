@@ -104,6 +104,8 @@ odoo-addon-stock-procurement-customer @ git+https://github.com/acsone/stock-logi
 odoo-addon-stock-picking-low-priority @ git+https://github.com/acsone/stock-logistics-workflow.git@16.0-add-stock_picking_low_priority-hda#subdirectory=setup/stock_picking_low_priority
 # https://github.com/OCA/stock-logistics-workflow/pull/1197 - [16.0][ADD] stock_move_manage_priority
 odoo-addon-stock-move-manage-priority @ git+https://github.com/acsone/stock-logistics-workflow.git@16.0-mig-stock_move_manage_priority-hda#subdirectory=setup/stock_move_manage_priority
+# https://github.com/OCA/stock-logistics-workflow/pull/1202
+odoo-addon-stock-move-picking-type-origin @ git+https://github.com/acsone/stock-logistics-workflow.git@16.0-stock_move_picking_type_origin-sbj#subdirectory=setup/stock_move_picking_type_origin
 
 # server-tools
 
