@@ -38,6 +38,7 @@
         "stock_production_lot_expiry",
         "stock_release_channel_auto_release",
         "stock_release_channel",
+        "stock_move_picking_type_origin",
     ],
     "data": [],
     "demo": [],
