@@ -11,6 +11,7 @@ _logger = logging.getLogger(__name__)
 def migrate(cr, version):
     addons_to_uninstall = [
         "alc_product_picking_zone",
+        "alc_product_storage_type_tracking",
         "alc_stock_location_content_relocation",
         "alc_stock_picking_package",
         "alc_stock_picking_policy_block",
