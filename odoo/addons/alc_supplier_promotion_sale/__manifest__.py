@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
-    "name": "Alc Additional Product Purchase",
+    "name": "Alc Supplier Promotion Sale",
     "description": """
         This addon define additional product in sale flow""",
     "license": "AGPL-3",
