@@ -3,6 +3,8 @@
 
 from odoo import api, fields, models
 
+from odoo.addons.base_sparse_field.models.fields import Serialized
+
 
 class ProductTemplate(models.Model):
 
@@ -16,7 +18,7 @@ class ProductTemplate(models.Model):
         help="Technical field. Stores all partner types allowed to access the product.",
     )
 
-    allowed_partner_types_list = fields.Serialized(
+    allowed_partner_types_list = Serialized(
         string="Allowed Partner Types List",
         compute="_compute_allowed_partner_types_list",
         help="Technical field. Stores all partner types allowed to access the product.",
