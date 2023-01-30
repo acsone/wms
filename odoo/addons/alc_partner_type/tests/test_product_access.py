@@ -1,8 +1,7 @@
-# -*- coding: utf-8 -*-
 # Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo.tests.common import SavepointCase
+from odoo.tests.common import TransactionCase
 
 ALL_P_TYPES = {
     "guest",
@@ -20,11 +19,16 @@ ALL_P_TYPES = {
 }
 
 
-class TestProductAccess(SavepointCase):
+class TestProductAccess(TransactionCase):
     @classmethod
     def setUpClass(cls):
-        super(TestProductAccess, cls).setUpClass()
-        cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True,))
+        super().setUpClass()
+        cls.env = cls.env(
+            context=dict(
+                cls.env.context,
+                tracking_disable=True,
+            )
+        )
 
         cls.product = cls.env["product.product"].create({"name": "test product access"})
         cls.categ_attribute_mapping = cls.env[

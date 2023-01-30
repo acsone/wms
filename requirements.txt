@@ -41,6 +41,7 @@ odoo-addon-base-attachment-object-storage @ git+https://github.com/acsone/odoo-c
 odoo-addon-base-delivery-carrier-label==16.0.1.0.0.3
 odoo-addon-base-exception==16.0.1.0.1.3
 odoo-addon-base-report-to-printer==16.0.1.1.0.1
+odoo-addon-base-sparse-field-list-support @ git+https://github.com/acsone/server-tools.git@f75469cfc3ead20b6224195b653ddba735a219b4#subdirectory=setup/base_sparse_field_list_support
 odoo-addon-delivery-carrier-account==16.0.1.0.0.4
 odoo-addon-delivery-carrier-info==16.0.1.0.0.2
 odoo-addon-delivery-carrier-label-gls @ git+https://github.com/acsone/delivery-carrier.git@c58e23409775402fc77e734a930066d5ae4d8991#subdirectory=setup/delivery_carrier_label_gls

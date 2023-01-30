@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -6,11 +5,13 @@ from odoo import api, models
 
 
 class ProductPartnerType(models.AbstractModel):
-    """These functions need to be exposed on product.product (for sale_exception)
-       but also on product.template if we want to keep the abstraction consistent.
+    """These functions need to be exposed on product.product (for sale_exception).
+
+    but also on product.template if we want to keep the abstraction consistent.
     """
 
     _name = "product.partner_type"
+    _description = "Type of customer from Alcyon business point of vue"
 
     def get_allowed_partner_types(self):
         """Returns the set of all partner types allowed to interact with the product."""

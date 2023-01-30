@@ -110,6 +110,8 @@ odoo-addon-stock-move-manage-priority @ git+https://github.com/acsone/stock-logi
 odoo-addon-stock-move-picking-type-origin @ git+https://github.com/acsone/stock-logistics-workflow.git@16.0-stock_move_picking_type_origin-sbj#subdirectory=setup/stock_move_picking_type_origin
 
 # server-tools
+# https://github.com/OCA/server-tools/pull/2533 - [16.0][MIG] base_sparse_field_list_support
+odoo-addon-base-sparse-field-list-support @ git+https://github.com/acsone/server-tools.git@16.0-mig-base_sparse_field_list_support-hda#subdirectory=setup/base_sparse_field_list_support
 
 # OCA/web
 

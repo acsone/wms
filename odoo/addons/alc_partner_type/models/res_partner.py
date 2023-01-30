@@ -1,13 +1,13 @@
-# -*- coding: utf-8 -*-
 # Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import api, fields, models
+from odoo import api, fields
+
+from odoo.addons.product.models import res_partner
 
 
-class ResPartner(models.Model):
+class ResPartner(res_partner.ResPartner):
 
-    _inherit = "res.partner"
     partner_type = fields.Selection(  # replaces alcyon_category_id
         string="Alcyon Partner Category",
         required=True,
@@ -40,5 +40,5 @@ class ResPartner(models.Model):
 
     def _get_product_domain(self):
         self.ensure_one()
-        partner_type_like = "%%%s%%" % self.partner_type
+        partner_type_like = f"%%{self.partner_type}%%"
         return [("allowed_partner_types", "like", partner_type_like)]
