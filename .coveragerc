@@ -134,7 +134,6 @@ omit =
     odoo/addons/alc_partner_delivery_window_import/*
     odoo/addons/alc_partner_force_re_geolocalization/*
     odoo/addons/alc_partner_manual_sale_order/*
-    odoo/addons/alc_partner_veterinary/*
     odoo/addons/alc_pg_trgm/*
     odoo/addons/alc_pim/*
     odoo/addons/alc_pim_attribute_group/*
