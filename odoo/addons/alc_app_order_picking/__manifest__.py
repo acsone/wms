@@ -23,6 +23,7 @@
         "shipment_advice",
         "stock_dynamic_routing",
         "stock_move_common_dest",
+        "stock_move_location",
         "stock_move_manage_priority",
         "stock_picking_backorder_reason",
         "stock_picking_backorder_reason_grn",
