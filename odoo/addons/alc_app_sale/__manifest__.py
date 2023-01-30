@@ -21,6 +21,7 @@
         # OCA/product-attribute
         "product_manufacturer",
         # ALC
+        "alc_partner_veterinary",
         "alc_product_category_data",
         "alc_product_pricelist_data",
         "alc_product_category_business_unit",
