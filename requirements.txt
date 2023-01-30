@@ -96,7 +96,7 @@ odoo-addon-stock-picking-group-by-partner-by-carrier-by-customer @ git+https://g
 odoo-addon-stock-picking-low-priority @ git+https://github.com/acsone/stock-logistics-workflow.git@d9e6c0614b1e618574695378dcf1fff8abbee5b3#subdirectory=setup/stock_picking_low_priority
 odoo-addon-stock-picking-start==16.0.1.0.1
 odoo-addon-stock-picking-type-shipping-policy @ git+https://github.com/acsone/wms.git@12dbcd20834849758e681098005f9386cb2c22a6#subdirectory=setup/stock_picking_type_shipping_policy
-odoo-addon-stock-procurement-customer @ git+https://github.com/acsone/stock-logistics-workflow.git@0ca3d1ab0e0ee3bf90628dfd63051dbdba6c460c#subdirectory=setup/stock_procurement_customer
+odoo-addon-stock-procurement-customer @ git+https://github.com/acsone/stock-logistics-workflow.git@2aca89a623214fe00d244f9688cdc6b384813709#subdirectory=setup/stock_procurement_customer
 odoo-addon-stock-production-lot-expired-date @ git+https://github.com/acsone/product-attribute.git@d76d655034abd4070b6e96debf60597903429dd7#subdirectory=setup/stock_production_lot_expired_date
 odoo-addon-stock-production-lot-expiry @ git+https://github.com/acsone/product-attribute.git@d1d1d4bc64d8464c621b0a5823ff43fd3ee03406#subdirectory=setup/stock_production_lot_expiry
 odoo-addon-stock-putaway-hook==16.0.1.0.0.4
