@@ -1,15 +1,19 @@
 # Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import api, fields, models
+from odoo import api, fields
 
+from odoo.addons.alc_product_pharmacy.models import (
+    ProductTemplate as ProductTemplateBase,
+)
 from odoo.addons.base_sparse_field.models.fields import Serialized
 
+from .product_partner_type import ProductPartnerType
 
-class ProductTemplate(models.Model):
+
+class ProductTemplate(ProductTemplateBase, ProductPartnerType):
 
     _name = "product.template"
-    _inherit = ["product.partner_type", "product.template"]
 
     allowed_partner_types = fields.Char(
         string="Allowed Partner Types",
