@@ -1,60 +1,59 @@
-# -*- coding: utf-8 -*-
 # Copyright 2018 Camptocamp SA
+# Copyright 2023 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
+
+import base64
 from collections import defaultdict
 from io import BytesIO
 
 import unicodecsv as csv
 from unidecode import unidecode
 
-from odoo import api, models
+from odoo.fields import Command
 from odoo.tools import config
 
+from odoo.addons.delivery.models import stock_picking
 
-class StockPicking(models.Model):
-    _inherit = "stock.picking"
 
-    @api.multi
-    def do_transfer(self):
+class StockPicking(stock_picking.StockPicking):
+    def button_validate(self):
         to_do = self.filtered(lambda p: p.state not in ("cancel", "done"))
         if not to_do:
             return True
-        result = super(StockPicking, to_do).do_transfer()
+        result = super(StockPicking, to_do).button_validate()
         picking_type_out = self.env.ref("stock.picking_type_out")
         if self.env.context.get("skip_pdf_gen"):
             return result
         for r in to_do:
-            if r.picking_type_id == picking_type_out:
+            if r.picking_type_id == picking_type_out and r.date_done:
                 r._send_delivery_notes(
                     r.customer_id.send_csv_deliveryship,
                     r.customer_id.send_pdf_deliveryship,
                 )
         return result
 
-    @api.multi
     def _get_delivery_note_filename(self, extension):
         """Return the delivery note filename."""
         self.ensure_one()
         if not self.date_done:
             return None
-        sale_orders = self.move_lines.mapped("order_id")
-
+        sale_orders = self.move_ids.mapped("order_id")
+        sz_date_done = self.date_done.strftime("%Y-%m-%d %H:%M:%S")
         return (
             "_".join(
                 [
                     "NE",
                     sale_orders[0].partner_id.ref or "" if len(sale_orders) > 0 else "",
                     str(self.id),
-                    "".join(self.date_done[:10].split("-")),
-                    "".join(self.date_done[-8:].split(":")),
+                    "".join(sz_date_done[:10].split("-")),
+                    "".join(sz_date_done[-8:].split(":")),
                 ]
             )
             + extension
         )
 
-    @api.multi
     def _generate_delivery_note_csv(self):
-        """Save the delivery note in csv format in ir.attachment"""
+        """Save the delivery note in csv format in ir.attachment."""
         self.ensure_one()
         filename = self._get_delivery_note_filename(extension=".csv")
         if not filename:
@@ -64,10 +63,7 @@ class StockPicking(models.Model):
         w = csv.writer(file_data, delimiter=";", encoding="iso-8859-1")
         for line in self._generate_delivery_note():
             w.writerow(
-                [
-                    unidecode(cell) if isinstance(cell, unicode) else cell
-                    for cell in line
-                ]
+                [unidecode(cell) if isinstance(cell, str) else cell for cell in line]
             )
         data = file_data.getvalue()
         csv_delivery_note = self.env["ir.attachment"].search([("name", "=", filename)])
@@ -80,17 +76,15 @@ class StockPicking(models.Model):
                     "res_model": "stock.picking",
                     "res_id": self.id,
                     "name": filename,
-                    "datas_fname": filename,
                     "mimetype": "text/csv",
-                    "datas": data.encode("base_64"),
+                    "datas": base64.encodebytes(data),
                 }
             )
 
         return csv_delivery_note
 
-    @api.multi
     def _generate_delivery_note_pdf(self):
-        """Save the delivery note in pdf format in ir.attachment"""
+        """Save the delivery note in pdf format in ir.attachment."""
         self.ensure_one()
         filename = self._get_delivery_note_filename(extension=".pdf")
         if not filename:
@@ -99,13 +93,14 @@ class StockPicking(models.Model):
 
         shippings = self.filtered(lambda p: p.picking_type_code == "outgoing")
         shipping_done = shippings.filtered(lambda shipping: shipping.state == "done")
-        report = self.env["report"].get_pdf(
-            shipping_done.ids, "stock.report_deliveryslip"
-        )
+        action_report = self.env.ref("stock.action_report_delivery")
+        pdf_report = action_report._render_qweb_pdf(
+            "stock.report_deliveryslip", shipping_done.ids
+        )[0]
 
         pdf_delivery_note = self.env["ir.attachment"].search([("name", "=", filename)])
         if len(pdf_delivery_note) > 0:
-            pdf_delivery_note[0].datas = report.encode("base_64")
+            pdf_delivery_note[0].datas = base64.encodebytes(pdf_report)
         else:
             pdf_delivery_note = self.env["ir.attachment"].create(
                 {
@@ -113,9 +108,8 @@ class StockPicking(models.Model):
                     "res_model": "stock.picking",
                     "res_id": self.id,
                     "name": filename,
-                    "datas_fname": filename,
                     "mimetype": "text/pdf",
-                    "datas": report.encode("base_64"),
+                    "datas": base64.encodebytes(pdf_report),
                 }
             )
 
@@ -135,7 +129,6 @@ class StockPicking(models.Model):
             partners_with_emails.add(current.id or partner.id)
         return list(partners_with_emails)
 
-    @api.multi
     def _send_delivery_notes(self, send_csv, send_pdf):
         """Send the delivery note by email to the customer."""
         self.ensure_one()
@@ -149,7 +142,8 @@ class StockPicking(models.Model):
             pdf_note = self._generate_delivery_note_pdf()
             attachements.append(pdf_note.id)
 
-        # If no CSV or PDF is generate, no email should be sent -- case for human_drug products
+        # If no CSV or PDF has been generated, no email should be sent -- case for
+        # human_drug products
         csv_filename = self._get_delivery_note_filename(extension=".csv")
         pdf_filename = self._get_delivery_note_filename(extension=".pdf")
         note_does_not_exist = not (
@@ -163,30 +157,40 @@ class StockPicking(models.Model):
         if config["test_enable"]:
             return
 
-        template = self.env.ref("stock_delivery_note.delivery_note_csv")
-        values = template.generate_email(self.id)
+        template = self.env.ref("alc_stock_delivery_slip.delivery_note_csv")
+        values = template.generate_email(
+            self.id,
+            [
+                "subject",
+                "body_html",
+                "email_from",
+                "email_to",
+                "email_cc",
+                "reply_to",
+                "partner_to",
+            ],
+        )
         values.update(
             {
                 "recipient_ids": [
-                    (4, pid) for pid in self._delivery_note_recipient_ids(values)
+                    Command.link(pid)
+                    for pid in self._delivery_note_recipient_ids(values)
                 ],
                 "auto_delete": False,
             }
         )
         if "email_from" in values and not values.get("email_from"):
             values.pop("email_from")
-        values["attachment_ids"] = [(6, 0, attachements)]
+        values["attachment_ids"] = [Command.set(attachements)]
         self.env["mail.mail"].create(values)
 
-    @api.multi
     def create_delivery_note(self):
         """Used for the action menu."""
         for picking in self:
             picking._generate_delivery_note_csv()
 
-    @api.multi
     def _generate_delivery_note(self):
-        """ Generate the data for a delivery note when a stock pick is validated.
+        """Generate the data for a delivery note when a stock pick is validated.
 
         It is a peculiar csv file because it does not have the same fields
         on each line, is structure is as folllow:
@@ -227,11 +231,11 @@ class StockPicking(models.Model):
             return ",".join(s.split("."))
 
         def format_use_date(use_date):
-            """Get the use dates in format dd-mm-yyyy"""
+            """Get the use dates in format dd-mm-yyyy."""
             if not use_date:
                 return ""
-            use_date = use_date[:10]
-            return use_date[-2:] + use_date[4:8] + use_date[:4]
+            sz_use_date = use_date.isoformat()[:10]
+            return sz_use_date[-2:] + sz_use_date[4:8] + sz_use_date[:4]
 
         self.ensure_one()
         lines = []
@@ -240,57 +244,50 @@ class StockPicking(models.Model):
         lines.append([self.id, partner.email or "", ""])
         lines.append(
             [
-                u"{} {}".format(
-                    partner.title.shortcut or "", partner.name or ""
-                ).strip(),
+                f"{partner.title.shortcut or ''} {partner.name or ''}".strip(),
                 partner.street or "",
-                u"{} {}".format(partner.zip or "", partner.city or "").strip(),
+                f"{partner.zip or ''} {partner.city or ''}".strip(),
                 partner.country_id.name or "",
                 "",
             ]
         )
 
-        vat_group = self.env.ref("account_tax_one_vat.vat_tax_group")
         # The product lines
         grouped_lines = self.get_moves_by_order()
         for group in grouped_lines:
             for move_line in group[1][0]:
                 product = move_line.product_id.with_context(lang=partner.lang)
-                sol = move_line.order_line_id
-                quants = move_line.get_lots(only_with_lot=False)
-                quants_qty = sum([quant[1] for quant in quants])
-                if quants_qty < move_line.product_qty:
+                sol = move_line.sale_line_id
+                stock_move_lines = move_line.get_lots()
+                smlines_qty = sum([smline[1] for smline in stock_move_lines])
+                if smlines_qty < move_line.product_qty:
                     # Sometimes get_lots does not return any quants
-                    # but the quantity of the stock still as to be
+                    # but the quantity of the stock still has to be
                     # represtented in the delivery note
-                    quants.append(["", move_line.product_qty - quants_qty, ""])
-                vat = sol.tax_id.filtered(lambda r: r.tax_group_id == vat_group)
-                if not vat:
-                    vat = product.taxes_id.filtered(
-                        lambda r: r.tax_group_id == vat_group
+                    stock_move_lines.append(
+                        ["", move_line.product_qty - smlines_qty, ""]
                     )
+                vat = sol.tax_id.filtered(lambda r: r.is_vat)
+                if not vat:
+                    vat = product.taxes_id.filtered(lambda r: r.is_vat)
 
-                for quant in quants:
+                for smline in stock_move_lines:
 
                     lines.append(
                         [
                             product.default_code or "",
                             product.name,
                             # Quantity computed from the quants
-                            format_number(quant[1], 3),
+                            format_number(smline[1], 3),
                             #  Net HTVA price
-                            format_number(sol.price_reduce, 2)
-                            if not (move_line.is_additional_move or sol.is_consignment)
-                            else "0",
+                            format_number(move_line._get_net_price(), 2),
                             #  Brut HTVA price
-                            format_number(sol.price_unit, 2)
-                            if not (move_line.is_additional_move or sol.is_consignment)
-                            else "0",
+                            format_number(move_line._get_crude_price(), 2),
                             #  VAT rate, yes only the first one if present
                             format_number(vat[0].amount if vat else 0, 1),
                             # Lots name
-                            quant[0] or "",
-                            format_use_date(quant[2] or ""),
+                            smline[0] or "",
+                            format_use_date(smline[2] or ""),
                             move_line._get_suite_name(sol.order_id, self.date_done),
                             # Product AMM if exist and delivery date
                             format_use_date(self.date_done or ""),
@@ -302,10 +299,10 @@ class StockPicking(models.Model):
                     )
         return lines
 
-    @api.multi
     def get_moves_by_order(self, is_entry_register=False):
         """
         Return lines for the delivery slip report.
+
         If the picking contains some medoc products, we have to print
         an entry register. This register will contains only medoc products.
 
@@ -324,7 +321,7 @@ class StockPicking(models.Model):
         if is_entry_register:
             lines_done = self.get_entry_register_lines()
         else:
-            lines_done = self.move_lines.filtered(lambda line: line.state == "done")
+            lines_done = self.move_ids.filtered(lambda line: line.state == "done")
 
         for line in lines_done:
             if not line.order_id:
@@ -334,8 +331,8 @@ class StockPicking(models.Model):
 
         # We don't need to display backorder for the entry register
         if not is_entry_register:
-            proc_groups = self.move_lines.mapped("procurement_id.group_id")
-            moves = proc_groups.mapped("procurement_ids.move_ids")
+            proc_groups = self.move_ids.mapped("group_id")
+            moves = proc_groups.mapped("stock_move_ids")
             moves = moves.filtered(
                 lambda rec: (
                     rec.location_dest_id.usage == "customer"
@@ -349,7 +346,7 @@ class StockPicking(models.Model):
                     backorder_moves_by_order[line.order_id].append(line)
 
         result_dict = {}
-        for order, moves in moves_by_order.iteritems():
+        for order, moves in moves_by_order.items():
             result_dict[order] = [moves, backorder_moves_by_order.get(order, [])]
         if moves_without_order:
             result.append((None, (moves_without_order, backorder_moves_without_order)))
@@ -364,21 +361,19 @@ class StockPicking(models.Model):
 
     def get_entry_register_lines(self):
         categ_vet = self.env.ref("alc_product_category_data.product_categ_vet_belges")
-        categ_import = self.env.ref("alc_product_category_data.product_categ_importation")
-
-        all_products = self.mapped("move_lines.product_id")
-        medic_products = self.env["product.product"].search(
-            [
-                "|",
-                ("categ_id", "child_of", categ_vet.id),
-                ("categ_id", "child_of", categ_import.id),
-                ("id", "in", all_products.ids),
-            ],
-            order="categ_id",
+        categ_import = self.env.ref(
+            "alc_product_category_data.product_categ_importation"
         )
 
-        lines = self.mapped("move_lines").filtered(
-            lambda line: line.state == "done" and line.product_id in medic_products
+        all_products = self.mapped("move_ids.product_id")
+
+        lines = self.mapped("move_ids").filtered(
+            lambda line: line.state == "done"
+            and (
+                line.product_id.categ_id.has_for_parent(categ_vet)
+                or line.product_id.categ_id.has_for_parent(categ_import)
+                or line.product_id in all_products.ids
+            )
         )
 
         return lines

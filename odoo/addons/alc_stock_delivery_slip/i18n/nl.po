@@ -1,0 +1,90 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* alc_stock_delivery_slip
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-02-20 16:40+0000\n"
+"PO-Revision-Date: 2023-02-20 16:40+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_stock_delivery_slip
+#: model:mail.template,body_html:alc_stock_delivery_slip.delivery_note_csv
+msgid ""
+"\n"
+"            \n"
+"                <p>Hello,</p>\n"
+"                <p>Please find here attached the electronic delivery note.</p>\n"
+"                <p>We wish you good reception.</p>\n"
+"                <p>Sincerely,</p>\n"
+"                <p>Your Team Alcyon</p>\n"
+"            \n"
+"        "
+msgstr ""
+"\n"
+"\n"
+"<p>Beste,</p>\n"
+"<p>Bijgevoegd vindt u de elektronische verzendbon van uw bestelling.</p>\n"
+"<p>Wij wensen u een goede ontvangst.</p>\n"
+"<p>Met vriendelijke groet,,</p>\n"
+"<p>Uw Alcyon team</p>\n"
+"\n"
+
+#. module: alc_stock_delivery_slip
+#: model:mail.template,subject:alc_stock_delivery_slip.delivery_note_csv
+msgid "Alcyon Delivery Note {{object.id}}"
+msgstr "Alcyon Verzendbon {{object.id}}"
+
+#. module: alc_stock_delivery_slip
+#: model:ir.model,name:alc_stock_delivery_slip.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: alc_stock_delivery_slip
+#: model:mail.template,name:alc_stock_delivery_slip.delivery_note_csv
+msgid "Delivery Note"
+msgstr "Alcyon Verzendbon"
+
+#. module: alc_stock_delivery_slip
+#: model:ir.actions.server,name:alc_stock_delivery_slip.action_server_generate_delivery_note
+msgid "Generate delivery note"
+msgstr "Genereer Verzendbon"
+
+#. module: alc_stock_delivery_slip
+#: model:ir.model.fields,field_description:alc_stock_delivery_slip.field_stock_move__order_id
+msgid "Order Reference"
+msgstr ""
+
+#. module: alc_stock_delivery_slip
+#: model:ir.model.fields,field_description:alc_stock_delivery_slip.field_res_partner__send_csv_deliveryship
+#: model:ir.model.fields,field_description:alc_stock_delivery_slip.field_res_users__send_csv_deliveryship
+msgid "Send the deliveryship in CSV format"
+msgstr ""
+
+#. module: alc_stock_delivery_slip
+#: model:ir.model.fields,field_description:alc_stock_delivery_slip.field_res_partner__send_pdf_deliveryship
+#: model:ir.model.fields,field_description:alc_stock_delivery_slip.field_res_users__send_pdf_deliveryship
+msgid "Send the deliveryship in PDF format"
+msgstr ""
+
+#. module: alc_stock_delivery_slip
+#: model:ir.model,name:alc_stock_delivery_slip.model_stock_move
+msgid "Stock Move"
+msgstr ""
+
+#. module: alc_stock_delivery_slip
+#: model:ir.model.fields,field_description:alc_stock_delivery_slip.field_stock_move__suite_name
+msgid "Suite Name"
+msgstr ""
+
+#. module: alc_stock_delivery_slip
+#: model:ir.model,name:alc_stock_delivery_slip.model_stock_picking
+msgid "Transfer"
+msgstr "Overdracht"

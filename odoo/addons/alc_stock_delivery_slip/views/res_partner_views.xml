@@ -2,15 +2,15 @@
 <!-- Copyright 2020 ACSONE SA/NV
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
-  <record model="ir.ui.view" id="view_partner_form">
-    <field name="name">res.partner.form (in stock_delivery_note)</field>
+  <record model="ir.ui.view" id="view_partner_property_form">
+    <field name="name">view.partner.property.form (in stock_delivery_note)</field>
     <field name="model">res.partner</field>
-    <field name="inherit_id" ref="delivery_rounds.view_partner_form" />
+    <field name="inherit_id" ref="delivery.view_partner_property_form" />
     <field name="arch" type="xml">
-      <xpath expr="//group[@name='delivery']" position="inside">
+      <field name="property_delivery_carrier_id" position="after">
         <field name="send_csv_deliveryship" />
         <field name="send_pdf_deliveryship" />
-      </xpath>
+      </field>
     </field>
   </record>
 </odoo>
