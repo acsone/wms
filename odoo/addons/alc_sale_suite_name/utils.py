@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -9,7 +8,7 @@ LAST_DIGITS_RE_OPERATOR = re.compile(LAST_DIGITS_RE)
 
 
 def increment_suite_name(suite_name):
-    """Increment the suite name
+    """Increment the suite name.
 
     We take the suite name from his sale orders and increment the last
     digit part of the last suite name:
@@ -31,6 +30,4 @@ def increment_suite_name(suite_name):
         next_suite_name = LAST_DIGITS_RE_OPERATOR.sub(next_suite, suite_name)
     else:
         next_suite_name = suite_name + next_suite
-    if isinstance(next_suite_name, unicode):
-        next_suite_name = next_suite_name.encode("utf-8")
     return str(next_suite_name)

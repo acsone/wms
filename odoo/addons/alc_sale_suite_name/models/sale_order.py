@@ -1,19 +1,17 @@
-# -*- coding: utf-8 -*-
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import api, fields, models
+from odoo import api, fields
+
+from odoo.addons.sale.models import sale_order
 
 
-class SaleOrder(models.Model):
-
-    _inherit = "sale.order"
+class SaleOrder(sale_order.SaleOrder):
 
     suite_name = fields.Char(string="Suite Id", copy=False)
 
-    @api.model_cr
     def init(self):
-        res = super(SaleOrder, self).init()
+        res = super().init()
         # This partial index is used by the 'last_suite_name' computed field
         # on 'res.partner' (use of 'LIMIT 1' making PostgreSQL slow under
         # certain circumstances).
