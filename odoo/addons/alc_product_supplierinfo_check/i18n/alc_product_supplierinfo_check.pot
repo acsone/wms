@@ -105,5 +105,5 @@ msgstr ""
 #. odoo-python
 #: code:addons/alc_product_supplierinfo_check/models/product_supplierinfo.py:0
 #, python-format
-msgid "You cannot two different supplier for a product"
+msgid "You cannot have two different supplier for a product"
 msgstr ""

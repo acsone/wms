@@ -10,6 +10,6 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": ["alc_supplier_promotion"],
-    "data": [],
+    "data": ["views/res_config_settings.xml"],
     "demo": [],
 }

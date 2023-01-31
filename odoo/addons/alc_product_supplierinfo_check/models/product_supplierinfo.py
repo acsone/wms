@@ -2,6 +2,8 @@
 # Copyright 2023 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+from ast import literal_eval
+
 from odoo import _, api
 from odoo.exceptions import ValidationError
 
@@ -18,7 +20,9 @@ class ProductSupplierinfo(SupplierInfo):
             ]
         )
         if other_supplier:
-            raise ValidationError(_("You cannot two different supplier for a product"))
+            raise ValidationError(
+                _("You cannot have two different supplier for a product")
+            )
 
     def _check_min_qty(self):
         self.ensure_one()
@@ -77,10 +81,19 @@ class ProductSupplierinfo(SupplierInfo):
                 _("The end date must be equal or greater than the start date")
             )
 
+    @api.model
+    def _is_alcyon_constraints_check_activated(self):
+        return not self._context.get("disable_check_dates") and literal_eval(
+            self.env["ir.config_parameter"].get_param(
+                "alc_product_supplierinfo_check.check_alcyon_constraints_on_supplierinfo",
+                "False",
+            )
+        )
+
     @api.constrains("date_start", "date_end", "partner_id", "min_qty", "min_qty_sale")
     def check_dates(self):
         # Used by imports to avoid problems with imported data
-        if self._context.get("disable_check_dates"):
+        if not self._is_alcyon_constraints_check_activated():
             return
         for rec in self:
             rec._check_unique_supplier()

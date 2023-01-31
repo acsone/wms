@@ -2,6 +2,16 @@
 <!-- Copyright 2022 ACSONE SA/NV
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
+  <!-- Config Settings -->
+    <record
+    id="check_alcyon_constraints_on_supplierinfo_parameter"
+    model="ir.config_parameter"
+  >
+      <field
+      name="key"
+    >alc_product_supplierinfo_check.check_alcyon_constraints_on_supplierinfo</field>
+      <field name="value">True</field>
+    </record>
   <!--
   <record id="constrain_discount_pricelist_parameter" model="ir.config_parameter">
     <field name="key">constrain_discount_pricelist</field>

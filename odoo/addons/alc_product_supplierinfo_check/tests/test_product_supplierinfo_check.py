@@ -16,6 +16,10 @@ class PricelistDiscountCase(TransactionCase):
         )
         cls.product = cls.env["product.product"].create({"name": "Unittest P1"})
         cls.sinfo_model = cls.env["product.supplierinfo"]
+        cls.env["ir.config_parameter"].set_param(
+            "alc_product_supplierinfo_check.check_alcyon_constraints_on_supplierinfo",
+            True,
+        )
 
     def test_check_dates(self):
         """Test exceptions with promotion dates."""
