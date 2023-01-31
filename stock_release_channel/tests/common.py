@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
 from odoo import fields
-from odoo.tests import common
+from odoo.tests import Form, common
 
 from odoo.addons.stock_available_to_promise_release.tests.common import (
     PromiseReleaseCommonCase,
@@ -31,12 +31,14 @@ class ReleaseChannelCase(common.TransactionCase):
             }
         )
         cls.wh.delivery_route_id.write({"available_to_promise_defer_pull": True})
-        cls.product1 = cls.env["product.product"].create(
-            {"name": "Test Product 1", "barcode": "test", "type": "product"}
-        )
-        cls.product2 = cls.env["product.product"].create(
-            {"name": "Test Product 2", "barcode": "test2", "type": "product"}
-        )
+        with Form(cls.env["product.product"]) as product_form:
+            product_form.name = ("Test Product 1",)
+            product_form.barcode = "test"
+        cls.product1 = product_form.save()
+        with Form(cls.env["product.product"]) as product_form:
+            product_form.name = ("Test Product 2",)
+            product_form.barcode = "test2"
+        cls.product2 = product_form.save()
 
     @classmethod
     def _update_qty_in_location(
