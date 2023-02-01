@@ -126,3 +126,7 @@ odoo-addon-shipment-advice @ git+https://github.com/acsone/stock-logistics-trans
 # stock-logistics-availability
 # https://github.com/OCA/stock-logistics-availability/pull/6 - [16.0][ADD] stock_available_immediately_exclude_location
 odoo-addon-stock-available-immediately-exclude-location @ git+https://github.com/acsone/stock-logistics-availability.git@16.0-mig-stock_available_immediately_exclude_location-hda#subdirectory=setup/stock_available_immediately_exclude_location
+
+# partner-contact
+# https://github.com/OCA/partner-contact/pull/1453
+odoo-addon-base-partner-sequence @ git+https://github.com/ursais/partner-contact@16_mig_base_partner_sequence#subdirectory=setup/base_partner_sequence

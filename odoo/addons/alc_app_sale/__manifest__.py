@@ -14,6 +14,7 @@
         # Odoo
         "sale",
         # OCA
+        "base_partner_sequence",
         # OCA/sale-workflow
         "sale_triple_discount",
         "product_price_category",

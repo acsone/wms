@@ -40,6 +40,7 @@ odoo-addon-attachment-s3 @ git+https://github.com/acsone/odoo-cloud-platform@25c
 odoo-addon-base-attachment-object-storage @ git+https://github.com/acsone/odoo-cloud-platform@fc452c6a2abbae4ab7d4bd041c5d2212691a8096#subdirectory=setup/base_attachment_object_storage
 odoo-addon-base-delivery-carrier-label==16.0.1.0.0.3
 odoo-addon-base-exception==16.0.1.0.1.3
+odoo-addon-base-partner-sequence @ git+https://github.com/ursais/partner-contact@422cc2cf0780ac99b7d7ef1f06d4d07ec47b95dc#subdirectory=setup/base_partner_sequence
 odoo-addon-base-report-to-printer==16.0.1.1.0.1
 odoo-addon-base-sparse-field-list-support @ git+https://github.com/acsone/server-tools.git@f75469cfc3ead20b6224195b653ddba735a219b4#subdirectory=setup/base_sparse_field_list_support
 odoo-addon-delivery-carrier-account==16.0.1.0.0.4
