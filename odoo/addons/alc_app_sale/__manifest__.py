@@ -33,6 +33,7 @@
         "alc_product_supplierinfo_default_price",
         "alc_product_supplierinfo_check",
         "alc_pricelist_discount",
+        "alc_sale_suite_name",
         "alc_supplier_promotion",
     ],
 }
