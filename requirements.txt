@@ -67,6 +67,7 @@ odoo-addon-product-template-has-one-variant @ git+https://github.com/acsone/prod
 odoo-addon-product-total-weight-from-packaging @ git+https://github.com/acsone/product-attribute.git@0ae6102ff01a7ea8622e20a5a47ecfbe68314a4d#subdirectory=setup/product_total_weight_from_packaging
 odoo-addon-purchase-stock-packaging @ git+https://github.com/acsone/purchase-workflow.git@02adbbcaf2c174f3cbfadc74e0b477bddb1886bf#subdirectory=setup/purchase_stock_packaging
 odoo-addon-queue-job==16.0.2.0.0
+odoo-addon-sale-cancel-remaining @ git+https://github.com/acsone/sale-workflow.git@b446df1dde83e9a399aabcb11c30fcc9b4608fd7#subdirectory=setup/sale_cancel_remaining
 odoo-addon-sale-exception @ git+https://github.com/acsone/sale-workflow.git@5a6c9d98f8e45570b510ed8369e0af6ba8ac8c2e#subdirectory=setup/sale_exception
 odoo-addon-sale-procurement-customer @ git+https://github.com/acsone/sale-workflow.git@ef0c216f30a0fd7fd1fb0d782f8b9aaac3f7d487#subdirectory=setup/sale_procurement_customer
 odoo-addon-sale-stock-picking-blocking @ git+https://github.com/acsone/sale-workflow.git@0759ba05b37a5ce5a9da3131bd03e1cdabd3d7ef#subdirectory=setup/sale_stock_picking_blocking
