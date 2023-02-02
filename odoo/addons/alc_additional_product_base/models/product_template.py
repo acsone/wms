@@ -1,6 +1,6 @@
 # Copyright 2023 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-from odoo import api, fields
+from odoo import fields
 
 from odoo.addons.product.models.product_product import ProductProduct
 from odoo.addons.product.models.product_template import (
@@ -30,8 +30,3 @@ class ProductTemplate(ProductTemplateBase):
         qty_additional_product = coefficient * self.ratio_additional_product
 
         return qty_additional_product
-
-    @api.model
-    def is_an_additional_product(self, product):
-        # FIXME: is this used?
-        return bool(self.search([("additional_product_id", "=", product.id)]))
