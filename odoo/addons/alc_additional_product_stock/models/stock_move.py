@@ -130,6 +130,8 @@ class StockMove(StockMoveBase):
 
     def _remove_all_additional_moves(self):
         for move in self:
+            if not move.additional_product_on_reserved_qty_allowed:
+                continue
             moves_to_remove = move._get_all_not_done_additional_moves()
             if moves_to_remove:
                 moves_to_remove._action_cancel()
