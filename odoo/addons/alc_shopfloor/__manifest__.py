@@ -32,7 +32,7 @@
         "stock_picking_batch_creation",
         "stock_helper",
         # alcyon
-        "alc_stock_move_operation",
+        # TODO: has been removed "alc_stock_move_operation",
         # TODO: has been replaced by STD "stock_operation_recompute",
         "stock_lot_loss",
     ],
