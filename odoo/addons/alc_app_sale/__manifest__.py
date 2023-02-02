@@ -36,5 +36,6 @@
         "alc_pricelist_discount",
         "alc_sale_suite_name",
         "alc_supplier_promotion",
+        "alc_supplier_promotion_sale",
     ],
 }

@@ -11,6 +11,7 @@ class SaleOrder(SaleOrderBase):
 
     supplier_promotion_allowed = fields.Boolean(
         string="Supplier promotion allowed",
+        readonly=True,
         states={"draft": [("readonly", False)], "sent": [("readonly", False)]},
     )
     discount_pricelist_ids = fields.Many2many[Pricelist](

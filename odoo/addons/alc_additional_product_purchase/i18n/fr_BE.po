@@ -1,0 +1,41 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* alc_additional_product_purchase
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-01-29 14:50+0000\n"
+"PO-Revision-Date: 2023-01-29 14:50+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_additional_product_purchase
+#: model:ir.model.fields,field_description:alc_additional_product_purchase.field_purchase_order_line__is_additional_product
+msgid "Additional product"
+msgstr "Produit Additionnel"
+
+#. module: alc_additional_product_purchase
+#: model_terms:ir.ui.view,arch_db:alc_additional_product_purchase.purchase_order_form
+msgid "Compute additional products"
+msgstr "Calculer les produits additionnels"
+
+#. module: alc_additional_product_purchase
+#: model:ir.model,name:alc_additional_product_purchase.model_purchase_order
+msgid "Purchase Order"
+msgstr "Commande fournisseur"
+
+#. module: alc_additional_product_purchase
+#: model:ir.model,name:alc_additional_product_purchase.model_purchase_order_line
+msgid "Purchase Order Line"
+msgstr "Ligne de commande d'achat"
+
+#. module: alc_additional_product_purchase
+#: model_terms:ir.ui.view,arch_db:alc_additional_product_purchase.purchase_order_form
+msgid "This action will erase all existing additional lines"
+msgstr "Cette action effacera toutes les lignes additionnelles existantes"
