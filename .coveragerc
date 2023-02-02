@@ -26,7 +26,6 @@ omit =
     odoo/addons/account_invoice_sent/*
     odoo/addons/account_move_productcateg/*
     odoo/addons/account_payment_order_background/*
-    odoo/addons/account_tax_one_vat/*
     odoo/addons/alc_account_invoice_cancel_permissions/*
     odoo/addons/alc_account_payment_globalization/*
     odoo/addons/alc_address_data/*

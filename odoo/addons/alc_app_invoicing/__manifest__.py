@@ -11,6 +11,10 @@
     "website": "https://acsone.eu",
     "application": True,
     "depends": [
+        "account_tax_one_vat",
+        "account_tax_one_vat_purchase",
+        "account_tax_one_vat_sale",
+        "account_invoice_tax_required",
         "alc_cash_on_delivery",
     ],
 }
