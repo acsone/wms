@@ -24,13 +24,13 @@ msgid "Alcyon pharmacy lot Label"
 msgstr ""
 
 #. module: alc_reception_pharmacy
-#: code:addons/alc_reception_pharmacy/models/reception_pharmacy.py:114
+#: code:addons/alc_reception_pharmacy/models/reception_pharmacy_line.py:142
 #, python-format
 msgid "All pickings at destination of a same shipping must be in the same delivery round"
 msgstr ""
 
 #. module: alc_reception_pharmacy
-#: code:addons/alc_reception_pharmacy/models/reception_pharmacy.py:125
+#: code:addons/alc_reception_pharmacy/models/reception_pharmacy_line.py:153
 #, python-format
 msgid "Assign pickings to delivery round %s after pharmacy reception."
 msgstr ""
@@ -81,7 +81,7 @@ msgid "Customer"
 msgstr ""
 
 #. module: alc_reception_pharmacy
-#: code:addons/alc_reception_pharmacy/models/reception_pharmacy.py:65
+#: code:addons/alc_reception_pharmacy/models/reception_pharmacy_line.py:96
 #, python-format
 msgid "Customer location is missing"
 msgstr ""
@@ -114,6 +114,7 @@ msgstr ""
 
 #. module: alc_reception_pharmacy
 #: selection:reception.pharmacy,state:0
+#: selection:reception.pharmacy.line,state:0
 msgid "Done"
 msgstr ""
 
@@ -173,11 +174,12 @@ msgstr ""
 
 #. module: alc_reception_pharmacy
 #: selection:reception.pharmacy,state:0
+#: selection:reception.pharmacy.line,state:0
 msgid "New"
 msgstr ""
 
 #. module: alc_reception_pharmacy
-#: code:addons/alc_reception_pharmacy/models/reception_pharmacy_line.py:65
+#: code:addons/alc_reception_pharmacy/models/reception_pharmacy_line.py:75
 #, python-format
 msgid "No printer defined for reception, please select one first"
 msgstr ""
@@ -193,7 +195,7 @@ msgid "Partner"
 msgstr ""
 
 #. module: alc_reception_pharmacy
-#: code:addons/alc_reception_pharmacy/models/reception_pharmacy_line.py:55
+#: code:addons/alc_reception_pharmacy/models/reception_pharmacy_line.py:65
 #, python-format
 msgid "Partner {} does not belong to any itinerary"
 msgstr ""
@@ -209,7 +211,7 @@ msgid "Pharmacy Reception Printer"
 msgstr ""
 
 #. module: alc_reception_pharmacy
-#: code:addons/alc_reception_pharmacy/models/reception_pharmacy.py:54
+#: code:addons/alc_reception_pharmacy/models/reception_pharmacy.py:55
 #, python-format
 msgid "Please insert at least one line"
 msgstr ""
@@ -225,6 +227,7 @@ msgid "Printer"
 msgstr ""
 
 #. module: alc_reception_pharmacy
+#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy_line_product_id
 #: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy_product_id
 msgid "Product"
 msgstr ""
@@ -233,6 +236,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:alc_reception_pharmacy.field_receive_pharmacy_products_product_qty
 #: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy_line_product_qty
 msgid "Quantity"
+msgstr ""
+
+#. module: alc_reception_pharmacy
+#: model:ir.model,name:alc_reception_pharmacy.model_queue_job
+msgid "Queue Job"
 msgstr ""
 
 #. module: alc_reception_pharmacy
@@ -262,8 +270,32 @@ msgid "Reception Pharmacy List"
 msgstr ""
 
 #. module: alc_reception_pharmacy
+#: code:addons/alc_reception_pharmacy/models/reception_pharmacy.py:69
+#, python-format
+msgid "Reception pharmacy : lines are validated in background"
+msgstr ""
+
+#. module: alc_reception_pharmacy
+#: code:addons/alc_reception_pharmacy/models/reception_pharmacy.py:63
+#, python-format
+msgid "Reception pharmacy for %s"
+msgstr ""
+
+#. module: alc_reception_pharmacy
 #: model:ir.model.fields,field_description:alc_reception_pharmacy.field_receive_pharmacy_products_reception_pharmacy_id
 msgid "Reception pharmacy id"
+msgstr ""
+
+#. module: alc_reception_pharmacy
+#: code:addons/alc_reception_pharmacy/models/queue_job.py:22
+#, python-format
+msgid "Related Record"
+msgstr ""
+
+#. module: alc_reception_pharmacy
+#: code:addons/alc_reception_pharmacy/models/queue_job.py:33
+#, python-format
+msgid "Related Records"
 msgstr ""
 
 #. module: alc_reception_pharmacy
@@ -279,12 +311,13 @@ msgstr ""
 
 #. module: alc_reception_pharmacy
 #: model:ir.model.fields,field_description:alc_reception_pharmacy.field_receive_pharmacy_products_state
+#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy_line_state
 #: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy_state
 msgid "State"
 msgstr ""
 
 #. module: alc_reception_pharmacy
-#: code:addons/alc_reception_pharmacy/models/reception_pharmacy.py:68
+#: code:addons/alc_reception_pharmacy/models/reception_pharmacy_line.py:99
 #, python-format
 msgid "Supplier location is missing"
 msgstr ""
@@ -306,7 +339,7 @@ msgid "Users"
 msgstr ""
 
 #. module: alc_reception_pharmacy
-#: code:addons/alc_reception_pharmacy/models/reception_pharmacy.py:62
+#: code:addons/alc_reception_pharmacy/models/reception_pharmacy_line.py:93
 #, python-format
 msgid "Warehouse is missing"
 msgstr ""
