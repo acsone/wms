@@ -276,7 +276,6 @@ CREATE UNIQUE INDEX pk_%(table)s ON %(table)s (id);
         where_clause = [where_clause] if where_clause else []
         query = Query(tables, where_clause, where_params)
         query_from, query_where, query_params = query.get_sql()
-        # pylint: disable=sql-injection
         sql_query = "SELECT * from {query_from} WHERE {query_where}".format(
             query_from=query_from, query_where=query_where
         )

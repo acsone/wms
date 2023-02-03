@@ -4,6 +4,7 @@
 
 import logging
 
+# pylint: disable=odoo-addons-relative-import
 from odoo.addons.alc_eshop_form.hooks import _load_form_name_translations
 
 _logger = logging.getLogger(__name__)
