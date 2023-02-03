@@ -58,7 +58,7 @@ class TestReceptionPharmacy(CommonReceptionPharmacyCase):
         )
         self.assertEqual(pharmacy_line.partner_shipping_id.id, self.partner.id)
 
-        pickings = reception.validate()
+        pickings = self._validate_reception_and_return_picking(reception)
 
         # after pharmacy reception, 2 items to be delivered
         self.assertEqual(len(self.shipping.move_lines), 2)
@@ -90,7 +90,7 @@ class TestReceptionPharmacy(CommonReceptionPharmacyCase):
             wiz.validate_reception()
             self.assertEqual(patched_print.call_count, 1)
 
-        pickings = reception.validate()
+        pickings = self._validate_reception_and_return_picking(reception)
         # after pharmacy reception, 2 items to be delivered
         self.assertEqual(len(self.shipping.move_lines), 2)
         self.assertTrue(pickings.mapped("delivery_round_id"))
@@ -118,8 +118,8 @@ class TestReceptionPharmacy(CommonReceptionPharmacyCase):
             self.env["reception.pharmacy.line"].__class__,
             "print_reception_pharmacy_label",
         ) as patched_print:
-            pickings = wiz.validate_reception()
+            wiz.validate_reception()
             self.assertEqual(patched_print.call_count, 1)
 
-        pickings = reception.validate()
+        pickings = self._validate_reception_and_return_picking(reception)
         self.assertFalse(pickings.mapped("delivery_round_id"))

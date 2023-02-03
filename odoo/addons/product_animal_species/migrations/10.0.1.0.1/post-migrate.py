@@ -4,6 +4,7 @@
 
 import logging
 
+# pylint: disable=odoo-addons-relative-import
 from odoo.addons.product_animal_species.hooks import _load_species_translations
 
 _logger = logging.getLogger(__name__)

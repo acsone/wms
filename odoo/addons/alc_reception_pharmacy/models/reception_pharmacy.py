@@ -5,7 +5,9 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import _, api, fields, models
-from odoo.exceptions import UserError, ValidationError
+from odoo.exceptions import UserError
+
+from odoo.addons.queue_job.job import identity_exact
 
 
 class ReceptionPharmacy(models.Model):
@@ -49,109 +51,23 @@ class ReceptionPharmacy(models.Model):
 
     def validate(self):
         self.ensure_one()
-
         if not self.line_ids:
             raise UserError(_("Please insert at least one line"))
-
-        proc_group = self.env["procurement.group"]
-        proc_order = self.env["procurement.order"]
-        move = self.env["stock.move"]
-        warehouse = self.env.ref("stock.warehouse0")
-        carrier = self.env.ref("__setup__.deliver_carrier_alcyon")
-        if not warehouse:
-            raise UserError(_("Warehouse is missing"))
-        loc_customer = self.env.ref("stock.stock_location_customers")
-        if not loc_customer:
-            raise UserError(_("Customer location is missing"))
-        loc_supplier = self.env.ref("stock.stock_location_suppliers")
-        if not loc_supplier:
-            raise UserError(_("Supplier location is missing"))
-
-        new_picking_ids = []
-        for line in self.line_ids:
-            # Put the lot in stock
-            line.reception_move_id = move.create(
-                {
-                    "name": "Pharmacy",
-                    "product_id": self.product_id.id,
-                    "product_uom": self.product_id.uom_id.id,
-                    "restrict_lot_id": line.lot_id.id,
-                    "product_uom_qty": line.product_qty,
-                    "location_id": loc_supplier.id,
-                    "location_dest_id": line.bin_id.id,
-                }
-            )
-            line.reception_move_id.action_done()
-            # Plan a delivery
-            # The procurement will create the ship and pick
-            group_id = proc_group.create(
-                {
-                    "partner_id": line.partner_shipping_id.id,
-                    "customer_id": line.customer_id.id,
-                    "carrier_id": carrier.id,
-                }
-            )
-            proc_order_vals = self._prepare_procurement_order(
-                line, line.lot_id.id, warehouse.id, loc_customer.id, group_id.id
-            )
-            line.procurement_id = proc_order.create(proc_order_vals)
-            # procurement_autorun_defer
-            line.procurement_id.run()
-            pickings = (
-                self.env["stock.move"]
-                .search([("group_id", "=", group_id.id)])
-                .mapped("picking_id")
-            )
-            new_picking_ids.extend(pickings.ids)
-            pickings = pickings.filtered(
-                lambda picking: picking.picking_type_subcode == "PICK"
-                and picking.state not in ("draft", "done", "cancel")
-                and not picking.printed
-            )
-            delivery_round = pickings.mapped("delivery_round_id")
-            if len(delivery_round) > 1:
-                raise ValidationError(
-                    _(
-                        "All pickings at destination of a same shipping must "
-                        "be in the same delivery round"
-                    )
-                )
-            if not delivery_round:
-                delivery_round = self.env["round.instance"].find_bypartner(
-                    pickings[0].partner_id
-                )
-            if delivery_round:
-                description = (
-                    _("Assign pickings to delivery round %s after pharmacy reception.")
-                    % delivery_round.display_name
-                )
-                delivery_round.with_delay(
-                    description=description, priority=8
-                )._assign_pickings(pickings)
-
+        line_by_partner = self.line_ids.filtered(
+            lambda s: s.state == "draft"
+        ).partition("partner_shipping_id")
+        for partner, lines in line_by_partner.items():
+            # we delay the validation of the lines to minimize the risk of
+            # deadlocks. The validation is done by partner to try to group
+            # the lines that should go to the same picking.
+            job_description = _("Reception pharmacy for %s") % partner.name
+            lines.with_delay(
+                description=job_description, identity_key=identity_exact
+            ).validate()
         self.state = "done"
-        return self.env["stock.picking"].browse(new_picking_ids)
-
-    def _prepare_procurement_order(
-        self, line, lot_id, warehouse_id, loc_customer_id, group_id
-    ):
-        proc_order = self.env["procurement.order"]
-        proc_order_vals = {
-            "name": "Pharmacy",
-            "product_id": self.product_id.id,
-            "product_uom": self.product_id.uom_id.id,
-            "product_qty": line.product_qty,
-            "warehouse_id": warehouse_id,
-            "location_id": loc_customer_id,
-            "partner_dest_id": line.customer_id.id,
-            "group_id": group_id,
-            "delivery_requires_other_lines": True,
-        }
-        # HACK HACK HACK for fields declared in specific_Stock.... TO BE
-        # REFACTORED!!!!!!
-        if "restrict_lot_id" in proc_order._fields:
-            proc_order_vals["restrict_lot_id"] = lot_id
-        return proc_order_vals
+        self.env.user.notify_info(
+            _("Reception pharmacy : lines are validated in background")
+        )
 
     def button_receive(self):
         self.ensure_one()

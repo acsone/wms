@@ -2,6 +2,8 @@
 # Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+import logging
+
 from odoo.tests.common import SavepointCase
 
 
@@ -9,6 +11,11 @@ class CommonReceptionPharmacyCase(SavepointCase):
     @classmethod
     def setUpClass(cls):
         super(CommonReceptionPharmacyCase, cls).setUpClass()
+        cls.env = cls.env(
+            context=dict(
+                cls.env.context, tracking_disable=True, test_queue_job_no_delay=True
+            )
+        )
 
         # Create customer with delivery address
         cls.partner = cls.env["res.partner"].create(
@@ -42,6 +49,8 @@ class CommonReceptionPharmacyCase(SavepointCase):
             }
         )
         cls.warehouse_1.pick_type_id.subcode = "PICK"
+        cls.bin.location_id = cls.warehouse_1.lot_stock_id.id
+        cls.env["stock.location"]._parent_store_compute()
 
         cls.warehouse_1.pick_type_id.groupbypartner = True
         cls.warehouse_1.out_type_id.groupbypartner = True
@@ -53,7 +62,11 @@ class CommonReceptionPharmacyCase(SavepointCase):
         )
 
         cls.delivery_round_1 = cls.env["round.instance"].create(
-            {"template_id": cls.delivery_template.id, "date": "2020-11-18"}
+            {
+                "template_id": cls.delivery_template.id,
+                "date": "2020-11-18",
+                "state": "draft",
+            }
         )
         cls.carrier.delivery_template_id = cls.delivery_template.id
 
@@ -75,6 +88,8 @@ class CommonReceptionPharmacyCase(SavepointCase):
                 "type": "product",
             }
         )
+        cls._set_qty_in_loc_only(cls.product2, 100)
+
         cls.itinerary = cls.env["round.itinerary"].create(
             {
                 "name": "Itinerary test",
@@ -86,6 +101,50 @@ class CommonReceptionPharmacyCase(SavepointCase):
             }
         )
         cls.delivery_round_1.itinerary_ids = cls.itinerary
+
+    def setUp(self):
+        super(CommonReceptionPharmacyCase, self).setUp()
+        # mute logger
+        loggers = ["odoo.addons.queue_job.models.base"]
+        for logger in loggers:
+            logging.getLogger(logger).addFilter(self)
+
+        # pylint: disable=unused-variable
+        @self.addCleanup
+        def un_mute_logger():
+            for logger_ in loggers:
+                logging.getLogger(logger_).removeFilter(self)
+
+    def filter(self, record):
+        # required to mute logger
+        return 0
+
+    @classmethod
+    def _validate_reception_and_return_picking(cls, reception):
+        existing_pickings = cls.env["stock.picking"].search([])
+        reception.validate()
+        new_pickings = cls.env["stock.picking"].search([]) - existing_pickings
+        return new_pickings
+
+    @classmethod
+    def _set_qty_in_loc_only(cls, product, qty, location=None):
+        location = location or cls.env.ref("stock.stock_location_stock")
+        inventory = cls.env["stock.inventory"].create(
+            {"name": "Test", "product_id": product.id, "filter": "product"}
+        )
+        inventory.prepare_inventory()
+        inventory.line_ids.write({"product_qty": 0})
+        cls.env["stock.inventory.line"].create(
+            {
+                "inventory_id": inventory.id,
+                "product_id": product.id,
+                "product_uom_id": product.uom_id.id,
+                "product_qty": qty,
+                "location_id": location.id,
+            }
+        )
+        inventory.action_done()
+        return inventory
 
     @classmethod
     def _create_and_prepare_so(cls):

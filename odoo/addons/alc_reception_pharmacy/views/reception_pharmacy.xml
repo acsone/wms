@@ -53,6 +53,7 @@
           <field name="bin_id" options="{'no_open':True,'no_create':True}" />
           <field name="lot_id" options="{'no_open':True,'no_create':True}" />
           <field name="product_qty" options="{'no_open':True,'no_create':True}" />
+          <field name="state" />
           <button name="print_reception_pharmacy_label" type="object" string="Print" />
         </tree>
     </field>

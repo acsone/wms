@@ -6,6 +6,7 @@ import logging
 
 from openupgradelib import openupgrade
 
+# pylint: disable=odoo-addons-relative-import
 from odoo.addons.alc_pim.hooks import (
     _load_attribute_options_translations,
     _load_categories_translations,
