@@ -13,9 +13,12 @@
     # TODO split delivery_rounds...
     "depends": [
         "alc_delivery_rounds_assign_blocking",
+        "base_partition",
+        "queue_job",
         "specific_data",
         "stock",
         "specific_print",
+        "web_notify",
     ],
     "data": [
         "wizards/select_pharmacy_printing_printer.xml",
