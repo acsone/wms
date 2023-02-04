@@ -41,6 +41,8 @@ odoo-addon-stock-picking-completion-info @ git+https://github.com/acsone/wms.git
 odoo-addon-stock-picking-type-shipping-policy @ git+https://github.com/acsone/wms.git@16.0-mig-stock_picking_type_shipping_policy-lma#subdirectory=setup/stock_picking_type_shipping_policy
 # https://github.com/OCA/wms/pull/548 [FIX] - stock_dynamic_routing: fix method params
 odoo-addon-stock-dynamic-routing @ git+https://github.com/acsone/wms.git@16.0-stock_dynamic_routing-sbj#subdirectory=setup/stock_dynamic_routing
+# https://github.com/OCA/wms/pull/534/files
+odoo-addon-stock-picking-batch-creation @ git+https://github.com/acsone/wms.git@16.0-mig-stock_picking_batch_creation-lma#subdirectory=setup/stock_picking_batch_creation
 
 # product-attribute
 # https://github.com/OCA/product-attribute/pull/1192
@@ -89,6 +91,8 @@ odoo-addon-stock-move-auto-assign-auto-release @ git+https://github.com/acsone/s
 odoo-addon-stock-packaging-calculator @ git+https://github.com/acsone/stock-logistics-warehouse.git@16.0-mig-stock_packaging_calculator#subdirectory=setup/stock_packaging_calculator
 # https://github.com/OCA/stock-logistics-warehouse/pull/1580
 odoo-addon-stock-route-mto @ git+https://github.com/acsone/stock-logistics-warehouse.git@16.0-add-stock_route_mto-dro#subdirectory=setup/stock_route_mto
+# https://github.com/OCA/stock-logistics-warehouse/pull/1626
+odoo-addon-stock-picking-volume @ git+https://github.com/acsone/stock-logistics-warehouse.git@16.0-add-stock-picking-volume#subdirectory=setup/stock_picking_volume
 
 # stock-logistics-workflow
 # https://github.com/OCA/stock-logistics-workflow/pull/1158
