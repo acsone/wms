@@ -348,7 +348,6 @@ exclude:  |
   ^odoo/addons/test_product_additional_groupbypartner/|
   ^odoo/addons/test_product_mto/|
   ^odoo/addons/test_stock_refill_storage_type/|
-  ^odoo/addons/web_autorefresh/|
   ^odoo/addons/web_widget_inputmask/|
   ^odoo/addons/website_purchase_review/|
   # END NOT INSTALLABLE ADDONS
