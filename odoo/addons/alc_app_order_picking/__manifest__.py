@@ -25,6 +25,7 @@
         "stock_move_common_dest",
         "stock_move_location",
         "stock_move_manage_priority",
+        "stock_picking_batch_creation",
         "stock_picking_backorder_reason",
         "stock_picking_backorder_reason_grn",
         "stock_picking_completion_info",
