@@ -19,6 +19,7 @@
         "sale_triple_discount",
         "product_price_category",
         "sale_exception",
+        "sale_stock_picking_blocking",
         # OCA/product-attribute
         "product_manufacturer",
         # ALC
