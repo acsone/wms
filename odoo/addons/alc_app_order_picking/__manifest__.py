@@ -44,6 +44,8 @@
         "stock_release_channel",
         "stock_release_channel_auto_release",
         "stock_release_channel_process_end_time",
+        "shipment_advice_planner",
+        "stock_release_channel_shipment_advice",
     ],
     "data": [],
     "demo": [],

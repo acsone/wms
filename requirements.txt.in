@@ -37,6 +37,8 @@ odoo-addon-stock-storage-type-putaway-abc-classification-sale-stock @ git+https:
 odoo-addon-stock-picking-type-shipping-policy @ git+https://github.com/acsone/wms.git@16.0-mig-stock_picking_type_shipping_policy-lma#subdirectory=setup/stock_picking_type_shipping_policy
 # https://github.com/OCA/wms/pull/534/files
 odoo-addon-stock-picking-batch-creation @ git+https://github.com/acsone/wms.git@16.0-mig-stock_picking_batch_creation-lma#subdirectory=setup/stock_picking_batch_creation
+# https://github.com/OCA/wms/pull/560 [16.0][ADD] - stock_release_channel_shipment_advice #560
+odoo-addon-stock-release-channel-shipment-advice @ git+https://github.com/acsone/wms.git@16.0-stock_release_channel_shipment_advice-sbj#subdirectory=setup/stock_release_channel_shipment_advice
 
 # product-attribute
 # https://github.com/OCA/product-attribute/pull/1192
@@ -130,6 +132,8 @@ odoo-addon-attachment-s3 @ git+https://github.com/acsone/odoo-cloud-platform@16.
 # https://github.com/OCA/stock-logistics-transport/pull/87
 odoo-addon-stock-dock @ git+https://github.com/acsone/stock-logistics-transport.git@16.0-mig-shipment_advice-lmi#subdirectory=setup/stock_dock
 odoo-addon-shipment-advice @ git+https://github.com/acsone/stock-logistics-transport.git@16.0-mig-shipment_advice-lmi#subdirectory=setup/shipment_advice
+# https://github.com/OCA/stock-logistics-transport/pull/88
+odoo-addon-shipment-advice-planner @ git+https://github.com/acsone/stock-logistics-transport.git@16.0-shipment_advice_planner-sbj#subdirectory=setup/shipment_advice_planner
 
 # stock-logistics-availability
 # https://github.com/OCA/stock-logistics-availability/pull/6 - [16.0][ADD] stock_available_immediately_exclude_location
