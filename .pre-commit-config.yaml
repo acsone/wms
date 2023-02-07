@@ -1,8 +1,8 @@
-exclude:  |
+exclude: |
   (?x)
-  ^(?!odoo/)|
   .pot$|
   .po$|
+  ^.gitlab|
   # NOT INSTALLABLE ADDONS
   ^odoo/addons/account_invoice_email/|
   ^odoo/addons/account_invoice_sent/|
