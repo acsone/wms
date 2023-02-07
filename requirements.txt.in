@@ -28,7 +28,7 @@ odoo-addon-stock-available-to-promise-release @ git+https://github.com/acsone/wm
 # https://github.com/OCA/wms/pull/493
 odoo-addon-stock-release-channel @ git+https://github.com/acsone/wms.git@16.0-add-stock_release_channel_auto_release#subdirectory=setup/stock_release_channel
 # https://github.com/OCA/wms/pull/550
-odoo-addon-stock-release-channel-process-end-date @ git+https://github.com/acsone/wms.git@16.0-release_channel_date-dro#subdirectory=setup/stock_release_channel_process_end_date
+odoo-addon-stock-release-channel-process-end-time @ git+https://github.com/acsone/wms.git@16.0-release_channel_date-dro#subdirectory=setup/stock_release_channel_process_end_time
 # https://github.com/OCA/wms/pull/470
 odoo-addon-stock-storage-type @ git+https://github.com/acsone/wms.git@16.0-mig-stock_storage_type-dro#subdirectory=setup/stock_storage_type
 # https://github.com/OCA/wms/pull/508

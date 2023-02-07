@@ -42,7 +42,7 @@
         "stock_production_lot_expiry",
         "stock_release_channel",
         "stock_release_channel_auto_release",
-        "stock_release_channel_process_end_date",
+        "stock_release_channel_process_end_time",
     ],
     "data": [],
     "demo": [],
