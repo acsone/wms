@@ -15,7 +15,6 @@
         "delivery",
         "stock_picking_assignment",
         "stock_picking_backorder",
-        "stock_picking_subcode",
         "stock_picking_sequence",
         "stock_groupbypartner",
         # TODO: has been removed "partner_delivery",
