@@ -72,6 +72,7 @@ odoo-addon-sale-exception @ git+https://github.com/acsone/sale-workflow.git@5a6c
 odoo-addon-sale-procurement-customer @ git+https://github.com/acsone/sale-workflow.git@ef0c216f30a0fd7fd1fb0d782f8b9aaac3f7d487#subdirectory=setup/sale_procurement_customer
 odoo-addon-sale-stock-picking-blocking @ git+https://github.com/acsone/sale-workflow.git@0759ba05b37a5ce5a9da3131bd03e1cdabd3d7ef#subdirectory=setup/sale_stock_picking_blocking
 odoo-addon-sale-triple-discount==16.0.1.0.1.1
+odoo-addon-server-environment==16.0.1.0.1
 odoo-addon-session-db==16.0.1.0.2
 odoo-addon-shipment-advice @ git+https://github.com/acsone/stock-logistics-transport.git@654bd86571e1ccae1d07988bb47927364333cedc#subdirectory=setup/shipment_advice
 odoo-addon-stock-available==16.0.1.0.1.1
