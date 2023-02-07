@@ -275,19 +275,19 @@ msgstr "Réception Pharmacie"
 #. module: alc_reception_pharmacy
 #: model:ir.actions.act_window,name:alc_reception_pharmacy.reception_pharmacy_action
 msgid "Reception Pharmacy List"
-msgstr "Reception Pharmacy List"
+msgstr "Réceptions pharmacie"
 
 #. module: alc_reception_pharmacy
 #: code:addons/alc_reception_pharmacy/models/reception_pharmacy.py:69
 #, python-format
 msgid "Reception pharmacy : lines are validated in background"
-msgstr ""
+msgstr "Réception pharmacie: les lignes sont validées en arrière plan"
 
 #. module: alc_reception_pharmacy
 #: code:addons/alc_reception_pharmacy/models/reception_pharmacy.py:63
 #, fuzzy, python-format
 msgid "Reception pharmacy for %s"
-msgstr "Reception pharmacy id"
+msgstr "Reception pharmacie pour %s"
 
 #. module: alc_reception_pharmacy
 #: model:ir.model.fields,field_description:alc_reception_pharmacy.field_receive_pharmacy_products_reception_pharmacy_id
