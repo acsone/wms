@@ -229,6 +229,10 @@ export var PackagingQtyPicker = Vue.component("packaging-qty-picker", {
       }
       return "background-color: pink";
     },
+
+    unit_color: function() {
+      return "background-color:transparent; ";
+    },
   },
   template: `
 <div :class="[$options._componentTag, opts.mode ? 'mode-' + opts.mode : '']">
@@ -245,7 +249,7 @@ export var PackagingQtyPicker = Vue.component("packaging-qty-picker", {
                     <v-col cols="3" md="2" :class="readonly ? 'd-none' : ''">
                         <span class="qty-todo">/ {{ qty_todo }}</span>
                     </v-col>
-                    <v-col>
+                    <v-col :style="unit_color">
                         {{ unit_uom.name }}
                     </v-col>
                 </v-row>
