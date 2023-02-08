@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-import os
 import subprocess
 import sys
 
@@ -8,7 +7,13 @@ import click
 
 @click.command()
 @click.argument("modules")
-@click.option("--directory", "-d", type=click.Path(exists=True), required=True, default="odoo/addons")
+@click.option(
+    "--directory",
+    "-d",
+    type=click.Path(exists=True),
+    required=True,
+    default="odoo/addons",
+)
 @click.option("--init-version-name", default="10.0")
 @click.option("--target-version-name", default="16.0")
 @click.option("--format-patch", is_flag=True)

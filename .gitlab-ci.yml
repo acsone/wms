@@ -1,179 +1,133 @@
-stages:
-  - build
-  - test
-  - coverage
-  - deploy
-
-before_script:
-  - |
-    function start_ssh_agent {
-        eval $(ssh-agent -s)
-        ssh-add <(echo "$SSH_DEPLOY_KEY")
-        echo "${SSH_AGENT_PID}" > ssh-agent.pid
-    }
-    function makepot {
-        # if you use weblate, remove --msgmerge here and install the msgmerge addon on weblate
-        venv/bin/click-odoo-makepot -c odoo-ci.cfg -d ${DB_NAME} --commit --msgmerge --addons-dir=$(pwd)/odoo/addons
-        git push --push-option ci.skip "git@gitlab.acsone.eu:${CI_PROJECT_PATH}" "HEAD:${CI_COMMIT_REF_NAME}"
-    }
+# /!\ pin refs when project enters maintenance phase.
+include:
+  - project: acsone/gitlab-ci-templates
+    file: pre-commit.yml
+    ref: master
+  - project: acsone/gitlab-ci-templates
+    file: push-pot.yml
+    ref: master
+  - project: acsone/gitlab-ci-templates
+    file: build-publish-image-buildkit.yml
+    ref: master
+  - project: acsone/gitlab-ci-templates
+    file: python-coverage-report.yml
+    ref: master
 
 variables:
-  PYTHON: python3.10
+  TRIGRAM: alc
 
 pre-commit:
-  stage: test
-  image: python:3.10
+  extends: .pre-commit
   variables:
-    PRE_COMMIT_HOME: ${CI_PROJECT_DIR}/.cache/pre-commit
-  cache:
-    key: pre-commit
-    paths:
-      - ${PRE_COMMIT_HOME}
-  script:
-    - pip install pre-commit
-    - pre-commit run --all-files --show-diff-on-failure
-  needs: []
-  interruptible: true
-
-build:
-  stage: build
-  image: ghcr.io/acsone/odoo-ci-image:v20220907.0
-  tags:
-    - pip-cache
-  script:
-    - start_ssh_agent
-    - virtualenv --python=$PYTHON venv && source venv/bin/activate
-    # install pinned build dependencies
-    - pip install "--only-binary=:all:" -r requirements-build.txt
-    # download/build all dependencies, with --no-build-isolation,
-    # to use the pinned build deps we just installed
-    - |
-      for group in '' '-test' '-build' ; do
-          pip wheel --no-build-isolation --use-pep517 --wheel-dir=./release${group} -r requirements${group}.txt
-      done
-  artifacts:
-    expire_in: 1 week
-    paths:
-      - release*/
-    name: "${CI_PROJECT_NAME}-${CI_JOB_ID}-build"
-  interruptible: true
+    ACIT_PYTHON_IMAGE: "python:3.10"
 
 .test_common:
-  stage: test
-  tags:
-    - speedy
-    - postgres
-  image: ghcr.io/acsone/odoo-ci-image:v20220907.0
-  needs:
-    - job: build
-      artifacts: true
+  variables:
+    FF_KUBERNETES_HONOR_ENTRYPOINT: 1 # we want the odoo-bedrock image entrypoint to run
+    NOGOSU: 1 # In order to run test as root. So pip install -e . can write to the venv
+    DB_HOST: $PGHOST
+    DB_USER: $PGUSER
+    DB_PASSWORD: $PGPASSWORD
+    DB_NAME: "${CI_PROJECT_NAME}-${CI_JOB_ID}"
+  image: ${CI_REGISTRY_IMAGE}/dependencies:${CI_COMMIT_SHA}
   interruptible: true
-  artifacts:
-    expire_in: 1 day
-    paths:
-      - .coverage.*
-    name: "${CI_PROJECT_NAME}-${CI_JOB_ID}-coverage"
+  needs:
+    - job: build-dependencies-image
 
 license_check:
   extends: .test_common
+  tags:
+    - generic
   script:
-    - virtualenv --python=$PYTHON venv && source venv/bin/activate
-    - pip install --no-deps --no-index ./release/*.whl
     - manifestoo -d odoo/addons check-licenses
 
 dev_status_check:
   extends: .test_common
+  tags:
+    - generic
   script:
-    - virtualenv --python=$PYTHON venv && source venv/bin/activate
-    - pip install --no-deps --no-index ./release/*.whl
     - manifestoo -d odoo/addons check-dev-status --default-dev-status=Beta
 
 test:
   extends: .test_common
-  variables:
-    DB_NAME: "${CI_PROJECT_NAME}-${CI_JOB_ID}"
+  tags:
+    - postgres
+    - speedy
   script:
-    - pipx install acsoo  # for checklog
-    - virtualenv --python=$PYTHON venv && source venv/bin/activate
-    # use --no-index so missing dependencies that would not be in *.whl are detected
-    # install the project in editable mode (-e) so coverage sees it
-    - pip install --no-index --find-links=./release  --find-links=./release-build  --find-links=./release-test -e .[test]
+    - pip install -e .
+    - python -m venv /tmp/acsoo-env && /tmp/acsoo-env/bin/pip install acsoo
     - ADDONS_INIT=$(manifestoo -d odoo/addons list-depends --separator=,)
     - echo Installing dependent addons ${ADDONS_INIT}
-    - unbuffer click-odoo-initdb -c odoo-ci.cfg --new-database ${DB_NAME} --cache-prefix alc -m ${ADDONS_INIT} | acsoo checklog
+    - unbuffer click-odoo-initdb -c odoo-ci.cfg --new-database ${DB_NAME} --cache-prefix $TRIGRAM -m ${ADDONS_INIT} | /tmp/acsoo-env/bin/acsoo checklog
     - ADDONS_TEST=$(manifestoo -d odoo/addons list --separator=,)
     - PYTEST_ADDONS_TEST=$(sed -E 's;([^,]+)(,|$);odoo/addons/\1 ;g' <<< $ADDONS_TEST)
     - echo Installing ${ADDONS_TEST}
-    - unbuffer odoo -c odoo-ci.cfg -d ${DB_NAME} --stop-after-init -i ${ADDONS_TEST} | acsoo checklog
+    - unbuffer odoo -c odoo-ci.cfg -d ${DB_NAME} --stop-after-init -i ${ADDONS_TEST} | /tmp/acsoo-env/bin/acsoo checklog
     - echo Testing ${PYTEST_ADDONS_TEST}
     - unbuffer coverage run -m pytest --color=yes -v --odoo-config=odoo-ci.cfg --odoo-database=${DB_NAME} ${PYTEST_ADDONS_TEST}
-
+    - if [ "${CI_COMMIT_REF_NAME}" = "master" ] ; then click-odoo-makepot -c odoo-ci.cfg -d ${DB_NAME} --msgmerge --addons-dir=odoo/addons ; fi
   after_script:
     - dropdb --if-exists ${DB_NAME}
-
-coverage-report:
-  stage: coverage
-  image: python:3.10
-  script:
-    - pip install $(grep coverage requirements-test.txt)
-    - coverage combine
-    - coverage html --skip-empty --show-contexts
-    - coverage xml
-    - coverage report --skip-empty
-  coverage: '/TOTAL\s+\d+\s+\d+\s+\d+\s+\d+\s+(\d+\%)/'
   artifacts:
     expire_in: 1 week
     paths:
-      - htmlcov/
-      - coverage.xml
-    name: "${CI_PROJECT_NAME}-${CI_JOB_ID}-coverage-html"
-    reports:
-      coverage_report:
-        coverage_format: cobertura
-        path: coverage.xml
+      - odoo/addons/**/*.pot
+      - .coverage.*
+
+coverage:
+  extends: .python-coverage-report
   needs:
-  - job: test
-    artifacts: true
+    - job: test
+      artifacts: true
+
+push-pot:
+  extends: .push-pot
+  variables:
+    ACIT_SSH_KEY: $SSH_DEPLOY_KEY
+  needs:
+    - job: test
+      artifacts: true
 
 # build container images
 
-.build-and-publish-image:
-  image: quay.io/podman/stable:v4.2
-  before_script: []
-  script:
-    - podman login ${CI_REGISTRY_IMAGE} -u "${CI_REGISTRY_USER}" -p "${CI_REGISTRY_PASSWORD}"
-    - | 
-      podman build \
-        --cache-from ${CI_REGISTRY_IMAGE}/cache \
-        --cache-to ${CI_REGISTRY_IMAGE}/cache \
-        --tag ${CI_REGISTRY_IMAGE}${IMAGE_FLAVOR}:${CI_COMMIT_REF_NAME} \
-        --build-context release=./release \
-        --build-context release-build=./release-build \
-        .
-    - podman push ${CI_REGISTRY_IMAGE}${IMAGE_FLAVOR}:${CI_COMMIT_REF_NAME}
-  needs:
-    - job: build
-      artifacts: true
+.build-publish-image:
+  extends: .build-publish-image-buildkit
+  variables:
+    ACIT_SSH_KEY: $SSH_DEPLOY_KEY
 
-build-image:
-  extends: .build-and-publish-image
-  allow_failure: false
-  only:
-    - /^\d+\.\d+\.\d+$/
+build-dependencies-image:
+  extends: .build-publish-image
+  variables:
+    ACIT_IMAGE_BUILD_TARGET: dependencies
+    ACIT_IMAGE_FLAVOR: /dependencies
+    ACIT_IMAGE_TAG: $CI_COMMIT_SHA
 
 build-review-image:
-  extends: .build-and-publish-image
+  extends: .build-publish-image
   variables:
-    IMAGE_FLAVOR: /review
+    ACIT_IMAGE_FLAVOR: /review16
   only:
     - branches
   except:
     - master
+  needs:
+    - job: build-dependencies-image
   when: manual
+
+build-test-image:
+  extends: .build-publish-image
+  variables:
+    ACIT_IMAGE_FLAVOR: /test16
+  only:
+    - /^\d+\.\d+\.\d+$/
+  needs:
+    - job: build-dependencies-image
 
 # deployments
 
 .deploy-trigger:
+  tags:
+    - generic
   image: ghcr.io/acsone/deploy-tools
   script:
     - echo "triggering deploy of ${CI_REGISTRY_IMAGE}${IMAGE_FLAVOR}:${CI_COMMIT_REF_NAME} to ${CI_ENVIRONMENT_NAME}"
@@ -192,7 +146,7 @@ deploy-review-trigger:
   variables:
     DEPLOY_BRANCH: deploy-test
     DEPLOY_ENV: review16/${CI_COMMIT_REF_NAME}
-    IMAGE_FLAVOR: /review
+    IMAGE_FLAVOR: /review16
   needs:
     - job: build-review-image
   only:
@@ -204,10 +158,10 @@ deploy-test-trigger:
   extends: .deploy-trigger
   variables:
     DEPLOY_BRANCH: deploy-test
+    IMAGE_FLAVOR: /test16
   environment:
     name: test16
   needs:
-    - job: build-image
+    - job: build-test-image
   only:
     - /^\d+\.\d+\.\d+$/
-

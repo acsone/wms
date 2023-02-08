@@ -42,17 +42,18 @@ def is_not_installable_addon(addon_dir):
 
 
 def main(addons_dir):
-    """ Update pyproject.tom  [MYPY] exclude section with the list of
-        uninstallable addons. The section must begin with a line
-        containing '# MYPY NOT INSTALLABLE ADDONS' and end with a line
-        containing '# MYPY END NOT INSTALLABLE ADDONS'.
+    """Update pyproject.tom  [MYPY] exclude section with the list of.
+
+    uninstallable addons. The section must begin with a line
+    containing '# MYPY NOT INSTALLABLE ADDONS' and end with a line
+    containing '# MYPY END NOT INSTALLABLE ADDONS'.
     """
     not_installable_addons = []
     addons = os.listdir(addons_dir or ".")
     for addon in addons:
         addon_dir = os.path.join(addons_dir, addon)
         if is_not_installable_addon(addon_dir):
-            exclude_addon = "  '{addon_dir}/*'".format(addon_dir=addon_dir)
+            exclude_addon = f"  '{addon_dir}/*'"
             not_installable_addons.append(exclude_addon)
     not_installable_addons.sort()
     not_installable_addons_excluded = ",\n".join(not_installable_addons)
