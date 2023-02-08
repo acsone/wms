@@ -121,6 +121,8 @@ odoo-addon-stock-picking-low-priority @ git+https://github.com/acsone/stock-logi
 odoo-addon-stock-move-manage-priority @ git+https://github.com/acsone/stock-logistics-workflow.git@16.0-mig-stock_move_manage_priority-hda#subdirectory=setup/stock_move_manage_priority
 # https://github.com/OCA/stock-logistics-workflow/pull/1202
 odoo-addon-stock-move-propagate-first-move @ git+https://github.com/acsone/stock-logistics-workflow.git@16.0-stock_move_picking_type_origin-sbj#subdirectory=setup/stock_move_propagate_first_move
+# https://github.com/OCA/stock-logistics-workflow/pull/1214
+odoo-addon-stock-override-procurement @ git+https://github.com/acsone/stock-logistics-workflow.git@16.0-stock_override_procurement-sbj#subdirectory=setup/stock_override_procurement
 
 # server-tools
 # https://github.com/OCA/server-tools/pull/2533 - [16.0][MIG] base_sparse_field_list_support
