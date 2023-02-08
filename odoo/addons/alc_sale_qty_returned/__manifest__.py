@@ -11,5 +11,5 @@
     "website": "https://acsone.eu",
     "depends": ["sale_cancel_remaining"],
     "data": ["views/sale_order.xml", "views/sale_order_line.xml"],
-    "demo": [],
+    "pre_init_hook": "pre_init_hook",
 }
