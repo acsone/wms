@@ -104,8 +104,8 @@ class ReceptionPharmacyLine(models.Model):
             rec.reception_move_id = move.create(
                 {
                     "name": "Pharmacy",
-                    "product_id": self.product_id.id,
-                    "product_uom": self.product_id.uom_id.id,
+                    "product_id": rec.product_id.id,
+                    "product_uom": rec.product_id.uom_id.id,
                     "restrict_lot_id": rec.lot_id.id,
                     "product_uom_qty": rec.product_qty,
                     "location_id": loc_supplier.id,
