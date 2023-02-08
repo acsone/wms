@@ -18,13 +18,30 @@ Initialize virtualenv
 Install everything
 ------------------
 
-In an activated python 3.6 virtualenv, run::
+Some dependencies are not available on Pypi as manylinux wheels, so you need
+to have a C compiler,the Python headers and some additional dev
+packages installed in order to compile them. The list of packages can be
+found in the `Dockerfile <https://gitlab.acsone.eu/acsone/odoo-alcyon/
+-/blob/master/Dockerfile#L32-38>`_
+
+As an alternative, you can reference the wheelhouse from ACSONE in the pip
+environment variable before launching the pip-df command::
+
+   export PIP_FIND_LINKS=https://wheelhouse.acsone.eu/manylinux1
+
+In an activated python 3.10 virtualenv, run::
 
    pip-df sync
 
 When dependencies change, use ``pip-df sync`` again, possibly with
 ``--update``. Add unmerged VCS dependencies in ``requirements.txt.in``. See the
 pip-deepfreeze documentation for more information.
+
+
+If you need to install the test and development dependencies, run::
+
+   pip-df sync -x test,dev
+
 
 Run
 ---
