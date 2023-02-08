@@ -35,7 +35,7 @@ odoo-addon-stock-picking-group-by-partner-by-carrier-by-customer @ git+https://g
 odoo-addon-stock-picking-low-priority @ git+https://github.com/acsone/stock-logistics-workflow.git@d9e6c0614b1e618574695378dcf1fff8abbee5b3#subdirectory=setup/stock_picking_low_priority
 odoo-addon-stock-picking-start==16.0.1.0.1
 odoo-addon-stock-picking-type-shipping-policy @ git+https://github.com/acsone/wms.git@12dbcd20834849758e681098005f9386cb2c22a6#subdirectory=setup/stock_picking_type_shipping_policy
-odoo-addon-stock-picking-volume @ git+https://github.com/OCA/stock-logistics-warehouse.git@f1e1713b5459218fef5749cf29e5031f75792c69#subdirectory=setup/stock_picking_volume
+odoo-addon-stock-picking-volume @ git+https://github.com/OCA/stock-logistics-warehouse.git@3a6bf112dcbfc1e138dfe10515d124fc5ddb9b5f#subdirectory=setup/stock_picking_volume
 odoo-addon-stock-procurement-customer @ git+https://github.com/acsone/stock-logistics-workflow.git@e142a70dd6da183ccff6ca5374c1e445882fc376#subdirectory=setup/stock_procurement_customer
 odoo-addon-stock-production-lot-expired-date @ git+https://github.com/acsone/product-attribute.git@d76d655034abd4070b6e96debf60597903429dd7#subdirectory=setup/stock_production_lot_expired_date
 odoo-addon-stock-production-lot-expiry @ git+https://github.com/acsone/product-attribute.git@d1d1d4bc64d8464c621b0a5823ff43fd3ee03406#subdirectory=setup/stock_production_lot_expiry
@@ -44,6 +44,7 @@ odoo-addon-stock-quant-package-dimension==16.0.1.0.0.2
 odoo-addon-stock-quant-package-product-packaging==16.0.1.0.1
 odoo-addon-stock-release-channel @ git+https://github.com/acsone/wms.git@0c9450759aca70988281e4577ffbb5082bae4c8f#subdirectory=setup/stock_release_channel
 odoo-addon-stock-release-channel-auto-release @ git+https://github.com/acsone/wms.git@6f9f6b2c3df46ef24cbd46c4403e6853c52cd55b#subdirectory=setup/stock_release_channel_auto_release
+odoo-addon-stock-release-channel-process-end-time @ git+https://github.com/acsone/wms.git@ca9239c28aef13f884bfae39bb30789d347d4ecd#subdirectory=setup/stock_release_channel_process_end_time
 odoo-addon-stock-route-mto @ git+https://github.com/acsone/stock-logistics-warehouse.git@3acb2ea38a2cac932a01fe6284b80feeae695ce0#subdirectory=setup/stock_route_mto
 odoo-addon-stock-storage-type @ git+https://github.com/acsone/wms.git@fd484bfeb2110f1dbcaec071acab1a41dc57d935#subdirectory=setup/stock_storage_type
 odoo-addon-stock-storage-type-putaway-abc @ git+https://github.com/acsone/wms.git@2cca4a20b17686fe5cfee096215035b9fdef3e09#subdirectory=setup/stock_storage_type_putaway_abc
