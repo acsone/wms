@@ -1,17 +1,30 @@
 # Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import models
+from odoo import api, fields, models
 
 
 class DeliveryCarrier(models.Model):
 
     _name = "delivery.carrier"
     _inherit = ["delivery.carrier", "server.env.mixin"]
+    _server_env_section_name_field = "env_section_name"
 
     _sql_constraints = [  # we cannot really put the constraint on the name...
         ("name_uniq", "unique(product_id)", "Carrier name must be unique."),
     ]
+
+    env_section_name = fields.Char(
+        string="Environment Section Name",
+        help="Name of the section in the server environment configuration "
+        "file that contains the configuration for this carrier account.",
+        compute="_compute_env_section_name",
+    )
+
+    @api.depends("name")
+    def _compute_env_section_name(self):
+        for rec in self:
+            rec.env_section_name = rec.name.replace(" ", "_")
 
     @property
     def _server_env_fields(self):
