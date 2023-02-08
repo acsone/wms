@@ -1,10 +1,8 @@
---find-links https://wheelhouse.acsone.eu/manylinux2014
-
 # odoo
--r https://raw.githubusercontent.com/odoo/odoo/master/requirements.txt
 odoo @ git+https://github.com/acsone/odoo.git@16.0-alc_master
 odoo-addons-enterprise @ git+ssh://git@github.com/acsone/enterprise.git@16.0-alc_master
-
+werkzeug<2.1
+pypdf2<2
 
 # account-invoicing
 # https://github.com/OCA/account-invoicing/pull/1364 - [16.0][ADD] account_tax_one_vat

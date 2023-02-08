@@ -35,6 +35,7 @@ RUN set -e \
        python3.10-dev \
        build-essential \
        libpq-dev \
+       libcups2-dev \
   && apt -y clean \
   && rm -rf /var/lib/apt/lists/*
 
