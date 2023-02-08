@@ -27,6 +27,8 @@ odoo-addon-delivery-package-number-theoretical @ git+https://github.com/acsone/d
 odoo-addon-stock-available-to-promise-release @ git+https://github.com/acsone/wms.git@16.0-add-stock_release_channel_auto_release#subdirectory=setup/stock_available_to_promise_release
 # https://github.com/OCA/wms/pull/493
 odoo-addon-stock-release-channel @ git+https://github.com/acsone/wms.git@16.0-add-stock_release_channel_auto_release#subdirectory=setup/stock_release_channel
+# https://github.com/OCA/wms/pull/550
+odoo-addon-stock-release-channel-process-end-time @ git+https://github.com/acsone/wms.git@16.0-release_channel_date-dro#subdirectory=setup/stock_release_channel_process_end_time
 # https://github.com/OCA/wms/pull/470
 odoo-addon-stock-storage-type @ git+https://github.com/acsone/wms.git@16.0-mig-stock_storage_type-dro#subdirectory=setup/stock_storage_type
 # https://github.com/OCA/wms/pull/508
@@ -141,3 +143,5 @@ odoo-addon-stock-available-immediately-exclude-location @ git+https://github.com
 # partner-contact
 # https://github.com/OCA/partner-contact/pull/1453
 odoo-addon-base-partner-sequence @ git+https://github.com/ursais/partner-contact@16_mig_base_partner_sequence#subdirectory=setup/base_partner_sequence
+# https://github.com/OCA/partner-contact/pull/1464
+odoo-addon-partner-tz @ git+https://github.com/acsone/partner-contact@16.0-mig-partner-tz-dro#subdirectory=setup/partner_tz

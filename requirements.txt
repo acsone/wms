@@ -55,6 +55,7 @@ odoo-addon-delivery-carrier-max-weight-constraint @ git+https://github.com/acson
 odoo-addon-delivery-package-number-theoretical @ git+https://github.com/acsone/delivery-carrier.git@88acd6b0c189b60a5aa151a93f4faf0ab6fc1325#subdirectory=setup/delivery_package_number_theoretical
 odoo-addon-delivery-package-type-number-parcels==16.0.1.0.1
 odoo-addon-delivery-procurement-group-carrier @ git+https://github.com/acsone/stock-logistics-workflow.git@d60c1524c95caa5b293c89b89a33950a4ce844ad#subdirectory=setup/delivery_procurement_group_carrier
+odoo-addon-partner-tz @ git+https://github.com/acsone/partner-contact@70915afa6bf0beae725d1998bd0d600b6dffd2b7#subdirectory=setup/partner_tz
 odoo-addon-product-abc-classification @ git+https://github.com/acsone/product-attribute.git@cc97df93b3f97e947c2ed38cc6232c0a642f65e1#subdirectory=setup/product_abc_classification
 odoo-addon-product-abc-classification-sale-stock @ git+https://github.com/acsone/product-attribute.git@f9690a9c1f19ece371effeb200a417e96fddb158#subdirectory=setup/product_abc_classification_sale_stock
 odoo-addon-product-dimension==16.0.1.1.0.1
@@ -113,6 +114,7 @@ odoo-addon-stock-quant-package-dimension==16.0.1.0.0.2
 odoo-addon-stock-quant-package-product-packaging==16.0.1.0.1
 odoo-addon-stock-release-channel @ git+https://github.com/acsone/wms.git@0c9450759aca70988281e4577ffbb5082bae4c8f#subdirectory=setup/stock_release_channel
 odoo-addon-stock-release-channel-auto-release @ git+https://github.com/acsone/wms.git@6f9f6b2c3df46ef24cbd46c4403e6853c52cd55b#subdirectory=setup/stock_release_channel_auto_release
+odoo-addon-stock-release-channel-process-end-time @ git+https://github.com/acsone/wms.git@ca9239c28aef13f884bfae39bb30789d347d4ecd#subdirectory=setup/stock_release_channel_process_end_time
 odoo-addon-stock-route-mto @ git+https://github.com/acsone/stock-logistics-warehouse.git@3acb2ea38a2cac932a01fe6284b80feeae695ce0#subdirectory=setup/stock_route_mto
 odoo-addon-stock-storage-type @ git+https://github.com/acsone/wms.git@fd484bfeb2110f1dbcaec071acab1a41dc57d935#subdirectory=setup/stock_storage_type
 odoo-addon-stock-storage-type-putaway-abc @ git+https://github.com/acsone/wms.git@2cca4a20b17686fe5cfee096215035b9fdef3e09#subdirectory=setup/stock_storage_type_putaway_abc
