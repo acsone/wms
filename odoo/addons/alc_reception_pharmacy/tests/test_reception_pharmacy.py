@@ -11,7 +11,13 @@ class TestReceptionPharmacy(CommonReceptionPharmacyCase):
     @classmethod
     def setUpClass(cls):
         super(TestReceptionPharmacy, cls).setUpClass()
+        cls.env = cls.env(
+            context=dict(
+                cls.env.context, test_queue_job_no_delay=True, mail_notrack=True
+            )
+        )
         cls.wizard = cls.env["receive.pharmacy.products"]
+        cls.bin2 = cls.env["stock.location"].create({"name": "Test unit 2"})
         Printer = cls.env["printing.printer"].sudo()
         Printer.search([]).unlink()
         printer_server = (
@@ -123,3 +129,43 @@ class TestReceptionPharmacy(CommonReceptionPharmacyCase):
 
         pickings = self._validate_reception_and_return_picking(reception)
         self.assertFalse(pickings.mapped("delivery_round_id"))
+
+    def test_several_reception_for_one_customer(self):
+        reception = self.ReceptionPharmacy.create({"product_id": self.product.id})
+        wiz = self.wizard.create(
+            {
+                "reception_pharmacy_id": reception.id,
+                "customer_id": self.partner.id,
+                "bin_id": self.bin.id,
+                "product_qty": 1,
+            }
+        )
+
+        with mock.patch.object(
+            self.env["reception.pharmacy.line"].__class__,
+            "print_reception_pharmacy_label",
+        ):
+            wiz.validate_reception()
+        wiz = self.wizard.create(
+            {
+                "reception_pharmacy_id": reception.id,
+                "customer_id": self.partner.id,
+                "bin_id": self.bin2.id,
+                "product_qty": 1,
+            }
+        )
+        with mock.patch.object(
+            self.env["reception.pharmacy.line"].__class__,
+            "print_reception_pharmacy_label",
+        ):
+            wiz.validate_reception()
+        pharmacy_lines = self.env["reception.pharmacy.line"].search(
+            [("wizard_id", "=", reception.id)]
+        )
+        self.assertEqual(len(pharmacy_lines), 2)
+        self.assertEqual(pharmacy_lines.mapped("customer_id"), self.partner)
+        pickings = self._validate_reception_and_return_picking(reception)
+
+        self.assertEqual(len(pickings), 2)
+        self.assertEqual(reception.state, "done")
+        self.assertEqual(reception.line_ids.mapped("state"), ["done", "done"])
