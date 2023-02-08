@@ -164,8 +164,8 @@ class ReceptionPharmacyLine(models.Model):
         proc_order = self.env["procurement.order"]
         proc_order_vals = {
             "name": "Pharmacy",
-            "product_id": self.product_id.id,
-            "product_uom": self.product_id.uom_id.id,
+            "product_id": line.product_id.id,
+            "product_uom": line.product_id.uom_id.id,
             "product_qty": line.product_qty,
             "warehouse_id": warehouse_id,
             "location_id": loc_customer_id,
