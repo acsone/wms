@@ -20,6 +20,7 @@
         "product_price_category",
         "sale_exception",
         "sale_stock_picking_blocking",
+        "sale_cancel_remaining",
         # OCA/product-attribute
         "product_manufacturer",
         # ALC
@@ -38,5 +39,9 @@
         "alc_sale_suite_name",
         "alc_supplier_promotion",
         "alc_supplier_promotion_sale",
+        "alc_sale_cancel_remaining_check",
+        "alc_sale_order_line_unavailable_list",
+        "alc_sale_qty_returned",
+        "alc_sale_qty_returned_product_additional",
     ],
 }
