@@ -133,6 +133,10 @@ odoo-addon-base-attachment-object-storage @ git+https://github.com/acsone/odoo-c
 # https://github.com/camptocamp/odoo-cloud-platform/pull/394
 odoo-addon-attachment-s3 @ git+https://github.com/acsone/odoo-cloud-platform@16.0-mig-s3-lmi#subdirectory=setup/attachment_s3
 
+# stock-logistics-tracking
+# https://github.com/OCA/stock-logistics-tracking/pull/34
+odoo-addon-internal-stock-quant-package @ git+https://github.com/acsone/stock-logistics-tracking.git@16.0-add-internal_stock_quant_package-hda#subdirectory=setup/internal_stock_quant_package
+
 # stock-logistics-transport
 # https://github.com/OCA/stock-logistics-transport/pull/87
 odoo-addon-stock-dock @ git+https://github.com/acsone/stock-logistics-transport.git@16.0-mig-shipment_advice-lmi#subdirectory=setup/stock_dock

@@ -2,6 +2,7 @@
 # from requirements.txt, requirements-test.txt.
 # Do not edit.
 odoo-addon-delivery-procurement-group-carrier @ git+https://github.com/acsone/stock-logistics-workflow.git@d60c1524c95caa5b293c89b89a33950a4ce844ad#subdirectory=setup/delivery_procurement_group_carrier
+odoo-addon-internal-stock-quant-package @ git+https://github.com/acsone/stock-logistics-tracking.git@472c75e7e027e74ae582628faf89ae1a30b13d7e#subdirectory=setup/internal_stock_quant_package
 odoo-addon-product-abc-classification-sale-stock @ git+https://github.com/acsone/product-attribute.git@f9690a9c1f19ece371effeb200a417e96fddb158#subdirectory=setup/product_abc_classification_sale_stock
 odoo-addon-purchase-stock-packaging @ git+https://github.com/acsone/purchase-workflow.git@02adbbcaf2c174f3cbfadc74e0b477bddb1886bf#subdirectory=setup/purchase_stock_packaging
 odoo-addon-sale-stock-picking-blocking @ git+https://github.com/acsone/sale-workflow.git@0759ba05b37a5ce5a9da3131bd03e1cdabd3d7ef#subdirectory=setup/sale_stock_picking_blocking

@@ -9,7 +9,10 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["stock_groupbypartner", "alc_internal_stock_quant_package"],
+    "depends": [
+        "stock_groupbypartner",
+        # has been replaced by internal_stock_quant_package "alc_internal_stock_quant_package",
+    ],
     "data": [],
     "demo": [],
     "installable": False,
