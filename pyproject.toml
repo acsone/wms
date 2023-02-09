@@ -333,7 +333,6 @@ exclude = [
   'odoo/addons/authenticated_partner_mixin/*',
   'odoo/addons/base_cached_xmlid/*',
   'odoo/addons/connector_esb/*',
-  'odoo/addons/delivery_carrier_label_gls_server_env/*',
   'odoo/addons/delivery_rounds/*',
   'odoo/addons/delivery_rounds_alcyon/*',
   'odoo/addons/delivery_rounds_refill/*',

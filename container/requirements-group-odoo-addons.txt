@@ -36,4 +36,5 @@ odoo-addon-sale-cancel-remaining @ git+https://github.com/acsone/sale-workflow.g
 odoo-addon-sale-exception @ git+https://github.com/acsone/sale-workflow.git@5a6c9d98f8e45570b510ed8369e0af6ba8ac8c2e#subdirectory=setup/sale_exception
 odoo-addon-sale-procurement-customer @ git+https://github.com/acsone/sale-workflow.git@ef0c216f30a0fd7fd1fb0d782f8b9aaac3f7d487#subdirectory=setup/sale_procurement_customer
 odoo-addon-sale-triple-discount==16.0.1.0.1.1
+odoo-addon-server-environment==16.0.1.0.1
 odoo-addon-session-db==16.0.1.0.2

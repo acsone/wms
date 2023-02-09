@@ -21,6 +21,7 @@ def migrate(cr, version):
         "alc_stock_quant_package_delivery",
         "alc_stock_quant_package_nbr",
         "alc_stock_storage_type_fixed_location",
+        "delivery_carrier_label_gls_server_env",
         "partner_delivery",
         "partner_helper",
         "product_packaging_barcode",
