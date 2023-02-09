@@ -1,0 +1,183 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* alc_product_animal_species
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-02-09 18:30+0000\n"
+"PO-Revision-Date: 2023-02-09 18:30+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_product_animal_species
+#: model:animal.species,name:alc_product_animal_species.all
+msgid "All"
+msgstr "Tous"
+
+#. module: alc_product_animal_species
+#: model:ir.model,name:alc_product_animal_species.model_animal_species
+msgid "Animal Species"
+msgstr "Espèce animale"
+
+#. module: alc_product_animal_species
+#: model:animal.species,name:alc_product_animal_species.bee
+msgid "Bee"
+msgstr "Abeille"
+
+#. module: alc_product_animal_species
+#: model:animal.species,name:alc_product_animal_species.bird
+msgid "Bird"
+msgstr "Oiseau"
+
+#. module: alc_product_animal_species
+#: model:animal.species,name:alc_product_animal_species.cat
+msgid "Cat"
+msgstr "Chat"
+
+#. module: alc_product_animal_species
+#: model:animal.species,name:alc_product_animal_species.cattle
+msgid "Cattle"
+msgstr "Bovin"
+
+#. module: alc_product_animal_species
+#: model:animal.species,name:alc_product_animal_species.chinchilla
+msgid "Chinchilla"
+msgstr ""
+
+#. module: alc_product_animal_species
+#: model:ir.model.fields,field_description:alc_product_animal_species.field_animal_species__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: alc_product_animal_species
+#: model:ir.model.fields,field_description:alc_product_animal_species.field_animal_species__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: alc_product_animal_species
+#: model:ir.model.fields,field_description:alc_product_animal_species.field_animal_species__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: alc_product_animal_species
+#: model:animal.species,name:alc_product_animal_species.dog
+msgid "Dog"
+msgstr "Chien"
+
+#. module: alc_product_animal_species
+#: model:animal.species,name:alc_product_animal_species.ferret
+msgid "Ferret"
+msgstr "Furet"
+
+#. module: alc_product_animal_species
+#: model:animal.species,name:alc_product_animal_species.goat
+msgid "Goat"
+msgstr "Caprin"
+
+#. module: alc_product_animal_species
+#: model:animal.species,name:alc_product_animal_species.guinea_pig
+msgid "Guinea pig"
+msgstr "Cobaye"
+
+#. module: alc_product_animal_species
+#: model:animal.species,name:alc_product_animal_species.horse
+msgid "Horse"
+msgstr "Cheval"
+
+#. module: alc_product_animal_species
+#: model:ir.model.fields,field_description:alc_product_animal_species.field_animal_species__id
+msgid "ID"
+msgstr ""
+
+#. module: alc_product_animal_species
+#: model:ir.model.fields,field_description:alc_product_animal_species.field_animal_species____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: alc_product_animal_species
+#: model:ir.model.fields,field_description:alc_product_animal_species.field_animal_species__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: alc_product_animal_species
+#: model:ir.model.fields,field_description:alc_product_animal_species.field_animal_species__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: alc_product_animal_species
+#: model:ir.model.fields,field_description:alc_product_animal_species.field_product_product__species_id
+#: model:ir.model.fields,field_description:alc_product_animal_species.field_product_template__species_id
+msgid "Main Species"
+msgstr ""
+
+#. module: alc_product_animal_species
+#: model:animal.species,name:alc_product_animal_species.mouse
+msgid "Mouse"
+msgstr "Souris"
+
+#. module: alc_product_animal_species
+#: model:ir.model.fields,field_description:alc_product_animal_species.field_animal_species__name
+msgid "Name"
+msgstr ""
+
+#. module: alc_product_animal_species
+#: model:animal.species,name:alc_product_animal_species.not_specified
+msgid "Not specified"
+msgstr "Non spécifié"
+
+#. module: alc_product_animal_species
+#: model:animal.species,name:alc_product_animal_species.other
+msgid "Other"
+msgstr "Autre"
+
+#. module: alc_product_animal_species
+#: model:animal.species,name:alc_product_animal_species.pig
+msgid "Pig"
+msgstr "Porc"
+
+#. module: alc_product_animal_species
+#: model:animal.species,name:alc_product_animal_species.pigeon
+msgid "Pigeon"
+msgstr ""
+
+#. module: alc_product_animal_species
+#: model:animal.species,name:alc_product_animal_species.poultry
+msgid "Poultry"
+msgstr "Volaille"
+
+#. module: alc_product_animal_species
+#: model:ir.model,name:alc_product_animal_species.model_product_template
+msgid "Product"
+msgstr "Modèle de produit"
+
+#. module: alc_product_animal_species
+#: model:animal.species,name:alc_product_animal_species.rabbit
+msgid "Rabbit"
+msgstr "Lapin"
+
+#. module: alc_product_animal_species
+#: model:animal.species,name:alc_product_animal_species.rat
+msgid "Rat"
+msgstr ""
+
+#. module: alc_product_animal_species
+#: model:animal.species,name:alc_product_animal_species.reptile
+msgid "Reptile"
+msgstr ""
+
+#. module: alc_product_animal_species
+#: model:animal.species,name:alc_product_animal_species.sheep
+msgid "Sheep"
+msgstr "Ovin"
+
+#. module: alc_product_animal_species
+#: model:ir.model.fields,field_description:alc_product_animal_species.field_product_product__species_ids
+#: model:ir.model.fields,field_description:alc_product_animal_species.field_product_template__species_ids
+msgid "Species"
+msgstr ""
