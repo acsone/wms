@@ -1,12 +1,14 @@
 # Copyright 2023 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import api, fields, models
+from odoo import api, fields
+
+from odoo.addons.delivery_carrier_account.models import carrier_account
+from odoo.addons.server_environment.models import server_env_mixin
 
 
-class CarrierAccount(models.Model):
+class CarrierAccount(carrier_account.CarrierAccount, server_env_mixin.ServerEnvMixin):
     _name = "carrier.account"
-    _inherit = ["carrier.account", "server.env.mixin"]
     _server_env_section_name_field = "env_section_name"
 
     env_section_name = fields.Char(

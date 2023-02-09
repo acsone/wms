@@ -1,13 +1,16 @@
 # Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import api, fields, models
+from odoo import api, fields
+
+from odoo.addons.delivery.models import delivery_carrier
+from odoo.addons.server_environment.models import server_env_mixin
 
 
-class DeliveryCarrier(models.Model):
-
+class DeliveryCarrier(
+    delivery_carrier.DeliveryCarrier, server_env_mixin.ServerEnvMixin
+):
     _name = "delivery.carrier"
-    _inherit = ["delivery.carrier", "server.env.mixin"]
     _server_env_section_name_field = "env_section_name"
 
     _sql_constraints = [  # we cannot really put the constraint on the name...
