@@ -288,7 +288,6 @@ exclude: |
   ^odoo/addons/product_last_transaction/|
   ^odoo/addons/product_price_import/|
   ^odoo/addons/purchase_prepaid/|
-  ^odoo/addons/purchase_unlink_cancelop/|
   ^odoo/addons/purchase_update_procurement_qty/|
   ^odoo/addons/sale_confirm_background/|
   ^odoo/addons/sale_delay/|
