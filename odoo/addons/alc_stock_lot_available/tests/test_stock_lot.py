@@ -1,25 +1,28 @@
-# -*- coding: utf-8 -*-
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo.tests.common import SavepointCase
+from odoo.tests.common import TransactionCase
 
 
-class TestStockProductionLot(SavepointCase):
+class TestStockLot(TransactionCase):
     # to avoid trouble with pre installed db where specific_zeste is installed
     at_install = False
     post_install = True
 
     @classmethod
     def setUpClass(cls):
-        super(TestStockProductionLot, cls).setUpClass()
+        super().setUpClass()
         # enable lot
         cls.env.user.write(
             {"groups_id": [(4, cls.env.ref("stock.group_production_lot").id)]}
         )
         # product
-        cls.prod1 = cls.env.ref("product.product_product_1")
-        cls.prod2 = cls.prod1.copy()
+        cls.prod1 = cls.env["product.product"].create(
+            {"name": "Product 1", "type": "product"}
+        )
+        cls.prod2 = cls.env["product.product"].create(
+            {"name": "Product 2", "type": "product"}
+        )
         # Warehouses
         cls.warehouse_1 = cls.env["stock.warehouse"].create(
             {"name": "Warehouse1", "code": "WH1"}
@@ -47,35 +50,52 @@ class TestStockProductionLot(SavepointCase):
         cls.env["stock.location"]._parent_store_compute()
 
         # Lots
-        StockProductionLot = cls.env["stock.production.lot"]
-        cls.prod1_lot1 = StockProductionLot.create(
-            {"name": "Prod 1 Lot 1", "product_id": cls.prod1.id}
-        )
-        cls.prod1_lot2 = StockProductionLot.create(
-            {"name": "Prod 1 Lot 2", "product_id": cls.prod1.id}
-        )
-        cls.prod2_lot1 = StockProductionLot.create(
-            {"name": "Prod 2 Lot 1", "product_id": cls.prod2.id}
-        )
-        cls.prod2_lot2 = StockProductionLot.create(
-            {"name": "Prod 1 Lot 1", "product_id": cls.prod2.id}
-        )
-        cls.StockInventory = cls.env["stock.inventory"]
-
-    def _add_lot_qty(self, prod_lot, qty, location):
-        inventory_wizard = self.env["stock.change.product.qty"].create(
+        StockLot = cls.env["stock.lot"]
+        company_id = cls.env.ref("base.main_company").id
+        cls.prod1_lot1 = StockLot.create(
             {
-                "product_id": prod_lot.product_id.id,
-                "new_quantity": qty,
-                "location_id": location.id,
-                "lot_id": prod_lot.id,
+                "name": "Prod 1 Lot 1",
+                "product_id": cls.prod1.id,
+                "company_id": company_id,
             }
         )
-        inventory_wizard.change_product_qty()
+        cls.prod1_lot2 = StockLot.create(
+            {
+                "name": "Prod 1 Lot 2",
+                "product_id": cls.prod1.id,
+                "company_id": company_id,
+            }
+        )
+        cls.prod2_lot1 = StockLot.create(
+            {
+                "name": "Prod 2 Lot 1",
+                "product_id": cls.prod2.id,
+                "company_id": company_id,
+            }
+        )
+        cls.prod2_lot2 = StockLot.create(
+            {
+                "name": "Prod 1 Lot 1",
+                "product_id": cls.prod2.id,
+                "company_id": company_id,
+            }
+        )
+
+    def _add_lot_qty(self, prod_lot, qty, location):
+        inventory_quant = self.env["stock.quant"].create(
+            {
+                "location_id": location.id,
+                "product_id": prod_lot.product_id.id,
+                "lot_id": prod_lot.id,
+                "inventory_quantity": qty,
+            }
+        )
+        inventory_quant.action_apply_inventory()
 
     def test_1(self):
         """
         Data:
+
             A product without stock (prod1)
         Test:
             1 Add qty 2  for lot1 in wh1
@@ -95,22 +115,27 @@ class TestStockProductionLot(SavepointCase):
         self.assertEqual(
             self.prod1_lot1.with_context(warehouse=self.warehouse_1.id).qty_available, 2
         )
+        self.prod1_lot1.invalidate_recordset()
         self.assertEqual(
             self.prod1_lot1.with_context(warehouse=self.warehouse_2.id).qty_available, 0
         )
         # 2
         self._add_lot_qty(self.prod1_lot1, 3, self.location_wh2_1)
+        self.prod1_lot1.invalidate_recordset()
         self.assertEqual(self.prod1_lot1.qty_available, 5)
+        self.prod1_lot1.invalidate_recordset()
         self.assertEqual(
             self.prod1_lot1.with_context(warehouse=self.warehouse_1.id).qty_available, 2
         )
+        self.prod1_lot1.invalidate_recordset()
         self.assertEqual(
             self.prod1_lot1.with_context(warehouse=self.warehouse_2.id).qty_available, 3
         )
 
     def test_2(self):
         """
-        Data
+        Data.
+
             A product without stock (prod1)
         Test:
             Add qty 2 for lot1 in customer location
@@ -121,6 +146,7 @@ class TestStockProductionLot(SavepointCase):
         self.assertEqual(self.prod1_lot1.qty_available, 0)
         self._add_lot_qty(self.prod1_lot1, 2, self.customer_location)
         self.assertEqual(self.prod1_lot1.qty_available, 0)
+        self.prod1_lot1.invalidate_recordset()
         self.assertEqual(
             self.prod1_lot1.with_context(
                 location=self.customer_location.id
@@ -130,7 +156,8 @@ class TestStockProductionLot(SavepointCase):
 
     def test_3(self):
         """
-        Data
+        Data.
+
             A product without stock (prod1)
         Test:
             Add qty for lot1 and lot2 into the same location
@@ -145,7 +172,8 @@ class TestStockProductionLot(SavepointCase):
 
     def test_4(self):
         """
-        Data
+        Data.
+
             2 products without stock
         Tests:
             Add qty for one lot by product into the same location
