@@ -152,7 +152,6 @@ exclude: |
   ^odoo/addons/alc_product_stock_state/|
   ^odoo/addons/alc_product_uom_updatable/|
   ^odoo/addons/alc_purchase_announced_delivery_date/|
-  ^odoo/addons/alc_purchase_order_cleaner/|
   ^odoo/addons/alc_purchase_order_import_ubl/|
   ^odoo/addons/alc_purchase_order_ubl/|
   ^odoo/addons/alc_pywebdriver/|
@@ -287,7 +286,6 @@ exclude: |
   ^odoo/addons/product_last_transaction/|
   ^odoo/addons/product_price_import/|
   ^odoo/addons/purchase_prepaid/|
-  ^odoo/addons/purchase_unlink_cancelop/|
   ^odoo/addons/purchase_update_procurement_qty/|
   ^odoo/addons/sale_confirm_background/|
   ^odoo/addons/sale_delay/|

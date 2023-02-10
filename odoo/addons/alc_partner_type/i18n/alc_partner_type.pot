@@ -6,8 +6,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-30 13:08+0000\n"
-"PO-Revision-Date: 2023-01-30 13:08+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -115,7 +113,7 @@ msgstr ""
 
 #. module: alc_partner_type
 #: model:ir.model,name:alc_partner_type.model_product_partner_type
-msgid "Type of customer for Alcyon business point of vue"
+msgid "Type of customer from Alcyon business point of vue"
 msgstr ""
 
 #. module: alc_partner_type

@@ -1,12 +1,12 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* alc_product_pharmacy
+# 	* alc_product_pharmacy
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0+e\n"
+"Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: <>\n"
+"Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -14,166 +14,122 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_product_pharmacy
-#: model:ir.model.fields,field_description:alc_product_pharmacy.field_delivery_carrier_code_amm
-#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_product_code_amm
-#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_template_code_amm
-#: model:ir.model.fields,field_description:alc_product_pharmacy.field_shopinvader_product_code_amm
-#: model:ir.model.fields,field_description:alc_product_pharmacy.field_shopinvader_variant_code_amm
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_product__code_amm
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_template__code_amm
 msgid "AMM Number"
 msgstr ""
 
 #. module: alc_product_pharmacy
-#: model:ir.model.fields,field_description:alc_product_pharmacy.field_delivery_carrier_is_vt_be
-#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_product_is_vt_be
-#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_template_is_vt_be
-#: model:ir.model.fields,field_description:alc_product_pharmacy.field_shopinvader_product_is_vt_be
-#: model:ir.model.fields,field_description:alc_product_pharmacy.field_shopinvader_variant_is_vt_be
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_product__is_vt_be
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_template__is_vt_be
 msgid "Belgian Veterinaries"
 msgstr ""
 
 #. module: alc_product_pharmacy
-#: model:ir.model.fields,field_description:alc_product_pharmacy.field_delivery_carrier_belgium_only
-#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_product_belgium_only
-#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_template_belgium_only
-#: model:ir.model.fields,field_description:alc_product_pharmacy.field_shopinvader_product_belgium_only
-#: model:ir.model.fields,field_description:alc_product_pharmacy.field_shopinvader_variant_belgium_only
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_product__belgium_only
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_template__belgium_only
 msgid "Belgium only"
 msgstr ""
 
 #. module: alc_product_pharmacy
-#: model:ir.model.fields,field_description:alc_product_pharmacy.field_delivery_carrier_cnk_code
-#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_product_cnk_code
-#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_template_cnk_code
-#: model:ir.model.fields,field_description:alc_product_pharmacy.field_shopinvader_product_cnk_code
-#: model:ir.model.fields,field_description:alc_product_pharmacy.field_shopinvader_variant_cnk_code
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_product__cnk_code
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_template__cnk_code
 msgid "CNK"
 msgstr ""
 
 #. module: alc_product_pharmacy
-#: model:ir.ui.view,arch_db:alc_product_pharmacy.product_template_search_view
+#: model_terms:ir.ui.view,arch_db:alc_product_pharmacy.product_template_search_view
 msgid "CNK code"
 msgstr ""
 
 #. module: alc_product_pharmacy
-#: model:ir.model.fields,field_description:alc_product_pharmacy.field_delivery_carrier_code_cti
-#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_product_code_cti
-#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_template_code_cti
-#: model:ir.model.fields,field_description:alc_product_pharmacy.field_shopinvader_product_code_cti
-#: model:ir.model.fields,field_description:alc_product_pharmacy.field_shopinvader_variant_code_cti
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_product__code_cti
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_template__code_cti
 msgid "Code CTI Extended"
 msgstr ""
 
 #. module: alc_product_pharmacy
-#: model:ir.model.fields,field_description:alc_product_pharmacy.field_delivery_carrier_is_equipment
-#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_product_is_equipment
-#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_template_is_equipment
-#: model:ir.model.fields,field_description:alc_product_pharmacy.field_shopinvader_product_is_equipment
-#: model:ir.model.fields,field_description:alc_product_pharmacy.field_shopinvader_variant_is_equipment
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_product__is_equipment
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_template__is_equipment
 msgid "Equipment"
 msgstr ""
 
 #. module: alc_product_pharmacy
-#: model:ir.model.fields,field_description:alc_product_pharmacy.field_delivery_carrier_is_food
-#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_product_is_food
-#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_template_is_food
-#: model:ir.model.fields,field_description:alc_product_pharmacy.field_shopinvader_product_is_food
-#: model:ir.model.fields,field_description:alc_product_pharmacy.field_shopinvader_variant_is_food
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_product__is_food
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_template__is_food
 msgid "Food"
 msgstr ""
 
 #. module: alc_product_pharmacy
-#: model:ir.model.fields,field_description:alc_product_pharmacy.field_delivery_carrier_is_human
-#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_product_is_human
-#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_template_is_human
-#: model:ir.model.fields,field_description:alc_product_pharmacy.field_shopinvader_product_is_human
-#: model:ir.model.fields,field_description:alc_product_pharmacy.field_shopinvader_variant_is_human
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_product__is_human
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_template__is_human
 msgid "Human"
 msgstr ""
 
 #. module: alc_product_pharmacy
-#: model:ir.model.fields,field_description:alc_product_pharmacy.field_delivery_carrier_is_import
-#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_product_is_import
-#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_template_is_import
-#: model:ir.model.fields,field_description:alc_product_pharmacy.field_shopinvader_product_is_import
-#: model:ir.model.fields,field_description:alc_product_pharmacy.field_shopinvader_variant_is_import
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_product__is_import
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_template__is_import
 msgid "Importation"
 msgstr ""
 
 #. module: alc_product_pharmacy
-#: model:ir.model.fields,field_description:alc_product_pharmacy.field_delivery_carrier_is_meds
-#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_product_is_meds
-#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_template_is_meds
-#: model:ir.model.fields,field_description:alc_product_pharmacy.field_shopinvader_product_is_meds
-#: model:ir.model.fields,field_description:alc_product_pharmacy.field_shopinvader_variant_is_meds
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_product__is_meds
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_template__is_meds
 msgid "Medicine"
 msgstr ""
 
 #. module: alc_product_pharmacy
-#: model:ir.model.fields,field_description:alc_product_pharmacy.field_delivery_carrier_is_narcotic_reg
-#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_product_is_narcotic_reg
-#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_template_is_narcotic_reg
-#: model:ir.model.fields,field_description:alc_product_pharmacy.field_shopinvader_product_is_narcotic_reg
-#: model:ir.model.fields,field_description:alc_product_pharmacy.field_shopinvader_variant_is_narcotic_reg
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_product__is_narcotic_reg
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_template__is_narcotic_reg
 msgid "Narcotics (Regular)"
 msgstr ""
 
 #. module: alc_product_pharmacy
-#: model:ir.model.fields,field_description:alc_product_pharmacy.field_delivery_carrier_is_narcotic_vet
-#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_product_is_narcotic_vet
-#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_template_is_narcotic_vet
-#: model:ir.model.fields,field_description:alc_product_pharmacy.field_shopinvader_product_is_narcotic_vet
-#: model:ir.model.fields,field_description:alc_product_pharmacy.field_shopinvader_variant_is_narcotic_vet
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_product__is_narcotic_vet
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_template__is_narcotic_vet
 msgid "Narcotics (Veterinary)"
 msgstr ""
 
 #. module: alc_product_pharmacy
-#: model:ir.model.fields,field_description:alc_product_pharmacy.field_delivery_carrier_is_pharmaceutical
-#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_product_is_pharmaceutical
-#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_template_is_pharmaceutical
-#: model:ir.model.fields,field_description:alc_product_pharmacy.field_shopinvader_product_is_pharmaceutical
-#: model:ir.model.fields,field_description:alc_product_pharmacy.field_shopinvader_variant_is_pharmaceutical
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_product__is_pharmaceutical
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_template__is_pharmaceutical
 msgid "Parapharmaceutical"
 msgstr ""
 
 #. module: alc_product_pharmacy
 #: model:ir.model,name:alc_product_pharmacy.model_product_template
-msgid "Product Template"
+msgid "Product"
 msgstr ""
 
 #. module: alc_product_pharmacy
-#: model:ir.ui.view,arch_db:alc_product_pharmacy.product_template_search_view
+#: model_terms:ir.ui.view,arch_db:alc_product_pharmacy.product_template_search_view
 msgid "Product without amm and belgian veterinary med or importation"
 msgstr ""
 
 #. module: alc_product_pharmacy
-#: model:ir.model.fields,field_description:alc_product_pharmacy.field_delivery_carrier_is_psychotropic
-#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_product_is_psychotropic
-#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_template_is_psychotropic
-#: model:ir.model.fields,field_description:alc_product_pharmacy.field_shopinvader_product_is_psychotropic
-#: model:ir.model.fields,field_description:alc_product_pharmacy.field_shopinvader_variant_is_psychotropic
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_product__is_psychotropic
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_template__is_psychotropic
 msgid "Psychotropic"
 msgstr ""
 
 #. module: alc_product_pharmacy
-#: code:addons/alc_product_pharmacy/models/product_template.py:68
-#: sql_constraint:product.template:0
+#. odoo-python
+#: code:addons/alc_product_pharmacy/models/product_template.py:0
+#: model:ir.model.constraint,message:alc_product_pharmacy.constraint_product_template_uniq_code_cti
 #, python-format
 msgid "This CTI extended code already exists."
 msgstr ""
 
 #. module: alc_product_pharmacy
-#: code:addons/alc_product_pharmacy/models/product_template.py:63
-#: sql_constraint:product.template:0
+#. odoo-python
+#: code:addons/alc_product_pharmacy/models/product_template.py:0
+#: model:ir.model.constraint,message:alc_product_pharmacy.constraint_product_template_uniq_cnk_code
 #, python-format
 msgid "This cnk_code already exists."
 msgstr ""
 
 #. module: alc_product_pharmacy
-#: model:ir.model.fields,field_description:alc_product_pharmacy.field_delivery_carrier_veterinary_only
-#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_product_veterinary_only
-#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_template_veterinary_only
-#: model:ir.model.fields,field_description:alc_product_pharmacy.field_shopinvader_product_veterinary_only
-#: model:ir.model.fields,field_description:alc_product_pharmacy.field_shopinvader_variant_veterinary_only
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_product__veterinary_only
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_template__veterinary_only
 msgid "Veterinary only"
 msgstr ""
-

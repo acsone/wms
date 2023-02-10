@@ -1,12 +1,12 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* alc_supplier_promotion
+# 	* alc_supplier_promotion
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0+e\n"
+"Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: <>\n"
+"Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -14,40 +14,129 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_supplier_promotion
-#: model:ir.model,name:alc_supplier_promotion.model_product_supplierinfo
-msgid "Information about a product vendor"
+#. odoo-python
+#: code:addons/alc_supplier_promotion/models/product_supplierinfo.py:0
+#: model:ir.model.constraint,message:alc_supplier_promotion.constraint_product_supplierinfo_valid_promotion_buyx_gety
+#, python-format
+msgid ""
+"A valid promotion on quantity must have both value higher than\n"
+"                 zero"
 msgstr ""
 
 #. module: alc_supplier_promotion
-#: model:ir.model.fields,field_description:alc_supplier_promotion.field_product_supplierinfo_is_promotion
-msgid "Is promotion"
+#: model_terms:ir.ui.view,arch_db:alc_supplier_promotion.product_supplierinfo_form_view
+msgid "For"
 msgstr ""
 
 #. module: alc_supplier_promotion
-#: model:ir.model.fields,field_description:alc_supplier_promotion.field_product_supplierinfo_is_sale_discount
-msgid "Is sale discount"
+#. odoo-python
+#: code:addons/alc_supplier_promotion/models/product_supplierinfo.py:0
+#, python-format
+msgid ""
+"For %(ratio_main_product)s products, %(ratio_promotional_product)s free"
+msgstr ""
+
+#. module: alc_supplier_promotion
+#: model:ir.model.fields,field_description:alc_supplier_promotion.field_product_supplierinfo__is_future
+msgid "Is Future"
+msgstr ""
+
+#. module: alc_supplier_promotion
+#: model:ir.model.fields,field_description:alc_supplier_promotion.field_product_supplierinfo__is_past
+msgid "Is Past"
+msgstr ""
+
+#. module: alc_supplier_promotion
+#: model:ir.model.fields,field_description:alc_supplier_promotion.field_product_supplierinfo__is_promotion
+msgid "Is Promotion"
+msgstr ""
+
+#. module: alc_supplier_promotion
+#: model:ir.model.fields,field_description:alc_supplier_promotion.field_product_supplierinfo__is_sale_discount
+msgid "Is Sale Discount"
 msgstr ""
 
 #. module: alc_supplier_promotion
 #: model:ir.model,name:alc_supplier_promotion.model_product_template
-msgid "Product Template"
+msgid "Product"
 msgstr ""
 
 #. module: alc_supplier_promotion
-#: model:ir.model.fields,field_description:alc_supplier_promotion.field_delivery_carrier_supplier_discount_ids
-#: model:ir.model.fields,field_description:alc_supplier_promotion.field_product_product_supplier_discount_ids
-#: model:ir.model.fields,field_description:alc_supplier_promotion.field_product_template_supplier_discount_ids
-#: model:ir.model.fields,field_description:alc_supplier_promotion.field_shopinvader_product_supplier_discount_ids
-#: model:ir.model.fields,field_description:alc_supplier_promotion.field_shopinvader_variant_supplier_discount_ids
-msgid "Supplier discount ids"
+#: model:ir.model.fields,field_description:alc_supplier_promotion.field_product_supplierinfo__ratio_display_name
+msgid "Promotion"
 msgstr ""
 
 #. module: alc_supplier_promotion
-#: model:ir.model.fields,field_description:alc_supplier_promotion.field_delivery_carrier_supplier_promotion_ids
-#: model:ir.model.fields,field_description:alc_supplier_promotion.field_product_product_supplier_promotion_ids
-#: model:ir.model.fields,field_description:alc_supplier_promotion.field_product_template_supplier_promotion_ids
-#: model:ir.model.fields,field_description:alc_supplier_promotion.field_shopinvader_product_supplier_promotion_ids
-#: model:ir.model.fields,field_description:alc_supplier_promotion.field_shopinvader_variant_supplier_promotion_ids
-msgid "Supplier promotion ids"
+#: model:ir.model.fields,field_description:alc_supplier_promotion.field_product_supplierinfo__discount_purchase
+msgid "Purchase discount (%)"
 msgstr ""
 
+#. module: alc_supplier_promotion
+#: model:ir.model.fields,field_description:alc_supplier_promotion.field_product_supplierinfo__min_qty
+msgid "Purchase minimum qty"
+msgstr ""
+
+#. module: alc_supplier_promotion
+#: model:ir.model.fields,field_description:alc_supplier_promotion.field_product_supplierinfo__ratio_promotional_product
+msgid "Ratio Free Product"
+msgstr ""
+
+#. module: alc_supplier_promotion
+#: model:ir.model.fields,field_description:alc_supplier_promotion.field_product_supplierinfo__ratio_main_product
+msgid "Ratio Main Product"
+msgstr ""
+
+#. module: alc_supplier_promotion
+#: model_terms:ir.ui.view,arch_db:alc_supplier_promotion.product_supplierinfo_form_view
+msgid "Sale"
+msgstr ""
+
+#. module: alc_supplier_promotion
+#: model:ir.model.fields,field_description:alc_supplier_promotion.field_product_supplierinfo__discount_sale
+msgid "Sale discount (%)"
+msgstr ""
+
+#. module: alc_supplier_promotion
+#: model:ir.model.fields,field_description:alc_supplier_promotion.field_product_supplierinfo__min_qty_sale
+msgid "Sale minimum qty"
+msgstr ""
+
+#. module: alc_supplier_promotion
+#: model:ir.model.fields,field_description:alc_supplier_promotion.field_product_product__supplier_discount_ids
+#: model:ir.model.fields,field_description:alc_supplier_promotion.field_product_template__supplier_discount_ids
+msgid "Supplier Discount"
+msgstr ""
+
+#. module: alc_supplier_promotion
+#: model:ir.model,name:alc_supplier_promotion.model_product_supplierinfo
+msgid "Supplier Pricelist"
+msgstr ""
+
+#. module: alc_supplier_promotion
+#: model:ir.model.fields,field_description:alc_supplier_promotion.field_product_product__supplier_promotion_ids
+#: model:ir.model.fields,field_description:alc_supplier_promotion.field_product_template__supplier_promotion_ids
+msgid "Supplier Promotion"
+msgstr ""
+
+#. module: alc_supplier_promotion
+#: model:ir.model.fields,field_description:alc_supplier_promotion.field_product_supplierinfo__is_null_date_start
+msgid "The date start is null"
+msgstr ""
+
+#. module: alc_supplier_promotion
+#: model:ir.model.fields,help:alc_supplier_promotion.field_product_supplierinfo__min_qty
+msgid ""
+"The quantity to purchase from this vendor to benefit from the price, "
+"expressed in the vendor Product Unit of Measure if not any, in the default "
+"unit of measure of the product otherwise."
+msgstr ""
+
+#. module: alc_supplier_promotion
+#: model_terms:ir.ui.view,arch_db:alc_supplier_promotion.product_supplierinfo_form_view
+msgid "free."
+msgstr ""
+
+#. module: alc_supplier_promotion
+#: model_terms:ir.ui.view,arch_db:alc_supplier_promotion.product_supplierinfo_form_view
+msgid "products,"
+msgstr ""

@@ -1,15 +1,14 @@
-# -*- coding: utf-8 -*-
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import fields
-from odoo.tests.common import SavepointCase
+from odoo.tests.common import TransactionCase
 
 
-class TestPurchaseOrder(SavepointCase):
+class TestPurchaseOrder(TransactionCase):
     @classmethod
     def setUpClass(cls):
-        super(TestPurchaseOrder, cls).setUpClass()
+        super().setUpClass()
 
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
         cls.supplier = cls.env.ref("base.res_partner_12")
@@ -29,7 +28,7 @@ class TestPurchaseOrder(SavepointCase):
                         {
                             "name": cls.product_1.name,
                             "product_id": cls.product_1.id,
-                            "product_uom": cls.env.ref("product.product_uom_unit").id,
+                            "product_uom": cls.env.ref("uom.product_uom_unit").id,
                             "product_qty": 365,
                             "price_unit": 50,
                             "date_planned": fields.Datetime.now(),
@@ -41,7 +40,7 @@ class TestPurchaseOrder(SavepointCase):
                         {
                             "name": cls.product_2.name,
                             "product_id": cls.product_2.id,
-                            "product_uom": cls.env.ref("product.product_uom_unit").id,
+                            "product_uom": cls.env.ref("uom.product_uom_unit").id,
                             "product_qty": 0,
                             "price_unit": 5,
                             "date_planned": fields.Datetime.now(),
@@ -54,6 +53,7 @@ class TestPurchaseOrder(SavepointCase):
     def test_00(self):
         """
         Data:
+
             A PO with 2 lines:
             * line 1: product 1, product_qty 365
             * line 2: product 2, product_qty 0
