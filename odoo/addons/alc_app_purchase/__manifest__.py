@@ -14,5 +14,6 @@
         "purchase_stock_packaging",
         "alc_additional_product_purchase",
         "alc_purchase_order_cleaner",
+        "alc_stock_move_list",
     ],
 }

@@ -219,7 +219,6 @@ exclude: |
   ^odoo/addons/alc_stock_available_immediately_lot_loss/|
   ^odoo/addons/alc_stock_lot_available/|
   ^odoo/addons/alc_stock_move_direction/|
-  ^odoo/addons/alc_stock_move_list/|
   ^odoo/addons/alc_stock_picking_batch_assignment/|
   ^odoo/addons/alc_stock_picking_batch_creation/|
   ^odoo/addons/alc_stock_picking_batch_delivery_rounds/|

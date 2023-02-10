@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -6,11 +5,11 @@
     "name": "Alc Stock Move List",
     "description": """
         Filter stock moves  by date desc and at one month by default""",
-    "version": "10.0.1.0.0",
+    "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": ["stock"],
     "data": ["views/stock_move.xml"],
     "demo": [],
-    'installable': False
+    "installable": True,
 }
