@@ -25,6 +25,7 @@ def migrate(cr, version):
         "partner_delivery",
         "partner_helper",
         "product_packaging_barcode",
+        "purchase_unlink_cancelop",
         "specific_zetes",
         "stock_expired",
         "stock_inventory_controller",
