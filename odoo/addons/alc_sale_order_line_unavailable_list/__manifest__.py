@@ -9,7 +9,7 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
-    "depends": ["sale_cancel_remaining"],
+    "depends": ["sale_cancel_remaining", "alc_sale_consignment"],
     "data": ["views/sale_order_line.xml"],
     "demo": [],
 }

@@ -310,7 +310,6 @@ omit =
     odoo/addons/purchase_unlink_cancelop/*
     odoo/addons/purchase_update_procurement_qty/*
     odoo/addons/sale_confirm_background/*
-    odoo/addons/sale_consignment/*
     odoo/addons/sale_delay/*
     odoo/addons/sale_internal_confirmation_mail/*
     odoo/addons/sale_quick_create/*
