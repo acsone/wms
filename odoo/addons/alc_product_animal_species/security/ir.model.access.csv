@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_animal_species,animal_species_animal_species,alc_product_animal_species.model_animal_species,base.group_user,1,1,1,1
