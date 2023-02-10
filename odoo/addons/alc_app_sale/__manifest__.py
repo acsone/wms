@@ -43,5 +43,6 @@
         "alc_sale_order_line_unavailable_list",
         "alc_sale_qty_returned",
         "alc_sale_qty_returned_product_additional",
+        "alc_sale_consignment",
     ],
 }
