@@ -60,15 +60,6 @@ run ``pre-commit install`` after cloning the repository.
 Running tests
 -------------
 
-This project needs some extra dependencies to run tests. These dependencies
-are declared into the ``extras_require`` section of the ``setup.py`` file.
-To install these dependencies run::
-
-    pip-df sync --extras tests
-
-When these dependencies change, use ``pip-df sync --extras tests`` again,
-possibly with ``--update``.
-
 To run tests as usual::
 
     odoo --test-enable

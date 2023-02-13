@@ -414,3 +414,6 @@ exclude = [
   'odoo/addons/website_purchase_review/*'
   # MYPY END NOT INSTALLABLE ADDONS
 ]
+
+[tool.pip-deepfreeze.sync]
+extras = "test,dev"
