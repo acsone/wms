@@ -12,7 +12,7 @@ odoo-addon-stock-available-immediately-exclude-location @ git+https://github.com
 odoo-addon-stock-available-to-promise-release @ git+https://github.com/acsone/wms.git@9528f1625dede8e39c1bdb2e1b038ee5ff8db1e0#subdirectory=setup/stock_available_to_promise_release
 odoo-addon-stock-average-daily-sale @ git+https://github.com/acsone/stock-logistics-reporting.git@78c730e58e7d22191193e0827aaf0834e39067d7#subdirectory=setup/stock_average_daily_sale
 odoo-addon-stock-dock @ git+https://github.com/acsone/stock-logistics-transport.git@4f4b6169a35e1f99b3e92ebab55dc2ada2e1e00e#subdirectory=setup/stock_dock
-odoo-addon-stock-dynamic-routing @ git+https://github.com/acsone/wms.git@12288118a461e90e17afe1024f1a13ce9f202258#subdirectory=setup/stock_dynamic_routing
+odoo-addon-stock-dynamic-routing==16.0.1.0.1
 odoo-addon-stock-grn==16.0.1.0.1
 odoo-addon-stock-helper==16.0.1.0.1
 odoo-addon-stock-location-product-restriction==16.0.1.0.0.3
@@ -28,7 +28,7 @@ odoo-addon-stock-packaging-calculator @ git+https://github.com/acsone/stock-logi
 odoo-addon-stock-picking-backorder-reason @ git+https://github.com/acsone/stock-logistics-workflow.git@1789528b69158cddce8a79f8577e266a2854998d#subdirectory=setup/stock_picking_backorder_reason
 odoo-addon-stock-picking-backorder-reason-grn @ git+https://github.com/acsone/stock-logistics-workflow.git@385cf7dc6eb9ce7c43ca7e0f697d513c4cd6891b#subdirectory=setup/stock_picking_backorder_reason_grn
 odoo-addon-stock-picking-batch-creation @ git+https://github.com/acsone/wms.git@0ccf4bf42f54c84b4eb5587ce77d507a4e7d7988#subdirectory=setup/stock_picking_batch_creation
-odoo-addon-stock-picking-completion-info @ git+https://github.com/acsone/wms.git@008729166985bcb41891442e6491e09e7f0aede4#subdirectory=setup/stock_picking_completion_info
+odoo-addon-stock-picking-completion-info==16.0.1.0.1
 odoo-addon-stock-picking-delivery-link==16.0.1.0.1
 odoo-addon-stock-picking-group-by-base @ git+https://github.com/acsone/stock-logistics-workflow.git@20afe143fb8e3b31e154024d74b979a6d9c6f3f7#subdirectory=setup/stock_picking_group_by_base
 odoo-addon-stock-picking-group-by-max-weight @ git+https://github.com/acsone/stock-logistics-workflow.git@ec1809573d449907146ebcdcda9821cf2b519b6e#subdirectory=setup/stock_picking_group_by_max_weight
@@ -39,7 +39,7 @@ odoo-addon-stock-picking-start==16.0.1.0.1
 odoo-addon-stock-picking-type-shipping-policy @ git+https://github.com/acsone/wms.git@12dbcd20834849758e681098005f9386cb2c22a6#subdirectory=setup/stock_picking_type_shipping_policy
 odoo-addon-stock-picking-volume @ git+https://github.com/OCA/stock-logistics-warehouse.git@3a6bf112dcbfc1e138dfe10515d124fc5ddb9b5f#subdirectory=setup/stock_picking_volume
 odoo-addon-stock-procurement-customer @ git+https://github.com/acsone/stock-logistics-workflow.git@e142a70dd6da183ccff6ca5374c1e445882fc376#subdirectory=setup/stock_procurement_customer
-odoo-addon-stock-production-lot-expired-date @ git+https://github.com/acsone/product-attribute.git@d76d655034abd4070b6e96debf60597903429dd7#subdirectory=setup/stock_production_lot_expired_date
+odoo-addon-stock-production-lot-expired-date==16.0.1.0.1
 odoo-addon-stock-production-lot-expiry @ git+https://github.com/acsone/product-attribute.git@d1d1d4bc64d8464c621b0a5823ff43fd3ee03406#subdirectory=setup/stock_production_lot_expiry
 odoo-addon-stock-putaway-hook==16.0.1.0.0.4
 odoo-addon-stock-quant-package-dimension==16.0.1.0.0.2

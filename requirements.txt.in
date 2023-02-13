@@ -13,8 +13,6 @@ odoo-addon-account-tax-one-vat-purchase @ git+https://github.com/acsone/account-
 odoo-addon-account-tax-one-vat-sale @ git+https://github.com/acsone/account-invoicing.git@16.0-add-account_tax_one_vat_sale-hda#subdirectory=setup/account_tax_one_vat_sale
 
 # delivery-carrier
-# https://github.com/OCA/delivery-carrier/pull/594 - [16.0][ADD] delivery_carrier_max_weight_constraint
-odoo-addon-delivery-carrier-max-weight-constraint @ git+https://github.com/acsone/delivery-carrier.git@16.0-mig-delivery_carrier_max_weight_constraint-hda#subdirectory=setup/delivery_carrier_max_weight_constraint
 # https://github.com/OCA/delivery-carrier/pull/599 - [16.0][MIG] delivery_carrier_label_gls
 odoo-addon-delivery-carrier-label-gls @ git+https://github.com/acsone/delivery-carrier.git@16.0-mig-delivery_carrier_label_gls-hda#subdirectory=setup/delivery_carrier_label_gls
 # https://github.com/OCA/delivery-carrier/pull/604 - [16.0][ADD] delivery_package_number_theoretical
@@ -35,12 +33,8 @@ odoo-addon-stock-release-channel-auto-release @ git+https://github.com/acsone/wm
 odoo-addon-stock-storage-type-putaway-abc @ git+https://github.com/acsone/wms.git@16.0-mig-stock_storage_type_abc-dro#subdirectory=setup/stock_storage_type_putaway_abc
 # https://github.com/OCA/wms/pull/497 - [ADD] stock_storage_type_putaway_abc_classification_sale_stock
 odoo-addon-stock-storage-type-putaway-abc-classification-sale-stock @ git+https://github.com/acsone/wms.git@16.0-add-stock_storage_type_abc_classification-dro#subdirectory=setup/stock_storage_type_putaway_abc_classification_sale_stock
-# https://github.com/OCA/wms/pull/510 - [MIG][16.0] stock_picking_completion_info
-odoo-addon-stock-picking-completion-info @ git+https://github.com/acsone/wms.git@16.0-mig-stock_picking_completion_info-hda#subdirectory=setup/stock_picking_completion_info
 # https://github.com/OCA/wms/pull/535 - [MIG][16.0] stock_picking_type_shipping_policy
 odoo-addon-stock-picking-type-shipping-policy @ git+https://github.com/acsone/wms.git@16.0-mig-stock_picking_type_shipping_policy-lma#subdirectory=setup/stock_picking_type_shipping_policy
-# https://github.com/OCA/wms/pull/548 [FIX] - stock_dynamic_routing: fix method params
-odoo-addon-stock-dynamic-routing @ git+https://github.com/acsone/wms.git@16.0-stock_dynamic_routing-sbj#subdirectory=setup/stock_dynamic_routing
 # https://github.com/OCA/wms/pull/534/files
 odoo-addon-stock-picking-batch-creation @ git+https://github.com/acsone/wms.git@16.0-mig-stock_picking_batch_creation-lma#subdirectory=setup/stock_picking_batch_creation
 
@@ -61,8 +55,6 @@ odoo-addon-product-packaging-level-pallet @ git+https://github.com/acsone/produc
 odoo-addon-product-route-mto @ git+https://github.com/acsone/product-attribute.git@16.0-add-product_route_mto-dro#subdirectory=setup/product_route_mto
 # https://github.com/OCA/product-attribute/pull/1221 - [MIG][16.0] product total weight from packaging
 odoo-addon-product-total-weight-from-packaging @ git+https://github.com/acsone/product-attribute.git@16.0-mig-product_total_weight_from_packaging#subdirectory=setup/product_total_weight_from_packaging
-# https://github.com/OCA/product-attribute/pull/1217
-odoo-addon-stock-production-lot-expired-date @ git+https://github.com/acsone/product-attribute.git@16.0-mig-stock_production_lot_expired_dates#subdirectory=setup/stock_production_lot_expired_date
 # https://github.com/OCA/product-attribute/pull/1225 - [ADD] product_template_has_one_variant
 odoo-addon-product-template-has-one-variant @ git+https://github.com/acsone/product-attribute.git@16.0-add-product-template-has-one-variant-dro#subdirectory=setup/product_template_has_one_variant
 
@@ -70,8 +62,6 @@ odoo-addon-product-template-has-one-variant @ git+https://github.com/acsone/prod
 odoo-addon-purchase-stock-packaging @ git+https://github.com/acsone/purchase-workflow.git@16.0-add-purchase_stock_packaging-dro#subdirectory=setup/purchase_stock_packaging
 
 # sale-workflow
-# https://github.com/OCA/sale-workflow/pull/2266
-odoo-addon-sale-exception @ git+https://github.com/acsone/sale-workflow.git@16.0-sale_exception-sbj#subdirectory=setup/sale_exception
 # https://github.com/OCA/sale-workflow/pull/2322
 odoo-addon-product-price-category @ git+https://github.com/acsone/sale-workflow.git@16.0-mig-product_price_category-sbj#subdirectory=setup/product_price_category
 # https://github.com/OCA/sale-workflow/pull/2329
@@ -146,7 +136,5 @@ odoo-addon-shipment-advice @ git+https://github.com/acsone/stock-logistics-trans
 odoo-addon-stock-available-immediately-exclude-location @ git+https://github.com/acsone/stock-logistics-availability.git@16.0-mig-stock_available_immediately_exclude_location-hda#subdirectory=setup/stock_available_immediately_exclude_location
 
 # partner-contact
-# https://github.com/OCA/partner-contact/pull/1453
-odoo-addon-base-partner-sequence @ git+https://github.com/ursais/partner-contact@16_mig_base_partner_sequence#subdirectory=setup/base_partner_sequence
 # https://github.com/OCA/partner-contact/pull/1464
 odoo-addon-partner-tz @ git+https://github.com/acsone/partner-contact@16.0-mig-partner-tz-dro#subdirectory=setup/partner_tz
