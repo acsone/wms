@@ -127,7 +127,8 @@ odoo-addon-stock-override-procurement @ git+https://github.com/acsone/stock-logi
 # server-tools
 # https://github.com/OCA/server-tools/pull/2533 - [16.0][MIG] base_sparse_field_list_support
 odoo-addon-base-sparse-field-list-support @ git+https://github.com/acsone/server-tools.git@16.0-mig-base_sparse_field_list_support-hda#subdirectory=setup/base_sparse_field_list_support
-
+# https://github.com/OCA/server-tools/pull/2550/files
+odoo-addon-session-db @ git+https://github.com/acsone/server-tools.git@16.0-session_db-concurrency-sbi#subdirectory=setup/session_db
 # OCA/web
 
 # camptocamp/odoo-cloud-platform
