@@ -354,7 +354,6 @@ exclude = [
   'odoo/addons/product_price_import/*',
   'odoo/addons/purchase_prepaid/*',
   'odoo/addons/purchase_update_procurement_qty/*',
-  'odoo/addons/sale_confirm_background/*',
   'odoo/addons/sale_delay/*',
   'odoo/addons/sale_internal_confirmation_mail/*',
   'odoo/addons/server_environment_files/*',
