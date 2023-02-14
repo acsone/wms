@@ -97,7 +97,6 @@ exclude: |
   ^odoo/addons/alc_gls_putinpack/|
   ^odoo/addons/alc_incoming_product_supplier_filter/|
   ^odoo/addons/alc_internal_package_groupbypartner/|
-  ^odoo/addons/alc_internal_stock_quant_package/|
   ^odoo/addons/alc_invoices_audit/|
   ^odoo/addons/alc_keycloak/|
   ^odoo/addons/alc_label_printing_gls/|

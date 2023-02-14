@@ -52,6 +52,7 @@ odoo-addon-delivery-carrier-max-weight-constraint==16.0.1.0.1
 odoo-addon-delivery-package-number-theoretical @ git+https://github.com/acsone/delivery-carrier.git@88acd6b0c189b60a5aa151a93f4faf0ab6fc1325#subdirectory=setup/delivery_package_number_theoretical
 odoo-addon-delivery-package-type-number-parcels==16.0.1.0.1
 odoo-addon-delivery-procurement-group-carrier @ git+https://github.com/acsone/stock-logistics-workflow.git@d60c1524c95caa5b293c89b89a33950a4ce844ad#subdirectory=setup/delivery_procurement_group_carrier
+odoo-addon-internal-stock-quant-package @ git+https://github.com/acsone/stock-logistics-tracking.git@472c75e7e027e74ae582628faf89ae1a30b13d7e#subdirectory=setup/internal_stock_quant_package
 odoo-addon-partner-tz @ git+https://github.com/acsone/partner-contact@70915afa6bf0beae725d1998bd0d600b6dffd2b7#subdirectory=setup/partner_tz
 odoo-addon-product-abc-classification @ git+https://github.com/acsone/product-attribute.git@cc97df93b3f97e947c2ed38cc6232c0a642f65e1#subdirectory=setup/product_abc_classification
 odoo-addon-product-abc-classification-sale-stock @ git+https://github.com/acsone/product-attribute.git@f9690a9c1f19ece371effeb200a417e96fddb158#subdirectory=setup/product_abc_classification_sale_stock
