@@ -246,7 +246,6 @@ exclude = [
   'odoo/addons/alc_sale_product_qty_available_to_promise/*',
   'odoo/addons/alc_sale_product_qty_backorder/*',
   'odoo/addons/alc_sale_statistics/*',
-  'odoo/addons/alc_sale_stock_restocking_fee_invoicing_additional_product/*',
   'odoo/addons/alc_search_engine/*',
   'odoo/addons/alc_shopfloor/*',
   'odoo/addons/alc_shopfloor_app/*',

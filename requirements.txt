@@ -72,6 +72,7 @@ odoo-addon-sale-cancel-remaining @ git+https://github.com/acsone/sale-workflow.g
 odoo-addon-sale-exception==16.0.1.0.1.1
 odoo-addon-sale-procurement-customer @ git+https://github.com/acsone/sale-workflow.git@ef0c216f30a0fd7fd1fb0d782f8b9aaac3f7d487#subdirectory=setup/sale_procurement_customer
 odoo-addon-sale-stock-picking-blocking @ git+https://github.com/acsone/sale-workflow.git@0759ba05b37a5ce5a9da3131bd03e1cdabd3d7ef#subdirectory=setup/sale_stock_picking_blocking
+odoo-addon-sale-stock-restocking-fee-invoicing @ git+https://github.com/acsone/account-invoicing.git@2bdf46dd08bd874d6a1c0a64ec8a7f5d1751ddd3#subdirectory=setup/sale_stock_restocking_fee_invoicing
 odoo-addon-sale-triple-discount==16.0.1.0.1.1
 odoo-addon-server-environment==16.0.1.0.1
 odoo-addon-session-db @ git+https://github.com/acsone/server-tools.git@2277d974581225574cc139b4c14bc9e18182512a#subdirectory=setup/session_db

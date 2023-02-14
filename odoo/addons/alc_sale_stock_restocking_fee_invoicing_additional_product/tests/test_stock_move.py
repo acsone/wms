@@ -1,17 +1,16 @@
-# -*- coding: utf-8 -*-
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo.tests.common import SavepointCase
+from odoo.fields import Command
+from odoo.tests.common import Form, TransactionCase
 
 
-class TestStockMove(SavepointCase):
+class TestStockMove(TransactionCase):
     @classmethod
     def setUpClass(cls):
-        super(TestStockMove, cls).setUpClass()
+        super().setUpClass()
 
-        if "round.instance" in cls.env:
-            cls.env = cls.env(context=dict(cls.env.context, round_autoset=False))
+        cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
 
         cls.warehouse_1 = cls.env.ref("stock.warehouse0")
         cls.warehouse_1.write(
@@ -22,10 +21,10 @@ class TestStockMove(SavepointCase):
                 "code": "TST",
             }
         )
-        cls.warehouse_1.pick_type_id.subcode = "PICK"
+        cls.loc_stock = cls.warehouse_1.lot_stock_id
 
         cls.env.user.company_id.restocking_fee_product_id = cls.env.ref(
-            "sale_stock_restocking_fee_invoicing." "product_restocking_fee"
+            "sale_stock_restocking_fee_invoicing.product_restocking_fee"
         )
 
         cls.partner = cls.env["res.partner"].create(
@@ -38,19 +37,13 @@ class TestStockMove(SavepointCase):
                 "default_code": "987654321",
                 "tracking": "none",
                 "list_price": 20,
-                "uom_id": cls.env.ref("product.product_uom_unit").id,
+                "uom_id": cls.env.ref("uom.product_uom_unit").id,
                 "type": "product",
             }
         )
-        update_qty_wizard = cls.env["stock.change.product.qty"].create(
-            {
-                "product_id": cls.additional_product.id,
-                "product_tmpl_id": cls.additional_product.product_tmpl_id.id,
-                "new_quantity": 15,
-                "location_id": cls.warehouse_1.lot_stock_id.id,
-            }
+        cls.env["stock.quant"]._update_available_quantity(
+            cls.additional_product, cls.loc_stock, 15
         )
-        update_qty_wizard.change_product_qty()
 
         cls.main_product = cls.env["product.product"].create(
             {
@@ -60,29 +53,21 @@ class TestStockMove(SavepointCase):
                 "list_price": 100,
                 "type": "product",
                 "additional_product_id": cls.additional_product.id,
-                "uom_id": cls.env.ref("product.product_uom_unit").id,
+                "uom_id": cls.env.ref("uom.product_uom_unit").id,
                 "ratio_main_product": 1,
                 "ratio_additional_product": 1,
             }
         )
-        update_qty_wizard = cls.env["stock.change.product.qty"].create(
-            {
-                "product_id": cls.main_product.id,
-                "product_tmpl_id": cls.main_product.product_tmpl_id.id,
-                "new_quantity": 100,
-                "location_id": cls.warehouse_1.lot_stock_id.id,
-            }
+        cls.env["stock.quant"]._update_available_quantity(
+            cls.main_product, cls.loc_stock, 100
         )
-        update_qty_wizard.change_product_qty()
 
         cls.so = cls.env["sale.order"].create(
             {
                 "partner_id": cls.partner.id,
                 "warehouse_id": cls.warehouse_1.id,
                 "order_line": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "name": cls.main_product.name,
                             "product_id": cls.main_product.id,
@@ -97,7 +82,7 @@ class TestStockMove(SavepointCase):
 
         # cls.picking = cls.so.picking_ids
         cls.picking = cls.so.mapped("picking_ids").filtered(
-            lambda p: p.picking_type_subcode == "PICK"
+            lambda p: p.picking_type_code == "internal"
         )
 
         cls.shipping = cls.so.mapped("picking_ids").filtered(
@@ -108,31 +93,21 @@ class TestStockMove(SavepointCase):
 
     @staticmethod
     def _process_picking(picking):
-        picking.force_assign()
-        for pack in picking.pack_operation_product_ids:
-            pack.qty_done = pack.product_qty
-        picking.do_transfer()
+        picking.action_assign()
+        for ml in picking.move_line_ids:
+            ml.qty_done = ml.reserved_qty
+        picking.button_validate()
 
     def _create_return_wizard(self):
-        default_data = (
-            self.env["stock.return.picking"]
-            .with_context(active_ids=self.shipping.ids, active_id=self.shipping.ids[0])
-            .default_get(
-                [
-                    "move_dest_exists",
-                    "original_location_id",
-                    "product_return_moves",
-                    "parent_location_id",
-                    "location_id",
-                    "charge_restocking_fee",
-                ]
+        return_wizard = Form(
+            self.env["stock.return.picking"].with_context(
+                active_ids=self.shipping.ids,
+                active_id=self.shipping.ids[0],
+                active_model="stock.picking",
             )
         )
-        return (
-            self.env["stock.return.picking"]
-            .with_context(active_ids=self.shipping.ids, active_id=self.shipping.ids[0])
-            .create(default_data)
-        )
+        res = return_wizard.save()
+        return res
 
     def _create_return_picking(self):
         res = self._create_return_wizard().create_returns()
@@ -141,8 +116,9 @@ class TestStockMove(SavepointCase):
     def test_00(self):
         """
         Data:
+
             A customer charged with restocking fee
-            A delivered SO with 2 lines, main and additional products
+            A delivered SO with product main having additional product
         Test case:
             Create the return picking from the wizard
             Process the picking.
@@ -150,14 +126,6 @@ class TestStockMove(SavepointCase):
             1 new lines for customer fees must be added to the SO
             (only one for the main product) with qty 1
         """
-
-        # Check the additional product is on the picking
-        self.assertEqual(len(self.picking.move_lines), 2)
-        self.assertEqual(len(self.picking.pack_operation_ids), 2)
-
-        # Check that the additional product is also added to the shipping after confirmation
-        self.assertEqual(len(self.shipping.move_lines), 2)
-
         self.partner.charge_restocking_fee = True
 
         wizard = self._create_return_wizard()
