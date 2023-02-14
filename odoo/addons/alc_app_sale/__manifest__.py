@@ -46,5 +46,6 @@
         "alc_product_animal_species",
         "alc_sale_consignment",
         "alc_stock_lot_available",
+        "alc_sale_order_line_product_type",
     ],
 }
