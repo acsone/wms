@@ -336,7 +336,6 @@ exclude = [
   'odoo/addons/elasticsearch_search/*',
   'odoo/addons/elasticsearch_security/*',
   'odoo/addons/elasticsearch_security_mixin/*',
-  'odoo/addons/external_fax/*',
   'odoo/addons/ir_sequence_period/*',
   'odoo/addons/keycloak/*',
   'odoo/addons/l10n_be_bba_fix/*',
