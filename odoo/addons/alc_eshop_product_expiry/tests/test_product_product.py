@@ -20,7 +20,7 @@ class TestProductProduct(StockCommonCase):
         cls.inventory_line_model = cls.env["stock.inventory.line"]
         cls.stock_location = cls.env.ref("stock.stock_location_stock")
         cls.customer_location = cls.env.ref("stock.stock_location_customers")
-        cls.loc_physical = cls.env.ref("specific_base.stock_location_vlb")
+        cls.loc_physical = cls.env.ref("alc_stock_location_data.stock_location_vlb")
         cls.stock_location.location_id = cls.loc_physical
         cls.env["stock.location"].search([])._parent_store_compute()
         # avoid trouble with gitlab since odoo storage is not preserved with
