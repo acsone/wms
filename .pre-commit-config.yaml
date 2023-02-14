@@ -216,7 +216,6 @@ exclude: |
   ^odoo/addons/alc_shopinvader_fixes/|
   ^odoo/addons/alc_standby_delivery/|
   ^odoo/addons/alc_stock_available_immediately_lot_loss/|
-  ^odoo/addons/alc_stock_lot_available/|
   ^odoo/addons/alc_stock_move_direction/|
   ^odoo/addons/alc_stock_picking_batch_assignment/|
   ^odoo/addons/alc_stock_picking_batch_creation/|
