@@ -360,8 +360,6 @@ exclude = [
   'odoo/addons/sale_confirm_background/*',
   'odoo/addons/sale_delay/*',
   'odoo/addons/sale_internal_confirmation_mail/*',
-  'odoo/addons/sale_quick_create/*',
-  'odoo/addons/sale_quick_create_pricelist_discount/*',
   'odoo/addons/server_environment_files/*',
   'odoo/addons/shopinvader_assortment_bind/*',
   'odoo/addons/shopinvader_search_engine_export/*',
