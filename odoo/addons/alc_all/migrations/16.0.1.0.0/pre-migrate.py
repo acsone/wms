@@ -36,6 +36,7 @@ def migrate(cr, version):
         "stock_location_report",
         "stock_operation_cleaner",
         "stock_operation_recompute",
+        "stock_production_lot_expiry",
         "stock_reassign_auto",
         "stock_picking_assignment",
         "stock_picking_backorder",

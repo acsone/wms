@@ -18,7 +18,6 @@
         "product_animal_species",
         # data dependencies
         "product_dimension",
-        "stock_production_lot_expiry",
         "specific_product",
         "specific_purchase",  # depends on alc_product_pharmacy, product_manufacturer
         "alc_product_audit",

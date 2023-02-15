@@ -12,11 +12,13 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["stock_receive_lot", "stock_production_lot_expiry"],  # LGPL  # AGPL
+    "depends": [
+        "stock_receive_lot",  # REMOVED "stock_production_lot_expiry"
+    ],  # LGPL  # AGPL
     "data": [
         "views/stock_pack_operation.xml",
         "wizards/stock_pack_operation_lot_add.xml",
     ],
     "demo": [],
-    'installable': False
+    "installable": False,
 }
