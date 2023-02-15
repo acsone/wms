@@ -95,7 +95,7 @@ class TestPricelistDiscountCommon(TransactionCase):
                 ],
             }
         )
-
+        cls.discount_item = cls.discount_pricelist_id.item_ids
         cls.partner = cls.env["res.partner"].create(
             {
                 "name": "Unittest partner",
