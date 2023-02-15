@@ -165,7 +165,6 @@ exclude: |
   ^odoo/addons/alc_sale_channel_stock_move/|
   ^odoo/addons/alc_sale_invoicing_on_transfer/|
   ^odoo/addons/alc_sale_invoicing_policy/|
-  ^odoo/addons/alc_sale_order_line_product_type/|
   ^odoo/addons/alc_sale_order_price_recalculation/|
   ^odoo/addons/alc_sale_processing_finalizer/|
   ^odoo/addons/alc_sale_processing_finalizer_exclude_logiweb/|
