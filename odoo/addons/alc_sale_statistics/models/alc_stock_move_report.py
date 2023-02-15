@@ -86,6 +86,7 @@ class AlcStockMoveReport(models.Model):
     supplier_ref = fields.Char("Vendor Product Code", readonly=True)
     supplier_name = fields.Char("Supplier name", readonly=True)
     validation_date = fields.Date("Validation date", readonly=True)
+    sale_channel = fields.Char("Sale channel", readonly=True)
 
     @api.model_cr
     def init(self):
@@ -106,6 +107,7 @@ class AlcStockMoveReport(models.Model):
                        pt.list_price AS product_price,
                        pt.vendor_product_code AS supplier_ref,
                        sol.price_unit AS price_unit,
+                       sol.sale_channel AS sale_channel,
                        resp.id as partner_id,
                        resp.ref AS internal_ref_for_partner_invoice,
                        resp.name AS partner_invoice_name,

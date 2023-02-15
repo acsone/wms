@@ -71,3 +71,24 @@ class TestGlsFlow(TestGLSWizard):
         gls_wizard_transfer = wizard_model.browse(gls_wizard_transfer_action["res_id"])
 
         self.assertEqual(gls_wizard_transfer.package_id.id, package_id)
+
+    def test_unreserve_moves(self):
+        wizard_model = self.env["delivery.package.gls.wizard"]
+        self.sale_order.action_confirm()
+        picking = self.sale_order.picking_ids
+        picking.force_assign()
+        pack_operation_1 = picking.pack_operation_ids[0]
+        pack_operation_1.qty_done = pack_operation_1.product_qty
+        gls_wizard_action_1 = picking.button_gls_put_in_pack()
+        gls_wizard_1 = wizard_model.browse(gls_wizard_action_1["res_id"])
+        gls_wizard_1.shipping_weight = self.product.weight
+        with mock_gls_client():
+            gls_wizard_1.put_in_pack()
+
+        with self.assertRaises(ValidationError), self.env.cr.savepoint():
+            picking.do_unreserve()
+
+        with mock_gls_client():
+            gls_wizard_1.abort()
+        picking.do_unreserve()
+        self.assertFalse(picking.pack_operation_ids)

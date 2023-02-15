@@ -15,3 +15,25 @@ class TestFacadeFlow(TestFacade):
         self.assertEqual(error, [])
         self.assertEqual(location, None)
         self.assertEqual(result, expected)
+
+    def test_catalog_supplier_promotion(self):
+        product_facade = self._get_service_facade("catalog")
+        self.partner.partner_type = "guest"
+        self.partner.supplier_promotion_sale_allowed = True
+        flattened_data = self._example_product_flattened_data()
+        flattened_data["has_supplier_promotion"] = True
+        flattened_data["supplier_promotion_only_for_veterinaries"] = False
+        return_value = (r for r in [self._wrap_flattened_data(flattened_data)])
+        with self.mock_product_data(return_value=return_value):
+            result, _, _ = product_facade(language="FR")
+            self.assertIn("FREE products", result)
+        flattened_data["supplier_promotion_only_for_veterinaries"] = True
+        return_value = (r for r in [self._wrap_flattened_data(flattened_data)])
+        with self.mock_product_data(return_value=return_value):
+            result, _, _ = product_facade(language="FR")
+            self.assertNotIn("FREE products", result)
+        self.partner.partner_type = "veterinary"
+        return_value = (r for r in [self._wrap_flattened_data(flattened_data)])
+        with self.mock_product_data(return_value=return_value):
+            result, _, _ = product_facade(language="FR")
+            self.assertIn("FREE products", result)

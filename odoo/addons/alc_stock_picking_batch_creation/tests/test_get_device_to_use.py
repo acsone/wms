@@ -31,7 +31,7 @@ class TestGetDeviceToUse(AlcClusterPickingCommonFeatures):
                 ],
             }
         )
-        candidates_pickings = make_picking_batch._search_pickings()
+        candidates_pickings = make_picking_batch._candidates_pickings_to_batch()
         for picking in candidates_pickings:
             device = make_picking_batch._compute_device_to_use(picking)
             if device:
@@ -59,7 +59,7 @@ class TestGetDeviceToUse(AlcClusterPickingCommonFeatures):
                 ],
             }
         )
-        candidates_pickings = make_picking_batch._search_pickings()
+        candidates_pickings = make_picking_batch._candidates_pickings_to_batch()
         for picking in candidates_pickings:
             device = make_picking_batch._compute_device_to_use(picking)
             if device:
@@ -84,9 +84,35 @@ class TestGetDeviceToUse(AlcClusterPickingCommonFeatures):
                 ],
             }
         )
-        candidates_pickings = make_picking_batch._search_pickings()
+        candidates_pickings = make_picking_batch._candidates_pickings_to_batch()
         for picking in candidates_pickings:
             device = make_picking_batch._compute_device_to_use(picking)
             if device:
                 break
         self.assertEqual(device, self.device3)
+
+    def test_check_volume_picking_computed(self):
+        partner1_devices = self.device3
+        self.partner1.write({"device_type_ids": [(6, 0, partner1_devices.ids)]})
+
+        self._create_picking_pick_and_assign(
+            self.picking_type_ali.id, products=self.p2 | self.p4
+        )
+        make_picking_batch = self.makePickingBatch.create(
+            {
+                "user_id": self.env.user.id,
+                "picking_type_ids": [(4, self.picking_type_ali.id)],
+                "stock_device_type_ids": [(4, self.device1.id)],
+            }
+        )
+        candidates_pickings = make_picking_batch._candidates_pickings_to_batch()
+        volume_pickings = candidates_pickings.mapped("total_volume_batch_picking")
+        for volume in volume_pickings:
+            self.assertEqual(volume, 0)
+        for picking in candidates_pickings:
+            device = make_picking_batch._compute_device_to_use(picking)
+            if device:
+                break
+        volume_pickings = candidates_pickings.mapped("total_volume_batch_picking")
+        for volume in volume_pickings:
+            self.assertEqual(volume, 60)

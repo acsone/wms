@@ -13,7 +13,7 @@ ClusterPickingBase.component.template = template.replace(
   '<Screen :screen_info="screen_info">',
   `<Screen :screen_info="screen_info">
    <picking-detail
-   v-if="state_in(['start_operation', 'scan_destination', 'change_pack_lot', 'stock_issue'])"
+   v-show="state_in(['start_operation', 'scan_destination', 'change_pack_lot', 'stock_issue'])"
    :record="state.data.picking"
    />
 `

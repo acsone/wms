@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2022 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+  <record model="ir.ui.view" id="res_users_form_view">
+    <field name="name">res.users.form.preferences (in alc_reception_pharmacy)</field>
+    <field name="model">res.users</field>
+    <field name="inherit_id" ref="base_report_to_printer.view_users_form" />
+    <field name="arch" type="xml">
+          <field name="printing_printer_id" position="after">
+              <field name="printing_pharmacy_reception_printer_id" />
+          </field>
+    </field>
+  </record>
+
+  <record model="ir.ui.view" id="res_users_form_view_simple_modif">
+    <field name="name">res.users.form.simple.modif (in alc_reception_pharmacy)</field>
+    <field name="model">res.users</field>
+    <field
+      name="inherit_id"
+      ref="base_report_to_printer.view_users_form_simple_modif"
+    />
+    <field name="arch" type="xml">
+      <field name="printing_printer_id" position="after">
+              <field name="printing_pharmacy_reception_printer_id" />
+          </field>
+    </field>
+  </record>
+
+
+
+</odoo>

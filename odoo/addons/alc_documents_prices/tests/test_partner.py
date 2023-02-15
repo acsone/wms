@@ -5,6 +5,13 @@ from .common import TestAlcDocumentsPrices
 
 
 class TestAlcDocumentsPricesFlow(TestAlcDocumentsPrices):
+    @classmethod
+    def setUpClass(cls):
+        super(TestAlcDocumentsPricesFlow, cls).setUpClass()
+        cls.partner = cls.partner.with_context(test_queue_job_no_delay=True)
+        cls.partner.supplier_promotion_sale_allowed = False
+        cls.partner.partner_type = "guest"
+
     def test_flow(self):
         self.partner._process_dossier()
         # then: we have pricelist files
@@ -43,3 +50,55 @@ class TestAlcDocumentsPricesFlow(TestAlcDocumentsPrices):
         # even after generation, document_date is not set
         for document in documents_partner:
             self.assertFalse(document.document_date)
+
+    def _get_discount_data(
+        self,
+        has_supplier_promotion,
+        supplier_promotion_only_for_veterinaries,
+        partner=None,
+    ):
+        if not partner:
+            partner = self.partner
+        flattened_data = self._example_product_flattened_data()
+        flattened_data["has_supplier_promotion"] = has_supplier_promotion
+        flattened_data[
+            "supplier_promotion_only_for_veterinaries"
+        ] = supplier_promotion_only_for_veterinaries
+        return_value = (r for r in [self._wrap_flattened_data(flattened_data)])
+        domain_base = [("format", "=", "csv"), ("partner_id", "=", partner.id)]
+        domain_discount = domain_base + [("compute", "=", "discount")]
+        document_discount = self.alc_document_model.search(domain_discount)
+        with self.mock_product_data(return_value=return_value):
+            return document_discount._get_data().decode("base64")
+
+    def test_supplier_promotion_guest(self):
+        self.partner.partner_type = "guest"
+        self.partner.supplier_promotion_sale_allowed = True
+        csv = self._get_discount_data(
+            has_supplier_promotion=True, supplier_promotion_only_for_veterinaries=False
+        )
+        self.assertIn("Produits GRATUITS", csv)
+
+    def test_supplier_promotion_only_veterinary_guest(self):
+        self.partner.partner_type = "guest"
+        self.partner.supplier_promotion_sale_allowed = True
+        csv = self._get_discount_data(
+            has_supplier_promotion=True, supplier_promotion_only_for_veterinaries=True
+        )
+        self.assertNotIn("Produits GRATUITS", csv)
+
+    def test_supplier_promotion_only_veterinary_veterinary(self):
+        self.partner.partner_type = "veterinary"
+        self.partner.supplier_promotion_sale_allowed = True
+        csv = self._get_discount_data(
+            has_supplier_promotion=True, supplier_promotion_only_for_veterinaries=True
+        )
+        self.assertIn("Produits GRATUITS", csv)
+
+    def test_supplier_promotion_veterinary(self):
+        self.partner.partner_type = "veterinary"
+        self.partner.supplier_promotion_sale_allowed = True
+        csv = self._get_discount_data(
+            has_supplier_promotion=True, supplier_promotion_only_for_veterinaries=False
+        )
+        self.assertIn("Produits GRATUITS", csv)

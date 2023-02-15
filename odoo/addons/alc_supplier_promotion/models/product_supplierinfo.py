@@ -31,6 +31,14 @@ class ProductSupplierInfo(SupplierInfo, MixinPast):
     discount_sale = fields.Float("Sale discount (%)", digits="Discount", default=0.0)
     min_qty_sale = fields.Float(string="Sale minimum qty", default=0.0)
     min_qty = fields.Float(string="Purchase minimum qty")
+    # IDEA could be a list of promotion scopes
+    # a promotion scope could be based on partner_type or whatever scopes
+    # emerging from the business needs
+    only_for_veterinaries = fields.Boolean(
+        "Only for veterinaries",
+        default=False,
+        help="This field only apply to buyx_gety promotion",
+    )
 
     _sql_constraints = [
         (
@@ -72,6 +80,8 @@ class ProductSupplierInfo(SupplierInfo, MixinPast):
                 ratio_main_product=rec.ratio_main_product,
                 ratio_promotional_product=rec.ratio_promotional_product,
             )
+            if rec.only_for_veterinaries:
+                display_name += _(" (only for veterinaries)")
             rec.ratio_display_name = display_name
 
     @api.depends("discount_sale", "ratio_main_product", "ratio_promotional_product")
@@ -81,36 +91,3 @@ class ProductSupplierInfo(SupplierInfo, MixinPast):
             record.is_promotion = (
                 record.ratio_main_product and record.ratio_promotional_product
             )
-
-    def get_promotional_product(self, qty, uom):
-        """Compute how many promotional product are offered.
-
-        Given a quantity and a unity of measure, returns for the current
-        day how many promotional (free) product will be given.
-        The unit of measure is adapted if needs be.
-        """
-        self.ensure_one()
-        if uom != self.uom_id:
-            qty = uom._compute_quantity(qty, self.uom_id)
-        result = self.env["product.supplierinfo"].search(
-            [
-                ("ratio_promotional_product", ">", 0),
-                ("ratio_main_product", ">", 0),
-                "|",
-                ("date_start", "=", False),
-                ("date_start", "<=", fields.Date.today()),
-                "|",
-                ("date_end", "=", False),
-                ("date_end", ">=", fields.Date.today()),
-                "|",
-                ("min_qty_sale", "=", False),
-                ("min_qty_sale", "<=", qty),
-                ("product_tmpl_id", "=", self.id),
-            ],
-            order="sequence, min_qty_sale desc, price",
-            limit=1,
-        )
-        if not result:
-            return 0
-        coefficient = int(qty / result.ratio_main_product)
-        return coefficient * result.ratio_promotional_product

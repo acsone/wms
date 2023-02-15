@@ -10,6 +10,7 @@
     "category": "Stock Management",
     "depends": [
         "alc_base_auto_join",
+        "alc_stock_picking_assignable",
         "mail",
         "stock",
         "delivery",

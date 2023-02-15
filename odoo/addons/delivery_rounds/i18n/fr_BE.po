@@ -86,7 +86,7 @@ msgid "Assign Delivery Round"
 msgstr "Assigner une tournée"
 
 #. module: delivery_rounds
-#: code:addons/delivery_rounds/models/stock_picking.py:243
+#: code:addons/delivery_rounds/models/stock_picking.py:230
 #, python-format
 msgid "Assign pickings of partner %s"
 msgstr "Assigner les préparations du partenaire %s"
@@ -342,7 +342,7 @@ msgid "Delivery round %s will be updated in background."
 msgstr "La tournée %s va être mise à jour en arrière-plan."
 
 #. module: delivery_rounds
-#: code:addons/delivery_rounds/models/stock_picking.py:169
+#: code:addons/delivery_rounds/models/stock_picking.py:156
 #, python-format
 msgid ""
 "Delivery round assigned to a picking without reservation. Method "
@@ -472,11 +472,6 @@ msgstr "Inclure dans une tournée"
 #: model:ir.model.fields,help:delivery_rounds.field_stock_picking_partner_itinerary_ids
 msgid "Indicates on which itinerary this partner is"
 msgstr "Indique sur quel itinéraire se trouve ce partenaire"
-
-#. module: delivery_rounds
-#: model:ir.model.fields,field_description:delivery_rounds.field_stock_picking_is_assignable
-msgid "Is assignable"
-msgstr "Is assignable"
 
 #. module: delivery_rounds
 #: model:ir.model.fields,field_description:delivery_rounds.field_stock_picking_is_assignable_to_round
@@ -1085,7 +1080,7 @@ msgstr ""
 "même temps."
 
 #. module: delivery_rounds
-#: code:addons/delivery_rounds/models/stock_picking.py:197
+#: code:addons/delivery_rounds/models/stock_picking.py:184
 #, python-format
 msgid "You cannot unassign a delivery round from a started picking"
 msgstr ""
@@ -1179,6 +1174,9 @@ msgstr "unités(s)"
 #, python-format
 msgid "{} is not working day for {}"
 msgstr "{} n'est pas un jour de travail pour {}"
+
+#~ msgid "Is assignable"
+#~ msgstr "Is assignable"
 
 #~ msgid "Is alcyonnaire"
 #~ msgstr "Is alcyonnaire"

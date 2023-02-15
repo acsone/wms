@@ -7,6 +7,14 @@
     <field name="model">stock.picking</field>
     <field name="inherit_id" ref="stock.view_picking_form" />
     <field name="arch" type="xml">
+       <field name="name" position="after">
+        <field name="can_unreserve_moves" invisible="1" />
+       </field>
+      <xpath expr="//button[@name='do_unreserve']" position="attributes">
+       <attribute
+          name="attrs"
+        >{'invisible': ['|', ('quant_reserved_exist', '=', False), ('can_unreserve_moves', '=', False)]}</attribute>
+      </xpath>
       <xpath expr="//page/button[@name='put_in_pack']" position="attributes">
         <attribute
           name="attrs"

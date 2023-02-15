@@ -18,7 +18,7 @@ msgstr ""
 #. module: alc_stock_picking_wave_display
 #: model:ir.model.fields,field_description:alc_stock_picking_wave_display.field_stock_picking__batch_state
 msgid "Picking batch state"
-msgstr "Etat du lot"
+msgstr "Etat de la wave"
 
 #. module: alc_stock_picking_wave_display
 #: model:ir.model,name:alc_stock_picking_wave_display.model_stock_picking
