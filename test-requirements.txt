@@ -1,0 +1,9 @@
+# wms
+# https://github.com/OCA/wms/pull/560
+odoo-addon-stock-release-channel-shipment-advice @ git+https://github.com/OCA/wms.git@refs/pull/560/head#subdirectory=setup/stock_release_channel_shipment_advice
+# https://github.com/OCA/wms/pull/550
+odoo-addon-stock-release-channel-process-end-time @ git+https://github.com/OCA/wms.git@refs/pull/550/head#subdirectory=setup/stock_release_channel_process_end_time
+
+# stock-logistics-transport
+# https://github.com/OCA/stock-logistics-transport/pull/88
+odoo-addon-shipment-advice-planner @ git+https://github.com/OCA/stock-logistics-transport.git@refs/pull/88/head#subdirectory=setup/shipment_advice_planner
