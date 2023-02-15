@@ -16,6 +16,13 @@ msgstr ""
 #. module: alc_supplier_promotion
 #. odoo-python
 #: code:addons/alc_supplier_promotion/models/product_supplierinfo.py:0
+#, python-format
+msgid " (only for veterinaries)"
+msgstr ""
+
+#. module: alc_supplier_promotion
+#. odoo-python
+#: code:addons/alc_supplier_promotion/models/product_supplierinfo.py:0
 #: model:ir.model.constraint,message:alc_supplier_promotion.constraint_product_supplierinfo_valid_promotion_buyx_gety
 #, python-format
 msgid ""
@@ -54,6 +61,11 @@ msgstr ""
 #. module: alc_supplier_promotion
 #: model:ir.model.fields,field_description:alc_supplier_promotion.field_product_supplierinfo__is_sale_discount
 msgid "Is Sale Discount"
+msgstr ""
+
+#. module: alc_supplier_promotion
+#: model:ir.model.fields,field_description:alc_supplier_promotion.field_product_supplierinfo__only_for_veterinaries
+msgid "Only for veterinaries"
 msgstr ""
 
 #. module: alc_supplier_promotion
@@ -108,6 +120,12 @@ msgid "Supplier Discount"
 msgstr ""
 
 #. module: alc_supplier_promotion
+#: model:ir.model.fields,field_description:alc_supplier_promotion.field_product_product__supplier_discount_json
+#: model:ir.model.fields,field_description:alc_supplier_promotion.field_product_template__supplier_discount_json
+msgid "Supplier Discount Json"
+msgstr ""
+
+#. module: alc_supplier_promotion
 #: model:ir.model,name:alc_supplier_promotion.model_product_supplierinfo
 msgid "Supplier Pricelist"
 msgstr ""
@@ -116,6 +134,24 @@ msgstr ""
 #: model:ir.model.fields,field_description:alc_supplier_promotion.field_product_product__supplier_promotion_ids
 #: model:ir.model.fields,field_description:alc_supplier_promotion.field_product_template__supplier_promotion_ids
 msgid "Supplier Promotion"
+msgstr ""
+
+#. module: alc_supplier_promotion
+#: model:ir.model.fields,field_description:alc_supplier_promotion.field_product_product__supplier_promotion_for_veterinaries_ids
+#: model:ir.model.fields,field_description:alc_supplier_promotion.field_product_template__supplier_promotion_for_veterinaries_ids
+msgid "Supplier Promotion For Veterinaries"
+msgstr ""
+
+#. module: alc_supplier_promotion
+#: model:ir.model.fields,field_description:alc_supplier_promotion.field_product_product__supplier_promotion_json
+#: model:ir.model.fields,field_description:alc_supplier_promotion.field_product_template__supplier_promotion_json
+msgid "Supplier Promotion Json"
+msgstr ""
+
+#. module: alc_supplier_promotion
+#: model:ir.model.fields,field_description:alc_supplier_promotion.field_product_product__supplier_promotion_json_for_veterinaries
+#: model:ir.model.fields,field_description:alc_supplier_promotion.field_product_template__supplier_promotion_json_for_veterinaries
+msgid "Supplier Promotion Json For Veterinaries"
 msgstr ""
 
 #. module: alc_supplier_promotion
@@ -129,6 +165,11 @@ msgid ""
 "The quantity to purchase from this vendor to benefit from the price, "
 "expressed in the vendor Product Unit of Measure if not any, in the default "
 "unit of measure of the product otherwise."
+msgstr ""
+
+#. module: alc_supplier_promotion
+#: model:ir.model.fields,help:alc_supplier_promotion.field_product_supplierinfo__only_for_veterinaries
+msgid "This field only apply to buyx_gety promotion"
 msgstr ""
 
 #. module: alc_supplier_promotion
