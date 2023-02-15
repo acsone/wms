@@ -46,6 +46,7 @@
         "stock_release_channel_process_end_time",
         "shipment_advice_planner",
         "stock_release_channel_shipment_advice",
+        "stock_release_channel_shipment_advice_process_end_time",
         "alc_stock_location_data",
         "alc_mail_thread_no_auto_subscribe_notify",
         "alc_stock_picking_batch_creation",
