@@ -441,14 +441,6 @@ repos:
   #      exclude : ^odoo/addons/.*/migrations/.*$
   #      additional_dependencies: [types-python-dateutil]
   - repo: https://github.com/sbidoul/pip-split-requirements
-    rev: v0.6.0
+    rev: v0.7.0
     hooks:
       - id: pip-split-requirements
-        files: ^(requirements.*\.txt|.pre-commit-config.yaml)$
-        args:
-          - --prefix=container/requirements-group
-          - "--group-spec=odoo:^(odoo|odoo-addons-enterprise) "
-          - "--group-spec=odoo-addons-stock:odoo-addon-.*stock"
-          - "--group-spec=odoo-addons:odoo-addon"
-          - requirements.txt
-          - requirements-test.txt

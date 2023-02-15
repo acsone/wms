@@ -404,3 +404,21 @@ exclude = [
   'odoo/addons/website_purchase_review/*'
   # MYPY END NOT INSTALLABLE ADDONS
 ]
+
+[tool.pip-deepfreeze.sync]
+extras = "test,dev"
+post_sync_commands = [
+  "pip-split-requirements",
+]
+
+[tool.pip-split-requirements]
+group_specs = [
+  "odoo:^(odoo|odoo-addons-enterprise) ",
+  "odoo-addons-stock:odoo-addon-.*stock",
+  "odoo-addons:odoo-addon",
+]
+requirements_files = [
+  "requirements.txt",
+  "requirements-test.txt"
+]
+prefix = "container/requirements-group"
