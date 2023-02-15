@@ -1,0 +1,21 @@
+# partner-contact
+# https://github.com/OCA/partner-contact/pull/1464
+odoo-addon-partner-tz @ git+https://github.com/OCA/partner-contact.git@refs/pull/1464/head#subdirectory=setup/partner_tz
+
+# wms
+# https://github.com/OCA/wms/pull/508
+odoo-addon-stock-release-channel @ git+https://github.com/OCA/wms.git@refs/pull/508/head#subdirectory=setup/stock_release_channel
+# https://github.com/OCA/wms/pull/560
+odoo-addon-stock-release-channel-shipment-advice @ git+https://github.com/OCA/wms.git@refs/pull/560/head#subdirectory=setup/stock_release_channel_shipment_advice
+# https://github.com/OCA/wms/pull/550
+odoo-addon-stock-release-channel-process-end-time @ git+https://github.com/OCA/wms.git@refs/pull/550/head#subdirectory=setup/stock_release_channel_process_end_time
+# https://github.com/OCA/wms/pull/478
+odoo-addon-stock-available-to-promise-release @ git+https://github.com/OCA/wms.git@refs/pull/478/head#subdirectory=setup/stock_available_to_promise_release
+
+# stock-logistics-transport
+# https://github.com/OCA/stock-logistics-transport/pull/87
+odoo-addon-shipment-advice @ git+https://github.com/OCA/stock-logistics-transport.git@refs/pull/87/head#subdirectory=setup/shipment_advice
+# https://github.com/OCA/stock-logistics-transport/pull/87
+odoo-addon-stock-dock @ git+https://github.com/OCA/stock-logistics-transport.git@refs/pull/87/head#subdirectory=setup/stock_dock
+# https://github.com/OCA/stock-logistics-transport/pull/88
+odoo-addon-shipment-advice-planner @ git+https://github.com/OCA/stock-logistics-transport.git@refs/pull/88/head#subdirectory=setup/shipment_advice_planner
