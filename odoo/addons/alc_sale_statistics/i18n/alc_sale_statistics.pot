@@ -171,6 +171,12 @@ msgid "Sale Price 2"
 msgstr ""
 
 #. module: alc_sale_statistics
+#: model:ir.model.fields,field_description:alc_sale_statistics.field_alc_stock_move_report_sale_channel
+#: model:ir.ui.view,arch_db:alc_sale_statistics.stock_moves_with_partner_view_search
+msgid "Sale channel"
+msgstr ""
+
+#. module: alc_sale_statistics
 #: model:ir.model.fields,field_description:alc_sale_statistics.field_alc_stock_move_report_location_id
 msgid "Source Location"
 msgstr ""

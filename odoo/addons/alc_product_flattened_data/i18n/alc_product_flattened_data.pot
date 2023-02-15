@@ -159,6 +159,11 @@ msgid "Supplier promotion date end"
 msgstr ""
 
 #. module: alc_product_flattened_data
+#: model:ir.model.fields,field_description:alc_product_flattened_data.field_alc_product_flattened_data_supplier_promotion_only_for_veterinaries
+msgid "Supplier promotion only for veterinaries"
+msgstr ""
+
+#. module: alc_product_flattened_data
 #: model:ir.model.fields,field_description:alc_product_flattened_data.field_alc_product_flattened_data_tax_amount
 msgid "Tax amount"
 msgstr ""

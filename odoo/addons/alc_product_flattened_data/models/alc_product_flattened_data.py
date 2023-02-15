@@ -50,6 +50,7 @@ class AlcProductFlattenedData(models.Model):
     supplier_discount_date_end = fields.Date(readonly=True)
     has_supplier_promotion = fields.Boolean(readonly=True)
     supplier_promotion_date_end = fields.Date(readonly=True)
+    supplier_promotion_only_for_veterinaries = fields.Boolean(readonly=True)
     has_discount_special = fields.Boolean(readonly=True)
     discount_special_date_end = fields.Date(readonly=True)
     web_published = fields.Boolean(readonly=True)
@@ -144,6 +145,7 @@ SELECT
     price_cache,
     supplier_promotion.id is not null as has_supplier_promotion,
     supplier_promotion.date_end as supplier_promotion_date_end,
+    supplier_promotion.only_for_veterinaries as supplier_promotion_only_for_veterinaries,
     supplier_discount.discount_sale as supplier_discount_discount_sale,
     supplier_discount.date_end as supplier_discount_date_end,
     discount_special.id is not null as has_discount_special,
@@ -274,7 +276,6 @@ CREATE UNIQUE INDEX pk_%(table)s ON %(table)s (id);
         where_clause = [where_clause] if where_clause else []
         query = Query(tables, where_clause, where_params)
         query_from, query_where, query_params = query.get_sql()
-        # pylint: disable=sql-injection
         sql_query = "SELECT * from {query_from} WHERE {query_where}".format(
             query_from=query_from, query_where=query_where
         )

@@ -13,6 +13,10 @@
             name="ratio_promotional_product"
             class="oe_inline"
           /> free.</p>
+         <field
+          name="only_for_veterinaries"
+          attrs="{'invisible': [('ratio_main_product', '&lt;', 1)]}"
+        />
       </xpath>
       <xpath expr="//group[field[@name='product_tmpl_id']]" position="inside">
         <field name="discount_purchase" />

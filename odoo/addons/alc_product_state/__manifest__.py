@@ -12,6 +12,7 @@
     "website": "https://acsone.eu/",
     "depends": ["sale"],
     "data": [
+        "views/product_product.xml",
         "views/product_state.xml",
         "views/product_template.xml",
         "security/product_state.xml",

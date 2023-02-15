@@ -4,6 +4,7 @@
 
 import logging
 
+# pylint: disable=odoo-addons-relative-import
 from odoo.addons.alc_pim.hooks import _load_attribute_options_translations
 
 _logger = logging.getLogger(__name__)

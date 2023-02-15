@@ -5,9 +5,10 @@
 from odoo.tools import mute_logger
 
 from odoo.addons.alc_documents.tests.common import TestAlcDocuments
+from odoo.addons.alc_product_flattened_data.tests.common import TestProductFlattenedData
 
 
-class TestAlcDocumentsPrices(TestAlcDocuments):
+class TestAlcDocumentsPrices(TestAlcDocuments, TestProductFlattenedData):
     @classmethod
     @mute_logger("odoo.addons.queue_job.models.base")
     def setUpClass(cls):

@@ -96,7 +96,7 @@ msgid "Created on"
 msgstr "Créé le"
 
 #. module: specific_print
-#: code:addons/specific_print/models/stock_picking.py:96
+#: code:addons/specific_print/models/stock_picking.py:102
 #: model:ir.model.fields,help:specific_print.field_res_partner_no_labels_products
 #: model:ir.model.fields,help:specific_print.field_res_users_no_labels_products
 #: model:ir.model.fields,help:specific_print.field_shopinvader_partner_no_labels_products
@@ -215,8 +215,8 @@ msgstr "Lots"
 
 #. module: specific_print
 #: code:addons/specific_print/models/stock_pack_operation.py:51
-#: code:addons/specific_print/models/stock_picking.py:40
-#: code:addons/specific_print/models/stock_picking.py:76
+#: code:addons/specific_print/models/stock_picking.py:44
+#: code:addons/specific_print/models/stock_picking.py:82
 #, python-format
 msgid "No destination partner defined"
 msgstr "Aucun destinaire défini"
@@ -299,6 +299,12 @@ msgid "Print lots"
 msgstr "Imprimer les lots"
 
 #. module: specific_print
+#: model:ir.model.fields,field_description:specific_print.field_stock_picking_printed_once
+#, fuzzy
+msgid "Printed once"
+msgstr "Imprimer le lot"
+
+#. module: specific_print
 #: model:ir.model,name:specific_print.model_printing_printer
 #: model:ir.model.fields,field_description:specific_print.field_print_label_printer_id
 msgid "Printer"
@@ -330,6 +336,13 @@ msgstr "Quantité"
 #: model:ir.model,name:specific_print.model_report
 msgid "Report"
 msgstr "Rapport"
+
+#. module: specific_print
+#: model:ir.model.fields,help:specific_print.field_stock_picking_printed_once
+msgid ""
+"Technical field to see if labels for food products in case of wholesaler "
+"have already been printed once since we only need one label"
+msgstr ""
 
 #. module: specific_print
 #: code:addons/specific_print/models/printer.py:20

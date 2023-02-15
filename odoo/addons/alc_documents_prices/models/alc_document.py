@@ -197,6 +197,10 @@ class AlcDocument(models.Model):
                 elif (
                     discount_def == "supplier_promotion"
                     and prices_data.has_supplier_promotion
+                    and (
+                        not prices_data.supplier_promotion_only_for_veterinaries
+                        or self.partner_id.partner_type == "veterinary"
+                    )
                 ):
                     discount_type = "Produits GRATUITS"
                     date_end = prices_data.supplier_promotion_date_end

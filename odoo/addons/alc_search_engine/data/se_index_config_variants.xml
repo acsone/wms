@@ -11,9 +11,10 @@
 {
   "mappings": {
     "properties": {
-      "price": {"dynamic": false, "type": "object"},
-      "vt_groups": {"dynamic": true, "type": "object"},
-      "links": {"dynamic": false, "type": "object"},
+      "links": {
+        "dynamic": false,
+        "type": "object"
+      },
       "hierarchicalCategories": {
         "type": "nested",
         "properties": {
@@ -34,6 +35,10 @@
       "description_shop_long": {
         "type": "text",
         "analyzer": "analyzer_lang"
+      },
+      "vt_groups": {
+        "dynamic": true,
+        "type": "object"
       },
       "url_key": {
         "type": "keyword"
@@ -56,7 +61,26 @@
         "type": "integer"
       },
       "supplier_promotion": {
-        "type": "nested"
+        "type": "nested",
+        "properties": {
+          "time_frame": {
+            "type": "date_range",
+            "format": "yyyy-MM-dd"
+          }
+        }
+      },
+      "supplier_promotion_veterinary": {
+        "type": "nested",
+        "properties": {
+          "time_frame": {
+            "type": "date_range",
+            "format": "yyyy-MM-dd"
+          }
+        }
+      },
+      "cross": {
+        "type": "text",
+        "analyzer": "analyzer_lang"
       },
       "categories": {
         "type": "nested",
@@ -78,6 +102,10 @@
       },
       "main": {
         "type": "boolean"
+      },
+      "price": {
+        "dynamic": false,
+        "type": "object"
       },
       "stock": {
         "properties": {
@@ -159,7 +187,13 @@
         "type": "nested"
       },
       "supplier_discount": {
-        "type": "nested"
+        "type": "nested",
+        "properties": {
+          "time_frame": {
+            "type": "date_range",
+            "format": "yyyy-MM-dd"
+          }
+        }
       },
       "attributes": {
         "properties": {
@@ -378,9 +412,10 @@
 {
   "mappings": {
     "properties": {
-      "price": {"dynamic": false, "type": "object"},
-      "vt_groups": {"dynamic": true, "type": "object"},
-      "links": {"dynamic": false, "type": "object"},
+      "links": {
+        "dynamic": false,
+        "type": "object"
+      },
       "hierarchicalCategories": {
         "type": "nested",
         "properties": {
@@ -401,6 +436,10 @@
       "description_shop_long": {
         "type": "text",
         "analyzer": "analyzer_lang"
+      },
+      "vt_groups": {
+        "dynamic": true,
+        "type": "object"
       },
       "url_key": {
         "type": "keyword"
@@ -423,7 +462,22 @@
         "type": "integer"
       },
       "supplier_promotion": {
-        "type": "nested"
+        "type": "nested",
+        "properties": {
+          "time_frame": {
+            "type": "date_range",
+            "format": "yyyy-MM-dd"
+          }
+        }
+      },
+      "supplier_promotion_veterinary": {
+        "type": "nested",
+        "properties": {
+          "time_frame": {
+            "type": "date_range",
+            "format": "yyyy-MM-dd"
+          }
+        }
       },
       "categories": {
         "type": "nested",
@@ -445,6 +499,10 @@
       },
       "main": {
         "type": "boolean"
+      },
+      "price": {
+        "dynamic": false,
+        "type": "object"
       },
       "stock": {
         "properties": {
@@ -505,6 +563,10 @@
       "indicated_price": {
         "type": "double"
       },
+      "cross": {
+        "type": "text",
+        "analyzer": "analyzer_lang"
+      },
       "name": {
         "fields": {
           "raw": {
@@ -526,7 +588,13 @@
         "type": "nested"
       },
       "supplier_discount": {
-        "type": "nested"
+        "type": "nested",
+        "properties": {
+          "time_frame": {
+            "type": "date_range",
+            "format": "yyyy-MM-dd"
+          }
+        }
       },
       "attributes": {
         "properties": {
@@ -735,9 +803,10 @@
 {
   "mappings": {
     "properties": {
-      "price": {"dynamic": false, "type": "object"},
-      "vt_groups": {"dynamic": true, "type": "object"},
-      "links": {"dynamic": false, "type": "object"},
+      "links": {
+        "dynamic": false,
+        "type": "object"
+      },
       "hierarchicalCategories": {
         "type": "nested",
         "properties": {
@@ -758,6 +827,10 @@
       "description_shop_long": {
         "type": "text",
         "analyzer": "analyzer_lang"
+      },
+      "vt_groups": {
+        "dynamic": true,
+        "type": "object"
       },
       "url_key": {
         "type": "keyword"
@@ -780,7 +853,22 @@
         "type": "integer"
       },
       "supplier_promotion": {
-        "type": "nested"
+        "type": "nested",
+        "properties": {
+          "time_frame": {
+            "type": "date_range",
+            "format": "yyyy-MM-dd"
+          }
+        }
+      },
+      "supplier_promotion_veterinary": {
+        "type": "nested",
+        "properties": {
+          "time_frame": {
+            "type": "date_range",
+            "format": "yyyy-MM-dd"
+          }
+        }
       },
       "categories": {
         "type": "nested",
@@ -802,6 +890,10 @@
       },
       "main": {
         "type": "boolean"
+      },
+      "price": {
+        "dynamic": false,
+        "type": "object"
       },
       "stock": {
         "properties": {
@@ -862,6 +954,10 @@
       "indicated_price": {
         "type": "double"
       },
+      "cross": {
+        "type": "text",
+        "analyzer": "analyzer_lang"
+      },
       "name": {
         "fields": {
           "raw": {
@@ -883,7 +979,13 @@
         "type": "nested"
       },
       "supplier_discount": {
-        "type": "nested"
+        "type": "nested",
+        "properties": {
+          "time_frame": {
+            "type": "date_range",
+            "format": "yyyy-MM-dd"
+          }
+        }
       },
       "attributes": {
         "properties": {

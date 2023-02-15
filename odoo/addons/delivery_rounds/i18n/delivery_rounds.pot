@@ -79,7 +79,7 @@ msgid "Assign Delivery Round"
 msgstr ""
 
 #. module: delivery_rounds
-#: code:addons/delivery_rounds/models/stock_picking.py:243
+#: code:addons/delivery_rounds/models/stock_picking.py:230
 #, python-format
 msgid "Assign pickings of partner %s"
 msgstr ""
@@ -335,7 +335,7 @@ msgid "Delivery round %s will be updated in background."
 msgstr ""
 
 #. module: delivery_rounds
-#: code:addons/delivery_rounds/models/stock_picking.py:169
+#: code:addons/delivery_rounds/models/stock_picking.py:156
 #, python-format
 msgid "Delivery round assigned to a picking without reservation. Method _assign_pickings on delivery.round should have been called."
 msgstr ""
@@ -457,11 +457,6 @@ msgstr ""
 #. module: delivery_rounds
 #: model:ir.model.fields,help:delivery_rounds.field_stock_picking_partner_itinerary_ids
 msgid "Indicates on which itinerary this partner is"
-msgstr ""
-
-#. module: delivery_rounds
-#: model:ir.model.fields,field_description:delivery_rounds.field_stock_picking_is_assignable
-msgid "Is assignable"
 msgstr ""
 
 #. module: delivery_rounds
@@ -1048,7 +1043,7 @@ msgid "You cannot set a week day and a date overwrite in the same time."
 msgstr ""
 
 #. module: delivery_rounds
-#: code:addons/delivery_rounds/models/stock_picking.py:197
+#: code:addons/delivery_rounds/models/stock_picking.py:184
 #, python-format
 msgid "You cannot unassign a delivery round from a started picking"
 msgstr ""

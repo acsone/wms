@@ -23,7 +23,7 @@ class SaleOrder(SaleOrderBase):
             for line in rec.order_line:
                 product_tmpl = line.product_id.product_tmpl_id
                 promotional_qty = product_tmpl.get_promotional_product(
-                    line.product_uom_qty, line.product_id.uom_id
+                    line.product_uom_qty, line.product_id.uom_id, self.partner_id
                 )
                 line.sequence = sequence
                 if not promotional_qty:

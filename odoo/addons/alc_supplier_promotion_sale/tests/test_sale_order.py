@@ -86,6 +86,59 @@ class TestSaleOrder(TransactionCase):
         so.action_confirm()
         self.assertEqual(len(self.sale_order.order_line), 1)
 
+    def test_only_for_veterinaries(self):
+        """Check free products could be restricted to veterinaries only."""
+        self.partner.supplier_promotion_sale_allowed = True
+        self.partner.partner_type = "guest"
+        self.env["product.supplierinfo"].create(
+            {
+                "partner_id": self.supplier.id,
+                "product_tmpl_id": self.main_product.product_tmpl_id.id,
+                "product_code": "123456",
+                "delay": 1,
+                "ratio_main_product": 3,
+                "ratio_promotional_product": 1,
+                "only_for_veterinaries": True,
+            }
+        )
+        so = self.env["sale.order"].create(
+            {
+                "partner_id": self.partner.id,
+                "order_line": [
+                    Command.create(
+                        {
+                            "name": self.main_product.name,
+                            "product_id": self.main_product.id,
+                            "product_uom_qty": 10,
+                            "sequence": 1,
+                        },
+                    )
+                ],
+            }
+        )
+        self.assertEqual(len(so.order_line), 1)
+        so.action_confirm()
+        self.assertEqual(len(so.order_line), 1)
+        self.partner.partner_type = "veterinary"
+        so = self.env["sale.order"].create(
+            {
+                "partner_id": self.partner.id,
+                "order_line": [
+                    Command.create(
+                        {
+                            "name": self.main_product.name,
+                            "product_id": self.main_product.id,
+                            "product_uom_qty": 10,
+                            "sequence": 1,
+                        },
+                    )
+                ],
+            }
+        )
+        self.assertEqual(len(so.order_line), 1)
+        so.action_confirm()
+        self.assertEqual(len(so.order_line), 2)
+
     def test_action_confirm_1(self):
         """
         Add a simple supplier info (ratio 3/1) without date or min quantity.

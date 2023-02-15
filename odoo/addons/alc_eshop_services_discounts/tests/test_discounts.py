@@ -43,3 +43,21 @@ class TestDiscountServiceFlow(TestDiscountService):
                 "is_sale_discount": True,
             }
             self.assertEqual(result["data"], [expected])
+
+    def test_discount_only_veterinary(self):
+        self.partner.partner_type = "guest"
+        discount = self.discount_food
+        params = {"reference": discount.product_tmpl_id.default_code}
+        with self.discount_service(self.partner) as service:
+            result = service.dispatch("search", params=params)
+            self.assertEqual(result["size"], 1)
+
+        discount.only_for_veterinaries = True
+        with self.discount_service(self.partner) as service:
+            result = service.dispatch("search", params=params)
+            self.assertEqual(result["size"], 0)
+
+        self.partner.partner_type = "veterinary"
+        with self.discount_service(self.partner) as service:
+            result = service.dispatch("search", params=params)
+            self.assertEqual(result["size"], 1)

@@ -93,3 +93,56 @@ class TestSupplierInfoFlow(TestSupplierInfo):
             )
         )
         self.assertEqual(supplierinfo.ratio_display_name, "For 4 products, 5 free")
+
+    def test_promo_json(self):
+        vals_promo_tomorrow = self.get_supplierinfo_vals(
+            date_start=self.tomorrow,
+            date_end=self.tomorrow,
+            ratio_promotional_product=5,
+            ratio_main_product=4,
+        )
+        promo_tomorrow = self.supplierinfo_model.create(vals_promo_tomorrow)
+        json = self.product_template.supplier_promotion_json
+        self.assertEqual(1, len(json))
+        self.assertDictEqual(
+            json[0],
+            {
+                "ratio_main_product": 4,
+                "ratio_promotional_product": 5,
+                "date_end": self.tomorrow,
+                "date_start": self.tomorrow,
+                "time_frame": {"gte": self.tomorrow, "lte": self.tomorrow},
+            },
+        )
+        self.assertFalse(self.product_template.supplier_promotion_json_for_veterinaries)
+        promo_tomorrow.only_for_veterinaries = True
+        self.assertFalse(self.product_template.supplier_promotion_json)
+        json = self.product_template.supplier_promotion_json_for_veterinaries
+        self.assertEqual(1, len(json))
+        self.assertDictEqual(
+            json[0],
+            {
+                "ratio_main_product": 4,
+                "ratio_promotional_product": 5,
+                "date_end": self.tomorrow,
+                "date_start": self.tomorrow,
+                "time_frame": {"gte": self.tomorrow, "lte": self.tomorrow},
+            },
+        )
+
+    def test_discount_json(self):
+        vals_discount_tomorrow = self.get_supplierinfo_vals(
+            date_start=self.tomorrow, date_end=self.tomorrow, discount_sale=11
+        )
+        self.supplierinfo_model.create(vals_discount_tomorrow)
+        json = self.product_template.supplier_discount_json
+        self.assertEqual(1, len(json))
+        self.assertDictEqual(
+            json[0],
+            {
+                "discount_sale": 11,
+                "date_end": self.tomorrow,
+                "date_start": self.tomorrow,
+                "time_frame": {"gte": self.tomorrow, "lte": self.tomorrow},
+            },
+        )

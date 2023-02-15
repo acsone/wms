@@ -4,6 +4,7 @@
 
 import logging
 
+# pylint: disable=odoo-addons-relative-import
 from odoo.addons.alc_geo_delivery_rounds.hooks import _fill_partner_tag
 
 _logger = logging.getLogger(__name__)

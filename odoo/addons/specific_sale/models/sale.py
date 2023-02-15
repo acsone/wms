@@ -333,7 +333,7 @@ class SaleOrderLine(models.Model):
     def warning_free_product(self):
         """Raise a warning if order give rights to promotional product."""
         return self.product_id.product_tmpl_id.get_promotional_product(
-            self.product_uom_qty, self.product_id.uom_id
+            self.product_uom_qty, self.product_id.uom_id, self.order_partner_id
         )
 
     def warning_provision_on_order(self):

@@ -14,6 +14,9 @@ class MakePickingBatch(models.TransientModel):
         partner = first_picking_to_cluster.partner_id
         partner_devices = partner._get_specific_stock_devices()
         if partner_devices:
+            # Initialize dimension fields on picking
+            first_picking_to_cluster = first_picking_to_cluster.with_prefetch()
+            first_picking_to_cluster._init_dimension_fields()
             menu_devices = self.stock_device_type_ids
             device_to_keep = self.env["stock.device.type"]
             for device in partner_devices:

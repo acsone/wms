@@ -21,6 +21,7 @@
         "alc_product_mto",
         "alc_storage_media_lang",
         "alc_veterinary_group",
+        "account_tax_one_vat",
     ],
     "data": [
         "data/ir_export_product.xml",

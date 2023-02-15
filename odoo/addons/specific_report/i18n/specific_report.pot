@@ -478,14 +478,14 @@ msgid "Canceled Refund"
 msgstr ""
 
 #. module: specific_report
-#: code:addons/specific_report/models/sale_order.py:119
+#: code:addons/specific_report/models/sale_order.py:125
 #, python-format
 msgid "Cannot send pharmacist email\n"
 "%s partner must have an email address."
 msgstr ""
 
 #. module: specific_report
-#: code:addons/specific_report/models/sale_order.py:112
+#: code:addons/specific_report/models/sale_order.py:118
 #, python-format
 msgid "Cannot send pharmacist email\n"
 "No pharmacist affiliated to the client."
@@ -1040,7 +1040,7 @@ msgid "Taxes"
 msgstr ""
 
 #. module: specific_report
-#: code:addons/specific_report/models/sale_order.py:76
+#: code:addons/specific_report/models/sale_order.py:82
 #, python-format
 msgid "The Quotation can not be printed the client {} ({}) has no reference assigned."
 msgstr ""

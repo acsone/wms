@@ -2,68 +2,73 @@
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+import mock
+
 from .common import CommonReceptionPharmacyCase
 
 
 class TestReceptionPharmacy(CommonReceptionPharmacyCase):
     @classmethod
-    def _create_and_prepare_so(cls):
-        cls.so1 = cls.env["sale.order"].create(
+    def setUpClass(cls):
+        super(TestReceptionPharmacy, cls).setUpClass()
+        cls.env = cls.env(
+            context=dict(
+                cls.env.context, test_queue_job_no_delay=True, mail_notrack=True
+            )
+        )
+        cls.wizard = cls.env["receive.pharmacy.products"]
+        cls.bin2 = cls.env["stock.location"].create({"name": "Test unit 2"})
+        Printer = cls.env["printing.printer"].sudo()
+        Printer.search([]).unlink()
+        printer_server = (
+            cls.env["printing.server"]
+            .sudo()
+            .create({"name": "Localhost", "address": "no_printing", "port": "1234"})
+        )
+        cls.printer1 = Printer.create(
             {
-                "partner_id": cls.partner.id,
-                "warehouse_id": cls.warehouse_1.id,
-                "carrier_id": cls.carrier.id,
-                "partner_invoice_id": cls.partner.id,
-                "partner_shipping_id": cls.partner.id,
-                "order_line": [
-                    (
-                        0,
-                        0,
-                        {
-                            "name": cls.product2.name,
-                            "product_id": cls.product2.id,
-                            "product_uom_qty": 15.0,
-                            "product_uom": cls.product2.uom_id.id,
-                        },
-                    )
-                ],
+                "name": "Test printer 1",
+                "system_name": "test_printer_1",
+                "server_id": printer_server.id,
             }
         )
-        cls.so1.action_confirm()
-
-        cls.picking = cls.so1.mapped("picking_ids").filtered(
-            lambda p: p.picking_type_subcode == "PICK"
-        )
-
-        cls.picking.action_confirm()
-        cls.picking.action_assign()
-        for pack_op in cls.picking.pack_operation_ids:
-            pack_op.qty_done = pack_op.product_qty
-        cls.picking.action_done()
-        cls.shipping = cls.so1.mapped("picking_ids").filtered(
-            lambda p: p.picking_type_code == "outgoing"
-        )
-
-        cls.shipping.action_confirm()
-        cls.shipping.action_assign()
-        for pack_op in cls.shipping.pack_operation_ids:
-            pack_op.qty_done = pack_op.product_qty
-        cls.shipping.delivery_round_id = cls.delivery_round_1.id
+        cls.env.user.printing_pharmacy_reception_printer_id = cls.printer1
 
     def test_00(self):
         # Create reception pharmcy for the given customer
         # assert that the partner_shipping_id = customer delivery id
 
+        # create the existing pick out
+        self._create_and_prepare_so()
+        # before pharmacy reception, one item to be delivered
+        self.assertEqual(len(self.shipping.move_lines), 1)
+
         reception = self.ReceptionPharmacy.create({"product_id": self.product.id})
-        pharmacy_line = self.ReceptionPharmacyLine.create(
+        wiz = self.wizard.create(
             {
+                "reception_pharmacy_id": reception.id,
                 "customer_id": self.partner.id,
                 "bin_id": self.bin.id,
-                "wizard_id": reception.id,
+                "product_qty": 1,
             }
         )
 
+        with mock.patch.object(
+            self.env["reception.pharmacy.line"].__class__,
+            "print_reception_pharmacy_label",
+        ) as patched_print:
+            wiz.validate_reception()
+            self.assertEqual(patched_print.call_count, 1)
+        pharmacy_line = self.env["reception.pharmacy.line"].search(
+            [("wizard_id", "=", reception.id)]
+        )
         self.assertEqual(pharmacy_line.partner_shipping_id.id, self.partner.id)
+
+        pickings = self._validate_reception_and_return_picking(reception)
+
+        # after pharmacy reception, 2 items to be delivered
+        self.assertEqual(len(self.shipping.move_lines), 2)
+        self.assertTrue(pickings.mapped("delivery_round_id"))
 
     def test_01(self):
         # Create reception pharmacy for the given customer with an existing picking out
@@ -75,16 +80,23 @@ class TestReceptionPharmacy(CommonReceptionPharmacyCase):
         self.assertEqual(len(self.shipping.move_lines), 1)
 
         reception = self.ReceptionPharmacy.create({"product_id": self.product.id})
-        self.ReceptionPharmacyLine.create(
+        wiz = self.wizard.create(
             {
+                "reception_pharmacy_id": reception.id,
                 "customer_id": self.partner.id,
                 "bin_id": self.bin.id,
-                "wizard_id": reception.id,
+                "product_qty": 1,
             }
         )
 
-        pickings = reception.validate()
+        with mock.patch.object(
+            self.env["reception.pharmacy.line"].__class__,
+            "print_reception_pharmacy_label",
+        ) as patched_print:
+            wiz.validate_reception()
+            self.assertEqual(patched_print.call_count, 1)
 
+        pickings = self._validate_reception_and_return_picking(reception)
         # after pharmacy reception, 2 items to be delivered
         self.assertEqual(len(self.shipping.move_lines), 2)
         self.assertTrue(pickings.mapped("delivery_round_id"))
@@ -99,13 +111,61 @@ class TestReceptionPharmacy(CommonReceptionPharmacyCase):
 
     def test_no_round_auto_assign_if_alone(self):
         reception = self.ReceptionPharmacy.create({"product_id": self.product.id})
-        self.ReceptionPharmacyLine.create(
+        wiz = self.wizard.create(
             {
+                "reception_pharmacy_id": reception.id,
                 "customer_id": self.partner.id,
                 "bin_id": self.bin.id,
-                "wizard_id": reception.id,
+                "product_qty": 1,
             }
         )
 
-        pickings = reception.validate()
+        with mock.patch.object(
+            self.env["reception.pharmacy.line"].__class__,
+            "print_reception_pharmacy_label",
+        ) as patched_print:
+            wiz.validate_reception()
+            self.assertEqual(patched_print.call_count, 1)
+
+        pickings = self._validate_reception_and_return_picking(reception)
         self.assertFalse(pickings.mapped("delivery_round_id"))
+
+    def test_several_reception_for_one_customer(self):
+        reception = self.ReceptionPharmacy.create({"product_id": self.product.id})
+        wiz = self.wizard.create(
+            {
+                "reception_pharmacy_id": reception.id,
+                "customer_id": self.partner.id,
+                "bin_id": self.bin.id,
+                "product_qty": 1,
+            }
+        )
+
+        with mock.patch.object(
+            self.env["reception.pharmacy.line"].__class__,
+            "print_reception_pharmacy_label",
+        ):
+            wiz.validate_reception()
+        wiz = self.wizard.create(
+            {
+                "reception_pharmacy_id": reception.id,
+                "customer_id": self.partner.id,
+                "bin_id": self.bin2.id,
+                "product_qty": 1,
+            }
+        )
+        with mock.patch.object(
+            self.env["reception.pharmacy.line"].__class__,
+            "print_reception_pharmacy_label",
+        ):
+            wiz.validate_reception()
+        pharmacy_lines = self.env["reception.pharmacy.line"].search(
+            [("wizard_id", "=", reception.id)]
+        )
+        self.assertEqual(len(pharmacy_lines), 2)
+        self.assertEqual(pharmacy_lines.mapped("customer_id"), self.partner)
+        pickings = self._validate_reception_and_return_picking(reception)
+
+        self.assertEqual(len(pickings), 2)
+        self.assertEqual(reception.state, "done")
+        self.assertEqual(reception.line_ids.mapped("state"), ["done", "done"])
