@@ -48,6 +48,7 @@
         "alc_stock_lot_available",
         "alc_external_fax",
         "alc_sale_order_line_product_type",
+        "alc_company_term_condition",
         "alc_price_triple_discount_exclusive",
     ],
 }

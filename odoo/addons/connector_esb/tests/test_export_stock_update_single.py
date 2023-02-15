@@ -38,7 +38,7 @@ class ExportStockUpdateSingleTestCase(SavepointCase):
         products = self.env["stock.quant"].search([]).mapped("product_id")
         products.write({"sale_ok": False})
         self.partner = self.env.ref("base.res_partner_1")
-        self.loc_physical = self.env.ref("specific_base.stock_location_vlb")
+        self.loc_physical = self.env.ref("alc_stock_location_data.stock_location_vlb")
         self.location = self.env.ref("stock.stock_location_stock")
         self.location.location_id = self.loc_physical
         self.location._parent_store_compute()

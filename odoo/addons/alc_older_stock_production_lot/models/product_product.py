@@ -25,7 +25,7 @@ class ProductProduct(models.Model):
         tracked_product_ids = self.filtered(lambda p: p.tracking == "lot").ids
         lot_id_by_product_id = {}
         if tracked_product_ids:
-            location_physical = self.env.ref("specific_base.stock_location_vlb")
+            location_physical = self.env.ref("alc_stock_location_data.stock_location_vlb")
             get_lot_query = """
                 SELECT
                     DISTINCT ON (product_id) product_id,

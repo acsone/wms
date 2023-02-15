@@ -368,7 +368,6 @@ exclude = [
   'odoo/addons/shopinvader_search_engine_update_vtgroups/*',
   'odoo/addons/shopinvader_url_locales/*',
   'odoo/addons/specific_account/*',
-  'odoo/addons/specific_base/*',
   'odoo/addons/specific_cutoff/*',
   'odoo/addons/specific_partner/*',
   'odoo/addons/specific_print/*',
