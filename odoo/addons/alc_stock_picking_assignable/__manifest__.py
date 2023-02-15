@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
@@ -14,5 +13,5 @@
     "data": ["views/stock_picking.xml"],
     "demo": [],
     "pre_init_hook": "pre_init_hook",
-    "installable": True,
+    "installable": False,
 }

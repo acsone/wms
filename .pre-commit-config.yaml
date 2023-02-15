@@ -181,6 +181,7 @@ exclude: |
   ^odoo/addons/alc_shopfloor_app/|
   ^odoo/addons/alc_shopfloor_assignation_issue_message/|
   ^odoo/addons/alc_shopfloor_cluster_picking/|
+  ^odoo/addons/alc_shopfloor_cluster_picking_by_partners/|
   ^odoo/addons/alc_shopfloor_cluster_picking_out_location/|
   ^odoo/addons/alc_shopfloor_cluster_picking_printing/|
   ^odoo/addons/alc_shopfloor_cluster_picking_stock_issue_all_products/|
@@ -219,6 +220,7 @@ exclude: |
   ^odoo/addons/alc_stock_available_immediately_lot_loss/|
   ^odoo/addons/alc_stock_lot_available/|
   ^odoo/addons/alc_stock_move_direction/|
+  ^odoo/addons/alc_stock_picking_assignable/|
   ^odoo/addons/alc_stock_picking_batch_assignment/|
   ^odoo/addons/alc_stock_picking_batch_creation/|
   ^odoo/addons/alc_stock_picking_batch_delivery_rounds/|
@@ -333,6 +335,7 @@ exclude: |
   ^odoo/addons/stock_reception_priority/|
   ^odoo/addons/stock_refill/|
   ^odoo/addons/stock_valuation/|
+  ^odoo/addons/storage_file_url_store/|
   ^odoo/addons/test_alc_shopfloor_stock_issue_product_additional/|
   ^odoo/addons/test_delivery_rounds/|
   ^odoo/addons/test_product_additional_groupbypartner/|

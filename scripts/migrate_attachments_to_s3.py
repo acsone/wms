@@ -18,14 +18,15 @@ import psycopg2
 dbname = os.environ["DB_NAME"]
 
 
-def chunks(l, n):
-    for i in range(0, len(l), n):
-        yield l[i : i + n]
+def chunks(lst, n):
+    for i in range(0, len(lst), n):
+        yield lst[i : i + n]
 
 
 def _migrate_batch(attachment_ids):
     print("migrating attachments", attachment_ids)
     from click_odoo import OdooEnvironment
+
     from odoo import api
 
     @api.model
