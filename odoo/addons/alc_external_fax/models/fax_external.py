@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2018 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
@@ -8,11 +7,10 @@ import re
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
-from odoo.addons.queue_job.job import job
 
-
-class Fax(models.Model):
+class FaxExternal(models.Model):
     _name = "fax.external"
+    _description = "Fax"
 
     name = fields.Char(string="Fax name")
     email_from = fields.Char(string="Email from", compute="_compute_from_env")
@@ -34,9 +32,8 @@ class Fax(models.Model):
             record.fax_number = os.getenv("OVH_FAX_NUMBER", "")
             record.password = os.getenv("OVH_FAX_PASSWORD", "")
 
-    @api.multi
     def email_recipient(self, recipient_fax_number):
-        """ Generate the email recipient.
+        """Generate the email recipient.
 
         It is build like this
         {fax number of the recipient} @ {email domain}
@@ -47,22 +44,19 @@ class Fax(models.Model):
         email_recipient = "".join([fax_no, "@", self.email_domain])
         return email_recipient
 
-    @api.multi
     def subject(self):
         """The subject is the fax number of the service."""
         self.ensure_one()
         return self.fax_number
 
-    @api.multi
     def body(self):
-        """ The password to the service is sent in the body of the message."""
+        """The password to the service is sent in the body of the message."""
         self.ensure_one()
-        return u"password:{}".format(self.password)
+        return f"password:{self.password}"
 
-    @api.multi
-    @job(default_channel="root.background.fax")  # priority=10
     def send(self, fax_no, attachment_id):
-        """Send an email to the fax service
+        """
+        Send an email to the fax service.
 
         The file referenced by the attachment_id is send to the number fax_no.
         """
@@ -70,8 +64,8 @@ class Fax(models.Model):
         if not fax_no:
             raise UserError(
                 _(
-                    u"Fax could not be sent for attachment with "
-                    u"id {}. Fax number is empty or invalid."
+                    "Fax could not be sent for attachment with "
+                    "id {}. Fax number is empty or invalid."
                 ).format(attachment_id)
             )
         mail_values = {
