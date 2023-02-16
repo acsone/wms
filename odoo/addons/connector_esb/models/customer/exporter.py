@@ -46,6 +46,7 @@ class CustomerExportMapper(Component):
 
         The value is in float format but the minutes on a base of 100
         """
+        # TODO: This field has been removed from specific_stock module
         tlo = record.time_limit_order
         hours = int(tlo)
         minutes = int((tlo - hours) * 100) * 60 / 100

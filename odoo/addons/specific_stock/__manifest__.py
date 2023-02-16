@@ -50,7 +50,6 @@
         # Views
         "views/product_category.xml",
         "views/product_template.xml",
-        "views/res_partner.xml",
         "views/stock_location.xml",
         "views/stock_production_lot.xml",
         "views/stock_quant.xml",
