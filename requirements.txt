@@ -111,7 +111,6 @@ odoo-addon-stock-picking-type-shipping-policy @ git+https://github.com/acsone/wm
 odoo-addon-stock-picking-volume @ git+https://github.com/OCA/stock-logistics-warehouse.git@3a6bf112dcbfc1e138dfe10515d124fc5ddb9b5f#subdirectory=setup/stock_picking_volume
 odoo-addon-stock-procurement-customer @ git+https://github.com/acsone/stock-logistics-workflow.git@e142a70dd6da183ccff6ca5374c1e445882fc376#subdirectory=setup/stock_procurement_customer
 odoo-addon-stock-production-lot-expired-date==16.0.1.0.1
-odoo-addon-stock-production-lot-expiry @ git+https://github.com/acsone/product-attribute.git@d1d1d4bc64d8464c621b0a5823ff43fd3ee03406#subdirectory=setup/stock_production_lot_expiry
 odoo-addon-stock-putaway-hook==16.0.1.0.0.4
 odoo-addon-stock-quant-package-dimension==16.0.1.0.0.2
 odoo-addon-stock-quant-package-product-packaging==16.0.1.0.1
