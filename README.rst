@@ -7,6 +7,12 @@ Alcyon Odoo
 Development environment howto
 =============================
 
+Development requirements
+------------------------
+
+- Install pip-deepfreeze with ``pipx install pip-deepfreeze``
+- Install pip-split-requirements with ``pipx install pip-split-requirements``
+
 Initialize virtualenv
 ---------------------
 
@@ -86,6 +92,7 @@ To release using gitlab-ci
 
 .. [#] https://pypi.python.org/pypi/acsoo/#installation
 .. [#] https://pypi.python.org/pypi/pip-deepfreeze
+.. [#] https://pypi.org/project/pip-split-requirements
 .. [#] https://pypi.python.org/pypi/git-autoshare
 .. [#] https://github.com/ambv/black
 .. [#] https://github.com/pre-commit/pre-commit
