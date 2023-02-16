@@ -63,6 +63,8 @@ odoo-addon-product-total-weight-from-packaging @ git+https://github.com/acsone/p
 odoo-addon-product-template-has-one-variant @ git+https://github.com/acsone/product-attribute.git@16.0-add-product-template-has-one-variant-dro#subdirectory=setup/product_template_has_one_variant
 
 # purchase-workflow
+# https://github.com/OCA/purchase-workflow/pull/1687
+odoo-addon-purchase-delivery-split-date @ git+https://github.com/acsone/purchase-workflow.git@16.0-imp-purchase_delivery_dplit_date-dro#subdirectory=setup/purchase_delivery_split_date
 
 # sale-workflow
 # https://github.com/OCA/sale-workflow/pull/2322
