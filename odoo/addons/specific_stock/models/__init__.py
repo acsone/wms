@@ -1,16 +1,17 @@
-from . import product_category
-from . import product_template
-from . import product_product
-from . import res_partner
-from . import stock_picking
-from . import stock_production_lot
-from . import stock_location
-from . import stock_config_settings
-from . import stock_inventory
-from . import stock_pack_operation
-from . import stock_quant
-from . import stock_quant_package
-from . import procurement_order
-from . import stock_move
-from . import stock_scrap
-from . import board
+from . import (
+    board,
+    procurement_order,
+    product_category,
+    product_product,
+    product_template,
+    res_partner,
+    stock_inventory,
+    stock_location,
+    stock_move,
+    stock_pack_operation,
+    stock_picking,
+    stock_production_lot,
+    stock_quant,
+    stock_quant_package,
+    stock_scrap,
+)

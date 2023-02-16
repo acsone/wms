@@ -53,7 +53,6 @@
         "views/res_partner.xml",
         "views/stock_location.xml",
         "views/stock_production_lot.xml",
-        "views/stock_config_settings.xml",
         "views/stock_quant.xml",
         "views/stock_move.xml",
         "views/stock_inventory.xml",
