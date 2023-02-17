@@ -30,6 +30,7 @@ libsass==0.22.0
 lxml==4.9.2
 manifestoo_core==0.10.4
 MarkupSafe==2.1.2
+multidict==6.0.4
 num2words==0.5.12
 numpy==1.24.2
 odoo @ git+https://github.com/acsone/odoo.git@6dda7918534a89ddb813073f7485345db6290751
@@ -45,6 +46,7 @@ odoo-addon-base-exception==16.0.1.0.1.3
 odoo-addon-base-partner-sequence==16.0.1.0.0.3
 odoo-addon-base-report-to-printer==16.0.1.1.0.1
 odoo-addon-base-sparse-field-list-support @ git+https://github.com/acsone/server-tools.git@f75469cfc3ead20b6224195b653ddba735a219b4#subdirectory=setup/base_sparse_field_list_support
+odoo-addon-base-time-window @ git+https://github.com/OCA/server-tools.git@d01e665eeb53f0ec577c91b74f26c1f895ab3369#subdirectory=setup/base_time_window
 odoo-addon-delivery-carrier-account==16.0.1.0.0.4
 odoo-addon-delivery-carrier-info==16.0.1.0.0.2
 odoo-addon-delivery-carrier-label-gls @ git+https://github.com/acsone/delivery-carrier.git@c58e23409775402fc77e734a930066d5ae4d8991#subdirectory=setup/delivery_carrier_label_gls
@@ -82,6 +84,8 @@ odoo-addon-server-environment==16.0.1.0.1
 odoo-addon-session-db==16.0.1.0.3
 odoo-addon-shipment-advice==16.0.1.0.1
 odoo-addon-shipment-advice-planner @ git+https://github.com/acsone/stock-logistics-transport.git@2970f906e1d0d7eae3c6d28405388671798453db#subdirectory=setup/shipment_advice_planner
+odoo-addon-shipment-advice-planner-toursolver @ git+https://github.com/OCA/stock-logistics-transport.git@cfa638f051f454bcfb304669580a97f900a49a9b#subdirectory=setup/shipment_advice_planner_toursolver
+odoo-addon-shipment-advice-planner-toursolver-queue-job @ git+https://github.com/OCA/stock-logistics-transport.git@cfa638f051f454bcfb304669580a97f900a49a9b#subdirectory=setup/shipment_advice_planner_toursolver_queue_job
 odoo-addon-stock-available==16.0.1.0.1.1
 odoo-addon-stock-available-immediately==16.0.1.0.0.4
 odoo-addon-stock-available-immediately-exclude-location @ git+https://github.com/acsone/stock-logistics-availability.git@17e6e34765fd01ed1a3b2f4c021526f3c3ba11be#subdirectory=setup/stock_available_immediately_exclude_location
@@ -124,12 +128,14 @@ odoo-addon-stock-release-channel-auto-release @ git+https://github.com/acsone/wm
 odoo-addon-stock-release-channel-process-end-time @ git+https://github.com/acsone/wms.git@c29d5a6cf4ba5264ff1a36f6aff5f4423f78e8b6#subdirectory=setup/stock_release_channel_process_end_time
 odoo-addon-stock-release-channel-shipment-advice @ git+https://github.com/acsone/wms.git@0d776d523ead4e35e218cbc461422c42992d174c#subdirectory=setup/stock_release_channel_shipment_advice
 odoo-addon-stock-release-channel-shipment-advice-process-end-time @ git+https://github.com/acsone/wms.git@90e8aebeee688177c1ba0b10b03b8cd49a652986#subdirectory=setup/stock_release_channel_shipment_advice_process_end_time
+odoo-addon-stock-release-channel-shipment-advice-toursolver @ git+https://github.com/OCA/wms.git@46cf39a54b0389062d13e5cdcb27b1788eb0c01e#subdirectory=setup/stock_release_channel_shipment_advice_toursolver
 odoo-addon-stock-restrict-lot==16.0.1.0.0.2
 odoo-addon-stock-route-mto @ git+https://github.com/acsone/stock-logistics-warehouse.git@3acb2ea38a2cac932a01fe6284b80feeae695ce0#subdirectory=setup/stock_route_mto
 odoo-addon-stock-scrap-location-default @ git+https://github.com/acsone/stock-logistics-warehouse.git@b50ec6f42d728695d742873e00c326d7cd3713fa#subdirectory=setup/stock_scrap_location_default
 odoo-addon-stock-storage-type @ git+https://github.com/acsone/wms.git@fd484bfeb2110f1dbcaec071acab1a41dc57d935#subdirectory=setup/stock_storage_type
 odoo-addon-stock-storage-type-putaway-abc @ git+https://github.com/acsone/wms.git@2cca4a20b17686fe5cfee096215035b9fdef3e09#subdirectory=setup/stock_storage_type_putaway_abc
 odoo-addon-stock-storage-type-putaway-abc-classification-sale-stock @ git+https://github.com/acsone/wms.git@980b444e365da2752f5bc1345f22d2cf5ca80657#subdirectory=setup/stock_storage_type_putaway_abc_classification_sale_stock
+odoo-addon-web-notify @ git+https://github.com/OCA/web.git@d81d6375a9eee259c1f7dc686988ed62db9ab02f#subdirectory=setup/web_notify
 odoo-addons-enterprise @ git+ssh://git@github.com/acsone/enterprise.git@9e4907621674d6fb3c5f19a0ede9094f6fdae302
 ofxparse==0.21
 openupgradelib==3.4.1
@@ -156,6 +162,7 @@ python-dateutil==2.8.2
 python-stdnum==1.18
 pytz==2022.7.1
 pyusb==1.2.1
+PyYAML==6.0
 qrcode==7.4.2
 reportlab==3.6.12
 requests==2.28.2
@@ -170,12 +177,15 @@ typodoo==0.2
 unicodecsv==0.14.1
 Unidecode==1.3.6
 urllib3==1.26.14
+vcrpy==4.2.1
+vcrpy-unittest==0.1.7
 vobject==0.9.6.1
 Werkzeug==2.0.3
 wrapt==1.14.1
 xlrd==2.0.1
 XlsxWriter==3.0.8
 xlwt==1.3.0
+yarl==1.8.2
 zeep==4.2.1
 zope.event==4.6
 zope.interface==5.5.2
