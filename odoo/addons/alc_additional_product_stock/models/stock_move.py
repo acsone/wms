@@ -62,7 +62,7 @@ class StockMove(StockMoveBase):
 
     def _get_additional_product_procurement(self):
         self.ensure_one()
-        first_move = self.first_move_id if self.first_move_id else self
+        first_move = self.first_move_id
         additional_product = first_move.product_id.additional_product_id
         product_qty = first_move.product_id._get_qty_additional_product(
             self.reserved_availability
@@ -115,7 +115,7 @@ class StockMove(StockMoveBase):
 
     def _get_all_not_done_additional_moves(self):
         if not self.is_additional_move:
-            first_move = self.first_move_id if self.first_move_id else self
+            first_move = self.first_move_id
             first_additional_move = first_move.additional_move_ids
             return (
                 self.search(

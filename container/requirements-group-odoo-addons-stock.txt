@@ -24,7 +24,7 @@ odoo-addon-stock-move-auto-assign-auto-release @ git+https://github.com/acsone/s
 odoo-addon-stock-move-common-dest==16.0.1.0.1
 odoo-addon-stock-move-location==16.0.1.1.0.2
 odoo-addon-stock-move-manage-priority @ git+https://github.com/acsone/stock-logistics-workflow.git@f31ba15e6c93b348e6e4bc37240b79639b0a991a#subdirectory=setup/stock_move_manage_priority
-odoo-addon-stock-move-propagate-first-move @ git+https://github.com/acsone/stock-logistics-workflow.git@64055d8b59387caaf2307116070427f58859c469#subdirectory=setup/stock_move_propagate_first_move
+odoo-addon-stock-move-propagate-first-move @ git+https://github.com/acsone/stock-logistics-workflow.git@a00e59b764583cd3cec72cf8e1a20fc44648e290#subdirectory=setup/stock_move_propagate_first_move
 odoo-addon-stock-override-procurement @ git+https://github.com/acsone/stock-logistics-workflow.git@ac0568b760314fa721e8f167b8ffd61c16a14b36#subdirectory=setup/stock_override_procurement
 odoo-addon-stock-packaging-calculator @ git+https://github.com/acsone/stock-logistics-warehouse.git@7a62f663ee6d0c2393ad2d09c79e88d6308e6efd#subdirectory=setup/stock_packaging_calculator
 odoo-addon-stock-picking-backorder-reason @ git+https://github.com/acsone/stock-logistics-workflow.git@1789528b69158cddce8a79f8577e266a2854998d#subdirectory=setup/stock_picking_backorder_reason
