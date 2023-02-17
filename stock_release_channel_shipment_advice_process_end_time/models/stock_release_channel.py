@@ -31,9 +31,7 @@ class StockReleaseChannel(models.Model):
             return self.shipment_advice_arrival_delay
         if not warehouse:
             return 0
-        if warehouse.release_channel_shipment_advice_arrival_delay:
-            return warehouse.release_channel_shipment_advice_arrival_delay
-        return warehouse.company_id.release_channel_shipment_advice_arrival_delay
+        return warehouse.release_channel_shipment_advice_arrival_delay
 
     def _get_shipment_advice_arrival_date(self, warehouse):
         self.ensure_one()

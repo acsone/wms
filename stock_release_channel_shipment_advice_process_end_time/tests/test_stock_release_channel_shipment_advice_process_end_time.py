@@ -22,31 +22,12 @@ class TestStockReleaseChannelShipmentAdviceProcessEndTime(ChannelReleaseCase):
         cls.channel.process_end_time = 10.5
         cls.channel.shipment_planning_method = "simple"
 
-    def test_plan_shipment_simple_delay_on_company_arrival_date(self):
-        """
-        delay:
-        - company: 10mn
-        - warehouse: 0mn
-        - channel: 0mn
-        """
-        self.wh.company_id.release_channel_shipment_advice_arrival_delay = 10
-        self.wh.release_channel_shipment_advice_arrival_delay = 0
-        self.channel.shipment_advice_arrival_delay = 0
-
-        self.channel.button_plan_shipments()
-        shipment_advice = self.channel.shipment_advice_ids
-        self.assertEqual(
-            shipment_advice.arrival_date, self.date_ref.replace(hour=10, minute=40)
-        )
-
     def test_plan_shipment_simple_delay_on_warehouse_arrival_date(self):
         """
         delay:
-        - company: 10mn
         - warehouse: 20mn
         - channel: 0mn
         """
-        self.wh.company_id.release_channel_shipment_advice_arrival_delay = 10
         self.wh.release_channel_shipment_advice_arrival_delay = 20
         self.channel.shipment_advice_arrival_delay = 0
 
@@ -59,11 +40,9 @@ class TestStockReleaseChannelShipmentAdviceProcessEndTime(ChannelReleaseCase):
     def test_plan_shipment_simple_delay_on_channel_arrival_date(self):
         """
         delay:
-        - company: 10mn
         - warehouse: 20mn
         - channel: 30mn
         """
-        self.wh.company_id.release_channel_shipment_advice_arrival_delay = 10
         self.wh.release_channel_shipment_advice_arrival_delay = 20
         self.channel.shipment_advice_arrival_delay = 30
 

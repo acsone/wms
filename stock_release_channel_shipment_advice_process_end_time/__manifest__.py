@@ -17,7 +17,6 @@
     "data": [
         "views/stock_release_channel.xml",
         "views/stock_warehouse.xml",
-        "views/res_config_settings.xml",
     ],
     "demo": [],
 }
