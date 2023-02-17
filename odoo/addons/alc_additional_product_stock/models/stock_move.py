@@ -100,11 +100,13 @@ class StockMove(StockMoveBase):
         }
 
     def _action_assign(self, force_qty=False):
-        additional_moves_to_remove = self.filtered("is_additional_move")
-        main_moves = self - additional_moves_to_remove
+        res = super()._action_assign(force_qty=force_qty)
+        main_moves = self.filtered(lambda m: not m.is_additional_move)
         main_moves._remove_all_additional_moves()
-        res = super(StockMove, main_moves)._action_assign(force_qty=force_qty)
         main_moves._add_additional_products()
+        additional_moves = main_moves.additional_move_ids
+        if additional_moves:
+            additional_moves._action_assign(force_qty=force_qty)
         return res
 
     def _action_cancel(self):

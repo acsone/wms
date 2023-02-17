@@ -145,3 +145,15 @@ class StockPickingTestCase(TransactionCase):
         return so.mapped("picking_ids").filtered(
             lambda p: p.picking_type_id.code == "outgoing"
         )
+
+    def _get_additional_move(self, picking):
+        return picking.move_ids.filtered(
+            lambda m, product=self.additional_product: m.product_id == product
+            and m.is_additional_move
+        )
+
+    def _check_move_assigned(self, move, qty):
+        self.assertEqual(move.state, "assigned")
+        self.assertEqual(move.product_qty, qty)
+        self.assertEqual(move.reserved_availability, qty)
+        self.assertTrue(move.move_line_ids)
