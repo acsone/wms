@@ -5,19 +5,6 @@
     <field name="inherit_id" ref="product.product_supplierinfo_form_view" />
     <field name="priority">20</field>
     <field name="arch" type="xml">
-      <xpath expr="//group[@name='vendor']" position="inside">
-        <p colspan="2">For <field
-            name="ratio_main_product"
-            class="oe_inline"
-          /> products, <field
-            name="ratio_promotional_product"
-            class="oe_inline"
-          /> free.</p>
-         <field
-          name="only_for_veterinaries"
-          attrs="{'invisible': [('ratio_main_product', '&lt;', 1)]}"
-        />
-      </xpath>
       <xpath expr="//group[field[@name='product_tmpl_id']]" position="inside">
         <field name="discount_purchase" />
       </xpath>
@@ -29,6 +16,19 @@
             widget="integer"
           />
           <field name="discount_sale" />
+          <p colspan="2" style="font-weight: bold">For <field
+              name="ratio_main_product"
+              class="oe_inline"
+              attrs="{'readonly': [('date_start', '=', False), ('date_end', '=', False)]}"
+            /> products, <field
+              name="ratio_promotional_product"
+              class="oe_inline"
+              attrs="{'readonly': [('date_start', '=', False), ('date_end', '=', False)]}"
+            /> free.</p>
+          <field
+            name="only_for_veterinaries"
+            attrs="{'invisible': [('ratio_main_product', '&lt;', 1)]}"
+          />
         </group>
       </xpath>
       <xpath expr="//field[@name='min_qty']" position="attributes">
