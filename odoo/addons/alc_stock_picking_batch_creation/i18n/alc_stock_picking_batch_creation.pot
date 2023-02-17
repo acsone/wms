@@ -1,12 +1,14 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* alc_stock_picking_batch_creation
+# 	* alc_stock_picking_batch_creation
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0+e\n"
+"Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: <>\n"
+"POT-Creation-Date: 2023-02-16 18:41+0000\n"
+"PO-Revision-Date: 2023-02-16 18:41+0000\n"
+"Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -14,61 +16,53 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_stock_picking_batch_creation
-#: model:ir.ui.view,arch_db:alc_stock_picking_batch_creation.res_partner_form_view
+#: model_terms:ir.ui.view,arch_db:alc_stock_picking_batch_creation.res_partner_form_view
 msgid "Cluster picking parameters"
 msgstr ""
 
 #. module: alc_stock_picking_batch_creation
-#: model:ir.model.fields,help:alc_stock_picking_batch_creation.field_stock_picking_total_volume_batch_picking_liter
-#: model:ir.model.fields,help:alc_stock_picking_batch_creation.field_stock_picking_wave_wave_volume_liter
-msgid "Indicates total volume of transfers included."
-msgstr ""
-
-#. module: alc_stock_picking_batch_creation
-#: model:ir.model.fields,field_description:alc_stock_picking_batch_creation.field_stock_device_type_max_volume_liter
-msgid "Max volume liter"
-msgstr ""
-
-#. module: alc_stock_picking_batch_creation
-#: model:ir.model.fields,field_description:alc_stock_picking_batch_creation.field_stock_device_type_min_volume_liter
-msgid "Min volume liter"
-msgstr ""
-
-#. module: alc_stock_picking_batch_creation
 #: model:ir.model,name:alc_stock_picking_batch_creation.model_res_partner
-msgid "Partner"
+msgid "Contact"
 msgstr ""
 
 #. module: alc_stock_picking_batch_creation
-#: model:ir.model,name:alc_stock_picking_batch_creation.model_stock_picking_wave
-msgid "Picking Wave"
+#: model:ir.model.fields,help:alc_stock_picking_batch_creation.field_make_picking_batch__picking_type_ids
+msgid ""
+"Default list of eligible operation types when creating a batch transfer"
 msgstr ""
 
 #. module: alc_stock_picking_batch_creation
-#: model:ir.model.fields,field_description:alc_stock_picking_batch_creation.field_res_partner_device_type_ids
-#: model:ir.model.fields,field_description:alc_stock_picking_batch_creation.field_res_users_device_type_ids
-#: model:ir.model.fields,field_description:alc_stock_picking_batch_creation.field_shopinvader_partner_device_type_ids
-msgid "Specific device types for partner"
-msgstr ""
-
-#. module: alc_stock_picking_batch_creation
-#: model:ir.model,name:alc_stock_picking_batch_creation.model_stock_device_type
-msgid "Stock Device Type"
-msgstr ""
-
-#. module: alc_stock_picking_batch_creation
-#: model:ir.model,name:alc_stock_picking_batch_creation.model_stock_picking
-msgid "Transfer"
-msgstr ""
-
-#. module: alc_stock_picking_batch_creation
-#: model:ir.model.fields,field_description:alc_stock_picking_batch_creation.field_stock_picking_total_volume_batch_picking_liter
-#: model:ir.model.fields,field_description:alc_stock_picking_batch_creation.field_stock_picking_wave_wave_volume_liter
-msgid "Volume (l)"
+#: model:ir.model.fields,field_description:alc_stock_picking_batch_creation.field_make_picking_batch__picking_type_ids
+msgid "Default operation types"
 msgstr ""
 
 #. module: alc_stock_picking_batch_creation
 #: model:ir.model,name:alc_stock_picking_batch_creation.model_make_picking_batch
-msgid "make.picking.batch"
+msgid "Make a batch picking wizard"
 msgstr ""
 
+#. module: alc_stock_picking_batch_creation
+#: model_terms:ir.ui.view,arch_db:alc_stock_picking_batch_creation.res_partner_form_view
+msgid "Max V"
+msgstr ""
+
+#. module: alc_stock_picking_batch_creation
+#: model_terms:ir.ui.view,arch_db:alc_stock_picking_batch_creation.res_partner_form_view
+msgid "Max W"
+msgstr ""
+
+#. module: alc_stock_picking_batch_creation
+#: model_terms:ir.ui.view,arch_db:alc_stock_picking_batch_creation.res_partner_form_view
+msgid "Min V"
+msgstr ""
+
+#. module: alc_stock_picking_batch_creation
+#: model_terms:ir.ui.view,arch_db:alc_stock_picking_batch_creation.res_partner_form_view
+msgid "Nr bins"
+msgstr ""
+
+#. module: alc_stock_picking_batch_creation
+#: model:ir.model.fields,field_description:alc_stock_picking_batch_creation.field_res_partner__device_type_ids
+#: model:ir.model.fields,field_description:alc_stock_picking_batch_creation.field_res_users__device_type_ids
+msgid "Specific device types"
+msgstr ""

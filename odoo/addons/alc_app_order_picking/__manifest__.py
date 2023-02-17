@@ -48,6 +48,7 @@
         "stock_release_channel_shipment_advice",
         "alc_stock_location_data",
         "alc_mail_thread_no_auto_subscribe_notify",
+        "alc_stock_picking_batch_creation",
     ],
     "data": [],
     "demo": [],

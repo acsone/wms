@@ -2,27 +2,33 @@
 <odoo noupdate="1">
     <record id="chariot_medoc1" model="stock.device.type">
         <field name="name">Chariot Médicaments 1 (S)</field>
-        <field name="min_volume_liter">0.1</field>
-        <field name="max_volume_liter">324</field>
-        <field name="max_weight">250</field>
+        <field name="user_min_volume">0.1</field>
+        <field name="user_max_volume">324</field>
+        <field name="user_volume_uom_id" ref="uom.product_uom_litre" />
+        <field name="user_max_weight">250</field>
+        <field name="user_weight_uom_id" ref="uom.product_uom_kgm" />
         <field name="nbr_bins">6</field>
         <field name="sequence">10</field>
     </record>
 
     <record id="roller_cage" model="stock.device.type">
         <field name="name">Roller Cage</field>
-        <field name="min_volume_liter">1</field>
-        <field name="max_volume_liter">350</field>
-        <field name="max_weight">400</field>
+        <field name="user_min_volume">1</field>
+        <field name="user_max_volume">350</field>
+        <field name="user_volume_uom_id" ref="uom.product_uom_litre" />
+        <field name="user_max_weight">400</field>
+        <field name="user_weight_uom_id" ref="uom.product_uom_kgm" />
         <field name="nbr_bins">4</field>
         <field name="sequence">100</field>
     </record>
 
     <record id="palette" model="stock.device.type">
         <field name="name">Palette</field>
-        <field name="min_volume_liter">20</field>
-        <field name="max_volume_liter">400</field>
-        <field name="max_weight">400</field>
+        <field name="user_min_volume">20</field>
+        <field name="user_max_volume">400</field>
+        <field name="user_volume_uom_id" ref="uom.product_uom_litre" />
+        <field name="user_max_weight">400</field>
+        <field name="user_weight_uom_id" ref="uom.product_uom_kgm" />
         <field name="nbr_bins">1</field>
         <field name="sequence">10</field>
     </record>

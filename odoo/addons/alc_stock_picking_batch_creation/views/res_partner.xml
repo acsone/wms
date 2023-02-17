@@ -14,7 +14,19 @@
           string="Cluster picking parameters"
           name="cluster_picking_parameters"
         >
-                <field name="device_type_ids" />
+                    <label for="device_type_ids" />
+                    <div class="o_row">
+                        <field name="device_type_ids" nolabel="1">
+                            <tree>
+                                <field name="name" />
+                                <field name="user_min_volume" string="Min V" />
+                                <field name="user_max_volume" string="Max V" />
+                                <field name="user_max_weight" string="Max W" />
+                                <field name="nbr_bins" string="Nr bins" />
+                            </tree>
+
+                        </field>
+                    </div>
                 </group>
             </xpath>
         </field>
