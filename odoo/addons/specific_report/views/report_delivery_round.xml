@@ -23,21 +23,26 @@
                 <span t-field="delivery.display_name" />
               </t>
             </h2>
-            <div class="row" style="margin-top: 15px;">
+            <div class="row">
               <div class="col-xs-5">
                 <table class="table">
                   <tbody>
                     <tr>
-                      <td class="col-ws-4">Driver</td>
-                      <td class="col-ws-8" />
-                    </tr>
-                    <tr>
-                      <td>Vehicle</td>
-                      <td />
-                    </tr>
-                    <tr>
-                      <td>Registration</td>
-                      <td />
+                      <td>
+                        Exp: <span
+                      t-field="delivery.shipping_ids.mapped('carrier_id.company_id').name"
+                    />
+                        <br />
+                        <span
+                      t-field="delivery.shipping_ids.mapped('carrier_id.company_id').street"
+                    />
+                        <br />
+                        <span
+                      t-field="delivery.shipping_ids.mapped('carrier_id.company_id').zip"
+                    />, <span
+                      t-field="delivery.shipping_ids.mapped('carrier_id.company_id').city"
+                    />
+                        </td>
                     </tr>
                     <tr>
                       <td>Start mileage</td>
