@@ -8,6 +8,7 @@ class ResConfigSettings(models.TransientModel):
 
     _inherit = "res.config.settings"
 
-    release_channel_process_end_time_delay = fields.Integer(
-        related="company_id.release_channel_process_end_time_delay", readonly=False
+    release_channel_shipment_advice_arrival_delay = fields.Integer(
+        related="company_id.release_channel_shipment_advice_arrival_delay",
+        readonly=False,
     )

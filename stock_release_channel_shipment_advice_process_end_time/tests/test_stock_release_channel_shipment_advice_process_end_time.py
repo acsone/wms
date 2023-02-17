@@ -29,9 +29,9 @@ class TestStockReleaseChannelShipmentAdviceProcessEndTime(ChannelReleaseCase):
         - warehouse: 0mn
         - channel: 0mn
         """
-        self.wh.company_id.release_channel_process_end_time_delay = 10
-        self.wh.release_channel_process_end_time_delay = 0
-        self.channel.process_end_time_delay = 0
+        self.wh.company_id.release_channel_shipment_advice_arrival_delay = 10
+        self.wh.release_channel_shipment_advice_arrival_delay = 0
+        self.channel.shipment_advice_arrival_delay = 0
 
         self.channel.button_plan_shipments()
         shipment_advice = self.channel.shipment_advice_ids
@@ -46,9 +46,9 @@ class TestStockReleaseChannelShipmentAdviceProcessEndTime(ChannelReleaseCase):
         - warehouse: 20mn
         - channel: 0mn
         """
-        self.wh.company_id.release_channel_process_end_time_delay = 10
-        self.wh.release_channel_process_end_time_delay = 20
-        self.channel.process_end_time_delay = 0
+        self.wh.company_id.release_channel_shipment_advice_arrival_delay = 10
+        self.wh.release_channel_shipment_advice_arrival_delay = 20
+        self.channel.shipment_advice_arrival_delay = 0
 
         self.channel.button_plan_shipments()
         shipment_advice = self.channel.shipment_advice_ids
@@ -63,9 +63,9 @@ class TestStockReleaseChannelShipmentAdviceProcessEndTime(ChannelReleaseCase):
         - warehouse: 20mn
         - channel: 30mn
         """
-        self.wh.company_id.release_channel_process_end_time_delay = 10
-        self.wh.release_channel_process_end_time_delay = 20
-        self.channel.process_end_time_delay = 30
+        self.wh.company_id.release_channel_shipment_advice_arrival_delay = 10
+        self.wh.release_channel_shipment_advice_arrival_delay = 20
+        self.channel.shipment_advice_arrival_delay = 30
 
         self.channel.button_plan_shipments()
         shipment_advice = self.channel.shipment_advice_ids

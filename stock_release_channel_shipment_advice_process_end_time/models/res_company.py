@@ -8,4 +8,7 @@ class ResCompany(models.Model):
 
     _inherit = "res.company"
 
-    release_channel_process_end_time_delay = fields.Integer()
+    release_channel_shipment_advice_arrival_delay = fields.Integer(
+        help="Global default value for the delay between the release channel process "
+        "end time and the arrival of shipments to the dock."
+    )
