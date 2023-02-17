@@ -11,6 +11,5 @@ from . import (
     stock_picking,
     stock_production_lot,
     stock_quant,
-    stock_quant_package,
     stock_scrap,
 )

@@ -91,36 +91,3 @@ class StockPicking(models.Model):
         wizard_values["context"] = wizard_context
 
         return wizard_values
-
-    def _filter_operations_to_pack(self, operation):
-        to_pack = operation.qty_done > 0 and (
-            not operation.result_package_id
-            or (
-                self.empty_internal_package_on_transfer
-                and operation.result_package_id.is_internal
-            )
-        )
-        return to_pack
-
-    @api.multi
-    def put_in_pack(self):
-        result = False
-        for pick in self:
-            operations = pick.pack_operation_ids.filtered(
-                self._filter_operations_to_pack
-            )
-            if operations:
-                result = super(StockPicking, self).put_in_pack()
-
-                original_picking_zone_id = self.mapped(
-                    "picking_type_id.picking_zone_id"
-                )
-                if len(original_picking_zone_id) == 1:
-                    packages = self.mapped(
-                        "pack_operation_ids.result_package_id"
-                    ).filtered(lambda package: not package.original_picking_zone_id)
-                    packages.write(
-                        {"original_picking_zone_id": original_picking_zone_id.id}
-                    )
-            self.write({"is_put_in_pack_done": True})
-        return result

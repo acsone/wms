@@ -111,16 +111,6 @@ class StockPicking(models.Model):
                         item_numbers = self._compute_number_of_items(
                             picking, op, item_numbers, zones
                         )
-                elif operation.package_id and not operation.package_id.is_internal:
-                    if not operation.package_id.original_picking_zone_id:
-                        raise UserError(
-                            _("There is no original picking zone on " "this operation.")
-                        )
-                    picking_zone = operation.package_id.original_picking_zone_id
-                    if operation.package_id:
-                        nbr_of_packages_by_zone[picking_zone].add(
-                            operation.package_id.id
-                        )
                 else:
                     item_numbers = self._compute_number_of_items(
                         picking, operation, item_numbers, zones
