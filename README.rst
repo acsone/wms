@@ -12,6 +12,7 @@ Development requirements
 
 - Install pip-deepfreeze with ``pipx install pip-deepfreeze``
 - Install pip-split-requirements with ``pipx install pip-split-requirements``
+- Install pip-preserve-requirements with ``pipx install pip-preserve-requirements``
 
 Initialize virtualenv
 ---------------------
@@ -44,13 +45,9 @@ When dependencies change, use ``pip-df sync`` again, possibly with
 pip-deepfreeze documentation for more information.
 
 
-If you need to install the test and development dependencies, run::
-
-   pip-df sync -x test,dev
-
-
 Run
 ---
+
  Run::
 
     odoo -c odoo.cfg
@@ -80,19 +77,16 @@ should work (note the ignore of the `manual_tests` directory)
 Release
 -------
 
-First make sure you have been testing using the correct dependencies by
-running ``pip-df sync`` and checking there is no change in ``requirements.txt``.
+1. First make sure you have been testing using the correct dependencies by
+   running ``pip-df sync`` and checking there is no change in ``requirements.txt``.
+2. Update the version number using ``bumpversion patch`` or ``bumpversion minor``.
+2. Create and push a git tag of the form `x.y.z`. The deploy to the test environment
+   will be automatic, and GitLab will show a button on the pipeline to deploy to
+   production.
 
-To release using gitlab-ci
---------------------------
-
-- run ``bumpversion patch|minor|major``
-- run ``acsoo tag``, the deploy to the test environment will be automatic, and
-  gitlab will show a button on the pipeline to deploy to production.
-
-.. [#] https://pypi.python.org/pypi/acsoo/#installation
 .. [#] https://pypi.python.org/pypi/pip-deepfreeze
-.. [#] https://pypi.org/project/pip-split-requirements
+.. [#] https://pypi.python.org/pypi/pip-preserve-requirements
+.. [#] https://pypi.python.org/pypi/pip-split-requirements
 .. [#] https://pypi.python.org/pypi/git-autoshare
 .. [#] https://github.com/ambv/black
 .. [#] https://github.com/pre-commit/pre-commit

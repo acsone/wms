@@ -424,3 +424,12 @@ requirements_files = [
   "requirements-test.txt"
 ]
 prefix = "container/requirements-group"
+
+[tool.pip-preserve-requirements]
+tag_prefix = "alc16-"
+match_any_tag = true
+
+[[tool.pip-preserve-requirements.vcs_vaults]]
+provider = "github.com"
+owner = "acsone"
+default = true
