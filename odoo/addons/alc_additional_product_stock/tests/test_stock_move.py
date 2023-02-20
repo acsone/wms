@@ -23,12 +23,8 @@ class TestStockMove(StockPickingTestCase):
         # Create the sale order without setting a sequence on sale order lines
         so = self._confirm_sale_order(products=[self.main_product, self.product_2])
         # check the pickings
-        pick = self._get_picking_pick(so)
 
         ship = self._get_picking_ship(so)
-
-        pick.action_confirm()
-        pick.action_assign()
 
         # Check that the additional product is also added to the shipping after confirmation
         self.assertEqual(len(ship.move_ids), 3)
@@ -40,11 +36,8 @@ class TestStockMove(StockPickingTestCase):
         main_product_move._action_cancel()
 
         self.assertEqual(main_product_move.state, "cancel")
-        additionnal_product_move = ship.move_ids.filtered(
-            lambda a, additional_product=self.additional_product: a.product_id
-            == additional_product
-        )
-        self.assertEqual(additionnal_product_move.state, "cancel")
+        additional_move = self._get_additional_move(ship)
+        self.assertEqual(additional_move.state, "cancel")
 
     def test_01(self):
         """
@@ -61,14 +54,7 @@ class TestStockMove(StockPickingTestCase):
 
         # Create the sale order without setting a sequence on sale order lines
         so2 = self._confirm_sale_order(products=[self.main_product, self.main_product2])
-
-        # check the pickings
-        pick = self._get_picking_pick(so2)
-
         ship = self._get_picking_ship(so2)
-        pick.action_confirm()
-        pick.action_assign()
-
         # Check that the additional product is also added to the shipping after confirmation
         self.assertEqual(len(ship.move_ids), 4)
 
