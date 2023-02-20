@@ -92,6 +92,8 @@ odoo-addon-stock-packaging-calculator @ git+https://github.com/acsone/stock-logi
 odoo-addon-stock-route-mto @ git+https://github.com/acsone/stock-logistics-warehouse.git@16.0-add-stock_route_mto-dro#subdirectory=setup/stock_route_mto
 # https://github.com/OCA/stock-logistics-warehouse/pull/1626
 odoo-addon-stock-picking-volume @ git+https://github.com/acsone/stock-logistics-warehouse.git@16.0-add-stock-picking-volume#subdirectory=setup/stock_picking_volume
+# https://github.com/OCA/stock-logistics-warehouse/pull/1646
+odoo-addon-stock-scrap-location-default @ git+https://github.com/acsone/stock-logistics-warehouse.git@16.0-add-stock-default-scrap-location-dro#subdirectory=setup/stock_scrap_location_default
 
 # stock-logistics-workflow
 # https://github.com/OCA/stock-logistics-workflow/pull/1158
