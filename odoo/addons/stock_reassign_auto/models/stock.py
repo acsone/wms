@@ -84,8 +84,12 @@ class StockMove(models.Model):
 
     @api.multi
     def _get_moves_to_auto_reassign(self):
-        """Hook to overload if needed."""
-        return self
+        """Do not process moves that are not in stock yet."""
+        stock = self.env.ref("stock.stock_location_stock")
+        return self.filtered(
+            lambda m: m.location_id.parent_left >= stock.parent_left
+            and m.location_id.parent_right <= stock.parent_right
+        )
 
     def action_cancel(self):
         """ When move is canceled, check if other moves can be assigned """
