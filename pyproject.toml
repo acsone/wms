@@ -3,11 +3,14 @@
 requires = ["hatchling", "setuptools-odoo>=3.1.4", "hatch-odoo"]
 build-backend = "hatchling.build"
 
+# The standard project metadata section
+# https://packaging.python.org/en/latest/specifications/declaring-project-metadata/
 [project]
 name = "odoo-addons-alcyon"
 version = "16.0.1.0.1"
 readme = "README.rst"
 #license = "LicenseRef-Proprietary"  # waiting for hatchling>1.8.1
+requires-python = "==3.10.*"
 # Dependencies are dynamic because they will be generated from Odoo addons manifests.
 dynamic = ["dependencies"]
 
