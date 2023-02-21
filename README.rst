@@ -10,17 +10,21 @@ Development environment howto
 Development requirements
 ------------------------
 
-- Install pip-deepfreeze with ``pipx install pip-deepfreeze``
-- Install pip-split-requirements with ``pipx install pip-split-requirements``
-- Install pip-preserve-requirements with ``pipx install pip-preserve-requirements``
+- Install pip-deepfreeze [#]_ with ``pipx install pip-deepfreeze``
+- Install pip-split-requirements [#]_ with ``pipx install pip-split-requirements``
+- Install pip-preserve-requirements [#]_ with ``pipx install pip-preserve-requirements``
+- Install bump2version with ``pipx install bump2version``
+
+- To save some time it is recommended to install git-autoshare [#]_ with ``pipx install
+  git-autoshare``. Don't forget to configure it according to the documentation.
+- git-aggregator [#]_ (``pipx install git-aggregator``) is also occasionally useful to
+  combine multiple pull requests into a single branch (see ``gitaggregate.yaml``).
 
 Initialize virtualenv
 ---------------------
 
 - Create and activate virtualenv, possibly with virtualenvwrapper's
   `mkvirtualenv odoo-alcyon -a . --python=$(which python2)`
-- make sure acsoo [#]_ and pip-deepfreeze [#]_ are installed and in your PATH
-- to save some time it is recommended to configure git-autoshare [#]_.
 
 Install everything
 ------------------
@@ -43,7 +47,6 @@ In an activated python 3.10 virtualenv, run::
 When dependencies change, use ``pip-df sync`` again, possibly with
 ``--update``. Add unmerged VCS dependencies in ``requirements.txt.in``. See the
 pip-deepfreeze documentation for more information.
-
 
 Run
 ---
@@ -79,14 +82,15 @@ Release
 
 1. First make sure you have been testing using the correct dependencies by
    running ``pip-df sync`` and checking there is no change in ``requirements.txt``.
-2. Update the version number using ``bumpversion patch`` or ``bumpversion minor``.
-2. Create and push a git tag of the form `x.y.z`. The deploy to the test environment
-   will be automatic, and GitLab will show a button on the pipeline to deploy to
-   production.
+2. Update the version number using ``bumpversion patch|minor|major`` and push the tag
+   that bumpversion created with ``git push --tags``.
+2. The deploy to the test environment will be automatic, and GitLab will show buttons
+   on the pipeline to deploy to other environments.
 
 .. [#] https://pypi.python.org/pypi/pip-deepfreeze
 .. [#] https://pypi.python.org/pypi/pip-preserve-requirements
 .. [#] https://pypi.python.org/pypi/pip-split-requirements
 .. [#] https://pypi.python.org/pypi/git-autoshare
+.. [#] https://pypi.python.org/pypi/git-aggregator
 .. [#] https://github.com/ambv/black
 .. [#] https://github.com/pre-commit/pre-commit
