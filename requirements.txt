@@ -72,6 +72,7 @@ odoo-addon-sale-cancel-remaining @ git+https://github.com/acsone/sale-workflow.g
 odoo-addon-sale-exception==16.0.1.0.1.1
 odoo-addon-sale-procurement-customer @ git+https://github.com/acsone/sale-workflow.git@ef0c216f30a0fd7fd1fb0d782f8b9aaac3f7d487#subdirectory=setup/sale_procurement_customer
 odoo-addon-sale-stock-picking-blocking @ git+https://github.com/acsone/sale-workflow.git@0759ba05b37a5ce5a9da3131bd03e1cdabd3d7ef#subdirectory=setup/sale_stock_picking_blocking
+odoo-addon-sale-stock-restocking-fee-invoicing @ git+https://github.com/acsone/account-invoicing.git@2bdf46dd08bd874d6a1c0a64ec8a7f5d1751ddd3#subdirectory=setup/sale_stock_restocking_fee_invoicing
 odoo-addon-sale-triple-discount==16.0.1.0.1.1
 odoo-addon-server-environment==16.0.1.0.1
 odoo-addon-session-db @ git+https://github.com/acsone/server-tools.git@2277d974581225574cc139b4c14bc9e18182512a#subdirectory=setup/session_db
@@ -108,7 +109,7 @@ odoo-addon-stock-picking-group-by-partner-by-carrier-by-customer @ git+https://g
 odoo-addon-stock-picking-low-priority @ git+https://github.com/acsone/stock-logistics-workflow.git@d9e6c0614b1e618574695378dcf1fff8abbee5b3#subdirectory=setup/stock_picking_low_priority
 odoo-addon-stock-picking-start==16.0.1.0.1
 odoo-addon-stock-picking-type-shipping-policy @ git+https://github.com/acsone/wms.git@12dbcd20834849758e681098005f9386cb2c22a6#subdirectory=setup/stock_picking_type_shipping_policy
-odoo-addon-stock-picking-volume @ git+https://github.com/OCA/stock-logistics-warehouse.git@3a6bf112dcbfc1e138dfe10515d124fc5ddb9b5f#subdirectory=setup/stock_picking_volume
+odoo-addon-stock-picking-volume @ git+https://github.com/acsone/stock-logistics-warehouse.git@3a6bf112dcbfc1e138dfe10515d124fc5ddb9b5f#subdirectory=setup/stock_picking_volume
 odoo-addon-stock-procurement-customer @ git+https://github.com/acsone/stock-logistics-workflow.git@e142a70dd6da183ccff6ca5374c1e445882fc376#subdirectory=setup/stock_procurement_customer
 odoo-addon-stock-production-lot-expired-date==16.0.1.0.1
 odoo-addon-stock-putaway-hook==16.0.1.0.0.4
