@@ -413,6 +413,7 @@ exclude = [
 [tool.pip-deepfreeze.sync]
 extras = "test,dev"
 post_sync_commands = [
+  "pip-preserve-requirements requirements*.txt",
   "pip-split-requirements",
 ]
 
