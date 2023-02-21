@@ -17,11 +17,12 @@ class TestStockMove(TransactionCase):
             {
                 "name": "Test Warehouse",
                 "reception_steps": "one_step",
-                "delivery_steps": "pick_ship",
+                "delivery_steps": "ship_only",
                 "code": "TST",
             }
         )
         cls.loc_stock = cls.warehouse_1.lot_stock_id
+        cls.warehouse_1.out_type_id.allow_additional_product_on_reserved_qty = True
 
         cls.env.user.company_id.restocking_fee_product_id = cls.env.ref(
             "sale_stock_restocking_fee_invoicing.product_restocking_fee"
@@ -80,16 +81,8 @@ class TestStockMove(TransactionCase):
         )
         cls.so.action_confirm()
 
-        # cls.picking = cls.so.picking_ids
-        cls.picking = cls.so.mapped("picking_ids").filtered(
-            lambda p: p.picking_type_code == "internal"
-        )
-
-        cls.shipping = cls.so.mapped("picking_ids").filtered(
-            lambda p: p.picking_type_code == "outgoing"
-        )
+        cls.picking = cls.so.picking_ids
         cls._process_picking(cls.picking)
-        cls._process_picking(cls.shipping)
 
     @staticmethod
     def _process_picking(picking):
@@ -101,8 +94,8 @@ class TestStockMove(TransactionCase):
     def _create_return_wizard(self):
         return_wizard = Form(
             self.env["stock.return.picking"].with_context(
-                active_ids=self.shipping.ids,
-                active_id=self.shipping.ids[0],
+                active_ids=self.picking.ids,
+                active_id=self.picking.ids[0],
                 active_model="stock.picking",
             )
         )
@@ -127,6 +120,8 @@ class TestStockMove(TransactionCase):
             (only one for the main product) with qty 1
         """
         self.partner.charge_restocking_fee = True
+        # One line for main product, one for additional product
+        self.assertEqual(2, len(self.picking.move_ids))
 
         wizard = self._create_return_wizard()
         self.assertTrue(wizard.is_customer_return)
@@ -135,8 +130,8 @@ class TestStockMove(TransactionCase):
         picking = self.env["stock.picking"].browse(res["res_id"])
 
         self._process_picking(picking)
-        # One line for main product, one for return
-        self.assertEqual(2, len(self.so.order_line))
+        # One line for main product, one line for additional, one for return
+        self.assertEqual(3, len(self.so.order_line))
 
         fees_line = self.so.order_line.filtered("is_restocking_fee")
         self.assertEqual(1, len(fees_line))
