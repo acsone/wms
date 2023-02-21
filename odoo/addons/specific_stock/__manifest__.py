@@ -9,9 +9,9 @@
     "license": "AGPL-3",
     "category": "Warehouse",
     "depends": [
-        # has been replaced by internal_stock_quant_package "alc_internal_stock_quant_package",
+        # TODO has been replaced by internal_stock_quant_package "alc_internal_stock_quant_package",
         "alc_stock_receive_lot_expiry",
-        "alc_stock_receive_lot_inputmask",
+        # TODO has been removed "alc_stock_receive_lot_inputmask",
         "alc_product_lot_info",
         "alc_product_mto",
         "board",
