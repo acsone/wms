@@ -11,3 +11,6 @@ class StockPickingType(PickingType):
     allow_additional_product_on_reserved_qty = fields.Boolean(
         string="Allow Additional Product On Reserved Quantity"
     )
+    no_backorder_for_additional_product = fields.Boolean(
+        string="No Backorders for additional products"
+    )

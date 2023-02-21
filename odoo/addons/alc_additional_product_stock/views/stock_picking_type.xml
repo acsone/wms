@@ -8,6 +8,7 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='show_reserved']" position="after">
                 <field name="allow_additional_product_on_reserved_qty" />
+                <field name="no_backorder_for_additional_product" />
             </xpath>
         </field>
     </record>

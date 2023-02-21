@@ -239,3 +239,35 @@ class TestStockPicking(StockPickingTestCase):
             and not m.is_additional_move
         )
         self._check_move_assigned(other_additional_move, 1)
+
+    def test_07(self):
+        """Check that not done quantity of additional moves are canceled."""
+        self.env["stock.quant"]._update_available_quantity(
+            self.additional_product, self.loc_stock, -498
+        )
+        sale = self._confirm_sale_order(products=[self.main_product])
+        pick = self._get_picking_pick(sale)
+        pick.move_ids.move_line_ids.write({"qty_done": 1})
+        additional_move = self._get_additional_move(pick)
+        self.assertEqual(additional_move.product_uom_qty, 5)
+        pick._action_done()
+        self.assertEqual(pick.state, "done")
+        self.assertEqual(additional_move.product_uom_qty, 1)
+        self.assertEqual(additional_move.quantity_done, 1)
+        backorder = self.env["stock.picking"].search([("backorder_id", "=", pick.id)])
+        self.assertTrue(backorder.move_ids.is_additional_move)
+        self.assertEqual(backorder.move_ids.product_uom_qty, 4)
+
+        ship = self._get_picking_ship(sale)
+        ship.picking_type_id.no_backorder_for_additional_product = True
+        ship.action_assign()
+        self.assertEqual(ship.state, "assigned")
+        additional_move = self._get_additional_move(ship)
+        self.assertEqual(additional_move.product_uom_qty, 5)
+        ship.move_ids.move_line_ids.write({"qty_done": 1})
+        ship._action_done()
+        self.assertEqual(ship.state, "done")
+        backorder = self.env["stock.picking"].search([("backorder_id", "=", ship.id)])
+        self.assertFalse(backorder)
+        self.assertEqual(len(ship.move_ids), 3)
+        self.assertEqual(ship.move_ids[2].state, "cancel")
