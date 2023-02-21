@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+from datetime import datetime
 
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
@@ -24,6 +25,7 @@ class ReceivePharmacyProducts(models.TransientModel):
     product_qty = fields.Float(
         "Quantity", digits=dp.get_precision("Product Unit of Measure"), default=1.0,
     )
+    lot_name = fields.Char(string="Lot")
     state = fields.Selection(related="reception_pharmacy_id.state", default="draft")
 
     @api.model
@@ -38,6 +40,7 @@ class ReceivePharmacyProducts(models.TransientModel):
     @api.onchange("customer_id")
     def _onchange_customer_id(self):
         self.bin_id = False
+        self.lot_name = ""
         self.product_qty = 1
 
     def _check_reception_state(self):
@@ -60,7 +63,7 @@ class ReceivePharmacyProducts(models.TransientModel):
     def _create_reception_pharmacy_line(self):
         product = self.reception_pharmacy_id.product_id
         reception_pharmacy_line = self.env["reception.pharmacy.line"]
-        lot = self._create_lot(product)
+        lot = self._create_lot(product, self.lot_name)
         line = reception_pharmacy_line.create(
             {
                 "wizard_id": self.reception_pharmacy_id.id,
@@ -73,12 +76,13 @@ class ReceivePharmacyProducts(models.TransientModel):
         )
         return line
 
-    def _create_lot(self, product):
-        sequence = self.env["ir.sequence"]
+    def _create_lot(self, product, lot_name):
+        current_year = datetime.now().year
+        lot_name = str(current_year) + "#" + lot_name
         lot = self.env["stock.production.lot"]
         lot_vals = {
             "product_id": product.id,
-            "name": sequence.next_by_code("stock.lot.pharmacy"),
+            "name": lot_name,
         }
         # HACK HACK HACK for fields declared in specific_Stock.... TO BE
         # REFACTORED!!!!!!
@@ -95,5 +99,6 @@ class ReceivePharmacyProducts(models.TransientModel):
 
     def _clean_wizard(self):
         self.bin_id = False
+        self.lot_name = ""
         self.product_qty = 1
         self.customer_id = False
