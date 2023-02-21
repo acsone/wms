@@ -3,6 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import mock
+from freezegun import freeze_time
 
 from .common import CommonReceptionPharmacyCase
 
@@ -49,6 +50,7 @@ class TestReceptionPharmacy(CommonReceptionPharmacyCase):
                 "reception_pharmacy_id": reception.id,
                 "customer_id": self.partner.id,
                 "bin_id": self.bin.id,
+                "lot_name": "TC54636",
                 "product_qty": 1,
             }
         )
@@ -85,6 +87,7 @@ class TestReceptionPharmacy(CommonReceptionPharmacyCase):
                 "reception_pharmacy_id": reception.id,
                 "customer_id": self.partner.id,
                 "bin_id": self.bin.id,
+                "lot_name": "TC546736",
                 "product_qty": 1,
             }
         )
@@ -116,6 +119,7 @@ class TestReceptionPharmacy(CommonReceptionPharmacyCase):
                 "reception_pharmacy_id": reception.id,
                 "customer_id": self.partner.id,
                 "bin_id": self.bin.id,
+                "lot_name": "TC512344636",
                 "product_qty": 1,
             }
         )
@@ -137,6 +141,7 @@ class TestReceptionPharmacy(CommonReceptionPharmacyCase):
                 "reception_pharmacy_id": reception.id,
                 "customer_id": self.partner.id,
                 "bin_id": self.bin.id,
+                "lot_name": "TC123467436",
                 "product_qty": 1,
             }
         )
@@ -151,6 +156,7 @@ class TestReceptionPharmacy(CommonReceptionPharmacyCase):
                 "reception_pharmacy_id": reception.id,
                 "customer_id": self.partner.id,
                 "bin_id": self.bin2.id,
+                "lot_name": "TC90876",
                 "product_qty": 1,
             }
         )
@@ -169,3 +175,29 @@ class TestReceptionPharmacy(CommonReceptionPharmacyCase):
         self.assertEqual(len(pickings), 2)
         self.assertEqual(reception.state, "done")
         self.assertEqual(reception.line_ids.mapped("state"), ["done", "done"])
+
+    @freeze_time("2023-01-01 00:00:00")
+    def test_lot_name(self):
+        reception = self.ReceptionPharmacy.create({"product_id": self.product.id})
+        wiz = self.wizard.create(
+            {
+                "reception_pharmacy_id": reception.id,
+                "customer_id": self.partner.id,
+                "bin_id": self.bin.id,
+                "lot_name": "TC12345",
+                "product_qty": 1,
+            }
+        )
+
+        with mock.patch.object(
+            self.env["reception.pharmacy.line"].__class__,
+            "print_reception_pharmacy_label",
+        ):
+            wiz.validate_reception()
+
+        pharmacy_line = self.env["reception.pharmacy.line"].search(
+            [("wizard_id", "=", reception.id)]
+        )
+        lot = pharmacy_line.lot_id
+
+        self.assertEqual(lot.name, "2023#TC12345")
