@@ -29,6 +29,7 @@ odoo-addon-product-packaging-level @ git+https://github.com/acsone/product-attri
 odoo-addon-product-packaging-level-pallet @ git+https://github.com/acsone/product-attribute.git@0902b25c2ec0564e9dfef2b35c78bc4f0a8d6a71#subdirectory=setup/product_packaging_level_pallet
 odoo-addon-product-price-category @ git+https://github.com/acsone/sale-workflow.git@bd03b6c5a098a1ce9dce4f594be675990049ff7d#subdirectory=setup/product_price_category
 odoo-addon-product-route-mto @ git+https://github.com/acsone/product-attribute.git@f7a09db24299d7e08dd65e9acc9c62449c43562d#subdirectory=setup/product_route_mto
+odoo-addon-product-state==16.0.1.0.0.2
 odoo-addon-product-template-has-one-variant @ git+https://github.com/acsone/product-attribute.git@07c1609e5ec906cbca3377a62ea55ff8e78c9a2c#subdirectory=setup/product_template_has_one_variant
 odoo-addon-product-total-weight-from-packaging @ git+https://github.com/acsone/product-attribute.git@0ae6102ff01a7ea8622e20a5a47ecfbe68314a4d#subdirectory=setup/product_total_weight_from_packaging
 odoo-addon-queue-job==16.0.2.0.0

@@ -217,7 +217,6 @@ exclude = [
   'odoo/addons/alc_product_promotion_subscription/*',
   'odoo/addons/alc_product_search_cnk/*',
   'odoo/addons/alc_product_shop_category/*',
-  'odoo/addons/alc_product_state/*',
   'odoo/addons/alc_product_stock_state/*',
   'odoo/addons/alc_product_uom_updatable/*',
   'odoo/addons/alc_purchase_announced_delivery_date/*',
