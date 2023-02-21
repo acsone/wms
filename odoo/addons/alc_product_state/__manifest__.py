@@ -1,24 +1,18 @@
-# -*- coding: utf-8 -*-
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
     "name": "Alc Product State",
     "description": """
-        Alcyon: Add state_id field on product""",
-    "version": "10.0.1.0.0",
+        Alcyon: Add some data on product_state""",
+    "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["sale"],
+    "depends": ["product_state"],
     "data": [
-        "views/product_product.xml",
-        "views/product_state.xml",
-        "views/product_template.xml",
-        "security/product_state.xml",
         "data/product_state.xml",
     ],
     "demo": [],
-    "pre_init_hook": "pre_init_hook",
-    'installable': False
+    "installable": True,
 }
