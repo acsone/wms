@@ -170,6 +170,7 @@ msgid "Lines"
 msgstr "Lignes"
 
 #. module: alc_reception_pharmacy
+#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_receive_pharmacy_products_lot_name
 #: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy_line_lot_id
 msgid "Lot"
 msgstr "Lot"
@@ -331,7 +332,7 @@ msgid "Supplier location is missing"
 msgstr "Supplier location is missing"
 
 #. module: alc_reception_pharmacy
-#: code:addons/alc_reception_pharmacy/wizards/receive_pharmacy_products.py:46
+#: code:addons/alc_reception_pharmacy/wizards/receive_pharmacy_products.py:49
 #, python-format
 msgid ""
 "This reception is transferred, please create a new one before adding "
