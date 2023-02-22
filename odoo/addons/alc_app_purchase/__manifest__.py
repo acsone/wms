@@ -16,7 +16,9 @@
         "alc_purchase_order_cleaner",
         "alc_stock_move_list",
         "alc_supplier_purchase_manager",
+        "alc_supplier_purchase_manager_account",
         "alc_product_supplierinfo_force_edit_form",
         "alc_product_state",
+        "partner_manual_rank",
     ],
 }
