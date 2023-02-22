@@ -4,6 +4,7 @@
 import logging
 
 from odoo import _, api, fields
+from odoo.tools import float_compare
 
 from odoo.addons.stock_move_propagate_first_move.models.stock_move import (
     StockMove as StockMoveBase,
@@ -124,6 +125,7 @@ class StockMove(StockMoveBase):
                     [
                         ("first_move_id", "in", first_additional_move.ids),
                         ("state", "!=", "done"),
+                        ("quantity_done", "=", 0),
                     ]
                 )
                 | first_additional_move
@@ -145,3 +147,32 @@ class StockMove(StockMoveBase):
             "main_move_id",
             "is_additional_move",
         ]
+
+    def _additional_move_split_and_cancel_not_done_qty(self):
+        precision_digits = self.env["decimal.precision"].precision_get(
+            "Product Unit of Measure"
+        )
+        for move in self:
+            if move.state == "cancel" or not move.is_additional_move:
+                continue
+            quantity_todo = move.product_uom._compute_quantity(
+                move.product_uom_qty, move.product_id.uom_id, rounding_method="HALF-UP"
+            )
+            quantity_done = move.product_uom._compute_quantity(
+                move.quantity_done, move.product_id.uom_id, rounding_method="HALF-UP"
+            )
+            if (
+                float_compare(
+                    quantity_done,
+                    quantity_todo,
+                    precision_digits=precision_digits,
+                )
+                != -1
+            ):
+                continue
+            move_to_cancel_vals = move._prepare_move_split_vals(
+                quantity_todo - quantity_done
+            )
+            move_to_cancel = move.copy(move_to_cancel_vals)
+            move_to_cancel._action_cancel()
+            move.product_uom_qty = quantity_done
