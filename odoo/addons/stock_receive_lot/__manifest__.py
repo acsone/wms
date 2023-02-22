@@ -9,7 +9,11 @@
     "maintainer": "Camptocamp",
     "license": "LGPL-3",  # MUST BE LGPL since will be mixed with helpdesk OEEL
     "category": "Stock Management",
-    "depends": ["product_expiry", "stock", "stock_location_act_as_view"],  # LGPL
+    "depends": [
+        "product_expiry",
+        "stock",
+        # TODO has been removed "stock_location_act_as_view"
+    ],  # LGPL
     "data": [
         "views/stock_location.xml",
         "views/stock_pack_operation.xml",
