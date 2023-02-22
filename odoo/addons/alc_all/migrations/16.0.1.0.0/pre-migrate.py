@@ -29,6 +29,7 @@ def migrate(cr, version):
         "product_packaging_barcode",
         "purchase_unlink_cancelop",
         "specific_zetes",
+        "stock_delivery_note",
         "stock_expired",
         "stock_inventory_controller",
         "stock_inventory_products",

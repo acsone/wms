@@ -1,15 +1,14 @@
-# -*- coding: utf-8 -*-
 # Copyright 2018 Camptocamp
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 
-from odoo.tests.common import SavepointCase
+from odoo.tests.common import TransactionCase
 
 
-class TestDeliveryNoteRecipient(SavepointCase):
+class TestDeliveryNoteRecipient(TransactionCase):
     @classmethod
     def setUpClass(cls):
-        super(TestDeliveryNoteRecipient, cls).setUpClass()
+        super().setUpClass()
 
         cls.Users = cls.env["res.users"]
 
@@ -65,7 +64,7 @@ class TestDeliveryNoteRecipient(SavepointCase):
         )
 
     def test_mail_send_all(self):
-        """Do not duplicate recipients"""
+        """Do not duplicate recipients."""
         values = {
             "partner_ids": [
                 self.partner_with_mail.id,

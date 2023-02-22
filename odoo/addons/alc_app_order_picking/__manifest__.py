@@ -15,6 +15,7 @@
         "alc_delivery_carrier_label_gls_server_env",
         "alc_partner_carrier",
         "alc_stock_available_immediately",
+        "alc_stock_delivery_slip",
         "alc_stock_picking_backorder_reason",
         "alc_stock_picking_wave_display",
         "base_delivery_carrier_label",

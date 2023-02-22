@@ -1,13 +1,12 @@
-# -*- coding: utf-8 -*-
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import fields, models
+from odoo import fields
+
+from odoo.addons.alc_partner_veterinary.models import res_partner
 
 
-class ResPartner(models.Model):
-
-    _inherit = "res.partner"
+class ResPartner(res_partner.ResPartner):
 
     send_csv_deliveryship = fields.Boolean(
         string="Send the deliveryship in CSV format", default=False
