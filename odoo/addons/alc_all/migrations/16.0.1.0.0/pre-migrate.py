@@ -29,6 +29,7 @@ def migrate(cr, version):
         "partner_helper",
         "product_packaging_barcode",
         "product_price_import",
+        "purchase_prepaid",
         "purchase_unlink_cancelop",
         "purchase_update_procurement_qty",
         "specific_zetes",
