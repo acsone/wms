@@ -255,8 +255,10 @@ class TestStockPicking(StockPickingTestCase):
         self.assertEqual(additional_move.product_uom_qty, 1)
         self.assertEqual(additional_move.quantity_done, 1)
         backorder = self.env["stock.picking"].search([("backorder_id", "=", pick.id)])
-        self.assertTrue(backorder.move_ids.is_additional_move)
-        self.assertEqual(backorder.move_ids.product_uom_qty, 4)
+        backorder_additional_move = backorder.move_ids
+        self.assertTrue(backorder_additional_move.is_additional_move)
+        self.assertEqual(backorder_additional_move.product_uom_qty, 4)
+        self.assertEqual(backorder_additional_move.state, "partially_available")
 
         ship = self._get_picking_ship(sale)
         ship.picking_type_id.no_backorder_for_additional_product = True
@@ -271,3 +273,4 @@ class TestStockPicking(StockPickingTestCase):
         self.assertFalse(backorder)
         self.assertEqual(len(ship.move_ids), 3)
         self.assertEqual(ship.move_ids[2].state, "cancel")
+        self.assertEqual(backorder_additional_move.state, "cancel")
