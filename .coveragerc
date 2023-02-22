@@ -253,7 +253,6 @@ omit =
     odoo/addons/alc_storage_file_lang/*
     odoo/addons/alc_storage_media_lang/*
     odoo/addons/alc_storage_media_product/*
-    odoo/addons/alc_supplier_purchase_manager/*
     odoo/addons/alc_turnover_reporting/*
     odoo/addons/alc_veterinary_group/*
     odoo/addons/alc_weighing_widget/*
