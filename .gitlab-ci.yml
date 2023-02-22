@@ -412,6 +412,17 @@ deploy-review-trigger:
     - "10.0"
   when: on_success # automatic after build-review-image
 
+deploy-uat-trigger:
+  extends: .deploy-trigger
+  variables:
+    DEPLOY_BRANCH: deploy-test
+  environment:
+    name: uat10
+  needs:
+    - job: build-image
+  only:
+    - /^1\.98\.\d+$/
+
 # deployments to docker environments (uat, preprod, prod)
 
 .deploy-docker:
@@ -421,13 +432,6 @@ deploy-review-trigger:
   only:
     - /^1\.98\.\d+$/
   when: manual
-
-deploy-uat-trigger:
-  extends: .deploy-docker
-  variables:
-    DEPLOY_BRANCH: deploy
-  environment:
-    name: uat
 
 deploy-preprod-trigger:
   extends: .deploy-docker
