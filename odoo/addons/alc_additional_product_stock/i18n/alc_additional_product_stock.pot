@@ -52,6 +52,11 @@ msgid "Main Product Move"
 msgstr ""
 
 #. module: alc_additional_product_stock
+#: model:ir.model.fields,field_description:alc_additional_product_stock.field_stock_picking_type__no_backorder_for_additional_product
+msgid "No Backorders for additional products"
+msgstr ""
+
+#. module: alc_additional_product_stock
 #: model:ir.model.fields,help:alc_additional_product_stock.field_stock_move__additional_move_ids
 msgid ""
 "Optional: stock move for additional products linked to the current product"
@@ -70,4 +75,9 @@ msgstr ""
 #. module: alc_additional_product_stock
 #: model:ir.model,name:alc_additional_product_stock.model_stock_rule
 msgid "Stock Rule"
+msgstr ""
+
+#. module: alc_additional_product_stock
+#: model:ir.model,name:alc_additional_product_stock.model_stock_picking
+msgid "Transfer"
 msgstr ""
