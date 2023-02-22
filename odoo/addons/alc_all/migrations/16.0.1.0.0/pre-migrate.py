@@ -33,6 +33,7 @@ def migrate(cr, version):
         "stock_inventory_controller",
         "stock_inventory_products",
         "stock_location",
+        "stock_location_act_as_view",
         "stock_location_notranslate",
         "stock_location_report",
         "stock_operation_cleaner",
