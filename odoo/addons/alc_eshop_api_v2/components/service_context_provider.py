@@ -13,3 +13,9 @@ class ShopinvaderAuthJwtServiceContextProvider(Component):
     _inherit = "auth_jwt.shopinvader.service.context.provider"
     _name = "auth_jwt.shopinvader.api.v2.service.context.provider"
     _collection = "shopinvader.api.v2"
+
+
+class ShopinvaderAuthApiKeyServiceContextProvider(Component):
+    _inherit = "auth_api_key.shopinvader.service.context.provider"
+    _name = "auth_api_key.shopinvader.api.v2.service.context.provider"
+    _collection = "shopinvader.api.v2"
