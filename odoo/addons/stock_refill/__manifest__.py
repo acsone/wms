@@ -8,7 +8,10 @@
     "author": "BCIM",
     "maintainer": "Camptocamp",
     "category": "Stock Management",
-    "depends": ["stock", "stock_quant_bylocation"],
+    "depends": [
+        "stock",
+        # TODO has been removed "stock_quant_bylocation",
+    ],
     "data": [
         "wizards/stock_config_settings.xml",
         "views/stock_picking_type.xml",

@@ -46,6 +46,7 @@ def migrate(cr, version):
         "stock_picking_fillwithstock",
         "stock_picking_show_backorder",
         "stock_putaway_route",
+        "stock_quant_bylocation",
         "base_cached_xmlid",
         "specific_data",
         "pricelist_discount",
