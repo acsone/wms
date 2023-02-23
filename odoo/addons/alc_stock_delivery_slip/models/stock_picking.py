@@ -189,7 +189,7 @@ class StockPicking(stock_picking.StockPicking):
         for picking in self:
             picking._generate_delivery_note_csv()
 
-    def _generate_delivery_note(self):
+    def _generate_delivery_note(self):  # noqa: C901
         """Generate the data for a delivery note when a stock pick is validated.
 
         It is a peculiar csv file because it does not have the same fields
