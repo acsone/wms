@@ -14,11 +14,6 @@ class StockMove(models.Model):
 
     group_id = fields.Many2one(index=True)
 
-    def _prepare_procurement_from_move(self):
-        res = super(StockMove, self)._prepare_procurement_from_move()
-        res["restrict_lot_id"] = self.restrict_lot_id.id
-        return res
-
     @api.multi
     def action_done(self):
         res = super(StockMove, self).action_done()

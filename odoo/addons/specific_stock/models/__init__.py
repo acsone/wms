@@ -1,6 +1,5 @@
 from . import (
     board,
-    procurement_order,
     product_category,
     product_product,
     product_template,
