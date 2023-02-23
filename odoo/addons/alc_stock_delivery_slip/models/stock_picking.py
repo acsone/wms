@@ -15,6 +15,32 @@ from odoo.tools import config
 from odoo.addons.delivery.models import stock_picking
 
 
+def format_number(number, fractional_size=None):
+    """Format a number to a string.
+
+    The number is formated separating the decimal and fractional part
+    with a comma. With between 1 and 3 number after the comma.
+    """
+    if fractional_size == 1:
+        formater = "{:.1f}"
+    elif fractional_size == 2:
+        formater = "{:.2f}"
+    elif fractional_size == 3:
+        formater = "{:.3f}"
+    else:
+        formater = "{}"
+    s = formater.format(number)
+    return ",".join(s.split("."))
+
+
+def format_use_date(use_date):
+    """Get the use dates in format dd-mm-yyyy."""
+    if not use_date:
+        return ""
+    sz_use_date = use_date.isoformat()[:10]
+    return sz_use_date[-2:] + sz_use_date[4:8] + sz_use_date[:4]
+
+
 class StockPicking(stock_picking.StockPicking):
     def button_validate(self):
         to_do = self.filtered(lambda p: p.state not in ("cancel", "done"))
@@ -213,30 +239,6 @@ class StockPicking(stock_picking.StockPicking):
         For each line an empty column so it always ends with a semi colon
         """
 
-        def format_number(number, fractional_size=None):
-            """Format a number to a string.
-
-            The number is formated separating the decimal and fractional part
-            with a comma. With between 1 and 3 number after the comma.
-            """
-            if fractional_size == 1:
-                formater = "{:.1f}"
-            elif fractional_size == 2:
-                formater = "{:.2f}"
-            elif fractional_size == 3:
-                formater = "{:.3f}"
-            else:
-                formater = "{}"
-            s = formater.format(number)
-            return ",".join(s.split("."))
-
-        def format_use_date(use_date):
-            """Get the use dates in format dd-mm-yyyy."""
-            if not use_date:
-                return ""
-            sz_use_date = use_date.isoformat()[:10]
-            return sz_use_date[-2:] + sz_use_date[4:8] + sz_use_date[:4]
-
         self.ensure_one()
         lines = []
         partner = self.partner_id
@@ -291,9 +293,7 @@ class StockPicking(stock_picking.StockPicking):
                             move_line._get_suite_name(sol.order_id, self.date_done),
                             # Product AMM if exist and delivery date
                             format_use_date(self.date_done or ""),
-                            product.product_tmpl_id.code_amm
-                            if product.product_tmpl_id.code_amm
-                            else "",
+                            product.code_amm or "",
                             "",
                         ]
                     )
