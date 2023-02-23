@@ -149,6 +149,12 @@ class StockMove(StockMoveBase):
         ]
 
     def _additional_move_split_and_cancel_not_done_qty(self):
+        """
+        At picking done this method is called to split undone additional moves and.
+
+        cancel the remaining qty. It also cancel all potential backorders for the
+        additional move
+        """
         precision_digits = self.env["decimal.precision"].precision_get(
             "Product Unit of Measure"
         )
@@ -173,6 +179,10 @@ class StockMove(StockMoveBase):
             move_to_cancel_vals = move._prepare_move_split_vals(
                 quantity_todo - quantity_done
             )
-            move_to_cancel = move.copy(move_to_cancel_vals)
-            move_to_cancel._action_cancel()
+            moves_to_cancel = (
+                move.main_move_id._get_all_not_done_additional_moves()
+                + move.copy(move_to_cancel_vals)
+                - move
+            )
+            moves_to_cancel._action_cancel()
             move.product_uom_qty = quantity_done
