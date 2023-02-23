@@ -64,6 +64,18 @@ Vue.component("searchbar", {
         // As the inputMode is set to none when inserted in the DOM, we need to force the focus
         if (this.autofocus) this.$refs.searchbar.focus();
     },
+    updated: function(val) {
+        this.$nextTick(function () {
+            // Code that will run only after the
+            // entire view has been re-rendered
+            if (this.autofocus) {
+                // this is needed to force the focus on the input
+                // when the searchbar is updated (e.g. when the
+                // input type is changed)
+                this.$refs.searchbar.focus();
+            }
+        });
+    },
     computed: {
         // defined as computed property to put a new instance in cache each
         // time the reactive debounceWait is modified
