@@ -63,7 +63,6 @@ odoo-addon-product-total-weight-from-packaging @ git+https://github.com/acsone/p
 odoo-addon-product-template-has-one-variant @ git+https://github.com/acsone/product-attribute.git@16.0-add-product-template-has-one-variant-dro#subdirectory=setup/product_template_has_one_variant
 
 # purchase-workflow
-odoo-addon-purchase-stock-packaging @ git+https://github.com/acsone/purchase-workflow.git@16.0-add-purchase_stock_packaging-dro#subdirectory=setup/purchase_stock_packaging
 
 # sale-workflow
 # https://github.com/OCA/sale-workflow/pull/2322
