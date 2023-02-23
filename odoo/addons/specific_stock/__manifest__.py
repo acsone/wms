@@ -44,7 +44,6 @@
     "data": [
         # Data
         "data/ir_cron.xml",
-        "data/ir_config_parameter.xml",
         "data/product.category.csv",
         "data/ir_sequence.xml",
         # Views
@@ -56,7 +55,6 @@
         "views/stock_move.xml",
         "views/stock_inventory.xml",
         # Wizards
-        "wizards/location_checksum.xml",
         "wizards/stock_receive_lot.xml",
         "wizards/stock_picking_return_views.xml",
         "wizards/put_in_pack_helper.xml",

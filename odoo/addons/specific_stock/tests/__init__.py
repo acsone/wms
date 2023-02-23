@@ -1,5 +1,4 @@
 from . import (
-    test_lot_checksum,
     test_picking_transfer,
     test_product_category_expired_times,
     test_stock_inventory,
