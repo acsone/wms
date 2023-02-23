@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2019 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -6,9 +5,10 @@ from collections import OrderedDict, namedtuple
 
 from odoo import _
 
-from odoo.addons.report_xlsx_helper.report.abstract_report_xlsx import (
-    AbstractReportXlsx,
+from odoo.addons.report_xlsx_helper.report.report_xlsx_abstract import (
+    ReportXlsxAbstract,
 )
+from odoo.addons.report_xlsx_helper.report.report_xlsx_format import FORMATS
 
 ProductInfo = namedtuple(
     "ProductInfo",
@@ -24,7 +24,10 @@ ProductInfo = namedtuple(
 )
 
 
-class ReportProductPriceImport(AbstractReportXlsx):
+class ReportProductPriceImport(ReportXlsxAbstract):
+    _name = "report.report_product_price_import_xlsx"
+    _description = "Report model for report_xlsx"
+
     def _get_ws_params(self, wb, data, products):
         template = OrderedDict()
         template["product_id"] = {
@@ -44,7 +47,7 @@ class ReportProductPriceImport(AbstractReportXlsx):
             "header": {"value": "supplier_name"},
             "data": {
                 "type": "string",
-                "value": self._render("supplier.name.name or ''"),
+                "value": self._render("supplier.partner_id.name or ''"),
             },
             "width": 30,
         }
@@ -127,7 +130,7 @@ class ReportProductPriceImport(AbstractReportXlsx):
             row_pos,
             ws_params,
             col_specs_section="header",
-            default_format=self.format_theader_yellow_left,
+            default_format=FORMATS["format_theader_yellow_left"],
         )
         ws.freeze_panes(row_pos, 0)
 
@@ -147,23 +150,19 @@ class ReportProductPriceImport(AbstractReportXlsx):
                     "product_info": product_info,
                     "product": product,
                 },
-                default_format=self.format_tcell_left,
+                default_format=FORMATS["format_tcell_left"],
             )
 
     def _get_product_data(self, product):
         data = product.export_data(
             [
                 "id",
-                "supplier_id/id",
+                "seller_ids/partner_id/id",
                 "name",
                 "default_code",
                 "list_price",
                 "sale_price_2",
                 "indicated_price",
             ],
-            raw_data=True,
         )["datas"][0]
         return ProductInfo(*data)
-
-
-ReportProductPriceImport("report.product_price_import.xlsx", "product.template")

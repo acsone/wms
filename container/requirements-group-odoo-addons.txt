@@ -37,6 +37,8 @@ odoo-addon-product-total-weight-from-packaging @ git+https://github.com/acsone/p
 odoo-addon-purchase-cancel-reason @ git+https://github.com/acsone/purchase-workflow.git@4d9c8cf585059f70e397db19d07f79050d87b68d#subdirectory=setup/purchase_cancel_reason
 odoo-addon-purchase-delivery-split-date @ git+https://github.com/acsone/purchase-workflow.git@93078bd65d4aad4c1a4b138e2a4664bcf57e88fd#subdirectory=setup/purchase_delivery_split_date
 odoo-addon-queue-job==16.0.2.0.0
+odoo-addon-report-xlsx==16.0.1.0.1.1
+odoo-addon-report-xlsx-helper==16.0.1.0.0.3
 odoo-addon-sale-cancel-remaining @ git+https://github.com/acsone/sale-workflow.git@b446df1dde83e9a399aabcb11c30fcc9b4608fd7#subdirectory=setup/sale_cancel_remaining
 odoo-addon-sale-exception==16.0.1.0.1.1
 odoo-addon-sale-procurement-customer @ git+https://github.com/acsone/sale-workflow.git@ef0c216f30a0fd7fd1fb0d782f8b9aaac3f7d487#subdirectory=setup/sale_procurement_customer

@@ -1,18 +1,17 @@
-# -*- coding: utf-8 -*-
 # Copyright 2019 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import api, models
+from odoo import api
+
+from odoo.addons.product.models import product_template
 
 
-class ProductTemplate(models.Model):
-
-    _inherit = "product.template"
-
+class ProductTemplate(product_template.ProductTemplate):
     @api.model
     def _get_default_supplierinfo(self, products):
         """
-        Return the default supplier_info by product_tmpl_id, IOW the one
+        Return the default supplier_info by product_tmpl_id, IOW the one.
+
         without start and end date
         """
         si = self.env["product.supplierinfo"].search(
