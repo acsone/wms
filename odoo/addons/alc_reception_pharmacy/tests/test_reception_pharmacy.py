@@ -200,4 +200,4 @@ class TestReceptionPharmacy(CommonReceptionPharmacyCase):
         )
         lot = pharmacy_line.lot_id
 
-        self.assertEqual(lot.name, "2023#TC12345")
+        self.assertEqual(lot.name, "2023TC12345")

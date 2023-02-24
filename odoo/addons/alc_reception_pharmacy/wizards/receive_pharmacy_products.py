@@ -78,7 +78,7 @@ class ReceivePharmacyProducts(models.TransientModel):
 
     def _create_lot(self, product, lot_name):
         current_year = datetime.now().year
-        lot_name = str(current_year) + "#" + lot_name
+        lot_name = str(current_year) + lot_name
         lot = self.env["stock.production.lot"]
         lot_vals = {
             "product_id": product.id,
