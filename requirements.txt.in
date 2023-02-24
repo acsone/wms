@@ -65,6 +65,7 @@ odoo-addon-product-template-has-one-variant @ git+https://github.com/acsone/prod
 # purchase-workflow
 # https://github.com/OCA/purchase-workflow/pull/1687
 odoo-addon-purchase-delivery-split-date @ git+https://github.com/acsone/purchase-workflow.git@16.0-imp-purchase_delivery_dplit_date-dro#subdirectory=setup/purchase_delivery_split_date
+odoo-addon-purchase-cancel-reason @ git+https://github.com/OCA/purchase-workflow.git@refs/pull/1776/head#subdirectory=setup/purchase_cancel_reason
 
 # sale-workflow
 # https://github.com/OCA/sale-workflow/pull/2322
