@@ -17,6 +17,7 @@
         "alc_app_receipt",
         "alc_app_return",
         "alc_app_sale",
+        "stock_scrap_location_default",
         # TO BE REMOVED
         "base_report_to_printer",
     ],

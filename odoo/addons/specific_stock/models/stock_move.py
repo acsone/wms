@@ -8,14 +8,11 @@ from odoo import api, fields, models
 class StockMove(models.Model):
     _inherit = "stock.move"
 
+    # TODO: This is managed now through the purchase order (lines)
+    # for incoming shipments. What to do with this (as used elsewhere) ?
     date_expected = fields.Datetime(group_operator="min")
 
     group_id = fields.Many2one(index=True)
-
-    def _prepare_procurement_from_move(self):
-        res = super(StockMove, self)._prepare_procurement_from_move()
-        res["restrict_lot_id"] = self.restrict_lot_id.id
-        return res
 
     @api.multi
     def action_done(self):
@@ -24,19 +21,6 @@ class StockMove(models.Model):
             lots = move.lot_ids.filtered("is_archived")
             lots.write({"is_archived": False})
         return res
-
-    def action_open_update_wizard(self):
-        self.ensure_one()
-        if self.picking_type_id.code != "incoming" or self.state in ["done"]:
-            return None
-        action = self.env.ref("specific_stock.stock_move_wizard_handler_action")
-        vals = action.read()[0]
-        vals["context"] = {
-            "default_new_date_expected": self.date_expected,
-            "default_move_id": self.id,
-        }
-        vals["target"] = "new"
-        return vals
 
     def action_cancel_move(self):
         if self.picking_type_id.code != "incoming" or self.state in ["done"]:

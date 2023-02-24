@@ -11,7 +11,6 @@ This module adds Alcyon specific fields and logic for stock.
 * Allow to manage expired times on product category
 * Add a required constraint on expiration date of "serial numbers / lots"
 * Create a cron to archive lot
-* Assign a unique (N-2/N+2) checksum on lot
 * Check if the removal date is not expired when we receive a lot
 * Indicate in reception wizard if operation is related to a product in backorder
 * Create a cron to create automatically a daily inventory according some rules

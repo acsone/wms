@@ -44,27 +44,20 @@
     "data": [
         # Data
         "data/ir_cron.xml",
-        "data/ir_config_parameter.xml",
         "data/product.category.csv",
         "data/ir_sequence.xml",
         # Views
         "views/product_category.xml",
         "views/product_template.xml",
-        "views/res_partner.xml",
         "views/stock_location.xml",
         "views/stock_production_lot.xml",
-        "views/stock_config_settings.xml",
         "views/stock_quant.xml",
         "views/stock_move.xml",
         "views/stock_inventory.xml",
         # Wizards
-        "wizards/location_checksum.xml",
         "wizards/stock_receive_lot.xml",
         "wizards/stock_picking_return_views.xml",
-        "wizards/stock_move_update_handler.xml",
         "wizards/put_in_pack_helper.xml",
-        "wizards/generate_voice_identifier.xml",
-        "wizards/open_uop.xml",
         # Views (loaded after wizards)
         "views/stock_picking.xml",
         # Security

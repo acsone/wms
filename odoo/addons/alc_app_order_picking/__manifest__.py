@@ -45,6 +45,7 @@
         "stock_release_channel",
         "stock_release_channel_auto_release",
         "stock_release_channel_process_end_time",
+        "stock_restrict_lot",
         "shipment_advice_planner",
         "stock_release_channel_shipment_advice",
         "stock_release_channel_shipment_advice_process_end_time",

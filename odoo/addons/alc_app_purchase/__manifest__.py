@@ -11,6 +11,7 @@
     "website": "https://acsone.eu",
     "depends": [
         "purchase",
+        "purchase_delivery_split_date",
         "purchase_stock_packaging",
         "alc_additional_product_purchase",
         "alc_purchase_order_cleaner",
