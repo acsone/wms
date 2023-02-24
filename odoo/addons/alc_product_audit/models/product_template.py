@@ -282,7 +282,7 @@ class ProductTemplate(models.Model):
                    JOIN
                         product_template pt ON pt.id = pp.product_tmpl_id AND pt.is_mto_product = True
                    WHERE
-                        pol.state NOT IN ('cancel', 'done') AND pol.qty_to_receive > 0
+                        pol.state NOT IN ('cancel', 'done') AND pol.product_qty - pol.qty_received > 0
                    AND NOT EXISTS
                         (
                             SELECT sol.id FROM sale_order_line sol

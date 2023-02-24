@@ -16,7 +16,6 @@
         "delivery_rounds_refill",
         "product_dimension",
         "purchase",
-        "purchase_open_qty",
         "product",
         "sale_cancel_remaining",
         "specific_stock",
