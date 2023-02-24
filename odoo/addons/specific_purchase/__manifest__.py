@@ -18,7 +18,6 @@
         "purchase_cancel_reason",
         "purchase_prepaid",
         "specific_product",
-        "stock_mts_mto_rule",
         "website_purchase_review",
     ],
     "website": "http://www.camptocamp.com",

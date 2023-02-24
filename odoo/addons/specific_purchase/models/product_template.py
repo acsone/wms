@@ -35,13 +35,8 @@ class ProductTemplate(models.Model):
     @api.onchange("route_ids")
     def _compute_date_out_of_stock(self):
         route_mto = self.env.ref("stock.route_warehouse0_mto")
-        route_mto_mts = self.env.ref("stock_mts_mto_rule.route_mto_mts")
-        route_ids = [route_mto.id, route_mto_mts.id]
         for product in self:
-            if (
-                any(route in product.route_ids.ids for route in route_ids)
-                or product.product_variant_count > 1
-            ):
+            if route_mto in product.route_ids.ids or product.product_variant_count > 1:
                 product.nb_days_out_of_stock = 0
             else:
                 avg_csp = product.product_variant_id.average_annual_consumption

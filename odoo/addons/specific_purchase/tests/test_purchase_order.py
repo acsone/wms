@@ -21,7 +21,6 @@ class TestPurchaseOrder(SavepointCase):
         cls.product = cls.env["product.product"].create({"name": "Product 1"})
         cls.route_mto = cls.env.ref("stock.route_warehouse0_mto")
         cls.route_buy = cls.env.ref("purchase.route_warehouse0_buy")
-        cls.route_mto_mts = cls.env.ref("stock_mts_mto_rule.route_mto_mts")
         cls.partner = cls.env.ref("base.res_partner_1")
 
         cls.so1 = cls.env["sale.order"].create(
@@ -272,9 +271,8 @@ class TestPurchaseOrder(SavepointCase):
     # pylint: disable=no-self-argument
     @freeze_time("2018-06-01", as_arg=True)
     def test_nb_days_out_of_stock_computation(frozen_time, self):
-        # without the route_mto, route_mto_mts
+        # without the route_mto
         self.assertNotIn(self.route_mto.id, self.product.route_ids.ids)
-        self.assertNotIn(self.route_mto_mts.id, self.product.route_ids.ids)
         # There should be only one variant
         self.assertEqual(self.product.product_variant_count, 1)
         # there are no SO in past so it will be null
@@ -319,7 +317,6 @@ class TestPurchaseOrder(SavepointCase):
         self.product.refresh()
 
         self.assertNotIn(self.route_mto.id, self.product.route_ids.ids)
-        self.assertNotIn(self.route_mto_mts.id, self.product.route_ids.ids)
 
         self.assertEqual(self.product.virtual_available, 365)
         self.assertEqual(
@@ -333,11 +330,4 @@ class TestPurchaseOrder(SavepointCase):
         self.product.write({"route_ids": [(4, self.route_mto.id, False)]})
         self.product.refresh()
         self.assertIn(self.route_mto.id, self.product.route_ids.ids)
-        self.assertEqual(self.product.nb_days_out_of_stock, 0)
-
-    def test_nb_days_out_of_stock_route_mto_mts(self):
-        # With the route_mto_mts
-        self.product.write({"route_ids": [(4, self.route_mto_mts.id, False)]})
-        self.product.refresh()
-        self.assertIn(self.route_mto_mts.id, self.product.route_ids.ids)
         self.assertEqual(self.product.nb_days_out_of_stock, 0)
