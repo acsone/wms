@@ -130,8 +130,8 @@ odoo-addon-base-sparse-field-list-support @ git+https://github.com/acsone/server
 
 # camptocamp/odoo-cloud-platform
 odoo-addon-base-attachment-object-storage @ git+https://github.com/acsone/odoo-cloud-platform@16.0#subdirectory=setup/base_attachment_object_storage
-# https://github.com/camptocamp/odoo-cloud-platform/pull/394
-odoo-addon-attachment-s3 @ git+https://github.com/acsone/odoo-cloud-platform@16.0-mig-s3-lmi#subdirectory=setup/attachment_s3
+# https://github.com/camptocamp/odoo-cloud-platform/pull/401
+odoo-addon-attachment-s3 @ git+https://github.com/acsone/odoo-cloud-platform@16.0-attachment-s3-sbi#subdirectory=setup/attachment_s3
 
 # stock-logistics-tracking
 # https://github.com/OCA/stock-logistics-tracking/pull/34

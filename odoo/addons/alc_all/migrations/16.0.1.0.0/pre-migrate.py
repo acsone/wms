@@ -53,6 +53,7 @@ def migrate(cr, version):
         "stock_picking_subcode",  # replaced by stock_move_picking_type_origin
         "purchase_open_qty",
         "stock_mts_mto_rule",
+        "stock_disable_force_availability_button",
     ]
     for addon in addons_to_uninstall:
         _logger.info("uninstall %s", ",".join(addon))
