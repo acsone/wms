@@ -51,6 +51,7 @@ def migrate(cr, version):
         "specific_data",
         "pricelist_discount",
         "stock_picking_subcode",  # replaced by stock_move_picking_type_origin
+        "purchase_open_qty",
     ]
     for addon in addons_to_uninstall:
         _logger.info("uninstall %s", ",".join(addon))
