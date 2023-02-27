@@ -1,0 +1,35 @@
+# Copyright 2023 ACSONE SA/NV
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+from openupgradelib import openupgrade
+
+
+def _rename_delivery_window(env):
+    openupgrade.rename_columns(
+        env,
+        {
+            "alc_delivery_window": [
+                ("start", "time_window_start"),
+                ("end", "time_window_end"),
+            ],
+            "alc_delivery_week_day_alc_delivery_window_rel": [
+                ("alc_delivery_window_id", "toursolver_delivery_window_id"),
+                ("alc_delivery_week_day_id", "time_weekday_id"),
+            ],
+        },
+    )
+    openupgrade.rename_tables(
+        env.cr,
+        [
+            ("alc_delivery_week_day", "time_weekday"),
+            ("alc_delivery_window", "toursolver_delivery_window"),
+            (
+                "alc_delivery_week_day_alc_delivery_window_rel",
+                "time_weekday_toursolver_delivery_window_rel",
+            ),
+        ],
+    )
+
+
+@openupgrade.migrate()
+def migrate(env, version):
+    _rename_delivery_window(env)
