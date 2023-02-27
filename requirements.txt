@@ -30,7 +30,6 @@ libsass==0.22.0
 lxml==4.9.2
 manifestoo_core==0.10.4
 MarkupSafe==2.1.2
-multidict==6.0.4
 num2words==0.5.12
 numpy==1.24.2
 odoo @ git+https://github.com/acsone/odoo.git@6dda7918534a89ddb813073f7485345db6290751
@@ -84,8 +83,8 @@ odoo-addon-server-environment==16.0.1.0.1
 odoo-addon-session-db==16.0.1.0.3
 odoo-addon-shipment-advice==16.0.1.0.1
 odoo-addon-shipment-advice-planner @ git+https://github.com/acsone/stock-logistics-transport.git@2970f906e1d0d7eae3c6d28405388671798453db#subdirectory=setup/shipment_advice_planner
-odoo-addon-shipment-advice-planner-toursolver @ git+https://github.com/OCA/stock-logistics-transport.git@cfa638f051f454bcfb304669580a97f900a49a9b#subdirectory=setup/shipment_advice_planner_toursolver
-odoo-addon-shipment-advice-planner-toursolver-queue-job @ git+https://github.com/OCA/stock-logistics-transport.git@cfa638f051f454bcfb304669580a97f900a49a9b#subdirectory=setup/shipment_advice_planner_toursolver_queue_job
+odoo-addon-shipment-advice-planner-toursolver @ git+https://github.com/OCA/stock-logistics-transport.git@6073657ab50306d7ea66cc800d84ff4392f9f810#subdirectory=setup/shipment_advice_planner_toursolver
+odoo-addon-shipment-advice-planner-toursolver-queue-job @ git+https://github.com/OCA/stock-logistics-transport.git@6073657ab50306d7ea66cc800d84ff4392f9f810#subdirectory=setup/shipment_advice_planner_toursolver_queue_job
 odoo-addon-stock-available==16.0.1.0.1.1
 odoo-addon-stock-available-immediately==16.0.1.0.0.4
 odoo-addon-stock-available-immediately-exclude-location @ git+https://github.com/acsone/stock-logistics-availability.git@17e6e34765fd01ed1a3b2f4c021526f3c3ba11be#subdirectory=setup/stock_available_immediately_exclude_location
@@ -162,7 +161,6 @@ python-dateutil==2.8.2
 python-stdnum==1.18
 pytz==2022.7.1
 pyusb==1.2.1
-PyYAML==6.0
 qrcode==7.4.2
 reportlab==3.6.12
 requests==2.28.2
@@ -177,15 +175,12 @@ typodoo==0.2
 unicodecsv==0.14.1
 Unidecode==1.3.6
 urllib3==1.26.14
-vcrpy==4.2.1
-vcrpy-unittest==0.1.7
 vobject==0.9.6.1
 Werkzeug==2.0.3
 wrapt==1.14.1
 xlrd==2.0.1
 XlsxWriter==3.0.8
 xlwt==1.3.0
-yarl==1.8.2
 zeep==4.2.1
 zope.event==4.6
 zope.interface==5.5.2
