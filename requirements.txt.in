@@ -43,6 +43,7 @@ odoo-addon-stock-picking-batch-creation @ git+https://github.com/acsone/wms.git@
 odoo-addon-stock-release-channel-shipment-advice @ git+https://github.com/acsone/wms.git@16.0-stock_release_channel_shipment_advice-sbj#subdirectory=setup/stock_release_channel_shipment_advice
 # https://github.com/OCA/wms/pull/572 [ADD] - add stock_release_channel_shipment_advice_process_end_time #572
 odoo-addon-stock-release-channel-shipment-advice-process-end-time @ git+https://github.com/acsone/wms.git@16.0-stock_release_channel_shipment_advice_process_end_time-sbj#subdirectory=setup/stock_release_channel_shipment_advice_process_end_time
+odoo-addon-stock-release-channel-shipment-advice-toursolver @ git+https://github.com/OCA/wms.git@refs/pull/577/head#subdirectory=setup/stock_release_channel_shipment_advice_toursolver
 
 # product-attribute
 # https://github.com/OCA/product-attribute/pull/1192
@@ -125,8 +126,10 @@ odoo-addon-stock-override-procurement @ git+https://github.com/acsone/stock-logi
 # server-tools
 # https://github.com/OCA/server-tools/pull/2533 - [16.0][MIG] base_sparse_field_list_support
 odoo-addon-base-sparse-field-list-support @ git+https://github.com/acsone/server-tools.git@16.0-mig-base_sparse_field_list_support-hda#subdirectory=setup/base_sparse_field_list_support
+odoo-addon-base-time-window @ git+https://github.com/OCA/server-tools.git@refs/pull/2559/head#subdirectory=setup/base_time_window
 
 # OCA/web
+odoo-addon-web-notify @ git+https://github.com/OCA/web.git@refs/pull/2412/head#subdirectory=setup/web_notify
 
 # camptocamp/odoo-cloud-platform
 odoo-addon-base-attachment-object-storage @ git+https://github.com/acsone/odoo-cloud-platform@16.0#subdirectory=setup/base_attachment_object_storage
@@ -140,6 +143,8 @@ odoo-addon-internal-stock-quant-package @ git+https://github.com/acsone/stock-lo
 # stock-logistics-transport
 # https://github.com/OCA/stock-logistics-transport/pull/88
 odoo-addon-shipment-advice-planner @ git+https://github.com/acsone/stock-logistics-transport.git@16.0-shipment_advice_planner-sbj#subdirectory=setup/shipment_advice_planner
+odoo-addon-shipment-advice-planner-toursolver @ git+https://github.com/OCA/stock-logistics-transport.git@refs/pull/91/head#subdirectory=setup/shipment_advice_planner_toursolver
+odoo-addon-shipment-advice-planner-toursolver-queue-job @ git+https://github.com/OCA/stock-logistics-transport.git@refs/pull/91/head#subdirectory=setup/shipment_advice_planner_toursolver_queue_job
 
 # stock-logistics-availability
 # https://github.com/OCA/stock-logistics-availability/pull/6 - [16.0][ADD] stock_available_immediately_exclude_location

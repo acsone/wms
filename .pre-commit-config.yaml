@@ -108,7 +108,6 @@ exclude: |
   ^odoo/addons/alc_package_label_printer/|
   ^odoo/addons/alc_partner_category/|
   ^odoo/addons/alc_partner_delivery_person/|
-  ^odoo/addons/alc_partner_delivery_window/|
   ^odoo/addons/alc_partner_delivery_window_import/|
   ^odoo/addons/alc_partner_force_re_geolocalization/|
   ^odoo/addons/alc_partner_manual_sale_order/|
