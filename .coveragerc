@@ -178,7 +178,6 @@ omit =
     odoo/addons/alc_running_env/*
     odoo/addons/alc_sale_cart_price_recalculation/*
     odoo/addons/alc_sale_channel/*
-    odoo/addons/alc_sale_channel_stock_move/*
     odoo/addons/alc_sale_invoicing_on_transfer/*
     odoo/addons/alc_sale_invoicing_policy/*
     odoo/addons/alc_sale_order_price_recalculation/*
