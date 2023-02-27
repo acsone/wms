@@ -9,7 +9,7 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["alc_pim_attribute_group", "pim"],
+    "depends": ["alc_pim_attribute_group"],
     "application": False,
     "data": ["data/attribute_attribute.xml", "views/product_template.xml"],
     "demo": [],
