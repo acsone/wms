@@ -50,5 +50,6 @@
         "alc_sale_order_line_product_type",
         "alc_company_term_condition",
         "alc_price_triple_discount_exclusive",
+        "alc_pricelist_items",
     ],
 }
