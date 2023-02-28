@@ -25,6 +25,7 @@
         "product_manufacturer",
         # OCA/odoo-pim
         "attribute_set",
+        "product_attribute_set",
         # ALC
         "alc_partner_veterinary",
         "alc_product_category_data",

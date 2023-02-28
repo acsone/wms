@@ -156,3 +156,4 @@ odoo-addon-partner-tz @ git+https://github.com/acsone/partner-contact@16.0-mig-p
 
 # odoo-pim
 odoo-addon-attribute-set @ git+https://github.com/OCA/odoo-pim.git@refs/pull/141/head#subdirectory=setup/attribute_set
+odoo-addon-product-attribute-set @ git+https://github.com/OCA/odoo-pim.git@refs/pull/142/head#subdirectory=setup/product_attribute_set

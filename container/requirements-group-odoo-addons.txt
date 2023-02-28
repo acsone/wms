@@ -24,6 +24,7 @@ odoo-addon-delivery-package-type-number-parcels==16.0.1.0.1
 odoo-addon-partner-manual-rank==16.0.1.0.1
 odoo-addon-partner-tz @ git+https://github.com/acsone/partner-contact@70915afa6bf0beae725d1998bd0d600b6dffd2b7#subdirectory=setup/partner_tz
 odoo-addon-product-abc-classification @ git+https://github.com/acsone/product-attribute.git@cc97df93b3f97e947c2ed38cc6232c0a642f65e1#subdirectory=setup/product_abc_classification
+odoo-addon-product-attribute-set @ git+https://github.com/OCA/odoo-pim.git@d50bd057ca672edea3ffb1587b390c24b7002bcf#subdirectory=setup/product_attribute_set
 odoo-addon-product-dimension==16.0.1.1.0.1
 odoo-addon-product-logistics-uom==16.0.1.0.0.5
 odoo-addon-product-manufacturer==16.0.1.0.0.5
