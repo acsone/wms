@@ -1,6 +1,5 @@
 <odoo noupdate="1">
   <record model="attribute.attribute" id="attribute_promo_bag">
-    <field name="allow_mass_editing" eval="False" />
     <field
       ref="alc_pim_attribute_group.marketing_attribute_group"
       name="attribute_group_id"
@@ -9,13 +8,12 @@
       name="attribute_set_ids"
       eval="[(6,0,[ref('alc_pim_attribute_group.attribute_set_aliments')])]"
     />
-    <field ref="alc_pim_product.field_product_template_promo_bag" name="field_id" />
+    <field ref="alc_pim_product.field_product_template__promo_bag" name="field_id" />
     <field ref="product.model_product_template" name="model_id" />
     <field name="nature">native</field>
     <field name="attribute_type">integer</field>
   </record>
   <record model="attribute.attribute" id="attribute_size_clothing_option_id">
-    <field name="allow_mass_editing" eval="False" />
     <field
       ref="alc_pim_attribute_group.marketing_attribute_group"
       name="attribute_group_id"
@@ -25,7 +23,7 @@
       eval="[(6,0,[ref('alc_pim_attribute_group.attribute_set_materiel')])]"
     />
     <field
-      ref="alc_pim_product.field_product_template_size_clothing_option_id"
+      ref="alc_pim_product.field_product_template__size_clothing_option_id"
       name="field_id"
     />
     <field ref="product.model_product_template" name="model_id" />
@@ -33,7 +31,6 @@
     <field name="attribute_type">select</field>
   </record>
   <record model="attribute.attribute" id="attribute_thread_option_id">
-    <field name="allow_mass_editing" eval="False" />
     <field
       ref="alc_pim_attribute_group.marketing_attribute_group"
       name="attribute_group_id"
@@ -43,7 +40,7 @@
       eval="[(6,0,[ref('alc_pim_attribute_group.attribute_set_materiel')])]"
     />
     <field
-      ref="alc_pim_product.field_product_template_thread_option_id"
+      ref="alc_pim_product.field_product_template__thread_option_id"
       name="field_id"
     />
     <field ref="product.model_product_template" name="model_id" />
@@ -51,7 +48,6 @@
     <field name="attribute_type">select</field>
   </record>
   <record model="attribute.attribute" id="attribute_food_range_option_id">
-    <field name="allow_mass_editing" eval="False" />
     <field
       ref="alc_pim_attribute_group.marketing_attribute_group"
       name="attribute_group_id"
@@ -61,7 +57,7 @@
       eval="[(6,0,[ref('alc_pim_attribute_group.attribute_set_aliments')])]"
     />
     <field
-      ref="alc_pim_product.field_product_template_food_range_option_id"
+      ref="alc_pim_product.field_product_template__food_range_option_id"
       name="field_id"
     />
     <field ref="product.model_product_template" name="model_id" />
@@ -69,7 +65,6 @@
     <field name="attribute_type">select</field>
   </record>
   <record model="attribute.attribute" id="attribute_presentation_option_id">
-    <field name="allow_mass_editing" eval="False" />
     <field
       ref="alc_pim_attribute_group.marketing_attribute_group"
       name="attribute_group_id"
@@ -79,7 +74,7 @@
       eval="[(6,0,[ref('alc_pim_attribute_group.attribute_set_aliments')])]"
     />
     <field
-      ref="alc_pim_product.field_product_template_presentation_option_id"
+      ref="alc_pim_product.field_product_template__presentation_option_id"
       name="field_id"
     />
     <field ref="product.model_product_template" name="model_id" />
@@ -87,7 +82,6 @@
     <field name="attribute_type">select</field>
   </record>
   <record model="attribute.attribute" id="attribute_categ_age_option_ids">
-    <field name="allow_mass_editing" eval="False" />
     <field
       ref="alc_pim_attribute_group.marketing_attribute_group"
       name="attribute_group_id"
@@ -97,7 +91,7 @@
       eval="[(6,0,[ref('alc_pim_attribute_group.attribute_set_aliments')])]"
     />
     <field
-      ref="alc_pim_product.field_product_template_categ_age_option_ids"
+      ref="alc_pim_product.field_product_template__categ_age_option_ids"
       name="field_id"
     />
     <field ref="product.model_product_template" name="model_id" />
@@ -105,7 +99,6 @@
     <field name="attribute_type">multiselect</field>
   </record>
   <record model="attribute.attribute" id="attribute_product_color_option_ids">
-    <field name="allow_mass_editing" eval="False" />
     <field
       ref="alc_pim_attribute_group.marketing_attribute_group"
       name="attribute_group_id"
@@ -115,7 +108,7 @@
       eval="[(6,0,[ref('alc_pim_attribute_group.attribute_set_materiel')])]"
     />
     <field
-      ref="alc_pim_product.field_product_template_product_color_option_ids"
+      ref="alc_pim_product.field_product_template__product_color_option_ids"
       name="field_id"
     />
     <field ref="product.model_product_template" name="model_id" />
@@ -123,7 +116,6 @@
     <field name="attribute_type">multiselect</field>
   </record>
   <record model="attribute.attribute" id="attribute_indication_option_ids">
-    <field name="allow_mass_editing" eval="False" />
     <field
       ref="alc_pim_attribute_group.marketing_attribute_group"
       name="attribute_group_id"
@@ -133,7 +125,7 @@
       eval="[(6,0,[ref('alc_pim_attribute_group.attribute_set_aliments')])]"
     />
     <field
-      ref="alc_pim_product.field_product_template_indication_option_ids"
+      ref="alc_pim_product.field_product_template__indication_option_ids"
       name="field_id"
     />
     <field ref="product.model_product_template" name="model_id" />
@@ -141,7 +133,6 @@
     <field name="attribute_type">multiselect</field>
   </record>
   <record model="attribute.attribute" id="attribute_animal_size_option_ids">
-    <field name="allow_mass_editing" eval="False" />
     <field
       ref="alc_pim_attribute_group.marketing_attribute_group"
       name="attribute_group_id"
@@ -151,7 +142,7 @@
       eval="[(6,0,[ref('alc_pim_attribute_group.attribute_set_aliments')])]"
     />
     <field
-      ref="alc_pim_product.field_product_template_animal_size_option_ids"
+      ref="alc_pim_product.field_product_template__animal_size_option_ids"
       name="field_id"
     />
     <field ref="product.model_product_template" name="model_id" />
@@ -159,7 +150,6 @@
     <field name="attribute_type">multiselect</field>
   </record>
   <record model="attribute.attribute" id="attribute_active_principle_option_ids">
-    <field name="allow_mass_editing" eval="False" />
     <field
       ref="alc_pim_attribute_group.marketing_attribute_group"
       name="attribute_group_id"
@@ -169,7 +159,7 @@
       eval="[(6,0,[ref('alc_pim_attribute_group.attribute_set_medicaments')])]"
     />
     <field
-      ref="alc_pim_product.field_product_template_active_principle_option_ids"
+      ref="alc_pim_product.field_product_template__active_principle_option_ids"
       name="field_id"
     />
     <field ref="product.model_product_template" name="model_id" />
@@ -177,7 +167,6 @@
     <field name="attribute_type">multiselect</field>
   </record>
   <record model="attribute.attribute" id="attribute_administration_route_option_ids">
-    <field name="allow_mass_editing" eval="False" />
     <field
       ref="alc_pim_attribute_group.marketing_attribute_group"
       name="attribute_group_id"
@@ -187,7 +176,7 @@
       eval="[(6,0,[ref('alc_pim_attribute_group.attribute_set_medicaments')])]"
     />
     <field
-      ref="alc_pim_product.field_product_template_administration_route_option_ids"
+      ref="alc_pim_product.field_product_template__administration_route_option_ids"
       name="field_id"
     />
     <field ref="product.model_product_template" name="model_id" />

@@ -131,7 +131,6 @@ omit =
     odoo/addons/alc_partner_manual_sale_order/*
     odoo/addons/alc_pg_trgm/*
     odoo/addons/alc_pim/*
-    odoo/addons/alc_pim_product/*
     odoo/addons/alc_placedesvetos/*
     odoo/addons/alc_placedesvetos_payment_globalization/*
     odoo/addons/alc_price_cache/*

@@ -1,16 +1,19 @@
-# -*- coding: utf-8 -*-
 # Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import inspect
 import logging
 
-from odoo import api, fields, models
+from odoo import api, fields
+
+from odoo.addons.product.models.product_template import (
+    ProductTemplate as ProductTemplateBase,
+)
 
 _logger = logging.getLogger(__name__)
 
 
-class LazyDefaultAttributeIdContext(object):
+class LazyDefaultAttributeIdContext:
     def __call__(self, source):
         try:
             frame = inspect.currentframe()
@@ -24,21 +27,18 @@ class LazyDefaultAttributeIdContext(object):
             field = frame.f_locals.get("self")
             env = frame.f_locals.get("env")
             if field and env:
-                attribute_attribute_xmlid = "alc_pim_product.attribute_%s" % field.name
-                return "{'default_attribute_id': %s}" % (
-                    env.ref(attribute_attribute_xmlid).id
-                )
+                attribute_attribute_xmlid = f"alc_pim_product.attribute_{field.name}"
+                return f"{{'default_attribute_id': {env.ref(attribute_attribute_xmlid).id}}}"
             _logger.Exception("Not able to build field context")
-        except Exception:
+        except Exception as error:  # pylint: disable=broad-except
             _logger.Exception(
                 'Not able to build field context for "%r", skipped', source
             )
+            _logger.error(error)
         return {}
 
 
-class ProductTemplate(models.Model):
-
-    _inherit = "product.template"
+class ProductTemplate(ProductTemplateBase):
 
     pdf_file = fields.Binary("PDF")
 
@@ -127,5 +127,5 @@ class ProductTemplate(models.Model):
 
     @api.model
     def _get_domain(self, fn_name):
-        attribute_attribute_xmlid = "alc_pim_product.attribute_%s" % fn_name
+        attribute_attribute_xmlid = f"alc_pim_product.attribute_{fn_name}"
         return [("attribute_id", "=", self.env.ref(attribute_attribute_xmlid).id)]
