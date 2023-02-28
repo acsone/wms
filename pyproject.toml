@@ -345,7 +345,6 @@ exclude = [
   'odoo/addons/product_last_transaction/*',
   'odoo/addons/product_price_import/*',
   'odoo/addons/purchase_prepaid/*',
-  'odoo/addons/sale_delay/*',
   'odoo/addons/sale_internal_confirmation_mail/*',
   'odoo/addons/server_environment_files/*',
   'odoo/addons/shopinvader_assortment_bind/*',

@@ -5,7 +5,11 @@
     <field name="inherit_id" ref="product.view_partner_property_form" />
     <field name="arch" type="xml">
       <group name="sale" position="inside">
-        <field name="max_delay_for_sale_order_creation" />
+        <label for="auto_confirm_max_delay" />
+        <div>
+            <field name="auto_confirm_max_delay" class="oe_inline" />
+            <span>hours</span>
+        </div>
       </group>
     </field>
   </record>
