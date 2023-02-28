@@ -1,13 +1,14 @@
-# -*- coding: utf-8 -*-
 # Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, fields, models
+from odoo import _, api, fields
+
+from odoo.addons.stock_picking_batch.models.stock_picking_batch import (
+    StockPickingBatch as StockPickingBatchBase,
+)
 
 
-class StockPickingWave(models.Model):
-
-    _inherit = "stock.picking.wave"
+class StockPickingBatch(StockPickingBatchBase):
 
     # Odoo Fix: never copy the printed field. Important for backorder creation
     printed = fields.Boolean(compute="_compute_printed", inverse="_inverse_printed")
@@ -16,7 +17,7 @@ class StockPickingWave(models.Model):
         "res.users",
         string="Operator",
         copy=False,
-        track_visibility="onchange",
+        tracking=True,
         inverse="_inverse_operator_id",
     )
 
@@ -32,14 +33,13 @@ class StockPickingWave(models.Model):
         operator_id = operator.id if operator else self.env.uid
         return {"operator_id": operator_id, "printed": True}
 
-    @api.multi
     def assign_operator(self, operator=None):
         self.write(self._prepare_assign_operator_values(operator))
 
     def _inverse_operator_id(self):
         for rec in self:
             rec.user_id = rec.operator_id
-            rec.picking_ids.write({"operator_id": rec.operator_id.id})
+            rec.picking_ids.write({"user_id": rec.operator_id.id})
 
     @api.depends("picking_ids", "picking_ids.printed")
     def _compute_printed(self):

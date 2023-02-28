@@ -6,9 +6,9 @@
     <record model="ir.ui.view" id="stock_picking_wave_form_view">
         <field
       name="name"
-    >stock.picking.wave.form (in alc_stock_picking_batch_assignment)</field>
-        <field name="model">stock.picking.wave</field>
-        <field name="inherit_id" ref="stock_picking_wave.view_picking_wave_form" />
+    >stock.picking.batch.form (in alc_stock_picking_batch_assignment)</field>
+        <field name="model">stock.picking.batch</field>
+        <field name="inherit_id" ref="stock_picking_batch.stock_picking_batch_form" />
         <field name="arch" type="xml">
             <field name="user_id" position="after">
                 <field name="operator_id" />
