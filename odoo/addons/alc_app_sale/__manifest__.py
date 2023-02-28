@@ -55,5 +55,6 @@
         "alc_company_term_condition",
         "alc_price_triple_discount_exclusive",
         "alc_pricelist_items",
+        "alc_pim_attribute_group",
     ],
 }
