@@ -179,7 +179,6 @@ omit =
     odoo/addons/alc_sale_channel/*
     odoo/addons/alc_sale_invoicing_on_transfer/*
     odoo/addons/alc_sale_invoicing_policy/*
-    odoo/addons/alc_sale_order_price_recalculation/*
     odoo/addons/alc_sale_processing_finalizer/*
     odoo/addons/alc_sale_processing_finalizer_exclude_logiweb/*
     odoo/addons/alc_sale_product_expected_receipt_date/*

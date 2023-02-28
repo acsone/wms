@@ -1,13 +1,14 @@
-# -*- coding: utf-8 -*-
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+from datetime import timedelta
+
 from odoo import fields
 
-from odoo.addons.alc_pricelist_discount.tests.common import PricelistDiscountCase
+from .common import TestPricelistDiscountCommon
 
 
-class TestAlcSaleOrderPriceRecalculation(PricelistDiscountCase):
+class TestSaleOrderPriceRecalculation(TestPricelistDiscountCommon):
     def test_price_recalculation(self):
         # at this stage we have two sale order line
         # one with discount2 and one with discount2 and discount3 set
@@ -22,7 +23,7 @@ class TestAlcSaleOrderPriceRecalculation(PricelistDiscountCase):
         # and recompute the prices, the dicount2 on the first line will
         # be reset to 0
         self.supplierinfo1.write({"date_start": "2099-01-01", "date_end": "2100-01-01"})
-        self.sale.recalculate_prices()
+        self.sale.action_update_prices()
         self.assertEqual(100, self.sol_p1.price_unit)
         self.assertEqual(0, self.sol_p1.discount2)
         self.assertEqual(0, self.sol_p1.discount3)
@@ -35,10 +36,13 @@ class TestAlcSaleOrderPriceRecalculation(PricelistDiscountCase):
             {"date_start": fields.Date.today(), "date_end": fields.Date.today()}
         )
         self.discount_pricelist_id.item_ids.write(
-            {"date_start": fields.Date.today(), "date_end": fields.Date.today()}
+            {
+                "date_start": fields.Date.today() - timedelta(days=1),
+                "date_end": fields.Date.today(),
+            }
         )
         self.sale.date_order = "2099-01-01"
-        self.sale.recalculate_prices()
+        self.sale.action_update_prices()
 
         self.assertEqual(100, self.sol_p1.price_unit)
         self.assertEqual(10, self.sol_p1.discount2)

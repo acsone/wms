@@ -55,6 +55,7 @@ def migrate(cr, version):
         "stock_mts_mto_rule",
         "stock_disable_force_availability_button",
         "alc_sale_channel_stock_move",
+        "alc_sale_order_price_recalculation",  # merged into alc_pricelist_discount
     ]
     for addon in addons_to_uninstall:
         _logger.info("uninstall %s", ",".join(addon))
