@@ -153,3 +153,6 @@ odoo-addon-stock-available-immediately-exclude-location @ git+https://github.com
 # partner-contact
 # https://github.com/OCA/partner-contact/pull/1464
 odoo-addon-partner-tz @ git+https://github.com/acsone/partner-contact@16.0-mig-partner-tz-dro#subdirectory=setup/partner_tz
+
+# odoo-pim
+odoo-addon-attribute-set @ git+https://github.com/OCA/odoo-pim.git@refs/pull/141/head#subdirectory=setup/attribute_set

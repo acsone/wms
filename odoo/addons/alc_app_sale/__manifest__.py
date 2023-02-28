@@ -23,6 +23,8 @@
         "sale_cancel_remaining",
         # OCA/product-attribute
         "product_manufacturer",
+        # OCA/odoo-pim
+        "attribute_set",
         # ALC
         "alc_partner_veterinary",
         "alc_product_category_data",
