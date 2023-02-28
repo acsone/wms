@@ -154,7 +154,6 @@ omit =
     odoo/addons/alc_product_is_new/*
     odoo/addons/alc_product_label_printer/*
     odoo/addons/alc_product_link_notice/*
-    odoo/addons/alc_product_lot_info/*
     odoo/addons/alc_product_mto/*
     odoo/addons/alc_product_packaging_stock_reserve/*
     odoo/addons/alc_product_promoted_links/*
