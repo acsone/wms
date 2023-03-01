@@ -60,6 +60,7 @@ def migrate(cr, version):
         "alc_sale_channel_stock_move",
         "alc_sale_order_price_recalculation",  # merged into alc_pricelist_discount
         "sale_delay",  # replaced by alc_sale_auto_confirm_max_delay
+        "sale_internal_confirmation_mail",  # replaced by alc_sale_internal_confirmation_mail
     ]
     for addon in addons_to_uninstall:
         _logger.info("uninstall %s", ",".join(addon))
