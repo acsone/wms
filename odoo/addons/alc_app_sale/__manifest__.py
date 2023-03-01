@@ -21,6 +21,8 @@
         "sale_exception",
         "sale_stock_picking_blocking",
         "sale_cancel_remaining",
+        # OCA/sale-channel
+        "sale_channel",
         # OCA/product-attribute
         "product_manufacturer",
         # OCA/odoo-pim
@@ -58,5 +60,6 @@
         "alc_pim_attribute_group",
         "alc_pim_product",
         "alc_sale_auto_confirm_max_delay",
+        "alc_sale_channel",
     ],
 }
