@@ -25,5 +25,6 @@
         "alc_product_supplierinfo_force_edit_form",
         "alc_product_state",
         "partner_manual_rank",
+        "product_uom_updatable",
     ],
 }

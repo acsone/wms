@@ -62,6 +62,7 @@ odoo-addon-product-route-mto @ git+https://github.com/acsone/product-attribute.g
 odoo-addon-product-total-weight-from-packaging @ git+https://github.com/acsone/product-attribute.git@16.0-mig-product_total_weight_from_packaging#subdirectory=setup/product_total_weight_from_packaging
 # https://github.com/OCA/product-attribute/pull/1225 - [ADD] product_template_has_one_variant
 odoo-addon-product-template-has-one-variant @ git+https://github.com/acsone/product-attribute.git@16.0-add-product-template-has-one-variant-dro#subdirectory=setup/product_template_has_one_variant
+odoo-addon-product-uom-updatable @ git+https://github.com/OCA/product-attribute.git@refs/pull/1286/head#subdirectory=setup/product_uom_updatable
 
 # purchase-workflow
 # https://github.com/OCA/purchase-workflow/pull/1687
