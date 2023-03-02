@@ -95,7 +95,6 @@ exclude: |
   ^odoo/addons/alc_eshop_wishlist/|
   ^odoo/addons/alc_geo_delivery_rounds/|
   ^odoo/addons/alc_gls_putinpack/|
-  ^odoo/addons/alc_incoming_product_supplier_filter/|
   ^odoo/addons/alc_internal_package_groupbypartner/|
   ^odoo/addons/alc_invoices_audit/|
   ^odoo/addons/alc_keycloak/|
@@ -163,7 +162,6 @@ exclude: |
   ^odoo/addons/alc_sale_processing_finalizer/|
   ^odoo/addons/alc_sale_processing_finalizer_exclude_logiweb/|
   ^odoo/addons/alc_sale_product_expected_receipt_date/|
-  ^odoo/addons/alc_sale_product_qty_available_to_promise/|
   ^odoo/addons/alc_sale_product_qty_backorder/|
   ^odoo/addons/alc_sale_statistics/|
   ^odoo/addons/alc_search_engine/|
@@ -273,7 +271,6 @@ exclude: |
   ^odoo/addons/product_last_transaction/|
   ^odoo/addons/product_price_import/|
   ^odoo/addons/purchase_prepaid/|
-  ^odoo/addons/purchase_update_procurement_qty/|
   ^odoo/addons/sale_delay/|
   ^odoo/addons/sale_internal_confirmation_mail/|
   ^odoo/addons/server_environment_files/|
