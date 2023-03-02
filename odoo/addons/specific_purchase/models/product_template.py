@@ -8,6 +8,7 @@ class ProductTemplate(models.Model):
     _inherit = "product.template"
 
     supplier_id = fields.Many2one(
+        # TODO: already moved to new alc_product_supplier
         "res.partner",
         string="Vendor",
         readonly=True,

@@ -114,7 +114,6 @@ omit =
     odoo/addons/alc_eshop_wishlist/*
     odoo/addons/alc_geo_delivery_rounds/*
     odoo/addons/alc_gls_putinpack/*
-    odoo/addons/alc_incoming_product_supplier_filter/*
     odoo/addons/alc_internal_package_groupbypartner/*
     odoo/addons/alc_invoices_audit/*
     odoo/addons/alc_keycloak/*
