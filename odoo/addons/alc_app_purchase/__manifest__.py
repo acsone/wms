@@ -15,6 +15,7 @@
         "purchase_stock_packaging",
         "purchase_cancel_reason",
         "alc_additional_product_purchase",
+        "alc_purchase_announced_delivery_date",
         "alc_purchase_order_cleaner",
         "alc_stock_move_list",
         "alc_supplier_purchase_manager",
