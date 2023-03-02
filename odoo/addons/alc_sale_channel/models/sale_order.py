@@ -8,7 +8,10 @@ from odoo.addons.sale_channel.models.sale_order import SaleOrder as SaleOrderBas
 
 class SaleOrder(SaleOrderBase):
     sale_channel_id = fields.Many2one(
-        compute="_compute_sale_channel_id", store=True, readonly=False
+        compute="_compute_sale_channel_id",
+        store=True,
+        readonly=True,
+        states={"draft": [("readonly", False)]},
     )
 
     @api.depends("team_id")

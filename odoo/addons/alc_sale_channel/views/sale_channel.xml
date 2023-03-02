@@ -8,6 +8,7 @@
         <field name="inherit_id" ref="sale_channel.sale_channel_view_form" />
         <field name="arch" type="xml">
             <xpath expr="//group[@name='general_info']" position="inside">
+                <field name="code" />
                 <field name="is_internal" />
             </xpath>
         </field>

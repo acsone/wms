@@ -9,3 +9,4 @@ from odoo.addons.sale_channel.models.sale_channel import SaleChannel as SaleChan
 class SaleChannel(SaleChannelBase):
 
     is_internal = fields.Boolean(string="Internal?")
+    code = fields.Char()

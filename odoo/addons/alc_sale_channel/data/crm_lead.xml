@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record
+    id="sales_team.salesteam_website_sales"
+    model="crm.team"
+    forcecreate="False"
+  >
+        <field name="sale_channel_id" ref="alc_sale_channel.sale_channel_web" />
+    </record>
+
+</odoo>
