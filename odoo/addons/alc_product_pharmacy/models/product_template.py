@@ -22,6 +22,9 @@ class ProductTemplate(models.Model):
     is_human = fields.Boolean(
         string="Human", compute="_compute_category_attributes", store=True,
     )
+    is_colis_souverain = fields.Boolean(
+        string="Colis", compute="_compute_category_attributes", store=True,
+    )
     is_food = fields.Boolean(
         string="Food", compute="_compute_category_attributes", store=True,
     )
@@ -93,6 +96,7 @@ class ProductTemplate(models.Model):
             "is_equipment": "specific_data.product_categ_materiel",
             "is_vt_be": "specific_data.product_categ_vet_belges",
             "is_human": "specific_data.product_categ_humain",
+            "is_colis_souverain": "specific_data.product_categ_colis_souverain",
             "is_narcotic_reg": "specific_data.product_categ_stupefiant",
             "is_narcotic_vet": "specific_data.product_categ_stupefiant_vet",
             "is_psychotropic": "specific_data.product_categ_psychotropes_25",
