@@ -18,12 +18,12 @@ msgstr ""
 #. module: alc_purchase_announced_delivery_date
 #: model:ir.model.fields,field_description:alc_purchase_announced_delivery_date.field_purchase_order_line__date_announced
 msgid "Announced Date"
-msgstr ""
+msgstr "Date annoncée"
 
 #. module: alc_purchase_announced_delivery_date
 #: model:ir.model.fields,field_description:alc_purchase_announced_delivery_date.field_purchase_order_line__is_modify_date_announced_allowed
 msgid "Can modify date announced"
-msgstr ""
+msgstr "Date annoncée modifiable"
 
 #. module: alc_purchase_announced_delivery_date
 #: model:ir.model,name:alc_purchase_announced_delivery_date.model_purchase_order
