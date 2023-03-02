@@ -183,7 +183,6 @@ omit =
     odoo/addons/alc_sale_processing_finalizer/*
     odoo/addons/alc_sale_processing_finalizer_exclude_logiweb/*
     odoo/addons/alc_sale_product_expected_receipt_date/*
-    odoo/addons/alc_sale_product_qty_available_to_promise/*
     odoo/addons/alc_sale_product_qty_backorder/*
     odoo/addons/alc_sale_statistics/*
     odoo/addons/alc_search_engine/*
