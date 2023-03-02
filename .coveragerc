@@ -271,7 +271,6 @@ omit =
     odoo/addons/keycloak/*
     odoo/addons/l10n_be_bba_fix/*
     odoo/addons/l10n_be_vat/*
-    odoo/addons/materialized_view_mixin/*
     odoo/addons/mixin_file_id/*
     odoo/addons/mixin_image_id/*
     odoo/addons/mixin_user_id/*

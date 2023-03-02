@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -10,11 +9,12 @@ from odoo import api, fields, models
 class MaterializedViewMixin(models.AbstractModel):
 
     _name = "materialized.view.mixin"
+    _description = "Materialized view mixin"
     _auto = False
 
     @api.model
     def _get_param_name(self):
-        return "%s_refresh_date" % self._table
+        return f"{self._table}_refresh_date"
 
     @api.model
     def get_refresh_date(self):
@@ -29,7 +29,7 @@ class MaterializedViewMixin(models.AbstractModel):
     @api.model
     def set_cron_date(self, date=None):
         date = date or fields.Datetime.now()
-        xmlid = "{}.{}_refresh_materialized_view".format(self._module, self._table)
+        xmlid = f"{self._module}.{self._table}_refresh_materialized_view"
         cron = self.env.ref(xmlid, raise_if_not_found=False)  # doesn't exist at install
         if cron:  # refresh data asap, but not during the upgrade
             cron.nextcall = date
