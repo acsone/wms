@@ -8,7 +8,14 @@
     "author": "Camptocamp",
     "license": "AGPL-3",
     "category": "Sales",
-    "depends": ["product_price_category", "sale", "stock", "alc_product_pricelist_data"],
+    "depends": [
+        # TODO: sale_price_2 and indicated_price have been moved
+        #  to alc_product_additional_price
+        "product_price_category",
+        "sale",
+        "stock",
+        "alc_product_pricelist_data",
+    ],
     "website": "https://www.camptocamp.com",
     "data": [
         "data/product_price_category.xml",

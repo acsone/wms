@@ -52,6 +52,9 @@ dependencies = [
   # addons we want in the package but not installed
   "odoo-addon-attachment-s3",
   "odoo-addon-session_db",
+  # xlrd >= 2 removes xlsx support for anything other than .xls files
+  # https://xlrd.readthedocs.io/en/latest/changes.html#id1
+  "xlrd<2",
 ]
 addons_dirs = ["odoo/addons"]
 
@@ -341,7 +344,6 @@ exclude = [
   'odoo/addons/procurement_sale/*',
   'odoo/addons/product_discount_specials/*',
   'odoo/addons/product_last_transaction/*',
-  'odoo/addons/product_price_import/*',
   'odoo/addons/purchase_prepaid/*',
   'odoo/addons/sale_internal_confirmation_mail/*',
   'odoo/addons/server_environment_files/*',

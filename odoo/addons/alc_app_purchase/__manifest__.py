@@ -25,5 +25,7 @@
         "alc_product_supplierinfo_force_edit_form",
         "alc_product_state",
         "partner_manual_rank",
+        "alc_product_additional_price",
+        "alc_product_price_import",
     ],
 }

@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2019 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -7,23 +6,25 @@ from datetime import datetime, timedelta
 
 from odoo import fields
 from odoo.exceptions import ValidationError
-from odoo.tests import SavepointCase
+from odoo.tests import TransactionCase
 
-from odoo.addons.product_price_import.wizards.product_price_importer import (
+from odoo.addons.alc_product_price_import.wizards.alc_product_price_importer import (
     ProductPriceInfo,
 )
 
 
-class TestProductPriceImport(SavepointCase):
+class TestProductPriceImport(TransactionCase):
     @classmethod
     def setUpClass(cls):
-        super(TestProductPriceImport, cls).setUpClass()
+        super().setUpClass()
+        cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
+
         cls.BaseImport = cls.env["base_import.import"]
         cls.pastday = fields.Date.to_string(datetime.now() - timedelta(days=10))
         cls.yesterday = fields.Date.to_string(datetime.now() - timedelta(days=1))
         cls.tomorrow = fields.Date.to_string(datetime.now() + timedelta(days=1))
         cls.report_action = cls.env.ref(
-            "product_price_import.report_product_price_import_xlsx"
+            "alc_product_price_import.report_product_price_import_xlsx"
         )
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
         cls.supplier = cls.env.ref("base.res_partner_12")
@@ -37,43 +38,45 @@ class TestProductPriceImport(SavepointCase):
         )
 
         cls.supplierinfo = cls.env["product.supplierinfo"].create(
-            {"name": cls.supplier.id, "price": 10, "product_code": "SUP01"}
+            {"partner_id": cls.supplier.id, "price": 10, "product_code": "SUP01"}
         )
         cls.supplierinfo_promo_active = cls.env["product.supplierinfo"].create(
             {
-                "name": cls.supplier.id,
+                "partner_id": cls.supplier.id,
                 "price": 10,
                 "product_code": "SUP01",
-                "discount_purchase": 10,
+                # "discount_purchase": 10,
                 "date_start": cls.yesterday,
                 "date_end": cls.tomorrow,
             }
         )
         cls.supplierinfo_promo_future = cls.env["product.supplierinfo"].create(
             {
-                "name": cls.supplier.id,
+                "partner_id": cls.supplier.id,
                 "price": 10,
                 "min_qty": 20,
                 "product_code": "SUP01",
-                "discount_purchase": 20,
+                # "discount_purchase": 20,
                 "date_start": cls.tomorrow,
                 "date_end": cls.tomorrow,
             }
         )
         cls.supplierinfo_promo_obsolete = cls.env["product.supplierinfo"].create(
             {
-                "name": cls.supplier.id,
+                "partner_id": cls.supplier.id,
                 "price": 10,
                 "min_qty": 20,
                 "product_code": "SUP01",
-                "discount_purchase": 20,
+                # "discount_purchase": 20,
                 "date_start": cls.pastday,
                 "date_end": cls.pastday,
             }
         )
         cls.product.write({"seller_ids": [(6, 0, cls.supplierinfo.ids)]})
 
-        cls.pricelist_pb2 = cls.env.ref("alc_product_pricelist_data.product_pricelist_pb2")
+        cls.pricelist_pb2 = cls.env.ref(
+            "alc_product_pricelist_data.product_pricelist_pb2"
+        )
         cls.product_pricelist_item = cls.env["product.pricelist.item"].create(
             {
                 "applied_on": "1_product",
@@ -85,11 +88,12 @@ class TestProductPriceImport(SavepointCase):
             }
         )
 
-        cls.generated_import_content, _ext = cls.report_action.render_report(
-            cls.product.product_tmpl_id.id, cls.report_action.report_name, {}
+        cls.generated_import_content, _ext = cls.report_action._render(
+            cls.report_action.id,
+            cls.product.product_tmpl_id.ids,
         )
-        cls.ProductPriceImporter = cls.env["product.price.importer"]
-        cls.default_product_prive_info = ProductPriceInfo(
+        cls.ProductPriceImporter = cls.env["alc.product.price.importer"]
+        cls.default_product_price_info = ProductPriceInfo(
             product_id=cls._get_xml_id(cls.product.product_tmpl_id),
             supplier_id=cls._get_xml_id(cls.supplier),
             purchase_price="10.5",
@@ -119,13 +123,14 @@ class TestProductPriceImport(SavepointCase):
         )
         if data:
             if data[0].module:
-                return "{}.{}".format(data[0].module, data[0].name)
+                return f"{data[0].module}.{data[0].name}"
             return data[0].name
         return None
 
     def test_0(self):
         """
         Data:
+
             A generated import report
         Test case:
             Import the generated report
@@ -143,13 +148,14 @@ class TestProductPriceImport(SavepointCase):
     def test_1(self):
         """
         Data:
+
             ProductPriceInfo with wrong product xml_id
         Test Case:
             call the price update logic _do_update_prices
         Expected result:
             ValidationError is raised
         """
-        price_info = self.default_product_prive_info.copy()
+        price_info = self.default_product_price_info.copy()
         self.ProductPriceImporter._do_update_prices([price_info])
         price_info.product_id = "wrong"
         with self.assertRaises(ValidationError), self.env.cr.savepoint():
@@ -161,13 +167,14 @@ class TestProductPriceImport(SavepointCase):
     def test_2(self):
         """
         Data:
+
             ProductPriceInfo with wrong supplier xml_id
         Test Case:
             call the price update logic _do_update_prices
         Expected result:
             ValidationError is raised
         """
-        price_info = self.default_product_prive_info.copy()
+        price_info = self.default_product_price_info.copy()
         self.ProductPriceImporter._do_update_prices([price_info])
         price_info.supplier_id = "wrong"
         with self.assertRaises(ValidationError), self.env.cr.savepoint():
@@ -179,6 +186,7 @@ class TestProductPriceImport(SavepointCase):
     def test_3(self):
         """
         Data:
+
             A product with a supplier and all the prices filled
             ProductPriceInfo with new values for all the fields price
         Test Case:
@@ -186,7 +194,7 @@ class TestProductPriceImport(SavepointCase):
         Expected result:
             Price fields on the product are updated
         """
-        price_info = self.default_product_prive_info.copy()
+        price_info = self.default_product_price_info.copy()
         self.assertNotEqual(float(price_info.sale_price), self.product.list_price)
         self.assertNotEqual(
             float(price_info.indicated_price), self.product.indicated_price
@@ -196,7 +204,7 @@ class TestProductPriceImport(SavepointCase):
             float(price_info.purchase_price), self.product.seller_ids[0].price
         )
         self.ProductPriceImporter._do_update_prices([price_info])
-        self.product.refresh()
+        self.product.env.invalidate_all()
         self.assertEqual(float(price_info.sale_price), self.product.list_price)
         self.assertEqual(
             float(price_info.indicated_price), self.product.indicated_price
@@ -209,6 +217,7 @@ class TestProductPriceImport(SavepointCase):
     def test_4(self):
         """
         Data:
+
             A product without supplier
             ProductPriceInfo with new values for all the fields price
         Test Case:
@@ -217,24 +226,22 @@ class TestProductPriceImport(SavepointCase):
             A new default supplier is created with the supplier_reference and
             the given price
         """
-        price_info = self.default_product_prive_info.copy()
+        price_info = self.default_product_price_info.copy()
         self.product.seller_ids.unlink()
         self.assertFalse(self.product.seller_ids)
         self.ProductPriceImporter._do_update_prices([price_info])
-        self.product.refresh()
+        self.product.invalidate_recordset()
         self.assertEqual(
             float(price_info.purchase_price), self.product.seller_ids[0].price
         )
         self.assertEqual(
             price_info.supplier_reference, self.product.seller_ids[0].product_code
         )
-        self.assertEqual(
-            price_info.supplier_reference, self.product.vendor_product_code
-        )
 
     def test_5(self):
         """
         Data:
+
             A product with a supplier and all the prices filled
             ProductPriceInfo with sale_price_2 == "0"
         Test Case:
@@ -243,18 +250,19 @@ class TestProductPriceImport(SavepointCase):
             sale_price_2 becomes None
             related pricelistitem is removed
         """
-        price_info = self.default_product_prive_info.copy()
-        self.product.refresh()
+        price_info = self.default_product_price_info.copy()
+        self.product.invalidate_recordset()
         self.assertTrue(self.product.sale_price_2)
         price_info.sale_price_2 = "0"
         self.ProductPriceImporter._do_update_prices([price_info])
-        self.product.refresh()
+        self.product.invalidate_recordset()
         self.assertFalse(self.product.sale_price_2)
         self.assertFalse(self.product_pricelist_item.exists())
 
     def test_6(self):
         """
         Data:
+
             A product with a supplier and all the prices filled
             ProductPriceInfo with sale_price_2 == ""
         Test Case:
@@ -263,18 +271,19 @@ class TestProductPriceImport(SavepointCase):
             sale_price_2 becomes None
             related pricelistitem is removed
         """
-        price_info = self.default_product_prive_info.copy()
-        self.product.refresh()
+        price_info = self.default_product_price_info.copy()
+        self.product.invalidate_recordset()
         self.assertTrue(self.product.sale_price_2)
         price_info.sale_price_2 = ""
         self.ProductPriceImporter._do_update_prices([price_info])
-        self.product.refresh()
+        self.product.invalidate_recordset()
         self.assertFalse(self.product.sale_price_2)
         self.assertFalse(self.product_pricelist_item.exists())
 
     def test_7(self):
         """
         Data:
+
             A product without sale_price_2
             ProductPriceInfo with sale_price_2
         Test Case:
@@ -283,9 +292,9 @@ class TestProductPriceImport(SavepointCase):
             sale_price_2 is filled
             a new pricelistitem is created for the given product
         """
-        price_info = self.default_product_prive_info.copy()
+        price_info = self.default_product_price_info.copy()
         self.product_pricelist_item.unlink()
-        self.product.refresh()
+        self.product.invalidate_recordset()
         self.assertFalse(self.product.sale_price_2)
         self.assertEqual(
             0,
@@ -294,18 +303,19 @@ class TestProductPriceImport(SavepointCase):
             ),
         )
         self.ProductPriceImporter._do_update_prices([price_info])
-        self.product.refresh()
-        self.assertEqual(float(price_info.sale_price_2), self.product.sale_price_2)
         self.assertEqual(
             1,
             self.env["product.pricelist.item"].search_count(
-                [("product_id", "=", self.product.id)]
+                [("product_tmpl_id", "=", self.product.product_tmpl_id.id)]
             ),
         )
+        self.product.env.invalidate_all()
+        self.assertEqual(float(price_info.sale_price_2), self.product.sale_price_2)
 
     def test_8(self):
         """
         Data:
+
             A product with supplier promos (1 active , 1 future,  1 obsolete)
         Test Case:
             call the price update logic _do_update_prices
@@ -316,7 +326,7 @@ class TestProductPriceImport(SavepointCase):
         """
         self._add_promos()
         self.assertEqual(len(self.product.seller_ids), 4)
-        price_info = self.default_product_prive_info.copy()
+        price_info = self.default_product_price_info.copy()
         self.assertNotEqual(
             self.supplierinfo_promo_active.price, float(price_info.purchase_price)
         )
@@ -328,7 +338,7 @@ class TestProductPriceImport(SavepointCase):
         )
 
         self.ProductPriceImporter._do_update_prices([price_info])
-        self.supplierinfo_promo_active.refresh()
+        self.supplierinfo_promo_active.invalidate_recordset()
         self.assertEqual(
             self.supplierinfo_promo_active.price, float(price_info.purchase_price)
         )

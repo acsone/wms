@@ -19,11 +19,11 @@ class ProductTemplate(models.Model):
         readonly=True,
         store=False,
         string="Sale Price 2",
-    )
+    )  # TODO: has been moved to alc_product_additional_price
 
     indicated_price = fields.Float(
         string="Indicated price", digits=dp.get_precision("Product Price")
-    )
+    )  # TODO: has been moved to alc_product_additional_price
 
     storage_temperature_id = fields.Many2one(
         "product.storage.temperature", string="Storage temperature"

@@ -1,19 +1,20 @@
-# -*- coding: utf-8 -*-
 # Copyright 2019 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import xlrd
 
-from odoo.tests import SavepointCase
+from odoo.tests import TransactionCase
 
 
-class TestReportProductPriceImport(SavepointCase):
+class TestReportProductPriceImport(TransactionCase):
     @classmethod
     def setUpClass(cls):
-        super(TestReportProductPriceImport, cls).setUpClass()
+        super().setUpClass()
+        cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
+
         cls.BaseImport = cls.env["base_import.import"]
         cls.report_action = cls.env.ref(
-            "product_price_import.report_product_price_import_xlsx"
+            "alc_product_price_import.report_product_price_import_xlsx"
         )
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
         cls.supplier = cls.env.ref("base.res_partner_12")
@@ -27,11 +28,13 @@ class TestReportProductPriceImport(SavepointCase):
         )
 
         cls.supplierinfo = cls.env["product.supplierinfo"].create(
-            {"name": cls.supplier.id, "price": 10, "product_code": "SUP01"}
+            {"partner_id": cls.supplier.id, "price": 10, "product_code": "SUP01"}
         )
         cls.product.write({"seller_ids": [(6, 0, cls.supplierinfo.ids)]})
 
-        cls.pricelist_pb2 = cls.env.ref("alc_product_pricelist_data.product_pricelist_pb2")
+        cls.pricelist_pb2 = cls.env.ref(
+            "alc_product_pricelist_data.product_pricelist_pb2"
+        )
         cls.pricelist_pb2.item_ids = [
             (
                 0,
@@ -53,13 +56,14 @@ class TestReportProductPriceImport(SavepointCase):
         )
         if data:
             if data[0].module:
-                return "{}.{}".format(data[0].module, data[0].name)
+                return f"{data[0].module}.{data[0].name}"
             return data[0].name
         return None
 
     def test_0(self):
         """
         Data:
+
             A product with a supplier and all the prices filled
         Test case:
             Generate the report
@@ -68,8 +72,8 @@ class TestReportProductPriceImport(SavepointCase):
 
         Dummy test to validate the generation process (not the content)
         """
-        content, ext = self.report_action.render_report(
-            self.product.product_tmpl_id.id, self.report_action.report_name, {}
+        content, ext = self.report_action._render(
+            self.report_action.id, self.product.product_tmpl_id.ids
         )
         self.assertIsNotNone(content)
         self.assertEqual(ext, "xlsx")
@@ -77,6 +81,7 @@ class TestReportProductPriceImport(SavepointCase):
     def test_1(self):
         """
         Data:
+
             A product with a supplier and all the prices filled
         Test case:
             Generate the report
@@ -96,12 +101,12 @@ class TestReportProductPriceImport(SavepointCase):
              * indicated_price
             The second line contains the values for the given product.
         """
-        content, _ext = self.report_action.render_report(
-            self.product.product_tmpl_id.id, self.report_action.report_name, {}
+        content, _ext = self.report_action._render(
+            self.report_action.id, self.product.product_tmpl_id.ids
         )
         book = xlrd.open_workbook(file_contents=content)
-        # pylint: disable=unnecessary-comprehension
-        rows = [r for r in self.BaseImport._read_xls_book(book)]
+        tuple_rows = self.BaseImport._read_xls_book(book, book._sheet_names[0])
+        rows = tuple_rows[1]
         headers = rows[0]
         self.assertListEqual(
             headers,
@@ -126,13 +131,13 @@ class TestReportProductPriceImport(SavepointCase):
                 self._get_xml_id(self.product.product_tmpl_id),
                 self._get_xml_id(self.supplier),
                 self.supplier.name,
-                u"Product 1",
-                u"P01",
-                u"SUP01",
+                "Product 1",
+                "P01",
+                "SUP01",
                 ", ".join(self.product.mapped("taxes_id.name")),
-                u"10",
-                u"11",
-                u"12.24",
-                u"13.75",
+                "10",
+                "11",
+                "12.24",
+                "13.75",
             ],
         )
