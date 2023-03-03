@@ -57,5 +57,6 @@
         "alc_pricelist_items",
         "alc_pim_attribute_group",
         "alc_pim_product",
+        "alc_sale_auto_confirm_max_delay",
     ],
 }
