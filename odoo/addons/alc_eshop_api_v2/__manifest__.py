@@ -12,6 +12,7 @@
     "website": "https://acsone.eu/",
     "depends": [
         "alc_eshop_auth_jwt",
+        "alc_eshop_auth_api_key",
         "shopinvader_sale_cart",
         "shopinvader_sale_cart_delivery",
         "alc_eshop_sale_cart_channel",

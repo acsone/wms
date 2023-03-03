@@ -97,7 +97,7 @@ odoo10-addon-attribute-set==10.0.1.0.2.99.dev4
 odoo10-addon-attribute-set-completeness==10.0.1.2.0.99.dev5
 odoo10-addon-attribute-set-mass-edit==10.0.1.0.1.99.dev5
 odoo10-addon-attribute-set-searchable==10.0.1.0.0.99.dev5
-odoo10-addon-auth-api-key @ git+https://github.com/acsone/server-auth.git@482460eed5839ec0d116ee32b050ec4b1bc7fd8a#subdirectory=setup/auth_api_key
+odoo10-addon-auth-api-key @ git+https://github.com/acsone/server-auth.git@276293363b4d1bac21614fd4733a33aa2a7b0e3b#subdirectory=setup/auth_api_key
 odoo10-addon-auth-jwt @ git+https://github.com/acsone/server-auth.git@86de089db127b19b8f382e11d0625a833841399b#subdirectory=setup/auth_jwt
 odoo10-addon-auto-reconcile-structured-ref @ git+https://github.com/acsone/account-reconcile.git@eecb8a9dcb54145e876362efd07f76400da318f9#subdirectory=setup/auto_reconcile_structured_ref
 odoo10-addon-base-attachment-object-storage @ git+https://github.com/acsone/odoo-cloud-platform.git@601842b9c0b4d45bd40c73ed3e0edf8def2f5787#subdirectory=setup/base_attachment_object_storage
@@ -213,6 +213,7 @@ odoo10-addon-shopfloor-workstation @ git+https://github.com/acsone/wms.git@7506e
 odoo10-addon-shopfloor-workstation-mobile @ git+https://github.com/acsone/wms.git@8d3a7751a171813a630c053484cc9f2e0d7ea3e8#subdirectory=setup/shopfloor_workstation_mobile
 odoo10-addon-shopinvader @ git+https://github.com/acsone/odoo-shopinvader.git@49da06ea6082052f7f6ce389d18134fe8b5719be#subdirectory=setup/shopinvader
 odoo10-addon-shopinvader-assortment @ git+https://github.com/acsone/odoo-shopinvader.git@e4e5659e14575a28ced8a9f797cf22c7af1aadab#subdirectory=setup/shopinvader_assortment
+odoo10-addon-shopinvader-auth-api-key @ git+https://github.com/acsone/odoo-shopinvader.git@9067c72134160b6ed9a4ded4f69bca056f3f144e#subdirectory=setup/shopinvader_auth_api_key
 odoo10-addon-shopinvader-auth-jwt @ git+https://github.com/acsone/odoo-shopinvader.git@af293d04db561b1a1a08329c396940f71073c2b4#subdirectory=setup/shopinvader_auth_jwt
 odoo10-addon-shopinvader-delivery-carrier @ git+https://github.com/acsone/odoo-shopinvader.git@3f2894b45d32157afe1355405915222e6321c52b#subdirectory=setup/shopinvader_delivery_carrier
 odoo10-addon-shopinvader-elasticsearch @ git+https://github.com/acsone/odoo-shopinvader.git@a0519f6e027c43e91835249e2a83274d824308da#subdirectory=setup/shopinvader_elasticsearch
