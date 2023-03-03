@@ -13,6 +13,7 @@ def migrate(cr, version):
         "alc_internal_stock_quant_package",
         "alc_product_picking_zone",
         "alc_product_storage_type_tracking",
+        "alc_product_uom_updatable",
         "alc_stock_location_content_relocation",
         "alc_stock_move_operation",
         "alc_stock_pack_operation_audit",
