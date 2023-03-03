@@ -90,7 +90,7 @@ msgid "Goods Received Note"
 msgstr ""
 
 #. module: stock_grn
-#: model:ir.model.fields,field_description:stock_grn.field_stock_grn_type_id_10665
+#: model:ir.model.fields,field_description:stock_grn.field_stock_grn_type_id_10666
 msgid "Grn Type"
 msgstr ""
 
