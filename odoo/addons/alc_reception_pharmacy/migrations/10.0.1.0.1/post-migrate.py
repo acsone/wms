@@ -34,7 +34,7 @@ def migrate(cr, version):
         """,
         {
             "category_id": colis_souverain_category_id,
-            "product_ids": [colis_souverain.id, colis_souverain_frigo.id],
+            "product_ids": tuple([colis_souverain.id, colis_souverain_frigo.id]),
         },
     )
 
@@ -45,5 +45,9 @@ def migrate(cr, version):
             SET is_colis_souverain = True
         WHERE id in %(product_tmpl_ids)s;
         """,
-        {"product_tmpl_ids": [colis_souverain_tmpl_id, colis_souverain_frigo_tmpl_id]},
+        {
+            "product_tmpl_ids": tuple(
+                [colis_souverain_tmpl_id, colis_souverain_frigo_tmpl_id]
+            )
+        },
     )
