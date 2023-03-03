@@ -7,7 +7,7 @@ odoo-addon-account-tax-one-vat @ git+https://github.com/acsone/account-invoicing
 odoo-addon-account-tax-one-vat-purchase @ git+https://github.com/acsone/account-invoicing.git@29e7901f6d81e83598197d5ca7179f42093d618e#subdirectory=setup/account_tax_one_vat_purchase
 odoo-addon-account-tax-one-vat-sale @ git+https://github.com/acsone/account-invoicing.git@33be8490bd24d4a3aa729d860241b15c11df22bb#subdirectory=setup/account_tax_one_vat_sale
 odoo-addon-attachment-s3 @ git+https://github.com/acsone/odoo-cloud-platform@859aa085094fb5cd9acb39dc28d4315b9e77ae62#subdirectory=setup/attachment_s3
-odoo-addon-attribute-set @ git+https://github.com/OCA/odoo-pim.git@3d27eb95dfce785b56f571b7f19b7bf0b03b54bc#subdirectory=setup/attribute_set
+odoo-addon-attribute-set @ git+https://github.com/OCA/odoo-pim.git@d8078f7e77f07390200bd321619ee6db5d36727f#subdirectory=setup/attribute_set
 odoo-addon-base-attachment-object-storage @ git+https://github.com/acsone/odoo-cloud-platform@fc452c6a2abbae4ab7d4bd041c5d2212691a8096#subdirectory=setup/base_attachment_object_storage
 odoo-addon-base-delivery-carrier-label==16.0.1.0.0.3
 odoo-addon-base-exception==16.0.1.0.1.3
