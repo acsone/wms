@@ -55,9 +55,9 @@ class ExportProductTestCase(ESBXMLTestCase):
         cm.rounding = 0.001
         cm.esb_ref = "2"
 
-        ali = self.env.ref("specific_product.product_price_category_ali")
-        alg = self.env.ref("specific_product.product_price_category_alg")
-        alh = self.env.ref("specific_product.product_price_category_alh")
+        ali = self.env.ref("alc_product_price_category_data.product_price_category_ali")
+        alg = self.env.ref("alc_product_price_category_data.product_price_category_alg")
+        alh = self.env.ref("alc_product_price_category_data.product_price_category_alh")
 
         self.additional_product = self.env.ref("product.product_product_4")
         self.additional_product.default_code = "SKU_FREE"
