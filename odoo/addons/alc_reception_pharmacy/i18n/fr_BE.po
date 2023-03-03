@@ -66,6 +66,13 @@ msgid "Colis Souverain Frigo"
 msgstr "Colis Souverain Frigo"
 
 #. module: alc_reception_pharmacy
+#: model:product.product,name:alc_reception_pharmacy.product_colis_souverain_frigo_immunopharma
+#: model:product.template,name:alc_reception_pharmacy.product_colis_souverain_frigo_immunopharma_product_template
+#, fuzzy
+msgid "Colis Souverain Frigo Immunopharma"
+msgstr "Colis Souverain Frigo"
+
+#. module: alc_reception_pharmacy
 #: model:ir.model.fields,field_description:alc_reception_pharmacy.field_receive_pharmacy_products_create_uid
 #: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy_create_uid
 #: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy_line_create_uid
@@ -220,7 +227,7 @@ msgid "Pharmacy Reception Printer"
 msgstr "Imprimante de réception pharmacie"
 
 #. module: alc_reception_pharmacy
-#: code:addons/alc_reception_pharmacy/models/reception_pharmacy.py:55
+#: code:addons/alc_reception_pharmacy/models/reception_pharmacy.py:50
 #, python-format
 msgid "Please insert at least one line"
 msgstr "Please insert at least one line"
@@ -279,13 +286,13 @@ msgid "Reception Pharmacy List"
 msgstr "Réceptions pharmacie"
 
 #. module: alc_reception_pharmacy
-#: code:addons/alc_reception_pharmacy/models/reception_pharmacy.py:69
+#: code:addons/alc_reception_pharmacy/models/reception_pharmacy.py:64
 #, python-format
 msgid "Reception pharmacy : lines are validated in background"
 msgstr "Réception pharmacie: les lignes sont validées en arrière plan"
 
 #. module: alc_reception_pharmacy
-#: code:addons/alc_reception_pharmacy/models/reception_pharmacy.py:63
+#: code:addons/alc_reception_pharmacy/models/reception_pharmacy.py:58
 #, fuzzy, python-format
 msgid "Reception pharmacy for %s"
 msgstr "Reception pharmacie pour %s"
