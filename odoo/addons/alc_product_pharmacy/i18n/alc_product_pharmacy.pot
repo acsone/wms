@@ -64,6 +64,15 @@ msgid "Code CTI Extended"
 msgstr ""
 
 #. module: alc_product_pharmacy
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_delivery_carrier_is_colis_souverain
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_product_is_colis_souverain
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_template_is_colis_souverain
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_shopinvader_product_is_colis_souverain
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_shopinvader_variant_is_colis_souverain
+msgid "Colis"
+msgstr ""
+
+#. module: alc_product_pharmacy
 #: model:ir.model.fields,field_description:alc_product_pharmacy.field_delivery_carrier_is_equipment
 #: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_product_is_equipment
 #: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_template_is_equipment
@@ -155,14 +164,14 @@ msgid "Psychotropic"
 msgstr ""
 
 #. module: alc_product_pharmacy
-#: code:addons/alc_product_pharmacy/models/product_template.py:68
+#: code:addons/alc_product_pharmacy/models/product_template.py:71
 #: sql_constraint:product.template:0
 #, python-format
 msgid "This CTI extended code already exists."
 msgstr ""
 
 #. module: alc_product_pharmacy
-#: code:addons/alc_product_pharmacy/models/product_template.py:63
+#: code:addons/alc_product_pharmacy/models/product_template.py:66
 #: sql_constraint:product.template:0
 #, python-format
 msgid "This cnk_code already exists."
