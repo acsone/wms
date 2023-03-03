@@ -171,7 +171,6 @@ omit =
     odoo/addons/alc_restocking_exclude_not_salable/*
     odoo/addons/alc_running_env/*
     odoo/addons/alc_sale_cart_price_recalculation/*
-    odoo/addons/alc_sale_channel/*
     odoo/addons/alc_sale_invoicing_on_transfer/*
     odoo/addons/alc_sale_invoicing_policy/*
     odoo/addons/alc_sale_processing_finalizer/*
@@ -285,7 +284,6 @@ omit =
     odoo/addons/product_discount_specials/*
     odoo/addons/product_last_transaction/*
     odoo/addons/purchase_prepaid/*
-    odoo/addons/sale_internal_confirmation_mail/*
     odoo/addons/server_environment_files/*
     odoo/addons/shopinvader_assortment_bind/*
     odoo/addons/shopinvader_search_engine_export/*

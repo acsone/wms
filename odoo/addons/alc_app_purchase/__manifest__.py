@@ -27,6 +27,6 @@
         "alc_product_additional_price",
         "alc_product_price_import",
         "partner_manual_rank",
-        "product_uom_updatable
+        "product_uom_updatable",
     ],
 }

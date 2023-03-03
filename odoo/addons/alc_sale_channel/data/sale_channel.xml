@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record model="sale.channel" id="sale_channel_phone">
+        <field name="name">Phone</field>
+        <field name="code">phone</field>
+    </record>
+    <record model="sale.channel" id="sale_channel_mail">
+        <field name="name">Mail</field>
+        <field name="code">mail</field>
+    </record>
+    <record model="sale.channel" id="sale_channel_fax">
+        <field name="name">Fax</field>
+        <field name="code">fax</field>
+    </record>
+    <record model="sale.channel" id="sale_channel_web">
+        <field name="name">Web</field>
+        <field name="code">web</field>
+    </record>
+</odoo>
