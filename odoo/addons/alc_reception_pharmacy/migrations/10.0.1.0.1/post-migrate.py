@@ -18,12 +18,12 @@ def migrate(cr, version):
     colis_souverain_category_id = env.ref(
         "specific_data.product_categ_colis_souverain"
     ).id
-    colis_souverain_id = env.ref("alc_reception_pharmacy.product_colis_souverain").id
-    colis_souverain_tmpl_id = colis_souverain_id.product_tmpl_id.id
-    colis_souverain_frigo_id = env.ref(
+    colis_souverain = env.ref("alc_reception_pharmacy.product_colis_souverain")
+    colis_souverain_tmpl_id = colis_souverain.product_tmpl_id.id
+    colis_souverain_frigo = env.ref(
         "alc_reception_pharmacy.product_colis_souverain_frigo"
-    ).id
-    colis_souverain_tmpl_id = colis_souverain_frigo_id.product_tmpl_id.id
+    )
+    colis_souverain_frigo_tmpl_id = colis_souverain_frigo.product_tmpl_id.id
 
     cr.execute(
         """
@@ -34,7 +34,7 @@ def migrate(cr, version):
         """,
         {
             "category_id": colis_souverain_category_id,
-            "product_ids": [colis_souverain_id, colis_souverain_frigo_id],
+            "product_ids": [colis_souverain.id, colis_souverain_frigo.id],
         },
     )
 
@@ -45,5 +45,5 @@ def migrate(cr, version):
             SET is_colis_souverain = True
         WHERE id in %(product_tmpl_ids)s;
         """,
-        {"product_tmpl_ids": [colis_souverain_tmpl_id, colis_souverain_tmpl_id]},
+        {"product_tmpl_ids": [colis_souverain_tmpl_id, colis_souverain_frigo_tmpl_id]},
     )
