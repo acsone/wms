@@ -28,26 +28,15 @@ def migrate(cr, version):
     cr.execute(
         """
         UPDATE
-            product_product
-            SET categ_id = %(category_id)s
-        WHERE id in %(product_ids)s;
-        """,
-        {
-            "category_id": colis_souverain_category_id,
-            "product_ids": tuple([colis_souverain.id, colis_souverain_frigo.id]),
-        },
-    )
-
-    cr.execute(
-        """
-        UPDATE
             product_template
-            SET is_colis_souverain = True
+            SET is_colis_souverain = True,
+                categ_id = %(category_id)s
         WHERE id in %(product_tmpl_ids)s;
         """,
         {
+            "category_id": colis_souverain_category_id,
             "product_tmpl_ids": tuple(
                 [colis_souverain_tmpl_id, colis_souverain_frigo_tmpl_id]
-            )
+            ),
         },
     )
