@@ -100,6 +100,7 @@
         "alc_account_invoice_cancel_permissions",
         "alc_account_payment_globalization",
         "alc_analytic_category_report",
+        "alc_base_rest_api_doc",
         "alc_b2c_connector",
         "alc_b2c_connector_pricelist_discount",
         "alc_b2c_partner_no_geooptimize",
