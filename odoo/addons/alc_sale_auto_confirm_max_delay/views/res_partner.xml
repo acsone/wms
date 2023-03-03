@@ -1,0 +1,16 @@
+<odoo>
+  <record model="ir.ui.view" id="view_partner_product_group">
+    <field name="name">res.partner.product.form</field>
+    <field name="model">res.partner</field>
+    <field name="inherit_id" ref="product.view_partner_property_form" />
+    <field name="arch" type="xml">
+      <group name="sale" position="inside">
+        <label for="auto_confirm_max_delay" />
+        <div>
+            <field name="auto_confirm_max_delay" class="oe_inline" />
+            <span>hours</span>
+        </div>
+      </group>
+    </field>
+  </record>
+</odoo>

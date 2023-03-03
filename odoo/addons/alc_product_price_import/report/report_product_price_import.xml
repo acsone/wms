@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+  <record model="ir.actions.report" id="report_product_price_import_xlsx">
+    <field name="name">product_price_import_xlsx</field>
+    <field name="model">product.template</field>
+    <field name="report_type">xlsx</field>
+    <field name="report_name">report_product_price_import_xlsx</field>
+    <field name="report_file">report_product_price_import_xlsx</field>
+  </record>
+</odoo>

@@ -1,0 +1,122 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* alc_product_price_import
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-03-03 09:54+0000\n"
+"PO-Revision-Date: 2023-03-03 09:54+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_product_price_import
+#: model_terms:ir.ui.view,arch_db:alc_product_price_import.alc_product_price_importer_form_view
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: alc_product_price_import
+#: model:ir.model.fields,field_description:alc_product_price_import.field_alc_product_price_importer__create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: alc_product_price_import
+#: model:ir.model.fields,field_description:alc_product_price_import.field_alc_product_price_importer__create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: alc_product_price_import
+#: model:ir.model.fields,field_description:alc_product_price_import.field_alc_product_price_importer__display_name
+msgid "Display Name"
+msgstr "Nom affiché"
+
+#. module: alc_product_price_import
+#: model:ir.model.fields,field_description:alc_product_price_import.field_alc_product_price_importer__id
+msgid "ID"
+msgstr "ID"
+
+#. module: alc_product_price_import
+#: model_terms:ir.ui.view,arch_db:alc_product_price_import.alc_product_price_importer_form_view
+msgid "Import"
+msgstr "Import"
+
+#. module: alc_product_price_import
+#: model:ir.model.fields,field_description:alc_product_price_import.field_alc_product_price_importer____last_update
+msgid "Last Modified on"
+msgstr "Dernière modification le"
+
+#. module: alc_product_price_import
+#: model:ir.model.fields,field_description:alc_product_price_import.field_alc_product_price_importer__write_uid
+msgid "Last Updated by"
+msgstr "Dernière mise à jour par"
+
+#. module: alc_product_price_import
+#: model:ir.model.fields,field_description:alc_product_price_import.field_alc_product_price_importer__write_date
+msgid "Last Updated on"
+msgstr "Dernière mise à jour le"
+
+#. module: alc_product_price_import
+#: model:ir.model,name:alc_product_price_import.model_product_template
+msgid "Product"
+msgstr ""
+
+#. module: alc_product_price_import
+#: model:ir.actions.act_window,name:alc_product_price_import.alc_product_price_importer_act_window
+#: model:ir.ui.menu,name:alc_product_price_import.product_price_importer_menu
+#: model_terms:ir.ui.view,arch_db:alc_product_price_import.alc_product_price_importer_form_view
+msgid "Product Price Importer"
+msgstr "Import des prix des articles"
+
+#. module: alc_product_price_import
+#. odoo-python
+#: code:addons/alc_product_price_import/report/report_product_price_import.py:0
+#: code:addons/alc_product_price_import/report/report_product_price_import.py:0
+#, python-format
+msgid "Product prices"
+msgstr "Prix des articles"
+
+#. module: alc_product_price_import
+#: model:ir.model,name:alc_product_price_import.model_alc_product_price_importer
+msgid "Product prices mass import wizard"
+msgstr "Import en masse des prix des articles"
+
+#. module: alc_product_price_import
+#: model:ir.model,name:alc_product_price_import.model_report_report_product_price_import_xlsx
+msgid "Report model for report_xlsx"
+msgstr ""
+
+#. module: alc_product_price_import
+#. odoo-python
+#: code:addons/alc_product_price_import/wizards/alc_product_price_importer.py:0
+#, python-format
+msgid "Unknown product identifier %(product_xml_id)s"
+msgstr "Identifiant d'article inconnu %(product_xml_id)s"
+
+#. module: alc_product_price_import
+#. odoo-python
+#: code:addons/alc_product_price_import/wizards/alc_product_price_importer.py:0
+#, python-format
+msgid "Unknown supplier identifier %(supplier_xml_id)s"
+msgstr "Identifiant de fournisseur inconnu %(supplier_xml_id)s"
+
+#. module: alc_product_price_import
+#. odoo-python
+#: code:addons/alc_product_price_import/wizards/alc_product_price_importer.py:0
+#, python-format
+msgid "Updated products"
+msgstr "Articles mis à jour"
+
+#. module: alc_product_price_import
+#: model:ir.model.fields,field_description:alc_product_price_import.field_alc_product_price_importer__document
+msgid "XLSX file"
+msgstr "Fichier au format xlsx"
+
+#. module: alc_product_price_import
+#: model:ir.actions.report,name:alc_product_price_import.report_product_price_import_xlsx
+msgid "product_price_import_xlsx"
+msgstr ""

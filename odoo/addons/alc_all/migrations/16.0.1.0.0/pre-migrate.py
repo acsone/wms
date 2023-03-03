@@ -28,6 +28,7 @@ def migrate(cr, version):
         "partner_delivery",
         "partner_helper",
         "product_packaging_barcode",
+        "product_price_import",
         "purchase_unlink_cancelop",
         "purchase_update_procurement_qty",
         "specific_zetes",
@@ -57,6 +58,8 @@ def migrate(cr, version):
         "stock_mts_mto_rule",
         "stock_disable_force_availability_button",
         "alc_sale_channel_stock_move",
+        "alc_sale_order_price_recalculation",  # merged into alc_pricelist_discount
+        "sale_delay",  # replaced by alc_sale_auto_confirm_max_delay
     ]
     for addon in addons_to_uninstall:
         _logger.info("uninstall %s", ",".join(addon))

@@ -23,6 +23,9 @@
         "sale_cancel_remaining",
         # OCA/product-attribute
         "product_manufacturer",
+        # OCA/odoo-pim
+        "attribute_set",
+        "product_attribute_set",
         # ALC
         "alc_partner_veterinary",
         "alc_product_category_data",
@@ -52,5 +55,8 @@
         "alc_company_term_condition",
         "alc_price_triple_discount_exclusive",
         "alc_pricelist_items",
+        "alc_pim_attribute_group",
+        "alc_pim_product",
+        "alc_sale_auto_confirm_max_delay",
     ],
 }

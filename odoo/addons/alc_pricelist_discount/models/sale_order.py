@@ -1,7 +1,7 @@
 # Copyright 2017 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import api, fields
+from odoo import Command, api, fields
 
 from odoo.addons.product.models.product_pricelist import Pricelist
 from odoo.addons.sale.models.sale_order import SaleOrder as SaleOrderBase
@@ -81,3 +81,16 @@ class SaleOrder(SaleOrderBase):
     @api.onchange("discount_pricelist_ids")
     def onchange_discount_pricelist_ids(self):
         self.order_line.compute_alcyon_discount()
+
+    def action_update_prices(self):
+        for order in self:
+            if order.discount_pricelist_ids != order.partner_id.discount_pricelist_ids:
+                order.write(
+                    {
+                        "discount_pricelist_ids": Command.set(
+                            order.partner_id.discount_pricelist_ids.ids
+                        )
+                    }
+                )
+            order.order_line.onchange_product_id_reset_discount()
+        return super().action_update_prices()
