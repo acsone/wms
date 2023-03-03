@@ -375,7 +375,7 @@ class WSCreateSaleOrderTestCase(SavepointCase):
         job_creation_date = datetime.strptime(
             "2019-10-01 09:59:00", "%Y-%m-%d %H:%M:%S"
         )
-        self.partner.max_delay_for_sale_order_creation = 1
+        self.partner.auto_confirm_max_delay = 1
         data = deepcopy(self.order_data)
         order = self.env["sale.order"]._ws_create_new(data, job_creation_date)
         self.assertEqual(order.state, "cancel")
