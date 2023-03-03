@@ -64,6 +64,11 @@ msgid "Chèques clients"
 msgstr ""
 
 #. module: specific_data
+#: model:product.category,name:specific_data.product_categ_colis_souverain
+msgid "Colis"
+msgstr ""
+
+#. module: specific_data
 #: model:product.category,name:specific_data.product_categ_mat_conso
 msgid "Consommables"
 msgstr ""
