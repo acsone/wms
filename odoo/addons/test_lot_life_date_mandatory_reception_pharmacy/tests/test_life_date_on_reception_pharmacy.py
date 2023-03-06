@@ -11,6 +11,7 @@ class TestLifeDateOnReceptionPharmacy(CommonReceptionPharmacyCase):
     @classmethod
     def setUpClass(cls):
         super(TestLifeDateOnReceptionPharmacy, cls).setUpClass()
+        cls.partner.not_in_dynamic_delivery_round = True
         cls.env = cls.env(
             context=dict(
                 cls.env.context, test_queue_job_no_delay=True, mail_notrack=True
