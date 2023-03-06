@@ -3,17 +3,32 @@
         <field name="model">product.template</field>
         <field name="inherit_id" ref="product.product_template_form_view" />
         <field name="arch" type="xml">
-            <div name="standard_price_uom" position="after">
-              <field
-          name="sale_price_2"
-          widget='monetary'
-          options="{'currency_field': 'currency_id'}"
+            <xpath expr="//div[@name='pricing']" position="after">
+                <label
+          for="sale_price_2"
           attrs="{'invisible':[('sale_price_2','=',0.0)]}"
         />
-            <xpath expr="//field[@name='list_price']" position="after">
-              <field name="indicated_price" />
+                <div
+          name="sale_price_2"
+          attrs="{'invisible':[('sale_price_2','=',0.0)]}"
+        >
+                  <field
+            name="sale_price_2"
+            class="oe_inline"
+            widget='monetary'
+            options="{'currency_field': 'currency_id', 'field_digits': True}"
+          />
+                </div>
+              <label for="indicated_price" />
+                <div name="indicated_price">
+                  <field
+            name="indicated_price"
+            class="oe_inline"
+            widget='monetary'
+            options="{'currency_field': 'currency_id', 'field_digits': True}"
+          />
+                </div>
             </xpath>
-            </div>
         </field>
     </record>
   <record id="product_template_specific_tree_view" model="ir.ui.view">
@@ -26,4 +41,5 @@
       </field>
     </field>
   </record>
+
 </odoo>

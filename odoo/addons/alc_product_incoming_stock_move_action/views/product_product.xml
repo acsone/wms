@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+     <record id="product_normal_form_view" model="ir.ui.view">
+        <field name="model">product.product</field>
+    <field name="inherit_id" ref="product.product_normal_form_view" />
+    <field name="arch" type="xml">
+      <xpath expr="//div[@name='button_box']" position="inside">
+          <button
+          type="object"
+          name="action_open_incoming_stock_moves"
+          attrs="{'invisible':[('type', 'not in', ['product', 'consu'])]}"
+          class="oe_stat_button"
+          icon="fa-truck"
+          groups="stock.group_stock_user"
+        >
+              <div class="o_field_widget o_stat_info">
+                  <span class="o_stat_value">
+                      <field
+                name="count_incoming_moves"
+                widget="statinfo"
+                nolabel="1"
+                class="mr4"
+              />
+                  </span>
+                  <span class="o_stat_text">Receptions</span>
+              </div>
+          </button>
+      </xpath>
+    </field>
+  </record>
+
+
+
+</odoo>
