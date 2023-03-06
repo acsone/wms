@@ -33,5 +33,6 @@
         "stock_picking_start",
         "stock_storage_type_putaway_abc_classification_sale_stock",
         "stock_override_procurement",
+        "alc_product_storage_temperature",
     ],
 }

@@ -63,5 +63,10 @@
         "alc_sale_auto_confirm_max_delay",
         "alc_sale_channel",
         "alc_sale_internal_confirmation_mail",
+        "alc_product_web_publish",
+        "alc_product_medical_device",
+        "alc_product_additional_price",
+        "alc_product_view",
+        "alc_product_price_category_data",
     ],
 }
