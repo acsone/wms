@@ -3,7 +3,6 @@
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
   <record model="ir.ui.view" id="res_partner_form_view">
-    <field name="name">res.partner.form (in alc_b2c_partner)</field>
     <field name="model">res.partner</field>
     <field
       name="inherit_id"
@@ -14,8 +13,9 @@
         <field name="is_b2c_customer" invisible="1" />
       </field>
       <field name="manual_sale_order_allowed" position="attributes">
-        <attribute name="attrs">{'readonly': [('is_b2c_customer', '=', True)]}
-                </attribute>
+        <attribute
+          name="attrs"
+        >{'readonly': [('is_b2c_customer', '=', True)]}</attribute>
       </field>
     </field>
   </record>

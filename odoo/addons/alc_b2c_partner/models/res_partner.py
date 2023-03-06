@@ -1,19 +1,26 @@
-# -*- coding: utf-8 -*-
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, fields, models
+from odoo import Command, _, api, fields
 from odoo.exceptions import ValidationError
 
+from odoo.addons.alc_partner_manual_sale_order.models.res_partner import (
+    ResPartner as ResPartnerBase,
+)
 
-class ResPartner(models.Model):
-    _inherit = "res.partner"
+B2C_CUSTOMER_CATEGORY_REF = "alc_b2c_partner.res_partner_category_b2c_customer"
+
+
+class ResPartner(ResPartnerBase):
 
     is_b2c_customer = fields.Boolean(
         compute="_compute_is_b2c_customer",
         inverse="_inverse_is_b2c_customer",
         store=True,
         index=True,
+    )
+    manual_sale_order_allowed = fields.Boolean(
+        compute="_compute_is_b2c_customer", store=True, readonly=False
     )
 
     @api.constrains("is_b2c_customer", "manual_sale_order_allowed")
@@ -23,44 +30,34 @@ class ResPartner(models.Model):
         )
         if errored:
             raise ValidationError(
-                _("Manual sale order not allowed for B2C cutomers (%s)")
+                _("Manual sale order not allowed for B2C customers (%s)")
                 % errored.mapped("name")
             )
 
     @api.depends("category_id")
     def _compute_is_b2c_customer(self):
-        bc2_category = self.env.ref(
-            "alc_b2c_partner.res_partner_category_b2c_customer",
-            raise_if_not_found=False,
-        )
+        bc2_category = self.env.ref(B2C_CUSTOMER_CATEGORY_REF, raise_if_not_found=False)
         if not bc2_category:
             # odoo init stage...
-            for rec in self:
-                rec.is_b2c_customer = False
+            self.update({"is_b2c_customer": False})
             return
         for rec in self:
             rec.is_b2c_customer = bc2_category in rec.category_id
+            rec.manual_sale_order_allowed = not rec.is_b2c_customer
 
     def _inverse_is_b2c_customer(self):
-        bc2_category_id = self.env.ref(
-            "alc_b2c_partner.res_partner_category_b2c_customer"
-        ).id
+        bc2_category = self.env.ref(B2C_CUSTOMER_CATEGORY_REF)
         to_unset = self.filtered(lambda n: not n.is_b2c_customer)
-        to_unset.write({"category_id": [(3, bc2_category_id)]})
-        to_set = self.filtered(lambda n: n.is_b2c_customer)
-        to_set.write({"category_id": [(4, bc2_category_id)]})
-
-    @api.onchange("is_b2c_customer", "category_id")
-    def _onchange_b2c(self):
-        bc2_category_id = self.env.ref(
-            "alc_b2c_partner.res_partner_category_b2c_customer"
+        to_unset.write(
+            {
+                "category_id": [Command.unlink(bc2_category.id)],
+                "manual_sale_order_allowed": True,
+            }
         )
-        for record in self:
-            if record.is_b2c_customer or bc2_category_id in record.category_id:
-                record.manual_sale_order_allowed = False
-
-    @api.multi
-    def _write(self, vals):
-        if vals.get("is_b2c_customer"):
-            vals["manual_sale_order_allowed"] = False
-        return super(ResPartner, self)._write(vals)
+        to_set = self.filtered(lambda n: n.is_b2c_customer)
+        to_set.write(
+            {
+                "category_id": [Command.link(bc2_category.id)],
+                "manual_sale_order_allowed": False,
+            }
+        )

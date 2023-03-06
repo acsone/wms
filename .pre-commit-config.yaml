@@ -14,7 +14,6 @@ exclude: |
   ^odoo/addons/alc_automatic_account_move_line_reconcile/|
   ^odoo/addons/alc_b2c_connector/|
   ^odoo/addons/alc_b2c_connector_pricelist_discount/|
-  ^odoo/addons/alc_b2c_partner/|
   ^odoo/addons/alc_b2c_partner_no_geooptimize/|
   ^odoo/addons/alc_b2c_to_magento/|
   ^odoo/addons/alc_base_auto_join/|

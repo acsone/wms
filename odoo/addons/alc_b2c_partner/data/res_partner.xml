@@ -5,7 +5,5 @@
   <record id="b2c_customer" model="res.partner">
     <field name="name">B2C Customer</field>
     <field name="is_company" eval="True" />
-    <field name="supplier" eval="False" />
-    <field name="customer" eval="True" />
   </record>
 </odoo>
