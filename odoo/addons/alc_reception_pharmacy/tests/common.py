@@ -29,7 +29,7 @@ class CommonReceptionPharmacyCase(SavepointCase):
         )
 
         # Create the product for reception
-        cls.product = cls.env["product.template"].browse(
+        cls.product = cls.env["product.product"].browse(
             cls.env.ref("alc_reception_pharmacy.product_colis_souverain").id
         )
 

@@ -63,7 +63,7 @@ class ReceivePharmacyProducts(models.TransientModel):
     def _create_reception_pharmacy_line(self):
         product = self.reception_pharmacy_id.product_id
         reception_pharmacy_line = self.env["reception.pharmacy.line"]
-        lot = self._create_lot(product, self.lot_name)
+        lot = self._create_lot(product)
         line = reception_pharmacy_line.create(
             {
                 "wizard_id": self.reception_pharmacy_id.id,
@@ -76,9 +76,9 @@ class ReceivePharmacyProducts(models.TransientModel):
         )
         return line
 
-    def _create_lot(self, product, lot_name):
+    def _create_lot(self, product):
         current_year = datetime.now().year
-        lot_name = str(current_year) + lot_name
+        lot_name = str(current_year) + self.lot_name
         lot = self.env["stock.production.lot"]
         lot_vals = {
             "product_id": product.id,
@@ -91,7 +91,7 @@ class ReceivePharmacyProducts(models.TransientModel):
         if "checksum" in lot._fields:
             lot_vals["checksum"] = "123"
         # END HACK
-        lot_id = lot.create(lot_vals)
+        lot_id = lot.with_context(default_life_date_allowed=True).create(lot_vals)
         return lot_id
 
     def print_reception_pharmacy_label(self, reception_pharmacy_line):
