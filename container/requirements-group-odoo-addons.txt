@@ -14,6 +14,7 @@ odoo-addon-attribute-set @ git+https://github.com/acsone/odoo-pim.git@d8078f7e77
 odoo-addon-base-attachment-object-storage @ git+https://github.com/acsone/odoo-cloud-platform@fc452c6a2abbae4ab7d4bd041c5d2212691a8096#subdirectory=setup/base_attachment_object_storage
 odoo-addon-base-delivery-carrier-label==16.0.1.0.0.3
 odoo-addon-base-exception==16.0.1.0.1.3
+odoo-addon-base-geoengine @ git+https://github.com/OCA/geospatial.git@f1e0efbf8bf35810c45154152088499ae11b7209#subdirectory=setup/base_geoengine
 odoo-addon-base-partner-sequence==16.0.1.0.0.3
 odoo-addon-base-report-to-printer==16.0.1.1.0.1
 odoo-addon-base-sparse-field-list-support @ git+https://github.com/acsone/server-tools.git@f75469cfc3ead20b6224195b653ddba735a219b4#subdirectory=setup/base_sparse_field_list_support
@@ -24,6 +25,8 @@ odoo-addon-delivery-carrier-label-gls @ git+https://github.com/acsone/delivery-c
 odoo-addon-delivery-carrier-max-weight-constraint==16.0.1.0.1
 odoo-addon-delivery-package-number-theoretical @ git+https://github.com/acsone/delivery-carrier.git@88acd6b0c189b60a5aa151a93f4faf0ab6fc1325#subdirectory=setup/delivery_package_number_theoretical
 odoo-addon-delivery-package-type-number-parcels==16.0.1.0.1
+odoo-addon-geoengine-base-geolocalize @ git+https://github.com/OCA/geospatial.git@d977cbdc42825e5d241ebe91203e0d087d73b2e7#subdirectory=setup/geoengine_base_geolocalize
+odoo-addon-geoengine-partner @ git+https://github.com/OCA/geospatial.git@ff4a76d86be5abd88dcb0f84c5def21a70e2262d#subdirectory=setup/geoengine_partner
 odoo-addon-partner-manual-rank==16.0.1.0.1
 odoo-addon-partner-tz @ git+https://github.com/acsone/partner-contact@70915afa6bf0beae725d1998bd0d600b6dffd2b7#subdirectory=setup/partner_tz
 odoo-addon-product-abc-classification @ git+https://github.com/acsone/product-attribute.git@cc97df93b3f97e947c2ed38cc6232c0a642f65e1#subdirectory=setup/product_abc_classification
