@@ -11,10 +11,16 @@
     "website": "https://acsone.eu",
     "application": True,
     "depends": [
+        # OCA/bank-payment
+        "account_payment_mode",
+        "account_payment_sale",
+        "account_payment_partner",
+        # OCA/account-invoicing
         "account_tax_one_vat",
         "account_tax_one_vat_purchase",
         "account_tax_one_vat_sale",
         "account_invoice_tax_required",
+        # ALC
         "alc_cash_on_delivery",
     ],
 }
