@@ -34,6 +34,7 @@
         "alc_product_pricelist_data",
         "alc_product_category_business_unit",
         "alc_product_category_property",
+        "alc_product_lot_info",
         "alc_product_pharmacy",
         "alc_product_override_price",
         "alc_partner_pricelist",
