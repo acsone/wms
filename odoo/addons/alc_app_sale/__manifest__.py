@@ -62,5 +62,6 @@
         "alc_sale_auto_confirm_max_delay",
         "alc_sale_channel",
         "alc_sale_internal_confirmation_mail",
+        "alc_partner_manual_sale_order",
     ],
 }

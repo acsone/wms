@@ -3,21 +3,19 @@
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
   <record model="ir.ui.view" id="res_partner_form_view">
-    <field name="name">res.partner.form (in alc_partner_manual_sale_order)</field>
     <field name="model">res.partner</field>
     <field name="inherit_id" ref="base.view_partner_form" />
     <field name="arch" type="xml">
-      <xpath expr="//group[@name='sale']/field[@name='customer']" position="after">
+      <xpath expr="//group[@name='sale']" position="inside">
         <field name="manual_sale_order_allowed" />
       </xpath>
     </field>
   </record>
   <record model="ir.ui.view" id="res_partner_search_view">
-    <field name="name">res.partner.search (in alc_partner_manual_sale_order)</field>
     <field name="model">res.partner</field>
     <field name="inherit_id" ref="base.view_res_partner_filter" />
     <field name="arch" type="xml">
-      <filter name="customer" position="after">
+      <filter name="type_company" position="after">
         <filter
           string="Direct customers (manual order allowed)"
           name="manual_sale_order_allowed"
