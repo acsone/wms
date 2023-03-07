@@ -222,7 +222,6 @@ omit =
     odoo/addons/alc_stock_picking_batch_assignment/*
     odoo/addons/alc_stock_picking_batch_delivery_rounds/*
     odoo/addons/alc_stock_picking_gls_check_validation/*
-    odoo/addons/alc_stock_picking_no_pack_in_pack/*
     odoo/addons/alc_stock_picking_number_package/*
     odoo/addons/alc_stock_picking_type_locking/*
     odoo/addons/alc_stock_picking_wave_release_pickings/*

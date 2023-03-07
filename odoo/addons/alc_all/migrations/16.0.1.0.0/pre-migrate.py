@@ -17,6 +17,7 @@ def migrate(cr, version):
         "alc_stock_location_content_relocation",
         "alc_stock_move_operation",
         "alc_stock_pack_operation_audit",
+        "alc_stock_picking_no_pack_in_pack",
         "alc_stock_picking_number_package",
         "alc_stock_picking_package",
         "alc_stock_picking_policy_block",
