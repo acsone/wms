@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="stock_package_type_form">
+        <field name="name">stock_package_type_form (in alc_product_is_new)</field>
+        <field name="model">stock.package.type</field>
+        <field name="inherit_id" ref="stock_storage_type.stock_package_type_form" />
+        <field name="arch" type="xml">
+            <field name="barcode" position="before">
+                <field name="is_new" />
+            </field>
+        </field>
+    </record>
+
+</odoo>

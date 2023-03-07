@@ -146,7 +146,6 @@ omit =
     odoo/addons/alc_product_consolidated_price_newpharma/*
     odoo/addons/alc_product_consolidated_price_report/*
     odoo/addons/alc_product_flattened_data/*
-    odoo/addons/alc_product_is_new/*
     odoo/addons/alc_product_label_printer/*
     odoo/addons/alc_product_link_notice/*
     odoo/addons/alc_product_mto/*

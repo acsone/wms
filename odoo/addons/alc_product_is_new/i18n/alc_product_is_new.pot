@@ -20,7 +20,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:alc_product_is_new.field_product_template__is_new
 #: model:ir.model.fields,field_description:alc_product_is_new.field_stock_package_type__is_new
 msgid "Is New"
-msgstr "Nouveauté"
+msgstr ""
 
 #. module: alc_product_is_new
 #: model:ir.model.fields,field_description:alc_product_is_new.field_product_product__new_product_with_old_date
@@ -31,7 +31,7 @@ msgstr ""
 #. module: alc_product_is_new
 #: model:ir.model,name:alc_product_is_new.model_product_template
 msgid "Product"
-msgstr "Article"
+msgstr ""
 
 #. module: alc_product_is_new
 #: model:ir.model.fields,field_description:alc_product_is_new.field_product_product__product_package_storage_type_id
@@ -42,12 +42,12 @@ msgstr ""
 #. module: alc_product_is_new
 #: model_terms:ir.ui.view,arch_db:alc_product_is_new.product_template_form_view
 msgid "Product has the storage type 'new' but is older than a month"
-msgstr "Article nouveauté créé il y a plus d'un mois"
+msgstr ""
 
 #. module: alc_product_is_new
 #: model_terms:ir.ui.view,arch_db:alc_product_is_new.product_template_search_view
 msgid "Product is categorized as 'new' but is older than a month"
-msgstr "Article classé comme nouveauté mais créé il y a plus d'un mois"
+msgstr ""
 
 #. module: alc_product_is_new
 #: model:ir.model,name:alc_product_is_new.model_stock_package_type

@@ -56,6 +56,7 @@
         "alc_mail_thread_no_auto_subscribe_notify",
         "alc_stock_picking_batch_creation",
         "alc_product_incoming_stock_move_action",
+        "alc_product_is_new",
     ],
     "data": [],
     "demo": [],

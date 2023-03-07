@@ -262,6 +262,7 @@ class ProductTemplate(models.Model):
                 product.packaging_has_no_dimensions = False
 
     def _get_current_ids(self):
+        # copied as is into alc_product_is_new to avoid the whole dependency
         if self.ids and len(self.ids) > 1:
             current_ids = AsIs("AND pt.id in {}".format(tuple(self.ids)))
         elif self.ids and len(self.ids) == 1:
