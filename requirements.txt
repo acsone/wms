@@ -137,6 +137,8 @@ odoo-addon-stock-quant-package-dimension==16.0.1.0.0.2
 odoo-addon-stock-quant-package-product-packaging==16.0.1.0.1
 odoo-addon-stock-release-channel @ git+https://github.com/acsone/wms.git@56803f47c6d4d6d60d051e4e9e9d90a0645f9800#subdirectory=setup/stock_release_channel
 odoo-addon-stock-release-channel-auto-release @ git+https://github.com/acsone/wms.git@56803f47c6d4d6d60d051e4e9e9d90a0645f9800#subdirectory=setup/stock_release_channel_auto_release
+odoo-addon-stock-release-channel-auto-release-geoengine @ git+https://github.com/OCA/wms.git@89404da9f9d12c77b38e9e77971a851ad52b028a#subdirectory=setup/stock_release_channel_auto_release_geoengine
+odoo-addon-stock-release-channel-geoengine @ git+https://github.com/OCA/wms.git@89404da9f9d12c77b38e9e77971a851ad52b028a#subdirectory=setup/stock_release_channel_geoengine
 odoo-addon-stock-release-channel-process-end-time @ git+https://github.com/acsone/wms.git@c29d5a6cf4ba5264ff1a36f6aff5f4423f78e8b6#subdirectory=setup/stock_release_channel_process_end_time
 odoo-addon-stock-release-channel-shipment-advice @ git+https://github.com/acsone/wms.git@0d776d523ead4e35e218cbc461422c42992d174c#subdirectory=setup/stock_release_channel_shipment_advice
 odoo-addon-stock-release-channel-shipment-advice-process-end-time @ git+https://github.com/acsone/wms.git@90e8aebeee688177c1ba0b10b03b8cd49a652986#subdirectory=setup/stock_release_channel_shipment_advice_process_end_time
