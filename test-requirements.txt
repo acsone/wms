@@ -1,0 +1,10 @@
+# OCA/stock-logistics-warehouse
+odoo-addon-stock-move-auto-assign @ git+https://github.com/OCA/stock-logistics-warehouse.git@refs/pull/1560/head#subdirectory=setup/stock_move_auto_assign
+odoo-addon-stock-move-auto-assign-auto-release @ git+https://github.com/oca/stock-logistics-warehouse.git@refs/pull/1560/head#subdirectory=setup/stock_move_auto_assign_auto_release
+# OCA/wms
+odoo-addon-stock-release-channel @ git+https://github.com/acsone/wms.git@ad80539d57101b7292f76fbac918abcc6fd551dd#subdirectory=setup/stock_release_channel
+odoo-addon-stock-release-channel-auto-release @ git+https://github.com/OCA/wms.git@refs/pull/508/head#subdirectory=setup/stock_release_channel_auto_release
+odoo-addon-stock-available-to-promise-release @ git+https://github.com/oca/wms.git@refs/pull/478/head#subdirectory=setup/stock_available_to_promise_release
+# OCA/geospatial
+odoo-addon-base-geoengine @ git+https://github.com/OCA/geospatial.git@refs/pull/328/head#subdirectory=setup/base_geoengine
+odoo-addon-geoengine-partner @ git+https://github.com/OCA/geospatial.git@refs/pull/331/head#subdirectory=setup/geoengine_partner
