@@ -1,0 +1,2 @@
+# OCA/geospatial
+odoo-addon-geoengine-partner @ git+https://github.com/OCA/geospatial.git@refs/pull/331/head#subdirectory=setup/geoengine_partner
