@@ -1,0 +1,5 @@
+# OCA/wms
+odoo-addon-stock-release-channel @ git+https://github.com/OCA/wms.git@refs/pull/651/head#subdirectory=setup/stock_release_channel
+# OCA/geospatial
+odoo-addon-base-geoengine @ git+https://github.com/OCA/geospatial.git@refs/pull/328/head#subdirectory=setup/base_geoengine
+odoo-addon-geoengine-partner @ git+https://github.com/OCA/geospatial.git@refs/pull/331/head#subdirectory=setup/geoengine_partner
