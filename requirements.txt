@@ -115,7 +115,7 @@ odoo10-addon-base-optional-quick-create @ git+https://github.com/acsone/server-t
 odoo10-addon-base-partition @ git+https://github.com/acsone/odoo-shopinvader.git@5f47d82cbb6d9774d744a534ed9f6af7c361ce27#subdirectory=setup/base_partition
 odoo10-addon-base-partner-sequence @ git+https://github.com/acsone/partner-contact@a9e98e0dad100bbf0ba80da7e4b83b9a65dcc3ea#subdirectory=setup/base_partner_sequence
 odoo10-addon-base-report-to-printer @ git+https://github.com/acsone/report-print-send.git@c8244592b3952b406f768f6f45faeec048b9e1a0#subdirectory=setup/base_report_to_printer
-odoo10-addon-base-rest @ git+https://github.com/acsone/rest-framework.git@f0014fda04915ff9650b6578d811c8c420b9ff69#subdirectory=setup/base_rest
+odoo10-addon-base-rest @ git+https://github.com/acsone/rest-framework.git@aab4cc96c53f64558065b3915bc21061d571d1b0#subdirectory=setup/base_rest
 odoo10-addon-base-rest-auth-api-key @ git+https://github.com/acsone/rest-framework.git@5d93f008584c29a2cdebca2ecd4a7ed7b026ab0a#subdirectory=setup/base_rest_auth_api_key
 odoo10-addon-base-rest-auth-jwt @ git+https://github.com/acsone/rest-framework.git@57b4fef8ecea68867aa088e0722fa423ea25a414#subdirectory=setup/base_rest_auth_jwt
 odoo10-addon-base-search-custom-field-filter==10.0.1.0.1
