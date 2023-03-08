@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo noupdate="1">
+    <record
+    model="alc.stock.release.channel.tag"
+    id="alc_stock_release_channel_tag_demo_1"
+  >
+       <field name="name">tag 1</field>
+    </record>
+    <record
+    model="alc.stock.release.channel.tag"
+    id="alc_stock_release_channel_tag_demo_2"
+  >
+       <field name="name">tag 2</field>
+    </record>
+</odoo>
