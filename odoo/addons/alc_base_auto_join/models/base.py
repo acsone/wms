@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -15,7 +14,9 @@ class Base(models.AbstractModel):
     @api.model
     def _auto_join(self, field_names):
         """
-        Force auto_join on the provided fields. The initial value defined on
+        Force auto_join on the provided fields.
+
+        The initial value defined on
         fields is restored at the end of the call.
 
         When the left side of a domain leaf contains a dot ie
