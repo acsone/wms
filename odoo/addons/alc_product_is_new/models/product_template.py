@@ -1,17 +1,19 @@
-# -*- coding: utf-8 -*-
 # Copyright 2021 ACSONE SA/NV
 # Copyright 2022 Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import api, fields, models
+from psycopg2.extensions import AsIs
+
+from odoo import api, fields
+
+from odoo.addons.stock_storage_type.models import product_template
 
 
-class ProductTemplate(models.Model):
-
-    _inherit = "product.template"
+class ProductTemplate(product_template.ProductTemplate):
 
     is_new = fields.Boolean(
-        related="product_package_storage_type_id.is_new", readonly=True,
+        related="product_package_storage_type_id.is_new",
+        readonly=True,
     )
     new_product_with_old_date = fields.Boolean(
         default=False,
@@ -20,25 +22,21 @@ class ProductTemplate(models.Model):
     )
 
     product_package_storage_type_id = fields.Many2one(
-        "stock.package.storage.type",
-        default=lambda self: self.env.ref(
-            "alc_stock_storage_type.package_st_M_M_Nouveaute"
-        ),
+        "stock.package.type",
         copy=False,
     )
 
     def _get_new_products_older_than_a_month(self):
-        ids = []
         current_ids = self._get_current_ids()
         self.env.cr.execute(
             """
             SELECT DISTINCT pt.id
                 FROM
                         product_template pt
-                JOIN stock_package_storage_type pst
-                    ON pt.product_package_storage_type_id = pst.id
+                JOIN stock_package_type spt
+                    ON pt.product_package_storage_type_id = spt.id
                 WHERE
-                        pst.is_new
+                        spt.is_new
                     AND pt.create_date < NOW() - '1 month'::interval
                 %(ids)s
             """,
@@ -57,3 +55,17 @@ class ProductTemplate(models.Model):
     def _search_new_product_with_old_date(self, operator, value):
         ids = self._get_new_products_older_than_a_month()
         return [("id", "in", ids)]
+
+    def _get_current_ids(self):
+        """
+        Copied from alc_product_audit because detected as a missing hidden dependency.
+
+        Taking alc_product_audit as dependency just for this method looks overkill
+        """
+        if self.ids and len(self.ids) > 1:
+            current_ids = AsIs(f"AND pt.id in {tuple(self.ids)}")
+        elif self.ids and len(self.ids) == 1:
+            current_ids = AsIs(f"AND pt.id = {self.ids[0]}")
+        else:
+            current_ids = AsIs("")
+        return current_ids

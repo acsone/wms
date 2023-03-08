@@ -13,11 +13,12 @@
             <header position="after">
                 <div
           class="alert alert-warning"
+          role="alert"
           attrs="{'invisible': [('new_product_with_old_date', '=', False)]}"
         >
                     <div>
                         <p
-            >- Product has the storage type 'new' but is older than a month</p>
+            >Product has the storage type 'new' but is older than a month</p>
                     </div>
                 </div>
             </header>
