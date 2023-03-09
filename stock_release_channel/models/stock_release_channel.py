@@ -468,10 +468,6 @@ class StockReleaseChannel(models.Model):
         return domain
 
     @api.model
-    def _get_assignable_release_channel_domain(self):
-        return [("state", "!=", "asleep")]
-
-    @api.model
     def assign_release_channel(self, picking):
         picking.ensure_one()
         if picking.picking_type_id.code != "outgoing" or picking.state in (
@@ -479,39 +475,22 @@ class StockReleaseChannel(models.Model):
             "done",
         ):
             return
-        # get channel candidates from the picking
-        channel = picking._find_release_channel_candidate()
-        if channel:
-            picking.release_channel_id = channel
-            return True
-        # No channel provided by the picking -> try to find one be evaluating the rules
-        # of all available channels
-        # do a single query rather than one for each rule*picking
-        for channel in self.sudo().search(
-            self._get_assignable_release_channel_domain()
-        ):
-            if (
-                channel.picking_type_ids
-                and picking.picking_type_id not in channel.picking_type_ids
-            ):
-                continue
-
+        for channel in picking._find_release_channel_possible_candidate():
+            current = picking
             domain = channel._prepare_domain()
-
+            if not domain and not channel.code:
+                current.release_channel_id = channel
             if domain:
                 current = picking.filtered_domain(domain)
-            else:
-                current = picking
-
             if not current:
                 continue
-
             if channel.code:
                 current = channel._eval_code(current)
-
             if not current:
                 continue
             current = channel._assign_release_channel_additional_filter(current)
+            if not current:
+                continue
             current.release_channel_id = channel
             break
 

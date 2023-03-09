@@ -71,7 +71,7 @@
                             name="options"
                             groups="stock.group_stock_manager"
                         >
-                            <group name="options" groups="stock.group_stock_manager">
+                            <group name="options">
                         <field name="release_forbidden" />
                         <field
                                     name="release_mode"
@@ -85,25 +85,28 @@
                                     name="max_batch_mode"
                                     attrs="{'invisible': ['|', '|', ('release_mode','!=', 'batch'), ('release_forbidden', '=', True), ('batch_mode', '!=', 'max')]}"
                                 />
-                        <field name="warehouse_id" />
-                        <field name="picking_type_ids" options="{'no_create': True}">
-                            <tree>
-                                <field name="name" />
-                            </tree>
-                        </field>
-                        <field
+                    </group>
+                        </page>
+                        <page string="Selection criteria" name="criteria">
+                            <group name="criteria">
+                                <field
+                                    name="picking_type_ids"
+                                    options="{'no_create': True}"
+                                    widget="many2many_tags"
+                                />
+                                <field name="warehouse_id" />
+                                <field
                                     name="rule_domain"
                                     widget="domain"
                                     options="{'model': 'stock.picking', 'in_dialog': true}"
                                 />
-
-                        <field
+                                <field
                                     name="code"
                                     widget="ace"
                                     options="{'mode': 'python'}"
                                     placeholder="Enter Python code here."
                                 />
-                    </group>
+                            </group>
                         </page>
                     </notebook>
                 </sheet>
