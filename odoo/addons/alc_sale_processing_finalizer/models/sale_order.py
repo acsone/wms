@@ -1,18 +1,17 @@
-# -*- coding: utf-8 -*-
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import datetime
 
-import dateutil
+from dateutil.relativedelta import relativedelta
 
-from odoo import api, fields, models
+from odoo import api, fields
 from odoo.tools import config
 
+from odoo.addons.alc_sale_consignment.models import sale_order
 
-class SaleOrder(models.Model):
 
-    _inherit = "sale.order"
+class SaleOrder(sale_order.SaleOrder):
 
     auto_finalize_processing = fields.Boolean(
         default=True, help="Set to true to automatically purge SO after 3 months"
@@ -22,7 +21,6 @@ class SaleOrder(models.Model):
     def cancel_sales_bo_gt_3months(self):
         wizard = self.env["cancel.remaining.wizard"].new()
         mail_template = self.env.ref("alc_sale_processing_finalizer.mail_template_30")
-
         lines = self.env["sale.order.line"].search(
             [
                 ("product_qty_remains_to_deliver", ">", 0),
@@ -31,22 +29,14 @@ class SaleOrder(models.Model):
                 (
                     "date_order",
                     "<",
-                    (
-                        datetime.datetime.today()
-                        - dateutil.relativedelta.relativedelta(months=3)
-                    ).strftime("%Y-%m-%d"),
+                    (datetime.datetime.today() - relativedelta(months=3)).date(),
                 ),
             ]
         )
-
         canceled_orders = self.env["sale.order"]
-
         lines = self._filter_sale_order_lines_to_cancel(lines)
-
         for line in lines:
-
-            moves = line.procurement_ids.mapped("move_ids")
-
+            moves = line.move_ids
             remaining_moves = moves.filtered(
                 lambda m: m.state not in ("cancel", "done")
             )
@@ -58,7 +48,7 @@ class SaleOrder(models.Model):
             if True in remaining_moves.mapped("picking_id.printed"):
                 continue
 
-            internal_moves = remaining_moves.mapped("move_orig_ids")
+            internal_moves = remaining_moves.move_orig_ids
             if "done" in internal_moves.mapped("state"):
                 continue
             if True in internal_moves.mapped("picking_id.printed"):
@@ -77,6 +67,5 @@ class SaleOrder(models.Model):
 
     def _filter_sale_order_lines_to_cancel(self, lines):
         return lines.filtered(
-            lambda line: line.order_id.carrier_id
-            != self.env.ref("alc_sale_processing_finalizer.deliver_carrier_long_term")
+            lambda line: not line.order_id.carrier_id.is_long_term_delivery
         )

@@ -1,1 +1,1 @@
-from . import test_cron
+from . import test_sale_processing_finalizer
