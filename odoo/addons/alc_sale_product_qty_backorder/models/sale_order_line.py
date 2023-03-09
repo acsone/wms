@@ -1,26 +1,22 @@
-# -*- coding: utf-8 -*-
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import api, fields, models
+from odoo import api, fields
 
-import odoo.addons.decimal_precision as dp
+from odoo.addons.alc_sale_product_qty_unavailable.models import sale_order_line
 
 
-class SaleOrderLine(models.Model):
-
-    _inherit = "sale.order.line"
+class SaleOrderLine(sale_order_line.SaleOrderLine):
 
     product_qty_backorder = fields.Float(
         string="Qty into back order",
-        digits=dp.get_precision("Product Unit of Measure"),
+        digits="Product Unit of Measure",
         compute="_compute_product_qty_backorder",
         help="As long as no quantity has been delivered, the BO quantity is "
         "the quantity unavailable at the time of the order minus the canceled "
         "quantity. Otherwise it is the quantity remaining to be delivered.",
     )
 
-    @api.multi
     @api.depends(
         "qty_delivered",
         "product_qty_canceled",
@@ -29,7 +25,8 @@ class SaleOrderLine(models.Model):
     )
     def _compute_product_qty_backorder(self):
         """
-        As long as no quantity has been delivered, the BO quantity is the
+        As long as no quantity has been delivered, the BO quantity is the.
+
         quantity unavailable at the time of the order minus the canceled
         quantity. Otherwise it is the quantity remaining to be delivered.
         """
