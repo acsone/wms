@@ -79,10 +79,10 @@
                                 />
                         <field
                                     name="batch_mode"
-                            attrs="{'invisible': ['|', ('release_mode','!=', 'batch'), ('release_forbidden', '=', True)]}"
-                        />
+                                    attrs="{'invisible': ['|', ('release_mode','!=', 'batch'), ('release_forbidden', '=', True)]}"
+                                />
                         <field
-                            name="max_batch_mode"
+                                    name="max_batch_mode"
                                     attrs="{'invisible': ['|', '|', ('release_mode','!=', 'batch'), ('release_forbidden', '=', True), ('batch_mode', '!=', 'max')]}"
                                 />
                         <field name="warehouse_id" />
