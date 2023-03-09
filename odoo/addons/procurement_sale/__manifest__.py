@@ -4,6 +4,10 @@
 
 {
     "name": "Procurement Sale",
+    #####################################################################
+    # split partially into alc_sale_qty_unavailable where the fields for
+    # quantity unavailable are added
+    #####################################################################
     "version": "10.0.2.0.0",
     "author": "BCIM",
     "maintainer": "Camptocamp",
