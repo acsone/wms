@@ -21,8 +21,8 @@ odoo-addon-delivery-carrier-label-gls @ git+https://github.com/acsone/delivery-c
 odoo-addon-delivery-package-number-theoretical @ git+https://github.com/acsone/delivery-carrier.git@16.0-add-delivery_package_number_theoretical-hda#subdirectory=setup/delivery_package_number_theoretical
 
 # wms
-# https://github.com/OCA/wms/pull/508
-odoo-addon-stock-available-to-promise-release @ git+https://github.com/acsone/wms.git@16.0-add-stock_release_channel_auto_release#subdirectory=setup/stock_available_to_promise_release
+# https://github.com/OCA/wms/pull/478
+odoo-addon-stock-available-to-promise-release @ git+https://github.com/acsone/wms.git@16.0-stock-available-to-promise-manage-backorder-lmi#subdirectory=setup/stock_available_to_promise_release
 # https://github.com/OCA/wms/pull/493
 odoo-addon-stock-release-channel @ git+https://github.com/acsone/wms.git@16.0-add-stock_release_channel_auto_release#subdirectory=setup/stock_release_channel
 # https://github.com/OCA/wms/pull/550
