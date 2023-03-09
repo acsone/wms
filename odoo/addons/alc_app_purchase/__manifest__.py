@@ -28,6 +28,7 @@
         "alc_product_food",
         "alc_product_additional_price",
         "alc_product_price_import",
+        "alc_stock_lot_track_food",
         "partner_manual_rank",
         "product_uom_updatable",
     ],
