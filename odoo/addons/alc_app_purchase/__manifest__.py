@@ -25,6 +25,7 @@
         "alc_product_supplier",
         "alc_product_supplierinfo_force_edit_form",
         "alc_product_state",
+        "alc_product_food",
         "alc_product_additional_price",
         "alc_product_price_import",
         "partner_manual_rank",

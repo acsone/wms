@@ -9,6 +9,7 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
+        "alc_product_food",
         "alc_product_pharmacy",
         "base_sparse_field_list_support",
     ],
