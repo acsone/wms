@@ -59,6 +59,7 @@
         "alc_product_incoming_stock_move_action",
         "alc_product_is_new",
         "alc_stock_release_channel_tag",
+        "alc_stock_release_channel_import",
     ],
     "data": [],
     "demo": [],
