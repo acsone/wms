@@ -7,7 +7,10 @@
             alc_stock_receive_lot_product_info)
         </field>
     <field name="model">stock.pack.operation.lot.add</field>
-    <field name="inherit_id" ref="stock_receive_lot.view_pack_operation_lot_add_form" />
+    <field
+      name="inherit_id"
+      ref="alc_stock_receive_lot.view_pack_operation_lot_add_form"
+    />
     <field name="arch" type="xml">
       <group name="operation_details" position="after">
         <group name="lots">
@@ -20,14 +23,7 @@
             <tree limit='5' default_order="life_date DESC, qty_available DESC">
               <field name="name" />
               <field name="qty_available" widget="integer" />
-              <field name="life_date" />
-            </tree>
-          </field>
-          <field name="stock_bin_ids" nolabel="1">
-            <tree>
-              <field name="sequence" widget="handle" />
-              <field name="location_id" />
-              <field name="bin_location_id" />
+              <field name="expiration_date" />
             </tree>
           </field>
         </group>
