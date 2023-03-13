@@ -30,6 +30,7 @@
         "alc_product_price_import",
         "alc_stock_lot_track_food",
         "alc_stock_receive_lot",
+        "alc_stock_receive_display_stock_storage_type",
         "partner_manual_rank",
         "product_uom_updatable",
     ],
