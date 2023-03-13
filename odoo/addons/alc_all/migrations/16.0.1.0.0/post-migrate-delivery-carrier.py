@@ -15,7 +15,7 @@ def _move_maximum_weight_per_package(env):
         "delivery.carrier",
         ["maximum_weight_per_package"],
         "alc_stock_picking_number_package",
-        "delivery_package_number_theoretical",
+        "delivery_estimated_package_quantity_by_weight",
     )
 
 

@@ -17,8 +17,8 @@ odoo-addon-sale-stock-restocking-fee-invoicing @ git+https://github.com/acsone/a
 # delivery-carrier
 # https://github.com/OCA/delivery-carrier/pull/599 - [16.0][MIG] delivery_carrier_label_gls
 odoo-addon-delivery-carrier-label-gls @ git+https://github.com/oca/delivery-carrier.git@refs/pull/599/head#subdirectory=setup/delivery_carrier_label_gls
-# https://github.com/OCA/delivery-carrier/pull/604 - [16.0][ADD] delivery_package_number_theoretical
-odoo-addon-delivery-package-number-theoretical @ git+https://github.com/acsone/delivery-carrier.git@16.0-add-delivery_package_number_theoretical-hda#subdirectory=setup/delivery_package_number_theoretical
+# https://github.com/OCA/delivery-carrier/pull/604 - [16.0][ADD] delivery_estimated_package_quantity_by_weight
+odoo-addon-delivery-estimated-package-quantity-by-weight @ git+https://github.com/oca/delivery-carrier.git@refs/pull/604/head#subdirectory=setup/delivery_estimated_package_quantity_by_weight
 
 # wms
 # https://github.com/OCA/wms/pull/478

@@ -20,7 +20,7 @@
         "alc_stock_picking_wave_display",
         "base_delivery_carrier_label",
         "delivery_carrier_max_weight_constraint",
-        "delivery_package_number_theoretical",
+        "delivery_estimated_package_quantity_by_weight",
         "delivery_package_type_number_parcels",
         "internal_stock_quant_package",
         "product_total_weight_from_packaging",
