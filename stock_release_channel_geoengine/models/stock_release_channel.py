@@ -5,6 +5,8 @@ import logging
 
 from odoo import fields, models
 
+from odoo.addons.base_geoengine.fields import GeoMultiPolygon
+
 _logger = logging.getLogger(__name__)
 
 
@@ -13,4 +15,4 @@ class StockReleaseChannel(models.Model):
     _inherit = "stock.release.channel"
 
     restrict_to_delivery_zone = fields.Boolean()
-    delivery_zone = fields.GeoMultiPolygon()
+    delivery_zone = GeoMultiPolygon()
