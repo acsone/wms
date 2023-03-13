@@ -25,11 +25,6 @@ class ProductTemplate(ProductTemplateBase):
         compute="_compute_category_attributes",
         store=True,
     )
-    is_food = fields.Boolean(
-        string="Food",
-        compute="_compute_category_attributes",
-        store=True,
-    )
     is_equipment = fields.Boolean(
         string="Equipment",
         compute="_compute_category_attributes",
@@ -104,7 +99,6 @@ class ProductTemplate(ProductTemplateBase):
     @api.model
     def _get_category_attributes(self):
         return {
-            "is_food": "alc_product_category_data.product_categ_ali",
             "is_meds": "alc_product_category_data.product_categ_medoc",
             "is_equipment": "alc_product_category_data.product_categ_materiel",
             "is_vt_be": "alc_product_category_data.product_categ_vet_belges",
