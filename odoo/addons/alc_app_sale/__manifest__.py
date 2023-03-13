@@ -28,6 +28,10 @@
         # OCA/odoo-pim
         "attribute_set",
         "product_attribute_set",
+        # OCA/geospatial
+        "base_geoengine",
+        "geoengine_partner",
+        "geoengine_base_geolocalize",
         # ALC
         "alc_partner_veterinary",
         "alc_product_category_data",
