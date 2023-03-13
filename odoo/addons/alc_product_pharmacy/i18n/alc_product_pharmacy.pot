@@ -55,12 +55,6 @@ msgid "Equipment"
 msgstr ""
 
 #. module: alc_product_pharmacy
-#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_product__is_food
-#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_template__is_food
-msgid "Food"
-msgstr ""
-
-#. module: alc_product_pharmacy
 #: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_product__is_human
 #: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_template__is_human
 msgid "Human"
