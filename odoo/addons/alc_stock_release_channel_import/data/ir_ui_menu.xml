@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.menu" id="alc_delivery_plan_root_menu">
+        <field name="name">Delivery Plans</field>
+        <field name="parent_id" ref="stock.menu_stock_config_settings" />
+        <field name="sequence" eval="100" />
+    </record>
+
+</odoo>

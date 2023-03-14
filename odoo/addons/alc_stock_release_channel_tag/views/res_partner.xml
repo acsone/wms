@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="res_partner_form_view">
+        <field name="model">res.partner</field>
+        <field
+      name="inherit_id"
+      ref="stock_release_channel_geoengine.res_partner_form_view"
+    />
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='release_channel']" position="inside">
+                <field
+          name="stock_release_channel_tag_ids"
+          widget="many2many_tags"
+          attrs="{'invisible': [('in_geo_release_channel', '=', False)]}"
+        />
+            </xpath>
+        </field>
+    </record>
+
+
+
+</odoo>
