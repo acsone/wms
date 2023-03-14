@@ -281,7 +281,6 @@ exclude: |
   ^odoo/addons/stock_picking_sequence/|
   ^odoo/addons/stock_picking_zone/|
   ^odoo/addons/stock_product_bin/|
-  ^odoo/addons/stock_receive_lot/|
   ^odoo/addons/stock_reception_priority/|
   ^odoo/addons/stock_refill/|
   ^odoo/addons/stock_valuation/|
