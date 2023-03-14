@@ -10,7 +10,10 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["procurement_sale", "sale_cancel_remaining"],
+    "depends": [
+        "procurement_sale",  # TODO: partially replaced by alc_sale_product_qty_unavailable
+        "sale_cancel_remaining"
+    ],
     "data": [],
     "demo": [],
     'installable': False

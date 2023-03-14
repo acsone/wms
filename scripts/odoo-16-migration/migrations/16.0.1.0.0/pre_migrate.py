@@ -35,6 +35,7 @@ def migrate(cr, version):
         "portal",
         "portal_sale",
         "portal_stock",
+        "procurement_sale",
         "product_packaging_barcode",
         "product_price_import",
         "purchase_mrp",
