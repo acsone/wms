@@ -56,7 +56,7 @@ odoo-addon-delivery-carrier-account==16.0.1.0.0.4
 odoo-addon-delivery-carrier-info==16.0.1.0.0.2
 odoo-addon-delivery-carrier-label-gls @ git+https://github.com/acsone/delivery-carrier.git@8d7564ac6d67e77eadba41a3de2f3c1fe656fd13#subdirectory=setup/delivery_carrier_label_gls
 odoo-addon-delivery-carrier-max-weight-constraint==16.0.1.0.1
-odoo-addon-delivery-package-number-theoretical @ git+https://github.com/acsone/delivery-carrier.git@88acd6b0c189b60a5aa151a93f4faf0ab6fc1325#subdirectory=setup/delivery_package_number_theoretical
+odoo-addon-delivery-estimated-package-quantity-by-weight @ git+https://github.com/acsone/delivery-carrier.git@628d15f465d02c468772d7f92fe7c3e3eebd3c18#subdirectory=setup/delivery_estimated_package_quantity_by_weight
 odoo-addon-delivery-package-type-number-parcels==16.0.1.0.1
 odoo-addon-delivery-procurement-group-carrier @ git+https://github.com/acsone/stock-logistics-workflow.git@d60c1524c95caa5b293c89b89a33950a4ce844ad#subdirectory=setup/delivery_procurement_group_carrier
 odoo-addon-geoengine-base-geolocalize @ git+https://github.com/acsone/geospatial.git@d977cbdc42825e5d241ebe91203e0d087d73b2e7#subdirectory=setup/geoengine_base_geolocalize
