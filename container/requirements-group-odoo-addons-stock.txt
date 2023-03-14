@@ -39,7 +39,7 @@ odoo-addon-stock-picking-group-by-max-weight @ git+https://github.com/acsone/sto
 odoo-addon-stock-picking-group-by-partner-by-carrier @ git+https://github.com/acsone/stock-logistics-workflow.git@c72ab4708b78ee0c068523ed9b0a2e645da71da8#subdirectory=setup/stock_picking_group_by_partner_by_carrier
 odoo-addon-stock-picking-group-by-partner-by-carrier-by-customer @ git+https://github.com/acsone/stock-logistics-workflow.git@8486bf88795420832c0588ccacf9840c3f9b9056#subdirectory=setup/stock_picking_group_by_partner_by_carrier_by_customer
 odoo-addon-stock-picking-low-priority @ git+https://github.com/acsone/stock-logistics-workflow.git@d9e6c0614b1e618574695378dcf1fff8abbee5b3#subdirectory=setup/stock_picking_low_priority
-odoo-addon-stock-picking-start==16.0.1.0.1
+odoo-addon-stock-picking-start @ git+https://github.com/acsone/stock-logistics-workflow.git@cbb49f2a6300dbf84f84301c7cf6265cbc272924#subdirectory=setup/stock_picking_start
 odoo-addon-stock-picking-type-shipping-policy @ git+https://github.com/acsone/wms.git@12dbcd20834849758e681098005f9386cb2c22a6#subdirectory=setup/stock_picking_type_shipping_policy
 odoo-addon-stock-picking-volume @ git+https://github.com/acsone/stock-logistics-warehouse.git@3a6bf112dcbfc1e138dfe10515d124fc5ddb9b5f#subdirectory=setup/stock_picking_volume
 odoo-addon-stock-procurement-customer @ git+https://github.com/acsone/stock-logistics-workflow.git@e142a70dd6da183ccff6ca5374c1e445882fc376#subdirectory=setup/stock_procurement_customer
