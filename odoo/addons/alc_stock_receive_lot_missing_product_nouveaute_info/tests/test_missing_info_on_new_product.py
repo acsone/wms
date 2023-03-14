@@ -144,7 +144,7 @@ class TestMissingInfoOnNewProduct(SavepointCase):
             }
         )
         cls.p10 = cls.pt10.product_variant_ids[0]
-        cls.p10.categ_id = cls.env.ref("alc_product_category_data.product_categ_ali").id
+        cls.p10.categ_id = cls.env.ref("alc_product_food.product_categ_ali").id
 
         cls.pt11 = cls.env["product.template"].create(
             {
@@ -173,7 +173,7 @@ class TestMissingInfoOnNewProduct(SavepointCase):
         cls.p13 = cls.pt13.product_variant_ids[0]
         cls.p13.write(
             {
-                "categ_id": cls.env.ref("alc_product_category_data.product_categ_ali").id,
+                "categ_id": cls.env.ref("alc_product_food.product_categ_ali").id,
                 "route_ids": [(6, 0, cls.env.ref("stock.route_warehouse0_mto").ids)],
             }
         )

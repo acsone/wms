@@ -16,7 +16,7 @@ class TestSaleOrderException(SavepointCase):
         cls.prod_food = cls.env["product.product"].create(
             {
                 "name": "I am some food, yam",
-                "categ_id": cls.env.ref("alc_product_category_data.product_categ_ali_divers").id,
+                "categ_id": cls.env.ref("alc_product_category_data.categ_ali_divers").id,
             }
         )
         cls.prod_stup = cls.env["product.product"].create(

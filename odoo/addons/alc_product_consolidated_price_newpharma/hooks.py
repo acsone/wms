@@ -52,7 +52,7 @@ def _initialize_product_assortment_filter(cr):
                         (
                             "categ_id",
                             "child_of",
-                            env.ref("alc_product_category_data.product_categ_ali").id,
+                            env.ref("alc_product_food.product_categ_ali").id,
                         )
                     ],
                     [

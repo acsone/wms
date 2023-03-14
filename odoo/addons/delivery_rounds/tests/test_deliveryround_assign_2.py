@@ -138,7 +138,7 @@ class DeliveryRoundAssignTestCase(common.DeliveryRoundTestCase):
             )
 
         cls.categ_ali = cls.env.ref(
-            "alc_product_category_data.product_categ_ali", raise_if_not_found=False
+            "alc_product_food.product_categ_ali", raise_if_not_found=False
         )
         if not cls.categ_ali:
             cls.categ_ali = cls.env["product.category"].create(

@@ -14,6 +14,7 @@
         "stock_account",
         # ACL
         "alc_product_category_business_unit",
+        "alc_product_food",
     ],
     "data": ["data/product_category.xml"],
     "pre_init_hook": "pre_init_hook",

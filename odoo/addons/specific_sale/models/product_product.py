@@ -130,7 +130,7 @@ class ProductProduct(models.Model):
             [("supplier", "=", True), ("ref", "in", ["81200", "81201"])]
         )
 
-        categ_ali = self.env.ref("alc_product_category_data.product_categ_ali")
+        categ_ali = self.env.ref("alc_product_food.product_categ_ali")
         categ_parapharmacie = self.env.ref("alc_product_category_data.product_categ_parapharmacie")
 
         domain = [

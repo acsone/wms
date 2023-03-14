@@ -43,9 +43,7 @@ class TestProductAccess(TransactionCase):
         self._assert_partner_types(ALL_P_TYPES)
 
     def test_access_product_food(self):
-        self.product.categ_id = self.env.ref(
-            "alc_product_category_data.product_categ_ali"
-        )
+        self.product.categ_id = self.env.ref("alc_product_food.product_categ_ali")
         self._assert_partner_types(ALL_P_TYPES - {"equipment_only", "guest"})
 
     def test_access_product_equiment(self):
