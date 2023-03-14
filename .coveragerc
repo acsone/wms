@@ -119,7 +119,6 @@ omit =
     odoo/addons/alc_logiweb/*
     odoo/addons/alc_magento_api/*
     odoo/addons/alc_mrp_repair/*
-    odoo/addons/alc_older_stock_production_lot/*
     odoo/addons/alc_package_label_printer/*
     odoo/addons/alc_partner_category/*
     odoo/addons/alc_partner_delivery_person/*
