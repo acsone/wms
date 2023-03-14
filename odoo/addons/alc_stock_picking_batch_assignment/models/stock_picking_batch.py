@@ -3,7 +3,6 @@
 
 from odoo import _, api, fields
 
-from odoo.addons.base.models.res_users import Users
 from odoo.addons.stock_picking_batch.models.stock_picking_batch import (
     StockPickingBatch as StockPickingBatchBase,
 )
@@ -14,32 +13,13 @@ class StockPickingBatch(StockPickingBatchBase):
     # Odoo Fix: never copy the printed field. Important for backorder creation
     printed = fields.Boolean(compute="_compute_printed", inverse="_inverse_printed")
 
-    operator_id = fields.Many2one[Users](
-        string="Operator",
-        copy=False,
-        tracking=True,
-        inverse="_inverse_operator_id",
-    )
-
     _sql_constraints = [
         (
-            "operator_id_unique",
-            "EXCLUDE (operator_id WITH =) WHERE ( operator_id is not null and state not in ('done', 'cancel', 'released'))",
+            "user_id_unique",
+            "EXCLUDE (user_id WITH =) WHERE ( user_id is not null and state not in ('done', 'cancel', 'released'))",
             _("This operator is already assigned to a wave"),
         )
     ]
-
-    def _prepare_assign_operator_values(self, operator=None):
-        operator_id = operator.id if operator else self.env.uid
-        return {"operator_id": operator_id, "printed": True}
-
-    def assign_operator(self, operator=None):
-        self.write(self._prepare_assign_operator_values(operator))
-
-    def _inverse_operator_id(self):
-        for rec in self:
-            rec.user_id = rec.operator_id
-            rec.picking_ids.write({"user_id": rec.operator_id.id})
 
     @api.depends("picking_ids", "picking_ids.printed")
     def _compute_printed(self):
