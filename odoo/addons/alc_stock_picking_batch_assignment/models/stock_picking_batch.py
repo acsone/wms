@@ -10,22 +10,47 @@ from odoo.addons.stock_picking_batch.models.stock_picking_batch import (
 
 class StockPickingBatch(StockPickingBatchBase):
 
-    # Odoo Fix: never copy the printed field. Important for backorder creation
-    printed = fields.Boolean(compute="_compute_printed", inverse="_inverse_printed")
+    action_start_allowed = fields.Boolean(compute="_compute_action_start_allowed")
+    action_cancel_start_allowed = fields.Boolean(
+        compute="_compute_action_cancel_start_allowed"
+    )
+    started = fields.Boolean(compute="_compute_started", store=True)
 
     _sql_constraints = [
         (
             "user_id_unique",
-            "EXCLUDE (user_id WITH =) WHERE ( user_id is not null and state not in ('done', 'cancel', 'released'))",
+            "EXCLUDE (user_id WITH =) WHERE ( user_id is not null and state not in "
+            "('done', 'cancel', 'released'))",
             _("This operator is already assigned to a wave"),
         )
     ]
 
-    @api.depends("picking_ids", "picking_ids.printed")
-    def _compute_printed(self):
-        for rec in self:
-            rec.printed = all(rec.picking_ids.mapped("printed"))
+    @api.depends("picking_ids", "picking_ids.action_start_allowed")
+    def _compute_action_start_allowed(self):
+        for batch in self:
+            allowed = False
+            if batch.picking_ids:
+                allowed = all(batch.mapped("picking_ids.action_start_allowed"))
+            batch.action_start_allowed = allowed
 
-    def _inverse_printed(self):
-        for rec in self:
-            rec.picking_ids.write({"printed": rec.printed})
+    @api.depends("picking_ids", "picking_ids.action_cancel_start_allowed")
+    def _compute_action_cancel_start_allowed(self):
+        for batch in self:
+            allowed = False
+            if batch.picking_ids:
+                allowed = all(batch.mapped("picking_ids.action_cancel_start_allowed"))
+            batch.action_cancel_start_allowed = allowed
+
+    @api.depends("picking_ids", "picking_ids.started")
+    def _compute_started(self):
+        for batch in self:
+            started = False
+            if batch.picking_ids:
+                started = batch.picking_ids and all(batch.mapped("picking_ids.started"))
+            batch.started = started
+
+    def action_start(self):
+        self.picking_ids.action_start()
+
+    def action_cancel_start(self):
+        self.picking_ids.action_cancel_start()

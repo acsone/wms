@@ -9,7 +9,7 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["stock_picking_batch"],
+    "depends": ["stock_picking_batch", "stock_picking_start"],
     "data": ["views/stock_picking_batch.xml"],
     "demo": [],
     "installable": True,
