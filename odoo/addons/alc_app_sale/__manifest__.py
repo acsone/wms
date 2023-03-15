@@ -92,5 +92,6 @@
         "alc_sale_exception_promotion",
         "alc_sale_exception_product_category",
         "alc_sale_exception_product_availability",
+        "alc_sale_statistics",
     ],
 }
