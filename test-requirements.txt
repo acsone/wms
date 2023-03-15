@@ -1,0 +1,2 @@
+odoo-addon-stock-storage-category-capacity-name @ git+https://github.com/OCA/stock-logistics-warehouse.git@refs/pull/1655/head#subdirectory=setup/stock_storage_category_capacity_name
+odoo-addon-stock-move-line-reserved-quant @ git+https://github.com/OCA/stock-logistics-workflow.git@refs/pull/1274/head#subdirectory=setup/stock_move_line_reserved_quant
