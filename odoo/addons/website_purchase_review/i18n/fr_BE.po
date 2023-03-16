@@ -49,6 +49,11 @@ msgid "Advised qty"
 msgstr "Qté conseillée"
 
 #. module: website_purchase_review
+#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
+msgid "Class:"
+msgstr "Classe:"
+
+#. module: website_purchase_review
 #: model:ir.model.fields,field_description:website_purchase_review.field_delivery_carrier_advised_qty
 #: model:ir.model.fields,field_description:website_purchase_review.field_product_product_advised_qty
 #: model:ir.model.fields,field_description:website_purchase_review.field_shopinvader_variant_advised_qty

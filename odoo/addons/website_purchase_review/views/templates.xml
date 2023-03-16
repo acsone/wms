@@ -267,6 +267,14 @@
                     <div class="col-md-8">
                       <table class="spacing_table_5">
                         <tr>
+                          <td>Class: </td>
+                          <td>
+                            <strong>
+                              <span t-esc="current_product.abc_storage" />
+                            </strong>
+                          </td>
+                        </tr>
+                        <tr>
                           <td>Advised qty</td>
                           <td>
                             <strong>
