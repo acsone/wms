@@ -10,13 +10,13 @@ class StockMove(models.Model):
 
     @api.model
     def create(self, vals):
-        record = super(StockMove, self).create(vals)
+        record = super().create(vals)
         if "state" in vals:
             record.set_validation_date()
         return record
 
     def write(self, vals):
-        result = super(StockMove, self).write(vals)
+        result = super().write(vals)
         if "state" in vals:
             self.set_validation_date()
         return result

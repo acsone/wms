@@ -4,7 +4,7 @@ import logging
 import urllib
 from datetime import datetime
 
-from odoo import _, api, fields, models
+from odoo import _, fields, models
 from odoo.exceptions import ValidationError
 
 _logger = logging.getLogger(__name__)
@@ -36,16 +36,15 @@ class PurchaseOrder(models.Model):
             products = self.order_line.mapped("product_id").sorted(
                 lambda product: product.name
             )
-            url = "/purchase_review/{}/{}?products_to_order=true&reload_products=true".format(
-                self.id, products[0].id
-            )
+            query = "products_to_order=true&reload_products=true"
+            url = f"/purchase_review/{self.id}/{products[0].id}?{query}"
         else:
             products = self.env["product.product"].search(
                 [("supplier_id", "=", self.partner_id.id)], limit=1
             )
             if not products:
                 raise ValidationError(_("There are no products for this supplier"))
-            url = "/purchase_review/%s?reload_products=true" % self.id
+            url = f"/purchase_review/{self.id}?reload_products=true"
 
         return {"type": "ir.actions.act_url", "url": url, "target": "self"}
 

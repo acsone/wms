@@ -58,12 +58,12 @@ class PurchaseReview(Home):
             po.update_or_create_line(kw_copy)
 
             if params.get("next_product_id"):
-                url = "/purchase_review/{}/{}".format(po.id, params["next_product_id"])
+                url = f"/purchase_review/{po.id}/{params['next_product_id']}"
             else:
-                url = "/purchase_review/%s" % po.id
+                url = f"/purchase_review/{po.id}"
 
             if params:
-                url += "?%s" % urlencode(params)
+                url += f"?{urlencode(params)}"
 
             return redirect(url)
 

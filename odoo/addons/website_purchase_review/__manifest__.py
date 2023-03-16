@@ -4,7 +4,7 @@
 {
     "name": "Website purchase review",
     "version": "16.0.1.0.0",
-    "author": "Okia SPRL",
+    "author": "Okia SPRL,ACSONE SA/NV",
     "license": "AGPL-3",
     "category": "Others",
     "description": """

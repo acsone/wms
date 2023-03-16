@@ -1,5 +1,5 @@
 /* eslint-disable */
-odoo.define("website_purchase_review.main_page", function(require) {
+odoo.define("website_purchase_review.main_page", function (require) {
   "use strict";
 
   var Model = require("web.Model");
@@ -28,20 +28,20 @@ odoo.define("website_purchase_review.main_page", function(require) {
   }
 
   function init_listeners() {
-    $("#save_global_values_btn").click(function() {
+    $("#save_global_values_btn").click(function () {
       save_global_values();
     });
 
     var products_list_header = $("#products_list_header");
-    products_list_header.find("input[type=checkbox]").change(function() {
+    products_list_header.find("input[type=checkbox]").change(function () {
       refresh_list();
     });
-    products_list_header.find("input[type=text]").keyup(function() {
+    products_list_header.find("input[type=text]").keyup(function () {
       refresh_list();
     });
     $("#buttons_panel")
       .find("button")
-      .click(function() {
+      .click(function () {
         var tagId = $(this).attr("id");
         switch (tagId) {
           case "save_line":
@@ -61,7 +61,7 @@ odoo.define("website_purchase_review.main_page", function(require) {
             break;
         }
       });
-    $("#button_reload_products").click(function() {
+    $("#button_reload_products").click(function () {
       load_product(current_product_id, true);
     });
   }
@@ -80,7 +80,7 @@ odoo.define("website_purchase_review.main_page", function(require) {
     if (preSelectedPackaging.getAttribute("value")) {
       unitQty.readOnly = false;
       productQty.readOnly = true;
-      _.each(selectPackagingType.options, function(option) {
+      _.each(selectPackagingType.options, function (option) {
         if (preSelectedPackaging.getAttribute("value") === option.value) {
           option.selected = true;
         }
@@ -90,7 +90,7 @@ odoo.define("website_purchase_review.main_page", function(require) {
       productQty.readOnly = false;
     }
 
-    unitQty.addEventListener("input", function() {
+    unitQty.addEventListener("input", function () {
       if (unitQty.value) {
         unitQty.readOnly = false;
         unitQty.value = parseInt(unitQty.value);
@@ -100,14 +100,14 @@ odoo.define("website_purchase_review.main_page", function(require) {
       }
     });
 
-    selectPackagingType.addEventListener("change", function() {
+    selectPackagingType.addEventListener("change", function () {
       unitQty.value = "";
       if (selectPackagingType.value) {
         unitQty.readOnly = false;
         productQty.readOnly = true;
         preSelectedPackaging.setAttribute("value", selectPackagingType.value);
         selectPackagingType.selectedOptions[0].selected = true;
-        _.each(selectPackagingType.options, function(option) {
+        _.each(selectPackagingType.options, function (option) {
           if (option.value != selectPackagingType.value) {
             option.selected = false;
           }
@@ -118,7 +118,7 @@ odoo.define("website_purchase_review.main_page", function(require) {
         productQty.readOnly = false;
         preSelectedPackaging.setAttribute("value", "");
         selectPackagingType.selectedOptions[0].selected = true;
-        _.each(selectPackagingType.options, function(option) {
+        _.each(selectPackagingType.options, function (option) {
           option.selected = false;
         });
       }
@@ -144,7 +144,7 @@ odoo.define("website_purchase_review.main_page", function(require) {
   }
 
   function init_shortcuts() {
-    $(document).keydown(function(e) {
+    $(document).keydown(function (e) {
       switch (e.which) {
         case 39 && e.altKey:
           change_product("+1");
@@ -176,7 +176,7 @@ odoo.define("website_purchase_review.main_page", function(require) {
       _set_loaded_products(JSON.parse(products));
       return;
     }
-    PO.call("get_products", [purchase_order_id]).then(function(result) {
+    PO.call("get_products", [purchase_order_id]).then(function (result) {
       sessionStorage.setItem(storageKey, JSON.stringify(result));
       _set_loaded_products(result);
       return;
@@ -184,7 +184,7 @@ odoo.define("website_purchase_review.main_page", function(require) {
   }
 
   function _set_loaded_products(products) {
-    $.each(products, function(index) {
+    $.each(products, function (index) {
       products_list.push({
         id: products[index].id,
         name: products[index].name,
@@ -212,7 +212,7 @@ odoo.define("website_purchase_review.main_page", function(require) {
     var products_with_promo = $("#products_with_promo").is(":checked");
     var product_name = $("#product_name").val();
 
-    current_products_list = products_list.filter(function(product) {
+    current_products_list = products_list.filter(function (product) {
       if (ordered_product && !product.ordered_products) {
         return false;
       }
@@ -237,7 +237,7 @@ odoo.define("website_purchase_review.main_page", function(require) {
     var products_list_tag = $("#products_list");
     products_list_tag.empty();
 
-    $.each(current_products_list, function(index) {
+    $.each(current_products_list, function (index) {
       var product_container = $("<div/>");
       var product_tag = $("<input/>", {
         type: "radio",
@@ -245,7 +245,7 @@ odoo.define("website_purchase_review.main_page", function(require) {
         value: current_products_list[index].id,
       });
 
-      product_tag.click(function() {
+      product_tag.click(function () {
         var productId = parseInt($(this).val());
         load_product(productId);
       });
@@ -272,23 +272,21 @@ odoo.define("website_purchase_review.main_page", function(require) {
 
   function load_stock_graph() {
     var PP = new Model("product.product");
-    PP.call("get_graph_values", [current_product_id]).then(function(result) {
-      nv.addGraph(function() {
+    PP.call("get_graph_values", [current_product_id]).then(function (result) {
+      nv.addGraph(function () {
         var chart = nv.models
           .discreteBarChart()
-          .x(function(d) {
+          .x(function (d) {
             return d.label;
           })
-          .y(function(d) {
+          .y(function (d) {
             return d.value;
           })
           .staggerLabels(true)
           .valueFormat(d3.format(",.0f"))
           .showValues(true);
 
-        d3.select("#stock_graph svg")
-          .datum(result)
-          .call(chart);
+        d3.select("#stock_graph svg").datum(result).call(chart);
 
         nv.utils.windowResize(chart.update);
       });
@@ -299,7 +297,7 @@ odoo.define("website_purchase_review.main_page", function(require) {
     // Default product
     var newProductId = products_list[0].id;
 
-    $.each(current_products_list, function(index) {
+    $.each(current_products_list, function (index) {
       if (current_products_list[index].id === current_product_id) {
         switch (step) {
           case "+1":
@@ -383,7 +381,7 @@ odoo.define("website_purchase_review.main_page", function(require) {
     };
 
     var PO = new Model("purchase.order");
-    PO.call("set_overwrite_values", [purchase_order_id, vals]).then(function(result) {
+    PO.call("set_overwrite_values", [purchase_order_id, vals]).then(function (result) {
       if (global_discount_global) {
         $("#discount_global").val(global_discount_global);
       }

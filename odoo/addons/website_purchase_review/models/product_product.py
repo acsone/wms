@@ -4,7 +4,7 @@ from datetime import date, datetime
 
 from dateutil.relativedelta import relativedelta
 
-from odoo import api, fields, models
+from odoo import fields, models
 from odoo.tools import float_compare, float_round
 
 
@@ -27,7 +27,9 @@ class ProductProduct(models.Model):
 
     def _compute_advised_qty(self):
         """
-        Compute an advised quantity. The advised quantity must be the same
+        Compute an advised quantity.
+
+        The advised quantity must be the same
         than the value computed by reordering rules
         :return:
         """
@@ -200,6 +202,7 @@ class ProductProduct(models.Model):
     def get_graph_values(self):
         """
         Return the number of sale by month on 1 year.
+
         january is always the first value and december is always the last value
 
         - If the month is in the past (eg: date today == 15 February 2018
@@ -247,8 +250,8 @@ class ProductProduct(models.Model):
             # If the current month is less than today
             # (take data in the current year)
             if month < today.month:
-                label = "%02d/%s" % (month, str(today.year)[2:])
-                value = values.get("%s-%02d" % (today.year, month), 0)
+                label = f"{month}/{str(today.year)[2:]}"
+                value = values.get(f"{today.year}-{month}", 0)
                 month_values = [{"label": label, "value": value}]
             # If the current month is the same than today
             # (take data in the current year AND in the last year)
@@ -256,25 +259,19 @@ class ProductProduct(models.Model):
                 # We don't take values in the current year if we are the first
                 # day of month (there are no data for the current month)
                 if today.day == 1:
-                    label = "%02d/%s" % (month, str(today.year - 1)[2:])
-                    value = values.get("%s-%02d" % (today.year - 1, month), 0)
+                    label = f"{month}/{str(today.year - 1)[2:]}"
+                    value = values.get(f"{today.year - 1}-{month}", 0)
                     month_values = [{"label": label, "value": value}]
                 # Otherwise we take values in the current year and in the last
                 # year
                 else:
-                    label_current_year = "%02d/%02d/%s" % (
-                        today.day - 1,
-                        month,
-                        str(today.year)[2:],
+                    label_current_year = (
+                        f"{today.day - 1}/{month}/{str(today.year)[2:]}"
                     )
-                    value_current_year = values.get("%s-%02d" % (today.year, month), 0)
+                    value_current_year = values.get(f"{today.year}-{month}", 0)
 
-                    label_last_year = "%02d/%02d/%s" % (
-                        today.day,
-                        month,
-                        str(today.year - 1)[2:],
-                    )
-                    value_last_year = values.get("%s-%02d" % (today.year - 1, month), 0)
+                    label_last_year = f"{today.day}/{month}/{str(today.year - 1)[2:]}"
+                    value_last_year = values.get(f"{today.year - 1}-{month}", 0)
 
                     month_values = [
                         {"label": label_current_year, "value": value_current_year},
@@ -282,8 +279,8 @@ class ProductProduct(models.Model):
                     ]
             # Otherwise we take values in the last year
             else:
-                label = "%02d/%s" % (month, str(today.year - 1)[2:])
-                value = values.get("%s-%02d" % (today.year - 1, month), 0)
+                label = f"{month}/{str(today.year - 1)[2:]}"
+                value = values.get(f"{today.year - 1}-{month}", 0)
                 month_values = [{"label": label, "value": value}]
 
             graph_values += month_values
