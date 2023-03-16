@@ -1,28 +1,17 @@
 # © 2018 Okia SPRL <Sylvain Van Hoof>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-from datetime import date, datetime
+from datetime import datetime
 
-from dateutil.relativedelta import relativedelta
-
-from odoo import fields, models
+from odoo import fields
 from odoo.tools import float_compare, float_round
 
+from odoo.addons.product.models.product_product import ProductProduct as ProductBase
 
-class ProductProduct(models.Model):
-    _inherit = "product.product"
+
+class ProductProduct(ProductBase):
 
     advised_qty = fields.Integer(
         "Advised quantity", readonly=True, compute="_compute_advised_qty"
-    )
-    average_annual_consumption = fields.Float(
-        "Average annual consumption",
-        readonly=True,
-        compute="_compute_average_consumption",
-    )
-    average_three_months_consumption = fields.Float(
-        "Average three months consumption",
-        readonly=True,
-        compute="_compute_average_consumption",
     )
 
     def _compute_advised_qty(self):
@@ -30,16 +19,19 @@ class ProductProduct(models.Model):
         Compute an advised quantity.
 
         The advised quantity must be the same
-        than the value computed by reordering rules
+        as the value computed by reordering rules
         :return:
         """
-        orderpoints = self.mapped("orderpoint_ids")
+        self.mapped("orderpoint_ids")
+
+        # TODO verify that this is really not needed anymore.
+        # TODO How is this taken into account in 16?
 
         # Compute quantities to subtract
-        if orderpoints:
-            subtract_quantity = orderpoints.subtract_procurements_from_orderpoints()
-        else:
-            subtract_quantity = {}
+        # if orderpoints:
+        #     subtract_quantity = orderpoints.subtract_procurements_from_orderpoints()
+        # else:
+        #     subtract_quantity = {}
 
         for product in self:
             virtual_available = product.virtual_available
@@ -52,9 +44,10 @@ class ProductProduct(models.Model):
             diff_qty = float_compare(
                 virtual_available,
                 orderpoint.product_min_qty,
-                precision_rounding=orderpoint.product_uom.rounding,
+                precision_rounding=product.uom_id.rounding,
             )
             if diff_qty > 0:
+                product.advised_qty = False
                 continue
 
             # Compute the qty to order
@@ -100,90 +93,21 @@ class ProductProduct(models.Model):
             ):
                 continue
 
-            if orderpoint and orderpoint.id in subtract_quantity:
-                qty -= subtract_quantity[orderpoint.id]
+            # TODO see previous
+            # if orderpoint and orderpoint.id in subtract_quantity:
+            #     qty -= subtract_quantity[orderpoint.id]
             qty_rounded = float_round(
                 qty, precision_rounding=orderpoint.product_uom.rounding
             )
             if qty_rounded > 0:
                 product.advised_qty = qty_rounded
 
-    def _compute_average_consumption(self):
-        # Stop the method if self is empty.
-        # Otherwise SQL query will fail (ids = [])
-        if not self:
-            return
-        today = datetime.now()
-        today_minus_one_year = today - relativedelta(years=1)
-        today_str = fields.Datetime.to_string(today)
-        today_minus_one_year_str = fields.Datetime.to_string(today_minus_one_year)
-        # Compute annual consumption
-        query_annual = """
-        SELECT
-          sol.product_id,
-          sum(sol.product_uom_qty)
-        FROM sale_order_line AS sol
-          INNER JOIN sale_order so ON sol.order_id = so.id
-        WHERE so.confirmation_date IS NOT NULL
-          AND sol.product_id IN %s
-          AND so.confirmation_date >= %s
-          AND so.confirmation_date < %s
-          AND so.state <> 'cancel'
-        GROUP BY sol.product_id
-        """
-        self.env.cr.execute(
-            query_annual, (tuple(self.ids), today_minus_one_year_str, today_str)
-        )
-        annual_consumption_per_products = dict(self.env.cr.fetchall())
-
-        # Compute three months consumption
-        last_year_start = (date.today() - relativedelta(years=1)).replace(day=1)
-        last_year_start_str = fields.Datetime.to_string(last_year_start)
-        last_year_end = last_year_start + relativedelta(months=3)
-        last_year_end_str = fields.Datetime.to_string(last_year_end)
-        query_period = """
-        SELECT
-          sol.product_id,
-          sum(sol.product_uom_qty)
-        FROM sale_order_line AS sol
-          INNER JOIN sale_order so ON sol.order_id = so.id
-        WHERE so.confirmation_date IS NOT NULL
-          AND sol.product_id IN %s
-          AND so.confirmation_date >= %s
-          AND so.confirmation_date < %s
-          AND so.state <> 'cancel'
-        GROUP BY sol.product_id
-        """
-        self.env.cr.execute(
-            query_period, (tuple(self.ids), last_year_start_str, last_year_end_str)
-        )
-        three_months_consumption_per_products = dict(self.env.cr.fetchall())
-
-        for product in self:
-            annual_consumption = annual_consumption_per_products.get(product.id, 0)
-            if annual_consumption:
-                av_annual_consumption = round(float(annual_consumption) / 12, 2)
-            else:
-                av_annual_consumption = 0
-            product.average_annual_consumption = av_annual_consumption
-
-            three_months_consumption = three_months_consumption_per_products.get(
-                product.id, 0
-            )
-            if three_months_consumption:
-                av_three_months_consumption = round(
-                    float(three_months_consumption) / 3, 2
-                )
-            else:
-                av_three_months_consumption = 0
-            product.average_three_months_consumption = av_three_months_consumption
-
     def get_lots(self):
         self.ensure_one()
 
-        lots = self.env["stock.production.lot"].search(
-            [("product_id", "=", self.id), ("is_archived", "=", False)],
-            order="life_date",
+        lots = self.env["stock.lot"].search(
+            [("product_id", "=", self.id)],
+            order="expiration_date",
         )
 
         return lots
@@ -193,7 +117,7 @@ class ProductProduct(models.Model):
 
         sellers = self.seller_ids
         sellers_with_discount = sellers.filtered(
-            lambda s: s.discount_purchase or s.ratio_promotional_product
+            lambda s: s.discount or s.ratio_promotional_product
         )
         sellers_with_discount.sorted(lambda seller: seller.date_start)
 
@@ -226,14 +150,14 @@ class ProductProduct(models.Model):
         # Retrieve sales by year/month (eg: 2017-07)
         query = """
         SELECT
-          to_char(so.confirmation_date, 'YYYY-MM') AS year_month,
+          to_char(so.date_order, 'YYYY-MM') AS year_month,
           sum(sol.product_uom_qty)
         FROM sale_order_line AS sol
           INNER JOIN sale_order so ON sol.order_id = so.id
-        WHERE so.confirmation_date IS NOT NULL
+        WHERE so.state IN ('sale', 'done')
           AND sol.product_id = %s
-          AND so.confirmation_date::DATE >= (NOW() - INTERVAL '1 year')::DATE
-          AND so.confirmation_date::DATE < NOW()::DATE
+          AND so.date_order::DATE >= (NOW() - INTERVAL '1 year')::DATE
+          AND so.date_order::DATE < NOW()::DATE
           AND so.state <> 'cancel'
         GROUP BY year_month
         ORDER BY year_month;

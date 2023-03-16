@@ -1,15 +1,15 @@
 import json
 import logging
 from datetime import datetime
-from urllib import urlencode
+from urllib.parse import urlencode
 
 from dateutil.relativedelta import relativedelta
-from werkzeug.utils import redirect
 
-from odoo import fields, http
+from odoo import _, fields, http
+from odoo.exceptions import UserError
 from odoo.http import request
 
-from odoo.addons.web.controllers.main import Home, module_boot
+from odoo.addons.web.controllers.home import Home
 
 _logger = logging.getLogger(__name__)
 
@@ -26,9 +26,9 @@ FILTERS = [
 class PurchaseReview(Home):
     @http.route(  # noqa: C901
         [
-            '/purchase_review/<model("purchase.order"):po>',
-            '/purchase_review/<model("purchase.order"):po>/'
-            '<model("product.product"):product>',
+            "/purchase_review/<model('purchase.order'):po>",
+            "/purchase_review/<model('purchase.order'):po>/"
+            "<model('product.product'):product>",
         ],
         type="http",
         methods=["GET", "POST"],
@@ -37,39 +37,42 @@ class PurchaseReview(Home):
         csrf=False,
     )
     def purchase_review(self, po, product=None, **kw):
-        if not product:
-            products = po.get_products()
-            if not products:
-                raise Exception("There are no products for this supplier")
+        if not (product or self._product_from_po(po)):
+            raise UserError(_("There are no products for this supplier"))
 
+        po_line = po.order_line.filtered(lambda line: line.product_id == product)
+        if len(po_line) > 1:
+            raise UserError(_("You can only have one purchase order line by product"))
+
+        # Pop debug key to avoid having different results with debug activated
+        if url := self._no_debug_url(po, kw):
+            res = request.redirect(url)
+        else:
+            values = self._values(po, po_line, product)
+            res = request.render("website_purchase_review.main_page", values)
+        return res
+
+    def _product_from_po(self, po):
+        products = po.get_products()
+        product = None
+        if products:
             product_id = products[0]["id"]
             product = request.env["product.product"].browse(product_id)
+        return product
 
-        params = {}
-        for filter_ in FILTERS:
-            value = kw.pop(filter_, None)
-            if value:
-                params[filter_] = value
-        # Pop debug key to avoid having different results with debug activated
-        kw_copy = kw.copy()
-        if "debug" in kw_copy:
-            kw_copy.pop("debug")
-        if kw_copy:
-            po.update_or_create_line(kw_copy)
+    def _values(self, po, po_line, product):
+        values = self._base_values(po, product)
+        if po_line:
+            date_planned_str = po_line.date_planned
+            date_planned = fields.Datetime.from_string(date_planned_str)
+            values.update(self._values_with_po_line(po_line, product, date_planned))
+        else:
+            values.update(self._values_with_seller(product, po, values))
+        return values
 
-            if params.get("next_product_id"):
-                url = f"/purchase_review/{po.id}/{params['next_product_id']}"
-            else:
-                url = f"/purchase_review/{po.id}"
-
-            if params:
-                url += f"?{urlencode(params)}"
-
-            return redirect(url)
-
-        render_values = {
+    def _base_values(self, po, product):
+        values = {
             "session_info": json.dumps(request.env["ir.http"].session_info()),
-            "modules": json.dumps(module_boot()),
             "po": po,
             "res_company": request.env.user.company_id,
             "current_product": product,
@@ -82,75 +85,76 @@ class PurchaseReview(Home):
             "is_existing_line": False,
             "return_url": po.get_url(),
         }
-
         if po.discount_global_overwrite:
-            render_values["discount_global_overwrite"] = po.discount_global_overwrite
+            values["discount_global_overwrite"] = po.discount_global_overwrite
 
         if po.promotion_supplier_overwrite:
-            render_values[
-                "promotion_supplier_overwrite"
-            ] = po.promotion_supplier_overwrite
+            values["promotion_supplier_overwrite"] = po.promotion_supplier_overwrite
+        return values
 
-        po_line = po.order_line.filtered(lambda line: line.product_id == product)
-        if len(po_line) > 1:
-            raise Exception("You can only have one purchase order line by product")
+    def _values_with_po_line(self, po_line, product, date_planned):
+        return {
+            "current_product": product,
+            "product_qty": po_line.product_qty,
+            "pre_selected_packaging": po_line.product_packaging_id.id,
+            "unit_qty": po_line.product_packaging_qty,
+            # "price_unit_base": po_line.price_unit_base, #  TODO Waiting for specific_purchase
+            "discount_global": po_line.discount_global,
+            "promotion_supplier": po_line.promotion_supplier,
+            "date_planned": fields.Date.to_string(date_planned),
+            "is_existing_line": True,
+            "is_confirmed_line": po_line.is_confirmed_line,
+        }
 
-        if po_line:
-            date_planned_str = po_line.date_planned
-            date_planned = fields.Datetime.from_string(date_planned_str)
-            render_values.update(
-                {
-                    "current_product": product,
-                    "product_qty": po_line.product_qty,
-                    "pre_selected_packaging": po_line.product_packaging.id,
-                    "unit_qty": po_line.product_packaging_qty,
-                    "price_unit_base": po_line.price_unit_base,
-                    "discount_global": po_line.discount_global,
-                    "promotion_supplier": po_line.promotion_supplier,
-                    "date_planned": fields.Date.to_string(date_planned),
-                    "is_existing_line": True,
-                    "is_confirmed_line": po_line.is_confirmed_line,
-                }
-            )
+    def _values_with_seller(self, product, po, values):
+        seller = product._select_seller(partner_id=po.partner_id)
+
+        # Set the price_unit_base unit base
+        price_unit_base = seller.price if seller.price else 0
+
+        # Set the date planned
+        date_planned = self._date_planned(seller, po)
+
+        # Set the discount global
+        if values.get("discount_global_overwrite"):
+            discount_global = values["discount_global_overwrite"]
         else:
-            seller = product._select_seller(partner_id=po.partner_id)
+            discount_global = po.partner_id.supplier_discount
 
-            # Set the price_unit_base unit base
-            price_unit_base = seller.price or 0
+        # Set the promotion supplier
+        if values.get("promotion_supplier_overwrite"):
+            promotion_supplier = values["promotion_supplier_overwrite"]
+        else:
+            promotion_supplier = seller.discount_purchase or 0
 
-            # Set the date planned
-            if seller:
-                delivery_lead_time = seller.delay
-                date_planned = datetime.now() + relativedelta(days=delivery_lead_time)
-                if po.date_planned:
-                    po_date_planned = fields.Datetime.from_string(po.date_planned)
-                    if po_date_planned > date_planned:
-                        date_planned = po_date_planned
+        return {
+            "price_unit_base": price_unit_base,
+            "discount_global": discount_global,
+            "promotion_supplier": promotion_supplier,
+            "date_planned": fields.Date.to_string(date_planned),
+        }
+
+    def _no_debug_url(self, po, kw):
+        params = {key: param for key, param in kw.items() if key in FILTERS}
+        kw_copy = kw.copy()
+        debug = kw_copy.pop("debug", False)
+        url = ""
+        if debug:
+            po.update_or_create_line(kw_copy)
+            if params.get("next_product_id"):
+                url = f"/purchase_review/{po.id}/{params['next_product_id']}"
             else:
-                if po.date_planned:
-                    date_planned = fields.Datetime.from_string(po.date_planned)
-                else:
-                    date_planned = datetime.now()
+                url = f"/purchase_review/{po.id}"
+            if params:
+                url += f"?{urlencode(params)}"
+        return url
 
-            # Set the discount global
-            if render_values.get("discount_global_overwrite"):
-                discount_global = render_values["discount_global_overwrite"]
-            else:
-                discount_global = po.partner_id.supplier_discount
-
-            # Set the promotion supplier
-            if render_values.get("promotion_supplier_overwrite"):
-                promotion_supplier = render_values["promotion_supplier_overwrite"]
-            else:
-                promotion_supplier = seller.discount_purchase or 0
-
-            render_values.update(
-                {
-                    "price_unit_base": price_unit_base,
-                    "discount_global": discount_global,
-                    "promotion_supplier": promotion_supplier,
-                    "date_planned": fields.Date.to_string(date_planned),
-                }
-            )
-
-        return request.render("website_purchase_review.main_page", render_values)
+    def _date_planned(self, seller, po):
+        date_planned = datetime.now()
+        if seller:
+            delivery_lead_time = seller.delay
+            date_planned += relativedelta(days=delivery_lead_time)
+            date_planned = max([po.date_planned, date_planned])
+        elif po.date_planned:
+            date_planned = fields.Datetime.from_string(po.date_planned)
+        return date_planned

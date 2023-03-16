@@ -5,13 +5,13 @@
       type="text/javascript"
       src="/website_purchase_review/static/src/js/purchase_review.js"
     />
-    <script type="text/javascript" src="/web/static/lib/nvd3/d3.v3.js" />
-    <script type="text/javascript" src="/web/static/lib/nvd3/nv.d3.js" />
+<!--    <script type="text/javascript" src="/web/static/lib/chart/chart.js" />-->
+<!--    <script type="text/javascript" src="/web/static/lib/nvd3/nv.d3.js" />-->
     <link
       rel="stylesheet"
       href="/website_purchase_review/static/src/css/purchase_review.css"
     />
-    <link rel="stylesheet" type="text/css" href="/web/static/lib/nvd3/nv.d3.css" />
+<!--    <link rel="stylesheet" type="text/css" href="/web/static/lib/nvd3/nv.d3.css" />-->
   </template>
   <template id="main_page" name="Purchase review">&lt;!DOCTYPE html&gt;
 <html>
@@ -20,11 +20,11 @@
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
         <meta http-equiv="content-type" content="text/html, charset=utf-8" />
-        <link
-          rel="shortcut icon"
-          href="/web/static/src/img/favicon.ico"
-          type="image/x-icon"
-        />
+<!--        <link-->
+<!--          rel="shortcut icon"-->
+<!--          href="/web/static/src/img/favicon.ico"-->
+<!--          type="image/x-icon"-->
+<!--        />-->
         <script type="text/javascript">
             var odoo = {
             csrf_token: "<t t-esc="request.csrf_token(None)" />",
@@ -384,23 +384,23 @@
                               name="orderpoint_qty_multiple"
                               id="orderpoint_qty_multiple"
                               t-att-value="current_product.orderpoint_qty_multiple"
-                              t-att-readonly="current_product.is_mto_product and 'readonly' or None"
+                              t-att-readonly="current_product.is_mto and 'readonly' or None"
                             />
                           </td>
                         </tr>
-                        <tr>
-                          <td>Price</td>
-                          <td>
-                            <input
-                              type="number"
-                              name="price_unit_base"
-                              step="0.01"
-                              id="price_unit_base"
-                              t-att-value="price_unit_base"
-                              required="required"
-                            />
-                          </td>
-                        </tr>
+<!--                        <tr>-->
+<!--                          <td>Price</td>-->
+<!--                          <td>-->
+<!--                            <input-->
+<!--                              type="number"-->
+<!--                              name="price_unit_base"-->
+<!--                              step="0.01"-->
+<!--                              id="price_unit_base"-->
+<!--                              t-att-value="price_unit_base"-->
+<!--                              required="required"-->
+<!--                            />-->
+<!--                          </td>-->
+<!--                        </tr>-->
                         <tr>
                           <td>Scheduled date</td>
                           <td>

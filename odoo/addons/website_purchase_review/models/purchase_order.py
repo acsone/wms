@@ -4,14 +4,15 @@ import logging
 import urllib
 from datetime import datetime
 
-from odoo import _, fields, models
+from odoo import _, fields
 from odoo.exceptions import ValidationError
+
+from odoo.addons.purchase.models.purchase import PurchaseOrder as PurchaseOrderBase
 
 _logger = logging.getLogger(__name__)
 
 
-class PurchaseOrder(models.Model):
-    _inherit = "purchase.order"
+class PurchaseOrder(PurchaseOrderBase):
 
     discount_global_overwrite = fields.Float("Discount global overwrite")
     promotion_supplier_overwrite = fields.Float("Promotion supplier overwrite")
@@ -50,20 +51,15 @@ class PurchaseOrder(models.Model):
 
     def set_overwrite_values(self, vals):
         self.ensure_one()
-        trigger_onchange = False
 
         discount_global = vals.get("global_discount_global")
         if discount_global:
             self.order_line.write({"discount_global": discount_global})
             self.discount_global_overwrite = discount_global
-            trigger_onchange = True
         promotion_supplier = vals.get("global_promotion_supplier")
         if promotion_supplier:
             self.order_line.write({"promotion_supplier": promotion_supplier})
             self.promotion_supplier_overwrite = promotion_supplier
-            trigger_onchange = True
-        if trigger_onchange:
-            self.order_line._onchange_price_unit()
 
     def get_products(self):
         self.ensure_one()
@@ -113,13 +109,7 @@ class PurchaseOrder(models.Model):
     def update_or_create_line(self, vals):
         self.ensure_one()
 
-        for key in (
-            "order_id",
-            "product_id",
-            "product_qty",
-            "price_unit_base",
-            "date_planned",
-        ):
+        for key in self._line_required_fields():
             if not vals.get(key):
                 _logger.error("No value for %s", key)
                 return False
@@ -128,7 +118,9 @@ class PurchaseOrder(models.Model):
         vals["order_id"] = int(vals["order_id"])
         vals["product_id"] = int(vals["product_id"])
         vals["product_qty"] = float(vals["product_qty"])
-        vals["price_unit_base"] = float(vals["price_unit_base"])
+
+        # TODO price_unit_base is defined in specific_purchase
+        # vals["price_unit_base"] = float(vals["price_unit_base"])
 
         date_planned_str = vals["date_planned"]
         date_planned = fields.Datetime.from_string(date_planned_str)
@@ -141,29 +133,7 @@ class PurchaseOrder(models.Model):
         else:
             vals["date_planned"] = fields.Datetime.to_string(date_planned)
 
-        orderpoint_min = vals.pop("orderpoint_min", 0)
-        orderpoint_max = vals.pop("orderpoint_max", 0)
-        orderpoint_qty_multiple = vals.pop("orderpoint_qty_multiple", 0)
-
-        if orderpoint_min or orderpoint_max or orderpoint_qty_multiple:
-            product = self.env["product.product"].browse(vals["product_id"])
-            orderpoint_min = float(orderpoint_min) if orderpoint_min else 0.0
-            orderpoint_max = float(orderpoint_max) if orderpoint_max else 0.0
-            orderpoint_qty_multiple = (
-                float(orderpoint_qty_multiple) if orderpoint_qty_multiple else 0.0
-            )
-            if (
-                product.orderpoint_min != orderpoint_min
-                or product.orderpoint_max != orderpoint_max
-                or product.orderpoint_qty_multiple != orderpoint_qty_multiple
-            ):
-                product.sudo().write(
-                    {
-                        "orderpoint_min": orderpoint_min,
-                        "orderpoint_max": orderpoint_max,
-                        "orderpoint_qty_multiple": orderpoint_qty_multiple,
-                    }
-                )
+        self._update_orderpoint(vals)
 
         p_id = vals.pop("packaging_ids", 0)
         u_qty = vals.pop("unit_qty", 0)
@@ -176,9 +146,8 @@ class PurchaseOrder(models.Model):
             )
         else:
             vals.update({"product_packaging": "", "product_packaging_qty": ""})
-        PurchaseOrderLine = self.env["purchase.order.line"]
 
-        existing_line = PurchaseOrderLine.search(
+        existing_line = self.env["purchase.order.line"].search(
             [
                 ("order_id", "=", vals["order_id"]),
                 ("product_id", "=", vals["product_id"]),
@@ -186,47 +155,90 @@ class PurchaseOrder(models.Model):
             limit=1,
         )
         if existing_line:
-            vals.pop("order_id")
-            vals.pop("product_id")
-            old_price_unit_base = existing_line.price_unit_base
-            old_discount_global = existing_line.discount_global
-            old_promotion_supplier = existing_line.promotion_supplier
-            existing_line.write(vals)
-            if (
-                old_price_unit_base != existing_line.price_unit_base
-                or old_discount_global != existing_line.discount_global
-                or old_promotion_supplier != existing_line.promotion_supplier
-            ):
-                existing_line._onchange_price_unit()
+            self._update_line(existing_line, vals)
         else:
-
-            product_id = vals.pop("product_id")
-            # TODO: not sure why we don't use all the values defined in `vals`
-            line = PurchaseOrderLine.new(
-                {
-                    # mandatory to make the onchange work fine w/ vendor info
-                    "product_id": product_id,
-                    "partner_id": self.partner_id,
-                    "order_id": vals["order_id"],
-                }
-            )
-            line.onchange_product_id()
-            new_vals = line._convert_to_write(line._cache)
-
-            new_vals.update(vals)
-            new_line = PurchaseOrderLine.create(new_vals)
-
-            # The subtotal is not correct if we don't call this onchange.
-            # Calling the onchange after 'onchange_product_id' above does
-            # not give the expected result, probably because the 'create()'
-            # method modifies some values.
-            new_line._onchange_price_unit()
+            self._create_line(vals)
         if date_planned < today_date:
             self.date_planned = po_date_planned
         elif self.date_planned != fields.Datetime.to_string(date_planned):
             self.date_planned = date_planned
 
         return True
+
+    def _line_required_fields(self):
+        return (
+            "order_id",
+            "product_id",
+            "product_qty",
+            "price_unit_base",
+            "date_planned",
+        )
+
+    def _update_orderpoint(self, vals):
+        orderpoint_min = vals.pop("orderpoint_min", 0)
+        orderpoint_max = vals.pop("orderpoint_max", 0)
+        orderpoint_qty_multiple = vals.pop("orderpoint_qty_multiple", 0)
+
+        if orderpoint_min or orderpoint_max or orderpoint_qty_multiple:
+            product = self.env["product.product"].browse(vals["product_id"])
+            orderpoint_min = float(orderpoint_min) if orderpoint_min else 0.0
+            orderpoint_max = float(orderpoint_max) if orderpoint_max else 0.0
+            # orderpoint_qty_multiple = (
+            #     float(orderpoint_qty_multiple) if orderpoint_qty_multiple else 0.0
+            # )
+            if (
+                product.reordering_min_qty != orderpoint_min
+                or product.reordering_max_qty != orderpoint_max
+                # TODO what is this? Is it still relevant in 16
+                # or product.orderpoint_qty_multiple != orderpoint_qty_multiple
+            ):
+                product.sudo().write(
+                    {
+                        "reordering_min_qty": orderpoint_min,
+                        "reordering_max_qty": orderpoint_max,
+                        # "orderpoint_qty_multiple": orderpoint_qty_multiple,
+                    }
+                )
+
+    def _update_line(self, existing_line, vals):
+        vals.pop("order_id")
+        vals.pop("product_id")
+        # old_price_unit_base = existing_line.price_unit_base
+        old_discount_global = existing_line.discount_global
+        old_promotion_supplier = existing_line.promotion_supplier
+        existing_line.write(vals)
+        if (
+            # old_price_unit_base != existing_line.price_unit_base
+            old_discount_global != existing_line.discount_global
+            or old_promotion_supplier != existing_line.promotion_supplier
+        ):
+            existing_line._onchange_price_unit()
+
+    def _create_line(self, vals):
+        self.env["purchase.order.line"].create(
+            {
+                "product_id": vals.get("product_id"),
+                "partner_id": self.partner_id,
+                "order_id": vals.get("order_id"),
+            }
+        )
+
+        # po_line = self.env["purchase.order.line"]
+        # product_id = vals.pop("product_id")
+        # # TODO: not sure why we don't use all the values defined in `vals`
+        # line = po_line.new(
+        #     {
+        #         # mandatory to make the onchange work fine w/ vendor info
+        #         "product_id": product_id,
+        #         "partner_id": self.partner_id,
+        #         "order_id": vals["order_id"],
+        #     }
+        # )
+        # line.onchange_product_id()
+        # new_vals = line._convert_to_write(line._cache)
+        #
+        # new_vals.update(vals)
+        # po_line.create(new_vals)
 
     def get_url(self):
         self.ensure_one()
@@ -238,4 +250,4 @@ class PurchaseOrder(models.Model):
             "action": self.env.ref("purchase.purchase_rfq").id,
             "menu_id": self.env.ref("purchase.menu_purchase_root").id,
         }
-        return "/web#" + urllib.urlencode(vals)
+        return f"/web#{urllib.parse.urlencode(vals)}"
