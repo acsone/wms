@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # © 2018 Okia SPRL <Sylvain Van Hoof>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 import logging
@@ -23,7 +22,6 @@ class PurchaseOrder(models.Model):
         "Total lines done", compute="_compute_total_lines", readonly=True
     )
 
-    @api.multi
     def _compute_total_lines(self):
         for purchase in self:
             purchase.total_lines = len(purchase.order_line)
@@ -31,7 +29,6 @@ class PurchaseOrder(models.Model):
                 purchase.order_line.filtered(lambda line: line.is_confirmed_line)
             )
 
-    @api.multi
     def open_purchase_review_url(self):
         self.ensure_one()
 
@@ -52,7 +49,6 @@ class PurchaseOrder(models.Model):
 
         return {"type": "ir.actions.act_url", "url": url, "target": "self"}
 
-    @api.multi
     def set_overwrite_values(self, vals):
         self.ensure_one()
         trigger_onchange = False
@@ -70,7 +66,6 @@ class PurchaseOrder(models.Model):
         if trigger_onchange:
             self.order_line._onchange_price_unit()
 
-    @api.multi
     def get_products(self):
         self.ensure_one()
 
@@ -116,7 +111,6 @@ class PurchaseOrder(models.Model):
             )
         return result
 
-    @api.multi
     def update_or_create_line(self, vals):
         self.ensure_one()
 
@@ -235,7 +229,6 @@ class PurchaseOrder(models.Model):
 
         return True
 
-    @api.multi
     def get_url(self):
         self.ensure_one()
 

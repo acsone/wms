@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # © 2018 Okia SPRL <Sylvain Van Hoof>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 from datetime import date, datetime
@@ -26,7 +25,6 @@ class ProductProduct(models.Model):
         compute="_compute_average_consumption",
     )
 
-    @api.multi
     def _compute_advised_qty(self):
         """
         Compute an advised quantity. The advised quantity must be the same
@@ -108,7 +106,6 @@ class ProductProduct(models.Model):
             if qty_rounded > 0:
                 product.advised_qty = qty_rounded
 
-    @api.multi
     def _compute_average_consumption(self):
         # Stop the method if self is empty.
         # Otherwise SQL query will fail (ids = [])
@@ -179,7 +176,6 @@ class ProductProduct(models.Model):
                 av_three_months_consumption = 0
             product.average_three_months_consumption = av_three_months_consumption
 
-    @api.multi
     def get_lots(self):
         self.ensure_one()
 
@@ -190,7 +186,6 @@ class ProductProduct(models.Model):
 
         return lots
 
-    @api.multi
     def get_promotions(self):
         self.ensure_one()
 
@@ -202,7 +197,6 @@ class ProductProduct(models.Model):
 
         return list(sellers_with_discount)
 
-    @api.multi
     def get_graph_values(self):
         """
         Return the number of sale by month on 1 year.
