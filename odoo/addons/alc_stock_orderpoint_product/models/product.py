@@ -1,12 +1,15 @@
-# -*- coding: utf-8 -*-
 # © 2016 BCIM sprl (http://www.bcim.be)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import api, fields, models
+from odoo import api, fields
+
+from odoo.addons.product.models.product_product import ProductProduct as ProductBase
+from odoo.addons.product.models.product_template import (
+    ProductTemplate as ProductTemplateBase,
+)
 
 
-class ProductTemplate(models.Model):
-    _inherit = "product.template"
+class ProductTemplate(ProductTemplateBase):
 
     orderpoint_qty_multiple = fields.Float(
         "Qty Multiple",
@@ -60,8 +63,7 @@ class ProductTemplate(models.Model):
             )
 
 
-class ProductProduct(models.Model):
-    _inherit = "product.product"
+class ProductProduct(ProductBase):
 
     orderpoint_qty_multiple = fields.Float(
         "Qty Multiple",
@@ -91,9 +93,6 @@ class ProductProduct(models.Model):
                 "product_max_qty": product.orderpoint_max,
                 "qty_multiple": product.orderpoint_qty_multiple,
                 "active": product.active,
-                "location_id": self.env.ref(
-                    "stock.stock_location_stock"
-                ).location_id.id,
             }
         )
 

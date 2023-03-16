@@ -1,13 +1,14 @@
-# -*- coding: utf-8 -*-
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _, models
+from odoo import _
+
+from odoo.addons.stock.models.stock_orderpoint import (
+    StockWarehouseOrderpoint as StockWarehouseOrderpointBase,
+)
 
 
-class StockWarehouseOrderpoint(models.Model):
-
-    _inherit = "stock.warehouse.orderpoint"
+class StockWarehouseOrderpoint(StockWarehouseOrderpointBase):
 
     _sql_constraints = [
         (

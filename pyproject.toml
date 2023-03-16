@@ -359,7 +359,6 @@ exclude = [
   'odoo/addons/stock_constraint/*',
   'odoo/addons/stock_inventory_constrains/*',
   'odoo/addons/stock_lot_loss/*',
-  'odoo/addons/stock_orderpoint_product/*',
   'odoo/addons/stock_picking_sequence/*',
   'odoo/addons/stock_picking_zone/*',
   'odoo/addons/stock_product_bin/*',
