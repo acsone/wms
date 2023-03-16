@@ -285,6 +285,24 @@
                           </td>
                         </tr>
                         <tr>
+                          <td>Stock coverage (days)</td>
+                          <td>
+                            <strong>
+                              <t
+                                t-if="current_product.average_three_months_consumption"
+                              >
+                              <span
+                                  t-esc="round(int(current_product.advised_qty + product_qty + current_product.virtual_available) /
+                                  (current_product.average_three_months_consumption / 90.0), 2)"
+                                />
+                              </t>
+                              <t t-else="">
+                                <span>0</span>
+                              </t>
+                            </strong>
+                          </td>
+                        </tr>
+                        <tr>
                           <td>Ordered qty</td>
                           <td>
                             <input
