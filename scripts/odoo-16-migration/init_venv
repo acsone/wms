@@ -1,0 +1,18 @@
+#!/usr/bin/env -S python3 -u
+from tasks import venv
+
+
+def main():  # noqa: C901
+    venv.mkvenv(
+        "venv-16",
+        "python3.10",
+        pip_installs=[
+            ["-r", "../../requirements.txt"],
+            ["-e", "../../"],
+            ["setuptools-odoo"],
+        ],
+    )
+
+
+if __name__ == "__main__":
+    main()

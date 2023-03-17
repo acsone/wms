@@ -30,16 +30,27 @@ def _move_product_state(env):
 
 
 def _rename_state_id_in_product_template(env):
-    _logger.info("product.template: rename field 'state_id' in 'product_state_id")
-    fields = [
-        (
-            "product.template",
-            "product_template",
-            "state_id",
-            "product_state_id",
+    if not openupgrade.column_exists(env.cr, "product_template", "product_state_id"):
+        _logger.info("product.template: rename field 'state_id' in 'product_state_id")
+        fields = [
+            (
+                "product.template",
+                "product_template",
+                "state_id",
+                "product_state_id",
+            )
+        ]
+        openupgrade.rename_fields(env, fields)
+    else:
+        _logger.info("product.template: initialize field 'product_state_id")
+        openupgrade.logged_query(
+            env.cr,
+            """
+            UPDATE product_template
+            SET product_state_id = state_id
+            WHERE state_id IS NOT NULL
+            """,
         )
-    ]
-    openupgrade.rename_fields(env, fields)
 
 
 @openupgrade.migrate()

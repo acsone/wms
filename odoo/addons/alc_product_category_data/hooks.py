@@ -75,3 +75,14 @@ def pre_init_hook(cr):
             for xml_id in IDS
         ],
     )
+    # set xml_id on product.category records no_update=True
+    openupgrade.logged_query(
+        cr,
+        """
+        UPDATE ir_model_data
+        SET noupdate=True
+        WHERE module='alc_product_category_data'
+        AND name IN %s
+    """,
+        (tuple(IDS),),
+    )

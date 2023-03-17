@@ -16,3 +16,11 @@ def migrate(cr, version):
         WHERE sale_order.sale_channel=sale_channel.code
     """
     )
+    cr.execute(
+        """
+        UPDATE sale_order_line SET
+        sale_channel_id=sale_order.sale_channel_id
+        FROM sale_order
+        WHERE sale_order_line.order_id=sale_order.id
+    """
+    )
