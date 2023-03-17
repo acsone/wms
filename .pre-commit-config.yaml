@@ -201,7 +201,6 @@ exclude: |
   ^odoo/addons/alc_stock_picking_gls_check_validation/|
   ^odoo/addons/alc_stock_picking_number_package/|
   ^odoo/addons/alc_stock_picking_type_locking/|
-  ^odoo/addons/alc_stock_picking_wave_release_pickings/|
   ^odoo/addons/alc_stock_picking_wave_type/|
   ^odoo/addons/alc_stock_put_remaining_to_reserve/|
   ^odoo/addons/alc_stock_putaway/|
