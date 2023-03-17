@@ -1,12 +1,12 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* alc_older_stock_production_lot
+# 	* alc_older_stock_production_lot
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0+e\n"
+"Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: <>\n"
+"Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -14,21 +14,16 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_older_stock_production_lot
-#: model:ir.model.fields,field_description:alc_older_stock_production_lot.field_delivery_carrier_best_before_date
-#: model:ir.model.fields,field_description:alc_older_stock_production_lot.field_product_product_best_before_date
-#: model:ir.model.fields,field_description:alc_older_stock_production_lot.field_shopinvader_variant_best_before_date
-msgid "Best before date"
+#: model:ir.model.fields,field_description:alc_older_stock_production_lot.field_product_product__best_before_date
+msgid "Best before"
 msgstr ""
 
 #. module: alc_older_stock_production_lot
-#: model:ir.model.fields,field_description:alc_older_stock_production_lot.field_delivery_carrier_older_lot_id
-#: model:ir.model.fields,field_description:alc_older_stock_production_lot.field_product_product_older_lot_id
-#: model:ir.model.fields,field_description:alc_older_stock_production_lot.field_shopinvader_variant_older_lot_id
+#: model:ir.model.fields,field_description:alc_older_stock_production_lot.field_product_product__older_lot_id
 msgid "Older lot"
 msgstr ""
 
 #. module: alc_older_stock_production_lot
 #: model:ir.model,name:alc_older_stock_production_lot.model_product_product
-msgid "Product"
+msgid "Product Variant"
 msgstr ""
-
