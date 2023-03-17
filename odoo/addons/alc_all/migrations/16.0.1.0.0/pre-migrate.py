@@ -65,6 +65,7 @@ def migrate(cr, version):
         "sale_delay",  # replaced by alc_sale_auto_confirm_max_delay
         "sale_internal_confirmation_mail",  # replaced by alc_sale_internal_confirmation_mail
         "materialized_view_mixin",  # replaced by alc_materialized_view_mixin
+        "alc_geo_delivery_rounds",  # replaced by alc_stock_release_channel_tag & alc_stock_release_channel_import
     ]
     for addon in addons_to_uninstall:
         _logger.info("uninstall %s", ",".join(addon))
