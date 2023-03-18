@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -8,12 +7,12 @@ from odoo.tests.common import SavepointCase
 class TestOrderpointsPropagation(SavepointCase):
     @classmethod
     def setUpClass(cls):
-        super(TestOrderpointsPropagation, cls).setUpClass()
+        super().setUpClass()
         cls.product = cls.env["product.product"].create(
             {
                 "name": "test product1",
                 "default_code": "987654321",
-                "uom_id": cls.env.ref("product.product_uom_unit").id,
+                "uom_id": cls.env.ref("uom.product_uom_unit").id,
                 "type": "product",
                 "active": True,
             }
@@ -23,7 +22,7 @@ class TestOrderpointsPropagation(SavepointCase):
             {
                 "name": "test product2",
                 "default_code": "987654312",
-                "uom_id": cls.env.ref("product.product_uom_unit").id,
+                "uom_id": cls.env.ref("uom.product_uom_unit").id,
                 "type": "product",
                 "active": True,
             }
@@ -37,7 +36,6 @@ class TestOrderpointsPropagation(SavepointCase):
                 "product_min_qty": 1,
                 "product_max_qty": 10,
                 "qty_multiple": 2,
-                "location_id": cls.env.ref("stock.stock_location_stock").location_id.id,
             }
         )
 
@@ -89,9 +87,6 @@ class TestOrderpointsPropagation(SavepointCase):
                 "product_min_qty": 2,
                 "product_max_qty": 120,
                 "qty_multiple": 4,
-                "location_id": self.env.ref(
-                    "stock.stock_location_stock"
-                ).location_id.id,
             }
         )
         self.assertTrue(orderpoint2.active)
@@ -101,10 +96,14 @@ class TestOrderpointsPropagation(SavepointCase):
 
     def test_archive_orderpoint_set_values_to_zero_on_product(self):
         self.orderpoint1.active = False
+        self.orderpoint1.flush_recordset()
         self.assertTrue(self.product.active)
         self.assertEqual(self.product_tmpl.orderpoint_min, 0)
         self.assertEqual(self.product_tmpl.orderpoint_max, 0)
         self.assertEqual(self.product_tmpl.orderpoint_qty_multiple, 0)
+        location = self.env["stock.location"].create(
+            {"location_id": self.orderpoint1.location_id.id, "name": "TEST"}
+        )
         orderpoint2 = self.env["stock.warehouse.orderpoint"].create(
             {
                 "product_id": self.product.id,
@@ -112,9 +111,7 @@ class TestOrderpointsPropagation(SavepointCase):
                 "product_min_qty": 2,
                 "product_max_qty": 120,
                 "qty_multiple": 4,
-                "location_id": self.env.ref(
-                    "stock.stock_location_stock"
-                ).location_id.id,
+                "location_id": location.id,
             }
         )
         self.assertTrue(orderpoint2.active)
