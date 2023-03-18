@@ -267,12 +267,38 @@
                     <div class="col-md-8">
                       <table class="spacing_table_5">
                         <tr>
+                          <td>Class: </td>
+                          <td>
+                            <strong>
+                              <span t-esc="current_product.abc_storage" />
+                            </strong>
+                          </td>
+                        </tr>
+                        <tr>
                           <td>Advised qty</td>
                           <td>
                             <strong>
                               <span
                                 t-esc="int(current_product.advised_qty + product_qty)"
                               />
+                            </strong>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Stock coverage (days)</td>
+                          <td>
+                            <strong>
+                              <t
+                                t-if="current_product.average_three_months_consumption"
+                              >
+                              <span
+                                  t-esc="round(int(current_product.advised_qty + product_qty + current_product.virtual_available) /
+                                  (current_product.average_three_months_consumption / 90.0), 2)"
+                                />
+                              </t>
+                              <t t-else="">
+                                <span>0</span>
+                              </t>
                             </strong>
                           </td>
                         </tr>

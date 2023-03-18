@@ -49,6 +49,11 @@ msgid "Advised qty"
 msgstr "Qté conseillée"
 
 #. module: website_purchase_review
+#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
+msgid "Class:"
+msgstr "Classe:"
+
+#. module: website_purchase_review
 #: model:ir.model.fields,field_description:website_purchase_review.field_delivery_carrier_advised_qty
 #: model:ir.model.fields,field_description:website_purchase_review.field_product_product_advised_qty
 #: model:ir.model.fields,field_description:website_purchase_review.field_shopinvader_variant_advised_qty
@@ -64,6 +69,12 @@ msgstr "Conso. moyenne (3 mois)"
 #: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
 msgid "Av. annual consumption"
 msgstr "Conso. moyenne (1 an)"
+
+
+#. module: website_purchase_review
+#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
+msgid "Stock coverage (days)"
+msgstr "Couverture du stock (jours)"
 
 #. module: website_purchase_review
 #: model:ir.model.fields,field_description:website_purchase_review.field_delivery_carrier_average_annual_consumption
