@@ -38,13 +38,13 @@ class StockPicking(models.Model):
         if not self.date_done:
             return None
         sale_orders = self.move_lines.mapped("order_id")
-
+        picking_number = self.name.split("/")[-1]
         return (
             "_".join(
                 [
                     "NE",
                     sale_orders[0].partner_id.ref or "" if len(sale_orders) > 0 else "",
-                    str(self.id),
+                    picking_number,
                     "".join(self.date_done[:10].split("-")),
                     "".join(self.date_done[-8:].split(":")),
                 ]
