@@ -254,7 +254,7 @@ def recover_round_template_geo_polygon_shape():
 
 
 @task
-def delare_alc_product_category_data_module_as_installed():
+def declare_alc_product_category_data_module_as_installed():
     with cursor(DB_16_POSTMIG) as cr:
         # we first check if the record exists in the database
         query = """
@@ -299,6 +299,23 @@ def fix_account_tax_one_vat():
             and module = 'account_tax_one_vat'
             """
         openupgrade.logged_query(cr, query)
+
+
+@task
+def drop_materialized_views():
+    with cursor(DB_16_POSTMIG) as cr:
+        query = """
+                SELECT matviewname
+                FROM pg_matviews
+                """
+        openupgrade.logged_query(cr, query)
+        materialized_views = [row[0] for row in cr.fetchall()]
+        # drop materialized views
+        for materialized_view in materialized_views:
+            query = f"""
+                    DROP MATERIALIZED VIEW IF EXISTS {materialized_view} CASCADE
+                    """
+            openupgrade.logged_query(cr, query)
 
 
 _register_migration_scripts_in_tasks("pre_")
