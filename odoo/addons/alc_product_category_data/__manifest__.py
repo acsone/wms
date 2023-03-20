@@ -15,6 +15,6 @@
         # ACL
         "alc_product_category_business_unit",
     ],
-    "data": ["data/product.category.csv"],
+    "data": ["data/product_category.xml"],
     "pre_init_hook": "pre_init_hook",
 }

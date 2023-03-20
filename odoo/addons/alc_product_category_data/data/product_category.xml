@@ -1,0 +1,419 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<odoo noupdate='1'>
+
+    <record id="product_categ_materiel" model="product.category">
+        <field name="name">Matériel</field>
+        <field name="is_business_unit">True</field>
+        <field name="parent_id" ref="product.product_category_all" />
+        <field name="property_cost_method">average</field>
+    </record>
+
+    <record id="product_categ_ali" model="product.category">
+        <field name="name">Aliments</field>
+        <field name="is_business_unit">True</field>
+        <field name="parent_id" ref="product.product_category_all" />
+        <field name="property_cost_method">average</field>
+    </record>
+
+    <record id="product_categ_medoc" model="product.category">
+        <field name="name">Médicaments</field>
+        <field name="is_business_unit">True</field>
+        <field name="parent_id" ref="product.product_category_all" />
+        <field name="property_cost_method">average</field>
+    </record>
+
+    <record id="product_categ_finance" model="product.category">
+        <field name="name">Finance</field>
+        <field name="is_business_unit">True</field>
+        <field name="parent_id" ref="product.product_category_all" />
+        <field name="property_cost_method">average</field>
+    </record>
+
+    <record id="product_categ_vet_belges" model="product.category">
+        <field name="name">Médicaments vétérinaires belges</field>
+        <field name="is_business_unit" />
+        <field name="parent_id" ref="product_categ_medoc" />
+        <field name="property_cost_method">average</field>
+    </record>
+
+    <record id="product_categ_stupefiant_vet" model="product.category">
+        <field name="name">Stupéfiant VET</field>
+        <field name="is_business_unit" />
+        <field name="parent_id" ref="product_categ_vet_belges" />
+        <field name="property_cost_method">average</field>
+    </record>
+
+    <record id="product_categ_importation" model="product.category">
+        <field name="name">Cascade importation</field>
+        <field name="is_business_unit" />
+        <field name="parent_id" ref="product_categ_medoc" />
+        <field name="property_cost_method">average</field>
+    </record>
+
+    <record id="product_categ_humain" model="product.category">
+        <field name="name">Médicaments humains</field>
+        <field name="is_business_unit" />
+        <field name="parent_id" ref="product_categ_medoc" />
+        <field name="property_cost_method">average</field>
+    </record>
+
+    <record id="product_categ_parapharmacie" model="product.category">
+        <field name="name">Parapharmacie</field>
+        <field name="is_business_unit" />
+        <field name="parent_id" ref="product_categ_medoc" />
+        <field name="property_cost_method">average</field>
+    </record>
+
+    <record id="product_categ_finance_divers" model="product.category">
+        <field name="name">Divers</field>
+        <field name="is_business_unit" />
+        <field name="parent_id" ref="product_categ_finance" />
+        <field name="property_cost_method">average</field>
+    </record>
+
+    <record id="product_categ_finance_opcli" model="product.category">
+        <field name="name">Opcli</field>
+        <field name="is_business_unit" />
+        <field name="parent_id" ref="product_categ_finance" />
+        <field name="property_cost_method">average</field>
+    </record>
+
+    <record id="product_categ_finance_coope" model="product.category">
+        <field name="name">Coope</field>
+        <field name="is_business_unit" />
+        <field name="parent_id" ref="product_categ_finance" />
+        <field name="property_cost_method">average</field>
+    </record>
+
+    <record id="product_categ_antimicrobiens" model="product.category">
+        <field name="name">Antimicrobiens</field>
+        <field name="is_business_unit" />
+        <field name="parent_id" ref="product_categ_vet_belges" />
+        <field name="property_cost_method">average</field>
+    </record>
+
+    <record id="product_categ_pis" model="product.category">
+        <field name="name">medicaments du pis</field>
+        <field name="is_business_unit" />
+        <field name="parent_id" ref="product_categ_vet_belges" />
+        <field name="property_cost_method">average</field>
+    </record>
+
+    <record id="product_categ_oeil_oreille" model="product.category">
+        <field name="name">Médicaments de l'oeil - oreille</field>
+        <field name="is_business_unit" />
+        <field name="parent_id" ref="product_categ_vet_belges" />
+        <field name="property_cost_method">average</field>
+    </record>
+
+    <record id="product_categ_antiparasite" model="product.category">
+        <field name="name">Antiparasitaire</field>
+        <field name="is_business_unit" />
+        <field name="parent_id" ref="product_categ_vet_belges" />
+        <field name="property_cost_method">average</field>
+    </record>
+
+    <record id="product_categ_sys_nerveux" model="product.category">
+        <field name="name">Médicaments du système nerveux</field>
+        <field name="is_business_unit" />
+        <field name="parent_id" ref="product_categ_vet_belges" />
+        <field name="property_cost_method">average</field>
+    </record>
+
+    <record id="product_categ_vasculo" model="product.category">
+        <field name="name">Médicaments du système vasculo-circ</field>
+        <field name="is_business_unit" />
+        <field name="parent_id" ref="product_categ_vet_belges" />
+        <field name="property_cost_method">average</field>
+    </record>
+
+    <record id="product_categ_vitamines" model="product.category">
+        <field name="name">Vitamines</field>
+        <field name="is_business_unit" />
+        <field name="parent_id" ref="product_categ_vet_belges" />
+        <field name="property_cost_method">average</field>
+    </record>
+
+    <record id="product_categ_vaccins" model="product.category">
+        <field name="name">Vaccins, sérums</field>
+        <field name="is_business_unit" />
+        <field name="parent_id" ref="product_categ_vet_belges" />
+        <field name="property_cost_method">average</field>
+    </record>
+
+    <record id="product_categ_divers_veto" model="product.category">
+        <field name="name">Médicaments Vétérinaire Divers</field>
+        <field name="is_business_unit" />
+        <field name="parent_id" ref="product_categ_vet_belges" />
+        <field name="property_cost_method">average</field>
+    </record>
+
+    <record id="product_categ_hormones" model="product.category">
+        <field name="name">Hormones</field>
+        <field name="is_business_unit" />
+        <field name="parent_id" ref="product_categ_vet_belges" />
+        <field name="property_cost_method">average</field>
+    </record>
+
+    <record id="product_categ_psychotropes_25" model="product.category">
+        <field name="name">Psychotropes Annexe III</field>
+        <field name="is_business_unit" />
+        <field name="parent_id" ref="product_categ_vet_belges" />
+        <field name="property_cost_method">average</field>
+    </record>
+
+    <record id="product_categ_stupefiant" model="product.category">
+        <field name="name">Stupéfiants</field>
+        <field name="is_business_unit" />
+        <field name="parent_id" ref="product_categ_vet_belges" />
+        <field name="property_cost_method">average</field>
+    </record>
+
+    <record id="product_categ_topiques" model="product.category">
+        <field name="name">Topiques</field>
+        <field name="is_business_unit" />
+        <field name="parent_id" ref="product_categ_vet_belges" />
+        <field name="property_cost_method">average</field>
+    </record>
+
+    <record id="product_categ_phytosanitaires" model="product.category">
+        <field name="name">Phytosanitaires</field>
+        <field name="is_business_unit" />
+        <field name="parent_id" ref="product_categ_parapharmacie" />
+        <field name="property_cost_method">average</field>
+    </record>
+
+    <record id="product_categ_homeo" model="product.category">
+        <field name="name">Homéopathie, Phytotérapie</field>
+        <field name="is_business_unit" />
+        <field name="parent_id" ref="product_categ_parapharmacie" />
+        <field name="property_cost_method">average</field>
+    </record>
+
+    <record id="product_categ_chimiques" model="product.category">
+        <field name="name">Chimiques (pas d'APB)</field>
+        <field name="is_business_unit" />
+        <field name="parent_id" ref="product_categ_parapharmacie" />
+        <field name="property_cost_method">average</field>
+    </record>
+
+    <record id="product_categ_divers_para" model="product.category">
+        <field name="name">Divers parapharmacie</field>
+        <field name="is_business_unit" />
+        <field name="parent_id" ref="product_categ_parapharmacie" />
+        <field name="property_cost_method">average</field>
+    </record>
+
+    <record id="product_categ_ali_comp" model="product.category">
+        <field name="name">Aliments complémentaires</field>
+        <field name="is_business_unit" />
+        <field name="parent_id" ref="product_categ_parapharmacie" />
+        <field name="property_cost_method">average</field>
+    </record>
+
+    <record id="product_categ_ali_dietetique" model="product.category">
+        <field name="name">Diététique</field>
+        <field name="is_business_unit" />
+        <field name="parent_id" ref="product_categ_ali" />
+        <field name="property_cost_method">average</field>
+    </record>
+
+    <record id="product_categ_ali_physio" model="product.category">
+        <field name="name">Physiologique</field>
+        <field name="is_business_unit" />
+        <field name="parent_id" ref="product_categ_ali" />
+        <field name="property_cost_method">average</field>
+    </record>
+
+    <record id="product_categ_ali_divers" model="product.category">
+        <field name="name">Articles divers</field>
+        <field name="is_business_unit" />
+        <field name="parent_id" ref="product_categ_ali" />
+        <field name="property_cost_method">average</field>
+    </record>
+
+    <record id="product_categ_mat_sutures" model="product.category">
+        <field name="name">Sutures en pochette</field>
+        <field name="is_business_unit" />
+        <field name="parent_id" ref="product_categ_materiel" />
+        <field name="property_cost_method">average</field>
+    </record>
+
+    <record id="product_categ_mat_cardio" model="product.category">
+        <field name="name">Anesth-Rea-Cardio-Resp</field>
+        <field name="is_business_unit" />
+        <field name="parent_id" ref="product_categ_materiel" />
+        <field name="property_cost_method">average</field>
+    </record>
+
+    <record id="product_categ_mat_dentisterie" model="product.category">
+        <field name="name">Dentisterie</field>
+        <field name="is_business_unit" />
+        <field name="parent_id" ref="product_categ_materiel" />
+        <field name="property_cost_method">average</field>
+    </record>
+
+    <record id="product_categ_mat_equins" model="product.category">
+        <field name="name">Mat, pour Equins</field>
+        <field name="is_business_unit" />
+        <field name="parent_id" ref="product_categ_materiel" />
+        <field name="property_cost_method">average</field>
+    </record>
+
+    <record id="product_categ_mat_rurale" model="product.category">
+        <field name="name">Matériel de Médecine Rurale</field>
+        <field name="is_business_unit" />
+        <field name="parent_id" ref="product_categ_materiel" />
+        <field name="property_cost_method">average</field>
+    </record>
+
+    <record id="product_categ_mat_sav" model="product.category">
+        <field name="name">Main d'œuvre - Service - SAV</field>
+        <field name="is_business_unit" />
+        <field name="parent_id" ref="product_categ_materiel" />
+        <field name="property_cost_method">average</field>
+    </record>
+
+    <record id="product_categ_mat_ortho" model="product.category">
+        <field name="name">Orthopedie</field>
+        <field name="is_business_unit" />
+        <field name="parent_id" ref="product_categ_materiel" />
+        <field name="property_cost_method">average</field>
+    </record>
+
+    <record id="product_categ_mat_sut_bobine" model="product.category">
+        <field name="name">Sutures en bobine</field>
+        <field name="is_business_unit" />
+        <field name="parent_id" ref="product_categ_materiel" />
+        <field name="property_cost_method">average</field>
+    </record>
+
+    <record id="product_categ_mat_equipement" model="product.category">
+        <field name="name">Equipement</field>
+        <field name="is_business_unit" />
+        <field name="parent_id" ref="product_categ_materiel" />
+        <field name="property_cost_method">average</field>
+    </record>
+
+    <record id="product_categ_mat_instrumentation" model="product.category">
+        <field name="name">Instrumentation</field>
+        <field name="is_business_unit" />
+        <field name="parent_id" ref="product_categ_materiel" />
+        <field name="property_cost_method">average</field>
+    </record>
+
+    <record id="product_categ_mat_img_echo" model="product.category">
+        <field name="name">Imagerie Médicale - échographie</field>
+        <field name="is_business_unit" />
+        <field name="parent_id" ref="product_categ_materiel" />
+        <field name="property_cost_method">average</field>
+    </record>
+
+    <record id="product_categ_mat_img_radio" model="product.category">
+        <field name="name">Imagerie Médicale - radiologie</field>
+        <field name="is_business_unit" />
+        <field name="parent_id" ref="product_categ_materiel" />
+        <field name="property_cost_method">average</field>
+    </record>
+
+    <record id="product_categ_mat_img_endo" model="product.category">
+        <field name="name">Imagerie Médicale - endoscopie</field>
+        <field name="is_business_unit" />
+        <field name="parent_id" ref="product_categ_materiel" />
+        <field name="property_cost_method">average</field>
+    </record>
+
+    <record id="product_categ_mat_occasion" model="product.category">
+        <field name="name">Occasion</field>
+        <field name="is_business_unit" />
+        <field name="parent_id" ref="product_categ_materiel" />
+        <field name="property_cost_method">average</field>
+    </record>
+
+    <record id="product_categ_mat_conso" model="product.category">
+        <field name="name">Consommables</field>
+        <field name="is_business_unit" />
+        <field name="parent_id" ref="product_categ_materiel" />
+        <field name="property_cost_method">average</field>
+    </record>
+
+    <record id="product_categ_mat_petshop" model="product.category">
+        <field name="name">Petshop</field>
+        <field name="is_business_unit" />
+        <field name="parent_id" ref="product_categ_materiel" />
+        <field name="property_cost_method">average</field>
+    </record>
+
+    <record id="product_categ_mat_marge" model="product.category">
+        <field name="name">Marge s/vtes Alcyon</field>
+        <field name="is_business_unit" />
+        <field name="parent_id" ref="product_categ_materiel" />
+        <field name="property_cost_method">average</field>
+    </record>
+
+    <record id="product_categ_finance_frais" model="product.category">
+        <field name="name">Frais accessoires s/achats</field>
+        <field name="is_business_unit" />
+        <field name="parent_id" ref="product_categ_finance_divers" />
+        <field name="property_cost_method">average</field>
+    </record>
+
+    <record id="product_categ_finance_remises_fournisseurs" model="product.category">
+        <field name="name">Remises fournisseurs</field>
+        <field name="is_business_unit" />
+        <field name="parent_id" ref="product_categ_finance_divers" />
+        <field name="property_cost_method">average</field>
+    </record>
+
+    <record id="product_categ_finance_divers_divers" model="product.category">
+        <field name="name">Divers</field>
+        <field name="is_business_unit" />
+        <field name="parent_id" ref="product_categ_finance_divers" />
+        <field name="property_cost_method">average</field>
+    </record>
+
+    <record id="product_categ_finance_bonus_actionnaires" model="product.category">
+        <field name="name">Bonus actionnaire</field>
+        <field name="is_business_unit" />
+        <field name="parent_id" ref="product_categ_finance_opcli" />
+        <field name="property_cost_method">average</field>
+    </record>
+
+    <record id="product_categ_finance_remises_partenariat" model="product.category">
+        <field name="name">Remises partenariat</field>
+        <field name="is_business_unit" />
+        <field name="parent_id" ref="product_categ_finance_opcli" />
+        <field name="property_cost_method">average</field>
+    </record>
+
+    <record
+    id="product_categ_finance_remises_geste_commercial"
+    model="product.category"
+  >
+        <field name="name">Remises Geste commerciale</field>
+        <field name="is_business_unit" />
+        <field name="parent_id" ref="product_categ_finance_opcli" />
+        <field name="property_cost_method">average</field>
+    </record>
+
+    <record id="product_categ_finance_cheques_clients" model="product.category">
+        <field name="name">Chèques clients</field>
+        <field name="is_business_unit" />
+        <field name="parent_id" ref="product_categ_finance_coope" />
+        <field name="property_cost_method">average</field>
+    </record>
+
+    <record id="product_categ_finance_divers_service" model="product.category">
+        <field name="name">Service</field>
+        <field name="is_business_unit" />
+        <field name="parent_id" ref="product_categ_finance_divers" />
+        <field name="property_cost_method">average</field>
+    </record>
+
+    <record id="product_categ_undefined" model="product.category">
+        <field name="name">Undefined</field>
+        <field name="is_business_unit" />
+        <field name="parent_id" ref="" />
+        <field name="property_cost_method">average</field>
+    </record>
+            </odoo>

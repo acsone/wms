@@ -9,6 +9,13 @@ _logger = logging.getLogger(__name__)
 
 def pre_init_hook(cr) -> None:
     _logger.info("alc_stock_scrap_responsible: copy operator_id into user_id")
+    if not sql.column_exists(cr, "stock_scrap", "user_id"):
+        cr.execute(
+            """
+            ALTER TABLE stock_scrap
+            ADD COLUMN user_id INTEGER
+            """
+        )
     if sql.column_exists(cr, "stock_scrap", "operator_id"):
         cr.execute(
             """

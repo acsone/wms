@@ -8,14 +8,14 @@ def _stock_change_product_quantity_fields(env):
 
     # remove FK
     query = """
-        ALTER TABLE stock_change_product_quantity
+        ALTER TABLE stock_change_product_qty
         DROP CONSTRAINT IF EXISTS stock_change_product_qty_location_id_fkey
     """
     env.cr.execute(query)
 
     # remove field
     query = """
-        ALTER TABLE stock_change_product_quantity
+        ALTER TABLE stock_change_product_qty
         DROP COLUMN IF EXISTS location_id
     """
     env.cr.execute(query)

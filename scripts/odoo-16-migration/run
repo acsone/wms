@@ -1,0 +1,77 @@
+#!/usr/bin/env -S python3 -u
+import argparse
+import datetime
+import os
+import signal
+import subprocess
+import sys
+
+from tasks import tasks
+from tasks.console import bold
+
+
+def main():  # noqa: C901
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--start-at")
+    parser.add_argument("--stop-before")
+    parser.add_argument("--one")
+    parser.add_argument("--list", action="store_true")
+    parser.add_argument("--nolog", action="store_true")
+    parser.add_argument("--logdir")
+    args = parser.parse_args()
+
+    if not args.nolog:
+        if not args.logdir:
+            dt = datetime.datetime.now().replace(microsecond=0).isoformat()
+            args.logdir = f"logs/{dt}"
+            os.makedirs(args.logdir, exist_ok=True)
+
+    if args.list:
+        for task, _ in tasks:
+            print(task)
+        return
+
+    skip = False
+    if args.start_at:
+        skip = True
+    for i, (task, f) in enumerate(tasks):
+        if args.one and task != args.one:
+            continue
+        if args.start_at and task == args.start_at:
+            skip = False
+        if args.stop_before and task == args.stop_before:
+            skip = True
+        if skip:
+            print(bold(f"==== Skipped {task}"))
+            continue
+        if args.nolog:
+            f()
+        else:
+            logfile = f"{args.logdir}/{i:02d}-{task}.log"
+            print(bold(f"==== Running {task} > {logfile}"))
+            with open(logfile, "wb") as logf:
+                with subprocess.Popen(
+                    [sys.argv[0], "--nolog", "--one", task],
+                    stdout=subprocess.PIPE,
+                    stderr=subprocess.STDOUT,
+                ) as proc:
+                    interrupted = False
+                    while not interrupted:
+                        try:
+                            chunk = proc.stdout.readline()
+                        except KeyboardInterrupt:
+                            interrupted = True
+                            proc.send_signal(signal.SIGINT)
+                            chunk = proc.stdout.read()
+                        if not chunk:
+                            break
+                        logf.write(chunk)
+                        sys.stdout.buffer.write(chunk)
+
+                    proc.wait()
+                    if proc.returncode != 0:
+                        break
+
+
+if __name__ == "__main__":
+    main()
