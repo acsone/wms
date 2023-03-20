@@ -44,6 +44,7 @@
         "stock_picking_start",
         "stock_picking_type_shipping_policy",
         "stock_production_lot_expired_date",
+        "stock_lot_is_archived",
         "stock_release_channel",
         "stock_release_channel_geoengine",
         "stock_release_channel_auto_release",

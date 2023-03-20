@@ -113,6 +113,7 @@ odoo-addon-stock-grn==16.0.1.0.1
 odoo-addon-stock-helper==16.0.1.0.1
 odoo-addon-stock-location-product-restriction==16.0.1.0.0.3
 odoo-addon-stock-location-zone==16.0.1.0.1
+odoo-addon-stock-lot-is-archived @ git+https://github.com/acsone/product-attribute.git@97187f0ca50387f0e1eb16ba34b5d9a4a14bd8d0#subdirectory=setup/stock_lot_is_archived
 odoo-addon-stock-move-auto-assign @ git+https://github.com/acsone/stock-logistics-warehouse.git@11d1faad4c9f4aacc92052ef2e53df9f5fe8b518#subdirectory=setup/stock_move_auto_assign
 odoo-addon-stock-move-auto-assign-auto-release @ git+https://github.com/acsone/stock-logistics-warehouse.git@11d1faad4c9f4aacc92052ef2e53df9f5fe8b518#subdirectory=setup/stock_move_auto_assign_auto_release
 odoo-addon-stock-move-common-dest==16.0.1.0.1
