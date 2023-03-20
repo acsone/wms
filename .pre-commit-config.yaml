@@ -254,7 +254,6 @@ exclude: |
   ^odoo/addons/procurement_sale/|
   ^odoo/addons/product_discount_specials/|
   ^odoo/addons/product_last_transaction/|
-  ^odoo/addons/server_environment_files/|
   ^odoo/addons/shopinvader_assortment_bind/|
   ^odoo/addons/shopinvader_search_engine_export/|
   ^odoo/addons/shopinvader_search_engine_update/|

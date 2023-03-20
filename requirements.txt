@@ -93,6 +93,7 @@ odoo-addon-sale-stock-picking-blocking @ git+https://github.com/acsone/sale-work
 odoo-addon-sale-stock-restocking-fee-invoicing @ git+https://github.com/acsone/account-invoicing.git@2bdf46dd08bd874d6a1c0a64ec8a7f5d1751ddd3#subdirectory=setup/sale_stock_restocking_fee_invoicing
 odoo-addon-sale-triple-discount==16.0.1.0.1.1
 odoo-addon-server-environment==16.0.1.0.1
+odoo-addon-server-environment-ir-config-parameter==16.0.1.0.0.6
 odoo-addon-session-db==16.0.1.0.3
 odoo-addon-shipment-advice==16.0.1.0.1
 odoo-addon-shipment-advice-planner @ git+https://github.com/acsone/stock-logistics-transport.git@2970f906e1d0d7eae3c6d28405388671798453db#subdirectory=setup/shipment_advice_planner
@@ -148,6 +149,7 @@ odoo-addon-stock-scrap-location-default @ git+https://github.com/acsone/stock-lo
 odoo-addon-stock-storage-type @ git+https://github.com/acsone/wms.git@fd484bfeb2110f1dbcaec071acab1a41dc57d935#subdirectory=setup/stock_storage_type
 odoo-addon-stock-storage-type-putaway-abc @ git+https://github.com/acsone/wms.git@2cca4a20b17686fe5cfee096215035b9fdef3e09#subdirectory=setup/stock_storage_type_putaway_abc
 odoo-addon-stock-storage-type-putaway-abc-classification-sale-stock @ git+https://github.com/acsone/wms.git@980b444e365da2752f5bc1345f22d2cf5ca80657#subdirectory=setup/stock_storage_type_putaway_abc_classification_sale_stock
+odoo-addon-web-environment-ribbon==16.0.1.0.0.3
 odoo-addon-web-notify @ git+https://github.com/acsone/web.git@d81d6375a9eee259c1f7dc686988ed62db9ab02f#subdirectory=setup/web_notify
 odoo-addons-enterprise @ git+ssh://git@github.com/acsone/enterprise.git@9e4907621674d6fb3c5f19a0ede9094f6fdae302
 ofxparse==0.21
