@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field
+      name="name"
+    >res.config.settings.view.form.inherit.stock (in alc_stock_location_constraint)</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="stock.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <div id="categorize_locations" position="after">
+                <div
+          class="col-12 col-lg-6 o_setting_box"
+          id="alc_constraint_locations"
+          attrs="{'invisible': [('group_stock_multi_locations', '=', False)]}"
+        >
+                    <div class="o_setting_left_pane">
+                        <field name="alc_stock_location_constraint" />
+                    </div>
+                    <div class="o_setting_right_pane">
+                        <label for="alc_stock_location_constraint" />
+                        <div class="text-muted">
+                            Check this if you want the stock locations to be unique across several parameters:
+                                Location Zone, Corridor, Rack, Level, Position(X, Y, Z)
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </field>
+    </record>
+</odoo>
