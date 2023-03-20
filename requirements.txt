@@ -77,6 +77,7 @@ odoo-addon-product-price-category @ git+https://github.com/acsone/sale-workflow.
 odoo-addon-product-route-mto @ git+https://github.com/acsone/product-attribute.git@f7a09db24299d7e08dd65e9acc9c62449c43562d#subdirectory=setup/product_route_mto
 odoo-addon-product-state==16.0.1.0.0.2
 odoo-addon-product-template-has-one-variant @ git+https://github.com/acsone/product-attribute.git@07c1609e5ec906cbca3377a62ea55ff8e78c9a2c#subdirectory=setup/product_template_has_one_variant
+odoo-addon-product-template-multi-link @ git+https://github.com/OCA/e-commerce.git@e0823c594edb7d3bddfbf687180df5aada132c2f#subdirectory=setup/product_template_multi_link
 odoo-addon-product-total-weight-from-packaging @ git+https://github.com/acsone/product-attribute.git@0ae6102ff01a7ea8622e20a5a47ecfbe68314a4d#subdirectory=setup/product_total_weight_from_packaging
 odoo-addon-product-uom-updatable @ git+https://github.com/acsone/product-attribute.git@acf4a2eab1bac99aae7c0a86806817407e3727c4#subdirectory=setup/product_uom_updatable
 odoo-addon-purchase-cancel-reason @ git+https://github.com/acsone/purchase-workflow.git@4d9c8cf585059f70e397db19d07f79050d87b68d#subdirectory=setup/purchase_cancel_reason

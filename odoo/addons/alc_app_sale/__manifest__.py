@@ -33,6 +33,8 @@
         "base_geoengine",
         "geoengine_partner",
         "geoengine_base_geolocalize",
+        # OCA/e-commerce
+        "product_template_multi_link",
         # ALC
         "alc_partner_veterinary",
         "alc_product_category_data",
