@@ -78,5 +78,6 @@
         "alc_product_additional_price",
         "alc_product_view",
         "alc_product_price_category_data",
+        "alc_product_promoted_links",
     ],
 }
