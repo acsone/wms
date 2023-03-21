@@ -1,14 +1,14 @@
-# -*- coding: utf-8 -*-
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo.tests.common import SavepointCase
+from odoo.fields import Command
+from odoo.tests.common import TransactionCase
 
 
-class TestSaleOrderLine(SavepointCase):
+class TestSaleOrderLine(TransactionCase):
     @classmethod
     def setUpClass(cls):
-        super(TestSaleOrderLine, cls).setUpClass()
+        super().setUpClass()
         cls.env = cls.env(
             context=dict(
                 cls.env.context, tracking_disable=True, test_queue_job_no_delay=True
@@ -21,9 +21,7 @@ class TestSaleOrderLine(SavepointCase):
                 "partner_id": cls.partner.id,
                 "date_order": "2018-01-29",
                 "order_line": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "sequence": 1,
                             "name": cls.product_1.name,
@@ -35,11 +33,11 @@ class TestSaleOrderLine(SavepointCase):
             }
         )
         cls.order_line = cls.sale_oder.order_line[0]
-        cls.sale_oder.action_confirm()
 
     def test_00(self):
         """
         Data:
+
             A sale order with a line with qty 7 and no product in stock
         Test case:
             1. Confirm the SO
@@ -53,7 +51,7 @@ class TestSaleOrderLine(SavepointCase):
               product_qty_remains_to_deliver == 0
               product_qty_canceled == 7
         """
-
+        self.sale_oder.action_confirm()
         order_line = self.order_line
         self.assertEqual(order_line.product_qty_backorder, 7)
         self.assertEqual(order_line.product_qty_remains_to_deliver, 7)
