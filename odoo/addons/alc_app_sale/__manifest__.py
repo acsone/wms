@@ -21,6 +21,7 @@
         "sale_exception",
         "sale_stock_picking_blocking",
         "sale_cancel_remaining",
+        "sale_route_amendment",
         # OCA/sale-channel
         "sale_channel",
         # OCA/product-attribute

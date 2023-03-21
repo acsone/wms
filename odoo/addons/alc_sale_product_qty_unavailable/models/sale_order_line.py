@@ -2,9 +2,7 @@
 # Copyright 2023 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, fields
-from odoo.exceptions import UserError
-from odoo.tools import float_compare
+from odoo import api, fields
 
 from odoo.addons.sale_cancel_remaining.models import sale_order_line
 
@@ -145,50 +143,6 @@ class SaleOrderLine(sale_order_line.SaleOrderLine):
         for record, vals in zip(res, vals_list, strict=False):
             record._init_product_qty_unavailable(vals)
         return res
-
-    def write(self, values):
-        """If the route has changed, we need to adapt the procurement.
-
-        Cancel it and recreate it
-        """
-        changed_lines = False
-        if "route_id" in values:
-            changed_lines = self.filtered(lambda r: r.state == "sale")
-            if changed_lines:
-                move_ids = changed_lines.mapped("move_ids")
-                move_ids._action_cancel()
-                move_ids.write({"sale_line_id": False})
-                if "product_uom_qty" in values:
-                    # then procurement is already recreated in standard
-                    precision = self.env["decimal.precision"].precision_get(
-                        "Product Unit of Measure"
-                    )
-                    changed_lines -= self.filtered(
-                        lambda r: r.state == "sale"
-                        and float_compare(
-                            r.product_uom_qty,
-                            values["product_uom_qty"],
-                            precision_digits=precision,
-                        )
-                        == -1
-                    )
-        result = super().write(values)
-        if changed_lines:
-            changed_lines._action_launch_stock_rule()
-        self._init_product_qty_unavailable(values)
-        return result
-
-    def _prepare_procurement_values(self, group_id=False):
-        vals = super()._prepare_procurement_values(group_id=group_id)
-        if not self.order_id.date_order:
-            raise UserError(
-                _(
-                    "Missing sale order confirmation date. "
-                    "Cannot plan delivery procurement order"
-                )
-            )
-        vals["date_planned"] = self.order_id.date_order
-        return vals
 
     def _compute_current_product_qty_unavailable(self):
         for line in self:
