@@ -25,6 +25,7 @@ def migrate(cr, version):
         "alc_stock_quant_package_delivery",
         "alc_stock_quant_package_nbr",
         "alc_stock_receive_lot_inputmask",
+        "alc_stock_putaway",
         "alc_stock_storage_type_fixed_location",
         "delivery_carrier_label_gls_server_env",
         "grid",
