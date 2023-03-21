@@ -317,7 +317,7 @@ def drop_materialized_views():
             openupgrade.logged_query(cr, query)
 
 
-_register_migration_scripts_in_tasks("pre_")
+_register_migration_scripts_in_tasks("pre-")
 
 
 @task()
@@ -325,4 +325,4 @@ def click_odoo_update():
     check_call(["venv-16/bin/click-odoo-update", "-d", DB_16_POSTMIG])
 
 
-_register_migration_scripts_in_tasks("post_")
+_register_migration_scripts_in_tasks("post-")
