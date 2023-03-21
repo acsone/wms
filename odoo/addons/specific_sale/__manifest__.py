@@ -35,7 +35,7 @@
         "stock_picking_assignment",
         "stock_product_bin",
         "stock_refill",
-        "procurement_sale",
+        "procurement_sale",  # TODO: partially replaced by alc_sale_product_qty_unavailable
         "sale_consignment",
         "alc_product_category_data",
         "alc_product_pricelist_data",

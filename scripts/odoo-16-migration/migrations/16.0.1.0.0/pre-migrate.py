@@ -35,6 +35,7 @@ def migrate(cr, version):
         "portal",
         "portal_sale",
         "portal_stock",
+        "procurement_sale",
         "product_packaging_barcode",
         "product_price_import",
         "purchase_mrp",
@@ -77,7 +78,7 @@ def migrate(cr, version):
         "alc_geo_delivery_rounds",  # replaced by alc_stock_release_channel_tag & alc_stock_release_channel_import
     ]
     for addon in addons_to_uninstall:
-        _logger.info("uninstall %s", ",".join(addon))
+        _logger.info("uninstall %s", addon)
         cr.execute(
             "update ir_module_module set state = 'to remove' where name = %s",
             (addon,),
@@ -92,7 +93,7 @@ def _migrate_stock_picking_assignment(cr):
             """
             UPDATE stock_picking
             SET user_id = operator_id
-            WHERE operator_id IS NOT NULL
+            WHERE operator_id IS NOT NULL and user_id IS NULL
             """
         )
         _logger.info("picking_assignment: drop operator_id")

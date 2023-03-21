@@ -10,7 +10,10 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["alc_delivery_rounds_assign_blocking", "procurement_sale"],
+    "depends": [
+        "alc_delivery_rounds_assign_blocking",
+        "procurement_sale"  # TODO: partially replaced by alc_sale_product_qty_unavailable
+    ],
     "data": [],
     "demo": [],
     "installable": False,

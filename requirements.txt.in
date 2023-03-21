@@ -79,6 +79,7 @@ odoo-addon-sale-procurement-customer @ git+https://github.com/acsone/sale-workfl
 odoo-addon-sale-stock-picking-blocking @ git+https://github.com/acsone/sale-workflow.git@16.0-sale_stock_picking_blocking-sbj#subdirectory=setup/sale_stock_picking_blocking
 # https://github.com/OCA/sale-workflow/pull/2357
 odoo-addon-sale-cancel-remaining @ git+https://github.com/acsone/sale-workflow.git@16.0-sale_cancel_remaining-sbj#subdirectory=setup/sale_cancel_remaining
+odoo-addon-sale-route-amendment @ git+https://github.com/OCA/sale-workflow.git@refs/pull/2423/head#subdirectory=setup/sale_route_amendment
 
 # sale-channel
 odoo-addon-sale-channel @ git+https://github.com/acsone/sale-channel.git@16.0-sale_channel-sbj#subdirectory=setup/sale_channel

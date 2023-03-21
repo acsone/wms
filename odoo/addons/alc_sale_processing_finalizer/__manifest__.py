@@ -13,7 +13,7 @@
         "alc_sale_order_line_product_type",
         "delivery",
         "queue_job_cron",
-        "procurement_sale",
+        "procurement_sale",  # TODO: partially replaced by alc_sale_product_qty_unavailable
         "sale",
         "sale_cancel_remaining",
         "sale_consignment",

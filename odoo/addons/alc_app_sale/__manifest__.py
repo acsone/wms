@@ -21,6 +21,7 @@
         "sale_exception",
         "sale_stock_picking_blocking",
         "sale_cancel_remaining",
+        "sale_route_amendment",
         # OCA/sale-channel
         "sale_channel",
         # OCA/product-attribute
@@ -54,6 +55,7 @@
         "alc_sale_product_qty_available_to_promise",
         "alc_sale_qty_returned",
         "alc_sale_qty_returned_product_additional",
+        "alc_sale_product_qty_unavailable",
         "alc_product_animal_species",
         "alc_sale_consignment",
         "alc_stock_lot_available",

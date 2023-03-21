@@ -21,7 +21,7 @@
         "delivery_rounds",
         "onchange_helper",
         "alc_pricelist_discount",
-        "procurement_sale",
+        "procurement_sale",  # TODO: partially replaced by alc_sale_product_qty_unavailable
         "product",
         "product",
         "product_dimension",
