@@ -8,8 +8,6 @@ from odoo import api, fields, models
 class StockMove(models.Model):
     _inherit = "stock.move"
 
-    group_id = fields.Many2one(index=True)
-
     @api.multi
     def action_done(self):
         res = super(StockMove, self).action_done()

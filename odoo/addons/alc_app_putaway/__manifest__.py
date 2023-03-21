@@ -15,6 +15,7 @@
         "alc_product_packaging",
         "alc_product_packaging_dimension",
         "alc_product_dimensions",
+        "alc_stock_indexes",
         "alc_stock_location_constraint",
         "alc_stock_move_group_order",
         "alc_stock_picking_zone",

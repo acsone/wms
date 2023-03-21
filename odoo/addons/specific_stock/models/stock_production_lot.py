@@ -11,7 +11,6 @@ class StockProductionLot(models.Model):
 
     life_date = fields.Datetime(string="Expiration Date", required=True)
     is_archived = fields.Boolean("Archived", default=False, readonly=True)
-    product_id = fields.Many2one(index=True)
 
     @api.model
     def create(self, vals):
