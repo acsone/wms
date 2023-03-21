@@ -6,7 +6,7 @@ import signal
 import subprocess
 import sys
 
-from tasks import tasks
+import tasks
 from tasks.console import bold
 
 
@@ -18,7 +18,11 @@ def main():  # noqa: C901
     parser.add_argument("--list", action="store_true")
     parser.add_argument("--nolog", action="store_true")
     parser.add_argument("--logdir")
+    parser.add_argument("--version")
     args = parser.parse_args()
+
+    tasks.VERSION = args.version
+    all_tasks = tasks.get_tasks()
 
     if not args.nolog:
         if not args.logdir:
@@ -27,14 +31,14 @@ def main():  # noqa: C901
             os.makedirs(args.logdir, exist_ok=True)
 
     if args.list:
-        for task, _ in tasks:
+        for task, _ in all_tasks:
             print(task)
         return
 
     skip = False
     if args.start_at:
         skip = True
-    for i, (task, f) in enumerate(tasks):
+    for i, (task, f) in enumerate(all_tasks):
         if args.one and task != args.one:
             continue
         if args.start_at and task == args.start_at:
@@ -50,8 +54,11 @@ def main():  # noqa: C901
             logfile = f"{args.logdir}/{i:02d}-{task}.log"
             print(bold(f"==== Running {task} > {logfile}"))
             with open(logfile, "wb") as logf:
+                params = [sys.argv[0], "--nolog", "--one", task]
+                if args.version:
+                    params.extend(["--version", args.version])
                 with subprocess.Popen(
-                    [sys.argv[0], "--nolog", "--one", task],
+                    params,
                     stdout=subprocess.PIPE,
                     stderr=subprocess.STDOUT,
                 ) as proc:
