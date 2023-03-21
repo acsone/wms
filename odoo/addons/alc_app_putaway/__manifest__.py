@@ -16,6 +16,7 @@
         "alc_product_packaging_dimension",
         "alc_product_dimensions",
         "alc_stock_location_constraint",
+        "alc_stock_picking_zone",
         "alc_stock_scrap_responsible",
         "alc_stock_lot_update",
         "product_abc_classification_sale_stock",
