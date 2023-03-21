@@ -20,6 +20,7 @@
         "alc_stock_move_group_order",
         "alc_stock_picking_zone",
         "alc_stock_scrap_responsible",
+        "alc_stock_lot_unarchive",
         "alc_stock_lot_update",
         "product_abc_classification_sale_stock",
         "product_dimension",
