@@ -392,3 +392,17 @@ repos:
     rev: v0.7.0
     hooks:
       - id: pip-split-requirements
+
+  - repo: https://github.com/returntocorp/semgrep
+    rev: "v1.14.0"
+    hooks:
+      - id: semgrep
+        # See semgrep.dev/rulesets to select a ruleset and copy its URL
+        args:
+          [
+            "--config",
+            ".semgrep.yaml",
+            "--error",
+            "--skip-unknown-extensions",
+            "--metrics=off",
+          ]
