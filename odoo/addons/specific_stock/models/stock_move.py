@@ -8,10 +8,6 @@ from odoo import api, fields, models
 class StockMove(models.Model):
     _inherit = "stock.move"
 
-    # TODO: This is managed now through the purchase order (lines)
-    # for incoming shipments. What to do with this (as used elsewhere) ?
-    date_expected = fields.Datetime(group_operator="min")
-
     group_id = fields.Many2one(index=True)
 
     @api.multi
