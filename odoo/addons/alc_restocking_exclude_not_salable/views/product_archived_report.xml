@@ -6,10 +6,10 @@
   >
     <p>The following products have been archived and cannot be returned: </p>
     <br />
-    <t t-foreach="products_archived" t-as="product">
+    <t t-foreach="inactive_product_moves" t-as="move">
       <li>
         <strong>
-          <span t-esc="product.display_name" />
+          <span t-esc="move.product_id.display_name" />
         </strong>
       </li>
     </t>

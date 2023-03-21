@@ -142,7 +142,6 @@ exclude: |
   ^odoo/addons/alc_registration/|
   ^odoo/addons/alc_registration_eshop_service/|
   ^odoo/addons/alc_registration_responsible/|
-  ^odoo/addons/alc_restocking_exclude_not_salable/|
   ^odoo/addons/alc_running_env/|
   ^odoo/addons/alc_sale_cart_price_recalculation/|
   ^odoo/addons/alc_sale_invoicing_on_transfer/|
