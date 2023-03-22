@@ -1,25 +1,22 @@
-# -*- coding: utf-8 -*-
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo.tests.common import SavepointCase
+from odoo.fields import Command
+from odoo.tests.common import Form, TransactionCase
 
 
-class TestRestockingExcludeNotSalable(SavepointCase):
+class TestRestockingExcludeNotSalable(TransactionCase):
     @classmethod
     def setUpClass(cls):
-        super(TestRestockingExcludeNotSalable, cls).setUpClass()
+        super().setUpClass()
+        cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
 
-        cls.partner = cls.env["res.partner"].create({"name": "Partner"})
-
-        cls.product_categ = cls.env["product.category"].create(
-            {"name": "Test category"}
-        )
-
+        cls.loc_stock = cls.env.ref("stock.stock_location_stock")
+        cls.loc_customer = cls.env.ref("stock.stock_location_customers")
+        cls.picking_type = cls.env.ref("stock.picking_type_out")
         cls.product_1 = cls.env["product.product"].create(
             {
                 "name": "test product 1",
-                "list_price": 20,
                 "type": "product",
                 "sale_ok": True,
                 "active": False,
@@ -28,92 +25,74 @@ class TestRestockingExcludeNotSalable(SavepointCase):
         cls.product_2 = cls.env["product.product"].create(
             {
                 "name": "test product 2",
-                "list_price": 30,
                 "type": "product",
                 "sale_ok": True,
                 "active": True,
             }
         )
-
         cls.product_3 = cls.env["product.product"].create(
             {
                 "name": "test product 3",
-                "list_price": 40,
                 "type": "product",
                 "sale_ok": False,
                 "active": True,
             }
         )
-
-        cls.so = cls.env["sale.order"].create(
+        cls.picking = cls.env["stock.picking"].create(
             {
-                "partner_id": cls.partner.id,
-                "order_line": [
-                    (
-                        0,
-                        0,
+                "picking_type_id": cls.picking_type.id,
+                "location_id": cls.loc_stock.id,
+                "location_dest_id": cls.loc_customer.id,
+                "move_ids": [
+                    Command.create(
                         {
-                            "name": cls.product_1.name,
+                            "name": "test move p1",
                             "product_id": cls.product_1.id,
-                            "product_uom_qty": 5.0,
-                            "product_uom": cls.product_1.uom_id.id,
+                            "product_uom_qty": 5,
+                            "location_id": cls.loc_stock.id,
+                            "location_dest_id": cls.loc_customer.id,
                         },
                     ),
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
-                            "name": cls.product_2.name,
+                            "name": "test move p2",
                             "product_id": cls.product_2.id,
-                            "product_uom_qty": 15.0,
-                            "product_uom": cls.product_2.uom_id.id,
+                            "product_uom_qty": 6,
+                            "location_id": cls.loc_stock.id,
+                            "location_dest_id": cls.loc_customer.id,
                         },
                     ),
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
-                            "name": cls.product_3.name,
+                            "name": "test move p3",
                             "product_id": cls.product_3.id,
-                            "product_uom_qty": 10.0,
-                            "product_uom": cls.product_3.uom_id.id,
+                            "product_uom_qty": 7,
+                            "location_id": cls.loc_stock.id,
+                            "location_dest_id": cls.loc_customer.id,
                         },
                     ),
                 ],
             }
         )
-        cls.so.action_confirm()
-
-        cls.picking = cls.so.picking_ids
         cls._process_picking(cls.picking)
 
     @staticmethod
     def _process_picking(picking):
-        picking.force_assign()
-        for pack in picking.pack_operation_product_ids:
-            pack.qty_done = pack.product_qty
-        picking.do_transfer()
+        picking.action_confirm()
+        for move in picking.move_ids:
+            move.quantity_done = move.product_qty
+        picking.button_validate()
 
     def _create_return_wizard(self):
-        default_data = (
-            self.env["stock.return.picking"]
-            .with_context(active_ids=self.picking.ids, active_id=self.picking.ids[0])
-            .default_get(
-                [
-                    "move_dest_exists",
-                    "original_location_id",
-                    "product_return_moves",
-                    "parent_location_id",
-                    "location_id",
-                    "archived_product",
-                ]
+        return_wizard = Form(
+            self.env["stock.return.picking"].with_context(
+                active_ids=self.picking.ids,
+                active_id=self.picking.ids[0],
+                active_model="stock.picking",
             )
         )
-        return (
-            self.env["stock.return.picking"]
-            .with_context(active_ids=self.picking.ids, active_id=self.picking.ids[0])
-            .create(default_data)
-        )
+        res = return_wizard.save()
+        return res
 
     def _create_return_picking(self):
         res = self._create_return_wizard().create_returns()
@@ -122,43 +101,38 @@ class TestRestockingExcludeNotSalable(SavepointCase):
     def test_00(self):
         """
         Data:
-            3 products for start, one in an archived lot
+
+            3 products for start, one is archived (product_1), one is not salable
+            (product_3)
         Test case:
             Create a stock return wizard
         Expected result:
             The stock return must:
-             * exclude the product marked as archived
+             * exclude the product marked as archived (product_1)
              * have only 2 products to return
-             * display the error in the html
+             * move for product_3 should be marked not_salable
+             * display the exclusion in the html which must contains the display_name
+               of the excluded product (product_1)
         """
         wizard = self._create_return_wizard()
+        wizard._onchange_picking_id()
+        # check only 2 products to return
         self.assertEqual(len(wizard.product_return_moves), 2)
-
-        product_ids_to_return = [
-            product.product_id.id for product in wizard.product_return_moves
-        ]
-        self.assertFalse(self.product_1.id in product_ids_to_return)
-
-    def test_01(self):
-        """
-        Data:
-            3 products for start, one in an archived lot, another one is flagged sale_ok=False
-        Test case:
-            Create a stock return wizard
-        Expected result:
-            The stock return must:
-             * exclude the product marked as archived
-             * signal the sale_ok = False
-             * have only 1 products to return
-        """
-        wizard = self._create_return_wizard()
-        self.assertEqual(len(wizard.product_return_moves), 2)
-
+        # check that product_1 is excluded from return lines
+        self.assertNotIn(
+            self.product_1, wizard.product_return_moves.mapped("product_id")
+        )
+        # check that move for product_3 is marked not_salable
         not_salable_product = [
-            product.not_salable_product for product in wizard.product_return_moves
+            move.product_id
+            for move in wizard.product_return_moves
+            if move.not_salable_product
         ]
-        # First one is still sold => product still salable
-        self.assertFalse(not_salable_product[0])
-
-        # Second one is not sold anymore => not salable = True
-        self.assertTrue(not_salable_product[1])
+        self.assertEqual(len(not_salable_product), 1)
+        self.assertIn(self.product_3, not_salable_product)
+        # check the html message which must contain product_1.display_name
+        self.assertIn(
+            "The following products have been archived and cannot be returned:",
+            wizard.archived_products_message,
+        )
+        self.assertIn(self.product_1.display_name, wizard.archived_products_message)

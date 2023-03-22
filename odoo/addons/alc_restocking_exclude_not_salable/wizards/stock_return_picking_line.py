@@ -1,13 +1,12 @@
-# -*- coding: utf-8 -*-
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import api, fields, models
+from odoo import api, fields
+
+from odoo.addons.stock.wizard.stock_picking_return import ReturnPickingLine
 
 
-class StockReturnPickingLine(models.TransientModel):
-
-    _inherit = "stock.return.picking.line"
+class StockReturnPickingLine(ReturnPickingLine):
 
     not_salable_product = fields.Boolean(
         readonly=True, default=False, compute="_compute_not_salable_product"

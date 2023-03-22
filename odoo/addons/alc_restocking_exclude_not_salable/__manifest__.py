@@ -1,16 +1,18 @@
-# -*- coding: utf-8 -*-
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
     "name": "Alc Restocking Exclude Not Salable",
     "description": """
-        a product that have been archived should not be suitable for restocking. A product that is no more sold is still suitable for restocking but the user should be warned. This is the purpose of this addon""",
-    "version": "10.0.1.0.0",
+        A product that have been archived should not be suitable for restocking.
+        A product that is no more sold is still suitable for restocking but the user
+        should be warned.
+        This is the purpose of this addon.""",
+    "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
-    "depends": ["sale", "stock", "specific_stock"],
+    "depends": ["sale", "stock"],
     "data": ["wizards/stock_return_picking.xml", "views/product_archived_report.xml"],
     "demo": [],
-    'installable': False
+    "installable": True,
 }
