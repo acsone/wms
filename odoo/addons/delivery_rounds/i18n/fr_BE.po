@@ -389,11 +389,6 @@ msgid "Done"
 msgstr "Fini"
 
 #. module: delivery_rounds
-#: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report_lines
-msgid "Driver"
-msgstr "Conducteur"
-
-#. module: delivery_rounds
 #: model:ir.ui.view,arch_db:delivery_rounds.view_round_instance_kanban
 msgid "Edit"
 msgstr "Modifier"
@@ -413,6 +408,11 @@ msgstr "Kilométrage final"
 #, python-format
 msgid "Error when delivering %s: %s"
 msgstr "Erreur lors de la livraison %s: %s"
+
+#. module: delivery_rounds
+#: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report_lines
+msgid "Exp:"
+msgstr ""
 
 #. module: delivery_rounds
 #: model:ir.ui.view,arch_db:delivery_rounds.round_report_delivery
@@ -770,11 +770,6 @@ msgid "Rank"
 msgstr "Rang"
 
 #. module: delivery_rounds
-#: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report_lines
-msgid "Registration"
-msgstr "Immatriculation"
-
-#. module: delivery_rounds
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_instance_report_delivery
 msgid "Report delivery"
 msgstr "Remise du rapport"
@@ -991,7 +986,6 @@ msgstr "Erreur inattendue (%s)"
 
 #. module: delivery_rounds
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_itinerary_template_ids
-#: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report_lines
 msgid "Vehicle"
 msgstr "Modèle de Tournée"
 
@@ -1174,6 +1168,12 @@ msgstr "unités(s)"
 #, python-format
 msgid "{} is not working day for {}"
 msgstr "{} n'est pas un jour de travail pour {}"
+
+#~ msgid "Driver"
+#~ msgstr "Conducteur"
+
+#~ msgid "Registration"
+#~ msgstr "Immatriculation"
 
 #~ msgid "Is assignable"
 #~ msgstr "Is assignable"

@@ -156,12 +156,13 @@ class TestStockDeliveryNote(TransactionCase):
     def test_delivery_note_filename(self):
         """Check the correct generation of the filename."""
         sz_date_done = self.picking_csv.date_done.strftime("%Y-%m-%d %H:%M:%S")
+        picking_number = self.picking_csv.name.split("/")[-1]
         expected_filename = (
             "_".join(
                 [
                     "NE",
                     "123456789",
-                    str(self.picking_csv.id),
+                    picking_number,
                     "".join(sz_date_done[:10].split("-")),
                     "".join(sz_date_done[-8:].split(":")),
                 ]

@@ -38,14 +38,9 @@ class ReceptionPharmacy(models.Model):
     def _domain_product_id(self):
         return [
             (
-                "id",
-                "in",
-                [
-                    self.env.ref("alc_reception_pharmacy.product_colis_souverain").id,
-                    self.env.ref(
-                        "alc_reception_pharmacy.product_colis_souverain_frigo"
-                    ).id,
-                ],
+                "categ_id",
+                "=",
+                self.env.ref("specific_data.product_categ_colis_souverain").id,
             )
         ]
 
