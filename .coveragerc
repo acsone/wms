@@ -214,7 +214,6 @@ omit =
     odoo/addons/alc_stock_picking_batch_delivery_rounds/*
     odoo/addons/alc_stock_picking_gls_check_validation/*
     odoo/addons/alc_stock_picking_number_package/*
-    odoo/addons/alc_stock_picking_type_locking/*
     odoo/addons/alc_stock_picking_wave_type/*
     odoo/addons/alc_stock_put_remaining_to_reserve/*
     odoo/addons/alc_stock_receive_frigo/*
