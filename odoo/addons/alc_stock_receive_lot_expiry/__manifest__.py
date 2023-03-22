@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -13,12 +12,12 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        "stock_receive_lot",  # REMOVED "stock_production_lot_expiry"
-    ],  # LGPL  # AGPL
+        "product_expiry",
+        "alc_stock_receive_lot",
+    ],
     "data": [
-        "views/stock_pack_operation.xml",
         "wizards/stock_pack_operation_lot_add.xml",
     ],
     "demo": [],
-    "installable": False,
+    "installable": True,
 }

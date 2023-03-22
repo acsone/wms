@@ -63,6 +63,7 @@
         "alc_stock_release_channel_import",
         "alc_stock_release_channel_user",
         "alc_restocking_exclude_not_salable",
+        "alc_stock_receive_lot_expiry",
     ],
     "data": [],
     "demo": [],
