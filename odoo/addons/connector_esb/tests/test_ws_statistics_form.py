@@ -24,7 +24,7 @@ class WSStatisticsFormTestCase(ESBXMLTestCase):
             {"name": "specific med", "esb_ref": "34", "parent_id": categ_med.id}
         )
 
-        categ_ali = self.env.ref("alc_product_category_data.product_categ_ali")
+        categ_ali = self.env.ref("alc_product_food.product_categ_ali")
         categ_ali.esb_ref = "ALI"
         categ_ali.is_business_unit = True
         categ_mat = self.env.ref("alc_product_category_data.product_categ_materiel")

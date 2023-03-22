@@ -4,18 +4,19 @@
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 
+from odoo.addons.base.models.res_company import Company
+from odoo.addons.product.models.product_product import ProductProduct
+from odoo.addons.stock.models.stock_lot import StockLot
+
 
 class StockLotUpdate(models.TransientModel):
     _name = "stock.lot.update"
     _description = "Allow to always modify the product associated to a lot in case"
 
-    lot_id = fields.Many2one(
-        comodel_name="stock.lot", string="Lot", compute="_compute_lot_id"
-    )
-    company_id = fields.Many2one(related="lot_id.company_id")
+    lot_id = fields.Many2one[StockLot](string="Lot", compute="_compute_lot_id")
+    company_id = fields.Many2one[Company](related="lot_id.company_id")
 
-    product_id = fields.Many2one(
-        comodel_name="product.product",
+    product_id = fields.Many2one[ProductProduct](
         string="Product",
         index=True,
         domain=lambda self: self._domain_product_id(),

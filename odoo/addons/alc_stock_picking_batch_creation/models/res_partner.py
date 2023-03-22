@@ -4,12 +4,14 @@
 from odoo import fields
 
 from odoo.addons.base.models.res_partner import Partner
+from odoo.addons.stock_picking_batch_creation.models.stock_device_type import (
+    StockDeviceType,
+)
 
 
 class ResPartner(Partner):
 
-    device_type_ids = fields.Many2many(
-        comodel_name="stock.device.type",
+    device_type_ids = fields.Many2many[StockDeviceType](
         string="Specific device types",
     )
 

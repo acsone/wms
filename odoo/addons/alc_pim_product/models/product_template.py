@@ -4,6 +4,7 @@
 
 from odoo import api, fields
 
+from odoo.addons.attribute_set.models.attribute_option import AttributeOption
 from odoo.addons.product.models.product_template import (
     ProductTemplate as ProductTemplateBase,
 )
@@ -29,9 +30,8 @@ class ProductTemplate(ProductTemplateBase):
         selection=[("yellow", "Yellow"), ("orange", "Orange"), ("red", "Red")],
     )
 
-    size_clothing_option_id = fields.Many2one(
-        "attribute.option",
-        "Clothing size",
+    size_clothing_option_id = fields.Many2one[AttributeOption](
+        string="Clothing size",
         domain=lambda a: a._get_domain("size_clothing_option_id"),
         context={
             "default_attribute_id": lambda a: a._get_attribute_id(
@@ -39,17 +39,15 @@ class ProductTemplate(ProductTemplateBase):
             )
         },
     )
-    thread_option_id = fields.Many2one(
-        "attribute.option",
-        "Thread",
+    thread_option_id = fields.Many2one[AttributeOption](
+        string="Thread",
         domain=lambda a: a._get_domain("thread_option_id"),
         context={
             "default_attribute_id": lambda a: a._get_attribute_id("thread_option_id")
         },
     )
-    food_range_option_id = fields.Many2one(
-        "attribute.option",
-        "Food range",
+    food_range_option_id = fields.Many2one[AttributeOption](
+        string="Food range",
         domain=lambda a: a._get_domain("food_range_option_id"),
         context={
             "default_attribute_id": lambda a: a._get_attribute_id(
@@ -57,9 +55,8 @@ class ProductTemplate(ProductTemplateBase):
             )
         },
     )
-    presentation_option_id = fields.Many2one(
-        "attribute.option",
-        "Presentation",
+    presentation_option_id = fields.Many2one[AttributeOption](
+        string="Presentation",
         domain=lambda a: a._get_domain("presentation_option_id"),
         context={
             "default_attribute_id": lambda a: a._get_attribute_id(
@@ -67,9 +64,8 @@ class ProductTemplate(ProductTemplateBase):
             )
         },
     )
-    product_color_option_ids = fields.Many2many(
+    product_color_option_ids = fields.Many2many[AttributeOption](
         string="Colours",
-        comodel_name="attribute.option",
         relation="product_template_color_options_rel",
         domain=lambda a: a._get_domain("product_color_option_ids"),
         context={
@@ -78,9 +74,8 @@ class ProductTemplate(ProductTemplateBase):
             )
         },
     )
-    categ_age_option_ids = fields.Many2many(
+    categ_age_option_ids = fields.Many2many[AttributeOption](
         string="Age categories",
-        comodel_name="attribute.option",
         relation="product_template_age_options_rel",
         domain=lambda a: a._get_domain("categ_age_option_ids"),
         context={
@@ -89,9 +84,8 @@ class ProductTemplate(ProductTemplateBase):
             )
         },
     )
-    indication_option_ids = fields.Many2many(
+    indication_option_ids = fields.Many2many[AttributeOption](
         string="Indications",
-        comodel_name="attribute.option",
         relation="product_template_indication_options_rel",
         domain=lambda a: a._get_domain("indication_option_ids"),
         context={
@@ -100,9 +94,8 @@ class ProductTemplate(ProductTemplateBase):
             )
         },
     )
-    active_principle_option_ids = fields.Many2many(
+    active_principle_option_ids = fields.Many2many[AttributeOption](
         string="Active Principles",
-        comodel_name="attribute.option",
         relation="product_template_active_principle_options_rel",
         domain=lambda a: a._get_domain("active_principle_option_ids"),
         context={
@@ -111,9 +104,8 @@ class ProductTemplate(ProductTemplateBase):
             )
         },
     )
-    animal_size_option_ids = fields.Many2many(
+    animal_size_option_ids = fields.Many2many[AttributeOption](
         string="Animal Sizes",
-        comodel_name="attribute.option",
         relation="product_template_animal_size_options_rel",
         domain=lambda a: a._get_domain("animal_size_option_ids"),
         context={
@@ -122,9 +114,8 @@ class ProductTemplate(ProductTemplateBase):
             )
         },
     )
-    administration_route_option_ids = fields.Many2many(
+    administration_route_option_ids = fields.Many2many[AttributeOption](
         string="Administration Routes",
-        comodel_name="attribute.option",
         relation="product_template_administration_route_options_rel",
         domain=lambda a: a._get_domain("administration_route_option_ids"),
         context={

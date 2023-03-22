@@ -1,11 +1,13 @@
 # Copyright 2023 ACSONE SA/NV
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import fields, models
+from odoo import fields
+
+from odoo.addons.stock_release_channel.models import stock_release_channel
+
+from .alc_delivery_plan import AlcDeliveryPlan
 
 
-class StockReleaseChannel(models.Model):
+class StockReleaseChannel(stock_release_channel.StockReleaseChannel):
 
-    _inherit = "stock.release.channel"
-
-    delivery_plan_id = fields.Many2one(comodel_name="alc.delivery.plan", readonly=True)
+    delivery_plan_id = fields.Many2one[AlcDeliveryPlan](readonly=True)

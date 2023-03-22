@@ -8,13 +8,6 @@
         <field name="property_cost_method">average</field>
     </record>
 
-    <record id="product_categ_ali" model="product.category">
-        <field name="name">Aliments</field>
-        <field name="is_business_unit">True</field>
-        <field name="parent_id" ref="product.product_category_all" />
-        <field name="property_cost_method">average</field>
-    </record>
-
     <record id="product_categ_medoc" model="product.category">
         <field name="name">Médicaments</field>
         <field name="is_business_unit">True</field>
@@ -214,21 +207,21 @@
     <record id="product_categ_ali_dietetique" model="product.category">
         <field name="name">Diététique</field>
         <field name="is_business_unit" />
-        <field name="parent_id" ref="product_categ_ali" />
+        <field name="parent_id" ref="alc_product_food.product_categ_ali" />
         <field name="property_cost_method">average</field>
     </record>
 
     <record id="product_categ_ali_physio" model="product.category">
         <field name="name">Physiologique</field>
         <field name="is_business_unit" />
-        <field name="parent_id" ref="product_categ_ali" />
+        <field name="parent_id" ref="alc_product_food.product_categ_ali" />
         <field name="property_cost_method">average</field>
     </record>
 
     <record id="product_categ_ali_divers" model="product.category">
         <field name="name">Articles divers</field>
         <field name="is_business_unit" />
-        <field name="parent_id" ref="product_categ_ali" />
+        <field name="parent_id" ref="alc_product_food.product_categ_ali" />
         <field name="property_cost_method">average</field>
     </record>
 

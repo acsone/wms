@@ -117,7 +117,7 @@ class StatsController(http.Controller):
         """ Return a customer 2 years purchase statistics by base category.
 
         Base categories are:
-            alc_product_category_data.product_categ_ali
+            alc_product_food.product_categ_ali
             alc_product_category_data.product_categ_medoc
             alc_product_category_data.product_categ_materiel
         Expect a GET : connector_esb/statistics/customer/<customer_ref>

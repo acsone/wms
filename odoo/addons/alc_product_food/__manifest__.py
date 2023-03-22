@@ -6,10 +6,10 @@
     "description": """
         Add an is_food flag on product templates""",
     "version": "16.0.1.0.0",
-    "license": "AGPL-3",
+    "license": "LGPL-3",  # MUST BE LGPL so alc_stock_receive_lot can depend on it
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
-    "depends": ["alc_product_category_property", "alc_product_category_data"],
-    "data": [],
+    "depends": ["stock_account"],
+    "data": ["data/product_category.xml"],
     "demo": [],
 }

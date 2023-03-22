@@ -16,6 +16,12 @@ from shapely.wkb import loads as wkbloads
 from odoo import Command, _, api, fields, models
 from odoo.exceptions import UserError
 
+from odoo.addons.alc_stock_release_channel_tag.models.alc_stock_release_channel_tag import (
+    AlcStockReleaseChannelTag,
+)
+
+from ..models.alc_delivery_plan import AlcDeliveryPlan
+
 _logger = logging.getLogger(__name__)
 
 
@@ -24,16 +30,14 @@ class AlcImportDeliveryZoneWizard(models.TransientModel):
     _name = "alc.import.delivery.zone.wizard"
     _description = "Import Delivery Zones Wizard"
 
-    delivery_plan_id = fields.Many2one(
-        comodel_name="alc.delivery.plan",
+    delivery_plan_id = fields.Many2one[AlcDeliveryPlan](
         string="Delivery Plan",
         required=True,
         default=lambda x: x._default_delivery_plan(),
     )
     filename = fields.Char()
     file = fields.Binary(string="Import shape file", required=True)
-    stock_release_channel_tag_ids = fields.Many2many(
-        comodel_name="alc.stock.release.channel.tag",
+    stock_release_channel_tag_ids = fields.Many2many[AlcStockReleaseChannelTag](
         string="Release channel tags",
         relation="alc_import_channel_tag_rel",
     )

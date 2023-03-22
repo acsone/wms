@@ -1,24 +1,23 @@
-# -*- coding: utf-8 -*-
 # Copyright 2017-2018 Jacques-Etienne Baudoux (BCIM sprl) <je@bcim.be>
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
 {
     "name": "Stock Receive Wizard",
-    "version": "10.0.1.0.0",
-    "author": "BCIM",
+    "version": "16.0.1.0.0",
+    "author": "BCIM, ACSONE SA/NV",
     "maintainer": "Camptocamp",
     "license": "LGPL-3",  # MUST BE LGPL since will be mixed with helpdesk OEEL
     "category": "Stock Management",
     "depends": [
         "product_expiry",
-        "stock",
-        # TODO has been removed "stock_location_act_as_view"
+        "alc_stock_lot_track_food",
     ],  # LGPL
     "data": [
+        "security/alc_stock_receive_lot.xml",
         "views/stock_location.xml",
-        "views/stock_pack_operation.xml",
         "wizards/stock_pack_operation_lot_add.xml",
         "views/stock_picking.xml",
     ],
-    "installable": False,
+    "installable": True,
+    "pre_init_hook": "pre_init_hook",
 }

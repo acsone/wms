@@ -1,6 +1,6 @@
 id,esb_ref
 alc_product_category_data.product_categ_materiel,MAT
-alc_product_category_data.product_categ_ali,ALI
+alc_product_food.product_categ_ali,ALI
 alc_product_category_data.product_categ_medoc,MED
 alc_product_category_data.product_categ_vet_belges,
 alc_product_category_data.product_categ_stupefiant_vet,80

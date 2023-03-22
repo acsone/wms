@@ -4,8 +4,9 @@
 from odoo import fields
 
 from odoo.addons.stock_storage_type.models import product_template
+from odoo.addons.stock_storage_type.models.stock_package_type import StockPackageType
 
 
 class ProductTemplate(product_template.ProductTemplate):
 
-    package_type_id = fields.Many2one(tracking=True)
+    package_type_id = fields.Many2one[StockPackageType](tracking=True)

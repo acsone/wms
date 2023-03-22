@@ -37,45 +37,41 @@
             </group>
           </group>
           <group name="operation_select">
-            <field name="picking_id" invisible="1" />
-            <field
-              name="operation_id"
+              <field name="picking_id" invisible="1" />
+              <field
+              name="move_line_id"
               required="1"
               domain="[('picking_id','=',picking_id)]"
               options="{'no_create':1}"
             />
-            <label for="remaining_qty" />
-            <span>
-                        <field
-                name="remaining_qty"
-                class="oe_inline"
-                readonly="1"
-              /> out of
-                        <field name="product_qty" class="oe_inline" readonly="1" />
-                        <field
+              <label for="remaining_qty" />
+              <span>
+                <field name="remaining_qty" class="oe_inline" readonly="1" /> out of
+                <field name="product_qty" class="oe_inline" readonly="1" />
+                <field
                 name="product_uom_id"
                 class="oe_inline"
-                groups="product.group_uom"
+                groups="uom.group_uom"
                 readonly="1"
               />
-                    </span>
+              </span>
           </group>
           <group name="operation_details">
             <group>
               <field name="lot_required" invisible="1" />
-              <label for="life_date" />
+              <label for="expiration_date_char" string="Date d'expiration" />
               <div>
                 <field
-                  name="life_date_char"
-                  attrs="{'required': [('lot_required', '=', True)], 'readonly': ['|', ('operation_id', '=', False), ('lot_required', '=', False)]}"
+                  name="expiration_date_char"
+                  attrs="{'required': [('lot_required', '=', True)], 'readonly': ['|', ('move_line_id', '=', False), ('lot_required', '=', False)]}"
                 />
-                <field name="life_date" invisible="1" />
+                <field name="expiration_date" invisible="1" />
               </div>
               <field
                 name="lot_name"
-                attrs="{'required': [('lot_required', '=', True)], 'readonly': ['|', ('operation_id', '=', False), ('lot_required', '=', False)]}"
+                attrs="{'required': [('lot_required', '=', True)], 'readonly': ['|', ('move_line_id', '=', False), ('lot_required', '=', False)]}"
               />
-              <field name="qty" attrs="{'readonly': [('operation_id', '=', False)]}" />
+              <field name="qty" attrs="{'readonly': [('move_line_id', '=', False)]}" />
               <field name="is_qty_exceeded" invisible="1" />
               <field
                 name="is_surplus_qty_confirmed"
@@ -89,7 +85,7 @@
                 <field
                   name="location_dest_id"
                   domain="['|', '|', ('is_reception_wizard', '=', True), ('scrap_location', '=', True),
-                                           '&amp;', '&amp;', ('usage', '=', 'internal'), ('id', 'child_of', location_op_dest_id), ('act_as_view', '=', False)]"
+                           '&amp;', '&amp;', ('usage', '=', 'internal'), ('id', 'child_of', location_op_dest_id), ('usage', '=', 'view')]"
                   required="1"
                   options="{'no_create':1}"
                 />
@@ -106,7 +102,6 @@
     <field name="name">Receive</field>
     <field name="res_model">stock.pack.operation.lot.add</field>
     <field name="type">ir.actions.act_window</field>
-    <field name="view_type">form</field>
     <field name="view_mode">form</field>
     <field name="target">current</field>
   </record>

@@ -17,6 +17,17 @@ class ProductTemplate(ProductTemplateBase):
 
     @api.depends("categ_id")
     def _compute_is_food(self):
-        self._compute_business_unit_property(
-            "is_food", "alc_product_category_data.product_categ_ali"
+        food_category = self.env.ref(
+            "alc_product_food.product_categ_ali", raise_if_not_found=False
         )
+        for product in self:
+            category = product.categ_id
+            is_food = False
+            if category and food_category:
+                cat_parent_ids = [
+                    int(cat_id) for cat_id in category.parent_path.split("/") if cat_id
+                ]
+                is_food = (
+                    category == food_category or food_category.id in cat_parent_ids
+                )
+            product.is_food = is_food

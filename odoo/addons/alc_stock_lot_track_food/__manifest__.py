@@ -6,7 +6,7 @@
     "description": """
         TODO""",
     "version": "16.0.1.0.0",
-    "license": "AGPL-3",
+    "license": "LGPL-3",  # MUST BE LGPL so alc_stock_receive_lot can depend on it
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": ["alc_product_food"],

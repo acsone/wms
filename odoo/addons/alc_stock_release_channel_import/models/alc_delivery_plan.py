@@ -1,7 +1,12 @@
 # Copyright 2023 ACSONE SA/NV
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
+import typing
+
 from odoo import _, fields, models
+
+if typing.TYPE_CHECKING:
+    pass
 
 
 class AlcDeliveryPlan(models.Model):
@@ -11,8 +16,7 @@ class AlcDeliveryPlan(models.Model):
 
     active = fields.Boolean(default=True)
     name = fields.Char(required=True)
-    release_channel_ids = fields.One2many(
-        comodel_name="stock.release.channel",
+    release_channel_ids = fields.One2many["StockReleaseChannel"](
         inverse_name="delivery_plan_id",
         string="Channels",
         readonly=True,

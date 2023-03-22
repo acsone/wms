@@ -1,13 +1,10 @@
 # Copyright 2023 ACSONE SA/NV
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import models
+from odoo.addons.stock.models import stock_picking
 
 
-class StockPicking(models.Model):
-
-    _inherit = "stock.picking"
-
+class StockPicking(stock_picking.Picking):
     def _action_done(self):
         for rec in self:
             if (

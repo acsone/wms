@@ -2,9 +2,10 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from openupgradelib import openupgrade
 
+from odoo import SUPERUSER_ID, api
+
 IDS = {
     "product_categ_materiel",
-    "product_categ_ali",
     "product_categ_medoc",
     "product_categ_finance",
     "product_categ_vet_belges",
@@ -86,3 +87,7 @@ def pre_init_hook(cr):
     """,
         (tuple(IDS),),
     )
+
+    # update existing food category
+    env = api.Environment(cr, SUPERUSER_ID, {})
+    env.ref("alc_product_food.product_categ_ali").is_business_unit = True

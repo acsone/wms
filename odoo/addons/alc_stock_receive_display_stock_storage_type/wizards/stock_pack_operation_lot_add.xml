@@ -10,14 +10,14 @@
         <field name="model">stock.pack.operation.lot.add</field>
         <field
       name="inherit_id"
-      ref="stock_receive_lot.view_pack_operation_lot_add_form"
+      ref="alc_stock_receive_lot.view_pack_operation_lot_add_form"
     />
         <field name="arch" type="xml">
             <xpath expr="//group[@name='operation_details']" position="after">
                 <group name="stock_storage_type_info">
                     <field
-            name="product_stock_storage_type_id"
-            attrs="{'invisible': [('operation_id', '=', False)]}"
+            name="package_type_id"
+            attrs="{'invisible': [('move_line_id', '=', False)]}"
           />
                 </group>
             </xpath>

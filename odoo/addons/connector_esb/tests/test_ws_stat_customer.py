@@ -49,7 +49,7 @@ class WSStatCustomerTestCase(ESBXMLTestCase):
         cat_materiel = self.env.ref("alc_product_category_data.product_categ_materiel")
         cat_materiel.esb_ref = "MAT"
         cat_materiel.is_business_unit = True
-        cat_ali = self.env.ref("alc_product_category_data.product_categ_ali")
+        cat_ali = self.env.ref("alc_product_food.product_categ_ali")
         cat_ali.is_business_unit = True
         cat_ali.esb_ref = "ALI"
         # Test with a sub category of medic
