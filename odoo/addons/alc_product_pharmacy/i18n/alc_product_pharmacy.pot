@@ -49,6 +49,12 @@ msgid "Code CTI Extended"
 msgstr ""
 
 #. module: alc_product_pharmacy
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_product__is_colis_souverain
+#: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_template__is_colis_souverain
+msgid "Colis"
+msgstr ""
+
+#. module: alc_product_pharmacy
 #: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_product__is_equipment
 #: model:ir.model.fields,field_description:alc_product_pharmacy.field_product_template__is_equipment
 msgid "Equipment"
