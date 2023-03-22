@@ -10,16 +10,12 @@
       ref="stock_release_channel.stock_release_channel_form_view"
     />
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='picking_type_ids']" position="before">
-                <field
-          name="stock_release_channel_tag_ids"
-          widget="many2many_tags"
-          options="{'color_field': 'color'}"
-        />
+            <xpath expr="//notebook" position="before">
+                <group>
+                    <field name="user_ids" widget="many2many_tags" />
+                </group>
             </xpath>
         </field>
     </record>
-
-
 
 </odoo>

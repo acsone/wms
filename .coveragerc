@@ -50,7 +50,6 @@ omit =
     odoo/addons/alc_delivery_rounds_close_pickings_by_zone/*
     odoo/addons/alc_delivery_rounds_geooptimize/*
     odoo/addons/alc_delivery_rounds_gls/*
-    odoo/addons/alc_delivery_rounds_operator/*
     odoo/addons/alc_delivery_rounds_partner_geolocalize/*
     odoo/addons/alc_documents/*
     odoo/addons/alc_documents_eshop_services/*

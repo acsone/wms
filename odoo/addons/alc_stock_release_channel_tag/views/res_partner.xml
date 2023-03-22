@@ -5,18 +5,16 @@
 
     <record model="ir.ui.view" id="res_partner_form_view">
         <field name="model">res.partner</field>
-        <field
-      name="inherit_id"
-      ref="stock_release_channel_geoengine.res_partner_form_view"
-    />
+        <field name="inherit_id" ref="base.view_partner_form" />
         <field name="arch" type="xml">
-            <xpath expr="//group[@name='release_channel']" position="inside">
+            <xpath expr="//field[@name='category_id']" position="after">
                 <field
           name="stock_release_channel_tag_ids"
           widget="many2many_tags"
-          attrs="{'invisible': [('in_geo_release_channel', '=', False)]}"
+          options="{'color_field': 'color'}"
         />
             </xpath>
+
         </field>
     </record>
 
