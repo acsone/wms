@@ -34,7 +34,7 @@ def get_version():
             )
             return cr.fetchone()[0]
     except Exception:
-        return "16.0.1.0.0"
+        return "10.0.0.0.0"
 
 
 CURRENT_VERSION = VERSION or get_version()
