@@ -7,9 +7,11 @@ from odoo.addons.stock_release_channel_geoengine.models.res_partner import (
     ResPartner as ResPartnerBase,
 )
 
+from .alc_stock_release_channel_tag import AlcStockReleaseChannelTag
+
 
 class ResPartner(ResPartnerBase):
 
-    stock_release_channel_tag_ids = fields.Many2many(
-        comodel_name="alc.stock.release.channel.tag", string="Release channel tags"
+    stock_release_channel_tag_ids = fields.Many2many[AlcStockReleaseChannelTag](
+        string="Release channel tags"
     )

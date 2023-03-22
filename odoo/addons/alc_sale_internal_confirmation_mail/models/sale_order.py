@@ -1,12 +1,10 @@
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import models
+from odoo.addons.sale.models import sale_order
 
 
-class SaleOrder(models.Model):
-    _inherit = "sale.order"
-
+class SaleOrder(sale_order.SaleOrder):
     def action_confirm(self):
         res = super().action_confirm()
         send_confirmation_email_internal = (

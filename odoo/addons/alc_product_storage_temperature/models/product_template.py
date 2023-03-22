@@ -7,9 +7,11 @@ from odoo.addons.product.models.product_template import (
     ProductTemplate as ProductTemplateBase,
 )
 
+from .product_storage_temperature import ProductStorageTemperature
+
 
 class ProductTemplate(ProductTemplateBase):
 
-    storage_temperature_id = fields.Many2one(
-        comodel_name="product.storage.temperature", string="Storage temperature"
+    storage_temperature_id = fields.Many2one[ProductStorageTemperature](
+        string="Storage temperature"
     )

@@ -3,12 +3,13 @@
 
 from odoo import fields
 
+from odoo.addons.alc_stock_lot_available.models.stock_lot import StockLot
 from odoo.addons.product.models import product_template
 
 
 class ProductTemplate(product_template.ProductTemplate):
 
-    lot_ids = fields.One2many("stock.lot", string="Lots", compute="_compute_lot_ids")
+    lot_ids = fields.One2many[StockLot](string="Lots", compute="_compute_lot_ids")
 
     def _compute_lot_ids(self):
         now = fields.Datetime.now()

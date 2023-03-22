@@ -6,11 +6,14 @@ from datetime import datetime
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
+from odoo.addons.base.models.res_partner import Partner
 from odoo.addons.product.models.product_product import ProductProduct
 from odoo.addons.stock.models.stock_location import Location
 from odoo.addons.stock.models.stock_lot import StockLot
+from odoo.addons.stock.models.stock_move import StockMove
 from odoo.addons.stock.models.stock_move_line import StockMoveLine
 from odoo.addons.stock.models.stock_picking import Picking
+from odoo.addons.uom.models.uom_uom import UoM
 
 
 class StockPackOperationLotAdd(models.TransientModel):
@@ -19,7 +22,9 @@ class StockPackOperationLotAdd(models.TransientModel):
 
     name = fields.Char(default="New")
     picking_id = fields.Many2one[Picking](readonly="True")
-    partner_id = fields.Many2one(related="picking_id.partner_id", readonly=True)
+    partner_id = fields.Many2one[Partner](
+        related="picking_id.partner_id", readonly=True
+    )
     origin = fields.Char(related="picking_id.origin", readonly=True)
     move_line_id = fields.Many2one[StockMoveLine](
         string="Operation",
@@ -27,7 +32,7 @@ class StockPackOperationLotAdd(models.TransientModel):
         compute="_compute_move_line_id",
         readonly=False,
     )
-    move_id = fields.Many2one(related="move_line_id.move_id")
+    move_id = fields.Many2one[StockMove](related="move_line_id.move_id")
     location_op_dest_id = fields.Many2one[Location](
         string="Operation Destination View Location",
         compute="_compute_location_op_dest_id",
@@ -41,7 +46,7 @@ class StockPackOperationLotAdd(models.TransientModel):
     product_id = fields.Many2one[ProductProduct](
         related="move_line_id.product_id", readonly=True
     )
-    product_uom_id = fields.Many2one(
+    product_uom_id = fields.Many2one[UoM](
         related="move_line_id.product_uom_id", readonly=True
     )
     remaining_qty = fields.Float("Qty Remaining", compute="_compute_remaining_qty")

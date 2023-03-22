@@ -2,12 +2,10 @@
 # Copyright 2023 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import models
+from odoo.addons.product.models import product_template
 
 
-class ProductTemplate(models.Model):
-    _inherit = "product.template"
-
+class ProductTemplate(product_template.ProductTemplate):
     def price_compute(
         self, price_type, uom=None, currency=None, company=None, date=False
     ):

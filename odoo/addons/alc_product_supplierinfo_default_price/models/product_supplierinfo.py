@@ -1,12 +1,12 @@
 # Copyright 2023 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import api, fields, models
+from odoo import api, fields
+
+from odoo.addons.product.models import product_supplierinfo
 
 
-class ProductSupplierinfo(models.Model):
-
-    _inherit = "product.supplierinfo"
+class ProductSupplierInfo(product_supplierinfo.SupplierInfo):
 
     price = fields.Float(compute="_compute_price", readonly=False, store=True)
 

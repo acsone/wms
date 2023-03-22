@@ -6,10 +6,11 @@
 from odoo import fields
 
 from odoo.addons.sale_stock.models import stock
+from odoo.addons.sale_stock.models.sale_order import SaleOrder
 
 
 class StockMove(stock.StockMove):
-    order_id = fields.Many2one("sale.order", related="sale_line_id.order_id")
+    order_id = fields.Many2one[SaleOrder](related="sale_line_id.order_id")
     suite_name = fields.Char(compute="_compute_suite_name")
 
     def get_lots(self):

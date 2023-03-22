@@ -7,6 +7,7 @@ from psycopg2.extensions import AsIs
 from odoo import api, fields
 
 from odoo.addons.stock_storage_type.models import product_template
+from odoo.addons.stock_storage_type.models.stock_package_type import StockPackageType
 
 
 class ProductTemplate(product_template.ProductTemplate):
@@ -21,8 +22,7 @@ class ProductTemplate(product_template.ProductTemplate):
         search="_search_new_product_with_old_date",
     )
 
-    product_package_storage_type_id = fields.Many2one(
-        "stock.package.type",
+    product_package_storage_type_id = fields.Many2one[StockPackageType](
         copy=False,
     )
 

@@ -6,11 +6,12 @@ from odoo import fields
 from odoo.addons.alc_stock_receive_lot.wizards.stock_pack_operation_lot_add import (
     StockPackOperationLotAdd as Base,
 )
+from odoo.addons.stock_storage_type.models.stock_package_type import StockPackageType
 
 
 class StockPackOperationLotAdd(Base):
 
-    package_type_id = fields.Many2one(
+    package_type_id = fields.Many2one[StockPackageType](
         related="product_id.product_tmpl_id.package_type_id",
         readonly=True,
     )

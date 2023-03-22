@@ -3,6 +3,7 @@
 
 from odoo import _, api, fields
 
+from odoo.addons.base.models.res_users import Users
 from odoo.addons.stock_picking_batch.models.stock_picking_batch import (
     StockPickingBatch as StockPickingBatchBase,
 )
@@ -13,8 +14,7 @@ class StockPickingBatch(StockPickingBatchBase):
     # Odoo Fix: never copy the printed field. Important for backorder creation
     printed = fields.Boolean(compute="_compute_printed", inverse="_inverse_printed")
 
-    operator_id = fields.Many2one(
-        "res.users",
+    operator_id = fields.Many2one[Users](
         string="Operator",
         copy=False,
         tracking=True,
