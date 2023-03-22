@@ -3,7 +3,6 @@
 
 from odoo import _, api, fields
 
-from odoo.addons.base.models.res_users import Users
 from odoo.addons.stock_picking_batch.models.stock_picking_batch import (
     StockPickingBatch as StockPickingBatchBase,
 )
@@ -11,41 +10,47 @@ from odoo.addons.stock_picking_batch.models.stock_picking_batch import (
 
 class StockPickingBatch(StockPickingBatchBase):
 
-    # Odoo Fix: never copy the printed field. Important for backorder creation
-    printed = fields.Boolean(compute="_compute_printed", inverse="_inverse_printed")
-
-    operator_id = fields.Many2one[Users](
-        string="Operator",
-        copy=False,
-        tracking=True,
-        inverse="_inverse_operator_id",
+    action_start_allowed = fields.Boolean(compute="_compute_action_start_allowed")
+    action_cancel_start_allowed = fields.Boolean(
+        compute="_compute_action_cancel_start_allowed"
     )
+    started = fields.Boolean(compute="_compute_started", store=True)
 
     _sql_constraints = [
         (
-            "operator_id_unique",
-            "EXCLUDE (operator_id WITH =) WHERE ( operator_id is not null and state not in ('done', 'cancel', 'released'))",
+            "user_id_unique",
+            "EXCLUDE (user_id WITH =) WHERE ( user_id is not null and state not in "
+            "('done', 'cancel', 'released'))",
             _("This operator is already assigned to a wave"),
         )
     ]
 
-    def _prepare_assign_operator_values(self, operator=None):
-        operator_id = operator.id if operator else self.env.uid
-        return {"operator_id": operator_id, "printed": True}
+    @api.depends("picking_ids", "picking_ids.action_start_allowed")
+    def _compute_action_start_allowed(self):
+        for batch in self:
+            allowed = False
+            if batch.picking_ids:
+                allowed = all(batch.mapped("picking_ids.action_start_allowed"))
+            batch.action_start_allowed = allowed
 
-    def assign_operator(self, operator=None):
-        self.write(self._prepare_assign_operator_values(operator))
+    @api.depends("picking_ids", "picking_ids.action_cancel_start_allowed")
+    def _compute_action_cancel_start_allowed(self):
+        for batch in self:
+            allowed = False
+            if batch.picking_ids:
+                allowed = all(batch.mapped("picking_ids.action_cancel_start_allowed"))
+            batch.action_cancel_start_allowed = allowed
 
-    def _inverse_operator_id(self):
-        for rec in self:
-            rec.user_id = rec.operator_id
-            rec.picking_ids.write({"user_id": rec.operator_id.id})
+    @api.depends("picking_ids", "picking_ids.started")
+    def _compute_started(self):
+        for batch in self:
+            started = False
+            if batch.picking_ids:
+                started = batch.picking_ids and all(batch.mapped("picking_ids.started"))
+            batch.started = started
 
-    @api.depends("picking_ids", "picking_ids.printed")
-    def _compute_printed(self):
-        for rec in self:
-            rec.printed = all(rec.picking_ids.mapped("printed"))
+    def action_start(self):
+        self.picking_ids.action_start()
 
-    def _inverse_printed(self):
-        for rec in self:
-            rec.picking_ids.write({"printed": rec.printed})
+    def action_cancel_start(self):
+        self.picking_ids.action_cancel_start()
