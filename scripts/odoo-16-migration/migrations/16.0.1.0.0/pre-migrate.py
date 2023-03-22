@@ -21,6 +21,7 @@ def migrate(cr, version):
         "alc_stock_picking_number_package",
         "alc_stock_picking_package",
         "alc_stock_picking_policy_block",
+        "alc_stock_picking_wave_release_pickings",
         "alc_stock_quant_package_delivery",
         "alc_stock_quant_package_nbr",
         "alc_stock_receive_lot_inputmask",

@@ -9,7 +9,10 @@
     "version": "10.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
-    "depends": ["alc_shopfloor", "alc_stock_picking_wave_release_pickings"],
+    "depends": [
+        "alc_shopfloor",
+        "alc_stock_picking_wave_release_pickings"  # TODO: has been removed
+    ],
     "data": [],
     'installable': False
 }
