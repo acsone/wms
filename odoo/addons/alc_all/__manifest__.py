@@ -10,6 +10,11 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
+        # OCA
+        "server_environment",
+        "server_environment_ir_config_parameter",
+        "web_environment_ribbon",
+        # ALC
         "alc_app_framework",
         "alc_app_invoicing",
         "alc_app_order_picking",

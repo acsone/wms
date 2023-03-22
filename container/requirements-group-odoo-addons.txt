@@ -56,6 +56,8 @@ odoo-addon-sale-procurement-customer @ git+https://github.com/acsone/sale-workfl
 odoo-addon-sale-route-amendment @ git+https://github.com/acsone/sale-workflow.git@f506b778476eacfc4a3f33d85c2f77f790a8ebc8#subdirectory=setup/sale_route_amendment
 odoo-addon-sale-triple-discount==16.0.1.0.1.1
 odoo-addon-server-environment==16.0.1.0.1
+odoo-addon-server-environment-ir-config-parameter==16.0.1.0.0.6
 odoo-addon-session-db==16.0.1.0.3
 odoo-addon-shipment-advice==16.0.1.0.1
+odoo-addon-web-environment-ribbon==16.0.1.0.0.3
 odoo-addon-web-notify @ git+https://github.com/acsone/web.git@d81d6375a9eee259c1f7dc686988ed62db9ab02f#subdirectory=setup/web_notify
