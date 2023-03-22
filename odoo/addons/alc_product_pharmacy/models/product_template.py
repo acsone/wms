@@ -25,6 +25,11 @@ class ProductTemplate(ProductTemplateBase):
         compute="_compute_category_attributes",
         store=True,
     )
+    is_colis_souverain = fields.Boolean(
+        string="Colis",
+        compute="_compute_category_attributes",
+        store=True,
+    )
     is_equipment = fields.Boolean(
         string="Equipment",
         compute="_compute_category_attributes",
@@ -103,6 +108,7 @@ class ProductTemplate(ProductTemplateBase):
             "is_equipment": "alc_product_category_data.product_categ_materiel",
             "is_vt_be": "alc_product_category_data.product_categ_vet_belges",
             "is_human": "alc_product_category_data.product_categ_humain",
+            "is_colis_souverain": "alc_product_category_data.product_categ_colis_souverain",
             "is_narcotic_reg": "alc_product_category_data.product_categ_stupefiant",
             "is_narcotic_vet": "alc_product_category_data.product_categ_stupefiant_vet",
             "is_psychotropic": "alc_product_category_data.product_categ_psychotropes_25",

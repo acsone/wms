@@ -6,7 +6,7 @@
     <field name="tracking">lot</field>
     <field name="purchase_ok">0</field>
     <field name="sale_ok">0</field>
-    <field name="categ_id" ref="alc_product_category_data.product_categ_humain" />
+    <field name="categ_id" ref="alc_product_category_data.product_categ_colis_souverain" />
   </record>
   <record id="product_colis_souverain_frigo" model="product.product">
     <field name="name">Colis Souverain Frigo</field>
@@ -14,6 +14,14 @@
     <field name="tracking">lot</field>
     <field name="purchase_ok">0</field>
     <field name="sale_ok">0</field>
-    <field name="categ_id" ref="alc_product_category_data.product_categ_medoc" />
+    <field name="categ_id" ref="alc_product_category_data.product_categ_colis_souverain" />
+  </record>
+  <record id="product_colis_souverain_frigo_immunopharma" model="product.product">
+    <field name="name">Colis Souverain Frigo Immunopharma</field>
+    <field name="type">product</field>
+    <field name="tracking">lot</field>
+    <field name="purchase_ok">0</field>
+    <field name="sale_ok">0</field>
+    <field name="categ_id" ref="alc_product_category_data.product_categ_colis_souverain" />
   </record>
 </odoo>

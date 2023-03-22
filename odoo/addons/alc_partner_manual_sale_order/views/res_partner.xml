@@ -11,17 +11,4 @@
       </xpath>
     </field>
   </record>
-  <record model="ir.ui.view" id="res_partner_search_view">
-    <field name="model">res.partner</field>
-    <field name="inherit_id" ref="base.view_res_partner_filter" />
-    <field name="arch" type="xml">
-      <filter name="type_company" position="after">
-        <filter
-          string="Direct customers (manual order allowed)"
-          name="manual_sale_order_allowed"
-          domain="[('manual_sale_order_allowed','=',1), ('parent_id', '=', False)]"
-        />
-      </filter>
-    </field>
-  </record>
 </odoo>

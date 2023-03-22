@@ -63,6 +63,7 @@ IDS = {
     "product_categ_finance_cheques_clients",
     "product_categ_finance_divers_service",
     "product_categ_undefined",
+    "product_categ_colis_souverain",
 }
 
 

@@ -81,6 +81,11 @@ msgstr "Consommation moyenne sur trois mois"
 
 #. module: website_purchase_review
 #: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
+msgid "Class:"
+msgstr "Classe:"
+
+#. module: website_purchase_review
+#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
 msgid "Confirm"
 msgstr "Confirmer"
 
@@ -305,6 +310,11 @@ msgstr "Mouvement de stock"
 #: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
 msgid "Stock available"
 msgstr "Stock Disponible"
+
+#. module: website_purchase_review
+#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
+msgid "Stock coverage (days)"
+msgstr "Couverture du stock (jours)"
 
 #. module: website_purchase_review
 #: model:ir.ui.view,arch_db:website_purchase_review.main_page_body

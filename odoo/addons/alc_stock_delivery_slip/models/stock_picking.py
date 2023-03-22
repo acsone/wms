@@ -65,12 +65,13 @@ class StockPicking(stock_picking.StockPicking):
             return None
         sale_orders = self.move_ids.mapped("order_id")
         sz_date_done = self.date_done.strftime("%Y-%m-%d %H:%M:%S")
+        picking_number = self.name.split("/")[-1]
         return (
             "_".join(
                 [
                     "NE",
                     sale_orders[0].partner_id.ref or "" if len(sale_orders) > 0 else "",
-                    str(self.id),
+                    picking_number,
                     "".join(sz_date_done[:10].split("-")),
                     "".join(sz_date_done[-8:].split(":")),
                 ]
