@@ -12,9 +12,9 @@
         <field name="name" position="after">
           <field name="coordinates_should_be_checked" invisible="1" />
         </field>
-        <div name="button_box" position="before">
+        <div name="button_box" position="after">
         <div
-          class="alert alert-warning"
+          class="text-warning"
           attrs="{'invisible': [('coordinates_should_be_checked', '=', False)]}"
         >
           The address has changed for this partner. Please press 'Geolocalize' once again (Partner Assignation tab) and check that the point correspond to the address. If not, please enter the correct point on the map.
