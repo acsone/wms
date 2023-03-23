@@ -269,11 +269,23 @@ def declare_alc_product_category_data_module_as_installed():
         query = """
             INSERT INTO ir_module_module
             (name, state, author, website, license, shortdesc, description, auto_install, latest_version, sequence, category_id, icon, create_uid, create_date, write_uid, write_date)
-            SELECT 'alc_product_category_data', 'to upgrade', author, website, license, shortdesc, description, auto_install, '16.0.1.0.0', sequence, category_id, icon, create_uid, create_date, write_uid, write_date
+            SELECT 'alc_product_category_data', 'to upgrade', author, website, license, shortdesc, description, auto_install, '10.0.1.0.0', sequence, category_id, icon, create_uid, create_date, write_uid, write_date
             FROM ir_module_module
             WHERE name = 'specific_data'
             """
         openupgrade.logged_query(cr, query)
+
+        # declare xml ids for product.category
+        # as no update
+        openupgrade.logged_query(
+            cr,
+            """
+            UPDATE ir_model_data
+            SET noupdate=True
+            WHERE module='specific_data'
+            AND model='product.category'
+        """,
+        )
 
 
 @task("16.0.1.0.0")

@@ -5,7 +5,7 @@ from openupgradelib import openupgrade
 
 def _rename_delivery_window(env):
     openupgrade.rename_columns(
-        env,
+        env.cr,
         {
             "alc_delivery_window": [
                 ("start", "time_window_start"),
@@ -26,6 +26,27 @@ def _rename_delivery_window(env):
                 "alc_delivery_week_day_alc_delivery_window_rel",
                 "time_weekday_toursolver_delivery_window_rel",
             ),
+        ],
+    )
+    openupgrade.rename_models(env.cr, [("alc.delivery.week.day", "time.weekday")])
+    # change xmlid model
+    days = [
+        "monday",
+        "tuesday",
+        "wednesday",
+        "thursday",
+        "friday",
+        "saturday",
+        "sunday",
+    ]
+    openupgrade.rename_xmlids(
+        env.cr,
+        [
+            (
+                f"alc_partner_delivery_window.alc_delivery_weed_day_{day}",
+                f"base_time_window.time_weekday_{day}",
+            )
+            for day in days
         ],
     )
 

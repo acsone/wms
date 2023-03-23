@@ -4,6 +4,13 @@ from openupgradelib import openupgrade
 
 
 def _stock_picking_wave_state(env):
+    # drop unique constraint on operator id
+    query = """
+        ALTER TABLE stock_picking_batch
+        DROP CONSTRAINT IF EXISTS stock_picking_wave_operator_id_unique
+    """
+    env.cr.execute(query)
+    # set state as draft where state is released
     query = """
         UPDATE stock_picking_batch
         SET state = 'draft'
