@@ -50,20 +50,6 @@ class StockPicking(models.Model):
         )._create_lots_for_picking()
 
     @api.multi
-    def do_new_transfer(self):
-        self.ensure_one()
-
-        if self.picking_type_code == "incoming" and not self.grn_id:
-            if not self.env.context.get(
-                "__no_pick_receive_note_check"
-            ) and not self.env.context.get("test_mode"):
-                raise UserError(
-                    _("The reception must be linked to a Goods Received Note")
-                )
-
-        return super(StockPicking, self).do_new_transfer()
-
-    @api.multi
     def button_put_in_pack(self):
         self.ensure_one()
         pick = self

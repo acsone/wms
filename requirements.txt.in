@@ -99,6 +99,8 @@ odoo-addon-stock-picking-volume @ git+https://github.com/OCA/stock-logistics-war
 odoo-addon-stock-picking-backorder-reason @ git+https://github.com/acsone/stock-logistics-workflow.git@16.0-picking-backorder-reason-dro#subdirectory=setup/stock_picking_backorder_reason
 # https://github.com/OCA/stock-logistics-workflow/pull/1200
 odoo-addon-stock-picking-backorder-reason-grn @ git+https://github.com/acsone/stock-logistics-workflow.git@16.0-add-backorder-reason-grn-dro#subdirectory=setup/stock_picking_backorder_reason_grn
+# https://github.com/OCA/stock-logistics-workflow/pull/1256
+odoo-addon-stock-picking-grn-mandatory @ git+https://github.com/OCA/stock-logistics-workflow.git@refs/pull/1256/head#subdirectory=setup/stock_picking_grn_mandatory
 # https://github.com/OCA/stock-logistics-workflow/pull/1188
 odoo-addon-stock-picking-group-by-max-weight @ git+https://github.com/acsone/stock-logistics-workflow.git@16.0-add-stock-picking-group-by-max-weight-dro#subdirectory=setup/stock_picking_group_by_max_weight
 # https://github.com/OCA/stock-logistics-workflow/pull/1165
