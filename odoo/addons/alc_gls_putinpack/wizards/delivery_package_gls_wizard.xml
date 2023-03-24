@@ -14,8 +14,8 @@
           <field name="package_id" domain="package_id_domain" />
           <field name="is_sent" invisible="1" required="1" />
           <field name="can_put_in_pack" invisible="1" />
-          <field name="packaging_id" required="1" />
-          <field name="shipping_weight" required="1" widget="weighing_widget" />
+          <field name="package_type_id" required="1" />
+          <field name="shipping_weight" required="1" widget="web_scale" />
         </group>
         <footer>
                     <button
@@ -56,7 +56,6 @@
   <record model="ir.actions.act_window" id="delivery_package_gls_wizard_act_window">
     <field name="name">GLS: send package wizard</field>
     <field name="res_model">delivery.package.gls.wizard</field>
-    <field name="view_type">form</field>
     <field name="view_mode">form</field>
     <field name="target">new</field>
     <field name="domain">[]</field>
