@@ -7,7 +7,10 @@ _logger = logging.getLogger(__name__)
 
 
 def migrate(cr, version):
-    addons_to_uninstall = []
+    addons_to_uninstall = [
+        "alc_delivery_rounds_allatonce_assignment",
+        "web_decimal_numpad_dot",
+    ]
     for addon in addons_to_uninstall:
         _logger.info("uninstall %s", addon)
         cr.execute(
