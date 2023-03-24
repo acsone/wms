@@ -65,10 +65,10 @@ class StockPackOperationLotAdd(models.TransientModel):
 
     @api.depends("move_line_id", "expiration_date")
     def _compute_lot_name(self):
-        compute_name = self.env["stock.lot"]._calc_lotname_from_expiration_date
+        compute_name = self.env["stock.lot"]._calc_name_for_food
         for wiz in self:
             lot_name = wiz.lot_name
-            if wiz.product_id.is_food and wiz.expiration_date:
+            if wiz.expiration_date:
                 lot_name = compute_name(wiz.expiration_date)
             wiz.lot_name = lot_name
 
@@ -145,7 +145,7 @@ class StockPackOperationLotAdd(models.TransientModel):
     def _onchange_expiration_date(self):
         lot = self.env["stock.lot"]
         if self.expiration_date and self.move_line_id:
-            self.lot_name = lot._calc_lotname_from_expiration_date(self.expiration_date)
+            self.lot_name = lot._calc_name_for_food(self.expiration_date)
 
     def _lot_onchange_expiration_date(self, lot):
         methods = lot._onchange_methods.get("expiration_date", ())

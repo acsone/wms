@@ -1,1 +1,1 @@
-from . import alc_stock_lot_track_food
+from . import stock_lot
