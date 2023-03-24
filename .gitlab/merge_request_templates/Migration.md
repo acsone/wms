@@ -13,5 +13,5 @@
       setUpClass as it's way more performant since it runs only once.
 - [ ] Replace SavepointCase by TransactionCase in tests.
 
-/label ~"needs review" /assign me /assign_reviewer @laurent.mignon /milestone %2.1
+/label ~"needs review" /assign me /assign_reviewer @laurent.mignon /milestone %2.0
 /target_branch master
