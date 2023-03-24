@@ -17,6 +17,8 @@ odoo-addon-account-tax-one-vat-sale @ git+https://github.com/oca/account-invoici
 odoo-addon-delivery-carrier-label-gls @ git+https://github.com/oca/delivery-carrier.git@refs/pull/599/head#subdirectory=setup/delivery_carrier_label_gls
 # https://github.com/OCA/delivery-carrier/pull/604 - [16.0][ADD] delivery_estimated_package_quantity_by_weight
 odoo-addon-delivery-estimated-package-quantity-by-weight @ git+https://github.com/oca/delivery-carrier.git@refs/pull/604/head#subdirectory=setup/delivery_estimated_package_quantity_by_weight
+# https://github.com/OCA/delivery-carrier/pull/623 - [ADD] stock_picking_delivery_package
+odoo-addon-stock-picking-delivery-package @ git+https://github.com/oca/delivery-carrier.git@refs/pull/623/head#subdirectory=setup/stock_picking_delivery_package
 
 # wms
 # https://github.com/OCA/wms/pull/609
