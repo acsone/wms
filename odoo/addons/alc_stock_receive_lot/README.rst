@@ -10,9 +10,19 @@ Add a new reception wizard to more easily encode destination, lot and expiration
 
 Also improve the standard lot reception wizard to allow to set expiration date.
 
-Check if the removal date is not expired when we receive a lot.
-
 Disable standard check that prevent to create a lot at reception.
+
+Tests
+=====
+
+- Create a new purchase order with a few different products in some quantity, then confirm it;
+- Click *Receive Product* on the PO, then *Receive* on the picking;
+- Choose an operation (aka move line): there should be only one per move for a newly created PO;
+- After setting the operation, the *Destination Location* should be set automatically;
+- Set the expiration date and lot name (if required) and the quantity;
+- Click either *Next lot* or *Next Operation* (try both) and check that the move line was updated by clicking on the parent move on the picking screen;
+- Do this with products with lot tracking and without. When there are several lot by move line, the move line should be split, otherwise the quantity is simply added;
+- Do this with a product with the *Aliments* category or one of it's child categories. On those the lot name should be set automatically after you enter the expiration date.
 
 Credits
 =======
