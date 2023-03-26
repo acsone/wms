@@ -64,6 +64,7 @@
         "alc_stock_release_channel_user",
         "alc_restocking_exclude_not_salable",
         "alc_stock_release_channel_pick_allowed",
+        "alc_stock_release_channel_picking_batch_creation",
     ],
     "data": [],
     "demo": [],
