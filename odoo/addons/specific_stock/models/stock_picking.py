@@ -48,32 +48,3 @@ class StockPicking(models.Model):
         return super(
             StockPicking, self.with_context(default_life_date_allowed=True)
         )._create_lots_for_picking()
-
-    @api.multi
-    def button_put_in_pack(self):
-        self.ensure_one()
-        pick = self
-        operations_total = sum(
-            x.qty_done
-            for x in pick.pack_operation_ids
-            if x.qty_done > 0 and (not x.result_package_id)
-        )
-
-        # A picking must be "put in pack" to be validated
-        self.write({"is_put_in_pack_done": True})
-
-        if not operations_total:
-            return None
-
-        wizard = self.env.ref("specific_stock.put_in_pack_helper_action")
-        wizard_values = wizard.read()[0]
-
-        # If the user pick in the aliment, we need to set the number of
-        # packages to the picked qty. Other the number of packages equals 0
-        pick_ali = self.env.ref("__setup__.stock_picking_type_ali")
-        wizard_context = safe_eval(wizard_values.get("context", "{}"))
-        if pick.picking_type_id == pick_ali:
-            wizard_context["default_nbr_packages"] = int(operations_total)
-        wizard_values["context"] = wizard_context
-
-        return wizard_values
