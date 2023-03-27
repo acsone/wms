@@ -270,7 +270,7 @@
                           <td>Class: </td>
                           <td>
                             <strong>
-                              <span t-esc="current_product.abc_storage" />
+                              <span t-field="current_product.abc_storage" />
                             </strong>
                           </td>
                         </tr>
@@ -280,6 +280,11 @@
                             <strong>
                               <span
                                 t-esc="int(current_product.advised_qty + product_qty)"
+                              />
+                              <span
+                                id="advised_qty"
+                                style="display:none"
+                                t-esc="current_product.advised_qty"
                               />
                             </strong>
                           </td>
@@ -292,6 +297,7 @@
                                 t-if="current_product.average_three_months_consumption"
                               >
                               <span
+                                  id="stock_coverage"
                                   t-esc="round(int(current_product.advised_qty + product_qty + current_product.virtual_available) /
                                   (current_product.average_three_months_consumption / 90.0), 2)"
                                 />
@@ -462,6 +468,7 @@
                     <td>Av. 3 months consumption</td>
                     <td>
                       <span
+                        id="average_three_months_consumption"
                         t-field="current_product.average_three_months_consumption"
                       />
                     </td>
@@ -475,7 +482,10 @@
                   <tr>
                     <td>Stock available</td>
                     <td>
-                      <span t-field="current_product.virtual_available" />
+                      <span
+                        id="virtual_available"
+                        t-field="current_product.virtual_available"
+                      />
                     </td>
                   </tr>
                   <tr>
