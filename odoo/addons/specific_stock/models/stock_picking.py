@@ -7,23 +7,6 @@ from odoo.exceptions import UserError
 from odoo.tools.safe_eval import safe_eval
 
 
-class StockPickingType(models.Model):
-    _inherit = "stock.picking.type"
-
-    @api.multi
-    def name_get(self):
-        """ Display 'Warehouse code: PickingType_name' """
-        res = []
-        for picking_type in self:
-            if picking_type.warehouse_id:
-                name = u"{}: {}".format(
-                    picking_type.warehouse_id.code, picking_type.name
-                )
-            else:
-                name = picking_type.name
-            res.append((picking_type.id, name))
-        return res
-
 
 class StockPicking(models.Model):
     _inherit = "stock.picking"

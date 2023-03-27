@@ -110,15 +110,4 @@
       </xpath>
     </field>
   </record>
-  <record id="view_picking_internal_search" model="ir.ui.view">
-    <field name="name">view.picking.internal.search</field>
-    <field name="model">stock.picking</field>
-    <field name="inherit_id" ref="stock.view_picking_internal_search" />
-    <field name="arch" type="xml">
-      <xpath expr="//field[@name='picking_type_id']" position="before">
-        <separator />
-        <field name="operator_id" />
-      </xpath>
-    </field>
-  </record>
 </odoo>
