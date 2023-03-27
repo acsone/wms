@@ -54,7 +54,7 @@ odoo-addon-base-sparse-field-list-support @ git+https://github.com/acsone/server
 odoo-addon-base-time-window @ git+https://github.com/acsone/server-tools.git@d01e665eeb53f0ec577c91b74f26c1f895ab3369#subdirectory=setup/base_time_window
 odoo-addon-delivery-carrier-account==16.0.1.0.0.4
 odoo-addon-delivery-carrier-info==16.0.1.0.0.2
-odoo-addon-delivery-carrier-label-gls @ git+https://github.com/acsone/delivery-carrier.git@8d7564ac6d67e77eadba41a3de2f3c1fe656fd13#subdirectory=setup/delivery_carrier_label_gls
+odoo-addon-delivery-carrier-label-gls @ git+https://github.com/acsone/delivery-carrier.git@db253a1b9dcb48a634cbbd2bc5f10be44a0ed48e#subdirectory=setup/delivery_carrier_label_gls
 odoo-addon-delivery-carrier-max-weight-constraint==16.0.1.0.1
 odoo-addon-delivery-estimated-package-quantity-by-weight @ git+https://github.com/acsone/delivery-carrier.git@628d15f465d02c468772d7f92fe7c3e3eebd3c18#subdirectory=setup/delivery_estimated_package_quantity_by_weight
 odoo-addon-delivery-package-type-number-parcels==16.0.1.0.1
