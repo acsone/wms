@@ -1,13 +1,12 @@
-# -*- coding: utf-8 -*-
 # Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import fields, models
+from odoo import fields
+
+from odoo.addons.base.models.res_users import Users as BaseUsers
 
 
-class ResUsers(models.Model):
-
-    _inherit = "res.users"
+class ResUsers(BaseUsers):
 
     pywebdriver_proxy_ip = fields.Char(
         string="PyWebDriver IP Address",

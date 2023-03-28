@@ -211,7 +211,6 @@ exclude = [
   'odoo/addons/alc_product_stock_state/*',
   'odoo/addons/alc_purchase_order_import_ubl/*',
   'odoo/addons/alc_purchase_order_ubl/*',
-  'odoo/addons/alc_pywebdriver/*',
   'odoo/addons/alc_reception_pharmacy/*',
   'odoo/addons/alc_reception_pharmacy_geo_delivery_rounds/*',
   'odoo/addons/alc_registration/*',
