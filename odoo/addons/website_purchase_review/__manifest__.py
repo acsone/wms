@@ -19,6 +19,7 @@
         "purchase",
         "stock",
         "stock_orderpoint_product",
+        "alc_product_picking_zone",
     ],
     "data": ["views/purchase_order.xml", "views/templates.xml"],
     "website": "http://www.camptocamp.com",

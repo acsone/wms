@@ -82,6 +82,7 @@ class PurchaseReview(Home):
             "is_confirmed_line": False,
             "is_existing_line": False,
             "return_url": po.get_url(),
+            "picking_zones": po._get_purchase_review_picking_zones(),
         }
 
         if po.discount_global_overwrite:

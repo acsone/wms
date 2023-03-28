@@ -194,6 +194,7 @@ odoo.define("website_purchase_review.main_page", function(require) {
         with_promo: products[index].with_promo,
         without_promo: products[index].without_promo,
         is_in_bo: products[index].is_in_bo,
+        picking_zone: products[index].picking_zone,
       });
     });
 
@@ -211,8 +212,19 @@ odoo.define("website_purchase_review.main_page", function(require) {
     var products_without_promo = $("#products_without_promo").is(":checked");
     var products_with_promo = $("#products_with_promo").is(":checked");
     var product_name = $("#product_name").val();
-
+    var picking_zones_checked = [];
+    $("input[id*=picking_zone_]").each(function() {
+      if ($(this).is(":checked")) {
+        picking_zones_checked.push(this.id);
+      }
+    });
     current_products_list = products_list.filter(function(product) {
+      if (
+        picking_zones_checked.length &&
+        !picking_zones_checked.includes(product.picking_zone)
+      ) {
+        return false;
+      }
       if (ordered_product && !product.ordered_products) {
         return false;
       }

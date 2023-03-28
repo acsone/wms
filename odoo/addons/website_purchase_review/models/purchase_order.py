@@ -71,12 +71,17 @@ class PurchaseOrder(models.Model):
             self.order_line._onchange_price_unit()
 
     @api.multi
+    def _get_all_products(self):
+        self.ensure_one()
+        return self.env["product.product"].search(
+            [("supplier_id", "=", self.partner_id.id)], order="name"
+        )
+
+    @api.multi
     def get_products(self):
         self.ensure_one()
 
-        products = self.env["product.product"].search(
-            [("supplier_id", "=", self.partner_id.id)], order="name"
-        )
+        products = self._get_all_products()
 
         all_products = []
         for product in products:
@@ -101,7 +106,6 @@ class PurchaseOrder(models.Model):
                 is_without_promo = not is_with_promo
 
             is_in_bo = product.immediately_usable_qty < 0
-
             result.append(
                 {
                     "id": product.id,
@@ -112,6 +116,7 @@ class PurchaseOrder(models.Model):
                     "with_promo": is_with_promo,
                     "without_promo": is_without_promo,
                     "is_in_bo": is_in_bo,
+                    "picking_zone": "picking_zone_%s" % product.picking_zone_id.id,
                 }
             )
         return result
@@ -247,3 +252,8 @@ class PurchaseOrder(models.Model):
             "menu_id": self.env.ref("purchase.menu_purchase_root").id,
         }
         return "/web#" + urllib.urlencode(vals)
+
+    @api.multi
+    def _get_purchase_review_picking_zones(self):
+        products = self._get_all_products()
+        return products.mapped("picking_zone_id")
