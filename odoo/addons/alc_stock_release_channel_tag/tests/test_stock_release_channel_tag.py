@@ -3,19 +3,16 @@
 
 from odoo.tools import mute_logger
 
-from odoo.addons.stock_release_channel_geoengine.tests.common import (
-    TestStockReleaseChannelGeoengineCommon,
-)
+from odoo.addons.stock_release_channel.tests.common import ChannelReleaseCase
 
 
-class TestStockReleaseChannelTag(TestStockReleaseChannelGeoengineCommon):
+class TestStockReleaseChannelTag(ChannelReleaseCase):
     @classmethod
     @mute_logger("odoo.addons.stock_release_channel.models.stock_release_channel")
     def setUpClass(cls):
         super().setUpClass()
-        cls.delivery_address_1.geo_point = cls.point1
-        cls.delivery_address_2.geo_point = cls.point2
-        cls.other_partner.geo_point = cls.point3
+        cls.pickings = cls.picking + cls.picking2 + cls.picking3
+        cls.pickings.write({"release_channel_id": False})
         cls.tag = cls.env.ref(
             "alc_stock_release_channel_tag.alc_stock_release_channel_tag_demo_1"
         )

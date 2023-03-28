@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record id="stock_release_channel_dashboard_kanban_view" model="ir.ui.view">
+        <field name="model">stock.release.channel</field>
+        <field name="arch" type="xml">
+            <kanban
+        class="oe_background_grey o_kanban_dashboard o_release_channel_kanban"
+        group_create="0"
+        create="0"
+      >
+                <field name="id" />
+                <field name="name" />
+                <field name="color" />
+                <field name="pick_allowed" />
+                <field name="state" />
+                <field name="is_auto_release_allowed" />
+                <field name="release_forbidden" />
+                <field name="active" />
+                <field name="kanban_dashboard" />
+                <templates>
+                    <t t-name="kanban-box">
+                        <t
+              t-value="JSON.parse(record.kanban_dashboard.raw_value)"
+              t-set="dashboard"
+            />
+                        <div
+              t-attf-class="#{!selection_mode ? kanban_color(record.color.raw_value) : ''}"
+            >
+                            <t t-call="ChannelTop" />
+                            <t t-call="ChannelDashboard" />
+                        </div>
+                    </t>
+                    <t t-name="ChannelTop">
+                        <div t-attf-class="o_kanban_card_header">
+                            <div class="o_kanban_card_header_title">
+                                <div class="o_primary">
+                                    <a
+                    type="object"
+                    name="action_kanban_dashboard_open"
+                  >
+                                        <field name="name" />
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="o_kanban_manage_button_section">
+                                <a class="o_kanban_manage_toggle_button" href="#">
+                                    <i
+                    class="fa fa-ellipsis-v"
+                    aria-label="Selection"
+                    role="img"
+                    title="Selection"
+                  />
+                                </a>
+                            </div>
+                            <div
+                class="container o_kanban_card_manage_pane dropdown-menu"
+                role="menu"
+              >
+                                <t t-call="ChannelManage" />
+                            </div>
+                        </div>
+                    </t>
+                    <t t-name="ChannelManage">
+                        <div
+              t-if="widget.editable"
+              class="o_kanban_card_manage_settings row"
+            >
+                            <div class="col-8">
+                                <ul class="oe_kanban_colorpicker" data-field="color" />
+                            </div>
+                        </div>
+                        <div class="row o_kanban_card_settings">
+                            <div class="col-6 text-right mt-1">
+                                <a
+                  class="dropdown-item"
+                  t-if="widget.editable"
+                  type="edit"
+                >Configuration
+                                </a>
+                            </div>
+                        </div>
+                    </t>
+                    <t t-name="ChannelDashboard">
+                        <div class="o_kanban_card_header_title">
+                        <div
+                class="ribbon ribbon-top-right"
+                attrs="{'invisible': ['|', ('release_forbidden', '=', False), ('active', '=', False)]}"
+              ><span class="bg-danger" title="">Forbidden</span></div>
+                        <div
+                class="ribbon ribbon-top-right"
+                attrs="{'invisible': [('active', '=', True)]}"
+              ><span class="bg-danger" title="">Archived</span></div>
+                            <div class="row">
+                                <div class="col-2">
+                                  <a name="button_toggle_pick_allowed" type="object">
+                                    <i
+                      name="start_stop_pickings"
+                      t-attf-class="oe_inline fa #{record.pick_allowed.raw_value ? 'fa-volume-up' : 'fa-volume-off'}"
+                      title="Start/Stop pickings"
+                    />
+                                  </a>
+                                </div>
+                                <div class="col-2">
+                                    <t
+                    t-set="lock_class_name"
+                    t-value="{'open': 'fa fa-unlock', 'locked': 'fa fa-lock', 'asleep': 'fa fa-bed'}[record.state.raw_value] || ''"
+                  />
+                                  <a name="button_toggle_locked" type="object">
+                                    <i
+                      t-attf-class="{{ lock_class_name }}"
+                      title="Lock/Unlock destinations"
+                    />
+                                  </a>
+                                </div>
+                                <div
+                  class="col-2"
+                  attrs="{'invisible': [('release_mode', '!=', 'auto')]}"
+                >
+                                    <i
+                    t-att-class="'fa fa-cog ' + (record.is_auto_release_allowed.raw_value ? 'fa-spin': '')"
+                    role="img"
+                    aria-label="Release mode auto"
+                    title="Automatic Release mode"
+                  />
+                                </div>
+                                <div class="col-6">
+                                    <field name="release_mode" />
+                                </div>
+                            </div>
+                        </div>
+                        <div
+              class="row o_kanban_card_manage_section o_kanban_manage_view"
+            >
+                            <div class="col-12">
+                            <table style="width:100%;">
+                            <tr
+                    t-foreach="dashboard"
+                    t-as="obj"
+                    style="border-bottom: 2px #f6f6fa solid;"
+                  >
+                                <td width="40%">
+                                    <a
+                        type="object"
+                        name="action_kanban_dashboard_open"
+                        t-att-context="{'active_id': obj['id'], 'active_model': obj['model'], 'filter_type':'todo'}"
+                      >
+                                        <strong t-out="obj['name']" />
+                                    </a>
+                                </td>
+                                <td width="50%">
+                                    <div class="progress">
+                                       <div
+                          class="progress-bar progress-bar-striped"
+                          role="progressbar"
+                          t-att-aria-valuenow="obj['done']"
+                          aria-valuemin="0"
+                          t-att-aria-valuemax="obj['todo']"
+                          t-att-style="'width: ' + obj['done'] / obj['todo'] * 100 + '%;'"
+                        >
+                                           <span t-out="obj['progress']" />
+                                       </div>
+                                    </div>
+                                </td>
+                                <td width="4%" style="text-align: right;">
+                                    <a
+                        type="object"
+                        name="action_kanban_dashboard_open"
+                        t-att-context="{'active_id': obj['id'], 'active_model': obj['model'], 'filter_type':'done'}"
+                      >
+                                        <span t-out="obj['done']" />
+                                    </a>
+                                </td>
+                                <td width="1%">/</td>
+                                <td width="4%">
+                                    <a
+                        type="object"
+                        name="action_kanban_dashboard_open"
+                        t-att-context="{'active_id': obj['id'], 'active_model': obj['model'], 'filter_type':'todo'}"
+                      >
+                                    <span t-out="obj['todo']" />
+                                    </a>
+                                </td>
+                                <td width="1%">
+                                  <a
+                        name="button_toggle_pick_allowed"
+                        type="object"
+                        t-att-context="{'picking_type_id': obj['id']}"
+                        t-if="'pick_allowed' in obj"
+                      >
+                                    <i
+                          name="start_stop_pickings"
+                          t-attf-class="oe_inline fa #{obj['pick_allowed'] ? 'fa-volume-up' : 'fa-volume-off'}"
+                          title="Start/Stop pickings"
+                        />
+                                  </a>
+                                </td>
+                            </tr>
+                            </table>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+    <record
+    id="stock_release_channel_geoengine.action_stock_release_channel_kanban"
+    model="ir.actions.act_window.view"
+  >
+    <field
+      name="view_id"
+      ref="alc_stock_release_channel_dashboard.stock_release_channel_dashboard_kanban_view"
+    />
+
+  </record>
+</odoo>

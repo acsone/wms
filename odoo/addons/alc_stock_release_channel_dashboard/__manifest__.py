@@ -1,0 +1,25 @@
+# Copyright 2023 ACSONE SA/NV
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+
+{
+    "name": "Alc Stock Release Channel Dashboard",
+    "description": """
+        This addon improves release channels kanban view""",
+    "version": "16.0.1.0.0",
+    "license": "AGPL-3",
+    "author": "ACSONE SA/NV",
+    "website": "https://acsone.eu",
+    "depends": [
+        "stock_release_channel_geoengine",
+        "stock_release_channel_shipment_advice",
+        "stock_release_channel_auto_release",
+        "stock_release_channel_process_end_time",
+        "alc_stock_release_channel_pick_allowed",
+    ],
+    "data": ["views/stock_release_channel.xml"],
+    "assets": {
+        "web.assets_backend": [
+            "alc_stock_release_channel_dashboard/static/src/scss/channel_dashboard.scss",
+        ],
+    },
+}

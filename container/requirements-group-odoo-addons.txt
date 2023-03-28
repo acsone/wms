@@ -18,17 +18,18 @@ odoo-addon-base-geoengine @ git+https://github.com/acsone/geospatial.git@0a097bc
 odoo-addon-base-partner-sequence==16.0.1.0.0.3
 odoo-addon-base-report-to-printer==16.0.1.1.0.1
 odoo-addon-base-sparse-field-list-support @ git+https://github.com/acsone/server-tools.git@f75469cfc3ead20b6224195b653ddba735a219b4#subdirectory=setup/base_sparse_field_list_support
-odoo-addon-base-time-window @ git+https://github.com/acsone/server-tools.git@d01e665eeb53f0ec577c91b74f26c1f895ab3369#subdirectory=setup/base_time_window
+odoo-addon-base-time-window==16.0.1.0.0.3
 odoo-addon-delivery-carrier-account==16.0.1.0.0.4
 odoo-addon-delivery-carrier-info==16.0.1.0.0.2
 odoo-addon-delivery-carrier-label-gls @ git+https://github.com/acsone/delivery-carrier.git@8d7564ac6d67e77eadba41a3de2f3c1fe656fd13#subdirectory=setup/delivery_carrier_label_gls
 odoo-addon-delivery-carrier-max-weight-constraint==16.0.1.0.1
 odoo-addon-delivery-estimated-package-quantity-by-weight @ git+https://github.com/acsone/delivery-carrier.git@628d15f465d02c468772d7f92fe7c3e3eebd3c18#subdirectory=setup/delivery_estimated_package_quantity_by_weight
 odoo-addon-delivery-package-type-number-parcels==16.0.1.0.1
+odoo-addon-delivery-procurement-group-carrier==16.0.1.0.0.2
 odoo-addon-geoengine-base-geolocalize @ git+https://github.com/acsone/geospatial.git@d977cbdc42825e5d241ebe91203e0d087d73b2e7#subdirectory=setup/geoengine_base_geolocalize
 odoo-addon-geoengine-partner @ git+https://github.com/acsone/geospatial.git@ff4a76d86be5abd88dcb0f84c5def21a70e2262d#subdirectory=setup/geoengine_partner
 odoo-addon-partner-manual-rank==16.0.1.0.1
-odoo-addon-partner-tz @ git+https://github.com/acsone/partner-contact@70915afa6bf0beae725d1998bd0d600b6dffd2b7#subdirectory=setup/partner_tz
+odoo-addon-partner-tz==16.0.1.0.0.3
 odoo-addon-product-abc-classification @ git+https://github.com/acsone/product-attribute.git@cc97df93b3f97e947c2ed38cc6232c0a642f65e1#subdirectory=setup/product_abc_classification
 odoo-addon-product-attribute-set @ git+https://github.com/acsone/odoo-pim.git@d50bd057ca672edea3ffb1587b390c24b7002bcf#subdirectory=setup/product_attribute_set
 odoo-addon-product-dimension==16.0.1.1.0.1
@@ -40,11 +41,11 @@ odoo-addon-product-packaging-level-pallet @ git+https://github.com/acsone/produc
 odoo-addon-product-price-category @ git+https://github.com/acsone/sale-workflow.git@bd03b6c5a098a1ce9dce4f594be675990049ff7d#subdirectory=setup/product_price_category
 odoo-addon-product-route-mto @ git+https://github.com/acsone/product-attribute.git@f7a09db24299d7e08dd65e9acc9c62449c43562d#subdirectory=setup/product_route_mto
 odoo-addon-product-state==16.0.1.0.0.2
-odoo-addon-product-template-has-one-variant @ git+https://github.com/acsone/product-attribute.git@07c1609e5ec906cbca3377a62ea55ff8e78c9a2c#subdirectory=setup/product_template_has_one_variant
+odoo-addon-product-template-has-one-variant==16.0.1.0.1
 odoo-addon-product-total-weight-from-packaging @ git+https://github.com/acsone/product-attribute.git@0ae6102ff01a7ea8622e20a5a47ecfbe68314a4d#subdirectory=setup/product_total_weight_from_packaging
 odoo-addon-product-uom-updatable @ git+https://github.com/acsone/product-attribute.git@acf4a2eab1bac99aae7c0a86806817407e3727c4#subdirectory=setup/product_uom_updatable
 odoo-addon-purchase-cancel-reason @ git+https://github.com/acsone/purchase-workflow.git@4d9c8cf585059f70e397db19d07f79050d87b68d#subdirectory=setup/purchase_cancel_reason
-odoo-addon-purchase-delivery-split-date @ git+https://github.com/acsone/purchase-workflow.git@93078bd65d4aad4c1a4b138e2a4664bcf57e88fd#subdirectory=setup/purchase_delivery_split_date
+odoo-addon-purchase-delivery-split-date==16.0.1.0.0.7
 odoo-addon-queue-job==16.0.2.0.0
 odoo-addon-queue-job-cron==16.0.1.0.0.1
 odoo-addon-report-xlsx==16.0.1.0.1.1

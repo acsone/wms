@@ -11,9 +11,9 @@
     "website": "https://acsone.eu",
     "depends": ["stock_release_channel"],
     "data": [
+        "security/alc_stock_release_channel_tag.xml",
         "views/stock_release_channel.xml",
         "views/res_partner.xml",
-        "security/alc_stock_release_channel_tag.xml",
         "views/alc_stock_release_channel_tag.xml",
     ],
     "demo": ["demo/alc_stock_release_channel_tag.xml"],
