@@ -12,6 +12,7 @@
     "depends": ["product_state"],
     "data": [
         "data/product_state.xml",
+        "views/product_template_views.xml",
     ],
     "demo": [],
     "installable": True,
