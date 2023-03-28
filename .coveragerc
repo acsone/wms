@@ -123,7 +123,6 @@ omit =
     odoo/addons/alc_partner_category/*
     odoo/addons/alc_partner_delivery_person/*
     odoo/addons/alc_partner_delivery_window_import/*
-    odoo/addons/alc_partner_force_re_geolocalization/*
     odoo/addons/alc_pg_trgm/*
     odoo/addons/alc_pim/*
     odoo/addons/alc_placedesvetos/*

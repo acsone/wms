@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 import random
@@ -9,7 +8,7 @@ from odoo.tests.common import SavepointCase
 class TestForceRelocalization(SavepointCase):
     @classmethod
     def setUpClass(cls):
-        super(TestForceRelocalization, cls).setUpClass()
+        super().setUpClass()
         vals_partner = {
             "name": "Unittest partner",
             "city": "Ramillies",
@@ -18,7 +17,7 @@ class TestForceRelocalization(SavepointCase):
             "street": "9, rue des bourlottes",
             "country_id": cls.env.ref("base.be").id,
             "ref": "12344566777878",
-            "customer": True,
+            "customer_rank": 1,
             "is_b2c_customer": False,
             "partner_latitude": 50.62998,
             "partner_longitude": 4.86337,
