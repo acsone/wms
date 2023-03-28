@@ -704,7 +704,7 @@
       </div>
       <div class="col-md-3 h-100 d-inline-block" style="height: 100%; min-height: 100%">
         <div class="border" style="height: 100%; min-height: 100%; ">
-          <div style="height: 120px;">
+          <div>
             <div class="row">
               <div class="col-md-8">
                 <div id="products_list_header">
@@ -720,6 +720,13 @@
                     type="checkbox"
                     id="products_with_promo"
                   /> Products with promotions<br />
+                  <strong t-if="picking_zones">Picking Zones</strong><br />
+                  <t t-foreach="picking_zones" t-as="picking_zone">
+                      <input
+                      type="checkbox"
+                      t-att-id="'picking_zone_%s' % picking_zone.id"
+                    /> <t t-esc="picking_zone.display_name" /><br />
+                  </t>
                                     <input
                     type="text"
                     id="product_name"
