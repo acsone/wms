@@ -216,7 +216,6 @@ omit =
     odoo/addons/alc_stock_picking_wave_type/*
     odoo/addons/alc_stock_put_remaining_to_reserve/*
     odoo/addons/alc_stock_receive_frigo/*
-    odoo/addons/alc_stock_receive_lot_expiry/*
     odoo/addons/alc_stock_receive_lot_missing_product_nouveaute_info/*
     odoo/addons/alc_stock_storage_type/*
     odoo/addons/alc_storage/*

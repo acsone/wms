@@ -129,7 +129,7 @@ class TestPackOperationLotAdd(TransactionCase):
 
         # select operation
         wiz.move_line_id = op1
-        wiz._compute_move_line_id()
+        wiz._set_wiz_default_values()
         self.assertEqual(5, wiz.remaining_qty)
 
         # select destination
@@ -179,7 +179,7 @@ class TestPackOperationLotAdd(TransactionCase):
         wiz.move_line_id = op2
         # After next op, dest location is now reset
         wiz.location_dest_id = self.bin1
-        wiz._compute_move_line_id()
+        wiz._set_wiz_default_values()
         self.assertEqual(5, wiz.remaining_qty)
         self.assertEqual(self.bin1, wiz.location_dest_id)
 
@@ -213,13 +213,13 @@ class TestPackOperationLotAdd(TransactionCase):
         # select operation
         with self.assertRaises(UserError), self.env.cr.savepoint():
             wiz.move_line_id = op1
-            wiz._compute_move_line_id()
+            wiz._set_wiz_default_values()
             self.assertEqual(wiz.remaining_qty, 5)
             wiz.qty = 10
             wiz.lot_name = "Unittest Reception L1"
             wiz.button_nextop()
         wiz.move_line_id = op1
-        wiz._compute_move_line_id()
+        wiz._set_wiz_default_values()
         self.assertEqual(wiz.remaining_qty, 5)
         wiz.qty = 10
         wiz.is_surplus_qty_confirmed = True
@@ -242,7 +242,7 @@ class TestPackOperationLotAdd(TransactionCase):
         # select operation
         with self.assertRaises(UserError), self.env.cr.savepoint():
             wiz.move_line_id = op1
-            wiz._compute_move_line_id()
+            wiz._set_wiz_default_values()
             self.assertEqual(wiz.remaining_qty, 5)
             self.assertTrue(wiz.lot_required)
             wiz.qty = 10
@@ -250,7 +250,7 @@ class TestPackOperationLotAdd(TransactionCase):
             wiz.lot_name = "Unittest Reception L1"
             wiz.button_nextop()
         wiz.move_line_id = op1
-        wiz._compute_move_line_id()
+        wiz._set_wiz_default_values()
         self.assertTrue(wiz.lot_required)
         self.assertEqual(wiz.remaining_qty, 5)
         wiz.qty = 10
@@ -276,7 +276,7 @@ class TestPackOperationLotAdd(TransactionCase):
 
         # select operation
         wiz.move_line_id = op1
-        wiz._compute_move_line_id()
+        wiz._set_wiz_default_values()
         self.assertEqual(wiz.remaining_qty, 5)
 
         # destination is already pre-selected
@@ -284,7 +284,7 @@ class TestPackOperationLotAdd(TransactionCase):
 
         # change operation
         wiz.move_line_id = op2
-        wiz._compute_move_line_id()
+        wiz._set_wiz_default_values()
         self.assertEqual(wiz.remaining_qty, 5)
 
         # destination has changed
@@ -306,7 +306,7 @@ class TestPackOperationLotAdd(TransactionCase):
         # select operation
         wiz.move_line_id = op1
         wiz.location_dest_id = self.bin1
-        wiz._compute_move_line_id()
+        wiz._set_wiz_default_values()
         self.assertEqual(wiz.remaining_qty, 5)
 
         # destination is already pre-selected
@@ -356,16 +356,16 @@ class TestPackOperationLotAdd(TransactionCase):
 
         op.location_dest_id = self.bin1
         wiz.move_line_id = op
-        wiz._compute_move_line_id()
+        wiz._set_wiz_default_values()
         self.assertEqual(wiz.location_dest_id, self.bin1)
         self.assertEqual(wiz.remaining_qty, 5)
         wiz.qty = 1
         wiz.button_nextop()
         wiz.move_line_id = op
-        wiz._compute_move_line_id()
+        wiz._set_wiz_default_values()
         self.assertEqual(wiz.remaining_qty, 4)
         wiz.qty = 2
         wiz.button_nextop()
         wiz.move_line_id = op
-        wiz._compute_move_line_id()
+        wiz._set_wiz_default_values()
         self.assertEqual(wiz.remaining_qty, 2)

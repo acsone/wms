@@ -12,7 +12,7 @@
           type="object"
           class="oe_highlight"
           groups="base.group_user"
-          context="{'default_picking_id':active_id}"
+          context="{'default_picking_id': id}"
           attrs="{'invisible': ['|', ('picking_type_code', '!=', 'incoming'), ('state', '!=', 'assigned')]}"
         />
       </button>

@@ -29,7 +29,6 @@ class StockPackOperationLotAdd(models.TransientModel):
     move_line_id = fields.Many2one[StockMoveLine](
         string="Operation",
         domain=[("state", "=", "assigned")],
-        compute="_compute_move_line_id",
         readonly=False,
     )
     move_id = fields.Many2one[StockMove](related="move_line_id.move_id")
@@ -55,7 +54,9 @@ class StockPackOperationLotAdd(models.TransientModel):
     is_surplus_qty_confirmed = fields.Boolean("Confirm received more than expected")
     expiration_date_char = fields.Char(string="Expiration date (input)")
     expiration_date = fields.Datetime(string="Expiration date")
-    lot_name = fields.Char("Lot Name", compute="_compute_lot_name", readonly=False)
+    lot_name = fields.Char(
+        "Lot Name", compute="_compute_lot_name", store=True, readonly=False
+    )
     lot_id = fields.Many2one[StockLot](string="Lot")
 
     @api.depends("qty", "remaining_qty")
@@ -65,17 +66,23 @@ class StockPackOperationLotAdd(models.TransientModel):
 
     @api.depends("move_line_id", "expiration_date")
     def _compute_lot_name(self):
-        compute_name = self.env["stock.lot"]._calc_lotname_from_expiration_date
+        compute_name = self.env["stock.lot"]._calc_name_for_food
         for wiz in self:
             lot_name = wiz.lot_name
-            if wiz.product_id.is_food and wiz.expiration_date:
+            if wiz.expiration_date:
                 lot_name = compute_name(wiz.expiration_date)
             wiz.lot_name = lot_name
 
     def _is_parent_child(self, parent, child):
-        return child.parent_path.startswith(parent.parent_path)
+        if child and parent:
+            return child.parent_path.startswith(parent.parent_path)
+        return False
 
-    def _compute_move_line_id(self):
+    @api.onchange("move_line_id")
+    def _onchange_move_line_id(self):
+        self._set_wiz_default_values()
+
+    def _set_wiz_default_values(self):
         for wiz in self:
             op_dest_loc = wiz.move_line_id.location_dest_id
             if op_dest_loc.usage == "internal":
@@ -145,7 +152,7 @@ class StockPackOperationLotAdd(models.TransientModel):
     def _onchange_expiration_date(self):
         lot = self.env["stock.lot"]
         if self.expiration_date and self.move_line_id:
-            self.lot_name = lot._calc_lotname_from_expiration_date(self.expiration_date)
+            self.lot_name = lot._calc_name_for_food(self.expiration_date)
 
     def _lot_onchange_expiration_date(self, lot):
         methods = lot._onchange_methods.get("expiration_date", ())
