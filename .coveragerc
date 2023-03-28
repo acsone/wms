@@ -146,7 +146,6 @@ omit =
     odoo/addons/alc_product_link_notice/*
     odoo/addons/alc_product_mto/*
     odoo/addons/alc_product_packaging_stock_reserve/*
-    odoo/addons/alc_product_promoted_links/*
     odoo/addons/alc_product_promotion_mailing/*
     odoo/addons/alc_product_promotion_subscription/*
     odoo/addons/alc_product_search_cnk/*
