@@ -182,6 +182,11 @@ msgstr "Qté commande"
 
 #. module: website_purchase_review
 #: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
+msgid "Picking Zones"
+msgstr ""
+
+#. module: website_purchase_review
+#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
 msgid "Price"
 msgstr "Prix"
 
