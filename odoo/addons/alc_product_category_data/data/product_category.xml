@@ -50,6 +50,13 @@
         <field name="property_cost_method">average</field>
     </record>
 
+    <record id="product_categ_colis_souverain" model="product.category">
+        <field name="name">Colis</field>
+        <field name="is_business_unit" />
+        <field name="parent_id" ref="product_categ_humain" />
+        <field name="property_cost_method">average</field>
+    </record>
+
     <record id="product_categ_parapharmacie" model="product.category">
         <field name="name">Parapharmacie</field>
         <field name="is_business_unit" />

@@ -34,7 +34,7 @@ def get_version():
             )
             return cr.fetchone()[0]
     except Exception:
-        return "16.0.1.0.0"
+        return "10.0.0.0.0"
 
 
 CURRENT_VERSION = VERSION or get_version()
@@ -103,6 +103,92 @@ def cleanup_geoengine_layers():
             DELETE FROM geoengine_raster_layer;
         """
         openupgrade.logged_query(cr, query)
+
+
+@task("16.0.1.0.0")
+def delete_uninstallable_xml_ids():
+    """Delete menus, filters, record rules from uninstallable modules."""
+    # TODO: this could be done unconditionally for all these records?
+    with cursor(DB_16_POSTMIG) as cr:
+        for model, table, fk_column in (
+            ("report.layout", "report_layout", None),
+            ("ir.ui.view", "ir_ui_view", "inherit_id"),
+            ("ir.filters", "ir_filters", None),
+            ("ir.ui.menu", "ir_ui_menu", "parent_id"),
+            ("ir.rule", "ir_rule", None),
+            ("ir.cron", "ir_cron", None),
+            ("ir.actions.todo", "ir_actions_todo", None),
+            ("ir.actions.server", "ir_act_server", None),
+            ("ir.actions.report", "ir_act_report_xml", None),
+            ("ir.actions.client", "ir_act_client", None),
+            ("ir.actions.act_window", "ir_act_window", None),
+        ):
+            # we delete the records from the table. For each table to delete,
+            # we get the name of the column that is the foreign key to the
+            # same table. We ensure that the record is not referenced by
+            # another record.
+            if fk_column:
+                query = f"""
+                    UPDATE {table} set {fk_column}=NULL WHERE {fk_column} IN (
+                            select res_id from ir_model_data imd
+                            left join ir_module_module imm on imm.name=imd.module
+                            where (imm.state != 'installed' or imm.latest_version NOT LIKE '16.%') and model='{model}'
+                        )
+                    """
+                cr.execute(query)
+                print("Updated", cr.rowcount, f"from {table}")
+
+            query = f"""
+                delete from {table}
+                where id in (
+                    select res_id from ir_model_data imd
+                    left join ir_module_module imm on imm.name=imd.module
+                    where (imm.state != 'installed' or imm.latest_version NOT LIKE '16.%') and model='{model}'
+                )
+                """
+            cr.execute(query)
+            print("deleted", cr.rowcount, f"from {table}")
+
+            if model.startswith("ir.actions."):
+                query = f"""
+                    delete from ir_actions
+                    where id in (
+                        select res_id from ir_model_data imd
+                        left join ir_module_module imm on imm.name=imd.module
+                        where (imm.state != 'installed' or imm.latest_version NOT LIKE '16.%') and model='{model}'
+                    )
+                    """
+                cr.execute(query)
+                print("deleted", cr.rowcount, "from ir_actions")
+
+            query = f"""
+                delete from ir_model_data
+                where model='{model}'
+                and module in (
+                    select name from ir_module_module where (state != 'installed' or latest_version NOT LIKE '16.%')
+                )
+                """
+            cr.execute(query)
+            print("deleted", cr.rowcount, "from ir_model_data")
+
+
+@task("16.0.1.0.0")
+def cleanup_assets():
+    query = """
+        DELETE FROM ir_asset ia
+        WHERE EXISTS(
+            SELECT
+                True
+            FROM
+                ir_module_module imm
+            WHERE
+                ia.name LIKE CONCAT(imm.name, '.%')
+                AND imm.state != 'installed' or imm.latest_version NOT LIKE '16.%'
+        );
+        """
+    with cursor(DB_16_POSTMIG) as cr:
+        cr.execute(query)
+        print("deleted", cr.rowcount, "from ir_asset")
 
 
 @task("16.0.1.0.0")
@@ -269,11 +355,23 @@ def declare_alc_product_category_data_module_as_installed():
         query = """
             INSERT INTO ir_module_module
             (name, state, author, website, license, shortdesc, description, auto_install, latest_version, sequence, category_id, icon, create_uid, create_date, write_uid, write_date)
-            SELECT 'alc_product_category_data', 'to upgrade', author, website, license, shortdesc, description, auto_install, '16.0.1.0.0', sequence, category_id, icon, create_uid, create_date, write_uid, write_date
+            SELECT 'alc_product_category_data', 'to upgrade', author, website, license, shortdesc, description, auto_install, '10.0.1.0.0', sequence, category_id, icon, create_uid, create_date, write_uid, write_date
             FROM ir_module_module
             WHERE name = 'specific_data'
             """
         openupgrade.logged_query(cr, query)
+
+        # declare xml ids for product.category
+        # as no update
+        openupgrade.logged_query(
+            cr,
+            """
+            UPDATE ir_model_data
+            SET noupdate=True
+            WHERE module='specific_data'
+            AND model='product.category'
+        """,
+        )
 
 
 @task("16.0.1.0.0")

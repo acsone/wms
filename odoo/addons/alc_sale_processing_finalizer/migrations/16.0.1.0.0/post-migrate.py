@@ -12,8 +12,12 @@ def migrate(cr, version):
         """
         UPDATE delivery_carrier dc
         SET is_long_term_delivery = TRUE
-        WHERE dc.id = (SELECT res_id FROM ir_model_data
-                       WHERE model LIKE 'delivery.carrier'
-                       AND name LIKE 'deliver_carrier_long_term')
+        WHERE dc.id = (
+            SELECT res_id FROM ir_model_data
+                WHERE
+                model = 'delivery.carrier'
+                AND name = 'deliver_carrier_long_term'
+                AND module = 'alc_sale_processing_finalizer'
+        )
     """
     )

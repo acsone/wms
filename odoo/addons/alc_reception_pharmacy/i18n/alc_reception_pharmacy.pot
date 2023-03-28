@@ -59,6 +59,12 @@ msgid "Colis Souverain Frigo"
 msgstr ""
 
 #. module: alc_reception_pharmacy
+#: model:product.product,name:alc_reception_pharmacy.product_colis_souverain_frigo_immunopharma
+#: model:product.template,name:alc_reception_pharmacy.product_colis_souverain_frigo_immunopharma_product_template
+msgid "Colis Souverain Frigo Immunopharma"
+msgstr ""
+
+#. module: alc_reception_pharmacy
 #: model:ir.model.fields,field_description:alc_reception_pharmacy.field_receive_pharmacy_products_create_uid
 #: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy_create_uid
 #: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy_line_create_uid
@@ -163,6 +169,7 @@ msgid "Lines"
 msgstr ""
 
 #. module: alc_reception_pharmacy
+#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_receive_pharmacy_products_lot_name
 #: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy_line_lot_id
 msgid "Lot"
 msgstr ""
@@ -211,7 +218,7 @@ msgid "Pharmacy Reception Printer"
 msgstr ""
 
 #. module: alc_reception_pharmacy
-#: code:addons/alc_reception_pharmacy/models/reception_pharmacy.py:55
+#: code:addons/alc_reception_pharmacy/models/reception_pharmacy.py:50
 #, python-format
 msgid "Please insert at least one line"
 msgstr ""
@@ -270,13 +277,13 @@ msgid "Reception Pharmacy List"
 msgstr ""
 
 #. module: alc_reception_pharmacy
-#: code:addons/alc_reception_pharmacy/models/reception_pharmacy.py:69
+#: code:addons/alc_reception_pharmacy/models/reception_pharmacy.py:64
 #, python-format
 msgid "Reception pharmacy : lines are validated in background"
 msgstr ""
 
 #. module: alc_reception_pharmacy
-#: code:addons/alc_reception_pharmacy/models/reception_pharmacy.py:63
+#: code:addons/alc_reception_pharmacy/models/reception_pharmacy.py:58
 #, python-format
 msgid "Reception pharmacy for %s"
 msgstr ""
@@ -323,7 +330,7 @@ msgid "Supplier location is missing"
 msgstr ""
 
 #. module: alc_reception_pharmacy
-#: code:addons/alc_reception_pharmacy/wizards/receive_pharmacy_products.py:46
+#: code:addons/alc_reception_pharmacy/wizards/receive_pharmacy_products.py:49
 #, python-format
 msgid "This reception is transferred, please create a new one before adding products to receive."
 msgstr ""

@@ -24,6 +24,7 @@ gevent==22.10.2
 google-auth==2.16.0
 greenlet==2.0.2
 idna==3.4
+importlib-metadata==4.13.0
 isodate==0.6.1
 Jinja2==3.1.2
 jmespath==1.0.1
@@ -51,19 +52,19 @@ odoo-addon-base-geoengine @ git+https://github.com/acsone/geospatial.git@0a097bc
 odoo-addon-base-partner-sequence==16.0.1.0.0.3
 odoo-addon-base-report-to-printer==16.0.1.1.0.1
 odoo-addon-base-sparse-field-list-support @ git+https://github.com/acsone/server-tools.git@f75469cfc3ead20b6224195b653ddba735a219b4#subdirectory=setup/base_sparse_field_list_support
-odoo-addon-base-time-window @ git+https://github.com/acsone/server-tools.git@d01e665eeb53f0ec577c91b74f26c1f895ab3369#subdirectory=setup/base_time_window
+odoo-addon-base-time-window==16.0.1.0.0.3
 odoo-addon-delivery-carrier-account==16.0.1.0.0.4
 odoo-addon-delivery-carrier-info==16.0.1.0.0.2
 odoo-addon-delivery-carrier-label-gls @ git+https://github.com/acsone/delivery-carrier.git@8d7564ac6d67e77eadba41a3de2f3c1fe656fd13#subdirectory=setup/delivery_carrier_label_gls
 odoo-addon-delivery-carrier-max-weight-constraint==16.0.1.0.1
 odoo-addon-delivery-estimated-package-quantity-by-weight @ git+https://github.com/acsone/delivery-carrier.git@628d15f465d02c468772d7f92fe7c3e3eebd3c18#subdirectory=setup/delivery_estimated_package_quantity_by_weight
 odoo-addon-delivery-package-type-number-parcels==16.0.1.0.1
-odoo-addon-delivery-procurement-group-carrier @ git+https://github.com/acsone/stock-logistics-workflow.git@d60c1524c95caa5b293c89b89a33950a4ce844ad#subdirectory=setup/delivery_procurement_group_carrier
+odoo-addon-delivery-procurement-group-carrier==16.0.1.0.0.2
 odoo-addon-geoengine-base-geolocalize @ git+https://github.com/acsone/geospatial.git@d977cbdc42825e5d241ebe91203e0d087d73b2e7#subdirectory=setup/geoengine_base_geolocalize
 odoo-addon-geoengine-partner @ git+https://github.com/acsone/geospatial.git@ff4a76d86be5abd88dcb0f84c5def21a70e2262d#subdirectory=setup/geoengine_partner
 odoo-addon-internal-stock-quant-package @ git+https://github.com/acsone/stock-logistics-tracking.git@472c75e7e027e74ae582628faf89ae1a30b13d7e#subdirectory=setup/internal_stock_quant_package
 odoo-addon-partner-manual-rank==16.0.1.0.1
-odoo-addon-partner-tz @ git+https://github.com/acsone/partner-contact@70915afa6bf0beae725d1998bd0d600b6dffd2b7#subdirectory=setup/partner_tz
+odoo-addon-partner-tz==16.0.1.0.0.3
 odoo-addon-product-abc-classification @ git+https://github.com/acsone/product-attribute.git@cc97df93b3f97e947c2ed38cc6232c0a642f65e1#subdirectory=setup/product_abc_classification
 odoo-addon-product-abc-classification-sale-stock @ git+https://github.com/acsone/product-attribute.git@f9690a9c1f19ece371effeb200a417e96fddb158#subdirectory=setup/product_abc_classification_sale_stock
 odoo-addon-product-attribute-set @ git+https://github.com/acsone/odoo-pim.git@d50bd057ca672edea3ffb1587b390c24b7002bcf#subdirectory=setup/product_attribute_set
@@ -76,12 +77,12 @@ odoo-addon-product-packaging-level-pallet @ git+https://github.com/acsone/produc
 odoo-addon-product-price-category @ git+https://github.com/acsone/sale-workflow.git@bd03b6c5a098a1ce9dce4f594be675990049ff7d#subdirectory=setup/product_price_category
 odoo-addon-product-route-mto @ git+https://github.com/acsone/product-attribute.git@f7a09db24299d7e08dd65e9acc9c62449c43562d#subdirectory=setup/product_route_mto
 odoo-addon-product-state==16.0.1.0.0.2
-odoo-addon-product-template-has-one-variant @ git+https://github.com/acsone/product-attribute.git@07c1609e5ec906cbca3377a62ea55ff8e78c9a2c#subdirectory=setup/product_template_has_one_variant
+odoo-addon-product-template-has-one-variant==16.0.1.0.1
 odoo-addon-product-template-multi-link @ git+https://github.com/OCA/e-commerce.git@e0823c594edb7d3bddfbf687180df5aada132c2f#subdirectory=setup/product_template_multi_link
 odoo-addon-product-total-weight-from-packaging @ git+https://github.com/acsone/product-attribute.git@0ae6102ff01a7ea8622e20a5a47ecfbe68314a4d#subdirectory=setup/product_total_weight_from_packaging
 odoo-addon-product-uom-updatable @ git+https://github.com/acsone/product-attribute.git@acf4a2eab1bac99aae7c0a86806817407e3727c4#subdirectory=setup/product_uom_updatable
 odoo-addon-purchase-cancel-reason @ git+https://github.com/acsone/purchase-workflow.git@4d9c8cf585059f70e397db19d07f79050d87b68d#subdirectory=setup/purchase_cancel_reason
-odoo-addon-purchase-delivery-split-date @ git+https://github.com/acsone/purchase-workflow.git@93078bd65d4aad4c1a4b138e2a4664bcf57e88fd#subdirectory=setup/purchase_delivery_split_date
+odoo-addon-purchase-delivery-split-date==16.0.1.0.0.7
 odoo-addon-purchase-stock-packaging==16.0.1.0.0.4
 odoo-addon-queue-job==16.0.2.0.0
 odoo-addon-queue-job-cron==16.0.1.0.0.1
@@ -92,7 +93,7 @@ odoo-addon-sale-channel @ git+https://github.com/acsone/sale-channel.git@e3920cb
 odoo-addon-sale-exception==16.0.1.0.1.1
 odoo-addon-sale-procurement-customer @ git+https://github.com/acsone/sale-workflow.git@ef0c216f30a0fd7fd1fb0d782f8b9aaac3f7d487#subdirectory=setup/sale_procurement_customer
 odoo-addon-sale-route-amendment @ git+https://github.com/acsone/sale-workflow.git@f506b778476eacfc4a3f33d85c2f77f790a8ebc8#subdirectory=setup/sale_route_amendment
-odoo-addon-sale-stock-picking-blocking @ git+https://github.com/acsone/sale-workflow.git@0759ba05b37a5ce5a9da3131bd03e1cdabd3d7ef#subdirectory=setup/sale_stock_picking_blocking
+odoo-addon-sale-stock-picking-blocking==16.0.1.0.0.4
 odoo-addon-sale-stock-restocking-fee-invoicing @ git+https://github.com/acsone/stock-logistics-workflow.git@f2ceafadb0008ee27a6346a432ef9f58f1726784#subdirectory=setup/sale_stock_restocking_fee_invoicing
 odoo-addon-sale-triple-discount==16.0.1.0.1.1
 odoo-addon-server-environment==16.0.1.0.1
@@ -117,30 +118,30 @@ odoo-addon-stock-move-auto-assign @ git+https://github.com/acsone/stock-logistic
 odoo-addon-stock-move-auto-assign-auto-release @ git+https://github.com/acsone/stock-logistics-warehouse.git@11d1faad4c9f4aacc92052ef2e53df9f5fe8b518#subdirectory=setup/stock_move_auto_assign_auto_release
 odoo-addon-stock-move-common-dest==16.0.1.0.1
 odoo-addon-stock-move-location==16.0.1.1.0.2
-odoo-addon-stock-move-manage-priority @ git+https://github.com/acsone/stock-logistics-workflow.git@f31ba15e6c93b348e6e4bc37240b79639b0a991a#subdirectory=setup/stock_move_manage_priority
-odoo-addon-stock-move-propagate-first-move @ git+https://github.com/acsone/stock-logistics-workflow.git@a00e59b764583cd3cec72cf8e1a20fc44648e290#subdirectory=setup/stock_move_propagate_first_move
+odoo-addon-stock-move-manage-priority @ git+https://github.com/acsone/stock-logistics-workflow.git@dd6c0233b110cddba40c8f919bca35088b4f134e#subdirectory=setup/stock_move_manage_priority
+odoo-addon-stock-move-propagate-first-move==16.0.1.0.1.3
 odoo-addon-stock-override-procurement @ git+https://github.com/acsone/stock-logistics-workflow.git@ac0568b760314fa721e8f167b8ffd61c16a14b36#subdirectory=setup/stock_override_procurement
-odoo-addon-stock-packaging-calculator @ git+https://github.com/acsone/stock-logistics-warehouse.git@7a62f663ee6d0c2393ad2d09c79e88d6308e6efd#subdirectory=setup/stock_packaging_calculator
+odoo-addon-stock-packaging-calculator==16.0.1.0.1
 odoo-addon-stock-picking-backorder-reason @ git+https://github.com/acsone/stock-logistics-workflow.git@1789528b69158cddce8a79f8577e266a2854998d#subdirectory=setup/stock_picking_backorder_reason
 odoo-addon-stock-picking-backorder-reason-grn @ git+https://github.com/acsone/stock-logistics-workflow.git@385cf7dc6eb9ce7c43ca7e0f697d513c4cd6891b#subdirectory=setup/stock_picking_backorder_reason_grn
 odoo-addon-stock-picking-batch-creation @ git+https://github.com/acsone/wms.git@0ccf4bf42f54c84b4eb5587ce77d507a4e7d7988#subdirectory=setup/stock_picking_batch_creation
 odoo-addon-stock-picking-completion-info==16.0.1.0.1
 odoo-addon-stock-picking-delivery-link==16.0.1.0.1
-odoo-addon-stock-picking-group-by-base @ git+https://github.com/acsone/stock-logistics-workflow.git@20afe143fb8e3b31e154024d74b979a6d9c6f3f7#subdirectory=setup/stock_picking_group_by_base
+odoo-addon-stock-picking-group-by-base==16.0.1.0.0.2
 odoo-addon-stock-picking-group-by-max-weight @ git+https://github.com/acsone/stock-logistics-workflow.git@ec1809573d449907146ebcdcda9821cf2b519b6e#subdirectory=setup/stock_picking_group_by_max_weight
 odoo-addon-stock-picking-group-by-partner-by-carrier @ git+https://github.com/acsone/stock-logistics-workflow.git@c72ab4708b78ee0c068523ed9b0a2e645da71da8#subdirectory=setup/stock_picking_group_by_partner_by_carrier
 odoo-addon-stock-picking-group-by-partner-by-carrier-by-customer @ git+https://github.com/acsone/stock-logistics-workflow.git@8486bf88795420832c0588ccacf9840c3f9b9056#subdirectory=setup/stock_picking_group_by_partner_by_carrier_by_customer
 odoo-addon-stock-picking-kind @ git+https://github.com/acsone/stock-logistics-workflow.git@1bda0f519e84b8f4d704f835c44d2d9998055fb1#subdirectory=setup/stock_picking_kind
 odoo-addon-stock-picking-low-priority @ git+https://github.com/acsone/stock-logistics-workflow.git@d9e6c0614b1e618574695378dcf1fff8abbee5b3#subdirectory=setup/stock_picking_low_priority
-odoo-addon-stock-picking-start @ git+https://github.com/acsone/stock-logistics-workflow.git@cbb49f2a6300dbf84f84301c7cf6265cbc272924#subdirectory=setup/stock_picking_start
-odoo-addon-stock-picking-type-shipping-policy @ git+https://github.com/acsone/wms.git@12dbcd20834849758e681098005f9386cb2c22a6#subdirectory=setup/stock_picking_type_shipping_policy
-odoo-addon-stock-picking-volume @ git+https://github.com/acsone/stock-logistics-warehouse.git@3a6bf112dcbfc1e138dfe10515d124fc5ddb9b5f#subdirectory=setup/stock_picking_volume
+odoo-addon-stock-picking-start==16.0.1.0.2.2
+odoo-addon-stock-picking-type-shipping-policy==16.0.1.0.0.3
+odoo-addon-stock-picking-volume==16.0.1.0.0.2
 odoo-addon-stock-procurement-customer @ git+https://github.com/acsone/stock-logistics-workflow.git@e142a70dd6da183ccff6ca5374c1e445882fc376#subdirectory=setup/stock_procurement_customer
 odoo-addon-stock-production-lot-expired-date==16.0.1.0.1
 odoo-addon-stock-putaway-hook==16.0.1.0.0.4
 odoo-addon-stock-quant-package-dimension==16.0.1.0.0.2
 odoo-addon-stock-quant-package-product-packaging==16.0.1.0.1
-odoo-addon-stock-release-channel @ git+https://github.com/acsone/wms.git@f7e63e3741b6e06c611e101cb067617ea34b5207#subdirectory=setup/stock_release_channel
+odoo-addon-stock-release-channel @ git+https://github.com/acsone/wms.git@6ea02e2d29fcf227f6f81ed52b3d46c4353dba12#subdirectory=setup/stock_release_channel
 odoo-addon-stock-release-channel-auto-release @ git+https://github.com/acsone/wms.git@56803f47c6d4d6d60d051e4e9e9d90a0645f9800#subdirectory=setup/stock_release_channel_auto_release
 odoo-addon-stock-release-channel-geoengine @ git+https://github.com/acsone/wms.git@a9d8af8190810f0736d6ca9b1e66bf1de8678c9a#subdirectory=setup/stock_release_channel_geoengine
 odoo-addon-stock-release-channel-process-end-time @ git+https://github.com/acsone/wms.git@c29d5a6cf4ba5264ff1a36f6aff5f4423f78e8b6#subdirectory=setup/stock_release_channel_process_end_time
@@ -205,5 +206,6 @@ xlrd==1.2.0
 XlsxWriter==3.0.8
 xlwt==1.3.0
 zeep==4.2.1
+zipp==3.12.1
 zope.event==4.6
 zope.interface==5.5.2

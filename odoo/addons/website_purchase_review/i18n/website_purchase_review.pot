@@ -76,6 +76,11 @@ msgstr ""
 
 #. module: website_purchase_review
 #: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
+msgid "Class:"
+msgstr ""
+
+#. module: website_purchase_review
+#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
 msgid "Confirm"
 msgstr ""
 
@@ -298,6 +303,11 @@ msgstr ""
 #. module: website_purchase_review
 #: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
 msgid "Stock available"
+msgstr ""
+
+#. module: website_purchase_review
+#: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
+msgid "Stock coverage (days)"
 msgstr ""
 
 #. module: website_purchase_review

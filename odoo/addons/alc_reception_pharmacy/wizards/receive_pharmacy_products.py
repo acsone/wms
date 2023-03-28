@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+from datetime import datetime
 
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
@@ -24,6 +25,7 @@ class ReceivePharmacyProducts(models.TransientModel):
     product_qty = fields.Float(
         "Quantity", digits=dp.get_precision("Product Unit of Measure"), default=1.0,
     )
+    lot_name = fields.Char(string="Lot")
     state = fields.Selection(related="reception_pharmacy_id.state", default="draft")
 
     @api.model
@@ -38,6 +40,7 @@ class ReceivePharmacyProducts(models.TransientModel):
     @api.onchange("customer_id")
     def _onchange_customer_id(self):
         self.bin_id = False
+        self.lot_name = ""
         self.product_qty = 1
 
     def _check_reception_state(self):
@@ -74,11 +77,12 @@ class ReceivePharmacyProducts(models.TransientModel):
         return line
 
     def _create_lot(self, product):
-        sequence = self.env["ir.sequence"]
+        current_year = datetime.now().year
+        lot_name = str(current_year) + self.lot_name
         lot = self.env["stock.production.lot"]
         lot_vals = {
             "product_id": product.id,
-            "name": sequence.next_by_code("stock.lot.pharmacy"),
+            "name": lot_name,
         }
         # HACK HACK HACK for fields declared in specific_Stock.... TO BE
         # REFACTORED!!!!!!
@@ -87,7 +91,7 @@ class ReceivePharmacyProducts(models.TransientModel):
         if "checksum" in lot._fields:
             lot_vals["checksum"] = "123"
         # END HACK
-        lot_id = lot.create(lot_vals)
+        lot_id = lot.with_context(default_life_date_allowed=True).create(lot_vals)
         return lot_id
 
     def print_reception_pharmacy_label(self, reception_pharmacy_line):
@@ -95,5 +99,6 @@ class ReceivePharmacyProducts(models.TransientModel):
 
     def _clean_wizard(self):
         self.bin_id = False
+        self.lot_name = ""
         self.product_qty = 1
         self.customer_id = False
