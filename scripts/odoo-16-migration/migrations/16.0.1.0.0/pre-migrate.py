@@ -80,6 +80,7 @@ def migrate(cr, version):
         "materialized_view_mixin",  # replaced by alc_materialized_view_mixin
         "alc_geo_delivery_rounds",  # replaced by alc_stock_release_channel_tag & alc_stock_release_channel_import
         "alc_delivery_rounds_operator",  # replaced by alc_stock_release_channel_user
+        "alc_stock_picking_batch_delivery_rounds",  # replaced by alc_stock_release_channel_picking_batch_creation
     ]
     for addon in addons_to_uninstall:
         _logger.info("uninstall %s", addon)
