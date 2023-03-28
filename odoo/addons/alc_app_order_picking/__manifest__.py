@@ -18,6 +18,7 @@
         "alc_stock_delivery_slip",
         "alc_stock_picking_backorder_reason",
         "alc_stock_picking_batch_assignment",
+        "alc_stock_picking_name",
         "alc_stock_picking_type_aliment",
         "alc_stock_picking_wave_display",
         "base_delivery_carrier_label",
