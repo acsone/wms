@@ -12,7 +12,7 @@ odoo-addon-shipment-advice-planner-toursolver-queue-job @ git+https://github.com
 odoo-addon-stock-available==16.0.1.0.1.1
 odoo-addon-stock-available-immediately==16.0.1.0.0.4
 odoo-addon-stock-available-immediately-exclude-location @ git+https://github.com/acsone/stock-logistics-availability.git@17e6e34765fd01ed1a3b2f4c021526f3c3ba11be#subdirectory=setup/stock_available_immediately_exclude_location
-odoo-addon-stock-available-to-promise-release @ git+https://github.com/acsone/wms.git@9528f1625dede8e39c1bdb2e1b038ee5ff8db1e0#subdirectory=setup/stock_available_to_promise_release
+odoo-addon-stock-available-to-promise-release @ git+https://github.com/acsone/wms.git@e64b6157a7420fa9259064c252e047f106ae1e0f#subdirectory=setup/stock_available_to_promise_release
 odoo-addon-stock-average-daily-sale @ git+https://github.com/acsone/stock-logistics-reporting.git@78c730e58e7d22191193e0827aaf0834e39067d7#subdirectory=setup/stock_average_daily_sale
 odoo-addon-stock-dock==16.0.1.0.1
 odoo-addon-stock-dynamic-routing==16.0.1.0.1
