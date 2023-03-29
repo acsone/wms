@@ -192,6 +192,18 @@ def cleanup_assets():
 
 
 @task("16.0.1.0.0")
+def cleanup_sale_typology_domain():
+    with cursor(DB_16_POSTMIG) as cr:
+        query = """
+            update ir_act_window iaw
+            set domain = Null
+            where domain like '%typology%'
+        """
+        cr.execute(query)
+        print("updated", cr.rowcount, "from ir_act_window for sale typology domain")
+
+
+@task("16.0.1.0.0")
 def cleanup_non_odoo_views():
     with cursor(DB_16_POSTMIG) as cr:
         odoo_addons = tuple([i for i in base_addons.odoo16 if i])
@@ -420,7 +432,9 @@ _register_migration_scripts_in_tasks("pre-")
 
 @task()
 def click_odoo_update():
-    check_call(["venv-16/bin/click-odoo-update", "-d", DB_16_POSTMIG])
+    check_call(
+        ["venv-16/bin/click-odoo-update", "-d", DB_16_POSTMIG, "--i18n-overwrite"]
+    )
 
 
 _register_migration_scripts_in_tasks("post-")
