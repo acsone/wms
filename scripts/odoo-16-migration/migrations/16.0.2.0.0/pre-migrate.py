@@ -11,6 +11,7 @@ def migrate(cr, version):
         "alc_delivery_rounds_allatonce_assignment",
         "alc_delivery_rounds_partner_geolocalize",
         "web_decimal_numpad_dot",
+        "alc_stock_picking_batch_delivery_rounds",  # replaced by alc_stock_release_channel_picking_batch_creation
     ]
     for addon in addons_to_uninstall:
         _logger.info("uninstall %s", addon)
