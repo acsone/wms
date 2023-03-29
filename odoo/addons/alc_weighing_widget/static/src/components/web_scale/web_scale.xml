@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+  <t t-name="WebScale" owl="1">
+    <div id="web-scale" class="web_scale o_input">
+      <input
+        t-if="!props.readonly"
+        class="o_input"
+        t-attf-style="background: {{ state.inputColor }}"
+        t-att-value="props.value"
+      />
+      <span
+        t-if="state.status == 'ERROR'"
+        id="web-scale-error"
+        class="fa fa-exclamation-circle text-danger"
+        data-toggle="tooltip"
+        data-html="true"
+        data-placement="right"
+        title="state.error"
+      >
+        <span class="ml-2" t-esc="state.error" />
+      </span>
+    </div>
+  </t>
+</templates>

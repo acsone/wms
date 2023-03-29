@@ -1,0 +1,18 @@
+.o_form_view {
+  .web_scale {
+    align-items: baseline;
+  }
+  // Flex fields
+  .web_scale {
+    > span,
+    > button {
+      display: flex;
+    }
+    > .web-scale-error {
+      &::before {
+        color: #f16567;
+      }
+      display: none;
+    }
+  }
+}
