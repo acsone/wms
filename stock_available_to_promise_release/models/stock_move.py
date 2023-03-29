@@ -49,8 +49,6 @@ class StockMove(models.Model):
         search="_search_release_ready",
     )
     need_release = fields.Boolean(index=True, copy=False)
-    zip_code = fields.Char(related="partner_id.zip", store=True)
-    city = fields.Char(related="partner_id.city", store=True)
 
     def _previous_promised_qty_sql_main_query(self):
         return """
