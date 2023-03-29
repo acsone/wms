@@ -89,6 +89,7 @@ odoo-addon-stock-move-auto-assign-auto-release @ git+https://github.com/acsone/s
 odoo-addon-stock-route-mto @ git+https://github.com/acsone/stock-logistics-warehouse.git@16.0-add-stock_route_mto-dro#subdirectory=setup/stock_route_mto
 # https://github.com/OCA/stock-logistics-warehouse/pull/1646
 odoo-addon-stock-scrap-location-default @ git+https://github.com/acsone/stock-logistics-warehouse.git@16.0-add-stock-default-scrap-location-dro#subdirectory=setup/stock_scrap_location_default
+odoo-addon-stock-picking-volume @ git+https://github.com/OCA/stock-logistics-warehouse.git@refs/pull/1680/head#subdirectory=setup/stock_picking_volume
 
 # stock-logistics-workflow
 # https://github.com/OCA/stock-logistics-workflow/pull/1199
