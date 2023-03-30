@@ -29,14 +29,18 @@ class StockPackOperationLotAdd(models.TransientModel):
     move_line_id = fields.Many2one[StockMoveLine](
         string="Operation",
         domain=[("state", "=", "assigned")],
-        readonly=False,
     )
     move_id = fields.Many2one[StockMove](related="move_line_id.move_id")
     location_op_dest_id = fields.Many2one[Location](
         string="Operation Destination View Location",
         compute="_compute_location_op_dest_id",
     )
-    location_dest_id = fields.Many2one[Location](string="Destination Location")
+    location_dest_id = fields.Many2one[Location](
+        compute="_compute_location_dest_id",
+        store=True,
+        readonly=False,
+        string="Destination Location",
+    )
 
     lot_required = fields.Boolean(
         string="Lot Required", compute="_compute_lot_required"
@@ -49,13 +53,25 @@ class StockPackOperationLotAdd(models.TransientModel):
         related="move_line_id.product_uom_id", readonly=True
     )
     remaining_qty = fields.Float("Qty Remaining", compute="_compute_remaining_qty")
-    qty = fields.Float("Qty Done")
+    qty = fields.Float("Qty Done", compute="_compute_qty", store=True, readonly=False)
     is_qty_exceeded = fields.Boolean(compute="_compute_is_qty_exceeded")
     is_surplus_qty_confirmed = fields.Boolean("Confirm received more than expected")
-    expiration_date_char = fields.Char(string="Expiration date (input)")
-    expiration_date = fields.Datetime(string="Expiration date")
+    expiration_date_char = fields.Char(
+        string="Expiration date (input)",
+        compute="_compute_expiration_date_char",
+        readonly=False,
+        store=True,
+    )
+    expiration_date = fields.Datetime(
+        string="Expiration date",
+        compute="_compute_expiration_date",
+        store=True,
+    )
     lot_name = fields.Char(
-        "Lot Name", compute="_compute_lot_name", store=True, readonly=False
+        "Lot Name",
+        compute="_compute_lot_name",
+        store=True,
+        readonly=False,
     )
     lot_id = fields.Many2one[StockLot](string="Lot")
 
@@ -66,23 +82,38 @@ class StockPackOperationLotAdd(models.TransientModel):
 
     @api.depends("move_line_id", "expiration_date")
     def _compute_lot_name(self):
-        compute_name = self.env["stock.lot"]._calc_name_for_food
         for wiz in self:
             lot_name = wiz.lot_name
             if wiz.expiration_date:
-                lot_name = compute_name(wiz.expiration_date)
+                lot_name = (
+                    self.env["stock.lot"]
+                    .new({"product_id": wiz.product_id.id})
+                    ._calc_name_for_food(wiz.expiration_date)
+                )
             wiz.lot_name = lot_name
+
+    @api.depends("move_line_id")
+    def _compute_expiration_date_char(self):
+        for wizard in self:
+            wizard.update(
+                {
+                    "expiration_date": False,
+                    "expiration_date_char": False,
+                }
+            )
 
     def _is_parent_child(self, parent, child):
         if child and parent:
             return child.parent_path.startswith(parent.parent_path)
         return False
 
-    @api.onchange("move_line_id")
-    def _onchange_move_line_id(self):
-        self._set_wiz_default_values()
+    @api.depends("move_line_id")
+    def _compute_qty(self):
+        for wizard in self:
+            wizard.qty = 0
 
-    def _set_wiz_default_values(self):
+    @api.depends("move_line_id", "expiration_date")
+    def _compute_location_dest_id(self):
         for wiz in self:
             op_dest_loc = wiz.move_line_id.location_dest_id
             if op_dest_loc.usage == "internal":
@@ -94,10 +125,6 @@ class StockPackOperationLotAdd(models.TransientModel):
                 # If in the wizard, there is no location or if the current location
                 # is not valid for selected operation then we need to update it
                 wiz.location_dest_id = False
-            wiz.expiration_date = False
-            wiz.expiration_date_char = False
-            wiz.lot_name = False
-            wiz.qty = 0
 
     @api.depends("move_line_id")
     def _compute_location_op_dest_id(self):
@@ -132,53 +159,16 @@ class StockPackOperationLotAdd(models.TransientModel):
             }
         return None
 
-    @api.onchange("expiration_date_char")
-    def _onchange_expiration_date_char(self):
-        if not self.expiration_date_char:
-            self.expiration_date = False
-        else:
+    @api.depends("expiration_date_char")
+    def _compute_expiration_date(self):
+        for wiz in self:
             try:
                 expiration_date = fields.Datetime.to_string(
-                    datetime.strptime(self.expiration_date_char, "%d/%m/%Y")
+                    datetime.strptime(wiz.expiration_date_char, "%d/%m/%Y")
                 )
-                self.expiration_date = expiration_date
+                wiz.expiration_date = expiration_date
             except (TypeError, ValueError):
-                self.expiration_date = False
-        methods = self._onchange_methods.get("expiration_date", ())
-        for method in methods:
-            method(self)
-
-    @api.onchange("expiration_date")
-    def _onchange_expiration_date(self):
-        lot = self.env["stock.lot"]
-        if self.expiration_date and self.move_line_id:
-            self.lot_name = lot._calc_name_for_food(self.expiration_date)
-
-    def _lot_onchange_expiration_date(self, lot):
-        methods = lot._onchange_methods.get("expiration_date", ())
-        for method in methods:
-            method(lot)
-
-    def _get_lot_from_lot_name(self):
-        lot_obj = self.env["stock.lot"]
-        lot = lot_obj.search(
-            [
-                ("name", "=", self.lot_name),
-                ("product_id", "=", self.move_line_id.product_id.id),
-            ]
-        )
-        if not lot:
-            lot = lot_obj.create(
-                {
-                    "name": self.lot_name,
-                    "expiration_date": self.expiration_date,
-                    "product_id": self.move_line_id.product_id.id,
-                    "company_id": self.env.company.id,
-                }
-            )
-            self._lot_onchange_expiration_date(lot)
-        self.lot_id = lot
-        return lot
+                wiz.expiration_date = False
 
     def _split_move(self):
         move = self.move_id
