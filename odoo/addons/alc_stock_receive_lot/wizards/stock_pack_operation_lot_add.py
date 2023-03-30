@@ -5,6 +5,7 @@ from datetime import datetime
 
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
+from odoo.tools import float_compare
 
 from odoo.addons.base.models.res_partner import Partner
 from odoo.addons.product.models.product_product import ProductProduct
@@ -52,8 +53,18 @@ class StockPackOperationLotAdd(models.TransientModel):
     product_uom_id = fields.Many2one[UoM](
         related="move_line_id.product_uom_id", readonly=True
     )
-    remaining_qty = fields.Float("Qty Remaining", compute="_compute_remaining_qty")
-    qty = fields.Float("Qty Done", compute="_compute_qty", store=True, readonly=False)
+    remaining_qty = fields.Float(
+        "Qty Remaining",
+        digits="Product Unit of Measure",
+        compute="_compute_remaining_qty",
+    )
+    qty = fields.Float(
+        "Qty Done",
+        digits="Product Unit of Measure",
+        compute="_compute_qty",
+        store=True,
+        readonly=False,
+    )
     is_qty_exceeded = fields.Boolean(compute="_compute_is_qty_exceeded")
     is_surplus_qty_confirmed = fields.Boolean("Confirm received more than expected")
     expiration_date_char = fields.Char(
@@ -75,10 +86,19 @@ class StockPackOperationLotAdd(models.TransientModel):
     )
     lot_id = fields.Many2one[StockLot](string="Lot")
 
-    @api.depends("qty", "remaining_qty")
+    @api.depends("move_line_id", "qty", "remaining_qty")
     def _compute_is_qty_exceeded(self):
         for rec in self:
-            rec.is_qty_exceeded = rec.qty > rec.remaining_qty
+            rec.is_qty_exceeded = bool(
+                float_compare(
+                    rec.qty,
+                    rec.remaining_qty,
+                    precision_rounding=rec.move_line_id.product_uom_id.rounding,
+                )
+                > 0
+                if rec.move_line_id
+                else False
+            )
 
     @api.depends("move_line_id", "expiration_date")
     def _compute_lot_name(self):
@@ -182,7 +202,14 @@ class StockPackOperationLotAdd(models.TransientModel):
         )
 
     def _add(self):
-        if self.qty <= 0:
+        if (
+            float_compare(
+                self.qty,
+                0,
+                precision_rounding=self.move_line_id.product_uom_id.rounding,
+            )
+            <= 0
+        ):
             raise UserError(_("Quantity must be greater than 0"))
         if self.is_qty_exceeded and not self.is_surplus_qty_confirmed:
             raise UserError(
