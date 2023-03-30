@@ -83,6 +83,7 @@ def migrate(cr, version):
         "alc_geo_delivery_rounds",  # replaced by alc_stock_release_channel_tag & alc_stock_release_channel_import
         "alc_delivery_rounds_operator",  # replaced by alc_stock_release_channel_user
         "sale_cancel_remaining",  # replaced by sale_order_line_cancel
+        "alc_delivery_rounds_close_pickings_by_zone",  # replaced by alc_stock_release_channel_pick_allowed
     ]
     for addon in addons_to_uninstall:
         _logger.info("uninstall %s", addon)
