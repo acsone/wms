@@ -144,21 +144,6 @@ class StockPackOperationLotAdd(models.TransientModel):
         for rec in self:
             rec.remaining_qty = rec.move_id.product_uom_qty - rec.move_id.quantity_done
 
-    @api.onchange("qty")
-    def _onchange_qty(self):
-        if self.is_qty_exceeded:
-            return {
-                "warning": {
-                    "title": _("Warning"),
-                    "message": _(
-                        "You received more than the expected remaining quantity. "
-                        "Please confirm by ticking the 'Confirm received more "
-                        "than expected' checkbox."
-                    ),
-                }
-            }
-        return None
-
     @api.depends("expiration_date_char")
     def _compute_expiration_date(self):
         for wiz in self:

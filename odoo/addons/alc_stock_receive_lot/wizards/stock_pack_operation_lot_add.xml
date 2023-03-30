@@ -27,6 +27,14 @@
           />
           <button name="button_transfer" type="object" string="Transfer" />
         </header>
+        <div
+          class="alert alert-warning"
+          role="alert"
+          attrs="{'invisible': ['|', ('is_qty_exceeded', '=', False), ('is_surplus_qty_confirmed', '=', True)]}"
+        >
+            You received more than the expected remaining quantity.
+            Please confirm by ticking the 'Confirm received more than expected' checkbox.
+                    </div>
         <sheet>
           <group name="incking_info">
             <group>
