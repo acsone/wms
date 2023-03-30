@@ -71,6 +71,7 @@
               <div>
                 <field
                   name="expiration_date_char"
+                  placeholder="__/__/____"
                   attrs="{'required': [('lot_required', '=', True)], 'readonly': ['|', ('move_line_id', '=', False), ('lot_required', '=', False)]}"
                 />
                 <field name="expiration_date" invisible="1" />
