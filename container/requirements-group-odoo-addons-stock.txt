@@ -47,7 +47,7 @@ odoo-addon-stock-production-lot-expired-date==16.0.1.0.1
 odoo-addon-stock-putaway-hook==16.0.1.0.0.4
 odoo-addon-stock-quant-package-dimension==16.0.1.0.0.2
 odoo-addon-stock-quant-package-product-packaging==16.0.1.0.1
-odoo-addon-stock-release-channel @ git+https://github.com/acsone/wms.git@6ea02e2d29fcf227f6f81ed52b3d46c4353dba12#subdirectory=setup/stock_release_channel
+odoo-addon-stock-release-channel @ git+https://github.com/acsone/wms.git@1759366477b6ebbcca676dddaf8d70dd33c69ba1#subdirectory=setup/stock_release_channel
 odoo-addon-stock-release-channel-auto-release @ git+https://github.com/acsone/wms.git@56803f47c6d4d6d60d051e4e9e9d90a0645f9800#subdirectory=setup/stock_release_channel_auto_release
 odoo-addon-stock-release-channel-geoengine @ git+https://github.com/acsone/wms.git@a9d8af8190810f0736d6ca9b1e66bf1de8678c9a#subdirectory=setup/stock_release_channel_geoengine
 odoo-addon-stock-release-channel-process-end-time @ git+https://github.com/acsone/wms.git@c29d5a6cf4ba5264ff1a36f6aff5f4423f78e8b6#subdirectory=setup/stock_release_channel_process_end_time
