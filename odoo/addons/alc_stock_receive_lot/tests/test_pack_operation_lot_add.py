@@ -249,3 +249,33 @@ class TestPackOperationLotAdd(PackOperationLotAddCommon, TransactionCase):
         wiz.button_nextop()
         wiz.move_line_id = op
         self.assertEqual(wiz.remaining_qty, 2)
+
+    def test_receive_existing_lot_surplus_quantities_aliment(self):
+        """
+        Create a lot with an expiration date for an aliment product.
+
+        Then, do the reception with a surplus quantity
+        The same lot should be used
+        """
+        self._create_lot()
+
+        picking = self.picking
+        # launch wizard
+        wiz = self.stock_reception_wizard.with_context(
+            default_expiration_date_allowed=True
+        ).create({"picking_id": picking.id})
+
+        op1 = picking.move_ids[0].move_line_ids[0]
+
+        # Simulate putaway to bin1 and bin2
+        op1.location_dest_id = self.bin1
+
+        wiz.move_line_id = op1
+        self.assertTrue(wiz.lot_required)
+        self.assertEqual(wiz.remaining_qty, 5)
+        wiz.qty = 10
+        wiz.expiration_date = "2030-01-01 10:00:00"
+        wiz.is_surplus_qty_confirmed = True
+        wiz.button_nextop()
+        self.assertEqual(op1.move_id.quantity_done, 10)
+        self.assertEqual(op1.move_id.lot_ids, self.created_lot)

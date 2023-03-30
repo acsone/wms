@@ -10,6 +10,7 @@ class PackOperationLotAddCommon:
         cls.category_model = cls.env["product.category"]
         cls.product_model = cls.env["product.product"]
         cls.partner_model = cls.env["res.partner"]
+        cls.lot_obj = cls.env["stock.lot"]
 
         # force parent_left/right computation
         cls.location_model = cls.env["stock.location"]
@@ -109,3 +110,17 @@ class PackOperationLotAddCommon:
         picking = picking.with_context(test_mode=1)
         picking.action_assign()
         cls.picking = picking
+
+    @classmethod
+    def _create_lot(cls):
+        product = cls.products.filtered(lambda p: p.name == "Unittest Reception P1")
+        food_category = cls.env.ref("alc_product_food.product_categ_ali")
+        product.categ_id = food_category
+        cls.created_lot = cls.lot_obj.create(
+            {
+                "name": "010130",
+                "expiration_date": "2030-01-01 10:00:00",
+                "product_id": product.id,
+                "company_id": cls.env.company.id,
+            }
+        )
