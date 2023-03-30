@@ -158,3 +158,6 @@ odoo-addon-geoengine-base-geolocalize @ git+https://github.com/OCA/geospatial.gi
 
 # OCA/e-commerce
 odoo-addon-product-template-multi-link @ git+https://github.com/OCA/e-commerce.git@refs/pull/774/head#subdirectory=setup/product_template_multi_link
+
+# OCA/hr-holidays
+odoo-addon-hr-holidays-public @ git+https://github.com/OCA/hr-holidays.git@refs/pull/69/head#subdirectory=setup/hr_holidays_public

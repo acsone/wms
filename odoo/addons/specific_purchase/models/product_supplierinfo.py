@@ -7,14 +7,6 @@ class ProductSupplierinfo(models.Model):
 
     product_cnk_code = fields.Char(related="product_tmpl_id.cnk_code", readonly=True)
 
-    @api.onchange("name")
-    def onchange_name(self):
-        if not self.name.delivery_lead_time:
-            return
-
-        delay = self.name.delivery_lead_time
-        self.delay = delay
-
     @api.onchange("product_tmpl_id", "name")
     def _onchange_update_product_code(self):
         for promo in self:

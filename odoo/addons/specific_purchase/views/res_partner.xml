@@ -11,7 +11,6 @@
     <field name="arch" type="xml">
       <field name="substitute_purchase_manager_id" position="after">
         <field name="supplier_discount" />
-        <field name="delivery_lead_time" />
         <label string="Days for management" />
         <table
           class="table table-bordered text-center table-condensed"

@@ -24,7 +24,6 @@
         "views/res_partner.xml",
         "views/product_template.xml",
         "views/purchase_order.xml",
-        "views/bank_holiday.xml",
         "views/purchase_config_settings.xml",
         "views/product_state.xml",
         "views/product_supplierinfo.xml",

@@ -34,5 +34,6 @@
         "alc_stock_receive_lot_product_info",
         "partner_manual_rank",
         "product_uom_updatable",
+        "alc_purchase_order_date_planned",
     ],
 }

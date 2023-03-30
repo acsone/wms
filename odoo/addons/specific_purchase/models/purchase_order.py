@@ -52,13 +52,6 @@ class PurchaseOrder(models.Model):
         return tz_context.localize(new_planned_date).astimezone(tz_utc)
 
     @api.multi
-    def action_set_date_planned(self):
-        # disabled default method
-        for order in self:
-            renew_date = self.convert_time(order.date_planned)
-            order.order_line.update({"date_planned": renew_date})
-
-    @api.multi
     def _compute_nbr_lines(self):
         """
         Compute the number of lines by purchase order.
@@ -105,13 +98,6 @@ class PurchaseOrder(models.Model):
                 vals["responsible_id"] = partner.purchase_manager_id.id
 
         return super(PurchaseOrder, self).create(vals)
-
-    def write(self, vals):
-        res = super(PurchaseOrder, self).write(vals)
-        for rec in self:
-            if rec.state == "draft" and vals.get("date_planned"):
-                rec.action_set_date_planned()
-        return res
 
     @api.multi
     def _compute_total_weight(self):
@@ -291,73 +277,6 @@ class PurchaseOrderLine(models.Model):
             if not line.discount_global:
                 line.discount_global = line.order_id.partner_id.supplier_discount
             line._set_price_unit()
-
-    @api.multi
-    def get_next_scheduled_date(self, seller, date_order_str=None):
-        """
-        Return the scheduled date
-        :return: datetime - the scheduled date
-        """
-
-        # By default, take the delivery lead time on the supplier info
-        if seller:
-            lead_time = seller.delay
-        # If there is no supplier info for this product, we take
-        # the delivery lead time on the supplier
-        elif len(self) == 1:
-            lead_time = self.order_id.partner_id.delivery_lead_time
-        else:
-            lead_time = 0
-
-        if date_order_str:
-            date_planned = fields.Datetime.from_string(date_order_str)
-        else:
-            date_planned = date.today()
-
-        holiday_obj = self.env["bank.holiday"]
-        index = 0
-        while index < lead_time:
-            date_planned += timedelta(days=1)
-
-            # Check if there is a bank holiday for the current date planned
-            date_order_str = fields.Date.to_string(date_planned)
-            holiday = holiday_obj.search([("date", "=", date_order_str)])
-            if holiday:
-                continue
-
-            # Check if the date planned is Saturday or Sunday
-            if date_planned.isoweekday() in [6, 7]:
-                continue
-
-            index += 1
-        return fields.Datetime.to_string(date_planned)
-
-    @api.model
-    def _get_date_planned(self, seller, po=False):
-        """
-        Inherit the method "_get_date_planned" in the module purchase
-        The original method has the decorator "api.model" but
-        it should be the decorator api.multi or api.one.
-        The parameter po is priority on self (see below)
-        purchase.py:
-        date_order = po.date_order if po else self.order_id.date_order
-        :param seller:
-        :param po:
-        :return:
-        """
-        date_planned_str = False
-        if not po:
-            po = self.order_id
-        if po.date_planned:
-            # if there is planned date propagate it all lines
-            date_planned_str = po.convert_time(po.date_planned).strftime(
-                DEFAULT_SERVER_DATETIME_FORMAT
-            )
-        if not date_planned_str:
-            date_order_str = po.date_order if po else self.order_id.date_order
-            date_planned_str = self.get_next_scheduled_date(seller, date_order_str)
-
-        return fields.Datetime.from_string(date_planned_str)
 
     def _prepare_stock_moves(self, picking):
         res = super(PurchaseOrderLine, self)._prepare_stock_moves(picking)
