@@ -16,8 +16,6 @@
         "stock",
         "calendar",
         "purchase_cancel_reason",
-        "purchase_prepaid",
-        "specific_product",
         "website_purchase_review",
     ],
     "website": "http://www.camptocamp.com",

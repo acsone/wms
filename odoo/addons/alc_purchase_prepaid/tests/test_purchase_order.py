@@ -13,7 +13,9 @@ class TestPurchaseOrder(TransactionCase):
 
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
         cls.supplier = cls.env.ref("base.res_partner_12")
-        cls.product_1 = cls.env["product.product"].create({"name": "Product 1"})
+        cls.product_1 = cls.env["product.product"].create(
+            {"name": "Product 1", "purchase_method": "receive"}
+        )
 
         cls.partner = cls.env.ref("base.res_partner_1")
 
@@ -70,6 +72,8 @@ class TestPurchaseOrder(TransactionCase):
         self.assertEqual(bill_action["type"], "ir.actions.act_window")
         self.assertEqual(bill_action["name"], "Bills")
         self.assertEqual(bill_action["res_model"], "account.move")
+        invoice_line = self.po.order_line.invoice_lines
+        self.assertEqual(invoice_line.quantity, 365)
 
     def test_po_with_prepayment_after_confirm(self):
         """
@@ -87,3 +91,5 @@ class TestPurchaseOrder(TransactionCase):
         self.assertEqual(bill_action["type"], "ir.actions.act_window")
         self.assertEqual(bill_action["name"], "Bills")
         self.assertEqual(bill_action["res_model"], "account.move")
+        invoice_line = self.po.order_line.invoice_lines
+        self.assertEqual(invoice_line.quantity, 365)
