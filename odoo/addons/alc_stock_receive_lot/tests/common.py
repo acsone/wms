@@ -114,6 +114,7 @@ class PackOperationLotAddCommon:
     @classmethod
     def _create_lot(cls):
         product = cls.products.filtered(lambda p: p.name == "Unittest Reception P1")
+        product.use_expiration_date = True
         food_category = cls.env.ref("alc_product_food.product_categ_ali")
         product.categ_id = food_category
         cls.created_lot = cls.lot_obj.create(

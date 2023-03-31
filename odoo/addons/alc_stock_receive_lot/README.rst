@@ -23,6 +23,7 @@ Tests
 - Click either *Next lot* or *Next Operation* (try both) and check that the move line was updated by clicking on the parent move on the picking screen;
 - Do this with products with lot tracking and without. When there are several lot by move line, the move line should be split, otherwise the quantity is simply added;
 - Do this with a product with the *Aliments* category or one of it's child categories. On those the lot name should be set automatically after you enter the expiration date.
+  If the lot does not exists, it will be created, if yes, it will be reused (Use Create Lots option should be enabled on Operation Type level).
 
 Credits
 =======

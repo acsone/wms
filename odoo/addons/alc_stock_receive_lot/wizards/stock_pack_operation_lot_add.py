@@ -191,15 +191,17 @@ class StockPackOperationLotAdd(models.TransientModel):
         for move_line in self.move_id.move_line_ids:
             move_line.reserved_uom_qty = move_line.qty_done
 
+    def _prepare_move_line_values(self):
+        self.ensure_one()
+        return {
+            "move_id": self.move_id.id,
+            "location_id": self.move_line_id.location_id.id,
+            "location_dest_id": self.location_dest_id.id,
+            "product_id": self.move_line_id.product_id.id,
+        }
+
     def _add_move_line(self):
-        return self.env["stock.move.line"].create(
-            {
-                "move_id": self.move_id.id,
-                "location_id": self.move_line_id.location_id.id,
-                "location_dest_id": self.location_dest_id.id,
-                "product_id": self.move_line_id.product_id.id,
-            }
-        )
+        return self.env["stock.move.line"].create(self._prepare_move_line_values())
 
     def _add(self):
         if (
@@ -249,34 +251,49 @@ class StockPackOperationLotAdd(models.TransientModel):
                     move_line = current_operation
                 else:
                     move_line = self._add_move_line()
-                move_line.lot_name = self.lot_name
-                move_line.qty_done = self.qty
-                move_line._create_and_assign_production_lot()
-                if self.expiration_date and self.product_id.use_expiration_date:
-                    move_line.lot_id.expiration_date = self.expiration_date
-
+                # Setting just those fields is sufficient to allow
+                # Odoo creating or using an existing lot at move validation
+                move_line.update(
+                    {
+                        "lot_name": self.lot_name,
+                        "qty_done": self.qty,
+                        "expiration_date": self.expiration_date,
+                    }
+                )
         else:
             current_operation.qty_done += self.qty
 
     def button_nextop(self):
         self.button_nextlot()
-        self.move_line_id = False
-        self.location_dest_id = False
+        self.update(
+            {
+                "move_line_id": False,
+                "location_dest_id": False,
+            }
+        )
 
     def button_nextlot(self):
         self._add()
-        self.qty = False
-        self.lot_id = False  # ensure we don't modify lot on next lines
-        self.expiration_date = False
-        self.expiration_date_char = False
-        self.lot_name = False
-        self.is_surplus_qty_confirmed = False
+        self.update(
+            {
+                "qty": False,
+                "lot_id": False,
+                "expiration_date": False,
+                "expiration_date_char": False,
+                "lot_name": False,
+                "is_surplus_qty_confirmed": False,
+            }
+        )
 
     def button_nextdestloc(self):
         self._add()
-        self.qty = False
-        self.location_dest_id = False
-        self.is_surplus_qty_confirmed = False
+        self.update(
+            {
+                "qty": False,
+                "location_dest_id": False,
+                "is_surplus_qty_confirmed": False,
+            }
+        )
 
     def button_transfer(self):
         self.button_nextop()

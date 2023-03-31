@@ -258,7 +258,6 @@ class TestPackOperationLotAdd(PackOperationLotAddCommon, TransactionCase):
         The same lot should be used
         """
         self._create_lot()
-
         picking = self.picking
         # launch wizard
         wiz = self.stock_reception_wizard.with_context(
@@ -276,6 +275,12 @@ class TestPackOperationLotAdd(PackOperationLotAddCommon, TransactionCase):
         wiz.qty = 10
         wiz.expiration_date = "2030-01-01 10:00:00"
         wiz.is_surplus_qty_confirmed = True
-        wiz.button_nextop()
+
+        res_dict = wiz.button_transfer()
+        res_dict = picking.button_validate()
+        # No backorder
+        self.env["stock.backorder.confirmation"].with_context(
+            **res_dict["context"]
+        ).process_cancel_backorder()
         self.assertEqual(op1.move_id.quantity_done, 10)
         self.assertEqual(op1.move_id.lot_ids, self.created_lot)
