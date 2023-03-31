@@ -19,9 +19,8 @@ odoo-addon-delivery-carrier-label-gls @ git+https://github.com/oca/delivery-carr
 odoo-addon-delivery-estimated-package-quantity-by-weight @ git+https://github.com/oca/delivery-carrier.git@refs/pull/604/head#subdirectory=setup/delivery_estimated_package_quantity_by_weight
 
 # wms
-# https://github.com/OCA/wms/pull/478
 # https://github.com/OCA/wms/pull/609
-odoo-addon-stock-available-to-promise-release @ git+https://github.com/acsone/wms.git@16.0-alc_stock_available_to_promise_release#subdirectory=setup/stock_available_to_promise_release
+odoo-addon-stock-available-to-promise-release @ git+https://github.com/OCA/wms.git@refs/pull/609/head#subdirectory=setup/stock_available_to_promise_release
 # https://github.com/OCA/wms/pull/508
 odoo-addon-stock-release-channel @ git+https://github.com/acsone/wms.git@16.0-add-stock_release_channel_auto_release#subdirectory=setup/stock_release_channel
 # https://github.com/OCA/wms/pull/550
