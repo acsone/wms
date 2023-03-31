@@ -12,6 +12,6 @@ class Picking(PickingBase):
             self.user_id = self.env.user
             self.printed = True
 
-        return self.env.ref(
+        return self.env["ir.actions.act_window"]._for_xml_id(
             "alc_stock_receive_lot.action_pack_operation_lot_add"
-        ).read()[0]
+        )
