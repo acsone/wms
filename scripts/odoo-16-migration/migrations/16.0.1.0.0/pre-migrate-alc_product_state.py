@@ -22,7 +22,7 @@ def _move_product_state(env):
     _logger.info("product_state: move field 'name', 'code' and 'sequence'")
     openupgrade.update_module_moved_fields(
         env.cr,
-        "product.template",
+        "product.state",
         ["name", "code", "sequence"],
         "alc_product_state",
         "product_state",
