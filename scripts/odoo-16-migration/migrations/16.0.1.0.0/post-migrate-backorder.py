@@ -10,6 +10,7 @@ def _res_partner_fields(env):
                 CASE
                     WHEN is_sale_back_order_cancel THEN 'cancel'
                     ELSE 'create'
+                END
     """
     env.cr.execute(query)
 
@@ -19,6 +20,7 @@ def _res_partner_fields(env):
                 CASE
                     WHEN is_purchase_back_order_accepted THEN 'create'
                     ELSE 'cancel'
+                END
     """
     env.cr.execute(query)
 
