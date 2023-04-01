@@ -58,6 +58,7 @@ odoo-addon-product-route-mto @ git+https://github.com/acsone/product-attribute.g
 # https://github.com/OCA/product-attribute/pull/1221 - [MIG][16.0] product total weight from packaging
 odoo-addon-product-total-weight-from-packaging @ git+https://github.com/acsone/product-attribute.git@16.0-mig-product_total_weight_from_packaging#subdirectory=setup/product_total_weight_from_packaging
 odoo-addon-product-uom-updatable @ git+https://github.com/OCA/product-attribute.git@refs/pull/1286/head#subdirectory=setup/product_uom_updatable
+odoo-addon-product-logistics-uom @ git+https://github.com/OCA/product-attribute.git@refs/pull/1314/head#subdirectory=setup/product_logistics_uom
 
 # purchase-workflow
 odoo-addon-purchase-cancel-reason @ git+https://github.com/OCA/purchase-workflow.git@refs/pull/1776/head#subdirectory=setup/purchase_cancel_reason

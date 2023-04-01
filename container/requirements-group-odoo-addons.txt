@@ -33,7 +33,7 @@ odoo-addon-partner-tz==16.0.1.0.0.3
 odoo-addon-product-abc-classification @ git+https://github.com/acsone/product-attribute.git@cc97df93b3f97e947c2ed38cc6232c0a642f65e1#subdirectory=setup/product_abc_classification
 odoo-addon-product-attribute-set @ git+https://github.com/acsone/odoo-pim.git@d50bd057ca672edea3ffb1587b390c24b7002bcf#subdirectory=setup/product_attribute_set
 odoo-addon-product-dimension==16.0.1.1.0.1
-odoo-addon-product-logistics-uom==16.0.1.0.0.5
+odoo-addon-product-logistics-uom @ git+https://github.com/acsone/product-attribute.git@1a045c978f092288b0908bda29f0638a579f1f51#subdirectory=setup/product_logistics_uom
 odoo-addon-product-manufacturer==16.0.1.0.0.5
 odoo-addon-product-packaging-dimension @ git+https://github.com/acsone/product-attribute.git@acfce3cbe8e463ed080b483b00058941e533cada#subdirectory=setup/product_packaging_dimension
 odoo-addon-product-packaging-level @ git+https://github.com/acsone/product-attribute.git@5382722d152e1e534d4d9c684a7a3919ee6ea3de#subdirectory=setup/product_packaging_level
