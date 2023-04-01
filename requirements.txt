@@ -34,7 +34,7 @@ manifestoo_core==0.10.4
 MarkupSafe==2.1.2
 num2words==0.5.12
 numpy==1.24.2
-odoo @ git+https://github.com/acsone/odoo.git@6dda7918534a89ddb813073f7485345db6290751
+odoo @ git+https://github.com/acsone/odoo.git@e690866cfd4cebfc435e055f0fee19960a75f796
 odoo-addon-account-invoice-tax-required==16.0.1.0.0.7
 odoo-addon-account-invoice-triple-discount==16.0.1.0.0.2
 odoo-addon-account-payment-mode==16.0.1.1.0.1
@@ -156,7 +156,7 @@ odoo-addon-stock-storage-type-putaway-abc @ git+https://github.com/acsone/wms.gi
 odoo-addon-stock-storage-type-putaway-abc-classification-sale-stock @ git+https://github.com/acsone/wms.git@980b444e365da2752f5bc1345f22d2cf5ca80657#subdirectory=setup/stock_storage_type_putaway_abc_classification_sale_stock
 odoo-addon-web-environment-ribbon==16.0.1.0.0.3
 odoo-addon-web-notify @ git+https://github.com/acsone/web.git@d81d6375a9eee259c1f7dc686988ed62db9ab02f#subdirectory=setup/web_notify
-odoo-addons-enterprise @ git+ssh://git@github.com/acsone/enterprise.git@9e4907621674d6fb3c5f19a0ede9094f6fdae302
+odoo-addons-enterprise @ git+ssh://git@github.com/acsone/enterprise.git@06b1c946d8ad2d045e8da30a6e7a80f8be893862
 ofxparse==0.21
 openupgradelib==3.4.1
 passlib==1.7.4

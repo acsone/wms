@@ -4,9 +4,10 @@
     origin: ssh://git@github.com/acsone/enterprise.git
   merges:
     - odoo 16.0
+    - origin refs/pull/12/head # [IMP] base: add pyproject.toml
   shell_command_after:
     # add pyproject.toml so pip wheel works
-    - gh --repo acsone/enterprise pr diff 12 --patch | git am
+    #- gh --repo acsone/enterprise pr diff 12 --patch | git am
     # remove broken/useless stuff
     - git rm -r data_cleaning
     - git commit -m "Remove unused auto install addon data_cleaning"
