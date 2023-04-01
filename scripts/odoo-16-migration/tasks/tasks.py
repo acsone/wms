@@ -128,8 +128,11 @@ def delete_uninstallable_xml_ids():
             # same table. We ensure that the record is not referenced by
             # another record.
             if fk_column:
+                update = ""
+                if table == "ir_ui_view":
+                    update = ", mode='todelete'"
                 query = f"""
-                    UPDATE {table} set {fk_column}=NULL WHERE {fk_column} IN (
+                    UPDATE {table} set {fk_column}=NULL {update} WHERE {fk_column} IN (
                             select res_id from ir_model_data imd
                             left join ir_module_module imm on imm.name=imd.module
                             where (imm.state != 'installed' or imm.latest_version NOT LIKE '16.%') and model='{model}'
