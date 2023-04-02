@@ -4,7 +4,7 @@
 
 from odoo import fields
 
-from odoo.addons.sale_cancel_remaining.models.sale_order_line import (
+from odoo.addons.sale_order_line_cancel.models.sale_order_line import (
     SaleOrderLine as SaleOrderLineBase,
 )
 

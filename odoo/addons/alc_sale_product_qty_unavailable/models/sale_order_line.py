@@ -4,7 +4,7 @@
 
 from odoo import api, fields
 
-from odoo.addons.sale_cancel_remaining.models import sale_order_line
+from odoo.addons.sale_order_line_cancel.models import sale_order_line
 
 
 class SaleOrderLine(sale_order_line.SaleOrderLine):

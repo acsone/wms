@@ -3,7 +3,7 @@
 
 from odoo.tests import Form
 
-from odoo.addons.sale_cancel_remaining.tests.common import TestSaleCancelRemainingBase
+from odoo.addons.sale_order_line_cancel.tests.common import TestSaleCancelRemainingBase
 
 
 class TestSaleCancelRemaining(TestSaleCancelRemainingBase):

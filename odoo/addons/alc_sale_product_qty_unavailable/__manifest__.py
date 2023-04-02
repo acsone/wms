@@ -10,7 +10,7 @@
     "author": "BCIM, ACSONE SA/NV",
     "depends": [
         "alc_base_auto_join",
-        "sale_cancel_remaining",
+        "sale_order_line_cancel",
         "sale_stock",
         "stock_available",
     ],

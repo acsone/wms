@@ -87,9 +87,9 @@ odoo-addon-queue-job==16.0.2.0.0
 odoo-addon-queue-job-cron==16.0.1.0.0.1
 odoo-addon-report-xlsx==16.0.1.0.1.1
 odoo-addon-report-xlsx-helper==16.0.1.0.0.3
-odoo-addon-sale-cancel-remaining @ git+https://github.com/acsone/sale-workflow.git@b446df1dde83e9a399aabcb11c30fcc9b4608fd7#subdirectory=setup/sale_cancel_remaining
 odoo-addon-sale-channel @ git+https://github.com/acsone/sale-channel.git@e3920cb6276556e98afed18a828d5a7c5103bf67#subdirectory=setup/sale_channel
 odoo-addon-sale-exception==16.0.1.0.1.1
+odoo-addon-sale-order-line-cancel @ git+https://github.com/acsone/sale-workflow.git@34bf9057b6de07e0d5a161688905da813387c399#subdirectory=setup/sale_order_line_cancel
 odoo-addon-sale-procurement-customer @ git+https://github.com/acsone/sale-workflow.git@ef0c216f30a0fd7fd1fb0d782f8b9aaac3f7d487#subdirectory=setup/sale_procurement_customer
 odoo-addon-sale-route-amendment @ git+https://github.com/acsone/sale-workflow.git@f506b778476eacfc4a3f33d85c2f77f790a8ebc8#subdirectory=setup/sale_route_amendment
 odoo-addon-sale-stock-picking-blocking==16.0.1.0.0.4

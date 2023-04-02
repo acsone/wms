@@ -3,17 +3,14 @@
 
 from odoo.exceptions import UserError
 
-from odoo.addons.sale_cancel_remaining.tests.common import TestSaleCancelRemainingBase
+from odoo.addons.sale_order_line_cancel.tests.common import TestSaleOrderLineCancelBase
 
 
-class TestSaleCancelRemaining(TestSaleCancelRemainingBase):
+class TestSaleOrderLineCancel(TestSaleOrderLineCancelBase):
     def test_cancel_remaining_qty_started_picking(self):
         """Check printed picking can't be canceled."""
-        pick = self.sale.picking_ids.filtered(
-            lambda picking: picking.picking_type_code == "internal"
-            and picking.state not in ("cancel", "done")
-        )
-        pick.printed = True
+        ship = self.sale.picking_ids
+        ship.printed = True
         with self.assertRaises(UserError):
             self.wiz.with_context(
                 active_id=self.sale.order_line.id

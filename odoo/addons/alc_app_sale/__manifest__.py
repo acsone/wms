@@ -20,7 +20,7 @@
         "product_price_category",
         "sale_exception",
         "sale_stock_picking_blocking",
-        "sale_cancel_remaining",
+        "sale_order_line_cancel",
         "sale_route_amendment",
         # OCA/sale-channel
         "sale_channel",
@@ -52,7 +52,7 @@
         "alc_sale_suite_name",
         "alc_supplier_promotion",
         "alc_supplier_promotion_sale",
-        "alc_sale_cancel_remaining_check",
+        "alc_sale_order_line_cancel_check",
         "alc_sale_order_line_unavailable_list",
         "alc_sale_product_qty_backorder",
         "alc_sale_product_qty_available_to_promise",
