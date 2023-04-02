@@ -31,6 +31,7 @@
         "stock_move_location",
         "stock_move_manage_priority",
         "stock_move_propagate_first_move",
+        "stock_move_propagate_first_move_cancel",
         "stock_picking_batch_creation",
         "stock_picking_backorder_reason",
         "stock_picking_backorder_reason_grn",
