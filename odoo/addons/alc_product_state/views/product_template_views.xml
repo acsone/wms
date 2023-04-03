@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="product_template_form_view">
+        <field
+      name="name"
+    >product.template.common.form.product.state (in alc_product_state)</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product_state.product_template_form_view" />
+        <field name="arch" type="xml">
+            <field name="product_state_id" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </field>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="product_template_only_form_view">
+        <field name="name">product.template.product.form (in alc_product_state)</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view" />
+        <field name="arch" type="xml">
+            <field name="default_code" position="after">
+                <field name="product_state_id" />
+            </field>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="product_template_view_tree_inherit_product_state_id">
+        <field name="name">product.template.tree (product_state_id)</field>
+        <field name="model">product.template</field>
+        <field
+      name="inherit_id"
+      ref="product_state.product_template_view_tree_inherit_product_state_id"
+    />
+        <field name="arch" type="xml">
+            <field name="state" position="before">
+                <field name="state_name" optional="show" />
+            </field>
+            <field name="state" position="attributes">
+                <attribute name="optional">
+                    hide
+                </attribute>
+            </field>
+        </field>
+    </record>
+</odoo>
