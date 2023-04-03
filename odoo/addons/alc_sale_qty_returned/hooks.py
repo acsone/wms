@@ -10,6 +10,6 @@ def pre_init_hook(cr):
         cr,
         "sale.order.line",
         ["product_qty_returned"],
-        "sale_cancel_remaining",
+        "sale_order_line_cancel",
         "alc_sale_qty_returned",
     )

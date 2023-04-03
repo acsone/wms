@@ -29,7 +29,7 @@
         "specific_stock",
         "stock_lot_track",
         "stock_lot_loss",
-        "sale_cancel_remaining",
+        "sale_order_line_cancel",
         "specific_purchase",
         "stock_picking_backorder",
         "stock_picking_assignment",

@@ -18,7 +18,7 @@
         "alc_sale_order_line_product_type",
         "authenticated_partner_mixin",
         "procurement_sale",  # TODO: partially replaced by alc_sale_product_qty_unavailable
-        "sale_cancel_remaining",
+        "sale_order_line_cancel",
         "sale_consignment",
         "alc_product_category_data",
     ],

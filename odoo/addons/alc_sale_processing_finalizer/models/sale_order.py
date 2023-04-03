@@ -19,7 +19,7 @@ class SaleOrder(sale_order.SaleOrder):
 
     @api.model
     def cancel_sales_bo_gt_3months(self):
-        wizard = self.env["cancel.remaining.wizard"].new()
+        wizard = self.env["sale.order.line.cancel"].new()
         mail_template = self.env.ref("alc_sale_processing_finalizer.mail_template_30")
         lines = self.env["sale.order.line"].search(
             [

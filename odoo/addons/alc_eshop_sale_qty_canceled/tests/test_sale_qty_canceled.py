@@ -26,7 +26,7 @@ class TestSaleQtyCanceled(CommonCase):
         # "internal" picking type is required by the cancel wizard since
         # it's designed to work in a 2 steps picking
         cls.so.picking_ids.picking_type_id.code = "internal"
-        cls.cancel_wiz = cls.env["cancel.remaining.wizard"].create({})
+        cls.cancel_wiz = cls.env["sale.order.line.cancel"].create({})
 
     def setUp(self):
         super(TestSaleQtyCanceled, self).setUp()

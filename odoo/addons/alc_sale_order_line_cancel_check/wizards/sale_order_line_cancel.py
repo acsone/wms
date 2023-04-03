@@ -6,18 +6,18 @@
 from odoo import _, api
 from odoo.exceptions import UserError
 
-from odoo.addons.sale_cancel_remaining.wizards.cancel_remaining_wizard import (
-    CancelRemainingWizard as CancelRemainingWizardBase,
+from odoo.addons.sale_order_line_cancel.wizards.sale_order_line_cancel import (
+    SaleOrderLineCancel as SaleOrderLineCancelBase,
 )
 
 
-class CancelRemainingWizard(CancelRemainingWizardBase):
+class SaleOrderLineCancel(SaleOrderLineCancelBase):
     @api.model
     def _check_pickings_to_cancel(self, line):
         res = super()._check_pickings_to_cancel(line)
         pickings_to_cancel = self._get_pickings_to_cancel(line)
         if any(pickings_to_cancel.mapped("printed")):
             raise UserError(
-                _("You cannot cancel a quantity that is part " "of a started picking")
+                _("You cannot cancel a quantity that is part of a started picking")
             )
         return res

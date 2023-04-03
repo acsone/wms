@@ -17,7 +17,7 @@
         "product_dimension",
         "purchase",
         "product",
-        "sale_cancel_remaining",
+        "sale_order_line_cancel",
         "specific_stock",
         "stock",
         "stock_orderpoint_product",

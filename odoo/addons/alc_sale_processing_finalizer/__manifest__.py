@@ -12,7 +12,7 @@
         "delivery",
         "sale",
         "queue_job_cron",
-        "sale_cancel_remaining",
+        "sale_order_line_cancel",
         "alc_sale_order_line_product_type",
         "alc_sale_product_qty_unavailable",
         "alc_sale_consignment",

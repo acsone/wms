@@ -3,10 +3,10 @@
 
 from odoo.tests import Form
 
-from odoo.addons.sale_cancel_remaining.tests.common import TestSaleCancelRemainingBase
+from odoo.addons.sale_order_line_cancel.tests.common import TestSaleOrderLineCancelBase
 
 
-class TestSaleCancelRemaining(TestSaleCancelRemainingBase):
+class TestSaleCancelRemaining(TestSaleOrderLineCancelBase):
     def test_deliver_and_return_order(self):
         order_line = self.sale.order_line
         ship = order_line.move_ids.filtered(

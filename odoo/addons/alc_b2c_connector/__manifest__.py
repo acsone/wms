@@ -28,7 +28,7 @@
         "procurement_sale",  # confirmation_date field on SO TODO: partially replaced by alc_sale_product_qty_unavailable
         "product_assortment",
         "sale",
-        "sale_cancel_remaining",
+        "sale_order_line_cancel",
         "sales_team",
         "stock_available",
         "stock_picking_backorder",  # is_sale_back_order_accepted on respartner
