@@ -152,7 +152,6 @@ omit =
     odoo/addons/alc_product_stock_state/*
     odoo/addons/alc_purchase_order_import_ubl/*
     odoo/addons/alc_purchase_order_ubl/*
-    odoo/addons/alc_pywebdriver/*
     odoo/addons/alc_reception_pharmacy/*
     odoo/addons/alc_reception_pharmacy_geo_delivery_rounds/*
     odoo/addons/alc_registration/*
@@ -222,7 +221,6 @@ omit =
     odoo/addons/alc_storage_media_product/*
     odoo/addons/alc_turnover_reporting/*
     odoo/addons/alc_veterinary_group/*
-    odoo/addons/alc_weighing_widget/*
     odoo/addons/alce_account_reports_followup_data/*
     odoo/addons/alce_all/*
     odoo/addons/alce_helpdesk/*
