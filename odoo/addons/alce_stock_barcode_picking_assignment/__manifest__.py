@@ -1,10 +1,9 @@
-# -*- coding: utf-8 -*-
 # Copyright 2021 ACSONE SA/NV
 {
     "name": "Alce Stock Barcode Picking Assignment",
     "description": """
-        Alcyon: Add barcode command on picking assignment""",
-    "version": "10.0.1.0.0",
+        Alcyon: Add barcode command for picking assignment""",
+    "version": "16.0.1.0.0",
     "license": "Other proprietary",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
@@ -12,9 +11,9 @@
     # stock_barcode is an Odoo enterprise module
     "depends": [
         "stock_barcode",
-        "stock_picking_assignment",
         "alce_stock_barcode_easy_operation",
+        "stock_picking_start",
     ],
-    "data": ["views/stock_picking.xml"],
-    'installable': False
+    "data": [],
+    "installable": True,
 }
