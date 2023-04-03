@@ -61,5 +61,10 @@ odoo-addon-server-environment==16.0.1.0.1
 odoo-addon-server-environment-ir-config-parameter==16.0.1.0.0.6
 odoo-addon-session-db==16.0.1.0.3
 odoo-addon-shipment-advice==16.0.1.0.1
+odoo-addon-web-chatter-position==16.0.1.0.0.6
 odoo-addon-web-environment-ribbon==16.0.1.0.0.3
 odoo-addon-web-notify @ git+https://github.com/acsone/web.git@d81d6375a9eee259c1f7dc686988ed62db9ab02f#subdirectory=setup/web_notify
+odoo-addon-web-refresher==16.0.2.0.0.3
+odoo-addon-web-search-with-and==16.0.1.0.0.3
+odoo-addon-web-sheet-full-width==16.0.1.0.0.3
+odoo-addon-web-tree-many2one-clickable==16.0.1.0.0.3
