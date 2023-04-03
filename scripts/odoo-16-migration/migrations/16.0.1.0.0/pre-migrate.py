@@ -28,6 +28,7 @@ def migrate(cr, version):
         "alc_stock_receive_lot_inputmask",
         "alc_stock_putaway",
         "alc_stock_storage_type_fixed_location",
+        "base_geolocalize_openstreetmap",  # Replaced by STD
         "delivery_carrier_label_gls_server_env",
         "grid",
         "mrp",
