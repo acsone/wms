@@ -30,8 +30,8 @@ msgid "Product Variant"
 msgstr ""
 
 #. module: alc_product_dimensions
-#: model:ir.model.fields,field_description:alc_product_dimensions.field_product_product__product_weight
-msgid "Product Weight"
+#: model:ir.model.fields,help:alc_product_dimensions.field_product_product__product_weight
+msgid "The weight in the product's weight UOM."
 msgstr ""
 
 #. module: alc_product_dimensions
@@ -55,6 +55,11 @@ msgstr ""
 #: model:ir.model.fields,help:alc_product_dimensions.field_product_product__volume_liter
 #: model:ir.model.fields,help:alc_product_dimensions.field_product_template__volume_liter
 msgid "Volume in liter"
+msgstr ""
+
+#. module: alc_product_dimensions
+#: model:ir.model.fields,field_description:alc_product_dimensions.field_product_product__product_weight
+msgid "Weight in product UOM"
 msgstr ""
 
 #. module: alc_product_dimensions
