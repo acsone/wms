@@ -10,6 +10,7 @@ def migrate(cr, version):
     addons_to_uninstall = [
         "alc_delivery_rounds_allatonce_assignment",
         "alc_delivery_rounds_partner_geolocalize",
+        "alce_stock_barcode_easy_operation",  # replaced by STD
         "web_decimal_numpad_dot",
         "alc_stock_picking_batch_delivery_rounds",  # replaced by alc_stock_release_channel_picking_batch_creation
     ]
