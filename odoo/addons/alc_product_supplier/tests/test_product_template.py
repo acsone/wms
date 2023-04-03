@@ -1,30 +1,33 @@
-# -*- coding: utf-8 -*-
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo.tests import common
+from odoo import Command
+from odoo.tests.common import TransactionCase
 
 
-class TestProductTemplate(common.SavepointCase):
+class TestProductTemplate(TransactionCase):
     @classmethod
     def setUpClass(cls):
-        super(TestProductTemplate, cls).setUpClass()
-        cls.ProducTemplate = cls.env["product.template"]
-        cls.ProductSupplierInfo = cls.env["product.supplierinfo"]
+        super().setUpClass()
+        cls.product_tmpl_model = cls.env["product.template"]
+        cls.sinfo_model = cls.env["product.supplierinfo"]
         cls.supplier = cls.env["res.partner"].create({"name": "supplier"})
-        cls.product_no_seller = cls.ProducTemplate.create({"name": "no seller"})
-
-        cls.supplierinfo = cls.ProductSupplierInfo.create(
-            {"name": cls.supplier.id, "product_code": "ABCD"}
+        cls.product_no_seller = cls.product_tmpl_model.create({"name": "no seller"})
+        cls.product_seller = cls.product_tmpl_model.create(
+            {"name": "with seller", "default_code": "1234"}
         )
-
-        cls.product_seller = cls.ProducTemplate.create(
-            {"name": "with seller", "seller_ids": [(6, 0, [cls.supplierinfo.id])]}
+        cls.supplierinfo = cls.sinfo_model.create(
+            {
+                "partner_id": cls.supplier.id,
+                "product_code": "ABCD",
+                "product_tmpl_id": cls.product_seller.id,
+            }
         )
 
     def test_00(self):
         """
         Data:
+
             A product without supplier
             A supplier info with product_code "ABCD"
         Test Case:
@@ -42,6 +45,7 @@ class TestProductTemplate(common.SavepointCase):
     def test_01(self):
         """
         Data:
+
             A product with a seller with product_code "ABCD"
         Test Case:
             Update the product_code on the supplier info
@@ -55,6 +59,7 @@ class TestProductTemplate(common.SavepointCase):
     def test_03(self):
         """
         Data:
+
             A product with a seller with product_code "ABCD"
         Test Case:
             Replace existing seller_ids by a new supplier with an other product_code "BCD"
@@ -66,14 +71,12 @@ class TestProductTemplate(common.SavepointCase):
         self.product_seller.write(
             {
                 "seller_ids": [
-                    (5,),
-                    (
-                        0,
-                        0,
+                    Command.clear(),
+                    Command.create(
                         {
                             "product_tmpl_id": self.product_seller.id,
                             "product_code": "BCD",
-                            "name": new_supplier.id,
+                            "partner_id": new_supplier.id,
                         },
                     ),
                 ]
@@ -81,3 +84,12 @@ class TestProductTemplate(common.SavepointCase):
         )
         self.assertEqual(self.product_seller.supplier_id, new_supplier)
         self.assertEqual(self.product_seller.vendor_product_code, "BCD")
+
+    def test_name_search(self):
+        """Test search by vendor code."""
+        self.assertEqual(
+            self.env["product.product"]
+            .with_context(partner_id=self.supplier.id)
+            .name_search("ABCD"),
+            [(self.product_seller.product_variant_ids.id, "[ABCD] with seller")],
+        )

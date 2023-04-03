@@ -16,3 +16,16 @@ class ProductTemplate(product_template.ProductTemplate):
         store=True,
         index=True,
     )
+    supplier_rel_id = fields.Integer(
+        string="Vendor ID",
+        readonly=True,
+        related="supplier_id.id",
+        store=False,
+    )
+    vendor_product_code = fields.Char(
+        "Vendor Product Code",
+        readonly=True,
+        related="seller_ids.product_code",
+        store=True,
+        index=True,
+    )

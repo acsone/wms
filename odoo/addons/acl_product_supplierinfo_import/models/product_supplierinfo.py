@@ -4,11 +4,11 @@
 from odoo import api, fields
 
 from odoo.addons.alc_product_supplierinfo_default_price.models.product_supplierinfo import (
-    ProductSupplierinfo as ProductSupplierinfoBase,
+    ProductSupplierInfo as ProductSupplierInfoBase,
 )
 
 
-class ProductSupplierinfo(ProductSupplierinfoBase):
+class ProductSupplierInfo(ProductSupplierInfoBase):
 
     product_cnk_code = fields.Char(related="product_tmpl_id.cnk_code", readonly=True)
 
