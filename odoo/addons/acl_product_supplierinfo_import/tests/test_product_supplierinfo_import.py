@@ -1,6 +1,8 @@
 # Copyright 2023 ACSONE SA/NV
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
+from datetime import datetime, timedelta
+
 from odoo.tests.common import Form, TransactionCase
 
 
@@ -13,20 +15,30 @@ class TestProductSupplierInfoImport(TransactionCase):
         cls.product = cls.env.ref("product.product_product_6")
         cls.product_tmpl.cnk_code = "product_cnk_code"
         cls.supplierinfo = cls.env.ref("product.product_supplierinfo_2")
-        cls.env.ref("product.product_supplierinfo_2bis").unlink()
+        cls.supplierinfo.search([("id", "!=", cls.supplierinfo.id)]).unlink()
         cls.supplierinfo.product_code = "product code"
 
     def test_00(self):
         """Create supplierinfo with product_code."""
         supplierinfo = self.supplierinfo.create(
-            {"product_code": "product code", "partner_id": self.partner.id}
+            {
+                "product_code": "product code",
+                "partner_id": self.partner.id,
+                "date_start": datetime.today(),
+                "date_end": datetime.today() + timedelta(days=1),
+            }
         )
         self.assertEqual(supplierinfo.product_tmpl_id, self.product_tmpl)
 
     def test_01(self):
         """Create supplierinfo with product_cnk_code."""
         supplierinfo = self.supplierinfo.create(
-            {"product_cnk_code": "product_cnk_code", "partner_id": self.partner.id}
+            {
+                "product_cnk_code": "product_cnk_code",
+                "partner_id": self.partner.id,
+                "date_start": datetime.today(),
+                "date_end": datetime.today() + timedelta(days=1),
+            }
         )
         self.assertEqual(supplierinfo.product_tmpl_id, self.product_tmpl)
         self.assertEqual(supplierinfo.product_code, "product code")
