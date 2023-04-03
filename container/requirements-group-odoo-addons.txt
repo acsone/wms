@@ -31,7 +31,7 @@ odoo-addon-geoengine-partner @ git+https://github.com/acsone/geospatial.git@ff4a
 odoo-addon-partner-manual-rank==16.0.1.0.1
 odoo-addon-partner-tz==16.0.1.0.0.3
 odoo-addon-product-abc-classification @ git+https://github.com/acsone/product-attribute.git@cc97df93b3f97e947c2ed38cc6232c0a642f65e1#subdirectory=setup/product_abc_classification
-odoo-addon-product-attribute-set @ git+https://github.com/acsone/odoo-pim.git@d50bd057ca672edea3ffb1587b390c24b7002bcf#subdirectory=setup/product_attribute_set
+odoo-addon-product-attribute-set @ git+https://github.com/acsone/odoo-pim.git@ec398626b73661f320974cc6ba6210de8ea9c188#subdirectory=setup/product_attribute_set
 odoo-addon-product-dimension==16.0.1.1.0.1
 odoo-addon-product-logistics-uom @ git+https://github.com/acsone/product-attribute.git@1a045c978f092288b0908bda29f0638a579f1f51#subdirectory=setup/product_logistics_uom
 odoo-addon-product-manufacturer==16.0.1.0.0.5
@@ -39,7 +39,7 @@ odoo-addon-product-packaging-dimension @ git+https://github.com/acsone/product-a
 odoo-addon-product-packaging-level @ git+https://github.com/acsone/product-attribute.git@5382722d152e1e534d4d9c684a7a3919ee6ea3de#subdirectory=setup/product_packaging_level
 odoo-addon-product-packaging-level-pallet @ git+https://github.com/acsone/product-attribute.git@0902b25c2ec0564e9dfef2b35c78bc4f0a8d6a71#subdirectory=setup/product_packaging_level_pallet
 odoo-addon-product-price-category @ git+https://github.com/acsone/sale-workflow.git@bd03b6c5a098a1ce9dce4f594be675990049ff7d#subdirectory=setup/product_price_category
-odoo-addon-product-route-mto @ git+https://github.com/acsone/product-attribute.git@f7a09db24299d7e08dd65e9acc9c62449c43562d#subdirectory=setup/product_route_mto
+odoo-addon-product-route-mto @ git+https://github.com/acsone/product-attribute.git@a9d7dfafd652be0c6c193286a512c9143d2ff28b#subdirectory=setup/product_route_mto
 odoo-addon-product-state==16.0.1.0.0.2
 odoo-addon-product-template-has-one-variant==16.0.1.0.1
 odoo-addon-product-template-multi-link @ git+https://github.com/acsone/e-commerce.git@e0823c594edb7d3bddfbf687180df5aada132c2f#subdirectory=setup/product_template_multi_link
