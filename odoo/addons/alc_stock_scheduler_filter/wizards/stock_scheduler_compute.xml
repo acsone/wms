@@ -1,28 +1,27 @@
 <?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright ACSONE SA/NV n
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
-  <record id="view_procurement_compute_wizard" model="ir.ui.view">
-    <field name="name">Run Reordering Rules</field>
-    <field name="model">procurement.orderpoint.compute</field>
-    <field name="inherit_id" ref="stock.view_procurement_compute_wizard" />
-    <field name="arch" type="xml">
-      <xpath expr="//form/group" position="after">
+
+    <record model="ir.ui.view" id="stock_scheduler_compute_form_view">
+        <field name="model">stock.scheduler.compute</field>
+        <field name="inherit_id" ref="stock.view_procurement_compute_wizard" />
+        <field name="arch" type="xml">
+            <xpath expr="//form/p" position="after">
         <group>
-          <field name="type" />
+          <field name="procure_type" />
           <field
             name="supplier_ids"
-            attrs="{'invisible': [('type', '!=', 'by_suppliers')]}"
+            attrs="{'invisible': [('procure_type', '!=', 'by_suppliers')]}"
             widget="many2many_tags"
             options="{'no_create':True}"
           />
         </group>
-        <div attrs="{'invisible': [('type', '!=', 'by_days')]}">
+        <div attrs="{'invisible': [('procure_type', '!=', 'by_days')]}">
           <h3
           >WARNING - You will generate procurement order by days. This process can take a very long time.</h3>
-          <label string="Days to generate" />
-          <table
-            class="table table-bordered text-center table-condensed"
-            style="width: auto;"
-          >
+          <separator string="Days to generate" />
+          <table class="table table-bordered text-center table-condensed" colspan="2">
             <tr>
               <th>
                 <label for="is_manage_day_1" />
@@ -72,6 +71,9 @@
           </table>
         </div>
       </xpath>
-    </field>
-  </record>
+        </field>
+    </record>
+
+
+
 </odoo>
