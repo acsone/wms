@@ -17,15 +17,42 @@ class PurchaseOrderLine(PurchaseOrderLineBase):
     discount = fields.Float(compute="_compute_discount", readonly=False, store=True)
 
     @api.model
+    def _get_discount(self, discount_global, promotion_supplier):
+        return 100 - ((100 - discount_global) * (100 - promotion_supplier) / 100)
+
+    @api.depends("promotion_supplier", "discount_global")
+    def _compute_discount(self):
+        for rec in self:
+            rec.discount = rec._get_discount(
+                rec.discount_global, rec.promotion_supplier
+            )
+
+    @api.model
     def _apply_value_from_seller(self, seller):
         res = super()._apply_value_from_seller(seller)
         self.discount_global = self.partner_id.supplier_discount
         self.promotion_supplier = seller.discount
         return res
 
-    @api.depends("promotion_supplier", "discount_global")
-    def _compute_discount(self):
-        for rec in self:
-            rec.discount = 100 - (
-                (100 - rec.discount_global) * (100 - rec.promotion_supplier) / 100
-            )
+    @api.model
+    def _prepare_purchase_order_line(
+        self, product_id, product_qty, product_uom, company_id, supplier, po
+    ):
+        values = super()._prepare_purchase_order_line(
+            product_id, product_qty, product_uom, company_id, supplier, po
+        )
+        values.update(
+            {
+                "discount": self._get_discount(
+                    supplier.partner_id.supplier_discount,
+                    values.get("promotion_supplier", 0),
+                ),
+                "discount_global": supplier.partner_id.supplier_discount,
+            }
+        )
+        return values
+
+    def _prepare_purchase_order_line_from_seller(self, seller):
+        values = super()._prepare_purchase_order_line_from_seller(seller)
+        values.update({"promotion_supplier": seller.discount})
+        return values
