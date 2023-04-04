@@ -48,6 +48,7 @@ odoo-addon-product-total-weight-from-packaging @ git+https://github.com/acsone/p
 odoo-addon-product-uom-updatable @ git+https://github.com/acsone/product-attribute.git@acf4a2eab1bac99aae7c0a86806817407e3727c4#subdirectory=setup/product_uom_updatable
 odoo-addon-purchase-cancel-reason @ git+https://github.com/acsone/purchase-workflow.git@4d9c8cf585059f70e397db19d07f79050d87b68d#subdirectory=setup/purchase_cancel_reason
 odoo-addon-purchase-delivery-split-date==16.0.1.0.0.7
+odoo-addon-purchase-discount==16.0.1.1.0
 odoo-addon-queue-job==16.0.2.0.0
 odoo-addon-queue-job-cron==16.0.1.0.0.1
 odoo-addon-report-xlsx==16.0.1.0.1.1

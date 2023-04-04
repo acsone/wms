@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="purchase_order_line_form2">
+        <field name="model">purchase.order.line</field>
+        <field name="inherit_id" ref="purchase.purchase_order_line_form2" />
+        <field name="arch" type="xml">
+            <field name="discount" position="before">
+                <field name="discount_global" />
+                <field name="promotion_supplier" />
+            </field>
+            <xpath expr="//field[@name='discount']" position="attributes">
+                <attribute name="groups">base.group_no_one</attribute>
+                <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="purchase_order_line_tree">
+        <field name="model">purchase.order.line</field>
+        <field name="inherit_id" ref="purchase.purchase_order_line_tree" />
+        <field name="arch" type="xml">
+            <field name="discount" position="before">
+                <field name="discount_global" />
+                <field name="promotion_supplier" />
+            </field>
+                        <xpath expr="//field[@name='discount']" position="attributes">
+                <attribute name="groups">base.group_no_one</attribute>
+                <attribute name="optional">hide</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -25,9 +25,6 @@ class ProductSupplierInfo(SupplierInfo, MixinPast):
     ratio_display_name = fields.Char(
         "Promotion", compute="_compute_ratio_display_name", readonly=True
     )
-    discount_purchase = fields.Float(
-        "Purchase discount (%)", digits="Discount", default=0.0
-    )
     discount_sale = fields.Float("Sale discount (%)", digits="Discount", default=0.0)
     min_qty_sale = fields.Float(string="Sale minimum qty", default=0.0)
     min_qty = fields.Float(string="Purchase minimum qty")

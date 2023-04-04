@@ -11,7 +11,6 @@ def migrate(cr, version):
         "product.supplierinfo",
         [
             "is_null_date_start",
-            "discount_purchase",
             "discount_sale",
             "min_qty_sale",
             "min_qty",

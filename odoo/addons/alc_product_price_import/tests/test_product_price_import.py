@@ -45,7 +45,6 @@ class TestProductPriceImport(TransactionCase):
                 "partner_id": cls.supplier.id,
                 "price": 10,
                 "product_code": "SUP01",
-                # "discount_purchase": 10,
                 "date_start": cls.yesterday,
                 "date_end": cls.tomorrow,
             }
@@ -56,7 +55,6 @@ class TestProductPriceImport(TransactionCase):
                 "price": 10,
                 "min_qty": 20,
                 "product_code": "SUP01",
-                # "discount_purchase": 20,
                 "date_start": cls.tomorrow,
                 "date_end": cls.tomorrow,
             }
@@ -67,7 +65,6 @@ class TestProductPriceImport(TransactionCase):
                 "price": 10,
                 "min_qty": 20,
                 "product_code": "SUP01",
-                # "discount_purchase": 20,
                 "date_start": cls.pastday,
                 "date_end": cls.pastday,
             }

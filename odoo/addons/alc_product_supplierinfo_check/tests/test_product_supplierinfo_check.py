@@ -73,7 +73,6 @@ class PricelistDiscountCase(TransactionCase):
                 "date_start": "2018-01-01",
                 "date_end": "2018-03-31",
                 "discount_sale": 10,
-                "discount_purchase": 15,
             }
         )
 
@@ -85,7 +84,6 @@ class PricelistDiscountCase(TransactionCase):
                 "date_start": "2018-08-01",
                 "date_end": "2018-12-31",
                 "discount_sale": 10,
-                "discount_purchase": 15,
             }
         )
 
@@ -97,7 +95,6 @@ class PricelistDiscountCase(TransactionCase):
                 "date_start": "2018-04-01",
                 "date_end": "2018-06-30",
                 "discount_sale": 10,
-                "discount_purchase": 15,
             }
         )
 
@@ -146,7 +143,6 @@ class PricelistDiscountCase(TransactionCase):
                 "date_end": "2018-03-31",
                 "min_qty": 100,
                 "discount_sale": 10,
-                "discount_purchase": 20,
             }
         )
 
@@ -160,7 +156,6 @@ class PricelistDiscountCase(TransactionCase):
                 "date_end": "2018-06-30",
                 "min_qty_sale": 25,
                 "discount_sale": 11.5,
-                "discount_purchase": 15,
             }
         )
 
@@ -174,7 +169,6 @@ class PricelistDiscountCase(TransactionCase):
                 "date_end": "2018-06-30",
                 "min_qty_sale": 50,
                 "discount_sale": 14,
-                "discount_purchase": 15,
             }
         )
 
@@ -188,7 +182,6 @@ class PricelistDiscountCase(TransactionCase):
                     "date_end": "2018-06-30",
                     "min_qty_sale": 50,
                     "discount_sale": 14,
-                    "discount_purchase": 15,
                 }
             )
 
@@ -212,7 +205,6 @@ class PricelistDiscountCase(TransactionCase):
                 "date_end": "2018-06-30",
                 "min_qty_sale": 50,
                 "discount_sale": 14,
-                "discount_purchase": 15,
             }
         )
         records = self.sinfo_model.search([])
