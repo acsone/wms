@@ -277,7 +277,7 @@ class TestPackOperationLotAdd(PackOperationLotAddCommon, TransactionCase):
         wiz.is_surplus_qty_confirmed = True
 
         res_dict = wiz.button_transfer()
-        res_dict = picking.button_validate()
+        # res_dict = picking.button_validate()
         # No backorder
         self.env["stock.backorder.confirmation"].with_context(
             **res_dict["context"]

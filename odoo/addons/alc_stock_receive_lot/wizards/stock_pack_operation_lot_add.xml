@@ -6,24 +6,27 @@
         <field name="arch" type="xml">
             <form>
                 <header>
+                    <field name="picking_is_completed" invisible="1" />
                     <button
             name="button_nextlot"
             type="object"
             string="Next Lot"
             class="oe_highlight"
-            attrs="{'invisible': [('lot_required', '!=', True)]}"
+            attrs="{'invisible': ['|', ('lot_required', '!=', True), ('picking_is_completed', '=', True)]}"
           />
                     <button
             name="button_nextop"
             type="object"
             string="Next Operation"
             class="oe_highlight"
+            attrs="{'invisible': [('picking_is_completed', '=', True)]}"
           />
                     <button
             name="button_nextdestloc"
             type="object"
             string="Next Destination"
             class="oe_highlight"
+            attrs="{'invisible': [('picking_is_completed', '=', True)]}"
           />
                     <button name="button_transfer" type="object" string="Transfer" />
                 </header>
@@ -35,6 +38,16 @@
                     You received more than the expected remaining quantity.
                     Please confirm by ticking the 'Confirm received more than expected' checkbox.
                 </div>
+                <div
+          class="alert alert-success oe_button_box"
+          role="alert"
+          attrs="{'invisible': [('picking_is_completed', '=', False)]}"
+        >
+                    <p class="mt-3">
+                        The picking seems to be completed and is about to be validated.
+                    </p>
+                </div>
+
                 <sheet>
                     <group name="incking_info">
                         <group>
@@ -48,9 +61,9 @@
                         <field name="picking_id" invisible="1" />
                         <field
               name="move_line_id"
-              required="1"
               domain="[('picking_id','=',picking_id)]"
               options="{'no_create':1}"
+              attrs="{'required': [('picking_is_completed', '=', False)]}"
             />
                         <label for="remaining_qty" />
                         <span>
@@ -79,13 +92,13 @@
                                 <field
                   name="expiration_date_char"
                   placeholder="__/__/____"
-                  attrs="{'required': [('lot_required', '=', True)], 'readonly': ['|', ('move_line_id', '=', False), ('lot_required', '=', False)]}"
+                  attrs="{'required': [('lot_required', '=', True), ('picking_is_completed', '=', False)], 'readonly': ['|', ('move_line_id', '=', False), ('lot_required', '=', False)]}"
                 />
                                 <field name="expiration_date" invisible="1" />
                             </div>
                             <field
                 name="lot_name"
-                attrs="{'required': [('lot_required', '=', True)], 'readonly': ['|', ('move_line_id', '=', False), ('lot_required', '=', False)]}"
+                attrs="{'required': [('lot_required', '=', True), ('picking_is_completed', '=', False)], 'readonly': ['|', ('move_line_id', '=', False), ('lot_required', '=', False)]}"
               />
                             <field
                 name="qty"
@@ -105,7 +118,7 @@
                   name="location_dest_id"
                   domain="['|', '|', ('is_reception_wizard', '=', True), ('scrap_location', '=', True),
                            '&amp;', '&amp;', ('usage', '=', 'internal'), ('id', 'child_of', location_op_dest_id), ('usage', '=', 'view')]"
-                  required="1"
+                  attrs="{'required': [('picking_is_completed', '=', False)]}"
                   options="{'no_create':1}"
                 />
                             </h2>

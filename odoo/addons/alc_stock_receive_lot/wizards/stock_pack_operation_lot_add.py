@@ -23,6 +23,7 @@ class StockPackOperationLotAdd(models.TransientModel):
 
     name = fields.Char(default="New")
     picking_id = fields.Many2one[Picking](readonly="True")
+    picking_is_completed = fields.Boolean(related="picking_id.is_completed")
     partner_id = fields.Many2one[Partner](
         related="picking_id.partner_id", readonly=True
     )
@@ -85,6 +86,10 @@ class StockPackOperationLotAdd(models.TransientModel):
         readonly=False,
     )
     lot_id = fields.Many2one[StockLot](string="Lot")
+    is_transfer = fields.Boolean(
+        help="Technical field that is set when user is doing the transfer action"
+        "in order to bypass some operations"
+    )
 
     @api.depends("move_line_id", "qty", "remaining_qty")
     def _compute_is_qty_exceeded(self):
@@ -204,15 +209,16 @@ class StockPackOperationLotAdd(models.TransientModel):
         return self.env["stock.move.line"].create(self._prepare_move_line_values())
 
     def _add(self):
-        if (
-            float_compare(
-                self.qty,
-                0,
-                precision_rounding=self.move_line_id.product_uom_id.rounding,
-            )
-            <= 0
-        ):
+        precision = self.env["decimal.precision"].precision_get(
+            "Product Unit of Measure"
+        )
+        quantity_zero = bool(
+            float_compare(self.qty, 0, precision_rounding=precision) <= 0
+        )
+        if quantity_zero and not self.is_transfer:
             raise UserError(_("Quantity must be greater than 0"))
+        if quantity_zero and self.is_transfer:
+            return
         if self.is_qty_exceeded and not self.is_surplus_qty_confirmed:
             raise UserError(
                 _(
@@ -269,6 +275,7 @@ class StockPackOperationLotAdd(models.TransientModel):
             {
                 "move_line_id": False,
                 "location_dest_id": False,
+                "is_transfer": False,
             }
         )
 
@@ -282,6 +289,7 @@ class StockPackOperationLotAdd(models.TransientModel):
                 "expiration_date_char": False,
                 "lot_name": False,
                 "is_surplus_qty_confirmed": False,
+                "is_transfer": False,
             }
         )
 
@@ -292,9 +300,28 @@ class StockPackOperationLotAdd(models.TransientModel):
                 "qty": False,
                 "location_dest_id": False,
                 "is_surplus_qty_confirmed": False,
+                "is_transfer": False,
             }
         )
 
     def button_transfer(self):
+        """
+        Just validate and return the action or if True,.
+
+        return the picking form
+        """
+        self.is_transfer = True
         self.button_nextop()
-        return self.picking_id.button_validate()
+        res = self.picking_id.button_validate()
+        if isinstance(res, bool) and res:
+            action = self.env["ir.actions.act_window"]._for_xml_id(
+                "stock.action_picking_form"
+            )
+            action.update(
+                {
+                    "res_id": self.picking_id.id,
+                    "context": False,
+                }
+            )
+            return action
+        return res

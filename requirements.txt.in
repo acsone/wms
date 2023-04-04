@@ -101,6 +101,8 @@ odoo-addon-stock-picking-group-by-max-weight @ git+https://github.com/acsone/sto
 odoo-addon-stock-picking-group-by-partner-by-carrier @ git+https://github.com/acsone/stock-logistics-workflow.git@16.0-mig-stock-picking-group-by-carrier-dro#subdirectory=setup/stock_picking_group_by_partner_by_carrier
 # https://github.com/OCA/stock-logistics-workflow/pull/1186
 odoo-addon-stock-picking-group-by-partner-by-carrier-by-customer @ git+https://github.com/acsone/stock-logistics-workflow.git@16.0-add-stock-picking-group-by-customer-dro#subdirectory=setup/stock_picking_group_by_partner_by_carrier_by_customer
+# https://github.com/OCA/stock-logistics-workflow/pull/1268
+odoo-addon-stock-picking-is-completed @ git+https://github.com/OCA/stock-logistics-workflow.git@refs/pull/1268/head#subdirectory=setup/stock_picking_is_completed
 # https://github.com/OCA/stock-logistics-workflow/pull/1168
 odoo-addon-stock-procurement-customer @ git+https://github.com/acsone/stock-logistics-workflow.git@16.0-add-stock-procurement-customer-dro#subdirectory=setup/stock_procurement_customer
 # https://github.com/OCA/stock-logistics-workflow/pull/1196 - [16.0][ADD] stock_picking_low_priority
