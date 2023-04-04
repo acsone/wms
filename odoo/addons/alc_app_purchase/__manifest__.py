@@ -36,5 +36,6 @@
         "product_uom_updatable",
         "alc_purchase_order_date_planned",
         "alc_stock_scheduler_filter",
+        "alc_product_nb_days_out_of_stock",
     ],
 }
