@@ -92,7 +92,7 @@ class StockPackOperationLotAdd(models.TransientModel):
     )
 
     @api.depends("move_line_id", "qty", "remaining_qty")
-    def _compute_is_qty_exceeded(self):
+    def _compute_is_qty_exceeded(self) -> None:
         for rec in self:
             rec.is_qty_exceeded = bool(
                 float_compare(
@@ -106,7 +106,7 @@ class StockPackOperationLotAdd(models.TransientModel):
             )
 
     @api.depends("move_line_id", "expiration_date")
-    def _compute_lot_name(self):
+    def _compute_lot_name(self) -> None:
         for wiz in self:
             lot_name = wiz.lot_name
             if wiz.expiration_date:
@@ -118,7 +118,7 @@ class StockPackOperationLotAdd(models.TransientModel):
             wiz.lot_name = lot_name
 
     @api.depends("move_line_id")
-    def _compute_expiration_date_char(self):
+    def _compute_expiration_date_char(self) -> None:
         for wizard in self:
             wizard.update(
                 {
@@ -127,18 +127,18 @@ class StockPackOperationLotAdd(models.TransientModel):
                 }
             )
 
-    def _is_parent_child(self, parent, child):
+    def _is_parent_child(self, parent, child) -> bool:
         if child and parent:
             return child.parent_path.startswith(parent.parent_path)
         return False
 
     @api.depends("move_line_id")
-    def _compute_qty(self):
+    def _compute_qty(self) -> None:
         for wizard in self:
             wizard.qty = 0
 
     @api.depends("move_line_id", "expiration_date")
-    def _compute_location_dest_id(self):
+    def _compute_location_dest_id(self) -> None:
         for wiz in self:
             op_dest_loc = wiz.move_line_id.location_dest_id
             if op_dest_loc.usage == "internal":
@@ -152,7 +152,7 @@ class StockPackOperationLotAdd(models.TransientModel):
                 wiz.location_dest_id = False
 
     @api.depends("move_line_id")
-    def _compute_location_op_dest_id(self):
+    def _compute_location_op_dest_id(self) -> None:
         for rec in self:
             loc = rec.move_line_id.location_dest_id
             while loc and not loc.usage == "view":
@@ -160,17 +160,17 @@ class StockPackOperationLotAdd(models.TransientModel):
             rec.location_op_dest_id = loc.id
 
     @api.depends("move_line_id")
-    def _compute_lot_required(self):
+    def _compute_lot_required(self) -> None:
         for rec in self:
             rec.lot_required = rec.product_id.tracking != "none"
 
     @api.depends("move_id.quantity_done")
-    def _compute_remaining_qty(self):
+    def _compute_remaining_qty(self) -> None:
         for rec in self:
             rec.remaining_qty = rec.move_id.product_uom_qty - rec.move_id.quantity_done
 
     @api.depends("expiration_date_char")
-    def _compute_expiration_date(self):
+    def _compute_expiration_date(self) -> None:
         for wiz in self:
             try:
                 expiration_date = fields.Datetime.to_string(
@@ -180,7 +180,7 @@ class StockPackOperationLotAdd(models.TransientModel):
             except (TypeError, ValueError):
                 wiz.expiration_date = False
 
-    def _split_move(self):
+    def _split_move(self) -> StockMove:
         move = self.move_id
         move_line_new = move.copy(
             default={
@@ -192,11 +192,11 @@ class StockPackOperationLotAdd(models.TransientModel):
         self.move_line_id = move_line_new
         return move_line_new
 
-    def _level_move_line_quantities(self):
+    def _level_move_line_quantities(self) -> None:
         for move_line in self.move_id.move_line_ids:
             move_line.reserved_uom_qty = move_line.qty_done
 
-    def _prepare_move_line_values(self):
+    def _prepare_move_line_values(self) -> dict:
         self.ensure_one()
         return {
             "move_id": self.move_id.id,
@@ -205,10 +205,10 @@ class StockPackOperationLotAdd(models.TransientModel):
             "product_id": self.move_line_id.product_id.id,
         }
 
-    def _add_move_line(self):
+    def _add_move_line(self) -> StockMoveLine:
         return self.env["stock.move.line"].create(self._prepare_move_line_values())
 
-    def _add(self):
+    def _add(self) -> None:
         precision = self.env["decimal.precision"].precision_get(
             "Product Unit of Measure"
         )
@@ -269,7 +269,7 @@ class StockPackOperationLotAdd(models.TransientModel):
         else:
             current_operation.qty_done += self.qty
 
-    def button_nextop(self):
+    def button_nextop(self) -> None:
         self.button_nextlot()
         self.update(
             {
@@ -279,7 +279,7 @@ class StockPackOperationLotAdd(models.TransientModel):
             }
         )
 
-    def button_nextlot(self):
+    def button_nextlot(self) -> None:
         self._add()
         self.update(
             {
@@ -293,7 +293,7 @@ class StockPackOperationLotAdd(models.TransientModel):
             }
         )
 
-    def button_nextdestloc(self):
+    def button_nextdestloc(self) -> None:
         self._add()
         self.update(
             {
@@ -304,7 +304,7 @@ class StockPackOperationLotAdd(models.TransientModel):
             }
         )
 
-    def button_transfer(self):
+    def button_transfer(self) -> bool or dict:
         """
         Just validate and return the action or if True,.
 
