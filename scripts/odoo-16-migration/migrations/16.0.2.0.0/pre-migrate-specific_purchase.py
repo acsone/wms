@@ -99,7 +99,7 @@ def _mig_alc_stock_scheduler_filter(env):
     )
 
 
-def _mig_bank_holiday():
+def _mig_bank_holiday(env):
     # FIXME: is this table used any more, the data in the db are for 2017 and 2018
     pass
 
@@ -126,6 +126,23 @@ def _mig_purchase_order_user(env):
     )
 
 
+def _mig_alc_purchase_order_bo_line(env):
+    openupgrade.update_module_moved_fields(
+        env.cr,
+        "purchase.order",
+        ["nbr_lines", "nbr_lines_bo"],
+        "specific_purchase",
+        "alc_purchase_order_bo_line",
+    )
+    openupgrade.update_module_moved_fields(
+        env.cr,
+        "purchase.order.line",
+        ["is_bo_line"],
+        "specific_purchase",
+        "alc_purchase_order_bo_line",
+    )
+
+
 @openupgrade.migrate()
 def migrate(env, version):
     _mig_alc_product_supplier(env)
@@ -136,3 +153,4 @@ def migrate(env, version):
     _mig_bank_holiday(env)
     _mig_acl_product_supplierinfo_import(env)
     _mig_purchase_order_user(env)
+    _mig_alc_purchase_order_bo_line(env)

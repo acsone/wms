@@ -42,5 +42,6 @@
         "alc_stock_scheduler_filter",
         "alc_product_nb_days_out_of_stock",
         "alc_purchase_discount",
+        "alc_purchase_order_bo_line",
     ],
 }

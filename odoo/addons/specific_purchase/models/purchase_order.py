@@ -24,13 +24,6 @@ class PurchaseOrder(models.Model):
         readonly=True,
         help="Total weight in Kg",
     )
-    nbr_lines = fields.Integer("Nbr lines", compute="_compute_nbr_lines", readonly=True)
-    nbr_lines_bo = fields.Integer(
-        "Nbr lines BO",
-        compute="_compute_nbr_lines_bo",
-        search="_search_nbr_lines_bo",
-        readonly=True,
-    )
 
     @api.model
     def convert_time(self, pl_day, pl_time=14.00):
@@ -49,40 +42,6 @@ class PurchaseOrder(models.Model):
         return tz_context.localize(new_planned_date).astimezone(tz_utc)
 
     @api.multi
-    def _compute_nbr_lines(self):
-        """
-        Compute the number of lines by purchase order.
-        :return:
-        """
-        for po in self:
-            po.nbr_lines = len(po.order_line)
-
-    @api.multi
-    def _compute_nbr_lines_bo(self):
-        """
-        Compute the number of lines with back order by purchase order.
-        :return:
-        """
-        for po in self:
-            # NOTE: computing 'immediately_usable_qty' field is very slow,
-            # especially when the field is displayed on PO tree view
-            po.nbr_lines_bo = len(
-                po.order_line.filtered(
-                    lambda line: line.product_id.immediately_usable_qty < 0
-                )
-            )
-
-    def _search_nbr_lines_bo(self, operator, value):
-        orders = self.browse()
-        draft_orders = self.search([("state", "=", "draft")])
-        for order in draft_orders:
-            # NOTE: actual operator is ignored here for the sake of simplicity.
-            # To implement if it's really needed.
-            if order.nbr_lines_bo:
-                orders |= order
-        return [("id", "in", orders.ids)]
-
-    @api.multi
     def _compute_total_weight(self):
         for po in self:
             total_weight = 0
@@ -90,9 +49,3 @@ class PurchaseOrder(models.Model):
                 total_weight += line.product_id.weight * line.product_qty
 
             po.total_weight = total_weight
-
-    @api.multi
-    def button_confirm(self):
-        self.responsible_id = self.env.user.id
-
-        return super(PurchaseOrder, self).button_confirm()
