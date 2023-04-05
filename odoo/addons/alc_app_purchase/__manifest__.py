@@ -44,5 +44,6 @@
         "alc_purchase_discount",
         "alc_purchase_order_bo_line",
         "alc_purchase_security",
+        "alc_purchase_order_total_weight",
     ],
 }

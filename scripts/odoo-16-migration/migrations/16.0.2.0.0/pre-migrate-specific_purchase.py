@@ -143,6 +143,16 @@ def _mig_alc_purchase_order_bo_line(env):
     )
 
 
+def _mig_alc_purchase_order_total_weight(env):
+    openupgrade.update_module_moved_fields(
+        env.cr,
+        "purchase.order",
+        ["total_weight"],
+        "specific_purchase",
+        "alc_purchase_order_total_weight",
+    )
+
+
 @openupgrade.migrate()
 def migrate(env, version):
     _mig_alc_product_supplier(env)
@@ -154,3 +164,4 @@ def migrate(env, version):
     _mig_acl_product_supplierinfo_import(env)
     _mig_purchase_order_user(env)
     _mig_alc_purchase_order_bo_line(env)
+    _mig_alc_purchase_order_total_weight(env)
