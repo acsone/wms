@@ -12,9 +12,6 @@
       <xpath expr="//field[@name='origin']" position="after">
         <field name="nbr_lines" />
         <field name="nbr_lines_bo" />
-      <xpath expr="//field[@name='partner_id']" position="after">
-        <field name="responsible_id" />
-      </xpath>
       <xpath expr="//field[@name='date_order']" position="after">
         <field name="total_weight" />
       </xpath>
@@ -92,16 +89,6 @@
     <field name="inherit_id" ref="purchase.view_purchase_order_filter" />
     <field name="arch" type="xml">
       <xpath expr="//filter[@name='draft']" position="before">
-        <filter
-          name="my_orders"
-          string="My Orders"
-          domain="[('responsible_id', '=', uid)]"
-        />
-        <filter
-          name="without_responsible"
-          string="Without responsible"
-          domain="[('responsible_id', '=', False)]"
-        />
         <filter name="bo_orders" string="In BO" domain="[('nbr_lines_bo', '>', 0)]" />
         <separtor />
       </xpath>

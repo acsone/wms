@@ -24,9 +24,6 @@ class PurchaseOrder(models.Model):
         readonly=True,
         help="Total weight in Kg",
     )
-    responsible_id = fields.Many2one(
-        "res.users", string="Responsible", track_visibility="onchange"
-    )
     nbr_lines = fields.Integer("Nbr lines", compute="_compute_nbr_lines", readonly=True)
     nbr_lines_bo = fields.Integer(
         "Nbr lines BO",
@@ -84,20 +81,6 @@ class PurchaseOrder(models.Model):
             if order.nbr_lines_bo:
                 orders |= order
         return [("id", "in", orders.ids)]
-
-    @api.model
-    def create(self, vals):
-        """
-        Set the default responsible on a purchase order
-        :param vals:
-        :return:
-        """
-        if not vals.get("responsible_id") and vals.get("partner_id"):
-            partner = self.env["res.partner"].browse(vals["partner_id"])
-            if partner.purchase_manager_id:
-                vals["responsible_id"] = partner.purchase_manager_id.id
-
-        return super(PurchaseOrder, self).create(vals)
 
     @api.multi
     def _compute_total_weight(self):

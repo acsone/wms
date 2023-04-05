@@ -114,6 +114,18 @@ def _mig_acl_product_supplierinfo_import(env):
     )
 
 
+def _mig_purchase_order_user(env):
+    if not openupgrade.column_exists(env.cr, "purchase_order", "responsible_id"):
+        return
+    env.cr.execute(
+        """
+        ALTER TABLE purchase_order ADD COLUMN IF NOT EXISTS user_id integer;
+        UPDATE purchase_order
+        SET user_id=responsible_id;
+        """
+    )
+
+
 @openupgrade.migrate()
 def migrate(env, version):
     _mig_alc_product_supplier(env)
@@ -123,3 +135,4 @@ def migrate(env, version):
     _mig_alc_stock_scheduler_filter(env)
     _mig_bank_holiday(env)
     _mig_acl_product_supplierinfo_import(env)
+    _mig_purchase_order_user(env)
