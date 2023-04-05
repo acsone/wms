@@ -5,6 +5,7 @@
     <field name="model_id" ref="purchase.model_purchase_order" />
     <field name="partner_to">${object.partner_id.id}</field>
     <field name="subject">Purchase order ${object.partner_ref or ''} canceled</field>
+      <field name="description">Sent manually to cancel a purchase</field>
     <field name="body_html">
             <![CDATA[
                 <p>Hello,</p>

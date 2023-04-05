@@ -46,5 +46,6 @@
         "alc_purchase_security",
         "alc_purchase_order_total_weight",
         "alc_purchase_order_readonly",
+        "alc_purchase_order_cancel_email_template",
     ],
 }

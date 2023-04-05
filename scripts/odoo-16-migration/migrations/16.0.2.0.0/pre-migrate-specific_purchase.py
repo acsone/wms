@@ -153,6 +153,19 @@ def _mig_alc_purchase_order_total_weight(env):
     )
 
 
+def _mig_alc_purchase_order_cancel_email_template(env):
+    openupgrade.rename_xmlids(
+        env.cr,
+        [
+            (
+                "specific_purchase.cancel_purchase_order",
+                "alc_purchase_order_cancel_email_template.cancel_purchase_order",
+            )
+        ],
+        allow_merge=True,
+    )
+
+
 @openupgrade.migrate()
 def migrate(env, version):
     _mig_alc_product_supplier(env)
@@ -165,3 +178,4 @@ def migrate(env, version):
     _mig_purchase_order_user(env)
     _mig_alc_purchase_order_bo_line(env)
     _mig_alc_purchase_order_total_weight(env)
+    _mig_alc_purchase_order_cancel_email_template(env)
