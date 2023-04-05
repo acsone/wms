@@ -25,22 +25,6 @@ class PurchaseOrder(models.Model):
         help="Total weight in Kg",
     )
 
-    @api.model
-    def convert_time(self, pl_day, pl_time=14.00):
-        """
-        mock float field to respect user timezone
-        pl_day - date in string format
-        pl_time - time in float format
-        """
-        tz_utc = pytz.timezone("UTC")
-        tz_context = pytz.timezone(self.env.context.get("tz", "UTC"))
-
-        new_planned_date = fields.Datetime.from_string(pl_day)
-        hour = int(pl_time)
-        minute = int(round(pl_time - hour) * 60)
-        new_planned_date = new_planned_date.replace(hour=hour, minute=minute, second=0)
-        return tz_context.localize(new_planned_date).astimezone(tz_utc)
-
     @api.multi
     def _compute_total_weight(self):
         for po in self:
