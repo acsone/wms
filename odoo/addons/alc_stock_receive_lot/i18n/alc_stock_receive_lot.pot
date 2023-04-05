@@ -79,8 +79,18 @@ msgid "Inventory Locations"
 msgstr ""
 
 #. module: alc_stock_receive_lot
+#: model:ir.model.fields,field_description:alc_stock_receive_lot.field_stock_pack_operation_lot_add__picking_is_completed
+msgid "Is Completed"
+msgstr ""
+
+#. module: alc_stock_receive_lot
 #: model:ir.model.fields,field_description:alc_stock_receive_lot.field_stock_pack_operation_lot_add__is_qty_exceeded
 msgid "Is Qty Exceeded"
+msgstr ""
+
+#. module: alc_stock_receive_lot
+#: model:ir.model.fields,field_description:alc_stock_receive_lot.field_stock_pack_operation_lot_add__is_transfer
+msgid "Is Transfer"
 msgstr ""
 
 #. module: alc_stock_receive_lot
@@ -192,6 +202,25 @@ msgid "Stock Operation"
 msgstr ""
 
 #. module: alc_stock_receive_lot
+#: model:ir.model.fields,help:alc_stock_receive_lot.field_stock_pack_operation_lot_add__is_transfer
+msgid ""
+"Technical field that is set when user is doing the transfer actionin order "
+"to bypass some operations"
+msgstr ""
+
+#. module: alc_stock_receive_lot
+#: model_terms:ir.ui.view,arch_db:alc_stock_receive_lot.view_pack_operation_lot_add_form
+msgid "The picking seems to be completed and is about to be validated."
+msgstr ""
+
+#. module: alc_stock_receive_lot
+#: model:ir.model.fields,help:alc_stock_receive_lot.field_stock_pack_operation_lot_add__picking_is_completed
+msgid ""
+"This field means if all picking operations have been done (each quantity is "
+"> 0)"
+msgstr ""
+
+#. module: alc_stock_receive_lot
 #: model:ir.model.fields,help:alc_stock_receive_lot.field_stock_pack_operation_lot_add__product_qty
 msgid ""
 "This is the quantity of products from an inventory point of view. For moves "
@@ -222,25 +251,21 @@ msgstr ""
 #. odoo-python
 #: code:addons/alc_stock_receive_lot/wizards/stock_pack_operation_lot_add.py:0
 #, python-format
-msgid "Warning"
-msgstr ""
-
-#. module: alc_stock_receive_lot
-#. odoo-python
-#: code:addons/alc_stock_receive_lot/wizards/stock_pack_operation_lot_add.py:0
-#, python-format
 msgid ""
 "You receive more than the expected remaining quantity. You must confirm that"
 " you received more than the expected qty"
 msgstr ""
 
 #. module: alc_stock_receive_lot
-#. odoo-python
-#: code:addons/alc_stock_receive_lot/wizards/stock_pack_operation_lot_add.py:0
-#, python-format
+#: model_terms:ir.ui.view,arch_db:alc_stock_receive_lot.view_pack_operation_lot_add_form
 msgid ""
-"You received more than the expected remaining quantity. Please confirm by "
-"ticking the 'Confirm received more than expected' checkbox."
+"You received more than the expected remaining quantity.\n"
+"                    Please confirm by ticking the 'Confirm received more than expected' checkbox."
+msgstr ""
+
+#. module: alc_stock_receive_lot
+#: model_terms:ir.ui.view,arch_db:alc_stock_receive_lot.view_pack_operation_lot_add_form
+msgid "__/__/____"
 msgstr ""
 
 #. module: alc_stock_receive_lot
