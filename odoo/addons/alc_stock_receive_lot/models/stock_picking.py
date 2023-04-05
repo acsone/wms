@@ -5,13 +5,13 @@ from odoo.addons.stock.models.stock_picking import Picking as PickingBase
 
 
 class Picking(PickingBase):
-    def button_receive(self):
+    def button_receive(self) -> dict:
         self.ensure_one()
 
         if not self.user_id:
             self.user_id = self.env.user
             self.printed = True
 
-        return self.env.ref(
+        return self.env["ir.actions.act_window"]._for_xml_id(
             "alc_stock_receive_lot.action_pack_operation_lot_add"
-        ).read()[0]
+        )

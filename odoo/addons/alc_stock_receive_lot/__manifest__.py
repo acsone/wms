@@ -10,6 +10,7 @@
     "category": "Stock Management",
     "depends": [
         "product_expiry",
+        "stock_picking_is_completed",
         "alc_stock_lot_track_food",
     ],  # LGPL
     "data": [

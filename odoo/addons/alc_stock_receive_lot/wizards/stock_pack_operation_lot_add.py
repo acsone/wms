@@ -5,6 +5,7 @@ from datetime import datetime
 
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
+from odoo.tools import float_compare
 
 from odoo.addons.base.models.res_partner import Partner
 from odoo.addons.product.models.product_product import ProductProduct
@@ -22,6 +23,7 @@ class StockPackOperationLotAdd(models.TransientModel):
 
     name = fields.Char(default="New")
     picking_id = fields.Many2one[Picking](readonly="True")
+    picking_is_completed = fields.Boolean(related="picking_id.is_completed")
     partner_id = fields.Many2one[Partner](
         related="picking_id.partner_id", readonly=True
     )
@@ -29,14 +31,18 @@ class StockPackOperationLotAdd(models.TransientModel):
     move_line_id = fields.Many2one[StockMoveLine](
         string="Operation",
         domain=[("state", "=", "assigned")],
-        readonly=False,
     )
     move_id = fields.Many2one[StockMove](related="move_line_id.move_id")
     location_op_dest_id = fields.Many2one[Location](
         string="Operation Destination View Location",
         compute="_compute_location_op_dest_id",
     )
-    location_dest_id = fields.Many2one[Location](string="Destination Location")
+    location_dest_id = fields.Many2one[Location](
+        compute="_compute_location_dest_id",
+        store=True,
+        readonly=False,
+        string="Destination Location",
+    )
 
     lot_required = fields.Boolean(
         string="Lot Required", compute="_compute_lot_required"
@@ -48,41 +54,91 @@ class StockPackOperationLotAdd(models.TransientModel):
     product_uom_id = fields.Many2one[UoM](
         related="move_line_id.product_uom_id", readonly=True
     )
-    remaining_qty = fields.Float("Qty Remaining", compute="_compute_remaining_qty")
-    qty = fields.Float("Qty Done")
+    remaining_qty = fields.Float(
+        "Qty Remaining",
+        digits="Product Unit of Measure",
+        compute="_compute_remaining_qty",
+    )
+    qty = fields.Float(
+        "Qty Done",
+        digits="Product Unit of Measure",
+        compute="_compute_qty",
+        store=True,
+        readonly=False,
+    )
     is_qty_exceeded = fields.Boolean(compute="_compute_is_qty_exceeded")
     is_surplus_qty_confirmed = fields.Boolean("Confirm received more than expected")
-    expiration_date_char = fields.Char(string="Expiration date (input)")
-    expiration_date = fields.Datetime(string="Expiration date")
+    expiration_date_char = fields.Char(
+        string="Expiration date (input)",
+        compute="_compute_expiration_date_char",
+        readonly=False,
+        store=True,
+    )
+    expiration_date = fields.Datetime(
+        string="Expiration date",
+        compute="_compute_expiration_date",
+        store=True,
+    )
     lot_name = fields.Char(
-        "Lot Name", compute="_compute_lot_name", store=True, readonly=False
+        "Lot Name",
+        compute="_compute_lot_name",
+        store=True,
+        readonly=False,
     )
     lot_id = fields.Many2one[StockLot](string="Lot")
+    is_transfer = fields.Boolean(
+        help="Technical field that is set when user is doing the transfer action"
+        "in order to bypass some operations"
+    )
 
-    @api.depends("qty", "remaining_qty")
-    def _compute_is_qty_exceeded(self):
+    @api.depends("move_line_id", "qty", "remaining_qty")
+    def _compute_is_qty_exceeded(self) -> None:
         for rec in self:
-            rec.is_qty_exceeded = rec.qty > rec.remaining_qty
+            rec.is_qty_exceeded = bool(
+                float_compare(
+                    rec.qty,
+                    rec.remaining_qty,
+                    precision_rounding=rec.move_line_id.product_uom_id.rounding,
+                )
+                > 0
+                if rec.move_line_id
+                else False
+            )
 
     @api.depends("move_line_id", "expiration_date")
-    def _compute_lot_name(self):
-        compute_name = self.env["stock.lot"]._calc_name_for_food
+    def _compute_lot_name(self) -> None:
         for wiz in self:
             lot_name = wiz.lot_name
             if wiz.expiration_date:
-                lot_name = compute_name(wiz.expiration_date)
+                lot_name = (
+                    self.env["stock.lot"]
+                    .new({"product_id": wiz.product_id.id})
+                    ._calc_name_for_food(wiz.expiration_date)
+                )
             wiz.lot_name = lot_name
 
-    def _is_parent_child(self, parent, child):
+    @api.depends("move_line_id")
+    def _compute_expiration_date_char(self) -> None:
+        for wizard in self:
+            wizard.update(
+                {
+                    "expiration_date": False,
+                    "expiration_date_char": False,
+                }
+            )
+
+    def _is_parent_child(self, parent, child) -> bool:
         if child and parent:
             return child.parent_path.startswith(parent.parent_path)
         return False
 
-    @api.onchange("move_line_id")
-    def _onchange_move_line_id(self):
-        self._set_wiz_default_values()
+    @api.depends("move_line_id")
+    def _compute_qty(self) -> None:
+        for wizard in self:
+            wizard.qty = 0
 
-    def _set_wiz_default_values(self):
+    @api.depends("move_line_id", "expiration_date")
+    def _compute_location_dest_id(self) -> None:
         for wiz in self:
             op_dest_loc = wiz.move_line_id.location_dest_id
             if op_dest_loc.usage == "internal":
@@ -94,13 +150,9 @@ class StockPackOperationLotAdd(models.TransientModel):
                 # If in the wizard, there is no location or if the current location
                 # is not valid for selected operation then we need to update it
                 wiz.location_dest_id = False
-            wiz.expiration_date = False
-            wiz.expiration_date_char = False
-            wiz.lot_name = False
-            wiz.qty = 0
 
     @api.depends("move_line_id")
-    def _compute_location_op_dest_id(self):
+    def _compute_location_op_dest_id(self) -> None:
         for rec in self:
             loc = rec.move_line_id.location_dest_id
             while loc and not loc.usage == "view":
@@ -108,79 +160,27 @@ class StockPackOperationLotAdd(models.TransientModel):
             rec.location_op_dest_id = loc.id
 
     @api.depends("move_line_id")
-    def _compute_lot_required(self):
+    def _compute_lot_required(self) -> None:
         for rec in self:
             rec.lot_required = rec.product_id.tracking != "none"
 
     @api.depends("move_id.quantity_done")
-    def _compute_remaining_qty(self):
+    def _compute_remaining_qty(self) -> None:
         for rec in self:
             rec.remaining_qty = rec.move_id.product_uom_qty - rec.move_id.quantity_done
 
-    @api.onchange("qty")
-    def _onchange_qty(self):
-        if self.is_qty_exceeded:
-            return {
-                "warning": {
-                    "title": _("Warning"),
-                    "message": _(
-                        "You received more than the expected remaining quantity. "
-                        "Please confirm by ticking the 'Confirm received more "
-                        "than expected' checkbox."
-                    ),
-                }
-            }
-        return None
-
-    @api.onchange("expiration_date_char")
-    def _onchange_expiration_date_char(self):
-        if not self.expiration_date_char:
-            self.expiration_date = False
-        else:
+    @api.depends("expiration_date_char")
+    def _compute_expiration_date(self) -> None:
+        for wiz in self:
             try:
                 expiration_date = fields.Datetime.to_string(
-                    datetime.strptime(self.expiration_date_char, "%d/%m/%Y")
+                    datetime.strptime(wiz.expiration_date_char, "%d/%m/%Y")
                 )
-                self.expiration_date = expiration_date
+                wiz.expiration_date = expiration_date
             except (TypeError, ValueError):
-                self.expiration_date = False
-        methods = self._onchange_methods.get("expiration_date", ())
-        for method in methods:
-            method(self)
+                wiz.expiration_date = False
 
-    @api.onchange("expiration_date")
-    def _onchange_expiration_date(self):
-        lot = self.env["stock.lot"]
-        if self.expiration_date and self.move_line_id:
-            self.lot_name = lot._calc_name_for_food(self.expiration_date)
-
-    def _lot_onchange_expiration_date(self, lot):
-        methods = lot._onchange_methods.get("expiration_date", ())
-        for method in methods:
-            method(lot)
-
-    def _get_lot_from_lot_name(self):
-        lot_obj = self.env["stock.lot"]
-        lot = lot_obj.search(
-            [
-                ("name", "=", self.lot_name),
-                ("product_id", "=", self.move_line_id.product_id.id),
-            ]
-        )
-        if not lot:
-            lot = lot_obj.create(
-                {
-                    "name": self.lot_name,
-                    "expiration_date": self.expiration_date,
-                    "product_id": self.move_line_id.product_id.id,
-                    "company_id": self.env.company.id,
-                }
-            )
-            self._lot_onchange_expiration_date(lot)
-        self.lot_id = lot
-        return lot
-
-    def _split_move(self):
+    def _split_move(self) -> StockMove:
         move = self.move_id
         move_line_new = move.copy(
             default={
@@ -192,23 +192,33 @@ class StockPackOperationLotAdd(models.TransientModel):
         self.move_line_id = move_line_new
         return move_line_new
 
-    def _level_move_line_quantities(self):
+    def _level_move_line_quantities(self) -> None:
         for move_line in self.move_id.move_line_ids:
             move_line.reserved_uom_qty = move_line.qty_done
 
-    def _add_move_line(self):
-        return self.env["stock.move.line"].create(
-            {
-                "move_id": self.move_id.id,
-                "location_id": self.move_line_id.location_id.id,
-                "location_dest_id": self.location_dest_id.id,
-                "product_id": self.move_line_id.product_id.id,
-            }
-        )
+    def _prepare_move_line_values(self) -> dict:
+        self.ensure_one()
+        return {
+            "move_id": self.move_id.id,
+            "location_id": self.move_line_id.location_id.id,
+            "location_dest_id": self.location_dest_id.id,
+            "product_id": self.move_line_id.product_id.id,
+        }
 
-    def _add(self):
-        if self.qty <= 0:
+    def _add_move_line(self) -> StockMoveLine:
+        return self.env["stock.move.line"].create(self._prepare_move_line_values())
+
+    def _add(self) -> None:
+        precision = self.env["decimal.precision"].precision_get(
+            "Product Unit of Measure"
+        )
+        quantity_zero = bool(
+            float_compare(self.qty, 0, precision_rounding=precision) <= 0
+        )
+        if quantity_zero and not self.is_transfer:
             raise UserError(_("Quantity must be greater than 0"))
+        if quantity_zero and self.is_transfer:
+            return
         if self.is_qty_exceeded and not self.is_surplus_qty_confirmed:
             raise UserError(
                 _(
@@ -247,35 +257,71 @@ class StockPackOperationLotAdd(models.TransientModel):
                     move_line = current_operation
                 else:
                     move_line = self._add_move_line()
-                move_line.lot_name = self.lot_name
-                move_line.qty_done = self.qty
-                move_line._create_and_assign_production_lot()
-                if self.expiration_date and self.product_id.use_expiration_date:
-                    move_line.lot_id.expiration_date = self.expiration_date
-
+                # Setting just those fields is sufficient to allow
+                # Odoo creating or using an existing lot at move validation
+                move_line.update(
+                    {
+                        "lot_name": self.lot_name,
+                        "qty_done": self.qty,
+                        "expiration_date": self.expiration_date,
+                    }
+                )
         else:
             current_operation.qty_done += self.qty
 
-    def button_nextop(self):
+    def button_nextop(self) -> None:
         self.button_nextlot()
-        self.move_line_id = False
-        self.location_dest_id = False
+        self.update(
+            {
+                "move_line_id": False,
+                "location_dest_id": False,
+                "is_transfer": False,
+            }
+        )
 
-    def button_nextlot(self):
+    def button_nextlot(self) -> None:
         self._add()
-        self.qty = False
-        self.lot_id = False  # ensure we don't modify lot on next lines
-        self.expiration_date = False
-        self.expiration_date_char = False
-        self.lot_name = False
-        self.is_surplus_qty_confirmed = False
+        self.update(
+            {
+                "qty": False,
+                "lot_id": False,
+                "expiration_date": False,
+                "expiration_date_char": False,
+                "lot_name": False,
+                "is_surplus_qty_confirmed": False,
+                "is_transfer": False,
+            }
+        )
 
-    def button_nextdestloc(self):
+    def button_nextdestloc(self) -> None:
         self._add()
-        self.qty = False
-        self.location_dest_id = False
-        self.is_surplus_qty_confirmed = False
+        self.update(
+            {
+                "qty": False,
+                "location_dest_id": False,
+                "is_surplus_qty_confirmed": False,
+                "is_transfer": False,
+            }
+        )
 
-    def button_transfer(self):
+    def button_transfer(self) -> bool or dict:
+        """
+        Just validate and return the action or if True,.
+
+        return the picking form
+        """
+        self.is_transfer = True
         self.button_nextop()
-        return self.picking_id.button_validate()
+        res = self.picking_id.button_validate()
+        if isinstance(res, bool) and res:
+            action = self.env["ir.actions.act_window"]._for_xml_id(
+                "stock.action_picking_form"
+            )
+            action.update(
+                {
+                    "res_id": self.picking_id.id,
+                    "context": False,
+                }
+            )
+            return action
+        return res
