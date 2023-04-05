@@ -1,0 +1,136 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* alc_stock_scheduler_filter
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-04-05 19:53+0000\n"
+"PO-Revision-Date: 2023-04-05 19:53+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_stock_scheduler_filter
+#: model:ir.model.fields.selection,name:alc_stock_scheduler_filter.selection__stock_scheduler_compute__procure_type__by_days
+msgid "By days"
+msgstr ""
+
+#. module: alc_stock_scheduler_filter
+#: model:ir.model.fields.selection,name:alc_stock_scheduler_filter.selection__stock_scheduler_compute__procure_type__by_suppliers
+msgid "By suppliers"
+msgstr ""
+
+#. module: alc_stock_scheduler_filter
+#: model:ir.model,name:alc_stock_scheduler_filter.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: alc_stock_scheduler_filter
+#: model_terms:ir.ui.view,arch_db:alc_stock_scheduler_filter.view_partner_form
+msgid "Days for management"
+msgstr ""
+
+#. module: alc_stock_scheduler_filter
+#: model_terms:ir.ui.view,arch_db:alc_stock_scheduler_filter.stock_scheduler_compute_form_view
+msgid "Days to generate"
+msgstr ""
+
+#. module: alc_stock_scheduler_filter
+#: model:ir.model.fields,field_description:alc_stock_scheduler_filter.field_res_partner__is_manage_day_5
+#: model:ir.model.fields,field_description:alc_stock_scheduler_filter.field_res_users__is_manage_day_5
+#: model:ir.model.fields,field_description:alc_stock_scheduler_filter.field_stock_scheduler_compute__is_manage_day_5
+msgid "Friday"
+msgstr ""
+
+#. module: alc_stock_scheduler_filter
+#: model:ir.model,name:alc_stock_scheduler_filter.model_stock_warehouse_orderpoint
+msgid "Minimum Inventory Rule"
+msgstr ""
+
+#. module: alc_stock_scheduler_filter
+#: model:ir.model.fields,field_description:alc_stock_scheduler_filter.field_res_partner__is_manage_day_1
+#: model:ir.model.fields,field_description:alc_stock_scheduler_filter.field_res_users__is_manage_day_1
+#: model:ir.model.fields,field_description:alc_stock_scheduler_filter.field_stock_scheduler_compute__is_manage_day_1
+msgid "Monday"
+msgstr ""
+
+#. module: alc_stock_scheduler_filter
+#. odoo-python
+#: code:addons/alc_stock_scheduler_filter/wizards/stock_scheduler_compute.py:0
+#, python-format
+msgid "Please select at least one day"
+msgstr ""
+
+#. module: alc_stock_scheduler_filter
+#. odoo-python
+#: code:addons/alc_stock_scheduler_filter/wizards/stock_scheduler_compute.py:0
+#, python-format
+msgid "Please select at least one supplier"
+msgstr ""
+
+#. module: alc_stock_scheduler_filter
+#: model:ir.model,name:alc_stock_scheduler_filter.model_procurement_group
+msgid "Procurement Group"
+msgstr ""
+
+#. module: alc_stock_scheduler_filter
+#: model:ir.model,name:alc_stock_scheduler_filter.model_stock_scheduler_compute
+msgid "Run Scheduler Manually"
+msgstr ""
+
+#. module: alc_stock_scheduler_filter
+#: model:ir.model.fields,field_description:alc_stock_scheduler_filter.field_res_partner__is_manage_day_6
+#: model:ir.model.fields,field_description:alc_stock_scheduler_filter.field_res_users__is_manage_day_6
+#: model:ir.model.fields,field_description:alc_stock_scheduler_filter.field_stock_scheduler_compute__is_manage_day_6
+msgid "Saturday"
+msgstr ""
+
+#. module: alc_stock_scheduler_filter
+#: model:ir.model.fields,field_description:alc_stock_scheduler_filter.field_res_partner__is_manage_day_7
+#: model:ir.model.fields,field_description:alc_stock_scheduler_filter.field_res_users__is_manage_day_7
+#: model:ir.model.fields,field_description:alc_stock_scheduler_filter.field_stock_scheduler_compute__is_manage_day_7
+msgid "Sunday"
+msgstr ""
+
+#. module: alc_stock_scheduler_filter
+#: model:ir.model.fields,field_description:alc_stock_scheduler_filter.field_stock_scheduler_compute__supplier_ids
+msgid "Suppliers"
+msgstr ""
+
+#. module: alc_stock_scheduler_filter
+#: model:ir.model.fields,field_description:alc_stock_scheduler_filter.field_res_partner__is_manage_day_4
+#: model:ir.model.fields,field_description:alc_stock_scheduler_filter.field_res_users__is_manage_day_4
+#: model:ir.model.fields,field_description:alc_stock_scheduler_filter.field_stock_scheduler_compute__is_manage_day_4
+msgid "Thursday"
+msgstr ""
+
+#. module: alc_stock_scheduler_filter
+#: model:ir.model.fields,field_description:alc_stock_scheduler_filter.field_res_partner__is_manage_day_2
+#: model:ir.model.fields,field_description:alc_stock_scheduler_filter.field_res_users__is_manage_day_2
+#: model:ir.model.fields,field_description:alc_stock_scheduler_filter.field_stock_scheduler_compute__is_manage_day_2
+msgid "Tuesday"
+msgstr ""
+
+#. module: alc_stock_scheduler_filter
+#: model:ir.model.fields,field_description:alc_stock_scheduler_filter.field_stock_scheduler_compute__procure_type
+msgid "Type"
+msgstr ""
+
+#. module: alc_stock_scheduler_filter
+#: model_terms:ir.ui.view,arch_db:alc_stock_scheduler_filter.stock_scheduler_compute_form_view
+msgid ""
+"WARNING - You will generate procurement order by days. This process can take"
+" a very long time."
+msgstr ""
+
+#. module: alc_stock_scheduler_filter
+#: model:ir.model.fields,field_description:alc_stock_scheduler_filter.field_res_partner__is_manage_day_3
+#: model:ir.model.fields,field_description:alc_stock_scheduler_filter.field_res_users__is_manage_day_3
+#: model:ir.model.fields,field_description:alc_stock_scheduler_filter.field_stock_scheduler_compute__is_manage_day_3
+msgid "Wednesday"
+msgstr ""

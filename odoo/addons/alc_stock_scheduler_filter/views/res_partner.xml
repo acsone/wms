@@ -9,7 +9,7 @@
     <field name="arch" type="xml">
       <xpath expr="//group[@name='purchase']" position="inside">
         <separator string="Days for management" />
-        <table class="table-bordered text-center table-condensed" colspan="2">
+        <table class="table table-bordered text-center table-condensed" colspan="2">
           <tr>
             <th>
               <label class="o_form_label" for="is_manage_day_1" />

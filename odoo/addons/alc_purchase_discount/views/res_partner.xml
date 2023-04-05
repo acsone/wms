@@ -10,6 +10,13 @@
             <xpath expr="//group[@name='purchase']" position="inside">
                 <field name="supplier_discount" />
             </xpath>
+            <xpath
+        expr="//field[@name='default_supplierinfo_discount']"
+        position="attributes"
+      >
+                <!-- field from OCA that may be confusing with  supplier_discount -->
+                <attribute name="invisible">1</attribute>
+            </xpath>
         </field>
     </record>
 
