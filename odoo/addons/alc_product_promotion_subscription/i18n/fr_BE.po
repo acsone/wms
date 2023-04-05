@@ -44,7 +44,7 @@ msgid "Display Name"
 msgstr "Nom affiché"
 
 #. module: alc_product_promotion_subscription
-#: model:ir.ui.view,arch_db:alc_product_promotion_subscription.alc_promotion_subscription_search_view
+#: model_terms:ir.ui.view,arch_db:alc_product_promotion_subscription.alc_promotion_subscription_search_view
 msgid "Group By"
 msgstr "Grouper par"
 
@@ -71,7 +71,7 @@ msgstr "Dernière mis à jour le"
 #. module: alc_product_promotion_subscription
 #: model:ir.model,name:alc_product_promotion_subscription.model_res_partner
 #: model:ir.model.fields,field_description:alc_product_promotion_subscription.field_alc_product_promotion_subscription_partner_id
-#: model:ir.ui.view,arch_db:alc_product_promotion_subscription.alc_promotion_subscription_search_view
+#: model_terms:ir.ui.view,arch_db:alc_product_promotion_subscription.alc_promotion_subscription_search_view
 msgid "Partner"
 msgstr "Partenaire"
 
@@ -83,7 +83,7 @@ msgstr "Le partneaire %s est déjà abonné aux promotions pour le produit %s"
 
 #. module: alc_product_promotion_subscription
 #: model:ir.model.fields,field_description:alc_product_promotion_subscription.field_alc_product_promotion_subscription_product_id
-#: model:ir.ui.view,arch_db:alc_product_promotion_subscription.alc_promotion_subscription_search_view
+#: model_terms:ir.ui.view,arch_db:alc_product_promotion_subscription.alc_promotion_subscription_search_view
 msgid "Product"
 msgstr "Produit"
 
@@ -91,7 +91,7 @@ msgstr "Produit"
 #: model:ir.actions.act_window,name:alc_product_promotion_subscription.act_res_partner_2_product_promotion_subscription
 #: model:ir.actions.act_window,name:alc_product_promotion_subscription.alc_promotion_subscription_act_window
 #: model:ir.ui.menu,name:alc_product_promotion_subscription.alc_promotion_subscription_menu
-#: model:ir.ui.view,arch_db:alc_product_promotion_subscription.res_partner_form_view
+#: model_terms:ir.ui.view,arch_db:alc_product_promotion_subscription.res_partner_form_view
 msgid "Product Promotion Subscriptions"
 msgstr "Abonnements aux promotions produits"
 

@@ -34,13 +34,13 @@ msgid "Approval Pending"
 msgstr "En attente d'approbation"
 
 #. module: alc_eshop_classifieds
-#: model:ir.ui.view,arch_db:alc_eshop_classifieds.alc_classified_wizard_rejection_form_view
+#: model_terms:ir.ui.view,arch_db:alc_eshop_classifieds.alc_classified_wizard_rejection_form_view
 msgid "Cancel"
 msgstr "Annuler"
 
 #. module: alc_eshop_classifieds
 #: model:ir.model.fields,field_description:alc_eshop_classifieds.field_alc_classified_category
-#: model:ir.ui.view,arch_db:alc_eshop_classifieds.alc_classified_search_view
+#: model_terms:ir.ui.view,arch_db:alc_eshop_classifieds.alc_classified_search_view
 msgid "Category"
 msgstr "Catégorie"
 
@@ -61,7 +61,7 @@ msgstr "Classified Advertising"
 #: model:ir.model.fields,field_description:alc_eshop_classifieds.field_res_users_alc_classified_ids
 #: model:ir.model.fields,field_description:alc_eshop_classifieds.field_shopinvader_partner_alc_classified_ids
 #: model:ir.ui.menu,name:alc_eshop_classifieds.alc_classified_menu
-#: model:ir.ui.view,arch_db:alc_eshop_classifieds.view_partner_form
+#: model_terms:ir.ui.view,arch_db:alc_eshop_classifieds.view_partner_form
 #, python-format
 msgid "Classifieds"
 msgstr "Petites annonces"
@@ -125,7 +125,7 @@ msgid "Equipment"
 msgstr "Matériel"
 
 #. module: alc_eshop_classifieds
-#: model:ir.ui.view,arch_db:alc_eshop_classifieds.alc_classified_search_view
+#: model_terms:ir.ui.view,arch_db:alc_eshop_classifieds.alc_classified_search_view
 msgid "Group By"
 msgstr "Grouper par"
 
@@ -161,12 +161,12 @@ msgstr "Divers"
 #. module: alc_eshop_classifieds
 #: model:ir.model,name:alc_eshop_classifieds.model_res_partner
 #: model:ir.model.fields,field_description:alc_eshop_classifieds.field_alc_classified_partner_id
-#: model:ir.ui.view,arch_db:alc_eshop_classifieds.alc_classified_search_view
+#: model_terms:ir.ui.view,arch_db:alc_eshop_classifieds.alc_classified_search_view
 msgid "Partner"
 msgstr "Partenaire"
 
 #. module: alc_eshop_classifieds
-#: model:ir.ui.view,arch_db:alc_eshop_classifieds.alc_classified_search_view
+#: model_terms:ir.ui.view,arch_db:alc_eshop_classifieds.alc_classified_search_view
 msgid "Pending"
 msgstr "En attente"
 
@@ -176,31 +176,31 @@ msgid "Phone"
 msgstr "Téléphone"
 
 #. module: alc_eshop_classifieds
-#: model:ir.ui.view,arch_db:alc_eshop_classifieds.alc_classified_form_view
+#: model_terms:ir.ui.view,arch_db:alc_eshop_classifieds.alc_classified_form_view
 msgid "Publish"
 msgstr "Publier"
 
 #. module: alc_eshop_classifieds
 #: selection:alc.classified,state:0
-#: model:ir.ui.view,arch_db:alc_eshop_classifieds.alc_classified_search_view
+#: model_terms:ir.ui.view,arch_db:alc_eshop_classifieds.alc_classified_search_view
 msgid "Published"
 msgstr "Publié"
 
 #. module: alc_eshop_classifieds
-#: model:ir.ui.view,arch_db:alc_eshop_classifieds.alc_classified_form_view
-#: model:ir.ui.view,arch_db:alc_eshop_classifieds.alc_classified_wizard_rejection_form_view
+#: model_terms:ir.ui.view,arch_db:alc_eshop_classifieds.alc_classified_form_view
+#: model_terms:ir.ui.view,arch_db:alc_eshop_classifieds.alc_classified_wizard_rejection_form_view
 msgid "Reject"
 msgstr "Rejeter"
 
 #. module: alc_eshop_classifieds
 #: model:ir.actions.act_window,name:alc_eshop_classifieds.alc_classified_wizard_rejection_act_window
-#: model:ir.ui.view,arch_db:alc_eshop_classifieds.alc_classified_wizard_rejection_form_view
+#: model_terms:ir.ui.view,arch_db:alc_eshop_classifieds.alc_classified_wizard_rejection_form_view
 msgid "Reject Classified"
 msgstr "Rejeter l'annonce"
 
 #. module: alc_eshop_classifieds
 #: selection:alc.classified,state:0
-#: model:ir.ui.view,arch_db:alc_eshop_classifieds.alc_classified_search_view
+#: model_terms:ir.ui.view,arch_db:alc_eshop_classifieds.alc_classified_search_view
 msgid "Rejected"
 msgstr "Rejeté"
 
@@ -226,13 +226,13 @@ msgstr "Date de début"
 
 #. module: alc_eshop_classifieds
 #: model:ir.model.fields,field_description:alc_eshop_classifieds.field_alc_classified_state_id
-#: model:ir.ui.view,arch_db:alc_eshop_classifieds.alc_classified_search_view
+#: model_terms:ir.ui.view,arch_db:alc_eshop_classifieds.alc_classified_search_view
 msgid "State"
 msgstr "État"
 
 #. module: alc_eshop_classifieds
 #: model:ir.model.fields,field_description:alc_eshop_classifieds.field_alc_classified_state
-#: model:ir.ui.view,arch_db:alc_eshop_classifieds.alc_classified_search_view
+#: model_terms:ir.ui.view,arch_db:alc_eshop_classifieds.alc_classified_search_view
 msgid "Status"
 msgstr "État"
 

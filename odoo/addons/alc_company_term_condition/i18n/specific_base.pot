@@ -54,7 +54,7 @@ msgid "Reference for ESB"
 msgstr ""
 
 #. module: alc_company_term_condition
-#: model:ir.ui.view,arch_db:alc_company_term_condition.view_company_form
+#: model_terms:ir.ui.view,arch_db:alc_company_term_condition.view_company_form
 msgid "Report configuration"
 msgstr ""
 

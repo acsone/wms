@@ -14,22 +14,22 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: delivery_rounds_alcyon
-#: model:ir.ui.view,arch_db:delivery_rounds_alcyon.view_round_instance_kanban
+#: model_terms:ir.ui.view,arch_db:delivery_rounds_alcyon.view_round_instance_kanban
 msgid "Aliments"
 msgstr ""
 
 #. module: delivery_rounds_alcyon
-#: model:ir.ui.view,arch_db:delivery_rounds_alcyon.view_round_instance_kanban
+#: model_terms:ir.ui.view,arch_db:delivery_rounds_alcyon.view_round_instance_kanban
 msgid "Frigo"
 msgstr ""
 
 #. module: delivery_rounds_alcyon
-#: model:ir.ui.view,arch_db:delivery_rounds_alcyon.view_round_instance_kanban
+#: model_terms:ir.ui.view,arch_db:delivery_rounds_alcyon.view_round_instance_kanban
 msgid "Matériel"
 msgstr ""
 
 #. module: delivery_rounds_alcyon
-#: model:ir.ui.view,arch_db:delivery_rounds_alcyon.view_round_instance_kanban
+#: model_terms:ir.ui.view,arch_db:delivery_rounds_alcyon.view_round_instance_kanban
 msgid "Médicaments"
 msgstr ""
 
@@ -84,7 +84,7 @@ msgid "Picking Done Total Pharmacie"
 msgstr ""
 
 #. module: delivery_rounds_alcyon
-#: model:ir.ui.view,arch_db:delivery_rounds_alcyon.view_round_instance_kanban
+#: model_terms:ir.ui.view,arch_db:delivery_rounds_alcyon.view_round_instance_kanban
 msgid "Zone M"
 msgstr ""
 

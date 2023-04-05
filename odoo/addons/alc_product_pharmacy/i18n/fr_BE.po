@@ -53,7 +53,7 @@ msgid "CNK"
 msgstr "CNK"
 
 #. module: alc_product_pharmacy
-#: model:ir.ui.view,arch_db:alc_product_pharmacy.product_template_search_view
+#: model_terms:ir.ui.view,arch_db:alc_product_pharmacy.product_template_search_view
 msgid "CNK code"
 msgstr "code CNK"
 
@@ -154,7 +154,7 @@ msgid "Product Template"
 msgstr "Modèle de produit"
 
 #. module: alc_product_pharmacy
-#: model:ir.ui.view,arch_db:alc_product_pharmacy.product_template_search_view
+#: model_terms:ir.ui.view,arch_db:alc_product_pharmacy.product_template_search_view
 msgid "Product without amm and belgian veterinary med or importation"
 msgstr ""
 "Code AMM manquant pour un médicament vétérinaire belge ou produit importé"

@@ -52,7 +52,7 @@ msgid "Picking that goes to reserve of"
 msgstr ""
 
 #. module: alc_stock_put_remaining_to_reserve
-#: model:ir.ui.view,arch_db:alc_stock_put_remaining_to_reserve.stock_picking_search_view
+#: model_terms:ir.ui.view,arch_db:alc_stock_put_remaining_to_reserve.stock_picking_search_view
 msgid "Pickings remaining to reserve"
 msgstr ""
 
@@ -62,12 +62,12 @@ msgid "Put in reserve allowed"
 msgstr ""
 
 #. module: alc_stock_put_remaining_to_reserve
-#: model:ir.ui.view,arch_db:alc_stock_put_remaining_to_reserve.stock_picking_form_view
+#: model_terms:ir.ui.view,arch_db:alc_stock_put_remaining_to_reserve.stock_picking_form_view
 msgid "Put remaining items in reserve"
 msgstr ""
 
 #. module: alc_stock_put_remaining_to_reserve
-#: model:ir.ui.view,arch_db:alc_stock_put_remaining_to_reserve.stock_picking_search_view
+#: model_terms:ir.ui.view,arch_db:alc_stock_put_remaining_to_reserve.stock_picking_search_view
 msgid "Remaining parts of picking partially sent to reserve"
 msgstr ""
 

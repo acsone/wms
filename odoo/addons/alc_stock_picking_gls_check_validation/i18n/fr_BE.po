@@ -17,7 +17,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_stock_picking_gls_check_validation
-#: model:ir.ui.view,arch_db:alc_stock_picking_gls_check_validation.stock_picking_form_view
+#: model_terms:ir.ui.view,arch_db:alc_stock_picking_gls_check_validation.stock_picking_form_view
 msgid "Force validate"
 msgstr "Forcer validation"
 
@@ -59,7 +59,7 @@ msgstr ""
 "opérations"
 
 #. module: alc_stock_picking_gls_check_validation
-#: model:ir.ui.view,arch_db:alc_stock_picking_gls_check_validation.stock_picking_form_view
+#: model_terms:ir.ui.view,arch_db:alc_stock_picking_gls_check_validation.stock_picking_form_view
 msgid ""
 "You have at least one pack in the picking. Please process it/them first."
 msgstr ""

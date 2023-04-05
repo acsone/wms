@@ -17,7 +17,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: specific_sale
-#: model:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
+#: model_terms:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
 msgid "&amp;bull;"
 msgstr "&amp;bull;"
 
@@ -76,7 +76,7 @@ msgid "Category III (psychotropic) Medicine Not Allowed"
 msgstr ""
 
 #. module: specific_sale
-#: model:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
+#: model_terms:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
 msgid "Confirmed order #"
 msgstr "Bestelling #"
 
@@ -86,22 +86,22 @@ msgid "December"
 msgstr ""
 
 #. module: specific_sale
-#: model:ir.ui.view,arch_db:specific_sale.view_order_line_form_edit
+#: model_terms:ir.ui.view,arch_db:specific_sale.view_order_line_form_edit
 msgid "Delivered Quantity"
 msgstr "Geleverde Hoeveelheid"
 
 #. module: specific_sale
-#: model:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
+#: model_terms:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
 msgid "Description"
 msgstr "Omschrijving"
 
 #. module: specific_sale
-#: model:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
+#: model_terms:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
 msgid "Disc.(%)"
 msgstr "Korting(%)"
 
 #. module: specific_sale
-#: model:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
+#: model_terms:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
 msgid "Discount"
 msgstr "Korting"
 
@@ -164,7 +164,7 @@ msgid ""
 msgstr ""
 
 #. module: specific_sale
-#: model:ir.ui.view,arch_db:specific_sale.view_order_line_form_edit
+#: model_terms:ir.ui.view,arch_db:specific_sale.view_order_line_form_edit
 msgid "Invoiced Quantity"
 msgstr "Gefactureerde Hoeveelheid"
 
@@ -201,7 +201,7 @@ msgid ""
 msgstr ""
 
 #. module: specific_sale
-#: model:ir.ui.view,arch_db:specific_sale.partner_form_view_sale_lines_unavailable_button
+#: model_terms:ir.ui.view,arch_db:specific_sale.partner_form_view_sale_lines_unavailable_button
 msgid "Lines unavailable"
 msgstr ""
 
@@ -348,7 +348,7 @@ msgstr ""
 
 #. module: specific_sale
 #: model:ir.model.fields,field_description:specific_sale.field_sale_report_only_narcotic
-#: model:ir.ui.view,arch_db:specific_sale.sale_report_specific_search
+#: model_terms:ir.ui.view,arch_db:specific_sale.sale_report_specific_search
 msgid "Only narcotics"
 msgstr ""
 
@@ -358,7 +358,7 @@ msgid "Order offer free product"
 msgstr ""
 
 #. module: specific_sale
-#: model:ir.ui.view,arch_db:specific_sale.view_order_line_form_edit
+#: model_terms:ir.ui.view,arch_db:specific_sale.view_order_line_form_edit
 msgid "Ordered Quantity"
 msgstr "Bestelde Hoeveelheid"
 
@@ -385,7 +385,7 @@ msgid "Picking zone"
 msgstr ""
 
 #. module: specific_sale
-#: model:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
+#: model_terms:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
 msgid "Price"
 msgstr "Prijs"
 
@@ -421,12 +421,12 @@ msgid "Product of type human medicine"
 msgstr ""
 
 #. module: specific_sale
-#: model:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
+#: model_terms:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
 msgid "Product reference"
 msgstr "Referentie"
 
 #. module: specific_sale
-#: model:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
+#: model_terms:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
 msgid "Promotion"
 msgstr "Promotie"
 
@@ -441,12 +441,12 @@ msgid "Psychotropic: written order, keep confirmation."
 msgstr ""
 
 #. module: specific_sale
-#: model:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
+#: model_terms:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
 msgid "Quantity"
 msgstr "Hoeveelheid"
 
 #. module: specific_sale
-#: model:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
+#: model_terms:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
 msgid "Quantity unavailable"
 msgstr "Niet beschikbare hoeveelheid"
 
@@ -478,7 +478,7 @@ msgid "Sales Order Line"
 msgstr "Verkooporderlijn"
 
 #. module: specific_sale
-#: model:ir.ui.view,arch_db:specific_sale.view_order_line_form_edit
+#: model_terms:ir.ui.view,arch_db:specific_sale.view_order_line_form_edit
 msgid "Sales Order Lines"
 msgstr "Verkooporderlijnen"
 
@@ -493,7 +493,7 @@ msgid "September"
 msgstr ""
 
 #. module: specific_sale
-#: model:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
+#: model_terms:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
 msgid "Taxes"
 msgstr "BTW"
 
@@ -512,7 +512,7 @@ msgstr ""
 "niet meer mogen worden geconsumeerd."
 
 #. module: specific_sale
-#: model:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
+#: model_terms:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
 msgid "Total Price"
 msgstr "Totaalprijs"
 
@@ -522,7 +522,7 @@ msgid "Une ligne de vente ne peut pas être à zéro"
 msgstr ""
 
 #. module: specific_sale
-#: model:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
+#: model_terms:ir.ui.view,arch_db:specific_sale.report_saleorder_specific_document
 msgid "Unit Price"
 msgstr "Prijs"
 
@@ -582,7 +582,7 @@ msgid "You cannot cancel sale order %s, it's already prepared"
 msgstr ""
 
 #. module: specific_sale
-#: model:ir.ui.view,arch_db:specific_sale.view_order_line_form_edit
+#: model_terms:ir.ui.view,arch_db:specific_sale.view_order_line_form_edit
 msgid "days"
 msgstr ""
 

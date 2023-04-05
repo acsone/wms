@@ -14,14 +14,14 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_product_promotion_mailing
-#: model:ir.ui.view,arch_db:alc_product_promotion_mailing.report_alc_product_promotion_mailing
+#: model_terms:ir.ui.view,arch_db:alc_product_promotion_mailing.report_alc_product_promotion_mailing
 msgid ", sauf\n"
 "                            modification de la part\n"
 "                            du fournisseur."
 msgstr ""
 
 #. module: alc_product_promotion_mailing
-#: model:ir.ui.view,arch_db:alc_product_promotion_mailing.report_alc_product_promotion_mailing
+#: model_terms:ir.ui.view,arch_db:alc_product_promotion_mailing.report_alc_product_promotion_mailing
 msgid "Alcyon: Alert fin de promotion."
 msgstr ""
 
@@ -32,7 +32,7 @@ msgid "Alcyon: End of promotion period alert"
 msgstr ""
 
 #. module: alc_product_promotion_mailing
-#: model:ir.ui.view,arch_db:alc_product_promotion_mailing.report_alc_product_promotion_mailing
+#: model_terms:ir.ui.view,arch_db:alc_product_promotion_mailing.report_alc_product_promotion_mailing
 msgid "Chère / Cher"
 msgstr ""
 
@@ -75,7 +75,7 @@ msgid "Information about a product vendor"
 msgstr ""
 
 #. module: alc_product_promotion_mailing
-#: model:ir.ui.view,arch_db:alc_product_promotion_mailing.report_alc_product_promotion_mailing
+#: model_terms:ir.ui.view,arch_db:alc_product_promotion_mailing.report_alc_product_promotion_mailing
 msgid "La promotion sur les articles suivants se termine le"
 msgstr ""
 
@@ -106,7 +106,7 @@ msgid "Number of days before the end of promotions at which mailings must be sen
 msgstr ""
 
 #. module: alc_product_promotion_mailing
-#: model:ir.ui.view,arch_db:alc_product_promotion_mailing.sale_config_settings_form_view
+#: model_terms:ir.ui.view,arch_db:alc_product_promotion_mailing.sale_config_settings_form_view
 msgid "Promotions"
 msgstr ""
 
@@ -116,7 +116,7 @@ msgid "Reminder mailing sent"
 msgstr ""
 
 #. module: alc_product_promotion_mailing
-#: model:ir.ui.view,arch_db:alc_product_promotion_mailing.report_alc_product_promotion_mailing
+#: model_terms:ir.ui.view,arch_db:alc_product_promotion_mailing.report_alc_product_promotion_mailing
 msgid "Votre équipe Alcyon."
 msgstr ""
 

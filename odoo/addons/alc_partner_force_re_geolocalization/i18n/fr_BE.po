@@ -29,7 +29,7 @@ msgid "Partner"
 msgstr "Partenaire"
 
 #. module: alc_partner_force_re_geolocalization
-#: model:ir.ui.view,arch_db:alc_partner_force_re_geolocalization.res_partner_form_view
+#: model_terms:ir.ui.view,arch_db:alc_partner_force_re_geolocalization.res_partner_form_view
 msgid ""
 "The address has changed for this partner. Please press 'Geolocalize' once "
 "again (Partner Assignation tab) and check that the point correspond to the "

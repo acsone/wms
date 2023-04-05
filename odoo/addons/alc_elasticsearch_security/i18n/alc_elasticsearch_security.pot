@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_elasticsearch_security
-#: model:ir.ui.view,arch_db:alc_elasticsearch_security.se_backend_elasticsearch_form_view
+#: model_terms:ir.ui.view,arch_db:alc_elasticsearch_security.se_backend_elasticsearch_form_view
 msgid "Create Pricelist Roles"
 msgstr ""
 

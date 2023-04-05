@@ -24,7 +24,7 @@ msgid "Account Cut-off Line"
 msgstr ""
 
 #. module: account_move_productcateg
-#: model:ir.ui.view,arch_db:account_move_productcateg.view_move_line_search
+#: model_terms:ir.ui.view,arch_db:account_move_productcateg.view_move_line_search
 msgid "Category"
 msgstr ""
 

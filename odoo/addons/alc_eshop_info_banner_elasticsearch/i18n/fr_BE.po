@@ -23,7 +23,7 @@ msgid "%s: Batch export EShop Info banners"
 msgstr "%s: Batch export EShop Info banners"
 
 #. module: alc_eshop_info_banner_elasticsearch
-#: model:ir.ui.view,arch_db:alc_eshop_info_banner_elasticsearch.alc_eshop_info_banner_form_view
+#: model_terms:ir.ui.view,arch_db:alc_eshop_info_banner_elasticsearch.alc_eshop_info_banner_form_view
 msgid "<span>Export to EShop</span>"
 msgstr "<span>Export to EShop</span>"
 
@@ -53,7 +53,7 @@ msgid "Index"
 msgstr "Index"
 
 #. module: alc_eshop_info_banner_elasticsearch
-#: model:ir.ui.view,arch_db:alc_eshop_info_banner_elasticsearch.se_backend_elasticsearch_form_view
+#: model_terms:ir.ui.view,arch_db:alc_eshop_info_banner_elasticsearch.se_backend_elasticsearch_form_view
 msgid "Info banners"
 msgstr "Bannières info"
 
@@ -88,7 +88,7 @@ msgid "Sync state"
 msgstr "Sync state"
 
 #. module: alc_eshop_info_banner_elasticsearch
-#: model:ir.ui.view,arch_db:alc_eshop_info_banner_elasticsearch.se_backend_elasticsearch_form_view
+#: model_terms:ir.ui.view,arch_db:alc_eshop_info_banner_elasticsearch.se_backend_elasticsearch_form_view
 msgid "Synchronize info banners"
 msgstr "Synchronize info banners"
 

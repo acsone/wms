@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_invoices_audit
-#: model:ir.ui.view,arch_db:alc_invoices_audit.account_invoice_search_view
+#: model_terms:ir.ui.view,arch_db:alc_invoices_audit.account_invoice_search_view
 msgid "Call name"
 msgstr ""
 
@@ -29,17 +29,17 @@ msgid "Invoice frequency"
 msgstr ""
 
 #. module: alc_invoices_audit
-#: model:ir.ui.view,arch_db:alc_invoices_audit.account_invoice_search_view
+#: model_terms:ir.ui.view,arch_db:alc_invoices_audit.account_invoice_search_view
 msgid "Invoice frequency 10 days"
 msgstr ""
 
 #. module: alc_invoices_audit
-#: model:ir.ui.view,arch_db:alc_invoices_audit.account_invoice_search_view
+#: model_terms:ir.ui.view,arch_db:alc_invoices_audit.account_invoice_search_view
 msgid "Invoice frequency 14 days"
 msgstr ""
 
 #. module: alc_invoices_audit
-#: model:ir.ui.view,arch_db:alc_invoices_audit.account_invoice_search_view
+#: model_terms:ir.ui.view,arch_db:alc_invoices_audit.account_invoice_search_view
 msgid "Invoice frequency one month"
 msgstr ""
 

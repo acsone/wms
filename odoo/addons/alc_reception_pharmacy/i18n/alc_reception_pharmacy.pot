@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_reception_pharmacy
-#: model:ir.ui.view,arch_db:alc_reception_pharmacy.receive_pharmacy_products_form_view
+#: model_terms:ir.ui.view,arch_db:alc_reception_pharmacy.receive_pharmacy_products_form_view
 msgid "ADD"
 msgstr ""
 
@@ -42,7 +42,7 @@ msgid "Bin"
 msgstr ""
 
 #. module: alc_reception_pharmacy
-#: model:ir.ui.view,arch_db:alc_reception_pharmacy.select_pharmacy_printing_printer_form_view
+#: model_terms:ir.ui.view,arch_db:alc_reception_pharmacy.select_pharmacy_printing_printer_form_view
 msgid "Cancel"
 msgstr ""
 
@@ -192,7 +192,7 @@ msgid "No printer defined for reception, please select one first"
 msgstr ""
 
 #. module: alc_reception_pharmacy
-#: model:ir.ui.view,arch_db:alc_reception_pharmacy.select_pharmacy_printing_printer_form_view
+#: model_terms:ir.ui.view,arch_db:alc_reception_pharmacy.select_pharmacy_printing_printer_form_view
 msgid "OK"
 msgstr ""
 
@@ -208,7 +208,7 @@ msgid "Partner {} does not belong to any itinerary"
 msgstr ""
 
 #. module: alc_reception_pharmacy
-#: model:ir.ui.view,arch_db:alc_reception_pharmacy.reception_pharmacy_view_form
+#: model_terms:ir.ui.view,arch_db:alc_reception_pharmacy.reception_pharmacy_view_form
 msgid "Pharmacy Reception"
 msgstr ""
 
@@ -224,7 +224,7 @@ msgid "Please insert at least one line"
 msgstr ""
 
 #. module: alc_reception_pharmacy
-#: model:ir.ui.view,arch_db:alc_reception_pharmacy.view_reception_pharmacy_line_tree
+#: model_terms:ir.ui.view,arch_db:alc_reception_pharmacy.view_reception_pharmacy_line_tree
 msgid "Print"
 msgstr ""
 
@@ -251,13 +251,13 @@ msgid "Queue Job"
 msgstr ""
 
 #. module: alc_reception_pharmacy
-#: model:ir.ui.view,arch_db:alc_reception_pharmacy.reception_pharmacy_view_form
+#: model_terms:ir.ui.view,arch_db:alc_reception_pharmacy.reception_pharmacy_view_form
 msgid "Receive"
 msgstr ""
 
 #. module: alc_reception_pharmacy
 #: model:ir.actions.act_window,name:alc_reception_pharmacy.receive_pharmacy_products_act_window
-#: model:ir.ui.view,arch_db:alc_reception_pharmacy.receive_pharmacy_products_form_view
+#: model_terms:ir.ui.view,arch_db:alc_reception_pharmacy.receive_pharmacy_products_form_view
 msgid "Receive Pharmacy Products"
 msgstr ""
 
@@ -307,7 +307,7 @@ msgstr ""
 
 #. module: alc_reception_pharmacy
 #: model:ir.actions.act_window,name:alc_reception_pharmacy.select_pharmacy_printing_printer_act_window
-#: model:ir.ui.view,arch_db:alc_reception_pharmacy.select_pharmacy_printing_printer_form_view
+#: model_terms:ir.ui.view,arch_db:alc_reception_pharmacy.select_pharmacy_printing_printer_form_view
 msgid "Select Pharmacy Printer"
 msgstr ""
 
@@ -336,7 +336,7 @@ msgid "This reception is transferred, please create a new one before adding prod
 msgstr ""
 
 #. module: alc_reception_pharmacy
-#: model:ir.ui.view,arch_db:alc_reception_pharmacy.reception_pharmacy_view_form
+#: model_terms:ir.ui.view,arch_db:alc_reception_pharmacy.reception_pharmacy_view_form
 msgid "Transfer"
 msgstr ""
 
@@ -357,48 +357,48 @@ msgid "Wizard"
 msgstr ""
 
 #. module: alc_reception_pharmacy
-#: model:ir.ui.view,arch_db:alc_reception_pharmacy.pharmacy_lot_label
+#: model_terms:ir.ui.view,arch_db:alc_reception_pharmacy.pharmacy_lot_label
 msgid "^FS\\r\n"
 "^FO32,105^A0N,34,28^FDLot:^FS\\r\n"
 "^FO90,105^A0N,34,28^FD"
 msgstr ""
 
 #. module: alc_reception_pharmacy
-#: model:ir.ui.view,arch_db:alc_reception_pharmacy.pharmacy_lot_label
+#: model_terms:ir.ui.view,arch_db:alc_reception_pharmacy.pharmacy_lot_label
 msgid "^FS\\r\n"
 "^FO32,145^A0N,34,28^FDBac:^FS\\r\n"
 "^FO90,145^A0N,34,28^FD"
 msgstr ""
 
 #. module: alc_reception_pharmacy
-#: model:ir.ui.view,arch_db:alc_reception_pharmacy.pharmacy_lot_label
+#: model_terms:ir.ui.view,arch_db:alc_reception_pharmacy.pharmacy_lot_label
 msgid "^FS\\r\n"
 "^FO32,190^A0N,34,28^FDDate limite:^FS\\r\n"
 "^FO175,186^A0N,40,30^FD"
 msgstr ""
 
 #. module: alc_reception_pharmacy
-#: model:ir.ui.view,arch_db:alc_reception_pharmacy.pharmacy_lot_label
+#: model_terms:ir.ui.view,arch_db:alc_reception_pharmacy.pharmacy_lot_label
 msgid "^FS\\r\n"
 "^FO32,240^A0N,34,28^FDArticle:^FS\\r\n"
 "^FO120,240^A0N,34,36^FD"
 msgstr ""
 
 #. module: alc_reception_pharmacy
-#: model:ir.ui.view,arch_db:alc_reception_pharmacy.pharmacy_lot_label
+#: model_terms:ir.ui.view,arch_db:alc_reception_pharmacy.pharmacy_lot_label
 msgid "^FS\\r\n"
 "^FO32,283^A0N,31,23^FD"
 msgstr ""
 
 #. module: alc_reception_pharmacy
-#: model:ir.ui.view,arch_db:alc_reception_pharmacy.pharmacy_lot_label
+#: model_terms:ir.ui.view,arch_db:alc_reception_pharmacy.pharmacy_lot_label
 msgid "^FS\\r\n"
 "^FO32,70^A0N,29,31^FDClient:^FS\\r\n"
 "^FO120,68^A0N,34,28^FD"
 msgstr ""
 
 #. module: alc_reception_pharmacy
-#: model:ir.ui.view,arch_db:alc_reception_pharmacy.pharmacy_lot_label
+#: model_terms:ir.ui.view,arch_db:alc_reception_pharmacy.pharmacy_lot_label
 msgid "^FS\\r\n"
 "^FO420,150\\r\n"
 "^BQN,2,6\\r\n"
@@ -406,19 +406,19 @@ msgid "^FS\\r\n"
 msgstr ""
 
 #. module: alc_reception_pharmacy
-#: model:ir.ui.view,arch_db:alc_reception_pharmacy.pharmacy_lot_label
+#: model_terms:ir.ui.view,arch_db:alc_reception_pharmacy.pharmacy_lot_label
 msgid "^FS\\r\n"
 "^FO420,33^A0N,29,31^FD"
 msgstr ""
 
 #. module: alc_reception_pharmacy
-#: model:ir.ui.view,arch_db:alc_reception_pharmacy.pharmacy_lot_label
+#: model_terms:ir.ui.view,arch_db:alc_reception_pharmacy.pharmacy_lot_label
 msgid "^FS\\r\n"
 "^XZ"
 msgstr ""
 
 #. module: alc_reception_pharmacy
-#: model:ir.ui.view,arch_db:alc_reception_pharmacy.pharmacy_lot_label
+#: model_terms:ir.ui.view,arch_db:alc_reception_pharmacy.pharmacy_lot_label
 msgid "^XA\n"
 "^PRC\n"
 "^LH0,0^FS\\r\n"

@@ -33,7 +33,7 @@ msgstr ""
 #: model:ir.actions.act_window,name:alc_analytic_category_report.analytic_analysis_act_window
 #: model:ir.ui.menu,name:alc_analytic_category_report.analytic_analysis_menu
 #: model:ir.ui.menu,name:alc_analytic_category_report.analytic_analysis_view_menu
-#: model:ir.ui.view,arch_db:alc_analytic_category_report.account_move_line_with_analytic_category_pivot_view
+#: model_terms:ir.ui.view,arch_db:alc_analytic_category_report.account_move_line_with_analytic_category_pivot_view
 msgid "Analytic Analysis"
 msgstr ""
 
@@ -93,7 +93,7 @@ msgid "Last Modified on"
 msgstr ""
 
 #. module: alc_analytic_category_report
-#: model:ir.ui.view,arch_db:alc_analytic_category_report.account_move_line_with_analytic_category_search_view
+#: model_terms:ir.ui.view,arch_db:alc_analytic_category_report.account_move_line_with_analytic_category_search_view
 msgid "Move"
 msgstr ""
 
@@ -103,7 +103,7 @@ msgid "Name"
 msgstr ""
 
 #. module: alc_analytic_category_report
-#: model:ir.ui.view,arch_db:alc_analytic_category_report.account_move_line_with_analytic_category_search_view
+#: model_terms:ir.ui.view,arch_db:alc_analytic_category_report.account_move_line_with_analytic_category_search_view
 msgid "Number (Move)"
 msgstr ""
 

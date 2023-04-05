@@ -20,13 +20,13 @@ msgstr ""
 
 #. module: keycloak
 #: model:ir.model.fields,field_description:keycloak.field_keycloak_user_keycloak_backend_id
-#: model:ir.ui.view,arch_db:keycloak.keycloak_user_search_view
+#: model_terms:ir.ui.view,arch_db:keycloak.keycloak_user_search_view
 msgid "Backend"
 msgstr ""
 
 #. module: keycloak
-#: model:ir.ui.view,arch_db:keycloak.keycloak_partner_wizard_form
-#: model:ir.ui.view,arch_db:keycloak.keycloak_user_wizard_form
+#: model_terms:ir.ui.view,arch_db:keycloak.keycloak_partner_wizard_form
+#: model_terms:ir.ui.view,arch_db:keycloak.keycloak_user_wizard_form
 msgid "Cancel"
 msgstr ""
 
@@ -71,16 +71,16 @@ msgid "Client to get user tokens."
 msgstr ""
 
 #. module: keycloak
-#: model:ir.ui.view,arch_db:keycloak.keycloak_backend_form_view
-#: model:ir.ui.view,arch_db:keycloak.keycloak_user_form_view
+#: model_terms:ir.ui.view,arch_db:keycloak.keycloak_backend_form_view
+#: model_terms:ir.ui.view,arch_db:keycloak.keycloak_user_form_view
 msgid "Configuration"
 msgstr ""
 
 #. module: keycloak
 #: model:ir.actions.act_window,name:keycloak.keycloak_partner_wizard_action
 #: model:ir.model,name:keycloak.model_keycloak_partner_wizard
-#: model:ir.ui.view,arch_db:keycloak.keycloak_partner_wizard_form
-#: model:ir.ui.view,arch_db:keycloak.view_partner_form
+#: model_terms:ir.ui.view,arch_db:keycloak.keycloak_partner_wizard_form
+#: model_terms:ir.ui.view,arch_db:keycloak.view_partner_form
 msgid "Create Keycloak User"
 msgstr ""
 
@@ -113,7 +113,7 @@ msgid "Delete Keycloak User %s"
 msgstr ""
 
 #. module: keycloak
-#: model:ir.ui.view,arch_db:keycloak.keycloak_user_search_view
+#: model_terms:ir.ui.view,arch_db:keycloak.keycloak_user_search_view
 msgid "Disabled"
 msgstr ""
 
@@ -128,17 +128,17 @@ msgstr ""
 #. module: keycloak
 #: model:ir.model.fields,field_description:keycloak.field_keycloak_partner_wizard_enabled
 #: model:ir.model.fields,field_description:keycloak.field_keycloak_user_enabled
-#: model:ir.ui.view,arch_db:keycloak.keycloak_user_search_view
+#: model_terms:ir.ui.view,arch_db:keycloak.keycloak_user_search_view
 msgid "Enabled"
 msgstr ""
 
 #. module: keycloak
-#: model:ir.ui.view,arch_db:keycloak.keycloak_user_tree_view
+#: model_terms:ir.ui.view,arch_db:keycloak.keycloak_user_tree_view
 msgid "Force Keycloak info synchronisation ."
 msgstr ""
 
 #. module: keycloak
-#: model:ir.ui.view,arch_db:keycloak.keycloak_user_search_view
+#: model_terms:ir.ui.view,arch_db:keycloak.keycloak_user_search_view
 msgid "Group By"
 msgstr ""
 
@@ -156,13 +156,13 @@ msgid "In keycloak, username is stored in lowercase. The username is also case i
 msgstr ""
 
 #. module: keycloak
-#: model:ir.ui.view,arch_db:keycloak.view_partner_form
+#: model_terms:ir.ui.view,arch_db:keycloak.view_partner_form
 msgid "Keycloak"
 msgstr ""
 
 #. module: keycloak
 #: model:ir.model,name:keycloak.model_keycloak_backend
-#: model:ir.ui.view,arch_db:keycloak.keycloak_backend_form_view
+#: model_terms:ir.ui.view,arch_db:keycloak.keycloak_backend_form_view
 msgid "Keycloak Backend"
 msgstr ""
 
@@ -179,9 +179,9 @@ msgstr ""
 
 #. module: keycloak
 #: model:ir.model,name:keycloak.model_keycloak_user
-#: model:ir.ui.view,arch_db:keycloak.keycloak_partner_wizard_form
-#: model:ir.ui.view,arch_db:keycloak.keycloak_user_form_view
-#: model:ir.ui.view,arch_db:keycloak.keycloak_user_wizard_form
+#: model_terms:ir.ui.view,arch_db:keycloak.keycloak_partner_wizard_form
+#: model_terms:ir.ui.view,arch_db:keycloak.keycloak_user_form_view
+#: model_terms:ir.ui.view,arch_db:keycloak.keycloak_user_wizard_form
 #: model:res.groups,name:keycloak.group_keycloak_user
 msgid "Keycloak User"
 msgstr ""
@@ -245,7 +245,7 @@ msgid "Name"
 msgstr ""
 
 #. module: keycloak
-#: model:ir.ui.view,arch_db:keycloak.keycloak_user_form_view
+#: model_terms:ir.ui.view,arch_db:keycloak.keycloak_user_form_view
 msgid "Open Update Wizard"
 msgstr ""
 
@@ -367,7 +367,7 @@ msgstr ""
 #. module: keycloak
 #: model:ir.actions.act_window,name:keycloak.keycloak_user_wizard_action
 #: model:ir.model,name:keycloak.model_keycloak_user_wizard
-#: model:ir.ui.view,arch_db:keycloak.keycloak_user_wizard_form
+#: model_terms:ir.ui.view,arch_db:keycloak.keycloak_user_wizard_form
 msgid "Update Keycloak User"
 msgstr ""
 
@@ -378,8 +378,8 @@ msgid "Update Keycloak User %s"
 msgstr ""
 
 #. module: keycloak
-#: model:ir.ui.view,arch_db:keycloak.keycloak_user_form_view
-#: model:ir.ui.view,arch_db:keycloak.keycloak_user_tree_view
+#: model_terms:ir.ui.view,arch_db:keycloak.keycloak_user_form_view
+#: model_terms:ir.ui.view,arch_db:keycloak.keycloak_user_tree_view
 msgid "Update password or send actions to user."
 msgstr ""
 
@@ -439,7 +439,7 @@ msgid "action"
 msgstr ""
 
 #. module: keycloak
-#: model:ir.ui.view,arch_db:keycloak.keycloak_backend_form_view
+#: model_terms:ir.ui.view,arch_db:keycloak.keycloak_backend_form_view
 msgid "http://localhost:8080/auth/"
 msgstr ""
 

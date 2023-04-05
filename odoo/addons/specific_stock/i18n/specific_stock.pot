@@ -35,7 +35,7 @@ msgid "Backorder"
 msgstr ""
 
 #. module: specific_stock
-#: model:ir.ui.view,arch_db:specific_stock.view_location_search
+#: model_terms:ir.ui.view,arch_db:specific_stock.view_location_search
 msgid "Bin"
 msgstr ""
 
@@ -50,17 +50,17 @@ msgid "Box"
 msgstr ""
 
 #. module: specific_stock
-#: model:ir.ui.view,arch_db:specific_stock.generate_voice_identifier_view_form
-#: model:ir.ui.view,arch_db:specific_stock.open_uop_view_form
-#: model:ir.ui.view,arch_db:specific_stock.put_in_pack_helper_view_form
-#: model:ir.ui.view,arch_db:specific_stock.stock_location_wizard_checksum_view_form
-#: model:ir.ui.view,arch_db:specific_stock.view_stock_move_wizard_handler_form
+#: model_terms:ir.ui.view,arch_db:specific_stock.generate_voice_identifier_view_form
+#: model_terms:ir.ui.view,arch_db:specific_stock.open_uop_view_form
+#: model_terms:ir.ui.view,arch_db:specific_stock.put_in_pack_helper_view_form
+#: model_terms:ir.ui.view,arch_db:specific_stock.stock_location_wizard_checksum_view_form
+#: model_terms:ir.ui.view,arch_db:specific_stock.view_stock_move_wizard_handler_form
 msgid "Cancel"
 msgstr ""
 
 #. module: specific_stock
-#: model:ir.ui.view,arch_db:specific_stock.view_move_picking_tree
-#: model:ir.ui.view,arch_db:specific_stock.view_stock_move_wizard_handler_form
+#: model_terms:ir.ui.view,arch_db:specific_stock.view_move_picking_tree
+#: model_terms:ir.ui.view,arch_db:specific_stock.view_stock_move_wizard_handler_form
 msgid "Cancel move"
 msgstr ""
 
@@ -71,7 +71,7 @@ msgid "Cannot generate a voice identifier"
 msgstr ""
 
 #. module: specific_stock
-#: model:ir.ui.view,arch_db:specific_stock.product_template_search_view
+#: model_terms:ir.ui.view,arch_db:specific_stock.product_template_search_view
 msgid "Category"
 msgstr ""
 
@@ -81,7 +81,7 @@ msgid "Change Product Quantity"
 msgstr ""
 
 #. module: specific_stock
-#: model:ir.ui.view,arch_db:specific_stock.stock_location_wizard_checksum_view_form
+#: model_terms:ir.ui.view,arch_db:specific_stock.stock_location_wizard_checksum_view_form
 msgid "Check"
 msgstr ""
 
@@ -114,7 +114,7 @@ msgid "Created on"
 msgstr ""
 
 #. module: specific_stock
-#: model:ir.ui.view,arch_db:specific_stock.view_stock_config_settings
+#: model_terms:ir.ui.view,arch_db:specific_stock.view_stock_config_settings
 msgid "Daily inventory"
 msgstr ""
 
@@ -161,14 +161,14 @@ msgid "Duration to compute best sellers (in months)"
 msgstr ""
 
 #. module: specific_stock
-#: model:ir.ui.view,arch_db:specific_stock.generate_voice_identifier_view_form
-#: model:ir.ui.view,arch_db:specific_stock.stock_location_wizard_checksum_view_form
+#: model_terms:ir.ui.view,arch_db:specific_stock.generate_voice_identifier_view_form
+#: model_terms:ir.ui.view,arch_db:specific_stock.stock_location_wizard_checksum_view_form
 msgid "Generate"
 msgstr ""
 
 #. module: specific_stock
 #: model:ir.actions.act_window,name:specific_stock.action_generate_lot_voice_identifier
-#: model:ir.ui.view,arch_db:specific_stock.generate_voice_identifier_view_form
+#: model_terms:ir.ui.view,arch_db:specific_stock.generate_voice_identifier_view_form
 msgid "Generate voice identifier"
 msgstr ""
 
@@ -246,7 +246,7 @@ msgid "Last inventory"
 msgstr ""
 
 #. module: specific_stock
-#: model:ir.ui.view,arch_db:specific_stock.stock_location_form_inherit
+#: model_terms:ir.ui.view,arch_db:specific_stock.stock_location_form_inherit
 msgid "Localization"
 msgstr ""
 
@@ -277,7 +277,7 @@ msgstr ""
 
 #. module: specific_stock
 #: model:ir.actions.act_window,name:specific_stock.act_stock_location_wizard_checksum
-#: model:ir.ui.view,arch_db:specific_stock.stock_location_wizard_checksum_view_form
+#: model_terms:ir.ui.view,arch_db:specific_stock.stock_location_wizard_checksum_view_form
 msgid "Manage Checksum"
 msgstr ""
 
@@ -331,7 +331,7 @@ msgstr ""
 #. module: specific_stock
 #: model:ir.actions.act_window,name:specific_stock.open_uop_action
 #: model:ir.ui.menu,name:specific_stock.open_uop_menu
-#: model:ir.ui.view,arch_db:specific_stock.open_uop_view_form
+#: model_terms:ir.ui.view,arch_db:specific_stock.open_uop_view_form
 msgid "Open UOP"
 msgstr ""
 
@@ -351,7 +351,7 @@ msgid "Packing Operation"
 msgstr ""
 
 #. module: specific_stock
-#: model:ir.ui.view,arch_db:specific_stock.view_location_search
+#: model_terms:ir.ui.view,arch_db:specific_stock.view_location_search
 msgid "Parking"
 msgstr ""
 
@@ -433,7 +433,7 @@ msgstr ""
 
 #. module: specific_stock
 #: model:ir.actions.act_window,name:specific_stock.put_in_pack_helper_action
-#: model:ir.ui.view,arch_db:specific_stock.put_in_pack_helper_view_form
+#: model_terms:ir.ui.view,arch_db:specific_stock.put_in_pack_helper_view_form
 msgid "Put in Pack"
 msgstr ""
 
@@ -443,7 +443,7 @@ msgid "Put in Pack done"
 msgstr ""
 
 #. module: specific_stock
-#: model:ir.ui.view,arch_db:specific_stock.put_in_pack_helper_view_form
+#: model_terms:ir.ui.view,arch_db:specific_stock.put_in_pack_helper_view_form
 msgid "Put in Pack helper"
 msgstr ""
 
@@ -458,7 +458,7 @@ msgid "Quants"
 msgstr ""
 
 #. module: specific_stock
-#: model:ir.ui.view,arch_db:specific_stock.view_location_search
+#: model_terms:ir.ui.view,arch_db:specific_stock.view_location_search
 msgid "Reserve"
 msgstr ""
 
@@ -468,7 +468,7 @@ msgid "Return Picking"
 msgstr ""
 
 #. module: specific_stock
-#: model:ir.ui.view,arch_db:specific_stock.view_stock_move_wizard_handler_form
+#: model_terms:ir.ui.view,arch_db:specific_stock.view_stock_move_wizard_handler_form
 msgid "Set Scheduled Date"
 msgstr ""
 
@@ -478,7 +478,7 @@ msgid "Shelf"
 msgstr ""
 
 #. module: specific_stock
-#: model:ir.ui.view,arch_db:specific_stock.stock_location_pivot
+#: model_terms:ir.ui.view,arch_db:specific_stock.stock_location_pivot
 msgid "Stock Location"
 msgstr ""
 
@@ -584,13 +584,13 @@ msgstr ""
 
 #. module: specific_stock
 #: model:ir.model.fields,field_description:specific_stock.field_open_uop_uop
-#: model:ir.ui.view,arch_db:specific_stock.view_picking_form
-#: model:ir.ui.view,arch_db:specific_stock.view_stock_picking_tree
+#: model_terms:ir.ui.view,arch_db:specific_stock.view_picking_form
+#: model_terms:ir.ui.view,arch_db:specific_stock.view_stock_picking_tree
 msgid "UOP"
 msgstr ""
 
 #. module: specific_stock
-#: model:ir.ui.view,arch_db:specific_stock.view_move_picking_tree
+#: model_terms:ir.ui.view,arch_db:specific_stock.view_move_picking_tree
 msgid "Update expected date"
 msgstr ""
 
@@ -660,7 +660,7 @@ msgid "open.uop"
 msgstr ""
 
 #. module: specific_stock
-#: model:ir.ui.view,arch_db:specific_stock.stock_location_wizard_checksum_view_form
+#: model_terms:ir.ui.view,arch_db:specific_stock.stock_location_wizard_checksum_view_form
 msgid "or"
 msgstr ""
 
@@ -695,7 +695,7 @@ msgid "stock.scrap"
 msgstr ""
 
 #. module: specific_stock
-#: model:ir.ui.view,arch_db:specific_stock.view_picking_form
+#: model_terms:ir.ui.view,arch_db:specific_stock.view_picking_form
 msgid "↳Put in Pack"
 msgstr ""
 

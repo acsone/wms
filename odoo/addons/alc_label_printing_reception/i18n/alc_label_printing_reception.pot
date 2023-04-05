@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_label_printing_reception
-#: model:ir.ui.view,arch_db:alc_label_printing_reception.select_printing_printer_form_view
+#: model_terms:ir.ui.view,arch_db:alc_label_printing_reception.select_printing_printer_form_view
 msgid "Cancel"
 msgstr ""
 
@@ -60,12 +60,12 @@ msgid "Lot is missing"
 msgstr ""
 
 #. module: alc_label_printing_reception
-#: model:ir.ui.view,arch_db:alc_label_printing_reception.select_printing_printer_form_view
+#: model_terms:ir.ui.view,arch_db:alc_label_printing_reception.select_printing_printer_form_view
 msgid "OK"
 msgstr ""
 
 #. module: alc_label_printing_reception
-#: model:ir.ui.view,arch_db:alc_label_printing_reception.view_pack_operation_lot_add_form
+#: model_terms:ir.ui.view,arch_db:alc_label_printing_reception.view_pack_operation_lot_add_form
 msgid "Print"
 msgstr ""
 
@@ -92,7 +92,7 @@ msgstr ""
 #. module: alc_label_printing_reception
 #: model:ir.actions.act_window,name:alc_label_printing_reception.select_printing_printer_act_window
 #: model:ir.ui.menu,name:alc_label_printing_reception.select_printing_printer_menu
-#: model:ir.ui.view,arch_db:alc_label_printing_reception.select_printing_printer_form_view
+#: model_terms:ir.ui.view,arch_db:alc_label_printing_reception.select_printing_printer_form_view
 msgid "Select Printing Printer"
 msgstr ""
 

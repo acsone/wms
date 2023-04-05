@@ -136,32 +136,32 @@ msgid "<html>\n"
 msgstr ""
 
 #. module: alc_mrp_repair
-#: model:ir.ui.view,arch_db:alc_mrp_repair.report_repairorder_document
+#: model_terms:ir.ui.view,arch_db:alc_mrp_repair.report_repairorder_document
 msgid "<span>Quotation # </span>"
 msgstr ""
 
 #. module: alc_mrp_repair
-#: model:ir.ui.view,arch_db:alc_mrp_repair.report_repairorder_document
+#: model_terms:ir.ui.view,arch_db:alc_mrp_repair.report_repairorder_document
 msgid "<strong>Invoicing address:</strong>"
 msgstr ""
 
 #. module: alc_mrp_repair
-#: model:ir.ui.view,arch_db:alc_mrp_repair.report_repairorder_document
+#: model_terms:ir.ui.view,arch_db:alc_mrp_repair.report_repairorder_document
 msgid "<strong>Shipping address:</strong>"
 msgstr ""
 
 #. module: alc_mrp_repair
-#: model:ir.ui.view,arch_db:alc_mrp_repair.report_repairorder_document
+#: model_terms:ir.ui.view,arch_db:alc_mrp_repair.report_repairorder_document
 msgid "<strong>Subtotal: </strong>"
 msgstr ""
 
 #. module: alc_mrp_repair
-#: model:ir.ui.view,arch_db:alc_mrp_repair.report_repairorder_document
+#: model_terms:ir.ui.view,arch_db:alc_mrp_repair.report_repairorder_document
 msgid "<strong>Total Without Taxes</strong>"
 msgstr ""
 
 #. module: alc_mrp_repair
-#: model:ir.ui.view,arch_db:alc_mrp_repair.report_repairorder_document
+#: model_terms:ir.ui.view,arch_db:alc_mrp_repair.report_repairorder_document
 msgid "<strong>Total</strong>"
 msgstr ""
 
@@ -171,17 +171,17 @@ msgid "Alcyon Repair order ${object.name}"
 msgstr ""
 
 #. module: alc_mrp_repair
-#: model:ir.ui.view,arch_db:alc_mrp_repair.report_repairorder_document
+#: model_terms:ir.ui.view,arch_db:alc_mrp_repair.report_repairorder_document
 msgid "Description"
 msgstr ""
 
 #. module: alc_mrp_repair
-#: model:ir.ui.view,arch_db:alc_mrp_repair.report_repairorder_document
+#: model_terms:ir.ui.view,arch_db:alc_mrp_repair.report_repairorder_document
 msgid "Price"
 msgstr ""
 
 #. module: alc_mrp_repair
-#: model:ir.ui.view,arch_db:alc_mrp_repair.report_repairorder_document
+#: model_terms:ir.ui.view,arch_db:alc_mrp_repair.report_repairorder_document
 msgid "Quantity"
 msgstr ""
 
@@ -202,22 +202,22 @@ msgid "Repair quote"
 msgstr ""
 
 #. module: alc_mrp_repair
-#: model:ir.ui.view,arch_db:alc_mrp_repair.view_repair_order_form
+#: model_terms:ir.ui.view,arch_db:alc_mrp_repair.view_repair_order_form
 msgid "Send by email"
 msgstr ""
 
 #. module: alc_mrp_repair
-#: model:ir.ui.view,arch_db:alc_mrp_repair.report_repairorder_document
+#: model_terms:ir.ui.view,arch_db:alc_mrp_repair.report_repairorder_document
 msgid "Taxes"
 msgstr ""
 
 #. module: alc_mrp_repair
-#: model:ir.ui.view,arch_db:alc_mrp_repair.report_repairorder_document
+#: model_terms:ir.ui.view,arch_db:alc_mrp_repair.report_repairorder_document
 msgid "Unit Price"
 msgstr ""
 
 #. module: alc_mrp_repair
-#: model:ir.ui.view,arch_db:alc_mrp_repair.report_repairorder_document
+#: model_terms:ir.ui.view,arch_db:alc_mrp_repair.report_repairorder_document
 msgid "VAT:"
 msgstr ""
 

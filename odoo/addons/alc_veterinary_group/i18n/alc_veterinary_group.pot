@@ -107,7 +107,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:alc_veterinary_group.field_shopinvader_product_veterinary_group_ids
 #: model:ir.model.fields,field_description:alc_veterinary_group.field_shopinvader_variant_veterinary_group_ids
 #: model:ir.ui.menu,name:alc_veterinary_group.veterinary_group_menu
-#: model:ir.ui.view,arch_db:alc_veterinary_group.product_template_form_view_discount_specials
+#: model_terms:ir.ui.view,arch_db:alc_veterinary_group.product_template_form_view_discount_specials
 msgid "Veterinary Groups"
 msgstr ""
 

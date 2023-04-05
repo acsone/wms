@@ -14,82 +14,82 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
+#: model_terms:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
 msgid "- MTO Product purchased by a supplier but not sold"
 msgstr ""
 
 #. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
+#: model_terms:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
 msgid "- MTO Product with abnormal routes"
 msgstr ""
 
 #. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
+#: model_terms:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
 msgid "- More than one route is selected for the product, leading to a mismatch with the picking zone"
 msgstr ""
 
 #. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
+#: model_terms:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
 msgid "- Product can be purchased but does not have the buy route"
 msgstr ""
 
 #. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
+#: model_terms:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
 msgid "- Product has min/max and is 'on command reappro'"
 msgstr ""
 
 #. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
+#: model_terms:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
 msgid "- Product has no min/max and is not 'on command reappro'"
 msgstr ""
 
 #. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
+#: model_terms:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
 msgid "- Product is missing dimensions"
 msgstr ""
 
 #. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
+#: model_terms:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
 msgid "- Product is missing packaging dimensions"
 msgstr ""
 
 #. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
+#: model_terms:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
 msgid "- Product is not salable and still has a bin"
 msgstr ""
 
 #. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
+#: model_terms:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
 msgid "- Product is not salable but not archived"
 msgstr ""
 
 #. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
+#: model_terms:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
 msgid "- Product not sold but on website"
 msgstr ""
 
 #. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
+#: model_terms:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
 msgid "- Product stocked in a MTO location for more than 5 days"
 msgstr ""
 
 #. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
+#: model_terms:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
 msgid "- Product stocked in a MTO location with new route"
 msgstr ""
 
 #. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
+#: model_terms:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
 msgid "- Product stocked in a MTO location without MTO route"
 msgstr ""
 
 #. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
+#: model_terms:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
 msgid "- Product without dimensions in stock"
 msgstr ""
 
 #. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
+#: model_terms:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
 msgid "- The selected picking zone does not match the bin"
 msgstr ""
 
@@ -112,7 +112,7 @@ msgid "Dimensions in stock"
 msgstr ""
 
 #. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
+#: model_terms:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
 msgid "Following issue(s) is/are observed on the product:"
 msgstr ""
 
@@ -135,7 +135,7 @@ msgid "Has no dimensions"
 msgstr ""
 
 #. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
+#: model_terms:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
 msgid "MTO product has abnormal routes"
 msgstr ""
 
@@ -149,17 +149,17 @@ msgid "Min max on command reappro"
 msgstr ""
 
 #. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
+#: model_terms:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
 msgid "Min/max and 'on command reappro'"
 msgstr ""
 
 #. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
+#: model_terms:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
 msgid "Mismatch between picking zone and bin"
 msgstr ""
 
 #. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
+#: model_terms:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
 msgid "Mismatch between route and picking zone"
 msgstr ""
 
@@ -182,17 +182,17 @@ msgid "Mismatch route picking"
 msgstr ""
 
 #. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
+#: model_terms:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
 msgid "Missing dimensions"
 msgstr ""
 
 #. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
+#: model_terms:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
 msgid "Missing packaging dimensions"
 msgstr ""
 
 #. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
+#: model_terms:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
 msgid "Mto product purchased and not sold"
 msgstr ""
 
@@ -260,17 +260,17 @@ msgid "No min max no on command reappro"
 msgstr ""
 
 #. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
+#: model_terms:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
 msgid "No min/max and no 'on command reappro'"
 msgstr ""
 
 #. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
+#: model_terms:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
 msgid "Not salable but not archived"
 msgstr ""
 
 #. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
+#: model_terms:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
 msgid "Not salable or archived but with a bin"
 msgstr ""
 
@@ -298,37 +298,37 @@ msgid "Product Template"
 msgstr ""
 
 #. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
+#: model_terms:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
 msgid "Product has an anomaly"
 msgstr ""
 
 #. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
+#: model_terms:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
 msgid "Product in a MTO stock location for more than 5 days"
 msgstr ""
 
 #. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
+#: model_terms:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
 msgid "Product in a MTO stock location with mto route"
 msgstr ""
 
 #. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
+#: model_terms:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
 msgid "Product in a MTO stock location with route new"
 msgstr ""
 
 #. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
+#: model_terms:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
 msgid "Product is not sold anymore but still on website"
 msgstr ""
 
 #. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
+#: model_terms:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
 msgid "Product with dimensions in stock"
 msgstr ""
 
 #. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
+#: model_terms:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
 msgid "Product without dimensions in stock"
 msgstr ""
 
@@ -351,7 +351,7 @@ msgid "Sale not ok not archived"
 msgstr ""
 
 #. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
+#: model_terms:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
 msgid "can be bought without buy routes"
 msgstr ""
 

@@ -26,7 +26,7 @@ msgid "A File Matcher Pattern is required for task %s with an SFTP backend"
 msgstr ""
 
 #. module: alc_edi_connector
-#: model:ir.ui.view,arch_db:alc_edi_connector.edi_backend_form_view
+#: model_terms:ir.ui.view,arch_db:alc_edi_connector.edi_backend_form_view
 msgid "API Configuration"
 msgstr ""
 
@@ -174,7 +174,7 @@ msgid "Export filename"
 msgstr ""
 
 #. module: alc_edi_connector
-#: model:ir.ui.view,arch_db:alc_edi_connector.edi_backend_form_view
+#: model_terms:ir.ui.view,arch_db:alc_edi_connector.edi_backend_form_view
 msgid "Exports"
 msgstr ""
 
@@ -230,7 +230,7 @@ msgid "Import UBL Order Response"
 msgstr ""
 
 #. module: alc_edi_connector
-#: model:ir.ui.view,arch_db:alc_edi_connector.edi_backend_form_view
+#: model_terms:ir.ui.view,arch_db:alc_edi_connector.edi_backend_form_view
 msgid "Imports"
 msgstr ""
 
@@ -369,7 +369,7 @@ msgid "Regexp used to identify the file to import"
 msgstr ""
 
 #. module: alc_edi_connector
-#: model:ir.ui.view,arch_db:alc_edi_connector.purchase_order_form_view
+#: model_terms:ir.ui.view,arch_db:alc_edi_connector.purchase_order_form_view
 msgid "Send UBL Order"
 msgstr ""
 
@@ -386,7 +386,7 @@ msgid "Sending UBL Order document is only allowed in state approved"
 msgstr ""
 
 #. module: alc_edi_connector
-#: model:ir.ui.view,arch_db:alc_edi_connector.edi_backend_form_view
+#: model_terms:ir.ui.view,arch_db:alc_edi_connector.edi_backend_form_view
 msgid "Test connection"
 msgstr ""
 
@@ -442,7 +442,7 @@ msgid "Username"
 msgstr ""
 
 #. module: alc_edi_connector
-#: model:ir.ui.view,arch_db:alc_edi_connector.edi_backend_form_view
+#: model_terms:ir.ui.view,arch_db:alc_edi_connector.edi_backend_form_view
 msgid "ble\"/&gt;"
 msgstr ""
 

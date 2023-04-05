@@ -15,7 +15,7 @@ msgstr ""
 
 #. module: alc_shopfloor_rest_log
 #: model:ir.model.fields,field_description:alc_shopfloor_rest_log.field_rest_log_operator_id
-#: model:ir.ui.view,arch_db:alc_shopfloor_rest_log.rest_log_search_view
+#: model_terms:ir.ui.view,arch_db:alc_shopfloor_rest_log.rest_log_search_view
 msgid "Operator"
 msgstr ""
 

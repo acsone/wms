@@ -17,7 +17,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_storage_file_lang
-#: model:ir.ui.view,arch_db:alc_storage_file_lang.storage_file_search_view
+#: model_terms:ir.ui.view,arch_db:alc_storage_file_lang.storage_file_search_view
 msgid "Group By"
 msgstr "Grouper par"
 
@@ -35,6 +35,6 @@ msgid "Storage File"
 msgstr "Storage File"
 
 #. module: alc_storage_file_lang
-#: model:ir.ui.view,arch_db:alc_storage_file_lang.storage_file_search_view
+#: model_terms:ir.ui.view,arch_db:alc_storage_file_lang.storage_file_search_view
 msgid "Vendor"
 msgstr ""

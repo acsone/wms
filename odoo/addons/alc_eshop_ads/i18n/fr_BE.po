@@ -37,12 +37,12 @@ msgid "Created on"
 msgstr "Créé le"
 
 #. module: alc_eshop_ads
-#: model:ir.ui.view,arch_db:alc_eshop_ads.alc_eshop_ads_search_view
+#: model_terms:ir.ui.view,arch_db:alc_eshop_ads.alc_eshop_ads_search_view
 msgid "Current"
 msgstr "Non-échu"
 
 #. module: alc_eshop_ads
-#: model:ir.ui.view,arch_db:alc_eshop_ads.alc_eshop_ads_search_view
+#: model_terms:ir.ui.view,arch_db:alc_eshop_ads.alc_eshop_ads_search_view
 msgid "Current ads"
 msgstr "Annonces en cours"
 
@@ -74,7 +74,7 @@ msgstr "Durée d'affichage"
 #. module: alc_eshop_ads
 #: model:ir.actions.act_window,name:alc_eshop_ads.alc_eshop_ads_act_window
 #: model:ir.ui.menu,name:alc_eshop_ads.alc_eshop_ads_menu
-#: model:ir.ui.view,arch_db:alc_eshop_ads.alc_eshop_ads_calendar_view
+#: model_terms:ir.ui.view,arch_db:alc_eshop_ads.alc_eshop_ads_calendar_view
 msgid "EShop Ads"
 msgstr "Annonces Publicitaires"
 
@@ -89,7 +89,7 @@ msgid "Everyone"
 msgstr ""
 
 #. module: alc_eshop_ads
-#: model:ir.ui.view,arch_db:alc_eshop_ads.alc_eshop_ads_kanban_view
+#: model_terms:ir.ui.view,arch_db:alc_eshop_ads.alc_eshop_ads_kanban_view
 msgid "From"
 msgstr "De"
 
@@ -129,7 +129,7 @@ msgid "Lang"
 msgstr "Langue"
 
 #. module: alc_eshop_ads
-#: model:ir.ui.view,arch_db:alc_eshop_ads.alc_eshop_ads_kanban_view
+#: model_terms:ir.ui.view,arch_db:alc_eshop_ads.alc_eshop_ads_kanban_view
 msgid "Lang:"
 msgstr "Langue:"
 
@@ -150,7 +150,7 @@ msgstr "Dernière mis à jour le"
 
 #. module: alc_eshop_ads
 #: model:ir.model.fields,field_description:alc_eshop_ads.field_alc_eshop_ads_name
-#: model:ir.ui.view,arch_db:alc_eshop_ads.alc_eshop_ads_form_view
+#: model_terms:ir.ui.view,arch_db:alc_eshop_ads.alc_eshop_ads_form_view
 msgid "Name"
 msgstr "Nom"
 
@@ -160,12 +160,12 @@ msgid "Non Shareholder"
 msgstr ""
 
 #. module: alc_eshop_ads
-#: model:ir.ui.view,arch_db:alc_eshop_ads.alc_eshop_ads_search_view
+#: model_terms:ir.ui.view,arch_db:alc_eshop_ads.alc_eshop_ads_search_view
 msgid "Past"
 msgstr "Echues"
 
 #. module: alc_eshop_ads
-#: model:ir.ui.view,arch_db:alc_eshop_ads.alc_eshop_ads_search_view
+#: model_terms:ir.ui.view,arch_db:alc_eshop_ads.alc_eshop_ads_search_view
 msgid "Past ads from today"
 msgstr "Annonces échues au jour d'aujourd'hui"
 
@@ -180,7 +180,7 @@ msgid "Site url"
 msgstr "Url du site"
 
 #. module: alc_eshop_ads
-#: model:ir.ui.view,arch_db:alc_eshop_ads.alc_eshop_ads_kanban_view
+#: model_terms:ir.ui.view,arch_db:alc_eshop_ads.alc_eshop_ads_kanban_view
 msgid "Slot:"
 msgstr "Emplacement dans le bandeau:"
 
@@ -201,12 +201,12 @@ msgid "Top right"
 msgstr "En haut à droite"
 
 #. module: alc_eshop_ads
-#: model:ir.ui.view,arch_db:alc_eshop_ads.alc_eshop_ads_search_view
+#: model_terms:ir.ui.view,arch_db:alc_eshop_ads.alc_eshop_ads_search_view
 msgid "Upcoming"
 msgstr "A venir"
 
 #. module: alc_eshop_ads
-#: model:ir.ui.view,arch_db:alc_eshop_ads.alc_eshop_ads_search_view
+#: model_terms:ir.ui.view,arch_db:alc_eshop_ads.alc_eshop_ads_search_view
 msgid "Upcoming ads from today"
 msgstr "Annonces futures"
 
@@ -231,7 +231,7 @@ msgstr ""
 "téléchargement d'un fichier lors du click sur l'annonce dans le site"
 
 #. module: alc_eshop_ads
-#: model:ir.ui.view,arch_db:alc_eshop_ads.alc_eshop_ads_form_view
+#: model_terms:ir.ui.view,arch_db:alc_eshop_ads.alc_eshop_ads_form_view
 msgid "name"
 msgstr ""
 
@@ -241,7 +241,7 @@ msgid "storage file"
 msgstr ""
 
 #. module: alc_eshop_ads
-#: model:ir.ui.view,arch_db:alc_eshop_ads.alc_eshop_ads_kanban_view
+#: model_terms:ir.ui.view,arch_db:alc_eshop_ads.alc_eshop_ads_kanban_view
 msgid "to"
 msgstr "au"
 

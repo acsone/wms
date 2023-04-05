@@ -17,6 +17,6 @@ msgstr ""
 
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_invoice_sent
-#: model:ir.ui.view,arch_db:account.invoice_form
+#: model_terms:ir.ui.view,arch_db:account.invoice_form
 msgid "Send by Email"
 msgstr "Envoyé"

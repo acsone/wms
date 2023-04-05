@@ -20,7 +20,7 @@ msgid "Create helpdesk ticket"
 msgstr ""
 
 #. module: alce_stock_picking_backorder_helpdesk
-#: model:ir.ui.view,arch_db:alce_stock_picking_backorder_helpdesk.stock_backorder_choice_form_view
+#: model_terms:ir.ui.view,arch_db:alce_stock_picking_backorder_helpdesk.stock_backorder_choice_form_view
 msgid "Helpdesk"
 msgstr ""
 

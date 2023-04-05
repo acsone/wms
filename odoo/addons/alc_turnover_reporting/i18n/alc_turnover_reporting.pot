@@ -19,17 +19,17 @@ msgid "ALC Turnover Reporting"
 msgstr ""
 
 #. module: alc_turnover_reporting
-#: model:ir.ui.view,arch_db:alc_turnover_reporting.export_report_turnover_form_view
+#: model_terms:ir.ui.view,arch_db:alc_turnover_reporting.export_report_turnover_form_view
 msgid "Cancel"
 msgstr ""
 
 #. module: alc_turnover_reporting
-#: model:ir.ui.view,arch_db:alc_turnover_reporting.export_report_turnover_form_view
+#: model_terms:ir.ui.view,arch_db:alc_turnover_reporting.export_report_turnover_form_view
 msgid "Click on the export button to export your report."
 msgstr ""
 
 #. module: alc_turnover_reporting
-#: model:ir.ui.view,arch_db:alc_turnover_reporting.export_report_turnover_form_view
+#: model_terms:ir.ui.view,arch_db:alc_turnover_reporting.export_report_turnover_form_view
 msgid "Close"
 msgstr ""
 
@@ -49,19 +49,19 @@ msgid "Display Name"
 msgstr ""
 
 #. module: alc_turnover_reporting
-#: model:ir.ui.view,arch_db:alc_turnover_reporting.export_report_turnover_form_view
+#: model_terms:ir.ui.view,arch_db:alc_turnover_reporting.export_report_turnover_form_view
 msgid "Export"
 msgstr ""
 
 #. module: alc_turnover_reporting
-#: model:ir.ui.view,arch_db:alc_turnover_reporting.export_report_turnover_form_view
+#: model_terms:ir.ui.view,arch_db:alc_turnover_reporting.export_report_turnover_form_view
 msgid "Export Complete"
 msgstr ""
 
 #. module: alc_turnover_reporting
 #: model:ir.actions.act_window,name:alc_turnover_reporting.export_report_turnover_act_window
 #: model:ir.ui.menu,name:alc_turnover_reporting.menu_wizard_turnover_export
-#: model:ir.ui.view,arch_db:alc_turnover_reporting.export_report_turnover_form_view
+#: model_terms:ir.ui.view,arch_db:alc_turnover_reporting.export_report_turnover_form_view
 msgid "Export Report Turnover"
 msgstr ""
 
@@ -76,7 +76,7 @@ msgid "File Name"
 msgstr ""
 
 #. module: alc_turnover_reporting
-#: model:ir.ui.view,arch_db:alc_turnover_reporting.export_report_turnover_form_view
+#: model_terms:ir.ui.view,arch_db:alc_turnover_reporting.export_report_turnover_form_view
 msgid "Here is the exported report file:"
 msgstr ""
 

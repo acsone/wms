@@ -92,7 +92,7 @@ msgid "Colours"
 msgstr "Kleur"
 
 #. module: alc_pim_product
-#: model:ir.ui.view,arch_db:alc_pim_product.product_template_view_form
+#: model_terms:ir.ui.view,arch_db:alc_pim_product.product_template_view_form
 #, fuzzy
 msgid "Descriptions"
 msgstr "Lange omschrijving"
@@ -129,7 +129,7 @@ msgid "Indications"
 msgstr "Indicaties"
 
 #. module: alc_pim_product
-#: model:ir.ui.view,arch_db:alc_pim_product.product_template_view_form
+#: model_terms:ir.ui.view,arch_db:alc_pim_product.product_template_view_form
 msgid "Long"
 msgstr ""
 
@@ -198,7 +198,7 @@ msgid "Shop short description"
 msgstr "Korte omschrijving"
 
 #. module: alc_pim_product
-#: model:ir.ui.view,arch_db:alc_pim_product.product_template_view_form
+#: model_terms:ir.ui.view,arch_db:alc_pim_product.product_template_view_form
 msgid "Short"
 msgstr ""
 

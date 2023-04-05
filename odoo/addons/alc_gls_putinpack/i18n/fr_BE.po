@@ -29,7 +29,7 @@ msgid "Can unreserve moves"
 msgstr ""
 
 #. module: alc_gls_putinpack
-#: model:ir.ui.view,arch_db:alc_gls_putinpack.delivery_package_gls_wizard_form_view
+#: model_terms:ir.ui.view,arch_db:alc_gls_putinpack.delivery_package_gls_wizard_form_view
 msgid "Cancel"
 msgstr "Annuler"
 
@@ -49,17 +49,17 @@ msgid "Display Name"
 msgstr "Nom affiché"
 
 #. module: alc_gls_putinpack
-#: model:ir.ui.view,arch_db:alc_gls_putinpack.delivery_package_gls_wizard_form_view
+#: model_terms:ir.ui.view,arch_db:alc_gls_putinpack.delivery_package_gls_wizard_form_view
 msgid "GLS: Cancel"
 msgstr "GLS: Annuler"
 
 #. module: alc_gls_putinpack
-#: model:ir.ui.view,arch_db:alc_gls_putinpack.delivery_package_gls_wizard_form_view
+#: model_terms:ir.ui.view,arch_db:alc_gls_putinpack.delivery_package_gls_wizard_form_view
 msgid "GLS: Resend"
 msgstr "GLS: Renvoyer"
 
 #. module: alc_gls_putinpack
-#: model:ir.ui.view,arch_db:alc_gls_putinpack.delivery_package_gls_wizard_form_view
+#: model_terms:ir.ui.view,arch_db:alc_gls_putinpack.delivery_package_gls_wizard_form_view
 msgid "GLS: Send"
 msgstr "GLS: Envoyer"
 
@@ -146,13 +146,13 @@ msgid "Picking"
 msgstr "Opération de manutention"
 
 #. module: alc_gls_putinpack
-#: model:ir.ui.view,arch_db:alc_gls_putinpack.delivery_package_gls_wizard_form_view
+#: model_terms:ir.ui.view,arch_db:alc_gls_putinpack.delivery_package_gls_wizard_form_view
 #, fuzzy
 msgid "Put in Pack"
 msgstr "↳Ajouter au colis"
 
 #. module: alc_gls_putinpack
-#: model:ir.ui.view,arch_db:alc_gls_putinpack.delivery_package_gls_wizard_form_view
+#: model_terms:ir.ui.view,arch_db:alc_gls_putinpack.delivery_package_gls_wizard_form_view
 msgid "Report"
 msgstr "Lettre"
 
@@ -182,7 +182,7 @@ msgid "Wizard to prepare the package and send it to GLS."
 msgstr "Wizard to prepare the package and send it to GLS."
 
 #. module: alc_gls_putinpack
-#: model:ir.ui.view,arch_db:alc_gls_putinpack.view_picking_form
+#: model_terms:ir.ui.view,arch_db:alc_gls_putinpack.view_picking_form
 msgid "↳Put in Pack"
 msgstr "↳Ajouter au colis"
 

@@ -20,12 +20,12 @@ msgid "%s: Batch export EShop Ads"
 msgstr ""
 
 #. module: alc_eshop_ads_elasticsearch
-#: model:ir.ui.view,arch_db:alc_eshop_ads_elasticsearch.alc_eshop_ads_form_view
+#: model_terms:ir.ui.view,arch_db:alc_eshop_ads_elasticsearch.alc_eshop_ads_form_view
 msgid "<span>Export to EShop</span>"
 msgstr ""
 
 #. module: alc_eshop_ads_elasticsearch
-#: model:ir.ui.view,arch_db:alc_eshop_ads_elasticsearch.se_backend_elasticsearch_form_view
+#: model_terms:ir.ui.view,arch_db:alc_eshop_ads_elasticsearch.se_backend_elasticsearch_form_view
 msgid "Ads"
 msgstr ""
 
@@ -85,7 +85,7 @@ msgid "Sync state"
 msgstr ""
 
 #. module: alc_eshop_ads_elasticsearch
-#: model:ir.ui.view,arch_db:alc_eshop_ads_elasticsearch.se_backend_elasticsearch_form_view
+#: model_terms:ir.ui.view,arch_db:alc_eshop_ads_elasticsearch.se_backend_elasticsearch_form_view
 msgid "Synchronize ads"
 msgstr ""
 

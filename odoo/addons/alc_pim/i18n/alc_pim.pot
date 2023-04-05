@@ -2006,7 +2006,7 @@ msgid "Gynaecology - calving"
 msgstr ""
 
 #. module: alc_pim
-#: model:ir.ui.view,arch_db:alc_pim.product_template_view_form
+#: model_terms:ir.ui.view,arch_db:alc_pim.product_template_view_form
 msgid "Général"
 msgstr ""
 

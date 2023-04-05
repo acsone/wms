@@ -913,7 +913,7 @@ msgid "Created on"
 msgstr ""
 
 #. module: alc_eshop_cms
-#: model:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_news_search_view
+#: model_terms:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_news_search_view
 msgid "Current"
 msgstr ""
 
@@ -992,7 +992,7 @@ msgid "HTTP accessible path to the file"
 msgstr ""
 
 #. module: alc_eshop_cms
-#: model:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_news_form_view
+#: model_terms:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_news_form_view
 msgid "Header: 1176x384 (px)"
 msgstr ""
 
@@ -1022,7 +1022,7 @@ msgid "Image medium url"
 msgstr ""
 
 #. module: alc_eshop_cms
-#: model:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_news_form_view
+#: model_terms:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_news_form_view
 msgid "Image preview"
 msgstr ""
 
@@ -1032,12 +1032,12 @@ msgid "Image small url"
 msgstr ""
 
 #. module: alc_eshop_cms
-#: model:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_news_form_view
+#: model_terms:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_news_form_view
 msgid "Images should be in the following format:"
 msgstr ""
 
 #. module: alc_eshop_cms
-#: model:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_news_form_view
+#: model_terms:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_news_form_view
 msgid "Info"
 msgstr ""
 
@@ -1103,14 +1103,14 @@ msgstr ""
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_name
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_slot_name
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_snippet_name
-#: model:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_news_form_view
-#: model:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_page_form_view
-#: model:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_snippet_form_view
+#: model_terms:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_news_form_view
+#: model_terms:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_page_form_view
+#: model_terms:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_snippet_form_view
 msgid "Name"
 msgstr ""
 
 #. module: alc_eshop_cms
-#: model:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_page_search_view
+#: model_terms:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_page_search_view
 msgid "Not published"
 msgstr ""
 
@@ -1130,12 +1130,12 @@ msgid "Page Slot"
 msgstr ""
 
 #. module: alc_eshop_cms
-#: model:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_news_search_view
+#: model_terms:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_news_search_view
 msgid "Past"
 msgstr ""
 
 #. module: alc_eshop_cms
-#: model:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_news_search_view
+#: model_terms:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_news_search_view
 msgid "Past from today"
 msgstr ""
 
@@ -1156,7 +1156,7 @@ msgstr ""
 
 #. module: alc_eshop_cms
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_published
-#: model:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_page_search_view
+#: model_terms:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_page_search_view
 msgid "Published"
 msgstr ""
 
@@ -1197,17 +1197,17 @@ msgid "Thumbnail image filename"
 msgstr ""
 
 #. module: alc_eshop_cms
-#: model:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_news_form_view
+#: model_terms:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_news_form_view
 msgid "Thumbnail: 288x128 (px)"
 msgstr ""
 
 #. module: alc_eshop_cms
-#: model:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_news_search_view
+#: model_terms:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_news_search_view
 msgid "Upcoming"
 msgstr ""
 
 #. module: alc_eshop_cms
-#: model:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_news_search_view
+#: model_terms:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_news_search_view
 msgid "Upcoming from today"
 msgstr ""
 
@@ -1295,9 +1295,9 @@ msgid "ir.attachment"
 msgstr ""
 
 #. module: alc_eshop_cms
-#: model:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_news_form_view
-#: model:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_page_form_view
-#: model:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_snippet_form_view
+#: model_terms:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_news_form_view
+#: model_terms:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_page_form_view
+#: model_terms:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_snippet_form_view
 msgid "name"
 msgstr ""
 

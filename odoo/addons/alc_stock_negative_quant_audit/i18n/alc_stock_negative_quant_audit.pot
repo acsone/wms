@@ -29,7 +29,7 @@ msgid "Display Name"
 msgstr ""
 
 #. module: alc_stock_negative_quant_audit
-#: model:ir.ui.view,arch_db:alc_stock_negative_quant_audit.stock_negative_quant_audit_search_view
+#: model_terms:ir.ui.view,arch_db:alc_stock_negative_quant_audit.stock_negative_quant_audit_search_view
 msgid "Group by..."
 msgstr ""
 
@@ -55,7 +55,7 @@ msgstr ""
 
 #. module: alc_stock_negative_quant_audit
 #: model:ir.model.fields,field_description:alc_stock_negative_quant_audit.field_stock_negative_quant_audit_product_id
-#: model:ir.ui.view,arch_db:alc_stock_negative_quant_audit.stock_negative_quant_audit_search_view
+#: model_terms:ir.ui.view,arch_db:alc_stock_negative_quant_audit.stock_negative_quant_audit_search_view
 msgid "Product"
 msgstr ""
 

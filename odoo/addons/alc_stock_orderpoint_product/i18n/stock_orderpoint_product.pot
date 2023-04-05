@@ -14,12 +14,12 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_stock_orderpoint_product
-#: model:ir.ui.view,arch_db:alc_stock_orderpoint_product.view_stock_orderpoint_search
+#: model_terms:ir.ui.view,arch_db:alc_stock_orderpoint_product.view_stock_orderpoint_search
 msgid "Active"
 msgstr ""
 
 #. module: alc_stock_orderpoint_product
-#: model:ir.ui.view,arch_db:alc_stock_orderpoint_product.view_stock_orderpoint_search
+#: model_terms:ir.ui.view,arch_db:alc_stock_orderpoint_product.view_stock_orderpoint_search
 msgid "Inactive"
 msgstr ""
 
@@ -73,7 +73,7 @@ msgid "Qty Multiple"
 msgstr ""
 
 #. module: alc_stock_orderpoint_product
-#: model:ir.ui.view,arch_db:alc_stock_orderpoint_product.view_template_property_form
+#: model_terms:ir.ui.view,arch_db:alc_stock_orderpoint_product.view_template_property_form
 msgid "Reordering Rules"
 msgstr ""
 

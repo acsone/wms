@@ -14,17 +14,17 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alcyon_credit_control
-#: model:ir.ui.view,arch_db:alcyon_credit_control.report_credit_control_summary_document
+#: model_terms:ir.ui.view,arch_db:alcyon_credit_control.report_credit_control_summary_document
 msgid "<strong>Total</strong>"
 msgstr ""
 
 #. module: alcyon_credit_control
-#: model:ir.ui.view,arch_db:alcyon_credit_control.report_credit_control_summary_document
+#: model_terms:ir.ui.view,arch_db:alcyon_credit_control.report_credit_control_summary_document
 msgid "Client reference :"
 msgstr ""
 
 #. module: alcyon_credit_control
-#: model:ir.ui.view,arch_db:alcyon_credit_control.report_credit_control_summary_document
+#: model_terms:ir.ui.view,arch_db:alcyon_credit_control.report_credit_control_summary_document
 msgid "Date"
 msgstr ""
 
@@ -44,17 +44,17 @@ msgid "Last Modified on"
 msgstr ""
 
 #. module: alcyon_credit_control
-#: model:ir.ui.view,arch_db:alcyon_credit_control.report_credit_control_summary_document
+#: model_terms:ir.ui.view,arch_db:alcyon_credit_control.report_credit_control_summary_document
 msgid "Left to pay"
 msgstr ""
 
 #. module: alcyon_credit_control
-#: model:ir.ui.view,arch_db:alcyon_credit_control.report_credit_control_summary_document
+#: model_terms:ir.ui.view,arch_db:alcyon_credit_control.report_credit_control_summary_document
 msgid "Reference number"
 msgstr ""
 
 #. module: alcyon_credit_control
-#: model:ir.ui.view,arch_db:alcyon_credit_control.report_credit_control_summary_document
+#: model_terms:ir.ui.view,arch_db:alcyon_credit_control.report_credit_control_summary_document
 msgid "Total"
 msgstr ""
 

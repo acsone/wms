@@ -672,17 +672,17 @@ msgid "Réassort Médicaments"
 msgstr "Reassort Medicaments"
 
 #. module: alc_shopfloor
-#: model:ir.ui.view,arch_db:alc_shopfloor.view_pack_operation_details_form
+#: model_terms:ir.ui.view,arch_db:alc_shopfloor.view_pack_operation_details_form
 msgid "SF Priority"
 msgstr "SF Priority"
 
 #. module: alc_shopfloor
-#: model:ir.ui.view,arch_db:alc_shopfloor.view_pack_operation_details_form
+#: model_terms:ir.ui.view,arch_db:alc_shopfloor.view_pack_operation_details_form
 msgid "SF checkout done"
 msgstr "SF checkout done"
 
 #. module: alc_shopfloor
-#: model:ir.ui.view,arch_db:alc_shopfloor.view_pack_operation_details_form
+#: model_terms:ir.ui.view,arch_db:alc_shopfloor.view_pack_operation_details_form
 msgid "SF unloaded"
 msgstr "SF unloaded"
 
@@ -744,8 +744,8 @@ msgid "Several products found in %s, please scan a product."
 msgstr "Plusieurs produits trouvés dans %s, veuillez scanner un produit."
 
 #. module: alc_shopfloor
-#: model:ir.ui.view,arch_db:alc_shopfloor.view_location_form
-#: model:ir.ui.view,arch_db:alc_shopfloor.view_picking_type_form
+#: model_terms:ir.ui.view,arch_db:alc_shopfloor.view_location_form
+#: model_terms:ir.ui.view,arch_db:alc_shopfloor.view_picking_type_form
 msgid "Shopfloor"
 msgstr "Shopfloor"
 

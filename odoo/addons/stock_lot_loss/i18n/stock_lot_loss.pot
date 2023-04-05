@@ -14,12 +14,12 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: stock_lot_loss
-#: model:ir.ui.view,arch_db:stock_lot_loss.stock_picking_form_view
+#: model_terms:ir.ui.view,arch_db:stock_lot_loss.stock_picking_form_view
 msgid "Are you sure the product is out of stock?"
 msgstr ""
 
 #. module: stock_lot_loss
-#: model:ir.ui.view,arch_db:stock_lot_loss.stock_pack_operation_skip_lot_form_view
+#: model_terms:ir.ui.view,arch_db:stock_lot_loss.stock_pack_operation_skip_lot_form_view
 msgid "Cancel"
 msgstr ""
 
@@ -108,7 +108,7 @@ msgid "Packing Operation"
 msgstr ""
 
 #. module: stock_lot_loss
-#: model:ir.ui.view,arch_db:stock_lot_loss.stock_picking_form_view
+#: model_terms:ir.ui.view,arch_db:stock_lot_loss.stock_picking_form_view
 msgid "Rupture"
 msgstr ""
 
@@ -124,12 +124,12 @@ msgid "Select Lot/Serial Number to skip"
 msgstr ""
 
 #. module: stock_lot_loss
-#: model:ir.ui.view,arch_db:stock_lot_loss.stock_pack_operation_skip_lot_form_view
+#: model_terms:ir.ui.view,arch_db:stock_lot_loss.stock_pack_operation_skip_lot_form_view
 msgid "Skip"
 msgstr ""
 
 #. module: stock_lot_loss
-#: model:ir.ui.view,arch_db:stock_lot_loss.stock_pack_operation_skip_lot_form_view
+#: model_terms:ir.ui.view,arch_db:stock_lot_loss.stock_pack_operation_skip_lot_form_view
 msgid "Skip pack operation for lot"
 msgstr ""
 

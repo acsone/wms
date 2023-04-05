@@ -34,12 +34,12 @@ msgid "Created on"
 msgstr ""
 
 #. module: alc_eshop_info_banner
-#: model:ir.ui.view,arch_db:alc_eshop_info_banner.alc_eshop_info_banner_search_view
+#: model_terms:ir.ui.view,arch_db:alc_eshop_info_banner.alc_eshop_info_banner_search_view
 msgid "Current"
 msgstr ""
 
 #. module: alc_eshop_info_banner
-#: model:ir.ui.view,arch_db:alc_eshop_info_banner.alc_eshop_info_banner_search_view
+#: model_terms:ir.ui.view,arch_db:alc_eshop_info_banner.alc_eshop_info_banner_search_view
 msgid "Current banners"
 msgstr ""
 
@@ -91,12 +91,12 @@ msgid "Last Updated on"
 msgstr ""
 
 #. module: alc_eshop_info_banner
-#: model:ir.ui.view,arch_db:alc_eshop_info_banner.alc_eshop_info_banner_search_view
+#: model_terms:ir.ui.view,arch_db:alc_eshop_info_banner.alc_eshop_info_banner_search_view
 msgid "Past"
 msgstr ""
 
 #. module: alc_eshop_info_banner
-#: model:ir.ui.view,arch_db:alc_eshop_info_banner.alc_eshop_info_banner_search_view
+#: model_terms:ir.ui.view,arch_db:alc_eshop_info_banner.alc_eshop_info_banner_search_view
 msgid "Past banners from today"
 msgstr ""
 
@@ -117,12 +117,12 @@ msgid "Type"
 msgstr ""
 
 #. module: alc_eshop_info_banner
-#: model:ir.ui.view,arch_db:alc_eshop_info_banner.alc_eshop_info_banner_search_view
+#: model_terms:ir.ui.view,arch_db:alc_eshop_info_banner.alc_eshop_info_banner_search_view
 msgid "Upcoming"
 msgstr ""
 
 #. module: alc_eshop_info_banner
-#: model:ir.ui.view,arch_db:alc_eshop_info_banner.alc_eshop_info_banner_search_view
+#: model_terms:ir.ui.view,arch_db:alc_eshop_info_banner.alc_eshop_info_banner_search_view
 msgid "Upcoming banners from today"
 msgstr ""
 

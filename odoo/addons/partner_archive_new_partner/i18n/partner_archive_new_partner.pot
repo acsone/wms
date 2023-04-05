@@ -14,12 +14,12 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: partner_archive_new_partner
-#: model:ir.ui.view,arch_db:partner_archive_new_partner.partner_archive_new_partner_view
+#: model_terms:ir.ui.view,arch_db:partner_archive_new_partner.partner_archive_new_partner_view
 msgid "Cancel"
 msgstr ""
 
 #. module: partner_archive_new_partner
-#: model:ir.ui.view,arch_db:partner_archive_new_partner.partner_archive_new_partner_view
+#: model_terms:ir.ui.view,arch_db:partner_archive_new_partner.partner_archive_new_partner_view
 msgid "Change partner and archive"
 msgstr ""
 
@@ -94,12 +94,12 @@ msgid "Sale orders"
 msgstr ""
 
 #. module: partner_archive_new_partner
-#: model:ir.ui.view,arch_db:partner_archive_new_partner.partner_archive_new_partner_view
+#: model_terms:ir.ui.view,arch_db:partner_archive_new_partner.partner_archive_new_partner_view
 msgid "Select a new partner to replace the existing one on the following documents :"
 msgstr ""
 
 #. module: partner_archive_new_partner
-#: model:ir.ui.view,arch_db:partner_archive_new_partner.partner_archive_new_partner_view
+#: model_terms:ir.ui.view,arch_db:partner_archive_new_partner.partner_archive_new_partner_view
 msgid "Select new partner before archiving"
 msgstr ""
 

@@ -14,12 +14,12 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: account_invoice_sent
-#: model:ir.ui.view,arch_db:account_invoice_sent.view_account_invoice_print_form
+#: model_terms:ir.ui.view,arch_db:account_invoice_sent.view_account_invoice_print_form
 msgid "<span>Invoices</span>"
 msgstr ""
 
 #. module: account_invoice_sent
-#: model:ir.ui.view,arch_db:account_invoice_sent.account_invoice_sent_view
+#: model_terms:ir.ui.view,arch_db:account_invoice_sent.account_invoice_sent_view
 msgid "<strong>Please select operation...</strong>"
 msgstr ""
 
@@ -37,7 +37,7 @@ msgstr ""
 
 #. module: account_invoice_sent
 #: model:ir.actions.act_window,name:account_invoice_sent.action_account_invoice_print_form
-#: model:ir.ui.view,arch_db:account_invoice_sent.view_account_invoice_print_form
+#: model_terms:ir.ui.view,arch_db:account_invoice_sent.view_account_invoice_print_form
 msgid "Account Invoice Print"
 msgstr ""
 
@@ -54,7 +54,7 @@ msgid "By email"
 msgstr ""
 
 #. module: account_invoice_sent
-#: model:ir.ui.view,arch_db:account_invoice_sent.account_invoice_sent_view
+#: model_terms:ir.ui.view,arch_db:account_invoice_sent.account_invoice_sent_view
 msgid "Cancel"
 msgstr ""
 
@@ -83,12 +83,12 @@ msgstr ""
 
 #. module: account_invoice_sent
 #: selection:account.invoice.print,state:0
-#: model:ir.ui.view,arch_db:account_invoice_sent.view_account_invoice_print_view
+#: model_terms:ir.ui.view,arch_db:account_invoice_sent.view_account_invoice_print_view
 msgid "Done"
 msgstr ""
 
 #. module: account_invoice_sent
-#: model:ir.ui.view,arch_db:account_invoice_sent.account_invoice_sent_view
+#: model_terms:ir.ui.view,arch_db:account_invoice_sent.account_invoice_sent_view
 #: selection:res.partner,invoice_sending_method:0
 msgid "Email"
 msgstr ""
@@ -123,7 +123,7 @@ msgstr ""
 
 #. module: account_invoice_sent
 #: selection:account.invoice.print,state:0
-#: model:ir.ui.view,arch_db:account_invoice_sent.view_account_invoice_print_view
+#: model_terms:ir.ui.view,arch_db:account_invoice_sent.view_account_invoice_print_view
 msgid "In Progress"
 msgstr ""
 
@@ -158,12 +158,12 @@ msgid "Invoice sent"
 msgstr ""
 
 #. module: account_invoice_sent
-#: model:ir.ui.view,arch_db:account_invoice_sent.view_account_invoice_print_view
+#: model_terms:ir.ui.view,arch_db:account_invoice_sent.view_account_invoice_print_view
 msgid "Invoices"
 msgstr ""
 
 #. module: account_invoice_sent
-#: model:ir.ui.view,arch_db:account_invoice_sent.account_invoice_sent_view
+#: model_terms:ir.ui.view,arch_db:account_invoice_sent.account_invoice_sent_view
 msgid "Invoices Mass Sending"
 msgstr ""
 
@@ -197,7 +197,7 @@ msgid "Letter"
 msgstr ""
 
 #. module: account_invoice_sent
-#: model:ir.ui.view,arch_db:account_invoice_sent.account_invoice_sent_view
+#: model_terms:ir.ui.view,arch_db:account_invoice_sent.account_invoice_sent_view
 msgid "Mark as sent"
 msgstr ""
 
@@ -207,12 +207,12 @@ msgid "Mass Sending"
 msgstr ""
 
 #. module: account_invoice_sent
-#: model:ir.ui.view,arch_db:account_invoice_sent.view_account_invoice_print_view
+#: model_terms:ir.ui.view,arch_db:account_invoice_sent.view_account_invoice_print_view
 msgid "My reports"
 msgstr ""
 
 #. module: account_invoice_sent
-#: model:ir.ui.view,arch_db:account_invoice_sent.account_invoice_sent_view
+#: model_terms:ir.ui.view,arch_db:account_invoice_sent.account_invoice_sent_view
 msgid "Only mark as sent without sending anything"
 msgstr ""
 
@@ -222,12 +222,12 @@ msgid "Partner"
 msgstr ""
 
 #. module: account_invoice_sent
-#: model:ir.ui.view,arch_db:account_invoice_sent.account_invoice_sent_view
+#: model_terms:ir.ui.view,arch_db:account_invoice_sent.account_invoice_sent_view
 msgid "Print"
 msgstr ""
 
 #. module: account_invoice_sent
-#: model:ir.ui.view,arch_db:account_invoice_sent.account_invoice_sent_view
+#: model_terms:ir.ui.view,arch_db:account_invoice_sent.account_invoice_sent_view
 msgid "Print invoices for partners having an invoice sending method 'letter'. Also mark as sent"
 msgstr ""
 
@@ -249,12 +249,12 @@ msgid "Related Records"
 msgstr ""
 
 #. module: account_invoice_sent
-#: model:ir.ui.view,arch_db:account_invoice_sent.view_account_invoice_print_view
+#: model_terms:ir.ui.view,arch_db:account_invoice_sent.view_account_invoice_print_view
 msgid "Search Account Invoice Print"
 msgstr ""
 
 #. module: account_invoice_sent
-#: model:ir.ui.view,arch_db:account_invoice_sent.account_invoice_sent_view
+#: model_terms:ir.ui.view,arch_db:account_invoice_sent.account_invoice_sent_view
 msgid "Send by email invoices for partners having an invoice sending method 'email'. Also mark as sent"
 msgstr ""
 
@@ -284,12 +284,12 @@ msgid "To print"
 msgstr ""
 
 #. module: account_invoice_sent
-#: model:ir.ui.view,arch_db:account_invoice_sent.view_account_invoice_filter
+#: model_terms:ir.ui.view,arch_db:account_invoice_sent.view_account_invoice_filter
 msgid "Unsent"
 msgstr ""
 
 #. module: account_invoice_sent
-#: model:ir.ui.view,arch_db:account_invoice_sent.view_account_invoice_filter
+#: model_terms:ir.ui.view,arch_db:account_invoice_sent.view_account_invoice_filter
 msgid "Unsent Proforma/Open/Paid Invoices"
 msgstr ""
 

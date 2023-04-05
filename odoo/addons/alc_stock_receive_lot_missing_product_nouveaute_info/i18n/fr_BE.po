@@ -73,7 +73,7 @@ msgid "Product width (cm)"
 msgstr "Largeur (cm)"
 
 #. module: alc_stock_receive_lot_missing_product_nouveaute_info
-#: model:ir.ui.view,arch_db:alc_stock_receive_lot_missing_product_nouveaute_info.stock_picking_form_view
+#: model_terms:ir.ui.view,arch_db:alc_stock_receive_lot_missing_product_nouveaute_info.stock_picking_form_view
 msgid ""
 "Some information are missing on new products (dimensions, weight or "
 "barcode), please complete them before picking."

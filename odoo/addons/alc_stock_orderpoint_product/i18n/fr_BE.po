@@ -17,12 +17,12 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_stock_orderpoint_product
-#: model:ir.ui.view,arch_db:alc_stock_orderpoint_product.view_stock_orderpoint_search
+#: model_terms:ir.ui.view,arch_db:alc_stock_orderpoint_product.view_stock_orderpoint_search
 msgid "Active"
 msgstr "Actif"
 
 #. module: alc_stock_orderpoint_product
-#: model:ir.ui.view,arch_db:alc_stock_orderpoint_product.view_stock_orderpoint_search
+#: model_terms:ir.ui.view,arch_db:alc_stock_orderpoint_product.view_stock_orderpoint_search
 msgid "Inactive"
 msgstr "Inactif"
 
@@ -76,7 +76,7 @@ msgid "Qty Multiple"
 msgstr "Multiple Qté"
 
 #. module: alc_stock_orderpoint_product
-#: model:ir.ui.view,arch_db:alc_stock_orderpoint_product.view_template_property_form
+#: model_terms:ir.ui.view,arch_db:alc_stock_orderpoint_product.view_template_property_form
 msgid "Reordering Rules"
 msgstr "Règles de réapprovisionnement"
 

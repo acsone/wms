@@ -24,7 +24,7 @@ msgid "\n"
 msgstr ""
 
 #. module: alc_partner_delivery_window_import
-#: model:ir.ui.view,arch_db:alc_partner_delivery_window_import.alc_delivery_window_importer_form_view
+#: model_terms:ir.ui.view,arch_db:alc_partner_delivery_window_import.alc_delivery_window_importer_form_view
 msgid "Cancel"
 msgstr ""
 
@@ -45,7 +45,7 @@ msgid "Delivery Window Importer"
 msgstr ""
 
 #. module: alc_partner_delivery_window_import
-#: model:ir.ui.view,arch_db:alc_partner_delivery_window_import.alc_delivery_window_importer_form_view
+#: model_terms:ir.ui.view,arch_db:alc_partner_delivery_window_import.alc_delivery_window_importer_form_view
 msgid "Delivery Windows Importer"
 msgstr ""
 
@@ -71,7 +71,7 @@ msgid "ID"
 msgstr ""
 
 #. module: alc_partner_delivery_window_import
-#: model:ir.ui.view,arch_db:alc_partner_delivery_window_import.alc_delivery_window_importer_form_view
+#: model_terms:ir.ui.view,arch_db:alc_partner_delivery_window_import.alc_delivery_window_importer_form_view
 msgid "Import"
 msgstr ""
 

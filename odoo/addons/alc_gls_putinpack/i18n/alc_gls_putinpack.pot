@@ -25,7 +25,7 @@ msgid "Can unreserve moves"
 msgstr ""
 
 #. module: alc_gls_putinpack
-#: model:ir.ui.view,arch_db:alc_gls_putinpack.delivery_package_gls_wizard_form_view
+#: model_terms:ir.ui.view,arch_db:alc_gls_putinpack.delivery_package_gls_wizard_form_view
 msgid "Cancel"
 msgstr ""
 
@@ -45,17 +45,17 @@ msgid "Display Name"
 msgstr ""
 
 #. module: alc_gls_putinpack
-#: model:ir.ui.view,arch_db:alc_gls_putinpack.delivery_package_gls_wizard_form_view
+#: model_terms:ir.ui.view,arch_db:alc_gls_putinpack.delivery_package_gls_wizard_form_view
 msgid "GLS: Cancel"
 msgstr ""
 
 #. module: alc_gls_putinpack
-#: model:ir.ui.view,arch_db:alc_gls_putinpack.delivery_package_gls_wizard_form_view
+#: model_terms:ir.ui.view,arch_db:alc_gls_putinpack.delivery_package_gls_wizard_form_view
 msgid "GLS: Resend"
 msgstr ""
 
 #. module: alc_gls_putinpack
-#: model:ir.ui.view,arch_db:alc_gls_putinpack.delivery_package_gls_wizard_form_view
+#: model_terms:ir.ui.view,arch_db:alc_gls_putinpack.delivery_package_gls_wizard_form_view
 msgid "GLS: Send"
 msgstr ""
 
@@ -140,12 +140,12 @@ msgid "Picking"
 msgstr ""
 
 #. module: alc_gls_putinpack
-#: model:ir.ui.view,arch_db:alc_gls_putinpack.delivery_package_gls_wizard_form_view
+#: model_terms:ir.ui.view,arch_db:alc_gls_putinpack.delivery_package_gls_wizard_form_view
 msgid "Put in Pack"
 msgstr ""
 
 #. module: alc_gls_putinpack
-#: model:ir.ui.view,arch_db:alc_gls_putinpack.delivery_package_gls_wizard_form_view
+#: model_terms:ir.ui.view,arch_db:alc_gls_putinpack.delivery_package_gls_wizard_form_view
 msgid "Report"
 msgstr ""
 
@@ -175,7 +175,7 @@ msgid "Wizard to prepare the package and send it to GLS."
 msgstr ""
 
 #. module: alc_gls_putinpack
-#: model:ir.ui.view,arch_db:alc_gls_putinpack.view_picking_form
+#: model_terms:ir.ui.view,arch_db:alc_gls_putinpack.view_picking_form
 msgid "↳Put in Pack"
 msgstr ""
 

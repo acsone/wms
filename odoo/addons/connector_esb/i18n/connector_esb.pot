@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: connector_esb
-#: model:ir.ui.view,arch_db:connector_esb.view_esb_backend_form
+#: model_terms:ir.ui.view,arch_db:connector_esb.view_esb_backend_form
 msgid "API Configuration"
 msgstr ""
 
@@ -52,7 +52,7 @@ msgid "Buy X Get Y"
 msgstr ""
 
 #. module: connector_esb
-#: model:ir.ui.view,arch_db:connector_esb.esb_period_exporter_form_view
+#: model_terms:ir.ui.view,arch_db:connector_esb.esb_period_exporter_form_view
 msgid "Cancel"
 msgstr ""
 
@@ -62,7 +62,7 @@ msgid "Carrier"
 msgstr ""
 
 #. module: connector_esb
-#: model:ir.ui.view,arch_db:connector_esb.esb_period_exporter_form_view
+#: model_terms:ir.ui.view,arch_db:connector_esb.esb_period_exporter_form_view
 msgid "Close"
 msgstr ""
 
@@ -121,7 +121,7 @@ msgstr ""
 
 #. module: connector_esb
 #: model:ir.model,name:connector_esb.model_esb_backend
-#: model:ir.ui.view,arch_db:connector_esb.view_esb_backend_form
+#: model_terms:ir.ui.view,arch_db:connector_esb.view_esb_backend_form
 msgid "ESB Backend"
 msgstr ""
 
@@ -142,7 +142,7 @@ msgstr ""
 
 #. module: connector_esb
 #: model:ir.actions.act_window,name:connector_esb.esb_period_exporter_act_window
-#: model:ir.ui.view,arch_db:connector_esb.esb_period_exporter_form_view
+#: model_terms:ir.ui.view,arch_db:connector_esb.esb_period_exporter_form_view
 msgid "Esb Period Exporter"
 msgstr ""
 
@@ -159,12 +159,12 @@ msgid "Esb exported"
 msgstr ""
 
 #. module: connector_esb
-#: model:ir.ui.view,arch_db:connector_esb.view_esb_backend_form
+#: model_terms:ir.ui.view,arch_db:connector_esb.view_esb_backend_form
 msgid "Export"
 msgstr ""
 
 #. module: connector_esb
-#: model:ir.ui.view,arch_db:connector_esb.view_esb_backend_form
+#: model_terms:ir.ui.view,arch_db:connector_esb.view_esb_backend_form
 msgid "Export a given period"
 msgstr ""
 
@@ -174,7 +174,7 @@ msgid "Export filename"
 msgstr ""
 
 #. module: connector_esb
-#: model:ir.ui.view,arch_db:connector_esb.view_esb_backend_form
+#: model_terms:ir.ui.view,arch_db:connector_esb.view_esb_backend_form
 msgid "Exports"
 msgstr ""
 
@@ -263,7 +263,7 @@ msgid "Local"
 msgstr ""
 
 #. module: connector_esb
-#: model:ir.ui.view,arch_db:connector_esb.view_esb_backend_form
+#: model_terms:ir.ui.view,arch_db:connector_esb.view_esb_backend_form
 msgid "Main Configuration"
 msgstr ""
 
@@ -298,7 +298,7 @@ msgid "Nothing to export."
 msgstr ""
 
 #. module: connector_esb
-#: model:ir.ui.view,arch_db:connector_esb.esb_period_exporter_form_view
+#: model_terms:ir.ui.view,arch_db:connector_esb.esb_period_exporter_form_view
 msgid "OK"
 msgstr ""
 

@@ -15,7 +15,7 @@ msgstr ""
 
 #. module: alc_registration
 #: selection:alc.registration,state:0
-#: model:ir.ui.view,arch_db:alc_registration.alc_registration_search_view
+#: model_terms:ir.ui.view,arch_db:alc_registration.alc_registration_search_view
 msgid "Accepted"
 msgstr ""
 
@@ -25,7 +25,7 @@ msgid "Active"
 msgstr ""
 
 #. module: alc_registration
-#: model:ir.ui.view,arch_db:alc_registration.alc_registration_form_view
+#: model_terms:ir.ui.view,arch_db:alc_registration.alc_registration_form_view
 msgid "Address"
 msgstr ""
 
@@ -41,7 +41,7 @@ msgstr ""
 
 #. module: alc_registration
 #: model:ir.model.fields,field_description:alc_registration.field_alc_registration_city
-#: model:ir.ui.view,arch_db:alc_registration.alc_registration_form_view
+#: model_terms:ir.ui.view,arch_db:alc_registration.alc_registration_form_view
 msgid "City"
 msgstr ""
 
@@ -62,7 +62,7 @@ msgstr ""
 
 #. module: alc_registration
 #: model:ir.model.fields,field_description:alc_registration.field_alc_registration_country_id
-#: model:ir.ui.view,arch_db:alc_registration.alc_registration_form_view
+#: model_terms:ir.ui.view,arch_db:alc_registration.alc_registration_form_view
 msgid "Country"
 msgstr ""
 
@@ -72,7 +72,7 @@ msgid "Country Name"
 msgstr ""
 
 #. module: alc_registration
-#: model:ir.ui.view,arch_db:alc_registration.alc_registration_form_view
+#: model_terms:ir.ui.view,arch_db:alc_registration.alc_registration_form_view
 msgid "Create Partner"
 msgstr ""
 
@@ -200,7 +200,7 @@ msgstr ""
 
 #. module: alc_registration
 #: selection:alc.registration,state:0
-#: model:ir.ui.view,arch_db:alc_registration.alc_registration_search_view
+#: model_terms:ir.ui.view,arch_db:alc_registration.alc_registration_search_view
 msgid "Pending"
 msgstr ""
 
@@ -237,13 +237,13 @@ msgid "Registrations"
 msgstr ""
 
 #. module: alc_registration
-#: model:ir.ui.view,arch_db:alc_registration.alc_registration_form_view
+#: model_terms:ir.ui.view,arch_db:alc_registration.alc_registration_form_view
 msgid "Reject"
 msgstr ""
 
 #. module: alc_registration
 #: selection:alc.registration,state:0
-#: model:ir.ui.view,arch_db:alc_registration.alc_registration_search_view
+#: model_terms:ir.ui.view,arch_db:alc_registration.alc_registration_search_view
 msgid "Rejected"
 msgstr ""
 
@@ -253,7 +253,7 @@ msgid "Restricted to 10 parnters, use the action to show all potential matches."
 msgstr ""
 
 #. module: alc_registration
-#: model:ir.ui.view,arch_db:alc_registration.alc_registration_form_view
+#: model_terms:ir.ui.view,arch_db:alc_registration.alc_registration_form_view
 msgid "Set to pending"
 msgstr ""
 
@@ -265,14 +265,14 @@ msgstr ""
 #. module: alc_registration
 #: code:addons/alc_registration/models/alc_registration.py:222
 #: model:ir.model.fields,field_description:alc_registration.field_alc_registration_similar_partner_ids
-#: model:ir.ui.view,arch_db:alc_registration.alc_registration_form_view
+#: model_terms:ir.ui.view,arch_db:alc_registration.alc_registration_form_view
 #, python-format
 msgid "Similar Partners"
 msgstr ""
 
 #. module: alc_registration
 #: model:ir.model.fields,field_description:alc_registration.field_alc_registration_state_id
-#: model:ir.ui.view,arch_db:alc_registration.alc_registration_form_view
+#: model_terms:ir.ui.view,arch_db:alc_registration.alc_registration_form_view
 msgid "State"
 msgstr ""
 
@@ -287,12 +287,12 @@ msgid "Street"
 msgstr ""
 
 #. module: alc_registration
-#: model:ir.ui.view,arch_db:alc_registration.alc_registration_form_view
+#: model_terms:ir.ui.view,arch_db:alc_registration.alc_registration_form_view
 msgid "Street 2..."
 msgstr ""
 
 #. module: alc_registration
-#: model:ir.ui.view,arch_db:alc_registration.alc_registration_form_view
+#: model_terms:ir.ui.view,arch_db:alc_registration.alc_registration_form_view
 msgid "Street..."
 msgstr ""
 
@@ -363,7 +363,7 @@ msgid "Wholesaler"
 msgstr ""
 
 #. module: alc_registration
-#: model:ir.ui.view,arch_db:alc_registration.alc_registration_form_view
+#: model_terms:ir.ui.view,arch_db:alc_registration.alc_registration_form_view
 msgid "ZIP"
 msgstr ""
 

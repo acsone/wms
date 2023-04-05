@@ -17,7 +17,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_product_packaging_stock_reserve
-#: model:ir.ui.view,arch_db:alc_product_packaging_stock_reserve.view_stock_config_settings
+#: model_terms:ir.ui.view,arch_db:alc_product_packaging_stock_reserve.view_stock_config_settings
 msgid "Configure Packaging Ratio By Type"
 msgstr "Configuration du ratio minimal réservable par type de conditionnement"
 
@@ -35,7 +35,7 @@ msgid "Minimum quantity"
 msgstr "Quantité minimale"
 
 #. module: alc_product_packaging_stock_reserve
-#: model:ir.ui.view,arch_db:alc_product_packaging_stock_reserve.view_stock_config_settings
+#: model_terms:ir.ui.view,arch_db:alc_product_packaging_stock_reserve.view_stock_config_settings
 msgid "Packaging reservation"
 msgstr "Réservation par conditionnement"
 

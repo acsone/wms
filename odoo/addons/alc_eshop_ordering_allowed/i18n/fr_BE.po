@@ -24,7 +24,7 @@ msgid "Eshop ordering allowed"
 msgstr "Commandes en ligne autorisées"
 
 #. module: alc_eshop_ordering_allowed
-#: model:ir.ui.view,arch_db:alc_eshop_ordering_allowed.res_partner_search_view
+#: model_terms:ir.ui.view,arch_db:alc_eshop_ordering_allowed.res_partner_search_view
 msgid "Eshop ordering not allowed"
 msgstr "Commandes en ligne interdites"
 

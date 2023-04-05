@@ -85,7 +85,7 @@ msgid "New"
 msgstr ""
 
 #. module: alc_sale_statistics
-#: model:ir.ui.view,arch_db:alc_sale_statistics.stock_moves_with_partner_view_search
+#: model_terms:ir.ui.view,arch_db:alc_sale_statistics.stock_moves_with_partner_view_search
 msgid "Only supplier requesting statistics"
 msgstr ""
 
@@ -136,7 +136,7 @@ msgid "Picking reference"
 msgstr ""
 
 #. module: alc_sale_statistics
-#: model:ir.ui.view,arch_db:alc_sale_statistics.stock_moves_with_partner_view_search
+#: model_terms:ir.ui.view,arch_db:alc_sale_statistics.stock_moves_with_partner_view_search
 msgid "Previous Month"
 msgstr ""
 
@@ -172,7 +172,7 @@ msgstr ""
 
 #. module: alc_sale_statistics
 #: model:ir.model.fields,field_description:alc_sale_statistics.field_alc_stock_move_report_sale_channel
-#: model:ir.ui.view,arch_db:alc_sale_statistics.stock_moves_with_partner_view_search
+#: model_terms:ir.ui.view,arch_db:alc_sale_statistics.stock_moves_with_partner_view_search
 msgid "Sale channel"
 msgstr ""
 
@@ -243,7 +243,7 @@ msgid "Waiting Availability"
 msgstr ""
 
 #. module: alc_sale_statistics
-#: model:ir.ui.view,arch_db:alc_sale_statistics.stock_moves_with_partner_view_search
+#: model_terms:ir.ui.view,arch_db:alc_sale_statistics.stock_moves_with_partner_view_search
 msgid "customer related stock moves"
 msgstr ""
 

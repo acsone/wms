@@ -62,7 +62,7 @@ msgid "B2C Product Assortment"
 msgstr ""
 
 #. module: alc_b2c_connector
-#: model:ir.ui.view,arch_db:alc_b2c_connector.sale_order_search_view
+#: model_terms:ir.ui.view,arch_db:alc_b2c_connector.sale_order_search_view
 msgid "B2C ref"
 msgstr ""
 

@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: shopinvader_search_engine_export
-#: model:ir.ui.view,arch_db:shopinvader_search_engine_export.view_product_template_form
+#: model_terms:ir.ui.view,arch_db:shopinvader_search_engine_export.view_product_template_form
 msgid "Export"
 msgstr ""
 

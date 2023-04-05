@@ -40,7 +40,7 @@ msgstr ""
 #. module: alc_documents
 #: model:ir.actions.act_window,name:alc_documents.alc_document_act_window
 #: model:ir.ui.menu,name:alc_documents.alc_document_menu
-#: model:ir.ui.view,arch_db:alc_documents.res_partner_form_view
+#: model_terms:ir.ui.view,arch_db:alc_documents.res_partner_form_view
 msgid "Alcyon Documents"
 msgstr ""
 
@@ -72,7 +72,7 @@ msgstr ""
 
 #. module: alc_documents
 #: model:ir.model.fields,field_description:alc_documents.field_alc_document_compute
-#: model:ir.ui.view,arch_db:alc_documents.alc_document_form_view
+#: model_terms:ir.ui.view,arch_db:alc_documents.alc_document_form_view
 msgid "Compute"
 msgstr ""
 

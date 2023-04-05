@@ -29,7 +29,7 @@ msgid "Transfer"
 msgstr ""
 
 #. module: stock_constraint
-#: model:ir.ui.view,arch_db:stock_constraint.view_picking_uncancel_form
+#: model_terms:ir.ui.view,arch_db:stock_constraint.view_picking_uncancel_form
 msgid "Uncancel"
 msgstr ""
 

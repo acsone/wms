@@ -24,7 +24,7 @@ msgid "Maximum weight per package"
 msgstr ""
 
 #. module: alc_stock_picking_number_package
-#: model:ir.ui.view,arch_db:alc_stock_picking_number_package.stock_picking_form_view
+#: model_terms:ir.ui.view,arch_db:alc_stock_picking_number_package.stock_picking_form_view
 msgid "Number of packages"
 msgstr ""
 
@@ -39,7 +39,7 @@ msgid "Number of packages visible"
 msgstr ""
 
 #. module: alc_stock_picking_number_package
-#: model:ir.ui.view,arch_db:alc_stock_picking_number_package.stock_picking_form_view
+#: model_terms:ir.ui.view,arch_db:alc_stock_picking_number_package.stock_picking_form_view
 msgid "The number of packages outranged the adviced number of packages"
 msgstr ""
 

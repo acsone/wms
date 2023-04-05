@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_product_shop_category
-#: model:ir.ui.view,arch_db:alc_product_shop_category.product_category_search_view
+#: model_terms:ir.ui.view,arch_db:alc_product_shop_category.product_category_search_view
 msgid "Alcyon category"
 msgstr ""
 
@@ -46,7 +46,7 @@ msgid "Product Template"
 msgstr ""
 
 #. module: alc_product_shop_category
-#: model:ir.ui.view,arch_db:alc_product_shop_category.product_category_search_view
+#: model_terms:ir.ui.view,arch_db:alc_product_shop_category.product_category_search_view
 msgid "Web category"
 msgstr ""
 

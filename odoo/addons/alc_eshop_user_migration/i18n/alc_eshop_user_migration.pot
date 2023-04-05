@@ -15,7 +15,7 @@ msgstr ""
 
 #. module: alc_eshop_user_migration
 #: model:ir.model.fields,field_description:alc_eshop_user_migration.field_magento_user_activated
-#: model:ir.ui.view,arch_db:alc_eshop_user_migration.magento_user_search_view
+#: model_terms:ir.ui.view,arch_db:alc_eshop_user_migration.magento_user_search_view
 msgid "Activated"
 msgstr ""
 
@@ -72,7 +72,7 @@ msgid "Magento id"
 msgstr ""
 
 #. module: alc_eshop_user_migration
-#: model:ir.ui.view,arch_db:alc_eshop_user_migration.magento_user_search_view
+#: model_terms:ir.ui.view,arch_db:alc_eshop_user_migration.magento_user_search_view
 msgid "Not yet activated"
 msgstr ""
 

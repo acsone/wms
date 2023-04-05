@@ -69,7 +69,7 @@ msgid "Invoice grouping"
 msgstr ""
 
 #. module: alc_sale_invoicing_policy
-#: model:ir.ui.view,arch_db:alc_sale_invoicing_policy.account_payment_mode_form_view
+#: model_terms:ir.ui.view,arch_db:alc_sale_invoicing_policy.account_payment_mode_form_view
 msgid "Invoicing"
 msgstr ""
 

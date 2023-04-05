@@ -23,7 +23,7 @@ msgstr ""
 #. module: alc_account_payment_globalization
 #: model:ir.actions.act_window,name:alc_account_payment_globalization.alc_account_payment_globalization_act_window
 #: model:ir.ui.menu,name:alc_account_payment_globalization.alc_account_payment_globalization_menu
-#: model:ir.ui.view,arch_db:alc_account_payment_globalization.alc_account_payment_globalization_form_view
+#: model_terms:ir.ui.view,arch_db:alc_account_payment_globalization.alc_account_payment_globalization_form_view
 msgid "Account Payment Globalization"
 msgstr ""
 
@@ -33,7 +33,7 @@ msgid "Actions"
 msgstr ""
 
 #. module: alc_account_payment_globalization
-#: model:ir.ui.view,arch_db:alc_account_payment_globalization.alc_account_payment_globalization_form_view
+#: model_terms:ir.ui.view,arch_db:alc_account_payment_globalization.alc_account_payment_globalization_form_view
 msgid "Cancel"
 msgstr ""
 
@@ -91,7 +91,7 @@ msgid "No accounting lines for this partner."
 msgstr ""
 
 #. module: alc_account_payment_globalization
-#: model:ir.ui.view,arch_db:alc_account_payment_globalization.alc_account_payment_globalization_form_view
+#: model_terms:ir.ui.view,arch_db:alc_account_payment_globalization.alc_account_payment_globalization_form_view
 msgid "OK"
 msgstr ""
 

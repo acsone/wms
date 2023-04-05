@@ -37,7 +37,7 @@ msgid "End date"
 msgstr "Date de fin"
 
 #. module: partner_schedule
-#: model:ir.ui.view,arch_db:partner_schedule.view_partner_form
+#: model_terms:ir.ui.view,arch_db:partner_schedule.view_partner_form
 msgid "Holidays"
 msgstr "Vacances"
 

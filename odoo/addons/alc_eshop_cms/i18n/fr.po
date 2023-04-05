@@ -2731,7 +2731,7 @@ msgid "Created on"
 msgstr "Créé le"
 
 #. module: alc_eshop_cms
-#: model:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_news_search_view
+#: model_terms:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_news_search_view
 msgid "Current"
 msgstr "Non-échu"
 
@@ -2810,7 +2810,7 @@ msgid "HTTP accessible path to the file"
 msgstr "HTTP accessible path to the file"
 
 #. module: alc_eshop_cms
-#: model:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_news_form_view
+#: model_terms:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_news_form_view
 msgid "Header: 1176x384 (px)"
 msgstr ""
 
@@ -2840,7 +2840,7 @@ msgid "Image medium url"
 msgstr "Image medium url"
 
 #. module: alc_eshop_cms
-#: model:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_news_form_view
+#: model_terms:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_news_form_view
 msgid "Image preview"
 msgstr "Visualisation des images"
 
@@ -2850,12 +2850,12 @@ msgid "Image small url"
 msgstr "Url de la vignette"
 
 #. module: alc_eshop_cms
-#: model:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_news_form_view
+#: model_terms:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_news_form_view
 msgid "Images should be in the following format:"
 msgstr ""
 
 #. module: alc_eshop_cms
-#: model:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_news_form_view
+#: model_terms:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_news_form_view
 msgid "Info"
 msgstr "Info"
 
@@ -2921,14 +2921,14 @@ msgstr "Mon installation sur-mesure"
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_name
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_slot_name
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_snippet_name
-#: model:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_news_form_view
-#: model:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_page_form_view
-#: model:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_snippet_form_view
+#: model_terms:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_news_form_view
+#: model_terms:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_page_form_view
+#: model_terms:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_snippet_form_view
 msgid "Name"
 msgstr "Nom"
 
 #. module: alc_eshop_cms
-#: model:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_page_search_view
+#: model_terms:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_page_search_view
 msgid "Not published"
 msgstr "Non publié"
 
@@ -2948,12 +2948,12 @@ msgid "Page Slot"
 msgstr "Emplacement"
 
 #. module: alc_eshop_cms
-#: model:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_news_search_view
+#: model_terms:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_news_search_view
 msgid "Past"
 msgstr "Echues"
 
 #. module: alc_eshop_cms
-#: model:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_news_search_view
+#: model_terms:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_news_search_view
 msgid "Past from today"
 msgstr "Echues"
 
@@ -2974,7 +2974,7 @@ msgstr "Procédure retours produits frigos"
 
 #. module: alc_eshop_cms
 #: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_published
-#: model:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_page_search_view
+#: model_terms:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_page_search_view
 msgid "Published"
 msgstr "Publié"
 
@@ -3015,17 +3015,17 @@ msgid "Thumbnail image filename"
 msgstr "Thumbnail image filename"
 
 #. module: alc_eshop_cms
-#: model:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_news_form_view
+#: model_terms:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_news_form_view
 msgid "Thumbnail: 288x128 (px)"
 msgstr ""
 
 #. module: alc_eshop_cms
-#: model:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_news_search_view
+#: model_terms:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_news_search_view
 msgid "Upcoming"
 msgstr "A venir"
 
 #. module: alc_eshop_cms
-#: model:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_news_search_view
+#: model_terms:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_news_search_view
 msgid "Upcoming from today"
 msgstr "A venir"
 
@@ -3115,9 +3115,9 @@ msgid "ir.attachment"
 msgstr "ir.attachment"
 
 #. module: alc_eshop_cms
-#: model:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_news_form_view
-#: model:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_page_form_view
-#: model:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_snippet_form_view
+#: model_terms:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_news_form_view
+#: model_terms:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_page_form_view
+#: model_terms:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_snippet_form_view
 msgid "name"
 msgstr "Intitulé"
 

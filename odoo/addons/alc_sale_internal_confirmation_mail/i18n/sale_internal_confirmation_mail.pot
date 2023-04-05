@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: sale_internal_confirmation_mail
-#: model:ir.ui.view,arch_db:sale_internal_confirmation_mail.sale_config_settings_form_view
+#: model_terms:ir.ui.view,arch_db:sale_internal_confirmation_mail.sale_config_settings_form_view
 msgid "Email Confirmation"
 msgstr ""
 

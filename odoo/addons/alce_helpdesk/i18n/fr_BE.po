@@ -311,7 +311,7 @@ msgid "After Sale Service"
 msgstr "SAV - Matériel"
 
 #. module: alce_helpdesk
-#: model:ir.ui.view,arch_db:alce_helpdesk.create_helpdesk_ticket_view_form
+#: model_terms:ir.ui.view,arch_db:alce_helpdesk.create_helpdesk_ticket_view_form
 msgid "Cancel"
 msgstr "Annuler"
 
@@ -321,13 +321,13 @@ msgid "Click to create a new ticket reason."
 msgstr "Cliquer pour créer une nouvelle cause du ticket"
 
 #. module: alce_helpdesk
-#: model:ir.ui.view,arch_db:alce_helpdesk.view_pack_operation_lot_add_form
+#: model_terms:ir.ui.view,arch_db:alce_helpdesk.view_pack_operation_lot_add_form
 msgid "Create a helpdesk ticket"
 msgstr "Créer un ticket helpdesk"
 
 #. module: alce_helpdesk
 #: model:ir.actions.act_window,name:alce_helpdesk.action_create_helpdesk_ticket
-#: model:ir.ui.view,arch_db:alce_helpdesk.create_helpdesk_ticket_view_form
+#: model_terms:ir.ui.view,arch_db:alce_helpdesk.create_helpdesk_ticket_view_form
 msgid "Create helpdesk ticket"
 msgstr "Créer un ticket helpdesk"
 
@@ -424,7 +424,7 @@ msgstr "Quantité commandée"
 
 #. module: alce_helpdesk
 #: model:ir.model,name:alce_helpdesk.model_res_partner
-#: model:ir.ui.view,arch_db:alce_helpdesk.helpdesk_ticket_view_form
+#: model_terms:ir.ui.view,arch_db:alce_helpdesk.helpdesk_ticket_view_form
 msgid "Partner"
 msgstr "Partenaire"
 
@@ -447,7 +447,7 @@ msgstr "Commande fournisseur"
 #: model:ir.model.fields,field_description:alce_helpdesk.field_create_helpdesk_ticket_helpdesk_ticket_reason_id
 #: model:ir.model.fields,field_description:alce_helpdesk.field_helpdesk_ticket_helpdesk_ticket_reason_id
 #: model:ir.model.fields,field_description:alce_helpdesk.field_stock_pack_operation_lot_add_helpdesk_ticket_reason_id
-#: model:ir.ui.view,arch_db:alce_helpdesk.helpdesk_ticket_reason_view_form
+#: model_terms:ir.ui.view,arch_db:alce_helpdesk.helpdesk_ticket_reason_view_form
 msgid "Reason"
 msgstr "Motif"
 
@@ -519,12 +519,12 @@ msgid "Ticket Reason"
 msgstr "Cause du ticket"
 
 #. module: alce_helpdesk
-#: model:ir.ui.view,arch_db:alce_helpdesk.account_invoice_alce_helpdesk
-#: model:ir.ui.view,arch_db:alce_helpdesk.account_supplier_invoice_alce_helpdesk
-#: model:ir.ui.view,arch_db:alce_helpdesk.partner_form_view_helpdesk_tickets_button
-#: model:ir.ui.view,arch_db:alce_helpdesk.purchase_order_specific_form
-#: model:ir.ui.view,arch_db:alce_helpdesk.sale_order_specific_form
-#: model:ir.ui.view,arch_db:alce_helpdesk.view_picking_form
+#: model_terms:ir.ui.view,arch_db:alce_helpdesk.account_invoice_alce_helpdesk
+#: model_terms:ir.ui.view,arch_db:alce_helpdesk.account_supplier_invoice_alce_helpdesk
+#: model_terms:ir.ui.view,arch_db:alce_helpdesk.partner_form_view_helpdesk_tickets_button
+#: model_terms:ir.ui.view,arch_db:alce_helpdesk.purchase_order_specific_form
+#: model_terms:ir.ui.view,arch_db:alce_helpdesk.sale_order_specific_form
+#: model_terms:ir.ui.view,arch_db:alce_helpdesk.view_picking_form
 msgid "Tickets"
 msgstr "Tickets"
 
@@ -534,7 +534,7 @@ msgid "Transfer"
 msgstr "Transfert"
 
 #. module: alce_helpdesk
-#: model:ir.ui.view,arch_db:alce_helpdesk.create_helpdesk_ticket_view_form
+#: model_terms:ir.ui.view,arch_db:alce_helpdesk.create_helpdesk_ticket_view_form
 msgid "Validate"
 msgstr "Valider"
 

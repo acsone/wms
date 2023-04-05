@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: stock_product_bin
-#: model:ir.ui.view,arch_db:stock_product_bin.product_stock_bin_form_view
+#: model_terms:ir.ui.view,arch_db:stock_product_bin.product_stock_bin_form_view
 msgid "<i class=\"fa fa-exclamation-triangle\" style=\"color:red\">\n"
 "                  <span style=\"margin:0 5px\">Inactive bin location</span>\n"
 "                </i>"
@@ -116,8 +116,8 @@ msgid "Stock Bins"
 msgstr ""
 
 #. module: stock_product_bin
-#: model:ir.ui.view,arch_db:stock_product_bin.product_stock_bin_form_view
-#: model:ir.ui.view,arch_db:stock_product_bin.product_stock_bin_search_view
+#: model_terms:ir.ui.view,arch_db:stock_product_bin.product_stock_bin_form_view
+#: model_terms:ir.ui.view,arch_db:stock_product_bin.product_stock_bin_search_view
 msgid "Storage Location"
 msgstr ""
 

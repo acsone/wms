@@ -97,12 +97,12 @@ msgid "Date"
 msgstr "Date "
 
 #. module: specific_purchase
-#: model:ir.ui.view,arch_db:specific_purchase.view_partner_form
+#: model_terms:ir.ui.view,arch_db:specific_purchase.view_partner_form
 msgid "Days for management"
 msgstr "Jours de gestion"
 
 #. module: specific_purchase
-#: model:ir.ui.view,arch_db:specific_purchase.view_procurement_compute_wizard
+#: model_terms:ir.ui.view,arch_db:specific_purchase.view_procurement_compute_wizard
 msgid "Days to generate"
 msgstr "Jours à générer"
 
@@ -137,7 +137,7 @@ msgid "Friday"
 msgstr "Vendredi"
 
 #. module: specific_purchase
-#: model:ir.ui.view,arch_db:specific_purchase.product_template_search_view
+#: model_terms:ir.ui.view,arch_db:specific_purchase.product_template_search_view
 msgid "Group By"
 msgstr "Grouper par"
 
@@ -147,7 +147,7 @@ msgid "ID"
 msgstr "ID"
 
 #. module: specific_purchase
-#: model:ir.ui.view,arch_db:specific_purchase.view_purchase_order_filter
+#: model_terms:ir.ui.view,arch_db:specific_purchase.view_purchase_order_filter
 msgid "In BO"
 msgstr "Dans le BO"
 
@@ -185,7 +185,7 @@ msgid "Monday"
 msgstr "Lundi"
 
 #. module: specific_purchase
-#: model:ir.ui.view,arch_db:specific_purchase.view_purchase_order_filter
+#: model_terms:ir.ui.view,arch_db:specific_purchase.view_purchase_order_filter
 msgid "My Orders"
 msgstr "Mes commandes"
 
@@ -240,7 +240,7 @@ msgid "Please select at least one supplier"
 msgstr "Veuillez sélectionner au moins un fournisseur"
 
 #. module: specific_purchase
-#: model:ir.ui.view,arch_db:specific_purchase.product_supplierinfo_view_form
+#: model_terms:ir.ui.view,arch_db:specific_purchase.product_supplierinfo_view_form
 msgid "Price List"
 msgstr "Liste de prix"
 
@@ -267,7 +267,7 @@ msgstr "Référence produit"
 #. module: specific_purchase
 #: model:ir.actions.act_window,name:specific_purchase.product_state_action_form
 #: model:ir.ui.menu,name:specific_purchase.menu_product_state_config
-#: model:ir.ui.view,arch_db:specific_purchase.view_product_state_form_view
+#: model_terms:ir.ui.view,arch_db:specific_purchase.view_product_state_form_view
 msgid "Product state"
 msgstr "Etat du produit"
 
@@ -277,7 +277,7 @@ msgid "Promotion supplier"
 msgstr "Remise d'achat"
 
 #. module: specific_purchase
-#: model:ir.ui.view,arch_db:specific_purchase.product_supplierinfo_view_form
+#: model_terms:ir.ui.view,arch_db:specific_purchase.product_supplierinfo_view_form
 msgid "Purchase"
 msgstr "Achats"
 
@@ -310,7 +310,7 @@ msgid "Saturday"
 msgstr "Samedi"
 
 #. module: specific_purchase
-#: model:ir.ui.view,arch_db:specific_purchase.purchase_order_form
+#: model_terms:ir.ui.view,arch_db:specific_purchase.purchase_order_form
 msgid "Set date to all order lines"
 msgstr "Définir la date pour toutes les lignes de la commande"
 
@@ -352,7 +352,7 @@ msgid "The procurement order must be unique by product"
 msgstr "La règle de réapprovisionnement doit être unique par produit"
 
 #. module: specific_purchase
-#: model:ir.ui.view,arch_db:specific_purchase.purchase_order_form
+#: model_terms:ir.ui.view,arch_db:specific_purchase.purchase_order_form
 msgid "This changes the scheduled date of all order lines to the given date"
 msgstr "Définit la date prévue pour toutes les lignes de la commande"
 
@@ -404,7 +404,7 @@ msgid "Unit Price"
 msgstr "Prix unitaire"
 
 #. module: specific_purchase
-#: model:ir.ui.view,arch_db:specific_purchase.product_supplierinfo_view_form
+#: model_terms:ir.ui.view,arch_db:specific_purchase.product_supplierinfo_view_form
 msgid "Validity"
 msgstr "Validité"
 
@@ -414,7 +414,7 @@ msgstr "Validité"
 #: model:ir.model.fields,field_description:specific_purchase.field_product_template_supplier_id
 #: model:ir.model.fields,field_description:specific_purchase.field_shopinvader_product_supplier_id
 #: model:ir.model.fields,field_description:specific_purchase.field_shopinvader_variant_supplier_id
-#: model:ir.ui.view,arch_db:specific_purchase.product_template_search_view
+#: model_terms:ir.ui.view,arch_db:specific_purchase.product_template_search_view
 msgid "Vendor"
 msgstr "Fournisseur"
 
@@ -448,7 +448,7 @@ msgid "Vendor of this product"
 msgstr "Référence Fournisseur"
 
 #. module: specific_purchase
-#: model:ir.ui.view,arch_db:specific_purchase.view_procurement_compute_wizard
+#: model_terms:ir.ui.view,arch_db:specific_purchase.view_procurement_compute_wizard
 msgid ""
 "WARNING - You will generate procurement order by days. This process can take "
 "a very long time."
@@ -465,7 +465,7 @@ msgid "Wednesday"
 msgstr "Mercredi"
 
 #. module: specific_purchase
-#: model:ir.ui.view,arch_db:specific_purchase.view_purchase_order_filter
+#: model_terms:ir.ui.view,arch_db:specific_purchase.view_purchase_order_filter
 msgid "Without responsible"
 msgstr "Sans responsable"
 
@@ -480,7 +480,7 @@ msgid "purchase.config.settings"
 msgstr "purchase.config.settings"
 
 #. module: specific_purchase
-#: model:ir.ui.view,arch_db:specific_purchase.product_supplierinfo_view_form
+#: model_terms:ir.ui.view,arch_db:specific_purchase.product_supplierinfo_view_form
 msgid "to"
 msgstr "au"
 

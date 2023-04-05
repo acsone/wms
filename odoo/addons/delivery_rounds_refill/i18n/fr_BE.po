@@ -103,19 +103,19 @@ msgid "Barcode Picking Type"
 msgstr ""
 
 #. module: delivery_rounds_refill
-#: model:ir.ui.view,arch_db:delivery_rounds_refill.view_report_stock_refill_wizard_form
+#: model_terms:ir.ui.view,arch_db:delivery_rounds_refill.view_report_stock_refill_wizard_form
 msgid "Cancel"
 msgstr "Annuler"
 
 #. module: delivery_rounds_refill
-#: model:ir.ui.view,arch_db:delivery_rounds_refill.view_report_stock_refill_wizard_form
+#: model_terms:ir.ui.view,arch_db:delivery_rounds_refill.view_report_stock_refill_wizard_form
 msgid "Confirm"
 msgstr "Confirmer"
 
 #. module: delivery_rounds_refill
 #: model:ir.actions.act_window,name:delivery_rounds_refill.act_report_stock_refill_arrange
 #: model:ir.actions.act_window,name:delivery_rounds_refill.act_report_stock_refill_reassort
-#: model:ir.ui.view,arch_db:delivery_rounds_refill.view_report_stock_refill_wizard_form
+#: model_terms:ir.ui.view,arch_db:delivery_rounds_refill.view_report_stock_refill_wizard_form
 msgid "Create Operation"
 msgstr "Créer une operation"
 
@@ -305,7 +305,7 @@ msgid "Planned quantity to pick"
 msgstr "Qté plannifiée à préparer"
 
 #. module: delivery_rounds_refill
-#: model:ir.ui.view,arch_db:delivery_rounds_refill.view_report_stock_refill_wizard_form
+#: model_terms:ir.ui.view,arch_db:delivery_rounds_refill.view_report_stock_refill_wizard_form
 msgid "Please confirm the creation of the stock operation"
 msgstr "Veuillez confirmer la creation de l'operation de stock"
 
@@ -456,9 +456,9 @@ msgid "Stock Move"
 msgstr "Mouvement de stock"
 
 #. module: delivery_rounds_refill
-#: model:ir.ui.view,arch_db:delivery_rounds_refill.report_stock_refill_arrange_retours_search_view
-#: model:ir.ui.view,arch_db:delivery_rounds_refill.view_report_stock_refill_arrange_search
-#: model:ir.ui.view,arch_db:delivery_rounds_refill.view_report_stock_refill_reassort_search
+#: model_terms:ir.ui.view,arch_db:delivery_rounds_refill.report_stock_refill_arrange_retours_search_view
+#: model_terms:ir.ui.view,arch_db:delivery_rounds_refill.view_report_stock_refill_arrange_search
+#: model_terms:ir.ui.view,arch_db:delivery_rounds_refill.view_report_stock_refill_reassort_search
 msgid "To do"
 msgstr "À faire"
 
@@ -491,12 +491,12 @@ msgid "Warehouse id"
 msgstr "Entrepôt"
 
 #. module: delivery_rounds_refill
-#: model:ir.ui.view,arch_db:delivery_rounds_refill.view_round_instance_with_reassort_search
+#: model_terms:ir.ui.view,arch_db:delivery_rounds_refill.view_round_instance_with_reassort_search
 msgid "With reassort"
 msgstr "Avec réassort"
 
 #. module: delivery_rounds_refill
-#: model:ir.ui.view,arch_db:delivery_rounds_refill.view_report_stock_refill_wizard_form
+#: model_terms:ir.ui.view,arch_db:delivery_rounds_refill.view_report_stock_refill_wizard_form
 msgid "or"
 msgstr "ou"
 

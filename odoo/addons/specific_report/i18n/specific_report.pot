@@ -31,22 +31,22 @@ msgid "\n"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
+#: model_terms:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
 msgid "# Cold"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
+#: model_terms:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
 msgid "# Drug"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
+#: model_terms:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
 msgid "# Food"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
+#: model_terms:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
 msgid "# Mat."
 msgstr ""
 
@@ -61,57 +61,57 @@ msgid "${object.subject}"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
+#: model_terms:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "%<br/>Alcyon<br/>discount"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
+#: model_terms:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "%<br/>Supplier<br/>discount"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.deliveryslip_with_price
-#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_entry_register_body
+#: model_terms:ir.ui.view,arch_db:specific_report.deliveryslip_with_price
+#: model_terms:ir.ui.view,arch_db:specific_report.report_deliveryslip_entry_register_body
 msgid "(AMM:"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.deliveryslip_b2c_customer
-#: model:ir.ui.view,arch_db:specific_report.deliveryslip_with_price
-#: model:ir.ui.view,arch_db:specific_report.deliveryslip_without_price
-#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_entry_register_body
+#: model_terms:ir.ui.view,arch_db:specific_report.deliveryslip_b2c_customer
+#: model_terms:ir.ui.view,arch_db:specific_report.deliveryslip_with_price
+#: model_terms:ir.ui.view,arch_db:specific_report.deliveryslip_without_price
+#: model_terms:ir.ui.view,arch_db:specific_report.report_deliveryslip_entry_register_body
 msgid "(S/N:"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
+#: model_terms:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "(V Ref:"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.page_number_footer
-#: model:ir.ui.view,arch_db:specific_report.report_invoice
+#: model_terms:ir.ui.view,arch_db:specific_report.page_number_footer
+#: model_terms:ir.ui.view,arch_db:specific_report.report_invoice
 msgid "-\n"
 "                    <span>Fax:</span>"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
+#: model_terms:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "<br/>\n"
 "                                BIC:"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
+#: model_terms:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "<br/>\n"
 "                      <br/>\n"
 "                      <span>Customer</span>"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.page_number_footer
-#: model:ir.ui.view,arch_db:specific_report.report_invoice
+#: model_terms:ir.ui.view,arch_db:specific_report.page_number_footer
+#: model_terms:ir.ui.view,arch_db:specific_report.report_invoice
 msgid "<br/>\n"
 "                    <span>Email:</span>"
 msgstr ""
@@ -193,151 +193,151 @@ msgid "<html>\n"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
+#: model_terms:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "<span> - Delivery slip:</span>"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
+#: model_terms:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "<span>Alcyon<br/>discount</span>"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
+#: model_terms:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "<span>Base<br/>discount</span>"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_saleorder_document_inherit
+#: model_terms:ir.ui.view,arch_db:specific_report.report_saleorder_document_inherit
 msgid "<span>Consignment # </span>"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
-#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_entry_register_body
-#: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
-#: model:ir.ui.view,arch_db:specific_report.report_picking_body
+#: model_terms:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
+#: model_terms:ir.ui.view,arch_db:specific_report.report_deliveryslip_entry_register_body
+#: model_terms:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
+#: model_terms:ir.ui.view,arch_db:specific_report.report_picking_body
 msgid "<span>Customer</span>"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
-#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_entry_register_body
-#: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
-#: model:ir.ui.view,arch_db:specific_report.report_picking_body
+#: model_terms:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
+#: model_terms:ir.ui.view,arch_db:specific_report.report_deliveryslip_entry_register_body
+#: model_terms:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
+#: model_terms:ir.ui.view,arch_db:specific_report.report_picking_body
 msgid "<span>Date</span>"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
+#: model_terms:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "<span>Due date</span>"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
+#: model_terms:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "<span>Gross<br/>amount</span>"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_saleorder_document_pharmacist_supplier
+#: model_terms:ir.ui.view,arch_db:specific_report.report_saleorder_document_pharmacist_supplier
 msgid "<span>No associated pharmacist</span>"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
-#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_entry_register_body
-#: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
-#: model:ir.ui.view,arch_db:specific_report.report_picking_body
+#: model_terms:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
+#: model_terms:ir.ui.view,arch_db:specific_report.report_deliveryslip_entry_register_body
+#: model_terms:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
+#: model_terms:ir.ui.view,arch_db:specific_report.report_picking_body
 msgid "<span>N° Document</span>"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_saleorder_document_pharmacist_supplier
+#: model_terms:ir.ui.view,arch_db:specific_report.report_saleorder_document_pharmacist_supplier
 msgid "<span>Order # </span>"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.page_number_footer
-#: model:ir.ui.view,arch_db:specific_report.report_invoice
+#: model_terms:ir.ui.view,arch_db:specific_report.page_number_footer
+#: model_terms:ir.ui.view,arch_db:specific_report.report_invoice
 msgid "<span>RPM Liège division Huy - TVA</span>"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
+#: model_terms:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "<span>SUMMARY</span>\n"
 "                <br/>\n"
 "                <span>Total discount:</span>"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
+#: model_terms:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "<span>Sales Order</span>"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
+#: model_terms:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "<span>Total<br/>APB</span>"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
+#: model_terms:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "<span>Total<br/>Antibiotics</span>"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
+#: model_terms:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "<span>Total<br/>amount</span>"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
+#: model_terms:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "<span>Total<br/>refund</span>"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
+#: model_terms:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "<span>Total<br/>tax</span>"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
+#: model_terms:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "<span>Untaxed<br/>amount</span>"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
-#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_entry_register_body
-#: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
+#: model_terms:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
+#: model_terms:ir.ui.view,arch_db:specific_report.report_deliveryslip_entry_register_body
+#: model_terms:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "<span>Your VAT number:</span>"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
+#: model_terms:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "<span>du</span>"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.deliveryslip_orderref
+#: model_terms:ir.ui.view,arch_db:specific_report.deliveryslip_orderref
 msgid "<span>of</span>"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_saleorder_document_pharmacist_supplier
+#: model_terms:ir.ui.view,arch_db:specific_report.report_saleorder_document_pharmacist_supplier
 msgid "<strong>Customer:</strong>"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_saleorder_document_pharmacist_supplier
+#: model_terms:ir.ui.view,arch_db:specific_report.report_saleorder_document_pharmacist_supplier
 msgid "<strong>Date Ordered:</strong>"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_saleorder_document_inherit
+#: model_terms:ir.ui.view,arch_db:specific_report.report_saleorder_document_inherit
 msgid "<strong>Discount subtotal</strong>"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_saleorder_document_inherit
+#: model_terms:ir.ui.view,arch_db:specific_report.report_saleorder_document_inherit
 msgid "<strong>Subtotal without discount</strong>"
 msgstr ""
 
@@ -410,70 +410,70 @@ msgid "Apb ids"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.modify_serial_number_view_form
+#: model_terms:ir.ui.view,arch_db:specific_report.modify_serial_number_view_form
 msgid "Apply"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
+#: model_terms:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "BELFIUS:"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
+#: model_terms:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "BNP PARIBAS FORTIS :"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.deliveryslip_b2c_customer
-#: model:ir.ui.view,arch_db:specific_report.deliveryslip_with_price
-#: model:ir.ui.view,arch_db:specific_report.deliveryslip_without_price
+#: model_terms:ir.ui.view,arch_db:specific_report.deliveryslip_b2c_customer
+#: model_terms:ir.ui.view,arch_db:specific_report.deliveryslip_with_price
+#: model_terms:ir.ui.view,arch_db:specific_report.deliveryslip_without_price
 msgid "Balance to be delivered"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.deliveryslip_b2c_customer
-#: model:ir.ui.view,arch_db:specific_report.deliveryslip_with_price
-#: model:ir.ui.view,arch_db:specific_report.deliveryslip_without_price
+#: model_terms:ir.ui.view,arch_db:specific_report.deliveryslip_b2c_customer
+#: model_terms:ir.ui.view,arch_db:specific_report.deliveryslip_with_price
+#: model_terms:ir.ui.view,arch_db:specific_report.deliveryslip_without_price
 msgid "Balance to be delivered on order"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
+#: model_terms:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "Base taxable"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.deliveryslip_b2c_customer
-#: model:ir.ui.view,arch_db:specific_report.deliveryslip_with_price
-#: model:ir.ui.view,arch_db:specific_report.deliveryslip_without_price
-#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_entry_register_body
-#: model:ir.ui.view,arch_db:specific_report.report_passport_body
+#: model_terms:ir.ui.view,arch_db:specific_report.deliveryslip_b2c_customer
+#: model_terms:ir.ui.view,arch_db:specific_report.deliveryslip_with_price
+#: model_terms:ir.ui.view,arch_db:specific_report.deliveryslip_without_price
+#: model_terms:ir.ui.view,arch_db:specific_report.report_deliveryslip_entry_register_body
+#: model_terms:ir.ui.view,arch_db:specific_report.report_passport_body
 msgid "By lot"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
+#: model_terms:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "CBC:"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.deliveryslip_without_price
+#: model_terms:ir.ui.view,arch_db:specific_report.deliveryslip_without_price
 msgid "CNK"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.modify_serial_number_view_form
+#: model_terms:ir.ui.view,arch_db:specific_report.modify_serial_number_view_form
 msgid "Cancel"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_invoice
+#: model_terms:ir.ui.view,arch_db:specific_report.report_invoice
 msgid "Canceled Invoice"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_invoice
+#: model_terms:ir.ui.view,arch_db:specific_report.report_invoice
 msgid "Canceled Refund"
 msgstr ""
 
@@ -492,7 +492,7 @@ msgid "Cannot send pharmacist email\n"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.deliveryslip_orderref
+#: model_terms:ir.ui.view,arch_db:specific_report.deliveryslip_orderref
 msgid "Consignement"
 msgstr ""
 
@@ -518,23 +518,23 @@ msgid "Currency"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_passport_body
+#: model_terms:ir.ui.view,arch_db:specific_report.report_passport_body
 msgid "Customer"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
-#: model:ir.ui.view,arch_db:specific_report.report_saleorder_document_inherit
+#: model_terms:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
+#: model_terms:ir.ui.view,arch_db:specific_report.report_saleorder_document_inherit
 msgid "DON'T FORGET TO BRING BACK COOLPACK IF ANY"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_invoice
+#: model_terms:ir.ui.view,arch_db:specific_report.report_invoice
 msgid "DUPLICATA"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_passport_body
+#: model_terms:ir.ui.view,arch_db:specific_report.report_passport_body
 msgid "Date"
 msgstr ""
 
@@ -544,22 +544,22 @@ msgid "Delivery round"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
+#: model_terms:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
 msgid "Delivery round:"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip
+#: model_terms:ir.ui.view,arch_db:specific_report.report_deliveryslip
 msgid "Delivery slip"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_saleorder_document_inherit
+#: model_terms:ir.ui.view,arch_db:specific_report.report_saleorder_document_inherit
 msgid "Depot number:"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_saleorder_document_pharmacist_supplier
+#: model_terms:ir.ui.view,arch_db:specific_report.report_saleorder_document_pharmacist_supplier
 msgid "Description"
 msgstr ""
 
@@ -572,26 +572,26 @@ msgid "Display Name"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_invoice
+#: model_terms:ir.ui.view,arch_db:specific_report.report_invoice
 msgid "Draft Credit Note"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_invoice
+#: model_terms:ir.ui.view,arch_db:specific_report.report_invoice
 msgid "Draft Invoice"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_entry_register
+#: model_terms:ir.ui.view,arch_db:specific_report.report_deliveryslip_entry_register
 msgid "Entry register"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.deliveryslip_b2c_customer
-#: model:ir.ui.view,arch_db:specific_report.deliveryslip_with_price
-#: model:ir.ui.view,arch_db:specific_report.deliveryslip_without_price
-#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_entry_register_body
-#: model:ir.ui.view,arch_db:specific_report.report_passport_body
+#: model_terms:ir.ui.view,arch_db:specific_report.deliveryslip_b2c_customer
+#: model_terms:ir.ui.view,arch_db:specific_report.deliveryslip_with_price
+#: model_terms:ir.ui.view,arch_db:specific_report.deliveryslip_without_price
+#: model_terms:ir.ui.view,arch_db:specific_report.report_deliveryslip_entry_register_body
+#: model_terms:ir.ui.view,arch_db:specific_report.report_passport_body
 msgid "Expiration date"
 msgstr ""
 
@@ -601,20 +601,20 @@ msgid "For delivery order only"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.deliveryslip_b2c_customer
-#: model:ir.ui.view,arch_db:specific_report.deliveryslip_with_price
-#: model:ir.ui.view,arch_db:specific_report.deliveryslip_without_price
-#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_entry_register_body
+#: model_terms:ir.ui.view,arch_db:specific_report.deliveryslip_b2c_customer
+#: model_terms:ir.ui.view,arch_db:specific_report.deliveryslip_with_price
+#: model_terms:ir.ui.view,arch_db:specific_report.deliveryslip_without_price
+#: model_terms:ir.ui.view,arch_db:specific_report.report_deliveryslip_entry_register_body
 msgid "Fridge"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip
+#: model_terms:ir.ui.view,arch_db:specific_report.report_deliveryslip
 msgid "Goods return note"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.deliveryslip_with_price
+#: model_terms:ir.ui.view,arch_db:specific_report.deliveryslip_with_price
 msgid "Gross<br/>unit<br/>price"
 msgstr ""
 
@@ -646,7 +646,7 @@ msgid "ID"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
+#: model_terms:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "ING:"
 msgstr ""
 
@@ -656,13 +656,13 @@ msgid "Intrastat XML Declaration"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
+#: model_terms:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "Intrastat code"
 msgstr ""
 
 #. module: specific_report
 #: model:ir.model,name:specific_report.model_account_invoice
-#: model:ir.ui.view,arch_db:specific_report.report_invoice
+#: model_terms:ir.ui.view,arch_db:specific_report.report_invoice
 msgid "Invoice"
 msgstr ""
 
@@ -707,8 +707,8 @@ msgid "Invoicing method description"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
-#: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
+#: model_terms:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
+#: model_terms:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "Kg"
 msgstr ""
 
@@ -731,7 +731,7 @@ msgid "Last Updated on"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_picking_body
+#: model_terms:ir.ui.view,arch_db:specific_report.report_picking_body
 msgid "Location:"
 msgstr ""
 
@@ -741,17 +741,17 @@ msgid "Modify Serial Number"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.deliveryslip_b2c_customer
-#: model:ir.ui.view,arch_db:specific_report.deliveryslip_with_price
-#: model:ir.ui.view,arch_db:specific_report.deliveryslip_without_price
-#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_entry_register_body
-#: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
-#: model:ir.ui.view,arch_db:specific_report.report_passport_body
+#: model_terms:ir.ui.view,arch_db:specific_report.deliveryslip_b2c_customer
+#: model_terms:ir.ui.view,arch_db:specific_report.deliveryslip_with_price
+#: model_terms:ir.ui.view,arch_db:specific_report.deliveryslip_without_price
+#: model_terms:ir.ui.view,arch_db:specific_report.report_deliveryslip_entry_register_body
+#: model_terms:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
+#: model_terms:ir.ui.view,arch_db:specific_report.report_passport_body
 msgid "Name"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.deliveryslip_with_price
+#: model_terms:ir.ui.view,arch_db:specific_report.deliveryslip_with_price
 msgid "Net<br/>unit<br/>price"
 msgstr ""
 
@@ -769,11 +769,11 @@ msgid "No invoice to print"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.deliveryslip_b2c_customer
-#: model:ir.ui.view,arch_db:specific_report.deliveryslip_with_price
-#: model:ir.ui.view,arch_db:specific_report.deliveryslip_without_price
-#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_entry_register_body
-#: model:ir.ui.view,arch_db:specific_report.report_passport_body
+#: model_terms:ir.ui.view,arch_db:specific_report.deliveryslip_b2c_customer
+#: model_terms:ir.ui.view,arch_db:specific_report.deliveryslip_with_price
+#: model_terms:ir.ui.view,arch_db:specific_report.deliveryslip_without_price
+#: model_terms:ir.ui.view,arch_db:specific_report.report_deliveryslip_entry_register_body
+#: model_terms:ir.ui.view,arch_db:specific_report.report_passport_body
 msgid "Number"
 msgstr ""
 
@@ -834,43 +834,43 @@ msgid "Only tax ids"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_passport_body
+#: model_terms:ir.ui.view,arch_db:specific_report.report_passport_body
 msgid "Operator"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.deliveryslip_orderref
+#: model_terms:ir.ui.view,arch_db:specific_report.deliveryslip_orderref
 msgid "Order"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_saleorder_document_inherit
+#: model_terms:ir.ui.view,arch_db:specific_report.report_saleorder_document_inherit
 msgid "Order #"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_passport_body
+#: model_terms:ir.ui.view,arch_db:specific_report.report_passport_body
 msgid "Ordered Quantity"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_invoice
+#: model_terms:ir.ui.view,arch_db:specific_report.report_invoice
 msgid "PRO-FORMA"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_picking_body
+#: model_terms:ir.ui.view,arch_db:specific_report.report_picking_body
 msgid "Package:"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_passport
+#: model_terms:ir.ui.view,arch_db:specific_report.report_passport
 msgid "Page:"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.page_number_footer
-#: model:ir.ui.view,arch_db:specific_report.report_invoice
+#: model_terms:ir.ui.view,arch_db:specific_report.page_number_footer
+#: model_terms:ir.ui.view,arch_db:specific_report.report_invoice
 msgid "Page: <span class=\"page\"/> / <span class=\"topage\"/>"
 msgstr ""
 
@@ -895,7 +895,7 @@ msgid "Pharmacist fax content"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_passport_body
+#: model_terms:ir.ui.view,arch_db:specific_report.report_passport_body
 msgid "Picked Quantity"
 msgstr ""
 
@@ -905,7 +905,7 @@ msgid "Picking Inspection"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_passport_body
+#: model_terms:ir.ui.view,arch_db:specific_report.report_passport_body
 msgid "Picking inspection"
 msgstr ""
 
@@ -916,77 +916,77 @@ msgid "Picking zone does not exist anymore %s for picking %s and product %s"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.view_round_instance_form
-#: model:ir.ui.view,arch_db:specific_report.view_round_instance_kanban
+#: model_terms:ir.ui.view,arch_db:specific_report.view_round_instance_form
+#: model_terms:ir.ui.view,arch_db:specific_report.view_round_instance_kanban
 msgid "Print delivery round"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.view_round_instance_customer_tree
-#: model:ir.ui.view,arch_db:specific_report.view_round_instance_form
-#: model:ir.ui.view,arch_db:specific_report.view_round_instance_kanban
+#: model_terms:ir.ui.view,arch_db:specific_report.view_round_instance_customer_tree
+#: model_terms:ir.ui.view,arch_db:specific_report.view_round_instance_form
+#: model_terms:ir.ui.view,arch_db:specific_report.view_round_instance_kanban
 msgid "Print invoices"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.deliveryslip_b2c_customer
-#: model:ir.ui.view,arch_db:specific_report.deliveryslip_with_price
-#: model:ir.ui.view,arch_db:specific_report.deliveryslip_without_price
-#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_entry_register_body
-#: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
-#: model:ir.ui.view,arch_db:specific_report.report_passport_body
+#: model_terms:ir.ui.view,arch_db:specific_report.deliveryslip_b2c_customer
+#: model_terms:ir.ui.view,arch_db:specific_report.deliveryslip_with_price
+#: model_terms:ir.ui.view,arch_db:specific_report.deliveryslip_without_price
+#: model_terms:ir.ui.view,arch_db:specific_report.report_deliveryslip_entry_register_body
+#: model_terms:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
+#: model_terms:ir.ui.view,arch_db:specific_report.report_passport_body
 msgid "Product<br/>reference"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.deliveryslip_b2c_customer
-#: model:ir.ui.view,arch_db:specific_report.deliveryslip_with_price
-#: model:ir.ui.view,arch_db:specific_report.deliveryslip_without_price
-#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_entry_register_body
-#: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
-#: model:ir.ui.view,arch_db:specific_report.report_passport_body
-#: model:ir.ui.view,arch_db:specific_report.report_saleorder_document_pharmacist_supplier
+#: model_terms:ir.ui.view,arch_db:specific_report.deliveryslip_b2c_customer
+#: model_terms:ir.ui.view,arch_db:specific_report.deliveryslip_with_price
+#: model_terms:ir.ui.view,arch_db:specific_report.deliveryslip_without_price
+#: model_terms:ir.ui.view,arch_db:specific_report.report_deliveryslip_entry_register_body
+#: model_terms:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
+#: model_terms:ir.ui.view,arch_db:specific_report.report_passport_body
+#: model_terms:ir.ui.view,arch_db:specific_report.report_saleorder_document_pharmacist_supplier
 msgid "Quantity"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_saleorder_document_inherit
+#: model_terms:ir.ui.view,arch_db:specific_report.report_saleorder_document_inherit
 msgid "Quotation #"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
+#: model_terms:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "Rate"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
+#: model_terms:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
 msgid "Received the:<br/>\n"
 "                            Signature:"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_saleorder_document_pharmacist_supplier
+#: model_terms:ir.ui.view,arch_db:specific_report.report_saleorder_document_pharmacist_supplier
 msgid "Ref"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
+#: model_terms:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "Reference for your payment"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_invoice
+#: model_terms:ir.ui.view,arch_db:specific_report.report_invoice
 msgid "Refund"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_picking_body
+#: model_terms:ir.ui.view,arch_db:specific_report.report_picking_body
 msgid "Resulting Package:"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_passport_body
+#: model_terms:ir.ui.view,arch_db:specific_report.report_passport_body
 msgid "Round"
 msgstr ""
 
@@ -1025,17 +1025,17 @@ msgid "Stock Move"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.deliveryslip_with_price
+#: model_terms:ir.ui.view,arch_db:specific_report.deliveryslip_with_price
 msgid "Subtotal"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
+#: model_terms:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "Subtotal<br/>price"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
+#: model_terms:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "Taxes"
 msgstr ""
 
@@ -1069,17 +1069,17 @@ msgid "Total"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
+#: model_terms:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "Total net value"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
+#: model_terms:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "Total weight"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
+#: model_terms:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "Totals"
 msgstr ""
 
@@ -1089,42 +1089,42 @@ msgid "Transfer"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_passport_body
+#: model_terms:ir.ui.view,arch_db:specific_report.report_passport_body
 msgid "UOP"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
+#: model_terms:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "Unit<br/>price"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.deliveryslip_with_price
+#: model_terms:ir.ui.view,arch_db:specific_report.deliveryslip_with_price
 msgid "VAT"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
+#: model_terms:ir.ui.view,arch_db:specific_report.report_invoice_alcyon
 msgid "VAT Amount"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_saleorder_document_pharmacist_supplier
+#: model_terms:ir.ui.view,arch_db:specific_report.report_saleorder_document_pharmacist_supplier
 msgid "VAT:"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_invoice
+#: model_terms:ir.ui.view,arch_db:specific_report.report_invoice
 msgid "Vendor Bill"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_invoice
+#: model_terms:ir.ui.view,arch_db:specific_report.report_invoice
 msgid "Vendor Refund"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
+#: model_terms:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
 msgid "Weight:<br/>"
 msgstr ""
 
@@ -1134,12 +1134,12 @@ msgid "account.invoice.line.margin"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
+#: model_terms:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
 msgid "boxes"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
+#: model_terms:ir.ui.view,arch_db:specific_report.report_deliveryslip_alcyon
 msgid "items"
 msgstr ""
 
@@ -1169,23 +1169,23 @@ msgid "sale.order.line.margin"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.page_number_footer
-#: model:ir.ui.view,arch_db:specific_report.report_invoice
+#: model_terms:ir.ui.view,arch_db:specific_report.page_number_footer
+#: model_terms:ir.ui.view,arch_db:specific_report.report_invoice
 msgid "|\n"
 "                    <span>Fax:</span>"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.page_number_footer
-#: model:ir.ui.view,arch_db:specific_report.report_invoice
+#: model_terms:ir.ui.view,arch_db:specific_report.page_number_footer
+#: model_terms:ir.ui.view,arch_db:specific_report.report_invoice
 msgid "|\n"
 "                    <span>For commands;</span>\n"
 "                    <span>Phone:</span>"
 msgstr ""
 
 #. module: specific_report
-#: model:ir.ui.view,arch_db:specific_report.page_number_footer
-#: model:ir.ui.view,arch_db:specific_report.report_invoice
+#: model_terms:ir.ui.view,arch_db:specific_report.page_number_footer
+#: model_terms:ir.ui.view,arch_db:specific_report.report_invoice
 msgid "|\n"
 "                    <span>Phone:</span>"
 msgstr ""
