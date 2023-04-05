@@ -44,6 +44,15 @@ class TestPricelistDiscount(TestPricelistDiscountCommon):
 
         self.assertAlmostEqual(432, self.sale.amount_total)
 
+    def test_sale_discount_for_fixed_price_item(self):
+        self.discount_pricelist_id.item_ids.compute_price = "fixed"
+        self.discount_pricelist_id.item_ids.fixed_price = 100
+        self.sol_p2._compute_discount_item_id()
+        self.assertAlmostEqual(200, self.sol_p2.price_unit)
+        self.assertAlmostEqual(10, self.sol_p2.discount2)
+        self.assertAlmostEqual(50, self.sol_p2.discount3)
+        self.assertAlmostEqual(180, self.sol_p2.price_subtotal)
+
     def test_sale_discounts_tax_excluded(self):
         self.tax.amount = 20
 

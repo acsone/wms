@@ -54,7 +54,12 @@ class SaleOrderLine(SaleOrderLineBase):
                     discount3 = rule.percent_price
                 elif line.price_unit:
                     price_unit = line.price_unit
-                    item_price = rule._compute_price(price_unit)
+                    item_price = rule._compute_price(
+                        line.product_id,
+                        line.product_uom_qty,
+                        line.product_uom,
+                        line.order_id.date_order or fields.Date.context_today(line),
+                    )
                     discount3 = (price_unit - item_price) / price_unit * 100
 
             line.discount3 = discount3
