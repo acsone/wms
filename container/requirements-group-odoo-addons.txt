@@ -30,7 +30,7 @@ odoo-addon-geoengine-base-geolocalize @ git+https://github.com/acsone/geospatial
 odoo-addon-geoengine-partner @ git+https://github.com/acsone/geospatial.git@ff4a76d86be5abd88dcb0f84c5def21a70e2262d#subdirectory=setup/geoengine_partner
 odoo-addon-partner-manual-rank==16.0.1.0.1
 odoo-addon-partner-tz==16.0.1.0.0.3
-odoo-addon-product-abc-classification @ git+https://github.com/acsone/product-attribute.git@cc97df93b3f97e947c2ed38cc6232c0a642f65e1#subdirectory=setup/product_abc_classification
+odoo-addon-product-abc-classification @ git+https://github.com/acsone/product-attribute.git@6403c0518b44a1e3b741f94b550120879ae7c3f8#subdirectory=setup/product_abc_classification
 odoo-addon-product-attribute-set @ git+https://github.com/acsone/odoo-pim.git@ec398626b73661f320974cc6ba6210de8ea9c188#subdirectory=setup/product_attribute_set
 odoo-addon-product-dimension==16.0.1.1.0.1
 odoo-addon-product-logistics-uom @ git+https://github.com/acsone/product-attribute.git@1a045c978f092288b0908bda29f0638a579f1f51#subdirectory=setup/product_logistics_uom
