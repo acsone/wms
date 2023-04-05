@@ -3,15 +3,13 @@
 
 from odoo import fields
 
-from odoo.addons.stock.models.stock_picking import Picking
+from odoo.addons.stock.models.stock_picking import PickingType
 from odoo.addons.stock_picking_batch_creation.wizards import make_picking_batch
 
 
 class MakePickingBatch(make_picking_batch.MakePickingBatch):
 
-    picking_type_ids = fields.Many2many[Picking](
-        domain="[('picking_type_code','=','internal')]"
-    )
+    picking_type_ids = fields.Many2many[PickingType](domain="[('code','=','internal')]")
 
     def _compute_device_to_use(self, first_picking_to_cluster):
         partner = first_picking_to_cluster.partner_id
