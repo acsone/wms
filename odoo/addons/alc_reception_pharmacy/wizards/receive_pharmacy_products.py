@@ -91,6 +91,7 @@ class ReceivePharmacyProducts(models.TransientModel):
         if "checksum" in lot._fields:
             lot_vals["checksum"] = "123"
         # END HACK
+        # TODO: ajouter datetime.now() dans les valeurs du create() pour life_date
         lot_id = lot.with_context(default_life_date_allowed=True).create(lot_vals)
         return lot_id
 

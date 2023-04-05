@@ -4,6 +4,7 @@
 from odoo import _, api, fields, models
 
 
+# TODO: Check if needed for inventory flows
 class StockInventory(models.Model):
     _inherit = "stock.inventory"
 

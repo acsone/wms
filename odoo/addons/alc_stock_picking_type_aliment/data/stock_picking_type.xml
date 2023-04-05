@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo noupdate="1">
+    <record id="stock_picking_type_ali" model="stock.picking.type">
+        <field name="name">Pick Aliments</field>
+        <field name="sequence_id" ref="stock.seq_picking_internal" />
+        <field name="sequence" eval="10" />
+        <field name="sequence_code">PICK</field>
+        <field name="warehouse_id" ref="stock.warehouse0" />
+        <field name="default_location_src_id" ref="stock.stock_location_stock" />
+        <field name="default_location_dest_id" ref="stock.stock_location_stock" />
+        <field name="use_create_lots" eval="0" />
+        <field name="use_existing_lots" eval="1" />
+        <field name="color" eval="5" />
+        <field name="code">internal</field>
+        <field name="display_completion_info" eval="1" />
+    </record>
+</odoo>
