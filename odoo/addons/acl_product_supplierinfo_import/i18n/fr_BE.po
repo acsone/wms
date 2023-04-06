@@ -1,0 +1,46 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* acl_product_supplierinfo_import
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-04-06 10:52+0000\n"
+"PO-Revision-Date: 2023-04-06 10:52+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: acl_product_supplierinfo_import
+#: model:ir.model.fields,field_description:acl_product_supplierinfo_import.field_product_supplierinfo__product_cnk_code
+msgid "CNK"
+msgstr ""
+
+#. module: acl_product_supplierinfo_import
+#: model_terms:ir.ui.view,arch_db:acl_product_supplierinfo_import.product_supplierinfo_view_form
+msgid "Price List"
+msgstr "Liste de prix"
+
+#. module: acl_product_supplierinfo_import
+#: model_terms:ir.ui.view,arch_db:acl_product_supplierinfo_import.product_supplierinfo_view_form
+msgid "Purchase"
+msgstr "Achat"
+
+#. module: acl_product_supplierinfo_import
+#: model:ir.model,name:acl_product_supplierinfo_import.model_product_supplierinfo
+msgid "Supplier Pricelist"
+msgstr "Liste de prix du fournisseur"
+
+#. module: acl_product_supplierinfo_import
+#: model_terms:ir.ui.view,arch_db:acl_product_supplierinfo_import.product_supplierinfo_view_form
+msgid "Validity"
+msgstr "Validité"
+
+#. module: acl_product_supplierinfo_import
+#: model_terms:ir.ui.view,arch_db:acl_product_supplierinfo_import.product_supplierinfo_view_form
+msgid "to"
+msgstr "au"

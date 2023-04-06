@@ -2,9 +2,9 @@
    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
    :alt: License: AGPL-3
 
-================
+==========================
 Alc Purchase Order Bo Line
-================
+==========================
 
 With this module, you can now easily identify purchase lines for products that
 do not have a usable quantity available at the moment.

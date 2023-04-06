@@ -40,6 +40,7 @@
         "product_uom_updatable",
         "alc_purchase_order_date_planned",
         "alc_stock_scheduler_filter",
+        "acl_product_supplierinfo_import",
         "alc_product_nb_days_out_of_stock",
         "alc_purchase_discount",
         "alc_purchase_order_bo_line",
