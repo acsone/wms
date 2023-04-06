@@ -67,7 +67,7 @@
                 <filter
           name="bo_orders"
           string="In BO"
-          domain="[('nbr_lines_bo', '&gt;', 0)]"
+          domain="[('has_lines_bo', '=', True)]"
         />
                 <separator />
             </xpath>
