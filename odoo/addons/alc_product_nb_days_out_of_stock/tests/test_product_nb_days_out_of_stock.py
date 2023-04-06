@@ -5,9 +5,7 @@ from datetime import date
 
 from dateutil.relativedelta import relativedelta
 
-from odoo.addons.alc_product_average_sale.tests.common import (
-    TestAverageSaleCommon,
-)
+from odoo.addons.alc_product_average_sale.tests.common import TestAverageSaleCommon
 
 
 class TestProductNbDaysOutOfStock(TestAverageSaleCommon):
@@ -32,17 +30,18 @@ class TestProductNbDaysOutOfStock(TestAverageSaleCommon):
         so = self._create_so(self.product_3, 100)
         so.date_order = date.today() - relativedelta(months=6)
         self.so.flush_model()
-        self.product_3._compute_average_consumption()
+        self.product_3._compute_average_sale()
         self.assertEqual(self.product_3.virtual_available, 187)
         self.assertEqual(self.product_3.average_annual_sale, 8.33)
         self.assertEqual(self.product_3.nb_days_out_of_stock, 51)
+        self.assertEqual(self.product_3.product_tmpl_id.nb_days_out_of_stock, 51)
 
     def test_02(self):
         """Test nb_days_out_of_stock non-available product."""
         so = self._create_so(self.product_1, 100)
         so.date_order = date.today() - relativedelta(months=6)
         self.so.flush_model()
-        self.product_3._compute_average_consumption()
+        self.product_3._compute_average_sale()
         self.assertEqual(self.product_1.virtual_available, -100)
         self.assertEqual(self.product_1.average_annual_sale, 8.33)
         self.assertEqual(self.product_1.nb_days_out_of_stock, -27)
@@ -53,7 +52,7 @@ class TestProductNbDaysOutOfStock(TestAverageSaleCommon):
         so = self._create_so(self.product_3, 100)
         so.date_order = date.today() - relativedelta(months=6)
         self.so.flush_model()
-        self.product_3._compute_average_consumption()
+        self.product_3._compute_average_sale()
         self.assertEqual(self.product_3.virtual_available, 187)
         self.assertEqual(self.product_3.average_annual_sale, 8.33)
         self.assertEqual(self.product_3.nb_days_out_of_stock, 0)
@@ -65,7 +64,8 @@ class TestProductNbDaysOutOfStock(TestAverageSaleCommon):
         self.product_3.copy().product_tmpl_id = self.product_3.product_tmpl_id
         self.assertEqual(self.product_3.product_variant_count, 2)
         self.so.flush_model()
-        self.product_3._compute_average_consumption()
+        self.product_3._compute_average_sale()
         self.assertEqual(self.product_3.virtual_available, 187)
         self.assertEqual(self.product_3.average_annual_sale, 8.33)
-        self.assertEqual(self.product_3.nb_days_out_of_stock, 0)
+        self.assertEqual(self.product_3.nb_days_out_of_stock, 51)
+        self.assertEqual(self.product_3.product_tmpl_id.nb_days_out_of_stock, 0)

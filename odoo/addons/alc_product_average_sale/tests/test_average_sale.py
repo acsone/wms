@@ -2,7 +2,6 @@ from datetime import date
 
 from dateutil.relativedelta import relativedelta
 
-
 from odoo.tools.float_utils import float_compare
 
 from .common import TestAverageSaleCommon
