@@ -112,4 +112,4 @@ class StockLotUpdate(models.TransientModel):
             )
             params = [(self.lot_id.id,)]
 
-            cr.execute(query, params)  # pylint: disable=sql-injection
+            cr.execute(query, params)

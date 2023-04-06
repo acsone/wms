@@ -9,6 +9,7 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "category": "Product",
+    "version": "16.0.1.0.0",
     "depends": [
         "sale",
         "alc_partner_pricelist",

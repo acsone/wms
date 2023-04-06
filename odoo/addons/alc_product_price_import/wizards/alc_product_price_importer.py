@@ -173,9 +173,12 @@ class ProductPriceImporter(models.TransientModel):
                 ):
                     raise ValidationError(
                         _(
-                            f"The default supplier {product_supplierinfo.partner_id.name} "
-                            f"for product {price_info.product.name} is not the same "
-                            f"one as found into the file ({price_info.supplier.name})"
+                            "The default supplier %(product_supplier_name)s "
+                            "for product %(product_name)s is not the same "
+                            "one as found into the file (%(price_supplier_name)s)",
+                            product_supplier_name=product_supplierinfo.partner_id.name,
+                            product_name=price_info.product.name,
+                            price_supplier_name=price_info.supplier.name,
                         )
                     )
                 product_supplierinfo.write(

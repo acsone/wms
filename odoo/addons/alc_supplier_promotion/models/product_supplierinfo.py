@@ -75,8 +75,7 @@ class ProductSupplierInfo(SupplierInfo, MixinPast):
                 rec.ratio_display_name = ""
                 continue
             display_name = _(
-                "For %(ratio_main_product)s products, %(ratio_promotional_product)s free"
-            ) % dict(
+                "For %(ratio_main_product)s products, %(ratio_promotional_product)s free",
                 ratio_main_product=rec.ratio_main_product,
                 ratio_promotional_product=rec.ratio_promotional_product,
             )

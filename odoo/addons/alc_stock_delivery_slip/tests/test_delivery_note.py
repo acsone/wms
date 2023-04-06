@@ -315,7 +315,6 @@ class TestStockDeliveryNote(TransactionCase):
         attachments = self.env["ir.attachment"].search(
             [("res_id", "=", self.picking_csv.id)]
         )
-        # pylint: disable=deprecated-method
         content = base64.decodebytes(attachments.datas)
         for line in content.splitlines():
             self.assertEqual(line[-1:], b";")

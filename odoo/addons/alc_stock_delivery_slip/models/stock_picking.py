@@ -262,7 +262,7 @@ class StockPicking(stock_picking.StockPicking):
                 product = move_line.product_id.with_context(lang=partner.lang)
                 sol = move_line.sale_line_id
                 stock_move_lines = move_line.get_lots()
-                smlines_qty = sum([smline[1] for smline in stock_move_lines])
+                smlines_qty = sum(smline[1] for smline in stock_move_lines)
                 if smlines_qty < move_line.product_qty:
                     # Sometimes get_lots does not return any quants
                     # but the quantity of the stock still has to be

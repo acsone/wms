@@ -46,7 +46,7 @@ class ProductSupplierinfo(SupplierInfo):
         )
         if existing_open_promo:
             raise ValidationError(
-                _("You cannot have two promos " "without start and end date")
+                _("You cannot have two promos without start and end date")
             )
 
     def _check_existing_promo(self):

@@ -7,7 +7,7 @@ import os
 import tempfile
 import zipfile
 
-import shapefile  # pylint: disable=missing-manifest-dependency
+import shapefile
 from shapely.geometry import shape
 from shapely.geometry.multipolygon import MultiPolygon
 from shapely.geometry.polygon import Polygon

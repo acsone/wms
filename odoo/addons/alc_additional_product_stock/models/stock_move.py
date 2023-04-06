@@ -56,7 +56,8 @@ class StockMove(StockMoveBase):
         self.env["procurement.group"].run(procurements)
 
     def _get_additional_product_display_name(self, additional_product):
-        return _("ADDITIONAL PRODUCT: %(ap_name)s (FROM %(m_p_name)s)") % dict(
+        return _(
+            "ADDITIONAL PRODUCT: %(ap_name)s (FROM %(m_p_name)s)",
             ap_name=additional_product.display_name,
             m_p_name=self.product_id.display_name,
         )
