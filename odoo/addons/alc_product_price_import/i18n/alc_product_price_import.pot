@@ -92,6 +92,15 @@ msgstr ""
 #. odoo-python
 #: code:addons/alc_product_price_import/wizards/alc_product_price_importer.py:0
 #, python-format
+msgid ""
+"The default supplier %(product_supplier_name)s for product %(product_name)s "
+"is not the same one as found into the file (%(price_supplier_name)s)"
+msgstr ""
+
+#. module: alc_product_price_import
+#. odoo-python
+#: code:addons/alc_product_price_import/wizards/alc_product_price_importer.py:0
+#, python-format
 msgid "Unknown product identifier %(product_xml_id)s"
 msgstr ""
 

@@ -46,7 +46,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/alc_b2c_partner/models/res_partner.py:0
 #, python-format
-msgid "Manual sale order not allowed for B2C customers (%s)"
+msgid "Manual sale order not allowed for B2C customers (%(name)s)"
 msgstr ""
 
 #. module: alc_b2c_partner
