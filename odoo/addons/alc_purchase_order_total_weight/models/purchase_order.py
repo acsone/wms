@@ -27,12 +27,12 @@ class PurchaseOrder(PurchaseOrderBase):
             }
         )
 
-    @api.depends("order_line")
+    @api.depends("order_line", "order_line.product_id", "order_line.product_qty")
     def _compute_total_weight(self):
         for rec in self:
             if not rec.order_line:
                 rec.total_weight = 0
                 continue
             rec.total_weight = sum(
-                [line.product_id.weight * line.product_qty for line in rec.order_line]
+                line.product_id.weight * line.product_qty for line in rec.order_line
             )
