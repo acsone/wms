@@ -2,6 +2,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo import api, fields
+from odoo.osv.expression import NEGATIVE_TERM_OPERATORS
 
 from odoo.addons.purchase.models.purchase import PurchaseOrder as PurchaseOrderBase
 
@@ -23,7 +24,11 @@ class PurchaseOrder(PurchaseOrderBase):
     def _search_has_lines_bo(self, operator, value):
         draft_orders = self.search([("state", "=", "draft")])
         bo_orders = draft_orders.filtered_domain([("has_lines_bo", operator, value)])
-        return ["|", ("id", "in", bo_orders.ids), ("state", "!=", "draft")]
+        if (operator in NEGATIVE_TERM_OPERATORS and value) or (
+            operator not in NEGATIVE_TERM_OPERATORS and not value
+        ):
+            return ["|", ("id", "in", bo_orders.ids), ("state", "!=", "draft")]
+        return [("id", "in", bo_orders.ids)]
 
     @api.depends("order_line")
     def _compute_nbr_lines(self):
