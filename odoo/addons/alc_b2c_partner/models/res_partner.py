@@ -30,8 +30,10 @@ class ResPartner(ResPartnerBase):
         )
         if errored:
             raise ValidationError(
-                _("Manual sale order not allowed for B2C customers (%s)")
-                % errored.mapped("name")
+                _(
+                    "Manual sale order not allowed for B2C customers (%(name)s)",
+                    name=errored.mapped("name"),
+                )
             )
 
     @api.depends("category_id")
