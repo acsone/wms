@@ -1,21 +1,10 @@
 # Copyright 2023 ACSONE SA/NV
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-import math
-from datetime import timedelta
 
 from odoo.addons.stock_picking_start.models.stock_picking import (
     StockPicking as StockPickingBase,
 )
-
-
-def float_to_time(hours_minutes: float) -> (int, int):
-    hour = math.floor(hours_minutes)
-    minute = round((hours_minutes % 1) * 60)
-    if minute == 60:
-        minute = 0
-        hour += 1
-    return hour, minute
 
 
 class StockPicking(StockPickingBase):
@@ -34,13 +23,9 @@ class StockPicking(StockPickingBase):
             "auto_allow_pick"
         )
         for channel, picking_type in channel_picking_type_todo:
-            if channel.auto_allow_pick_after > 0:
-                hours, minutes = float_to_time(channel.auto_allow_pick_after)
-                channel.with_delay(
-                    eta=timedelta(hours=hours, minutes=minutes)
-                )._set_pick_allowed(pick_allowed=True, picking_type=picking_type)
-            else:
-                channel._set_pick_allowed(pick_allowed=True, picking_type=picking_type)
+            channel.with_delay(eta=channel.auto_allow_pick_datetime)._set_pick_allowed(
+                pick_allowed=True, picking_type=picking_type
+            )
         return res
 
     def _get_release_channel_auto_allow_pick_needed(self, action):

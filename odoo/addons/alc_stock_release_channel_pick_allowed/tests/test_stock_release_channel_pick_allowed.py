@@ -1,7 +1,9 @@
 # Copyright 2023 ACSONE SA/NV
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from datetime import timedelta
+from datetime import datetime
+
+from freezegun import freeze_time
 
 from odoo.addons.queue_job.tests.common import trap_jobs
 from odoo.addons.stock_release_channel.tests.common import ChannelReleaseCase
@@ -27,7 +29,12 @@ class TestStockReleaseChannelPickAllowed(ChannelReleaseCase):
         cls.channel.pick_allowed = True
         cls.channel.auto_disallow_pick = True
         cls.channel.auto_allow_pick = True
-        cls.channel.auto_allow_pick_after = 0
+        cls.channel.leave_planned_time = 12
+        cls.channel.auto_allow_pick_time_before_leave = 0.5
+        cls.backend = cls.env.ref(
+            "shipment_advice_planner_toursolver.toursolver_backend_default"
+        )
+        cls.backend.loading_duration = 180
 
     def test_00(self):
         """
@@ -65,27 +72,36 @@ class TestStockReleaseChannelPickAllowed(ChannelReleaseCase):
         self.picking.action_start()
         self.assertTrue(self.channel.pick_allowed)
 
+    @freeze_time("2023-04-01 12:00:00")
     def test_03(self):
         """
         The picking type of the done pickings is not set to be managed individually.
 
-        -> test that the channel allow pick after all pickings are done
+        -> test that a job is planned to allow pick
         """
         self.channel.pick_allowed = False
         self.assertFalse(self.channel.pick_allowed)
         _do_picking(self.picking)
         self.assertEqual(self.picking.state, "done")
         self.assertFalse(self.channel.pick_allowed)
-        _do_picking(self.picking2)
-        self.assertEqual(self.picking2.state, "done")
-        self.assertTrue(self.channel.pick_allowed)
+        with trap_jobs() as trap:
+            _do_picking(self.picking2)
+            self.assertEqual(self.picking2.state, "done")
+            trap.assert_enqueued_job(
+                self.env["stock.release.channel"]._set_pick_allowed,
+                kwargs=dict(pick_allowed=True, picking_type=None),
+                properties=dict(eta=datetime(2023, 4, 2, 6, 30)),
+            )
+            self.assertFalse(self.channel.pick_allowed)
+            trap.perform_enqueued_jobs()
+            self.assertTrue(self.channel.pick_allowed)
 
+    @freeze_time("2023-04-01 12:00:00")
     def test_04(self):
         """
         The picking type of the done pickings is set to be managed individually.
 
-        -> test that the channel allow pick for the given picking type after all
-        pickings are done
+        -> test that a job to allow pick for the given picking type is planned
         """
         self.channel.pick_allowed = False
         picking_type = self.picking.picking_type_id
@@ -96,10 +112,20 @@ class TestStockReleaseChannelPickAllowed(ChannelReleaseCase):
         self.assertEqual(self.picking.state, "done")
         self.assertFalse(self.channel._get_picking_type_pick_allowed(picking_type.id))
         self.assertFalse(self.channel.pick_allowed)
-        _do_picking(self.picking2)
-        self.assertEqual(self.picking2.state, "done")
-        self.assertTrue(self.channel._get_picking_type_pick_allowed(picking_type.id))
-        self.assertFalse(self.channel.pick_allowed)
+        with trap_jobs() as trap:
+            _do_picking(self.picking2)
+            self.assertEqual(self.picking2.state, "done")
+            trap.assert_enqueued_job(
+                self.env["stock.release.channel"]._set_pick_allowed,
+                kwargs=dict(pick_allowed=True, picking_type=picking_type),
+                properties=dict(eta=datetime(2023, 4, 2, 6, 30)),
+            )
+            self.assertFalse(self.channel.pick_allowed)
+            trap.perform_enqueued_jobs()
+            self.assertTrue(
+                self.channel._get_picking_type_pick_allowed(picking_type.id)
+            )
+            self.assertFalse(self.channel.pick_allowed)
 
     def test_05(self):
         """
@@ -116,40 +142,28 @@ class TestStockReleaseChannelPickAllowed(ChannelReleaseCase):
         self.assertEqual(self.picking2.state, "done")
         self.assertFalse(self.channel.pick_allowed)
 
+    @freeze_time("2023-04-01 12:00:00")
     def test_06(self):
-        """Test auto allow pick after 30 minutes."""
-        self.channel.pick_allowed = False
-        self.channel.auto_allow_pick_after = 0.5
-        _do_picking(self.picking)
-        with trap_jobs() as trap:
-            _do_picking(self.picking2)
-            trap.assert_jobs_count(
-                1, only=self.env["stock.release.channel"]._set_pick_allowed
-            )
-            trap.assert_enqueued_job(
-                self.env["stock.release.channel"]._set_pick_allowed,
-                kwargs=dict(pick_allowed=True, picking_type=None),
-                properties=dict(eta=timedelta(minutes=30)),
-            )
-            self.assertFalse(self.channel.pick_allowed)
-            trap.perform_enqueued_jobs()
-            self.assertTrue(self.channel.pick_allowed)
-
-    def test_07(self):
-        """Test auto allow pick after one hour and 30 minutes."""
-        self.channel.pick_allowed = False
-        self.channel.auto_allow_pick_after = 1.5
-        _do_picking(self.picking)
-        with trap_jobs() as trap:
-            _do_picking(self.picking2)
-            trap.assert_jobs_count(
-                1, only=self.env["stock.release.channel"]._set_pick_allowed
-            )
-            trap.assert_enqueued_job(
-                self.env["stock.release.channel"]._set_pick_allowed,
-                kwargs=dict(pick_allowed=True, picking_type=None),
-                properties=dict(eta=timedelta(hours=1, minutes=30)),
-            )
-            self.assertFalse(self.channel.pick_allowed)
-            trap.perform_enqueued_jobs()
-            self.assertTrue(self.channel.pick_allowed)
+        """Test auto_allow_pick_datetime."""
+        self.assertEqual(
+            self.channel.auto_allow_pick_datetime, datetime(2023, 4, 2, 6, 30)
+        )
+        self.channel.auto_allow_pick_time_before_leave = 1.5
+        self.assertEqual(
+            self.channel.auto_allow_pick_datetime, datetime(2023, 4, 2, 5, 30)
+        )
+        self.channel.leave_planned_time = 14
+        self.channel.auto_allow_pick_time_before_leave = 0
+        self.assertEqual(
+            self.channel.auto_allow_pick_datetime, datetime(2023, 4, 2, 9, 0)
+        )
+        self.backend.loading_duration = 120
+        self.channel.leave_planned_time = 16
+        self.assertEqual(
+            self.channel.auto_allow_pick_datetime, datetime(2023, 4, 2, 12, 0)
+        )
+        self.env.user.tz = "UTC"
+        self.channel.leave_planned_time = 18
+        self.assertEqual(
+            self.channel.auto_allow_pick_datetime, datetime(2023, 4, 1, 16, 0)
+        )

@@ -12,27 +12,17 @@
         <field name="arch" type="xml">
 
             <xpath expr="//group[@name='options']" position="inside">
-                <label for="auto_allow_pick" />
-                <div>
-                    <field name="auto_allow_pick" class="oe_inline" no_label="1" />
-                    <label
-            for="auto_allow_pick_after"
-            string="After"
-            class="oe_inline text-900"
-            attrs="{'invisible': [('auto_allow_pick', '=', False)]}"
-          />
-                    <field
-            name="auto_allow_pick_after"
-            class="oe_inline"
-            no_label="1"
-            widget="float_time"
-            attrs="{'invisible': [('auto_allow_pick', '=', False)]}"
-          />
-                    <span
-            attrs="{'invisible': [('auto_allow_pick', '=', False)]}"
-          >(hours:minutes)</span>
-                </div>
                 <field name="auto_disallow_pick" />
+                <field name="auto_allow_pick" class="oe_inline" no_label="1" />
+                <field
+          name="auto_allow_pick_time_before_leave"
+          widget="float_time"
+          attrs="{'invisible': [('auto_allow_pick', '=', False)]}"
+        />
+                <field
+          name="auto_allow_pick_datetime"
+          attrs="{'invisible': [('auto_allow_pick', '=', False)]}"
+        />
             </xpath>
         </field>
     </record>

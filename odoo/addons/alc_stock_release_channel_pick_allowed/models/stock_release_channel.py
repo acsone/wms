@@ -1,11 +1,19 @@
 # Copyright 2023 ACSONE SA/NV
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+from datetime import date, datetime, time, timedelta
 
-from odoo import fields
+import pytz
 
+from odoo import api, fields
+
+from odoo.addons.alc_stock_release_channel_shipment_advice_toursolver.models import (
+    stock_release_channel,
+)
 from odoo.addons.stock_release_channel.models.stock_release_channel import (
     StockReleaseChannel as StockReleaseChannelBase,
 )
+
+float_to_time = stock_release_channel.float_to_time
 
 
 class StockReleaseChannel(StockReleaseChannelBase):
@@ -20,9 +28,40 @@ class StockReleaseChannel(StockReleaseChannelBase):
         string="Allow picking automatically",
         help="Allow picking automatically after all ongoing transfers are done",
     )
-    auto_allow_pick_after = fields.Float(
-        "Allow picking automatically after", default=0.5
+    auto_allow_pick_time_before_leave = fields.Float(
+        "Duration before shipment leave to allow picking automatically", default=0.5
     )
+    auto_allow_pick_datetime = fields.Datetime(
+        "Allow picking automatically at", compute="_compute_auto_allow_pick_datetime"
+    )
+
+    @api.depends(
+        "planned_start_loading_time",
+        "leave_planned_datetime",
+        "auto_allow_pick_time_before_leave",
+    )
+    def _compute_auto_allow_pick_datetime(self):
+        datetime_now = datetime.now()
+        user_tz = pytz.timezone(self.env.user.tz)
+        utc_tz = pytz.timezone("UTC")
+        for rec in self:
+            hours, minutes = float_to_time(rec.planned_start_loading_time)
+            planned_start_loading_time = time(hours, minutes)
+            planned_start_loading_datetime = datetime.combine(
+                date.today(), planned_start_loading_time
+            )
+            planned_start_loading_datetime = (
+                user_tz.localize(planned_start_loading_datetime)
+                .astimezone(utc_tz)
+                .replace(tzinfo=None)
+            )
+            if planned_start_loading_datetime <= datetime_now:
+                planned_start_loading_datetime += timedelta(days=1)
+            hours, minutes = float_to_time(rec.auto_allow_pick_time_before_leave)
+            auto_allow_pick_timedelta = timedelta(hours=hours, minutes=minutes)
+            rec.auto_allow_pick_datetime = (
+                planned_start_loading_datetime - auto_allow_pick_timedelta
+            )
 
     def button_toggle_pick_allowed(self):
         if self.env.context.get("picking_type_id"):

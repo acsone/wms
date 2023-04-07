@@ -10,7 +10,12 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
-    "depends": ["stock_release_channel", "stock_picking_start", "queue_job"],
+    "depends": [
+        "stock_release_channel",
+        "stock_picking_start",
+        "queue_job",
+        "alc_stock_release_channel_shipment_advice_toursolver",
+    ],
     "data": [
         "data/queue_job_function.xml",
         "views/stock_release_channel.xml",
