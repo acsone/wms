@@ -237,7 +237,8 @@ class StockPicking(models.Model):
         lines = []
         partner = self.partner_id
         # The two header lines
-        lines.append([self.id, partner.email or "", ""])
+        picking_number = self.name.split("/")[-1]
+        lines.append([picking_number, partner.email or "", ""])
         lines.append(
             [
                 u"{} {}".format(
