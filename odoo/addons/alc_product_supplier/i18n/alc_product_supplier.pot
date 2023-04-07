@@ -24,8 +24,28 @@ msgid "Product"
 msgstr ""
 
 #. module: alc_product_supplier
+#: model:ir.model.fields,help:alc_product_supplier.field_product_product__vendor_product_code
+#: model:ir.model.fields,help:alc_product_supplier.field_product_template__vendor_product_code
+msgid ""
+"This vendor's product code will be used when printing a request for "
+"quotation. Keep empty to use the internal one."
+msgstr ""
+
+#. module: alc_product_supplier
 #: model:ir.model.fields,field_description:alc_product_supplier.field_product_product__supplier_id
 #: model:ir.model.fields,field_description:alc_product_supplier.field_product_template__supplier_id
 #: model_terms:ir.ui.view,arch_db:alc_product_supplier.product_template_search_view
 msgid "Vendor"
+msgstr ""
+
+#. module: alc_product_supplier
+#: model:ir.model.fields,field_description:alc_product_supplier.field_product_product__supplier_rel_id
+#: model:ir.model.fields,field_description:alc_product_supplier.field_product_template__supplier_rel_id
+msgid "Vendor ID"
+msgstr ""
+
+#. module: alc_product_supplier
+#: model:ir.model.fields,field_description:alc_product_supplier.field_product_product__vendor_product_code
+#: model:ir.model.fields,field_description:alc_product_supplier.field_product_template__vendor_product_code
+msgid "Vendor Product Code"
 msgstr ""

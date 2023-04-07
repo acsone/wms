@@ -79,11 +79,6 @@ msgid "Promotion"
 msgstr ""
 
 #. module: alc_supplier_promotion
-#: model:ir.model.fields,field_description:alc_supplier_promotion.field_product_supplierinfo__discount_purchase
-msgid "Purchase discount (%)"
-msgstr ""
-
-#. module: alc_supplier_promotion
 #: model:ir.model.fields,field_description:alc_supplier_promotion.field_product_supplierinfo__min_qty
 msgid "Purchase minimum qty"
 msgstr ""
