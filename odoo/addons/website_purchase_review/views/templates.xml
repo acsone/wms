@@ -290,7 +290,7 @@
                           </td>
                         </tr>
                         <tr>
-                          <td>Stock coverage (days)</td>
+                          <td>Stock coverage (weeks)</td>
                           <td>
                             <strong>
                               <t
@@ -298,8 +298,8 @@
                               >
                               <span
                                   id="stock_coverage"
-                                  t-esc="round(int(current_product.advised_qty + product_qty + current_product.virtual_available) /
-                                  (current_product.average_three_months_consumption / 90.0), 2)"
+                                  t-esc="round(int(current_product.advised_qty + product_qty + current_product.qty_available) /
+                                  (current_product.average_three_months_consumption / 13.0), 2)"
                                 />
                               </t>
                               <t t-else="">
