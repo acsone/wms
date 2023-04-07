@@ -38,16 +38,21 @@ class TestProductPriceImport(TransactionCase):
         )
 
         cls.supplierinfo = cls.env["product.supplierinfo"].create(
-            {"partner_id": cls.supplier.id, "price": 10, "product_code": "SUP01"}
+            {
+                "partner_id": cls.supplier.id,
+                "price": 10,
+                "product_code": "SUP01",
+                "product_tmpl_id": cls.product.product_tmpl_id.id,
+            }
         )
         cls.supplierinfo_promo_active = cls.env["product.supplierinfo"].create(
             {
                 "partner_id": cls.supplier.id,
                 "price": 10,
                 "product_code": "SUP01",
-                # "discount_purchase": 10,
                 "date_start": cls.yesterday,
                 "date_end": cls.tomorrow,
+                "product_tmpl_id": cls.product.product_tmpl_id.id,
             }
         )
         cls.supplierinfo_promo_future = cls.env["product.supplierinfo"].create(
@@ -56,9 +61,9 @@ class TestProductPriceImport(TransactionCase):
                 "price": 10,
                 "min_qty": 20,
                 "product_code": "SUP01",
-                # "discount_purchase": 20,
                 "date_start": cls.tomorrow,
                 "date_end": cls.tomorrow,
+                "product_tmpl_id": cls.product.product_tmpl_id.id,
             }
         )
         cls.supplierinfo_promo_obsolete = cls.env["product.supplierinfo"].create(
@@ -67,12 +72,11 @@ class TestProductPriceImport(TransactionCase):
                 "price": 10,
                 "min_qty": 20,
                 "product_code": "SUP01",
-                # "discount_purchase": 20,
                 "date_start": cls.pastday,
                 "date_end": cls.pastday,
+                "product_tmpl_id": cls.product.product_tmpl_id.id,
             }
         )
-        cls.product.write({"seller_ids": [(6, 0, cls.supplierinfo.ids)]})
 
         cls.pricelist_pb2 = cls.env.ref(
             "alc_product_pricelist_data.product_pricelist_pb2"

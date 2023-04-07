@@ -367,7 +367,6 @@ class TestPricelistDiscount(TestPricelistDiscountCommon):
                 "date_start": fields.Date.from_string("2018-01-01"),
                 "date_end": fields.Date.from_string("2018-03-31"),
                 "discount_sale": 10,
-                "discount_purchase": 15,
                 "price": 100,
             }
         )
@@ -380,7 +379,6 @@ class TestPricelistDiscount(TestPricelistDiscountCommon):
                 "date_end": fields.Date.from_string("2018-03-31"),
                 "min_qty": 100,
                 "discount_sale": 10,
-                "discount_purchase": 20,
                 "price": 100,
             }
         )
@@ -393,7 +391,6 @@ class TestPricelistDiscount(TestPricelistDiscountCommon):
                 "date_start": fields.Date.from_string("2018-04-01"),
                 "date_end": fields.Date.from_string("2018-06-30"),
                 "discount_sale": 11,
-                "discount_purchase": 13,
                 "price": 100,
             }
         )
@@ -407,7 +404,6 @@ class TestPricelistDiscount(TestPricelistDiscountCommon):
                 "date_end": fields.Date.from_string("2018-06-30"),
                 "min_qty_sale": 25,
                 "discount_sale": 11.5,
-                "discount_purchase": 13,
                 "price": 100,
             }
         )
@@ -421,7 +417,6 @@ class TestPricelistDiscount(TestPricelistDiscountCommon):
                 "date_end": fields.Date.from_string("2018-06-30"),
                 "min_qty_sale": 50,
                 "discount_sale": 14,
-                "discount_purchase": 13,
                 "price": 100,
             }
         )
@@ -434,7 +429,6 @@ class TestPricelistDiscount(TestPricelistDiscountCommon):
                 "date_start": fields.Date.from_string("2018-08-01"),
                 "date_end": fields.Date.from_string("2018-12-31"),
                 "discount_sale": 8,
-                "discount_purchase": 10,
                 "price": 100,
             }
         )

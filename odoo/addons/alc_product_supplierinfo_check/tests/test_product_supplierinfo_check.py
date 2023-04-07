@@ -11,10 +11,14 @@ class PricelistDiscountCase(TransactionCase):
         super().setUpClass()
         cls.category = cls.env.ref("product.product_category_5")
         cls.supplier = cls.env.ref("base.res_partner_12")
-        cls.sinfo = cls.env["product.supplierinfo"].create(
-            {"partner_id": cls.supplier.id, "discount_sale": 10}
-        )
         cls.product = cls.env["product.product"].create({"name": "Unittest P1"})
+        cls.sinfo = cls.env["product.supplierinfo"].create(
+            {
+                "partner_id": cls.supplier.id,
+                "discount_sale": 10,
+                "product_tmpl_id": cls.product.product_tmpl_id.id,
+            }
+        )
         cls.sinfo_model = cls.env["product.supplierinfo"]
         cls.env["ir.config_parameter"].set_param(
             "alc_product_supplierinfo_check.check_alcyon_constraints_on_supplierinfo",
@@ -73,7 +77,6 @@ class PricelistDiscountCase(TransactionCase):
                 "date_start": "2018-01-01",
                 "date_end": "2018-03-31",
                 "discount_sale": 10,
-                "discount_purchase": 15,
             }
         )
 
@@ -85,7 +88,6 @@ class PricelistDiscountCase(TransactionCase):
                 "date_start": "2018-08-01",
                 "date_end": "2018-12-31",
                 "discount_sale": 10,
-                "discount_purchase": 15,
             }
         )
 
@@ -97,7 +99,6 @@ class PricelistDiscountCase(TransactionCase):
                 "date_start": "2018-04-01",
                 "date_end": "2018-06-30",
                 "discount_sale": 10,
-                "discount_purchase": 15,
             }
         )
 
@@ -146,7 +147,6 @@ class PricelistDiscountCase(TransactionCase):
                 "date_end": "2018-03-31",
                 "min_qty": 100,
                 "discount_sale": 10,
-                "discount_purchase": 20,
             }
         )
 
@@ -160,7 +160,6 @@ class PricelistDiscountCase(TransactionCase):
                 "date_end": "2018-06-30",
                 "min_qty_sale": 25,
                 "discount_sale": 11.5,
-                "discount_purchase": 15,
             }
         )
 
@@ -174,7 +173,6 @@ class PricelistDiscountCase(TransactionCase):
                 "date_end": "2018-06-30",
                 "min_qty_sale": 50,
                 "discount_sale": 14,
-                "discount_purchase": 15,
             }
         )
 
@@ -188,7 +186,6 @@ class PricelistDiscountCase(TransactionCase):
                     "date_end": "2018-06-30",
                     "min_qty_sale": 50,
                     "discount_sale": 14,
-                    "discount_purchase": 15,
                 }
             )
 
@@ -212,7 +209,6 @@ class PricelistDiscountCase(TransactionCase):
                 "date_end": "2018-06-30",
                 "min_qty_sale": 50,
                 "discount_sale": 14,
-                "discount_purchase": 15,
             }
         )
         records = self.sinfo_model.search([])

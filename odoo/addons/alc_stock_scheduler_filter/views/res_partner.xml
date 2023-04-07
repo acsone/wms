@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+  <record id="view_partner_form" model="ir.ui.view">
+    <field name="name">view.partner.form</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+
+    <field name="model">res.partner</field>
+    <field name="priority">20</field>
+    <field name="arch" type="xml">
+      <xpath expr="//group[@name='purchase']" position="inside">
+        <separator string="Days for management" />
+        <table class="table table-bordered text-center table-condensed" colspan="2">
+          <tr>
+            <th>
+              <label class="o_form_label" for="is_manage_day_1" />
+            </th>
+            <th>
+              <label class="o_form_label" for="is_manage_day_2" />
+            </th>
+            <th>
+              <label class="o_form_label" for="is_manage_day_3" />
+            </th>
+            <th>
+              <label class="o_form_label" for="is_manage_day_4" />
+            </th>
+            <th>
+              <label class="o_form_label" for="is_manage_day_5" />
+            </th>
+            <th>
+              <label class="o_form_label" for="is_manage_day_6" />
+            </th>
+            <th>
+              <label class="o_form_label" for="is_manage_day_7" />
+            </th>
+          </tr>
+          <tr>
+            <td>
+              <field name="is_manage_day_1" nolabel="1" />
+            </td>
+            <td>
+              <field name="is_manage_day_2" nolabel="1" />
+            </td>
+            <td>
+              <field name="is_manage_day_3" nolabel="1" />
+            </td>
+            <td>
+              <field name="is_manage_day_4" nolabel="1" />
+            </td>
+            <td>
+              <field name="is_manage_day_5" nolabel="1" />
+            </td>
+            <td>
+              <field name="is_manage_day_6" nolabel="1" />
+            </td>
+            <td>
+              <field name="is_manage_day_7" nolabel="1" />
+            </td>
+          </tr>
+        </table>
+      </xpath>
+    </field>
+  </record>
+</odoo>

@@ -1,0 +1,52 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* alc_purchase_discount
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-04-05 20:02+0000\n"
+"PO-Revision-Date: 2023-04-05 20:02+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_purchase_discount
+#: model:ir.model,name:alc_purchase_discount.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: alc_purchase_discount
+#: model:ir.model.fields,field_description:alc_purchase_discount.field_purchase_order_line__discount
+msgid "Discount (%)"
+msgstr "Remise (%)"
+
+#. module: alc_purchase_discount
+#: model:ir.model.fields,field_description:alc_purchase_discount.field_purchase_order_line__discount_global
+msgid "Discount Global"
+msgstr "Ristourne globale"
+
+#. module: alc_purchase_discount
+#: model:ir.model.fields,field_description:alc_purchase_discount.field_purchase_order_line__promotion_supplier
+msgid "Promotion Supplier"
+msgstr "Remise d'achat"
+
+#. module: alc_purchase_discount
+#: model:ir.model,name:alc_purchase_discount.model_purchase_order
+msgid "Purchase Order"
+msgstr "Bon de commande"
+
+#. module: alc_purchase_discount
+#: model:ir.model,name:alc_purchase_discount.model_purchase_order_line
+msgid "Purchase Order Line"
+msgstr "Ligne de commande d'achat"
+
+#. module: alc_purchase_discount
+#: model:ir.model.fields,field_description:alc_purchase_discount.field_res_partner__supplier_discount
+#: model:ir.model.fields,field_description:alc_purchase_discount.field_res_users__supplier_discount
+msgid "Supplier discount %"
+msgstr "Ristourne globale %"

@@ -5,9 +5,6 @@
     <field name="inherit_id" ref="product.product_supplierinfo_form_view" />
     <field name="priority">20</field>
     <field name="arch" type="xml">
-      <xpath expr="//group[field[@name='product_tmpl_id']]" position="inside">
-        <field name="discount_purchase" />
-      </xpath>
       <xpath expr="//group[field[@name='product_tmpl_id']]" position="after">
         <group string="Sale" name="sale">
           <field
@@ -54,7 +51,6 @@
         <attribute name="widget">integer</attribute>
       </xpath>
       <field name="date_start" position="before">
-        <field name="discount_purchase" />
         <field name="min_qty_sale" widget="integer" />
         <field name="discount_sale" />
       </field>

@@ -26,6 +26,7 @@
         "sale_channel",
         # OCA/product-attribute
         "product_manufacturer",
+        "product_state",
         # OCA/odoo-pim
         "attribute_set",
         "product_attribute_set",

@@ -10,10 +10,14 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
+        # Odoo
         "purchase",
+        # OCA
         "purchase_delivery_split_date",
         "purchase_stock_packaging",
         "purchase_cancel_reason",
+        "purchase_discount",
+        # ALC
         "alc_additional_product_purchase",
         "alc_incoming_product_supplier_filter",
         "alc_purchase_announced_delivery_date",
@@ -34,5 +38,15 @@
         "alc_stock_receive_lot_product_info",
         "partner_manual_rank",
         "product_uom_updatable",
+        "alc_purchase_order_date_planned",
+        "alc_stock_scheduler_filter",
+        "acl_product_supplierinfo_import",
+        "alc_product_nb_days_out_of_stock",
+        "alc_purchase_discount",
+        "alc_purchase_order_bo_line",
+        "alc_purchase_security",
+        "alc_purchase_order_total_weight",
+        "alc_purchase_order_readonly",
+        "alc_purchase_order_cancel_email_template",
     ],
 }

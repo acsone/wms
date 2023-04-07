@@ -29,20 +29,18 @@ class TestPricelistDiscountCommon(TransactionCase):
 
         cls.supplier = cls.env.ref("base.res_partner_12")
 
-        cls.supplierinfo1 = cls.env["product.supplierinfo"].create(
-            {"partner_id": cls.supplier.id, "discount_sale": 10}
-        )
-
         cls.p1 = cls.env["product.product"].create(
             {
                 "name": "Unittest P1",
                 "taxes_id": [Command.set([cls.tax.id])],
-                "seller_ids": [Command.set([cls.supplierinfo1.id])],
             }
         )
-
-        cls.supplierinfo2 = cls.env["product.supplierinfo"].create(
-            {"partner_id": cls.supplier.id, "discount_sale": 10}
+        cls.supplierinfo1 = cls.env["product.supplierinfo"].create(
+            {
+                "partner_id": cls.supplier.id,
+                "discount_sale": 10,
+                "product_tmpl_id": cls.p1.product_tmpl_id.id,
+            }
         )
 
         cls.p2 = cls.env["product.product"].create(
@@ -50,7 +48,13 @@ class TestPricelistDiscountCommon(TransactionCase):
                 "name": "Unittest P2",
                 "categ_id": cls.category.id,
                 "taxes_id": [Command.set([cls.tax.id])],
-                "seller_ids": [Command.set([cls.supplierinfo2.id])],
+            }
+        )
+        cls.supplierinfo2 = cls.env["product.supplierinfo"].create(
+            {
+                "partner_id": cls.supplier.id,
+                "discount_sale": 10,
+                "product_tmpl_id": cls.p2.product_tmpl_id.id,
             }
         )
 
@@ -63,6 +67,7 @@ class TestPricelistDiscountCommon(TransactionCase):
                         {
                             "applied_on": "0_product_variant",
                             "product_id": cls.p1.id,
+                            "product_tmpl_id": cls.p1.product_tmpl_id.id,
                             "compute_price": "fixed",
                             "fixed_price": 100,
                         },
@@ -71,6 +76,7 @@ class TestPricelistDiscountCommon(TransactionCase):
                         {
                             "applied_on": "0_product_variant",
                             "product_id": cls.p2.id,
+                            "product_tmpl_id": cls.p2.product_tmpl_id.id,
                             "compute_price": "fixed",
                             "fixed_price": 200,
                         },

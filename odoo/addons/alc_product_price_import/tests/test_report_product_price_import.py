@@ -28,10 +28,13 @@ class TestReportProductPriceImport(TransactionCase):
         )
 
         cls.supplierinfo = cls.env["product.supplierinfo"].create(
-            {"partner_id": cls.supplier.id, "price": 10, "product_code": "SUP01"}
+            {
+                "partner_id": cls.supplier.id,
+                "price": 10,
+                "product_code": "SUP01",
+                "product_tmpl_id": cls.product.product_tmpl_id.id,
+            }
         )
-        cls.product.write({"seller_ids": [(6, 0, cls.supplierinfo.ids)]})
-
         cls.pricelist_pb2 = cls.env.ref(
             "alc_product_pricelist_data.product_pricelist_pb2"
         )

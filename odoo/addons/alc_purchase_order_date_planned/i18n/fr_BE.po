@@ -1,0 +1,82 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* alc_purchase_order_date_planned
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-04-05 19:51+0000\n"
+"PO-Revision-Date: 2023-04-05 19:51+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_purchase_order_date_planned
+#: model:ir.model,name:alc_purchase_order_date_planned.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: alc_purchase_order_date_planned
+#: model:ir.model.fields,field_description:alc_purchase_order_date_planned.field_product_supplierinfo__delay
+msgid "Delivery Lead Time"
+msgstr "Délai de livraison"
+
+#. module: alc_purchase_order_date_planned
+#: model:ir.model.fields,help:alc_purchase_order_date_planned.field_purchase_order_line__date_planned
+msgid ""
+"Delivery date expected from vendor. This date respectively defaults to "
+"vendor pricelist lead time then today's date."
+msgstr ""
+"Date de livraison prévue du fournisseur. Cette date correspond par défaut au"
+" délai de livraison du fournisseur, puis à la date du jour."
+
+#. module: alc_purchase_order_date_planned
+#: model:ir.model.fields,help:alc_purchase_order_date_planned.field_purchase_order__date_planned
+msgid ""
+"Delivery date promised by vendor. This date is used to determine expected "
+"arrival of products."
+msgstr ""
+"Date de livraison promise par le fournisseur. Cette date est utilisée pour "
+"déterminer la date de réception prévue des produits."
+
+#. module: alc_purchase_order_date_planned
+#: model:ir.model.fields,field_description:alc_purchase_order_date_planned.field_res_partner__delivery_lead_time
+#: model:ir.model.fields,field_description:alc_purchase_order_date_planned.field_res_users__delivery_lead_time
+msgid "Delivery lead time"
+msgstr "Délai de livraison"
+
+#. module: alc_purchase_order_date_planned
+#: model:ir.model.fields,field_description:alc_purchase_order_date_planned.field_purchase_order__date_planned
+#: model:ir.model.fields,field_description:alc_purchase_order_date_planned.field_purchase_order_line__date_planned
+msgid "Expected Arrival"
+msgstr "Arrivée prévue"
+
+#. module: alc_purchase_order_date_planned
+#: model:ir.model.fields,help:alc_purchase_order_date_planned.field_product_supplierinfo__delay
+msgid ""
+"Lead time in days between the confirmation of the purchase order and the "
+"receipt of the products in your warehouse. Used by the scheduler for "
+"automatic computation of the purchase order planning."
+msgstr ""
+"Délai (en jours) entre la confirmation du bon de commande et la réception "
+"des produits dans votre entrepôt. Utilisé par le planificateur pour calculer"
+" le planning des bons de commande automatiquement."
+
+#. module: alc_purchase_order_date_planned
+#: model:ir.model,name:alc_purchase_order_date_planned.model_purchase_order
+msgid "Purchase Order"
+msgstr "Bon de commande"
+
+#. module: alc_purchase_order_date_planned
+#: model:ir.model,name:alc_purchase_order_date_planned.model_purchase_order_line
+msgid "Purchase Order Line"
+msgstr "Ligne de commande d'achat"
+
+#. module: alc_purchase_order_date_planned
+#: model:ir.model,name:alc_purchase_order_date_planned.model_product_supplierinfo
+msgid "Supplier Pricelist"
+msgstr "Liste de prix du fournisseur"
