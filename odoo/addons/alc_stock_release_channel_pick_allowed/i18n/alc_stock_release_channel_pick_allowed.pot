@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-06 00:21+0000\n"
-"PO-Revision-Date: 2023-04-06 00:21+0000\n"
+"POT-Creation-Date: 2023-04-07 01:19+0000\n"
+"PO-Revision-Date: 2023-04-07 01:19+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,30 +16,18 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_stock_release_channel_pick_allowed
-#: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_pick_allowed.stock_release_channel_form_view
-msgid ""
-"<span attrs=\"{'invisible': [('auto_allow_pick', '=', "
-"False)]}\">(hours:minutes)</span>"
-msgstr ""
-
-#. module: alc_stock_release_channel_pick_allowed
-#: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_pick_allowed.stock_release_channel_form_view
-msgid "After"
-msgstr ""
-
-#. module: alc_stock_release_channel_pick_allowed
 #: model:ir.model.fields,field_description:alc_stock_release_channel_pick_allowed.field_stock_release_channel__auto_allow_pick
 msgid "Allow picking automatically"
 msgstr ""
 
 #. module: alc_stock_release_channel_pick_allowed
-#: model:ir.model.fields,field_description:alc_stock_release_channel_pick_allowed.field_stock_release_channel__auto_allow_pick_after
-msgid "Allow picking automatically after"
+#: model:ir.model.fields,help:alc_stock_release_channel_pick_allowed.field_stock_release_channel__auto_allow_pick
+msgid "Allow picking automatically after all ongoing transfers are done"
 msgstr ""
 
 #. module: alc_stock_release_channel_pick_allowed
-#: model:ir.model.fields,help:alc_stock_release_channel_pick_allowed.field_stock_release_channel__auto_allow_pick
-msgid "Allow picking automatically after all ongoing transfers are done"
+#: model:ir.model.fields,field_description:alc_stock_release_channel_pick_allowed.field_stock_release_channel__auto_allow_pick_datetime
+msgid "Allow picking automatically at"
 msgstr ""
 
 #. module: alc_stock_release_channel_pick_allowed
@@ -50,6 +38,11 @@ msgstr ""
 #. module: alc_stock_release_channel_pick_allowed
 #: model:ir.model.fields,help:alc_stock_release_channel_pick_allowed.field_stock_release_channel__auto_disallow_pick
 msgid "Disallow picking automatically after ongoing transfers are started"
+msgstr ""
+
+#. module: alc_stock_release_channel_pick_allowed
+#: model:ir.model.fields,field_description:alc_stock_release_channel_pick_allowed.field_stock_release_channel__auto_allow_pick_time_before_leave
+msgid "Duration before shipment leave to allow picking automatically"
 msgstr ""
 
 #. module: alc_stock_release_channel_pick_allowed

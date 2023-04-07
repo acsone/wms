@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-06 00:22+0000\n"
-"PO-Revision-Date: 2023-04-06 00:22+0000\n"
+"POT-Creation-Date: 2023-04-07 01:20+0000\n"
+"PO-Revision-Date: 2023-04-07 01:20+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,51 +16,47 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_stock_release_channel_pick_allowed
-#: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_pick_allowed.stock_release_channel_form_view
-msgid ""
-"<span attrs=\"{'invisible': [('auto_allow_pick', '=', "
-"False)]}\">(hours:minutes)</span>"
-msgstr ""
-"<span attrs=\"{'invisible': [('auto_allow_pick', '=', "
-"False)]}\">(minutes:minutes)</span>"
-
-#. module: alc_stock_release_channel_pick_allowed
-#: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_pick_allowed.stock_release_channel_form_view
-msgid "After"
-msgstr "Après"
-
-#. module: alc_stock_release_channel_pick_allowed
 #: model:ir.model.fields,field_description:alc_stock_release_channel_pick_allowed.field_stock_release_channel__auto_allow_pick
 msgid "Allow picking automatically"
-msgstr "Autoriser la préparation automatiquement"
-
-#. module: alc_stock_release_channel_pick_allowed
-#: model:ir.model.fields,field_description:alc_stock_release_channel_pick_allowed.field_stock_release_channel__auto_allow_pick_after
-msgid "Allow picking automatically after"
-msgstr "Autoriser la préparation automatiquement après"
+msgstr "Autoriser automatiquement la préparation"
 
 #. module: alc_stock_release_channel_pick_allowed
 #: model:ir.model.fields,help:alc_stock_release_channel_pick_allowed.field_stock_release_channel__auto_allow_pick
 msgid "Allow picking automatically after all ongoing transfers are done"
-msgstr "Autoriser la préparation automatiquement une fois tous les transferts en cours effectués"
+msgstr ""
+"Autoriser automatiquement la préparation une fois tous les transferts en "
+"cours effectués"
+
+#. module: alc_stock_release_channel_pick_allowed
+#: model:ir.model.fields,field_description:alc_stock_release_channel_pick_allowed.field_stock_release_channel__auto_allow_pick_datetime
+msgid "Allow picking automatically at"
+msgstr "Autoriser automatiquement la préparation à"
 
 #. module: alc_stock_release_channel_pick_allowed
 #: model:ir.model.fields,field_description:alc_stock_release_channel_pick_allowed.field_stock_release_channel__auto_disallow_pick
 msgid "Disallow picking automatically"
-msgstr "Interdire la préparation automatiquement"
+msgstr "Interdire automatiquement la préparation"
 
 #. module: alc_stock_release_channel_pick_allowed
 #: model:ir.model.fields,help:alc_stock_release_channel_pick_allowed.field_stock_release_channel__auto_disallow_pick
 msgid "Disallow picking automatically after ongoing transfers are started"
-msgstr "Interdire la préparation automatiquement après le début des transferts en cours"
+msgstr ""
+"Interdire automatiquement la préparation après le début des transferts en "
+"cours"
+
+#. module: alc_stock_release_channel_pick_allowed
+#: model:ir.model.fields,field_description:alc_stock_release_channel_pick_allowed.field_stock_release_channel__auto_allow_pick_time_before_leave
+msgid "Duration before shipment leave to allow picking automatically"
+msgstr "Durée avant le départ de l'expédition pour autoriser automatiquement le picking"
 
 #. module: alc_stock_release_channel_pick_allowed
 #: model:ir.model.fields,help:alc_stock_release_channel_pick_allowed.field_stock_picking_type__release_channel_can_allow_pick
 msgid ""
 "If true, users can allow/disallow picking preparation for this type on "
 "release channels"
-msgstr "Si vrai, les utilisateurs peuvent autoriser/interdire la préparation "
-" pour ce type d'opération"
+msgstr ""
+"Si vrai, les utilisateurs peuvent autoriser/interdire la préparation  pour "
+"ce type d'opération"
 
 #. module: alc_stock_release_channel_pick_allowed
 #: model:ir.model.fields,field_description:alc_stock_release_channel_pick_allowed.field_stock_release_channel__pick_allowed
