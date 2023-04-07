@@ -127,7 +127,7 @@ odoo-addon-base-sparse-field-list-support @ git+https://github.com/acsone/server
 odoo-addon-web-notify @ git+https://github.com/OCA/web.git@refs/pull/2412/head#subdirectory=setup/web_notify
 
 # camptocamp/odoo-cloud-platform
-odoo-addon-base-attachment-object-storage @ git+https://github.com/acsone/odoo-cloud-platform@16.0#subdirectory=setup/base_attachment_object_storage
+odoo-addon-base-attachment-object-storage @ git+https://github.com/acsone/odoo-cloud-platform@16.0-base_attachment_storage-no-register-lmi#subdirectory=setup/base_attachment_object_storage
 # https://github.com/camptocamp/odoo-cloud-platform/pull/401
 odoo-addon-attachment-s3 @ git+https://github.com/acsone/odoo-cloud-platform@16.0-attachment-s3-sbi#subdirectory=setup/attachment_s3
 

@@ -19,6 +19,8 @@
         "web_search_with_and",
         "web_sheet_full_width",
         "web_tree_many2one_clickable",
+        # C2C
+        "attachment_s3",
         # ALC
         "alc_app_framework",
         "alc_app_invoicing",
