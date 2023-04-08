@@ -167,3 +167,41 @@ class TestStockReleaseChannelPickAllowed(ChannelReleaseCase):
         self.assertEqual(
             self.channel.auto_allow_pick_datetime, datetime(2023, 4, 1, 16, 0)
         )
+
+    @freeze_time("2023-04-01 12:00:00")
+    def test_07(self):
+        """
+        Auto_allow_pick_time_before_leave changes so the set_pick_allowed job must be.
+
+        rescheduled
+        """
+        self.channel.pick_allowed = False
+        picking_type = self.picking.picking_type_id
+        picking_type.release_channel_can_allow_pick = True
+        self.assertFalse(self.channel._get_picking_type_pick_allowed(picking_type.id))
+        self.assertFalse(self.channel.pick_allowed)
+        _do_picking(self.picking)
+        self.assertEqual(self.picking.state, "done")
+        self.assertFalse(self.channel._get_picking_type_pick_allowed(picking_type.id))
+        self.assertFalse(self.channel.pick_allowed)
+        _do_picking(self.picking2)
+        job = self.env["queue.job"].search(
+            [
+                ("model_name", "=", self.channel._name),
+                ("method_name", "=", "_set_pick_allowed"),
+            ]
+        )
+        self.assertEqual(job.eta, datetime(2023, 4, 2, 6, 30))
+        with trap_jobs() as trap:
+            self.channel.auto_allow_pick_time_before_leave = 1.5
+            self.assertEqual(job.state, "done")
+            self.assertEqual(
+                job.result,
+                "Change on hours for release channel pick allowed."
+                "This job is set to done, a new one is created.",
+            )
+            trap.assert_enqueued_job(
+                self.env["stock.release.channel"]._set_pick_allowed,
+                kwargs=dict(pick_allowed=True, picking_type=picking_type),
+                properties=dict(eta=datetime(2023, 4, 2, 5, 30)),
+            )

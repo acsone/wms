@@ -1,5 +1,6 @@
 # Copyright 2023 ACSONE SA/NV
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+import json
 from datetime import date, datetime, time, timedelta
 
 import pytz
@@ -9,6 +10,7 @@ from odoo import api, fields
 from odoo.addons.alc_stock_release_channel_shipment_advice_toursolver.models import (
     stock_release_channel,
 )
+from odoo.addons.queue_job.fields import JobEncoder
 from odoo.addons.stock_release_channel.models.stock_release_channel import (
     StockReleaseChannel as StockReleaseChannelBase,
 )
@@ -133,3 +135,47 @@ class StockReleaseChannel(StockReleaseChannelBase):
             if self._get_picking_type_pick_allowed(picking_type_id=picking_type.id):
                 res.append(picking_type.id)
         return res
+
+    def _delay_set_pick_allowed(
+        self, pick_allowed: bool, picking_type=None, eta: datetime = None
+    ):
+        self.ensure_one()
+        self.with_delay(eta=eta)._set_pick_allowed(
+            pick_allowed=pick_allowed, picking_type=picking_type
+        )
+
+    def write(self, vals):
+        res = super().write(vals)
+        if "auto_allow_pick_time_before_leave" in vals or "leave_planned_time" in vals:
+            # auto_allow_pick_datetime changed, we look if there is planned jobs to set
+            # pick_allowed True and reschedule them
+            for rec in self:
+                rec._requeue_set_pick_allowed_true_job()
+        return res
+
+    def _get_set_pick_allowed_true_pending_jobs(self):
+        self.ensure_one()
+        return (
+            self.env["queue.job"]
+            .search(
+                [
+                    ("model_name", "=", self._name),
+                    ("method_name", "=", "_set_pick_allowed"),
+                    ("state", "=", "pending"),
+                    ("records", "=", json.dumps(self, cls=JobEncoder)),
+                ]
+            )
+            .filtered(lambda job_: job_.kwargs.get("pick_allowed"))
+        )
+
+    def _requeue_set_pick_allowed_true_job(self):
+        self.ensure_one()
+        for job in self._get_set_pick_allowed_true_pending_jobs():
+            job._change_job_state(
+                state="done",
+                result="Change on hours for release channel pick allowed."
+                "This job is set to done, a new one is created.",
+            )
+            self._delay_set_pick_allowed(
+                **job.kwargs, eta=self.auto_allow_pick_datetime
+            )
