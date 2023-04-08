@@ -31,8 +31,11 @@ class StockReleaseChannel(StockReleaseChannelBase):
         help="Allow picking automatically after all ongoing transfers are done",
     )
     auto_allow_pick_time_before_leave = fields.Float(
-        "Duration before shipment leave to allow picking automatically", default=0.5
+        "Duration before shipment leave to allow picking automatically",
+        default=0.5,
+        inverse="_inverse_auto_allow_pick_datetime",
     )
+    leave_planned_time = fields.Float(inverse="_inverse_auto_allow_pick_datetime")
     auto_allow_pick_datetime = fields.Datetime(
         "Allow picking automatically at", compute="_compute_auto_allow_pick_datetime"
     )
@@ -98,6 +101,7 @@ class StockReleaseChannel(StockReleaseChannelBase):
             )
         if self.pick_allowed != pick_allowed:
             self.pick_allowed = pick_allowed
+            self.pick_allowed_by_picking_type = {}
         return True
 
     def _set_pick_allowed_for_picking_type_id(
@@ -144,14 +148,14 @@ class StockReleaseChannel(StockReleaseChannelBase):
             pick_allowed=pick_allowed, picking_type=picking_type
         )
 
-    def write(self, vals):
-        res = super().write(vals)
-        if "auto_allow_pick_time_before_leave" in vals or "leave_planned_time" in vals:
-            # auto_allow_pick_datetime changed, we look if there is planned jobs to set
-            # pick_allowed True and reschedule them
-            for rec in self:
-                rec._requeue_set_pick_allowed_true_job()
-        return res
+    def _inverse_auto_allow_pick_datetime(self):
+        """
+        Auto_allow_pick_datetime changed, we look if there is planned jobs to set.
+
+        pick_allowed True and reschedule them
+        """
+        for rec in self:
+            rec._requeue_set_pick_allowed_true_job()
 
     def _get_set_pick_allowed_true_pending_jobs(self):
         self.ensure_one()
@@ -179,3 +183,17 @@ class StockReleaseChannel(StockReleaseChannelBase):
             self._delay_set_pick_allowed(
                 **job.kwargs, eta=self.auto_allow_pick_datetime
             )
+
+    def action_wake_up(self):
+        for rec in self:
+            if not rec.auto_allow_pick:
+                continue
+            rec._delay_set_pick_allowed(
+                pick_allowed=True, picking_type=None, eta=rec.auto_allow_pick_datetime
+            )
+
+    def action_sleep(self):
+        for rec in self:
+            if not rec.auto_disallow_pick:
+                continue
+            rec._set_pick_allowed(pick_allowed=False, picking_type=None)

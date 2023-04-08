@@ -17,20 +17,6 @@ class StockPicking(StockPickingBase):
             channel._set_pick_allowed(pick_allowed=False, picking_type=picking_type)
         return res
 
-    def _action_done(self):
-        res = super()._action_done()
-        channel_picking_type_todo = self._get_release_channel_auto_allow_pick_needed(
-            "auto_allow_pick"
-        )
-        for channel, picking_type in channel_picking_type_todo:
-            channel._delay_set_pick_allowed(
-                pick_allowed=True,
-                picking_type=picking_type,
-                eta=channel.auto_allow_pick_datetime,
-            )
-
-        return res
-
     def _get_release_channel_auto_allow_pick_needed(self, action):
         channel_picking_type_todo = []
         picking_types_allowing_pick = self.env["stock.picking.type"].search(
