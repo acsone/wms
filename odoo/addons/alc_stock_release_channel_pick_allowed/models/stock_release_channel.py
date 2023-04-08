@@ -89,24 +89,28 @@ class StockReleaseChannel(StockReleaseChannelBase):
             rec.pick_allowed_by_picking_type = pick_allowed_by_picking_type
 
     def _set_pick_allowed(self, pick_allowed: bool, picking_type=None):
+        self.ensure_one()
         if picking_type:
             return self._set_pick_allowed_for_picking_type_id(
                 picking_type.id, pick_allowed
             )
-        self.write({"pick_allowed": pick_allowed})
+        if self.pick_allowed != pick_allowed:
+            self.pick_allowed = pick_allowed
         return True
 
     def _set_pick_allowed_for_picking_type_id(
         self, picking_type_id: int, pick_allowed: bool
     ):
-        for rec in self:
-            pick_allowed_by_picking_type = (
-                dict(rec.pick_allowed_by_picking_type)
-                if rec.pick_allowed_by_picking_type
-                else {}
-            )
-            pick_allowed_by_picking_type.update({picking_type_id: pick_allowed})
-            rec.pick_allowed_by_picking_type = pick_allowed_by_picking_type
+        self.ensure_one()
+        if self._get_picking_type_pick_allowed(picking_type_id) == pick_allowed:
+            return
+        pick_allowed_by_picking_type = (
+            dict(self.pick_allowed_by_picking_type)
+            if self.pick_allowed_by_picking_type
+            else {}
+        )
+        pick_allowed_by_picking_type.update({picking_type_id: pick_allowed})
+        self.pick_allowed_by_picking_type = pick_allowed_by_picking_type
 
     def _get_picking_type_pick_allowed(self, picking_type_id: int):
         self.ensure_one()
