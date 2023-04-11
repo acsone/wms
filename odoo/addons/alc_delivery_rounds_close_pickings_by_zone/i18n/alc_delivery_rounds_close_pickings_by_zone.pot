@@ -62,22 +62,22 @@ msgid "Pickings Med Launched"
 msgstr ""
 
 #. module: alc_delivery_rounds_close_pickings_by_zone
-#: model_terms:ir.ui.view,arch_db:alc_delivery_rounds_close_pickings_by_zone.view_round_instance_kanban
+#: model:ir.ui.view,arch_db:alc_delivery_rounds_close_pickings_by_zone.view_round_instance_kanban
 msgid "Start/Stop ali pickings"
 msgstr ""
 
 #. module: alc_delivery_rounds_close_pickings_by_zone
-#: model_terms:ir.ui.view,arch_db:alc_delivery_rounds_close_pickings_by_zone.view_round_instance_kanban
+#: model:ir.ui.view,arch_db:alc_delivery_rounds_close_pickings_by_zone.view_round_instance_kanban
 msgid "Start/Stop frigo pickings"
 msgstr ""
 
 #. module: alc_delivery_rounds_close_pickings_by_zone
-#: model_terms:ir.ui.view,arch_db:alc_delivery_rounds_close_pickings_by_zone.view_round_instance_kanban
+#: model:ir.ui.view,arch_db:alc_delivery_rounds_close_pickings_by_zone.view_round_instance_kanban
 msgid "Start/Stop mat pickings"
 msgstr ""
 
 #. module: alc_delivery_rounds_close_pickings_by_zone
-#: model_terms:ir.ui.view,arch_db:alc_delivery_rounds_close_pickings_by_zone.view_round_instance_kanban
+#: model:ir.ui.view,arch_db:alc_delivery_rounds_close_pickings_by_zone.view_round_instance_kanban
 msgid "Start/Stop med pickings"
 msgstr ""
 

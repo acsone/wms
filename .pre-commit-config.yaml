@@ -28,7 +28,6 @@ exclude: |
   ^odoo/addons/alc_delivery_carrier_gls_report/|
   ^odoo/addons/alc_delivery_rounds_assign_blocking/|
   ^odoo/addons/alc_delivery_rounds_assign_blocking_unavailable_product/|
-  ^odoo/addons/alc_delivery_rounds_close_pickings_by_zone/|
   ^odoo/addons/alc_delivery_rounds_geooptimize/|
   ^odoo/addons/alc_delivery_rounds_gls/|
   ^odoo/addons/alc_documents/|

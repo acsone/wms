@@ -54,10 +54,10 @@ class TestStockReleaseChannelPickingBatchCreation(ClusterPickingCommonFeatures):
 
         batch
         """
-        self.channel._toggle_pick_allowed_for_picking_type(self.picking_type_1.id)
+        self.channel._toggle_pick_allowed_for_picking_type_id(self.picking_type_1.id)
         batch = self.make_picking_batch._create_batch()
         self.assertFalse(batch)
-        self.channel._toggle_pick_allowed_for_picking_type(self.picking_type_1.id)
+        self.channel._toggle_pick_allowed_for_picking_type_id(self.picking_type_1.id)
         batch = self.make_picking_batch._create_batch()
         self.assertTrue(batch)
 
