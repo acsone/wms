@@ -26,6 +26,7 @@
         "delivery_estimated_package_quantity_by_weight",
         "delivery_package_type_number_parcels",
         "internal_stock_quant_package",
+        "product_expiry_configurable",
         "product_total_weight_from_packaging",
         "shipment_advice",
         "stock_dynamic_routing",
