@@ -318,8 +318,8 @@ msgstr "Stock Disponible"
 
 #. module: website_purchase_review
 #: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
-msgid "Stock coverage (days)"
-msgstr "Couverture du stock (jours)"
+msgid "Stock coverage (weeks)"
+msgstr "Couverture du stock (semaines)"
 
 #. module: website_purchase_review
 #: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
