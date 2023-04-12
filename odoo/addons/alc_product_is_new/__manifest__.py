@@ -8,7 +8,7 @@
     "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
-    "depends": ["product", "stock_storage_type"],
+    "depends": ["product", "stock"],
     "data": [
         "views/product_template_views.xml",
         "views/stock_package_type_views.xml",
