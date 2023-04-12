@@ -17,6 +17,7 @@
         "purchase_stock_packaging",
         "purchase_cancel_reason",
         "purchase_discount",
+        "purchase_order_approved",
         # ALC
         "alc_additional_product_purchase",
         "alc_incoming_product_supplier_filter",

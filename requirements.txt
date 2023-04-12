@@ -87,6 +87,7 @@ odoo-addon-product-uom-updatable @ git+https://github.com/acsone/product-attribu
 odoo-addon-purchase-cancel-reason @ git+https://github.com/acsone/purchase-workflow.git@4d9c8cf585059f70e397db19d07f79050d87b68d#subdirectory=setup/purchase_cancel_reason
 odoo-addon-purchase-delivery-split-date==16.0.1.0.0.7
 odoo-addon-purchase-discount==16.0.1.1.0
+odoo-addon-purchase-order-approved==16.0.1.0.0.3
 odoo-addon-purchase-stock-packaging==16.0.1.0.0.4
 odoo-addon-queue-job==16.0.2.0.0
 odoo-addon-queue-job-cron==16.0.1.0.0.1
