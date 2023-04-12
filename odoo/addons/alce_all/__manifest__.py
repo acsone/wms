@@ -1,11 +1,10 @@
-# -*- coding: utf-8 -*-
 # Copyright 2021 ACSONE SA/NV
 
 {
     "name": "Alc All Enterprise",
     "description": """
         Alcyon addons under Odoo Enterprise licence""",
-    "version": "10.0.2.0.6",
+    "version": "16.0.1.0.0",
     "license": "Other proprietary",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
@@ -15,11 +14,11 @@
         # "alce_account_reports_followup_data",
         # "alce_l10n_be_reports",
         # "alce_split_coda",
-        # "alce_stock_barcode",
+        "alce_stock_barcode",
         # "alce_stock_picking_backorder_helpdesk",
     ],
     "data": [],
     "demo": [],
     "application": True,
-    "installable": False,
+    "installable": True,
 }

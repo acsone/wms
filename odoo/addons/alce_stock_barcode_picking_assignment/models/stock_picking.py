@@ -24,7 +24,8 @@ def applySaltToChar(salt, code):
 
 
 def decipher(salt):
-    """decrypt token from QRCode printed on the employee badge and
+    """Decrypt token from QRCode printed on the employee badge and.
+
     encoded using the methods proposed here:
     https://stackoverflow.com/questions/18279141/javascript-string-encryption-and-decryption
     """
@@ -43,7 +44,8 @@ def decipher(salt):
 
 class StockPicking(stock_picking.StockPicking):
     def on_barcode_scanned(self, barcode):
-        """ Try to assign the operator if not yet assigned and barcode is
+        """Try to assign the operator if not yet assigned and barcode is.
+
         an operator. Once operator is assigned, printed is set to True
         """
         if self.action_start_allowed and not config["test_enable"]:
