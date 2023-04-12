@@ -163,3 +163,6 @@ odoo-addon-product-template-multi-link @ git+https://github.com/OCA/e-commerce.g
 
 # OCA/hr-holidays
 odoo-addon-hr-holidays-public @ git+https://github.com/OCA/hr-holidays.git@refs/pull/69/head#subdirectory=setup/hr_holidays_public
+
+# OCA/edi
+odoo-addon-base-ubl @ git+https://github.com/OCA/edi.git@refs/pull/725/head#subdirectory=setup/base_ubl
