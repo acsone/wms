@@ -19,9 +19,9 @@ class TestStockDeliveryNoteAdditionalProduct(
         # Check that the additional product is taken into account after confirmation
         sale = self._confirm_sale_order()
         picking = self.create_pick(sale)
-
+        picking_number = picking.name.split("/")[-1]
         expected = [
-            [picking.id, "", ""],
+            [picking_number, "", ""],
             [u"Unittest first partner", "", "", "", ""],
             [
                 "1234567",
