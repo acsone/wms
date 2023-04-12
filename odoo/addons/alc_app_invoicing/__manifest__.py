@@ -20,6 +20,8 @@
         "account_tax_one_vat_purchase",
         "account_tax_one_vat_sale",
         "account_invoice_tax_required",
+        # OCA/reporting-engine
+        "report_xml",
         # ALC
         "alc_cash_on_delivery",
     ],
