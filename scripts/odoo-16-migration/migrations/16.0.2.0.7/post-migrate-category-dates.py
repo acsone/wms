@@ -19,6 +19,22 @@ def _move_column(env):
         openupgrade.logged_query(env.cr, query)
 
 
+def _update_use_expiration_date(env):
+    """
+    Then, set the property 'use_expiration_date' on products that:
+
+      - have an expiration_date set
+      - have a tracking == 'lot'
+    """
+    query = """
+        UPDATE product_template
+            SET use_expiration_date = true
+            WHERE expiration_time <> 0 AND tracking = 'lot' AND not use_expiration_date
+    """
+    openupgrade.logged_query(env.cr, query)
+
+
 @openupgrade.migrate()
 def migrate(env, version):
     _move_column(env)
+    _update_use_expiration_date(env)
