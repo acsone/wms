@@ -27,6 +27,7 @@
         "account_tax_unece",
         # OCA/edi
         "base_ubl",
+        "base_business_document_import",
         # ALC
         "alc_cash_on_delivery",
     ],

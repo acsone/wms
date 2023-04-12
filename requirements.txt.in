@@ -166,3 +166,4 @@ odoo-addon-hr-holidays-public @ git+https://github.com/OCA/hr-holidays.git@refs/
 
 # OCA/edi
 odoo-addon-base-ubl @ git+https://github.com/OCA/edi.git@refs/pull/725/head#subdirectory=setup/base_ubl
+odoo-addon-base-business-document-import @ git+https://github.com/OCA/edi.git@refs/pull/724/head#subdirectory=setup/base_business_document_import
