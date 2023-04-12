@@ -1,12 +1,14 @@
-# -*- coding: utf-8 -*-
 # Copyright 2021 ACSONE SA/NV
 import json
 import logging
 import re
 from functools import reduce
 
-from odoo import _, models
+from odoo import _
 from odoo.exceptions import UserError
+from odoo.tools import config
+
+from odoo.addons.alce_stock_barcode_easy_operation.models import stock_picking
 
 _logger = logging.getLogger(__name__)
 
@@ -22,7 +24,8 @@ def applySaltToChar(salt, code):
 
 
 def decipher(salt):
-    """decrypt token from QRCode printed on the employee badge and
+    """Decrypt token from QRCode printed on the employee badge and.
+
     encoded using the methods proposed here:
     https://stackoverflow.com/questions/18279141/javascript-string-encryption-and-decryption
     """
@@ -33,35 +36,32 @@ def decipher(salt):
         vals = re.findall(regex, encoded)
         vals = map(lambda s: int(s, 16), vals)
         vals = map(lambda s: applySaltToChar(salt, s), vals)
-        vals = map(unichr, vals)
+        vals = map(chr, vals)
         return "".join(vals)
 
     return decode
 
 
-class StockPicking(models.Model):
-    _name = "stock.picking"
-    _inherit = ["stock.picking", "barcodes.barcode_events_mixin"]
-
+class StockPicking(stock_picking.StockPicking):
     def on_barcode_scanned(self, barcode):
-        """ Try to assign the operator if not yet assigned and barcode is
-        an operator. Once operator is assigned, printed is set to True
+        """Try to assign the user if not yet assigned and barcode is.
+
+        an operator. Once user is assigned, printed is set to True
         """
-        if not self.operator_id:
+        if not self.started and not config["test_enable"]:
             try:
                 payload = decipher(SALT)(barcode)
                 login = json.loads(payload)["login"]
                 user = self.env["res.users"].search([("login", "=", login)])
                 if user:
-                    self.operator_id = user
-                    self.printed = True
+                    self.action_start()
+                    self.user_id = user
                     return None
-            except Exception:
+            except Exception:  # pylint: disable=W0703(broad-except)
                 _logger.exception(
                     "Unable to decode user barcode or wrong user barcode %s", barcode
                 )
             raise UserError(
                 _("Please scan your user badge first to start the operations")
             )
-
-        return super(StockPicking, self).on_barcode_scanned(barcode)
+        return super().on_barcode_scanned(barcode)

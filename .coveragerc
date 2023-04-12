@@ -227,7 +227,6 @@ omit =
     odoo/addons/alce_purchase_report/*
     odoo/addons/alce_split_coda/*
     odoo/addons/alce_stock_barcode/*
-    odoo/addons/alce_stock_barcode_picking_assignment/*
     odoo/addons/alce_stock_picking_backorder_helpdesk/*
     odoo/addons/alcyon_credit_control/*
     odoo/addons/authenticated_partner_mixin/*
