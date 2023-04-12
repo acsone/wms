@@ -312,7 +312,7 @@ msgstr ""
 
 #. module: website_purchase_review
 #: model:ir.ui.view,arch_db:website_purchase_review.main_page_body
-msgid "Stock coverage (days)"
+msgid "Stock coverage (weeks)"
 msgstr ""
 
 #. module: website_purchase_review
