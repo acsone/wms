@@ -24,6 +24,7 @@
         "report_xml",
         # OCA/community-data-files
         "base_unece",
+        "account_tax_unece",
         # OCA/edi
         "base_ubl",
         # ALC
