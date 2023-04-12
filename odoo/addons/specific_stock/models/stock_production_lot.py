@@ -1,15 +1,12 @@
 # -*- coding: utf-8 -*-
 # Copyright 2016 Julien Coux (Camptocamp)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-from psycopg2.extensions import AsIs
-
 from odoo import api, fields, models
 
 
 class StockProductionLot(models.Model):
     _inherit = "stock.production.lot"
 
-    life_date = fields.Datetime(string="Expiration Date", required=True)
     is_archived = fields.Boolean("Archived", default=False, readonly=True)
 
     @api.model
