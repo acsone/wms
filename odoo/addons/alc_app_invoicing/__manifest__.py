@@ -22,6 +22,12 @@
         "account_invoice_tax_required",
         # OCA/reporting-engine
         "report_xml",
+        # OCA/community-data-files
+        "base_unece",
+        "account_tax_unece",
+        # OCA/edi
+        "base_ubl",
+        "base_business_document_import",
         # ALC
         "alc_cash_on_delivery",
     ],
