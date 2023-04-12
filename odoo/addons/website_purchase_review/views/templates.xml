@@ -281,11 +281,6 @@
                               <span
                                 t-esc="int(current_product.advised_qty + product_qty)"
                               />
-                              <span
-                                id="advised_qty"
-                                style="display:none"
-                                t-esc="current_product.advised_qty"
-                              />
                             </strong>
                           </td>
                         </tr>
@@ -298,8 +293,8 @@
                               >
                               <span
                                   id="stock_coverage"
-                                  t-esc="round(int(current_product.advised_qty + product_qty + current_product.qty_available) /
-                                  (current_product.average_three_months_consumption / 13.0), 2)"
+                                  t-esc="round(float(product_qty + current_product.virtual_available) /
+                                  float(current_product.average_three_months_consumption / 13.0), 2)"
                                 />
                               </t>
                               <t t-else="">

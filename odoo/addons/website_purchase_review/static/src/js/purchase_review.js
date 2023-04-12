@@ -66,19 +66,23 @@ odoo.define("website_purchase_review.main_page", function(require) {
     });
     $("#product_qty").on("input", function() {
       var average_three_months_consumption = parseFloat(
-        $("#average_three_months_consumption").text()
+        $("#average_three_months_consumption")
+          .text()
+          .replace(/\s+/g, "")
       );
       if (average_three_months_consumption == 0) {
         $("#stock_coverage").html(0.0);
       } else {
-        var advised_qty = parseFloat($("#advised_qty").text());
         var product_qty = parseFloat(this.value);
-        var virtual_available = parseFloat($("#virtual_available").text());
-        var stock_coverage = Math.round(
-          (advised_qty + product_qty + virtual_available) /
-            (average_three_months_consumption / 90),
-          2
+        var virtual_available = parseFloat(
+          $("#virtual_available")
+            .text()
+            .replace(/\s+/g, "")
         );
+        var stock_coverage = (
+          (product_qty + virtual_available) /
+          (average_three_months_consumption / 13)
+        ).toFixed(2);
         $("#stock_coverage").html(stock_coverage);
       }
     });
