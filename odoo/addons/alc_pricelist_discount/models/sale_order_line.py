@@ -34,15 +34,12 @@ class SaleOrderLine(SaleOrderLineBase):
     def _compute_discount_item_id(self):
         for line in self:
             # we don't use UOMs, if that changes then apply it here:
-            line.discount_item_id = (
-                discount_item
-            ) = line.product_id._get_best_applicable_pricelist_item(
+            line.discount_item_id = line.product_id._get_best_applicable_pricelist_item(
                 line.order_id.date_order,
                 quantity=line.product_uom_qty or 1,
-                pricelists=line.order_id.discount_pricelist_ids,
+                pricelists=line.order_id.discount_pricelist_ids._origin,
                 currency=line.currency_id,
             )
-            line.discount_item_id = discount_item
         self.onchange_product_id_reset_discount()
 
     def compute_alcyon_discount(self):
