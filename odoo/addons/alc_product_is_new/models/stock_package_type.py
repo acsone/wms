@@ -4,9 +4,9 @@
 
 from odoo import fields
 
-from odoo.addons.stock_storage_type.models import stock_package_type
+from odoo.addons.stock.models.stock_package_type import PackageType
 
 
-class StockPackageType(stock_package_type.StockPackageType):
+class StockPackageType(PackageType):
 
     is_new = fields.Boolean(default=False)
