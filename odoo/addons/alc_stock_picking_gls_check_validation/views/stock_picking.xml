@@ -12,24 +12,26 @@
         <field name="arch" type="xml">
             <header position="after">
                 <field name="gls_pack_in_picking" invisible="1" />
-                <div
+                <field name="is_put_in_pack_done" invisible="1" />
+                    <div
           class="alert alert-danger"
           style="margin-bottom:0px;font-weight: bolder;text-align: center;"
           role="alert"
           attrs="{'invisible': [('gls_pack_in_picking', '=', False)]}"
         >
                             You have at least one pack in the picking. Please process it/them first.
-                        </div>
+                    </div>
             </header>
-
-
-            <button name="do_new_transfer" position="after">
+            <button name="button_validate" position="after">
                 <button
           name="action_force_validate"
           string="Force validate"
           type="object"
           groups="base.group_no_one"
-          attrs="{'invisible': ['|', '|', '|', ('operator_id', '=', False), ('state', 'not in', ['draft','partially_available','assigned']), '&amp;', ('is_put_in_pack_done', '=', False), ('picking_type_subcode', '=', 'PICK')]}"
+          attrs="{'invisible': ['|', ('user_id', '=', False),
+                                            '|', ('state', 'not in', ['draft','partially_available','assigned']),
+                                                '&amp;', ('is_put_in_pack_done', '=', False),
+                                                         ('picking_type_code', '=', 'internal')]}"
         />
             </button>
         </field>
