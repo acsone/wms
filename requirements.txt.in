@@ -94,6 +94,8 @@ odoo-addon-stock-scrap-location-default @ git+https://github.com/acsone/stock-lo
 odoo-addon-stock-picking-volume @ git+https://github.com/OCA/stock-logistics-warehouse.git@refs/pull/1680/head#subdirectory=setup/stock_picking_volume
 
 # stock-logistics-workflow
+# https://github.com/OCA/stock-logistics-workflow/pull/1274
+odoo-addon-stock-move-line-reserved-quant @ git+https://github.com/OCA/stock-logistics-workflow.git@refs/pull/1274/head#subdirectory=setup/stock_move_line_reserved_quant
 # https://github.com/OCA/stock-logistics-workflow/pull/1199
 odoo-addon-stock-picking-backorder-reason @ git+https://github.com/acsone/stock-logistics-workflow.git@16.0-picking-backorder-reason-dro#subdirectory=setup/stock_picking_backorder_reason
 # https://github.com/OCA/stock-logistics-workflow/pull/1200

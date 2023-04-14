@@ -25,6 +25,7 @@ odoo-addon-stock-lot-is-archived @ git+https://github.com/acsone/product-attribu
 odoo-addon-stock-move-auto-assign==16.0.1.1.0
 odoo-addon-stock-move-auto-assign-auto-release==16.0.1.1.0
 odoo-addon-stock-move-common-dest==16.0.1.0.1
+odoo-addon-stock-move-line-reserved-quant @ git+https://github.com/acsone/stock-logistics-workflow.git@488cbb4b78fc453732a430ce0d4a13a9c87d691b#subdirectory=setup/stock_move_line_reserved_quant
 odoo-addon-stock-move-location==16.0.1.1.0.2
 odoo-addon-stock-move-manage-priority @ git+https://github.com/acsone/stock-logistics-workflow.git@dd6c0233b110cddba40c8f919bca35088b4f134e#subdirectory=setup/stock_move_manage_priority
 odoo-addon-stock-move-propagate-first-move @ git+https://github.com/acsone/stock-logistics-workflow.git@bce6c8ff639e34fb7828e7140fbca871cedd2e34#subdirectory=setup/stock_move_propagate_first_move
@@ -62,6 +63,7 @@ odoo-addon-stock-release-channel-shipment-advice-toursolver @ git+https://github
 odoo-addon-stock-restrict-lot==16.0.1.0.0.2
 odoo-addon-stock-route-mto @ git+https://github.com/acsone/stock-logistics-warehouse.git@3acb2ea38a2cac932a01fe6284b80feeae695ce0#subdirectory=setup/stock_route_mto
 odoo-addon-stock-scrap-location-default @ git+https://github.com/acsone/stock-logistics-warehouse.git@b50ec6f42d728695d742873e00c326d7cd3713fa#subdirectory=setup/stock_scrap_location_default
-odoo-addon-stock-storage-type @ git+https://github.com/acsone/wms.git@fd484bfeb2110f1dbcaec071acab1a41dc57d935#subdirectory=setup/stock_storage_type
+odoo-addon-stock-storage-category-capacity-name==16.0.1.0.0.2
+odoo-addon-stock-storage-type @ git+https://github.com/acsone/wms.git@2e53184835de3967bdebbba9a2483e497c4ad5b8#subdirectory=setup/stock_storage_type
 odoo-addon-stock-storage-type-putaway-abc @ git+https://github.com/acsone/wms.git@2cca4a20b17686fe5cfee096215035b9fdef3e09#subdirectory=setup/stock_storage_type_putaway_abc
 odoo-addon-stock-storage-type-putaway-abc-classification-sale-stock @ git+https://github.com/acsone/wms.git@980b444e365da2752f5bc1345f22d2cf5ca80657#subdirectory=setup/stock_storage_type_putaway_abc_classification_sale_stock
