@@ -81,7 +81,7 @@ odoo.define("website_purchase_review.main_page", function(require) {
         );
         var stock_coverage = (
           (product_qty + virtual_available) /
-          (average_three_months_consumption / 13)
+          (average_three_months_consumption / 4.333)
         ).toFixed(2);
         $("#stock_coverage").html(stock_coverage);
       }

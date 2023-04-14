@@ -294,7 +294,7 @@
                               <span
                                   id="stock_coverage"
                                   t-esc="round(float(product_qty + current_product.virtual_available) /
-                                  float(current_product.average_three_months_consumption / 13.0), 2)"
+                                  float(current_product.average_three_months_consumption / 4.333), 2)"
                                 />
                               </t>
                               <t t-else="">
