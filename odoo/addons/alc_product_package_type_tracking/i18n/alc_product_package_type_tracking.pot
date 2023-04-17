@@ -18,7 +18,8 @@ msgstr ""
 #: model:ir.model.fields,help:alc_product_package_type_tracking.field_product_template__package_type_id
 msgid ""
 "Defines a 'default' package type for this product to be applied on packages "
-"without product packagings for put-away computations."
+"without product packagings and on put-away computation based on package type"
+" for product not in a package"
 msgstr ""
 
 #. module: alc_product_package_type_tracking
