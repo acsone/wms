@@ -28,6 +28,14 @@
         "stock_available",
         "stock_storage_type_putaway_abc",
     ],
+    "assets": {
+        "website_purchase_review.assets_purchase_review": [
+            "website_purchase_review/static/src/js/purchase_review.js",
+        ],
+        "web.assets_frontend": [
+            "website_purchase_review/static/src/css/purchase_review.css",
+        ],
+    },
     "data": ["views/purchase_order.xml", "views/templates.xml"],
     "website": "http://www.camptocamp.com",
     "installable": True,

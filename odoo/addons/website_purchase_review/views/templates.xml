@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
   <template id="assets_purchase_review">
-    <script
-      type="text/javascript"
-      src="/website_purchase_review/static/src/js/purchase_review.js"
-    />
+
 <!--    <script type="text/javascript" src="/web/static/lib/chart/chart.js" />-->
 <!--    <script type="text/javascript" src="/web/static/lib/nvd3/nv.d3.js" />-->
     <link
@@ -25,25 +22,23 @@
 <!--          href="/web/static/src/img/favicon.ico"-->
 <!--          type="image/x-icon"-->
 <!--        />-->
-        <script type="text/javascript">
-            var odoo = {
-            csrf_token: "<t t-esc="request.csrf_token(None)" />",
-            session_info: <t t-raw="session_info" />,
-            _modules: <t t-raw="modules" />,
-            };
-        </script>
+<!--        <script type="text/javascript">-->
+<!--            var odoo = {-->
+<!--            csrf_token: "<t t-esc="request.csrf_token(None)" />",-->
+<!--            session_info: <t t-raw="session_info" />,-->
+<!--            _modules: <t t-raw="modules" />,-->
+<!--            };-->
+<!--        </script>-->
+<!--        <script src="/web/static/src/boot.js" type="text/javascript"/>-->
+<!--        <script-->
+<!--          type="text/javascript"-->
+<!--          src="/website_purchase_review/static/src/js/purchase_review.js"-->
+<!--        />-->
         <t t-call-assets="web.assets_common" t-js="false" />
         <t t-call-assets="web.assets_frontend" t-js="false" />
         <t t-call-assets="web.assets_common" t-css="false" />
         <t t-call-assets="web.assets_frontend" t-css="false" />
-        <t
-          t-call-assets="website_purchase_review.assets_purchase_review"
-          t-js="false"
-        />
-        <t
-          t-call-assets="website_purchase_review.assets_purchase_review"
-          t-css="false"
-        />
+        <t t-call-assets="website_purchase_review.assets_purchase_review" />
       </head>
       <body class="container-fluid">
         <div>
@@ -288,12 +283,10 @@
                           <td>Stock coverage (days)</td>
                           <td>
                             <strong>
-                              <t
-                                t-if="current_product.average_three_months_consumption"
-                              >
+                              <t t-if="current_product.average_three_months_sale">
                               <span
                                   t-esc="round(int(current_product.advised_qty + product_qty + current_product.virtual_available) /
-                                  (current_product.average_three_months_consumption / 90.0), 2)"
+                                  (current_product.average_three_months_sale / 90.0), 2)"
                                 />
                               </t>
                               <t t-else="">
@@ -360,7 +353,7 @@
                               name="orderpoint_min"
                               id="orderpoint_min"
                               t-att-value="current_product.orderpoint_min"
-                              t-att-readonly="current_product.is_mto_product and 'readonly' or None"
+                              t-att-readonly="current_product.is_mto and 'readonly' or None"
                             />
                           </td>
                         </tr>
@@ -372,7 +365,7 @@
                               name="orderpoint_max"
                               id="orderpoint_max"
                               t-att-value="current_product.orderpoint_max"
-                              t-att-readonly="current_product.is_mto_product and 'readonly' or None"
+                              t-att-readonly="current_product.is_mto and 'readonly' or None"
                             />
                           </td>
                         </tr>
@@ -455,15 +448,13 @@
                   <tr>
                     <td>Av. annual consumption</td>
                     <td>
-                      <span t-field="current_product.average_annual_consumption" />
+                      <span t-field="current_product.average_annual_sale" />
                     </td>
                   </tr>
                   <tr>
                     <td>Av. 3 months consumption</td>
                     <td>
-                      <span
-                        t-field="current_product.average_three_months_consumption"
-                      />
+                      <span t-field="current_product.average_three_months_sale" />
                     </td>
                   </tr>
                   <tr>
@@ -543,12 +534,8 @@
                       <tr>
                         <td>Order code</td>
                         <td>
-                          <span
-                            t-if="current_product.is_mto_product"
-                          >Product on order</span>
-                          <span
-                            t-if="not current_product.is_mto_product"
-                          >Normal product</span>
+                          <span t-if="current_product.is_mto">Product on order</span>
+                          <span t-if="not current_product.is_mto">Normal product</span>
                         </td>
                       </tr>
                     </table>
@@ -578,9 +565,10 @@
                       </tr>
                       <tr>
                         <td>Sold out</td>
-                        <td>
-                          <span t-field="current_product.state_id.display_name" />
-                        </td>
+                        <td>TODO</td>
+<!--                        <td>-->
+<!--                          <span t-field="current_product.state_id.display_name" />-->
+<!--                        </td>-->
                       </tr>
                       <tr>
                         <td>Gross weight</td>
