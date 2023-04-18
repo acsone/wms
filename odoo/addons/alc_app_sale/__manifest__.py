@@ -80,5 +80,6 @@
         "alc_product_view",
         "alc_product_price_category_data",
         "alc_product_promoted_links",
+        "alc_sale_exception_promotion",
     ],
 }
