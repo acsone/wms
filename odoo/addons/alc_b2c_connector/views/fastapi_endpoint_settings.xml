@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="fastapi_endpoint_settings_form_view">
+        <field name="model">fastapi.endpoint.settings</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" />
+                        <h1>
+                            <field name="name" />
+                        </h1>
+                        </div>
+                    <group>
+                        <group>
+                        <field name="sale_channel_id" />
+                        <field name="payment_mode_id" />
+                        <field name="pricelist_id" />
+                        <field name="picking_policy" />
+                        <field name="allow_customer_modifications" />
+
+                        </group>
+                        <group>
+                        <field name="sale_team_id" />
+                        <field name="payment_term_id" />
+                        <field name="product_assortment_id" />
+                        <field name="is_sale_back_order_accepted" />
+                        <field name="auth_api_key_id" />
+
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record model="ir.ui.view" id="fastapi_endpoint_settings_tree_view">
+        <field name="model">fastapi.endpoint.settings</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="product_assortment_id" />
+                <field name="sale_channel_id" />
+                <field name="pricelist_id" />
+                <field name="sale_team_id" />
+                <field name="payment_mode_id" />
+                <field name="payment_term_id" />
+                <field name="is_sale_back_order_accepted" />
+                <field name="picking_policy" />
+                <field name="auth_api_key_id" />
+                <field name="allow_customer_modifications" />
+            </tree>
+        </field>
+    </record>
+
+</odoo>

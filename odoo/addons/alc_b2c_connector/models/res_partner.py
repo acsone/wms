@@ -1,10 +1,11 @@
-# -*- coding: utf-8 -*-
 # Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 
-from odoo import _, api, models
+from odoo import _, api, fields
 from odoo.exceptions import ValidationError
+
+from odoo.addons.alc_partner_type.models.res_partner import ResPartner as ResPartnerBase
 
 TITLE_XML_ID_BY_B2C_KEY = {
     "mr": "base.res_partner_title_mister",
@@ -12,29 +13,30 @@ TITLE_XML_ID_BY_B2C_KEY = {
 }
 
 
-class ResPartner(models.Model):
-    _inherit = "res.partner"
+class ResPartner(ResPartnerBase):
+
+    ref = fields.Char(required=True)
 
     @api.depends("partner_type", "is_b2c_customer")
     def _compute_is_student(self):
         """The student category is also used as a miscellaneous category."""
-        res = super(ResPartner, self)._compute_is_student()
+        res = super()._compute_is_student()
         for partner in self.filtered(lambda p: p.is_student and p.is_b2c_customer):
             partner.is_student = False
         return res
 
-    def _update_b2c_recipient_validate_data(self, data, b2c_backend):
+    def _update_b2c_recipient_validate_data(self, data, endpoint_setting):
         """If this partner has one started picking out, only update contact fields."""
         self.ensure_one()
         domain_pickings = [
-            ("customer_id", "=", self.id),
+            ("partner_id", "=", self.id),
             ("picking_type_code", "=", "outgoing"),
             ("printed", "=", True),
         ]
         keys = ["mobile", "phone", "email", "comment"]
         if (
             self.env["stock.picking"].search(domain_pickings, limit=1)
-            and not b2c_backend.allow_customer_modifications
+            and not endpoint_setting.allow_customer_modifications
         ):
             for key in data:
                 value = self[key].id if key in {"title", "country_id"} else self[key]
@@ -42,51 +44,59 @@ class ResPartner(models.Model):
                     msg = _(
                         "You cannot update this address since there are already"
                         " closed Sale Orders for this partner. "
-                        "Incoherent field: %s, current value: %s"
+                        "Incoherent field: %(key)s, current value: %(value)s"
                     )
-                    raise ValidationError(msg % (key, value))
+                    raise ValidationError(msg % dict(key=key, value=value))
         return data
 
     @api.model
-    def _update_b2c_recipient(self, b2c_id, b2c_backend, data):
-        """ Update the final customer
-        """
-        b2c_ref = self._b2c_id_to_b2c_ref(b2c_id, b2c_backend)
+    def _update_b2c_recipient(self, b2c_id, endpoint_setting, data):
+        """Update the final customer."""
+        b2c_ref = self._b2c_id_to_b2c_ref(b2c_id, endpoint_setting)
         partner = self._get_partner_by_ref(b2c_ref)
-        partner._update_b2c_data(data, b2c_backend)
+        partner._update_b2c_data(data, endpoint_setting)
         return partner
 
-    def _update_b2c_data(self, data, b2c_backend):
+    def _update_b2c_data(self, data, endpoint_setting):
         self.ensure_one()
-        data.pop("id", None)
         if data.get("country_code"):
-            country = self.env["res.country"]._get_by_code(data.pop("country_code"))
+            country = self.env["res.country"]._get_by_code(
+                data.pop("country_code").value
+            )
             data["country_id"] = country.id
         name = data.pop("first_name", "")
         if data.get("last_name"):
-            name = u"{} {}".format(name, data.pop("last_name"))
+            name = f"{name} {data.pop('last_name')}"
         if name:
             data["name"] = name
         if data.get("title"):
-            data["title"] = self.env.ref(TITLE_XML_ID_BY_B2C_KEY[data["title"]]).id
-        if "name2" in data:
-            data["suite"] = data.pop("name2")
+            data["title"] = self.env.ref(
+                TITLE_XML_ID_BY_B2C_KEY[data["title"].value]
+            ).id
+        # if "name2" in data:
+        #   data["suite"] = data.pop("name2") FIXME: do after specific_partner migration
         if "note" in data:  # passing None is allowed, so no get here
             data["comment"] = data.pop("note")
-        self._update_b2c_recipient_validate_data(data, b2c_backend)
+        self._update_b2c_recipient_validate_data(data, endpoint_setting)
         return self.write(data)
 
     @api.model
     def _get_partner_by_ref(self, b2c_ref, raise_if_notfound=True):
-        partner = self.search([("ref", "=", b2c_ref)], order="parent_id desc", limit=1,)
+        partner = self.search(
+            [("ref", "=", b2c_ref)],
+            order="parent_id desc",
+            limit=1,
+        )
         if not partner and raise_if_notfound:
-            raise ValidationError(_("No match found for customer_id: %s") % b2c_ref)
+            raise ValidationError(
+                _("No match found for customer_id: {b2c_ref}").format(b2c_ref=b2c_ref)
+            )
         return partner
 
     @api.model
-    def _b2c_id_to_b2c_ref(self, b2c_id, b2c_backend):
-        return u"{}_{}".format(b2c_backend.sale_channel, b2c_id)
+    def _b2c_id_to_b2c_ref(self, b2c_id, endpoint_setting):
+        return f"{endpoint_setting.sale_channel_id.name}_{b2c_id}"
 
     @api.model
     def _b2c_ref_to_b2c_id(self, ref):
-        return ref.split("_")[1]
+        return ref.split("_")[1] if isinstance(ref, str) else None

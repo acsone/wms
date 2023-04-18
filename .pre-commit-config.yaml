@@ -11,7 +11,6 @@ exclude: |
   ^odoo/addons/alc_address_data/|
   ^odoo/addons/alc_analytic_category_report/|
   ^odoo/addons/alc_automatic_account_move_line_reconcile/|
-  ^odoo/addons/alc_b2c_connector/|
   ^odoo/addons/alc_b2c_connector_pricelist_discount/|
   ^odoo/addons/alc_base_rest_api_doc/|
   ^odoo/addons/alc_cerberus_utils/|
@@ -315,6 +314,7 @@ repos:
     rev: v0.0.249
     hooks:
       - id: ruff
+        exclude: \/alc_b2c_connector\/services\/.
   - repo: https://github.com/OCA/pylint-odoo
     rev: v8.0.19
     hooks:

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record id="fastapi_endpoint_b2c" model="fastapi.endpoint">
+      <field name="name">B2C</field>
+      <field name="app">b2c</field>
+        <field name="root_path">b2c_api</field>
+    </record>
+
+
+
+</odoo>

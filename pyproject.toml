@@ -89,7 +89,6 @@ exclude = [
   'odoo/addons/alc_address_data/*',
   'odoo/addons/alc_analytic_category_report/*',
   'odoo/addons/alc_automatic_account_move_line_reconcile/*',
-  'odoo/addons/alc_b2c_connector/*',
   'odoo/addons/alc_b2c_connector_pricelist_discount/*',
   'odoo/addons/alc_base_rest_api_doc/*',
   'odoo/addons/alc_cerberus_utils/*',

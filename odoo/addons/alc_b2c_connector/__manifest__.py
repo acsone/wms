@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -7,48 +6,34 @@
     "description": """
         Alcyon: B2C Connector
 
-        A set of REST services used by B2C market places to makes PO.
+        A set of FastAPI services used by B2C market places to makes PO.
         """,
-    "version": "10.0.2.0.0",
+    "version": "16.0.2.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        "account_payment_mode",
-        "account_payment_sale",
-        "account_payment_partner",
-        "alc_b2c_partner",
-        "alc_sale_product_qty_backorder",
-        "base_rest",
-        "base_rest_auth_api_key",
-        "base_suspend_security",
-        "connector",
-        "delivery",
-        "onchange_helper",
-        "procurement_sale",  # confirmation_date field on SO TODO: partially replaced by alc_sale_product_qty_unavailable
+        "fastapi",
         "product_assortment",
-        "sale",
-        "sale_order_line_cancel",
-        "sales_team",
+        "sale_channel",
+        "sale_stock",
+        "auth_api_key",
+        "account_payment_mode",
+        "alc_product_pharmacy",
         "stock_available",
-        "stock_picking_backorder",  # is_sale_back_order_accepted on respartner
-        "alc_partner_veterinary",
-        "alc_sale_channel",  # sale_channel field on SO
-        "stock_groupbypartner",
-        "alc_pricelist_discount",
-        "alc_product_category_data",
-        "alc_product_pricelist_data",
+        "alc_partner_type",
+        "alc_b2c_partner",
     ],
     "data": [
-        "views/sale_order.xml",
-        "data/ir_filters.xml",
-        "data/product_pricelist.xml",
-        "data/res_users.xml",
-        "views/alc_b2c_backend.xml",
-        "security/alc_b2c_backend.xml",
+        "security/fastapi_endpoint_settings.xml",
+        "data/fastapi_endpoint.xml",
+        "views/fastapi_endpoint_settings.xml",
+        "views/fastapi_endpoint.xml",
+        # "views/sale_order.xml",
+        # "data/ir_filters.xml",
+        # "data/product_pricelist.xml",
+        # "data/res_users.xml",
+        # "views/alc_b2c_backend.xml",
+        # "security/alc_b2c_backend.xml",
     ],
-    "demo": [],
-    "post_init_hook": "post_init_hook",
-    "application": True,
-    'installable': False
 }

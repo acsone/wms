@@ -12,6 +12,7 @@ odoo-addon-account-tax-one-vat-sale @ git+https://github.com/acsone/account-invo
 odoo-addon-account-tax-unece==16.0.1.1.0
 odoo-addon-attachment-s3 @ git+https://github.com/acsone/odoo-cloud-platform@859aa085094fb5cd9acb39dc28d4315b9e77ae62#subdirectory=setup/attachment_s3
 odoo-addon-attribute-set @ git+https://github.com/acsone/odoo-pim.git@d8078f7e77f07390200bd321619ee6db5d36727f#subdirectory=setup/attribute_set
+odoo-addon-auth-api-key==16.0.1.0.0.4
 odoo-addon-base-attachment-object-storage @ git+https://github.com/acsone/odoo-cloud-platform@be594cd1855d41772f585e1ec87b14c5eab8cce7#subdirectory=setup/base_attachment_object_storage
 odoo-addon-base-business-document-import @ git+https://github.com/acsone/edi.git@f15198354f32bf9b2c4107659883e6fecbf01e75#subdirectory=setup/base_business_document_import
 odoo-addon-base-delivery-carrier-label==16.0.1.0.0.3
@@ -30,6 +31,8 @@ odoo-addon-delivery-carrier-max-weight-constraint==16.0.1.0.1
 odoo-addon-delivery-estimated-package-quantity-by-weight @ git+https://github.com/acsone/delivery-carrier.git@628d15f465d02c468772d7f92fe7c3e3eebd3c18#subdirectory=setup/delivery_estimated_package_quantity_by_weight
 odoo-addon-delivery-package-type-number-parcels==16.0.1.0.1
 odoo-addon-delivery-procurement-group-carrier==16.0.1.0.0.2
+odoo-addon-endpoint-route-handler @ git+https://github.com/OCA/web-api.git@568d6cd6e69a88b466d81197674265933ebce557#subdirectory=setup/endpoint_route_handler
+odoo-addon-fastapi @ git+https://github.com/OCA/rest-framework.git@c1217416a4d95f14e6d39a7030367a24d9e13744#subdirectory=setup/fastapi
 odoo-addon-geoengine-base-geolocalize @ git+https://github.com/acsone/geospatial.git@d977cbdc42825e5d241ebe91203e0d087d73b2e7#subdirectory=setup/geoengine_base_geolocalize
 odoo-addon-geoengine-partner @ git+https://github.com/acsone/geospatial.git@ff4a76d86be5abd88dcb0f84c5def21a70e2262d#subdirectory=setup/geoengine_partner
 odoo-addon-hr-holidays-public==16.0.1.1.0
@@ -40,6 +43,7 @@ odoo-addon-partner-manual-rank==16.0.1.0.1
 odoo-addon-partner-tz==16.0.1.0.0.3
 odoo-addon-pdf-helper==16.0.1.0.0.2
 odoo-addon-product-abc-classification @ git+https://github.com/acsone/product-attribute.git@6403c0518b44a1e3b741f94b550120879ae7c3f8#subdirectory=setup/product_abc_classification
+odoo-addon-product-assortment==16.0.1.0.2.3
 odoo-addon-product-attribute-set @ git+https://github.com/acsone/odoo-pim.git@ec398626b73661f320974cc6ba6210de8ea9c188#subdirectory=setup/product_attribute_set
 odoo-addon-product-dimension==16.0.1.1.0.1
 odoo-addon-product-expiry-configurable==16.0.1.0.0.4
