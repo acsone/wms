@@ -35,10 +35,9 @@
 <!--          src="/website_purchase_review/static/src/js/purchase_review.js"-->
 <!--        />-->
         <t t-call-assets="web.assets_common" t-js="false" />
-        <t t-call-assets="web.assets_frontend" t-js="false" />
+        <t t-call-assets="web.assets_backend" t-js="false" />
         <t t-call-assets="web.assets_common" t-css="false" />
-        <t t-call-assets="web.assets_frontend" t-css="false" />
-        <t t-call-assets="website_purchase_review.assets_purchase_review" />
+        <t t-call-assets="web.assets_backend" t-css="false" />
       </head>
       <body class="container-fluid">
         <div>

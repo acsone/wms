@@ -1,7 +1,9 @@
 /* eslint-disable */
-odoo.define("website_purchase_review.main_page", function (require) {
-  "use strict";
 
+odoo.define("website_purchase_review.main_page", ["web.rpc"], function (require) {
+  "use strict";
+  /** @odoo-module */
+  var rpc = require("web.rpc");
   const self = this;
   // const { useService } = require("@web/core/utils/hooks");
   // window.onload = () => {
@@ -404,12 +406,13 @@ odoo.define("website_purchase_review.main_page", function (require) {
     $("#save_line").prop("disabled", is_disable);
     $("#save_global_values_btn").prop("disabled", is_disable);
   }
-
-  init_listeners();
-  // Init_shortcuts();
-  disable_buttons(true);
-  load_filters();
-  load_products_list();
-  listenPackageSelection();
-  console.log("all loaded");
+  $(document).ready(function () {
+    init_listeners();
+    // Init_shortcuts();
+    disable_buttons(true);
+    load_filters();
+    load_products_list();
+    listenPackageSelection();
+    console.log("all loaded");
+  });
 });

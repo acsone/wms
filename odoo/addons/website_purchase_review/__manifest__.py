@@ -27,13 +27,13 @@
         "stock_account",
         "stock_available",
         "stock_storage_type_putaway_abc",
+        "web",
     ],
     "assets": {
-        "website_purchase_review.assets_purchase_review": [
-            "website_purchase_review/static/src/js/purchase_review.js",
-        ],
-        "web.assets_frontend": [
-            "website_purchase_review/static/src/css/purchase_review.css",
+        "web.assets_backend": [
+            "web/static/src/legacy/legacy_setup.js",
+            "website_purchase_review/static/src/legacy/css/purchase_review.css",
+            "website_purchase_review/static/src/legacy/js/purchase_review.js",
         ],
     },
     "data": ["views/purchase_order.xml", "views/templates.xml"],
