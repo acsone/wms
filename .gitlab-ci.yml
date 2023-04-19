@@ -370,7 +370,7 @@ build-review-image:
     - "10.0"
   when: manual
 
-# deployments to k8s environments (review, test)
+# deployments to k8s environments (review, test, uat, preprod)
 
 .deploy-trigger:
   stage: deploy
@@ -423,7 +423,19 @@ deploy-uat-trigger:
   only:
     - /^1\.100\.\d+$/
 
-# deployments to docker environments (uat, preprod, prod)
+deploy-preprod-trigger:
+  extends: .deploy-trigger
+  variables:
+    DEPLOY_BRANCH: deploy-test
+  environment:
+    name: pp10
+  needs:
+    - job: build-image
+  only:
+    - /^1\.100\.\d+$/
+  when: manual
+
+# deployments to docker environments (prod)
 
 .deploy-docker:
   extends: .deploy-trigger
@@ -432,13 +444,6 @@ deploy-uat-trigger:
   only:
     - /^1\.100\.\d+$/
   when: manual
-
-deploy-preprod-trigger:
-  extends: .deploy-docker
-  variables:
-    DEPLOY_BRANCH: deploy
-  environment:
-    name: preprod
 
 deploy-prod-trigger:
   extends: .deploy-docker
