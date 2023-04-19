@@ -87,7 +87,7 @@ class PurchaseOrder(PurchaseOrderBase):
                 is_with_promo = False
                 is_without_promo = True
             else:
-                is_with_promo = seller.discount_purchase > 0
+                is_with_promo = seller.discount > 0
                 is_without_promo = not is_with_promo
 
             is_in_bo = product.immediately_usable_qty < 0
@@ -119,8 +119,7 @@ class PurchaseOrder(PurchaseOrderBase):
         vals["product_id"] = int(vals["product_id"])
         vals["product_qty"] = float(vals["product_qty"])
 
-        # TODO price_unit_base is defined in specific_purchase
-        # vals["price_unit_base"] = float(vals["price_unit_base"])
+        vals["price_unit"] = float(vals["price_unit"])
 
         date_planned_str = vals["date_planned"]
         date_planned = fields.Datetime.from_string(date_planned_str)
@@ -142,10 +141,13 @@ class PurchaseOrder(PurchaseOrderBase):
 
         if packaging_id and unit_qty:
             vals.update(
-                {"product_packaging": packaging_id, "product_packaging_qty": unit_qty}
+                {
+                    "product_packaging_id": packaging_id,
+                    "product_packaging_qty": unit_qty,
+                }
             )
         else:
-            vals.update({"product_packaging": "", "product_packaging_qty": ""})
+            vals.update({"product_packaging_id": "", "product_packaging_qty": ""})
 
         existing_line = self.env["purchase.order.line"].search(
             [
@@ -170,7 +172,7 @@ class PurchaseOrder(PurchaseOrderBase):
             "order_id",
             "product_id",
             "product_qty",
-            "price_unit_base",
+            "price_unit",
             "date_planned",
         )
 
@@ -183,33 +185,32 @@ class PurchaseOrder(PurchaseOrderBase):
             product = self.env["product.product"].browse(vals["product_id"])
             orderpoint_min = float(orderpoint_min) if orderpoint_min else 0.0
             orderpoint_max = float(orderpoint_max) if orderpoint_max else 0.0
-            # orderpoint_qty_multiple = (
-            #     float(orderpoint_qty_multiple) if orderpoint_qty_multiple else 0.0
-            # )
+            orderpoint_qty_multiple = (
+                float(orderpoint_qty_multiple) if orderpoint_qty_multiple else 0.0
+            )
             if (
                 product.reordering_min_qty != orderpoint_min
                 or product.reordering_max_qty != orderpoint_max
-                # TODO what is this? Is it still relevant in 16
-                # or product.orderpoint_qty_multiple != orderpoint_qty_multiple
+                or product.orderpoint_qty_multiple != orderpoint_qty_multiple
             ):
                 product.sudo().write(
                     {
                         "reordering_min_qty": orderpoint_min,
                         "reordering_max_qty": orderpoint_max,
-                        # "orderpoint_qty_multiple": orderpoint_qty_multiple,
+                        "orderpoint_qty_multiple": orderpoint_qty_multiple,
                     }
                 )
 
     def _update_line(self, existing_line, vals):
         vals.pop("order_id")
         vals.pop("product_id")
-        # old_price_unit_base = existing_line.price_unit_base
+        old_price_unit = existing_line.price_unit
         old_discount_global = existing_line.discount_global
         old_promotion_supplier = existing_line.promotion_supplier
         existing_line.write(vals)
         if (
-            # old_price_unit_base != existing_line.price_unit_base
-            old_discount_global != existing_line.discount_global
+            old_price_unit != existing_line.price_unit
+            or old_discount_global != existing_line.discount_global
             or old_promotion_supplier != existing_line.promotion_supplier
         ):
             existing_line._onchange_price_unit()
@@ -223,22 +224,22 @@ class PurchaseOrder(PurchaseOrderBase):
             }
         )
 
-        # po_line = self.env["purchase.order.line"]
-        # product_id = vals.pop("product_id")
-        # # TODO: not sure why we don't use all the values defined in `vals`
-        # line = po_line.new(
-        #     {
-        #         # mandatory to make the onchange work fine w/ vendor info
-        #         "product_id": product_id,
-        #         "partner_id": self.partner_id,
-        #         "order_id": vals["order_id"],
-        #     }
-        # )
-        # line.onchange_product_id()
-        # new_vals = line._convert_to_write(line._cache)
-        #
-        # new_vals.update(vals)
-        # po_line.create(new_vals)
+        po_line = self.env["purchase.order.line"]
+        product_id = vals.pop("product_id")
+        # TODO: not sure why we don't use all the values defined in `vals`
+        line = po_line.new(
+            {
+                # mandatory to make the onchange work fine w/ vendor info
+                "product_id": product_id,
+                "partner_id": self.partner_id,
+                "order_id": vals["order_id"],
+            }
+        )
+        line.onchange_product_id()
+        new_vals = line._convert_to_write(line._cache)
+
+        new_vals.update(vals)
+        po_line.create(new_vals)
 
     def get_url(self):
         self.ensure_one()

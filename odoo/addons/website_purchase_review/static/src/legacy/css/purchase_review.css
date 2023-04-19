@@ -62,6 +62,7 @@ body {
   /*background-color: #FFFDF7;*/
 }
 #stock_graph {
+  margin-top: 15px;
   padding-right: 25px;
 }
 #save_global_values_btn {

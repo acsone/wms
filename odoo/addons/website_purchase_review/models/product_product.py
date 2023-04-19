@@ -22,16 +22,13 @@ class ProductProduct(ProductBase):
         as the value computed by reordering rules
         :return:
         """
-        self.mapped("orderpoint_ids")
-
-        # TODO verify that this is really not needed anymore.
-        # TODO How is this taken into account in 16?
+        orderpoints = self.mapped("orderpoint_ids")
 
         # Compute quantities to subtract
-        # if orderpoints:
-        #     subtract_quantity = orderpoints.subtract_procurements_from_orderpoints()
-        # else:
-        #     subtract_quantity = {}
+        if orderpoints:
+            subtract_quantity = orderpoints._quantity_in_progress()
+        else:
+            subtract_quantity = {}
 
         for product in self:
             virtual_available = product.virtual_available
@@ -93,14 +90,15 @@ class ProductProduct(ProductBase):
             ):
                 continue
 
-            # TODO see previous
-            # if orderpoint and orderpoint.id in subtract_quantity:
-            #     qty -= subtract_quantity[orderpoint.id]
+            if orderpoint and orderpoint.id in subtract_quantity:
+                qty -= subtract_quantity[orderpoint.id]
             qty_rounded = float_round(
                 qty, precision_rounding=orderpoint.product_uom.rounding
             )
             if qty_rounded > 0:
                 product.advised_qty = qty_rounded
+            else:
+                product.advised_qty = False
 
     def get_lots(self):
         self.ensure_one()
@@ -175,7 +173,7 @@ class ProductProduct(ProductBase):
             # (take data in the current year)
             if month < today.month:
                 label = f"{month}/{str(today.year)[2:]}"
-                value = values.get(f"{today.year}-{month}", 0)
+                value = values.get(f"{today.year}-{month:02}", 0)
                 month_values = [{"label": label, "value": value}]
             # If the current month is the same than today
             # (take data in the current year AND in the last year)
@@ -209,6 +207,6 @@ class ProductProduct(ProductBase):
 
             graph_values += month_values
 
-        result = [{"key": "Sale order", "values": graph_values}]
+        result = graph_values
 
         return result
