@@ -428,7 +428,7 @@ deploy-preprod-trigger:
   variables:
     DEPLOY_BRANCH: deploy-test
   environment:
-    name: pp10
+    name: preprod10
   needs:
     - job: build-image
   only:
