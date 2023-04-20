@@ -2,13 +2,13 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 {
-    "name": "Website purchase review",
+    "name": "Alc purchase order builder",
     "version": "16.0.1.0.0",
     "author": "Okia SPRL,ACSONE SA/NV",
     "license": "AGPL-3",
     "category": "Others",
     "description": """
-    Website purchase review
+    Alc purchase order build
     """,
     "depends": [
         "alc_additional_product_base",
@@ -31,14 +31,15 @@
         "web",
     ],
     "assets": {
-        "website_purchase_review.assets_website_purchase_review": [
+        "alc_purchase_order_builder.assets_purchase_order_builder": [
             "web/static/lib/Chart/Chart.js",
-            "website_purchase_review/static/src/legacy/css/purchase_review.css",
-            "website_purchase_review/static/src/legacy/js/purchase_review.js",
+            "alc_purchase_order_builder/static/src/legacy/css/alc_purchase_order_builder.css",
+            "alc_purchase_order_builder/static/src/legacy/js/alc_purchase_order_builder.js",
             "web/static/src/legacy/legacy_setup.js",
         ],
     },
     "data": ["views/purchase_order.xml", "views/templates.xml"],
+    "pre_init_hook": "pre_init_hook",
     "website": "http://www.camptocamp.com",
     "installable": True,
 }

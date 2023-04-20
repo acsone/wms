@@ -23,11 +23,11 @@ FILTERS = [
 ]
 
 
-class PurchaseReview(Home):
+class PurchaseOrderBuilder(Home):
     @http.route(  # noqa: C901
         [
-            "/purchase_review/<model('purchase.order'):po>",
-            "/purchase_review/<model('purchase.order'):po>/"
+            "/purchase_order_builder/<model('purchase.order'):po>",
+            "/purchase_order_builder/<model('purchase.order'):po>/"
             "<model('product.product'):product>",
         ],
         type="http",
@@ -36,7 +36,7 @@ class PurchaseReview(Home):
         website=False,
         csrf=False,
     )
-    def purchase_review(self, po, product=None, **kw):
+    def purchase_order_builder(self, po, product=None, **kw):
         if not (product or self._product_from_po(po)):
             raise UserError(_("There are no products for this supplier"))
 
@@ -55,15 +55,15 @@ class PurchaseReview(Home):
         if kw_copy:
             po.update_or_create_line(kw_copy)
             if params.get("next_product_id"):
-                url = f"/purchase_review/{po.id}/{params['next_product_id']}"
+                url = f"/purchase_order_builder/{po.id}/{params['next_product_id']}"
             else:
-                url = f"/purchase_review/{po.id}"
+                url = f"/purchase_order_builder/{po.id}"
             if params:
                 url += f"?{urlencode(params)}"
             res = request.redirect(url)
         else:
             values = self._values(po, po_line, product)
-            res = request.render("website_purchase_review.main_page", values)
+            res = request.render("alc_purchase_order_builder.main_page", values)
         return res
 
     def _product_from_po(self, po):

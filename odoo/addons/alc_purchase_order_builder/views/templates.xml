@@ -10,19 +10,19 @@
         <t t-call-assets="web.assets_common" t-js="false" />
         <t t-call-assets="web.assets_backend" t-js="false" />
         <t
-          t-call-assets="website_purchase_review.assets_website_purchase_review"
+          t-call-assets="alc_purchase_order_builder.assets_purchase_order_builder"
           t-js="false"
         />
         <t t-call-assets="web.assets_common" t-css="false" />
         <t t-call-assets="web.assets_backend" t-css="false" />
         <t
-          t-call-assets="website_purchase_review.assets_website_purchase_review"
+          t-call-assets="alc_purchase_order_builder.assets_purchase_order_builder"
           t-css="false"
         />
       </head>
       <body class="container-fluid">
         <div>
-          <t t-call="website_purchase_review.main_page_body" />
+          <t t-call="alc_purchase_order_builder.main_page_body" />
         </div>
       </body>
     </html>

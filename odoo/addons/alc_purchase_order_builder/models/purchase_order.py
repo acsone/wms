@@ -30,7 +30,7 @@ class PurchaseOrder(PurchaseOrderBase):
                 purchase.order_line.filtered(lambda line: line.is_confirmed_line)
             )
 
-    def open_purchase_review_url(self):
+    def open_purchase_order_builder_url(self):
         self.ensure_one()
 
         if self.order_line:
@@ -38,14 +38,14 @@ class PurchaseOrder(PurchaseOrderBase):
                 lambda product: product.name
             )
             query = "products_to_order=true&reload_products=true"
-            url = f"/purchase_review/{self.id}/{products[0].id}?{query}"
+            url = f"/purchase_order_builder/{self.id}/{products[0].id}?{query}"
         else:
             products = self.env["product.product"].search(
                 [("supplier_id", "=", self.partner_id.id)], limit=1
             )
             if not products:
                 raise ValidationError(_("There are no products for this supplier"))
-            url = f"/purchase_review/{self.id}?reload_products=true"
+            url = f"/purchase_order_builder/{self.id}?reload_products=true"
 
         return {"type": "ir.actions.act_url", "url": url, "target": "self"}
 

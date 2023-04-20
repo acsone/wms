@@ -115,7 +115,7 @@ class ProductProduct(ProductBase):
 
         sellers = self.seller_ids
         sellers_with_discount = sellers.filtered(
-            lambda s: s.discount_purchase or s.ratio_promotional_product
+            lambda s: s.discount or s.ratio_promotional_product
         )
         sellers_with_discount.sorted(lambda seller: seller.date_start)
 
