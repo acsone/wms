@@ -22,7 +22,7 @@ class TestBarcodeRequired(SavepointCase):
                     "uom_id": self.env.ref("product.product_uom_unit").id,
                     "type": "product",
                     "weight": 6.0,
-                    "product_package_storage_type_id": self.dummy_storage_type.id,
+                    "package_type_id": self.dummy_storage_type.id,
                 }
             )
 
@@ -34,7 +34,7 @@ class TestBarcodeRequired(SavepointCase):
                 "type": "product",
                 "weight": 6.0,
                 "barcode": "1234567892",
-                "product_package_storage_type_id": self.dummy_storage_type.id,
+                "package_type_id": self.dummy_storage_type.id,
             }
         )
 
@@ -49,7 +49,7 @@ class TestBarcodeRequired(SavepointCase):
                 "type": "product",
                 "weight": 6.0,
                 "no_barcode_authorized": True,
-                "product_package_storage_type_id": self.dummy_storage_type.id,
+                "package_type_id": self.dummy_storage_type.id,
             }
         )
 
@@ -64,7 +64,7 @@ class TestBarcodeRequired(SavepointCase):
                     "uom_id": self.env.ref("product.product_uom_unit").id,
                     "type": "product",
                     "weight": 6.0,
-                    "product_package_storage_type_id": self.dummy_storage_type.id,
+                    "package_type_id": self.dummy_storage_type.id,
                 }
             )
 
@@ -76,7 +76,7 @@ class TestBarcodeRequired(SavepointCase):
                 "type": "product",
                 "weight": 6.0,
                 "barcode": "1234567892",
-                "product_package_storage_type_id": self.dummy_storage_type.id,
+                "package_type_id": self.dummy_storage_type.id,
             }
         )
         with self.assertRaises(ValidationError), self.env.cr.savepoint():
@@ -88,7 +88,7 @@ class TestBarcodeRequired(SavepointCase):
         )
         template = self.env["product.template"].create(
             {
-                "product_package_storage_type_id": storage_type_new.id,
+                "package_type_id": storage_type_new.id,
                 "name": "Unittest template missing no barcode authorized on write",
                 "uom_id": self.env.ref("product.product_uom_unit").id,
                 "type": "product",

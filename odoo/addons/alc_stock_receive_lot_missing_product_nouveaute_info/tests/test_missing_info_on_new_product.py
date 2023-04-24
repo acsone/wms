@@ -32,7 +32,7 @@ class TestMissingInfoOnNewProduct(SavepointCase):
                 "uom_id": cls.env.ref("product.product_uom_unit").id,
                 "type": "product",
                 "weight": 10.0,
-                "product_package_storage_type_id": storage_type_new.id,
+                "package_type_id": storage_type_new.id,
             }
         )
         cls.p1 = cls.pt1.product_variant_ids[0]
@@ -42,7 +42,7 @@ class TestMissingInfoOnNewProduct(SavepointCase):
                 "uom_id": cls.env.ref("product.product_uom_unit").id,
                 "type": "product",
                 "barcode": "123456789",
-                "product_package_storage_type_id": storage_type_new.id,
+                "package_type_id": storage_type_new.id,
             }
         )
         cls.p2 = cls.pt2.product_variant_ids[0]
@@ -55,7 +55,7 @@ class TestMissingInfoOnNewProduct(SavepointCase):
                 "length": 2.0,
                 "width": 4.0,
                 "height": 6.0,
-                "product_package_storage_type_id": storage_type_new.id,
+                "package_type_id": storage_type_new.id,
             }
         )
         cls.p3 = cls.pt3.product_variant_ids[0]
@@ -68,7 +68,7 @@ class TestMissingInfoOnNewProduct(SavepointCase):
                 "width": 4.0,
                 "height": 6.0,
                 "barcode": "123456778",
-                "product_package_storage_type_id": storage_type_new.id,
+                "package_type_id": storage_type_new.id,
             }
         )
         cls.p4 = cls.pt4.product_variant_ids[0]
@@ -79,7 +79,7 @@ class TestMissingInfoOnNewProduct(SavepointCase):
                 "type": "product",
                 "weight": 10.0,
                 "barcode": "123456723",
-                "product_package_storage_type_id": storage_type_new.id,
+                "package_type_id": storage_type_new.id,
             }
         )
         cls.p5 = cls.pt5.product_variant_ids[0]
@@ -91,7 +91,7 @@ class TestMissingInfoOnNewProduct(SavepointCase):
                 "length": 2.0,
                 "width": 4.0,
                 "height": 6.0,
-                "product_package_storage_type_id": storage_type_new.id,
+                "package_type_id": storage_type_new.id,
             }
         )
         cls.p6 = cls.pt6.product_variant_ids[0]
@@ -105,7 +105,7 @@ class TestMissingInfoOnNewProduct(SavepointCase):
                 "height": 6.0,
                 "weight": 10.0,
                 "barcode": "2345678910",
-                "product_package_storage_type_id": storage_type_new.id,
+                "package_type_id": storage_type_new.id,
             }
         )
         cls.p7 = cls.pt7.product_variant_ids[0]
@@ -115,7 +115,7 @@ class TestMissingInfoOnNewProduct(SavepointCase):
                 "uom_id": cls.env.ref("product.product_uom_unit").id,
                 "type": "product",
                 "barcode": "23456998778910",
-                "product_package_storage_type_id": cls.dummy_storage_type.id,
+                "package_type_id": cls.dummy_storage_type.id,
             }
         )
         cls.p8 = cls.pt8.product_variant_ids[0]
@@ -127,7 +127,7 @@ class TestMissingInfoOnNewProduct(SavepointCase):
                 "type": "product",
                 "weight": 10.0,
                 "barcode": "234567998778910",
-                "product_package_storage_type_id": cls.dummy_storage_type.id,
+                "package_type_id": cls.dummy_storage_type.id,
             }
         )
         cls.p9 = cls.pt9.product_variant_ids[0]
@@ -140,7 +140,7 @@ class TestMissingInfoOnNewProduct(SavepointCase):
                 "type": "product",
                 "weight": 10.0,
                 "barcode": "234569234578910",
-                "product_package_storage_type_id": cls.dummy_storage_type.id,
+                "package_type_id": cls.dummy_storage_type.id,
             }
         )
         cls.p10 = cls.pt10.product_variant_ids[0]
@@ -154,7 +154,7 @@ class TestMissingInfoOnNewProduct(SavepointCase):
                 "weight": 10.0,
                 "barcode": "2345696578778910",
                 "is_human": True,
-                "product_package_storage_type_id": cls.dummy_storage_type.id,
+                "package_type_id": cls.dummy_storage_type.id,
             }
         )
         cls.p11 = cls.pt11.product_variant_ids[0]
@@ -167,7 +167,7 @@ class TestMissingInfoOnNewProduct(SavepointCase):
                 "type": "product",
                 "weight": 10.0,
                 "barcode": "23456920009578910",
-                "product_package_storage_type_id": cls.dummy_storage_type.id,
+                "package_type_id": cls.dummy_storage_type.id,
             }
         )
         cls.p13 = cls.pt13.product_variant_ids[0]
@@ -197,7 +197,7 @@ class TestMissingInfoOnNewProduct(SavepointCase):
                 "weight": 10.0,
                 "barcode": "2345696511178910",
                 "is_equipment": True,
-                "product_package_storage_type_id": cls.dummy_storage_type.id,
+                "package_type_id": cls.dummy_storage_type.id,
             }
         )
         cls.p12 = cls.pt12.product_variant_ids[0]

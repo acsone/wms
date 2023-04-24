@@ -21,7 +21,7 @@ class TestStorageTypePutawayStrategy(TestStorageTypeCommon):
             }
         )
         # assign storage_type to product
-        cls.product.product_package_storage_type_id = cls.cardboxes_package_storage_type
+        cls.product.package_type_id = cls.cardboxes_package_storage_type
         # ensure tracking by lot
         cls.product.tracking = "lot"
 
