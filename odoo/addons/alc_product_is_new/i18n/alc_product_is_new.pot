@@ -14,6 +14,15 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_product_is_new
+#: model:ir.model.fields,help:alc_product_is_new.field_product_product__package_type_id
+#: model:ir.model.fields,help:alc_product_is_new.field_product_template__package_type_id
+msgid ""
+"Defines a 'default' package type for this product to be applied on packages "
+"without product packagings and on put-away computation based on package type"
+" for product not in a package"
+msgstr ""
+
+#. module: alc_product_is_new
 #: model:ir.model.fields,field_description:alc_product_is_new.field_product_product__is_new
 #: model:ir.model.fields,field_description:alc_product_is_new.field_product_template__is_new
 #: model:ir.model.fields,field_description:alc_product_is_new.field_stock_package_type__is_new
@@ -27,14 +36,14 @@ msgid "New Product With Old Date"
 msgstr ""
 
 #. module: alc_product_is_new
-#: model:ir.model,name:alc_product_is_new.model_product_template
-msgid "Product"
+#: model:ir.model.fields,field_description:alc_product_is_new.field_product_product__package_type_id
+#: model:ir.model.fields,field_description:alc_product_is_new.field_product_template__package_type_id
+msgid "Package type"
 msgstr ""
 
 #. module: alc_product_is_new
-#: model:ir.model.fields,field_description:alc_product_is_new.field_product_product__package_type_id
-#: model:ir.model.fields,field_description:alc_product_is_new.field_product_template__package_type_id
-msgid "Product Package Storage Type"
+#: model:ir.model,name:alc_product_is_new.model_product_template
+msgid "Product"
 msgstr ""
 
 #. module: alc_product_is_new
