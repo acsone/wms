@@ -9,24 +9,53 @@
     <field name="arch" type="xml">
        <field name="name" position="after">
         <field name="can_unreserve_moves" invisible="1" />
+        <field name="quant_reserved_exist" invisible="1" />
        </field>
       <xpath expr="//button[@name='do_unreserve']" position="attributes">
        <attribute
           name="attrs"
         >{'invisible': ['|', ('quant_reserved_exist', '=', False), ('can_unreserve_moves', '=', False)]}</attribute>
       </xpath>
-      <xpath expr="//page/button[@name='put_in_pack']" position="attributes">
+      <xpath
+        expr="//page[@name='operations']/button[@name='action_put_in_pack']"
+        position="attributes"
+      >
         <attribute
           name="attrs"
-        >{'invisible': ['|', '|', '|', ('picking_type_subcode', '=', 'PICK'), ('operator_id', '=', False), ('state', 'not in', ['partially_available','assigned']), ('delivery_type', '=', 'gls')]}</attribute>
+        >{'invisible': ['|', ('state', 'in', ('draft', 'done', 'cancel')), ('delivery_type', '=', 'gls')]}</attribute>
       </xpath>
-      <xpath expr="//page/button[@name='put_in_pack']" position="after">
+      <xpath
+        expr="//page[@name='operations']/button[@name='action_put_in_pack']"
+        position="after"
+      >
         <button
-          attrs="{'invisible': ['|', '|', '|', ('picking_type_subcode', '=', 'PICK'), ('operator_id', '=', False), ('state', 'not in', ['partially_available','assigned']), ('delivery_type', '!=', 'gls')]}"
-          class="oe_link oe_right"
+          attrs="{'invisible': ['|', ('state', 'in', ('draft', 'done', 'cancel')), ('delivery_type', '!=', 'gls')]}"
+          class="oe_highlight"
           name="button_gls_put_in_pack"
           type="object"
-          string="&#8627;Put in Pack"
+          string="Put in Pack"
+          context="{'default_picking_id': active_id}"
+          barcode_trigger="gls-put-in-pack"
+        />
+      </xpath>
+      <xpath
+        expr="//page[@name='detailed_operations']/button[@name='action_put_in_pack']"
+        position="attributes"
+      >
+        <attribute
+          name="attrs"
+        >{'invisible': ['|', ('state', 'in', ('draft', 'done', 'cancel')), ('delivery_type', '=', 'gls')]}</attribute>
+      </xpath>
+      <xpath
+        expr="//page[@name='detailed_operations']/button[@name='action_put_in_pack']"
+        position="after"
+      >
+        <button
+          attrs="{'invisible': ['|', ('state', 'in', ('draft', 'done', 'cancel')), ('delivery_type', '!=', 'gls')]}"
+          class="oe_highlight"
+          name="button_gls_put_in_pack"
+          type="object"
+          string="Put in Pack"
           context="{'default_picking_id': active_id}"
           barcode_trigger="gls-put-in-pack"
         />

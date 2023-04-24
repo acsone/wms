@@ -64,7 +64,7 @@ class ProductProduct(ProductProductBase):
         self, partner_id=False, quantity=0.0, date=None, uom_id=False, params=False
     ):
         self_with_context = self.with_context(
-            partner_id=partner_id, quantity=quantity, date=date, uom_id=uom_id
+            quantity=quantity, date=date, uom_id=uom_id
         )
         return super(ProductProduct, self_with_context)._select_seller(
             partner_id=partner_id,

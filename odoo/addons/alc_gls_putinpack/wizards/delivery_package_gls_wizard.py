@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -8,38 +7,40 @@ import threading
 from odoo import _, api, fields, models, registry
 from odoo.exceptions import ValidationError
 
+from odoo.addons.stock.models.stock_package_type import PackageType
+from odoo.addons.stock.models.stock_picking import Picking
+from odoo.addons.stock.models.stock_quant import QuantPackage
+
 
 class DeliveryPackageGlsWizard(models.TransientModel):
     _name = "delivery.package.gls.wizard"
     _description = "Wizard to prepare the package and send it to GLS."
 
-    picking_id = fields.Many2one(
-        comodel_name="stock.picking",
+    picking_id = fields.Many2one[Picking](
         string="Picking",
         required=True,
         domain=[("delivery_type", "=", "gls")],
     )
-    allowed_package_ids = fields.Many2many(
-        comodel_name="stock.quant.package",
-        string="Package",
+    allowed_package_ids = fields.Many2many[QuantPackage](
+        string="Allowed Packages",
         compute="_compute_allowed_package_ids",
     )
-    package_id = fields.Many2one(
-        comodel_name="stock.quant.package",
+    package_id = fields.Many2one[QuantPackage](
         string="Package",
         help="The package to send to GLS.",
         # domain="[('id', 'in', allowed_package_ids)]",  # when migrating, use this
     )
     package_id_domain = fields.Char(
-        compute="_compute_package_id_domain", readonly=True, store=False,
+        compute="_compute_package_id_domain",
+        readonly=True,
+        store=False,
     )
     is_sent = fields.Boolean(
         string="Is sent",
         help="Technical field to know if we need to force resend.",
         compute="_compute_is_sent",
     )
-    packaging_id = fields.Many2one(
-        comodel_name="product.packaging",
+    package_type_id = fields.Many2one[PackageType](
         string="Packaging Type",
         domain=[("package_carrier_type", "=", "gls")],
     )
@@ -51,7 +52,7 @@ class DeliveryPackageGlsWizard(models.TransientModel):
     @api.depends("picking_id")
     def _compute_allowed_package_ids(self):
         for record in self:
-            key_packages = "pack_operation_product_ids.result_package_id"
+            key_packages = "move_line_ids.result_package_id"
             record.allowed_package_ids = record.picking_id.mapped(key_packages)
 
     @api.depends("allowed_package_ids")
@@ -74,45 +75,50 @@ class DeliveryPackageGlsWizard(models.TransientModel):
 
     @api.onchange("package_id")
     def onchange_package_id(self):
-        if self.package_id.packaging_id:
-            packaging = self.package_id.packaging_id
-        else:
-            xml_id = "delivery_carrier_label_gls.product_packaging_gls_parcel"
+        packaging = self.package_id.package_type_id
+        if not packaging:
+            xml_id = "delivery_carrier_label_gls.packaging_gls_parcel"
             packaging = self.env.ref(xml_id)
         self._set_shipping_weight()
-        self.packaging_id = packaging
+        self.package_type_id = packaging
 
     def _set_shipping_weight(self):
         for record in self:
             if record.package_id:
                 self.shipping_weight = self.package_id.shipping_weight
             else:
-                filter_ops = lambda o: o.qty_done > 0 and not o.result_package_id
-                ops = self.picking_id.pack_operation_ids.filtered(filter_ops)
+                ops = self.picking_id.move_line_ids.filtered(
+                    lambda o: o.qty_done > 0 and not o.result_package_id
+                )
                 package = self.picking_id._get_gls_pack_package(ops)
                 weight_ops = sum(ops.mapped(lambda o: o.qty_done * o.product_id.weight))
                 self.shipping_weight = package.shipping_weight + weight_ops
 
-    @api.model
-    def create(self, vals):
-        res = super(DeliveryPackageGlsWizard, self).create(vals)
-        res._set_shipping_weight()
+    @api.model_create_multi
+    def create(self, vals_list):
+        res = super().create(vals_list)
+        for wiz in res:
+            wiz._set_shipping_weight()
         return res
 
     def _validate_parameters(self, put_in_pack=False):
-        required_keys = ["packaging_id", "shipping_weight"]
+        required_keys = ["package_type_id", "shipping_weight"]
         if not put_in_pack:
             required_keys.append("package_id")
         for f in required_keys:
             if not self[f]:
-                raise ValidationError(_("Missing parameter: %s") % f)
+                raise ValidationError(_("Missing parameter: %(field)s", field=f))
 
     def put_in_pack(self):
         self._validate_parameters(put_in_pack=True)
-        res = self.picking_id.put_in_pack()
-        if not res:
+        ml_filter = self.picking_id._filter_can_put_in_pack
+        move_line_ids = self.picking_id.move_line_ids.filtered(ml_filter)
+        package = self.picking_id._put_in_pack(move_line_ids)
+        if not package:
             raise ValidationError(_("No package to process."))
-        self.package_id = res["res_id"] if isinstance(res, dict) else res.id
+        package.package_type_id = self.package_type_id
+        package.shipping_weight = self.shipping_weight
+        self.package_id = package.id
         return self._send(put_in_pack=True)
 
     def resend(self):
@@ -139,23 +145,27 @@ class DeliveryPackageGlsWizard(models.TransientModel):
         # we want to keep the package information details in case sending fails
         # however the package does not already exist if we put_in_pack; in that case,
         # the package is also rollbacked, so we can't write the info on it
-        self.write_package_vals()
+        vals = {
+            "shipping_weight": self.shipping_weight,
+            "package_type_id": self.package_type_id.id,
+        }
+        package_id = self.package_id
+        self.package_id.write(vals)
         if not put_in_pack and not (
-            getattr(threading.currentThread(), "testing", False)
+            getattr(threading.current_thread(), "testing", False)
             or self.env.registry.in_test_mode()
         ):  # rollback hooks explode at test cleanup
-            self.env.cr.after("rollback", lambda: self.write_package_vals(True))
-        return self.picking_id.gls_send_shipping_package(self.package_id)
+            package_id = self.package_id.id
+            dbname = self.env.cr.dbname
+            context = self.env.context
+            uid = self.env.uid
 
-    def write_package_vals(self, after_rollback=False):
-        vals_package = {
-            "shipping_weight": self.shipping_weight,
-            "packaging_id": self.packaging_id.id,
-        }
-        if after_rollback:
-            with api.Environment.manage():
-                with registry(self.env.cr.dbname).cursor() as new_cr:
-                    new_env = api.Environment(new_cr, self.env.uid, self.env.context)
-                    self.package_id.with_env(new_env).write(vals_package)
-        else:
-            self.package_id.write(vals_package)
+            @self.env.cr.postrollback.add
+            def after_rollback():
+                db_registry = registry(dbname)
+                with db_registry.cursor() as cr:
+                    env = api.Environment(cr, uid, context)
+                    package = env["stock.quant.package"].browse(package_id)
+                    package.write(vals)
+
+        return self.picking_id.gls_send_shipping_package(self.package_id)
