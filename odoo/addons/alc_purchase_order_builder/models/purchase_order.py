@@ -63,10 +63,12 @@ class PurchaseOrder(PurchaseOrderBase):
 
     def get_products(self):
         self.ensure_one()
-
-        products = self.env["product.product"].search(
-            [("supplier_id", "=", self.partner_id.id)], order="name"
+        supplier_info = self.env["product.supplierinfo"].search(
+            [("partner_id", "=", self.partner_id.id)]
         )
+        products = supplier_info.mapped("product_tmpl_id.product_variant_ids")
+        ordered_products = self.order_line.mapped("product_id")
+        products |= ordered_products
 
         all_products = []
         for product in products:
@@ -75,7 +77,7 @@ class PurchaseOrder(PurchaseOrderBase):
                 all_products.append(product.additional_product_id)
 
         # Don't set empty line (qty == 0) as ordered product
-        ordered_products = self.order_line.filtered(
+        ordered_products_with_qty = self.order_line.filtered(
             lambda line: line.product_qty
         ).mapped("product_id")
         partner = self.partner_id
@@ -98,7 +100,7 @@ class PurchaseOrder(PurchaseOrderBase):
                     "name": product.name,
                     "display_name": product.display_name,
                     "ref": product.default_code,
-                    "ordered_product": product in ordered_products,
+                    "ordered_product": product in ordered_products_with_qty,
                     "with_promo": is_with_promo,
                     "without_promo": is_without_promo,
                     "is_in_bo": is_in_bo,
