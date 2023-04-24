@@ -6,7 +6,6 @@ from datetime import datetime
 
 from odoo import api
 
-from odoo.addons.base.models.res_company import Company
 from odoo.addons.stock.models.stock_orderpoint import (
     StockWarehouseOrderpoint as StockWarehouseOrderpointBase,
 )
@@ -25,11 +24,9 @@ class StockWarehouseOrderpoint(StockWarehouseOrderpointBase):
         # if we are running from the resupply wizard, first make sure all
         # products with a negative stock have a procurement order
         if not company_id:
-            company_id = self.env.company.id
-        if isinstance(company_id, Company):
-            company_id = company_id.id
+            company_id = self.env.company
         warehouses = self.env["stock.warehouse"].search(
-            [("company_id", "=", company_id)]
+            [("company_id", "=", company_id.id)]
         )
         missing_orderpoints = self.browse()
         for warehouse in warehouses:
