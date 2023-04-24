@@ -1,6 +1,8 @@
 # Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+import threading
+
 from odoo import api, fields
 
 from odoo.addons.delivery.models import delivery_carrier
@@ -39,5 +41,9 @@ class DeliveryCarrier(
             "prod_environment",
         ]
         res = super()._server_env_fields
-        res.update({k: {} for k in _gls_env_fields})
+        if not (
+            getattr(threading.current_thread(), "testing", False)
+            or self.env.registry.in_test_mode()
+        ):
+            res.update({k: {} for k in _gls_env_fields})
         return res
