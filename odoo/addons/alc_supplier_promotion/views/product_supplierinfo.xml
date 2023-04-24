@@ -40,6 +40,12 @@
     <field name="model">product.supplierinfo</field>
     <field name="inherit_id" ref="product.product_supplierinfo_tree_view" />
     <field name="arch" type="xml">
+      <xpath expr="//field[@name='date_start']" position="attributes">
+        <attribute name="optional">show</attribute>
+      </xpath>
+      <xpath expr="//field[@name='date_end']" position="attributes">
+        <attribute name="optional">show</attribute>
+      </xpath>
       <xpath expr="//tree" position="inside">
         <field name="ratio_display_name" />
       </xpath>
