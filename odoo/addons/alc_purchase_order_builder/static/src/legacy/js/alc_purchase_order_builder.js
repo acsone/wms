@@ -6,17 +6,6 @@ odoo.define(
   function (require) {
     "use strict";
     var rpc = require("web.rpc");
-    // const { useService } = require("@web/core/utils/hooks");
-    // window.onload = () => {
-    //     self.orm = useService('orm')
-    // }
-    // Wait for loading
-    // require("web_editor.base");
-
-    // if (!$(".container-fluid").length) {
-    //   return $.Deferred().reject("DOM doesn't contain '.container-fluid'");
-    // }
-    //
     var products_list = [];
     var current_product_id = null;
     var current_products_list = [];
@@ -142,6 +131,8 @@ odoo.define(
         var sParameterValues = sURLVariables[i].split("=");
 
         switch (sParameterValues[0]) {
+          case "":
+            break;
           case "product_name":
             $("#product_name").val(sParameterValues[1]);
             break;
@@ -152,26 +143,7 @@ odoo.define(
         }
       }
     }
-    //
-    // function init_shortcuts() {
-    //   $(document).keydown(function (e) {
-    //     switch (e.which) {
-    //       case 39 && e.altKey:
-    //         change_product("+1");
-    //         break;
-    //       case 37 && e.altKey:
-    //         change_product("-1");
-    //         break;
-    //       case 39 && e.ctrlKey && e.altKey:
-    //         change_product("end");
-    //         break;
-    //       case 37 && e.ctrlKey && e.altKey:
-    //         change_product("start");
-    //         break;
-    //     }
-    //   });
-    // }
-    //
+
     function load_products_list() {
       var url = new URL(window.location);
       var storageKey = "products_" + purchase_order_id;
@@ -218,9 +190,9 @@ odoo.define(
       load_stock_graph();
       refresh_list();
       compute_next_product();
-      // disable_buttons(false);
+      disable_buttons(false);
     }
-    //
+
     function refresh_list() {
       var ordered_product = $("#products_to_order").is(":checked");
       var products_without_promo = $("#products_without_promo").is(":checked");
@@ -446,8 +418,7 @@ odoo.define(
     }
     $(document).ready(function () {
       init_listeners();
-      // Init_shortcuts();
-      // disable_buttons(true);
+      disable_buttons(true);
       load_filters();
       load_products_list();
       listenPackageSelection();
