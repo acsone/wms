@@ -24,7 +24,7 @@ class TestProductIsNew(TransactionCase):
             }
         )
         cls.product_template2 = cls.product2.product_tmpl_id
-        cls.product_template2.product_package_storage_type_id = package_type_new.id
+        cls.product_template2.package_type_id = package_type_new.id
 
     def test_00(self):
         """Product is new."""
@@ -33,5 +33,5 @@ class TestProductIsNew(TransactionCase):
     def test_01(self):
         """Product is not new."""
         package_type = self.env["stock.package.type"].create({"name": "any name"})
-        self.product_template2.product_package_storage_type_id = package_type.id
+        self.product_template2.package_type_id = package_type.id
         self.assertFalse(self.product_template2.is_new)

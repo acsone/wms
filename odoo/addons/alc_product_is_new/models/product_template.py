@@ -13,7 +13,7 @@ from odoo.addons.stock_storage_type.models.stock_package_type import StockPackag
 class ProductTemplate(product_template.ProductTemplate):
 
     is_new = fields.Boolean(
-        related="product_package_storage_type_id.is_new",
+        related="package_type_id.is_new",
         readonly=True,
     )
     new_product_with_old_date = fields.Boolean(
@@ -22,7 +22,7 @@ class ProductTemplate(product_template.ProductTemplate):
         search="_search_new_product_with_old_date",
     )
 
-    product_package_storage_type_id = fields.Many2one[StockPackageType](
+    package_type_id = fields.Many2one[StockPackageType](
         copy=False,
     )
 
@@ -34,7 +34,7 @@ class ProductTemplate(product_template.ProductTemplate):
                 FROM
                         product_template pt
                 JOIN stock_package_type spt
-                    ON pt.product_package_storage_type_id = spt.id
+                    ON pt.package_type_id = spt.id
                 WHERE
                         spt.is_new
                     AND pt.create_date < NOW() - '1 month'::interval

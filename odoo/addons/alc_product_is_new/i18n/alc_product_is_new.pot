@@ -32,8 +32,8 @@ msgid "Product"
 msgstr ""
 
 #. module: alc_product_is_new
-#: model:ir.model.fields,field_description:alc_product_is_new.field_product_product__product_package_storage_type_id
-#: model:ir.model.fields,field_description:alc_product_is_new.field_product_template__product_package_storage_type_id
+#: model:ir.model.fields,field_description:alc_product_is_new.field_product_product__package_type_id
+#: model:ir.model.fields,field_description:alc_product_is_new.field_product_template__package_type_id
 msgid "Product Package Storage Type"
 msgstr ""
 
