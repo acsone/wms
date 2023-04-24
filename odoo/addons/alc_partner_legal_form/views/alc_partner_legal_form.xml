@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="alc_partner_legal_form_tree_view">
+        <field
+      name="name"
+    >alc.partner.legal.form.tree (in alc_partner_legal_form)</field>
+        <field name="model">alc.partner.legal.form</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="name" />
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="alc_partner_legal_form_act_window">
+        <field name="name">alc Partner Legal Form</field>
+        <field name="res_model">alc.partner.legal.form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.ui.menu" id="alc_partner_legal_form_menu">
+        <field name="name">Legal Forms</field>
+        <field name="parent_id" ref="sale.menu_sale_config" />
+        <field name="action" ref="alc_partner_legal_form_act_window" />
+        <field name="sequence" eval="21" />
+    </record>
+
+</odoo>
