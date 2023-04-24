@@ -81,5 +81,6 @@
         "alc_product_price_category_data",
         "alc_product_promoted_links",
         "alc_partner_legal_form",
+        "alc_partner_pharmacist",
     ],
 }

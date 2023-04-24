@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="res_partner_form_view">
+        <field name="name">res.partner.form (in alc_partner_pharmacist)</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="arch" type="xml">
+            <xpath
+        expr="//page[@name='sales_purchases']//field[@name='user_id']"
+        position="after"
+      >
+                <field
+          name="pharmacist_id"
+          attrs="{'invisible': [('is_customer', '=', False)]}"
+        />
+          </xpath>
+        </field>
+    </record>
+
+</odoo>
