@@ -204,16 +204,7 @@ class PurchaseOrder(PurchaseOrderBase):
     def _update_line(self, existing_line, vals):
         vals.pop("order_id")
         vals.pop("product_id")
-        old_price_unit = existing_line.price_unit
-        old_discount_global = existing_line.discount_global
-        old_promotion_supplier = existing_line.promotion_supplier
         existing_line.write(vals)
-        if (
-            old_price_unit != existing_line.price_unit
-            or old_discount_global != existing_line.discount_global
-            or old_promotion_supplier != existing_line.promotion_supplier
-        ):
-            existing_line._onchange_price_unit()
 
     def _create_line(self, vals):
         self.env["purchase.order.line"].create(
