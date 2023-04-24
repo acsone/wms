@@ -49,19 +49,14 @@ odoo-addon-stock-release-channel-geoengine @ git+https://github.com/OCA/wms.git@
 odoo-addon-product-abc-classification @ git+https://github.com/acsone/product-attribute.git@16.0-mig-product_abc_classification-dro#subdirectory=setup/product_abc_classification
 # https://github.com/OCA/product-attribute/pull/1196
 odoo-addon-product-abc-classification-sale-stock @ git+https://github.com/acsone/product-attribute.git@16.0-mig-product-abc-sale-dro#subdirectory=setup/product_abc_classification_sale_stock
-# https://github.com/OCA/product-attribute/pull/1318 - [MIG][16.0] product_expiry_configurable
-odoo-addon-product-expiry-configurable @ git+https://github.com/OCA/product-attribute.git@refs/pull/1318/head#subdirectory=setup/product_expiry_configurable
 # https://github.com/OCA/product-attribute/pull/1220 - [IMP] product_packaging_dimension: Improve view in order to easy inheritance
 odoo-addon-product-packaging-dimension @ git+https://github.com/acsone/product-attribute.git@16.0-imp-product-packaging-dimension-dro#subdirectory=setup/product_packaging_dimension
 # https://github.com/OCA/product-attribute/pull/1215 - MIG][16.0] product_packaging_type + renaming to product_packaging_level
 odoo-addon-product-packaging-level @ git+https://github.com/acsone/product-attribute.git@16.0-mig-product-packaging-level-dro#subdirectory=setup/product_packaging_level
 # https://github.com/OCA/product-attribute/pull/1216 - [MIG][16.0] product_packaging_type_pallet => product_packaging_level_pallet
 odoo-addon-product-packaging-level-pallet @ git+https://github.com/acsone/product-attribute.git@16.0-mig-product-packaging-level-pallet-dro#subdirectory=setup/product_packaging_level_pallet
-# https://github.com/OCA/product-attribute/pull/1227 - [16.0][ADD] product_route_mto
-odoo-addon-product-route-mto @ git+https://github.com/acsone/product-attribute.git@16.0-add-product_route_mto-dro#subdirectory=setup/product_route_mto
 # https://github.com/OCA/product-attribute/pull/1221 - [MIG][16.0] product total weight from packaging
 odoo-addon-product-total-weight-from-packaging @ git+https://github.com/acsone/product-attribute.git@16.0-mig-product_total_weight_from_packaging#subdirectory=setup/product_total_weight_from_packaging
-odoo-addon-product-uom-updatable @ git+https://github.com/OCA/product-attribute.git@refs/pull/1286/head#subdirectory=setup/product_uom_updatable
 odoo-addon-product-logistics-uom @ git+https://github.com/OCA/product-attribute.git@refs/pull/1314/head#subdirectory=setup/product_logistics_uom
 # https://github.com/OCA/product-attribute/pull/1275 - [ADD] stock_lot_is_archived
 odoo-addon-stock-lot-is-archived @ git+https://github.com/acsone/product-attribute.git@16.0-add-product_lot_archived-dro#subdirectory=setup/stock_lot_is_archived
@@ -89,8 +84,6 @@ odoo-addon-stock-average-daily-sale @ git+https://github.com/acsone/stock-logist
 
 # https://github.com/OCA/stock-logistics-warehouse/pull/1500
 odoo-addon-stock-location-position @ git+https://github.com/OCA/stock-logistics-warehouse.git@refs/pull/1500/head#subdirectory=setup/stock_location_position
-# https://github.com/OCA/stock-logistics-warehouse/pull/1580
-odoo-addon-stock-route-mto @ git+https://github.com/acsone/stock-logistics-warehouse.git@16.0-add-stock_route_mto-dro#subdirectory=setup/stock_route_mto
 # https://github.com/OCA/stock-logistics-warehouse/pull/1646
 odoo-addon-stock-scrap-location-default @ git+https://github.com/acsone/stock-logistics-warehouse.git@16.0-add-stock-default-scrap-location-dro#subdirectory=setup/stock_scrap_location_default
 odoo-addon-stock-picking-volume @ git+https://github.com/OCA/stock-logistics-warehouse.git@refs/pull/1680/head#subdirectory=setup/stock_picking_volume
@@ -110,7 +103,7 @@ odoo-addon-stock-picking-group-by-partner-by-carrier @ git+https://github.com/ac
 odoo-addon-stock-picking-group-by-partner-by-carrier-by-customer @ git+https://github.com/acsone/stock-logistics-workflow.git@16.0-add-stock-picking-group-by-customer-dro#subdirectory=setup/stock_picking_group_by_partner_by_carrier_by_customer
 # https://github.com/OCA/stock-logistics-workflow/pull/1268
 odoo-addon-stock-picking-is-completed @ git+https://github.com/OCA/stock-logistics-workflow.git@refs/pull/1268/head#subdirectory=setup/stock_picking_is_completed
-# https://github.com/OCA/stock-logistics-workflow/pull/1168
+# https://github.com/OCA/stock-logistics-workflow/pull/1185
 odoo-addon-stock-procurement-customer @ git+https://github.com/acsone/stock-logistics-workflow.git@16.0-add-stock-procurement-customer-dro#subdirectory=setup/stock_procurement_customer
 # https://github.com/OCA/stock-logistics-workflow/pull/1196 - [16.0][ADD] stock_picking_low_priority
 odoo-addon-stock-picking-low-priority @ git+https://github.com/acsone/stock-logistics-workflow.git@16.0-add-stock_picking_low_priority-hda#subdirectory=setup/stock_picking_low_priority
@@ -128,7 +121,6 @@ odoo-addon-stock-move-propagate-first-move-cancel @ git+https://github.com/oca/s
 odoo-addon-base-sparse-field-list-support @ git+https://github.com/acsone/server-tools.git@16.0-mig-base_sparse_field_list_support-hda#subdirectory=setup/base_sparse_field_list_support
 
 # OCA/web
-odoo-addon-web-notify @ git+https://github.com/OCA/web.git@refs/pull/2412/head#subdirectory=setup/web_notify
 
 # camptocamp/odoo-cloud-platform
 odoo-addon-base-attachment-object-storage @ git+https://github.com/acsone/odoo-cloud-platform@16.0-base_attachment_storage-no-register-lmi#subdirectory=setup/base_attachment_object_storage
@@ -156,7 +148,7 @@ odoo-addon-attribute-set @ git+https://github.com/OCA/odoo-pim.git@refs/pull/141
 odoo-addon-product-attribute-set @ git+https://github.com/OCA/odoo-pim.git@refs/pull/142/head#subdirectory=setup/product_attribute_set
 
 # OCA/geospatial
-odoo-addon-base-geoengine @ git+https://github.com/OCA/geospatial.git@refs/pull/328/head#subdirectory=setup/base_geoengine
+odoo-addon-base-geoengine @ git+https://github.com/OCA/geospatial.git@refs/pull/334/head#subdirectory=setup/base_geoengine
 odoo-addon-geoengine-partner @ git+https://github.com/OCA/geospatial.git@refs/pull/331/head#subdirectory=setup/geoengine_partner
 odoo-addon-geoengine-base-geolocalize @ git+https://github.com/OCA/geospatial.git@refs/pull/332/head#subdirectory=setup/geoengine_base_geolocalize
 
@@ -164,7 +156,6 @@ odoo-addon-geoengine-base-geolocalize @ git+https://github.com/OCA/geospatial.gi
 odoo-addon-product-template-multi-link @ git+https://github.com/OCA/e-commerce.git@refs/pull/774/head#subdirectory=setup/product_template_multi_link
 
 # OCA/hr-holidays
-odoo-addon-hr-holidays-public @ git+https://github.com/OCA/hr-holidays.git@refs/pull/69/head#subdirectory=setup/hr_holidays_public
 
 # OCA/edi
 odoo-addon-base-ubl @ git+https://github.com/OCA/edi.git@refs/pull/725/head#subdirectory=setup/base_ubl
