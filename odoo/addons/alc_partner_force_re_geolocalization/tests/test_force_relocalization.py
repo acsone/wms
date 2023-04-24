@@ -2,10 +2,10 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 import random
 
-from odoo.tests.common import SavepointCase
+from odoo.tests.common import TransactionCase
 
 
-class TestForceRelocalization(SavepointCase):
+class TestForceRelocalization(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
