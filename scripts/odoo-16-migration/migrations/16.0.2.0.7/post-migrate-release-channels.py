@@ -47,7 +47,7 @@ def _create_release_channels_from_delivery_rounds(env):
             time_leave_planned,
             id,
             active,
-            'asleep',
+            'asleep'
         FROM
             round_template
         WHERE
@@ -71,7 +71,7 @@ def _create_release_channels_from_delivery_rounds(env):
             shipment_advice_arrival_delay,
             round_template_id,
             active,
-            state,
+            state
         )
         SELECT
             name,
@@ -83,7 +83,7 @@ def _create_release_channels_from_delivery_rounds(env):
             time_leave_planned,
             id,
             active,
-            'asleep',
+            'asleep'
         FROM
             round_template
         WHERE

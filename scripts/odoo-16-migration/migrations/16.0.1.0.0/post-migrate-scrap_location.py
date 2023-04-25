@@ -8,7 +8,7 @@ def _migrate_scrap_location(env):
     location_id = env.ref("__setup__.stock_location_scrap_quality").id
     query = """
         UPDATE res_company
-            SET default_scrap_location_id = %(id)s
+            SET scrap_default_location_id = %(id)s
     """
     openupgrade.logged_query(env.cr, query, {"id": location_id})
 

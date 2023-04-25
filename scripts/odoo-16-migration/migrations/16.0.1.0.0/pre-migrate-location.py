@@ -9,7 +9,7 @@ def _change_columns(env):
     openupgrade.update_module_moved_fields(
         env.cr,
         "stock.location",
-        "corridor",
+        ("corridor",),
         "specific_stock",
         "stock_location_position",
     )

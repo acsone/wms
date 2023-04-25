@@ -7,7 +7,7 @@ def _change_column(env):
     openupgrade.update_module_moved_fields(
         env.cr,
         "stock.lot",
-        "is_archived",
+        ("is_archived",),
         "alc_stock_production_lot_archive",
         "stock_lot_is_archived",
     )

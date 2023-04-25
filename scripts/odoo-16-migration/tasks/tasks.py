@@ -441,3 +441,90 @@ def click_odoo_update():
 
 
 _register_migration_scripts_in_tasks("post-")
+
+
+@task()
+def click_odoo_uninstall():
+    modules_list = [
+        "alc_internal_stock_quant_package",
+        "alc_product_picking_zone",
+        "alc_product_storage_type_tracking",
+        "alc_product_uom_updatable",
+        "alc_stock_location_content_relocation",
+        "alc_stock_move_operation",
+        "alc_stock_pack_operation_audit",
+        "alc_stock_picking_no_pack_in_pack",
+        "alc_stock_picking_number_package",
+        "alc_stock_picking_package",
+        "alc_stock_picking_policy_block",
+        "alc_stock_picking_wave_release_pickings",
+        "alc_stock_picking_type_locking",
+        "alc_stock_quant_package_delivery",
+        "alc_stock_quant_package_nbr",
+        "alc_stock_receive_lot_inputmask",
+        "alc_stock_putaway",
+        "alc_stock_storage_type_fixed_location",
+        "base_geolocalize_openstreetmap",  # Replaced by STD
+        "base_vat_sanitized",  # Replaced by STD
+        "delivery_carrier_label_gls_server_env",
+        "grid",
+        "mrp",
+        "mrp_account",
+        "mrp_workorder",
+        "partner_delivery",
+        "partner_helper",
+        "portal",
+        "portal_sale",
+        "portal_stock",
+        "procurement_sale",
+        "product_packaging_barcode",
+        "product_price_import",
+        "purchase_mrp",
+        "purchase_prepaid",
+        "purchase_unlink_cancelop",
+        "purchase_update_procurement_qty",
+        "sale_mrp",
+        "specific_zetes",
+        "stock_delivery_note",
+        "stock_expired",
+        "stock_inventory_controller",
+        "stock_inventory_products",
+        "stock_location",
+        "stock_location_act_as_view",
+        "stock_location_notranslate",
+        "stock_location_report",
+        "stock_operation_cleaner",
+        "stock_operation_recompute",
+        "stock_production_lot_expiry",
+        "stock_reassign_auto",
+        "stock_picking_assignment",
+        "stock_picking_backorder",
+        "stock_picking_fillwithstock",
+        "stock_picking_show_backorder",
+        "stock_putaway_defaultfixedlocation",
+        "stock_putaway_route",
+        "stock_quant_bylocation",
+        "base_cached_xmlid",
+        "specific_data",
+        "pricelist_discount",
+        "stock_picking_subcode",  # replaced by stock_move_picking_type_origin
+        "purchase_open_qty",
+        "stock_mts_mto_rule",
+        "stock_disable_force_availability_button",
+        "alc_sale_channel_stock_move",
+        "alc_sale_order_price_recalculation",  # merged into alc_pricelist_discount
+        "sale_delay",  # replaced by alc_sale_auto_confirm_max_delay
+        "sale_internal_confirmation_mail",  # replaced by alc_sale_internal_confirmation_mail
+        "materialized_view_mixin",  # replaced by alc_materialized_view_mixin
+        "alc_geo_delivery_rounds",  # replaced by alc_stock_release_channel_tag & alc_stock_release_channel_import
+        "alc_delivery_rounds_operator",  # replaced by alc_stock_release_channel_user
+        "sale_cancel_remaining",  # replaced by sale_order_line_cancel
+        "alc_delivery_rounds_close_pickings_by_zone",  # replaced by alc_stock_release_channel_pick_allowed
+        "alc_delivery_rounds_allatonce_assignment",
+        "alc_delivery_rounds_partner_geolocalize",
+        "alce_stock_barcode_easy_operation",  # replaced by STD
+        "web_decimal_numpad_dot",
+        "alc_stock_picking_batch_delivery_rounds",  # replaced by alc_stock_release_channel_picking_batch_creation
+    ]
+    modules = ",".join(modules_list)
+    check_call(["venv-16/bin/click-odoo-uninstall", "-d", DB_16_POSTMIG, "-m", modules])
