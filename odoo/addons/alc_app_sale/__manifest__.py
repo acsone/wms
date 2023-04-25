@@ -82,5 +82,6 @@
         "alc_product_promoted_links",
         "alc_partner_legal_form",
         "alc_partner_pharmacist",
+        "alc_partner_sequence",
     ],
 }
