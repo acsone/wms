@@ -22,9 +22,13 @@ from .models.partner import PartnerRequest, PartnerResponse
 def _get_partners(
     id: int,  # pylint: disable=redefined-builtin
     env: Environment = Depends(authenticated_partner_env),  # noqa: B008
+    endpoint_setting: FastapiEndpointSettings = Depends(  # noqa: B008
+        fastapi_endpoint_setting
+    ),
 ) -> PartnerResponse:
     """Get partner by id."""
-    partner = env["res.partner"].search([("id", "=", id)])
+    b2c_ref = env["res.partner"]._b2c_id_to_b2c_ref(id, endpoint_setting)
+    partner = env["res.partner"]._get_partner_by_ref(b2c_ref)
     return PartnerResponse.from_orm(partner)
 
 

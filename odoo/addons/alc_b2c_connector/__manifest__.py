@@ -6,7 +6,7 @@
     "description": """
         Alcyon: B2C Connector
 
-        A set of FastAPI services used by B2C market places to makes PO.
+        A set of FastAPI services used by B2C market places to makes SO.
         """,
     "version": "16.0.2.0.0",
     "license": "AGPL-3",
@@ -23,6 +23,11 @@
         "stock_available",
         "alc_partner_type",
         "alc_b2c_partner",
+        "sale_order_line_cancel",
+        "account_payment_sale",
+        "alc_sale_qty_returned",
+        "alc_sale_product_qty_backorder",
+        "delivery",
     ],
     "data": [
         "security/fastapi_endpoint_settings.xml",

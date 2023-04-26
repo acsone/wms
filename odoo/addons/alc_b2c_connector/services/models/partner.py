@@ -16,7 +16,6 @@ class PartnerCommon(BaseModel):
     # name2: Optional[str] = None FIXME: do after specific_partner migration
     country_code: Optional[country.CountryCode]
     city: Optional[str]
-    name: Optional[str]
     zip: Optional[str]
     title: Optional[partner_title.Title]
     mobile: Optional[str]
@@ -25,8 +24,8 @@ class PartnerCommon(BaseModel):
 
 
 class PartnerRequest(PartnerCommon):
-    first_name: Optional[str]
-    last_name: Optional[str]
+    first_name: str
+    last_name: str
 
     def _convert_to_write(self):
         return {key: value for key, value in dict(self).items() if value}
@@ -56,3 +55,7 @@ class PartnerResponse(PartnerCommon):
             # "name2": obj.suite, FIXME: do after specific_partner migration
             "note": obj.comment or None,
         }
+
+
+class PartnerSaleOrderRequest(PartnerRequest):
+    id: str
