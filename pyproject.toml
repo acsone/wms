@@ -322,7 +322,6 @@ exclude = [
   'odoo/addons/shopinvader_url_locales/*',
   'odoo/addons/specific_account/*',
   'odoo/addons/specific_cutoff/*',
-  'odoo/addons/specific_partner/*',
   'odoo/addons/specific_print/*',
   'odoo/addons/specific_report/*',
   'odoo/addons/specific_sale/*',
