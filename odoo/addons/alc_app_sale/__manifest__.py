@@ -84,5 +84,6 @@
         "alc_partner_pharmacist",
         "alc_partner_sequence",
         "alc_partner_address",
+        "alc_partner_suite"
     ],
 }
