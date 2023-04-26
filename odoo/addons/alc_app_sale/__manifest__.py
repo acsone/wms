@@ -88,5 +88,6 @@
         "alc_partner_call_name",
         "alc_partner_apb_authorization",
         "alc_partner_master",
+        "alc_partner_manual_rank",
     ],
 }
