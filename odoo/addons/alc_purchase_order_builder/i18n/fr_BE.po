@@ -1,0 +1,397 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* alc_purchase_order_builder
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-04-20 12:32+0000\n"
+"PO-Revision-Date: 2023-04-20 15:00+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: fr_BE\n"
+"X-Generator: Poedit 2.3\n"
+
+#. module: alc_purchase_order_builder
+#: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
+msgid "<i class=\"fa fa-check-circle-o\" aria-hidden=\"true\"/> Confirmed"
+msgstr "<i class=\"fa fa-check-circle-o\" aria-hidden=\"true\"/> Confirmé"
+
+#. module: alc_purchase_order_builder
+#: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
+msgid "<i class=\"fa fa-circle-o\" aria-hidden=\"true\"/> To confirm"
+msgstr "<i class=\"fa fa-circle-o\" aria-hidden=\"true\"/> A confirmer"
+
+#. module: alc_purchase_order_builder
+#: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
+msgid "<i class=\"fa fa-long-arrow-left\" aria-hidden=\"true\"/> Return"
+msgstr "<i class=\"fa fa-long-arrow-left\" aria-hidden=\"true\"/> Retour"
+
+#. module: alc_purchase_order_builder
+#: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
+msgid "<i class=\"fa fa-question-circle\" aria-hidden=\"true\"/> New line"
+msgstr "<i class=\"fa fa-question-circle\" aria-hidden=\"true\"/> Nouvelle ligne"
+
+#. module: alc_purchase_order_builder
+#: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
+msgid "<i class=\"fa fa-refresh\" aria-hidden=\"true\"/> Refresh product list"
+msgstr "<i class=\"fa fa-check-circle-o\" aria-hidden=\"true\"/> Rafraîchir la liste"
+
+#. module: alc_purchase_order_builder
+#: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
+msgid "Advised qty"
+msgstr "Qté conseillée"
+
+#. module: alc_purchase_order_builder
+#: model:ir.model.fields,field_description:alc_purchase_order_builder.field_delivery_carrier_advised_qty
+#: model:ir.model.fields,field_description:alc_purchase_order_builder.field_product_product_advised_qty
+#: model:ir.model.fields,field_description:alc_purchase_order_builder.field_shopinvader_variant_advised_qty
+msgid "Advised quantity"
+msgstr "Quantité conseillée"
+
+#. module: alc_purchase_order_builder
+#: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
+msgid "Av. 3 months consumption"
+msgstr "Conso. moyenne (3 mois)"
+
+#. module: alc_purchase_order_builder
+#: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
+msgid "Av. annual consumption"
+msgstr "Conso. moyenne (1 an)"
+
+#. module: alc_purchase_order_builder
+#: model:ir.model.fields,field_description:alc_purchase_order_builder.field_delivery_carrier_average_annual_consumption
+#: model:ir.model.fields,field_description:alc_purchase_order_builder.field_product_product_average_annual_consumption
+#: model:ir.model.fields,field_description:alc_purchase_order_builder.field_shopinvader_variant_average_annual_consumption
+msgid "Average annual consumption"
+msgstr "Consommation annuelle moyenne"
+
+#. module: alc_purchase_order_builder
+#: model:ir.model.fields,field_description:alc_purchase_order_builder.field_delivery_carrier_average_three_months_consumption
+#: model:ir.model.fields,field_description:alc_purchase_order_builder.field_product_product_average_three_months_consumption
+#: model:ir.model.fields,field_description:alc_purchase_order_builder.field_shopinvader_variant_average_three_months_consumption
+msgid "Average three months consumption"
+msgstr "Consommation moyenne sur trois mois"
+
+#. module: alc_purchase_order_builder
+#: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
+msgid "Class:"
+msgstr "Classe:"
+
+#. module: alc_purchase_order_builder
+#: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
+msgid "Confirm"
+msgstr "Confirmer"
+
+#. module: alc_purchase_order_builder
+#: model:ir.model.fields,field_description:alc_purchase_order_builder.field_purchase_order_line_is_confirmed_line
+msgid "Confirmed line"
+msgstr "Ligne confirmée"
+
+#. module: alc_purchase_order_builder
+#: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
+msgid "Creation date"
+msgstr "Date de création"
+
+#. module: alc_purchase_order_builder
+#: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
+msgid "Discount global"
+msgstr "Ristourne globale"
+
+#. module: alc_purchase_order_builder
+#: model:ir.model.fields,field_description:alc_purchase_order_builder.field_purchase_order_discount_global_overwrite
+msgid "Discount global overwrite"
+msgstr "Ristourne globale principale"
+
+#. module: alc_purchase_order_builder
+#: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
+msgid "Discount global:"
+msgstr "Ristourne globale:"
+
+#. module: alc_purchase_order_builder
+#: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
+msgid "End"
+msgstr "Fin"
+
+#. module: alc_purchase_order_builder
+#: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
+msgid "Expiration date"
+msgstr "Date d'expiration"
+
+#. module: alc_purchase_order_builder
+#: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
+msgid "Free"
+msgstr "Gratuit"
+
+#. module: alc_purchase_order_builder
+#: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
+msgid "Gross weight"
+msgstr "Poids Brut"
+
+#. module: alc_purchase_order_builder
+#: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
+msgid "Group"
+msgstr "Groupe"
+
+#. module: alc_purchase_order_builder
+#: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
+msgid "Kg"
+msgstr "Kg"
+
+#. module: alc_purchase_order_builder
+#: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
+msgid "Lot"
+msgstr "Lot"
+
+#. module: alc_purchase_order_builder
+#: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
+msgid "Lots"
+msgstr "Lots"
+
+#. module: alc_purchase_order_builder
+#: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
+msgid "Normal product"
+msgstr "Produit normal"
+
+#. module: alc_purchase_order_builder
+#: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.purchase_order_form
+msgid "Open PO"
+msgstr "Ouvrir le devis"
+
+#. module: alc_purchase_order_builder
+#: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
+msgid "Order code"
+msgstr "Code commande"
+
+#. module: alc_purchase_order_builder
+#: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
+msgid "Ordered qty"
+msgstr "Qté commande"
+
+#. module: alc_purchase_order_builder
+#: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
+#, fuzzy
+msgid "Ordered qty of unit"
+msgstr "Qté commande"
+
+#. module: alc_purchase_order_builder
+#: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
+msgid "Price"
+msgstr "Prix"
+
+#. module: alc_purchase_order_builder
+#: model:ir.model,name:alc_purchase_order_builder.model_product_product
+#: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
+msgid "Product"
+msgstr "Produit"
+
+#. module: alc_purchase_order_builder
+#: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
+msgid "Product name"
+msgstr "Nom du produit"
+
+#. module: alc_purchase_order_builder
+#: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
+msgid "Product on order"
+msgstr "Acheté-vendu"
+
+#. module: alc_purchase_order_builder
+#: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
+msgid "Products to order<br/>"
+msgstr "Produits à commander<br/>"
+
+#. module: alc_purchase_order_builder
+#: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
+msgid "Products with promotions<br/>"
+msgstr "Produits avec promotions<br/>"
+
+#. module: alc_purchase_order_builder
+#: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
+msgid "Products without promotions<br/>"
+msgstr "Produits sans promotions<br/>"
+
+#. module: alc_purchase_order_builder
+#: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
+msgid "Promotion supplier"
+msgstr "Remise d'achat"
+
+#. module: alc_purchase_order_builder
+#: model:ir.model.fields,field_description:alc_purchase_order_builder.field_purchase_order_promotion_supplier_overwrite
+msgid "Promotion supplier overwrite"
+msgstr "Promotion fournisseur principale"
+
+#. module: alc_purchase_order_builder
+#: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
+msgid "Promotion supplier:"
+msgstr "Remise d'achat:"
+
+#. module: alc_purchase_order_builder
+#: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
+msgid "Promotions"
+msgstr "Promotions"
+
+#. module: alc_purchase_order_builder
+#: model:ir.model,name:alc_purchase_order_builder.model_purchase_order
+msgid "Purchase Order"
+msgstr "Commande fournisseur"
+
+#. module: alc_purchase_order_builder
+#: model:ir.model,name:alc_purchase_order_builder.model_purchase_order_line
+msgid "Purchase Order Line"
+msgstr "Ligne de commande d'achat"
+
+#. module: alc_purchase_order_builder
+#: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
+msgid "Purchase discount"
+msgstr "Remise d'achat"
+
+#. module: alc_purchase_order_builder
+#: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
+msgid "Qty"
+msgstr "Qté"
+
+#. module: alc_purchase_order_builder
+#: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
+msgid "Qty multiple"
+msgstr "Multiple Qté"
+
+#. module: alc_purchase_order_builder
+#: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
+msgid "Save"
+msgstr "Sauvegarder"
+
+#. module: alc_purchase_order_builder
+#: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
+msgid "Scheduled date"
+msgstr "Date prévue"
+
+#. module: alc_purchase_order_builder
+#: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
+msgid "Scheduled date:"
+msgstr "Date prévue:"
+
+#. module: alc_purchase_order_builder
+#: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
+msgid "Sold out"
+msgstr "Rupture fourn"
+
+#. module: alc_purchase_order_builder
+#: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
+msgid "Start"
+msgstr "Début"
+
+#. module: alc_purchase_order_builder
+#: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
+msgid "Stock"
+msgstr "Stock"
+
+#. module: alc_purchase_order_builder
+#: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
+msgid "Stock BO"
+msgstr "Qté BO Client"
+
+#. module: alc_purchase_order_builder
+#: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
+msgid "Stock Customer"
+msgstr "Réservé clients"
+
+#. module: alc_purchase_order_builder
+#: model:ir.model,name:alc_purchase_order_builder.model_stock_move
+msgid "Stock Move"
+msgstr "Mouvement de stock"
+
+#. module: alc_purchase_order_builder
+#: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
+msgid "Stock available"
+msgstr "Stock Disponible"
+
+#. module: alc_purchase_order_builder
+#: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
+msgid "Stock coverage (days)"
+msgstr "Couverture du stock (jours)"
+
+#. module: alc_purchase_order_builder
+#: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
+msgid "Stock max"
+msgstr "Stock max"
+
+#. module: alc_purchase_order_builder
+#: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
+msgid "Stock min"
+msgstr "Stock min"
+
+#. module: alc_purchase_order_builder
+#: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
+msgid "Stock supplier"
+msgstr "Encours fournisseurs"
+
+#. module: alc_purchase_order_builder
+#: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
+msgid "Sub group"
+msgstr "Sous-groupe"
+
+#. module: alc_purchase_order_builder
+#: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
+msgid "Supplier discount"
+msgstr "Ristourne globale"
+
+#. module: alc_purchase_order_builder
+#: code:addons/alc_purchase_order_builder/models/purchase_order.py:50
+#, python-format
+msgid "There are no products for this supplier"
+msgstr ""
+
+#. module: alc_purchase_order_builder
+#: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
+msgid "Total amount:"
+msgstr "Montant total:"
+
+#. module: alc_purchase_order_builder
+#: model:ir.model.fields,field_description:alc_purchase_order_builder.field_purchase_order_total_lines
+msgid "Total lines"
+msgstr "Total des lignes"
+
+#. module: alc_purchase_order_builder
+#: model:ir.model.fields,field_description:alc_purchase_order_builder.field_purchase_order_total_lines_done
+msgid "Total lines done"
+msgstr "Total des lignes faites"
+
+#. module: alc_purchase_order_builder
+#: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
+msgid "Total weight:"
+msgstr "Poids total:"
+
+#. module: alc_purchase_order_builder
+#: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
+msgid "Unit"
+msgstr ""
+
+#. module: alc_purchase_order_builder
+#: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
+msgid "Unit in box"
+msgstr "Nbr unités par boite"
+
+#. module: alc_purchase_order_builder
+#: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
+msgid "Unit in pallet"
+msgstr "Nbr unités par palette"
+
+#. module: alc_purchase_order_builder
+#: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
+msgid "Unit in shrink-wrap"
+msgstr "Nbr unités par fardelage"
+
+#. module: alc_purchase_order_builder
+#: model:ir.model.fields,field_description:alc_purchase_order_builder.field_stock_move_validation_date
+msgid "Validation date"
+msgstr "Date de validation"
+
+#. module: alc_purchase_order_builder
+#: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
+msgid "Write date"
+msgstr "Date d'écriture"

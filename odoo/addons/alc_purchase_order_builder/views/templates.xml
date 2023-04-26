@@ -1,18 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-  <template id="assets_purchase_review">
-    <script
-      type="text/javascript"
-      src="/website_purchase_review/static/src/js/purchase_review.js"
-    />
-    <script type="text/javascript" src="/web/static/lib/nvd3/d3.v3.js" />
-    <script type="text/javascript" src="/web/static/lib/nvd3/nv.d3.js" />
-    <link
-      rel="stylesheet"
-      href="/website_purchase_review/static/src/css/purchase_review.css"
-    />
-    <link rel="stylesheet" type="text/css" href="/web/static/lib/nvd3/nv.d3.css" />
-  </template>
   <template id="main_page" name="Purchase review">&lt;!DOCTYPE html&gt;
 <html>
       <head>
@@ -20,34 +7,22 @@
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
         <meta http-equiv="content-type" content="text/html, charset=utf-8" />
-        <link
-          rel="shortcut icon"
-          href="/web/static/src/img/favicon.ico"
-          type="image/x-icon"
-        />
-        <script type="text/javascript">
-            var odoo = {
-            csrf_token: "<t t-esc="request.csrf_token(None)" />",
-            session_info: <t t-raw="session_info" />,
-            _modules: <t t-raw="modules" />,
-            };
-        </script>
         <t t-call-assets="web.assets_common" t-js="false" />
-        <t t-call-assets="web.assets_frontend" t-js="false" />
-        <t t-call-assets="web.assets_common" t-css="false" />
-        <t t-call-assets="web.assets_frontend" t-css="false" />
+        <t t-call-assets="web.assets_backend" t-js="false" />
         <t
-          t-call-assets="website_purchase_review.assets_purchase_review"
+          t-call-assets="alc_purchase_order_builder.assets_purchase_order_builder"
           t-js="false"
         />
+        <t t-call-assets="web.assets_common" t-css="false" />
+        <t t-call-assets="web.assets_backend" t-css="false" />
         <t
-          t-call-assets="website_purchase_review.assets_purchase_review"
+          t-call-assets="alc_purchase_order_builder.assets_purchase_order_builder"
           t-css="false"
         />
       </head>
       <body class="container-fluid">
         <div>
-          <t t-call="website_purchase_review.main_page_body" />
+          <t t-call="alc_purchase_order_builder.main_page_body" />
         </div>
       </body>
     </html>
@@ -288,12 +263,10 @@
                           <td>Stock coverage (days)</td>
                           <td>
                             <strong>
-                              <t
-                                t-if="current_product.average_three_months_consumption"
-                              >
+                              <t t-if="current_product.average_three_months_sale">
                               <span
                                   t-esc="round(int(current_product.advised_qty + product_qty + current_product.virtual_available) /
-                                  (current_product.average_three_months_consumption / 90.0), 2)"
+                                  (current_product.average_three_months_sale / 90.0), 2)"
                                 />
                               </t>
                               <t t-else="">
@@ -360,7 +333,7 @@
                               name="orderpoint_min"
                               id="orderpoint_min"
                               t-att-value="current_product.orderpoint_min"
-                              t-att-readonly="current_product.is_mto_product and 'readonly' or None"
+                              t-att-readonly="current_product.is_mto and 'readonly' or None"
                             />
                           </td>
                         </tr>
@@ -372,7 +345,7 @@
                               name="orderpoint_max"
                               id="orderpoint_max"
                               t-att-value="current_product.orderpoint_max"
-                              t-att-readonly="current_product.is_mto_product and 'readonly' or None"
+                              t-att-readonly="current_product.is_mto and 'readonly' or None"
                             />
                           </td>
                         </tr>
@@ -384,7 +357,7 @@
                               name="orderpoint_qty_multiple"
                               id="orderpoint_qty_multiple"
                               t-att-value="current_product.orderpoint_qty_multiple"
-                              t-att-readonly="current_product.is_mto_product and 'readonly' or None"
+                              t-att-readonly="current_product.is_mto and 'readonly' or None"
                             />
                           </td>
                         </tr>
@@ -393,10 +366,10 @@
                           <td>
                             <input
                               type="number"
-                              name="price_unit_base"
+                              name="price_unit"
                               step="0.01"
-                              id="price_unit_base"
-                              t-att-value="price_unit_base"
+                              id="price_unit"
+                              t-att-value="price_unit"
                               required="required"
                             />
                           </td>
@@ -442,9 +415,8 @@
                   </form>
                 </div>
                 <div class="row">
-                  <div id="stock_graph">
-                    <svg height="250" />
-                  </div>
+                  <canvas id="stock_graph">
+                  </canvas>
                 </div>
               </div>
             </div>
@@ -455,15 +427,13 @@
                   <tr>
                     <td>Av. annual consumption</td>
                     <td>
-                      <span t-field="current_product.average_annual_consumption" />
+                      <span t-field="current_product.average_annual_sale" />
                     </td>
                   </tr>
                   <tr>
                     <td>Av. 3 months consumption</td>
                     <td>
-                      <span
-                        t-field="current_product.average_three_months_consumption"
-                      />
+                      <span t-field="current_product.average_three_months_sale" />
                     </td>
                   </tr>
                   <tr>
@@ -516,7 +486,7 @@
                       <span t-esc="int(lot.qty_available)" />
                     </td>
                     <td>
-                      <span t-field="lot.life_date" />
+                      <span t-field="lot.expiration_date" />
                     </td>
                   </tr>
                 </table>
@@ -543,12 +513,8 @@
                       <tr>
                         <td>Order code</td>
                         <td>
-                          <span
-                            t-if="current_product.is_mto_product"
-                          >Product on order</span>
-                          <span
-                            t-if="not current_product.is_mto_product"
-                          >Normal product</span>
+                          <span t-if="current_product.is_mto">Product on order</span>
+                          <span t-if="not current_product.is_mto">Normal product</span>
                         </td>
                       </tr>
                     </table>
@@ -579,7 +545,7 @@
                       <tr>
                         <td>Sold out</td>
                         <td>
-                          <span t-field="current_product.state_id.display_name" />
+                          <span t-field="current_product.state_name" />
                         </td>
                       </tr>
                       <tr>
@@ -672,7 +638,7 @@
                         <span t-field="po.partner_id.supplier_discount" />
                       </td>
                       <td>
-                        <span t-field="promotion.discount_purchase" />
+                        <span t-field="promotion.discount" />
                       </td>
                       <td>
                         <span t-field="promotion.min_qty" />

@@ -1,43 +1,32 @@
-# -*- coding: utf-8 -*-
 # © 2018 Okia SPRL <Sylvain Van Hoof>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-from datetime import date, datetime
+from datetime import datetime
 
-from dateutil.relativedelta import relativedelta
-
-from odoo import api, fields, models
+from odoo import fields
 from odoo.tools import float_compare, float_round
 
+from odoo.addons.product.models.product_product import ProductProduct as ProductBase
 
-class ProductProduct(models.Model):
-    _inherit = "product.product"
+
+class ProductProduct(ProductBase):
 
     advised_qty = fields.Integer(
         "Advised quantity", readonly=True, compute="_compute_advised_qty"
     )
-    average_annual_consumption = fields.Float(
-        "Average annual consumption",
-        readonly=True,
-        compute="_compute_average_consumption",
-    )
-    average_three_months_consumption = fields.Float(
-        "Average three months consumption",
-        readonly=True,
-        compute="_compute_average_consumption",
-    )
 
-    @api.multi
     def _compute_advised_qty(self):
         """
-        Compute an advised quantity. The advised quantity must be the same
-        than the value computed by reordering rules
+        Compute an advised quantity.
+
+        The advised quantity must be the same
+        as the value computed by reordering rules
         :return:
         """
         orderpoints = self.mapped("orderpoint_ids")
 
         # Compute quantities to subtract
         if orderpoints:
-            subtract_quantity = orderpoints.subtract_procurements_from_orderpoints()
+            subtract_quantity = orderpoints._quantity_in_progress()
         else:
             subtract_quantity = {}
 
@@ -52,9 +41,10 @@ class ProductProduct(models.Model):
             diff_qty = float_compare(
                 virtual_available,
                 orderpoint.product_min_qty,
-                precision_rounding=orderpoint.product_uom.rounding,
+                precision_rounding=product.uom_id.rounding,
             )
             if diff_qty > 0:
+                product.advised_qty = False
                 continue
 
             # Compute the qty to order
@@ -107,105 +97,34 @@ class ProductProduct(models.Model):
             )
             if qty_rounded > 0:
                 product.advised_qty = qty_rounded
-
-    @api.multi
-    def _compute_average_consumption(self):
-        # Stop the method if self is empty.
-        # Otherwise SQL query will fail (ids = [])
-        if not self:
-            return
-        today = datetime.now()
-        today_minus_one_year = today - relativedelta(years=1)
-        today_str = fields.Datetime.to_string(today)
-        today_minus_one_year_str = fields.Datetime.to_string(today_minus_one_year)
-        # Compute annual consumption
-        query_annual = """
-        SELECT
-          sol.product_id,
-          sum(sol.product_uom_qty)
-        FROM sale_order_line AS sol
-          INNER JOIN sale_order so ON sol.order_id = so.id
-        WHERE so.confirmation_date IS NOT NULL
-          AND sol.product_id IN %s
-          AND so.confirmation_date >= %s
-          AND so.confirmation_date < %s
-          AND so.state <> 'cancel'
-        GROUP BY sol.product_id
-        """
-        self.env.cr.execute(
-            query_annual, (tuple(self.ids), today_minus_one_year_str, today_str)
-        )
-        annual_consumption_per_products = dict(self.env.cr.fetchall())
-
-        # Compute three months consumption
-        last_year_start = (date.today() - relativedelta(years=1)).replace(day=1)
-        last_year_start_str = fields.Datetime.to_string(last_year_start)
-        last_year_end = last_year_start + relativedelta(months=3)
-        last_year_end_str = fields.Datetime.to_string(last_year_end)
-        query_period = """
-        SELECT
-          sol.product_id,
-          sum(sol.product_uom_qty)
-        FROM sale_order_line AS sol
-          INNER JOIN sale_order so ON sol.order_id = so.id
-        WHERE so.confirmation_date IS NOT NULL
-          AND sol.product_id IN %s
-          AND so.confirmation_date >= %s
-          AND so.confirmation_date < %s
-          AND so.state <> 'cancel'
-        GROUP BY sol.product_id
-        """
-        self.env.cr.execute(
-            query_period, (tuple(self.ids), last_year_start_str, last_year_end_str)
-        )
-        three_months_consumption_per_products = dict(self.env.cr.fetchall())
-
-        for product in self:
-            annual_consumption = annual_consumption_per_products.get(product.id, 0)
-            if annual_consumption:
-                av_annual_consumption = round(float(annual_consumption) / 12, 2)
             else:
-                av_annual_consumption = 0
-            product.average_annual_consumption = av_annual_consumption
+                product.advised_qty = False
 
-            three_months_consumption = three_months_consumption_per_products.get(
-                product.id, 0
-            )
-            if three_months_consumption:
-                av_three_months_consumption = round(
-                    float(three_months_consumption) / 3, 2
-                )
-            else:
-                av_three_months_consumption = 0
-            product.average_three_months_consumption = av_three_months_consumption
-
-    @api.multi
     def get_lots(self):
         self.ensure_one()
 
-        lots = self.env["stock.production.lot"].search(
-            [("product_id", "=", self.id), ("is_archived", "=", False)],
-            order="life_date",
+        lots = self.env["stock.lot"].search(
+            [("product_id", "=", self.id)],
+            order="expiration_date",
         )
 
         return lots
 
-    @api.multi
     def get_promotions(self):
         self.ensure_one()
 
         sellers = self.seller_ids
         sellers_with_discount = sellers.filtered(
-            lambda s: s.discount_purchase or s.ratio_promotional_product
+            lambda s: s.discount or s.ratio_promotional_product
         )
         sellers_with_discount.sorted(lambda seller: seller.date_start)
 
         return list(sellers_with_discount)
 
-    @api.multi
     def get_graph_values(self):
         """
         Return the number of sale by month on 1 year.
+
         january is always the first value and december is always the last value
 
         - If the month is in the past (eg: date today == 15 February 2018
@@ -229,14 +148,14 @@ class ProductProduct(models.Model):
         # Retrieve sales by year/month (eg: 2017-07)
         query = """
         SELECT
-          to_char(so.confirmation_date, 'YYYY-MM') AS year_month,
+          to_char(so.date_order, 'YYYY-MM') AS year_month,
           sum(sol.product_uom_qty)
         FROM sale_order_line AS sol
           INNER JOIN sale_order so ON sol.order_id = so.id
-        WHERE so.confirmation_date IS NOT NULL
+        WHERE so.state IN ('sale', 'done')
           AND sol.product_id = %s
-          AND so.confirmation_date::DATE >= (NOW() - INTERVAL '1 year')::DATE
-          AND so.confirmation_date::DATE < NOW()::DATE
+          AND so.date_order::DATE >= (NOW() - INTERVAL '1 year')::DATE
+          AND so.date_order::DATE < NOW()::DATE
           AND so.state <> 'cancel'
         GROUP BY year_month
         ORDER BY year_month;
@@ -253,8 +172,8 @@ class ProductProduct(models.Model):
             # If the current month is less than today
             # (take data in the current year)
             if month < today.month:
-                label = "%02d/%s" % (month, str(today.year)[2:])
-                value = values.get("%s-%02d" % (today.year, month), 0)
+                label = f"{month}/{str(today.year)[2:]}"
+                value = values.get(f"{today.year}-{month:02}", 0)
                 month_values = [{"label": label, "value": value}]
             # If the current month is the same than today
             # (take data in the current year AND in the last year)
@@ -262,25 +181,19 @@ class ProductProduct(models.Model):
                 # We don't take values in the current year if we are the first
                 # day of month (there are no data for the current month)
                 if today.day == 1:
-                    label = "%02d/%s" % (month, str(today.year - 1)[2:])
-                    value = values.get("%s-%02d" % (today.year - 1, month), 0)
+                    label = f"{month}/{str(today.year - 1)[2:]}"
+                    value = values.get(f"{today.year - 1}-{month}", 0)
                     month_values = [{"label": label, "value": value}]
                 # Otherwise we take values in the current year and in the last
                 # year
                 else:
-                    label_current_year = "%02d/%02d/%s" % (
-                        today.day - 1,
-                        month,
-                        str(today.year)[2:],
+                    label_current_year = (
+                        f"{today.day - 1}/{month}/{str(today.year)[2:]}"
                     )
-                    value_current_year = values.get("%s-%02d" % (today.year, month), 0)
+                    value_current_year = values.get(f"{today.year}-{month}", 0)
 
-                    label_last_year = "%02d/%02d/%s" % (
-                        today.day,
-                        month,
-                        str(today.year - 1)[2:],
-                    )
-                    value_last_year = values.get("%s-%02d" % (today.year - 1, month), 0)
+                    label_last_year = f"{today.day}/{month}/{str(today.year - 1)[2:]}"
+                    value_last_year = values.get(f"{today.year - 1}-{month}", 0)
 
                     month_values = [
                         {"label": label_current_year, "value": value_current_year},
@@ -288,12 +201,12 @@ class ProductProduct(models.Model):
                     ]
             # Otherwise we take values in the last year
             else:
-                label = "%02d/%s" % (month, str(today.year - 1)[2:])
-                value = values.get("%s-%02d" % (today.year - 1, month), 0)
+                label = f"{month}/{str(today.year - 1)[2:]}"
+                value = values.get(f"{today.year - 1}-{month}", 0)
                 month_values = [{"label": label, "value": value}]
 
             graph_values += month_values
 
-        result = [{"key": "Sale order", "values": graph_values}]
+        result = graph_values
 
         return result
