@@ -31,6 +31,7 @@
         "product_total_weight_from_packaging",
         "shipment_advice",
         "stock_dynamic_routing",
+        "stock_location_orderpoint",
         "stock_move_common_dest",
         "stock_move_location",
         "stock_move_manage_priority",
