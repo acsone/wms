@@ -8,13 +8,14 @@ from fastapi import Depends, Query
 from odoo.api import Environment
 
 from odoo.addons.fastapi.depends import authenticated_partner_env, paging
-from odoo.addons.fastapi.schemas import PagedCollection, Paging
+from odoo.addons.fastapi.schemas import Paging
 
 from ..models.fastapi_endpoint import b2c_api_router
 from ..models.fastapi_endpoint_settings import (
     FastapiEndpointSettings,
     fastapi_endpoint_setting,
 )
+from ..utils import PagedCollection
 from .models.sale_order import (
     SaleOrderCreateRequest,
     SaleOrderResponse,
@@ -68,8 +69,8 @@ def get_sale_orders(
     )
     count = len(sale_orders)
     return PagedCollection[SaleOrderResponse](
-        total=count,
-        items=[SaleOrderResponse.from_orm(sale_order) for sale_order in sale_orders],
+        size=count,
+        data=[SaleOrderResponse.from_orm(sale_order) for sale_order in sale_orders],
     )
 
 

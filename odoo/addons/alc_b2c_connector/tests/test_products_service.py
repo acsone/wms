@@ -25,8 +25,8 @@ class TestProductsService(CommonCase):
         )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         res = response.json()
-        self.assertEqual(res["total"], 2)
-        result = res["items"][0]
+        self.assertEqual(res["size"], 2)
+        result = res["data"][0]
         result.pop("create_date")
         self.assertDictEqual(
             result,
@@ -40,7 +40,7 @@ class TestProductsService(CommonCase):
                 "taxes": [{"amount": 6.0, "amount_type": "percent", "name": "Tax 6%"}],
             },
         )
-        result = res["items"][1]
+        result = res["data"][1]
         result.pop("create_date")
         self.assertDictEqual(
             result,
@@ -77,8 +77,8 @@ class TestProductsService(CommonCase):
         )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         res = response.json()
-        self.assertEqual(res["total"], 2)
-        result = res["items"][0]
+        self.assertEqual(res["size"], 2)
+        result = res["data"][0]
         result.pop("create_date")
         self.assertDictEqual(
             result,
@@ -92,7 +92,7 @@ class TestProductsService(CommonCase):
                 "taxes": [{"amount": 6.0, "amount_type": "percent", "name": "Tax 6%"}],
             },
         )
-        result = res["items"][1]
+        result = res["data"][1]
         result.pop("create_date")
         self.assertDictEqual(
             result,
@@ -135,9 +135,9 @@ class TestProductsService(CommonCase):
             )
             self.assertEqual(response.status_code, status.HTTP_200_OK)
             res = response.json()
-            self.assertEqual(res["total"], 1)
+            self.assertEqual(res["size"], 1)
             self.assertEqual(
-                res["items"][0]["sku"], self.saleable_product_2.default_code
+                res["data"][0]["sku"], self.saleable_product_2.default_code
             )
         self.saleable_product.categ_id = default_categ
         response: Response = self.client.get(
@@ -145,7 +145,7 @@ class TestProductsService(CommonCase):
         )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         res = response.json()
-        self.assertEqual(res["total"], 2)
+        self.assertEqual(res["size"], 2)
 
     def test_03(self):
         """
@@ -165,7 +165,7 @@ class TestProductsService(CommonCase):
         )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         res = response.json()
-        self.assertEqual(res["total"], 1)
+        self.assertEqual(res["size"], 1)
         response: Response = self.client.get(
             self._get_path("/products/search"),
             headers={"api-key": "1234"},
@@ -173,4 +173,4 @@ class TestProductsService(CommonCase):
         )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         res = response.json()
-        self.assertEqual(res["total"], 0)
+        self.assertEqual(res["size"], 0)

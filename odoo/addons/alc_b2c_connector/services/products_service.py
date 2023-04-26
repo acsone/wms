@@ -8,13 +8,14 @@ from fastapi import Depends, Query
 from odoo.api import Environment
 
 from odoo.addons.fastapi.depends import authenticated_partner_env, paging
-from odoo.addons.fastapi.schemas import PagedCollection, Paging
+from odoo.addons.fastapi.schemas import Paging
 
 from ..models.fastapi_endpoint import b2c_api_router
 from ..models.fastapi_endpoint_settings import (
     FastapiEndpointSettings,
     fastapi_endpoint_setting,
 )
+from ..utils import PagedCollection
 from .models.product import Product
 
 
@@ -44,6 +45,6 @@ def get_products(
         skus, paging_.limit, paging_.offset, endpoint_setting
     )
     return PagedCollection[Product](
-        total=len(products),
-        items=[Product.from_orm(product) for product in products],
+        size=len(products),
+        data=[Product.from_orm(product) for product in products],
     )

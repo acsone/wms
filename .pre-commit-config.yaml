@@ -2,6 +2,7 @@ exclude: |
   (?x)
   .pot$|
   .po$|
+  ^odoo/addons/alc_b2c_connector\/utils.py|
   # NOT INSTALLABLE ADDONS
   ^odoo/addons/account_invoice_email/|
   ^odoo/addons/account_invoice_sent/|
