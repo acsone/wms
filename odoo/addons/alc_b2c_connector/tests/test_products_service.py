@@ -1,23 +1,18 @@
-# -*- coding: utf-8 -*-
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-import pytz
+
+from fastapi import status
+from requests import Response
 
 from .common import CommonCase
 
 
 class TestProductsService(CommonCase):
-    @classmethod
-    def setUpClass(cls):
-        super(TestProductsService, cls).setUpClass()
-
-        with cls.work_on_services() as work:
-            cls.products_service = work.component(usage="products")
-
     def test_00(self):
         """
         Data:
+
             1 saleable product
         Test case:
             Get list of saleable product
@@ -25,41 +20,42 @@ class TestProductsService(CommonCase):
             The product is into the list with the expected info
         """
 
-        res = self.products_service.dispatch("search", params=False)
-        self.assertEqual(res["size"], 2)
-        result = res["data"][0]
-        create_date = result.pop("create_date")
-        self.assertEqual(create_date.tzinfo, pytz.utc)
-        self.assertDictEqual(
-            result,
-            {
-                "eans": [u"XXX0001"],
-                "name": u"Product 1",
-                "price": 10.0,
-                "quantity": 5.0,
-                "sku": u"12345",
-                "cnk": "CNK123",
-                "taxes": [
-                    {"amount": 6.0, "amount_type": u"percent", "name": u"Tax 6%"}
-                ],
-            },
+        response: Response = self.client.get(
+            self._get_path("/products/search"), headers={"api-key": "1234"}
         )
-        result = res["data"][1]
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        res = response.json()
+        self.assertEqual(res["total"], 2)
+        result = res["items"][0]
         result.pop("create_date")
         self.assertDictEqual(
             result,
             {
-                "eans": [u"XXX0002"],
-                "name": u"Product 2",
+                "eans": ["XXX0001"],
+                "name": "Product 1",
+                "price": 10.0,
+                "quantity": 5.0,
+                "sku": "12345",
+                "cnk": "CNK123",
+                "taxes": [{"amount": 6.0, "amount_type": "percent", "name": "Tax 6%"}],
+            },
+        )
+        result = res["items"][1]
+        result.pop("create_date")
+        self.assertDictEqual(
+            result,
+            {
+                "eans": ["XXX0002"],
+                "name": "Product 2",
                 "price": 20.0,
                 "quantity": 110.0,
-                "sku": u"23456",
+                "sku": "23456",
                 "cnk": "CNK234",
                 "taxes": [
                     {
                         "amount": 10.0,
-                        "amount_type": u"fixed",
-                        "name": u"Tax 10.0 (Fixed)",
+                        "amount_type": "fixed",
+                        "name": "Tax 10.0 (Fixed)",
                     }
                 ],
             },
@@ -68,6 +64,7 @@ class TestProductsService(CommonCase):
     def test_01(self):
         """
         Data:
+
             1 saleable product without cnk nor ean
         Test case:
             Get list of saleable product
@@ -75,41 +72,42 @@ class TestProductsService(CommonCase):
             The product is into the list with the expected info
         """
         self.saleable_product.write({"barcode": False, "cnk_code": False})
-        res = self.products_service.dispatch("search", params=False)
-        self.assertEqual(res["size"], 2)
-        result = res["data"][0]
-        create_date = result.pop("create_date")
-        self.assertEqual(create_date.tzinfo, pytz.utc)
-        self.assertDictEqual(
-            result,
-            {
-                "eans": [],
-                "name": u"Product 1",
-                "price": 10.0,
-                "quantity": 5.0,
-                "sku": u"12345",
-                "cnk": None,
-                "taxes": [
-                    {"amount": 6.0, "amount_type": u"percent", "name": u"Tax 6%"}
-                ],
-            },
+        response: Response = self.client.get(
+            self._get_path("/products/search"), headers={"api-key": "1234"}
         )
-        result = res["data"][1]
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        res = response.json()
+        self.assertEqual(res["total"], 2)
+        result = res["items"][0]
         result.pop("create_date")
         self.assertDictEqual(
             result,
             {
-                "eans": [u"XXX0002"],
-                "name": u"Product 2",
+                "eans": [],
+                "name": "Product 1",
+                "price": 10.0,
+                "quantity": 5.0,
+                "sku": "12345",
+                "cnk": None,
+                "taxes": [{"amount": 6.0, "amount_type": "percent", "name": "Tax 6%"}],
+            },
+        )
+        result = res["items"][1]
+        result.pop("create_date")
+        self.assertDictEqual(
+            result,
+            {
+                "eans": ["XXX0002"],
+                "name": "Product 2",
                 "price": 20.0,
                 "quantity": 110.0,
-                "sku": u"23456",
+                "sku": "23456",
                 "cnk": "CNK234",
                 "taxes": [
                     {
                         "amount": 10.0,
-                        "amount_type": u"fixed",
-                        "name": u"Tax 10.0 (Fixed)",
+                        "amount_type": "fixed",
+                        "name": "Tax 10.0 (Fixed)",
                     }
                 ],
             },
@@ -118,6 +116,7 @@ class TestProductsService(CommonCase):
     def test_02(self):
         """
         Data:
+
             2 saleable product
         Test case:
             Put 1 the product into a forbidden category
@@ -131,18 +130,27 @@ class TestProductsService(CommonCase):
             "alc_product_category_data.product_categ_importation",
         ):
             self.saleable_product.categ_id = self.env.ref(categ_xml_id)
-            res = self.products_service.dispatch("search", params=False)
-            self.assertEqual(res["size"], 1)
+            response: Response = self.client.get(
+                self._get_path("/products/search"), headers={"api-key": "1234"}
+            )
+            self.assertEqual(response.status_code, status.HTTP_200_OK)
+            res = response.json()
+            self.assertEqual(res["total"], 1)
             self.assertEqual(
-                res["data"][0]["sku"], self.saleable_product_2.default_code
+                res["items"][0]["sku"], self.saleable_product_2.default_code
             )
         self.saleable_product.categ_id = default_categ
-        res = self.products_service.dispatch("search", params=False)
-        self.assertEqual(res["size"], 2)
+        response: Response = self.client.get(
+            self._get_path("/products/search"), headers={"api-key": "1234"}
+        )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        res = response.json()
+        self.assertEqual(res["total"], 2)
 
     def test_03(self):
         """
         Data:
+
             3 saleable product
         Test case:
             Search for a given sku
@@ -150,9 +158,19 @@ class TestProductsService(CommonCase):
             Product is returned if the sku match
         """
         sku = self.saleable_product.default_code
-        res = self.products_service.dispatch("search", params=dict(skus=[sku]))
-        self.assertEqual(res["size"], 1)
-        res = self.products_service.dispatch(
-            "search", params=dict(skus=[sku + "false"])
+        response: Response = self.client.get(
+            self._get_path("/products/search"),
+            headers={"api-key": "1234"},
+            params=dict(skus=[sku]),
         )
-        self.assertEqual(res["size"], 0)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        res = response.json()
+        self.assertEqual(res["total"], 1)
+        response: Response = self.client.get(
+            self._get_path("/products/search"),
+            headers={"api-key": "1234"},
+            params=dict(skus=[sku + "false"]),
+        )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        res = response.json()
+        self.assertEqual(res["total"], 0)

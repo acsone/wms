@@ -119,3 +119,4 @@ textual==0.10.1
 tomli==2.0.1
 typer==0.4.2
 zipp==3.12.1
+httpx==0.24.0

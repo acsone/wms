@@ -1,33 +1,24 @@
-# -*- coding: utf-8 -*-
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-import logging
-from contextlib import contextmanager
+from fastapi.testclient import TestClient
 
-from odoo.tools import mute_logger
+from odoo.tests.common import TransactionCase
 
-from odoo.addons.base_rest.controllers.main import _PseudoCollection
-from odoo.addons.base_rest.tests.common import BaseRestCase
-from odoo.addons.component.core import WorkContext
+from odoo.addons.fastapi.context import odoo_env_ctx
 
 from ..hooks import _initialize_product_assortment_filter
-from ..services.base_b2c_service import B2C_COLLECTION
 
 
-class CommonCase(BaseRestCase):
+class CommonCase(TransactionCase):
     @classmethod
-    @mute_logger("odoo.addons.queue_job.models.base")
     def setUpClass(cls):
-        super(CommonCase, cls).setUpClass()
-        cls.env = cls.env(
-            context=dict(
-                cls.env.context, tracking_disable=True, test_queue_job_no_delay=True
-            )
-        )
+        super().setUpClass()
         _initialize_product_assortment_filter(cls.env.cr)
         cls.currency_id = cls.env.user.company_id.currency_id
-        cls.pricelist_id = cls.env.ref("alc_product_pricelist_data.product_pricelist_pb1")
+        cls.pricelist_id = cls.env.ref(
+            "alc_product_pricelist_data.product_pricelist_pb1"
+        )
         # ensure same currency across products and pricelists
         cls.pricelist_id.currency_id = cls.currency_id
         cls.ProductProduct = cls.env["product.product"]
@@ -107,7 +98,9 @@ class CommonCase(BaseRestCase):
         cls.auth_api_key = cls.env["auth.api.key"].create(
             {"name": "test api key", "key": "1234", "user_id": cls.env.user.id}
         )
-        cls.b2c_backend = cls.env["alc.b2c.backend"].create(
+        cls.sale_channel = cls.env.ref("sale_channel.sale_channel_amazon")
+        cls.endpoint = cls.env.ref("alc_b2c_connector.fastapi_endpoint_b2c")
+        cls.endpoint_setting = cls.env["fastapi.endpoint.settings"].create(
             {
                 "name": "B2c backend test",
                 "product_assortment_id": cls.env.ref(
@@ -116,43 +109,31 @@ class CommonCase(BaseRestCase):
                 "pricelist_id": cls.pricelist_id.id,
                 "sale_team_id": cls.env.ref("sales_team.salesteam_website_sales").id,
                 "payment_mode_id": cls.payment_mode.id,
-                "sale_channel": "web",
+                "sale_channel_id": cls.sale_channel.id,
                 "is_sale_back_order_accepted": False,
                 "auth_api_key_id": cls.auth_api_key.id,
+                "fastapi_endpoint_id": cls.endpoint.id,
             }
         )
-
-    def setUp(self):
-        super(CommonCase, self).setUp()
-        loggers = ["odoo.addons.queue_job.models.base"]
-        for logger in loggers:
-            logging.getLogger(logger).addFilter(self)
-
-        # pylint: disable=unused-variable
-        @self.addCleanup
-        def un_mute_logger():
-            for logger_ in loggers:
-                logging.getLogger(logger_).removeFilter(self)
-
-    def filter(self, record):
-        return 0
+        cls.app = cls.endpoint._get_app()
+        cls.client = TestClient(cls.app)
+        cls._ctx_token = odoo_env_ctx.set(cls.env)
 
     @classmethod
     def change_product_qty(cls, product, qty):
         cls.env["stock.change.product.qty"].create(
-            {"product_id": product.id, "new_quantity": qty}
+            {
+                "product_id": product.id,
+                "product_tmpl_id": product.product_tmpl_id.id,
+                "new_quantity": qty,
+            }
         ).change_product_qty()
 
     @classmethod
-    @contextmanager
-    def work_on_services(cls, **params):
-        params = params or {}
-        ctx = cls.env["res.users"].sudo(
-            cls.env.ref("alc_b2c_connector.alc_b2c_rest_api_user").id
-        )
-        if "b2c_backend" not in params:
-            params["b2c_backend"] = cls.b2c_backend
-        collection = _PseudoCollection(B2C_COLLECTION, ctx.env)
-        yield WorkContext(
-            model_name="rest.service.registration", collection=collection, **params
-        )
+    def tearDownClass(cls) -> None:
+        odoo_env_ctx.reset(cls._ctx_token)
+        cls.endpoint._reset_app()
+        super().tearDownClass()
+
+    def _get_path(self, path) -> str:
+        return self.endpoint.root_path + path
