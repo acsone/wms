@@ -119,6 +119,7 @@ odoo-addon-stock-move-propagate-first-move-cancel @ git+https://github.com/oca/s
 # server-tools
 # https://github.com/OCA/server-tools/pull/2533 - [16.0][MIG] base_sparse_field_list_support
 odoo-addon-base-sparse-field-list-support @ git+https://github.com/acsone/server-tools.git@16.0-mig-base_sparse_field_list_support-hda#subdirectory=setup/base_sparse_field_list_support
+odoo-addon-base-partition @ git+https://github.com/OCA/server-tools.git@refs/pull/2615/head#subdirectory=setup/sbase_partition
 
 # OCA/web
 
