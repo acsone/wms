@@ -32,6 +32,7 @@
         "alc_app_sale",
         "stock_scrap_location_default",
         "alc_partner_message_subscribe",
+        "alc_partner_name",
         # TO BE REMOVED
         "base_report_to_printer",
     ],
