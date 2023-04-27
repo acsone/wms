@@ -12,6 +12,14 @@
     >alc_product_supplierinfo_check.check_alcyon_constraints_on_supplierinfo</field>
       <field name="value">True</field>
     </record>
+  <record id="alc_stock_location_constraint_parameter" model="ir.config_parameter">
+    <field name="key">alc_stock_location_constraint.stock_location_constraint</field>
+    <field name="value">True</field>
+  </record>
+  <record id="alc_sale_exception_check_enabled_parameter" model="ir.config_parameter">
+    <field name="key">alc_sale_exception_settings.sale_exception_check_enabled</field>
+    <field name="value">True</field>
+  </record>
   <!--
   <record id="constrain_discount_pricelist_parameter" model="ir.config_parameter">
     <field name="key">constrain_discount_pricelist</field>
