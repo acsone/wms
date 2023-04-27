@@ -1,7 +1,10 @@
 # Copyright 2023 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from ...utils import BaseModel
+from odoo.addons.alc_b2c_connector.utils import (  # pylint: disable=odoo-addons-relative-import
+    BaseModel,
+)
+
 from . import amount_type
 
 

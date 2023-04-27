@@ -5,7 +5,9 @@ from typing import Any, Optional, Type
 
 from pydantic.utils import GetterDict
 
-from ...utils import BaseModel
+from odoo.addons.alc_b2c_connector.utils import (  # pylint: disable=odoo-addons-relative-import
+    BaseModel,
+)
 
 
 class SaleLineCommon(BaseModel):
@@ -15,9 +17,6 @@ class SaleLineCommon(BaseModel):
 
 class SaleLineRequest(SaleLineCommon):
     quantity: float
-
-    def _convert_to_write(self):
-        return {key: value for key, value in dict(self).items() if value}
 
 
 class SaleLineResponse(SaleLineCommon):

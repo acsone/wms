@@ -6,7 +6,7 @@ import dateutil
 import pytz
 
 from odoo import Command, _, api, fields
-from odoo.exceptions import ValidationError
+from odoo.exceptions import MissingError, ValidationError
 from odoo.osv import expression
 from odoo.osv.expression import AND
 from odoo.tests.common import Form
@@ -135,10 +135,13 @@ class SaleOrder(SaleOrderBase):
 
     @api.model
     def _parse_b2c_order(self, data, endpoint_setting):
+        date_order = self._convert_datetime_to_utc(data["date"])
         sale_order_form = Form(
             self.with_context(
-                default_date_order=data["date"],
+                default_date_order=date_order,
                 default_pricelist_id=endpoint_setting.pricelist_id.id,
+                keep_pricelist_if_set=True,
+                keep_payment_mode_if_set=True,
             )
         )
         # we create all the orders with the VET as final customer
@@ -151,10 +154,6 @@ class SaleOrder(SaleOrderBase):
         sale_order_form.team_id = endpoint_setting.sale_team_id
         if endpoint_setting.payment_mode_id:
             sale_order_form.payment_mode_id = endpoint_setting.payment_mode_id
-        # replace partner by the final customer
-        sale_order_form.partner_id = self._get_final_b2c_recipient(
-            data, endpoint_setting
-        )
         # ensure specific values from the backend are preserved
         sale_order_form.payment_term_id = endpoint_setting.payment_term_id
         sale_order_form.picking_policy = endpoint_setting.picking_policy
@@ -168,15 +167,23 @@ class SaleOrder(SaleOrderBase):
             line_vals["b2c_ref"] = line_info["b2c_ref"]
             line_vals_list.append(line_vals)
         values = sale_order_form._values_to_save()
-        values["b2c_ref"] = data["id"]
-        values["order_line"] = [
-            Command.create(line_vals) for line_vals in line_vals_list
-        ]
+        # replace partner by the final customer
+        values.update(
+            {
+                "b2c_ref": data["id"],
+                "partner_id": self._get_final_b2c_recipient(data, endpoint_setting).id,
+                "partner_invoice_id": partner_vet.id,
+                "partner_shipping_id": partner_vet.id,
+                "order_line": [
+                    Command.create(line_vals) for line_vals in line_vals_list
+                ],
+            }
+        )
         return values
 
     @api.model
     def _parse_b2c_order_line(self, data, endpoint_setting):
-        lines_data = [line._convert_to_write() for line in data["lines"]]
+        lines_data = data["lines"]
         skus = [line["sku"] for line in lines_data]
         domain = [("default_code", "in", skus)]
         if endpoint_setting.product_assortment_id:
@@ -202,7 +209,7 @@ class SaleOrder(SaleOrderBase):
 
     @api.model
     def _get_final_b2c_recipient(self, data, endpoint_setting):
-        customer_info = data["recipient"]._convert_to_write()
+        customer_info = data["recipient"]
         b2c_ref = self.env["res.partner"]._b2c_id_to_b2c_ref(
             customer_info["id"], endpoint_setting
         )
@@ -220,8 +227,9 @@ class SaleOrder(SaleOrderBase):
         if title:
             title = self.env.ref(TITLE_XML_ID_BY_B2C_KEY[title]).id
         country_id = None
-        country_code = customer_info.get("country_code").value
+        country_code = customer_info.get("country_code")
         if country_code:
+            country_code = country_code.value
             country_id = self.env["res.country"]._get_by_code(country_code).id
         return self.env["res.partner"].create(
             {
@@ -234,36 +242,36 @@ class SaleOrder(SaleOrderBase):
                 "city": customer_info.get("city"),
                 "phone": customer_info.get("phone"),
                 "mobile": customer_info.get("mobile"),
-                # FIXME: where this field is gone
-                # "is_sale_back_order_accepted": endpoint_setting.is_sale_back_order_accepted,
+                "sale_reason_backorder_strategy": endpoint_setting.sale_reason_backorder_strategy,
                 "is_b2c_customer": True,
                 "partner_type": "student_like",
                 "ref": b2c_ref,
                 "country_id": country_id,
-                # FIXME: do after specific_partner migration
-                # "suite": customer_info.get("name2"),
+                "suite": customer_info.get("name2"),
                 "comment": customer_info.get("note"),
             }
         )
 
     @api.model
-    def _parse_datetime_to_utc(self, dt):
+    def _convert_datetime_to_utc(self, dt):
         """Parse an iso8601-formatted date string and returns.
 
         a DT into UTC without TZ info as string
         """
-        dt = dateutil.parser.parse(dt)
-        dt = dt.astimezone(pytz.timezone("UTC"))
-        return fields.Datetime.to_string(dt)
+        if isinstance(dt, str):
+            dt = dateutil.parser.parse(dt)
+        return dt.astimezone(pytz.timezone("UTC")).replace(tzinfo=None)
 
-    @api.constrains("sale_channel")
+    @api.constrains("sale_channel_id", "b2c_ref")
     def _check_sale_channel_selection(self):
         user = self.env.user
-        b2c_xmlid = "alc_b2c_connector.alc_b2c_rest_api_user"
-        if not user._is_superuser() and user != self.env.ref(b2c_xmlid):
-            b2c_channels = self._get_sale_channels_external()
-            if any(c in b2c_channels for c in self.mapped("sale_channel")):
-                msg = _("You cannot use this sale channel for manuel order")
+        msg = _("You cannot use this sale channel for manuel order")
+        for rec in self:
+            if (
+                not user._is_superuser()
+                and not rec.b2c_ref
+                and not rec.sale_channel_id.is_internal
+            ):
                 raise ValidationError(msg)
 
     @api.model
@@ -277,7 +285,7 @@ class SaleOrder(SaleOrderBase):
             domain = expression.AND([domain, extended_domain])
         res = self.search(domain)
         if not res:
-            raise ValidationError(
+            raise MissingError(
                 _("Sale order not found for id {b2c_ref}").format(b2c_ref=b2c_ref)
             )
         return res
@@ -289,3 +297,31 @@ class SaleOrder(SaleOrderBase):
         if b2c_refs:
             domain = expression.AND([domain, [("b2c_ref", "in", b2c_refs)]])
         return self.search(domain, limit=limit, offset=offset)
+
+    @api.depends("partner_id")
+    def _compute_pricelist_id(self):
+        """Pricelist is changed with partner change, we need to disable this behavior.
+
+        for b2c order as the pricelist is set by the endpoint settings
+        """
+        keep_pricelist_if_set = self.env.context.get("keep_pricelist_if_set")
+        if not keep_pricelist_if_set:
+            return super()._compute_pricelist_id()
+        for rec in self:
+            if not rec.pricelist_id:
+                super(SaleOrder, rec)._compute_pricelist_id()
+        return True
+
+    @api.depends("partner_id")
+    def _compute_payment_mode(self):
+        """Payment_mode is changed with partner change, we need to disable this behavior.
+
+        for b2c orders as the payment_mode is set by the endpoint settings
+        """
+        keep_payment_mode_if_set = self.env.context.get("keep_payment_mode_if_set")
+        if not keep_payment_mode_if_set:
+            return super()._compute_payment_mode()
+        for rec in self:
+            if not rec.payment_mode_id:
+                super(SaleOrder, rec)._compute_payment_mode()
+        return True

@@ -3,6 +3,9 @@
 
 from psycopg2 import IntegrityError
 
+from odoo.exceptions import ValidationError
+from odoo.tools.misc import mute_logger
+
 from .common import CommonCase
 
 
@@ -15,7 +18,7 @@ class TestSaleOrder(CommonCase):
 
         cls.b2c_order = cls.env["sale.order"].create(
             {
-                "b2c_ref": "10",
+                "b2c_ref": 10,
                 "sale_channel_id": cls.sale_channel.id,
                 "partner_id": cls.partner.id,
             }
@@ -30,10 +33,10 @@ class TestSaleOrder(CommonCase):
         Expected Result:
             IntegrityError
         """
-        with self.assertRaises(IntegrityError):
+        with self.assertRaises(IntegrityError), mute_logger("odoo.sql_db"):
             self.env["sale.order"].create(
                 {
-                    "b2c_ref": "10",
+                    "b2c_ref": 10,
                     "sale_channel_id": self.sale_channel.id,
                     "partner_id": self.partner.id,
                 }
@@ -50,6 +53,44 @@ class TestSaleOrder(CommonCase):
         """
         self.assertTrue(
             self.env["sale.order"].create(
-                {"b2c_ref": 10, "sale_channel": "phone", "partner_id": self.partner.id}
+                {
+                    "b2c_ref": 10,
+                    "sale_channel_id": self.sale_channel2.id,
+                    "partner_id": self.partner.id,
+                }
             )
+        )
+
+    def test_check_internal_sale_channel(self):
+        """Regular users can't use external sale channels for not b2c orders."""
+        self.sale_channel.is_internal = False
+        with self.assertRaises(ValidationError):
+            self.env["sale.order"].with_user(self.env.ref("base.user_demo")).create(
+                {
+                    "sale_channel_id": self.sale_channel.id,
+                    "partner_id": self.partner.id,
+                }
+            )
+
+        self.env["sale.order"].with_user(self.env.ref("base.user_demo")).create(
+            {
+                "b2c_ref": 20,
+                "sale_channel_id": self.sale_channel.id,
+                "partner_id": self.partner.id,
+            }
+        )
+
+        self.sale_channel.is_internal = True
+        self.env["sale.order"].with_user(self.env.ref("base.user_demo")).create(
+            {
+                "sale_channel_id": self.sale_channel.id,
+                "partner_id": self.partner.id,
+            }
+        )
+
+        self.env["sale.order"].create(
+            {
+                "sale_channel_id": self.sale_channel.id,
+                "partner_id": self.partner.id,
+            }
         )

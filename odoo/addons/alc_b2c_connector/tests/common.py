@@ -96,9 +96,14 @@ class CommonCase(TransactionCase):
             }
         )
         cls.auth_api_key = cls.env["auth.api.key"].create(
-            {"name": "test api key", "key": "1234", "user_id": cls.env.user.id}
+            {
+                "name": "test api key",
+                "key": "1234",
+                "user_id": cls.env.ref("alc_b2c_connector.alc_b2c_rest_api_user").id,
+            }
         )
         cls.sale_channel = cls.env.ref("sale_channel.sale_channel_amazon")
+        cls.sale_channel2 = cls.env.ref("sale_channel.sale_channel_ebay")
         cls.endpoint = cls.env.ref("alc_b2c_connector.fastapi_endpoint_b2c")
         cls.endpoint_setting = cls.env["fastapi.endpoint.settings"].create(
             {
@@ -110,7 +115,7 @@ class CommonCase(TransactionCase):
                 "sale_team_id": cls.env.ref("sales_team.salesteam_website_sales").id,
                 "payment_mode_id": cls.payment_mode.id,
                 "sale_channel_id": cls.sale_channel.id,
-                "is_sale_back_order_accepted": False,
+                "sale_reason_backorder_strategy": "cancel",
                 "auth_api_key_id": cls.auth_api_key.id,
                 "fastapi_endpoint_id": cls.endpoint.id,
             }

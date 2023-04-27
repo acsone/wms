@@ -18,7 +18,7 @@ from odoo.addons.product_assortment.models.ir_filters import IrFilters
 from odoo.addons.sale_channel.models.sale_channel import SaleChannel
 from odoo.addons.sales_team.models.crm_team import CrmTeam
 
-from ..utils import api_key_header
+from ..services.utils import api_key_header
 
 
 class FastapiEndpointSettings(models.Model):
@@ -40,10 +40,12 @@ class FastapiEndpointSettings(models.Model):
         string="Payment Mode", domain=[("payment_type", "=", "inbound")]
     )
     payment_term_id = fields.Many2one[AccountPaymentTerm](string="Payment Terms")
-    is_sale_back_order_accepted = fields.Boolean(
-        string="Sale backorder accepted",
-        default=True,
-        help="Allows customer to order products not in stock",
+    sale_reason_backorder_strategy = fields.Selection(
+        selection=[("create", "Create"), ("cancel", "Cancel")],
+        default=lambda self: self._get_default_sale_reason_backorder_strategy(),
+        required=True,
+        help="Choose the strategy that will be applied on pickings that have "
+        "backorder choice enabled and depending on partner sale strategy.",
     )
     picking_policy = fields.Selection(
         selection="_selection_picking_policy",
@@ -66,6 +68,10 @@ class FastapiEndpointSettings(models.Model):
     @api.model
     def _default_picking_policy(self):
         return self.env["sale.order"]._fields["picking_policy"].default("sale.order")
+
+    @api.model
+    def _get_default_sale_reason_backorder_strategy(self):
+        return self.env.company.partner_sale_backorder_default_strategy
 
 
 def fastapi_endpoint_setting(

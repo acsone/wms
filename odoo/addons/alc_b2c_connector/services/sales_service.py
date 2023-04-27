@@ -15,12 +15,12 @@ from ..models.fastapi_endpoint_settings import (
     FastapiEndpointSettings,
     fastapi_endpoint_setting,
 )
-from ..utils import PagedCollection
 from .models.sale_order import (
     SaleOrderCreateRequest,
     SaleOrderResponse,
     SaleOrderUpdateRequest,
 )
+from .utils import PagedCollection
 
 
 @b2c_api_router.post("/sales/create", response_model=SaleOrderResponse)

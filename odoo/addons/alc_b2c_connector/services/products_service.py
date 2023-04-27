@@ -15,8 +15,8 @@ from ..models.fastapi_endpoint_settings import (
     FastapiEndpointSettings,
     fastapi_endpoint_setting,
 )
-from ..utils import PagedCollection
 from .models.product import Product
+from .utils import PagedCollection
 
 
 @b2c_api_router.get(

@@ -17,7 +17,7 @@ from odoo.addons.fastapi.models.fastapi_endpoint import (
     FastapiEndpoint as FastapiEndpointBase,
 )
 
-from ..utils import api_key_header
+from ..services.utils import api_key_header
 from .fastapi_endpoint_settings import FastapiEndpointSettings
 
 

@@ -29,6 +29,11 @@
         "alc_sale_product_qty_backorder",
         "delivery",
         "alc_product_pricelist_data",
+        "alc_partner_suite",
+        "stock_picking_backorder_reason",
+        "alc_pricelist_discount",
+        "alc_partner_pricelist",
+        "alc_sale_channel",
     ],
     "data": [
         "security/fastapi_endpoint_settings.xml",

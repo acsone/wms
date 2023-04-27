@@ -5,7 +5,10 @@ from typing import Any, Optional, Type
 
 from pydantic.utils import GetterDict
 
-from ...utils import BaseModel
+from odoo.addons.alc_b2c_connector.utils import (  # pylint: disable=odoo-addons-relative-import
+    BaseModel,
+)
+
 from . import country_code as country, partner_title
 
 
@@ -13,7 +16,7 @@ class PartnerCommon(BaseModel):
     street2: Optional[str]
     phone: Optional[str]
     street: Optional[str]
-    # name2: Optional[str] = None FIXME: do after specific_partner migration
+    name2: Optional[str] = None
     country_code: Optional[country.CountryCode]
     city: Optional[str]
     zip: Optional[str]
@@ -48,8 +51,8 @@ class PartnerResponse(PartnerCommon):
             "email": obj.email or None,
             "mobile": obj.mobile or None,
             "phone": obj.phone or None,
-            "country_code": obj.country_id.code,
-            # "name2": obj.suite, FIXME: do after specific_partner migration
+            "country_code": obj.country_id.code if obj.country_id else None,
+            "name2": obj.suite,
             "note": obj.comment or None,
         }
 

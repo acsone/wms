@@ -1,7 +1,9 @@
-from fastapi.security import APIKeyHeader
-from odoo.addons.fastapi.schemas import GenericModel, Generic
 from typing import List, TypeVar
+
+from fastapi.security import APIKeyHeader
 from pydantic import BaseModel as PydanticBaseModel
+
+from odoo.addons.fastapi.schemas import Generic, GenericModel
 
 T = TypeVar("T")
 

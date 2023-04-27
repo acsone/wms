@@ -33,7 +33,7 @@ class ResPartner(ResPartnerBase):
             ("picking_type_code", "=", "outgoing"),
             ("printed", "=", True),
         ]
-        keys = ["mobile", "phone", "email", "comment"]
+        keys = ["mobile", "phone", "email", "comment", "name2"]
         if (
             self.env["stock.picking"].search(domain_pickings, limit=1)
             and not endpoint_setting.allow_customer_modifications
@@ -73,8 +73,8 @@ class ResPartner(ResPartnerBase):
             data["title"] = self.env.ref(
                 TITLE_XML_ID_BY_B2C_KEY[data["title"].value]
             ).id
-        # if "name2" in data:
-        #   data["suite"] = data.pop("name2") FIXME: do after specific_partner migration
+        if "name2" in data:
+            data["suite"] = data.pop("name2")
         if "note" in data:  # passing None is allowed, so no get here
             data["comment"] = data.pop("note")
         self._update_b2c_recipient_validate_data(data, endpoint_setting)

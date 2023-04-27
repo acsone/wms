@@ -166,8 +166,7 @@ class TestRecipientsService(CommonCase):
         self.assertEqual(self.b2c_partner.zip, "4567")
         self.assertEqual(self.b2c_partner.title.name, "Madam")
         self.assertEqual(self.b2c_partner.name, "test b2cPartner")
-        # FIXME: do after specific_partner migration
-        # self.assertEqual(self.b2c_partner.suite, "My Partner Society")
+        self.assertEqual(self.b2c_partner.suite, "My Partner Society")
         self.assertEqual(str(self.b2c_partner.comment), "<p>Test note for delivery</p>")
 
         self.assertEqual(self.b2c_order.partner_id.street, "new_street")
@@ -175,8 +174,7 @@ class TestRecipientsService(CommonCase):
         self.assertEqual(self.b2c_order.partner_id.zip, "4567")
         self.assertEqual(self.b2c_order.partner_id.title.name, "Madam")
         self.assertEqual(self.b2c_order.partner_id.name, "test b2cPartner")
-        # FIXME: do after specific_partner migration
-        # self.assertEqual(self.b2c_order.partner_id.suite, "My Partner Society")
+        self.assertEqual(self.b2c_order.partner_id.suite, "My Partner Society")
         self.assertEqual(
             str(self.b2c_order.partner_id.comment), "<p>Test note for delivery</p>"
         )
@@ -288,17 +286,23 @@ class TestRecipientsService(CommonCase):
 
     def test_name2(self):
         """Suite can be nulled, and is not updatable after a picking is started."""
+        self.b2c_order.partner_id = self.b2c_partner
         self.b2c_partner.suite = "C"
-        self.recipient_service.dispatch(
-            "update", "ABC", params={"id": "ABC", "name2": None}
+        response: Response = self.client.post(
+            self._get_path("/recipients/ABC/update"),
+            headers={"api-key": "1234"},
+            json={"id": "ABC", "name2": None},
         )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertFalse(self.b2c_partner.suite)
 
         self.b2c_order.action_confirm()
         self.b2c_order.mapped("picking_ids").write({"printed": True})
         with self.assertRaises(ValidationError):
-            self.recipient_service.dispatch(
-                "update", "ABC", params={"id": "ABC", "name2": "S"}
+            self.env["res.partner"]._update_b2c_recipient(
+                "ABC",
+                self.endpoint_setting,
+                {"id": "ABC", "name2": "S"},
             )
 
     def test_update_recipient_if_allowed_on_b2c_backend(self):
