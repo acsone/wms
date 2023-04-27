@@ -6,8 +6,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-18 06:56+0000\n"
-"PO-Revision-Date: 2023-04-18 06:56+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,6 +14,16 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_sale_exception_promotion
+#: model:exception.rule,name:alc_sale_exception_promotion.warning_free_product
+msgid "Order offer free product"
+msgstr ""
+
+#. module: alc_sale_exception_promotion
 #: model:ir.model,name:alc_sale_exception_promotion.model_sale_order_line
 msgid "Sales Order Line"
+msgstr ""
+
+#. module: alc_sale_exception_promotion
+#: model:exception.rule,description:alc_sale_exception_promotion.warning_free_product
+msgid "Will include free product"
 msgstr ""
