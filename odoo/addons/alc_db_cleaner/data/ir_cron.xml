@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo noupdate="1">
+  <!-- Copyright 2023 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+  <record forcecreate="True" id="ir_cron_db_cleaner" model="ir.cron">
+    <field name="name">Clean database</field>
+    <field eval="True" name="active" />
+    <field name="user_id" ref="base.user_root" />
+    <field name="interval_number">1</field>
+    <field name="interval_type">weeks</field>
+    <field name="numbercall">-1</field>
+    <field eval="False" name="doall" />
+    <field eval="'alc.db.cleaner'" name="model" />
+    <field eval="'_cron_do_cleanup'" name="function" />
+    <field name="nextcall" eval="(DateTime.now()).strftime('%Y-%m-%d 23:00:00')" />
+  </record>
+  </odoo>
