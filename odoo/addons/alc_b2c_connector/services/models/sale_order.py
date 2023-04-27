@@ -4,9 +4,9 @@ from datetime import date, datetime
 from enum import Enum
 from typing import Any, List, Optional, Type
 
-from pydantic import BaseModel
 from pydantic.utils import GetterDict
 
+from ...utils import BaseModel
 from . import delivery, partner, sale_line
 
 

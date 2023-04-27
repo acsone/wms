@@ -20,7 +20,7 @@ from .models.partner import PartnerRequest, PartnerResponse
 @b2c_api_router.post("/recipients/{id}", response_model=PartnerResponse)
 @b2c_api_router.put("/recipients/{id}", response_model=PartnerResponse)
 def _get_partners(
-    id: int,  # pylint: disable=redefined-builtin
+    id: str,  # pylint: disable=redefined-builtin
     env: Environment = Depends(authenticated_partner_env),  # noqa: B008
     endpoint_setting: FastapiEndpointSettings = Depends(  # noqa: B008
         fastapi_endpoint_setting
@@ -34,7 +34,7 @@ def _get_partners(
 
 @b2c_api_router.post("/recipients/{id}/update", response_model=PartnerResponse)
 def _update_partner(
-    id: int,  # pylint: disable=redefined-builtin
+    id: str,  # pylint: disable=redefined-builtin
     body: PartnerRequest,
     env: Environment = Depends(authenticated_partner_env),  # noqa: B008
     endpoint_setting: FastapiEndpointSettings = Depends(  # noqa: B008

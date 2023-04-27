@@ -3,8 +3,9 @@
 
 from typing import Any, Optional, Type
 
-from pydantic import BaseModel
 from pydantic.utils import GetterDict
+
+from ...utils import BaseModel
 
 
 class SaleLineCommon(BaseModel):

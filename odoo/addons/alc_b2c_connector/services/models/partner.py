@@ -3,9 +3,9 @@
 
 from typing import Any, Optional, Type
 
-from pydantic import BaseModel
 from pydantic.utils import GetterDict
 
+from ...utils import BaseModel
 from . import country_code as country, partner_title
 
 
@@ -24,11 +24,8 @@ class PartnerCommon(BaseModel):
 
 
 class PartnerRequest(PartnerCommon):
-    first_name: str
-    last_name: str
-
-    def _convert_to_write(self):
-        return {key: value for key, value in dict(self).items() if value}
+    first_name: Optional[str]
+    last_name: Optional[str]
 
 
 class PartnerResponse(PartnerCommon):

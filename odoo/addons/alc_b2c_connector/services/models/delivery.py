@@ -5,8 +5,9 @@ from datetime import date
 from enum import Enum
 from typing import Any, Optional, Type
 
-from pydantic import BaseModel
 from pydantic.utils import GetterDict
+
+from ...utils import BaseModel
 
 
 class Carrier(Enum):
