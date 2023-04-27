@@ -1,0 +1,33 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* alc_partner_pharmacist
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-04-24 08:28+0000\n"
+"PO-Revision-Date: 2023-04-24 08:28+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_partner_pharmacist
+#: model:ir.model.fields,field_description:alc_partner_pharmacist.field_res_partner__pharmacist_id
+#: model:ir.model.fields,field_description:alc_partner_pharmacist.field_res_users__pharmacist_id
+msgid "Associated pharmacist"
+msgstr "Pharmacien associé"
+
+#. module: alc_partner_pharmacist
+#: model:ir.model,name:alc_partner_pharmacist.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: alc_partner_pharmacist
+#: model:ir.model.fields,field_description:alc_partner_pharmacist.field_res_partner__pharmacist_of_ids
+#: model:ir.model.fields,field_description:alc_partner_pharmacist.field_res_users__pharmacist_of_ids
+msgid "Pharmacist associated to"
+msgstr "Pharmacien associé à"

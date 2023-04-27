@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+  <record id="view_res_partner_specific_filter" model="ir.ui.view">
+    <field name="name">res.partner.specific.select</field>
+    <field name="model">res.partner</field>
+    <field name="inherit_id" ref="base.view_res_partner_filter" />
+    <field name="arch" type="xml">
+      <field name="category_id" position="before">
+        <field name="call_name" />
+      </field>
+      <!-- Add call_name in the default search on name -->
+      <field name="name" position="attributes">
+        <attribute name="filter_domain">
+          ['|', '|', '|', ('display_name', 'ilike', self), ('ref', '=', self), ('email', 'ilike', self),
+            ('call_name', 'ilike', self)]
+        </attribute>
+      </field>
+    </field>
+  </record>
+
+  <record id="view_partner_form" model="ir.ui.view">
+    <field name="model">res.partner</field>
+    <field name="inherit_id" ref="base.view_partner_form" />
+    <field name="priority">99</field>
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='name']/parent::h1" position="after">
+        <group>
+          <field name="call_name" />
+        </group>
+      </xpath>
+    </field>
+  </record>
+
+</odoo>

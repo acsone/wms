@@ -57,6 +57,7 @@
   <record model="ir.ui.view" id="res_partner_tree_view">
     <field name="name">res.partner.tree (in alc_customer_audit)</field>
     <field name="model">res.partner</field>
+<!--    in v16: Inherit this from alc_partner_manual_rank instead-->
     <field name="inherit_id" ref="specific_partner.view_res_partner_specific_tree" />
     <field name="arch" type="xml">
       <field name="supplier" position="after">

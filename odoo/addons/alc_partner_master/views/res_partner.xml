@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+  <record id="view_partner_form" model="ir.ui.view">
+    <field name="model">res.partner</field>
+    <field name="inherit_id" ref="base.view_partner_form" />
+    <field name="priority">99</field>
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='name']/parent::h1" position="after">
+        <group>
+          <field name="master_partner_id" />
+        </group>
+      </xpath>
+    </field>
+  </record>
+
+
+
+
+</odoo>

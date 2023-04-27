@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+  <record id="view_res_partner_specific_tree" model="ir.ui.view">
+    <field name="name">res.partner.specific.tree</field>
+    <field name="model">res.partner</field>
+    <field name="inherit_id" ref="base.view_partner_tree" />
+    <field name="arch" type="xml">
+      <field name="display_name" position="after">
+        <field name="is_customer" />
+        <field name="is_supplier" />
+      </field>
+    </field>
+  </record>
+
+  <!--Display the view tree first-->
+  <record id="base.action_partner_form" model="ir.actions.act_window">
+    <field name="view_mode">tree,kanban,form, activity</field>
+  </record>
+  <record id="base.action_partner_customer_form" model="ir.actions.act_window">
+    <field name="view_mode">tree,kanban,form, activity</field>
+  </record>
+  <record id="base.action_partner_supplier_form" model="ir.actions.act_window">
+    <field name="view_mode">tree,kanban,form, activity</field>
+  </record>
+
+</odoo>
