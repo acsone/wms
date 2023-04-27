@@ -14,7 +14,10 @@ def pre_init_hook(cr):
     openupgrade.rename_xmlids(
         cr,
         [
-            (f"specific_sale.{xml_id}", f"alc_sale_exception.{xml_id}")
+            (
+                f"specific_sale.{xml_id}",
+                f"alc_sale_exception_product_availability.{xml_id}",
+            )
             for xml_id in XML_IDS
         ],
     )

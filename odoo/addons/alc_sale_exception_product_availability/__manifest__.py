@@ -14,6 +14,7 @@
         "stock",
         "stock_available",
         "stock_picking_backorder_reason",
+        "alc_sale_exception",
         "alc_sale_product_qty_unavailable",
         "alc_product_state",
         "alc_sale_exception_settings",
