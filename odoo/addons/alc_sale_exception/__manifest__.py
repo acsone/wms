@@ -9,7 +9,9 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
-    "depends": ["sale_exception", "base_exception"],
+    "depends": [
+        "alc_sale_exception_settings",
+    ],
     "data": [
         "data/exception_rule.xml",
         "views/base_exception_views.xml",

@@ -4,7 +4,9 @@
 
 from datetime import date, timedelta
 
-from odoo.addons.alc_sale_exception.tests.common import TestSaleOrderExceptionCommon
+from odoo.addons.alc_sale_exception_settings.tests.common import (
+    TestSaleOrderExceptionCommon,
+)
 
 
 class TestSaleOrderException(TestSaleOrderExceptionCommon):

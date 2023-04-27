@@ -16,7 +16,6 @@ class TestSaleOrderExceptionCommon(TransactionCase):
         cls.prod1 = cls.env["product.product"].create(
             {
                 "name": "Corner Desk Right Sit",
-                "type": "product",
             }
         )
         cls.so1_vals = {
@@ -34,6 +33,11 @@ class TestSaleOrderExceptionCommon(TransactionCase):
                 )
             ],
         }
+        cls.env["res.config.settings"].create(
+            {
+                "alc_sale_exception_check_enabled": True,
+            }
+        ).execute()
 
     @classmethod
     def get_module_exception_ids(cls, module=None):

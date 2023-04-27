@@ -3,7 +3,9 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
 
-from odoo.addons.alc_sale_exception.tests.common import TestSaleOrderExceptionCommon
+from odoo.addons.alc_sale_exception_settings.tests.common import (
+    TestSaleOrderExceptionCommon,
+)
 
 
 class TestSaleOrderException(TestSaleOrderExceptionCommon):

@@ -10,7 +10,7 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        "alc_sale_exception",
+        "alc_sale_exception_settings",
         "alc_supplier_promotion",
     ],
     "data": ["data/exception_rule.xml"],

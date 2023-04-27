@@ -2,7 +2,9 @@
 # Copyright 2023 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
-from odoo.addons.alc_sale_exception.tests.common import TestSaleOrderExceptionCommon
+from odoo.addons.alc_sale_exception_settings.tests.common import (
+    TestSaleOrderExceptionCommon,
+)
 
 
 class TestSaleOrderException(TestSaleOrderExceptionCommon):
@@ -32,6 +34,7 @@ class TestSaleOrderException(TestSaleOrderExceptionCommon):
             }
         )
         cls.so1 = cls.env["sale.order"].create(cls.so1_vals)
+        cls.prod1.type = "product"
 
     def test_exception_warning_provision_on_order(self):
         """Check the warning provision on order."""
