@@ -1,31 +1,32 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!-- Copyright 2022 ACSONE SA/NV
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
-<odoo>
+<odoo noupdate="1">
+
   <!-- Config Settings -->
-    <record
-    id="check_alcyon_constraints_on_supplierinfo_parameter"
+  <function
     model="ir.config_parameter"
-  >
-      <field
-      name="key"
-    >alc_product_supplierinfo_check.check_alcyon_constraints_on_supplierinfo</field>
-      <field name="value">True</field>
-    </record>
-  <record id="alc_stock_location_constraint_parameter" model="ir.config_parameter">
-    <field name="key">alc_stock_location_constraint.stock_location_constraint</field>
-    <field name="value">True</field>
-  </record>
-  <record id="alc_sale_exception_check_enabled_parameter" model="ir.config_parameter">
-    <field name="key">alc_sale_exception_settings.sale_exception_check_enabled</field>
-    <field name="value">True</field>
-  </record>
+    name="set_param"
+    eval="('alc_product_supplierinfo_check.check_alcyon_constraints_on_supplierinfo', True)"
+  />
+  <function
+    model="ir.config_parameter"
+    name="set_param"
+    eval="('alc_stock_location_constraint.stock_location_constraint', True)"
+  />
+  <function
+    model="ir.config_parameter"
+    name="set_param"
+    eval="('alc_sale_exception_settings.sale_exception_check_enabled', True)"
+  />
+  <function
+    model="ir.config_parameter"
+    name="set_param"
+    eval="('constrain_discount_pricelist', True)"
+  />
+
   <!--
-  <record id="constrain_discount_pricelist_parameter" model="ir.config_parameter">
-    <field name="key">constrain_discount_pricelist</field>
-    <field name="value">1</field>
-  </record>
-  <record
+
     id="alc_stock_picking_wave_release_pickings.constrain_release_picking_wave_before_unlink_parameter"
     model="ir.config_parameter"
   >

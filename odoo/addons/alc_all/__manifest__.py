@@ -40,6 +40,7 @@
     "data": [
         "security/sale_order.xml",
         "security/product_state.xml",
+        "security/res_groups.xml",
         "views/product_packaging.xml",
         "views/product_template.xml",
         "views/res_partner.xml",
