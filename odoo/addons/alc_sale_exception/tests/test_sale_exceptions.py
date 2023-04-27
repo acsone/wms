@@ -17,7 +17,7 @@ class TestSaleOrderException(TestSaleOrderExceptionCommon):
         cls.activate_module_exceptions_only()
 
     def test_basic(self):
-        so1 = self.env["sale.order"].create(self.so1_vals)
+        so1 = self.env["sale.order"].create(self.so1_vals.copy())
         sol = so1.order_line[0]
         sol_name = sol.name
         sol.exception = "Test exception"
@@ -37,7 +37,7 @@ class TestSaleOrderException(TestSaleOrderExceptionCommon):
                 "warning_text": "Text WARNING",
             }
         )
-        so1 = self.env["sale.order"].create(self.so1_vals)
+        so1 = self.env["sale.order"].create(self.so1_vals.copy())
         sol = so1.order_line[0]
         sol_name = sol.name
         sol.product_id_onchange()
@@ -49,7 +49,7 @@ class TestSaleOrderException(TestSaleOrderExceptionCommon):
         exception = self.env.ref("alc_sale_exception.no_line_under_0")
         exception.active = True
         self.prod1.list_price = -1
-        so1 = self.env["sale.order"].create(self.so1_vals)
+        so1 = self.env["sale.order"].create(self.so1_vals.copy())
         sol = so1.order_line[0]
         self.assertEqual(exception.description, sol.exception)
 
@@ -57,7 +57,7 @@ class TestSaleOrderException(TestSaleOrderExceptionCommon):
         exception = self.env.ref("alc_sale_exception.no_line_at_zero")
         exception.active = True
         self.prod1.list_price = 0
-        so1 = self.env["sale.order"].create(self.so1_vals)
+        so1 = self.env["sale.order"].create(self.so1_vals.copy())
         sol = so1.order_line[0]
         self.assertEqual(exception.description, sol.exception)
 
@@ -65,7 +65,7 @@ class TestSaleOrderException(TestSaleOrderExceptionCommon):
         exception = self.env.ref("alc_sale_exception.order_amount_minimum")
         exception.active = True
         self.prod1.list_price = 1
-        so1 = self.env["sale.order"].create(self.so1_vals)
+        so1 = self.env["sale.order"].create(self.so1_vals.copy())
         so1.action_confirm()
         self.assertEqual(so1.state, "draft")
         self.assertIn(exception, so1.exception_ids)
