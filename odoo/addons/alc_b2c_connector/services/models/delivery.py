@@ -7,7 +7,7 @@ from typing import Any, Optional, Type
 
 from pydantic.utils import GetterDict
 
-from odoo.addons.alc_b2c_connector.utils import (  # pylint: disable=odoo-addons-relative-import
+from odoo.addons.alc_b2c_connector.services.utils import (  # pylint: disable=odoo-addons-relative-import
     BaseModel,
 )
 

@@ -3,21 +3,19 @@
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
   <record model="ir.ui.view" id="sale_order_form_view">
-    <field name="name">sale.order.form (in alc_b2c_connector)</field>
     <field name="model">sale.order</field>
-    <field name="inherit_id" ref="alc_sale_channel.sale_order_form_view" />
+    <field name="inherit_id" ref="sale_channel.view_sale_order_form_channel" />
     <field name="arch" type="xml">
-      <field name="sale_channel" position="after">
+      <field name="sale_channel_id" position="after">
         <field name="b2c_ref" readonly="1" />
       </field>
     </field>
   </record>
   <record model="ir.ui.view" id="sale_order_search_view">
-    <field name="name">sale.order.search (in alc_b2c_connector)</field>
     <field name="model">sale.order</field>
     <field name="inherit_id" ref="sale.view_sales_order_filter" />
     <field name="arch" type="xml">
-      <xpath expr="//search//field[@name='product_id']" position="after">
+      <xpath expr="//search//field[@name='order_line']" position="after">
         <field
           name="b2c_ref"
           filter_domain="[('b2c_ref','ilike',self)]"

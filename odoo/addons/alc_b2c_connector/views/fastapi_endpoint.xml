@@ -7,8 +7,14 @@
         <field name="model">fastapi.endpoint</field>
         <field name="inherit_id" ref="fastapi.fastapi_endpoint_form_view" />
         <field name="arch" type="xml">
+            <xpath expr="//field[@name='user_id']" position="attributes">
+                <attribute name="attrs">{'invisible': [('app', '=', 'b2c')]}</attribute>
+            </xpath>
             <span name="configuration" position="after">
-                <field name="setting_ids" />
+                <field
+          name="setting_ids"
+          attrs="{'invisible': [('app', '!=', 'b2c')]}"
+        />
             </span>
         </field>
     </record>

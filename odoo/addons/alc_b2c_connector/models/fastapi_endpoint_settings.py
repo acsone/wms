@@ -3,7 +3,7 @@
 
 from fastapi import Depends
 
-from odoo import api, fields, models
+from odoo import _, api, fields, models
 from odoo.api import Environment
 
 from odoo.addons.account.models.account_payment_term import AccountPaymentTerm
@@ -60,6 +60,15 @@ class FastapiEndpointSettings(models.Model):
         help="If set to True, first name, last name and address can be modified for the customer without any check",
     )
     fastapi_endpoint_id = fields.Many2one[FastapiEndpoint](required=True)
+
+    _sql_constraints = [
+        ("name_uniq", "UNIQUE(name)", _("Name must be unique")),
+        (
+            "auth_api_key_uniq",
+            "UNIQUE(auth_api_key_id)",
+            _("Auth api key can only be used by 1 backend at same time"),
+        ),
+    ]
 
     @api.model
     def _selection_picking_policy(self):

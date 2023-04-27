@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 
-from odoo import _, api, fields
+from odoo import _, api
 from odoo.exceptions import ValidationError
 
 from odoo.addons.alc_partner_type.models.res_partner import ResPartner as ResPartnerBase
@@ -14,9 +14,6 @@ TITLE_XML_ID_BY_B2C_KEY = {
 
 
 class ResPartner(ResPartnerBase):
-
-    ref = fields.Char(required=True)
-
     @api.depends("partner_type", "is_b2c_customer")
     def _compute_is_student(self):
         """The student category is also used as a miscellaneous category."""

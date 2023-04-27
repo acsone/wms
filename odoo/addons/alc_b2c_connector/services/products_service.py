@@ -24,6 +24,11 @@ from .utils import PagedCollection
     response_model=PagedCollection[Product],
     response_model_exclude_unset=True,
 )
+@b2c_api_router.get(
+    "/stocks/search",
+    response_model=PagedCollection[Product],
+    response_model_exclude_unset=True,
+)
 def get_products(
     paging_: Paging = Depends(paging),  # noqa: B008
     skus: Optional[List[str]] = Query(None),
