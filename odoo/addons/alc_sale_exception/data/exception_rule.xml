@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+  <record id="no_line_under_0" model="exception.rule">
+    <field name="name">No line under 0</field>
+    <field name="description">Negative Sale Order Line Not Allowed</field>
+    <field name="active">True</field>
+    <field name="sequence">20</field>
+    <field name="model">sale.order.line</field>
+    <field name="code">failed = object.price_subtotal &lt; 0</field>
+    <field name="is_blocking">True</field>
+  </record>
+  <!-- General exceptions not enabled, test only or ? Should keep ? -->
+  <record id="no_line_at_zero" model="exception.rule">
+    <field name="name">Pas de ligne à zéro</field>
+    <field name="description">Une ligne de vente ne peut pas être à zéro</field>
+    <field name="active">False</field>
+    <field name="sequence">20</field>
+    <field name="model">sale.order.line</field>
+    <field name="code">
+if object.price_subtotal == 0:
+    failed=True
+            </field>
+    <field name="is_blocking">True</field>
+  </record>
+  <record id="order_amount_minimum" model="exception.rule">
+    <field name="name">Montant minimum à 100 euros</field>
+    <field
+      name="description"
+    >Le montant total de la commande ne peut pas être inférieur à 100 euros</field>
+    <field name="active">False</field>
+    <field name="sequence">30</field>
+    <field name="model">sale.order</field>
+    <field name="code">
+if object.amount_total &lt; 100:
+    failed=True
+            </field>
+    <field name="is_blocking">True</field>
+  </record>
+</odoo>

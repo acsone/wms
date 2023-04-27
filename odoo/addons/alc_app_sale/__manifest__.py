@@ -89,5 +89,8 @@
         "alc_partner_apb_authorization",
         "alc_partner_master",
         "alc_partner_manual_rank",
+        "alc_sale_exception_promotion",
+        "alc_sale_exception_product_category",
+        "alc_sale_exception_product_availability",
     ],
 }

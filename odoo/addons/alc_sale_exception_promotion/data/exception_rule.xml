@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+  <record id="warning_free_product" model="exception.rule">
+    <field name="name">Order offer free product</field>
+    <field name="description">Will include free product</field>
+    <field name="active">True</field>
+    <field name="sequence">100</field>
+    <field name="model">sale.order.line</field>
+    <field name="code">
+failed = object.warning_free_product()
+            </field>
+  </record>
+</odoo>
