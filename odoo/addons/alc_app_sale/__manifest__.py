@@ -96,5 +96,6 @@
         "alc_product_shop_category",
         "alc_pricelist_role_name",
         "alc_shipping_fee",
+        "alc_sales_count",
     ],
 }
