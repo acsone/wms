@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="view_order_form_with_carrier" model="ir.ui.view">
+        <field name="name">sale.order (in alc_shipping_fee)</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale_stock.view_order_form_inherit_sale_stock" />
+        <field name="arch" type="xml">
+            <field name="picking_policy" position="after">
+                <field
+          name="carrier_id"
+          attrs="{'required':[('state','in',('draft','sent'))],
+                               'readonly':[('state','not in',('draft','sent'))]}"
+        />
+                <field
+          name="fixed_extra_fee_for_delivery"
+          widget="monetary"
+          attrs="{'invisible': [('carrier_id','=', False)]}"
+        />
+            </field>
+        </field>
+    </record>
+
+</odoo>
