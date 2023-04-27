@@ -1,0 +1,167 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* alc_sale_exception_product_category
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-04-18 15:33+0000\n"
+"PO-Revision-Date: 2023-04-18 15:33+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_sale_exception_product_category
+#: model:exception.rule,description:alc_sale_exception_product_category.no_medoc_veterinary_belge
+msgid "Belgian Veterinary Medicine Not Allowed"
+msgstr ""
+
+#. module: alc_sale_exception_product_category
+#: model:exception.rule,description:alc_sale_exception_product_category.no_medoc_belgium_only
+msgid "Belgium Only Medicine Not Allowed"
+msgstr ""
+
+#. module: alc_sale_exception_product_category
+#: model:exception.rule,description:alc_sale_exception_product_category.no_medoc_vet_stupIII
+msgid "Category III (psychotropic) Medicine Not Allowed"
+msgstr ""
+
+#. module: alc_sale_exception_product_category
+#: model:exception.rule,description:alc_sale_exception_product_category.no_food_allowed
+msgid "Food Product Not Allowed"
+msgstr ""
+
+#. module: alc_sale_exception_product_category
+#: model:exception.rule,description:alc_sale_exception_product_category.no_medoc_human
+msgid "Human Medicine Not Allowed"
+msgstr ""
+
+#. module: alc_sale_exception_product_category
+#: model:exception.rule,description:alc_sale_exception_product_category.order_amount_material_maximum
+msgid ""
+"Le montant total de la commande ne peut pas être supérieur à 1000 euros pour"
+" les produits de type matériel"
+msgstr ""
+
+#. module: alc_sale_exception_product_category
+#: model:exception.rule,description:alc_sale_exception_product_category.no_medoc_cascade_import
+msgid "Medicine Cascade Import Not Allowed"
+msgstr ""
+
+#. module: alc_sale_exception_product_category
+#: model:exception.rule,description:alc_sale_exception_product_category.no_medoc_allowed
+msgid "Medicine Not Allowed"
+msgstr ""
+
+#. module: alc_sale_exception_product_category
+#: model:exception.rule,name:alc_sale_exception_product_category.order_amount_material_maximum
+msgid "Montant maximum à 1000 euros (matériel)"
+msgstr ""
+
+#. module: alc_sale_exception_product_category
+#: model:exception.rule,description:alc_sale_exception_product_category.no_medoc_vet_stup
+msgid "Narcotic Veterinary Medicine Not Allowed"
+msgstr ""
+
+#. module: alc_sale_exception_product_category
+#: model:exception.rule,name:alc_sale_exception_product_category.no_medoc_veterinary_belge
+msgid "No Belgian Veterinary Medicine"
+msgstr ""
+
+#. module: alc_sale_exception_product_category
+#: model:exception.rule,name:alc_sale_exception_product_category.no_medoc_belgium_only
+msgid "No Belgium Only Medicine"
+msgstr ""
+
+#. module: alc_sale_exception_product_category
+#: model:exception.rule,name:alc_sale_exception_product_category.no_medoc_vet_stupIII
+msgid "No Cat.III Medicine"
+msgstr ""
+
+#. module: alc_sale_exception_product_category
+#: model:exception.rule,name:alc_sale_exception_product_category.no_food_allowed
+msgid "No Food Product Allowed"
+msgstr ""
+
+#. module: alc_sale_exception_product_category
+#: model:exception.rule,name:alc_sale_exception_product_category.no_medoc_human
+msgid "No Human Medicine"
+msgstr ""
+
+#. module: alc_sale_exception_product_category
+#: model:exception.rule,name:alc_sale_exception_product_category.no_medoc_allowed
+msgid "No Medicine Allowed"
+msgstr ""
+
+#. module: alc_sale_exception_product_category
+#: model:exception.rule,name:alc_sale_exception_product_category.no_medoc_cascade_import
+msgid "No Medicine Cascade Import"
+msgstr ""
+
+#. module: alc_sale_exception_product_category
+#: model:exception.rule,name:alc_sale_exception_product_category.no_medoc_vet_stup
+msgid "No Narcotic Veterinary Medicine"
+msgstr ""
+
+#. module: alc_sale_exception_product_category
+#: model:exception.rule,description:alc_sale_exception_product_category.no_stupefiant_vet_by_phone
+msgid "No Stupéfiant VET by phone"
+msgstr ""
+
+#. module: alc_sale_exception_product_category
+#: model:exception.rule,name:alc_sale_exception_product_category.no_stupefiant_vet_by_phone
+msgid "No Stupéfiant VET ordered by phone"
+msgstr ""
+
+#. module: alc_sale_exception_product_category
+#: model:exception.rule,name:alc_sale_exception_product_category.no_veterinary_product
+msgid "No Veterinary Product"
+msgstr ""
+
+#. module: alc_sale_exception_product_category
+#: model:exception.rule,description:alc_sale_exception_product_category.no_psychotropic_by_phone
+msgid "No psychotropic by phone"
+msgstr ""
+
+#. module: alc_sale_exception_product_category
+#: model:exception.rule,name:alc_sale_exception_product_category.no_psychotropic_by_phone
+msgid "No psychotropic ordered by phone"
+msgstr ""
+
+#. module: alc_sale_exception_product_category
+#: model:ir.model,name:alc_sale_exception_product_category.model_sale_order_line
+msgid "Sales Order Line"
+msgstr ""
+
+#. module: alc_sale_exception_product_category
+#: model:exception.rule,description:alc_sale_exception_product_category.no_veterinary_product
+msgid "Veterinary Product Not Allowed"
+msgstr ""
+
+#. module: alc_sale_exception_product_category
+#: model:exception.rule,description:alc_sale_exception_product_category.warning_cascade_import
+#: model:exception.rule,name:alc_sale_exception_product_category.warning_cascade_import
+msgid "Warning cascade importation"
+msgstr ""
+
+#. module: alc_sale_exception_product_category
+#: model:exception.rule,description:alc_sale_exception_product_category.warning_human_medoc
+#: model:exception.rule,name:alc_sale_exception_product_category.warning_human_medoc
+msgid "Warning human medicine"
+msgstr ""
+
+#. module: alc_sale_exception_product_category
+#: model:exception.rule,description:alc_sale_exception_product_category.warning_psychotropic
+#: model:exception.rule,name:alc_sale_exception_product_category.warning_psychotropic
+msgid "Warning psychotropic"
+msgstr ""
+
+#. module: alc_sale_exception_product_category
+#: model:exception.rule,description:alc_sale_exception_product_category.warning_stupefiant_vet
+#: model:exception.rule,name:alc_sale_exception_product_category.warning_stupefiant_vet
+msgid "Warning stupéfiant VET"
+msgstr ""

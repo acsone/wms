@@ -3,7 +3,7 @@
 from odoo import fields, models
 
 
-class StockLocation(models.TransientModel):
+class ResConfigSettings(models.TransientModel):
     _inherit = "res.config.settings"
 
     alc_stock_location_constraint = fields.Boolean(
