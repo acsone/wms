@@ -5,6 +5,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 
 from odoo import api, fields
 from odoo.api import Environment
+from odoo.http import request
 
 from odoo.addons.base.models.res_partner import Partner
 from odoo.addons.fastapi.depends import (
@@ -45,6 +46,30 @@ class FastapiEndpoint(FastapiEndpointBase):
             ] = fastapi_endpoint_setting_based_authenticated_partner_impl
         return app
 
+    @api.model
+    def get_uid(self, root_path):
+        record = self.search([("root_path", "=", root_path)])
+        if not record:
+            return None
+        if record.app != "b2c":
+            return record
+        environ = request.httprequest.environ
+        api_key = environ.get("HTTP_API_KEY")
+        setting = (
+            self.env["fastapi.endpoint.settings"]
+            .sudo()
+            .search(
+                [
+                    ("fastapi_endpoint_id", "=", record.id),
+                    ("auth_api_key_id.key", "=", api_key),
+                ],
+                limit=1,
+            )
+        )
+        if not setting:
+            return None
+        return setting.auth_api_key_id.user_id.id
+
 
 def fastapi_endpoint_setting_based_authenticated_partner_impl(
     api_key: str = Depends(api_key_header),  # noqa: B008
@@ -62,7 +87,8 @@ def fastapi_endpoint_setting_based_authenticated_partner_impl(
             [
                 ("fastapi_endpoint_id", "=", endpoint.id),
                 ("auth_api_key_id.key", "=", api_key),
-            ]
+            ],
+            limit=1,
         )
     )
     if not setting:
