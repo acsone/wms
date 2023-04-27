@@ -11,6 +11,7 @@
     "website": "https://acsone.eu",
     "depends": [
         "alc_sale_channel",
+        "alc_sale_exception",  # warning text
         "alc_sale_exception_settings",
         "alc_partner_type",
         "alc_product_pharmacy",
