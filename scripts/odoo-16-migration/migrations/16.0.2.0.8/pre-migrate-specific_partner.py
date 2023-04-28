@@ -22,5 +22,6 @@ def _mig_partner_legal_form(env):
     openupgrade.rename_fields(env, fields)
 
 
-def migrate(env):
+@openupgrade.migrate()
+def migrate(env, version):
     _mig_partner_legal_form(env)
