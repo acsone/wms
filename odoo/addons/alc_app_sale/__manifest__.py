@@ -97,5 +97,6 @@
         "alc_pricelist_role_name",
         "alc_shipping_fee",
         "alc_sales_count",
+        "alc_product_newpharma",
     ],
 }
