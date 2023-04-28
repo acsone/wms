@@ -100,5 +100,6 @@
         "alc_product_newpharma",
         "alc_product_olalux",
         "alc_product_cnk",
+        "alc_product_sku",
     ],
 }
