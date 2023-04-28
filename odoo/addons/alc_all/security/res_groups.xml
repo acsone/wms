@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!-- Copyright 2023 ACSONE SA/NV
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
-<odoo noupdate="1">
+<odoo>
   <!-- Activate configuration options -->
   <record model="res.groups" id="base.group_user">
     <field
@@ -11,6 +11,7 @@
                                      (4, ref('stock.group_tracking_lot')),
                                      (4, ref('product.group_discount_per_so_line')),
                                      (4, ref('stock.group_stock_storage_categories')),
+                                     (4, ref('stock.group_adv_location')),
                                      ]"
     />
   </record>
