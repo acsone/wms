@@ -114,7 +114,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:alc_product_animal_species.field_product_product__species_id
 #: model:ir.model.fields,field_description:alc_product_animal_species.field_product_template__species_id
 msgid "Main Species"
-msgstr ""
+msgstr "Espèce principale"
 
 #. module: alc_product_animal_species
 #: model:animal.species,name:alc_product_animal_species.mouse
@@ -180,4 +180,4 @@ msgstr "Ovin"
 #: model:ir.model.fields,field_description:alc_product_animal_species.field_product_product__species_ids
 #: model:ir.model.fields,field_description:alc_product_animal_species.field_product_template__species_ids
 msgid "Species"
-msgstr ""
+msgstr "Espèces"

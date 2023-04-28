@@ -30,7 +30,6 @@
         "data/attribute_option.xml",
         "data/product_brand.xml",
         "views/product_category_views.xml",
-        "views/product_template.xml",
     ],
     "demo": [],
     "pre_init_hook": "pre_init_hook",

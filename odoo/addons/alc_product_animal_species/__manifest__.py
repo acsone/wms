@@ -8,8 +8,12 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["product"],
+    "depends": ["product_attribute_set"],
     "application": False,
-    "data": ["security/ir.model.access.csv", "data/animal_species.xml"],
+    "data": [
+        "security/ir.model.access.csv",
+        "data/animal_species.xml",
+        "views/product_template.xml",
+    ],
     "pre_init_hook": "pre_init_hook",
 }
