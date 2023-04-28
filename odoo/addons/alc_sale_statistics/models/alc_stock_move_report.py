@@ -1,8 +1,12 @@
-# -*- coding: utf-8 -*-
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import api, fields, models, tools
+from odoo import fields, models, tools
+
+from odoo.addons.base.models.res_partner import Partner
+from odoo.addons.product.models.product_product import ProductProduct
+from odoo.addons.stock.models.stock_location import Location
+from odoo.addons.stock.models.stock_move import StockMove
 
 
 class AlcStockMoveReport(models.Model):
@@ -12,9 +16,7 @@ class AlcStockMoveReport(models.Model):
     _auto = False
     _order = "validation_date desc"
 
-    move_id = fields.Many2one(
-        comodel_name="stock.move", string="Stock move", readonly=True
-    )
+    move_id = fields.Many2one[StockMove](string="Stock move", readonly=True)
     supplier_ask_sale_statistics = fields.Boolean(
         "Supplier ask statistics", readonly=True
     )
@@ -23,14 +25,12 @@ class AlcStockMoveReport(models.Model):
         "Internal Ref for invoicing", readonly=True
     )
 
-    location_dest_id = fields.Many2one(
-        "stock.location", "Destination Location", readonly=True
+    location_dest_id = fields.Many2one[Location](
+        string="Destination Location", readonly=True
     )
-    location_id = fields.Many2one("stock.location", "Source Location", readonly=True)
+    location_id = fields.Many2one[Location](string="Source Location", readonly=True)
 
-    partner_id = fields.Many2one(
-        comodel_name="res.partner", string="Partner", readonly=True
-    )
+    partner_id = fields.Many2one[Partner](string="Partner", readonly=True)
     partner_invoice_alcyon_category = fields.Char(
         "Partner Alcyon category for invoicing", readonly=True
     )
@@ -47,7 +47,7 @@ class AlcStockMoveReport(models.Model):
 
     price_unit = fields.Float(string="Unit Price", readonly=True)
 
-    product_id = fields.Many2one("product.product", "Product", readonly=True)
+    product_id = fields.Many2one[ProductProduct](string="Product", readonly=True)
     product_default_code = fields.Char()
     product_name = fields.Char(readonly=True)
     product_price = fields.Float(readonly=True)
@@ -80,18 +80,16 @@ class AlcStockMoveReport(models.Model):
         "* Done: When the shipment is processed, the state is 'Done'.",
     )
 
-    supplier_id = fields.Many2one(
-        comodel_name="res.partner", string="Supplier", readonly=True
-    )
+    supplier_id = fields.Many2one[Partner](string="Supplier", readonly=True)
     supplier_ref = fields.Char("Vendor Product Code", readonly=True)
     supplier_name = fields.Char("Supplier name", readonly=True)
     validation_date = fields.Date("Validation date", readonly=True)
     sale_channel = fields.Char("Sale channel", readonly=True)
 
-    @api.model_cr
     def init(self):
-        tools.drop_view_if_exists(self._cr, "alc_stock_move_report")
-        self._cr.execute(
+        cr = self.env.cr
+        tools.drop_view_if_exists(cr, "alc_stock_move_report")
+        cr.execute(
             """
             create view alc_stock_move_report as (
                 SELECT sm.id AS id,
@@ -100,14 +98,14 @@ class AlcStockMoveReport(models.Model):
                        sm.state AS state,
                        sm.location_id AS location_id,
                        sm.location_dest_id AS location_dest_id,
-                       sm.validation_date AS validation_date,
+                       sm.date AS validation_date,
                        sm.product_uom_qty AS product_qty,
                        pt.default_code AS product_default_code,
                        pt.name AS product_name,
                        pt.list_price AS product_price,
                        pt.vendor_product_code AS supplier_ref,
                        sol.price_unit AS price_unit,
-                       sol.sale_channel AS sale_channel,
+                       sol.sale_channel_id AS sale_channel,
                        resp.id as partner_id,
                        resp.ref AS internal_ref_for_partner_invoice,
                        resp.name AS partner_invoice_name,
@@ -124,7 +122,7 @@ class AlcStockMoveReport(models.Model):
                 FROM stock_move sm
                     JOIN product_product pp ON pp.id = sm.product_id
                     JOIN product_template pt ON pt.id = pp.product_tmpl_id
-                    JOIN sale_order_line sol ON sol.id = sm.order_line_id
+                    JOIN sale_order_line sol ON sol.id = sm.sale_line_id
                     JOIN sale_order so ON so.id = sol.order_id
                     JOIN res_partner resp ON resp.id = so.partner_invoice_id
                     JOIN stock_picking pick ON pick.id = sm.picking_id

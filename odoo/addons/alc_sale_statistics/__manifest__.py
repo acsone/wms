@@ -1,20 +1,21 @@
-# -*- coding: utf-8 -*-
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
     "name": "Alc Sale Statistics",
     "description": """
-        Add a way to export report for a specific customer""",
-    "version": "10.0.1.0.0",
+        Add a way to export a report showing sale stock moves for a specific customer""",
+    "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": [
         "stock",
-        "product",
-        "specific_product",
-        "specific_partner",
-        "stock_delivery_note",
+        "sale_channel",
+        "alc_product_additional_price",
+        "alc_product_supplier",
+        "alc_partner_veterinary",
+        "alc_partner_type",
+        "alc_sale_channel",
     ],
     "data": [
         "views/res_partner.xml",
@@ -22,5 +23,5 @@
         "security/alc_sale_statistics_security.xml",
     ],
     "demo": [],
-    'installable': False
+    "installable": True,
 }

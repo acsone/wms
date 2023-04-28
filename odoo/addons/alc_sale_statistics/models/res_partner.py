@@ -1,13 +1,12 @@
-# -*- coding: utf-8 -*-
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import fields, models
+from odoo import fields
+
+from odoo.addons.base.models.res_partner import Partner as PartnerBase
 
 
-class ResPartner(models.Model):
-
-    _inherit = "res.partner"
+class ResPartner(PartnerBase):
 
     ask_sale_statistics = fields.Boolean(
         "Ask for sale statistics ", default=False, index=True
