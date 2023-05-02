@@ -101,5 +101,6 @@
         "alc_product_olalux",
         "alc_product_cnk",
         "alc_product_sku",
+        "alc_sale_order_product_category_warning",
     ],
 }
