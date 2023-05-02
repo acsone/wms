@@ -120,7 +120,7 @@ odoo-addon-stock-available-to-promise-release @ git+https://github.com/acsone/wm
 odoo-addon-stock-average-daily-sale @ git+https://github.com/acsone/stock-logistics-reporting.git@78c730e58e7d22191193e0827aaf0834e39067d7#subdirectory=setup/stock_average_daily_sale
 odoo-addon-stock-dock==16.0.1.0.1
 odoo-addon-stock-dynamic-routing==16.0.1.0.1
-odoo-addon-stock-grn==16.0.1.0.1
+odoo-addon-stock-grn @ git+https://github.com/acsone/stock-logistics-workflow.git@c96b8aa6b6df50c3c910742db419d15dd606ea39#subdirectory=setup/stock_grn
 odoo-addon-stock-helper==16.0.1.0.1
 odoo-addon-stock-location-position @ git+https://github.com/acsone/stock-logistics-warehouse.git@7e2528698e4f8b302175ba815f1e96f575355d0b#subdirectory=setup/stock_location_position
 odoo-addon-stock-location-product-restriction==16.0.1.0.0.3
