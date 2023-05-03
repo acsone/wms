@@ -104,5 +104,6 @@
         "alc_sale_order_product_category_warning",
         "alc_sale_order_line_unavailable",
         "alc_sale_report_search_narcotics",
+        "alc_sale_report_search_month",
     ],
 }
