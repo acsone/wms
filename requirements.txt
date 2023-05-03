@@ -132,8 +132,8 @@ odoo-addon-stock-move-common-dest==16.0.1.0.1
 odoo-addon-stock-move-line-reserved-quant @ git+https://github.com/acsone/stock-logistics-workflow.git@488cbb4b78fc453732a430ce0d4a13a9c87d691b#subdirectory=setup/stock_move_line_reserved_quant
 odoo-addon-stock-move-location==16.0.1.1.0.2
 odoo-addon-stock-move-manage-priority @ git+https://github.com/acsone/stock-logistics-workflow.git@dd6c0233b110cddba40c8f919bca35088b4f134e#subdirectory=setup/stock_move_manage_priority
-odoo-addon-stock-move-propagate-first-move @ git+https://github.com/acsone/stock-logistics-workflow.git@bce6c8ff639e34fb7828e7140fbca871cedd2e34#subdirectory=setup/stock_move_propagate_first_move
-odoo-addon-stock-move-propagate-first-move-cancel @ git+https://github.com/acsone/stock-logistics-workflow.git@cc577176335f6ab6ad868641b431f0a40cca9c26#subdirectory=setup/stock_move_propagate_first_move_cancel
+odoo-addon-stock-move-propagate-first-move @ git+https://github.com/acsone/stock-logistics-workflow.git@f3286ed6b5cec704537e5ca08d1b93b7bd08df20#subdirectory=setup/stock_move_propagate_first_move
+odoo-addon-stock-move-propagate-first-move-cancel @ git+https://github.com/acsone/stock-logistics-workflow.git@f3286ed6b5cec704537e5ca08d1b93b7bd08df20#subdirectory=setup/stock_move_propagate_first_move_cancel
 odoo-addon-stock-override-procurement @ git+https://github.com/acsone/stock-logistics-workflow.git@ac0568b760314fa721e8f167b8ffd61c16a14b36#subdirectory=setup/stock_override_procurement
 odoo-addon-stock-packaging-calculator==16.0.1.0.1
 odoo-addon-stock-picking-backorder-reason @ git+https://github.com/acsone/stock-logistics-workflow.git@1789528b69158cddce8a79f8577e266a2854998d#subdirectory=setup/stock_picking_backorder_reason
