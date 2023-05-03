@@ -115,6 +115,7 @@ odoo-addon-sale-stock-restocking-fee-invoicing @ git+https://github.com/oca/stoc
 odoo-addon-stock-picking-kind @ git+https://github.com/oca/stock-logistics-workflow.git@refs/pull/1254/head#subdirectory=setup/stock_picking_kind
 odoo-addon-stock-move-propagate-first-move @ git+https://github.com/oca/stock-logistics-workflow.git@refs/pull/1262/head#subdirectory=setup/stock_move_propagate_first_move
 odoo-addon-stock-move-propagate-first-move-cancel @ git+https://github.com/oca/stock-logistics-workflow.git@refs/pull/1264/head#subdirectory=setup/stock_move_propagate_first_move_cancel
+odoo-addon-stock-grn @ git+https://github.com/oca/stock-logistics-workflow.git@refs/pull/1285/head#subdirectory=setup/stock_grn
 
 # server-tools
 # https://github.com/OCA/server-tools/pull/2533 - [16.0][MIG] base_sparse_field_list_support
