@@ -9,10 +9,13 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
-    "depends": ["stock_release_channel_geoengine", "alc_stock_release_channel_tag"],
+    "depends": [
+        "stock_release_channel_geoengine",
+        "alc_stock_release_channel_tag",
+        "alc_stock_release_channel_menu",
+    ],
     "data": [
         "data/alc_delivery_plan.xml",
-        "data/ir_ui_menu.xml",
         "security/alc_delivery_plan.xml",
         "security/alc_import_delivery_zone_wizard.xml",
         "wizards/alc_import_delivery_zone_wizard.xml",

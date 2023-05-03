@@ -40,9 +40,12 @@
 
     <record model="ir.ui.menu" id="alc_stock_release_channel_tag_menu">
         <field name="name">Release Channel Tags</field>
-        <field name="parent_id" ref="stock.menu_stock_config_settings" />
+        <field
+      name="parent_id"
+      ref="alc_stock_release_channel_menu.alc_stock_release_channel_setting_menu"
+    />
         <field name="action" ref="alc_stock_release_channel_tag_act_window" />
-        <field name="sequence" eval="20" />
+        <field name="sequence" eval="50" />
     </record>
 
 </odoo>

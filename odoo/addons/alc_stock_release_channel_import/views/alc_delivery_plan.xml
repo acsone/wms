@@ -45,7 +45,7 @@
     </record>
 
     <record model="ir.actions.act_window" id="alc_delivery_plan_act_window">
-        <field name="name">Delivery Plans</field> <!-- TODO -->
+        <field name="name">Delivery Plans</field>
         <field name="res_model">alc.delivery.plan</field>
         <field name="view_mode">tree,form</field>
         <field name="domain">[]</field>
@@ -56,7 +56,7 @@
         <field name="name">Delivery Plans</field>
         <field
       name="parent_id"
-      ref="alc_stock_release_channel_import.alc_delivery_plan_root_menu"
+      ref="alc_stock_release_channel_menu.alc_stock_release_channel_setting_menu"
     />
         <field name="action" ref="alc_delivery_plan_act_window" />
         <field name="sequence" eval="16" />

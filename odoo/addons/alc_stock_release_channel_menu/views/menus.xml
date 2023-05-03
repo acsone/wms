@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.menu" id="alc_stock_release_channel_root_menu">
+        <field name="name">Release Channels</field>
+        <field name="parent_id" ref="stock.menu_stock_root" />
+        <field name="sequence" eval="3" />
+    </record>
+
+    <record model="ir.ui.menu" id="alc_stock_release_channel_action_menu">
+        <field name="name">Actions</field>
+        <field
+      name="parent_id"
+      ref="alc_stock_release_channel_menu.alc_stock_release_channel_root_menu"
+    />
+        <field name="sequence" eval="50" />
+    </record>
+
+    <record model="ir.ui.menu" id="alc_stock_release_channel_setting_menu">
+        <field name="name">Settings</field>
+        <field
+      name="parent_id"
+      ref="alc_stock_release_channel_menu.alc_stock_release_channel_root_menu"
+    />
+        <field name="sequence" eval="100" />
+    </record>
+    <record model="ir.ui.menu" id="stock_release_channel.stock_release_channel_menu">
+        <field
+      name="parent_id"
+      ref="alc_stock_release_channel_menu.alc_stock_release_channel_root_menu"
+    />
+        <field name="sequence" eval="4" />
+    </record>
+
+</odoo>
