@@ -19,6 +19,7 @@ class StockMove(StockMoveBase):
     main_move_id = fields.Many2one[StockMoveBase](
         string="Main Product Move",
         ondelete="set null",
+        index=True,
         help="Link to the main product for stock moves created for additional products",
     )
     additional_move_ids = fields.One2many[StockMoveBase](
@@ -112,10 +113,11 @@ class StockMove(StockMoveBase):
         return res
 
     def _action_cancel(self):
+        res = super()._action_cancel()
         additional_moves = self.mapped("additional_move_ids")
         if additional_moves:
-            self.mapped("additional_move_ids")._action_cancel()
-        return super()._action_cancel()
+            return additional_moves._action_cancel()
+        return res
 
     def _get_all_not_done_additional_moves(self):
         if not self.is_additional_move:

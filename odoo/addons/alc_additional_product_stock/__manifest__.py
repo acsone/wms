@@ -14,6 +14,7 @@
         "sale_stock",
         # OCA
         "stock_move_propagate_first_move",
+        "stock_move_propagate_first_move_cancel",
         # ALC
         "alc_additional_product_base",
     ],
