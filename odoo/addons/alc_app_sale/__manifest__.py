@@ -106,5 +106,6 @@
         "alc_sale_report_search_narcotics",
         "alc_sale_report_search_month",
         "alc_sale_order_validation_disable_tracking",
+        "alc_sale_order_cancel",
     ],
 }
