@@ -191,9 +191,11 @@ class StockReleaseChannel(StockReleaseChannelBase):
             rec._delay_set_pick_allowed(
                 pick_allowed=True, picking_type=None, eta=rec.auto_allow_pick_datetime
             )
+        return super().action_wake_up()
 
     def action_sleep(self):
         for rec in self:
             if not rec.auto_disallow_pick:
                 continue
             rec._set_pick_allowed(pick_allowed=False, picking_type=None)
+        return super().action_sleep()

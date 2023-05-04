@@ -31,6 +31,7 @@ class TestStockReleaseChannelPickAllowed(ChannelReleaseCase):
         cls.channel.auto_allow_pick = True
         cls.channel.leave_planned_time = 12
         cls.channel.auto_allow_pick_time_before_leave = 0.5
+        cls.channel.state = "asleep"
         cls.backend = cls.env.ref(
             "shipment_advice_planner_toursolver.toursolver_backend_default"
         )
@@ -196,6 +197,7 @@ class TestStockReleaseChannelPickAllowed(ChannelReleaseCase):
     def test_08(self):
         """Action_sleep disallow pick automatically."""
         self.channel.pick_allowed = True
+        self.channel.state = "open"
         self.assertTrue(self.channel.pick_allowed)
         self.channel.action_sleep()
         self.assertFalse(self.channel.pick_allowed)
