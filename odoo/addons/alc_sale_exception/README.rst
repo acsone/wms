@@ -9,14 +9,17 @@ _____________
 
 Please refer to sale_exception README to configure your user as
 Exception manager and be sure to be in developer mode to access the menu item
-in *Settings - Technical - Exception Rules*.
+in *Sales - Configuration - Sale Exception Rules*.
 
 Install also the sale_management addon.
+
+Go to *Settings - Sales - Quotations & Orders* and check the
+'Sale Exception Check Enabled'.
 
 Test
 ----
 
- * Go to *Settings - Technical - Exception Rules*
+ * Go to *Sales - Configuration - Sale Exception Rules*
  * Enable the rule "No line under 0"
  * Create a sale order
  * Add a product and set its price < 0

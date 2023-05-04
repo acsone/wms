@@ -6,9 +6,6 @@
     <field name="active">True</field>
     <field name="sequence">30</field>
     <field name="model">sale.order.line</field>
-    <field
-      name="warning_text"
-    >Item bought on order, neither taken back nor exchanged.</field>
     <field name="code">
 failed = object.warning_provision_on_order()
             </field>
@@ -32,7 +29,6 @@ failed = object.validate_no_backorder()
     <field name="active">True</field>
     <field name="sequence">100</field>
     <field name="model">sale.order.line</field>
-    <field name="warning_text">Out of stock at supplier level</field>
     <field name="code">
 failed = object.warning_supplier_break()
             </field>

@@ -34,7 +34,7 @@ class TestSaleOrderException(TestSaleOrderExceptionCommon):
                 "name": "Exception Warning Test",
                 "code": "failed=True",
                 "active": True,
-                "warning_text": "Text WARNING",
+                "description": "Text WARNING",
             }
         )
         so1 = self.env["sale.order"].create(self.so1_vals.copy())

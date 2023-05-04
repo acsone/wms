@@ -59,18 +59,11 @@ msgid "Sales Order Line"
 msgstr ""
 
 #. module: alc_sale_exception
-#: model:ir.model.fields,help:alc_sale_exception.field_exception_rule__warning_text
-msgid ""
-"Text which appears in sale order lines if the exception is non blocking"
-msgstr ""
-
-#. module: alc_sale_exception
 #: model:exception.rule,description:alc_sale_exception.no_line_at_zero
 msgid "Une ligne de vente ne peut pas être à zéro"
 msgstr ""
 
 #. module: alc_sale_exception
-#: model:ir.model.fields,field_description:alc_sale_exception.field_exception_rule__warning_text
 #: model:ir.model.fields,field_description:alc_sale_exception.field_sale_order_line__warning_text
 msgid "Warning Text"
 msgstr ""

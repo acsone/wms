@@ -44,7 +44,7 @@ class TestSaleOrderException(TestSaleOrderExceptionCommon):
         exception.active = True
         line = self.so1.order_line[0]
         line.product_id = self.prod_provision_on_sale
-        self.assertIn(exception.warning_text, line.warning_text)
+        self.assertIn(exception.description, line.warning_text)
 
     def test_no_backorder_rule(self):
         """Check the no backorder rule.
@@ -83,7 +83,7 @@ class TestSaleOrderException(TestSaleOrderExceptionCommon):
         self.prod1.product_state_id = self.env.ref("alc_product_state.product_state_h")
         line.product_id = self.prod2
         line.product_id = self.prod1
-        self.assertIn(exception.warning_text, line.warning_text)
+        self.assertIn(exception.description, line.warning_text)
         # With some inventory there should be no warning
         stock_location = self.env.ref("stock.stock_location_stock")
         quant = self.env["stock.quant"].create(
@@ -98,4 +98,4 @@ class TestSaleOrderException(TestSaleOrderExceptionCommon):
         self.prod1.invalidate_recordset()
         line.product_id = self.prod2
         line.product_id = self.prod1
-        self.assertNotIn(exception.warning_text, str(line.warning_text))
+        self.assertNotIn(exception.description, str(line.warning_text))

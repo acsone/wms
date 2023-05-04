@@ -389,7 +389,7 @@ class TestSaleOrderException(TestSaleOrderExceptionCommon):
         )
         line = self.so1.order_line[0]
         line.product_id = self.prod_psycho_III
-        self.assertTrue(exception.warning_text in line.warning_text)
+        self.assertTrue(exception.description in line.warning_text)
 
     def test_exception_warning_stupefiant_vet_product(self):
         """Check sale order line message for psychotropic products."""
@@ -398,7 +398,7 @@ class TestSaleOrderException(TestSaleOrderExceptionCommon):
         )
         line = self.so1.order_line[0]
         line.product_id = self.prod_stupefiant_vet
-        self.assertTrue(exception.warning_text in line.warning_text)
+        self.assertTrue(exception.description in line.warning_text)
 
     def test_exceptions_by_phone(self):
         """Check psychotropic are not oredered on the phone."""
@@ -435,7 +435,7 @@ class TestSaleOrderException(TestSaleOrderExceptionCommon):
         )
         line = self.so1.order_line[0]
         line.product_id = self.prod_cascade_import
-        self.assertTrue(exception.warning_text in line.warning_text)
+        self.assertTrue(exception.description in line.warning_text)
 
     def test_exception_warning_medoc_human(self):
         """Check sale order line message for human medicicine."""
@@ -444,4 +444,4 @@ class TestSaleOrderException(TestSaleOrderExceptionCommon):
         )
         line = self.so1.order_line[0]
         line.product_id = self.prod_medoc_human
-        self.assertTrue(exception.warning_text in line.warning_text)
+        self.assertTrue(exception.description in line.warning_text)

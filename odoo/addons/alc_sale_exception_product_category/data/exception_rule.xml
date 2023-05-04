@@ -130,7 +130,6 @@ failed = object.validate_no_stupefiant_vet_by_phone()
     <field name="active">True</field>
     <field name="sequence">30</field>
     <field name="model">sale.order.line</field>
-    <field name="warning_text">Psychotropic: written order, keep confirmation.</field>
     <field name="code">
 failed = object.warning_psychotropic()
             </field>
@@ -141,7 +140,6 @@ failed = object.warning_psychotropic()
     <field name="active">True</field>
     <field name="sequence">30</field>
     <field name="model">sale.order.line</field>
-    <field name="warning_text">stupéfiant VET: written order, keep confirmation.</field>
     <field name="code">
 failed = object.warning_stupefiant_vet()
             </field>
@@ -152,7 +150,6 @@ failed = object.warning_stupefiant_vet()
     <field name="active">True</field>
     <field name="sequence">30</field>
     <field name="model">sale.order.line</field>
-    <field name="warning_text">Product of type cascade importation</field>
     <field name="code">
 failed = object.warning_cascade_importation()
             </field>
@@ -163,7 +160,6 @@ failed = object.warning_cascade_importation()
     <field name="active">True</field>
     <field name="sequence">30</field>
     <field name="model">sale.order.line</field>
-    <field name="warning_text">Product of type human medicine</field>
     <field name="code">
 failed = object.warning_human_medicine()
             </field>
