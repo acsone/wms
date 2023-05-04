@@ -9,7 +9,6 @@ from odoo import Command, _, api, fields
 from odoo.exceptions import MissingError, ValidationError
 from odoo.osv import expression
 from odoo.osv.expression import AND
-from odoo.tests.common import Form
 
 from odoo.addons.sale.models.sale_order import SaleOrder as SaleOrderBase
 
@@ -108,21 +107,10 @@ class SaleOrder(SaleOrderBase):
         self.action_confirm()
         return self
 
-    def _update_lines_from_b2c(self, data, endpoint_setting):
+    def _update_lines_from_b2c(self, data, b2c_backend):
         self.order_line.unlink()
-        sale_order_form = Form(self)
-        line_vals_list = []
-        for line_info in self._parse_b2c_order_line(data, endpoint_setting):
-            with sale_order_form.order_line.new() as line_form:
-                line_form.product_id = line_info["product_id"]
-                line_form.name = line_info["name"]
-                line_form.product_uom_qty = line_info["product_uom_qty"]
-            line_vals = line_form._values_to_save()
-            line_vals["b2c_ref"] = line_info["b2c_ref"]
-            line_vals_list.append(line_vals)
-        self.write(
-            {"order_line": [Command.create(line_vals) for line_vals in line_vals_list]}
-        )
+        data_lines = self._parse_b2c_order_line(data, b2c_backend)
+        self.write({"order_line": [(0, 0, line) for line in data_lines]})
         body = _("Sale Order  {sale_order} updated from json: {json_file}.").format(
             sale_order=self.name,
             json_file=data,
@@ -135,62 +123,43 @@ class SaleOrder(SaleOrderBase):
 
     @api.model
     def _parse_b2c_order(self, data, endpoint_setting):
-        date_order = self._convert_datetime_to_utc(data["date"])
-        sale_order_form = Form(
-            self.with_context(
-                default_date_order=date_order,
-                default_pricelist_id=endpoint_setting.pricelist_id.id,
-                keep_pricelist_if_set=True,
-                keep_payment_mode_if_set=True,
-            )
-        )
+        order_data = {}
         # we create all the orders with the VET as final customer
         # At the end of the process and after the onchange call, the partner_id
         # will be replaced by the final customer
         partner_vet = self.env["res.partner"]._get_partner_by_ref(data["customer_ref"])
         # get the parther and play onchange to get shipping,
-        sale_order_form.partner_id = partner_vet
-        sale_order_form.sale_channel_id = endpoint_setting.sale_channel_id
-        sale_order_form.team_id = endpoint_setting.sale_team_id
+        order_data["partner_id"] = partner_vet.id
+        order_data["b2c_ref"] = data["id"]
+        order_data["sale_channel_id"] = endpoint_setting.sale_channel_id.id
+        order_data["date_order"] = self._convert_datetime_to_utc(data["date"])
+        order_data["team_id"] = endpoint_setting.sale_team_id.id
         if endpoint_setting.payment_mode_id:
-            sale_order_form.payment_mode_id = endpoint_setting.payment_mode_id
-        # ensure specific values from the backend are preserved
-        sale_order_form.payment_term_id = endpoint_setting.payment_term_id
-        sale_order_form.picking_policy = endpoint_setting.picking_policy
-        line_vals_list = []
-        for line_info in self._parse_b2c_order_line(data, endpoint_setting):
-            with sale_order_form.order_line.new() as line_form:
-                line_form.product_id = line_info["product_id"]
-                line_form.name = line_info["name"]
-                line_form.product_uom_qty = line_info["product_uom_qty"]
-            line_vals = line_form._values_to_save()
-            line_vals["b2c_ref"] = line_info["b2c_ref"]
-            line_vals_list.append(line_vals)
-        values = sale_order_form._values_to_save()
+            order_data["payment_mode_id"] = endpoint_setting.payment_mode_id.id
+        # invvoice, payment_term, pricelist, carrier_id, team
+        updated_data = self.play_onchanges(order_data, order_data.keys())
+        order_data.update(updated_data)
+
         # replace partner by the final customer
-        values.update(
-            {
-                "b2c_ref": data["id"],
-                "partner_id": self._get_final_b2c_recipient(data, endpoint_setting).id,
-                "partner_invoice_id": partner_vet.id,
-                "partner_shipping_id": partner_vet.id,
-                "order_line": [
-                    Command.create(line_vals) for line_vals in line_vals_list
-                ],
-            }
-        )
-        return values
+        order_data["partner_id"] = self._get_final_b2c_recipient(
+            data, endpoint_setting
+        ).id
+        # ensure specific values from the backend are preserved
+        order_data["pricelist_id"] = endpoint_setting.pricelist_id.id
+        order_data["payment_term_id"] = endpoint_setting.payment_term_id.id
+        order_data["picking_policy"] = endpoint_setting.picking_policy
+        order_data["order_line"] = [
+            Command.create(line_info)
+            for line_info in self._parse_b2c_order_line(data, endpoint_setting)
+        ]
+        return order_data
 
     @api.model
     def _parse_b2c_order_line(self, data, endpoint_setting):
         lines_data = data["lines"]
         skus = [line["sku"] for line in lines_data]
-        domain = [("default_code", "in", skus)]
-        if endpoint_setting.product_assortment_id:
-            product_assortment_domain = (
-                endpoint_setting.product_assortment_id._get_eval_domain()
-            )
-            domain = AND([product_assortment_domain, domain])
+        domain = endpoint_setting.product_assortment_id._get_eval_domain()
+        domain = AND([domain, [("default_code", "in", skus)]])
         products = self.env["product.product"].search(domain)
         product_by_sku = {p.default_code: p for p in products}
         unknown_skus = set(skus).difference(set(product_by_sku.keys()))
@@ -200,10 +169,12 @@ class SaleOrder(SaleOrderBase):
         for line_data in lines_data:
             sol = {}
             product = product_by_sku[line_data["sku"]]
-            sol["product_id"] = product
+            sol["product_id"] = product.id
             sol["name"] = product.name
+            sol["product_uom"] = product.uom_id.id
             sol["product_uom_qty"] = line_data.pop("quantity")
             sol["b2c_ref"] = line_data.pop("line_id")
+            sol["discounting_type"] = "multiplicative"
             result.append(sol)
         return result
 
@@ -223,13 +194,12 @@ class SaleOrder(SaleOrderBase):
         last_name = customer_info.get("last_name")
         if last_name:
             name = f"{name} {last_name}"
-        title = customer_info.get("title").value
+        title = customer_info.get("title")
         if title:
             title = self.env.ref(TITLE_XML_ID_BY_B2C_KEY[title]).id
         country_id = None
         country_code = customer_info.get("country_code")
         if country_code:
-            country_code = country_code.value
             country_id = self.env["res.country"]._get_by_code(country_code).id
         return self.env["res.partner"].create(
             {
@@ -297,31 +267,3 @@ class SaleOrder(SaleOrderBase):
         if b2c_refs:
             domain = expression.AND([domain, [("b2c_ref", "in", b2c_refs)]])
         return self.search(domain, limit=limit, offset=offset)
-
-    @api.depends("partner_id")
-    def _compute_pricelist_id(self):
-        """Pricelist is changed with partner change, we need to disable this behavior.
-
-        for b2c order as the pricelist is set by the endpoint settings
-        """
-        keep_pricelist_if_set = self.env.context.get("keep_pricelist_if_set")
-        if not keep_pricelist_if_set:
-            return super()._compute_pricelist_id()
-        for rec in self:
-            if not rec.pricelist_id:
-                super(SaleOrder, rec)._compute_pricelist_id()
-        return True
-
-    @api.depends("partner_id")
-    def _compute_payment_mode(self):
-        """Payment_mode is changed with partner change, we need to disable this behavior.
-
-        for b2c orders as the payment_mode is set by the endpoint settings
-        """
-        keep_payment_mode_if_set = self.env.context.get("keep_payment_mode_if_set")
-        if not keep_payment_mode_if_set:
-            return super()._compute_payment_mode()
-        for rec in self:
-            if not rec.payment_mode_id:
-                super(SaleOrder, rec)._compute_payment_mode()
-        return True

@@ -13,5 +13,5 @@ class ResCountry(Country):
     def _get_by_code(self, code):
         country = self.search([("code", "=", code)], limit=1)
         if not country:
-            raise ValidationError(_("Unknown country code %s"), code)
+            raise ValidationError(_("Unknown country code {code}").format(code=code))
         return country

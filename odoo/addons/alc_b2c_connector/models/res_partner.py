@@ -57,9 +57,7 @@ class ResPartner(ResPartnerBase):
     def _update_b2c_data(self, data, endpoint_setting):
         self.ensure_one()
         if data.get("country_code"):
-            country = self.env["res.country"]._get_by_code(
-                data.pop("country_code").value
-            )
+            country = self.env["res.country"]._get_by_code(data.pop("country_code"))
             data["country_id"] = country.id
         name = data.pop("first_name", "")
         if data.get("last_name"):
@@ -67,9 +65,7 @@ class ResPartner(ResPartnerBase):
         if name:
             data["name"] = name
         if data.get("title"):
-            data["title"] = self.env.ref(
-                TITLE_XML_ID_BY_B2C_KEY[data["title"].value]
-            ).id
+            data["title"] = self.env.ref(TITLE_XML_ID_BY_B2C_KEY[data["title"]]).id
         if "name2" in data:
             data["suite"] = data.pop("name2")
         if "note" in data:  # passing None is allowed, so no get here

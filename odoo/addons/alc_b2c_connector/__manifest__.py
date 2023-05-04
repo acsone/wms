@@ -25,6 +25,7 @@
         "stock_available",
         "account_payment_sale",
         "stock_picking_backorder_reason",
+        "onchange_helper",
         # ALC
         "alc_product_pharmacy",
         "alc_partner_type",
