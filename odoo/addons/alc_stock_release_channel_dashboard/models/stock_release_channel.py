@@ -44,7 +44,12 @@ class StockReleaseChannel(StockReleaseChannelBase):
                     todo_shipment_advices, done_shipment_advices
                 )
             )
-            rec.kanban_dashboard = json.dumps(result)
+            rec.kanban_dashboard = json.dumps(
+                {
+                    "data": result,
+                    "tags": rec.stock_release_channel_tag_ids.mapped("name"),
+                }
+            )
 
     def _kanban_dashboard_data(self):
         picking_types = self.env["stock.picking.type"].search(
