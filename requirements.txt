@@ -34,7 +34,7 @@ manifestoo_core==0.10.4
 MarkupSafe==2.1.2
 num2words==0.5.12
 numpy==1.24.2
-odoo @ git+https://github.com/acsone/odoo.git@8195c4db4518ff56cde5f062f2809aaee117a7db
+odoo @ git+https://github.com/acsone/odoo.git@0d022ec7d23fb9367cfaa83de0c9556b90658648
 odoo-addon-account-invoice-tax-required==16.0.1.0.0.7
 odoo-addon-account-invoice-triple-discount==16.0.1.0.0.2
 odoo-addon-account-payment-mode==16.0.1.1.0.1
@@ -106,7 +106,7 @@ odoo-addon-sale-route-amendment @ git+https://github.com/acsone/sale-workflow.gi
 odoo-addon-sale-stock-picking-blocking==16.0.1.0.0.4
 odoo-addon-sale-stock-restocking-fee-invoicing @ git+https://github.com/acsone/stock-logistics-workflow.git@f2ceafadb0008ee27a6346a432ef9f58f1726784#subdirectory=setup/sale_stock_restocking_fee_invoicing
 odoo-addon-sale-triple-discount==16.0.1.0.1.1
-odoo-addon-server-environment==16.0.1.0.1
+odoo-addon-server-environment==16.0.1.0.1.1
 odoo-addon-server-environment-ir-config-parameter==16.0.1.0.0.6
 odoo-addon-session-db==16.0.1.0.3
 odoo-addon-shipment-advice==16.0.1.0.1
