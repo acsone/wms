@@ -33,3 +33,13 @@ class TestStockReleaseChannelTag(ChannelReleaseCase):
         self.assertEqual(self.picking.release_channel_id, self.channel)
         self.assertEqual(self.picking2.release_channel_id, self.channel)
         self.assertEqual(self.picking3.release_channel_id, self.channel)
+
+    @mute_logger("odoo.addons.stock_release_channel.models.stock_release_channel")
+    def test_release_without_partner_tag(self):
+        # Don't set a tag on partner
+        self.delivery_address_1.stock_release_channel_tag_ids = False
+
+        self.pickings.assign_release_channel()
+        self.assertFalse(self.picking.release_channel_id)
+        self.assertFalse(self.picking2.release_channel_id)
+        self.assertFalse(self.picking3.release_channel_id)
