@@ -19,11 +19,6 @@ msgid "Exception"
 msgstr ""
 
 #. module: alc_sale_exception
-#: model:ir.model,name:alc_sale_exception.model_exception_rule
-msgid "Exception Rule"
-msgstr ""
-
-#. module: alc_sale_exception
 #: model:exception.rule,description:alc_sale_exception.order_amount_minimum
 msgid "Le montant total de la commande ne peut pas être inférieur à 100 euros"
 msgstr ""
