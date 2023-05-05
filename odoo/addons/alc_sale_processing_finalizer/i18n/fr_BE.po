@@ -24,7 +24,7 @@ msgstr "Finalisation automatique"
 #: model:ir.actions.server,name:alc_sale_processing_finalizer.ir_cron_cancel_sales_bo_gt_3months_ir_actions_server
 #: model:ir.cron,cron_name:alc_sale_processing_finalizer.ir_cron_cancel_sales_bo_gt_3months
 msgid "Cancel Sales BO > 3months"
-msgstr ""
+msgstr "Annuler les backorders > 3 mois"
 
 #. module: alc_sale_processing_finalizer
 #: model:ir.model.fields,help:alc_sale_processing_finalizer.field_delivery_carrier__is_long_term_delivery
@@ -44,12 +44,12 @@ msgstr "Long délai de livraison"
 #. module: alc_sale_processing_finalizer
 #: model:ir.model,name:alc_sale_processing_finalizer.model_sale_order
 msgid "Sales Order"
-msgstr ""
+msgstr "Bons de commande"
 
 #. module: alc_sale_processing_finalizer
 #: model:mail.template,name:alc_sale_processing_finalizer.mail_template_30
 msgid "Sales Order - Annulation solde"
-msgstr ""
+msgstr "Bons de commande - Annulation solde"
 
 #. module: alc_sale_processing_finalizer
 #: model:ir.model.fields,help:alc_sale_processing_finalizer.field_sale_order__auto_finalize_processing
@@ -59,4 +59,4 @@ msgstr "Finalisation automatique après 3 mois"
 #. module: alc_sale_processing_finalizer
 #: model:ir.model,name:alc_sale_processing_finalizer.model_delivery_carrier
 msgid "Shipping Methods"
-msgstr ""
+msgstr "Modes de livraison"
