@@ -109,5 +109,6 @@
         "alc_sale_order_cancel",
         "alc_sale_product_narcotic",
         "alc_sale_product_qty_unavailable_promotion",
+        "alc_sale_order_line_lots",
     ],
 }

@@ -10,7 +10,9 @@ from odoo.addons.stock.models.stock_lot import StockLot
 class ProductProduct(ProductBase):
 
     older_lot_id = fields.Many2one[StockLot](
-        string="Older lot", compute="_compute_older_lot_id"
+        string="Older lot",
+        compute="_compute_older_lot_id",
+        search="_search_older_lot_id",
     )
 
     best_before_date = fields.Date(
@@ -58,6 +60,10 @@ class ProductProduct(ProductBase):
             lot_id_by_product_id = dict(self.env.cr.fetchall())
         for product in self:
             product.older_lot_id = lot_id_by_product_id.get(product.id)
+
+    def _search_older_lot_id(self, operator, value):
+        lots = self.env["stock.lot"].search([("name", operator, value)])
+        return [("older_lot_id", "in", lots)]
 
     def _compute_best_before_date(self):
         for rec in self:
