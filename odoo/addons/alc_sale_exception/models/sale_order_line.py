@@ -29,9 +29,7 @@ class SaleOrderLine(sale_order_line.SaleOrderLine):
                 for rule in line_exceptions:
                     if not self.env["sale.order"]._rule_eval(rule, line):
                         continue
-                    if not rule.is_blocking:
-                        if rule.warning_text:
-                            warning += "\n" + rule.warning_text
+                    warning += "\n" + rule.description
                     if not exception:
                         exception = rule.description
             line.exception = exception

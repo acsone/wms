@@ -9,15 +9,8 @@ Configuration
 
 To configure this module, you need to:
 
-#. Go to ...
-
-Usage
-=====
-
-To use this module, you need to:
-
-#. Go to ...
-
+# Go to *Settings - Sales - Quotations & Orders* and check/uncheck the
+'Sale Exception Check Enabled'.
 
 Changelog
 =========
