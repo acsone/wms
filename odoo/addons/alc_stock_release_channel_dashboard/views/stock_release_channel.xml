@@ -26,6 +26,8 @@
               t-value="JSON.parse(record.kanban_dashboard.raw_value)"
               t-set="dashboard"
             />
+                        <t t-value="dashboard['data']" t-set="dashboard_data" />
+                        <t t-value="dashboard['tags']" t-set="dashboard_tags" />
                         <div
               t-attf-class="#{!selection_mode ? kanban_color(record.color.raw_value) : ''}"
             >
@@ -44,6 +46,19 @@
                                         <field name="name" />
                                     </a>
                                 </div>
+                                <t t-foreach="dashboard_tags" t-as="tag">
+                                    <span
+                    tabindex="-1"
+                    class="o_tag_color_0 badge rounded-pill o_tag d-inline-flex align-items-center"
+                    data-color="0"
+                    t-att-title="tag"
+                    style="box-shadow: inset 0 0 0 1px;"
+                  >
+                                        <div class="o_tag_badge_text"><t
+                        t-esc="tag"
+                      /></div>
+                                    </span>
+                                </t>
                             </div>
                             <div class="o_kanban_manage_button_section">
                                 <a class="o_kanban_manage_toggle_button" href="#">
@@ -137,7 +152,7 @@
                             <div class="col-12">
                             <table style="width:100%;">
                             <tr
-                    t-foreach="dashboard"
+                    t-foreach="dashboard_data"
                     t-as="obj"
                     style="border-bottom: 2px #f6f6fa solid;"
                   >
