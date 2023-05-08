@@ -10,7 +10,7 @@ def check_call(cmd, cwd=None, **kwargs):
     subprocess.check_call(cmd, cwd=cwd, **kwargs)
 
 
-def click_odoo(db, script_text, cmd="venv-16/bin/click-odoo"):
+def click_odoo(db, script_text, cmd="click-odoo"):
     with tempfile.TemporaryFile() as f:
         f.write(textwrap.dedent(script_text))
         f.flush()

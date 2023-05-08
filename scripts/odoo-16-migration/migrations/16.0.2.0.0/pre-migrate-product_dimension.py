@@ -12,4 +12,6 @@ field_renames = [
 
 @openupgrade.migrate(use_env=True)
 def migrate(env, version):
-    openupgrade.rename_fields(env, field_renames)
+    pass
+    # Seems to be unnecessary - moreover these fields are related one (non stored)
+    # openupgrade.rename_fields(env, field_renames)
