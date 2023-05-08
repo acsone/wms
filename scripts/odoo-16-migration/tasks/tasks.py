@@ -435,9 +435,7 @@ _register_migration_scripts_in_tasks("pre-")
 
 @task()
 def click_odoo_update():
-    check_call(
-        ["venv-16/bin/click-odoo-update", "-d", DB_16_POSTMIG, "--i18n-overwrite"]
-    )
+    check_call(["click-odoo-update", "-d", DB_16_POSTMIG, "--i18n-overwrite"])
 
 
 _register_migration_scripts_in_tasks("post-")
@@ -527,4 +525,4 @@ def click_odoo_uninstall():
         "alc_stock_picking_batch_delivery_rounds",  # replaced by alc_stock_release_channel_picking_batch_creation
     ]
     modules = ",".join(modules_list)
-    check_call(["venv-16/bin/click-odoo-uninstall", "-d", DB_16_POSTMIG, "-m", modules])
+    check_call(["click-odoo-uninstall", "-d", DB_16_POSTMIG, "-m", modules])
