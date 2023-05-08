@@ -108,8 +108,7 @@ odoo-addon-stock-picking-is-completed @ git+https://github.com/OCA/stock-logisti
 odoo-addon-stock-procurement-customer @ git+https://github.com/acsone/stock-logistics-workflow.git@16.0-add-stock-procurement-customer-dro#subdirectory=setup/stock_procurement_customer
 # https://github.com/OCA/stock-logistics-workflow/pull/1196 - [16.0][ADD] stock_picking_low_priority
 odoo-addon-stock-picking-low-priority @ git+https://github.com/acsone/stock-logistics-workflow.git@16.0-add-stock_picking_low_priority-hda#subdirectory=setup/stock_picking_low_priority
-# https://github.com/OCA/stock-logistics-workflow/pull/1197 - [16.0][ADD] stock_move_manage_priority
-odoo-addon-stock-move-manage-priority @ git+https://github.com/acsone/stock-logistics-workflow.git@16.0-mig-stock_move_manage_priority-hda#subdirectory=setup/stock_move_manage_priority
+odoo-addon-stock-move-manage-priority @ git+https://github.com/oca/stock-logistics-workflow.git@refs/pull/1197/head#subdirectory=setup/stock_move_manage_priority
 # https://github.com/OCA/stock-logistics-workflow/pull/1214
 odoo-addon-stock-override-procurement @ git+https://github.com/acsone/stock-logistics-workflow.git@16.0-stock_override_procurement-sbj#subdirectory=setup/stock_override_procurement
 odoo-addon-sale-stock-restocking-fee-invoicing @ git+https://github.com/oca/stock-logistics-workflow.git@refs/pull/1251/head#subdirectory=setup/sale_stock_restocking_fee_invoicing
