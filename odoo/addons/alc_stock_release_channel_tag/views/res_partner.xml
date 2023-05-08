@@ -7,7 +7,7 @@
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="base.view_partner_form" />
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='category_id']" position="after">
+            <xpath expr="//group[@name='release_channel']" position="inside">
                 <field
           name="stock_release_channel_tag_ids"
           widget="many2many_tags"
