@@ -24,13 +24,13 @@
                 </div>
             </header>
             <xpath
-        expr="//field[@name='pack_operation_product_ids']//tree/field[@name='qty_done']"
+        expr="//field[@name='move_ids_without_package']//tree/field[@name='quantity_done']"
         position="after"
       >
                 <field name="has_missing_info" invisible="1" />
             </xpath>
             <xpath
-        expr="//field[@name='pack_operation_product_ids']//tree"
+        expr="//field[@name='move_ids_without_package']//tree"
         position="attributes"
       >
                 <attribute name="decoration-danger">has_missing_info == True</attribute>

@@ -1,13 +1,13 @@
-# -*- coding: utf-8 -*-
 # Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import api, fields, models
+from odoo import api, fields
+
+from odoo.addons.stock.models.stock_move_line import StockMoveLine as StockMoveLineBase
 
 
-class StockPackOperation(models.Model):
+class StockMoveLine(StockMoveLineBase):
 
-    _inherit = "stock.pack.operation"
     has_missing_info = fields.Boolean(
         default=False, compute="_compute_has_missing_info"
     )
@@ -22,17 +22,18 @@ class StockPackOperation(models.Model):
     )
     def _compute_has_missing_info(self):
         """
-        We are only interested in flagging the missing infos for "new" products
+        We are only interested in flagging the missing infos for "new" products.
+
         Missing info will be either missing dimensions, packaging dimensions, weight or barcode
         """
-        for packop in self:
-            product = packop.product_id
+        for move_line in self:
+            product = move_line.product_id
             if product.is_new:
-                packop.has_missing_info = (
+                move_line.has_missing_info = (
                     product.has_no_dimensions
                     or product.packaging_has_no_dimensions
                     or product.missing_weight
                     or product.missing_barcode
                 )
             else:
-                packop.has_missing_info = False
+                move_line.has_missing_info = False
