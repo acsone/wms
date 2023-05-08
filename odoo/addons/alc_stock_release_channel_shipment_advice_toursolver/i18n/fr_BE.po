@@ -38,4 +38,4 @@ msgstr "Paramètres de chargement de l'expédition"
 #. module: alc_stock_release_channel_shipment_advice_toursolver
 #: model:ir.model,name:alc_stock_release_channel_shipment_advice_toursolver.model_stock_release_channel
 msgid "Stock Release Channels"
-msgstr ""
+msgstr "Canaux de libération des stocks"
