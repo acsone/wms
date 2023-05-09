@@ -1,13 +1,16 @@
-# -*- coding: utf-8 -*-
 # Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import fields, models
+from odoo import fields
+
+from odoo.addons.product.models.product_template import (
+    ProductTemplate as ProductTemplateBase,
+)
+
+from .product_category import ProductCategory
 
 
-class ProductTemplate(models.Model):
+class ProductTemplate(ProductTemplateBase):
 
-    _inherit = "product.template"
-
-    categ_id = fields.Many2one(domain=[("is_web", "=", False)])
-    categ_ids = fields.Many2many(domain=[("is_web", "=", True)])
+    categ_id = fields.Many2one[ProductCategory](domain=[("is_web", "=", False)])
+    categ_ids = fields.Many2many[ProductCategory](domain=[("is_web", "=", True)])

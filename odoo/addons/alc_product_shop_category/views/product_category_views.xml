@@ -3,9 +3,6 @@
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
     <record id="product_category_search_view" model="ir.ui.view">
-        <field
-      name="name"
-    >product.category.search (in alc_product_shop_category)</field>
         <field name="model">product.category</field>
         <field name="inherit_id" ref="product.product_category_search_view" />
         <field name="arch" type="xml">
@@ -25,11 +22,10 @@
         </field>
     </record>
     <record id="product_category_form_view" model="ir.ui.view">
-        <field name="name">product.category.form</field>
         <field name="model">product.category</field>
        <field name="inherit_id" ref="product.product_category_form_view" />
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='type']" position="after">
+            <xpath expr="//group[@name='first']" position="inside">
                 <field name="is_web" readonly="1" />
             </xpath>
         </field>
@@ -38,7 +34,7 @@
         <field name="name">Product Categories Web</field>
         <field name="res_model">product.category</field>
         <field name="type">ir.actions.act_window</field>
-        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
         <field name="view_id" ref="product.product_category_list_view" />
         <field
       name="search_view_id"
@@ -52,11 +48,14 @@
         <field name="context">{'search_default_is_not_web': 1}</field>
     </record>
 
-    <menuitem
-    action="alc_product_shop_category.product_category_action_form_web"
-    id="menu_product_category_is_web"
-    parent="sale.prod_config_main"
-    groups="base.group_no_one"
-    sequence="1"
-  />
+    <record model="ir.ui.menu" id="menu_product_category_is_web">
+        <field name="name">Product Categories Web</field>
+        <field name="parent_id" ref="sale.prod_config_main" />
+        <field
+      name="action"
+      ref="alc_product_shop_category.product_category_action_form_web"
+    />
+        <field name="sequence" eval="1" />
+        <field name="groups_id" eval="[(6,0,[ref('base.group_no_one')])]" />
+    </record>
 </odoo>
