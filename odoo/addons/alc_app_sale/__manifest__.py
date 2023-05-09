@@ -111,5 +111,6 @@
         "alc_sale_product_qty_unavailable_promotion",
         "alc_sale_order_line_lots",
         "alc_sale_auto_cancel_unavailable_qty",
+        "alc_sale_mto_check_procurements",
     ],
 }
