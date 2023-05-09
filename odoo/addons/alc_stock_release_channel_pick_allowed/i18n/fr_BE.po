@@ -76,7 +76,7 @@ msgstr "Type de picking"
 #. module: alc_stock_release_channel_pick_allowed
 #: model:ir.model,name:alc_stock_release_channel_pick_allowed.model_stock_release_channel
 msgid "Stock Release Channels"
-msgstr ""
+msgstr "Canaux de libération des stocks"
 
 #. module: alc_stock_release_channel_pick_allowed
 #: model:ir.model,name:alc_stock_release_channel_pick_allowed.model_stock_picking

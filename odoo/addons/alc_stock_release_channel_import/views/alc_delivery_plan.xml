@@ -63,7 +63,7 @@
     </record>
 
     <record id="alc_import_delivery_zone_wizard_action" model="ir.actions.server">
-        <field name="name">Import Release channels</field>
+        <field name="name">Import Delivery Plans</field>
         <field name="model_id" ref="model_alc_delivery_plan" />
         <field name="binding_model_id" ref="model_alc_delivery_plan" />
         <field name="state">code</field>
