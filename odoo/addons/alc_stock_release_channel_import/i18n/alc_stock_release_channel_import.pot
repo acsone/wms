@@ -6,8 +6,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-08 12:14+0000\n"
-"PO-Revision-Date: 2023-05-08 12:14+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -100,15 +98,15 @@ msgid "Import"
 msgstr ""
 
 #. module: alc_stock_release_channel_import
-#: model:ir.model,name:alc_stock_release_channel_import.model_alc_import_delivery_zone_wizard
-msgid "Import Delivery Zones Wizard"
-msgstr ""
-
-#. module: alc_stock_release_channel_import
 #: model:ir.actions.act_window,name:alc_stock_release_channel_import.alc_import_delivery_zone_wizard_act_window
 #: model:ir.actions.server,name:alc_stock_release_channel_import.alc_import_delivery_zone_wizard_action
 #: model:ir.ui.menu,name:alc_stock_release_channel_import.alc_import_delivery_zone_wizard_menu
 msgid "Import Delivery Plans"
+msgstr ""
+
+#. module: alc_stock_release_channel_import
+#: model:ir.model,name:alc_stock_release_channel_import.model_alc_import_delivery_zone_wizard
+msgid "Import Delivery Zones Wizard"
 msgstr ""
 
 #. module: alc_stock_release_channel_import
