@@ -523,6 +523,7 @@ def click_odoo_uninstall():
         "alce_stock_barcode_easy_operation",  # replaced by STD
         "web_decimal_numpad_dot",
         "alc_stock_picking_batch_delivery_rounds",  # replaced by alc_stock_release_channel_picking_batch_creation
+        "alc_b2c_to_magento",
     ]
     modules = ",".join(modules_list)
     check_call(["click-odoo-uninstall", "-d", DB_16_POSTMIG, "-m", modules])
