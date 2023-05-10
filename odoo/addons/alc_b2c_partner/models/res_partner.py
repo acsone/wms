@@ -44,7 +44,9 @@ class ResPartner(ResPartnerBase):
             self.update({"is_b2c_customer": False})
             return
         for rec in self:
-            rec.is_b2c_customer = bc2_category in rec.category_id
+            # In an onchange, id is an instance of odoo.models.NewId
+            # use _origin to get db records
+            rec.is_b2c_customer = bc2_category in rec.category_id._origin
             rec.manual_sale_order_allowed = not rec.is_b2c_customer
 
     def _inverse_is_b2c_customer(self):
