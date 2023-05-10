@@ -10,6 +10,7 @@ msgstr ""
 "PO-Revision-Date: 2023-04-11 15:53+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -36,7 +37,6 @@ msgstr "La quantité attendue pour le lot est dépassée"
 
 #. module: alce_stock_barcode_easy_operation
 #. odoo-python
-#: code:addons/alce_stock_barcode_easy_operation/models/stock_picking.py:0
 #: code:addons/alce_stock_barcode_easy_operation/models/stock_picking.py:0
 #, python-format
 msgid "Expected quantity exceeded"
@@ -65,7 +65,6 @@ msgstr "Aucune correspondance pour lot %(lot)s et article %(product)s."
 
 #. module: alce_stock_barcode_easy_operation
 #. odoo-python
-#: code:addons/alce_stock_barcode_easy_operation/models/stock_picking.py:0
 #: code:addons/alce_stock_barcode_easy_operation/models/stock_picking.py:0
 #, python-format
 msgid "No operation matched for product %(product)s."
@@ -99,7 +98,6 @@ msgstr ""
 #. module: alce_stock_barcode_easy_operation
 #. odoo-python
 #: code:addons/alce_stock_barcode_easy_operation/models/stock_picking.py:0
-#: code:addons/alce_stock_barcode_easy_operation/models/stock_picking.py:0
 #, python-format
 msgid ""
 "Too much product scanned for operation with product %(product)s.\n"
@@ -127,8 +125,6 @@ msgstr "Valeur du dernier code-barre scanné"
 
 #. module: alce_stock_barcode_easy_operation
 #. odoo-python
-#: code:addons/alce_stock_barcode_easy_operation/models/stock_picking.py:0
-#: code:addons/alce_stock_barcode_easy_operation/models/stock_picking.py:0
 #: code:addons/alce_stock_barcode_easy_operation/models/stock_picking.py:0
 #, python-format
 msgid "Wrong lot"
