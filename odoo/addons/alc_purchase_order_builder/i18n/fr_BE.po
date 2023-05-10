@@ -10,11 +10,11 @@ msgstr ""
 "PO-Revision-Date: 2023-04-20 15:00+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
+"Language: fr_BE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: \n"
-"Language: fr_BE\n"
 "X-Generator: Poedit 2.3\n"
 
 #. module: alc_purchase_order_builder
@@ -35,12 +35,19 @@ msgstr "<i class=\"fa fa-long-arrow-left\" aria-hidden=\"true\"/> Retour"
 #. module: alc_purchase_order_builder
 #: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
 msgid "<i class=\"fa fa-question-circle\" aria-hidden=\"true\"/> New line"
-msgstr "<i class=\"fa fa-question-circle\" aria-hidden=\"true\"/> Nouvelle ligne"
+msgstr ""
+"<i class=\"fa fa-question-circle\" aria-hidden=\"true\"/> Nouvelle ligne"
 
 #. module: alc_purchase_order_builder
 #: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
 msgid "<i class=\"fa fa-refresh\" aria-hidden=\"true\"/> Refresh product list"
-msgstr "<i class=\"fa fa-check-circle-o\" aria-hidden=\"true\"/> Rafraîchir la liste"
+msgstr ""
+"<i class=\"fa fa-check-circle-o\" aria-hidden=\"true\"/> Rafraîchir la liste"
+
+#. module: alc_purchase_order_builder
+#: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
+msgid "<span>0</span>"
+msgstr ""
 
 #. module: alc_purchase_order_builder
 #: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
@@ -48,9 +55,7 @@ msgid "Advised qty"
 msgstr "Qté conseillée"
 
 #. module: alc_purchase_order_builder
-#: model:ir.model.fields,field_description:alc_purchase_order_builder.field_delivery_carrier_advised_qty
-#: model:ir.model.fields,field_description:alc_purchase_order_builder.field_product_product_advised_qty
-#: model:ir.model.fields,field_description:alc_purchase_order_builder.field_shopinvader_variant_advised_qty
+#: model:ir.model.fields,field_description:alc_purchase_order_builder.field_product_product__advised_qty
 msgid "Advised quantity"
 msgstr "Quantité conseillée"
 
@@ -65,20 +70,6 @@ msgid "Av. annual consumption"
 msgstr "Conso. moyenne (1 an)"
 
 #. module: alc_purchase_order_builder
-#: model:ir.model.fields,field_description:alc_purchase_order_builder.field_delivery_carrier_average_annual_consumption
-#: model:ir.model.fields,field_description:alc_purchase_order_builder.field_product_product_average_annual_consumption
-#: model:ir.model.fields,field_description:alc_purchase_order_builder.field_shopinvader_variant_average_annual_consumption
-msgid "Average annual consumption"
-msgstr "Consommation annuelle moyenne"
-
-#. module: alc_purchase_order_builder
-#: model:ir.model.fields,field_description:alc_purchase_order_builder.field_delivery_carrier_average_three_months_consumption
-#: model:ir.model.fields,field_description:alc_purchase_order_builder.field_product_product_average_three_months_consumption
-#: model:ir.model.fields,field_description:alc_purchase_order_builder.field_shopinvader_variant_average_three_months_consumption
-msgid "Average three months consumption"
-msgstr "Consommation moyenne sur trois mois"
-
-#. module: alc_purchase_order_builder
 #: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
 msgid "Class:"
 msgstr "Classe:"
@@ -89,7 +80,7 @@ msgid "Confirm"
 msgstr "Confirmer"
 
 #. module: alc_purchase_order_builder
-#: model:ir.model.fields,field_description:alc_purchase_order_builder.field_purchase_order_line_is_confirmed_line
+#: model:ir.model.fields,field_description:alc_purchase_order_builder.field_purchase_order_line__is_confirmed_line
 msgid "Confirmed line"
 msgstr "Ligne confirmée"
 
@@ -104,7 +95,7 @@ msgid "Discount global"
 msgstr "Ristourne globale"
 
 #. module: alc_purchase_order_builder
-#: model:ir.model.fields,field_description:alc_purchase_order_builder.field_purchase_order_discount_global_overwrite
+#: model:ir.model.fields,field_description:alc_purchase_order_builder.field_purchase_order__discount_global_overwrite
 msgid "Discount global overwrite"
 msgstr "Ristourne globale principale"
 
@@ -185,10 +176,16 @@ msgid "Price"
 msgstr "Prix"
 
 #. module: alc_purchase_order_builder
-#: model:ir.model,name:alc_purchase_order_builder.model_product_product
 #: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
 msgid "Product"
 msgstr "Produit"
+
+#. module: alc_purchase_order_builder
+#: model:ir.model,name:alc_purchase_order_builder.model_product_product
+#, fuzzy
+#| msgid "Product name"
+msgid "Product Variant"
+msgstr "Nom du produit"
 
 #. module: alc_purchase_order_builder
 #: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
@@ -221,7 +218,7 @@ msgid "Promotion supplier"
 msgstr "Remise d'achat"
 
 #. module: alc_purchase_order_builder
-#: model:ir.model.fields,field_description:alc_purchase_order_builder.field_purchase_order_promotion_supplier_overwrite
+#: model:ir.model.fields,field_description:alc_purchase_order_builder.field_purchase_order__promotion_supplier_overwrite
 msgid "Promotion supplier overwrite"
 msgstr "Promotion fournisseur principale"
 
@@ -301,11 +298,6 @@ msgid "Stock Customer"
 msgstr "Réservé clients"
 
 #. module: alc_purchase_order_builder
-#: model:ir.model,name:alc_purchase_order_builder.model_stock_move
-msgid "Stock Move"
-msgstr "Mouvement de stock"
-
-#. module: alc_purchase_order_builder
 #: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
 msgid "Stock available"
 msgstr "Stock Disponible"
@@ -341,7 +333,9 @@ msgid "Supplier discount"
 msgstr "Ristourne globale"
 
 #. module: alc_purchase_order_builder
-#: code:addons/alc_purchase_order_builder/models/purchase_order.py:50
+#. odoo-python
+#: code:addons/alc_purchase_order_builder/controllers/main.py:0
+#: code:addons/alc_purchase_order_builder/models/purchase_order.py:0
 #, python-format
 msgid "There are no products for this supplier"
 msgstr ""
@@ -352,12 +346,12 @@ msgid "Total amount:"
 msgstr "Montant total:"
 
 #. module: alc_purchase_order_builder
-#: model:ir.model.fields,field_description:alc_purchase_order_builder.field_purchase_order_total_lines
+#: model:ir.model.fields,field_description:alc_purchase_order_builder.field_purchase_order__total_lines
 msgid "Total lines"
 msgstr "Total des lignes"
 
 #. module: alc_purchase_order_builder
-#: model:ir.model.fields,field_description:alc_purchase_order_builder.field_purchase_order_total_lines_done
+#: model:ir.model.fields,field_description:alc_purchase_order_builder.field_purchase_order__total_lines_done
 msgid "Total lines done"
 msgstr "Total des lignes faites"
 
@@ -387,11 +381,25 @@ msgid "Unit in shrink-wrap"
 msgstr "Nbr unités par fardelage"
 
 #. module: alc_purchase_order_builder
-#: model:ir.model.fields,field_description:alc_purchase_order_builder.field_stock_move_validation_date
-msgid "Validation date"
-msgstr "Date de validation"
-
-#. module: alc_purchase_order_builder
 #: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
 msgid "Write date"
 msgstr "Date d'écriture"
+
+#. module: alc_purchase_order_builder
+#. odoo-python
+#: code:addons/alc_purchase_order_builder/controllers/main.py:0
+#, python-format
+msgid "You can only have one purchase order line by product"
+msgstr ""
+
+#~ msgid "Average annual consumption"
+#~ msgstr "Consommation annuelle moyenne"
+
+#~ msgid "Average three months consumption"
+#~ msgstr "Consommation moyenne sur trois mois"
+
+#~ msgid "Stock Move"
+#~ msgstr "Mouvement de stock"
+
+#~ msgid "Validation date"
+#~ msgstr "Date de validation"
