@@ -41,5 +41,6 @@
         "stock_override_procurement",
         "alc_product_storage_temperature",
         "alc_product_dimensions_missing",
+        "alc_product_barcode_required",
     ],
 }

@@ -1,17 +1,21 @@
-# -*- coding: utf-8 -*-
 # Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, fields, models
+from odoo import _, api, fields
 from odoo.exceptions import ValidationError
 
+from odoo.addons.product.models.product_product import (
+    ProductProduct as ProductProductBase,
+)
 
-class ProductProduct(models.Model):
+
+class ProductProduct(ProductProductBase):
 
     _inherit = "product.product"
 
     no_barcode_authorized = fields.Boolean(
-        default=False, help="Barcode not required for this product",
+        default=False,
+        help="Barcode not required for this product",
     )
     missing_weight = fields.Boolean(default=False, compute="_compute_missing_weight")
     missing_barcode = fields.Boolean(default=False, compute="_compute_missing_barcode")
@@ -32,13 +36,18 @@ class ProductProduct(models.Model):
 
     @api.constrains("active", "is_new", "barcode", "no_barcode_authorized")
     def _check_barcode_is_mandatory(self):
-        if not self.env.context.get("disable_check_barcode_constrains"):
-            filter_bad = lambda p: (
-                p.active
-                and not p.is_new
-                and not p.no_barcode_authorized
-                and not p.barcode
-            )
+        if self.env["ir.config_parameter"].get_param(
+            "product_barcode_required"
+        ) and not self.env.context.get("disable_check_barcode_constrains"):
+
+            def filter_bad(p):
+                return (
+                    p.active
+                    and not p.is_new
+                    and not p.no_barcode_authorized
+                    and not p.barcode
+                )
+
             bad_products = self.filtered(filter_bad)
             if bad_products:
                 msg = _(
@@ -48,7 +57,7 @@ class ProductProduct(models.Model):
                 raise ValidationError(msg % bad_products.ids)
 
     def write(self, vals):
-        result = super(ProductProduct, self).write(vals)
+        result = super().write(vals)
         for rec in self:
             rec._check_barcode_is_mandatory()
         return result
