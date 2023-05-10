@@ -10,6 +10,7 @@ msgstr ""
 "PO-Revision-Date: 2023-01-30 13:08+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -111,7 +112,8 @@ msgstr "Fournisseurs (Non supporté par akénéo)"
 #: model:ir.model.fields,help:alc_partner_type.field_product_template__allowed_partner_types_list
 msgid ""
 "Technical field. Stores all partner types allowed to access the product."
-msgstr "Technical field. Stores all partner types allowed to access the product."
+msgstr ""
+"Technical field. Stores all partner types allowed to access the product."
 
 #. module: alc_partner_type
 #: model:ir.model,name:alc_partner_type.model_product_partner_type
