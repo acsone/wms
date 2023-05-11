@@ -1,15 +1,14 @@
-# -*- coding: utf-8 -*-
 # Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from slugify import slugify
 
-from odoo import _, api, fields, models
+from odoo import _, api, fields
+
+from odoo.addons.product.models.product_pricelist import Pricelist
 
 
-class ProductPricelist(models.Model):
-
-    _inherit = "product.pricelist"
+class ProductPricelist(Pricelist):
 
     role_name = fields.Char(compute="_compute_role_name", store=True)
     discount_role_name = fields.Char(compute="_compute_role_name", store=True)
@@ -24,4 +23,4 @@ class ProductPricelist(models.Model):
         for pl in self:
             role_name = slugify("price_" + names[pl])
             pl.role_name = role_name
-            pl.discount_role_name = "discount_%s" % role_name
+            pl.discount_role_name = f"discount_{role_name}"
