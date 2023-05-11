@@ -113,5 +113,6 @@
         "alc_sale_auto_cancel_unavailable_qty",
         "alc_sale_mto_check_procurements",
         "alc_sale_pricelist_2_menu",
+        "alc_delivery_product_hide_hs_code",
     ],
 }
